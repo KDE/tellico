@@ -128,7 +128,7 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
       break;
 
     case BCAttribute::ReadOnly:
-      kdDebug() << "BCAttributeWidget() - read-only attributem, this shouldn't have been called" << endl;
+      kdDebug() << "BCAttributeWidget() - read-only attribute, this shouldn't have been called" << endl;
       break;
 
     case BCAttribute::URL:
@@ -183,42 +183,42 @@ void BCAttributeWidget::clear() {
 
   switch (m_type) {
     case BCAttribute::Line:
-      kl = static_cast<KLineEdit*>(m_editWidget);
+      kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         kl->clear();
       }
       break;
 
     case BCAttribute::Para:
-      te = static_cast<QTextEdit*>(m_editWidget);
+      te = dynamic_cast<QTextEdit*>(m_editWidget);
       if(te) {
         te->clear();
       }
       break;
 
     case BCAttribute::Choice:
-      kc = static_cast<KComboBox*>(m_editWidget);
+      kc = dynamic_cast<KComboBox*>(m_editWidget);
       if(kc) {
         kc->setCurrentItem(0);
       }
       break;
 
     case BCAttribute::Bool:
-      cb = static_cast<QCheckBox*>(m_editWidget);
+      cb = dynamic_cast<QCheckBox*>(m_editWidget);
       if(cb) {
         cb->setChecked(false);
       }
       break;
 
     case BCAttribute::Year:
-      kl = static_cast<KLineEdit*>(m_editWidget);
+      kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         kl->clear();
       }
       break;
 
     case BCAttribute::URL:
-      ku = static_cast<KURLRequester*>(m_editWidget);
+      ku = dynamic_cast<KURLRequester*>(m_editWidget);
       if(ku) {
         ku->clear();
       }
@@ -243,7 +243,7 @@ QString BCAttributeWidget::text() const {
 
   switch(m_type) {
     case BCAttribute::Line:
-      kl = static_cast<KLineEdit*>(m_editWidget);
+      kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         text = kl->text();
         text.replace(QRegExp(QString::fromLatin1(";\\s*")), QString::fromLatin1("; "));
@@ -253,28 +253,28 @@ QString BCAttributeWidget::text() const {
       break;
 
     case BCAttribute::Para:
-      te = static_cast<QTextEdit*>(m_editWidget);
+      te = dynamic_cast<QTextEdit*>(m_editWidget);
       if(te) {
         text = te->text();
       }
       break;
 
     case BCAttribute::Choice:
-      kc = static_cast<KComboBox*>(m_editWidget);
+      kc = dynamic_cast<KComboBox*>(m_editWidget);
       if(kc) {
         text = kc->currentText();
       }
       break;
 
     case BCAttribute::Bool:
-      cb = static_cast<QCheckBox*>(m_editWidget);
+      cb = dynamic_cast<QCheckBox*>(m_editWidget);
       if(cb && cb->isChecked()) {
         text = QString::fromLatin1("1");
       }
       break;
 
     case BCAttribute::Year:
-      kl = static_cast<KLineEdit*>(m_editWidget);
+      kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         text = kl->text();
         text.replace(QRegExp(QString::fromLatin1(";\\s*")), QString::fromLatin1("; "));
@@ -284,7 +284,7 @@ QString BCAttributeWidget::text() const {
       break;
 
     case BCAttribute::URL:
-      ku = static_cast<KURLRequester*>(m_editWidget);
+      ku = dynamic_cast<KURLRequester*>(m_editWidget);
       if(ku) {
         text = ku->url();
       }
@@ -308,7 +308,7 @@ void BCAttributeWidget::setText(const QString& text_) {
 
   switch (m_type) {
     case BCAttribute::Line:
-      kl = static_cast<KLineEdit*>(m_editWidget);
+      kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         kl->setText(text_);
 //        if(kl->validator()) {
@@ -325,14 +325,14 @@ void BCAttributeWidget::setText(const QString& text_) {
       break;
 
     case BCAttribute::Para:
-      te = static_cast<QTextEdit*>(m_editWidget);
+      te = dynamic_cast<QTextEdit*>(m_editWidget);
       if(te) {
         te->setText(text_);
       }
       break;
 
     case BCAttribute::Choice:
-      kc = static_cast<KComboBox*>(m_editWidget);
+      kc = dynamic_cast<KComboBox*>(m_editWidget);
       if(kc) {
         for(int i = 0; i < kc->count(); ++i) {
           if(kc->text(i) == text_) {
@@ -344,21 +344,21 @@ void BCAttributeWidget::setText(const QString& text_) {
       break;
 
     case BCAttribute::Bool:
-      cb = static_cast<QCheckBox*>(m_editWidget);
+      cb = dynamic_cast<QCheckBox*>(m_editWidget);
       if(cb) {
         cb->setChecked(text_ == QString::fromLatin1("1"));
       }
       break;
 
     case BCAttribute::Year:
-      kl = static_cast<KLineEdit*>(m_editWidget);
+      kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         kl->setText(text_);
       }
       break;
 
     case BCAttribute::URL:
-      ku = static_cast<KURLRequester*>(m_editWidget);
+      ku = dynamic_cast<KURLRequester*>(m_editWidget);
       if(ku) {
         ku->setURL(text_);
       }
@@ -394,7 +394,7 @@ void BCAttributeWidget::setLabelWidth(int width_) {
 
 void BCAttributeWidget::addCompletionObjectItem(const QString& text_) {
   if(m_type == BCAttribute::Line) {
-    KLineEdit* kl = static_cast<KLineEdit*>(m_editWidget);
+    KLineEdit* kl = dynamic_cast<KLineEdit*>(m_editWidget);
     kl->completionObject()->addItem(text_);
   }
 }
@@ -435,14 +435,14 @@ void BCAttributeWidget::setHighlighted(const QString& highlight_) const {
 
     switch (m_type) {
       case BCAttribute::Line:
-        kl = static_cast<KLineEdit*>(m_editWidget);
+        kl = dynamic_cast<KLineEdit*>(m_editWidget);
         if(kl) {
           kl->selectAll();
         }
         break;
 
       case BCAttribute::Para:
-        te = static_cast<QTextEdit*>(m_editWidget);
+        te = dynamic_cast<QTextEdit*>(m_editWidget);
         if(te) {
           // TODO: it would be nice if this selected only the highlighted text
           te->selectAll();
@@ -450,14 +450,14 @@ void BCAttributeWidget::setHighlighted(const QString& highlight_) const {
         break;
 
       case BCAttribute::Year:
-        kl = static_cast<KLineEdit*>(m_editWidget);
+        kl = dynamic_cast<KLineEdit*>(m_editWidget);
         if(kl) {
           kl->selectAll();
         }
         break;
 
       case BCAttribute::URL:
-        ku = static_cast<KURLRequester*>(m_editWidget);
+        ku = dynamic_cast<KURLRequester*>(m_editWidget);
         if(ku) {
           ku->lineEdit()->selectAll();
         }
@@ -481,10 +481,22 @@ void BCAttributeWidget::updateAttribute(BCAttribute* att_) {
   QWhatsThis::add(m_label, att_->description());
   // TODO: fix if the validator might have changed
   if(m_type == BCAttribute::Choice) {
-    KComboBox* kc = static_cast<KComboBox*>(m_editWidget);
-    kc->clear();
-    // always have empty choice
-    kc->insertItem(QString::null);
-    kc->insertStringList(att_->allowed());
+    KComboBox* kc = dynamic_cast<KComboBox*>(m_editWidget);
+    if(kc) {
+      kc->clear();
+      // always have empty choice
+      kc->insertItem(QString::null);
+      kc->insertStringList(att_->allowed());
+    }
+  } else if(m_type == BCAttribute::Line) {
+    KLineEdit* kl = dynamic_cast<KLineEdit*>(m_editWidget);
+    if(kl) {
+      BCUnitEditWidget* w = BCUnitEditWidgetAncestor(parent());
+      if(att_->flags() & BCAttribute::AllowCompletion) {
+        kl->completionObject()->setItems(w->m_currColl->valuesByAttributeName(att_->name()));
+      } else {
+        kl->completionObject()->clear();
+      }
+    }
   }
 }

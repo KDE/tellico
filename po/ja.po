@@ -1,23 +1,23 @@
-# Translation of Bookcase to Spanish
-# Copyright (C) 2003 Robby Stephenson <robby@periapsis.org>
-# This file is distributed under the same license as the Bookcase package.
-# First translation by Quique <quique@sindominio.net>, 2003
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2003-06-25 17:56-0700\n"
-"PO-Revision-Date: 2003-05-20 15:38CET\n"
-"Last-Translator: Quique <quique@sindominio.net>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2003-05-18 11:44+0900\n"
+"Last-Translator: Koichi OIKE <daichi1@gol.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: bcattribute.cpp:32
 msgid "a,an,and,in,of,the,to"
-msgstr "un,una,y,en,de,del,el,la,a"
+msgstr "a,an,and,in,of,the,to"
 
 #: bcattribute.cpp:38 bcattribute.cpp:53 bccollection.cpp:35
 #: bookcollection.cpp:19 configdialog.cpp:118 songcollection.cpp:30
@@ -29,7 +29,7 @@ msgstr "General"
 
 #: bcattribute.cpp:312
 msgid "the"
-msgstr "el,la,los,las"
+msgstr "the"
 
 #: bcattribute.cpp:336
 msgid "jr.,jr,iii,iv"
@@ -41,25 +41,25 @@ msgstr "de,van der,von"
 
 #: bcattribute.cpp:381 bccollectionpropdialog.cpp:264
 msgid "Simple Text"
-msgstr "Texto simple"
+msgstr "シンプルテキスト"
 
 #: bcattribute.cpp:382 bccollectionpropdialog.cpp:262
 #: bccollectionpropdialog.cpp:275
 msgid "Paragraph"
-msgstr "Párrafo"
+msgstr "パラグラフ"
 
 #: bcattribute.cpp:383 bccollectionpropdialog.cpp:261
 msgid "List"
-msgstr "Lista"
+msgstr "リスト"
 
 #: bcattribute.cpp:384
 msgid "Checkbox"
-msgstr "Casilla"
+msgstr "チェックボックス"
 
 #: bcattribute.cpp:385 songcollection.cpp:40 videocollection.cpp:29
 #: bccollectionpropdialog.cpp:269
 msgid "Year"
-msgstr "Año"
+msgstr "年"
 
 #: bcattribute.cpp:386 bccollectionpropdialog.cpp:272
 msgid "URL"
@@ -67,93 +67,93 @@ msgstr "URL"
 
 #: bccollection.cpp:34
 msgid "Title"
-msgstr "Título"
+msgstr "タイトル"
 
 #: bccollection.cpp:501
 msgid "(Empty)"
-msgstr "(Vacío)"
+msgstr "(未設定)"
 
 #: bcdetailedlistview.cpp:67 bcgroupview.cpp:59 bcuniteditwidget.cpp:56
 #: bcuniteditwidget.cpp:508
 msgid "Delete Book"
-msgstr "Borrar libro"
+msgstr "ブック削除"
 
 #: bcdetailedlistview.cpp:340
 msgid "View Columns"
-msgstr "Ver columnas"
+msgstr "表示項目"
 
 #: bcgroupview.cpp:53
 msgid "Rename Collection..."
-msgstr "Darle un nuevo nombre a la colección..."
+msgstr "コレクションの名前変更..."
 
 #: bcgroupview.cpp:54
 msgid "Edit Collection Fields..."
-msgstr "Editar los campos de la colección..."
+msgstr "コレクションの項目編集..."
 
 #: bcgroupview.cpp:56
 msgid "Expand All Groups"
-msgstr "Expandir todos los grupos"
+msgstr "全グループを展開"
 
 #: bcgroupview.cpp:57
 msgid "Collapse All Groups"
-msgstr "Contraer todos los grupos"
+msgstr "全グループをたたむ"
 
 #: bcgroupview.cpp:436
 msgid "New Collection Name"
-msgstr "Nuevo nombre de la colección"
+msgstr "コレクションの新しい名前"
 
 #: bcuniteditwidget.cpp:54
 msgid "New Book"
-msgstr "Nuevo libro"
+msgstr "新規ブック"
 
 #: bcuniteditwidget.cpp:55 bcuniteditwidget.cpp:78 bcuniteditwidget.cpp:380
 #: bcuniteditwidget.cpp:548
 msgid "Enter Book"
-msgstr "Introducir libro"
+msgstr "ブック登録"
 
 #: bcuniteditwidget.cpp:65
 msgid "Duplicate Book"
-msgstr "Duplicar libro"
+msgstr "ブック複製"
 
 #: bcuniteditwidget.cpp:278
 msgid "Do you really want to modify these books?"
-msgstr "¿Realmente quiere modificar estos libros?"
+msgstr "本当にこれらのブックを変更しますか?"
 
 #: bcuniteditwidget.cpp:280
 msgid "Modify Multiple Books?"
-msgstr "¿Modificar varios libros?"
+msgstr "複数のブックを変更しますか?"
 
 #: bcuniteditwidget.cpp:328
 msgid "Do you really want to delete these books?"
-msgstr "¿Realmente quiere borrar estos libros?"
+msgstr "本当にこれらのブックを削除しますか?"
 
 #: bcuniteditwidget.cpp:330
 msgid "Delete Multiple Books?"
-msgstr "¿Borrar varios libros?"
+msgstr "複数のブックを削除しますか?"
 
 #: bcuniteditwidget.cpp:439
 msgid "Modify Books"
-msgstr "Modificar libros"
+msgstr "ブック変更"
 
 #: bcuniteditwidget.cpp:440
 msgid "Delete Books"
-msgstr "Borrar libros"
+msgstr "ブック削除"
 
 #: bcuniteditwidget.cpp:503
 msgid "Modify Book"
-msgstr "Modificar libro"
+msgstr "ブック変更"
 
 #: bcuniteditwidget.cpp:545
 msgid ""
 "The current book has been modified.\n"
 "Do you want to enter the changes?"
 msgstr ""
-"El libro actual ha sido modificado.\n"
-"¿Quiere introducir los cambios?"
+"現在のブックは変更されています。\n"
+"変更した内容を登録しますか?"
 
 #: bcuniteditwidget.cpp:547 bookcasedoc.cpp:386
 msgid "Warning!"
-msgstr "Advertencia"
+msgstr "警告!"
 
 #: bookcase.cpp:113 bookcase.cpp:664 bookcase.cpp:683 bookcase.cpp:698
 #: bookcase.cpp:711 bookcase.cpp:762 bookcase.cpp:790 bookcase.cpp:864
@@ -163,747 +163,735 @@ msgstr "Advertencia"
 #: bookcase.cpp:1298 bookcase.cpp:1358 bookcase.cpp:1365 bookcase.cpp:1375
 #: bookcase.cpp:1396
 msgid "Ready."
-msgstr "Preparado."
+msgstr "レディ"
 
 #: bookcase.cpp:144
 msgid "Collection Fields..."
-msgstr "Campos de la colección..."
+msgstr "コレクションの項目..."
 
 #: bookcase.cpp:157
 msgid "Import Bibtex File..."
-msgstr "Importar fichero Bibtex..."
+msgstr "Bibtexファイルをインポート..."
 
 #: bookcase.cpp:161
 msgid "Import Bibtexml File..."
-msgstr "Importar fichero Bibtexml..."
+msgstr "Bibtexmlファイルをインポート..."
 
 #: bookcase.cpp:166
 msgid "Export to Bibtex File..."
-msgstr "Exportar a fichero Bibtex..."
+msgstr "Bibtexファイルへエクスポート..."
 
 #: bookcase.cpp:170
 msgid "Export to Bibtexml File..."
-msgstr "Exportar a fichero Bibtexml..."
+msgstr "Bibtexmlファイルへエクスポート..."
 
 #: bookcase.cpp:174
 msgid "Export Using XSL Transform..."
-msgstr "Exportar usando una transformación XSL..."
+msgstr "XSL変換を使ってエクスポート..."
 
 #: bookcase.cpp:180
 msgid "Lookup book..."
-msgstr "Buscar libro..."
+msgstr "ブック照合..."
 
 #: bookcase.cpp:185
 msgid "Advanced Filter..."
-msgstr "Filtro avanzado..."
+msgstr "上級フィルター..."
 
 #: bookcase.cpp:196
 msgid "Show Co&llection ToolBar"
-msgstr "Mostrar &la barra de colecciones"
+msgstr "コレクションのツールバーを表示(&l)"
 
 #: bookcase.cpp:201
 msgid "Group by: "
-msgstr "Agrupar por: "
+msgstr "分類: "
 
 #: bookcase.cpp:204
 msgid "Group Books By"
-msgstr "Agrupar libros por"
+msgstr "ブックを分類"
 
 #: bookcase.cpp:209 bookcase.cpp:212
 msgid "Quick Filter: "
-msgstr "Filtro rápido: "
+msgstr "クイックフィルター: "
 
 #: bookcase.cpp:219
 msgid "Create a new document"
-msgstr "Crear un nuevo documento"
+msgstr "新規ドキュメントを作成"
 
 #: bookcase.cpp:220
 msgid "Open an existing document"
-msgstr "Abrir un documento ya existente"
+msgstr "既存のドキュメントを開く"
 
 #: bookcase.cpp:221
 msgid "Open a recently used file"
-msgstr "Abrir un fichero usado recientemente"
+msgstr "最近使ったファイルを開く"
 
 #: bookcase.cpp:222
 msgid "Save the actual document"
-msgstr "Guardar el documento actual"
+msgstr "ドキュメントを保存"
 
 #: bookcase.cpp:223
 msgid "Save the actual document as..."
-msgstr "Guardar el documento actual como..."
+msgstr "名前を付けて保存..."
 
 #: bookcase.cpp:224
 msgid "Print the contents of the document..."
-msgstr "Imprime el contenido del documento..."
+msgstr "ドキュメントの内容を表示..."
 
 #: bookcase.cpp:225
 msgid "Quit the application"
-msgstr "Salir de la aplicación"
+msgstr "アプリケーションを修了"
 
 #: bookcase.cpp:229
 msgid "Search in the document..."
-msgstr "Buscar en el documento..."
+msgstr "ドキュメント内を検索"
 
 #: bookcase.cpp:230
 msgid "Modify the collection fields..."
-msgstr "Modificar los campos de la colección..."
+msgstr "コレクションの項目を編集..."
 
 #: bookcase.cpp:231
 msgid "Filter the collection to only show certain books..."
-msgstr "Filtrar la colección para que se muestren solamente ciertos libros..."
+msgstr "コレクションの特定のブックだけにフィルタリング"
 
 #: bookcase.cpp:233
 msgid "Enable/disable the toolbar"
-msgstr "Activar/desactivar la barra de herramientas"
+msgstr "ツールバーを有効/無効にする"
 
 #: bookcase.cpp:235
 msgid "Enable/disable the statusbar"
-msgstr "Activar/desactivar la barra de estado"
+msgstr "ステータスバーを有効/無効にする"
 
 #: bookcase.cpp:236
 msgid "Configure the options for the application..."
-msgstr "Configurar las opciones de la aplicación..."
+msgstr "アプリケーションのオプションを設定..."
 
 #: bookcase.cpp:237
 msgid "Change the grouping of the collection"
-msgstr "Cambiar el agrupamiento de la colección"
+msgstr "コレクションの分類を変更"
 
 #: bookcase.cpp:239
 msgid "Enable/disable the collection toolbar"
-msgstr "Habilitar/deshabilitar la barra de colecciones"
+msgstr "コレクションのツールバーを有効/無効にする"
 
 #: bookcase.cpp:242
 msgid "Import a Bibtexml file..."
-msgstr "Importar un fichero Bibtexml..."
+msgstr "Bibtexmlファイルをインポート..."
 
 #: bookcase.cpp:243
 msgid "Export to Bibtex file..."
-msgstr "Exportar a un fichero Bibtex..."
+msgstr "Bibtexファイルにエクスポート..."
 
 #: bookcase.cpp:244
 msgid "Export to Bibtexml file..."
-msgstr "Exportar a un fichero Bibtexml..."
+msgstr "Bibtexmlファイルにエクスポート..."
 
 #: bookcase.cpp:245
 msgid "Export a file using an XSL transform..."
-msgstr "Exportar a fichero usando una transformación XSL..."
+msgstr "XSL変換を使ってファイルにエクスポート"
 
 #: bookcase.cpp:656
 msgid "Creating new document..."
-msgstr "Creando un documento nuevo..."
+msgstr "新しいドキュメントを作成..."
 
 #: bookcase.cpp:668 bookcase.cpp:687 bookcase.cpp:702
 msgid "Opening file..."
-msgstr "Abriendo fichero..."
+msgstr "ファイルを開く..."
 
 #: bookcase.cpp:671 bookcase.cpp:776
 msgid "*.bc|Bookcase files (*.bc)"
-msgstr "*.bc|Ficheros de Bookcase (*.bc)"
+msgstr "*.bc|Bookcaseファイル (*.bc)"
 
 #: bookcase.cpp:673 bookcase.cpp:778
 msgid "*.xml|XML files (*.xml)"
-msgstr "*.xml|Ficheros XML (*.xml)"
+msgstr "*.xml|XMLファイル (*.xml)"
 
 #: bookcase.cpp:675 bookcase.cpp:780 bookcase.cpp:1247 bookcase.cpp:1266
 #: bookcase.cpp:1278 bookcase.cpp:1313 bookcase.cpp:1371 bookcase.cpp:1390
 msgid "*|All files"
-msgstr "*|Todos los ficheros"
+msgstr "*|すべてのファイル"
 
 #: bookcase.cpp:678
 msgid "Open File..."
-msgstr "Abrir fichero..."
+msgstr "ファイルを開く..."
 
 #: bookcase.cpp:752
 msgid "Saving file..."
-msgstr "Guardando fichero..."
+msgstr "ファイルを保存..."
 
 #: bookcase.cpp:774
 msgid "Saving file with a new filename..."
-msgstr "Guardando fichero con un nuevo nombre..."
+msgstr "新しいファイル名でファイルを保存..."
 
 #: bookcase.cpp:783
 msgid "Save as..."
-msgstr "Guardar como..."
+msgstr "名前を付けて保存..."
 
 #: bookcase.cpp:794 bookcase.cpp:869
 msgid "Printing..."
-msgstr "Imprimiendo..."
+msgstr "印刷..."
 
 #: bookcase.cpp:830
 msgid "(sorted by %1)"
-msgstr "(ordenado por %1)"
+msgstr "(%1でソート)"
 
 #: bookcase.cpp:860
 msgid "Processing document..."
-msgstr "Procesando documento..."
+msgstr "文書を処理中..."
 
 #: bookcase.cpp:876
 msgid "Exiting..."
-msgstr "Saliendo..."
+msgstr "終了中..."
 
 #: bookcase.cpp:886
 msgid "Cutting selection..."
-msgstr "Cortando selección..."
+msgstr "セレクションをカット中..."
 
 #: bookcase.cpp:892
 msgid "Copying selection to clipboard..."
-msgstr "Copiando la selección al portapapeles..."
+msgstr "セレクションをクリップボードにコピー中..."
 
 #: bookcase.cpp:898
 msgid "Inserting clipboard contents..."
-msgstr "Insertando el contenido del portapapeles..."
+msgstr "クリップボードの内容を挿入中..."
 
 #: bookcase.cpp:926
 msgid "Toggling toolbar..."
-msgstr "Conmutando barra de herramientas..."
+msgstr "ツールバーをトグル中..."
 
 #: bookcase.cpp:939
 msgid "Toggle the statusbar..."
-msgstr "Conmutar la barra de estado..."
+msgstr "ステータスバーをトグル中..."
 
 #: bookcase.cpp:952
 msgid "Toggling collection toolbar..."
-msgstr "Conmutando la barra de colecciones..."
+msgstr "コレクションツールバーをトグル中..."
 
 #: bookcase.cpp:999
 msgid "%1 Total"
-msgstr "%1 Total"
+msgstr "%1の合計"
 
 #: bookcase.cpp:1197
 msgid "Page %1"
-msgstr "Página %1"
+msgstr "%1 ページ"
 
 #: bookcase.cpp:1224
 msgid "Bookcase encountered an error in XSLT processing.\n"
-msgstr "Bookcase se ha encontrado con un error en un proceso XSLT.\n"
+msgstr "BookcaseはXSLT処理中にエラーに遭遇しました。\n"
 
 #: bookcase.cpp:1225 bookcase.cpp:1231
 msgid "Please check your installation."
-msgstr "Por favor, compruebe su instalación."
+msgstr "インストール上状況を確認して下さい。"
 
 #: bookcase.cpp:1230
 msgid "Bookcase is unable to find a required file - %1.\n"
-msgstr "Bookcase no es capaz de encontrar un fichero necesario - %1.\n"
+msgstr "Bookcaseは必要なファイル %1 を見つけられませんでした。\n"
 
 #: bookcase.cpp:1236 bookcase.cpp:1255 bookcase.cpp:1362
 msgid "Exporting..."
-msgstr "Exportando..."
+msgstr "エクスポート中..."
 
 #: bookcase.cpp:1245 bookcase.cpp:1276
 msgid "*.bib|Bibtex files (*.bib)"
-msgstr "*.bib|Ficheros Bibtex (*.bib)"
+msgstr "*.bib|Bibtexファイル (*.bib)"
 
 #: bookcase.cpp:1264 bookcase.cpp:1311
 msgid "*.xml|Bibtexml files (*.xml)"
-msgstr "*.xml|Ficheros Bibtexml (*.xml)"
+msgstr "*.xml|Bibtexmlファイル (*.xml)"
 
 #: bookcase.cpp:1274
 msgid "Importing from Bibtex..."
-msgstr "Importando de Bibtex..."
+msgstr "Bibtexからインポート中..."
 
 #: bookcase.cpp:1281
 msgid "Import from Bibtex..."
-msgstr "Importar de Bibtex..."
+msgstr "Bibtexからインポート..."
 
 #: bookcase.cpp:1302
 msgid "Importing from Bibtexml..."
-msgstr "Importando de Bibtexml..."
+msgstr "Bibtexmlからインポート中..."
 
 #: bookcase.cpp:1316
 msgid "Import from Bibtexml..."
-msgstr "Importar de Bibtexml..."
+msgstr "Bibtexmlからインポート..."
 
 #: bookcase.cpp:1326 bookcasedoc.cpp:96
 msgid "Bookcase is unable to find the file - %1."
-msgstr "Bookcase no es capaz de encontrar el fichero - %1."
+msgstr "Bookcaseはファイル %1 を見つけられません。"
 
 #: bookcase.cpp:1328 bookcasedoc.cpp:98
 msgid "Bookcase is unable to download the file - %1."
-msgstr "Bookcase no es capaz de descargar el fichero - %1."
+msgstr "Bookcaseはファイル %1 をダウンロードできません。"
 
 #: bookcase.cpp:1369
 msgid "*.xsl|XSLT files (*.xsl)"
-msgstr "*.xsl|Ficheros XSLT (*.xsl)"
+msgstr "*.xsl|XSLTファイル (*.xsl)"
 
 #: bookcase.cpp:1373
 msgid "Select XSLT file..."
-msgstr "Seleccionar fichero XSLT..."
+msgstr "XSLTファイルを選択..."
 
 #: bookcase.cpp:1391 bookcase.cpp:1418
 msgid "Export..."
-msgstr "Exportar..."
+msgstr "エクスポート..."
 
 #: bookcasedoc.cpp:107
 msgid "Bookcase is unable to open the file - %1."
-msgstr "Bookcase no es capaz de abrir el fichero - %1."
+msgstr "Bookcaseはファイル %1 を開けません。"
 
 #: bookcasedoc.cpp:117
 msgid "Bookcase is unable to read the file - %1."
-msgstr "Bookcase no es capaz de leer el fichero - %1."
+msgstr "Bookcaseはファイル %1 を読みこめません。"
 
 #: bookcasedoc.cpp:127 bookcasedoc.cpp:140 bookcasedoc.cpp:175
 #: bookcasedoc.cpp:187 bookcasedoc.cpp:193
 msgid "Bookcase is unable to load the file - %1."
-msgstr "Bookcase no es capaz de cargar el fichero - %1."
+msgstr "Bookcaseはファイル %1 をロードできません。"
 
 #: bookcasedoc.cpp:141
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr "Hay un error de análisis sintáctico de XML en la línea %1, columna %2."
+msgstr "XMLパースエラー(%1 行, %2 カラム)"
 
 #: bookcasedoc.cpp:143
 msgid "The error message from Qt is:"
-msgstr "El mensaje de error de Qt es:"
+msgstr "Qtのエラーメッセージは:"
 
 #: bookcasedoc.cpp:195
 msgid "It is from a future version of Bookcase."
-msgstr "Es de una versión futura de Bookcase."
+msgstr "より新しいバージョンのBookcaseのものです。"
 
 #: bookcasedoc.cpp:262
 msgid "Unknown"
-msgstr "Desconocido"
+msgstr "未知"
 
 #: bookcasedoc.cpp:384
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
 msgstr ""
-"El fichero actual ha sido modificado.\n"
-"¿Desea guardarlo?"
+"現在のファイルは変更されています。\n"
+"保存しますか?"
 
 #: bookcasedoc.cpp:436
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
-msgstr ""
-"Ya existe un fichero llamado %1. ¿Está seguro de que quiere sobreescribirlo?"
+msgstr "\"%1\"というファイルはすでに存在します。上書きしますか?"
 
 #: bookcasedoc.cpp:439
 msgid "Overwrite File?"
-msgstr "¿Sobreescribir fichero?"
+msgstr "ファイルを上書きしますか?"
 
 #: bookcasedoc.cpp:440
 msgid "Overwrite"
-msgstr "Sobreescribir"
+msgstr "上書き"
 
 #: bookcasedoc.cpp:467
 msgid "Bookcase is unable to upload the file - %1."
-msgstr "Bookcase no es capaz de cargar el fichero - %1."
+msgstr "Bookcaseはファイル %1 をアップロードできません。"
 
 #: bookcasedoc.cpp:492
 msgid "Bookcase is unable to write the file - %1."
-msgstr "Bookcase no es capaz de escribir el fichero - %1."
+msgstr "Bookcaseはファイル %1 を書きこめません。"
 
 #: bookcasedoc.cpp:926
 msgid "Search string '%1' not found."
-msgstr "No se ha encontrado la cadena buscada '%1'."
+msgstr "検索文字列 '%1' が見つかりません。"
 
 #: bookcollection.cpp:20
 msgid "Publishing"
-msgstr "Publicación"
+msgstr "出版"
 
 #: bookcollection.cpp:21
 msgid "Classification"
-msgstr "Clasificación"
+msgstr "分類"
 
 #: bookcollection.cpp:22
 msgid "Personal"
-msgstr "Personal"
+msgstr "個人"
 
 #: bookcollection.cpp:25 bookcollection.cpp:184
 msgid "Books"
-msgstr "Libros"
+msgstr "ブック"
 
 #: bookcollection.cpp:34
 msgid "Subtitle"
-msgstr "Subtítulo"
+msgstr "サブタイトル"
 
 #: bookcollection.cpp:39
 msgid "Author"
-msgstr "Autor"
+msgstr "著者"
 
 #: bookcollection.cpp:47
 msgid "Hardback"
-msgstr "Tapa dura"
+msgstr "ハードカバー"
 
 #: bookcollection.cpp:47
 msgid "Paperback"
-msgstr "Rústica"
+msgstr "文庫本"
 
 #: bookcollection.cpp:47
 msgid "Trade Paperback"
-msgstr "Rústica comercial"
+msgstr "新書"
 
 #: bookcollection.cpp:48
 msgid "E-Book"
-msgstr "Libro electrónico"
+msgstr "eブック"
 
 #: bookcollection.cpp:48
 msgid "Magazine"
-msgstr "Revista"
+msgstr "雑誌"
 
 #: bookcollection.cpp:48
 msgid "Journal"
-msgstr "Periódico"
+msgstr "ジャーナル"
 
 #: bookcollection.cpp:49
 msgid "Binding"
-msgstr "Encuadernación"
+msgstr "製本"
 
 #: bookcollection.cpp:54
 msgid "Purchase Date"
-msgstr "Fecha de compra"
+msgstr "購入日"
 
 #: bookcollection.cpp:59
 msgid "Purchase Price"
-msgstr "Precio de compra"
+msgstr "購入価格"
 
 #: bookcollection.cpp:63
 msgid "Publisher"
-msgstr "Editorial"
+msgstr "出版社"
 
 #: bookcollection.cpp:68
 msgid "Edition"
-msgstr "Edición"
+msgstr "版"
 
 #: bookcollection.cpp:73
 msgid "Copyright Year"
-msgstr "Año del copyright"
+msgstr "著作年"
 
 #: bookcollection.cpp:78
 msgid "Publication Year"
-msgstr "Año de publicación"
+msgstr "出版年"
 
 #: bookcollection.cpp:83
 msgid "ISBN#"
-msgstr "ISBN"
+msgstr "ISBN番号"
 
 #: bookcollection.cpp:85
 msgid "International Standard Book Number"
-msgstr "Número Estándar Internacional del Libro"
+msgstr "国際標準図書番号"
 
 #: bookcollection.cpp:88
 msgid "LCCN#"
-msgstr "LCCN"
+msgstr "LCCN番号"
 
 #: bookcollection.cpp:90
 msgid "Library of Congress Control Number"
-msgstr "Número de Control de la Biblioteca del Congreso"
+msgstr "米国議会図書館制御番号"
 
 #: bookcollection.cpp:93
 msgid "Pages"
-msgstr "Páginas"
+msgstr "ページ数"
 
 #: bookcollection.cpp:97
 msgid "Language"
-msgstr "Idioma"
+msgstr "言語"
 
 #: bookcollection.cpp:102 songcollection.cpp:45 videocollection.cpp:34
 msgid "Genre"
-msgstr "Género"
+msgstr "ジャンル"
 
 #: bookcollection.cpp:109
 msgid "Keywords"
-msgstr "Palabras clave"
+msgstr "キーワード"
 
 #: bookcollection.cpp:114
 msgid "Series"
-msgstr "Serie"
+msgstr "シリーズ名"
 
 #: bookcollection.cpp:119
 msgid "Series Number"
-msgstr "Número de serie"
+msgstr "シリーズ番号"
 
 #: bookcollection.cpp:124
 msgid "New"
-msgstr "Nuevo"
+msgstr "新刊"
 
 #: bookcollection.cpp:124
 msgid "Used"
-msgstr "Usado"
+msgstr "中古"
 
 #: bookcollection.cpp:125
 msgid "Condition"
-msgstr "Estado"
+msgstr "状態"
 
 #: bookcollection.cpp:129
 msgid "Signed"
-msgstr "Firmado"
+msgstr "サイン"
 
 #: bookcollection.cpp:133
 msgid "Read"
-msgstr "Leído"
+msgstr "読了"
 
 #: bookcollection.cpp:137
 msgid "Gift"
-msgstr "Regalo"
+msgstr "贈呈"
 
 #: bookcollection.cpp:141
 msgid "Loaned"
-msgstr "Prestado"
+msgstr "ローン"
 
 #: bookcollection.cpp:146
 msgid "5 - Best"
-msgstr "5 - Excelente"
+msgstr "5 - 最良"
 
 #: bookcollection.cpp:146
 msgid "4 - Good"
-msgstr "4 - Bueno"
+msgstr "4 - よい"
 
 #: bookcollection.cpp:146
 msgid "3 - Neutral"
-msgstr "3 - Normal"
+msgstr "3 - 普通"
 
 #: bookcollection.cpp:146
 msgid "2 - Bad"
-msgstr "2 - Malo"
+msgstr "2 - 悪い"
 
 #: bookcollection.cpp:146
 msgid "1 - Worst"
-msgstr "1 - Pésimo"
+msgstr "1 - 最悪"
 
 #: bookcollection.cpp:147
 msgid "Rating"
-msgstr "Valoración"
+msgstr "評価"
 
 #: bookcollection.cpp:152 songcollection.cpp:57 videocollection.cpp:47
 msgid "Comments"
-msgstr "Comentarios"
+msgstr "コメント"
 
 #: bookcollection.cpp:180 bookcollection.h:67
 msgid "My Books"
-msgstr "Mis libros"
+msgstr "My Books"
 
 #: configdialog.cpp:52
 msgid "Configure Bookcase"
-msgstr "Configurar Bookcase"
+msgstr "Bookcaseを設定"
 
 #: configdialog.cpp:118
 msgid "General Options"
-msgstr "Opciones generales"
+msgstr "一般的なオプション"
 
 #: configdialog.cpp:121
 msgid "Reopen file at startup"
-msgstr "Volver a abrir el fichero al arrancar"
+msgstr "起動時にファイルを再オープン"
 
 #: configdialog.cpp:122
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
 msgstr ""
-"Si se marca, el fichero abierto por última vez se volverá a abrir al "
-"arrancar el programa."
+"チェックすると、最期に開いたファイルがプログラム起動時に再オープンされます。"
 
 #: configdialog.cpp:127
 msgid "Show number of items in group"
-msgstr "Mostrar el número de elementos del grupo"
+msgstr "グループのアイテム数を表示"
 
 #: configdialog.cpp:128
 msgid ""
 "If checked, the number of items in the group will be appended to the group "
 "name."
-msgstr ""
-"Si se marca, se agrega el número de elementos del grupo al nombre del grupo."
+msgstr "チェックすると、グループ内のアイテム数がグループ名の後に表示されます。"
 
 #: configdialog.cpp:133 configdialog.cpp:197
 msgid "Formatting Options"
-msgstr "Opciones de formato"
+msgstr "フォーマットオプション"
 
 #: configdialog.cpp:136
 msgid "(Requires restart)"
-msgstr "(Requiere reiniciar el programa)"
+msgstr "(再起動が必要)"
 
 #: configdialog.cpp:137
 msgid "Auto capitalize titles and names"
-msgstr "Escribir autómaticamente con mayúsculas los títulos y nombres"
+msgstr "タイトルと名前のキャピタライズ"
 
 #: configdialog.cpp:138
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr ""
-"Si se marca, los títulos y nombres se escribirán automáticamente con "
-"mayúsculas."
+msgstr "チェックすると、タイトルと名前が自動的にキャピタライズされます。"
 
 #: configdialog.cpp:142
 msgid "Auto format titles and names"
-msgstr "Formatear automáticamente títulos y nombres"
+msgstr "タイトルと名前の自動フォーマット"
 
 #: configdialog.cpp:143 configdialog.cpp:201
 msgid "If checked, titles and names will be automatically formatted."
-msgstr "Si se marca, los títulos y nombre serán formateados automáticamente."
+msgstr "チェックすると、タイトルと名前が自動的にフォーマットされます。"
 
 #: configdialog.cpp:151
 msgid "Articles:"
-msgstr "Artículos:"
+msgstr "記事:"
 
 #: configdialog.cpp:157 configdialog.cpp:160
 msgid ""
 "A comma-separated list of words which should be considered as articles if "
 "they are the first word in a title."
 msgstr ""
-"Una lista de palabras separadas por comas que deberán considerarse como "
-"artículos si son la primera palabra en un título."
+"タイトルの最初に使うと「記事」として判断される単語のリスト(カンマ区切り)"
 
 #: configdialog.cpp:165
 msgid "Personal suffixes:"
-msgstr "Sufijos de nombre:"
+msgstr "名の接尾辞:"
 
 #: configdialog.cpp:170 configdialog.cpp:172
 msgid ""
 "A comma-separated list of suffixes which might be used in personal names."
-msgstr ""
-"Una lista de sufijos separados por comas que se pueden usar en los nombres "
-"propios."
+msgstr "名前の後に使われる可能性のある単語のリスト(カンマ区切り)"
 
 #: configdialog.cpp:176
 msgid "Surname prefixes:"
-msgstr "Prefijos de apellido:"
+msgstr "姓の接頭辞(尊称):"
 
 #: configdialog.cpp:181 configdialog.cpp:183
 msgid "A comma-separated list of prefixes which might be used in surnames."
-msgstr ""
-"Una lista de prefijos separados por comas que se pueden usar en los "
-"apellidos."
+msgstr "姓の前に使われる可能性のある単語のリスト(カンマ区切り)"
 
 #: configdialog.cpp:194
 msgid "Printing"
-msgstr "Impresión"
+msgstr "印刷"
 
 #: configdialog.cpp:194
 msgid "Printing Options"
-msgstr "Opciones de impresión"
+msgstr "印刷オプション"
 
 #: configdialog.cpp:200
 msgid "Format titles and names"
-msgstr "Formatear títulos y nombres"
+msgstr "タイトルと名前をフォーマット"
 
 #: configdialog.cpp:205
 msgid "Print field headers"
-msgstr "Imprimir cabeceras con los campos"
+msgstr "項目見出しの印刷"
 
 #: configdialog.cpp:206
 msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Si se marca, los nombres de los campos se imprimirán como cabeceras de tabla."
+msgstr "チェックすると、項目名が表の見だしとして印刷されます。"
 
 #: configdialog.cpp:210
 msgid "Grouping Options"
-msgstr "Opciones de agrupamiento"
+msgstr "分類オプション"
 
 #: configdialog.cpp:213
 msgid "Group the books"
-msgstr "Agrupar los libros"
+msgstr "ブックを分類する"
 
 #: configdialog.cpp:214
 msgid "If checked, the books will be grouped under the selected field."
-msgstr "Si se marca, los libros se agruparán bajo el campo seleccionado."
+msgstr "チェックすると、ブックが選択した項目で分類されます。"
 
 #: configdialog.cpp:220
 msgid "The collection is grouped by this field."
-msgstr "La colección está agrupada por este campo."
+msgstr "コレクションは、この項目で分類されます。"
 
 #: configdialog.cpp:232
 msgid "Fields"
-msgstr "Campos"
+msgstr "項目"
 
 #: configdialog.cpp:237
 msgid "Available Fields"
-msgstr "Campos disponibles"
+msgstr "利用できる項目"
 
 #: configdialog.cpp:239
 msgid "These are the available fields in the collection."
-msgstr "Estos son los campos disponibles en la colección."
+msgstr "コレクションで利用できる項目です。"
 
 #: configdialog.cpp:255
 msgid "Selected Fields"
-msgstr "Campos seleccionados"
+msgstr "選択された項目"
 
 #: configdialog.cpp:257
 msgid "These are the selected fields in the collection."
-msgstr "Estos son los campos seleccionados en la colección."
+msgstr "コレクションで選択された項目です。"
 
 #: finddialog.cpp:43
 msgid "Find Text"
-msgstr "Encontrar texto"
+msgstr "テキスト検索"
 
 #: finddialog.cpp:44
 msgid "&Find"
-msgstr "&Encontrar"
+msgstr "検索(&F)"
 
 #: finddialog.cpp:50
 msgid "Text To Find:"
-msgstr "Texto a buscar:"
+msgstr "検索文字列:"
 
 #: finddialog.cpp:53
 msgid "The search string"
-msgstr "La cadena buscada"
+msgstr "検索する文字列"
 
 #: finddialog.cpp:64
 msgid "Search In:"
-msgstr "Buscar en:"
+msgstr "検索対象:"
 
 #: finddialog.cpp:67
 msgid "Select which field should be searched."
-msgstr "Seleccione el que se debe buscar."
+msgstr "どの項目を検索するか選択する。"
 
 #: finddialog.cpp:75
 msgid "Case &Sensitive"
-msgstr "&Diferenciar entre mayúsculas y minúsculas"
+msgstr "大文字小文字を区別(&S)"
 
 #: finddialog.cpp:76
 msgid "If checked, the search is case-sensitive."
-msgstr "Si se marca, la búsqueda diferencia entre mayúsculas y minúsculas."
+msgstr "チェックすると、大文字小文字を区別して検索します。"
 
 #: finddialog.cpp:77
 msgid "Find &Backwards"
-msgstr "&Buscar hacia atrás"
+msgstr "後ろ向き検索(&B)"
 
 #: finddialog.cpp:78
 msgid "If checked, the document is searched in reverse."
-msgstr "Si se marca, se busca hacia atrás."
+msgstr "チェックすると、反対方向に検索します。"
 
 #: finddialog.cpp:79
 msgid "&Whole Words Only"
-msgstr "&Solo palabras completas"
+msgstr "単語全体を検索(&W)"
 
 #: finddialog.cpp:80
 msgid "If checked, the search is limited to whole words."
-msgstr "Si se marca, la búsqueda se limita a palabras completas."
+msgstr "チェックすると、単語全体に限定して検索します。"
 
 #: finddialog.cpp:81
 msgid "&From Beginning"
-msgstr "&Desde el principio"
+msgstr "先頭から検索(&F)"
 
 #: finddialog.cpp:82
 msgid "If checked, the document is searched from the beginning."
-msgstr "Si se marca, la búsqueda se realiza desde el principio del documento."
+msgstr "チェックすると、ドキュメントの先頭から検索します。"
 
 #: finddialog.cpp:83
 msgid "As &Regular Expression"
-msgstr "Como expresión &regular"
+msgstr "正規表現として(&R)"
 
 #: finddialog.cpp:84
 msgid "If checked, the search string is used as a regular expression."
-msgstr ""
-"Si se marca, la cadena de búsqueda es usada como una expresión regular."
+msgstr "チェックすると、検索文字列が正規表現として扱われます。"
 
 #: finddialog.cpp:87
 msgid "&Edit Regular Expression..."
-msgstr "&Editar la expresión regular..."
+msgstr "正規表現を編集(&E)..."
 
 #: finddialog.cpp:107 finddialog.cpp:173
 msgid "All Fields"
-msgstr "Todos los campos"
+msgstr "すべての項目"
 
 #: finddialog.cpp:117
 msgid "Invalid regular expression."
-msgstr "Expresión regular no válida."
+msgstr "不正な正規表現です。"
 
 #: main.cpp:26
 msgid "Bookcase - a book collection manager for KDE"
-msgstr "Bookcase - un gestor de colecciones de libros para KDE"
+msgstr "Bookcase - KDE用の蔵書管理ソフト"
 
 #: main.cpp:31
 msgid "File to open"
-msgstr "Fichero a abrir"
+msgstr "開くファイル"
 
 #: main.cpp:36 bookcase.moc.cpp:34 bookcase.moc.cpp:42
 msgid "Bookcase"
@@ -911,15 +899,15 @@ msgstr "Bookcase"
 
 #: songcollection.cpp:20
 msgid "Song"
-msgstr "Canción"
+msgstr "歌"
 
 #: songcollection.cpp:29
 msgid "Artist"
-msgstr "Artista"
+msgstr "アーティスト"
 
 #: songcollection.cpp:35
 msgid "Album"
-msgstr "Álbum"
+msgstr "アルバム"
 
 #: songcollection.cpp:51
 msgid "CD"
@@ -927,19 +915,19 @@ msgstr "CD"
 
 #: songcollection.cpp:51
 msgid "Cassette"
-msgstr "Cinta"
+msgstr "カセット"
 
 #: songcollection.cpp:52 videocollection.cpp:42
 msgid "Medium"
-msgstr "Soporte"
+msgstr "Medium"
 
 #: songcollection.h:48
 msgid "My Songs"
-msgstr "Mis canciones"
+msgstr "My Songs"
 
 #: videocollection.cpp:20
 msgid "Videos"
-msgstr "Videos"
+msgstr "ビデオ"
 
 #: videocollection.cpp:41
 msgid "DVD"
@@ -951,7 +939,7 @@ msgstr "VHS"
 
 #: videocollection.cpp:41
 msgid "VCD"
-msgstr "VCD"
+msgstr "ビデオCD"
 
 #: videocollection.cpp:41
 msgid "DivX"
@@ -959,161 +947,160 @@ msgstr "DivX"
 
 #: videocollection.h:47
 msgid "My Videos"
-msgstr "Mis videos"
+msgstr "My Videos"
 
 #: bccollectionpropdialog.cpp:73
 msgid "Edit Collection Fields"
-msgstr "Editar los campos de la colección"
+msgstr "コレクションの項目編集"
 
 #: bccollectionpropdialog.cpp:80
 msgid "Current Fields"
-msgstr "Campos actuales"
+msgstr "現在の項目"
 
 #: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
 #: bccollectionpropdialog.cpp:212
 msgid "New Field"
-msgstr "Nuevo campo"
+msgstr "追加"
 
 #: bccollectionpropdialog.cpp:97
 msgid "Delete Field"
-msgstr "Borrar campo"
+msgstr "削除"
 
 #: bccollectionpropdialog.cpp:107
 msgid "Field Properties"
-msgstr "Propiedades del campo"
+msgstr "項目のプロパティ"
 
 #: bccollectionpropdialog.cpp:113
 msgid "Title:"
-msgstr "Título:"
+msgstr "タイトル:"
 
 #: bccollectionpropdialog.cpp:118
 msgid "Type:"
-msgstr "Tipo:"
+msgstr "タイプ:"
 
 #: bccollectionpropdialog.cpp:125
 msgid "Category:"
-msgstr "Categoría:"
+msgstr "カテゴリー:"
 
 #: bccollectionpropdialog.cpp:131
 msgid "The fields are grouped by common categories for editing."
-msgstr "Los campos se agrupan por categorías comunes para editarlos."
+msgstr "項目は編集用のいくつかのカテゴリーに分類されます。"
 
 #: bccollectionpropdialog.cpp:133
 msgid "Allowed:"
-msgstr "Permitido:"
+msgstr "許可:"
 
 #: bccollectionpropdialog.cpp:137
 msgid "Allowed values for this field are separated by a semi-colon."
-msgstr ""
-"Los valores permitidos para este campo están separados por un punto y coma."
+msgstr "この項目に設定できる値をセミコロン区切りで記述します。"
 
 #: bccollectionpropdialog.cpp:139
 msgid "Description:"
-msgstr "Descripción:"
+msgstr "記述:"
 
 #: bccollectionpropdialog.cpp:145
 msgid "Format Options"
-msgstr "Opciones de formato"
+msgstr "フォーマットオプション"
 
 #: bccollectionpropdialog.cpp:146
 msgid "No formatting"
-msgstr "Sin formato"
+msgstr "フォーマットしない"
 
 #: bccollectionpropdialog.cpp:147
 msgid "Format as a title"
-msgstr "Formato de título"
+msgstr "タイトルとしてフォーマット"
 
 #: bccollectionpropdialog.cpp:148
 msgid "Format as a name"
-msgstr "Formato de nombre"
+msgstr "名前としてフォーマット"
 
 #: bccollectionpropdialog.cpp:151
 msgid "Field Options"
-msgstr "Opciones de campo"
+msgstr "項目オプション"
 
 #: bccollectionpropdialog.cpp:152
 msgid "Enable auto-completion"
-msgstr "Habilitar completado automático"
+msgstr "自動補完を有効にする"
 
 #: bccollectionpropdialog.cpp:153
 msgid "Allow multiple values"
-msgstr "Permitir varios valores"
+msgstr "複数の値を許可する"
 
 #: bccollectionpropdialog.cpp:154
 msgid "Allow grouping"
-msgstr "Permitir agrupamiento"
+msgstr "分類を許可する"
 
 #: bccollectionpropdialog.cpp:243
 msgid ""
 "Do you really want to delete the %1 field? This action occurs immediately "
 "and can not be undone!"
 msgstr ""
-"¿Realmente quiere borrar el campo %1? Esta acción se realiza inmediatamente "
-"y no puede ser deshecha."
+"本当に %1 項目を削除しますか? この操作はただちに実行され 元に戻すことはできま"
+"せん!"
 
 #: bccollectionpropdialog.cpp:246
 msgid "Delete Field?"
-msgstr "¿Borrar el campo?"
+msgstr "項目の削除?"
 
 #: bcfilterdialog.cpp:60
 msgid "Any Field"
-msgstr "Cualquier campo"
+msgstr "任意の項目"
 
 #: bcfilterdialog.cpp:69
 msgid "contains"
-msgstr "contiene"
+msgstr "は右の文字列を含む"
 
 #: bcfilterdialog.cpp:70
 msgid "does not contain"
-msgstr "no contiene"
+msgstr "は右の文字列を含まない"
 
 #: bcfilterdialog.cpp:71
 msgid "equals"
-msgstr "igual a"
+msgstr "は右の文字列と等しい"
 
 #: bcfilterdialog.cpp:72
 msgid "does not equal"
-msgstr "no es igual a"
+msgstr "は右の文字列と等しくない"
 
 #: bcfilterdialog.cpp:73
 msgid "matches regexp"
-msgstr "casa con la expresión regular"
+msgstr "は右の正規表現にマッチする"
 
 #: bcfilterdialog.cpp:74
 msgid "does not match regexp"
-msgstr "no casa con la expresión regular"
+msgstr "は右の正規表現にマッチしない"
 
 #: bcfilterdialog.cpp:86
 msgid "Edit..."
-msgstr "Editar..."
+msgstr "編集..."
 
 #: bcfilterdialog.cpp:246
 msgid "Advanced Filter"
-msgstr "Filtro avanzado"
+msgstr "上級フィルター"
 
 #: bcfilterdialog.cpp:252
 msgid "Filter Criteria"
-msgstr "Criterio de filtros"
+msgstr "フィルター基準"
 
 #: bcfilterdialog.cpp:255
 msgid "Match a&ll of the following"
-msgstr "Coincide con &todo lo que sigue"
+msgstr "以下のすべてにマッチ(&L)"
 
 #: bcfilterdialog.cpp:256
 msgid "Match an&y of the following"
-msgstr "Coincide con &cualquiera de lo que sigue"
+msgstr "以下のいずれかにマッチ(&Y)"
 
 #: kwidgetlister.cpp:56
 msgid "more widgets"
-msgstr "más elementos"
+msgstr "追加"
 
 #: kwidgetlister.cpp:59
 msgid "fewer widgets"
-msgstr "menos elementos"
+msgstr "減少"
 
 #: kwidgetlister.cpp:65
 msgid "clear widgets"
-msgstr "borrar elementos"
+msgstr "クリア"
 
 #: configdialog.moc.cpp:34 configdialog.moc.cpp:42
 msgid "ConfigDialog"
@@ -1189,24 +1176,24 @@ msgstr "BCAttributeWidget"
 
 #: rc.cpp:1
 msgid "I&mport"
-msgstr "&Importar"
+msgstr "インポート(&I)"
 
 #: rc.cpp:2
 msgid "E&xport"
-msgstr "E&xportar"
+msgstr "エクスポート(&X)"
 
 #: rc.cpp:3
 msgid "Collection Toolbar"
-msgstr "Barra de colecciones"
+msgstr "コレクションツールバー"
 
 #: _translatorinfo.cpp:1
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr "Quique"
+msgstr "Koichi OIKE"
 
 #: _translatorinfo.cpp:3
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr "quique@sindominio.net"
+msgstr "daichi1@gol.com"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-27 18:57-0700\n"
+"POT-Creation-Date: 2003-06-25 17:56-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,41 +27,41 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: bcattribute.cpp:306
+#: bcattribute.cpp:312
 msgid "the"
 msgstr ""
 
-#: bcattribute.cpp:330
+#: bcattribute.cpp:336
 msgid "jr.,jr,iii,iv"
 msgstr ""
 
-#: bcattribute.cpp:360
+#: bcattribute.cpp:366
 msgid "de,van der,von"
 msgstr ""
 
-#: bcattribute.cpp:375 bccollectionpropdialog.cpp:264
+#: bcattribute.cpp:381 bccollectionpropdialog.cpp:264
 msgid "Simple Text"
 msgstr ""
 
-#: bcattribute.cpp:376 bccollectionpropdialog.cpp:262
+#: bcattribute.cpp:382 bccollectionpropdialog.cpp:262
 #: bccollectionpropdialog.cpp:275
 msgid "Paragraph"
 msgstr ""
 
-#: bcattribute.cpp:377 bccollectionpropdialog.cpp:261
+#: bcattribute.cpp:383 bccollectionpropdialog.cpp:261
 msgid "List"
 msgstr ""
 
-#: bcattribute.cpp:378
+#: bcattribute.cpp:384
 msgid "Checkbox"
 msgstr ""
 
-#: bcattribute.cpp:379 bccollectionpropdialog.cpp:269 songcollection.cpp:40
-#: videocollection.cpp:29
+#: bcattribute.cpp:385 songcollection.cpp:40 videocollection.cpp:29
+#: bccollectionpropdialog.cpp:269
 msgid "Year"
 msgstr ""
 
-#: bcattribute.cpp:380 bccollectionpropdialog.cpp:272
+#: bcattribute.cpp:386 bccollectionpropdialog.cpp:272
 msgid "URL"
 msgstr ""
 
@@ -73,152 +73,13 @@ msgstr ""
 msgid "(Empty)"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:73
-msgid "Edit Collection Fields"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:80
-msgid "Current Fields"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
-#: bccollectionpropdialog.cpp:212
-msgid "New Field"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:97
-msgid "Delete Field"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:107
-msgid "Field Properties"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:113
-msgid "Title:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:118
-msgid "Type:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:125
-msgid "Category:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:131
-msgid "The fields are grouped by common categories for editing."
-msgstr ""
-
-#: bccollectionpropdialog.cpp:133
-msgid "Allowed:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:137
-msgid "Allowed values for this field are separated by a semi-colon."
-msgstr ""
-
-#: bccollectionpropdialog.cpp:139
-msgid "Description:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:145
-msgid "Format Options"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:146
-msgid "No formatting"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:147
-msgid "Format as a title"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:148
-msgid "Format as a name"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:151
-msgid "Field Options"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:152
-msgid "Enable auto-completion"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:153
-msgid "Allow multiple values"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:154
-msgid "Allow grouping"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:243
-msgid ""
-"Do you really want to delete the %1 field? This action occurs immediately "
-"and can not be undone!"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:246
-msgid "Delete Field?"
-msgstr ""
-
 #: bcdetailedlistview.cpp:67 bcgroupview.cpp:59 bcuniteditwidget.cpp:56
-#: bcuniteditwidget.cpp:506
+#: bcuniteditwidget.cpp:508
 msgid "Delete Book"
 msgstr ""
 
 #: bcdetailedlistview.cpp:340
 msgid "View Columns"
-msgstr ""
-
-#: bcfilterdialog.cpp:60
-msgid "Any Field"
-msgstr ""
-
-#: bcfilterdialog.cpp:69
-msgid "contains"
-msgstr ""
-
-#: bcfilterdialog.cpp:70
-msgid "does not contain"
-msgstr ""
-
-#: bcfilterdialog.cpp:71
-msgid "equals"
-msgstr ""
-
-#: bcfilterdialog.cpp:72
-msgid "does not equal"
-msgstr ""
-
-#: bcfilterdialog.cpp:73
-msgid "matches regexp"
-msgstr ""
-
-#: bcfilterdialog.cpp:74
-msgid "does not match regexp"
-msgstr ""
-
-#: bcfilterdialog.cpp:86
-msgid "Edit..."
-msgstr ""
-
-#: bcfilterdialog.cpp:246
-msgid "Advanced Filter"
-msgstr ""
-
-#: bcfilterdialog.cpp:252
-msgid "Filter Criteria"
-msgstr ""
-
-#: bcfilterdialog.cpp:255
-msgid "Match a&ll of the following"
-msgstr ""
-
-#: bcfilterdialog.cpp:256
-msgid "Match an&y of the following"
 msgstr ""
 
 #: bcgroupview.cpp:53
@@ -245,8 +106,8 @@ msgstr ""
 msgid "New Book"
 msgstr ""
 
-#: bcuniteditwidget.cpp:55 bcuniteditwidget.cpp:78 bcuniteditwidget.cpp:378
-#: bcuniteditwidget.cpp:546
+#: bcuniteditwidget.cpp:55 bcuniteditwidget.cpp:78 bcuniteditwidget.cpp:380
+#: bcuniteditwidget.cpp:548
 msgid "Enter Book"
 msgstr ""
 
@@ -254,41 +115,41 @@ msgstr ""
 msgid "Duplicate Book"
 msgstr ""
 
-#: bcuniteditwidget.cpp:276
+#: bcuniteditwidget.cpp:278
 msgid "Do you really want to modify these books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:278
+#: bcuniteditwidget.cpp:280
 msgid "Modify Multiple Books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:326
+#: bcuniteditwidget.cpp:328
 msgid "Do you really want to delete these books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:328
+#: bcuniteditwidget.cpp:330
 msgid "Delete Multiple Books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:437
+#: bcuniteditwidget.cpp:439
 msgid "Modify Books"
 msgstr ""
 
-#: bcuniteditwidget.cpp:438
+#: bcuniteditwidget.cpp:440
 msgid "Delete Books"
 msgstr ""
 
-#: bcuniteditwidget.cpp:501
+#: bcuniteditwidget.cpp:503
 msgid "Modify Book"
 msgstr ""
 
-#: bcuniteditwidget.cpp:543
+#: bcuniteditwidget.cpp:545
 msgid ""
 "The current book has been modified.\n"
 "Do you want to enter the changes?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:545 bookcasedoc.cpp:386
+#: bcuniteditwidget.cpp:547 bookcasedoc.cpp:386
 msgid "Warning!"
 msgstr ""
 
@@ -1018,18 +879,6 @@ msgstr ""
 msgid "Invalid regular expression."
 msgstr ""
 
-#: kwidgetlister.cpp:56
-msgid "more widgets"
-msgstr ""
-
-#: kwidgetlister.cpp:59
-msgid "fewer widgets"
-msgstr ""
-
-#: kwidgetlister.cpp:65
-msgid "clear widgets"
-msgstr ""
-
 #: main.cpp:26
 msgid "Bookcase - a book collection manager for KDE"
 msgstr ""
@@ -1094,6 +943,157 @@ msgstr ""
 msgid "My Videos"
 msgstr ""
 
+#: bccollectionpropdialog.cpp:73
+msgid "Edit Collection Fields"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:80
+msgid "Current Fields"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
+#: bccollectionpropdialog.cpp:212
+msgid "New Field"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:97
+msgid "Delete Field"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:107
+msgid "Field Properties"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:113
+msgid "Title:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:118
+msgid "Type:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:125
+msgid "Category:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:131
+msgid "The fields are grouped by common categories for editing."
+msgstr ""
+
+#: bccollectionpropdialog.cpp:133
+msgid "Allowed:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:137
+msgid "Allowed values for this field are separated by a semi-colon."
+msgstr ""
+
+#: bccollectionpropdialog.cpp:139
+msgid "Description:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:145
+msgid "Format Options"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:146
+msgid "No formatting"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:147
+msgid "Format as a title"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:148
+msgid "Format as a name"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:151
+msgid "Field Options"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:152
+msgid "Enable auto-completion"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:153
+msgid "Allow multiple values"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:154
+msgid "Allow grouping"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:243
+msgid ""
+"Do you really want to delete the %1 field? This action occurs immediately "
+"and can not be undone!"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:246
+msgid "Delete Field?"
+msgstr ""
+
+#: bcfilterdialog.cpp:60
+msgid "Any Field"
+msgstr ""
+
+#: bcfilterdialog.cpp:69
+msgid "contains"
+msgstr ""
+
+#: bcfilterdialog.cpp:70
+msgid "does not contain"
+msgstr ""
+
+#: bcfilterdialog.cpp:71
+msgid "equals"
+msgstr ""
+
+#: bcfilterdialog.cpp:72
+msgid "does not equal"
+msgstr ""
+
+#: bcfilterdialog.cpp:73
+msgid "matches regexp"
+msgstr ""
+
+#: bcfilterdialog.cpp:74
+msgid "does not match regexp"
+msgstr ""
+
+#: bcfilterdialog.cpp:86
+msgid "Edit..."
+msgstr ""
+
+#: bcfilterdialog.cpp:246
+msgid "Advanced Filter"
+msgstr ""
+
+#: bcfilterdialog.cpp:252
+msgid "Filter Criteria"
+msgstr ""
+
+#: bcfilterdialog.cpp:255
+msgid "Match a&ll of the following"
+msgstr ""
+
+#: bcfilterdialog.cpp:256
+msgid "Match an&y of the following"
+msgstr ""
+
+#: kwidgetlister.cpp:56
+msgid "more widgets"
+msgstr ""
+
+#: kwidgetlister.cpp:59
+msgid "fewer widgets"
+msgstr ""
+
+#: kwidgetlister.cpp:65
+msgid "clear widgets"
+msgstr ""
+
 #: configdialog.moc.cpp:34 configdialog.moc.cpp:42
 msgid "ConfigDialog"
 msgstr ""
@@ -1134,10 +1134,6 @@ msgstr ""
 msgid "BookcaseDoc"
 msgstr ""
 
-#: bccollectionpropdialog.moc.cpp:34 bccollectionpropdialog.moc.cpp:42
-msgid "BCCollectionPropDialog"
-msgstr ""
-
 #: bcfilterdialog.moc.cpp:34 bcfilterdialog.moc.cpp:42
 msgid "BCFilterRuleWidget"
 msgstr ""
@@ -1148,6 +1144,10 @@ msgstr ""
 
 #: bcfilterdialog.moc.cpp:204 bcfilterdialog.moc.cpp:212
 msgid "BCFilterDialog"
+msgstr ""
+
+#: bccollectionpropdialog.moc.cpp:34 bccollectionpropdialog.moc.cpp:42
+msgid "BCCollectionPropDialog"
 msgstr ""
 
 #: songcollection.moc.cpp:34 songcollection.moc.cpp:42

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2003-05-27 18:57-0700\n"
+"POT-Creation-Date: 2003-06-25 17:56-0700\n"
 "PO-Revision-Date: 2003-05-13 02:47+0200\n"
 "Last-Translator: Leif Mathis Gaup <lmgaup@nsn.no>\n"
 "Language-Team: Norsk Bokmål <nb@li.org>\n"
@@ -28,41 +28,41 @@ msgstr "en,ei,et,i,av,den,det,de,til,fra"
 msgid "General"
 msgstr "Hovedvalg"
 
-#: bcattribute.cpp:306
+#: bcattribute.cpp:312
 msgid "the"
 msgstr "den"
 
-#: bcattribute.cpp:330
+#: bcattribute.cpp:336
 msgid "jr.,jr,iii,iv"
 msgstr "jr,Sr,"
 
-#: bcattribute.cpp:360
+#: bcattribute.cpp:366
 msgid "de,van der,von"
 msgstr "van,von"
 
-#: bcattribute.cpp:375 bccollectionpropdialog.cpp:264
+#: bcattribute.cpp:381 bccollectionpropdialog.cpp:264
 msgid "Simple Text"
 msgstr "Enkel tekst"
 
-#: bcattribute.cpp:376 bccollectionpropdialog.cpp:262
+#: bcattribute.cpp:382 bccollectionpropdialog.cpp:262
 #: bccollectionpropdialog.cpp:275
 msgid "Paragraph"
 msgstr "Avsnitt"
 
-#: bcattribute.cpp:377 bccollectionpropdialog.cpp:261
+#: bcattribute.cpp:383 bccollectionpropdialog.cpp:261
 msgid "List"
 msgstr "Liste"
 
-#: bcattribute.cpp:378
+#: bcattribute.cpp:384
 msgid "Checkbox"
 msgstr "Avkryssningsboks"
 
-#: bcattribute.cpp:379 bccollectionpropdialog.cpp:269 songcollection.cpp:40
-#: videocollection.cpp:29
+#: bcattribute.cpp:385 songcollection.cpp:40 videocollection.cpp:29
+#: bccollectionpropdialog.cpp:269
 msgid "Year"
 msgstr "År"
 
-#: bcattribute.cpp:380 bccollectionpropdialog.cpp:272
+#: bcattribute.cpp:386 bccollectionpropdialog.cpp:272
 msgid "URL"
 msgstr "Adresse"
 
@@ -74,155 +74,14 @@ msgstr "Tittel"
 msgid "(Empty)"
 msgstr "(Tom)"
 
-#: bccollectionpropdialog.cpp:73
-msgid "Edit Collection Fields"
-msgstr "Endre felter for Bookcase"
-
-#: bccollectionpropdialog.cpp:80
-msgid "Current Fields"
-msgstr "Gjeldende felter"
-
-#: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
-#: bccollectionpropdialog.cpp:212
-msgid "New Field"
-msgstr "Nytt felt"
-
-#: bccollectionpropdialog.cpp:97
-msgid "Delete Field"
-msgstr "Slett felt"
-
-#: bccollectionpropdialog.cpp:107
-msgid "Field Properties"
-msgstr "Feltverdi"
-
-#: bccollectionpropdialog.cpp:113
-msgid "Title:"
-msgstr "Tittel:"
-
-#: bccollectionpropdialog.cpp:118
-msgid "Type:"
-msgstr "Type:"
-
-#: bccollectionpropdialog.cpp:125
-msgid "Category:"
-msgstr "Kategori:"
-
-#: bccollectionpropdialog.cpp:131
-msgid "The fields are grouped by common categories for editing."
-msgstr "Feltene er gruppert på vanlige kategorier for redigering."
-
-#: bccollectionpropdialog.cpp:133
-msgid "Allowed:"
-msgstr "Tillatt:"
-
-#: bccollectionpropdialog.cpp:137
-msgid "Allowed values for this field are separated by a semi-colon."
-msgstr "Tillatte verdier for dette feltet er separert med semikolon."
-
-#: bccollectionpropdialog.cpp:139
-msgid "Description:"
-msgstr "Beskrivelse:"
-
-#: bccollectionpropdialog.cpp:145
-msgid "Format Options"
-msgstr "Formateringsvalg"
-
-#: bccollectionpropdialog.cpp:146
-msgid "No formatting"
-msgstr "Ingen formatering"
-
-#: bccollectionpropdialog.cpp:147
-msgid "Format as a title"
-msgstr "Formater som tittel"
-
-#: bccollectionpropdialog.cpp:148
-msgid "Format as a name"
-msgstr "Formater som navn"
-
-#: bccollectionpropdialog.cpp:151
-msgid "Field Options"
-msgstr "Feltvalg"
-
-#: bccollectionpropdialog.cpp:152
-msgid "Enable auto-completion"
-msgstr "Slå på auto-fullføring"
-
-#: bccollectionpropdialog.cpp:153
-msgid "Allow multiple values"
-msgstr "Tillat flere verdier"
-
-#: bccollectionpropdialog.cpp:154
-msgid "Allow grouping"
-msgstr "Tillat gruppering"
-
-#: bccollectionpropdialog.cpp:243
-msgid ""
-"Do you really want to delete the %1 field? This action occurs immediately "
-"and can not be undone!"
-msgstr ""
-"Vil du virkelig slette  %1-feltet. Denne handlingen skjer med en gang og kan "
-"ikke bli omgjort!"
-
-#: bccollectionpropdialog.cpp:246
-msgid "Delete Field?"
-msgstr "Slett felt?"
-
 #: bcdetailedlistview.cpp:67 bcgroupview.cpp:59 bcuniteditwidget.cpp:56
-#: bcuniteditwidget.cpp:506
+#: bcuniteditwidget.cpp:508
 msgid "Delete Book"
 msgstr "Slett bok"
 
 #: bcdetailedlistview.cpp:340
 msgid "View Columns"
 msgstr "Vis kolonner"
-
-#: bcfilterdialog.cpp:60
-msgid "Any Field"
-msgstr "Uansett felt"
-
-#: bcfilterdialog.cpp:69
-msgid "contains"
-msgstr "inneholder"
-
-#: bcfilterdialog.cpp:70
-msgid "does not contain"
-msgstr "inneholder ikke"
-
-#: bcfilterdialog.cpp:71
-msgid "equals"
-msgstr "er lik"
-
-#: bcfilterdialog.cpp:72
-msgid "does not equal"
-msgstr "er ikke lik"
-
-#: bcfilterdialog.cpp:73
-msgid "matches regexp"
-msgstr "treffer regulært uttrykk"
-
-#: bcfilterdialog.cpp:74
-msgid "does not match regexp"
-msgstr "treffer ikke regulært uttrykk"
-
-#: bcfilterdialog.cpp:86
-msgid "Edit..."
-msgstr "Endre..."
-
-#: bcfilterdialog.cpp:246
-msgid "Advanced Filter"
-msgstr "Avansert filter"
-
-#: bcfilterdialog.cpp:252
-msgid "Filter Criteria"
-msgstr "Filterkriterie"
-
-#: bcfilterdialog.cpp:255
-msgid "Match a&ll of the following"
-msgstr "Treff på a&lle"
-
-#: bcfilterdialog.cpp:256
-msgid "Match an&y of the following"
-msgstr "Treff på e&n eller flere"
 
 #: bcgroupview.cpp:53
 msgid "Rename Collection..."
@@ -248,8 +107,8 @@ msgstr "Nytt navn på samling"
 msgid "New Book"
 msgstr "Ny bok"
 
-#: bcuniteditwidget.cpp:55 bcuniteditwidget.cpp:78 bcuniteditwidget.cpp:378
-#: bcuniteditwidget.cpp:546
+#: bcuniteditwidget.cpp:55 bcuniteditwidget.cpp:78 bcuniteditwidget.cpp:380
+#: bcuniteditwidget.cpp:548
 msgid "Enter Book"
 msgstr "Sett inn bok"
 
@@ -257,35 +116,35 @@ msgstr "Sett inn bok"
 msgid "Duplicate Book"
 msgstr "Dupliser bok"
 
-#: bcuniteditwidget.cpp:276
+#: bcuniteditwidget.cpp:278
 msgid "Do you really want to modify these books?"
 msgstr "Vil du virkelig endre disse bøkene?"
 
-#: bcuniteditwidget.cpp:278
+#: bcuniteditwidget.cpp:280
 msgid "Modify Multiple Books?"
 msgstr "Modifiser flere bøker?"
 
-#: bcuniteditwidget.cpp:326
+#: bcuniteditwidget.cpp:328
 msgid "Do you really want to delete these books?"
 msgstr "Vil du slette disse bøkene?"
 
-#: bcuniteditwidget.cpp:328
+#: bcuniteditwidget.cpp:330
 msgid "Delete Multiple Books?"
 msgstr "Slett flere bøker?"
 
-#: bcuniteditwidget.cpp:437
+#: bcuniteditwidget.cpp:439
 msgid "Modify Books"
 msgstr "Endre bøker"
 
-#: bcuniteditwidget.cpp:438
+#: bcuniteditwidget.cpp:440
 msgid "Delete Books"
 msgstr "Slett bøker"
 
-#: bcuniteditwidget.cpp:501
+#: bcuniteditwidget.cpp:503
 msgid "Modify Book"
 msgstr "Endre bok"
 
-#: bcuniteditwidget.cpp:543
+#: bcuniteditwidget.cpp:545
 msgid ""
 "The current book has been modified.\n"
 "Do you want to enter the changes?"
@@ -293,7 +152,7 @@ msgstr ""
 "Boken har blitt endret.\n"
 "Vil du lagre endringer?"
 
-#: bcuniteditwidget.cpp:545 bookcasedoc.cpp:386
+#: bcuniteditwidget.cpp:547 bookcasedoc.cpp:386
 msgid "Warning!"
 msgstr "Advarsel!"
 
@@ -1029,18 +888,6 @@ msgstr "Alle felter"
 msgid "Invalid regular expression."
 msgstr "Ugyldig regulært uttrykk."
 
-#: kwidgetlister.cpp:56
-msgid "more widgets"
-msgstr "flere avkrysningsbokser"
-
-#: kwidgetlister.cpp:59
-msgid "fewer widgets"
-msgstr "færre avkrysningsbokser"
-
-#: kwidgetlister.cpp:65
-msgid "clear widgets"
-msgstr "rens avkrysningsbokser"
-
 #: main.cpp:26
 msgid "Bookcase - a book collection manager for KDE"
 msgstr "Bookcase - en boksamlingshåndterer for KDE"
@@ -1105,6 +952,159 @@ msgstr "DivX"
 msgid "My Videos"
 msgstr "Mine Videofilmer"
 
+#: bccollectionpropdialog.cpp:73
+msgid "Edit Collection Fields"
+msgstr "Endre felter for Bookcase"
+
+#: bccollectionpropdialog.cpp:80
+msgid "Current Fields"
+msgstr "Gjeldende felter"
+
+#: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
+#: bccollectionpropdialog.cpp:212
+msgid "New Field"
+msgstr "Nytt felt"
+
+#: bccollectionpropdialog.cpp:97
+msgid "Delete Field"
+msgstr "Slett felt"
+
+#: bccollectionpropdialog.cpp:107
+msgid "Field Properties"
+msgstr "Feltverdi"
+
+#: bccollectionpropdialog.cpp:113
+msgid "Title:"
+msgstr "Tittel:"
+
+#: bccollectionpropdialog.cpp:118
+msgid "Type:"
+msgstr "Type:"
+
+#: bccollectionpropdialog.cpp:125
+msgid "Category:"
+msgstr "Kategori:"
+
+#: bccollectionpropdialog.cpp:131
+msgid "The fields are grouped by common categories for editing."
+msgstr "Feltene er gruppert på vanlige kategorier for redigering."
+
+#: bccollectionpropdialog.cpp:133
+msgid "Allowed:"
+msgstr "Tillatt:"
+
+#: bccollectionpropdialog.cpp:137
+msgid "Allowed values for this field are separated by a semi-colon."
+msgstr "Tillatte verdier for dette feltet er separert med semikolon."
+
+#: bccollectionpropdialog.cpp:139
+msgid "Description:"
+msgstr "Beskrivelse:"
+
+#: bccollectionpropdialog.cpp:145
+msgid "Format Options"
+msgstr "Formateringsvalg"
+
+#: bccollectionpropdialog.cpp:146
+msgid "No formatting"
+msgstr "Ingen formatering"
+
+#: bccollectionpropdialog.cpp:147
+msgid "Format as a title"
+msgstr "Formater som tittel"
+
+#: bccollectionpropdialog.cpp:148
+msgid "Format as a name"
+msgstr "Formater som navn"
+
+#: bccollectionpropdialog.cpp:151
+msgid "Field Options"
+msgstr "Feltvalg"
+
+#: bccollectionpropdialog.cpp:152
+msgid "Enable auto-completion"
+msgstr "Slå på auto-fullføring"
+
+#: bccollectionpropdialog.cpp:153
+msgid "Allow multiple values"
+msgstr "Tillat flere verdier"
+
+#: bccollectionpropdialog.cpp:154
+msgid "Allow grouping"
+msgstr "Tillat gruppering"
+
+#: bccollectionpropdialog.cpp:243
+msgid ""
+"Do you really want to delete the %1 field? This action occurs immediately "
+"and can not be undone!"
+msgstr ""
+"Vil du virkelig slette  %1-feltet. Denne handlingen skjer med en gang og kan "
+"ikke bli omgjort!"
+
+#: bccollectionpropdialog.cpp:246
+msgid "Delete Field?"
+msgstr "Slett felt?"
+
+#: bcfilterdialog.cpp:60
+msgid "Any Field"
+msgstr "Uansett felt"
+
+#: bcfilterdialog.cpp:69
+msgid "contains"
+msgstr "inneholder"
+
+#: bcfilterdialog.cpp:70
+msgid "does not contain"
+msgstr "inneholder ikke"
+
+#: bcfilterdialog.cpp:71
+msgid "equals"
+msgstr "er lik"
+
+#: bcfilterdialog.cpp:72
+msgid "does not equal"
+msgstr "er ikke lik"
+
+#: bcfilterdialog.cpp:73
+msgid "matches regexp"
+msgstr "treffer regulært uttrykk"
+
+#: bcfilterdialog.cpp:74
+msgid "does not match regexp"
+msgstr "treffer ikke regulært uttrykk"
+
+#: bcfilterdialog.cpp:86
+msgid "Edit..."
+msgstr "Endre..."
+
+#: bcfilterdialog.cpp:246
+msgid "Advanced Filter"
+msgstr "Avansert filter"
+
+#: bcfilterdialog.cpp:252
+msgid "Filter Criteria"
+msgstr "Filterkriterie"
+
+#: bcfilterdialog.cpp:255
+msgid "Match a&ll of the following"
+msgstr "Treff på a&lle"
+
+#: bcfilterdialog.cpp:256
+msgid "Match an&y of the following"
+msgstr "Treff på e&n eller flere"
+
+#: kwidgetlister.cpp:56
+msgid "more widgets"
+msgstr "flere avkrysningsbokser"
+
+#: kwidgetlister.cpp:59
+msgid "fewer widgets"
+msgstr "færre avkrysningsbokser"
+
+#: kwidgetlister.cpp:65
+msgid "clear widgets"
+msgstr "rens avkrysningsbokser"
+
 #: configdialog.moc.cpp:34 configdialog.moc.cpp:42
 msgid "ConfigDialog"
 msgstr "Konfigurasjonsdialog"
@@ -1145,10 +1145,6 @@ msgstr ""
 msgid "BookcaseDoc"
 msgstr "Bookcase dokumentasjon"
 
-#: bccollectionpropdialog.moc.cpp:34 bccollectionpropdialog.moc.cpp:42
-msgid "BCCollectionPropDialog"
-msgstr ""
-
 #: bcfilterdialog.moc.cpp:34 bcfilterdialog.moc.cpp:42
 msgid "BCFilterRuleWidget"
 msgstr ""
@@ -1159,6 +1155,10 @@ msgstr ""
 
 #: bcfilterdialog.moc.cpp:204 bcfilterdialog.moc.cpp:212
 msgid "BCFilterDialog"
+msgstr ""
+
+#: bccollectionpropdialog.moc.cpp:34 bccollectionpropdialog.moc.cpp:42
+msgid "BCCollectionPropDialog"
 msgstr ""
 
 #: songcollection.moc.cpp:34 songcollection.moc.cpp:42

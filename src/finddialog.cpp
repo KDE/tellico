@@ -41,7 +41,7 @@
 //                  parent_, name_, false, false, i18n("&Find")), m_bookcase(parent_) {
 FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, false, i18n("Find Text"), User1|Cancel, User1,
-                  false, i18n("&Find")), m_bookcase(parent_), m_editRegExpDialog(0) {
+                  false, i18n("&Find")), m_bookcase(parent_), m_editRegExp(0), m_editRegExpDialog(0) {
   QWidget* page = new QWidget(this);
   setMainWidget(page);
         

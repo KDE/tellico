@@ -1,3 +1,25 @@
+2003-06-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed sorting bug for empty fields.
+	* Released Bookcase 0.6.4
+
+2003-06-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed focus to first tab when adding new book.
+	* Disabled multiple value option for title field in field editor.
+	* Fixed bug with completion object not being updated when a field is changed to all auto-completion.
+	* Fixed drawing bug with toolbar label background.
+
+2003-06-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with surname matching too much with periods in regexp.
+	* Added Japanese translation from Linux Magazine.
+	* Added Dutch translation from Liese De Vos.
+
+2003-05-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fix crashing bug when opening the filter dialog on KDE 3.0.
+
 2003-05-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase 0.6.3

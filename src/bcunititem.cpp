@@ -22,11 +22,23 @@
 #include <qpainter.h>
 #include <qregexp.h>
 
+int BCUnitItem::compare(QListViewItem* item_, int col_, bool asc_) const {
+  BCDetailedListView* lv = dynamic_cast<BCDetailedListView*>(listView());
+
+// compare keys. If not equal or not BCDetailedListView parent view, just return result
+// otherwise, check prev sorted column
+  int result = KListViewItem::compare(item_, col_, asc_);
+  if(result != 0 || !lv) {
+    return result;
+  } else {
+    return KListViewItem::compare(item_, lv->prevSortedColumn(), asc_);
+  }
+}
+
+// if there's a non-null pixmap and no text, return a tab character to put this one first
 QString BCUnitItem::key(int col_, bool) const {
-  QListView* lv = listView();
-  
-  if(lv && lv->isA("BCDetailedListView") && static_cast<BCDetailedListView*>(lv)->prevSortedColumn() > -1) {
-    return text(col_) + text(static_cast<BCDetailedListView*>(lv)->prevSortedColumn());
+  if(pixmap(col_) && !pixmap(col_)->isNull() && text(col_).isEmpty()) {
+    return QString::fromLatin1("\t");
   } else {
     return text(col_);
   }
@@ -74,21 +86,17 @@ void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
   // always paint the cell
   KListViewItem::paintCell(p_, cg_, column_, width_, align_);
 
-  QListView* lv = listView();
-  if(!lv) {
+  BCGroupView* groupView = dynamic_cast<BCGroupView*>(listView());
+  if(!groupView) {
     return;
   }
 
   // show count is only for first column and depth of 1
-  if(lv->isA("BCGroupView") && column_ == 0 && depth() == 1) {
-    BCGroupView* groupView = static_cast<BCGroupView*>(lv);
-
+  if(column_ == 0 && depth() == 1) {
     if(groupView->showCount()) {
-      int marg = lv->itemMargin();
+      int marg = groupView->itemMargin();
 
-      QString numText = QString::fromLatin1(" (");
-      numText += QString::number(m_count);
-      numText += QString::fromLatin1(")");
+      QString numText = QString::fromLatin1(" (%1)").arg(m_count);
 
       if(isSelected()) {
         p_->setPen(cg_.highlightedText());
@@ -97,7 +105,7 @@ void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
       }
 
       // don't call ParentItem::width() because that includes the count already
-      int w = KListViewItem::width(p_->fontMetrics(), lv, column_);
+      int w = KListViewItem::width(p_->fontMetrics(), groupView, column_);
       
       p_->drawText(w-marg, 0, width_-marg-w, height(), align_ | Qt::AlignVCenter, numText);
     }

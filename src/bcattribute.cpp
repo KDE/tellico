@@ -42,7 +42,7 @@ BCAttribute::BCAttribute(const QString& name_, const QString& title_, AttributeT
     kdWarning() << "BCAttribute() - A different constructor should be called for multiple choice attributes." << endl;
     kdWarning() << "Constructing a BCAttribute with name = " << name_ << endl;
   }
-  // a paragraph's category is always it's title
+  // a paragraph's category is always its title
   if(m_type == Para) {
     m_category = m_title;
   }
@@ -184,12 +184,17 @@ QString BCAttribute::formatTitle(const QString& title_) {
   for(it = m_articles.begin(); it != m_articles.end(); ++it) {
     // assume white space is already stripped
     // the articles are already in lower-case
+    // assume white space is already stripped
+    // the articles are already in lower-case
     if(newTitle.lower().startsWith(*it + QString::fromLatin1(" "))) {
-      QString str(*it);
-      str.prepend(QString::fromLatin1("^")).append(QString::fromLatin1("\\s"));
-      QRegExp regexp(str);
+#if QT_VERSION >= 0x030100
+      QRegExp regexp(QString::fromLatin1("^") + QRegExp::escape(*it) + QString::fromLatin1("\\s"));
+#else
+      QRegExp regexp(QString::fromLatin1("^") + *it + QString::fromLatin1("\\s"));
+#endif
       regexp.setCaseSensitive(false);
-      newTitle = newTitle.replace(regexp, QString()).append(QString::fromLatin1(", ")).append(*it);
+      QString article = autoCapitalize() ? capitalize(*it) : *it;
+      newTitle = newTitle.replace(regexp, QString()).append(QString::fromLatin1(", ")).append(article);
       break;
     }
   }
@@ -208,6 +213,9 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
     entries << name_;
   }
 
+  QRegExp lastWord;
+  lastWord.setCaseSensitive(false);
+
   QStringList names;
   QStringList::ConstIterator it;
   for(it = entries.begin(); it != entries.end(); ++it) {
@@ -218,9 +226,14 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
 
     // split the name by white space and commas
     QStringList words = QStringList::split(QRegExp(QString::fromLatin1("[\\s,]")), name, false);
+#if QT_VERSION >= 0x030100
+    lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
+#else
+    lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
+#endif
+
     // if it contains a comma already and the last word is not a suffix, don't format it
-    if(name.contains(QString::fromLatin1(",")) > 0
-       && m_suffixes.grep(words.last(), false).isEmpty()) {
+    if(name.find(',') > -1 && m_suffixes.grep(lastWord).isEmpty()) {
       // arbitrarily impose rule that no spaces before a comma and
       // a single space after every comma
       QRegExp spaceComma(QString::fromLatin1("\\s*,\\s*"));
@@ -231,25 +244,33 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
     // otherwise split it by white space, move the last word to the front
     // but only if there is more than one word
     if(words.count() > 1) {
-      QRegExp lastWord;
-      lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
-      lastWord.setCaseSensitive(false);
       // if the last word is a suffix, it has to be kept with last name
-      if(m_suffixes.grep(words.last(), false).count() > 0) {
+      if(m_suffixes.grep(lastWord).count() > 0) {
         words.prepend(words.last().append(QString::fromLatin1(",")));
         words.remove(words.fromLast());
       }
       
       // now move the word
+      // adding comma here when there had been a suffix is because it was originally split with space or comma
       words.prepend(words.last().append(QString::fromLatin1(",")));
       words.remove(words.fromLast());
+
+      // update last word regexp
+#if QT_VERSION >= 0x030100
+      lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
+#else
       lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
+#endif
 
       // this is probably just something for me, limited to english
       while(m_surnamePrefixes.grep(lastWord).count() > 0) {
         words.prepend(words.last());
         words.remove(words.fromLast());
+#if QT_VERSION >= 0x030100
+        lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
+#else
         lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
+#endif
       }
             
       names << words.join(QString::fromLatin1(" "));
@@ -270,29 +291,34 @@ QString BCAttribute::capitalize(QString str_) {
   if(str_.isEmpty()) {
     return str_;
   }
-  // nothing is done to the last character which saves a position check
   // first letter is always capitalized
   str_.replace(0, 1, str_.at(0).upper());
 
   // regexp to split words
   QRegExp rx(QString::fromLatin1("[\\s,.-;]"));
-  int pos = str_.find(rx);
+  
+  int pos = str_.find(rx, 1);
   int nextPos;
-  QString word;
+  QRegExp wordRx;
+  wordRx.setCaseSensitive(false);
 
   QStringList notCap = m_noCapitalize;
   // don't capitalize the surname prefixes
   // does this hold true everywhere other than english?
   notCap += BCAttribute::surnamePrefixList();
-  
-  while(pos != -1) {
+
+  while(pos > -1) {
     // also need to compare against list of non-capitalized words
     nextPos = str_.find(rx, pos+1);
     if(nextPos == -1) {
       nextPos = str_.length();
     }
-    word = str_.mid(pos+1, nextPos-pos-1);
-    if(notCap.grep(word, false).isEmpty() && !word.isEmpty()) {
+#if QT_VERSION >= 0x030100
+    wordRx.setPattern(QString::fromLatin1("^") + QRegExp::escape(str_.mid(pos+1, nextPos-pos-1)) + QString::fromLatin1("$"));
+#else
+    wordRx.setPattern(QString::fromLatin1("^") + str_.mid(pos+1, nextPos-pos-1) + QString::fromLatin1("$"));
+#endif
+    if(notCap.grep(wordRx).isEmpty() && nextPos-pos > 1) {
       str_.replace(pos+1, 1, str_.at(pos+1).upper());
     }
     pos = str_.find(rx, pos+1);

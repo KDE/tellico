@@ -32,10 +32,16 @@ public:
 protected:
   void drawButton(QPainter* p_) {
     // Draw the background
+#if QT_VERSION >= 0x030100
+    style().drawControl(QStyle::CE_DockWindowEmptyArea, p_, this, rect(), colorGroup(),
+                        QStyle::Style_Enabled);
+#else
     style().drawComplexControl(QStyle::CC_ToolButton, p_, this, rect(), colorGroup(),
                                QStyle::Style_Enabled, QStyle::SC_ToolButton);
+#endif
+    QRect r = QStyle::visualRect(style().subRect(QStyle::SR_ToolButtonContents, this), this);
     // Draw the label
-    style().drawControl(QStyle::CE_ToolButtonLabel, p_, this, rect(), colorGroup(),
+    style().drawControl(QStyle::CE_ToolButtonLabel, p_, this, r, colorGroup(),
                         QStyle::Style_Enabled);
   }
 };

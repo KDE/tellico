@@ -2,7 +2,7 @@
 
 SUBDIRS = src po doc icons xslt admin 
 
-EXTRA_DIST = COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.spec bookcase.dtd x-bookcase.desktop configure.in.in AUTHORS 
+EXTRA_DIST = COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.spec bookcase.dtd x-bookcase.desktop configure.in.in AUTHORS NEWS 
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 

@@ -348,14 +348,12 @@ void BCCollectionPropDialog::slotUpdateValues(const QString& title_) {
   m_multiple->setChecked(flags & BCAttribute::AllowMultiple);
   m_grouped->setChecked(flags & BCAttribute::AllowGrouped);
 
-  // can't delete the title attribute
+  // can't delete the title attribute, or have multiple titles
   m_btnDelete->setEnabled(att->name() != QString::fromLatin1("title"));
+  m_multiple->setEnabled(att->name() != QString::fromLatin1("title"));
 
   // type is only changeable for new attributes
   m_typeCombo->setEnabled(isNew);
-  
-  m_titleEdit->setFocus();
-  m_titleEdit->selectAll();
 
   m_currentAttribute = att;
   m_updatingValues = false;

@@ -43,7 +43,7 @@
 
 BCFilterRuleWidget::BCFilterRuleWidget(BCFilterRule* rule_,
                                        QWidget* parent_, const char* name_/*=0*/)
-    : QHBox(parent_, name_), m_editRegExpDialog(0) {
+    : QHBox(parent_, name_), m_editRegExp(0), m_editRegExpDialog(0) {
   initLists();
   initWidget();
 

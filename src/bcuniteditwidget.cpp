@@ -218,7 +218,7 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
 //}
 
 void BCUnitEditWidget::slotHandleReturn() {
-  kdDebug() << "BCUnitEditWidget::slotHandleReturn()" << endl;
+//  kdDebug() << "BCUnitEditWidget::slotHandleReturn()" << endl;
   slotHandleSave();
 }
 
@@ -227,6 +227,8 @@ void BCUnitEditWidget::slotHandleNew() {
     return;
   }
 //  kdDebug() << "BCUnitEditWidget::slotHandleNew()" << endl;
+  m_tabs->setCurrentPage(0);
+  m_tabs->setFocusToChild(0);
   slotHandleClear();
 
   BCUnit* unit = new BCUnit(m_currColl);
@@ -578,8 +580,8 @@ void BCUnitEditWidget::slotUpdateAttribute(BCCollection* coll_, BCAttribute* new
     // attribute widgets's parent is the grid, whose parent is the tab page
     if(m_tabs->tabLabel(widget->parentWidget()->parentWidget()) != newAtt_->category()) {
       slotSetLayout(coll_);
-      // this is needed since the layout update uses the old attribute
-      m_widgetDict[key]->updateAttribute(newAtt_);
     }
+    // this is needed since the layout update uses the old attribute
+    m_widgetDict[key]->updateAttribute(newAtt_);
   }
 }

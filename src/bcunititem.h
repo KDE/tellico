@@ -33,7 +33,7 @@ class BCUnit;
  * @see BCUnit
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.4.2.2 2003/05/27 03:45:34 robby Exp $
+ * @version $Id: bcunititem.h,v 1.4.2.3 2003/06/21 16:55:35 robby Exp $
  */
 class BCUnitItem : public KListViewItem {
 public:
@@ -56,6 +56,7 @@ public:
   BCUnitItem(KListViewItem* parent, const QString& text, BCUnit* unit)
       : KListViewItem(parent, text), m_unit(unit) {}
 
+  virtual int compare(QListViewItem* item, int col, bool ascending) const;
   virtual QString key(int col, bool) const;
   /**
    * Returns a const pointer to the unit to which the item refers
@@ -77,7 +78,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.4.2.2 2003/05/27 03:45:34 robby Exp $
+ * @version $Id: bcunititem.h,v 1.4.2.3 2003/06/21 16:55:35 robby Exp $
  */
 class ParentItem : public KListViewItem {
 public:
