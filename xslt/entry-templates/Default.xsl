@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - default template forviewing entry data
 
-   $Id: Default.xsl 409 2004-01-31 05:01:58Z robby $
+   $Id: Default.xsl 431 2004-02-05 02:20:45Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 

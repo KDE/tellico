@@ -607,7 +607,6 @@ void MainWindow::initFileOpen(bool nofile_) {
   } else {
     // instead add default initial book collection
     m_controller->slotCollectionAdded(m_doc->collection());
-    readCollectionOptions(m_doc->collection());
 
     m_fileSave->setEnabled(false);
     slotEnableOpenedActions();
@@ -845,6 +844,7 @@ void MainWindow::slotFileNew(int type_) {
 
   if(m_editDialog->queryModified() && m_doc->saveModified()) {
     m_doc->newDocument(type_);
+    m_fileOpenRecent->setCurrentItem(-1);
     slotEnableOpenedActions();
     slotEnableModifiedActions(false);
     m_newDocument = true;
@@ -879,6 +879,7 @@ void MainWindow::slotFileOpen(const KURL& url_) {
     bool success = openURL(url_);
     if(success) {
       m_fileOpenRecent->addURL(url_);
+      m_fileOpenRecent->setCurrentItem(-1);
     }// else {
      // m_fileOpenRecent->removeURL(url_);
     //}

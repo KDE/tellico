@@ -1,5 +1,13 @@
 2004-02-04  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed saving visible columns yet again.
+	* Changed XSLT parser to prevent all network calls.
+	* Fixed crashing bug when deleting a field.
+	* Fixed compilation bug when using libxml > 2.6.0 but libxslt < 1.1.
+	* Released Bookcase 0.8.3.
+
+2004-02-04  Robby Stephenson  <robby@periapsis.org>
+
 	* Fixed file truncation for file with some Unicode characters.
 	* Released Bookcase 0.8.2.
 

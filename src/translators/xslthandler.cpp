@@ -15,8 +15,6 @@
 
 #include <kdebug.h>
 
-//extern int xmlLoadExtDtdDefaultValue;
-
 #include <libxslt/xslt.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
@@ -24,7 +22,9 @@
 #include <libexslt/exslt.h>
 
 #if LIBXML_VERSION >= 20600
-static int xml_options = XSLT_PARSE_OPTIONS;
+// I don't want any network I/O at all
+static int xml_options = XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NOCDATA;
+static int xslt_options = xml_options;
 #endif
 
 /* some functions to pass to the XSLT libs */
@@ -87,7 +87,7 @@ void XSLTHandler::init() {
 
 void XSLTHandler::setXSLTText(const QString& text_) {
 #if LIBXML_VERSION >= 20600
-  xmlDocPtr xsltDoc = xmlReadDoc((xmlChar *)text_.local8Bit().data(), NULL, NULL, xml_options);
+  xmlDocPtr xsltDoc = xmlReadDoc((xmlChar *)text_.local8Bit().data(), NULL, NULL, xslt_options);
 #else
   xmlDocPtr xsltDoc = xmlParseDoc((xmlChar *)text_.local8Bit().data());
 #endif
@@ -95,6 +95,7 @@ void XSLTHandler::setXSLTText(const QString& text_) {
     xsltFreeStylesheet(m_stylesheet);
   }
   m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
+//  xmlFreeDoc(xsltDoc); // this causes a crash for some reason
 }
 
 void XSLTHandler::addParam(const QCString& name_, const QCString& value_) {

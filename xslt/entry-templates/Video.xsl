@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - Entry template for videos
 
-   $Id: Video.xsl 421 2004-02-03 05:11:17Z robby $
+   $Id: Video.xsl 431 2004-02-05 02:20:45Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 

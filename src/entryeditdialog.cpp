@@ -440,13 +440,14 @@ void EntryEditDialog::removeField(Data::Field* field_) {
     // this function is called after the field has been removed from the collection,
     // so the category should be gone from the category list
     if(m_currColl->fieldCategories().findIndex(field_->category()) == -1) {
-      kdDebug() << "last field in the category" << endl;
+//      kdDebug() << "last field in the category" << endl;
       // fragile, widget's parent is the grid, whose parent is the tab page
       QWidget* w = widget->parentWidget()->parentWidget();
       m_tabs->removePage(w);
       delete w; // automatically deletes child widget
+    } else {
+      delete widget;
     }
-    delete widget;
   }
 }
 

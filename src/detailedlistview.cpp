@@ -278,8 +278,6 @@ void DetailedListView::removeCollection(Bookcase::Data::Collection* coll_) {
 
 //  kdDebug() << "DetailedListView::removeCollection() - " << coll_->title() << endl;
 
-  saveConfig(coll_);
-
   clear();
   while(columns() > 0) {
     removeColumn(0);
