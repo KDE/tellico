@@ -99,3 +99,7 @@ uninstall-local:
                "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
 	fi
 
+# probably a better way to do this
+uninstall-hook:
+	-if [ -d $(localdir) ]; then rmdir $(localdir); fi
+

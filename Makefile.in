@@ -749,6 +749,8 @@ ps-am:
 
 uninstall-am: uninstall-appDATA uninstall-info-am uninstall-local \
 	uninstall-localDATA uninstall-mimeDATA
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
 
 uninstall-info: uninstall-info-recursive
 
@@ -842,6 +844,10 @@ uninstall-local:
           @XMLCATALOG@ --noout --del \
                "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
 	fi
+
+# probably a better way to do this
+uninstall-hook:
+	-if [ -d $(localdir) ]; then rmdir $(localdir); fi
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

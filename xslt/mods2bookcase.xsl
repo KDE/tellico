@@ -9,7 +9,7 @@
    ===================================================================
    Bookcase XSLT file - used for importing MODS files.
 
-   $Id: mods2bookcase.xsl 659 2004-05-13 05:17:29Z robby $
+   $Id: mods2bookcase.xsl 687 2004-05-28 01:00:48Z robby $
 
    Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
 
@@ -31,17 +31,16 @@
    <fields>
     <field name="_default"/>
     <!-- the default book collection does not have multiple publishers -->
-    <xsl:if test="//mods:mods/mods:originInfo[count(mods:publisher) &gt; 1]">
-     <!-- darn, this kills i18n -->
-     <field flags="7" title="Publisher" category="Publishing" format="0" type="1" name="publisher"/>
+    <xsl:if test=".//mods:mods/mods:originInfo[count(mods:publisher) &gt; 1]">
+     <field flags="7" title="Publisher" category="Publishing" format="0" type="1" name="publisher" i18n="true"/>
     </xsl:if>
-    <xsl:if test="//mods:mods/mods:abstract">
-     <field flags="0" title="Abstract" format="4" type="2" name="abstract" description="Abstract"/>
+    <xsl:if test=".//mods:mods/mods:abstract">
+     <field flags="0" title="Abstract" format="4" type="2" name="abstract" description="Abstract" i18n="true"/>
     </xsl:if>
    </fields>
 <!-- for now, go the route of bibliox, and assume only text records
   with an originInfo/publisher element are actually books -->
-   <xsl:for-each select="//mods:mods[mods:typeOfResource='text' and mods:originInfo/mods:publisher]">
+   <xsl:for-each select=".//mods:mods[mods:typeOfResource='text' and mods:originInfo/mods:publisher]">
     <xsl:apply-templates select="."/>
    </xsl:for-each>
   </collection>
@@ -65,13 +64,16 @@
     <!--    <xsl:if test="mods:role[mods:roleTerm/@authority='marcrelator' and mods:roleTerm='creator']">-->
      <author>
       <xsl:for-each select="mods:namePart">
-       <xsl:value-of select="."/><xsl:text> </xsl:text>
+       <xsl:value-of select="."/>
+       <xsl:if test="position() &lt; last()">
+        <xsl:text> </xsl:text>
+       </xsl:if>
       </xsl:for-each>
      </author>
    </xsl:for-each>
   </authors>
 
-  <genres>
+  <genres i18n="true">
    <xsl:for-each select="mods:genre">
     <genre>
      <xsl:value-of select="."/>
@@ -112,11 +114,11 @@
    <xsl:value-of select="mods:originInfo/mods:copyrightDate[@encoding='marc']"/>  
   </cr_year>
 
-  <edition>
+  <edition i18n="true">
    <xsl:value-of select="mods:originInfo/edition"/>  
   </edition>
 
-  <languages>
+  <languages i18n="true">
    <xsl:for-each select="mods:language/mods:languageTerm">
     <language>
      <xsl:value-of select="."/>
@@ -144,7 +146,7 @@
    <xsl:value-of select="mods:abstract"/>  
   </abstract>
 
-  <keywords>
+  <keywords i18n="true">
    <xsl:for-each select="mods:subject/mods:topic">
     <keyword>
      <xsl:value-of select="."/>

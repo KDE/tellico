@@ -429,6 +429,8 @@ ps: ps-am
 ps-am:
 
 uninstall-am: uninstall-info-am uninstall-xslDATA
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
@@ -440,6 +442,10 @@ uninstall-am: uninstall-info-am uninstall-xslDATA
 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
 	uninstall-info-am uninstall-xslDATA
 
+
+# probably a better way to do this
+uninstall-hook:
+	-if [ -d $(xsldir) ]; then rmdir $(xsldir); fi
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -20,13 +20,8 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: isbnvalidator.h 677 2004-05-25 04:25:29Z robby $
  *
- * Parts of this code are based on Java code
- * copyright (c) 1998-2002 Roedy Green, Canadian Mind Products which
- * may be copied and used freely for any purpose but military.
- *
- * @see http://mindprod.com/isbn.html
  * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
  * @see http://www.eblong.com/zarf/bookscan/
  * @see http://doc.trolltech.com/qq/qq01-seriously-weird-qregexp.html
@@ -59,7 +54,7 @@ public:
 private:
   /**
    * This function calculates and returns the ISBN checksum. The
-   * algorithm is based on some code by Andrew Plotkin, available at 
+   * algorithm is based on some code by Andrew Plotkin, available at
    * http://www.eblong.com/zarf/bookscan/
    *
    * @see http://www.eblong.com/zarf/bookscan/
@@ -67,10 +62,9 @@ private:
    * @param input The raw string, with no hyphens
    */
   QChar checkSum(const QString& input) const;
-  
+
   /**
-   * This function inserts hyphens. The code is heavily based on the Java ISBN
-   * validator by Roedy Green at http://mindprod.com/isbn.html and copyright by him.
+   * This function inserts hyphens in the proper positions.
    *
    * For correct presentation, the 10 digits of an ISBN must
    * be divided, by hyphens, into four parts:
@@ -82,7 +76,17 @@ private:
    * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
    * For info on group codes
    * @see http://www.isbn.spk-berlin.de/html/prefix/allpref.htm
+   * For info on French language publisher codes
+   * @see http://www.afnil.org
    * <pre>
+   *  Group Identifiers    First Hyphen After
+   *  -----------------------------------------
+   *  0........7              1st digit
+   *  80.......94             2nd   "
+   *  950......993            3rd   "
+   *  9940.....9989           4th   "
+   *  99900....99999          5th   "
+   *
    *  Group                   Insert Hyphens
    *  Identifier "0"            After
    *  -----------------------------------------
@@ -102,19 +106,32 @@ private:
    *  869800...998999      "   7th       "
    *  9990000..9999999     "   8th       "
    *
-   *  For other groups, 2 .. 99999 properly we would need to find out the rules
-   *  separately for each country. For now we simply leave out the dash between
-   *  publisher and title
-   * </pre>
-   * @see http://mindprod.com/isbn.html
    *
-   * @param input The raw string, with no hyphens
+   *  Group                   Insert Hyphens
+   *  Identifier "2"            After
+   *  -----------------------------------------
+   *  00.......19          1st  3rd  9th digit
+   *  200......349          "   4th       "
+   *  34000....39999        "   6th       "
+   *  400......699          "   4th       "
+   *  7000.....8399         "   5th       "
+   *  84000....89999        "   6th       "
+   *  900000...949999       "   7th       "
+   *  9500000..9999999      "   8th       "
+   *
+   *  The position of the hyphens are determined by the publisher
+   *  prefix range established by each national agency in accordance
+   *  with the industry needs. The knowledge of the prefix ranges for
+   *  each country or group of countries is necessary to develop the
+   *  hyphenation output program. For groups 3 through 99999, the hyphenation
+   *  rules are currently unknown. So just leave out the hyphen between
+   *  the publisher and title for now, but allow it if the user inserts it.
+   * </pre>
+   *
+   * @param input The original string, with user-entered hyphens
+   * @param input The corrected digits, with check-sum
    */
-  void insertDashesNonEnglish(QString& input) const;
-  /**
-   * See previous @ref insertDashesNonEnglish()
-  */
-  void insertDashesEnglish(QString& input) const;
+  void insertDashes(QString& input, const QString& digits) const;
 };
 
 } // end namespace

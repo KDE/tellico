@@ -2,19 +2,20 @@
 # Copyright (C) 2001-2002, Robby Stephenson
 # This file is distributed under the same license as the Bookcase package.
 # First translation by FaUsT <faust@inventati.org>, 2002, 2003, 2004.
+# Lorenzo Novaro <novalore@inwind.it>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "POT-Creation-Date: 2004-05-12 22:02-0700\n"
-"PO-Revision-Date: 2004-04-13 16:28+0200\n"
+"PO-Revision-Date: 2004-05-27 20:03+0200\n"
 "Last-Translator: FaUsT <faust@inventati.org>\n"
 "Language-Team: Italiano <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
-"X-Generator: KBabel 1.3\n"
+"X-Generator: KBabel 1.3.1\n"
 
 #: collectionfactory.cpp:73 collectionfactory.cpp:87
 #: collections/bibtexcollection.cpp:24 collections/bibtexcollection.cpp:58
@@ -120,14 +121,14 @@ msgid "Keywords"
 msgstr "Parole chiave"
 
 #: collections/comicbookcollection.cpp:120
-#, fuzzy
 msgid ""
 "_: _:Comic book grade levels\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
-"_:gradi di conservazione dei fumetti\n"
-"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
+"_: _:Gradi di conservazione dei fumetti\n"
+"Mint,Near Mint,Molto soddisfacente,Soddisfacente,Molto buono,Buono,Insomma,Cattivo\n"
+"Mint,Near Mint,Molto soddisfacente,Soddisfacente,Molto buono,Buono,Insomma,Cattivo"
 
 #: collections/bookcollection.cpp:137 collections/comicbookcollection.cpp:122
 #: collections/stampcollection.cpp:22
@@ -204,14 +205,14 @@ msgid "Scott#"
 msgstr "Scott#"
 
 #: collections/stampcollection.cpp:78
-#, fuzzy
 msgid ""
 "_: _:Stamp grade levels\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr ""
-"_:gradi di conservazione dei fumettiSuperb,Extremely Fine,Very "
-"Fine,Fine,Average,Poor"
+"_: _:Gradi di conservazione dei francobolli\n"
+"Mint,Near Mint,Molto soddisfacente,Soddisfacente,Molto buono,Buono,Insomma,Cattivo\n"
+"Mint,Near Mint,Molto soddisfacente,Soddisfacente,Molto buono,Buono,Insomma,Cattivo"
 
 #: collections/coincollection.cpp:86 collections/stampcollection.cpp:80
 msgid "Grade"
@@ -223,7 +224,7 @@ msgstr "Cancellato"
 
 #: collections/stampcollection.cpp:89
 msgid "Hinged"
-msgstr ""
+msgstr "Incollato (Hinged)"
 
 #: collections/stampcollection.cpp:94
 msgid "Centering"
@@ -269,7 +270,6 @@ msgid "Coin Set"
 msgstr "Set di monete"
 
 #: collections/coincollection.cpp:81
-#, fuzzy
 msgid ""
 "_: _:Coin grade levels\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
@@ -279,19 +279,22 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
-"_:Grado di conservazione delle monete\n"
+"_: _:Grado di conservazione delle monete\n"
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 
 #: collections/coincollection.cpp:94
-#, fuzzy
 msgid ""
 "_: _:Coin grading services\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgstr ""
-"_:Servizi di valutazione monete\n"
+"_: _:Servizi di valutazione monete\n"
+"PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
 #: collections/coincollection.cpp:96
@@ -430,7 +433,7 @@ msgstr "D.O.C."
 
 #: collections/winecollection.cpp:55
 msgid "Varietal"
-msgstr ""
+msgstr "Varietà"
 
 #: collections/winecollection.cpp:61
 msgid "Vintage"
@@ -454,7 +457,7 @@ msgstr "Quantità"
 
 #: collections/winecollection.cpp:97
 msgid "Drink By"
-msgstr ""
+msgstr "Da bere"
 
 #: collections/winecollection.cpp:111
 msgid "Label Image"
@@ -501,14 +504,14 @@ msgid "Production Year"
 msgstr "Anno di produzione"
 
 #: collections/videocollection.cpp:62
-#, fuzzy
 msgid ""
 "_: _:Movie ratings\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA)"
 msgstr ""
-"_:Classificazione del film\n"
-" G (USA),PG (USA),PG-13 (USA),R (USA)"
+"_: _:Classificazione del film\n"
+" G (USA),PG (USA),PG-13 (USA),R (USA)\n"
+"G (USA),PG (USA),PG-13 (USA),R (USA)"
 
 #: collections/videocollection.cpp:64
 msgid "Certification"
@@ -879,11 +882,11 @@ msgstr "Ordine discendente per gruppo"
 
 #: groupview.cpp:63 groupview.cpp:73
 msgid "Sort by Count, Ascending"
-msgstr ""
+msgstr "Ordine ascendente per conteggio"
 
 #: groupview.cpp:64 groupview.cpp:74
 msgid "Sort by Count, Descending"
-msgstr ""
+msgstr "Ordine discendente per conteggio"
 
 #: groupview.cpp:67
 msgid "Expand All Groups"
@@ -1480,7 +1483,7 @@ msgstr "Stringa"
 
 #: mainwindow.cpp:1906
 msgid "<qt>Bookcase is unable to write to the server pipe at <b>%1</b>.</qt>"
-msgstr ""
+msgstr "<qt>Bookcase non riesce a scrivere sulla server pipe in <b>%1</b>.</qt>"
 
 #: filehandler.cpp:94 translators/bookcaseimporter.cpp:73
 #: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
@@ -1498,8 +1501,7 @@ msgid "Bookcase is unable to load the image - %1."
 msgstr "Impossibile caricare l'immagine - %1."
 
 #: filehandler.cpp:135
-msgid ""
-"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Il file \"%1\" esiste già. lo vuoi sovrascrivere?"
 
 #: filehandler.cpp:138
@@ -1560,8 +1562,7 @@ msgstr "Trova &Indietro"
 
 #: finddialog.cpp:77
 msgid "If checked, the document is searched in reverse."
-msgstr ""
-"Se selezionato, la ricerca procede dalla fine all'inizio del documento."
+msgstr "Se selezionato, la ricerca procede dalla fine all'inizio del documento."
 
 #: finddialog.cpp:78
 msgid "&Whole Words Only"
@@ -1585,8 +1586,7 @@ msgstr "Come Espressione &Regolare"
 
 #: finddialog.cpp:83
 msgid "If checked, the search string is used as a regular expression."
-msgstr ""
-"Se selezionato, la stringa inserita viene cercata come espressione regolare."
+msgstr "Se selezionato, la stringa inserita viene cercata come espressione regolare."
 
 #: finddialog.cpp:86
 msgid "&Edit Regular Expression..."
@@ -1629,22 +1629,24 @@ msgid "Current Fields"
 msgstr "Campi attuali"
 
 #: collectionfieldsdialog.cpp:108
-#, fuzzy
 msgid ""
 "_: New Field\n"
 "New"
-msgstr "Nuovo campo"
+msgstr ""
+"_: Nuovo campo\n"
+"Nuovo"
 
 #: collectionfieldsdialog.cpp:110
 msgid "Add a new field to the collection"
 msgstr "Aggiungi un campo alla collezione"
 
 #: collectionfieldsdialog.cpp:111
-#, fuzzy
 msgid ""
 "_: Delete Field\n"
 "Delete"
-msgstr "Cancella il campo"
+msgstr ""
+"_: Cancella il campo\n"
+"Cancella"
 
 #: collectionfieldsdialog.cpp:113
 msgid "Remove a field from the collection"
@@ -1780,8 +1782,7 @@ msgid "Allow auto-capitalization only"
 msgstr "Permetti il maiuscolo automatico"
 
 #: collectionfieldsdialog.cpp:227
-msgid ""
-"This option allows the field to be capitalized, but not specially formatted."
+msgid "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 "Questa opzione permette che gli elementi del campo vengano automaticamente "
 "resi maiuscoli, senza però cambiare la formattazione."
@@ -1843,16 +1844,14 @@ msgid "Allow grouping"
 msgstr "Ammetti il raggruppamento"
 
 #: collectionfieldsdialog.cpp:245
-msgid ""
-"If checked, this field may be used to group the entries in the group view."
+msgid "If checked, this field may be used to group the entries in the group view."
 msgstr ""
 "Se selezionato, il campo può essere usato per ragruppare gli elementi nella "
 "vista di gruppo."
 
 #: collectionfieldsdialog.cpp:259
 msgid "Revert the selected field's properties to the default values."
-msgstr ""
-"Ripristina le proprietà dei campi selezionati secondo i valori predefiniti."
+msgstr "Ripristina le proprietà dei campi selezionati secondo i valori predefiniti."
 
 #: collectionfieldsdialog.cpp:358 collectionfieldsdialog.cpp:361
 #: translators/csvimporter.cpp:337 translators/csvimporter.cpp:429
@@ -1904,13 +1903,12 @@ msgid "A field with this title already exists. Please enter a different title."
 msgstr "Esiste già un campo con questo titolo. Inserisci un titolo diverso."
 
 #: collectionfieldsdialog.cpp:812
-#, fuzzy
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
 "<em>Table</em> or <em>Image</em> field. Please enter a different "
 "category.</qt>"
 msgstr ""
-"<qt>Un campo non è nella categoria <em>paragrafo</em>, <em>tabella</em> o "
+"<qt>Un campo potrebbe non essere nella stessa categoria del campo <em>paragrafo</em>, <em>tabella</em> o "
 "<em>immagine</em>. Inserisci un'altra categoria."
 
 #: collectionfieldsdialog.cpp:820
@@ -1984,8 +1982,7 @@ msgstr "Usa il pacchetto URL"
 
 #: translators/bibtexexporter.cpp:69
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr ""
-"Se selezionato, qualsiasi campo URL verrà tradotto in un indirizzo \\url."
+msgstr "Se selezionato, qualsiasi campo URL verrà tradotto in un indirizzo \\url."
 
 #: translators/bibtexexporter.cpp:72
 msgid "Skip entries with empty citation keys"
@@ -2203,8 +2200,7 @@ msgstr "Stampa i field headers"
 
 #: configdialog.cpp:236 translators/htmlexporter.cpp:73
 msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Se selezionato, i nomi di campo saranno stampati come headers della tabella."
+msgstr "Se selezionato, i nomi di campo saranno stampati come headers della tabella."
 
 #: configdialog.cpp:242 translators/htmlexporter.cpp:77
 msgid "Group the entries"
@@ -2282,7 +2278,6 @@ msgstr "Configura Bookcase"
 
 #: configdialog.cpp:134 configdialog.cpp:317 configdialog.cpp:324
 #: configdialog.cpp:457
-#, fuzzy
 msgid "Braces"
 msgstr "Sostegni"
 
@@ -2332,8 +2327,7 @@ msgstr "Maiuscolo automatico in titoli e nomi"
 
 #: configdialog.cpp:168
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr ""
-"Se selezionato, i titoli e gli autori diventeranno automaticamente maiuscoli."
+msgstr "Se selezionato, i titoli e gli autori diventeranno automaticamente maiuscoli."
 
 #: configdialog.cpp:172
 msgid "Auto format titles and names"
@@ -2405,30 +2399,28 @@ msgid "Maximum image width:"
 msgstr "Larghezza massima delle immagini"
 
 #: configdialog.cpp:256
-#, fuzzy
 msgid ""
 "The maximum width of the images in the printout. The aspect ration is "
 "preserved."
-msgstr "La larghezza massima delle immagini in stampa. "
+msgstr "La larghezza massima delle immagini in stampa. Le proporzioni sono rispettate."
 
 #: configdialog.cpp:261
 msgid "Maximum image height:"
 msgstr "Altezza massima delle immagini"
 
 #: configdialog.cpp:265
-#, fuzzy
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
-msgstr "L'altezza massima delle immagini in stampa. "
+msgstr "L'altezza massima delle immagini in stampa. Le proporzioni sono rispettate."
 
 #: configdialog.cpp:276
 msgid "Templates"
-msgstr ""
+msgstr "Template"
 
 #: configdialog.cpp:276
 msgid "Template Options"
-msgstr ""
+msgstr "Opzioni Template"
 
 #: configdialog.cpp:315
 msgid "Bibtex quotation style:"
@@ -2443,21 +2435,18 @@ msgstr "Citazioni"
 msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
 "escaped with either  braces or quotation marks.</qt>"
-msgstr "<qt>Lo stile usato per le citazioni quando si esporta bibtex.</qt>"
+msgstr "<qt>Lo stile usato per le citazioni quando si esporta bibtex. </qt>"
 
 #: configdialog.cpp:330
 msgid "Path to LyX server:"
 msgstr "Percorso per il server LyX:"
 
 #: configdialog.cpp:332
-#, fuzzy
 msgid ""
 "<qt>The location of the LyX server for citing bibliographic entries. Also "
 "used by other applications such as Kile or Pybliographer. Do not include the "
 "trailing .in suffix.</qt>"
-msgstr ""
-"<qt>L'ubicazione del server LyX per citare elementi bibliografici. È anche "
-"usata da altre applicazioni come Kile o Pybliographer.</qt>"
+msgstr "<qt>L'ubicazione del server LyX per citare elementi bibliografici. È anche usata da altre applicazioni come Kile o Pybliographer. Non includere il suffisso .in</qt>"
 
 #: exportdialog.cpp:43
 msgid "Export Options"
@@ -2515,25 +2504,28 @@ msgid "Bookcase is unable to upload the file - %1."
 msgstr "Impossibile uploadare il file - %1."
 
 #: kwidgetlister.cpp:56
-#, fuzzy
 msgid ""
 "_: more widgets\n"
 "More"
-msgstr "più oggetti grafici"
+msgstr ""
+"_: più oggetti grafici\n"
+"Più"
 
 #: kwidgetlister.cpp:59
-#, fuzzy
 msgid ""
 "_: fewer widgets\n"
 "Fewer"
-msgstr "meno oggetti grafici"
+msgstr ""
+"_: meno oggetti grafici\n"
+"Meno"
 
 #: kwidgetlister.cpp:65
-#, fuzzy
 msgid ""
 "_: clear widgets\n"
 "Clear"
-msgstr "cancella oggetti grafici"
+msgstr ""
+"_: cancella oggetti grafici\n"
+"Cancella"
 
 #: imagewidget.cpp:46
 msgid "Select Image..."
@@ -2572,8 +2564,9 @@ msgid "Save Entry"
 msgstr "Salva Elemento"
 
 #: entryview.cpp:138
+#, fuzzy
 msgid "Bookcase is unable to locate the default entry template stylesheet."
-msgstr ""
+msgstr "Bookcase non è in grado di trovare"
 
 #: rc.cpp:2
 msgid "&New"
@@ -2747,16 +2740,16 @@ msgstr "<p>...che clickare due volte su un elemento apre l'editor.</p>\n"
 
 #, fuzzy
 #~ msgid "Export images"
-#~ msgstr "Esporta come"
+#~ msgstr "Esporta immagini"
 
 #, fuzzy
 #~ msgid "If checked, the images will also be exported."
 #~ msgstr ""
-#~ "Se selezionato, i nomi di campo saranno stampati come headers della tabella."
+#~ "Se selezionato, verranno esportate anche le immagini."
 
 #, fuzzy
 #~ msgid "Image Directory:"
-#~ msgstr "Regista"
+#~ msgstr "Directory per le immagini:"
 
 #~ msgid "List"
 #~ msgstr "Lista"
@@ -3262,3 +3255,4 @@ msgstr "<p>...che clickare due volte su un elemento apre l'editor.</p>\n"
 
 #~ msgid "Show Browse Toolbar"
 #~ msgstr "Mostra la barra di navigazione"
+

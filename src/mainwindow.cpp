@@ -1818,6 +1818,10 @@ QStringList MainWindow::groupBy() const {
       g << it.current()->name();
     }
   }
+  // special case for no groups
+  if(g[0].isEmpty()) {
+    g.clear();
+  }
   return g;
 }
 

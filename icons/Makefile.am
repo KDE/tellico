@@ -12,3 +12,7 @@ icon_ICON = bookcase
 
 picdir = ${kde_datadir}/bookcase/pics
 pic_DATA = book.png bookcase.png person.png person-open.png album.png video.png bibtex.png coin.png card.png stamp.png wine.png comic.png
+
+# probably a better way to do this
+uninstall-hook:
+	-if [ -d $(picdir) ]; then rmdir $(picdir); fi

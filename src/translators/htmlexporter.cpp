@@ -131,6 +131,10 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     outNodes.item(0).toElement().setAttribute(QString::fromLatin1("encoding"), encoding);
   }
 
+  if(m_groupBy.isEmpty()) {
+    m_printGrouped = false; // can't group if no groups exist
+  }
+
   if(m_printGrouped && !m_groupBy.isEmpty()) {
     // since the XSL stylesheet can't use a parameter as a key name, need to replace keys
     QDomNodeList keyNodes = dom.elementsByTagName(QString::fromLatin1("xsl:key"));

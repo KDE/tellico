@@ -436,6 +436,8 @@ ps-am:
 #>- uninstall-am: uninstall-info-am uninstall-picDATA
 #>+ 1
 uninstall-am: uninstall-kde-icons  uninstall-info-am uninstall-picDATA
+	@$(NORMAL_INSTALL)
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
@@ -447,6 +449,10 @@ uninstall-am: uninstall-kde-icons  uninstall-info-am uninstall-picDATA
 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
 	uninstall-info-am uninstall-picDATA
 
+
+# probably a better way to do this
+uninstall-hook:
+	-if [ -d $(picdir) ]; then rmdir $(picdir); fi
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -11,18 +11,18 @@
 </para>
 
 <sect2 id="importing-bookcase">
-<title>Bookcase Data</title>
+<title>Importing Bookcase Data</title>
 
 <para>
-Other &bookcase; data files may be imported.
+Other &bookcase; data files may be imported. Replacing the current collection by importing a &bookcase; file is the same thing as just opening the file itself. The value of importing &bookcase; data is primarily for appending or merging two collections together.
 </para>
 </sect2>
 
 <sect2 id="importing-csv">
-<title>CSV Data</title>
+<title>Importing CSV Data</title>
 
 <para>
-Comma-separated values (CSV) are a common way of importing and exporting tabular data.
+Comma-separated values (CSV) are a common way of importing and exporting tabular data. Each field value is separated by a comma, with one entry per line. The field titles may be included in the first line. The CSV importer is not limited to using a comma as the separator. Any character or string may be used.
 </para>
 
 <screenshot>
@@ -33,6 +33,48 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 <caption><para>The CSV Import Dialog</para></caption>
 </mediaobject>
 </screenshot>
+
+<para>
+First, select the type of collection that you are importing. If you are appending or merging to your open collection, the type is limited to your current collection type. If the first line of the CSV file contains the field titles, click the checkbox and the importer will automatically compare the titles against the fields in the current collection. If a field title matches, the header for that column changes to show that the column has been assigned to that field. If the file uses a delimiter other than a comma, be sure to change that option accordingly.
+</para>
+
+<para>
+In order for &bookcase; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the dropdown list and clicking the <guibutton>Set</guibutton> button. If you need to add a new field to the collection, the last item in the dropdown list opens the  <link linkend="fields-dialog">&fields-dialog;</link>.
+</para>
+
+<para>
+Only the first five lines of the imported CSV file are shown in the dialog.
+</para>
+
+</sect2>
+
+<sect2 id="importing-bibtex">
+<title>Importing Bibtex Data</title>
+
+<para>
+<ulink url="http://www.ecst.csuchico.edu/~jacobsd/bib/formats/bibtex.html">Bibtex</ulink> is a bibliography format used with the LaTeX document preparation system. Various type of bibliographic references may be included in the file. &bookcase; imports bibtex files as a Bibliographic collection.
+</para>
+
+<para>
+If the bibtex importer encounters fields in the file which are not in the default bibliography collection, they are added as <link linkend="line">Simple Text</link> fields, with two exceptions. If the field value contains more than 100 characters, it becomes a <link linkend="para">Paragraph</link> field. If the field value appears to contain a &URL; or a file reference, then a <link linkend="url">URL</link> field is created. &bookcase; uses an internal copy of the <ulink url="http://www.gerg.ca/software/btOOL/">btparse library</ulink> for parsing the bibtex files.
+</para>
+</sect2>
+
+<sect2 id="importing-bibtexml">
+<title>Importing Bibtexml Data</title>
+
+<para>
+<ulink url="http://bibtexml.sf.net">Bibtexml</ulink> is an XML representation of bibtex data, and the data from the imported bibtexml file is treated in the same way as bibtex data would be.
+</para>
+
+</sect2>
+
+<sect2 id="importing-xslt">
+<title>Importing XML Data via XSLT</title>
+
+<para>
+Any XML file may be imported into &bookcase; provided an XSL stylesheet is available to convert the file to &bookcase; format. &bookcase; automatically loads the stylesheet and performs the XSLT processing needed to load the file.
+</para>
 </sect2>
 
 </sect1>
@@ -43,6 +85,57 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 <para>
 To be written...
 </para>
+
+<sect2 id="exporting-xml">
+<title>Exporting XML</title>
+
+<para>
+The file format for &bookcase; data is a zipped XML file. Exporting to XML merely skips the zip compression. Images may be included in the XML file as base64-encoded data in image elements.
+</para>
+</sect2>
+
+<sect2 id="exporting-html">
+<title>Exporting HTML</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2 id="exporting-csv">
+<title>Exporting CSV</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2 id="exporting-pilotdb">
+<title>Exporting Pilot-DB</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2 id="exporting-bibtex">
+<title>Exporting Bibtex</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2 id="exporting-bibtexml">
+<title>Exporting Bibtexml</title>
+
+<para>
+</para>
+</sect2>
+
+<sect2 id="exporting-xslt">
+<title>Exporting XML via XSLT</title>
+
+<para>
+</para>
+</sect2>
+
 </sect1>
 
 </chapter>

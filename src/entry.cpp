@@ -171,7 +171,9 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   }
 
   QStringList groups = fields(fieldName_, true);
-  if(f->type() == Field::Table2) {
+  if(groups.isEmpty()) {
+    groups += Collection::s_emptyGroupTitle;
+  } else if(f->type() == Field::Table2) {
     for(QStringList::Iterator it = groups.begin(); it != groups.end(); ++it) {
       // quick hack for 2-column tables, how often will a user have "::" in their value?
       // only use first column for group

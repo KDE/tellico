@@ -1,7 +1,30 @@
+2004-05-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.9.3.
+	* Updated italian translation, thanks to FaUsT.
+
+2004-05-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug for exporting when no fields can be grouped.
+
+2004-05-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Restructured ISBN code to get rid of some old cruft.
+	* Added patch from Regis Boudin to add French ISBN formatting and
+	remove old copyright restricted ISBN code.
+
+2004-05-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with empty group names.
+
+2004-05-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.9.2.
+
 2004-05-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with xslt import with libxml < 2.6.
-	* Fixed bug with losing extended properties when cloning fields/
+	* Fixed bug with losing extended properties when cloning fields.
 
 2004-05-12  Robby Stephenson  <robby@periapsis.org>
 

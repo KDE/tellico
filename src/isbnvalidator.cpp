@@ -19,7 +19,6 @@ using Bookcase::ISBNValidator;
 
 ISBNValidator::ISBNValidator(QObject* parent_, const char* name_/*=0*/)
     : QValidator(parent_, name_) {
-//  buildValidGroupLookup();
 }
 
 QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
@@ -39,9 +38,9 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
   // only allow up to a single "X"
   // only allow up to 10 digits
   // the "X" can only be the last character
-  QRegExp validChars(QString::fromLatin1("[\\d-X]{0,12}"));
+  static const QRegExp validChars(QString::fromLatin1("[\\d-X]{0,12}"));
+  static QRegExp rx(QString::fromLatin1("[^\\d-X]"));
   if(!validChars.exactMatch(input_)) {
-    QRegExp rx(QString::fromLatin1("[^\\d-X]"));
     input_.replace(rx, QString::null);
     // special case for EAN values that start with 978 or 979. That's the case
     // for things like barcode readers that essentially 'type' the string at
@@ -109,7 +108,7 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
     pos_ = input_.length();
   }
 
-  QRegExp re(QString::fromLatin1("[\\d-]{0,11}-[\\dX]"));
+  static QRegExp re(QString::fromLatin1("[\\d-]{0,11}-[\\dX]"));
   if(re.exactMatch(input_)) {
     return QValidator::Acceptable;
   } else {
@@ -122,21 +121,24 @@ void ISBNValidator::fixup(QString& input_) const {
     return;
   }
 
-  if(input_[0] == '0' || input_[0] == '1') {
-    // english-speaking group
-    input_.replace(QRegExp(QString::fromLatin1("-")), QString::null);
-    // only add the checksum if more than 8 digits are present
-    if(input_.length() > 8) {
-      input_[9] = checkSum(input_);
-    }
-    insertDashesEnglish(input_);
-    return;
-  } else {
-    insertDashesNonEnglish(input_);
+  // only add the checksum if more than 8 digits are present
+  QString digits = input_;
+  digits.replace('-', QString::null);
+  if(digits.length() > 9) {
+    digits.truncate(9);
   }
+  if(digits.length() > 8) {
+    digits += checkSum(digits);
+  }
+  insertDashes(input_, digits);
 }
 
 QChar ISBNValidator::checkSum(const QString& input_) const {
+#ifndef NDEBUG
+  if(input_.length() != 9) {
+    kdDebug() << "ISBNValidator::checkSum() - only supposed to call with 9 digits!" << endl;
+  }
+#endif
   unsigned sum = 0;
   unsigned multiplier = 10;
 
@@ -155,49 +157,103 @@ QChar ISBNValidator::checkSum(const QString& input_) const {
   }
 }
 
-void ISBNValidator::insertDashesNonEnglish(QString& input_) const {
-/* for non-english-language publishers, the first and last hyphen positions are well-defined
-   but the middle one isn't. Poossible publisher groups are
-                           0 - 7
-                          80 - 94
-                         950 - 993
-                        9940 - 9989
-                       99900 - 99999
-*/
-  // first grab digits
-  QString digits = input_;
-  digits.replace('-', QString::null);
+void ISBNValidator::insertDashes(QString& input_, const QString& digits_) const {
+  static const QRegExp rxDigit(QString::fromLatin1("\\d"));
+  // hyphen placement for some language's publishers is well-defined
+  unsigned long range = digits_.leftJustify(9, '0', true).toInt();
+  unsigned whereFirstDash = 0;
+  unsigned whereMidDash = 10;
+  unsigned whereLastDash = 9;
+  // how to format an ISBN, after categorising it into a range of numbers.
+  // number is high+1 for the band.
+  static const struct isbn_band {
+    unsigned long MaxValue;
+    unsigned First;
+    unsigned Mid;
+    unsigned Last;
+  } bands[] = {
+    /* high+1    First Middle Last */
+    /* Groups 0 & 1 : English */
+    { 20000000,  1,    3,     9}, /* Grp 0 Publishers 00-19 */
+    { 70000000,  1,    4,     9}, /* Grp 0 Publishers 200-699 */
+    { 85000000,  1,    5,     9}, /* Grp 0 Publishers 7000-8499 */
+    { 90000000,  1,    6,     9}, /* Grp 0 Publishers 85000-89999 */
+    { 95000000,  1,    7,     9}, /* Grp 0 Publishers 900000-949999 */
+    {100000000,  1,    8,     9}, /* Grp 0 Publishers 9500000-9999999 */
+    {155000000,  1,    6,     9}, /* Grp 1 Publishers 00000-54999 (illegal) */
+    {186980000,  1,    6,     9}, /* Grp 1 Publishers 55000-86979 */
+    {199900000,  1,    7,     9}, /* Grp 1 Publishers 969800-998999 */
+    {200000000,  1,    8,     9}, /* Grp 1 Publishers 9900000-9999999 */
 
-  int whereFirstDash;
-  if(digits.left(1).toInt() < 8) {
-    whereFirstDash = 1;
-  } else if(digits.left(2).toInt() < 95) {
-    whereFirstDash = 2;
-  } else if(digits.left(3).toInt() < 994) {
-    whereFirstDash = 3;
-  } else if(digits.left(4).toInt() < 9990) {
-    whereFirstDash = 4;
-  } else {
-    whereFirstDash = 5;
+    /* Group 2 : French */
+    {220000000,  1,    3,     9}, /* Grp 2 Publishers 00-19 */
+    {234000000,  1,    4,     9}, /* Grp 2 Publishers 200-349 */
+    {240000000,  1,    6,     9}, /* Grp 2 Publishers 35000-39999 */
+    {270000000,  1,    4,     9}, /* Grp 2 Publishers 400-699 */
+    {284000000,  1,    5,     9}, /* Grp 2 Publishers 7000-8399 */
+    {290000000,  1,    6,     9}, /* Grp 2 Publishers 84000-89999 */
+    {295000000,  1,    7,     9}, /* Grp 2 Publishers 900000-949999 */
+    {300000000,  1,    10,    9}, /* Grp 2 Publishers 9500000-9999999 */
+
+    /* Languages with unknown rules */
+    {800000000,  1,    10,    9}, /* Groups 3 - 7 */
+    {950000000,  2,    10,    9}, /* Groups 80 - 94 */
+    {994000000,  3,    10,    9}, /* Groups 950 - 993 */
+    {999000000,  4,    10,    9}, /* Groups 9940 - 9989 */
+    {1000000000, 5,    10,    9}  /* Groups 99900 - 99999 */
+  };
+
+  bool keepUserHyphens = false;
+  for(unsigned i = 0; i < sizeof(bands)/sizeof(struct isbn_band); ++i) {
+    if(range < bands[i].MaxValue) {
+      whereFirstDash = bands[i].First;
+      whereMidDash = bands[i].Mid;
+      whereLastDash = bands[i].Last;
+      if(range >= 300000000) { // change this if other language's publishers are added
+        keepUserHyphens = true;
+      }
+      break;
+    }
   }
 
-  QString pub = digits.left(whereFirstDash);
-  if(pub == digits) {
+  if(!keepUserHyphens) {
+    QString isbn = digits_;
+    if(isbn.length() > whereFirstDash) {
+      isbn.insert(whereFirstDash, '-');
+      ++whereMidDash;
+      ++whereLastDash;
+    }
+    if(isbn.length() > whereMidDash) {
+      isbn.insert(whereMidDash, '-');
+      ++whereLastDash;
+    }
+    if(isbn.length() > whereLastDash) {
+      isbn.insert(whereLastDash, '-');
+    }
+    // if we're not keeping any user hyphens, we're done.
+    input_ = isbn;
     return;
   }
 
-  // now want to find the position in the input string where the publisher group ends
+  // now the user may have added a hyphen somewhere between the publisher and title parts
+  // this is really dumb code but seems to work
+  QString group = digits_.left(whereFirstDash); // group string
+  if(group == digits_) {
+    return;
+  }
+
+  // now want to find the position in the input string where the group ends
   unsigned pos1 = 0;
   for(unsigned i = 0; i < input_.length(); ++i) {
-    if(input_[i] == pub[pos1]) {
+    if(input_[i] == group[pos1]) {
       ++pos1;
     }
-    if(pos1 == pub.length()) {
+    if(pos1 == group.length()) {
       pos1 = i+1;
       break;
     }
   }
-  // now pos1 is the position in the input string where the publisher group ends
+  // now pos1 is the position in the input string where the group ends
   // shift by one, so that now, pos1 is where the rest of the string starts
   if(input_[pos1] == '-') {
     ++pos1;
@@ -206,133 +262,28 @@ void ISBNValidator::insertDashesNonEnglish(QString& input_) const {
   int pos2 = input_.find('-', pos1+1);
   if(pos2 == -1) {
     QString tail = input_.mid(pos1);
-    if(pub.length() + tail.length() < 9) {
-      input_ = pub + QString::fromLatin1("-") + tail;
+    if(group.length() + tail.length() < 9) {
+      input_ = group + '-' + tail;
     } else {
-      input_ = pub + QString::fromLatin1("-") + tail.left(10-pub.length()) + QString::fromLatin1("-") + checkSum(digits);
+      input_ = group + '-' + tail.left(9-group.length()) + '-' + digits_[9];
     }
     return;
   }
 
+  ++pos2; // since it points to a hyphen
   // is the second hyphen the one before the check sum or is there a third hyphen?
   int pos3 = input_.find('-', pos2+1);
 
   QString middle;
   if(pos3 == -1) {
-    middle = input_.mid(pos1, pos2-pos1);
+    middle = input_.mid(pos1);
   } else {
     middle = input_.mid(pos1, pos3-pos1);
   }
 
-  if(pub.length() + middle.contains(QRegExp(QString::fromLatin1("\\d"))) < 9) {
-    input_ = pub + QString::fromLatin1("-") + middle;
-    return;
-  }
-  input_ = pub + QString::fromLatin1("-") + middle + QString::fromLatin1("-") + checkSum(digits);
-}
-
-void ISBNValidator::insertDashesEnglish(QString& input_) const {
-  // hyphen placement for english-language publishers is well-defined
-  // remove all hyphens, and insert ourselves
-  input_.replace('-', QString::null);
-  int range = input_.leftJustify(9, '0', true).toInt();
-  unsigned whereFirstDash = 0;
-  unsigned whereMidDash = 0;
-  unsigned whereLastDash = 9;
-  // how to format an ISBN, after categorising it into a range of numbers.
-  // number is high+1 for the band.
-  int bands[] = {
-    // --------0  0-00-bbbbbb-x group 0
-    20000000,
-    // --------1  0-200-bbbbb-x
-    70000000,
-    // --------2  0-7000-bbbb-x
-    85000000,
-    // --------3  0-85000-bbb-x
-    90000000,
-    // --------4  0-90000-bb-x
-    95000000,
-    // --------5  0-950000-b-x
-    100000000,
-    // --------6  1-1000-bbbb-x  group 1
-    155000000,
-    // --------7  1-55000-bbb-x
-    186980000,
-    // --------8  1-869800-bb-x
-    199900000,
-    // --------9  1-1999000-b-x
-    200000000
-  };
-  unsigned band = 0;
-  for(unsigned i = 0; i < sizeof(bands)/sizeof(int); ++i) {
-    if(range < bands[i]) {
-      band = i;
-      break;
-    }
-  }
-  switch(band) {
-    /* cases 0..5 handle the standard publisher pattern, for group 0 */
-    case 0:
-      /* publisher 00 .. 19 : 0-00-bbbbbb-x */
-      whereFirstDash = 1;
-      whereMidDash = whereFirstDash + 2;
-      break;
-    case 1:
-      /* publisher 200 .. 699 : 0-200-bbbbb-x */
-      whereFirstDash = 1;
-      whereMidDash = whereFirstDash + 3;
-      break;
-    case 2:
-      /* publisher 7000 .. 8499 : 0-7000-bbbb-x */
-      whereFirstDash = 1;
-      whereMidDash = whereFirstDash + 4;
-      break;
-    case 3:
-      /* publisher 85000 .. 89999 : 0-85000-bbb-x  */
-      whereFirstDash = 1;
-      whereMidDash = whereFirstDash + 5;
-      break;
-    case 4:
-      /* publisher 900000 .. 94999 : 0-90000-bb-x */
-      whereFirstDash = 1;
-      whereMidDash = whereFirstDash + 6;
-      break;
-    case 5:
-      /* publisher 9500000 .. 9999999 : 0-950000-b-x */
-      whereFirstDash = 1;
-      whereMidDash = whereFirstDash + 7;
-      break;
-      /* cases 6..9 : 1-1000-bbbb-x handle nonstandard publisher pattern of group-1 */
-    case 6:
-      whereFirstDash = 1;
-      whereMidDash = 5;
-      break;
-    case 7: /*  1-55000-bbb-x  */
-      whereFirstDash = 1;
-      whereMidDash = 6;
-      break;
-    case 8:  /* 1-55000-bbb-x */
-      whereFirstDash = 1;
-      whereMidDash = 7;
-      break;
-    case 9: /* 1-1999000-b-x */
-      whereFirstDash = 1;
-      whereMidDash = 8;
-      break;
-  }
-
-  if(input_.length() > whereFirstDash) {
-    input_.insert(whereFirstDash, '-');
-    ++whereMidDash;
-    ++whereLastDash;
-  }
-  if(input_.length() > whereMidDash) {
-    //add 1 since one "-" has already been inserted
-    input_.insert(whereMidDash, '-');
-    ++whereLastDash;
-  }
-  // add a "-" before the checkdigit
-  if(input_.length() > whereLastDash) {
-    input_.insert(whereLastDash, '-');
+  if(group.length() + middle.contains(rxDigit) < 9) {
+    input_ = group + '-' + middle;
+  } else {
+    input_ = group + '-' + middle.left(9-group.length()) + '-' + digits_[9];
   }
 }

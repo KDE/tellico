@@ -186,7 +186,8 @@ bool BibtexHandler::setFieldValue(Data::Entry* entry_, const QString& bibtexFiel
       // special case, try to detect URLs
       // In qt 3.1, QString::startsWith() is always case-sensitive
       if(bibtexField_ == QString::fromLatin1("url")
-         || value_.lower().startsWith(QString::fromLatin1("http"))
+         || value_.lower().startsWith(QString::fromLatin1("http")) // might have https: too
+         || value_.lower().startsWith(QString::fromLatin1("ftp:/"))
          || value_.lower().startsWith(QString::fromLatin1("file:/"))
          || value_.lower().startsWith(QString::fromLatin1("/"))) { // assume this indicates a local path
         kdDebug() << "BibtexHandler::setFieldValue() - creating a URL field for " << bibtexField_ << endl;

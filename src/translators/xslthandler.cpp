@@ -124,10 +124,8 @@ void XSLTHandler::init() {
     xmlSubstituteEntitiesDefault(1);
     xmlLoadExtDtdDefaultValue = 0;
 
-    // register the string library
-    exsltStrRegister();
-    // register the dynamic library
-    exsltDynRegister();
+    // register all exslt extensions
+    exsltRegisterAll();
   }
   ++s_initCount;
 
