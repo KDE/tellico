@@ -1933,7 +1933,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=tellico
- VERSION=0.13.2
+ VERSION=0.13.3
 
 
 cat >>confdefs.h <<_ACEOF
@@ -27409,7 +27409,7 @@ else
 
 fi;
 
-if test x$enable_amazon == xyes; then
+if test x$enable_amazon = xyes; then
 
 cat >>confdefs.h <<\_ACEOF
 #define AMAZON_SUPPORT 1

@@ -40,7 +40,7 @@ dnl Perform program name transformation
 AC_ARG_PROGRAM
 
 dnl Automake doc recommends to do this only here. (Janos)
-AM_INIT_AUTOMAKE(tellico, 0.13.2) dnl searches for some needed programs
+AM_INIT_AUTOMAKE(tellico, 0.13.3) dnl searches for some needed programs
 
 KDE_SET_PREFIX
 
@@ -359,7 +359,7 @@ AC_ARG_ENABLE(amazon,
     [enable_amazon=yes]
 )
 
-if test x$enable_amazon == xyes; then
+if test x$enable_amazon = xyes; then
     AC_DEFINE(AMAZON_SUPPORT, 1, [Define to 1 if Amazon.com searching should be enabled])
 else
     AC_DEFINE(AMAZON_SUPPORT, 0, [Define to 1 if Amazon.com searching should be enabled])

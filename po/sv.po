@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
-"POT-Creation-Date: 2005-02-05 12:10-0800\n"
+"POT-Creation-Date: 2005-02-10 20:22-0800\n"
 "PO-Revision-Date: 2005-01-21 18:33+0100\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
@@ -2465,11 +2465,11 @@ msgstr ""
 "Den maximala bredden på bilden vid utskrift. Höjd/bredd-förhållandet "
 "behålls."
 
-#: configdialog.cpp:260
+#: configdialog.cpp:263
 msgid "Maximum image height:"
 msgstr "Maximal bildhöjd:"
 
-#: configdialog.cpp:264
+#: configdialog.cpp:267
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
@@ -2477,61 +2477,61 @@ msgstr ""
 "Den maximala höjden på bilden vid utskrift. Höjd/bredd-förhållandet "
 "behålls."
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Templates"
 msgstr "Mallar"
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Template Options"
 msgstr "Mallalternativ"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 msgid "Data Sources"
 msgstr "Datakällor"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 msgid "Data Source Options"
 msgstr "Datakällsalternativ"
 
-#: configdialog.cpp:310 fetchdialog.cpp:136
+#: configdialog.cpp:316 fetchdialog.cpp:136
 msgid "Source"
 msgstr "Källa"
 
-#: configdialog.cpp:319
+#: configdialog.cpp:325
 msgid "&New..."
 msgstr "&Ny"
 
-#: configdialog.cpp:322
+#: configdialog.cpp:328
 msgid "&Modify..."
 msgstr "&Modifiera"
 
-#: configdialog.cpp:325
+#: configdialog.cpp:331
 msgid "Remo&ve"
 msgstr "&Tabort"
 
-#: configdialog.cpp:518 configdialog.cpp:629
+#: configdialog.cpp:524 configdialog.cpp:635
 msgid "Data Source Properties"
 msgstr "Datakällsegenskaper"
 
-#: configdialog.cpp:537 configdialog.cpp:648
+#: configdialog.cpp:543 configdialog.cpp:654
 msgid "&Source name: "
 msgstr "&Källnamn: "
 
-#: configdialog.cpp:539 configdialog.cpp:650
+#: configdialog.cpp:545 configdialog.cpp:656
 msgid ""
 "The name identifies the data source and should be unique and informative."
 msgstr "Namnet identifierar datakällan och bör vara unik och beskrivande."
 
-#: configdialog.cpp:548 configdialog.cpp:659
+#: configdialog.cpp:554 configdialog.cpp:665
 msgid "Source type: "
 msgstr "Käll typ: "
 
-#: configdialog.cpp:550 configdialog.cpp:661
+#: configdialog.cpp:556 configdialog.cpp:667
 msgid ""
 "Tellico currently supports three source types: Amazon.com, IMDB, and z39.50."
 msgstr "Tellico stöder f. n. tre källtyper: Amazon.com, IMDB och z39.50."
 
-#: configdialog.cpp:558 configdialog.cpp:668
+#: configdialog.cpp:564 configdialog.cpp:674
 msgid "Source Options"
 msgstr "Källalternativ"
 
@@ -3051,7 +3051,7 @@ msgstr "Tilldelningsfält"
 msgid "Abstract"
 msgstr "Sammandrag"
 
-#: translators/bibtexhandler.cpp:235 translators/risimporter.cpp:256
+#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:256
 #: translators/risimporter.cpp:260 translators/tellicoimporter.cpp:212
 msgid "Unknown"
 msgstr "Okänd"
@@ -3064,15 +3064,15 @@ msgstr "PDF"
 msgid "Scanning audio files..."
 msgstr "Skannar ljudfiler..."
 
-#: translators/audiofileimporter.cpp:239
+#: translators/audiofileimporter.cpp:240
 msgid "Audio File Options"
 msgstr "Ljudfilsalternativ"
 
-#: translators/audiofileimporter.cpp:241
+#: translators/audiofileimporter.cpp:242
 msgid "Recursive folder search"
 msgstr "Rekursiv mappsökning"
 
-#: translators/audiofileimporter.cpp:242
+#: translators/audiofileimporter.cpp:243
 msgid "If checked, folders are recursively searched for audio files."
 msgstr "Om ikryssad, kommer mappar att sökas rekursivt för ljudfiler."
 
@@ -3247,6 +3247,18 @@ msgstr "Filen är tom."
 msgid "The file contains no collection data."
 msgstr "Filen innehåller inga samlingsdata."
 
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Ny"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "N&y samling"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Samlingsverktygsrad"
+
 #: tellico_strings.cpp:18
 #, c-format
 msgid "Tellico is unable to load the file - %1."
@@ -3265,18 +3277,6 @@ msgstr "Tellico kan inte ladda upp fil - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Söksträngen \"%1\" hittades inte."
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Ny"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "N&y samling"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Samlingsverktygsrad"
 
 #: _translatorinfo.cpp:1
 msgid ""

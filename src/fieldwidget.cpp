@@ -161,6 +161,9 @@ FieldWidget::FieldWidget(const Data::Field* field_, QWidget* parent_, const char
         // intentionally allow only positive numbers
         SpinBox* sb = new SpinBox(-1, INT_MAX, this);
         connect(sb, SIGNAL(valueChanged(int)), SIGNAL(modified()));
+        // QSpinBox doesn't emit valueChanged if you edit the value with
+        // the lineEdit until you change the keyboard focus
+        connect(sb->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
         // I want to allow no value, so set space as special text. Empty text is ignored
         sb->setSpecialValueText(QString::fromLatin1(" "));
         m_editWidget = sb;

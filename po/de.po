@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2005-02-05 12:10-0800\n"
+"POT-Creation-Date: 2005-02-10 20:22-0800\n"
 "PO-Revision-Date: 2004-08-20 01:13+0200\n"
 "Last-Translator: Gerrit M. Albrecht <mail@gerrit-albrecht.de>\n"
 "Language-Team: german <de@li.org>\n"
@@ -2544,11 +2544,11 @@ msgstr ""
 "Die maximale Breite von Bildern im Ausdruck. Das Breite/Höhe-Verhältnis "
 "wird beibehalten."
 
-#: configdialog.cpp:260
+#: configdialog.cpp:263
 msgid "Maximum image height:"
 msgstr "Maximale Bild-Höhe:"
 
-#: configdialog.cpp:264
+#: configdialog.cpp:267
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
@@ -2556,67 +2556,67 @@ msgstr ""
 "Die maximale Höhe von Bildern im Ausdruck. Das Breite/Höhe-Verhältnis "
 "wird beibehalten."
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Templates"
 msgstr "Vorlagen"
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Template Options"
 msgstr "Vorlage-Optionen"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 #, fuzzy
 msgid "Data Sources"
 msgstr "Quelle"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 #, fuzzy
 msgid "Data Source Options"
 msgstr "Vorlage-Optionen"
 
-#: configdialog.cpp:310 fetchdialog.cpp:136
+#: configdialog.cpp:316 fetchdialog.cpp:136
 msgid "Source"
 msgstr "Quelle"
 
-#: configdialog.cpp:319
+#: configdialog.cpp:325
 #, fuzzy
 msgid "&New..."
 msgstr "&Neu"
 
-#: configdialog.cpp:322
+#: configdialog.cpp:328
 msgid "&Modify..."
 msgstr ""
 
-#: configdialog.cpp:325
+#: configdialog.cpp:331
 msgid "Remo&ve"
 msgstr ""
 
-#: configdialog.cpp:518 configdialog.cpp:629
+#: configdialog.cpp:524 configdialog.cpp:635
 #, fuzzy
 msgid "Data Source Properties"
 msgstr "Feld-Eigenschaften"
 
-#: configdialog.cpp:537 configdialog.cpp:648
+#: configdialog.cpp:543 configdialog.cpp:654
 #, fuzzy
 msgid "&Source name: "
 msgstr "Quelle"
 
-#: configdialog.cpp:539 configdialog.cpp:650
+#: configdialog.cpp:545 configdialog.cpp:656
 msgid ""
 "The name identifies the data source and should be unique and informative."
 msgstr ""
 
-#: configdialog.cpp:548 configdialog.cpp:659
+#: configdialog.cpp:554 configdialog.cpp:665
 #, fuzzy
 msgid "Source type: "
 msgstr "Quelle"
 
-#: configdialog.cpp:550 configdialog.cpp:661
+#: configdialog.cpp:556 configdialog.cpp:667
 msgid ""
 "Tellico currently supports three source types: Amazon.com, IMDB, and z39.50."
 msgstr ""
 
-#: configdialog.cpp:558 configdialog.cpp:668
+#: configdialog.cpp:564 configdialog.cpp:674
 #, fuzzy
 msgid "Source Options"
 msgstr "CSV-Optionen"
@@ -3155,7 +3155,7 @@ msgstr "Feld zuweisen"
 msgid "Abstract"
 msgstr ""
 
-#: translators/bibtexhandler.cpp:235 translators/risimporter.cpp:256
+#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:256
 #: translators/risimporter.cpp:260 translators/tellicoimporter.cpp:212
 msgid "Unknown"
 msgstr "Unbekannt"
@@ -3169,16 +3169,16 @@ msgstr ""
 msgid "Scanning audio files..."
 msgstr "Speichere Datei..."
 
-#: translators/audiofileimporter.cpp:239
+#: translators/audiofileimporter.cpp:240
 #, fuzzy
 msgid "Audio File Options"
 msgstr "Feld-Optionen"
 
-#: translators/audiofileimporter.cpp:241
+#: translators/audiofileimporter.cpp:242
 msgid "Recursive folder search"
 msgstr ""
 
-#: translators/audiofileimporter.cpp:242
+#: translators/audiofileimporter.cpp:243
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 
@@ -3364,6 +3364,18 @@ msgstr ""
 msgid "The file contains no collection data."
 msgstr ""
 
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Neu"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Sammlung"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Sammlungs-Werkzeugleiste"
+
 #: tellico_strings.cpp:18
 #, c-format
 msgid "Tellico is unable to load the file - %1."
@@ -3382,18 +3394,6 @@ msgstr "Tellico kann die Datei nicht hochladen - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Zu suchende Zeichenkette '%1' nicht gefunden."
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Neu"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Sammlung"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Sammlungs-Werkzeugleiste"
 
 #: _translatorinfo.cpp:1
 msgid ""

@@ -1,3 +1,15 @@
+2005-02-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 0.13.3.
+
+2005-02-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug in configure script for disabling amazon, thanks to
+	Markus Brueffer.
+	* Fixed bug with spin boxes not enabling Apply button in Config
+	Dialog.
+	* Fixed bug with audio file metadata import for compilations.
+
 2005-02-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Update some bibtex character translations.

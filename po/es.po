@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"POT-Creation-Date: 2005-02-05 12:10-0800\n"
+"POT-Creation-Date: 2005-02-10 20:22-0800\n"
 "PO-Revision-Date: 2004-11-20 18:59-0800\n"
 "Last-Translator: Quique <quique@sindominio.net>\n"
 "Language-Team: Castilian aka Spanish <en@li.org>\n"
@@ -2467,75 +2467,75 @@ msgid ""
 "preserved."
 msgstr ""
 
-#: configdialog.cpp:260
+#: configdialog.cpp:263
 msgid "Maximum image height:"
 msgstr ""
 
-#: configdialog.cpp:264
+#: configdialog.cpp:267
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
 msgstr ""
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Templates"
 msgstr "Plantillas"
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Template Options"
 msgstr "Opciones de las plantillas"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 #, fuzzy
 msgid "Data Sources"
 msgstr "Buscar en:"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 #, fuzzy
 msgid "Data Source Options"
 msgstr "Opciones de las plantillas"
 
-#: configdialog.cpp:310 fetchdialog.cpp:136
+#: configdialog.cpp:316 fetchdialog.cpp:136
 msgid "Source"
 msgstr ""
 
-#: configdialog.cpp:319
+#: configdialog.cpp:325
 #, fuzzy
 msgid "&New..."
 msgstr "&Nuevo"
 
-#: configdialog.cpp:322
+#: configdialog.cpp:328
 msgid "&Modify..."
 msgstr ""
 
-#: configdialog.cpp:325
+#: configdialog.cpp:331
 msgid "Remo&ve"
 msgstr ""
 
-#: configdialog.cpp:518 configdialog.cpp:629
+#: configdialog.cpp:524 configdialog.cpp:635
 #, fuzzy
 msgid "Data Source Properties"
 msgstr "Propiedades del campo"
 
-#: configdialog.cpp:537 configdialog.cpp:648
+#: configdialog.cpp:543 configdialog.cpp:654
 msgid "&Source name: "
 msgstr ""
 
-#: configdialog.cpp:539 configdialog.cpp:650
+#: configdialog.cpp:545 configdialog.cpp:656
 msgid ""
 "The name identifies the data source and should be unique and informative."
 msgstr ""
 
-#: configdialog.cpp:548 configdialog.cpp:659
+#: configdialog.cpp:554 configdialog.cpp:665
 msgid "Source type: "
 msgstr ""
 
-#: configdialog.cpp:550 configdialog.cpp:661
+#: configdialog.cpp:556 configdialog.cpp:667
 msgid ""
 "Tellico currently supports three source types: Amazon.com, IMDB, and z39.50."
 msgstr ""
 
-#: configdialog.cpp:558 configdialog.cpp:668
+#: configdialog.cpp:564 configdialog.cpp:674
 #, fuzzy
 msgid "Source Options"
 msgstr "Opciones de CSV"
@@ -3066,7 +3066,7 @@ msgstr "Cualquier campo"
 msgid "Abstract"
 msgstr ""
 
-#: translators/bibtexhandler.cpp:235 translators/risimporter.cpp:256
+#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:256
 #: translators/risimporter.cpp:260 translators/tellicoimporter.cpp:212
 msgid "Unknown"
 msgstr "Desconocido"
@@ -3080,16 +3080,16 @@ msgstr ""
 msgid "Scanning audio files..."
 msgstr "Guardando fichero..."
 
-#: translators/audiofileimporter.cpp:239
+#: translators/audiofileimporter.cpp:240
 #, fuzzy
 msgid "Audio File Options"
 msgstr "Opciones de campo"
 
-#: translators/audiofileimporter.cpp:241
+#: translators/audiofileimporter.cpp:242
 msgid "Recursive folder search"
 msgstr ""
 
-#: translators/audiofileimporter.cpp:242
+#: translators/audiofileimporter.cpp:243
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 
@@ -3270,6 +3270,18 @@ msgstr ""
 msgid "The file contains no collection data."
 msgstr ""
 
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Nuevo"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Colección"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Barra de colecciones"
+
 #: tellico_strings.cpp:18
 #, c-format
 msgid "Tellico is unable to load the file - %1."
@@ -3288,18 +3300,6 @@ msgstr "Tellico no es capaz de cargar el fichero - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "No se ha encontrado la cadena buscada '%1'."
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Nuevo"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Colección"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Barra de colecciones"
 
 #: _translatorinfo.cpp:1
 msgid ""

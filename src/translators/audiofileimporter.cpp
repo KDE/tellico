@@ -152,7 +152,8 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
           other = other.section(';', i, i).stripWhiteSpace();
           if(!other.isEmpty()) {
             other += QString::fromLatin1("::") + initialArtist;
-            entry->setField(track, insertValue(QString::null, other, i));
+            // position is not zero-indexed...
+            entry->setField(track, insertValue(QString::null, other, i+1));
           }
         }
         QString t = TStringToQString(tag->title()) + QString::fromLatin1("::") + TStringToQString(tag->artist());
@@ -262,7 +263,7 @@ QStringList AudioFileImporter::findAllSubDirs(const QString& dir_) {
     return QStringList();
   }
 
-  // TODO: build in symlink chekcing, for now, prohibit
+  // TODO: build in symlink checking, for now, prohibit
   QDir dir(dir_, QString::null, QDir::Name | QDir::IgnoreCase, QDir::Dirs | QDir::Readable | QDir::NoSymLinks);
 
   QStringList allSubdirs; // the whole list

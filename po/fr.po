@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"POT-Creation-Date: 2005-02-05 12:10-0800\n"
+"POT-Creation-Date: 2005-02-10 20:22-0800\n"
 "PO-Revision-Date: 2005-02-06 13:46+0000\n"
 "Last-Translator: Regis Boudin <regis@boudin.name>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -130,7 +130,8 @@ msgid ""
 "_: _:Comic book grade levels\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr "Neuf,Presque neuf,Excellent,Très très bon,Très bon,Bon,Moyen,Mauvais"
+msgstr ""
+"Neuf,Presque neuf,Excellent,Très très bon,Très bon,Bon,Moyen,Mauvais"
 
 #: collections/bookcollection.cpp:139 collections/comicbookcollection.cpp:124
 #: collections/stampcollection.cpp:21
@@ -1551,7 +1552,8 @@ msgstr "Ligne"
 
 #: mainwindow.cpp:2058
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
-msgstr "<qt>Tellico ne peut pas écrire vers le serveur pipe à <b>%1</b>.</qt>"
+msgstr ""
+"<qt>Tellico ne peut pas écrire vers le serveur pipe à <b>%1</b>.</qt>"
 
 #: filehandler.cpp:100 translators/tellicoimporter.cpp:62
 #: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
@@ -1569,7 +1571,8 @@ msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico ne peut pas charger l'image - %1."
 
 #: filehandler.cpp:143
-msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 "Un fichier nommé \"%1\" existe déjà. Êtes-vous sur de vouloir le "
 "remplacer?"
@@ -1849,7 +1852,8 @@ msgid "Select IMDB Result"
 msgstr "Sélectionnez le résultat IMDB"
 
 #: fetch/imdbfetcher.cpp:412
-msgid "<qt>Your search returned multiple matches. Please select one below.</qt>"
+msgid ""
+"<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
 "<qt>Votre recherche a obtenu plusieurs résultats. Veuillez sélectionner "
 "l'un des suivants.</qt>"
@@ -2052,7 +2056,8 @@ msgid "An <i>Image</i> field holds a picture. "
 msgstr "Un champs <i>Image</i> contient une image. "
 
 #: collectionfieldsdialog.cpp:166
-msgid "A <i>Date</i> field can be used for values with a day, month, and year. "
+msgid ""
+"A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
 "Un champs <i>Date</i> put être utilisé pour des valeurs avec jour, mois et "
 "année. "
@@ -2079,7 +2084,8 @@ msgstr "Catégorie:"
 
 #: collectionfieldsdialog.cpp:182
 msgid "The field category determines where the field is placed in the editor."
-msgstr "La catégorie du champ détermine la position du champ dans l'éditeur."
+msgstr ""
+"La catégorie du champ détermine la position du champ dans l'éditeur."
 
 #: collectionfieldsdialog.cpp:199
 msgid "Description:"
@@ -2145,7 +2151,8 @@ msgid "Allow auto-capitalization only"
 msgstr "Autoriser la mise en majuscule automatique seulement"
 
 #: collectionfieldsdialog.cpp:234
-msgid "This option allows the field to be capitalized, but not specially formatted."
+msgid ""
+"This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 "Cette option permet de mettre le champ en majuscules, sans autre mise en "
 "forme."
@@ -2207,7 +2214,8 @@ msgid "Allow grouping"
 msgstr "Autoriser le regroupement"
 
 #: collectionfieldsdialog.cpp:252
-msgid "If checked, this field may be used to group the entries in the group view."
+msgid ""
+"If checked, this field may be used to group the entries in the group view."
 msgstr ""
 "Si cochée, ce champ sera utilisé pour regrouper les entrées dans la vue "
 "par groupe."
@@ -2343,7 +2351,8 @@ msgstr "Afficher les \"Astuces du jour\" au démarrage"
 
 #: configdialog.cpp:152
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
-msgstr "Si cochée, l'\"Astuce du jour\" sera ouverte au démarrage du programme."
+msgstr ""
+"Si cochée, l'\"Astuce du jour\" sera ouverte au démarrage du programme."
 
 #: configdialog.cpp:157
 msgid "Show number of items in group"
@@ -2353,7 +2362,8 @@ msgstr "Afficher le nombre d'entrées dans le groupe"
 msgid ""
 "If checked, the number of items in the group will be appended to the group "
 "name."
-msgstr "Si cochée, le nombre d'entrées sera affiché à côté du nom du groupe."
+msgstr ""
+"Si cochée, le nombre d'entrées sera affiché à côté du nom du groupe."
 
 #: configdialog.cpp:163 configdialog.cpp:227
 msgid "Formatting Options"
@@ -2365,7 +2375,8 @@ msgstr "Auto capitaliser titres et noms"
 
 #: configdialog.cpp:167
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr "Si cochée, les titres et les noms seront automatiquement mis en capitales."
+msgstr ""
+"Si cochée, les titres et les noms seront automatiquement mis en capitales."
 
 #: configdialog.cpp:171
 msgid "Auto format titles and names"
@@ -2373,7 +2384,8 @@ msgstr "Mise en forme automatique des titres et des noms"
 
 #: configdialog.cpp:172 configdialog.cpp:231
 msgid "If checked, titles and names will be automatically formatted."
-msgstr "Si cochée, les titres et les noms seront automatiquement mis en forme."
+msgstr ""
+"Si cochée, les titres et les noms seront automatiquement mis en forme."
 
 #: configdialog.cpp:180
 msgid "Articles:"
@@ -2430,7 +2442,8 @@ msgstr "Imprimer les libellés des champs"
 
 #: configdialog.cpp:235 translators/htmlexporter.cpp:76
 msgid "If checked, the field names will be printed as table headers."
-msgstr "Si cochée, le nom des champs sera imprimé comme des titres de tableau."
+msgstr ""
+"Si cochée, le nom des champs sera imprimé comme des titres de tableau."
 
 #: configdialog.cpp:238
 msgid "Grouping Options"
@@ -2462,11 +2475,11 @@ msgstr ""
 "La largeur maximale de l'image lors de l'impression. Les proportions sont "
 "conservées."
 
-#: configdialog.cpp:260
+#: configdialog.cpp:263
 msgid "Maximum image height:"
 msgstr "Hauteur maximale de l'image:"
 
-#: configdialog.cpp:264
+#: configdialog.cpp:267
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
@@ -2474,61 +2487,64 @@ msgstr ""
 "La hauteur maximale de l'image lors de l'impression. Les proportions sont "
 "conservées."
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Templates"
 msgstr "Modèles"
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Template Options"
 msgstr "Options du modèle"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 msgid "Data Sources"
 msgstr "Sources de données"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 msgid "Data Source Options"
 msgstr "Options de la source de données"
 
-#: configdialog.cpp:310 fetchdialog.cpp:136
+#: configdialog.cpp:316 fetchdialog.cpp:136
 msgid "Source"
 msgstr "Source"
 
-#: configdialog.cpp:319
+#: configdialog.cpp:325
 msgid "&New..."
 msgstr "&Nouveau..."
 
-#: configdialog.cpp:322
+#: configdialog.cpp:328
 msgid "&Modify..."
 msgstr "&Modifier..."
 
-#: configdialog.cpp:325
+#: configdialog.cpp:331
 msgid "Remo&ve"
 msgstr "&Supprimer"
 
-#: configdialog.cpp:518 configdialog.cpp:629
+#: configdialog.cpp:524 configdialog.cpp:635
 msgid "Data Source Properties"
 msgstr "Propriétés de la source de données"
 
-#: configdialog.cpp:537 configdialog.cpp:648
+#: configdialog.cpp:543 configdialog.cpp:654
 msgid "&Source name: "
 msgstr "Nom de la &source: "
 
-#: configdialog.cpp:539 configdialog.cpp:650
-msgid "The name identifies the data source and should be unique and informative."
-msgstr "Le nom identifie la source de données et devrait être unique et informatif."
+#: configdialog.cpp:545 configdialog.cpp:656
+msgid ""
+"The name identifies the data source and should be unique and informative."
+msgstr ""
+"Le nom identifie la source de données et devrait être unique et informatif."
 
-#: configdialog.cpp:548 configdialog.cpp:659
+#: configdialog.cpp:554 configdialog.cpp:665
 msgid "Source type: "
 msgstr "Type de source: "
 
-#: configdialog.cpp:550 configdialog.cpp:661
-msgid "Tellico currently supports three source types: Amazon.com, IMDB, and z39.50."
+#: configdialog.cpp:556 configdialog.cpp:667
+msgid ""
+"Tellico currently supports three source types: Amazon.com, IMDB, and z39.50."
 msgstr ""
 "Tellico supporte actuellement trois types de source: Amazon.com, IMDB et "
 "z39.50."
 
-#: configdialog.cpp:558 configdialog.cpp:668
+#: configdialog.cpp:564 configdialog.cpp:674
 msgid "Source Options"
 msgstr "Options de source"
 
@@ -2640,7 +2656,8 @@ msgstr "Formater tous les champs"
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
-msgstr "Si cochée, tous les champs seront mis en forme selon leur type de format."
+msgstr ""
+"Si cochée, tous les champs seront mis en forme selon leur type de format."
 
 #: exportdialog.cpp:56
 msgid "Export selected entries only"
@@ -2717,7 +2734,8 @@ msgid "Edit ISBN list..."
 msgstr "Liste ISBN..."
 
 #: fetchdialog.cpp:111
-msgid "Click to open a text edit box for entering or editing multiple ISBN values."
+msgid ""
+"Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr "Cliquez pour entrer ou éditer les valeurs ISBN à chercher."
 
 #: fetchdialog.cpp:117
@@ -3047,7 +3065,7 @@ msgstr "Assigner le champ"
 msgid "Abstract"
 msgstr "Résumé"
 
-#: translators/bibtexhandler.cpp:235 translators/risimporter.cpp:256
+#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:256
 #: translators/risimporter.cpp:260 translators/tellicoimporter.cpp:212
 msgid "Unknown"
 msgstr "Inconnu"
@@ -3060,15 +3078,15 @@ msgstr "PDF"
 msgid "Scanning audio files..."
 msgstr "Analyse des fichiers audio..."
 
-#: translators/audiofileimporter.cpp:239
+#: translators/audiofileimporter.cpp:240
 msgid "Audio File Options"
 msgstr "Options de fichier audio"
 
-#: translators/audiofileimporter.cpp:241
+#: translators/audiofileimporter.cpp:242
 msgid "Recursive folder search"
 msgstr "Recherche récursive"
 
-#: translators/audiofileimporter.cpp:242
+#: translators/audiofileimporter.cpp:243
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Si cochée, les répertoires sont sont balayés récursivement pour chercher "
@@ -3126,7 +3144,8 @@ msgstr "<qt>Plusieurs entrées correspondant au CD ont été trouvées.</qt>"
 
 #: translators/freedbimporter.cpp:143
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr "<qt>Tellico n'a pas pu compléter la recherche des informations du CD.</qt>"
+msgstr ""
+"<qt>Tellico n'a pas pu compléter la recherche des informations du CD.</qt>"
 
 #: translators/freedbimporter.cpp:193
 msgid "Audio CD Options"
@@ -3246,6 +3265,18 @@ msgstr "Le fichier est vide."
 msgid "The file contains no collection data."
 msgstr "Le fichier ne contient pas de collection."
 
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Nouveau"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Collection"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Barre d'outils Collection"
+
 #: tellico_strings.cpp:18
 #, c-format
 msgid "Tellico is unable to load the file - %1."
@@ -3264,18 +3295,6 @@ msgstr "Tellico ne peut pas mettre à jour le fichier - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Chaîne recherchée '%1' introuvable."
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Nouveau"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Collection"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Barre d'outils Collection"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -3451,4 +3470,3 @@ msgstr ""
 "<p>...que dans la vue détaillée, vous pouvez presser une touche du clavier "
 "pour aller directement à le prochaine entrée débutant par cette "
 "lettre.</p>\n"
-

@@ -177,9 +177,8 @@ existing ones may be modified or deleted, using the <guibutton>Modify...</guibut
 <title>Amazon.com</title>
 
 <para>
-Using the Amazon Web Services, &appname; can search four different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, and Japan.
-Other local Amazon.com servers, such as <ulink url="http://amazon.fr">Amazon.fr</ulink> are expected to available
-soon.
+Using the Amazon Web Services, &appname; can search six different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, Japan,
+France, and Canada.
 </para>
 
 <screenshot>

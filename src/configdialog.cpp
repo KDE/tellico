@@ -256,6 +256,9 @@ void ConfigDialog::setupPrintingPage() {
   QWhatsThis::add(l1, whats);
   QWhatsThis::add(m_imageWidthBox, whats);
   connect(m_imageWidthBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
+  // QSpinBox doesn't emit valueChanged if you edit the value with
+  // the lineEdit until you change the keyboard focus
+  connect(m_imageWidthBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   QLabel* l2 = new QLabel(i18n("Maximum image height:"), grid);
   m_imageHeightBox = new KIntSpinBox(0, 999, 1, 50, 10, grid);
@@ -265,6 +268,9 @@ void ConfigDialog::setupPrintingPage() {
   QWhatsThis::add(l2, whats);
   QWhatsThis::add(m_imageHeightBox, whats);
   connect(m_imageHeightBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
+  // QSpinBox doesn't emit valueChanged if you edit the value with
+  // the lineEdit until you change the keyboard focus
+  connect(m_imageHeightBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   // stretch to fill lower area
   l->addStretch(1);

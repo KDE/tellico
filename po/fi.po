@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
-"POT-Creation-Date: 2005-02-05 12:10-0800\n"
+"POT-Creation-Date: 2005-02-10 20:22-0800\n"
 "PO-Revision-Date: 2004-12-07 19:26+0200\n"
 "Last-Translator: Teuvo Eloranta <teuvo@piketa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -2463,75 +2463,75 @@ msgid ""
 "preserved."
 msgstr "Tulosteessa olevan kuvan enimmäisleveys. Kuvasuhde on vakio."
 
-#: configdialog.cpp:260
+#: configdialog.cpp:263
 msgid "Maximum image height:"
 msgstr "Kuvan enimmäiskorkeus:"
 
-#: configdialog.cpp:264
+#: configdialog.cpp:267
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
 msgstr "Tulosteessa olevan kuvan enimmäiskorkeus. Kuvasuhde on vakio."
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Templates"
 msgstr "Mallipohjat"
 
-#: configdialog.cpp:275
+#: configdialog.cpp:281
 msgid "Template Options"
 msgstr "Mallipohjien asetukset"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 msgid "Data Sources"
 msgstr "Tietolähteet"
 
-#: configdialog.cpp:306
+#: configdialog.cpp:312
 msgid "Data Source Options"
 msgstr "Tietolähteiden asetukset"
 
-#: configdialog.cpp:310 fetchdialog.cpp:136
+#: configdialog.cpp:316 fetchdialog.cpp:136
 msgid "Source"
 msgstr "Lähde"
 
-#: configdialog.cpp:319
+#: configdialog.cpp:325
 msgid "&New..."
 msgstr "&Uusi..."
 
-#: configdialog.cpp:322
+#: configdialog.cpp:328
 msgid "&Modify..."
 msgstr "&Muokkaa..."
 
-#: configdialog.cpp:325
+#: configdialog.cpp:331
 msgid "Remo&ve"
 msgstr "Poi&sta"
 
-#: configdialog.cpp:518 configdialog.cpp:629
+#: configdialog.cpp:524 configdialog.cpp:635
 msgid "Data Source Properties"
 msgstr "Tietolähteen ominaisuudet"
 
-#: configdialog.cpp:537 configdialog.cpp:648
+#: configdialog.cpp:543 configdialog.cpp:654
 msgid "&Source name: "
 msgstr "Tietolähteen &nimi: "
 
-#: configdialog.cpp:539 configdialog.cpp:650
+#: configdialog.cpp:545 configdialog.cpp:656
 msgid ""
 "The name identifies the data source and should be unique and informative."
 msgstr ""
 "Nimi määrittää tietolähteen nimen. Sen tulisi olla yksilöllinen ja "
 "informatiivinen."
 
-#: configdialog.cpp:548 configdialog.cpp:659
+#: configdialog.cpp:554 configdialog.cpp:665
 msgid "Source type: "
 msgstr "Tietolähteen tyyppi: "
 
-#: configdialog.cpp:550 configdialog.cpp:661
+#: configdialog.cpp:556 configdialog.cpp:667
 msgid ""
 "Tellico currently supports three source types: Amazon.com, IMDB, and z39.50."
 msgstr ""
 "Tällä hetkellä Tellico tukee kolmea eri lähdetyyppiä: Amazon.com, IMDB "
 "ja z39.50."
 
-#: configdialog.cpp:558 configdialog.cpp:668
+#: configdialog.cpp:564 configdialog.cpp:674
 msgid "Source Options"
 msgstr "Tietolähteen asetukset"
 
@@ -3054,7 +3054,7 @@ msgstr "Määritä kenttä"
 msgid "Abstract"
 msgstr "Tiivistelmä"
 
-#: translators/bibtexhandler.cpp:235 translators/risimporter.cpp:256
+#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:256
 #: translators/risimporter.cpp:260 translators/tellicoimporter.cpp:212
 msgid "Unknown"
 msgstr "Tuntematon"
@@ -3067,15 +3067,15 @@ msgstr "PDF"
 msgid "Scanning audio files..."
 msgstr "Selataan äänitiedostoja..."
 
-#: translators/audiofileimporter.cpp:239
+#: translators/audiofileimporter.cpp:240
 msgid "Audio File Options"
 msgstr "Äänitiedoston asetukset"
 
-#: translators/audiofileimporter.cpp:241
+#: translators/audiofileimporter.cpp:242
 msgid "Recursive folder search"
 msgstr "Rekursiivinen hakemistoetsintä"
 
-#: translators/audiofileimporter.cpp:242
+#: translators/audiofileimporter.cpp:243
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Jos valittu, äänitiedostoja etsitään hakemistorakenteesta "
@@ -3251,6 +3251,18 @@ msgstr "Tiedosto on tyhjä"
 msgid "The file contains no collection data."
 msgstr "Tiedosto ei sisällä kokoelma-tietoa."
 
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Uusi"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Kokoelma"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Kokoelmatyökalupalkki"
+
 #: tellico_strings.cpp:18
 #, c-format
 msgid "Tellico is unable to load the file - %1."
@@ -3269,18 +3281,6 @@ msgstr "Tellico ei pysty siirtämään tiedostoa - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Hakumerkkijonoa \"%1\" ei löytynyt."
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Uusi"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Kokoelma"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Kokoelmatyökalupalkki"
 
 #: _translatorinfo.cpp:1
 msgid ""

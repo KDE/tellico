@@ -117,8 +117,14 @@ bool Collection::mergeField(Field* newField_) {
 
   // the original field type is kept
   if(currField->type() != newField_->type()) {
-    kdDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
-    return false;
+    // make special exception for music collections and the track field, ok
+    // to convert Table to Table2
+    if(type() == Album && currField->type() == Field::Table && newField_->type() == Field::Table2) {
+      currField->setType(Field::Table2);
+    } else {
+      kdDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
+      return false;
+    }
   }
 
   // if field is a Choice, then make sure all values are there
