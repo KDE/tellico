@@ -30,9 +30,6 @@
 
 using Bookcase::Export::BookcaseXMLExporter;
 
-static const char* BOOKCASE_NAMESPACE = "http://periapsis.org/bookcase/";
-static const char* BOOKCASE_DTD = "bookcase.dtd";
-
 /*
  * VERSION 2 added namespaces, changed to multiple elements,
  * and changed the "keywords" field to "keyword"
@@ -46,6 +43,10 @@ static const char* BOOKCASE_DTD = "bookcase.dtd";
  * inside the field element, and added the image element.
  */
 const unsigned BookcaseXMLExporter::syntaxVersion = 5;
+
+static const char* BOOKCASE_NAMESPACE = "http://periapsis.org/bookcase/";
+static const char* BOOKCASE_PUBLIC = "-//Robby Stephenson/DTD Bookcase V%1.0//EN";
+static const char* BOOKCASE_DTD = "http://periapsis.org/bookcase/dtd/v%1/bookcase.dtd";
 
 QString BookcaseXMLExporter::formatString() const {
   return i18n("XML");
@@ -94,8 +95,8 @@ QString BookcaseXMLExporter::text(bool format_, bool encodeUTF8_) {
 QDomDocument BookcaseXMLExporter::exportXML(bool format_, bool encodeUTF8_) const {
   QDomImplementation impl;
   QDomDocumentType doctype = impl.createDocumentType(QString::fromLatin1("bookcase"),
-                                                     QString::null,
-                                                     QString::fromLatin1(BOOKCASE_DTD));
+                                                     QString::fromLatin1(BOOKCASE_PUBLIC).arg(syntaxVersion),
+                                                     QString::fromLatin1(BOOKCASE_DTD).arg(syntaxVersion));
   //default namespace
   QString ns = QString::fromLatin1(BOOKCASE_NAMESPACE);
 

@@ -90,8 +90,8 @@ void BibtexHandler::loadTranslationMaps() {
     QString s = keyList.item(i).toElement().attribute(QString::fromLatin1("char"));
     for(int j = strList.count()-1; j > -1; --j) {
       s_utf8LatexMap[s].append(strList.item(j).toElement().text());
-//      kdDebug() << "BibtexHandler::loadTranslationMaps - "
-//       << s << " = " << strList.item(j).toElement().text() << endl;
+      kdDebug() << "BibtexHandler::loadTranslationMaps - "
+       << s << " = " << strList.item(j).toElement().text() << endl;
     }
   }
 }

@@ -43,7 +43,7 @@ Bookcase::Data::Collection* BibtexImporter::collection() {
   } else {
 //    kdDebug() << "BibtexImporter::collection() - found " << list.count() << " entries" << endl;
   }
-  
+
   m_coll = new Data::BibtexCollection(true);
   m_coll->blockSignals(true);
 
@@ -160,7 +160,7 @@ ASTList BibtexImporter::parseText(const QString& text) const {
     }
     if(brace == 0) {
       entry = text.mid(startpos, pos-startpos+1);
-//      kdDebug() << entry.stripWhiteSpace() << endl;
+      //kdDebug() << entry.stripWhiteSpace() << endl;
       // TODO: figure out proper decoding of QString
       AST* node = bt_parse_entry_s(const_cast<char*>(entry.local8Bit().data()),
                                    const_cast<char*>(url().fileName().local8Bit().data()),

@@ -21,6 +21,7 @@ class KComboBox;
 class QCheckBox;
 
 #include <kdialogbase.h>
+#include <kcombobox.h>
 
 #include <qstringlist.h>
 #include <qintdict.h>
@@ -32,7 +33,7 @@ namespace Bookcase {
  * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: configdialog.h 402 2004-01-26 15:03:38Z robby $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT

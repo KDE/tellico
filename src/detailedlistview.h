@@ -38,7 +38,7 @@ namespace Bookcase {
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: detailedlistview.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: detailedlistview.h 407 2004-01-29 03:11:43Z root $
  */
 class DetailedListView : public KListView {
 Q_OBJECT
@@ -119,6 +119,10 @@ public:
   void removeField(Data::Field* field);
   void reorderFields(const Data::FieldList& list);
   void saveConfig(Bookcase::Data::Collection* coll);
+  /**
+   * Select all visible items.
+   */
+  void selectAllVisible();
 
 public slots:
   /**

@@ -114,9 +114,11 @@ Bookcase::Data::FieldList ComicBookCollection::defaultFields() {
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  QStringList cond;
-  cond << i18n("Mint") << i18n("Near Mint") << i18n("Very Fine") << i18n("Fine")
-       << i18n("Very Good") << i18n("Good") << i18n("Fair") << i18n("Poor");
+  QStringList cond = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
+                                        i18n("_:Comic book grade levels\n"
+                                             "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor",
+                                             "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"),
+                                        false);
   field = new Field(QString::fromLatin1("condition"), i18n("Condition"), cond);
   field->setCategory(i18n(comic_classification));
   list.append(field);

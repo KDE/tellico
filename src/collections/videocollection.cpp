@@ -53,11 +53,14 @@ Bookcase::Data::FieldList VideoCollection::defaultFields() {
 
   field = new Field(QString::fromLatin1("year"), i18n("Production Year"), Field::Number);
   field->setCategory(i18n(video_general));
-  field->setFlags(Field::AllowMultiple | Field::AllowGrouped);
+  field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   QStringList cert = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                        i18n("G (USA),PG (USA),PG-13 (USA),R (USA)"), false);
+                                        i18n("_:Movie ratings\n"
+                                             "G (USA),PG (USA),PG-13 (USA),R (USA)",
+                                             "G (USA),PG (USA),PG-13 (USA),R (USA)"),
+                                        false);
   field = new Field(QString::fromLatin1("certification"), i18n("Certification"), cert);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);

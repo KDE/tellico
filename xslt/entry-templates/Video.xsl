@@ -6,15 +6,15 @@
 
 <!--
    ===================================================================
-   Bookcase XSLT file - default template forviewing entry data
+   Bookcase XSLT file - Entry template for videos
 
-   $Id: Default.xsl 409 2004-01-31 05:01:58Z robby $
+   $Id: Video.xsl 421 2004-02-03 05:11:17Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
    Known Issues:
-   o Dependent titles have no value in the entry element.
-   o Bool and URL fields are assumed to never have multiple values.
+   o If there is more an one image, there's a lot of white space under
+     the top tables.
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
    application, which can be found at http://www.periapsis.org/bookcase/
@@ -55,9 +55,8 @@
  <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
  <xsl:if test="@syntaxVersion != '5'">
   <xsl:message>
-   <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
-   <xsl:value-of select="'5'"/>
-   <xsl:text>, &#xa;but the input data file is version </xsl:text>
+   <xsl:text>This stylesheet was designed for Bookcase DTD version 5, &#xa;
+             but the input data file is version </xsl:text>
    <xsl:value-of select="@syntaxVersion"/>
    <xsl:text>. There might be some &#xa;problems with the output.</xsl:text>
   </xsl:message>
@@ -76,24 +75,46 @@
 -->
         font-family: <xsl:value-of select="$font"/>;
         color: #000;
-        background-color: #fff;;
+        background-color: #fff;
+        font-size: 1em;
    }
-   h1.title {
+   #banner {
+        padding-bottom: 5px;
+        margin-bottom: 8px;
+        border-bottom: 2px ridge <xsl:value-of select="$color2"/>;
+   }
+   img#logo {
+        padding-top: 2px; /* match h1 */
+   }
+   h1 {
         color: <xsl:value-of select="$color2"/>;
         background-color: <xsl:value-of select="$color1"/>;
-        font-size: 1.6em;
+        font-size: 1.8em;
+        text-align: left;
         padding: 0px;
-        padding-top: 2px;
         padding-bottom: 2px;
         margin: 0px;
-        text-align: center;
         font-weight: bold;
    }
+   span.year {
+        font-size: 0.8em;
+   }
+   span.country {
+        font-size: 0.8em;
+        font-style: italics;
+   }
+   h2 {
+        font-size: 1.2em;
+        margin: 0px;
+        padding: 0px;
+   }
    img {
+        padding-top: 1px; /* match cellspacing of table */
         padding-right: 10px;
+        padding-bottom: 9px;
    }
    table.category {
-        margin-bottom: 10px;
+       margin-bottom: 10px;
    }
    tr.category {
         font-weight: bold;
@@ -117,28 +138,77 @@
  </html>
 </xsl:template>
 
-<xsl:template match="bc:collection">
+<!-- type 3 is video collections -->
+<!-- warn user that this template is meant for videos only. -->
+<xsl:template match="bc:collection[@type!=3]">
+ <h1>The <em>Video</em> template is meant for video collections only.</h1>
+</xsl:template>
+
+<xsl:template match="bc:collection[@type=3]">
  <xsl:apply-templates select="bc:entry[1]"/>
 </xsl:template>
 
 <xsl:template match="bc:entry">
  <xsl:variable name="entry" select="."/>
+ <xsl:variable name="titleCat" select="key('fieldsByName','title')/@category"/>
+ <xsl:variable name="castCat" select="key('fieldsByName','cast')/@category"/>
 
- <!-- first, show the title -->
- <xsl:if test="bc:title">
-  <h1 class="title">
+ <div id="banner">
+  <!-- do format logo -->
+  <xsl:choose>
+   <xsl:when test="$datadir and bc:medium = 'DVD'">
+    <img width="74" height="30" align="right" id="logo">
+     <xsl:attribute name="src">
+      <xsl:value-of select="concat($datadir,'dvd-logo.png')"/>
+     </xsl:attribute>
+    </img>
+   </xsl:when>
+   <xsl:when test="$datadir and bc:medium = 'VHS'">
+    <img width="108" height="58" align="right" id="logo">
+     <xsl:attribute name="src">
+      <xsl:value-of select="concat($datadir,'vhs-logo.png')"/>
+     </xsl:attribute>
+    </img>
+   </xsl:when>
+  </xsl:choose>
+  
+  <!-- title block -->
+  <h1>
    <xsl:value-of select="bc:title"/>
+   <xsl:text> - </xsl:text>
+   <!-- Bookcase 0.8 had multiple years in the default video collection -->
+   <xsl:if test=".//bc:year">
+    <span class="year">
+     <xsl:value-of select="concat(.//bc:year, ' ')"/>
+    </span>
+   </xsl:if>
+   <xsl:if test="bc:nationality">
+    <span class="country">
+     <xsl:text>(</xsl:text>
+     <xsl:value-of select="bc:nationality"/>
+     <xsl:text>)</xsl:text>
+    </span>
+   </xsl:if>
   </h1>
- </xsl:if>
+  
+  <h2>
+   <xsl:if test="bc:widescreen">
+    <xsl:value-of select="concat(key('fieldsByName', 'widescreen')/@title, ' ')"/>
+   </xsl:if>
+   <xsl:if test="bc:directors-cut">
+    <xsl:value-of select="key('fieldsByName', 'directors-cut')/@title"/>
+   </xsl:if>
+  </h2>
+ </div>
  
- <!-- now, show all the images in the entry, type 10 -->
+ <!-- now, show all the images in the entry, field type 10 -->
  <xsl:variable name="images" select="../bc:fields/bc:field[@type=10]"/>
  <xsl:if test="count($images) &gt; 0">
-  <table align="right">
-   <tr>
-    <td>
-     <!-- now, show all the images in the entry, type 10 -->
-     <xsl:for-each select="$images">
+  <table align="left" cellpadding="0" cellspacing="0">
+   <!-- now, show all the images in the entry, type 10 -->
+   <xsl:for-each select="$images">
+    <tr>
+     <td>
       
       <!-- images will never be multiple, so no need to check for that -->
       <!-- find the value of the image field in the entry -->
@@ -157,78 +227,56 @@
         </xsl:call-template>
        </img>
       </xsl:if>
-      <xsl:if test="position() mod 2 = 0">
-       <br/>
-      </xsl:if>
-     </xsl:for-each>
-    </td>
-   </tr>
-  </table>
- </xsl:if>
- 
- <!-- show the general group, or more accurately, the title's group -->
- <xsl:variable name="cat1" select="key('fieldsByName','title')/@category"/>
- <table cellspacing="1" cellpadding="0" width="100%" class="category">
-  <tr class="category">
-   <td colspan="2">
-    <xsl:value-of select="$cat1"/>
-   </td>
-  </tr>
-  <xsl:for-each select="key('fieldsByCat', $cat1)">
-   <xsl:if test="@name!='title'">
-    <tr>
-     <th>
-      <xsl:value-of select="@title"/>
-     </th>
-     <td width="75%">
-      <xsl:call-template name="output-field">
-       <xsl:with-param name="entry" select="$entry"/>
-       <xsl:with-param name="field" select="@name"/>
-      </xsl:call-template>
      </td>
     </tr>
-   </xsl:if>
-  </xsl:for-each>
- </table>
- <br clear="all"/>
+   </xsl:for-each>
+  </table>
+ </xsl:if>
 
- <!-- write categories other than general and images -->
- <xsl:for-each select="$categories[. != $cat1 and
-                       key('fieldsByCat',.)[1]/@type!=10]">
-  <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
-   <tr class="category">
-    <td colspan="2">
-     <xsl:value-of select="."/>
-    </td>
-   </tr>
-   <xsl:for-each select="key('fieldsByCat', .)">
-    <tr>
-     <xsl:choose>
-      <!-- paragraphs -->
-      <xsl:when test="@type=2">
-       <td>
-        <p>
-         <xsl:value-of select="$entry/*[local-name(.)=current()/@name]"/>
-        </p>
+ <!-- the general group and the cast are each in a table cell -->
+ <table cellspacing="1" cellpadding="0" width="100%" class="category">
+  <tr>
+   <td valign="top">
+    <!-- show the general group, or more accurately, the title's group -->
+    <table cellspacing="1" cellpadding="0" width="100%">
+     <tr class="category">
+      <td colspan="2">
+       <xsl:value-of select="$titleCat"/>
+      </td>
+     </tr>
+     <xsl:for-each select="key('fieldsByCat', $titleCat)">
+      <xsl:if test="@name != 'title' and
+                    @name != 'year' and
+                    @name != 'nationality'">
+       <tr>
+        <th>
+         <xsl:value-of select="@title"/>
+        </th>
+        <td width="75%">
+         <xsl:call-template name="output-field">
+          <xsl:with-param name="entry" select="$entry"/>
+          <xsl:with-param name="field" select="@name"/>
+         </xsl:call-template>
+        </td>
+       </tr>
+      </xsl:if>
+     </xsl:for-each>
+    </table>
+    
+   </td>
+   <td valign="top">
+    <!-- now for the cast -->
+    <xsl:if test="bc:casts">
+     <table cellspacing="1" cellpadding="0" width="100%">
+      <tr class="category">
+       <td colspan="2">
+        <xsl:value-of select="key('fieldsByName', 'cast')/@title"/>
        </td>
-      </xsl:when>
-      <!-- single-column table -->
-      <xsl:when test="@type=8">
-       <td>
-        <ul>
-         <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
-          <li>
-           <xsl:value-of select="."/>
-          </li>
-         </xsl:for-each>
-        </ul>
-       </td>
-      </xsl:when>
-      <!-- double-column table -->
-      <xsl:when test="@type=9">
+      </tr>
+      <tr>
        <td>
         <table width="100%" cellspacing="0" cellpadding="0">
-         <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
+         <xsl:for-each select="$entry/bc:casts/bc:cast">
           <tr>
            <td width="50%">
             <xsl:value-of select="bc:column[1]"/>
@@ -242,27 +290,86 @@
          </xsl:for-each>
         </table>
        </td>
-      </xsl:when>
-      <!-- everything else -->
-      <xsl:otherwise>
-       <th>
-        <xsl:value-of select="@title"/>
-       </th>
-       <td with="75%">
-        <xsl:call-template name="output-field">
-         <xsl:with-param name="entry" select="$entry"/>
-         <xsl:with-param name="field" select="@name"/>
-        </xsl:call-template>
-       </td>
-      </xsl:otherwise>
-     </xsl:choose>
-    </tr>
-   </xsl:for-each>
-   <tr>
-    <td>
-     <br/>
+      </tr>
+     </table>
+    </xsl:if>
+   </td>
+  </tr>
+ </table>
+
+ <br clear="all"/>
+
+ <!-- now for every thing else -->
+ <!-- write categories other than general and images -->
+ <xsl:for-each select="$categories[. != $titleCat and
+                                   . != $castCat and
+                                   key('fieldsByCat',.)[1]/@type != 10]">
+  <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
+   <tr class="category">
+    <td colspan="2">
+     <xsl:value-of select="."/>
     </td>
    </tr>
+   <xsl:for-each select="key('fieldsByCat', .)[@name != 'directors-cut' and
+                                               @name != 'widescreen']">
+    <xsl:if test="$entry//*[local-name(.)=current()/@name]">
+     <tr>
+      <xsl:choose>
+       <!-- paragraphs -->
+       <xsl:when test="@type=2">
+        <td>
+         <p>
+          <xsl:value-of select="$entry/*[local-name(.)=current()/@name]"/>
+         </p>
+        </td>
+       </xsl:when>
+       <!-- single-column table -->
+       <xsl:when test="@type=8">
+        <td>
+         <ul>
+          <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
+           <li>
+            <xsl:value-of select="."/>
+           </li>
+          </xsl:for-each>
+         </ul>
+        </td>
+       </xsl:when>
+       <!-- double-column table -->
+       <xsl:when test="@type=9">
+        <td>
+         <table width="100%" cellspacing="0" cellpadding="0">
+          <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
+           <tr>
+            <td width="50%">
+             <xsl:value-of select="bc:column[1]"/>
+            </td>
+            <td width="50%">
+             <em>
+              <xsl:value-of select="bc:column[2]"/>
+             </em>
+            </td>
+           </tr>
+          </xsl:for-each>
+         </table>
+        </td>
+       </xsl:when>
+       <!-- everything else -->
+       <xsl:otherwise>
+        <th>
+         <xsl:value-of select="@title"/>
+        </th>
+        <td with="75%">
+         <xsl:call-template name="output-field">
+          <xsl:with-param name="entry" select="$entry"/>
+          <xsl:with-param name="field" select="@name"/>
+         </xsl:call-template>
+        </td>
+       </xsl:otherwise>
+      </xsl:choose>
+     </tr>
+    </xsl:if>
+   </xsl:for-each>
   </table>
   <xsl:if test="position() mod 2 = 0">
    <br clear="left"/>

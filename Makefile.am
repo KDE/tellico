@@ -55,3 +55,45 @@ dist-hook:
 #	cd $(srcdir) && rm -f $(distdir).tar.gz
 # remove any executable
 	rm -rf $(distdir)/src/bookcase
+
+PUBLIC_ID=-//Robby Stephenson/DTD Bookcase V5.0//EN
+SYSTEM_ID=http://www.periapsis.org/bookcase/dtd/v5/bookcase.dtd
+
+install-data-local:
+	@if test x"@XML_CATALOG_FILE@" != x; then \
+          echo @XMLCATALOG@ --noout --add "delegatePublic" \
+               "$(PUBLIC_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --add "delegatePublic" \
+               "$(PUBLIC_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          echo @XMLCATALOG@ --noout --add "delegateSystem" \
+               "$(SYSTEM_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --add "delegateSystem" \
+               "$(SYSTEM_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          echo @XMLCATALOG@ --noout --add "delegateURI" \
+               "$(SYSTEM_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --add "delegateURI" \
+               "$(SYSTEM_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+	fi
+
+uninstall-local:
+	@if test x"@XML_CATALOG_FILE@" != x; then \
+          echo @XMLCATALOG@ --noout --del \
+               "$(PUBLIC_ID)" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --del \
+               "$(PUBLIC_ID)" "@XML_CATALOG_FILE@" ; \
+          echo @XMLCATALOG@ --noout --del \
+               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --del \
+               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
+          echo @XMLCATALOG@ --noout --del \
+               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --del \
+               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
+	fi
+

@@ -72,32 +72,27 @@ Bookcase::Data::FieldList CoinCollection::defaultFields() {
   field->setCategory(i18n(coin_general));
   list.append(field);
 
-  QStringList grade;
-  grade << i18n("Proof-65")
-        << i18n("Proof-60")
-        << i18n("Mint State-65")
-        << i18n("Mint State-60")
-        << i18n("Almost Uncirculated-55")
-        << i18n("Almost Uncirculated-50")
-        << i18n("Extremely Fine-40")
-        << i18n("Very Fine-30")
-        << i18n("Very Fine-20")
-        << i18n("Fine-12")
-        << i18n("Very Good-8")
-        << i18n("Good")
-        << i18n("Fair");
+  QStringList grade = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
+                                         i18n("_:Coin grade levels\n"
+                                              "Proof-65,Proof-60,Mint State-65,Mint State-60,"
+                                              "Almost Uncirculated-55,Almost Uncirculated-50,"
+                                              "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
+                                              "Very Good-8,Good-4,Fair",
+                                              "Proof-65,Proof-60,Mint State-65,Mint State-60,"
+                                              "Almost Uncirculated-55,Almost Uncirculated-50,"
+                                              "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
+                                              "Very Good-8,Good-4,Fair"),
+                                         false);
   field = new Field(QString::fromLatin1("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  QStringList service;
-  service << i18n("PCGS")
-          << i18n("NGC")
-          << i18n("ANACS")
-          << i18n("ICG")
-          << i18n("ASA")
-          << i18n("PCI");
+  QStringList service = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
+                                           i18n("_:Coin grading services\n"
+                                                "PCGS,NGC,ANACS,ICG,ASA,PCI",
+                                                "PCGS,NGC,ANACS,ICG,ASA,PCI"),
+                                           false);
   field = new Field(QString::fromLatin1("service"), i18n("Grading Service"), service);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);

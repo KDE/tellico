@@ -36,22 +36,52 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
 #else
   input_.replace(QRegExp(QString::fromLatin1("x")), QString::fromLatin1("X"));
 #endif
-  // an ISBN must be less than 13 characters
-  // only allow digits, hyphens, and "X" or "x"
+
+  // an ISBN must no more than 13 characters
+  // only allow digits, hyphens, and "X"
   // only allow maximum of three hyphens
-  // only allow up to a single "X" or "x"
-  // the "X" or "x" can only be the last character
+  // only allow up to a single "X"
   // only allow up to 10 digits
-  QRegExp validChars(QString::fromLatin1("[\\d-X]{0,13}"));
+  // the "X" can only be the last character
+  QRegExp validChars(QString::fromLatin1("[\\d-X]{0,12}"));
   if(!validChars.exactMatch(input_)) {
     QRegExp rx(QString::fromLatin1("[^\\d-X]"));
     input_.replace(rx, QString::null);
-    input_.truncate(13);
+    // special case for EAN values that start with 978 or 979. That's the case
+    // for things like barcode readers that essentially 'type' the string at
+    // once. The simulated typing has already caused the input to be normalized,
+    // so strip that off, as well as the generated checksum. Then continue as normal.
+    //  If someone were to input a regular 978- or 979- ISBN _including_ the
+    // checksum, it will be regarded as barcode input and the input will be stripped accordingly.
+    // I consider the likelihood that someone wants to input an EAN to be higher than someone
+    // using a Nigerian ISBN and not noticing that the checksum gets added automatically.
+    if(input_.length() > 12
+       && (input_.startsWith(QString::fromLatin1("978-")))
+           || input_.startsWith(QString::fromLatin1("979-"))) {
+      // Strip the first 4 characters (the invalid publisher)
+      input_ = input_.right(input_.length() - 4);
+      // Remove the checksum
+      input_ = input_.left(6) + input_.right(1);
+    } else {
+      input_.truncate(13);
+    }
     while(pos_ > static_cast<int>(input_.length())) {
       --pos_;
     }
   }
   int len = input_.length();
+
+  // special case for EAN values that start with 978 or 979
+  // only convert if 13 digits in string, that's the case for things
+  // like barcode readers that essentially paste the whole string at once
+  if(input_.contains(QRegExp(QString::fromLatin1("[\\dX]"))) == 13
+     && (input_.startsWith(QString::fromLatin1("978")))
+         || input_.startsWith(QString::fromLatin1("979"))) {
+    input_ = input_.right(len-3);
+    len -= 3;
+    pos_ = QMAX(0, pos_-3);
+  }
+
   if(input_.contains(QString::fromLatin1("-")) > 3
       || input_.contains(QString::fromLatin1("X"), false) > 1
       || (input_.find(QString::fromLatin1("X"), 0, false) != -1
@@ -70,8 +100,8 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
   // fix the case where the user attempts to delete the checksum; the
   // solution is to delete the last digit as well
   if(pos_ == len
-      && input_.contains(QRegExp(QString::fromLatin1("\\d"))) == 9
-      && input_[pos_-1] == '-') {
+     && input_.contains(QRegExp(QString::fromLatin1("\\d"))) == 9
+     && input_[pos_-1] == '-') {
     input_.truncate(input_.length()-2);
     pos_ -= 2;
     len -= 2;
@@ -83,7 +113,7 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
     pos_ = input_.length();
   }
   
-  QRegExp re(QString::fromLatin1("(\\d-?){9}[\\dX]"));
+  QRegExp re(QString::fromLatin1("[\\d-]{0,11}-[\\dX]"));
   if(re.exactMatch(input_)) {
     return QValidator::Acceptable;
   } else {

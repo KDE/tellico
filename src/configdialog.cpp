@@ -20,7 +20,6 @@
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kconfig.h>
-#include <kcombobox.h>
 #include <kstandarddirs.h>
 #include <kdialogbase.h>
 

@@ -1,3 +1,26 @@
+2004-02-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.8.1.
+
+2004-02-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Album entry template.
+	* Added Finnish translation, thanks to Teuvo Eloranta.
+	* Added --with-xml-catalog configure option.
+
+2004-01-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed compile bug with src/Makefile.am and libxslt.
+	* Fixed bug with $datadir param in Default entry template.
+	* Added Video entry template.
+	* Added EAN to ISBN conversion for 978 and 979 codes. Patch from Martijn Pieters.
+
+2004-01-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with Select All not working.
+	* Fixed some compilation issues.
+	* Updated French translation from Rui Nibau.
+
 2004-01-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed DTD for new collections.

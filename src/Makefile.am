@@ -4,7 +4,7 @@ bin_PROGRAMS = bookcase
 ## INCLUDES were found outside kdevelop specific part
 
 bookcase_SOURCES = entryview.cpp collection.cpp mainwindow.cpp controller.cpp kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp entryeditdialog.cpp
-bookcase_LDADD = ./collections/libcollections.a ./translators/libtranslators.a ./translators/btparse/libbtparse.a ./translators/pilotdb/libpilotdb.a ./translators/pilotdb/libflatfile/liblibflatfile.a ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET) $(XSLT_LIBS)
+bookcase_LDADD = ./collections/libcollections.a ./translators/libtranslators.a ./translators/btparse/libbtparse.a ./translators/pilotdb/libpilotdb.a ./translators/pilotdb/libflatfile/liblibflatfile.a ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET) $(LIBXSLT_LIBS)
 
 SUBDIRS = collections translators 
 

@@ -13,11 +13,7 @@
 
 #include "xslthandler.h"
 
-//#include <kio/netaccess.h>
-//#include <kio/job.h>
 #include <kdebug.h>
-
-//#include <qfile.h>
 
 //extern int xmlLoadExtDtdDefaultValue;
 

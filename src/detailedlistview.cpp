@@ -772,3 +772,24 @@ Bookcase::Data::EntryList DetailedListView::visibleEntries() {
   }
   return list;
 }
+
+void DetailedListView::selectAllVisible() {
+  blockSignals(true);
+#if QT_VERSION >= 0x030200
+  QListViewItemIterator it(this, QListViewItemIterator::Visible);
+#else
+  QListViewItemIterator it(this);
+#endif
+  for( ; it.current(); ++it) {
+#if QT_VERSION < 0x030200
+    if(it.current()->isVisible()) {
+#endif
+      setSelected(it.current(), true);
+#if QT_VERSION < 0x030200
+    }
+#endif
+  }
+  blockSignals(false);
+  slotSelectionChanged();
+}
+

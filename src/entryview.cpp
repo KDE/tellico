@@ -63,10 +63,8 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
   }
 
 #if 0
-  if(entry_ != m_entry) {
-    clear();
-    setXSLTFile(m_xsltFile);
-  }
+  clear();
+  setXSLTFile(m_xsltFile);
 #endif
   if(!m_xsltHandler->isValid()) {
     setXSLTFile(m_xsltFile);
@@ -85,7 +83,8 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
 
   if(!m_tempDirSet) {
     // look for a file that gets installed to know the installation directory
-    QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("bookcase.png"));
+    QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/bookcase.png"));
+    appdir += QString::fromLatin1("pics/");
     m_xsltHandler->addStringParam("datadir", QFile::encodeName(appdir));
     m_xsltHandler->addStringParam("tmpdir", QFile::encodeName(ImageFactory::tempDir()));
     m_tempDirSet = true;
@@ -162,7 +161,7 @@ void EntryView::refresh() {
 }
 
 void EntryView::slotOpenURL(const KURL& url_) {
-  kdDebug() << "EntryView::slotOpenURL() - " << url_.path() << endl;
+//  kdDebug() << "EntryView::slotOpenURL() - " << url_.path() << endl;
   if(url_.isValid()) {
     m_run = new KRun(url_);
   }

@@ -72,13 +72,11 @@ Bookcase::Data::FieldList StampCollection::defaultFields() {
   field->setCategory(i18n(stamp_general));
   list.append(field);
 
-  QStringList grade;
-  grade << i18n("Superb")
-        << i18n("Extremely Fine")
-        << i18n("Very Fine")
-        << i18n("Fine")
-        << i18n("Average")
-        << i18n("Poor");
+  QStringList grade = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
+                                         i18n("_:Stamp grade levels\n"
+                                              "Superb,Extremely Fine,Very Fine,Fine,Average,Poor",
+                                              "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"),
+                                         false);
   field = new Field(QString::fromLatin1("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowGrouped);

@@ -909,7 +909,7 @@ bool MainWindow::openURL(const KURL& url_) {
   kapp->restoreOverrideCursor();
 
   if(success) {
-    slotUpdateFilter(QString::null);
+    m_quickFilter->clear();
     slotEnableOpenedActions();
     slotEnableModifiedActions(false);
     m_newDocument = false;
@@ -1075,11 +1075,7 @@ void MainWindow::activateEditWidgetSlot(const char* slot_) {
 }
 
 void MainWindow::slotEditSelectAll() {
-// only select the visible entries
-//  m_detailedView->selectAll(true);
-  m_controller->slotUpdateSelection(m_detailedView, m_detailedView->visibleEntries());
-  // just don't want to show anything in the entry view
-//  m_entryView->clear();
+  m_detailedView->selectAllVisible();
 }
 
 void MainWindow::slotEditDeselect() {
@@ -1570,7 +1566,7 @@ void MainWindow::slotHideCollectionFieldsDialog() {
 
 void MainWindow::slotFileImport(int format_) {
   slotStatusMsg(i18n("Importing data..."));
-  slotUpdateFilter(QString::null);
+  m_quickFilter->clear();
 
   ImportDialog::ImportFormat format = static_cast<ImportDialog::ImportFormat>(format_);
   KURL url;

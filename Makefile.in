@@ -176,6 +176,8 @@ USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
 WOVERLOADED_VIRTUAL = @WOVERLOADED_VIRTUAL@
 XGETTEXT = @XGETTEXT@
+XMLCATALOG = @XMLCATALOG@
+XML_CATALOG_FILE = @XML_CATALOG_FILE@
 X_EXTRA_LIBS = @X_EXTRA_LIBS@
 X_INCLUDES = @X_INCLUDES@
 X_LDFLAGS = @X_LDFLAGS@
@@ -276,6 +278,9 @@ local_DATA = bookcase.dtd bookcase.tips
 DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz
 
 MAINTAINERCLEANFILES = subdirs configure.in aclocal.m4 acinclude.m4 configure.files Makefile.in $(DISTCLEANFILES)
+
+PUBLIC_ID = -//Robby Stephenson/DTD Bookcase V5.0//EN
+SYSTEM_ID = http://www.periapsis.org/bookcase/dtd/v5/bookcase.dtd
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
@@ -706,7 +711,8 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-appDATA install-localDATA install-mimeDATA
+install-data-am: install-appDATA install-data-local install-localDATA \
+	install-mimeDATA
 
 install-exec-am:
 
@@ -733,8 +739,8 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-appDATA uninstall-info-am uninstall-localDATA \
-	uninstall-mimeDATA
+uninstall-am: uninstall-appDATA uninstall-info-am uninstall-local \
+	uninstall-localDATA uninstall-mimeDATA
 
 uninstall-info: uninstall-info-recursive
 
@@ -745,18 +751,19 @@ uninstall-info: uninstall-info-recursive
 	distclean-recursive distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am dvi-recursive info info-am \
 	info-recursive install install-am install-appDATA install-data \
-	install-data-am install-data-recursive install-exec \
-	install-exec-am install-exec-recursive install-info \
-	install-info-am install-info-recursive install-localDATA \
-	install-man install-mimeDATA install-recursive install-strip \
-	installcheck installcheck-am installdirs installdirs-am \
-	installdirs-recursive maintainer-clean maintainer-clean-generic \
+	install-data-am install-data-local install-data-recursive \
+	install-exec install-exec-am install-exec-recursive \
+	install-info install-info-am install-info-recursive \
+	install-localDATA install-man install-mimeDATA \
+	install-recursive install-strip installcheck installcheck-am \
+	installdirs installdirs-am installdirs-recursive \
+	maintainer-clean maintainer-clean-generic \
 	maintainer-clean-recursive mostlyclean mostlyclean-generic \
 	mostlyclean-libtool mostlyclean-recursive pdf pdf-am \
 	pdf-recursive ps ps-am ps-recursive tags tags-recursive \
 	uninstall uninstall-am uninstall-appDATA uninstall-info-am \
-	uninstall-info-recursive uninstall-localDATA uninstall-mimeDATA \
-	uninstall-recursive
+	uninstall-info-recursive uninstall-local uninstall-localDATA \
+	uninstall-mimeDATA uninstall-recursive
 
 
 #$(top_srcdir)/configure.in: configure.in.in $(top_srcdir)/subdirs
@@ -789,6 +796,44 @@ dist-hook:
 #	cd $(srcdir) && rm -f $(distdir).tar.gz
 # remove any executable
 	rm -rf $(distdir)/src/bookcase
+
+install-data-local:
+	@if test x"@XML_CATALOG_FILE@" != x; then \
+          echo @XMLCATALOG@ --noout --add "delegatePublic" \
+               "$(PUBLIC_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --add "delegatePublic" \
+               "$(PUBLIC_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          echo @XMLCATALOG@ --noout --add "delegateSystem" \
+               "$(SYSTEM_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --add "delegateSystem" \
+               "$(SYSTEM_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          echo @XMLCATALOG@ --noout --add "delegateURI" \
+               "$(SYSTEM_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --add "delegateURI" \
+               "$(SYSTEM_ID)" \
+               "file://$(localdir)/bookcase.dtd" "@XML_CATALOG_FILE@" ; \
+	fi
+
+uninstall-local:
+	@if test x"@XML_CATALOG_FILE@" != x; then \
+          echo @XMLCATALOG@ --noout --del \
+               "$(PUBLIC_ID)" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --del \
+               "$(PUBLIC_ID)" "@XML_CATALOG_FILE@" ; \
+          echo @XMLCATALOG@ --noout --del \
+               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --del \
+               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
+          echo @XMLCATALOG@ --noout --del \
+               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
+          @XMLCATALOG@ --noout --del \
+               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
+	fi
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

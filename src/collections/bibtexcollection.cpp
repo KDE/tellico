@@ -70,9 +70,7 @@ Bookcase::Data::FieldList BibtexCollection::defaultFields() {
   field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("entry-type"));
   field->setCategory(i18n(bibtex_general));
   field->setFlags(Field::AllowGrouped | Field::NoDelete);
-  //TODO: finish this
-  field->setDescription(i18n("An article is from a journal or magazine. A book has an "
-                           "explicit publisher, while a booklet does not."));
+  field->setDescription(i18n("These entry types are specific to bibtex. See the bibtex documentation."));
   list.append(field);
 
   field = new Field(QString::fromLatin1("author"), i18n("Author"));

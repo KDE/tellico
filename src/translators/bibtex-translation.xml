@@ -3,13 +3,31 @@
 <!-- Some bibtex file may incorrectly place the braces. -->
 <!-- The first string element should be the correct representation -->
 <!-- These key mappings were taken, with permission, from the CharacterConversion.plist -->
-<!-- file in the BIbdesk program by Michael McCracken -->
-<keymap version="0.7">
+<!-- file in the Bibdesk program by Michael McCracken -->
+<keymap version="0.8">
   <key char="¡">
     <string>{!'}</string>
   </key>
   <key char="Å">
     <string>{\AA}</string>
+  </key>
+  <key char="À">
+    <string>{\`A}</string>
+    <string>\`{A}</string>
+  </key>
+  <key char="Â">
+    <string>{\^A}</string>
+    <string>\^{A}</string>
+  </key>
+  <key char="Á">
+    <string>{\'A}</string>
+    <string>\'{A}</string>
+  </key>
+  <key char="Ã">
+    <string>{\~A}</string>
+  </key>
+  <key char="Ä">
+    <string>{\&quot;A}</string>
   </key>
   <key char="Æ">
     <string>{\AE}</string>
@@ -39,6 +57,10 @@
   </key>
   <key char="æ">
     <string>{\ae}</string>
+  </key>
+  <key char="ç">
+    <string>{\cc}</string>
+    <string>\c{c}</string>
   </key>
   <key char="è">
     <string>{\`e}</string>
@@ -87,6 +109,7 @@
   </key>
   <key char="ö">
     <string>{\&quot;o}</string>
+    <string>{\oe}</string>
   </key>
   <key char="ø">
     <string>{\o}</string>
@@ -109,7 +132,10 @@
   <key char="ÿ">
     <string>{\&quot;y}</string>
   </key>
-  <key char="oe">
-    <string>{\oe}</string>
+  <key char="ß">
+    <string>{\ss}</string>
+  </key>
+  <key char="£">
+    <string>\pounds</string>
   </key>
 </keymap>

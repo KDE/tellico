@@ -2,9 +2,9 @@
    ================================================================
    Bookcase XML DTD version 5.0
 
-   $Id: bookcase.dtd,v 1.6 2003/05/03 08:43:09 robby Exp $
+   $Id: bookcase.dtd 414 2004-02-02 03:48:15Z robby $
 
-   Copyright (c) 2001-2003 Robby Stephenson
+   Copyright (c) 2004 Robby Stephenson
 
    This DTD is designed to be used with XML data files for the 
    'bookcase' application, which can be found at:
@@ -33,7 +33,7 @@
 <!ATTLIST image height CDATA #REQUIRED>
 
 <!ELEMENT fields (field+)>
-<!ELEMENT field (property*)>
+<!ELEMENT field (prop*)>
 <!ATTLIST field name CDATA #REQUIRED>
 <!ATTLIST field title CDATA #REQUIRED>
 <!ATTLIST field category CDATA #REQUIRED>
@@ -43,7 +43,8 @@
 <!ATTLIST field description CDATA #IMPLIED>
 <!ATTLIST field type (1|2|3|4|5|6|7|8|9|10|11) #IMPLIED>
 
-<!ELEMENT property (#PCDATA)>
+<!ELEMENT prop (#PCDATA)>
+<!ATTLIST prop name CDATA #REQUIRED>
 
 <!-- bibliography, or bibtex, collections may have a preamble and macros -->
 <!ELEMENT bibtex-preamble (#PCDATA)>
@@ -55,16 +56,20 @@
 <!-- columns are used in 2-column tables to split the values -->
 <!ELEMENT column (#PCDATA)>
 
-<!ELEMENT entry (title | subtitle | authors | binding | pur_date | pur_price | publisher | edition |
-cr_years | pub_year | isbn | lccn | pages | languages | genres | keywords | series | series_num | 
-condition | signed | read | gift | loaned | rating | comments | entry-type | bibtex-key | booktitle | 
-editors | organization | year | journal | month | number | howpublished | chapter | volume | crossref | 
-note | medium | artists | album | label | tracks | certification | region | nationality | format | casts | 
-directors | producers | writers | composers | studios | subtitles | audio-tracks | running-time | 
-aspect-ratios | widescreen | color | directors-cut | plot | player | team | brand | location | 
-quantity | front | back | mintmark | set | grade | service | obverse | reverse | issue | 
-cover | description | scott | cancelled | hinged | centering | gummed | producer | appellation | 
-varietal | vintage | type | drink-by)+>
+<!ELEMENT entry (title | subtitle | authors | binding | pur_date |
+pur_price | publisher | edition | cr_years | pub_year | isbn | lccn |
+pages | languages | genres | keywords | series | series_num |
+condition | signed | read | gift | loaned | rating | comments |
+entry-type | bibtex-key | booktitle | editors | organization | year |
+journal | month | number | howpublished | chapter | volume | crossref
+| note | medium | artists | album | label | tracks | certification |
+region | nationality | format | casts | directors | producers |
+writers | composers | studios | subtitles | audio-tracks |
+running-time | aspect-ratios | widescreen | color | directors-cut |
+plot | player | team | brand | location | quantity | front | back |
+mintmark | set | grade | service | obverse | reverse | issue | cover |
+description | scott | cancelled | hinged | centering | gummed |
+producer | appellation | varietal | vintage | type | drink-by)+>
 
 
 <!ELEMENT title (#PCDATA)>

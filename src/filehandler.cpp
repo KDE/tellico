@@ -24,6 +24,7 @@
 #include <kio/netaccess.h>
 #include <ktempfile.h>
 #include <ksavefile.h>
+#include <kdebug.h>
 
 #include <qdom.h>
 #include <qfile.h>
@@ -180,7 +181,7 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool loca
   bool success = FileHandler::writeTextFile(f, text_, locale_);
   if(success) {
 #if KDE_IS_VERSION(3,1,90)
-    bool uploaded  =KIO::NetAccess::upload(tempfile.name(), url_, s_mainWindow);
+    bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_, s_mainWindow);
 #else
     bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_);
 #endif
