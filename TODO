@@ -1,0 +1,21 @@
+General
+  Allow for multiple collections in one document, will require major changes.
+
+BCAttribute::formatTitle()
+  If the user enters an article at the end of the title, like so: "new title, a" because
+  he/she doesn't know that it gets switched automatically, it should get saved in the proper
+  place at the beginning, and then the normal switch is made.
+
+BCAttribute::formatName()
+  Need to implement first name/last name sorting.
+
+BCUnitEditWidget::reset()
+  The widget layout should be redone when a new collection is added. This is complex, and should
+  be thought through, especially since there will likely be multiple collections in the document.
+
+BookcaseDoc::openDocument()
+  Some sort of progress indicator is needed, especially for large documents.
+
+Bookcase::slotFileSave() or whatever
+  Figure out how to include a graphic of the book cover or whatever. Should probably move to a
+  KTarGz file format like koffice.

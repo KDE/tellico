@@ -1,0 +1,14 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="bookcase" version="0.1">
+<MenuBar>
+<!--  <Menu name="file"><text>&amp;File</text>
+    <Action name="file_new_window"/>
+    <Menu name="file_new"><text>&amp;New...</text>
+      <Action name="file_new_collection"/>
+    </Menu>
+  </Menu>
+  <Menu name="settings"><text>Show Browse Toolbar</text>
+    <Action name="settings_show_browsetoolbar"/>
+  </Menu>-->
+</MenuBar>
+</kpartgui>
