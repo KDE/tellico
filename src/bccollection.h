@@ -44,7 +44,7 @@ typedef QPtrListIterator<BCCollection> BCCollectionListIterator;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bccollection.h,v 1.5 2003/05/10 19:21:53 robby Exp $
+ * @version $Id: bccollection.h,v 1.5.2.2 2003/05/26 01:07:49 robby Exp $
  */
 class BCCollection : public QObject {
 Q_OBJECT
@@ -211,13 +211,13 @@ public:
    *
    * @return The list of names
    */
-  QStringList attributeNames() const;
+  const QStringList& attributeNames() const;
   /**
    * Returns a list of all the attribute titles.
    *
    * @return The list of titles
    */
-  QStringList attributeTitles() const;
+  const QStringList& attributeTitles() const;
   /**
    * Returns the title of an attribute, given its name.
    *
@@ -312,7 +312,7 @@ public:
   static QString emptyGroupName();
 
 signals:
-  void signalGroupModified(BCCollection* coll, BCUnitGroup* group);
+  void signalGroupModified(BCCollection* coll, const BCUnitGroup* group);
   void signalAttributeAdded(BCCollection* coll, BCAttribute* att);
   void signalAttributeModified(BCCollection* coll, BCAttribute* newAtt, BCAttribute* oldAtt);
   void signalAttributeDeleted(BCCollection* coll, BCAttribute* att);
@@ -341,6 +341,8 @@ protected:
   QDict<BCAttribute> m_attributeNameDict;
   QDict<BCAttribute> m_attributeTitleDict;
   QStringList m_attributeCategories;
+  QStringList m_attributeNames;
+  QStringList m_attributeTitles;
   
   BCUnitList m_unitList;
   

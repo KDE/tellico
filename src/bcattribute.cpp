@@ -183,10 +183,12 @@ QString BCAttribute::formatTitle(const QString& title_) {
   QStringList::ConstIterator it;
   for(it = m_articles.begin(); it != m_articles.end(); ++it) {
     // assume white space is already stripped
-    if(newTitle.startsWith(*it + QString::fromLatin1(" "))) {
-      QString rx(*it);
-      rx.prepend(QString::fromLatin1("^")).append(QString::fromLatin1("\\s"));
-      QRegExp regexp(rx);
+    // the articles are already in lower-case
+    if(newTitle.lower().startsWith(*it + QString::fromLatin1(" "))) {
+      QString str(*it);
+      str.prepend(QString::fromLatin1("^")).append(QString::fromLatin1("\\s"));
+      QRegExp regexp(str);
+      regexp.setCaseSensitive(false);
       newTitle = newTitle.replace(regexp, QString()).append(QString::fromLatin1(", ")).append(*it);
       break;
     }
@@ -229,6 +231,9 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
     // otherwise split it by white space, move the last word to the front
     // but only if there is more than one word
     if(words.count() > 1) {
+      QRegExp lastWord;
+      lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
+      lastWord.setCaseSensitive(false);
       // if the last word is a suffix, it has to be kept with last name
       if(m_suffixes.grep(words.last(), false).count() > 0) {
         words.prepend(words.last().append(QString::fromLatin1(",")));
@@ -238,11 +243,13 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
       // now move the word
       words.prepend(words.last().append(QString::fromLatin1(",")));
       words.remove(words.fromLast());
+      lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
 
-      // this is probably just soemthing for me, limited to english
-      while(m_surnamePrefixes.grep(words.last(), false).count() > 0) {
+      // this is probably just something for me, limited to english
+      while(m_surnamePrefixes.grep(lastWord).count() > 0) {
         words.prepend(words.last());
         words.remove(words.fromLast());
+        lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
       }
             
       names << words.join(QString::fromLatin1(" "));
@@ -299,8 +306,18 @@ QStringList BCAttribute::defaultArticleList() {
                             i18n("the"), false);
 }
 
+// articles should all be in lower-case
 void BCAttribute::setArticleList(const QStringList& list_) {
-  m_articles = list_;
+  m_articles.clear();
+  
+  QString article;
+  QStringList::ConstIterator it;
+  for(it = list_.begin(); it != list_.end(); ++it) {
+    article = (*it).lower();
+    if(m_articles.contains(article) == 0) {
+      m_articles.append(article);
+    }
+  }
 }
 
 const QStringList& BCAttribute::articleList() {

@@ -104,11 +104,14 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
   
   int maxHeight = 0;
 
+  QPtrList<QWidget> gridList;
+  
   QStringList catList = m_currColl->attributeCategories();
   QStringList::ConstIterator catIt;
   for(catIt = catList.begin(); catIt != catList.end(); ++catIt) {
     BCAttributeList list = m_currColl->attributesByCategory(*catIt);
 
+    // if this layout model is changed, be sure to check slotUpdateAttribute()
     QWidget* page = new QWidget(m_tabs);
     // (parent, margin, spacing)
     QVBoxLayout* boxLayout = new QVBoxLayout(page, 0, 0);
@@ -116,8 +119,10 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
     int nrows = (list.count()+1)/NCOLS;
 
     QWidget* grid = new QWidget(page);
+    gridList.append(grid);
     // (parent, nrows, ncols, margin, spacing)
     QGridLayout* layout = new QGridLayout(grid, nrows, NCOLS, 8, 0);
+
     boxLayout->addWidget(grid, 0);
     boxLayout->addStretch(1);
 
@@ -156,7 +161,6 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
       widget = m_widgetDict[QString::number(m_currColl->id()) + it.current()->name()];
       if(widget) {
         widget->setLabelWidth(maxWidth[count%NCOLS]);
-        layout->addRowSpacing(count/NCOLS, maxHeight);
         ++count;
       }
     }
@@ -173,9 +177,19 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
     m_tabs->addTab(page, *catIt);
   }
 
-    // update keyboard accels
+  // Now, go through and set all the attribute widgets to the same height
+  QGridLayout* l;
+  QPtrListIterator<QWidget> it(gridList);
+  for( ; it.current(); ++it) {
+    l = static_cast<QGridLayout*>(it.current()->layout());
+    for(int row = 0; row < l->numRows(); ++row) {
+      l->addRowSpacing(row, maxHeight);
+    }
+  }
+
+  // update keyboard accels
 #if KDE_VERSION > 305
-    KAcceleratorManager::manage(m_tabs);
+  KAcceleratorManager::manage(m_tabs);
 #endif
 
   setUpdatesEnabled(true);
@@ -550,14 +564,22 @@ bool BCUnitEditWidget::queryModified() {
   return ok;
 }
 
-void BCUnitEditWidget::slotUpdateAttribute(BCCollection* coll_, BCAttribute* att_) {
+// modified attributes will always have the same name
+void BCUnitEditWidget::slotUpdateAttribute(BCCollection* coll_, BCAttribute* newAtt_, BCAttribute* oldAtt_) {
   if(coll_ != m_currColl) {
     kdDebug() << "BCUnitEditWidget::slotUpdateAttribute() - wrong collection pointer!" << endl;
     m_currColl = coll_;
   }
-  QString key = QString::number(coll_->id()) + att_->name();
+  QString key = QString::number(coll_->id()) + oldAtt_->name();
   BCAttributeWidget* widget = m_widgetDict[key];
   if(widget) {
-    widget->updateAttribute(att_);
+    widget->updateAttribute(newAtt_);
+    // this is very fragile!
+    // attribute widgets's parent is the grid, whose parent is the tab page
+    if(m_tabs->tabLabel(widget->parentWidget()->parentWidget()) != newAtt_->category()) {
+      slotSetLayout(coll_);
+      // this is needed since the layout update uses the old attribute
+      m_widgetDict[key]->updateAttribute(newAtt_);
+    }
   }
 }

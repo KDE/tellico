@@ -41,7 +41,7 @@ typedef QPtrListIterator<BCUnit> BCUnitListIterator;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bcunit.h,v 1.5 2003/05/11 00:35:11 robby Exp $
+ * @version $Id: bcunit.h,v 1.5.2.1 2003/05/26 00:36:46 robby Exp $
  */
 class BCUnit {
 public:
@@ -72,7 +72,7 @@ public:
    * @param name The attribute name
    * @return The value of the attribute
    */
-  QString attribute(const QString& name) const;
+  const QString& attribute(const QString& name) const;
   /**
    * Returns the formatted value of the attribute with a given key name. If the
    * key doesn't exist, the method returns @ref QString::null. The value is cached,

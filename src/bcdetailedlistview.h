@@ -40,7 +40,7 @@ class BCFilter;
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: bcdetailedlistview.h,v 1.5 2003/05/11 00:58:41 robby Exp $
+ * @version $Id: bcdetailedlistview.h,v 1.5.2.1 2003/05/27 03:45:34 robby Exp $
  */
 class BCDetailedListView : public KListView {
 Q_OBJECT
@@ -66,7 +66,10 @@ public:
   QStringList columnTitles() const;
   void setFilter(const BCFilter* filter);
   const BCFilter* filter() const;
-   
+  int prevSortedColumn() const;
+  virtual void setSorting(int column, bool ascending = true);
+  void setPrevSortedColumn(int column);
+
 public slots:
   /**
    */
@@ -157,7 +160,6 @@ protected slots:
   void slotClearSelection();
   void slotHeaderMenuActivated(int id);
   void slotCacheColumnWidth(int section, int oldSize, int newSize);
-  void verifyHeaderMenu();
 
 signals:
   /**
@@ -182,6 +184,7 @@ private:
   QPixmap m_checkPix;
   BCUnitList m_selectedUnits;
   const BCFilter* m_filter;
+  int m_prevSortColumn;
 };
 
 #endif

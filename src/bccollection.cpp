@@ -90,6 +90,8 @@ bool BCCollection::addAttribute(BCAttribute* att_) {
   m_attributeList.append(att_);
   m_attributeNameDict.insert(att_->name(), att_);
   m_attributeTitleDict.insert(att_->title(), att_);
+  m_attributeNames << att_->name();
+  m_attributeTitles << att_->title();
 
   //att_->category() will never be empty
   if(m_attributeCategories.contains(att_->category()) == 0) {
@@ -154,6 +156,18 @@ bool BCCollection::modifyAttribute(BCAttribute* newAtt) {
     m_unitGroups << newAtt->name();
   }
 
+  // update category list. Need to do this before emitting signal since the
+  // edit widget layout may have to change. Nobody else cares about the category.
+  if(oldAtt->category() != newAtt->category()) {
+    if(attributesByCategory(oldAtt->category()).count() == 1) {
+      m_attributeCategories.remove(oldAtt->category());
+    }
+    oldAtt->setCategory(newAtt->category());
+    if(m_attributeCategories.contains(oldAtt->category()) == 0) {
+      m_attributeCategories << oldAtt->category();
+    }
+  }
+
   // need to emit this before oldAtt gets updated
   emit signalAttributeModified(this, newAtt, oldAtt);
 
@@ -164,19 +178,10 @@ bool BCCollection::modifyAttribute(BCAttribute* newAtt) {
   // change title
   if(oldAtt->title() != newAtt->title()) {
     m_attributeTitleDict.remove(oldAtt->title());
+    m_attributeTitles.remove(oldAtt->title());
     oldAtt->setTitle(newAtt->title());
     m_attributeTitleDict.insert(oldAtt->title(), oldAtt);
-  }
-
-  // change category
-  if(oldAtt->category() != newAtt->category()) {
-    if(attributesByCategory(oldAtt->category()).count() == 1) {
-      m_attributeCategories.remove(newAtt->category());
-    }
-    oldAtt->setCategory(newAtt->category());
-    if(m_attributeCategories.contains(oldAtt->category()) == 0) {
-      m_attributeCategories << oldAtt->category();
-    }
+    m_attributeTitles.append(oldAtt->title());
   }
 
   // type won't can't be changed, but allowed can for Choice
@@ -220,6 +225,8 @@ bool BCCollection::deleteAttribute(BCAttribute* att_, bool force_/*=false*/) {
   
   m_attributeNameDict.remove(att_->name());
   m_attributeTitleDict.remove(att_->title());
+  m_attributeNames.remove(att_->name());
+  m_attributeTitles.remove(att_->title());
   
   if(attributesByCategory(att_->category()).count() == 1) {
     m_attributeCategories.remove(att_->category());
@@ -329,24 +336,12 @@ BCAttributeList BCCollection::attributesByCategory(const QString& cat_) const {
   return list;
 }
 
-QStringList BCCollection::attributeNames() const {
-//  kdDebug() << "BCCollection::attributeNames()" << endl;
-  QStringList strlist;
-  BCAttributeListIterator it(m_attributeList);
-  for ( ; it.current(); ++it) {
-    strlist << it.current()->name();
-  }
-  return strlist;
+const QStringList& BCCollection::attributeNames() const {
+  return m_attributeNames;
 }
 
-QStringList BCCollection::attributeTitles() const {
-//  kdDebug() << "BCCollection::attributeTitles()" << endl;
-  QStringList strlist;
-  BCAttributeListIterator it(m_attributeList);
-  for( ; it.current(); ++it) {
-    strlist << it.current()->title();
-  }
-  return strlist;
+const QStringList& BCCollection::attributeTitles() const {
+  return m_attributeTitles;
 }
 
 const QString& BCCollection::attributeNameByTitle(const QString& title_) const {

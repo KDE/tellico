@@ -804,7 +804,7 @@ void BookcaseDoc::search(const QString& text_, const QString& attTitle_, int opt
   Bookcase* app = BookcaseAncestor(parent());
   BCUnitItem* item = app->selectedOrFirstItem();
   if(!item) {
-//    kdDebug() << "BookcaseDoc::search() - empty document" << endl;
+//    kdDebug() << "BookcaseDoc::search() - no item found" << endl;
     // doc has no items
     return;
   }
@@ -829,7 +829,9 @@ void BookcaseDoc::search(const QString& text_, const QString& attTitle_, int opt
   } else {
     // don't want to continually search the same one, so if the returned item
     // is the same as the selected one, then skip to the next
-    if(item->isSelected()) {
+    while(item && item->isSelected()) {
+      // there is no QListViewItem::prevSibling()
+      // itemABove() works since I know there are no parents in the detailed view
       if(backwards) {
         item = static_cast<BCUnitItem*>(item->itemAbove());
       } else {

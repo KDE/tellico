@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-10 17:20-0700\n"
+"POT-Creation-Date: 2003-05-27 18:57-0700\n"
 "PO-Revision-Date: 2003-03-22 08:54+0100\n"
 "Last-Translator: Gerrit M. Albrecht <mail@gerrit-albrecht.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
@@ -20,50 +20,50 @@ msgid "a,an,and,in,of,the,to"
 msgstr "ein,und,in,von,der,an"
 
 #: bcattribute.cpp:38 bcattribute.cpp:53 bccollection.cpp:35
-#: configdialog.cpp:118 bookcollection.cpp:19 videocollection.cpp:30
+#: bookcollection.cpp:19 configdialog.cpp:118 songcollection.cpp:30
+#: songcollection.cpp:36 songcollection.cpp:41 songcollection.cpp:46
+#: songcollection.cpp:53 songcollection.cpp:58 videocollection.cpp:30
 #: videocollection.cpp:35 videocollection.cpp:43 videocollection.cpp:48
-#: songcollection.cpp:30 songcollection.cpp:36 songcollection.cpp:41
-#: songcollection.cpp:46 songcollection.cpp:53 songcollection.cpp:58
 msgid "General"
 msgstr "Allgemein"
 
-#: bcattribute.cpp:299
+#: bcattribute.cpp:306
 msgid "the"
 msgstr "der,die,das"
 
-#: bcattribute.cpp:313
+#: bcattribute.cpp:330
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: bcattribute.cpp:343
+#: bcattribute.cpp:360
 msgid "de,van der,von"
 msgstr ""
 
-#: bcattribute.cpp:358 bccollectionpropdialog.cpp:264
+#: bcattribute.cpp:375 bccollectionpropdialog.cpp:264
 #, fuzzy
 msgid "Simple Text"
 msgstr "Suche Text"
 
-#: bcattribute.cpp:359 bccollectionpropdialog.cpp:262
+#: bcattribute.cpp:376 bccollectionpropdialog.cpp:262
 #: bccollectionpropdialog.cpp:275
 msgid "Paragraph"
 msgstr ""
 
-#: bcattribute.cpp:360 bccollectionpropdialog.cpp:261
+#: bcattribute.cpp:377 bccollectionpropdialog.cpp:261
 #, fuzzy
 msgid "List"
 msgstr "Künstler"
 
-#: bcattribute.cpp:361
+#: bcattribute.cpp:378
 msgid "Checkbox"
 msgstr ""
 
-#: bcattribute.cpp:362 videocollection.cpp:29 songcollection.cpp:40
-#: bccollectionpropdialog.cpp:269
+#: bcattribute.cpp:379 bccollectionpropdialog.cpp:269 songcollection.cpp:40
+#: videocollection.cpp:29
 msgid "Year"
 msgstr "Jahr"
 
-#: bcattribute.cpp:363 bccollectionpropdialog.cpp:272
+#: bcattribute.cpp:380 bccollectionpropdialog.cpp:272
 msgid "URL"
 msgstr ""
 
@@ -71,9 +71,169 @@ msgstr ""
 msgid "Title"
 msgstr "Titel"
 
-#: bccollection.cpp:506
+#: bccollection.cpp:501
 msgid "(Empty)"
 msgstr "(Leer)"
+
+#: bccollectionpropdialog.cpp:73
+#, fuzzy
+msgid "Edit Collection Fields"
+msgstr "Sammlungs Werkzeugleiste"
+
+#: bccollectionpropdialog.cpp:80
+#, fuzzy
+msgid "Current Fields"
+msgstr "Ausgewählte Felder"
+
+#: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
+#: bccollectionpropdialog.cpp:212
+#, fuzzy
+msgid "New Field"
+msgstr "Alle Felder"
+
+#: bccollectionpropdialog.cpp:97
+#, fuzzy
+msgid "Delete Field"
+msgstr "Ausgewählte Felder"
+
+#: bccollectionpropdialog.cpp:107
+msgid "Field Properties"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:113
+#, fuzzy
+msgid "Title:"
+msgstr "Titel"
+
+#: bccollectionpropdialog.cpp:118
+msgid "Type:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:125
+msgid "Category:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:131
+msgid "The fields are grouped by common categories for editing."
+msgstr ""
+
+#: bccollectionpropdialog.cpp:133
+msgid "Allowed:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:137
+msgid "Allowed values for this field are separated by a semi-colon."
+msgstr ""
+
+#: bccollectionpropdialog.cpp:139
+msgid "Description:"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:145
+#, fuzzy
+msgid "Format Options"
+msgstr "Formatieroptionen"
+
+#: bccollectionpropdialog.cpp:146
+msgid "No formatting"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:147
+#, fuzzy
+msgid "Format as a title"
+msgstr "Formatiere Titel und Namen"
+
+#: bccollectionpropdialog.cpp:148
+#, fuzzy
+msgid "Format as a name"
+msgstr "Formatiere Titel und Namen"
+
+#: bccollectionpropdialog.cpp:151
+#, fuzzy
+msgid "Field Options"
+msgstr "Allgemeine Optionen"
+
+#: bccollectionpropdialog.cpp:152
+msgid "Enable auto-completion"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:153
+msgid "Allow multiple values"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:154
+msgid "Allow grouping"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:243
+msgid ""
+"Do you really want to delete the %1 field? This action occurs immediately "
+"and can not be undone!"
+msgstr ""
+
+#: bccollectionpropdialog.cpp:246
+#, fuzzy
+msgid "Delete Field?"
+msgstr "Ausgewählte Felder"
+
+#: bcdetailedlistview.cpp:67 bcgroupview.cpp:59 bcuniteditwidget.cpp:56
+#: bcuniteditwidget.cpp:506
+msgid "Delete Book"
+msgstr "Lösche Buch"
+
+#: bcdetailedlistview.cpp:340
+msgid "View Columns"
+msgstr "Zeige Spalten"
+
+#: bcfilterdialog.cpp:60
+#, fuzzy
+msgid "Any Field"
+msgstr "Alle Felder"
+
+#: bcfilterdialog.cpp:69
+msgid "contains"
+msgstr ""
+
+#: bcfilterdialog.cpp:70
+msgid "does not contain"
+msgstr ""
+
+#: bcfilterdialog.cpp:71
+msgid "equals"
+msgstr ""
+
+#: bcfilterdialog.cpp:72
+msgid "does not equal"
+msgstr ""
+
+#: bcfilterdialog.cpp:73
+msgid "matches regexp"
+msgstr ""
+
+#: bcfilterdialog.cpp:74
+msgid "does not match regexp"
+msgstr ""
+
+#: bcfilterdialog.cpp:86
+#, fuzzy
+msgid "Edit..."
+msgstr "Beende..."
+
+#: bcfilterdialog.cpp:246
+msgid "Advanced Filter"
+msgstr ""
+
+#: bcfilterdialog.cpp:252
+msgid "Filter Criteria"
+msgstr ""
+
+#: bcfilterdialog.cpp:255
+msgid "Match a&ll of the following"
+msgstr ""
+
+#: bcfilterdialog.cpp:256
+msgid "Match an&y of the following"
+msgstr ""
 
 #: bcgroupview.cpp:53
 msgid "Rename Collection..."
@@ -92,25 +252,16 @@ msgstr "Expandiere alle Gruppen"
 msgid "Collapse All Groups"
 msgstr "Kollabiere alle Gruppen"
 
-#: bcgroupview.cpp:59 bcdetailedlistview.cpp:67 bcuniteditwidget.cpp:56
-#: bcuniteditwidget.cpp:496
-msgid "Delete Book"
-msgstr "Lösche Buch"
-
-#: bcgroupview.cpp:431
+#: bcgroupview.cpp:436
 msgid "New Collection Name"
 msgstr "Neuer Sammlungs-Name"
-
-#: bcdetailedlistview.cpp:338
-msgid "View Columns"
-msgstr "Zeige Spalten"
 
 #: bcuniteditwidget.cpp:54
 msgid "New Book"
 msgstr "Neues Buch"
 
-#: bcuniteditwidget.cpp:55 bcuniteditwidget.cpp:78 bcuniteditwidget.cpp:368
-#: bcuniteditwidget.cpp:537
+#: bcuniteditwidget.cpp:55 bcuniteditwidget.cpp:78 bcuniteditwidget.cpp:378
+#: bcuniteditwidget.cpp:546
 msgid "Enter Book"
 msgstr "Füge Buch ein"
 
@@ -118,39 +269,39 @@ msgstr "Füge Buch ein"
 msgid "Duplicate Book"
 msgstr "Verdopple Buch"
 
-#: bcuniteditwidget.cpp:265
+#: bcuniteditwidget.cpp:276
 msgid "Do you really want to modify these books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:267
+#: bcuniteditwidget.cpp:278
 #, fuzzy
 msgid "Modify Multiple Books?"
 msgstr "Verändere Buch"
 
-#: bcuniteditwidget.cpp:316
+#: bcuniteditwidget.cpp:326
 msgid "Do you really want to delete these books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:318
+#: bcuniteditwidget.cpp:328
 #, fuzzy
 msgid "Delete Multiple Books?"
 msgstr "Lösche Buch"
 
-#: bcuniteditwidget.cpp:427
+#: bcuniteditwidget.cpp:437
 #, fuzzy
 msgid "Modify Books"
 msgstr "Verändere Buch"
 
-#: bcuniteditwidget.cpp:428
+#: bcuniteditwidget.cpp:438
 #, fuzzy
 msgid "Delete Books"
 msgstr "Lösche Buch"
 
-#: bcuniteditwidget.cpp:491
+#: bcuniteditwidget.cpp:501
 msgid "Modify Book"
 msgstr "Verändere Buch"
 
-#: bcuniteditwidget.cpp:534
+#: bcuniteditwidget.cpp:543
 msgid ""
 "The current book has been modified.\n"
 "Do you want to enter the changes?"
@@ -158,17 +309,17 @@ msgstr ""
 "Das aktuelle Buch wurde geändert.\n"
 "Sollen die Änderungen eingefügt werden?"
 
-#: bcuniteditwidget.cpp:536 bookcasedoc.cpp:381
+#: bcuniteditwidget.cpp:545 bookcasedoc.cpp:386
 msgid "Warning!"
 msgstr "Warnung!"
 
-#: bookcase.cpp:113 bookcase.cpp:660 bookcase.cpp:679 bookcase.cpp:694
-#: bookcase.cpp:707 bookcase.cpp:754 bookcase.cpp:782 bookcase.cpp:856
-#: bookcase.cpp:864 bookcase.cpp:874 bookcase.cpp:880 bookcase.cpp:886
-#: bookcase.cpp:892 bookcase.cpp:926 bookcase.cpp:939 bookcase.cpp:954
-#: bookcase.cpp:1229 bookcase.cpp:1241 bookcase.cpp:1248 bookcase.cpp:1260
-#: bookcase.cpp:1288 bookcase.cpp:1348 bookcase.cpp:1355 bookcase.cpp:1365
-#: bookcase.cpp:1386
+#: bookcase.cpp:113 bookcase.cpp:664 bookcase.cpp:683 bookcase.cpp:698
+#: bookcase.cpp:711 bookcase.cpp:762 bookcase.cpp:790 bookcase.cpp:864
+#: bookcase.cpp:872 bookcase.cpp:882 bookcase.cpp:888 bookcase.cpp:894
+#: bookcase.cpp:900 bookcase.cpp:934 bookcase.cpp:947 bookcase.cpp:962
+#: bookcase.cpp:1239 bookcase.cpp:1251 bookcase.cpp:1258 bookcase.cpp:1270
+#: bookcase.cpp:1298 bookcase.cpp:1358 bookcase.cpp:1365 bookcase.cpp:1375
+#: bookcase.cpp:1396
 msgid "Ready."
 msgstr "Bereit."
 
@@ -298,148 +449,148 @@ msgstr "Exportiere in Bibtexml-Datei..."
 msgid "Export a file using an XSL transform..."
 msgstr "Exportiere eine Datei mit Hilfe einer XSL-Transformation..."
 
-#: bookcase.cpp:652
+#: bookcase.cpp:656
 msgid "Creating new document..."
 msgstr "Erstelle ein neues Dokument..."
 
-#: bookcase.cpp:664 bookcase.cpp:683 bookcase.cpp:698
+#: bookcase.cpp:668 bookcase.cpp:687 bookcase.cpp:702
 msgid "Opening file..."
 msgstr "Öffne Datei..."
 
-#: bookcase.cpp:667 bookcase.cpp:768
+#: bookcase.cpp:671 bookcase.cpp:776
 msgid "*.bc|Bookcase files (*.bc)"
 msgstr "*.bc|Bookcase-Dateien (*.bc)"
 
-#: bookcase.cpp:669 bookcase.cpp:770
+#: bookcase.cpp:673 bookcase.cpp:778
 msgid "*.xml|XML files (*.xml)"
 msgstr "*.xml|XML-Dateien (*.xml)"
 
-#: bookcase.cpp:671 bookcase.cpp:772 bookcase.cpp:1237 bookcase.cpp:1256
-#: bookcase.cpp:1268 bookcase.cpp:1303 bookcase.cpp:1361 bookcase.cpp:1380
+#: bookcase.cpp:675 bookcase.cpp:780 bookcase.cpp:1247 bookcase.cpp:1266
+#: bookcase.cpp:1278 bookcase.cpp:1313 bookcase.cpp:1371 bookcase.cpp:1390
 msgid "*|All files"
 msgstr "*|Alle Dateien"
 
-#: bookcase.cpp:674
+#: bookcase.cpp:678
 msgid "Open File..."
 msgstr "Öffne Datei..."
 
-#: bookcase.cpp:744
+#: bookcase.cpp:752
 msgid "Saving file..."
 msgstr "Speichere Datei..."
 
-#: bookcase.cpp:766
+#: bookcase.cpp:774
 msgid "Saving file with a new filename..."
 msgstr "Speichere Datei unter einem neuen Dateinamen..."
 
-#: bookcase.cpp:775
+#: bookcase.cpp:783
 msgid "Save as..."
 msgstr "Speichere als..."
 
-#: bookcase.cpp:786 bookcase.cpp:861
+#: bookcase.cpp:794 bookcase.cpp:869
 msgid "Printing..."
 msgstr "Drucke..."
 
-#: bookcase.cpp:822
+#: bookcase.cpp:830
 msgid "(sorted by %1)"
 msgstr ""
 
-#: bookcase.cpp:852
+#: bookcase.cpp:860
 msgid "Processing document..."
 msgstr "Bearbeite Dokument..."
 
-#: bookcase.cpp:868
+#: bookcase.cpp:876
 msgid "Exiting..."
 msgstr "Beende..."
 
-#: bookcase.cpp:878
+#: bookcase.cpp:886
 msgid "Cutting selection..."
 msgstr "Schneide Auswahl aus..."
 
-#: bookcase.cpp:884
+#: bookcase.cpp:892
 msgid "Copying selection to clipboard..."
 msgstr "Kopiere Auswahl in die Zwischenablage..."
 
-#: bookcase.cpp:890
+#: bookcase.cpp:898
 msgid "Inserting clipboard contents..."
 msgstr "Füge den Inhalt der Zwischenablage ein..."
 
-#: bookcase.cpp:918
+#: bookcase.cpp:926
 msgid "Toggling toolbar..."
 msgstr "Schalte Werkzeugleiste um..."
 
-#: bookcase.cpp:931
+#: bookcase.cpp:939
 msgid "Toggle the statusbar..."
 msgstr "Schalte Statuszeile um..."
 
-#: bookcase.cpp:944
+#: bookcase.cpp:952
 msgid "Toggling collection toolbar..."
 msgstr "Schalte Sammlungs-Werkzeugleiste um..."
 
-#: bookcase.cpp:991
+#: bookcase.cpp:999
 msgid "%1 Total"
 msgstr "%1 Gesamt"
 
-#: bookcase.cpp:1187
+#: bookcase.cpp:1197
 msgid "Page %1"
 msgstr "Seite %1"
 
-#: bookcase.cpp:1214
+#: bookcase.cpp:1224
 msgid "Bookcase encountered an error in XSLT processing.\n"
 msgstr "Bookcase bemerkte einen Fehler bei der XSL-Transformation.\n"
 
-#: bookcase.cpp:1215 bookcase.cpp:1221
+#: bookcase.cpp:1225 bookcase.cpp:1231
 msgid "Please check your installation."
 msgstr "Bitte überprüfen Sie die Installation."
 
-#: bookcase.cpp:1220
+#: bookcase.cpp:1230
 msgid "Bookcase is unable to find a required file - %1.\n"
 msgstr "Bookcase kann eine erforderliche Datei nicht finden - %1.\n"
 
-#: bookcase.cpp:1226 bookcase.cpp:1245 bookcase.cpp:1352
+#: bookcase.cpp:1236 bookcase.cpp:1255 bookcase.cpp:1362
 msgid "Exporting..."
 msgstr "Exportiere..."
 
-#: bookcase.cpp:1235 bookcase.cpp:1266
+#: bookcase.cpp:1245 bookcase.cpp:1276
 msgid "*.bib|Bibtex files (*.bib)"
 msgstr "*.bib|Bibtex-Dateien (*.bib)"
 
-#: bookcase.cpp:1254 bookcase.cpp:1301
+#: bookcase.cpp:1264 bookcase.cpp:1311
 msgid "*.xml|Bibtexml files (*.xml)"
 msgstr "*.xml|Bibtexml-Dateien (*.xml)"
 
-#: bookcase.cpp:1264
+#: bookcase.cpp:1274
 msgid "Importing from Bibtex..."
 msgstr "Importiere von Bibtex..."
 
-#: bookcase.cpp:1271
+#: bookcase.cpp:1281
 msgid "Import from Bibtex..."
 msgstr "Importiere von Bibtex..."
 
-#: bookcase.cpp:1292
+#: bookcase.cpp:1302
 msgid "Importing from Bibtexml..."
 msgstr "Importiere von Bibtexml..."
 
-#: bookcase.cpp:1306
+#: bookcase.cpp:1316
 msgid "Import from Bibtexml..."
 msgstr "Importiere von Bibtexml..."
 
-#: bookcase.cpp:1316 bookcasedoc.cpp:96
+#: bookcase.cpp:1326 bookcasedoc.cpp:96
 msgid "Bookcase is unable to find the file - %1."
 msgstr "Bookcase kann die Datei nicht finden - %1."
 
-#: bookcase.cpp:1318 bookcasedoc.cpp:98
+#: bookcase.cpp:1328 bookcasedoc.cpp:98
 msgid "Bookcase is unable to download the file - %1."
 msgstr "Bookcase kann die Datei nicht herunterladen - %1."
 
-#: bookcase.cpp:1359
+#: bookcase.cpp:1369
 msgid "*.xsl|XSLT files (*.xsl)"
 msgstr "*.xsl|XSLT-Dateien (*.xsl)"
 
-#: bookcase.cpp:1363
+#: bookcase.cpp:1373
 msgid "Select XSLT file..."
 msgstr "Wähle XSLT-Datei aus..."
 
-#: bookcase.cpp:1381 bookcase.cpp:1408
+#: bookcase.cpp:1391 bookcase.cpp:1418
 msgid "Export..."
 msgstr "Exportiere..."
 
@@ -472,7 +623,7 @@ msgstr "Es ist von einer neueren Bookcase-Version."
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: bookcasedoc.cpp:379
+#: bookcasedoc.cpp:384
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
@@ -480,32 +631,209 @@ msgstr ""
 "Die aktuelle Datei wurde verändert.\n"
 "Soll sie gespeichert werden?"
 
-#: bookcasedoc.cpp:431
+#: bookcasedoc.cpp:436
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 "Eine Datei mit dem Namen \"%1\" existiert bereits. Soll sie wirklich "
 "überschrieben werden?"
 
-#: bookcasedoc.cpp:434
+#: bookcasedoc.cpp:439
 msgid "Overwrite File?"
 msgstr "Datei überschreiben?"
 
-#: bookcasedoc.cpp:435
+#: bookcasedoc.cpp:440
 msgid "Overwrite"
 msgstr "Überschreiben"
 
-#: bookcasedoc.cpp:462
+#: bookcasedoc.cpp:467
 msgid "Bookcase is unable to upload the file - %1."
 msgstr "Bookcase kann die Datei nicht hochladen - %1."
 
-#: bookcasedoc.cpp:487
+#: bookcasedoc.cpp:492
 msgid "Bookcase is unable to write the file - %1."
 msgstr "Bookcase kann die Datei nicht speichern - %1."
 
-#: bookcasedoc.cpp:919
+#: bookcasedoc.cpp:926
 msgid "Search string '%1' not found."
 msgstr "Zu suchende Zeichenkette '%1' nicht gefunden."
+
+#: bookcollection.cpp:20
+msgid "Publishing"
+msgstr "Herausgeber"
+
+#: bookcollection.cpp:21
+#, fuzzy
+msgid "Classification"
+msgstr "Zuordnung"
+
+#: bookcollection.cpp:22
+msgid "Personal"
+msgstr "Privat"
+
+#: bookcollection.cpp:25 bookcollection.cpp:184
+msgid "Books"
+msgstr "Bücher"
+
+#: bookcollection.cpp:34
+msgid "Subtitle"
+msgstr "Untertitel"
+
+#: bookcollection.cpp:39
+msgid "Author"
+msgstr "Autor"
+
+#: bookcollection.cpp:47
+msgid "Hardback"
+msgstr "Gebundene Ausgabe"
+
+#: bookcollection.cpp:47
+msgid "Paperback"
+msgstr "Papp-Einband"
+
+#: bookcollection.cpp:47
+msgid "Trade Paperback"
+msgstr "Taschenbuch"
+
+#: bookcollection.cpp:48
+msgid "E-Book"
+msgstr "E-Buch"
+
+#: bookcollection.cpp:48
+msgid "Magazine"
+msgstr "Zeitschrift"
+
+#: bookcollection.cpp:48
+msgid "Journal"
+msgstr "Zeitung"
+
+#: bookcollection.cpp:49
+msgid "Binding"
+msgstr "Bindung"
+
+#: bookcollection.cpp:54
+msgid "Purchase Date"
+msgstr "Kaufdatum"
+
+#: bookcollection.cpp:59
+msgid "Purchase Price"
+msgstr "Kaufpreis"
+
+#: bookcollection.cpp:63
+msgid "Publisher"
+msgstr "Herausgeber"
+
+#: bookcollection.cpp:68
+msgid "Edition"
+msgstr "Auflage"
+
+#: bookcollection.cpp:73
+msgid "Copyright Year"
+msgstr "Copyright (Jahr)"
+
+#: bookcollection.cpp:78
+msgid "Publication Year"
+msgstr "Veröffentlichung (Jahr)"
+
+#: bookcollection.cpp:83
+msgid "ISBN#"
+msgstr "ISBN#"
+
+#: bookcollection.cpp:85
+msgid "International Standard Book Number"
+msgstr "International standardisierte Buchnummer"
+
+#: bookcollection.cpp:88
+msgid "LCCN#"
+msgstr "LCCN#"
+
+#: bookcollection.cpp:90
+msgid "Library of Congress Control Number"
+msgstr "Library of Congress-Nummer"
+
+#: bookcollection.cpp:93
+msgid "Pages"
+msgstr "Seiten"
+
+#: bookcollection.cpp:97
+msgid "Language"
+msgstr "Sprache"
+
+#: bookcollection.cpp:102 songcollection.cpp:45 videocollection.cpp:34
+msgid "Genre"
+msgstr "Gattung"
+
+#: bookcollection.cpp:109
+msgid "Keywords"
+msgstr "Schlüsselwörter"
+
+#: bookcollection.cpp:114
+msgid "Series"
+msgstr "Serie"
+
+#: bookcollection.cpp:119
+msgid "Series Number"
+msgstr "Seriennummer"
+
+#: bookcollection.cpp:124
+msgid "New"
+msgstr "Neu"
+
+#: bookcollection.cpp:124
+msgid "Used"
+msgstr "Gebraucht"
+
+#: bookcollection.cpp:125
+msgid "Condition"
+msgstr "Zustand"
+
+#: bookcollection.cpp:129
+msgid "Signed"
+msgstr "Signiert"
+
+#: bookcollection.cpp:133
+msgid "Read"
+msgstr "Gelesen"
+
+#: bookcollection.cpp:137
+msgid "Gift"
+msgstr "Verschenkt"
+
+#: bookcollection.cpp:141
+msgid "Loaned"
+msgstr "Verliehen"
+
+#: bookcollection.cpp:146
+msgid "5 - Best"
+msgstr "5 - Sehr gut"
+
+#: bookcollection.cpp:146
+msgid "4 - Good"
+msgstr "4 - Gut"
+
+#: bookcollection.cpp:146
+msgid "3 - Neutral"
+msgstr "3 - Neutral"
+
+#: bookcollection.cpp:146
+msgid "2 - Bad"
+msgstr "2 - Schlecht"
+
+#: bookcollection.cpp:146
+msgid "1 - Worst"
+msgstr "1 - Sehr schlecht"
+
+#: bookcollection.cpp:147
+msgid "Rating"
+msgstr "Bewertung"
+
+#: bookcollection.cpp:152 songcollection.cpp:57 videocollection.cpp:47
+msgid "Comments"
+msgstr "Kommentare"
+
+#: bookcollection.cpp:180 bookcollection.h:67
+msgid "My Books"
+msgstr "Meine Bücher"
 
 #: configdialog.cpp:52
 msgid "Configure Bookcase"
@@ -657,195 +985,6 @@ msgstr "Ausgewählte Felder"
 msgid "These are the selected fields in the collection."
 msgstr "Das sind die ausgewählten Felder in der Sammlung."
 
-#: main.cpp:26
-msgid "Bookcase - a book collection manager for KDE"
-msgstr "Bookcase - ein Bibliotheks-Manager für KDE"
-
-#: main.cpp:31
-msgid "File to open"
-msgstr "Datei zum Öffnen"
-
-#: main.cpp:36 bookcase.moc.cpp:34 bookcase.moc.cpp:42
-msgid "Bookcase"
-msgstr "Bookcase"
-
-#: bookcollection.h:67 bookcollection.cpp:180
-msgid "My Books"
-msgstr "Meine Bücher"
-
-#: bookcollection.cpp:20
-msgid "Publishing"
-msgstr "Herausgeber"
-
-#: bookcollection.cpp:21
-#, fuzzy
-msgid "Classification"
-msgstr "Zuordnung"
-
-#: bookcollection.cpp:22
-msgid "Personal"
-msgstr "Privat"
-
-#: bookcollection.cpp:25 bookcollection.cpp:184
-msgid "Books"
-msgstr "Bücher"
-
-#: bookcollection.cpp:34
-msgid "Subtitle"
-msgstr "Untertitel"
-
-#: bookcollection.cpp:39
-msgid "Author"
-msgstr "Autor"
-
-#: bookcollection.cpp:47
-msgid "Hardback"
-msgstr "Gebundene Ausgabe"
-
-#: bookcollection.cpp:47
-msgid "Paperback"
-msgstr "Papp-Einband"
-
-#: bookcollection.cpp:47
-msgid "Trade Paperback"
-msgstr "Taschenbuch"
-
-#: bookcollection.cpp:48
-msgid "E-Book"
-msgstr "E-Buch"
-
-#: bookcollection.cpp:48
-msgid "Magazine"
-msgstr "Zeitschrift"
-
-#: bookcollection.cpp:48
-msgid "Journal"
-msgstr "Zeitung"
-
-#: bookcollection.cpp:49
-msgid "Binding"
-msgstr "Bindung"
-
-#: bookcollection.cpp:54
-msgid "Purchase Date"
-msgstr "Kaufdatum"
-
-#: bookcollection.cpp:59
-msgid "Purchase Price"
-msgstr "Kaufpreis"
-
-#: bookcollection.cpp:63
-msgid "Publisher"
-msgstr "Herausgeber"
-
-#: bookcollection.cpp:68
-msgid "Edition"
-msgstr "Auflage"
-
-#: bookcollection.cpp:73
-msgid "Copyright Year"
-msgstr "Copyright (Jahr)"
-
-#: bookcollection.cpp:78
-msgid "Publication Year"
-msgstr "Veröffentlichung (Jahr)"
-
-#: bookcollection.cpp:83
-msgid "ISBN#"
-msgstr "ISBN#"
-
-#: bookcollection.cpp:85
-msgid "International Standard Book Number"
-msgstr "International standardisierte Buchnummer"
-
-#: bookcollection.cpp:88
-msgid "LCCN#"
-msgstr "LCCN#"
-
-#: bookcollection.cpp:90
-msgid "Library of Congress Control Number"
-msgstr "Library of Congress-Nummer"
-
-#: bookcollection.cpp:93
-msgid "Pages"
-msgstr "Seiten"
-
-#: bookcollection.cpp:97
-msgid "Language"
-msgstr "Sprache"
-
-#: bookcollection.cpp:102 videocollection.cpp:34 songcollection.cpp:45
-msgid "Genre"
-msgstr "Gattung"
-
-#: bookcollection.cpp:109
-msgid "Keywords"
-msgstr "Schlüsselwörter"
-
-#: bookcollection.cpp:114
-msgid "Series"
-msgstr "Serie"
-
-#: bookcollection.cpp:119
-msgid "Series Number"
-msgstr "Seriennummer"
-
-#: bookcollection.cpp:124
-msgid "New"
-msgstr "Neu"
-
-#: bookcollection.cpp:124
-msgid "Used"
-msgstr "Gebraucht"
-
-#: bookcollection.cpp:125
-msgid "Condition"
-msgstr "Zustand"
-
-#: bookcollection.cpp:129
-msgid "Signed"
-msgstr "Signiert"
-
-#: bookcollection.cpp:133
-msgid "Read"
-msgstr "Gelesen"
-
-#: bookcollection.cpp:137
-msgid "Gift"
-msgstr "Verschenkt"
-
-#: bookcollection.cpp:141
-msgid "Loaned"
-msgstr "Verliehen"
-
-#: bookcollection.cpp:146
-msgid "5 - Best"
-msgstr "5 - Sehr gut"
-
-#: bookcollection.cpp:146
-msgid "4 - Good"
-msgstr "4 - Gut"
-
-#: bookcollection.cpp:146
-msgid "3 - Neutral"
-msgstr "3 - Neutral"
-
-#: bookcollection.cpp:146
-msgid "2 - Bad"
-msgstr "2 - Schlecht"
-
-#: bookcollection.cpp:146
-msgid "1 - Worst"
-msgstr "1 - Sehr schlecht"
-
-#: bookcollection.cpp:147
-msgid "Rating"
-msgstr "Bewertung"
-
-#: bookcollection.cpp:152 videocollection.cpp:47 songcollection.cpp:57
-msgid "Comments"
-msgstr "Kommentare"
-
 #: finddialog.cpp:43
 msgid "Find Text"
 msgstr "Suche Text"
@@ -925,37 +1064,29 @@ msgstr "Alle Felder"
 msgid "Invalid regular expression."
 msgstr "Unerlaubter regulärer Ausdruck."
 
-#: videocollection.cpp:20
-msgid "Videos"
-msgstr "Videos"
+#: kwidgetlister.cpp:56
+msgid "more widgets"
+msgstr ""
 
-#: videocollection.cpp:41
-msgid "DVD"
-msgstr "DVD"
+#: kwidgetlister.cpp:59
+msgid "fewer widgets"
+msgstr ""
 
-#: videocollection.cpp:41
-msgid "VHS"
-msgstr "VHS"
+#: kwidgetlister.cpp:65
+msgid "clear widgets"
+msgstr ""
 
-#: videocollection.cpp:41
-msgid "VCD"
-msgstr "VCD"
+#: main.cpp:26
+msgid "Bookcase - a book collection manager for KDE"
+msgstr "Bookcase - ein Bibliotheks-Manager für KDE"
 
-#: videocollection.cpp:41
-msgid "DivX"
-msgstr "DivX"
+#: main.cpp:31
+msgid "File to open"
+msgstr "Datei zum Öffnen"
 
-#: videocollection.cpp:42 songcollection.cpp:52
-msgid "Medium"
-msgstr "Medium"
-
-#: videocollection.h:47
-msgid "My Videos"
-msgstr "Meine Videos"
-
-#: songcollection.h:48
-msgid "My Songs"
-msgstr "Meine Lieder"
+#: main.cpp:36 bookcase.moc.cpp:34 bookcase.moc.cpp:42
+msgid "Bookcase"
+msgstr "Bookcase"
 
 #: songcollection.cpp:20
 msgid "Song"
@@ -977,13 +1108,41 @@ msgstr "CD"
 msgid "Cassette"
 msgstr "Kassette"
 
+#: songcollection.cpp:52 videocollection.cpp:42
+msgid "Medium"
+msgstr "Medium"
+
+#: songcollection.h:48
+msgid "My Songs"
+msgstr "Meine Lieder"
+
+#: videocollection.cpp:20
+msgid "Videos"
+msgstr "Videos"
+
+#: videocollection.cpp:41
+msgid "DVD"
+msgstr "DVD"
+
+#: videocollection.cpp:41
+msgid "VHS"
+msgstr "VHS"
+
+#: videocollection.cpp:41
+msgid "VCD"
+msgstr "VCD"
+
+#: videocollection.cpp:41
+msgid "DivX"
+msgstr "DivX"
+
+#: videocollection.h:47
+msgid "My Videos"
+msgstr "Meine Videos"
+
 #: configdialog.moc.cpp:34 configdialog.moc.cpp:42
 msgid "ConfigDialog"
 msgstr "ConfigDialog"
-
-#: bookcasedoc.moc.cpp:34 bookcasedoc.moc.cpp:42
-msgid "BookcaseDoc"
-msgstr "BookcaseDoc"
 
 #: bclabelaction.moc.cpp:34 bclabelaction.moc.cpp:42
 msgid "BCLabelAction"
@@ -998,14 +1157,34 @@ msgstr "BCLabelAction"
 msgid "VideoCollection"
 msgstr "VideoCollection"
 
+#: finddialog.moc.cpp:34 finddialog.moc.cpp:42
+msgid "FindDialog"
+msgstr "FindDialog"
+
+#: bccollection.moc.cpp:34 bccollection.moc.cpp:42
+msgid "BCCollection"
+msgstr "BCCollection"
+
+#: bcdetailedlistview.moc.cpp:34 bcdetailedlistview.moc.cpp:42
+msgid "BCDetailedListView"
+msgstr "BCDetailedListView"
+
+#: bookcollection.moc.cpp:34 bookcollection.moc.cpp:42
+msgid "BookCollection"
+msgstr "BookCollection"
+
+#: bcuniteditwidget.moc.cpp:34 bcuniteditwidget.moc.cpp:42
+msgid "BCUnitEditWidget"
+msgstr "BCUnitEditWidget"
+
+#: bookcasedoc.moc.cpp:34 bookcasedoc.moc.cpp:42
+msgid "BookcaseDoc"
+msgstr "BookcaseDoc"
+
 #: bccollectionpropdialog.moc.cpp:34 bccollectionpropdialog.moc.cpp:42
 #, fuzzy
 msgid "BCCollectionPropDialog"
 msgstr "BCCollection"
-
-#: finddialog.moc.cpp:34 finddialog.moc.cpp:42
-msgid "FindDialog"
-msgstr "FindDialog"
 
 #: bcfilterdialog.moc.cpp:34 bcfilterdialog.moc.cpp:42
 #, fuzzy
@@ -1022,96 +1201,22 @@ msgstr "BCUnitEditWidget"
 msgid "BCFilterDialog"
 msgstr "FindDialog"
 
-#: bccollection.moc.cpp:34 bccollection.moc.cpp:42
-msgid "BCCollection"
-msgstr "BCCollection"
-
 #: songcollection.moc.cpp:34 songcollection.moc.cpp:42
 msgid "SongCollection"
 msgstr "SongCollection"
-
-#: bcdetailedlistview.moc.cpp:34 bcdetailedlistview.moc.cpp:42
-msgid "BCDetailedListView"
-msgstr "BCDetailedListView"
-
-#: bookcollection.moc.cpp:34 bookcollection.moc.cpp:42
-msgid "BookCollection"
-msgstr "BookCollection"
-
-#: bcattributewidget.moc.cpp:34 bcattributewidget.moc.cpp:42
-#, fuzzy
-msgid "BCAttributeWidget"
-msgstr "BCUnitEditWidget"
-
-#: bcfilterdialog.cpp:60
-#, fuzzy
-msgid "Any Field"
-msgstr "Alle Felder"
-
-#: bcfilterdialog.cpp:69
-msgid "contains"
-msgstr ""
-
-#: bcfilterdialog.cpp:70
-msgid "does not contain"
-msgstr ""
-
-#: bcfilterdialog.cpp:71
-msgid "equals"
-msgstr ""
-
-#: bcfilterdialog.cpp:72
-msgid "does not equal"
-msgstr ""
-
-#: bcfilterdialog.cpp:73
-msgid "matches regexp"
-msgstr ""
-
-#: bcfilterdialog.cpp:74
-msgid "does not match regexp"
-msgstr ""
-
-#: bcfilterdialog.cpp:86
-#, fuzzy
-msgid "Edit..."
-msgstr "Beende..."
-
-#: bcfilterdialog.cpp:246
-msgid "Advanced Filter"
-msgstr ""
-
-#: bcfilterdialog.cpp:252
-msgid "Filter Criteria"
-msgstr ""
-
-#: bcfilterdialog.cpp:255
-msgid "Match a&ll of the following"
-msgstr ""
-
-#: bcfilterdialog.cpp:256
-msgid "Match an&y of the following"
-msgstr ""
-
-#: bcgroupview.moc.cpp:34 bcgroupview.moc.cpp:42
-msgid "BCGroupView"
-msgstr "BCGroupView"
 
 #: bctabcontrol.moc.cpp:34 bctabcontrol.moc.cpp:42
 msgid "BCTabControl"
 msgstr "BCTabControl"
 
-#: kwidgetlister.cpp:56
-msgid "more widgets"
-msgstr ""
+#: bcgroupview.moc.cpp:34 bcgroupview.moc.cpp:42
+msgid "BCGroupView"
+msgstr "BCGroupView"
 
-#: kwidgetlister.cpp:59
-msgid "fewer widgets"
-msgstr ""
-
-#: kwidgetlister.cpp:65
-msgid "clear widgets"
-msgstr ""
+#: bcattributewidget.moc.cpp:34 bcattributewidget.moc.cpp:42
+#, fuzzy
+msgid "BCAttributeWidget"
+msgstr "BCUnitEditWidget"
 
 #: rc.cpp:1
 msgid "I&mport"
@@ -1124,111 +1229,6 @@ msgstr "E&xportiere"
 #: rc.cpp:3
 msgid "Collection Toolbar"
 msgstr "Sammlungs Werkzeugleiste"
-
-#: bcuniteditwidget.moc.cpp:34 bcuniteditwidget.moc.cpp:42
-msgid "BCUnitEditWidget"
-msgstr "BCUnitEditWidget"
-
-#: bccollectionpropdialog.cpp:73
-#, fuzzy
-msgid "Edit Collection Fields"
-msgstr "Sammlungs Werkzeugleiste"
-
-#: bccollectionpropdialog.cpp:80
-#, fuzzy
-msgid "Current Fields"
-msgstr "Ausgewählte Felder"
-
-#: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
-#: bccollectionpropdialog.cpp:212
-#, fuzzy
-msgid "New Field"
-msgstr "Alle Felder"
-
-#: bccollectionpropdialog.cpp:97
-#, fuzzy
-msgid "Delete Field"
-msgstr "Ausgewählte Felder"
-
-#: bccollectionpropdialog.cpp:107
-msgid "Field Properties"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:113
-#, fuzzy
-msgid "Title:"
-msgstr "Titel"
-
-#: bccollectionpropdialog.cpp:118
-msgid "Type:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:125
-msgid "Category:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:131
-msgid "The fields are grouped by common categories for editing."
-msgstr ""
-
-#: bccollectionpropdialog.cpp:133
-msgid "Allowed:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:137
-msgid "Allowed values for this field are separated by a semi-colon."
-msgstr ""
-
-#: bccollectionpropdialog.cpp:139
-msgid "Description:"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:145
-#, fuzzy
-msgid "Format Options"
-msgstr "Formatieroptionen"
-
-#: bccollectionpropdialog.cpp:146
-msgid "No formatting"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:147
-#, fuzzy
-msgid "Format as a title"
-msgstr "Formatiere Titel und Namen"
-
-#: bccollectionpropdialog.cpp:148
-#, fuzzy
-msgid "Format as a name"
-msgstr "Formatiere Titel und Namen"
-
-#: bccollectionpropdialog.cpp:151
-#, fuzzy
-msgid "Field Options"
-msgstr "Allgemeine Optionen"
-
-#: bccollectionpropdialog.cpp:152
-msgid "Enable auto-completion"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:153
-msgid "Allow multiple values"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:154
-msgid "Allow grouping"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:243
-msgid ""
-"Do you really want to delete the %1 field? This action occurs immediately "
-"and can not be undone!"
-msgstr ""
-
-#: bccollectionpropdialog.cpp:246
-#, fuzzy
-msgid "Delete Field?"
-msgstr "Ausgewählte Felder"
 
 #: _translatorinfo.cpp:1
 msgid ""

@@ -27,8 +27,8 @@
 #include <kurlrequester.h>
 #include <kurllabel.h>
 #include <krun.h>
-#include <qtextedit.h>
 
+#include <qtextedit.h>
 #include <qlayout.h>
 #include <qwhatsthis.h>
 
@@ -38,7 +38,7 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
 
   // do this to just add a little space in front of the widget
   // a hack, I know
-  QWidget* w = new QWidget(this);
+  (void) new QWidget(this);
 
   if(m_type == BCAttribute::URL) {
     // set URL to null for now
@@ -84,7 +84,6 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
     case BCAttribute::Para:
       te = new QTextEdit(this);
       te->setTextFormat(Qt::PlainText);
-//      connect(te, SIGNAL(textChanged()), SIGNAL(modified()));
       connect(te, SIGNAL(modificationChanged(bool)), SIGNAL(modified()));
       m_editWidget = te;
       break;
@@ -304,6 +303,7 @@ void BCAttributeWidget::setText(const QString& text_) {
   QCheckBox* cb;
   KURLRequester* ku;
 
+  m_editWidget->blockSignals(true);
   blockSignals(true);
 
   switch (m_type) {
@@ -368,6 +368,7 @@ void BCAttributeWidget::setText(const QString& text_) {
   }
 
   blockSignals(false);
+  m_editWidget->blockSignals(false);
 }
 
 bool BCAttributeWidget::isEnabled() const {

@@ -1,3 +1,21 @@
+2003-05-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.6.3
+
+2003-05-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Added feature where the column view remembers the previous sorted column, so that items with the same sort key are subsequently sorted by previous column.
+
+2003-05-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Add Spanish translation, thanks to Quique.
+	* Updated Norwegian translation, thanks to Leif Mathis.
+	* Fix bug with collapse/expand all not working in group view.
+	* Fix bug with "Find" not properly traversing the collection.
+	* Fix bug with sorted column not being saved between document loads.
+	* Fix bug with changed category not being reflected in edit widget.
+	* Fix bug with name prefixes not being limited to word boundaries.
+
 2003-05-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase 0.6.2

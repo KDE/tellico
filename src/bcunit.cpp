@@ -44,7 +44,7 @@ QString BCUnit::title() const {
   if(BCAttribute::autoFormat()) {
     QString titleName = QString::fromLatin1("title");
     if(m_formattedAttributes.contains(titleName)) {
-      return m_formattedAttributes.find(titleName).data();
+      return m_formattedAttributes[titleName];
     } else {
       QString title = BCAttribute::formatTitle(m_title);
       m_formattedAttributes.insert(titleName, title);
@@ -57,17 +57,19 @@ QString BCUnit::title() const {
   }
 }
 
-QString BCUnit::attribute(const QString& attName_) const {
+const QString& BCUnit::attribute(const QString& attName_) const {
   if(attName_ == QString::fromLatin1("title")) {
-//    return BCAttribute::autoCapitalize() ? BCAttribute::capitalize(m_title) : m_title;
     return m_title;
   }
   
-  QString value;
-  if(!m_attributes.isEmpty() && m_attributes.contains(attName_)) {
-    value = m_attributes.find(attName_).data();
+ // from Qt help:
+ // QMap::operator[] returns the value associated with the key k.
+ // If no such key is present, a reference to an empty item is returned.
+//  if(!m_attributes.isEmpty() && m_attributes.contains(attName_)) {
+  if(!m_attributes.isEmpty()) {
+    return m_attributes[attName_];
   }
-  return value;
+  return QString::null;
 }
 
 QString BCUnit::attributeFormatted(const QString& attName_, BCAttribute::FormatFlag flag_/*=FormatPlain*/) const {
@@ -97,7 +99,7 @@ QString BCUnit::attributeFormatted(const QString& attName_, BCAttribute::FormatF
       m_formattedAttributes.insert(attName_, value);
     }
   } else {
-    value = m_formattedAttributes.find(attName_).data();
+    value = m_formattedAttributes[attName_];
   }
   return value;
 }

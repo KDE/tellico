@@ -288,6 +288,7 @@ void BCDetailedListView::slotSetSelected(BCUnit* unit_) {
   slotClearSelection();
   blockSignals(true);
   setSelected(item, true);
+  setCurrentItem(item);
   blockSignals(false);
   ensureItemVisible(item);
 }
@@ -308,6 +309,7 @@ void BCDetailedListView::slotClearSelection() {
 //  kdDebug() << "BCDetailedListView::slotClearSelection()" << endl;
   blockSignals(true);
   selectAll(false);
+  setCurrentItem(0);
   blockSignals(false);
   m_selectedUnits.clear();
 }
@@ -547,10 +549,7 @@ void BCDetailedListView::slotAddColumn(BCCollection*, BCAttribute* att_) {
 //  m_columnWidths.push_back(columnWidth(col));
   m_columnWidths.push_back(0);
   // by default, keep the new column hidden
-  // easiest way to do that is to simulate selected the menu item
-//  slotHeaderMenuActivated(col);
   hideColumn(col);
-  verifyHeaderMenu();
 }
 
 void BCDetailedListView::slotModifyColumn(BCCollection*, BCAttribute* newAtt_, BCAttribute* oldAtt_) {
@@ -599,31 +598,19 @@ void BCDetailedListView::slotRemoveColumn(BCCollection*, const QString& title_) 
     header()->setResizeEnabled(columnWidth(i) > 0, header()->mapToSection(i));
   }
   triggerUpdate();
-  verifyHeaderMenu();
 }
 
-void BCDetailedListView::verifyHeaderMenu() {
-  for(int col = 0; col < columns(); ++col) {
-    // add one to menu index because of title item
-    if(m_headerMenu->isItemChecked(m_headerMenu->idAt(col+1)) != (columnWidth(col) > 0)) {
-      kdWarning() << "BCDetailedListView::verifyHeaderMenu()"
-                  << "\tChecked: " << (m_headerMenu->isItemChecked(m_headerMenu->idAt(col+1))?"true":"false")
-                  << "\\tWidth: " << columnWidth(col)
-                  << endl;
-    }
-    if(columnText(col) != m_headerMenu->text(m_headerMenu->idAt(col+1))) {
-      kdWarning() << "BCDetailedListView::verifyHeaderMenu()"
-                  << "\tColumn Text: " << columnText(col)
-                  << "\tMenu Text: " << m_headerMenu->text(m_headerMenu->idAt(col+1))
-                  << endl;
-    }
-//    kdDebug() << "\tColumn: " << col
-//              << "\tSection: " << header()->mapToSection(col)
-//              << "\tText: " << columnText(col)
-//              << "\t\tMenu Text: " << m_headerMenu->text(m_headerMenu->idAt(col+1))
-//              << "\tChecked: " << (m_headerMenu->isItemChecked(m_headerMenu->idAt(col+1))?"true":"false")
-//              << "\tWidth: " << columnWidth(col)
-//              << "\tCached Width: " << m_columnWidths[header()->mapToSection(col)]
-//              << endl;
+int BCDetailedListView::prevSortedColumn() const {
+  return m_prevSortColumn;
+}
+
+void BCDetailedListView::setPrevSortedColumn(int column_) {
+  m_prevSortColumn = column_;
+}
+
+void BCDetailedListView::setSorting(int column_, bool ascending_/*=true*/) {
+  if(column_ != columnSorted()) {
+    setPrevSortedColumn(columnSorted());
   }
+  KListView::setSorting(column_, ascending_);
 }

@@ -37,7 +37,7 @@ class QPushButton;
  * edit controls and so on.
  *
  * @author Robby Stephenson
- * @version $Id: bcuniteditwidget.h,v 1.6 2003/05/10 19:21:53 robby Exp $
+ * @version $Id: bcuniteditwidget.h,v 1.6.2.1 2003/05/26 00:36:46 robby Exp $
  */
 class BCUnitEditWidget : public QWidget {
 Q_OBJECT
@@ -95,7 +95,7 @@ public slots:
    * from a @ref BCAttributeEditWidget.
    */
   void slotSetModified(bool modified=true);
-  void slotUpdateAttribute(BCCollection* coll, BCAttribute* att);
+  void slotUpdateAttribute(BCCollection* coll, BCAttribute* newAtt, BCAttribute* oldAtt);
 
 protected slots:
   /**

@@ -41,7 +41,7 @@ class BCAttribute;
  * @see BCCollection
  *
  * @author Robby Stephenson
- * @version $Id: bcgroupview.h,v 1.3 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bcgroupview.h,v 1.3.2.1 2003/05/26 01:07:49 robby Exp $
  */
 class BCGroupView : public KListView {
 Q_OBJECT
@@ -91,7 +91,7 @@ public slots:
    * @param coll A pointer to the collection of the gorup
    * @param group A pointer to the modified group
    */
-  void slotModifyGroup(BCCollection* coll, BCUnitGroup* group);
+  void slotModifyGroup(BCCollection* coll, const BCUnitGroup* group);
   /**
    * Removes a root collection item, and all of its children.
    *
@@ -146,7 +146,7 @@ protected:
    * @param group The group to be added
    * @return A pointer to the group listviewitem
    */
-  ParentItem* locateItem(ParentItem* collItem, BCUnitGroup* group);
+  ParentItem* locateItem(ParentItem* collItem, const BCUnitGroup* group);
   /**
    * Inserts a listviewitem for a given group
    *
@@ -154,7 +154,7 @@ protected:
    * @param group The group to be added
    * @return A pointer to the created @ ref ParentItem
    */
-  ParentItem* insertItem(ParentItem* collItem, BCUnitGroup* group);
+  ParentItem* insertItem(ParentItem* collItem, const BCUnitGroup* group);
   /**
    * A helper method to make sure that the key used for the groups
    * is consistant. For now, the key is the id of the unit's collection
@@ -166,7 +166,7 @@ protected:
   /**
    * Identical to the previous function.
    */
-  QString groupKey(ParentItem* par_, BCUnitGroup* group_) const {
+  QString groupKey(ParentItem* par_, const BCUnitGroup* group_) const {
     return QString::number(par_->id()) + group_->groupName();
   }
   /**

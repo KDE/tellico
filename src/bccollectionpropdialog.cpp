@@ -155,7 +155,7 @@ BCCollectionPropDialog::BCCollectionPropDialog(BCCollection* coll_, QWidget* par
   connect(m_complete, SIGNAL(clicked()), SLOT(slotModified()));
   connect(m_multiple, SIGNAL(clicked()), SLOT(slotModified()));
   connect(m_grouped, SIGNAL(clicked()), SLOT(slotModified()));
-  
+
   m_fieldsBox->setSelected(0, true);
   // need to call this since the text isn't actually changed when it's set initially
   slotTypeChanged(m_typeCombo->currentText());
@@ -433,7 +433,7 @@ void BCCollectionPropDialog::updateAttribute() {
     flags |= BCAttribute::AllowMultiple;
   }
   att->setFlags(flags);
-
+  
   m_modified = false;
 }
 

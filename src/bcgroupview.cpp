@@ -85,7 +85,7 @@ BCGroupView::BCGroupView(QWidget* parent_, const char* name_/*=0*/)
 
 }
 
-ParentItem* BCGroupView::insertItem(ParentItem* collItem_, BCUnitGroup* group_) {
+ParentItem* BCGroupView::insertItem(ParentItem* collItem_, const BCUnitGroup* group_) {
   QString text = group_->groupName();
   
   ParentItem* par = new ParentItem(collItem_, text);
@@ -98,7 +98,7 @@ ParentItem* BCGroupView::insertItem(ParentItem* collItem_, BCUnitGroup* group_) 
   return par;
 }
 
-ParentItem* BCGroupView::locateItem(ParentItem* collItem_, BCUnitGroup* group_) {
+ParentItem* BCGroupView::locateItem(ParentItem* collItem_, const BCUnitGroup* group_) {
   QString key = groupKey(collItem_, group_);
   ParentItem* par = m_groupDict.find(key);
   if(par) {
@@ -129,7 +129,7 @@ ParentItem* BCGroupView::locateItem(BCCollection* coll_) {
 }
 
 const QString& BCGroupView::collGroupBy(const QString& type_) const {
-  return m_collGroupBy.find(type_).data();
+  return m_collGroupBy[type_];
 }
 
 void BCGroupView::slotReset() {
@@ -157,7 +157,7 @@ void BCGroupView::slotRemoveItem(BCCollection* coll_) {
   delete collItem;
 }
 
-void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
+void BCGroupView::slotModifyGroup(BCCollection* coll_, const BCUnitGroup* group_) {
   if(!coll_ || !group_) {
     kdWarning() << "BCGroupView::slotModifyGroup() - null coll or group pointer!" << endl;
     return;
@@ -166,8 +166,7 @@ void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
   // if the units aren't grouped by attribute of the modified group,
   // we don't care, so return
   QString unitName = coll_->unitName();
-  if(m_collGroupBy.contains(unitName)
-      && m_collGroupBy.find(unitName).data() != group_->attributeName()) {
+  if(m_collGroupBy.contains(unitName) && m_collGroupBy[unitName] != group_->attributeName()) {
     return;
   }
   
@@ -209,8 +208,9 @@ void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
   icon = KGlobal::iconLoader()->loadIcon(coll_->iconName(), KIcon::User);
 
   // in case the number of units in the group changed
-  par->repaint();
-  
+//  par->repaint();
+  par->setCount(group_->count());
+    
   // next add new listViewItems for items in the group, but not currently in the view
   QPtrListIterator<BCUnit> it(leftover);
   for( ; it.current(); ++it) {
@@ -286,7 +286,7 @@ void BCGroupView::slotSetSelected(BCUnit* unit_) {
   }
 
   // if the selected unit is the same as the current one, just return
-  if(selectedItem() && unit_ == static_cast<BCUnitItem*>(selectedItem())->unit()) {
+  if(currentItem() && unit_ == static_cast<BCUnitItem*>(currentItem())->unit()) {
     return;
   }
 
@@ -298,7 +298,7 @@ void BCGroupView::slotSetSelected(BCUnit* unit_) {
   }
 
   BCUnitGroup* group = 0;
-  QString currentGroup = m_collGroupBy.find(unitName).data();
+  QString currentGroup = m_collGroupBy[unitName];
   QPtrListIterator<BCUnitGroup> groupIt(unit_->groups());
   for( ; groupIt.current(); ++groupIt) {
     if(groupIt.current()->attributeName() == currentGroup) {
@@ -329,6 +329,7 @@ void BCGroupView::slotSetSelected(BCUnit* unit_) {
   slotClearSelection();
   blockSignals(true);
   setSelected(unitItem, true);
+  setCurrentItem(item);
   blockSignals(false);
   ensureItemVisible(unitItem);
 }
@@ -341,10 +342,14 @@ void BCGroupView::slotToggleItem(QListViewItem* item_) {
 }
 
 void BCGroupView::slotExpandAll(int depth_/*=-1*/) {
-  QListViewItem* item;
+  if(childCount() == 0) {
+    return;
+  }
+
+  QListViewItem* item = 0;
 
   if(depth_ == -1) {
-    item = selectedItem();
+    item = currentItem();
     if(!item) {
       return;
     }
@@ -376,16 +381,16 @@ void BCGroupView::slotCollapseAll(int depth_/*=-1*/) {
     return;
   }
 
-  QListViewItem* item;
+  QListViewItem* item = 0;
 
   if(depth_ == -1) {
-    item = selectedItem();
+    item = currentItem();
     if(!item) {
       return;
     }
     depth_ = item->depth();
   }
-  
+
   switch(depth_) {
     //TODO: should be iterating over all collections
     case 0:
@@ -466,6 +471,7 @@ void BCGroupView::slotClearSelection() {
 //  kdDebug() << "BCGroupView::slotClearSelection()" << endl;
   blockSignals(true);
   selectAll(false);
+  setCurrentItem(0);
   blockSignals(false);
   m_selectedUnits.clear();
 }
@@ -481,7 +487,7 @@ void BCGroupView::slotAddCollection(BCCollection* coll_) {
   QString groupBy;
   QString unitName = coll_->unitName();
   if(m_collGroupBy.contains(unitName)) {
-    groupBy = m_collGroupBy.find(unitName).data();
+    groupBy = m_collGroupBy[unitName];
   } else {
     groupBy = coll_->defaultGroupAttribute();
     m_collGroupBy.insert(unitName, groupBy);
@@ -514,7 +520,7 @@ void BCGroupView::setGroupAttribute(BCCollection* coll_, const QString& groupAtt
   ParentItem* collItem = locateItem(coll_);
   QString unitName = coll_->unitName();
   if(!m_collGroupBy.contains(unitName)
-     || m_collGroupBy.find(unitName).data() != groupAtt_
+     || m_collGroupBy[unitName] != groupAtt_
      || collItem->childCount() == 0) {
     m_collGroupBy.insert(unitName, groupAtt_);
     if(att->formatFlag() == BCAttribute::FormatName) {
@@ -540,14 +546,7 @@ void BCGroupView::showCount(bool showCount_) {
 //  kdDebug() << "BCGroupView::showCount()" << endl;
   if(m_showCount != showCount_) {
     m_showCount = showCount_;
-
-    // now just repaint all the child items, paintCell(() will take care of the update
-    QListViewItemIterator it(this);
-    for( ; it.current(); ++it) {
-      if(it.current()->depth() == 1) {
-        it.current()->repaint();
-      }
-    }
+    triggerUpdate();
   }
 }
 
@@ -560,7 +559,7 @@ ParentItem* BCGroupView::populateCollection(BCCollection* coll_,
     QString groupBy;
     QString unitName = coll_->unitName();
     if(m_collGroupBy.contains(unitName)) {
-      groupBy = m_collGroupBy.find(unitName).data();
+      groupBy = m_collGroupBy[unitName];
     } else {
       groupBy = coll_->defaultGroupAttribute();
       m_collGroupBy.insert(unitName, groupBy);

@@ -33,7 +33,7 @@ class BCUnit;
  * @see BCUnit
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.4 2003/05/03 08:11:46 robby Exp $
+ * @version $Id: bcunititem.h,v 1.4.2.2 2003/05/27 03:45:34 robby Exp $
  */
 class BCUnitItem : public KListViewItem {
 public:
@@ -56,6 +56,7 @@ public:
   BCUnitItem(KListViewItem* parent, const QString& text, BCUnit* unit)
       : KListViewItem(parent, text), m_unit(unit) {}
 
+  virtual QString key(int col, bool) const;
   /**
    * Returns a const pointer to the unit to which the item refers
    *
@@ -76,7 +77,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.4 2003/05/03 08:11:46 robby Exp $
+ * @version $Id: bcunititem.h,v 1.4.2.2 2003/05/27 03:45:34 robby Exp $
  */
 class ParentItem : public KListViewItem {
 public:
@@ -123,7 +124,7 @@ public:
    * @param col The column number
    * @return The key
    */
-  QString key(int col, bool) const;
+  virtual QString key(int col, bool) const;
 
   /** paints the cell */
   virtual void paintCell(QPainter* p, const QColorGroup& cg,

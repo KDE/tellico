@@ -17,9 +17,20 @@
 #include "bcunititem.h"
 #include "bcgroupview.h"
 #include "bccollection.h"
+#include "bcdetailedlistview.h"
 
 #include <qpainter.h>
 #include <qregexp.h>
+
+QString BCUnitItem::key(int col_, bool) const {
+  QListView* lv = listView();
+  
+  if(lv && lv->isA("BCDetailedListView") && static_cast<BCDetailedListView*>(lv)->prevSortedColumn() > -1) {
+    return text(col_) + text(static_cast<BCDetailedListView*>(lv)->prevSortedColumn());
+  } else {
+    return text(col_);
+  }
+}
 
 // prepend a tab character to always sort the empty group name first
 // also check for surname prefixes
@@ -36,7 +47,8 @@ QString ParentItem::key(int col_, bool) const {
     m_text = text(col_);
     if(BCAttribute::autoFormat()) {
       QString prefixes = BCAttribute::surnamePrefixList().join(QString::fromLatin1("|"));
-      QRegExp rx(QString::fromLatin1("^(") + prefixes + QString::fromLatin1(")\\s*"));
+      QRegExp rx(QString::fromLatin1("^(") + prefixes + QString::fromLatin1(")\\s"));
+      rx.setCaseSensitive(false);
       if(rx.search(m_text) > -1) {
         m_key = m_text.mid(rx.matchedLength());
       } else {
@@ -81,7 +93,6 @@ void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
       if(isSelected()) {
         p_->setPen(cg_.highlightedText());
       } else {
-//        p_->setPen(QColor("blue"));
         p_->setPen(cg_.highlight());
       }
 
@@ -96,14 +107,9 @@ void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
 int ParentItem::width(const QFontMetrics& fm_, const QListView* lv_, int column_) const {
   int w = KListViewItem::width(fm_, lv_, column_);
 
-  QListView* lv = listView();
-  if(!lv) {
-    return -1;
-  }
-
-  // show count is only for firct column and depth of 1
-  if(lv->isA("BCGroupView") && column_ == 0 && depth() == 1) {
-    BCGroupView* groupView = static_cast<BCGroupView*>(lv); 
+  // show count is only for first column and depth of 1
+  if(lv_ && lv_->isA("BCGroupView") && column_ == 0 && depth() == 1) {
+    const BCGroupView* groupView = static_cast<const BCGroupView*>(lv_); 
 
     if(groupView->showCount()) {
       QString numText = QString::fromLatin1(" (");

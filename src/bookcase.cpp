@@ -305,8 +305,8 @@ void Bookcase::initView() {
   // need to connect update signal
   BCCollectionListIterator it(m_doc->collectionList());
   for( ; it.current(); ++it) {
-    connect(it.current(), SIGNAL(signalGroupModified(BCCollection*, BCUnitGroup*)),
-            m_groupView, SLOT(slotModifyGroup(BCCollection*, BCUnitGroup*)));
+    connect(it.current(), SIGNAL(signalGroupModified(BCCollection*, const BCUnitGroup*)),
+            m_groupView, SLOT(slotModifyGroup(BCCollection*, const BCUnitGroup*)));
             // since already created, need to call it now
     slotUpdateCollection(it.current());
   }
@@ -450,6 +450,7 @@ void Bookcase::saveCollectionOptions(BCCollection* coll_) {
   m_config->writeEntry("ColumnOrder", order);
   m_config->writeEntry("SortColumn", m_detailedView->columnSorted());
   m_config->writeEntry("SortAscending", m_detailedView->ascendingSort());
+  m_config->writeEntry("PrevSortColumn", m_detailedView->prevSortedColumn());
 
   QStringList colTitles = m_detailedView->columnTitles();
   QStringList colNames;
@@ -582,9 +583,12 @@ void Bookcase::readOptions() {
     }
     
     if(m_config->hasKey("SortColumn")) {
-      int sortCol = m_config->readNumEntry("SortColumn");
+      int sortCol = m_config->readNumEntry("SortColumn", 0);
       bool sortAsc = m_config->readBoolEntry("SortAscending", true);
       m_detailedView->setSorting(sortCol, sortAsc);
+      // has to be after setSorting()
+      int prevSortCol = m_config->readNumEntry("PrevSortColumn", -1);
+      m_detailedView->setPrevSortedColumn(prevSortCol);
     }
   }
 }
@@ -641,7 +645,7 @@ BookcaseDoc* Bookcase::doc() {
 }
 
 BCUnitItem* Bookcase::selectedOrFirstItem() {
-  QListViewItem* item = m_detailedView->selectedItem();
+  QListViewItem* item = m_detailedView->currentItem();
   if(!item) {
     item = m_detailedView->firstChild();
   }
@@ -715,7 +719,10 @@ bool Bookcase::openURL(const KURL& url_) {
  // since a lot of updates will happen with a large file, disable them
   m_detailedView->setUpdatesEnabled(false);
   m_groupView->setUpdatesEnabled(false);
-  // disable sorting
+  // disable sorting; does this actually help?
+  int dvSortCol = m_detailedView->columnSorted();
+  bool dvSortAsc = m_detailedView->ascendingSort();
+  int dvPrevSortCol = m_detailedView->prevSortedColumn();
   m_detailedView->setSorting(-1);
   m_groupView->setSorting(-1);
 
@@ -726,7 +733,8 @@ bool Bookcase::openURL(const KURL& url_) {
   m_detailedView->setUpdatesEnabled(true);
   m_groupView->setUpdatesEnabled(true);
   // re-enable sorting
-  m_detailedView->setSorting(0, true);
+  m_detailedView->setSorting(dvSortCol, dvSortAsc);
+  m_detailedView->setPrevSortedColumn(dvPrevSortCol);
   m_groupView->setSorting(0, true);
 
   if(success) {
@@ -1015,8 +1023,10 @@ void Bookcase::slotEnableOpenedActions(bool opened_ /*= true*/) {
 }
 
 void Bookcase::slotEnableModifiedActions(bool modified_ /*= true*/) {
-  setCaption(m_doc->URL().fileName(), modified_);
-  m_fileSave->setEnabled(modified_);
+  if(m_fileSave->isEnabled() != modified_) {
+    setCaption(m_doc->URL().fileName(), modified_);
+    m_fileSave->setEnabled(modified_);
+  }
 }
 
 void Bookcase::slotUpdateFractionDone(float f_) {
@@ -1108,8 +1118,8 @@ void Bookcase::slotUpdateCollection(BCCollection* coll_) {
   
   slotUpdateCollectionToolBar(coll_);
   slotUnitCount();
-  connect(coll_, SIGNAL(signalGroupModified(BCCollection*, BCUnitGroup*)),
-          m_groupView, SLOT(slotModifyGroup(BCCollection*, BCUnitGroup*)));
+  connect(coll_, SIGNAL(signalGroupModified(BCCollection*, const BCUnitGroup*)),
+          m_groupView, SLOT(slotModifyGroup(BCCollection*, const BCUnitGroup*)));
           
   connect(coll_, SIGNAL(signalAttributeAdded(BCCollection*, BCAttribute*)),
           m_editWidget, SLOT(slotSetLayout(BCCollection*)));
@@ -1126,7 +1136,7 @@ void Bookcase::slotUpdateCollection(BCCollection* coll_) {
           SLOT(slotUpdateCollectionToolBar(BCCollection*)));
           
   connect(coll_, SIGNAL(signalAttributeModified(BCCollection*, BCAttribute*, BCAttribute*)),
-          m_editWidget, SLOT(slotUpdateAttribute(BCCollection*, BCAttribute*)));
+          m_editWidget, SLOT(slotUpdateAttribute(BCCollection*, BCAttribute*, BCAttribute*)));
   connect(coll_, SIGNAL(signalAttributeModified(BCCollection*, BCAttribute*, BCAttribute*)),
           m_detailedView, SLOT(slotModifyColumn(BCCollection*, BCAttribute*, BCAttribute*)));
   connect(coll_, SIGNAL(signalAttributeModified(BCCollection*, BCAttribute*, BCAttribute*)),
