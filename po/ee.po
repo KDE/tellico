@@ -1,23 +1,24 @@
-# translation of it.po to italiano
-# Copyright (C) 2001-2002, Robby Stephenson
-# This file is distributed under the same license as the Bookcase package.
-# First translation by FaUsT <faust@inventati.org>, 2002.
+# translation of ee.po to 
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Toomas Nigola,25,+3727416388,+3725296049,+3727500970 <toomas.nigola@eelk.ee>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: it\n"
+"Project-Id-Version: ee\n"
 "POT-Creation-Date: 2003-07-12 12:46-0700\n"
-"PO-Revision-Date: 2003-03-10 13:02+0100\n"
-"Last-Translator: FaUsT <faust@inventati.org>\n"
-"Language-Team: italiano <it@li.org>\n"
+"PO-Revision-Date: 2003-07-09 22:33+0300\n"
+"Last-Translator: Toomas Nigola,25,+3727416388,+3725296049,+3727500970 "
+"<toomas.nigola@eelk.ee>\n"
+"Language-Team:  <et@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: VIM 6.0\n"
+"X-Generator: KBabel 1.2beta3\n"
 
 #: bcattribute.cpp:32
 msgid "a,an,and,in,of,the,to"
-msgstr "uno,un,una,un',in,di,del,della,il,la,lo,a"
+msgstr ""
 
 #: bcattribute.cpp:38 bcattribute.cpp:53 bccollection.cpp:35
 #: bookcollection.cpp:19 configdialog.cpp:118 songcollection.cpp:30
@@ -25,142 +26,135 @@ msgstr "uno,un,una,un',in,di,del,della,il,la,lo,a"
 #: songcollection.cpp:53 songcollection.cpp:58 videocollection.cpp:30
 #: videocollection.cpp:35 videocollection.cpp:43 videocollection.cpp:48
 msgid "General"
-msgstr "Generale"
+msgstr "Üldine"
 
 #: bcattribute.cpp:332
 msgid "the"
-msgstr "il,lo,la,l',i,gli,le"
+msgstr "see"
 
 #: bcattribute.cpp:356
 msgid "jr.,jr,iii,iv"
-msgstr "jr.,jr,iii,iv"
+msgstr ""
 
 #: bcattribute.cpp:386
 msgid "de,van der,von"
 msgstr ""
 
 #: bcattribute.cpp:401 bccollectionpropdialog.cpp:264
-#, fuzzy
 msgid "Simple Text"
-msgstr "Trova testo"
+msgstr "Lihtne tekst"
 
 #: bcattribute.cpp:402 bccollectionpropdialog.cpp:262
 #: bccollectionpropdialog.cpp:275
 msgid "Paragraph"
-msgstr ""
+msgstr "Paragrahv"
 
 #: bcattribute.cpp:403 bccollectionpropdialog.cpp:261
-#, fuzzy
 msgid "List"
-msgstr "Artista"
+msgstr "Nimekiri"
 
 #: bcattribute.cpp:404
 msgid "Checkbox"
-msgstr ""
+msgstr "Märkeruut"
 
 #: bcattribute.cpp:405 songcollection.cpp:40 videocollection.cpp:29
 #: bccollectionpropdialog.cpp:269
 msgid "Year"
-msgstr "Anno"
+msgstr "Aasta"
 
 #: bcattribute.cpp:406 bccollectionpropdialog.cpp:272
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: bccollection.cpp:34
 msgid "Title"
-msgstr "Titolo"
+msgstr "Pealkiri"
 
 #: bccollection.cpp:501
 msgid "(Empty)"
-msgstr "(Vuoto)"
+msgstr "(tühi)"
 
 #: bcdetailedlistview.cpp:67 bcgroupview.cpp:59 bcuniteditwidget.cpp:56
 #: bcuniteditwidget.cpp:508
 msgid "Delete Book"
-msgstr "Cancella libro"
+msgstr "Raamatu kustutamine"
 
 #: bcdetailedlistview.cpp:340
 msgid "View Columns"
-msgstr "Vedi colonne"
+msgstr "Tulpadena vaatamine"
 
 #: bcgroupview.cpp:53
 msgid "Rename Collection..."
-msgstr "Rinomina Collezione..."
+msgstr "Kogu nime muutmine"
 
 #: bcgroupview.cpp:54
-#, fuzzy
 msgid "Edit Collection Fields..."
-msgstr "Chiusura ..."
+msgstr "Kogu väljade redigeerimine"
 
 #: bcgroupview.cpp:56
 msgid "Expand All Groups"
-msgstr "Espandi elenco"
+msgstr "Gruppide vaate laiendamine"
 
 #: bcgroupview.cpp:57
 msgid "Collapse All Groups"
-msgstr "Riduci elenco"
+msgstr "Gruppide vaate ahendamine"
 
 #: bcgroupview.cpp:436
 msgid "New Collection Name"
-msgstr "Nuova collezione"
+msgstr "Uue kogu nimi"
 
 #: bcuniteditwidget.cpp:54
 msgid "New Book"
-msgstr "Nuovo libro"
+msgstr "Uus raamat"
 
 #: bcuniteditwidget.cpp:55 bcuniteditwidget.cpp:78 bcuniteditwidget.cpp:380
 #: bcuniteditwidget.cpp:548
 msgid "Enter Book"
-msgstr "Archivia libro"
+msgstr "Raamatu sisestamine"
 
 #: bcuniteditwidget.cpp:65
 msgid "Duplicate Book"
-msgstr "Duplica libro"
+msgstr "Raamatust dublikaadi tegemine"
 
 #: bcuniteditwidget.cpp:278
 msgid "Do you really want to modify these books?"
-msgstr ""
+msgstr "Kas oled kindel oma soovis muuta nende raamatute kirjeid?"
 
 #: bcuniteditwidget.cpp:280
-#, fuzzy
 msgid "Modify Multiple Books?"
-msgstr "Modifica libro"
+msgstr "Muuta mitme raamatu kirjeid?"
 
 #: bcuniteditwidget.cpp:328
 msgid "Do you really want to delete these books?"
-msgstr ""
+msgstr "Kas oled kindel oma soovis kustutada need raamatud?"
 
 #: bcuniteditwidget.cpp:330
-#, fuzzy
 msgid "Delete Multiple Books?"
-msgstr "Cancella libro"
+msgstr "Kustutada need raamatud?"
 
 #: bcuniteditwidget.cpp:439
-#, fuzzy
 msgid "Modify Books"
-msgstr "Modifica libro"
+msgstr "Raamatute kirjete muutmine"
 
 #: bcuniteditwidget.cpp:440
-#, fuzzy
 msgid "Delete Books"
-msgstr "Cancella libro"
+msgstr "Raamatute kustutamine"
 
 #: bcuniteditwidget.cpp:503
 msgid "Modify Book"
-msgstr "Modifica libro"
+msgstr "Raamatu kirje muutmine"
 
 #: bcuniteditwidget.cpp:545
 msgid ""
 "The current book has been modified.\n"
 "Do you want to enter the changes?"
 msgstr ""
-"Il file attuale risulta modificato.\n"
-"Lo vuoi salvare?"
+"Kõnealuse raamatu kirje on muudetud.\n"
+"Kas soovid tehtud muudatused salvestada?"
 
 #: bcuniteditwidget.cpp:547 bookcasedoc.cpp:386
 msgid "Warning!"
-msgstr "Attenzione!"
+msgstr "Hoiatus!"
 
 #: bookcase.cpp:113 bookcase.cpp:664 bookcase.cpp:683 bookcase.cpp:698
 #: bookcase.cpp:711 bookcase.cpp:762 bookcase.cpp:790 bookcase.cpp:864
@@ -170,750 +164,752 @@ msgstr "Attenzione!"
 #: bookcase.cpp:1298 bookcase.cpp:1358 bookcase.cpp:1365 bookcase.cpp:1375
 #: bookcase.cpp:1396
 msgid "Ready."
-msgstr "Pronto."
+msgstr "Valmis!"
 
 #: bookcase.cpp:144
-#, fuzzy
 msgid "Collection Fields..."
-msgstr "Opzioni per la collezione di audio"
+msgstr "Kogu kirjed"
 
 #: bookcase.cpp:157
 msgid "Import Bibtex File..."
-msgstr "Importa file Bibtex ..."
+msgstr "Bibtex'i faili importimine"
 
 #: bookcase.cpp:161
 msgid "Import Bibtexml File..."
-msgstr "Importa file Bibtexml ..."
+msgstr "Bibtexml faili importimine"
 
 #: bookcase.cpp:166
 msgid "Export to Bibtex File..."
-msgstr "Esporta come file Bibtex ..."
+msgstr "Bibtex'i faili eksportimine"
 
 #: bookcase.cpp:170
 msgid "Export to Bibtexml File..."
-msgstr "Esporta come file Bibtexml ..."
+msgstr "Bibtexml'i faili eksportimine"
 
 #: bookcase.cpp:174
 msgid "Export Using XSL Transform..."
-msgstr "Esporta usando XSL Transform ..."
+msgstr "XSL muudatustega eksportimine"
 
 #: bookcase.cpp:180
 msgid "Lookup book..."
-msgstr ""
+msgstr "Raamatu otsimine"
 
 #: bookcase.cpp:185
-#, fuzzy
 msgid "Advanced Filter..."
-msgstr "Apri file ..."
+msgstr "Erifilter"
 
 #: bookcase.cpp:196
 msgid "Show Co&llection ToolBar"
-msgstr "Mostra la barra degli strumenti-co&llezione"
+msgstr "Kogu tööriistariba näitamine"
 
 #: bookcase.cpp:201
 msgid "Group by: "
-msgstr "Raggruppa per:"
+msgstr "Grupeerimise alus:"
 
 #: bookcase.cpp:204
 msgid "Group Books By"
-msgstr "Raggruppa libri per"
+msgstr "Raamatute grupeerimise alus:"
 
 #: bookcase.cpp:209 bookcase.cpp:212
 msgid "Quick Filter: "
-msgstr ""
+msgstr "Kiirfilter"
 
 #: bookcase.cpp:219
 msgid "Create a new document"
-msgstr "Crea un nuovo documento"
+msgstr "Uue dokumendi loomine"
 
 #: bookcase.cpp:220
 msgid "Open an existing document"
-msgstr "Apri un documento esistente"
+msgstr "Olemasoleva dokumendi avamine"
 
 #: bookcase.cpp:221
 msgid "Open a recently used file"
-msgstr "Apri un documento recente"
+msgstr "Hiljuti kasutatud faili avamine"
 
 #: bookcase.cpp:222
 msgid "Save the actual document"
-msgstr "Salva il documento aperto"
+msgstr "Käesoleva dokumendi salvestamine"
 
 #: bookcase.cpp:223
 msgid "Save the actual document as..."
-msgstr "Salva il documento con nome ..."
+msgstr "Dokumendi uue nimega salvestamine"
 
 #: bookcase.cpp:224
 msgid "Print the contents of the document..."
-msgstr "Stampa il documento ..."
+msgstr "Dokumendi sisu printimine"
 
 #: bookcase.cpp:225
 msgid "Quit the application"
-msgstr "Chiude il programma"
+msgstr "Rakendusest lahkumine"
 
 #: bookcase.cpp:229
 msgid "Search in the document..."
-msgstr "Ricerca nel documento ..."
+msgstr "Dokumendist otsimine"
 
 #: bookcase.cpp:230
 msgid "Modify the collection fields..."
-msgstr ""
+msgstr "Kogu väljade muutmine"
 
 #: bookcase.cpp:231
 msgid "Filter the collection to only show certain books..."
-msgstr ""
+msgstr "Filtreerida kogu nii, et näidataks vaid kindlaid raamatuid"
 
 #: bookcase.cpp:233
 msgid "Enable/disable the toolbar"
-msgstr "Abilita/disabilita la barra degli strumenti"
+msgstr "Tööriistariba lubamine/keelamine"
 
 #: bookcase.cpp:235
 msgid "Enable/disable the statusbar"
-msgstr "Abilita/disabilita la barra di stato"
+msgstr "Olekuriba lubamine/keelamine"
 
 #: bookcase.cpp:236
 msgid "Configure the options for the application..."
-msgstr "Configura le opzioni di Bookcase ..."
+msgstr "Rakenduse suvandite määramine"
 
 #: bookcase.cpp:237
 msgid "Change the grouping of the collection"
-msgstr "Cambia il modo di raggruppamento"
+msgstr "Kogu grupeerimise muutmine"
 
 #: bookcase.cpp:239
 msgid "Enable/disable the collection toolbar"
-msgstr "Abilita/disabilita la barra degli strumenti-collezione"
+msgstr "Kogu tööriistariba lubamine/keelamine"
 
 #: bookcase.cpp:242
 msgid "Import a Bibtexml file..."
-msgstr "Importa un file Bibtexml ..."
+msgstr "Bibtexml faili importimine"
 
 #: bookcase.cpp:243
 msgid "Export to Bibtex file..."
-msgstr "Esporta come file Bibtex ..."
+msgstr "Bibtex faili eksportimine"
 
 #: bookcase.cpp:244
 msgid "Export to Bibtexml file..."
-msgstr "Esporta come file Bibtexml ..."
+msgstr "Bibtexml faili eksportimine"
 
 #: bookcase.cpp:245
 msgid "Export a file using an XSL transform..."
-msgstr "Esporta un file usando XSL transform ..."
+msgstr "XSL muudatusi kasutav eksportimine faili"
 
 #: bookcase.cpp:656
 msgid "Creating new document..."
-msgstr "Creazione nuovo documento ..."
+msgstr "Uue dokumendi loomine"
 
 #: bookcase.cpp:668 bookcase.cpp:687 bookcase.cpp:702
 msgid "Opening file..."
-msgstr "Sto aprendo il file ..."
+msgstr "Faili avamine"
 
 #: bookcase.cpp:671 bookcase.cpp:776
 msgid "*.bc|Bookcase files (*.bc)"
-msgstr "*.bc|File di Bookcase (*.bc)"
+msgstr "*.bc|Bookcase failid (*.bc)"
 
 #: bookcase.cpp:673 bookcase.cpp:778
 msgid "*.xml|XML files (*.xml)"
-msgstr "*.xml|file XML (*.xml)"
+msgstr "*.xml|XML failid (*.xml)"
 
 #: bookcase.cpp:675 bookcase.cpp:780 bookcase.cpp:1247 bookcase.cpp:1266
 #: bookcase.cpp:1278 bookcase.cpp:1313 bookcase.cpp:1371 bookcase.cpp:1390
 msgid "*|All files"
-msgstr "*|Tutti i file"
+msgstr "*|Kõik failid"
 
 #: bookcase.cpp:678
 msgid "Open File..."
-msgstr "Apri file ..."
+msgstr "Faili avamine..."
 
 #: bookcase.cpp:752
 msgid "Saving file..."
-msgstr "Sto salvando il  file ..."
+msgstr "Faili salvestamine..."
 
 #: bookcase.cpp:774
 msgid "Saving file with a new filename..."
-msgstr "Sto salvando il file con un nuovo nome ..."
+msgstr "Faili uue nimega salvestamine..."
 
 #: bookcase.cpp:783
 msgid "Save as..."
-msgstr ""
+msgstr "Salvesta nimega..."
 
 #: bookcase.cpp:794 bookcase.cpp:869
 msgid "Printing..."
-msgstr "In stampa ..."
+msgstr "Printimine..."
 
 #: bookcase.cpp:830
 msgid "(sorted by %1)"
-msgstr ""
+msgstr "(sorteeritud %1 järgi)"
 
 #: bookcase.cpp:860
 msgid "Processing document..."
-msgstr "Sto processando il documento ..."
+msgstr "Dokumendi töötlemine..."
 
 #: bookcase.cpp:876
 msgid "Exiting..."
-msgstr "Chiusura ..."
+msgstr "Väljumine..."
 
 #: bookcase.cpp:886
 msgid "Cutting selection..."
-msgstr "Sto tagliando ..."
+msgstr "Märgistatu lõikamine"
 
 #: bookcase.cpp:892
 msgid "Copying selection to clipboard..."
-msgstr "Sto copiando ..."
+msgstr "Valitu lõikelauale kopeerimine"
 
 #: bookcase.cpp:898
 msgid "Inserting clipboard contents..."
-msgstr "Sto incollando ..."
+msgstr "Lõikelaua sisu lisamine"
 
 #: bookcase.cpp:926
 msgid "Toggling toolbar..."
-msgstr "Sto modificando la barra degli strumenti ..."
+msgstr "Tööriistariba lülitamine"
 
 #: bookcase.cpp:939
 msgid "Toggle the statusbar..."
-msgstr "Sto modificando la barra di stato ..."
+msgstr "Olekuriba lülitamine"
 
 #: bookcase.cpp:952
 msgid "Toggling collection toolbar..."
-msgstr "Sto modificando la barra degli strumenti-collezione ..."
+msgstr "Kogu tööriistariba lülitamine"
 
 #: bookcase.cpp:999
 msgid "%1 Total"
-msgstr "Totale"
+msgstr "%1 kokku"
 
 #: bookcase.cpp:1197
 msgid "Page %1"
-msgstr "Pagina %1"
+msgstr "Lehekülg nr %1"
 
 #: bookcase.cpp:1224
 msgid "Bookcase encountered an error in XSLT processing.\n"
-msgstr "Rilevato errore processando XSLT. \n"
+msgstr "Bookcase sattus veale XSLT töötluses.\n"
 
 #: bookcase.cpp:1225 bookcase.cpp:1231
 msgid "Please check your installation."
-msgstr "Controlla la tua installazione, grazie."
+msgstr "Palun kontrolli oma installatsiooni."
 
 #: bookcase.cpp:1230
 msgid "Bookcase is unable to find a required file - %1.\n"
-msgstr "Impossibile aprire il file - %1.\n"
+msgstr "Bookcase ei suuda leida vajalikku faili - %1.\n"
 
 #: bookcase.cpp:1236 bookcase.cpp:1255 bookcase.cpp:1362
 msgid "Exporting..."
-msgstr "Sto esportando ..."
+msgstr "Eksportimine..."
 
 #: bookcase.cpp:1245 bookcase.cpp:1276
 msgid "*.bib|Bibtex files (*.bib)"
-msgstr "*.bib|file bibtex (*.bib)"
+msgstr "*.bib|Bibtexi failid (*.bib)"
 
 #: bookcase.cpp:1264 bookcase.cpp:1311
 msgid "*.xml|Bibtexml files (*.xml)"
-msgstr "*.xml|file bibtexml (*.xml)"
+msgstr "*.xml|Bibtexml failid (*.xml)"
 
 #: bookcase.cpp:1274
 msgid "Importing from Bibtex..."
-msgstr "Sto importando da bibtex ..."
+msgstr "Bibtexist importimine..."
 
 #: bookcase.cpp:1281
 msgid "Import from Bibtex..."
-msgstr "Sto importando da bibtex ..."
+msgstr "Bibtexist importimine"
 
 #: bookcase.cpp:1302
 msgid "Importing from Bibtexml..."
-msgstr "Sto importando da bibtexml ..."
+msgstr "Bibtexmlist importimine..."
 
 #: bookcase.cpp:1316
 msgid "Import from Bibtexml..."
-msgstr "Sto importando da bibtexml ..."
+msgstr "Bibtexmlist importimine"
 
 #: bookcase.cpp:1326 bookcasedoc.cpp:96
 msgid "Bookcase is unable to find the file - %1."
-msgstr "Impossibile trovare il file - %1."
+msgstr "Bookcase-l ei õnnestu leida faili %1."
 
 #: bookcase.cpp:1328 bookcasedoc.cpp:98
 msgid "Bookcase is unable to download the file - %1."
-msgstr "Impossibile scaricare il file - %1."
+msgstr "Bookcase-l ei õnnestu alla laadida faili %1."
 
 #: bookcase.cpp:1369
 msgid "*.xsl|XSLT files (*.xsl)"
-msgstr "*.xsl|file XSLT (*.xsl)"
+msgstr "*.xsl|XSLT failid (*.xsl)"
 
 #: bookcase.cpp:1373
 msgid "Select XSLT file..."
-msgstr "*.xsl|file XSLT ..."
+msgstr "XSLT fail valimine"
 
 #: bookcase.cpp:1391 bookcase.cpp:1418
 msgid "Export..."
-msgstr "Esportare ..."
+msgstr "Eksportimine"
 
 #: bookcasedoc.cpp:107
 msgid "Bookcase is unable to open the file - %1."
-msgstr "Impossibile aprire il file - %1."
+msgstr "Bookcase-l ei õnnestu avada faili %1."
 
 #: bookcasedoc.cpp:117
 msgid "Bookcase is unable to read the file - %1."
-msgstr "Impossibile leggere il file - %1."
+msgstr "Bookcase-l ei õnnestu lugeda faili %1."
 
 #: bookcasedoc.cpp:127 bookcasedoc.cpp:140 bookcasedoc.cpp:175
 #: bookcasedoc.cpp:187 bookcasedoc.cpp:193
 msgid "Bookcase is unable to load the file - %1."
-msgstr "Impossibile caricare il file - %1."
+msgstr "Bookcase-l ei õnnestu laadida faili %1."
 
 #: bookcasedoc.cpp:141
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr ""
+msgstr "XML sõelumisel on viga real %1, veerus %2."
 
 #: bookcasedoc.cpp:143
 msgid "The error message from Qt is:"
-msgstr ""
+msgstr "Qt veateade on:"
 
 #: bookcasedoc.cpp:195
 msgid "It is from a future version of Bookcase."
-msgstr "Il file sembra appartenere ad una versione futura di Bookcase."
+msgstr "See on pärit Bookcase tulevikuversioonist."
 
 #: bookcasedoc.cpp:262
 msgid "Unknown"
-msgstr "Sconosciuto"
+msgstr "Tundmatu"
 
 #: bookcasedoc.cpp:384
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
 msgstr ""
-"Il file attuale risulta modificato.\n"
-"Lo vuoi salvare?"
+"Käesolevat faili on muudetud.\n"
+"Soovid sa selle salvestada?"
 
 #: bookcasedoc.cpp:436
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
+"Fail nimega \"%1\" on juba olemas. Oled sa kindel, et soovid selle üle "
+"kirjutada?"
 
 #: bookcasedoc.cpp:439
 msgid "Overwrite File?"
-msgstr ""
+msgstr "Kirjutada fail üle?"
 
 #: bookcasedoc.cpp:440
 msgid "Overwrite"
-msgstr ""
+msgstr "Üle kirjutamine"
 
 #: bookcasedoc.cpp:467
 msgid "Bookcase is unable to upload the file - %1."
-msgstr "Impossibile uploadare il file - %1."
+msgstr "Bookcase-l ei õnnestu üles laadida faili %1."
 
 #: bookcasedoc.cpp:492
 msgid "Bookcase is unable to write the file - %1."
-msgstr "Impossibile scrivere sul file - %1."
+msgstr "Bookcase-l ei õnnestu kirjutada faili %1."
 
 #: bookcasedoc.cpp:926
 msgid "Search string '%1' not found."
-msgstr "Stringa '%1' non trovata."
+msgstr "Otsitavat sõna (%1) ei leidunud."
 
 #: bookcollection.cpp:20
-#, fuzzy
 msgid "Publishing"
-msgstr "Pubblicazione"
+msgstr "Kirjastamine"
 
 #: bookcollection.cpp:21
-#, fuzzy
 msgid "Classification"
-msgstr "Classificazione"
+msgstr "Klassifitseerimine"
 
 #: bookcollection.cpp:22
-#, fuzzy
 msgid "Personal"
-msgstr "Personale"
+msgstr "Isiklik"
 
 #: bookcollection.cpp:25 bookcollection.cpp:184
 msgid "Books"
-msgstr "Libri"
+msgstr "Raamatud"
 
 #: bookcollection.cpp:34
 msgid "Subtitle"
-msgstr "Sottotitolo"
+msgstr "Alapealkiri"
 
 #: bookcollection.cpp:39
 msgid "Author"
-msgstr "Autore"
+msgstr "Autor"
 
 #: bookcollection.cpp:47
 msgid "Hardback"
-msgstr "Rigida"
+msgstr "Kõvakaaneline"
 
 #: bookcollection.cpp:47
 msgid "Paperback"
-msgstr "Morbida"
+msgstr "Pehmeköiteline"
 
 #: bookcollection.cpp:47
 msgid "Trade Paperback"
-msgstr "Economica"
+msgstr "Trade Paperpack"
 
 #: bookcollection.cpp:48
 msgid "E-Book"
-msgstr "E-Book"
+msgstr "E-raamat"
 
 #: bookcollection.cpp:48
 msgid "Magazine"
-msgstr "Rivista"
+msgstr "Ajakiri"
 
 #: bookcollection.cpp:48
 msgid "Journal"
-msgstr "Giornale"
+msgstr "Žurnaal"
 
 #: bookcollection.cpp:49
 msgid "Binding"
-msgstr "Rilegatura"
+msgstr "Köide"
 
 #: bookcollection.cpp:54
 msgid "Purchase Date"
-msgstr "Data di acquisto"
+msgstr "Ostetud"
 
 #: bookcollection.cpp:59
 msgid "Purchase Price"
-msgstr "Prezzo"
+msgstr "Ostuhind"
 
 #: bookcollection.cpp:63
 msgid "Publisher"
-msgstr "Casa editrice"
+msgstr "Kirjastaja"
 
 #: bookcollection.cpp:68
 msgid "Edition"
-msgstr "Edizione"
+msgstr "Väljaanne"
 
 #: bookcollection.cpp:73
 msgid "Copyright Year"
-msgstr "Copyright (anno)"
+msgstr "Valmimisaasta"
 
 #: bookcollection.cpp:78
 msgid "Publication Year"
-msgstr "Anno di pubblicazione"
+msgstr "Väljaandmisaasta"
 
 #: bookcollection.cpp:83
 msgid "ISBN#"
-msgstr "num. ISBN"
+msgstr "ISBN nr"
 
 #: bookcollection.cpp:85
 msgid "International Standard Book Number"
-msgstr "Numero Standard Internazionale per i libri"
+msgstr "International Standard Book Number"
 
 #: bookcollection.cpp:88
 msgid "LCCN#"
-msgstr "num. LCCN"
+msgstr "LCCN nr"
 
 #: bookcollection.cpp:90
 msgid "Library of Congress Control Number"
-msgstr "Numero di Controllo della Biblioteca del Congresso"
+msgstr "Library of Congress Control Number"
 
 #: bookcollection.cpp:93
 msgid "Pages"
-msgstr "Pagine"
+msgstr "Lehekülgede arv"
 
 #: bookcollection.cpp:97
 msgid "Language"
-msgstr "Lingua"
+msgstr "Keel"
 
 #: bookcollection.cpp:102 songcollection.cpp:45 videocollection.cpp:34
 msgid "Genre"
-msgstr "Genere"
+msgstr "Žanr"
 
 #: bookcollection.cpp:109
 msgid "Keywords"
-msgstr "Parole chiave"
+msgstr "Märksõnad"
 
 #: bookcollection.cpp:114
 msgid "Series"
-msgstr "Collana"
+msgstr "Seeriad"
 
 #: bookcollection.cpp:119
 msgid "Series Number"
-msgstr "Numero"
+msgstr "Seeria nr"
 
 #: bookcollection.cpp:124
 msgid "New"
-msgstr "Nuovo"
+msgstr "Uus"
 
 #: bookcollection.cpp:124
 msgid "Used"
-msgstr "Usato"
+msgstr "Kasutatud"
 
 #: bookcollection.cpp:125
 msgid "Condition"
-msgstr "Condizioni"
+msgstr "Seisukord"
 
 #: bookcollection.cpp:129
 msgid "Signed"
-msgstr "Autografato"
+msgstr "Pühendusega"
 
 #: bookcollection.cpp:133
 msgid "Read"
-msgstr "Letto"
+msgstr "Loetud"
 
 #: bookcollection.cpp:137
 msgid "Gift"
-msgstr "Regalo"
+msgstr "Kingitud"
 
 #: bookcollection.cpp:141
 msgid "Loaned"
-msgstr "Prestato"
+msgstr "Laenatud"
 
 #: bookcollection.cpp:146
 msgid "5 - Best"
-msgstr "5 - Bellissimo"
+msgstr "5 - Parim"
 
 #: bookcollection.cpp:146
 msgid "4 - Good"
-msgstr "4 - Bello"
+msgstr "4 - Hea"
 
 #: bookcollection.cpp:146
 msgid "3 - Neutral"
-msgstr "3 - Insomma..."
+msgstr "3 - Loetav"
 
 #: bookcollection.cpp:146
 msgid "2 - Bad"
-msgstr "2 - Brutto"
+msgstr "2 - Vilets"
 
 #: bookcollection.cpp:146
 msgid "1 - Worst"
-msgstr "1 - Pessimo"
+msgstr "1 - Viletsaim"
 
 #: bookcollection.cpp:147
 msgid "Rating"
-msgstr "Voto"
+msgstr "Hinnang"
 
 #: bookcollection.cpp:152 songcollection.cpp:57 videocollection.cpp:47
 msgid "Comments"
-msgstr "Commenti"
+msgstr "Märkused"
 
 #: bookcollection.cpp:180 bookcollection.h:67
 msgid "My Books"
-msgstr "I miei libri"
+msgstr "Minu raamatud"
 
 #: configdialog.cpp:52
 msgid "Configure Bookcase"
-msgstr "Configura Bookcase"
+msgstr "Bookcase'i seadistamine"
 
 #: configdialog.cpp:118
 msgid "General Options"
-msgstr "Opzioni generali"
+msgstr "Üldised valikud"
 
 #: configdialog.cpp:121
 msgid "Reopen file at startup"
-msgstr "Riapri il file all'avvio"
+msgstr "Faili taasavamine programmi käivitamisel"
 
 #: configdialog.cpp:122
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
-msgstr "Se selezionato, l'ultimo file aperto dev'essere riaperto all'avvio."
+msgstr ""
+"Selle ruudu märkimisel avatakse viimati kasutatud fail programmi "
+"taaskäivitamisel"
 
 #: configdialog.cpp:127
 msgid "Show number of items in group"
-msgstr "Mostra il numero degli oggetti nel gruppo"
+msgstr "Gruppi kuuluvate nimetuste arvu näitamine"
 
 #: configdialog.cpp:128
 msgid ""
 "If checked, the number of items in the group will be appended to the group "
 "name."
 msgstr ""
-"Se selezionato, il numero di oggetti nel gruppo viene allegato al nome del "
-"gruppo."
+"Selle ruudu märkimisel lisatakse grupis olevate nimetuste arv grupi nimele"
 
 #: configdialog.cpp:133 configdialog.cpp:197
 msgid "Formatting Options"
-msgstr "Opzioni di formattazione"
+msgstr "Kujundamise valikud"
 
 #: configdialog.cpp:136
 msgid "(Requires restart)"
-msgstr ""
+msgstr "(Nõuab taaskäivitamist)"
 
 #: configdialog.cpp:137
 msgid "Auto capitalize titles and names"
-msgstr "Maiuscolo automatico in titoli e nomi"
+msgstr "Pealkirjadele ja nimedele automaatselt suure algustähe andmine"
 
 #: configdialog.cpp:138
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
-"Se selezionato, il titolo e l'autore diventeranno automaticamente maiuscoli."
+"Selle ruudu märkimisel antakse raamatute pealkirjadele ja autorite nimedele "
+"automaatselt suured algustähed."
 
 #: configdialog.cpp:142
 msgid "Auto format titles and names"
-msgstr "Maiuscolo automatico in titoli e nomi"
+msgstr "Pealkirjade ja nimede automaatvormindus"
 
 #: configdialog.cpp:143 configdialog.cpp:201
 msgid "If checked, titles and names will be automatically formatted."
-msgstr "Se selezionato, titoli e nomi  diventeranno automaticamente maiuscoli."
+msgstr ""
+"Selle ruudu märkimisel vormistatakse raamatute pealkirjad ja autorite nimed "
+"automaatselt."
 
 #: configdialog.cpp:151
 msgid "Articles:"
-msgstr "Articoli:"
+msgstr "Artiklid:"
 
 #: configdialog.cpp:157 configdialog.cpp:160
 msgid ""
 "A comma-separated list of words which should be considered as articles if "
 "they are the first word in a title."
 msgstr ""
-"Un elenco di parole separate da virgole che saranno considerati articoli se "
-"appaiono come prima parola di un titolo"
+"Komadega eraldatud nimekiri sõnadest, mida tuleks kohelda artiklitena, kui "
+"nad esinevad pealkirja esimese sõnana."
 
 #: configdialog.cpp:165
 msgid "Personal suffixes:"
-msgstr "Suffissi personali:"
+msgstr "Isiklikud sufiksid"
 
 #: configdialog.cpp:170 configdialog.cpp:172
 msgid ""
 "A comma-separated list of suffixes which might be used in personal names."
-msgstr "Un elenco di parole separate da virgole da usare nei nomi di persona."
+msgstr ""
+"Komadega eraldatud nimekiri sufiksitest, mida võidakse kasutada isikunimedes."
 
 #: configdialog.cpp:176
 msgid "Surname prefixes:"
-msgstr ""
+msgstr "Perekonnanime prefiksid:"
 
 #: configdialog.cpp:181 configdialog.cpp:183
-#, fuzzy
 msgid "A comma-separated list of prefixes which might be used in surnames."
-msgstr "Un elenco di parole separate da virgole da usare nei nomi di persona."
+msgstr ""
+"Komadega eraldatud nimekiri prefiksitest, mida võidakse kasutada "
+"perekonnanimedes."
 
 #: configdialog.cpp:194
 msgid "Printing"
-msgstr "In stampa ..."
+msgstr "Printimine"
 
 #: configdialog.cpp:194
 msgid "Printing Options"
-msgstr "Opzioni di stampa"
+msgstr "Printimise valikud"
 
 #: configdialog.cpp:200
 msgid "Format titles and names"
-msgstr "Formatta  titoli e nomi"
+msgstr "Pealkirjade ja nimede vormindamine"
 
 #: configdialog.cpp:205
 msgid "Print field headers"
-msgstr "Stampa field headers"
+msgstr "Välja päiste printimine"
 
 #: configdialog.cpp:206
 msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Se selezionato, i nomi di campo saranno stampati come headers della tabella."
+msgstr "Selle ruudu märkimisel väljade nimed prinditakse tabeli päistena."
 
 #: configdialog.cpp:210
-#, fuzzy
 msgid "Grouping Options"
-msgstr "Raggruppamento"
+msgstr "Grupeerimise valikud"
 
 #: configdialog.cpp:213
 msgid "Group the books"
-msgstr "Raggruppa i libri"
+msgstr "Raamatute grupeerimine"
 
 #: configdialog.cpp:214
 msgid "If checked, the books will be grouped under the selected field."
-msgstr ""
-"Se selezionato, i libri verranno raggruppati secondo il campo selezionato."
+msgstr "Selle ruudu märkimisel grupeeritakse raamatud valitud välja järgi."
 
 #: configdialog.cpp:220
 msgid "The collection is grouped by this field."
-msgstr "La collezione viene ordinata secondo questo campo"
+msgstr "Kogu grupeeritakse selle välja järgi."
 
 #: configdialog.cpp:232
 msgid "Fields"
-msgstr "Campi"
+msgstr "Väljad"
 
 #: configdialog.cpp:237
 msgid "Available Fields"
-msgstr "Campi disponibili"
+msgstr "Saadavalolevad väljad"
 
 #: configdialog.cpp:239
 msgid "These are the available fields in the collection."
-msgstr "Questi sono i campi disponibili per la collezione"
+msgstr "Need on selles kogus saadavalolevad väljad."
 
 #: configdialog.cpp:255
 msgid "Selected Fields"
-msgstr "Campi selezionati"
+msgstr "Valitud väljad"
 
 #: configdialog.cpp:257
 msgid "These are the selected fields in the collection."
-msgstr "Questi sono i campi selezionati per la collezione"
+msgstr "Need on selle kogu valitud väljad."
 
 #: finddialog.cpp:43
 msgid "Find Text"
-msgstr "Trova testo"
+msgstr "Teksti leidmine"
 
 #: finddialog.cpp:44
 msgid "&Find"
-msgstr "&Trova"
+msgstr "Otsimine"
 
 #: finddialog.cpp:50
 msgid "Text To Find:"
-msgstr "Testo da trovare:"
+msgstr "Otsitav tekst:"
 
 #: finddialog.cpp:53
 msgid "The search string"
-msgstr "La stringa da ricercare"
+msgstr "Otsitav string"
 
 #: finddialog.cpp:64
 msgid "Search In:"
-msgstr "Cerca in:"
+msgstr "Otsimiskoht:"
 
 #: finddialog.cpp:67
 msgid "Select which field should be searched."
-msgstr "Seleziona in quale campo eseguire la ricerca"
+msgstr "Otsitakse järgnevast väljast:"
 
 #: finddialog.cpp:75
 msgid "Case &Sensitive"
-msgstr "Case &Sensitive"
+msgstr "Tõstutundlik"
 
 #: finddialog.cpp:76
 msgid "If checked, the search is case-sensitive."
-msgstr "Se selezionato, la ricerca distingue tra maiuscle e minuscole. "
+msgstr ""
+"Selle ruudu märkimisel omavad otsingul tähtsust suur- ja väiketähtede "
+"erinevused."
 
 #: finddialog.cpp:77
 msgid "Find &Backwards"
-msgstr "Trova indietro"
+msgstr "&Tagurpidiotsing"
 
 #: finddialog.cpp:78
 msgid "If checked, the document is searched in reverse."
-msgstr ""
-"Se selezionato, la ricerca procedere dalla fine all'inizio del documento."
+msgstr "Selle ruudu märkimisel otsitakse dokumendist kirjeid tagant ettepoole."
 
 #: finddialog.cpp:79
 msgid "&Whole Words Only"
-msgstr "S&olo parole intere"
+msgstr "Ainult terved sõnad"
 
 #: finddialog.cpp:80
 msgid "If checked, the search is limited to whole words."
-msgstr "Se selezionato, la ricerca si limita alle parole intere."
+msgstr ""
+"Selle ruudu märkimisel otsitakse ainult täissõnu (mitte lihtsalt tähemärkide "
+"järgnevust)."
 
 #: finddialog.cpp:81
 msgid "&From Beginning"
-msgstr "&Dall'inizio"
+msgstr "&Algusest"
 
 #: finddialog.cpp:82
 msgid "If checked, the document is searched from the beginning."
-msgstr "Se selezionato, la ricerca comincia dall'inizio del documento."
+msgstr "Selle ruudu märkimisel otsitakse dokumendist kirjeid eest tahapoole."
 
 #: finddialog.cpp:83
 msgid "As &Regular Expression"
-msgstr "Come espressione &regolare."
+msgstr "Regulaaravaldisena"
 
 #: finddialog.cpp:84
 msgid "If checked, the search string is used as a regular expression."
 msgstr ""
-"Se selezionato, la stringa inserita viene cercata come espressione regolare."
+"Selle ruudu märkimisel vaadeldakse otsitavat stringi regulaaravaldisena."
 
 #: finddialog.cpp:87
-#, fuzzy
 msgid "&Edit Regular Expression..."
-msgstr "Come espressione &regolare."
+msgstr "Regulaaravaldise muutmine"
 
 #: finddialog.cpp:107 finddialog.cpp:173
 msgid "All Fields"
-msgstr "Tutti i campi"
+msgstr "Kõik väljad"
 
 #: finddialog.cpp:117
 msgid "Invalid regular expression."
-msgstr "Espressione regolare non valida."
+msgstr "Vigane regulaaravaldis"
 
 #: main.cpp:26
 msgid "Bookcase - a book collection manager for KDE"
-msgstr "Bookcase - un gestore della biblioteca per KDE"
+msgstr "Bookcase - rakendus raamatute kogu haldamiseks KDE-s"
 
 #: main.cpp:31
 msgid "File to open"
-msgstr "File da aprire"
+msgstr "Fail, mida avada"
 
 #: main.cpp:36 bookcase.moc.cpp:34 bookcase.moc.cpp:42
 msgid "Bookcase"
@@ -921,11 +917,11 @@ msgstr "Bookcase"
 
 #: songcollection.cpp:20
 msgid "Song"
-msgstr "Canzone"
+msgstr "Laul"
 
 #: songcollection.cpp:29
 msgid "Artist"
-msgstr "Artista"
+msgstr "Esitaja"
 
 #: songcollection.cpp:35
 msgid "Album"
@@ -937,19 +933,19 @@ msgstr "CD"
 
 #: songcollection.cpp:51
 msgid "Cassette"
-msgstr "Musicassetta"
+msgstr "Kassett"
 
 #: songcollection.cpp:52 videocollection.cpp:42
 msgid "Medium"
-msgstr "Supporto"
+msgstr "Meedia"
 
 #: songcollection.h:48
 msgid "My Songs"
-msgstr "Le mie canzoni"
+msgstr "Minu Laulud"
 
 #: videocollection.cpp:20
 msgid "Videos"
-msgstr "Video"
+msgstr "Videod"
 
 #: videocollection.cpp:41
 msgid "DVD"
@@ -957,7 +953,7 @@ msgstr "DVD"
 
 #: videocollection.cpp:41
 msgid "VHS"
-msgstr "Videocassetta"
+msgstr "VHS"
 
 #: videocollection.cpp:41
 msgid "VCD"
@@ -969,208 +965,196 @@ msgstr "DivX"
 
 #: videocollection.h:47
 msgid "My Videos"
-msgstr "I miei video"
+msgstr "Minu Videod"
 
 #: bccollectionpropdialog.cpp:73
-#, fuzzy
 msgid "Edit Collection Fields"
-msgstr "Opzioni per la collezione di audio"
+msgstr "Kogu väljade muutmine"
 
 #: bccollectionpropdialog.cpp:80
-#, fuzzy
 msgid "Current Fields"
-msgstr "Campi selezionati"
+msgstr "Käesolevad väljad"
 
 #: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
 #: bccollectionpropdialog.cpp:212
-#, fuzzy
 msgid "New Field"
-msgstr "Tutti i campi"
+msgstr "Uus väli"
 
 #: bccollectionpropdialog.cpp:97
-#, fuzzy
 msgid "Delete Field"
-msgstr "Campi selezionati"
+msgstr "Välja kustutamine"
 
 #: bccollectionpropdialog.cpp:107
 msgid "Field Properties"
-msgstr ""
+msgstr "Välja omadused"
 
 #: bccollectionpropdialog.cpp:113
-#, fuzzy
 msgid "Title:"
-msgstr "Titolo"
+msgstr "Pealkiri:"
 
 #: bccollectionpropdialog.cpp:118
 msgid "Type:"
-msgstr ""
+msgstr "Tüüp:"
 
 #: bccollectionpropdialog.cpp:125
 msgid "Category:"
-msgstr ""
+msgstr "Kategooria:"
 
 #: bccollectionpropdialog.cpp:131
 msgid "The fields are grouped by common categories for editing."
-msgstr ""
+msgstr "Väljad grupeeritakse muutmiseks ühiste kategooriatena."
 
 #: bccollectionpropdialog.cpp:133
 msgid "Allowed:"
-msgstr ""
+msgstr "Lubatud:"
 
 #: bccollectionpropdialog.cpp:137
 msgid "Allowed values for this field are separated by a semi-colon."
-msgstr ""
+msgstr "Sellel väljal lubatud väärtused on eraldatud semikooloniga."
 
 #: bccollectionpropdialog.cpp:139
 msgid "Description:"
-msgstr ""
+msgstr "Kirjeldus:"
 
 #: bccollectionpropdialog.cpp:145
-#, fuzzy
 msgid "Format Options"
-msgstr "Opzioni di formattazione"
+msgstr "Vormingu valikud"
 
 #: bccollectionpropdialog.cpp:146
 msgid "No formatting"
-msgstr ""
+msgstr "Vormistamata"
 
 #: bccollectionpropdialog.cpp:147
-#, fuzzy
 msgid "Format as a title"
-msgstr "Formatta  titoli e nomi"
+msgstr "Pealkirjana vormistamine"
 
 #: bccollectionpropdialog.cpp:148
-#, fuzzy
 msgid "Format as a name"
-msgstr "Formatta  titoli e nomi"
+msgstr "Nimena vormistamine"
 
 #: bccollectionpropdialog.cpp:151
-#, fuzzy
 msgid "Field Options"
-msgstr "Opzioni generali"
+msgstr "Välja valikud"
 
 #: bccollectionpropdialog.cpp:152
 msgid "Enable auto-completion"
-msgstr ""
+msgstr "Automaatse sõnalõpetuse lubamine"
 
 #: bccollectionpropdialog.cpp:153
 msgid "Allow multiple values"
-msgstr ""
+msgstr "Enam kui ühe väärtuse lubamine"
 
 #: bccollectionpropdialog.cpp:154
 msgid "Allow grouping"
-msgstr ""
+msgstr "Grupeerimise lubamine"
 
 #: bccollectionpropdialog.cpp:243
 msgid ""
 "Do you really want to delete the %1 field? This action occurs immediately "
 "and can not be undone!"
 msgstr ""
+"Kas oled kindel oma otsuses kustutada väli  nimega %1? Selle teo tulemused "
+"avalduvad otsekohe ja neid pole enam võimalik olematuks teha!"
 
 #: bccollectionpropdialog.cpp:246
-#, fuzzy
 msgid "Delete Field?"
-msgstr "Campi selezionati"
+msgstr "Kustutada väli?"
 
 #: bcfilterdialog.cpp:60
-#, fuzzy
 msgid "Any Field"
-msgstr "Tutti i campi"
+msgstr "Suvaline väli"
 
 #: bcfilterdialog.cpp:69
 msgid "contains"
-msgstr ""
+msgstr "sisaldab"
 
 #: bcfilterdialog.cpp:70
 msgid "does not contain"
-msgstr ""
+msgstr "ei sisalda"
 
 #: bcfilterdialog.cpp:71
 msgid "equals"
-msgstr ""
+msgstr "võrdub"
 
 #: bcfilterdialog.cpp:72
 msgid "does not equal"
-msgstr ""
+msgstr "ei võrdu"
 
 #: bcfilterdialog.cpp:73
 msgid "matches regexp"
-msgstr ""
+msgstr "vastab regulaaravaldisele"
 
 #: bcfilterdialog.cpp:74
 msgid "does not match regexp"
-msgstr ""
+msgstr "ei vasta regulaaravaldisele"
 
 #: bcfilterdialog.cpp:86
-#, fuzzy
 msgid "Edit..."
-msgstr "Chiusura ..."
+msgstr "Muutmine"
 
 #: bcfilterdialog.cpp:246
 msgid "Advanced Filter"
-msgstr ""
+msgstr "Erifilter"
 
 #: bcfilterdialog.cpp:252
 msgid "Filter Criteria"
-msgstr ""
+msgstr "Filtreerimise kriteeriumid"
 
 #: bcfilterdialog.cpp:255
 msgid "Match a&ll of the following"
-msgstr ""
+msgstr "Vasta kõigele järgnevale"
 
 #: bcfilterdialog.cpp:256
 msgid "Match an&y of the following"
-msgstr ""
+msgstr "Vasta millelegi järgnevast"
 
 #: kwidgetlister.cpp:56
 msgid "more widgets"
-msgstr ""
+msgstr "rohkem vidinaid"
 
 #: kwidgetlister.cpp:59
 msgid "fewer widgets"
-msgstr ""
+msgstr "vähem vidinaid"
 
 #: kwidgetlister.cpp:65
 msgid "clear widgets"
-msgstr ""
+msgstr "puhasta vidinad"
 
 #: configdialog.moc.cpp:34 configdialog.moc.cpp:42
 msgid "ConfigDialog"
-msgstr "ConfigDialog"
+msgstr "Valikudialoog"
 
 #: rc.cpp:1
 msgid "I&mport"
-msgstr "I&mporta"
+msgstr "I&mport"
 
 #: rc.cpp:2
 msgid "E&xport"
-msgstr "E&sporta"
+msgstr "Eksport"
 
 #: rc.cpp:3
-#, fuzzy
 msgid "Collection Toolbar"
-msgstr "Barra degli strumenti-collezione"
+msgstr "Kogu tööriistariba"
 
 #: bclabelaction.moc.cpp:34 bclabelaction.moc.cpp:42
 msgid "BCLabelAction"
-msgstr "BCLabelAction"
+msgstr ""
 
 #: bclabelaction.moc.cpp:107 bclabelaction.moc.cpp:115
-#, fuzzy
 msgid "BCLineEditAction"
-msgstr "BCLabelAction"
+msgstr ""
 
 #: videocollection.moc.cpp:34 videocollection.moc.cpp:42
 msgid "VideoCollection"
-msgstr "VideoCollection"
+msgstr "Videokogu"
 
 #: finddialog.moc.cpp:34 finddialog.moc.cpp:42
 msgid "FindDialog"
-msgstr "FindDialog"
+msgstr "Otsingukataloog"
 
 #: bccollection.moc.cpp:34 bccollection.moc.cpp:42
 msgid "BCCollection"
-msgstr "BCCollection"
+msgstr ""
 
 #: bcdetailedlistview.moc.cpp:34 bcdetailedlistview.moc.cpp:42
 msgid "BCDetailedListView"
@@ -1178,40 +1162,35 @@ msgstr ""
 
 #: bookcollection.moc.cpp:34 bookcollection.moc.cpp:42
 msgid "BookCollection"
-msgstr "BookCollection"
+msgstr "Raamatukogu"
 
 #: bcuniteditwidget.moc.cpp:34 bcuniteditwidget.moc.cpp:42
-#, fuzzy
 msgid "BCUnitEditWidget"
-msgstr "FindDialog"
+msgstr ""
 
 #: bookcasedoc.moc.cpp:34 bookcasedoc.moc.cpp:42
 msgid "BookcaseDoc"
-msgstr "BookcaseDoc"
+msgstr ""
 
 #: bcfilterdialog.moc.cpp:34 bcfilterdialog.moc.cpp:42
-#, fuzzy
 msgid "BCFilterRuleWidget"
-msgstr "FindDialog"
+msgstr ""
 
 #: bcfilterdialog.moc.cpp:122 bcfilterdialog.moc.cpp:130
-#, fuzzy
 msgid "BCFilterRuleWidgetLister"
-msgstr "FindDialog"
+msgstr ""
 
 #: bcfilterdialog.moc.cpp:204 bcfilterdialog.moc.cpp:212
-#, fuzzy
 msgid "BCFilterDialog"
-msgstr "FindDialog"
+msgstr ""
 
 #: bccollectionpropdialog.moc.cpp:34 bccollectionpropdialog.moc.cpp:42
-#, fuzzy
 msgid "BCCollectionPropDialog"
-msgstr "BCCollection"
+msgstr ""
 
 #: songcollection.moc.cpp:34 songcollection.moc.cpp:42
 msgid "SongCollection"
-msgstr "SongCollection"
+msgstr "Muusikakogu"
 
 #: bctabcontrol.moc.cpp:34 bctabcontrol.moc.cpp:42
 msgid "BCTabControl"
@@ -1222,148 +1201,23 @@ msgid "BCGroupView"
 msgstr ""
 
 #: bcattributewidget.moc.cpp:34 bcattributewidget.moc.cpp:42
-#, fuzzy
 msgid "BCAttributeWidget"
-msgstr "FindDialog"
+msgstr ""
 
 #: _translatorinfo.cpp:1
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr "FaUsT"
+msgstr ""
+"_: TÕLKIJATE NIMED\n"
+"Teele Nigola \n"
+"Toomas Nigoa"
 
 #: _translatorinfo.cpp:3
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr "faust@inventati.org"
-
-#~ msgid "Cut the selected section and puts it to the clipboard"
-#~ msgstr "Taglia"
-
-#~ msgid "Copy the selected section to the clipboard"
-#~ msgstr "Copia"
-
-#~ msgid "Paste the clipboard contents to actual position"
-#~ msgstr "Incolla"
-
-#~ msgid "Clear Data"
-#~ msgstr "Cancella dati"
-
-#~ msgid ""
-#~ "*.bc|Bookcase files (*.bc)\n"
-#~ "*.xml|XML files (*.xml)\n"
-#~ "*|All files"
-#~ msgstr ""
-#~ "*.bc|file di Bookcase (*.bc)\n"
-#~ "*.xml|file XML (*.xml)\n"
-#~ "*|tutti i file"
-
-#, fuzzy
-#~ msgid "Unable to upload file - %1."
-#~ msgstr "Impossibile scaricare il file - %1."
-
-#, fuzzy
-#~ msgid "Unable to write file - %1."
-#~ msgstr "Impossibile leggere il file - %1."
-
-#~ msgid ""
-#~ "Unable to find a file needed for printing - %1.\n"
-#~ "Please check your installation."
-#~ msgstr ""
-#~ "Impossibile trovare un file necessario per la stampa - %1.\n"
-#~ "Controlla la tua installazione, grazie."
-
-#, fuzzy
-#~ msgid "Unable to find file - %1."
-#~ msgstr "Impossibile aprire il file - %1."
-
-#~ msgid "Unable to download file - %1."
-#~ msgstr "Impossibile scaricare il file - %1."
-
-#~ msgid "Unable to open file - %1."
-#~ msgstr "Impossibile aprire il file - %1."
-
-#~ msgid "Unable to read file - %1."
-#~ msgstr "Impossibile leggere il file - %1."
-
-#~ msgid "File is not in XML format - %1."
-#~ msgstr "Il file non ha l'aspetto di un file XML -%1."
-
-#, fuzzy
-#~ msgid "Unable to load file - %1."
-#~ msgstr "Impossibile scaricare il file - %1."
-
-#, fuzzy
-#~ msgid "This file is not a Bookcase data file - %1."
-#~ msgstr "Il file non ha l'aspetto di un file di Bookcase - %1"
-
-#, fuzzy
-#~ msgid "File has no syntax version - %1."
-#~ msgstr "Il file non ha l'aspetto di un file XML -%1."
-
-#~ msgid "My CDs"
-#~ msgstr "I miei CD"
-
-#~ msgid "8-track"
-#~ msgstr "8 piste"
-
-#~ msgid "Video"
-#~ msgstr "Video"
-
-#~ msgid "Date"
-#~ msgstr "Data"
-
-#~ msgid "8mm"
-#~ msgstr "8mm"
-
-#~ msgid "LaserDisc"
-#~ msgstr "LaserDisc"
-
-#~ msgid "Betamax"
-#~ msgstr "Beta"
-
-#~ msgid "CDs"
-#~ msgstr "CD"
-
-#~ msgid "New &Collection"
-#~ msgstr "Nuova &Collezione"
-
-#, fuzzy
-#~ msgid "Importing..."
-#~ msgstr "In stampa ..."
-
-#~ msgid "Find:"
-#~ msgstr "Trova:"
-
-#~ msgid "%1 %2"
-#~ msgstr "%1 %2"
-
-#, fuzzy
-#~ msgid ""
-#~ "Unable to find a required file - %1.\n"
-#~ "Please check your installation."
-#~ msgstr ""
-#~ "Impossibile trovare un file necessario per la stampa - %1.\n"
-#~ "Controlla la tua installazione, grazie."
-
-#~ msgid "Rename"
-#~ msgstr "Rinomina"
-
-#~ msgid "(None)"
-#~ msgstr "(Nessuno)"
-
-#~ msgid "Full Contents"
-#~ msgstr "Intero contenuto"
-
-#~ msgid "Creates a full report"
-#~ msgstr "Crea un report completo"
-
-#~ msgid "Unable to find %1 in standard KDE directories."
-#~ msgstr "Impossibile trovare %1 nelle directory standard di KDE."
-
-#~ msgid "&New..."
-#~ msgstr "&Nuovo ..."
-
-#~ msgid "Show Browse Toolbar"
-#~ msgstr "Mostra la barra di navigazione"
+msgstr ""
+"_: TÕLKIJATE E-POSTI AADRESSID\n"
+"teele.nigola@eelk.ee\n"
+"toomas.nigola@eelk.ee"

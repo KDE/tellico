@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2003-06-25 17:56-0700\n"
+"POT-Creation-Date: 2003-07-12 12:46-0700\n"
 "PO-Revision-Date: 2003-05-13 02:47+0200\n"
 "Last-Translator: Leif Mathis Gaup <lmgaup@nsn.no>\n"
 "Language-Team: Norsk Bokmål <nb@li.org>\n"
@@ -28,41 +28,41 @@ msgstr "en,ei,et,i,av,den,det,de,til,fra"
 msgid "General"
 msgstr "Hovedvalg"
 
-#: bcattribute.cpp:312
+#: bcattribute.cpp:332
 msgid "the"
 msgstr "den"
 
-#: bcattribute.cpp:336
+#: bcattribute.cpp:356
 msgid "jr.,jr,iii,iv"
 msgstr "jr,Sr,"
 
-#: bcattribute.cpp:366
+#: bcattribute.cpp:386
 msgid "de,van der,von"
 msgstr "van,von"
 
-#: bcattribute.cpp:381 bccollectionpropdialog.cpp:264
+#: bcattribute.cpp:401 bccollectionpropdialog.cpp:264
 msgid "Simple Text"
 msgstr "Enkel tekst"
 
-#: bcattribute.cpp:382 bccollectionpropdialog.cpp:262
+#: bcattribute.cpp:402 bccollectionpropdialog.cpp:262
 #: bccollectionpropdialog.cpp:275
 msgid "Paragraph"
 msgstr "Avsnitt"
 
-#: bcattribute.cpp:383 bccollectionpropdialog.cpp:261
+#: bcattribute.cpp:403 bccollectionpropdialog.cpp:261
 msgid "List"
 msgstr "Liste"
 
-#: bcattribute.cpp:384
+#: bcattribute.cpp:404
 msgid "Checkbox"
 msgstr "Avkryssningsboks"
 
-#: bcattribute.cpp:385 songcollection.cpp:40 videocollection.cpp:29
+#: bcattribute.cpp:405 songcollection.cpp:40 videocollection.cpp:29
 #: bccollectionpropdialog.cpp:269
 msgid "Year"
 msgstr "År"
 
-#: bcattribute.cpp:386 bccollectionpropdialog.cpp:272
+#: bcattribute.cpp:406 bccollectionpropdialog.cpp:272
 msgid "URL"
 msgstr "Adresse"
 
@@ -1109,13 +1109,26 @@ msgstr "rens avkrysningsbokser"
 msgid "ConfigDialog"
 msgstr "Konfigurasjonsdialog"
 
+#: rc.cpp:1
+msgid "I&mport"
+msgstr "I&mporter"
+
+#: rc.cpp:2
+msgid "E&xport"
+msgstr "E&ksporter"
+
+#: rc.cpp:3
+msgid "Collection Toolbar"
+msgstr "Bookcaseverktøylinje"
+
 #: bclabelaction.moc.cpp:34 bclabelaction.moc.cpp:42
 msgid "BCLabelAction"
 msgstr ""
 
 #: bclabelaction.moc.cpp:107 bclabelaction.moc.cpp:115
+#, fuzzy
 msgid "BCLineEditAction"
-msgstr ""
+msgstr "Tilstand"
 
 #: videocollection.moc.cpp:34 videocollection.moc.cpp:42
 msgid "VideoCollection"
@@ -1126,8 +1139,9 @@ msgid "FindDialog"
 msgstr "FinnDialog"
 
 #: bccollection.moc.cpp:34 bccollection.moc.cpp:42
+#, fuzzy
 msgid "BCCollection"
-msgstr ""
+msgstr "Boksamling"
 
 #: bcdetailedlistview.moc.cpp:34 bcdetailedlistview.moc.cpp:42
 msgid "BCDetailedListView"
@@ -1154,12 +1168,14 @@ msgid "BCFilterRuleWidgetLister"
 msgstr ""
 
 #: bcfilterdialog.moc.cpp:204 bcfilterdialog.moc.cpp:212
+#, fuzzy
 msgid "BCFilterDialog"
-msgstr ""
+msgstr "FinnDialog"
 
 #: bccollectionpropdialog.moc.cpp:34 bccollectionpropdialog.moc.cpp:42
+#, fuzzy
 msgid "BCCollectionPropDialog"
-msgstr ""
+msgstr "Boksamling"
 
 #: songcollection.moc.cpp:34 songcollection.moc.cpp:42
 msgid "SongCollection"
@@ -1176,18 +1192,6 @@ msgstr ""
 #: bcattributewidget.moc.cpp:34 bcattributewidget.moc.cpp:42
 msgid "BCAttributeWidget"
 msgstr ""
-
-#: rc.cpp:1
-msgid "I&mport"
-msgstr "I&mporter"
-
-#: rc.cpp:2
-msgid "E&xport"
-msgstr "E&ksporter"
-
-#: rc.cpp:3
-msgid "Collection Toolbar"
-msgstr "Bookcaseverktøylinje"
 
 #: _translatorinfo.cpp:1
 msgid ""

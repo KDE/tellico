@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-06-25 17:56-0700\n"
+"POT-Creation-Date: 2003-07-12 12:46-0700\n"
 "PO-Revision-Date: 2003-05-18 11:44+0900\n"
 "Last-Translator: Koichi OIKE <daichi1@gol.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -27,41 +27,41 @@ msgstr "a,an,and,in,of,the,to"
 msgid "General"
 msgstr "General"
 
-#: bcattribute.cpp:312
+#: bcattribute.cpp:332
 msgid "the"
 msgstr "the"
 
-#: bcattribute.cpp:336
+#: bcattribute.cpp:356
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: bcattribute.cpp:366
+#: bcattribute.cpp:386
 msgid "de,van der,von"
 msgstr "de,van der,von"
 
-#: bcattribute.cpp:381 bccollectionpropdialog.cpp:264
+#: bcattribute.cpp:401 bccollectionpropdialog.cpp:264
 msgid "Simple Text"
 msgstr "シンプルテキスト"
 
-#: bcattribute.cpp:382 bccollectionpropdialog.cpp:262
+#: bcattribute.cpp:402 bccollectionpropdialog.cpp:262
 #: bccollectionpropdialog.cpp:275
 msgid "Paragraph"
 msgstr "パラグラフ"
 
-#: bcattribute.cpp:383 bccollectionpropdialog.cpp:261
+#: bcattribute.cpp:403 bccollectionpropdialog.cpp:261
 msgid "List"
 msgstr "リスト"
 
-#: bcattribute.cpp:384
+#: bcattribute.cpp:404
 msgid "Checkbox"
 msgstr "チェックボックス"
 
-#: bcattribute.cpp:385 songcollection.cpp:40 videocollection.cpp:29
+#: bcattribute.cpp:405 songcollection.cpp:40 videocollection.cpp:29
 #: bccollectionpropdialog.cpp:269
 msgid "Year"
 msgstr "年"
 
-#: bcattribute.cpp:386 bccollectionpropdialog.cpp:272
+#: bcattribute.cpp:406 bccollectionpropdialog.cpp:272
 msgid "URL"
 msgstr "URL"
 
@@ -1106,6 +1106,18 @@ msgstr "クリア"
 msgid "ConfigDialog"
 msgstr "ConfigDialog"
 
+#: rc.cpp:1
+msgid "I&mport"
+msgstr "インポート(&I)"
+
+#: rc.cpp:2
+msgid "E&xport"
+msgstr "エクスポート(&X)"
+
+#: rc.cpp:3
+msgid "Collection Toolbar"
+msgstr "コレクションツールバー"
+
 #: bclabelaction.moc.cpp:34 bclabelaction.moc.cpp:42
 msgid "BCLabelAction"
 msgstr "BCLabelAction"
@@ -1173,18 +1185,6 @@ msgstr "BCGroupView"
 #: bcattributewidget.moc.cpp:34 bcattributewidget.moc.cpp:42
 msgid "BCAttributeWidget"
 msgstr "BCAttributeWidget"
-
-#: rc.cpp:1
-msgid "I&mport"
-msgstr "インポート(&I)"
-
-#: rc.cpp:2
-msgid "E&xport"
-msgstr "エクスポート(&X)"
-
-#: rc.cpp:3
-msgid "Collection Toolbar"
-msgstr "コレクションツールバー"
 
 #: _translatorinfo.cpp:1
 msgid ""

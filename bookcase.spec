@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.6.4
+%define version 0.6.5
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
@@ -75,6 +75,9 @@ EOF
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Mon Jul 21 2003 Robby Stephenson <robby@periapsis.org> 0.6.5-1rls
+- Version 0.6.5
+
 * Wed Jun 25 2003 Robby Stephenson <robby@periapsis.org> 0.6.4-1rls
 - Version 0.6.4
 

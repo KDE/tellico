@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-06-25 17:56-0700\n"
+"POT-Creation-Date: 2003-07-12 12:46-0700\n"
 "PO-Revision-Date: 2002-12-03 17:29-0800\n"
 "Last-Translator: Iulian Ursache <iulianu@cs.tuiasi.ro>\n"
 "Language-Team: Română <ro@li.org>\n"
@@ -27,43 +27,43 @@ msgstr ""
 msgid "General"
 msgstr "General"
 
-#: bcattribute.cpp:312
+#: bcattribute.cpp:332
 msgid "the"
 msgstr ""
 
-#: bcattribute.cpp:336
+#: bcattribute.cpp:356
 msgid "jr.,jr,iii,iv"
 msgstr ""
 
-#: bcattribute.cpp:366
+#: bcattribute.cpp:386
 msgid "de,van der,von"
 msgstr ""
 
-#: bcattribute.cpp:381 bccollectionpropdialog.cpp:264
+#: bcattribute.cpp:401 bccollectionpropdialog.cpp:264
 #, fuzzy
 msgid "Simple Text"
 msgstr "Caută"
 
-#: bcattribute.cpp:382 bccollectionpropdialog.cpp:262
+#: bcattribute.cpp:402 bccollectionpropdialog.cpp:262
 #: bccollectionpropdialog.cpp:275
 msgid "Paragraph"
 msgstr ""
 
-#: bcattribute.cpp:383 bccollectionpropdialog.cpp:261
+#: bcattribute.cpp:403 bccollectionpropdialog.cpp:261
 #, fuzzy
 msgid "List"
 msgstr "Artist"
 
-#: bcattribute.cpp:384
+#: bcattribute.cpp:404
 msgid "Checkbox"
 msgstr ""
 
-#: bcattribute.cpp:385 songcollection.cpp:40 videocollection.cpp:29
+#: bcattribute.cpp:405 songcollection.cpp:40 videocollection.cpp:29
 #: bccollectionpropdialog.cpp:269
 msgid "Year"
 msgstr "An"
 
-#: bcattribute.cpp:386 bccollectionpropdialog.cpp:272
+#: bcattribute.cpp:406 bccollectionpropdialog.cpp:272
 msgid "URL"
 msgstr ""
 
@@ -1205,6 +1205,19 @@ msgstr ""
 msgid "ConfigDialog"
 msgstr "Opţiuni colecţii cărţi"
 
+#: rc.cpp:1
+msgid "I&mport"
+msgstr ""
+
+#: rc.cpp:2
+msgid "E&xport"
+msgstr ""
+
+#: rc.cpp:3
+#, fuzzy
+msgid "Collection Toolbar"
+msgstr "Bara de colecţii"
+
 #: bclabelaction.moc.cpp:34 bclabelaction.moc.cpp:42
 #, fuzzy
 msgid "BCLabelAction"
@@ -1254,8 +1267,9 @@ msgid "BCFilterRuleWidget"
 msgstr "Opţiuni colecţii cărţi"
 
 #: bcfilterdialog.moc.cpp:122 bcfilterdialog.moc.cpp:130
+#, fuzzy
 msgid "BCFilterRuleWidgetLister"
-msgstr ""
+msgstr "Opţiuni colecţii cărţi"
 
 #: bcfilterdialog.moc.cpp:204 bcfilterdialog.moc.cpp:212
 #, fuzzy
@@ -1281,21 +1295,9 @@ msgid "BCGroupView"
 msgstr ""
 
 #: bcattributewidget.moc.cpp:34 bcattributewidget.moc.cpp:42
-msgid "BCAttributeWidget"
-msgstr ""
-
-#: rc.cpp:1
-msgid "I&mport"
-msgstr ""
-
-#: rc.cpp:2
-msgid "E&xport"
-msgstr ""
-
-#: rc.cpp:3
 #, fuzzy
-msgid "Collection Toolbar"
-msgstr "Bara de colecţii"
+msgid "BCAttributeWidget"
+msgstr "Opţiuni colecţii cărţi"
 
 #: _translatorinfo.cpp:1
 msgid ""

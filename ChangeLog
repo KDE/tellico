@@ -1,3 +1,20 @@
+2003-07-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.6.5
+
+2003-07-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Estonian translation from Toomas Nigola
+
+2003-07-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated German translation from Ulf-Diether Ehlert.
+
+2003-07-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed translation bug with category names.
+	* Added Bulgarian translation from Boyan Ivanov.
+
 2003-06-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed sorting bug for empty fields.
