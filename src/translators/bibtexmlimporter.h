@@ -1,8 +1,5 @@
 /***************************************************************************
-                             bibtexmlimporter.h
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,33 +14,42 @@
 #ifndef BIBTEXMLIMPORTER_H
 #define BIBTEXMLIMPORTER_H
 
-class BCCollection;
-class BCUnit;
+namespace Bookcase {
+  namespace Data {
+    class Data;
+  }
+}
+class Entry;
 
-#include "textimporter.h"
+#include "xmlimporter.h"
 
 #include <qdom.h>
+
+namespace Bookcase {
+  namespace Import {
 
 /**
  *@author Robby Stephenson
  */
-class BibtexmlImporter : public TextImporter {
+class BibtexmlImporter : public XMLImporter {
 Q_OBJECT
 
-public: 
-  BibtexmlImporter(const KURL& url);
+public:
+  /**
+   */
+  BibtexmlImporter(const KURL& url) : Import::XMLImporter(url), m_coll(0) {}
 
   /**
    */
-  virtual BCCollection* collection();
+  virtual Data::Collection* collection();
 
 private:
-  void readDomDocument(const QString& text);
   void loadDomDocument();
   void readEntry(const QDomNode& entryNode);
 
-  QDomDocument m_doc;
-  BCCollection* m_coll;
+  Data::Collection* m_coll;
 };
 
+  } // end namespace
+} // end namespace
 #endif

@@ -1,8 +1,5 @@
 /***************************************************************************
-                              isbnvalidator.h
-                             -------------------
-    begin                : Sun Oct 6 2002
-    copyright            : (C) 2002, 2003 by Robby Stephenson
+    copyright            : (C) 2002-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,9 +16,11 @@
 
 #include <qvalidator.h>
 
+namespace Bookcase {
+
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h 241 2003-11-04 05:56:49Z robby $
+ * @version $Id: isbnvalidator.h 386 2004-01-24 05:12:28Z robby $
  *
  * Parts of this code are based on Java code
  * copyright (c) 1998-2002 Roedy Green, Canadian Mind Products which
@@ -32,7 +31,7 @@
  * @see http://www.eblong.com/zarf/bookscan/
  * @see http://doc.trolltech.com/qq/qq01-seriously-weird-qregexp.html
  */
-class ISBNValidator : public QValidator  {
+class ISBNValidator : public QValidator {
 public:
   ISBNValidator(QObject* parent, const char* name=0);
 
@@ -118,4 +117,5 @@ private:
   void insertDashesEnglish(QString& input) const;
 };
 
+} // end namespace
 #endif

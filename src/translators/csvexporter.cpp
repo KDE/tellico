@@ -1,8 +1,5 @@
 /***************************************************************************
-                               csvexporter.cpp
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +12,7 @@
  ***************************************************************************/
 
 #include "csvexporter.h"
-#include "../bccollection.h"
+#include "../collection.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -33,7 +30,10 @@
 #include <qregexp.h> // needed for string replacement
 #endif
 
-CSVExporter::CSVExporter(const BCCollection* coll_, const BCUnitList& list_) : Exporter(coll_, list_),
+using Bookcase::Export::CSVExporter;
+
+CSVExporter::CSVExporter(const Data::Collection* coll_, const Data::EntryList& list_)
+  : Bookcase::Export::TextExporter(coll_, list_),
     m_includeTitles(true),
     m_delimiter(QString::fromLatin1(",")),
     m_widget(0) {
@@ -136,10 +136,10 @@ void CSVExporter::saveOptions(KConfig* config_) {
   config_->writeEntry("Delimiter", m_delimiter);
 }
 
-QString CSVExporter::text(bool formatAttributes_, bool) {
+QString CSVExporter::text(bool formatFields_, bool) {
   QString text;
 
-  BCAttributeListIterator attIt(collection()->attributeList());
+  Data::FieldListIterator attIt(collection()->fieldList());
   
   if(m_includeTitles) {
     for(attIt.toFirst(); attIt.current(); ++attIt) {
@@ -153,13 +153,12 @@ QString CSVExporter::text(bool formatAttributes_, bool) {
   }
   
   QString tmp;
-  BCUnitListIterator unitIt(unitList());
-  for( ; unitIt.current(); ++unitIt) {
+  for(Data::EntryListIterator entryIt(entryList()); entryIt.current(); ++entryIt) {
     for(attIt.toFirst() ; attIt.current(); ++attIt) {
-      if(formatAttributes_) {
-        tmp = unitIt.current()->attributeFormatted(attIt.current()->name(), attIt.current()->formatFlag());
+      if(formatFields_) {
+        tmp = entryIt.current()->formattedField(attIt.current()->name());
       } else {
-        tmp = unitIt.current()->attribute(attIt.current()->name());
+        tmp = entryIt.current()->field(attIt.current()->name());
       }
       text += escapeText(tmp);
       if(!attIt.atLast()) {

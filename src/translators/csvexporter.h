@@ -1,8 +1,5 @@
 /***************************************************************************
-                                csvexporter.h
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,15 +21,18 @@ class QWidget;
 class QCheckBox;
 class QRadioButton;
 
-#include "exporter.h"
+#include "textexporter.h"
+
+namespace Bookcase {
+  namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: csvexporter.h 216 2003-10-24 00:58:22Z robby $
+ * @version $Id: csvexporter.h 386 2004-01-24 05:12:28Z robby $
  */
-class CSVExporter : public Exporter {
+class CSVExporter : public TextExporter {
 public: 
-  CSVExporter(const BCCollection* coll, const BCUnitList& list);
+  CSVExporter(const Data::Collection* coll, const Data::EntryList& list);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;
@@ -56,4 +56,6 @@ private:
   KLineEdit* m_editOther;
 };
 
+  } // end namespace
+} // end namespace
 #endif

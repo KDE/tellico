@@ -1,8 +1,5 @@
 /***************************************************************************
-                                xslthandler.h
-                             -------------------
-    begin                : Wed Jan 22 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,12 +25,14 @@
 
 static const int MAX_PARAMS = 2*16;
 
+namespace Bookcase {
+
 /**
  * The XSLTHandler contains all the code which uses XSLT processing to generate HTML or to
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h 288 2003-11-10 06:11:56Z robby $
+ * @version $Id: xslthandler.h 394 2004-01-24 23:17:42Z robby $
  */
 class XSLTHandler {
 
@@ -46,6 +45,7 @@ public:
    */
   ~XSLTHandler();
 
+  bool isValid() const { return m_stylesheet; }
   /**
    * Set the XSLT text
    *
@@ -81,4 +81,5 @@ private:
   const char* m_params[MAX_PARAMS + 1];
 };
 
+} // end namespace
 #endif

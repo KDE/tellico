@@ -1,8 +1,5 @@
 /***************************************************************************
-                             musiccollection.cpp
-                             -------------------
-    begin                : Tue Mar 4 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,99 +12,98 @@
  ***************************************************************************/
 
 #include "musiccollection.h"
+#include "../collectionfactory.h"
 
 #include <klocale.h>
+
+using Bookcase::Data::MusicCollection;
 
 static const char* music_general = I18N_NOOP("General");
 static const char* music_personal = I18N_NOOP("Personal");
 
-MusicCollection::MusicCollection(bool addAttributes_, const QString& title_ /*=null*/)
-   : BCCollection(title_, QString::fromLatin1("album"), i18n("Albums")) {
+MusicCollection::MusicCollection(bool addFields_, const QString& title_ /*=null*/)
+   : Collection(title_, CollectionFactory::entryName(Album), i18n("Albums")) {
   setTitle(title_.isNull() ? i18n("My Music") : title_);
-  if(addAttributes_) {
-    addAttributes(MusicCollection::defaultAttributes());
+  if(addFields_) {
+    addFields(defaultFields());
   }
-  setDefaultGroupAttribute(QString::fromLatin1("artist"));
-  setDefaultViewAttributes(QStringList::split(',', QString::fromLatin1("title,artist,album,genre")));
+  setDefaultGroupField(QString::fromLatin1("artist"));
 }
 
-BCAttributeList MusicCollection::defaultAttributes() {
-  BCAttributeList list;
-  BCAttribute* att;
+Bookcase::Data::FieldList MusicCollection::defaultFields() {
+  FieldList list;
+  Field* field;
 
-  att = new BCAttribute(QString::fromLatin1("title"), i18n("Title"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::NoDelete);
-  att->setFormatFlag(BCAttribute::FormatTitle);
-  list.append(att);
+  field = new Field(QString::fromLatin1("title"), i18n("Album"));
+  field->setCategory(i18n(music_general));
+  field->setFlags(Field::NoDelete | Field::AllowCompletion | Field::AllowGrouped);
+  field->setFormatFlag(Field::FormatTitle);
+  list.append(field);
 
   QStringList media;
   media << i18n("Compact Disc") << i18n("Cassette") << i18n("Vinyl");
-  att = new BCAttribute(QString::fromLatin1("medium"), i18n("Medium"), media);
-  att->setCategory(i18n(music_general));
-  att->setFlags(BCAttribute::AllowGrouped);
-  list.append(att);
+  field = new Field(QString::fromLatin1("medium"), i18n("Medium"), media);
+  field->setCategory(i18n(music_general));
+  field->setFlags(Field::AllowGrouped);
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("artist"), i18n("Artist"));
-  att->setCategory(i18n(music_general));
-  att->setFlags(BCAttribute::AllowCompletion | BCAttribute::AllowGrouped | BCAttribute::AllowMultiple);
-  att->setFormatFlag(BCAttribute::FormatName);
-  list.append(att);
+  field = new Field(QString::fromLatin1("artist"), i18n("Artist"));
+  field->setCategory(i18n(music_general));
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
+  field->setFormatFlag(Field::FormatTitle); // don't use FormatName
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("album"), i18n("Album"));
-  att->setCategory(i18n(music_general));
-  att->setFlags(BCAttribute::AllowCompletion | BCAttribute::AllowGrouped);
-  att->setFormatFlag(BCAttribute::FormatTitle);
-  list.append(att);
+  field = new Field(QString::fromLatin1("label"), i18n("Label"));
+  field->setCategory(i18n(music_general));
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
+  field->setFormatFlag(Field::FormatPlain);
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("label"), i18n("Label"));
-  att->setCategory(i18n(music_general));
-  att->setFlags(BCAttribute::AllowCompletion | BCAttribute::AllowGrouped | BCAttribute::AllowMultiple);
-  att->setFormatFlag(BCAttribute::FormatPlain);
-  list.append(att);
+  field = new Field(QString::fromLatin1("year"), i18n("Year"), Field::Number);
+  field->setCategory(i18n(music_general));
+  field->setFlags(Field::AllowMultiple | Field::AllowGrouped);
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("year"), i18n("Year"), BCAttribute::Number);
-  att->setCategory(i18n(music_general));
-  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
-  list.append(att);
+  field = new Field(QString::fromLatin1("genre"), i18n("Genre"));
+  field->setCategory(i18n(music_general));
+  field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
+  field->setFormatFlag(Field::FormatPlain);
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("genre"), i18n("Genre"));
-  att->setCategory(i18n(music_general));
-  att->setFlags(BCAttribute::AllowCompletion | BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
-  att->setFormatFlag(BCAttribute::FormatPlain);
-  list.append(att);
-
-  att = new BCAttribute(QString::fromLatin1("track"), i18n("Tracks"), BCAttribute::Table);
-  att->setFormatFlag(BCAttribute::FormatTitle);
-  list.append(att);
+  field = new Field(QString::fromLatin1("track"), i18n("Tracks"), Field::Table);
+  field->setFormatFlag(Field::FormatTitle);
+  list.append(field);
 
   QStringList rating;
   rating << i18n("5 - Best") << i18n("4 - Good") << i18n("3 - Neutral") << i18n("2 - Bad") << i18n("1 - Worst");
-  att = new BCAttribute(QString::fromLatin1("rating"), i18n("Rating"), rating);
-  att->setCategory(i18n(music_personal));
-  att->setFlags(BCAttribute::AllowGrouped);
-  list.append(att);
+  field = new Field(QString::fromLatin1("rating"), i18n("Rating"), rating);
+  field->setCategory(i18n(music_personal));
+  field->setFlags(Field::AllowGrouped);
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("pur_date"), i18n("Purchase Date"));
-  att->setCategory(i18n(music_personal));
-  att->setFormatFlag(BCAttribute::FormatDate);
-  list.append(att);
+  field = new Field(QString::fromLatin1("pur_date"), i18n("Purchase Date"));
+  field->setCategory(i18n(music_personal));
+  field->setFormatFlag(Field::FormatDate);
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("gift"), i18n("Gift"), BCAttribute::Bool);
-  att->setCategory(i18n(music_personal));
-  list.append(att);
+  field = new Field(QString::fromLatin1("gift"), i18n("Gift"), Field::Bool);
+  field->setCategory(i18n(music_personal));
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("pur_price"), i18n("Purchase Price"));
-  att->setCategory(i18n(music_personal));
-  list.append(att);
+  field = new Field(QString::fromLatin1("pur_price"), i18n("Purchase Price"));
+  field->setCategory(i18n(music_personal));
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("loaned"), i18n("Loaned"), BCAttribute::Bool);
-  att->setCategory(i18n(music_personal));
-  list.append(att);
+  field = new Field(QString::fromLatin1("loaned"), i18n("Loaned"), Field::Bool);
+  field->setCategory(i18n(music_personal));
+  list.append(field);
 
-  att = new BCAttribute(QString::fromLatin1("comments"), i18n("Comments"));
-  att->setCategory(i18n(music_personal));
-  list.append(att);
+  field = new Field(QString::fromLatin1("cover"), i18n("Cover"), Field::Image);
+  list.append(field);
+
+  field = new Field(QString::fromLatin1("comments"), i18n("Comments"), Field::Para);
+  field->setCategory(i18n(music_personal));
+  list.append(field);
 
   return list;
 }

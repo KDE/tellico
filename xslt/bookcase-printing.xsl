@@ -2,8 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:bc="http://periapsis.org/bookcase/"
                 xmlns:str="http://exslt.org/strings"
-                xmlns:dyn="http://exslt.org/dynamic"
-                extension-element-prefixes="str dyn"
+                extension-element-prefixes="str"
                 exclude-result-prefixes="bc"
                 version="1.0">
 
@@ -11,9 +10,9 @@
    ===================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl 295 2003-11-22 07:40:03Z robby $
+   $Id: bookcase-printing.xsl 394 2004-01-24 23:17:42Z robby $
 
-   Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
    application, which can be found at http://www.periapsis.org/bookcase/
@@ -35,8 +34,6 @@
 -->
 
 <xsl:output method="html" version="xhtml"/>
-
-<xsl:strip-space elements="*"/>
 
 <!-- To choose which fields of each entry are printed, change the
      string to a space separated list of field names. To know what
@@ -76,25 +73,22 @@
 </xsl:text>
 </xsl:variable>
 
-<!-- This stylesheet is designed for Bookcase document syntax version 4 -->
-<xsl:variable name="current-syntax" select="'4'"/>
-
 <xsl:template match="/">
  <xsl:apply-templates select="bc:bookcase"/>
 </xsl:template>
  
 <xsl:template match="bc:bookcase">
- <xsl:if test="not(@syntaxVersion = $current-syntax)">
+ <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
+ <xsl:if test="@syntaxVersion != '5'">
   <xsl:message>
    <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
-   <xsl:value-of select="$current-syntax"/>
-   <xsl:text>, </xsl:text>
-   <xsl:value-of select="$endl"/>
-   <xsl:text>but the data file is version </xsl:text>
+   <xsl:value-of select="'5'"/>
+   <xsl:text>, &#xa;but the input data file is version </xsl:text>
    <xsl:value-of select="@syntaxVersion"/>
-   <xsl:text>.</xsl:text>
+   <xsl:text>. There might be some &#xa;problems with the output.</xsl:text>
   </xsl:message>
  </xsl:if>
+
  <html>
   <head>
    <style type="text/css">
@@ -244,7 +238,7 @@
  <xsl:param name="fields"/>
  <xsl:param name="name"/>
  <xsl:variable name="name-tokens" select="str:tokenize($name, ':')"/>
- <!-- the header is the title attribute of the field node whose name equals the column name -->
+ <!-- the header is the title field of the field node whose name equals the column name -->
  <xsl:choose>
   <xsl:when test="$fields">
    <xsl:value-of select="$fields/bc:field[@name = $name-tokens[last()]]/@title"/>

@@ -1,8 +1,5 @@
 /***************************************************************************
-                               textimporter.h
-                             -------------------
-    begin                : Wed Sep 24 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,12 +16,14 @@
 
 #include "importer.h"
 
+namespace Bookcase {
+  namespace Import {
+
 /**
- * The TextImporter class is meant as an abstract class for any importer which reads text files,
- * whether it be XML, Bibtex, or whatever.
+ * The TextImporter class is meant as an abstract class for any importer which reads text files.
  *
  * @author Robby Stephenson
- * @version $Id: textimporter.h 204 2003-10-18 01:49:35Z robby $
+ * @version $Id: textimporter.h 386 2004-01-24 05:12:28Z robby $
  */
 class TextImporter : public Importer {
 Q_OBJECT
@@ -49,4 +48,6 @@ private:
   QString m_text;
 };
 
+  } // end namespace
+} // end namespace
 #endif

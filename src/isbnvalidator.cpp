@@ -1,8 +1,5 @@
 /***************************************************************************
-                              isbnvalidator.cpp
-                             -------------------
-    begin                : Sun Oct 6 2002
-    copyright            : (C) 2002, 2003 by Robby Stephenson
+    copyright            : (C) 2002-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,6 +14,8 @@
 #include "isbnvalidator.h"
 
 #include <kdebug.h>
+
+using Bookcase::ISBNValidator;
 
 ISBNValidator::ISBNValidator(QObject* parent_, const char* name_/*=0*/)
     : QValidator(parent_, name_) {

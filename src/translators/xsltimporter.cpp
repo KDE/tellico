@@ -1,8 +1,5 @@
 /***************************************************************************
-                              xsltimporter.cpp
-                             -------------------
-    begin                : Wed Sep 24 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,8 +13,8 @@
 
 #include "xsltimporter.h"
 #include "xslthandler.h"
-#include "bookcasexmlimporter.h"
-#include "../bcfilehandler.h"
+#include "bookcaseimporter.h"
+#include "../filehandler.h"
 
 #include <klocale.h>
 #include <kurlrequester.h>
@@ -28,10 +25,14 @@
 #include <qlayout.h>
 #include <qgroupbox.h>
 
-XSLTImporter::XSLTImporter(const KURL& url_) : TextImporter(url_), m_coll(0), m_widget(0) {
+using Bookcase::Import::XSLTImporter;
+
+XSLTImporter::XSLTImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_),
+    m_coll(0),
+    m_widget(0) {
 }
 
-BCCollection* XSLTImporter::collection() {
+Bookcase::Data::Collection* XSLTImporter::collection() {
   if(!m_widget) {
     return 0;
   }
@@ -46,14 +47,19 @@ BCCollection* XSLTImporter::collection() {
     return 0;
   }
 
-  QDomDocument doc = BCFileHandler::readXMLFile(u);
+  QDomDocument doc = FileHandler::readXMLFile(u);
+  if(doc.isNull()) {
+    return 0;
+  }
+
   XSLTHandler handler(doc.toString());
 //  kdDebug() << text() << endl;
   // TODO: is there anyway to know if the text is in utf-8 or not?
   QString str = handler.applyStylesheet(text(), false);
 //  kdDebug() << str << endl;
   
-  BookcaseXMLImporter imp(str);
+  Import::BookcaseImporter imp(str);
+  connect(&imp, SIGNAL(signalFractionDone(float)), SIGNAL(signalFractionDone(float)));
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
   return m_coll;

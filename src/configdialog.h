@@ -1,8 +1,5 @@
 /****************************************************************************
-                              configdialogh.h
-                             -------------------
-    begin                : Wed Dec 5 2001
-    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
+    copyright            : (C) 2001-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,19 +16,23 @@
 
 class KConfig;
 class KLineEdit;
+class KComboBox;
+
+class QCheckBox;
 
 #include <kdialogbase.h>
 
-#include <qdict.h>
-#include <qcheckbox.h>
 #include <qstringlist.h>
+#include <qintdict.h>
+
+namespace Bookcase {
 
 /**
  * The configuration dialog class allows the user to change the global application
  * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h 178 2003-10-11 03:36:05Z robby $
+ * @version $Id: configdialog.h 386 2004-01-24 05:12:28Z robby $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT
@@ -59,7 +60,6 @@ public:
    * @param config A pointer to the KConfig object
    */
   void saveConfiguration(KConfig* config);
-  bool configValue(const QString& key);
 
 protected:
   /**
@@ -70,6 +70,10 @@ protected:
    * Sets-up the page for printing options.
    */
   void setupPrintingPage();
+  /**
+   * Sets-up the page for template options.
+   */
+  void setupTemplatePage();
 
 protected slots:
   /**
@@ -90,6 +94,10 @@ protected slots:
    * @param checked The formatting checkbox is checkeed
    */
   void slotToggleFormatted(bool checked);
+  /**
+   * Preview an entry template.
+   */
+  void slotPreview();
 
 signals:
   /**
@@ -106,13 +114,13 @@ private:
   KLineEdit* m_leArticles;
   KLineEdit* m_leSuffixes;
   KLineEdit* m_lePrefixes;
+  QIntDict<KComboBox> m_cbTemplates;
 
   QCheckBox* m_cbPrintHeaders;
   QCheckBox* m_cbPrintFormatted;
   QCheckBox* m_cbPrintGrouped;
   QStringList m_groupAttributes;
-
-  QDict<QCheckBox> m_cbDict;
 };
 
+} // end namespace
 #endif

@@ -1,8 +1,5 @@
 /***************************************************************************
-                               xsltexporter.h
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,15 +16,18 @@
 
 class KURLRequester;
 
-#include "exporter.h"
+#include "textexporter.h"
+
+namespace Bookcase {
+  namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: xsltexporter.h 216 2003-10-24 00:58:22Z robby $
+ * @version $Id: xsltexporter.h 386 2004-01-24 05:12:28Z robby $
  */
-class XSLTExporter : public Exporter {
+class XSLTExporter : public TextExporter {
 public: 
-  XSLTExporter(const BCCollection* coll, BCUnitList list);
+  XSLTExporter(const Data::Collection* coll, Data::EntryList list);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;
@@ -41,4 +41,6 @@ private:
   KURLRequester* m_URLRequester;
 };
 
+  } // end namespace
+} // end namespace
 #endif

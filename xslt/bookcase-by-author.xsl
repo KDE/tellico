@@ -7,9 +7,9 @@
    ================================================================
    Bookcase XSLT file - sort by author
 
-   $Id: bookcase-by-author.xsl 261 2003-11-06 05:15:35Z robby $
+   $Id: bookcase-by-author.xsl 394 2004-01-24 23:17:42Z robby $
 
-   Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with XML data files
    from the 'bookcase' application, which can be found at:
@@ -22,8 +22,6 @@
 <xsl:strip-space elements="*"/>
 
 <xsl:param name="version"/>
-
-<xsl:variable name="current-syntax" select="'4'"/>
 
 <xsl:key name="books" match="bc:book" use=".//bc:author"/>
 <xsl:key name="authors" match="bc:author" use="."/>
@@ -41,17 +39,17 @@
 </xsl:template>
 
 <xsl:template match="bc:bookcase">
- <xsl:if test="not(@syntaxVersion = $current-syntax)">
+ <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
+ <xsl:if test="@syntaxVersion != '5'">
   <xsl:message>
    <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
-   <xsl:value-of select="$current-syntax"/>
-   <xsl:text>, </xsl:text>
-   <xsl:value-of select="$endl"/>
-   <xsl:text>but the data file is version </xsl:text>
+   <xsl:value-of select="'5'"/>
+   <xsl:text>, &#xa;but the input data file is version </xsl:text>
    <xsl:value-of select="@syntaxVersion"/>
-   <xsl:text>.</xsl:text>
+   <xsl:text>. There might be some &#xa;problems with the output.</xsl:text>
   </xsl:message>
  </xsl:if>
+
  <html>
   <head>
    <title>My Book Collections - sorted by author</title>
@@ -157,7 +155,3 @@
 </xsl:template>
 
 </xsl:stylesheet>
-<!-- Local Variables: -->
-<!-- sgml-indent-step: 1 -->
-<!-- sgml-indent-data: 1 -->
-<!-- End: -->

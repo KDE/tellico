@@ -1,8 +1,5 @@
 /***************************************************************************
-                               finddialog.cpp
-                             -------------------
-    begin                : Wed Feb 27 2002
-    copyright            : (C) 2002, 2003 by Robby Stephenson
+    copyright            : (C) 2002-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,9 +12,9 @@
  ***************************************************************************/
 
 #include "finddialog.h"
-#include "bookcase.h"
-#include "bookcasedoc.h"
-#include "bccollection.h"
+#include "mainwindow.h"
+#include "document.h"
+#include "collection.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -36,10 +33,12 @@
 #include <qregexp.h>
 #include <qwhatsthis.h>
 
+using Bookcase::FindDialog;
+
 //FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
 //    : KDialogBase(Plain, i18n("Find"), User1|Cancel, User1,
 //                  parent_, name_, false, false, i18n("&Find")), m_bookcase(parent_) {
-FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
+FindDialog::FindDialog(MainWindow* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, false, i18n("Find Text"), User1|Cancel, User1,
                   false, i18n("&Find")), m_bookcase(parent_), m_editRegExp(0), m_editRegExpDialog(0) {
   QWidget* page = new QWidget(this);
@@ -63,10 +62,10 @@ FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
 
   topLayout->addWidget(new QLabel(i18n("Search In:"), page));
 
-  m_attributes = new KComboBox(page);
-  QWhatsThis::add(m_attributes, i18n("Select which field should be searched."));
-  updateAttributeList();
-  topLayout->addWidget(m_attributes);
+  m_fields = new KComboBox(page);
+  QWhatsThis::add(m_fields, i18n("Select which field should be searched."));
+  updateFieldList();
+  topLayout->addWidget(m_fields);
 
   QGroupBox* optionsGroup = new QGroupBox(2, Qt::Horizontal, i18n("Options"), page);
   optionsGroup->layout()->setSpacing(KDialog::spacingHint());
@@ -100,17 +99,17 @@ void FindDialog::slotUser1() {
 //  kdDebug() << "FindDialog::slotUser1()" << endl;
   QString text = m_pattern->currentText();
   m_pattern->addToHistory(text);
-  
-  QString att = m_attributes->currentText();
+
+  QString field = m_fields->currentText();
   int options = 0;
-  
-  if(att == i18n("All Fields")) {
-    options |= BookcaseDoc::AllAttributes;
+
+  if(field == i18n("All Fields")) {
+    options |= Data::Document::AllFields;
   }
 
   // if checking whole words, then necessitates a regexp search
   if(m_asRegExp->isChecked() || m_wholeWords->isChecked()) {
-    options = (options & BookcaseDoc::AsRegExp);
+    options = (options & Data::Document::AsRegExp);
     if(!QRegExp(text).isValid()) {
       // TODO: but what about when just checked whole words? Need to escape stuff if there's
       // critical characters in the string, fix later
@@ -125,22 +124,29 @@ void FindDialog::slotUser1() {
   }
 
   if(m_findBackwards->isChecked()) {
-    options |= BookcaseDoc::FindBackwards;
+    options |= Data::Document::FindBackwards;
   }
 
   if(m_caseSensitive->isChecked()) {
-    options |= BookcaseDoc::CaseSensitive;
+    options |= Data::Document::CaseSensitive;
   }
 
   if(m_fromBeginning->isChecked()) {
-    options |= BookcaseDoc::FromBeginning;
+    options |= Data::Document::FromBeginning;
   }
 
-  m_bookcase->doc()->search(text, att, options);
+  m_bookcase->doc()->search(text, field, options);
 }
 
 void FindDialog::slotFindNext() {
   slotUser1();
+}
+
+void FindDialog::slotFindPrev() {
+// easy way is just to toggle the "find backwards" switch
+  m_findBackwards->setChecked(!m_findBackwards->isChecked());
+  slotUser1();
+  m_findBackwards->setChecked(!m_findBackwards->isChecked());
 }
 
 void FindDialog::slotPatternChanged(const QString& text_) {
@@ -167,15 +173,15 @@ void FindDialog::slotEditRegExp() {
   }
 }
 
-void FindDialog::updateAttributeList() {
-  m_attributes->clear();
+void FindDialog::updateFieldList() {
+  m_fields->clear();
 
-  m_attributes->insertItem(i18n("All Fields"));
+  m_fields->insertItem(i18n("All Fields"));
 
-  QStringList titles = m_bookcase->doc()->collection()->attributeTitles();
+  QStringList titles = m_bookcase->doc()->collection()->fieldTitles();
 
   if(titles.count() > 0) {
-    m_attributes->insertStringList(titles);
+    m_fields->insertStringList(titles);
   }
-  m_attributes->adjustSize();
+  m_fields->adjustSize();
 }

@@ -1,8 +1,5 @@
 /***************************************************************************
-                             bibtexcollection.h
-                             -------------------
-    begin                : Tue Aug 26 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,56 +14,56 @@
 #ifndef BIBTEXCOLLECTION_H
 #define BIBTEXCOLLECTION_H
 
-#include "../bccollection.h"
-#include "bibtexattribute.h"
+#include "../collection.h"
 
-#include <qmap.h>
-
-typedef QMap<QString, QString> StringMap;
+namespace Bookcase {
+  namespace Data {
 
 /**
- * A BCCollection specifically for bibliographies, in Bibtex format.
+ * A collection specifically for bibliographies, in Bibtex format.
  *
  * It has the following standard attributes:
  * @li Title
  *
  * @author Robby Stephenson
- * @version $Id: bibtexcollection.h 227 2003-10-25 17:28:09Z robby $
+ * @version $Id: bibtexcollection.h 386 2004-01-24 05:12:28Z robby $
  */
-class BibtexCollection : public BCCollection {
+class BibtexCollection : public Collection {
 Q_OBJECT
 
 public: 
   /**
    * The constructor
    *
-   * @param addAttributes A boolean indicating whether the default attributes should be added
+   * @param addFields A boolean indicating whether the default attributes should be added
    * @param title The title of the collection
    */
-  BibtexCollection(bool addAttributes, const QString& title = QString::null);
+  BibtexCollection(bool addFields, const QString& title = QString::null);
   /**
    */
   virtual ~BibtexCollection() {}
 
-  virtual BCCollection::CollectionType collectionType() const { return BCCollection::Bibtex; };
-  virtual bool addAttribute(BCAttribute* att);
-  virtual bool modifyAttribute(BCAttribute* att);
-  virtual bool deleteAttribute(BCAttribute* att, bool force=false);
+  virtual CollectionType collectionType() const { return Bibtex; }
+  virtual bool addField(Field* field);
+  virtual bool modifyField(Field* field);
+  virtual bool deleteField(Field* field, bool force=false);
 
-  BibtexAttribute* const attributeByBibtexField(const QString& field) const;
+  Field* const fieldByBibtexName(const QString& name) const;
   const QString& preamble() const { return m_preamble; }
   void setPreamble(const QString& preamble) { m_preamble = preamble; }
   const StringMap& macroList() const { return m_macros; }
   void setMacroList(StringMap map) { m_macros = map; }
-  void addMacro(const QString& key, const QString& value);
+  void addMacro(const QString& key, const QString& value) { m_macros.insert(key, value); }
 
-  static BCAttributeList defaultAttributes();
-  static BibtexCollection* convertBookCollection(const BCCollection* coll);
+  static FieldList defaultFields();
+  static BibtexCollection* convertBookCollection(const Collection* coll);
 
 private:
-  QDict<BibtexAttribute> m_bibtexFieldDict;
+  QDict<Field> m_bibtexFieldDict;
   QString m_preamble;
   StringMap m_macros;
 };
 
+  } // end namespace
+} // end namespace
 #endif

@@ -79,7 +79,7 @@ within the stylesheet governs things like the font, the margins, etc.</p>
 </tip>
 <tip category="Bookcase">
 <html>
-<p>...that you can import and export using any generic XSL stylesheet which
+<p>...that you can import using any generic XSL stylesheet which
 outputs a valid Bookcase XML file.</p>
 </html>
 </tip>

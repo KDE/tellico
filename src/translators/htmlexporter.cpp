@@ -1,8 +1,5 @@
 /***************************************************************************
-                              htmlexporter.cpp
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,11 +14,9 @@
 #include "htmlexporter.h"
 #include "xslthandler.h"
 #include "bookcasexmlexporter.h"
-#include "../bccollection.h"
-#include "../bcfilehandler.h"
+#include "../collection.h"
+#include "../filehandler.h"
 
-#include <klocale.h>
-#include <kglobal.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
 #include <kdebug.h>
@@ -32,7 +27,10 @@
 #include <qcheckbox.h>
 #include <qwhatsthis.h>
 
-HTMLExporter::HTMLExporter(const BCCollection* coll_, BCUnitList list_) : Exporter(coll_, list_),
+using Bookcase::Export::HTMLExporter;
+
+HTMLExporter::HTMLExporter(const Data::Collection* coll_, Data::EntryList list_)
+  : Bookcase::Export::TextExporter(coll_, list_),
     m_printHeaders(true),
     m_printGrouped(false),
     m_widget(0),
@@ -88,14 +86,14 @@ void HTMLExporter::saveOptions(KConfig* config_) {
 }
 
 // TODO: figure out encoding
-QString HTMLExporter::text(bool formatAttributes_, bool encodeUTF8_) {
+QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
   QString xsltfile = KGlobal::dirs()->findResource("appdata", m_xsltfile);
   if(xsltfile.isNull()) {
     return QString::null;
   }
 
-  QDomDocument dom = BCFileHandler::readXMLFile(KURL(xsltfile));
-  const BCCollection* coll = collection();
+  QDomDocument dom = FileHandler::readXMLFile(KURL(xsltfile));
+  const Data::Collection* coll = collection();
 
   if(m_printGrouped && !m_groupBy.isEmpty()) {
     // since the XSL stylesheet can't use a parameter as a key name, need to replace keys
@@ -108,7 +106,7 @@ QString HTMLExporter::text(bool formatAttributes_, bool encodeUTF8_) {
         QString s;
         for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
           s += QString::fromLatin1(".//bc:") + *it;
-          if(coll->attributeByName(*it)->type() == BCAttribute::Table2) {
+          if(coll->fieldByName(*it)->type() == Data::Field::Table2) {
             s += QString::fromLatin1("/bc:column[1]");
           }
           if(*it != m_groupBy.last()) {
@@ -121,7 +119,7 @@ QString HTMLExporter::text(bool formatAttributes_, bool encodeUTF8_) {
         QString s;
         for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
           s += QString::fromLatin1("bc:") + *it;
-          if(coll->attributeByName(*it)->type() == BCAttribute::Table2) {
+          if(coll->fieldByName(*it)->type() == Data::Field::Table2) {
             s += QString::fromLatin1("/bc:column[1]");
           }
           if(*it != m_groupBy.last()) {
@@ -138,7 +136,7 @@ QString HTMLExporter::text(bool formatAttributes_, bool encodeUTF8_) {
         QString s;
         for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
           s += QString::fromLatin1("//bc:") + *it;
-          if(coll->attributeByName(*it)->type() == BCAttribute::Table2) {
+          if(coll->fieldByName(*it)->type() == Data::Field::Table2) {
             s += QString::fromLatin1("/bc:column[1]");
           }
           if(*it != m_groupBy.last()) {
@@ -169,11 +167,11 @@ QString HTMLExporter::text(bool formatAttributes_, bool encodeUTF8_) {
     sortTitles << m_sort3;
   }
 
-  handler.addStringParam("sort-name1", coll->attributeNameByTitle(sortTitles[0]).utf8());
+  handler.addStringParam("sort-name1", coll->fieldNameByTitle(sortTitles[0]).utf8());
   if(sortTitles.count() > 1) {
-    handler.addStringParam("sort-name2", coll->attributeNameByTitle(sortTitles[1]).utf8());
+    handler.addStringParam("sort-name2", coll->fieldNameByTitle(sortTitles[1]).utf8());
     if(sortTitles.count() > 2) {
-      handler.addStringParam("sort-name3", coll->attributeNameByTitle(sortTitles[2]).utf8());
+      handler.addStringParam("sort-name3", coll->fieldNameByTitle(sortTitles[2]).utf8());
     }
   }
 
@@ -184,7 +182,7 @@ QString HTMLExporter::text(bool formatAttributes_, bool encodeUTF8_) {
     if(m_groupBy.count() > 1) {
       s = i18n("People");
     } else {
-      s = coll->attributeTitleByName(m_groupBy[0]);
+      s = coll->fieldTitleByName(m_groupBy[0]);
     }
     sortString = i18n("(grouped by %1; sorted by %2)").arg(s).arg(sortTitles.join(QString::fromLatin1(", ")));
   } else {
@@ -199,14 +197,14 @@ QString HTMLExporter::text(bool formatAttributes_, bool encodeUTF8_) {
 
   QStringList printFields;
   for(QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
-    printFields << coll->attributeNameByTitle(*it);
+    printFields << coll->fieldNameByTitle(*it);
   }
   handler.addStringParam("column-names",
                          encodeUTF8_ ? printFields.join(QString::fromLatin1(" ")).utf8()
                                      : printFields.join(QString::fromLatin1(" ")).local8Bit());
 
-  BookcaseXMLExporter exporter(coll, unitList());
-  dom = exporter.exportXML(formatAttributes_, true);
+  BookcaseXMLExporter exporter(coll, entryList());
+  dom = exporter.exportXML(formatFields_, true);
 
 //  kdDebug() << dom.toString() << endl;
   return handler.applyStylesheet(dom.toString(), encodeUTF8_);

@@ -197,8 +197,7 @@ build_alias = @build_alias@
 build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
-
-datadir = $(kde_datadir)/bookcase
+datadir = @datadir@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@
@@ -257,18 +256,34 @@ noinst_LIBRARIES = libtranslators.a
 
 #>- libtranslators_a_METASOURCES = AUTO
 
-libtranslators_a_SOURCES = bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp 
+libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp
 
-SUBDIRS = btparse 
+SUBDIRS = btparse pilotdb
 
-EXTRA_DIST = csvexporter.cpp csvexporter.h htmlexporter.cpp htmlexporter.h bibtexmlexporter.cpp bibtexmlexporter.h bibtexexporter.h xsltexporter.h exporter.h bibtexhandler.cpp bibtexhandler.h importer.h textimporter.cpp xsltimporter.cpp bibteximporter.cpp bibteximporter.h xslthandler.h xslthandler.cpp xsltimporter.h xsltexporter.cpp csvimporter.cpp csvimporter.h textimporter.h bibtex-translation.xml bookcasexmlexporter.cpp bookcasexmlexporter.h bookcasexmlimporter.cpp bookcasexmlimporter.h bibtexmlimporter.cpp bibtexmlimporter.h bibtexexporter.cpp 
+EXTRA_DIST = bibtex-translation.xml \
+bibtexexporter.cpp       bookcasexmlexporter.h    pilotdbexporter.cpp \
+bibtexexporter.h         bookcasezipexporter.cpp  pilotdbexporter.h \
+bibtexhandler.cpp        bookcasezipexporter.h    textexporter.h \
+bibtexhandler.h          csvexporter.cpp          textimporter.cpp \
+bibteximporter.cpp       csvexporter.h            textimporter.h \
+bibteximporter.h         csvimporter.cpp          xmlimporter.cpp \
+bibtexmlexporter.cpp     csvimporter.h            xmlimporter.h \
+bibtexmlexporter.h       dataexporter.h           xsltexporter.cpp \
+bibtexmlimporter.cpp     dataimporter.h           xsltexporter.h \
+bibtexmlimporter.h       exporter.h               xslthandler.cpp \
+bookcaseimporter.cpp     htmlexporter.cpp         xslthandler.h \
+bookcaseimporter.h       htmlexporter.h           xsltimporter.cpp \
+bookcasexmlexporter.cpp  importer.h               xsltimporter.h
+
 
 
 ####### kdevelop will overwrite this part!!! (end)############
 INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
 
 KDE_OPTIONS = noautodist
-data_DATA = bibtex-translation.xml
+
+appdir = $(kde_datadir)/bookcase
+app_DATA = bibtex-translation.xml
 subdir = src/translators
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -277,26 +292,28 @@ LIBRARIES = $(noinst_LIBRARIES)
 
 libtranslators_a_AR = $(AR) cru
 libtranslators_a_LIBADD =
-am_libtranslators_a_OBJECTS = bibtexexporter.$(OBJEXT) \
-	bibtexmlimporter.$(OBJEXT) bookcasexmlimporter.$(OBJEXT) \
+am_libtranslators_a_OBJECTS = pilotdbexporter.$(OBJEXT) \
+	bibtexexporter.$(OBJEXT) bibtexmlimporter.$(OBJEXT) \
 	bookcasexmlexporter.$(OBJEXT) csvimporter.$(OBJEXT) \
 	xsltexporter.$(OBJEXT) xslthandler.$(OBJEXT) \
 	bibteximporter.$(OBJEXT) xsltimporter.$(OBJEXT) \
 	textimporter.$(OBJEXT) bibtexhandler.$(OBJEXT) \
 	bibtexmlexporter.$(OBJEXT) htmlexporter.$(OBJEXT) \
-	csvexporter.$(OBJEXT)
+	csvexporter.$(OBJEXT) bookcasezipexporter.$(OBJEXT) \
+	xmlimporter.$(OBJEXT) bookcaseimporter.$(OBJEXT)
 #>- libtranslators_a_OBJECTS = $(am_libtranslators_a_OBJECTS)
-#>+ 12
+#>+ 13
 libtranslators_a_final_OBJECTS = libtranslators_a.all_cpp.o 
-libtranslators_a_nofinal_OBJECTS = bibtexexporter.$(OBJEXT) \
-	bibtexmlimporter.$(OBJEXT) bookcasexmlimporter.$(OBJEXT) \
+libtranslators_a_nofinal_OBJECTS = pilotdbexporter.$(OBJEXT) \
+	bibtexexporter.$(OBJEXT) bibtexmlimporter.$(OBJEXT) \
 	bookcasexmlexporter.$(OBJEXT) csvimporter.$(OBJEXT) \
 	xsltexporter.$(OBJEXT) xslthandler.$(OBJEXT) \
 	bibteximporter.$(OBJEXT) xsltimporter.$(OBJEXT) \
 	textimporter.$(OBJEXT) bibtexhandler.$(OBJEXT) \
 	bibtexmlexporter.$(OBJEXT) htmlexporter.$(OBJEXT) \
-	csvexporter.$(OBJEXT)\
-xsltimporter.moc.o bookcasexmlimporter.moc.o importer.moc.o bibtexmlimporter.moc.o bibteximporter.moc.o textimporter.moc.o csvimporter.moc.o 
+	csvexporter.$(OBJEXT) bookcasezipexporter.$(OBJEXT) \
+	xmlimporter.$(OBJEXT) bookcaseimporter.$(OBJEXT)\
+dataimporter.moc.o csvimporter.moc.o textimporter.moc.o bookcaseimporter.moc.o xmlimporter.moc.o bibteximporter.moc.o xsltimporter.moc.o bibtexmlimporter.moc.o importer.moc.o 
 @KDE_USE_FINAL_FALSE@libtranslators_a_OBJECTS = $(libtranslators_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libtranslators_a_OBJECTS = $(libtranslators_a_final_OBJECTS)
 
@@ -308,41 +325,50 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bibteximporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bibtexmlexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bibtexmlimporter.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bookcaseimporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bookcasexmlexporter.Po \
-#>- @AMDEP_TRUE@	./$(DEPDIR)/bookcasexmlimporter.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bookcasezipexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/csvexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/csvimporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/htmlexporter.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/pilotdbexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/textimporter.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/xmlimporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/xsltexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/xsltimporter.Po
-#>+ 29
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/xsltimporter.moc.P $(DEPDIR)/bookcasexmlimporter.moc.P $(DEPDIR)/bibtexmlimporter.moc.P $(DEPDIR)/bibteximporter.moc.P $(DEPDIR)/textimporter.moc.P $(DEPDIR)/csvimporter.moc.P  $(DEPDIR)/libtranslators_a.all_cpp.P  ./$(DEPDIR)/bibtexexporter.Po \
+#>+ 35
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/dataimporter.moc.P $(DEPDIR)/csvimporter.moc.P $(DEPDIR)/textimporter.moc.P $(DEPDIR)/bookcaseimporter.moc.P $(DEPDIR)/xmlimporter.moc.P $(DEPDIR)/bibteximporter.moc.P $(DEPDIR)/xsltimporter.moc.P $(DEPDIR)/bibtexmlimporter.moc.P  $(DEPDIR)/libtranslators_a.all_cpp.P  ./$(DEPDIR)/bibtexexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexhandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibteximporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexmlexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexmlimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcaseimporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasexmlexporter.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasexmlimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasezipexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/csvexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/csvimporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/htmlexporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/pilotdbexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/textimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xmlimporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xsltexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xsltimporter.Po
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/xsltimporter.moc.P $(DEPDIR)/bookcasexmlimporter.moc.P $(DEPDIR)/bibtexmlimporter.moc.P $(DEPDIR)/bibteximporter.moc.P $(DEPDIR)/textimporter.moc.P $(DEPDIR)/csvimporter.moc.P  ./$(DEPDIR)/bibtexexporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/dataimporter.moc.P $(DEPDIR)/csvimporter.moc.P $(DEPDIR)/textimporter.moc.P $(DEPDIR)/bookcaseimporter.moc.P $(DEPDIR)/xmlimporter.moc.P $(DEPDIR)/bibteximporter.moc.P $(DEPDIR)/xsltimporter.moc.P $(DEPDIR)/bibtexmlimporter.moc.P  ./$(DEPDIR)/bibtexexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexhandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibteximporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexmlexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexmlimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcaseimporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasexmlexporter.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasexmlimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasezipexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/csvexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/csvimporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/htmlexporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/pilotdbexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/textimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/xmlimporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/xsltexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/xsltimporter.Po
@@ -366,7 +392,7 @@ CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --mode=link --tag=CXX $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(KDE_CXXFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(libtranslators_a_SOURCES)
-DATA = $(data_DATA)
+DATA = $(app_DATA)
 
 
 #>- RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
@@ -420,12 +446,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bibteximporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bibtexmlexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bibtexmlimporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcaseimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcasexmlexporter.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcasexmlimporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcasezipexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csvexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csvimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/htmlexporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pilotdbexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/textimporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xsltexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xslthandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xsltimporter.Po@am__quote@
@@ -475,23 +504,23 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-dataDATA_INSTALL = $(INSTALL_DATA)
-install-dataDATA: $(data_DATA)
+appDATA_INSTALL = $(INSTALL_DATA)
+install-appDATA: $(app_DATA)
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(datadir)
-	@list='$(data_DATA)'; for p in $$list; do \
+	$(mkinstalldirs) $(DESTDIR)$(appdir)
+	@list='$(app_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(dataDATA_INSTALL) $$d$$p $(DESTDIR)$(datadir)/$$f"; \
-	  $(dataDATA_INSTALL) $$d$$p $(DESTDIR)$(datadir)/$$f; \
+	  echo " $(appDATA_INSTALL) $$d$$p $(DESTDIR)$(appdir)/$$f"; \
+	  $(appDATA_INSTALL) $$d$$p $(DESTDIR)$(appdir)/$$f; \
 	done
 
-uninstall-dataDATA:
+uninstall-appDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(data_DATA)'; for p in $$list; do \
+	@list='$(app_DATA)'; for p in $$list; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(datadir)/$$f"; \
-	  rm -f $(DESTDIR)$(datadir)/$$f; \
+	  echo " rm -f $(DESTDIR)$(appdir)/$$f"; \
+	  rm -f $(DESTDIR)$(appdir)/$$f; \
 	done
 
 # This directory's subdirectories are mostly independent; you can cd
@@ -661,7 +690,7 @@ check: check-recursive
 all-am: Makefile $(LIBRARIES) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	$(mkinstalldirs) $(DESTDIR)$(datadir)
+	$(mkinstalldirs) $(DESTDIR)$(appdir)
 
 install: install-recursive
 install-exec: install-exec-recursive
@@ -710,7 +739,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-dataDATA
+install-data-am: install-appDATA
 
 install-exec-am:
 
@@ -737,7 +766,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-dataDATA uninstall-info-am
+uninstall-am: uninstall-appDATA uninstall-info-am
 
 uninstall-info: uninstall-info-recursive
 
@@ -747,8 +776,8 @@ uninstall-info: uninstall-info-recursive
 	distclean-compile distclean-depend distclean-generic \
 	distclean-libtool distclean-recursive distclean-tags distdir \
 	dvi dvi-am dvi-recursive info info-am info-recursive install \
-	install-am install-data install-data-am install-data-recursive \
-	install-dataDATA install-exec install-exec-am \
+	install-am install-appDATA install-data install-data-am \
+	install-data-recursive install-exec install-exec-am \
 	install-exec-recursive install-info install-info-am \
 	install-info-recursive install-man install-recursive \
 	install-strip installcheck installcheck-am installdirs \
@@ -757,7 +786,7 @@ uninstall-info: uninstall-info-recursive
 	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
 	mostlyclean-recursive pdf pdf-am pdf-recursive ps ps-am \
 	ps-recursive tags tags-recursive uninstall uninstall-am \
-	uninstall-dataDATA uninstall-info-am uninstall-info-recursive \
+	uninstall-appDATA uninstall-info-am uninstall-info-recursive \
 	uninstall-recursive
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
@@ -766,36 +795,44 @@ uninstall-info: uninstall-info-recursive
 
 
 #>+ 3
-xsltimporter.moc.cpp: $(srcdir)/xsltimporter.h
-	$(MOC) $(srcdir)/xsltimporter.h -o xsltimporter.moc.cpp
-
-#>+ 3
-bookcasexmlimporter.moc.cpp: $(srcdir)/bookcasexmlimporter.h
-	$(MOC) $(srcdir)/bookcasexmlimporter.h -o bookcasexmlimporter.moc.cpp
-
-#>+ 3
-importer.moc.cpp: $(srcdir)/importer.h
-	$(MOC) $(srcdir)/importer.h -o importer.moc.cpp
-
-#>+ 3
-bibtexmlimporter.moc.cpp: $(srcdir)/bibtexmlimporter.h
-	$(MOC) $(srcdir)/bibtexmlimporter.h -o bibtexmlimporter.moc.cpp
-
-#>+ 3
-bibteximporter.moc.cpp: $(srcdir)/bibteximporter.h
-	$(MOC) $(srcdir)/bibteximporter.h -o bibteximporter.moc.cpp
-
-#>+ 3
-textimporter.moc.cpp: $(srcdir)/textimporter.h
-	$(MOC) $(srcdir)/textimporter.h -o textimporter.moc.cpp
+dataimporter.moc.cpp: $(srcdir)/dataimporter.h
+	$(MOC) $(srcdir)/dataimporter.h -o dataimporter.moc.cpp
 
 #>+ 3
 csvimporter.moc.cpp: $(srcdir)/csvimporter.h
 	$(MOC) $(srcdir)/csvimporter.h -o csvimporter.moc.cpp
 
 #>+ 3
+textimporter.moc.cpp: $(srcdir)/textimporter.h
+	$(MOC) $(srcdir)/textimporter.h -o textimporter.moc.cpp
+
+#>+ 3
+bookcaseimporter.moc.cpp: $(srcdir)/bookcaseimporter.h
+	$(MOC) $(srcdir)/bookcaseimporter.h -o bookcaseimporter.moc.cpp
+
+#>+ 3
+xmlimporter.moc.cpp: $(srcdir)/xmlimporter.h
+	$(MOC) $(srcdir)/xmlimporter.h -o xmlimporter.moc.cpp
+
+#>+ 3
+bibteximporter.moc.cpp: $(srcdir)/bibteximporter.h
+	$(MOC) $(srcdir)/bibteximporter.h -o bibteximporter.moc.cpp
+
+#>+ 3
+xsltimporter.moc.cpp: $(srcdir)/xsltimporter.h
+	$(MOC) $(srcdir)/xsltimporter.h -o xsltimporter.moc.cpp
+
+#>+ 3
+bibtexmlimporter.moc.cpp: $(srcdir)/bibtexmlimporter.h
+	$(MOC) $(srcdir)/bibtexmlimporter.h -o bibtexmlimporter.moc.cpp
+
+#>+ 3
+importer.moc.cpp: $(srcdir)/importer.h
+	$(MOC) $(srcdir)/importer.h -o importer.moc.cpp
+
+#>+ 3
 clean-metasources:
-	-rm -f  xsltimporter.moc.cpp bookcasexmlimporter.moc.cpp importer.moc.cpp bibtexmlimporter.moc.cpp bibteximporter.moc.cpp textimporter.moc.cpp csvimporter.moc.cpp
+	-rm -f  dataimporter.moc.cpp csvimporter.moc.cpp textimporter.moc.cpp bookcaseimporter.moc.cpp xmlimporter.moc.cpp bibteximporter.moc.cpp xsltimporter.moc.cpp bibtexmlimporter.moc.cpp importer.moc.cpp
 
 #>+ 2
 docs-am:
@@ -818,11 +855,11 @@ bcheck-am:
 	test ! -s bchecktest.cc.oldclass || test ! -s bchecktest.cc.class || cmp -s bchecktest.cc.oldclass bchecktest.cc.class
 
 #>+ 11
-libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/bookcasexmlimporter.cpp $(srcdir)/bookcasexmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp xsltimporter.moc.cpp importer.moc.cpp bookcasexmlimporter.moc.cpp bibteximporter.moc.cpp bibtexmlimporter.moc.cpp textimporter.moc.cpp csvimporter.moc.cpp 
+libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/pilotdbexporter.cpp $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/bookcasexmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp $(srcdir)/bookcasezipexporter.cpp $(srcdir)/xmlimporter.cpp $(srcdir)/bookcaseimporter.cpp textimporter.moc.cpp csvimporter.moc.cpp dataimporter.moc.cpp bookcaseimporter.moc.cpp bibteximporter.moc.cpp xmlimporter.moc.cpp xsltimporter.moc.cpp bibtexmlimporter.moc.cpp importer.moc.cpp 
 	@echo 'creating libtranslators_a.all_cpp.cpp ...'; \
 	rm -f libtranslators_a.all_cpp.files libtranslators_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libtranslators_a.all_cpp.final; \
-	for file in bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp xsltimporter.moc.cpp importer.moc.cpp bookcasexmlimporter.moc.cpp bibteximporter.moc.cpp bibtexmlimporter.moc.cpp textimporter.moc.cpp csvimporter.moc.cpp ; do \
+	for file in pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp textimporter.moc.cpp csvimporter.moc.cpp dataimporter.moc.cpp bookcaseimporter.moc.cpp bibteximporter.moc.cpp xmlimporter.moc.cpp xsltimporter.moc.cpp bibtexmlimporter.moc.cpp importer.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> libtranslators_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libtranslators_a.all_cpp.final; \
 	done; \

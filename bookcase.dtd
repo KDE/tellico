@@ -1,6 +1,6 @@
 <!--
    ================================================================
-   Bookcase XML DTD version 4.0
+   Bookcase XML DTD version 5.0
 
    $Id: bookcase.dtd,v 1.6 2003/05/03 08:43:09 robby Exp $
 
@@ -12,7 +12,7 @@
 
    The formal public identifer for this DTD should be:
    
-      "-//Robby Stephenson/DTD Bookcase V1.0//EN"
+      "-//Robby Stephenson/DTD Bookcase V5.0//EN"
 
    ================================================================
 -->
@@ -20,13 +20,20 @@
 <!ATTLIST bookcase syntaxVersion CDATA #REQUIRED>
 <!ATTLIST bookcase xmlns CDATA #FIXED "http://periapsis.org/bookcase/">
 
-<!ELEMENT collection (fields*, bibtex-preamble*, macros*, entry*)>
+<!ELEMENT collection (fields | bibtex-preamble | macros | entry | images)+>
 <!ATTLIST collection title CDATA #REQUIRED>
 <!ATTLIST collection type (1|2|3|4|5|6|7|8|9|10) #REQUIRED>
 <!ATTLIST collection unitTitle CDATA #IMPLIED>
 
+<!ELEMENT images (image+)>
+<!ELEMENT image (#PCDATA)>
+<!ATTLIST image id CDATA #REQUIRED>
+<!ATTLIST image format CDATA #REQUIRED>
+<!ATTLIST image width CDATA #REQUIRED>
+<!ATTLIST image height CDATA #REQUIRED>
+
 <!ELEMENT fields (field+)>
-<!ELEMENT field EMPTY>
+<!ELEMENT field (property*)>
 <!ATTLIST field name CDATA #REQUIRED>
 <!ATTLIST field title CDATA #REQUIRED>
 <!ATTLIST field category CDATA #REQUIRED>
@@ -34,7 +41,9 @@
 <!ATTLIST field flags CDATA #IMPLIED>
 <!ATTLIST field format CDATA #IMPLIED>
 <!ATTLIST field description CDATA #IMPLIED>
-<!ATTLIST field type (1|2|3|4|5|6|7|8|9|10) #IMPLIED>
+<!ATTLIST field type (1|2|3|4|5|6|7|8|9|10|11) #IMPLIED>
+
+<!ELEMENT property (#PCDATA)>
 
 <!-- bibliography, or bibtex, collections may have a preamble and macros -->
 <!ELEMENT bibtex-preamble (#PCDATA)>
@@ -42,7 +51,22 @@
 <!ELEMENT macro (#PCDATA)>
 <!ATTLIST macro name CDATA #REQUIRED>
 
-<!ELEMENT entry (title?, subtitle?, authors?, binding?, pur_date?, pur_price?, publisher?, edition?, cr_years?, pub_year?, isbn?, lccn?, pages?, languages?, genres?, keywords?, series?, series_num?, condition?, signed?, read?, gift?, loaned?, rating?, comments?, entry-type?, bibtex-key?, booktitle?, editors?, organization?, year?, journal?, month?, number?, howpublished?, chapter?, volume?, crossref?, note?, medium?, artists?, album?, label?, tracks?, certification?, region?, nationality?, format?, casts?, directors?, producers?, writers?, composers?, studios?, subtitles?, audio-tracks?, running-time?, aspect-ratios?, widescreen?, color?, directors-cut?, plot?)>
+<!-- general -->
+<!-- columns are used in 2-column tables to split the values -->
+<!ELEMENT column (#PCDATA)>
+
+<!ELEMENT entry (title | subtitle | authors | binding | pur_date | pur_price | publisher | edition |
+cr_years | pub_year | isbn | lccn | pages | languages | genres | keywords | series | series_num | 
+condition | signed | read | gift | loaned | rating | comments | entry-type | bibtex-key | booktitle | 
+editors | organization | year | journal | month | number | howpublished | chapter | volume | crossref | 
+note | medium | artists | album | label | tracks | certification | region | nationality | format | casts | 
+directors | producers | writers | composers | studios | subtitles | audio-tracks | running-time | 
+aspect-ratios | widescreen | color | directors-cut | plot | player | team | brand | location | 
+quantity | front | back | mintmark | set | grade | service | obverse | reverse | issue | 
+cover | description | scott | cancelled | hinged | centering | gummed | producer | appellation | 
+varietal | vintage | type | drink-by)+>
+
+
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT subtitle (#PCDATA)>
 <!ELEMENT authors (author+)>
@@ -129,6 +153,38 @@
 <!ELEMENT directors-cut (#PCDATA)>
 <!ELEMENT plot (#PCDATA)>
 
-<!-- general -->
-<!-- columns are used in 2-column tables to split the values -->
-<!ELEMENT column (#PCDATA)>
+<!-- cards -->
+<!ELEMENT player (#PCDATA)>
+<!ELEMENT team (#PCDATA)>
+<!ELEMENT brand (#PCDATA)>
+<!ELEMENT location (#PCDATA)>
+<!ELEMENT quantity (#PCDATA)>
+<!ELEMENT front (#PCDATA)>
+<!ELEMENT back (#PCDATA)>
+
+<!-- coins -->
+<!ELEMENT mintmark (#PCDATA)>
+<!ELEMENT set (#PCDATA)>
+<!ELEMENT grade (#PCDATA)>
+<!ELEMENT service (#PCDATA)>
+<!ELEMENT obverse (#PCDATA)>
+<!ELEMENT reverse (#PCDATA)>
+
+<!-- comic book -->
+<!ELEMENT issue (#PCDATA)>
+<!ELEMENT cover (#PCDATA)>
+
+<!-- stamps -->
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT scott (#PCDATA)>
+<!ELEMENT cancelled (#PCDATA)>
+<!ELEMENT hinged (#PCDATA)>
+<!ELEMENT centering (#PCDATA)>
+<!ELEMENT gummed (#PCDATA)>
+
+<!-- wine -->
+<!ELEMENT appellation (#PCDATA)>
+<!ELEMENT varietal (#PCDATA)>
+<!ELEMENT vintage (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT drink-by (#PCDATA)>

@@ -1,8 +1,10 @@
 Begin3
 Title:          Bookcase 
-Version:        0.7.2
+Version:        0.8
 Entered-date:   
-Description:    Bookcase is a collection manager for books, bibliographies, video, and music
+Description:    Bookcase is a collection manager for books,
+bibliographies, video, music, comic books, coins, stamps, trading
+cards, and wines.
 Keywords:        
 Author:         Robby Stephenson <robby@periapsis.org> 
 Maintained-by:  Robby Stephenson <robby@periapsis.org> 

@@ -335,7 +335,7 @@ following" button is checked. Set the first rule to have "Genre"
 "contains" "Science Fiction" (no quotes) and the second rule to have
 "Read" "does not contain" "true" (no quotes).</para>
 
-<para>Also, the quick filter in the toolbar will match any attribute,
+<para>Also, the quick filter in the toolbar will match any field,
 and if there is a non-word character, the text is interpreted as a
 regular expression. So if you quickly want to filter your books to
 show those by Weber or Bujold, then type "weber|bujold" (no quotes) in

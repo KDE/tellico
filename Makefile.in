@@ -199,8 +199,7 @@ build_alias = @build_alias@
 build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
-
-datadir = $(kde_datadir)/bookcase
+datadir = @datadir@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@
@@ -270,7 +269,9 @@ app_DATA = bookcase.desktop
 
 mimedir = $(kde_mimedir)/application
 mime_DATA = x-bookcase.desktop
-data_DATA = bookcase.dtd bookcase.tips
+
+localdir = $(kde_datadir)/bookcase
+local_DATA = bookcase.dtd bookcase.tips
 
 DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz
 
@@ -281,7 +282,7 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
-DATA = $(app_DATA) $(data_DATA) $(mime_DATA)
+DATA = $(app_DATA) $(local_DATA) $(mime_DATA)
 
 
 #>- RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
@@ -371,23 +372,23 @@ uninstall-appDATA:
 	  echo " rm -f $(DESTDIR)$(appdir)/$$f"; \
 	  rm -f $(DESTDIR)$(appdir)/$$f; \
 	done
-dataDATA_INSTALL = $(INSTALL_DATA)
-install-dataDATA: $(data_DATA)
+localDATA_INSTALL = $(INSTALL_DATA)
+install-localDATA: $(local_DATA)
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(datadir)
-	@list='$(data_DATA)'; for p in $$list; do \
+	$(mkinstalldirs) $(DESTDIR)$(localdir)
+	@list='$(local_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(dataDATA_INSTALL) $$d$$p $(DESTDIR)$(datadir)/$$f"; \
-	  $(dataDATA_INSTALL) $$d$$p $(DESTDIR)$(datadir)/$$f; \
+	  echo " $(localDATA_INSTALL) $$d$$p $(DESTDIR)$(localdir)/$$f"; \
+	  $(localDATA_INSTALL) $$d$$p $(DESTDIR)$(localdir)/$$f; \
 	done
 
-uninstall-dataDATA:
+uninstall-localDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(data_DATA)'; for p in $$list; do \
+	@list='$(local_DATA)'; for p in $$list; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(datadir)/$$f"; \
-	  rm -f $(DESTDIR)$(datadir)/$$f; \
+	  echo " rm -f $(DESTDIR)$(localdir)/$$f"; \
+	  rm -f $(DESTDIR)$(localdir)/$$f; \
 	done
 mimeDATA_INSTALL = $(INSTALL_DATA)
 install-mimeDATA: $(mime_DATA)
@@ -658,7 +659,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	$(mkinstalldirs) $(DESTDIR)$(appdir) $(DESTDIR)$(datadir) $(DESTDIR)$(mimedir)
+	$(mkinstalldirs) $(DESTDIR)$(appdir) $(DESTDIR)$(localdir) $(DESTDIR)$(mimedir)
 
 install: install-recursive
 install-exec: install-exec-recursive
@@ -705,7 +706,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-appDATA install-dataDATA install-mimeDATA
+install-data-am: install-appDATA install-localDATA install-mimeDATA
 
 install-exec-am:
 
@@ -732,7 +733,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-appDATA uninstall-dataDATA uninstall-info-am \
+uninstall-am: uninstall-appDATA uninstall-info-am uninstall-localDATA \
 	uninstall-mimeDATA
 
 uninstall-info: uninstall-info-recursive
@@ -744,17 +745,17 @@ uninstall-info: uninstall-info-recursive
 	distclean-recursive distclean-tags distcleancheck distdir \
 	distuninstallcheck dvi dvi-am dvi-recursive info info-am \
 	info-recursive install install-am install-appDATA install-data \
-	install-data-am install-data-recursive install-dataDATA \
-	install-exec install-exec-am install-exec-recursive \
-	install-info install-info-am install-info-recursive install-man \
-	install-mimeDATA install-recursive install-strip installcheck \
-	installcheck-am installdirs installdirs-am \
+	install-data-am install-data-recursive install-exec \
+	install-exec-am install-exec-recursive install-info \
+	install-info-am install-info-recursive install-localDATA \
+	install-man install-mimeDATA install-recursive install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
 	installdirs-recursive maintainer-clean maintainer-clean-generic \
 	maintainer-clean-recursive mostlyclean mostlyclean-generic \
 	mostlyclean-libtool mostlyclean-recursive pdf pdf-am \
 	pdf-recursive ps ps-am ps-recursive tags tags-recursive \
-	uninstall uninstall-am uninstall-appDATA uninstall-dataDATA \
-	uninstall-info-am uninstall-info-recursive uninstall-mimeDATA \
+	uninstall uninstall-am uninstall-appDATA uninstall-info-am \
+	uninstall-info-recursive uninstall-localDATA uninstall-mimeDATA \
 	uninstall-recursive
 
 

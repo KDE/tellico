@@ -1,10 +1,10 @@
 %define name    bookcase
-%define version 0.7.2
+%define version 0.8
 %define release 1rls
-# get around stupid Mandrake libtool tag CXX bug
-%define __libtoolize true
+%define iconname %{name}.png
+%define __libtoolize /bin/true
 
-Summary: A book collection manager
+Summary: A collection manager
 Name: %{name}
 Version: %{version}
 Release: %{release}
@@ -13,11 +13,29 @@ Group: Office
 Source: %{name}-%{version}.tar.gz
 URL: http://www.periapsis.org/bookcase/
 Requires: kdebase libxslt1 >= 1.0.19
-BuildRequires: kdelibs-devel libxslt-devel >= 1.0.19
+BuildRequires: kdelibs-devel >= 3.1 libxslt-devel >= 1.0.19
+BuildRequires: ImageMagick
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
-Bookcase is a KDE application for keeping track of your book collection.
+Bookcase is a KDE application for keeping track of your collection of books, bibliographies, music, movies, coins, stamps, trading cards, comic books, or wines.
+
+Features:
+
+o Supports any number of user-defined fields, of ten different types:
+   o text, paragraph, list, checkbox, year, URL
+   o tables of one or two columns.
+   o images
+   o combinations of other fields
+o Handles books with multiple authors, genres, keywords, etc.
+o Automatically formats titles and names
+o Supports collection searching and view filtering
+o Sorts and groups collection by various properties
+o Automatically validates ISBN
+o Allows customizable entry templates through XSLT
+o Imports Bibtex, Bibtexml, CSV, and XSLT-filtered data
+o Exports to Bibtex, Bibtexml, CSV, HTML, PilotDB, and XSLT-filtered data
+
 
 %prep
 rm -rf $RPM_BUILD_ROOT
@@ -26,32 +44,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %build
 %configure2_5x --disable-debug --enable-final --disable-rpath
-make
+%make
 
 %install
 rm -Rf %{buildroot}
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/pics
 %makeinstall_std
 
-mkdir -p %{buildroot}/%{_menudir}
-cat > %{buildroot}/%{_menudir}/%{name} <<EOF
-?package(%{name}):\
-command="%_bindir/bookcase" \
-icon="%{name}.png" \
-kde_filename="bookcase" \
-kde_command="bookcase -caption \"%c\" %i %m" \
-title="Bookcase" \
-longtitle="Book Collection Manager" \
-needs="kde" \
-section="Office/Accessories" \
-mimetypes="application/x-bookcase"
-EOF
+mkdir -p %{buildroot}{%{_miconsdir},%{_iconsdir},%{_liconsdir},%{_menudir}}
+convert icons/%{name}.png -geometry 48x48 %{buildroot}%{_liconsdir}/%{iconname}
+convert icons/%{name}.png -geometry 32x32 %{buildroot}%{_iconsdir}/%{iconname} 
+convert icons/%{name}.png -geometry 16x16 %{buildroot}%{_miconsdir}/%{iconname} 
 
-#icons too
-mkdir -p %{buildroot}/{%{_miconsdir},%{_liconsdir}}
-install -m644 icons/hi32-app-bookcase.png %{buildroot}/%{_iconsdir}/%{name}.png
-install -m644 icons/hi32-app-bookcase.png %{buildroot}/%{_liconsdir}/%{name}.png
-install -m644 icons/hi16-app-bookcase.png %{buildroot}/%{_miconsdir}/%{name}.png
+kdedesktop2mdkmenu.pl bookcase "Office/Accessories"    %buildroot/%_datadir/applnk/Applications/bookcase.desktop                             %buildroot/%_menudir/bookcase 
 
 %find_lang %{name}
 
@@ -67,19 +71,27 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr (-,root,root)
 %doc AUTHORS COPYING ChangeLog INSTALL README TODO
+%doc %dir %{_datadir}/doc/HTML/*/bookcase/*
 %{_bindir}/*
-#%{_mandir}/man1/*
 %{_datadir}/applnk/Applications/bookcase.desktop
 %{_datadir}/mimelnk/application/x-bookcase.desktop
-%{_libdir}/menu/*
 %{_datadir}/apps/%{name}/
-%{_iconsdir}/*/*/*/*.png
-%{_iconsdir}/%{name}.png
-%{_miconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
-%{_datadir}/doc/HTML/*/bookcase/*
+%{_menudir}/%{name}
+%{_miconsdir}/%{iconname}
+%{_iconsdir}/%{iconname}
+%{_liconsdir}/%{iconname}
+%{_iconsdir}/*/*/*  
 
 %changelog
+* Sun Jan 25 2004 Robby Stephenson <robby@periapsis.org> 0.8-1rls
+- Version 0.8
+
+* Thu Jan 22 2004 Robby Stephenson <robby@periapsis.org> 0.8-0.pre1.1rls
+- Version 0.8pre1
+
+* Sat Jan 17 2004 Robby Stephenson <robby@periapsis.org> 0.7.2-2rls
+- Update to Charles Edwards' version in Mandrake contribs.
+
 * Tue Nov 25 2003 Robby Stephenson <robby@periapsis.org> 0.7.2-1rls
 - Version 0.7.2
 

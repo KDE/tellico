@@ -11,9 +11,9 @@
    ===================================================================
    Bookcase XSLT file - used for exporting to HTML
 
-   $Id: bookcase2html.xsl 295 2003-11-22 07:40:03Z robby $
+   $Id: bookcase2html.xsl 394 2004-01-24 23:17:42Z robby $
 
-   Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
    application, which can be found at http://www.periapsis.org/bookcase/
@@ -31,7 +31,7 @@
 
    Customize this file in order to print different columns of
    fields for each entry. Any version of this file in the user's
-   home directory, such as $HOME/.kde/share/apps/bookcase/, will
+   KDE home directory, such as $KDEHOME/share/apps/bookcase/, will
    override the system file.
    ===================================================================
 -->
@@ -57,6 +57,7 @@
 <!-- DO NOT CHANGE THE NAME OF THESE KEYS -->
 <xsl:key name="entries" match="bc:entry" use=".//bc:author"/>
 <xsl:key name="groups" match="bc:author" use="."/>
+<xsl:key name="fieldsByName" match="bc:field" use="@name"/>
 <xsl:variable name="all-groups" select="//bc:author"/>
 
 <!-- Up to three fields may be used for sorting. -->
@@ -98,26 +99,23 @@
 </xsl:text>
 </xsl:variable>
 
-<!-- This stylesheet is designed for Bookcase document syntax version 4 -->
-<xsl:variable name="current-syntax" select="'4'"/>
-
 <xsl:template match="/">
  <xsl:apply-templates select="bc:bookcase"/>
 </xsl:template>
- 
+
 <xsl:template match="bc:bookcase">
- <xsl:if test="not(@syntaxVersion = $current-syntax)">
+ <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
+ <xsl:if test="@syntaxVersion != '5'">
   <xsl:message>
    <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
-   <xsl:value-of select="$current-syntax"/>
-   <xsl:text>, </xsl:text>
-   <xsl:value-of select="$endl"/>
-   <xsl:text>but the data file is version </xsl:text>
+   <xsl:value-of select="'5'"/>
+   <xsl:text>, &#xa;but the input data file is version </xsl:text>
    <xsl:value-of select="@syntaxVersion"/>
-   <xsl:text>.</xsl:text>
+   <xsl:text>. There might be some &#xa;problems with the output.</xsl:text>
   </xsl:message>
  </xsl:if>
- <html>
+
+<html>
   <head>
    <style type="text/css">
    body {
@@ -292,7 +290,7 @@
  <xsl:param name="fields"/>
  <xsl:param name="name"/>
  <xsl:variable name="name-tokens" select="str:tokenize($name, ':')"/>
- <!-- the header is the title attribute of the field node whose name equals the column name -->
+ <!-- the header is the title field of the field node whose name equals the column name -->
  <xsl:choose>
   <xsl:when test="$fields">
    <xsl:value-of select="$fields/bc:field[@name = $name-tokens[last()]]/@title"/>
@@ -307,36 +305,49 @@
  <xsl:variable name="current" select="descendant::*"/>
  <xsl:for-each select="$columns">
   <xsl:variable name="column" select="."/>
-  <xsl:variable name="numvalues" select="count($current[local-name() = $column])"/>
+  <xsl:variable name="values" select="$current[local-name() = $column]"/>
+
   <!-- if the field node exists, output its value, otherwise put in a space -->
   <td class="field">
    <xsl:choose>
     <!-- when there is at least one value... -->
-    <xsl:when test="$numvalues &gt; 0">
+    <xsl:when test="count($values) &gt; 0">
      <!-- the field's value is its text() unless it doesn't have any, then just output an 'X' -->
-     <xsl:for-each select="$current[local-name() = $column]">
+     <xsl:for-each select="$values">
       <xsl:choose>
-      <!-- boolean values end up as 'true', would be better to check if it's boolean
-           but for now just test for string equality. If so, output 'X' --> 
+       <!-- boolean values end up as 'true', would be better to check if it's boolean
+            but for now just test for string equality. If so, output 'X' --> 
        <xsl:when test=". = 'true'">
         <xsl:text>X</xsl:text>
        </xsl:when>
+
        <!-- next, check for 2-column table values which have '::' -->
        <xsl:when test="count(bc:column) &gt; 1">
         <!-- italicize second column -->
         <xsl:value-of select="bc:column[1]"/>
         <xsl:text> - </xsl:text>
-        <em><xsl:value-of select="bc:column[2]"/></em>
+        <em>
+         <xsl:value-of select="bc:column[2]"/>
+        </em>
         <br/>
        </xsl:when>
+
+       <!-- next, check for URLs -->
+       <xsl:when test="key('fieldsByName', $column)/@type = 7">
+        <a href=".">
+         <xsl:value-of select="."/>
+        </a>
+       </xsl:when>
+
        <!-- finally, it's just a regular value -->
        <xsl:otherwise>
         <xsl:value-of select="."/>
         <!-- if there is more than one value, add the semi-colon -->
-        <xsl:if test="position() &lt; $numvalues">
+        <xsl:if test="position() &lt; last()">
          <xsl:text>; </xsl:text>
         </xsl:if>
        </xsl:otherwise>
+
       </xsl:choose>
      </xsl:for-each>
     </xsl:when>

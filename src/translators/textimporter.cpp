@@ -1,8 +1,5 @@
 /***************************************************************************
-                              textimporter.cpp
-                             -------------------
-    begin                : Wed Sep 24 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,11 +12,13 @@
  ***************************************************************************/
 
 #include "textimporter.h"
-#include "../bcfilehandler.h"
+#include "../filehandler.h"
 
-TextImporter::TextImporter(const KURL& url_) : Importer(url_) {
+using Bookcase::Import::TextImporter;
+
+TextImporter::TextImporter(const KURL& url_) : Import::Importer(url_) {
   // TODO: error handling?
   if(url_.isValid()) {
-    m_text = BCFileHandler::readFile(url_);
+    m_text = FileHandler::readTextFile(url_);
   }
 }

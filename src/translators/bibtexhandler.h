@@ -1,8 +1,5 @@
 /***************************************************************************
-                               bibtexhandler.h
-                             -------------------
-    begin                : Thu Aug 21 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,27 +14,28 @@
 #ifndef BIBTEXHANDLER_H
 #define BIBTEXHANDLER_H
 
-class BCUnit;
-
 class QString;
 class QStringList;
 
 #include <qmap.h>
 
-typedef QMap<QString, QStringList> StringListMap;
+namespace Bookcase {
+  namespace Data {
+    class Entry;
+  }
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexhandler.h 261 2003-11-06 05:15:35Z robby $
+ * @version $Id: bibtexhandler.h 386 2004-01-24 05:12:28Z robby $
  */
 class BibtexHandler {
 public:
   enum QuoteStyle { BRACES=0, QUOTES=1 };
-  static QString bibtexKey(BCUnit* unit);
+  static QString bibtexKey(Data::Entry* unit);
   static QString bibtexKey(const QString& author, const QString& title, const QString& year);
   static QString importText(char* text);
   static QString exportText(const QString& text, const QStringList& macros);
-  static bool setAttributeValue(BCUnit* unit, const QString& bibtexField, const QString& value);
+  static bool setFieldValue(Data::Entry* unit, const QString& bibtexField, const QString& value);
   /**
    * Strips the text of all vestiges of Latex.
    *
@@ -49,9 +47,12 @@ public:
   static const QString s_bibtexmlNamespace;
 
 private:
+  typedef QMap<QString, QStringList> StringListMap;
+
   static void loadTranslationMaps();
   static StringListMap s_utf8LatexMap;
   static QuoteStyle s_quoteStyle;
 };
 
+} // end namespace
 #endif

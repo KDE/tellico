@@ -28,8 +28,8 @@ app_DATA = bookcase.desktop
 mimedir = $(kde_mimedir)/application
 mime_DATA = x-bookcase.desktop
 
-datadir = $(kde_datadir)/bookcase
-data_DATA = bookcase.dtd bookcase.tips
+localdir = $(kde_datadir)/bookcase
+local_DATA = bookcase.dtd bookcase.tips
 
 DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz
 
@@ -45,7 +45,7 @@ messages:
 	$(PERL) ./preparetips < bookcase.tips > tips.cpp; \
 	$(XGETTEXT) tips.cpp -c++ -j -o $(podir)/bookcase.pot; \
 	rm -f tips.cpp
-  
+
 dist-hook:
 # am_edit needs to modify the Makefile.in files, so they must be writeable
 	-find $(distdir) -exec chmod a+w {} \;

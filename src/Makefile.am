@@ -3,12 +3,33 @@ bin_PROGRAMS = bookcase
 
 ## INCLUDES were found outside kdevelop specific part
 
-bookcase_SOURCES = bccollectionfieldsdialog.cpp stringmacrodialog.cpp bclabelaction.cpp bcfilehandler.cpp bcimportdialog.cpp bcexportdialog.cpp bccollectionfactory.cpp bookcasecontroller.cpp bcattributewidget.cpp kwidgetlister.cpp bcfilterdialog.cpp bcfilter.cpp bcunititem.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp 
-bookcase_LDADD   = ./collections/libcollections.a ./translators/libtranslators.a ./translators/btparse/libbtparse.a -lkdeprint -lxml2 -lxslt -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET)
+bookcase_SOURCES = entryview.cpp collection.cpp mainwindow.cpp controller.cpp kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp entryeditdialog.cpp
+bookcase_LDADD = ./collections/libcollections.a ./translators/libtranslators.a ./translators/btparse/libbtparse.a ./translators/pilotdb/libpilotdb.a ./translators/pilotdb/libflatfile/liblibflatfile.a ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET) $(XSLT_LIBS)
 
 SUBDIRS = collections translators 
 
-EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcasedoc.cpp bookcasedoc.h bookcaseui.rc bcattribute.cpp bcattribute.h bccollection.cpp bccollection.h bcgroupview.cpp bcgroupview.h bcdetailedlistview.cpp bcdetailedlistview.h bctabcontrol.cpp bctabcontrol.h bcunit.cpp bcuniteditwidget.cpp bcuniteditwidget.h bcunit.h bcunititem.h configdialog.cpp configdialog.h finddialog.cpp finddialog.h isbnvalidator.cpp isbnvalidator.h bcutils.h bcunititem.cpp bcfilter.cpp bcfilter.h bcfilterdialog.cpp bcfilterdialog.h kwidgetlister.cpp kwidgetlister.h bcattributewidget.cpp bcattributewidget.h bookcasecontroller.cpp bookcasecontroller.h bccollectionfactory.cpp bccollectionfactory.h bcexportdialog.h bcexportdialog.cpp bcimportdialog.h bcimportdialog.cpp bcfilehandler.cpp bcfilehandler.h bclabelaction.cpp bclabelaction.h stringmacrodialog.cpp stringmacrodialog.h bccollectionfieldsdialog.cpp bccollectionfieldsdialog.h 
+EXTRA_DIST = bookcaseui.rc \
+collection.cpp              entryview.h          imagefactory.h \
+collectionfactory.cpp       exportdialog.cpp     image.h \
+collectionfactory.h         exportdialog.h       imagewidget.cpp \
+collectionfieldsdialog.cpp  fieldcompletion.cpp  imagewidget.h \
+collectionfieldsdialog.h    fieldcompletion.h    importdialog.cpp \
+collection.h                field.cpp            importdialog.h \
+configdialog.cpp            field.h              isbnvalidator.cpp \
+configdialog.h              fieldwidget.cpp      isbnvalidator.h \
+controller.cpp              fieldwidget.h        kwidgetlister.cpp \
+controller.h                filehandler.cpp      kwidgetlister.h \
+detailedlistview.cpp        filehandler.h        labelaction.cpp \
+detailedlistview.h          filter.cpp           labelaction.h \
+document.cpp                filterdialog.cpp     main.cpp \
+document.h                  filterdialog.h       mainwindow.cpp \
+entry.cpp                   filter.h             mainwindow.h \
+entryeditdialog.cpp         finddialog.cpp       stringmapdialog.cpp \
+entryeditdialog.h           finddialog.h         stringmapdialog.h \
+entry.h                     groupview.cpp        strings.h \
+entryitem.cpp               groupview.h          tabcontrol.cpp \
+entryitem.h                 image.cpp            tabcontrol.h \
+entryview.cpp               imagefactory.cpp     utils.h
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -40,7 +61,7 @@ METASOURCES = AUTO
 KDE_OPTIONS = noautodist
 
 # the library search path. 
-bookcase_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH)
+bookcase_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH) $(TAGLIB_RPATH)
 
 rcdir = $(kde_datadir)/bookcase
 rc_DATA = bookcaseui.rc
@@ -51,4 +72,6 @@ messages: rc.cpp
 	 $(XGETTEXT) $$LIST -o $(podir)/bookcase.pot; \
 	fi
 
-include ../admin/Doxyfile.am
+#include ../admin/Doxyfile.am
+
+noinst_HEADERS = image.h imagewidget.h fieldcompletion.h imagefactory.h strings.h stringmapdialog.h entryeditdialog.h

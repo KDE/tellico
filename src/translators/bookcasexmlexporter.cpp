@@ -1,8 +1,5 @@
 /***************************************************************************
-                           bookcasexmlexporter.cpp
-                             -------------------
-    begin                : Wed Sep 10 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,36 +12,78 @@
  ***************************************************************************/
 
 #include "bookcasexmlexporter.h"
-#include "../bccollection.h"
+#include "../collection.h"
 #include "../collections/bibtexcollection.h"
-#include "../collections/bibtexattribute.h"
+#include "../imagefactory.h"
 
 #include <klocale.h>
+#include <kconfig.h>
+#include <kmdcodec.h>
 #include <kdebug.h>
 
+#include <qlayout.h>
+#include <qgroupbox.h>
+#include <qcheckbox.h>
+#include <qwhatsthis.h>
 #include <qdom.h>
 #include <qtextcodec.h>
+
+using Bookcase::Export::BookcaseXMLExporter;
 
 static const char* BOOKCASE_NAMESPACE = "http://periapsis.org/bookcase/";
 static const char* BOOKCASE_DTD = "bookcase.dtd";
 
 /*
  * VERSION 2 added namespaces, changed to multiple elements,
- * and changed the "keywords" attribute to "keyword"
+ * and changed the "keywords" field to "keyword"
  *
  * VERSION 3 broke out the formatFlag, and changed NoComplete to AllowCompletion
  *
- * VERSION 4 added a bibtex-field name forBibtex collections, element name was
- * changed to 'entry', attribute elements changed to 'field', and boolean fields are now "true"
+ * VERSION 4 added a bibtex-field name for Bibtex collections, element name was
+ * changed to 'entry', field elements changed to 'field', and boolean fields are now "true"
+ *
+ * VERSION 5 moved the bibtex-field and any other extended field property to property elements
+ * inside the field element, and added the image element.
  */
-const unsigned BookcaseXMLExporter::syntaxVersion = 4;
+const unsigned BookcaseXMLExporter::syntaxVersion = 5;
 
 QString BookcaseXMLExporter::formatString() const {
-  return i18n("Bookcase");
+  return i18n("XML");
 }
 
 QString BookcaseXMLExporter::fileFilter() const {
-  return i18n("*|All files");
+  return i18n("*.xml|XML files (*.xml)") + QString::fromLatin1("\n") + i18n("*|All files");
+}
+
+QWidget* BookcaseXMLExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
+  if(m_widget && m_widget->parent() == parent_) {
+    return m_widget;
+  }
+
+  m_widget = new QWidget(parent_, name_);
+  QVBoxLayout* l = new QVBoxLayout(m_widget);
+
+  QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("Bookcase XML Options"), m_widget);
+  l->addWidget(box);
+
+  m_checkExportImages = new QCheckBox(i18n("Include images in XML document"), box);
+  m_checkExportImages->setChecked(m_exportImages);
+  QWhatsThis::add(m_checkExportImages, i18n("If checked, the images in the document will be included "
+                                             "in the XML stream as base64 encoded elements."));
+
+  return m_widget;
+}
+
+void BookcaseXMLExporter::readOptions(KConfig* config_) {
+  config_->setGroup(QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_exportImages = config_->readBoolEntry("Include Images", m_exportImages);
+}
+
+void BookcaseXMLExporter::saveOptions(KConfig* config_) {
+  m_exportImages = m_checkExportImages->isChecked();
+
+  config_->setGroup(QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  config_->writeEntry("Include Images", m_exportImages);
 }
 
 QString BookcaseXMLExporter::text(bool format_, bool encodeUTF8_) {
@@ -80,6 +119,9 @@ QDomDocument BookcaseXMLExporter::exportXML(bool format_, bool encodeUTF8_) cons
 
   exportCollectionXML(dom, bcelem, format_);
 
+  // clear image list
+  m_imageList.clear();
+
   return dom;
 }
 
@@ -88,17 +130,17 @@ void BookcaseXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& p
 
   collElem.setAttribute(QString::fromLatin1("type"),      collection()->collectionType());
   collElem.setAttribute(QString::fromLatin1("title"),     collection()->title());
-  collElem.setAttribute(QString::fromLatin1("unitTitle"), collection()->unitTitle());
+  // it's unitTitle and not entryTitle for historical reasons...
+  collElem.setAttribute(QString::fromLatin1("unitTitle"), collection()->entryTitle());
 
   QDomElement attsElem = dom_.createElement(QString::fromLatin1("fields"));
   collElem.appendChild(attsElem);
-  BCAttributeListIterator attIt(collection()->attributeList());
-  for( ; attIt.current(); ++attIt) {
-    exportAttributeXML(dom_, attsElem, attIt.current());
+  for(Data::FieldListIterator fIt(collection()->fieldList()); fIt.current(); ++fIt) {
+    exportFieldXML(dom_, attsElem, fIt.current());
   }
 
-  if(collection()->collectionType() == BCCollection::Bibtex) {
-    const BibtexCollection* c = dynamic_cast<const BibtexCollection*>(collection());
+  if(collection()->collectionType() == Data::Collection::Bibtex) {
+    const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(collection());
     if(c) {
       if(!c->preamble().isEmpty()) {
         QDomElement preElem = dom_.createElement(QString::fromLatin1("bibtex-preamble"));
@@ -107,7 +149,7 @@ void BookcaseXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& p
       }
 
       QDomElement macrosElem = dom_.createElement(QString::fromLatin1("macros"));
-      QMap<QString, QString>::ConstIterator macroIt;
+      Data::StringMap::ConstIterator macroIt;
       for(macroIt = c->macroList().begin(); macroIt != c->macroList().end(); ++macroIt) {
         if(!macroIt.data().isEmpty()) {
           QDomElement macroElem = dom_.createElement(QString::fromLatin1("macro"));
@@ -122,99 +164,124 @@ void BookcaseXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& p
     }
   }
 
-  BCUnitListIterator unitIt(unitList());
-  for( ; unitIt.current(); ++unitIt) {
-    exportUnitXML(dom_, collElem, unitIt.current(), format_);
+  for(Data::EntryListIterator it(entryList()); it.current(); ++it) {
+    exportEntryXML(dom_, collElem, it.current(), format_);
+  }
+
+  if(!m_imageList.isEmpty()) {
+    QDomElement imgsElem = dom_.createElement(QString::fromLatin1("images"));
+    collElem.appendChild(imgsElem);
+    for(QStringList::ConstIterator it = m_imageList.begin(); it != m_imageList.end(); ++it) {
+      exportImageXML(dom_, imgsElem, ImageFactory::imageById(*it));
+    }
   }
 
   parent_.appendChild(collElem);
 }
 
-void BookcaseXMLExporter::exportAttributeXML(QDomDocument& dom_, QDomElement& parent_, BCAttribute* att_) const {
-  QDomElement attElem = dom_.createElement(QString::fromLatin1("field"));
+void BookcaseXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_, Data::Field* field_) const {
+  QDomElement elem = dom_.createElement(QString::fromLatin1("field"));
 
-  attElem.setAttribute(QString::fromLatin1("name"),          att_->name());
-  attElem.setAttribute(QString::fromLatin1("title"),         att_->title());
-  attElem.setAttribute(QString::fromLatin1("category"),      att_->category());
-  attElem.setAttribute(QString::fromLatin1("type"),          att_->type());
-  attElem.setAttribute(QString::fromLatin1("flags"),         att_->flags());
-  attElem.setAttribute(QString::fromLatin1("format"),        att_->formatFlag());
+  elem.setAttribute(QString::fromLatin1("name"), field_->name());
+  elem.setAttribute(QString::fromLatin1("title"), field_->title());
+  elem.setAttribute(QString::fromLatin1("category"), field_->category());
+  elem.setAttribute(QString::fromLatin1("type"), field_->type());
+  elem.setAttribute(QString::fromLatin1("flags"), field_->flags());
+  elem.setAttribute(QString::fromLatin1("format"), field_->formatFlag());
 
-  if(att_->type() == BCAttribute::Choice) {
-    attElem.setAttribute(QString::fromLatin1("allowed"),     att_->allowed().join(QString::fromLatin1(";")));
-  }
-
-  if(att_->isBibtexAttribute()) {
-    BibtexAttribute* bAtt = dynamic_cast<BibtexAttribute*>(att_);
-    if(bAtt) {
-      attElem.setAttribute(QString::fromLatin1("bibtex-field"), bAtt->bibtexFieldName());
-    }
+  if(field_->type() == Data::Field::Choice) {
+    elem.setAttribute(QString::fromLatin1("allowed"), field_->allowed().join(QString::fromLatin1(";")));
   }
 
   // only save description if it's not equal to title, which is the default
   // title is never empty, so this indirectly checks for empty descriptions
-  if(att_->description() != att_->title()) {
-    attElem.setAttribute(QString::fromLatin1("description"), att_->description());
+  if(field_->description() != field_->title()) {
+    elem.setAttribute(QString::fromLatin1("description"), field_->description());
   }
 
-  parent_.appendChild(attElem);
+  Data::StringMap::ConstIterator it;
+  for(it = field_->propertyList().begin(); it != field_->propertyList().end(); ++it) {
+    QDomElement e = dom_.createElement(QString::fromLatin1("prop"));
+    e.setAttribute(QString::fromLatin1("name"), it.key());
+    e.appendChild(dom_.createTextNode(it.data()));
+    elem.appendChild(e);
+  }
+
+  parent_.appendChild(elem);
 }
 
-void BookcaseXMLExporter::exportUnitXML(QDomDocument& dom_, QDomElement& parent_, BCUnit* unit_, bool format_) const {
-  QDomElement unitElem = dom_.createElement(QString::fromLatin1("entry"));
+void BookcaseXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_, Data::Entry* entry_, bool format_) const {
+  QDomElement entryElem = dom_.createElement(QString::fromLatin1("entry"));
 
-  // is it really faster to put these outside the loop?
-  // parent element if attribute contains multiple values, child of unitElem
-  QDomElement attParElem;
-  // element for attribute value, child of eith unitElem or attParElem
-  QDomElement attElem;
+  // iterate through every field for the entry
+  for(Data::FieldListIterator fIt(entry_->collection()->fieldList()); fIt.current(); ++fIt) {
+    QString fieldName = fIt.current()->name();
+    QString fieldValue = format_ ? entry_->formattedField(fieldName) : entry_->field(fieldName);
 
-  // iterate through every attribute for the unit
-  BCAttributeListIterator attIt(unit_->collection()->attributeList());
-  for( ; attIt.current(); ++attIt) {
-    QString attName = attIt.current()->name();
-    QString attValue;
-    if(format_) {
-      attValue = unit_->attributeFormatted(attName, attIt.current()->formatFlag());
-    } else {
-      attValue = unit_->attribute(attName);
-    }
-
-    // if empty, then no attribute element is added and just continue
-    if(attValue.isEmpty()) {
+    // if empty, then no field element is added and just continue
+    if(fieldValue.isEmpty()) {
       continue;
     }
 
     // if multiple versions are allowed, split them into separate elements
-    if(attIt.current()->flags() & BCAttribute::AllowMultiple) {
+    if(fIt.current()->flags() & Data::Field::AllowMultiple) {
+      // parent element if field contains multiple values, child of entryElem
       // who cares about grammar, just add an 's' to the name
-      attParElem = dom_.createElement(attName + QString::fromLatin1("s"));
-      unitElem.appendChild(attParElem);
+      QDomElement parElem = dom_.createElement(fieldName + QString::fromLatin1("s"));
+      entryElem.appendChild(parElem);
 
-      // the space after the semi-colon is enforced when the attribute is set for the unit
-      QStringList atts = QStringList::split(QString::fromLatin1("; "), attValue, true);
+      // the space after the semi-colon is enforced when the field is set for the unit
+      QStringList atts = QStringList::split(QString::fromLatin1("; "), fieldValue, true);
       for(QStringList::ConstIterator it = atts.begin(); it != atts.end(); ++it) {
-        attElem = dom_.createElement(attName);
+        // element for field value, child of either entryElem or ParentElem
+        QDomElement fieldElem = dom_.createElement(fieldName);
         // special case for 2-column tables
-        if(attIt.current()->type() == BCAttribute::Table2) {
+        if(fIt.current()->type() == Data::Field::Table2) {
           QDomElement elem1, elem2;
           elem1 = dom_.createElement(QString::fromLatin1("column"));
           elem2 = dom_.createElement(QString::fromLatin1("column"));
           elem1.appendChild(dom_.createTextNode((*it).section(QString::fromLatin1("::"), 0, 0)));
           elem2.appendChild(dom_.createTextNode((*it).section(QString::fromLatin1("::"), 1)));
-          attElem.appendChild(elem1);
-          attElem.appendChild(elem2);
+          fieldElem.appendChild(elem1);
+          fieldElem.appendChild(elem2);
         } else {
-          attElem.appendChild(dom_.createTextNode(*it));
+          fieldElem.appendChild(dom_.createTextNode(*it));
         }
-        attParElem.appendChild(attElem);
+        parElem.appendChild(fieldElem);
       }
     } else {
-      attElem = dom_.createElement(attName);
-      unitElem.appendChild(attElem);
-      attElem.appendChild(dom_.createTextNode(attValue));
+      QDomElement fieldElem = dom_.createElement(fieldName);
+      entryElem.appendChild(fieldElem);
+      fieldElem.appendChild(dom_.createTextNode(fieldValue));
     }
-  } // end attribute loop
 
-  parent_.appendChild(unitElem);
+    if(fIt.current()->type() == Data::Field::Image) {
+      // possible to have more than one entry with the same image
+      // only want to include it in the output xml once
+      if(m_imageList.findIndex(fieldValue) == -1) {
+        m_imageList += fieldValue;
+      }
+    }
+  } // end field loop
+
+  parent_.appendChild(entryElem);
+}
+
+void BookcaseXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_, const Data::Image& img_) const {
+  if(img_.isNull()) {
+    kdDebug() << "BookcaseXMLExporter::exportImageXML() - null image!" << endl;
+    return;
+  }
+//  kdDebug() << "BookcaseXMLExporter::exportImageXML() - id = " << img_.id() << endl;
+
+  QDomElement imgElem = dom_.createElement(QString::fromLatin1("image"));
+  imgElem.setAttribute(QString::fromLatin1("format"), img_.format());
+  imgElem.setAttribute(QString::fromLatin1("id"), img_.id());
+  imgElem.setAttribute(QString::fromLatin1("width"), img_.width());
+  imgElem.setAttribute(QString::fromLatin1("height"), img_.height());
+  if(m_exportImages) {
+    QCString imgText = KCodecs::base64Encode(img_.byteArray());
+    imgElem.appendChild(dom_.createTextNode(QString::fromLatin1(imgText)));
+  }
+  parent_.appendChild(imgElem);
 }

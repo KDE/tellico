@@ -1,8 +1,5 @@
 /***************************************************************************
-                               finddialog.h
-                             -------------------
-    begin                : Wed Feb 27 2002
-    copyright            : (C) 2002, 2003 by Robby Stephenson
+    copyright            : (C) 2002-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,8 +14,9 @@
 #ifndef FINDDIALOG_H
 #define FINDDIALOG_H
 
-class Bookcase;
-
+namespace Bookcase {
+  class MainWindow;
+}
 class KComboBox;
 class KHistoryCombo;
 class KPushButton;
@@ -27,13 +25,15 @@ class QCheckBox;
 
 #include <kdialogbase.h>
 
+namespace Bookcase {
+
 /**
  * The find dialog allows the user to search for a string in the document.
  *
  * @author Robby Stephenson
- * @version $Id: finddialog.h 113 2003-09-13 05:33:05Z robby $
+ * @version $Id: finddialog.h 386 2004-01-24 05:12:28Z robby $
  */
-class FindDialog : public KDialogBase  {
+class FindDialog : public KDialogBase {
 Q_OBJECT
 
 public: 
@@ -43,19 +43,23 @@ public:
    * @param parent A pointer to the parent widget, a Bookcase object
    * @param name The widget name
    */
-  FindDialog(Bookcase* parent, const char* name=0);
+  FindDialog(MainWindow* parent, const char* name=0);
 
   /**
-   * Update the attribute list. This is needed since the parent Bookcase app
+   * Update the field list. This is needed since the parent Bookcase app
    * doesn't delete the object once it's created. That's to retain the history list.
    */
-  void updateAttributeList();
+  void updateFieldList();
 
 public slots:
   /**
    * Find the next match
    */
   void slotFindNext();
+  /**
+   * Find the previous match
+   */
+  void slotFindPrev();
 
 protected slots:
   /**
@@ -72,10 +76,10 @@ protected slots:
   void slotEditRegExp();
 
 private:
-  Bookcase* m_bookcase;
+  MainWindow* m_bookcase;
   
   KHistoryCombo* m_pattern;
-  KComboBox* m_attributes;
+  KComboBox* m_fields;
   QCheckBox* m_caseSensitive;
   QCheckBox* m_findBackwards;
   QCheckBox* m_asRegExp;
@@ -86,4 +90,5 @@ private:
   QDialog* m_editRegExpDialog;
 };
 
+} // end namespace
 #endif

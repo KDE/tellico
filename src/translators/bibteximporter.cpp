@@ -1,8 +1,5 @@
 /***************************************************************************
-                             bibteximporter.cpp
-                             -------------------
-    begin                : Wed Sep 24 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,7 +21,9 @@
 #include <qptrlist.h>
 #include <qregexp.h>
 
-BibtexImporter::BibtexImporter(const KURL& url_) : TextImporter(url_), m_coll(0) {
+using Bookcase::Import::BibtexImporter;
+
+BibtexImporter::BibtexImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_), m_coll(0) {
   bt_initialize();
 }
 
@@ -32,7 +31,7 @@ BibtexImporter::~BibtexImporter() {
   bt_cleanup();
 }
 
-BCCollection* BibtexImporter::collection() {
+Bookcase::Data::Collection* BibtexImporter::collection() {
   if(m_coll) {
     return m_coll;
   }
@@ -45,7 +44,7 @@ BCCollection* BibtexImporter::collection() {
 //    kdDebug() << "BibtexImporter::collection() - found " << list.count() << " entries" << endl;
   }
   
-  m_coll = new BibtexCollection(true);
+  m_coll = new Data::BibtexCollection(true);
   m_coll->blockSignals(true);
 
   QString text;
@@ -74,16 +73,16 @@ BCCollection* BibtexImporter::collection() {
     }
 
     // now we're parsing a regular entrry
-    BCUnit* unit = new BCUnit(m_coll);
+    Data::Entry* unit = new Data::Entry(m_coll);
 
     text = QString::fromLatin1(bt_entry_type(it.current()));
 //    kdDebug() << "entry type: " << text << endl;
     // text is automatically put into lower-case by btparse
-    BibtexHandler::setAttributeValue(unit, QString::fromLatin1("entry-type"), text);
+    BibtexHandler::setFieldValue(unit, QString::fromLatin1("entry-type"), text);
 
     text = QString::fromLatin1(bt_entry_key(it.current()));
 //    kdDebug() << "entry key: " << text << endl;
-    BibtexHandler::setAttributeValue(unit, QString::fromLatin1("key"), text);
+    BibtexHandler::setFieldValue(unit, QString::fromLatin1("key"), text);
 
     char* name;
     AST* field = 0;
@@ -118,10 +117,10 @@ BCCollection* BibtexImporter::collection() {
       if(attName == QString::fromLatin1("author") || attName == QString::fromLatin1("editor")) {
         text.replace(QRegExp(QString::fromLatin1("\\sand\\s")), QString::fromLatin1("; "));
       }
-      BibtexHandler::setAttributeValue(unit, attName, text);
+      BibtexHandler::setFieldValue(unit, attName, text);
     }
 
-    m_coll->addUnit(unit);
+    m_coll->addEntry(unit);
 
     if(j%s_stepSize == 0) {
       emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));

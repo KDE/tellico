@@ -1,8 +1,5 @@
 /***************************************************************************
-                               htmlexporter.h
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,17 +16,20 @@
 
 class QCheckBox;
 
-#include "exporter.h"
+#include "textexporter.h"
 
 #include <qstringlist.h>
 
+namespace Bookcase {
+  namespace Export {
+
 /**
  * @author Robby Stephenson
- * @version $Id: htmlexporter.h 225 2003-10-25 05:38:23Z robby $
+ * @version $Id: htmlexporter.h 386 2004-01-24 05:12:28Z robby $
  */
-class HTMLExporter : public Exporter {
+class HTMLExporter : public TextExporter {
 public: 
-  HTMLExporter(const BCCollection* coll, BCUnitList list);
+  HTMLExporter(const Data::Collection* coll, Data::EntryList list);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;
@@ -61,4 +61,6 @@ private:
   QStringList m_columns;
 };
 
+  } // end namespace
+} // end namespace
 #endif

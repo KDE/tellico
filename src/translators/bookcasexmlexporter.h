@@ -1,8 +1,5 @@
 /***************************************************************************
-                            bookcasexmlexporter.h
-                             -------------------
-    begin                : Wed Sep 10 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,26 +16,38 @@
 
 class QDomDocument;
 class QDomElement;
-class BCAttribute;
-class BCUnit;
+class QCheckBox;
 
-#include "exporter.h"
+#include "textexporter.h"
+#include "../image.h"
+
+#include "qstringlist.h"
+
+namespace Bookcase {
+  namespace Data {
+    class Field;
+    class Entry;
+  }
+
+  namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: xsltexporter.h 105 2003-09-04 04:54:50Z robby $
+ * @version $Id: bookcasexmlexporter.h 386 2004-01-24 05:12:28Z robby $
  */
-class BookcaseXMLExporter : public Exporter {
+class BookcaseXMLExporter : public TextExporter {
 public:
-  BookcaseXMLExporter(const BCCollection* coll, const BCUnitList& list) : Exporter(coll, list) {}
+  BookcaseXMLExporter(const Data::Collection* coll, const Data::EntryList& list) : TextExporter(coll, list),
+     m_exportImages(false), m_widget(0) {}
 
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual QWidget* widget(QWidget*, const char*);
   virtual QString formatString() const;
   virtual QString text(bool format, bool encodeUTF8);
   virtual QString fileFilter() const;
-  virtual void readOptions(KConfig*) {}
-  virtual void saveOptions(KConfig*) {}
+  virtual void readOptions(KConfig* cfg);
+  virtual void saveOptions(KConfig* cfg);
   QDomDocument exportXML(bool format, bool encodeUTF8) const;
+  void exportImages(bool b) { m_exportImages = b; }
 
   /**
    * An integer indicating format version.
@@ -47,8 +56,18 @@ public:
 
 private:
   void exportCollectionXML(QDomDocument& doc, QDomElement& parent, bool format) const;
-  void exportAttributeXML(QDomDocument& doc, QDomElement& parent, BCAttribute* att) const;
-  void exportUnitXML(QDomDocument& doc, QDomElement& parent, BCUnit* unit, bool format) const;
+  void exportFieldXML(QDomDocument& doc, QDomElement& parent, Data::Field* field) const;
+  void exportEntryXML(QDomDocument& doc, QDomElement& parent, Data::Entry* unit, bool format) const;
+  void exportImageXML(QDomDocument& doc, QDomElement& parent, const Data::Image& image) const;
+
+  // keep track of which images were written, since some entries could have same image
+  mutable QStringList m_imageList;
+  bool m_exportImages;
+
+  QWidget* m_widget;
+  QCheckBox* m_checkExportImages;
 };
 
+  } // end namespace
+} // end namespace
 #endif

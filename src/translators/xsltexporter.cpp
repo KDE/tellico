@@ -1,8 +1,5 @@
 /***************************************************************************
-                              xsltexporter.cpp
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,7 +14,7 @@
 #include "xsltexporter.h"
 #include "xslthandler.h"
 #include "bookcasexmlexporter.h"
-#include "../bcfilehandler.h"
+#include "../filehandler.h"
 
 #include <klocale.h>
 #include <kurlrequester.h>
@@ -29,9 +26,12 @@
 #include <qdom.h>
 #include <qwhatsthis.h>
 
-XSLTExporter::XSLTExporter(const BCCollection* coll_, BCUnitList list_) : Exporter(coll_, list_),
-  m_widget(0),
-  m_URLRequester(0) {
+using Bookcase::Export::XSLTExporter;
+
+XSLTExporter::XSLTExporter(const Data::Collection* coll_, Data::EntryList list_)
+  : Export::TextExporter(coll_, list_),
+    m_widget(0),
+    m_URLRequester(0) {
 }
 
 QString XSLTExporter::formatString() const {
@@ -62,13 +62,13 @@ QWidget* XSLTExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   return m_widget;
 }
 
-QString XSLTExporter::text(bool formatAttributes_, bool encodeUTF8_) {
+QString XSLTExporter::text(bool formatFields_, bool encodeUTF8_) {
   KURL url = m_URLRequester->url();
   if(url.isValid()) {
-    XSLTHandler handler(BCFileHandler::readFile(url));
+    XSLTHandler handler(FileHandler::readTextFile(url));
 
-    BookcaseXMLExporter exporter(collection(), unitList());
-    QDomDocument dom = exporter.exportXML(formatAttributes_, encodeUTF8_);
+    BookcaseXMLExporter exporter(collection(), entryList());
+    QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
     return handler.applyStylesheet(dom.toString(), encodeUTF8_);
   }
   return QString::null;

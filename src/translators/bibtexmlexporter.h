@@ -1,8 +1,5 @@
 /***************************************************************************
-                             bibtexmlexporter.h
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,15 +14,18 @@
 #ifndef BIBTEXMLEXPORTER_H
 #define BIBTEXMLEXPORTER_H
 
-#include "exporter.h"
+#include "textexporter.h"
+
+namespace Bookcase {
+  namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexmlexporter.h 261 2003-11-06 05:15:35Z robby $
+ * @version $Id: bibtexmlexporter.h 386 2004-01-24 05:12:28Z robby $
  */
-class BibtexmlExporter : public Exporter {
+class BibtexmlExporter : public TextExporter {
 public: 
-  BibtexmlExporter(const BCCollection* coll, const BCUnitList& list) : Exporter(coll, list) {}
+  BibtexmlExporter(const Data::Collection* coll, const Data::EntryList& list) : TextExporter(coll, list) {}
 
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual QString formatString() const;
@@ -35,4 +35,6 @@ public:
   virtual void saveOptions(KConfig*) {}
 };
 
+  } // end namespace
+} // end namespace
 #endif

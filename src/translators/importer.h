@@ -1,8 +1,5 @@
 /***************************************************************************
-                                 importer.h
-                             -------------------
-    begin                : Wed Sep 24 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,14 +14,19 @@
 #ifndef IMPORTER_H
 #define IMPORTER_H
 
-class BCCollection;
-
 class QWidget;
 
 #include <kurl.h>
 
 #include <qobject.h>
 #include <qstring.h>
+
+namespace Bookcase {
+  namespace Data {
+    class Collection;
+  }
+
+  namespace Import {
 
 /**
  * The top-level abstract class for importing other document formats into Bookcase.
@@ -33,7 +35,7 @@ class QWidget;
  * @ref BCCollection. Any errors or warnings are added to a status message queue.
  *
  * @author Robby Stephenson
- * @version $Id: importer.h 233 2003-10-30 03:03:33Z robby $
+ * @version $Id: importer.h 386 2004-01-24 05:12:28Z robby $
  */
 class Importer : public QObject {
 Q_OBJECT
@@ -45,7 +47,7 @@ public:
    *
    * @param url The URL of the file to import
    */
-  Importer(const KURL& url) : QObject() { m_url = url; }
+  Importer(const KURL& url) : QObject(), m_url(url) {}
   /**
    */
   virtual ~Importer() {}
@@ -55,9 +57,9 @@ public:
    * This function should probably only be called once, but the subclasses may cache the
    * collection. The collection should not be created until this function is called.
    *
-   * @return A pointer to a @ref BCCollection created on the stack, or 0 if none could be created.
+   * @return A pointer to a @ref Collection created on the stack, or 0 if none could be created.
    */
-  virtual BCCollection* collection() = 0;
+  virtual Data::Collection* collection() = 0;
   /**
    * Returns a string containing all the messages added to the queue in the course of loading
    * and importing the file.
@@ -73,7 +75,7 @@ public:
    * @param name The widget name
    * @return A pointer to the setting widget
    */
-  virtual QWidget* widget(QWidget* parent, const char* name=0) { return 0; }
+  virtual QWidget* widget(QWidget*, const char*) { return 0; }
 
 signals:
   /**
@@ -95,13 +97,15 @@ protected:
    *
    * @param msg A string containing a warning or error.
    */
-  void setStatusMessage(const QString& msg) { m_statusMsg += msg + QString::fromLatin1(" "); }
+  void setStatusMessage(const QString& msg) { if(!msg.isEmpty()) m_statusMsg += msg + QString::fromLatin1(" "); }
 
-  static const int s_stepSize;
+  static const unsigned s_stepSize;
   
 private:
   KURL m_url;
   QString m_statusMsg;
 };
 
+  } // end namespace
+} // end namespace
 #endif

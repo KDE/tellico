@@ -1,8 +1,5 @@
 /***************************************************************************
-                              musiccollection.h
-                             -------------------
-    begin                : Tue Mar 4 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,7 +14,10 @@
 #ifndef MUSICCOLLECTION_H
 #define MUSICCOLLECTION_H
 
-#include "../bccollection.h"
+#include "../collection.h"
+
+namespace Bookcase {
+  namespace Data {
 
 /**
  * A BCCollection for music, like CD's and cassettes.
@@ -31,23 +31,25 @@
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: musiccollection.h 200 2003-10-14 00:21:13Z robby $
+ * @version $Id: musiccollection.h 386 2004-01-24 05:12:28Z robby $
  */
-class MusicCollection : public BCCollection  {
+class MusicCollection : public Collection {
 Q_OBJECT
 
 public:
   /**
    * The constructor
    *
-   * @param addAttributes Whether to add the default attributes
+   * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  MusicCollection(bool addAttributes, const QString& title = QString::null);
+  MusicCollection(bool addFields, const QString& title = QString::null);
 
-  virtual BCCollection::CollectionType collectionType() const { return BCCollection::Album; };
+  virtual CollectionType collectionType() const { return Album; }
 
-  static BCAttributeList defaultAttributes();
+  static FieldList defaultFields();
 };
 
+  } // end namespace
+} // end namespace
 #endif

@@ -1,6 +1,62 @@
+2004-01-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed DTD for new collections.
+	* Updated some accel keys.
+	* Changed Requires to KDE 3.1 or higher since KZip is used.
+	* Released Bookcase 0.8.
+
+2004-01-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.8pre1
+
+2004-01-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Finnish translation from Teuvo Eloranta.
+	* Added "Export to XML" option since file format is Zip now.
+	* Switched to new XML parser in libxml2 > 2.6.0
+
+2004-01-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Added new Collection menu.
+
+2004-01-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed entry method for bibtex string macros. Triple-clicking on list view items is stupid.
+
+2004-01-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Added zip file format for collections with images.
+
+2004-01-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Added cut, copy, and paste functions.
+	* Added new entry and copy entry functions.
+	* Added find previous, select all, and deselection functions.
+
+2003-12-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed double clicking an entry to show the editor.
+	* Moved entry edit widget to dialog box.
+
+2003-12-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated French translation, thanks to RNB.
+
+2003-12-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added image fields.
+	* Changed auto-completion to account for fields with multiple values.
+
+2003-12-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Norwegian translation, thanks to Leif Mathis Gaup.
+
+
 2003-11-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug in remembering visible columns for custom fields.
+	* Added some speed-ups in loading time.
+	* Released Bookcase 0.7.2
 
 2003-11-24  Robby Stephenson  <robby@periapsis.org>
 
@@ -14,14 +70,21 @@
 
 2003-11-21  Robby Stephenson  <robby@periapsis.org>
 
+	* Added Pilot-DB export option.
 	* Fixed bug to update status line after deleting entries.
+
+2003-11-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Derived field type for concatenating values from other fields.
+	* Added default collections for trading cards, coins, stamps, comic books, and wines.
 
 2003-11-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated German tranlation, thanks to Gerrit Albrecht.
 	* Added Swedish translation, thanks to Karolina Lindqvist.
-	* Fixed bug with adding a 2-column table.
+	* Fixed bug with adding 2-column table.
 	* Cut the 0.7.x branch.	
+	* Added Derived field type.
 
 2003-11-09  Robby Stephenson  <robby@periapsis.org>
 

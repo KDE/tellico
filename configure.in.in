@@ -1,6 +1,6 @@
 #MIN_CONFIG(3)
 
-AM_INIT_AUTOMAKE(bookcase,0.7.2)
+AM_INIT_AUTOMAKE(bookcase,0.8)
 
 dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
 dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
@@ -9,7 +9,7 @@ dnl CXXFLAGS="$CXXFLAGS $USE_EXCEPTIONS -DQT_NO_ASCII_CAST -DQT_NO_TRANSLATION" 
 dnl KDE_NEED_FLEX dnl __kdevelop__
 dnl AC_PROG_YACC dnl __kdevelop__
 
-KDE_FIND_PATH(xml2-config, XML_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [
+KDE_FIND_PATH(xml2-config, XML_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin], [
   AC_MSG_ERROR([[Could not find xml2-config anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.23. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxml2-devel or something similar.]])
 ])
 
@@ -28,14 +28,16 @@ if test -n "$XML_CONFIG"; then
     done
     LIBXML_RPATH=`echo $LIBXML_RPATH | sed -e "s/-L/-R/g"`
     LIBXML_CFLAGS="`$XML_CONFIG --cflags`"
-
   else
     AC_MSG_ERROR([[You need at least libxml 2.4.23.]])
-    HELP_SUBDIR=
   fi
 fi
 
-KDE_FIND_PATH(xslt-config, XSLT_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [
+dnl KDE_FIND_PATH(xmlcatalog, XMLCATALOG, [${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin], [
+dnl   AC_MSG_WARN([[Could not find xmlcatalog anywhere, check ftp://xmlsoft.org/ for libxml2 >= 2.4.23. If you are using pre-packaged libraries, be sure to have the utility files installed as well, which may be called libxml2-utils or something similar.]])
+dnl ])
+
+KDE_FIND_PATH(xslt-config, XSLT_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin], [
   AC_MSG_ERROR([[Could not find xslt-config anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.19. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxslt-devel or something similar.]])
 ])
 
@@ -53,7 +55,6 @@ if test -n "$XSLT_CONFIG"; then
     done
     LIBXSLT_RPATH=`echo $LIBXSLT_RPATH | sed -e "s/-L/-R/g"`
     LIBXSLT_CFLAGS="`$XSLT_CONFIG --cflags`"
-
   else
     AC_MSG_ERROR([[You need at least libxslt 1.0.19.]])
   fi
@@ -66,6 +67,8 @@ AC_SUBST(LIBXSLT_RPATH)
 AC_SUBST(LIBXML_LIBS)
 AC_SUBST(LIBXML_CFLAGS)
 AC_SUBST(LIBXML_RPATH)
+
+dnl AC_SUBST(XMLCATALOG)
 
 AC_MSG_CHECKING(for ushort in <sys/types.h>)
 AC_CACHE_VAL(bt_cv_type_ushort, [
@@ -105,3 +108,9 @@ dnl Checks for library functions.
 AC_FUNC_ALLOCA
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS(strlwr strupr)
+
+AC_CHECK_SIZEOF(unsigned long, 4)
+AC_CHECK_SIZEOF(unsigned int, 4)
+AC_CHECK_SIZEOF(unsigned short, 2)
+AC_CHECK_SIZEOF(unsigned char, 1)
+AC_CHECK_SIZEOF(char, 1)

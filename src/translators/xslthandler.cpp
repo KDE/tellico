@@ -1,8 +1,5 @@
 /***************************************************************************
-                               xslthandler.cpp
-                             -------------------
-    begin                : Wed Jan 22 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -30,6 +27,10 @@
 
 #include <libexslt/exslt.h>
 
+#if LIBXML_VERSION >= 20600
+static int xml_options = XSLT_PARSE_OPTIONS;
+#endif
+
 /* some functions to pass to the XSLT libs */
 static int writeToQString(void* context, const char* buffer, int len) {
   QString *t = static_cast<QString*>(context);
@@ -41,6 +42,8 @@ static void closeQString(void* context) {
   QString *t = static_cast<QString*>(context);;
   *t += QString::fromLatin1("\n");
 }
+
+using Bookcase::XSLTHandler;
 
 XSLTHandler::XSLTHandler(const QString& xsltText_/*=null*/) :
     m_stylesheet(0),
@@ -74,7 +77,6 @@ XSLTHandler::~XSLTHandler() {
   }
 }
 
-inline
 void XSLTHandler::init() {
   xmlSubstituteEntitiesDefault(1);
   xmlLoadExtDtdDefaultValue = 0;
@@ -88,7 +90,11 @@ void XSLTHandler::init() {
 }
 
 void XSLTHandler::setXSLTText(const QString& text_) {
+#if LIBXML_VERSION >= 20600
+  xmlDocPtr xsltDoc = xmlReadDoc((xmlChar *)text_.local8Bit().data(), NULL, NULL, xml_options);
+#else
   xmlDocPtr xsltDoc = xmlParseDoc((xmlChar *)text_.local8Bit().data());
+#endif
   if(m_stylesheet) {
     xsltFreeStylesheet(m_stylesheet);
   }
@@ -102,23 +108,14 @@ void XSLTHandler::addParam(const QCString& name_, const QCString& value_) {
     m_params[m_numParams + 2] = 0;
     m_numParams += 2;
 //    kdDebug() << "XSLTHandler::addParam() - " << name_ << ":" << value_ << endl;
+  } else {
+    kdWarning() << "XSLTHandler::addParam() - too many params to add " << name_ << ":" << value_ << endl;
   }
 }
 
 void XSLTHandler::addStringParam(const QCString& name_, const QCString& value_) {
   addParam(name_, QCString("'") + value_ + QCString("'"));
 }
-
-//QString XSLTHandler::applyStylesheetToFile(const QString& file_) {
-//  if(!m_stylesheet) {
-//    kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
-//    return QString::null;
-//  }
-//
-//  m_docIn = xmlParseFile(QFile::encodeName(file_).data());
-//
-//  return process();
-//}
 
 QString XSLTHandler::applyStylesheet(const QString& text_, bool encodedUTF8_) {
   if(!m_stylesheet) {
@@ -128,9 +125,17 @@ QString XSLTHandler::applyStylesheet(const QString& text_, bool encodedUTF8_) {
 
 // ARGH, I don't know which to use...
   if(encodedUTF8_) {
+#if LIBXML_VERSION >= 20600
+    m_docIn = xmlReadDoc((xmlChar *)text_.utf8().data(), NULL, NULL, xml_options);
+#else
     m_docIn = xmlParseDoc((xmlChar *)text_.utf8().data());
+#endif
   } else {
+#if LIBXML_VERSION >= 20600
+    m_docIn = xmlReadDoc((xmlChar *)text_.local8Bit().data(), NULL, NULL, xml_options);
+#else
     m_docIn = xmlParseDoc((xmlChar *)text_.local8Bit().data());
+#endif
   }
   return process();
 }

@@ -1,8 +1,5 @@
 /***************************************************************************
-                              bibtexexporter.h
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,8 +16,11 @@
 
 class QCheckBox;
 
-#include "exporter.h"
+#include "textexporter.h"
 #include "bibtexhandler.h"
+
+namespace Bookcase {
+  namespace Export {
 
 /**
  * The Bibtex exporter shows a list of possible Bibtex fields next to a combobox of all
@@ -28,11 +28,11 @@ class QCheckBox;
  * of all the attributes, with comboboxes for each Bibtex field, but I think this way is more obvious.
  *
  * @author Robby Stephenson
- * @version $Id: bibtexexporter.h 216 2003-10-24 00:58:22Z robby $
+ * @version $Id: bibtexexporter.h 386 2004-01-24 05:12:28Z robby $
  */
-class BibtexExporter : public Exporter {
+class BibtexExporter : public TextExporter {
 public: 
-  BibtexExporter(const BCCollection* coll, const BCUnitList& list);
+  BibtexExporter(const Data::Collection* coll, const Data::EntryList& list);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;
@@ -51,4 +51,6 @@ private:
   QCheckBox* m_checkPackageURL;
 };
 
+  } // end namespace
+} // end namespace
 #endif

@@ -1,80 +1,91 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="5" name="bookcase" >
+<kpartgui version="6" name="bookcase">
  <MenuBar>
-  <Menu name="file" >
+  <Menu name="file">
    <text>&amp;File</text>
    <Menu append="new_merge" name="file_new_collection" >
     <text>&amp;New</text>
-    <Action name="new_book_collection" />
-    <Action name="new_bibtex_collection" />
-    <Action name="new_comic_book_collection" />
-    <Action name="new_video_collection" />
-    <Action name="new_music_collection" />
-    <Action name="new_coin_collection" />
-    <Action name="new_stamp_collection" />
-    <Action name="new_wine_collection" />
-    <Action name="new_card_collection" />
-    <Action name="new_custom_collection" />
+    <Action name="new_book_collection"/>
+    <Action name="new_bibtex_collection"/>
+    <Action name="new_comic_book_collection"/>
+    <Action name="new_video_collection"/>
+    <Action name="new_music_collection"/>
+    <Action name="new_coin_collection"/>
+    <Action name="new_stamp_collection"/>
+    <Action name="new_card_collection"/>
+    <Action name="new_wine_collection"/>
+    <Action name="new_custom_collection"/>
    </Menu>
-   <Menu name="file_import" >
+   <Menu name="file_import">
     <text>&amp;Import</text>
-    <Action name="file_import_csv" />
-    <Action name="file_import_bookcase" />
+    <Action name="file_import_bookcase"/>
+    <Action name="file_import_csv"/>
     <Separator/>
-    <Action name="file_import_bibtex" />
-    <Action name="file_import_bibtexml" />
+    <Action name="file_import_bibtex"/>
+    <Action name="file_import_bibtexml"/>
     <Separator/>
-    <Action name="file_import_xslt" />
+    <Action name="file_import_xslt"/>
    </Menu>
-   <Menu name="file_export" >
+   <Menu name="file_export">
     <text>&amp;Export</text>
-    <Action name="file_export_html" />
-    <Action name="file_export_csv" />
-    <Action name="file_export_pilotdb" />
+    <Action name="file_export_xml"/>
+    <Action name="file_export_html"/>
+    <Action name="file_export_csv"/>
+    <Action name="file_export_pilotdb"/>
     <Separator/>
-    <Action name="file_export_bibtex" />
-    <Action name="file_export_bibtexml" />
+    <Action name="file_export_bibtex"/>
+    <Action name="file_export_bibtexml"/>
     <Separator/>
-    <Action name="file_export_xslt" />
+    <Action name="file_export_xslt"/>
    </Menu>
   </Menu>
-  <Menu name="edit" >
-   <Action name="edit_delete" />
+  <Menu name="edit">
+   <Action append="edit_find_merge" name="edit_find_last"/>
+   <Action append="edit_select_merge" name="edit_deselect"/>
+  </Menu>
+  <Menu name="collection">
+   <text>&amp;Collection</text>
+   <Action name="edit_new_entry"/>
+   <Action name="edit_edit_entry"/>
+   <Action name="edit_copy_entry"/>
+   <Action name="edit_delete_entry"/>
    <Separator/>
-   <Action name="edit_rename_collection" />
-   <Action name="edit_fields" />
-   <Action name="edit_convert_bibtex" />
-   <Action name="edit_string_macros" />
+   <Action name="edit_rename_collection"/>
+   <Action name="edit_fields"/>
+   <Action name="edit_convert_bibtex"/>
+   <Action name="edit_string_macros"/>
   </Menu>
-  <Menu name="settings" >
-   <Action append="show_merge" name="toggle_collection_bar" />
-   <Action append="show_merge" name="toggle_group_widget" />
-   <Action append="show_merge" name="toggle_edit_widget" />
-   <Action append="show_merge" name="change_unit_grouping" />
-   <Action append="show_merge" name="filter_dialog" />
+  <Menu name="settings">
+   <Action append="show_merge" name="toggle_collection_bar"/>
+   <Action append="show_merge" name="toggle_group_widget"/>
+   <Action append="show_merge" name="toggle_edit_widget"/>
+   <Action append="show_merge" name="toggle_entry_view"/>
+   <Action append="show_merge" name="change_unit_grouping"/>
+   <Action append="show_merge" name="filter_dialog"/>
   </Menu>
-  <Menu name="help" >
-   <Action name="tipOfDay" />
+  <Menu name="help">
+   <Action name="tipOfDay"/>
   </Menu>
  </MenuBar>
- <ToolBar noMerge="1" name="mainToolBar" >
+ <ToolBar noMerge="1" name="mainToolBar">
   <text>Main Toolbar</text>
-  <Action name="file_new_collection" />
-  <text>&amp;New Collection</text>
-  <Action name="file_open" />
-  <Action name="file_save" />
-  <Action name="file_print" />
-  <Separator name="separator_0" />
-  <Action name="edit_find" />
-  <Action name="edit_fields" />
-  <Action name="filter_dialog" />
+  <Action name="file_new_collection"/>
+  <Action name="file_open"/>
+  <Action name="file_save"/>
+  <Action name="file_print"/>
+  <Separator/>
+  <Action name="edit_find"/>
  </ToolBar>
- <ToolBar noMerge="1" name="collectionToolBar" >
+ <ToolBar name="collectionToolBar">
   <text>Collection Toolbar</text>
-  <Action name="quick_filter_label" />
-  <Action name="quick_filter" />
-  <Action name="change_unit_grouping_label" />
-  <Action name="change_unit_grouping" />
+  <Action name="edit_new_entry"/>
+  <Action name="edit_delete_entry"/>
+  <Action name="edit_fields"/>
+  <Action name="change_unit_grouping_label"/>
+  <Action name="change_unit_grouping"/>
+  <Action name="quick_filter_label"/>
+  <Action name="quick_filter"/>
+  <Action name="filter_dialog"/>
  </ToolBar>
 </kpartgui>

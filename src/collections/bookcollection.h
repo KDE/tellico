@@ -1,8 +1,5 @@
 /***************************************************************************
-                              bookcollection.h
-                             -------------------
-    begin                : Tue Mar 4 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,9 +14,12 @@
 #ifndef BOOKCOLLECTION_H
 #define BOOKCOLLECTION_H
 
-#include "../bccollection.h"
+#include "../collection.h"
 
 #include <klocale.h>
+
+namespace Bookcase {
+  namespace Data {
 
 /**
  * A BCCollection for books.
@@ -52,23 +52,25 @@
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: bookcollection.h 200 2003-10-14 00:21:13Z robby $
+ * @version $Id: bookcollection.h 386 2004-01-24 05:12:28Z robby $
  */
-class BookCollection : public BCCollection  {
+class BookCollection : public Collection {
 Q_OBJECT
 
 public: 
   /**
    * The constructor
    *
-   * @param addAttributes Whether to add the default attributes
+   * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  BookCollection(bool addAttributes, const QString& title = QString::null);
+  BookCollection(bool addFields, const QString& title = QString::null);
 
-  virtual BCCollection::CollectionType collectionType() const { return BCCollection::Book; };
+  virtual CollectionType collectionType() const { return Book; }
 
-  static BCAttributeList defaultAttributes();
+  static FieldList defaultFields();
 };
 
+  } // end namespace
+} // end namespace
 #endif

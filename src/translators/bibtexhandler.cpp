@@ -1,8 +1,5 @@
 /***************************************************************************
-                              bibtexhandler.cpp
-                             -------------------
-    begin                : Thu Aug 21 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,9 +13,9 @@
 
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
-#include "../bcunit.h"
-#include "../bccollection.h"
-#include "../bcfilehandler.h"
+#include "../entry.h"
+#include "../collection.h"
+#include "../filehandler.h"
 
 #include <kglobal.h>
 #include <kstandarddirs.h>
@@ -31,28 +28,29 @@
 #include <qregexp.h>
 #include <qdom.h>
 
-StringListMap BibtexHandler::s_utf8LatexMap;
+using Bookcase::BibtexHandler;
+
+BibtexHandler::StringListMap BibtexHandler::s_utf8LatexMap;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
 const QString BibtexHandler::s_bibtexmlNamespace = QString::fromLatin1("http://bibtexml.sf.net/");
 
-
-QString BibtexHandler::bibtexKey(BCUnit* unit_) {
+QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
   QString author;
-  BCAttribute* authorAtt = unit_->collection()->attributeByName(QString::fromLatin1("author"));
-  if(authorAtt->flags() & BCAttribute::AllowMultiple) {
-    QString tmp = unit_->attribute(authorAtt->name());
+  Data::Field* authorField = entry_->collection()->fieldByName(QString::fromLatin1("author"));
+  if(authorField->flags() & Data::Field::AllowMultiple) {
+    QString tmp = entry_->field(authorField->name());
     author = tmp.section(';', 0, 0);
   } else {
-    author = unit_->attribute(authorAtt->name());
+    author = entry_->field(authorField->name());
   }
   author = author.lower();
   
-  QString title = unit_->attribute(QString::fromLatin1("title")).lower();
+  QString title = entry_->field(QString::fromLatin1("title")).lower();
 
-  QString year = unit_->attribute(QString::fromLatin1("pub_year"));
+  QString year = entry_->field(QString::fromLatin1("pub_year"));
 
   if(year.isEmpty()) {
-    year = unit_->attribute(QString::fromLatin1("cr_year"));
+    year = entry_->field(QString::fromLatin1("cr_year"));
   }
   year = year.section(QString::fromLatin1("; "), 0, 0);
   return bibtexKey(author, title, year);
@@ -80,7 +78,7 @@ void BibtexHandler::loadTranslationMaps() {
     return;
   }
 
-  QDomDocument dom = BCFileHandler::readXMLFile(KURL(mapfile));
+  QDomDocument dom = FileHandler::readXMLFile(KURL(mapfile));
 
   QDomNodeList keyList = dom.elementsByTagName(QString::fromLatin1("key"));
 
@@ -175,25 +173,25 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
   return text;
 }
 
-bool BibtexHandler::setAttributeValue(BCUnit* unit_, const QString& bibtexField_, const QString& value_) {
-  BibtexCollection* c = static_cast<BibtexCollection*>(unit_->collection());
-  BibtexAttribute* att = c->attributeByBibtexField(bibtexField_);
-  if(!att) {
+bool BibtexHandler::setFieldValue(Data::Entry* entry_, const QString& bibtexField_, const QString& value_) {
+  Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(entry_->collection());
+  Data::Field* field = c->fieldByBibtexName(bibtexField_);
+  if(!field) {
     // arbitrarily say if the value has more than 100 chars, then it's a paragraph
     if(value_.length() < 100) {
       if(bibtexField_ == QString::fromLatin1("url")) {
-        att = new BibtexAttribute(bibtexField_, KStringHandler::capwords(bibtexField_), BCAttribute::URL);
+        field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::URL);
       } else {
-        att = new BibtexAttribute(bibtexField_, KStringHandler::capwords(bibtexField_), BCAttribute::Line);
+        field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::Line);
       }
-      att->setCategory(i18n("Unknown"));
+      field->setCategory(i18n("Unknown"));
     } else {
-      att = new BibtexAttribute(bibtexField_, KStringHandler::capwords(bibtexField_), BCAttribute::Para);
+      field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::Para);
     }
-    att->setBibtexFieldName(bibtexField_);
-    c->addAttribute(att);
+    field->setProperty(QString::fromLatin1("bibtex"), bibtexField_);
+    c->addField(field);
   }
-  return att ? unit_->setAttribute(att->name(), value_) : false;
+  return field ? entry_->setField(field->name(), value_) : false;
 }
 
 QString& BibtexHandler::cleanText(QString& text_) {

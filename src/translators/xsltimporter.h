@@ -1,8 +1,5 @@
 /***************************************************************************
-                               xsltimporter.h
-                             -------------------
-    begin                : Wed Sep 24 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,17 +16,18 @@
 
 class KURLRequester;
 
-class QWidget;
-
 #include "textimporter.h"
+
+namespace Bookcase {
+  namespace Import {
 
 /**
  * The XSLTImporter class takes care of transforming XML data using an XSL stylesheet.
  *
  * @author Robby Stephenson
- * @version $Id: xsltimporter.h 231 2003-10-26 16:46:37Z robby $
+ * @version $Id: xsltimporter.h 386 2004-01-24 05:12:28Z robby $
  */
-class XSLTImporter : public TextImporter  {
+class XSLTImporter : public TextImporter {
 Q_OBJECT
 
 public:
@@ -39,16 +37,18 @@ public:
 
   /**
    */
-  virtual BCCollection* collection();
+  virtual Data::Collection* collection();
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
 
 private:
-  BCCollection* m_coll;
+  Data::Collection* m_coll;
 
   QWidget* m_widget;
   KURLRequester* m_URLRequester;
 };
 
+  } // end namespace
+} // end namespace
 #endif

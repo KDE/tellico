@@ -1,8 +1,5 @@
 /***************************************************************************
-                               bibtexexporter.cpp
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,9 +16,8 @@
 #endif
 
 #include "bibtexexporter.h"
-#include "../bccollection.h"
+#include "../collection.h"
 #include "../collections/bibtexcollection.h"
-#include "../collections/bibtexattribute.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -33,7 +29,10 @@
 #include <qgroupbox.h>
 #include <qwhatsthis.h>
 
-BibtexExporter::BibtexExporter(const BCCollection* coll_, const BCUnitList& list_) : Exporter(coll_, list_),
+using Bookcase::Export::BibtexExporter;
+
+BibtexExporter::BibtexExporter(const Data::Collection* coll_, const Data::EntryList& list_)
+ : Bookcase::Export::TextExporter(coll_, list_),
    m_expandMacros(false),
    m_packageURL(true),
    m_quoteStyle(BibtexHandler::BRACES),
@@ -87,36 +86,31 @@ void BibtexExporter::saveOptions(KConfig* config_) {
   config_->writeEntry("URL Package", m_packageURL);
 }
 
-QString BibtexExporter::text(bool formatAttributes_, bool) {
+QString BibtexExporter::text(bool formatFields_, bool) {
 // there are some special attributes
 // the entry-type specifies the entry type - book, inproceedings, whatever
-  QString typeAttribute;
+  QString typeField;
 // the key specifies the cite-key
-  QString keyAttribute;
+  QString keyField;
 // keep a list of all the 'ordinary' fields to iterate through later
-  BibtexAttributeList attList;
-  BCAttributeListIterator it(collection()->attributeList());
-  for( ; it.current(); ++it) {
-    if(it.current()->isBibtexAttribute()) {
-      BibtexAttribute* batt = dynamic_cast<BibtexAttribute*>(it.current());
-      if(!batt->bibtexFieldName().isEmpty()) {
-        if(batt->bibtexFieldName() == QString::fromLatin1("entry-type")) {
-          typeAttribute = batt->name();
-        } else if(batt->bibtexFieldName() == QString::fromLatin1("key")) {
-          keyAttribute = batt->name();
-        } else {
-          attList.append(batt);
-        }
-      }
+  Data::FieldList list;
+  for(Data::FieldListIterator it(collection()->fieldList()); it.current(); ++it) {
+    QString bibtex = it.current()->property(QString::fromLatin1("bibtex"));
+    if(bibtex == QString::fromLatin1("entry-type")) {
+      typeField = it.current()->name();
+    } else if(bibtex == QString::fromLatin1("key")) {
+      keyField = it.current()->name();
+    } else if(!bibtex.isEmpty()) {
+      list.append(it.current());
     }
   }
 
-  if(typeAttribute.isEmpty() || keyAttribute.isEmpty()) {
+  if(typeField.isEmpty() || keyField.isEmpty()) {
     kdWarning() << "BibtexExporter::text() - the collection must have attributes defining "
                    "the entry-type and the key of the entry" << endl;
     return QString::null;
   }
-  if(attList.isEmpty()) {
+  if(list.isEmpty()) {
     kdWarning() << "BibtexExporter::text() - no bibtex field mapping exist in the collection." << endl;
     return QString::null;
   }
@@ -125,7 +119,7 @@ QString BibtexExporter::text(bool formatAttributes_, bool) {
   text += QString::fromLatin1(VERSION);
   text += QString::fromLatin1("}\n");
 
-  const BibtexCollection* c = dynamic_cast<const BibtexCollection*>(collection());
+  const Data::BibtexCollection* c = dynamic_cast<const Data::BibtexCollection*>(collection());
   QStringList macros;
   if(c) {
     QString pre = c->preamble();
@@ -149,49 +143,47 @@ QString BibtexExporter::text(bool formatAttributes_, bool) {
   }
   
   QString value;
-  BibtexAttributeListIterator attIt(attList);
-  BCUnitListIterator unitIt(unitList());
-  for( ; unitIt.current(); ++unitIt) {
-    value = unitIt.current()->attribute(typeAttribute);
+  Data::FieldListIterator fIt(list);
+  for(Data::EntryListIterator entryIt(entryList()); entryIt.current(); ++entryIt) {
+    value = entryIt.current()->field(typeField);
     if(value.isEmpty()) {
       kdWarning() << "BibtexExporter::text() - this entry has no entry-type!" << endl;
       continue;
     }
     text += QString::fromLatin1("@") + value + QString::fromLatin1("{");
 
-    value = unitIt.current()->attribute(keyAttribute);
+    value = entryIt.current()->field(keyField);
     // this is left-over, can I remove it?
     if(value.isEmpty()) {
-      value = unitIt.current()->attribute(QString::fromLatin1("bibtex-id"));
+      value = entryIt.current()->field(QString::fromLatin1("bibtex-id"));
     }
     if(value.isEmpty()) {
-      value = BibtexHandler::bibtexKey(unitIt.current());
+      value = BibtexHandler::bibtexKey(entryIt.current());
     }
     text += value;
-    
-    attIt.toFirst();
-    for( ; attIt.current(); ++attIt) {
-      if(formatAttributes_) {
-        value = unitIt.current()->attributeFormatted(attIt.current()->name(), attIt.current()->formatFlag());
+
+    for(fIt.toFirst(); fIt.current(); ++fIt) {
+      if(formatFields_) {
+        value = entryIt.current()->formattedField(fIt.current()->name());
       } else {
-        value = unitIt.current()->attribute(attIt.current()->name());
+        value = entryIt.current()->field(fIt.current()->name());
       }
       // If the entry is formatted as a name and allow multiple values
       // insert "and" in between them (e.g. author and editor)
-      if(attIt.current()->formatFlag() == BCAttribute::FormatName
-         && attIt.current()->flags() & BCAttribute::AllowMultiple) {
-        value.replace(QRegExp(QString::fromLatin1("\\s?;\\s?")), QString::fromLatin1(" and "));
+      if(fIt.current()->formatFlag() == Data::Field::FormatName
+         && fIt.current()->flags() & Data::Field::AllowMultiple) {
+        value.replace(Data::Field::delimiter(), QString::fromLatin1(" and "));
       }
       if(!value.isEmpty()) {
-        if(m_packageURL && attIt.current()->type() == BCAttribute::URL) {
+        if(m_packageURL && fIt.current()->type() == Data::Field::URL) {
           value = QString::fromLatin1("\\url{") + value + QString::fromLatin1("}");
-        } else if(attIt.current()->type() != BCAttribute::Number) {
+        } else if(fIt.current()->type() != Data::Field::Number) {
         // numbers aren't escaped, nor will they have macros
           // if m_expandMacros is true, then macros is empty, so this is ok even then
           value = BibtexHandler::exportText(value, macros);
         }
         text += QString::fromLatin1(",\n  ");
-        text += attIt.current()->bibtexFieldName();
+        text += fIt.current()->property(QString::fromLatin1("bibtex"));
         text += QString::fromLatin1(" = ");
         text += value;
       }

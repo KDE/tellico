@@ -1,8 +1,5 @@
 /***************************************************************************
-                             bibtexmlimporter.h
-                             -------------------
-    begin                : Sat Aug 2 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,54 +14,29 @@
 #include "bibtexmlimporter.h"
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
-#include "../collections/bibtexattribute.h"
+#include "../strings.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 
-BibtexmlImporter::BibtexmlImporter(const KURL& url_) : TextImporter(url_), m_coll(0) {
-  readDomDocument(text());
-}
+using Bookcase::Import::BibtexmlImporter;
 
-BCCollection* BibtexmlImporter::collection() {
+Bookcase::Data::Collection* BibtexmlImporter::collection() {
   if(!m_coll) {
     loadDomDocument();
   }
   return m_coll;
 }
 
-void BibtexmlImporter::readDomDocument(const QString& text_) {
-  if(text_.isEmpty()) {
-    return;
-  }
-
-  // Is it XML ?
-  if(text_.left(5) != QString::fromLatin1("<?xml")) {
-    setStatusMessage(i18n("Bookcase is unable to load the file - %1.").arg(url().fileName()));
-    return;
-  }
-
-  QString errorMsg;
-  int errorLine, errorColumn;
-  if(!m_doc.setContent(text_, true, &errorMsg, &errorLine, &errorColumn)) {
-    QString str = i18n("Bookcase is unable to load the file - %1.").arg(url().fileName());
-    str += i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
-    str += QString::fromLatin1("\n");
-    str += i18n("The error message from Qt is:");
-    str += QString::fromLatin1("\n\t") + errorMsg;
-    setStatusMessage(str);
-    return;
-  }
-}
 void BibtexmlImporter::loadDomDocument() {
-  QDomElement root = m_doc.documentElement();
+  QDomElement root = domDocument().documentElement();
   if(root.tagName() != QString::fromLatin1("file")) {
-    setStatusMessage(i18n("Bookcase is unable to load the file - %1.").arg(url().fileName()));
+    setStatusMessage(i18n(loadError).arg(url().fileName()));
     return;
   }
 
   QString ns = BibtexHandler::s_bibtexmlNamespace;
-  m_coll = new BibtexCollection(true);
+  m_coll = new Data::BibtexCollection(true);
 
   QDomNodeList entryelems = root.elementsByTagNameNS(ns, QString::fromLatin1("entry"));
 //  kdDebug() << "BibtexmlImporter::loadDomDocument - found " << entryelems.count() << " entries" << endl;
@@ -80,9 +52,9 @@ void BibtexmlImporter::loadDomDocument() {
 }
 
 void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
-  QDomNode node = (QDomNode&)entryNode_;
+  QDomNode node = const_cast<QDomNode&>(entryNode_);
 
-  BCUnit* unit = new BCUnit(m_coll);
+  Data::Entry* unit = new Data::Entry(m_coll);
 
 /* The Bibtexml format looks like
   <entry id="...">
@@ -93,9 +65,9 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
     <publisher>...</publisher> */
 
   QString type = node.firstChild().toElement().tagName();
-  unit->setAttribute(QString::fromLatin1("entry-type"), type);
+  unit->setField(QString::fromLatin1("entry-type"), type);
   QString id = node.toElement().attribute(QString::fromLatin1("id"));
-  unit->setAttribute(QString::fromLatin1("bibtex-key"), id);
+  unit->setField(QString::fromLatin1("bibtex-key"), id);
 
   QString name, value;
   // field values are first child of first child of entry node
@@ -114,7 +86,7 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
           name = n2.toElement().tagName();
           value = n2.toElement().text();
           if(!name.isEmpty() && !value.isEmpty()) {
-            BibtexHandler::setAttributeValue(unit, name, value.simplifyWhiteSpace());
+            BibtexHandler::setFieldValue(unit, name, value.simplifyWhiteSpace());
           }
         }
         name.truncate(0);
@@ -159,10 +131,10 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
       }
     }
     if(!name.isEmpty() && !value.isEmpty()) {
-      BibtexHandler::setAttributeValue(unit, name, value.simplifyWhiteSpace());
+      BibtexHandler::setFieldValue(unit, name, value.simplifyWhiteSpace());
     }
   }
 
-  m_coll->addUnit(unit);
+  m_coll->addEntry(unit);
 }
 

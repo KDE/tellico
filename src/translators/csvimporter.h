@@ -1,8 +1,5 @@
 /***************************************************************************
-                                csvimporter.h
-                             -------------------
-    begin                : Wed Sep 24 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -30,13 +27,16 @@ class QRadioButton;
 class QTable;
 
 #include "textimporter.h"
-#include "../bccollectionfactory.h" // needed for CollectionNameMap
+#include "../collectionfactory.h" // needed for CollectionNameMap
 
 #include <qobject.h>
 
+namespace Bookcase {
+  namespace Import {
+
 /**
  * @author Robby Stephenson
- * @version $Id: csvimporter.h 267 2003-11-08 09:18:46Z robby $
+ * @version $Id: csvimporter.h 386 2004-01-24 05:12:28Z robby $
  */
 class CSVImporter : public TextImporter {
 Q_OBJECT
@@ -49,7 +49,7 @@ public:
   /**
    * @return A pointer to a @ref BCCollection, or 0 if none can be created.
    */
-  virtual BCCollection* collection();
+  virtual Data::Collection* collection();
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
@@ -69,8 +69,8 @@ private:
   void fillTable();
   void updateHeader(bool force);
 
-  BCCollection* m_coll;
-  CollectionNameMap m_typeMap;
+  Data::Collection* m_coll;
+  CollectionNameMap m_nameMap;
   bool m_firstRowHeader;
   QString m_delimiter;
 
@@ -90,4 +90,7 @@ private:
 
   static const QChar s_quote;
 };
+
+  } // end namespace
+} // end namespace
 #endif

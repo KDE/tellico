@@ -15,1500 +15,489 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#: bookcasecontroller.cpp:61 bookcase.cpp:82
-msgid "Ready."
-msgstr "レディ"
-
-#: bookcasecontroller.cpp:174
-#, fuzzy
-msgid "Do you really want to delete these entries?"
-msgstr "本当にこれらのブックを削除しますか?"
-
-#: bookcasecontroller.cpp:176
-#, fuzzy
-msgid "Delete Multiple Entries?"
-msgstr "複数のブックを削除しますか?"
-
-#: finddialog.cpp:43
-msgid "Find Text"
-msgstr "テキスト検索"
-
-#: finddialog.cpp:44
-msgid "&Find"
-msgstr "検索(&F)"
-
-#: finddialog.cpp:50
-msgid "Text To Find:"
-msgstr "検索文字列:"
-
-#: finddialog.cpp:53
-msgid "The search string"
-msgstr "検索する文字列"
-
-#: finddialog.cpp:64
-msgid "Search In:"
-msgstr "検索対象:"
-
-#: finddialog.cpp:67
-msgid "Select which field should be searched."
-msgstr "どの項目を検索するか選択する。"
-
-#: finddialog.cpp:75
-msgid "Case &Sensitive"
-msgstr "大文字小文字を区別(&S)"
-
-#: finddialog.cpp:76
-msgid "If checked, the search is case-sensitive."
-msgstr "チェックすると、大文字小文字を区別して検索します。"
-
-#: finddialog.cpp:77
-msgid "Find &Backwards"
-msgstr "後ろ向き検索(&B)"
-
-#: finddialog.cpp:78
-msgid "If checked, the document is searched in reverse."
-msgstr "チェックすると、反対方向に検索します。"
-
-#: finddialog.cpp:79
-msgid "&Whole Words Only"
-msgstr "単語全体を検索(&W)"
-
-#: finddialog.cpp:80
-msgid "If checked, the search is limited to whole words."
-msgstr "チェックすると、単語全体に限定して検索します。"
-
-#: finddialog.cpp:81
-msgid "&From Beginning"
-msgstr "先頭から検索(&F)"
-
-#: finddialog.cpp:82
-msgid "If checked, the document is searched from the beginning."
-msgstr "チェックすると、ドキュメントの先頭から検索します。"
-
-#: finddialog.cpp:83
-msgid "As &Regular Expression"
-msgstr "正規表現として(&R)"
-
-#: finddialog.cpp:84
-msgid "If checked, the search string is used as a regular expression."
-msgstr "チェックすると、検索文字列が正規表現として扱われます。"
-
-#: finddialog.cpp:87
-msgid "&Edit Regular Expression..."
-msgstr "正規表現を編集(&E)..."
-
-#: finddialog.cpp:107 finddialog.cpp:173
-msgid "All Fields"
-msgstr "すべての項目"
-
-#: finddialog.cpp:117
-msgid "Invalid regular expression."
-msgstr "不正な正規表現です。"
-
-#: bccollection.cpp:24
-msgid "(Empty)"
-msgstr "(未設定)"
-
-#: main.cpp:25
-msgid "Bookcase - a book collection manager for KDE"
-msgstr "Bookcase - KDE用の蔵書管理ソフト"
-
-#: main.cpp:30
-msgid "File to open"
-msgstr "開くファイル"
-
-#: main.cpp:31
-msgid "Do not reopen the last open file"
-msgstr ""
-
-#: main.cpp:36 translators/bookcasexmlexporter.cpp:43 bookcase.moc.cpp:34
-#: bookcase.moc.cpp:42
-msgid "Bookcase"
-msgstr "Bookcase"
-
-#: main.cpp:41
-msgid "Author of btparse library"
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:80
-#, fuzzy
-msgid "Collection Fields"
-msgstr "コレクションの項目..."
-
-#: bccollectionfieldsdialog.cpp:92
-msgid "Current Fields"
-msgstr "現在の項目"
-
-#: bccollectionfieldsdialog.cpp:107 bccollectionfieldsdialog.cpp:326
-#: bccollectionfieldsdialog.cpp:329 translators/csvimporter.cpp:327
-#: translators/csvimporter.cpp:414
-msgid "New Field"
-msgstr "追加"
-
-#: bccollectionfieldsdialog.cpp:109
-#, fuzzy
-msgid "Add a new field to the collection"
-msgstr "新規ドキュメントを作成"
-
-#: bccollectionfieldsdialog.cpp:110
-msgid "Delete Field"
-msgstr "削除"
-
-#: bccollectionfieldsdialog.cpp:112
-#, fuzzy
-msgid "Remove a field from the collection"
-msgstr "コレクションの項目を編集..."
-
-#: bccollectionfieldsdialog.cpp:121
-msgid ""
-"Move this field up in the list. The list order is important for the layout "
-"of the entry editor."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:125
-msgid ""
-"Move this field down in the list. The list order is important for the layout "
-"of the entry editor."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:135
-msgid "Field Properties"
-msgstr "項目のプロパティ"
-
-#: bccollectionfieldsdialog.cpp:141
-msgid "Title:"
-msgstr "タイトル:"
-
-#: bccollectionfieldsdialog.cpp:145
-msgid "The title of the field"
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:150
-msgid "Type:"
-msgstr "タイプ:"
-
-#: bccollectionfieldsdialog.cpp:154
-msgid ""
-"<qt>The type of the field determines what values may be used. <i>Simple "
-"Text</i> is used for most fields. <i>Paragraph</i> is for large text blocks. "
-"<i>List</i> limits the field to certain values. <i>Checkbox</i> is for a "
-"simple yes/no value. <i>Number</i> indicates that the field contains a "
-"numerical value. <i>URL</i> is for fields which refer to URLs, including "
-"references to other files. <i>Table</i>s may be a single or double column of "
-"values, while <i>Read Only</i> is for internal values, possibly useful for "
-"import and export.</qt>"
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:167
-msgid "Category:"
-msgstr "カテゴリー:"
-
-#: bccollectionfieldsdialog.cpp:171
-msgid "The field category determines where the field is placed in the editor."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:178
-msgid "Allowed:"
-msgstr "許可:"
-
-#: bccollectionfieldsdialog.cpp:182
-msgid ""
-"<qt>For <i>List</i>-type fields, these are the only values allowed. They are "
-"placed in a combo box.</qt>"
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:188
-msgid "Description:"
-msgstr "記述:"
-
-#: bccollectionfieldsdialog.cpp:193
-msgid ""
-"The description is useful reminder of what information is contained in the "
-"field."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:198
-msgid "Bibtex Field Name:"
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:202
-msgid ""
-"The Bibtex field name determines the entry name for exporting to "
-"bibliogrgaphy files."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:213
-msgid "Format Options"
-msgstr "フォーマットオプション"
-
-#: bccollectionfieldsdialog.cpp:214
-msgid "No formatting"
-msgstr "フォーマットしない"
-
-#: bccollectionfieldsdialog.cpp:215
-msgid ""
-"This option prevents the field from ever being automatically formatted or "
-"capitalized."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:217
-msgid "Allow auto-capitalization only"
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:218
-msgid ""
-"This option allows the field to be capitalized, but not specially formatted."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:220
-msgid "Format as a title"
-msgstr "タイトルとしてフォーマット"
-
-#: bccollectionfieldsdialog.cpp:221
-msgid ""
-"This option capitalizes and formats the field as a title, but only if those "
-"options are globally set."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:223
-msgid "Format as a name"
-msgstr "名前としてフォーマット"
-
-#: bccollectionfieldsdialog.cpp:224
-msgid ""
-"This option capitalizes and formats the field as a name, but only if those "
-"options are globally set."
-msgstr ""
-
-#: bccollectionfieldsdialog.cpp:228
-msgid "Field Options"
-msgstr "項目オプション"
-
-#: bccollectionfieldsdialog.cpp:229
-msgid "Enable auto-completion"
-msgstr "自動補完を有効にする"
-
-#: bccollectionfieldsdialog.cpp:230
-#, fuzzy
-msgid ""
-"If checked, KDE auto-completion will be enabled in the text edit box for "
-"this field."
-msgstr "チェックすると、ブックが選択した項目で分類されます。"
-
-#: bccollectionfieldsdialog.cpp:232
-msgid "Allow multiple values"
-msgstr "複数の値を許可する"
-
-#: bccollectionfieldsdialog.cpp:233
-#, fuzzy
-msgid ""
-"If checked, Bookcase will parse the values in the field for multiple values, "
-"separated by a semi-colon."
-msgstr "この項目に設定できる値をセミコロン区切りで記述します。"
-
-#: bccollectionfieldsdialog.cpp:235
-msgid "Allow grouping"
-msgstr "分類を許可する"
-
-#: bccollectionfieldsdialog.cpp:236
-#, fuzzy
-msgid ""
-"If checked, this field may be used to group the entries in the group view."
-msgstr "チェックすると、グループ内のアイテム数がグループ名の後に表示されます。"
-
-#: bccollectionfieldsdialog.cpp:250
-#, fuzzy
-msgid "Revert the selected field's properties to the default values."
-msgstr "コレクションで選択された項目です。"
-
-#: bccollectionfieldsdialog.cpp:366
-#, fuzzy
-msgid ""
-"<qt><p>Do you really want to delete the <em>%1</em> field? This action "
-"occurs immediately and can not be undone!</p></qt>"
-msgstr ""
-"本当に %1 項目を削除しますか? この操作はただちに実行され 元に戻すことはできま"
-"せん!"
-
-#: bccollectionfieldsdialog.cpp:369
-msgid "Delete Field?"
-msgstr "項目の削除?"
-
-#: bccollectionfieldsdialog.cpp:384 bcattribute.cpp:438
-msgid "List"
-msgstr "リスト"
-
-#: bccollectionfieldsdialog.cpp:386 bccollectionfieldsdialog.cpp:404
-#: bcattribute.cpp:437
-msgid "Paragraph"
-msgstr "パラグラフ"
-
-#: bccollectionfieldsdialog.cpp:387 bccollectionfieldsdialog.cpp:391
-#: bccollectionfieldsdialog.cpp:399 bcattribute.cpp:442
-#, fuzzy
-msgid "Table"
-msgstr "タイトル"
-
-#: bccollectionfieldsdialog.cpp:388 bccollectionfieldsdialog.cpp:392
-#: bccollectionfieldsdialog.cpp:399 bcattribute.cpp:443
-#, fuzzy
-msgid "Table (2 Columns)"
-msgstr "表示項目"
-
-#: bccollectionfieldsdialog.cpp:390 bcattribute.cpp:436
-msgid "Simple Text"
-msgstr "シンプルテキスト"
-
-#: bccollectionfieldsdialog.cpp:398 bcattribute.cpp:440
-#: collections/bibtexcollection.cpp:174
-#, fuzzy
-msgid "Number"
-msgstr "シリーズ番号"
-
-#: bccollectionfieldsdialog.cpp:401 bcattribute.cpp:441
-msgid "URL"
-msgstr "URL"
-
-#: bccollectionfieldsdialog.cpp:653
-#, fuzzy
-msgid "Revert Field Properties?"
-msgstr "項目のプロパティ"
-
-#: bccollectionfieldsdialog.cpp:654
-#, fuzzy
-msgid ""
-"<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
-"back to their default values?</p></qt>"
-msgstr ""
-"本当に %1 項目を削除しますか? この操作はただちに実行され 元に戻すことはできま"
-"せん!"
-
-#: bccollectionfieldsdialog.cpp:657
-msgid "Revert"
-msgstr ""
-
-#: bcfilterdialog.cpp:61
-msgid "Any Field"
-msgstr "任意の項目"
-
-#: bcfilterdialog.cpp:70
-msgid "contains"
-msgstr "は右の文字列を含む"
-
-#: bcfilterdialog.cpp:71
-msgid "does not contain"
-msgstr "は右の文字列を含まない"
-
-#: bcfilterdialog.cpp:72
-msgid "equals"
-msgstr "は右の文字列と等しい"
-
-#: bcfilterdialog.cpp:73
-msgid "does not equal"
-msgstr "は右の文字列と等しくない"
-
-#: bcfilterdialog.cpp:74
-msgid "matches regexp"
-msgstr "は右の正規表現にマッチする"
-
-#: bcfilterdialog.cpp:75
-msgid "does not match regexp"
-msgstr "は右の正規表現にマッチしない"
-
-#: bcfilterdialog.cpp:87
-msgid "Edit..."
-msgstr "編集..."
-
-#: bcfilterdialog.cpp:245
-msgid "Advanced Filter"
-msgstr "上級フィルター"
-
-#: bcfilterdialog.cpp:251
-msgid "Filter Criteria"
-msgstr "フィルター基準"
-
-#: bcfilterdialog.cpp:254
-msgid "Match a&ll of the following"
-msgstr "以下のすべてにマッチ(&L)"
-
-#: bcfilterdialog.cpp:255
-msgid "Match an&y of the following"
-msgstr "以下のいずれかにマッチ(&Y)"
-
-#: bookcasedoc.cpp:119
-msgid ""
-"The current file has been modified.\n"
-"Do you want to save it?"
-msgstr ""
-"現在のファイルは変更されています。\n"
-"保存しますか?"
-
-#: bookcasedoc.cpp:121 bcuniteditwidget.cpp:529
-msgid "Warning!"
-msgstr "警告!"
-
-#: bookcasedoc.cpp:324 bookcasedoc.cpp:327 bookcasedoc.cpp:331
-#, fuzzy
-msgid "Rename Collection"
-msgstr "コレクションの名前変更..."
-
-#: bookcasedoc.cpp:324 bookcasedoc.cpp:327 bookcasedoc.cpp:331
-msgid "New Collection Name"
-msgstr "コレクションの新しい名前"
-
-#: bookcasedoc.cpp:470
-msgid "Search string '%1' not found."
-msgstr "検索文字列 '%1' が見つかりません。"
-
-#: bcfilehandler.cpp:72
-msgid "Bookcase is unable to open the file - %1."
-msgstr "Bookcaseはファイル %1 を開けません。"
-
-#: bcfilehandler.cpp:81
-msgid "Bookcase is unable to read the file - %1."
-msgstr "Bookcaseはファイル %1 を読みこめません。"
-
-#: bcfilehandler.cpp:90 bcfilehandler.cpp:101
-#: translators/bookcasexmlimporter.cpp:63
-#: translators/bookcasexmlimporter.cpp:70
-#: translators/bookcasexmlimporter.cpp:83
-#: translators/bookcasexmlimporter.cpp:94
-#: translators/bookcasexmlimporter.cpp:99 translators/bibtexmlimporter.cpp:43
-#: translators/bibtexmlimporter.cpp:50 translators/bibtexmlimporter.cpp:62
-msgid "Bookcase is unable to load the file - %1."
-msgstr "Bookcaseはファイル %1 をロードできません。"
-
-#: bcfilehandler.cpp:102 translators/bookcasexmlimporter.cpp:71
-#: translators/bibtexmlimporter.cpp:51
-msgid "There is an XML parsing error in line %1, column %2."
-msgstr "XMLパースエラー(%1 行, %2 カラム)"
-
-#: bcfilehandler.cpp:104 translators/bookcasexmlimporter.cpp:73
-#: translators/bibtexmlimporter.cpp:53
-msgid "The error message from Qt is:"
-msgstr "Qtのエラーメッセージは:"
-
-#: bcfilehandler.cpp:120
-msgid ""
-"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
-msgstr "\"%1\"というファイルはすでに存在します。上書きしますか?"
-
-#: bcfilehandler.cpp:123
-msgid "Overwrite File?"
-msgstr "ファイルを上書きしますか?"
-
-#: bcfilehandler.cpp:124
-msgid "Overwrite"
-msgstr "上書き"
-
-#: bcfilehandler.cpp:150
-msgid "Bookcase is unable to upload the file - %1."
-msgstr "Bookcaseはファイル %1 をアップロードできません。"
-
-#: bcfilehandler.cpp:174
-msgid "Bookcase is unable to write the file - %1."
-msgstr "Bookcaseはファイル %1 を書きこめません。"
-
-#: configdialog.cpp:46
-msgid "Configure Bookcase"
-msgstr "Bookcaseを設定"
-
-#: configdialog.cpp:91 bcattribute.cpp:38 bcattribute.cpp:56
-#: collections/videocollection.cpp:23 collections/videocollection.cpp:43
-#: collections/bookcollection.cpp:21 collections/bookcollection.cpp:41
-#: collections/bibtexcollection.cpp:22 collections/bibtexcollection.cpp:58
-#: collections/bibtexcollection.cpp:90 collections/musiccollection.cpp:21
-#: collections/musiccollection.cpp:39
-msgid "General"
-msgstr "General"
-
-#: configdialog.cpp:91
-msgid "General Options"
-msgstr "一般的なオプション"
-
-#: configdialog.cpp:94
-msgid "Reopen file at startup"
-msgstr "起動時にファイルを再オープン"
-
-#: configdialog.cpp:95
-msgid ""
-"If checked, the file that was last open will be re-opened at program start-"
-"up."
-msgstr ""
-"チェックすると、最期に開いたファイルがプログラム起動時に再オープンされます。"
-
-#: configdialog.cpp:100
-msgid "Show \"Tip of the Day\" at startup"
-msgstr ""
-
-#: configdialog.cpp:101
-#, fuzzy
-msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
-msgstr ""
-"チェックすると、最期に開いたファイルがプログラム起動時に再オープンされます。"
-
-#: configdialog.cpp:106
-msgid "Show number of items in group"
-msgstr "グループのアイテム数を表示"
-
-#: configdialog.cpp:107
-msgid ""
-"If checked, the number of items in the group will be appended to the group "
-"name."
-msgstr "チェックすると、グループ内のアイテム数がグループ名の後に表示されます。"
-
-#: configdialog.cpp:112 configdialog.cpp:176
-msgid "Formatting Options"
-msgstr "フォーマットオプション"
-
-#: configdialog.cpp:115
-msgid "(Requires restart)"
-msgstr "(再起動が必要)"
-
-#: configdialog.cpp:116
-msgid "Auto capitalize titles and names"
-msgstr "タイトルと名前のキャピタライズ"
-
-#: configdialog.cpp:117
-msgid "If checked, titles and names will be automatically capitalized."
-msgstr "チェックすると、タイトルと名前が自動的にキャピタライズされます。"
-
-#: configdialog.cpp:121
-msgid "Auto format titles and names"
-msgstr "タイトルと名前の自動フォーマット"
-
-#: configdialog.cpp:122 configdialog.cpp:180
-msgid "If checked, titles and names will be automatically formatted."
-msgstr "チェックすると、タイトルと名前が自動的にフォーマットされます。"
-
-#: configdialog.cpp:130
-msgid "Articles:"
-msgstr "記事:"
-
-#: configdialog.cpp:136 configdialog.cpp:139
-msgid ""
-"A comma-separated list of words which should be considered as articles if "
-"they are the first word in a title."
-msgstr ""
-"タイトルの最初に使うと「記事」として判断される単語のリスト(カンマ区切り)"
-
-#: configdialog.cpp:144
-msgid "Personal suffixes:"
-msgstr "名の接尾辞:"
-
-#: configdialog.cpp:149 configdialog.cpp:151
-msgid ""
-"A comma-separated list of suffixes which might be used in personal names."
-msgstr "名前の後に使われる可能性のある単語のリスト(カンマ区切り)"
-
-#: configdialog.cpp:155
-msgid "Surname prefixes:"
-msgstr "姓の接頭辞(尊称):"
-
-#: configdialog.cpp:160 configdialog.cpp:162
-msgid "A comma-separated list of prefixes which might be used in surnames."
-msgstr "姓の前に使われる可能性のある単語のリスト(カンマ区切り)"
-
-#: configdialog.cpp:173
-msgid "Printing"
-msgstr "印刷"
-
-#: configdialog.cpp:173
-msgid "Printing Options"
-msgstr "印刷オプション"
-
-#: configdialog.cpp:179
-msgid "Format titles and names"
-msgstr "タイトルと名前をフォーマット"
-
-#: configdialog.cpp:184 translators/htmlexporter.cpp:62
-msgid "Print field headers"
-msgstr "項目見出しの印刷"
-
-#: configdialog.cpp:185 translators/htmlexporter.cpp:63
-msgid "If checked, the field names will be printed as table headers."
-msgstr "チェックすると、項目名が表の見だしとして印刷されます。"
-
-#: configdialog.cpp:189
-msgid "Grouping Options"
-msgstr "分類オプション"
-
-#: configdialog.cpp:192 translators/htmlexporter.cpp:67
-#, fuzzy
-msgid "Group the entries"
-msgstr "ブックを分類する"
-
-#: configdialog.cpp:193 translators/htmlexporter.cpp:68
-#, fuzzy
-msgid "If checked, the entries will be grouped by the selected field."
-msgstr "チェックすると、ブックが選択した項目で分類されます。"
-
-#: bookcase.cpp:162 collections/bookcollection.cpp:137
-msgid "New"
-msgstr "新刊"
-
-#: bookcase.cpp:165
-msgid "Create a new document"
-msgstr "新規ドキュメントを作成"
-
-#: bookcase.cpp:169
-#, fuzzy
-msgid "New &Book Collection"
-msgstr "BookCollection"
-
-#: bookcase.cpp:172
-#, fuzzy
-msgid "Create a new book collection"
-msgstr "新規ドキュメントを作成"
-
-#: bookcase.cpp:178
-#, fuzzy
-msgid "New B&ibliography"
-msgstr "Bibtexmlファイルをインポート..."
-
-#: bookcase.cpp:181
-#, fuzzy
-msgid "Create a new bibtex bibliography"
-msgstr "Bibtexmlファイルをインポート..."
-
-#: bookcase.cpp:196
-#, fuzzy
-msgid "New &Video Collection"
-msgstr "VideoCollection"
-
-#: bookcase.cpp:199
-#, fuzzy
-msgid "Create a new video collection"
-msgstr "新規ドキュメントを作成"
-
-#: bookcase.cpp:205
-#, fuzzy
-msgid "New &Music Collection"
-msgstr "コレクションの新しい名前"
-
-#: bookcase.cpp:208
-#, fuzzy
-msgid "Create a new music collection"
-msgstr "新規ドキュメントを作成"
-
-#: bookcase.cpp:261
-msgid "Open an existing document"
-msgstr "既存のドキュメントを開く"
-
-#: bookcase.cpp:263
-msgid "Open a recently used file"
-msgstr "最近使ったファイルを開く"
-
-#: bookcase.cpp:265
-#, fuzzy
-msgid "Save the document"
-msgstr "ドキュメントを保存"
-
-#: bookcase.cpp:267
-#, fuzzy
-msgid "Save the document as a different file..."
-msgstr "名前を付けて保存..."
-
-#: bookcase.cpp:269
-msgid "Print the contents of the document..."
-msgstr "ドキュメントの内容を表示..."
-
-#: bookcase.cpp:271
-msgid "Quit the application"
-msgstr "アプリケーションを修了"
-
-#: bookcase.cpp:283
-#, fuzzy
-msgid "Import collection data from other formats..."
-msgstr "コレクションの特定のブックだけにフィルタリング"
-
-#: bookcase.cpp:287
-#, fuzzy
-msgid "Import Bookcase Data"
-msgstr "Bibtexファイルをインポート..."
-
-#: bookcase.cpp:288
-#, fuzzy
-msgid "Import another Bookcase data file"
-msgstr "Bibtexファイルをインポート..."
-
-#: bookcase.cpp:294
-#, fuzzy
-msgid "Import CSV Data"
-msgstr "エクスポート中..."
-
-#: bookcase.cpp:295
-#, fuzzy
-msgid "Import a CSV file"
-msgstr "Bibtexmlファイルをインポート..."
-
-#: bookcase.cpp:301
-#, fuzzy
-msgid "Import Bibtex Data"
-msgstr "Bibtexファイルをインポート..."
-
-#: bookcase.cpp:302
-#, fuzzy
-msgid "Import a Bibtex bibliography file"
-msgstr "Bibtexmlファイルをインポート..."
-
-#: bookcase.cpp:308
-#, fuzzy
-msgid "Import Bibtexml Data"
-msgstr "Bibtexmlファイルをインポート..."
-
-#: bookcase.cpp:309
-#, fuzzy
-msgid "Import a Bibtexml bibliography file"
-msgstr "Bibtexmlファイルをインポート..."
-
-#: bookcase.cpp:315
-#, fuzzy
-msgid "Import XSL Transform"
-msgstr "XSL変換を使ってエクスポート..."
-
-#: bookcase.cpp:316
-#, fuzzy
-msgid "Import using an XSL Transform"
-msgstr "XSL変換を使ってファイルにエクスポート"
-
-#: bookcase.cpp:331
-#, fuzzy
-msgid "Export the collection data to other formats..."
-msgstr "コレクションの特定のブックだけにフィルタリング"
-
-#: bookcase.cpp:335
-#, fuzzy
-msgid "Export to HTML"
-msgstr "エクスポート(&X)"
-
-#: bookcase.cpp:336
-#, fuzzy
-msgid "Export to an HTML file"
-msgstr "Bibtexファイルにエクスポート..."
-
-#: bookcase.cpp:342
-#, fuzzy
-msgid "Export to CSV"
-msgstr "エクスポート(&X)"
-
-#: bookcase.cpp:343
-#, fuzzy
-msgid "Export to a comma-separated values file"
-msgstr "Bibtexmlファイルにエクスポート..."
-
-#: bookcase.cpp:356
-#, fuzzy
-msgid "Export to Bibtex"
-msgstr "Bibtexファイルへエクスポート..."
-
-#: bookcase.cpp:357
-#, fuzzy
-msgid "Export to a bibtex file"
-msgstr "Bibtexファイルにエクスポート..."
-
-#: bookcase.cpp:363
-#, fuzzy
-msgid "Export to Bibtexml"
-msgstr "Bibtexmlファイルへエクスポート..."
-
-#: bookcase.cpp:364
-#, fuzzy
-msgid "Export to a Bibtexml file"
-msgstr "Bibtexmlファイルにエクスポート..."
-
-#: bookcase.cpp:370
-#, fuzzy
-msgid "Export XSL Transform"
-msgstr "XSL変換を使ってエクスポート..."
-
-#: bookcase.cpp:371
-#, fuzzy
-msgid "Export using an XSL Transform"
-msgstr "XSL変換を使ってファイルにエクスポート"
-
-#: bookcase.cpp:394
-#, fuzzy
-msgid "Search the collection"
-msgstr "コレクションの名前変更..."
-
-#: bookcase.cpp:396
-#, fuzzy
-msgid "Find next match in the collection"
-msgstr "コレクションの分類を変更"
-
-#: bookcase.cpp:402
-#, fuzzy
-msgid "Delete the selected entries"
-msgstr "複数のブックを削除しますか?"
-
-#: bookcase.cpp:403
-msgid "Rename Collection..."
-msgstr "コレクションの名前変更..."
-
-#: bookcase.cpp:406
-#, fuzzy
-msgid "Rename the collection"
-msgstr "コレクションの名前変更..."
-
-#: bookcase.cpp:407
-msgid "Collection Fields..."
-msgstr "コレクションの項目..."
-
-#: bookcase.cpp:410
-msgid "Modify the collection fields"
-msgstr "コレクションの項目を編集..."
-
-#: bookcase.cpp:411
-#, fuzzy
-msgid "Convert to Bibliography"
-msgstr "Bibtexmlファイルをインポート..."
-
-#: bookcase.cpp:414
-#, fuzzy
-msgid "Convert a book collection to a bibliography"
-msgstr "Bibtexmlファイルをインポート..."
-
-#: bookcase.cpp:415
-#, fuzzy
-msgid "String Macros..."
-msgstr "評価"
-
-#: bookcase.cpp:418
-msgid "Edit the Bibtex string macros"
-msgstr ""
-
-#: bookcase.cpp:428
-msgid "Enable/disable the toolbar"
-msgstr "ツールバーを有効/無効にする"
-
-#: bookcase.cpp:429
-msgid "Show Co&llection ToolBar"
-msgstr "コレクションのツールバーを表示(&l)"
-
-#: bookcase.cpp:432
-msgid "Enable/disable the collection toolbar"
-msgstr "コレクションのツールバーを有効/無効にする"
-
-#: bookcase.cpp:440 bookcase.cpp:445
-msgid "Enable/disable the statusbar"
-msgstr "ステータスバーを有効/無効にする"
-
-#: bookcase.cpp:449
-#, fuzzy
-msgid "Show &Group View"
-msgstr "BCGroupView"
-
-#: bookcase.cpp:452
-#, fuzzy
-msgid "Enable/disable the group view"
-msgstr "ツールバーを有効/無効にする"
-
-#: bookcase.cpp:453
-msgid "Show Entry &Editor"
-msgstr ""
-
-#: bookcase.cpp:456
-#, fuzzy
-msgid "Enable/disable the editor"
-msgstr "ツールバーを有効/無効にする"
-
-#: bookcase.cpp:457
-msgid "Advanced Filter..."
-msgstr "上級フィルター..."
-
-#: bookcase.cpp:460 bookcase.cpp:489
-#, fuzzy
-msgid "Filter the collection"
-msgstr "コレクションの項目を編集..."
-
-#: bookcase.cpp:471
-msgid "Tip of the &Day"
-msgstr ""
-
-#: bookcase.cpp:475
-msgid "Show the \"Tip of the Day\" dialog..."
-msgstr ""
-
-#: bookcase.cpp:479
-msgid "Group By:"
-msgstr "分類:"
-
-#: bookcase.cpp:481 bookcase.cpp:485
-msgid "Change the grouping of the collection"
-msgstr "コレクションの分類を変更"
-
-#: bookcase.cpp:482
-#, fuzzy
-msgid "Group Selection"
-msgstr "分類オプション"
-
-#: bookcase.cpp:487
-msgid "Quick Filter:"
-msgstr "クイックフィルター:"
-
-#: bookcase.cpp:490
-#, fuzzy
-msgid "Filter Entry"
-msgstr "ブック削除"
-
-#: bookcase.cpp:807
-msgid "Creating new document..."
-msgstr "新しいドキュメントを作成..."
-
-#: bookcase.cpp:820 bookcase.cpp:839 bookcase.cpp:854
-msgid "Opening file..."
-msgstr "ファイルを開く..."
-
-#: bookcase.cpp:823 bookcase.cpp:913 bcimportdialog.cpp:122
-msgid "*.bc|Bookcase files (*.bc)"
-msgstr "*.bc|Bookcaseファイル (*.bc)"
-
-#: bookcase.cpp:825 bookcase.cpp:915 bcimportdialog.cpp:135
-msgid "*.xml|XML files (*.xml)"
-msgstr "*.xml|XMLファイル (*.xml)"
-
-#: bookcase.cpp:827 bookcase.cpp:917 bcimportdialog.cpp:142
-#: translators/bibtexmlexporter.cpp:41 translators/bibtexexporter.cpp:48
-#: translators/csvexporter.cpp:47 translators/bookcasexmlexporter.cpp:47
-#: translators/xsltexporter.cpp:42 translators/htmlexporter.cpp:48
-msgid "*|All files"
-msgstr "*|すべてのファイル"
-
-#: bookcase.cpp:830
-msgid "Open File..."
-msgstr "ファイルを開く..."
-
-#: bookcase.cpp:888
-msgid "Saving file..."
-msgstr "ファイルを保存..."
-
-#: bookcase.cpp:911
-msgid "Saving file with a new filename..."
-msgstr "新しいファイル名でファイルを保存..."
-
-#: bookcase.cpp:951 bookcase.cpp:993
-msgid "Printing..."
-msgstr "印刷..."
-
-#: bookcase.cpp:961
-msgid ""
-"The collection is currently being filtered to show a limited subset of the "
-"entries. Only the visible entries will be printed. Continue?"
-msgstr ""
-
-#: bookcase.cpp:980
-msgid "Processing document..."
-msgstr "文書を処理中..."
-
-#: bookcase.cpp:1000
-msgid "Exiting..."
-msgstr "終了中..."
-
-#: bookcase.cpp:1010
-msgid "Cutting selection..."
-msgstr "セレクションをカット中..."
-
-#: bookcase.cpp:1016
-msgid "Copying selection to clipboard..."
-msgstr "セレクションをクリップボードにコピー中..."
-
-#: bookcase.cpp:1022
-msgid "Inserting clipboard contents..."
-msgstr "クリップボードの内容を挿入中..."
-
-#: bookcase.cpp:1067
-msgid "Toggling toolbar..."
-msgstr "ツールバーをトグル中..."
-
-#: bookcase.cpp:1081
-msgid "Toggling collection toolbar..."
-msgstr "コレクションツールバーをトグル中..."
-
-#: bookcase.cpp:1096
-msgid "Toggle the statusbar..."
-msgstr "ステータスバーをトグル中..."
-
-#: bookcase.cpp:1176
-msgid "(%1 selected)"
-msgstr ""
-
-#: bookcase.cpp:1273 translators/htmlexporter.cpp:185
-msgid "People"
-msgstr ""
-
-#: bookcase.cpp:1325
-#, fuzzy
-msgid "Print %1"
-msgstr "印刷"
-
-#: bookcase.cpp:1359
-msgid "Page %1"
-msgstr "%1 ページ"
-
-#: bookcase.cpp:1386
-msgid "Bookcase encountered an error in XSLT processing.\n"
-msgstr "BookcaseはXSLT処理中にエラーに遭遇しました。\n"
-
-#: bookcase.cpp:1387 bookcase.cpp:1393
-msgid "Please check your installation."
-msgstr "インストール上状況を確認して下さい。"
-
-#: bookcase.cpp:1392
-msgid "Bookcase is unable to find a required file - %1.\n"
-msgstr "Bookcaseは必要なファイル %1 を見つけられませんでした。\n"
-
-#: bookcase.cpp:1501
-#, fuzzy
-msgid "Importing data..."
-msgstr "エクスポート中..."
-
-#: bookcase.cpp:1506
-#, fuzzy
-msgid "Import File..."
-msgstr "Bibtexファイルをインポート..."
-
-#: bookcase.cpp:1537
-msgid ""
-"Only collections with the same type of entries as the current one can be "
-"appended. No changes are being made to the current collection"
-msgstr ""
-
-#: bookcase.cpp:1559
-#, fuzzy
-msgid "Exporting data..."
-msgstr "エクスポート中..."
-
-#: bookcase.cpp:1566
-#, fuzzy
-msgid "Export As"
-msgstr "エクスポート(&X)"
-
-#: bookcase.cpp:1599
-msgid "Editing string macros..."
-msgstr ""
-
-#: bcuniteditwidget.cpp:58
-#, fuzzy
-msgid "&New Entry"
-msgstr "ブック複製"
-
-#: bcuniteditwidget.cpp:59 bcuniteditwidget.cpp:82 bcuniteditwidget.cpp:359
-#: bcuniteditwidget.cpp:485
-#, fuzzy
-msgid "Sa&ve Entry"
-msgstr "ブック複製"
-
-#: bcuniteditwidget.cpp:60 bcuniteditwidget.cpp:490
-#, fuzzy
-msgid "&Delete Entry"
-msgstr "削除"
-
-#: bcuniteditwidget.cpp:69
-#, fuzzy
-msgid "Duplicate Entry"
-msgstr "ブック複製"
-
-#: bcuniteditwidget.cpp:286
-msgid "Do you really want to modify these books?"
-msgstr "本当にこれらのブックを変更しますか?"
-
-#: bcuniteditwidget.cpp:288
-msgid "Modify Multiple Books?"
-msgstr "複数のブックを変更しますか?"
-
-#: bcuniteditwidget.cpp:421
-#, fuzzy
-msgid "Sa&ve Entries"
-msgstr "削除"
-
-#: bcuniteditwidget.cpp:422
-#, fuzzy
-msgid "&Delete Entries"
-msgstr "削除"
-
-#: bcuniteditwidget.cpp:527
-#, fuzzy
-msgid ""
-"The current entry has been modified.\n"
-"Do you want to enter the changes?"
-msgstr ""
-"現在のブックは変更されています。\n"
-"変更した内容を登録しますか?"
-
-#: bcuniteditwidget.cpp:530
-#, fuzzy
-msgid "Save Entry"
-msgstr "ブック複製"
-
-#: bcimportdialog.cpp:41 bcimportdialog.cpp:47
-#, fuzzy
-msgid "Import Options"
-msgstr "フォーマットオプション"
-
-#: bcimportdialog.cpp:49
-#, fuzzy
-msgid "Replace current collection"
-msgstr "コレクションの名前変更..."
-
-#: bcimportdialog.cpp:51
-msgid "Replace the current collection with the contents of the imported file."
-msgstr ""
-
-#: bcimportdialog.cpp:53
-#, fuzzy
-msgid "Append to current collection"
-msgstr "コレクションの分類を変更"
-
-#: bcimportdialog.cpp:54
-msgid ""
-"Append the contents of the imported file to the current collection. This is "
-"only possible when the collection types match."
-msgstr ""
-
-#: bcimportdialog.cpp:126 translators/bibtexexporter.cpp:48
-msgid "*.bib|Bibtex files (*.bib)"
-msgstr "*.bib|Bibtexファイル (*.bib)"
-
-#: bcimportdialog.cpp:130 translators/csvexporter.cpp:47
-#, fuzzy
-msgid "*.csv|CSV files (*.csv)"
-msgstr "*.xsl|XSLTファイル (*.xsl)"
-
-#: bcexportdialog.cpp:42
+#: exportdialog.cpp:42
 #, fuzzy
 msgid "Export Options"
 msgstr "フォーマットオプション"
 
-#: bcexportdialog.cpp:55
+#: exportdialog.cpp:54
 #, fuzzy
 msgid "Formatting"
 msgstr "フォーマットしない"
 
-#: bcexportdialog.cpp:57
+#: exportdialog.cpp:56
 #, fuzzy
 msgid "Format all fields"
 msgstr "タイトルとしてフォーマット"
 
-#: bcexportdialog.cpp:59
+#: exportdialog.cpp:58
 #, fuzzy
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr "チェックすると、タイトルと名前が自動的にフォーマットされます。"
 
-#: bcexportdialog.cpp:62
+#: exportdialog.cpp:61
 #, fuzzy
 msgid "Encoding"
 msgstr "製本"
 
-#: bcexportdialog.cpp:64
+#: exportdialog.cpp:63
 msgid "Encode in Unicode (UTF-8)"
 msgstr ""
 
-#: bcexportdialog.cpp:66
+#: exportdialog.cpp:65
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr ""
 
-#: bcexportdialog.cpp:67
+#: exportdialog.cpp:66
 msgid "Encode in user locale (%1)"
 msgstr ""
 
-#: bcexportdialog.cpp:70
+#: exportdialog.cpp:69
 msgid "Encode the exported file in the local format."
 msgstr ""
 
-#: bcdetailedlistview.cpp:70 bcdetailedlistview.cpp:298
+#: finddialog.cpp:42
+msgid "Find Text"
+msgstr "テキスト検索"
+
+#: finddialog.cpp:43
+msgid "&Find"
+msgstr "検索(&F)"
+
+#: finddialog.cpp:49
+msgid "Text To Find:"
+msgstr "検索文字列:"
+
+#: finddialog.cpp:52
+msgid "The search string"
+msgstr "検索する文字列"
+
+#: finddialog.cpp:63
+msgid "Search In:"
+msgstr "検索対象:"
+
+#: finddialog.cpp:66
+msgid "Select which field should be searched."
+msgstr "どの項目を検索するか選択する。"
+
+#: finddialog.cpp:74
+msgid "Case &Sensitive"
+msgstr "大文字小文字を区別(&S)"
+
+#: finddialog.cpp:75
+msgid "If checked, the search is case-sensitive."
+msgstr "チェックすると、大文字小文字を区別して検索します。"
+
+#: finddialog.cpp:76
+msgid "Find &Backwards"
+msgstr "後ろ向き検索(&B)"
+
+#: finddialog.cpp:77
+msgid "If checked, the document is searched in reverse."
+msgstr "チェックすると、反対方向に検索します。"
+
+#: finddialog.cpp:78
+msgid "&Whole Words Only"
+msgstr "単語全体を検索(&W)"
+
+#: finddialog.cpp:79
+msgid "If checked, the search is limited to whole words."
+msgstr "チェックすると、単語全体に限定して検索します。"
+
+#: finddialog.cpp:80
+msgid "&From Beginning"
+msgstr "先頭から検索(&F)"
+
+#: finddialog.cpp:81
+msgid "If checked, the document is searched from the beginning."
+msgstr "チェックすると、ドキュメントの先頭から検索します。"
+
+#: finddialog.cpp:82
+msgid "As &Regular Expression"
+msgstr "正規表現として(&R)"
+
+#: finddialog.cpp:83
+msgid "If checked, the search string is used as a regular expression."
+msgstr "チェックすると、検索文字列が正規表現として扱われます。"
+
+#: finddialog.cpp:86
+msgid "&Edit Regular Expression..."
+msgstr "正規表現を編集(&E)..."
+
+#: finddialog.cpp:106 finddialog.cpp:179
+msgid "All Fields"
+msgstr "すべての項目"
+
+#: finddialog.cpp:116
+msgid "Invalid regular expression."
+msgstr "不正な正規表現です。"
+
+#: filehandler.cpp:93 translators/bookcaseimporter.cpp:76
+#: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
+msgid "There is an XML parsing error in line %1, column %2."
+msgstr "XMLパースエラー(%1 行, %2 カラム)"
+
+#: filehandler.cpp:95 translators/bookcaseimporter.cpp:78
+#: translators/xmlimporter.cpp:37 translators/xmlimporter.cpp:54
+msgid "The error message from Qt is:"
+msgstr "Qtのエラーメッセージは:"
+
+#: filehandler.cpp:131
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr "\"%1\"というファイルはすでに存在します。上書きしますか?"
+
+#: filehandler.cpp:134
+msgid "Overwrite File?"
+msgstr "ファイルを上書きしますか?"
+
+#: filehandler.cpp:135
+msgid "Overwrite"
+msgstr "上書き"
+
+#: main.cpp:22
+#, fuzzy
+msgid "Bookcase - a collection manager for KDE"
+msgstr "Bookcase - KDE用の蔵書管理ソフト"
+
+#: main.cpp:27
+msgid "File to open"
+msgstr "開くファイル"
+
+#: main.cpp:28
+msgid "Do not reopen the last open file"
+msgstr ""
+
+#: main.cpp:33
+msgid "Bookcase"
+msgstr "Bookcase"
+
+#: main.cpp:38
+msgid "Author of btparse library"
+msgstr ""
+
+#: detailedlistview.cpp:69 detailedlistview.cpp:298
+#: translators/pilotdbexporter.cpp:96
 msgid "View Columns"
 msgstr "表示項目"
 
-#: bcattribute.cpp:32
+#: field.cpp:33
 msgid "a,an,and,in,of,the,to"
 msgstr "a,an,and,in,of,the,to"
 
-#: bcattribute.cpp:367
+#: field.cpp:41 field.cpp:59 configdialog.cpp:102 collectionfactory.cpp:73
+#: collectionfactory.cpp:87 collections/bookcollection.cpp:21
+#: collections/bookcollection.cpp:40 collections/videocollection.cpp:23
+#: collections/videocollection.cpp:42 collections/coincollection.cpp:21
+#: collections/bibtexcollection.cpp:21 collections/bibtexcollection.cpp:55
+#: collections/bibtexcollection.cpp:87 collections/winecollection.cpp:21
+#: collections/cardcollection.cpp:21 collections/musiccollection.cpp:21
+#: collections/comicbookcollection.cpp:21 collections/stampcollection.cpp:21
+msgid "General"
+msgstr "General"
+
+#: field.cpp:314
 msgid "the"
 msgstr "the"
 
-#: bcattribute.cpp:391
+#: field.cpp:328
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: bcattribute.cpp:421
+#: field.cpp:333
 msgid "de,van der,von"
 msgstr "de,van der,von"
 
-#: bcattribute.cpp:439
+#: field.cpp:340 collectionfieldsdialog.cpp:383 collectionfieldsdialog.cpp:391
+msgid "Simple Text"
+msgstr "シンプルテキスト"
+
+#: field.cpp:341 collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:399
+msgid "Paragraph"
+msgstr "パラグラフ"
+
+#: field.cpp:342 collectionfieldsdialog.cpp:375
+msgid "List"
+msgstr "リスト"
+
+#: field.cpp:343
 msgid "Checkbox"
 msgstr "チェックボックス"
 
-#: stringmacrodialog.cpp:29
+#: field.cpp:344 collectionfieldsdialog.cpp:391
+#: collections/bibtexcollection.cpp:171
 #, fuzzy
-msgid "String Macros"
-msgstr "評価"
+msgid "Number"
+msgstr "シリーズ番号"
 
-#: stringmacrodialog.cpp:37
-msgid "Macro"
-msgstr ""
+#: field.cpp:345 collectionfieldsdialog.cpp:395
+msgid "URL"
+msgstr "URL"
 
-#: stringmacrodialog.cpp:38
+#: field.cpp:346 collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:383
 #, fuzzy
-msgid "String"
-msgstr "評価"
-
-#: stringmacrodialog.cpp:44
-msgid ""
-"Both the macro and the string can be edited by triple-clicking the item."
-msgstr ""
-
-#: translators/bibteximporter.cpp:42
-msgid "No valid Bibtex entries were found in file - %1"
-msgstr ""
-
-#: translators/bibtexmlexporter.cpp:37
-#, fuzzy
-msgid "Bibtexml"
-msgstr "Bibtexmlファイルへエクスポート..."
-
-#: translators/bibtexmlexporter.cpp:41
-msgid "*.xml|Bibtexml files (*.xml)"
-msgstr "*.xml|Bibtexmlファイル (*.xml)"
-
-#: translators/bibtexexporter.cpp:44
-#, fuzzy
-msgid "Bibtex"
-msgstr "項目オプション"
-
-#: translators/bibtexexporter.cpp:59
-#, fuzzy
-msgid "Bibtex Options"
-msgstr "項目オプション"
-
-#: translators/bibtexexporter.cpp:62
-#, fuzzy
-msgid "Expand string macros"
-msgstr "評価"
-
-#: translators/bibtexexporter.cpp:64
-msgid ""
-"If checked, the string macros will be expanded and no @string{} entries will "
-"be written."
-msgstr ""
-
-#: translators/bibtexexporter.cpp:67
-msgid "Use URL package"
-msgstr ""
-
-#: translators/bibtexexporter.cpp:69
-#, fuzzy
-msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr "チェックすると、項目名が表の見だしとして印刷されます。"
-
-#: translators/csvimporter.cpp:107 translators/csvexporter.cpp:58
-#, fuzzy
-msgid "CSV Options"
-msgstr "項目オプション"
-
-#: translators/csvimporter.cpp:111
-#, fuzzy
-msgid "Collection Type:"
-msgstr "BCCollection"
-
-#: translators/csvimporter.cpp:113
-msgid "Select the type of collection being imported."
-msgstr ""
-
-#: translators/csvimporter.cpp:121
-msgid "First row contains field titles"
-msgstr ""
-
-#: translators/csvimporter.cpp:123
-#, fuzzy
-msgid "If checked, the first row is used as field titles."
-msgstr "チェックすると、検索文字列が正規表現として扱われます。"
-
-#: translators/csvimporter.cpp:126 translators/csvexporter.cpp:66
-msgid "Delimiter"
-msgstr ""
-
-#: translators/csvimporter.cpp:129 translators/csvexporter.cpp:69
-msgid ""
-"In addition to a comma, other characters may be used as a delimiter, "
-"separating each value in the file."
-msgstr ""
-
-#: translators/csvimporter.cpp:134 translators/csvexporter.cpp:73
-#, fuzzy
-msgid "Comma"
-msgstr "コメント"
-
-#: translators/csvimporter.cpp:136 translators/csvexporter.cpp:75
-msgid "Use a comma as the delimiter."
-msgstr ""
-
-#: translators/csvimporter.cpp:140 translators/csvexporter.cpp:79
-msgid "Semicolon"
-msgstr ""
-
-#: translators/csvimporter.cpp:141 translators/csvexporter.cpp:80
-msgid "Use a semi-colon as the delimiter."
-msgstr ""
-
-#: translators/csvimporter.cpp:145 translators/csvexporter.cpp:84
-#, fuzzy
-msgid "Tab"
+msgid "Table"
 msgstr "タイトル"
 
-#: translators/csvimporter.cpp:146 translators/csvexporter.cpp:85
-msgid "Use a tab as the delimiter."
-msgstr ""
-
-#: translators/csvimporter.cpp:150 translators/csvexporter.cpp:89
+#: field.cpp:347 collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:384
 #, fuzzy
-msgid "Other"
-msgstr "the"
-
-#: translators/csvimporter.cpp:151 translators/csvexporter.cpp:90
-msgid "Use a custom string as the delimiter."
-msgstr ""
-
-#: translators/csvimporter.cpp:156 translators/csvexporter.cpp:95
-msgid "A custom string, such as a colon, may be used as a delimiter."
-msgstr ""
-
-#: translators/csvimporter.cpp:181
-msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
-
-#: translators/csvimporter.cpp:187
-msgid ""
-"<qt>Set each column to correspond to a field in the collection by choosing a "
-"column, selecting the field, then clicking the <i>Set</i> button.</qt>"
-msgstr ""
-
-#: translators/csvimporter.cpp:189
-#, fuzzy
-msgid "Column:"
+msgid "Table (2 Columns)"
 msgstr "表示項目"
 
-#: translators/csvimporter.cpp:193
+#: field.cpp:348 collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:399
+#: collections/stampcollection.cpp:125
 #, fuzzy
-msgid "Collection field in this column:"
-msgstr "コレクションの項目..."
+msgid "Image"
+msgstr "ページ数"
 
-#: translators/csvimporter.cpp:196
-msgid "Set"
+#: field.cpp:349 collectionfieldsdialog.cpp:399
+msgid "Dependent"
 msgstr ""
 
-#: translators/csvexporter.cpp:43
-msgid "CSV"
+#: configdialog.cpp:49
+msgid "Configure Bookcase"
+msgstr "Bookcaseを設定"
+
+#: configdialog.cpp:102
+msgid "General Options"
+msgstr "一般的なオプション"
+
+#: configdialog.cpp:105
+msgid "Reopen file at startup"
+msgstr "起動時にファイルを再オープン"
+
+#: configdialog.cpp:106
+msgid ""
+"If checked, the file that was last open will be re-opened at program start-"
+"up."
+msgstr ""
+"チェックすると、最期に開いたファイルがプログラム起動時に再オープンされます。"
+
+#: configdialog.cpp:110
+msgid "Show \"Tip of the Day\" at startup"
 msgstr ""
 
-#: translators/csvexporter.cpp:61
-msgid "Include field titles as column headers"
-msgstr ""
-
-#: translators/csvexporter.cpp:63
+#: configdialog.cpp:111
 #, fuzzy
-msgid "If checked, a header row will be added with the field titles."
+msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
+msgstr ""
+"チェックすると、最期に開いたファイルがプログラム起動時に再オープンされます。"
+
+#: configdialog.cpp:115
+msgid "Show number of items in group"
+msgstr "グループのアイテム数を表示"
+
+#: configdialog.cpp:116
+msgid ""
+"If checked, the number of items in the group will be appended to the group "
+"name."
+msgstr "チェックすると、グループ内のアイテム数がグループ名の後に表示されます。"
+
+#: configdialog.cpp:120 configdialog.cpp:185
+msgid "Formatting Options"
+msgstr "フォーマットオプション"
+
+#: configdialog.cpp:123
+msgid "(Requires restart)"
+msgstr "(再起動が必要)"
+
+#: configdialog.cpp:124
+msgid "Auto capitalize titles and names"
+msgstr "タイトルと名前のキャピタライズ"
+
+#: configdialog.cpp:125
+msgid "If checked, titles and names will be automatically capitalized."
+msgstr "チェックすると、タイトルと名前が自動的にキャピタライズされます。"
+
+#: configdialog.cpp:128
+msgid "Auto format titles and names"
+msgstr "タイトルと名前の自動フォーマット"
+
+#: configdialog.cpp:129 configdialog.cpp:189
+msgid "If checked, titles and names will be automatically formatted."
+msgstr "チェックすると、タイトルと名前が自動的にフォーマットされます。"
+
+#: configdialog.cpp:136
+msgid "Articles:"
+msgstr "記事:"
+
+#: configdialog.cpp:148
+msgid ""
+"A comma-separated list of words which should be considered as articles if "
+"they are the first word in a title."
+msgstr ""
+"タイトルの最初に使うと「記事」として判断される単語のリスト(カンマ区切り)"
+
+#: configdialog.cpp:155
+msgid "Personal suffixes:"
+msgstr "名の接尾辞:"
+
+#: configdialog.cpp:160
+msgid ""
+"A comma-separated list of suffixes which might be used in personal names."
+msgstr "名前の後に使われる可能性のある単語のリスト(カンマ区切り)"
+
+#: configdialog.cpp:166
+msgid "Surname prefixes:"
+msgstr "姓の接頭辞(尊称):"
+
+#: configdialog.cpp:171
+msgid "A comma-separated list of prefixes which might be used in surnames."
+msgstr "姓の前に使われる可能性のある単語のリスト(カンマ区切り)"
+
+#: configdialog.cpp:182
+msgid "Printing"
+msgstr "印刷"
+
+#: configdialog.cpp:182
+msgid "Printing Options"
+msgstr "印刷オプション"
+
+#: configdialog.cpp:188
+msgid "Format titles and names"
+msgstr "タイトルと名前をフォーマット"
+
+#: configdialog.cpp:192 translators/htmlexporter.cpp:60
+msgid "Print field headers"
+msgstr "項目見出しの印刷"
+
+#: configdialog.cpp:193 translators/htmlexporter.cpp:61
+msgid "If checked, the field names will be printed as table headers."
+msgstr "チェックすると、項目名が表の見だしとして印刷されます。"
+
+#: configdialog.cpp:196
+msgid "Grouping Options"
+msgstr "分類オプション"
+
+#: configdialog.cpp:199 translators/htmlexporter.cpp:65
+#, fuzzy
+msgid "Group the entries"
+msgstr "ブックを分類する"
+
+#: configdialog.cpp:200 translators/htmlexporter.cpp:66
+#, fuzzy
+msgid "If checked, the entries will be grouped by the selected field."
 msgstr "チェックすると、ブックが選択した項目で分類されます。"
 
-#: translators/bookcasexmlimporter.cpp:101
-msgid "It is from a future version of Bookcase."
-msgstr "より新しいバージョンのBookcaseのものです。"
+#: configdialog.cpp:209
+msgid "Templates"
+msgstr ""
 
-#: translators/bookcasexmlimporter.cpp:105
+#: configdialog.cpp:209
+#, fuzzy
+msgid "Template Options"
+msgstr "フォーマットオプション"
+
+#: configdialog.cpp:339
+msgid "Preview Entry Template"
+msgstr ""
+
+#: importdialog.cpp:40 importdialog.cpp:46
+#, fuzzy
+msgid "Import Options"
+msgstr "フォーマットオプション"
+
+#: importdialog.cpp:48
+#, fuzzy
+msgid "Replace current collection"
+msgstr "コレクションの名前変更..."
+
+#: importdialog.cpp:50
+msgid "Replace the current collection with the contents of the imported file."
+msgstr ""
+
+#: importdialog.cpp:52
+#, fuzzy
+msgid "Append to current collection"
+msgstr "コレクションの分類を変更"
+
+#: importdialog.cpp:53
 msgid ""
-"Bookcase is converting the file to a more recent document format. "
-"Information loss may occur if an older version of Bookcase is used to read "
-"this file in the future."
+"Append the contents of the imported file to the current collection. This is "
+"only possible when the collection types match."
 msgstr ""
 
-#: translators/bookcasexmlimporter.cpp:204 translators/bibtexhandler.cpp:189
-msgid "Unknown"
-msgstr "未知"
+#: importdialog.cpp:122 mainwindow.cpp:863 mainwindow.cpp:953
+msgid "*.bc|Bookcase files (*.bc)"
+msgstr "*.bc|Bookcaseファイル (*.bc)"
 
-#: translators/xsltimporter.cpp:45
-msgid "A valid XSLT file is needed to import the file."
-msgstr ""
+#: importdialog.cpp:126 translators/bibtexexporter.cpp:47
+msgid "*.bib|Bibtex files (*.bib)"
+msgstr "*.bib|Bibtexファイル (*.bib)"
 
-#: translators/xsltimporter.cpp:66 translators/xsltexporter.cpp:53
+#: importdialog.cpp:130 translators/csvexporter.cpp:47
 #, fuzzy
-msgid "XSLT Options"
-msgstr "項目オプション"
+msgid "*.csv|CSV files (*.csv)"
+msgstr "*.xsl|XSLTファイル (*.xsl)"
 
-#: translators/xsltimporter.cpp:67 translators/xsltexporter.cpp:57
-#, fuzzy
-msgid "XSLT File:"
-msgstr "タイトル:"
-
-#: translators/xsltexporter.cpp:38
-msgid "XSLT"
-msgstr ""
-
-#: translators/xsltexporter.cpp:59
-msgid "Choose the XSLT file used to transform the Bookcase XML data."
-msgstr ""
-
-#: translators/htmlexporter.cpp:44
-msgid "HTML"
-msgstr ""
-
-#: translators/htmlexporter.cpp:48
-#, fuzzy
-msgid "*.html|HTML files (*.html)"
+#: importdialog.cpp:135 mainwindow.cpp:865 mainwindow.cpp:955
+#: translators/bookcasexmlexporter.cpp:55
+msgid "*.xml|XML files (*.xml)"
 msgstr "*.xml|XMLファイル (*.xml)"
 
-#: translators/htmlexporter.cpp:59
+#: importdialog.cpp:140
 #, fuzzy
-msgid "HTML Options"
-msgstr "項目オプション"
+msgid "*.ogg|Ogg files (*.ogg)"
+msgstr "*.xml|XMLファイル (*.xml)"
 
-#: translators/htmlexporter.cpp:189
-#, fuzzy
-msgid "(grouped by %1; sorted by %2)"
-msgstr "(%1でソート)"
+#: importdialog.cpp:147 mainwindow.cpp:867 mainwindow.cpp:957
+#: translators/csvexporter.cpp:47 translators/htmlexporter.cpp:46
+#: translators/bibtexexporter.cpp:47 translators/bibtexmlexporter.cpp:39
+#: translators/xsltexporter.cpp:42 translators/pilotdbexporter.cpp:43
+#: translators/bookcasexmlexporter.cpp:55
+#: translators/bookcasezipexporter.cpp:37
+msgid "*|All files"
+msgstr "*|すべてのファイル"
 
-#: translators/htmlexporter.cpp:191
-msgid "(sorted by %1)"
-msgstr "(%1でソート)"
+#: filterdialog.cpp:61
+msgid "Any Field"
+msgstr "任意の項目"
 
-#: translators/xsltimporter.moc.cpp:34 translators/xsltimporter.moc.cpp:42
-#, fuzzy
-msgid "XSLTImporter"
-msgstr "インポート(&I)"
+#: filterdialog.cpp:70
+msgid "contains"
+msgstr "は右の文字列を含む"
 
-#: translators/importer.moc.cpp:34 translators/importer.moc.cpp:42
-#, fuzzy
-msgid "Importer"
-msgstr "インポート(&I)"
+#: filterdialog.cpp:71
+msgid "does not contain"
+msgstr "は右の文字列を含まない"
 
-#: translators/csvimporter.moc.cpp:34 translators/csvimporter.moc.cpp:42
-#, fuzzy
-msgid "CSVImporter"
-msgstr "エクスポート(&X)"
+#: filterdialog.cpp:72
+msgid "equals"
+msgstr "は右の文字列と等しい"
 
-#: translators/textimporter.moc.cpp:34 translators/textimporter.moc.cpp:42
-#, fuzzy
-msgid "TextImporter"
-msgstr "インポート(&I)"
+#: filterdialog.cpp:73
+msgid "does not equal"
+msgstr "は右の文字列と等しくない"
 
-#: translators/bibteximporter.moc.cpp:34 translators/bibteximporter.moc.cpp:42
-#, fuzzy
-msgid "BibtexImporter"
-msgstr "インポート(&I)"
+#: filterdialog.cpp:74
+msgid "matches regexp"
+msgstr "は右の正規表現にマッチする"
 
-#: translators/bookcasexmlimporter.moc.cpp:34
-#: translators/bookcasexmlimporter.moc.cpp:42
-#, fuzzy
-msgid "BookcaseXMLImporter"
-msgstr "BookcaseDoc"
+#: filterdialog.cpp:75
+msgid "does not match regexp"
+msgstr "は右の正規表現にマッチしない"
 
-#: translators/bibtexmlimporter.moc.cpp:34
-#: translators/bibtexmlimporter.moc.cpp:42
-#, fuzzy
-msgid "BibtexmlImporter"
-msgstr "インポート(&I)"
+#: filterdialog.cpp:87
+msgid "Edit..."
+msgstr "編集..."
+
+#: filterdialog.cpp:244
+msgid "Advanced Filter"
+msgstr "上級フィルター"
+
+#: filterdialog.cpp:250
+msgid "Filter Criteria"
+msgstr "フィルター基準"
+
+#: filterdialog.cpp:253
+msgid "Match a&ll of the following"
+msgstr "以下のすべてにマッチ(&L)"
+
+#: filterdialog.cpp:254
+msgid "Match an&y of the following"
+msgstr "以下のいずれかにマッチ(&Y)"
 
 #: kwidgetlister.cpp:56
 msgid "more widgets"
@@ -1522,300 +511,1284 @@ msgstr "減少"
 msgid "clear widgets"
 msgstr "クリア"
 
-#: bccollectionfactory.cpp:90
+#: groupview.cpp:60
+msgid "Expand All Groups"
+msgstr "全グループを展開"
+
+#: groupview.cpp:61
+msgid "Collapse All Groups"
+msgstr "全グループをたたむ"
+
+#: collectionfactory.cpp:70 collectionfactory.cpp:84
+#, fuzzy
+msgid "My Collection"
+msgstr "BCCollection"
+
+#: collectionfactory.cpp:71 collectionfactory.cpp:85
+#, fuzzy
+msgid "Entry"
+msgstr "シリーズ名"
+
+#: collectionfactory.cpp:72 collectionfactory.cpp:86
+#: collections/bookcollection.cpp:39 collections/videocollection.cpp:41
+#: collections/coincollection.cpp:37 collections/bibtexcollection.cpp:53
+#: collections/winecollection.cpp:37 collections/cardcollection.cpp:37
+#: collections/comicbookcollection.cpp:39 collections/stampcollection.cpp:38
+msgid "Title"
+msgstr "タイトル"
+
+#: collectionfactory.cpp:125
 #, fuzzy
 msgid "Book Collection"
 msgstr "BookCollection"
 
-#: bccollectionfactory.cpp:91 collections/bibtexcollection.cpp:28
+#: collectionfactory.cpp:126 collections/bibtexcollection.cpp:27
 #, fuzzy
 msgid "Bibliography"
 msgstr "Bibtexmlファイルをインポート..."
 
-#: bccollectionfactory.cpp:92
+#: collectionfactory.cpp:127
+#, fuzzy
+msgid "Comic Book Collection"
+msgstr "BookCollection"
+
+#: collectionfactory.cpp:128
 #, fuzzy
 msgid "Video Collection"
 msgstr "VideoCollection"
 
-#: bccollectionfactory.cpp:93
+#: collectionfactory.cpp:129
 #, fuzzy
 msgid "Music Collection"
 msgstr "BCCollection"
 
-#: bcgroupview.cpp:61
-msgid "Expand All Groups"
-msgstr "全グループを展開"
-
-#: bcgroupview.cpp:62
-msgid "Collapse All Groups"
-msgstr "全グループをたたむ"
-
-#: collections/videocollection.cpp:24
-msgid "Other People"
-msgstr ""
-
-#: collections/videocollection.cpp:25
-msgid "Features"
-msgstr ""
-
-#: collections/videocollection.cpp:26 collections/bookcollection.cpp:24
-#: collections/musiccollection.cpp:22
-msgid "Personal"
-msgstr "個人"
-
-#: collections/videocollection.cpp:29
-msgid "Videos"
-msgstr "ビデオ"
-
-#: collections/videocollection.cpp:30
-msgid "My Videos"
-msgstr "My Videos"
-
-#: collections/videocollection.cpp:42 collections/bookcollection.cpp:40
-#: collections/bibtexcollection.cpp:56 collections/musiccollection.cpp:38
-msgid "Title"
-msgstr "タイトル"
-
-#: collections/videocollection.cpp:49
-msgid "DVD"
-msgstr "DVD"
-
-#: collections/videocollection.cpp:49
-msgid "VHS"
-msgstr "VHS"
-
-#: collections/videocollection.cpp:49
-msgid "VCD"
-msgstr "ビデオCD"
-
-#: collections/videocollection.cpp:49
-msgid "DivX"
-msgstr "DivX"
-
-#: collections/videocollection.cpp:50 collections/musiccollection.cpp:46
-msgid "Medium"
-msgstr "Medium"
-
-#: collections/videocollection.cpp:55
+#: collectionfactory.cpp:130
 #, fuzzy
-msgid "Production Year"
-msgstr "出版年"
+msgid "Coin Collection"
+msgstr "SongCollection"
 
-#: collections/videocollection.cpp:61
-msgid "G (USA),PG (USA),PG-13 (USA),R (USA)"
-msgstr ""
-
-#: collections/videocollection.cpp:62
+#: collectionfactory.cpp:131
 #, fuzzy
-msgid "Certification"
-msgstr "分類"
+msgid "Stamp Collection"
+msgstr "コレクションの名前変更..."
 
-#: collections/videocollection.cpp:67 collections/bookcollection.cpp:115
-#: collections/musiccollection.cpp:74
-msgid "Genre"
-msgstr "ジャンル"
-
-#: collections/videocollection.cpp:74
-msgid "Region 1"
-msgstr ""
-
-#: collections/videocollection.cpp:75
-msgid "Region 2"
-msgstr ""
-
-#: collections/videocollection.cpp:76
-msgid "Region 3"
-msgstr ""
-
-#: collections/videocollection.cpp:77
-msgid "Region 4"
-msgstr ""
-
-#: collections/videocollection.cpp:78
-msgid "Region 5"
-msgstr ""
-
-#: collections/videocollection.cpp:79
-msgid "Region 6"
-msgstr ""
-
-#: collections/videocollection.cpp:80
-msgid "Region 7"
-msgstr ""
-
-#: collections/videocollection.cpp:81
-msgid "Region 8"
-msgstr ""
-
-#: collections/videocollection.cpp:82
-msgid "Region"
-msgstr ""
-
-#: collections/videocollection.cpp:87
-msgid "Nationality"
-msgstr ""
-
-#: collections/videocollection.cpp:94
-msgid "NTSC"
-msgstr ""
-
-#: collections/videocollection.cpp:94
-msgid "PAL"
-msgstr ""
-
-#: collections/videocollection.cpp:94
-msgid "SECAM"
-msgstr ""
-
-#: collections/videocollection.cpp:95
+#: collectionfactory.cpp:132
 #, fuzzy
-msgid "Format"
+msgid "Wine Collection"
+msgstr "VideoCollection"
+
+#: collectionfactory.cpp:133
+#, fuzzy
+msgid "Card Collection"
+msgstr "BCCollection"
+
+#: collectionfactory.cpp:134
+#, fuzzy
+msgid "Custom Collection"
+msgstr "コレクションの新しい名前"
+
+#: document.cpp:108
+msgid ""
+"The current file has been modified.\n"
+"Do you want to save it?"
+msgstr ""
+"現在のファイルは変更されています。\n"
+"保存しますか?"
+
+#: document.cpp:110 entryeditdialog.cpp:491
+msgid "Warning!"
+msgstr "警告!"
+
+#: document.cpp:348 document.cpp:351
+#, fuzzy
+msgid "Rename Collection"
+msgstr "コレクションの名前変更..."
+
+#: document.cpp:348 document.cpp:351
+msgid "New Collection Name"
+msgstr "コレクションの新しい名前"
+
+#: document.cpp:490
+msgid "Search string '%1' not found."
+msgstr "検索文字列 '%1' が見つかりません。"
+
+#: collectionfieldsdialog.cpp:80
+#, fuzzy
+msgid "Collection Fields"
+msgstr "コレクションの項目..."
+
+#: collectionfieldsdialog.cpp:92
+msgid "Current Fields"
+msgstr "現在の項目"
+
+#: collectionfieldsdialog.cpp:107 collectionfieldsdialog.cpp:323
+#: collectionfieldsdialog.cpp:326 translators/csvimporter.cpp:326
+#: translators/csvimporter.cpp:413
+msgid "New Field"
+msgstr "追加"
+
+#: collectionfieldsdialog.cpp:109
+#, fuzzy
+msgid "Add a new field to the collection"
+msgstr "新規ドキュメントを作成"
+
+#: collectionfieldsdialog.cpp:110
+msgid "Delete Field"
+msgstr "削除"
+
+#: collectionfieldsdialog.cpp:112
+#, fuzzy
+msgid "Remove a field from the collection"
+msgstr "コレクションの項目を編集..."
+
+#: collectionfieldsdialog.cpp:121
+msgid ""
+"Move this field up in the list. The list order is important for the layout "
+"of the entry editor."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:125
+msgid ""
+"Move this field down in the list. The list order is important for the layout "
+"of the entry editor."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:135
+msgid "Field Properties"
+msgstr "項目のプロパティ"
+
+#: collectionfieldsdialog.cpp:141
+msgid "Title:"
+msgstr "タイトル:"
+
+#: collectionfieldsdialog.cpp:145
+msgid "The title of the field"
+msgstr ""
+
+#: collectionfieldsdialog.cpp:150
+msgid "Type:"
+msgstr "タイプ:"
+
+#: collectionfieldsdialog.cpp:154
+msgid ""
+"<qt>The type of the field determines what values may be used. <i>Simple "
+"Text</i> is used for most fields. <i>Paragraph</i> is for large text blocks. "
+"<i>List</i> limits the field to certain values. <i>Checkbox</i> is for a "
+"simple yes/no value. <i>Number</i> indicates that the field contains a "
+"numerical value. <i>URL</i> is for fields which refer to URLs, including "
+"references to other files. <i>Table</i>s may be a single or double column of "
+"values, while <i>Read Only</i> is for internal values, possibly useful for "
+"import and export. A <i>Dependent</i> field depends on the values of other "
+"fields, and is formatted according to the field description. An <i>Image</i> "
+"holds a picture.</qt>"
+msgstr ""
+
+#: collectionfieldsdialog.cpp:170
+msgid "Category:"
+msgstr "カテゴリー:"
+
+#: collectionfieldsdialog.cpp:174
+msgid "The field category determines where the field is placed in the editor."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:181
+msgid "Allowed:"
+msgstr "許可:"
+
+#: collectionfieldsdialog.cpp:185
+msgid ""
+"<qt>For <i>List</i>-type fields, these are the only values allowed. They are "
+"placed in a combo box.</qt>"
+msgstr ""
+
+#: collectionfieldsdialog.cpp:191
+msgid "Description:"
+msgstr "記述:"
+
+#: collectionfieldsdialog.cpp:196
+msgid ""
+"The description is useful reminder of what information is contained in the "
+"field. For <i>Dependent</i> fields, the description is a format string such "
+"as \"%{year} %{title}\" where the named fields get substituted in the string."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:203
+#, fuzzy
+msgid "Extended Properties:"
+msgstr "項目のプロパティ"
+
+#: collectionfieldsdialog.cpp:205
+#, fuzzy
+msgid "Set..."
+msgstr "名前を付けて保存..."
+
+#: collectionfieldsdialog.cpp:207
+msgid ""
+"Extended field properties are used to specify things such as the "
+"corresponding bibtex field."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:211
+msgid "Format Options"
 msgstr "フォーマットオプション"
 
-#: collections/videocollection.cpp:100
-#, fuzzy
-msgid "Cast"
-msgstr "カセット"
+#: collectionfieldsdialog.cpp:212
+msgid "No formatting"
+msgstr "フォーマットしない"
 
-#: collections/videocollection.cpp:103
-msgid "A table for the cast members, along with the roles they play"
+#: collectionfieldsdialog.cpp:213
+msgid ""
+"This option prevents the field from ever being automatically formatted or "
+"capitalized."
 msgstr ""
 
-#: collections/videocollection.cpp:106
-msgid "Director"
+#: collectionfieldsdialog.cpp:215
+msgid "Allow auto-capitalization only"
 msgstr ""
 
-#: collections/videocollection.cpp:112
+#: collectionfieldsdialog.cpp:216
+msgid ""
+"This option allows the field to be capitalized, but not specially formatted."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:218
+msgid "Format as a title"
+msgstr "タイトルとしてフォーマット"
+
+#: collectionfieldsdialog.cpp:219
+msgid ""
+"This option capitalizes and formats the field as a title, but only if those "
+"options are globally set."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:221
+msgid "Format as a name"
+msgstr "名前としてフォーマット"
+
+#: collectionfieldsdialog.cpp:222
+msgid ""
+"This option capitalizes and formats the field as a name, but only if those "
+"options are globally set."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:226
+msgid "Field Options"
+msgstr "項目オプション"
+
+#: collectionfieldsdialog.cpp:227
+msgid "Enable auto-completion"
+msgstr "自動補完を有効にする"
+
+#: collectionfieldsdialog.cpp:228
 #, fuzzy
-msgid "Producer"
+msgid ""
+"If checked, KDE auto-completion will be enabled in the text edit box for "
+"this field."
+msgstr "チェックすると、ブックが選択した項目で分類されます。"
+
+#: collectionfieldsdialog.cpp:230
+msgid "Allow multiple values"
+msgstr "複数の値を許可する"
+
+#: collectionfieldsdialog.cpp:231
+#, fuzzy
+msgid ""
+"If checked, Bookcase will parse the values in the field for multiple values, "
+"separated by a semi-colon."
+msgstr "この項目に設定できる値をセミコロン区切りで記述します。"
+
+#: collectionfieldsdialog.cpp:233
+msgid "Allow grouping"
+msgstr "分類を許可する"
+
+#: collectionfieldsdialog.cpp:234
+#, fuzzy
+msgid ""
+"If checked, this field may be used to group the entries in the group view."
+msgstr "チェックすると、グループ内のアイテム数がグループ名の後に表示されます。"
+
+#: collectionfieldsdialog.cpp:248
+#, fuzzy
+msgid "Revert the selected field's properties to the default values."
+msgstr "コレクションで選択された項目です。"
+
+#: collectionfieldsdialog.cpp:358
+#, fuzzy
+msgid ""
+"<qt><p>Do you really want to delete the <em>%1</em> field? This action "
+"occurs immediately and can not be undone!</p></qt>"
+msgstr ""
+"本当に %1 項目を削除しますか? この操作はただちに実行され 元に戻すことはできま"
+"せん!"
+
+#: collectionfieldsdialog.cpp:361
+msgid "Delete Field?"
+msgstr "項目の削除?"
+
+#: collectionfieldsdialog.cpp:637
+#, fuzzy
+msgid "Revert Field Properties?"
+msgstr "項目のプロパティ"
+
+#: collectionfieldsdialog.cpp:638
+#, fuzzy
+msgid ""
+"<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
+"back to their default values?</p></qt>"
+msgstr ""
+"本当に %1 項目を削除しますか? この操作はただちに実行され 元に戻すことはできま"
+"せん!"
+
+#: collectionfieldsdialog.cpp:641
+msgid "Revert"
+msgstr ""
+
+#: collectionfieldsdialog.cpp:768
+#, fuzzy
+msgid "Extended Field Properties"
+msgstr "項目のプロパティ"
+
+#: collectionfieldsdialog.cpp:769
+#, fuzzy
+msgid "Property"
 msgstr "出版年"
 
-#: collections/videocollection.cpp:118
-msgid "Writer"
-msgstr ""
-
-#: collections/videocollection.cpp:124
+#: collectionfieldsdialog.cpp:769
 #, fuzzy
-msgid "Composer"
+msgid "Value"
+msgstr "表示項目"
+
+#: collection.cpp:23
+msgid "(Empty)"
+msgstr "(未設定)"
+
+#: controller.cpp:67 mainwindow.cpp:77
+msgid "Ready."
+msgstr "レディ"
+
+#: controller.cpp:206
+#, fuzzy
+msgid "Do you really want to delete these entries?"
+msgstr "本当にこれらのブックを削除しますか?"
+
+#: controller.cpp:208
+#, fuzzy
+msgid "Delete Multiple Entries?"
+msgstr "複数のブックを削除しますか?"
+
+#: mainwindow.cpp:151 collections/bookcollection.cpp:136
+msgid "New"
+msgstr "新刊"
+
+#: mainwindow.cpp:154
+#, fuzzy
+msgid "Create a new collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:158
+#, fuzzy
+msgid "New &Book Collection"
+msgstr "BookCollection"
+
+#: mainwindow.cpp:161
+#, fuzzy
+msgid "Create a new book collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:167
+#, fuzzy
+msgid "New B&ibliography"
+msgstr "Bibtexmlファイルをインポート..."
+
+#: mainwindow.cpp:170
+#, fuzzy
+msgid "Create a new bibtex bibliography"
+msgstr "Bibtexmlファイルをインポート..."
+
+#: mainwindow.cpp:176
+#, fuzzy
+msgid "New &Comic Book Collection"
+msgstr "BookCollection"
+
+#: mainwindow.cpp:179
+#, fuzzy
+msgid "Create a new comic book collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:185
+#, fuzzy
+msgid "New &Video Collection"
+msgstr "VideoCollection"
+
+#: mainwindow.cpp:188
+#, fuzzy
+msgid "Create a new video collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:194
+#, fuzzy
+msgid "New &Music Collection"
+msgstr "コレクションの新しい名前"
+
+#: mainwindow.cpp:197
+#, fuzzy
+msgid "Create a new music collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:203
+#, fuzzy
+msgid "New C&ard Collection"
+msgstr "VideoCollection"
+
+#: mainwindow.cpp:206
+#, fuzzy
+msgid "Create a new trading card collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:212
+#, fuzzy
+msgid "New C&oin Collection"
+msgstr "コレクションの新しい名前"
+
+#: mainwindow.cpp:215
+#, fuzzy
+msgid "Create a new coin collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:221
+#, fuzzy
+msgid "New &Stamp Collection"
+msgstr "コレクションの新しい名前"
+
+#: mainwindow.cpp:224
+#, fuzzy
+msgid "Create a new stamp collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:230
+#, fuzzy
+msgid "New &Wine Collection"
+msgstr "VideoCollection"
+
+#: mainwindow.cpp:233
+#, fuzzy
+msgid "Create a new wine collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:239
+#, fuzzy
+msgid "New C&ustom Collection"
+msgstr "コレクションの新しい名前"
+
+#: mainwindow.cpp:242
+#, fuzzy
+msgid "Create a new custom collection"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:251
+msgid "Open an existing document"
+msgstr "既存のドキュメントを開く"
+
+#: mainwindow.cpp:253
+msgid "Open a recently used file"
+msgstr "最近使ったファイルを開く"
+
+#: mainwindow.cpp:255
+#, fuzzy
+msgid "Save the document"
+msgstr "ドキュメントを保存"
+
+#: mainwindow.cpp:257
+#, fuzzy
+msgid "Save the document as a different file..."
+msgstr "名前を付けて保存..."
+
+#: mainwindow.cpp:259
+msgid "Print the contents of the document..."
+msgstr "ドキュメントの内容を表示..."
+
+#: mainwindow.cpp:261
+msgid "Quit the application"
+msgstr "アプリケーションを修了"
+
+#: mainwindow.cpp:273
+#, fuzzy
+msgid "Import collection data from other formats..."
+msgstr "コレクションの特定のブックだけにフィルタリング"
+
+#: mainwindow.cpp:277
+#, fuzzy
+msgid "Import Bookcase Data"
+msgstr "Bibtexファイルをインポート..."
+
+#: mainwindow.cpp:278
+#, fuzzy
+msgid "Import another Bookcase data file"
+msgstr "Bibtexファイルをインポート..."
+
+#: mainwindow.cpp:284
+#, fuzzy
+msgid "Import CSV Data"
+msgstr "エクスポート中..."
+
+#: mainwindow.cpp:285
+#, fuzzy
+msgid "Import a CSV file"
+msgstr "Bibtexmlファイルをインポート..."
+
+#: mainwindow.cpp:291
+#, fuzzy
+msgid "Import Bibtex Data"
+msgstr "Bibtexファイルをインポート..."
+
+#: mainwindow.cpp:292
+#, fuzzy
+msgid "Import a Bibtex bibliography file"
+msgstr "Bibtexmlファイルをインポート..."
+
+#: mainwindow.cpp:298
+#, fuzzy
+msgid "Import Bibtexml Data"
+msgstr "Bibtexmlファイルをインポート..."
+
+#: mainwindow.cpp:299
+#, fuzzy
+msgid "Import a Bibtexml bibliography file"
+msgstr "Bibtexmlファイルをインポート..."
+
+#: mainwindow.cpp:305
+#, fuzzy
+msgid "Import XSL Transform"
+msgstr "XSL変換を使ってエクスポート..."
+
+#: mainwindow.cpp:306
+#, fuzzy
+msgid "Import using an XSL Transform"
+msgstr "XSL変換を使ってファイルにエクスポート"
+
+#: mainwindow.cpp:321
+#, fuzzy
+msgid "Export the collection data to other formats..."
+msgstr "コレクションの特定のブックだけにフィルタリング"
+
+#: mainwindow.cpp:325
+#, fuzzy
+msgid "Export to XML"
 msgstr "エクスポート(&X)"
 
-#: collections/videocollection.cpp:130
-msgid "Studio"
-msgstr ""
-
-#: collections/videocollection.cpp:136
+#: mainwindow.cpp:326
 #, fuzzy
-msgid "Language Tracks"
-msgstr "言語"
+msgid "Export to a Bookcase XML file"
+msgstr "Bibtexファイルにエクスポート..."
 
-#: collections/videocollection.cpp:142
+#: mainwindow.cpp:332
 #, fuzzy
-msgid "Subtitle Languages"
-msgstr "サブタイトル"
-
-#: collections/videocollection.cpp:148
-msgid "Audio Tracks"
-msgstr ""
-
-#: collections/videocollection.cpp:154
-msgid "Running Time"
-msgstr ""
-
-#: collections/videocollection.cpp:157
-msgid "The running time of the video (in minutes)"
-msgstr ""
-
-#: collections/videocollection.cpp:160
-msgid "Aspect Ratio"
-msgstr ""
-
-#: collections/videocollection.cpp:165
-msgid "Widescreen"
-msgstr ""
-
-#: collections/videocollection.cpp:170
-#, fuzzy
-msgid "Color"
+msgid "Export to HTML"
 msgstr "エクスポート(&X)"
 
-#: collections/videocollection.cpp:170
-msgid "Black & White"
-msgstr ""
-
-#: collections/videocollection.cpp:171
-msgid "Color Mode"
-msgstr ""
-
-#: collections/videocollection.cpp:176
-msgid "Director's Cut"
-msgstr ""
-
-#: collections/videocollection.cpp:180
-msgid "Plot Summary"
-msgstr ""
-
-#: collections/videocollection.cpp:184 collections/bookcollection.cpp:159
-#: collections/musiccollection.cpp:85
-msgid "5 - Best"
-msgstr "5 - 最良"
-
-#: collections/videocollection.cpp:184 collections/bookcollection.cpp:159
-#: collections/musiccollection.cpp:85
-msgid "4 - Good"
-msgstr "4 - よい"
-
-#: collections/videocollection.cpp:184 collections/bookcollection.cpp:159
-#: collections/musiccollection.cpp:85
-msgid "3 - Neutral"
-msgstr "3 - 普通"
-
-#: collections/videocollection.cpp:184 collections/bookcollection.cpp:159
-#: collections/musiccollection.cpp:85
-msgid "2 - Bad"
-msgstr "2 - 悪い"
-
-#: collections/videocollection.cpp:184 collections/bookcollection.cpp:159
-#: collections/musiccollection.cpp:85
-msgid "1 - Worst"
-msgstr "1 - 最悪"
-
-#: collections/videocollection.cpp:185
+#: mainwindow.cpp:333
 #, fuzzy
-msgid "Personal Rating"
-msgstr "個人"
+msgid "Export to an HTML file"
+msgstr "Bibtexファイルにエクスポート..."
 
-#: collections/videocollection.cpp:190 collections/bookcollection.cpp:65
-#: collections/musiccollection.cpp:91
-msgid "Purchase Date"
-msgstr "購入日"
+#: mainwindow.cpp:339
+#, fuzzy
+msgid "Export to CSV"
+msgstr "エクスポート(&X)"
 
-#: collections/videocollection.cpp:195 collections/bookcollection.cpp:150
-#: collections/musiccollection.cpp:96
-msgid "Gift"
-msgstr "贈呈"
+#: mainwindow.cpp:340
+#, fuzzy
+msgid "Export to a comma-separated values file"
+msgstr "Bibtexmlファイルにエクスポート..."
 
-#: collections/videocollection.cpp:199 collections/bookcollection.cpp:70
-#: collections/musiccollection.cpp:100
-msgid "Purchase Price"
-msgstr "購入価格"
+#: mainwindow.cpp:346
+#, fuzzy
+msgid "Export to PilotDB"
+msgstr "Bibtexファイルへエクスポート..."
 
-#: collections/videocollection.cpp:203 collections/bookcollection.cpp:154
-#: collections/musiccollection.cpp:104
-msgid "Loaned"
-msgstr "ローン"
+#: mainwindow.cpp:347
+#, fuzzy
+msgid "Export to a PilotDB database"
+msgstr "Bibtexファイルにエクスポート..."
 
-#: collections/videocollection.cpp:207 collections/bookcollection.cpp:165
-#: collections/musiccollection.cpp:108
-msgid "Comments"
+#: mainwindow.cpp:353
+#, fuzzy
+msgid "Export to Bibtex"
+msgstr "Bibtexファイルへエクスポート..."
+
+#: mainwindow.cpp:354
+#, fuzzy
+msgid "Export to a bibtex file"
+msgstr "Bibtexファイルにエクスポート..."
+
+#: mainwindow.cpp:360
+#, fuzzy
+msgid "Export to Bibtexml"
+msgstr "Bibtexmlファイルへエクスポート..."
+
+#: mainwindow.cpp:361
+#, fuzzy
+msgid "Export to a Bibtexml file"
+msgstr "Bibtexmlファイルにエクスポート..."
+
+#: mainwindow.cpp:367
+#, fuzzy
+msgid "Export XSL Transform"
+msgstr "XSL変換を使ってエクスポート..."
+
+#: mainwindow.cpp:368
+#, fuzzy
+msgid "Export using an XSL Transform"
+msgstr "XSL変換を使ってファイルにエクスポート"
+
+#: mainwindow.cpp:377
+msgid "Cut the selected text and puts it in the clipboard"
+msgstr ""
+
+#: mainwindow.cpp:379
+#, fuzzy
+msgid "Copy the selected text to the clipboard"
+msgstr "セレクションをクリップボードにコピー中..."
+
+#: mainwindow.cpp:381
+#, fuzzy
+msgid "Paste the clipboard contents"
+msgstr "クリップボードの内容を挿入中..."
+
+#: mainwindow.cpp:383
+#, fuzzy
+msgid "Select all the entries in the collection"
+msgstr "コレクションで選択された項目です。"
+
+#: mainwindow.cpp:385
+#, fuzzy
+msgid "Deselect all the entries in the collection"
+msgstr "コレクションで選択された項目です。"
+
+#: mainwindow.cpp:388
+#, fuzzy
+msgid "Search the collection"
+msgstr "コレクションの名前変更..."
+
+#: mainwindow.cpp:390
+#, fuzzy
+msgid "Find next match in the collection"
+msgstr "コレクションの分類を変更"
+
+#: mainwindow.cpp:394
+#, fuzzy
+msgid "Find previous match in the collection"
+msgstr "コレクションの分類を変更"
+
+#: mainwindow.cpp:401
+#, fuzzy
+msgid "New Entry"
+msgstr "ブック複製"
+
+#: mainwindow.cpp:404
+#, fuzzy
+msgid "Create a new entry"
+msgstr "新規ドキュメントを作成"
+
+#: mainwindow.cpp:405 entryeditdialog.cpp:41
+#, fuzzy
+msgid "Edit Entry"
+msgstr "ブック削除"
+
+#: mainwindow.cpp:408
+#, fuzzy
+msgid "Edit the selected entries"
+msgstr "複数のブックを削除しますか?"
+
+#: mainwindow.cpp:409
+#, fuzzy
+msgid "Copy Entry"
+msgstr "ブック複製"
+
+#: mainwindow.cpp:412
+#, fuzzy
+msgid "Copy the selected entries"
+msgstr "複数のブックを削除しますか?"
+
+#: mainwindow.cpp:413
+#, fuzzy
+msgid "Delete Entry"
+msgstr "削除"
+
+#: mainwindow.cpp:416
+#, fuzzy
+msgid "Delete the selected entries"
+msgstr "複数のブックを削除しますか?"
+
+#: mainwindow.cpp:417
+msgid "Rename Collection..."
+msgstr "コレクションの名前変更..."
+
+#: mainwindow.cpp:420
+#, fuzzy
+msgid "Rename the collection"
+msgstr "コレクションの名前変更..."
+
+#: mainwindow.cpp:421
+msgid "Collection Fields..."
+msgstr "コレクションの項目..."
+
+#: mainwindow.cpp:424
+msgid "Modify the collection fields"
+msgstr "コレクションの項目を編集..."
+
+#: mainwindow.cpp:425
+#, fuzzy
+msgid "Convert to Bibliography"
+msgstr "Bibtexmlファイルをインポート..."
+
+#: mainwindow.cpp:428
+#, fuzzy
+msgid "Convert a book collection to a bibliography"
+msgstr "Bibtexmlファイルをインポート..."
+
+#: mainwindow.cpp:429
+#, fuzzy
+msgid "String Macros..."
+msgstr "評価"
+
+#: mainwindow.cpp:432
+msgid "Edit the Bibtex string macros"
+msgstr ""
+
+#: mainwindow.cpp:442
+msgid "Enable/disable the toolbar"
+msgstr "ツールバーを有効/無効にする"
+
+#: mainwindow.cpp:443
+msgid "Show Co&llection ToolBar"
+msgstr "コレクションのツールバーを表示(&l)"
+
+#: mainwindow.cpp:446
+msgid "Enable/disable the collection toolbar"
+msgstr "コレクションのツールバーを有効/無効にする"
+
+#: mainwindow.cpp:453
+msgid "Enable/disable the statusbar"
+msgstr "ステータスバーを有効/無効にする"
+
+#: mainwindow.cpp:457
+#, fuzzy
+msgid "Show &Group View"
+msgstr "BCGroupView"
+
+#: mainwindow.cpp:460
+#, fuzzy
+msgid "Enable/disable the group view"
+msgstr "ツールバーを有効/無効にする"
+
+#: mainwindow.cpp:461
+msgid "Show Entry &Editor"
+msgstr ""
+
+#: mainwindow.cpp:464
+#, fuzzy
+msgid "Enable/disable the editor"
+msgstr "ツールバーを有効/無効にする"
+
+#: mainwindow.cpp:465
+#, fuzzy
+msgid "Show Entry &View"
+msgstr "BCGroupView"
+
+#: mainwindow.cpp:468
+#, fuzzy
+msgid "Enable/disable the entry view"
+msgstr "ツールバーを有効/無効にする"
+
+#: mainwindow.cpp:469
+msgid "Advanced Filter..."
+msgstr "上級フィルター..."
+
+#: mainwindow.cpp:472 mainwindow.cpp:502
+#, fuzzy
+msgid "Filter the collection"
+msgstr "コレクションの項目を編集..."
+
+#: mainwindow.cpp:483
+msgid "Tip of the &Day"
+msgstr ""
+
+#: mainwindow.cpp:487
+msgid "Show the \"Tip of the Day\" dialog..."
+msgstr ""
+
+#: mainwindow.cpp:492
+msgid "Group By:"
+msgstr "分類:"
+
+#: mainwindow.cpp:494 mainwindow.cpp:498
+msgid "Change the grouping of the collection"
+msgstr "コレクションの分類を変更"
+
+#: mainwindow.cpp:495
+#, fuzzy
+msgid "Group Selection"
+msgstr "分類オプション"
+
+#: mainwindow.cpp:500
+msgid "Quick Filter:"
+msgstr "クイックフィルター:"
+
+#: mainwindow.cpp:503
+#, fuzzy
+msgid "Filter Entry"
+msgstr "ブック削除"
+
+#: mainwindow.cpp:847
+msgid "Creating new document..."
+msgstr "新しいドキュメントを作成..."
+
+#: mainwindow.cpp:860 mainwindow.cpp:879 mainwindow.cpp:894
+msgid "Opening file..."
+msgstr "ファイルを開く..."
+
+#: mainwindow.cpp:870
+msgid "Open File..."
+msgstr "ファイルを開く..."
+
+#: mainwindow.cpp:928
+msgid "Saving file..."
+msgstr "ファイルを保存..."
+
+#: mainwindow.cpp:951
+msgid "Saving file with a new filename..."
+msgstr "新しいファイル名でファイルを保存..."
+
+#: mainwindow.cpp:991 mainwindow.cpp:1033
+msgid "Printing..."
+msgstr "印刷..."
+
+#: mainwindow.cpp:1001
+msgid ""
+"The collection is currently being filtered to show a limited subset of the "
+"entries. Only the visible entries will be printed. Continue?"
+msgstr ""
+
+#: mainwindow.cpp:1020
+msgid "Processing document..."
+msgstr "文書を処理中..."
+
+#: mainwindow.cpp:1040
+msgid "Exiting..."
+msgstr "終了中..."
+
+#: mainwindow.cpp:1233
+#, fuzzy
+msgid "Total Entries: %1"
+msgstr "削除"
+
+#: mainwindow.cpp:1239
+msgid "(%1 selected)"
+msgstr ""
+
+#: mainwindow.cpp:1351 translators/htmlexporter.cpp:183
+msgid "People"
+msgstr ""
+
+#: mainwindow.cpp:1402
+#, fuzzy
+msgid "Print %1"
+msgstr "印刷"
+
+#: mainwindow.cpp:1436
+msgid "Page %1"
+msgstr "%1 ページ"
+
+#: mainwindow.cpp:1463
+msgid "Bookcase encountered an error in XSLT processing.\n"
+msgstr "BookcaseはXSLT処理中にエラーに遭遇しました。\n"
+
+#: mainwindow.cpp:1464
+msgid "Please check your installation."
+msgstr "インストール上状況を確認して下さい。"
+
+#: mainwindow.cpp:1563
+#, fuzzy
+msgid "Importing data..."
+msgstr "エクスポート中..."
+
+#: mainwindow.cpp:1570
+#, fuzzy
+msgid "Import File..."
+msgstr "Bibtexファイルをインポート..."
+
+#: mainwindow.cpp:1609
+msgid ""
+"Only collections with the same type of entries as the current one can be "
+"appended. No changes are being made to the current collection"
+msgstr ""
+
+#: mainwindow.cpp:1632
+#, fuzzy
+msgid "Exporting data..."
+msgstr "エクスポート中..."
+
+#: mainwindow.cpp:1639
+#, fuzzy
+msgid "Export As"
+msgstr "エクスポート(&X)"
+
+#: mainwindow.cpp:1681
+#, fuzzy
+msgid "String Macros"
+msgstr "評価"
+
+#: mainwindow.cpp:1682
+msgid "Macro"
+msgstr ""
+
+#: mainwindow.cpp:1682
+#, fuzzy
+msgid "String"
+msgstr "評価"
+
+#: configdialog.moc.cpp:34 configdialog.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::ConfigDialog"
+msgstr "ConfigDialog"
+
+#: document.moc.cpp:34 document.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Data::Document"
+msgstr "BookcaseDoc"
+
+#: collection.moc.cpp:34 collection.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Data::Collection"
+msgstr "BookCollection"
+
+#: translators/csvexporter.cpp:43
+msgid "CSV"
+msgstr ""
+
+#: translators/csvexporter.cpp:58 translators/csvimporter.cpp:106
+#, fuzzy
+msgid "CSV Options"
+msgstr "項目オプション"
+
+#: translators/csvexporter.cpp:61
+msgid "Include field titles as column headers"
+msgstr ""
+
+#: translators/csvexporter.cpp:63
+#, fuzzy
+msgid "If checked, a header row will be added with the field titles."
+msgstr "チェックすると、ブックが選択した項目で分類されます。"
+
+#: translators/csvexporter.cpp:66 translators/csvimporter.cpp:125
+msgid "Delimiter"
+msgstr ""
+
+#: translators/csvexporter.cpp:69 translators/csvimporter.cpp:128
+msgid ""
+"In addition to a comma, other characters may be used as a delimiter, "
+"separating each value in the file."
+msgstr ""
+
+#: translators/csvexporter.cpp:73 translators/csvimporter.cpp:133
+#, fuzzy
+msgid "Comma"
 msgstr "コメント"
 
-#: collections/bookcollection.cpp:22 collections/bibtexcollection.cpp:23
+#: translators/csvexporter.cpp:75 translators/csvimporter.cpp:135
+msgid "Use a comma as the delimiter."
+msgstr ""
+
+#: translators/csvexporter.cpp:79 translators/csvimporter.cpp:139
+msgid "Semicolon"
+msgstr ""
+
+#: translators/csvexporter.cpp:80 translators/csvimporter.cpp:140
+msgid "Use a semi-colon as the delimiter."
+msgstr ""
+
+#: translators/csvexporter.cpp:84 translators/csvimporter.cpp:144
+#, fuzzy
+msgid "Tab"
+msgstr "タイトル"
+
+#: translators/csvexporter.cpp:85 translators/csvimporter.cpp:145
+msgid "Use a tab as the delimiter."
+msgstr ""
+
+#: translators/csvexporter.cpp:89 translators/csvimporter.cpp:149
+#, fuzzy
+msgid "Other"
+msgstr "the"
+
+#: translators/csvexporter.cpp:90 translators/csvimporter.cpp:150
+msgid "Use a custom string as the delimiter."
+msgstr ""
+
+#: translators/csvexporter.cpp:95 translators/csvimporter.cpp:155
+msgid "A custom string, such as a colon, may be used as a delimiter."
+msgstr ""
+
+#: translators/htmlexporter.cpp:42
+msgid "HTML"
+msgstr ""
+
+#: translators/htmlexporter.cpp:46
+#, fuzzy
+msgid "*.html|HTML files (*.html)"
+msgstr "*.xml|XMLファイル (*.xml)"
+
+#: translators/htmlexporter.cpp:57
+#, fuzzy
+msgid "HTML Options"
+msgstr "項目オプション"
+
+#: translators/htmlexporter.cpp:187
+#, fuzzy
+msgid "(grouped by %1; sorted by %2)"
+msgstr "(%1でソート)"
+
+#: translators/htmlexporter.cpp:189
+msgid "(sorted by %1)"
+msgstr "(%1でソート)"
+
+#: translators/bibtexexporter.cpp:43
+#, fuzzy
+msgid "Bibtex"
+msgstr "項目オプション"
+
+#: translators/bibtexexporter.cpp:58
+#, fuzzy
+msgid "Bibtex Options"
+msgstr "項目オプション"
+
+#: translators/bibtexexporter.cpp:61
+#, fuzzy
+msgid "Expand string macros"
+msgstr "評価"
+
+#: translators/bibtexexporter.cpp:63
+msgid ""
+"If checked, the string macros will be expanded and no @string{} entries will "
+"be written."
+msgstr ""
+
+#: translators/bibtexexporter.cpp:66
+msgid "Use URL package"
+msgstr ""
+
+#: translators/bibtexexporter.cpp:68
+#, fuzzy
+msgid "If checked, any URL fields will be wrapped in a \\url declaration."
+msgstr "チェックすると、項目名が表の見だしとして印刷されます。"
+
+#: translators/bibtexmlexporter.cpp:35
+#, fuzzy
+msgid "Bibtexml"
+msgstr "Bibtexmlファイルへエクスポート..."
+
+#: translators/bibtexmlexporter.cpp:39
+msgid "*.xml|Bibtexml files (*.xml)"
+msgstr "*.xml|Bibtexmlファイル (*.xml)"
+
+#: translators/csvimporter.cpp:110
+#, fuzzy
+msgid "Data Type:"
+msgstr "タイプ:"
+
+#: translators/csvimporter.cpp:112
+msgid "Select the type of collection being imported."
+msgstr ""
+
+#: translators/csvimporter.cpp:120
+msgid "First row contains field titles"
+msgstr ""
+
+#: translators/csvimporter.cpp:122
+#, fuzzy
+msgid "If checked, the first row is used as field titles."
+msgstr "チェックすると、検索文字列が正規表現として扱われます。"
+
+#: translators/csvimporter.cpp:180
+msgid "The table shows up to the first five lines of the CSV file."
+msgstr ""
+
+#: translators/csvimporter.cpp:186
+msgid ""
+"<qt>Set each column to correspond to a field in the collection by choosing a "
+"column, selecting the field, then clicking the <i>Set</i> button.</qt>"
+msgstr ""
+
+#: translators/csvimporter.cpp:188
+#, fuzzy
+msgid "Column:"
+msgstr "表示項目"
+
+#: translators/csvimporter.cpp:192
+#, fuzzy
+msgid "Data field in this column:"
+msgstr "コレクションの項目..."
+
+#: translators/csvimporter.cpp:195
+msgid "Set"
+msgstr ""
+
+#: translators/xsltexporter.cpp:38
+msgid "XSLT"
+msgstr ""
+
+#: translators/xsltexporter.cpp:53 translators/xsltimporter.cpp:72
+#, fuzzy
+msgid "XSLT Options"
+msgstr "項目オプション"
+
+#: translators/xsltexporter.cpp:57 translators/xsltimporter.cpp:73
+#, fuzzy
+msgid "XSLT File:"
+msgstr "タイトル:"
+
+#: translators/xsltexporter.cpp:59
+msgid "Choose the XSLT file used to transform the Bookcase XML data."
+msgstr ""
+
+#: translators/bibteximporter.cpp:41
+msgid "No valid Bibtex entries were found in file - %1"
+msgstr ""
+
+#: translators/pilotdbexporter.cpp:39
+msgid "PilotDB"
+msgstr ""
+
+#: translators/pilotdbexporter.cpp:43
+#, fuzzy
+msgid "*.pdb|Pilot Database files(*.pdb)"
+msgstr "*.bc|Bookcaseファイル (*.bc)"
+
+#: translators/pilotdbexporter.cpp:138
+#, fuzzy
+msgid "PilotDB Options"
+msgstr "項目オプション"
+
+#: translators/pilotdbexporter.cpp:141 translators/pilotdbexporter.cpp:143
+msgid "Set PDA backup flag for database"
+msgstr ""
+
+#: translators/bibtexhandler.cpp:187 translators/bookcaseimporter.cpp:221
+msgid "Unknown"
+msgstr "未知"
+
+#: translators/bookcasexmlexporter.cpp:51
+msgid "XML"
+msgstr ""
+
+#: translators/bookcasexmlexporter.cpp:66
+#, fuzzy
+msgid "Bookcase XML Options"
+msgstr "BookcaseDoc"
+
+#: translators/bookcasexmlexporter.cpp:69
+msgid "Include images in XML document"
+msgstr ""
+
+#: translators/bookcasexmlexporter.cpp:71
+msgid ""
+"If checked, the images in the document will be included in the XML stream as "
+"base64 encoded elements."
+msgstr ""
+
+#: translators/xsltimporter.cpp:46
+msgid "A valid XSLT file is needed to import the file."
+msgstr ""
+
+#: translators/dataimporter.moc.cpp:34 translators/dataimporter.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::DataImporter"
+msgstr "BookcaseDoc"
+
+#: translators/bookcaseimporter.cpp:109
+msgid "It is from a future version of Bookcase."
+msgstr "より新しいバージョンのBookcaseのものです。"
+
+#: translators/bookcaseimporter.cpp:114
+msgid ""
+"Bookcase is converting the file to a more recent document format. "
+"Information loss may occur if an older version of Bookcase is used to read "
+"this file in the future."
+msgstr ""
+
+#: translators/csvimporter.moc.cpp:34 translators/csvimporter.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::CSVImporter"
+msgstr "BookcaseDoc"
+
+#: translators/xsltimporter.moc.cpp:34 translators/xsltimporter.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::XSLTImporter"
+msgstr "BookcaseDoc"
+
+#: translators/bookcasezipexporter.cpp:33
+#, fuzzy
+msgid "Bookcase Zip File"
+msgstr "Bookcase"
+
+#: translators/bookcasezipexporter.cpp:37
+#, fuzzy
+msgid "*.bcz|Bookcase files(*.bcz)"
+msgstr "*.bc|Bookcaseファイル (*.bc)"
+
+#: translators/textimporter.moc.cpp:34 translators/textimporter.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::TextImporter"
+msgstr "BookcaseDoc"
+
+#: translators/bookcaseimporter.moc.cpp:34
+#: translators/bookcaseimporter.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::BookcaseImporter"
+msgstr "BookcaseDoc"
+
+#: translators/bibteximporter.moc.cpp:34 translators/bibteximporter.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::BibtexImporter"
+msgstr "BookcaseDoc"
+
+#: translators/bibtexmlimporter.moc.cpp:34
+#: translators/bibtexmlimporter.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::BibtexmlImporter"
+msgstr "インポート(&I)"
+
+#: translators/xmlimporter.moc.cpp:34 translators/xmlimporter.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::XMLImporter"
+msgstr "BookcaseDoc"
+
+#: translators/importer.moc.cpp:34 translators/importer.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Import::Importer"
+msgstr "BookcaseDoc"
+
+#: exportdialog.moc.cpp:34 exportdialog.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::ExportDialog"
+msgstr "BCFilterDialog"
+
+#: collections/bookcollection.cpp:22 collections/bibtexcollection.cpp:22
+#: collections/comicbookcollection.cpp:22
 msgid "Publishing"
 msgstr "出版"
 
-#: collections/bookcollection.cpp:23
+#: collections/bookcollection.cpp:23 collections/comicbookcollection.cpp:23
 msgid "Classification"
 msgstr "分類"
+
+#: collections/bookcollection.cpp:24 collections/videocollection.cpp:26
+#: collections/coincollection.cpp:22 collections/winecollection.cpp:22
+#: collections/cardcollection.cpp:22 collections/musiccollection.cpp:22
+#: collections/comicbookcollection.cpp:24 collections/stampcollection.cpp:23
+msgid "Personal"
+msgstr "個人"
 
 #: collections/bookcollection.cpp:27
 msgid "Books"
@@ -1825,177 +1798,675 @@ msgstr "ブック"
 msgid "My Books"
 msgstr "My Books"
 
-#: collections/bookcollection.cpp:46
+#: collections/bookcollection.cpp:45 collections/comicbookcollection.cpp:45
 msgid "Subtitle"
 msgstr "サブタイトル"
 
-#: collections/bookcollection.cpp:51 collections/bibtexcollection.cpp:81
+#: collections/bookcollection.cpp:50 collections/bibtexcollection.cpp:78
 msgid "Author"
 msgstr "著者"
 
-#: collections/bookcollection.cpp:58
+#: collections/bookcollection.cpp:57
 msgid "Hardback"
 msgstr "ハードカバー"
 
-#: collections/bookcollection.cpp:58
+#: collections/bookcollection.cpp:57
 msgid "Paperback"
 msgstr "文庫本"
 
-#: collections/bookcollection.cpp:58
+#: collections/bookcollection.cpp:57
 msgid "Trade Paperback"
 msgstr "新書"
 
-#: collections/bookcollection.cpp:59
+#: collections/bookcollection.cpp:58
 msgid "E-Book"
 msgstr "eブック"
 
-#: collections/bookcollection.cpp:59
+#: collections/bookcollection.cpp:58
 msgid "Magazine"
 msgstr "雑誌"
 
-#: collections/bookcollection.cpp:59 collections/bibtexcollection.cpp:159
+#: collections/bookcollection.cpp:58 collections/bibtexcollection.cpp:156
 msgid "Journal"
 msgstr "ジャーナル"
 
-#: collections/bookcollection.cpp:60
+#: collections/bookcollection.cpp:59
 msgid "Binding"
 msgstr "製本"
 
-#: collections/bookcollection.cpp:74 collections/bibtexcollection.cpp:122
+#: collections/bookcollection.cpp:64 collections/videocollection.cpp:189
+#: collections/coincollection.cpp:106 collections/winecollection.cpp:79
+#: collections/cardcollection.cpp:82 collections/musiccollection.cpp:84
+#: collections/comicbookcollection.cpp:124 collections/stampcollection.cpp:106
+msgid "Purchase Date"
+msgstr "購入日"
+
+#: collections/bookcollection.cpp:69 collections/videocollection.cpp:198
+#: collections/coincollection.cpp:111 collections/winecollection.cpp:84
+#: collections/cardcollection.cpp:87 collections/musiccollection.cpp:93
+#: collections/comicbookcollection.cpp:129 collections/stampcollection.cpp:111
+msgid "Purchase Price"
+msgstr "購入価格"
+
+#: collections/bookcollection.cpp:73 collections/bibtexcollection.cpp:119
+#: collections/comicbookcollection.cpp:73
 msgid "Publisher"
 msgstr "出版社"
 
-#: collections/bookcollection.cpp:80 collections/bibtexcollection.cpp:135
+#: collections/bookcollection.cpp:79 collections/bibtexcollection.cpp:132
+#: collections/comicbookcollection.cpp:79
 msgid "Edition"
 msgstr "版"
 
-#: collections/bookcollection.cpp:86
+#: collections/bookcollection.cpp:85
 msgid "Copyright Year"
 msgstr "著作年"
 
-#: collections/bookcollection.cpp:91
+#: collections/bookcollection.cpp:90 collections/comicbookcollection.cpp:85
 msgid "Publication Year"
 msgstr "出版年"
 
-#: collections/bookcollection.cpp:96
+#: collections/bookcollection.cpp:95
 msgid "ISBN#"
 msgstr "ISBN番号"
 
-#: collections/bookcollection.cpp:98
+#: collections/bookcollection.cpp:97
 msgid "International Standard Book Number"
 msgstr "国際標準図書番号"
 
-#: collections/bookcollection.cpp:101
+#: collections/bookcollection.cpp:100
 msgid "LCCN#"
 msgstr "LCCN番号"
 
-#: collections/bookcollection.cpp:103
+#: collections/bookcollection.cpp:102
 msgid "Library of Congress Control Number"
 msgstr "米国議会図書館制御番号"
 
-#: collections/bookcollection.cpp:106 collections/bibtexcollection.cpp:142
+#: collections/bookcollection.cpp:105 collections/bibtexcollection.cpp:139
+#: collections/comicbookcollection.cpp:90
 msgid "Pages"
 msgstr "ページ数"
 
-#: collections/bookcollection.cpp:110
+#: collections/bookcollection.cpp:109 collections/comicbookcollection.cpp:100
 msgid "Language"
 msgstr "言語"
 
-#: collections/bookcollection.cpp:122
+#: collections/bookcollection.cpp:114 collections/videocollection.cpp:66
+#: collections/musiccollection.cpp:67 collections/comicbookcollection.cpp:106
+msgid "Genre"
+msgstr "ジャンル"
+
+#: collections/bookcollection.cpp:121 collections/cardcollection.cpp:100
+#: collections/comicbookcollection.cpp:112
 msgid "Keywords"
 msgstr "キーワード"
 
-#: collections/bookcollection.cpp:127 collections/bibtexcollection.cpp:196
+#: collections/bookcollection.cpp:126 collections/bibtexcollection.cpp:193
+#: collections/cardcollection.cpp:71 collections/comicbookcollection.cpp:62
 msgid "Series"
 msgstr "シリーズ名"
 
-#: collections/bookcollection.cpp:132
+#: collections/bookcollection.cpp:131
 msgid "Series Number"
 msgstr "シリーズ番号"
 
-#: collections/bookcollection.cpp:137
+#: collections/bookcollection.cpp:136
 msgid "Used"
 msgstr "中古"
 
-#: collections/bookcollection.cpp:138
+#: collections/bookcollection.cpp:137 collections/comicbookcollection.cpp:120
+#: collections/stampcollection.cpp:22
 msgid "Condition"
 msgstr "状態"
 
-#: collections/bookcollection.cpp:142
+#: collections/bookcollection.cpp:141 collections/comicbookcollection.cpp:133
 msgid "Signed"
 msgstr "サイン"
 
-#: collections/bookcollection.cpp:146
+#: collections/bookcollection.cpp:145
 msgid "Read"
 msgstr "読了"
 
-#: collections/bookcollection.cpp:160 collections/musiccollection.cpp:86
+#: collections/bookcollection.cpp:149 collections/videocollection.cpp:194
+#: collections/coincollection.cpp:121 collections/winecollection.cpp:107
+#: collections/cardcollection.cpp:96 collections/musiccollection.cpp:89
+#: collections/comicbookcollection.cpp:137 collections/stampcollection.cpp:121
+msgid "Gift"
+msgstr "贈呈"
+
+#: collections/bookcollection.cpp:153 collections/videocollection.cpp:202
+#: collections/musiccollection.cpp:97 collections/comicbookcollection.cpp:141
+msgid "Loaned"
+msgstr "ローン"
+
+#: collections/bookcollection.cpp:158 collections/videocollection.cpp:183
+#: collections/musiccollection.cpp:78
+msgid "5 - Best"
+msgstr "5 - 最良"
+
+#: collections/bookcollection.cpp:158 collections/videocollection.cpp:183
+#: collections/musiccollection.cpp:78
+msgid "4 - Good"
+msgstr "4 - よい"
+
+#: collections/bookcollection.cpp:158 collections/videocollection.cpp:183
+#: collections/musiccollection.cpp:78
+msgid "3 - Neutral"
+msgstr "3 - 普通"
+
+#: collections/bookcollection.cpp:158 collections/videocollection.cpp:183
+#: collections/musiccollection.cpp:78
+msgid "2 - Bad"
+msgstr "2 - 悪い"
+
+#: collections/bookcollection.cpp:158 collections/videocollection.cpp:183
+#: collections/musiccollection.cpp:78
+msgid "1 - Worst"
+msgstr "1 - 最悪"
+
+#: collections/bookcollection.cpp:159 collections/winecollection.cpp:102
+#: collections/musiccollection.cpp:79
 msgid "Rating"
 msgstr "評価"
 
-#: collections/bibtexcollection.cpp:27
+#: collections/bookcollection.cpp:164 collections/videocollection.cpp:209
+#: collections/coincollection.cpp:131 collections/winecollection.cpp:111
+#: collections/cardcollection.cpp:115 collections/musiccollection.cpp:104
+#: collections/comicbookcollection.cpp:148 collections/stampcollection.cpp:128
+msgid "Comments"
+msgstr "コメント"
+
+#: collections/bookcollection.cpp:168 collections/comicbookcollection.cpp:145
+msgid "Front Cover"
+msgstr ""
+
+#: collections/videocollection.cpp:24
+msgid "Other People"
+msgstr ""
+
+#: collections/videocollection.cpp:25
+msgid "Features"
+msgstr ""
+
+#: collections/videocollection.cpp:29
+msgid "Videos"
+msgstr "ビデオ"
+
+#: collections/videocollection.cpp:30
+msgid "My Videos"
+msgstr "My Videos"
+
+#: collections/videocollection.cpp:48
+msgid "DVD"
+msgstr "DVD"
+
+#: collections/videocollection.cpp:48
+msgid "VHS"
+msgstr "VHS"
+
+#: collections/videocollection.cpp:48
+msgid "VCD"
+msgstr "ビデオCD"
+
+#: collections/videocollection.cpp:48
+msgid "DivX"
+msgstr "DivX"
+
+#: collections/videocollection.cpp:49 collections/musiccollection.cpp:45
+msgid "Medium"
+msgstr "Medium"
+
+#: collections/videocollection.cpp:54
+#, fuzzy
+msgid "Production Year"
+msgstr "出版年"
+
+#: collections/videocollection.cpp:60
+msgid "G (USA),PG (USA),PG-13 (USA),R (USA)"
+msgstr ""
+
+#: collections/videocollection.cpp:61
+#, fuzzy
+msgid "Certification"
+msgstr "分類"
+
+#: collections/videocollection.cpp:73
+msgid "Region 1"
+msgstr ""
+
+#: collections/videocollection.cpp:74
+msgid "Region 2"
+msgstr ""
+
+#: collections/videocollection.cpp:75
+msgid "Region 3"
+msgstr ""
+
+#: collections/videocollection.cpp:76
+msgid "Region 4"
+msgstr ""
+
+#: collections/videocollection.cpp:77
+msgid "Region 5"
+msgstr ""
+
+#: collections/videocollection.cpp:78
+msgid "Region 6"
+msgstr ""
+
+#: collections/videocollection.cpp:79
+msgid "Region 7"
+msgstr ""
+
+#: collections/videocollection.cpp:80
+msgid "Region 8"
+msgstr ""
+
+#: collections/videocollection.cpp:81
+msgid "Region"
+msgstr ""
+
+#: collections/videocollection.cpp:86
+msgid "Nationality"
+msgstr ""
+
+#: collections/videocollection.cpp:93
+msgid "NTSC"
+msgstr ""
+
+#: collections/videocollection.cpp:93
+msgid "PAL"
+msgstr ""
+
+#: collections/videocollection.cpp:93
+msgid "SECAM"
+msgstr ""
+
+#: collections/videocollection.cpp:94
+#, fuzzy
+msgid "Format"
+msgstr "フォーマットオプション"
+
+#: collections/videocollection.cpp:99
+#, fuzzy
+msgid "Cast"
+msgstr "カセット"
+
+#: collections/videocollection.cpp:102
+msgid "A table for the cast members, along with the roles they play"
+msgstr ""
+
+#: collections/videocollection.cpp:105
+msgid "Director"
+msgstr ""
+
+#: collections/videocollection.cpp:111 collections/winecollection.cpp:43
+#, fuzzy
+msgid "Producer"
+msgstr "出版年"
+
+#: collections/videocollection.cpp:117 collections/comicbookcollection.cpp:50
+msgid "Writer"
+msgstr ""
+
+#: collections/videocollection.cpp:123
+#, fuzzy
+msgid "Composer"
+msgstr "エクスポート(&X)"
+
+#: collections/videocollection.cpp:129
+msgid "Studio"
+msgstr ""
+
+#: collections/videocollection.cpp:135
+#, fuzzy
+msgid "Language Tracks"
+msgstr "言語"
+
+#: collections/videocollection.cpp:141
+#, fuzzy
+msgid "Subtitle Languages"
+msgstr "サブタイトル"
+
+#: collections/videocollection.cpp:147
+msgid "Audio Tracks"
+msgstr ""
+
+#: collections/videocollection.cpp:153
+msgid "Running Time"
+msgstr ""
+
+#: collections/videocollection.cpp:156
+msgid "The running time of the video (in minutes)"
+msgstr ""
+
+#: collections/videocollection.cpp:159
+msgid "Aspect Ratio"
+msgstr ""
+
+#: collections/videocollection.cpp:164
+msgid "Widescreen"
+msgstr ""
+
+#: collections/videocollection.cpp:169 collections/stampcollection.cpp:66
+#, fuzzy
+msgid "Color"
+msgstr "エクスポート(&X)"
+
+#: collections/videocollection.cpp:169
+msgid "Black & White"
+msgstr ""
+
+#: collections/videocollection.cpp:170
+msgid "Color Mode"
+msgstr ""
+
+#: collections/videocollection.cpp:175
+msgid "Director's Cut"
+msgstr ""
+
+#: collections/videocollection.cpp:179
+msgid "Plot Summary"
+msgstr ""
+
+#: collections/videocollection.cpp:184
+#, fuzzy
+msgid "Personal Rating"
+msgstr "個人"
+
+#: collections/videocollection.cpp:206 collections/musiccollection.cpp:101
+#, fuzzy
+msgid "Cover"
+msgstr "エクスポート(&X)"
+
+#: collections/coincollection.cpp:25
+#, fuzzy
+msgid "Coins"
+msgstr "は右の文字列を含む"
+
+#: collections/coincollection.cpp:26
+#, fuzzy
+msgid "My Coins"
+msgstr "My Songs"
+
+#: collections/coincollection.cpp:43 collections/winecollection.cpp:68
+#, fuzzy
+msgid "Type"
+msgstr "タイプ:"
+
+#: collections/coincollection.cpp:49 collections/stampcollection.cpp:50
+msgid "Denomination"
+msgstr ""
+
+#: collections/coincollection.cpp:54 collections/bibtexcollection.cpp:144
+#: collections/cardcollection.cpp:66 collections/musiccollection.cpp:62
+msgid "Year"
+msgstr "年"
+
+#: collections/coincollection.cpp:59
+msgid "Mint Mark"
+msgstr ""
+
+#: collections/coincollection.cpp:65 collections/winecollection.cpp:73
+#: collections/comicbookcollection.cpp:94 collections/stampcollection.cpp:55
+msgid "Country"
+msgstr ""
+
+#: collections/coincollection.cpp:71
+#, fuzzy
+msgid "Coin Set"
+msgstr "は右の文字列を含む"
+
+#: collections/coincollection.cpp:76
+msgid "Proof-65"
+msgstr ""
+
+#: collections/coincollection.cpp:77
+msgid "Proof-60"
+msgstr ""
+
+#: collections/coincollection.cpp:78
+msgid "Mint State-65"
+msgstr ""
+
+#: collections/coincollection.cpp:79
+msgid "Mint State-60"
+msgstr ""
+
+#: collections/coincollection.cpp:80
+msgid "Almost Uncirculated-55"
+msgstr ""
+
+#: collections/coincollection.cpp:81
+msgid "Almost Uncirculated-50"
+msgstr ""
+
+#: collections/coincollection.cpp:82
+msgid "Extremely Fine-40"
+msgstr ""
+
+#: collections/coincollection.cpp:83
+msgid "Very Fine-30"
+msgstr ""
+
+#: collections/coincollection.cpp:84
+msgid "Very Fine-20"
+msgstr ""
+
+#: collections/coincollection.cpp:85
+msgid "Fine-12"
+msgstr ""
+
+#: collections/coincollection.cpp:86
+msgid "Very Good-8"
+msgstr ""
+
+#: collections/coincollection.cpp:87 collections/comicbookcollection.cpp:119
+#, fuzzy
+msgid "Good"
+msgstr "4 - よい"
+
+#: collections/coincollection.cpp:88 collections/comicbookcollection.cpp:119
+msgid "Fair"
+msgstr ""
+
+#: collections/coincollection.cpp:89 collections/stampcollection.cpp:82
+#, fuzzy
+msgid "Grade"
+msgstr "ジャンル"
+
+#: collections/coincollection.cpp:95
+msgid "PCGS"
+msgstr ""
+
+#: collections/coincollection.cpp:96
+msgid "NGC"
+msgstr ""
+
+#: collections/coincollection.cpp:97
+msgid "ANACS"
+msgstr ""
+
+#: collections/coincollection.cpp:98
+msgid "ICG"
+msgstr ""
+
+#: collections/coincollection.cpp:99
+msgid "ASA"
+msgstr ""
+
+#: collections/coincollection.cpp:100
+msgid "PCI"
+msgstr ""
+
+#: collections/coincollection.cpp:101
+msgid "Grading Service"
+msgstr ""
+
+#: collections/coincollection.cpp:115 collections/winecollection.cpp:88
+#: collections/cardcollection.cpp:91 collections/stampcollection.cpp:115
+#, fuzzy
+msgid "Location"
+msgstr "BCCollection"
+
+#: collections/coincollection.cpp:125
+#, fuzzy
+msgid "Obverse"
+msgstr "上書き"
+
+#: collections/coincollection.cpp:128
+msgid "Reverse"
+msgstr ""
+
+#: collections/winecollection.moc.cpp:34 collections/winecollection.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Data::WineCollection"
+msgstr "BookCollection"
+
+#: collections/bibtexcollection.cpp:26
 #, fuzzy
 msgid "Entries"
 msgstr "シリーズ名"
 
-#: collections/bibtexcollection.cpp:72
+#: collections/bibtexcollection.cpp:69
 msgid "Entry Type"
 msgstr ""
 
-#: collections/bibtexcollection.cpp:77
+#: collections/bibtexcollection.cpp:74
 msgid ""
 "An article is from a journal or magazine. A book has an explicit publisher, "
 "while a booklet does not."
 msgstr ""
 
-#: collections/bibtexcollection.cpp:88
+#: collections/bibtexcollection.cpp:85
 #, fuzzy
 msgid "Bibtex Key"
 msgstr "項目オプション"
 
-#: collections/bibtexcollection.cpp:94
+#: collections/bibtexcollection.cpp:91
 #, fuzzy
 msgid "Book Title"
 msgstr "タイトル"
 
-#: collections/bibtexcollection.cpp:100
+#: collections/bibtexcollection.cpp:97
 #, fuzzy
 msgid "Editor"
 msgstr "版"
 
-#: collections/bibtexcollection.cpp:107
+#: collections/bibtexcollection.cpp:104
 msgid "Organization"
 msgstr ""
 
-#: collections/bibtexcollection.cpp:147 collections/musiccollection.cpp:69
-msgid "Year"
-msgstr "年"
-
-#: collections/bibtexcollection.cpp:168
+#: collections/bibtexcollection.cpp:165
 msgid "Month"
 msgstr ""
 
-#: collections/bibtexcollection.cpp:179
+#: collections/bibtexcollection.cpp:176
 #, fuzzy
 msgid "How Published"
 msgstr "出版社"
 
-#: collections/bibtexcollection.cpp:191
+#: collections/bibtexcollection.cpp:188
 #, fuzzy
 msgid "Chapter"
 msgstr "カテゴリー:"
 
-#: collections/bibtexcollection.cpp:203
+#: collections/bibtexcollection.cpp:200
 #, fuzzy
 msgid "Volume"
 msgstr "表示項目"
 
-#: collections/bibtexcollection.cpp:208
+#: collections/bibtexcollection.cpp:205
 msgid "Cross-Reference"
 msgstr ""
 
-#: collections/bibtexcollection.cpp:218
+#: collections/bibtexcollection.cpp:215
 msgid "Notes"
+msgstr ""
+
+#: collections/winecollection.cpp:25
+msgid "Wines"
+msgstr ""
+
+#: collections/winecollection.cpp:26
+#, fuzzy
+msgid "My Wines"
+msgstr "My Videos"
+
+#: collections/winecollection.cpp:49
+msgid "Appellation"
+msgstr ""
+
+#: collections/winecollection.cpp:55
+msgid "Varietal"
+msgstr ""
+
+#: collections/winecollection.cpp:61
+msgid "Vintage"
+msgstr ""
+
+#: collections/winecollection.cpp:67
+msgid "Red Wine"
+msgstr ""
+
+#: collections/winecollection.cpp:67
+msgid "White Wine"
+msgstr ""
+
+#: collections/winecollection.cpp:67
+msgid "Sparkling Wine"
+msgstr ""
+
+#: collections/winecollection.cpp:93 collections/cardcollection.cpp:105
+msgid "Quantity"
+msgstr ""
+
+#: collections/winecollection.cpp:97
+msgid "Drink By"
+msgstr ""
+
+#: collections/winecollection.cpp:114
+#, fuzzy
+msgid "Label Image"
+msgstr "タイトル"
+
+#: collections/cardcollection.cpp:25
+#, fuzzy
+msgid "Cards"
+msgstr "カセット"
+
+#: collections/cardcollection.cpp:26
+msgid "My Cards"
+msgstr ""
+
+#: collections/cardcollection.cpp:43
+msgid "Player"
+msgstr ""
+
+#: collections/cardcollection.cpp:49
+msgid "Team"
+msgstr ""
+
+#: collections/cardcollection.cpp:55
+msgid "Brand"
+msgstr ""
+
+#: collections/cardcollection.cpp:62
+#, fuzzy
+msgid "Card Number"
+msgstr "シリーズ番号"
+
+#: collections/cardcollection.cpp:77
+#, fuzzy
+msgid "Card Type"
+msgstr "タイプ:"
+
+#: collections/cardcollection.cpp:109
+msgid "Front Image"
+msgstr ""
+
+#: collections/cardcollection.cpp:112
+msgid "Back Image"
 msgstr ""
 
 #: collections/musiccollection.cpp:25
@@ -2007,70 +2478,251 @@ msgstr "アルバム"
 msgid "My Music"
 msgstr ""
 
-#: collections/musiccollection.cpp:45
-msgid "Compact Disc"
-msgstr ""
-
-#: collections/musiccollection.cpp:45
-msgid "Cassette"
-msgstr "カセット"
-
-#: collections/musiccollection.cpp:45
-msgid "Vinyl"
-msgstr ""
-
-#: collections/musiccollection.cpp:51
-msgid "Artist"
-msgstr "アーティスト"
-
-#: collections/musiccollection.cpp:57
+#: collections/musiccollection.cpp:37
 msgid "Album"
 msgstr "アルバム"
 
-#: collections/musiccollection.cpp:63
+#: collections/musiccollection.cpp:44
+msgid "Compact Disc"
+msgstr ""
+
+#: collections/musiccollection.cpp:44
+msgid "Cassette"
+msgstr "カセット"
+
+#: collections/musiccollection.cpp:44
+msgid "Vinyl"
+msgstr ""
+
+#: collections/musiccollection.cpp:50 collections/comicbookcollection.cpp:56
+msgid "Artist"
+msgstr "アーティスト"
+
+#: collections/musiccollection.cpp:56
 #, fuzzy
 msgid "Label"
 msgstr "タイトル"
 
-#: collections/musiccollection.cpp:80
+#: collections/musiccollection.cpp:73
 msgid "Tracks"
+msgstr ""
+
+#: collections/comicbookcollection.cpp:27
+msgid "Comics"
+msgstr ""
+
+#: collections/comicbookcollection.cpp:28
+#, fuzzy
+msgid "My Comic Books"
+msgstr "My Books"
+
+#: collections/comicbookcollection.cpp:68
+msgid "Issue"
+msgstr ""
+
+#: collections/comicbookcollection.cpp:118
+msgid "Mint"
+msgstr ""
+
+#: collections/comicbookcollection.cpp:118
+msgid "Near Mint"
+msgstr ""
+
+#: collections/comicbookcollection.cpp:118 collections/stampcollection.cpp:78
+msgid "Very Fine"
+msgstr ""
+
+#: collections/comicbookcollection.cpp:118 collections/stampcollection.cpp:79
+#, fuzzy
+msgid "Fine"
+msgstr "検索(&F)"
+
+#: collections/comicbookcollection.cpp:119
+msgid "Very Good"
+msgstr ""
+
+#: collections/comicbookcollection.cpp:119 collections/stampcollection.cpp:81
+#, fuzzy
+msgid "Poor"
+msgstr "エクスポート(&X)"
+
+#: collections/stampcollection.cpp:26
+msgid "Stamps"
+msgstr ""
+
+#: collections/stampcollection.cpp:27
+msgid "My Stamps"
+msgstr ""
+
+#: collections/stampcollection.cpp:44
+#, fuzzy
+msgid "Description"
+msgstr "記述:"
+
+#: collections/stampcollection.cpp:61
+msgid "Issue Year"
+msgstr ""
+
+#: collections/stampcollection.cpp:71
+msgid "Scott#"
+msgstr ""
+
+#: collections/stampcollection.cpp:76
+msgid "Superb"
+msgstr ""
+
+#: collections/stampcollection.cpp:77
+msgid "Extremely Fine"
+msgstr ""
+
+#: collections/stampcollection.cpp:80
+msgid "Average"
+msgstr ""
+
+#: collections/stampcollection.cpp:87
+msgid "Cancelled"
+msgstr ""
+
+#: collections/stampcollection.cpp:91
+#, fuzzy
+msgid "Hinged"
+msgstr "サイン"
+
+#: collections/stampcollection.cpp:96
+#, fuzzy
+msgid "Centering"
+msgstr "評価"
+
+#: collections/stampcollection.cpp:101
+msgid "Gummed"
+msgstr ""
+
+#: collections/stampcollection.moc.cpp:34
+#: collections/stampcollection.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Data::StampCollection"
+msgstr "BookCollection"
+
+#: collections/comicbookcollection.moc.cpp:34
+#: collections/comicbookcollection.moc.cpp:42
+msgid "Bookcase::Data::ComicBookCollection"
 msgstr ""
 
 #: collections/musiccollection.moc.cpp:34
 #: collections/musiccollection.moc.cpp:42
 #, fuzzy
-msgid "MusicCollection"
+msgid "Bookcase::Data::MusicCollection"
 msgstr "BCCollection"
 
 #: collections/bibtexcollection.moc.cpp:34
 #: collections/bibtexcollection.moc.cpp:42
 #, fuzzy
-msgid "BibtexCollection"
+msgid "Bookcase::Data::BibtexCollection"
 msgstr "BCCollection"
-
-#: collections/bookcollection.moc.cpp:34 collections/bookcollection.moc.cpp:42
-msgid "BookCollection"
-msgstr "BookCollection"
 
 #: collections/videocollection.moc.cpp:34
 #: collections/videocollection.moc.cpp:42
-msgid "VideoCollection"
+#, fuzzy
+msgid "Bookcase::Data::VideoCollection"
 msgstr "VideoCollection"
 
-#: bclabelaction.moc.cpp:34 bclabelaction.moc.cpp:42
-msgid "BCLabelAction"
-msgstr "BCLabelAction"
+#: collections/coincollection.moc.cpp:34 collections/coincollection.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Data::CoinCollection"
+msgstr "BookCollection"
 
-#: bclabelaction.moc.cpp:107 bclabelaction.moc.cpp:115
-msgid "BCLineEditAction"
-msgstr "BCLineEditAction"
+#: collections/bookcollection.moc.cpp:34 collections/bookcollection.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Data::BookCollection"
+msgstr "BookCollection"
 
-#: bcdetailedlistview.moc.cpp:34 bcdetailedlistview.moc.cpp:42
-msgid "BCDetailedListView"
+#: collections/cardcollection.moc.cpp:34 collections/cardcollection.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Data::CardCollection"
+msgstr "BookCollection"
+
+#: imagewidget.moc.cpp:34 imagewidget.moc.cpp:42
+msgid "Bookcase::ImageWidget"
+msgstr ""
+
+#: strings.h:24
+msgid "Bookcase is unable to load the file - %1."
+msgstr "Bookcaseはファイル %1 をロードできません。"
+
+#: strings.h:25
+msgid "Bookcase is unable to write the file - %1."
+msgstr "Bookcaseはファイル %1 を書きこめません。"
+
+#: strings.h:26
+msgid "Bookcase is unable to upload the file - %1."
+msgstr "Bookcaseはファイル %1 をアップロードできません。"
+
+#: finddialog.moc.cpp:34 finddialog.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::FindDialog"
+msgstr "FindDialog"
+
+#: tabcontrol.moc.cpp:34 tabcontrol.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::TabControl"
+msgstr "BookcaseDoc"
+
+#: fieldcompletion.moc.cpp:34 fieldcompletion.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::FieldCompletion"
+msgstr "BookCollection"
+
+#: controller.moc.cpp:34 controller.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::Controller"
+msgstr "BookcaseDoc"
+
+#: groupview.moc.cpp:34 groupview.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::GroupView"
+msgstr "BCGroupView"
+
+#: imagewidget.cpp:43
+#, fuzzy
+msgid "Select Image..."
+msgstr "XSLTファイルを選択..."
+
+#: detailedlistview.moc.cpp:34 detailedlistview.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::DetailedListView"
 msgstr "BCDetailedListView"
 
-#: bookcasedoc.moc.cpp:34 bookcasedoc.moc.cpp:42
-msgid "BookcaseDoc"
+#: importdialog.moc.cpp:34 importdialog.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::ImportDialog"
+msgstr "BCFilterDialog"
+
+#: labelaction.moc.cpp:34 labelaction.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::LabelAction"
+msgstr "BCLabelAction"
+
+#: labelaction.moc.cpp:107 labelaction.moc.cpp:115
+#, fuzzy
+msgid "Bookcase::LineEditAction"
+msgstr "BCLineEditAction"
+
+#: mainwindow.moc.cpp:34 mainwindow.moc.cpp:42
+msgid "Bookcase::MainWindow"
+msgstr ""
+
+#: entryeditdialog.moc.cpp:34 entryeditdialog.moc.cpp:42
+msgid "Bookcase::EntryEditDialog"
+msgstr ""
+
+#: collectionfieldsdialog.moc.cpp:34 collectionfieldsdialog.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::CollectionFieldsDialog"
+msgstr "BCCollectionPropDialog"
+
+#: entryview.moc.cpp:34 entryview.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::EntryView"
 msgstr "BookcaseDoc"
 
 #: rc.cpp:2
@@ -2088,79 +2740,75 @@ msgstr "インポート(&I)"
 msgid "&Export"
 msgstr "エクスポート..."
 
-#: rc.cpp:6
+#: rc.cpp:5
 #, fuzzy
-msgid "&New Collection"
-msgstr "コレクションの新しい名前"
+msgid "Co&llection"
+msgstr "BCCollection"
 
 #: rc.cpp:7
 msgid "Collection Toolbar"
 msgstr "コレクションツールバー"
 
-#: bctabcontrol.moc.cpp:34 bctabcontrol.moc.cpp:42
-msgid "BCTabControl"
-msgstr "BCTabControl"
-
-#: bcattributewidget.moc.cpp:34 bcattributewidget.moc.cpp:42
-msgid "BCAttributeWidget"
-msgstr "BCAttributeWidget"
-
-#: bccollectionfieldsdialog.moc.cpp:34 bccollectionfieldsdialog.moc.cpp:42
+#: entryeditdialog.cpp:42
 #, fuzzy
-msgid "BCCollectionFieldsDialog"
-msgstr "BCCollectionPropDialog"
+msgid "&New Entry"
+msgstr "ブック複製"
 
-#: bookcasecontroller.moc.cpp:34 bookcasecontroller.moc.cpp:42
+#: entryeditdialog.cpp:67 entryeditdialog.cpp:305 entryeditdialog.cpp:419
 #, fuzzy
-msgid "BookcaseController"
-msgstr "BookcaseDoc"
+msgid "Sa&ve Entry"
+msgstr "ブック複製"
 
-#: bcgroupview.moc.cpp:34 bcgroupview.moc.cpp:42
-msgid "BCGroupView"
-msgstr "BCGroupView"
+#: entryeditdialog.cpp:248
+msgid "Do you really want to modify these books?"
+msgstr "本当にこれらのブックを変更しますか?"
 
-#: bcuniteditwidget.moc.cpp:34 bcuniteditwidget.moc.cpp:42
-msgid "BCUnitEditWidget"
-msgstr "BCUnitEditWidget"
+#: entryeditdialog.cpp:250
+msgid "Modify Multiple Books?"
+msgstr "複数のブックを変更しますか?"
 
-#: configdialog.moc.cpp:34 configdialog.moc.cpp:42
-msgid "ConfigDialog"
-msgstr "ConfigDialog"
-
-#: finddialog.moc.cpp:34 finddialog.moc.cpp:42
-msgid "FindDialog"
-msgstr "FindDialog"
-
-#: bcexportdialog.moc.cpp:34 bcexportdialog.moc.cpp:42
+#: entryeditdialog.cpp:363
 #, fuzzy
-msgid "BCExportDialog"
-msgstr "BCFilterDialog"
+msgid "Sa&ve Entries"
+msgstr "削除"
 
-#: bccollection.moc.cpp:34 bccollection.moc.cpp:42
-msgid "BCCollection"
-msgstr "BCCollection"
-
-#: bcimportdialog.moc.cpp:34 bcimportdialog.moc.cpp:42
+#: entryeditdialog.cpp:489
 #, fuzzy
-msgid "BCImportDialog"
-msgstr "BCFilterDialog"
+msgid ""
+"The current entry has been modified.\n"
+"Do you want to enter the changes?"
+msgstr ""
+"現在のブックは変更されています。\n"
+"変更した内容を登録しますか?"
 
-#: stringmacrodialog.moc.cpp:34 stringmacrodialog.moc.cpp:42
+#: entryeditdialog.cpp:492
 #, fuzzy
-msgid "StringMacroDialog"
+msgid "Save Entry"
+msgstr "ブック複製"
+
+#: stringmapdialog.moc.cpp:34 stringmapdialog.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::StringMapDialog"
 msgstr "評価"
 
-#: bcfilterdialog.moc.cpp:34 bcfilterdialog.moc.cpp:42
-msgid "BCFilterRuleWidget"
+#: filterdialog.moc.cpp:34 filterdialog.moc.cpp:42
+#, fuzzy
+msgid "Bookcase::FilterRuleWidget"
 msgstr "BCFilterRuleWidget"
 
-#: bcfilterdialog.moc.cpp:122 bcfilterdialog.moc.cpp:130
-msgid "BCFilterRuleWidgetLister"
+#: filterdialog.moc.cpp:122 filterdialog.moc.cpp:130
+#, fuzzy
+msgid "Bookcase::FilterRuleWidgetLister"
 msgstr "BCFilterRuleWidgetLister"
 
-#: bcfilterdialog.moc.cpp:204 bcfilterdialog.moc.cpp:212
-msgid "BCFilterDialog"
+#: filterdialog.moc.cpp:204 filterdialog.moc.cpp:212
+#, fuzzy
+msgid "Bookcase::FilterDialog"
 msgstr "BCFilterDialog"
+
+#: fieldwidget.moc.cpp:34 fieldwidget.moc.cpp:42
+msgid "Bookcase::FieldWidget"
+msgstr ""
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -2260,9 +2908,75 @@ msgstr ""
 
 #: tips.cpp:71
 msgid ""
-"<p>...that you can import and export using any generic XSL stylesheet which\n"
+"<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Bookcase XML file.</p>\n"
 msgstr ""
+
+#~ msgid "Cutting selection..."
+#~ msgstr "セレクションをカット中..."
+
+#~ msgid "Toggling toolbar..."
+#~ msgstr "ツールバーをトグル中..."
+
+#~ msgid "Toggling collection toolbar..."
+#~ msgstr "コレクションツールバーをトグル中..."
+
+#~ msgid "Toggle the statusbar..."
+#~ msgstr "ステータスバーをトグル中..."
+
+#~ msgid "Bookcase is unable to find a required file - %1.\n"
+#~ msgstr "Bookcaseは必要なファイル %1 を見つけられませんでした。\n"
+
+#, fuzzy
+#~ msgid "Duplicate Entry"
+#~ msgstr "ブック複製"
+
+#, fuzzy
+#~ msgid "&Delete Entries"
+#~ msgstr "削除"
+
+#, fuzzy
+#~ msgid "&New Collection"
+#~ msgstr "コレクションの新しい名前"
+
+#~ msgid "BCUnitEditWidget"
+#~ msgstr "BCUnitEditWidget"
+
+#, fuzzy
+#~ msgid "TextImporter"
+#~ msgstr "インポート(&I)"
+
+#, fuzzy
+#~ msgid "Collection Type:"
+#~ msgstr "BCCollection"
+
+#, fuzzy
+#~ msgid "XSLTImporter"
+#~ msgstr "インポート(&I)"
+
+#, fuzzy
+#~ msgid "Importer"
+#~ msgstr "インポート(&I)"
+
+#, fuzzy
+#~ msgid "CSVImporter"
+#~ msgstr "エクスポート(&X)"
+
+#, fuzzy
+#~ msgid "BibtexImporter"
+#~ msgstr "インポート(&I)"
+
+#~ msgid "BCAttributeWidget"
+#~ msgstr "BCAttributeWidget"
+
+#~ msgid "Bookcase is unable to open the file - %1."
+#~ msgstr "Bookcaseはファイル %1 を開けません。"
+
+#~ msgid "Bookcase is unable to read the file - %1."
+#~ msgstr "Bookcaseはファイル %1 を読みこめません。"
+
+#~ msgid "BCTabControl"
+#~ msgstr "BCTabControl"
 
 #, fuzzy
 #~ msgid "Processing new entries..."
@@ -2307,17 +3021,6 @@ msgstr ""
 #~ msgid "Selected Fields"
 #~ msgstr "選択された項目"
 
-#~ msgid "These are the selected fields in the collection."
-#~ msgstr "コレクションで選択された項目です。"
-
-#, fuzzy
-#~ msgid "New C&ustom Collection"
-#~ msgstr "コレクションの新しい名前"
-
-#, fuzzy
-#~ msgid "Create a new collection"
-#~ msgstr "新規ドキュメントを作成"
-
 #, fuzzy
 #~ msgid "Import..."
 #~ msgstr "エクスポート..."
@@ -2354,10 +3057,6 @@ msgstr ""
 #~ msgstr "*.xsl|XSLTファイル (*.xsl)"
 
 #, fuzzy
-#~ msgid "Type"
-#~ msgstr "タイプ:"
-
-#, fuzzy
 #~ msgid "Institution"
 #~ msgstr "状態"
 
@@ -2388,9 +3087,6 @@ msgstr ""
 #~ msgid "Configure the options for the application..."
 #~ msgstr "アプリケーションのオプションを設定..."
 
-#~ msgid "Save as..."
-#~ msgstr "名前を付けて保存..."
-
 #~ msgid "%1 Total"
 #~ msgstr "%1の合計"
 
@@ -2403,17 +3099,8 @@ msgstr ""
 #~ msgid "Importing from Bibtexml..."
 #~ msgstr "Bibtexmlからインポート中..."
 
-#~ msgid "Select XSLT file..."
-#~ msgstr "XSLTファイルを選択..."
-
 #~ msgid "Song"
 #~ msgstr "歌"
 
 #~ msgid "CD"
 #~ msgstr "CD"
-
-#~ msgid "My Songs"
-#~ msgstr "My Songs"
-
-#~ msgid "SongCollection"
-#~ msgstr "SongCollection"

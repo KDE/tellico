@@ -1,8 +1,5 @@
 /***************************************************************************
-                               csvimporter.cpp
-                             -------------------
-    begin                : Wed Sep 24 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +12,7 @@
  ***************************************************************************/
 
 #include "csvimporter.h"
-#include "../bccollectionfieldsdialog.h"
+#include "../collectionfieldsdialog.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -36,26 +33,28 @@
 #include <qvaluevector.h>
 #include <qregexp.h>
 
+using Bookcase::Import::CSVImporter;
+
 const QChar CSVImporter::s_quote('"');
 
-CSVImporter::CSVImporter(const KURL& url_) : TextImporter(url_),
+CSVImporter::CSVImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_),
     m_coll(0),
     m_firstRowHeader(false),
     m_delimiter(QString::fromLatin1(",")),
     m_widget(0) {
 }
 
-BCCollection* CSVImporter::collection() {
+Bookcase::Data::Collection* CSVImporter::collection() {
   // don't just check if m_coll is non-null since the collection can be created elsewhere
-  if(!m_coll->unitList().isEmpty()) {
+  if(!m_coll->entryList().isEmpty()) {
     return m_coll;
   }
 
   if(!m_coll) {
     // iterate over the collection names until it matches the text of the combo box
-    for(CollectionNameMap::Iterator it = m_typeMap.begin(); it != m_typeMap.end(); ++it) {
+    for(CollectionNameMap::Iterator it = m_nameMap.begin(); it != m_nameMap.end(); ++it) {
       if(it.data() == m_comboType->currentText()) {
-        m_coll = BCCollectionFactory::collection(it.key(), true);
+        m_coll = CollectionFactory::collection(it.key(), true);
         break;
       }
     }
@@ -67,9 +66,9 @@ BCCollection* CSVImporter::collection() {
   QValueVector<int> cols;
   QStringList names;
   for(int col = 0; col < m_table->numCols(); ++col) {
-    if(m_coll->attributeTitles().findIndex(m_table->horizontalHeader()->label(col)) > -1) {
+    if(m_coll->fieldTitles().findIndex(m_table->horizontalHeader()->label(col)) > -1) {
       cols.push_back(col);
-      names << m_coll->attributeNameByTitle(m_table->horizontalHeader()->label(col));
+      names << m_coll->fieldNameByTitle(m_table->horizontalHeader()->label(col));
     }
   }
 
@@ -81,12 +80,12 @@ BCCollection* CSVImporter::collection() {
   int numLines = str.contains(QString::fromLatin1("\n"));
   int j = 0;
   for(QString line = t.readLine(); !line.isNull(); line = t.readLine(), ++j) {
-    BCUnit* unit = new BCUnit(m_coll);
+    Data::Entry* unit = new Data::Entry(m_coll);
     QStringList values = splitLine(line);
     for(unsigned i = 0; i < cols.size(); ++i) {
-      unit->setAttribute(names[i], values[cols[i]]);
+      unit->setField(names[i], values[cols[i]].simplifyWhiteSpace());
     }
-    m_coll->addUnit(unit);
+    m_coll->addEntry(unit);
     
     if(j%s_stepSize == 0) {
       emit signalFractionDone(static_cast<float>(j)/static_cast<float>(numLines));
@@ -108,11 +107,11 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   l->addWidget(group);
 
   QHBox* box = new QHBox(group);
-  (void) new QLabel(i18n("Collection Type:"), box);
+  (void) new QLabel(i18n("Data Type:"), box);
   m_comboType = new KComboBox(box);
   QWhatsThis::add(m_comboType, i18n("Select the type of collection being imported."));
-  m_typeMap = BCCollectionFactory::typeMap();
-  m_comboType->insertStringList(m_typeMap.values());
+  m_nameMap = CollectionFactory::nameMap();
+  m_comboType->insertStringList(m_nameMap.values());
   connect(m_comboType, SIGNAL(activated(const QString&)), SLOT(slotTypeChanged(const QString&)));
   // need a spacer
   QWidget*w = new QWidget(box);
@@ -190,7 +189,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   m_colSpinBox = new KIntSpinBox(hbox);
   m_colSpinBox->setMinValue(1);
   connect(m_colSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSelectColumn(int)));
-  (void) new QLabel(i18n("Collection field in this column:"), hbox);
+  (void) new QLabel(i18n("Data field in this column:"), hbox);
   m_comboField = new KComboBox(hbox);
   connect(m_comboField, SIGNAL(activated(int)), SLOT(slotFieldChanged(int)));
   m_setColumnBtn = new KPushButton(i18n("Set"), hbox);
@@ -312,18 +311,18 @@ void CSVImporter::fillTable() {
 
 void CSVImporter::slotTypeChanged(const QString& name_) {
   // iterate over the collection names until it matches the text of the combo box
-  for(CollectionNameMap::Iterator it = m_typeMap.begin(); it != m_typeMap.end(); ++it) {
+  for(CollectionNameMap::Iterator it = m_nameMap.begin(); it != m_nameMap.end(); ++it) {
     if(it.data() == name_) {
     // delete the old collection
       delete m_coll;
-      m_coll = BCCollectionFactory::collection(it.key(), true);
+      m_coll = CollectionFactory::collection(it.key(), true);
       break;
     }
   }
 
   updateHeader(true);
   m_comboField->clear();
-  m_comboField->insertStringList(m_coll->attributeTitles());
+  m_comboField->insertStringList(m_coll->fieldTitles());
   m_comboField->insertItem('<' + i18n("New Field") + '>');
 }
 
@@ -392,7 +391,7 @@ void CSVImporter::updateHeader(bool force_) {
   if(m_firstRowHeader || force_) {
     for(int col = 0; col < m_table->numCols(); ++col) {
       if(m_firstRowHeader && m_firstRowHeader
-         && m_coll->attributeByTitle(m_table->text(0, col)) != 0) {
+         && m_coll->fieldByTitle(m_table->text(0, col)) != 0) {
         m_table->horizontalHeader()->setLabel(col, m_table->text(0, col));
       } else {
         m_table->horizontalHeader()->setLabel(col, QString::number(col+1));
@@ -406,11 +405,11 @@ void CSVImporter::slotFieldChanged(int idx_) {
   if(idx_ < m_comboField->count()-1) {
     return;
   }
-  BCCollectionFieldsDialog dlg(m_coll, m_widget);
+  CollectionFieldsDialog dlg(m_coll, m_widget);
 //  dlg.setModal(true);
   if(dlg.exec() == QDialog::Accepted) {
     m_comboField->clear();
-    m_comboField->insertStringList(m_coll->attributeTitles());
+    m_comboField->insertStringList(m_coll->fieldTitles());
     m_comboField->insertItem('<' + i18n("New Field") + '>');
   }
   m_comboField->setCurrentItem(0);
