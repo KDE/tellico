@@ -66,7 +66,7 @@ namespace Bookcase {
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: mainwindow.h 739 2004-08-05 05:37:17Z robby $
+ * @version $Id: mainwindow.h 817 2004-08-27 07:50:40Z robby $
  */
 class MainWindow : public KMainWindow {
 Q_OBJECT
@@ -469,6 +469,7 @@ private:
   KAction* m_filePrint;
   KActionMenu* m_fileImportMenu;
   KActionMenu* m_fileExportMenu;
+  KAction* m_exportAlex;
   KAction* m_exportBibtex;
   KAction* m_exportBibtexml;
   KAction* m_editFind;

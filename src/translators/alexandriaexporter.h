@@ -11,31 +11,58 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef DATAEXPORTER_H
-#define DATAEXPORTER_H
+#ifndef ALEXANDRIAEXPORTER_H
+#define ALEXANDRIAEXPORTER_H
+
+class QDir;
 
 #include "exporter.h"
 
 namespace Bookcase {
+  namespace Data {
+    class Entry;
+  }
   namespace Export {
 
 /**
- * The DataExporter class is meant as an abstract class for any exporter which operates on binary files.
- *
  * @author Robby Stephenson
- * @version $Id: dataexporter.h 817 2004-08-27 07:50:40Z robby $
+ * @version $Id: alexandriaexporter.h 821 2004-08-27 23:26:04Z robby $
  */
-class DataExporter : public Exporter {
+class AlexandriaExporter : public Exporter {
 public:
-  DataExporter(const Data::Collection* coll) : Exporter(coll) {}
+  AlexandriaExporter(const Data::Collection* coll) : Exporter(coll) {}
 
-  // not used
-  virtual bool exportEntries(bool) const { return false; }
+  virtual QString formatString() const;
+  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual bool exportEntries(bool formatFields) const;
+
+  /**
+   * This should never get called.
+   */
+  virtual void readOptions(KConfig*) {}
+  /**
+   * This should never get called.
+   */
+  virtual void saveOptions(KConfig*) {}
+  /**
+   * This should never get called.
+   */
+  virtual QString fileFilter() const { return QString::null; }
+  /**
+   * This should never get called.
+   */
   virtual bool isText() const { return false; }
   /**
    * This should never get called.
    */
   virtual QString text(bool, bool) { return QString::null; }
+  /**
+   * This should never get called.
+   */
+  virtual QByteArray data(bool) { return QByteArray(); }
+
+private:
+  bool writeFile(const QDir& dir, Data::Entry* entry, bool formatFields) const;
 };
 
   } // end namespace

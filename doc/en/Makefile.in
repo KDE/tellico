@@ -54,6 +54,7 @@ AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
+CDDA_LIBS = @CDDA_LIBS@
 CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
@@ -80,6 +81,7 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+KCDDB_LIBS = @KCDDB_LIBS@
 KDECONFIG = @KDECONFIG@
 KDE_EXTRA_RPATH = @KDE_EXTRA_RPATH@
 KDE_INCLUDES = @KDE_INCLUDES@
@@ -165,6 +167,9 @@ RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+TAGLIB_CFLAGS = @TAGLIB_CFLAGS@
+TAGLIB_LIBS = @TAGLIB_LIBS@
+TAGLIB_RPATH = @TAGLIB_RPATH@
 TOPSUBDIRS = @TOPSUBDIRS@
 UIC = @UIC@
 UIC_TR = @UIC_TR@
@@ -326,9 +331,7 @@ TAGS:
 ctags: CTAGS
 CTAGS:
 
-#>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-#>+ 1
-DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
 top_distdir = ../..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
@@ -460,11 +463,8 @@ uninstall-am: uninstall-info-am
 .NOEXPORT:
 
 
-#>+ 2
-KDE_DIST=index.cache.bz2 
-
 #>+ 24
-index.cache.bz2: $(srcdir)/index.docbook $(KDE_XSL_STYLESHEET) index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png details.docbook fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png 
+index.cache.bz2: $(srcdir)/index.docbook $(KDE_XSL_STYLESHEET) index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook details.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png 
 	@if test -n "$(MEINPROC)"; then echo $(MEINPROC) --check --cache index.cache.bz2 $(srcdir)/index.docbook; $(MEINPROC) --check --cache index.cache.bz2 $(srcdir)/index.docbook; fi
 
 docs-am: index.cache.bz2
@@ -491,20 +491,20 @@ clean-docs:
 #>+ 13
 install-nls:
 	$(mkinstalldirs) $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase
-	@for base in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png details.docbook fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
+	@for base in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook details.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
 	  echo $(INSTALL_DATA) $$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
 	  $(INSTALL_DATA) $(srcdir)/$$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
 	done
 
 uninstall-nls:
-	for base in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png details.docbook fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
+	for base in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook details.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
 	  rm -f $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
 	done
 
 
 #>+ 5
 distdir-nls:
-	for file in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png details.docbook fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
+	for file in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook details.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
 	  cp $(srcdir)/$$file $(distdir); \
 	done
 

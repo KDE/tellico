@@ -265,17 +265,42 @@ void Document::mergeCollection(Collection* coll_) {
   }
 
   // FIXME: find a faster way than one-to-one comparison
-  for(EntryListIterator it(coll_->entryList()); it.current(); ++it) {
+  // music collection get a special case because of the audio file metadata might
+  // be read on a per-track basis, allow merging of entries with identical titles and artists
+  bool isMusic = (m_coll->type() == Collection::Album);
+  static const QString sep = QString::fromLatin1("; ");
+  static const QString artist = QString::fromLatin1("artist");
+  static const QString track = QString::fromLatin1("track");
+
+  EntryListIterator currIt(m_coll->entryList());
+  for(EntryListIterator newIt(coll_->entryList()); newIt.current(); ++newIt) {
     bool matches = false;
-    for(EntryListIterator it2(m_coll->entryList()); it2.current(); ++it2) {
-      if(*it2.current() == *it.current()) {
+    for(currIt.toFirst(); currIt.current(); ++currIt) {
+      if(isMusic && !newIt.current()->title().isEmpty() && !newIt.current()->field(artist).isEmpty()
+                 && newIt.current()->title() == currIt.current()->title()
+                 && newIt.current()->field(artist) == currIt.current()->field(artist)) {
+        matches = true;
+        // trackList 1 is collection to be merged, trackList2 is current collection
+        QStringList newTracks = Data::Field::split(newIt.current()->field(track), true);
+        QStringList currTracks = Data::Field::split(currIt.current()->field(track), true);
+        for(uint idx = 0; idx < newTracks.count(); ++idx) {
+          // only add track if current track id is empty or shorter
+          if(!newTracks[idx].isEmpty() && (idx >= currTracks.count() || currTracks[idx].isEmpty())) {
+            while(currTracks.count() <= idx) {
+              currTracks += QString::null;
+            }
+            currTracks[idx] = newTracks[idx];
+          }
+        }
+        currIt.current()->setField(track, currTracks.join(sep));
+      } else if(*currIt.current() == *newIt.current()) {
         matches = true;
         break;
       }
     }
     if(!matches) {
       // use constructor for different collection
-      m_coll->addEntry(new Entry(*it.current(), m_coll));
+      m_coll->addEntry(new Entry(*newIt.current(), m_coll));
     }
   }
   m_coll->blockSignals(false);
@@ -343,10 +368,10 @@ void Document::slotRenameCollection() {
   bool ok;
 #if KDE_IS_VERSION(3,1,90)
   QString newName = KInputDialog::getText(i18n("Rename Collection"), i18n("New Collection Name"),
-                    m_coll->title(), &ok, static_cast<QWidget*>(parent()));
+                    m_coll->title(), &ok, Kernel::self()->widget());
 #else
   QString newName = KLineEditDlg::getText(i18n("Rename Collection"), i18n("New Collection Name"),
-                    m_coll->title(), &ok, static_cast<QWidget*>(parent()));
+                    m_coll->title(), &ok, Kernel::self()->widget());
 #endif
   if(ok) {
     m_coll->setTitle(newName);
@@ -362,8 +387,7 @@ bool Document::isEmpty() const {
 
 void Document::search(const QString& text_, const QString& attTitle_, int options_) {
 //  kdDebug() << "Document::search() - looking for " << text_ << " in " << attTitle_ << endl;
-  MainWindow* app = static_cast<MainWindow*>(parent());
-  EntryItem* item = app->selectedOrFirstItem();
+  EntryItem* item = static_cast<MainWindow*>(Kernel::self()->widget())->selectedOrFirstItem();
   if(!item) {
 //    kdDebug() << "Document::search() - empty document" << endl;
     // doc has no items
@@ -484,7 +508,7 @@ void Document::search(const QString& text_, const QString& attTitle_, int option
   }
 
   // if this point is reached, no match was found
-  KMessageBox::information(app, i18n("Search string '%1' not found.").arg(text_));
+  KMessageBox::information(Kernel::self()->widget(), i18n("Search string '%1' not found.").arg(text_));
 }
 
 #include "document.moc"

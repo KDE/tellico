@@ -25,6 +25,7 @@
 #include "translators/bibtexmlexporter.h"
 #include "translators/xsltexporter.h"
 #include "translators/pilotdbexporter.h"
+#include "translators/alexandriaexporter.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -42,7 +43,7 @@ using Bookcase::ExportDialog;
 
 ExportDialog::ExportDialog(ExportFormat format_, Data::Collection* coll_, MainWindow* parent_, const char* name_)
     : KDialogBase(parent_, name_, true /*modal*/, i18n("Export Options"), Ok|Cancel),
-      m_coll(coll_), m_exporter(exporter(format_, parent_)) {
+      m_format(format_), m_coll(coll_), m_exporter(exporter(format_, parent_)) {
   QWidget* widget = new QWidget(this);
   QVBoxLayout* topLayout = new QVBoxLayout(widget, 0, spacingHint());
 
@@ -165,6 +166,10 @@ Bookcase::Export::Exporter* ExportDialog::exporter(ExportFormat format_, MainWin
       }
       break;
 
+    case Alexandria:
+      exporter = new Export::AlexandriaExporter(m_coll);
+      break;
+
     default:
       kdDebug() << "ExportDialog::exporter() - not implemented!" << endl;
       break;
@@ -175,7 +180,7 @@ Bookcase::Export::Exporter* ExportDialog::exporter(ExportFormat format_, MainWin
   return exporter;
 }
 
-bool ExportDialog::exportURL(const KURL& url_) const {
+bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
   if(!m_exporter) {
     return false;
   }
@@ -184,11 +189,26 @@ bool ExportDialog::exportURL(const KURL& url_) const {
   m_exporter->setURL(url_);
   m_exporter->setEntryList(m_exportSelected->isChecked() ? Controller::self()->selectedEntries() : m_coll->entryList());
 
-  if(m_exporter->isText()) {
-    bool encodeUTF8 = m_encodeUTF8->isChecked();
-    return FileHandler::writeTextURL(url_, m_exporter->text(m_formatFields->isChecked(), encodeUTF8), encodeUTF8);
+  if(exportTarget(m_format) == ExportNone) {
+    return m_exporter->exportEntries(m_formatFields->isChecked());
   } else {
-    return FileHandler::writeDataURL(url_, m_exporter->data(m_formatFields->isChecked()));
+    if(m_exporter->isText()) {
+      bool encodeUTF8 = m_encodeUTF8->isChecked();
+      return FileHandler::writeTextURL(url_, m_exporter->text(m_formatFields->isChecked(), encodeUTF8), encodeUTF8);
+    } else {
+      return FileHandler::writeDataURL(url_, m_exporter->data(m_formatFields->isChecked()));
+    }
+  }
+}
+
+// alexandria is exported to known directory
+// all others are files
+ExportDialog::ExportTarget ExportDialog::exportTarget(ExportFormat format_) {
+  switch(format_) {
+    case Alexandria:
+      return ExportNone;
+    default:
+      return ExportFile;
   }
 }
 

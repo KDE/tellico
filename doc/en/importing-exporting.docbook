@@ -12,11 +12,11 @@
 </para>
 
 <para>
-Searches may use four different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, or <guilabel>Keyword</guilabel>. Once a search is initiated, the <guilabel>Search</guilabel> button becomes <guilabel>Stop</guilabel> which will end a search. As results are found, they are added to the list directly under the search box, and selecting an item will show the result without adding it to the collection. Clicking the <guilabel>Add Entry</guilabel> button will add all the selected items to your collection. Clicking <guilabel>Clear</guilabel> will remove all the current results and reset the search.
+Searches may use four different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, or <guilabel>Keyword</guilabel>. Once a search is initiated, the <guibutton>Search</guibutton> button becomes <guibutton>Stop</guibutton> which will end a search. As results are found, they are added to the list directly under the search box, and selecting an item will show the result without adding it to the collection. Clicking the <guibutton>Add Entry</guibutton> button will add all the selected items to your collection. Clicking <guibutton>Clear</guibutton> will remove all the current results and reset the search.
 </para>
 
 <para>
-To facilitate the use of barcode scanners, searches can include multiple ISBN values, up to 10 at once. Selecting the <guilabel>Multiple ISBN search</guilabel> checkbox will disable the search box and enable the <guilabel>Edit ISBN list...</guilabel> button, which will open a multi-line text entry box. Each ISBN should be entered on a line by itself. After closing the box, each ISBN will be validated for correct formatting. The ISBN validation is able to convert 13-digit EAN values, as well as full <acronym>UPC</acronym> codes, to the proper formatting.
+To facilitate the use of barcode scanners, searches can include multiple ISBN values, up to 10 at once. Selecting the <guilabel>Multiple ISBN search</guilabel> checkbox will disable the search box and enable the <guibutton>Edit ISBN list...</guibutton> button, which will open a multi-line text entry box. Each ISBN should be entered on a line by itself. After closing the box, each ISBN will be validated for correct formatting. The ISBN validation is able to convert 13-digit EAN values, as well as full <acronym>UPC</acronym> codes, to the proper formatting.
 </para>
 
 <screenshot>
@@ -42,7 +42,7 @@ Using the Amazon Web Services, &bookcase; can search four different internationa
 <title>Importing Data</title>
 
 <para>
-&bookcase; offers three different actions when importing data. <guilabel>Replace collection</guilabel> indicates the current collection should be closed, and a new one created with the data from the imported file. <guilabel>Append collection</guilabel> tells &bookcase; to add all the entries in the imported collection to the current one, and to add any fields which don't currently exist. The <guilabel>Merge collection</guilabel> action is the same as appending, except that each imported entry is compared to the current ones, and any identical entries are skipped. Future plans include an improved heuristic for identifying matching entries, but currently, they must be identical for every field.
+&bookcase; offers three different actions when importing data. <guilabel>Replace collection</guilabel> indicates the current collection should be closed, and a new one created with the data from the imported file. <guilabel>Append collection</guilabel> tells &bookcase; to add all the entries in the imported collection to the current one, and to add any fields which don't currently exist. The <guilabel>Merge collection</guilabel> action is the same as appending, except that each imported entry is compared to the current ones, and any identical entries are skipped. Future plans include an improved heuristic for identifying matching entries, but currently, except for music collections, they must be identical for every field. Music collections compare the artist and album only, and the tracks are merged for matching entries. The <link linkend="importing-audio-files">audio file importer</link> is able to correctly build track lists by merging entries.
 </para>
 
 <sect2 id="importing-bookcase">
@@ -57,7 +57,7 @@ Other &bookcase; data files may be imported. Replacing the current collection by
 <title>Importing CSV Data</title>
 
 <para>
-Comma-separated values (CSV) are a common way of importing and exporting tabular data. Each field value is separated by a comma, with one entry per line. The field titles may be included in the first line. The CSV importer is not limited to using a comma as the separator. Any character or string may be used.
+Comma-separated values (<acronym>CSV</acronym>) are a common way of importing and exporting tabular data. Each field value is separated by a comma, with one entry per line. The field titles may be included in the first line. The CSV importer is not limited to using a comma as the separator. Any character or string may be used.
 </para>
 
 <screenshot>
@@ -83,11 +83,37 @@ Only the first five lines of the imported CSV file are shown in the dialog.
 
 </sect2>
 
-<sect2 id="importing-mods">
-<title>Importing MODS Data</title>
+<sect2 id="importing-audio">
+<title>Importing Audio CD Data</title>
 
 <para>
-<acronym><ulink url="http://www.loc.gov/standards/mods/">MODS</ulink></acronym> is a format for representing various types of media collections. Currently, only books may be imported to &bookcase;.
+&bookcase; is able to use the <ulink url="http://freedb.org">freedb.org</ulink> service to lookup
+information about a <acronym>CD</acronym>, including the track list.
+</para>
+</sect2>
+
+<sect2 id="importing-audio-files">
+<title>Importing Audio File Metadata</title>
+
+<para>
+&bookcase; is able to scan a directory and read the tags for common audio file formats, such as <literal role="extension">mp3</literal> and <literal role="extension">ogg</literal>. The songs are entered in a music collection, where each entry is an album. If the song files contain the track number, the song name is inserted in the correct spot in the track list. The artist and genre information is also added to the entry. If the song tags contain comments, they are appended to the comments field in the entry, preceded by the file name.
+</para>
+
+<para>
+In addition, if a directory contains a <filename>.directory</filename> file and the directory name matches an album title, the <literal>Icon</literal> entry in the desktop file is used as the cover image for the album.
+</para>
+
+<para>
+The audio file metadata importer can recursively scan a directory to find all audio files in any subdirectory, though symbolic links are not followed.
+</para>
+
+</sect2>
+
+<sect2 id="importing-alexandria">
+<title>Importing Alexandria Libraries</title>
+
+<para>
+<application><ulink url="http://alexandria.rubyforge.org">Alexandria</ulink></application> is a book collection manager for the <ulink url="http://www.gnome.org">Gnome</ulink> desktop environment. The importer offers a choice of importing any of the libraries found in <filename>$<envar>HOME</envar>/.alexandria</filename>.
 </para>
 
 </sect2>
@@ -108,16 +134,25 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 <title>Importing Bibtexml Data</title>
 
 <para>
-<ulink url="http://bibtexml.sf.net">Bibtexml</ulink> is an XML representation of bibtex data, and the data from the imported bibtexml file is treated in the same way as bibtex data would be.
+<ulink url="http://bibtexml.sf.net">Bibtexml</ulink> is an &xml; representation of bibtex data, and the data from the imported bibtexml file is treated in the same way as bibtex data would be.
+</para>
+
+</sect2>
+
+<sect2 id="importing-mods">
+<title>Importing MODS Data</title>
+
+<para>
+<acronym><ulink url="http://www.loc.gov/standards/mods/">MODS</ulink></acronym> is a format for representing various types of media collections. Currently, only books may be imported to &bookcase;.
 </para>
 
 </sect2>
 
 <sect2 id="importing-xslt">
-<title>Importing XML Data via XSLT</title>
+<title>Importing &xml; Data via XSLT</title>
 
 <para>
-Any XML file may be imported into &bookcase; provided an XSL stylesheet is available to convert the file to &bookcase; format. &bookcase; automatically loads the stylesheet and performs the XSLT processing needed to load the file.
+Any &xml; file may be imported into &bookcase; provided an XSL stylesheet is available to convert the file to &bookcase; format. &bookcase; automatically loads the stylesheet and performs the XSLT processing needed to load the file.
 </para>
 </sect2>
 
@@ -144,10 +179,10 @@ Exported text files, such as Bibtex or CSV, may use the Unicode (UTF-8) characte
 </screenshot>
 
 <sect2 id="exporting-xml">
-<title>Exporting XML</title>
+<title>Exporting &xml;</title>
 
 <para>
-The file format for &bookcase; data is a zipped XML file. Exporting to XML merely creates the XML file without zipping it. Images may be included in the XML file as base64-encoded data in an image element.
+The file format for &bookcase; data is a zipped &xml; file. Exporting to &xml; merely creates the &xml; file without zipping it. Images may be included in the &xml; file as base64-encoded data in an image element.
 </para>
 </sect2>
 
@@ -215,10 +250,10 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 </sect2>
 
 <sect2 id="exporting-xslt">
-<title>Exporting XML via XSLT</title>
+<title>Exporting &xml; via XSLT</title>
 
 <para>
-Finally, &bookcase; is able to process its internal XML representation of the collection data through an external XSL stylesheet before exporting. This type of export may be useful for generating text reports or other file types.
+Finally, &bookcase; is able to process its internal &xml; representation of the collection data through an external XSL stylesheet before exporting. This type of export may be useful for generating text reports or other file types.
 </para>
 </sect2>
 

@@ -62,11 +62,15 @@ QString Entry::field(const QString& fieldName_) const {
 }
 
 QString Entry::formattedField(const QString& fieldName_) const {
-  if(m_coll->fieldByName(fieldName_)->type() == Field::Dependent) {
-    return dependentValue(m_coll->fieldByName(fieldName_)->description(), true);
+  Field* f = m_coll->fieldByName(fieldName_);
+  if(!f) {
+    return QString::null;
+  }
+  if(f->type() == Field::Dependent) {
+    return dependentValue(f->description(), true);
   }
 
-  Field::FormatFlag flag = m_coll->fieldByName(fieldName_)->formatFlag();
+  Field::FormatFlag flag = f->formatFlag();
 
   // if auto format is not set or FormatNone, then just return the value
   if(flag == Field::FormatNone) {

@@ -16,7 +16,6 @@
 
 namespace Bookcase {
   namespace Data {
-    class Collection;
     class BibtexCollection;
   }
 }
@@ -24,10 +23,12 @@ class Entry;
 
 #include "textimporter.h"
 #include "../../config.h"
+extern "C" {
 #ifdef HAVE_LIBBTPARSE
 #include <btparse.h>
 #else
 #include "btparse/btparse.h"
+}
 #endif
 
 #include <qptrlist.h>
@@ -43,7 +44,7 @@ namespace Bookcase {
  * parse the text and generate a @ref BibtexCollection.
  *
  * @author Robby Stephenson
- * @version $Id: bibteximporter.h 731 2004-08-04 03:25:22Z robby $
+ * @version $Id: bibteximporter.h 828 2004-09-03 05:08:23Z robby $
  */
 class BibtexImporter : public TextImporter {
 Q_OBJECT
@@ -67,6 +68,7 @@ public:
    * @return A pointer to a @ref BibtexCollection, or 0 if none can be created.
    */
   virtual Data::Collection* collection();
+  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Bibtex); }
 
 private:
   QPtrList<AST> parseText(const QString& text) const;

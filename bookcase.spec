@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.10
+%define version 0.11
 %define release 1rls
 %define iconname %{name}.png
 %define __libtoolize /bin/true
@@ -9,13 +9,18 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 License: GPL
-Group: Office
+Group: Databases
 #Source: %{name}-%{version}.tar.gz
 Source: %{name}-%{version}.tar.gz
 URL: http://www.periapsis.org/bookcase/
 Requires: kdebase libxslt1 >= 1.0.19
+# needed for kcddb
+Requires: libkdemultimedia-kscd libcdda0
+# needed for audio file metadata import
+Requires: taglib
 BuildRequires: kdelibs-devel >= 3.1 libxslt-devel >= 1.0.19
-BuildRequires: ImageMagick libart_lgpl-devel
+BuildRequires: ImageMagick libart_lgpl-devel libtaglib-devel
+BuildRequires: libkdemultimedia-kscd-devel libcdda-devel
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
@@ -56,7 +61,7 @@ convert icons/%{name}.png -geometry 48x48 %{buildroot}%{_liconsdir}/%{iconname}
 convert icons/%{name}.png -geometry 32x32 %{buildroot}%{_iconsdir}/%{iconname} 
 convert icons/%{name}.png -geometry 16x16 %{buildroot}%{_miconsdir}/%{iconname} 
 
-kdedesktop2mdkmenu.pl bookcase "Office/Accessories"    %buildroot/%_datadir/applnk/Applications/bookcase.desktop                             %buildroot/%_menudir/bookcase 
+kdedesktop2mdkmenu.pl bookcase "More applications/Databases"    %buildroot/%_datadir/applnk/Applications/bookcase.desktop                             %buildroot/%_menudir/bookcase 
 
 %find_lang %{name}
 
@@ -84,6 +89,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
+* Thu Aug 26 2004 Robby Stephenson <robby@periapsis.org> 0.11-1rls
+- Version 0.11
+- Changed group to Databases
+- Added requires for taglib, libkcddb, and libcdda
+
 * Tue Aug 10 2004 Robby Stephenson <robby@periapsis.org> 0.10-1rls
 - Version 0.10
 

@@ -15,12 +15,14 @@
 
 #include <kdebug.h>
 
+extern "C" {
 #include <libxslt/xslt.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
 #include <libxslt/extensions.h>
 
 #include <libexslt/exslt.h>
+}
 
 #if LIBXML_VERSION >= 20600
 // I don't want any network I/O at all

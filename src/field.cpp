@@ -427,5 +427,5 @@ QStringList Field::typeTitles() {
 }
 
 QStringList Field::split(const QString& string_, bool allowEmpty_) {
-  return QStringList::split(s_delimiter, string_, allowEmpty_);
+  return string_.isEmpty() ? QStringList() : QStringList::split(s_delimiter, string_, allowEmpty_);
 }

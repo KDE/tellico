@@ -26,7 +26,7 @@ typedef QMap<Data::Collection::Type, QString> CollectionNameMap;
  * A factory class for dealing with the different types of collections.
  *
  * @author Robby Stephenson
- * @version $Id: collectionfactory.h 652 2004-05-11 04:57:03Z robby $
+ * @version $Id: collectionfactory.h 822 2004-08-27 23:27:34Z robby $
  */
 class CollectionFactory {
 public:

@@ -17,9 +17,8 @@
 class QCheckBox;
 class QRadioButton;
 
-class KURL;
-
 #include <kdialogbase.h>
+#include <kurl.h>
 
 namespace Bookcase {
   class MainWindow;
@@ -32,7 +31,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: exportdialog.h 759 2004-08-11 01:28:25Z robby $
+ * @version $Id: exportdialog.h 817 2004-08-27 07:50:40Z robby $
  */
 class ExportDialog : public KDialogBase {
 Q_OBJECT
@@ -46,14 +45,23 @@ public:
     CSV,
     XSLT,
     Text,
-    PilotDB
+    PilotDB,
+    Alexandria
+  };
+
+  enum ExportTarget {
+   ExportNone,
+   ExportFile,
+   ExportDir
   };
 
   ExportDialog(ExportFormat format, Data::Collection* coll, MainWindow* parent, const char* name);
   ~ExportDialog();
 
   QString fileFilter();
-  bool exportURL(const KURL& url) const;
+  bool exportURL(const KURL& url=KURL()) const;
+
+  static ExportTarget exportTarget(ExportFormat format);
 
 private slots:
   void slotSaveOptions();
@@ -62,6 +70,7 @@ private:
   void readOptions();
   Export::Exporter* exporter(ExportFormat format, MainWindow* bookcase_);
 
+  ExportFormat m_format;
   Data::Collection* m_coll;
   Export::Exporter* m_exporter;
   QCheckBox* m_formatFields;

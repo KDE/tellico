@@ -23,7 +23,7 @@ namespace Bookcase {
  * whether child items may be selected or not.
  *
  * @author Robby Stephenson
- * @version $Id: multiselectionlistview.h 737 2004-08-05 04:48:06Z robby $
+ * @version $Id: multiselectionlistview.h 810 2004-08-27 03:13:09Z robby $
  */
 class MultiSelectionListView : public KListView {
 Q_OBJECT
@@ -61,11 +61,11 @@ private:
 
 /**
  * @author Robby Stephenson
- * @version $Id: multiselectionlistview.h 737 2004-08-05 04:48:06Z robby $
+ * @version $Id: multiselectionlistview.h 810 2004-08-27 03:13:09Z robby $
  */
 class MultiSelectionListViewItem : public KListViewItem {
 public:
-  ~MultiSelectionListViewItem();
+  virtual ~MultiSelectionListViewItem();
 
   MultiSelectionListViewItem(MultiSelectionListView* parent) : KListViewItem(parent) {}
   MultiSelectionListViewItem(MultiSelectionListViewItem* parent) : KListViewItem(parent) {}

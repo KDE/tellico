@@ -53,6 +53,7 @@ AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
+CDDA_LIBS = @CDDA_LIBS@
 CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
@@ -79,6 +80,7 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+KCDDB_LIBS = @KCDDB_LIBS@
 KDECONFIG = @KDECONFIG@
 KDE_EXTRA_RPATH = @KDE_EXTRA_RPATH@
 KDE_INCLUDES = @KDE_INCLUDES@
@@ -164,6 +166,9 @@ RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+TAGLIB_CFLAGS = @TAGLIB_CFLAGS@
+TAGLIB_LIBS = @TAGLIB_LIBS@
+TAGLIB_RPATH = @TAGLIB_RPATH@
 TOPSUBDIRS = @TOPSUBDIRS@
 UIC = @UIC@
 UIC_TR = @UIC_TR@
@@ -261,7 +266,7 @@ noinst_LIBRARIES = libtranslators.a
 
 #>- libtranslators_a_METASOURCES = AUTO
 
-libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp
+libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp
 
 SUBDIRS = pilotdb $(am__append_1)
 
@@ -278,12 +283,15 @@ bibtexmlimporter.cpp     dataimporter.h           xsltexporter.h \
 bibtexmlimporter.h       exporter.h               xslthandler.cpp \
 bookcaseimporter.cpp     htmlexporter.cpp         xslthandler.h \
 bookcaseimporter.h       htmlexporter.h           xsltimporter.cpp \
-bookcasexmlexporter.cpp  importer.h               xsltimporter.h
+bookcasexmlexporter.cpp  importer.h               xsltimporter.h \
+audiofileimporter.h      audiofileimporter.cpp    alexandriaimporter.h \
+alexandriaimporter.cpp   alexandriaexporter.h     alexandriaexporter.cpp \
+freedbimporter.h         freedbimporter.cpp
 
 
 
 ####### kdevelop will overwrite this part!!! (end)############
-INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
+INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS)
 
 KDE_OPTIONS = noautodist
 
@@ -305,9 +313,11 @@ am_libtranslators_a_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	textimporter.$(OBJEXT) bibtexhandler.$(OBJEXT) \
 	bibtexmlexporter.$(OBJEXT) htmlexporter.$(OBJEXT) \
 	csvexporter.$(OBJEXT) bookcasezipexporter.$(OBJEXT) \
-	xmlimporter.$(OBJEXT) bookcaseimporter.$(OBJEXT)
+	xmlimporter.$(OBJEXT) bookcaseimporter.$(OBJEXT) \
+	audiofileimporter.$(OBJEXT) alexandriaimporter.$(OBJEXT) \
+	alexandriaexporter.$(OBJEXT) freedbimporter.$(OBJEXT)
 #>- libtranslators_a_OBJECTS = $(am_libtranslators_a_OBJECTS)
-#>+ 13
+#>+ 15
 libtranslators_a_final_OBJECTS = libtranslators_a.all_cpp.o 
 libtranslators_a_nofinal_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	bibtexexporter.$(OBJEXT) bibtexmlimporter.$(OBJEXT) \
@@ -317,7 +327,9 @@ libtranslators_a_nofinal_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	textimporter.$(OBJEXT) bibtexhandler.$(OBJEXT) \
 	bibtexmlexporter.$(OBJEXT) htmlexporter.$(OBJEXT) \
 	csvexporter.$(OBJEXT) bookcasezipexporter.$(OBJEXT) \
-	xmlimporter.$(OBJEXT) bookcaseimporter.$(OBJEXT)\
+	xmlimporter.$(OBJEXT) bookcaseimporter.$(OBJEXT) \
+	audiofileimporter.$(OBJEXT) alexandriaimporter.$(OBJEXT) \
+	alexandriaexporter.$(OBJEXT) freedbimporter.$(OBJEXT)\
 dataimporter.moc.o importer.moc.o 
 @KDE_USE_FINAL_FALSE@libtranslators_a_OBJECTS = $(libtranslators_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libtranslators_a_OBJECTS = $(libtranslators_a_final_OBJECTS)
@@ -325,7 +337,10 @@ dataimporter.moc.o importer.moc.o
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/admin/depcomp
 am__depfiles_maybe = depfiles
-#>- @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/bibtexexporter.Po \
+#>- @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/alexandriaexporter.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/alexandriaimporter.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/audiofileimporter.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bibtexexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bibtexhandler.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bibteximporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bibtexmlexporter.Po \
@@ -335,6 +350,7 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bookcasezipexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/csvexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/csvimporter.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/freedbimporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/htmlexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/pilotdbexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/textimporter.Po \
@@ -342,8 +358,11 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@	./$(DEPDIR)/xsltexporter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/xsltimporter.Po
-#>+ 34
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/dataimporter.moc.P  $(DEPDIR)/libtranslators_a.all_cpp.P ./$(DEPDIR)/bibtexexporter.Po \
+#>+ 42
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/dataimporter.moc.P  $(DEPDIR)/libtranslators_a.all_cpp.P ./$(DEPDIR)/alexandriaexporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/alexandriaimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/audiofileimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexhandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibteximporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexmlexporter.Po \
@@ -353,6 +372,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasezipexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/csvexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/csvimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/freedbimporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/htmlexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/pilotdbexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/textimporter.Po \
@@ -360,7 +380,10 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xsltexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xsltimporter.Po
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/dataimporter.moc.P ./$(DEPDIR)/bibtexexporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/dataimporter.moc.P ./$(DEPDIR)/alexandriaexporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/alexandriaimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/audiofileimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexhandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibteximporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexmlexporter.Po \
@@ -370,6 +393,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasezipexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/csvexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/csvimporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/freedbimporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/htmlexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/pilotdbexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/textimporter.Po \
@@ -445,6 +469,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/alexandriaexporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/alexandriaimporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/audiofileimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bibtexexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bibtexhandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bibteximporter.Po@am__quote@
@@ -455,6 +482,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcasezipexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csvexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csvimporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/freedbimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/htmlexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pilotdbexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/textimporter.Po@am__quote@
@@ -813,11 +841,32 @@ csvimporter.moc: $(srcdir)/csvimporter.h
 mocs: csvimporter.moc
 
 #>+ 3
+xsltimporter.moc: $(srcdir)/xsltimporter.h
+	$(MOC) $(srcdir)/xsltimporter.h -o xsltimporter.moc
+
+#>+ 2
+mocs: xsltimporter.moc
+
+#>+ 3
 textimporter.moc: $(srcdir)/textimporter.h
 	$(MOC) $(srcdir)/textimporter.h -o textimporter.moc
 
 #>+ 2
 mocs: textimporter.moc
+
+#>+ 3
+alexandriaimporter.moc: $(srcdir)/alexandriaimporter.h
+	$(MOC) $(srcdir)/alexandriaimporter.h -o alexandriaimporter.moc
+
+#>+ 2
+mocs: alexandriaimporter.moc
+
+#>+ 3
+freedbimporter.moc: $(srcdir)/freedbimporter.h
+	$(MOC) $(srcdir)/freedbimporter.h -o freedbimporter.moc
+
+#>+ 2
+mocs: freedbimporter.moc
 
 #>+ 3
 bookcaseimporter.moc: $(srcdir)/bookcaseimporter.h
@@ -827,13 +876,6 @@ bookcaseimporter.moc: $(srcdir)/bookcaseimporter.h
 mocs: bookcaseimporter.moc
 
 #>+ 3
-xmlimporter.moc: $(srcdir)/xmlimporter.h
-	$(MOC) $(srcdir)/xmlimporter.h -o xmlimporter.moc
-
-#>+ 2
-mocs: xmlimporter.moc
-
-#>+ 3
 bibteximporter.moc: $(srcdir)/bibteximporter.h
 	$(MOC) $(srcdir)/bibteximporter.h -o bibteximporter.moc
 
@@ -841,11 +883,18 @@ bibteximporter.moc: $(srcdir)/bibteximporter.h
 mocs: bibteximporter.moc
 
 #>+ 3
-xsltimporter.moc: $(srcdir)/xsltimporter.h
-	$(MOC) $(srcdir)/xsltimporter.h -o xsltimporter.moc
+xmlimporter.moc: $(srcdir)/xmlimporter.h
+	$(MOC) $(srcdir)/xmlimporter.h -o xmlimporter.moc
 
 #>+ 2
-mocs: xsltimporter.moc
+mocs: xmlimporter.moc
+
+#>+ 3
+audiofileimporter.moc: $(srcdir)/audiofileimporter.h
+	$(MOC) $(srcdir)/audiofileimporter.h -o audiofileimporter.moc
+
+#>+ 2
+mocs: audiofileimporter.moc
 
 #>+ 3
 bibtexmlimporter.moc: $(srcdir)/bibtexmlimporter.h
@@ -863,7 +912,7 @@ mocs: importer.moc.cpp
 
 #>+ 3
 clean-metasources:
-	-rm -f  dataimporter.moc.cpp csvimporter.moc textimporter.moc bookcaseimporter.moc xmlimporter.moc bibteximporter.moc xsltimporter.moc bibtexmlimporter.moc importer.moc.cpp
+	-rm -f  dataimporter.moc.cpp csvimporter.moc xsltimporter.moc textimporter.moc alexandriaimporter.moc freedbimporter.moc bookcaseimporter.moc bibteximporter.moc xmlimporter.moc audiofileimporter.moc bibtexmlimporter.moc importer.moc.cpp
 
 #>+ 2
 docs-am:
@@ -898,11 +947,11 @@ bcheck-am:
 
 
 #>+ 11
-libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/pilotdbexporter.cpp $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/bookcasexmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp $(srcdir)/bookcasezipexporter.cpp $(srcdir)/xmlimporter.cpp $(srcdir)/bookcaseimporter.cpp dataimporter.moc.cpp importer.moc.cpp  textimporter.moc csvimporter.moc bookcaseimporter.moc bibteximporter.moc xmlimporter.moc xsltimporter.moc bibtexmlimporter.moc
+libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/pilotdbexporter.cpp $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/bookcasexmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp $(srcdir)/bookcasezipexporter.cpp $(srcdir)/xmlimporter.cpp $(srcdir)/bookcaseimporter.cpp $(srcdir)/audiofileimporter.cpp $(srcdir)/alexandriaimporter.cpp $(srcdir)/alexandriaexporter.cpp $(srcdir)/freedbimporter.cpp dataimporter.moc.cpp importer.moc.cpp  csvimporter.moc xsltimporter.moc textimporter.moc alexandriaimporter.moc freedbimporter.moc bookcaseimporter.moc bibteximporter.moc xmlimporter.moc audiofileimporter.moc bibtexmlimporter.moc
 	@echo 'creating libtranslators_a.all_cpp.cpp ...'; \
 	rm -f libtranslators_a.all_cpp.files libtranslators_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libtranslators_a.all_cpp.final; \
-	for file in pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp dataimporter.moc.cpp importer.moc.cpp ; do \
+	for file in pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp dataimporter.moc.cpp importer.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> libtranslators_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libtranslators_a.all_cpp.final; \
 	done; \
@@ -937,15 +986,18 @@ cvs-clean:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 17
+#>+ 23
 bibtexmlimporter.lo: bibtexmlimporter.moc 
+alexandriaimporter.lo: alexandriaimporter.moc 
 csvimporter.lo: csvimporter.moc 
 csvimporter.o: csvimporter.moc 
+audiofileimporter.lo: audiofileimporter.moc 
 xmlimporter.o: xmlimporter.moc 
 bibteximporter.o: bibteximporter.moc 
-xsltimporter.lo: xsltimporter.moc 
 bookcaseimporter.o: bookcaseimporter.moc 
+xsltimporter.lo: xsltimporter.moc 
 bibtexmlimporter.o: bibtexmlimporter.moc 
+audiofileimporter.o: audiofileimporter.moc 
 xsltimporter.o: xsltimporter.moc 
 textimporter.lo: textimporter.moc 
 nmcheck: 
@@ -954,3 +1006,6 @@ textimporter.o: textimporter.moc
 nmcheck-am: nmcheck
 bookcaseimporter.lo: bookcaseimporter.moc 
 bibteximporter.lo: bibteximporter.moc 
+freedbimporter.o: freedbimporter.moc 
+freedbimporter.lo: freedbimporter.moc 
+alexandriaimporter.o: alexandriaimporter.moc 

@@ -302,6 +302,20 @@ void MainWindow::initActions() {
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, ImportDialog::CSV);
 
+  action = new KAction(actionCollection(), "file_import_mods");
+  action->setText(i18n("Import MODS Data"));
+  action->setToolTip(i18n("Import a MODS data file"));
+  m_fileImportMenu->insert(action);
+  connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
+  importMapper->setMapping(action, ImportDialog::MODS);
+
+  action = new KAction(actionCollection(), "file_import_alexandria");
+  action->setText(i18n("Import Alexandria Data"));
+  action->setToolTip(i18n("Import data from the Alexandria book collection manager"));
+  m_fileImportMenu->insert(action);
+  connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
+  importMapper->setMapping(action, ImportDialog::Alexandria);
+
   action = new KAction(actionCollection(), "file_import_bibtex");
   action->setText(i18n("Import Bibtex Data"));
   action->setToolTip(i18n("Import a Bibtex bibliography file"));
@@ -316,12 +330,25 @@ void MainWindow::initActions() {
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, ImportDialog::Bibtexml);
 
-  action = new KAction(actionCollection(), "file_import_mods");
-  action->setText(i18n("Import MODS Data"));
-  action->setToolTip(i18n("Import a MODS data file"));
+  action = new KAction(actionCollection(), "file_import_audiofile");
+  action->setText(i18n("Import Audio File Metadata"));
+  action->setToolTip(i18n("Import meta-data from audio files"));
   m_fileImportMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
-  importMapper->setMapping(action, ImportDialog::MODS);
+  importMapper->setMapping(action, ImportDialog::AudioFile);
+#if !HAVE_TAGLIB
+  action->setEnabled(false);
+#endif
+
+  action = new KAction(actionCollection(), "file_import_freedb");
+  action->setText(i18n("Import Audio CD Data"));
+  action->setToolTip(i18n("Import audio CD information from FreeDB"));
+  m_fileImportMenu->insert(action);
+  connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
+  importMapper->setMapping(action, ImportDialog::FreeDB);
+#if !HAVE_KCDDB
+  action->setEnabled(false);
+#endif
 
   action = new KAction(actionCollection(), "file_import_xslt");
   action->setText(i18n("Import XSL Transform"));
@@ -370,6 +397,13 @@ void MainWindow::initActions() {
   m_fileExportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, ExportDialog::PilotDB);
+
+  m_exportAlex = new KAction(actionCollection(), "file_export_alexandria");
+  m_exportAlex->setText(i18n("Export to Alexandria"));
+  m_exportAlex->setToolTip(i18n("Export to an Alexandria library"));
+  m_fileExportMenu->insert(m_exportAlex);
+  connect(m_exportAlex, SIGNAL(activated()), exportMapper, SLOT(map()));
+  exportMapper->setMapping(m_exportAlex, ExportDialog::Alexandria);
 
   m_exportBibtex = new KAction(actionCollection(), "file_export_bibtex");
   m_exportBibtex->setText(i18n("Export to Bibtex"));
@@ -1302,6 +1336,7 @@ void MainWindow::slotEnableOpenedActions() {
   if(Kernel::self()->collection()) {
     Data::Collection::Type type = Kernel::self()->collection()->type();
     bool isBibtex = (type == Data::Collection::Bibtex);
+    m_exportAlex->setEnabled(isBibtex || type == Data::Collection::Book);
     m_exportBibtex->setEnabled(isBibtex);
     m_exportBibtexml->setEnabled(isBibtex);
     m_convertBibtex->setEnabled(type == Data::Collection::Book);
@@ -1636,11 +1671,28 @@ void MainWindow::slotFileImport(int format_) {
   m_quickFilter->clear();
 
   ImportDialog::ImportFormat format = static_cast<ImportDialog::ImportFormat>(format_);
+  bool checkURL = true;
   KURL url;
-  if(ImportDialog::selectFileFirst(format)) {
-    url = KFileDialog::getOpenURL(QString::fromLatin1(":import"), ImportDialog::fileFilter(format),
-                                   this, i18n("Import File..."));
-    bool ok = url.isValid();
+  switch(ImportDialog::importTarget(format)) {
+    case ImportDialog::ImportFile:
+      url = KFileDialog::getOpenURL(QString::fromLatin1(":import"), ImportDialog::fileFilter(format),
+                                    this, i18n("Import File..."));
+      break;
+
+    case ImportDialog::ImportDir:
+      // TODO: allow remote audiofile importing
+      url.setPath(KFileDialog::getExistingDirectory(QString::fromLatin1(":import"),
+                                                    this, i18n("Import File...")));
+      break;
+
+    case ImportDialog::ImportNone:
+    default:
+      checkURL = false;
+      break;
+  }
+
+  if(checkURL) {
+    bool ok = !url.isEmpty() && url.isValid();
 #if KDE_IS_VERSION(3,1,90)
     ok &= KIO::NetAccess::exists(url, true, this);
 #else
@@ -1726,35 +1778,51 @@ void MainWindow::slotFileImport(int format_) {
 void MainWindow::slotFileExport(int format_) {
   slotStatusMsg(i18n("Exporting data..."));
 
-  ExportDialog dlg(static_cast<ExportDialog::ExportFormat>(format_),
-                   Kernel::self()->collection(), this, "exportdialog");
+  ExportDialog::ExportFormat format = static_cast<ExportDialog::ExportFormat>(format_);
+  ExportDialog dlg(format, Kernel::self()->collection(), this, "exportdialog");
 
-  if(dlg.exec() == QDialog::Accepted) {
-    KFileDialog fileDlg(QString::fromLatin1(":export"), dlg.fileFilter(), this, "filedialog", true);
-    fileDlg.setCaption(i18n("Export As"));
-    fileDlg.setOperationMode(KFileDialog::Saving);
+  if(dlg.exec() == QDialog::Rejected) {
+    slotStatusMsg(i18n(ready));
+    return;
+  }
 
-    int result = fileDlg.exec();
-    if(result == QDialog::Rejected) {
-      slotStatusMsg(i18n(ready));
-      return;
-    }
+  switch(ExportDialog::exportTarget(format)) {
+    case ExportDialog::ExportNone:
+      dlg.exportURL();
+      break;
 
-    KURL url = fileDlg.selectedURL();
+    case ExportDialog::ExportDir:
+      kdDebug() << "MainWindow::slotFileExport() - ExportDir not implemented!" << endl;
+      break;
 
-    // if the file has no extension, add it automatically, based on the current filter
-    if(url.fileName().contains('.') == 0) {
-      QString cf = fileDlg.currentFilter();
-      if(cf.length() > 1 && cf[1] == '.') {
-        url.setFileName(url.fileName() + cf.mid(1));
+    case ExportDialog::ExportFile:
+    {
+      KFileDialog fileDlg(QString::fromLatin1(":export"), dlg.fileFilter(), this, "filedialog", true);
+      fileDlg.setCaption(i18n("Export As"));
+      fileDlg.setOperationMode(KFileDialog::Saving);
+
+      if(fileDlg.exec() == QDialog::Rejected) {
+        slotStatusMsg(i18n(ready));
+        return;
+      }
+
+      KURL url = fileDlg.selectedURL();
+
+      // if the file has no extension, add it automatically, based on the current filter
+      if(url.fileName().contains('.') == 0) {
+        QString cf = fileDlg.currentFilter();
+        if(cf.length() > 1 && cf[1] == '.') {
+          url.setFileName(url.fileName() + cf.mid(1));
+        }
+      }
+
+      if(!url.isEmpty()) {
+        kapp->setOverrideCursor(Qt::waitCursor);
+        dlg.exportURL(url);
+        kapp->restoreOverrideCursor();
       }
     }
-
-    if(!url.isEmpty()) {
-      kapp->setOverrideCursor(Qt::waitCursor);
-      dlg.exportURL(url);
-      kapp->restoreOverrideCursor();
-    }
+    break;
   }
 
   slotStatusMsg(i18n(ready));

@@ -1,240 +1,221 @@
-# translation of bookcase.po to Bulgarian
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# Boyan Ivanov <boyan17@bulgaria.com>, 2003
+# translation of nb.po to Norsk bokmål
+# translation of nb.po to
+# translation of nb.po to Norsk Bokmål
+# translation of nb.po to Norsk Bokm?
+# This file is distributed under the same license as the Bookcase package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# First translation by Leif Mathis Gaup <lmgaup@nsn.no>, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: bookcase\n"
-"POT-Creation-Date: 2004-08-22 17:50-0700\n"
-"PO-Revision-Date: 2003-07-01 11:27+0300\n"
-"Last-Translator: Boyan Ivanov <boyan17@bulgaria.com>\n"
-"Language-Team: Bulgarian <bg@li.org>\n"
+"Project-Id-Version: nb\n"
+"POT-Creation-Date: 2004-09-02 22:41-0700\n"
+"PO-Revision-Date: 2004-08-25 14:59+0200\n"
+"Last-Translator: Leif Mathis Gaup <lmgaup@nsn.no>\n"
+"Language-Team: Norsk bokmål\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
-"X-Generator: KBabel 1.0.1\n"
+"X-Generator: KBabel 1.3.1\n"
 
-#: exportdialog.cpp:44
-#, fuzzy
+#: exportdialog.cpp:45
 msgid "Export Options"
-msgstr "Опции за форматиране"
+msgstr "Valg for eksport"
 
-#: exportdialog.cpp:49
-#, fuzzy
+#: exportdialog.cpp:50
 msgid "Formatting"
-msgstr "Без форматиране"
+msgstr "Formatering"
 
-#: exportdialog.cpp:51
-#, fuzzy
+#: exportdialog.cpp:52
 msgid "Format all fields"
-msgstr "Форматиране като заглавие"
+msgstr "Formater alle felter"
 
-#: exportdialog.cpp:53
-#, fuzzy
+#: exportdialog.cpp:54
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
-"Ако е избрано,заглавията и имената ще "
-"бъдат форматирани автоматично."
+"Om slått på vil felter bli automatisk formatert i henhold til sin "
+"format-type."
 
-#: exportdialog.cpp:55
-#, fuzzy
+#: exportdialog.cpp:56
 msgid "Export selected entries only"
-msgstr "Изтриване на няколко книги ?"
+msgstr "Eksporter kun valgte innslag"
 
-#: exportdialog.cpp:57
-#, fuzzy
+#: exportdialog.cpp:58
 msgid "If checked, only the currently selected entries will be exported."
-msgstr ""
-"Ако е избрано,заглавията на полетата ще "
-"бъдат отпечатани."
+msgstr "Påslått vil kun valgte innslag bli eksportert."
 
-#: exportdialog.cpp:60
-#, fuzzy
+#: exportdialog.cpp:61
 msgid "Encoding"
-msgstr "Корица"
+msgstr "Tegnsett"
 
-#: exportdialog.cpp:62
+#: exportdialog.cpp:63
 msgid "Encode in Unicode (UTF-8)"
-msgstr ""
-
-#: exportdialog.cpp:64
-msgid "Encode the exported file in Unicode (UTF-8)."
-msgstr ""
+msgstr "Tegnsettet Unicode (UTF-8)"
 
 #: exportdialog.cpp:65
-msgid "Encode in user locale (%1)"
-msgstr ""
+msgid "Encode the exported file in Unicode (UTF-8)."
+msgstr "Eksporter filen i tegnsettet Unicode (UTF-8)."
 
-#: exportdialog.cpp:68
+#: exportdialog.cpp:66
+msgid "Encode in user locale (%1)"
+msgstr "Bruk ditt systems tegnsett (%1)"
+
+#: exportdialog.cpp:69
 msgid "Encode the exported file in the local format."
-msgstr ""
+msgstr "Eksporter filen i ditt lokale tegnsett."
 
 #: finddialog.cpp:41
 msgid "Find Text"
-msgstr "Търси текст"
+msgstr "Finn tekst"
 
 #: finddialog.cpp:42
 msgid "&Find"
-msgstr "&Търси"
+msgstr "&Finn"
 
 #: finddialog.cpp:48
 msgid "Text To Find:"
-msgstr "Текст за търсене"
+msgstr "Tekst å finne:"
 
 #: finddialog.cpp:51
 msgid "The search string"
-msgstr "Стринг за търсене"
+msgstr "Søkestreng"
 
 #: finddialog.cpp:62
 msgid "Search In:"
-msgstr "Търси в :"
+msgstr "Søk i:"
 
 #: finddialog.cpp:65
 msgid "Select which field should be searched."
-msgstr "Указва полетата,в които ще се търси."
+msgstr "Velg hvilke felter som det skal søkes i."
 
 #: finddialog.cpp:73
 msgid "Case &Sensitive"
-msgstr "&Чувствително към главни и малки букви"
+msgstr "Skill mellom s&må og store"
 
 #: finddialog.cpp:74
 msgid "If checked, the search is case-sensitive."
-msgstr ""
-"Ако е избрано,прави разлика м/у малки и "
-"големи букви."
+msgstr "Om slått på vil søk avhenge av store og små bokstaver."
 
 #: finddialog.cpp:75
 msgid "Find &Backwards"
-msgstr "Търси &назад"
+msgstr "Søk &baklengs"
 
 #: finddialog.cpp:76
 msgid "If checked, the document is searched in reverse."
-msgstr ""
-"Ако е избрано се провежда търсене назад."
+msgstr "Om slått på vil søk skje bakover i dokumentet."
 
 #: finddialog.cpp:77
 msgid "&Whole Words Only"
-msgstr "Само &цели думи"
+msgstr "Bare &hele ord"
 
 #: finddialog.cpp:78
 msgid "If checked, the search is limited to whole words."
-msgstr ""
-"Ако е избрано,търсенето се ограничава до "
-"цели думи"
+msgstr "Om slått på så søkes kun etter hele ord."
 
 #: finddialog.cpp:79
 msgid "&From Beginning"
-msgstr "&От началото"
+msgstr "&Fra begynnelsen"
 
 #: finddialog.cpp:80
 msgid "If checked, the document is searched from the beginning."
-msgstr ""
-"Ако е избрано,търсенето започва от "
-"началото на документа."
+msgstr "Om slått på så søkes fra begynnelsen av dokumentet."
 
 #: finddialog.cpp:81
 msgid "As &Regular Expression"
-msgstr "Като &регулярен израз"
+msgstr "Som &regulært uttrykk"
 
 #: finddialog.cpp:82
 msgid "If checked, the search string is used as a regular expression."
-msgstr ""
-"Ако е избрано,низът за търсене се "
-"използва като регулярен израз."
+msgstr "Om slått på blir søkestrengen brukt som et regulært uttrykk."
 
 #: finddialog.cpp:85
 msgid "&Edit Regular Expression..."
-msgstr "&Редакция на обикновените изрази..."
+msgstr "&Rediger uttrykk..."
 
 #: finddialog.cpp:105 finddialog.cpp:178
 msgid "All Fields"
-msgstr "Всички полета"
+msgstr "Alle felter"
 
 #: finddialog.cpp:115
 msgid "Invalid regular expression."
-msgstr "Грешен израз"
+msgstr "Ugyldig regulært uttrykk."
 
 #: filehandler.cpp:32
 #, c-format
 msgid "Bookcase is unable to load the file - %1."
-msgstr "Bookcase не може да зареди файла %1."
+msgstr "Bookcase klarer ikke å laste filen - %1."
 
 #: filehandler.cpp:33
 #, c-format
 msgid "Bookcase is unable to write the file - %1."
-msgstr "Bookcase не може да пише във файл %1."
+msgstr "Bookcase klarer ikke å skrive til filen - %1."
 
 #: filehandler.cpp:34
 #, c-format
 msgid "Bookcase is unable to upload the file - %1."
-msgstr "Bookcase не може да качи файла %1."
+msgstr "Bookcase klarte ikke å laste opp filen - %1."
 
 #: filehandler.cpp:98 translators/bookcaseimporter.cpp:78
 #: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr ""
-"Грешка при четене на XML на ред %1,колона %2"
+msgstr "Det er en XML sammenflettingsfeil på linje %1, kolonne %2."
 
 #: filehandler.cpp:100 translators/bookcaseimporter.cpp:80
 #: translators/xmlimporter.cpp:37 translators/xmlimporter.cpp:54
 msgid "The error message from Qt is:"
-msgstr "Съобщението за грешка е :"
+msgstr "Feilmeldingen fra QT er:"
 
 #: filehandler.cpp:125
-#, fuzzy, c-format
+#, c-format
 msgid "Bookcase is unable to load the image - %1."
-msgstr "Bookcase не може да зареди файла %1."
+msgstr "Bookcase klarer ikke å laste filen - %1."
 
 #: filehandler.cpp:139
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
-"Файл с името \"%1\" вече съществува.Сигурни "
-"ли сте,че желаете да го презапишете ?"
+"En fil med navnet \"%1\" finnes allerede. Er du sikker på at du vil "
+"overskrive?"
 
 #: filehandler.cpp:142
 msgid "Overwrite File?"
-msgstr "Презаписване на файл?"
+msgstr "Overskrive fil?"
 
 #: filehandler.cpp:143
 msgid "Overwrite"
-msgstr "Презаписване"
+msgstr "Skriv over"
 
 #: main.cpp:22
-#, fuzzy
 msgid "Bookcase - a collection manager for KDE"
-msgstr ""
-"Bookcase (Лавица) - програма за картотекиране "
-"на книги"
+msgstr "Bookcase - en håndterer av samlinger for KDE"
 
 #: main.cpp:27
 msgid "File to open"
-msgstr "Файл за отваряне"
+msgstr "Åpne fil"
 
 #: main.cpp:28
 msgid "Do not reopen the last open file"
-msgstr ""
+msgstr "Ikke åpne siste brukte fil"
 
 #: main.cpp:33
 msgid "Bookcase"
-msgstr "Лавица"
+msgstr "Bokhylle"
 
 #: main.cpp:38
 msgid "Author of btparse library"
-msgstr ""
+msgstr "Forfatter av btparse-biblioteket"
 
 #: detailedlistview.cpp:63 detailedlistview.cpp:294
 #: translators/pilotdbexporter.cpp:130
 msgid "View Columns"
-msgstr "Показва колони"
+msgstr "Vis kolonner"
 
 #: field.cpp:36
 msgid "a,an,and,in,of,the,to"
-msgstr "и,в,от,към"
+msgstr "en,ei,et,i,av,den,det,de,til,fra"
 
 #: collectionfactory.cpp:73 collectionfactory.cpp:87
 #: collections/bibtexcollection.cpp:25 collections/bibtexcollection.cpp:59
@@ -246,283 +227,258 @@ msgstr "и,в,от,към"
 #: collections/winecollection.cpp:21 configdialog.cpp:143 field.cpp:44
 #: field.cpp:68
 msgid "General"
-msgstr "Общи"
+msgstr "Hovedvalg"
 
 #: field.cpp:366
 msgid "the"
-msgstr " "
+msgstr "den"
 
 #: field.cpp:384
 msgid "jr.,jr,iii,iv"
-msgstr "мл.,мл,iii,iv"
+msgstr "jr,Sr,"
 
 #: field.cpp:389
 msgid "de,van der,von"
-msgstr "де,ван де,фон"
+msgstr "van,von"
 
 #: field.cpp:396
 msgid "Simple Text"
-msgstr "Прост текст"
+msgstr "Enkel tekst"
 
 #: field.cpp:397
 msgid "Paragraph"
-msgstr "Параграф"
+msgstr "Avsnitt"
 
 #: field.cpp:398
 msgid "Choice"
-msgstr ""
+msgstr "Valg"
 
 #: field.cpp:399
 msgid "Checkbox"
-msgstr "Кутийка"
+msgstr "Avkrysningsboks"
 
 #: collections/bibtexcollection.cpp:173 field.cpp:400
-#, fuzzy
 msgid "Number"
-msgstr "Номер от поредица"
+msgstr "Nummer"
 
 #: field.cpp:401
 msgid "URL"
-msgstr "URL"
+msgstr "Url"
 
 #: field.cpp:402
-#, fuzzy
 msgid "Table"
-msgstr "Заглавие"
+msgstr "Tabell"
 
 #: field.cpp:403
-#, fuzzy
 msgid "Table (2 Columns)"
-msgstr "Показва колони"
+msgstr "Tabell (2 kolonner)"
 
 #: collections/stampcollection.cpp:123 field.cpp:404
-#, fuzzy
 msgid "Image"
-msgstr "Страници"
+msgstr "Bilde"
 
 #: field.cpp:405
 msgid "Dependent"
-msgstr ""
+msgstr "Avhenger"
 
 #: field.cpp:407
 msgid "Date"
-msgstr ""
+msgstr "Dato"
 
 #: configdialog.cpp:50
 msgid "Configure Bookcase"
-msgstr "Настройка на Bookcase"
+msgstr "Oppsett av Bookcase"
 
 #: configdialog.cpp:134 configdialog.cpp:317 configdialog.cpp:324
 #: configdialog.cpp:457
 msgid "Braces"
-msgstr ""
+msgstr "Bueparanteser"
 
 #: configdialog.cpp:143
 msgid "General Options"
-msgstr "Общи настройки"
+msgstr "Hovedvalg"
 
 #: configdialog.cpp:146
 msgid "Reopen file at startup"
-msgstr ""
-"Отваряне на файл при пускане на "
-"приложението"
+msgstr "Åpne siste fil ved oppstart"
 
 #: configdialog.cpp:147
 msgid ""
 "If checked, the file that was last open will be re-opened at program "
 "start-up."
-msgstr ""
-"Ако е избрано,последно отвореният файл ще "
-"бъде отворен при повторно пускане на "
-"програмата."
+msgstr "Filen som sist var åpnet vil bli lastet ved neste programstart."
 
 #: configdialog.cpp:152
 msgid "Show \"Tip of the Day\" at startup"
-msgstr ""
+msgstr "Vis \" Dagens tips\" ved oppstart"
 
 #: configdialog.cpp:153
-#, fuzzy
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr ""
-"Ако е избрано,последно отвореният файл ще "
-"бъде отворен при повторно пускане на "
-"програмата."
+"Om slått på vil \"Dagens tips\" bli vist når programmet starter opp."
 
 #: configdialog.cpp:158
 msgid "Show number of items in group"
-msgstr "Показва броя участници в групата"
+msgstr "Vis antall i gruppering"
 
 #: configdialog.cpp:159
 msgid ""
 "If checked, the number of items in the group will be appended to the group "
 "name."
-msgstr ""
-"Ако е избрано,броя на книгите в груптата "
-"ще бъде добавен към името й."
+msgstr "Vis antall elementer i en gruppe ved siden av gruppenavnet."
 
 #: configdialog.cpp:164 configdialog.cpp:228
 msgid "Formatting Options"
-msgstr "Настройки за форматиране"
+msgstr "Valg for formatering"
 
 #: configdialog.cpp:167
 msgid "Auto capitalize titles and names"
-msgstr ""
-"Автоматично прави буквите в имената и "
-"заглавията главни"
+msgstr "Stor bokstav i titler og navn"
 
 #: configdialog.cpp:168
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr ""
-"Ако е избрана,заглавията и имената "
-"автоматично ще получат главни букви"
+msgstr "Titler og navn vil automatisk få stor forbokstav."
 
 #: configdialog.cpp:172
 msgid "Auto format titles and names"
-msgstr ""
-"Автоматично форматиране на заглавията и "
-"имената"
+msgstr "Autoformater titler og navn"
 
 #: configdialog.cpp:173 configdialog.cpp:232
 msgid "If checked, titles and names will be automatically formatted."
-msgstr ""
-"Ако е избрано,заглавията и имената ще "
-"бъдат форматирани автоматично."
+msgstr "Om slått på vil titler og navn bli automatisk formatert."
 
 #: configdialog.cpp:181
 msgid "Articles:"
-msgstr "Междуметия:"
+msgstr "Artikler:"
 
 #: configdialog.cpp:188
-#, fuzzy
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
 "first word in a title. Multiple values should be separated by a "
 "semi-colon.</qt>"
 msgstr ""
-"Списък от междуметия,думи със "
-"запетая,които не се числят към "
-"заглавие,ако са в началото му."
+"<qt>En liste av ord som burde bli regnet som artikler om de er det første "
+"ordet i en tittel. Flere verdier bør bli separert med ett semikolon.</qt>"
 
 #: configdialog.cpp:196
 msgid "Personal suffixes:"
-msgstr "Лични наставки:"
+msgstr "Personsuffiks:"
 
 #: configdialog.cpp:201
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>En liste over suffiks som kan bli brukt i en persons navn. Flere verdier "
+"bør separeres med ett semikolon.</qt>"
 
 #: configdialog.cpp:208
 msgid "Surname prefixes:"
-msgstr "Фамилни наставки:"
+msgstr "Prefiks:"
 
 #: configdialog.cpp:213
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>En liste over en persons prefiks som kan bli brukt. Flere verdier bør "
+"separeres med ett semikolon.</qt>"
 
 #: configdialog.cpp:225
 msgid "Printing"
-msgstr "Печатане"
+msgstr "Utskrift"
 
 #: configdialog.cpp:225
 msgid "Printing Options"
-msgstr "Настройки за печат"
+msgstr "Valg for utskrift"
 
 #: configdialog.cpp:231
 msgid "Format titles and names"
-msgstr "Форматиране на заглавия и имена"
+msgstr "Formater titler og navn"
 
 #: configdialog.cpp:235 translators/htmlexporter.cpp:74
 msgid "Print field headers"
-msgstr "Печатане заглавията на полетата"
+msgstr "Skriv ut feltoverskrifter"
 
 #: configdialog.cpp:236 translators/htmlexporter.cpp:75
 msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Ако е избрано,заглавията на полетата ще "
-"бъдат отпечатани."
+msgstr "Feltnavn blir skrevet ut som tabelloverskrift."
 
 #: configdialog.cpp:239
 msgid "Grouping Options"
-msgstr "Опции за групиране"
+msgstr "Valg for gruppering"
 
 #: configdialog.cpp:242 translators/htmlexporter.cpp:79
-#, fuzzy
 msgid "Group the entries"
-msgstr "Групиране на книгите"
+msgstr "Grupper innslag"
 
 #: configdialog.cpp:243 translators/htmlexporter.cpp:80
-#, fuzzy
 msgid "If checked, the entries will be grouped by the selected field."
-msgstr ""
-"Ако е избрано,книгите ще бъдат групирани "
-"по даден признак."
+msgstr "Om slått på vil man gruppere innslag ved hjelp av nedtrekkslisten."
 
 #: configdialog.cpp:246
-#, fuzzy
 msgid "Image Options"
-msgstr "Опции за форматиране"
+msgstr "Valg for bilder"
 
 #: configdialog.cpp:252
 msgid "Maximum image width:"
-msgstr ""
+msgstr "Maks bredde på bilder:"
 
 #: configdialog.cpp:256
 msgid ""
 "The maximum width of the images in the printout. The aspect ration is "
 "preserved."
 msgstr ""
+"Maksbredden på bilder ved utskrift. Forholdet mellom høyde og bredde blir "
+"ivaretatt."
 
 #: configdialog.cpp:261
 msgid "Maximum image height:"
-msgstr ""
+msgstr "Maks bildehøyde:"
 
 #: configdialog.cpp:265
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
 msgstr ""
+"Maks høyde på bilde ved utskrift. Forholdet mellom høyde og bredde vil "
+"bli ivaretatt."
 
 #: configdialog.cpp:276
 msgid "Templates"
-msgstr ""
+msgstr "Mal"
 
 #: configdialog.cpp:276
-#, fuzzy
 msgid "Template Options"
-msgstr "Опции за форматиране"
+msgstr "Valg for maler"
 
 #: configdialog.cpp:308 translators/bibtexexporter.cpp:44
-#, fuzzy
 msgid "Bibtex"
-msgstr "Настройки на полето"
+msgstr "bibtex"
 
 #: configdialog.cpp:308 translators/bibtexexporter.cpp:59
-#, fuzzy
 msgid "Bibtex Options"
-msgstr "Настройки на полето"
+msgstr "Valg for Bibtex"
 
 #: configdialog.cpp:315
-#, fuzzy
 msgid "Bibtex quotation style:"
-msgstr "Настройки на полето"
+msgstr "Bibtex siteringsstil:"
 
 #: configdialog.cpp:318 configdialog.cpp:326
 msgid "Quotes"
-msgstr ""
+msgstr "Sitat"
 
 #: configdialog.cpp:319
 msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will be "
 "escaped with either  braces or quotation marks.</qt>"
 msgstr ""
+"<qt>Siteringsstil brukt ved eksport til bibtex. Alle felter vil bli sendt "
+"gjennom en tolker ved hjelp av enten parenteser eller siteringstegn.</qt>"
 
 #: configdialog.cpp:330
 msgid "Path to LyX server:"
-msgstr ""
+msgstr "Sti til lyx-tjener:"
 
 #: configdialog.cpp:332
 msgid ""
@@ -530,191 +486,184 @@ msgid ""
 "used by other applications such as Kile or Pybliographer. Do not include the "
 "trailing .in suffix.</qt>"
 msgstr ""
+"<qt>Plassering av lyx-tjeneren for oppslag mot bibliografiske innslag. Også "
+"benyttet av andre programmer som Kile eller Pybibliographer. Ikke inkluder "
+"den etterfølgende .in suffikset.</qt>"
 
 #: entryview.cpp:131
-#, fuzzy
 msgid "Bookcase is unable to locate the default entry stylesheet."
-msgstr "Bookcase не може да зареди файла %1."
+msgstr "Bookcase klarte ikke å finne standardmalens visningsark."
 
-#: entryview.cpp:133 mainwindow.cpp:1540
+#: entryview.cpp:133 mainwindow.cpp:1575
 msgid "Please check your installation."
-msgstr "Моля проверете инсталацията си."
+msgstr "Vennligst sjekk din installasjon."
 
-#: importdialog.cpp:42 importdialog.cpp:48
-#, fuzzy
+#: importdialog.cpp:46 importdialog.cpp:52
 msgid "Import Options"
-msgstr "Опции за форматиране"
-
-#: importdialog.cpp:50
-#, fuzzy
-msgid "Replace current collection"
-msgstr "Преименувай колекцията"
-
-#: importdialog.cpp:51
-msgid "Replace the current collection with the contents of the imported file."
-msgstr ""
-
-#: importdialog.cpp:53
-#, fuzzy
-msgid "Append to current collection"
-msgstr "Промяна на групирането на колекцията"
+msgstr "Valg for import"
 
 #: importdialog.cpp:54
+msgid "Replace current collection"
+msgstr "Bytt ut nåværende samling"
+
+#: importdialog.cpp:55
+msgid "Replace the current collection with the contents of the imported file."
+msgstr ""
+"Bytter ut den nåværende samlingen med innholdet fra den importerte filen."
+
+#: importdialog.cpp:57
+msgid "Append to current collection"
+msgstr "Legg til i samlingen som er åpen"
+
+#: importdialog.cpp:58
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
 msgstr ""
+"Legg til innholdet av den importerte samlingen. Dette er mulig kun når "
+"samlingene er av samme type."
 
-#: importdialog.cpp:57
-#, fuzzy
+#: importdialog.cpp:61
 msgid "Merge with current collection"
-msgstr "Промяна на групирането на колекцията"
+msgstr "Legg til i den nåværende samlingen"
 
-#: importdialog.cpp:58
+#: importdialog.cpp:62
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
 "only possible when the collection types match. Entries must match exactly in "
 "order to be merged."
 msgstr ""
+"Legg til innholdet av den importerte samlingen. Dette er mulig kun når "
+"samlingene er av samme type. Innslag må stemme eksakt for å kunne bli lagt "
+"til."
 
-#: importdialog.cpp:157 mainwindow.cpp:880 mainwindow.cpp:987
+#: importdialog.cpp:185 mainwindow.cpp:914 mainwindow.cpp:1021
 msgid "*.bc|Bookcase files (*.bc)"
-msgstr "*.bc|Bookcase файлове (*.bc)"
+msgstr "*.bc Bookcase filer (*.bc)"
 
-#: importdialog.cpp:161 translators/bibtexexporter.cpp:48
+#: importdialog.cpp:189 translators/bibtexexporter.cpp:48
 msgid "*.bib|Bibtex files (*.bib)"
-msgstr "*.bib|Bibtex файлове (*.bib)"
+msgstr "*.bib|Bibtex filer (*.bib)"
 
-#: importdialog.cpp:165 translators/csvexporter.cpp:42
-#, fuzzy
+#: importdialog.cpp:193 translators/csvexporter.cpp:42
 msgid "*.csv|CSV files (*.csv)"
-msgstr "*.xsl|XSLT файлове (*.xsl)"
+msgstr "*.csv|CSV filer (*.csv)"
 
-#: importdialog.cpp:170 importdialog.cpp:179 mainwindow.cpp:882
+#: importdialog.cpp:198 importdialog.cpp:202 mainwindow.cpp:916
 #: translators/bookcasexmlexporter.cpp:64
 msgid "*.xml|XML files (*.xml)"
-msgstr "*.xml|XML файлове (*.xml)"
+msgstr "*.xml|XML filer (*.xml)"
 
-#: importdialog.cpp:175
-#, fuzzy
-msgid "*.ogg|Ogg files (*.ogg)"
-msgstr "*.xml|XML файлове (*.xml)"
-
-#: importdialog.cpp:186 mainwindow.cpp:884 mainwindow.cpp:989
+#: importdialog.cpp:212 mainwindow.cpp:918 mainwindow.cpp:1023
 #: translators/bibtexexporter.cpp:48 translators/bibtexmlexporter.cpp:41
 #: translators/bookcasexmlexporter.cpp:64
 #: translators/bookcasezipexporter.cpp:33 translators/csvexporter.cpp:42
 #: translators/htmlexporter.cpp:60 translators/pilotdbexporter.cpp:45
 #: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:87
 msgid "*|All files"
-msgstr "*|Всички файлове"
+msgstr "*|Alle filer"
 
 #: filterdialog.cpp:57
 msgid "Any Field"
-msgstr "Някое поле"
+msgstr "Uansett felt"
 
 #: filterdialog.cpp:65
 msgid "contains"
-msgstr "съдържа"
+msgstr "inneholder"
 
 #: filterdialog.cpp:66
 msgid "does not contain"
-msgstr "не съдържа"
+msgstr "inneholder ikke"
 
 #: filterdialog.cpp:67
 msgid "equals"
-msgstr "е равно на"
+msgstr "er lik"
 
 #: filterdialog.cpp:68
 msgid "does not equal"
-msgstr "не е равно на"
+msgstr "er ikke lik"
 
 #: filterdialog.cpp:69
 msgid "matches regexp"
-msgstr "пасва на регул. израз"
+msgstr "treffer regulært uttrykk"
 
 #: filterdialog.cpp:70
 msgid "does not match regexp"
-msgstr "не пасва на регул. израз"
+msgstr "treffer ikke regulært uttrykk"
 
 #: filterdialog.cpp:82
 msgid "Edit..."
-msgstr "Редакция..."
+msgstr "Endre..."
 
 #: filterdialog.cpp:236
 msgid "Advanced Filter"
-msgstr "Разширен филтър"
+msgstr "Avansert filter"
 
 #: filterdialog.cpp:241
 msgid "Filter Criteria"
-msgstr "Критерии за филтриране"
+msgstr "Filterkriterie"
 
 #: filterdialog.cpp:247
 msgid "Match a&ll of the following"
-msgstr "Съдържа в&сички :"
+msgstr "Treff på a&lle"
 
 #: filterdialog.cpp:248
 msgid "Match an&y of the following"
-msgstr "Съдържа н&якое от :"
+msgstr "Treff på e&n eller flere"
 
 #: kwidgetlister.cpp:56
-#, fuzzy
 msgid ""
 "_: more widgets\n"
 "More"
-msgstr "повече интерфейсни елементи"
+msgstr "_: flere avkrysningsbokser"
 
 #: kwidgetlister.cpp:59
-#, fuzzy
 msgid ""
 "_: fewer widgets\n"
 "Fewer"
-msgstr "по-малко интерфейсни елементи"
+msgstr "_: færre avkrysningsbokser"
 
 #: kwidgetlister.cpp:65
-#, fuzzy
 msgid ""
 "_: clear widgets\n"
 "Clear"
-msgstr "изчиства интерфейсните елементи"
+msgstr "_: rens avkrysningsbokser"
 
 #: groupview.cpp:57 groupview.cpp:67
 msgid "Sort by Group, Ascending"
-msgstr ""
+msgstr "Sorter på gruppe, synkende"
 
 #: groupview.cpp:58 groupview.cpp:68
 msgid "Sort by Group, Descending"
-msgstr ""
+msgstr "Sorter på gruppe, stigende"
 
 #: groupview.cpp:59 groupview.cpp:69
 msgid "Sort by Count, Ascending"
-msgstr ""
+msgstr "Sorter på antall, synkende"
 
 #: groupview.cpp:60 groupview.cpp:70
 msgid "Sort by Count, Descending"
-msgstr ""
+msgstr "Sorter på\"antall, stigende"
 
 #: groupview.cpp:63
 msgid "Expand All Groups"
-msgstr "Разшири всички групи"
+msgstr "Utvid alle grupper"
 
 #: groupview.cpp:64
 msgid "Collapse All Groups"
-msgstr "Свий всички групи"
+msgstr "Fold sammen alle grupper"
 
 #: groupview.cpp:65
 msgid "Filter by Group"
-msgstr ""
+msgstr "Filtrer på gruppe"
 
 #: collectionfactory.cpp:70 collectionfactory.cpp:84
-#, fuzzy
 msgid "My Collection"
-msgstr "BCCollection"
+msgstr "Min samling"
 
 #: collectionfactory.cpp:71 collectionfactory.cpp:85
-#, fuzzy
 msgid "Entry"
-msgstr "Поредица"
+msgstr "Innslag"
 
 #: collectionfactory.cpp:72 collectionfactory.cpp:86
 #: collections/bibtexcollection.cpp:57 collections/bookcollection.cpp:39
@@ -723,855 +672,801 @@ msgstr "Поредица"
 #: collections/videocollection.cpp:41 collections/winecollection.cpp:37
 #: fetchdialog.cpp:79 fetchdialog.cpp:132
 msgid "Title"
-msgstr "Заглавие"
+msgstr "Tittel"
 
 #: collectionfactory.cpp:125
-#, fuzzy
 msgid "Book Collection"
-msgstr "Колекция от книги"
+msgstr "Samling av bøker"
 
 #: collectionfactory.cpp:126 collections/bibtexcollection.cpp:31
-#, fuzzy
 msgid "Bibliography"
-msgstr "Импортира Bibtexml файл ..."
+msgstr "Bibliografi"
 
 #: collectionfactory.cpp:127
-#, fuzzy
 msgid "Comic Book Collection"
-msgstr "Колекция от книги"
+msgstr "Samling av tegneserier"
 
 #: collectionfactory.cpp:128
-#, fuzzy
 msgid "Video Collection"
-msgstr "Видео колекция"
+msgstr "Samling av videofilmer"
 
 #: collectionfactory.cpp:129
-#, fuzzy
 msgid "Music Collection"
-msgstr "BCCollection"
+msgstr "Samling med musikk"
 
 #: collectionfactory.cpp:130
-#, fuzzy
 msgid "Coin Collection"
-msgstr "Музикална колекция"
+msgstr "Samling av mynter"
 
 #: collectionfactory.cpp:131
-#, fuzzy
 msgid "Stamp Collection"
-msgstr "Преименувай колекцията"
+msgstr "Samling med frimerker"
 
 #: collectionfactory.cpp:132
-#, fuzzy
 msgid "Wine Collection"
-msgstr "Видео колекция"
+msgstr "Samling med viner"
 
 #: collectionfactory.cpp:133
-#, fuzzy
 msgid "Card Collection"
-msgstr "BCCollection"
+msgstr "Samling av kort"
 
 #: collectionfactory.cpp:134
-#, fuzzy
 msgid "Custom Collection"
-msgstr "Ново име за колекция"
+msgstr "Egendefinert samling"
 
 #: controller.cpp:73 fetchdialog.cpp:179 fetchdialog.cpp:238
 #: fetchdialog.cpp:293 mainwindow.cpp:89
 msgid "Ready."
-msgstr "Готово."
+msgstr "Klar."
 
 #: collections/bookcollection.cpp:136 mainwindow.cpp:166
 msgid "New"
-msgstr "Нова"
+msgstr "Ny"
 
 #: mainwindow.cpp:169
-#, fuzzy
 msgid "Create a new collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny samling"
 
 #: mainwindow.cpp:173
-#, fuzzy
 msgid "New &Book Collection"
-msgstr "Колекция от книги"
+msgstr "Ny &boksamling"
 
 #: mainwindow.cpp:176
-#, fuzzy
 msgid "Create a new book collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny boksamling"
 
 #: mainwindow.cpp:182
-#, fuzzy
 msgid "New B&ibliography"
-msgstr "Импортира Bibtexml файл ..."
+msgstr "Ny b&ibliografi"
 
 #: mainwindow.cpp:185
-#, fuzzy
 msgid "Create a new bibtex bibliography"
-msgstr "Импортира Bibtexml файл ..."
+msgstr "Lag ny Bibtex bibliografi"
 
 #: mainwindow.cpp:191
-#, fuzzy
 msgid "New &Comic Book Collection"
-msgstr "Колекция от книги"
+msgstr "Ny &tegneseriesamling"
 
 #: mainwindow.cpp:194
-#, fuzzy
 msgid "Create a new comic book collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny tegneseriesamling"
 
 #: mainwindow.cpp:200
-#, fuzzy
 msgid "New &Video Collection"
-msgstr "Видео колекция"
+msgstr "Ny &videosamling"
 
 #: mainwindow.cpp:203
-#, fuzzy
 msgid "Create a new video collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny videosamling"
 
 #: mainwindow.cpp:209
-#, fuzzy
 msgid "New &Music Collection"
-msgstr "Ново име за колекция"
+msgstr "Ny &musikksamling"
 
 #: mainwindow.cpp:212
-#, fuzzy
 msgid "Create a new music collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny musikksamling"
 
 #: mainwindow.cpp:218
-#, fuzzy
 msgid "New C&ard Collection"
-msgstr "Видео колекция"
+msgstr "Ny &kortsamling"
 
 #: mainwindow.cpp:221
-#, fuzzy
 msgid "Create a new trading card collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny kortsamling"
 
 #: mainwindow.cpp:227
-#, fuzzy
 msgid "New C&oin Collection"
-msgstr "Ново име за колекция"
+msgstr "Ny &myntsamling"
 
 #: mainwindow.cpp:230
-#, fuzzy
 msgid "Create a new coin collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny myntsamling"
 
 #: mainwindow.cpp:236
-#, fuzzy
 msgid "New &Stamp Collection"
-msgstr "Ново име за колекция"
+msgstr "Ny &frimerkesamling"
 
 #: mainwindow.cpp:239
-#, fuzzy
 msgid "Create a new stamp collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny frimerkesamling"
 
 #: mainwindow.cpp:245
-#, fuzzy
 msgid "New &Wine Collection"
-msgstr "Видео колекция"
+msgstr "Ny &vinsamling"
 
 #: mainwindow.cpp:248
-#, fuzzy
 msgid "Create a new wine collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny vinsamling"
 
 #: mainwindow.cpp:254
-#, fuzzy
 msgid "New C&ustom Collection"
-msgstr "Ново име за колекция"
+msgstr "Ny &spesialsamling"
 
 #: mainwindow.cpp:257
-#, fuzzy
 msgid "Create a new custom collection"
-msgstr "Създава нов документ"
+msgstr "Lag ny spesialsamling"
 
 #: mainwindow.cpp:266
 msgid "Open an existing document"
-msgstr "Отваря съществуващ документ"
+msgstr "Åpne eksisterende dokument"
 
 #: mainwindow.cpp:268
 msgid "Open a recently used file"
-msgstr "Отваря наскоро използван файл"
+msgstr "Åpne nylig"
 
 #: mainwindow.cpp:270
-#, fuzzy
 msgid "Save the document"
-msgstr "Записва текущия документ"
+msgstr "Lagre gjeldende samling"
 
 #: mainwindow.cpp:272
-#, fuzzy
 msgid "Save the document as a different file..."
-msgstr "Записва текущия документ като ..."
+msgstr "Lagre gjeldende samling som..."
 
 #: mainwindow.cpp:274
 msgid "Print the contents of the document..."
-msgstr "Отпечатва съдържанието на документа..."
+msgstr "Skriv ut innhold i dokumentet..."
 
 #: mainwindow.cpp:276
 msgid "Quit the application"
-msgstr "Изход от приложението"
+msgstr "Avslutt"
 
 #: mainwindow.cpp:285 rc.cpp:3
-#, fuzzy
 msgid "&Import"
-msgstr "И&мпортиране"
+msgstr "&Importer"
 
 #: mainwindow.cpp:288
-#, fuzzy
 msgid "Import collection data from other formats..."
-msgstr ""
-"Филтриране на колекцията за показване "
-"само на дадени книги..."
+msgstr "Importer samling av data fra andre formater..."
 
 #: mainwindow.cpp:292
-#, fuzzy
 msgid "Import Bookcase Data"
-msgstr "Импортира Bibtex файл..."
+msgstr "Importer Bookcase-data"
 
 #: mainwindow.cpp:293
-#, fuzzy
 msgid "Import another Bookcase data file"
-msgstr "Импортира Bibtex файл..."
+msgstr "Importer andre Bookcase-datafiler"
 
 #: mainwindow.cpp:299
-#, fuzzy
 msgid "Import CSV Data"
-msgstr "Експортирам..."
+msgstr "Importer CSV-data"
 
 #: mainwindow.cpp:300
-#, fuzzy
 msgid "Import a CSV file"
-msgstr "Импортира Bibtexml файл ..."
+msgstr "Importer en CSV-fil"
 
 #: mainwindow.cpp:306
-#, fuzzy
-msgid "Import Bibtex Data"
-msgstr "Импортира Bibtex файл..."
+msgid "Import MODS Data"
+msgstr "Importer MODS-data"
 
 #: mainwindow.cpp:307
-#, fuzzy
-msgid "Import a Bibtex bibliography file"
-msgstr "Импортира Bibtexml файл ..."
+msgid "Import a MODS data file"
+msgstr "Importer en MODS data-fil"
 
 #: mainwindow.cpp:313
 #, fuzzy
-msgid "Import Bibtexml Data"
-msgstr "Импортира Bibtexml файл..."
+msgid "Import Alexandria Data"
+msgstr "Importer Bibtex data"
 
 #: mainwindow.cpp:314
-#, fuzzy
-msgid "Import a Bibtexml bibliography file"
-msgstr "Импортира Bibtexml файл ..."
+msgid "Import data from the Alexandria book collection manager"
+msgstr ""
 
 #: mainwindow.cpp:320
-#, fuzzy
-msgid "Import MODS Data"
-msgstr "Експортирам..."
+msgid "Import Bibtex Data"
+msgstr "Importer Bibtex data"
 
 #: mainwindow.cpp:321
-#, fuzzy
-msgid "Import a MODS data file"
-msgstr "Импортира Bibtexml файл ..."
+msgid "Import a Bibtex bibliography file"
+msgstr "Importer en Bibtex bibliografi-fil"
 
 #: mainwindow.cpp:327
-#, fuzzy
-msgid "Import XSL Transform"
-msgstr "Експортира,използвайки XSL Transform..."
+msgid "Import Bibtexml Data"
+msgstr "Importer Bibtexml-data"
 
 #: mainwindow.cpp:328
-#, fuzzy
-msgid "Import using an XSL Transform"
-msgstr "Експортира файл,използвайки XSL transform..."
+msgid "Import a Bibtexml bibliography file"
+msgstr "Importer en Bibtexml-bibliografi fil"
 
-#: mainwindow.cpp:340 rc.cpp:4
-#, fuzzy
-msgid "&Export"
-msgstr "Експортиране..."
-
-#: mainwindow.cpp:343
-#, fuzzy
-msgid "Export the collection data to other formats..."
+#: mainwindow.cpp:334
+msgid "Import Audio File Metadata"
 msgstr ""
-"Филтриране на колекцията за показване "
-"само на дадени книги..."
 
-#: mainwindow.cpp:347
+#: mainwindow.cpp:335
 #, fuzzy
-msgid "Export to XML"
-msgstr "Е&кспортиране"
+msgid "Import meta-data from audio files"
+msgstr "Import fra Bibtexml..."
 
-#: mainwindow.cpp:348
+#: mainwindow.cpp:344
 #, fuzzy
-msgid "Export to a Bookcase XML file"
-msgstr "Експортира към Bibtex файл..."
+msgid "Import Audio CD Data"
+msgstr "Importer CSV-data"
+
+#: mainwindow.cpp:345
+msgid "Import audio CD information from FreeDB"
+msgstr ""
 
 #: mainwindow.cpp:354
-#, fuzzy
-msgid "Export to HTML"
-msgstr "Е&кспортиране"
+msgid "Import XSL Transform"
+msgstr "Importer via XSL-omgjøring"
 
 #: mainwindow.cpp:355
-#, fuzzy
-msgid "Export to an HTML file"
-msgstr "Експортира към Bibtex файл..."
+msgid "Import using an XSL Transform"
+msgstr "Importer en fil via XSL omgjøring"
 
-#: mainwindow.cpp:361
-#, fuzzy
-msgid "Export to CSV"
-msgstr "Е&кспортиране"
+#: mainwindow.cpp:367 rc.cpp:4
+msgid "&Export"
+msgstr "&Eksporter"
 
-#: mainwindow.cpp:362
-#, fuzzy
-msgid "Export to a comma-separated values file"
-msgstr "Експортира към Bibtexml файл..."
+#: mainwindow.cpp:370
+msgid "Export the collection data to other formats..."
+msgstr "Eksporter samlingens data til annet format..."
 
-#: mainwindow.cpp:368
-#, fuzzy
-msgid "Export to PilotDB"
-msgstr "Експортира към Bibtex файл..."
-
-#: mainwindow.cpp:369
-#, fuzzy
-msgid "Export to a PilotDB database"
-msgstr "Експортира към Bibtex файл..."
+#: mainwindow.cpp:374
+msgid "Export to XML"
+msgstr "Eksporter til xml"
 
 #: mainwindow.cpp:375
-#, fuzzy
-msgid "Export to Bibtex"
-msgstr "Експортира към Bibtex файл..."
+msgid "Export to a Bookcase XML file"
+msgstr "Eksporter til en bookcase-xml-fil"
 
-#: mainwindow.cpp:376
-#, fuzzy
-msgid "Export to a bibtex file"
-msgstr "Експортира към Bibtex файл..."
+#: mainwindow.cpp:381
+msgid "Export to HTML"
+msgstr "Eksporter til html"
 
 #: mainwindow.cpp:382
-#, fuzzy
-msgid "Export to Bibtexml"
-msgstr "Експортира към Bibtexml файл"
+msgid "Export to an HTML file"
+msgstr "Eksporter til en html-fil"
 
-#: mainwindow.cpp:383
-#, fuzzy
-msgid "Export to a Bibtexml file"
-msgstr "Експортира към Bibtexml файл..."
+#: mainwindow.cpp:388
+msgid "Export to CSV"
+msgstr "Eksporter til CSV"
 
 #: mainwindow.cpp:389
-#, fuzzy
-msgid "Export XSL Transform"
-msgstr "Експортира,използвайки XSL Transform..."
+msgid "Export to a comma-separated values file"
+msgstr "Eksporter til en fil med kommaseparerte verdier"
 
-#: mainwindow.cpp:390
-#, fuzzy
-msgid "Export using an XSL Transform"
-msgstr "Експортира файл,използвайки XSL transform..."
+#: mainwindow.cpp:395
+msgid "Export to PilotDB"
+msgstr "Eksporter til PilotDB"
 
-#: mainwindow.cpp:399
-msgid "Cut the selected text and puts it in the clipboard"
-msgstr ""
+#: mainwindow.cpp:396
+msgid "Export to a PilotDB database"
+msgstr "Eksporter til en PilotDB-database"
 
-#: mainwindow.cpp:401
+#: mainwindow.cpp:402
 #, fuzzy
-msgid "Copy the selected text to the clipboard"
-msgstr ""
-"Копиране на избраното в буфера за обмен..."
+msgid "Export to Alexandria"
+msgstr "Importer Bibtex data"
 
 #: mainwindow.cpp:403
 #, fuzzy
-msgid "Paste the clipboard contents"
-msgstr "Поставяне на съдържанието на буфера"
+msgid "Export to an Alexandria library"
+msgstr "Importer Bibtex data"
 
-#: mainwindow.cpp:405
-#, fuzzy
-msgid "Select all the entries in the collection"
-msgstr "Няма избрани полета в тази колекция"
+#: mainwindow.cpp:409
+msgid "Export to Bibtex"
+msgstr "Eksporter til Bibtex"
 
-#: mainwindow.cpp:413
-#, fuzzy
-msgid "Deselect all the entries in the collection"
-msgstr "Няма избрани полета в тази колекция"
+#: mainwindow.cpp:410
+msgid "Export to a bibtex file"
+msgstr "Eksporter til en Bibtex fil"
 
 #: mainwindow.cpp:416
-#, fuzzy
-msgid "Search the collection"
-msgstr "Преименувай колекцията"
+msgid "Export to Bibtexml"
+msgstr "Eksporter til Bibtexml"
 
-#: mainwindow.cpp:418
-#, fuzzy
-msgid "Find next match in the collection"
-msgstr "Промяна на групирането на колекцията"
+#: mainwindow.cpp:417
+msgid "Export to a Bibtexml file"
+msgstr "Eksporter til en Bibtexml fil"
 
-#: mainwindow.cpp:428
-#, fuzzy
-msgid "Find previous match in the collection"
-msgstr "Промяна на групирането на колекцията"
+#: mainwindow.cpp:423
+msgid "Export XSL Transform"
+msgstr "Eksporter via XSL-omgjøring"
 
-#: mainwindow.cpp:431
-msgid "Internet Search..."
-msgstr ""
+#: mainwindow.cpp:424
+msgid "Export using an XSL Transform"
+msgstr "Eksporter en fil via XSL omgjøring"
 
-#: mainwindow.cpp:434
-#, fuzzy
-msgid "Search the internet..."
-msgstr "Търсене в документа..."
+#: mainwindow.cpp:433
+msgid "Cut the selected text and puts it in the clipboard"
+msgstr "Klipp ut valgt tekst og sett den i utklippstavlen"
 
-#: entryeditdialog.cpp:42 mainwindow.cpp:439
-#, fuzzy
-msgid "&New Entry"
-msgstr "Дуплициране на книга"
+#: mainwindow.cpp:435
+msgid "Copy the selected text to the clipboard"
+msgstr "Kopierer utvalg til utklippstavle"
 
-#: mainwindow.cpp:442
-#, fuzzy
-msgid "Create a new entry"
-msgstr "Създава нов документ"
+#: mainwindow.cpp:437
+msgid "Paste the clipboard contents"
+msgstr "Sett inn utklippstavlens innhold"
 
-#: controller.cpp:385 mainwindow.cpp:443
-#, fuzzy
-msgid "&Edit Entry"
-msgstr "Изтрий книга"
+#: mainwindow.cpp:439
+msgid "Select all the entries in the collection"
+msgstr "Velg alle felter i samlingen"
 
-#: mainwindow.cpp:446
-#, fuzzy
-msgid "Edit the selected entries"
-msgstr "Изтриване на няколко книги ?"
-
-#: controller.cpp:386 mainwindow.cpp:447
-#, fuzzy
-msgid "&Copy Entry"
-msgstr "Дуплициране на книга"
+#: mainwindow.cpp:447
+msgid "Deselect all the entries in the collection"
+msgstr "Fjern alle valgte felter i samlingen"
 
 #: mainwindow.cpp:450
-#, fuzzy
-msgid "Copy the selected entries"
-msgstr "Изтриване на няколко книги ?"
+msgid "Search the collection"
+msgstr "Søk i samlingen"
 
-#: controller.cpp:387 mainwindow.cpp:451
-#, fuzzy
-msgid "&Delete Entry"
-msgstr "Изтриване на поле"
-
-#: mainwindow.cpp:454
-#, fuzzy
-msgid "Delete the selected entries"
-msgstr "Изтриване на няколко книги ?"
-
-#: mainwindow.cpp:455
-#, fuzzy
-msgid "&Rename Collection..."
-msgstr "Преименувай колекцията"
-
-#: mainwindow.cpp:458
-#, fuzzy
-msgid "Rename the collection"
-msgstr "Преименувай колекцията"
-
-#: mainwindow.cpp:459
-#, fuzzy
-msgid "Collection &Fields..."
-msgstr "Полета на колекцията..."
+#: mainwindow.cpp:452
+msgid "Find next match in the collection"
+msgstr "Finn neste treff i samlingen"
 
 #: mainwindow.cpp:462
-msgid "Modify the collection fields"
-msgstr "Редакция на полетата на колекцията..."
+msgid "Find previous match in the collection"
+msgstr "Finn forrige treff i samlingen"
 
-#: mainwindow.cpp:463
-#, fuzzy
-msgid "Convert to &Bibliography"
-msgstr "Импортира Bibtexml файл ..."
+#: mainwindow.cpp:465
+msgid "Internet Search..."
+msgstr "Søk på internett..."
 
-#: mainwindow.cpp:466
-#, fuzzy
-msgid "Convert a book collection to a bibliography"
-msgstr "Импортира Bibtexml файл ..."
+#: mainwindow.cpp:468
+msgid "Search the internet..."
+msgstr "Søk via internett..."
 
-#: mainwindow.cpp:467
-#, fuzzy
-msgid "String &Macros..."
-msgstr "Оценка"
+#: entryeditdialog.cpp:42 mainwindow.cpp:473
+msgid "&New Entry"
+msgstr "&Nytt innslag"
 
-#: mainwindow.cpp:470
-msgid "Edit the Bibtex string macros"
-msgstr ""
+#: mainwindow.cpp:476
+msgid "Create a new entry"
+msgstr "Lag nytt innslag"
 
-#: mainwindow.cpp:471
-#, fuzzy
-msgid "&Cite Entry"
-msgstr "Изтрий книга"
+#: controller.cpp:385 mainwindow.cpp:477
+msgid "&Edit Entry"
+msgstr "&Endre innslag"
 
-#: mainwindow.cpp:474
-#, fuzzy
-msgid "Cite the selected entries in LyX"
-msgstr "Изтриване на няколко книги ?"
+#: mainwindow.cpp:480
+msgid "Edit the selected entries"
+msgstr "Endre valgt innslag"
 
-#: mainwindow.cpp:485
-msgid "Enable/disable the statusbar"
-msgstr "Показва/скрива долната лента"
+#: controller.cpp:386 mainwindow.cpp:481
+msgid "&Copy Entry"
+msgstr "&Kopier innslag"
+
+#: mainwindow.cpp:484
+msgid "Copy the selected entries"
+msgstr "Kopier valgte innslag"
+
+#: controller.cpp:387 mainwindow.cpp:485
+msgid "&Delete Entry"
+msgstr "&Slett innslag"
+
+#: mainwindow.cpp:488
+msgid "Delete the selected entries"
+msgstr "Slett valgte innslag"
 
 #: mainwindow.cpp:489
-#, fuzzy
-msgid "Show Grou&p View"
-msgstr "BCGroupView"
+msgid "&Rename Collection..."
+msgstr "&Gi samling nytt navn..."
 
 #: mainwindow.cpp:492
-#, fuzzy
-msgid "Enable/disable the group view"
-msgstr "Показва/скрива тази лента"
+msgid "Rename the collection"
+msgstr "Gi samling nytt navn"
 
 #: mainwindow.cpp:493
-msgid "Show Entry &Editor"
-msgstr ""
+msgid "Collection &Fields..."
+msgstr "&Felter for samling..."
 
 #: mainwindow.cpp:496
-#, fuzzy
-msgid "Enable/disable the editor"
-msgstr "Показва/скрива тази лента"
+msgid "Modify the collection fields"
+msgstr "Endre samlingens felter"
 
 #: mainwindow.cpp:497
-#, fuzzy
-msgid "Show Entry &View"
-msgstr "BCGroupView"
+msgid "Convert to &Bibliography"
+msgstr "Konverter til en &bibliografi"
 
 #: mainwindow.cpp:500
-#, fuzzy
-msgid "Enable/disable the entry view"
-msgstr "Показва/скрива тази лента"
+msgid "Convert a book collection to a bibliography"
+msgstr "Konverter en boksamling til en bibliografi"
 
 #: mainwindow.cpp:501
-#, fuzzy
+msgid "String &Macros..."
+msgstr "&Makro for tekststreng..."
+
+#: mainwindow.cpp:504
+msgid "Edit the Bibtex string macros"
+msgstr "Endre Bibtex tekststrengmakro"
+
+#: mainwindow.cpp:505
+msgid "&Cite Entry"
+msgstr "Sit&er innslag"
+
+#: mainwindow.cpp:508
+msgid "Cite the selected entries in LyX"
+msgstr "Siter valgte innslag i Lyx"
+
+#: mainwindow.cpp:519
+msgid "Enable/disable the statusbar"
+msgstr "Slå på/av statuslinje"
+
+#: mainwindow.cpp:523
+msgid "Show Grou&p View"
+msgstr "Bruk &grupperingsvisning"
+
+#: mainwindow.cpp:526
+msgid "Enable/disable the group view"
+msgstr "Slå på/av grupperingsvisning"
+
+#: mainwindow.cpp:527
+msgid "Show Entry &Editor"
+msgstr "Vis redigerer for &innslag"
+
+#: mainwindow.cpp:530
+msgid "Enable/disable the editor"
+msgstr "Slå på/av redigerer"
+
+#: mainwindow.cpp:531
+msgid "Show Entry &View"
+msgstr "Vis r&innslag"
+
+#: mainwindow.cpp:534
+msgid "Enable/disable the entry view"
+msgstr "Slå på/av innslagsvisning"
+
+#: mainwindow.cpp:535
 msgid "Advanced &Filter..."
-msgstr "Разширен филтър..."
+msgstr "Avansert &filter..."
 
-#: mainwindow.cpp:504 mainwindow.cpp:527 mainwindow.cpp:530
-#, fuzzy
+#: mainwindow.cpp:538 mainwindow.cpp:561 mainwindow.cpp:564
 msgid "Filter the collection"
-msgstr "Редакция на полетата на колекцията..."
+msgstr "Filtrer samlingen"
 
-#: mainwindow.cpp:517
+#: mainwindow.cpp:551
 msgid "Group By:"
-msgstr "Групирай по:"
+msgstr "Grupper på:"
 
-#: mainwindow.cpp:519 mainwindow.cpp:523
+#: mainwindow.cpp:553 mainwindow.cpp:557
 msgid "Change the grouping of the collection"
-msgstr "Промяна на групирането на колекцията"
+msgstr "Endre gruppering av samlingen"
 
-#: mainwindow.cpp:520
-#, fuzzy
+#: mainwindow.cpp:554
 msgid "&Group Selection"
-msgstr "Опции за групиране"
+msgstr "&Valg for gruppering"
 
-#: mainwindow.cpp:525
+#: mainwindow.cpp:559
 msgid "Quick Filter:"
-msgstr "Бърз филтър"
+msgstr "Hurtigfilter:"
 
-#: mainwindow.cpp:528
-#, fuzzy
+#: mainwindow.cpp:562
 msgid "Filter Entry"
-msgstr "Изтрий книга"
+msgstr "Filtrer innslag"
 
-#: mainwindow.cpp:561
+#: mainwindow.cpp:595
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
+"<qt><i>Grupperingsvisning</i> sorterer innslag inn i grupper basert på "
+"valgte felter</qt>"
 
-#: mainwindow.cpp:567
+#: mainwindow.cpp:601
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each "
 "entry.</qt>"
 msgstr ""
+"<qt><i>Kolonnevisning</i> viser antallet til flere felter for hvert "
+"innslag</qt>"
 
-#: mainwindow.cpp:857
+#: mainwindow.cpp:891
 msgid "Creating new document..."
-msgstr "Създава нов документ..."
+msgstr "Oppretter nytt dokument..."
 
-#: mainwindow.cpp:877 mainwindow.cpp:896 mainwindow.cpp:912
+#: mainwindow.cpp:911 mainwindow.cpp:930 mainwindow.cpp:946
 msgid "Opening file..."
-msgstr "Отваря файл..."
+msgstr "Åpne fil..."
 
-#: mainwindow.cpp:887
+#: mainwindow.cpp:921
 msgid "Open File..."
-msgstr "Отваря файл..."
+msgstr "Åpne fil..."
 
-#: mainwindow.cpp:963
+#: mainwindow.cpp:997
 msgid "Saving file..."
-msgstr "Записва файл..."
+msgstr "Lagrer filen..."
 
-#: mainwindow.cpp:985
+#: mainwindow.cpp:1019
 msgid "Saving file with a new filename..."
-msgstr "Записва файла с ново име ..."
+msgstr "Lagrer fil med nytt navn..."
 
-#: mainwindow.cpp:1027 mainwindow.cpp:1076
+#: mainwindow.cpp:1061 mainwindow.cpp:1110
 msgid "Printing..."
-msgstr "Отпечатване..."
+msgstr "Skriver ut..."
 
-#: mainwindow.cpp:1037
+#: mainwindow.cpp:1071
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
+"Samlingen er foreløpig satt opp til å vise en begrenset antall av innslag. "
+"Bare innslag som er synlige vil bli skrevet ut. Vil du fortsette?"
 
-#: mainwindow.cpp:1063
+#: mainwindow.cpp:1097
 msgid "Processing document..."
-msgstr "Процедирам с документа..."
+msgstr "Prosesserer dokument..."
 
-#: mainwindow.cpp:1083
+#: mainwindow.cpp:1117
 msgid "Exiting..."
-msgstr "Излизам..."
+msgstr "Avslutter..."
 
-#: mainwindow.cpp:1267
-#, fuzzy, c-format
+#: mainwindow.cpp:1301
+#, c-format
 msgid "Total Entries: %1"
-msgstr "Изтриване на поле"
+msgstr "antall innslag: %1"
 
-#: mainwindow.cpp:1276
+#: mainwindow.cpp:1310
 msgid "(%1 filtered; %2 selected)"
-msgstr ""
+msgstr "(%1 filtrert, %2 valgt)"
 
-#: mainwindow.cpp:1279
+#: mainwindow.cpp:1313
 msgid "(%1 filtered)"
-msgstr ""
+msgstr "(%1 filtrert)"
 
-#: mainwindow.cpp:1282
+#: mainwindow.cpp:1316
 msgid "(%1 selected)"
-msgstr ""
+msgstr "(%1 valgt)"
 
-#: mainwindow.cpp:1410 translators/htmlexporter.cpp:225
+#: mainwindow.cpp:1445 translators/htmlexporter.cpp:225
 msgid "People"
-msgstr ""
+msgstr "Personer"
 
-#: mainwindow.cpp:1478
-#, fuzzy, c-format
+#: mainwindow.cpp:1513
+#, c-format
 msgid "Print %1"
-msgstr "Печатане"
+msgstr "Skriv ut %1"
 
-#: mainwindow.cpp:1512
+#: mainwindow.cpp:1547
 #, c-format
 msgid "Page %1"
-msgstr "Страница %1"
+msgstr "Side %1"
 
-#: mainwindow.cpp:1539 translators/xsltimporter.cpp:56
-#, fuzzy
+#: mainwindow.cpp:1574 translators/xsltimporter.cpp:56
 msgid "Bookcase encountered an error in XSLT processing."
-msgstr ""
-"Програмата се натъкна на грешка при XSLT "
-"процедирането.\n"
+msgstr "Bookcase fikk en feil i XSLT prosesseringen."
 
-#: mainwindow.cpp:1635
-#, fuzzy
+#: mainwindow.cpp:1670
 msgid "Importing data..."
-msgstr "Експортирам..."
+msgstr "Importer data..."
 
-#: mainwindow.cpp:1642
-#, fuzzy
+#: mainwindow.cpp:1679 mainwindow.cpp:1685
 msgid "Import File..."
-msgstr "Импортира Bibtex файл..."
+msgstr "Importer fil..."
 
-#: mainwindow.cpp:1683
+#: mainwindow.cpp:1735
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection"
 msgstr ""
+"Bare samlinger av samme type innslag som den nåværende kan bli lagt til. "
+"Ingen forandringer er gjort i den nåværende samlingen"
 
-#: mainwindow.cpp:1698
+#: mainwindow.cpp:1750
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection"
 msgstr ""
+"Bare samlinger av samme type innslag som den nåværende kan bli lagt til. "
+"Ingen forandringer er gjort i den nåværende samlingen"
 
-#: mainwindow.cpp:1727
-#, fuzzy
+#: mainwindow.cpp:1779
 msgid "Exporting data..."
-msgstr "Експортирам..."
+msgstr "Eksporterer data..."
 
-#: mainwindow.cpp:1734
-#, fuzzy
+#: mainwindow.cpp:1801
 msgid "Export As"
-msgstr "Е&кспортиране"
+msgstr "Eksporter som"
 
-#: mainwindow.cpp:1771
-#, fuzzy
+#: mainwindow.cpp:1839
 msgid "String Macros"
-msgstr "Оценка"
+msgstr "Tekststreng-makro"
 
-#: mainwindow.cpp:1772
+#: mainwindow.cpp:1840
 msgid "Macro"
-msgstr ""
+msgstr "Makro"
 
-#: mainwindow.cpp:1772
-#, fuzzy
+#: mainwindow.cpp:1840
 msgid "String"
-msgstr "Оценка"
+msgstr "Tekststreng"
 
-#: mainwindow.cpp:1894
-#, fuzzy
+#: mainwindow.cpp:1962
 msgid "<qt>Bookcase is unable to write to the server pipe at <b>%1</b>.</qt>"
-msgstr "Bookcase не може да пише във файл %1."
+msgstr "<qt>Bookcase klarer ikke å skrive til tjeneren på <b>%1</b>.</qt>"
 
 #: document.cpp:106
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
 msgstr ""
-"Текущият файл бе променен.\n"
-"Желаете ли да го запишете?"
+"Dette dokumentet er endret.\n"
+"Vil du lagre?"
 
 #: document.cpp:108 entryeditdialog.cpp:565
 msgid "Warning!"
-msgstr "Предупреждение !"
+msgstr "Advarsel!"
 
-#: document.cpp:345 document.cpp:348
-#, fuzzy
+#: document.cpp:370 document.cpp:373
 msgid "Rename Collection"
-msgstr "Преименувай колекцията"
+msgstr "Gi samling nytt navn"
 
-#: document.cpp:345 document.cpp:348
+#: document.cpp:370 document.cpp:373
 msgid "New Collection Name"
-msgstr "Ново име за колекция"
+msgstr "Nytt navn på samling"
 
-#: document.cpp:487
+#: document.cpp:511
 msgid "Search string '%1' not found."
-msgstr "Търсеният низ \"%1\" не бе намерен."
+msgstr "Søkestrengen '%1' ble ikke funnet."
 
 #: collectionfieldsdialog.cpp:81
-#, fuzzy
 msgid "Collection Fields"
-msgstr "Полета на колекцията..."
+msgstr "Felter for samling"
 
 #: collectionfieldsdialog.cpp:94
 msgid "Current Fields"
-msgstr "Текущи полета"
+msgstr "Gjeldende felter"
 
 #: collectionfieldsdialog.cpp:109
-#, fuzzy
 msgid ""
 "_: New Field\n"
 "New"
-msgstr "Ново поле"
+msgstr "_: Nytt felt"
 
 #: collectionfieldsdialog.cpp:111
-#, fuzzy
 msgid "Add a new field to the collection"
-msgstr "Създава нов документ"
+msgstr "Legg nytt felt til i samlingen"
 
 #: collectionfieldsdialog.cpp:112
-#, fuzzy
 msgid ""
 "_: Delete Field\n"
 "Delete"
-msgstr "Изтриване на поле"
+msgstr ""
+"Slett felt\n"
+"Slett"
 
 #: collectionfieldsdialog.cpp:114
-#, fuzzy
 msgid "Remove a field from the collection"
-msgstr "Редакция на полетата на колекцията..."
+msgstr "Fjern et felt fra samlingen"
 
 #: collectionfieldsdialog.cpp:123
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
+"Flytt dette feltet opp i listen. Listerekkefølgen er viktig for utseende av "
+"innholdsredigerer."
 
 #: collectionfieldsdialog.cpp:127
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
+"Flytt dette feltet ned i listen. Listerekkefølgen er viktig for utseende av "
+"innholdsredigerer."
 
 #: collectionfieldsdialog.cpp:137
 msgid "Field Properties"
-msgstr "Настройки на поле"
+msgstr "Feltverdi"
 
 #: collectionfieldsdialog.cpp:143
 msgid "Title:"
-msgstr "Заглавие:"
+msgstr "Tittel:"
 
 #: collectionfieldsdialog.cpp:147
 msgid "The title of the field"
-msgstr ""
+msgstr "Tittel for feltet"
 
 #: collectionfieldsdialog.cpp:152
 msgid "Type:"
-msgstr "Тип:"
+msgstr "Felttype:"
 
 #: collectionfieldsdialog.cpp:157
 msgid "The type of the field determines what values may be used. "
-msgstr ""
+msgstr "Denne typen felter bestemmer hvilke verdier som kan benyttes. "
 
 #: collectionfieldsdialog.cpp:158
 msgid "<i>Simple Text</i> is used for most fields. "
-msgstr ""
+msgstr "<i>Enkel tekst</i> benyttes mest for felter. "
 
 #: collectionfieldsdialog.cpp:159
 msgid "<i>Paragraph</i> is for large text blocks. "
-msgstr ""
+msgstr "<i>Avsnitt</i> er for store tekstblokker. "
 
 #: collectionfieldsdialog.cpp:160
 msgid "<i>Choice</i> limits the field to certain values. "
-msgstr ""
+msgstr "<i>Valg</i> begrenser feltene til fastsatte verdier. "
 
 #: collectionfieldsdialog.cpp:161
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
-msgstr ""
+msgstr "<i>Avkrysningsboks</i> er for enkle ja/nei verdier. "
 
 #: collectionfieldsdialog.cpp:162
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
-msgstr ""
+msgstr "<i>Nummer</i> indikerer at feltet er numerisk. "
 
 #: collectionfieldsdialog.cpp:163
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
 "files. "
 msgstr ""
+"<i>URL</i> er for felter som refererer til en URL, inkludert referanser til "
+"andre filer. "
 
 #: collectionfieldsdialog.cpp:164
 msgid "<i>Table</i>s may be a single or double column of values. "
-msgstr ""
+msgstr "<i>Tabell</i>er kan være enkle eller doble kolonner av verdier. "
 
 #: collectionfieldsdialog.cpp:165
 msgid "An <i>Image</i> field holds a picture. "
-msgstr ""
+msgstr "Ett <i>bilde</i>felt holder på ett bilde. "
 
 #: collectionfieldsdialog.cpp:166
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
+"Ett <i>dato</i>felt kan bli brukt til å holde på verdier for dag, måned "
+"og år. "
 
 #: collectionfieldsdialog.cpp:167
 msgid ""
 "A <i>Dependent</i> field depends on the values of other fields, and is "
 "formatted according to the field description. "
 msgstr ""
+"<i>Avhenger</i>feltet trenger verdier i andre felter, og er formatert etter "
+"beskrivelsen til feltet. "
 
 #: collectionfieldsdialog.cpp:169
 msgid ""
 "A <i>Read Only</i> is for internal values, possibly useful for import and "
 "export. "
 msgstr ""
+"<i>Kun les</i> er kun interne verdier, kanskje brukbar til import og "
+"eksport. "
 
 #: collectionfieldsdialog.cpp:178
 msgid "Category:"
-msgstr "Категория:"
+msgstr "Kategori:"
 
 #: collectionfieldsdialog.cpp:182
 msgid "The field category determines where the field is placed in the editor."
-msgstr ""
+msgstr "Feltet kategori bestemmer hvor feltet er plassert i redigereren."
 
 #: collectionfieldsdialog.cpp:199
 msgid "Description:"
-msgstr "Описание:"
+msgstr "Beskrivelse:"
 
 #: collectionfieldsdialog.cpp:203
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
 "are placed in a combo box.</qt>"
 msgstr ""
+"<qt>For <i>valg</i>-felter, disse er de eneste verdiene som er tillatt. De "
+"er plassert i en kombinasjonsliste.</qt>"
 
 #: collectionfieldsdialog.cpp:209
 msgid "Allowed:"
-msgstr "Позволено:"
+msgstr "Tillatt:"
 
 #: collectionfieldsdialog.cpp:214
 msgid ""
@@ -1579,112 +1474,119 @@ msgid ""
 "field. For <i>Dependent</i> fields, the description is a format string such "
 "as \"%{year} %{title}\" where the named fields get substituted in the string."
 msgstr ""
+"Beskrivelse er en nyttig påminner om hvilken informasjon som ett felt "
+"inneholder. For <i>avhenger</i>-felter er beskrivelsen en formateringsstreng "
+"slik som \"%{year} %{title}\", hvor hvor de aktuelle feltene blir byttet ut "
+"i tekststrengen."
 
 #: collectionfieldsdialog.cpp:221
-#, fuzzy
 msgid "Extended Properties:"
-msgstr "Настройки на поле"
+msgstr "Utvidete egenskaper:"
 
 #: collectionfieldsdialog.cpp:223
-#, fuzzy
 msgid "Set..."
-msgstr "Запиши като ..."
+msgstr "Sett til..."
 
 #: collectionfieldsdialog.cpp:225
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr ""
+"Utvidete felter blir brukt for å spesifisere ting, slik som "
+"korresponderende bibtex-felter."
 
 #: collectionfieldsdialog.cpp:229
 msgid "Format Options"
-msgstr "Опции за форматиране"
+msgstr "Valg for formatering"
 
 #: collectionfieldsdialog.cpp:230
 msgid "No formatting"
-msgstr "Без форматиране"
+msgstr "Ingen formatering"
 
 #: collectionfieldsdialog.cpp:231
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
 msgstr ""
+"Dette valget forhindrer feltet fra automatisk formatering eller stor bokstav."
 
 #: collectionfieldsdialog.cpp:233
 msgid "Allow auto-capitalization only"
-msgstr ""
+msgstr "Tillat kun automatisk stor bokstav"
 
 #: collectionfieldsdialog.cpp:234
 msgid ""
 "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
+"Dette valget tillater feltet å få automatisk stor forbokstav, men ikke "
+"spesielt formatert."
 
 #: collectionfieldsdialog.cpp:236
 msgid "Format as a title"
-msgstr "Форматиране като заглавие"
+msgstr "Formater som tittel"
 
 #: collectionfieldsdialog.cpp:237
 msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
 msgstr ""
+"Dette valget setter stor forbokstav og formaterer feltet som en tittel, men "
+"kun om disse valgene er slått på globalt."
 
 #: collectionfieldsdialog.cpp:239
 msgid "Format as a name"
-msgstr "Форматиране като име"
+msgstr "Formater som navn"
 
 #: collectionfieldsdialog.cpp:240
 msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
 msgstr ""
+"Dette valget setter stor forbokstav og formaterer feltet som ett navn, men "
+"kun om disse valgene er slått på globalt."
 
 #: collectionfieldsdialog.cpp:244
 msgid "Field Options"
-msgstr "Настройки на полето"
+msgstr "Feltvalg"
 
 #: collectionfieldsdialog.cpp:245
 msgid "Enable auto-completion"
-msgstr "Разрешава автоматично завършване"
+msgstr "Slå på auto-fullføring"
 
 #: collectionfieldsdialog.cpp:246
-#, fuzzy
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
 msgstr ""
-"Ако е избрано,книгите ще бъдат групирани "
-"по даден признак."
+"Om slått på vil KDEs auto-fullføring bli skrudd på i tekst-redigereren "
+"for dette feltet."
 
 #: collectionfieldsdialog.cpp:248
 msgid "Allow multiple values"
-msgstr "Позволява няколко стойности"
+msgstr "Tillat flere verdier"
 
 #: collectionfieldsdialog.cpp:249
-#, fuzzy
 msgid ""
 "If checked, Bookcase will parse the values in the field for multiple values, "
 "separated by a semi-colon."
 msgstr ""
-"Позволени стойности,за това "
-"поле,разделени с ;"
+"Om slått på vil Bookcase tolke verdiene i feltene som flere verdier, "
+"separert av et semi-kolon."
 
 #: collectionfieldsdialog.cpp:251
 msgid "Allow grouping"
-msgstr "Позволява групиране"
+msgstr "Tillat gruppering"
 
 #: collectionfieldsdialog.cpp:252
-#, fuzzy
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
-"Ако е избрано,броя на книгите в груптата "
-"ще бъде добавен към името й."
+"Om slått på vil dette feltet bli brukt til å gruppere innslag i "
+"gruppevisningen."
 
 #: collectionfieldsdialog.cpp:265
-#, fuzzy
 msgid "Revert the selected field's properties to the default values."
-msgstr "Няма избрани полета в тази колекция"
+msgstr "Sett valgte felters verdier tilbake til standardverdier."
 
 #: collectionfieldsdialog.cpp:315
 msgid ""
@@ -1692,65 +1594,64 @@ msgid ""
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
+"<qt>Fjerning av verdier fra feltet <i>%1</i> som for øyeblikket benyttes av "
+"åpen samling kan føre til korrupsjon av data. Vil du beholde dim "
+"modifiserte verdi, eller kansellere for å beholde nåværende verdier?</qt>"
 
 #: collectionfieldsdialog.cpp:320
 msgid "Keep modified values"
-msgstr ""
+msgstr "Behold modifiserte verdier"
 
 #: collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:381
-#: translators/csvimporter.cpp:335 translators/csvimporter.cpp:427
+#: translators/csvimporter.cpp:340 translators/csvimporter.cpp:435
 msgid "New Field"
-msgstr "Ново поле"
+msgstr "Nytt felt"
 
 #: collectionfieldsdialog.cpp:414
-#, fuzzy
 msgid ""
 "<qt><p>Do you really want to delete the <em>%1</em> field? This action "
 "occurs immediately and can not be undone!</p></qt>"
 msgstr ""
-"Настина ли желаете да изтриете полето %1? "
-"Няма връщане назад,ако го изтриете."
+"<qt><p>Vil du virkelig slette <em>%1</em>-feltet. Denne handlingen skjer med "
+"en gang og kan ikke bli omgjort!</p></qt>"
 
 #: collectionfieldsdialog.cpp:417
 msgid "Delete Field?"
-msgstr "Изтриване на поле?"
+msgstr "Slett felt?"
 
 #: collectionfieldsdialog.cpp:713
-#, fuzzy
 msgid "Revert Field Properties?"
-msgstr "Настройки на поле"
+msgstr "Tilbakestill feltverdi?"
 
 #: collectionfieldsdialog.cpp:714
-#, fuzzy
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
-"Настина ли желаете да изтриете полето %1? "
-"Няма връщане назад,ако го изтриете."
+"<qt><p>Vil du virkelig sette egenskapene <em>%1</em>-feltet tilbake til sine "
+"originale verdier?</p></qt>"
 
 #: collectionfieldsdialog.cpp:717
 msgid "Revert"
-msgstr ""
+msgstr "Tilbakestill"
 
 #: collectionfieldsdialog.cpp:835
-#, fuzzy
 msgid "Extended Field Properties"
-msgstr "Настройки на поле"
+msgstr "Utvidete feltegenskaper"
 
 #: collectionfieldsdialog.cpp:836
-#, fuzzy
 msgid "Property"
-msgstr "Година на публикуване"
+msgstr "Egenskap"
 
 #: collectionfieldsdialog.cpp:836
-#, fuzzy
 msgid "Value"
-msgstr "Показва колони"
+msgstr "Verdi"
 
 #: collectionfieldsdialog.cpp:852
 msgid "A field with this title already exists. Please enter a different title."
 msgstr ""
+"Ett felt med denne tittelen eksisterer allerede. Vennligst velg en annen "
+"tittel."
 
 #: collectionfieldsdialog.cpp:861
 msgid ""
@@ -1758,307 +1659,322 @@ msgid ""
 "<em>Table</em> or <em>Image</em> field. Please enter a different "
 "category.</qt>"
 msgstr ""
+"<qt>Ett felt kan ikke være i samme kategori som en <em>paragraf</em>-, "
+"<em>tabell</em>- eller <em>bilde</em>felt. Vennligst velg en annen "
+"kategori.</qt>"
 
 #: collectionfieldsdialog.cpp:869
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
 msgstr ""
+"Ett felts tittel kan ikke den samme som en eksisterende kategori. Vennligst "
+"velg en annen tittel."
 
 #: collection.cpp:23
 msgid "(Empty)"
-msgstr "(Празно)"
+msgstr "(Tom)"
 
 #: controller.cpp:270
-#, fuzzy
 msgid "Do you really want to delete these entries?"
-msgstr ""
-"Наистина ли жалете да изтриете тези книги "
-"?"
+msgstr "Vil du slette disse innslagene?"
 
 #: controller.cpp:272
-#, fuzzy
 msgid "Delete Multiple Entries?"
-msgstr "Изтриване на няколко книги ?"
+msgstr "Slett flere innslag?"
 
 #: controller.cpp:389
-#, fuzzy
 msgid "&Edit Entries"
-msgstr "Изтрий книга"
+msgstr "&Endre innslag"
 
 #: controller.cpp:390
-#, fuzzy
 msgid "&Copy Entries"
-msgstr "Дуплициране на книга"
+msgstr "&Kopier innslag"
 
 #: controller.cpp:391
-#, fuzzy
 msgid "&Delete Entries"
-msgstr "Изтриване на поле"
+msgstr "&Slett innslag"
 
 #: translators/csvexporter.cpp:38
 msgid "CSV"
-msgstr ""
+msgstr "Csv"
 
-#: translators/csvexporter.cpp:53 translators/csvimporter.cpp:117
-#, fuzzy
+#: translators/csvexporter.cpp:53 translators/csvimporter.cpp:118
 msgid "CSV Options"
-msgstr "Настройки на полето"
+msgstr "Valg for CSV"
 
 #: translators/csvexporter.cpp:56
 msgid "Include field titles as column headers"
-msgstr ""
+msgstr "Inkluder feltet tittel som kolonneoverskrift"
 
 #: translators/csvexporter.cpp:58
-#, fuzzy
 msgid "If checked, a header row will be added with the field titles."
-msgstr ""
-"Ако е избрано,книгите ще бъдат групирани "
-"по даден признак."
+msgstr "Om slått på vil en overskriftsrad bli lagt til med feltet tittel."
 
-#: translators/csvexporter.cpp:61 translators/csvimporter.cpp:137
+#: translators/csvexporter.cpp:61 translators/csvimporter.cpp:138
 msgid "Delimiter"
-msgstr ""
+msgstr "Feltvelger"
 
-#: translators/csvexporter.cpp:64 translators/csvimporter.cpp:140
+#: translators/csvexporter.cpp:64 translators/csvimporter.cpp:141
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
+"I tillegg til et komma, kan andre tegn bli brukt som feltvelgere, som "
+"separerer hver verdi i filen."
 
-#: translators/csvexporter.cpp:68 translators/csvimporter.cpp:145
-#, fuzzy
+#: translators/csvexporter.cpp:68 translators/csvimporter.cpp:146
 msgid "Comma"
-msgstr "Коментар"
+msgstr "Komma"
 
-#: translators/csvexporter.cpp:70 translators/csvimporter.cpp:147
+#: translators/csvexporter.cpp:70 translators/csvimporter.cpp:148
 msgid "Use a comma as the delimiter."
-msgstr ""
+msgstr "Bruk komma som feltvelger."
 
-#: translators/csvexporter.cpp:74 translators/csvimporter.cpp:151
+#: translators/csvexporter.cpp:74 translators/csvimporter.cpp:152
 msgid "Semicolon"
-msgstr ""
+msgstr "Semikolon"
 
-#: translators/csvexporter.cpp:75 translators/csvimporter.cpp:152
+#: translators/csvexporter.cpp:75 translators/csvimporter.cpp:153
 msgid "Use a semi-colon as the delimiter."
-msgstr ""
+msgstr "Bruk semikolon som feltvelger."
 
-#: translators/csvexporter.cpp:79 translators/csvimporter.cpp:156
-#, fuzzy
+#: translators/csvexporter.cpp:79 translators/csvimporter.cpp:157
 msgid "Tab"
-msgstr "Заглавие"
+msgstr "Tabulator"
 
-#: translators/csvexporter.cpp:80 translators/csvimporter.cpp:157
+#: translators/csvexporter.cpp:80 translators/csvimporter.cpp:158
 msgid "Use a tab as the delimiter."
-msgstr ""
+msgstr "Bruk en tabulator som feltvelger."
 
-#: translators/csvexporter.cpp:84 translators/csvimporter.cpp:161
-#, fuzzy
+#: translators/csvexporter.cpp:84 translators/csvimporter.cpp:162
 msgid "Other"
-msgstr " "
+msgstr "Annet"
 
-#: translators/csvexporter.cpp:85 translators/csvimporter.cpp:162
+#: translators/csvexporter.cpp:85 translators/csvimporter.cpp:163
 msgid "Use a custom string as the delimiter."
-msgstr ""
+msgstr "Bruk egendefinert tegn som feltvelger."
 
-#: translators/csvexporter.cpp:90 translators/csvimporter.cpp:167
+#: translators/csvexporter.cpp:90 translators/csvimporter.cpp:168
 msgid "A custom string, such as a colon, may be used as a delimiter."
-msgstr ""
+msgstr "Et egendefinert tegn slik som kolon kan bli brukt som feltvelger."
 
 #: translators/htmlexporter.cpp:56
 msgid "HTML"
-msgstr ""
+msgstr "Html"
 
 #: translators/htmlexporter.cpp:60
-#, fuzzy
 msgid "*.html|HTML files (*.html)"
-msgstr "*.xml|XML файлове (*.xml)"
+msgstr "*.hml|HTML fil(*.html)"
 
 #: translators/htmlexporter.cpp:71
-#, fuzzy
 msgid "HTML Options"
-msgstr "Настройки на полето"
+msgstr "Valg for HTML"
 
 #: translators/htmlexporter.cpp:84
 msgid "Export individual entry files"
-msgstr ""
+msgstr "Eksporter innslag til egne filer"
 
 #: translators/htmlexporter.cpp:85
-#, fuzzy
 msgid "If checked, individual files will be created for each entry."
-msgstr ""
-"Ако е избрано,заглавията на полетата ще "
-"бъдат отпечатани."
+msgstr "Om slått på vil hvert innslag få sin egen fil."
 
 #: translators/htmlexporter.cpp:229
-#, fuzzy
 msgid "(grouped by %1; sorted by %2)"
-msgstr "(сортирано по %1)"
+msgstr "(gruppert på %1;sortert på %2)"
 
 #: translators/htmlexporter.cpp:231
 msgid "(sorted by %1)"
-msgstr "(сортирано по %1)"
+msgstr "(sortert på %1)"
 
 #: translators/bibtexexporter.cpp:62
-#, fuzzy
 msgid "Expand string macros"
-msgstr "Оценка"
+msgstr "Utvid tekststreng-makroer"
 
 #: translators/bibtexexporter.cpp:64
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
 msgstr ""
+"Om slått på vil tekststreng-makroer bli utvidet og ingen @innhold{} "
+"innslag vil bli skrevet."
 
 #: translators/bibtexexporter.cpp:67
 msgid "Use URL package"
-msgstr ""
+msgstr "Bruk URL-innpakking"
 
 #: translators/bibtexexporter.cpp:69
-#, fuzzy
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr ""
-"Ако е избрано,заглавията на полетата ще "
-"бъдат отпечатани."
+msgstr "Om slått på vil alle URL-felter bli satt inn i en \\URL-deklarasjon."
 
 #: translators/bibtexexporter.cpp:72
 msgid "Skip entries with empty citation keys"
-msgstr ""
+msgstr "Hopp over innslag med tomme siteringsnøkler"
 
 #: translators/bibtexexporter.cpp:74
 msgid "If checked, any entries without a bibtex citation key will be skipped."
-msgstr ""
+msgstr "Om slått på vil innslag uten en bibtex-nøkkel bli hoppet over."
 
 #: translators/bibtexmlexporter.cpp:37
-#, fuzzy
 msgid "Bibtexml"
-msgstr "Експортира към Bibtexml файл"
+msgstr "BibtexML"
 
 #: translators/bibtexmlexporter.cpp:41
 msgid "*.xml|Bibtexml files (*.xml)"
-msgstr "*.xml|Bibtexml файлове (*.xml)"
+msgstr "*.xml|Bibtexml filer (*.xml)"
 
-#: translators/csvimporter.cpp:122
-#, fuzzy
+#: translators/csvimporter.cpp:123
 msgid "Collection Type:"
-msgstr "BCCollection"
+msgstr "Type samling:"
 
-#: translators/csvimporter.cpp:124
+#: translators/csvimporter.cpp:125
 msgid "Select the type of collection being imported."
-msgstr ""
+msgstr "Velg typen av samling for import."
 
-#: translators/csvimporter.cpp:132
+#: translators/csvimporter.cpp:133
 msgid "First row contains field titles"
-msgstr ""
+msgstr "Første rad inneholder feltet tittel"
 
-#: translators/csvimporter.cpp:134
-#, fuzzy
+#: translators/csvimporter.cpp:135
 msgid "If checked, the first row is used as field titles."
-msgstr ""
-"Ако е избрано,низът за търсене се "
-"използва като регулярен израз."
+msgstr "Om slått på vil første rad bli brukt for feltet tittel."
 
-#: translators/csvimporter.cpp:192
+#: translators/csvimporter.cpp:193
 msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
+msgstr "Tabellen viser opp til de fem første linjene i CSV-filen."
 
-#: translators/csvimporter.cpp:198
+#: translators/csvimporter.cpp:199
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
 "column, selecting the field, then clicking the <i>Set</i> button.</qt>"
 msgstr ""
+"<qt>Sett hver kolonne til korresponderende felt i samlingen ved å velge en "
+"kolonne, velge feltet og så klikke på <i>Sett</i>-knappen.</qt>"
 
-#: translators/csvimporter.cpp:200
-#, fuzzy
+#: translators/csvimporter.cpp:201
 msgid "Column:"
-msgstr "Показва колони"
+msgstr "Kolonne:"
 
-#: translators/csvimporter.cpp:204
-#, fuzzy
+#: translators/csvimporter.cpp:205
 msgid "Data field in this column:"
-msgstr "Полета на колекцията..."
+msgstr "Datafelter i denne kolonnen:"
 
-#: translators/csvimporter.cpp:207
-#, fuzzy
+#: translators/csvimporter.cpp:208
 msgid "Assign Field"
-msgstr "Някое поле"
+msgstr "Tildel felt"
 
 #: translators/xsltexporter.cpp:37
 msgid "XSLT"
-msgstr ""
+msgstr "Xslt"
 
 #: translators/xsltexporter.cpp:52 translators/xsltimporter.cpp:80
-#, fuzzy
 msgid "XSLT Options"
-msgstr "Настройки на полето"
+msgstr "Valg for XSLT"
 
 #: translators/xsltexporter.cpp:57 translators/xsltimporter.cpp:83
-#, fuzzy
 msgid "XSLT File:"
-msgstr "Заглавие:"
+msgstr "XSLT-fil:"
 
 #: translators/xsltexporter.cpp:59
 msgid "Choose the XSLT file used to transform the Bookcase XML data."
-msgstr ""
+msgstr "Velg en XSLT-fil for omgjøring til Bookcase XML-data."
 
 #: translators/bibteximporter.cpp:42
 #, c-format
 msgid "No valid Bibtex entries were found in file - %1"
-msgstr ""
+msgstr "Ingen gyldig Bibtex-innslag ble funnet i filen - %1"
 
 #: translators/pilotdbexporter.cpp:41
 msgid "PilotDB"
-msgstr ""
+msgstr "Pilot-DB"
 
 #: translators/pilotdbexporter.cpp:45
-#, fuzzy
 msgid "*.pdb|Pilot Database files(*.pdb)"
-msgstr "*.bc|Bookcase файлове (*.bc)"
+msgstr "*.pdb|Pilot-databasefil(*.pdb)"
 
 #: translators/pilotdbexporter.cpp:174
-#, fuzzy
 msgid "PilotDB Options"
-msgstr "Настройки на полето"
+msgstr "Valg for PilotDB"
 
 #: translators/pilotdbexporter.cpp:177 translators/pilotdbexporter.cpp:179
 msgid "Set PDA backup flag for database"
-msgstr ""
+msgstr "Slå på backup av database for PDA"
 
 #: translators/bibtexhandler.cpp:199 translators/bookcaseimporter.cpp:227
 msgid "Unknown"
-msgstr "Непознат"
+msgstr "Ukjent"
 
 #: translators/bookcasexmlexporter.cpp:60
 msgid "XML"
-msgstr ""
+msgstr "Xml"
 
 #: translators/bookcasexmlexporter.cpp:75
-#, fuzzy
 msgid "Bookcase XML Options"
-msgstr "BookcaseDoc"
+msgstr "Valg for Bookcase XML"
 
 #: translators/bookcasexmlexporter.cpp:78
 msgid "Include images in XML document"
-msgstr ""
+msgstr "Inkluder bilder i XMl-dokumentet"
 
 #: translators/bookcasexmlexporter.cpp:80
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
 msgstr ""
+"Om slått på vil bilder i dokumentet bli inkludert som ett base64-enkodet "
+"element i XML-dokumentet."
 
 #: translators/xsltimporter.cpp:44 translators/xsltimporter.cpp:50
 msgid "A valid XSLT file is needed to import the file."
-msgstr ""
+msgstr "En gyldig XSLT-fil er nødvendig for å importere filen."
 
 #: translators/xsltimporter.cpp:86
-#, fuzzy
 msgid "*.xsl|XSL files (*.xsl)"
-msgstr "*.xml|XML файлове (*.xml)"
+msgstr "*.xsl|XSL filer (*.xsl)"
+
+#: translators/freedbimporter.cpp:59
+#, fuzzy
+msgid "<qt>Bookcase was unable to access the CD-ROM device - <i>%1</i>.</qt>"
+msgstr "<qt>Bookcase klarer ikke å skrive til tjeneren på <b>%1</b>.</qt>"
+
+#: translators/freedbimporter.cpp:77
+#, fuzzy
+msgid "<qt>Bookcase was unable to open the CD-ROM device - <i>%1</i>.</qt>"
+msgstr "<qt>Bookcase klarer ikke å skrive til tjeneren på <b>%1</b>.</qt>"
+
+#: translators/freedbimporter.cpp:122
+msgid "<qt>No records were found to match the CD.</qt>"
+msgstr ""
+
+#: translators/freedbimporter.cpp:126
+msgid "<qt>Multiple records were found to match the CD.</qt>"
+msgstr ""
+
+#: translators/freedbimporter.cpp:134
+#, fuzzy
+msgid "<qt>Bookcase was unable to complete the CD lookup.</qt>"
+msgstr "Bookcase klarer ikke å åpne filen - %1."
+
+#: collections/musiccollection.cpp:44 translators/freedbimporter.cpp:159
+msgid "Compact Disc"
+msgstr "CD"
+
+#: translators/freedbimporter.cpp:188
+#, fuzzy
+msgid "Audio CD Options"
+msgstr "Feltvalg"
+
+#: translators/freedbimporter.cpp:190
+msgid "CD-ROM Device:"
+msgstr ""
+
+#: translators/freedbimporter.cpp:193
+msgid "Select or input the CD-ROM device location."
+msgstr ""
 
 #: translators/bookcaseimporter.cpp:110
 msgid "It is from a future version of Bookcase."
-msgstr "Това е бъдеща версия на Bookcase."
+msgstr "Denne er fra en fremtidig versjon Bookcase."
 
 #: translators/bookcaseimporter.cpp:115
 msgid ""
@@ -2066,108 +1982,146 @@ msgid ""
 "Information loss may occur if an older version of Bookcase is used to read "
 "this file in the future."
 msgstr ""
+"Bookcase konverterer filen til et nyere format. Informasjonstap kan opptre "
+"om en eldre versjon av Bookcase blir brukt til å lese denne filen senere."
 
 #: translators/bookcasezipexporter.cpp:29
-#, fuzzy
 msgid "Bookcase Zip File"
-msgstr "Лавица"
+msgstr "Bookcase zipfil"
 
 #: translators/bookcasezipexporter.cpp:33
-#, fuzzy
 msgid "*.bc|Bookcase files(*.bc)"
-msgstr "*.bc|Bookcase файлове (*.bc)"
+msgstr "*.bc Bookcase fil(*.bc)"
+
+#: translators/alexandriaexporter.cpp:31
+#, fuzzy
+msgid "Alexandria"
+msgstr "Hovedvalg"
+
+#: translators/alexandriaexporter.cpp:48
+msgid ""
+"<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
+"books in that library could be overwritten.</qt>"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:86
+#, fuzzy
+msgid "Scanning audio files..."
+msgstr "Lagrer filen..."
+
+#: translators/audiofileimporter.cpp:207
+#, fuzzy
+msgid "Audio File Options"
+msgstr "Feltvalg"
+
+#: translators/audiofileimporter.cpp:209
+msgid "Recursive folder search"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:210
+msgid "If checked, folders are recursively searched for audio files."
+msgstr ""
+
+#: translators/alexandriaimporter.cpp:158
+#, fuzzy
+msgid "Alexandria Options"
+msgstr "Hovedvalg"
+
+#: translators/alexandriaimporter.cpp:159
+msgid "Library:"
+msgstr ""
 
 #: collections/bibtexcollection.cpp:26 collections/bookcollection.cpp:22
 #: collections/comicbookcollection.cpp:22
 msgid "Publishing"
-msgstr "Издателски"
+msgstr "Utgivelse"
 
 #: collections/bookcollection.cpp:23 collections/comicbookcollection.cpp:23
 msgid "Classification"
-msgstr "Класификация"
+msgstr "Klassifisering"
 
 #: collections/bookcollection.cpp:24 collections/cardcollection.cpp:22
 #: collections/coincollection.cpp:22 collections/comicbookcollection.cpp:24
 #: collections/musiccollection.cpp:22 collections/stampcollection.cpp:23
 #: collections/videocollection.cpp:26 collections/winecollection.cpp:22
 msgid "Personal"
-msgstr "Лични"
+msgstr "Personlig"
 
 #: collections/bookcollection.cpp:27
 msgid "Books"
-msgstr "Книги"
+msgstr "Bøker"
 
 #: collections/bookcollection.cpp:28
 msgid "My Books"
-msgstr "Моите книги"
+msgstr "Mine bøker"
 
 #: collections/bookcollection.cpp:45 collections/comicbookcollection.cpp:45
 msgid "Subtitle"
-msgstr "Подзаглавие"
+msgstr "Undertittel"
 
 #: collections/bibtexcollection.cpp:80 collections/bookcollection.cpp:50
 msgid "Author"
-msgstr "Автор"
+msgstr "Forfatter"
 
 #: collections/bookcollection.cpp:57
 msgid "Hardback"
-msgstr "Твърда корица"
+msgstr "Stivt omslag"
 
 #: collections/bookcollection.cpp:57
 msgid "Paperback"
-msgstr "Хартиена корица"
+msgstr "Papprygg"
 
 #: collections/bookcollection.cpp:57
 msgid "Trade Paperback"
-msgstr "Опаковъчна хартия"
+msgstr "Papirrygg"
 
 #: collections/bookcollection.cpp:58
 msgid "E-Book"
-msgstr "Електронна книга"
+msgstr "Elektronisk bok"
 
 #: collections/bookcollection.cpp:58
 msgid "Magazine"
-msgstr "Списание"
+msgstr "Blad"
 
 #: collections/bibtexcollection.cpp:158 collections/bookcollection.cpp:58
 msgid "Journal"
-msgstr "Журнал"
+msgstr "Hefte"
 
 #: collections/bookcollection.cpp:59
 msgid "Binding"
-msgstr "Корица"
+msgstr "Omslag"
 
 #: collections/bookcollection.cpp:64 collections/cardcollection.cpp:82
 #: collections/coincollection.cpp:101 collections/comicbookcollection.cpp:126
 #: collections/musiccollection.cpp:84 collections/stampcollection.cpp:104
 #: collections/videocollection.cpp:192 collections/winecollection.cpp:79
 msgid "Purchase Date"
-msgstr "Дата на покупка"
+msgstr "Innkjøpsdato"
 
 #: collections/bookcollection.cpp:69 collections/cardcollection.cpp:87
 #: collections/coincollection.cpp:106 collections/comicbookcollection.cpp:131
 #: collections/musiccollection.cpp:93 collections/stampcollection.cpp:109
 #: collections/videocollection.cpp:201 collections/winecollection.cpp:84
 msgid "Purchase Price"
-msgstr "Цена"
+msgstr "Innkjøpspris"
 
 #: collections/bibtexcollection.cpp:121 collections/bookcollection.cpp:73
 #: collections/comicbookcollection.cpp:73
 msgid "Publisher"
-msgstr "Издател"
+msgstr "Utgiver"
 
 #: collections/bibtexcollection.cpp:134 collections/bookcollection.cpp:79
 #: collections/comicbookcollection.cpp:79
 msgid "Edition"
-msgstr "Издание"
+msgstr "Utgave"
 
 #: collections/bookcollection.cpp:85
 msgid "Copyright Year"
-msgstr "Авторско право (година)"
+msgstr "Kopirettsår"
 
 #: collections/bookcollection.cpp:90 collections/comicbookcollection.cpp:85
 msgid "Publication Year"
-msgstr "Година на публикуване"
+msgstr "Utgivelsesår"
 
 #: collections/bookcollection.cpp:95
 msgid "ISBN#"
@@ -2175,7 +2129,7 @@ msgstr "ISBN"
 
 #: collections/bookcollection.cpp:97
 msgid "International Standard Book Number"
-msgstr "Международен стандартен книжен номер"
+msgstr "Internasjonalt Standard Bok Nummer"
 
 #: collections/bookcollection.cpp:100
 msgid "LCCN#"
@@ -2183,147 +2137,145 @@ msgstr "LCCN"
 
 #: collections/bookcollection.cpp:102
 msgid "Library of Congress Control Number"
-msgstr ""
-"Библиотека на конгреса,контролен номер"
+msgstr "Library of Congress Control Number (USA)"
 
 #: collections/bibtexcollection.cpp:141 collections/bookcollection.cpp:105
 #: collections/comicbookcollection.cpp:90
 msgid "Pages"
-msgstr "Страници"
+msgstr "Sider"
 
 #: collections/bookcollection.cpp:109 collections/comicbookcollection.cpp:100
 msgid "Language"
-msgstr "Език"
+msgstr "Språk"
 
 #: collections/bookcollection.cpp:114 collections/comicbookcollection.cpp:106
 #: collections/musiccollection.cpp:67 collections/videocollection.cpp:69
 msgid "Genre"
-msgstr "Жанр"
+msgstr "Sjanger"
 
 #: collections/bookcollection.cpp:121 collections/cardcollection.cpp:100
 #: collections/comicbookcollection.cpp:112 collections/musiccollection.cpp:101
 msgid "Keywords"
-msgstr "Ключови думи"
+msgstr "Nøkkelord"
 
 #: collections/bibtexcollection.cpp:195 collections/bookcollection.cpp:126
 #: collections/cardcollection.cpp:71 collections/comicbookcollection.cpp:62
 msgid "Series"
-msgstr "Поредица"
+msgstr "Serie"
 
 #: collections/bookcollection.cpp:131
 msgid "Series Number"
-msgstr "Номер от поредица"
+msgstr "Serienummer"
 
 #: collections/bookcollection.cpp:136
 msgid "Used"
-msgstr "Използвана"
+msgstr "Brukt"
 
 #: collections/bookcollection.cpp:137 collections/comicbookcollection.cpp:122
 #: collections/stampcollection.cpp:22
 msgid "Condition"
-msgstr "Състояние"
+msgstr "Tilstand"
 
 #: collections/bookcollection.cpp:141 collections/comicbookcollection.cpp:135
 msgid "Signed"
-msgstr "С автограф"
+msgstr "Signert"
 
 #: collections/bookcollection.cpp:145
 msgid "Read"
-msgstr "Прочетена"
+msgstr "Lest"
 
 #: collections/bookcollection.cpp:149 collections/cardcollection.cpp:96
 #: collections/coincollection.cpp:116 collections/comicbookcollection.cpp:139
 #: collections/musiccollection.cpp:89 collections/stampcollection.cpp:119
 #: collections/videocollection.cpp:197 collections/winecollection.cpp:107
 msgid "Gift"
-msgstr "Подарък"
+msgstr "Gave"
 
 #: collections/bookcollection.cpp:153 collections/comicbookcollection.cpp:143
 #: collections/musiccollection.cpp:97 collections/videocollection.cpp:205
 msgid "Loaned"
-msgstr "Дадена"
+msgstr "Lånt"
 
 #: collections/bookcollection.cpp:158 collections/musiccollection.cpp:78
 #: collections/videocollection.cpp:186
 msgid "5 - Best"
-msgstr "5 - Невероятна"
+msgstr "5 - Bra"
 
 #: collections/bookcollection.cpp:158 collections/musiccollection.cpp:78
 #: collections/videocollection.cpp:186
 msgid "4 - Good"
-msgstr "4 - Добра"
+msgstr "4 - God"
 
 #: collections/bookcollection.cpp:158 collections/musiccollection.cpp:78
 #: collections/videocollection.cpp:186
 msgid "3 - Neutral"
-msgstr "3 - Средна"
+msgstr "3 - Nøytral"
 
 #: collections/bookcollection.cpp:158 collections/musiccollection.cpp:78
 #: collections/videocollection.cpp:186
 msgid "2 - Bad"
-msgstr "2 - Лоша"
+msgstr "2 - Dårlig"
 
 #: collections/bookcollection.cpp:158 collections/musiccollection.cpp:78
 #: collections/videocollection.cpp:186
 msgid "1 - Worst"
-msgstr "1 - Ужасна"
+msgstr "1 - Elendig"
 
 #: collections/bookcollection.cpp:159 collections/musiccollection.cpp:79
 #: collections/winecollection.cpp:102
 msgid "Rating"
-msgstr "Оценка"
+msgstr "Karakter"
 
 #: collections/bookcollection.cpp:164 collections/comicbookcollection.cpp:147
 msgid "Front Cover"
-msgstr ""
+msgstr "Forside"
 
 #: collections/bookcollection.cpp:167 collections/cardcollection.cpp:115
 #: collections/coincollection.cpp:126 collections/comicbookcollection.cpp:150
 #: collections/musiccollection.cpp:109 collections/stampcollection.cpp:126
 #: collections/videocollection.cpp:212 collections/winecollection.cpp:114
 msgid "Comments"
-msgstr "Коментар"
+msgstr "Kommentar"
 
 #: collections/videocollection.cpp:24
 msgid "Other People"
-msgstr ""
+msgstr "Andre personer"
 
 #: collections/videocollection.cpp:25
 msgid "Features"
-msgstr ""
+msgstr "Egenskaper"
 
 #: collections/videocollection.cpp:29
 msgid "Videos"
-msgstr "Клипове"
+msgstr "Videoer"
 
 #: collections/videocollection.cpp:30
 msgid "My Videos"
-msgstr "Моите клипове"
+msgstr "Mine Videofilmer"
 
 #: collections/musiccollection.cpp:44 collections/videocollection.cpp:48
 msgid "DVD"
-msgstr "DVD"
+msgstr "DvD"
 
 #: collections/videocollection.cpp:48
 msgid "VHS"
-msgstr "VHS"
+msgstr "Vhs"
 
 #: collections/videocollection.cpp:48
 msgid "VCD"
-msgstr "VCD"
+msgstr "Vcd"
 
 #: collections/videocollection.cpp:48
 msgid "DivX"
-msgstr "DivX"
+msgstr "Divx"
 
 #: collections/musiccollection.cpp:45 collections/videocollection.cpp:49
 msgid "Medium"
-msgstr "Медия"
+msgstr "Media"
 
 #: collections/videocollection.cpp:54
-#, fuzzy
 msgid "Production Year"
-msgstr "Година на публикуване"
+msgstr "Produksjonsår"
 
 #: collections/videocollection.cpp:62
 msgid ""
@@ -2331,198 +2283,187 @@ msgid ""
 "G (USA),PG (USA),PG-13 (USA),R (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA)"
 msgstr ""
+"_: _:Filmgrense\n"
+"7 (Norge),10 (Norge),15 (Norge),18 (Norge)\n"
+"7 (Norge),10 (Norge),15 (Norge),18 (Norge)"
 
 #: collections/videocollection.cpp:64
-#, fuzzy
 msgid "Certification"
-msgstr "Класификация"
+msgstr "Ratifisering"
 
 #: collections/videocollection.cpp:76
 msgid "Region 1"
-msgstr ""
+msgstr "Region 1"
 
 #: collections/videocollection.cpp:77
 msgid "Region 2"
-msgstr ""
+msgstr "Region 2"
 
 #: collections/videocollection.cpp:78
 msgid "Region 3"
-msgstr ""
+msgstr "Region 3"
 
 #: collections/videocollection.cpp:79
 msgid "Region 4"
-msgstr ""
+msgstr "Region 4"
 
 #: collections/videocollection.cpp:80
 msgid "Region 5"
-msgstr ""
+msgstr "Region 5"
 
 #: collections/videocollection.cpp:81
 msgid "Region 6"
-msgstr ""
+msgstr "Region 6"
 
 #: collections/videocollection.cpp:82
 msgid "Region 7"
-msgstr ""
+msgstr "Region 7"
 
 #: collections/videocollection.cpp:83
 msgid "Region 8"
-msgstr ""
+msgstr "Region 8"
 
 #: collections/videocollection.cpp:84
 msgid "Region"
-msgstr ""
+msgstr "Region"
 
 #: collections/videocollection.cpp:89
 msgid "Nationality"
-msgstr ""
+msgstr "Nasjonalitet"
 
 #: collections/videocollection.cpp:96
 msgid "NTSC"
-msgstr ""
+msgstr "NTSC"
 
 #: collections/videocollection.cpp:96
 msgid "PAL"
-msgstr ""
+msgstr "PAL"
 
 #: collections/videocollection.cpp:96
 msgid "SECAM"
-msgstr ""
+msgstr "SECAM"
 
 #: collections/videocollection.cpp:97
-#, fuzzy
 msgid "Format"
-msgstr "Опции за форматиране"
+msgstr "Format"
 
 #: collections/videocollection.cpp:102
-#, fuzzy
 msgid "Cast"
-msgstr "Касета"
+msgstr "Besetning"
 
 #: collections/videocollection.cpp:105
 msgid "A table for the cast members, along with the roles they play"
-msgstr ""
+msgstr "En liste over personer med i filmen og hvilken rolle de spiller"
 
 #: collections/videocollection.cpp:108
 msgid "Director"
-msgstr ""
+msgstr "Regissør"
 
 #: collections/videocollection.cpp:114 collections/winecollection.cpp:43
-#, fuzzy
 msgid "Producer"
-msgstr "Година на публикуване"
+msgstr "Produsent"
 
 #: collections/comicbookcollection.cpp:50 collections/videocollection.cpp:120
 msgid "Writer"
-msgstr ""
+msgstr "Forfatter"
 
 #: collections/videocollection.cpp:126
-#, fuzzy
 msgid "Composer"
-msgstr "Е&кспортиране"
+msgstr "Komponist"
 
 #: collections/videocollection.cpp:132
 msgid "Studio"
-msgstr ""
+msgstr "Studio"
 
 #: collections/videocollection.cpp:138
-#, fuzzy
 msgid "Language Tracks"
-msgstr "Език"
+msgstr "Språkspor"
 
 #: collections/videocollection.cpp:144
-#, fuzzy
 msgid "Subtitle Languages"
-msgstr "Подзаглавие"
+msgstr "Språk for undertittel"
 
 #: collections/videocollection.cpp:150
 msgid "Audio Tracks"
-msgstr ""
+msgstr "Lydspor"
 
 #: collections/videocollection.cpp:156
 msgid "Running Time"
-msgstr ""
+msgstr "Varighet"
 
 #: collections/videocollection.cpp:159
 msgid "The running time of the video (in minutes)"
-msgstr ""
+msgstr "Varigheten på filmen (i minutter)"
 
 #: collections/videocollection.cpp:162
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Visningsforhold"
 
 #: collections/videocollection.cpp:167
 msgid "Widescreen"
-msgstr ""
+msgstr "Bredskjerm"
 
 #: collections/stampcollection.cpp:66 collections/videocollection.cpp:172
-#, fuzzy
 msgid "Color"
-msgstr "Е&кспортиране"
+msgstr "Farge"
 
 #: collections/videocollection.cpp:172
 msgid "Black & White"
-msgstr ""
+msgstr "Svart-hvitt"
 
 #: collections/videocollection.cpp:173
 msgid "Color Mode"
-msgstr ""
+msgstr "Fargemodus"
 
 #: collections/videocollection.cpp:178
 msgid "Director's Cut"
-msgstr ""
+msgstr "Director's Cut"
 
 #: collections/videocollection.cpp:182
 msgid "Plot Summary"
-msgstr ""
+msgstr "Sammendrag av handlingen"
 
 #: collections/videocollection.cpp:187
-#, fuzzy
 msgid "Personal Rating"
-msgstr "Лични"
+msgstr "Personlig karakter"
 
 #: collections/musiccollection.cpp:106 collections/videocollection.cpp:209
-#, fuzzy
 msgid "Cover"
-msgstr "Е&кспортиране"
+msgstr "Omslag"
 
 #: collections/coincollection.cpp:25
-#, fuzzy
 msgid "Coins"
-msgstr "съдържа"
+msgstr "Mynter"
 
 #: collections/coincollection.cpp:26
-#, fuzzy
 msgid "My Coins"
-msgstr "Моите песни"
+msgstr "Min mynter"
 
 #: collections/coincollection.cpp:43 collections/winecollection.cpp:68
-#, fuzzy
 msgid "Type"
-msgstr "Тип:"
+msgstr "Type"
 
 #: collections/coincollection.cpp:49 collections/stampcollection.cpp:50
 msgid "Denomination"
-msgstr ""
+msgstr "Denominering"
 
 #: collections/bibtexcollection.cpp:146 collections/cardcollection.cpp:66
 #: collections/coincollection.cpp:54 collections/musiccollection.cpp:62
 msgid "Year"
-msgstr "Година"
+msgstr "År"
 
 #: collections/coincollection.cpp:59
 msgid "Mint Mark"
-msgstr ""
+msgstr "Myntslag"
 
 #: collections/coincollection.cpp:65 collections/comicbookcollection.cpp:94
 #: collections/stampcollection.cpp:55 collections/winecollection.cpp:73
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: collections/coincollection.cpp:71
-#, fuzzy
 msgid "Coin Set"
-msgstr "съдържа"
+msgstr "Myntsett"
 
 #: collections/coincollection.cpp:81
 msgid ""
@@ -2534,11 +2475,17 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
+"_: _:Gradering av mynter\n"
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair\n"
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair"
 
 #: collections/coincollection.cpp:86 collections/stampcollection.cpp:80
-#, fuzzy
 msgid "Grade"
-msgstr "Жанр"
+msgstr "Gradering"
 
 #: collections/coincollection.cpp:94
 msgid ""
@@ -2546,220 +2493,203 @@ msgid ""
 "PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgstr ""
+"_: _:Myntgraderingstjeneste\n"
+"PCGS,NGC,ANACS,ICG,ASA,PCI\n"
+"PCGS,NGC,ANACS,ICG,ASA,PCI"
 
 #: collections/coincollection.cpp:96
 msgid "Grading Service"
-msgstr ""
+msgstr "Graderingstjeneste"
 
 #: collections/cardcollection.cpp:91 collections/coincollection.cpp:110
 #: collections/stampcollection.cpp:113 collections/winecollection.cpp:88
-#, fuzzy
 msgid "Location"
-msgstr "BCCollection"
+msgstr "Lokalisering"
 
 #: collections/coincollection.cpp:120
-#, fuzzy
 msgid "Obverse"
-msgstr "Презаписване"
+msgstr "Obvers"
 
 #: collections/coincollection.cpp:123
 msgid "Reverse"
-msgstr ""
+msgstr "Revers"
 
 #: collections/bibtexcollection.cpp:30
-#, fuzzy
 msgid "Entries"
-msgstr "Поредица"
+msgstr "Innslag"
 
 #: collections/bibtexcollection.cpp:73
 msgid "Entry Type"
-msgstr ""
+msgstr "Innslagstype"
 
 #: collections/bibtexcollection.cpp:77
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
 msgstr ""
+"Disse innslagsverdiene er spesifikke for Bibtex. Se dokumentasjon for bibtex."
 
 #: collections/bibtexcollection.cpp:87
-#, fuzzy
 msgid "Bibtex Key"
-msgstr "Настройки на полето"
+msgstr "Bibtex-nøkkel"
 
 #: collections/bibtexcollection.cpp:93
-#, fuzzy
 msgid "Book Title"
-msgstr "Заглавие"
+msgstr "Boktittel"
 
 #: collections/bibtexcollection.cpp:99
-#, fuzzy
 msgid "Editor"
-msgstr "Издание"
+msgstr "Redaktør"
 
 #: collections/bibtexcollection.cpp:106
 msgid "Organization"
-msgstr ""
+msgstr "Organisasjon"
 
 #: collections/bibtexcollection.cpp:167
 msgid "Month"
-msgstr ""
+msgstr "Måned"
 
 #: collections/bibtexcollection.cpp:178
-#, fuzzy
 msgid "How Published"
-msgstr "Издател"
+msgstr "Hvordan publisert"
 
 #: collections/bibtexcollection.cpp:190
-#, fuzzy
 msgid "Chapter"
-msgstr "Категория:"
+msgstr "Kapittel"
 
 #: collections/bibtexcollection.cpp:202
-#, fuzzy
 msgid "Volume"
-msgstr "Показва колони"
+msgstr "Antall"
 
 #: collections/bibtexcollection.cpp:207
 msgid "Cross-Reference"
-msgstr ""
+msgstr "Kryssreferanse"
 
 #: collections/bibtexcollection.cpp:217
 msgid "Notes"
-msgstr ""
+msgstr "Notat"
 
 #: collections/winecollection.cpp:25
 msgid "Wines"
-msgstr ""
+msgstr "Vin"
 
 #: collections/winecollection.cpp:26
-#, fuzzy
 msgid "My Wines"
-msgstr "Моите клипове"
+msgstr "Mine viner"
 
 #: collections/winecollection.cpp:49
 msgid "Appellation"
-msgstr ""
+msgstr "Appellasjon"
 
 #: collections/winecollection.cpp:55
 msgid "Varietal"
-msgstr ""
+msgstr "Varietal"
 
 #: collections/winecollection.cpp:61
 msgid "Vintage"
-msgstr ""
+msgstr "Årgang"
 
 #: collections/winecollection.cpp:67
 msgid "Red Wine"
-msgstr ""
+msgstr "Rødvin"
 
 #: collections/winecollection.cpp:67
 msgid "White Wine"
-msgstr ""
+msgstr "Hvitvin"
 
 #: collections/winecollection.cpp:67
 msgid "Sparkling Wine"
-msgstr ""
+msgstr "Musserende vin"
 
 #: collections/cardcollection.cpp:105 collections/winecollection.cpp:93
 msgid "Quantity"
-msgstr ""
+msgstr "Kvantitet"
 
 #: collections/winecollection.cpp:97
 msgid "Drink By"
-msgstr ""
+msgstr "Drikkes med"
 
 #: collections/winecollection.cpp:111
-#, fuzzy
 msgid "Label Image"
-msgstr "Заглавие"
+msgstr "Etikettbilde"
 
 #: collections/cardcollection.cpp:25
-#, fuzzy
 msgid "Cards"
-msgstr "Касета"
+msgstr "Kort"
 
 #: collections/cardcollection.cpp:26
 msgid "My Cards"
-msgstr ""
+msgstr "Mine kort"
 
 #: collections/cardcollection.cpp:43
 msgid "Player"
-msgstr ""
+msgstr "Spiller"
 
 #: collections/cardcollection.cpp:49
 msgid "Team"
-msgstr ""
+msgstr "Lag"
 
 #: collections/cardcollection.cpp:55
 msgid "Brand"
-msgstr ""
+msgstr "Merke"
 
 #: collections/cardcollection.cpp:62
-#, fuzzy
 msgid "Card Number"
-msgstr "Номер от поредица"
+msgstr "Kortnummer"
 
 #: collections/cardcollection.cpp:77
-#, fuzzy
 msgid "Card Type"
-msgstr "Тип:"
+msgstr "Korttype"
 
 #: collections/cardcollection.cpp:109
 msgid "Front Image"
-msgstr ""
+msgstr "Bilde av forside"
 
 #: collections/cardcollection.cpp:112
 msgid "Back Image"
-msgstr ""
+msgstr "Bilde av bakside"
 
 #: collections/musiccollection.cpp:25
-#, fuzzy
 msgid "Albums"
-msgstr "Албум"
+msgstr "Album"
 
 #: collections/musiccollection.cpp:26
 msgid "My Music"
-msgstr ""
+msgstr "Min musikk"
 
 #: collections/musiccollection.cpp:37
 msgid "Album"
-msgstr "Албум"
-
-#: collections/musiccollection.cpp:44
-msgid "Compact Disc"
-msgstr ""
+msgstr "Album"
 
 #: collections/musiccollection.cpp:44
 msgid "Cassette"
-msgstr "Касета"
+msgstr "Kassett"
 
 #: collections/musiccollection.cpp:44
 msgid "Vinyl"
-msgstr ""
+msgstr "Vinyl"
 
 #: collections/comicbookcollection.cpp:56 collections/musiccollection.cpp:50
 msgid "Artist"
-msgstr "Изпълнител"
+msgstr "Artist"
 
 #: collections/musiccollection.cpp:56
-#, fuzzy
 msgid "Label"
-msgstr "Заглавие"
+msgstr "Plateselskap"
 
 #: collections/musiccollection.cpp:73
 msgid "Tracks"
-msgstr ""
+msgstr "Spor"
 
 #: collections/comicbookcollection.cpp:27
 msgid "Comics"
-msgstr ""
+msgstr "Tegneserie"
 
 #: collections/comicbookcollection.cpp:28
-#, fuzzy
 msgid "My Comic Books"
-msgstr "Моите книги"
+msgstr "Mine tegneserier"
 
 #: collections/comicbookcollection.cpp:68
 msgid "Issue"
-msgstr ""
+msgstr "Nummer"
 
 #: collections/comicbookcollection.cpp:120
 msgid ""
@@ -2767,27 +2697,29 @@ msgid ""
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
+"_: _:Nivåer for tegneserien\n"
+"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor\n"
+"Perfekt,Som ny - uten feil,Nydelig,Fin,Helt OK,Godt brukt,Slitt,Elendig"
 
 #: collections/stampcollection.cpp:26
 msgid "Stamps"
-msgstr ""
+msgstr "Frimerker"
 
 #: collections/stampcollection.cpp:27
 msgid "My Stamps"
-msgstr ""
+msgstr "Mine frimerker"
 
 #: collections/stampcollection.cpp:44 fetchdialog.cpp:133
-#, fuzzy
 msgid "Description"
-msgstr "Описание:"
+msgstr "Beskrivelse"
 
 #: collections/stampcollection.cpp:61
 msgid "Issue Year"
-msgstr ""
+msgstr "Ugivelsesår"
 
 #: collections/stampcollection.cpp:71
 msgid "Scott#"
-msgstr ""
+msgstr "Scott#"
 
 #: collections/stampcollection.cpp:78
 msgid ""
@@ -2795,257 +2727,242 @@ msgid ""
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr ""
+"_: _:Gradering av frimerker\n"
+"Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
+"Perfekt,Ekstremt fin, Veldig fin,Fin,Gjennomsnittlig,Dårlig"
 
 #: collections/stampcollection.cpp:85
 msgid "Cancelled"
-msgstr ""
+msgstr "Kansellert"
 
 #: collections/stampcollection.cpp:89
-#, fuzzy
 msgid "Hinged"
-msgstr "С автограф"
+msgstr "Hengslet"
 
 #: collections/stampcollection.cpp:94
-#, fuzzy
 msgid "Centering"
-msgstr "Оценка"
+msgstr "Sentrering"
 
 #: collections/stampcollection.cpp:99
 msgid "Gummed"
-msgstr ""
+msgstr "Limt fast"
 
 #: imagewidget.cpp:46
-#, fuzzy
 msgid "Select Image..."
-msgstr "Избор на XSLT файл..."
+msgstr "Velg bilde..."
 
 #: rc.cpp:2
-#, fuzzy
 msgid "&New"
-msgstr "Нова"
+msgstr "&Ny"
 
 #: rc.cpp:5
-#, fuzzy
 msgid "&Collection"
-msgstr "BCCollection"
+msgstr "&Samling"
 
 #: rc.cpp:7
 msgid "Collection Toolbar"
-msgstr "Летна \"Колекция\""
-
-#: entryeditdialog.cpp:41 entryeditdialog.cpp:300 entryeditdialog.cpp:321
-#: entryeditdialog.cpp:365 entryeditdialog.cpp:417
-#, fuzzy
-msgid "Edit Entry"
-msgstr "Изтрий книга"
-
-#: entryeditdialog.cpp:76 entryeditdialog.cpp:332 entryeditdialog.cpp:453
-#, fuzzy
-msgid "Sa&ve Entry"
-msgstr "Дуплициране на книга"
-
-#: entryeditdialog.cpp:267
-msgid "Do you really want to modify these books?"
-msgstr ""
-"Наистина ли желаете да редактирате тези "
-"книги ?"
-
-#: entryeditdialog.cpp:269
-msgid "Modify Multiple Books?"
-msgstr "Редакция на няколко книги ?"
-
-#: entryeditdialog.cpp:393
-#, fuzzy
-msgid "Sa&ve Entries"
-msgstr "Изтриване на поле"
-
-#: entryeditdialog.cpp:563
-#, fuzzy
-msgid ""
-"The current entry has been modified.\n"
-"Do you want to enter the changes?"
-msgstr ""
-"Текущата книга бе променена.\n"
-"Желаете ли да запазите промените?"
-
-#: entryeditdialog.cpp:566
-#, fuzzy
-msgid "Save Entry"
-msgstr "Дуплициране на книга"
+msgstr "Verktøylinjen Samling"
 
 #: _translatorinfo.cpp:1
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr "Боян Иванов"
+msgstr "Leif Mathis Gaup"
 
 #: _translatorinfo.cpp:3
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr "boyan17@bulgaria.com"
+msgstr "lmgaup@nsn.no"
+
+#: entryeditdialog.cpp:41 entryeditdialog.cpp:300 entryeditdialog.cpp:321
+#: entryeditdialog.cpp:365 entryeditdialog.cpp:417
+msgid "Edit Entry"
+msgstr "Endre innslag"
+
+#: entryeditdialog.cpp:76 entryeditdialog.cpp:332 entryeditdialog.cpp:453
+msgid "Sa&ve Entry"
+msgstr "&Lagre innslag"
+
+#: entryeditdialog.cpp:267
+msgid "Do you really want to modify these books?"
+msgstr "Vil du virkelig endre disse bøkene?"
+
+#: entryeditdialog.cpp:269
+msgid "Modify Multiple Books?"
+msgstr "Modifiser flere bøker?"
+
+#: entryeditdialog.cpp:393
+msgid "Sa&ve Entries"
+msgstr "L&agre innslag"
+
+#: entryeditdialog.cpp:563
+msgid ""
+"The current entry has been modified.\n"
+"Do you want to enter the changes?"
+msgstr ""
+"Innslaget har blitt endret.\n"
+"Vil du lagre endringene?"
+
+#: entryeditdialog.cpp:566
+msgid "Save Entry"
+msgstr "Lagre innslag"
 
 #: fetch/srufetcher.cpp:44
-#, fuzzy
 msgid "Library of Congress (US)"
-msgstr ""
-"Библиотека на конгреса,контролен номер"
+msgstr "Library of Congress (US)"
 
 #: fetch/amazonfetcher.cpp:42
 msgid "Amazon (US)"
-msgstr ""
+msgstr "Amazon (.com)"
 
 #: fetch/amazonfetcher.cpp:51
 msgid "Amazon (UK)"
-msgstr ""
+msgstr "Amazon (.uk)"
 
 #: fetch/amazonfetcher.cpp:60
 msgid "Amazon (Germany)"
-msgstr ""
+msgstr "Amazon (.de)"
 
 #: fetch/amazonfetcher.cpp:69
 msgid "Amazon (Japan)"
-msgstr ""
+msgstr "Amazon (.jp)"
 
 #: fetch/amazonfetcher.cpp:173
 msgid "%1 does not allow searching for this collection type."
-msgstr ""
+msgstr "%1 tillater ikke søk for denne typen samling."
 
 #: fetch/amazonfetcher.cpp:383
 msgid "Results from %1: %2/%3"
-msgstr ""
+msgstr "Resultater fra %1: %2/%3"
 
 #: fetch/amazonfetcher.cpp:430
 msgid "The cover image could not be loaded."
-msgstr ""
+msgstr "Bilde av omslag kunne ikke lastes ned."
 
 #: fetchdialog.cpp:47
-#, fuzzy
 msgid "&Search"
-msgstr "Търси в :"
+msgstr "Søk"
 
 #: fetchdialog.cpp:48
 msgid "&Stop"
-msgstr ""
+msgstr "Stopp"
 
 #: fetchdialog.cpp:57
 msgid "Internet Search"
-msgstr ""
+msgstr "Internettsøk"
 
 #: fetchdialog.cpp:66
-#, fuzzy
 msgid "Search Query"
-msgstr "Търси в :"
+msgstr "Søkestreng"
 
 #: fetchdialog.cpp:73
-#, fuzzy
 msgid "Search:"
-msgstr "Търси в :"
+msgstr "Søk:"
 
 #: fetchdialog.cpp:76
 msgid "Enter a search value. An ISBN search must include the full ISBN."
-msgstr ""
+msgstr "Skriv inn en søkeverdi. Ett ISBN-nummer må skrives inn fullstendig."
 
 #: fetchdialog.cpp:80
-#, fuzzy
 msgid "Person"
-msgstr "Лични"
+msgstr "Person"
 
 #: fetchdialog.cpp:81 fetchdialog.cpp:313
-#, fuzzy
 msgid "ISBN"
 msgstr "ISBN"
 
 #: fetchdialog.cpp:82
-#, fuzzy
 msgid "Keyword"
-msgstr "Ключови думи"
+msgstr "Nøkkelord"
 
 #: fetchdialog.cpp:87
 msgid "Choose the type of search"
-msgstr ""
+msgstr "Velg søketype"
 
 #: fetchdialog.cpp:91
 msgid "Click to start or stop the search"
-msgstr ""
+msgstr "Klikk for å starte eller stoppe søk"
 
 #: fetchdialog.cpp:104
 msgid "Multiple ISBN search"
-msgstr ""
+msgstr "Søk på flere ISBN-nummer"
 
 #: fetchdialog.cpp:105
 msgid "Check this box to search for multiple ISBN values."
-msgstr ""
+msgstr "Kryss av for å søke etter multiple ISBN-nummer."
 
 #: fetchdialog.cpp:108
 msgid "Edit ISBN list..."
-msgstr ""
+msgstr "Endre ISBN-liste..."
 
 #: fetchdialog.cpp:110
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr ""
+"Klikk får å en tekstboks for å legge inn eller endre multiple ISBN-nummer."
 
 #: fetchdialog.cpp:116
-#, fuzzy
 msgid "Search Source:"
-msgstr "Търси в :"
+msgstr "Søkekilde:"
 
 #: fetchdialog.cpp:119
 msgid "Select the database to search"
-msgstr ""
+msgstr "Velg database å søke i"
 
 #: fetchdialog.cpp:134
 msgid "Source"
-msgstr ""
+msgstr "Kilde"
 
 #: fetchdialog.cpp:136
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
 msgstr ""
+"Etterhvert som resultater blir funnet blir de lagt til i listen.Å velge ett "
+"felt vil hente den fullstendige posten og vide det i visningsfeltet under."
 
 #: fetchdialog.cpp:143
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
+"Ett innslag kan bli vist her før man legger den til å nåværende samling "
+"ved å velge den fra listen over"
 
 #: fetchdialog.cpp:150
-#, fuzzy
 msgid "Add Entry"
-msgstr "Изтрий книга"
+msgstr "Legg til innslag"
 
 #: fetchdialog.cpp:153
-#, fuzzy
 msgid "Add the selected entry to the current collection"
-msgstr "Създава нов документ"
+msgstr "Legg valgte innslag til i nåværende samling"
 
 #: fetchdialog.cpp:158
 msgid "Clear all search fields and results"
-msgstr ""
+msgstr "Rens alle søkefelter og resultater"
 
 #: fetchdialog.cpp:223
-#, fuzzy
 msgid "Searching..."
-msgstr "Търси в :"
+msgstr "Søker..."
 
 #: fetchdialog.cpp:251
 msgid "The search returned %1 item(s)."
-msgstr ""
+msgstr "Søket på internett returnerte %1 innslag."
 
 #: fetchdialog.cpp:291
 msgid "Fetching %1..."
-msgstr ""
+msgstr "Henter %1..."
 
 #: fetchdialog.cpp:330
 msgid "Edit ISBN Values"
-msgstr ""
+msgstr "Endre ISBN-verdier"
 
 #: fetchdialog.cpp:335 fetchdialog.cpp:338
 msgid ""
 "<qt>Enter the ISBN values, one per line, up to a maximum of 10 values.</qt>"
 msgstr ""
+"qt>Tast inn ISBN-verdier, ett nummer per linje, maksimalt ti verdier.</qt>"
 
 #: fetchdialog.cpp:354
 msgid ""
@@ -3053,18 +2970,23 @@ msgid ""
 "contain a maximum of 10 ISBN values. Only the first 10 values in your list "
 "will be used.</qt>"
 msgstr ""
+"<qt>Fordi restriksjoner med Amazon.com sine nettjenester kan ett søk maks "
+"være på ti ISBN-verdier. Kun de ti første i listen vil søkes etter.</qt>"
 
 #: viewstack.cpp:27
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's "
 "contents.</qt>"
 msgstr ""
+"<qt><i>Innslagsvisning</i> viser hvordan innslag vil bli formatert.</qt>"
 
 #: viewstack.cpp:28
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
 "an icon, which may be an image in the entry.</qt>"
 msgstr ""
+"<qt><i>Ikonvisning</i> viser innslag i samling eller grupperinger som "
+"ikoner, som altså kan være bildet for ett innslag.</qt>"
 
 #: tips.cpp:3
 msgid ""
@@ -3074,18 +2996,27 @@ msgid ""
 "<p>Any other field which allows multiple values should be entered the\n"
 "same way. with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
+"<p>...om en bok har mer enn en forfatter, bør du separere deres\n"
+"navn ved bruk av semikolon, slik at Bookcase kan dele de opp og\n"
+"håndtere de separat.</p> <p>Alle andre felter som tillater flere verdier "
+"bør tastes inn på samme\n"
+"måte, med ett semikolon (;).</p>\n"
 
 #: tips.cpp:11
 msgid ""
 "<p>...that you can rename a collection by right-clicking on\n"
 "the top collection item in the left column.</p>\n"
 msgstr ""
+"<p>...at du kan gi nytt navn til en samling ved å høyreklikke på\n"
+"samlingens toppenhet i venstre kolonne.</p>\n"
 
 #: tips.cpp:16
 msgid ""
 "<p>...that you can change which fields are shown in the list view by\n"
 "right-clicking on the column header.\n"
 msgstr ""
+"<p>...at du kan endre hvilke felter som blir vist ved å høyreklikke\n"
+"på kolonnetittelen.\n"
 
 #: tips.cpp:21
 msgid ""
@@ -3095,10 +3026,15 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
+"<p>...at du kan legge til, endre eller modifisere felter i samlingen ved\n"
+"å bruke Feltredigerer. Pilknappene under feltene kan bli brukt til å\n"
+"forandre posisjonen til feltet i listen, noe som påvirker plasseringen\n"
+"i innslagsredigereren.</p>\n"
 
 #: tips.cpp:28
+#, fuzzy
 msgid ""
-"<p>...that if you want to filter by a checkbox field, a value of\n"
+"<p>...that if you want to filter by a Checkbox field, a value of\n"
 "\"true\" should be used. If you'd like to filter to\n"
 "show only the science fiction books which you've not read, for\n"
 "example, check the <em>Match all of the\n"
@@ -3106,6 +3042,15 @@ msgid ""
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
+"<p>...at hvis du vil filtrere på en avkrysningsboks, bør en verdi lik\n"
+"\"sann\" bli brukt. Hvis du vil filtrere på kun leste science fiction "
+"bøker\n"
+"som du ikke har lest, så kan du for eksempel sette <em>Treff på "
+"alle</em>,\n"
+",sette første regel til \"Sjanger\" \"inneholder\" \"Science Fiction\" "
+"(ingen apostrofer)\n"
+"og den andre regelen til \"Lest\" \"inneholder ikke\" \"true\" (ingen "
+"apostrofer).</p>\n"
 
 #: tips.cpp:38
 msgid ""
@@ -3114,24 +3059,35 @@ msgid ""
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
 "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
 msgstr ""
+"<p>...at om et kommandotegn blir brukt i et hurtigfilter, vil teksten bli "
+"tolket\n"
+"som et regulært uttrykk.</p>\n"
+"<p>For å vise bare bøker som er av Weber eller Bujold, kan de for\n"
+"eksempel skrive inn \"weber|bujold\" (uten apostrofer) i filterboksen</p>\n"
 
 #: tips.cpp:45
 msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
 msgstr ""
+"<p>...at du kan endre mer enn ett innslag om gangen ved å holde nede\n"
+"shift eller Ctrl-knappen og velge flere innslag.</p>\n"
 
 #: tips.cpp:50
 msgid ""
 "<p>...that you can convert an existing book collection to a bibliography,\n"
 "which can then be exported to Bibtex or Bibtexml format.</p>\n"
 msgstr ""
+"<p>...at du kan konvertere en eksisterende samling til en bibliografi,\n"
+"som kan videre eksporteres til Bibtex eller Bibtexml-format.</p>\n"
 
 #: tips.cpp:55
 msgid ""
 "<p>...that you can add, edit, and delete string macros for "
 "bibliographies.</p>\n"
 msgstr ""
+"<p>...at du kan legge til, endre og slette tekststreng-makroer for "
+"bibliografier.</p>\n"
 
 #: tips.cpp:59
 msgid ""
@@ -3141,6 +3097,10 @@ msgid ""
 "editors\n"
 "to be sorted or printed together, for example.</p>\n"
 msgstr ""
+"<p>...at om flere enn ett felt er formatert som navn, så kan en ekstra\n"
+"gruppe kalt \"Personer\" bli lagt til samlingen, slik at man kan sortere "
+"eller\n"
+"skrive ut for eksempel forfattere eller redaktører sammen.</p>\n"
 
 #: tips.cpp:65
 msgid ""
@@ -3149,144 +3109,195 @@ msgid ""
 "CSS\n"
 "within the stylesheet governs things like the font, the margins, etc.</p>\n"
 msgstr ""
+"<p>...at du kan endre utseendet på utskrift ved å endre på\n"
+"<tt>bookcase-printing.xsl</tt>-filen. Denne filen genererer\n"
+"HTML, og CSS-stilsettet styrer ting slik som fonter, marginer\n"
+"og så videre.</p>\n"
 
 #: tips.cpp:71
 msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Bookcase XML file.</p>\n"
 msgstr ""
+"<p>...at du kan importere og eksportere alle generiske XSL-stilark som\n"
+"gir ut gyldig Bookcase XSL-filer.</p>\n"
 
 #: tips.cpp:76
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
+msgstr "<p>...at dobbeltklikking åpner en redigerer for innslaget.</p>\n"
+
+#: tips.cpp:80
+msgid ""
+"<p>...that you can add HTML tags to any Paragraph field for formatting, such "
+"as\n"
+"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 msgstr ""
 
-#, fuzzy
+#: tips.cpp:85
+msgid ""
+"<p>...that in the Detailed View, you can press a letter on the\n"
+"keyboard to skip to the next entry that starts with that letter.</p>\n"
+msgstr ""
+
+#~ msgid "*.ogg|Ogg files (*.ogg)"
+#~ msgstr "*.ogg|Ogg-filer (*.ogg)"
+
+#~ msgid ""
+#~ "<qt>The type of the field determines what values may be used. <i>Simple "
+#~ "Text</i> is used for most fields. <i>Paragraph</i> is for large text blocks. "
+#~ "<i>Choice</i> limits the field to certain values. <i>Checkbox</i> is for a "
+#~ "simple yes/no value. <i>Number</i> indicates that the field contains a "
+#~ "numerical value. <i>URL</i> is for fields which refer to URLs, including "
+#~ "references to other files. <i>Table</i>s may be a single or double column of "
+#~ "values, while <i>Read Only</i> is for internal values, possibly useful for "
+#~ "import and export. A <i>Dependent</i> field depends on the values of other "
+#~ "fields, and is formatted according to the field description. An <i>Image</i> "
+#~ "holds a picture.</qt>"
+#~ msgstr ""
+#~ "<qt>Typen av feltet bestemmer hvilke verdier som kan bli brukt. <i>Enkel "
+#~ "tekst</i> blir brukt for  de fleste feltene. <i>Paragraf</i> er for store "
+#~ "tekstblokker. <i>Liste</i> begrenser feltene til fastsatte verdier. "
+#~ "<i>Avkrysningsboks</i> er for enkle ja/nei verdier. <i>Nummer</i> indikerer "
+#~ "at feltet er av numerisk type. <i>URL</i> er for felter som refererer til "
+#~ "hyperlenker, inkludert referanser til andre filer. <Tabell</i>er kan bli "
+#~ "brukt til enkle eller doble kolonner av verdier, mens <i>Kun les</i> er for "
+#~ "interne verdier, kanskje brukbare for import og eksport.<i>Avhenger</i> "
+#~ "feltet trenger verdier i andre felter, og er formatert ifølge "
+#~ "feltbeskrivelsen. Ett <i>bilde</i> viser ett bilde.</qt>"
+
 #~ msgid "Data Type:"
-#~ msgstr "Тип:"
+#~ msgstr "Datatype:"
+
+#~ msgid "Set"
+#~ msgstr "Sett"
 
 #, fuzzy
 #~ msgid "Export images"
-#~ msgstr "Е&кспортиране"
+#~ msgstr "E&ksporter som"
+
+#, fuzzy
+#~ msgid "Image Directory:"
+#~ msgstr "Regissør"
 
 #~ msgid "(Requires restart)"
-#~ msgstr "(Изисква повторно стартиране)"
+#~ msgstr "(Trenger omstart)"
 
 #~ msgid ""
 #~ "A comma-separated list of suffixes which might be used in personal names."
-#~ msgstr ""
-#~ "Списък от думи,разделени със "
-#~ "запетая,които се използват за създаване "
-#~ "на фамилни имена."
+#~ msgstr "En kommaseparert liste over suffiks som er brukt i personnavn."
 
 #~ msgid "A comma-separated list of prefixes which might be used in surnames."
-#~ msgstr ""
-#~ "Списък от думи,разделени със "
-#~ "запетая,които могат да бъдат използвани "
-#~ "за фамилии."
+#~ msgstr "En kommaseparert liste over prefiks som kan bli brukt i etternavn."
 
 #~ msgid "Enable/disable the toolbar"
-#~ msgstr "Показва/скрива тази лента"
+#~ msgstr "Slå på/av verktøylinje"
 
 #~ msgid "Show Co&llection ToolBar"
-#~ msgstr "Показва лентата \"ко&лекция\""
+#~ msgstr "Vis verktøylinjen &samling"
 
 #~ msgid "Enable/disable the collection toolbar"
-#~ msgstr "Показва/скрива лента \"колекция\""
+#~ msgstr "Slå på/av samlingens verktøylinje"
+
+#~ msgid "Tip of the &Day"
+#~ msgstr "&Dagens tips"
+
+#~ msgid "Show the \"Tip of the Day\" dialog..."
+#~ msgstr "Vis \"Dagens tips\" dialogboksen..."
 
 #, fuzzy
 #~ msgid "*.bcz|Bookcase files(*.bcz)"
-#~ msgstr "*.bc|Bookcase файлове (*.bc)"
+#~ msgstr "*.bc Bookcase filer (*.bc)"
 
 #~ msgid "List"
-#~ msgstr "Списък"
+#~ msgstr "Liste"
 
 #, fuzzy
 #~ msgid "Bookcase::ConfigDialog"
-#~ msgstr "ConfigDialog"
+#~ msgstr "Konfigurasjonsdialog"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::Document"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase dokumentasjon"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::DataImporter"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase XML-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::Importer"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase XML-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::CSVImporter"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase XML-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::XSLTImporter"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase XML-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::TextImporter"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase XML-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::BookcaseImporter"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase XML-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::XMLImporter"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase XML-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::BibtexImporter"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "Bookcase XML-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Import::BibtexmlImporter"
-#~ msgstr "И&мпортиране"
+#~ msgstr "Bibtexml-importerer"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::Collection"
-#~ msgstr "Колекция от книги"
+#~ msgstr "Boksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::ExportDialog"
-#~ msgstr "BCFilterDialog"
+#~ msgstr "BCExportDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::WineCollection"
-#~ msgstr "Колекция от книги"
+#~ msgstr "Boksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::StampCollection"
-#~ msgstr "Колекция от книги"
+#~ msgstr "Boksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::ComicBookCollection"
-#~ msgstr "Колекция от книги"
+#~ msgstr "Boksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::MusicCollection"
-#~ msgstr "BCCollection"
+#~ msgstr "Musikksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::VideoCollection"
-#~ msgstr "Видео колекция"
+#~ msgstr "Videosamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::CoinCollection"
-#~ msgstr "Колекция от книги"
+#~ msgstr "Boksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::BookCollection"
-#~ msgstr "Колекция от книги"
+#~ msgstr "Boksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::BibtexCollection"
-#~ msgstr "BCCollection"
+#~ msgstr "Bibtexsamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Data::CardCollection"
-#~ msgstr "Колекция от книги"
+#~ msgstr "Boksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::ImageWidget"
@@ -3294,19 +3305,19 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Bookcase::FindDialog"
-#~ msgstr "FindDialog"
+#~ msgstr "FinnDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::TabControl"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "BCCollectionFieldsDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::FieldCompletion"
-#~ msgstr "Колекция от книги"
+#~ msgstr "Boksamling"
 
 #, fuzzy
 #~ msgid "Bookcase::Controller"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "BCCollectionFieldsDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::GroupView"
@@ -3318,7 +3329,7 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Bookcase::ImportDialog"
-#~ msgstr "BCFilterDialog"
+#~ msgstr "BCImportDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::LabelAction"
@@ -3330,19 +3341,19 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Bookcase::EntryEditDialog"
-#~ msgstr "BCFilterDialog"
+#~ msgstr "BCExportDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::CollectionFieldsDialog"
-#~ msgstr "BCCollectionPropDialog"
+#~ msgstr "BCCollectionFieldsDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::EntryView"
-#~ msgstr "BookcaseDoc"
+#~ msgstr "BCCollectionFieldsDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::MainWindow"
-#~ msgstr "FindDialog"
+#~ msgstr "FinnDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::FilterRuleWidget"
@@ -3358,7 +3369,7 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Bookcase::StringMapDialog"
-#~ msgstr "Оценка"
+#~ msgstr "StringMacroDialog"
 
 #, fuzzy
 #~ msgid "Bookcase::FieldWidget"
@@ -3366,204 +3377,224 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Good"
-#~ msgstr "4 - Добра"
+#~ msgstr "4 - God"
+
+#~ msgid ""
+#~ "An article is from a journal or magazine. A book has an explicit publisher, "
+#~ "while a booklet does not."
+#~ msgstr ""
+#~ "En artikkel er fra en journal eller ett blad. En bok har en eksplisitt "
+#~ "utgiver,  mens en booklet ikke har det."
+
+#, fuzzy
+#~ msgid "Mint"
+#~ msgstr "Måned"
 
 #, fuzzy
 #~ msgid "Fine"
-#~ msgstr "&Търси"
+#~ msgstr "&Finn"
 
 #, fuzzy
 #~ msgid "Poor"
-#~ msgstr "Е&кспортиране"
+#~ msgstr "Farge"
 
 #, fuzzy
 #~ msgid "New Entry"
-#~ msgstr "Дуплициране на книга"
+#~ msgstr "&Nytt innslag"
+
+#~ msgid ""
+#~ "The description is useful reminder of what information is contained in the "
+#~ "field."
+#~ msgstr ""
+#~ "Beskrivelse er en nyttig påminnelse om hvilken informasjon som et felt "
+#~ "inneholder."
+
+#~ msgid "Bibtex Field Name:"
+#~ msgstr "Bibtex feltnavn:"
+
+#~ msgid ""
+#~ "The Bibtex field name determines the entry name for exporting to "
+#~ "bibliogrgaphy files."
+#~ msgstr ""
+#~ "Bibtex feltnavnet bestemmer innslagets navn for eksport til "
+#~ "bibliografi-filer."
+
+#~ msgid "Bookcase is unable to read the file - %1."
+#~ msgstr "Bookcase klarer ikke å lese filen - %1."
 
 #~ msgid "Cutting selection..."
-#~ msgstr "Отрязване на избраното..."
+#~ msgstr "Klipper ut utvalg..."
 
 #~ msgid "Toggling toolbar..."
-#~ msgstr "Промяна на лентата с инструменти..."
+#~ msgstr "Endrer verktøylinje..."
 
 #~ msgid "Toggling collection toolbar..."
-#~ msgstr "Промяна на лента \"Колекции\""
+#~ msgstr "Endrer samlingens verktøylinje"
 
 #~ msgid "Toggle the statusbar..."
-#~ msgstr "Промяна на статус лентата..."
+#~ msgstr "Skru på/av statuslinjen"
 
 #~ msgid "Bookcase is unable to find a required file - %1.\n"
-#~ msgstr ""
-#~ "Bookcase не може да намери необходимият файл "
-#~ "%1.\n"
+#~ msgstr "Bookcase klarer ikke å finne en nødvendig fil : %1.\n"
 
-#, fuzzy
+#~ msgid "Editing string macros..."
+#~ msgstr "Endre på tekststreng makroer"
+
 #~ msgid "Duplicate Entry"
-#~ msgstr "Дуплициране на книга"
+#~ msgstr "Dupliser innslag"
 
-#, fuzzy
+#~ msgid ""
+#~ "Both the macro and the string can be edited by triple-clicking the item."
+#~ msgstr ""
+#~ "Både makroer og tekststrenger man redigeres ved å bli klikket på tre "
+#~ "ganger."
+
+#~ msgid "XSLTImporter"
+#~ msgstr "XSLT i&mporterer"
+
+#~ msgid "Importer"
+#~ msgstr "Importer"
+
+#~ msgid "CSVImporter"
+#~ msgstr "CSV-importerer"
+
+#~ msgid "TextImporter"
+#~ msgstr "Tekst-importerer"
+
+#~ msgid "BibtexImporter"
+#~ msgstr "Bibtex-importerer"
+
 #~ msgid "&New Collection"
-#~ msgstr "Ново име за колекция"
+#~ msgstr "Ny &samling"
+
+#~ msgid "BCTabControl"
+#~ msgstr "BCTabControl"
+
+#~ msgid "BCAttributeWidget"
+#~ msgstr "BCAttributeWidget"
 
 #~ msgid "BCUnitEditWidget"
 #~ msgstr "BCUnitEditWidget"
 
 #, fuzzy
-#~ msgid "TextImporter"
-#~ msgstr "И&мпортиране"
-
-#, fuzzy
-#~ msgid "XSLTImporter"
-#~ msgstr "И&мпортиране"
-
-#, fuzzy
-#~ msgid "Importer"
-#~ msgstr "И&мпортиране"
-
-#, fuzzy
-#~ msgid "CSVImporter"
-#~ msgstr "Е&кспортиране"
-
-#, fuzzy
-#~ msgid "BibtexImporter"
-#~ msgstr "И&мпортиране"
-
-#~ msgid "BCAttributeWidget"
-#~ msgstr "BCAttributeWidget"
-
-#~ msgid "Bookcase is unable to open the file - %1."
-#~ msgstr "Bookcase не може да отвори файла %1."
-
-#~ msgid "Bookcase is unable to read the file - %1."
-#~ msgstr "Bookcase не може да прочете файла %1."
-
-#~ msgid "BCTabControl"
-#~ msgstr "BCTabControl"
-
-#, fuzzy
 #~ msgid "Processing new entries..."
-#~ msgstr "Процедирам с документа..."
+#~ msgstr "Prosesserer dokument..."
 
 #, fuzzy
 #~ msgid "If checked, the first row is used as field headers."
-#~ msgstr ""
-#~ "Ако е избрано,заглавията на полетата ще "
-#~ "бъдат отпечатани."
+#~ msgstr "Feltnavn blir skrevet ut som tabelloverskrift."
 
 #, fuzzy
 #~ msgid "Collection Field in this Column:"
-#~ msgstr "Полета на колекцията..."
+#~ msgstr "Felter for boksamling..."
 
 #, fuzzy
 #~ msgid "Delete Entries"
-#~ msgstr "Изтриване на поле"
+#~ msgstr "Slett felt"
 
 #~ msgid "Bookcase is unable to find the file - %1."
-#~ msgstr "Bookcase не може да намери файла %1."
+#~ msgstr "Bookcase klarer ikke å finne filen - %1."
 
 #~ msgid "Bookcase is unable to download the file - %1."
-#~ msgstr "Bookcase не може да свали файла %1."
+#~ msgstr "Bookcase klarer ikke å laste ned filen - %1."
 
 #~ msgid "Edit Collection Fields"
-#~ msgstr "Редакция на полетата за колекция"
+#~ msgstr "Endre felter for Bookcase"
 
 #~ msgid "The fields are grouped by common categories for editing."
-#~ msgstr "Полетата са групирани по категории."
+#~ msgstr "Feltene er gruppert på vanlige kategorier for redigering."
 
 #~ msgid "The collection is grouped by this field."
-#~ msgstr ""
-#~ "Колекцията е групирана по този признак."
+#~ msgstr "Denne samlingen er gruppert av dette feltet."
 
 #~ msgid "Fields"
-#~ msgstr "Полета"
+#~ msgstr "Felter"
 
 #~ msgid "Available Fields"
-#~ msgstr "Налични полета"
+#~ msgstr "Tilgjengelige felter"
 
 #~ msgid "These are the available fields in the collection."
-#~ msgstr ""
-#~ "Това са наличните полета за колекцията."
+#~ msgstr "Dette er de tilgjengelige feltene i samlingen."
 
 #~ msgid "Selected Fields"
-#~ msgstr "Избрани полета"
+#~ msgstr "Valgte felter"
 
 #, fuzzy
 #~ msgid "Import..."
-#~ msgstr "Експортиране..."
-
-#, fuzzy
-#~ msgid "Import data from other formats..."
-#~ msgstr "Импортиране от Bibtexml..."
+#~ msgstr "Eksporter..."
 
 #, fuzzy
 #~ msgid "Group By"
-#~ msgstr "Групирай по:"
+#~ msgstr "Grupper på: "
 
 #, fuzzy
 #~ msgid "Read Only"
-#~ msgstr "Готово."
+#~ msgstr "Klar."
 
 #, fuzzy
 #~ msgid "Text"
-#~ msgstr "Търси текст"
+#~ msgstr "Finn tekst"
 
 #, fuzzy
 #~ msgid "Enoding Options"
-#~ msgstr "Опции за групиране"
+#~ msgstr "Grupperingsvalg"
 
 #~ msgid "Edit Collection Fields..."
-#~ msgstr "Редакция на полетата на колекцията"
+#~ msgstr "Endre felter"
 
 #, fuzzy
 #~ msgid "&Create new collection"
-#~ msgstr "Създава нов документ"
+#~ msgstr "Lag nytt dokument"
 
 #, fuzzy
 #~ msgid "*.txt|Text files (*.txt)"
-#~ msgstr "*.xsl|XSLT файлове (*.xsl)"
+#~ msgstr "*.xsl|XSLT filer (*.xsl)"
 
 #, fuzzy
 #~ msgid "Institution"
-#~ msgstr "Състояние"
+#~ msgstr "Tilstand"
 
 #~ msgid "New Book"
-#~ msgstr "Нова книга"
+#~ msgstr "Ny bok"
 
 #~ msgid "Enter Book"
-#~ msgstr "Въвеждане на книга"
+#~ msgstr "Sett inn bok"
 
 #~ msgid "Modify Books"
-#~ msgstr "Редакция на книги"
+#~ msgstr "Endre bøker"
 
 #~ msgid "Delete Books"
-#~ msgstr "Изтриване на книги"
+#~ msgstr "Slett bøker"
 
 #~ msgid "Modify Book"
-#~ msgstr "Промяна на книга"
+#~ msgstr "Endre bok"
 
 #~ msgid "Lookup book..."
-#~ msgstr "Търсене на книга..."
+#~ msgstr "Slå opp bok..."
 
 #~ msgid "Group Books By"
-#~ msgstr "Групира книги по"
+#~ msgstr "Grupper bøker på"
 
 #~ msgid "Configure the options for the application..."
-#~ msgstr "Настройва приложението"
+#~ msgstr "Oppsett av programmet..."
+
+#~ msgid "Save as..."
+#~ msgstr "Lagre som..."
 
 #~ msgid "%1 Total"
-#~ msgstr "%1 Общо"
+#~ msgstr "%1 totalt"
 
 #~ msgid "Importing from Bibtex..."
-#~ msgstr "Импортиране от Bibtex..."
+#~ msgstr "Importerer fra Bibtex..."
 
 #~ msgid "Import from Bibtex..."
-#~ msgstr "Импортиране от Bibtex..."
+#~ msgstr "Importer fra Bibtex..."
 
 #~ msgid "Importing from Bibtexml..."
-#~ msgstr "Импортиране от Bibtexml..."
+#~ msgstr "Importerer fra Bibtexml..."
 
 #~ msgid "Song"
-#~ msgstr "Песен"
+#~ msgstr "Sanger"
 
 #~ msgid "CD"
-#~ msgstr "Диск"
+#~ msgstr "CD"

@@ -32,7 +32,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: importdialog.h 768 2004-08-19 01:13:22Z robby $
+ * @version $Id: importdialog.h 826 2004-09-02 02:39:12Z robby $
  */
 class ImportDialog : public KDialogBase {
 Q_OBJECT
@@ -45,13 +45,21 @@ public:
     CSV,
     XSLT,
     AudioFile,
-    MODS
+    MODS,
+    Alexandria,
+    FreeDB
   };
 
   enum ImportAction {
     Replace,
     Append,
     Merge
+  };
+
+  enum ImportTarget {
+   ImportNone,
+   ImportFile,
+   ImportDir
   };
 
   ImportDialog(ImportFormat format, const KURL& url, MainWindow* parent, const char* name);
@@ -62,7 +70,7 @@ public:
   ImportAction action() const;
 
   static QString fileFilter(ImportFormat format);
-  static bool selectFileFirst(ImportFormat format);
+  static ImportTarget importTarget(ImportFormat format);
 
 private slots:
   void slotUpdateAction();

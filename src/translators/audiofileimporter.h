@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,44 +11,45 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BIBTEXMLIMPORTER_H
-#define BIBTEXMLIMPORTER_H
+#ifndef AUDIOFILEIMPORTER_H
+#define AUDIOFILEIMPORTER_H
 
-namespace Bookcase {
-  namespace Data {
-    class Data;
-  }
-}
-class Entry;
+class QCheckBox;
 
-#include "xmlimporter.h"
-
-#include <qdom.h>
+#include "importer.h"
 
 namespace Bookcase {
   namespace Import {
 
 /**
- *@author Robby Stephenson
+ * The AudioFileImporter class takes care of importing audio files.
+ *
+ * @author Robby Stephenson
+ * @version $Id: audiofileimporter.h 804 2004-08-26 04:52:52Z robby $
  */
-class BibtexmlImporter : public XMLImporter {
+class AudioFileImporter : public Importer {
 Q_OBJECT
 
 public:
   /**
    */
-  BibtexmlImporter(const KURL& url) : Import::XMLImporter(url), m_coll(0) {}
+  AudioFileImporter(const KURL& url);
 
   /**
    */
   virtual Data::Collection* collection();
-  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Bibtex); }
+  /**
+   */
+  virtual QWidget* widget(QWidget* parent, const char* name=0);
+  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Album); }
 
 private:
-  void loadDomDocument();
-  void readEntry(const QDomNode& entryNode);
+  static QString insertValue(const QString& str, const QString& value, uint pos);
+  static QStringList findAllSubDirs(const QString& dir);
 
   Data::Collection* m_coll;
+  QWidget* m_widget;
+  QCheckBox* m_recursive;
 };
 
   } // end namespace

@@ -14,6 +14,7 @@
 #include "importdialog.h"
 #include "mainwindow.h"
 #include "document.h"
+#include "kernel.h"
 
 #include "translators/importer.h"
 #include "translators/bookcaseimporter.h"
@@ -21,6 +22,9 @@
 #include "translators/bibtexmlimporter.h"
 #include "translators/csvimporter.h"
 #include "translators/xsltimporter.h"
+#include "translators/audiofileimporter.h"
+#include "translators/alexandriaimporter.h"
+#include "translators/freedbimporter.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -59,8 +63,14 @@ ImportDialog::ImportDialog(ImportFormat format_, const KURL& url_, MainWindow* p
                                      "current collection. This is only possible when the "
                                      "collection types match. Entries must match exactly "
                                      "in order to be merged."));
-  // append by default?
-  m_radioAppend->setChecked(true);
+  if(m_importer->canImport(Kernel::self()->collection()->type())) {
+    // append by default?
+    m_radioAppend->setChecked(true);
+  } else {
+    m_radioReplace->setChecked(true);
+    m_radioAppend->setEnabled(false);
+    m_radioMerge->setEnabled(false);
+  }
 
   QWidget* w = m_importer->widget(widget, "importer_widget");
 //  m_importer->readOptions(KGlobal::config());
@@ -137,15 +147,33 @@ Bookcase::Import::Importer* ImportDialog::importer(ImportFormat format_, const K
           KURL u;
           u.setPath(xsltFile);
           static_cast<Import::XSLTImporter*>(importer)->setXSLTURL(u);
+        } else {
+          kdWarning() << "ImportDialog::importer - unable to find mods2bookcase.xml!" << endl;
         }
       }
       break;
 
     case AudioFile:
+      importer = new Import::AudioFileImporter(url_);
+      break;
+
+    case Alexandria:
+      importer = new Import::AlexandriaImporter();
+      break;
+
+    case FreeDB:
+      importer = new Import::FreeDBImporter();
+      break;
+
     default:
       kdDebug() << "ImportDialog::importer() - not implemented!" << endl;
       break;
   }
+#ifndef NDEBUG
+  if(!m_importer) {
+    kdWarning() << "ImportDialog::importer() - importer not created!" << endl;
+  }
+#endif
   return importer;
 }
 
@@ -170,15 +198,13 @@ QString ImportDialog::fileFilter(ImportFormat format_) {
       text = i18n("*.xml|XML files (*.xml)") + QChar('\n');
       break;
 
-    case AudioFile:
-      // FIXME: add mp3, too?
-      text = i18n("*.ogg|Ogg files (*.ogg)") + QChar('\n');
-      break;
-
     case MODS:
       text = i18n("*.xml|XML files (*.xml)") + QChar('\n');
       break;
 
+    case AudioFile:
+    case Alexandria:
+    case FreeDB:
     default:
       break;
   }
@@ -186,8 +212,19 @@ QString ImportDialog::fileFilter(ImportFormat format_) {
   return text + i18n("*|All files");
 }
 
-bool ImportDialog::selectFileFirst(ImportFormat format_) {
-  return (format_ != AudioFile);
+// audio files are imported by directory
+// alexandria is a defined location, as is freedb
+// all others are files
+ImportDialog::ImportTarget ImportDialog::importTarget(ImportFormat format_) {
+  switch(format_) {
+    case AudioFile:
+      return ImportDir;
+    case Alexandria:
+    case FreeDB:
+      return ImportNone;
+    default:
+      return ImportFile;
+  }
 }
 
 void ImportDialog::slotUpdateAction() {

@@ -16,16 +16,14 @@
 
 class QWidget;
 
+#include "../collection.h"
+
 #include <kurl.h>
 
 #include <qobject.h>
 #include <qstring.h>
 
 namespace Bookcase {
-  namespace Data {
-    class Collection;
-  }
-
   namespace Import {
 
 /**
@@ -33,14 +31,16 @@ namespace Bookcase {
  *
  * The Importer classes import a file, and return a pointer to a newly created
  * @ref Data::Collection. Any errors or warnings are added to a status message queue.
+ * The calling function owns the collection pointer.
  *
  * @author Robby Stephenson
- * @version $Id: importer.h 768 2004-08-19 01:13:22Z robby $
+ * @version $Id: importer.h 816 2004-08-27 05:51:02Z robby $
  */
 class Importer : public QObject {
 Q_OBJECT
 
 public:
+  Importer() : QObject() {}
   /**
    * The constructor should immediately load the contents of the file to be imported.
    * Any warnings or errors should be added the the status message queue.
@@ -76,6 +76,13 @@ public:
    * @return A pointer to the setting widget
    */
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  /**
+   * Checks to see if the importer can return a collection of this type
+   *
+   * @param type The collection type to check
+   * @return Whether the importer could return a collection of that type
+   */
+  virtual bool canImport(Data::Collection::Type) { return true; }
 
 public slots:
   virtual void slotActionChanged(int) {}

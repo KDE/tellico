@@ -22,7 +22,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: dataimporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: dataimporter.h 816 2004-08-27 05:51:02Z robby $
  */
 class DataImporter : public Importer {
 Q_OBJECT
@@ -44,9 +44,9 @@ public:
 
 protected:
   /**
-   * Return the URL of the imported file.
+   * Return the data in the imported file
    *
-   * @return the file URL
+   * @return the file data
    */
   const QByteArray& data() const { return m_data; }
 

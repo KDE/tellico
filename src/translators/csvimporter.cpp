@@ -44,7 +44,8 @@ CSVImporter::CSVImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_
     m_existingCollection(0),
     m_firstRowHeader(false),
     m_delimiter(QString::fromLatin1(",")),
-    m_widget(0) {
+    m_widget(0),
+    m_table(0) {
 }
 
 Bookcase::Data::Collection* CSVImporter::collection() {
@@ -291,6 +292,10 @@ QStringList CSVImporter::splitLine(const QString& line_) {
 }
 
 void CSVImporter::fillTable() {
+  if(!m_table) {
+    return;
+  }
+
   QString str = text();
   QTextStream t(&str, IO_ReadOnly);
 
@@ -399,6 +404,9 @@ void CSVImporter::slotSetColumnTitle() {
 }
 
 void CSVImporter::updateHeader(bool force_) {
+  if(!m_table) {
+    return;
+  }
   if(m_firstRowHeader || force_) {
     for(int col = 0; col < m_table->numCols(); ++col) {
       if(m_firstRowHeader && m_firstRowHeader

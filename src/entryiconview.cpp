@@ -33,12 +33,12 @@ EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
     : KIconView(parent_, name_), m_coll(0), m_group(0), m_maxIconWidth(MAX_ENTRY_ICON_SIZE) {
   setAutoArrange(true);
   setSorting(true);
-  setSpacing(10);
   setItemsMovable(false);
   setSelectionMode(Extended);
   setResizeMode(QIconView::Adjust);
   setMode(Select);
   setSpacing(4);
+//  setWordWrapIconText(false);
 
   m_defaultPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("bookcase"), KIcon::User);
 
@@ -52,24 +52,21 @@ EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
 }
 
 void EntryIconView::findImageField() {
+  m_imageField.truncate(0);
   if(!m_coll && (!m_group || m_group->isEmpty())) {
-    m_imageField.truncate(0);
     return;
   }
-  const Data::FieldList& list = m_coll ? m_coll->fieldList() : m_group->getFirst()->collection()->fieldList();
-  for(Data::FieldListIterator it(list); it.current(); ++it) {
-    if(it.current()->type() == Data::Field::Image) {
-      m_imageField = it.current()->name();
-      break;
-    }
+  const Data::FieldList& list = m_coll ? m_coll->imageFields() : m_group->getFirst()->collection()->imageFields();
+  if(!list.isEmpty()) {
+    m_imageField = list.getFirst()->name();
   }
 //  kdDebug() << "EntryIconView::findImageField() - image field = " << m_imageField << endl;
 }
 
 const QString& EntryIconView::imageField() {
-  if(m_imageField.isEmpty()) {
-    findImageField();
-  }
+//  if(m_imageField.isNull()) {
+//    findImageField();
+//  }
   return m_imageField;
 }
 
@@ -82,12 +79,15 @@ void EntryIconView::fillView(const Data::EntryList& list_) {
   setSorting(false);
   setGridX(m_maxIconWidth + 2*ENTRY_ICON_SIZE_PAD); // set default spacing initially
   int maxWidth = MIN_ENTRY_ICON_SIZE;
+  int maxHeight = 0;
   QIconViewItem* item;
   for(Data::EntryListIterator it(list_); it.current(); ++it) {
     item = new EntryIconViewItem(this, it.current());
     maxWidth = QMAX(maxWidth, item->width());
+    maxHeight = QMAX(maxWidth, item->pixmapRect().height());
   }
   setGridX(maxWidth + 2*ENTRY_ICON_SIZE_PAD); // the pad is so the text can be wider than the icon
+  setGridY(maxHeight + fontMetrics().height());
   sort();
   setSorting(true);
 }
@@ -114,6 +114,7 @@ void EntryIconView::showCollection(const Data::Collection* coll_) {
     return;
   }
   m_coll = coll_;
+  findImageField();
   fillView(coll_->entryList());
 }
 
@@ -123,6 +124,7 @@ void EntryIconView::showEntryGroup(const Data::EntryGroup* group_) {
     return;
   }
   m_group = group_;
+  findImageField();
   fillView(*group_);
 }
 

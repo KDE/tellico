@@ -3,20 +3,26 @@ bin_PROGRAMS = bookcase
 
 ## INCLUDES were found outside kdevelop specific part
 
-bookcase_SOURCES = entryview.cpp collection.cpp mainwindow.cpp controller.cpp \
-        kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp \
-        collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp \
-        entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp \
-        filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp \
-        imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp \
-        entryeditdialog.cpp fetchdialog.cpp kernel.cpp viewstack.cpp entryiconview.cpp \
-        datewidget.cpp multiselectionlistview.cpp
+bookcase_SOURCES = \
+entryview.cpp collection.cpp mainwindow.cpp \
+controller.cpp kwidgetlister.cpp isbnvalidator.cpp \
+finddialog.cpp configdialog.cpp main.cpp image.cpp \
+collectionfactory.cpp collectionfieldsdialog.cpp \
+detailedlistview.cpp document.cpp entry.cpp \
+entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp \
+filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp \
+importdialog.cpp labelaction.cpp tabcontrol.cpp \
+imagewidget.cpp fieldcompletion.cpp imagefactory.cpp \
+stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp \
+kernel.cpp viewstack.cpp entryiconview.cpp \
+datewidget.cpp multiselectionlistview.cpp
 
 bookcase_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
         ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
-        ./translators/pilotdb/libflatfile/liblibflatfile.a ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
+        ./translators/pilotdb/libflatfile/liblibflatfile.a \
+        ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
         $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET) \
-        $(LIBXSLT_LIBS)
+        $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(CDDA_LIBS)
 
 if !USE_LIBBTPARSE
   bookcase_LDADD += ./translators/btparse/libbtparse.a
@@ -49,7 +55,8 @@ entryview.cpp               imagefactory.cpp     utils.h \
 fetchdialog.h               fetchdialog.cpp      kernel.h \
 kernel.cpp                  viewstack.h          viewstack.cpp \
 entryiconview.h             entryiconview.cpp    datewidget.h \
-datewidget.cpp              multiselectionlistview.h multiselectionlistview.cpp
+datewidget.cpp              multiselectionlistview.h \
+multiselectionlistview.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:

@@ -443,7 +443,7 @@ void EntryEditDialog::setContents(Data::Entry* entry_, const QString& highlight_
       widget->setHighlighted(highlight);
       // now I only want to worry about first string found, so empty it
       highlight = QString::null;
-      highlightPage = m_tabs->indexOf(static_cast<QWidget*>(widget->parent()));
+      highlightPage = m_tabs->indexOf(widget->parentWidget());
     }
     widget->setEnabled(true);
     widget->editMultiple(false);

@@ -29,7 +29,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: exporter.h 759 2004-08-11 01:28:25Z robby $
+ * @version $Id: exporter.h 817 2004-08-27 07:50:40Z robby $
  */
 class Exporter {
 public:
@@ -43,6 +43,7 @@ public:
   virtual QString formatString() const = 0;
   virtual QString text(bool formatFields, bool encodeUTF8) = 0;
   virtual QByteArray data(bool formatFields) = 0;
+  virtual bool exportEntries(bool formatFields) const = 0;
   virtual QString fileFilter() const = 0;
   virtual void readOptions(KConfig* config) = 0;
   virtual void saveOptions(KConfig* config) = 0;

@@ -29,7 +29,7 @@ editor.</p>
 </tip>
 <tip category="Bookcase">
 <html>
-<p>...that if you want to filter by a checkbox field, a value of
+<p>...that if you want to filter by a Checkbox field, a value of
 "true" should be used. If you'd like to filter to
 show only the science fiction books which you've not read, for
 example, check the <em>Match all of the
@@ -86,5 +86,17 @@ outputs a valid Bookcase XML file.</p>
 <tip category="Bookcase">
 <html>
 <p>...that double-clicking an entry item opens the Entry Editor.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can add HTML tags to any Paragraph field for formatting, such as
+&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that in the Detailed View, you can press a letter on the
+keyboard to skip to the next entry that starts with that letter.</p>
 </html>
 </tip>

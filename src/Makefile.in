@@ -53,6 +53,7 @@ AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
+CDDA_LIBS = @CDDA_LIBS@
 CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
@@ -79,6 +80,7 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+KCDDB_LIBS = @KCDDB_LIBS@
 KDECONFIG = @KDECONFIG@
 KDE_EXTRA_RPATH = @KDE_EXTRA_RPATH@
 KDE_INCLUDES = @KDE_INCLUDES@
@@ -164,6 +166,9 @@ RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+TAGLIB_CFLAGS = @TAGLIB_CFLAGS@
+TAGLIB_LIBS = @TAGLIB_LIBS@
+TAGLIB_RPATH = @TAGLIB_RPATH@
 TOPSUBDIRS = @TOPSUBDIRS@
 UIC = @UIC@
 UIC_TR = @UIC_TR@
@@ -259,21 +264,27 @@ x_libraries = @x_libraries@
 ####### kdevelop will overwrite this part!!! (begin)##########
 bin_PROGRAMS = bookcase
 
-bookcase_SOURCES = entryview.cpp collection.cpp mainwindow.cpp controller.cpp \
-        kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp \
-        collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp \
-        entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp \
-        filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp \
-        imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp \
-        entryeditdialog.cpp fetchdialog.cpp kernel.cpp viewstack.cpp entryiconview.cpp \
-        datewidget.cpp multiselectionlistview.cpp
+bookcase_SOURCES = \
+entryview.cpp collection.cpp mainwindow.cpp \
+controller.cpp kwidgetlister.cpp isbnvalidator.cpp \
+finddialog.cpp configdialog.cpp main.cpp image.cpp \
+collectionfactory.cpp collectionfieldsdialog.cpp \
+detailedlistview.cpp document.cpp entry.cpp \
+entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp \
+filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp \
+importdialog.cpp labelaction.cpp tabcontrol.cpp \
+imagewidget.cpp fieldcompletion.cpp imagefactory.cpp \
+stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp \
+kernel.cpp viewstack.cpp entryiconview.cpp \
+datewidget.cpp multiselectionlistview.cpp
 
 
 bookcase_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
         ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
-        ./translators/pilotdb/libflatfile/liblibflatfile.a ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
+        ./translators/pilotdb/libflatfile/liblibflatfile.a \
+        ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
         $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET) \
-        $(LIBXSLT_LIBS)\
+        $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(CDDA_LIBS)\
 $(am__append_1)
 
 SUBDIRS = collections translators fetch tests
@@ -303,7 +314,8 @@ entryview.cpp               imagefactory.cpp     utils.h \
 fetchdialog.h               fetchdialog.cpp      kernel.h \
 kernel.cpp                  viewstack.h          viewstack.cpp \
 entryiconview.h             entryiconview.cpp    datewidget.h \
-datewidget.cpp              multiselectionlistview.h multiselectionlistview.cpp
+datewidget.cpp              multiselectionlistview.h \
+multiselectionlistview.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
@@ -366,7 +378,7 @@ am_bookcase_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
 	kernel.$(OBJEXT) viewstack.$(OBJEXT) entryiconview.$(OBJEXT) \
 	datewidget.$(OBJEXT) multiselectionlistview.$(OBJEXT)
 #>- bookcase_OBJECTS = $(am_bookcase_OBJECTS)
-#>+ 20
+#>+ 19
 bookcase_final_OBJECTS = bookcase.all_cpp.o 
 bookcase_nofinal_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
 	mainwindow.$(OBJEXT) controller.$(OBJEXT) \
@@ -383,8 +395,7 @@ bookcase_nofinal_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
 	imagefactory.$(OBJEXT) stringmapdialog.$(OBJEXT) \
 	entryeditdialog.$(OBJEXT) fetchdialog.$(OBJEXT) \
 	kernel.$(OBJEXT) viewstack.$(OBJEXT) entryiconview.$(OBJEXT) \
-	datewidget.$(OBJEXT) multiselectionlistview.$(OBJEXT)\
-entryview.moc.o 
+	datewidget.$(OBJEXT) multiselectionlistview.$(OBJEXT)
 @KDE_USE_FINAL_FALSE@bookcase_OBJECTS = $(bookcase_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@bookcase_OBJECTS = $(bookcase_final_OBJECTS)
 @USE_LIBBTPARSE_TRUE@bookcase_DEPENDENCIES = ./fetch/libfetch.a \
@@ -432,7 +443,7 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@	./$(DEPDIR)/stringmapdialog.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/tabcontrol.Po ./$(DEPDIR)/viewstack.Po
 #>+ 54
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/entryview.moc.P  $(DEPDIR)/bookcase.all_cpp.P ./$(DEPDIR)/collection.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =   $(DEPDIR)/bookcase.all_cpp.P ./$(DEPDIR)/collection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/collectionfactory.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/collectionfieldsdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
@@ -459,7 +470,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/multiselectionlistview.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/stringmapdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/tabcontrol.Po ./$(DEPDIR)/viewstack.Po
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/entryview.moc.P ./$(DEPDIR)/collection.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  ./$(DEPDIR)/collection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/collectionfactory.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/collectionfieldsdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
@@ -1106,11 +1117,11 @@ viewstack.moc: $(srcdir)/viewstack.h
 mocs: viewstack.moc
 
 #>+ 3
-entryview.moc.cpp: $(srcdir)/entryview.h
-	$(MOC) $(srcdir)/entryview.h -o entryview.moc.cpp
+entryview.moc: $(srcdir)/entryview.h
+	$(MOC) $(srcdir)/entryview.h -o entryview.moc
 
 #>+ 2
-mocs: entryview.moc.cpp
+mocs: entryview.moc
 
 #>+ 3
 mainwindow.moc: $(srcdir)/mainwindow.h
@@ -1149,7 +1160,7 @@ mocs: fieldwidget.moc
 
 #>+ 3
 clean-metasources:
-	-rm -f  configdialog.moc datewidget.moc entryiconview.moc document.moc collection.moc exportdialog.moc imagewidget.moc tabcontrol.moc finddialog.moc controller.moc fieldcompletion.moc kernel.moc groupview.moc detailedlistview.moc importdialog.moc fetchdialog.moc multiselectionlistview.moc collectionfieldsdialog.moc labelaction.moc entryeditdialog.moc viewstack.moc entryview.moc.cpp mainwindow.moc filterdialog.moc kwidgetlister.moc stringmapdialog.moc fieldwidget.moc
+	-rm -f  configdialog.moc datewidget.moc entryiconview.moc document.moc collection.moc exportdialog.moc imagewidget.moc tabcontrol.moc finddialog.moc controller.moc fieldcompletion.moc kernel.moc groupview.moc detailedlistview.moc importdialog.moc fetchdialog.moc multiselectionlistview.moc collectionfieldsdialog.moc labelaction.moc entryeditdialog.moc viewstack.moc entryview.moc mainwindow.moc filterdialog.moc kwidgetlister.moc stringmapdialog.moc fieldwidget.moc
 
 #>+ 2
 docs-am:
@@ -1184,11 +1195,11 @@ bcheck-am:
 
 
 #>+ 11
-bookcase.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/entryview.cpp $(srcdir)/collection.cpp $(srcdir)/mainwindow.cpp $(srcdir)/controller.cpp $(srcdir)/kwidgetlister.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/finddialog.cpp $(srcdir)/configdialog.cpp $(srcdir)/main.cpp $(srcdir)/image.cpp $(srcdir)/collectionfactory.cpp $(srcdir)/collectionfieldsdialog.cpp $(srcdir)/detailedlistview.cpp $(srcdir)/document.cpp $(srcdir)/entry.cpp $(srcdir)/entryitem.cpp $(srcdir)/exportdialog.cpp $(srcdir)/field.cpp $(srcdir)/fieldwidget.cpp $(srcdir)/filehandler.cpp $(srcdir)/filter.cpp $(srcdir)/filterdialog.cpp $(srcdir)/groupview.cpp $(srcdir)/importdialog.cpp $(srcdir)/labelaction.cpp $(srcdir)/tabcontrol.cpp $(srcdir)/imagewidget.cpp $(srcdir)/fieldcompletion.cpp $(srcdir)/imagefactory.cpp $(srcdir)/stringmapdialog.cpp $(srcdir)/entryeditdialog.cpp $(srcdir)/fetchdialog.cpp $(srcdir)/kernel.cpp $(srcdir)/viewstack.cpp $(srcdir)/entryiconview.cpp $(srcdir)/datewidget.cpp $(srcdir)/multiselectionlistview.cpp entryview.moc.cpp  configdialog.moc document.moc entryiconview.moc datewidget.moc exportdialog.moc collection.moc imagewidget.moc finddialog.moc tabcontrol.moc fieldcompletion.moc controller.moc kernel.moc groupview.moc detailedlistview.moc importdialog.moc fetchdialog.moc labelaction.moc collectionfieldsdialog.moc multiselectionlistview.moc entryeditdialog.moc mainwindow.moc viewstack.moc filterdialog.moc kwidgetlister.moc fieldwidget.moc stringmapdialog.moc
+bookcase.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/entryview.cpp $(srcdir)/collection.cpp $(srcdir)/mainwindow.cpp $(srcdir)/controller.cpp $(srcdir)/kwidgetlister.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/finddialog.cpp $(srcdir)/configdialog.cpp $(srcdir)/main.cpp $(srcdir)/image.cpp $(srcdir)/collectionfactory.cpp $(srcdir)/collectionfieldsdialog.cpp $(srcdir)/detailedlistview.cpp $(srcdir)/document.cpp $(srcdir)/entry.cpp $(srcdir)/entryitem.cpp $(srcdir)/exportdialog.cpp $(srcdir)/field.cpp $(srcdir)/fieldwidget.cpp $(srcdir)/filehandler.cpp $(srcdir)/filter.cpp $(srcdir)/filterdialog.cpp $(srcdir)/groupview.cpp $(srcdir)/importdialog.cpp $(srcdir)/labelaction.cpp $(srcdir)/tabcontrol.cpp $(srcdir)/imagewidget.cpp $(srcdir)/fieldcompletion.cpp $(srcdir)/imagefactory.cpp $(srcdir)/stringmapdialog.cpp $(srcdir)/entryeditdialog.cpp $(srcdir)/fetchdialog.cpp $(srcdir)/kernel.cpp $(srcdir)/viewstack.cpp $(srcdir)/entryiconview.cpp $(srcdir)/datewidget.cpp $(srcdir)/multiselectionlistview.cpp  configdialog.moc document.moc entryiconview.moc datewidget.moc exportdialog.moc collection.moc imagewidget.moc finddialog.moc tabcontrol.moc fieldcompletion.moc controller.moc kernel.moc groupview.moc detailedlistview.moc importdialog.moc fetchdialog.moc labelaction.moc collectionfieldsdialog.moc multiselectionlistview.moc entryeditdialog.moc mainwindow.moc entryview.moc viewstack.moc filterdialog.moc kwidgetlister.moc fieldwidget.moc stringmapdialog.moc
 	@echo 'creating bookcase.all_cpp.cpp ...'; \
 	rm -f bookcase.all_cpp.files bookcase.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> bookcase.all_cpp.final; \
-	for file in entryview.cpp collection.cpp mainwindow.cpp controller.cpp kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp kernel.cpp viewstack.cpp entryiconview.cpp datewidget.cpp multiselectionlistview.cpp entryview.moc.cpp ; do \
+	for file in entryview.cpp collection.cpp mainwindow.cpp controller.cpp kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp kernel.cpp viewstack.cpp entryiconview.cpp datewidget.cpp multiselectionlistview.cpp ; do \
 	  echo "#include \"$$file\"" >> bookcase.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> bookcase.all_cpp.final; \
 	done; \
@@ -1223,7 +1234,7 @@ cvs-clean:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 55
+#>+ 57
 viewstack.o: viewstack.moc 
 imagewidget.o: imagewidget.moc 
 groupview.o: groupview.moc 
@@ -1231,6 +1242,7 @@ imagewidget.lo: imagewidget.moc
 document.o: document.moc 
 stringmapdialog.lo: stringmapdialog.moc 
 multiselectionlistview.o: multiselectionlistview.moc 
+entryview.o: entryview.moc 
 kernel.lo: kernel.moc 
 importdialog.o: importdialog.moc 
 filterdialog.o: filterdialog.moc 
@@ -1258,6 +1270,7 @@ tabcontrol.o: tabcontrol.moc
 tabcontrol.lo: tabcontrol.moc 
 datewidget.lo: datewidget.moc 
 kernel.o: kernel.moc 
+entryview.lo: entryview.moc 
 collection.lo: collection.moc 
 configdialog.o: configdialog.moc 
 fetchdialog.lo: fetchdialog.moc 

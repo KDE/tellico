@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="9" name="bookcase">
+<kpartgui version="11" name="bookcase">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -21,10 +21,14 @@
     <text>&amp;Import</text>
     <Action name="file_import_bookcase"/>
     <Action name="file_import_csv"/>
-    <Action name="file_import_mods"/>
     <Separator/>
+    <Action name="file_import_freedb"/>
+    <Action name="file_import_audiofile"/>
+    <Separator/>
+    <Action name="file_import_alexandria"/>
     <Action name="file_import_bibtex"/>
     <Action name="file_import_bibtexml"/>
+    <Action name="file_import_mods"/>
     <Separator/>
     <Action name="file_import_xslt"/>
    </Menu>
@@ -35,6 +39,7 @@
     <Action name="file_export_csv"/>
     <Action name="file_export_pilotdb"/>
     <Separator/>
+    <Action name="file_export_alexandria"/>
     <Action name="file_export_bibtex"/>
     <Action name="file_export_bibtexml"/>
     <Separator/>

@@ -459,7 +459,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS build build_cpu build_vendor build_os host host_cpu host_vendor host_os target target_cpu target_vendor target_os INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE KDECONFIG kde_libs_prefix kde_libs_htmldir CONF_FILES CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE WOVERLOADED_VIRTUAL USE_EXCEPTIONS USE_RTTI CXXCPP NOOPT_CXXFLAGS NOOPT_CFLAGS KDE_USE_FINAL_TRUE KDE_USE_FINAL_FALSE KDE_USE_CLOSURE_TRUE KDE_USE_CLOSURE_FALSE KDE_NO_UNDEFINED KDE_USE_NMCHECK_TRUE KDE_USE_NMCHECK_FALSE LN_S ECHO RANLIB ac_ct_RANLIB EGREP LIBTOOL KDE_PLUGIN MSGFMT GMSGFMT XGETTEXT LIBUTIL LIBCOMPAT LIBCRYPT LIBRESOLV LIB_POLL FRAMEWORK_COREAUDIO LIBSOCKET X_EXTRA_LIBS LIBUCB LIBDL LIBXINERAMA X_PRE_LIBS LIB_X11 LIB_XRENDER LIBSM X_INCLUDES X_LDFLAGS x_includes x_libraries QTE_NORTTI LIB_XEXT LIBPTHREAD USE_THREADS KDE_MT_LDFLAGS KDE_MT_LIBS USER_INCLUDES USER_LDFLAGS LIBZ LIBPNG LIBJPEG qt_libraries qt_includes QT_INCLUDES QT_LDFLAGS PERL MOC UIC UIC_TR LIB_QT LIB_QPE kde_qtver KDE_EXTRA_RPATH KDE_RPATH X_RPATH kde_libraries kde_includes KDE_LDFLAGS KDE_INCLUDES all_includes all_libraries AUTODIRS include_ARTS_TRUE include_ARTS_FALSE DCOPIDL DCOPIDL2CPP DCOP_DEPENDENCIES MCOPIDL ARTSCCONFIG MEINPROC KDE_XSL_STYLESHEET kde_htmldir kde_appsdir kde_icondir kde_sounddir kde_datadir kde_locale kde_confdir kde_mimedir kde_wallpaperdir kde_bindir kde_templatesdir kde_servicesdir kde_servicetypesdir kde_moduledir kdeinitdir kde_styledir kde_widgetdir LIB_KDECORE LIB_KDEUI LIB_KIO LIB_SMB LIB_KAB LIB_KABC LIB_KHTML LIB_KSPELL LIB_KPARTS LIB_KDEPRINT LIB_KUTILS LIB_KDEPIM LIB_KSYCOCA LIB_KFILE LIB_KFM LIBXML_LIBS LIBXML_CFLAGS LIBXML_RPATH XMLCATALOG XML_CATALOG_FILE LIBXSLT_LIBS LIBXSLT_CFLAGS LIBXSLT_RPATH USE_LIBBTPARSE_TRUE USE_LIBBTPARSE_FALSE ALLOCA TOPSUBDIRS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS build build_cpu build_vendor build_os host host_cpu host_vendor host_os target target_cpu target_vendor target_os INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE KDECONFIG kde_libs_prefix kde_libs_htmldir CONF_FILES CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE WOVERLOADED_VIRTUAL USE_EXCEPTIONS USE_RTTI CXXCPP NOOPT_CXXFLAGS NOOPT_CFLAGS KDE_USE_FINAL_TRUE KDE_USE_FINAL_FALSE KDE_USE_CLOSURE_TRUE KDE_USE_CLOSURE_FALSE KDE_NO_UNDEFINED KDE_USE_NMCHECK_TRUE KDE_USE_NMCHECK_FALSE LN_S ECHO RANLIB ac_ct_RANLIB EGREP LIBTOOL KDE_PLUGIN MSGFMT GMSGFMT XGETTEXT LIBUTIL LIBCOMPAT LIBCRYPT LIBRESOLV LIB_POLL FRAMEWORK_COREAUDIO LIBSOCKET X_EXTRA_LIBS LIBUCB LIBDL LIBXINERAMA X_PRE_LIBS LIB_X11 LIB_XRENDER LIBSM X_INCLUDES X_LDFLAGS x_includes x_libraries QTE_NORTTI LIB_XEXT LIBPTHREAD USE_THREADS KDE_MT_LDFLAGS KDE_MT_LIBS USER_INCLUDES USER_LDFLAGS LIBZ LIBPNG LIBJPEG qt_libraries qt_includes QT_INCLUDES QT_LDFLAGS PERL MOC UIC UIC_TR LIB_QT LIB_QPE kde_qtver KDE_EXTRA_RPATH KDE_RPATH X_RPATH kde_libraries kde_includes KDE_LDFLAGS KDE_INCLUDES all_includes all_libraries AUTODIRS include_ARTS_TRUE include_ARTS_FALSE DCOPIDL DCOPIDL2CPP DCOP_DEPENDENCIES MCOPIDL ARTSCCONFIG MEINPROC KDE_XSL_STYLESHEET kde_htmldir kde_appsdir kde_icondir kde_sounddir kde_datadir kde_locale kde_confdir kde_mimedir kde_wallpaperdir kde_bindir kde_templatesdir kde_servicesdir kde_servicetypesdir kde_moduledir kdeinitdir kde_styledir kde_widgetdir LIB_KDECORE LIB_KDEUI LIB_KIO LIB_SMB LIB_KAB LIB_KABC LIB_KHTML LIB_KSPELL LIB_KPARTS LIB_KDEPRINT LIB_KUTILS LIB_KDEPIM LIB_KSYCOCA LIB_KFILE LIB_KFM ALLOCA LIBXML_LIBS LIBXML_CFLAGS LIBXML_RPATH XMLCATALOG XML_CATALOG_FILE LIBXSLT_LIBS LIBXSLT_CFLAGS LIBXSLT_RPATH TAGLIB_CFLAGS TAGLIB_LIBS TAGLIB_RPATH KCDDB_LIBS CDDA_LIBS USE_LIBBTPARSE_TRUE USE_LIBBTPARSE_FALSE TOPSUBDIRS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1898,7 +1898,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=bookcase
- VERSION=0.10
+ VERSION=0.11
 
 
 cat >>confdefs.h <<_ACEOF
@@ -24027,396 +24027,6 @@ fi
 
 
 
-
-   echo "$as_me:$LINENO: checking for xml2-config" >&5
-echo $ECHO_N "checking for xml2-config... $ECHO_C" >&6
-   if test -n "$XML_CONFIG"; then
-        kde_cv_path="$XML_CONFIG";
-   else
-        kde_cache=`echo xml2-config | sed 'y%./+-%__p_%'`
-
-        if eval "test \"\${kde_cv_path_$kde_cache+set}\" = set"; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-
-        kde_cv_path="NONE"
-	kde_save_IFS=$IFS
-	IFS=':'
-	dirs=""
-	for dir in $PATH; do
-	  dirs="$dirs $dir"
-	done
-	if test -z ""; then  	  dirs="${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin $dirs"
-        else  	  dirs="$dirs ${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin"
-	fi
-	IFS=$kde_save_IFS
-
-        for dir in $dirs; do
-	  if test -x "$dir/xml2-config"; then
-	    if test -n ""
-	    then
-              evalstr="$dir/xml2-config  2>&1 "
-	      if eval $evalstr; then
-                kde_cv_path="$dir/xml2-config"
-                break
-	      fi
-            else
-		kde_cv_path="$dir/xml2-config"
-                break
-	    fi
-          fi
-        done
-
-        eval "kde_cv_path_$kde_cache=$kde_cv_path"
-
-
-fi
-
-
-      eval "kde_cv_path=\"`echo '$kde_cv_path_'$kde_cache`\""
-
-   fi
-
-   if test -z "$kde_cv_path" || test "$kde_cv_path" = NONE; then
-      echo "$as_me:$LINENO: result: not found" >&5
-echo "${ECHO_T}not found" >&6
-
-  { { echo "$as_me:$LINENO: error: Could not find xml2-config anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.23. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxml2-devel or something similar." >&5
-echo "$as_me: error: Could not find xml2-config anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.23. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxml2-devel or something similar." >&2;}
-   { (exit 1); exit 1; }; }
-
-   else
-      echo "$as_me:$LINENO: result: $kde_cv_path" >&5
-echo "${ECHO_T}$kde_cv_path" >&6
-      XML_CONFIG=$kde_cv_path
-
-   fi
-
-
-if test -n "$XML_CONFIG"; then
-  vers=`$XML_CONFIG --version 2>/dev/null | sed -e 's/libxml //' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  if test -n "$vers" && test "$vers" -ge 2004023
-  then
-    LIBXML_LIBS="`$XML_CONFIG --libs`"
-    LIBXML_RPATH=
-    for args in $LIBXML_LIBS; do
-      case $args in
-        -L*)
-          LIBXML_RPATH="$LIBXML_RPATH $args"
-        ;;
-      esac
-    done
-    LIBXML_RPATH=`echo $LIBXML_RPATH | sed -e "s/-L/-R/g"`
-    LIBXML_CFLAGS="`$XML_CONFIG --cflags`"
-  else
-    { { echo "$as_me:$LINENO: error: You need at least libxml 2.4.23." >&5
-echo "$as_me: error: You need at least libxml 2.4.23." >&2;}
-   { (exit 1); exit 1; }; }
-  fi
-fi
-
-
-
-
-
-
-# Check whether --with-xml-catalog or --without-xml-catalog was given.
-if test "${with_xml_catalog+set}" = set; then
-  withval="$with_xml_catalog"
-
-else
-  with_xml_catalog=no
-fi;
-
-if test x"$with_xml_catalog" != xno; then
-
-   echo "$as_me:$LINENO: checking for xmlcatalog" >&5
-echo $ECHO_N "checking for xmlcatalog... $ECHO_C" >&6
-   if test -n "$XMLCATALOG"; then
-        kde_cv_path="$XMLCATALOG";
-   else
-        kde_cache=`echo xmlcatalog | sed 'y%./+-%__p_%'`
-
-        if eval "test \"\${kde_cv_path_$kde_cache+set}\" = set"; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-
-        kde_cv_path="NONE"
-	kde_save_IFS=$IFS
-	IFS=':'
-	dirs=""
-	for dir in $PATH; do
-	  dirs="$dirs $dir"
-	done
-	if test -z ""; then  	  dirs="${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin $dirs"
-        else  	  dirs="$dirs ${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin"
-	fi
-	IFS=$kde_save_IFS
-
-        for dir in $dirs; do
-	  if test -x "$dir/xmlcatalog"; then
-	    if test -n ""
-	    then
-              evalstr="$dir/xmlcatalog  2>&1 "
-	      if eval $evalstr; then
-                kde_cv_path="$dir/xmlcatalog"
-                break
-	      fi
-            else
-		kde_cv_path="$dir/xmlcatalog"
-                break
-	    fi
-          fi
-        done
-
-        eval "kde_cv_path_$kde_cache=$kde_cv_path"
-
-
-fi
-
-
-      eval "kde_cv_path=\"`echo '$kde_cv_path_'$kde_cache`\""
-
-   fi
-
-   if test -z "$kde_cv_path" || test "$kde_cv_path" = NONE; then
-      echo "$as_me:$LINENO: result: not found" >&5
-echo "${ECHO_T}not found" >&6
-
-    { { echo "$as_me:$LINENO: error: Could not find xmlcatalog anywhere, check ftp://xmlsoft.org/ for libxml2 >= 2.4.23. If you are using pre-packaged libraries, be sure to have the utility files installed as well, which may be called libxml2-utils or something similar." >&5
-echo "$as_me: error: Could not find xmlcatalog anywhere, check ftp://xmlsoft.org/ for libxml2 >= 2.4.23. If you are using pre-packaged libraries, be sure to have the utility files installed as well, which may be called libxml2-utils or something similar." >&2;}
-   { (exit 1); exit 1; }; }
-
-   else
-      echo "$as_me:$LINENO: result: $kde_cv_path" >&5
-echo "${ECHO_T}$kde_cv_path" >&6
-      XMLCATALOG=$kde_cv_path
-
-   fi
-
-
-
-
-  if test x"$with_xml_catalog" = xyes; then
-    XML_CATALOG_FILE="/etc/xml/catalog"
-  else
-    XML_CATALOG_FILE="$with_xml_catalog"
-  fi
-
-  echo "$as_me:$LINENO: checking for XML catalog" >&5
-echo $ECHO_N "checking for XML catalog... $ECHO_C" >&6
-  if test -f "$XML_CATALOG_FILE"; then
-    echo "$as_me:$LINENO: result: $XML_CATALOG_FILE" >&5
-echo "${ECHO_T}$XML_CATALOG_FILE" >&6
-  else
-    { { echo "$as_me:$LINENO: error: $XML_CATALOG_FILE not found" >&5
-echo "$as_me: error: $XML_CATALOG_FILE not found" >&2;}
-   { (exit 1); exit 1; }; }
-  fi
-
-
-fi
-
-
-   echo "$as_me:$LINENO: checking for xslt-config" >&5
-echo $ECHO_N "checking for xslt-config... $ECHO_C" >&6
-   if test -n "$XSLT_CONFIG"; then
-        kde_cv_path="$XSLT_CONFIG";
-   else
-        kde_cache=`echo xslt-config | sed 'y%./+-%__p_%'`
-
-        if eval "test \"\${kde_cv_path_$kde_cache+set}\" = set"; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-
-        kde_cv_path="NONE"
-	kde_save_IFS=$IFS
-	IFS=':'
-	dirs=""
-	for dir in $PATH; do
-	  dirs="$dirs $dir"
-	done
-	if test -z ""; then  	  dirs="${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin $dirs"
-        else  	  dirs="$dirs ${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin"
-	fi
-	IFS=$kde_save_IFS
-
-        for dir in $dirs; do
-	  if test -x "$dir/xslt-config"; then
-	    if test -n ""
-	    then
-              evalstr="$dir/xslt-config  2>&1 "
-	      if eval $evalstr; then
-                kde_cv_path="$dir/xslt-config"
-                break
-	      fi
-            else
-		kde_cv_path="$dir/xslt-config"
-                break
-	    fi
-          fi
-        done
-
-        eval "kde_cv_path_$kde_cache=$kde_cv_path"
-
-
-fi
-
-
-      eval "kde_cv_path=\"`echo '$kde_cv_path_'$kde_cache`\""
-
-   fi
-
-   if test -z "$kde_cv_path" || test "$kde_cv_path" = NONE; then
-      echo "$as_me:$LINENO: result: not found" >&5
-echo "${ECHO_T}not found" >&6
-
-  { { echo "$as_me:$LINENO: error: Could not find xslt-config anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.19. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxslt-devel or something similar." >&5
-echo "$as_me: error: Could not find xslt-config anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.19. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxslt-devel or something similar." >&2;}
-   { (exit 1); exit 1; }; }
-
-   else
-      echo "$as_me:$LINENO: result: $kde_cv_path" >&5
-echo "${ECHO_T}$kde_cv_path" >&6
-      XSLT_CONFIG=$kde_cv_path
-
-   fi
-
-
-if test -n "$XSLT_CONFIG"; then
-  vers=`$XSLT_CONFIG --version 2>/dev/null | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  if test -n "$vers" && test "$vers" -ge 1000019; then
-    LIBXSLT_LIBS="`$XSLT_CONFIG --libs`"
-    LIBXSLT_RPATH=
-    for args in $LIBXSLT_LIBS; do
-      case $args in
-        -L*)
-          LIBXSLT_RPATH="$LIBXSLT_RPATH $args"
-        ;;
-      esac
-    done
-    LIBXSLT_RPATH=`echo $LIBXSLT_RPATH | sed -e "s/-L/-R/g"`
-    LIBXSLT_CFLAGS="`$XSLT_CONFIG --cflags`"
-  else
-    { { echo "$as_me:$LINENO: error: You need at least libxslt 1.0.19." >&5
-echo "$as_me: error: You need at least libxslt 1.0.19." >&2;}
-   { (exit 1); exit 1; }; }
-  fi
-fi
-
-
-
-
-
-
-# Check whether --with-btparse or --without-btparse was given.
-if test "${with_btparse+set}" = set; then
-  withval="$with_btparse"
-  case "${withval}" in
-                 shared) btparse=shared ;;
-                 static) btparse=static ;;
-                    yes) btparse=shared ;;
-                      *) { { echo "$as_me:$LINENO: error: bad value ${withval} for --with-btparse" >&5
-echo "$as_me: error: bad value ${withval} for --with-btparse" >&2;}
-   { (exit 1); exit 1; }; } ;;
-             esac
-else
-  btparse=static
-fi;
-
-
-
-if test x$btparse = xshared; then
-  USE_LIBBTPARSE_TRUE=
-  USE_LIBBTPARSE_FALSE='#'
-else
-  USE_LIBBTPARSE_TRUE='#'
-  USE_LIBBTPARSE_FALSE=
-fi
-
-
-if test x$btparse = xshared; then
-
-echo "$as_me:$LINENO: checking for bt_initialize in -lbtparse" >&5
-echo $ECHO_N "checking for bt_initialize in -lbtparse... $ECHO_C" >&6
-if test "${ac_cv_lib_btparse_bt_initialize+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lbtparse  $LIBS"
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-
-/* Override any gcc2 internal prototype to avoid an error.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-/* We use char because int might match the return type of a gcc2
-   builtin and then its argument prototype would still apply.  */
-char bt_initialize ();
-int
-main ()
-{
-bt_initialize ();
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_lib_btparse_bt_initialize=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_lib_btparse_bt_initialize=no
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-echo "$as_me:$LINENO: result: $ac_cv_lib_btparse_bt_initialize" >&5
-echo "${ECHO_T}$ac_cv_lib_btparse_bt_initialize" >&6
-if test $ac_cv_lib_btparse_bt_initialize = yes; then
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBBTPARSE 1
-_ACEOF
-
-  LIBS="-lbtparse $LIBS"
-
-else
-  { { echo "$as_me:$LINENO: error: could not find libbtparse" >&5
-echo "$as_me: error: could not find libbtparse" >&2;}
-   { (exit 1); exit 1; }; }
-fi
-
-fi
-
-
 echo "$as_me:$LINENO: checking for ushort in <sys/types.h>" >&5
 echo $ECHO_N "checking for ushort in <sys/types.h>... $ECHO_C" >&6
 if test "${bt_cv_type_ushort+set}" = set; then
@@ -26987,11 +26597,6 @@ _ACEOF
 
 fi
 
-#MIN_CONFIG(3)
-
-
-
-
 
    echo "$as_me:$LINENO: checking for xml2-config" >&5
 echo $ECHO_N "checking for xml2-config... $ECHO_C" >&6
@@ -27274,6 +26879,369 @@ fi
 
 
 
+
+
+
+
+
+   echo "$as_me:$LINENO: checking for taglib-config" >&5
+echo $ECHO_N "checking for taglib-config... $ECHO_C" >&6
+   if test -n "$TAGLIB_CONFIG"; then
+        kde_cv_path="$TAGLIB_CONFIG";
+   else
+        kde_cache=`echo taglib-config | sed 'y%./+-%__p_%'`
+
+        if eval "test \"\${kde_cv_path_$kde_cache+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+        kde_cv_path="NONE"
+	kde_save_IFS=$IFS
+	IFS=':'
+	dirs=""
+	for dir in $PATH; do
+	  dirs="$dirs $dir"
+	done
+	if test -z ""; then  	  dirs="${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin $dirs"
+        else  	  dirs="$dirs ${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin"
+	fi
+	IFS=$kde_save_IFS
+
+        for dir in $dirs; do
+	  if test -x "$dir/taglib-config"; then
+	    if test -n ""
+	    then
+              evalstr="$dir/taglib-config  2>&1 "
+	      if eval $evalstr; then
+                kde_cv_path="$dir/taglib-config"
+                break
+	      fi
+            else
+		kde_cv_path="$dir/taglib-config"
+                break
+	    fi
+          fi
+        done
+
+        eval "kde_cv_path_$kde_cache=$kde_cv_path"
+
+
+fi
+
+
+      eval "kde_cv_path=\"`echo '$kde_cv_path_'$kde_cache`\""
+
+   fi
+
+   if test -z "$kde_cv_path" || test "$kde_cv_path" = NONE; then
+      echo "$as_me:$LINENO: result: not found" >&5
+echo "${ECHO_T}not found" >&6
+
+   else
+      echo "$as_me:$LINENO: result: $kde_cv_path" >&5
+echo "${ECHO_T}$kde_cv_path" >&6
+      TAGLIB_CONFIG=$kde_cv_path
+
+   fi
+
+if test -n "$TAGLIB_CONFIG"; then
+
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_TAGLIB 1
+_ACEOF
+
+    TAGLIB_CFLAGS=`$TAGLIB_CONFIG --cflags`
+    TAGLIB_LIBS=`$TAGLIB_CONFIG --libs`
+    TAGLIB_RPATH=
+    for args in $TAGLIB_LIBS; do
+      case $args in
+        -L*)
+          TAGLIB_RPATH="$TAGLIB_RPATH $args"
+        ;;
+      esac
+    done
+    TAGLIB_RPATH=`echo $TAGLIB_RPATH | sed -e "s/-L/-R/g"`
+
+else
+
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_TAGLIB 0
+_ACEOF
+
+    TAGLIB_CFLAGS=""
+    TAGLIB_LIBS=""
+    TAGLIB_RPATH=""
+
+    echo "  *** You don't have the TagLib headers on your system"
+    echo "  *** Support for reading audio files is disabled"
+fi
+
+
+
+
+
+
+
+
+
+ ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&5'
+
+
+
+ac_save_ldflags="$LDFLAGS"
+ac_save_cxxflags="$CXXFLAGS"
+
+LDFLAGS="$LDFLAGS $all_libraries -lkcddb"
+CXXFLAGS="$CXXFLAGS $all_includes"
+
+echo "$as_me:$LINENO: checking for libkcddb library and headers" >&5
+echo $ECHO_N "checking for libkcddb library and headers... $ECHO_C" >&6
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+#ifdef QT_NO_CAST_ASCII
+#undef QT_NO_CAST_ASCII
+#endif
+#include <libkcddb/cddb.h>
+
+int
+main ()
+{
+KCDDB::CDDB c
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  kcddb=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+kcddb=no
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+echo "$as_me:$LINENO: result: $kcddb" >&5
+echo "${ECHO_T}$kcddb" >&6
+
+LDFLAGS="$ac_save_ldflags"
+CXXFLAGS="$ac_save_cxxflags"
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+echo "$as_me:$LINENO: checking for cdda (cdparanoia) headers" >&5
+echo $ECHO_N "checking for cdda (cdparanoia) headers... $ECHO_C" >&6
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <cdda_interface.h>
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  cdda_paranoia=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+cdda_paranoia=no
+
+fi
+rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+echo "$as_me:$LINENO: result: $cdda_paranoia" >&5
+echo "${ECHO_T}$cdda_paranoia" >&6
+
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+if test x$cdda_paranoia = xyes; then
+
+     kde_save_LDFLAGS="$LDFLAGS"
+          kde_save_LIBS="$LIBS"
+     LDFLAGS="$LDFLAGS $all_libraries"
+     case $host_os in
+      aix*) LDFLAGS="-brtl $LDFLAGS"
+	test "$GCC" = yes && LDFLAGS="-Wl,$LDFLAGS"
+	;;
+     esac
+
+echo "$as_me:$LINENO: checking for paranoia_init in -lcdda_paranoia" >&5
+echo $ECHO_N "checking for paranoia_init in -lcdda_paranoia... $ECHO_C" >&6
+if test "${ac_cv_lib_cdda_paranoia_paranoia_init+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lcdda_paranoia -lcdda_paranoia -lcdda_interface -lm $LIBS"
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+/* Override any gcc2 internal prototype to avoid an error.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+/* We use char because int might match the return type of a gcc2
+   builtin and then its argument prototype would still apply.  */
+char paranoia_init ();
+int
+main ()
+{
+paranoia_init ();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_lib_cdda_paranoia_paranoia_init=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+ac_cv_lib_cdda_paranoia_paranoia_init=no
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+echo "$as_me:$LINENO: result: $ac_cv_lib_cdda_paranoia_paranoia_init" >&5
+echo "${ECHO_T}$ac_cv_lib_cdda_paranoia_paranoia_init" >&6
+if test $ac_cv_lib_cdda_paranoia_paranoia_init = yes; then
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBCDDA_PARANOIA 1
+_ACEOF
+
+  LIBS="-lcdda_paranoia $LIBS"
+
+else
+  cdda_paranoia=no
+fi
+
+     LDFLAGS="$kde_save_LDFLAGS"
+     LIBS="$kde_save_LIBS"
+
+fi
+
+if test x$kcddb$cdda_paranoia = xyesyes; then
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_KCDDB 1
+_ACEOF
+
+    KCDDB_LIBS="-lkcddb"
+    CDDA_LIBS="-lcdda_paranoia -lcdda_interface"
+else
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_KCDDB 0
+_ACEOF
+
+    KCDDB_LIBS=
+    CDDA_LIBS=
+    echo "  *** You don't have the kcddb and cdda headers on your system"
+    echo "  *** Support for fetching CDDB info is disabled"
+fi
+
+
+
+
+
+
 # Check whether --with-btparse or --without-btparse was given.
 if test "${with_btparse+set}" = set; then
   withval="$with_btparse"
@@ -27301,6 +27269,15 @@ fi
 
 
 if test x$btparse = xshared; then
+
+     kde_save_LDFLAGS="$LDFLAGS"
+          kde_save_LIBS="$LIBS"
+     LDFLAGS="$LDFLAGS $all_libraries"
+     case $host_os in
+      aix*) LDFLAGS="-brtl $LDFLAGS"
+	test "$GCC" = yes && LDFLAGS="-Wl,$LDFLAGS"
+	;;
+     esac
 
 echo "$as_me:$LINENO: checking for bt_initialize in -lbtparse" >&5
 echo $ECHO_N "checking for bt_initialize in -lbtparse... $ECHO_C" >&6
@@ -27379,2576 +27356,8 @@ echo "$as_me: error: could not find libbtparse" >&2;}
    { (exit 1); exit 1; }; }
 fi
 
-fi
-
-
-echo "$as_me:$LINENO: checking for ushort in <sys/types.h>" >&5
-echo $ECHO_N "checking for ushort in <sys/types.h>... $ECHO_C" >&6
-if test "${bt_cv_type_ushort+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-
-#include <sys/types.h>
-
-int
-main ()
-{
-
-ushort i;
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  bt_cv_type_ushort=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-bt_cv_type_ushort=no
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-
-echo "$as_me:$LINENO: result: $bt_cv_type_ushort" >&5
-echo "${ECHO_T}$bt_cv_type_ushort" >&6
-if test "$bt_cv_type_ushort" = "yes" ; then
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_USHORT 1
-_ACEOF
-
-fi
-
-echo "$as_me:$LINENO: checking for boolean in <sys/types.h>" >&5
-echo $ECHO_N "checking for boolean in <sys/types.h>... $ECHO_C" >&6
-if test "${bt_cv_type_boolean+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-
-#include <sys/types.h>
-
-int
-main ()
-{
-
-boolean f;
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  bt_cv_type_boolean=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-bt_cv_type_boolean=no
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-
-echo "$as_me:$LINENO: result: $bt_cv_type_boolean" >&5
-echo "${ECHO_T}$bt_cv_type_boolean" >&6
-if test "$bt_cv_type_boolean" = "yes" ; then
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_BOOLEAN 1
-_ACEOF
-
-fi
-
-echo "$as_me:$LINENO: checking for strdup declaration in <string.h>" >&5
-echo $ECHO_N "checking for strdup declaration in <string.h>... $ECHO_C" >&6
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-#include <string.h>
-
-_ACEOF
-if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
-  $EGREP "strdup *\(" >/dev/null 2>&1; then
-  bt_cv_decl_strdup=yes
-else
-  bt_cv_decl_strdup=no
-fi
-rm -f conftest*
-
-echo "$as_me:$LINENO: result: $bt_cv_decl_strdup" >&5
-echo "${ECHO_T}$bt_cv_decl_strdup" >&6
-if test "$bt_cv_decl_strdup" = "yes" ; then
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_STRDUP_DECL 1
-_ACEOF
-
-fi
-
-# The Ultrix 4.2 mips builtin alloca declared by alloca.h only works
-# for constant arguments.  Useless!
-echo "$as_me:$LINENO: checking for working alloca.h" >&5
-echo $ECHO_N "checking for working alloca.h... $ECHO_C" >&6
-if test "${ac_cv_working_alloca_h+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-#include <alloca.h>
-int
-main ()
-{
-char *p = (char *) alloca (2 * sizeof (int));
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_working_alloca_h=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_working_alloca_h=no
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: $ac_cv_working_alloca_h" >&5
-echo "${ECHO_T}$ac_cv_working_alloca_h" >&6
-if test $ac_cv_working_alloca_h = yes; then
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_ALLOCA_H 1
-_ACEOF
-
-fi
-
-echo "$as_me:$LINENO: checking for alloca" >&5
-echo $ECHO_N "checking for alloca... $ECHO_C" >&6
-if test "${ac_cv_func_alloca_works+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-#ifdef __GNUC__
-# define alloca __builtin_alloca
-#else
-# ifdef _MSC_VER
-#  include <malloc.h>
-#  define alloca _alloca
-# else
-#  if HAVE_ALLOCA_H
-#   include <alloca.h>
-#  else
-#   ifdef _AIX
- #pragma alloca
-#   else
-#    ifndef alloca /* predefined by HP cc +Olibcalls */
-char *alloca ();
-#    endif
-#   endif
-#  endif
-# endif
-#endif
-
-int
-main ()
-{
-char *p = (char *) alloca (1);
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_func_alloca_works=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_func_alloca_works=no
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: $ac_cv_func_alloca_works" >&5
-echo "${ECHO_T}$ac_cv_func_alloca_works" >&6
-
-if test $ac_cv_func_alloca_works = yes; then
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_ALLOCA 1
-_ACEOF
-
-else
-  # The SVR3 libPW and SVR4 libucb both contain incompatible functions
-# that cause trouble.  Some versions do not even contain alloca or
-# contain a buggy version.  If you still want to use their alloca,
-# use ar to extract alloca.o from them instead of compiling alloca.c.
-
-ALLOCA=alloca.$ac_objext
-
-cat >>confdefs.h <<\_ACEOF
-#define C_ALLOCA 1
-_ACEOF
-
-
-echo "$as_me:$LINENO: checking whether \`alloca.c' needs Cray hooks" >&5
-echo $ECHO_N "checking whether \`alloca.c' needs Cray hooks... $ECHO_C" >&6
-if test "${ac_cv_os_cray+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-#if defined(CRAY) && ! defined(CRAY2)
-webecray
-#else
-wenotbecray
-#endif
-
-_ACEOF
-if (eval "$ac_cpp conftest.$ac_ext") 2>&5 |
-  $EGREP "webecray" >/dev/null 2>&1; then
-  ac_cv_os_cray=yes
-else
-  ac_cv_os_cray=no
-fi
-rm -f conftest*
-
-fi
-echo "$as_me:$LINENO: result: $ac_cv_os_cray" >&5
-echo "${ECHO_T}$ac_cv_os_cray" >&6
-if test $ac_cv_os_cray = yes; then
-  for ac_func in _getb67 GETB67 getb67; do
-    as_ac_var=`echo "ac_cv_func_$ac_func" | $as_tr_sh`
-echo "$as_me:$LINENO: checking for $ac_func" >&5
-echo $ECHO_N "checking for $ac_func... $ECHO_C" >&6
-if eval "test \"\${$as_ac_var+set}\" = set"; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-/* Define $ac_func to an innocuous variant, in case <limits.h> declares $ac_func.
-   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
-#define $ac_func innocuous_$ac_func
-
-/* System header to define __stub macros and hopefully few prototypes,
-    which can conflict with char $ac_func (); below.
-    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
-    <limits.h> exists even on freestanding compilers.  */
-
-#ifdef __STDC__
-# include <limits.h>
-#else
-# include <assert.h>
-#endif
-
-#undef $ac_func
-
-/* Override any gcc2 internal prototype to avoid an error.  */
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-/* We use char because int might match the return type of a gcc2
-   builtin and then its argument prototype would still apply.  */
-char $ac_func ();
-/* The GNU C library defines this for functions which it implements
-    to always fail with ENOSYS.  Some functions are actually named
-    something starting with __ and the normal name is an alias.  */
-#if defined (__stub_$ac_func) || defined (__stub___$ac_func)
-choke me
-#else
-char (*f) () = $ac_func;
-#endif
-#ifdef __cplusplus
-}
-#endif
-
-int
-main ()
-{
-return f != $ac_func;
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  eval "$as_ac_var=yes"
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-eval "$as_ac_var=no"
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: `eval echo '${'$as_ac_var'}'`" >&5
-echo "${ECHO_T}`eval echo '${'$as_ac_var'}'`" >&6
-if test `eval echo '${'$as_ac_var'}'` = yes; then
-
-cat >>confdefs.h <<_ACEOF
-#define CRAY_STACKSEG_END $ac_func
-_ACEOF
-
-    break
-fi
-
-  done
-fi
-
-echo "$as_me:$LINENO: checking stack direction for C alloca" >&5
-echo $ECHO_N "checking stack direction for C alloca... $ECHO_C" >&6
-if test "${ac_cv_c_stack_direction+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  if test "$cross_compiling" = yes; then
-  ac_cv_c_stack_direction=0
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-int
-find_stack_direction ()
-{
-  static char *addr = 0;
-  auto char dummy;
-  if (addr == 0)
-    {
-      addr = &dummy;
-      return find_stack_direction ();
-    }
-  else
-    return (&dummy > addr) ? 1 : -1;
-}
-
-int
-main ()
-{
-  exit (find_stack_direction () < 0);
-}
-_ACEOF
-rm -f conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_c_stack_direction=1
-else
-  echo "$as_me: program exited with status $ac_status" >&5
-echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-( exit $ac_status )
-ac_cv_c_stack_direction=-1
-fi
-rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
-fi
-fi
-echo "$as_me:$LINENO: result: $ac_cv_c_stack_direction" >&5
-echo "${ECHO_T}$ac_cv_c_stack_direction" >&6
-
-cat >>confdefs.h <<_ACEOF
-#define STACK_DIRECTION $ac_cv_c_stack_direction
-_ACEOF
-
-
-fi
-
-
-for ac_func in vprintf
-do
-as_ac_var=`echo "ac_cv_func_$ac_func" | $as_tr_sh`
-echo "$as_me:$LINENO: checking for $ac_func" >&5
-echo $ECHO_N "checking for $ac_func... $ECHO_C" >&6
-if eval "test \"\${$as_ac_var+set}\" = set"; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-/* Define $ac_func to an innocuous variant, in case <limits.h> declares $ac_func.
-   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
-#define $ac_func innocuous_$ac_func
-
-/* System header to define __stub macros and hopefully few prototypes,
-    which can conflict with char $ac_func (); below.
-    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
-    <limits.h> exists even on freestanding compilers.  */
-
-#ifdef __STDC__
-# include <limits.h>
-#else
-# include <assert.h>
-#endif
-
-#undef $ac_func
-
-/* Override any gcc2 internal prototype to avoid an error.  */
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-/* We use char because int might match the return type of a gcc2
-   builtin and then its argument prototype would still apply.  */
-char $ac_func ();
-/* The GNU C library defines this for functions which it implements
-    to always fail with ENOSYS.  Some functions are actually named
-    something starting with __ and the normal name is an alias.  */
-#if defined (__stub_$ac_func) || defined (__stub___$ac_func)
-choke me
-#else
-char (*f) () = $ac_func;
-#endif
-#ifdef __cplusplus
-}
-#endif
-
-int
-main ()
-{
-return f != $ac_func;
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  eval "$as_ac_var=yes"
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-eval "$as_ac_var=no"
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: `eval echo '${'$as_ac_var'}'`" >&5
-echo "${ECHO_T}`eval echo '${'$as_ac_var'}'`" >&6
-if test `eval echo '${'$as_ac_var'}'` = yes; then
-  cat >>confdefs.h <<_ACEOF
-#define `echo "HAVE_$ac_func" | $as_tr_cpp` 1
-_ACEOF
-
-echo "$as_me:$LINENO: checking for _doprnt" >&5
-echo $ECHO_N "checking for _doprnt... $ECHO_C" >&6
-if test "${ac_cv_func__doprnt+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-/* Define _doprnt to an innocuous variant, in case <limits.h> declares _doprnt.
-   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
-#define _doprnt innocuous__doprnt
-
-/* System header to define __stub macros and hopefully few prototypes,
-    which can conflict with char _doprnt (); below.
-    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
-    <limits.h> exists even on freestanding compilers.  */
-
-#ifdef __STDC__
-# include <limits.h>
-#else
-# include <assert.h>
-#endif
-
-#undef _doprnt
-
-/* Override any gcc2 internal prototype to avoid an error.  */
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-/* We use char because int might match the return type of a gcc2
-   builtin and then its argument prototype would still apply.  */
-char _doprnt ();
-/* The GNU C library defines this for functions which it implements
-    to always fail with ENOSYS.  Some functions are actually named
-    something starting with __ and the normal name is an alias.  */
-#if defined (__stub__doprnt) || defined (__stub____doprnt)
-choke me
-#else
-char (*f) () = _doprnt;
-#endif
-#ifdef __cplusplus
-}
-#endif
-
-int
-main ()
-{
-return f != _doprnt;
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_func__doprnt=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_func__doprnt=no
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: $ac_cv_func__doprnt" >&5
-echo "${ECHO_T}$ac_cv_func__doprnt" >&6
-if test $ac_cv_func__doprnt = yes; then
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_DOPRNT 1
-_ACEOF
-
-fi
-
-fi
-done
-
-
-
-
-for ac_func in strlwr strupr
-do
-as_ac_var=`echo "ac_cv_func_$ac_func" | $as_tr_sh`
-echo "$as_me:$LINENO: checking for $ac_func" >&5
-echo $ECHO_N "checking for $ac_func... $ECHO_C" >&6
-if eval "test \"\${$as_ac_var+set}\" = set"; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-/* Define $ac_func to an innocuous variant, in case <limits.h> declares $ac_func.
-   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
-#define $ac_func innocuous_$ac_func
-
-/* System header to define __stub macros and hopefully few prototypes,
-    which can conflict with char $ac_func (); below.
-    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
-    <limits.h> exists even on freestanding compilers.  */
-
-#ifdef __STDC__
-# include <limits.h>
-#else
-# include <assert.h>
-#endif
-
-#undef $ac_func
-
-/* Override any gcc2 internal prototype to avoid an error.  */
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-/* We use char because int might match the return type of a gcc2
-   builtin and then its argument prototype would still apply.  */
-char $ac_func ();
-/* The GNU C library defines this for functions which it implements
-    to always fail with ENOSYS.  Some functions are actually named
-    something starting with __ and the normal name is an alias.  */
-#if defined (__stub_$ac_func) || defined (__stub___$ac_func)
-choke me
-#else
-char (*f) () = $ac_func;
-#endif
-#ifdef __cplusplus
-}
-#endif
-
-int
-main ()
-{
-return f != $ac_func;
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  eval "$as_ac_var=yes"
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-eval "$as_ac_var=no"
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: `eval echo '${'$as_ac_var'}'`" >&5
-echo "${ECHO_T}`eval echo '${'$as_ac_var'}'`" >&6
-if test `eval echo '${'$as_ac_var'}'` = yes; then
-  cat >>confdefs.h <<_ACEOF
-#define `echo "HAVE_$ac_func" | $as_tr_cpp` 1
-_ACEOF
-
-fi
-done
-
-
-echo "$as_me:$LINENO: checking for unsigned int" >&5
-echo $ECHO_N "checking for unsigned int... $ECHO_C" >&6
-if test "${ac_cv_type_unsigned_int+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-if ((unsigned int *) 0)
-  return 0;
-if (sizeof (unsigned int))
-  return 0;
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_type_unsigned_int=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_type_unsigned_int=no
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: $ac_cv_type_unsigned_int" >&5
-echo "${ECHO_T}$ac_cv_type_unsigned_int" >&6
-
-echo "$as_me:$LINENO: checking size of unsigned int" >&5
-echo $ECHO_N "checking size of unsigned int... $ECHO_C" >&6
-if test "${ac_cv_sizeof_unsigned_int+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  if test "$ac_cv_type_unsigned_int" = yes; then
-  # The cast to unsigned long works around a bug in the HP C Compiler
-  # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-  # declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
-  # This bug is HP SR number 8606223364.
-  if test "$cross_compiling" = yes; then
-  # Depending upon the size, compute the lo and hi bounds.
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned int))) >= 0)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_lo=0 ac_mid=0
-  while :; do
-    cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned int))) <= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=$ac_mid; break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo=`expr $ac_mid + 1`
-		    if test $ac_lo -le $ac_mid; then
-		      ac_lo= ac_hi=
-		      break
-		    fi
-		    ac_mid=`expr 2 '*' $ac_mid + 1`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-  done
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned int))) < 0)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=-1 ac_mid=-1
-  while :; do
-    cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned int))) >= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_lo=$ac_mid; break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_hi=`expr '(' $ac_mid ')' - 1`
-		       if test $ac_mid -le $ac_hi; then
-			 ac_lo= ac_hi=
-			 break
-		       fi
-		       ac_mid=`expr 2 '*' $ac_mid`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-  done
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo= ac_hi=
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-# Binary search between lo and hi bounds.
-while test "x$ac_lo" != "x$ac_hi"; do
-  ac_mid=`expr '(' $ac_hi - $ac_lo ')' / 2 + $ac_lo`
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned int))) <= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=$ac_mid
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo=`expr '(' $ac_mid ')' + 1`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-done
-case $ac_lo in
-?*) ac_cv_sizeof_unsigned_int=$ac_lo;;
-'') { { echo "$as_me:$LINENO: error: cannot compute sizeof (unsigned int), 77
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot compute sizeof (unsigned int), 77
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; } ;;
-esac
-else
-  if test "$cross_compiling" = yes; then
-  { { echo "$as_me:$LINENO: error: cannot run test program while cross compiling
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot run test program while cross compiling
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-long longval () { return (long) (sizeof (unsigned int)); }
-unsigned long ulongval () { return (long) (sizeof (unsigned int)); }
-#include <stdio.h>
-#include <stdlib.h>
-int
-main ()
-{
-
-  FILE *f = fopen ("conftest.val", "w");
-  if (! f)
-    exit (1);
-  if (((long) (sizeof (unsigned int))) < 0)
-    {
-      long i = longval ();
-      if (i != ((long) (sizeof (unsigned int))))
-	exit (1);
-      fprintf (f, "%ld\n", i);
-    }
-  else
-    {
-      unsigned long i = ulongval ();
-      if (i != ((long) (sizeof (unsigned int))))
-	exit (1);
-      fprintf (f, "%lu\n", i);
-    }
-  exit (ferror (f) || fclose (f) != 0);
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_sizeof_unsigned_int=`cat conftest.val`
-else
-  echo "$as_me: program exited with status $ac_status" >&5
-echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-( exit $ac_status )
-{ { echo "$as_me:$LINENO: error: cannot compute sizeof (unsigned int), 77
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot compute sizeof (unsigned int), 77
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
-fi
-fi
-rm -f conftest.val
-else
-  ac_cv_sizeof_unsigned_int=0
-fi
-fi
-echo "$as_me:$LINENO: result: $ac_cv_sizeof_unsigned_int" >&5
-echo "${ECHO_T}$ac_cv_sizeof_unsigned_int" >&6
-cat >>confdefs.h <<_ACEOF
-#define SIZEOF_UNSIGNED_INT $ac_cv_sizeof_unsigned_int
-_ACEOF
-
-
-echo "$as_me:$LINENO: checking for unsigned short" >&5
-echo $ECHO_N "checking for unsigned short... $ECHO_C" >&6
-if test "${ac_cv_type_unsigned_short+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-if ((unsigned short *) 0)
-  return 0;
-if (sizeof (unsigned short))
-  return 0;
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_type_unsigned_short=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_type_unsigned_short=no
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: $ac_cv_type_unsigned_short" >&5
-echo "${ECHO_T}$ac_cv_type_unsigned_short" >&6
-
-echo "$as_me:$LINENO: checking size of unsigned short" >&5
-echo $ECHO_N "checking size of unsigned short... $ECHO_C" >&6
-if test "${ac_cv_sizeof_unsigned_short+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  if test "$ac_cv_type_unsigned_short" = yes; then
-  # The cast to unsigned long works around a bug in the HP C Compiler
-  # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-  # declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
-  # This bug is HP SR number 8606223364.
-  if test "$cross_compiling" = yes; then
-  # Depending upon the size, compute the lo and hi bounds.
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned short))) >= 0)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_lo=0 ac_mid=0
-  while :; do
-    cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned short))) <= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=$ac_mid; break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo=`expr $ac_mid + 1`
-		    if test $ac_lo -le $ac_mid; then
-		      ac_lo= ac_hi=
-		      break
-		    fi
-		    ac_mid=`expr 2 '*' $ac_mid + 1`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-  done
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned short))) < 0)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=-1 ac_mid=-1
-  while :; do
-    cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned short))) >= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_lo=$ac_mid; break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_hi=`expr '(' $ac_mid ')' - 1`
-		       if test $ac_mid -le $ac_hi; then
-			 ac_lo= ac_hi=
-			 break
-		       fi
-		       ac_mid=`expr 2 '*' $ac_mid`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-  done
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo= ac_hi=
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-# Binary search between lo and hi bounds.
-while test "x$ac_lo" != "x$ac_hi"; do
-  ac_mid=`expr '(' $ac_hi - $ac_lo ')' / 2 + $ac_lo`
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned short))) <= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=$ac_mid
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo=`expr '(' $ac_mid ')' + 1`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-done
-case $ac_lo in
-?*) ac_cv_sizeof_unsigned_short=$ac_lo;;
-'') { { echo "$as_me:$LINENO: error: cannot compute sizeof (unsigned short), 77
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot compute sizeof (unsigned short), 77
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; } ;;
-esac
-else
-  if test "$cross_compiling" = yes; then
-  { { echo "$as_me:$LINENO: error: cannot run test program while cross compiling
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot run test program while cross compiling
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-long longval () { return (long) (sizeof (unsigned short)); }
-unsigned long ulongval () { return (long) (sizeof (unsigned short)); }
-#include <stdio.h>
-#include <stdlib.h>
-int
-main ()
-{
-
-  FILE *f = fopen ("conftest.val", "w");
-  if (! f)
-    exit (1);
-  if (((long) (sizeof (unsigned short))) < 0)
-    {
-      long i = longval ();
-      if (i != ((long) (sizeof (unsigned short))))
-	exit (1);
-      fprintf (f, "%ld\n", i);
-    }
-  else
-    {
-      unsigned long i = ulongval ();
-      if (i != ((long) (sizeof (unsigned short))))
-	exit (1);
-      fprintf (f, "%lu\n", i);
-    }
-  exit (ferror (f) || fclose (f) != 0);
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_sizeof_unsigned_short=`cat conftest.val`
-else
-  echo "$as_me: program exited with status $ac_status" >&5
-echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-( exit $ac_status )
-{ { echo "$as_me:$LINENO: error: cannot compute sizeof (unsigned short), 77
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot compute sizeof (unsigned short), 77
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
-fi
-fi
-rm -f conftest.val
-else
-  ac_cv_sizeof_unsigned_short=0
-fi
-fi
-echo "$as_me:$LINENO: result: $ac_cv_sizeof_unsigned_short" >&5
-echo "${ECHO_T}$ac_cv_sizeof_unsigned_short" >&6
-cat >>confdefs.h <<_ACEOF
-#define SIZEOF_UNSIGNED_SHORT $ac_cv_sizeof_unsigned_short
-_ACEOF
-
-
-echo "$as_me:$LINENO: checking for unsigned char" >&5
-echo $ECHO_N "checking for unsigned char... $ECHO_C" >&6
-if test "${ac_cv_type_unsigned_char+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-if ((unsigned char *) 0)
-  return 0;
-if (sizeof (unsigned char))
-  return 0;
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_type_unsigned_char=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_type_unsigned_char=no
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: $ac_cv_type_unsigned_char" >&5
-echo "${ECHO_T}$ac_cv_type_unsigned_char" >&6
-
-echo "$as_me:$LINENO: checking size of unsigned char" >&5
-echo $ECHO_N "checking size of unsigned char... $ECHO_C" >&6
-if test "${ac_cv_sizeof_unsigned_char+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  if test "$ac_cv_type_unsigned_char" = yes; then
-  # The cast to unsigned long works around a bug in the HP C Compiler
-  # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-  # declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
-  # This bug is HP SR number 8606223364.
-  if test "$cross_compiling" = yes; then
-  # Depending upon the size, compute the lo and hi bounds.
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned char))) >= 0)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_lo=0 ac_mid=0
-  while :; do
-    cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned char))) <= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=$ac_mid; break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo=`expr $ac_mid + 1`
-		    if test $ac_lo -le $ac_mid; then
-		      ac_lo= ac_hi=
-		      break
-		    fi
-		    ac_mid=`expr 2 '*' $ac_mid + 1`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-  done
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned char))) < 0)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=-1 ac_mid=-1
-  while :; do
-    cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned char))) >= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_lo=$ac_mid; break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_hi=`expr '(' $ac_mid ')' - 1`
-		       if test $ac_mid -le $ac_hi; then
-			 ac_lo= ac_hi=
-			 break
-		       fi
-		       ac_mid=`expr 2 '*' $ac_mid`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-  done
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo= ac_hi=
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-# Binary search between lo and hi bounds.
-while test "x$ac_lo" != "x$ac_hi"; do
-  ac_mid=`expr '(' $ac_hi - $ac_lo ')' / 2 + $ac_lo`
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (unsigned char))) <= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=$ac_mid
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo=`expr '(' $ac_mid ')' + 1`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-done
-case $ac_lo in
-?*) ac_cv_sizeof_unsigned_char=$ac_lo;;
-'') { { echo "$as_me:$LINENO: error: cannot compute sizeof (unsigned char), 77
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot compute sizeof (unsigned char), 77
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; } ;;
-esac
-else
-  if test "$cross_compiling" = yes; then
-  { { echo "$as_me:$LINENO: error: cannot run test program while cross compiling
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot run test program while cross compiling
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-long longval () { return (long) (sizeof (unsigned char)); }
-unsigned long ulongval () { return (long) (sizeof (unsigned char)); }
-#include <stdio.h>
-#include <stdlib.h>
-int
-main ()
-{
-
-  FILE *f = fopen ("conftest.val", "w");
-  if (! f)
-    exit (1);
-  if (((long) (sizeof (unsigned char))) < 0)
-    {
-      long i = longval ();
-      if (i != ((long) (sizeof (unsigned char))))
-	exit (1);
-      fprintf (f, "%ld\n", i);
-    }
-  else
-    {
-      unsigned long i = ulongval ();
-      if (i != ((long) (sizeof (unsigned char))))
-	exit (1);
-      fprintf (f, "%lu\n", i);
-    }
-  exit (ferror (f) || fclose (f) != 0);
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_sizeof_unsigned_char=`cat conftest.val`
-else
-  echo "$as_me: program exited with status $ac_status" >&5
-echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-( exit $ac_status )
-{ { echo "$as_me:$LINENO: error: cannot compute sizeof (unsigned char), 77
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot compute sizeof (unsigned char), 77
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
-fi
-fi
-rm -f conftest.val
-else
-  ac_cv_sizeof_unsigned_char=0
-fi
-fi
-echo "$as_me:$LINENO: result: $ac_cv_sizeof_unsigned_char" >&5
-echo "${ECHO_T}$ac_cv_sizeof_unsigned_char" >&6
-cat >>confdefs.h <<_ACEOF
-#define SIZEOF_UNSIGNED_CHAR $ac_cv_sizeof_unsigned_char
-_ACEOF
-
-
-echo "$as_me:$LINENO: checking for char" >&5
-echo $ECHO_N "checking for char... $ECHO_C" >&6
-if test "${ac_cv_type_char+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-if ((char *) 0)
-  return 0;
-if (sizeof (char))
-  return 0;
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_type_char=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_type_char=no
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-echo "$as_me:$LINENO: result: $ac_cv_type_char" >&5
-echo "${ECHO_T}$ac_cv_type_char" >&6
-
-echo "$as_me:$LINENO: checking size of char" >&5
-echo $ECHO_N "checking size of char... $ECHO_C" >&6
-if test "${ac_cv_sizeof_char+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  if test "$ac_cv_type_char" = yes; then
-  # The cast to unsigned long works around a bug in the HP C Compiler
-  # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-  # declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
-  # This bug is HP SR number 8606223364.
-  if test "$cross_compiling" = yes; then
-  # Depending upon the size, compute the lo and hi bounds.
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (char))) >= 0)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_lo=0 ac_mid=0
-  while :; do
-    cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (char))) <= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=$ac_mid; break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo=`expr $ac_mid + 1`
-		    if test $ac_lo -le $ac_mid; then
-		      ac_lo= ac_hi=
-		      break
-		    fi
-		    ac_mid=`expr 2 '*' $ac_mid + 1`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-  done
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (char))) < 0)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=-1 ac_mid=-1
-  while :; do
-    cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (char))) >= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_lo=$ac_mid; break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_hi=`expr '(' $ac_mid ')' - 1`
-		       if test $ac_mid -le $ac_hi; then
-			 ac_lo= ac_hi=
-			 break
-		       fi
-		       ac_mid=`expr 2 '*' $ac_mid`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-  done
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo= ac_hi=
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-# Binary search between lo and hi bounds.
-while test "x$ac_lo" != "x$ac_hi"; do
-  ac_mid=`expr '(' $ac_hi - $ac_lo ')' / 2 + $ac_lo`
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-int
-main ()
-{
-static int test_array [1 - 2 * !(((long) (sizeof (char))) <= $ac_mid)];
-test_array [0] = 0
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_hi=$ac_mid
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_lo=`expr '(' $ac_mid ')' + 1`
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-done
-case $ac_lo in
-?*) ac_cv_sizeof_char=$ac_lo;;
-'') { { echo "$as_me:$LINENO: error: cannot compute sizeof (char), 77
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot compute sizeof (char), 77
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; } ;;
-esac
-else
-  if test "$cross_compiling" = yes; then
-  { { echo "$as_me:$LINENO: error: cannot run test program while cross compiling
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot run test program while cross compiling
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
-else
-  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-$ac_includes_default
-long longval () { return (long) (sizeof (char)); }
-unsigned long ulongval () { return (long) (sizeof (char)); }
-#include <stdio.h>
-#include <stdlib.h>
-int
-main ()
-{
-
-  FILE *f = fopen ("conftest.val", "w");
-  if (! f)
-    exit (1);
-  if (((long) (sizeof (char))) < 0)
-    {
-      long i = longval ();
-      if (i != ((long) (sizeof (char))))
-	exit (1);
-      fprintf (f, "%ld\n", i);
-    }
-  else
-    {
-      unsigned long i = ulongval ();
-      if (i != ((long) (sizeof (char))))
-	exit (1);
-      fprintf (f, "%lu\n", i);
-    }
-  exit (ferror (f) || fclose (f) != 0);
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_sizeof_char=`cat conftest.val`
-else
-  echo "$as_me: program exited with status $ac_status" >&5
-echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-( exit $ac_status )
-{ { echo "$as_me:$LINENO: error: cannot compute sizeof (char), 77
-See \`config.log' for more details." >&5
-echo "$as_me: error: cannot compute sizeof (char), 77
-See \`config.log' for more details." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
-fi
-fi
-rm -f conftest.val
-else
-  ac_cv_sizeof_char=0
-fi
-fi
-echo "$as_me:$LINENO: result: $ac_cv_sizeof_char" >&5
-echo "${ECHO_T}$ac_cv_sizeof_char" >&6
-cat >>confdefs.h <<_ACEOF
-#define SIZEOF_CHAR $ac_cv_sizeof_char
-_ACEOF
-
-
-
-echo "$as_me:$LINENO: checking for std::vector::at(std::size_t)" >&5
-echo $ECHO_N "checking for std::vector::at(std::size_t)... $ECHO_C" >&6
-if test "${ac_cv_cxx_have_vector_at+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-
-
-
-         ac_ext=cc
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
-ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&5'
-
-
-        cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-
-                #include <vector>
-
-int
-main ()
-{
-
-                std::vector<int> v(1);
-                v.at(0);
-                return 0;
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_cxx_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_cxx_have_vector_at=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_cxx_have_vector_at=no
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-        ac_ext=c
-ac_cpp='$CPP $CPPFLAGS'
-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_c_compiler_gnu
-
-
-fi
-echo "$as_me:$LINENO: result: $ac_cv_cxx_have_vector_at" >&5
-echo "${ECHO_T}$ac_cv_cxx_have_vector_at" >&6
-if test "$ac_cv_cxx_have_vector_at" = "yes"; then
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_VECTOR_AT 1
-_ACEOF
+     LDFLAGS="$kde_save_LDFLAGS"
+     LIBS="$kde_save_LIBS"
 
 fi
 
@@ -30147,13 +27556,6 @@ if test -z "${include_ARTS_TRUE}" && test -z "${include_ARTS_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"include_ARTS\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"include_ARTS\" was never defined.
-Usually this means the macro was only invoked conditionally." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-if test -z "${USE_LIBBTPARSE_TRUE}" && test -z "${USE_LIBBTPARSE_FALSE}"; then
-  { { echo "$as_me:$LINENO: error: conditional \"USE_LIBBTPARSE\" was never defined.
-Usually this means the macro was only invoked conditionally." >&5
-echo "$as_me: error: conditional \"USE_LIBBTPARSE\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -30884,6 +28286,7 @@ s,@LIB_KDEPIM@,$LIB_KDEPIM,;t t
 s,@LIB_KSYCOCA@,$LIB_KSYCOCA,;t t
 s,@LIB_KFILE@,$LIB_KFILE,;t t
 s,@LIB_KFM@,$LIB_KFM,;t t
+s,@ALLOCA@,$ALLOCA,;t t
 s,@LIBXML_LIBS@,$LIBXML_LIBS,;t t
 s,@LIBXML_CFLAGS@,$LIBXML_CFLAGS,;t t
 s,@LIBXML_RPATH@,$LIBXML_RPATH,;t t
@@ -30892,9 +28295,13 @@ s,@XML_CATALOG_FILE@,$XML_CATALOG_FILE,;t t
 s,@LIBXSLT_LIBS@,$LIBXSLT_LIBS,;t t
 s,@LIBXSLT_CFLAGS@,$LIBXSLT_CFLAGS,;t t
 s,@LIBXSLT_RPATH@,$LIBXSLT_RPATH,;t t
+s,@TAGLIB_CFLAGS@,$TAGLIB_CFLAGS,;t t
+s,@TAGLIB_LIBS@,$TAGLIB_LIBS,;t t
+s,@TAGLIB_RPATH@,$TAGLIB_RPATH,;t t
+s,@KCDDB_LIBS@,$KCDDB_LIBS,;t t
+s,@CDDA_LIBS@,$CDDA_LIBS,;t t
 s,@USE_LIBBTPARSE_TRUE@,$USE_LIBBTPARSE_TRUE,;t t
 s,@USE_LIBBTPARSE_FALSE@,$USE_LIBBTPARSE_FALSE,;t t
-s,@ALLOCA@,$ALLOCA,;t t
 s,@TOPSUBDIRS@,$TOPSUBDIRS,;t t
 s,@LIBOBJS@,$LIBOBJS,;t t
 s,@LTLIBOBJS@,$LTLIBOBJS,;t t

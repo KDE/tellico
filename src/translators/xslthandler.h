@@ -18,10 +18,12 @@
 
 #include <qdom.h>
 
+extern "C" {
 // for xmlDocPtr
 #include <libxml/tree.h>
 // for xsltStyleSheetPtr
 #include <libxslt/xsltInternals.h>
+}
 
 static const int MAX_PARAMS = 2*16;
 
@@ -32,7 +34,7 @@ namespace Bookcase {
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h 744 2004-08-07 22:00:00Z robby $
+ * @version $Id: xslthandler.h 828 2004-09-03 05:08:23Z robby $
  */
 class XSLTHandler {
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2004-08-22 17:50-0700\n"
+"POT-Creation-Date: 2004-09-02 22:41-0700\n"
 "PO-Revision-Date: 2004-05-27 20:03+0200\n"
 "Last-Translator: FaUsT <faust@inventati.org>\n"
 "Language-Team: Italiano <kde-i18n-it@kde.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: exportdialog.cpp:44
+#: exportdialog.cpp:45
 msgid "Export Options"
 msgstr "Esporta opzioni"
 
-#: exportdialog.cpp:49
+#: exportdialog.cpp:50
 msgid "Formatting"
 msgstr "Formattazione"
 
-#: exportdialog.cpp:51
+#: exportdialog.cpp:52
 msgid "Format all fields"
 msgstr "Formatta tutti i campi"
 
-#: exportdialog.cpp:53
+#: exportdialog.cpp:54
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
@@ -37,33 +37,33 @@ msgstr ""
 "Se selezionato, i valori nei campi saranno automaticamente formattati "
 "secondo il tipo di formattazione."
 
-#: exportdialog.cpp:55
+#: exportdialog.cpp:56
 #, fuzzy
 msgid "Export selected entries only"
 msgstr "Copia l'elemento selezionato"
 
-#: exportdialog.cpp:57
+#: exportdialog.cpp:58
 #, fuzzy
 msgid "If checked, only the currently selected entries will be exported."
 msgstr "Se selezionato, verranno esportate anche le immagini."
 
-#: exportdialog.cpp:60
+#: exportdialog.cpp:61
 msgid "Encoding"
 msgstr "Codifica"
 
-#: exportdialog.cpp:62
+#: exportdialog.cpp:63
 msgid "Encode in Unicode (UTF-8)"
 msgstr "Codifica in Unicode (UTF-8)"
 
-#: exportdialog.cpp:64
+#: exportdialog.cpp:65
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "Codifica il file esportato in Unicode (UTF-8)."
 
-#: exportdialog.cpp:65
+#: exportdialog.cpp:66
 msgid "Encode in user locale (%1)"
 msgstr "Codifica secondo le impostazioni dell'utente (%1)"
 
-#: exportdialog.cpp:68
+#: exportdialog.cpp:69
 msgid "Encode the exported file in the local format."
 msgstr "Codifica il file esportato secondo l'impostazione locale."
 
@@ -500,27 +500,27 @@ msgstr ""
 msgid "Bookcase is unable to locate the default entry stylesheet."
 msgstr "Bookcase non è in grado di trovare"
 
-#: entryview.cpp:133 mainwindow.cpp:1540
+#: entryview.cpp:133 mainwindow.cpp:1575
 msgid "Please check your installation."
 msgstr "Controlla la tua installazione, grazie."
 
-#: importdialog.cpp:42 importdialog.cpp:48
+#: importdialog.cpp:46 importdialog.cpp:52
 msgid "Import Options"
 msgstr "Importa Opzioni"
 
-#: importdialog.cpp:50
+#: importdialog.cpp:54
 msgid "Replace current collection"
 msgstr "Sostituisci la collezione attuale"
 
-#: importdialog.cpp:51
+#: importdialog.cpp:55
 msgid "Replace the current collection with the contents of the imported file."
 msgstr "Sostituisci la collezione attuale con i contenuti del file importato."
 
-#: importdialog.cpp:53
+#: importdialog.cpp:57
 msgid "Append to current collection"
 msgstr "Allega alla collezione attuale"
 
-#: importdialog.cpp:54
+#: importdialog.cpp:58
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
@@ -528,11 +528,11 @@ msgstr ""
 "Allega il contenuto del file importato alla collezione attuale. This è "
 "possibile solo se le collezioni sono dello stesso tipo."
 
-#: importdialog.cpp:57
+#: importdialog.cpp:61
 msgid "Merge with current collection"
 msgstr "Unisci alla collezione attuale"
 
-#: importdialog.cpp:58
+#: importdialog.cpp:62
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
 "only possible when the collection types match. Entries must match exactly in "
@@ -542,28 +542,24 @@ msgstr ""
 "Questo è possibile solo quando le collezioni sono dello stesso tipo. Per "
 "poter essere unificati tutti gli elementi devono corrispondere esattamente."
 
-#: importdialog.cpp:157 mainwindow.cpp:880 mainwindow.cpp:987
+#: importdialog.cpp:185 mainwindow.cpp:914 mainwindow.cpp:1021
 msgid "*.bc|Bookcase files (*.bc)"
 msgstr "*.bc|File di Bookcase (*.bc)"
 
-#: importdialog.cpp:161 translators/bibtexexporter.cpp:48
+#: importdialog.cpp:189 translators/bibtexexporter.cpp:48
 msgid "*.bib|Bibtex files (*.bib)"
 msgstr "*.bib|file bibtex (*.bib)"
 
-#: importdialog.cpp:165 translators/csvexporter.cpp:42
+#: importdialog.cpp:193 translators/csvexporter.cpp:42
 msgid "*.csv|CSV files (*.csv)"
 msgstr "*.xsl|file CSV (*.csv)"
 
-#: importdialog.cpp:170 importdialog.cpp:179 mainwindow.cpp:882
+#: importdialog.cpp:198 importdialog.cpp:202 mainwindow.cpp:916
 #: translators/bookcasexmlexporter.cpp:64
 msgid "*.xml|XML files (*.xml)"
 msgstr "*.xml|file XML (*.xml)"
 
-#: importdialog.cpp:175
-msgid "*.ogg|Ogg files (*.ogg)"
-msgstr "*.ogg|file Ogg (*.ogg)"
-
-#: importdialog.cpp:186 mainwindow.cpp:884 mainwindow.cpp:989
+#: importdialog.cpp:212 mainwindow.cpp:918 mainwindow.cpp:1023
 #: translators/bibtexexporter.cpp:48 translators/bibtexmlexporter.cpp:41
 #: translators/bookcasexmlexporter.cpp:64
 #: translators/bookcasezipexporter.cpp:33 translators/csvexporter.cpp:42
@@ -871,309 +867,346 @@ msgid "Import a CSV file"
 msgstr "Importa un file CSV"
 
 #: mainwindow.cpp:306
-msgid "Import Bibtex Data"
-msgstr "Importa dati Bibtex"
-
-#: mainwindow.cpp:307
-msgid "Import a Bibtex bibliography file"
-msgstr "Importa un file di bibliografia Bibtex"
-
-#: mainwindow.cpp:313
-msgid "Import Bibtexml Data"
-msgstr "Importa dati Bibtexml"
-
-#: mainwindow.cpp:314
-msgid "Import a Bibtexml bibliography file"
-msgstr "Importa un file di bibliografia Bibtexml"
-
-#: mainwindow.cpp:320
 #, fuzzy
 msgid "Import MODS Data"
 msgstr "Importa dati CSV"
 
-#: mainwindow.cpp:321
+#: mainwindow.cpp:307
 #, fuzzy
 msgid "Import a MODS data file"
 msgstr "Importa un file CSV"
 
+#: mainwindow.cpp:313
+#, fuzzy
+msgid "Import Alexandria Data"
+msgstr "Importa dati Bibtex"
+
+#: mainwindow.cpp:314
+msgid "Import data from the Alexandria book collection manager"
+msgstr ""
+
+#: mainwindow.cpp:320
+msgid "Import Bibtex Data"
+msgstr "Importa dati Bibtex"
+
+#: mainwindow.cpp:321
+msgid "Import a Bibtex bibliography file"
+msgstr "Importa un file di bibliografia Bibtex"
+
 #: mainwindow.cpp:327
+msgid "Import Bibtexml Data"
+msgstr "Importa dati Bibtexml"
+
+#: mainwindow.cpp:328
+msgid "Import a Bibtexml bibliography file"
+msgstr "Importa un file di bibliografia Bibtexml"
+
+#: mainwindow.cpp:334
+msgid "Import Audio File Metadata"
+msgstr ""
+
+#: mainwindow.cpp:335
+#, fuzzy
+msgid "Import meta-data from audio files"
+msgstr "Sto importando da bibtexml ..."
+
+#: mainwindow.cpp:344
+#, fuzzy
+msgid "Import Audio CD Data"
+msgstr "Importa dati CSV"
+
+#: mainwindow.cpp:345
+msgid "Import audio CD information from FreeDB"
+msgstr ""
+
+#: mainwindow.cpp:354
 msgid "Import XSL Transform"
 msgstr "Importa usando XSL Transform"
 
-#: mainwindow.cpp:328
+#: mainwindow.cpp:355
 msgid "Import using an XSL Transform"
 msgstr "Importa un file usando XSL transform"
 
-#: mainwindow.cpp:340 rc.cpp:4
+#: mainwindow.cpp:367 rc.cpp:4
 msgid "&Export"
 msgstr "&Esporta"
 
-#: mainwindow.cpp:343
+#: mainwindow.cpp:370
 msgid "Export the collection data to other formats..."
 msgstr "Esporta i dati della collezione in un altro formato ..."
 
-#: mainwindow.cpp:347
+#: mainwindow.cpp:374
 msgid "Export to XML"
 msgstr "Esporta in XML"
 
-#: mainwindow.cpp:348
+#: mainwindow.cpp:375
 msgid "Export to a Bookcase XML file"
 msgstr "Esporta in un file XML di Bookcase"
 
-#: mainwindow.cpp:354
+#: mainwindow.cpp:381
 msgid "Export to HTML"
 msgstr "Esporta in HTML"
 
-#: mainwindow.cpp:355
+#: mainwindow.cpp:382
 msgid "Export to an HTML file"
 msgstr "Esporta in un file HTML"
 
-#: mainwindow.cpp:361
+#: mainwindow.cpp:388
 msgid "Export to CSV"
 msgstr "Esporta in CSV"
 
-#: mainwindow.cpp:362
+#: mainwindow.cpp:389
 msgid "Export to a comma-separated values file"
 msgstr "Esporta su un file Comma-Separated Values"
 
-#: mainwindow.cpp:368
+#: mainwindow.cpp:395
 msgid "Export to PilotDB"
 msgstr "Esporta in PilotDB"
 
-#: mainwindow.cpp:369
+#: mainwindow.cpp:396
 msgid "Export to a PilotDB database"
 msgstr "Esporta in un database PilotDB"
 
-#: mainwindow.cpp:375
+#: mainwindow.cpp:402
+#, fuzzy
+msgid "Export to Alexandria"
+msgstr "Importa dati Bibtex"
+
+#: mainwindow.cpp:403
+#, fuzzy
+msgid "Export to an Alexandria library"
+msgstr "Importa dati Bibtex"
+
+#: mainwindow.cpp:409
 msgid "Export to Bibtex"
 msgstr "Esporta in Bibtex"
 
-#: mainwindow.cpp:376
+#: mainwindow.cpp:410
 msgid "Export to a bibtex file"
 msgstr "Esporta come file Bibtex"
 
-#: mainwindow.cpp:382
+#: mainwindow.cpp:416
 msgid "Export to Bibtexml"
 msgstr "Esporta in Bibtexml"
 
-#: mainwindow.cpp:383
+#: mainwindow.cpp:417
 msgid "Export to a Bibtexml file"
 msgstr "Esporta come file Bibtexml"
 
-#: mainwindow.cpp:389
+#: mainwindow.cpp:423
 msgid "Export XSL Transform"
 msgstr "Esporta usando XSL Transform"
 
-#: mainwindow.cpp:390
+#: mainwindow.cpp:424
 msgid "Export using an XSL Transform"
 msgstr "Esporta il file usando un XSL transform"
 
-#: mainwindow.cpp:399
+#: mainwindow.cpp:433
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Taglia il testo selezionato e lo memorizza negli appunti"
 
-#: mainwindow.cpp:401
+#: mainwindow.cpp:435
 msgid "Copy the selected text to the clipboard"
 msgstr "Copia il testo selezionato negli appunti"
 
-#: mainwindow.cpp:403
+#: mainwindow.cpp:437
 msgid "Paste the clipboard contents"
 msgstr "Incolla il contenuto degli appunti"
 
-#: mainwindow.cpp:405
+#: mainwindow.cpp:439
 msgid "Select all the entries in the collection"
 msgstr "Seleziona tutti i campi della collezione"
 
-#: mainwindow.cpp:413
+#: mainwindow.cpp:447
 msgid "Deselect all the entries in the collection"
 msgstr "Deseleziona tutti i campi della collezione"
 
-#: mainwindow.cpp:416
+#: mainwindow.cpp:450
 msgid "Search the collection"
 msgstr "Ricerca la collezione"
 
-#: mainwindow.cpp:418
+#: mainwindow.cpp:452
 msgid "Find next match in the collection"
 msgstr "Trova la prossima corrispondenza nella collezione"
 
-#: mainwindow.cpp:428
+#: mainwindow.cpp:462
 msgid "Find previous match in the collection"
 msgstr "Trova la pecedente corrispondenza nella collezione"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:465
 msgid "Internet Search..."
 msgstr ""
 
-#: mainwindow.cpp:434
+#: mainwindow.cpp:468
 #, fuzzy
 msgid "Search the internet..."
 msgstr "Ricerca nel documento ..."
 
-#: entryeditdialog.cpp:42 mainwindow.cpp:439
+#: entryeditdialog.cpp:42 mainwindow.cpp:473
 msgid "&New Entry"
 msgstr "&Nuovo Elemento"
 
-#: mainwindow.cpp:442
+#: mainwindow.cpp:476
 msgid "Create a new entry"
 msgstr "Crea un nuovo elemento"
 
-#: controller.cpp:385 mainwindow.cpp:443
+#: controller.cpp:385 mainwindow.cpp:477
 msgid "&Edit Entry"
 msgstr "&Modifica elemento"
 
-#: mainwindow.cpp:446
+#: mainwindow.cpp:480
 msgid "Edit the selected entries"
 msgstr "Modifica gli elementi selezionati"
 
-#: controller.cpp:386 mainwindow.cpp:447
+#: controller.cpp:386 mainwindow.cpp:481
 msgid "&Copy Entry"
 msgstr "&Copia elemento"
 
-#: mainwindow.cpp:450
+#: mainwindow.cpp:484
 msgid "Copy the selected entries"
 msgstr "Copia l'elemento selezionato"
 
-#: controller.cpp:387 mainwindow.cpp:451
+#: controller.cpp:387 mainwindow.cpp:485
 msgid "&Delete Entry"
 msgstr "&Cancella Elemento"
 
-#: mainwindow.cpp:454
+#: mainwindow.cpp:488
 msgid "Delete the selected entries"
 msgstr "Cancella gli elementi selezionati"
 
-#: mainwindow.cpp:455
+#: mainwindow.cpp:489
 msgid "&Rename Collection..."
 msgstr "&Rinomina Collezione"
 
-#: mainwindow.cpp:458
+#: mainwindow.cpp:492
 msgid "Rename the collection"
 msgstr "Rinomina la collezione"
 
-#: mainwindow.cpp:459
+#: mainwindow.cpp:493
 msgid "Collection &Fields..."
 msgstr "Campi della colle&zione ..."
 
-#: mainwindow.cpp:462
+#: mainwindow.cpp:496
 msgid "Modify the collection fields"
 msgstr "Modifica i campi della tabella della collezione"
 
-#: mainwindow.cpp:463
+#: mainwindow.cpp:497
 msgid "Convert to &Bibliography"
 msgstr "Converti in &Bibliografia"
 
-#: mainwindow.cpp:466
+#: mainwindow.cpp:500
 msgid "Convert a book collection to a bibliography"
 msgstr "Trasforma una collezione di libri in una bibliografia"
 
-#: mainwindow.cpp:467
+#: mainwindow.cpp:501
 msgid "String &Macros..."
 msgstr "String &Macros..."
 
-#: mainwindow.cpp:470
+#: mainwindow.cpp:504
 msgid "Edit the Bibtex string macros"
 msgstr "Edita le string macros Bibtex"
 
-#: mainwindow.cpp:471
+#: mainwindow.cpp:505
 msgid "&Cite Entry"
 msgstr "&Cita elemento"
 
-#: mainwindow.cpp:474
+#: mainwindow.cpp:508
 msgid "Cite the selected entries in LyX"
 msgstr "Cita l'elemento selezionato in LyX"
 
-#: mainwindow.cpp:485
+#: mainwindow.cpp:519
 msgid "Enable/disable the statusbar"
 msgstr "Abilita/disabilita la barra di stato"
 
-#: mainwindow.cpp:489
+#: mainwindow.cpp:523
 msgid "Show Grou&p View"
 msgstr "Mostra la vista di grup&po"
 
-#: mainwindow.cpp:492
+#: mainwindow.cpp:526
 msgid "Enable/disable the group view"
 msgstr "Abilita/disabilita la vista di gruppo"
 
-#: mainwindow.cpp:493
+#: mainwindow.cpp:527
 msgid "Show Entry &Editor"
 msgstr "Mostra l'&Editor degli elementi"
 
-#: mainwindow.cpp:496
+#: mainwindow.cpp:530
 msgid "Enable/disable the editor"
 msgstr "Abilita/disabilita l'editor"
 
-#: mainwindow.cpp:497
+#: mainwindow.cpp:531
 msgid "Show Entry &View"
 msgstr "Mostra la &Vista degli elementi"
 
-#: mainwindow.cpp:500
+#: mainwindow.cpp:534
 msgid "Enable/disable the entry view"
 msgstr "Abilita/disabilita la vista degli elementi"
 
-#: mainwindow.cpp:501
+#: mainwindow.cpp:535
 msgid "Advanced &Filter..."
 msgstr "&Filtro avanzato ..."
 
-#: mainwindow.cpp:504 mainwindow.cpp:527 mainwindow.cpp:530
+#: mainwindow.cpp:538 mainwindow.cpp:561 mainwindow.cpp:564
 msgid "Filter the collection"
 msgstr "Applica filtri"
 
-#: mainwindow.cpp:517
+#: mainwindow.cpp:551
 msgid "Group By:"
 msgstr "Raggruppa per:"
 
-#: mainwindow.cpp:519 mainwindow.cpp:523
+#: mainwindow.cpp:553 mainwindow.cpp:557
 msgid "Change the grouping of the collection"
 msgstr "Cambia il modo di raggruppamento"
 
-#: mainwindow.cpp:520
+#: mainwindow.cpp:554
 msgid "&Group Selection"
 msgstr "Selezione di &gruppo"
 
-#: mainwindow.cpp:525
+#: mainwindow.cpp:559
 msgid "Quick Filter:"
 msgstr "Filtro rapido:"
 
-#: mainwindow.cpp:528
+#: mainwindow.cpp:562
 msgid "Filter Entry"
 msgstr "Filtra elemento"
 
-#: mainwindow.cpp:561
+#: mainwindow.cpp:595
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
 
-#: mainwindow.cpp:567
+#: mainwindow.cpp:601
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each "
 "entry.</qt>"
 msgstr ""
 
-#: mainwindow.cpp:857
+#: mainwindow.cpp:891
 msgid "Creating new document..."
 msgstr "Creazione nuovo documento ..."
 
-#: mainwindow.cpp:877 mainwindow.cpp:896 mainwindow.cpp:912
+#: mainwindow.cpp:911 mainwindow.cpp:930 mainwindow.cpp:946
 msgid "Opening file..."
 msgstr "Sto aprendo il file ..."
 
-#: mainwindow.cpp:887
+#: mainwindow.cpp:921
 msgid "Open File..."
 msgstr "Apri file ..."
 
-#: mainwindow.cpp:963
+#: mainwindow.cpp:997
 msgid "Saving file..."
 msgstr "Sto salvando il  file ..."
 
-#: mainwindow.cpp:985
+#: mainwindow.cpp:1019
 msgid "Saving file with a new filename..."
 msgstr "Sto salvando il file con un nuovo nome ..."
 
-#: mainwindow.cpp:1027 mainwindow.cpp:1076
+#: mainwindow.cpp:1061 mainwindow.cpp:1110
 msgid "Printing..."
 msgstr "In stampa ..."
 
-#: mainwindow.cpp:1037
+#: mainwindow.cpp:1071
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -1181,59 +1214,59 @@ msgstr ""
 "Sto filtrando la collezione per mostrare solo un numero ridotto di elementi. "
 "Solo gli elementi visibili saranno stampati. Continuare?"
 
-#: mainwindow.cpp:1063
+#: mainwindow.cpp:1097
 msgid "Processing document..."
 msgstr "Sto processando il documento ..."
 
-#: mainwindow.cpp:1083
+#: mainwindow.cpp:1117
 msgid "Exiting..."
 msgstr "Chiusura ..."
 
-#: mainwindow.cpp:1267
+#: mainwindow.cpp:1301
 #, c-format
 msgid "Total Entries: %1"
 msgstr "Elementi totali: %1"
 
-#: mainwindow.cpp:1276
+#: mainwindow.cpp:1310
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrato, %2 selezionato)"
 
-#: mainwindow.cpp:1279
+#: mainwindow.cpp:1313
 msgid "(%1 filtered)"
 msgstr "(%1 filtrato)"
 
-#: mainwindow.cpp:1282
+#: mainwindow.cpp:1316
 msgid "(%1 selected)"
 msgstr "(%1 selezionato)"
 
-#: mainwindow.cpp:1410 translators/htmlexporter.cpp:225
+#: mainwindow.cpp:1445 translators/htmlexporter.cpp:225
 msgid "People"
 msgstr "Gente"
 
-#: mainwindow.cpp:1478
+#: mainwindow.cpp:1513
 #, c-format
 msgid "Print %1"
 msgstr "Stampa %1"
 
-#: mainwindow.cpp:1512
+#: mainwindow.cpp:1547
 #, c-format
 msgid "Page %1"
 msgstr "Pagina %1"
 
-#: mainwindow.cpp:1539 translators/xsltimporter.cpp:56
+#: mainwindow.cpp:1574 translators/xsltimporter.cpp:56
 #, fuzzy
 msgid "Bookcase encountered an error in XSLT processing."
 msgstr "Bookcase ha rilevato un errore processando XSLT. \n"
 
-#: mainwindow.cpp:1635
+#: mainwindow.cpp:1670
 msgid "Importing data..."
 msgstr "Sto importando i dati ..."
 
-#: mainwindow.cpp:1642
+#: mainwindow.cpp:1679 mainwindow.cpp:1685
 msgid "Import File..."
 msgstr "Importa file ..."
 
-#: mainwindow.cpp:1683
+#: mainwindow.cpp:1735
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection"
@@ -1242,7 +1275,7 @@ msgstr ""
 "possoessere allegate. Nessuna modifica verr�applicata alla collezione "
 "attuale"
 
-#: mainwindow.cpp:1698
+#: mainwindow.cpp:1750
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection"
@@ -1250,27 +1283,27 @@ msgstr ""
 "Solo le collezioni con lo stesso tipo di elementi di quella attuale possono "
 "essere unificate. Nessuna modifica verrà applicata alla collezione attuale"
 
-#: mainwindow.cpp:1727
+#: mainwindow.cpp:1779
 msgid "Exporting data..."
 msgstr "Sto esportando i dati ..."
 
-#: mainwindow.cpp:1734
+#: mainwindow.cpp:1801
 msgid "Export As"
 msgstr "Esporta come"
 
-#: mainwindow.cpp:1771
+#: mainwindow.cpp:1839
 msgid "String Macros"
 msgstr "String Macros"
 
-#: mainwindow.cpp:1772
+#: mainwindow.cpp:1840
 msgid "Macro"
 msgstr "Macro"
 
-#: mainwindow.cpp:1772
+#: mainwindow.cpp:1840
 msgid "String"
 msgstr "Stringa"
 
-#: mainwindow.cpp:1894
+#: mainwindow.cpp:1962
 msgid "<qt>Bookcase is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr ""
 "<qt>Bookcase non riesce a scrivere sulla server pipe in <b>%1</b>.</qt>"
@@ -1287,15 +1320,15 @@ msgstr ""
 msgid "Warning!"
 msgstr "Attenzione!"
 
-#: document.cpp:345 document.cpp:348
+#: document.cpp:370 document.cpp:373
 msgid "Rename Collection"
 msgstr "Rinomina Collezione"
 
-#: document.cpp:345 document.cpp:348
+#: document.cpp:370 document.cpp:373
 msgid "New Collection Name"
 msgstr "Nuova collezione"
 
-#: document.cpp:487
+#: document.cpp:511
 msgid "Search string '%1' not found."
 msgstr "Stringa '%1' non trovata."
 
@@ -1576,7 +1609,7 @@ msgid "Keep modified values"
 msgstr ""
 
 #: collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:381
-#: translators/csvimporter.cpp:335 translators/csvimporter.cpp:427
+#: translators/csvimporter.cpp:340 translators/csvimporter.cpp:435
 msgid "New Field"
 msgstr "Nuovo campo"
 
@@ -1672,7 +1705,7 @@ msgstr "&Cancella elementi"
 msgid "CSV"
 msgstr "CSV"
 
-#: translators/csvexporter.cpp:53 translators/csvimporter.cpp:117
+#: translators/csvexporter.cpp:53 translators/csvimporter.cpp:118
 msgid "CSV Options"
 msgstr "Opzioni CSV"
 
@@ -1684,11 +1717,11 @@ msgstr "Includi i titoli degli elementi com header della colonna"
 msgid "If checked, a header row will be added with the field titles."
 msgstr "Se selezionato, verrà aggiunta una riga con i titoli dei campi."
 
-#: translators/csvexporter.cpp:61 translators/csvimporter.cpp:137
+#: translators/csvexporter.cpp:61 translators/csvimporter.cpp:138
 msgid "Delimiter"
 msgstr "Delimitatore"
 
-#: translators/csvexporter.cpp:64 translators/csvimporter.cpp:140
+#: translators/csvexporter.cpp:64 translators/csvimporter.cpp:141
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
@@ -1696,39 +1729,39 @@ msgstr ""
 "Oltre alla virgola, altri caratteri possono essere usati come delimitatori, "
 "separando un valore da un altro."
 
-#: translators/csvexporter.cpp:68 translators/csvimporter.cpp:145
+#: translators/csvexporter.cpp:68 translators/csvimporter.cpp:146
 msgid "Comma"
 msgstr "Virgola"
 
-#: translators/csvexporter.cpp:70 translators/csvimporter.cpp:147
+#: translators/csvexporter.cpp:70 translators/csvimporter.cpp:148
 msgid "Use a comma as the delimiter."
 msgstr "Usa una virgola come delimitatore."
 
-#: translators/csvexporter.cpp:74 translators/csvimporter.cpp:151
+#: translators/csvexporter.cpp:74 translators/csvimporter.cpp:152
 msgid "Semicolon"
 msgstr "Punto e virgola"
 
-#: translators/csvexporter.cpp:75 translators/csvimporter.cpp:152
+#: translators/csvexporter.cpp:75 translators/csvimporter.cpp:153
 msgid "Use a semi-colon as the delimiter."
 msgstr "Usa un punto e virgola come delimitatore."
 
-#: translators/csvexporter.cpp:79 translators/csvimporter.cpp:156
+#: translators/csvexporter.cpp:79 translators/csvimporter.cpp:157
 msgid "Tab"
 msgstr "Tab"
 
-#: translators/csvexporter.cpp:80 translators/csvimporter.cpp:157
+#: translators/csvexporter.cpp:80 translators/csvimporter.cpp:158
 msgid "Use a tab as the delimiter."
 msgstr "Usa uno spazio di tabulazione (tab) come delimitatore."
 
-#: translators/csvexporter.cpp:84 translators/csvimporter.cpp:161
+#: translators/csvexporter.cpp:84 translators/csvimporter.cpp:162
 msgid "Other"
 msgstr "Altro"
 
-#: translators/csvexporter.cpp:85 translators/csvimporter.cpp:162
+#: translators/csvexporter.cpp:85 translators/csvimporter.cpp:163
 msgid "Use a custom string as the delimiter."
 msgstr "Usa una stringa personalizzata come delimitatore."
 
-#: translators/csvexporter.cpp:90 translators/csvimporter.cpp:167
+#: translators/csvexporter.cpp:90 translators/csvimporter.cpp:168
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "Una stringa personalizzata, come per esempio due punti (:), può essere "
@@ -1799,29 +1832,29 @@ msgstr "Bibtexml"
 msgid "*.xml|Bibtexml files (*.xml)"
 msgstr "*.xml|file bibtexml (*.xml)"
 
-#: translators/csvimporter.cpp:122
+#: translators/csvimporter.cpp:123
 msgid "Collection Type:"
 msgstr "Tipo di collezione:"
 
-#: translators/csvimporter.cpp:124
+#: translators/csvimporter.cpp:125
 msgid "Select the type of collection being imported."
 msgstr "Seleziona il tipo di collezione importato."
 
-#: translators/csvimporter.cpp:132
+#: translators/csvimporter.cpp:133
 msgid "First row contains field titles"
 msgstr "La prima riga contiene i titoli dei campi"
 
-#: translators/csvimporter.cpp:134
+#: translators/csvimporter.cpp:135
 msgid "If checked, the first row is used as field titles."
 msgstr ""
 "Se selezionato, la prima riga verrà utilizzata per contenere i titoli dei "
 "campi."
 
-#: translators/csvimporter.cpp:192
+#: translators/csvimporter.cpp:193
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "La tabella mostra fino alle prime cinque linee del file CSV."
 
-#: translators/csvimporter.cpp:198
+#: translators/csvimporter.cpp:199
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
 "column, selecting the field, then clicking the <i>Set</i> button.</qt>"
@@ -1829,15 +1862,15 @@ msgstr ""
 "<qt>Configura ogni colonna per corrispondere ad un campo della collezione "
 "selezionando una colonna  e un campo e premendo il pulsante <i>Set</i>.</qt>"
 
-#: translators/csvimporter.cpp:200
+#: translators/csvimporter.cpp:201
 msgid "Column:"
 msgstr "Colonna:"
 
-#: translators/csvimporter.cpp:204
+#: translators/csvimporter.cpp:205
 msgid "Data field in this column:"
 msgstr "Campo di dati in questa colonna:"
 
-#: translators/csvimporter.cpp:207
+#: translators/csvimporter.cpp:208
 #, fuzzy
 msgid "Assign Field"
 msgstr "Tutti i campi"
@@ -1912,6 +1945,48 @@ msgstr "è necessario un file XSLT per importare il file."
 msgid "*.xsl|XSL files (*.xsl)"
 msgstr "*.xml|file XML (*.xml)"
 
+#: translators/freedbimporter.cpp:59
+#, fuzzy
+msgid "<qt>Bookcase was unable to access the CD-ROM device - <i>%1</i>.</qt>"
+msgstr ""
+"<qt>Bookcase non riesce a scrivere sulla server pipe in <b>%1</b>.</qt>"
+
+#: translators/freedbimporter.cpp:77
+#, fuzzy
+msgid "<qt>Bookcase was unable to open the CD-ROM device - <i>%1</i>.</qt>"
+msgstr ""
+"<qt>Bookcase non riesce a scrivere sulla server pipe in <b>%1</b>.</qt>"
+
+#: translators/freedbimporter.cpp:122
+msgid "<qt>No records were found to match the CD.</qt>"
+msgstr ""
+
+#: translators/freedbimporter.cpp:126
+msgid "<qt>Multiple records were found to match the CD.</qt>"
+msgstr ""
+
+#: translators/freedbimporter.cpp:134
+#, fuzzy
+msgid "<qt>Bookcase was unable to complete the CD lookup.</qt>"
+msgstr "Impossibile aprire il file - %1."
+
+#: collections/musiccollection.cpp:44 translators/freedbimporter.cpp:159
+msgid "Compact Disc"
+msgstr "Compact Disc"
+
+#: translators/freedbimporter.cpp:188
+#, fuzzy
+msgid "Audio CD Options"
+msgstr "Opzioni del campo"
+
+#: translators/freedbimporter.cpp:190
+msgid "CD-ROM Device:"
+msgstr ""
+
+#: translators/freedbimporter.cpp:193
+msgid "Select or input the CD-ROM device location."
+msgstr ""
+
 #: translators/bookcaseimporter.cpp:110
 msgid "It is from a future version of Bookcase."
 msgstr "Il file sembra appartenere ad una versione futura di Bookcase."
@@ -1933,6 +2008,44 @@ msgstr "File Zip Bookcase"
 #: translators/bookcasezipexporter.cpp:33
 msgid "*.bc|Bookcase files(*.bc)"
 msgstr "*.bc|File di Bookcase (*.bc)"
+
+#: translators/alexandriaexporter.cpp:31
+#, fuzzy
+msgid "Alexandria"
+msgstr "Opzioni generali"
+
+#: translators/alexandriaexporter.cpp:48
+msgid ""
+"<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
+"books in that library could be overwritten.</qt>"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:86
+#, fuzzy
+msgid "Scanning audio files..."
+msgstr "Sto salvando il  file ..."
+
+#: translators/audiofileimporter.cpp:207
+#, fuzzy
+msgid "Audio File Options"
+msgstr "Opzioni del campo"
+
+#: translators/audiofileimporter.cpp:209
+msgid "Recursive folder search"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:210
+msgid "If checked, folders are recursively searched for audio files."
+msgstr ""
+
+#: translators/alexandriaimporter.cpp:158
+#, fuzzy
+msgid "Alexandria Options"
+msgstr "Opzioni generali"
+
+#: translators/alexandriaimporter.cpp:159
+msgid "Library:"
+msgstr ""
 
 #: collections/bibtexcollection.cpp:26 collections/bookcollection.cpp:22
 #: collections/comicbookcollection.cpp:22
@@ -2564,10 +2677,6 @@ msgid "Album"
 msgstr "Album"
 
 #: collections/musiccollection.cpp:44
-msgid "Compact Disc"
-msgstr "Compact Disc"
-
-#: collections/musiccollection.cpp:44
 msgid "Cassette"
 msgstr "Musicassetta"
 
@@ -2675,6 +2784,18 @@ msgstr "&Collezione"
 msgid "Collection Toolbar"
 msgstr "Barra degli strumenti-collezione"
 
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "FaUsT"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "faust@inventati.org"
+
 #: entryeditdialog.cpp:41 entryeditdialog.cpp:300 entryeditdialog.cpp:321
 #: entryeditdialog.cpp:365 entryeditdialog.cpp:417
 msgid "Edit Entry"
@@ -2707,18 +2828,6 @@ msgstr ""
 #: entryeditdialog.cpp:566
 msgid "Save Entry"
 msgstr "Salva Elemento"
-
-#: _translatorinfo.cpp:1
-msgid ""
-"_: NAME OF TRANSLATORS\n"
-"Your names"
-msgstr "FaUsT"
-
-#: _translatorinfo.cpp:3
-msgid ""
-"_: EMAIL OF TRANSLATORS\n"
-"Your emails"
-msgstr "faust@inventati.org"
 
 #: fetch/srufetcher.cpp:44
 #, fuzzy
@@ -2949,8 +3058,9 @@ msgstr ""
 "nell'editor degli elementi.</p>\n"
 
 #: tips.cpp:28
+#, fuzzy
 msgid ""
-"<p>...that if you want to filter by a checkbox field, a value of\n"
+"<p>...that if you want to filter by a Checkbox field, a value of\n"
 "\"true\" should be used. If you'd like to filter to\n"
 "show only the science fiction books which you've not read, for\n"
 "example, check the <em>Match all of the\n"
@@ -3045,6 +3155,22 @@ msgstr ""
 #: tips.cpp:76
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
 msgstr "<p>...che clickare due volte su un elemento apre l'editor.</p>\n"
+
+#: tips.cpp:80
+msgid ""
+"<p>...that you can add HTML tags to any Paragraph field for formatting, such "
+"as\n"
+"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
+msgstr ""
+
+#: tips.cpp:85
+msgid ""
+"<p>...that in the Detailed View, you can press a letter on the\n"
+"keyboard to skip to the next entry that starts with that letter.</p>\n"
+msgstr ""
+
+#~ msgid "*.ogg|Ogg files (*.ogg)"
+#~ msgstr "*.ogg|file Ogg (*.ogg)"
 
 #~ msgid ""
 #~ "<qt>The type of the field determines what values may be used. <i>Simple "
@@ -3341,9 +3467,6 @@ msgstr "<p>...che clickare due volte su un elemento apre l'editor.</p>\n"
 #~ "Sia la macro che la stringa possono essere modificate con tre click "
 #~ "sull'oggetto."
 
-#~ msgid "Bookcase is unable to open the file - %1."
-#~ msgstr "Impossibile aprire il file - %1."
-
 #~ msgid "Bookcase is unable to read the file - %1."
 #~ msgstr "Impossibile leggere il file - %1."
 
@@ -3405,10 +3528,6 @@ msgstr "<p>...che clickare due volte su un elemento apre l'editor.</p>\n"
 #, fuzzy
 #~ msgid "Import..."
 #~ msgstr "In stampa ..."
-
-#, fuzzy
-#~ msgid "Import data from other formats..."
-#~ msgstr "Sto importando da bibtexml ..."
 
 #, fuzzy
 #~ msgid "Group By"

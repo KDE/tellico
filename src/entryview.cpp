@@ -177,3 +177,5 @@ void EntryView::slotOpenURL(const KURL& url_) {
     m_run = new KRun(url_);
   }
 }
+
+#include "entryview.moc"

@@ -1,3 +1,25 @@
+2004-09-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Added FreeDB importer.
+
+2004-08-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed compile on gcc 2.95.
+
+2004-08-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Alexandria importer.
+	* Added Alexandria exporter.
+
+2004-08-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Norwegian translation, thanks to Leif Mathis Gaup.
+	* Read album covers from .directory files in audio file importer.
+
+2004-08-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Added suport for reading audio file meta-data.
+
 2004-08-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated paragraph fields to remember line-breaks.

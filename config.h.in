@@ -36,8 +36,14 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
+/* Define to 1 if you have libkcddb and libcdda */
+#undef HAVE_KCDDB
+
 /* Define to 1 if you have the `btparse' library (-lbtparse). */
 #undef HAVE_LIBBTPARSE
+
+/* Define to 1 if you have the `cdda_paranoia' library (-lcdda_paranoia). */
+#undef HAVE_LIBCDDA_PARANOIA
 
 /* Define if you have libjpeg */
 #undef HAVE_LIBJPEG
@@ -102,13 +108,16 @@
 /* Define to 1 if you have the <sys/types.h> header file. */
 #undef HAVE_SYS_TYPES_H
 
+/* Define to 1 if you have the TagLib library */
+#undef HAVE_TAGLIB
+
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
 /* Define if ushort is defined in <sys/types.h> */
 #undef HAVE_USHORT
 
-/* Define if you have the `std::vector::at(std::size_t)' function */
+/* Define if you have the 'std::vector::at(std::size_t)' function */
 #undef HAVE_VECTOR_AT
 
 /* Define to 1 if you have the `vprintf' function. */

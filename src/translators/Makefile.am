@@ -5,7 +5,7 @@ noinst_LIBRARIES = libtranslators.a
 
 libtranslators_a_METASOURCES = AUTO
 
-libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp
+libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp
 
 SUBDIRS = pilotdb
 
@@ -26,12 +26,14 @@ bibtexmlimporter.cpp     dataimporter.h           xsltexporter.h \
 bibtexmlimporter.h       exporter.h               xslthandler.cpp \
 bookcaseimporter.cpp     htmlexporter.cpp         xslthandler.h \
 bookcaseimporter.h       htmlexporter.h           xsltimporter.cpp \
-bookcasexmlexporter.cpp  importer.h               xsltimporter.h
-
+bookcasexmlexporter.cpp  importer.h               xsltimporter.h \
+audiofileimporter.h      audiofileimporter.cpp    alexandriaimporter.h \
+alexandriaimporter.cpp   alexandriaexporter.h     alexandriaexporter.cpp \
+freedbimporter.h         freedbimporter.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 
-INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
+INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS)
 
 KDE_OPTIONS = noautodist
 
