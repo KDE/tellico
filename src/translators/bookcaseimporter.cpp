@@ -16,7 +16,7 @@
 #include "../collectionfactory.h"
 #include "../collections/bibtexcollection.h"
 #include "../imagefactory.h"
-#include "../strings.h"
+#include "../error_strings.h"
 
 #include <klocale.h>
 #include <kmdcodec.h>

@@ -14,7 +14,7 @@
 #include "bibtexmlimporter.h"
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
-#include "../strings.h"
+#include "../error_strings.h"
 
 #include <klocale.h>
 #include <kdebug.h>

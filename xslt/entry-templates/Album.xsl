@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - Entry template for videos
 
-   $Id: Album.xsl 431 2004-02-05 02:20:45Z robby $
+   $Id: Album.xsl 491 2004-02-21 06:12:49Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -155,17 +155,22 @@
      <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
      <!-- check if the value is not empty -->
      <xsl:if test="$image">
-      <img>
-       <xsl:attribute name="src">
-        <xsl:value-of select="concat($tmpdir, $image)"/>
+      <a>
+       <xsl:attribute name="href">
+        <xsl:value-of select="concat('file://',$tmpdir, $image)"/>
        </xsl:attribute>
-       <!-- limit to maximum widht of 200 of height of 300 -->
-       <xsl:call-template name="image-size">
-        <xsl:with-param name="limit-width" select="150"/>
-        <xsl:with-param name="limit-height" select="200"/>
-        <xsl:with-param name="image" select="key('imagesById', $image)"/>
-       </xsl:call-template>
-      </img>
+       <img>
+        <xsl:attribute name="src">
+         <xsl:value-of select="concat($tmpdir, $image)"/>
+        </xsl:attribute>
+        <!-- limit to maximum widht of 200 of height of 300 -->
+        <xsl:call-template name="image-size">
+         <xsl:with-param name="limit-width" select="150"/>
+         <xsl:with-param name="limit-height" select="200"/>
+         <xsl:with-param name="image" select="key('imagesById', $image)"/>
+        </xsl:call-template>
+       </img>
+      </a>
      </xsl:if>
      <xsl:if test="position() mod 2 = 0">
       <br/>
@@ -318,7 +323,7 @@
         <th>
          <xsl:value-of select="@title"/>
         </th>
-        <td with="75%" class="fieldValue">
+        <td width="50%" class="fieldValue">
          <xsl:call-template name="output-field">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>

@@ -165,9 +165,6 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
       }
     }
 
-    // I don't want anything to be hidden
-    //grid->setMinimumHeight(grid->sizeHint().height());
-
     m_tabs->addTab(page, *catIt);
   }
 
@@ -177,6 +174,9 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
     for(int row = 0; row < l->numRows() && it.current()->children()->count() > 1; ++row) {
       l->addRowSpacing(row, maxHeight);
     }
+    // I don't want anything to be hidden, Keramik has a bug if I don't do this
+    it.current()->setMinimumHeight(it.current()->sizeHint().height());
+    it.current()->parentWidget()->setMinimumHeight(it.current()->parentWidget()->sizeHint().height());
   }
 
   setUpdatesEnabled(true);
@@ -435,7 +435,7 @@ void EntryEditDialog::removeField(Data::Field* field_) {
   QString key = QString::number(m_currColl->id()) + field_->name();
   FieldWidget* widget = m_widgetDict.find(key);
   if(widget) {
-    m_widgetDict.remove(key); // auto deleted
+    m_widgetDict.remove(key);
     // if this is the last field in the category, need to remove the tab page
     // this function is called after the field has been removed from the collection,
     // so the category should be gone from the category list
@@ -446,6 +446,7 @@ void EntryEditDialog::removeField(Data::Field* field_) {
       m_tabs->removePage(w);
       delete w; // automatically deletes child widget
     } else {
+      // TODO: need to redo the layout!
       delete widget;
     }
   }
@@ -487,8 +488,8 @@ bool EntryEditDialog::queryModified() {
 //  kdDebug() << "EntryEditDialog::queryModified() - modified is " << (m_modified?"true":"false") << endl;
   bool ok = true;
   if(m_modified) {
-    QString str(i18n("The current entry has been modified.\n"
-                      "Do you want to enter the changes?"));
+    QString str = i18n("The current entry has been modified.\n"
+                       "Do you want to enter the changes?");
     int want_save = KMessageBox::warningYesNoCancel(this, str, i18n("Warning!"),
                                                     i18n("Save Entry"), KStdGuiItem::discard());
     switch(want_save) {

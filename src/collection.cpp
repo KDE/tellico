@@ -77,7 +77,7 @@ bool Collection::addField(Data::Field* field_) {
   }
 
   //field_->category() will never be empty
-  if(m_fieldCategories.contains(field_->category()) == 0) {
+  if(m_fieldCategories.findIndex(field_->category()) == -1) {
     m_fieldCategories << field_->category();
   }
 
@@ -209,7 +209,7 @@ bool Collection::modifyField(Data::Field* newField_) {
       m_fieldCategories.remove(oldField->category());
     }
     oldField->setCategory(newField_->category());
-    if(m_fieldCategories.contains(oldField->category()) == 0) {
+    if(m_fieldCategories.findIndex(oldField->category()) == -1) {
       m_fieldCategories << oldField->category();
     }
   }
@@ -327,6 +327,15 @@ void Collection::reorderFields(const Data::FieldList& list_) {
   m_fieldList.setAutoDelete(false);
   m_fieldList = list_;
   m_fieldList.setAutoDelete(true);
+  
+  // also reset category list, since the order may have changed
+  m_fieldCategories.clear();
+  for(FieldListIterator it(m_fieldList); it.current(); ++it) {
+    if(m_fieldCategories.findIndex(it.current()->category()) == -1) {
+      m_fieldCategories << it.current()->category();
+    }    
+  }
+  
   emit signalFieldsReordered(this);
 }
 
@@ -467,7 +476,7 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
   Data::Field* field = fieldByName(key_);
 
   // if the type is not multiple choice or if value_ is allowed, return true
-  if(field && (field->type() != Data::Field::Choice || field->allowed().contains(value_))) {
+  if(field && (field->type() != Data::Field::Choice || field->allowed().findIndex(value_) > -1)) {
     return true;
   }
 

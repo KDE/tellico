@@ -204,7 +204,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
                                      : printFields.join(QString::fromLatin1(" ")).local8Bit());
 
   BookcaseXMLExporter exporter(coll, entryList());
-  dom = exporter.exportXML(formatFields_, true);
+  dom = exporter.exportXML(formatFields_, encodeUTF8_);
 
 //  kdDebug() << dom.toString() << endl;
   return handler.applyStylesheet(dom.toString(), encodeUTF8_);

@@ -484,7 +484,7 @@ void GroupView::addCollection(Data::Collection* coll_) {
     kdWarning() << "GroupView::addCollection() - null coll pointer!" << endl;
     return;
   }
-  
+
 //  kdDebug() << "GroupView::addCollection" << endl;
 
   // if the collection doesn't have the grouped field, and it's not the pseudo-group,
@@ -497,7 +497,7 @@ void GroupView::addCollection(Data::Collection* coll_) {
   if(!collItem) {
     return;
   }
-  
+
 //  slotClearSelection();
 //  setSelected(collItem, true);
   slotCollapseAll();
@@ -517,7 +517,7 @@ void GroupView::setGroupField(Data::Collection* coll_, const QString& groupField
   if(!field && groupField_ != QString::fromLatin1("_people")) {
     return;
   }
-  
+
   // as a hack, when a new collection is added, this gets called
   // if the collection item is empty, go ahead and populate it
   // even if the group field has not changed
@@ -528,9 +528,9 @@ void GroupView::setGroupField(Data::Collection* coll_, const QString& groupField
     if((field && field->formatFlag() == Data::Field::FormatName)
        || groupField_ == QString::fromLatin1("_people")) {
       m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person-open"),
-                                                          KIcon::Small);
+                                                          KIcon::User, KIcon::SizeSmall);
       m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person"),
-                                                            KIcon::Small);
+                                                            KIcon::User, KIcon::SizeSmall);
     } else {
       m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder_open"),
                                                           KIcon::Small);
@@ -570,6 +570,9 @@ Bookcase::ParentItem* GroupView::populateCollection(Data::Collection* coll_) {
   }
 
   Data::EntryGroupDict* dict = coll_->entryGroupDictByName(m_groupBy);
+  if(!dict) { // could happen if m_groupBy is non empty, but there are no entries with a value
+    return collItem;
+  }
   QPixmap icon = KGlobal::iconLoader()->loadIcon(coll_->entryName(), KIcon::User);
 
   // iterate over all the groups in the dict

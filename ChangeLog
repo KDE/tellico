@@ -1,3 +1,37 @@
+2004-02-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with duplicate menu items in KDE 3.2.x.
+	* Fixed bug to properly reorder categories when reordering fields.
+	* Released Bookcase 0.8.4.
+
+2004-02-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Czech translation, thanks to Robert Kratky.
+
+2004-02-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed compilation issues for gcc 2.95 and FreeBSD.
+
+2004-02-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Estonian translation, from Toomas Nigola.
+
+2004-02-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when renaming single-category fields.
+
+2004-02-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with exporting HTML in non-utf8.
+
+2004-02-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Spanish translation, thanks to Quique.
+
+2004-02-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Added workaround for layout bug in Keramik style.
+
 2004-02-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed saving visible columns yet again.

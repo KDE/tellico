@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="6" name="bookcase">
+<kpartgui version="7" name="bookcase">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -41,8 +41,8 @@
    </Menu>
   </Menu>
   <Menu name="edit">
-   <Action append="edit_find_merge" name="edit_find_last"/>
-   <Action append="edit_select_merge" name="edit_deselect"/>
+   <Action append="edit_find_merge" name="my_edit_find_last"/>
+   <Action append="edit_select_merge" name="my_edit_deselect"/>
   </Menu>
   <Menu name="collection">
    <text>&amp;Collection</text>

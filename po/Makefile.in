@@ -260,8 +260,8 @@ EXTRA_DIST = bookcase.pot
 ####### kdevelop will overwrite this part!!! (end)############
 #>- POFILES = AUTO
 #>+ 2
-POFILES = es.po de.po nl.po ja.po bg.po it.po hu.po nb.po ro.po ee.po fr.po sv.po fi.po
-GMOFILES = es.gmo de.gmo nl.gmo ja.gmo bg.gmo it.gmo hu.gmo nb.gmo ro.gmo ee.gmo fr.gmo sv.gmo fi.gmo
+POFILES = es.po de.po nl.po ja.po bg.po it.po hu.po nb.po ro.po ee.po cs.po fr.po sv.po fi.po
+GMOFILES = es.gmo de.gmo nl.gmo ja.gmo bg.gmo it.gmo hu.gmo nb.gmo ro.gmo ee.gmo cs.gmo fr.gmo sv.gmo fi.gmo
 subdir = po
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -300,7 +300,7 @@ CTAGS:
 
 #>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=nl.po sv.gmo ro.po bg.gmo messages.mo bg.po nb.gmo fi.po ja.po it.gmo sv.po fi.gmo hu.po ee.gmo de.gmo de.po es.po fr.gmo es.gmo ja.gmo fr.po nb.po it.po ro.gmo hu.gmo nl.gmo ee.po 
+KDE_DIST=nl.po sv.gmo bg.gmo nb.gmo fi.po de.po fr.gmo ja.gmo fr.po nb.po ro.gmo cs.po ee.po cs.gmo ro.po bg.po messages.mo ja.po sv.po it.gmo hu.po fi.gmo ee.gmo de.gmo es.po es.gmo it.po nl.gmo hu.gmo 
 
 #>- DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 #>+ 1
@@ -438,7 +438,7 @@ uninstall-am: uninstall-info-am
 .NOEXPORT:
 
 
-#>+ 40
+#>+ 43
 es.gmo: es.po
 	rm -f es.gmo; $(GMSGFMT) -o es.gmo $(srcdir)/es.po
 	test ! -f es.gmo || touch es.gmo
@@ -469,6 +469,9 @@ ro.gmo: ro.po
 ee.gmo: ee.po
 	rm -f ee.gmo; $(GMSGFMT) -o ee.gmo $(srcdir)/ee.po
 	test ! -f ee.gmo || touch ee.gmo
+cs.gmo: cs.po
+	rm -f cs.gmo; $(GMSGFMT) -o cs.gmo $(srcdir)/cs.po
+	test ! -f cs.gmo || touch cs.gmo
 fr.gmo: fr.po
 	rm -f fr.gmo; $(GMSGFMT) -o fr.gmo $(srcdir)/fr.po
 	test ! -f fr.gmo || touch fr.gmo
@@ -481,11 +484,11 @@ fi.gmo: fi.po
 
 #>+ 3
 clean-nls:
-	-rm -f  es.gmo de.gmo nl.gmo ja.gmo bg.gmo it.gmo hu.gmo nb.gmo ro.gmo ee.gmo fr.gmo sv.gmo fi.gmo
+	-rm -f  es.gmo de.gmo nl.gmo ja.gmo bg.gmo it.gmo hu.gmo nb.gmo ro.gmo ee.gmo cs.gmo fr.gmo sv.gmo fi.gmo
 
 #>+ 10
 install-nls:
-	@for base in es de nl ja bg it hu nb ro ee fr sv fi ; do \
+	@for base in es de nl ja bg it hu nb ro ee cs fr sv fi ; do \
 	  echo $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
 	  $(mkinstalldirs) $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES ; \
 	  if test -f $$base.gmo; then $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
@@ -494,7 +497,7 @@ install-nls:
 	done
 
 
-#>+ 15
+#>+ 16
 uninstall-nls:
 	rm -f $(DESTDIR)$(kde_locale)/es/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/de/LC_MESSAGES/$(PACKAGE).mo
@@ -506,6 +509,7 @@ uninstall-nls:
 	rm -f $(DESTDIR)$(kde_locale)/nb/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/ro/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/ee/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/cs/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/fr/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/sv/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/fi/LC_MESSAGES/$(PACKAGE).mo

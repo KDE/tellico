@@ -1,3 +1,4 @@
+# translation of fi.po_083.po to Suomi
 # translation of fi.po_new_fields_plus_title_yritys.po to Suomi
 # translation of fi.po_new_fields.po to Suomi
 # translation of fi.po to Suomi
@@ -9,9 +10,9 @@
 # Teuvo Eloranta <teuvo@piketa.fi>, 2003, 2004.
 msgid ""
 msgstr ""
-"Project-Id-Version: fi\n"
+"Project-Id-Version: fi.po_083\n"
 "POT-Creation-Date: 2004-02-03 19:43-0800\n"
-"PO-Revision-Date: 2004-02-02 19:41+0000\n"
+"PO-Revision-Date: 2004-02-07 20:31+0000\n"
 "Last-Translator: Teuvo Eloranta <teuvo@piketa.fi>\n"
 "Language-Team: Suomi <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -81,7 +82,7 @@ msgstr "Hakupaikka:"
 
 #: finddialog.cpp:66
 msgid "Select which field should be searched."
-msgstr "Valitse etsittävä kenttä"
+msgstr "Valitse etsittävä kenttä."
 
 #: finddialog.cpp:74
 msgid "Case &Sensitive"
@@ -89,15 +90,15 @@ msgstr "&Huomioi isot ja pienet kirjaimet"
 
 #: finddialog.cpp:75
 msgid "If checked, the search is case-sensitive."
-msgstr "Jos valittu, haku huomioi isot ja pienet kirjaimet"
+msgstr "Jos valittu, haku huomioi isot ja pienet kirjaimet."
 
 #: finddialog.cpp:76
 msgid "Find &Backwards"
-msgstr "ETsi taakse&päin"
+msgstr "Etsi taakse&päin"
 
 #: finddialog.cpp:77
 msgid "If checked, the document is searched in reverse."
-msgstr "Jos valittu, etsitään taaksepäin"
+msgstr "Jos valittu, etsitään taaksepäin."
 
 #: finddialog.cpp:78
 msgid "&Whole Words Only"
@@ -105,7 +106,7 @@ msgstr "&Vain kokonaiset sanat"
 
 #: finddialog.cpp:79
 msgid "If checked, the search is limited to whole words."
-msgstr "Jos valittu, haku rajoittuu kokonaisiin sanoihin"
+msgstr "Jos valittu, haku rajoittuu kokonaisiin sanoihin."
 
 #: finddialog.cpp:80
 msgid "&From Beginning"
@@ -113,7 +114,7 @@ msgstr "&Alusta"
 
 #: finddialog.cpp:81
 msgid "If checked, the document is searched from the beginning."
-msgstr "Jos valittu, haetaan alusta alkaen"
+msgstr "Jos valittu, haetaan alusta alkaen."
 
 #: finddialog.cpp:82
 msgid "As &Regular Expression"
@@ -121,12 +122,11 @@ msgstr "Säännönmukaisena &lausekkeena"
 
 #: finddialog.cpp:83
 msgid "If checked, the search string is used as a regular expression."
-msgstr ""
-"Jos valittu, haettavaa merkkijonoa käsitellään säännönmukaisena lausekkeena."
+msgstr "Jos valittu, haettavaa merkkijonoa käsitellään säännönmukaisena lausekkeena."
 
 #: finddialog.cpp:86
 msgid "&Edit Regular Expression..."
-msgstr "Muokkaa säännönmukaista laus&eketta"
+msgstr "Muokkaa säännönmukaista laus&eketta..."
 
 #: finddialog.cpp:106 finddialog.cpp:179
 msgid "All Fields"
@@ -134,7 +134,7 @@ msgstr "Kaikki kentät"
 
 #: finddialog.cpp:116
 msgid "Invalid regular expression."
-msgstr "Virheellinen säännönmukainen lauseke"
+msgstr "Virheellinen säännönmukainen lauseke."
 
 #: filehandler.cpp:94 translators/bookcaseimporter.cpp:76
 #: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
@@ -147,8 +147,7 @@ msgid "The error message from Qt is:"
 msgstr "Qt:n virheilmoitus:"
 
 #: filehandler.cpp:132
-msgid ""
-"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Tiedosto \"%1\" on jo olemassa. Haluatko varmasti ylikirjoittaa sen?"
 
 #: filehandler.cpp:135
@@ -161,7 +160,7 @@ msgstr "Ylikirjoita"
 
 #: main.cpp:22
 msgid "Bookcase - a collection manager for KDE"
-msgstr "Bookcase -kirjakokoelmaohjelmisto KDE:lle"
+msgstr "Bookcase - kokoelmienhallintaohjelmisto KDE:lle"
 
 #: main.cpp:27
 msgid "File to open"
@@ -234,7 +233,7 @@ msgstr "Numero"
 
 #: field.cpp:345 collectionfieldsdialog.cpp:395
 msgid "URL"
-msgstr "Internet-osoite, URL"
+msgstr "Verkko-osoite (URL)"
 
 #: field.cpp:346 collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:383
 msgid "Table"
@@ -269,8 +268,7 @@ msgstr "Avaa tiedosto käynnistyksen jälkeen"
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
-msgstr ""
-"Jos valittu, viimeksi muokattua tiedosto avataan ohjelman käynnistyessä."
+msgstr "Jos valittu, viimeksi muokattu tiedosto avataan ohjelman käynnistyessä."
 
 #: configdialog.cpp:109
 msgid "Show \"Tip of the Day\" at startup"
@@ -304,12 +302,11 @@ msgstr "Automaattiset isot kirjaimet otsikoissa ja nimissä"
 
 #: configdialog.cpp:124
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr ""
-"Jos valittu, otsikot ja nimet muutetaan isoiksi kirjaimiksi automaattisesti."
+msgstr "Jos valittu, otsikkojen ja nimien alkukirjaimet muutetaan isoiksi kirjaimiksi automaattisesti."
 
 #: configdialog.cpp:127
 msgid "Auto format titles and names"
-msgstr "Otsikoiden ja kenttien autom. muotoilu."
+msgstr "Otsikoiden ja kenttien automaattinen muotoilu"
 
 #: configdialog.cpp:128 configdialog.cpp:188
 msgid "If checked, titles and names will be automatically formatted."
@@ -332,8 +329,7 @@ msgid "Personal suffixes:"
 msgstr "Henkilökohtaiset jälkiliitteet:"
 
 #: configdialog.cpp:159
-msgid ""
-"A comma-separated list of suffixes which might be used in personal names."
+msgid "A comma-separated list of suffixes which might be used in personal names."
 msgstr ""
 "Pilkuilla erotettu lista jälkiliitteistä joita saatetaan käyttää "
 "henkilökohtaisissa nimissä."
@@ -344,8 +340,7 @@ msgstr "Sukunimen alkuliitteet:"
 
 #: configdialog.cpp:170
 msgid "A comma-separated list of prefixes which might be used in surnames."
-msgstr ""
-"Pilkuilla erotettu lista alkuliitteistä joita saatetaan käyttää sukuniminä."
+msgstr "Pilkuilla erotettu lista alkuliitteistä joita saatetaan käyttää sukuniminä."
 
 #: configdialog.cpp:181
 msgid "Printing"
@@ -385,11 +380,11 @@ msgstr "Mallipohjat"
 
 #: configdialog.cpp:208
 msgid "Template Options"
-msgstr "Templaattien asetukset"
+msgstr "Mallipohjien asetukset"
 
 #: configdialog.cpp:338
 msgid "Preview Entry Template"
-msgstr "Näytä tietueen templaatti"
+msgstr "Näytä tietueen mallipohja"
 
 #: importdialog.cpp:40 importdialog.cpp:46
 msgid "Import Options"
@@ -443,7 +438,7 @@ msgstr "*.ogg|Ogg-tiedostot (*.ogg)"
 #: translators/bookcasexmlexporter.cpp:56
 #: translators/bookcasezipexporter.cpp:37
 msgid "*|All files"
-msgstr "*|kaikki tiedostot"
+msgstr "*|Kaikki tiedostot"
 
 #: filterdialog.cpp:61
 msgid "Any Field"
@@ -627,7 +622,7 @@ msgstr "Uusi Kor&ttikokoelma"
 
 #: mainwindow.cpp:214
 msgid "Create a new trading card collection"
-msgstr "Luo uusi vaihtokorttikokoelma"
+msgstr "Luo uusi korttikokoelma"
 
 #: mainwindow.cpp:220
 msgid "New C&oin Collection"
@@ -655,7 +650,7 @@ msgstr "Luo uusi viinikokoelma"
 
 #: mainwindow.cpp:247
 msgid "New C&ustom Collection"
-msgstr "Uusi m&uokattu kokoelma"
+msgstr "Uusi M&uokattu kokoelma"
 
 #: mainwindow.cpp:250
 msgid "Create a new custom collection"
@@ -838,63 +833,56 @@ msgid "Create a new entry"
 msgstr "Luo uusi tietue"
 
 #: mainwindow.cpp:413
-#, fuzzy
 msgid "&Edit Entry"
-msgstr "Muokkaa tietuetta"
+msgstr "&Muokkaa tietuetta"
 
 #: mainwindow.cpp:416
 msgid "Edit the selected entries"
 msgstr "Muokkaa valittuja tietueita"
 
 #: mainwindow.cpp:417
-#, fuzzy
 msgid "&Copy Entry"
-msgstr "Kopioi tietue"
+msgstr "&Kopioi tietue"
 
 #: mainwindow.cpp:420
 msgid "Copy the selected entries"
 msgstr "Kopioi valitut tietueet"
 
 #: mainwindow.cpp:421
-#, fuzzy
 msgid "&Delete Entry"
-msgstr "Tuhoa tietue"
+msgstr "&Tuhoa tietue"
 
 #: mainwindow.cpp:424
 msgid "Delete the selected entries"
 msgstr "Tuhoa valitut tietueet"
 
 #: mainwindow.cpp:425
-#, fuzzy
 msgid "&Rename Collection..."
-msgstr "Uudelleennimeä kokoelma..."
+msgstr "&Uudelleennimeä kokoelma..."
 
 #: mainwindow.cpp:428
 msgid "Rename the collection"
 msgstr "Uudelleennimeä kokoelma"
 
 #: mainwindow.cpp:429
-#, fuzzy
 msgid "Collection &Fields..."
-msgstr "Kokoelman kentät..."
+msgstr "&Kokoelman kentät..."
 
 #: mainwindow.cpp:432
 msgid "Modify the collection fields"
 msgstr "Muuta kokoelman kenttiä"
 
 #: mainwindow.cpp:433
-#, fuzzy
 msgid "Convert to &Bibliography"
-msgstr "Muunna bibliografiaksi"
+msgstr "Muunna &bibliografiaksi"
 
 #: mainwindow.cpp:436
 msgid "Convert a book collection to a bibliography"
 msgstr "Muuta kirjakokoelma bibliografiaksi"
 
 #: mainwindow.cpp:437
-#, fuzzy
 msgid "String &Macros..."
-msgstr "Merkkijonomakrot..."
+msgstr "&Merkkijonomakrot..."
 
 #: mainwindow.cpp:440
 msgid "Edit the Bibtex string macros"
@@ -917,7 +905,6 @@ msgid "Enable/disable the statusbar"
 msgstr "Näytä/älä näytä tilapalkkia"
 
 #: mainwindow.cpp:465
-#, fuzzy
 msgid "Show Grou&p View"
 msgstr "Näytä &ryhmänäkymä"
 
@@ -942,9 +929,8 @@ msgid "Enable/disable the entry view"
 msgstr "Näytä/älä näytä tietuenäkymä"
 
 #: mainwindow.cpp:477
-#, fuzzy
 msgid "Advanced &Filter..."
-msgstr "Tarkempi suodatin..."
+msgstr "&Tarkempi suodatin..."
 
 #: mainwindow.cpp:480 mainwindow.cpp:510
 msgid "Filter the collection"
@@ -967,9 +953,8 @@ msgid "Change the grouping of the collection"
 msgstr "Muuta kokoelman ryhmittelyä"
 
 #: mainwindow.cpp:503
-#, fuzzy
 msgid "&Group Selection"
-msgstr "Ryhmävalinta"
+msgstr "&Ryhmävalinta"
 
 #: mainwindow.cpp:508
 msgid "Quick Filter:"
@@ -1007,8 +992,7 @@ msgstr "Tulostetaan..."
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
-msgstr ""
-"Kokoelmasta on esillä suodatettu näkymä. Vain näkyvät tietueet tulostetaan?"
+msgstr "Kokoelmasta on esillä suodatettu näkymä. Vain näkyvät tietueet tulostetaan, jatketaanko?"
 
 #: mainwindow.cpp:1013
 msgid "Processing document..."
@@ -1137,16 +1121,16 @@ msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
-"Siirrä tämä kenttä ylös listassa. Listan järjestys on tärkeä tietue-editorin "
-"asettelulle."
+"Siirrä tämä kenttä ylös listassa. Listan järjestys vaikuttaa tietue-editorin "
+"kenttien asetteluun."
 
 #: collectionfieldsdialog.cpp:125
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
-"Siirrä tämä kenttä alas listassa. Listan järjestys on tärkeä tietue-editorin "
-"asettelulle."
+"Siirrä tämä kenttä alas listassa. Listan järjestys vaikuttaa tietue-editorin "
+"kenttien asetteluun."
 
 #: collectionfieldsdialog.cpp:135
 msgid "Field Properties"
@@ -1181,7 +1165,7 @@ msgstr ""
 "<i>Tavallista tekstiä</i> Käytetään useimpiin kenttiin. <i>Kappale</i> on "
 "Isoille tekstilohkoille. <i>Lista</i> rajoittaa kentän tiettyihin arvoihin. "
 "<i> Valintaruutu</i> on yksinkertaisille kyllä/ei- valinnoille. <i> Numero</"
-"i> kertoo kentän sisältävän numoroarvon. <i> Internetosoite</i> viittaa URL:"
+"i> kertoo kentän sisältävän numoroarvon. <i> Verkko-osoite</i> viittaa URL:"
 "iin, mukaanlukien viittaukset muihin tiedostoihin. <i> Taulu</i> on yhdelle "
 "tai kahdelle sarakkeelle arvoja. <i> Vain lukutila</i> on vain sisäisille "
 "arvoille, mahdollisesti käytännöllinen tietojen tuonnissa ja viennissä."
@@ -1190,11 +1174,11 @@ msgstr ""
 
 #: collectionfieldsdialog.cpp:170
 msgid "Category:"
-msgstr "Katekoria:"
+msgstr "Kategoria:"
 
 #: collectionfieldsdialog.cpp:174
 msgid "The field category determines where the field is placed in the editor."
-msgstr "Kategoria-kenttä määrittää kentän sijoituksen editorissa."
+msgstr "Kategoria-kenttä määrittää kentän välilehden tietue-editorissa."
 
 #: collectionfieldsdialog.cpp:181
 msgid "Allowed:"
@@ -1250,17 +1234,16 @@ msgstr "Ei muotoilua"
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
-msgstr "Tämä optio estää kentän automaattisen muotoilun."
+msgstr "Tämä valinta estää kentän automaattisen muotoilun."
 
 #: collectionfieldsdialog.cpp:215
 msgid "Allow auto-capitalization only"
 msgstr "Salli vain automaattinen isojen kirjainten käyttö"
 
 #: collectionfieldsdialog.cpp:216
-msgid ""
-"This option allows the field to be capitalized, but not specially formatted."
+msgid "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
-"Tämä asetus sallii kentässä isojen kirjainten käytön mutta ei sen erillistä "
+"Tämä valinta sallii kentässä isojen kirjainten käytön mutta ei sen erillistä "
 "muotoilua."
 
 #: collectionfieldsdialog.cpp:218
@@ -1272,8 +1255,8 @@ msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
 msgstr ""
-"Tämä asetus asettaa isot kirjaimet ja muotoilun kuten nimekkeessä, mutta "
-"vain mikäli nämä asetukset ovat globaalisti asetettu."
+"Tämä valinta asettaa isot kirjaimet ja muotoilun kuten otsikossa mutta "
+"vain jos nämä asetukset ovat globaalisti asetettu."
 
 #: collectionfieldsdialog.cpp:221
 msgid "Format as a name"
@@ -1284,7 +1267,7 @@ msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
 msgstr ""
-"Tämä asetus asettaa kenttän käyttämään isoja kirjaimia ja muotoilee sen "
+"Tämä valinta asettaa kenttän käyttämään isoja kirjaimia ja muotoilee sen "
 "kuten nimen, mutta vain jos nämä asetukset on globaalisti asetettu."
 
 #: collectionfieldsdialog.cpp:226
@@ -1299,8 +1282,7 @@ msgstr "Aktivoi automaattinen tekstintäydennys"
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
-msgstr ""
-"Jos valittu, tässä kentässä käytetään KDE:n automaattista tekstintäydennystä."
+msgstr "Jos valittu, tässä kentässä käytetään KDE:n automaattista tekstintäydennystä."
 
 #: collectionfieldsdialog.cpp:230
 msgid "Allow multiple values"
@@ -1319,10 +1301,8 @@ msgid "Allow grouping"
 msgstr "Salli ryhmittely"
 
 #: collectionfieldsdialog.cpp:234
-msgid ""
-"If checked, this field may be used to group the entries in the group view."
-msgstr ""
-"Jos valittu, kenttää voidaan käyttää ryhmittelemään ryhmänäkymän tietueet."
+msgid "If checked, this field may be used to group the entries in the group view."
+msgstr "Jos valittu, kenttää voidaan käyttää ryhmittelemään ryhmänäkymän tietueet."
 
 #: collectionfieldsdialog.cpp:248
 msgid "Revert the selected field's properties to the default values."
@@ -1333,8 +1313,8 @@ msgid ""
 "<qt><p>Do you really want to delete the <em>%1</em> field? This action "
 "occurs immediately and can not be undone!</p></qt>"
 msgstr ""
-"<qt><p>haluatko todella tuhota<em>%1</em>kentän? Tämä toimenpide suoritetaan "
-"heti ja on peruuttamaton!</p></qt>"
+"<qt><p>haluatko todella tuhota<em>%1</em>kentän? Tämä toimenpide "
+"suoritetaan heti ja on peruuttamaton!</p></qt>"
 
 #: collectionfieldsdialog.cpp:361
 msgid "Delete Field?"
@@ -1349,8 +1329,8 @@ msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
-"<qt><p>Haluatko todella palauttaa kentän <em>%1</em> asetuksetoletusarvoihin?"
-"</p></qt>"
+"<qt><p>Haluatko todella palauttaa kentän <em>%1</em> asetukset "
+"oletusarvoihin?</p></qt>"
 
 #: collectionfieldsdialog.cpp:641
 msgid "Revert"
@@ -1390,11 +1370,11 @@ msgstr "CSV-asetukset"
 
 #: translators/csvexporter.cpp:61
 msgid "Include field titles as column headers"
-msgstr "Sisällytä kenttien nimekkeet sarakkeiden otsikkoina."
+msgstr "Sisällytä kenttien nimet sarakkeiden otsikkoina."
 
 #: translators/csvexporter.cpp:63
 msgid "If checked, a header row will be added with the field titles."
-msgstr "Jos valittu, otsikokkorivi lisätään kentän nimekkeiden kanssa."
+msgstr "Jos valittu, otsikokkorivi lisätään kenttien nimien kanssa."
 
 #: translators/csvexporter.cpp:66 translators/csvimporter.cpp:125
 msgid "Delimiter"
@@ -1458,7 +1438,7 @@ msgstr "HTML-asetukset"
 
 #: translators/htmlexporter.cpp:187
 msgid "(grouped by %1; sorted by %2)"
-msgstr "(ryhmitelety %1 mukaan; lajiteltu %2 mukaan)"
+msgstr "(ryhmitelty %1 mukaan; lajiteltu %2 mukaan)"
 
 #: translators/htmlexporter.cpp:189
 msgid "(sorted by %1)"
@@ -1481,16 +1461,16 @@ msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
 msgstr ""
-"Jos valittu, merkkijonomakroja laajennetaan eikä @sring{} -esiintymiä "
+"Jos valittu, merkkijonomakrot laajennetaan eikä @sring{} -esiintymiä "
 "kirjoiteta."
 
 #: translators/bibtexexporter.cpp:66
 msgid "Use URL package"
-msgstr "Käytä URL-pakettia"
+msgstr "Käytä verkko-osoite (URL) -pakettia"
 
 #: translators/bibtexexporter.cpp:68
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr "Jos valittu, kaikki URL-kentät sijoitetaan \\url määritykseen."
+msgstr "Jos valittu, kaikki verkko-osoite -kentät sijoitetaan \\url määritykseen."
 
 #: translators/bibtexmlexporter.cpp:35
 msgid "Bibtexml"
@@ -1510,11 +1490,11 @@ msgstr "Valitse tuotavan kokoelman tyyppi."
 
 #: translators/csvimporter.cpp:120
 msgid "First row contains field titles"
-msgstr "Ensimmäinen rivi sisältää kenttien nimekkeet"
+msgstr "Ensimmäinen rivi sisältää kenttien nimet"
 
 #: translators/csvimporter.cpp:122
 msgid "If checked, the first row is used as field titles."
-msgstr "Jos valittu, ensimmäistä riviä käytetään kenttien nimekkeinä."
+msgstr "Jos valittu, ensimmäistä riviä käytetään kenttien niminä."
 
 #: translators/csvimporter.cpp:180
 msgid "The table shows up to the first five lines of the CSV file."
@@ -1526,7 +1506,7 @@ msgid ""
 "column, selecting the field, then clicking the <i>Set</i> button.</qt>"
 msgstr ""
 "<qt>Valitse jokainen sarake vastaamaan kokoelman kenttää valitsemalla sarake "
-"ja kenttä ja painamalla<i>Aseta</i>-nappulaa.</qt>"
+"ja kenttä ja painamalla sitten <i>Aseta</i>-nappulaa.</qt>"
 
 #: translators/csvimporter.cpp:188
 msgid "Column:"
@@ -1558,7 +1538,7 @@ msgstr "Valitse Bookcase XML-tiedon muuttamiseen käytettävä XSLT-tiedosto."
 
 #: translators/bibteximporter.cpp:41
 msgid "No valid Bibtex entries were found in file - %1"
-msgstr "Säännönmukaisia Bibted tietueita ei löytynyt tiedostosta - %1"
+msgstr "Säännönmukaisia Bibtex-tietueita ei löytynyt tiedostosta - %1"
 
 #: translators/pilotdbexporter.cpp:39
 msgid "PilotDB"
@@ -1810,7 +1790,7 @@ msgstr "Kunto"
 
 #: collections/bookcollection.cpp:141 collections/comicbookcollection.cpp:135
 msgid "Signed"
-msgstr "Allekirjoitus"
+msgstr "Signeerattu"
 
 #: collections/bookcollection.cpp:145
 msgid "Read"
@@ -1910,7 +1890,6 @@ msgid "Production Year"
 msgstr "Tuotantovuosi"
 
 #: collections/videocollection.cpp:60
-#, fuzzy
 msgid ""
 "_:Movie ratings\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA)"
@@ -2050,7 +2029,7 @@ msgstr "Ohjaajan leikkaus"
 
 #: collections/videocollection.cpp:182
 msgid "Plot Summary"
-msgstr "Yhteenveto"
+msgstr "Juonen yhteenveto"
 
 #: collections/videocollection.cpp:187
 msgid "Personal Rating"
@@ -2079,7 +2058,7 @@ msgstr "Nimellisarvo"
 #: collections/coincollection.cpp:54 collections/bibtexcollection.cpp:142
 #: collections/cardcollection.cpp:66 collections/musiccollection.cpp:62
 msgid "Year"
-msgstr "Vuosi"
+msgstr "Vuosiluku"
 
 #: collections/coincollection.cpp:59
 msgid "Mint Mark"
@@ -2088,7 +2067,7 @@ msgstr "Rahapajan merkki"
 #: collections/coincollection.cpp:65 collections/winecollection.cpp:73
 #: collections/comicbookcollection.cpp:94 collections/stampcollection.cpp:55
 msgid "Country"
-msgstr "Maa"
+msgstr "Alkuperämaa"
 
 #: collections/coincollection.cpp:71
 msgid "Coin Set"
@@ -2142,7 +2121,7 @@ msgstr "Tietueen tyyppi"
 
 #: collections/bibtexcollection.cpp:73
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr ""
+msgstr "Nämä tietuetyypit ovat erikoisia bibtex:lle. Katso bibtex:in dokumentaatio."
 
 #: collections/bibtexcollection.cpp:83
 msgid "Bibtex Key"
@@ -2158,7 +2137,7 @@ msgstr "Kirjoittaja"
 
 #: collections/bibtexcollection.cpp:102
 msgid "Organization"
-msgstr "Yritys"
+msgstr "Organisaatio"
 
 #: collections/bibtexcollection.cpp:163
 msgid "Month"
@@ -2194,11 +2173,11 @@ msgstr "Omat viinit"
 
 #: collections/winecollection.cpp:49
 msgid "Appellation"
-msgstr "Nimitys"
+msgstr "Luokitus"
 
 #: collections/winecollection.cpp:55
 msgid "Varietal"
-msgstr "Varietal"
+msgstr "Päälajike"
 
 #: collections/winecollection.cpp:61
 msgid "Vintage"
@@ -2222,7 +2201,7 @@ msgstr "Määrä"
 
 #: collections/winecollection.cpp:97
 msgid "Drink By"
-msgstr "Drink By"
+msgstr "Viimeinen juontipäivä"
 
 #: collections/winecollection.cpp:111
 msgid "Label Image"
@@ -2290,15 +2269,15 @@ msgstr "LP-levy"
 
 #: collections/musiccollection.cpp:50 collections/comicbookcollection.cpp:56
 msgid "Artist"
-msgstr "Taitelija"
+msgstr "Taiteilija"
 
 #: collections/musiccollection.cpp:56
 msgid "Label"
-msgstr "Nimeke"
+msgstr "Levymerkki"
 
 #: collections/musiccollection.cpp:73
 msgid "Tracks"
-msgstr "Raitoja"
+msgstr "Ääniraidat"
 
 #: collections/comicbookcollection.cpp:27
 msgid "Comics"
@@ -2485,9 +2464,9 @@ msgid ""
 "same way. with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
 "<p>...että jos kirjalla on useampi kirjoittaja, erota nimet puolipisteellä\n"
-"jotta Bookcase osaa käsitellä näitä erillisinä tietoina</p>\n"
-"<p>kaikkia muitakin kenttiä joihin voi laittaa useita arvoja tulee\n"
-"käyttää samalla tavalla, erottele arvot puolipuolipisteellä </p>\n"
+"jotta Bookcase osaa käsitellä näitä erillisinä tietoina.</p>\n"
+"<p>Kaikkia muitakin kenttiä joihin voi laittaa useita arvoja tulee\n"
+"käyttää samalla tavalla, erottele arvot puolipuolipisteellä.</p>\n"
 
 #: tips.cpp:11
 msgid ""
@@ -2496,14 +2475,14 @@ msgid ""
 msgstr ""
 "<p>...että voit uudelleennimetä kokoelman painamalla vasemmassa "
 "sarakkeessa \n"
-"hiiren kakkospainiketta kokoelman päällimmäisen tietueen päällä </p>\n"
+"hiiren kakkospainiketta kokoelman päällimmäisen tietueen päällä. </p>\n"
 
 #: tips.cpp:16
 msgid ""
 "<p>...that you can change which fields are shown in the list view by\n"
 "right-clicking on the column header.\n"
 msgstr ""
-"<p>...että voit muuttaa listassä näkyviä kenttiä napsauttamalla \n"
+"<p>...että voit muuttaa listassa näkyviä kenttiä napsauttamalla \n"
 "hiiren kakkospainiketta sarakkeen otsikon päällä.\n"
 
 #: tips.cpp:21
@@ -2514,10 +2493,10 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
-"<p>...että voi lisätä tai muokata kokoelman kenttiä kenttäeditorissa. Alla "
+"<p>...että voit lisätä tai muokata kokoelman kenttiä kenttäeditorissa. Alla "
 "olevilla\n"
-"Nuolinappuloilla voidaan vaihtaa kentän paikkaa listassa. Tämä vaikuttaa "
-"tietue-editorin kentän paikkaan.</p>\n"
+"Nuolinappuloilla voit vaihtaa kentän paikkaa listassa. Tämä vaikuttaa "
+"kentän paikkaan tietue-editorissa.</p>\n"
 
 #: tips.cpp:28
 msgid ""
@@ -2529,13 +2508,13 @@ msgid ""
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
-"<p>...että jos halut soudattaa näkymää valintaruudun mukaan,\n"
-" tulee käyttää arvoa\"tosi\". Jos esimerkiksi haluat suodattaa näkyviin \n"
-"vain kaikki lukemattomat scifi-kirjat, valitse <em>Etsi kaikilla "
-"seuraavilla\n"
-"</em>-nappula, aseta ensimmäinen sääntö, \"Lajityyppi\",\n"
-"\"sisältää\" \"Scifi\" (ei lainausmerkkejä) ja toiseen sääntöön\n"
-"\"Luettu\" \" ei sisällä\" \"Kyllä\" (ei lainausmerkkejä).</p>\n"
+"<p>...että jos halut suodattaa näkymää valintaruudun mukaan,\n"
+" tulee käyttää arvoa \"tosi\". Jos esimerkiksi haluat suodattaa näkyviin \n"
+"vain kaikki lukemattomat scifi-kirjat, valitse <em>\"Sopii kaikkiin "
+"seuraaviin\"\n"
+"</em>-valinta, aseta ensimmäiseksi säännöksi: \"Lajityyppi\",\n"
+"\"sisältää\" \"Scifi\" (ei lainausmerkkejä) ja toiseksi säännöksi:\n"
+"\"Luettu\" \"ei sisällä\" \"Kyllä\" (ei lainausmerkkejä).</p>\n"
 
 #: tips.cpp:38
 msgid ""
@@ -2584,7 +2563,7 @@ msgstr ""
 "<p>...että jos useampaa kuin yhtä kenttää muokataan nimenä, ryhmä\n"
 "nimeltä \"Ihmiset\" lisätään kokoelmaan. \n"
 "Näin esim. tekijöitä ja kirjoittajia voidaan järjestellä tai tulostaa "
-"yhdessä</p>\n"
+"yhdessä.</p>\n"
 
 #: tips.cpp:65
 msgid ""
@@ -2594,7 +2573,7 @@ msgid ""
 "within the stylesheet governs things like the font, the margins, etc.</p>\n"
 msgstr ""
 "<p>...että voit vaikuttaa tulosteen ulkoasuun muokkaamalla <tt>bookcase-"
-"printing.xsl</tt>. -tiedostoa. Tiedoston avulla luodaan HTML- \n"
+"printing.xsl</tt> -tiedostoa. Tiedoston avulla luodaan HTML- \n"
 "ja CSS-tiedostoja. Muokkaamalla voit vaikuttaa esim. tulosteen kirjasimiin \n"
 "ja marginaaleihin.</p>\n"
 
@@ -2604,7 +2583,7 @@ msgid ""
 "outputs a valid Bookcase XML file.</p>\n"
 msgstr ""
 "<p>...että voit tuoda ja viedä tietoja käyttäen mitä tahansa yleistä XSL-"
-"tyylitiedostoa joka tuottaa kelvollisenXML-tiedoston </p>\n"
+"tyylitiedostoa joka tuottaa kelvollisen XML-tiedoston </p>\n"
 
 #~ msgid "New Entry"
 #~ msgstr "Uusi tietue"
@@ -2772,3 +2751,4 @@ msgstr ""
 #~ msgid "The fields are grouped by common categories for editing."
 #~ msgstr ""
 #~ "KentÃ€t ryhmitellÃ€Ã€n yleisten kategorioiden mukaan muokkausta varten."
+

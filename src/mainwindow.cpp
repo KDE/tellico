@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainW
 
   // do main window stuff like setting the icon
   initWindow();
-  
+
   // initialize the status bar and progress bar
   initStatusBar();
 
@@ -317,7 +317,7 @@ void MainWindow::initActions() {
   importMapper->setMapping(action, ImportDialog::XSLT);
 
 /**************** Export Menu ***************************/
-  
+
   QSignalMapper* exportMapper = new QSignalMapper(this);
   connect(exportMapper, SIGNAL(mapped(int)),
           this, SLOT(slotFileExport(int)));
@@ -389,7 +389,13 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Paste the clipboard contents"));
   action = KStdAction::selectAll(this, SLOT(slotEditSelectAll()), actionCollection());
   action->setToolTip(i18n("Select all the entries in the collection"));
+  // KDE 3.1.x didn't include the action in the standard ui.rc
+  // in order not to have duplicate menu items in KDE 3.2.x, need a different name
+#if KDE_IS_VERSION(3,1,90)
   action = KStdAction::deselect(this, SLOT(slotEditDeselect()), actionCollection());
+#else
+  action = KStdAction::deselect(this, SLOT(slotEditDeselect()), actionCollection(), "my_edit_deselect");
+#endif
   action->setToolTip(i18n("Deselect all the entries in the collection"));
 
   m_editFind = KStdAction::find(this, SLOT(slotEditFind()), actionCollection());
@@ -398,7 +404,13 @@ void MainWindow::initActions() {
   m_editFindNext->setToolTip(i18n("Find next match in the collection"));
   // gets enabled once one search is done
   m_editFindNext->setEnabled(false);
+  // KDE 3.1.x didn't include the action in the standard ui.rc
+  // in order not to have duplicate menu items in KDE 3.2.x, need a different name
+#if KDE_IS_VERSION(3,1,90)
   m_editFindPrev = KStdAction::findPrev(this, SLOT(slotEditFindPrev()), actionCollection());
+#else
+  m_editFindPrev = KStdAction::findPrev(this, SLOT(slotEditFindPrev()), actionCollection(), "my_edit_find_last");
+#endif
   m_editFindPrev->setToolTip(i18n("Find previous match in the collection"));
   // gets enabled once one search is done
   m_editFindPrev->setEnabled(false);
@@ -478,9 +490,9 @@ void MainWindow::initActions() {
                        this, SLOT(slotShowFilterDialog()),
                        actionCollection(), "filter_dialog");
   action->setToolTip(i18n("Filter the collection"));
-                                         
+
   KStdAction::preferences(this, SLOT(slotShowConfigDialog()), actionCollection());
-                                          
+
   /*************************************************
    * Help menu
    *************************************************/
@@ -627,9 +639,9 @@ void MainWindow::saveOptions() {
     kdDebug() << "MainWindow::saveOptions() - inconsistent KConfig pointers!" << endl;
     m_config = kapp->config();
   }
-  
+
   saveMainWindowSettings(m_config, QString::fromLatin1("Main Window Options"));
-  
+
   m_config->setGroup("General Options");
 #if !KDE_IS_VERSION(3,1,90)
   m_config->writeEntry("Show Statusbar", m_toggleStatusBar->isChecked());
@@ -671,6 +683,9 @@ void MainWindow::readCollectionOptions(Data::Collection* coll_) {
   m_groupView->setGroupField(coll_, entryGroup);
 
   QString entryXSLTFile = m_config->readEntry("Entry Template", QString::fromLatin1("Default"));
+  if(entryXSLTFile.isEmpty()) {
+    entryXSLTFile = QString::fromLatin1("Default"); // should never happen, but just in case
+  }
   m_entryView->setXSLTFile(entryXSLTFile + QString::fromLatin1(".xsl"));
 
   // make sure the right combo element is selected
@@ -874,7 +889,7 @@ void MainWindow::slotFileOpen() {
 
 void MainWindow::slotFileOpen(const KURL& url_) {
   slotStatusMsg(i18n("Opening file..."));
-  
+
   if(m_editDialog->queryModified() && m_doc->saveModified()) {
     bool success = openURL(url_);
     if(success) {
@@ -941,15 +956,13 @@ void MainWindow::slotFileSaveAs() {
   if(!m_editDialog->queryModified()) {
     return;
   }
-  
+
   slotStatusMsg(i18n("Saving file with a new filename..."));
 
   QString filter = i18n("*.bc|Bookcase files (*.bc)");
   filter += QString::fromLatin1("\n");
-  filter += i18n("*.xml|XML files (*.xml)");
-  filter += QString::fromLatin1("\n");
   filter += i18n("*|All files");
-  
+
   // keyword 'open'
   KFileDialog dlg(QString::fromLatin1(":open"), filter, this, "filedialog", true);
   dlg.setCaption(i18n("Save As"));
@@ -958,9 +971,9 @@ void MainWindow::slotFileSaveAs() {
   int result = dlg.exec();
   if(result == QDialog::Rejected) {
     slotStatusMsg(i18n(ready));
-    return;   
+    return;
   }
-  
+
   KURL url = dlg.selectedURL();
 
   if(url.fileName().contains('.') == 0) {
@@ -969,7 +982,7 @@ void MainWindow::slotFileSaveAs() {
       url.setFileName(url.fileName() + cf.mid(1));
     }
   }
-  
+
   if(!url.isEmpty() && url.isValid()) {
     KRecentDocument::add(url);
     m_doc->saveDocument(url);
@@ -1000,7 +1013,7 @@ void MainWindow::slotFilePrint() {
       slotStatusMsg(i18n(ready));
       kapp->restoreOverrideCursor();
       return;
-    } 
+    }
   }
 
   Export::HTMLExporter exporter(m_doc->collection(), m_detailedView->visibleEntries());
@@ -1010,7 +1023,7 @@ void MainWindow::slotFilePrint() {
   exporter.setGroupBy(groupBy());
   exporter.setSortTitles(sortTitles());
   exporter.setColumns(visibleColumns());
-  
+
   slotStatusMsg(i18n("Processing document..."));
   bool printFormatted = m_config->readBoolEntry("Print Formatted", true);
   QString html = exporter.text(printFormatted, true);
@@ -1091,7 +1104,7 @@ void MainWindow::slotEditFind() {
   } else {
     m_findDlg->updateFieldList();
   }
-  
+
   m_findDlg->show();
 }
 
@@ -1099,7 +1112,7 @@ void MainWindow::slotEditFindNext() {
   if(m_doc->isEmpty()) {
     return;
   }
-  
+
   if(m_findDlg) {
     m_findDlg->slotFindNext();
   }
@@ -1109,7 +1122,7 @@ void MainWindow::slotEditFindPrev() {
   if(m_doc->isEmpty()) {
     return;
   }
-  
+
   if(m_findDlg) {
     m_findDlg->slotFindPrev();
   }
@@ -1244,7 +1257,7 @@ void MainWindow::slotEntryCount(int count_) {
     text += i18n("(%1 selected)").arg(count_);
     text += QString::fromLatin1(" ");
   }
-    
+
   statusBar()->changeItem(text, ID_STATUS_COUNT);
 }
 
@@ -1321,7 +1334,11 @@ void MainWindow::slotHandleConfigChange() {
   m_groupView->showCount(m_config->readBoolEntry("Show Group Count"));
 
   m_config->setGroup(QString::fromLatin1("Options - %1").arg(m_doc->collection()->entryName()));
-  m_entryView->setXSLTFile(m_config->readEntry("Entry Template") + QString::fromLatin1(".xsl"));
+  QString entryXSLTFile = m_config->readEntry("Entry Template", QString::fromLatin1("Default"));
+  if(entryXSLTFile.isEmpty()) {
+    entryXSLTFile = QString::fromLatin1("Default"); // should never happen, but just in case
+  }
+  m_entryView->setXSLTFile(entryXSLTFile + QString::fromLatin1(".xsl"));
 }
 
 void MainWindow::slotUpdateCollectionToolBar(Data::Collection* coll_/*=0*/) {
@@ -1334,7 +1351,7 @@ void MainWindow::slotUpdateCollectionToolBar(Data::Collection* coll_/*=0*/) {
   if(!coll_) {
     return;
   }
-  
+
   QString current = m_groupView->groupBy();
   if(current.isEmpty() || !coll_->entryGroups().contains(current)) {
     current = coll_->defaultGroupField();
@@ -1367,6 +1384,21 @@ void MainWindow::slotUpdateCollectionToolBar(Data::Collection* coll_/*=0*/) {
 //  }
   m_entryGrouping->setCurrentItem(index);
   // Bug in Qt such that combobox's width is never adjusted, nothing I can do about it.
+
+  // this isn't really proper, but works so the combo box width gets adjusted
+  int len = m_entryGrouping->containerCount();
+  for(int i = 0; i < len; ++i) {
+    KToolBar* tb = dynamic_cast<KToolBar*>(m_entryGrouping->container(i));
+    if(tb) {
+      KComboBox* cb = tb->getCombo(m_entryGrouping->itemId(i));
+      if(cb) {
+        // qt caches the combobox size and never recalculates the sizeHint()
+        // the source code recommends calling setFont to invalidate the sizeHint
+        cb->setFont(cb->font());
+        cb->updateGeometry();
+      }
+    }
+  }
 }
 
 void MainWindow::slotChangeGrouping() {
@@ -1413,21 +1445,21 @@ void MainWindow::doPrint(const QString& html_) {
 
     QPainter *p = new QPainter;
     p->begin(printer);
-    
+
     // mostly taken from KHTMLView::print()
     QString headerLeft = KGlobal::locale()->formatDate(QDate::currentDate(), false);
     QString headerRight = m_doc->URL().prettyURL();
     QString footerMid;
-    
+
     QFont headerFont(QString::fromLatin1("helvetica"), 8);
     p->setFont(headerFont);
     const int lspace = p->fontMetrics().lineSpacing();
     const int headerHeight = (lspace * 3) / 2;
-    
+
     QPaintDeviceMetrics metrics(printer);
     const int pageHeight = metrics.height() - 2*headerHeight;
     const int pageWidth = metrics.width();
-            
+
 //    kdDebug() << "MainWindow::doPrint() - pageHeight = " << pageHeight << ""
 //                 "; contentsHeight = " << w->view()->contentsHeight() << endl;
 
@@ -1636,7 +1668,7 @@ void MainWindow::slotFileImport(int format_) {
 
 void MainWindow::slotFileExport(int format_) {
   slotStatusMsg(i18n("Exporting data..."));
-  
+
   ExportDialog dlg(static_cast<ExportDialog::ExportFormat>(format_),
                    m_doc->collection(), this, "exportdialog");
 

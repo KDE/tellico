@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - default template forviewing entry data
 
-   $Id: Default.xsl 431 2004-02-05 02:20:45Z robby $
+   $Id: Default.xsl 491 2004-02-21 06:12:49Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -76,7 +76,7 @@
    h1.title {
         color: <xsl:value-of select="$color2"/>;
         background-color: <xsl:value-of select="$color1"/>;
-        font-size: 1.6em;
+        font-size: 1.8em;
         padding: 0px;
         padding-top: 2px;
         padding-bottom: 2px;
@@ -125,68 +125,82 @@
    <xsl:value-of select="bc:title"/>
   </h1>
  </xsl:if>
- 
- <!-- now, show all the images in the entry, type 10 -->
- <xsl:variable name="images" select="../bc:fields/bc:field[@type=10]"/>
- <xsl:if test="count($images) &gt; 0">
-  <table align="right">
-   <tr>
-    <td>
-     <!-- now, show all the images in the entry, type 10 -->
-     <xsl:for-each select="$images">
-      
-      <!-- images will never be multiple, so no need to check for that -->
-      <!-- find the value of the image field in the entry -->
-      <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
-      <!-- check if the value is not empty -->
-      <xsl:if test="$image">
-       <img>
-        <xsl:attribute name="src">
-         <xsl:value-of select="concat($tmpdir, $image)"/>
-        </xsl:attribute>
-        <!-- limit to maximum widht of 200 of height of 300 -->
-        <xsl:call-template name="image-size">
-         <xsl:with-param name="limit-width" select="200"/>
-         <xsl:with-param name="limit-height" select="300"/>
-         <xsl:with-param name="image" select="key('imagesById', $image)"/>
-        </xsl:call-template>
-       </img>
-      </xsl:if>
-      <xsl:if test="position() mod 2 = 0">
-       <br/>
+
+ <!-- put the general category and all images in top table, one cell for each -->
+ <xsl:variable name="cat1" select="key('fieldsByName','title')/@category"/>
+ <table cellspacing="0" cellpadding="0" width="100%">
+  <tr>
+   <td valign="top" width="100%">
+    <!-- show the general group, or more accurately, the title's group -->
+    <table cellspacing="1" cellpadding="0" class="category" width="100%">
+     <tr class="category">
+      <td colspan="2">
+       <xsl:value-of select="$cat1"/>
+      </td>
+     </tr>
+     <xsl:for-each select="key('fieldsByCat', $cat1)">
+      <xsl:if test="@name!='title'">
+       <tr>
+        <th>
+         <xsl:value-of select="@title"/>
+        </th>
+        <td width="75%">
+         <xsl:call-template name="output-field">
+          <xsl:with-param name="entry" select="$entry"/>
+          <xsl:with-param name="field" select="@name"/>
+         </xsl:call-template>
+        </td>
+       </tr>
       </xsl:if>
      </xsl:for-each>
-    </td>
-   </tr>
-  </table>
- </xsl:if>
- 
- <!-- show the general group, or more accurately, the title's group -->
- <xsl:variable name="cat1" select="key('fieldsByName','title')/@category"/>
- <table cellspacing="1" cellpadding="0" width="100%" class="category">
-  <tr class="category">
-   <td colspan="2">
-    <xsl:value-of select="$cat1"/>
+    </table>
    </td>
-  </tr>
-  <xsl:for-each select="key('fieldsByCat', $cat1)">
-   <xsl:if test="@name!='title'">
-    <tr>
-     <th>
-      <xsl:value-of select="@title"/>
-     </th>
-     <td width="75%">
-      <xsl:call-template name="output-field">
-       <xsl:with-param name="entry" select="$entry"/>
-       <xsl:with-param name="field" select="@name"/>
-      </xsl:call-template>
-     </td>
-    </tr>
+   <!-- now, show all the images in the entry, type 10 -->
+   <xsl:variable name="images" select="../bc:fields/bc:field[@type=10]"/>
+   <xsl:if test="count($images) &gt; 0">
+    <!-- now, show all the images in the entry, type 10 -->
+    <xsl:for-each select="$images">
+     
+     <!-- images will never be multiple, so no need to check for that -->
+     <!-- find the value of the image field in the entry -->
+     <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
+     <!-- check if the value is not empty -->
+     <xsl:if test="$image">
+      <td valign="top">
+       <table cellspacing="1" cellpadding="0" class="category">
+        <tr class="category">
+         <td>
+          <xsl:value-of select="current()/@title"/>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          <a>
+           <xsl:attribute name="href">
+            <xsl:value-of select="concat('file://',$tmpdir, $image)"/>
+           </xsl:attribute>
+           <img>
+            <xsl:attribute name="src">
+             <xsl:value-of select="concat($tmpdir, $image)"/>
+            </xsl:attribute>
+            <!-- limit to maximum width of 150 of height of 200 -->
+            <xsl:call-template name="image-size">
+             <xsl:with-param name="limit-width" select="150"/>
+             <xsl:with-param name="limit-height" select="200"/>
+             <xsl:with-param name="image" select="key('imagesById', $image)"/>
+            </xsl:call-template>
+           </img>
+          </a>
+         </td>
+        </tr>
+       </table>
+      </td>
+     </xsl:if>
+    </xsl:for-each>
    </xsl:if>
-  </xsl:for-each>
+  </tr>
  </table>
- <br clear="all"/>
-
+ 
  <!-- write categories other than general and images -->
  <xsl:for-each select="$categories[. != $cat1 and
                        key('fieldsByCat',.)[1]/@type!=10]">
@@ -243,7 +257,7 @@
        <th>
         <xsl:value-of select="@title"/>
        </th>
-       <td with="75%">
+       <td width="50%">
         <xsl:call-template name="output-field">
          <xsl:with-param name="entry" select="$entry"/>
          <xsl:with-param name="field" select="@name"/>

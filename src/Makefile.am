@@ -26,7 +26,7 @@ document.h                  filterdialog.h       mainwindow.cpp \
 entry.cpp                   filter.h             mainwindow.h \
 entryeditdialog.cpp         finddialog.cpp       stringmapdialog.cpp \
 entryeditdialog.h           finddialog.h         stringmapdialog.h \
-entry.h                     groupview.cpp        strings.h \
+entry.h                     groupview.cpp        error_strings.h \
 entryitem.cpp               groupview.h          tabcontrol.cpp \
 entryitem.h                 image.cpp            tabcontrol.h \
 entryview.cpp               imagefactory.cpp     utils.h
@@ -74,4 +74,4 @@ messages: rc.cpp
 
 #include ../admin/Doxyfile.am
 
-noinst_HEADERS = image.h imagewidget.h fieldcompletion.h imagefactory.h strings.h stringmapdialog.h entryeditdialog.h
+noinst_HEADERS = image.h imagewidget.h fieldcompletion.h imagefactory.h stringmapdialog.h entryeditdialog.h

@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - Entry template for videos
 
-   $Id: Video.xsl 431 2004-02-05 02:20:45Z robby $
+   $Id: Video.xsl 491 2004-02-21 06:12:49Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -196,42 +196,50 @@
   </h2>
  </div>
  
- <!-- now, show all the images in the entry, field type 10 -->
- <xsl:variable name="images" select="../bc:fields/bc:field[@type=10]"/>
- <xsl:if test="count($images) &gt; 0">
-  <table align="left" cellpadding="0" cellspacing="0">
-   <!-- now, show all the images in the entry, type 10 -->
-   <xsl:for-each select="$images">
-    <tr>
-     <td>
-      
-      <!-- images will never be multiple, so no need to check for that -->
-      <!-- find the value of the image field in the entry -->
-      <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
-      <!-- check if the value is not empty -->
-      <xsl:if test="$image">
-       <img>
-        <xsl:attribute name="src">
-         <xsl:value-of select="concat($tmpdir, $image)"/>
-        </xsl:attribute>
-        <!-- limit to maximum widht of 200 of height of 300 -->
-        <xsl:call-template name="image-size">
-         <xsl:with-param name="limit-width" select="200"/>
-         <xsl:with-param name="limit-height" select="300"/>
-         <xsl:with-param name="image" select="key('imagesById', $image)"/>
-        </xsl:call-template>
-       </img>
-      </xsl:if>
-     </td>
-    </tr>
-   </xsl:for-each>
-  </table>
- </xsl:if>
-
- <!-- the general group and the cast are each in a table cell -->
- <table cellspacing="1" cellpadding="0" width="100%" class="category">
+ <!-- the images, general group and the cast are each in a table cell -->
+ <table cellspacing="1" cellpadding="0" class="category" width="100%">
   <tr>
    <td valign="top">
+
+    <!-- now, show all the images in the entry, field type 10 -->
+    <xsl:variable name="images" select="../bc:fields/bc:field[@type=10]"/>
+    <xsl:if test="count($images) &gt; 0">
+     <table cellpadding="0" cellspacing="0">
+      <!-- now, show all the images in the entry, type 10 -->
+      <xsl:for-each select="$images">
+       <tr>
+        <td>
+         
+         <!-- images will never be multiple, so no need to check for that -->
+         <!-- find the value of the image field in the entry -->
+         <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
+         <!-- check if the value is not empty -->
+         <xsl:if test="$image">
+          <a>
+           <xsl:attribute name="href">
+            <xsl:value-of select="concat('file://',$tmpdir, $image)"/>
+           </xsl:attribute>
+           <img>
+            <xsl:attribute name="src">
+             <xsl:value-of select="concat($tmpdir, $image)"/>
+            </xsl:attribute>
+            <!-- limit to maximum widht of 200 of height of 300 -->
+            <xsl:call-template name="image-size">
+             <xsl:with-param name="limit-width" select="200"/>
+             <xsl:with-param name="limit-height" select="300"/>
+             <xsl:with-param name="image" select="key('imagesById', $image)"/>
+            </xsl:call-template>
+           </img>
+          </a>
+         </xsl:if>
+        </td>
+       </tr>
+      </xsl:for-each>
+     </table>
+    </xsl:if>
+   </td>
+
+   <td valign="top" width="50%">
     <!-- show the general group, or more accurately, the title's group -->
     <table cellspacing="1" cellpadding="0" width="100%">
      <tr class="category">
@@ -247,7 +255,7 @@
         <th>
          <xsl:value-of select="@title"/>
         </th>
-        <td width="75%">
+        <td>
          <xsl:call-template name="output-field">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>
@@ -259,7 +267,7 @@
     </table>
     
    </td>
-   <td valign="top">
+   <td valign="top" width="50%">
     <!-- now for the cast -->
     <xsl:if test="bc:casts">
      <table cellspacing="1" cellpadding="0" width="100%">
@@ -270,13 +278,13 @@
       </tr>
       <tr>
        <td>
-        <table width="100%" cellspacing="0" cellpadding="0">
+        <table cellspacing="0" cellpadding="0">
          <xsl:for-each select="$entry/bc:casts/bc:cast">
           <tr>
-           <td width="50%">
+           <td>
             <xsl:value-of select="bc:column[1]"/>
            </td>
-           <td width="50%">
+           <td>
             <em>
              <xsl:value-of select="bc:column[2]"/>
             </em>
@@ -354,7 +362,7 @@
         <th>
          <xsl:value-of select="@title"/>
         </th>
-        <td with="75%">
+        <td width="50%">
          <xsl:call-template name="output-field">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>

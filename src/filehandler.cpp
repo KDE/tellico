@@ -16,7 +16,7 @@
 #include "document.h"
 #include "image.h"
 #include "utils.h" // needed for version macros
-#include "strings.h" // needed for error strings
+#include "error_strings.h" // needed for error strings
 
 #include <kurl.h>
 #include <klocale.h>

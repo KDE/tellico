@@ -33,12 +33,13 @@ namespace Bookcase {
  * The FileHandler class contains some utility functions for reading files.
  *
  * @author Robby Stephenson
- * @version $Id: filehandler.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: filehandler.h 468 2004-02-18 02:59:14Z robby $
  */
 class FileHandler {
 
 friend class MainWindow;
 friend const Data::Image& addImage(const KURL& url);
+friend class FileRef;
 
 public:
   /**

@@ -18,7 +18,7 @@
 
 /*
  * @author Robby Stephenson
- * @version $Id: strings.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: error_strings.h 468 2004-02-18 02:59:14Z robby $
  */
 
 static const char* loadError = I18N_NOOP("Bookcase is unable to load the file - %1.");

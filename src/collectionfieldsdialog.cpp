@@ -528,15 +528,15 @@ void CollectionFieldsDialog::updateField() {
     field->setAllowed(QStringList::split(rx, m_allowEdit->text()));
   }
 
-  if(!field->isSingleCategory()) {
+  if(field->isSingleCategory()) {
+    field->setCategory(title);
+  } else {
     QString category = m_catCombo->currentText();
     field->setCategory(category);
     m_catCombo->setCurrentItem(category, true); // if it doesn't exist, it's added
   }
 
   field->setDescription(m_descEdit->text());
-
-//  field->setProperty(QString::fromLatin1("bibtex"), m_bibtexEdit->text());
 
   if(m_formatTitle->isChecked()) {
     field->setFormatFlag(Data::Field::FormatTitle);
