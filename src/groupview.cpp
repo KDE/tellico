@@ -16,6 +16,7 @@
 #include "collection.h"
 #include "field.h"
 #include "utils.h"
+#include "filter.h"
 
 #include <kpopupmenu.h>
 #include <klocale.h>
@@ -37,6 +38,8 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
     : KListView(parent_, name_), m_showCount(false) {
   // the app name isn't translated
   addColumn(QString::fromLatin1("Bookcase"));
+  addColumn(QString::null, 0); // hide this column, use for sorting
+  setResizeMode(QListView::NoColumn);
   // hide the header since there's only one column
   header()->hide();
   setRootIsDecorated(true);
@@ -45,25 +48,35 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
   setAlternateBackground(QColor());
   setSelectionMode(QListView::Extended);
 
-  QPixmap expand, collapse;
+  QPixmap expand, collapse, filter;
   expand = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("2downarrow"), KIcon::Small);
   collapse = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("2uparrow"), KIcon::Small);
+  filter = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("filter"), KIcon::Small);
 
   MainWindow* bookcase = static_cast<MainWindow*>(QObjectAncestor(parent_, "Bookcase::MainWindow"));
   m_collMenu = new KPopupMenu(this);
-  bookcase->action("edit_rename_collection")->plug(m_collMenu);
-  bookcase->action("edit_fields")->plug(m_collMenu);
-  bookcase->action("edit_convert_bibtex")->plug(m_collMenu);
-  bookcase->action("edit_string_macros")->plug(m_collMenu);
+  bookcase->action("coll_rename_collection")->plug(m_collMenu);
+  bookcase->action("coll_fields")->plug(m_collMenu);
+  m_collMenu->insertSeparator();
+  m_collMenu->insertItem(i18n("Sort by Group, Ascending"), this, SLOT(slotSortByGroupAscending()));
+  m_collMenu->insertItem(i18n("Sort by Group, Descending"), this, SLOT(slotSortByGroupDescending()));
+  m_collMenu->insertItem(i18n("Sort by Count, Ascending"), this, SLOT(slotSortByCountAscending()));
+  m_collMenu->insertItem(i18n("Sort by Count, Descending"), this, SLOT(slotSortByCountDescending()));
 
   m_groupMenu = new KPopupMenu(this);
   m_groupMenu->insertItem(expand, i18n("Expand All Groups"), this, SLOT(slotExpandAll()));
   m_groupMenu->insertItem(collapse, i18n("Collapse All Groups"), this, SLOT(slotCollapseAll()));
+  m_groupMenu->insertItem(filter, i18n("Filter by Group"), this, SLOT(slotFilterGroup()));
+  m_groupMenu->insertSeparator();
+  m_groupMenu->insertItem(i18n("Sort by Group, Ascending"), this, SLOT(slotSortByGroupAscending()));
+  m_groupMenu->insertItem(i18n("Sort by Group, Descending"), this, SLOT(slotSortByGroupDescending()));
+  m_groupMenu->insertItem(i18n("Sort by Count, Ascending"), this, SLOT(slotSortByCountAscending()));
+  m_groupMenu->insertItem(i18n("Sort by Count, Descending"), this, SLOT(slotSortByCountDescending()));
 
   m_entryMenu = new KPopupMenu(this);
-  bookcase->action("edit_edit_entry")->plug(m_entryMenu);
-  bookcase->action("edit_copy_entry")->plug(m_entryMenu);
-  bookcase->action("edit_delete_entry")->plug(m_entryMenu);
+  bookcase->action("coll_edit_entry")->plug(m_entryMenu);
+  bookcase->action("coll_copy_entry")->plug(m_entryMenu);
+  bookcase->action("coll_delete_entry")->plug(m_entryMenu);
 
   connect(this, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&, int)),
           SLOT(slotRMB(QListViewItem*, const QPoint&, int)));
@@ -82,7 +95,7 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
   connect(this, SIGNAL(collapsed(QListViewItem*)),
           SLOT(slotCollapsed(QListViewItem*)));
 
-  // TODO: maybe allow this to be customized
+  // FIXME: maybe allow this to be customized
   m_collOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder_open"), KIcon::Small);
   m_collClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder"), KIcon::Small);
   m_groupOpenPixmap = m_collOpenPixmap;
@@ -149,10 +162,6 @@ Bookcase::ParentItem* GroupView::locateItem(Data::Collection* coll_) {
     root->setPixmap(0, m_collClosedPixmap);
   }
   return root;
-}
-
-const QString& GroupView::groupBy() const {
-  return m_groupBy;
 }
 
 void GroupView::slotReset() {
@@ -489,7 +498,7 @@ void GroupView::addCollection(Data::Collection* coll_) {
 
   // if the collection doesn't have the grouped field, and it's not the pseudo-group,
   // change it to default
-  if(coll_->fieldByName(m_groupBy) == 0 && m_groupBy != QString::fromLatin1("_people")) {
+  if(coll_->fieldByName(m_groupBy) == 0 && m_groupBy != Data::Collection::s_peopleGroupName) {
     m_groupBy = coll_->defaultGroupField();
   }
 
@@ -514,35 +523,22 @@ void GroupView::setGroupField(Data::Collection* coll_, const QString& groupField
 
   // groupField_ could be"_people" for the pseudo-group;
   Data::Field* field = coll_->fieldByName(groupField_);
-  if(!field && groupField_ != QString::fromLatin1("_people")) {
+  if(!field && groupField_ != Data::Collection::s_peopleGroupName) {
     return;
   }
 
-  // as a hack, when a new collection is added, this gets called
-  // if the collection item is empty, go ahead and populate it
-  // even if the group field has not changed
-//  ParentItem* collItem = locateItem(coll_);
-//  if(m_groupBy != groupField_ || collItem->childCount() == 0) {
   if(m_groupBy != groupField_) {
     m_groupBy = groupField_;
     if((field && field->formatFlag() == Data::Field::FormatName)
-       || groupField_ == QString::fromLatin1("_people")) {
-      m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person-open"),
-                                                          KIcon::User, KIcon::SizeSmall);
-      m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person"),
-                                                            KIcon::User, KIcon::SizeSmall);
+       || groupField_ == Data::Collection::s_peopleGroupName) {
+      m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person-open"), KIcon::User, KIcon::SizeSmall);
+      m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person"), KIcon::User, KIcon::SizeSmall);
     } else {
-      m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder_open"),
-                                                          KIcon::Small);
-      m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder"),
-                                                            KIcon::Small);
+      m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder_open"), KIcon::Small);
+      m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder"), KIcon::Small);
     }
     populateCollection(coll_);
   }
-}
-
-bool GroupView::showCount() const {
-  return m_showCount;
 }
 
 void GroupView::showCount(bool showCount_) {
@@ -559,13 +555,16 @@ Bookcase::ParentItem* GroupView::populateCollection(Data::Collection* coll_) {
     m_groupBy = coll_->defaultGroupField();
   }
 
+  setUpdatesEnabled(false);
   clear();
   m_groupDict.clear();
-  //if there is not a root item for the collection, it is created
+  // if there is not a root item for the collection, it is created
   ParentItem* collItem = locateItem(coll_);
 
   // if there's no group field, just return
   if(m_groupBy.isEmpty()) {
+    setUpdatesEnabled(true);
+    blockSignals(false);
     return collItem;
   }
 
@@ -581,12 +580,75 @@ Bookcase::ParentItem* GroupView::populateCollection(Data::Collection* coll_) {
   for(QDictIterator<Data::EntryGroup> it(*dict); it.current(); ++it, ++j) {
     ParentItem* par = insertItem(collItem, it.current());
 
-    for(Data::EntryListIterator unitIt(*it.current()); unitIt.current(); ++unitIt) {
-      QString title = unitIt.current()->title();
-      EntryItem* item = new EntryItem(par, title, unitIt.current());
+    for(Data::EntryListIterator entryIt(*it.current()); entryIt.current(); ++entryIt) {
+      QString title = entryIt.current()->title();
+      EntryItem* item = new EntryItem(par, title, entryIt.current());
       item->setPixmap(0, icon);
     }
   }
+
+  setUpdatesEnabled(true);
+  triggerUpdate();
+
   collItem->setOpen(true);
   return collItem;
+}
+
+void GroupView::slotSortByGroupAscending() {
+  setSorting(0, true);
+}
+
+void GroupView::slotSortByGroupDescending() {
+  setSorting(0, false);
+}
+
+void GroupView::slotSortByCountAscending() {
+  setSorting(1, true);
+}
+
+void GroupView::slotSortByCountDescending() {
+  setSorting(1, false);
+}
+
+void GroupView::slotFilterGroup() {
+  Filter* filter = new Filter(Filter::MatchAny);
+
+  // keep track if we need to repaint
+  bool update = false;
+#if QT_VERSION >= 0x030200
+  QListViewItemIterator it(this, QListViewItemIterator::Selected);
+#else
+  QListViewItemIterator it(this);
+#endif
+  for( ; it.current(); ++it) {
+#if QT_VERSION < 0x030200
+    if(!it.current()->isSelected()) {
+      continue;
+    }
+#endif
+    if(it.current()->depth() == 1) {
+      Data::Entry* entry = static_cast<EntryItem*>(it.current()->firstChild())->entry();
+      // need to check for people group
+      if(m_groupBy == Data::Collection::s_peopleGroupName) {
+        for(Data::FieldListIterator fIt(entry->collection()->fieldList()); fIt.current(); ++fIt) {
+          if(fIt.current()->formatFlag() == Data::Field::FormatName) {
+            filter->append(new FilterRule(fIt.current()->name(), it.current()->text(0), FilterRule::FuncContains));
+          }
+        }
+      } else {
+        filter->append(new FilterRule(m_groupBy, it.current()->text(0), FilterRule::FuncContains));
+      }
+    } else {
+      blockSignals(true);
+      it.current()->setSelected(false);
+      blockSignals(false);
+      update = true;
+    }
+  }
+
+  if(update) {
+    triggerUpdate();
+    slotSelectionChanged();
+  }
+  emit signalUpdateFilter(filter);
 }

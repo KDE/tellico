@@ -88,7 +88,7 @@ Bookcase::Data::FieldList VideoCollection::defaultFields() {
 
   field = new Field(QString::fromLatin1("nationality"), i18n("Nationality"));
   field->setCategory(i18n(video_general));
-  field->setFlags(Field::AllowCompletion);
+  field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatPlain);
   list.append(field);
 

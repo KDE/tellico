@@ -11,11 +11,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCEXPORTDIALOG_H
-#define BCEXPORTDIALOG_H
+#ifndef EXPORTDIALOG_H
+#define EXPORTDIALOG_H
 
 class QCheckBox;
 class QRadioButton;
+
+class KURL;
 
 #include <kdialogbase.h>
 
@@ -30,12 +32,12 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: exportdialog.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: exportdialog.h 615 2004-04-17 20:32:47Z robby $
  */
 class ExportDialog : public KDialogBase {
 Q_OBJECT
 
-public: 
+public:
   enum ExportFormat {
     XML,
     Bibtex,
@@ -48,12 +50,10 @@ public:
   };
 
   ExportDialog(ExportFormat format, Data::Collection* coll, MainWindow* parent, const char* name);
+  ~ExportDialog();
 
   QString fileFilter();
-  bool isText() const;
-  QString text();
-  QByteArray data();
-  bool encodeUTF8() const;
+  bool exportURL(const KURL& url) const;
 
 private slots:
   void slotSaveOptions();

@@ -18,6 +18,7 @@
 #include <libxslt/xslt.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
+#include <libxslt/extensions.h>
 
 #include <libexslt/exslt.h>
 
@@ -41,14 +42,48 @@ static void closeQString(void* context) {
 
 using Bookcase::XSLTHandler;
 
-XSLTHandler::XSLTHandler(const QString& xsltText_/*=null*/) :
+int XSLTHandler::s_initCount = 0;
+
+XSLTHandler::XSLTHandler(const QCString& xsltFile_) :
     m_stylesheet(0),
     m_docIn(0),
     m_docOut(0),
     m_numParams(0) {
   init();
-  if(!xsltText_.isEmpty()) {
-    setXSLTText(xsltText_);
+  if(!xsltFile_.isNull()) {
+#if LIBXML_VERSION >= 20600
+    xmlDocPtr xsltDoc = xmlReadFile(xsltFile_, NULL, xslt_options);
+#else
+    xmlDocPtr xsltDoc = xmlParseFile(xsltFile_);
+#endif
+    m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
+  }
+}
+
+XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
+    m_stylesheet(0),
+    m_docIn(0),
+    m_docOut(0),
+    m_numParams(0) {
+  init();
+  if(xsltURL_.isValid()) {
+#if LIBXML_VERSION >= 20600
+    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.url().utf8(), NULL, xslt_options);
+#else
+    xmlDocPtr xsltDoc = xmlParseFile(xsltURL_.url().utf8());
+#endif
+    m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
+  }
+}
+
+XSLTHandler::XSLTHandler(const QDomDocument& xsltDoc_, const QCString& xsltFile_) :
+    m_stylesheet(0),
+    m_docIn(0),
+    m_docOut(0),
+    m_numParams(0) {
+  init();
+  if(!xsltDoc_.isNull()) {
+    setXSLTDoc(xsltDoc_, xsltFile_);
   }
 }
 
@@ -65,8 +100,13 @@ XSLTHandler::~XSLTHandler() {
     xmlFreeDoc(m_docOut);
   }
 
-  xsltCleanupGlobals();
-  xmlCleanupParser();
+  --s_initCount;
+  if(s_initCount == 0) {
+    xsltUnregisterExtModule(EXSLT_STRINGS_NAMESPACE);
+    xsltUnregisterExtModule(EXSLT_DYNAMIC_NAMESPACE);
+    xsltCleanupGlobals();
+    xmlCleanupParser();
+  }
 
   for(int i = 0; i < m_numParams; ++i) {
     delete[] m_params[i];
@@ -74,23 +114,54 @@ XSLTHandler::~XSLTHandler() {
 }
 
 void XSLTHandler::init() {
-  xmlSubstituteEntitiesDefault(1);
-  xmlLoadExtDtdDefaultValue = 0;
+  if(s_initCount == 0) {
+    xmlSubstituteEntitiesDefault(1);
+    xmlLoadExtDtdDefaultValue = 0;
 
-  // register the string library
-  exsltStrRegister();
-  // register the dynamic library
-  exsltDynRegister();
+    // register the string library
+    exsltStrRegister();
+    // register the dynamic library
+    exsltDynRegister();
+  }
+  ++s_initCount;
 
   m_params[0] = NULL;
 }
 
-void XSLTHandler::setXSLTText(const QString& text_) {
+void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_) {
+  bool utf8 = true; // XML defaults to utf-8
+
+  // need to find out if utf-8 or not
+  const QDomNodeList childs = dom_.childNodes();
+  for(unsigned j = 0; j < childs.count(); ++j) {
+    if(childs.item(j).isProcessingInstruction()) {
+      QDomProcessingInstruction pi = childs.item(j).toProcessingInstruction();
+      if(pi.data().lower().contains(QString::fromLatin1("encoding"))) {
+        if(!pi.data().lower().contains(QString::fromLatin1("utf-8"))) {
+          utf8 = false;
+        } else {
+          kdDebug() << "XSLTHandler::setXSLTDoc() - PI = " << pi.data() << endl;
+        }
+        break;
+      }
+    }
+  }
+
+  xmlDocPtr xsltDoc;
+  if(utf8) {
 #if LIBXML_VERSION >= 20600
-  xmlDocPtr xsltDoc = xmlReadDoc((xmlChar *)text_.local8Bit().data(), NULL, NULL, xslt_options);
+    xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().utf8().data(), xsltFile_, NULL, xslt_options);
 #else
-  xmlDocPtr xsltDoc = xmlParseDoc((xmlChar *)text_.local8Bit().data());
+    xsltDoc = xmlParseDoc((xmlChar *)dom_.toString().utf8().data());
 #endif
+  } else {
+#if LIBXML_VERSION >= 20600
+    xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().local8Bit().data(), NULL, NULL, xslt_options);
+#else
+    xsltDoc = xmlParseDoc((xmlChar *)dom_.toString().local8Bit().data());
+#endif
+  }
+
   if(m_stylesheet) {
     xsltFreeStylesheet(m_stylesheet);
   }
@@ -126,7 +197,6 @@ QString XSLTHandler::applyStylesheet(const QString& text_, bool encodedUTF8_) {
     return QString::null;
   }
 
-// ARGH, I don't know which to use...
   if(encodedUTF8_) {
 #if LIBXML_VERSION >= 20600
     m_docIn = xmlReadDoc((xmlChar *)text_.utf8().data(), NULL, NULL, xml_options);
@@ -140,12 +210,13 @@ QString XSLTHandler::applyStylesheet(const QString& text_, bool encodedUTF8_) {
     m_docIn = xmlParseDoc((xmlChar *)text_.local8Bit().data());
 #endif
   }
+
   return process();
 }
 
 QString XSLTHandler::process() {
   if(!m_docIn) {
-    kdDebug() << "XSLTHandler::applyStylesheet() - error parsing input string!" << endl;
+    kdDebug() << "XSLTHandler::process() - error parsing input string!" << endl;
     return QString::null;
   }
 
@@ -174,7 +245,8 @@ QString XSLTHandler::process() {
     return result;
   }
 
-  xmlOutputBufferFlush(outp);
+//  xmlOutputBufferFlush(outp);
+  xmlOutputBufferClose(outp);
 
   return result;
 }

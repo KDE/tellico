@@ -18,10 +18,13 @@
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kbuttonbox.h>
+#include <kurldrag.h>
 
 #include <qwmatrix.h>
 #include <qlayout.h>
 #include <qlabel.h>
+#include <qdragobject.h>
+#include <qapp.h> // needed for drag distance
 
 static const uint button_margin = 8;
 static const uint image_margin = 4;
@@ -47,6 +50,9 @@ ImageWidget::ImageWidget(QWidget* parent_, const char* name_) : QWidget(parent_,
 
   l->addWidget(box);
   slotClear();
+
+  // accept image drops
+  setAcceptDrops(true);
 }
 
 void ImageWidget::setImage(const QString& id_) {
@@ -72,14 +78,14 @@ void ImageWidget::setImage(const Data::Image& image_) {
 }
 
 void ImageWidget::slotClear() {
+  // if already null, no need to clear
   if(m_image.isNull()) {
     return;
   }
 
   m_image = Data::Image();
-  m_pixmap = QPixmap(50, 50);
-  m_scaled = QPixmap(50, 50);
-  m_scaled.fill(this, 0, 0);
+  m_pixmap = QPixmap();
+  m_scaled = m_pixmap;
 
   m_label->setPixmap(m_scaled);
   update();
@@ -113,7 +119,6 @@ void ImageWidget::scale() {
     m_scaled = m_pixmap;
   }
   m_label->setPixmap(m_scaled);
-//  updateGeometry();
 }
 
 void ImageWidget::resizeEvent(QResizeEvent *) {
@@ -126,8 +131,8 @@ void ImageWidget::resizeEvent(QResizeEvent *) {
 }
 
 void ImageWidget::slotGetImage() {
-  KURL url = KFileDialog::getImageOpenURL();
-  if(url.isEmpty()) {
+  KURL url = KFileDialog::getImageOpenURL(QString::null, this);
+  if(url.isEmpty() || !url.isValid()) {
     return;
   }
 
@@ -135,5 +140,64 @@ void ImageWidget::slotGetImage() {
   if(img != m_image) {
     setImage(img);
     emit signalModified();
+  }
+}
+
+void ImageWidget::mousePressEvent(QMouseEvent* event_) {
+  // Only interested in LMB
+  if(event_->button() == Qt::LeftButton) {
+    // Store the position of the mouse press.
+    // check if position is inside the label
+    if(m_label->geometry().contains(event_->pos())) {
+      m_dragStart = event_->pos();
+    } else {
+      m_dragStart = QPoint();
+    }
+  }
+}
+
+void ImageWidget::mouseMoveEvent(QMouseEvent* event_) {
+  static int delay = QApplication::startDragDistance();
+  // Only interested in LMB
+  if(event_->state() & Qt::LeftButton) {
+    // only allow drag is the image is non-null, and the drag start point isn't null and the user dragged far enough
+    if(!m_image.isNull() && !m_dragStart.isNull() && (m_dragStart - event_->pos()).manhattanLength() > delay) {
+      QImageDrag* drag = new QImageDrag(m_image, this);
+      drag->dragCopy();
+    }
+  }
+}
+
+void ImageWidget::dragEnterEvent(QDragEnterEvent* event_) {
+  event_->accept(KURLDrag::canDecode(event_) || QImageDrag::canDecode(event_));
+}
+
+void ImageWidget::dropEvent(QDropEvent* event_) {
+  QImage image;
+  KURL::List urls;
+
+  if(QImageDrag::decode(event_, image)) {
+    // Qt reads PNG data by default
+    const Data::Image& img = ImageFactory::addImage(image, QString::fromLatin1("PNG"));
+    if(!img.isNull() && img != m_image) {
+      setImage(img);
+      emit signalModified();
+    }
+  } else if(KURLDrag::decode(event_, urls)) {
+    if(urls.isEmpty()) {
+      return;
+    }
+    // only care about the first one
+    const KURL& url = urls[0];
+    if(url.isEmpty() || !url.isValid()) {
+      return;
+    }
+//    kdDebug() << "ImageWidget::dropEvent() - " << url.prettyURL() << endl;
+
+    const Data::Image& img = ImageFactory::addImage(url);
+    if(!img.isNull() && img != m_image) {
+      setImage(img);
+      emit signalModified();
+    }
   }
 }

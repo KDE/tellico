@@ -16,6 +16,8 @@
 
 #include "../collection.h"
 
+class QFile;
+
 namespace Bookcase {
   namespace Data {
 
@@ -26,12 +28,12 @@ namespace Bookcase {
  * @li Title
  *
  * @author Robby Stephenson
- * @version $Id: bibtexcollection.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: bibtexcollection.h 546 2004-03-16 02:12:05Z robby $
  */
 class BibtexCollection : public Collection {
 Q_OBJECT
 
-public: 
+public:
   /**
    * The constructor
    *
@@ -54,6 +56,10 @@ public:
   const StringMap& macroList() const { return m_macros; }
   void setMacroList(StringMap map) { m_macros = map; }
   void addMacro(const QString& key, const QString& value) { m_macros.insert(key, value); }
+  /**
+   * Open a pipe to lyx and send a citation for the selected entries
+   */
+  void citeEntries(QFile& lyxpipe, const EntryList& list);
 
   static FieldList defaultFields();
   static BibtexCollection* convertBookCollection(const Collection* coll);

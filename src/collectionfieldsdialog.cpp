@@ -35,6 +35,7 @@
 #include <qregexp.h>
 #include <qwhatsthis.h>
 #include <qpainter.h>
+#include <qtimer.h>
 
 using Bookcase::ListBoxText;
 using Bookcase::CollectionFieldsDialog;
@@ -77,7 +78,7 @@ void ListBoxText::paint(QPainter* painter_) {
 }
 
 CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget* parent_, const char* name_/*=0*/)
-    : KDialogBase(parent_, name_, false, i18n("Collection Fields"), Default|Ok|Apply|Cancel, Ok, false),
+    : KDialogBase(parent_, name_, false, i18n("Collection Fields"), Help|Default|Ok|Apply|Cancel, Ok, false),
       m_coll(coll_),
       m_defaultCollection(0),
       m_typeMap(Data::Field::typeMap()),
@@ -153,7 +154,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
   layout->addWidget(m_typeCombo, 0, 3);
   whats = i18n("<qt>The type of the field determines what values may be used. <i>Simple Text</i> "
                "is used for most fields. <i>Paragraph</i> is for large text blocks. "
-               "<i>List</i> limits the field to certain values. <i>Checkbox</i> is for "
+               "<i>Choice</i> limits the field to certain values. <i>Checkbox</i> is for "
                "a simple yes/no value. <i>Number</i> indicates that the field contains a "
                "numerical value. <i>URL</i> is for fields which refer to URLs, including "
                "references to other files. <i>Table</i>s may be a single or double column "
@@ -174,26 +175,36 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
   whats = i18n("The field category determines where the field is placed in the editor.");
   QWhatsThis::add(label, whats);
   QWhatsThis::add(m_catCombo, whats);
-  m_catCombo->insertStringList(m_coll->fieldCategories());
+
+  // I don't want to include the categories for singleCategory fields
+  QStringList cats;
+  const QStringList allCats = m_coll->fieldCategories();
+  for(QStringList::ConstIterator it = allCats.begin(); it != allCats.end(); ++it) {
+    Data::FieldList list = m_coll->fieldsByCategory(*it);
+    if(!list.isEmpty() && !list.getFirst()->isSingleCategory()) {
+      cats.append(*it);
+    }
+  }
+  m_catCombo->insertStringList(cats);
   m_catCombo->setDuplicatesEnabled(false);
   connect(m_catCombo, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  label = new QLabel(i18n("Allowed:"), grid);
-  layout->addWidget(label, 2, 0);
+  label = new QLabel(i18n("Description:"), grid);
+  layout->addWidget(label, 3, 0);
   m_allowEdit = new KLineEdit(grid);
   layout->addMultiCellWidget(m_allowEdit, 2, 2, 1, 3);
-  whats = i18n("<qt>For <i>List</i>-type fields, these are the only values allowed. They are "
+  whats = i18n("<qt>For <i>Choice</i>-type fields, these are the only values allowed. They are "
                "placed in a combo box.</qt>");
   QWhatsThis::add(label, whats);
   QWhatsThis::add(m_allowEdit, whats);
   connect(m_allowEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  label = new QLabel(i18n("Description:"), grid);
-  layout->addWidget(label, 3, 0);
+  label = new QLabel(i18n("Allowed:"), grid);
+  layout->addWidget(label, 2, 0);
   m_descEdit = new KLineEdit(grid);
   m_descEdit->setMinimumWidth(150);
   layout->addMultiCellWidget(m_descEdit, 3, 3, 1, 3);
-  whats = i18n("The description is useful reminder of what information is contained in the "
+  whats = i18n("The description is a useful reminder of what information is contained in the "
                "field. For <i>Dependent</i> fields, the description is a format string such as "
                "\"%{year} %{title}\" where the named fields get substituted in the string.");
   QWhatsThis::add(label, whats);
@@ -250,9 +261,14 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
   enableButtonOK(false);
   enableButtonApply(false);
 
-  m_fieldsBox->setSelected(0, true);
-  // need to call this since the text isn't actually changed when it's set initially
-  slotTypeChanged(m_typeCombo->currentText());
+  setHelp(QString::fromLatin1("fields-dialog"));
+
+  // initially the m_typeCombo is populated with all types, but as soon as something is
+  // selected in the fields box, the combo box is cleared and filled with the allowable
+  // new types. The problem is that when more types are added, the size of the combo box
+  // doesn't change. So when everything is laid out, the combo box needs to have all the
+  // items there.
+  QTimer::singleShot(0, this, SLOT(slotSelectInitial()));
 }
 
 CollectionFieldsDialog::~CollectionFieldsDialog() {
@@ -260,27 +276,41 @@ CollectionFieldsDialog::~CollectionFieldsDialog() {
   m_defaultCollection = 0;
 }
 
+void CollectionFieldsDialog::slotSelectInitial() {
+  m_fieldsBox->setSelected(0, true);
+  // need to call this since the text isn't actually changed when it's set initially
+  slotTypeChanged(m_typeCombo->currentText());
+}
+
 void CollectionFieldsDialog::slotOk() {
+  if(!checkValues()) {
+    return;
+  }
+
   slotApply();
   accept();
 }
 
 void CollectionFieldsDialog::slotApply() {
+  if(!checkValues()) {
+    return;
+  }
+
   updateField();
 
   for(Data::FieldListIterator it(m_copiedFields); it.current(); ++it) {
     m_coll->modifyField(it.current());
     // also must reset field pointers in fieldbox items
-    for(QListBoxItem* item = m_fieldsBox->firstItem(); item; item = item->next()) {
+/*    for(QListBoxItem* item = m_fieldsBox->firstItem(); item; item = item->next()) {
       Data::Field* field = static_cast<ListBoxText*>(item)->field();
       if(field && field == it.current()) {
         static_cast<ListBoxText*>(item)->setField(m_coll->fieldByName(field->name()));
         break;
       }
-    }
+    }*/
   }
 
-  
+
   for(Data::FieldListIterator it(m_newFields); it.current(); ++it) {
     m_coll->addField(it.current());
   }
@@ -305,12 +335,17 @@ void CollectionFieldsDialog::slotApply() {
     emit signalCollectionModified();
   }
 
-  // now clear copied fields
-  m_copiedFields.setAutoDelete(true);
+  // now clear copied fields, they all got added to the collection, so don't delete them
+//  m_copiedFields.setAutoDelete(true);
   m_copiedFields.clear();
-  m_copiedFields.setAutoDelete(false);
+//  m_copiedFields.setAutoDelete(false);
   // clear new ones, too
   m_newFields.clear();
+//  m_currentField = static_cast<ListBoxText*>(m_fieldsBox->selectedItem())->field();
+
+  // the field type might have changed, so need to update the type combo list with possible values
+  m_typeCombo->clear();
+  m_typeCombo->insertStringList(newTypesAllowed(m_currentField->type()));
 
   enableButtonApply(false);
 }
@@ -361,24 +396,26 @@ void CollectionFieldsDialog::slotDelete() {
   int ret = KMessageBox::warningYesNo(this, str, i18n("Delete Field?"),
                                       KStdGuiItem::yes(), KStdGuiItem::no(), dontAsk);
   if(ret == KMessageBox::Yes) {
-    m_coll->deleteField(field);
-    emit signalCollectionModified();
-    m_fieldsBox->removeItem(m_fieldsBox->currentItem());
-    m_fieldsBox->setSelected(m_fieldsBox->currentItem(), true);
-    m_fieldsBox->ensureCurrentVisible();
-    enableButtonOK(true);
+    bool success = m_coll->deleteField(field);
+    if(success) {
+      emit signalCollectionModified();
+      m_fieldsBox->removeItem(m_fieldsBox->currentItem());
+      m_fieldsBox->setSelected(m_fieldsBox->currentItem(), true);
+      m_fieldsBox->ensureCurrentVisible();
+      enableButtonOK(true);
+    }
   }
 }
 
 void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
   // only lists gets allowed values
-  m_allowEdit->setEnabled(type_ == i18n("List"));
+  m_allowEdit->setEnabled(type_ == i18n("Choice"));
 
   // paragraphs and tables are their own category
   bool isCategory = (type_ == i18n("Paragraph") || type_ == i18n("Table") ||
                      type_ == i18n("Table (2 Columns)") || type_ == i18n("Image"));
   m_catCombo->setEnabled(!isCategory);
-  
+
   // formatting is only applicable when the type is simple text or a table
   bool isText = (type_ == i18n("Simple Text") || type_ == i18n("Table") ||
                  type_ == i18n("Table (2 Columns)"));
@@ -395,8 +432,8 @@ void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
   isText = isText || (type_ == i18n("URL"));
   m_complete->setEnabled(isText);
 
-  // grouping is not possible with paragraphs, derived, or images
-  m_grouped->setEnabled(type_ != i18n("Paragraph") && type_ != i18n("Dependent") && type_ != i18n("Image"));
+  // grouping is not possible with paragraphs or images
+  m_grouped->setEnabled(type_ != i18n("Paragraph") && type_ != i18n("Image"));
 }
 
 void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
@@ -411,20 +448,13 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
   // first update the current one with all the values from the edit widgets
   updateField();
 
-  ListBoxText* item;
-#if QT_VERSION >= 0x030100
-  item = dynamic_cast<ListBoxText*>(m_fieldsBox->selectedItem());
-#else
-  item = dynamic_cast<ListBoxText*>(m_fieldsBox->item(m_fieldsBox->currentItem()));
-#endif
-
+  ListBoxText* item = dynamic_cast<ListBoxText*>(m_fieldsBox->selectedItem());
   if(!item) {
     return;
   }
 
   // need to get a pointer to the field with the new values to insert
   Data::Field* field = item->field();
-
   if(!field) {
     kdDebug() << "CollectionFieldsDialog::slotHighlightedChanged() - no field found!" << endl;
     return;
@@ -432,6 +462,14 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 
   m_titleEdit->setText(field->title());
 
+  // type is only changeable for new attributes
+  m_typeCombo->clear();
+  if(m_newFields.containsRef(field)) {
+    m_typeCombo->insertStringList(newTypesAllowed());
+  } else {
+    m_typeCombo->insertStringList(newTypesAllowed(field->type()));
+  }
+  // if the current name is not there, then this will change the list!
   m_typeCombo->setCurrentText(m_typeMap[field->type()]);
   slotTypeChanged(m_typeMap[field->type()]); // just setting the text doesn't emit the activated signal
 
@@ -477,9 +515,6 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
     bool hasField = (m_defaultCollection->fieldByName(field->name()) != 0);
     actionButton(KDialogBase::Default)->setEnabled(hasField);
   }
-
-  // type is only changeable for new attributes
-  m_typeCombo->setEnabled(m_newFields.containsRef(field));
 
   m_currentField = field;
   m_updatingValues = false;
@@ -529,9 +564,9 @@ void CollectionFieldsDialog::updateField() {
   }
 
   if(field->isSingleCategory()) {
-    field->setCategory(title);
+    field->setCategory(field->title());
   } else {
-    QString category = m_catCombo->currentText();
+    QString category = m_catCombo->currentText().simplifyWhiteSpace();
     field->setCategory(category);
     m_catCombo->setCurrentItem(category, true); // if it doesn't exist, it's added
   }
@@ -577,12 +612,13 @@ void CollectionFieldsDialog::slotModified() {
   enableButtonOK(true);
   enableButtonApply(true);
 
+  if(!m_currentField) {
+    kdDebug() << "CollectionFieldsDialog::slotModified() - no current field!" << endl;
+    m_currentField = static_cast<ListBoxText*>(m_fieldsBox->selectedItem())->field();
+  }
+
   // color the text
-#if QT_VERSION >= 0x030100
   static_cast<ListBoxText*>(m_fieldsBox->selectedItem())->setColored(true);
-#else
-  static_cast<ListBoxText*>(m_fieldsBox->item(m_fieldsBox->currentItem()))->setColored(true);
-#endif
 
   // check if copy exists already
   if(m_copiedFields.containsRef(m_currentField)) {
@@ -599,11 +635,7 @@ void CollectionFieldsDialog::slotModified() {
 
   m_copiedFields.append(newField);
   m_currentField = newField;
-#if QT_VERSION >= 0x030100
   static_cast<ListBoxText*>(m_fieldsBox->selectedItem())->setField(newField);
-#else
-  static_cast<ListBoxText*>(m_fieldsBox->item(m_fieldsBox->currentItem()))->setField(newField);
-#endif
 }
 
 void CollectionFieldsDialog::slotUpdateTitle(const QString& title_) {
@@ -701,11 +733,7 @@ void CollectionFieldsDialog::slotDefault() {
 
 void CollectionFieldsDialog::slotMoveUp() {
   QListBoxItem* item;
-#if QT_VERSION >= 0x030100
   item = m_fieldsBox->selectedItem();
-#else
-  item = m_fieldsBox->item(m_fieldsBox->currentItem());
-#endif
   if(item) {
     ListBoxText* prev = dynamic_cast<ListBoxText*>(item->prev()); // could be 0
     if(prev) {
@@ -725,12 +753,7 @@ void CollectionFieldsDialog::slotMoveUp() {
 }
 
 void CollectionFieldsDialog::slotMoveDown() {
-  ListBoxText* item;
-#if QT_VERSION >= 0x030100
-  item = dynamic_cast<ListBoxText*>(m_fieldsBox->selectedItem());
-#else
-  item = dynamic_cast<ListBoxText*>(m_fieldsBox->item(m_fieldsBox->currentItem()));
-#endif
+  ListBoxText* item = dynamic_cast<ListBoxText*>(m_fieldsBox->selectedItem());
   if(item) {
     QListBoxItem* next = item->next(); // could be 0
     if(next) {
@@ -771,4 +794,119 @@ void CollectionFieldsDialog::slotShowExtendedProperties() {
     m_currentField->setPropertyList(dlg->stringMap());
   }
   dlg->delayedDestruct();
+}
+
+bool CollectionFieldsDialog::checkValues() {
+  QString title = m_titleEdit->text().simplifyWhiteSpace();
+  if(m_coll->fieldByTitle(title) && m_coll->fieldNameByTitle(title) != m_currentField->name()) {
+    // already have a field with this title
+    KMessageBox::sorry(this, i18n("A field with this title already exists. Please enter a different title."));
+    m_titleEdit->selectAll();
+    return false;
+  }
+
+  QString category = m_catCombo->currentText().simplifyWhiteSpace();
+  Data::FieldList list = m_coll->fieldsByCategory(category);
+  if(!list.isEmpty() && list.getFirst()->isSingleCategory() && list.getFirst()->name() != m_currentField->name()) {
+    // can't have this category, cause it conflicts with a single-category field
+    KMessageBox::sorry(this, i18n("<qt>A field may not be in the same category as a <em>Paragraph</em>, "
+                                  "<em>Table</em> or <em>Image</em> field. Please enter a different category.</qt>"));
+    m_catCombo->lineEdit()->selectAll();
+    return false;
+  }
+
+  // the combobox is disabled for single-category fields
+  if(!m_catCombo->isEnabled() && m_coll->fieldByTitle(title) && m_coll->fieldNameByTitle(title) != m_currentField->name()) {
+    KMessageBox::sorry(this, i18n("A field's title may not be the same as an existing category. "
+                                  "Please enter a different title."));
+    m_titleEdit->selectAll();
+    return false;
+  }
+
+  return true;
+}
+
+// only certain type changes are allowed
+QStringList CollectionFieldsDialog::newTypesAllowed(unsigned type_ /*=0*/) {
+  // 0 means return all
+  if(type_ == 0) {
+    return m_typeMap.values();
+  }
+
+// from field.cpp
+//  map[Field::Line] = i18n("Simple Text");
+//  map[Field::Para] = i18n("Paragraph");
+//  map[Field::Choice] = i18n("Choice");
+//  map[Field::Bool] = i18n("Checkbox");
+//  map[Field::Number] = i18n("Number");
+//  map[Field::URL] = i18n("URL");
+//  map[Field::Table] = i18n("Table");
+//  map[Field::Table2] = i18n("Table (2 Columns)");
+//  map[Field::Image] = i18n("Image");
+//  map[Field::Dependent] = i18n("Dependent");
+
+  QStringList newTypes;
+  switch(type_) {
+    case Data::Field::Line: // might not work if converted to a number or URL, but ok
+    case Data::Field::Number:
+    case Data::Field::URL:
+      newTypes += m_typeMap[Data::Field::Line];
+      newTypes += m_typeMap[Data::Field::Para];
+      newTypes += m_typeMap[Data::Field::Number];
+      newTypes += m_typeMap[Data::Field::URL];
+      newTypes += m_typeMap[Data::Field::Table];
+      newTypes += m_typeMap[Data::Field::Table2];
+      break;
+
+    case Data::Field::Bool: // doesn't really make sense, but can't hurt
+      newTypes += m_typeMap[Data::Field::Line];
+      newTypes += m_typeMap[Data::Field::Para];
+      newTypes += m_typeMap[Data::Field::Bool];
+      newTypes += m_typeMap[Data::Field::Number];
+      newTypes += m_typeMap[Data::Field::URL];
+      newTypes += m_typeMap[Data::Field::Table];
+      newTypes += m_typeMap[Data::Field::Table2];
+      break;
+
+    case Data::Field::Choice:
+      newTypes += m_typeMap[Data::Field::Line];
+      newTypes += m_typeMap[Data::Field::Para];
+      newTypes += m_typeMap[Data::Field::Choice];
+      newTypes += m_typeMap[Data::Field::Number];
+      newTypes += m_typeMap[Data::Field::URL];
+      newTypes += m_typeMap[Data::Field::Table];
+      newTypes += m_typeMap[Data::Field::Table2];
+      break;
+
+    case Data::Field::Table:
+      newTypes += m_typeMap[Data::Field::Line];
+      newTypes += m_typeMap[Data::Field::Number];
+      newTypes += m_typeMap[Data::Field::Table];
+      newTypes += m_typeMap[Data::Field::Table2];
+      break;
+
+    case Data::Field::Table2: // not really a good idea since the "::" will be exposed, but allow it
+      newTypes += m_typeMap[Data::Field::Line];
+      newTypes += m_typeMap[Data::Field::Number];
+      newTypes += m_typeMap[Data::Field::Table];
+      newTypes += m_typeMap[Data::Field::Table2];
+      break;
+
+    case Data::Field::Para:
+      newTypes += m_typeMap[Data::Field::Line];
+      newTypes += m_typeMap[Data::Field::Para];
+      break;
+
+    // these can never be changed
+    case Data::Field::Image:
+    case Data::Field::Dependent:
+      newTypes = m_typeMap[static_cast<Data::Field::FieldType>(type_)];
+      break;
+
+    default:
+      kdDebug() << "CollectionFieldsDialog::newTypesAllowed() - no match for " << type_ << endl;
+      newTypes = m_typeMap.values();
+      break;
+  }
+  return newTypes;
 }

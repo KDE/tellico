@@ -17,6 +17,7 @@
 #include "filter.h"
 #include "mainwindow.h"
 #include "utils.h"
+#include "imagefactory.h"
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -37,7 +38,8 @@ using Bookcase::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
     : KListView(parent_, name_), m_filter(0),
-    m_prevSortColumn(-1), m_prev2SortColumn(-1), m_firstSection(-1) {
+    m_prevSortColumn(-1), m_prev2SortColumn(-1), m_firstSection(-1),
+    m_pixWidth(50), m_pixHeight(50) {
 //  kdDebug() << "DetailedListView()" << endl;
   setAllColumnsShowFocus(true);
   setShowSortIndicator(true);
@@ -54,7 +56,7 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
   header()->installEventFilter(this);
   connect(header(), SIGNAL(sizeChange(int, int, int)),
           this, SLOT(slotCacheColumnWidth(int, int, int)));
-  
+
   m_headerMenu = new KPopupMenu(this);
   m_headerMenu->setCheckable(true);
   m_headerMenu->insertTitle(i18n("View Columns"));
@@ -63,9 +65,9 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
 
   MainWindow* mainWindow = static_cast<MainWindow*>(QObjectAncestor(parent_, "Bookcase::MainWindow"));
   m_itemMenu = new KPopupMenu(this);
-  mainWindow->action("edit_edit_entry")->plug(m_itemMenu);
-  mainWindow->action("edit_copy_entry")->plug(m_itemMenu);
-  mainWindow->action("edit_delete_entry")->plug(m_itemMenu);
+  mainWindow->action("coll_edit_entry")->plug(m_itemMenu);
+  mainWindow->action("coll_copy_entry")->plug(m_itemMenu);
+  mainWindow->action("coll_delete_entry")->plug(m_itemMenu);
 
   m_checkPix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("ok"), KIcon::Small);
 }
@@ -156,7 +158,7 @@ void DetailedListView::addCollection(Bookcase::Data::Collection* coll_) {
   int prevSortCol = config->readNumEntry("PrevSortColumn", -1);
   int prev2SortCol = config->readNumEntry("Prev2SortColumn", -1);
   setPrevSortedColumn(prevSortCol, prev2SortCol);
-  
+
   triggerUpdate();
   kapp->processEvents();
   setUpdatesEnabled(false);
@@ -263,13 +265,12 @@ void DetailedListView::removeEntry(Data::Entry* entry_) {
     return;
   }
 
-  kdDebug() << "DetailedListView::removeEntry() - " << entry_->title() << endl;
+//  kdDebug() << "DetailedListView::removeEntry() - " << entry_->title() << endl;
 
   clearSelection();
   delete locateItem(entry_);
 }
 
-// TODO: more efficient way to do this?
 void DetailedListView::removeCollection(Bookcase::Data::Collection* coll_) {
   if(!coll_) {
     kdWarning() << "DetailedListView::removeCollection() - null coll pointer!" << endl;
@@ -355,7 +356,7 @@ void DetailedListView::slotSelectionChanged() {
       m_selectedEntries.removeRef(item->entry());
     }
   }
-  
+
   emit signalEntrySelected(this, m_selectedEntries);
 }
 
@@ -438,12 +439,12 @@ void DetailedListView::slotRefresh() {
     field = coll->fieldByTitle(columnText(colNum));
 
     // iterate over all items
-    
+
     for(QListViewItemIterator it(this); it.current(); ++it) {
       item = static_cast<EntryItem*>(it.current());
-      
+
       setPixmapAndText(item, colNum, field);
-      
+
       // if we're doing this for the first time, go ahead and pass through filter
       if(colNum == 0) {
         if(m_filter && !m_filter->matches(item->entry())) {
@@ -466,14 +467,15 @@ void DetailedListView::setPixmapAndText(EntryItem* item_, int col_, Data::Field*
     QString value = item_->entry()->field(field_->name());
     item_->setPixmap(col_, value.isEmpty() ? QPixmap() : m_checkPix);
     item_->setText(col_, QString::null);
-  } else { // for everything else, there's no pixmap, unless it's the first column
-    if(col_ == m_firstSection) {
-      item_->setPixmap(col_, m_entryPix);
-    } else {
-      item_->setPixmap(col_, QPixmap());
+  } else if(field_->type() == Data::Field::Image) {
+    const Data::Image& img = ImageFactory::imageById(item_->entry()->field(field_->name()));
+    if(!img.isNull()) {
+      item_->setPixmap(col_, img.convertToPixmap(m_pixWidth, m_pixHeight));
     }
-    QString value = item_->entry()->formattedField(field_->name());
-    item_->setText(col_, value);
+    item_->setText(col_, QString::null);
+  } else { // for everything else, there's no pixmap, unless it's the first column
+    item_->setPixmap(col_, col_ == m_firstSection ? m_entryPix : QPixmap());
+    item_->setText(col_, item_->entry()->formattedField(field_->name()));
   }
 }
 
@@ -503,6 +505,21 @@ void DetailedListView::hideColumn(int col_) {
   setColumnWidthMode(col_, QListView::Manual);
   setColumnWidth(col_, 0);
   header()->setResizeEnabled(false, col_);
+
+  // special case for images, I don't want all the items to be tall, so remove pixmaps
+  if(childCount() > 0) {
+    Data::Entry* entry = static_cast<EntryItem*>(firstChild())->entry();
+    if(entry) {
+      Data::Field* field = entry->collection()->fieldByTitle(columnText(col_));
+      if(field && field->type() == Data::Field::Image) {
+        m_isDirty[col_] = true;
+        for(QListViewItemIterator it(this); it.current(); ++it) {
+          it.current()->setPixmap(col_, QPixmap());
+        }
+      }
+    }
+  }
+
   triggerUpdate();
 }
 
@@ -522,6 +539,7 @@ void DetailedListView::setFilter(const Filter* filter_) {
 
 //  clearSelection();
 
+  int count = 0;
   // iterate over all items
   EntryItem* item;
   for(QListViewItemIterator it(this); it.current(); ++it) {
@@ -530,30 +548,30 @@ void DetailedListView::setFilter(const Filter* filter_) {
       item->setVisible(false);
     } else {
       item->setVisible(true);
+      ++count;
     }
   }
-}
-
-const Bookcase::Filter* DetailedListView::filter() const {
-  return m_filter;
+  m_visibleItems = count;
 }
 
 void DetailedListView::addField(Data::Field* field_, int width_) {
 //  kdDebug() << "DetailedListView::slotAddColumn() - " << field_->title() << endl;
   int col = addColumn(field_->title());
 
-  // bools have a checkmark pixmap, so center it. Numbers too
-  if(field_->type() == Data::Field::Bool || field_->type() == Data::Field::Number) {
+  // Bools, images, and numbers should be centered
+  if(field_->type() == Data::Field::Bool
+     || field_->type() == Data::Field::Number
+     || field_->type() == Data::Field::Image) {
     setColumnAlignment(col, Qt::AlignHCenter);
   }
 
   // width might be -1, which means set the width to maximum
   // but m_columnWidths is the cached width, so just set it to 0
   m_columnWidths.push_back(QMAX(width_, 0));
-  
+
   m_isNumber.push_back(field_->type() == Data::Field::Number);
   m_isDirty.push_back(true);
-  
+
   int id = m_headerMenu->insertItem(field_->title());
   if(width_ == 0) {
     m_headerMenu->setItemChecked(id, false);
@@ -575,7 +593,9 @@ void DetailedListView::modifyField(Data::Field* newField_, Data::Field* oldField
   // I thought this would have to be mapped to index, but not the case
   setColumnText(sec, newField_->title());
   m_isNumber[sec] = (newField_->type() == Data::Field::Number);
-  if(newField_->type() == Data::Field::Bool || newField_->type() == Data::Field::Number) {
+  if(newField_->type() == Data::Field::Bool
+     || newField_->type() == Data::Field::Number
+     || newField_->type() == Data::Field::Image) {
     setColumnAlignment(sec, Qt::AlignHCenter);
   } else {
     setColumnAlignment(sec, Qt::AlignLeft);
@@ -595,7 +615,7 @@ void DetailedListView::removeField(Data::Field* field_) {
   }
 
   if(sec == columns()) {
-    kdWarning() << "DetailedListView::slotRemoveColumn() - no column named " << field_->title() << endl;
+    kdWarning() << "DetailedListView::removeField() - no column named " << field_->title() << endl;
     return;
   }
 
@@ -634,7 +654,9 @@ void DetailedListView::reorderFields(const Data::FieldList& list_) {
     m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), it.current()->title());
     m_headerMenu->setItemChecked(m_headerMenu->idAt(sec+1), isVisible);
     m_columnWidths[sec] = 0;
-    if(it.current()->type() == Data::Field::Bool || it.current()->type() == Data::Field::Number) {
+    if(it.current()->type() == Data::Field::Bool
+       || it.current()->type() == Data::Field::Number
+       || it.current()->type() == Data::Field::Image) {
       setColumnAlignment(header()->mapToIndex(sec), Qt::AlignHCenter);
     } else {
       setColumnAlignment(header()->mapToIndex(sec), Qt::AlignLeft);
@@ -691,13 +713,25 @@ void DetailedListView::updateFirstSection() {
 void DetailedListView::slotUpdatePixmap() {
   int oldSection = m_firstSection;
   updateFirstSection();
-  if(oldSection == m_firstSection) {
+  if(childCount() == 0 || oldSection == m_firstSection) {
+    return;
+  }
+
+  Data::Entry* entry = static_cast<EntryItem*>(firstChild())->entry();
+  if(!entry) {
+    return;
+  }
+
+  Data::Field* field1 = entry->collection()->fieldByTitle(columnText(oldSection));
+  Data::Field* field2 = entry->collection()->fieldByTitle(columnText(m_firstSection));
+  if(!field1 || !field2) {
+    kdWarning() << "DetailedListView::slotUpdatePixmap() - no field found." << endl;
     return;
   }
 
   for(QListViewItemIterator it(this); it.current(); ++it) {
-    it.current()->setPixmap(oldSection, QPixmap());
-    it.current()->setPixmap(m_firstSection, m_entryPix);
+    setPixmapAndText(static_cast<EntryItem*>(it.current()), oldSection, field1);
+    setPixmapAndText(static_cast<EntryItem*>(it.current()), m_firstSection, field2);
   }
 }
 

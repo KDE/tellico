@@ -10,7 +10,7 @@
    ===================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl 394 2004-01-24 23:17:42Z robby $
+   $Id: bookcase-printing.xsl 586 2004-04-03 23:06:46Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -33,6 +33,10 @@
    ===================================================================
 -->
 
+<!-- import common templates -->
+<!-- location depends on being installed correctly -->
+<xsl:import href="bookcase-common.xsl"/>
+
 <xsl:output method="html" version="xhtml"/>
 
 <!-- To choose which fields of each entry are printed, change the
@@ -49,6 +53,11 @@
 <!-- The entries may be grouped by a certain field. Keys are needed
      for both the entries and the grouped field values -->
 <xsl:param name="group-entries" select="true()"/>
+
+<!-- Sets the maximum image size -->
+<xsl:param name="image-height" select="50"/>
+<xsl:param name="image-width" select="50"/>
+
 <!-- DO NOT CHANGE THE NAME OF THESE KEYS -->
 <xsl:key name="entries" match="bc:entry" use=".//bc:author"/>
 <xsl:key name="groups" match="bc:author" use="."/>
@@ -67,6 +76,10 @@
      automatically list which fields are used for sorting. -->
 <xsl:param name="sort-title" select="''"/>
 <!-- The entries are actually sorted by the app -->
+<xsl:param name="imgdir"/> <!-- dir where field images are located -->
+
+<xsl:key name="fieldsByName" match="bc:field" use="@name"/>
+<xsl:key name="imagesById" match="bc:image" use="@id"/>
 
 <xsl:variable name="endl">
 <xsl:text>
@@ -76,24 +89,22 @@
 <xsl:template match="/">
  <xsl:apply-templates select="bc:bookcase"/>
 </xsl:template>
- 
+
 <xsl:template match="bc:bookcase">
  <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
- <xsl:if test="@syntaxVersion != '5'">
-  <xsl:message>
-   <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
-   <xsl:value-of select="'5'"/>
-   <xsl:text>, &#xa;but the input data file is version </xsl:text>
-   <xsl:value-of select="@syntaxVersion"/>
-   <xsl:text>. There might be some &#xa;problems with the output.</xsl:text>
-  </xsl:message>
- </xsl:if>
+ <xsl:call-template name="syntax-version">
+  <xsl:with-param name="this-version" select="'5'"/>
+  <xsl:with-param name="data-version" select="@syntaxVersion"/>
+ </xsl:call-template>
 
  <html>
   <head>
    <style type="text/css">
    body {
         font-family: sans-serif;
+        <xsl:if test="count($columns) &gt; 3">
+        font-size: 80%;
+        </xsl:if>
    }     
    #headerblock {
         padding-top: 10px;
@@ -115,13 +126,11 @@
         background: #eee;
         font-size: 1.2em;
         font-weight: bolder;
-/**        border-top: 3px double black;
-        border-bottom: 1px solid #ccc;**/
    }
    tr.header {
         background-color: #ccc;
         font-weight: bolder;
-        font-size: 1.2em;
+        font-size: 1.1em;
    }
    tr.entry1 {
    }
@@ -261,22 +270,41 @@
    <xsl:choose>
     <!-- when there is at least one value... -->
     <xsl:when test="$numvalues &gt; 0">
-     <!-- the field's value is its text() unless it doesn't have any, then just output an 'X' -->
      <xsl:for-each select="$current[local-name() = $column]">
+      <xsl:variable name="field" select="key('fieldsByName', local-name())"/>
+
       <xsl:choose>
-      <!-- boolean values end up as 'true', would be better to check if it's boolean
-           but for now just test for string equality. If so, output 'X' --> 
-       <xsl:when test=". = 'true'">
+
+       <!-- boolean values end up as 'true', output 'X' --> 
+       <xsl:when test="$field/@type=4 and . = 'true'">
         <xsl:text>X</xsl:text>
        </xsl:when>
-       <!-- next, check for 2-column table values which have column children -->
-       <xsl:when test="count(bc:column) &gt; 1">
+
+       <!-- next, check for 2-column table -->
+       <xsl:when test="$field/@type=9">
         <!-- italicize second column -->
         <xsl:value-of select="bc:column[1]"/>
         <xsl:text> - </xsl:text>
-        <em><xsl:value-of select="bc:column[2]"/></em>
+        <em>
+         <xsl:value-of select="bc:column[2]"/>
+        </em>
         <br/>
        </xsl:when>
+
+       <!-- next, check for images -->
+       <xsl:when test="$field/@type=10">
+        <img>
+         <xsl:attribute name="src">
+          <xsl:value-of select="concat($imgdir, .)"/>
+         </xsl:attribute>
+         <xsl:call-template name="image-size">
+          <xsl:with-param name="limit-width" select="$image-width"/>
+          <xsl:with-param name="limit-height" select="$image-height"/>
+          <xsl:with-param name="image" select="key('imagesById', .)"/>
+         </xsl:call-template>
+        </img>
+       </xsl:when>
+
        <!-- finally, it's just a regular value -->
        <xsl:otherwise>
         <xsl:value-of select="."/>
@@ -288,9 +316,11 @@
       </xsl:choose>
      </xsl:for-each>
     </xsl:when>
+
     <xsl:otherwise>
      <xsl:text> </xsl:text>
     </xsl:otherwise>
+
    </xsl:choose>
   </td>
  </xsl:for-each>

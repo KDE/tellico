@@ -34,13 +34,13 @@ QString BookcaseZipExporter::formatString() const {
 }
 
 QString BookcaseZipExporter::fileFilter() const {
-  return i18n("*.bcz|Bookcase files(*.bcz)") + QString::fromLatin1("\n") + i18n("*|All files");
+  return i18n("*.bc|Bookcase files(*.bc)") + QString::fromLatin1("\n") + i18n("*|All files");
 }
 
 QByteArray BookcaseZipExporter::data(bool formatFields_) {
   const Data::Collection* coll = collection();
   BookcaseXMLExporter exp(coll, entryList());
-  exp.exportImages(false);
+  exp.includeImages(false); // do not include images in XML
   QCString xml = exp.text(formatFields_, true).utf8();
 
   QByteArray data;

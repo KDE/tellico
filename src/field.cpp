@@ -128,7 +128,7 @@ QString Field::format(const QString& value_, FormatFlag flag_) {
   if(value_.isEmpty()) {
     return value_;
   }
-  
+
   QString text;
   switch(flag_) {
     case FormatTitle:
@@ -163,20 +163,18 @@ QString Field::formatTitle(const QString& title_) {
     newTitle = capitalize(newTitle);
   }
 
-  // TODO if the title has ",the" at the end, put it at the front
-  for(QStringList::ConstIterator it = s_articles.begin(); it != s_articles.end(); ++it) {
-    // assume white space is already stripped
-    // the articles are already in lower-case
-    if(newTitle.lower().startsWith(*it + QString::fromLatin1(" "))) {
-#if QT_VERSION >= 0x030100
-      QRegExp regexp(QString::fromLatin1("^") + QRegExp::escape(*it) + QString::fromLatin1("\\s"));
-#else
-      QRegExp regexp(QString::fromLatin1("^") + *it + QString::fromLatin1("\\s"));
-#endif
-      regexp.setCaseSensitive(false);
-      QString article = newTitle.left((*it).length());
-      newTitle = newTitle.replace(regexp, QString()).append(QString::fromLatin1(", ")).append(article);
-      break;
+  if(autoFormat()) {
+    // TODO if the title has ",the" at the end, put it at the front
+    for(QStringList::ConstIterator it = s_articles.begin(); it != s_articles.end(); ++it) {
+      // assume white space is already stripped
+      // the articles are already in lower-case
+      if(newTitle.lower().startsWith(*it + QString::fromLatin1(" "))) {
+        QRegExp regexp(QString::fromLatin1("^") + QRegExp::escape(*it) + QString::fromLatin1("\\s"));
+        regexp.setCaseSensitive(false);
+        QString article = newTitle.left((*it).length());
+        newTitle = newTitle.replace(regexp, QString()).append(QString::fromLatin1(", ")).append(article);
+        break;
+      }
     }
   }
 
@@ -204,7 +202,7 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
     QString tail;
     if(name.find(QString::fromLatin1("::")) > -1) {
       tail = QString::fromLatin1("::") + name.section(QString::fromLatin1("::"), 1);
-      name = name.section(QString::fromLatin1("::"), 0, 0);      
+      name = name.section(QString::fromLatin1("::"), 0, 0);
     }
     // the ending look-ahead is so that a space is not added at the end
     QRegExp periodSpace(QString::fromLatin1("\\.\\s*(?=.)"));
@@ -215,14 +213,10 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
 
     // split the name by white space and commas
     QStringList words = QStringList::split(QRegExp(QString::fromLatin1("[\\s,]")), name, false);
-#if QT_VERSION >= 0x030100
     lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
-#else
-    lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
-#endif
 
     // if it contains a comma already and the last word is not a suffix, don't format it
-    if(name.find(',') > -1 && s_suffixes.grep(lastWord).isEmpty()) {
+    if(!autoFormat() || name.find(',') > -1 && s_suffixes.grep(lastWord).isEmpty()) {
       // arbitrarily impose rule that no spaces before a comma and
       // a single space after every comma
       name.replace(comma_split, QString::fromLatin1(", "));
@@ -237,30 +231,22 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
         words.prepend(words.last().append(QString::fromLatin1(",")));
         words.remove(words.fromLast());
       }
-      
+
       // now move the word
       // adding comma here when there had been a suffix is because it was originally split with space or comma
       words.prepend(words.last().append(QString::fromLatin1(",")));
       words.remove(words.fromLast());
 
       // update last word regexp
-#if QT_VERSION >= 0x030100
       lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
-#else
-      lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
-#endif
 
       // this is probably just something for me, limited to english
       while(s_surnamePrefixes.grep(lastWord).count() > 0) {
         words.prepend(words.last());
         words.remove(words.fromLast());
-#if QT_VERSION >= 0x030100
         lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
-#else
-        lastWord.setPattern(QString::fromLatin1("^") + words.last() + QString::fromLatin1("$"));
-#endif
       }
-            
+
       names << words.join(QString::fromLatin1(" ")) + tail;
     } else {
       names << name + tail;
@@ -279,7 +265,7 @@ QString Field::capitalize(QString str_) {
 
   // regexp to split words
   QRegExp rx(QString::fromLatin1("[\\s,.-;]"));
-  
+
   int pos = str_.find(rx, 1);
   int nextPos;
   QRegExp wordRx;
@@ -296,11 +282,7 @@ QString Field::capitalize(QString str_) {
     if(nextPos == -1) {
       nextPos = str_.length();
     }
-#if QT_VERSION >= 0x030100
     wordRx.setPattern(QString::fromLatin1("^") + QRegExp::escape(str_.mid(pos+1, nextPos-pos-1)) + QString::fromLatin1("$"));
-#else
-    wordRx.setPattern(QString::fromLatin1("^") + str_.mid(pos+1, nextPos-pos-1) + QString::fromLatin1("$"));
-#endif
     if(notCap.grep(wordRx).isEmpty() && nextPos-pos > 1) {
       str_.replace(pos+1, 1, str_.at(pos+1).upper());
     }
@@ -333,13 +315,13 @@ QStringList Field::defaultSurnamePrefixList() {
   return QStringList::split(comma_split, i18n("de,van der,von"), false);
 }
 
-// if these are changed, then BCCollectionPropDialog should be checked since it
+// if these are changed, then CollectionFieldsDialog should be checked since it
 // checks for equality against some of these strings
 QMap<Field::FieldType, QString> Field::typeMap() {
   QMap<Field::FieldType, QString> map;
   map[Field::Line] = i18n("Simple Text");
   map[Field::Para] = i18n("Paragraph");
-  map[Field::Choice] = i18n("List");
+  map[Field::Choice] = i18n("Choice");
   map[Field::Bool] = i18n("Checkbox");
   map[Field::Number] = i18n("Number");
   map[Field::URL] = i18n("URL");

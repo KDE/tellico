@@ -22,7 +22,7 @@ namespace Bookcase {
   namespace Data {
 
 /**
- * A BCCollection for books.
+ * A collection for books.
  *
  * It has the following standard attributes:
  * @li Title
@@ -52,12 +52,12 @@ namespace Bookcase {
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: bookcollection.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: bookcollection.h 527 2004-03-11 02:38:36Z robby $
  */
 class BookCollection : public Collection {
 Q_OBJECT
 
-public: 
+public:
   /**
    * The constructor
    *

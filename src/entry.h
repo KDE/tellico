@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCUNIT_H
-#define BCUNIT_H
+#ifndef ENTRY_H
+#define ENTRY_H
 
 #include "field.h"
 
@@ -38,7 +38,7 @@ namespace Bookcase {
  * @ref fieldName() would be "author".
  *
  * @author Robby Stephenson
- * @version $Id: entry.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: entry.h 583 2004-03-27 04:05:49Z robby $
  */
 class EntryGroup : public EntryList {
 
@@ -67,16 +67,15 @@ private:
  * @see Field
  *
  * @author Robby Stephenson
- * @version $Id: entry.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: entry.h 583 2004-03-27 04:05:49Z robby $
  */
 class Entry {
   // two entries are equal if all their field values are equal
   friend bool operator==(const Entry& e1, const Entry& e2) {
-    bool match = (e1.m_fields.count() == e2.m_fields.count());
-    if(!match) {
+    if(e1.m_fields.count() != e2.m_fields.count()) {
       return false;
     }
-    for(QMap<QString, QString>::ConstIterator it = e1.m_fields.begin(); it != e1.m_fields.end(); ++it) {
+    for(StringMap::ConstIterator it = e1.m_fields.begin(); it != e1.m_fields.end(); ++it) {
       if(!e2.m_fields.contains(it.key()) || e2.m_fields[it.key()] != it.data()) {
         return false;
       }
@@ -195,7 +194,13 @@ public:
    *
    * @return The list of field values
    */
-  QStringList fieldValues() const;
+  QStringList fieldValues() const { return m_fields.values(); }
+  /**
+   * Returns a list of all the formatted field values contained in the unit.
+   *
+   * @return The list of field values
+   */
+  QStringList formattedFieldValues() const { return m_formattedFields.values(); }
   /**
    * Returns a boolean indicating if the unit's parent collection recognizes
    * it existence, that is, the parent collection has this unit in its list.
@@ -205,9 +210,11 @@ public:
   bool isOwned() const;
   /**
    * Removes the formatted value of the field from the map. This should be used when
-   * the attributes format flag has changed.
+   * the field's format flag has changed.
+   *
+   * @param name The name of the field that changed. QString::null means invalidate all fields.
    */
-  void invalidateFormattedFieldValue(const QString& name);
+  void invalidateFormattedFieldValue(const QString& name=QString::null);
 
 protected:
   /**
@@ -217,10 +224,10 @@ protected:
    * strings themselves shoudl be taken into account.
    *
    * @param formatString The format string
-   * @param autoFormat Whether the inserted values should be auto-formatted
+   * @param autoCapitalize Whether the inserted values should be auto-capitalized. They're never formatted.
    * @return The constructed field value
    */
-  QString dependentValue(const QString& formatString, bool autoFormat) const;
+  QString dependentValue(const QString& formatString, bool autoCapitalize) const;
 
 private:
   Collection* m_coll;

@@ -1,3 +1,7 @@
+dnl =======================================================
+dnl FILE: ./admin/configure.in.min
+dnl =======================================================
+
 dnl    This file is part of the KDE libraries/packages
 dnl    Copyright (C) 2001 Stephan Kulow (coolo@kde.org)
  
@@ -36,7 +40,7 @@ dnl Perform program name transformation
 AC_ARG_PROGRAM
 
 dnl Automake doc recommends to do this only here. (Janos)
-AM_INIT_AUTOMAKE(bookcase, 0.8.5) dnl searches for some needed programs
+AM_INIT_AUTOMAKE(bookcase, 0.9) dnl searches for some needed programs
 
 KDE_SET_PREFIX
 
@@ -55,6 +59,10 @@ AM_KDE_WITH_NLS
 
 KDE_USE_QT(3)
 AC_PATH_KDE
+dnl =======================================================
+dnl FILE: configure.in.in
+dnl =======================================================
+
 #MIN_CONFIG(3)
 
 dnl PACKAGE set before
@@ -185,11 +193,27 @@ AC_FUNC_ALLOCA
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS(strlwr strupr)
 
-AC_CHECK_SIZEOF(unsigned long, 4)
 AC_CHECK_SIZEOF(unsigned int, 4)
 AC_CHECK_SIZEOF(unsigned short, 2)
 AC_CHECK_SIZEOF(unsigned char, 1)
 AC_CHECK_SIZEOF(char, 1)
+
+AC_CACHE_CHECK([for std::vector::at(std::size_t)],
+	ac_cv_cxx_have_vector_at, [
+        AC_LANG_SAVE
+        AC_LANG_CPLUSPLUS
+        AC_TRY_COMPILE([
+                #include <vector>
+        ],[
+                std::vector<int> v(1);
+                v.at(0);
+                return 0;
+        ],ac_cv_cxx_have_vector_at=yes, ac_cv_cxx_have_vector_at=no)
+        AC_LANG_RESTORE
+])
+if test "$ac_cv_cxx_have_vector_at" = "yes"; then
+        AC_DEFINE(HAVE_VECTOR_AT,1,[Define if you have the `std::vector::at(std::size_t)' function])
+fi
 KDE_CREATE_SUBDIRSLIST
 AC_CONFIG_FILES([ Makefile ])
 AC_CONFIG_FILES([ admin/Makefile ])
@@ -207,9 +231,23 @@ AC_CONFIG_FILES([ src/translators/pilotdb/libpalm/Makefile ])
 AC_CONFIG_FILES([ xslt/Makefile ])
 AC_CONFIG_FILES([ xslt/entry-templates/Makefile ])
 AC_OUTPUT
+# Check if KDE_SET_PREFIX was called, and --prefix was passed to configure
+if test -n "$kde_libs_prefix" -a -n "$given_prefix"; then
+  # And if so, warn when they don't match
+  if test "$kde_libs_prefix" != "$given_prefix"; then
+    echo ""
+    echo "Warning: you chose to install this package in $given_prefix,"
+    echo "but KDE was found in $kde_libs_prefix."
+    echo "For this to work, you will need to tell KDE about the new prefix, by ensuring"
+    echo "that KDEDIRS contains it, e.g. export KDEDIRS=$given_prefix:$kde_libs_prefix"
+    echo "Then restart KDE."
+    echo ""
+  fi
+fi
+
 if test "$all_tests" = "bad"; then
   if test ! "$cache_file" = "/dev/null"; then
-    echo ""    
+    echo ""
     echo "Please remove the file $cache_file after changing your setup"
     echo "so that configure will find the changes next time."
     echo ""

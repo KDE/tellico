@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCCOLLECTIONFIELDSDIALOG_H
-#define BCCOLLECTIONFIELDSDIALOG_H
+#ifndef COLLECTIONFIELDSDIALOG_H
+#define COLLECTIONFIELDSDIALOG_H
 
 class KComboBox;
 class KLineEdit;
@@ -35,11 +35,11 @@ namespace Bookcase {
   }
 
 /**
- * BCListBoxText subclasses QListBoxText so that @ref setText() can be made public,
+ * ListBoxText subclasses QListBoxText so that @ref setText() can be made public,
  * and the font color can be changed
  *
  * @author Robby Stephenson
- * @version $Id: collectionfieldsdialog.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: collectionfieldsdialog.h 599 2004-04-10 20:29:54Z robby $
  */
 class ListBoxText : public QListBoxText {
 public:
@@ -61,7 +61,7 @@ private:
 
 /**
  * @author Robby Stephenson
- * @version $Id: collectionfieldsdialog.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: collectionfieldsdialog.h 599 2004-04-10 20:29:54Z robby $
  */
 class CollectionFieldsDialog : public KDialogBase {
 Q_OBJECT
@@ -96,7 +96,12 @@ protected slots:
 
 protected:
   void updateField();
+  bool checkValues();
   ListBoxText* findItem(const QListBox* box, const Data::Field* field);
+  QStringList newTypesAllowed(unsigned type=0);
+
+private slots:
+  void slotSelectInitial();
 
 private:
   Data::Collection* m_coll;
@@ -105,17 +110,16 @@ private:
   Data::FieldList m_copiedFields;
   Data::FieldList m_newFields;
   Data::Field* m_currentField;
-  int m_currentListItem;
   bool m_modified;
   bool m_updatingValues;
   bool m_reordered;
-  
+
   QListBox* m_fieldsBox;
   KPushButton* m_btnNew;
   KPushButton* m_btnDelete;
   KPushButton* m_btnUp;
   KPushButton* m_btnDown;
-  
+
   KLineEdit* m_titleEdit;
   KComboBox* m_typeCombo;
   KLineEdit* m_allowEdit;

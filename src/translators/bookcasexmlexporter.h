@@ -33,12 +33,12 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bookcasexmlexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: bookcasexmlexporter.h 586 2004-04-03 23:06:46Z robby $
  */
 class BookcaseXMLExporter : public TextExporter {
 public:
   BookcaseXMLExporter(const Data::Collection* coll, const Data::EntryList& list) : TextExporter(coll, list),
-     m_exportImages(false), m_widget(0) {}
+     m_includeImages(false), m_includeID(false), m_widget(0) {}
 
   virtual QWidget* widget(QWidget*, const char*);
   virtual QString formatString() const;
@@ -47,7 +47,8 @@ public:
   virtual void readOptions(KConfig* cfg);
   virtual void saveOptions(KConfig* cfg);
   QDomDocument exportXML(bool format, bool encodeUTF8) const;
-  void exportImages(bool b) { m_exportImages = b; }
+  void includeImages(bool b) { m_includeImages = b; }
+  void includeID(bool b) { m_includeID = b; }
 
   /**
    * An integer indicating format version.
@@ -62,10 +63,11 @@ private:
 
   // keep track of which images were written, since some entries could have same image
   mutable QStringList m_imageList;
-  bool m_exportImages;
+  bool m_includeImages;
+  bool m_includeID;
 
   QWidget* m_widget;
-  QCheckBox* m_checkExportImages;
+  QCheckBox* m_checkIncludeImages;
 };
 
   } // end namespace

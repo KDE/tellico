@@ -28,7 +28,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryview.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: entryview.h 580 2004-03-27 03:34:33Z robby $
  */
 class EntryView : public KHTMLPart {
 Q_OBJECT
@@ -79,8 +79,8 @@ private:
   XSLTHandler* m_xsltHandler;
   // need to keep track of xslt file so images used in view can be found
   QString m_xsltFile;
-  // keep track if the temp directory has been set in the xslt handler
-  bool m_tempDirSet;
+  // keep track if the image directory has been set in the xslt handler
+  bool m_imageDirSet;
 
   // to run any clicked processes
   QGuardedPtr<KRun> m_run;

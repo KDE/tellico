@@ -26,10 +26,6 @@
 #include <qradiobutton.h>
 #include <qwhatsthis.h>
 
-#if QT_VERSION < 0x030100
-#include <qregexp.h> // needed for string replacement
-#endif
-
 using Bookcase::Export::CSVExporter;
 
 CSVExporter::CSVExporter(const Data::Collection* coll_, const Data::EntryList& list_)
@@ -51,13 +47,13 @@ QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   if(m_widget && m_widget->parent() == parent_) {
     return m_widget;
   }
-  
+
   m_widget = new QWidget(parent_, name_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
-  
+
   QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("CSV Options"), m_widget);
   l->addWidget(box);
-  
+
   m_checkIncludeTitles = new QCheckBox(i18n("Include field titles as column headers"), box);
   m_checkIncludeTitles->setChecked(m_includeTitles);
   QWhatsThis::add(m_checkIncludeTitles, i18n("If checked, a header row will be added with the "
@@ -114,7 +110,7 @@ QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 void CSVExporter::readOptions(KConfig* config_) {
-  config_->setGroup(QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_includeTitles = config_->readBoolEntry("Include Titles", m_includeTitles);
   m_delimiter = config_->readEntry("Delimiter", m_delimiter);
 }
@@ -131,7 +127,7 @@ void CSVExporter::saveOptions(KConfig* config_) {
     m_delimiter = m_editOther->text();
   }
 
-  config_->setGroup(QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   config_->writeEntry("Include Titles", m_includeTitles);
   config_->writeEntry("Delimiter", m_delimiter);
 }
@@ -140,7 +136,7 @@ QString CSVExporter::text(bool formatFields_, bool) {
   QString text;
 
   Data::FieldListIterator attIt(collection()->fieldList());
-  
+
   if(m_includeTitles) {
     for(attIt.toFirst(); attIt.current(); ++attIt) {
       QString title = attIt.current()->title();
@@ -151,7 +147,7 @@ QString CSVExporter::text(bool formatFields_, bool) {
     }
     text += QString::fromLatin1("\n");
   }
-  
+
   QString tmp;
   for(Data::EntryListIterator entryIt(entryList()); entryIt.current(); ++entryIt) {
     for(attIt.toFirst() ; attIt.current(); ++attIt) {
@@ -168,7 +164,7 @@ QString CSVExporter::text(bool formatFields_, bool) {
     attIt.toFirst();
     text += QString::fromLatin1("\n");
   }
-  
+
   return text;
 }
 
@@ -177,11 +173,7 @@ QString& CSVExporter::escapeText(QString& text_) {
   if(text_.find('"') != -1) {
     quotes = true;
     // quotation marks will be escaped by using a double pair
-#if QT_VERSION >= 0x030100
     text_.replace('"', QString::fromLatin1("\"\""));
-#else
-    text_.replace(QRegExp(QString::fromLatin1("\"")), QString::fromLatin1("\"\""));
-#endif
   }
   // if the text contains quotes or the delimiter, it needs to be surrounded by quotes
   if(quotes || text_.find(m_delimiter) != -1) {

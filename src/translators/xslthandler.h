@@ -16,7 +16,7 @@
 
 #include <kurl.h>
 
-#include <qstring.h>
+#include <qdom.h>
 
 // for xmlDocPtr
 #include <libxml/tree.h>
@@ -32,26 +32,36 @@ namespace Bookcase {
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h 394 2004-01-24 23:17:42Z robby $
+ * @version $Id: xslthandler.h 586 2004-04-03 23:06:46Z robby $
  */
 class XSLTHandler {
 
-public: 
+public:
   /**
-   * @param xsltText The XSLT text
+   * @param xsltFile The XSLT file
    */
-  XSLTHandler(const QString& xsltText=QString::null);
+  XSLTHandler(const QCString& xsltFile);
+  /**
+   * @param xsltURL The XSLT URL
+   */
+  XSLTHandler(const KURL& xsltURL);
+  /**
+   * @param xsltDoc The XSLT DOM document
+   * @param xsltFile The XSLT file, should be a url?
+   */
+  XSLTHandler(const QDomDocument& xsltDoc, const QCString& xsltFile);
   /**
    */
   ~XSLTHandler();
 
-  bool isValid() const { return m_stylesheet; }
+  bool isValid() const { return (m_stylesheet != NULL); }
   /**
    * Set the XSLT text
    *
-   * @param text The XSLT text
+   * @param dom The XSLT DOM document
+   * @param xsltFile The XSLT file, should be a url?
    */
-  void setXSLTText(const QString& text);
+  void setXSLTDoc(const QDomDocument& dom, const QCString& xsltFile);
   /**
    * Adds a param
    */
@@ -68,17 +78,19 @@ public:
    * @return The transformed text
    */
   QString applyStylesheet(const QString& text, bool encodedUTF8);
-//  QString applyStylesheetToFile(const QString& file_);
 
 private:
   void init();
   QString process();
 
   xsltStylesheetPtr m_stylesheet;
-  xmlDocPtr m_docIn, m_docOut;
+  xmlDocPtr m_docIn;
+  xmlDocPtr m_docOut;
 
   int m_numParams;
   const char* m_params[MAX_PARAMS + 1];
+
+  static int s_initCount;
 };
 
 } // end namespace

@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCFILEUTILS_H
-#define BCFILEUTILS_H
+#ifndef FILEHANDLER_H
+#define FILEHANDLER_H
 
 class KURL;
 class KSaveFile;
@@ -33,7 +33,7 @@ namespace Bookcase {
  * The FileHandler class contains some utility functions for reading files.
  *
  * @author Robby Stephenson
- * @version $Id: filehandler.h 514 2004-03-05 04:26:08Z robby $
+ * @version $Id: filehandler.h 586 2004-04-03 23:06:46Z robby $
  */
 class FileHandler {
 
@@ -69,10 +69,11 @@ public:
    *
    * @param url The url
    * @param text The text
-   * @param localeEncoding Whether to use Locale encoding, or UTF-8
+   * @param encodeUTF8 Whether to use UTF-8 encoding, or Locale
+   * @param force Whether to force the write
    * @return A boolean indicating success
    */
-  static bool writeTextURL(const KURL& url, const QString& text, bool localeEncoding);
+  static bool writeTextURL(const KURL& url, const QString& text, bool encodeUTF8, bool force=false);
   /**
    * Writes data to a url. If the file already exists, a "~" is appended
    * and the existing file is moved. If the file is remote, a temporary file is written and
@@ -80,9 +81,10 @@ public:
    *
    * @param url The url
    * @param data The data
+   * @param force Whether to force the write
    * @return A boolean indicating success
    */
-  static bool writeDataURL(const KURL& url, const QByteArray& data);
+  static bool writeDataURL(const KURL& url, const QByteArray& data, bool force=false);
 
 private:
   /**
@@ -118,10 +120,10 @@ private:
    *
    * @param file The file object
    * @param text The string
-   * @param localeEncoding Whether to use Locale encoding, or UTF-8 by default
+   * @param encodeUTF8 Whether to use UTF-8 encoding, or Locale
    * @return A boolean indicating success
    */
-  static bool writeTextFile(KSaveFile& file, const QString& text, bool localeEncoding);
+  static bool writeTextFile(KSaveFile& file, const QString& text, bool encodeUTF8);
   /**
    * Writes data to a file.
    *

@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCUNITITEM_H
-#define BCUNITITEM_H
+#ifndef ENTRYITEM_H
+#define ENTRYITEM_H
 
 #include <klistview.h>
 
@@ -33,7 +33,7 @@ namespace Bookcase {
  * @see Entry
  *
  * @author Robby Stephenson
- * @version $Id: entryitem.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: entryitem.h 527 2004-03-11 02:38:36Z robby $
  */
 class EntryItem : public KListViewItem {
 public:
@@ -44,7 +44,7 @@ public:
    * @param entry A pointer to the entry to which the item refers
    */
   EntryItem(KListView* parent, Data::Entry* entry)
-      : KListViewItem(parent), m_entry(entry), m_customSort(parent->isA("BCDetailedListView")) {}
+      : KListViewItem(parent), m_entry(entry), m_customSort(parent->isA("Bookcase::DetailedListView")) {}
   /**
    * This constructor is for items which have other KListViewItems as parents. It
    * initializes the text in the first column, as well.
@@ -57,7 +57,7 @@ public:
       : KListViewItem(parent, text), m_entry(entry), m_customSort(false) {}
 
   /**
-   * Compares one column to another, calling @ref BCDetailedListView::isNumber() and
+   * Compares one column to another, calling @ref DetailedListView::isNumber() and
    * using that to determine whether to do numerical or alphabetical comparison.
    *
    * @param item Pointer to comparison item
@@ -66,7 +66,7 @@ public:
    */
   int compareColumn(QListViewItem* item, int col) const;
   /**
-   * Compares one column to another. If the parent is a @ref BCDetailedListView,
+   * Compares one column to another. If the parent is a @ref DetailedListView,
    * it calls @ref compareColumn, otherwise just does default comparison.
    *
    * @param item Pointer to comparison item
@@ -93,8 +93,8 @@ public:
 private:
   // if I make this a QGuardedPtr, the app crashes, why?
   Data::Entry* m_entry;
-  // if the parent is a BCDetailedListView
-  // this way, I don't have to call listView()->isA("BCDetailedListView") every time
+  // if the parent is a DetailedListView
+  // this way, I don't have to call listView()->isA("Bookcase::DetailedListView") every time
   // when I want to do funky comparisons
   bool m_customSort;
 };
@@ -107,7 +107,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: entryitem.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: entryitem.h 527 2004-03-11 02:38:36Z robby $
  */
 class ParentItem : public KListViewItem {
 public:
@@ -138,7 +138,7 @@ public:
    *
    * @param c The count
    */
-  void setCount(int c) { m_count = c; }
+  void setCount(int c);
   /**
    * Returns the id reference number of the ParentItem.
    *
@@ -148,7 +148,7 @@ public:
   /**
    * Returns the key for sorting the listitems. The text used for an empty
    * value should be sorted first, so the returned key is "_". Since the text may
-   * have the number of entrys or something added to the name, only check if the
+   * have the number of entries or something added to the name, only check if the
    * text begins with the empty name. Maybe there should be something better.
    *
    * @param col The column number

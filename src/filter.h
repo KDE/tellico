@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCFILTER_H
-#define BCFILTER_H
+#ifndef FILTER_H
+#define FILTER_H
 
 #include <qptrlist.h>
 #include <qstring.h>
@@ -26,7 +26,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: filter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: filter.h 576 2004-03-26 01:21:30Z robby $
  */
 class FilterRule {
 
@@ -34,15 +34,15 @@ public:
   /**
    * Operators for comparison of field and contents.
    * If you change the order or contents of the enum: do not forget
-   * to change matches() and @ref BCFilterRuleWidget::initLists(), too.
+   * to change matches() and @ref FilterRuleWidget::initLists(), too.
    */
   enum Function {
     FuncContains=0, FuncNotContains,
     FuncEquals, FuncNotEquals,
     FuncRegExp, FuncNotRegExp
   };
-      
-  FilterRule(const QString& attName, const QString& text, Function func);
+
+  FilterRule(const QString& fieldName, const QString& text, Function func);
 
   /**
    * A rule is empty if the pattern text is empty
@@ -64,7 +64,6 @@ public:
    * Set filter function.
    */
   void setFunction(Function func) { m_function = func; }
-
   /**
    * Return field name
    */
@@ -73,7 +72,6 @@ public:
    * Set field name
    */
   void setFieldName(const QString& fieldName) { m_fieldName = fieldName; }
-  
   /**
    * Return pattern
    */
@@ -81,7 +79,7 @@ public:
   /**
    * Set pattern
    */
-  void setPattern(const QString& pattern) { m_pattern = pattern; }
+//  void setPattern(const QString& pattern) { m_pattern = pattern; }
 
 private:
   bool equals(const Data::Entry* const unit_) const;
@@ -97,7 +95,7 @@ private:
  * Borrows from KMSearchPattern by Marc Mutz
  *
  * @author Robby Stephenson
- * @version $Id: filter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: filter.h 576 2004-03-26 01:21:30Z robby $
  */
 class Filter : public QPtrList<FilterRule> {
 
@@ -106,14 +104,14 @@ public:
     MatchAny,
     MatchAll
   };
-  
+
   Filter(FilterOp op_) : QPtrList<FilterRule>(), m_op(op_) { setAutoDelete(true); }
 
   FilterOp op() const { return m_op; }
   bool matches(const Data::Entry* const unit) const;
 
 private:
-  FilterOp m_op; 
+  FilterOp m_op;
 };
 
 } // end namespace

@@ -23,6 +23,8 @@
 #include <kdebug.h>
 #include <kglobalsettings.h>
 #include <krun.h>
+#include <kmessagebox.h>
+#include <khtmlview.h>
 
 #include <qfile.h>
 #include <qapplication.h> // needed for default palette
@@ -36,8 +38,8 @@ EntryView::EntryView(QWidget* parent_, const char* name_) : KHTMLPart(parent_, n
   setMetaRefreshEnabled(false);
   setPluginsEnabled(false);
 
-  connect(browserExtension(), SIGNAL(openURLRequest(const KURL &, const KParts::URLArgs &)),
-          this, SLOT(slotOpenURL(const KURL &)));
+  connect(browserExtension(), SIGNAL(openURLRequest(const KURL&, const KParts::URLArgs&)),
+          this, SLOT(slotOpenURL(const KURL&)));
 }
 
 EntryView::~EntryView() {
@@ -53,6 +55,7 @@ void EntryView::clear() {
   // just clear the view
   begin();
   end();
+  view()->layout(); // I need this because some of the margins and widths may get messed up
 }
 
 void EntryView::showEntry(const Data::Entry* const entry_) {
@@ -63,6 +66,7 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
   }
 
 #if 0
+  kdDebug() << "EntryView::showEntry() - turn me off!" << endl;
   clear();
   setXSLTFile(m_xsltFile);
 #endif
@@ -81,13 +85,12 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
   QDomDocument dom = exporter.exportXML(false, true);
 //  kdDebug() << dom.toString() << endl;
 
-  if(!m_tempDirSet) {
+  if(!m_imageDirSet) {
     // look for a file that gets installed to know the installation directory
     QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/bookcase.png"));
-    appdir += QString::fromLatin1("pics/");
     m_xsltHandler->addStringParam("datadir", QFile::encodeName(appdir));
-    m_xsltHandler->addStringParam("tmpdir", QFile::encodeName(ImageFactory::tempDir()));
-    m_tempDirSet = true;
+    m_xsltHandler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
+    m_imageDirSet = true;
   }
 
   QString html = m_xsltHandler->applyStylesheet(dom.toString(), true);
@@ -95,8 +98,7 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
   for(Data::FieldListIterator it(entry_->collection()->imageFields()); it.current(); ++it) {
     const QString& id = entry_->field(it.current()->name());
     if(!id.isEmpty()) {
-      bool success = ImageFactory::writeImage(id);
-      if(!success) {
+      if(!ImageFactory::writeImage(id)) {
         kdWarning() << "EntryView::showEntry() - unable to write temporary image file: "
                     << entry_->field(it.current()->name()) << endl;
       }
@@ -115,6 +117,7 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
 //  kdDebug() << html << endl;
   write(html);
   end();
+  view()->layout(); // I need this because some of the margins and widths may get messed up
 
   m_entry = entry_;
 }
@@ -125,22 +128,28 @@ void EntryView::setXSLTFile(const QString& file_) {
   } else {
     m_xsltFile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("entry-templates/") + file_);
     if(m_xsltFile.isNull()) {
-      // TODO: error message
-      kdWarning() << "EntryView::setXSLTFile() - can't locate " << file_ << endl;
+      if(!file_.isEmpty()) {
+        kdWarning() << "EntryView::setXSLTFile() - can't locate " << file_ << endl;
+      }
       m_xsltFile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("entry-templates/Default.xsl"));
+    }
+    if(m_xsltFile.isNull()) {
+      QString str = QString::fromLatin1("<qt>");
+      str += i18n("Bookcase is unable to locate the default entry template stylesheet.");
+      str += QString::fromLatin1(" ");
+      str += i18n("Please check your installation.");
+      str += QString::fromLatin1("</qt>");
+      KMessageBox::error(view(), str);
     }
   }
 
-
-  KURL url;
-  url.setPath(m_xsltFile);
-  QDomDocument dom = FileHandler::readXMLFile(url);
-  if(dom.isNull()) {
-    kdWarning() << "EntryView::setXSLTFile() - null DOM" << endl;
+  delete m_xsltHandler;
+  // must read the file to get proper context
+  m_xsltHandler = new XSLTHandler(QFile::encodeName(m_xsltFile));
+  if(!m_xsltHandler->isValid()) {
+    kdWarning() << "EntryView::setXSLTFile() - invalid xslt handler" << endl;
     return;
   }
-  delete m_xsltHandler;
-  m_xsltHandler = new XSLTHandler(dom.toString());
 
   // add system colors to stylesheet
   const QColorGroup& cg = QApplication::palette().active();
@@ -150,7 +159,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   m_xsltHandler->addStringParam("color1", cg.highlightedText().name().latin1());
   m_xsltHandler->addStringParam("color2", cg.highlight().name().latin1());
 
-  m_tempDirSet = false;
+  m_imageDirSet = false;
 
   showEntry(m_entry);
 }
@@ -162,10 +171,7 @@ void EntryView::refresh() {
 
 void EntryView::slotOpenURL(const KURL& url_) {
 //  kdDebug() << "EntryView::slotOpenURL() - " << url_.path() << endl;
-  if(url_.isValid()) {
+  if(!url_.isEmpty() && url_.isValid()) {
     m_run = new KRun(url_);
   }
 }
-
-
-

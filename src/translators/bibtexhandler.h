@@ -16,6 +16,7 @@
 
 class QString;
 class QStringList;
+class QRegExp;
 
 #include <qmap.h>
 
@@ -26,7 +27,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexhandler.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: bibtexhandler.h 588 2004-04-09 21:47:06Z robby $
  */
 class BibtexHandler {
 public:
@@ -45,13 +46,14 @@ public:
   static QString& cleanText(QString& text);
 
   static const QString s_bibtexmlNamespace;
+  static QuoteStyle s_quoteStyle;
 
 private:
   typedef QMap<QString, QStringList> StringListMap;
 
   static void loadTranslationMaps();
   static StringListMap s_utf8LatexMap;
-  static QuoteStyle s_quoteStyle;
+  static const QRegExp s_badKeyChars;
 };
 
 } // end namespace

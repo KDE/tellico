@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCATTRIBUTEWIDGET_H
-#define BCATTRIBUTEWIDGET_H
+#ifndef FIELDWIDGET_H
+#define FIELDWIDGET_H
 
 class QLabel;
 class QCheckBox;
@@ -34,7 +34,7 @@ namespace Bookcase {
  * on the field type, and then a checkbox for multiple editing.
  *
  * @author Robby Stephenson
- * @version $Id: fieldwidget.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: fieldwidget.h 527 2004-03-11 02:38:36Z robby $
  */
 class FieldWidget : public QWidget {
 Q_OBJECT

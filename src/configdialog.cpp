@@ -14,6 +14,7 @@
 #include "configdialog.h"
 #include "field.h"
 #include "collectionfactory.h"
+#include "translators/bibtexhandler.h" // needed for bibtex quote style options
 
 #include <klineedit.h>
 #include <klocale.h>
@@ -22,6 +23,7 @@
 #include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kdialogbase.h>
+#include <knuminput.h>
 
 #include <qsize.h>
 #include <qlayout.h>
@@ -45,16 +47,44 @@ static const int CONFIG_MIN_HEIGHT = 420;
 using Bookcase::ConfigDialog;
 
 ConfigDialog::ConfigDialog(QWidget* parent_, const char* name_/*=0*/)
-    : KDialogBase(IconList, i18n("Configure Bookcase"), Ok|Apply|Cancel|Default,
+    : KDialogBase(IconList, i18n("Configure Bookcase"), Help|Ok|Apply|Cancel|Default,
                   Ok, parent_, name_, true, false) {
   setupGeneralPage();
   setupPrintingPage();
   setupTemplatePage();
+  setupBibliographyPage();
 
   updateGeometry();
   QSize s = sizeHint();
   resize(QMAX(s.width(), CONFIG_MIN_WIDTH),
          QMAX(s.height(), CONFIG_MIN_HEIGHT));
+
+  setHelp(QString::fromLatin1("general-options"));
+  connect(this, SIGNAL(aboutToShowPage(QWidget*)), SLOT(slotUpdateHelpLink(QWidget*)));
+}
+
+void ConfigDialog::slotUpdateHelpLink(QWidget* w_) {
+  int idx = pageIndex(w_);
+  switch(idx) {
+    case 0:
+      setHelp(QString::fromLatin1("general-options"));
+      break;
+
+    case 1:
+      setHelp(QString::fromLatin1("printing-options"));
+      break;
+
+    case 2:
+      setHelp(QString::fromLatin1("template-options"));
+      break;
+
+    case 3:
+      setHelp(QString::fromLatin1("bibtex-options"));
+      break;
+
+    default:
+      break;
+  }
 }
 
 void ConfigDialog::slotOk() {
@@ -84,6 +114,8 @@ void ConfigDialog::slotDefault() {
       m_cbPrintHeaders->setChecked(true);
       m_cbPrintFormatted->setChecked(true);
       m_cbPrintGrouped->setChecked(false);
+      m_imageWidthBox->setValue(50);
+      m_imageHeightBox->setValue(50);
       break;
 
     case 2:
@@ -92,6 +124,13 @@ void ConfigDialog::slotDefault() {
         // not translated since it's the file name
         it.current()->setCurrentItem(QString::fromLatin1("Default"));
       }
+      break;
+
+    case 3:
+      // bibtex options
+      m_cbBibtexStyle->setCurrentItem(i18n("Braces"));
+      // FIXME: should use KShell::homeDir() ?
+      m_leLyxpipe->setText(QString::fromLatin1("$HOME/.lyx/lyxpipe"));
       break;
   }
 }
@@ -119,12 +158,11 @@ void ConfigDialog::setupGeneralPage() {
   QVGroupBox* formatGroup = new QVGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);
 
-  QString restart = QString::fromLatin1(" ") + i18n("(Requires restart)");
-  m_cbCapitalize = new QCheckBox(i18n("Auto capitalize titles and names")+restart, formatGroup);
+  m_cbCapitalize = new QCheckBox(i18n("Auto capitalize titles and names"), formatGroup);
   QWhatsThis::add(m_cbCapitalize, i18n("If checked, titles and names will "
                                        "be automatically capitalized."));
 
-  m_cbFormat = new QCheckBox(i18n("Auto format titles and names")+restart, formatGroup);
+  m_cbFormat = new QCheckBox(i18n("Auto format titles and names"), formatGroup);
   QWhatsThis::add(m_cbFormat, i18n("If checked, titles and names will "
                                    "be automatically formatted."));
   connect(m_cbFormat, SIGNAL(toggled(bool)), this, SLOT(slotToggleFormatted(bool)));
@@ -136,17 +174,12 @@ void ConfigDialog::setupGeneralPage() {
   m_leArticles = new KLineEdit(g1);
   QStringList articles = Data::Field::articleList();
   if(!articles.isEmpty()) {
-    m_leArticles->setText(articles.join(QString::fromLatin1(", ")));
+    m_leArticles->setText(articles.join(QString::fromLatin1("; ")));
   }
 
-  // I should have added the <qt> tags around the help strings in the beginning. To save the
-  // translator's time, I'm just goint to append and prepend them
-  QString qt1 = QString::fromLatin1("<qt>");
-  QString qt2 = QString::fromLatin1("</qt>");
-
-  QString whats = qt1 + i18n("A comma-separated list of words which should be "
-                             "considered as articles if they are the first word "
-                             "in a title.") + qt2;
+  QString whats = i18n("<qt>A list of words which should be considered as articles "
+                       "if they are the first word in a title. Multiple values "
+                       "should be separated by a semi-colon.</qt>");
   QWhatsThis::add(l1, whats);
   QWhatsThis::add(m_leArticles, whats);
 
@@ -154,10 +187,10 @@ void ConfigDialog::setupGeneralPage() {
   QLabel* l2 = new QLabel(i18n("Personal suffixes:"), g1);
   m_leSuffixes = new KLineEdit(g1);
   if(!suffixes.isEmpty()) {
-    m_leSuffixes->setText(suffixes.join(QString::fromLatin1(", ")));
+    m_leSuffixes->setText(suffixes.join(QString::fromLatin1("; ")));
   }
-  whats = qt1 + i18n("A comma-separated list of suffixes which might "
-                     "be used in personal names.") + qt2;
+  whats = i18n("<qt>A list of suffixes which might be used in personal names. Multiple values "
+               "should be separated by a semi-colon.</qt>");
   QWhatsThis::add(l2, whats);
   QWhatsThis::add(m_leSuffixes, whats);
 
@@ -165,10 +198,10 @@ void ConfigDialog::setupGeneralPage() {
   QLabel* l3 = new QLabel(i18n("Surname prefixes:"), g1);
   m_lePrefixes = new KLineEdit(g1);
   if(!prefixes.isEmpty()) {
-    m_lePrefixes->setText(prefixes.join(QString::fromLatin1(", ")));
+    m_lePrefixes->setText(prefixes.join(QString::fromLatin1("; ")));
   }
-  whats = qt1 + i18n("A comma-separated list of prefixes which might "
-                     "be used in surnames.") + qt2;
+  whats = i18n("<qt>A list of prefixes which might be used in surnames. Multiple values "
+               "should be separated by a semi-colon.</qt>");
   QWhatsThis::add(l3, whats);
   QWhatsThis::add(m_lePrefixes, whats);
 
@@ -180,24 +213,43 @@ void ConfigDialog::setupPrintingPage() {
   QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("print_printer"), KIcon::Desktop);
   QFrame* frame = addPage(i18n("Printing"), i18n("Printing Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
-  
+
   QVGroupBox* formatOptions = new QVGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatOptions);
 
   m_cbPrintFormatted = new QCheckBox(i18n("Format titles and names"), formatOptions);
-  QWhatsThis::add(m_cbPrintFormatted, i18n("If checked, titles and names will "
-                                           "be automatically formatted."));
+  QWhatsThis::add(m_cbPrintFormatted, i18n("If checked, titles and names will be automatically formatted."));
 
   m_cbPrintHeaders = new QCheckBox(i18n("Print field headers"), formatOptions);
-  QWhatsThis::add(m_cbPrintHeaders, i18n("If checked, the field names will be "
-                                         "printed as table headers."));
+  QWhatsThis::add(m_cbPrintHeaders, i18n("If checked, the field names will be printed as table headers."));
 
   QHGroupBox* groupOptions = new QHGroupBox(i18n("Grouping Options"), frame);
   l->addWidget(groupOptions);
 
   m_cbPrintGrouped = new QCheckBox(i18n("Group the entries"), groupOptions);
-  QWhatsThis::add(m_cbPrintGrouped, i18n("If checked, the entries will be grouped by "
-                                         "the selected field."));
+  QWhatsThis::add(m_cbPrintGrouped, i18n("If checked, the entries will be grouped by the selected field."));
+
+  QVGroupBox* imageOptions = new QVGroupBox(i18n("Image Options"), frame);
+  l->addWidget(imageOptions);
+
+  QGrid* grid = new QGrid(3, imageOptions);
+  grid->setSpacing(5);
+
+  QLabel* l1 = new QLabel(i18n("Maximum Image Width:"), grid);
+  m_imageWidthBox = new KIntSpinBox(0, 999, 1, 50, 10, grid);
+  m_imageWidthBox->setSuffix(QString::fromLatin1(" px"));
+  (void) new QWidget(grid);
+  QString whats = i18n("The maximum width of the images in the printout. The aspect ration is preserved.");
+  QWhatsThis::add(l1, whats);
+  QWhatsThis::add(m_imageWidthBox, whats);
+
+  QLabel* l2 = new QLabel(i18n("Maximum Image Height:"), grid);
+  m_imageHeightBox = new KIntSpinBox(0, 999, 1, 50, 10, grid);
+  m_imageHeightBox->setSuffix(QString::fromLatin1(" px"));
+  (void) new QWidget(grid);
+  whats = i18n("The maximum height of the images in the printout. The aspect ration is preserved.");
+  QWhatsThis::add(l2, whats);
+  QWhatsThis::add(m_imageHeightBox, whats);
 
   // stretch to fill lower area
   l->addStretch(1);
@@ -215,6 +267,7 @@ void ConfigDialog::setupTemplatePage() {
     QFileInfo fi(*it);
     templates << fi.fileName().section('.', 0, 0);
   }
+  templates.sort();
 
   QGrid* grid = new QGrid(2, frame);
   grid->setSpacing(5);
@@ -232,13 +285,48 @@ void ConfigDialog::setupTemplatePage() {
   l->addStretch(1);
 }
 
+void ConfigDialog::setupBibliographyPage() {
+  // FIXME: need a bibtex icon?
+  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("document"), KIcon::Desktop);
+  QFrame* frame = addPage(i18n("Bibtex"), i18n("Bibtex Options"), pix);
+  QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
+
+  QGrid* grid = new QGrid(2, frame);
+  grid->setSpacing(5);
+  l->addWidget(grid);
+
+  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:"), grid);
+  m_cbBibtexStyle = new KComboBox(grid);
+  m_cbBibtexStyle->insertItem(i18n("Braces"));
+  m_cbBibtexStyle->insertItem(i18n("Quotes"));
+  QString whats = i18n("<qt>The quotation style used when exporting bibtex. All field values will be escaped with either "
+                       " braces or quotation marks.</qt>");
+  QWhatsThis::add(l1, whats);
+  QWhatsThis::add(m_cbBibtexStyle, whats);
+  if(BibtexHandler::s_quoteStyle == BibtexHandler::BRACES) {
+    m_cbBibtexStyle->setCurrentItem(i18n("Braces"));
+  } else {
+    m_cbBibtexStyle->setCurrentItem(i18n("Quotes"));
+  }
+
+  QLabel* l2 = new QLabel(i18n("Path to LyX server:"), grid);
+  m_leLyxpipe = new KLineEdit(grid);
+  whats = i18n("<qt>The location of the LyX server for citing bibliographic entries. Also used by other "
+               "applications such as Kile or Pybliographer. Do not include the trailing .in suffix.</qt>");
+  QWhatsThis::add(l2, whats);
+  QWhatsThis::add(m_leLyxpipe, whats);
+
+  // stretch to fill lower area
+  l->addStretch(1);
+}
+
 void ConfigDialog::readConfiguration(KConfig* config_) {
   config_->setGroup("TipOfDay");
   bool showTipDay = config_->readBoolEntry("RunOnStart", true);
   m_cbShowTipDay->setChecked(showTipDay);
 
   config_->setGroup("General Options");
-  
+
   bool openLastFile = config_->readBoolEntry("Reopen Last File", true);
   m_cbOpenLastFile->setChecked(openLastFile);
 
@@ -264,12 +352,23 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
   bool printGrouped = config_->readBoolEntry("Print Grouped", false);
   m_cbPrintGrouped->setChecked(printGrouped);
 
+  int imageWidth = config_->readNumEntry("Max Image Width", 50);
+  m_imageWidthBox->setValue(imageWidth);
+
+  int imageHeight = config_->readNumEntry("Max Image Height", 50);
+  m_imageHeightBox->setValue(imageHeight);
+
   // entry template selection
   for(QIntDictIterator<KComboBox> it(m_cbTemplates); it.current(); ++it) {
     QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::CollectionType>(it.currentKey()));
     config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
     it.current()->setCurrentItem(config_->readEntry("Entry Template", QString::fromLatin1("Default")));
   }
+
+  QString entryName = CollectionFactory::entryName(Data::Collection::Bibtex);
+  config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
+  QString lyxpipe = config_->readPathEntry("lyxpipe", QString::fromLatin1("$HOME/.lyx/lyxpipe"));
+  m_leLyxpipe->setText(lyxpipe);
 }
 
 void ConfigDialog::saveConfiguration(KConfig* config_) {
@@ -281,35 +380,38 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
 
   bool autoCapitals = m_cbCapitalize->isChecked();
   config_->writeEntry("Auto Capitalization", autoCapitals);
-  // TODO: somehow, this should take immediate effect, but that's complicated
   Data::Field::setAutoCapitalize(autoCapitals);
-  
+
   bool autoFormat = m_cbFormat->isChecked();
   config_->writeEntry("Auto Format", autoFormat);
-  // TODO: somehow, this should take immediate effect, but that's complicated
   Data::Field::setAutoFormat(autoFormat);
 
   config_->writeEntry("Show Group Count", m_cbShowCount->isChecked());
 
-  // there might be spaces before or after the commas in the lineedit box
-  QString articlesStr = m_leArticles->text().replace(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                                     QString::fromLatin1(","));
-  QStringList articles = QStringList::split(QString::fromLatin1(","), articlesStr, false);
+  const QRegExp commaSpace = QRegExp(QString::fromLatin1("\\s*;\\s*"));
+  const QString sep = QString::fromLatin1(";");
+  // there might be semi-colons before or after the commas in the lineedit box
+  // it was originally commas, but that was inconsistent
+  QString articlesStr = m_leArticles->text().replace(commaSpace, sep);
+  QStringList articles = QStringList::split(sep, articlesStr, false);
 // ok for articles to be empty
+// still use a comma to write list
   config_->writeEntry("Articles", articles, ',');
   Data::Field::setArticleList(articles);
 
   // there might be spaces before or after the commas in the lineedit box
-  QString suffixesStr = m_leSuffixes->text().replace(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                                     QString::fromLatin1(","));
-  QStringList suffixes = QStringList::split(QString::fromLatin1(","), suffixesStr, false);
+  // it was originally commas, but that was inconsistent
+  QString suffixesStr = m_leSuffixes->text().replace(commaSpace, sep);
+  QStringList suffixes = QStringList::split(sep, suffixesStr, false);
 // ok to be empty
+// still use a comma to write list
   config_->writeEntry("Name Suffixes", suffixes, ',');
   Data::Field::setSuffixList(suffixes);
 
-  QString prefixesStr = m_lePrefixes->text().replace(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                                     QString::fromLatin1(","));
-  QStringList prefixes = QStringList::split(QString::fromLatin1(","), prefixesStr, false);
+  // it was originally commas, but that was inconsistent
+  QString prefixesStr = m_lePrefixes->text().replace(commaSpace, sep);
+  QStringList prefixes = QStringList::split(sep, prefixesStr, false);
+// still use a comma to write list
   config_->writeEntry("Surname Prefixes", prefixes, ',');
   Data::Field::setSurnamePrefixList(prefixes);
 
@@ -317,6 +419,8 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   config_->writeEntry("Print Field Headers", m_cbPrintHeaders->isChecked());
   config_->writeEntry("Print Formatted", m_cbPrintFormatted->isChecked());
   config_->writeEntry("Print Grouped", m_cbPrintGrouped->isChecked());
+  config_->writeEntry("Max Image Width", m_imageWidthBox->value());
+  config_->writeEntry("Max Image Height", m_imageHeightBox->value());
 
   // entry template selection
   for(QIntDictIterator<KComboBox> it(m_cbTemplates); it.current(); ++it) {
@@ -324,6 +428,20 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
     config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
     config_->writeEntry("Entry Template", it.current()->currentText());
   }
+
+  // the groups may look odd, but the bibtex export may someday be divorced from the bibliography collection altogether
+  config_->setGroup(QString::fromLatin1("ExportOptions - Bibtex"));
+  bool useBraces = m_cbBibtexStyle->currentText() == i18n("Braces");
+  config_->writeEntry("Use Braces", useBraces);
+  if(useBraces) {
+    BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
+  } else {
+    BibtexHandler::s_quoteStyle = BibtexHandler::QUOTES;
+  }
+
+  QString entryName = CollectionFactory::entryName(Data::Collection::Bibtex);
+  config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
+  config_->writePathEntry("lyxpipe", m_leLyxpipe->text());
 
   config_->sync();
 }
@@ -334,7 +452,3 @@ void ConfigDialog::slotToggleFormatted(bool checked_) {
   m_lePrefixes->setEnabled(checked_);
 }
 
-void ConfigDialog::slotPreview() {
-  KDialogBase dlg(i18n("Preview Entry Template"), Close, Close, Close, this);
-  dlg.exec();
-}

@@ -64,12 +64,13 @@ QWidget* XSLTExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 
 QString XSLTExporter::text(bool formatFields_, bool encodeUTF8_) {
   KURL url = m_URLRequester->url();
-  if(url.isValid()) {
-    XSLTHandler handler(FileHandler::readTextFile(url));
-
-    BookcaseXMLExporter exporter(collection(), entryList());
-    QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
-    return handler.applyStylesheet(dom.toString(), encodeUTF8_);
+  if(url.isEmpty() || !url.isValid()) {
+    return QString::null;
   }
-  return QString::null;
+  //  XSLTHandler handler(FileHandler::readXMLFile(url));
+  XSLTHandler handler(url);
+
+  BookcaseXMLExporter exporter(collection(), entryList());
+  QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
+  return handler.applyStylesheet(dom.toString(), encodeUTF8_);
 }

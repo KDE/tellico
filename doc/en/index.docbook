@@ -1,15 +1,30 @@
 <?xml version="1.0" ?>
-<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.0//EN" "dtd/kdex.dtd" [
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY bookcase '<application>Bookcase</application>'>
-  <!ENTITY kapp "&bookcase;">
-  <!ENTITY email "robby@periapsis.org">
-  <!ENTITY homepage "http://www.periapsis.org/bookcase/">
+  <!ENTITY kappname "&bookcase;">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
+
+  <!ENTITY robby "Robby Stephenson">
+  <!ENTITY email "robby@periapsis.org">
+  <!ENTITY homepage "http://www.periapsis.org/bookcase/">
+
+  <!ENTITY group-view "<interface>Group View</interface>">
+  <!ENTITY detailed-view "<interface>Column View</interface>">
+  <!ENTITY entry-view "<interface>Entry View</interface>">
+  <!ENTITY entry-editor "<interface>Entry Editor</interface>">
+  <!ENTITY fields-dialog "<interface>Collection Fields Dialog</interface>">
   
-  
-  <!-- Do not define any other entities; instead, use the entities
-       from kde-genent.entities and $LANG/user.entities. -->
+  <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
+  <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
+  <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
+  <!ENTITY collections-chapter SYSTEM "collections.docbook">
+  <!ENTITY fields-chapter SYSTEM "fields.docbook">
+  <!ENTITY menus-chapter SYSTEM "menus.docbook">
+  <!ENTITY customization-chapter SYSTEM "customization.docbook">
+  <!ENTITY hacking-chapter SYSTEM "hacking.docbook">
+  <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
+
 ]>
 
 <!-- ................................................................ -->
@@ -22,7 +37,17 @@
 as Authors, publish date, the abstract, and Keywords -->
 
 <bookinfo>
-<title>The Bookcase Handbook</title>
+
+<!-- Date and version information of the documentation
+Don't forget to include this last date and this last revision number, we
+need them for translation coordination !
+Please respect the format of the date (DD/MM/YYYY) and of the version
+(V.MM.LL), it could be used by automation scripts.
+Do NOT change these in the translation. -->
+<date>01/28/2004</date>
+<releaseinfo>1.0</releaseinfo>
+
+<title>The &bookcase; Handbook</title>
 
 <authorgroup>
 <author>
@@ -40,28 +65,20 @@ as Authors, publish date, the abstract, and Keywords -->
 <year>2001</year>
 <year>2002</year>
 <year>2003</year>
-<holder>Robby Stephenson</holder>
+<year>2004</year>
+<holder>&robby;</holder>
 </copyright>
+
 <!-- Translators: put here the copyright notice of the translation -->
 <!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook 
      and in the FDL itself on how to use it. -->
 <legalnotice>&FDLNotice;</legalnotice>
 
-<!-- Date and version information of the documentation
-Don't forget to include this last date and this last revision number, we
-need them for translation coordination !
-Please respect the format of the date (DD/MM/YYYY) and of the version
-(V.MM.LL), it could be used by automation scripts.
-Do NOT change these in the translation. -->
-
-<date>01/11/2003</date>
-<releaseinfo>0.07.00</releaseinfo>
-
 <!-- Abstract about this handbook -->
 
 <abstract>
 <para>
-&bookcase; is an application for keeping track of a your books.
+This document is a handbook for using &bookcase;, a collection manager software application.
 </para>
 </abstract>
 
@@ -75,18 +92,20 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword>book</keyword>
 <keyword>collection</keyword>
 <keyword>database</keyword>
+<keyword>catalog</keyword>
 </keywordset>
 
 </bookinfo>
 
-<!-- The contents of the documentation begin here.  Label
-each chapter so with the id attribute. This is necessary for two reasons: it
-allows you to easily reference the chapter from other chapters of your
-document, and if there is no ID, the name of the generated HTML files will vary
-from time to time making it hard to manage for maintainers and for the CVS
-system. Any chapter labelled (OPTIONAL) may be left out at the author's
-discretion. Other chapters should not be left out in order to maintain a
-consistent documentation style across all KDE apps. -->
+<!-- The contents of the documentation begin here.  Label each chapter
+so with the id attribute. This is necessary for two reasons: it allows
+you to easily reference the chapter from other chapters of your
+document, and if there is no ID, the name of the generated HTML files
+will vary from time to time making it hard to manage for maintainers
+and for the CVS system. Any chapter labelled (OPTIONAL) may be left
+out at the author's discretion. Other chapters should not be left out
+in order to maintain a consistent documentation style across all KDE
+apps. -->
 
 <chapter id="introduction">
 <title>Introduction</title>
@@ -97,254 +116,62 @@ problems. Basically a long version of the abstract.  Don't include a
 revision history. (see installation appendix comment) -->
 
 <para>
-&bookcase; is a program that helps you keep track of your book collection.
-Please report any problems or feature requests to
-<ulink url="mailto:&email;">the author</ulink>.
-</para>
-</chapter>
-
-<!--
-<chapter id="using-kapp">
-<title>Using &bookcase;</title>
-
-This chapter should tell the user how to use your app. You should use as
-many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
-your application.
-
-<para>
-
-<screenshot>
-<screeninfo>Here's a screenshot of &bookcase;</screeninfo>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="main_screen.png" format="PNG"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Screenshot of Bookcase Main Window, ,version 0.4</phrase>
-	  </textobject>
-	</mediaobject>
-</screenshot>
-
+&bookcase; is a program for managing collections. It began as a simple
+book collection manager, and has expanded to include default
+collection templates for bibliographies, comic books, videos, music,
+coins, stamps, trading cards, and wines. In addition, custom
+collections can be built for any other type of collectibles.
 </para>
 
-<sect1 id="kapp-features">
-<title>More &bookcase; features</title>
+<sect1 id="what-bookcase-is">
+<title>What &bookcase; Is</title>
 
-<para>It slices! It dices! and it comes with a free toaster!</para>
+<para> &bookcase; keeps track of the items in a collection, and offers
+an easy way to enter data for each entry. It provides several
+different field types, and allows for an unlimited number of
+user-defined fields. The entries in a collection may be grouped by any
+field for easy organization, and customizable views show as much or as
+little information as you like. Full text searching is available, as
+well as filtering to show a subset of your collection.
+</para>
+
 <para>
-The Squiggle Tool <guiicon><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="squiggle.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="squiggle.eps" format="EPS"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Squiggle</phrase>
-	  </textobject>
-</inlinemediaobject></guiicon> is used to draw squiggly lines all over
-the &bookcase; main window. It's not a bug, it's a feature!
+Collections may be imported or exported using a variety of formats, to
+to allow for easy exchange or publication of data.
+</para>
+
+</sect1>
+
+<sect1 id="what-bookcase-is-not">
+<title>What &bookcase; Is Not</title>
+
+<para>
+&bookcase; is not an audio or video player. It does not provide
+facilities for reading or modifying multimedia files. It also does
+not provide any image-editing functionality.
 </para>
 
 </sect1>
 
 </chapter>
--->
-<!--
-<chapter id="commands">
-<title>Command Reference</title>
 
-(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
-application windows and their menubar and toolbar commands for easy reference.
-Also include any keys that have a special function but have no equivalent in the
-menus or toolbars. This may not be necessary for small apps or apps with no tool
-or menu bars.
+&fundamentals-chapter;
 
-<sect1 id="kapp-mainwindow">
-<title>The main &bookcase; window</title>
-<para></para>
+&importing-exporting-chapter;
 
-<sect2>
-<title>The File Menu</title>
-<para>
-<variablelist>
-<varlistentry>
-<term><menuchoice>
-<shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>n</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>New</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Creates a new document</action></para></listitem>
-</varlistentry>
-<varlistentry>
-<term><menuchoice>
-<shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>s</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Save</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Saves the document</action></para></listitem>
-</varlistentry>
-<varlistentry>
-<term><menuchoice>
-<shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>q</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Quit</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Quits</action> &bookcase;</para></listitem>
-</varlistentry>
-</variablelist>
-</para>
+&configuration-chapter;
 
-</sect2>
-</sect1>
-</chapter>
--->
-<chapter id="faq">
-<title>Questions and Answers</title>
+<!--&collections-chapter;
 
-<!-- (OPTIONAL but recommended) This chapter should include all of the silly
-(and not-so-silly) newbie questions that fill up your mailbox. This chapter
-should be reserved for BRIEF questions and answers! If one question uses more
-than a page or so then it should probably be part of the
-"Using this Application" chapter instead. You should use links to
-cross-reference questions to the parts of your documentation that answer them.
-This is also a great place to provide pointers to other FAQ's if your users
-must do some complicated configuration on other programs in order for your
-application work. -->
+&fields-chapter;-->
 
-<qandaset id="faqlist">
-<qandaentry>
-<question>
-<para>How do I enter multiple authors?</para>
-</question>
-<answer>
+&menus-chapter;
 
-<para>Author names should be separated by a semi-colon, like so:
-"Brian W. Kernighan; Dennis M. Ritchie" (without the quotes). Don't
-include the word "and" or anything similar, even if you have 20
-authors. If you have the auto-format option checked, then the last
-name will automatically be shown first for each author.</para>
+&customization-chapter;
 
-<para>Other properties which allow multiple values, like "genre" and
-"keywords", are entered in the same way, with a semi-colon (;)
-separating each value.</para>
+&hacking-chapter;
 
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para>How do I add page numbers when I print?</para>
-</question>
-<answer>
-
-<para>KDE 3.1 added an option for printing headers on HTML files
-(which is the mechanism that &bookcase; uses). So using KDE 3.1 or
-later will have an option in the expanded print dialog to print the
-header, which includes the filename and the page number.</para>
-
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para>Well, then can I modify what the printed page looks like?</para>
-</question>
-<answer>
-
-<para>Yes, most certainly. Find the file bookcase-printing.xsl which
- should be in the $KDEDIR/share/apps/bookcase/ directory. You can copy
- that to $KDEHOME/share/apps/bookcase/ for personal modifications.
- You'll have to know <ulink
- url="http://www.w3.org/TR/xslt">XSLT</ulink>, but modifying that file
- is how you change the printing layout. HTML is generated from the
- file, and the easiest way to change the appearance of the printout is
- to modify the CSS in the top portiong. Feel free to <ulink
- url="mailto:&email;">email me</ulink> with questions.  If I end up
- with some alternate XSLT printing files, I'll put them on <ulink
- url="&homepage;">the Bookcase website</ulink>.</para>
-
-</answer>
-</qandaentry>
-<qandaentry>
-<question>
-<para>How do I group by a property other than the ones listed in the toolbar?</para>
-</question>
-<answer>
-<para>
-To allow grouping by a field which doesn't allow grouping by default, check the
-"Allow Grouping" box for that particular field in the "Collection Fields" dialog.
-</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question>
-<para>How do I rename my book collection?</para>
-</question>
-<answer>
-<para>In the left side column, right-click on the top-level item representing
-the collection. Select the "Rename Collection" option.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question><para>Why does all that gobbledy-gook show up when I run &bookcase;?</para></question>
-<answer>
-<para>Stuff like:
-<screen width="40">
-<computeroutput>Bookcase::updateCollectionToolBar</computeroutput>
-<computeroutput>BCGroupView::setGroupAttribute - author</computeroutput>
-<computeroutput>BCGroupView::slotAddCollection</computeroutput>
-</screen>
-
-is debug info. At compile time, this can be stopped by compiling with
-the --disable-debug flag. You might also want to use --enable-final,
-too, which takes a bit more memory when compiling, but is more
-efficient when running the application.</para>
-
-<para>Or, if &bookcase; is already installed, run kdebugdialog and
-make sure that "0 (generic)" is unchecked. That turns off debug
-messages from all generic KDE apps i.e. those not distributed
-officially by KDE.</para>
-
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question><para>How do I change which columns are shown?</para></question>
-<answer>
-<para>Right-click on the header bar. You can also drag the headers to re-order
-the columns, and click on them to sort by that field.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question><para>How do I filter by something like the "Read"
-field?</para></question>
-<answer>
-<para>Internally, the checkbox
-fields in &bookcase; are saved as "true", so if you'd like to filter
-to show only the science fiction books which you've not read, for
-example, then you have two rules. Make sure the "Match all of the
-following" button is checked. Set the first rule to have "Genre"
-"contains" "Science Fiction" (no quotes) and the second rule to have
-"Read" "does not contain" "true" (no quotes).</para>
-
-<para>Also, the quick filter in the toolbar will match any field,
-and if there is a non-word character, the text is interpreted as a
-regular expression. So if you quickly want to filter your books to
-show those by Weber or Bujold, then type "weber|bujold" (no quotes) in
-the toolbar.</para>
-</answer>
-</qandaentry>
-
-</qandaset>
-</chapter>
+&faqs-chapter;
 
 <chapter id="credits">
 
@@ -359,25 +186,19 @@ file included in the KDE distribution. -->
 &bookcase;
 </para>
 <para>
-Program copyright 2001-2003 Robby Stephenson <email>&email;</email>
+Program copyright 2001-2004 &robby; <email>&email;</email>
 </para>
 <para>
 </para>
 
 <para>
-Documentation copyright 2001-2003 Robby Stephenson <email>&email;</email>
+Documentation copyright 2001-2004 &robby; <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
 &underFDL; <!-- FDL: do not remove. Commercial development should -->
 <!-- replace this with their copyright and either remove it or re-set this.-->
-
-<!-- Determine which license your application is licensed under, 
-     and delete all the remaining licenses below:
-
-     (NOTE:  All documentation are licensed under the FDL, 
-     regardless of what license the application uses) -->
 
 &underGPL;        	 <!-- GPL License -->
 
@@ -410,13 +231,13 @@ information here.
 -->
 
 <para>
-In order to successfully use &bookcase;, you need KDE 3.x.
-&bookcase; uses about 5 megs of memory to run, but this may vary
+In order to successfully use &bookcase;, you need KDE 3.1.x.
+&bookcase; uses about 5 megabytes of memory to run, but this may vary
 depending on your platform and configuration.
 </para>
 
 <para>
-KDE can be found at <ulink url="http://www.kde.org">the KDE home page</ulink>.
+&kde; can be found at <ulink url="http://www.kde.org">the KDE home page</ulink>.
 </para>
 
 <!-- For a list of updates, you may refer to the application web site
@@ -434,6 +255,7 @@ url="&homepage;">&homepage;</ulink>.
 In order to compile and install &bookcase; on your system, type the following
 in the base directory of the archive, where the third step must be done as
 root if you are installing in a system directory:
+
 <screen width="40">
 <prompt>%</prompt> <userinput>./configure --enable-final --disable-debug</userinput>
 <prompt>%</prompt> <userinput>make</userinput>
@@ -441,15 +263,16 @@ root if you are installing in a system directory:
 </screen>
 </para>
 
-<para>Since &bookcase; uses autoconf and automake you should have not trouble
-compiling it. Should you run into problems please report them to the
-<ulink url="mailto:&email;">the author</ulink>.</para>
+<para>Since &bookcase; uses autoconf and automake you should not have
+any trouble compiling it. Should you run into problems please report
+them to the the author at <email>&email;</email>.</para>
 
 </sect1>
 
 </appendix>
 
 &documentation.index;
+
 </book>
 <!--
 Local Variables:

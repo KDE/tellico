@@ -31,9 +31,11 @@ mime_DATA = x-bookcase.desktop
 localdir = $(kde_datadir)/bookcase
 local_DATA = bookcase.dtd bookcase.tips
 
-DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz
+CLEANFILES = *~
 
-MAINTAINERCLEANFILES = subdirs configure.in aclocal.m4 acinclude.m4 configure.files Makefile.in $(DISTCLEANFILES)
+DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz $(CLEANFILES)
+
+MAINTAINERCLEANFILES = subdirs configure configure.in aclocal.m4 acinclude.m4 configure.files Makefile.in $(DISTCLEANFILES)
 
 
 package-messages:

@@ -74,4 +74,4 @@ messages: rc.cpp
 
 #include ../admin/Doxyfile.am
 
-noinst_HEADERS = image.h imagewidget.h fieldcompletion.h imagefactory.h stringmapdialog.h entryeditdialog.h
+noinst_HEADERS = image.h imagewidget.h fieldcompletion.h imagefactory.h stringmapdialog.h entryeditdialog.h error_strings.h

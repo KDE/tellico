@@ -1,10 +1,86 @@
+2004-04-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.9.
+
+2004-04-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved visibilty of image size in Fancy.xsl.
+	* Updated Italian translation, thanks to FaUsT.
+	* Updated Finnish translation, thanks to Teuvo.
+	* Added hidden pref for pixmap size in detailed view.
+	* Changed HTML exporter to use titles as filenames.
+
+2004-04-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Added hidden preference for pilotdb export charset encoding.
+
+2004-04-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved bibtex export to detect duplicates keys and add 'a'b,
+	'b', etc.
+	* Released Bookcase 0.9pre1
+
+2004-03-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated printing and HTML export to include images.
+	* Updated Detailed View to show images, too.
+
+2004-03-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Italian translation, thanks to FaUsT.
+	* Changed toolbar icon for New Entry to collection icon on top of
+	empty mime type.
+
+2004-03-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Added menu item in group view for filtering on groups.
+	* Added config options for image sizes in printout.
+
+2004-03-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed another bug with HTML export character encoding.
+	* Added config panel for bibtex quotation style and lyxpipe location
+
+2004-03-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Paragraph fields to properly signal modified in the Entry Editor.
+	* Fixed crashing bug for fields with nothing but whitespace in the datafile.
+	* Updated printing stylesheet so that images can be included.
+
+2004-03-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed document opening so that if the first field has the name
+	of "_default", all the default fields will be added.
+
+2004-03-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed Dependent fields to allow grouping.
+	* Changed Fields Dialog to allow changing the field types, in some
+	limited cases.
+
+2004-03-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug in PilotDB export with images.
+	* Fixed bug with "other" delimiter freezing the app.
+
+2004-03-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with trying to reopen Untitled after converting to a bibliography.
+	* Added support for lyxpipe and citing entries in bibliography.
+
+2004-03-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed to be more aggressive in creating URL fields on Bibtex import.
+
 2004-03-10  Robby Stephenson  <robby@periapsis.org>
 
+	* Added Compact and Fancy entry templates.
 	* Released Bookcase 0.8.5.
 
 2004-03-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug in Video template for when there's no Cast field.
+	* Fixed bug in Video template for when there's no Cast template.
+	* Fixed bug with detecting old versions of gcc and vector::at.
 
 2004-03-05  Robby Stephenson  <robby@periapsis.org>
 
@@ -22,6 +98,8 @@
 2004-02-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug in Data::Entry::field().
+	* Fixed XSLTHandler to work for URLs, so XSLT files can reference
+	other files.
 
 2004-02-22  Robby Stephenson  <robby@periapsis.org>
 
@@ -33,6 +111,10 @@
 	* Fixed bug to properly reorder categories when reordering fields.
 	* Released Bookcase 0.8.4.
 
+2004-02-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed auto-capitalize and auto-format to take affect immediately.
+
 2004-02-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Added Czech translation, thanks to Robert Kratky.
@@ -40,22 +122,32 @@
 2004-02-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed compilation issues for gcc 2.95 and FreeBSD.
+	* Changed the Config Dialog to use a semi-colon to separated the articles, prefixes, and suffixes instead of a comma, for consistency. They're still saved in the config file with a comma, though, so old options should be fine.
+
+2004-02-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed problem when trying to reopen last file and getting error.
+	* Added drag & drop support for the image widget.
 
 2004-02-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Estonian translation, from Toomas Nigola.
+	* Changed to remember sorting config in group view.
 
 2004-02-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crashing bug when renaming single-category fields.
+	* Fixed crashing bug when renaming a single-category field.
 
 2004-02-11  Robby Stephenson  <robby@periapsis.org>
 
+	* Changed Entry Editor to redo page layout when deleting fields.
+	* Added merge functionality when importing collections.
 	* Fixed bug with exporting HTML in non-utf8.
 
 2004-02-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Spanish translation, thanks to Quique.
+	* Added sorting by group count.
 
 2004-02-07  Robby Stephenson  <robby@periapsis.org>
 

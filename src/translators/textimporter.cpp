@@ -17,7 +17,7 @@
 using Bookcase::Import::TextImporter;
 
 TextImporter::TextImporter(const KURL& url_) : Import::Importer(url_) {
-  // TODO: error handling?
+  // FIXME: error handling?
   if(url_.isValid()) {
     m_text = FileHandler::readTextFile(url_);
   }

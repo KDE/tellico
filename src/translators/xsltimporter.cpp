@@ -41,23 +41,21 @@ Bookcase::Data::Collection* XSLTImporter::collection() {
     return m_coll;
   }
 
-  KURL u = m_URLRequester->url();
-  if(u.isEmpty() || !u.isValid()) {
+  KURL url = m_URLRequester->url();
+  if(url.isEmpty() || !url.isValid()) {
     setStatusMessage(i18n("A valid XSLT file is needed to import the file."));
     return 0;
   }
 
-  QDomDocument doc = FileHandler::readXMLFile(u);
-  if(doc.isNull()) {
+  XSLTHandler handler(url);
+  if(!handler.isValid()) {
     return 0;
   }
-
-  XSLTHandler handler(doc.toString());
 //  kdDebug() << text() << endl;
-  // TODO: is there anyway to know if the text is in utf-8 or not?
+  // FIXME: is there anyway to know if the text is in utf-8 or not?
   QString str = handler.applyStylesheet(text(), false);
 //  kdDebug() << str << endl;
-  
+
   Import::BookcaseImporter imp(str);
   connect(&imp, SIGNAL(signalFractionDone(float)), SIGNAL(signalFractionDone(float)));
   m_coll = imp.collection();

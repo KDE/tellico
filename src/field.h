@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCATTRIBUTE_H
-#define BCATTRIBUTE_H
+#ifndef FIELD_H
+#define FIELD_H
 
 #include <qstringlist.h>
 #include <qstring.h>
@@ -30,7 +30,7 @@ namespace Bookcase {
  * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: field.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: field.h 527 2004-03-11 02:38:36Z robby $
  */
 class Field {
 public:

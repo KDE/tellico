@@ -20,7 +20,7 @@ namespace Bookcase {
   namespace Data {
 
 /**
- * A BCCollection for coins.
+ * A collection for coins.
  *
  * It has the following standard attributes:
  * @li Title

@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCDETAILEDLISTVIEW_H
-#define BCDETAILEDLISTVIEW_H
+#ifndef DETAILEDLISTVIEW_H
+#define DETAILEDLISTVIEW_H
 
 // needed for EntryList definition
 #include "entry.h"
@@ -38,7 +38,7 @@ namespace Bookcase {
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: detailedlistview.h 407 2004-01-29 03:11:43Z root $
+ * @version $Id: detailedlistview.h 609 2004-04-17 00:44:36Z robby $
  */
 class DetailedListView : public KListView {
 Q_OBJECT
@@ -52,7 +52,7 @@ public:
    */
   DetailedListView(QWidget* parent, const char* name=0);
   ~DetailedListView();
-  
+
   /**
    * Event filter used to popup the menu
    */
@@ -68,8 +68,8 @@ public:
    */
   void setEntrySelected(Data::Entry* entry);
   void setFilter(const Filter* filter);
-  const Filter* filter() const;
-  
+  const Filter* filter() const { return m_filter; }
+
   int prevSortedColumn() const;
   int prev2SortedColumn() const;
   virtual void setSorting(int column, bool ascending = true);
@@ -123,6 +123,14 @@ public:
    * Select all visible items.
    */
   void selectAllVisible();
+  int visibleItems() const { return m_filter ? m_visibleItems : childCount(); }
+  /**
+   * Set max size of pixmaps.
+   *
+   * @param width Width
+   * @param height Height
+   */
+  void setPixmapSize(int width, int height) { m_pixWidth = width; m_pixHeight = height; }
 
 public slots:
   /**
@@ -145,7 +153,7 @@ protected:
   void populateItem(EntryItem* item);
   void populateColumn(int col);
   void setPixmapAndText(EntryItem* item, int col, Data::Field* field);
-  
+
   /**
    * A helper method to locate any item which refers to a certain entry. If none
    * is found, a NULL pointer is returned.
@@ -212,6 +220,9 @@ private:
   int m_prevSortColumn;
   int m_prev2SortColumn;
   int m_firstSection;
+  int m_visibleItems;
+  int m_pixWidth;
+  int m_pixHeight;
 };
 
 } // end namespace;

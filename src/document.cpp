@@ -18,7 +18,6 @@
 #include "translators/bookcaseimporter.h"
 #include "translators/bookcasezipexporter.h"
 #include "filehandler.h"
-#include "collections/bibtexcollection.h" // needed for Bibtex conversion
 #include "utils.h" // needed for macro expansion
 
 #include <kdebug.h>
@@ -121,8 +120,8 @@ bool Document::saveModified() {
         break;
 
       case KMessageBox::No:
-        slotSetModified(false);
         deleteContents();
+        slotSetModified(false); // deleteContents() sets modified to true
         completed = true;
         break;
 
@@ -229,10 +228,7 @@ void Document::appendCollection(Collection* coll_) {
 
   m_coll->blockSignals(true);
   for(FieldListIterator fIt(coll_->fieldList()); fIt.current(); ++fIt) {
-    if(m_coll->fieldByName(fIt.current()->name()) == 0) {
-      // does not exist in current collection, add it
-      m_coll->addField(fIt.current()->clone());
-    }
+    m_coll->mergeField(fIt.current());
   }
 
   for(EntryListIterator entryIt(coll_->entryList()); entryIt.current(); ++entryIt) {
@@ -241,6 +237,7 @@ void Document::appendCollection(Collection* coll_) {
   }
   m_coll->blockSignals(false);
   // easiest thing is to signal collection deleted, then added?
+  // FIXME: fixme Signals for delete collection and then added are yucky
   emit signalCollectionDeleted(m_coll);
   emit signalCollectionAdded(m_coll);
 
@@ -260,13 +257,10 @@ void Document::mergeCollection(Collection* coll_) {
 
   m_coll->blockSignals(true);
   for(FieldListIterator fIt(coll_->fieldList()); fIt.current(); ++fIt) {
-    if(m_coll->fieldByName(fIt.current()->name()) == 0) {
-      // does not exist in current collection, add it
-      m_coll->addField(fIt.current()->clone());
-    }
+    m_coll->mergeField(fIt.current());
   }
 
-  // TODO: find a faster way than one-to-one comparison
+  // FIXME: find a faster way than one-to-one comparison
   for(EntryListIterator it(coll_->entryList()); it.current(); ++it) {
     bool matches = false;
     for(EntryListIterator it2(m_coll->entryList()); it2.current(); ++it2) {
@@ -282,19 +276,11 @@ void Document::mergeCollection(Collection* coll_) {
   }
   m_coll->blockSignals(false);
   // easiest thing is to signal collection deleted, then added?
+  // FIXME: fixme Signals for delete collection and then added are yucky
   emit signalCollectionDeleted(m_coll);
   emit signalCollectionAdded(m_coll);
 
   slotSetModified(true);
-}
-
-void Document::slotConvertToBibtex() {
-  // only book collections can be converted to bibtex
-  if(m_coll->collectionType() != Collection::Book) {
-    return;
-  }
-  Collection* coll = BibtexCollection::convertBookCollection(m_coll);
-  replaceCollection(coll);
 }
 
 void Document::slotSaveEntry(Entry* entry_) {
@@ -463,7 +449,7 @@ void Document::search(const QString& text_, const QString& attTitle_, int option
       if(found) {
 //        kdDebug() << "\tfound " << entry->field(field->name()) << endl;
         emit signalEntrySelected(entry, matchedText);
-        return;      
+        return;
       }
 
       // if not, then continue the search. If we're searching all, update the pointer,
@@ -475,7 +461,7 @@ void Document::search(const QString& text_, const QString& attTitle_, int option
         break;
       }
     }
-        
+
     // get next item
     if(backwards) {
       // there is no QListViewItem::prevSibling()

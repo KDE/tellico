@@ -25,20 +25,20 @@ FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Funct
  : m_fieldName(fieldName_), m_function(func_), m_pattern(pattern_) {
 }
 
-bool FilterRule::matches(const Data::Entry* const unit_) const {
+bool FilterRule::matches(const Data::Entry* const entry_) const {
   switch (m_function) {
     case FuncEquals:
-      return equals(unit_);
+      return equals(entry_);
     case FuncNotEquals:
-      return !equals(unit_);
+      return !equals(entry_);
     case FuncContains:
-      return contains(unit_);
+      return contains(entry_);
     case FuncNotContains:
-      return !contains(unit_);
+      return !contains(entry_);
     case FuncRegExp:
-      return matchesRegExp(unit_);
+      return matchesRegExp(entry_);
     case FuncNotRegExp:
-      return !matchesRegExp(unit_);
+      return !matchesRegExp(entry_);
     default:
       kdWarning() << "FilterRule::matches() - invalid function!" << endl;
       break;
@@ -46,80 +46,71 @@ bool FilterRule::matches(const Data::Entry* const unit_) const {
   return true;
 }
 
-bool FilterRule::equals(const Data::Entry* const unit_) const {
-  bool match = false;
-
+bool FilterRule::equals(const Data::Entry* const entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
-    QStringList list = unit_->fieldValues();
+    QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
     for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
       if(QString::compare((*it).lower(), m_pattern.lower()) == 0) {
-        match = true;
-        break;
+        return true;
       }
     }
   } else {
-    // TODO: for Bool types, should match anything?
-    QString value = unit_->field(m_fieldName);
-    match = (QString::compare(value.lower(), m_pattern.lower()) == 0);
+    return QString::compare(entry_->field(m_fieldName).lower(), m_pattern.lower()) == 0
+           || QString::compare(entry_->formattedField(m_fieldName).lower(), m_pattern.lower()) == 0;
   }
 
-  return match;
+  return false;
 }
 
-bool FilterRule::contains(const Data::Entry* const unit_) const {
-  bool match = false;
-
+bool FilterRule::contains(const Data::Entry* const entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
-    QStringList list = unit_->fieldValues();
+    QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
     // match is true if any strings match
     for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
       if((*it).find(m_pattern, 0, false) >= 0) {
-        match = true;
-        break;
+        return true;
       }
     }
   } else {
-    QString value = unit_->field(m_fieldName);
-    match = (value.find(m_pattern, 0, false) >= 0);
+    return entry_->field(m_fieldName).find(m_pattern, 0, false) >= 0
+           || entry_->formattedField(m_fieldName).find(m_pattern, 0, false) >= 0;
   }
 
-  return match;
+  return false;
 }
 
-bool FilterRule::matchesRegExp(const Data::Entry* const unit_) const {
-  bool match = false;
-
+bool FilterRule::matchesRegExp(const Data::Entry* const entry_) const {
   QRegExp rx(m_pattern, false);
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
-    QStringList list = unit_->fieldValues();
+    QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
     for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
       if((*it).find(rx) >= 0) {
-        match = true;
+        return true;
         break;
       }
     }
   } else {
-    QString value = unit_->field(m_fieldName);
-    match = (value.find(rx) >= 0);
+    return entry_->field(m_fieldName).find(rx) >= 0
+           || entry_->formattedField(m_fieldName).find(rx) >= 0;
   }
 
-  return match;
+  return false;
 }
 
 
 /*******************************************************/
 
-bool Filter::matches(const Data::Entry* const unit_) const {
+bool Filter::matches(const Data::Entry* const entry_) const {
   if(isEmpty()) {
     return true;
   }
 
   bool match = false;
   for(QPtrListIterator<FilterRule> it(*this); it.current(); ++it) {
-    if(it.current()->matches(unit_)) {
+    if(it.current()->matches(entry_)) {
       if(m_op == Filter::MatchAny) {
         return true;
       } else {
@@ -131,6 +122,6 @@ bool Filter::matches(const Data::Entry* const unit_) const {
       }
     }
   }
-  
+
   return match;
 }

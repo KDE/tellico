@@ -123,8 +123,6 @@ void KWidgetLister::addWidgetAtEnd(QWidget *w)
   mLayout->insertWidget( mLayout->findWidget( mButtonBox ), w );
   mWidgetList.append( w );
   w->show();
-  updateGeometry();
-
   enableControls();
   emit widgetAdded();
   emit widgetAdded(w);

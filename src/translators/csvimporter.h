@@ -36,7 +36,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: csvimporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: csvimporter.h 527 2004-03-11 02:38:36Z robby $
  */
 class CSVImporter : public TextImporter {
 Q_OBJECT
@@ -47,7 +47,7 @@ public:
   CSVImporter(const KURL& url);
 
   /**
-   * @return A pointer to a @ref BCCollection, or 0 if none can be created.
+   * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
    */
   virtual Data::Collection* collection();
   /**

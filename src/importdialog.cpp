@@ -46,14 +46,20 @@ ImportDialog::ImportDialog(ImportFormat format_, const KURL& url_, MainWindow* p
   QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, i18n("Import Options"), widget);
   topLayout->addWidget(bg, 0);
   m_radioReplace = new QRadioButton(i18n("Replace current collection"), bg);
-  m_radioReplace->setChecked(true);
   QWhatsThis::add(m_radioReplace, i18n("Replace the current collection with the contents "
                                        "of the imported file."));
   m_radioAppend = new QRadioButton(i18n("Append to current collection"), bg);
   QWhatsThis::add(m_radioAppend, i18n("Append the contents of the imported file to the "
                                       "current collection. This is only possible when the "
                                       "collection types match."));
-//  m_radioAppend->setEnabled(false);
+  m_radioMerge = new QRadioButton(i18n("Merge with current collection"), bg);
+  QWhatsThis::add(m_radioMerge, i18n("Merge the contents of the imported file to the "
+                                     "current collection. This is only possible when the "
+                                     "collection types match. Entries must match exactly "
+                                     "in order to be merged."));
+  // append by default?
+  m_radioAppend->setChecked(true);
+
 
   QWidget* w = m_importer->widget(widget, "importer_widget");
 //  m_importer->readOptions(KGlobal::config());
@@ -68,6 +74,11 @@ ImportDialog::ImportDialog(ImportFormat format_, const KURL& url_, MainWindow* p
   setMainWidget(widget);
 }
 
+ImportDialog::~ImportDialog() {
+  delete m_importer;
+  m_importer = 0;
+}
+
 Bookcase::Data::Collection* ImportDialog::collection() {
   if(m_importer && !m_coll) {
     m_coll = m_importer->collection();
@@ -79,8 +90,14 @@ QString ImportDialog::statusMessage() const {
   return m_importer ? m_importer->statusMessage() : QString::null;
 }
 
-bool ImportDialog::replaceCollection() const {
-  return m_radioReplace->isChecked();
+ImportDialog::ImportAction ImportDialog::action() const {
+  if(m_radioReplace->isChecked()) {
+    return Replace;
+  } else if(m_radioAppend->isChecked()) {
+    return Append;
+  } else {
+    return Merge;
+  }
 }
 
 Bookcase::Import::Importer* ImportDialog::importer(ImportFormat format_, const KURL& url_) {
@@ -136,7 +153,7 @@ QString ImportDialog::fileFilter(ImportFormat format_) {
       break;
 
     case AudioFile:
-      // TODO: add mp3, too?
+      // FIXME: add mp3, too?
       text = i18n("*.ogg|Ogg files (*.ogg)") + QString::fromLatin1("\n");
       break;
 

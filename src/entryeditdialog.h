@@ -29,7 +29,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryeditdialog.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: entryeditdialog.h 564 2004-03-20 02:23:33Z robby $
  */
 class EntryEditDialog : public KDialogBase {
 Q_OBJECT
@@ -50,9 +50,9 @@ public:
   /**
    * Deletes and resets the layout of the tabs.
    *
-   * @param coll A point to the collection whose fields should be used for setting up the layout
+   * @param coll A pointer to the collection whose fields should be used for setting up the layout
    */
-  void setLayout(Bookcase::Data::Collection* coll);
+  void setLayout(Data::Collection* coll);
   /**
    * Sets the contents of the input controls to match the contents of a entry.
    *

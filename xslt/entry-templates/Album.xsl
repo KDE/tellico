@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - Entry template for videos
 
-   $Id: Album.xsl 491 2004-02-21 06:12:49Z robby $
+   $Id: Album.xsl 614 2004-04-17 18:52:48Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -21,10 +21,14 @@
    ===================================================================
 -->
 
+<!-- import common templates -->
+<!-- location depends on being installed correctly -->
+<xsl:import href="../bookcase-common.xsl"/>
+
 <xsl:output method="html"/>
 
 <xsl:param name="datadir"/> <!-- dir where Bookcase data are located -->
-<xsl:param name="tmpdir"/> <!-- dir where field images are located -->
+<xsl:param name="imgdir"/> <!-- dir where field images are located -->
 <xsl:param name="font"/> <!-- default KDE font family -->
 <xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
 <xsl:param name="bgcolor"/> <!-- default KDE background color -->
@@ -53,14 +57,10 @@
      the entry. The title is in the top H1 element. -->
 <xsl:template match="bc:bookcase">
  <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
- <xsl:if test="@syntaxVersion != '5'">
-  <xsl:message>
-   <xsl:text>This stylesheet was designed for Bookcase DTD version 5, &#xa;
-             but the input data file is version </xsl:text>
-   <xsl:value-of select="@syntaxVersion"/>
-   <xsl:text>. There might be some &#xa;problems with the output.</xsl:text>
-  </xsl:message>
- </xsl:if>
+ <xsl:call-template name="syntax-version">
+  <xsl:with-param name="this-version" select="'5'"/>
+  <xsl:with-param name="data-version" select="@syntaxVersion"/>
+ </xsl:call-template>
 
  <html>
   <head>
@@ -119,6 +119,11 @@
         padding-right: 3px;
    }
   </style>
+  <title>
+   <xsl:value-of select="bc:collection/bc:entry[1]/bc:title"/>
+   <xsl:text> - </xsl:text>
+   <xsl:value-of select="bc:collection/@title"/>
+  </title>
   </head>
   <body>
    <xsl:apply-templates select="bc:collection"/>
@@ -139,7 +144,17 @@
 <xsl:template match="bc:entry">
  <xsl:variable name="entry" select="."/>
  <xsl:variable name="titleCat" select="key('fieldsByName','title')/@category"/>
- <xsl:variable name="trackCat" select="key('fieldsByName','track')/@category"/>
+ <!-- there might not be a track list -->
+ <xsl:variable name="trackCat">
+  <xsl:choose>
+   <xsl:when test="bc:tracks">
+    <xsl:value-of select="key('fieldsByName','track')/@category"/>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="''"/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:variable>
 
  <!-- the top table has images in the left cell and main fields in the right.
       2 images can be on the left -->
@@ -149,7 +164,7 @@
     <!-- now, show all the images in the entry, type 10 -->
     <xsl:variable name="images" select="../bc:fields/bc:field[@type=10]"/>
     <xsl:for-each select="$images">
-     
+
      <!-- images will never be multiple, so no need to check for that -->
      <!-- find the value of the image field in the entry -->
      <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
@@ -157,11 +172,11 @@
      <xsl:if test="$image">
       <a>
        <xsl:attribute name="href">
-        <xsl:value-of select="concat('file://',$tmpdir, $image)"/>
+        <xsl:value-of select="concat($imgdir, $image)"/>
        </xsl:attribute>
        <img>
         <xsl:attribute name="src">
-         <xsl:value-of select="concat($tmpdir, $image)"/>
+         <xsl:value-of select="concat($imgdir, $image)"/>
         </xsl:attribute>
         <!-- limit to maximum widht of 200 of height of 300 -->
         <xsl:call-template name="image-size">
@@ -181,7 +196,7 @@
    <td valign="top" width="100%">
     <!-- now a nested table with the general fields -->
     <div id="banner">
-     
+
      <h1>
       <xsl:choose>
        <xsl:when test="count(.//bc:artist) = 1">
@@ -193,7 +208,7 @@
       </xsl:choose>
       <xsl:text> - </xsl:text>
       <xsl:value-of select="bc:title"/>
-      
+
       <!-- Bookcase 0.8 had multiple years in the default video collection -->
       <xsl:if test=".//bc:year">
        <span class="year">
@@ -202,7 +217,7 @@
         <xsl:text>)</xsl:text>
        </span>
       </xsl:if>
-      
+
      </h1>
     </div>
    </td>
@@ -218,7 +233,7 @@
          <xsl:value-of select="@title"/>
         </th>
         <td width="75%" class="fieldValue">
-         <xsl:call-template name="output-field">
+         <xsl:call-template name="simple-field-value">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>
          </xsl:call-template>
@@ -227,46 +242,50 @@
       </xsl:if>
      </xsl:for-each>
     </table>
-    
+
    </td>
   </tr>
  </table>
 
- <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
+ <xsl:if test="bc:tracks">
+  <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
    <tr class="category">
     <td colspan="2">
      <xsl:value-of select="$trackCat"/>
     </td>
    </tr>
-  <xsl:for-each select="bc:tracks/bc:track">
-   <tr>
-    <th align="right">
-     <xsl:value-of select="format-number(position(), '00')"/>
-    </th>
-    <xsl:choose>
-     <xsl:when test="bc:column">
-      <td class="fieldValue">
-       <xsl:value-of select="bc:column[1]"/>
-      </td>
-      <td class="fieldValue">
-       <em>
-        <xsl:value-of select="bc:column[2]"/>
-       </em>
-      </td>
-     </xsl:when>
-     <xsl:otherwise>
-      <td width="100%" class="fieldValue">
-       <xsl:value-of select="."/>
-      </td>
-     </xsl:otherwise>
-    </xsl:choose>
-   </tr>
-  </xsl:for-each>
- </table>
-
-<!-- now for every thing else -->
+   <xsl:for-each select="bc:tracks/bc:track">
+    <tr>
+     <th align="right">
+      <xsl:value-of select="format-number(position(), '00')"/>
+     </th>
+     <xsl:choose>
+      <xsl:when test="bc:column">
+       <td class="fieldValue">
+        <xsl:value-of select="bc:column[1]"/>
+       </td>
+       <td class="fieldValue">
+        <em>
+         <xsl:value-of select="bc:column[2]"/>
+        </em>
+       </td>
+      </xsl:when>
+      <xsl:otherwise>
+       <td width="100%" class="fieldValue">
+        <xsl:value-of select="."/>
+       </td>
+      </xsl:otherwise>
+     </xsl:choose>
+    </tr>
+   </xsl:for-each>
+  </table>
+ </xsl:if>
+ 
+ <!-- now for every thing else -->
  <!-- write categories other than general and images -->
- <xsl:for-each select="$categories[. != $titleCat and. != $trackCat and  key('fieldsByCat',.)[1]/@type != 10]">
+ <xsl:for-each select="$categories[. != $titleCat and
+                                   ($trackCat = '' or . != $trackCat) and
+                                   key('fieldsByCat',.)[1]/@type != 10]">
   <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
    <tr class="category">
     <td colspan="2">
@@ -324,7 +343,7 @@
          <xsl:value-of select="@title"/>
         </th>
         <td width="50%" class="fieldValue">
-         <xsl:call-template name="output-field">
+         <xsl:call-template name="simple-field-value">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>
          </xsl:call-template>
@@ -339,95 +358,6 @@
    <br clear="left"/>
   </xsl:if>
  </xsl:for-each>
-</xsl:template>
-
-<xsl:template name="output-field">
- <xsl:param name="entry"/>
- <xsl:param name="field"/>
-
- <!-- if the field has multiple values, then there is no child of the entry with the field name -->
- <xsl:variable name="child" select="$entry/*[local-name(.)=$field]"/>
- <xsl:choose>
-  <xsl:when test="$child">
-
-   <!-- if the field is a bool type, just ouput an X -->
-   <xsl:choose>
-    <xsl:when test="key('fieldsByName',$field)/@type=4">
-     <xsl:text>X</xsl:text>
-    </xsl:when>
-
-    <!-- if it's a url, then add a hyperlink -->
-    <xsl:when test="key('fieldsByName',$field)/@type=7">
-     <a href="{$child}">
-      <xsl:value-of select="$child"/>
-     </a>
-    </xsl:when>
-
-    <xsl:otherwise>
-     <xsl:value-of select="$child"/>
-    </xsl:otherwise>
-   </xsl:choose>
-  </xsl:when>
-
-  <!-- now handle fields with multiple values -->
-  <xsl:otherwise>
-   <xsl:for-each select="$entry/*[local-name(.)=concat($field,'s')]/*">
-    <xsl:value-of select="."/>
-    <xsl:if test="position()!=last()">
-     <xsl:text>; </xsl:text>
-    </xsl:if>
-   </xsl:for-each>
-  </xsl:otherwise>
- </xsl:choose>
-</xsl:template>
-
-<xsl:template name="image-size">
- <xsl:param name="limit-height"/>
- <xsl:param name="limit-width"/>
- <xsl:param name="image"/>
-
- <xsl:variable name="actual-width" select="$image/@width"/>
- <xsl:variable name="actual-height" select="$image/@height"/>
-
- <xsl:choose>
-  <xsl:when test="$actual-width &gt; $limit-width or $actual-height &gt; $limit-height">
-
-   <!-- -->
-   <xsl:choose>
-    
-    <xsl:when test="$actual-width * $limit-height &lt; $actual-height * $limit-width">
-     <xsl:attribute name="height">
-      <xsl:value-of select="$limit-height"/>
-     </xsl:attribute>
-     <xsl:attribute name="width">
-      <xsl:value-of select="$actual-width * $limit-height div $actual-height"/>
-     </xsl:attribute>
-    </xsl:when>
-    
-    <xsl:otherwise>
-     <xsl:attribute name="width">
-      <xsl:value-of select="$limit-width"/>
-     </xsl:attribute>
-     <xsl:attribute name="height">
-      <xsl:value-of select="$actual-height * $limit-width div $actual-width"/>
-     </xsl:attribute>
-    </xsl:otherwise>
-
-   </xsl:choose>
-
-  </xsl:when>
-
-  <!-- if both are smaller, no change -->
-  <xsl:otherwise>
-   <xsl:attribute name="height">
-    <xsl:value-of select="$actual-height"/>
-   </xsl:attribute>
-   <xsl:attribute name="width">
-    <xsl:value-of select="$actual-width"/>
-   </xsl:attribute>
-  </xsl:otherwise>
-  
- </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>

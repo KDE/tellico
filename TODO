@@ -1,11 +1,5 @@
-Bookcase 0.9.x 
-
-  Update documentation
-  Clean up XSL files
-  Improve icons
-
-
 Beyond Bookcase 1.0 
 
   Enable lookup of book info via internet via z39.50
-  Enable lookup of video info view internet at imdb.com
+  Enable lookup of video info via internet at imdb.com
+  Add CDDB lookup for CDs

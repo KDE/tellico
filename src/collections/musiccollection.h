@@ -20,7 +20,7 @@ namespace Bookcase {
   namespace Data {
 
 /**
- * A BCCollection for music, like CD's and cassettes.
+ * A collection for music, like CD's and cassettes.
  *
  * It has the following standard attributes:
  * @li Title
@@ -31,7 +31,7 @@ namespace Bookcase {
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: musiccollection.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: musiccollection.h 527 2004-03-11 02:38:36Z robby $
  */
 class MusicCollection : public Collection {
 Q_OBJECT

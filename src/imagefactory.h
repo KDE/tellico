@@ -14,9 +14,9 @@
 #ifndef IMAGEFACTORY_H
 #define IMAGEFACTORY_H
 
-class KURL;
-
 #include "image.h"
+
+#include <kurl.h>
 
 #include <qdict.h>
 
@@ -24,11 +24,38 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imagefactory.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: imagefactory.h 612 2004-04-17 18:04:45Z robby $
  */
 class ImageFactory {
 public:
+  /**
+   * Add an image, reading it from a URL, which is the case when adding a new image from the
+   * @ref ImageWidget.
+   *
+   * @param url The URL of the image, anything KIO can handle
+   * @return The image
+   */
   static const Data::Image& addImage(const KURL& url);
+  /**
+   * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
+   * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
+   * 'know' what format it came from.
+   *
+   * @param image The qimage
+   * @param format The image format, probably "PNG"
+   * @return The image
+   */
+  static const Data::Image& addImage(const QImage& image, const QString& format);
+  /**
+   * Add an image, reading it from data, which is the case when reading from the data file. The
+   * @p id isn't strictly needed, since it can be reconstructed from the image data and format, but
+   * since it's already known, go ahead and use it.
+   *
+   * @param data The image data
+   * @param format The image format, from Qt's output format list
+   * @param id The internal id of the image
+   * @return The image
+   */
   static const Data::Image& addImage(const QByteArray& data, const QString& format, const QString& id);
   /**
    * Returns an image reference given its id. If none is found, a null image
@@ -45,17 +72,23 @@ public:
    */
   static const QString& tempDir() { if(s_tempDir.isEmpty()) createTempDir(); return s_tempDir; }
   /**
-   * Writes an image to a tempfile. ImageFactory keeps track of which images were already written.
+   * Writes an image to a file. ImageFactory keeps track of which images were already written
+   * if the location is the same as the tempdir.
    *
    * @param id The ID of the image to be written
+   * @param targetDir The directory to write the image to, if empty, the tempdir is used.
    * @param force Force the image to be written, even if it already has been
    * @return Whether the save was successful
    */
-  static bool writeImage(const QString& id, bool force=false);
+  static bool writeImage(const QString& id, const KURL& targetDir=KURL(), bool force=false);
   /**
    * Clean the temp dir and remove all temporary image files
    */
   static void clean();
+  /**
+   * Are there any images in the collection?
+   */
+  static bool hasImages() { return !s_imageDict.isEmpty(); }
 
 private:
   /**

@@ -69,7 +69,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
   Field::FormatFlag flag = m_coll->fieldByName(fieldName_)->formatFlag();
 
   // if auto format is not set or FormatNone, then just return the value
-  if(!Field::autoFormat() || flag == Field::FormatNone) {
+  if(flag == Field::FormatNone) {
     return field(fieldName_);
   }
 
@@ -164,7 +164,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   if(!(f->flags() & Field::AllowMultiple)) {
     QString value = formattedField(fieldName_);
     if(value.isEmpty()) {
-      return Collection::s_emptyGroupName;
+      return Collection::s_emptyGroupTitle;
     } else {
       return value;
     }
@@ -181,22 +181,21 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   return groups;
 }
 
-QStringList Entry::fieldValues() const {
-  return m_fields.values();
-}
-
 bool Entry::isOwned() const {
   return (m_coll && !m_coll->entryList().isEmpty() && m_coll->entryList().containsRef(this) > 0);
 }
 
+// a null string means invalidate all
 void Entry::invalidateFormattedFieldValue(const QString& name_) {
-  if(!m_formattedFields.isEmpty() && m_formattedFields.contains(name_)) {
+  if(name_.isNull()) {
+    m_formattedFields.clear();
+  } else if(!m_formattedFields.isEmpty() && m_formattedFields.contains(name_)) {
     m_formattedFields.remove(name_);
   }
 }
 
 // format is something like "%{year} %{author}"
-QString Entry::dependentValue(const QString& format_, bool autoFormat_) const {
+QString Entry::dependentValue(const QString& format_, bool autoCapitalize_) const {
   QString result, fieldName;
   Field* f;
 
@@ -215,7 +214,8 @@ QString Entry::dependentValue(const QString& format_, bool autoFormat_) const {
           f = m_coll->fieldByTitle(fieldName);
         }
         if(f) {
-          result += (autoFormat_ ? formattedField(fieldName) : field(fieldName));
+          // don't format, just capitalize
+          result += (autoCapitalize_ ? Field::capitalize(field(fieldName)) : field(fieldName));
         } else {
           result += format_.mid(pctPos, endPos-pctPos+1);
         }

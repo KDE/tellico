@@ -22,7 +22,7 @@
 using Bookcase::EntryItem;
 using Bookcase::ParentItem;
 
-// should only get called for BCDetailedListView parents
+// should only get called for DetailedListView parents
 int EntryItem::compareColumn(QListViewItem* item_, int col_) const {
   DetailedListView* lv = dynamic_cast<DetailedListView*>(listView());
   if(lv && lv->isNumber(col_)) {
@@ -83,10 +83,10 @@ QString ParentItem::key(int col_, bool) const {
     return text(col_);
   }
 
-  if(text(col_) == Data::Collection::s_emptyGroupName) {
+  if(text(col_) == Data::Collection::s_emptyGroupTitle) {
     return QString::fromLatin1("\t");
   }
-  
+
   if(m_text.isEmpty() || m_text != text(col_)) {
     m_text = text(col_);
     if(Data::Field::autoFormat()) {
@@ -106,7 +106,7 @@ QString ParentItem::key(int col_, bool) const {
   return m_key;
 }
 
-// if the parent listview is a BCGroupView, column=0, and showCount is true, then
+// if the parent listview is a GroupView, column=0, and showCount is true, then
 // include and color the number of books.
 // Otherwise, just pass the call up the line
 void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
@@ -114,7 +114,7 @@ void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
   if(!p_) {
     return;
   }
-  
+
   // always paint the cell
   KListViewItem::paintCell(p_, cg_, column_, width_, align_);
 
@@ -138,7 +138,7 @@ void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
 
       // don't call ParentItem::width() because that includes the count already
       int w = KListViewItem::width(p_->fontMetrics(), groupView, column_);
-      
+
       p_->drawText(w-marg, 0, width_-marg-w, height(), align_ | Qt::AlignVCenter, numText);
     }
   }
@@ -152,14 +152,16 @@ int ParentItem::width(const QFontMetrics& fm_, const QListView* lv_, int column_
     const GroupView* groupView = static_cast<const GroupView*>(lv_);
 
     if(groupView->showCount()) {
-      QString numText = QString::fromLatin1(" (");
-      numText += QString::number(m_count);
-      numText += QString::fromLatin1(")");
-
+      QString numText = QString::fromLatin1(" (%1)").arg(m_count);
       w += fm_.width(numText);
     }
   }
   return w;
 }
 
-
+void ParentItem::setCount(int count_) {
+  m_count = count_;
+  QString s;
+  s.sprintf("%06d", count_); // surely no one will ever have over a million entries!
+  setText(1, s);
+}

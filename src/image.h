@@ -25,7 +25,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: image.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: image.h 568 2004-03-23 02:28:56Z robby $
  */
 class Image : public QImage {
 
@@ -46,6 +46,7 @@ public:
 
 private:
   Image(const QString& filename);
+  Image(const QImage& image, const QString& format);
   Image(const QByteArray& data, const QString& format, const QString& id);
 
   QString m_id;
@@ -55,6 +56,8 @@ private:
   } // end namespace
 } // end namespace
 
-bool operator== (const Bookcase::Data::Image& img1, const Bookcase::Data::Image& img2);
+inline bool operator== (const Bookcase::Data::Image& img1, const Bookcase::Data::Image& img2) {
+  return img1.id() == img2.id();
+};
 
 #endif

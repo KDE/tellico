@@ -25,10 +25,10 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: htmlexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: htmlexporter.h 586 2004-04-03 23:06:46Z robby $
  */
 class HTMLExporter : public TextExporter {
-public: 
+public:
   HTMLExporter(const Data::Collection* coll, Data::EntryList list);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
@@ -41,6 +41,7 @@ public:
   void setXSLTFile(const QString& filename) { m_xsltfile = filename; }
   void setPrintHeaders(bool printHeaders) { m_printHeaders = printHeaders; }
   void setPrintGrouped(bool printGrouped) { m_printGrouped = printGrouped; }
+  void setMaxImageSize(int w, int h) { m_imageWidth = w; m_imageHeight = h; }
   void setGroupBy(const QStringList& groupBy) { m_groupBy = groupBy; }
   void setSortTitles(const QStringList& l)
     { m_sort1 = l[0]; m_sort2 = l[1]; m_sort3 = l[2]; }
@@ -49,9 +50,15 @@ public:
 private:
   bool m_printHeaders;
   bool m_printGrouped;
+  bool m_exportEntryFiles;
+  int m_imageWidth;
+  int m_imageHeight;
+
   QWidget* m_widget;
   QCheckBox* m_checkPrintHeaders;
   QCheckBox* m_checkPrintGrouped;
+  QCheckBox* m_checkExportEntryFiles;
+  QCheckBox* m_checkExportImages;
 
   QString m_xsltfile;
   QStringList m_groupBy;
@@ -59,6 +66,7 @@ private:
   QString m_sort2;
   QString m_sort3;
   QStringList m_columns;
+  QString m_entryXSLTFile;
 };
 
   } // end namespace

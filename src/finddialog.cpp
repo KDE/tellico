@@ -111,7 +111,7 @@ void FindDialog::slotUser1() {
   if(m_asRegExp->isChecked() || m_wholeWords->isChecked()) {
     options = (options & Data::Document::AsRegExp);
     if(!QRegExp(text).isValid()) {
-      // TODO: but what about when just checked whole words? Need to escape stuff if there's
+      // FIXME: but what about when just checked whole words? Need to escape stuff if there's
       // critical characters in the string, fix later
       KMessageBox::error(this, i18n("Invalid regular expression."));
       return;

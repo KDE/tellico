@@ -1,0 +1,260 @@
+<chapter id="fields">
+<title>Collection Fields</title>
+
+<para>
+Each collection may have an unlimited number of fields. &bookcase; supports ten types of fields, which allow for a range of different data.
+</para>
+
+<sect1 id="field-types">
+<title>Field Types</title>
+
+<variablelist>
+
+<varlistentry>
+<term><anchor id="Line"/>Simple Text</term>
+<listitem>
+
+<para>
+The most basic field type is called <emphasis>Simple Text</emphasis>.
+No restrictions are placed on the field values, and the data entry
+widget is the standard line edit. This type is appropriate for fields
+which aren't expected to have long values, such as author or genre.  </para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="Number"/>Number</term>
+<listitem>
+
+<para>
+The <emphasis>Number</emphasis> type is identical to the
+<emphasis>Simple Text</emphasis>, except that the data is restricted
+to being numerical. Entries will be sorted numerically in the column
+view if a <emphasis>Number</emphasis> field column is clicked. Again,
+the standard line edit is used for data entry. No formatting is ever
+applied.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="URL"/>URL</term>
+<listitem>
+
+<para>
+The <emphasis>URL</emphasis> type allows for links to other documents,
+using the standard &kde; file type associations for opening the linked
+documents. No validation is done on the actual value of a
+<emphasis>URL</emphasis> field, but non-valid links are not
+opened. The data entry is a line edit with a button for opening the
+standard File-Open dialog, but any URL may be used. In the Entry
+Editor, the label becomes the link, while in the Entry View, an actual
+hyperlink is used. This field type is convenient for linking to PDF
+files of bibliographic entries, or to movie reviews, for example. No
+formatting is ever applied.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="Para"/>Paragraph</term>
+<listitem>
+
+<para>
+For longer text fields, the <emphasis>Paragraph</emphasis> type offers
+a larger text edit area, and is always in its own category. A
+<emphasis>Paragraph</emphasis> field may not have multiple values, nor
+is it automatically formatted. It cannot be used for grouping. Abstracts, plot
+summaries, or reviews should be entered using this field type.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="Choice"/>Choice</term>
+<listitem>
+
+<para>
+When a field should be limited to a few preset values, a
+<emphasis>Choice</emphasis> type is used. The acceptable values are
+presented in a drop-down box for selection. Obviously, multiple values
+are not applicable. Fields such as bibliography type or personal rating
+use a <emphasis>Choice</emphasis> type.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="Bool"/>Checkbox</term>
+<listitem>
+
+<para>
+For fields which take a yes or no value, the
+<emphasis>Checkbox</emphasis> type is available. By default, the field
+is toggled off. <emphasis>Checkbox</emphasis> fields are not formatted
+and are limited to single values. Internally, the field values are
+carried as <constant>true</constant> or
+<constant>false</constant>. Some examples are gift or loaned
+fields.</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="Table"/>Table</term>
+<listitem>
+
+<para>
+<emphasis>Table</emphasis> fields allow a single-column list of unlimited values.
+In the Field Editor, the field is presented using a spreadsheet-like view, with
+numbered rows. When the last row is entered, an additional row is then added. This field
+would be good for a list of chapters in a book, scenes in a movie, or songs in an album.
+</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="Table2"/>Table (2 Columns)</term>
+<listitem>
+
+<para>
+Some fields may need two columns of data, which is available as a
+<emphasis>Table (2 Columns)</emphasis> type. It is identical to the
+previous <emphasis>Table</emphasis> type, but has an additional column. The default
+video collection uses a 2-column field for the cast, with the first column holding
+the actor's name and the second column holding the character's. Only the first column
+is ever auto-formatted, and only the first column is used for grouping. Typically, the
+second column is italicized in the entry view templates, or when exporting to HTML.
+</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="Image"/>Image</term>
+<listitem>
+
+<para>
+<emphasis>Image</emphasis> fields hold an image, of any format supported by &kde;.
+Some of the typical ones include PNG or JPEG. The image is saved inside the &bookcase; data
+file. The standard &kde; File Selector is used, so you can use a URL or just a file available
+locally.
+</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="Dependent"/>Dependent</term>
+<listitem>
+
+<para>
+The final field type is the <emphasis>Dependent</emphasis> field. You probably won't use
+this one very often. It is used to combine values from other fields using a format
+string in the field description. For example, if a <emphasis>Dependent</emphasis> field has
+a description of <userinput>%{title} %{year}</userinput>, then the value of that field will
+be the title, followed by the year. This field type is used primarily for the title field in
+the coin, stamp, trading card, and wine collections.
+</para>
+
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="customizing-fields">
+<title>Creating and Modifying Fields</title>
+
+<para>
+The Collection Fields Dialog allows you to modify the existing fields in the collection or to add new ones.
+</para>
+
+<screenshot>
+<screeninfo>The &bookcase; Collection Fields Dialog</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="fieldsdialog.png"/></imageobject>
+<textobject><phrase>The &bookcase; Collection Fields Dialog</phrase></textobject>
+<caption><para>The &bookcase; Collection Fields Dialog</para></caption>
+</mediaobject>
+</screenshot>
+
+<sect2 id="field-list">
+<title>Field List</title>
+
+<para>
+On the left side of the dialog is the list of the current fields. Modified fields are show in italics. The buttons below
+the list will add or delete a field, and the arrows can be used to change their order. The order of the fields in the list
+is important because the Entry Editor uses the order for its layout. For each category, the fields will be laid out from left
+to right, according to the top-to-bottom order of the fields in the list.
+</para>
+</sect2>
+
+<sect2 id="field-properties">
+<title>Field Properties</title>
+
+<para>
+A field is defined by its title, type, category, description, and possibly some allowed values. The title is used everywhere to
+refer to the field in the user interface. The Entry Editor uses it to prompt for values. The column view uses it as a column header, etc. The ten different types of fields are <link linkend="field-types">explained in the previous section</link>. The description is used as a tooltip in the Entry Editor, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="Dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The allowed values for <link linkend="Choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
+</para>
+</sect2>
+
+<sect2 id="field-formatting">
+<title>Field Formatting</title>
+
+<para>
+&bookcase; provides some capability for automatic formatting of field values. The simplest is auto-capitalization, which capitalizes every word except articles. Title formatting moves certain articles from the beginning to the end of the field, for example, changing "The Return of the King" to "Return of the King, The". The title articles are configurable. Finally, name formatting tries to break up the string so that the last, or family, name of the person is shown first. Name prefixes and suffixes are configurable. Also, the special group for people uses all fields which use name formatting.
+</para>
+
+<para>
+All automatic formatting can be disabled by changing the global options in the configuration dialog. Globally, capitalization is a distinct option from formatting, so a title can be auto-formatted without being capitalized. Not all field types allow auto-formatting. 
+</para>
+
+<note><para>The actual values in the collection are <emphasis>not</emphasis> changed, only the text used for the interface.</para></note>
+
+<table>
+<title>Formatting Examples</title>
+<tgroup cols="5">
+<thead>
+<row>
+<entry>Format Type</entry>
+<entry>Field Value</entry>
+<entry>Auto-Capitalized</entry>
+<entry>Auto-Formatted</entry>
+<entry>Auto-Formatted &amp; Auto-Capitalized</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><emphasis>Title</emphasis></entry>
+<entry>the return of the king</entry>
+<entry>The Return of the King</entry>
+<entry>return of the king, the</entry>
+<entry>Return of the King, The</entry>
+</row>
+<row>
+<entry><emphasis>Name</emphasis></entry>
+<entry>tom swift, jr.</entry>
+<entry>Tom Swift, Jr.</entry>
+<entry>swift, jr., tom</entry>
+<entry>Swift, Jr., Tom</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</sect2>
+
+<sect2 id="field-options">
+<title>Field Options</title>
+
+<para>
+Fields also have three general options. If auto-completion is enabled, &bookcase; caches all the values for every entry in the collection, and the &entry-editor; offers automatic completion, using the standard &kde; settings. The only drawback to auto-completion is that it slows down the initial loading of the collection somewhat. Not all field types allow auto-completion. &bookcase; also needs to know if a field may have multiple values or may be used to group the entries.
+</para>
+</sect2>
+
+</sect1>
+
+</chapter>

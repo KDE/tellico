@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.8.5
+%define version 0.9
 %define release 1rls
 %define iconname %{name}.png
 %define __libtoolize /bin/true
@@ -83,14 +83,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
-* Thu Feb 19 2004 Robby Stephenson <robby@periapsis.org> 0.8.4-1rls
-- Version 0.8.4
-
-* Wed Feb  5 2004 Robby Stephenson <robby@periapsis.org> 0.8.3-1rls
-- Version 0.8.3
-
-* Wed Feb  4 2004 Robby Stephenson <robby@periapsis.org> 0.8.2-1rls
-- Version 0.8.2
+* Sat Apr 10 2004 Robby Stephenson <robby@periapsis.org> 0.9-1rls
+- Version 0.9
 
 * Tue Feb  3 2004 Robby Stephenson <robby@periapsis.org> 0.8.1-1rls
 - Version 0.8.1

@@ -62,13 +62,24 @@
     <string>{\cc}</string>
     <string>\c{c}</string>
   </key>
+  <key char="É">
+    <string>{\`E}</string>
+    <string>\`{E}</string>
+  </key>
   <key char="è">
     <string>{\`e}</string>
     <string>\`{e}</string>
   </key>
+  <key char="È">
+    <string>{\'E}</string>
+    <string>\'{E}</string>
+  </key>
   <key char="é">
     <string>{\'e}</string>
     <string>\'{e}</string>
+  </key>
+  <key char="Ê">
+    <string>{\^E}</string>
   </key>
   <key char="ê">
     <string>{\^e}</string>
@@ -90,6 +101,9 @@
   <key char="ï">
     <string>{\&quot;i}</string>
   </key>
+  <key char="Ñ">
+    <string>{\~N}</string>
+  </key>
   <key char="ñ">
     <string>{\~n}</string>
   </key>
@@ -109,7 +123,12 @@
   </key>
   <key char="ö">
     <string>{\&quot;o}</string>
+  </key>
+  <key char="œ">
     <string>{\oe}</string>
+  </key>
+  <key char="Œ">
+    <string>{\OE}</string>
   </key>
   <key char="ø">
     <string>{\o}</string>
@@ -124,6 +143,10 @@
   </key>
   <key char="û">
     <string>{\^u}</string>
+  </key>
+  <key char="Ü">
+    <string>{\&quot;U}</string>
+    <string>\&quot;{U}</string>
   </key>
   <key char="ü">
     <string>{\&quot;u}</string>

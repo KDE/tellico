@@ -22,17 +22,21 @@ class QWidget;
 
 #include <qstring.h>
 
+#include <kurl.h>
+
 namespace Bookcase {
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: exporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: exporter.h 580 2004-03-27 03:34:33Z robby $
  */
 class Exporter {
-public: 
+public:
   Exporter(const Data::Collection* coll, const Data::EntryList& list) : m_coll(coll), m_entryList(list) {}
   virtual ~Exporter() {}
+
+  void setURL(const KURL& url_) { m_url = url_; }
 
   virtual QWidget* widget(QWidget* parent, const char* name=0) = 0;
   virtual QString formatString() const = 0;
@@ -46,10 +50,12 @@ public:
 protected:
   const Data::Collection* collection() const { return m_coll; }
   const Data::EntryList& entryList() const { return m_entryList; }
+  const KURL& url() const { return m_url; }
 
 private:
   const Data::Collection* m_coll;
   const Data::EntryList m_entryList;
+  KURL m_url;
 };
 
   } // end namespace

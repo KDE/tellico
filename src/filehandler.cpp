@@ -116,17 +116,20 @@ Bookcase::Data::Image* FileHandler::readImageFile(const KURL& url_) {
     return 0;
   }
 
-  return new Data::Image(f.filename);
+  Data::Image* img = new Data::Image(f.filename);
+  if(img->isNull()) {
+    QString str = i18n("Bookcase is unable to load the image - %1.").arg(url_.fileName());
+    KMessageBox::sorry(s_mainWindow, str);
+  }
+  return img;
 }
 
 bool FileHandler::queryExists(const KURL& url_) {
   bool success = true;
 #if KDE_IS_VERSION(3,1,90)
   if(KIO::NetAccess::exists(url_, false, s_mainWindow)) {
-#elif KDE_IS_VERSION(3,0,90)
-  if(KIO::NetAccess::exists(url_, false)) {
 #else
-  if(KIO::NetAccess::exists(url_)) {
+  if(KIO::NetAccess::exists(url_, false)) {
 #endif
     if(url_ != s_mainWindow->doc()->URL()) {
       QString str = i18n("A file named \"%1\" already exists. "
@@ -156,8 +159,8 @@ bool FileHandler::queryExists(const KURL& url_) {
   return success;
 }
 
-bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool locale_) {
-  if(!queryExists(url_)) {
+bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool encodeUTF8_, bool force_) {
+  if(!force_ && !queryExists(url_)) {
     return false;
   }
 
@@ -167,18 +170,19 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool loca
       KMessageBox::sorry(s_mainWindow, i18n(writeError).arg(url_.fileName()));
       return false;
     }
-    return FileHandler::writeTextFile(f, text_, locale_);
+    return FileHandler::writeTextFile(f, text_, encodeUTF8_);
   }
 
   // save to remote file
   KTempFile tempfile;
   KSaveFile f(tempfile.name());
   if(f.status() != 0) {
+    tempfile.unlink();
     KMessageBox::sorry(s_mainWindow, i18n(writeError).arg(url_.fileName()));
     return false;
   }
 
-  bool success = FileHandler::writeTextFile(f, text_, locale_);
+  bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
   if(success) {
 #if KDE_IS_VERSION(3,1,90)
     bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_, s_mainWindow);
@@ -186,6 +190,7 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool loca
     bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_);
 #endif
     if(!uploaded) {
+      tempfile.unlink();
       KMessageBox::sorry(s_mainWindow, i18n(uploadError).arg(url_.fileName()));
       success = false;
     }
@@ -195,12 +200,12 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool loca
   return success;
 }
 
-bool FileHandler::writeTextFile(KSaveFile& f_, const QString& text_, bool locale_) {
+bool FileHandler::writeTextFile(KSaveFile& f_, const QString& text_, bool encodeUTF8_) {
   QTextStream* t = f_.textStream();
-  if(locale_) {
-    t->setEncoding(QTextStream::Locale);
-  } else {
+  if(encodeUTF8_) {
     t->setEncoding(QTextStream::UnicodeUTF8);
+  } else {
+    t->setEncoding(QTextStream::Locale);
   }
 //    kdDebug() << "-----------------------------" << endl
 //              << text_ << endl
@@ -213,8 +218,8 @@ bool FileHandler::writeTextFile(KSaveFile& f_, const QString& text_, bool locale
   return success;
 }
 
-bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_) {
-  if(!queryExists(url_)) {
+bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool force_) {
+  if(!force_ && !queryExists(url_)) {
     return false;
   }
 

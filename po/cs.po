@@ -11,7 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
-"POT-Creation-Date: 2004-02-03 19:43-0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-04-18 19:05-0700\n"
 "PO-Revision-Date: 2004-02-06 20:54+0100\n"
 "Last-Translator: Robert Kratky <kratky@rob.cz>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -24,39 +25,39 @@ msgstr ""
 msgid "Export Options"
 msgstr "Exportovat možnosti"
 
-#: exportdialog.cpp:54
+#: exportdialog.cpp:47
 msgid "Formatting"
 msgstr "Formátování"
 
-#: exportdialog.cpp:56
+#: exportdialog.cpp:49
 msgid "Format all fields"
 msgstr "Formátovat všechna pole"
 
-#: exportdialog.cpp:58
+#: exportdialog.cpp:51
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
-"Je-li zaškrtnuto, budou hodnoty všech polí automaticky zformátovány "
-"podle svého druhu formátování."
+"Je-li zaškrtnuto, budou hodnoty všech polí automaticky zformátovány podle "
+"svého druhu formátování."
 
-#: exportdialog.cpp:61
+#: exportdialog.cpp:54
 msgid "Encoding"
 msgstr "Kódování"
 
-#: exportdialog.cpp:63
+#: exportdialog.cpp:56
 msgid "Encode in Unicode (UTF-8)"
 msgstr "Kódovat v Unicode (UTF-8)"
 
-#: exportdialog.cpp:65
+#: exportdialog.cpp:58
 msgid "Encode the exported file in Unicode (UTF-8)."
 msgstr "Kódovat exportovaný soubor v Unicode (UTF-8)."
 
-#: exportdialog.cpp:66
+#: exportdialog.cpp:59
 msgid "Encode in user locale (%1)"
 msgstr "Kódovat podle uživatelského nastavení (%1)"
 
-#: exportdialog.cpp:69
+#: exportdialog.cpp:62
 msgid "Encode the exported file in the local format."
 msgstr "Kódovat exportovaný soubor v místním formátu."
 
@@ -136,25 +137,31 @@ msgstr "Všechna pole"
 msgid "Invalid regular expression."
 msgstr "Neplatný regulární výraz."
 
-#: filehandler.cpp:94 translators/bookcaseimporter.cpp:76
+#: filehandler.cpp:94 translators/bookcaseimporter.cpp:73
 #: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Při načítání XML byla na řádce %1, sloupci %2 chyba."
 
-#: filehandler.cpp:96 translators/bookcaseimporter.cpp:78
+#: filehandler.cpp:96 translators/bookcaseimporter.cpp:75
 #: translators/xmlimporter.cpp:37 translators/xmlimporter.cpp:54
 msgid "The error message from Qt is:"
 msgstr "Chybová zpráva z Qt je:"
 
-#: filehandler.cpp:132
-msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
-msgstr "Soubor s názvem \"%1\" již existuje. Opravdu jej chcete přepsat?"
+#: filehandler.cpp:121
+#, fuzzy
+msgid "Bookcase is unable to load the image - %1."
+msgstr "Bookcase nemůže načíst soubor %1."
 
 #: filehandler.cpp:135
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr "Soubor s názvem \"%1\" již existuje. Opravdu jej chcete přepsat?"
+
+#: filehandler.cpp:138
 msgid "Overwrite File?"
 msgstr "Přepsat soubor?"
 
-#: filehandler.cpp:136
+#: filehandler.cpp:139
 msgid "Overwrite"
 msgstr "Přepsat"
 
@@ -178,8 +185,8 @@ msgstr "Bookcase"
 msgid "Author of btparse library"
 msgstr "Autor knihovny btparse"
 
-#: detailedlistview.cpp:60 detailedlistview.cpp:289
-#: translators/pilotdbexporter.cpp:96
+#: detailedlistview.cpp:62 detailedlistview.cpp:288
+#: translators/pilotdbexporter.cpp:131
 msgid "View Columns"
 msgstr "Zobrazit sloupce"
 
@@ -187,200 +194,280 @@ msgstr "Zobrazit sloupce"
 msgid "a,an,and,in,of,the,to"
 msgstr "a,an,and,in,of,the,to"
 
-#: field.cpp:41 field.cpp:59 configdialog.cpp:101 collectionfactory.cpp:73
+#: field.cpp:41 field.cpp:59 configdialog.cpp:140 collectionfactory.cpp:73
 #: collectionfactory.cpp:87 collections/bookcollection.cpp:21
 #: collections/bookcollection.cpp:40 collections/videocollection.cpp:23
 #: collections/videocollection.cpp:42 collections/coincollection.cpp:21
-#: collections/bibtexcollection.cpp:21 collections/bibtexcollection.cpp:55
-#: collections/bibtexcollection.cpp:85 collections/winecollection.cpp:21
+#: collections/bibtexcollection.cpp:24 collections/bibtexcollection.cpp:58
+#: collections/bibtexcollection.cpp:88 collections/winecollection.cpp:21
 #: collections/cardcollection.cpp:21 collections/musiccollection.cpp:21
 #: collections/comicbookcollection.cpp:21 collections/stampcollection.cpp:21
 msgid "General"
 msgstr "Obecné"
 
-#: field.cpp:314
+#: field.cpp:296
 msgid "the"
 msgstr "the"
 
-#: field.cpp:328
+#: field.cpp:310
 msgid "jr.,jr,iii,iv"
 msgstr "ml., iii, iv"
 
-#: field.cpp:333
+#: field.cpp:315
 msgid "de,van der,von"
 msgstr "de,van der,von"
 
-#: field.cpp:340 collectionfieldsdialog.cpp:383 collectionfieldsdialog.cpp:391
+#: field.cpp:322 collectionfieldsdialog.cpp:420 collectionfieldsdialog.cpp:428
 msgid "Simple Text"
 msgstr "Prostý text"
 
-#: field.cpp:341 collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:399
+#: field.cpp:323 collectionfieldsdialog.cpp:415 collectionfieldsdialog.cpp:436
 msgid "Paragraph"
 msgstr "Odstavec"
 
-#: field.cpp:342 collectionfieldsdialog.cpp:375
-msgid "List"
-msgstr "Seznam"
+#: field.cpp:324 collectionfieldsdialog.cpp:412
+#, fuzzy
+msgid "Choice"
+msgstr "Komiks"
 
-#: field.cpp:343
+#: field.cpp:325
 msgid "Checkbox"
 msgstr "Zaškrtávací tlačítko"
 
-#: field.cpp:344 collectionfieldsdialog.cpp:391
-#: collections/bibtexcollection.cpp:169
+#: field.cpp:326 collectionfieldsdialog.cpp:428
+#: collections/bibtexcollection.cpp:172
 msgid "Number"
 msgstr "Číslo"
 
-#: field.cpp:345 collectionfieldsdialog.cpp:395
+#: field.cpp:327 collectionfieldsdialog.cpp:432
 msgid "URL"
 msgstr "URL"
 
-#: field.cpp:346 collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:383
+#: field.cpp:328 collectionfieldsdialog.cpp:415 collectionfieldsdialog.cpp:420
 msgid "Table"
 msgstr "Tabulka"
 
-#: field.cpp:347 collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:384
+#: field.cpp:329 collectionfieldsdialog.cpp:416 collectionfieldsdialog.cpp:421
 msgid "Table (2 Columns)"
 msgstr "Tabulka (2 sloupce)"
 
-#: field.cpp:348 collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:399
+#: field.cpp:330 collectionfieldsdialog.cpp:416 collectionfieldsdialog.cpp:436
 #: collections/stampcollection.cpp:123
 msgid "Image"
 msgstr "Obrázek"
 
-#: field.cpp:349 collectionfieldsdialog.cpp:399
+#: field.cpp:331
 msgid "Dependent"
 msgstr "Závislé"
 
-#: configdialog.cpp:48
+#: configdialog.cpp:50
 msgid "Configure Bookcase"
 msgstr "Nastavit Bookcase"
 
-#: configdialog.cpp:101
+#: configdialog.cpp:131 configdialog.cpp:300 configdialog.cpp:307
+#: configdialog.cpp:434
+#, fuzzy
+msgid "Braces"
+msgstr "Stopy"
+
+#: configdialog.cpp:140
 msgid "General Options"
 msgstr "Obecné volby"
 
-#: configdialog.cpp:104
+#: configdialog.cpp:143
 msgid "Reopen file at startup"
 msgstr "Znovu otevřít soubor při spuštění"
 
-#: configdialog.cpp:105
+#: configdialog.cpp:144
 msgid ""
 "If checked, the file that was last open will be re-opened at program start-"
 "up."
-msgstr "Je-li zaškrtnuto, naposledy otevřený soubor bude otevřen při dalším spuštěním."
+msgstr ""
+"Je-li zaškrtnuto, naposledy otevřený soubor bude otevřen při dalším "
+"spuštěním."
 
-#: configdialog.cpp:109
+#: configdialog.cpp:148
 msgid "Show \"Tip of the Day\" at startup"
 msgstr "Při spuštění zobrazit \"Tip dne\""
 
-#: configdialog.cpp:110
+#: configdialog.cpp:149
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr "Je-li zaškrtnuto, bude při spuštění programu zobrazen \"Tip dne\"."
 
-#: configdialog.cpp:114
+#: configdialog.cpp:153
 msgid "Show number of items in group"
 msgstr "Zobrazit počet položek ve skupině"
 
-#: configdialog.cpp:115
+#: configdialog.cpp:154
 msgid ""
 "If checked, the number of items in the group will be appended to the group "
 "name."
 msgstr "Je-li zaškrtnuto, bude ke jménu skupiny připojen počet jejích položek."
 
-#: configdialog.cpp:119 configdialog.cpp:184
+#: configdialog.cpp:158 configdialog.cpp:217
 msgid "Formatting Options"
 msgstr "Možnosti formátování"
 
-#: configdialog.cpp:122
-msgid "(Requires restart)"
-msgstr "(vyžaduje opětovné spuštění)"
-
-#: configdialog.cpp:123
+#: configdialog.cpp:161
 msgid "Auto capitalize titles and names"
 msgstr "Jména a názvy s velkými písmeny"
 
-#: configdialog.cpp:124
+#: configdialog.cpp:162
 msgid "If checked, titles and names will be automatically capitalized."
-msgstr "Je-li zaškrtnuto, jména a názvy budou mít automaticky změněna první písmena na velká."
+msgstr ""
+"Je-li zaškrtnuto, jména a názvy budou mít automaticky změněna první písmena "
+"na velká."
 
-#: configdialog.cpp:127
+#: configdialog.cpp:165
 msgid "Auto format titles and names"
 msgstr "Formátovat jména a názvy"
 
-#: configdialog.cpp:128 configdialog.cpp:188
+#: configdialog.cpp:166 configdialog.cpp:221
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Je-li zaškrtnuto, jména a názvy budou automaticky formátovány."
 
-#: configdialog.cpp:135
+#: configdialog.cpp:173
 msgid "Articles:"
 msgstr "Členy:"
 
-#: configdialog.cpp:147
+#: configdialog.cpp:180
+#, fuzzy
 msgid ""
-"A comma-separated list of words which should be considered as articles if "
-"they are the first word in a title."
-msgstr "Seznam slov oddělených čárkou, které mají být považovány za člen, jsou-li prvním slovem v názvu."
+"<qt>A list of words which should be considered as articles if they are the "
+"first word in a title. Multiple values should be separated by a semi-colon.</"
+"qt>"
+msgstr ""
+"Seznam slov oddělených čárkou, které mají být považovány za člen, jsou-li "
+"prvním slovem v názvu."
 
-#: configdialog.cpp:154
+#: configdialog.cpp:187
 msgid "Personal suffixes:"
 msgstr "Osobní přípony:"
 
-#: configdialog.cpp:159
-msgid "A comma-separated list of suffixes which might be used in personal names."
-msgstr "Čárkami oddělený seznam přípon, které mohou být použity ve jménech osob."
+#: configdialog.cpp:192
+msgid ""
+"<qt>A list of suffixes which might be used in personal names. Multiple "
+"values should be separated by a semi-colon.</qt>"
+msgstr ""
 
-#: configdialog.cpp:165
+#: configdialog.cpp:198
 msgid "Surname prefixes:"
 msgstr "Přípony příjmení:"
 
-#: configdialog.cpp:170
-msgid "A comma-separated list of prefixes which might be used in surnames."
-msgstr "Čárkami oddělený seznam přípon, které mohou být použity v příjmeních."
+#: configdialog.cpp:203
+msgid ""
+"<qt>A list of prefixes which might be used in surnames. Multiple values "
+"should be separated by a semi-colon.</qt>"
+msgstr ""
 
-#: configdialog.cpp:181
+#: configdialog.cpp:214
 msgid "Printing"
 msgstr "Tisk"
 
-#: configdialog.cpp:181
+#: configdialog.cpp:214
 msgid "Printing Options"
 msgstr "Možnosti tisku"
 
-#: configdialog.cpp:187
+#: configdialog.cpp:220
 msgid "Format titles and names"
 msgstr "Formátovat jména a názvy"
 
-#: configdialog.cpp:191 translators/htmlexporter.cpp:60
+#: configdialog.cpp:223 translators/htmlexporter.cpp:72
 msgid "Print field headers"
 msgstr "Tisk hlaviček polí"
 
-#: configdialog.cpp:192 translators/htmlexporter.cpp:61
+#: configdialog.cpp:224 translators/htmlexporter.cpp:73
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Je-li zaškrtnuto, budou názvy polí vytištěny jako hlavičky tabulky."
 
-#: configdialog.cpp:195
+#: configdialog.cpp:226
 msgid "Grouping Options"
 msgstr "Možnosti seskupování"
 
-#: configdialog.cpp:198 translators/htmlexporter.cpp:65
+#: configdialog.cpp:229 translators/htmlexporter.cpp:77
 msgid "Group the entries"
 msgstr "Seskupit položky"
 
-#: configdialog.cpp:199 translators/htmlexporter.cpp:66
+#: configdialog.cpp:230 translators/htmlexporter.cpp:78
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Je-li zaškrtnuto, budou položky seskupeny podle zvoleného pole."
 
-#: configdialog.cpp:208
+#: configdialog.cpp:232
+#, fuzzy
+msgid "Image Options"
+msgstr "Možnosti šablon"
+
+#: configdialog.cpp:238
+msgid "Maximum Image Width:"
+msgstr ""
+
+#: configdialog.cpp:242
+msgid ""
+"The maximum width of the images in the printout. The aspect ration is "
+"preserved."
+msgstr ""
+
+#: configdialog.cpp:246
+msgid "Maximum Image Height:"
+msgstr ""
+
+#: configdialog.cpp:250
+msgid ""
+"The maximum height of the images in the printout. The aspect ration is "
+"preserved."
+msgstr ""
+
+#: configdialog.cpp:260
 msgid "Templates"
 msgstr "Šablony"
 
-#: configdialog.cpp:208
+#: configdialog.cpp:260
 msgid "Template Options"
 msgstr "Možnosti šablon"
 
-#: configdialog.cpp:338
-msgid "Preview Entry Template"
-msgstr "Náhled vstupní šablony"
+#: configdialog.cpp:291 translators/bibtexexporter.cpp:44
+msgid "Bibtex"
+msgstr "Bibtex"
+
+#: configdialog.cpp:291 translators/bibtexexporter.cpp:59
+msgid "Bibtex Options"
+msgstr "Možnosti Bibtex"
+
+#: configdialog.cpp:298
+#, fuzzy
+msgid "Bibtex quotation style:"
+msgstr "Možnosti Bibtex"
+
+#: configdialog.cpp:301 configdialog.cpp:309
+#, fuzzy
+msgid "Quotes"
+msgstr "Poznámky"
+
+#: configdialog.cpp:302
+msgid ""
+"<qt>The quotation style used when exporting bibtex. All field values will be "
+"escaped with either  braces or quotation marks.</qt>"
+msgstr ""
+
+#: configdialog.cpp:312
+msgid "Path to LyX server:"
+msgstr ""
+
+#: configdialog.cpp:314
+msgid ""
+"<qt>The location of the LyX server for citing bibliographic entries. Also "
+"used by other applications such as Kile or Pybliographer. Do not include the "
+"trailing .in suffix.</qt>"
+msgstr ""
+
+#: entryview.cpp:138
+#, fuzzy
+msgid "Bookcase is unable to locate the default entry template stylesheet."
+msgstr "Bookcase nemůže načíst soubor %1."
+
+#: entryview.cpp:140 mainwindow.cpp:1541
+msgid "Please check your installation."
+msgstr "Zkontrolujte svou instalaci."
 
 #: importdialog.cpp:40 importdialog.cpp:46
 msgid "Import Options"
@@ -390,95 +477,112 @@ msgstr "Možnosti importu"
 msgid "Replace current collection"
 msgstr "Nahradit stávající sbírku"
 
-#: importdialog.cpp:50
+#: importdialog.cpp:49
 msgid "Replace the current collection with the contents of the imported file."
 msgstr "Nahradit stávající sbírku obsahem importovaného souboru."
 
-#: importdialog.cpp:52
+#: importdialog.cpp:51
 msgid "Append to current collection"
 msgstr "Připojit ke stávající sbírce"
 
-#: importdialog.cpp:53
+#: importdialog.cpp:52
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
-msgstr "Připojit obsah importovaného souboru ke stávající sbírce. Toto je možné  pouze pokud se shodují druhy sbírek."
+msgstr ""
+"Připojit obsah importovaného souboru ke stávající sbírce. Toto je možné  "
+"pouze pokud se shodují druhy sbírek."
 
-#: importdialog.cpp:122 mainwindow.cpp:860 mainwindow.cpp:946
+#: importdialog.cpp:55
+#, fuzzy
+msgid "Merge with current collection"
+msgstr "Připojit ke stávající sbírce"
+
+#: importdialog.cpp:56
+#, fuzzy
+msgid ""
+"Merge the contents of the imported file to the current collection. This is "
+"only possible when the collection types match. Entries must match exactly in "
+"order to be merged."
+msgstr ""
+"Připojit obsah importovaného souboru ke stávající sbírce. Toto je možné  "
+"pouze pokud se shodují druhy sbírek."
+
+#: importdialog.cpp:139 mainwindow.cpp:893 mainwindow.cpp:991
 msgid "*.bc|Bookcase files (*.bc)"
 msgstr "*.Bc|soubory Bookcase (*.bc)"
 
-#: importdialog.cpp:126 translators/bibtexexporter.cpp:47
+#: importdialog.cpp:143 translators/bibtexexporter.cpp:48
 msgid "*.bib|Bibtex files (*.bib)"
 msgstr "*.bib|soubory Bibtex (*.bib)"
 
-#: importdialog.cpp:130 translators/csvexporter.cpp:47
+#: importdialog.cpp:147 translators/csvexporter.cpp:43
 msgid "*.csv|CSV files (*.csv)"
 msgstr "*.csv|soubory CSV (*.csv)"
 
-#: importdialog.cpp:135 mainwindow.cpp:862 mainwindow.cpp:948
+#: importdialog.cpp:152 mainwindow.cpp:895
 #: translators/bookcasexmlexporter.cpp:56
 msgid "*.xml|XML files (*.xml)"
 msgstr "*.xml|XML soubory (*.xml)"
 
-#: importdialog.cpp:140
+#: importdialog.cpp:157
 msgid "*.ogg|Ogg files (*.ogg)"
 msgstr "*.ogg|soubory Ogg (*.ogg)"
 
-#: importdialog.cpp:147 mainwindow.cpp:864 mainwindow.cpp:950
-#: translators/csvexporter.cpp:47 translators/htmlexporter.cpp:46
-#: translators/bibtexexporter.cpp:47 translators/bibtexmlexporter.cpp:39
-#: translators/xsltexporter.cpp:42 translators/pilotdbexporter.cpp:43
+#: importdialog.cpp:164 mainwindow.cpp:897 mainwindow.cpp:993
+#: translators/csvexporter.cpp:43 translators/htmlexporter.cpp:58
+#: translators/bibtexexporter.cpp:48 translators/bibtexmlexporter.cpp:40
+#: translators/xsltexporter.cpp:42 translators/pilotdbexporter.cpp:46
 #: translators/bookcasexmlexporter.cpp:56
 #: translators/bookcasezipexporter.cpp:37
 msgid "*|All files"
 msgstr "*|Všechny soubory"
 
-#: filterdialog.cpp:61
+#: filterdialog.cpp:60
 msgid "Any Field"
 msgstr "Jakékoliv pole"
 
-#: filterdialog.cpp:70
+#: filterdialog.cpp:69
 msgid "contains"
 msgstr "obsahuje"
 
-#: filterdialog.cpp:71
+#: filterdialog.cpp:70
 msgid "does not contain"
 msgstr "neobsahuje"
 
-#: filterdialog.cpp:72
+#: filterdialog.cpp:71
 msgid "equals"
 msgstr "je shodné"
 
-#: filterdialog.cpp:73
+#: filterdialog.cpp:72
 msgid "does not equal"
 msgstr "není rovno"
 
-#: filterdialog.cpp:74
+#: filterdialog.cpp:73
 msgid "matches regexp"
 msgstr "odpovídá reg. výrazu"
 
-#: filterdialog.cpp:75
+#: filterdialog.cpp:74
 msgid "does not match regexp"
 msgstr "neodpovídá reg. výrazu"
 
-#: filterdialog.cpp:87
+#: filterdialog.cpp:86
 msgid "Edit..."
 msgstr "Upravit..."
 
-#: filterdialog.cpp:244
+#: filterdialog.cpp:243
 msgid "Advanced Filter"
 msgstr "Pokročilý filtr"
 
-#: filterdialog.cpp:250
+#: filterdialog.cpp:249
 msgid "Filter Criteria"
 msgstr "Kritéria filtru"
 
-#: filterdialog.cpp:253
+#: filterdialog.cpp:255
 msgid "Match a&ll of the following"
 msgstr "&Odpovídá všemu, co následuje"
 
-#: filterdialog.cpp:254
+#: filterdialog.cpp:256
 msgid "Match an&y of the following"
 msgstr "O&dpovídá něčemu z toho, co následuje"
 
@@ -494,13 +598,33 @@ msgstr "méně ovládacích prvků"
 msgid "clear widgets"
 msgstr "žádné ovládací prvky"
 
-#: groupview.cpp:60
+#: groupview.cpp:61 groupview.cpp:71
+msgid "Sort by Group, Ascending"
+msgstr ""
+
+#: groupview.cpp:62 groupview.cpp:72
+msgid "Sort by Group, Descending"
+msgstr ""
+
+#: groupview.cpp:63 groupview.cpp:73
+msgid "Sort by Count, Ascending"
+msgstr ""
+
+#: groupview.cpp:64 groupview.cpp:74
+msgid "Sort by Count, Descending"
+msgstr ""
+
+#: groupview.cpp:67
 msgid "Expand All Groups"
 msgstr "Rozvinout všechny skupiny"
 
-#: groupview.cpp:61
+#: groupview.cpp:68
 msgid "Collapse All Groups"
 msgstr "Zavinout všechny skupiny"
+
+#: groupview.cpp:69
+msgid "Filter by Group"
+msgstr ""
 
 #: collectionfactory.cpp:70 collectionfactory.cpp:84
 msgid "My Collection"
@@ -512,7 +636,7 @@ msgstr "Záznam"
 
 #: collectionfactory.cpp:72 collectionfactory.cpp:86
 #: collections/bookcollection.cpp:39 collections/videocollection.cpp:41
-#: collections/coincollection.cpp:37 collections/bibtexcollection.cpp:53
+#: collections/coincollection.cpp:37 collections/bibtexcollection.cpp:56
 #: collections/winecollection.cpp:37 collections/cardcollection.cpp:37
 #: collections/comicbookcollection.cpp:39 collections/stampcollection.cpp:38
 msgid "Title"
@@ -522,7 +646,7 @@ msgstr "Název"
 msgid "Book Collection"
 msgstr "Sbírka knih"
 
-#: collectionfactory.cpp:126 collections/bibtexcollection.cpp:27
+#: collectionfactory.cpp:126 collections/bibtexcollection.cpp:30
 msgid "Bibliography"
 msgstr "Bibliografie"
 
@@ -558,507 +682,521 @@ msgstr "Sbírka karet"
 msgid "Custom Collection"
 msgstr "Vlastní sbírka"
 
-#: mainwindow.cpp:75 controller.cpp:67
+#: mainwindow.cpp:83 controller.cpp:69
 msgid "Ready."
 msgstr "Připraven."
 
-#: mainwindow.cpp:159 collections/bookcollection.cpp:136
+#: mainwindow.cpp:168 collections/bookcollection.cpp:136
 msgid "New"
 msgstr "Nový"
 
-#: mainwindow.cpp:162
+#: mainwindow.cpp:171
 msgid "Create a new collection"
 msgstr "Vytvořit novou sbírku"
 
-#: mainwindow.cpp:166
+#: mainwindow.cpp:175
 msgid "New &Book Collection"
 msgstr "Nová sbírka &knih"
 
-#: mainwindow.cpp:169
+#: mainwindow.cpp:178
 msgid "Create a new book collection"
 msgstr "Vytvořit novou sbírku knih"
 
-#: mainwindow.cpp:175
+#: mainwindow.cpp:184
 msgid "New B&ibliography"
 msgstr "Nová &bibliografie"
 
-#: mainwindow.cpp:178
+#: mainwindow.cpp:187
 msgid "Create a new bibtex bibliography"
 msgstr "Vytvořit novou bibtex bibliografii"
 
-#: mainwindow.cpp:184
+#: mainwindow.cpp:193
 msgid "New &Comic Book Collection"
 msgstr "Nová sbírka ko&miksů"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:196
 msgid "Create a new comic book collection"
 msgstr "Vytvořit novou sbírku komiksů"
 
-#: mainwindow.cpp:193
+#: mainwindow.cpp:202
 msgid "New &Video Collection"
 msgstr "Nová &video sbírka"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:205
 msgid "Create a new video collection"
 msgstr "Vytvořit novou video sbírku"
 
-#: mainwindow.cpp:202
+#: mainwindow.cpp:211
 msgid "New &Music Collection"
 msgstr "Nová sbírka &hudby"
 
-#: mainwindow.cpp:205
+#: mainwindow.cpp:214
 msgid "Create a new music collection"
 msgstr "Vytvořit novou sbírku hudby"
 
-#: mainwindow.cpp:211
+#: mainwindow.cpp:220
 msgid "New C&ard Collection"
 msgstr "Nová sbírka &karet"
 
-#: mainwindow.cpp:214
+#: mainwindow.cpp:223
 msgid "Create a new trading card collection"
 msgstr "Vytvořit novou sbírku výměnných karet"
 
-#: mainwindow.cpp:220
+#: mainwindow.cpp:229
 msgid "New C&oin Collection"
 msgstr "Nová sbírka min&cí"
 
-#: mainwindow.cpp:223
+#: mainwindow.cpp:232
 msgid "Create a new coin collection"
 msgstr "Vytvořit novou sbírku mincí"
 
-#: mainwindow.cpp:229
+#: mainwindow.cpp:238
 msgid "New &Stamp Collection"
 msgstr "Nová sbírka &známek"
 
-#: mainwindow.cpp:232
+#: mainwindow.cpp:241
 msgid "Create a new stamp collection"
 msgstr "Vytvořit novou sbírku známek"
 
-#: mainwindow.cpp:238
+#: mainwindow.cpp:247
 msgid "New &Wine Collection"
 msgstr "Nová sbírka &vín"
 
-#: mainwindow.cpp:241
+#: mainwindow.cpp:250
 msgid "Create a new wine collection"
 msgstr "Vytvořit novou sbírku vín"
 
-#: mainwindow.cpp:247
+#: mainwindow.cpp:256
 msgid "New C&ustom Collection"
 msgstr "Nová &vlastní sbírka"
 
-#: mainwindow.cpp:250
+#: mainwindow.cpp:259
 msgid "Create a new custom collection"
 msgstr "Vytvořit novou vlastní sbírku"
 
-#: mainwindow.cpp:259
+#: mainwindow.cpp:268
 msgid "Open an existing document"
 msgstr "Otevřít existující dokument"
 
-#: mainwindow.cpp:261
+#: mainwindow.cpp:270
 msgid "Open a recently used file"
 msgstr "Otevřít nedávný"
 
-#: mainwindow.cpp:263
+#: mainwindow.cpp:272
 msgid "Save the document"
 msgstr "Uložit dokument"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:274
 msgid "Save the document as a different file..."
 msgstr "Uložit dokument jako..."
 
-#: mainwindow.cpp:267
+#: mainwindow.cpp:276
 msgid "Print the contents of the document..."
 msgstr "Tisk obsahu dokumentu..."
 
-#: mainwindow.cpp:269
+#: mainwindow.cpp:278
 msgid "Quit the application"
 msgstr "Ukončit program"
 
-#: mainwindow.cpp:278 rc.cpp:3
+#: mainwindow.cpp:287
 msgid "&Import"
 msgstr "&Importovat"
 
-#: mainwindow.cpp:281
+#: mainwindow.cpp:290
 msgid "Import collection data from other formats..."
 msgstr "Importovat sbírku z jiných formátů..."
 
-#: mainwindow.cpp:285
+#: mainwindow.cpp:294
 msgid "Import Bookcase Data"
 msgstr "Importovat data Bookcase"
 
-#: mainwindow.cpp:286
+#: mainwindow.cpp:295
 msgid "Import another Bookcase data file"
 msgstr "Importovat jiný datový soubor Bookcase"
 
-#: mainwindow.cpp:292
+#: mainwindow.cpp:301
 msgid "Import CSV Data"
 msgstr "Importovat CSV data"
 
-#: mainwindow.cpp:293
+#: mainwindow.cpp:302
 msgid "Import a CSV file"
 msgstr "Importovat CSV soubor"
 
-#: mainwindow.cpp:299
+#: mainwindow.cpp:308
 msgid "Import Bibtex Data"
 msgstr "Importovat Bibtex data"
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:309
 msgid "Import a Bibtex bibliography file"
 msgstr "Importovat soubor s bibliografií Bibtex"
 
-#: mainwindow.cpp:306
+#: mainwindow.cpp:315
 msgid "Import Bibtexml Data"
 msgstr "Importovat Bibtexml data"
 
-#: mainwindow.cpp:307
+#: mainwindow.cpp:316
 msgid "Import a Bibtexml bibliography file"
 msgstr "Importovat soubor s bibliografií Bibtexml"
 
-#: mainwindow.cpp:313
+#: mainwindow.cpp:322
 msgid "Import XSL Transform"
 msgstr "Importovat XSL Transform"
 
-#: mainwindow.cpp:314
+#: mainwindow.cpp:323
 msgid "Import using an XSL Transform"
 msgstr "Importovat s pomocí XSL Transform"
 
-#: mainwindow.cpp:326 rc.cpp:4
+#: mainwindow.cpp:335
 msgid "&Export"
 msgstr "&Exportovat"
 
-#: mainwindow.cpp:329
+#: mainwindow.cpp:338
 msgid "Export the collection data to other formats..."
 msgstr "Exportovat sbírku do jiných formátů..."
 
-#: mainwindow.cpp:333
+#: mainwindow.cpp:342
 msgid "Export to XML"
 msgstr "Exportovat do XML"
 
-#: mainwindow.cpp:334
+#: mainwindow.cpp:343
 msgid "Export to a Bookcase XML file"
 msgstr "Exportovat do Bookcase XML souboru"
 
-#: mainwindow.cpp:340
+#: mainwindow.cpp:349
 msgid "Export to HTML"
 msgstr "Exportovat do HTML"
 
-#: mainwindow.cpp:341
+#: mainwindow.cpp:350
 msgid "Export to an HTML file"
 msgstr "Exportovat do HTML souboru"
 
-#: mainwindow.cpp:347
+#: mainwindow.cpp:356
 msgid "Export to CSV"
 msgstr "Exportovat do CSV"
 
-#: mainwindow.cpp:348
+#: mainwindow.cpp:357
 msgid "Export to a comma-separated values file"
 msgstr "Exportovat do souboru s hodnotami oddělenými čárkou"
 
-#: mainwindow.cpp:354
+#: mainwindow.cpp:363
 msgid "Export to PilotDB"
 msgstr "Exportovat do PilotDB"
 
-#: mainwindow.cpp:355
+#: mainwindow.cpp:364
 msgid "Export to a PilotDB database"
 msgstr "Exportovat do databáze PilotDB"
 
-#: mainwindow.cpp:361
+#: mainwindow.cpp:370
 msgid "Export to Bibtex"
 msgstr "Exportovat do Bibtex"
 
-#: mainwindow.cpp:362
+#: mainwindow.cpp:371
 msgid "Export to a bibtex file"
 msgstr "Exportovat souboru Bibtex"
 
-#: mainwindow.cpp:368
+#: mainwindow.cpp:377
 msgid "Export to Bibtexml"
 msgstr "Exportovat do Bibtexml"
 
-#: mainwindow.cpp:369
+#: mainwindow.cpp:378
 msgid "Export to a Bibtexml file"
 msgstr "Exportovat do souboru Bibtexml"
 
-#: mainwindow.cpp:375
+#: mainwindow.cpp:384
 msgid "Export XSL Transform"
 msgstr "Exportovat XSL Transform"
 
-#: mainwindow.cpp:376
+#: mainwindow.cpp:385
 msgid "Export using an XSL Transform"
 msgstr "Exportovat s pomocí XSL Transform"
 
-#: mainwindow.cpp:385
+#: mainwindow.cpp:394
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Vyjmout označený text a vložit jej do schránky"
 
-#: mainwindow.cpp:387
+#: mainwindow.cpp:396
 msgid "Copy the selected text to the clipboard"
 msgstr "Kopírovat označený text do schránky"
 
-#: mainwindow.cpp:389
+#: mainwindow.cpp:398
 msgid "Paste the clipboard contents"
 msgstr "Vložit obsah schránky"
 
-#: mainwindow.cpp:391
+#: mainwindow.cpp:400
 msgid "Select all the entries in the collection"
 msgstr "Vybrat všechny záznamy ve sbírce"
 
-#: mainwindow.cpp:393
+#: mainwindow.cpp:408
 msgid "Deselect all the entries in the collection"
 msgstr "Zrušit výběr všech záznamů ve sbírce"
 
-#: mainwindow.cpp:396
+#: mainwindow.cpp:411
 msgid "Search the collection"
 msgstr "Hledat ve sbírce"
 
-#: mainwindow.cpp:398
+#: mainwindow.cpp:413
 msgid "Find next match in the collection"
 msgstr "Najít další ve sbírce"
 
-#: mainwindow.cpp:402
+#: mainwindow.cpp:423
 msgid "Find previous match in the collection"
 msgstr "Najít předchozí ve sbírce"
 
-#: mainwindow.cpp:409 entryeditdialog.cpp:42
+#: mainwindow.cpp:430 entryeditdialog.cpp:40
 msgid "&New Entry"
 msgstr "&Nový záznam"
 
-#: mainwindow.cpp:412
+#: mainwindow.cpp:433
 msgid "Create a new entry"
 msgstr "Vytvořit nový záznam"
 
-#: mainwindow.cpp:413
+#: mainwindow.cpp:434
 msgid "&Edit Entry"
 msgstr "&Upravit záznam"
 
-#: mainwindow.cpp:416
+#: mainwindow.cpp:437
 msgid "Edit the selected entries"
 msgstr "Upravit označený záznam"
 
-#: mainwindow.cpp:417
+#: mainwindow.cpp:438
 msgid "&Copy Entry"
 msgstr "&Kopírovat záznam"
 
-#: mainwindow.cpp:420
+#: mainwindow.cpp:441
 msgid "Copy the selected entries"
 msgstr "Kopírovat označené záznamy"
 
-#: mainwindow.cpp:421
+#: mainwindow.cpp:442
 msgid "&Delete Entry"
 msgstr "&Smazat záznam"
 
-#: mainwindow.cpp:424
+#: mainwindow.cpp:445
 msgid "Delete the selected entries"
 msgstr "Smazat označené záznamy"
 
-#: mainwindow.cpp:425
+#: mainwindow.cpp:446
 msgid "&Rename Collection..."
 msgstr "&Přejmenovat sbírku..."
 
-#: mainwindow.cpp:428
+#: mainwindow.cpp:449
 msgid "Rename the collection"
 msgstr "Přejmenovat sbírku"
 
-#: mainwindow.cpp:429
+#: mainwindow.cpp:450
 msgid "Collection &Fields..."
 msgstr "P&ole sbírky..."
 
-#: mainwindow.cpp:432
+#: mainwindow.cpp:453
 msgid "Modify the collection fields"
 msgstr "Změnit pole sbírky"
 
-#: mainwindow.cpp:433
+#: mainwindow.cpp:454
 msgid "Convert to &Bibliography"
 msgstr "Převést na &bibliografii"
 
-#: mainwindow.cpp:436
+#: mainwindow.cpp:457
 msgid "Convert a book collection to a bibliography"
 msgstr "Převést sbírku knih na bibliografii"
 
-#: mainwindow.cpp:437
+#: mainwindow.cpp:458
 msgid "String &Macros..."
 msgstr "Řetězová &makra..."
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:461
 msgid "Edit the Bibtex string macros"
 msgstr "Upravit řetězová makra Bibtex"
 
-#: mainwindow.cpp:450
-msgid "Enable/disable the toolbar"
-msgstr "Povolit/zakázat nástrojovou lištu"
+#: mainwindow.cpp:462
+#, fuzzy
+msgid "&Cite Entry"
+msgstr "&Upravit záznam"
 
-#: mainwindow.cpp:451
-msgid "Show Co&llection ToolBar"
-msgstr "Zobrazit nástrojovou lištu &sbírky"
+#: mainwindow.cpp:465
+#, fuzzy
+msgid "Cite the selected entries in LyX"
+msgstr "Upravit označený záznam"
 
-#: mainwindow.cpp:454
-msgid "Enable/disable the collection toolbar"
-msgstr "Povolit/zakázat nástrojovou lištu sbírky"
-
-#: mainwindow.cpp:461
+#: mainwindow.cpp:476
 msgid "Enable/disable the statusbar"
 msgstr "Povolit/zakázat stavovou lištu"
 
-#: mainwindow.cpp:465
+#: mainwindow.cpp:480
 msgid "Show Grou&p View"
 msgstr "Zobrazit sku&pinový pohled"
 
-#: mainwindow.cpp:468
+#: mainwindow.cpp:483
 msgid "Enable/disable the group view"
 msgstr "Povolit/zakázat skupinový pohled"
 
-#: mainwindow.cpp:469
+#: mainwindow.cpp:484
 msgid "Show Entry &Editor"
 msgstr "Zobrazit &editor záznamů"
 
-#: mainwindow.cpp:472
+#: mainwindow.cpp:487
 msgid "Enable/disable the editor"
 msgstr "Povolit/zakázat editor"
 
-#: mainwindow.cpp:473
+#: mainwindow.cpp:488
 msgid "Show Entry &View"
 msgstr "Zobrazit pohled na &záznam"
 
-#: mainwindow.cpp:476
+#: mainwindow.cpp:491
 msgid "Enable/disable the entry view"
 msgstr "Povolit/zakázat pohled na záznam"
 
-#: mainwindow.cpp:477
+#: mainwindow.cpp:492
 msgid "Advanced &Filter..."
 msgstr "Pokročilý &filtr..."
 
-#: mainwindow.cpp:480 mainwindow.cpp:510
+#: mainwindow.cpp:495 mainwindow.cpp:517 mainwindow.cpp:520
 msgid "Filter the collection"
 msgstr "Filtrovat sbírku"
 
-#: mainwindow.cpp:491
-msgid "Tip of the &Day"
-msgstr "Tip &dne"
-
-#: mainwindow.cpp:495
-msgid "Show the \"Tip of the Day\" dialog..."
-msgstr "Zobrazit dialogové okno \"Tip dne\"..."
-
-#: mainwindow.cpp:500
+#: mainwindow.cpp:507
 msgid "Group By:"
 msgstr "Seskupit podle:"
 
-#: mainwindow.cpp:502 mainwindow.cpp:506
+#: mainwindow.cpp:509 mainwindow.cpp:513
 msgid "Change the grouping of the collection"
 msgstr "Změnit seskupení sbírky"
 
-#: mainwindow.cpp:503
+#: mainwindow.cpp:510
 msgid "&Group Selection"
 msgstr "&Výběr skupin"
 
-#: mainwindow.cpp:508
+#: mainwindow.cpp:515
 msgid "Quick Filter:"
 msgstr "Rychlý filtr:"
 
-#: mainwindow.cpp:511
+#: mainwindow.cpp:518
 msgid "Filter Entry"
 msgstr "Filtrovat záznam"
 
-#: mainwindow.cpp:844
+#: mainwindow.cpp:876
 msgid "Creating new document..."
 msgstr "Vytvářím nový dokument..."
 
-#: mainwindow.cpp:857 mainwindow.cpp:876 mainwindow.cpp:891
+#: mainwindow.cpp:890 mainwindow.cpp:909 mainwindow.cpp:922
 msgid "Opening file..."
 msgstr "Otevírám soubor..."
 
-#: mainwindow.cpp:867
+#: mainwindow.cpp:900
 msgid "Open File..."
 msgstr "Otevřít soubor..."
 
-#: mainwindow.cpp:925
+#: mainwindow.cpp:970
 msgid "Saving file..."
 msgstr "Ukládám soubor..."
 
-#: mainwindow.cpp:944
+#: mainwindow.cpp:989
 msgid "Saving file with a new filename..."
 msgstr "Ukládám soubor pod jiným názvem..."
 
-#: mainwindow.cpp:984 mainwindow.cpp:1026
+#: mainwindow.cpp:1027 mainwindow.cpp:1075
 msgid "Printing..."
 msgstr "Probíhá tisk..."
 
-#: mainwindow.cpp:994
+#: mainwindow.cpp:1037
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
-msgstr "Sbírka má nastaven filtr tak, aby byla zobrazena jen určitá část záznamů. Pouze viditelné záznamy budou vytištěny. Pokračovat?"
+msgstr ""
+"Sbírka má nastaven filtr tak, aby byla zobrazena jen určitá část záznamů. "
+"Pouze viditelné záznamy budou vytištěny. Pokračovat?"
 
-#: mainwindow.cpp:1013
+#: mainwindow.cpp:1062
 msgid "Processing document..."
 msgstr "Zpracovávám dokument..."
 
-#: mainwindow.cpp:1033
+#: mainwindow.cpp:1082
 msgid "Exiting..."
 msgstr "Ukončuji..."
 
-#: mainwindow.cpp:1237
+#: mainwindow.cpp:1266
 msgid "Total Entries: %1"
 msgstr "Celkem záznamů: %1"
 
-#: mainwindow.cpp:1243
+#: mainwindow.cpp:1275
+#, fuzzy
+msgid "(%1 filtered; %2 selected)"
+msgstr "(%1 označeno)"
+
+#: mainwindow.cpp:1278
+#, fuzzy
+msgid "(%1 filtered)"
+msgstr "(%1 označeno)"
+
+#: mainwindow.cpp:1281
 msgid "(%1 selected)"
 msgstr "(%1 označeno)"
 
-#: mainwindow.cpp:1355 translators/htmlexporter.cpp:183
+#: mainwindow.cpp:1410 translators/htmlexporter.cpp:219
 msgid "People"
 msgstr "Lidé"
 
-#: mainwindow.cpp:1407
+#: mainwindow.cpp:1479
 msgid "Print %1"
 msgstr "Vytisknout %1"
 
-#: mainwindow.cpp:1441
+#: mainwindow.cpp:1513
 msgid "Page %1"
 msgstr "Strana %1"
 
-#: mainwindow.cpp:1468
+#: mainwindow.cpp:1540
 msgid "Bookcase encountered an error in XSLT processing.\n"
 msgstr "Bookcase narazil na chybu při XSLT zpracovávání.\n"
 
-#: mainwindow.cpp:1469
-msgid "Please check your installation."
-msgstr "Zkontrolujte svou instalaci."
-
-#: mainwindow.cpp:1568
+#: mainwindow.cpp:1632
 msgid "Importing data..."
 msgstr "Importuji data..."
 
-#: mainwindow.cpp:1575
+#: mainwindow.cpp:1639
 msgid "Import File..."
 msgstr "Importovat soubor..."
 
-#: mainwindow.cpp:1614
+#: mainwindow.cpp:1676
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection"
-msgstr "Připojeny mohou být pouze sbírky se stejným druhem záznamů. Stávající sbírka nebude změněna"
+msgstr ""
+"Připojeny mohou být pouze sbírky se stejným druhem záznamů. Stávající sbírka "
+"nebude změněna"
 
-#: mainwindow.cpp:1637
+#: mainwindow.cpp:1689
+#, fuzzy
+msgid ""
+"Only collections with the same type of entries as the current one can be "
+"merged. No changes are being made to the current collection"
+msgstr ""
+"Připojeny mohou být pouze sbírky se stejným druhem záznamů. Stávající sbírka "
+"nebude změněna"
+
+#: mainwindow.cpp:1718
 msgid "Exporting data..."
 msgstr "Exportuji data..."
 
-#: mainwindow.cpp:1644
+#: mainwindow.cpp:1725
 msgid "Export As"
 msgstr "Exportovat jako"
 
-#: mainwindow.cpp:1686
+#: mainwindow.cpp:1762
 msgid "String Macros"
 msgstr "Řetězcová makra"
 
-#: mainwindow.cpp:1687
+#: mainwindow.cpp:1763
 msgid "Macro"
 msgstr "Makro"
 
-#: mainwindow.cpp:1687
+#: mainwindow.cpp:1763
 msgid "String"
 msgstr "Řetězec"
 
-#: document.cpp:108
+#: mainwindow.cpp:1885
+#, fuzzy
+msgid "<qt>Bookcase is unable to write to the server pipe at <b>%1</b>.</qt>"
+msgstr "Bookcase nemůže zapsat soubor %1."
+
+#: document.cpp:107
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
@@ -1066,81 +1204,86 @@ msgstr ""
 "Aktuální soubor byl změněn.\n"
 "Chcete ho uložit?"
 
-#: document.cpp:110 entryeditdialog.cpp:491
+#: document.cpp:109 entryeditdialog.cpp:548
 msgid "Warning!"
 msgstr "Varování!"
 
-#: document.cpp:348 document.cpp:351
+#: document.cpp:334 document.cpp:337
 msgid "Rename Collection"
 msgstr "Přejmenovat sbírku"
 
-#: document.cpp:348 document.cpp:351
+#: document.cpp:334 document.cpp:337
 msgid "New Collection Name"
 msgstr "Nový název sbírky"
 
-#: document.cpp:490
+#: document.cpp:476
 msgid "Search string '%1' not found."
 msgstr "Hledaný řetězec '%1' nebyl nalezen."
 
-#: collectionfieldsdialog.cpp:80
+#: collectionfieldsdialog.cpp:81
 msgid "Collection Fields"
 msgstr "Pole sbírky"
 
-#: collectionfieldsdialog.cpp:92
+#: collectionfieldsdialog.cpp:93
 msgid "Current Fields"
 msgstr "Aktuální pole"
 
-#: collectionfieldsdialog.cpp:107 collectionfieldsdialog.cpp:323
-#: collectionfieldsdialog.cpp:326 translators/csvimporter.cpp:326
-#: translators/csvimporter.cpp:413
+#: collectionfieldsdialog.cpp:108 collectionfieldsdialog.cpp:358
+#: collectionfieldsdialog.cpp:361 translators/csvimporter.cpp:322
+#: translators/csvimporter.cpp:411
 msgid "New Field"
 msgstr "Nové pole"
 
-#: collectionfieldsdialog.cpp:109
+#: collectionfieldsdialog.cpp:110
 msgid "Add a new field to the collection"
 msgstr "Přidat do sbírky nové pole"
 
-#: collectionfieldsdialog.cpp:110
+#: collectionfieldsdialog.cpp:111
 msgid "Delete Field"
 msgstr "Smazat pole"
 
-#: collectionfieldsdialog.cpp:112
+#: collectionfieldsdialog.cpp:113
 msgid "Remove a field from the collection"
 msgstr "Odstranit pole ze sbírky"
 
-#: collectionfieldsdialog.cpp:121
+#: collectionfieldsdialog.cpp:122
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
-msgstr "Posunout pole v seznamu nahoru. Pořadí v seznamu je důležité pro rozložení editoru záznamů.in je důležité pro."
+msgstr ""
+"Posunout pole v seznamu nahoru. Pořadí v seznamu je důležité pro rozložení "
+"editoru záznamů.in je důležité pro."
 
-#: collectionfieldsdialog.cpp:125
+#: collectionfieldsdialog.cpp:126
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
-msgstr "Posunout pole v seznamu dolu. Pořadí v seznamu je důležité pro rozložení editoru záznamů.in je důležité pro."
+msgstr ""
+"Posunout pole v seznamu dolu. Pořadí v seznamu je důležité pro rozložení "
+"editoru záznamů.in je důležité pro."
 
-#: collectionfieldsdialog.cpp:135
+#: collectionfieldsdialog.cpp:136
 msgid "Field Properties"
 msgstr "Vlastnosti pole"
 
-#: collectionfieldsdialog.cpp:141
+#: collectionfieldsdialog.cpp:142
 msgid "Title:"
 msgstr "Název:"
 
-#: collectionfieldsdialog.cpp:145
+#: collectionfieldsdialog.cpp:146
 msgid "The title of the field"
 msgstr "Název pole"
 
-#: collectionfieldsdialog.cpp:150
+#: collectionfieldsdialog.cpp:151
 msgid "Type:"
 msgstr "Druh:"
 
-#: collectionfieldsdialog.cpp:154
+#: collectionfieldsdialog.cpp:155
+#, fuzzy
 msgid ""
 "<qt>The type of the field determines what values may be used. <i>Simple "
 "Text</i> is used for most fields. <i>Paragraph</i> is for large text blocks. "
-"<i>List</i> limits the field to certain values. <i>Checkbox</i> is for a "
+"<i>Choice</i> limits the field to certain values. <i>Checkbox</i> is for a "
 "simple yes/no value. <i>Number</i> indicates that the field contains a "
 "numerical value. <i>URL</i> is for fields which refer to URLs, including "
 "references to other files. <i>Table</i>s may be a single or double column of "
@@ -1148,328 +1291,398 @@ msgid ""
 "import and export. A <i>Dependent</i> field depends on the values of other "
 "fields, and is formatted according to the field description. An <i>Image</i> "
 "holds a picture.</qt>"
-msgstr "<qt>Druh pole určuje jaké mohou být použity hodnoty. Pro většinu polí se používá <i>prostý text</i>. Pro velké bloky textu je <i>odstavec</i>. <i>Seznam</i> omezuje pole na určité hodnoty. <i>Zaškrtávací políčko</i> je pro jednoduchou hodnotu ano/ne. <i>Číslo</i> značí, že pole obsahuje numerickou hodnotu. <i>URL</i> je pro pole odkazující na URL, včetně odkazů na další soubory. <i>Tabulky</i> mohou být jeden nebo dva sloupce hodnot, přičemž <i>pouze pro čtení</i> je pro interní hodnoty, které mohou být užitečné pro import a export. <i>Závislé</i> pole závisí na hodnotách jiných polí a je formátováno podle popisu pole. <i>Obrázek</i> obsahuje, jak jinak, obrázek.</qt>"
+msgstr ""
+"<qt>Druh pole určuje jaké mohou být použity hodnoty. Pro většinu polí se "
+"používá <i>prostý text</i>. Pro velké bloky textu je <i>odstavec</i>. "
+"<i>Seznam</i> omezuje pole na určité hodnoty. <i>Zaškrtávací políčko</i> je "
+"pro jednoduchou hodnotu ano/ne. <i>Číslo</i> značí, že pole obsahuje "
+"numerickou hodnotu. <i>URL</i> je pro pole odkazující na URL, včetně odkazů "
+"na další soubory. <i>Tabulky</i> mohou být jeden nebo dva sloupce hodnot, "
+"přičemž <i>pouze pro čtení</i> je pro interní hodnoty, které mohou být "
+"užitečné pro import a export. <i>Závislé</i> pole závisí na hodnotách jiných "
+"polí a je formátováno podle popisu pole. <i>Obrázek</i> obsahuje, jak jinak, "
+"obrázek.</qt>"
 
-#: collectionfieldsdialog.cpp:170
+#: collectionfieldsdialog.cpp:171
 msgid "Category:"
 msgstr "Kategorie:"
 
-#: collectionfieldsdialog.cpp:174
+#: collectionfieldsdialog.cpp:175
 msgid "The field category determines where the field is placed in the editor."
 msgstr "Kategorie určuje, kde bude pole v editoru umístěno."
 
-#: collectionfieldsdialog.cpp:181
-msgid "Allowed:"
-msgstr "Povoleno:"
-
-#: collectionfieldsdialog.cpp:185
-msgid ""
-"<qt>For <i>List</i>-type fields, these are the only values allowed. They are "
-"placed in a combo box.</qt>"
-msgstr "<qt>U polí druhu <i>seznam</i> jsou povoleny pouze tyto hodnoty. Naleznete je v kombinovaném seznamu.</qt>"
-
-#: collectionfieldsdialog.cpp:191
+#: collectionfieldsdialog.cpp:192
 msgid "Description:"
 msgstr "Popis:"
 
 #: collectionfieldsdialog.cpp:196
+#, fuzzy
 msgid ""
-"The description is useful reminder of what information is contained in the "
+"<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
+"are placed in a combo box.</qt>"
+msgstr ""
+"<qt>U polí druhu <i>seznam</i> jsou povoleny pouze tyto hodnoty. Naleznete "
+"je v kombinovaném seznamu.</qt>"
+
+#: collectionfieldsdialog.cpp:202
+msgid "Allowed:"
+msgstr "Povoleno:"
+
+#: collectionfieldsdialog.cpp:207
+#, fuzzy
+msgid ""
+"The description is a useful reminder of what information is contained in the "
 "field. For <i>Dependent</i> fields, the description is a format string such "
 "as \"%{year} %{title}\" where the named fields get substituted in the string."
-msgstr "Popis je šikovnou připomínkou informací, které pole obsahuje. U <i>závislých</i> polí je popis řetězcem typu \"%{year} %{title}\", ve kterém budou pojmenovaná pole nahrazena."
+msgstr ""
+"Popis je šikovnou připomínkou informací, které pole obsahuje. U "
+"<i>závislých</i> polí je popis řetězcem typu \"%{year} %{title}\", ve kterém "
+"budou pojmenovaná pole nahrazena."
 
-#: collectionfieldsdialog.cpp:203
+#: collectionfieldsdialog.cpp:214
 msgid "Extended Properties:"
 msgstr "Rozšířené vlastnosti:"
 
-#: collectionfieldsdialog.cpp:205
+#: collectionfieldsdialog.cpp:216
 msgid "Set..."
 msgstr "Nastavit..."
 
-#: collectionfieldsdialog.cpp:207
+#: collectionfieldsdialog.cpp:218
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
-msgstr "Rozšířené vlastnosti pole se používají k určení věcí jako je například odpovídající bibtexové pole."
+msgstr ""
+"Rozšířené vlastnosti pole se používají k určení věcí jako je například "
+"odpovídající bibtexové pole."
 
-#: collectionfieldsdialog.cpp:211
+#: collectionfieldsdialog.cpp:222
 msgid "Format Options"
 msgstr "Možnosti formátu"
 
-#: collectionfieldsdialog.cpp:212
+#: collectionfieldsdialog.cpp:223
 msgid "No formatting"
 msgstr "Žádné formátování"
 
-#: collectionfieldsdialog.cpp:213
+#: collectionfieldsdialog.cpp:224
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
-msgstr "Tato volba zabraňuje automatickému formátování pole nebo nahrazení písmen velkými."
+msgstr ""
+"Tato volba zabraňuje automatickému formátování pole nebo nahrazení písmen "
+"velkými."
 
-#: collectionfieldsdialog.cpp:215
+#: collectionfieldsdialog.cpp:226
 msgid "Allow auto-capitalization only"
 msgstr "Povolit pouze náhradu za velká písmena"
 
-#: collectionfieldsdialog.cpp:216
-msgid "This option allows the field to be capitalized, but not specially formatted."
-msgstr "Tato volba umožňuje náhradu za velká písmena, ale ne speciální formátování."
+#: collectionfieldsdialog.cpp:227
+msgid ""
+"This option allows the field to be capitalized, but not specially formatted."
+msgstr ""
+"Tato volba umožňuje náhradu za velká písmena, ale ne speciální formátování."
 
-#: collectionfieldsdialog.cpp:218
+#: collectionfieldsdialog.cpp:229
 msgid "Format as a title"
 msgstr "Formátovat jako název"
 
-#: collectionfieldsdialog.cpp:219
+#: collectionfieldsdialog.cpp:230
 msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
-msgstr "Tato volba nahradí písmena za velké a zformátuje pole jako název, ale pouze pokud jsou tyto možnosti nastaveny globálně."
+msgstr ""
+"Tato volba nahradí písmena za velké a zformátuje pole jako název, ale pouze "
+"pokud jsou tyto možnosti nastaveny globálně."
 
-#: collectionfieldsdialog.cpp:221
+#: collectionfieldsdialog.cpp:232
 msgid "Format as a name"
 msgstr "Formátovat jako název"
 
-#: collectionfieldsdialog.cpp:222
+#: collectionfieldsdialog.cpp:233
 msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
-msgstr "Tato volba nahradí písmena za velké a zformátuje pole jako název, ale pouze pokud jsou tyto možnosti nastaveny globálně."
+msgstr ""
+"Tato volba nahradí písmena za velké a zformátuje pole jako název, ale pouze "
+"pokud jsou tyto možnosti nastaveny globálně."
 
-#: collectionfieldsdialog.cpp:226
+#: collectionfieldsdialog.cpp:237
 msgid "Field Options"
 msgstr "Možnosti pole"
 
-#: collectionfieldsdialog.cpp:227
+#: collectionfieldsdialog.cpp:238
 msgid "Enable auto-completion"
 msgstr "Povolit automatické doplňování"
 
-#: collectionfieldsdialog.cpp:228
+#: collectionfieldsdialog.cpp:239
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
-msgstr "Je-li zaškrtnuto, bude v při úpravě textu v tomto poli povolena funkce automatického doplňování KDE."
+msgstr ""
+"Je-li zaškrtnuto, bude v při úpravě textu v tomto poli povolena funkce "
+"automatického doplňování KDE."
 
-#: collectionfieldsdialog.cpp:230
+#: collectionfieldsdialog.cpp:241
 msgid "Allow multiple values"
 msgstr "Povolit více hodnot"
 
-#: collectionfieldsdialog.cpp:231
+#: collectionfieldsdialog.cpp:242
 msgid ""
 "If checked, Bookcase will parse the values in the field for multiple values, "
 "separated by a semi-colon."
-msgstr "Je-li zaškrtnuto, bude Bookcase v poli očekávat více hodnot oddělených středníkem."
+msgstr ""
+"Je-li zaškrtnuto, bude Bookcase v poli očekávat více hodnot oddělených "
+"středníkem."
 
-#: collectionfieldsdialog.cpp:233
+#: collectionfieldsdialog.cpp:244
 msgid "Allow grouping"
 msgstr "Povolit seskupování"
 
-#: collectionfieldsdialog.cpp:234
-msgid "If checked, this field may be used to group the entries in the group view."
-msgstr "Je-li zaškrtnuto, bude možné toto pole použít k seskupení záznamů ve skupinovém pohledu."
+#: collectionfieldsdialog.cpp:245
+msgid ""
+"If checked, this field may be used to group the entries in the group view."
+msgstr ""
+"Je-li zaškrtnuto, bude možné toto pole použít k seskupení záznamů ve "
+"skupinovém pohledu."
 
-#: collectionfieldsdialog.cpp:248
+#: collectionfieldsdialog.cpp:259
 msgid "Revert the selected field's properties to the default values."
 msgstr "Vrátit vlastnosti označeného pole na výchozí."
 
-#: collectionfieldsdialog.cpp:358
+#: collectionfieldsdialog.cpp:393
 msgid ""
 "<qt><p>Do you really want to delete the <em>%1</em> field? This action "
 "occurs immediately and can not be undone!</p></qt>"
-msgstr "<qt><p>Opravdu chcete pole <em>%1</em> vymazat? Tento krok se projeví ihned a nelze jej vzít zpět!</p></qt>"
+msgstr ""
+"<qt><p>Opravdu chcete pole <em>%1</em> vymazat? Tento krok se projeví ihned "
+"a nelze jej vzít zpět!</p></qt>"
 
-#: collectionfieldsdialog.cpp:361
+#: collectionfieldsdialog.cpp:396
 msgid "Delete Field?"
 msgstr "Smazat pole?"
 
-#: collectionfieldsdialog.cpp:637
+#: collectionfieldsdialog.cpp:669
 msgid "Revert Field Properties?"
 msgstr "Vrátit vlastnosti pole?"
 
-#: collectionfieldsdialog.cpp:638
+#: collectionfieldsdialog.cpp:670
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
-msgstr "<qt><p>Opravdu chcete vrátit vlastnosti pole <em>%1</em> na výchozí hodnoty?</p></qt>"
+msgstr ""
+"<qt><p>Opravdu chcete vrátit vlastnosti pole <em>%1</em> na výchozí hodnoty?"
+"</p></qt>"
 
-#: collectionfieldsdialog.cpp:641
+#: collectionfieldsdialog.cpp:673
 msgid "Revert"
 msgstr "Zpět"
 
-#: collectionfieldsdialog.cpp:768
+#: collectionfieldsdialog.cpp:791
 msgid "Extended Field Properties"
 msgstr "Rozšířené vlastnosti pole"
 
-#: collectionfieldsdialog.cpp:769
+#: collectionfieldsdialog.cpp:792
 msgid "Property"
 msgstr "Vlastnost"
 
-#: collectionfieldsdialog.cpp:769
+#: collectionfieldsdialog.cpp:792
 msgid "Value"
 msgstr "Hodnota"
+
+#: collectionfieldsdialog.cpp:803
+msgid "A field with this title already exists. Please enter a different title."
+msgstr ""
+
+#: collectionfieldsdialog.cpp:812
+msgid ""
+"<qt>A field may not be in the same category as a <em>Paragraph</em>, "
+"<em>Table</em> or <em>Image</em> field. Please enter a different category.</"
+"qt>"
+msgstr ""
+
+#: collectionfieldsdialog.cpp:820
+msgid ""
+"A field's title may not be the same as an existing category. Please enter a "
+"different title."
+msgstr ""
 
 #: collection.cpp:23
 msgid "(Empty)"
 msgstr "(Prázdné)"
 
-#: controller.cpp:206
+#: controller.cpp:214
 msgid "Do you really want to delete these entries?"
 msgstr "Opravdu chcete smazat tyto záznamy?"
 
-#: controller.cpp:208
+#: controller.cpp:216
 msgid "Delete Multiple Entries?"
 msgstr "Smazat více záznamů?"
 
-#: translators/csvexporter.cpp:43
+#: translators/csvexporter.cpp:39
 msgid "CSV"
 msgstr "CSV"
 
-#: translators/csvexporter.cpp:58 translators/csvimporter.cpp:106
+#: translators/csvexporter.cpp:54 translators/csvimporter.cpp:106
 msgid "CSV Options"
 msgstr "Možnosti CSV"
 
-#: translators/csvexporter.cpp:61
+#: translators/csvexporter.cpp:57
 msgid "Include field titles as column headers"
 msgstr "Začlenit názvy polí coby hlavičky sloupců"
 
-#: translators/csvexporter.cpp:63
+#: translators/csvexporter.cpp:59
 msgid "If checked, a header row will be added with the field titles."
 msgstr "Je-li zaškrtnuto, řada hlavičky bude doplněna o název pole."
 
-#: translators/csvexporter.cpp:66 translators/csvimporter.cpp:125
+#: translators/csvexporter.cpp:62 translators/csvimporter.cpp:126
 msgid "Delimiter"
 msgstr "Oddělovač"
 
-#: translators/csvexporter.cpp:69 translators/csvimporter.cpp:128
+#: translators/csvexporter.cpp:65 translators/csvimporter.cpp:129
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
-msgstr "Kromě čárky mohou být jako oddělovač oddělující všechny hodnoty v souboru použity i jiné znaky."
+msgstr ""
+"Kromě čárky mohou být jako oddělovač oddělující všechny hodnoty v souboru "
+"použity i jiné znaky."
 
-#: translators/csvexporter.cpp:73 translators/csvimporter.cpp:133
+#: translators/csvexporter.cpp:69 translators/csvimporter.cpp:134
 msgid "Comma"
 msgstr "Čárka"
 
-#: translators/csvexporter.cpp:75 translators/csvimporter.cpp:135
+#: translators/csvexporter.cpp:71 translators/csvimporter.cpp:136
 msgid "Use a comma as the delimiter."
 msgstr "Použít čárku jako oddělovač."
 
-#: translators/csvexporter.cpp:79 translators/csvimporter.cpp:139
+#: translators/csvexporter.cpp:75 translators/csvimporter.cpp:140
 msgid "Semicolon"
 msgstr "Středník"
 
-#: translators/csvexporter.cpp:80 translators/csvimporter.cpp:140
+#: translators/csvexporter.cpp:76 translators/csvimporter.cpp:141
 msgid "Use a semi-colon as the delimiter."
 msgstr "Použít střední jako oddělovač."
 
-#: translators/csvexporter.cpp:84 translators/csvimporter.cpp:144
+#: translators/csvexporter.cpp:80 translators/csvimporter.cpp:145
 msgid "Tab"
 msgstr "Tabulátor"
 
-#: translators/csvexporter.cpp:85 translators/csvimporter.cpp:145
+#: translators/csvexporter.cpp:81 translators/csvimporter.cpp:146
 msgid "Use a tab as the delimiter."
 msgstr "Použít tabulátor jako oddělovač."
 
-#: translators/csvexporter.cpp:89 translators/csvimporter.cpp:149
+#: translators/csvexporter.cpp:85 translators/csvimporter.cpp:150
 msgid "Other"
 msgstr "Jiné"
 
-#: translators/csvexporter.cpp:90 translators/csvimporter.cpp:150
+#: translators/csvexporter.cpp:86 translators/csvimporter.cpp:151
 msgid "Use a custom string as the delimiter."
 msgstr "Použít vlastní řetězec jako oddělovač."
 
-#: translators/csvexporter.cpp:95 translators/csvimporter.cpp:155
+#: translators/csvexporter.cpp:91 translators/csvimporter.cpp:156
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "Jako oddělovač může být použit vlastní řetězec, třeba dvojtečka."
 
-#: translators/htmlexporter.cpp:42
+#: translators/htmlexporter.cpp:54
 msgid "HTML"
 msgstr "HTML"
 
-#: translators/htmlexporter.cpp:46
+#: translators/htmlexporter.cpp:58
 msgid "*.html|HTML files (*.html)"
 msgstr "*.html|soubory HTML (*.html)"
 
-#: translators/htmlexporter.cpp:57
+#: translators/htmlexporter.cpp:69
 msgid "HTML Options"
 msgstr "Možnosti HTML"
 
-#: translators/htmlexporter.cpp:187
+#: translators/htmlexporter.cpp:82
+msgid "Export individual entry files"
+msgstr ""
+
+#: translators/htmlexporter.cpp:83
+#, fuzzy
+msgid "If checked, individual files will be created for each entry."
+msgstr "Je-li zaškrtnuto, budou názvy polí vytištěny jako hlavičky tabulky."
+
+#: translators/htmlexporter.cpp:223
 msgid "(grouped by %1; sorted by %2)"
 msgstr "(seskupeno podle %1; seřazeno podle %2)"
 
-#: translators/htmlexporter.cpp:189
+#: translators/htmlexporter.cpp:225
 msgid "(sorted by %1)"
 msgstr "(seřazeno podle %1)"
 
-#: translators/bibtexexporter.cpp:43
-msgid "Bibtex"
-msgstr "Bibtex"
-
-#: translators/bibtexexporter.cpp:58
-msgid "Bibtex Options"
-msgstr "Možnosti Bibtex"
-
-#: translators/bibtexexporter.cpp:61
+#: translators/bibtexexporter.cpp:62
 msgid "Expand string macros"
 msgstr "Rozšířit řetězcová makra"
 
-#: translators/bibtexexporter.cpp:63
+#: translators/bibtexexporter.cpp:64
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
-msgstr "Je-li zaškrtnuto, řetězcová makra budou rozšířena a nebudou zapsány žádné záznamy @řetězec{}."
+msgstr ""
+"Je-li zaškrtnuto, řetězcová makra budou rozšířena a nebudou zapsány žádné "
+"záznamy @řetězec{}."
 
-#: translators/bibtexexporter.cpp:66
+#: translators/bibtexexporter.cpp:67
 msgid "Use URL package"
 msgstr "Použít zabalení do URL"
 
-#: translators/bibtexexporter.cpp:68
+#: translators/bibtexexporter.cpp:69
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr "Je-li zaškrtnuto, budou URL pole zabalena do deklarace \\url."
 
-#: translators/bibtexmlexporter.cpp:35
+#: translators/bibtexexporter.cpp:72
+msgid "Skip entries with empty citation keys"
+msgstr ""
+
+#: translators/bibtexexporter.cpp:74
+msgid "If checked, any entries without a bibtex citation key will be skipped."
+msgstr ""
+
+#: translators/bibtexmlexporter.cpp:36
 msgid "Bibtexml"
 msgstr "Bibtexml"
 
-#: translators/bibtexmlexporter.cpp:39
+#: translators/bibtexmlexporter.cpp:40
 msgid "*.xml|Bibtexml files (*.xml)"
 msgstr "*.xml|soubory Bibtexml (*.xml)"
 
-#: translators/csvimporter.cpp:110
+#: translators/csvimporter.cpp:111
 msgid "Data Type:"
 msgstr "Druh dat:"
 
-#: translators/csvimporter.cpp:112
+#: translators/csvimporter.cpp:113
 msgid "Select the type of collection being imported."
 msgstr "Vyberte importovaný druh sbírky."
 
-#: translators/csvimporter.cpp:120
+#: translators/csvimporter.cpp:121
 msgid "First row contains field titles"
 msgstr "První řada obsahuje názvy polí"
 
-#: translators/csvimporter.cpp:122
+#: translators/csvimporter.cpp:123
 msgid "If checked, the first row is used as field titles."
 msgstr "Je-li zaškrtnuto, bude první řada použita jako názvy polí."
 
-#: translators/csvimporter.cpp:180
+#: translators/csvimporter.cpp:181
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Tabulka se zobrazuje až po prvních pět řádku souboru CSV."
 
-#: translators/csvimporter.cpp:186
+#: translators/csvimporter.cpp:187
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
 "column, selecting the field, then clicking the <i>Set</i> button.</qt>"
-msgstr "<qt> Nastavte každý sloupec tak, aby odpovídal poli ve sbírce. Vyberte sloupec, označte pole a klepněte na tlačítko <i> Nastavit</i>.</qt>"
+msgstr ""
+"<qt> Nastavte každý sloupec tak, aby odpovídal poli ve sbírce. Vyberte "
+"sloupec, označte pole a klepněte na tlačítko <i> Nastavit</i>.</qt>"
 
-#: translators/csvimporter.cpp:188
+#: translators/csvimporter.cpp:189
 msgid "Column:"
 msgstr "Sloupec:"
 
-#: translators/csvimporter.cpp:192
+#: translators/csvimporter.cpp:193
 msgid "Data field in this column:"
 msgstr "Datové pole v tomto sloupci:"
 
-#: translators/csvimporter.cpp:195
+#: translators/csvimporter.cpp:196
 msgid "Set"
 msgstr "Nastavit"
 
@@ -1477,11 +1690,11 @@ msgstr "Nastavit"
 msgid "XSLT"
 msgstr "XSLT"
 
-#: translators/xsltexporter.cpp:53 translators/xsltimporter.cpp:72
+#: translators/xsltexporter.cpp:53 translators/xsltimporter.cpp:70
 msgid "XSLT Options"
 msgstr "Možnosti XSLT"
 
-#: translators/xsltexporter.cpp:57 translators/xsltimporter.cpp:73
+#: translators/xsltexporter.cpp:57 translators/xsltimporter.cpp:71
 msgid "XSLT File:"
 msgstr "Soubor XSLT:"
 
@@ -1493,23 +1706,23 @@ msgstr "Zvolte XSLT soubor použitý pro transformaci XML Bookcase dat."
 msgid "No valid Bibtex entries were found in file - %1"
 msgstr "V souboru %1 nebyly nalezeny žádné platné Bibtex záznamy"
 
-#: translators/pilotdbexporter.cpp:39
+#: translators/pilotdbexporter.cpp:42
 msgid "PilotDB"
 msgstr "PilotDB"
 
-#: translators/pilotdbexporter.cpp:43
+#: translators/pilotdbexporter.cpp:46
 msgid "*.pdb|Pilot Database files(*.pdb)"
 msgstr "*.pdb|soubory databáze Pilot (*.pdb)"
 
-#: translators/pilotdbexporter.cpp:138
+#: translators/pilotdbexporter.cpp:175
 msgid "PilotDB Options"
 msgstr "Možnosti PilotDB"
 
-#: translators/pilotdbexporter.cpp:141 translators/pilotdbexporter.cpp:143
+#: translators/pilotdbexporter.cpp:178 translators/pilotdbexporter.cpp:180
 msgid "Set PDA backup flag for database"
 msgstr "Nastavit pro databázi značku zálohování na PDA"
 
-#: translators/bibtexhandler.cpp:187 translators/bookcaseimporter.cpp:221
+#: translators/bibtexhandler.cpp:197 translators/bookcaseimporter.cpp:219
 msgid "Unknown"
 msgstr "Neznámé"
 
@@ -1529,70 +1742,38 @@ msgstr "Začlenit do XML dokumentu obrázky"
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
-msgstr "Je-li zaškrtnuto, budou obrázky dokumentu začleněny do XML streamu jako base64 kódované elementy."
+msgstr ""
+"Je-li zaškrtnuto, budou obrázky dokumentu začleněny do XML streamu jako "
+"base64 kódované elementy."
 
 #: translators/xsltimporter.cpp:46
 msgid "A valid XSLT file is needed to import the file."
 msgstr "K importu tohoto souboru je potřeba platný XSLT soubor."
 
-#: translators/bookcaseimporter.cpp:109
+#: translators/bookcaseimporter.cpp:106
 msgid "It is from a future version of Bookcase."
 msgstr "Je to z budoucí verze Bookcase."
 
-#: translators/bookcaseimporter.cpp:114
+#: translators/bookcaseimporter.cpp:111
 msgid ""
 "Bookcase is converting the file to a more recent document format. "
 "Information loss may occur if an older version of Bookcase is used to read "
 "this file in the future."
-msgstr "Bookcase soubor převádí na současnější verzi formátu dokumentu. Pokud by by byla ke čtení tohoto souboru v budoucnu použita starší verze Bookcase, mohlo by dojít ke ztrátě dat."
+msgstr ""
+"Bookcase soubor převádí na současnější verzi formátu dokumentu. Pokud by by "
+"byla ke čtení tohoto souboru v budoucnu použita starší verze Bookcase, mohlo "
+"by dojít ke ztrátě dat."
 
 #: translators/bookcasezipexporter.cpp:33
 msgid "Bookcase Zip File"
 msgstr "Bookcase zip soubor"
 
 #: translators/bookcasezipexporter.cpp:37
-msgid "*.bcz|Bookcase files(*.bcz)"
-msgstr "*.bcz|soubory Bookcase (*.bcz)"
+#, fuzzy
+msgid "*.bc|Bookcase files(*.bc)"
+msgstr "*.Bc|soubory Bookcase (*.bc)"
 
-#: translators/dataimporter.moc.cpp:34 translators/dataimporter.moc.cpp:42
-msgid "Bookcase::Import::DataImporter"
-msgstr "Bookcase::Import::DataImporter"
-
-#: translators/csvimporter.moc.cpp:34 translators/csvimporter.moc.cpp:42
-msgid "Bookcase::Import::CSVImporter"
-msgstr "Bookcase::Import::CSVImporter"
-
-#: translators/xsltimporter.moc.cpp:34 translators/xsltimporter.moc.cpp:42
-msgid "Bookcase::Import::XSLTImporter"
-msgstr "Bookcase::Import::XSLTImporter"
-
-#: translators/textimporter.moc.cpp:34 translators/textimporter.moc.cpp:42
-msgid "Bookcase::Import::TextImporter"
-msgstr "Bookcase::Import::TextImporter"
-
-#: translators/bookcaseimporter.moc.cpp:34
-#: translators/bookcaseimporter.moc.cpp:42
-msgid "Bookcase::Import::BookcaseImporter"
-msgstr "Bookcase::Import::BookcaseImporter"
-
-#: translators/xmlimporter.moc.cpp:34 translators/xmlimporter.moc.cpp:42
-msgid "Bookcase::Import::XMLImporter"
-msgstr "Bookcase::Import::XMLImporter"
-
-#: translators/bibteximporter.moc.cpp:34 translators/bibteximporter.moc.cpp:42
-msgid "Bookcase::Import::BibtexImporter"
-msgstr "Bookcase::Import::BibtexImporter"
-
-#: translators/bibtexmlimporter.moc.cpp:34
-#: translators/bibtexmlimporter.moc.cpp:42
-msgid "Bookcase::Import::BibtexmlImporter"
-msgstr "Bookcase::Import::BibtexmlImporter"
-
-#: translators/importer.moc.cpp:34 translators/importer.moc.cpp:42
-msgid "Bookcase::Import::Importer"
-msgstr "Bookcase::Import::Importer"
-
-#: collections/bookcollection.cpp:22 collections/bibtexcollection.cpp:22
+#: collections/bookcollection.cpp:22 collections/bibtexcollection.cpp:25
 #: collections/comicbookcollection.cpp:22
 msgid "Publishing"
 msgstr "Publikování"
@@ -1620,7 +1801,7 @@ msgstr "Moje knihy"
 msgid "Subtitle"
 msgstr "Podtitul"
 
-#: collections/bookcollection.cpp:50 collections/bibtexcollection.cpp:76
+#: collections/bookcollection.cpp:50 collections/bibtexcollection.cpp:79
 msgid "Author"
 msgstr "Autor"
 
@@ -1644,7 +1825,7 @@ msgstr "E-Book"
 msgid "Magazine"
 msgstr "Časopis"
 
-#: collections/bookcollection.cpp:58 collections/bibtexcollection.cpp:154
+#: collections/bookcollection.cpp:58 collections/bibtexcollection.cpp:157
 msgid "Journal"
 msgstr "Žurnál"
 
@@ -1666,12 +1847,12 @@ msgstr "Datum koupě"
 msgid "Purchase Price"
 msgstr "Kupní cena"
 
-#: collections/bookcollection.cpp:73 collections/bibtexcollection.cpp:117
+#: collections/bookcollection.cpp:73 collections/bibtexcollection.cpp:120
 #: collections/comicbookcollection.cpp:73
 msgid "Publisher"
 msgstr "Vydavatel"
 
-#: collections/bookcollection.cpp:79 collections/bibtexcollection.cpp:130
+#: collections/bookcollection.cpp:79 collections/bibtexcollection.cpp:133
 #: collections/comicbookcollection.cpp:79
 msgid "Edition"
 msgstr "Vydání"
@@ -1700,7 +1881,7 @@ msgstr "LCCN č. "
 msgid "Library of Congress Control Number"
 msgstr "Kontrolní číslo Knihovny kongresu"
 
-#: collections/bookcollection.cpp:105 collections/bibtexcollection.cpp:137
+#: collections/bookcollection.cpp:105 collections/bibtexcollection.cpp:140
 #: collections/comicbookcollection.cpp:90
 msgid "Pages"
 msgstr "Stran"
@@ -1719,7 +1900,7 @@ msgstr "Žánr"
 msgid "Keywords"
 msgstr "Klíčová slova"
 
-#: collections/bookcollection.cpp:126 collections/bibtexcollection.cpp:191
+#: collections/bookcollection.cpp:126 collections/bibtexcollection.cpp:194
 #: collections/cardcollection.cpp:71 collections/comicbookcollection.cpp:62
 msgid "Series"
 msgstr "Série"
@@ -1787,16 +1968,16 @@ msgstr "1 - nejhorší"
 msgid "Rating"
 msgstr "Hodnocení"
 
-#: collections/bookcollection.cpp:164 collections/videocollection.cpp:212
+#: collections/bookcollection.cpp:164 collections/comicbookcollection.cpp:147
+msgid "Front Cover"
+msgstr "Přední obálka"
+
+#: collections/bookcollection.cpp:167 collections/videocollection.cpp:212
 #: collections/coincollection.cpp:126 collections/winecollection.cpp:114
 #: collections/cardcollection.cpp:115 collections/musiccollection.cpp:109
 #: collections/comicbookcollection.cpp:150 collections/stampcollection.cpp:126
 msgid "Comments"
 msgstr "Komentáře"
-
-#: collections/bookcollection.cpp:168 collections/comicbookcollection.cpp:147
-msgid "Front Cover"
-msgstr "Přední obálka"
 
 #: collections/videocollection.cpp:24
 msgid "Other People"
@@ -2004,7 +2185,7 @@ msgstr "Druh"
 msgid "Denomination"
 msgstr "Hodnota"
 
-#: collections/coincollection.cpp:54 collections/bibtexcollection.cpp:142
+#: collections/coincollection.cpp:54 collections/bibtexcollection.cpp:145
 #: collections/cardcollection.cpp:66 collections/musiccollection.cpp:62
 msgid "Year"
 msgstr "Rok"
@@ -2028,7 +2209,10 @@ msgid ""
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
-msgstr "Ověřená-65,Ověřená-60,Zbrusu nová-65,Zbrusu nová-60,Téměř nepoužitá-55,Téměř nepoužitá-50,Výjimečně kvalitní-40,Velmi kvalitní-30,Velmi kvalitní-20,Dobrý-12,Velmi dobrý-8,Dobrý-4,Ucházející"
+msgstr ""
+"Ověřená-65,Ověřená-60,Zbrusu nová-65,Zbrusu nová-60,Téměř nepoužitá-55,Téměř "
+"nepoužitá-50,Výjimečně kvalitní-40,Velmi kvalitní-30,Velmi kvalitní-20,Dobrý-"
+"12,Velmi dobrý-8,Dobrý-4,Ucházející"
 
 #: collections/coincollection.cpp:86 collections/stampcollection.cpp:80
 msgid "Grade"
@@ -2057,55 +2241,56 @@ msgstr "Líc"
 msgid "Reverse"
 msgstr "Rub"
 
-#: collections/bibtexcollection.cpp:26
+#: collections/bibtexcollection.cpp:29
 msgid "Entries"
 msgstr "Záznamy"
 
-#: collections/bibtexcollection.cpp:69
+#: collections/bibtexcollection.cpp:72
 msgid "Entry Type"
 msgstr "Druh záznamu"
 
-#: collections/bibtexcollection.cpp:73
+#: collections/bibtexcollection.cpp:76
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr "Tyto druhy záznamu jsou specifické pro Bibtex. Viz dokumentaci k Bibtex."
+msgstr ""
+"Tyto druhy záznamu jsou specifické pro Bibtex. Viz dokumentaci k Bibtex."
 
-#: collections/bibtexcollection.cpp:83
+#: collections/bibtexcollection.cpp:86
 msgid "Bibtex Key"
 msgstr "Bibtex klíč"
 
-#: collections/bibtexcollection.cpp:89
+#: collections/bibtexcollection.cpp:92
 msgid "Book Title"
 msgstr "Název knihy"
 
-#: collections/bibtexcollection.cpp:95
+#: collections/bibtexcollection.cpp:98
 msgid "Editor"
 msgstr "Redaktor"
 
-#: collections/bibtexcollection.cpp:102
+#: collections/bibtexcollection.cpp:105
 msgid "Organization"
 msgstr "Organizace"
 
-#: collections/bibtexcollection.cpp:163
+#: collections/bibtexcollection.cpp:166
 msgid "Month"
 msgstr "Měsíc"
 
-#: collections/bibtexcollection.cpp:174
+#: collections/bibtexcollection.cpp:177
 msgid "How Published"
 msgstr "Jak vydáno"
 
-#: collections/bibtexcollection.cpp:186
+#: collections/bibtexcollection.cpp:189
 msgid "Chapter"
 msgstr "Kapitola"
 
-#: collections/bibtexcollection.cpp:198
+#: collections/bibtexcollection.cpp:201
 msgid "Volume"
 msgstr "Svazek"
 
-#: collections/bibtexcollection.cpp:203
+#: collections/bibtexcollection.cpp:206
 msgid "Cross-Reference"
 msgstr "Odkazy"
 
-#: collections/bibtexcollection.cpp:213
+#: collections/bibtexcollection.cpp:216
 msgid "Notes"
 msgstr "Poznámky"
 
@@ -2241,7 +2426,9 @@ msgstr "Číslo"
 msgid ""
 "_:Comic book grade levels\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr "Zbrusu nový,Téměř nový,Velmi kvalitní,Kvalitní,Velmi dobrý,Dobrý,Ucházející,Mizerný"
+msgstr ""
+"Zbrusu nový,Téměř nový,Velmi kvalitní,Kvalitní,Velmi dobrý,Dobrý,Ucházející,"
+"Mizerný"
 
 #: collections/stampcollection.cpp:26
 msgid "Stamps"
@@ -2285,84 +2472,31 @@ msgstr "Centrovaná"
 msgid "Gummed"
 msgstr "Pogumovaná"
 
-#: collections/winecollection.moc.cpp:34 collections/winecollection.moc.cpp:42
-msgid "Bookcase::Data::WineCollection"
-msgstr "Bookcase::Data::WineCollection"
-
-#: collections/stampcollection.moc.cpp:34
-#: collections/stampcollection.moc.cpp:42
-msgid "Bookcase::Data::StampCollection"
-msgstr "Bookcase::Data::StampCollection"
-
-#: collections/comicbookcollection.moc.cpp:34
-#: collections/comicbookcollection.moc.cpp:42
-msgid "Bookcase::Data::ComicBookCollection"
-msgstr "Bookcase::Data::ComicBookCollection"
-
-#: collections/musiccollection.moc.cpp:34
-#: collections/musiccollection.moc.cpp:42
-msgid "Bookcase::Data::MusicCollection"
-msgstr "Bookcase::Data::MusicCollection"
-
-#: collections/videocollection.moc.cpp:34
-#: collections/videocollection.moc.cpp:42
-msgid "Bookcase::Data::VideoCollection"
-msgstr "Bookcase::Data::VideoCollection"
-
-#: collections/coincollection.moc.cpp:34 collections/coincollection.moc.cpp:42
-msgid "Bookcase::Data::CoinCollection"
-msgstr "Bookcase::Data::CoinCollection"
-
-#: collections/bookcollection.moc.cpp:34 collections/bookcollection.moc.cpp:42
-msgid "Bookcase::Data::BookCollection"
-msgstr "Bookcase::Data::BookCollection"
-
-#: collections/bibtexcollection.moc.cpp:34
-#: collections/bibtexcollection.moc.cpp:42
-msgid "Bookcase::Data::BibtexCollection"
-msgstr "Bookcase::Data::BibtexCollection"
-
-#: collections/cardcollection.moc.cpp:34 collections/cardcollection.moc.cpp:42
-msgid "Bookcase::Data::CardCollection"
-msgstr "Bookcase::Data::CardCollection"
-
-#: strings.h:24
-msgid "Bookcase is unable to load the file - %1."
-msgstr "Bookcase nemůže načíst soubor %1."
-
-#: strings.h:25
-msgid "Bookcase is unable to write the file - %1."
-msgstr "Bookcase nemůže zapsat soubor %1."
-
-#: strings.h:26
-msgid "Bookcase is unable to upload the file - %1."
-msgstr "Bookcase nemůže uploadoat soubor %1."
-
-#: imagewidget.cpp:43
+#: imagewidget.cpp:46
 msgid "Select Image..."
 msgstr "Vybrat obrázek..."
 
-#: entryeditdialog.cpp:41
+#: entryeditdialog.cpp:39
 msgid "Edit Entry"
 msgstr "Úprava záznamu"
 
-#: entryeditdialog.cpp:67 entryeditdialog.cpp:305 entryeditdialog.cpp:419
+#: entryeditdialog.cpp:74 entryeditdialog.cpp:322 entryeditdialog.cpp:436
 msgid "Sa&ve Entry"
 msgstr "&Uložit záznam"
 
-#: entryeditdialog.cpp:248
+#: entryeditdialog.cpp:265
 msgid "Do you really want to modify these books?"
 msgstr "Opravdu chcete tyto knihy upravit?"
 
-#: entryeditdialog.cpp:250
+#: entryeditdialog.cpp:267
 msgid "Modify Multiple Books?"
 msgstr "Upravit více knih?"
 
-#: entryeditdialog.cpp:363
+#: entryeditdialog.cpp:380
 msgid "Sa&ve Entries"
 msgstr "&Uložit záznamy"
 
-#: entryeditdialog.cpp:489
+#: entryeditdialog.cpp:546
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -2370,21 +2504,21 @@ msgstr ""
 "Aktuální záznam byl změněn.\n"
 "Chcete zadat změny?"
 
-#: entryeditdialog.cpp:492
+#: entryeditdialog.cpp:549
 msgid "Save Entry"
 msgstr "Uložit záznam"
 
-#: rc.cpp:2
-msgid "&New"
-msgstr "&New"
+#: error_strings.h:24
+msgid "Bookcase is unable to load the file - %1."
+msgstr "Bookcase nemůže načíst soubor %1."
 
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Sbírka"
+#: error_strings.h:25
+msgid "Bookcase is unable to write the file - %1."
+msgstr "Bookcase nemůže zapsat soubor %1."
 
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Nástrojová lišta sbírky"
+#: error_strings.h:26
+msgid "Bookcase is unable to upload the file - %1."
+msgstr "Bookcase nemůže uploadoat soubor %1."
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -2436,7 +2570,8 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
-"<p>...že pomocí Editoru polí můžete přidat, upravit a změnit pole ve sbírce.\n"
+"<p>...že pomocí Editoru polí můžete přidat, upravit a změnit pole ve "
+"sbírce.\n"
 "Tlačítka se šipkami pod seznamem polí mohou být použita ke změně umístění\n"
 "pole v seznamu, což ovlivňuje umístění v Editoru záznamů.</p>\n"
 
@@ -2451,11 +2586,13 @@ msgid ""
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
 "<p>...že pokud chcete filtrovat podle pole se zaškrtávacím políčkem,\n"
-"měla by být použita hodnota \"pravda\". Pokud byste například chtěli, aby filtr\n"
+"měla by být použita hodnota \"pravda\". Pokud byste například chtěli, aby "
+"filtr\n"
 "zobrazil pouze vědeckofantastické knížky, které jste nečetli, zaškrtněte\n"
 "tlačítko <em>Odpovídá všemu, co následuje</em>, nastavte první\n"
 "pravidlo na \"Žánr\" \"obsahuje\" \"Vědeckofantastický\" (bez uvozovek)\n"
-"a druhé pravidlo na \"Přečteno\" \"neobsahuje\" \"pravda\" (bez\n uvozovek).</p>\n"
+"a druhé pravidlo na \"Přečteno\" \"neobsahuje\" \"pravda\" (bez\n"
+" uvozovek).</p>\n"
 
 #: tips.cpp:38
 msgid ""
@@ -2524,3 +2661,117 @@ msgstr ""
 "<p>...že můžete importovat s pomocí jakéhokoliv obecného XSL stylesheetu,\n"
 "jehož výstupem je platný Bookcase XML soubor.</p>\n"
 
+#: tips.cpp:76
+msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Export images"
+#~ msgstr "Exportovat jako"
+
+#, fuzzy
+#~ msgid "If checked, the images will also be exported."
+#~ msgstr "Je-li zaškrtnuto, budou názvy polí vytištěny jako hlavičky tabulky."
+
+#, fuzzy
+#~ msgid "Image Directory:"
+#~ msgstr "Režisér"
+
+#~ msgid "List"
+#~ msgstr "Seznam"
+
+#~ msgid "(Requires restart)"
+#~ msgstr "(vyžaduje opětovné spuštění)"
+
+#~ msgid ""
+#~ "A comma-separated list of suffixes which might be used in personal names."
+#~ msgstr ""
+#~ "Čárkami oddělený seznam přípon, které mohou být použity ve jménech osob."
+
+#~ msgid "A comma-separated list of prefixes which might be used in surnames."
+#~ msgstr ""
+#~ "Čárkami oddělený seznam přípon, které mohou být použity v příjmeních."
+
+#~ msgid "Preview Entry Template"
+#~ msgstr "Náhled vstupní šablony"
+
+#~ msgid "Enable/disable the toolbar"
+#~ msgstr "Povolit/zakázat nástrojovou lištu"
+
+#~ msgid "Show Co&llection ToolBar"
+#~ msgstr "Zobrazit nástrojovou lištu &sbírky"
+
+#~ msgid "Enable/disable the collection toolbar"
+#~ msgstr "Povolit/zakázat nástrojovou lištu sbírky"
+
+#~ msgid "Tip of the &Day"
+#~ msgstr "Tip &dne"
+
+#~ msgid "Show the \"Tip of the Day\" dialog..."
+#~ msgstr "Zobrazit dialogové okno \"Tip dne\"..."
+
+#~ msgid "*.bcz|Bookcase files(*.bcz)"
+#~ msgstr "*.bcz|soubory Bookcase (*.bcz)"
+
+#~ msgid "Bookcase::Import::DataImporter"
+#~ msgstr "Bookcase::Import::DataImporter"
+
+#~ msgid "Bookcase::Import::CSVImporter"
+#~ msgstr "Bookcase::Import::CSVImporter"
+
+#~ msgid "Bookcase::Import::XSLTImporter"
+#~ msgstr "Bookcase::Import::XSLTImporter"
+
+#~ msgid "Bookcase::Import::TextImporter"
+#~ msgstr "Bookcase::Import::TextImporter"
+
+#~ msgid "Bookcase::Import::BookcaseImporter"
+#~ msgstr "Bookcase::Import::BookcaseImporter"
+
+#~ msgid "Bookcase::Import::XMLImporter"
+#~ msgstr "Bookcase::Import::XMLImporter"
+
+#~ msgid "Bookcase::Import::BibtexImporter"
+#~ msgstr "Bookcase::Import::BibtexImporter"
+
+#~ msgid "Bookcase::Import::BibtexmlImporter"
+#~ msgstr "Bookcase::Import::BibtexmlImporter"
+
+#~ msgid "Bookcase::Import::Importer"
+#~ msgstr "Bookcase::Import::Importer"
+
+#~ msgid "Bookcase::Data::WineCollection"
+#~ msgstr "Bookcase::Data::WineCollection"
+
+#~ msgid "Bookcase::Data::StampCollection"
+#~ msgstr "Bookcase::Data::StampCollection"
+
+#~ msgid "Bookcase::Data::ComicBookCollection"
+#~ msgstr "Bookcase::Data::ComicBookCollection"
+
+#~ msgid "Bookcase::Data::MusicCollection"
+#~ msgstr "Bookcase::Data::MusicCollection"
+
+#~ msgid "Bookcase::Data::VideoCollection"
+#~ msgstr "Bookcase::Data::VideoCollection"
+
+#~ msgid "Bookcase::Data::CoinCollection"
+#~ msgstr "Bookcase::Data::CoinCollection"
+
+#~ msgid "Bookcase::Data::BookCollection"
+#~ msgstr "Bookcase::Data::BookCollection"
+
+#~ msgid "Bookcase::Data::BibtexCollection"
+#~ msgstr "Bookcase::Data::BibtexCollection"
+
+#~ msgid "Bookcase::Data::CardCollection"
+#~ msgstr "Bookcase::Data::CardCollection"
+
+#~ msgid "&New"
+#~ msgstr "&New"
+
+#~ msgid "&Collection"
+#~ msgstr "&Sbírka"
+
+#~ msgid "Collection Toolbar"
+#~ msgstr "Nástrojová lišta sbírky"

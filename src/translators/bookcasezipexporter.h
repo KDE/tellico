@@ -21,10 +21,10 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bookcasezipexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: bookcasezipexporter.h 580 2004-03-27 03:34:33Z robby $
  */
 class BookcaseZipExporter : public DataExporter {
-public: 
+public:
   BookcaseZipExporter(const Data::Collection* coll, const Data::EntryList& list);
 
   virtual QWidget* widget(QWidget*, const char*) { return 0; }

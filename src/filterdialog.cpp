@@ -19,7 +19,6 @@
 #include "document.h"
 #include "collection.h"
 #include "filter.h"
-#include "detailedlistview.h"
 #include "utils.h"
 
 #include <klocale.h>
@@ -33,7 +32,7 @@
 #include <qlayout.h>
 #include <qgroupbox.h>
 #include <qradiobutton.h>
-#include <qbuttongroup.h>
+#include <qvbuttongroup.h>
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
@@ -58,7 +57,7 @@ FilterRuleWidget::FilterRuleWidget(FilterRule* rule_, QWidget* parent_, const ch
 void FilterRuleWidget::initLists() {
   //---------- initialize list of filter fields
   if(m_ruleFieldList.isEmpty()) {
-    m_ruleFieldList.append(i18n("Any Field"));
+    m_ruleFieldList.append('<' + i18n("Any Field") + '>');
     FilterDialog* dlg = static_cast<FilterDialog*>(QObjectAncestor(parent(), "Bookcase::FilterDialog"));
     m_ruleFieldList += dlg->fieldTitles();
   }
@@ -93,10 +92,10 @@ void FilterRuleWidget::initWidget() {
   m_ruleField->insertStringList(m_ruleFieldList);
   // don't show sliders when popping up this menu
 //  m_ruleField->setSizeLimit(m_ruleField->count());
-  m_ruleField->adjustSize();
-  
+//  m_ruleField->adjustSize();
+
   m_ruleFunc->insertStringList(m_ruleFuncList);
-  m_ruleFunc->adjustSize();
+//  m_ruleFunc->adjustSize();
 
 //  connect(m_ruleField, SIGNAL(textChanged(const QString &)),
 //          this, SIGNAL(fieldChanged(const QString &)));
@@ -109,7 +108,7 @@ void FilterRuleWidget::slotEditRegExp() {
     m_editRegExpDialog = KParts::ComponentFactory::createInstanceFromQuery<QDialog>(QString::fromLatin1("KRegExpEditor/KRegExpEditor"),
                                                                                     QString::null, this);
   }
-  
+
   KRegExpEditorInterface* iface = static_cast<KRegExpEditorInterface *>(m_editRegExpDialog->qt_cast(QString::fromLatin1("KRegExpEditorInterface")));
   if(iface) {
     iface->setRegExp(m_ruleValue->text());
@@ -139,7 +138,7 @@ void FilterRuleWidget::setRule(const FilterRule* rule_) {
   } else {
     m_ruleField->setCurrentText(dlg->fieldTitleByName(rule_->fieldName()));
   }
-  
+
   //--------------set function and contents
   m_ruleFunc->setCurrentItem(static_cast<int>(rule_->function()));
   m_ruleValue->setText(rule_->pattern());
@@ -152,7 +151,7 @@ void FilterRuleWidget::setRule(const FilterRule* rule_) {
 }
 
 Bookcase::FilterRule* FilterRuleWidget::rule() const {
-  QString field;
+  QString field; // empty string
   if(m_ruleField->currentItem() > 0) { // 0 is "All Fields", field is empty
     FilterDialog* dlg = static_cast<FilterDialog*>(QObjectAncestor(parent(), "Bookcase::FilterDialog"));
     field = dlg->fieldNameByTitle(m_ruleField->currentText());
@@ -169,7 +168,7 @@ void FilterRuleWidget::reset() {
   m_ruleField->setCurrentItem(0);
   m_ruleFunc->setCurrentItem(0);
   m_ruleValue->clear();
-  
+
   if(m_editRegExp) {
     m_editRegExp->setEnabled(false);
   }
@@ -188,13 +187,13 @@ FilterRuleWidgetLister::FilterRuleWidgetLister(QWidget* parent_, const char* nam
 }
 
 void FilterRuleWidgetLister::setFilter(const Filter* filter_) {
-  if(mWidgetList.first()) { // move this below next 'if'?
-    mWidgetList.first()->blockSignals(true);
-  }
+//  if(mWidgetList.first()) { // move this below next 'if'?
+//    mWidgetList.first()->blockSignals(true);
+//  }
 
   if(filter_->isEmpty()) {
     slotClear();
-    mWidgetList.first()->blockSignals(false);
+//    mWidgetList.first()->blockSignals(false);
     return;
   }
 
@@ -214,7 +213,7 @@ void FilterRuleWidgetLister::setFilter(const Filter* filter_) {
     static_cast<FilterRuleWidget*>(*wIt)->reset();
   }
 
-  mWidgetList.first()->blockSignals(false);
+//  mWidgetList.first()->blockSignals(false);
 }
 
 void FilterRuleWidgetLister::reset() {
@@ -240,26 +239,22 @@ const QPtrList<QWidget>& FilterRuleWidgetLister::widgetList() const {
 static const int FILTER_MIN_WIDTH = 600;
 
 // make the Apply button the default, so the user can see if the filter is good
-FilterDialog::FilterDialog(DetailedListView* view_, MainWindow* parent_, const char* name_/*=0*/)
+FilterDialog::FilterDialog(MainWindow* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, false, i18n("Advanced Filter"), Ok|Apply|Cancel, Ok,
-                  false), m_bookcase(parent_), m_view(view_) {
+                  false), m_bookcase(parent_) {
   QWidget* page = new QWidget(this);
   setMainWidget(page);
   QVBoxLayout* topLayout = new QVBoxLayout(page, 0, KDialog::spacingHint());
 
-  m_matchGroup = new QGroupBox(1, Qt::Horizontal, i18n("Filter Criteria"), page);
+  QGroupBox* m_matchGroup = new QGroupBox(1, Qt::Horizontal, i18n("Filter Criteria"), page);
   topLayout->addWidget(m_matchGroup);
 
-  m_matchAll = new QRadioButton(i18n("Match a&ll of the following"), m_matchGroup);
-  m_matchAny = new QRadioButton(i18n("Match an&y of the following"), m_matchGroup);
-
+  QVButtonGroup* bg = new QVButtonGroup(m_matchGroup);
+  bg->setFrameShape(QFrame::NoFrame);
+  bg->setInsideMargin(0);
+  m_matchAll = new QRadioButton(i18n("Match a&ll of the following"), bg);
+  m_matchAny = new QRadioButton(i18n("Match an&y of the following"), bg);
   m_matchAll->setChecked(true);
-  m_matchAny->setChecked(false);
-
-  QButtonGroup* bg = new QButtonGroup(m_matchGroup);
-  bg->hide();
-  bg->insert(m_matchAll, static_cast<int>(Filter::MatchAll));
-  bg->insert(m_matchAny, static_cast<int>(Filter::MatchAny));
 
   m_ruleLister = new FilterRuleWidgetLister(m_matchGroup);
   connect(m_ruleLister, SIGNAL(widgetRemoved()), SLOT(slotShrink()));
@@ -294,7 +289,7 @@ void FilterDialog::slotApply() {
   } else {
     filter = new Filter(Filter::MatchAll);
   }
-  
+
   for(QPtrListIterator<QWidget> it(m_ruleLister->widgetList()); it.current(); ++it) {
     FilterRuleWidget* rw = static_cast<FilterRuleWidget*>(it.current());
     FilterRule* rule = rw->rule();
@@ -302,14 +297,8 @@ void FilterDialog::slotApply() {
       filter->append(rule);
     }
   }
-  // TODO: the signal is emitted first because the Bookcase app clears
-  // the quick filter on this signal
-  // clearing it emits the textChanged signal which in turns also
-  // applies another filter. Should be fixed someday
-  emit filterApplied();
 
-  // the view takes over ownership of the filter
-  m_view->setFilter(filter);
+  emit signalUpdateFilter(filter);
 }
 
 void FilterDialog::slotClear() {

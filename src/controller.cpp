@@ -18,6 +18,8 @@
 #include "entryeditdialog.h"
 #include "entryview.h"
 #include "imagefactory.h"
+#include "filter.h"
+#include "filterdialog.h"
 
 #include "collection.h"
 #include "document.h"
@@ -66,8 +68,8 @@ void Controller::slotCollectionAdded(Data::Collection* coll_) {
   m_mainWindow->m_currentStep = 1;
   m_mainWindow->slotStatusMsg(i18n("Ready."));
 
-  m_mainWindow->slotEntryCount(0);
   m_selectedEntries.clear();
+  m_mainWindow->slotEntryCount();
 
   connect(coll_, SIGNAL(signalGroupModified(Bookcase::Data::Collection*, const Bookcase::Data::EntryGroup*)),
           m_groupView, SLOT(slotModifyGroup(Bookcase::Data::Collection*, const Bookcase::Data::EntryGroup*)));
@@ -80,7 +82,7 @@ void Controller::slotCollectionAdded(Data::Collection* coll_) {
           this, SLOT(slotFieldModified(Bookcase::Data::Collection*, Bookcase::Data::Field*, Bookcase::Data::Field*)));
   connect(coll_, SIGNAL(signalFieldsReordered(Bookcase::Data::Collection*)),
           this, SLOT(slotFieldsReordered(Bookcase::Data::Collection*)));
-  connect(coll_, SIGNAL(signalRefreshAttribute(Bookcase::Data::Field*)),
+  connect(coll_, SIGNAL(signalRefreshField(Bookcase::Data::Field*)),
           this, SLOT(slotRefreshField(Bookcase::Data::Field*)));
 }
 
@@ -93,6 +95,11 @@ void Controller::slotCollectionDeleted(Data::Collection* coll_) {
   m_detailedView->removeCollection(coll_);
   m_entryView->clear();
   blockAllSignals(false);
+
+  // disconnect all signals from the collection to the controller
+  // this is needed because the Collection::appendCollection() and mergeCollection()
+  // functions signal collection deleted then added for the same collection
+  disconnect(coll_, 0, this, 0);
 
 //  ImageFactory::clean();
 }
@@ -130,6 +137,7 @@ void Controller::slotFieldAdded(Data::Collection* coll_, Data::Field* field_) {
 }
 
 void Controller::slotFieldDeleted(Data::Collection* coll_, Data::Field* field_) {
+//  kdDebug() << "Controller::slotFieldDeleted() - " << field_->name() << endl;
   m_editDialog->removeField(field_);
   m_detailedView->removeField(field_);
   m_entryView->refresh();
@@ -169,14 +177,14 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Data::EntryList& li
   m_entryView->showEntry(list_.getFirst());
 
   if(list_.isEmpty()) {
-    m_mainWindow->m_editCopyEntry->setEnabled(false);
-    m_mainWindow->m_editDeleteEntry->setEnabled(false);
+    m_mainWindow->m_copyEntry->setEnabled(false);
+    m_mainWindow->m_deleteEntry->setEnabled(false);
   } else {
-    m_mainWindow->m_editCopyEntry->setEnabled(true);
-    m_mainWindow->m_editDeleteEntry->setEnabled(true);
+    m_mainWindow->m_copyEntry->setEnabled(true);
+    m_mainWindow->m_deleteEntry->setEnabled(true);
   }
-  m_mainWindow->slotEntryCount(list_.count());
   m_selectedEntries = list_;
+  m_mainWindow->slotEntryCount();
 }
 
 void Controller::slotUpdateSelection(Data::Entry* entry_, const QString& highlight_) {
@@ -246,4 +254,21 @@ void Controller::blockAllSignals(bool block_) {
   m_detailedView->blockSignals(block_);
   m_groupView->blockSignals(block_);
   m_editDialog->blockSignals(block_);
+}
+
+void Controller::slotUpdateFilter(Filter* filter_) {
+  // the view takes over ownership of the filter
+  m_detailedView->clearSelection();
+  m_selectedEntries.clear();
+  m_detailedView->setFilter(filter_);
+
+  // since filter dialog isn't modal
+  if(m_mainWindow->m_filterDlg) {
+    if(filter_) {
+      m_mainWindow->m_filterDlg->setFilter(filter_);
+    } else {
+      m_mainWindow->m_filterDlg->slotClear();
+    }
+  }
+  m_mainWindow->slotEntryCount();
 }

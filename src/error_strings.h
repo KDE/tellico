@@ -11,14 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <klocale.h>
+#ifndef ERROR_STRINGS_H
+#define ERROR_STRINGS_H
 
-#ifndef BOOKCASESTRINGS_H
-#define BOOKCASESTRINGS_H
+#include <klocale.h>
 
 /*
  * @author Robby Stephenson
- * @version $Id: error_strings.h 468 2004-02-18 02:59:14Z robby $
+ * @version $Id: error_strings.h 469 2004-02-18 03:03:59Z robby $
  */
 
 static const char* loadError = I18N_NOOP("Bookcase is unable to load the file - %1.");

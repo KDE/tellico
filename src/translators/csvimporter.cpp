@@ -86,7 +86,7 @@ Bookcase::Data::Collection* CSVImporter::collection() {
       unit->setField(names[i], values[cols[i]].simplifyWhiteSpace());
     }
     m_coll->addEntry(unit);
-    
+
     if(j%s_stepSize == 0) {
       emit signalFractionDone(static_cast<float>(j)/static_cast<float>(numLines));
     }
@@ -107,6 +107,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   l->addWidget(group);
 
   QHBox* box = new QHBox(group);
+  box->setSpacing(5);
   (void) new QLabel(i18n("Data Type:"), box);
   m_comboType = new KComboBox(box);
   QWhatsThis::add(m_comboType, i18n("Select the type of collection being imported."));
@@ -212,6 +213,9 @@ QStringList CSVImporter::splitLine(const QString& line_) {
   unsigned dn = m_delimiter.length();
   // list of eventual field values
   QStringList values;
+  if(dn==0) {
+    return values;
+  }
   // temporary string to hold splits, and cumulative string for quoted fields
   QString tmp, str;
   // are we inside a quoted field or not
@@ -256,11 +260,7 @@ QStringList CSVImporter::splitLine(const QString& line_) {
 
     // append the temporary field value to the cumulative
     // replace any double-quotes with single ones
-#if QT_VERSION >= 0x030100
     str.replace(dq, s_quote);
-#else
-    str.replace(QRegExp(dq), s_quote);
-#endif
     // add the accumulated string to the list
     values << str;
     // clear the string now, since we've added it
@@ -274,12 +274,8 @@ QStringList CSVImporter::splitLine(const QString& line_) {
     tmp.truncate(tmp.length()-1);
   }
   str += tmp;
-#if QT_VERSION >= 0x030100
   str.replace(dq, s_quote);
-#else
-  str.replace(QRegExp(dq), s_quote);
-#endif
-  values << str;  
+  values << str;
   return values;
 }
 
@@ -341,8 +337,10 @@ void CSVImporter::slotDelimiter() {
   } else {
     m_delimiter = m_editOther->text();
   }
-  fillTable();
-  updateHeader(false);
+  if(!m_delimiter.isEmpty()) {
+    fillTable();
+    updateHeader(false);
+  }
 }
 
 void CSVImporter::slotCurrentChanged(int, int col_) {

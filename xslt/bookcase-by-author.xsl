@@ -7,7 +7,7 @@
    ================================================================
    Bookcase XSLT file - sort by author
 
-   $Id: bookcase-by-author.xsl 394 2004-01-24 23:17:42Z robby $
+   $Id: bookcase-by-author.xsl 452 2004-02-12 06:28:49Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -17,7 +17,7 @@
    ================================================================
 -->
 
-<xsl:output method="html" version="xhtml" encoding="UTF-8" indent="yes"/>
+<xsl:output method="html" version="xhtml" indent="yes"/>
 
 <xsl:strip-space elements="*"/>
 

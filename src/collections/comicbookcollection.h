@@ -20,7 +20,7 @@ namespace Bookcase {
   namespace Data {
 
 /**
- * A BCCollection for comic books.
+ * A collection for comic books.
  *
  * It has the following standard attributes:
  * @li Title
@@ -31,7 +31,7 @@ namespace Bookcase {
 class ComicBookCollection : public Collection {
 Q_OBJECT
 
-public: 
+public:
   /**
    * The constructor
    *

@@ -161,11 +161,11 @@ Bookcase::Data::FieldList BookCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("comments"), i18n("Comments"), Field::Para);
-  field->setCategory(i18n(book_personal));
+  field = new Field(QString::fromLatin1("cover"), i18n("Front Cover"), Field::Image);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("cover"), i18n("Front Cover"), Field::Image);
+  field = new Field(QString::fromLatin1("comments"), i18n("Comments"), Field::Para);
+  field->setCategory(i18n(book_personal));
   list.append(field);
 
   return list;

@@ -33,10 +33,12 @@ using Bookcase::BibtexHandler;
 BibtexHandler::StringListMap BibtexHandler::s_utf8LatexMap;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
 const QString BibtexHandler::s_bibtexmlNamespace = QString::fromLatin1("http://bibtexml.sf.net/");
+const QRegExp BibtexHandler::s_badKeyChars(QString::fromLatin1("[^0-9a-zA-Z-]"));
 
 QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
   QString author;
-  Data::Field* authorField = entry_->collection()->fieldByName(QString::fromLatin1("author"));
+  const Data::BibtexCollection* c = dynamic_cast<const Data::BibtexCollection*>(entry_->collection());
+  Data::Field* authorField = c->fieldByBibtexName(QString::fromLatin1("author"));
   if(authorField->flags() & Data::Field::AllowMultiple) {
     QString tmp = entry_->field(authorField->name());
     author = tmp.section(';', 0, 0);
@@ -44,15 +46,26 @@ QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
     author = entry_->field(authorField->name());
   }
   author = author.lower();
-  
-  QString title = entry_->field(QString::fromLatin1("title")).lower();
 
-  QString year = entry_->field(QString::fromLatin1("pub_year"));
+  Data::Field* f = c->fieldByBibtexName(QString::fromLatin1("title"));
+  QString title;
+  if(f) {
+    title = entry_->field(f->name()).lower();
+  }
 
+  f = c->fieldByBibtexName(QString::fromLatin1("year"));
+  QString year;
+  if(f) {
+    year = entry_->field(f->name());
+  }
   if(year.isEmpty()) {
-    year = entry_->field(QString::fromLatin1("cr_year"));
+    year = entry_->field(QString::fromLatin1("pub_year"));
+    if(year.isEmpty()) {
+      year = entry_->field(QString::fromLatin1("cr_year"));
+    }
   }
   year = year.section(QString::fromLatin1("; "), 0, 0);
+
   return bibtexKey(author, title, year);
 }
 
@@ -69,7 +82,8 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
     key += (*it).left(1);
   }
   key += year_;
-  return key;
+  // bibtex key may only contain [0-9a-zA-Z-]
+  return key.replace(s_badKeyChars, QString::null);
 }
 
 void BibtexHandler::loadTranslationMaps() {
@@ -90,8 +104,8 @@ void BibtexHandler::loadTranslationMaps() {
     QString s = keyList.item(i).toElement().attribute(QString::fromLatin1("char"));
     for(int j = strList.count()-1; j > -1; --j) {
       s_utf8LatexMap[s].append(strList.item(j).toElement().text());
-      kdDebug() << "BibtexHandler::loadTranslationMaps - "
-       << s << " = " << strList.item(j).toElement().text() << endl;
+//      kdDebug() << "BibtexHandler::loadTranslationMaps - "
+//       << s << " = " << strList.item(j).toElement().text() << endl;
     }
   }
 }
@@ -104,11 +118,7 @@ QString BibtexHandler::importText(char* text_) {
   QString str = QString::fromLatin1(text_);
   for(StringListMap::Iterator it = s_utf8LatexMap.begin(); it != s_utf8LatexMap.end(); ++it) {
     for(QStringList::Iterator sit = it.data().begin(); sit != it.data().end(); ++sit) {
-#if QT_VERSION >= 0x030100
     str.replace(*sit, it.key());
-#else
-    str.replace(QRegExp(*sit), it.key());
-#endif
 }
   }
   return str;
@@ -129,16 +139,12 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
       lquote =  '"';
       rquote =  '"';
       break;
-  }    
+  }
 
   QString text = text_;
 
   for(StringListMap::Iterator it = s_utf8LatexMap.begin(); it != s_utf8LatexMap.end(); ++it) {
-#if QT_VERSION >= 0x030100
     text.replace(it.key(), it.data()[0]);
-#else
-    text.replace(QRegExp(it.key()), it.data()[0]);
-#endif
   }
 
   if(macros_.isEmpty()) {
@@ -163,12 +169,10 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
       list << *it;
     }
   }
-  text = list.join(QString::fromLatin1("#"));
-#if QT_VERSION >= 0x030100
-  text.replace(lquote+QString::fromLatin1("#")+rquote, QString::fromLatin1("#"));
-#else
-  text.replace(QRegExp(lquote+QString::fromLatin1("#")+rquote), QString::fromLatin1("#"));
-#endif
+
+  const QString octo = QString::fromLatin1("#");
+  text = list.join(octo);
+  text.replace(rquote+octo+lquote, octo);
 
   return text;
 }
@@ -179,7 +183,13 @@ bool BibtexHandler::setFieldValue(Data::Entry* entry_, const QString& bibtexFiel
   if(!field) {
     // arbitrarily say if the value has more than 100 chars, then it's a paragraph
     if(value_.length() < 100) {
-      if(bibtexField_ == QString::fromLatin1("url")) {
+      // special case, try to detect URLs
+      // In qt 3.1, QString::startsWith() is always case-sensitive
+      if(bibtexField_ == QString::fromLatin1("url")
+         || value_.lower().startsWith(QString::fromLatin1("http"))
+         || value_.lower().startsWith(QString::fromLatin1("file:/"))
+         || value_.lower().startsWith(QString::fromLatin1("/"))) { // assume this indicates a local path
+        kdDebug() << "BibtexHandler::setFieldValue() - creating a URL field for " << bibtexField_ << endl;
         field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::URL);
       } else {
         field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::Line);
@@ -195,15 +205,11 @@ bool BibtexHandler::setFieldValue(Data::Entry* entry_, const QString& bibtexFiel
 }
 
 QString& BibtexHandler::cleanText(QString& text_) {
-  // TODO: need to improve this for removing all Latex entities
+  // FIXME: need to improve this for removing all Latex entities
   QRegExp rx(QString::fromLatin1("(?=[^\\])\\.*{"));
   rx.setMinimal(true);
   text_.replace(rx, QString::null);
   text_.replace(QRegExp(QString::fromLatin1("[{}]")), QString::null);
-#if QT_VERSION >= 0x030100
   text_.replace('~', ' ');
-#else
-  text_.replace(QRegExp(QString::fromLatin1("~")), QString::fromLatin1(" "));
-#endif
   return text_;
 }

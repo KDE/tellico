@@ -24,9 +24,6 @@
 #include <kdebug.h>
 
 #include <qbuffer.h>
-#if QT_VERSION < 0x030100
-#include <qregexp.h> // needed for string replacement
-#endif
 
 using Bookcase::Import::BookcaseImporter;
 
@@ -137,15 +134,18 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 //  kdDebug() << "BookcaseDoc::loadDomDocument() - " << fieldelems.count() << " field(s)" << endl;
 
   // the dilemma is when to force the new collection to have all the default attributes
-  // if there are no attributes or if the first one is not the title, then add defaults
+  // if there are no attributes or if the first one has the special name of _default
   bool addFields = (fieldelems.count() == 0);
   if(!addFields) {
     QString name = fieldelems.item(0).toElement().attribute(QString::fromLatin1("name"));
-    addFields = (name != QString::fromLatin1("title"));
+    addFields = (name == QString::fromLatin1("_default"));
+    // removeChild only works for immediate children
+    if(addFields) {
+      fieldelems.item(0).parentNode().removeChild(fieldelems.item(0));
+    }
   }
 
   QString entryName;
-
   // in syntax 4, the element name was changed to "entry", always, rather than depending on
   // on the entryName of the collection. A type field was added to the collection element
   // to specify what type of collection it is.
@@ -212,8 +212,6 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
       readImage(imgelems.item(j).toElement());
     }
   }
-
-  return;
 }
 
 void BookcaseImporter::readField(unsigned syntaxVersion_, const QDomElement& elem_) {
@@ -236,11 +234,7 @@ void BookcaseImporter::readField(unsigned syntaxVersion_, const QDomElement& ele
     QString cat = elem_.attribute(QString::fromLatin1("category"));
     if(cat.find('&') > -1) {
       // Qt 3.0.x doesn't have QString::replace(QChar, ...)
-#if QT_VERSION >= 0x030100
       cat.replace('&', QString::null);
-#else
-      cat.replace(QRegExp(QString::fromLatin1("&")), QString::null);
-#endif
     }
     field->setCategory(cat);
   }
@@ -294,13 +288,16 @@ void BookcaseImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryN
       entry->setField(node.toElement().tagName(), QString::fromLatin1("true"));
     } else {
       QString name = node.toElement().tagName();
+      Data::Field* f = m_coll->fieldByName(name);
 
       // if the first child of the node is a text node, just set the attribute text
       // otherwise, recurse over the node's children
       // this is the case for <authors><author>..</author></authors>
-      if(node.firstChild().nodeType() == QDomNode::TextNode) {
+      // but if there's nothing but white space, then it's a BaseNode for some reason
+//      if(node.firstChild().nodeType() == QDomNode::TextNode) {
+      if(f) {
         // if it's a derived value, no field value is added
-        if(m_coll->fieldByName(name)->type() == Data::Field::Dependent) {
+        if(f->type() == Data::Field::Dependent) {
           continue;
         }
         // in version 2, "keywords" changed to "keyword"
@@ -311,18 +308,20 @@ void BookcaseImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryN
       } else { // if not, then it has children, iterate through them
         // the field name has the final 's', so remove it
         name.truncate(name.length() - 1);
-        // if it's a derived value, no field value is added
-        if(m_coll->fieldByName(name)->type() == Data::Field::Dependent) {
+        f = m_coll->fieldByName(name);
+
+         // if it's a derived value, no field value is added
+        if(!f || f->type() == Data::Field::Dependent) {
           continue;
         }
 
         QString value;
         QDomNode childNode = node.firstChild();
         // is it a 2-column table
-        bool table2 = (m_coll->fieldByName(name)->type() == Data::Field::Table2);
+        bool isTable2 = (f->type() == Data::Field::Table2);
         // concatenate values
         for( ; !childNode.isNull(); childNode = childNode.nextSibling()) {
-          if(table2) {
+          if(isTable2) {
             value += childNode.firstChild().toElement().text();
             value += QString::fromLatin1("::");
             value += childNode.lastChild().toElement().text();
@@ -349,9 +348,6 @@ void BookcaseImporter::readImage(const QDomElement& imgelem) {
   QByteArray ba;
   KCodecs::base64Decode(QCString(imgelem.text().latin1()), ba);
   ImageFactory::addImage(ba, format, id);
-//  const Data::Image& img = ImageFactory::addImage(ba, format, id, filename);
-//  kdDebug() << "BookcaseImporter::readImage() - char length: " << imgelem.text().length() << endl;
-//  kdDebug() << "BookcaseImporter::readImage() - image length: " << img.numBytes() << endl;
 }
 
 void BookcaseImporter::loadZipData(const QByteArray& data_) {
@@ -363,9 +359,14 @@ void BookcaseImporter::loadZipData(const QByteArray& data_) {
   }
 
   const KArchiveDirectory* dir = zip.directory();
+  if(!dir) {
+    setStatusMessage(i18n(loadError).arg(url().fileName()));
+    return;
+  }
 
   const KArchiveEntry* entry = dir->entry(QString::fromLatin1("bookcase.xml"));
   if(!entry || !entry->isFile()) {
+    setStatusMessage(i18n(loadError).arg(url().fileName()));
     return;
   }
 

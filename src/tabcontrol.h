@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCTABCONTROL_H
-#define BCTABCONTROL_H
+#ifndef TABCONTROL_H
+#define TABCONTROL_H
 
 #include <qtabwidget.h>
 
@@ -20,7 +20,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: tabcontrol.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: tabcontrol.h 527 2004-03-11 02:38:36Z robby $
  */
 class TabControl : public QTabWidget {
 Q_OBJECT

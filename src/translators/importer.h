@@ -32,10 +32,10 @@ namespace Bookcase {
  * The top-level abstract class for importing other document formats into Bookcase.
  *
  * The Importer classes import a file, and return a pointer to a newly created
- * @ref BCCollection. Any errors or warnings are added to a status message queue.
+ * @ref Data::Collection. Any errors or warnings are added to a status message queue.
  *
  * @author Robby Stephenson
- * @version $Id: importer.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: importer.h 527 2004-03-11 02:38:36Z robby $
  */
 class Importer : public QObject {
 Q_OBJECT
@@ -53,7 +53,7 @@ public:
   virtual ~Importer() {}
 
   /**
-   * Returns a pointer to a @ref BCCollection containing the contents of the imported file.
+   * Returns a pointer to a @ref Data::Collection containing the contents of the imported file.
    * This function should probably only be called once, but the subclasses may cache the
    * collection. The collection should not be created until this function is called.
    *
@@ -100,7 +100,7 @@ protected:
   void setStatusMessage(const QString& msg) { if(!msg.isEmpty()) m_statusMsg += msg + QString::fromLatin1(" "); }
 
   static const unsigned s_stepSize;
-  
+
 private:
   KURL m_url;
   QString m_statusMsg;

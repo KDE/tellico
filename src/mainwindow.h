@@ -67,7 +67,7 @@ namespace Bookcase {
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: mainwindow.h 391 2004-01-24 06:27:14Z robby $
+ * @version $Id: mainwindow.h 611 2004-04-17 17:54:35Z robby $
  */
 class MainWindow : public KMainWindow {
 Q_OBJECT
@@ -196,14 +196,6 @@ public slots:
    */
   void slotEditFindPrev();
   /**
-   * Toggles the toolbar. Not needed for KDE 3.1 or greater.
-   */
-  void slotToggleToolBar();
-  /**
-   * Toggles the collection toolbar. Not needed for KDE 3.1 or greater.
-   */
-  void slotToggleCollectionBar();
-  /**
    * Toggles the statusbar. Not needed for KDE 3.2 or greater.
    */
   void slotToggleStatusBar();
@@ -248,10 +240,8 @@ public slots:
   void slotConfigKeys();
   /**
    * Updates the unit count in the status bar.
-   *
-   * @param count The number of units currently selected
    */
-  void slotEntryCount(int count);
+  void slotEntryCount();
   /**
    * Updates the progress bar in the status bar.
    *
@@ -265,7 +255,7 @@ public slots:
    */
   void slotHandleConfigChange();
   /**
-   * Changes the grouping of the units in the @ref BCGroupView. The current value
+   * Changes the grouping of the units in the @ref GroupView. The current value
    * of the combobox in the toolbar is used.
    */
   void slotChangeGrouping();
@@ -397,7 +387,7 @@ private:
    * @param html The HTML string representing the doc to print
    */
   void doPrint(const QString& html);
-  
+
   void XSLTError();
   /**
    * Helper function to activate a slot in the edit widget.
@@ -439,7 +429,7 @@ private slots:
   /**
    * Updates the collection toolbar.
    */
-  void slotUpdateCollectionToolBar(Bookcase::Data::Collection* coll=0);
+  void slotUpdateCollectionToolBar(Bookcase::Data::Collection* coll);
   /**
    * Make sure the edit dialog is visible and start a new entry.
    */
@@ -457,10 +447,18 @@ private slots:
    */
   void slotStringMacroDialogOk();
   /**
-   * Since I use an application icon in the toolbar, I need to change it's size whenever
+   * Since I use an application icon in the toolbar, I need to change its size whenever
    * the toolbar changes mode
    */
   void slotUpdateToolbarIcons();
+  /**
+   * Convert current collection to a bibliography.
+   */
+  void slotConvertToBibliography();
+  /**
+   * Send a citation for the selected entries through the lyxpipe
+   */
+  void slotCiteEntry();
 
 private:
   Data::Document* m_doc;
@@ -475,19 +473,16 @@ private:
   KActionMenu* m_fileExportMenu;
   KAction* m_exportBibtex;
   KAction* m_exportBibtexml;
-  KAction* m_editNewEntry;
-  KAction* m_editCopyEntry;
-  KAction* m_editDeleteEntry;
   KAction* m_editFind;
   KAction* m_editFindNext;
   KAction* m_editFindPrev;
-  KAction* m_editConvertBibtex;
-  KAction* m_editStringMacros;
+  KAction* m_newEntry;
+  KAction* m_copyEntry;
+  KAction* m_deleteEntry;
+  KAction* m_convertBibtex;
+  KAction* m_stringMacros;
+  KAction* m_citeEntry;
   KToggleAction* m_toggleStatusBar;
-#if KDE_VERSION < 306
-  KToggleAction* m_toggleToolBar;
-  KToggleAction* m_toggleCollectionBar;
-#endif
   KToggleAction* m_toggleGroupWidget;
   KToggleAction* m_toggleEntryEditor;
   KToggleAction* m_toggleEntryView;
@@ -519,6 +514,8 @@ private:
   unsigned m_currentStep;
   unsigned m_maxSteps;
 
+  // keep track whether everything gets initialized
+  bool m_initialized;
   // need to keep track of whether the current collection has never been saved
   bool m_newDocument;
 };

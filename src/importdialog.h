@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCIMPORTDIALOG_H
-#define BCIMPORTDIALOG_H
+#ifndef IMPORTDIALOG_H
+#define IMPORTDIALOG_H
 
 class QRadioButton;
 class QCheckBox;
@@ -32,7 +32,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: importdialog.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: importdialog.h 615 2004-04-17 20:32:47Z robby $
  */
 class ImportDialog : public KDialogBase {
 Q_OBJECT
@@ -47,11 +47,18 @@ public:
     AudioFile
   };
 
+  enum ImportAction {
+    Replace,
+    Append,
+    Merge
+  };
+
   ImportDialog(ImportFormat format, const KURL& url, MainWindow* parent, const char* name);
+  ~ImportDialog();
 
   Data::Collection* collection();
   QString statusMessage() const;
-  bool replaceCollection() const;
+  ImportAction action() const;
 
   static QString fileFilter(ImportFormat format);
   static bool selectFileFirst(ImportFormat format);
@@ -63,6 +70,7 @@ private:
   Import::Importer* m_importer;
   QRadioButton* m_radioAppend;
   QRadioButton* m_radioReplace;
+  QRadioButton* m_radioMerge;
 };
 
 } // end namespace

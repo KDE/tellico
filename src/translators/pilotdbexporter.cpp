@@ -20,11 +20,14 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kconfig.h>
+#include <kglobal.h>
+#include <kcharsets.h>
 
 #include <qlayout.h>
 #include <qgroupbox.h>
 #include <qcheckbox.h>
 #include <qwhatsthis.h>
+#include <qtextcodec.h>
 
 using Bookcase::Export::PilotDBExporter;
 
@@ -46,46 +49,78 @@ QString PilotDBExporter::fileFilter() const {
 QByteArray PilotDBExporter::data(bool formatFields_) {
   const Data::Collection* coll = collection();
 
+  // This is something of a hidden preference cause I don't want to put it in the GUI right now
+  // Latin1 by default
+  QTextCodec* codec = 0;
+  {
+    // Latin1 is default
+    KConfigGroupSaver group(KGlobal::config(), QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+    codec = KGlobal::charsets()->codecForName(KGlobal::config()->readEntry("Charset"));
+  }
+#ifndef NDEBUG
+  if(!codec) {
+    kdWarning() << "PilotDBExporter::data() - no QTextCodec!" << endl;
+    return QByteArray();
+  } else {
+    kdDebug() << "PilotDBExporter::data() - encoding with " << codec->name() << endl;
+  }
+#endif
+
   // DB 0.3.x format
-  PalmLib::FlatFile::DB* db = new PalmLib::FlatFile::DB();
+  PalmLib::FlatFile::DB db;
 
   // set database title
-  db->title(coll->title().ascii());
+  db.title(codec->fromUnicode(coll->title()).data());
 
   // set backup option
-  db->setOption("backup", (m_checkBackup && m_checkBackup->isChecked()) ? "true" : "false");
+  db.setOption("backup", (m_checkBackup && m_checkBackup->isChecked()) ? "true" : "false");
 
   // all fields are added
   // except that only one field of type NOTE
   bool hasNote = false;
+  Data::FieldList outputFields; // not all fields will be output
   for(Data::FieldListIterator fIt(coll->fieldList()); fIt.current(); ++fIt) {
     switch(fIt.current()->type()) {
       case Data::Field::Choice:
         // the charSeparator is actually defined in DB.h
-        db->appendField(fIt.current()->title().ascii(), PalmLib::FlatFile::Field::LIST,
-                        fIt.current()->allowed().join(QChar('/')).ascii());
+        db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::LIST,
+                       codec->fromUnicode(fIt.current()->allowed().join(QChar('/'))).data());
+        outputFields.append(fIt.current());
         break;
+
       case Data::Field::Number:
         // the DB only supports single values of integers
         if(fIt.current()->flags() & Data::Field::AllowMultiple) {
-          db->appendField(fIt.current()->title().ascii(), PalmLib::FlatFile::Field::STRING);
+          db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
-          db->appendField(fIt.current()->title().ascii(), PalmLib::FlatFile::Field::INTEGER);
+          db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::INTEGER);
         }
+        outputFields.append(fIt.current());
         break;
+
       case Data::Field::Bool:
-        db->appendField(fIt.current()->title().ascii(), PalmLib::FlatFile::Field::BOOLEAN);
+        db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::BOOLEAN);
+        outputFields.append(fIt.current());
         break;
+
       case Data::Field::Para:
         if(hasNote) { // only one is allowed, according to palm-db-tools documentation
-          db->appendField(fIt.current()->title().ascii(), PalmLib::FlatFile::Field::STRING);
+          db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
-          db->appendField(fIt.current()->title().ascii(), PalmLib::FlatFile::Field::NOTE);
+          db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::NOTE);
           hasNote = true;
         }
+        outputFields.append(fIt.current());
         break;
+
+      case Data::Field::Image:
+        // don't include images
+        kdDebug() << "PilotDBExporter::data() - skipping " << fIt.current()->title() << " image field" << endl;
+        break;
+
       default:
-        db->appendField(fIt.current()->title().ascii(), PalmLib::FlatFile::Field::STRING);
+        db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::STRING);
+        outputFields.append(fIt.current());
         break;
     }
   }
@@ -93,36 +128,38 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
   // add view with visible fields
   if(m_columns.count() > 0) {
     PalmLib::FlatFile::ListView lv;
-    lv.name = i18n("View Columns").ascii();
+    lv.name = codec->fromUnicode(i18n("View Columns")).data();
     for(QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
       PalmLib::FlatFile::ListViewColumn col;
       col.field = coll->fieldTitles().findIndex(*it);
       lv.push_back(col);
     }
-    db->appendListView(lv);
+    db.appendListView(lv);
   } else {
     // add view with all fields
-    db->appendListView(PalmLib::FlatFile::ListView());
+    db.appendListView(PalmLib::FlatFile::ListView());
   }
 
   QString value;
   for(Data::EntryListIterator entryIt(entryList()); entryIt.current(); ++entryIt) {
     PalmLib::FlatFile::Record record;
     unsigned i = 0;
-    for(Data::FieldListIterator fIt(coll->fieldList()); fIt.current(); ++fIt, ++i) {
+    for(Data::FieldListIterator fIt(outputFields); fIt.current(); ++fIt, ++i) {
       if(formatFields_) {
         value = entryIt.current()->formattedField(fIt.current()->name());
       } else {
         value = entryIt.current()->field(fIt.current()->name());
       }
-      record.appendField(PilotDB::string2field(db->field_type(i), value.ascii()));
+      // the number of fields in the record must match the number of fields in the database
+      record.appendField(PilotDB::string2field(db.field_type(i),
+                         value.isEmpty() ? std::string() : codec->fromUnicode(value).data()));
     }
     // Add the record to the database.
-    db->appendRecord(record);
+    db.appendRecord(record);
   }
 
   PilotDB pdb;
-  db->outputPDB(pdb);
+  db.outputPDB(pdb);
 
   return pdb.data();
 }
@@ -147,12 +184,12 @@ QWidget* PilotDBExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 void PilotDBExporter::readOptions(KConfig* config_) {
-  config_->setGroup(QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_backup = config_->readBoolEntry("Backup", m_backup);
 }
 
 void PilotDBExporter::saveOptions(KConfig* config_) {
-  config_->setGroup(QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_backup = m_checkBackup->isChecked();
   config_->writeEntry("Backup", m_backup);
 }

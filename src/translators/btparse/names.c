@@ -1,12 +1,12 @@
 /* ------------------------------------------------------------------------
 @NAME       : names.c
 @DESCRIPTION: Functions for dealing with BibTeX names and lists of names:
-                bt_split_list 
+                bt_split_list
                 bt_split_name
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CREATED    : 1997/05/05, Greg Ward (as string_util.c)
-@MODIFIED   : 1997/05/14-05/16, GW: added all the code to split individual 
+@MODIFIED   : 1997/05/14-05/16, GW: added all the code to split individual
                                     names, renamed file to names.c
 @VERSION    : $Id: names.c,v 1.23 1999/11/29 01:13:10 greg Rel $
 @COPYRIGHT  : Copyright (c) 1996-99 by Gregory P. Ward.  All rights reserved.
@@ -41,10 +41,10 @@ switch (s[offs])                                \
 }
 
 /*
- * `name_loc' specifies where a name is found -- used for generating 
+ * `name_loc' specifies where a name is found -- used for generating
  * useful warning messages.  `line' and `name_num' are both 1-based.
  */
-typedef struct 
+typedef struct
 {
    char * filename;
    int    line;
@@ -79,17 +79,17 @@ GEN_PRIVATE_ERRFUNC (name_warning,
 
               The list of substrings is returned as *substrings, which
               is an array of pointers into a duplicate of string.  This
-              duplicate copy has been scribbled on such that there is 
+              duplicate copy has been scribbled on such that there is
               a nul byte at the end of every substring.  You should
               call bt_free_list() to free both the duplicate copy
               of string and *substrings itself.  Do *not* walk over
               the array free()'ing the substrings yourself, as this is
               invalid -- they were not malloc()'d!
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CALLERS    : anyone (exported by library)
 @CREATED    : 1997/05/05, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 bt_stringlist *
 bt_split_list (char *   string,
@@ -121,10 +121,10 @@ bt_split_list (char *   string,
    maxdiv = (string_len / delim_len) + 1;
    maxoffs = string_len - delim_len + 1;
 
-   /* 
+   /*
     * This is a bit of a band-aid solution to the "split empty string"
     * bug (formerly hit the internal_error() at the end of hte function).
-    * Still need a general "detect and fix unpreprocessed string" -- 
+    * Still need a general "detect and fix unpreprocessed string" --
     * admittedly a different bug/misfeature.
     */
    if (string_len == 0)
@@ -159,13 +159,13 @@ bt_split_list (char *   string,
 #if DEBUG
             printf ("found complete delim; i == %d, numdiv == %d: "
                     "stop[%d] == %d, start[%d] == %d\n",
-                    i, numdiv, 
+                    i, numdiv,
                     numdiv-1, stop[numdiv-1],
                     numdiv, start[numdiv]);
 #endif
          }
       }
-      
+
       /* no match between string and delim, at non-zero depth, or in a word */
       else
       {
@@ -180,28 +180,28 @@ bt_split_list (char *   string,
    list->num_items = numdiv+1;
 
 
-   /* 
+   /*
     * OK, now we know how many divisions there are and where they are --
     * so let's split that string up for real!
-    * 
+    *
     * list->items will be an array of pointers into a duplicate of
     * `string'; we duplicate `string' so we can safely scribble on it and
     * free() it later (in bt_free_list()).
     */
-       
+
    list->items = (char **) malloc (list->num_items * sizeof (char *));
    list->string = strdup (string);
 
    for (i = 0; i < list->num_items; i++)
    {
-      /* 
+      /*
        * Possible cases:
        *   - stop < start is for empty elements, e.g. "and and" seen in
        *     input.  (`start' for empty element will be the 'a' of the
        *     second 'and', and its stop will be the ' ' *before* the
        *     second 'and'.)
        *   - stop > start is for anything else between two and's (the usual)
-       *   - stop == start should never happen if the loop above is correct 
+       *   - stop == start should never happen if the loop above is correct
        */
 
       if (stop[i] > start[i])           /* the usual case */
@@ -212,7 +212,7 @@ bt_split_list (char *   string,
       else if (stop[i] < start[i])      /* empty element */
       {
          list->items[i] = NULL;
-         general_error (BTERR_CONTENT, filename, line, 
+         general_error (BTERR_CONTENT, filename, line,
                         description, i+1, "empty %s", description);
       }
       else                              /* should not happen! */
@@ -230,14 +230,14 @@ bt_split_list (char *   string,
 /* ------------------------------------------------------------------------
 @NAME       : bt_free_list()
 @INPUT      : list
-@OUTPUT     : 
-@RETURNS    : 
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: Frees the list of strings created by bt_split_list().
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CALLERS    : anyone (exported by library)
 @CREATED    : 1997/05/06, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 void bt_free_list (bt_stringlist *list)
 {
@@ -256,29 +256,29 @@ void bt_free_list (bt_stringlist *list)
 /* ------------------------------------------------------------------------
 @NAME       : find_commas
 @INPUT      : name       - string to search for commas
-              max_commas - maximum number of commas to allow (if more than 
+              max_commas - maximum number of commas to allow (if more than
                            this number are seen, a warning is printed and
                            the excess commas are removed)
-@OUTPUT     : 
+@OUTPUT     :
 @RETURNS    : number of commas found
 @DESCRIPTION: Counts and records positions of commas at brace-depth 0.
               Modifies string in-place to remove whitespace around commas,
               excess commas, and any trailing commas; warns on excess or
               trailing commas.  Excess commas are removed by replacing them
-              with space and calling bt_postprocess_string() to collapse 
+              with space and calling bt_postprocess_string() to collapse
               whitespace a second time; trailing commas are simply replaced
               with (char) 0 to truncate the string.
 
               Assumes whitespace has been collapsed (ie. no space at
               beginning or end of string, and all internal strings of
               whitespace reduced to exactly one space).
-@GLOBALS    : 
+@GLOBALS    :
 @CALLS      : name_warning() (if too many commas, or commas at end)
 @CALLERS    : bt_split_name()
 @CREATED    : 1997/05/14, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
-static int 
+static int
 find_commas (name_loc * loc, char *name, int max_commas)
 {
    int    i, j;
@@ -313,7 +313,7 @@ find_commas (name_loc * loc, char *name, int max_commas)
       }
    }
 
-   /* 
+   /*
     * If we blanked out a comma, better re-collapse whitespace.  (This is
     * a bit of a cop-out -- I could probably adjust i and j appropriately
     * in the above loop to do the collapsing for me, but my brain
@@ -321,13 +321,13 @@ find_commas (name_loc * loc, char *name, int max_commas)
     */
 
    if (warned)
-      bt_postprocess_string (name, 1);
+      bt_postprocess_string (name, BTO_COLLAPSE);
 
    /* Now the real comma-finding loop (only if necessary) */
 
    if (num_commas == 0)
       return 0;
-   
+
    num_commas = 0;
    i = 0;
    while (i < len)
@@ -353,7 +353,7 @@ find_commas (name_loc * loc, char *name, int max_commas)
    if (i != j) name[j] = (char) 0;
    j--;
 
-   if (name[j] == ',') 
+   if (name[j] == ',')
    {
       name_warning (loc, "comma(s) at end of name (removing)");
       while (name[j] == ',')
@@ -383,11 +383,11 @@ find_commas (name_loc * loc, char *name, int max_commas)
 
               The bt_stringlist structure returned can (and should) be
               freed with bt_free_list().
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CALLERS    : bt_split_name()
 @CREATED    : 1997/05/14, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static bt_stringlist *
 find_tokens (char *  name,
@@ -435,7 +435,7 @@ find_tokens (char *  name,
             comma_token[cur_comma++] = num_tok-1;
          }
 
-         /* 
+         /*
           * if already in a boundary zone, we have an empty token
           * (caused by multiple consecutive commas)
           */
@@ -443,8 +443,9 @@ find_tokens (char *  name,
          {
             tokens->items[num_tok-1] = NULL;
          }
+         num_tok--;
 
-         /* in any case, mark the end of one token and prepare for the 
+         /* in any case, mark the end of one token and prepare for the
           * start of the next
           */
          name[i] = (char) 0;
@@ -471,17 +472,17 @@ find_tokens (char *  name,
 @INPUT      : tokens
 @OUTPUT     : first_lc
               last_lc
-@RETURNS    : 
+@RETURNS    :
 @DESCRIPTION: Finds the first contiguous string of lowercase tokens in
               `name'.  The string must already be tokenized by
               find_tokens(), and the input args num_tok, tok_start, and
               tok_stop are the return value and the two same-named output
               arguments from find_tokens().
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CALLERS    : bt_split_name()
 @CREATED    : 1997/05/14, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
 find_lc_tokens (bt_stringlist * tokens,
@@ -522,15 +523,15 @@ find_lc_tokens (bt_stringlist * tokens,
 @OUTPUT     : *part      - set to point to first token in range, or NULL
                            if empty range
               *num_tok   - number of tokens in the range
-@RETURNS    : 
-@DESCRIPTION: Given a list of tokens and a range of token numbers (as a 
-              two-element array, tok_range), computes the number of tokens 
+@RETURNS    :
+@DESCRIPTION: Given a list of tokens and a range of token numbers (as a
+              two-element array, tok_range), computes the number of tokens
               in the range.  If this is >= 0, sets *part to point
               to the first token in the range; otherwise, sets *part
               to NULL.
-@CALLERS    : 
+@CALLERS    :
 @CREATED    : May 1997, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
 resolve_token_range (bt_stringlist *tokens,
@@ -547,7 +548,7 @@ resolve_token_range (bt_stringlist *tokens,
    else
    {
       *part = tokens->items + tok_range[0];
-   }   
+   }
 } /* resolve_token_range() */
 
 
@@ -557,12 +558,12 @@ resolve_token_range (bt_stringlist *tokens,
               first_lc
               last_lc
 @OUTPUT     : name
-@RETURNS    : 
+@RETURNS    :
 @DESCRIPTION: Splits up a name (represented as a string divided into
               non-overlapping, whitespace-separated tokens) according
               to the BibTeX rules for names without commas.  Specifically:
                 * tokens up to (but not including) the first lowercase
-                  token, or the last token of the string if there 
+                  token, or the last token of the string if there
                   are no lowercase tokens, become the `first' part
                 * the earliest contiguous sequence of lowercase tokens,
                   up to (but not including) the last token of the string,
@@ -571,12 +572,12 @@ resolve_token_range (bt_stringlist *tokens,
                   single token if there is no `von' part, become
                   the `last' part
                 * there is no `jr' part
-@GLOBALS    : 
+@GLOBALS    :
 @CALLS      : name_warning() (if last lc token taken as lastname)
               resolve_token_range()
 @CALLERS    : bt_split_name()
 @CREATED    : 1997/05/15, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
 split_simple_name (name_loc * loc,
@@ -599,9 +600,9 @@ split_simple_name (name_loc * loc,
          last_lc--;                     /* -- roll it back by one so we */
                                         /* still have a lastname */
 #ifdef WARN_LC_LASTNAME
-         /* 
+         /*
           * disable this warning for now because "others" is used fairly
-          * often as a name in BibTeX databases -- oops! 
+          * often as a name in BibTeX databases -- oops!
           */
          name_warning (loc,
                        "no capitalized token at end of name; "
@@ -628,11 +629,11 @@ split_simple_name (name_loc * loc,
       last_t[0] = last_t[1] = end;      /* and `last' is just the last token */
    }
 
-   resolve_token_range (name->tokens, first_t, 
+   resolve_token_range (name->tokens, first_t,
                         name->parts+BTN_FIRST, name->part_len+BTN_FIRST);
-   resolve_token_range (name->tokens, von_t, 
+   resolve_token_range (name->tokens, von_t,
                         name->parts+BTN_VON, name->part_len+BTN_VON);
-   resolve_token_range (name->tokens, last_t, 
+   resolve_token_range (name->tokens, last_t,
                         name->parts+BTN_LAST, name->part_len+BTN_LAST);
    name->parts[BTN_JR] = NULL;          /* no jr part possible */
    name->part_len[BTN_JR] = 0;
@@ -648,32 +649,32 @@ split_simple_name (name_loc * loc,
               first_lc
               last_lc
 @OUTPUT     : name
-@RETURNS    : 
-@DESCRIPTION: Splits a name according to the BibTeX rules for names 
+@RETURNS    :
+@DESCRIPTION: Splits a name according to the BibTeX rules for names
               with 1 or 2 commas (> 2 commas is handled elsewhere,
               namely by bt_split_name() calling find_commas() with
               max_commas == 2).  Specifically:
-                * an initial string of lowercase tokens, up to (but not 
+                * an initial string of lowercase tokens, up to (but not
                   including) the token before the first comma, becomes
                   the `von' part
-                * tokens from immediately after the `von' part, 
+                * tokens from immediately after the `von' part,
                   or from the beginning of the string if no `von',
                   up to the first comma become the `last' part
 
               if one comma:
-                * all tokens following the sole comma become the 
+                * all tokens following the sole comma become the
                   `first' part
 
               if two commas:
                 * tokens between the two commas become the `jr' part
-                * all tokens following the second comma become the 
+                * all tokens following the second comma become the
                   `first' part
-@GLOBALS    : 
+@GLOBALS    :
 @CALLS      : name_warning() (if last lc token taken as lastname)
               resolve_token_range()
 @CALLERS    : bt_split_name()
 @CREATED    : 1997/05/15, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
 split_general_name (name_loc * loc,
@@ -695,7 +696,7 @@ split_general_name (name_loc * loc,
          name_warning (loc, "no capitalized tokens before first comma");
          last_lc--;
       }
-      
+
       von_t[0] = first_lc;              /* `von' covers the sequence of */
       von_t[1] = last_lc;               /* lowercase tokens */
    }
@@ -723,13 +724,13 @@ split_general_name (name_loc * loc,
       first_t[1] = end;                 /* and go to end */
    }
 
-   resolve_token_range (name->tokens, first_t, 
+   resolve_token_range (name->tokens, first_t,
                         name->parts+BTN_FIRST, name->part_len+BTN_FIRST);
-   resolve_token_range (name->tokens, von_t, 
+   resolve_token_range (name->tokens, von_t,
                         name->parts+BTN_VON, name->part_len+BTN_VON);
-   resolve_token_range (name->tokens, last_t, 
+   resolve_token_range (name->tokens, last_t,
                         name->parts+BTN_LAST, name->part_len+BTN_LAST);
-   resolve_token_range (name->tokens, jr_t, 
+   resolve_token_range (name->tokens, jr_t,
                         name->parts+BTN_JR, name->part_len+BTN_JR);
 
 } /* split_general_name() */
@@ -741,12 +742,12 @@ split_general_name (name_loc * loc,
               filename
               line
               name_num
-@OUTPUT     : 
+@OUTPUT     :
 @RETURNS    : newly-allocated bt_name structure containing the four
               parts as token-lists
-@DESCRIPTION: Splits a name according to the BibTeX rules.  There are 
+@DESCRIPTION: Splits a name according to the BibTeX rules.  There are
               actually two sets of rules: one for names with no commas,
-              and one for names with 1 or 2 commas.  (If a name has 
+              and one for names with 1 or 2 commas.  (If a name has
               more than 2 commas, the extras are removed and it's treated
               as though it had just the first 2.)
 
@@ -755,11 +756,11 @@ split_general_name (name_loc * loc,
 
               The bt_name structure returned can (and should) be freed
               with bt_free_name() when you no longer need it.
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CALLERS    : anyone (exported by library)
 @CREATED    : 1997/05/14, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 @COMMENTS   : The name-splitting code all implicitly assumes that the
               string being split has been post-processed to collapse
               whitespace in the BibTeX way.  This means that it tends to
@@ -804,6 +805,7 @@ bt_split_name (char *  name,
 
    if (len == 0)                        /* non-existent or empty string? */
    {
+      split_name->tokens = NULL;
       for (i = 0; i < BT_MAX_NAMEPARTS; i++)
       {
          split_name->parts[i] = NULL;
@@ -833,7 +835,7 @@ bt_split_name (char *  name,
       {
          printf (">%s<\n", tokens->items[i]);
       }
-      else 
+      else
       {
          printf ("(empty)\n");
       }
@@ -854,6 +856,7 @@ bt_split_name (char *  name,
 
    if (strlen (name) == 0)              /* name now empty? */
    {
+      split_name->tokens = NULL;
       for (i = 0; i < BT_MAX_NAMEPARTS; i++)
       {
          split_name->parts[i] = NULL;
@@ -865,7 +868,7 @@ bt_split_name (char *  name,
       split_name->tokens = tokens;
       if (num_commas == 0)              /* no commas -- "simple" format */
       {
-         split_simple_name (&loc, split_name, 
+         split_simple_name (&loc, split_name,
                             first_lc, last_lc);
       }
       else
@@ -886,22 +889,22 @@ bt_split_name (char *  name,
 /* ------------------------------------------------------------------------
 @NAME       : bt_free_name()
 @INPUT      : name
-@OUTPUT     : 
-@RETURNS    : 
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: Frees up any memory allocated for a bt_name structure
               (namely, the `tokens' field [a bt_stringlist structure,
               this freed with bt_free_list()] and the structure itself.)
 @CALLS      : bt_free_list()
 @CALLERS    : anyone (exported)
 @CREATED    : 1997/11/14, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 void
 bt_free_name (bt_name * name)
 {
    DBG_ACTION (2, printf ("bt_free_name(): freeing name %p "
                           "(%d tokens, string=%p (%s), last[0]=%s)\n",
-                          name, 
+                          name,
                           name->tokens->num_items,
                           name->tokens->string,
                           name->tokens->string,

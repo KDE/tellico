@@ -36,7 +36,7 @@ namespace Bookcase {
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: document.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: document.h 546 2004-03-16 02:12:05Z robby $
  */
 class Document : public QObject {
 Q_OBJECT
@@ -54,7 +54,7 @@ public:
    * Destructor
    */
   ~Document();
-  
+
   /**
    * Sets the URL associated with the document.
    *
@@ -168,14 +168,14 @@ public:
 
   /**
    * Flags used for searching The options should be bit-wise OR'd together.
-   * @li AllFields - Search through all attributes
+   * @li AllFields - Search through all fields
    * @li AsRegExp - Use the text as the pattern for a regexp search
    * @li FindBackwards - search backwards
    * @li CaseSensitive - Case sensitive search
    * @li FromBeginning - Search from beginning
    */
   enum SearchOptions {
-    AllFields = 1 << 0,
+    AllFields     = 1 << 0,
     AsRegExp      = 1 << 1,
     FindBackwards = 1 << 2,
     CaseSensitive = 1 << 3,
@@ -187,17 +187,13 @@ public:
    * @param options The options, bit-wise OR'd together
    */
   void search(const QString& text, const QString& title, int options);
- 
+
 public slots:
   /**
    * Renames a collection, i.e. changes the collection title. A dialog box
    * opens up for the user to input the new name.
    */
   void slotRenameCollection();
-  /**
-   * Converts the document's collection to a BibtexCollection.
-   */
-  void slotConvertToBibtex();
   /**
    * Saves a unit. If the unit is already in a collection, the slotAddEntry() method is called;
    * otherwise, the signalEntryModified() signal is made.

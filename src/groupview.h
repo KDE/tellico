@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BCGROUPVIEW_H_H
-#define BCGROUPVIEW_H_H
+#ifndef GROUPVIEW_H_H
+#define GROUPVIEW_H_H
 
 class KPopupMenu;
 
@@ -31,6 +31,7 @@ namespace Bookcase {
     class Collection;
   }
   class ParentItem;
+  class Filter;
 
 /**
  * The GroupView is the main listview for the class, showing only the titles.
@@ -42,7 +43,7 @@ namespace Bookcase {
  * @see Bookcase::Data::Collection
  *
  * @author Robby Stephenson
- * @version $Id: groupview.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: groupview.h 573 2004-03-25 02:08:30Z robby $
  */
 class GroupView : public KListView {
 Q_OBJECT
@@ -61,7 +62,7 @@ public:
    *
    * @return The field name
    */
-  const QString& groupBy() const;
+  const QString& groupBy() const { return m_groupBy; }
   /**
    * Sets the name of the field by which the units are grouped
    *
@@ -72,7 +73,7 @@ public:
   /**
    * Returns true if the view should show the number of items in each group.
    */
-  bool showCount() const;
+  bool showCount() const { return m_showCount; }
   /**
    * Changes the view to show or hide the number of items in the group.
    *
@@ -116,7 +117,7 @@ public:
    * @return The item for the collection
    */
   ParentItem* populateCollection(Data::Collection* coll);
-  
+
 public slots:
   /**
    * Resets the list view, clearing and deleting all items.
@@ -198,7 +199,7 @@ protected:
    * @param open Whether the item should be open or not
    */
   void setSiblingsOpen(int depth, bool open);
-  
+
 protected slots:
   /**
    * Handles everything when an item is selected. The proper signal is emitted, depending
@@ -234,6 +235,26 @@ protected slots:
    * @param item A pointer to the collapse list item
    */
   void slotCollapsed(QListViewItem* item);
+  /**
+   * Sort groups by group name, ascending.
+   */
+  void slotSortByGroupAscending();
+  /**
+   * Sort groups by group name, descending.
+   */
+  void slotSortByGroupDescending();
+  /**
+   * Sort groups by the number of entries in each group, ascending.
+   */
+  void slotSortByCountAscending();
+  /**
+   * Sort groups by the number of entries in each group, descending.
+   */
+  void slotSortByCountDescending();
+  /**
+   * Filter by group
+   */
+  void slotFilterGroup();
 
 signals:
   /**
@@ -253,9 +274,15 @@ signals:
   /**
    * Signals a desire to delete a unit.
    *
-   * @param unit A pointer to the unit
+   * @param entry A pointer to the entry
    */
-  void signalDeleteEntry(Bookcase::Data::Entry* unit);
+  void signalDeleteEntry(Bookcase::Data::Entry* entry);
+  /**
+   * Signals a desire to filter the view.
+   *
+   * @param filter A pointer to the filter
+   */
+  void signalUpdateFilter(Bookcase::Filter* filter);
 
 private:
   QDict<ParentItem> m_groupDict;
@@ -265,7 +292,7 @@ private:
   KPopupMenu* m_collMenu;
   KPopupMenu* m_groupMenu;
   KPopupMenu* m_entryMenu;
-  
+
   QPixmap m_collOpenPixmap;
   QPixmap m_collClosedPixmap;
   QPixmap m_groupOpenPixmap;

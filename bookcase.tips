@@ -83,3 +83,8 @@ within the stylesheet governs things like the font, the margins, etc.</p>
 outputs a valid Bookcase XML file.</p>
 </html>
 </tip>
+<tip category="Bookcase">
+<html>
+<p>...that double-clicking an entry item opens the Entry Editor.</p>
+</html>
+</tip>

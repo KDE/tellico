@@ -19,11 +19,8 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <kiconloader.h>
-#include <kdeversion.h>
-#if KDE_VERSION > 309
 #include <kaccelmanager.h>
-#include <qtabbar.h>
-#endif
+#include <kdeversion.h>
 
 #include <qlayout.h>
 #include <qstringlist.h>
@@ -31,6 +28,7 @@
 #include <qvaluevector.h>
 #include <qvbox.h>
 #include <qobjectlist.h>
+#include <qtabbar.h>
 
 // must be an even number
 static const int NCOLS = 2; // number of columns of FieldWidgets
@@ -38,7 +36,7 @@ static const int NCOLS = 2; // number of columns of FieldWidgets
 using Bookcase::EntryEditDialog;
 
 EntryEditDialog::EntryEditDialog(QWidget* parent_, const char* name_)
-    : KDialogBase(parent_, name_, false, i18n("Edit Entry"), User1|User2|Close, User1, false,
+    : KDialogBase(parent_, name_, false, i18n("Edit Entry"), Help|User1|User2|Close, User1, false,
                   KStdGuiItem::save(), KGuiItem(i18n("&New Entry"))),
       m_currColl(0),
       m_tabs(new TabControl(this)),
@@ -53,11 +51,20 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_, const char* name_)
 
   m_isOrphan = false;
 
+  setHelp(QString::fromLatin1("entry-editor"));
+
   resize(configDialogSize(QString::fromLatin1("Edit Dialog Options")));
 }
 
 void EntryEditDialog::slotClose() {
-  hide();
+  // check to see if an entry should be saved before hiding
+  // block signals so the entry view and selection isn't cleared
+  if(queryModified()) {
+    hide();
+//    blockSignals(true);
+//    slotHandleNew();
+//    blockSignals(false);
+  }
 }
 
 void EntryEditDialog::slotReset() {
@@ -94,10 +101,10 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
 
   int maxHeight = 0;
   QPtrList<QWidget> gridList;
+  bool noChoices = true;
 
   QStringList catList = m_currColl->fieldCategories();
-  QStringList::ConstIterator catIt;
-  for(catIt = catList.begin(); catIt != catList.end(); ++catIt) {
+  for(QStringList::ConstIterator catIt = catList.begin(); catIt != catList.end(); ++catIt) {
     Data::FieldList list = m_currColl->fieldsByCategory(*catIt);
 
     // if this layout model is changed, be sure to check slotUpdateField()
@@ -108,6 +115,7 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
     QWidget* grid = new QWidget(page);
     gridList.append(grid);
     // (parent, nrows, ncols, margin, spacing)
+    // spacing gets a bit weird, if there are absolute no Choice fields, then spacing should be 4
     QGridLayout* layout = new QGridLayout(grid, 0, NCOLS, 8, 0);
 
     boxLayout->addWidget(grid, 0);
@@ -120,29 +128,31 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
     QValueVector<bool> expands(NCOLS, false);
     QValueVector<int> maxWidth(NCOLS, 0);
 
-    FieldWidget* widget;
-    Data::FieldListIterator it(list);
+    Data::FieldListIterator it(list); // needed later
     for(int count = 0; it.current(); ++it) {
+      Data::Field* f = it.current();
       // ReadOnly and Dependent fields don't get widgets
-      if(it.current()->type() == Data::Field::ReadOnly
-         || it.current()->type() == Data::Field::Dependent) {
+      if(f->type() == Data::Field::ReadOnly || f->type() == Data::Field::Dependent) {
         continue;
       }
+      if(f->type() == Data::Field::Choice) {
+        noChoices = false;
+      }
 
-      widget = new FieldWidget(it.current(), grid);
+      FieldWidget* widget = new FieldWidget(f, grid);
       connect(widget, SIGNAL(modified()), SLOT(slotSetModified()));
 
       layout->addWidget(widget, count/NCOLS, count%NCOLS);
       layout->setRowStretch(count/NCOLS, 1);
 
-      m_widgetDict.insert(QString::number(m_currColl->id()) + it.current()->name(), widget);
+      m_widgetDict.insert(QString::number(m_currColl->id()) + f->name(), widget);
 
       maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
       if(widget->expands()) {
         expands[count%NCOLS] = true;
       }
       widget->updateGeometry();
-      if(!it.current()->isSingleCategory()) {
+      if(!f->isSingleCategory()) {
         maxHeight = QMAX(maxHeight, widget->minimumSizeHint().height());
       }
       ++count;
@@ -151,7 +161,7 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
     // now, the labels in a column should all be the same width
     it.toFirst();
     for(int count = 0; it.current(); ++it) {
-      widget = m_widgetDict[QString::number(m_currColl->id()) + it.current()->name()];
+      FieldWidget* widget = m_widgetDict.find(QString::number(m_currColl->id()) + it.current()->name());
       if(widget) {
         widget->setLabelWidth(maxWidth[count%NCOLS]);
         ++count;
@@ -171,11 +181,15 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
   // Now, go through and set all the field widgets to the same height
   for(QPtrListIterator<QWidget> it(gridList); it.current(); ++it) {
     QGridLayout* l = static_cast<QGridLayout*>(it.current()->layout());
+    if(noChoices) {
+      l->setSpacing(5);
+    }
     for(int row = 0; row < l->numRows() && it.current()->children()->count() > 1; ++row) {
       l->addRowSpacing(row, maxHeight);
     }
     // I don't want anything to be hidden, Keramik has a bug if I don't do this
     it.current()->setMinimumHeight(it.current()->sizeHint().height());
+    // the parent of the grid is the page that got added to the tabs
     it.current()->parentWidget()->layout()->invalidate();
     it.current()->parentWidget()->setMinimumHeight(it.current()->parentWidget()->sizeHint().height());
   }
@@ -189,8 +203,10 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
   m_tabs->setMinimumWidth(m_tabs->sizeHint().width());
 
   // update keyboard accels
-#if KDE_VERSION > 309
   // only want to manage tabBar(), but KDE bug 71769 means the parent widget must be used
+#if KDE_IS_VERSION(3,2,90)
+  KAcceleratorManager::manage(m_tabs->tabBar());
+#else
   KAcceleratorManager::manage(m_tabs->tabBar()->parentWidget());
 #endif
 
@@ -243,8 +259,8 @@ void EntryEditDialog::slotHandleSave() {
   // add a message box if multiple items are selected
   if(m_currEntries.count() > 1) {
     QStringList names;
-    for(Data::EntryListIterator uIt(m_currEntries); uIt.current(); ++uIt) {
-      names += uIt.current()->title();
+    for(Data::EntryListIterator entryIt(m_currEntries); entryIt.current(); ++entryIt) {
+      names += entryIt.current()->title();
     }
     QString str(i18n("Do you really want to modify these books?"));
     QString dontAsk = QString::fromLatin1("SaveMultipleBooks");
@@ -256,7 +272,7 @@ void EntryEditDialog::slotHandleSave() {
   }
 
   Data::FieldListIterator fIt(m_currColl->fieldList());
-  for(Data::EntryListIterator uIt(m_currEntries); uIt.current(); ++uIt) {
+  for(Data::EntryListIterator entryIt(m_currEntries); entryIt.current(); ++entryIt) {
     // boolean to keep track if every possible field is empty
     bool empty = true;
 
@@ -266,7 +282,7 @@ void EntryEditDialog::slotHandleSave() {
       if(widget && widget->isEnabled()) {
         QString temp = widget->text();
         // ok to set field empty string, just not all of them
-        uIt.current()->setField(fIt.current()->name(), temp);
+        entryIt.current()->setField(fIt.current()->name(), temp);
         if(!temp.isEmpty()) {
           empty = false;
         }
@@ -276,7 +292,7 @@ void EntryEditDialog::slotHandleSave() {
     // if something was not empty, signal a save
     if(!empty) {
       m_isOrphan = false;
-      emit signalSaveEntry(uIt.current());
+      emit signalSaveEntry(entryIt.current());
     }
   }
   m_modified = false;
@@ -340,7 +356,7 @@ void EntryEditDialog::setContents(const Data::EntryList& list_) {
 
   blockSignals(true);
 
-  Data::EntryListIterator uIt(list_);
+  Data::EntryListIterator entryIt(list_);
   for(Data::FieldListIterator fIt(m_currColl->fieldList()); fIt.current(); ++fIt) {
     QString key = QString::number(m_currColl->id()) + fIt.current()->name();
     FieldWidget* widget = m_widgetDict.find(key);
@@ -350,13 +366,13 @@ void EntryEditDialog::setContents(const Data::EntryList& list_) {
     widget->editMultiple(true);
 
     QString value = list_.getFirst()->field(fIt.current()->name());
-    for(++uIt; uIt.current(); ++uIt) { // skip checking the first one
-      if(uIt.current()->field(fIt.current()->name()) != value) {
+    for(++entryIt; entryIt.current(); ++entryIt) { // skip checking the first one
+      if(entryIt.current()->field(fIt.current()->name()) != value) {
         widget->setEnabled(false);
         break;
       }
     }
-    uIt.toFirst();
+    entryIt.toFirst();
   } // end field loop
 
   blockSignals(false);
@@ -447,8 +463,46 @@ void EntryEditDialog::removeField(Data::Field* field_) {
       m_tabs->removePage(w);
       delete w; // automatically deletes child widget
     } else {
-      // TODO: need to redo the layout!
-      delete widget;
+      // much of this replicates code in setLayout()
+      QGridLayout* layout = static_cast<QGridLayout*>(widget->parentWidget()->layout());
+      delete widget; // automatically removes from layout
+
+      QValueVector<bool> expands(NCOLS, false);
+      QValueVector<int> maxWidth(NCOLS, 0);
+
+      Data::FieldList list = m_currColl->fieldsByCategory(field_->category());
+      Data::FieldListIterator it(list);
+      for(int count = 0; it.current(); ++it) {
+        FieldWidget* widget = m_widgetDict.find(QString::number(m_currColl->id()) + it.current()->name());
+        if(widget) {
+          layout->remove(widget);
+          layout->addWidget(widget, count/NCOLS, count%NCOLS);
+
+          maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
+          if(widget->expands()) {
+            expands[count%NCOLS] = true;
+          }
+          widget->updateGeometry();
+          ++count;
+        }
+      }
+
+      // now, the labels in a column should all be the same width
+      it.toFirst();
+      for(int count = 0; it.current(); ++it) {
+        FieldWidget* widget = m_widgetDict.find(QString::number(m_currColl->id()) + it.current()->name());
+        if(widget) {
+          widget->setLabelWidth(maxWidth[count%NCOLS]);
+          ++count;
+        }
+      }
+
+      // update stretch factors for columns with a line edit
+      for(int col = 0; col < NCOLS; ++col) {
+        if(expands[col]) {
+          layout->setColStretch(col, 1);
+        }
+      }
     }
   }
 }
@@ -489,8 +543,8 @@ bool EntryEditDialog::queryModified() {
 //  kdDebug() << "EntryEditDialog::queryModified() - modified is " << (m_modified?"true":"false") << endl;
   bool ok = true;
   if(m_modified) {
-    QString str = i18n("The current entry has been modified.\n"
-                       "Do you want to enter the changes?");
+    QString str(i18n("The current entry has been modified.\n"
+                      "Do you want to enter the changes?"));
     int want_save = KMessageBox::warningYesNoCancel(this, str, i18n("Warning!"),
                                                     i18n("Save Entry"), KStdGuiItem::discard());
     switch(want_save) {
@@ -514,10 +568,25 @@ bool EntryEditDialog::queryModified() {
 
 // modified fields will always have the same name
 void EntryEditDialog::slotUpdateField(Data::Collection* coll_, Data::Field* newField_, Data::Field* oldField_) {
+//  kdDebug() << "EntryEditDialog::slotUpdateField() - " << newField_->name() << endl;
+
   if(coll_ != m_currColl) {
     kdDebug() << "EntryEditDialog::slotUpdateField() - wrong collection pointer!" << endl;
     m_currColl = coll_;
   }
+
+  // if the field type changed, go ahead and redo the whole layout
+  // also if the category changed for a non-single field, since a new tab must be created
+  if(oldField_->type() != newField_->type()
+     || (oldField_->category() != newField_->category() && !newField_->isSingleCategory())) {
+    Data::EntryList entries = m_currEntries;
+    bool modified = m_modified;
+    setLayout(coll_);
+    setContents(entries);
+    m_modified = modified;
+    return;
+  }
+
   QString key = QString::number(coll_->id()) + oldField_->name();
   FieldWidget* widget = m_widgetDict[key];
   if(widget) {
@@ -537,6 +606,7 @@ void EntryEditDialog::slotUpdateField(Data::Collection* coll_, Data::Field* newF
     }
     // this is very fragile!
     // field widgets's parent is the grid, whose parent is the tab page
+    // this is for singleCategory fields
     if(newField_->category() != oldField_->category()) {
       m_tabs->setTabLabel(widget->parentWidget()->parentWidget(), newField_->category());
     }

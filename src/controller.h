@@ -24,6 +24,7 @@ namespace Bookcase {
   class DetailedListView;
   class GroupView;
   class EntryEditDialog;
+  class Filter;
   namespace Data {
     class Collection;
     class Field;
@@ -31,7 +32,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: controller.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: controller.h 573 2004-03-25 02:08:30Z robby $
  */
 class Controller : public QObject {
 Q_OBJECT
@@ -41,12 +42,13 @@ public:
 
   void setWidgets(GroupView* groupView, DetailedListView* detailedView,
                   EntryEditDialog* editDialog, EntryView* entryView);
+  const Data::EntryList& selectedEntries() const { return m_selectedEntries; }
 
 public slots:
   /**
    * When a collection is added to the document, certain actions need to be taken
    * by the parent app. The collection toolbar is updated, the unit count is set, and
-   * the collection's modified signal is connected to the @ref BCGroupView widget.
+   * the collection's modified signal is connected to the @ref GroupView widget.
    *
    * @param coll A pointer to the collection being added
    */
@@ -76,6 +78,7 @@ public slots:
   void slotUpdateSelection(Bookcase::Data::Entry* entry, const QString& highlight);
   void slotDeleteSelectedEntries();
   void slotCopySelectedEntries();
+  void slotUpdateFilter(Bookcase::Filter* filter);
 
 private:
   void blockAllSignals(bool block);

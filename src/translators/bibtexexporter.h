@@ -28,10 +28,10 @@ namespace Bookcase {
  * of all the attributes, with comboboxes for each Bibtex field, but I think this way is more obvious.
  *
  * @author Robby Stephenson
- * @version $Id: bibtexexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: bibtexexporter.h 588 2004-04-09 21:47:06Z robby $
  */
 class BibtexExporter : public TextExporter {
-public: 
+public:
   BibtexExporter(const Data::Collection* coll, const Data::EntryList& list);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
@@ -44,11 +44,13 @@ public:
 private:
   bool m_expandMacros;
   bool m_packageURL;
+  bool m_skipEmptyKeys;
   BibtexHandler::QuoteStyle m_quoteStyle;
 
   QWidget* m_widget;
   QCheckBox* m_checkExpandMacros;
   QCheckBox* m_checkPackageURL;
+  QCheckBox* m_checkSkipEmpty;
 };
 
   } // end namespace

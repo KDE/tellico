@@ -1,6 +1,6 @@
 #MIN_CONFIG(3)
 
-AM_INIT_AUTOMAKE(bookcase,0.8.5)
+AM_INIT_AUTOMAKE(bookcase,0.9)
 
 dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
 dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
@@ -128,8 +128,24 @@ AC_FUNC_ALLOCA
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS(strlwr strupr)
 
-AC_CHECK_SIZEOF(unsigned long, 4)
 AC_CHECK_SIZEOF(unsigned int, 4)
 AC_CHECK_SIZEOF(unsigned short, 2)
 AC_CHECK_SIZEOF(unsigned char, 1)
 AC_CHECK_SIZEOF(char, 1)
+
+AC_CACHE_CHECK([for std::vector::at(std::size_t)],
+	ac_cv_cxx_have_vector_at, [
+        AC_LANG_SAVE
+        AC_LANG_CPLUSPLUS
+        AC_TRY_COMPILE([
+                #include <vector>
+        ],[
+                std::vector<int> v(1);
+                v.at(0);
+                return 0;
+        ],ac_cv_cxx_have_vector_at=yes, ac_cv_cxx_have_vector_at=no)
+        AC_LANG_RESTORE
+])
+if test "$ac_cv_cxx_have_vector_at" = "yes"; then
+        AC_DEFINE(HAVE_VECTOR_AT,1,[Define if you have the `std::vector::at(std::size_t)' function])
+fi

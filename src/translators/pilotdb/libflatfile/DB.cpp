@@ -18,7 +18,7 @@
  */
 
 #include <iostream>
-#include <vector> 
+#include <vector>
 #include <string>
 #include <stdexcept>
 #include <sstream>
@@ -101,7 +101,7 @@ void PalmLib::FlatFile::DB::extract_chunks(const PalmLib::Block& appinfo)
         }
 
         // If everything was correct, then we should be exactly at the
-        // end of the block. 
+        // end of the block.
 //        if (i != appinfo.size())
 //            throw PalmLib::error("header is corrupt");
 //    } else {
@@ -205,7 +205,7 @@ void PalmLib::FlatFile::DB::extract_listviews()
 {
     if (!has_key(m_chunks, CHUNK_LISTVIEW_DEFINITION))
         return;
-    
+
 /*        throw PalmLib::error("no list views in database");*/
 
     const std::vector<Chunk>& chunks = m_chunks[CHUNK_LISTVIEW_DEFINITION];
@@ -323,7 +323,7 @@ std::string PalmLib::FlatFile::DB::extract_fieldsdata(pi_uint16_t field_search, 
 
                         // Convert and output the date using the format.
                         strftime(buf, sizeof(buf), "%Y/%m/%d", &date);
-                
+
                 theReturn << buf;
             }
         break;
@@ -352,7 +352,7 @@ std::string PalmLib::FlatFile::DB::extract_fieldsdata(pi_uint16_t field_search, 
 
                 // Convert and output the date using the format.
                 strftime(buf, sizeof(buf), "%H:%M", &t);
-                
+
                 theReturn << buf;
             }
         break;
@@ -598,10 +598,10 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
     // Determine the packed size of this record.
     size_t size = getNumOfFields() * sizeof(pi_uint16_t);
     for (i = 0; i < getNumOfFields(); i++) {
-#ifdef __LIBSTDCPP_PARTIAL_SUPPORT__
-  const Field field = record.fields()[i];
-#else
+#ifdef HAVE_VECTOR_AT
   const Field field = record.fields().at(i);
+#else
+  const Field field = record.fields()[i];
 #endif
         switch (field.type) {
         case PalmLib::FlatFile::Field::STRING:
@@ -665,10 +665,10 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
     for (i = 0; i < getNumOfFields(); i++) {
     pi_char_t* noteOffsetOffset = 0;
     bool setNote = false;
-#ifdef __LIBSTDCPP_PARTIAL_SUPPORT__
-  const Field fieldData = record.fields()[i];
+#ifdef HAVE_VECTOR_AT
+    const Field fieldData = record.fields().at(i);
 #else
-        const Field fieldData = record.fields().at(i);
+    const Field fieldData = record.fields()[i];
 #endif
 
         // Mark the offset to the start of this field in the offests table.
@@ -776,7 +776,7 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
                 p += fieldData.v_note.length() + 1;
         } else {
                 PalmLib::set_short(noteOffsetOffset, 0);
-        }        
+        }
     }
     }
 
@@ -801,10 +801,10 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
                 strcpy((char *) (buf + 2), field(i).argument().c_str());
             }
         break;
-    
+
         case PalmLib::FlatFile::Field::BOOLEAN:
         break;
-    
+
         case PalmLib::FlatFile::Field::INTEGER:
             if (!field(i).argument().empty()) {
                 std::string data = field(i).argument();
@@ -827,7 +827,7 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
                     p += sizeof(pi_uint16_t);
             }
         break;
-    
+
         case PalmLib::FlatFile::Field::FLOAT:
             if (!field(i).argument().empty()) {
                 std::string data = field(i).argument();
@@ -883,7 +883,7 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
                     *p++ = static_cast<pi_char_t> ((date.tm_mon + 1) & 0xFF);
                     *p++ = static_cast<pi_char_t> (date.tm_mday & 0xFF);
                 }
-                
+
             }
         break;
 
@@ -921,7 +921,7 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
                     *p++ = static_cast<pi_char_t> (t.tm_hour & 0xFF);
                     *p++ = static_cast<pi_char_t> (t.tm_min & 0xFF);
                 }
-                
+
             }
         break;
 
@@ -989,7 +989,7 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
                 p += sizeof(pi_uint16_t);
             }
         break;
-    
+
         case PalmLib::FlatFile::Field::LINKED:
             if (!field(i).argument().empty()) {
                 std::string data = field(i).argument();
@@ -1022,7 +1022,7 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
                     p += sizeof(pi_uint16_t);
             }
         break;
-    
+
         case PalmLib::FlatFile::Field::CALCULATED:
         break;
 
@@ -1030,7 +1030,7 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
 //            throw PalmLib::error("unknown field type");
             break;
         }
-    
+
         if (size) {
             Chunk data_chunk(buf, size);
             data_chunk.chunk_type = CHUNK_FIELD_DATA;
@@ -1304,7 +1304,7 @@ PalmLib::FlatFile::DB::supportsFieldType(const Field::FieldType& type) const
     }
 }
 
-std::vector<std::string> 
+std::vector<std::string>
 PalmLib::FlatFile::DB::field_argumentf(int i, std::string& format)
 {
     std::vector<std::string> vtitles(0, std::string(""));
@@ -1375,7 +1375,7 @@ void PalmLib::FlatFile::DB::doneWithSchema()
 {
     // Let the superclass have a chance.
     SUPERCLASS(PalmLib::FlatFile, Database, doneWithSchema, ());
-/* false from the 0.3.3 version 
+/* false from the 0.3.3 version
     if (getNumOfListViews() < 1)
         throw PalmLib::error("at least one list view must be specified");
 */

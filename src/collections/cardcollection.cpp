@@ -42,19 +42,19 @@ Bookcase::Data::FieldList CardCollection::defaultFields() {
 
   field = new Field(QString::fromLatin1("player"), i18n("Player"));
   field->setCategory(i18n(card_general));
-  field->setFlags(Field::AllowGrouped);
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatName);
   list.append(field);
 
   field = new Field(QString::fromLatin1("team"), i18n("Team"));
   field->setCategory(i18n(card_general));
-  field->setFlags(Field::AllowGrouped);
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatTitle);
   list.append(field);
 
   field = new Field(QString::fromLatin1("brand"), i18n("Brand"));
   field->setCategory(i18n(card_general));
-  field->setFlags(Field::AllowGrouped);
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatPlain);
   list.append(field);
 

@@ -13,3 +13,4 @@ Name=Bookcase
 GenericName=Collection Manager
 GenericName[cs]=Správce sbírek
 MimeType=application/x-bookcase
+Categories=KDE;Office;Database;

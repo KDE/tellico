@@ -15,8 +15,10 @@
 #define BOOKCASEIMAGEWIDGET_H
 
 class QLabel;
-class QPaintEvent;
 class QResizeEvent;
+class QMouseEvent;
+class QDragEnterEvent;
+class QDropEvent;
 
 #include "imagefactory.h"
 
@@ -27,7 +29,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imagewidget.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: imagewidget.h 459 2004-02-14 21:20:30Z robby $
  */
 class ImageWidget : public QWidget {
 Q_OBJECT
@@ -47,6 +49,10 @@ signals:
 
 protected:
   virtual void resizeEvent(QResizeEvent* ev);
+  virtual void mousePressEvent(QMouseEvent* ev);
+  virtual void mouseMoveEvent(QMouseEvent* ev);
+  virtual void dragEnterEvent(QDragEnterEvent* ev);
+  virtual void dropEvent(QDropEvent* ev);
 
 private slots:
   void slotGetImage();
@@ -59,6 +65,7 @@ private:
   QPixmap m_pixmap;
   QPixmap m_scaled;
   QLabel* m_label;
+  QPoint m_dragStart;
 };
 
 } // end namespace

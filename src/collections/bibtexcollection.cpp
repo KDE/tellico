@@ -15,6 +15,9 @@
 #include "../collectionfactory.h"
 
 #include <klocale.h>
+#include <kdebug.h>
+
+#include <qfile.h>
 
 using Bookcase::Data::BibtexCollection;
 
@@ -320,7 +323,7 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
   QString entryTypeName;
   if(field) {
     entryTypeName = field->name();
-  } 
+  }
 
   for(EntryListIterator entryIt(coll_->entryList()); entryIt.current(); ++entryIt) {
     Data::Entry* entry = new Entry(*entryIt.current(), coll);
@@ -331,4 +334,26 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
   }
 
   return coll;
+}
+
+void BibtexCollection::citeEntries(QFile& lyxpipe_, const EntryList& list_) {
+//  kdDebug() << "BibtexCollection::citeEntries()" << endl;
+  QString refs;
+  const Data::Field* f = fieldByBibtexName(QString::fromLatin1("key"));
+  if(!f || list_.isEmpty()) {
+    return;
+  }
+
+  for(Data::EntryListIterator it(list_); it.current(); ++it) {
+    refs += it.current()->field(f->name());
+    if(!it.atLast()) {
+      refs += QString::fromLatin1(",");
+    }
+  }
+
+  QTextStream ts(&lyxpipe_);
+//  ts << "LYXSRV:bookcase:hello\n";
+  ts << QString::fromLatin1("LYXSRV:bookcase:citation-insert:%1\n").arg(refs).latin1();
+//  ts << "LYXSRV:bookcase:bye\n";
+  lyxpipe_.flush();
 }

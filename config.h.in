@@ -105,6 +105,9 @@
 /* Define if ushort is defined in <sys/types.h> */
 #undef HAVE_USHORT
 
+/* Define if you have the `std::vector::at(std::size_t)' function */
+#undef HAVE_VECTOR_AT
+
 /* Define to 1 if you have the `vprintf' function. */
 #undef HAVE_VPRINTF
 

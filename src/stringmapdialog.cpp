@@ -38,16 +38,18 @@ StringMapDialog::StringMapDialog(const Data::StringMap& map_, QWidget* parent_, 
   m_listView->header()->hide(); // hide header since neither column has a label
   m_listView->setColumnWidthMode(0, QListView::Maximum);
   m_listView->setColumnWidthMode(1, QListView::Maximum);
-  m_listView->setResizeMode(QListView::LastColumn);
+  m_listView->setResizeMode(QListView::AllColumns);
   connect(m_listView, SIGNAL(clicked(QListViewItem*)), SLOT(slotClicked(QListViewItem*)));
   l->addWidget(m_listView);
 
   QHBox* box = new QHBox(page);
   box->setMargin(4);
+  box->setSpacing(4);
 
   m_edit1 = new KLineEdit(box);
   m_edit2 = new KLineEdit(box);
   KButtonBox* bb = new KButtonBox(box);
+  bb->addStretch();
   bb->addButton(i18n("Add"), this, SLOT(slotAdd()));
   bb->addButton(i18n("Delete"), this, SLOT(slotDelete()));
 
@@ -73,12 +75,15 @@ void StringMapDialog::slotAdd() {
   QListViewItem* item = new QListViewItem(m_listView, s1, s2);
   m_listView->ensureItemVisible(item);
   m_listView->setSelected(item, true);
+  m_edit1->clear();
+  m_edit2->clear();
 }
 
 void StringMapDialog::slotDelete() {
   delete m_listView->currentItem();
   m_edit1->clear();
   m_edit2->clear();
+  m_listView->setSelected(m_listView->currentItem(), true);
 }
 
 void StringMapDialog::slotClicked(QListViewItem* item_) {

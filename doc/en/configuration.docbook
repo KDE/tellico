@@ -1,0 +1,96 @@
+<chapter id="configuration">
+<title>Configuration</title>
+
+
+<para>
+The <interface>Configuration Dialog</interface> contains all the options for changing some of the default behaviour of &bookcase;. Clicking the <guibutton>Apply</guibutton> button <action>causes the changes to take effect immediately</action> without closing the dialog, while <guibutton>OK</guibutton> <action>applies the changes and closes the dialog</action>. <guibutton>Cancel</guibutton> closes the dialog, but any changes already made and applied will remain. The <guibutton>Default</guibutton> button <action>reverts the options</action> just on the current page of the dialog to their default values, while <guibutton>Help</guibutton> <action>opens the &khelpcenter;</action> to this section of the manual.
+</para>
+
+<sect1 id="general-options">
+<title><guilabel>General Options</guilabel></title>
+
+<para>
+The <guilabel>General Options</guilabel> control the general behavior. When &bookcase; is started, it can automatically reopen the last file that was open. The <guilabel>Tip of the Day</guilabel> dialog contains helpful hints on using &bookcase; and appears at program startup. You may want to read through some of the hints and then disable the dialog. The &group-view; is able to append the number of entries in each group to the group name in the tree view, and that functionality may be enabled or disabled using this option.
+</para>
+
+<para>
+The <guilabel>Formatting Options</guilabel> control the level of automatic formatting that &bookcase; does. For examples, see the <link linkend="field-formatting">Field Formatting section</link>. Capitalization and formatting are distinct options, since a field may be capitalized without having the order of the words changed, and vice-versa. The automatic formatting includes grammatical articles in titles, along with prefixes and suffixes for personal names. The values are case-insensitive, and should be separated by a semi-colon.
+</para>
+
+<para>
+The formatting rules follow general English usage. Articles are appended to the end of the title, with a comma. Personal names are formatted to have the last name first, followed by a comma, then the first name. Personal suffixes, such as Jr., are kept with the last name. Prefixes, such as von, are kept with the last name, but are ignored when the values are being sorted.
+</para>
+
+<informalexample><para><emphasis>John Q. von Public, III</emphasis> would become <emphasis>von Public, III, John Q.</emphasis> and <emphasis>Public</emphasis> would be used as the sort key.</para></informalexample>
+
+<note><para>The actual values in the collection are <emphasis>not</emphasis> changed, only the text used for the interface.</para></note>
+
+<screenshot>
+<screeninfo>The General Options Dialog</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="general-options.png"/></imageobject>
+<textobject><phrase>The General Options Dialog</phrase></textobject>
+<caption><para>The General Options Dialog</para></caption>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="printing-options">
+<title><guilabel>Printing Options</guilabel></title>
+
+<screenshot>
+<screeninfo>The Print Options Dialog</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="print-options.png"/></imageobject>
+<textobject><phrase>The Print Options Dialog</phrase></textobject>
+<caption><para>The Print Options Dialog</para></caption>
+</mediaobject>
+</screenshot>
+
+<para>
+The <guilabel>Printing Options</guilabel> allow you to change some formatting when printing a collection. 
+</para>
+</sect1>
+
+<sect1 id="template-options">
+<title><guilabel>Template Options</guilabel></title>
+
+<para>
+The <link linkend="entry-view">&entry-view;</link> uses templates to show the field values. You can specify a different template for each collection type. Some templates, such as the <emphasis>Album</emphasis> or <emphasis>Video</emphasis> templates are for a specific collection type, and a short error message will appear in the &entry-view; when they are used for other types.
+</para>
+
+<para>
+Additional templates may be installed in
+</para>
+
+<screenshot>
+<screeninfo>The Template Options Dialog</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="template-options.png"/></imageobject>
+<textobject><phrase>The Template Options Dialog</phrase></textobject>
+<caption><para>The Template Options Dialog</para></caption>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="bibtex-options">
+<title><guilabel>Bibtex Options</guilabel></title>
+
+<para>
+When exporting to Bibtex, the field values may be escaped with braces or quotation marks. &bookcase; is also able to send <application>latex</application> citations to a pipe for use with <application>LyX</application>, <application>Kile</application>, or other <application>latex</application> formatting programs. The location of the LyXpipe should not include the <literal role="extension">.in</literal> or <literal role="extension">.out</literal> suffix. The target application must be running for the pipe to exist.
+</para>
+
+<screenshot>
+<screeninfo>The Bibtex Options Dialog</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="bibtex-options.png"/></imageobject>
+<textobject><phrase>The Bibtex Options Dialog</phrase></textobject>
+<caption><para>The Bibtex Options Dialog</para></caption>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+</chapter>

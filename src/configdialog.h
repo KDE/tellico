@@ -17,6 +17,7 @@
 class KConfig;
 class KLineEdit;
 class KComboBox;
+class KIntSpinBox;
 
 class QCheckBox;
 
@@ -33,7 +34,7 @@ namespace Bookcase {
  * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h 402 2004-01-26 15:03:38Z robby $
+ * @version $Id: configdialog.h 601 2004-04-10 21:14:02Z robby $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT
@@ -75,6 +76,10 @@ protected:
    * Sets-up the page for template options.
    */
   void setupTemplatePage();
+  /**
+   * Sets-up the page for bibtex options.
+   */
+  void setupBibliographyPage();
 
 protected slots:
   /**
@@ -98,7 +103,13 @@ protected slots:
   /**
    * Preview an entry template.
    */
-  void slotPreview();
+//  void slotPreview();
+  /**
+   * Update the help link for a page.
+   *
+   * @param w The page
+   */
+  void slotUpdateHelpLink(QWidget* w);
 
 signals:
   /**
@@ -115,12 +126,17 @@ private:
   KLineEdit* m_leArticles;
   KLineEdit* m_leSuffixes;
   KLineEdit* m_lePrefixes;
-  QIntDict<KComboBox> m_cbTemplates;
 
   QCheckBox* m_cbPrintHeaders;
   QCheckBox* m_cbPrintFormatted;
   QCheckBox* m_cbPrintGrouped;
-  QStringList m_groupAttributes;
+  KIntSpinBox* m_imageWidthBox;
+  KIntSpinBox* m_imageHeightBox;
+
+  QIntDict<KComboBox> m_cbTemplates;
+
+  KLineEdit* m_leLyxpipe;
+  KComboBox* m_cbBibtexStyle;
 };
 
 } // end namespace

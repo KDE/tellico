@@ -34,7 +34,22 @@ const Bookcase::Data::Image& ImageFactory::addImage(const KURL& url_) {
     delete img;
     return img2;
   }
-  s_imageDict.insert(img->id(), img);
+  if(!img->isNull()) {
+    s_imageDict.insert(img->id(), img);
+  }
+  return *img;
+}
+
+const Bookcase::Data::Image& ImageFactory::addImage(const QImage& image_, const QString& format_) {
+  Data::Image* img = new Data::Image(image_, format_);
+  const Data::Image& img2 = imageById(img->id());
+  if(!img2.isNull()) {
+    delete img;
+    return img2;
+  }
+  if(!img->isNull()) {
+    s_imageDict.insert(img->id(), img);
+  }
   return *img;
 }
 
@@ -49,7 +64,9 @@ const Bookcase::Data::Image& ImageFactory::addImage(const QByteArray& data_, con
 //            << " bytes, format = " << format_
 //            << ", id = "<< id_ << endl;
   Data::Image* img = new Data::Image(data_, format_, id_);
-  s_imageDict.insert(img->id(), img);
+  if(!img->isNull()) {
+    s_imageDict.insert(img->id(), img);
+  }
   return *img;
 }
 
@@ -99,21 +116,35 @@ void ImageFactory::createTempDir() {
 //  kdDebug() << "ImageFactory::createTempDir() - created " << s_tempDir << endl;
 }
 
-bool ImageFactory::writeImage(const QString& id_, bool force_) {
+bool ImageFactory::writeImage(const QString& id_, const KURL& targetDir_, bool force_) {
   const Data::Image& img = imageById(id_);
   if(img.isNull()) {
     kdDebug() << "ImageFactory::writeImage() - null image: " << id_ << endl;
     return false;
   }
 
-  if(s_tempDir.isEmpty()) {
-    createTempDir();
+  bool track = true; // whether to track saving
+  KURL target;
+  if(targetDir_.isEmpty()) {
+    target.setPath(tempDir());
+  } else {
+    target = targetDir_;
+    if(targetDir_.path() != tempDir()) {
+      track = false;
+    }
   }
+  target.addPath(id_);
 
   bool success = true;
-  if(!s_imageFileDict[id_] || force_) {
-    success = img.save(s_tempDir + id_, Data::Image::outputFormat(img.format()));
-    if(success) {
+  // three cases when the image should definitely be saved
+  // - when forced
+  // - when the save dir is not the ImageFactory() temp dir
+  // - when the save dir _is_ the ImageFactory() but it has not been written yet
+  if(force_ || !track || !s_imageFileDict[id_]) {
+//    kdDebug() << "writing " << target.prettyURL() << endl;
+    success = FileHandler::writeDataURL(target, img.byteArray(), force_);
+    // only keep track for images saved in default tmp dir
+    if(success && track) {
       s_imageFileDict.insert(id_, reinterpret_cast<const int *>(1));
     }
   }

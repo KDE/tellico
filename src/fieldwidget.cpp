@@ -53,6 +53,7 @@ FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, cons
     m_label = new QLabel(field_->title() + QString::fromLatin1(":"), this);
   }
   m_label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+//  m_label->setAlignment(Qt::AlignVCenter);
   m_label->setFixedWidth(m_label->sizeHint().width());
   l->addWidget(m_label);
 
@@ -94,7 +95,7 @@ FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, cons
       {
         QTextEdit* te = new QTextEdit(this);
         te->setTextFormat(Qt::PlainText);
-        connect(te, SIGNAL(modificationChanged(bool)), SIGNAL(modified()));
+        connect(te, SIGNAL(textChanged()), SIGNAL(modified()));
         m_editWidget = te;
       }
       break;
@@ -318,6 +319,9 @@ QString FieldWidget::text() const {
       {
         QTextEdit* te = static_cast<QTextEdit*>(m_editWidget);
         text = te->text();
+        if(text.simplifyWhiteSpace().isEmpty()) {
+          text = QString();
+        }
       }
       break;
 
@@ -515,15 +519,11 @@ bool FieldWidget::expands() const {
 }
 
 void FieldWidget::editMultiple(bool show_) {
-// QWidget::isShown() is new in Qt 3.1
-// QWidget::isVisible() is true only if the tab holding this widget is visible
-#if QT_VERSION >= 0x30100
   if(show_ == m_editMultiple->isShown()) {
     return;
   }
-#endif
 
-  // TODO: maybe modified should only be signaled when the button is toggle on
+  // FIXME: maybe modified should only be signaled when the button is toggle on
   if(show_) {
     m_editMultiple->show();
     connect(m_editMultiple, SIGNAL(clicked()),
@@ -537,7 +537,7 @@ void FieldWidget::editMultiple(bool show_) {
   m_editWidget->updateGeometry();
 }
 
-// TODO: someday, make just the actual string highlighted
+// FIXME: someday, make just the actual string highlighted
 void FieldWidget::setHighlighted(const QString&) const {
   switch (m_type) {
     case Data::Field::Line:
@@ -551,7 +551,7 @@ void FieldWidget::setHighlighted(const QString&) const {
     case Data::Field::Para:
       {
         QTextEdit* te = static_cast<QTextEdit*>(m_editWidget);
-        // TODO: it would be nice if this selected only the highlighted text
+        // FIXME: it would be nice if this selected only the highlighted text
         te->selectAll();
       }
       break;
@@ -588,7 +588,7 @@ void FieldWidget::updateField(Data::Field* newField_, Data::Field* oldField_) {
   updateGeometry();
   QWhatsThis::add(m_label, newField_->description());
   QWhatsThis::add(m_editWidget, newField_->description());
-  // TODO: fix if the validator might have changed
+  // FIXME: fix if the validator might have changed
   if(m_type == Data::Field::Choice) {
     KComboBox* kc = static_cast<KComboBox*>(m_editWidget);
     kc->clear();

@@ -31,11 +31,7 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
   // than 10 digits
 
   //replace "x" with "X"
-#if QT_VERSION >= 0x030100
   input_.replace('x', QString::fromLatin1("X"));
-#else
-  input_.replace(QRegExp(QString::fromLatin1("x")), QString::fromLatin1("X"));
-#endif
 
   // an ISBN must no more than 13 characters
   // only allow digits, hyphens, and "X"
@@ -112,7 +108,7 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
     // can't use len here since it might have changed in fixup()
     pos_ = input_.length();
   }
-  
+
   QRegExp re(QString::fromLatin1("[\\d-]{0,11}-[\\dX]"));
   if(re.exactMatch(input_)) {
     return QValidator::Acceptable;
@@ -170,11 +166,7 @@ void ISBNValidator::insertDashesNonEnglish(QString& input_) const {
 */
   // first grab digits
   QString digits = input_;
-#if QT_VERSION >= 0x030100
   digits.replace('-', QString::null);
-#else
-  digits.replace(QRegExp(QString::fromLatin1("-")), QString::null);
-#endif
 
   int whereFirstDash;
   if(digits.left(1).toInt() < 8) {
@@ -242,11 +234,7 @@ void ISBNValidator::insertDashesNonEnglish(QString& input_) const {
 void ISBNValidator::insertDashesEnglish(QString& input_) const {
   // hyphen placement for english-language publishers is well-defined
   // remove all hyphens, and insert ourselves
-#if QT_VERSION >= 0x030100
   input_.replace('-', QString::null);
-#else
-  input_.replace(QRegExp(QString::fromLatin1("-")), QString::null);
-#endif
   int range = input_.leftJustify(9, '0', true).toInt();
   unsigned whereFirstDash = 0;
   unsigned whereMidDash = 0;

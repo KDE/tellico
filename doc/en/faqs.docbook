@@ -1,0 +1,140 @@
+<chapter id="faqs">
+<title>Questions and Answers</title>
+
+<!-- (OPTIONAL but recommended) This chapter should include all of the silly
+(and not-so-silly) newbie questions that fill up your mailbox. This chapter
+should be reserved for BRIEF questions and answers! If one question uses more
+than a page or so then it should probably be part of the
+"Using this Application" chapter instead. You should use links to
+cross-reference questions to the parts of your documentation that answer them.
+This is also a great place to provide pointers to other FAQ's if your users
+must do some complicated configuration on other programs in order for your
+application work. -->
+
+<qandaset id="faqlist">
+<qandaentry>
+<question>
+<para>How do I enter multiple authors?</para>
+</question>
+<answer>
+
+<para>Author names should be separated by a semi-colon, like so:
+"Brian W. Kernighan; Dennis M. Ritchie" (without the quotes). Don't
+include the word "and" or anything similar, even if you have 20
+authors. If you have the auto-format option checked, then the last
+name will automatically be shown first for each author.</para>
+
+<para>Other properties which allow multiple values, like "genre" and
+"keywords", are entered in the same way, with a semi-colon (;)
+separating each value.</para>
+
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para>How do I add page numbers when I print?</para>
+</question>
+<answer>
+
+<para>KDE 3.1 added an option for printing headers on HTML files
+(which is the mechanism that &bookcase; uses). So using KDE 3.1 or
+later will have an option in the expanded print dialog to print the
+header, which includes the filename and the page number.</para>
+
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para>Well, then can I modify what the printed page looks like?</para>
+</question>
+<answer>
+
+<para>Yes, most certainly. Find the file bookcase-printing.xsl which
+ should be in the $KDEDIR/share/apps/bookcase/ directory. You can copy
+ that to $KDEHOME/share/apps/bookcase/ for personal modifications.
+ You'll have to know <ulink
+ url="http://www.w3.org/TR/xslt">XSLT</ulink>, but modifying that file
+ is how you change the printing layout. HTML is generated from the
+ file, and the easiest way to change the appearance of the printout is
+ to modify the CSS in the top portiong. Feel free to <ulink
+ url="mailto:&email;">email me</ulink> with questions.  If I end up
+ with some alternate XSLT printing files, I'll put them on <ulink
+ url="&homepage;">the Bookcase website</ulink>.</para>
+
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para>How do I group by a property other than the ones listed in the toolbar?</para>
+</question>
+<answer>
+<para>
+To allow grouping by a field which doesn't allow grouping by default, check the
+"Allow Grouping" box for that particular field in the "Collection Fields" dialog.
+</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para>How do I rename my book collection?</para>
+</question>
+<answer>
+<para>In the left side column, right-click on the top-level item representing
+the collection. Select the "Rename Collection" option.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question><para>Why does all that gobbledy-gook show up when I run &bookcase;?</para></question>
+<answer>
+<para>Stuff like:
+<screen width="40">
+<computeroutput>Bookcase::updateCollectionToolBar</computeroutput>
+<computeroutput>BCGroupView::setGroupAttribute - author</computeroutput>
+<computeroutput>BCGroupView::slotAddCollection</computeroutput>
+</screen>
+
+is debug info. At compile time, this can be stopped by compiling with
+the --disable-debug flag. You might also want to use --enable-final,
+too, which takes a bit more memory when compiling, but is more
+efficient when running the application.</para>
+
+<para>Or, if &bookcase; is already installed, run kdebugdialog and
+make sure that "0 (generic)" is unchecked. That turns off debug
+messages from all generic KDE apps i.e. those not distributed
+officially by KDE.</para>
+
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question><para>How do I change which columns are shown?</para></question>
+<answer>
+<para>Right-click on the header bar. You can also drag the headers to re-order
+the columns, and click on them to sort by that field.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question><para>How do I filter by something like the "Read"
+field?</para></question>
+<answer>
+<para>Internally, the checkbox
+fields in &bookcase; are saved as "true", so if you'd like to filter
+to show only the science fiction books which you've not read, for
+example, then you have two rules. Make sure the "Match all of the
+following" button is checked. Set the first rule to have "Genre"
+"contains" "Science Fiction" (no quotes) and the second rule to have
+"Read" "does not contain" "true" (no quotes).</para>
+
+<para>Also, the quick filter in the toolbar will match any field,
+and if there is a non-word character, the text is interpreted as a
+regular expression. So if you quickly want to filter your books to
+show those by Weber or Bujold, then type "weber|bujold" (no quotes) in
+the toolbar.</para>
+</answer>
+</qandaentry>
+
+</qandaset>
+</chapter>

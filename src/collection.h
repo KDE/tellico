@@ -41,7 +41,7 @@ namespace Bookcase {
  * @see Field
  *
  * @author Robby Stephenson
- * @version $Id: collection.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: collection.h 607 2004-04-14 02:13:07Z robby $
  */
 class Collection : public QObject {
 Q_OBJECT
@@ -208,6 +208,7 @@ public:
    * @return A boolean indicating if the field was added or not
    */
   virtual bool addField(Field* field);
+  virtual bool mergeField(Field* field);
   virtual bool modifyField(Field* field);
   virtual bool deleteField(Field* field, bool force=false);
   void reorderFields(const FieldList& list);
@@ -302,16 +303,24 @@ public:
    */
   void groupModified(EntryGroup* group);
   /**
+   * Invalidates all group names in the collection.
+   */
+  void invalidateGroups();
+  /**
    * Returns true if the collection contains at least one Image field.
    *
    * @return Returns true if the collection contains at least one Image field;
    */
-  bool hasImages() const { return m_numImageFields > 0; }
+  bool hasImages() const { return !m_imageFields.isEmpty(); }
 
   /**
    * The string used for empty values. This forces consistency.
    */
-  static const QString s_emptyGroupName;
+  static const QString s_emptyGroupTitle;
+  /**
+   * The string used for the people pseudo-group. This forces consistency.
+   */
+  static const QString s_peopleGroupName;
 
 signals:
   void signalGroupModified(Bookcase::Data::Collection* coll, const Bookcase::Data::EntryGroup* group);
@@ -319,11 +328,12 @@ signals:
   void signalFieldModified(Bookcase::Data::Collection* coll, Bookcase::Data::Field* newField, Bookcase::Data::Field* oldField);
   void signalFieldDeleted(Bookcase::Data::Collection* coll, Bookcase::Data::Field* field);
   void signalFieldsReordered(Bookcase::Data::Collection* coll);
-  void signalRefreshAttribute(Bookcase::Data::Field* field);
+  void signalRefreshField(Bookcase::Data::Field* field);
 
 protected:
   void removeEntryFromDicts(Entry* entry);
   void populateDicts(Entry* entry);
+  QStringList entryGroupNamesByField(Entry* entry, const QString& fieldName);
   /*
    * Gets the preferred ID of the collection. A QIntDict is used to keep track of which
    * id's are in use, and the actual ID is returned.
@@ -360,7 +370,6 @@ private:
 
   QDict<EntryGroupDict> m_entryGroupDicts;
   QStringList m_entryGroups;
-  uint m_numImageFields;
 };
 
   } // end namespace

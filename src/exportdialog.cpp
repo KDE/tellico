@@ -44,13 +44,6 @@ ExportDialog::ExportDialog(ExportFormat format_, Data::Collection* coll_, MainWi
   QWidget* widget = new QWidget(this);
   QVBoxLayout* topLayout = new QVBoxLayout(widget, 0, spacingHint());
 
-//  QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, i18n("Options"), page1);
-//  topLayout->addWidget(bg, 0);
-//  QRadioButton* btn1 = new QRadioButton(i18n("Export &complete collection"), bg);
-//  btn1->setChecked(true);
-//  QRadioButton* btn2 = new QRadioButton(i18n("Export &selected items only"), bg);
-//  btn2->setEnabled(false);
-
   QGroupBox* group1 = new QGroupBox(1, Qt::Horizontal, i18n("Formatting"), widget);
   topLayout->addWidget(group1, 0);
   m_formatFields = new QCheckBox(i18n("Format all fields"), group1);
@@ -72,7 +65,7 @@ ExportDialog::ExportDialog(ExportFormat format_, Data::Collection* coll_, MainWi
   if(w) {
     topLayout->addWidget(w, 0);
   }
-  
+
   topLayout->addStretch();
 
   setMainWidget(widget);
@@ -90,24 +83,13 @@ ExportDialog::ExportDialog(ExportFormat format_, Data::Collection* coll_, MainWi
   connect(this, SIGNAL(okClicked()), SLOT(slotSaveOptions()));
 }
 
-bool ExportDialog::isText() const {
-  return m_exporter ? m_exporter->isText() : true;
-}
-
-QString ExportDialog::text() {
-  return m_exporter ? m_exporter->text(m_formatFields->isChecked(), m_encodeUTF8->isChecked()) : QString::null;
-}
-
-QByteArray ExportDialog::data() {
-  return m_exporter ? m_exporter->data(m_formatFields->isChecked()) : QByteArray();
+ExportDialog::~ExportDialog() {
+  delete m_exporter;
+  m_exporter = 0;
 }
 
 QString ExportDialog::fileFilter() {
   return m_exporter ? m_exporter->fileFilter() : QString::null;
-}
-
-bool ExportDialog::encodeUTF8() const {
-  return m_encodeUTF8->isChecked();
 }
 
 void ExportDialog::readOptions() {
@@ -182,4 +164,20 @@ Bookcase::Export::Exporter* ExportDialog::exporter(ExportFormat format_, MainWin
     exporter->readOptions(KGlobal::config());
   }
   return exporter;
+}
+
+bool ExportDialog::exportURL(const KURL& url_) const {
+  if(!m_exporter) {
+    return false;
+  }
+
+  // exporter might need to know final URL, say for writing images or something
+  m_exporter->setURL(url_);
+
+  if(m_exporter->isText()) {
+    bool encodeUTF8 = m_encodeUTF8->isChecked();
+    return FileHandler::writeTextURL(url_, m_exporter->text(m_formatFields->isChecked(), encodeUTF8), encodeUTF8);
+  } else {
+    return FileHandler::writeDataURL(url_, m_exporter->data(m_formatFields->isChecked()));
+  }
 }

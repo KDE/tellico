@@ -67,24 +67,24 @@ QWidget* BookcaseXMLExporter::widget(QWidget* parent_, const char* name_/*=0*/) 
   QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("Bookcase XML Options"), m_widget);
   l->addWidget(box);
 
-  m_checkExportImages = new QCheckBox(i18n("Include images in XML document"), box);
-  m_checkExportImages->setChecked(m_exportImages);
-  QWhatsThis::add(m_checkExportImages, i18n("If checked, the images in the document will be included "
+  m_checkIncludeImages = new QCheckBox(i18n("Include images in XML document"), box);
+  m_checkIncludeImages->setChecked(m_includeImages);
+  QWhatsThis::add(m_checkIncludeImages, i18n("If checked, the images in the document will be included "
                                              "in the XML stream as base64 encoded elements."));
 
   return m_widget;
 }
 
 void BookcaseXMLExporter::readOptions(KConfig* config_) {
-  config_->setGroup(QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_exportImages = config_->readBoolEntry("Include Images", m_exportImages);
+  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_includeImages = config_->readBoolEntry("Include Images", m_includeImages);
 }
 
 void BookcaseXMLExporter::saveOptions(KConfig* config_) {
-  m_exportImages = m_checkExportImages->isChecked();
+  m_includeImages = m_checkIncludeImages->isChecked();
 
-  config_->setGroup(QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  config_->writeEntry("Include Images", m_exportImages);
+  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  config_->writeEntry("Include Images", m_includeImages);
 }
 
 QString BookcaseXMLExporter::text(bool format_, bool encodeUTF8_) {
@@ -214,6 +214,10 @@ void BookcaseXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent
 void BookcaseXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_, Data::Entry* entry_, bool format_) const {
   QDomElement entryElem = dom_.createElement(QString::fromLatin1("entry"));
 
+  if(m_includeID) {
+    entryElem.setAttribute(QString::fromLatin1("id"), entry_->id());
+  }
+
   // iterate through every field for the entry
   for(Data::FieldListIterator fIt(entry_->collection()->fieldList()); fIt.current(); ++fIt) {
     QString fieldName = fIt.current()->name();
@@ -280,7 +284,7 @@ void BookcaseXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent
   imgElem.setAttribute(QString::fromLatin1("id"), img_.id());
   imgElem.setAttribute(QString::fromLatin1("width"), img_.width());
   imgElem.setAttribute(QString::fromLatin1("height"), img_.height());
-  if(m_exportImages) {
+  if(m_includeImages) {
     QCString imgText = KCodecs::base64Encode(img_.byteArray());
     imgElem.appendChild(dom_.createTextNode(QString::fromLatin1(imgText)));
   }
