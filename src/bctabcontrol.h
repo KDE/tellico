@@ -2,7 +2,7 @@
                              bctabcontrol.h
                              -------------------
     begin                : Sun Jan 6 2002
-    copyright            : (C) 2002 by Robby Stephenson
+    copyright            : (C) 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,7 +21,7 @@
 
 /**
  * @author Robby Stephenson
- * @version $Id: bctabcontrol.h,v 1.6 2003/05/10 19:21:53 robby Exp $
+ * @version $Id: bctabcontrol.h 267 2003-11-08 09:18:46Z robby $
  */
 class BCTabControl : public QTabWidget {
 Q_OBJECT
@@ -31,6 +31,8 @@ public:
    * Constructor
    */
   BCTabControl(QWidget* parent, const char* name=0);
+
+  QTabBar* tabBar();
 
 public slots:
   /**

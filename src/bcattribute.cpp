@@ -2,7 +2,7 @@
                                bcattribute.cpp
                              -------------------
     begin                : Sun Sep 23 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -36,22 +36,25 @@ bool BCAttribute::m_autoFormat = true;
 // this constructor is for anything but Choice type
 BCAttribute::BCAttribute(const QString& name_, const QString& title_, AttributeType type_/*=Line*/)
     : m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
-      m_type(type_), m_flags(0), m_formatFlag(FormatPlain) {
+      m_type(type_), m_flags(0), m_formatFlag(FormatNone) {
 
   if(m_type == Choice) {
     kdWarning() << "BCAttribute() - A different constructor should be called for multiple choice attributes." << endl;
     kdWarning() << "Constructing a BCAttribute with name = " << name_ << endl;
   }
-  // a paragraph's category is always its title
-  if(m_type == Para) {
+  // a paragraph's category is always its title, along with tables
+  if(isSingleCategory()) {
     m_category = m_title;
+  }
+  if(m_type == Table) {
+    m_flags = AllowMultiple;
   }
 }
 
 // if this constructor is called, the type is necessarily Choice
 BCAttribute::BCAttribute(const QString& name_, const QString& title_, const QStringList& allowed_)
     : m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
-      m_type(BCAttribute::Choice), m_allowed(allowed_), m_flags(0), m_formatFlag(FormatPlain) {
+      m_type(BCAttribute::Choice), m_allowed(allowed_), m_flags(0), m_formatFlag(FormatNone) {
 }
 
 BCAttribute::BCAttribute(const BCAttribute& att_)
@@ -135,12 +138,17 @@ void BCAttribute::setAllowed(const QStringList& allowed_) {
 }
 
 void BCAttribute::setCategory(const QString& category_) {
-  // a paragraph's category should be it's title, but this isn't enforced here
-  m_category = category_;
+  if(!isSingleCategory()) {
+    m_category = category_;
+  }
 }
 
 void BCAttribute::setFlags(int flags_) {
-  m_flags = flags_;
+  if(m_type == Table || m_type == Table2) {
+    m_flags = AllowMultiple | flags_;
+  } else {
+    m_flags = flags_;
+  }
 }
 
 void BCAttribute::setFormatFlag(FormatFlag flag_) {
@@ -151,30 +159,47 @@ void BCAttribute::setDescription(const QString& desc_) {
   m_desc = desc_;
 }
 
+bool BCAttribute::isSingleCategory() const {
+  return (m_type == Para || m_type == Table || m_type == Table2);
+}
+
 QString BCAttribute::format(const QString& value_, FormatFlag flag_) {
   if(value_.isEmpty()) {
     return value_;
   }
   
   QString text;
-
-  if(flag_ == FormatTitle) {
-    text = formatTitle(value_);
-
-  } else if(flag_ == FormatName) {
-    text = formatName(value_);
-
-  } else if(flag_ == FormatDate) {
-    text = formatDate(value_);
-
-  } else {
-    text = value_.simplifyWhiteSpace();
+  switch(flag_) {
+    case FormatTitle:
+      text = formatTitle(value_);
+      break;
+    case FormatName:
+      text = formatName(value_);
+      break;
+    case FormatDate:
+      text = formatDate(value_);
+      break;
+    case FormatPlain:
+      if(autoCapitalize()) {
+        text = capitalize(value_);
+      }
+      break;
+    default:
+      text = value_.simplifyWhiteSpace();
+      break;
   }
   return text;
 }
 
 QString BCAttribute::formatTitle(const QString& title_) {
   QString newTitle = title_;
+  // special case for 2-column tables, assume user never has '::' in a value
+  QString tail;
+  if(newTitle.find(QString::fromLatin1("::")) > -1) {
+    tail = QString::fromLatin1("::") + newTitle.section(QString::fromLatin1("::"), 1);
+    newTitle = newTitle.section(QString::fromLatin1("::"), 0, 0);
+  }
+
   if(autoCapitalize()) {
     newTitle = capitalize(newTitle);
   }
@@ -184,8 +209,6 @@ QString BCAttribute::formatTitle(const QString& title_) {
   for(it = m_articles.begin(); it != m_articles.end(); ++it) {
     // assume white space is already stripped
     // the articles are already in lower-case
-    // assume white space is already stripped
-    // the articles are already in lower-case
     if(newTitle.lower().startsWith(*it + QString::fromLatin1(" "))) {
 #if QT_VERSION >= 0x030100
       QRegExp regexp(QString::fromLatin1("^") + QRegExp::escape(*it) + QString::fromLatin1("\\s"));
@@ -193,7 +216,7 @@ QString BCAttribute::formatTitle(const QString& title_) {
       QRegExp regexp(QString::fromLatin1("^") + *it + QString::fromLatin1("\\s"));
 #endif
       regexp.setCaseSensitive(false);
-      QString article = autoCapitalize() ? capitalize(*it) : *it;
+      QString article = newTitle.left((*it).length());
       newTitle = newTitle.replace(regexp, QString()).append(QString::fromLatin1(", ")).append(article);
       break;
     }
@@ -201,7 +224,7 @@ QString BCAttribute::formatTitle(const QString& title_) {
 
   // also, arbitrarily impose rule that a space must follow every comma
   newTitle.replace(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::fromLatin1(", "));
-  return newTitle;
+  return newTitle + tail;
 }
 
 QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
@@ -217,9 +240,17 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
   lastWord.setCaseSensitive(false);
 
   QStringList names;
-  QStringList::ConstIterator it;
-  for(it = entries.begin(); it != entries.end(); ++it) {
+  for(QStringList::ConstIterator it = entries.begin(); it != entries.end(); ++it) {
     QString name = *it;
+    // special case for 2-column tables, assume user never has '::' in a value
+    QString tail;
+    if(name.find(QString::fromLatin1("::")) > -1) {
+      tail = QString::fromLatin1("::") + name.section(QString::fromLatin1("::"), 1);
+      name = name.section(QString::fromLatin1("::"), 0, 0);      
+    }
+    // the ending look-ahead is so that a space is not added at the end
+    QRegExp periodSpace(QString::fromLatin1("\\.\\s*(?=.)"));
+    name.replace(periodSpace, QString::fromLatin1(". "));
     if(autoCapitalize()) {
       name = capitalize(name);
     }
@@ -238,8 +269,8 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
       // a single space after every comma
       QRegExp spaceComma(QString::fromLatin1("\\s*,\\s*"));
       name.replace(spaceComma, QString::fromLatin1(", "));
-      names << name;
-      break;
+      names << name + tail;
+      continue;
     }
     // otherwise split it by white space, move the last word to the front
     // but only if there is more than one word
@@ -273,9 +304,9 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
 #endif
       }
             
-      names << words.join(QString::fromLatin1(" "));
+      names << words.join(QString::fromLatin1(" ")) + tail;
     } else {
-      names << name;
+      names << name + tail;
     }
   }
 
@@ -335,7 +366,7 @@ QStringList BCAttribute::defaultArticleList() {
 // articles should all be in lower-case
 void BCAttribute::setArticleList(const QStringList& list_) {
   m_articles.clear();
-  
+
   QString article;
   QStringList::ConstIterator it;
   for(it = list_.begin(); it != list_.end(); ++it) {
@@ -402,8 +433,10 @@ QMap<BCAttribute::AttributeType, QString> BCAttribute::typeMap() {
   map[BCAttribute::Para] = i18n("Paragraph");
   map[BCAttribute::Choice] = i18n("List");
   map[BCAttribute::Bool] = i18n("Checkbox"); 
-  map[BCAttribute::Year] = i18n("Year");
+  map[BCAttribute::Number] = i18n("Number");
   map[BCAttribute::URL] = i18n("URL");
+  map[BCAttribute::Table] = i18n("Table");
+  map[BCAttribute::Table2] = i18n("Table (2 Columns)");
+//  map[BCAttribute::ReadOnly] = i18n("Read Only");
   return map;
 }
-

@@ -2,7 +2,7 @@
                                finddialog.h
                              -------------------
     begin                : Wed Feb 27 2002
-    copyright            : (C) 2002 by Robby Stephenson
+    copyright            : (C) 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -31,7 +31,7 @@ class QCheckBox;
  * The find dialog allows the user to search for a string in the document.
  *
  * @author Robby Stephenson
- * @version $Id: finddialog.h,v 1.3 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: finddialog.h 113 2003-09-13 05:33:05Z robby $
  */
 class FindDialog : public KDialogBase  {
 Q_OBJECT

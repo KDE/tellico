@@ -2,7 +2,7 @@
                            bcdedtailedlistview.cpp
                              -------------------
     begin                : Tue Sep 4 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,22 +17,28 @@
 #include "bcdetailedlistview.h"
 #include "bcunititem.h"
 #include "bccollection.h"
-#include "bookcasedoc.h"
 #include "bcfilter.h"
+#include "bookcase.h"
 #include "bcutils.h"
 
 #include <klocale.h>
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <kdebug.h>
+#include <kconfig.h>
+#include <kapplication.h>
+#include <kaction.h>
 
 #include <qptrlist.h>
 #include <qstringlist.h>
 #include <qvaluelist.h>
 #include <qheader.h>
 
-BCDetailedListView::BCDetailedListView(BookcaseDoc* doc_, QWidget* parent_, const char* name_/*=0*/)
-    : KListView(parent_, name_), m_doc(doc_), m_filter(0) {
+static const int MIN_COL_WIDTH = 50;
+
+BCDetailedListView::BCDetailedListView(QWidget* parent_, const char* name_/*=0*/)
+    : KListView(parent_, name_), m_filter(0),
+    m_prevSortColumn(-1), m_prev2SortColumn(-1), m_firstSection(-1) {
 //  kdDebug() << "BCDetailedListView()" << endl;
   setAllColumnsShowFocus(true);
   setShowSortIndicator(true);
@@ -50,6 +56,8 @@ BCDetailedListView::BCDetailedListView(BookcaseDoc* doc_, QWidget* parent_, cons
 
   connect(this, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&, int)),
           SLOT(slotRMB(QListViewItem*, const QPoint&, int)));
+  connect(header(), SIGNAL(indexChange(int, int, int)),
+          SLOT(slotUpdatePixmap()));
 
   // header menu
   header()->setClickEnabled(true);
@@ -59,19 +67,15 @@ BCDetailedListView::BCDetailedListView(BookcaseDoc* doc_, QWidget* parent_, cons
   
   m_headerMenu = new KPopupMenu(this);
   m_headerMenu->setCheckable(true);
+  m_headerMenu->insertTitle(i18n("View Columns"));
   connect(m_headerMenu, SIGNAL(activated(int)),
           this, SLOT(slotHeaderMenuActivated(int)));
   
-  // item menu
-  QPixmap remove = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("remove"), KIcon::Small);
+  Bookcase* bookcase = static_cast<Bookcase*>(QObjectAncestor(parent_, "Bookcase"));
   m_itemMenu = new KPopupMenu(this);
-  m_itemMenu->insertItem(remove, i18n("Delete Book"), this, SLOT(slotHandleDelete()));
+  bookcase->action("edit_delete")->plug(m_itemMenu);
 
-  m_bookPix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("book"), KIcon::User);
   m_checkPix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("ok"), KIcon::Small);
-
-  // need this, so that sorting is allowed
-  setSorting(0, true);
 }
 
 BCDetailedListView::~BCDetailedListView() {
@@ -79,61 +83,80 @@ BCDetailedListView::~BCDetailedListView() {
   m_filter = 0;
 }
 
-void BCDetailedListView::slotAddCollection(BCCollection* coll_) {
+void BCDetailedListView::addCollection(BCCollection* coll_) {
   if(!coll_) {
     return;
   }
 
-//  kdDebug() << "BCDetailedListView::slotAddCollection()" << endl;
+//  kdDebug() << "BCDetailedListView::addCollection()" << endl;
 
-  if(columns() > 0 && !coll_->attributeList().isEmpty()) {
-    slotReset();
-    while(columns() > 0) {
-      removeColumn(0);
+  KConfig* config = kapp->config();
+  config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->unitName()));
+
+  QStringList colNames = config->readListEntry("ColumnNames");
+  if(colNames.isEmpty()) {
+    colNames = coll_->defaultViewAttributes();
+  }
+
+  // this block compensates for the chance that the user added an attribute and it wasn't
+  // written to the widths. Also compensates for 0.5.x to 0.6.x column layout changes
+  QValueList<int> colWidths = config->readIntListEntry("ColumnWidths");
+  if(colWidths.empty()) {
+    colWidths.insert(colWidths.begin(), colNames.count(), -1); // automatic width
+  }
+  // if the user runs Bookcase in another language, the column titles being viewed don't get
+  // saved correctly. Here, sort the widths just to find out if there are any non-zero values
+  // if not, then also need default attributes
+  //QValueList<int> newList = colWidths;
+  //qHeapSort(newList);
+  bool none = true;
+  BCAttributeListIterator attIt(coll_->attributeList());
+  for( ; attIt.current(); ++attIt) {
+    if(colNames.contains(attIt.current()->name()) && colWidths.count() > 0) {
+      addAttribute(attIt.current(), colWidths.front());
+      if(colWidths.front() > 0) {
+        none = false;
+      }
+      colWidths.pop_front();
+    } else {
+      addAttribute(attIt.current(), 0);
     }
-    Bookcase* bookcase = BookcaseAncestor(parent());
-    bookcase->readCollectionOptions(coll_);
+  }
+  if(none && columns() > 0) {
+    showColumn(0);
   }
 
-  // if columns already exist, check to see if any need to be removed or added
-//  if(columns() > 0 && !coll_->attributeList().isEmpty()) {
-//    QStringList colTitles;
-//    for(int i = 0; i < columns(); ++i) {
-//      colTitles += columnText(i);
-//    }
-//    QStringList colNames = m_titles2Names.values();
-//    QStringList list = coll_->attributeNames();
-//    QStringList::ConstIterator it;
-//    int i = 0;
-//    for(it = list.begin(); it != list.end(); ++it, ++i) {
-//      if(colNames.findIndex(*it) == -1) {
-//        slotAddColumn(coll_, coll_->attributeByName(*it));
-//      } else {
-//        BCAttribute* att = coll_->attributeByTitle(columnText(i));
-//        if(att) {
-//          slotModifyColumn(coll_, coll_->attributeByName(*it), att);
-//        } else {
-//          slotRemoveColumn(coll_, columnText(i));
-//				}
-//      }
-//      kdDebug() << "removing " << *it << endl;
-//      colNames.remove(*it);
-//      colTitles.remove();
-//    }
-//    kdDebug() << "mark" << endl;
-//    // if colTitles is not now empty, need to remove some columns
-//    if(!colNames.isEmpty()) {
-//      for(it = colNames.begin(); it != colNames.end(); ++it) {
-//        kdDebug() << "removing " << *it << endl;
-//        slotRemoveColumn(coll_, m_titles2Names);
-//      }
-//    }
-//  }
-  
-  QPtrListIterator<BCUnit> unitIt(coll_->unitList());
-  for( ; unitIt.current(); ++unitIt) {
-    slotAddItem(unitIt.current());
+  QValueList<int> colOrder = config->readIntListEntry("ColumnOrder");
+  QValueList<int>::ConstIterator it = colOrder.begin();
+  for(int i = 0; it != colOrder.end(); ++it) {
+    header()->moveSection(i++, *it);
   }
+  slotUpdatePixmap();
+
+  int sortCol = config->readNumEntry("SortColumn", 0);
+  bool sortAsc = config->readBoolEntry("SortAscending", true);
+  setSorting(sortCol, sortAsc);
+  int prevSortCol = config->readNumEntry("PrevSortColumn", -1);
+  int prev2SortCol = config->readNumEntry("Prev2SortColumn", -1);
+  setPrevSortedColumn(prevSortCol, prev2SortCol);
+  
+  triggerUpdate();
+  kapp->processEvents();
+  setUpdatesEnabled(false);
+
+  unsigned count = coll_->unitList().count();
+  BCUnitListIterator unitIt(coll_->unitList());
+  for(unsigned j = 0; unitIt.current(); ++unitIt, ++j) {
+    addItem(unitIt.current());
+
+    // magic number here
+    if(j%20 == 0) {
+      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));
+    }
+  }
+
+  setUpdatesEnabled(true);
+  triggerUpdate();
 }
 
 void BCDetailedListView::slotReset() {
@@ -141,7 +164,6 @@ void BCDetailedListView::slotReset() {
   //clear() does not remove columns
   clear();
   m_selectedUnits.clear();
-  m_headerMenu->clear();
 //  while(columns() > 0) {
 //    removeColumn(0);
 //  }
@@ -149,21 +171,20 @@ void BCDetailedListView::slotReset() {
   m_filter = 0;
 }
 
-void BCDetailedListView::slotAddItem(BCUnit* unit_) {
+void BCDetailedListView::addItem(BCUnit* unit_) {
   if(!unit_) {
     kdWarning() << "BCDetailedListView::slotAddItem() - null unit pointer!" << endl;
     return;
   }
+  
+  if(m_unitPix.isNull()) {
+    m_unitPix = KGlobal::iconLoader()->loadIcon(unit_->collection()->unitName(), KIcon::User);
+  }
+
 
 //  kdDebug() << "BCDetailedListView::slotAddItem() - " << unit_->attribute("title") << endl;
 
   BCUnitItem* item = new BCUnitItem(this, unit_);
-
-  if(unit_->collection()->isBook()) {
-    item->setPixmap(0, m_bookPix);
-  } else {
-    kdDebug() << "BCDetailedListView::slotAddItem() - no pixmap for this collection type!" << endl;
-  }
 
   populateItem(item);
   bool match = true;
@@ -175,17 +196,22 @@ void BCDetailedListView::slotAddItem(BCUnit* unit_) {
   if(isUpdatesEnabled() && match) {
     sort();
     ensureItemVisible(item);
-//    setSelected(item, true);
+    setCurrentItem(item);
+    if(m_selectedUnits.count() > 0) {
+      blockSignals(true);
+      clearSelection();
+      setSelected(item, true);
+      blockSignals(false);
+    }
   }
 }
 
-void BCDetailedListView::slotModifyItem(BCUnit* unit_) {
+void BCDetailedListView::modifyItem(BCUnit* unit_) {
   if(!unit_) {
-    kdWarning() << "BCDetailedListView::slotModifyItem() - null unit pointer!" << endl;
+    kdWarning() << "BCDetailedListView::modifyItem() - null unit pointer!" << endl;
     return;
   }
 
-  slotClearSelection();
 //  kdDebug() << "BCDetailedListView::slotModifyItem() - " << unit_->title() << endl;
   BCUnitItem* item = locateItem(unit_);
   if(item) {
@@ -196,60 +222,65 @@ void BCDetailedListView::slotModifyItem(BCUnit* unit_) {
       item->setVisible(match);
     }
     
-    if(match) {
+    if(isUpdatesEnabled() && match) {
       sort();
+      setCurrentItem(item);
       ensureItemVisible(item);
     }
+    
+    if(!item->isSelected() && m_selectedUnits.count() > 0) {
+      blockSignals(true);
+      clearSelection();
+      setSelected(item, true);
+      blockSignals(false);
+    }
   } else {
-    kdWarning() << "BCDetailedListView::slotModifyItem() - no item found for " << unit_->title() << endl;
+    kdWarning() << "BCDetailedListView::modifyItem() - no item found for " << unit_->title() << endl;
     return;
   }
 }
 
-void BCDetailedListView::slotRemoveItem(BCUnit* unit_) {
+void BCDetailedListView::removeItem(BCUnit* unit_) {
   if(!unit_) {
-    kdWarning() << "BCDetailedListView::slotRemoveItem() - null unit pointer!" << endl;
+    kdWarning() << "BCDetailedListView::removeItem() - null unit pointer!" << endl;
     return;
   }
 
-//  kdDebug() << "BCDetailedListView::slotRemoveItem() - " << unit_->title() << endl;
+//  kdDebug() << "BCDetailedListView::removeItem() - " << unit_->title() << endl;
 
-  slotClearSelection();
+  clearSelection();
   delete locateItem(unit_);
 }
 
 // TODO: more efficient way to do this?
-void BCDetailedListView::slotRemoveItem(BCCollection* coll_) {
+void BCDetailedListView::removeCollection(BCCollection* coll_) {
   if(!coll_) {
-    kdWarning() << "BCDetailedListView::slotRemoveItem() - null coll pointer!" << endl;
+    kdWarning() << "BCDetailedListView::removeCollection() - null coll pointer!" << endl;
     return;
   }
 
-//  kdDebug() << "BCDetailedListView::slotRemoveItem() - " << coll_->title() << endl;
+//  kdDebug() << "BCDetailedListView::removeCollection() - " << coll_->title() << endl;
 
-  QListViewItem* item = firstChild();
-  QListViewItem* next;
-  while(item) {
-    const BCUnit* unit = static_cast<BCUnitItem*>(item)->unit();
-    next = item->nextSibling();
-    if(unit->collection() == coll_) {
-      delete item;
-    }
-    item = next;
+  saveConfig(coll_);
+
+  clear();
+
+  while(columns() > 0) {
+    removeColumn(0);
   }
+  
+  m_headerMenu->clear();
+  m_headerMenu->insertTitle(i18n("View Columns"));
+
+  m_columnWidths.clear();
+  m_isNumber.clear();
+  m_unitPix = QPixmap();
+
+  m_selectedUnits.clear();
 
   // clear the filter, too
   delete m_filter;
   m_filter = 0;
-}
-
-void BCDetailedListView::slotHandleDelete() {
-  BCUnitItem* item = static_cast<BCUnitItem*>(currentItem());
-  if(!item || !item->unit()) {
-    return;
-  }
-
-  emit signalDeleteUnit(item->unit());
 }
 
 void BCDetailedListView::populateItem(BCUnitItem* item_) {
@@ -295,20 +326,20 @@ void BCDetailedListView::slotSelectionChanged() {
     }
   }
   
-  emit signalUnitSelected(m_selectedUnits);
+  emit signalUnitSelected(this, m_selectedUnits);
 }
 
-void BCDetailedListView::slotSetSelected(BCUnit* unit_) {
+// don't shadow QListView::setSelected
+void BCDetailedListView::setUnitSelected(BCUnit* unit_) {
 //  kdDebug() << "BCDetailedListView::slotSetSelected()" << endl;
-  // if unit_ is null pointer, set no selected
+  clearSelection();
+  // if unit_ is null pointer, just return
   if(!unit_) {
-    setSelected(currentItem(), false);
     return;
   }
 
   BCUnitItem* item = locateItem(unit_);
 
-  slotClearSelection();
   blockSignals(true);
   setSelected(item, true);
   setCurrentItem(item);
@@ -328,8 +359,8 @@ BCUnitItem* const BCDetailedListView::locateItem(const BCUnit* unit_) {
   return 0;
 }
 
-void BCDetailedListView::slotClearSelection() {
-//  kdDebug() << "BCDetailedListView::slotClearSelection()" << endl;
+void BCDetailedListView::clearSelection() {
+//  kdDebug() << "BCDetailedListView::clearSelection()" << endl;
   blockSignals(true);
   selectAll(false);
   setCurrentItem(0);
@@ -342,9 +373,10 @@ void BCDetailedListView::slotClearSelection() {
 void BCDetailedListView::setColumns(BCCollection* coll_, const QStringList& colNames_,
                                     const QValueList<int>& colWidths_) {
 //  kdDebug() << "BCDetailedListView::setColumns() " << endl;
-
+//  kdDebug() << "Titles: " << colNames_.join(QString::fromLatin1(";")) << endl;
 //  QString widths;
-//  for(QValueList<int>::ConstIterator wIt = colWidths_.begin(); wIt != colWidths_.end(); ++wIt) {
+//  QValueList<int>::ConstIterator wIt;
+//  for(wIt = colWidths_.begin(); wIt != colWidths_.end(); ++wIt) {
 //    widths += QString::number(*wIt) + ';';
 //  }
 //  kdDebug() << "Widths: " << widths << endl;
@@ -357,15 +389,7 @@ void BCDetailedListView::setColumns(BCCollection* coll_, const QStringList& colN
     kdWarning() << "BCDetailedListView::setColumns() called when columns already exist!" << endl;
     return;
   }
-  
-  // populate header menu
-  m_headerMenu->insertTitle(i18n("View Columns"));
-    
-  // get all the attributes in the document which are the same unit type
-  // this assumes that some day, I'll get around to using a QWidgetStack
-  // or something so I can show collections of different unit types
-//  BCCollection::CollectionType type = coll_->collectionType();
-//  BCAttributeList list = m_doc->uniqueAttributes(type);
+      
   BCAttributeList list = coll_->attributeList();
   
   // initialize the width cache
@@ -375,13 +399,20 @@ void BCDetailedListView::setColumns(BCCollection* coll_, const QStringList& colN
   BCAttributeListIterator it(list);
   for( ; it.current(); ++it) {
 //    kdDebug() << "BCDetailedListView::setColumns() - adding column " << it.current()->title() << endl;
-    // columns gets added for every attribute
+    // columns get added for every attribute
     int col = addColumn(it.current()->title());
     m_headerMenu->insertItem(it.current()->title(), col);
-    // bools have a checkmark pixmap, so center it
-    if(it.current()->type() == BCAttribute::Bool) {
+    
+    // keep track of which columns should be compared numerically
+    m_isNumber.push_back(it.current()->type() == BCAttribute::Number);
+    
+    // bools have a checkmark pixmap, so center it. Numbers, too.
+    if(it.current()->type() == BCAttribute::Bool || it.current()->type() == BCAttribute::Number) {
       setColumnAlignment(col, Qt::AlignHCenter);
     }
+
+    // keep track of which columns should be compared numerically
+    m_isNumber.push_back(it.current()->type() == BCAttribute::Number);
 
     // if the width is -1, then leave the width alone
     // otherwise, set it
@@ -393,11 +424,11 @@ void BCDetailedListView::setColumns(BCCollection* coll_, const QStringList& colN
     
     if(colWidths_[col] == 0) {
       header()->setResizeEnabled(false, col);
-//    } else if(colNames_.findIndex(it.current()->name()) > -1) {
-    } else {
+    } else if(colNames_.findIndex(it.current()->name()) > -1) {
       m_headerMenu->setItemChecked(col, true);
     }
   }
+  slotUpdatePixmap();
 }
 
 bool BCDetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
@@ -410,8 +441,6 @@ bool BCDetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
   return KListView::eventFilter(obj_, ev_);
 }
 
-// this implementation borrows from the code in the juk application
-// in the file playlistsplitter.cpp by Scott Wheeler 
 void BCDetailedListView::slotHeaderMenuActivated(int id_) {
 //  kdDebug() << "BCDetailedListView::slotHeaderMenuActivated() - " << m_headerMenu->text(id_) << endl;
   bool checked = m_headerMenu->isItemChecked(id_);
@@ -425,17 +454,18 @@ void BCDetailedListView::slotHeaderMenuActivated(int id_) {
   } else {
     hideColumn(col);
   }
+  slotUpdatePixmap();
 }
 
 void BCDetailedListView::slotRefresh() {
   if(childCount() == 0) {
     return;
   }
-  
-  // the algorithm here is to iterator over each column, then over every list item
-  BCUnitItem* item = static_cast<BCUnitItem*>(firstChild());
-  BCCollection* coll = item->unit()->collection();
+
+  // the algorithm here is to iterate over each column, then over every list item
+  BCCollection* coll = static_cast<BCUnitItem*>(firstChild())->unit()->collection();
   BCAttribute* att;
+  BCUnitItem* item;
 
   for(int colNum = 0; colNum < columns(); ++colNum) {
     att = coll->attributeByTitle(columnText(colNum));
@@ -445,11 +475,6 @@ void BCDetailedListView::slotRefresh() {
     for( ; it.current(); ++it) {
       item = static_cast<BCUnitItem*>(it.current());
       
-      // TODO: maybe someday there will be multiple collections
-//      if(item->unit()->collection() != coll) {
-//        coll = item->unit()->collection();
-//        att = coll->attributeByTitle(columnText(colNum));
-//      }
       setPixmapAndText(item, colNum, att);
       
       // if we're doing this for the first time, go ahead and pass through filter
@@ -465,37 +490,24 @@ void BCDetailedListView::slotRefresh() {
 }
 
 void BCDetailedListView::setPixmapAndText(BCUnitItem* item_, int col_, BCAttribute* att_) {
-  // for bools, there will be no text
+  if(!item_) {
+    return;
+  }
+
   // if the bool is not empty, show the checkmark pixmap
   if(att_->type() == BCAttribute::Bool) {
     QString value = item_->unit()->attribute(att_->name());
-    if(value.isEmpty()) {
-      item_->setPixmap(col_, QPixmap());
-      item_->setText(col_, QString());
-    } else {
-      item_->setPixmap(col_, m_checkPix);
-      // needed for sorting
-      item_->setText(col_, QString::fromLatin1(" "));
-    }
+    item_->setPixmap(col_, value.isEmpty() ? QPixmap() : m_checkPix);
+    item_->setText(col_, QString::null);
   } else { // for everything else, there's no pixmap, unless it's the first column
-    // TODO: fix for multiple types
-    if(col_ == 0) {
-      item_->setPixmap(col_, m_bookPix);
+    if(col_ == m_firstSection) {
+      item_->setPixmap(col_, m_unitPix);
     } else {
       item_->setPixmap(col_, QPixmap());
     }
     QString value = item_->unit()->attributeFormatted(att_->name(), att_->formatFlag());
     item_->setText(col_, value);
   }
-}
-
-QStringList BCDetailedListView::columnTitles() const {
-  QStringList colTitles;
-  // only visible if width > 0
-  for(int col = 0; col < columns(); ++col) {
-    colTitles += columnText(col);
-  }
-  return colTitles;
 }
 
 void BCDetailedListView::showColumn(int col_) {
@@ -507,7 +519,9 @@ void BCDetailedListView::showColumn(int col_) {
     for( ; it.current(); ++it) {
       w = QMAX(it.current()->width(fontMetrics(), this, col_), w);
     }
-    w = QMAX(w, 50);
+    w = QMAX(w, MIN_COL_WIDTH);
+  } else {
+    setColumnWidthMode(col_, QListView::Manual);
   }
 
   setColumnWidth(col_, w);
@@ -520,7 +534,6 @@ void BCDetailedListView::hideColumn(int col_) {
   setColumnWidthMode(col_, QListView::Manual);
   setColumnWidth(col_, 0);
   header()->setResizeEnabled(false, col_);
-//  setResizeMode(QListView::LastColumn);
   triggerUpdate();
 }
 
@@ -555,28 +568,32 @@ const BCFilter* BCDetailedListView::filter() const {
   return m_filter;
 }
 
-// don't care about collection right now
-// TODO: fix when multiple collections supported
-void BCDetailedListView::slotAddColumn(BCCollection*, BCAttribute* att_) {
+void BCDetailedListView::addAttribute(BCAttribute* att_, int width_/*=-1*/) {
 //  kdDebug() << "BCDetailedListView::slotAddColumn() - " << att_->title() << endl;
   int col = addColumn(att_->title());
-  int id = m_headerMenu->insertItem(att_->title());
 
-  m_headerMenu->setItemChecked(id, false);
-  // bools have a checkmark pixmap, so center it
-  if(att_->type() == BCAttribute::Bool) {
+  // bools have a checkmark pixmap, so center it. Numbers too
+  if(att_->type() == BCAttribute::Bool || att_->type() == BCAttribute::Number) {
     setColumnAlignment(col, Qt::AlignHCenter);
   }
 
-  slotRefresh();
-//  m_columnWidths.push_back(columnWidth(col));
-  m_columnWidths.push_back(0);
-  // by default, keep the new column hidden
-  hideColumn(col);
+  // width might be -1, which means set the width to maximum
+  // but m_columnWidths is the cached width, so just set it to 0
+  m_columnWidths.push_back(QMAX(width_, 0));
+  
+  m_isNumber.push_back(att_->type() == BCAttribute::Number);
+  
+  int id = m_headerMenu->insertItem(att_->title());
+  if(width_ == 0) {
+    m_headerMenu->setItemChecked(id, false);
+    hideColumn(col);
+  } else {
+    m_headerMenu->setItemChecked(id, true);
+    showColumn(col);
+  }
 }
 
-void BCDetailedListView::slotModifyColumn(BCCollection*, BCAttribute* newAtt_, BCAttribute* oldAtt_) {
-//  kdDebug() << "BCDetailedListView::slotModifyColumn() - " << newAtt_->title() << endl;
+void BCDetailedListView::modifyAttribute(BCAttribute* newAtt_, BCAttribute* oldAtt_) {
   int sec; // I need it for after the loop
   for(sec = 0; sec < columns(); ++sec) {
     if(header()->label(sec) == oldAtt_->title()) {
@@ -586,41 +603,75 @@ void BCDetailedListView::slotModifyColumn(BCCollection*, BCAttribute* newAtt_, B
 
   // I thought this would have to be mapped to index, but not the case
   setColumnText(sec, newAtt_->title());
+  m_isNumber[sec] = (newAtt_->type() == BCAttribute::Number);
+  if(newAtt_->type() == BCAttribute::Bool || newAtt_->type() == BCAttribute::Number) {
+    setColumnAlignment(sec, Qt::AlignHCenter);
+  } else {
+    setColumnAlignment(sec, Qt::AlignLeft);
+  }
   m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), newAtt_->title()); // add 1 since menu has title
 }
 
-void BCDetailedListView::slotRemoveColumn(BCCollection* coll_, BCAttribute* att_) {
-  slotRemoveColumn(coll_, att_->title());
-}
+//void BCDetailedListView::slotRemoveColumn(BCCollection* coll_, BCAttribute* att_) {
+//  slotRemoveColumn(coll_, att_->title());
+//}
+//
+void BCDetailedListView::removeAttribute(BCAttribute* att_) {
+//  kdDebug() << "BCDetailedListView::slotRemoveColumn() - " << att_->title() << endl;
 
-// don't care about collection right now
-// TODO: fix when multiple collections supported
-void BCDetailedListView::slotRemoveColumn(BCCollection*, const QString& title_) {
-//  kdDebug() << "BCDetailedListView::slotRemoveColumn() - " << title_ << endl;
-  
   int sec; // I need it for after the loop
   for(sec = 0; sec < columns(); ++sec) {
-    if(header()->label(sec) == title_) {
+    if(header()->label(sec) == att_->title()) {
 //      kdDebug() << "Removing section " << sec << endl;
       break;
     }
   }
 
   if(sec == columns()) {
-    kdWarning() << "BCDetailedListView::slotRemoveColumn() - no column named " << title_ << endl;
+    kdWarning() << "BCDetailedListView::slotRemoveColumn() - no column named " << att_->title() << endl;
     return;
   }
 
   m_headerMenu->removeItem(m_headerMenu->idAt(sec+1)); // add 1 since menu has title
 
   m_columnWidths.erase(&m_columnWidths[sec]);
+  m_isNumber.erase(&m_isNumber[sec]);
 
   // I thought this would have to be mapped to index, but not the case
   removeColumn(sec);
 
+  // sometimes resizeEnabled gets messed up
   for(int i = sec; i < columns(); ++i) {
     header()->setResizeEnabled(columnWidth(i) > 0, header()->mapToSection(i));
   }
+  slotUpdatePixmap();
+  triggerUpdate();
+}
+
+void BCDetailedListView::reorderAttributes(const BCAttributeList& list_) {
+//  kdDebug() << "BCDetailedListView::reorderAttributes()" << endl;
+  int sec = 0;
+  BCAttributeListIterator it(list_);
+  for(sec = 0; it.current() && sec < columns(); ++sec, ++it) {
+    if(header()->label(sec) != it.current()->title()) {
+      break;
+    }
+  }
+
+  for( ; it.current() && sec < columns();  ++sec, ++it) {
+    header()->setLabel(sec, it.current()->title());
+    m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), it.current()->title());
+    m_columnWidths[sec] = 0;
+    if(it.current()->type() == BCAttribute::Bool || it.current()->type() == BCAttribute::Number) {
+      setColumnAlignment(header()->mapToIndex(sec), Qt::AlignHCenter);
+    } else {
+      setColumnAlignment(header()->mapToIndex(sec), Qt::AlignLeft);
+    }
+    m_isNumber[sec] = (it.current()->type() == BCAttribute::Number);
+  }
+
+  slotRefresh();
+  slotUpdatePixmap();
   triggerUpdate();
 }
 
@@ -628,13 +679,108 @@ int BCDetailedListView::prevSortedColumn() const {
   return m_prevSortColumn;
 }
 
-void BCDetailedListView::setPrevSortedColumn(int column_) {
-  m_prevSortColumn = column_;
+int BCDetailedListView::prev2SortedColumn() const {
+  return m_prev2SortColumn;
+}
+
+void BCDetailedListView::setPrevSortedColumn(int prev1_, int prev2_) {
+  m_prevSortColumn = prev1_;
+  m_prev2SortColumn = prev2_;
 }
 
 void BCDetailedListView::setSorting(int column_, bool ascending_/*=true*/) {
   if(column_ != columnSorted()) {
-    setPrevSortedColumn(columnSorted());
+    m_prev2SortColumn = m_prevSortColumn;
+    m_prevSortColumn = columnSorted();
   }
   KListView::setSorting(column_, ascending_);
+}
+
+// it's possible to have a zero-length vector and have this called, so check bounds
+bool BCDetailedListView::isNumber(int column_) const {
+  return column_ < static_cast<int>(m_isNumber.size()) && m_isNumber[column_];
+}
+
+void BCDetailedListView::updateFirstSection() {
+  for(int numCol = 0; numCol < columns(); ++numCol) {
+    if(columnWidth(numCol) > 0) {
+      m_firstSection = header()->mapToSection(numCol);
+      return;
+    }
+  }
+}
+
+void BCDetailedListView::slotUpdatePixmap() {
+  int oldSection = m_firstSection;
+  updateFirstSection();
+  if(oldSection == m_firstSection) {
+    return;
+  }
+  
+  QListViewItemIterator it(this);
+  for( ; it.current(); ++it) {
+    it.current()->setPixmap(oldSection, QPixmap());
+    it.current()->setPixmap(m_firstSection, m_unitPix);
+  }
+}
+
+void BCDetailedListView::saveConfig(BCCollection* coll_) {
+  KConfig* config = kapp->config();
+  config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->unitName()));
+
+  QValueList<int> widths, order;
+  for(int i = 0; i < columns(); ++i) {
+    if(columnWidthMode(i) == QListView::Manual) {
+      widths += columnWidth(i);
+    } else {
+      widths += -1; // Maximum width mode
+    }
+    order += header()->mapToIndex(i);
+  }
+  config->writeEntry("ColumnWidths", widths);
+  config->writeEntry("ColumnOrder", order);
+  config->writeEntry("SortColumn", columnSorted());
+  config->writeEntry("SortAscending", ascendingSort());
+  config->writeEntry("PrevSortColumn", prevSortedColumn());
+  config->writeEntry("Prev2SortColumn", prev2SortedColumn());
+
+  QStringList colNames;
+  for(int col = 0; col < columns(); ++col) {
+    colNames += coll_->attributeNameByTitle(columnText(col));
+  }
+  config->writeEntry("ColumnNames", colNames);
+}
+
+QString BCDetailedListView::sortColumnTitle1() const {
+  return columnSorted() == -1 ? QString::null : header()->label(columnSorted());
+}
+
+QString BCDetailedListView::sortColumnTitle2() const {
+  return prevSortedColumn() == -1 ? QString::null : header()->label(prevSortedColumn());
+}
+
+QString BCDetailedListView::sortColumnTitle3() const {
+  return prev2SortedColumn() == -1 ? QString::null : header()->label(prev2SortedColumn());
+}
+
+QStringList BCDetailedListView::visibleColumns() const {
+  QStringList titles;
+  for(int i = 0; i < columns(); ++i) {
+    if(columnWidth(header()->mapToSection(i)) > 0) {
+      titles << columnText(header()->mapToSection(i));
+    }
+  }
+  return titles;
+}
+
+BCUnitList BCDetailedListView::visibleUnits() {
+  // We could just return the full collection unit list if the filter is 0
+  // but printing depends on the sorted order
+  BCUnitList list;
+  for(QListViewItemIterator it(this); it.current(); ++it) {
+    if(it.current()->isVisible()) {
+      list.append(static_cast<BCUnitItem*>(it.current())->unit());
+    }
+  }
+  return list;
 }

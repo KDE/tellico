@@ -1,5 +1,23 @@
 /* config.h.in.  Generated from configure.in by autoheader.  */
 
+/* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
+   systems. This function is required for `alloca.c' support on those systems.
+   */
+#undef CRAY_STACKSEG_END
+
+/* Define to 1 if using `alloca.c'. */
+#undef C_ALLOCA
+
+/* Define to 1 if you have `alloca', as a function or macro. */
+#undef HAVE_ALLOCA
+
+/* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
+   */
+#undef HAVE_ALLOCA_H
+
+/* Define if boolean is defined in <sys/types.h> */
+#undef HAVE_BOOLEAN
+
 /* Define if you have the CoreAudio API */
 #undef HAVE_COREAUDIO
 
@@ -11,6 +29,9 @@
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
+
+/* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
+#undef HAVE_DOPRNT
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
@@ -33,15 +54,8 @@
 /* Define if your system needs _NSGetEnviron to set up the environment */
 #undef HAVE_NSGETENVIRON
 
-/* Define to 1 if you have the <pthread/linuxthreads/pthread.h> header file.
-   */
-#undef HAVE_PTHREAD_LINUXTHREADS_PTHREAD_H
-
-/* Define if you have res_init */
+/* Define if you have the res_init function */
 #undef HAVE_RES_INIT
-
-/* Define if you have the res_init prototype */
-#undef HAVE_RES_INIT_PROTO
 
 /* Define to 1 if you have the `snprintf' function. */
 #undef HAVE_SNPRINTF
@@ -51,6 +65,9 @@
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
+
+/* Define if strdup is declared in <string.h> */
+#undef HAVE_STRDUP_DECL
 
 /* Define to 1 if you have the <strings.h> header file. */
 #undef HAVE_STRINGS_H
@@ -70,17 +87,26 @@
 /* Define if you have the strlcpy prototype */
 #undef HAVE_STRLCPY_PROTO
 
+/* Define to 1 if you have the `strlwr' function. */
+#undef HAVE_STRLWR
+
+/* Define to 1 if you have the `strupr' function. */
+#undef HAVE_STRUPR
+
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #undef HAVE_SYS_STAT_H
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #undef HAVE_SYS_TYPES_H
 
-/* C++ compiler supports template repository */
-#undef HAVE_TEMPLATE_REPOSITORY
-
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
+
+/* Define if ushort is defined in <sys/types.h> */
+#undef HAVE_USHORT
+
+/* Define to 1 if you have the `vprintf' function. */
+#undef HAVE_VPRINTF
 
 /* Define to 1 if you have the `vsnprintf' function. */
 #undef HAVE_VSNPRINTF
@@ -124,6 +150,14 @@
 /* The size of a `unsigned long', as computed by sizeof. */
 #undef SIZEOF_UNSIGNED_LONG
 
+/* If using the C implementation of alloca, define if you know the
+   direction of stack growth for your system; otherwise it will be
+   automatically deduced at run-time.
+        STACK_DIRECTION > 0 => grows toward higher addresses
+        STACK_DIRECTION < 0 => grows toward lower addresses
+        STACK_DIRECTION = 0 => direction of growth unknown */
+#undef STACK_DIRECTION
+
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
@@ -152,29 +186,34 @@
 
 
 
-#if !defined(HAVE_RES_INIT_PROTO)
-#ifdef __cplusplus
-extern "C"
-#endif
-int res_init (void);
+#if defined(HAVE_NSGETENVIRON) && defined(HAVE_CRT_EXTERNS_H)
+# include <sys/time.h>
+# include <crt_externs.h>
+# define environ (*_NSGetEnviron())
 #endif
 
 
 
 #if !defined(HAVE_STRLCAT_PROTO)
 #ifdef __cplusplus
-extern "C"
+extern "C" {
 #endif
 unsigned long strlcat(char*, const char*, unsigned long);
+#ifdef __cplusplus
+}
+#endif
 #endif
 
 
 
 #if !defined(HAVE_STRLCPY_PROTO)
 #ifdef __cplusplus
-extern "C"
+extern "C" {
 #endif
 unsigned long strlcpy(char*, const char*, unsigned long);
+#ifdef __cplusplus
+}
+#endif
 #endif
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1-Based Variant V1.0//EN" "dtd/kdex.dtd" [
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.0//EN" "dtd/kdex.dtd" [
   <!ENTITY bookcase '<application>Bookcase</application>'>
   <!ENTITY kapp "&bookcase;">
   <!ENTITY email "robby@periapsis.org">
@@ -54,8 +54,8 @@ Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>01/05/2002</date>
-<releaseinfo>0.06.00</releaseinfo>
+<date>01/11/2003</date>
+<releaseinfo>0.07.00</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -218,24 +218,23 @@ This is also a great place to provide pointers to other FAQ's if your users
 must do some complicated configuration on other programs in order for your
 application work. -->
 
-&reporting.bugs;
-&updating.documentation;
-
 <qandaset id="faqlist">
 <qandaentry>
 <question>
 <para>How do I enter multiple authors?</para>
 </question>
 <answer>
-<para>Author names should be separated by a semi-colon, like so: "Brian
- W. Kernighan; Dennis M. Ritchie" (without the quotes). Don't
- include the word "and" or anything similar, even if you have
- 20 authors. If you have the auto-format option checked, then the last
- name will automatically be shown first for each author.</para>
 
- <para>Other properties which allow multiple values, like "genre"
- and "keywords", are entered in the same way, with a semi-colon
- (;) separating each value.</para>
+<para>Author names should be separated by a semi-colon, like so:
+"Brian W. Kernighan; Dennis M. Ritchie" (without the quotes). Don't
+include the word "and" or anything similar, even if you have 20
+authors. If you have the auto-format option checked, then the last
+name will automatically be shown first for each author.</para>
+
+<para>Other properties which allow multiple values, like "genre" and
+"keywords", are entered in the same way, with a semi-colon (;)
+separating each value.</para>
+
 </answer>
 </qandaentry>
 <qandaentry>
@@ -243,10 +242,12 @@ application work. -->
 <para>How do I add page numbers when I print?</para>
 </question>
 <answer>
-<para>KDE 3.1 added an option for printing headers on HTML files (which
- is the mechanism that &bookcase; uses). So using KDE 3.1 or
- later will have an option in the expanded print dialog to print the
- header, which includes the filename and the page number.</para>
+
+<para>KDE 3.1 added an option for printing headers on HTML files
+(which is the mechanism that &bookcase; uses). So using KDE 3.1 or
+later will have an option in the expanded print dialog to print the
+header, which includes the filename and the page number.</para>
+
 </answer>
 </qandaentry>
 <qandaentry>
@@ -254,16 +255,19 @@ application work. -->
 <para>Well, then can I modify what the printed page looks like?</para>
 </question>
 <answer>
-<para>Yes, most certainly. If you're using &bookcase;
- 0.3, find the file bookcase-by-author.xsl which should be in the
- $KDEDIR/share/apps/bookcase/ directory. If you're using
- &bookcase; 0.4, find the file bookcase-printing.xsl
- which should be in the same directory. You'll have to know
- <ulink url="http://www.w3.org/TR/xslt">XSLT</ulink>, but
- modifying that file is how you change the printing layout. Feel free
- to <ulink url="mailto:&email;">email me</ulink> with questions.
- If I end up with some alternate XSLT printing files, I'll put them on
- <ulink url="&homepage;">the Bookcase website</ulink>.</para>
+
+<para>Yes, most certainly. Find the file bookcase-printing.xsl which
+ should be in the $KDEDIR/share/apps/bookcase/ directory. You can copy
+ that to $KDEHOME/share/apps/bookcase/ for personal modifications.
+ You'll have to know <ulink
+ url="http://www.w3.org/TR/xslt">XSLT</ulink>, but modifying that file
+ is how you change the printing layout. HTML is generated from the
+ file, and the easiest way to change the appearance of the printout is
+ to modify the CSS in the top portiong. Feel free to <ulink
+ url="mailto:&email;">email me</ulink> with questions.  If I end up
+ with some alternate XSLT printing files, I'll put them on <ulink
+ url="&homepage;">the Bookcase website</ulink>.</para>
+
 </answer>
 </qandaentry>
 <qandaentry>
@@ -272,9 +276,8 @@ application work. -->
 </question>
 <answer>
 <para>
-Version 0.6 added the ability to customize the collection fields. To allow
-grouping by a field which doesn't allow grouping by default, check the
-"Allow Grouping" box for that particular field in the "Edit Fields" dialog.
+To allow grouping by a field which doesn't allow grouping by default, check the
+"Allow Grouping" box for that particular field in the "Collection Fields" dialog.
 </para>
 </answer>
 </qandaentry>
@@ -298,38 +301,45 @@ the collection. Select the "Rename Collection" option.</para>
 <computeroutput>BCGroupView::setGroupAttribute - author</computeroutput>
 <computeroutput>BCGroupView::slotAddCollection</computeroutput>
 </screen>
-is debug info. At compile time, this can be stopped by compiling with the
---disable-debug flag. You might also want to use --enable-final, too, which
-takes a bit more memory when compiling, but is more efficient when running the application.</para>
 
-<para>Or, if &bookcase; is already installed, run kdebugdialog and make sure
-that "0 (generic)" is unchecked. That turns off debug messages from all
-generic KDE apps i.e. those not distributed officially by KDE.
-</para>
+is debug info. At compile time, this can be stopped by compiling with
+the --disable-debug flag. You might also want to use --enable-final,
+too, which takes a bit more memory when compiling, but is more
+efficient when running the application.</para>
+
+<para>Or, if &bookcase; is already installed, run kdebugdialog and
+make sure that "0 (generic)" is unchecked. That turns off debug
+messages from all generic KDE apps i.e. those not distributed
+officially by KDE.</para>
+
 </answer>
 </qandaentry>
 
 <qandaentry>
 <question><para>How do I change which columns are shown?</para></question>
 <answer>
-<para>Right-click on the header bar. You can also drag the headers to re-order the columns, and click on them to sort by that field.</para>
+<para>Right-click on the header bar. You can also drag the headers to re-order
+the columns, and click on them to sort by that field.</para>
 </answer>
 </qandaentry>
 
 <qandaentry>
-<question><para>What sort of data can &bookcase; import from a <ulink url="http://bibtexml.sf.net">Bibtexml</ulink> file?</para></question>
+<question><para>How do I filter by something like the "Read"
+field?</para></question>
 <answer>
-<para>The file should have a namespace of http://bibtexml.sf.net. Only the &lt;bibtex:book&gt; elements are imported; all others are ignored. The import XSL file is very simplified at the moment - the values are not checked for left-over braces or quotation marks from any Bibtex conversion.</para>
-</answer>
-</qandaentry>
+<para>Internally, the checkbox
+fields in &bookcase; are saved as "true", so if you'd like to filter
+to show only the science fiction books which you've not read, for
+example, then you have two rules. Make sure the "Match all of the
+following" button is checked. Set the first rule to have "Genre"
+"contains" "Science Fiction" (no quotes) and the second rule to have
+"Read" "does not contain" "true" (no quotes).</para>
 
-<qandaentry>
-<question><para>How do I filter by something like the "Read" field?</para></question>
-<answer>
-<para>Internally, the checkbox fields in &bookcase; are saved as "1", so if you'd like to filter to show only the science fiction books which you've not read, for example, then you have two rules. Make sure the "Match all of the following" button is checked. Set the first rule to have "Genre" "contains" "Science Fiction" (no quotes) and the second rule to have "Read" "does not contain" "1" (no quotes).</para>
-
- <para>Also, the quick filter in the toolbar will match any attribute, and if there is a non-word character, the text is interpreted as a regular expression. So if you quickly want to filter your books to show those by Weber or Bujold, then type "weber|bujold" (no quotes) in the toolbar.
-</para>
+<para>Also, the quick filter in the toolbar will match any attribute,
+and if there is a non-word character, the text is interpreted as a
+regular expression. So if you quickly want to filter your books to
+show those by Weber or Bujold, then type "weber|bujold" (no quotes) in
+the toolbar.</para>
 </answer>
 </qandaentry>
 
@@ -339,9 +349,9 @@ generic KDE apps i.e. those not distributed officially by KDE.
 <chapter id="credits">
 
 <!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the KDE
-distribution. -->
+contributors here. The license for your software should then be
+included below the credits with a reference to the appropriate license
+file included in the KDE distribution. -->
 
 <title>Credits and License</title>
 
@@ -349,13 +359,13 @@ distribution. -->
 &bookcase;
 </para>
 <para>
-Program copyright 2001-2002 Robby Stephenson <email>&email;</email>
+Program copyright 2001-2003 Robby Stephenson <email>&email;</email>
 </para>
 <para>
 </para>
 
 <para>
-Documentation copyright 2001-2002 Robby Stephenson <email>&email;</email>
+Documentation copyright 2001-2003 Robby Stephenson <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -425,7 +435,7 @@ In order to compile and install &bookcase; on your system, type the following
 in the base directory of the archive, where the third step must be done as
 root if you are installing in a system directory:
 <screen width="40">
-<prompt>%</prompt> <userinput>./configure --enable-final --enable-debug</userinput>
+<prompt>%</prompt> <userinput>./configure --enable-final --disable-debug</userinput>
 <prompt>%</prompt> <userinput>make</userinput>
 <prompt>%</prompt> <userinput>make install</userinput>
 </screen>
@@ -433,7 +443,7 @@ root if you are installing in a system directory:
 
 <para>Since &bookcase; uses autoconf and automake you should have not trouble
 compiling it. Should you run into problems please report them to the
-author.</para>
+<ulink url="mailto:&email;">the author</ulink>.</para>
 
 </sect1>
 

@@ -26,13 +26,14 @@ class KRun;
 
 #include <qhbox.h>
 #include <qcheckbox.h>
+#include <qguardedptr.h>
 
 /**
  * The BCAttributeWidget class is a box that shows a label, then a widget which depends
  * on the attribute type, and then a checkbox for multiple editing.
  *
  * @author Robby Stephenson
- * @version $Id: bcattributewidget.h,v 1.1 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bcattributewidget.h 269 2003-11-08 18:19:55Z robby $
  */
 class BCAttributeWidget : public QHBox {
 Q_OBJECT
@@ -60,7 +61,8 @@ signals:
   void modified();
 
 protected slots:
-  void openURL(const QString& url);
+  void slotOpenURL(const QString& url);
+  void slotCheckRows(int row, int col);
 
 private:
   QString m_name;
@@ -69,7 +71,7 @@ private:
   QWidget* m_editWidget;
   QCheckBox* m_editMultiple;
 
-  KRun* m_run;
+  QGuardedPtr<KRun> m_run;
 
   bool m_isTextEdit;
 };

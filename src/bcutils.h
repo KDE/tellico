@@ -17,51 +17,22 @@
 #ifndef BCUTILS_H
 #define BCUTILS_H
 
-#include "bookcase.h"
-#include "bcfilterdialog.h"
-#include "bcuniteditwidget.h"
-
 #include <kdebug.h>
-
-#include <qobject.h>
 
 /**
  * This file contains utility functions.
  *
  * @author Robby Stephenson
- * @version $Id: bcutils.h,v 1.3 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bcutils.h 200 2003-10-14 00:21:13Z robby $
  */
 inline
-Bookcase* BookcaseAncestor(QObject* obj) {
-  while(obj && !obj->isA("Bookcase")) {
+QObject* QObjectAncestor(QObject* obj, const char* className_) {
+  while(obj && !obj->isA(className_)) {
     obj = obj->parent();
   }
   if(!obj) {
-    kdWarning() << "BookcaseAncestor() - none found" << endl;
+    kdWarning() << "QObjectAncestor() - none found of class: " << className_ << endl;
   }
-  return static_cast<Bookcase*>(obj);
+  return obj;
 }
-
-inline
-BCFilterDialog* BCFilterDialogAncestor(QObject* obj) {
-  while(obj && !obj->isA("BCFilterDialog")) {
-    obj = obj->parent();
-  }
-  if(!obj) {
-    kdWarning() << "BCFilterDialogAncestor() - none found" << endl;
-  }
-  return static_cast<BCFilterDialog*>(obj);
-}
-
-inline
-BCUnitEditWidget* BCUnitEditWidgetAncestor(QObject* obj) {
-  while(obj && !obj->isA("BCUnitEditWidget")) {
-    obj = obj->parent();
-  }
-  if(!obj) {
-    kdWarning() << "BCUnitEditWidgetAncestor() - none found" << endl;
-  }
-  return static_cast<BCUnitEditWidget*>(obj);
-}
-
 #endif

@@ -7,7 +7,7 @@
    ================================================================
    Bookcase XSLT file - sort by author
 
-   $Id: bookcase-by-author.xsl,v 1.3 2003/05/03 05:50:26 robby Exp $
+   $Id: bookcase-by-author.xsl 261 2003-11-06 05:15:35Z robby $
 
    Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
@@ -23,13 +23,13 @@
 
 <xsl:param name="version"/>
 
-<xsl:variable name="current-syntax" select="'3'"/>
+<xsl:variable name="current-syntax" select="'4'"/>
 
 <xsl:key name="books" match="bc:book" use=".//bc:author"/>
 <xsl:key name="authors" match="bc:author" use="."/>
 
 <!-- more efficient to specify complete XPath like this than to use //bc:author -->
-<xsl:variable name="unique-authors" select="/bc:bookcase/bc:collection/bc:book//bc:author[generate-id(.)=generate-id(key('authors', .)[1])]"/>
+<xsl:variable name="unique-authors" select="/bc:bookcase/bc:collection/bc:entry/bc:authors/bc:author[generate-id(.)=generate-id(key('authors', .)[1])]"/>
 
 <xsl:variable name="endl">
 <xsl:text>
@@ -107,7 +107,6 @@
 </xsl:template>
 
 <xsl:template match="bc:collection">
- <xsl:variable name="current-collection" select="."/>
  <div id="headerblock">
   <div class="title">
    <xsl:value-of select="@title"/>
@@ -117,7 +116,7 @@
  </div>
 
  <!-- first output any with no author -->
- <xsl:variable name="no-author" select="/bc:bookcase/bc:collection/bc:book[count(//bc:author) = 0 and ../../bc:collection = $current-collection]"/>
+ <xsl:variable name="no-author" select="/bc:bookcase/bc:collection/bc:entry[count(bc:authors/bc:author) = 0"/>
  <xsl:if test="count($no-author) &gt; 0">
   <div class="author">
    <xsl:text>(Empty)</xsl:text>
@@ -139,7 +138,7 @@
   </div>
   <div class="books">
    <ul>
-    <xsl:for-each select="key('books', .)[../../bc:collection = $current-collection]"> 
+    <xsl:for-each select="key('books', .)"> 
      <xsl:sort select="bc:title"/>
 <!-- or sort by series and number -->
 <!-- <xsl:sort select="bc:series"/>
@@ -151,7 +150,7 @@
  </xsl:for-each> 
 </xsl:template>
 
-<xsl:template match="bc:book">
+<xsl:template match="bc:entry">
  <li>
   <xsl:value-of select="bc:title"/>
  </li>

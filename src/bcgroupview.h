@@ -2,7 +2,7 @@
                                 bcgroupview.h
                              -------------------
     begin                : Sat Oct 13 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,18 +18,20 @@
 #define BCGROUPVIEW_H_H
 
 class BCAttribute;
+class BCCollection;
+class ParentItem;
 
-#include "bcunititem.h"
-#include "bccollection.h"
+class KPopupMenu;
+
+#include "bcunit.h" // needed for BCUnitList
+#include "bcunititem.h" // needed for Parent Item
 
 #include <klistview.h>
-#include <kpopupmenu.h>
 
 #include <qdict.h>
 #include <qptrlist.h>
 #include <qpoint.h>
 #include <qpixmap.h>
-#include <qmap.h>
 
 /**
  * The BCGroupView is the main listview for the class, showing only the titles.
@@ -41,7 +43,7 @@ class BCAttribute;
  * @see BCCollection
  *
  * @author Robby Stephenson
- * @version $Id: bcgroupview.h,v 1.3.2.1 2003/05/26 01:07:49 robby Exp $
+ * @version $Id: bcgroupview.h 217 2003-10-24 01:32:12Z robby $
  */
 class BCGroupView : public KListView {
 Q_OBJECT
@@ -58,10 +60,9 @@ public:
   /**
    * Returns the name of the attribute by which the units are grouped
    *
-   * @param unitName The name of the unit, e.g. "book"
    * @return The attribute name
    */
-  const QString& collGroupBy(const QString& unitName) const;
+  const QString& groupBy() const;
   /**
    * Sets the name of the attribute by which the units are grouped
    *
@@ -79,6 +80,36 @@ public:
    * @param showCount A boolean indicating whether or not the count should be shown
    */
   void showCount(bool showCount);
+  /**
+   * Adds a collection, along with all all the groups for the collection in
+   * the groupAttribute. This method gets called as well when the groupAttribute
+   * is changed, since it essentially repopulates the listview.
+   *
+   * @param coll A pointer to the collection being added
+   */
+  void addCollection(BCCollection* coll);
+  /**
+   * Removes a root collection item, and all of its children.
+   *
+   * @param coll A pointer to the collection
+   */
+  void removeCollection(BCCollection* coll);
+  /**
+   * Renames the top-level collection item.
+   *
+   * @param name The new collection name
+   */
+  void renameCollection(const QString& name);
+  /**
+   * Clears the selection.
+   */
+  void clearSelection();
+  /**
+   * Selects the first item which refers to a certain unit.
+   *
+   * @param unit A pointer to the unit
+   */
+  void setUnitSelected(BCUnit* unit);
   
 public slots:
   /**
@@ -92,18 +123,6 @@ public slots:
    * @param group A pointer to the modified group
    */
   void slotModifyGroup(BCCollection* coll, const BCUnitGroup* group);
-  /**
-   * Removes a root collection item, and all of its children.
-   *
-   * @param coll A pointer to the collection
-   */
-  void slotRemoveItem(BCCollection* coll);
-  /**
-   * Selects the first item which refers to a certain unit.
-   *
-   * @param unit A pointer to the unit
-   */
-  void slotSetSelected(BCUnit* unit);
   /**
    * Expands all items at a certain depth. If depth is -1, the current selected item
    * is expanded. If depth is equal to either 0 or 1, then all items at that depth
@@ -120,14 +139,6 @@ public slots:
    * @param depth The depth value
    */
   void slotCollapseAll(int depth=-1);
-  /**
-   * Adds a collection, along with all all the groups for the collection in
-   * the groupAttribute. This method gets called as well when the groupAttribute
-   * is changed, since it essentially repopulates the listview.
-   *
-   * @param coll A pointer to the collection being added
-   */
-  void slotAddCollection(BCCollection* coll);
 
 protected:
   /**
@@ -160,30 +171,28 @@ protected:
    * is consistant. For now, the key is the id of the unit's collection
    * concatenated with the text of the group name.
    */
-  QString groupKey(ParentItem* par_, QListViewItem* item_) const {
-    return QString::number(par_->id()) + item_->text(0);
-  }
+  QString groupKey(const ParentItem* par, QListViewItem* item) const;
   /**
    * Identical to the previous function.
    */
-  QString groupKey(ParentItem* par_, const BCUnitGroup* group_) const {
-    return QString::number(par_->id()) + group_->groupName();
-  }
+  QString groupKey(const ParentItem* par, const BCUnitGroup* group_) const;
   /**
    * Identical to the previous function.
    */
-  QString groupKey(BCCollection* coll_, QListViewItem* item_) const {
-    return QString::number(coll_->id()) + item_->text(0);
-  }
+  QString groupKey(const BCCollection* coll, QListViewItem* item) const;
   /**
    * Identical to the previous function.
    */
-  QString groupKey(BCCollection* coll_, BCUnitGroup* group_) const {
-    return QString::number(coll_->id()) + group_->groupName();
-  }
+  QString groupKey(const BCCollection* coll, const BCUnitGroup* group) const;
+  ParentItem* populateCollection(BCCollection* coll);
   /**
+   * Traverse all siblings at a certain depth, setting them open or closed. If depth is -1,
+   * then the depth of the @ref currentItem() is used.
+   *
+   * @param depth Desired depth
+   * @param open Whether the item should be open or not
    */
-  ParentItem* populateCollection(BCCollection* coll, const QString& groupBy=QString::null);
+  void setSiblingsOpen(int depth, bool open);
   
 protected slots:
   /**
@@ -207,12 +216,6 @@ protected slots:
    */
   void slotRMB(QListViewItem* item, const QPoint& point, int col);
   /**
-   * Handles clicking the rename menu item. The collection is not modified, but
-   * the @ref signalDoCollectionRename signal is emitted.
-   */
-  void slotHandleRename();
-  void slotHandleProperties();
-  /**
    * Handles changing the icon when an item is expanded, depended on whether it refers
    * to a collection, a group, or a unit.
    *
@@ -226,23 +229,15 @@ protected slots:
    * @param item A pointer to the collapse list item
    */
   void slotCollapsed(QListViewItem* item);
-  /**
-   * Clears the selection.
-   */
-  void slotClearSelection();
-  /**
-   * Handles emitting the signal indicating a desire to delete the unit attached
-   * to the current list item.
-   */
-  void slotHandleDelete();
 
 signals:
   /**
    * Signals that the selection has changed.
    *
+   * @param widget A pointer to the widget where the seleection changed, this widget
    * @param list A list of the selected items, may be empty.
    */
-  void signalUnitSelected(const BCUnitList& list);  
+  void signalUnitSelected(QWidget* widget, const BCUnitList& list);  
   /**
    * Signals a collection has been selected. Only emitted when selection changed, and
    * the selection item refers to a collection.
@@ -251,28 +246,20 @@ signals:
    */
   void signalCollectionSelected(int id);
   /**
-   * Signals a desire to rename the collection having a certain id.
-   *
-   * @param id The collection id
-   * @param newName The new name of the collection
-   */
-  void signalRenameCollection(int id, const QString& newName);
-  /**
    * Signals a desire to delete a unit.
    *
    * @param unit A pointer to the unit
    */
   void signalDeleteUnit(BCUnit* unit);
-  void signalModifyCollection(int);
+
 private:
   QDict<ParentItem> m_groupDict;
-  // maps a unit type, "book" to a group attribute, "title"
-  QMap<QString, QString> m_collGroupBy;
+  QString m_groupBy;
   BCUnitList m_selectedUnits;
 
-  KPopupMenu m_collMenu;
-  KPopupMenu m_groupMenu;
-  KPopupMenu m_unitMenu;
+  KPopupMenu* m_collMenu;
+  KPopupMenu* m_groupMenu;
+  KPopupMenu* m_unitMenu;
   
   QPixmap m_collOpenPixmap;
   QPixmap m_collClosedPixmap;

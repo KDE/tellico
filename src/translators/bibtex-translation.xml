@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE keymap>
+<!-- Some bibtex file may incorrectly place the braces. -->
+<!-- The first string element should be the correct representation -->
+<!-- These key mappings were taken, with permission, from the CharacterConversion.plist -->
+<!-- file in the BIbdesk program by Michael McCracken -->
+<keymap version="0.7">
+  <key char="¡">
+    <string>{!'}</string>
+  </key>
+  <key char="Å">
+    <string>{\AA}</string>
+  </key>
+  <key char="Æ">
+    <string>{\AE}</string>
+  </key>
+  <key char="Ø">
+    <string>{\O}</string>
+  </key>
+  <key char="à">
+    <string>{\`a}</string>
+    <string>\`{a}</string>
+  </key>
+  <key char="á">
+    <string>{\'a}</string>
+    <string>\'{a}</string>
+  </key>
+  <key char="â">
+    <string>{\^a}</string>
+  </key>
+  <key char="ã">
+    <string>{\~a}</string>
+  </key>
+  <key char="ä">
+    <string>{\&quot;a}</string>
+  </key>
+  <key char="å">
+    <string>{\aa}</string>
+  </key>
+  <key char="æ">
+    <string>{\ae}</string>
+  </key>
+  <key char="è">
+    <string>{\`e}</string>
+    <string>\`{e}</string>
+  </key>
+  <key char="é">
+    <string>{\'e}</string>
+    <string>\'{e}</string>
+  </key>
+  <key char="ê">
+    <string>{\^e}</string>
+  </key>
+  <key char="ë">
+    <string>{\&quot;e}</string>
+  </key>
+  <key char="ì">
+    <string>{\`i}</string>
+    <string>\`{i}</string>
+  </key>
+  <key char="í">
+    <string>{\'i}</string>
+    <string>\'{i}</string>
+  </key>
+  <key char="î">
+    <string>{\^i}</string>
+  </key>
+  <key char="ï">
+    <string>{\&quot;i}</string>
+  </key>
+  <key char="ñ">
+    <string>{\~n}</string>
+  </key>
+  <key char="ò">
+    <string>{\`o}</string>
+    <string>\`{o}</string>
+  </key>
+  <key char="ó">
+    <string>{\'o}</string>
+    <string>\'{o}</string>
+  </key>
+  <key char="ô">
+    <string>{\^o}</string>
+  </key>
+  <key char="õ">
+    <string>{\~o}</string>
+  </key>
+  <key char="ö">
+    <string>{\&quot;o}</string>
+  </key>
+  <key char="ø">
+    <string>{\o}</string>
+  </key>
+  <key char="ù">
+    <string>{\`u}</string>
+    <string>\`{u}</string>
+  </key>
+  <key char="ú">
+    <string>{\'u}</string>
+    <string>\'{u}</string>
+  </key>
+  <key char="û">
+    <string>{\^u}</string>
+  </key>
+  <key char="ü">
+    <string>{\&quot;u}</string>
+    <string>\&quot;{u}</string>
+  </key>
+  <key char="ÿ">
+    <string>{\&quot;y}</string>
+  </key>
+  <key char="oe">
+    <string>{\oe}</string>
+  </key>
+</keymap>

@@ -2,7 +2,7 @@
                                bccollection.h
                              -------------------
     begin                : Sat Sep 15 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,7 +20,9 @@
 class BCCollection;
 
 #include "bcattribute.h"
-#include "bcunitgroup.h"
+#include "bcunit.h"
+
+#include <klocale.h>
 
 #include <qstringlist.h>
 #include <qptrlist.h>
@@ -29,22 +31,19 @@ class BCCollection;
 #include <qobject.h>
 
 typedef QDict<BCUnitGroup> BCUnitGroupDict;
-typedef QPtrList<BCCollection> BCCollectionList;
-typedef QPtrListIterator<BCCollection> BCCollectionListIterator;
 
 /**
  * The BCCollection class is the primary data object, holding a list of attributes and units.
  *
  * A collection holds units of a single type, whether it be books, CDs, or whatever.
- * It has a list of attributes which apply for the whole collection, and is capable
- * of generating the XML required to represent all of its data. A unique id value
+ * It has a list of attributes which apply for the whole collection. A unique id value
  * identifies each collection object.
  *
  * @see BCUnit
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bccollection.h,v 1.5.2.2 2003/05/26 01:07:49 robby Exp $
+ * @version $Id: bccollection.h 225 2003-10-25 05:38:23Z robby $
  */
 class BCCollection : public QObject {
 Q_OBJECT
@@ -54,30 +53,34 @@ public:
     Base = 1,
     Book = 2,
     Video = 3,
-    Song = 4
+    Album = 4,
+    Bibtex = 5,
+    ComicBook = 6,
+    Wine = 7,
+    Coin = 8,
+    Stamp = 9,
+    Card = 10
   };
 
   /**
    * The constructor is only used to create custom collections. It adds a title attribute,
    * in the "General" group. The iconName is set to be the unitName;
    *
-   * @param id The id of the collection, which should be unique. The collection
-   *            does not itself guarantee uniqueness.
    * @param title The title of the collection itself
    * @param unitName The name of the units that the collection holds (not translated)
    * @param unitTitle The title of the units, which can be translated
    */
-  BCCollection(int id, const QString& title, const QString& unitName, const QString& unitTitle);
+  BCCollection(const QString& title, const QString& unitName, const QString& unitTitle);
   /**
    */
-  ~BCCollection();
+  virtual ~BCCollection();
 
   /**
    * Returns the type of the collection.
    *
    * @return The type
    */
-  virtual BCCollection::CollectionType collectionType() const;
+  virtual BCCollection::CollectionType collectionType() const { return BCCollection::Base; };
   /**
    * Returns the id of the collection.
    *
@@ -135,6 +138,12 @@ public:
    */
   const BCAttributeList& attributeList() const;
   /**
+   * Returns a reference to the list of the people collection attributes.
+   *
+   * @return The list of attributes
+   */
+  const BCAttributeList& peopleAttributeList() const;
+  /**
    * Returns a reference to the list of attribute groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.
    *
@@ -153,6 +162,18 @@ public:
    * @param name The name of the attribute
    */
   void setDefaultGroupAttribute(const QString& name);
+  /**
+   * Returns the attributes shown in the column view by default.
+   *
+   * @return The attribute list
+   */
+  const QStringList& defaultViewAttributes() const;
+  /**
+   * Sets the attributes shown in the column view by default.
+   *
+   * @param list The attribute list
+   */
+  void setDefaultViewAttributes(const QStringList& list);
   /**
    * Returns the number of units in the collection.
    *
@@ -179,17 +200,24 @@ public:
    */
   bool deleteUnit(BCUnit* unit);
   /**
+   * Adds a whole list of attributes. It's gotta be virtual since it calls
+   * @ref addAttribute, which is virtual.
+   *
+   * @param list List of attributes to add
+   * @return A boolean indicating if the attribute was added or not
+   */
+  virtual bool addAttributes(const BCAttributeList& list);
+  /**
    * Adds an attribute to the collection, unless an attribute with that name
    * already exists. The collection takes ownership of the attribute object.
-   *
-   * @see BCAttribute
    *
    * @param att A pointer to the attribute
    * @return A boolean indicating if the attribute was added or not
    */
-  bool addAttribute(BCAttribute* att);
-  bool modifyAttribute(BCAttribute* att);
-  bool deleteAttribute(BCAttribute* att, bool force=false);
+  virtual bool addAttribute(BCAttribute* att);
+  virtual bool modifyAttribute(BCAttribute* att);
+  virtual bool deleteAttribute(BCAttribute* att, bool force=false);
+  void reorderAttributes(const BCAttributeList& list);
 
   /**
    * Determines whether or not a certain value is allowed for an attribute.
@@ -199,13 +227,6 @@ public:
    * @return A boolean indicating if the value is an allowed value for that attribute
    */
   bool isAllowed(const QString& key, const QString& value) const;
-  /**
-   * Returns a boolean indicating if the collection is a custom one, i.e.
-   * different from a collection returned from one of the static methods
-   *
-   * @return A boolean indicating if the collection is custom
-   */
-  bool isCustom() const;
   /**
    * Returns a list of all the attribute names.
    *
@@ -261,7 +282,7 @@ public:
    * Returns a pointer to an attribute given its title. If none is found, a NULL pointer
    * is returned. This lookup is slower than by name.
    *
-   * @param name The attribute title
+   * @param title The attribute title
    * @return The attribute pointer
    */
   BCAttribute* const attributeByTitle(const QString& title) const;
@@ -288,36 +309,32 @@ public:
    */
   void groupModified(BCUnitGroup* group);
   /**
-   * Adds all the default attributes. A BCCollection has none.
+   * Adds all the default attributes. A BCCollection by default only has a title.
    */
-  virtual void addDefaultAttributes() { };
-  /**
-   * Returns if it is a collection of books
-   */
-  virtual bool isBook() const;
-  /**
-   * Returns if it is a collection of songs
-   */
-  virtual bool isSong() const;
-  /**
-   * Returns if it is a collection of videos
-   */
-  virtual bool isVideo() const;
+//  virtual void addDefaultAttributes() { };
 
   /**
-   * Returns the string used for empty values. This forces consistency.
-   *
-   * @return The empty string
+   * The string used for empty values. This forces consistency.
    */
-  static QString emptyGroupName();
+  static const QString s_emptyGroupName;
 
 signals:
   void signalGroupModified(BCCollection* coll, const BCUnitGroup* group);
   void signalAttributeAdded(BCCollection* coll, BCAttribute* att);
   void signalAttributeModified(BCCollection* coll, BCAttribute* newAtt, BCAttribute* oldAtt);
   void signalAttributeDeleted(BCCollection* coll, BCAttribute* att);
+  void signalAttributesReordered(BCCollection* coll);
   
 protected:
+  void removeUnitFromDicts(BCUnit* unit);
+  void populateDicts(BCUnit* unit);
+  /*
+   * Gets the preferred ID of the collection. A QIntDict is used to keep track of which
+   * id's are in use, and the actual ID is returned.
+   */
+  static int getID();
+
+private:
   /**
    * The copy constructor is private, to ensure that it's never used.
    */
@@ -326,8 +343,6 @@ protected:
    * The assignment operator is private, to ensure that it's never used.
    */
   BCCollection operator=(const BCCollection& coll);
-  void removeUnitFromDicts(BCUnit* unit);
-  void populateDicts(BCUnit* unit);
 
   int m_id;
   QString m_title;
@@ -335,17 +350,19 @@ protected:
   QString m_unitTitle;
   QString m_iconName;
   QString m_defaultGroupAttribute;
-  bool m_isCustom;
-  
+  QStringList m_defaultViewAttributes;
+  QStringList m_defaultPrintAttributes;
+
   BCAttributeList m_attributeList;
+  BCAttributeList m_peopleAttributeList; // keep separate list of attributes for people
   QDict<BCAttribute> m_attributeNameDict;
   QDict<BCAttribute> m_attributeTitleDict;
   QStringList m_attributeCategories;
   QStringList m_attributeNames;
   QStringList m_attributeTitles;
-  
+
   BCUnitList m_unitList;
-  
+
   QDict<BCUnitGroupDict> m_unitGroupDicts;
   QStringList m_unitGroups;
 };

@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.6.6
+%define version 0.7.1
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
@@ -9,11 +9,11 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 License: GPL
-Group: Graphical Desktop/KDE
+Group: Office
 Source: %{name}-%{version}.tar.gz
 URL: http://www.periapsis.org/bookcase/
 Requires: kdebase libxslt1 >= 1.0.19
-BuildRequires: gcc-c++ libqt3-devel kdelibs-devel libxslt1-devel >= 1.0.19
+BuildRequires: kdelibs-devel libxslt-devel >= 1.0.19
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
@@ -25,32 +25,35 @@ rm -rf $RPM_BUILD_ROOT
 %setup -q
 
 %build
-./configure --disable-debug --enable-final
+%configure2_5x --disable-debug --enable-final --disable-rpath
 make
 
 %install
-#mkdir -p $RPM_BUILD_ROOT%{_bindir}
-#mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
-#mkdir -p $RPM_BUILD_ROOT%{_datadir}/applnk/Applications
+rm -Rf %{buildroot}
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/pics
 %makeinstall_std
-# why does this happen?
-#mv $RPM_BUILD_ROOT/usr/bin/i586-mandrake-linux-gnu-bookcase $RPM_BUILD_ROOT/usr/bin/bookcase
 
-(cd $RPM_BUILD_ROOT
-mkdir -p ./%{_menudir}
-cat > ./%{_menudir}/%{name} <<EOF
+mkdir -p %{buildroot}/%{_menudir}
+cat > %{buildroot}/%{_menudir}/%{name} <<EOF
 ?package(%{name}):\
-command="%_bindir/bookcase"\
-icon="%{name}.png"\
-kde_filename="bookcase"\
-kde_command="bookcase -caption \"%c\" %i %m"\
-title="Bookcase"\
-longtitle="Book Collection Manager"\
-needs="kde"\
-section="Office/Accessories"
+command="%_bindir/bookcase" \
+icon="%{name}.png" \
+kde_filename="bookcase" \
+kde_command="bookcase -caption \"%c\" %i %m" \
+title="Bookcase" \
+longtitle="Book Collection Manager" \
+needs="kde" \
+section="Office/Accessories" \
+mimetypes="application/x-bookcase"
 EOF
-)  
+
+#icons too
+mkdir -p %{buildroot}/{%{_miconsdir},%{_liconsdir}}
+install -m644 icons/hi32-app-bookcase.png %{buildroot}/%{_iconsdir}/%{name}.png
+install -m644 icons/hi32-app-bookcase.png %{buildroot}/%{_liconsdir}/%{name}.png
+install -m644 icons/hi16-app-bookcase.png %{buildroot}/%{_miconsdir}/%{name}.png
+
+%find_lang %{name}
 
 %post
 %{update_menus}
@@ -58,7 +61,10 @@ EOF
 %postun
 %{clean_menus}
 
-%files
+%clean 
+rm -rf $RPM_BUILD_ROOT
+
+%files -f %{name}.lang
 %defattr (-,root,root)
 %doc AUTHORS COPYING ChangeLog INSTALL README TODO
 %{_bindir}/*
@@ -68,14 +74,26 @@ EOF
 %{_libdir}/menu/*
 %{_datadir}/apps/%{name}/
 %{_iconsdir}/*/*/*/*.png
-%{_datadir}/locale/*/*/*
+%{_iconsdir}/%{name}.png
+%{_miconsdir}/%{name}.png
+%{_liconsdir}/%{name}.png
 %{_datadir}/doc/HTML/*/bookcase/*
 
-%clean 
-rm -rf $RPM_BUILD_ROOT
-
 %changelog
-* Sat Aug 16 2003 Robby Stephenson <robby@periapsis.org> 0.6.6-1rls
+* Sun Nov  9 2003 Robby Stephenson <robby@periapsis.org> 0.7.1-1rls
+- Version 0.7.1
+
+* Sat Nov  8 2003 Robby Stephenson <robby@periapsis.org> 0.7-1rls
+- Version 0.7
+
+* Wed Nov  5 2003 Robby Stephenson <robby@periapsis.org> 0.7pre2-1rls
+- Version 0.7pre2
+
+* Sun Nov  2 2003 Robby Stephenson <robby@periapsis.org> 0.7pre1-1rls
+- Version 0.7pre1
+- Add cleanups from Buchan Milne for Mandrake contribs.
+
+* Tue Jul 22 2003 Robby Stephenson <robby@periapsis.org> 0.6.6-1rls
 - Version 0.6.6
 
 * Mon Jul 21 2003 Robby Stephenson <robby@periapsis.org> 0.6.5-1rls

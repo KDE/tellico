@@ -2,7 +2,7 @@
                          bookcase.h
                      -------------------
         begin        : Wed Aug 29 21:00:54 CEST 2001
-        copyright    : (C) 2001 by Robby Stephenson
+        copyright    : (C) 2001, 2002, 2003 by Robby Stephenson
         email        : robby@periapsis.org
  ***************************************************************************/
 
@@ -26,7 +26,6 @@ class BookcaseDoc;
 class BCDetailedListView;
 class BCUnitEditWidget;
 class BCGroupView;
-class BCUnit;
 class ConfigDialog;
 class BCCollection;
 class FindDialog;
@@ -34,21 +33,24 @@ class BCUnitItem;
 class LookupDialog;
 class BCLineEditAction;
 class BCFilterDialog;
-class BCCollectionPropDialog;
+class BCCollectionFieldsDialog;
+class BookcaseController;
 
 class KProgress;
 class KToolBar;
+class KURL;
+class KAction;
+class KSelectAction;
+class KToggleAction;
+class KRecentFilesAction;
+class KActionMenu;
 
 class QCloseEvent;
 class QSplitter;
 
-// include files for KDE
-#include <kapplication.h>
 #include <kmainwindow.h>
-#include <kaccel.h>
-#include <kaction.h>
+#include <kdeversion.h>
 
-// include files for Qt
 #include <qvaluelist.h>
 
 /**
@@ -62,10 +64,12 @@ class QSplitter;
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: bookcase.h,v 1.4 2003/05/03 05:39:08 robby Exp $
+ * @version $Id: bookcase.h 260 2003-11-05 06:06:18Z robby $
  */
 class Bookcase : public KMainWindow {
 Q_OBJECT
+
+friend class BookcaseController;
 
 public:
   /**
@@ -87,13 +91,26 @@ public:
    * @return The item pointer
    */
   BCUnitItem* selectedOrFirstItem();
-  void readCollectionOptions(BCCollection* coll);
+  /**
+   * @return Returns the name of the field being used to group the entries.
+   */
+  QStringList groupBy() const;
+  /**
+   * @return Returns a list of the names of the fields being used to sort the entries.
+   */
+  QStringList sortTitles() const;
+  /**
+   * @return Returns the name of the fields currently visible in the column view.
+   */
+  QStringList visibleColumns() const;
 
 public slots:
   /**
    * Cleans up everything and then opens a new document.
+   *
+   * @param type Type of collection to add
    */
-  void slotFileNew();
+  void slotFileNew(int type);
   /**
    * Opens a file and loads it into the document
    */
@@ -119,7 +136,7 @@ public slots:
    */
   void slotFileSaveAs();
   /**
-   * Prints the current document. Not yet implemented!
+   * Prints the current document.
    */
   void slotFilePrint();
   /**
@@ -156,9 +173,21 @@ public slots:
    */
   void slotToggleToolBar();
   /**
-   * Toggles the statusbars
+   * Toggles the collection toolbar. Not needed for KDE 3.1 or greater.
+   */
+  void slotToggleCollectionBar();
+  /**
+   * Toggles the statusbar. Not needed for KDE 3.2 or greater.
    */
   void slotToggleStatusBar();
+  /**
+   * Toggles the group widget.
+   */
+  void slotToggleGroupWidget();
+  /**
+   * Toggles the edit widget.
+   */
+  void slotToggleEditWidget();
   /**
    * Shows the configuration dialog for the application.
    */
@@ -168,11 +197,6 @@ public slots:
    */
   void slotHideConfigDialog();
   /**
-   * Shows the new collection dialog and then adds it to the document.
-   * Not yet implemented!
-   */
-//  void slotFileNewCollection();
-  /**
    * Changes the statusbar contents for the standard label permanently,
    * used to indicate current actions being made.
    *
@@ -180,9 +204,23 @@ public slots:
    */
   void slotStatusMsg(const QString& text);
   /**
-   * Updates the unit count int he status bar.
+   * Shows the configuration window for the toolbars.
    */
-  void slotUnitCount();
+  void slotConfigToolbar();
+  /**
+   * Updates the toolbars;
+   */
+  void slotNewToolbarConfig();
+  /**
+   * Shows the configuration window for the key bindgins.
+   */
+  void slotConfigKeys();
+  /**
+   * Updates the unit count in the status bar.
+   *
+   * @param count The number of units currently selected
+   */
+  void slotUnitCount(int count);
   /**
    * Updates the progress bar in the status bar.
    *
@@ -201,37 +239,17 @@ public slots:
    */
   void slotChangeGrouping();
   /**
-   * When a collection is added to the document, certain actions need to be taken
-   * by the parent app. The colleection toolbar is updated, the unit count is set, and
-   * the collection's modified signal is connected to the @ref BCGroupView widget.
+   * Imports data.
    *
-   * @param coll A pointer to the collection being added
+   * @param format The import format
    */
-  void slotUpdateCollection(BCCollection* coll);
+  void slotFileImport(int format);
   /**
-   * Toggles the collection toolbar. Not needed for KDE 3.1 or greater.
+   * Exports the current document.
+   *
+   * @param format The export format
    */
-  void slotToggleCollectionBar();
-  /**
-   * Imports a bibtex file.
-   */
-  void slotImportBibtex();
-  /**
-   * Imports a bibtexml file.
-   */
-  void slotImportBibtexml();
-  /**
-   * Exports the document into Bibtex format.
-   */
-  void slotExportBibtex();
-  /**
-   * Exports the document into Bibtexml format.
-   */
-  void slotExportBibtexml();
-  /**
-   * Exports using any XSLT file.
-   */
-  void slotExportXSLT();
+  void slotFileExport(int format);
   /**
    * Checks to see if the last file should be opened, or opens a command-line file
    */
@@ -253,13 +271,23 @@ public slots:
    */
   void slotHideFilterDialog();
   /**
-   * Shows the collection propreties dialog for the application.
+   * Shows the collection properties dialog for the application.
    */
-  void slotShowCollectionPropertiesDialog(int id=0);
+  void slotShowCollectionFieldsDialog();
   /**
    * Hides the collection properties dialog for the application.
    */
-  void slotHideCollectionPropertiesDialog();
+  void slotHideCollectionFieldsDialog();
+  /**
+   * Shows the "Tip of the Day" dialog.
+   *
+   * @param force Whether the configuration setting should be ignored
+   */
+  void slotShowTipOfDay(bool force=true);
+  /**
+   * Shows the string macro editor dialog.
+   */
+  void slotEditStringMacros();
 
 private:
   /**
@@ -346,14 +374,12 @@ private:
    * @param html The HTML string representing the doc to print
    */
   void doPrint(const QString& html);
-
-  bool exportUsingXSLT(const QString& xsltFileName, const QString& filter, bool locale=false);
   
   void XSLTError();
 
   void FileError(const QString& filename);
   
-protected slots:
+private slots:
   /**
    * Updates the actions when a file is opened.
    */
@@ -362,6 +388,7 @@ protected slots:
    * Updates the save action and the caption when the document is modified.
    */
   void slotEnableModifiedActions(bool modified = true);
+  void readCollectionOptions(BCCollection* coll);
   /**
    * Saves the options relevant for a collection. I was having problems with the collection
    * being destructed before I could save info.
@@ -380,38 +407,37 @@ private:
 
   KConfig* m_config;
 
-  KAction* m_fileNew;
-  KAction* m_fileOpen;
   KRecentFilesAction* m_fileOpenRecent;
   KAction* m_fileSave;
   KAction* m_fileSaveAs;
   KAction* m_filePrint;
-  KAction* m_fileQuit;
-  KAction* m_editCut;
-  KAction* m_editCopy;
-  KAction* m_editPaste;
-  KAction* m_editFind;
-  KAction* m_editFindNext;
-  KAction* m_editFields;
-  KToggleAction* m_toggleToolBar;
-  KToggleAction* m_toggleStatusBar;
-  KAction* m_preferences;
-
-//  KAction* m_fileNewCollection;
-  KAction* m_importBibtex;
-  KAction* m_importBibtexml;
+  KActionMenu* m_fileImportMenu;
+  KActionMenu* m_fileExportMenu;
   KAction* m_exportBibtex;
   KAction* m_exportBibtexml;
-  KAction* m_exportXSLT;
-  KAction* m_lookup;
-  KAction* m_filter;
-  KSelectAction* m_unitGrouping;
+//  KAction* m_editCut;
+//  KAction* m_editCopy;
+//  KAction* m_editPaste;
+  KAction* m_editFind;
+  KAction* m_editFindNext;
+  KAction* m_editConvertBibtex;
+  KAction* m_editBibtexMacros;
+  KToggleAction* m_toggleStatusBar;
+#if KDE_VERSION < 306
+  KToggleAction* m_toggleToolBar;
   KToggleAction* m_toggleCollectionBar;
+#endif
+  KToggleAction* m_toggleGroupWidget;
+  KToggleAction* m_toggleEditWidget;
+
+//  KAction* m_lookup;
+  KSelectAction* m_unitGrouping;
   BCLineEditAction* m_quickFilter;
 
   QSplitter* m_split;
 
   KProgress* m_progress;
+  BookcaseController* m_controller;
   BCDetailedListView* m_detailedView;
   BCUnitEditWidget* m_editWidget;
   BCGroupView* m_groupView;
@@ -419,7 +445,11 @@ private:
   FindDialog* m_findDlg;
   LookupDialog* m_lookupDlg;
   BCFilterDialog* m_filterDlg;
-  BCCollectionPropDialog* m_collPropDlg;
+  BCCollectionFieldsDialog* m_collFieldsDlg;
+
+  // the loading process goes through several steps, keep track of the factor
+  unsigned m_currentStep;
+  unsigned m_maxSteps;
 };
  
 #endif // BOOKCASE_H

@@ -2,7 +2,7 @@
                               isbnvalidator.h
                              -------------------
     begin                : Sun Oct 6 2002
-    copyright            : (C) 2002 by Robby Stephenson
+    copyright            : (C) 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,17 +18,17 @@
 #define ISBNVALIDATOR_H
 
 #include <qvalidator.h>
-#include <qbitarray.h>
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h,v 1.3 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: isbnvalidator.h 241 2003-11-04 05:56:49Z robby $
  *
- * Parts of this card are based on Java code
+ * Parts of this code are based on Java code
  * copyright (c) 1998-2002 Roedy Green, Canadian Mind Products which
  * may be copied and used freely for any purpose but military.
  *
  * @see http://mindprod.com/isbn.html
+ * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
  * @see http://www.eblong.com/zarf/bookscan/
  * @see http://doc.trolltech.com/qq/qq01-seriously-weird-qregexp.html
  */
@@ -55,11 +55,11 @@ public:
    *
    * @param input The raw string, hyphens included
    */
-  void fixup(QString& input) const;
+  virtual void fixup(QString& input) const;
 
 private:
   /**
-   * This function calculates the checksum and adds it to the number. The
+   * This function calculates and returns the ISBN checksum. The
    * algorithm is based on some code by Andrew Plotkin, available at 
    * http://www.eblong.com/zarf/bookscan/
    *
@@ -67,7 +67,7 @@ private:
    *
    * @param input The raw string, with no hyphens
    */
-  void checkSum(QString& input) const;
+  QChar checkSum(const QString& input) const;
   
   /**
    * This function inserts hyphens. The code is heavily based on the Java ISBN
@@ -111,20 +111,11 @@ private:
    *
    * @param input The raw string, with no hyphens
    */
-  void insertDashes(QString& input) const;
-#if 0
+  void insertDashesNonEnglish(QString& input) const;
   /**
-   * This function takes the list of valid group numbers and populates a
-   * QBitArray. This is necessary since not all groups have the same number
-   * of digits.
-   */
-  void buildValidGroupLookup();
-
-  QBitArray validGroupLookup;
-
-  static const long validGroups[];
-  static const int numGroups;
-#endif
+   * See previous @ref insertDashesNonEnglish()
+  */
+  void insertDashesEnglish(QString& input) const;
 };
 
 #endif

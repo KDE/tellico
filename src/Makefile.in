@@ -40,6 +40,7 @@ build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
 ACLOCAL = @ACLOCAL@
+ALLOCA = @ALLOCA@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
@@ -119,6 +120,7 @@ LIBZ = @LIBZ@
 LIB_KAB = @LIB_KAB@
 LIB_KABC = @LIB_KABC@
 LIB_KDECORE = @LIB_KDECORE@
+LIB_KDEPIM = @LIB_KDEPIM@
 LIB_KDEPRINT = @LIB_KDEPRINT@
 LIB_KDEUI = @LIB_KDEUI@
 LIB_KFILE = @LIB_KFILE@
@@ -128,12 +130,14 @@ LIB_KIO = @LIB_KIO@
 LIB_KPARTS = @LIB_KPARTS@
 LIB_KSPELL = @LIB_KSPELL@
 LIB_KSYCOCA = @LIB_KSYCOCA@
+LIB_KUTILS = @LIB_KUTILS@
 LIB_POLL = @LIB_POLL@
 LIB_QPE = @LIB_QPE@
 LIB_QT = @LIB_QT@
 LIB_SMB = @LIB_SMB@
 LIB_X11 = @LIB_X11@
 LIB_XEXT = @LIB_XEXT@
+LIB_XRENDER = @LIB_XRENDER@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
@@ -143,7 +147,6 @@ MOC = @MOC@
 MSGFMT = @MSGFMT@
 NOOPT_CFLAGS = @NOOPT_CFLAGS@
 NOOPT_CXXFLAGS = @NOOPT_CXXFLAGS@
-NOREPO = @NOREPO@
 OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
@@ -152,11 +155,11 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PERL = @PERL@
 QTE_NORTTI = @QTE_NORTTI@
 QT_INCLUDES = @QT_INCLUDES@
 QT_LDFLAGS = @QT_LDFLAGS@
 RANLIB = @RANLIB@
-REPO = @REPO@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -175,6 +178,7 @@ X_EXTRA_LIBS = @X_EXTRA_LIBS@
 X_INCLUDES = @X_INCLUDES@
 X_LDFLAGS = @X_LDFLAGS@
 X_PRE_LIBS = @X_PRE_LIBS@
+X_RPATH = @X_RPATH@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_RANLIB = @ac_ct_RANLIB@
@@ -226,6 +230,7 @@ kde_styledir = @kde_styledir@
 kde_templatesdir = @kde_templatesdir@
 kde_wallpaperdir = @kde_wallpaperdir@
 kde_widgetdir = @kde_widgetdir@
+kdeinitdir = @kdeinitdir@
 libdir = @libdir@
 libexecdir = @libexecdir@
 localstatedir = @localstatedir@
@@ -249,10 +254,12 @@ x_libraries = @x_libraries@
 ####### kdevelop will overwrite this part!!! (begin)##########
 bin_PROGRAMS = bookcase
 
-bookcase_SOURCES = bccollectionpropdialog.cpp bcattributewidget.cpp kwidgetlister.cpp bcfilterdialog.cpp bcfilter.cpp bcunititem.cpp songcollection.cpp videocollection.cpp bookcollection.cpp xslthandler.cpp bclabelaction.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp 
-bookcase_LDADD = -lkdeprint -lxml2 -lxslt -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET)
+bookcase_SOURCES = bccollectionfieldsdialog.cpp stringmacrodialog.cpp bclabelaction.cpp bcfilehandler.cpp bcimportdialog.cpp bcexportdialog.cpp bccollectionfactory.cpp bookcasecontroller.cpp bcattributewidget.cpp kwidgetlister.cpp bcfilterdialog.cpp bcfilter.cpp bcunititem.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp 
+bookcase_LDADD = ./collections/libcollections.a ./translators/libtranslators.a ./translators/btparse/libbtparse.a -lkdeprint -lxml2 -lxslt -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET)
 
-EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcasedoc.cpp bookcasedoc.h bookcaseui.rc bcattribute.cpp bcattribute.h bccollection.cpp bccollection.h bcgroupview.cpp bcgroupview.h bcdetailedlistview.cpp bcdetailedlistview.h bctabcontrol.cpp bctabcontrol.h bcunit.cpp bcuniteditwidget.cpp bcuniteditwidget.h bcunit.h bcunititem.h configdialog.cpp configdialog.h finddialog.cpp finddialog.h isbnvalidator.cpp isbnvalidator.h bcunitgroup.h bclabelaction.cpp bclabelaction.h xslthandler.cpp xslthandler.h bookcollection.cpp bookcollection.h videocollection.cpp videocollection.h songcollection.cpp songcollection.h bcutils.h bcunititem.cpp bcfilter.cpp bcfilter.h bcfilterdialog.cpp bcfilterdialog.h kwidgetlister.cpp kwidgetlister.h bcattributewidget.cpp bcattributewidget.h bccollectionpropdialog.h bccollectionpropdialog.cpp 
+SUBDIRS = collections translators 
+
+EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcasedoc.cpp bookcasedoc.h bookcaseui.rc bcattribute.cpp bcattribute.h bccollection.cpp bccollection.h bcgroupview.cpp bcgroupview.h bcdetailedlistview.cpp bcdetailedlistview.h bctabcontrol.cpp bctabcontrol.h bcunit.cpp bcuniteditwidget.cpp bcuniteditwidget.h bcunit.h bcunititem.h configdialog.cpp configdialog.h finddialog.cpp finddialog.h isbnvalidator.cpp isbnvalidator.h bcutils.h bcunititem.cpp bcfilter.cpp bcfilter.h bcfilterdialog.cpp bcfilterdialog.h kwidgetlister.cpp kwidgetlister.h bcattributewidget.cpp bcattributewidget.h bookcasecontroller.cpp bookcasecontroller.h bccollectionfactory.cpp bccollectionfactory.h bcexportdialog.h bcexportdialog.cpp bcimportdialog.h bcimportdialog.cpp bcfilehandler.cpp bcfilehandler.h bclabelaction.cpp bclabelaction.h stringmacrodialog.cpp stringmacrodialog.h bccollectionfieldsdialog.cpp bccollectionfieldsdialog.h 
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -295,37 +302,41 @@ CONFIG_CLEAN_FILES =
 bin_PROGRAMS = bookcase$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_bookcase_OBJECTS = bccollectionpropdialog.$(OBJEXT) \
-	bcattributewidget.$(OBJEXT) kwidgetlister.$(OBJEXT) \
-	bcfilterdialog.$(OBJEXT) bcfilter.$(OBJEXT) \
-	bcunititem.$(OBJEXT) songcollection.$(OBJEXT) \
-	videocollection.$(OBJEXT) bookcollection.$(OBJEXT) \
-	xslthandler.$(OBJEXT) bclabelaction.$(OBJEXT) \
-	isbnvalidator.$(OBJEXT) finddialog.$(OBJEXT) \
-	configdialog.$(OBJEXT) bcuniteditwidget.$(OBJEXT) \
-	bcunit.$(OBJEXT) bctabcontrol.$(OBJEXT) \
-	bcdetailedlistview.$(OBJEXT) bcgroupview.$(OBJEXT) \
-	bccollection.$(OBJEXT) bcattribute.$(OBJEXT) \
-	bookcasedoc.$(OBJEXT) bookcase.$(OBJEXT) main.$(OBJEXT)
+am_bookcase_OBJECTS = bccollectionfieldsdialog.$(OBJEXT) \
+	stringmacrodialog.$(OBJEXT) bclabelaction.$(OBJEXT) \
+	bcfilehandler.$(OBJEXT) bcimportdialog.$(OBJEXT) \
+	bcexportdialog.$(OBJEXT) bccollectionfactory.$(OBJEXT) \
+	bookcasecontroller.$(OBJEXT) bcattributewidget.$(OBJEXT) \
+	kwidgetlister.$(OBJEXT) bcfilterdialog.$(OBJEXT) \
+	bcfilter.$(OBJEXT) bcunititem.$(OBJEXT) isbnvalidator.$(OBJEXT) \
+	finddialog.$(OBJEXT) configdialog.$(OBJEXT) \
+	bcuniteditwidget.$(OBJEXT) bcunit.$(OBJEXT) \
+	bctabcontrol.$(OBJEXT) bcdetailedlistview.$(OBJEXT) \
+	bcgroupview.$(OBJEXT) bccollection.$(OBJEXT) \
+	bcattribute.$(OBJEXT) bookcasedoc.$(OBJEXT) bookcase.$(OBJEXT) \
+	main.$(OBJEXT)
 #>- bookcase_OBJECTS = $(am_bookcase_OBJECTS)
-#>+ 16
+#>+ 17
 bookcase_final_OBJECTS = bookcase.all_cpp.o 
-bookcase_nofinal_OBJECTS = bccollectionpropdialog.$(OBJEXT) \
-	bcattributewidget.$(OBJEXT) kwidgetlister.$(OBJEXT) \
-	bcfilterdialog.$(OBJEXT) bcfilter.$(OBJEXT) \
-	bcunititem.$(OBJEXT) songcollection.$(OBJEXT) \
-	videocollection.$(OBJEXT) bookcollection.$(OBJEXT) \
-	xslthandler.$(OBJEXT) bclabelaction.$(OBJEXT) \
-	isbnvalidator.$(OBJEXT) finddialog.$(OBJEXT) \
-	configdialog.$(OBJEXT) bcuniteditwidget.$(OBJEXT) \
-	bcunit.$(OBJEXT) bctabcontrol.$(OBJEXT) \
-	bcdetailedlistview.$(OBJEXT) bcgroupview.$(OBJEXT) \
-	bccollection.$(OBJEXT) bcattribute.$(OBJEXT) \
-	bookcasedoc.$(OBJEXT) bookcase.$(OBJEXT) main.$(OBJEXT)\
-configdialog.moc.o bookcasedoc.moc.o bookcase.moc.o bclabelaction.moc.o videocollection.moc.o bccollectionpropdialog.moc.o finddialog.moc.o bcfilterdialog.moc.o bccollection.moc.o songcollection.moc.o bcdetailedlistview.moc.o bookcollection.moc.o bcattributewidget.moc.o bcgroupview.moc.o bctabcontrol.moc.o bcuniteditwidget.moc.o 
+bookcase_nofinal_OBJECTS = bccollectionfieldsdialog.$(OBJEXT) \
+	stringmacrodialog.$(OBJEXT) bclabelaction.$(OBJEXT) \
+	bcfilehandler.$(OBJEXT) bcimportdialog.$(OBJEXT) \
+	bcexportdialog.$(OBJEXT) bccollectionfactory.$(OBJEXT) \
+	bookcasecontroller.$(OBJEXT) bcattributewidget.$(OBJEXT) \
+	kwidgetlister.$(OBJEXT) bcfilterdialog.$(OBJEXT) \
+	bcfilter.$(OBJEXT) bcunititem.$(OBJEXT) isbnvalidator.$(OBJEXT) \
+	finddialog.$(OBJEXT) configdialog.$(OBJEXT) \
+	bcuniteditwidget.$(OBJEXT) bcunit.$(OBJEXT) \
+	bctabcontrol.$(OBJEXT) bcdetailedlistview.$(OBJEXT) \
+	bcgroupview.$(OBJEXT) bccollection.$(OBJEXT) \
+	bcattribute.$(OBJEXT) bookcasedoc.$(OBJEXT) bookcase.$(OBJEXT) \
+	main.$(OBJEXT)\
+bclabelaction.moc.o bcfilterdialog.moc.o bcexportdialog.moc.o bccollection.moc.o bcimportdialog.moc.o stringmacrodialog.moc.o finddialog.moc.o bookcasedoc.moc.o bookcase.moc.o configdialog.moc.o bcuniteditwidget.moc.o bctabcontrol.moc.o bookcasecontroller.moc.o bcgroupview.moc.o bcattributewidget.moc.o bccollectionfieldsdialog.moc.o bcdetailedlistview.moc.o 
 @KDE_USE_FINAL_FALSE@bookcase_OBJECTS = $(bookcase_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@bookcase_OBJECTS = $(bookcase_final_OBJECTS)
-bookcase_DEPENDENCIES =
+bookcase_DEPENDENCIES = ./collections/libcollections.a \
+	./translators/libtranslators.a \
+	./translators/btparse/libbtparse.a
 
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/admin/depcomp
@@ -333,67 +344,73 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/bcattribute.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcattributewidget.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bccollection.Po \
-#>- @AMDEP_TRUE@	./$(DEPDIR)/bccollectionpropdialog.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bccollectionfactory.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bccollectionfieldsdialog.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcdetailedlistview.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bcexportdialog.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bcfilehandler.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcfilter.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcfilterdialog.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcgroupview.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bcimportdialog.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bclabelaction.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bctabcontrol.Po ./$(DEPDIR)/bcunit.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcuniteditwidget.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcunititem.Po ./$(DEPDIR)/bookcase.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bookcasecontroller.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bookcasedoc.Po \
-#>- @AMDEP_TRUE@	./$(DEPDIR)/bookcollection.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/finddialog.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/kwidgetlister.Po ./$(DEPDIR)/main.Po \
-#>- @AMDEP_TRUE@	./$(DEPDIR)/songcollection.Po \
-#>- @AMDEP_TRUE@	./$(DEPDIR)/videocollection.Po \
-#>- @AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po
-#>+ 43
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/configdialog.moc.P $(DEPDIR)/bookcasedoc.moc.P $(DEPDIR)/bookcase.moc.P $(DEPDIR)/bclabelaction.moc.P $(DEPDIR)/videocollection.moc.P $(DEPDIR)/bccollectionpropdialog.moc.P $(DEPDIR)/finddialog.moc.P $(DEPDIR)/bcfilterdialog.moc.P $(DEPDIR)/bccollection.moc.P $(DEPDIR)/songcollection.moc.P $(DEPDIR)/bcdetailedlistview.moc.P $(DEPDIR)/bookcollection.moc.P $(DEPDIR)/bcattributewidget.moc.P $(DEPDIR)/bcgroupview.moc.P $(DEPDIR)/bctabcontrol.moc.P $(DEPDIR)/bcuniteditwidget.moc.P  $(DEPDIR)/bookcase.all_cpp.P  ./$(DEPDIR)/bcattribute.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/stringmacrodialog.Po
+#>+ 47
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/bclabelaction.moc.P $(DEPDIR)/bcfilterdialog.moc.P $(DEPDIR)/bcexportdialog.moc.P $(DEPDIR)/bccollection.moc.P $(DEPDIR)/bcimportdialog.moc.P $(DEPDIR)/stringmacrodialog.moc.P $(DEPDIR)/finddialog.moc.P $(DEPDIR)/bookcasedoc.moc.P $(DEPDIR)/bookcase.moc.P $(DEPDIR)/configdialog.moc.P $(DEPDIR)/bcuniteditwidget.moc.P $(DEPDIR)/bctabcontrol.moc.P $(DEPDIR)/bookcasecontroller.moc.P $(DEPDIR)/bcgroupview.moc.P $(DEPDIR)/bcattributewidget.moc.P $(DEPDIR)/bccollectionfieldsdialog.moc.P $(DEPDIR)/bcdetailedlistview.moc.P  $(DEPDIR)/bookcase.all_cpp.P  ./$(DEPDIR)/bcattribute.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcattributewidget.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollection.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollectionpropdialog.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollectionfactory.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollectionfieldsdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcdetailedlistview.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcexportdialog.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcfilehandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcfilter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcfilterdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcgroupview.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcimportdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bclabelaction.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bctabcontrol.Po ./$(DEPDIR)/bcunit.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcuniteditwidget.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcunititem.Po ./$(DEPDIR)/bookcase.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasecontroller.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasedoc.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/finddialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/kwidgetlister.Po ./$(DEPDIR)/main.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/songcollection.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/videocollection.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/configdialog.moc.P $(DEPDIR)/bookcasedoc.moc.P $(DEPDIR)/bookcase.moc.P $(DEPDIR)/bclabelaction.moc.P $(DEPDIR)/videocollection.moc.P $(DEPDIR)/bccollectionpropdialog.moc.P $(DEPDIR)/finddialog.moc.P $(DEPDIR)/bcfilterdialog.moc.P $(DEPDIR)/bccollection.moc.P $(DEPDIR)/songcollection.moc.P $(DEPDIR)/bcdetailedlistview.moc.P $(DEPDIR)/bookcollection.moc.P $(DEPDIR)/bcattributewidget.moc.P $(DEPDIR)/bcgroupview.moc.P $(DEPDIR)/bctabcontrol.moc.P $(DEPDIR)/bcuniteditwidget.moc.P  ./$(DEPDIR)/bcattribute.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/stringmacrodialog.Po
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/bclabelaction.moc.P $(DEPDIR)/bcfilterdialog.moc.P $(DEPDIR)/bcexportdialog.moc.P $(DEPDIR)/bccollection.moc.P $(DEPDIR)/bcimportdialog.moc.P $(DEPDIR)/stringmacrodialog.moc.P $(DEPDIR)/finddialog.moc.P $(DEPDIR)/bookcasedoc.moc.P $(DEPDIR)/bookcase.moc.P $(DEPDIR)/configdialog.moc.P $(DEPDIR)/bcuniteditwidget.moc.P $(DEPDIR)/bctabcontrol.moc.P $(DEPDIR)/bookcasecontroller.moc.P $(DEPDIR)/bcgroupview.moc.P $(DEPDIR)/bcattributewidget.moc.P $(DEPDIR)/bccollectionfieldsdialog.moc.P $(DEPDIR)/bcdetailedlistview.moc.P  ./$(DEPDIR)/bcattribute.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcattributewidget.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollection.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollectionpropdialog.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollectionfactory.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollectionfieldsdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcdetailedlistview.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcexportdialog.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcfilehandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcfilter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcfilterdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcgroupview.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcimportdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bclabelaction.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bctabcontrol.Po ./$(DEPDIR)/bcunit.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcuniteditwidget.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcunititem.Po ./$(DEPDIR)/bookcase.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasecontroller.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcasedoc.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/finddialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/kwidgetlister.Po ./$(DEPDIR)/main.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/songcollection.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/videocollection.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/stringmacrodialog.Po
 
 #>- CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 #>- 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -416,12 +433,25 @@ CXXLINK = $(LIBTOOL) --mode=link --tag=CXX $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $
 DIST_SOURCES = $(bookcase_SOURCES)
 DATA = $(rc_DATA)
 
+
+#>- RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
+#>- 	ps-recursive install-info-recursive uninstall-info-recursive \
+#>- 	all-recursive install-data-recursive install-exec-recursive \
+#>- 	installdirs-recursive install-recursive uninstall-recursive \
+#>- 	check-recursive installcheck-recursive
+#>+ 5
+RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
+	ps-recursive install-info-recursive uninstall-info-recursive \
+	all-recursive install-data-recursive install-exec-recursive \
+	installdirs-recursive install-recursive uninstall-recursive \
+	check-recursive installcheck-recursive bcheck-recursive
 DIST_COMMON = $(srcdir)/../admin/Doxyfile.am Makefile.am Makefile.in
+DIST_SUBDIRS = $(SUBDIRS)
 SOURCES = $(bookcase_SOURCES)
 
-#>- all: all-am
+#>- all: all-recursive
 #>+ 1
-all: docs-am  all-am
+all: docs-am  all-recursive
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
@@ -476,27 +506,29 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcattribute.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcattributewidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bccollection.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bccollectionpropdialog.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bccollectionfactory.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bccollectionfieldsdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcdetailedlistview.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcexportdialog.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcfilehandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcfilter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcfilterdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcgroupview.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcimportdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bclabelaction.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bctabcontrol.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcunit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcuniteditwidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcunititem.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcase.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcasecontroller.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcasedoc.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcollection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/configdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/finddialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/isbnvalidator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/kwidgetlister.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/songcollection.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/videocollection.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xslthandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/stringmacrodialog.Po@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -562,6 +594,65 @@ uninstall-rcDATA:
 	  rm -f $(DESTDIR)$(rcdir)/$$f; \
 	done
 
+# This directory's subdirectories are mostly independent; you can cd
+# into them and run `make' without going through this Makefile.
+# To change the values of `make' variables: instead of editing Makefiles,
+# (1) if the variable is set in `config.status', edit `config.status'
+#     (which will cause the Makefiles to be regenerated when you run `make');
+# (2) otherwise, pass the desired values on the `make' command line.
+$(RECURSIVE_TARGETS):
+	@set fnord $$MAKEFLAGS; amf=$$2; \
+	dot_seen=no; \
+	target=`echo $@ | sed s/-recursive//`; \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  echo "Making $$target in $$subdir"; \
+	  if test "$$subdir" = "."; then \
+	    dot_seen=yes; \
+	    local_target="$$target-am"; \
+	  else \
+	    local_target="$$target"; \
+	  fi; \
+	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
+	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
+	done; \
+	if test "$$dot_seen" = "no"; then \
+	  $(MAKE) $(AM_MAKEFLAGS) "$$target-am" || exit 1; \
+	fi; test -z "$$fail"
+
+mostlyclean-recursive clean-recursive distclean-recursive \
+maintainer-clean-recursive:
+	@set fnord $$MAKEFLAGS; amf=$$2; \
+	dot_seen=no; \
+	case "$@" in \
+	  distclean-* | maintainer-clean-*) list='$(DIST_SUBDIRS)' ;; \
+	  *) list='$(SUBDIRS)' ;; \
+	esac; \
+	rev=''; for subdir in $$list; do \
+	  if test "$$subdir" = "."; then :; else \
+	    rev="$$subdir $$rev"; \
+	  fi; \
+	done; \
+	rev="$$rev ."; \
+	target=`echo $@ | sed s/-recursive//`; \
+	for subdir in $$rev; do \
+	  echo "Making $$target in $$subdir"; \
+	  if test "$$subdir" = "."; then \
+	    local_target="$$target-am"; \
+	  else \
+	    local_target="$$target"; \
+	  fi; \
+	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
+	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
+	done && test -z "$$fail"
+tags-recursive:
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  test "$$subdir" = . || (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) tags); \
+	done
+ctags-recursive:
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  test "$$subdir" = . || (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) ctags); \
+	done
+
 ETAGS = etags
 ETAGSFLAGS =
 
@@ -579,10 +670,15 @@ ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	       END { for (i in files) print i; }'`; \
 	mkid -fID $$unique
 
-TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  if test "$$subdir" = .; then :; else \
+	    test -f $$subdir/TAGS && tags="$$tags -i $$here/$$subdir/TAGS"; \
+	  fi; \
+	done; \
 	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
 	unique=`for i in $$list; do \
 	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
@@ -594,7 +690,7 @@ TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 	     $$tags $$unique
 
 ctags: CTAGS
-CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+CTAGS: ctags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
@@ -648,22 +744,35 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  if test "$$subdir" = .; then :; else \
+	    test -d $(distdir)/$$subdir \
+	    || mkdir $(distdir)/$$subdir \
+	    || exit 1; \
+	    (cd $$subdir && \
+	      $(MAKE) $(AM_MAKEFLAGS) \
+	        top_distdir="$(top_distdir)" \
+	        distdir=../$(distdir)/$$subdir \
+	        distdir) \
+	      || exit 1; \
+	  fi; \
+	done
 check-am: all-am
-check: check-am
+check: check-recursive
 all-am: Makefile $(PROGRAMS) $(DATA)
-
-installdirs:
+installdirs: installdirs-recursive
+installdirs-am:
 	$(mkinstalldirs) $(DESTDIR)$(bindir) $(DESTDIR)$(rcdir)
 
-install: install-am
-install-exec: install-exec-am
-install-data: install-data-am
-uninstall: uninstall-am
+install: install-recursive
+install-exec: install-exec-recursive
+install-data: install-data-recursive
+uninstall: uninstall-recursive
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 
-installcheck: installcheck-am
+installcheck: installcheck-recursive
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
 	  INSTALL_STRIP_FLAG=-s \
@@ -679,24 +788,24 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-#>- clean: clean-am
+#>- clean: clean-recursive
 #>+ 1
-clean: kde-rpo-clean  clean-am
+clean: kde-rpo-clean  clean-recursive
 
 #>- clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
 #>+ 1
 clean-am: clean-metasources clean-final  clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
 
-distclean: distclean-am
+distclean: distclean-recursive
 
 distclean-am: clean-am distclean-compile distclean-depend \
 	distclean-generic distclean-libtool distclean-tags
 
-dvi: dvi-am
+dvi: dvi-recursive
 
 dvi-am:
 
-info: info-am
+info: info-recursive
 
 info-am:
 
@@ -704,44 +813,53 @@ install-data-am: install-data-local install-rcDATA
 
 install-exec-am: install-binPROGRAMS
 
-install-info: install-info-am
+install-info: install-info-recursive
 
 install-man:
 
 installcheck-am:
 
-maintainer-clean: maintainer-clean-am
+maintainer-clean: maintainer-clean-recursive
 
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
-mostlyclean: mostlyclean-am
+mostlyclean: mostlyclean-recursive
 
 mostlyclean-am: mostlyclean-compile mostlyclean-generic \
 	mostlyclean-libtool
 
-pdf: pdf-am
+pdf: pdf-recursive
 
 pdf-am:
 
-ps: ps-am
+ps: ps-recursive
 
 ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-info-am uninstall-local \
 	uninstall-rcDATA
 
-.PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
-	clean-generic clean-libtool ctags distclean distclean-compile \
+uninstall-info: uninstall-info-recursive
+
+.PHONY: $(RECURSIVE_TARGETS) CTAGS GTAGS all all-am check check-am clean \
+	clean-binPROGRAMS clean-generic clean-libtool clean-recursive \
+	ctags ctags-recursive distclean distclean-compile \
 	distclean-depend distclean-generic distclean-libtool \
-	distclean-tags distdir dvi dvi-am info info-am install \
-	install-am install-binPROGRAMS install-data install-data-am \
-	install-data-local install-exec install-exec-am install-info \
-	install-info-am install-man install-rcDATA install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags uninstall uninstall-am uninstall-binPROGRAMS \
-	uninstall-info-am uninstall-local uninstall-rcDATA
+	distclean-recursive distclean-tags distdir dvi dvi-am \
+	dvi-recursive info info-am info-recursive install install-am \
+	install-binPROGRAMS install-data install-data-am \
+	install-data-local install-data-recursive install-exec \
+	install-exec-am install-exec-recursive install-info \
+	install-info-am install-info-recursive install-man \
+	install-rcDATA install-recursive install-strip installcheck \
+	installcheck-am installdirs installdirs-am \
+	installdirs-recursive maintainer-clean maintainer-clean-generic \
+	maintainer-clean-recursive mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
+	pdf pdf-am pdf-recursive ps ps-am ps-recursive tags \
+	tags-recursive uninstall uninstall-am uninstall-binPROGRAMS \
+	uninstall-info-am uninstall-info-recursive uninstall-local \
+	uninstall-rcDATA uninstall-recursive
 
 
 messages: rc.cpp
@@ -915,8 +1033,32 @@ apidox-am-toplevel-yes:
 
 
 #>+ 3
-configdialog.moc.cpp: $(srcdir)/configdialog.h
-	$(MOC) $(srcdir)/configdialog.h -o configdialog.moc.cpp
+bclabelaction.moc.cpp: $(srcdir)/bclabelaction.h
+	$(MOC) $(srcdir)/bclabelaction.h -o bclabelaction.moc.cpp
+
+#>+ 3
+bcfilterdialog.moc.cpp: $(srcdir)/bcfilterdialog.h
+	$(MOC) $(srcdir)/bcfilterdialog.h -o bcfilterdialog.moc.cpp
+
+#>+ 3
+bcexportdialog.moc.cpp: $(srcdir)/bcexportdialog.h
+	$(MOC) $(srcdir)/bcexportdialog.h -o bcexportdialog.moc.cpp
+
+#>+ 3
+bccollection.moc.cpp: $(srcdir)/bccollection.h
+	$(MOC) $(srcdir)/bccollection.h -o bccollection.moc.cpp
+
+#>+ 3
+bcimportdialog.moc.cpp: $(srcdir)/bcimportdialog.h
+	$(MOC) $(srcdir)/bcimportdialog.h -o bcimportdialog.moc.cpp
+
+#>+ 3
+stringmacrodialog.moc.cpp: $(srcdir)/stringmacrodialog.h
+	$(MOC) $(srcdir)/stringmacrodialog.h -o stringmacrodialog.moc.cpp
+
+#>+ 3
+finddialog.moc.cpp: $(srcdir)/finddialog.h
+	$(MOC) $(srcdir)/finddialog.h -o finddialog.moc.cpp
 
 #>+ 3
 bookcasedoc.moc.cpp: $(srcdir)/bookcasedoc.h
@@ -927,64 +1069,44 @@ bookcase.moc.cpp: $(srcdir)/bookcase.h
 	$(MOC) $(srcdir)/bookcase.h -o bookcase.moc.cpp
 
 #>+ 3
-bclabelaction.moc.cpp: $(srcdir)/bclabelaction.h
-	$(MOC) $(srcdir)/bclabelaction.h -o bclabelaction.moc.cpp
-
-#>+ 3
-videocollection.moc.cpp: $(srcdir)/videocollection.h
-	$(MOC) $(srcdir)/videocollection.h -o videocollection.moc.cpp
-
-#>+ 3
-bccollectionpropdialog.moc.cpp: $(srcdir)/bccollectionpropdialog.h
-	$(MOC) $(srcdir)/bccollectionpropdialog.h -o bccollectionpropdialog.moc.cpp
-
-#>+ 3
-finddialog.moc.cpp: $(srcdir)/finddialog.h
-	$(MOC) $(srcdir)/finddialog.h -o finddialog.moc.cpp
-
-#>+ 3
-bcfilterdialog.moc.cpp: $(srcdir)/bcfilterdialog.h
-	$(MOC) $(srcdir)/bcfilterdialog.h -o bcfilterdialog.moc.cpp
-
-#>+ 3
-bccollection.moc.cpp: $(srcdir)/bccollection.h
-	$(MOC) $(srcdir)/bccollection.h -o bccollection.moc.cpp
-
-#>+ 3
-songcollection.moc.cpp: $(srcdir)/songcollection.h
-	$(MOC) $(srcdir)/songcollection.h -o songcollection.moc.cpp
-
-#>+ 3
-bcdetailedlistview.moc.cpp: $(srcdir)/bcdetailedlistview.h
-	$(MOC) $(srcdir)/bcdetailedlistview.h -o bcdetailedlistview.moc.cpp
-
-#>+ 3
-kwidgetlister.moc: $(srcdir)/kwidgetlister.h
-	$(MOC) $(srcdir)/kwidgetlister.h -o kwidgetlister.moc
-
-#>+ 3
-bookcollection.moc.cpp: $(srcdir)/bookcollection.h
-	$(MOC) $(srcdir)/bookcollection.h -o bookcollection.moc.cpp
-
-#>+ 3
-bcattributewidget.moc.cpp: $(srcdir)/bcattributewidget.h
-	$(MOC) $(srcdir)/bcattributewidget.h -o bcattributewidget.moc.cpp
-
-#>+ 3
-bcgroupview.moc.cpp: $(srcdir)/bcgroupview.h
-	$(MOC) $(srcdir)/bcgroupview.h -o bcgroupview.moc.cpp
-
-#>+ 3
-bctabcontrol.moc.cpp: $(srcdir)/bctabcontrol.h
-	$(MOC) $(srcdir)/bctabcontrol.h -o bctabcontrol.moc.cpp
+configdialog.moc.cpp: $(srcdir)/configdialog.h
+	$(MOC) $(srcdir)/configdialog.h -o configdialog.moc.cpp
 
 #>+ 3
 bcuniteditwidget.moc.cpp: $(srcdir)/bcuniteditwidget.h
 	$(MOC) $(srcdir)/bcuniteditwidget.h -o bcuniteditwidget.moc.cpp
 
 #>+ 3
+bctabcontrol.moc.cpp: $(srcdir)/bctabcontrol.h
+	$(MOC) $(srcdir)/bctabcontrol.h -o bctabcontrol.moc.cpp
+
+#>+ 3
+kwidgetlister.moc: $(srcdir)/kwidgetlister.h
+	$(MOC) $(srcdir)/kwidgetlister.h -o kwidgetlister.moc
+
+#>+ 3
+bookcasecontroller.moc.cpp: $(srcdir)/bookcasecontroller.h
+	$(MOC) $(srcdir)/bookcasecontroller.h -o bookcasecontroller.moc.cpp
+
+#>+ 3
+bcgroupview.moc.cpp: $(srcdir)/bcgroupview.h
+	$(MOC) $(srcdir)/bcgroupview.h -o bcgroupview.moc.cpp
+
+#>+ 3
+bcattributewidget.moc.cpp: $(srcdir)/bcattributewidget.h
+	$(MOC) $(srcdir)/bcattributewidget.h -o bcattributewidget.moc.cpp
+
+#>+ 3
+bccollectionfieldsdialog.moc.cpp: $(srcdir)/bccollectionfieldsdialog.h
+	$(MOC) $(srcdir)/bccollectionfieldsdialog.h -o bccollectionfieldsdialog.moc.cpp
+
+#>+ 3
+bcdetailedlistview.moc.cpp: $(srcdir)/bcdetailedlistview.h
+	$(MOC) $(srcdir)/bcdetailedlistview.h -o bcdetailedlistview.moc.cpp
+
+#>+ 3
 clean-metasources:
-	-rm -f  configdialog.moc.cpp bookcasedoc.moc.cpp bookcase.moc.cpp bclabelaction.moc.cpp videocollection.moc.cpp bccollectionpropdialog.moc.cpp finddialog.moc.cpp bcfilterdialog.moc.cpp bccollection.moc.cpp songcollection.moc.cpp bcdetailedlistview.moc.cpp kwidgetlister.moc bookcollection.moc.cpp bcattributewidget.moc.cpp bcgroupview.moc.cpp bctabcontrol.moc.cpp bcuniteditwidget.moc.cpp
+	-rm -f  bclabelaction.moc.cpp bcfilterdialog.moc.cpp bcexportdialog.moc.cpp bccollection.moc.cpp bcimportdialog.moc.cpp stringmacrodialog.moc.cpp finddialog.moc.cpp bookcasedoc.moc.cpp bookcase.moc.cpp configdialog.moc.cpp bcuniteditwidget.moc.cpp bctabcontrol.moc.cpp kwidgetlister.moc bookcasecontroller.moc.cpp bcgroupview.moc.cpp bcattributewidget.moc.cpp bccollectionfieldsdialog.moc.cpp bcdetailedlistview.moc.cpp
 
 #>+ 2
 docs-am:
@@ -997,7 +1119,7 @@ force-reedit:
 
 
 #>+ 9
-bcheck: bcheck-am
+bcheck: bcheck-recursive
 
 bcheck-am:
 	test ! -r bchecktest.cc.class || mv -f bchecktest.cc.class bchecktest.cc.oldclass
@@ -1007,11 +1129,11 @@ bcheck-am:
 	test ! -s bchecktest.cc.oldclass || test ! -s bchecktest.cc.class || cmp -s bchecktest.cc.oldclass bchecktest.cc.class
 
 #>+ 11
-bookcase.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/bccollectionpropdialog.cpp $(srcdir)/bcattributewidget.cpp $(srcdir)/kwidgetlister.cpp $(srcdir)/bcfilterdialog.cpp $(srcdir)/bcfilter.cpp $(srcdir)/bcunititem.cpp $(srcdir)/songcollection.cpp $(srcdir)/videocollection.cpp $(srcdir)/bookcollection.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bclabelaction.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/finddialog.cpp $(srcdir)/configdialog.cpp $(srcdir)/bcuniteditwidget.cpp $(srcdir)/bcunit.cpp $(srcdir)/bctabcontrol.cpp $(srcdir)/bcdetailedlistview.cpp $(srcdir)/bcgroupview.cpp $(srcdir)/bccollection.cpp $(srcdir)/bcattribute.cpp $(srcdir)/bookcasedoc.cpp $(srcdir)/bookcase.cpp $(srcdir)/main.cpp configdialog.moc.cpp bookcase.moc.cpp bookcasedoc.moc.cpp bclabelaction.moc.cpp videocollection.moc.cpp finddialog.moc.cpp bccollectionpropdialog.moc.cpp bcfilterdialog.moc.cpp bccollection.moc.cpp bcdetailedlistview.moc.cpp songcollection.moc.cpp bookcollection.moc.cpp bcuniteditwidget.moc.cpp bctabcontrol.moc.cpp bcgroupview.moc.cpp bcattributewidget.moc.cpp  kwidgetlister.moc
+bookcase.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/bccollectionfieldsdialog.cpp $(srcdir)/stringmacrodialog.cpp $(srcdir)/bclabelaction.cpp $(srcdir)/bcfilehandler.cpp $(srcdir)/bcimportdialog.cpp $(srcdir)/bcexportdialog.cpp $(srcdir)/bccollectionfactory.cpp $(srcdir)/bookcasecontroller.cpp $(srcdir)/bcattributewidget.cpp $(srcdir)/kwidgetlister.cpp $(srcdir)/bcfilterdialog.cpp $(srcdir)/bcfilter.cpp $(srcdir)/bcunititem.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/finddialog.cpp $(srcdir)/configdialog.cpp $(srcdir)/bcuniteditwidget.cpp $(srcdir)/bcunit.cpp $(srcdir)/bctabcontrol.cpp $(srcdir)/bcdetailedlistview.cpp $(srcdir)/bcgroupview.cpp $(srcdir)/bccollection.cpp $(srcdir)/bcattribute.cpp $(srcdir)/bookcasedoc.cpp $(srcdir)/bookcase.cpp $(srcdir)/main.cpp bcfilterdialog.moc.cpp bclabelaction.moc.cpp bccollection.moc.cpp bcexportdialog.moc.cpp bcimportdialog.moc.cpp stringmacrodialog.moc.cpp bookcase.moc.cpp bookcasedoc.moc.cpp finddialog.moc.cpp bcuniteditwidget.moc.cpp configdialog.moc.cpp bctabcontrol.moc.cpp bookcasecontroller.moc.cpp bcgroupview.moc.cpp bcattributewidget.moc.cpp bccollectionfieldsdialog.moc.cpp bcdetailedlistview.moc.cpp  kwidgetlister.moc
 	@echo 'creating bookcase.all_cpp.cpp ...'; \
 	rm -f bookcase.all_cpp.files bookcase.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> bookcase.all_cpp.final; \
-	for file in bccollectionpropdialog.cpp bcattributewidget.cpp kwidgetlister.cpp bcfilterdialog.cpp bcfilter.cpp bcunititem.cpp songcollection.cpp videocollection.cpp bookcollection.cpp xslthandler.cpp bclabelaction.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp configdialog.moc.cpp bookcase.moc.cpp bookcasedoc.moc.cpp bclabelaction.moc.cpp videocollection.moc.cpp finddialog.moc.cpp bccollectionpropdialog.moc.cpp bcfilterdialog.moc.cpp bccollection.moc.cpp bcdetailedlistview.moc.cpp songcollection.moc.cpp bookcollection.moc.cpp bcuniteditwidget.moc.cpp bctabcontrol.moc.cpp bcgroupview.moc.cpp bcattributewidget.moc.cpp ; do \
+	for file in bccollectionfieldsdialog.cpp stringmacrodialog.cpp bclabelaction.cpp bcfilehandler.cpp bcimportdialog.cpp bcexportdialog.cpp bccollectionfactory.cpp bookcasecontroller.cpp bcattributewidget.cpp kwidgetlister.cpp bcfilterdialog.cpp bcfilter.cpp bcunititem.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp bcfilterdialog.moc.cpp bclabelaction.moc.cpp bccollection.moc.cpp bcexportdialog.moc.cpp bcimportdialog.moc.cpp stringmacrodialog.moc.cpp bookcase.moc.cpp bookcasedoc.moc.cpp finddialog.moc.cpp bcuniteditwidget.moc.cpp configdialog.moc.cpp bctabcontrol.moc.cpp bookcasecontroller.moc.cpp bcgroupview.moc.cpp bcattributewidget.moc.cpp bccollectionfieldsdialog.moc.cpp bcdetailedlistview.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> bookcase.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> bookcase.all_cpp.final; \
 	done; \

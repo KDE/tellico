@@ -2,7 +2,7 @@
                                 bcattribute.h
                              -------------------
     begin                : Sun Sep 23 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -33,7 +33,7 @@ typedef QPtrListIterator<BCAttribute> BCAttributeListIterator;
  * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: bcattribute.h,v 1.3 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bcattribute.h 219 2003-10-24 03:04:04Z robby $
  */
 class BCAttribute {
 public:
@@ -41,14 +41,16 @@ public:
    * The possible attribute types. A Line is represented by a KLineEdit,
    * a Para is a QMultiLineEdit encompassing multiple lines, a Choice is
    * limited to set values shown in a KComboBox, and a Bool is either true
-   * or not and is thus a QCheckBox. A Year type is obvious.
-   * A ReadOnly is a hidden value. A URL is obvious, too.
-   * Don't forget to change BCAttribute::typeMap(), too.
+   * or not and is thus a QCheckBox. A Number type is obvious, though it used
+   * to be a Year. A ReadOnly is a hidden value. A URL is obvious, too.
+   * A Table looks like a small spreadsheet with one column.
+   * Don't forget to change BCAttribute::typeMap().
    *
    * @see KLineEdit
    * @see QMultiLineEdit
    * @see KComboBox
    * @see QCheckBox
+   * @see QTable
    **/
   enum AttributeType {
     Line     = 1,
@@ -56,8 +58,10 @@ public:
     Choice   = 3,
     Bool     = 4,
     ReadOnly = 5,
-    Year     = 6,
-    URL      = 7
+    Number   = 6,
+    URL      = 7,
+    Table    = 8,
+    Table2   = 9
   };
 
   /**
@@ -71,7 +75,8 @@ public:
   enum AttributeFlags {
     AllowMultiple   = 1 << 0,   // allow multiple values, separated by a semi-colon
     AllowGrouped    = 1 << 1,   // this attribute can be used to group units
-    AllowCompletion = 1 << 2    // allow auto-completion
+    AllowCompletion = 1 << 2,   // allow auto-completion
+    NoDelete        = 1 << 3    // don't allow user to delete this attribute
   };
 
   /**
@@ -82,10 +87,11 @@ public:
    * @li FormatDate - The attribute should be formatted as a date.
    */
   enum FormatFlag {
-    FormatPlain     = 0,   // format plain
+    FormatPlain     = 0,   // format plain, allows capitalization
     FormatTitle     = 1,   // format as a title, i.e. shift articles to end
     FormatName      = 2,   // format as a personal full name
-    FormatDate      = 3    // format as a date
+    FormatDate      = 3,   // format as a date
+    FormatNone      = 4    // no format, i.e. no capitalization allowed
   };
 
   /**
@@ -116,6 +122,9 @@ public:
    * The assignment operator
    */
   BCAttribute& operator=(const BCAttribute& att);
+  virtual ~BCAttribute() {};
+  // default copy constructor is ok, right?
+  virtual BCAttribute* clone() { return new BCAttribute(*this); }
 
   /**
    * Returns the name of the attribute.
@@ -200,7 +209,7 @@ public:
   /**
    * Sets the formatting flag of the attribute.
    *
-   * @param flags The attribute flags
+   * @param flag The attribute flag
    */
   void setFormatFlag(FormatFlag flag);
   /**
@@ -215,6 +224,18 @@ public:
    * @param desc The attribute description
    */
   void setDescription(const QString& desc);
+  /**
+   * Some attributes are always a category by themselves.
+   *
+   * @return Whether the attribute is th eonly member of its category
+   */
+  bool isSingleCategory() const;
+  /**
+   * Method to determine whether the attribute is a BibtexAttribute
+   *
+   * @return True if the attribute is a @ref BibtexAttribute
+   */
+  virtual bool isBibtexAttribute() const { return false; };
 
   /*************************** STATIC **********************************/
 

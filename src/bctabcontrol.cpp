@@ -2,7 +2,7 @@
                               bctabcontrol.cpp
                              -------------------
     begin                : Sun Jan 6 2002
-    copyright            : (C) 2002 by Robby Stephenson
+    copyright            : (C) 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,9 +24,13 @@ BCTabControl::BCTabControl(QWidget* parent_, const char* name_/*=0*/)
   connect(tabBar(), SIGNAL(selected(int)), SLOT(setFocusToChild(int)));
 }
 
+QTabBar* BCTabControl::tabBar() {
+  return QTabWidget::tabBar();
+}
+
 void BCTabControl::setFocusToChild(int tabNum_) {
   // I had some screwy errors and this fixed them, though
-  // I don't know why QTabeBar::selected() would signal a non-existent page
+  // I don't know why QTabBar::selected() would signal a non-existent page
   if(!page(tabNum_)) {
     return;
   }

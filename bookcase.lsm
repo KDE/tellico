@@ -1,13 +1,13 @@
 Begin3
 Title:          Bookcase 
-Version:        0.4
+Version:        0.7.1
 Entered-date:   
-Description:    Bookcase is a personal catalog application for your book collection.
+Description:    Bookcase is a collection manager for books, bibliographies, video, and music
 Keywords:        
 Author:         Robby Stephenson <robby@periapsis.org> 
 Maintained-by:  Robby Stephenson <robby@periapsis.org> 
-Primary-site:   http://periapsis.org/bookcase/       
-Home-page:      http://periapsis.org/bookcase/
+Primary-site:   http://www.periapsis.org/bookcase/       
+Home-page:      http://www.periapsis.org/bookcase/
 Original-site:  
 Platforms:      Linux and other Unices
 Copying-policy: GNU Public License

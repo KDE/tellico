@@ -36,7 +36,7 @@ dnl Perform program name transformation
 AC_ARG_PROGRAM
 
 dnl Automake doc recommends to do this only here. (Janos)
-AM_INIT_AUTOMAKE(bookcase, 0.6.6) dnl searches for some needed programs
+AM_INIT_AUTOMAKE(bookcase, 0.7.1) dnl searches for some needed programs
 
 KDE_SET_PREFIX
 
@@ -61,7 +61,7 @@ dnl PACKAGE set before
 
 dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
 dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
-dnl CXXFLAGS="$CXXFLAGS $USE_EXCEPTIONS -DQT_NO_ASCII_CAST" dnl __kdevelop[exc]__
+dnl CXXFLAGS="$CXXFLAGS $USE_EXCEPTIONS -DQT_NO_ASCII_CAST -DQT_NO_TRANSLATION" dnl __kdevelop[exc]__
 
 dnl KDE_NEED_FLEX dnl __kdevelop__
 dnl AC_PROG_YACC dnl __kdevelop__
@@ -77,17 +77,15 @@ if test -n "$XML_CONFIG"; then
     LIBXML_LIBS="`$XML_CONFIG --libs`"
     LIBXML_RPATH=
     for args in $LIBXML_LIBS; do
-	    case $args in
-	      -L*)
-  	      LIBXML_RPATH="$LIBXML_RPATH $args"
- 	      ;;
+      case $args in
+        -L*)
+          LIBXML_RPATH="$LIBXML_RPATH $args"
+        ;;
       esac
     done
     LIBXML_RPATH=`echo $LIBXML_RPATH | sed -e "s/-L/-R/g"`
     LIBXML_CFLAGS="`$XML_CONFIG --cflags`"
 
-#    KDE_FIND_PATH(xmllint, XMLLINT, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [XMLLINT=""])
-#    AC_DEFINE_UNQUOTED(XMLLINT, "$XMLLINT", [Defines the executable of xmllint])
   else
     AC_MSG_ERROR([[You need at least libxml 2.4.23.]])
     HELP_SUBDIR=
@@ -96,7 +94,6 @@ fi
 
 KDE_FIND_PATH(xslt-config, XSLT_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [
   AC_MSG_ERROR([[Could not find xslt-config anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.19. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxslt-devel or something similar.]])
-  HELP_SUBDIR=
 ])
 
 if test -n "$XSLT_CONFIG"; then
@@ -105,10 +102,10 @@ if test -n "$XSLT_CONFIG"; then
     LIBXSLT_LIBS="`$XSLT_CONFIG --libs`"
     LIBXSLT_RPATH=
     for args in $LIBXSLT_LIBS; do
-			case $args in
-	  		-L*)
-  	      LIBXSLT_RPATH="$LIBXSLT_RPATH $args"
- 	      ;;
+      case $args in
+        -L*)
+          LIBXSLT_RPATH="$LIBXSLT_RPATH $args"
+        ;;
       esac
     done
     LIBXSLT_RPATH=`echo $LIBXSLT_RPATH | sed -e "s/-L/-R/g"`
@@ -126,6 +123,152 @@ AC_SUBST(LIBXSLT_RPATH)
 AC_SUBST(LIBXML_LIBS)
 AC_SUBST(LIBXML_CFLAGS)
 AC_SUBST(LIBXML_RPATH)
+
+AC_MSG_CHECKING(for ushort in <sys/types.h>)
+AC_CACHE_VAL(bt_cv_type_ushort, [
+AC_TRY_COMPILE([
+#include <sys/types.h>
+],[
+ushort i;
+], bt_cv_type_ushort=yes, bt_cv_type_ushort=no)])
+AC_MSG_RESULT($bt_cv_type_ushort)
+if test "$bt_cv_type_ushort" = "yes" ; then
+  AC_DEFINE(HAVE_USHORT, 1, [Define if ushort is defined in <sys/types.h>])
+fi
+
+AC_MSG_CHECKING(for boolean in <sys/types.h>)
+AC_CACHE_VAL(bt_cv_type_boolean, [
+AC_TRY_COMPILE([
+#include <sys/types.h>
+],[
+boolean f;
+], bt_cv_type_boolean=yes, bt_cv_type_boolean=no)])
+AC_MSG_RESULT($bt_cv_type_boolean)
+if test "$bt_cv_type_boolean" = "yes" ; then
+  AC_DEFINE(HAVE_BOOLEAN, 1, [Define if boolean is defined in <sys/types.h>])
+fi
+
+AC_MSG_CHECKING(for strdup declaration in <string.h>)
+dnl AC_CACHE_VAL(bt_cv_decl_strdup, [
+dnl AC_EGREP_HEADER(strdup *\(, string.h,
+dnl bt_cv_decl_strdup=yes, bt_cv_decl_strdup=no)])
+AC_EGREP_HEADER([strdup *\(], string.h, bt_cv_decl_strdup=yes, bt_cv_decl_strdup=no)
+AC_MSG_RESULT($bt_cv_decl_strdup)
+if test "$bt_cv_decl_strdup" = "yes" ; then
+  AC_DEFINE(HAVE_STRDUP_DECL, 1, [Define if strdup is declared in <string.h>])
+fi
+
+dnl Checks for library functions.
+AC_FUNC_ALLOCA
+AC_FUNC_VPRINTF
+AC_CHECK_FUNCS(strlwr strupr)
+#MIN_CONFIG(3)
+
+dnl PACKAGE set before
+
+dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
+dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
+dnl CXXFLAGS="$CXXFLAGS $USE_EXCEPTIONS -DQT_NO_ASCII_CAST -DQT_NO_TRANSLATION" dnl __kdevelop[exc]__
+
+dnl KDE_NEED_FLEX dnl __kdevelop__
+dnl AC_PROG_YACC dnl __kdevelop__
+
+KDE_FIND_PATH(xml2-config, XML_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [
+  AC_MSG_ERROR([[Could not find xml2-config anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.23. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxml2-devel or something similar.]])
+])
+
+if test -n "$XML_CONFIG"; then
+  vers=`$XML_CONFIG --version 2>/dev/null | sed -e 's/libxml //' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+  if test -n "$vers" && test "$vers" -ge 2004023
+  then
+    LIBXML_LIBS="`$XML_CONFIG --libs`"
+    LIBXML_RPATH=
+    for args in $LIBXML_LIBS; do
+      case $args in
+        -L*)
+          LIBXML_RPATH="$LIBXML_RPATH $args"
+        ;;
+      esac
+    done
+    LIBXML_RPATH=`echo $LIBXML_RPATH | sed -e "s/-L/-R/g"`
+    LIBXML_CFLAGS="`$XML_CONFIG --cflags`"
+
+  else
+    AC_MSG_ERROR([[You need at least libxml 2.4.23.]])
+    HELP_SUBDIR=
+  fi
+fi
+
+KDE_FIND_PATH(xslt-config, XSLT_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [
+  AC_MSG_ERROR([[Could not find xslt-config anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.19. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxslt-devel or something similar.]])
+])
+
+if test -n "$XSLT_CONFIG"; then
+  vers=`$XSLT_CONFIG --version 2>/dev/null | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+  if test -n "$vers" && test "$vers" -ge 1000019; then
+    LIBXSLT_LIBS="`$XSLT_CONFIG --libs`"
+    LIBXSLT_RPATH=
+    for args in $LIBXSLT_LIBS; do
+      case $args in
+        -L*)
+          LIBXSLT_RPATH="$LIBXSLT_RPATH $args"
+        ;;
+      esac
+    done
+    LIBXSLT_RPATH=`echo $LIBXSLT_RPATH | sed -e "s/-L/-R/g"`
+    LIBXSLT_CFLAGS="`$XSLT_CONFIG --cflags`"
+
+  else
+    AC_MSG_ERROR([[You need at least libxslt 1.0.19.]])
+  fi
+fi
+
+AC_SUBST(LIBXSLT_LIBS)
+AC_SUBST(LIBXSLT_CFLAGS)
+AC_SUBST(LIBXSLT_RPATH)
+
+AC_SUBST(LIBXML_LIBS)
+AC_SUBST(LIBXML_CFLAGS)
+AC_SUBST(LIBXML_RPATH)
+
+AC_MSG_CHECKING(for ushort in <sys/types.h>)
+AC_CACHE_VAL(bt_cv_type_ushort, [
+AC_TRY_COMPILE([
+#include <sys/types.h>
+],[
+ushort i;
+], bt_cv_type_ushort=yes, bt_cv_type_ushort=no)])
+AC_MSG_RESULT($bt_cv_type_ushort)
+if test "$bt_cv_type_ushort" = "yes" ; then
+  AC_DEFINE(HAVE_USHORT, 1, [Define if ushort is defined in <sys/types.h>])
+fi
+
+AC_MSG_CHECKING(for boolean in <sys/types.h>)
+AC_CACHE_VAL(bt_cv_type_boolean, [
+AC_TRY_COMPILE([
+#include <sys/types.h>
+],[
+boolean f;
+], bt_cv_type_boolean=yes, bt_cv_type_boolean=no)])
+AC_MSG_RESULT($bt_cv_type_boolean)
+if test "$bt_cv_type_boolean" = "yes" ; then
+  AC_DEFINE(HAVE_BOOLEAN, 1, [Define if boolean is defined in <sys/types.h>])
+fi
+
+AC_MSG_CHECKING(for strdup declaration in <string.h>)
+dnl AC_CACHE_VAL(bt_cv_decl_strdup, [
+dnl AC_EGREP_HEADER(strdup *\(, string.h,
+dnl bt_cv_decl_strdup=yes, bt_cv_decl_strdup=no)])
+AC_EGREP_HEADER([strdup *\(], string.h, bt_cv_decl_strdup=yes, bt_cv_decl_strdup=no)
+AC_MSG_RESULT($bt_cv_decl_strdup)
+if test "$bt_cv_decl_strdup" = "yes" ; then
+  AC_DEFINE(HAVE_STRDUP_DECL, 1, [Define if strdup is declared in <string.h>])
+fi
+
+dnl Checks for library functions.
+AC_FUNC_ALLOCA
+AC_FUNC_VPRINTF
+AC_CHECK_FUNCS(strlwr strupr)
 KDE_CREATE_SUBDIRSLIST
 AC_CONFIG_FILES([ Makefile ])
 AC_CONFIG_FILES([ admin/Makefile ])
@@ -134,6 +277,9 @@ AC_CONFIG_FILES([ doc/en/Makefile ])
 AC_CONFIG_FILES([ icons/Makefile ])
 AC_CONFIG_FILES([ po/Makefile ])
 AC_CONFIG_FILES([ src/Makefile ])
+AC_CONFIG_FILES([ src/collections/Makefile ])
+AC_CONFIG_FILES([ src/translators/Makefile ])
+AC_CONFIG_FILES([ src/translators/btparse/Makefile ])
 AC_CONFIG_FILES([ xslt/Makefile ])
 AC_OUTPUT
 if test "$all_tests" = "bad"; then

@@ -2,7 +2,7 @@
                               configdialog.cpp
                              -------------------
     begin                : Wed Dec 5 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,18 +16,12 @@
 
 #include "configdialog.h"
 #include "bcattribute.h"
-#include "bccollection.h"
-#include "bookcasedoc.h"
-#include "bookcollection.h"
 
-#include <kcombobox.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kconfig.h>
-#include <klistbox.h>
-#include <kbuttonbox.h>
 
 #include <qsize.h>
 #include <qlayout.h>
@@ -48,14 +42,11 @@
 static const int CONFIG_MIN_WIDTH = 600;
 static const int CONFIG_MIN_HEIGHT = 420;
 
-ConfigDialog::ConfigDialog(BookcaseDoc* doc_, QWidget* parent_, const char* name_/*=0*/)
+ConfigDialog::ConfigDialog(QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(IconList, i18n("Configure Bookcase"), Ok|Apply|Cancel|Default,
-                  Ok, parent_, name_, true, false), m_doc(doc_) {
+                  Ok, parent_, name_, true, false) {
   setupGeneralPage();
   setupPrintingPage();
-  //setupBookPage();
-  //setupAudioPage();
-  //setupVideoPage();
 
   updateGeometry();
   QSize s = sizeHint();
@@ -73,43 +64,25 @@ void ConfigDialog::slotApply() {
 }
 
 void ConfigDialog::slotDefault() {
-  m_cbOpenLastFile->setChecked(true);
-  m_cbCapitalize->setChecked(true);
-  m_cbFormat->setChecked(true);
-  m_cbShowCount->setChecked(false);
-  m_leArticles->setText(BCAttribute::defaultArticleList().join(QString::fromLatin1(", ")));
-  m_leSuffixes->setText(BCAttribute::defaultSuffixList().join(QString::fromLatin1(", ")));
-  m_lePrefixes->setText(BCAttribute::defaultSurnamePrefixList().join(QString::fromLatin1(", ")));
+  // only change the defaults on the active page
+  switch(activePageIndex()) {
+    case 0:
+      m_cbOpenLastFile->setChecked(true);
+      m_cbShowTipDay->setChecked(true);
+      m_cbCapitalize->setChecked(true);
+      m_cbFormat->setChecked(true);
+      m_cbShowCount->setChecked(true);
+      m_leArticles->setText(BCAttribute::defaultArticleList().join(QString::fromLatin1(", ")));
+      m_leSuffixes->setText(BCAttribute::defaultSuffixList().join(QString::fromLatin1(", ")));
+      m_lePrefixes->setText(BCAttribute::defaultSurnamePrefixList().join(QString::fromLatin1(", ")));
+      break;
 
-  m_cbPrintHeaders->setChecked(false);
-  m_cbPrintFormatted->setChecked(true);
-  m_cbPrintGrouped->setChecked(true);
-  QString authorTitle = m_doc->collectionById(0)->attributeTitleByName(QString::fromLatin1("author"));
-  m_cbPrintGroupAttribute->setCurrentItem(authorTitle);
-
-  QStringList printAttNames = BookCollection::defaultPrintAttributes();
-  QStringList printAttTitles;
-  QStringList::iterator it;
-  for(it = printAttNames.begin(); it != printAttNames.end(); ++it) {
-    //TODO:: fix me for multiple collections
-    QString title = m_doc->collectionById(0)->attributeTitleByName(*it);
-    if(!title.isEmpty()) {
-      printAttTitles += title;
-    }
+    case 1:
+      m_cbPrintHeaders->setChecked(true);
+      m_cbPrintFormatted->setChecked(true);
+      m_cbPrintGrouped->setChecked(false);
+      break;
   }
-  m_lbSelectedFields->clear();
-  m_lbSelectedFields->insertStringList(printAttTitles);
-
-  QStringList availTitles;
-  BCAttributeList list = m_doc->uniqueAttributes(BCCollection::Book);
-  BCAttributeListIterator attIt(list);
-  for( ; attIt.current(); ++attIt) {
-    if(printAttTitles.contains(attIt.current()->title()) == 0) {
-      availTitles += attIt.current()->title();
-    }
-  }
-  m_lbAvailableFields->clear();
-  m_lbAvailableFields->insertStringList(availTitles);
 }
 
 void ConfigDialog::setupGeneralPage() {
@@ -123,6 +96,12 @@ void ConfigDialog::setupGeneralPage() {
                                          "will be re-opened at program start-up."));
   l->addWidget(m_cbOpenLastFile);
   m_cbDict.insert(QString::fromLatin1("openLastFile"), m_cbOpenLastFile);
+
+  m_cbShowTipDay = new QCheckBox(i18n("Show \"Tip of the Day\" at startup"), frame);
+  QWhatsThis::add(m_cbShowTipDay, i18n("If checked, the \"Tip of the Day\" will be "
+                                       "shown at program start-up."));
+  l->addWidget(m_cbShowTipDay);
+  m_cbDict.insert(QString::fromLatin1("showTipDay"), m_cbShowTipDay);
 
   m_cbShowCount = new QCheckBox(i18n("Show number of items in group"), frame);
   QWhatsThis::add(m_cbShowCount, i18n("If checked, the number of items in the group "
@@ -210,93 +189,20 @@ void ConfigDialog::setupPrintingPage() {
   QHGroupBox* groupOptions = new QHGroupBox(i18n("Grouping Options"), frame);
   l->addWidget(groupOptions);
 
-  m_cbPrintGrouped = new QCheckBox(i18n("Group the books"), groupOptions);
-  QWhatsThis::add(m_cbPrintGrouped, i18n("If checked, the books will be grouped under "
+  m_cbPrintGrouped = new QCheckBox(i18n("Group the entries"), groupOptions);
+  QWhatsThis::add(m_cbPrintGrouped, i18n("If checked, the entries will be grouped by "
                                          "the selected field."));
   m_cbDict.insert(QString::fromLatin1("printGrouped"), m_cbPrintGrouped);
-  connect(m_cbPrintGrouped, SIGNAL(toggled(bool)), this, SLOT(slotTogglePrintGrouped(bool)));
-
-  m_cbPrintGroupAttribute = new KComboBox(groupOptions);
-  QWhatsThis::add(m_cbPrintGroupAttribute, i18n("The collection is grouped by this field."));
-  
-  // TODO: fix for multiple collections
-  BCAttributeList list = m_doc->collectionById(0)->attributeList();
-  BCAttributeListIterator it(list);
-  for( ; it.current(); ++it) {
-    if(it.current()->flags() & BCAttribute::AllowGrouped) {
-      m_groupAttributes += it.current()->title();
-    }
-  }
-  m_cbPrintGroupAttribute->insertStringList(m_groupAttributes);
-
-  QHGroupBox* fieldsGroup = new QHGroupBox(i18n("Fields"), frame);
-//  fieldsGroup->layout()->setSpacing(KDialog::spacingHint());
-  l->addWidget(fieldsGroup);
-
-  QVBox* aBox = new QVBox(fieldsGroup);
-  (void) new QLabel(i18n("Available Fields"), aBox);
-  m_lbAvailableFields = new KListBox(aBox);
-  QWhatsThis::add(m_lbAvailableFields, i18n("These are the available fields in the collection."));
-
-  KButtonBox* bb = new KButtonBox(fieldsGroup, Qt::Vertical);
-  //the stretches center the buttons top to bottom
-  bb->addStretch();
-  QPixmap pixLeft = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("1leftarrow"),
-                                                KIcon::Toolbar);
-  QPushButton* left = bb->addButton(QString::null, this, SLOT(slotFieldLeft()));
-  left->setPixmap(pixLeft);
-  QPixmap pixRight = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("1rightarrow"),
-                                                KIcon::Toolbar);
-  QPushButton* right = bb->addButton(QString::null, this, SLOT(slotFieldRight()));
-  right->setPixmap(pixRight);
-  bb->addStretch();
-  
-  QVBox* sBox = new QVBox(fieldsGroup);
-  (void) new QLabel(i18n("Selected Fields"), sBox);
-  m_lbSelectedFields = new KListBox(sBox);
-  QWhatsThis::add(m_lbSelectedFields, i18n("These are the selected fields in the collection."));
-
-  KButtonBox* bb2 = new KButtonBox(fieldsGroup, Qt::Vertical);
-  bb2->addStretch();
-  QPixmap pixUp = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("1uparrow"),
-                                                KIcon::Toolbar);
-  QPushButton* up = bb2->addButton(QString::null, this, SLOT(slotFieldUp()));
-  up->setPixmap(pixUp);
-  QPixmap pixDown = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("1downarrow"),
-                                                KIcon::Toolbar);
-  QPushButton* down = bb2->addButton(QString::null, this, SLOT(slotFieldDown()));
-  down->setPixmap(pixDown);
-  bb2->addStretch();
 
   // stretch to fill lower area
   l->addStretch(1);
 }
 
-//void ConfigDialog::setupBookPage() {
-//  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("book"), KIcon::User,
-//                                                 KIcon::SizeMedium);
-//  QFrame* frame = addPage(i18n("Books"), i18n("Book Collection Options"), pix);
-//  QVBoxLayout* l = new QVBoxLayout(frame, 0, spacingHint());
-//  l->addStretch(1);
-//}
-//
-//void ConfigDialog::setupAudioPage() {
-//  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("cd"), KIcon::User,
-//                                                KIcon::SizeMedium);
-//  QFrame* frame = addPage(i18n("CDs"), i18n("Audio Collection Options"), pix);
-//  QVBoxLayout* l = new QVBoxLayout(frame, 0, spacingHint());
-//  l->addStretch(1);
-//}
-//
-//void ConfigDialog::setupVideoPage() {
-//  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("video"), KIcon::User,
-//                                                KIcon::SizeMedium);
-//  QFrame* frame = addPage(i18n("Videos"), i18n("Video Collection Options"), pix);
-//  QVBoxLayout* l = new QVBoxLayout(frame, 0, spacingHint());
-//  l->addStretch(1);
-//}
-
 void ConfigDialog::readConfiguration(KConfig* config_) {
+  config_->setGroup("TipOfDay");
+  bool showTipDay = config_->readBoolEntry("RunOnStart", true);
+  m_cbShowTipDay->setChecked(showTipDay);
+
   config_->setGroup("General Options");
   
   bool openLastFile = config_->readBoolEntry("Reopen Last File", true);
@@ -309,59 +215,26 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
   m_cbFormat->setChecked(autoFormat);
   slotToggleFormatted(autoFormat);
 
-  bool showCount = config_->readBoolEntry("Show Group Count", false);
+  bool showCount = config_->readBoolEntry("Show Group Count", true);
   m_cbShowCount->setChecked(showCount);
 
   // PRINTING
-  config_->setGroup("Printing");
-  
-  bool printHeaders = config_->readBoolEntry("Print Field Headers", false);
+  config_->setGroup(QString::fromLatin1("Printing"));
+
+  bool printHeaders = config_->readBoolEntry("Print Field Headers", true);
   m_cbPrintHeaders->setChecked(printHeaders);
 
   bool printFormatted = config_->readBoolEntry("Print Formatted", true);
   m_cbPrintFormatted->setChecked(printFormatted);
 
-  bool printGrouped = config_->readBoolEntry("Print Grouped", true);
+  bool printGrouped = config_->readBoolEntry("Print Grouped", false);
   m_cbPrintGrouped->setChecked(printGrouped);
-//  m_cbPrintGroupAttribute->setEnabled(printGrouped);
-  slotTogglePrintGrouped(printGrouped);
-  
-  QString printGroupAttribute = config_->readEntry("Print Grouped Attribute",
-                                                   QString::fromLatin1("author"));
-  QString selectedGroup = m_doc->collectionById(0)->attributeTitleByName(printGroupAttribute);
-  int idx = m_groupAttributes.findIndex(selectedGroup);
-  if(idx > -1 && idx < m_cbPrintGroupAttribute->count()) {
-    m_cbPrintGroupAttribute->setCurrentItem(idx);
-  }
-
-  QStringList printAttNames = config_->readListEntry("Print Fields - book");
-  if(printAttNames.isEmpty()) {
-    printAttNames = BookCollection::defaultPrintAttributes();
-  }
-  QStringList printAttTitles;
-  QStringList::iterator it;
-  for(it = printAttNames.begin(); it != printAttNames.end(); ++it) {
-    //TODO:: fix me for multiple collections
-    QString title = m_doc->collectionById(0)->attributeTitleByName(*it);
-    if(!title.isEmpty()) {
-      printAttTitles += title;
-    }
-  }
-  m_lbSelectedFields->clear();
-  m_lbSelectedFields->insertStringList(printAttTitles);
-  
-  QStringList availTitles;
-  BCAttributeList list = m_doc->uniqueAttributes(BCCollection::Book);
-  BCAttributeListIterator attIt(list);
-  for( ; attIt.current(); ++attIt) {
-    if(printAttTitles.contains(attIt.current()->title()) == 0) {
-      availTitles += attIt.current()->title();
-    }
-  }
-  m_lbAvailableFields->insertStringList(availTitles);
 }
 
 void ConfigDialog::saveConfiguration(KConfig* config_) {
+  config_->setGroup("TipOfDay");
+  config_->writeEntry("RunOnStart", m_cbShowTipDay->isChecked());
+
   config_->setGroup("General Options");
   config_->writeEntry("Reopen Last File", m_cbOpenLastFile->isChecked());
 
@@ -399,19 +272,10 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   config_->writeEntry("Surname Prefixes", prefixes, ',');
   BCAttribute::setSurnamePrefixList(prefixes);
 
-  config_->setGroup("Printing");
+  config_->setGroup(QString::fromLatin1("Printing"));
   config_->writeEntry("Print Field Headers", m_cbPrintHeaders->isChecked());
   config_->writeEntry("Print Formatted", m_cbPrintFormatted->isChecked());
   config_->writeEntry("Print Grouped", m_cbPrintGrouped->isChecked());
-  QString groupTitle = m_cbPrintGroupAttribute->currentText();
-  QString groupName = m_doc->collectionById(0)->attributeNameByTitle(groupTitle);
-  config_->writeEntry("Print Grouped Attribute", groupName);
-
-  QStringList printAttNames;
-  for(QListBoxItem* item = m_lbSelectedFields->firstItem(); item; item = item->next()) {
-    printAttNames += m_doc->collectionById(0)->attributeNameByTitle(item->text());
-  }
-  config_->writeEntry("Print Fields - book", printAttNames, ',');
 
   config_->sync();
 }
@@ -419,85 +283,6 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
 bool ConfigDialog::configValue(const QString& key_) {
   QCheckBox* cb = m_cbDict.find(key_);
   return cb && cb->isChecked();
-}
-
-void ConfigDialog::slotFieldLeft() {
-  QListBoxItem* item;
-#if QT_VERSION >= 0x030100
-  item = m_lbSelectedFields->selectedItem();
-#else
-  item = m_lbSelectedFields->item(m_lbSelectedFields->currentItem());
-#endif
-  if(item) {
-    m_lbAvailableFields->insertItem(item->text());
-    if(item->next()) {
-      m_lbSelectedFields->setSelected(item->next(), true);
-    } else if(item->prev()) {
-      m_lbSelectedFields->setSelected(item->prev(), true);
-    } else {
-      m_lbSelectedFields->clearSelection();
-    }
-    delete item;
-  }
-  m_lbAvailableFields->clearSelection();
-}
-
-void ConfigDialog::slotFieldRight() {
-  QListBoxItem* item;
-#if QT_VERSION >= 0x030100
-  item = m_lbAvailableFields->selectedItem();
-#else
-  item = m_lbAvailableFields->item(m_lbAvailableFields->currentItem());
-#endif
-  if(item) {
-    m_lbSelectedFields->insertItem(item->text());
-    if(item->next()) {
-      m_lbAvailableFields->setSelected(item->next(), true);
-    } else if(item->prev()) {
-      m_lbAvailableFields->setSelected(item->prev(), true);
-    } else {
-      m_lbAvailableFields->clearSelection();
-    }
-    delete item;
-  }
-  m_lbSelectedFields->clearSelection();
-}
-
-void ConfigDialog::slotFieldUp() {
-  QListBoxItem* item;
-#if QT_VERSION >= 0x030100
-  item = m_lbSelectedFields->selectedItem();
-#else
-  item = m_lbSelectedFields->item(m_lbSelectedFields->currentItem());
-#endif
-  if(item) {
-    QListBoxItem* prev = item->prev(); // could be 0
-    if(prev) {
-      (void) new QListBoxText(m_lbSelectedFields, prev->text(), item);
-      delete prev;
-    }
-  }
-}
-
-void ConfigDialog::slotFieldDown() {
-  QListBoxItem* item;
-#if QT_VERSION >= 0x030100
-  item = m_lbSelectedFields->selectedItem();
-#else
-  item = m_lbSelectedFields->item(m_lbSelectedFields->currentItem());
-#endif
-  if(item) {
-    QListBoxItem* next = item->next(); // could be 0
-    if(next) {
-      QListBoxItem* newItem = new QListBoxText(m_lbSelectedFields, item->text(), next);
-      delete item;
-      m_lbSelectedFields->setSelected(newItem, true);
-    }
-  }
-}
-
-void ConfigDialog::slotTogglePrintGrouped(bool checked_) {
-  m_cbPrintGroupAttribute->setEnabled(checked_);
 }
 
 void ConfigDialog::slotToggleFormatted(bool checked_) {

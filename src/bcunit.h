@@ -2,7 +2,7 @@
                                   bcunit.h
                              -------------------
     begin                : Sat Sep 15 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,9 +17,8 @@
 #ifndef BCUNIT_H
 #define BCUNIT_H
 
+class BCUnit; // needed for the typedef
 class BCCollection;
-class BCUnit;
-class BCUnitGroup;
 
 #include "bcattribute.h"
 
@@ -32,6 +31,34 @@ typedef QPtrList<BCUnit> BCUnitList;
 typedef QPtrListIterator<BCUnit> BCUnitListIterator;
 
 /**
+ * The BCUnitGroup is simply a QPtrList of BCUnits which knows the name of its group,
+ * and the name of the attribute to which that group belongs.
+ *
+ * An example for a book collection would be a group of books, all written by
+ * David Weber. The @ref groupName() would be "Weber, David" and the
+ * @ref attributeName() would be "author".
+ *
+ * @author Robby Stephenson
+ * @version $Id: bcunit.h 207 2003-10-22 01:06:46Z robby $
+ */
+class BCUnitGroup : public BCUnitList {
+
+public:
+  BCUnitGroup(const QString& group, const QString& att)
+   : BCUnitList(), m_group(group), m_attribute(att) {}
+  BCUnitGroup(const BCUnitGroup& group)
+   : BCUnitList(group), m_group(group.groupName()), m_attribute(group.attributeName()) {}
+  ~BCUnitGroup() {}
+
+  const QString& groupName() const { return m_group; }
+  const QString& attributeName() const { return m_attribute; }
+
+private:
+  QString m_group;
+  QString m_attribute;
+};
+
+/**
  * The BCUnit class represents a book, a CD, or whatever is the basic entity
  * in the collection.
  *
@@ -41,7 +68,7 @@ typedef QPtrListIterator<BCUnit> BCUnitListIterator;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bcunit.h,v 1.5.2.1 2003/05/26 00:36:46 robby Exp $
+ * @version $Id: bcunit.h 207 2003-10-22 01:06:46Z robby $
  */
 class BCUnit {
 public:
@@ -56,6 +83,10 @@ public:
    * The copy constructor, needed since the id must be different.
    */
   BCUnit(const BCUnit& unit);
+  /**
+   * If a copy of the unit is needed in a new collection, needs another pointer.
+   */
+  BCUnit(const BCUnit& unit, BCCollection* coll);
   /**
    * The assignment operator is overloaded, since the id must be different.
    */
@@ -84,7 +115,7 @@ public:
    * @return The value of the attribute
    */
   QString attributeFormatted(const QString& name,
-                             BCAttribute::FormatFlag flag = BCAttribute::FormatPlain) const;
+                             BCAttribute::FormatFlag flag = BCAttribute::FormatNone) const;
   /**
    * Sets the value of an attribute for the unit. The method first verifies that
    * the value is allowed for that particular key.
@@ -157,9 +188,9 @@ public:
   void invalidateFormattedAttributeValue(const QString& name);
 
 private:
-  QString m_title;
-  int m_id;
   BCCollection* m_coll;
+  int m_id;
+  QString m_title;
   QMap<QString, QString> m_attributes;
   mutable QMap<QString, QString> m_formattedAttributes;
   QPtrList<BCUnitGroup> m_groups;

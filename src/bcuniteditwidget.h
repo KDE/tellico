@@ -2,7 +2,7 @@
                              bcuniteditwidget.h
                              -------------------
     begin                : Wed Sep 26 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,7 +25,6 @@ class QPushButton;
 #include "bcattributewidget.h"
 #include "bcunit.h" // needed for BCUnitList definition
 #include "bcattribute.h"
-#include "bcunitgroup.h" // needed for linking for some reason
 
 #include <qdict.h>
 
@@ -37,7 +36,7 @@ class QPushButton;
  * edit controls and so on.
  *
  * @author Robby Stephenson
- * @version $Id: bcuniteditwidget.h,v 1.6.2.1 2003/05/26 00:36:46 robby Exp $
+ * @version $Id: bcuniteditwidget.h 222 2003-10-24 05:26:45Z robby $
  */
 class BCUnitEditWidget : public QWidget {
 Q_OBJECT
@@ -57,6 +56,14 @@ public:
 
   bool queryModified();
 //  void keyReleaseEvent(QKeyEvent* ev);
+  /**
+   * Sets the contents of the input controls to match the contents of a unit.
+   *
+   * @param unit A pointer to the unit
+   * @param highlight An optional string to highlight
+   */
+  void setContents(BCUnit* unit, const QString& highlight=QString::null);
+  void setContents(const BCUnitList& list);
 
 public slots:
   void slotSetLayout(BCCollection* coll);
@@ -64,14 +71,6 @@ public slots:
    * Resets the widget, deleting all of its contents
    */
   void slotReset();
-  /**
-   * Sets the contents of the input controls to match the contents of a unit.
-   *
-   * @param unit A pointer to the unit
-   * @param highlight An optional string to highlight
-   */
-  void slotSetContents(BCUnit* unit, const QString& highlight=QString::null);
-  void slotSetContents(const BCUnitList& list);
   /**
    * Updates the completion objects in the edit boxes to include values
    * contained in a certain unit.
@@ -130,6 +129,7 @@ signals:
    * @param unit A pointer to the unit to be deleted
    */
   void signalDeleteUnit(BCUnit* unit);
+  void signalClearSelection(QWidget* widget);
 
 private:
   BCCollection* m_currColl;

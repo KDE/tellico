@@ -67,11 +67,11 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
 
   //---------- connect everything
   connect( mBtnMore, SIGNAL(clicked()),
-	   this, SLOT(slotMore()) );
+     this, SLOT(slotMore()) );
   connect( mBtnFewer, SIGNAL(clicked()),
-	   this, SLOT(slotFewer()) );
+     this, SLOT(slotFewer()) );
   connect( mBtnClear, SIGNAL(clicked()),
-	   this, SLOT(slotClear()) );
+     this, SLOT(slotClear()) );
 
   enableControls();
 }

@@ -2,7 +2,7 @@
                                  bcunit.cpp
                              -------------------
     begin                : Sat Sep 15 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,23 +16,36 @@
 
 #include "bcunit.h"
 #include "bccollection.h"
-#include "bcunitgroup.h"
+#include "translators/bibtexhandler.h" // needed for BibtexHandler::cleanText()
 
 #include <kdebug.h>
 
 #include <qregexp.h>
 
-BCUnit::BCUnit(BCCollection* coll_) : m_title(QString::null), m_id(coll_->unitCount()), m_coll(coll_) {
+BCUnit::BCUnit(BCCollection* coll_) :
+    m_coll(coll_) {
   // keep the title in the attributes, too.
-  setAttribute(QString::fromLatin1("title"), m_title);
+  setAttribute(QString::fromLatin1("title"), QString::null);
 
   if(!coll_) {
     kdWarning() << "BCUnit() - null collection pointer!" << endl;
+    m_id = -1;
+    return;
   }
+  m_id = coll_->unitCount();
 }
 
-BCUnit::BCUnit(const BCUnit& unit_) : m_title(unit_.m_title),
-    m_id(unit_.m_coll->unitCount()), m_coll(unit_.m_coll),
+BCUnit::BCUnit(const BCUnit& unit_) :
+    m_coll(unit_.m_coll),
+    m_id(unit_.m_coll->unitCount()),
+    m_title(unit_.m_title),
+    m_attributes(unit_.m_attributes) {
+}
+
+BCUnit::BCUnit(const BCUnit& unit_,  BCCollection* coll_) :
+    m_coll(coll_),
+    m_id(coll_->unitCount()),
+    m_title(unit_.m_title),
     m_attributes(unit_.m_attributes) {
 }
 
@@ -47,6 +60,9 @@ QString BCUnit::title() const {
       return m_formattedAttributes[titleName];
     } else {
       QString title = BCAttribute::formatTitle(m_title);
+      if(m_coll->collectionType() == BCCollection::Bibtex) {
+        BibtexHandler::cleanText(title);
+      }
       m_formattedAttributes.insert(titleName, title);
       return title;
     }
@@ -73,18 +89,9 @@ const QString& BCUnit::attribute(const QString& attName_) const {
 }
 
 QString BCUnit::attributeFormatted(const QString& attName_, BCAttribute::FormatFlag flag_/*=FormatPlain*/) const {
-  // if auto format is not set, then just return the value
-  if(!BCAttribute::autoFormat()) {
+  // if auto format is not set or FormatNone, then just return the value
+  if(!BCAttribute::autoFormat() || flag_ == BCAttribute::FormatNone) {
     return attribute(attName_);
-  }
-  
-  // if format is plain, just return the attribute, maybe capitalized
-  if(flag_ == BCAttribute::FormatPlain) {
-    if(BCAttribute::autoCapitalize()) {
-      return BCAttribute::capitalize(attribute(attName_));
-    } else {
-      return attribute(attName_);
-    }
   }
   
   QString value;
@@ -95,6 +102,10 @@ QString BCUnit::attributeFormatted(const QString& attName_, BCAttribute::FormatF
       value = attribute(attName_);
     }
     if(!value.isEmpty()) {
+      // special for Bibtex collections
+      if(m_coll->collectionType() == BCCollection::Bibtex) {
+        BibtexHandler::cleanText(value);
+      }
       value = BCAttribute::format(value, flag_);
       m_formattedAttributes.insert(attName_, value);
     }
@@ -128,7 +139,7 @@ bool BCUnit::setAttribute(const QString& attName_, const QString& attValue_) {
   }
 
   if(!m_coll->isAllowed(attName_, attValue_)) {
-    kdDebug() << "BCUnit::setAttribute() - value is not allowed - " << attValue_ << endl;
+    kdDebug() << "BCUnit::setAttribute() - for " << attName_ << ", value is not allowed - " << attValue_ << endl;
     return false;
   }
 
@@ -148,13 +159,13 @@ int BCUnit::id() const {
 bool BCUnit::addToGroup(BCUnitGroup* group_) {
   if(!group_ || m_groups.containsRef(group_)) {
     return false;
-  } else {
-//    kdDebug() << "BCUnit::addToGroup() - adding group (" << group_->groupName() << ")" << endl;
-    m_groups.append(group_);
-    group_->append(this);
-    m_coll->groupModified(group_);
-    return true;
   }
+  
+//  kdDebug() << "BCUnit::addToGroup() - adding group (" << group_->groupName() << ")" << endl;
+  m_groups.append(group_);
+  group_->append(this);
+  m_coll->groupModified(group_);
+  return true;
 }
 
 bool BCUnit::removeFromGroup(BCUnitGroup* group_) {
@@ -189,10 +200,16 @@ QStringList BCUnit::groupNamesByAttributeName(const QString& attName_) const {
   
   QString attValue = attributeFormatted(attName_, att->formatFlag());
   if(attValue.isEmpty()) {
-    groups += BCCollection::emptyGroupName();
+    groups += BCCollection::s_emptyGroupName;
     // attributeByName() had better now return 0
   } else if(att->flags() & BCAttribute::AllowMultiple) {
     groups += QStringList::split(QRegExp(QString::fromLatin1(";\\s*")), attValue);
+    if(att->type() == BCAttribute::Table2) {
+      for(QStringList::Iterator it = groups.begin(); it != groups.end(); ++it) {
+        // quick hack for 2-column tables, how often will a user have "::" in their value?
+        (*it) = (*it).section(QString::fromLatin1("::"),  0,  0);
+      }
+    }
   } else {
     groups += attValue;
   }

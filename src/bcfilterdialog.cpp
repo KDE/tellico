@@ -40,6 +40,7 @@
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
+#include <qapplication.h>
 
 BCFilterRuleWidget::BCFilterRuleWidget(BCFilterRule* rule_,
                                        QWidget* parent_, const char* name_/*=0*/)
@@ -58,7 +59,7 @@ void BCFilterRuleWidget::initLists() {
   //---------- initialize list of filter fields
   if(m_ruleAttributeList.isEmpty()) {
     m_ruleAttributeList.append(i18n("Any Field"));
-    BCFilterDialog* dlg = BCFilterDialogAncestor(parent());
+    BCFilterDialog* dlg = static_cast<BCFilterDialog*>(QObjectAncestor(parent(), "BCFilterDialog"));
     m_ruleAttributeList += dlg->attributeTitles();
   }
 
@@ -131,7 +132,7 @@ void BCFilterRuleWidget::setRule(const BCFilterRule* rule_) {
 
   blockSignals(true);
 
-  BCFilterDialog* dlg = BCFilterDialogAncestor(parent());
+  BCFilterDialog* dlg = static_cast<BCFilterDialog*>(QObjectAncestor(parent(), "BCFilterDialog"));
 
   if(rule_->attribute().isEmpty()) {
     m_ruleAttribute->setCurrentItem(0); // "All Fields"
@@ -153,14 +154,12 @@ void BCFilterRuleWidget::setRule(const BCFilterRule* rule_) {
 BCFilterRule* BCFilterRuleWidget::rule() const {
   QString att;
   if(m_ruleAttribute->currentItem() > 0) { // 0 is "All Fields", attribute is empty
-    BCFilterDialog* dlg = BCFilterDialogAncestor(parent());
+    BCFilterDialog* dlg = static_cast<BCFilterDialog*>(QObjectAncestor(parent(), "BCFilterDialog"));
     att = dlg->attributeNameByTitle(m_ruleAttribute->currentText());
   }
 
-  BCFilterRule* r = new BCFilterRule(att, m_ruleValue->text().stripWhiteSpace(),
-                                     static_cast<BCFilterRule::Function>(m_ruleFunc->currentItem()));
-
-  return r;
+  return new BCFilterRule(att, m_ruleValue->text().stripWhiteSpace(),
+                          static_cast<BCFilterRule::Function>(m_ruleFunc->currentItem()));
 }
 
 void BCFilterRuleWidget::reset() {
@@ -199,12 +198,12 @@ void BCFilterRuleWidgetLister::setFilter(const BCFilter* filter_) {
     return;
   }
 
-  if(filter_->count() > mMaxWidgets) {
+  if(static_cast<int>(filter_->count()) > mMaxWidgets) {
     kdDebug() << "BCFilterRuleWidgetLister::setFilter() - more rules than allowed!" << endl;
   }
 
   // set the right number of widgets
-  setNumberOfShownWidgetsTo(QMAX(filter_->count(), mMinWidgets));
+  setNumberOfShownWidgetsTo(QMAX(static_cast<int>(filter_->count()), mMinWidgets));
 
   // load the actions into the widgets
   QPtrListIterator<BCFilterRule> rIt(*filter_);
@@ -330,13 +329,13 @@ void BCFilterDialog::slotShrink() {
 
 // TODO: fix when multiple collections supported
 QStringList BCFilterDialog::attributeTitles() const {
-  return m_bookcase->doc()->collectionById(0)->attributeTitles();
+  return m_bookcase->doc()->collection()->attributeTitles();
 }
 
 QString BCFilterDialog::attributeNameByTitle(const QString& title_) const {
-  return m_bookcase->doc()->attributeNameByTitle(title_);
+  return m_bookcase->doc()->collection()->attributeNameByTitle(title_);
 }
 
 QString BCFilterDialog::attributeTitleByName(const QString& name_) const {
-  return m_bookcase->doc()->attributeTitleByName(name_);
+  return m_bookcase->doc()->collection()->attributeTitleByName(name_);
 }

@@ -22,17 +22,49 @@
 #include <qpainter.h>
 #include <qregexp.h>
 
-int BCUnitItem::compare(QListViewItem* item_, int col_, bool asc_) const {
+// should only get called for BCDetailedListView parents
+int BCUnitItem::compareColumn(QListViewItem* item_, int col_) const {
   BCDetailedListView* lv = dynamic_cast<BCDetailedListView*>(listView());
-
-// compare keys. If not equal or not BCDetailedListView parent view, just return result
-// otherwise, check prev sorted column
-  int result = KListViewItem::compare(item_, col_, asc_);
-  if(result != 0 || !lv) {
-    return result;
+  if(lv && lv->isNumber(col_)) {
+    // by default, an empty string would get sorted before "1" because toFloat() turns it into "0"
+    // I want the empty strings to be at the end
+    bool ok1, ok2;
+    // use section in case of multiple values
+    float num1 = text(col_).section(';', 0, 0).toFloat(&ok1);
+    float num2 = item_->text(col_).section(';', 0, 0).toFloat(&ok2);
+    if(ok1 && ok2) {
+      return static_cast<int>(num1 - num2);
+    } else if(ok1 && !ok2) {
+      return -1;
+    } else if(!ok1 && ok2) {
+      return 1;
+    } else {
+      return 0;
+    }
   } else {
-    return KListViewItem::compare(item_, lv->prevSortedColumn(), asc_);
+    return KListViewItem::compare(item_, col_, true);
   }
+}
+
+int BCUnitItem::compare(QListViewItem* item_, int col_, bool asc_) const {
+  // if not custom sort, do default compare
+  if(!m_customSort) {
+    return KListViewItem::compare(item_, col_, asc_);
+  }
+
+// if keys are equal, check previous column
+// if those keys are equal, check column before that
+  int result = compareColumn(item_, col_);
+  if(result != 0) {
+    return result;
+  }
+
+  BCDetailedListView* lv = dynamic_cast<BCDetailedListView*>(listView());
+  result = compareColumn(item_, lv->prevSortedColumn());
+  if(result != 0) {
+    return result;
+  }
+  return compareColumn(item_, lv->prev2SortedColumn());
 }
 
 // if there's a non-null pixmap and no text, return a tab character to put this one first
@@ -51,7 +83,7 @@ QString ParentItem::key(int col_, bool) const {
     return text(col_);
   }
 
-  if(text(col_) == BCCollection::emptyGroupName()) {
+  if(text(col_) == BCCollection::s_emptyGroupName) {
     return QString::fromLatin1("\t");
   }
   

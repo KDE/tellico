@@ -49,7 +49,7 @@ class QDialog;
  * This class borrows heavily from KMSearchRule in kmail by Marc Mutz
  *
  * @author Robby Stephenson
- * @version $Id: bcfilterdialog.h,v 1.1 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bcfilterdialog.h 119 2003-09-19 01:55:15Z robby $
  */
 class BCFilterRuleWidget : public QHBox {
 Q_OBJECT
@@ -121,7 +121,7 @@ private:
 
 /**
  * @author Robby Stephenson
- * @version $Id: bcfilterdialog.h,v 1.1 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bcfilterdialog.h 119 2003-09-19 01:55:15Z robby $
  */
 class BCFilterDialog : public KDialogBase  {
 Q_OBJECT
@@ -130,7 +130,8 @@ public:
   /**
    * The constructor sets up the dialog.
    *
-   * @param parent A pointer to the parent widget, a Bookcase object
+   * @param view A pointer to the view widget
+   * @param parent A pointer to the parent widget
    * @param name The widget name
    */
   BCFilterDialog(BCDetailedListView* view, Bookcase* parent, const char* name=0);

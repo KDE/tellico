@@ -1,7 +1,7 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 
 
-EXTRA_DIST = bookcase.png book.png hi16-app-bookcase.png hi32-app-bookcase.png person-open.png person.png 
+EXTRA_DIST = bookcase.png book.png hi16-app-bookcase.png hi32-app-bookcase.png person-open.png person.png video.png album.png bibtex.png 
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -11,4 +11,4 @@ icondir = ${kde_icondir}
 icon_ICON = bookcase
 
 datadir = ${kde_datadir}/bookcase/pics
-data_DATA = book.png bookcase.png person.png person-open.png
+data_DATA = book.png bookcase.png person.png person-open.png album.png video.png bibtex.png

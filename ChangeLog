@@ -1,12 +1,121 @@
+2003-11-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed charset encoding bug.
+	* Fixed compile for GCC 2.96.
+	* Changed bibtex and CSV export to default to locale encoding.
+	* Fixed bug with field editor not updating title.
+	* Released Bookcase 0.7.1.
+
+2003-11-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.7.
+
+2003-11-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed the tips file translation issue.
+	* Released Bookcase 0.7pre2.
+
+2003-11-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed ISBN formatting bug for non-english language publishers.
+	* Released Bookcase 0.7pre1.
+
+2003-10-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed documentation compile error for KDE 3.2.
+	* Added CSV importer.
+	* Changed Bibtexml importer and exporter to use internal classes rather than XSL stylesheets.
+
+2003-10-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Added string macro editor for Bibtex collections.
+	* Printing now only prints visible entries by default.
+
+2003-10-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Added new group for all attributes formatted as names, so Editors and Authors can be grouped together.
+
+2003-10-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed printing to print columns as shown in the view, and group by the current grouping.
+	* Removed old options for printing fields selection.
+
+2003-10-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Added capability to reorder fields in field editor.
+
+2003-10-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Imported btparse library code to use for importing Bibtex files. It has a lot of warnings, but none should be fatal.
+
+2003-09-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Added "Bibtex Field" to default Bibtex collections fields to aid in exporting to Bibtex and Bibtexml.
+	* Bumped document syntax to 4.
+	* Changed "attribute" elements in document file to "field".
+	* Changed all unit elements to "entry" rather than the unit name.
+	* Changed Boolean values to save as "true" instead of an implicit value.
+	* Added CSV exporter.
+	
+2003-09-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Added 2-column Table field type.
+
+2003-09-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed boolean values to show title in group view.
+
+2003-09-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug when deleting multiple books from detailed listview.
+
+2003-08-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed field completion to be case-insensitive.
+	* Fixed bug with saving listview columns.
+
 2003-08-16  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with list view not retaining correct visible columns after save.
 	* Fixed bug with reopening last saved file.
-	* Released Bookcase 0.6.6
 
 2003-08-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Added French translation from RNB.
+
+2003-08-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Added menu item for configuring toolbars.
+	* Added menu item for configuring shortcut keys.
+
+2003-07-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Table field type.
+
+2003-07-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug in saving visible columns.
+	* Improved loading time.
+
+2003-07-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Implemented adding file extension (.bc) when using File->Save As and an extension filter is shown.
+	* Added status bar text showing number of selected books when more than 1 is selected.
+
+2003-07-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Added menu comands for showing/hiding the group view and editor.
+
+2003-07-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Added "--nofile" command line option for bypassing the "Open last file" config setting.
+	* Added "Tip of the Day" dialog.
+	* Changed default for showing unit count to true.
+	* Changed Year field type to generic Number.
+	* Improved sorting to sort numerically for Number fields.
+	* Added Default button to Field Editor dialog.
+	* Added additional format option to never capitalize or format.
+	* Fixed last open file option to no longer be over-written when Bookcase is exited with an empty document.
+	* Cut the 0.6.x branch.
 
 2003-07-22  Robby Stephenson  <robby@periapsis.org>
 

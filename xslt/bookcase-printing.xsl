@@ -4,18 +4,19 @@
                 xmlns:str="http://exslt.org/strings"
                 xmlns:dyn="http://exslt.org/dynamic"
                 extension-element-prefixes="str dyn"
+                exclude-result-prefixes="bc"
                 version="1.0">
 
 <!--
-   ================================================================
+   ===================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl,v 1.3 2003/05/03 05:50:26 robby Exp $
+   $Id: bookcase-printing.xsl 264 2003-11-06 07:04:54Z robby $
 
    Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
-   application, which can be found at http://periapsis.org/bookcase/
+   application, which can be found at http://www.periapsis.org/bookcase/
 
    The exslt extensions from http://www.exslt.org are required.
    Specifically, the string and dynamic modules are used. For
@@ -28,75 +29,55 @@
    actual Bookcase data file, since the application re-arranges the
    DOM for printing.
 
-   Customize this file in order to print different columns of
-   attributes for each book. Any version of this file in the user's home
-   directory, such as $HOME/.kde/share/apps/bookcase/, will override
-   the system file.
-   ================================================================
+   Any version of this file in the user's home directory, such as
+   $HOME/.kde/share/apps/bookcase/, will override the system file.
+   ===================================================================
 -->
 
 <xsl:output method="html" version="xhtml"/>
 
 <xsl:strip-space elements="*"/>
 
-<xsl:variable name="current-syntax" select="'3'"/>
-
-<!-- To choose which properties for the books are printed, change the
-     string to a space separated list of attribute names.
-     As of Bookcase 0.5, the available attribute names are:
-     - title (Title)
-     - subtitle (Subtitle)
-     - author (Author)
-     - binding (Binding)
-     - pur_date (Purchase Date)
-     - pur_price (Purchase Pricee)
-     - publisher (Publisher)
-     - edition (Edition)
-     - cr_year (Copyright Year)
-     - pub_year (Publication Year)
-     - isbn (ISBN#)
-     - lccn (LCCN#)
-     - pages (Pages)
-     - language (Language)
-     - genre (Genre)
-     - keyword (Keywords)
-     - series (Series)
-     - series_num (Series Number)
-     - condition (Condition)
-     - signed (Signed)
-     - read (Read)
-     - gift (Gift)
-     - rating (Rating)
-     - comments (Comments)
--->
-<xsl:param name="column-names" select="'title binding publisher read'"/>
+<!-- To choose which fields of each entry are printed, change the
+     string to a space separated list of field names. To know what
+     fields are available, check the Bookcase data file for <field>
+     elements. -->
+<xsl:param name="column-names" select="'title'"/>
+<xsl:variable name="columns" select="str:tokenize($column-names)"/>
 
 <!-- If you want the header row printed, showing which attributes
-     are printed, change this to true() -->
-<xsl:param name="show-headers" select="true()"/>
+     are printed, change this to true(), otherwise false() -->
+<xsl:param name="show-headers" select="false()"/>
 
-<!-- The sort-name parameter is a string defining the name() of the 
-     node used to sort the books. It can't be used to generate a key()
-     since key() can't use a parameter. Sorting by author is the default
-     Important: some of the fields, which can contain multiple entries,
-     need to be listed in the proper XPath position, as children of their
-     parent nodes. Author is one of those. -->
-<!-- Remember to add the bc namespace. -->
-<xsl:param name="sort-name" select="'bc:authors/bc:author'"/>
+<!-- The entries may be grouped by a certain field. Keys are needed
+     for both the entries and the grouped field values -->
+<xsl:param name="group-entries" select="true()"/>
+<!-- DO NOT CHANGE THE NAME OF THESE KEYS -->
+<xsl:key name="entries" match="bc:entry" use=".//bc:author"/>
+<xsl:key name="groups" match="bc:author" use="."/>
+<xsl:variable name="all-groups" select="//bc:author"/>
 
-<!-- The doc-url parameter is a string containing the url of the
-     file being printed -->
-<xsl:param name="doc-url" select="'Bookcase'"/>
+<!-- 
+   ===================================================================
+   The only thing below here that you might want to change is the CSS
+   governing the appearance of the output HTML.
+   ===================================================================
+-->
 
-<!-- The sort-title parameter is a string sontaining a description of the sort -->
-<xsl:param name="sort-title" select="'(sorted by author)'"/>
-
-<xsl:variable name="columns" select="str:tokenize($column-names)"/>
+<!-- The page-title is used for the HTML title -->
+<xsl:param name="page-title" select="'Bookcase'"/>
+<!-- This is the title just beside the collection name. It will 
+     automatically list which fields are used for sorting. -->
+<xsl:param name="sort-title" select="''"/>
+<!-- The entries are actually sorted by the app -->
 
 <xsl:variable name="endl">
 <xsl:text>
 </xsl:text>
 </xsl:variable>
+
+<!-- This stylesheet is designed for Bookcase document syntax version 4 -->
+<xsl:variable name="current-syntax" select="'4'"/>
 
 <xsl:template match="/">
  <xsl:apply-templates select="bc:bookcase"/>
@@ -117,14 +98,8 @@
  <html>
   <head>
    <style type="text/css">
-   html {
-        margin: 0px;
-        padding: 0px;
-   }
    body {
-        margin: 0px;
-        padding: 0px;
-        fon-family: sans-serif;
+        font-family: sans-serif;
    }     
    #headerblock {
         padding-top: 10px;
@@ -133,37 +108,44 @@
    }
    div.colltitle {
         padding: 4px;
-        line-height: 18px;
         font-size: 2em;
         border-bottom: 1px solid black;
-        margin: 0px;
    }
    span.subtitle {
         margin-left: 20px;
         font-size: 0.5em;
    }
    td.groupName {
-        margin-right: 3px;
         margin-top: 10px;
         margin-bottom: 2px;
         background: #eee;
         font-size: 1.2em;
-        font-weight: bold;
+        font-weight: bolder;
+/**        border-top: 3px double black;
+        border-bottom: 1px solid #ccc;**/
    }
-   tr.book {
-        margin-left: 15px;
-        margin-bottom: 5px;
-        margin-right: 15px;
-        font-size: 1em;
+   tr.header {
+        background-color: #ccc;
+        font-weight: bolder;
+        font-size: 1.2em;
    }
-   th {
+   tr.entry1 {
    }
-   td.attribute {
+   tr.entry2 {
+        background-color: #eee;
+   }
+   tr.groupEntry {
         padding-left: 20px;
+   }
+   td.field {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 5px;
+        padding-right: 5px;
    }
    </style>
    <title>
-    <xsl:value-of select="$doc-url"/>
+    <xsl:value-of select="$page-title"/>
    </title>
   </head>
   <body>
@@ -177,89 +159,95 @@
   <div class="colltitle">
    <xsl:value-of select="@title"/>
     <span class="subtitle">
-     <xsl:choose>
-      <xsl:when test="string-length($sort-title) &gt; 0">
-       <xsl:value-of select="$sort-title"/>
-      </xsl:when>
-      <xsl:otherwise>
-       <xsl:if test="string-length($sort-name) &gt; 0">
-        <xsl:text>(sorted by </xsl:text>
-        <xsl:call-template name="attribute-title">
-         <xsl:with-param name="attributes" select="bc:attributes"/>
-         <xsl:with-param name="name" select="$sort-name"/>
-        </xsl:call-template>
-        <xsl:text>)</xsl:text>
-       </xsl:if>
-      </xsl:otherwise>
-     </xsl:choose>
+     <xsl:value-of select="$sort-title"/>
     </span>
   </div>
  </div>
 
- <table>
+ <table class="entries">
+
   <xsl:if test="$show-headers">
-   <xsl:variable name="attributes" select="bc:attributes"/>
-   <tr>
-    <xsl:for-each select="$columns">
-     <xsl:variable name="column" select="."/>
-     <th>
-      <xsl:call-template name="attribute-title">
-       <xsl:with-param name="attributes" select="$attributes"/>
-       <xsl:with-param name="name" select="$column"/>
-      </xsl:call-template>
-     </th>
-    </xsl:for-each>
-   </tr>
+   <xsl:variable name="fields" select="bc:fields"/>
+   <thead>
+    <tr class="header">
+     <xsl:for-each select="$columns">
+      <xsl:variable name="column" select="."/>
+      <th>
+       <xsl:call-template name="field-title">
+        <xsl:with-param name="fields" select="$fields"/>
+        <xsl:with-param name="name" select="$column"/>
+       </xsl:call-template>
+      </th>
+     </xsl:for-each>
+    </tr>
+   </thead>
   </xsl:if>
-  <xsl:choose> <!-- if sort-name is not empty, do the funky sort -->
-   <xsl:when test="string-length($sort-name) &gt; 0">
-    <xsl:for-each select="bc:book">
-     <!-- Sort by dynamically evaluating the sort-name variable
-          this approach follows the one on page 141 in the book "XSLT"
-          by Doug Tidwell -->
-     <xsl:sort select="dyn:evaluate($sort-name)"/>
-     <!-- keep track of the last key value -->
-     <xsl:variable name="lastKey" select="dyn:evaluate($sort-name)"/>
-     <!-- build the test string for convenience -->
-     <xsl:variable name="test-str" select="concat('not(preceding-sibling::bc:book[',$sort-name,'=$lastKey])')"/>
-     <xsl:if test="dyn:evaluate($test-str)">
-      <tr>
-       <td class="groupName">
-        <xsl:attribute name="colspan">
-         <xsl:value-of select="count($columns)"/>
+
+  <tbody>
+
+   <!-- If the entries are not being grouped, it's easy -->
+   <xsl:if test="not($group-entries)">
+    <xsl:for-each select="bc:entry">
+     <tr>
+      <xsl:choose>
+       <xsl:when test="position() mod 2 = 1">
+        <xsl:attribute name="class">
+         <xsl:text>entry1</xsl:text>
         </xsl:attribute>
-        <xsl:value-of select="dyn:evaluate($sort-name)"/>
-       </td>
-      </tr>
-      <xsl:for-each select="dyn:evaluate(concat('../bc:book[',$sort-name,'=$lastKey]'))">
-       <xsl:sort select="dyn:evaluate(concat('//bc:', $columns[1]))"/>
-       <tr class="book">
-        <xsl:apply-templates select="."/>
-       </tr>
-      </xsl:for-each>
-     </xsl:if>
-    </xsl:for-each>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:for-each select="bc:book">
-     <xsl:sort select="dyn:evaluate(concat('//bc:', $columns[1]))"/>
-     <tr class="book">
+       </xsl:when>
+       <xsl:otherwise>
+        <xsl:attribute name="class">
+         <xsl:text>entry2</xsl:text>
+        </xsl:attribute>
+       </xsl:otherwise>
+      </xsl:choose>
       <xsl:apply-templates select="."/>
      </tr>
     </xsl:for-each>
-   </xsl:otherwise>
-  </xsl:choose>
+   </xsl:if> <!-- end ungrouped output -->
+
+   <!-- If the entries are being grouped, it's a bit more involved -->
+   <xsl:if test="$group-entries">
+    <!-- first loop through unique groups -->
+    <xsl:for-each select="$all-groups[generate-id(.)=generate-id(key('groups', .)[1])]">
+     <xsl:sort select="."/>
+     <tr>
+      <td class="groupName">
+       <xsl:attribute name="colspan">
+        <xsl:value-of select="count($columns)"/>
+       </xsl:attribute>
+       <xsl:choose>
+        <xsl:when test="count(bc:column) &gt; 1">
+         <!-- just output first column -->
+         <xsl:value-of select="bc:column[1]"/>
+        </xsl:when>
+        <xsl:otherwise>
+         <xsl:value-of select="."/>
+        </xsl:otherwise>
+       </xsl:choose>
+      </td>
+     </tr>
+     <!-- now loop through every entry with this group value -->
+     <xsl:for-each select="key('entries', .)">
+      <tr class="groupEntry">
+       <xsl:apply-templates select="."/>
+      </tr>
+     </xsl:for-each>
+    </xsl:for-each>
+   </xsl:if>
+
+  </tbody>
  </table>
 </xsl:template>
 
-<xsl:template name="attribute-title">
- <xsl:param name="attributes"/>
+<xsl:template name="field-title">
+ <xsl:param name="fields"/>
  <xsl:param name="name"/>
  <xsl:variable name="name-tokens" select="str:tokenize($name, ':')"/>
- <!-- the header is the title attribute of the attribute node whose name equals the column name -->
+ <!-- the header is the title attribute of the field node whose name equals the column name -->
  <xsl:choose>
-  <xsl:when test="$attributes">
-   <xsl:value-of select="$attributes/bc:attribute[@name = $name-tokens[last()]]/@title"/>
+  <xsl:when test="$fields">
+   <xsl:value-of select="$fields/bc:field[@name = $name-tokens[last()]]/@title"/>
   </xsl:when>
   <xsl:otherwise>
    <xsl:value-of select="$name-tokens[last()]"/>
@@ -267,33 +255,50 @@
  </xsl:choose>
 </xsl:template>
 
-<xsl:template match="bc:book">
+<xsl:template match="bc:entry">
+ <!-- stick all the descendants into a variable -->
  <xsl:variable name="current" select="descendant::*"/>
  <xsl:for-each select="$columns">
   <xsl:variable name="column" select="."/>
-  <!-- if the attribute node exists, output its value, otherwise put in a space -->
-  <xsl:choose>
-   <xsl:when test="count($current[local-name() = $column]) &gt; 0">
-    <!-- the attribute's value is its text() unless it doesn't have any, then just output an 'X' -->
-    <xsl:choose>
-     <xsl:when test="string-length($current[local-name() = $column]) &gt; 0">
-      <td class="attribute">
-       <xsl:value-of select="$current[local-name() = $column]"/>
-      </td>
-     </xsl:when>
-     <xsl:otherwise>
-      <th class="attribute">
-       <xsl:text>X</xsl:text>
-      </th>
-     </xsl:otherwise>
-    </xsl:choose>
-   </xsl:when>
-   <xsl:otherwise>
-    <td class="attribute">
+  <!-- find all descendants whose name matches the column name -->
+  <xsl:variable name="numvalues" select="count($current[local-name() = $column])"/>
+  <!-- if the field node exists, output its value, otherwise put in a space -->
+  <td class="field">
+   <xsl:choose>
+    <!-- when there is at least one value... -->
+    <xsl:when test="$numvalues &gt; 0">
+     <!-- the field's value is its text() unless it doesn't have any, then just output an 'X' -->
+     <xsl:for-each select="$current[local-name() = $column]">
+      <xsl:choose>
+      <!-- boolean values end up as 'true', would be better to check if it's boolean
+           but for now just test for string equality. If so, output 'X' --> 
+       <xsl:when test=". = 'true'">
+        <xsl:text>X</xsl:text>
+       </xsl:when>
+       <!-- next, check for 2-column table values which have column children -->
+       <xsl:when test="count(bc:column) &gt; 1">
+        <!-- italicize second column -->
+        <xsl:value-of select="bc:column[1]"/>
+        <xsl:text> - </xsl:text>
+        <em><xsl:value-of select="bc:column[2]"/></em>
+        <br/>
+       </xsl:when>
+       <!-- finally, it's just a regular value -->
+       <xsl:otherwise>
+        <xsl:value-of select="."/>
+        <!-- if there is more than one value, add the semi-colon -->
+        <xsl:if test="position() &lt; $numvalues">
+         <xsl:text>; </xsl:text>
+        </xsl:if>
+       </xsl:otherwise>
+      </xsl:choose>
+     </xsl:for-each>
+    </xsl:when>
+    <xsl:otherwise>
      <xsl:text> </xsl:text>
-    </td>
-   </xsl:otherwise>
-  </xsl:choose>
+    </xsl:otherwise>
+   </xsl:choose>
+  </td>
  </xsl:for-each>
 </xsl:template>
 

@@ -7,7 +7,7 @@
    ================================================================
    Bookcase XSLT file - sort by author
 
-   $Id: bookcase-by-title.xsl,v 1.3 2003/05/03 05:50:26 robby Exp $
+   $Id: bookcase-by-title.xsl 261 2003-11-06 05:15:35Z robby $
 
    Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
@@ -21,7 +21,7 @@
 
 <xsl:strip-space elements="*"/>
 
-<xsl:variable name="current-syntax" select="'3'"/>
+<xsl:variable name="current-syntax" select="'4'"/>
 
 <xsl:variable name="endl">
 <xsl:text>
@@ -92,7 +92,6 @@
 </xsl:template>
 
 <xsl:template match="bc:collection">
- <xsl:variable name="current-collection" select="."/>
  <div id="headerblock">
   <div class="title">
    <xsl:value-of select="@title"/>
@@ -103,7 +102,7 @@
 
  <div class="books">
   <ol>
-   <xsl:for-each select="/bc:bookcase/bc:collection/bc:book[../../bc:collection = $current-collection]">
+   <xsl:for-each select="/bc:bookcase/bc:collection/bc:entry">
     <xsl:sort select="bc:title"/>
     <xsl:apply-templates select="."/>
    </xsl:for-each> 
@@ -111,7 +110,7 @@
  </div>
 </xsl:template>
 
-<xsl:template match="bc:book">
+<xsl:template match="bc:entry">
  <li>
   <xsl:value-of select="bc:title"/><br/>
  </li>

@@ -2,7 +2,7 @@
                                 bookcasedoc.h
                              -------------------
     begin                : Sun Sep 9 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,14 +21,16 @@
 #include <config.h>
 #endif
 
-class QFile;
+class Bookcase;
+class BCUnit;
+class BCCollection;
 
-#include "bccollection.h"
+class QFile;
+class QDomDocument;
 
 #include <kurl.h>
 
 #include <qptrlist.h>
-#include <qdom.h>
 #include <qobject.h>
 
 /**
@@ -37,7 +39,7 @@ class QFile;
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: bookcasedoc.h,v 1.4 2003/05/10 19:21:53 robby Exp $
+ * @version $Id: bookcasedoc.h 260 2003-11-05 06:06:18Z robby $
  */
 class BookcaseDoc : public QObject  {
 Q_OBJECT
@@ -50,8 +52,12 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  BookcaseDoc(QWidget* parent, const char* name=0);
-
+  BookcaseDoc(Bookcase* parent, const char* name=0);
+  /**
+   * Destructor
+   */
+  ~BookcaseDoc();
+  
   /**
    * Sets the URL associated with the document.
    *
@@ -76,9 +82,10 @@ public:
    * value is currently always true, but should indicate whether or not a new document
    * was correctly initialized.
    *
+   * @param type The type of collection to add
    * @return A boolean indicating success
    */
-  bool newDocument();
+  bool newDocument(int type);
   /**
    * Open a document given a specified location. If, for whatever reason, the file
    * cannot be opened, a proper message box is shown, indicating the problem. The
@@ -89,10 +96,6 @@ public:
    * @return A boolean indicating success
    */
   bool openDocument(const KURL& url);
-  /**
-   * Loads a DomDocument into a BookcaseDoc
-   */
-  bool loadDomDocument(const KURL& url, const QDomDocument& dom);
   /**
    * Checks to see if the document has been modified before deleting the contents.
    * If it has, then a message box asks the user if the document should be saved,
@@ -109,17 +112,6 @@ public:
    */
   bool saveDocument(const KURL& url);
   /**
-   * Writes the contents of a string to a url. If the file already exists, a "~" is appended
-   * and the existing file is moved. The the file is remote, a temporary file is written and
-   * then uploaded.
-   *
-   * @param url The url
-   * @param text The text
-   * @param localeEncoding Whether to use Locale encoding, or UTF-8 by default
-   * @return A boolean indicating success
-   */
-  bool writeURL(const KURL& url, const QString& text, bool localeEncoding=false) const;
-  /**
    * Closes the document, deleting the contents. The return value is presently always true.
    *
    * @return A boolean indicating success
@@ -131,54 +123,44 @@ public:
    */
   void deleteContents();
   /**
-   * Returns the number of collections in the document.
+   * Returns a pointer to the document collection
    *
-   * @return The number of collections
+   * @return The collection
    */
-  unsigned collectionCount() const;
-  /**
-   * Locates a collection by its ID number. If none is found, a NULL pointer is returned.
-   *
-   * @param id The collection ID
-   * @return A pointer to the collection
-   */
-  BCCollection* collectionById(int id);
-  /**
-   * Returns a list of all the collections in the document.
-   *
-   * @return The collection list
-   */
-  const BCCollectionList& collectionList() const;
-  /**
-   * Inserts the data in the document into a DOM ordered form by iterating over
-   * the units in the whole document.
-   *
-   * @param format Whether to format the attributes
-   * @return The QDomDocument object
-   */
-  QDomDocument exportXML(bool format=false) const;
-  /**
-   * Inserts the data in the document into a DOM ordered form by iterating through
-   * a certain attribute group
-   *
-   * @param dictName The attribute name
-   * @param format Whether to format the attributes
-   * @return The QDomDocument object
-   */
-  QDomDocument exportXML(const QString& dictName, bool format) const;
+  BCCollection* collection();
   /**
    * Returns true if there are no units. A doc with an empty collection is still empty.
    */
-  bool isEmpty() const; 
+  bool isEmpty() const;
   /**
-   * Loads the contents of a file into a QDomDocument.
+   * Replace the current collection with a new one. Effectively, this is equivalent to opening
+   * a new file containg this collection.
    *
-   * @param url The url of the file
-   * @return A pointer to the QDomDocument, it must be deleted!
+   * @param coll A Pointer to the new collection. @ref BookcaseDoc takes ownership.
    */
-  QDomDocument* readDocument(const KURL& url) const;
+  void replaceCollection(BCCollection* coll);
+  /**
+   * Appends the contents of another collection to the current one. The collections must be the
+   * same type. BCAttributes which are in the current collection are left alone. BCAttributes
+   * in the appended collection not in the current one are added. BCUnits in the appended collection
+   * are added to the current one.
+   *
+   * @param coll A Pointer to the appended collection.
+   */
+  void appendCollection(BCCollection* coll);
+  /**
+   * Adds a collection to the document. The signalCollectionAdded() signal is made.
+   *
+   * @param coll A pointer to the collection
+   */
+  void addCollection(BCCollection* coll);
+  /**
+   * Removes a collection from the document. The signalCollectionDeleted() signal is made.
+   *
+   * @param coll A pointer to the collection
+   */
+  void deleteCollection(BCCollection* coll);
 
-  static QDomDocument* importBibtex(const KURL& url);
   /**
    * Flags used for searching The options should be bit-wise OR'd together.
    * @li AllAttributes - Search through all attributes
@@ -200,31 +182,17 @@ public:
    * @param options The options, bit-wise OR'd together
    */
   void search(const QString& text, const QString& attTitle, int options);
-  
-  BCAttributeList uniqueAttributes(int type = 0) const;
-  QString attributeNameByTitle(const QString& title, int type=0);
-  QString attributeTitleByName(const QString& name, int type=0);
-  
+ 
 public slots:
   /**
-   * Adds a collection to the document. The signalCollectionAdded() signal is made.
-   *
-   * @param coll A pointer to the collection
+   * Renames a collection, i.e. changes the collection title. A dialog box
+   * opens up for the user to input the new name.
    */
-  void slotAddCollection(BCCollection* coll);
+  void slotRenameCollection();
   /**
-   * Removes a collection from the document. The signalCollectionDeleted() signal is made.
-   *
-   * @param coll A pointer to the collection
+   * Converts the document's collection to a BibtexCollection.
    */
-  void slotDeleteCollection(BCCollection* coll);
-  /**
-   * Renames a collection, i.e. changes the collection title.
-   *
-   * @param id The ID of the collection to change
-   * @param newName The new name
-   */
-  void slotRenameCollection(int id, const QString& newName);
+  void slotConvertToBibtex();
   /**
    * Saves a unit. If the unit is already in a collection, the slotAddUnit() method is called;
    * otherwise, the signalUnitModified() signal is made.
@@ -252,20 +220,6 @@ public slots:
    */
   void slotSetModified(bool m=true);
 
-protected:
-  /**
-   * Writes the contents of a string to a file.
-   *
-   * @param file The file object
-   * @param text The string
-   * @param localeEncoding Whether to use Locale encoding, or UTF-8 by default
-   * @return A boolean indicating success
-   */
-  bool writeFile(QFile& file, const QString& text, bool localeEncoding) const;
-  void exportCollectionXML(QDomDocument& doc, QDomElement& parent, BCCollection* coll, bool format) const;
-  void exportAttributeXML(QDomDocument& doc, QDomElement& parent, BCAttribute* att) const;
-  void exportUnitXML(QDomDocument& doc, QDomElement& parent, BCUnit* unit, bool format) const;
-
 signals:
   /**
    * Signals that the document has been modified.
@@ -290,6 +244,12 @@ signals:
    */
   void signalCollectionDeleted(BCCollection* coll);
   /**
+   * Signals that the collection has been renamed.
+   *
+   * @param name The new collection name
+   */
+  void signalCollectionRenamed(const QString& name);
+  /**
    * Signals that a new unit has been added.
    *
    * @param unit A pointer to the unit
@@ -308,12 +268,6 @@ signals:
    */
   void signalUnitDeleted(BCUnit* unit);
   /**
-   * Signals that a fraction of an operation has been completed.
-   *
-   * @param f The fraction, 0 =< f >= 1
-   */
-  void signalFractionDone(float f);
-  /**
    * Signals that a unit should be selected, with an optional highlight string
    *
    * @param unit The unit to be selected
@@ -322,7 +276,7 @@ signals:
   void signalUnitSelected(BCUnit* unit, const QString& highlight);
 
 private:
-  BCCollectionList m_collList;
+  BCCollection* m_coll;
   bool m_isModified;
   KURL m_url;
 };

@@ -7,7 +7,7 @@
    ================================================================
    Bookcase summary XSLT file
 
-   $Id: summary.xsl,v 1.2 2003/04/01 03:30:41 robby Exp $
+   $Id: summary.xsl 279 2003-11-09 02:20:40Z robby $
 
    Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
@@ -40,13 +40,13 @@
 
 <xsl:template match="bc:collection">
  <h1>
- <xsl:value-of select="@title"/>
+  <xsl:value-of select="@title"/>
  </h1>
  <hr/>
  <p>
- <xsl:text>The collection has </xsl:text>
- <xsl:value-of select="count(bc:book)"/>
- <xsl:text> books.</xsl:text>
+  <xsl:text>The collection has </xsl:text>
+  <xsl:value-of select="count(bc:entry)"/>
+  <xsl:text> entries.</xsl:text>
  </p>
 </xsl:template>
 

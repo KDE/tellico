@@ -2,7 +2,7 @@
                                 bcunititem.h
                              -------------------
     begin                : Sat Oct 20 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -33,7 +33,7 @@ class BCUnit;
  * @see BCUnit
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.4.2.3 2003/06/21 16:55:35 robby Exp $
+ * @version $Id: bcunititem.h 168 2003-10-06 01:20:51Z robby $
  */
 class BCUnitItem : public KListViewItem {
 public:
@@ -44,7 +44,7 @@ public:
    * @param unit A pointer to the unit to which the item refers
    */
   BCUnitItem(KListView* parent, BCUnit* unit)
-      : KListViewItem(parent), m_unit(unit) {}
+      : KListViewItem(parent), m_unit(unit), m_customSort(parent->isA("BCDetailedListView")) {}
   /**
    * This constructor is for items which have other KListViewItems as parents. It
    * initializes the text in the first column, as well.
@@ -54,9 +54,34 @@ public:
    * @param unit A pointer to the unit to which the item refers
    */
   BCUnitItem(KListViewItem* parent, const QString& text, BCUnit* unit)
-      : KListViewItem(parent, text), m_unit(unit) {}
+      : KListViewItem(parent, text), m_unit(unit), m_customSort(false) {}
 
+  /**
+   * Compares one column to another, calling @ref BCDetailedListView::isNumber() and
+   * using that to determine whether to do numerical or alphabetical comparison.
+   *
+   * @param item Pointer to comparison item
+   * @param col Column to compare
+   * @return Comparison result, -1,0, or 1
+   */
+  int compareColumn(QListViewItem* item, int col) const;
+  /**
+   * Compares one column to another. If the parent is a @ref BCDetailedListView,
+   * it calls @ref compareColumn, otherwise just does default comparison.
+   *
+   * @param item Pointer to comparison item
+   * @param col Column to compare
+   * @param ascending Whether ascending or descing comparison, ignored
+   * @return Comparison result, -1,0, or 1
+   */
   virtual int compare(QListViewItem* item, int col, bool ascending) const;
+  /**
+   * Returns the key for the list item. The key is just the text, unless there is none,
+   * in which case a tab character is returned if there is a non-null pixmap.
+   *
+   * @param col Column to compare
+   * @return The key string
+   */
   virtual QString key(int col, bool) const;
   /**
    * Returns a const pointer to the unit to which the item refers
@@ -68,6 +93,10 @@ public:
 private:
   // if I make this a QGuardedPtr, the app crashes, why?
   BCUnit* m_unit;
+  // if the parent is a BCDetailedListView
+  // this way, I don't have to call listView()->isA("BCDetailedListView") every time
+  // when I want to do funky comparisons
+  bool m_customSort;
 };
 
 /**
@@ -78,7 +107,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.4.2.3 2003/06/21 16:55:35 robby Exp $
+ * @version $Id: bcunititem.h 168 2003-10-06 01:20:51Z robby $
  */
 class ParentItem : public KListViewItem {
 public:
@@ -127,7 +156,9 @@ public:
    */
   virtual QString key(int col, bool) const;
 
-  /** paints the cell */
+  /**
+   * Paints the cell, adding the number count.
+   */
   virtual void paintCell(QPainter* p, const QColorGroup& cg,
                          int column, int width, int align);
   virtual int width(const QFontMetrics& fm, const QListView* lv, int c) const;

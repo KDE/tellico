@@ -1,14 +1,14 @@
 <!--
    ================================================================
-   Bookcase XML DTD version 3.0
+   Bookcase XML DTD version 4.0
 
-   $Id: bookcase.dtd,v 1.5 2003/05/03 08:43:09 robby Exp $
+   $Id: bookcase.dtd,v 1.6 2003/05/03 08:43:09 robby Exp $
 
-   Copyright (c) 2002 Robby Stephenson
+   Copyright (c) 2001-2003 Robby Stephenson
 
    This DTD is designed to be used with XML data files for the 
    'bookcase' application, which can be found at:
-   http://periapsis.org/bookcase/
+   http://www.periapsis.org/bookcase/
 
    The formal public identifer for this DTD should be:
    
@@ -17,27 +17,36 @@
    ================================================================
 -->
 <!ELEMENT bookcase (collection+)>
-<!ATTLIST bookcase version CDATA #REQUIRED>
-<!ELEMENT collection (attributes*, book*)>
+<!ATTLIST bookcase syntexVersion CDATA #REQUIRED>
+
+<!ELEMENT collection (fields*, bibtex-preamble*, macros*, entry*)>
 <!ATTLIST collection title CDATA #REQUIRED>
-<!ATTLIST collection unit CDATA #REQUIRED>
+<!ATTLIST collection type (1|2|3|4|5|6|7|8|9|10) #REQUIRED>
 <!ATTLIST collection unitTitle CDATA #IMPLIED>
-<!ELEMENT attributes (attribute+)>
-<!ELEMENT attribute EMPTY>
-<!ATTLIST attribute name CDATA #REQUIRED>
-<!ATTLIST attribute title CDATA #REQUIRED>
-<!ATTLIST attribute group CDATA #REQUIRED>
-<!ATTLIST attribute allowed CDATA #IMPLIED>
-<!ATTLIST attribute flags CDATA #IMPLIED>
-<!ATTLIST attribute format CDATA #IMPLIED>
-<!ATTLIST attribute description CDATA #IMPLIED>
-<!ATTLIST attribute type (1|2|3|4|5|6|7) #IMPLIED> 
-<!ELEMENT book (title?, subtitle?, authors?, binding?, pur_date?, pur_price?, publisher?, edition?, cr_years?, pub_year?, isbn?, lccn?, pages?, languages?, genres?, keywords?, series?, series_num?, condition?, signed?, read?, gift?, loaned?, rating?, comments?)>
+
+<!ELEMENT fields (field+)>
+<!ELEMENT field EMPTY>
+<!ATTLIST field name CDATA #REQUIRED>
+<!ATTLIST field title CDATA #REQUIRED>
+<!ATTLIST field category CDATA #REQUIRED>
+<!ATTLIST field allowed CDATA #IMPLIED>
+<!ATTLIST field flags CDATA #IMPLIED>
+<!ATTLIST field format CDATA #IMPLIED>
+<!ATTLIST field description CDATA #IMPLIED>
+<!ATTLIST field type (1|2|3|4|5|6|7|8|9|10) #IMPLIED>
+
+<!-- bibliography, or bibtex, collections may have a preamble and macros -->
+<!ELEMENT bibtex-preamble (#PCDATA)>
+<!ELEMENT macros (macro+)>
+<!ELEMENT macro (#PCDATA)>
+<!ATTLIST macro name CDATA #REQUIRED>
+
+<!ELEMENT entry (title?, subtitle?, authors?, binding?, pur_date?, pur_price?, publisher?, edition?, cr_years?, pub_year?, isbn?, lccn?, pages?, languages?, genres?, keywords?, series?, series_num?, condition?, signed?, read?, gift?, loaned?, rating?, comments?, entry-type?, bibtex-key?, booktitle?, editors?, organization?, year?, journal?, month?, number?, howpublished?, chapter?, volume?, crossref?, note?, medium?, artists?, album?, label?, tracks?, certification?, region?, nationality?, format?, casts?, directors?, producers?, writers?, composers?, studios?, subtitles?, audio-tracks?, running-time?, aspect-ratios?, widescreen?, color?, directors-cut?, plot?)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT subtitle (#PCDATA)>
 <!ELEMENT authors (author+)>
 <!ELEMENT author (#PCDATA)>
-<!ELEMENT binding (#PCDATA)>
+<!ELEMENT binding (#PCDA11TA)>
 <!ELEMENT pur_date (#PCDATA)>
 <!ELEMENT pur_price (#PCDATA)>
 <!ELEMENT publisher (#PCDATA)>
@@ -57,9 +66,68 @@
 <!ELEMENT series (#PCDATA)>
 <!ELEMENT series_num (#PCDATA)>
 <!ELEMENT condition (#PCDATA)>
-<!ELEMENT signed EMPTY>
-<!ELEMENT read EMPTY>
-<!ELEMENT gift EMPTY>
+<!ELEMENT signed (#PCDATA)>
+<!ELEMENT read (#PCDATA)>
+<!ELEMENT gift (#PCDATA)>
 <!ELEMENT rating (#PCDATA)>
-<!ELEMENT loaned EMPTY>
+<!ELEMENT loaned (#PCDATA)>
 <!ELEMENT comments (#PCDATA)>
+
+<!-- bibtex -->
+<!ELEMENT entry-type (#PCDATA)>
+<!ELEMENT bibtex-key (#PCDATA)>
+<!ELEMENT booktitle (#PCDATA)>
+<!ELEMENT editors (editor+)>
+<!ELEMENT editor (#PCDATA)>
+<!ELEMENT organization (#PCDATA)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT journal (#PCDATA)>
+<!ELEMENT month (#PCDATA)>
+<!ELEMENT number (#PCDATA)>
+<!ELEMENT howpublished (#PCDATA)>
+<!ELEMENT chapter (#PCDATA)>
+<!ELEMENT volume (#PCDATA)>
+<!ELEMENT crossref (#PCDATA)>
+<!ELEMENT note (#PCDATA)>
+
+<!-- music -->
+<!ELEMENT medium (#PCDATA)>
+<!ELEMENT artists (artist+)>
+<!ELEMENT artist (#PCDATA)>
+<!ELEMENT album (#PCDATA)>
+<!ELEMENT label (#PCDATA)>
+<!ELEMENT tracks (track+)>
+<!ELEMENT track (#PCDATA)>
+
+<!-- video -->
+<!ELEMENT certification (#PCDATA)>
+<!ELEMENT region (#PCDATA)>
+<!ELEMENT nationality (#PCDATA)>
+<!ELEMENT format (#PCDATA)>
+<!ELEMENT casts (cast+)>
+<!ELEMENT cast (column, column)>
+<!ELEMENT directors (director+)>
+<!ELEMENT director (#PCDATA)>
+<!ELEMENT producers (producer+)>
+<!ELEMENT producer (#PCDATA)>
+<!ELEMENT writers (writer+)>
+<!ELEMENT writer (#PCDATA)>
+<!ELEMENT composers (composer+)>
+<!ELEMENT composer (#PCDATA)>
+<!ELEMENT studios (studio+)>
+<!ELEMENT studio (#PCDATA)>
+<!ELEMENT subtitles (subtitle+)>
+<!-- subtitle element is defined above -->
+<!ELEMENT audio-tracks (audio-track+)>
+<!ELEMENT audio-track (#PCDATA)>
+<!ELEMENT running-time (#PCDATA)>
+<!ELEMENT aspect-ratios (aspect-ratio+)>
+<!ELEMENT aspect-ratio (#PCDATA)>
+<!ELEMENT widescreen (#PCDATA)>
+<!ELEMENT color (#PCDATA)>
+<!ELEMENT directors-cut (#PCDATA)>
+<!ELEMENT plot (#PCDATA)>
+
+<!-- general -->
+<!-- columns are used in 2-column tables to split the values -->
+<!ELEMENT column (#PCDATA)>

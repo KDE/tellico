@@ -31,6 +31,9 @@
 #include <qtextedit.h>
 #include <qlayout.h>
 #include <qwhatsthis.h>
+#include <qtable.h>
+
+static const int MIN_TABLE_ROWS = 5;
 
 BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const char* name_/*=0*/)
     : QHBox(parent_, name_), m_name(att_->name()), m_type(att_->type()), m_run(0) {
@@ -48,12 +51,13 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
   }
   m_label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
   m_label->setFixedWidth(m_label->sizeHint().width());
-  QWhatsThis::add(m_label, att_->description());
 
   m_isTextEdit = (m_type == BCAttribute::Line
                || m_type == BCAttribute::Para
-               || m_type == BCAttribute::Year
-               || m_type == BCAttribute::URL);
+               || m_type == BCAttribute::Number
+               || m_type == BCAttribute::URL
+               || m_type == BCAttribute::Table
+               || m_type == BCAttribute::Table2);
 
   // declare these since creating them within the case switches causes warnings
   KLineEdit* kl;
@@ -61,6 +65,7 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
   KComboBox* kc;
   QCheckBox* cb;
   KURLRequester* ku;
+  QTable* qt = 0;
 
   switch (m_type) {
     case BCAttribute::Line:
@@ -69,15 +74,16 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
       // connect(kl, SIGNAL(returnPressed(const QString&)), this, SLOT(slotHandleReturn()));
 
       if(att_->flags() & BCAttribute::AllowCompletion) {
-        BCUnitEditWidget* w = BCUnitEditWidgetAncestor(parent());
+        BCUnitEditWidget* w = static_cast<BCUnitEditWidget*>(QObjectAncestor(parent(), "BCUnitEditWidget"));
         kl->completionObject()->setItems(w->m_currColl->valuesByAttributeName(att_->name()));
+        kl->completionObject()->setIgnoreCase(true);
         kl->setAutoDeleteCompletionObject(true);
       }
 
       if(att_->name() == QString::fromLatin1("isbn")) {
-        ISBNValidator* isbn = new ISBNValidator(this);
-        kl->setValidator(isbn);
+        kl->setValidator(new ISBNValidator(this));
       }
+
       m_editWidget = kl;
       break;
 
@@ -109,19 +115,21 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
       m_editWidget = cb;
       break;
 
-    case BCAttribute::Year:
+    case BCAttribute::Number:
       kl = new KLineEdit(this);
       connect(kl, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
       // connect(kl, SIGNAL(returnPressed(const QString&)), this, SLOT(slotHandleReturn()));
 
+      // I removed the validator primarily because of Bibtex. A number entry could have LaTex
+      // commands in it. So if the user wants to stick non-digit characters in here, go ahead
+      // and let him. Casting it to an integer later just won't work for the hapless fellow.
       if(att_->flags() & BCAttribute::AllowMultiple) {
-        // regexp is 4 digits followed optionally by any number of
-        // groups of a semi-colon, followed optionally by a space, followed by 4 digits
-        QRegExp rx(QString::fromLatin1("\\d{4}(;\\s?\\d{4})*"));
+        // regexp is any number of digits followed optionally by any number of
+        // groups of a semi-colon followed optionally by a space, followed by digits
+        QRegExp rx(QString::fromLatin1("-?\\d*(; ?-?\\d*)*"));
         kl->setValidator(new QRegExpValidator(rx, this));
       } else {
-        kl->setMaxLength(4);
-        kl->setValidator(new QIntValidator(1000, 9999, this));
+        kl->setValidator(new QIntValidator(this));
       }
 
       m_editWidget = kl;
@@ -135,16 +143,54 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
       ku = new KURLRequester(this);
       connect(ku, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
       connect(ku, SIGNAL(textChanged(const QString&)), m_label, SLOT(setURL(const QString&)));
-      connect(m_label, SIGNAL(leftClickedURL(const QString&)), SLOT(openURL(const QString&)));
+      connect(m_label, SIGNAL(leftClickedURL(const QString&)), SLOT(slotOpenURL(const QString&)));
       m_editWidget = ku;
       break;
 
+    case BCAttribute::Table:
+      qt = new QTable(MIN_TABLE_ROWS, 1, this);
+      qt->setTopMargin(0);
+      qt->horizontalHeader()->hide();
+      qt->verticalHeader()->setClickEnabled(false);
+      qt->verticalHeader()->setResizeEnabled(false);
+//      qt->setMaximumHeight(MIN_TABLE_ROWS*qt->rowHeight(0));
+//      qt->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
+      qt->setSelectionMode(QTable::Single);
+      qt->setDragEnabled(false);
+      qt->setRowMovingEnabled(false);
+      qt->setColumnMovingEnabled(false);
+      qt->setColumnStretchable(0, true);
+      qt->adjustColumn(0);
+      connect(qt, SIGNAL(valueChanged(int, int)), SIGNAL(modified()));
+      connect(qt, SIGNAL(currentChanged(int, int)), SLOT(slotCheckRows(int, int)));
+      m_editWidget = qt;
+      break;
+
+    case BCAttribute::Table2:
+      qt = new QTable(MIN_TABLE_ROWS, 2, this);
+      qt->setTopMargin(0);
+      qt->horizontalHeader()->hide();
+      qt->verticalHeader()->setClickEnabled(false);
+      qt->verticalHeader()->setResizeEnabled(false);
+//      qt->setMaximumHeight(MIN_TABLE_ROWS*qt->rowHeight(0));
+//      qt->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
+      qt->setSelectionMode(QTable::NoSelection);
+      qt->setDragEnabled(false);
+      qt->setRowMovingEnabled(false);
+      qt->setColumnMovingEnabled(false);
+      qt->setColumnStretchable(1, true);
+      qt->adjustColumn(1);
+      connect(qt, SIGNAL(valueChanged(int, int)), SIGNAL(modified()));
+      connect(qt, SIGNAL(currentChanged(int, int)), SLOT(slotCheckRows(int, int)));
+      m_editWidget = qt;
+      break;
+
     default:
-      kdDebug() << "BCAttributeWidget() - unknown attribute type ("
+      kdDebug() << "BCAttributeWidget() - unknown attribute type  ("
                 << att_->type() << ") named " << att_->name() << endl;
       break;
   } // end switch
-
+  
   if(m_isTextEdit) {
     setStretchFactor(m_editWidget, 1);
   } else {
@@ -159,10 +205,10 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
   m_editMultiple = new QCheckBox(this);
   m_editMultiple->setChecked(true);
   m_editMultiple->setFixedWidth(m_editMultiple->sizeHint().width()); // don't let it have any extra space
-  m_editMultiple->setPaletteForegroundColor(QColor("red"));
   m_editMultiple->hide();
   connect(m_editMultiple, SIGNAL(toggled(bool)), SLOT(setEnabled(bool)));
 
+  QWhatsThis::add(m_label, att_->description());
   QWhatsThis::add(m_editWidget, att_->description());
   m_label->setBuddy(m_editWidget);
 }
@@ -180,6 +226,7 @@ void BCAttributeWidget::clear() {
   KComboBox* kc;
   QCheckBox* cb;
   KURLRequester* ku;
+  QTable* qt;
 
   switch (m_type) {
     case BCAttribute::Line:
@@ -210,7 +257,7 @@ void BCAttributeWidget::clear() {
       }
       break;
 
-    case BCAttribute::Year:
+    case BCAttribute::Number:
       kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         kl->clear();
@@ -221,6 +268,18 @@ void BCAttributeWidget::clear() {
       ku = dynamic_cast<KURLRequester*>(m_editWidget);
       if(ku) {
         ku->clear();
+      }
+      break;
+
+    case BCAttribute::Table:
+    case BCAttribute::Table2:
+      qt = dynamic_cast<QTable*>(m_editWidget);
+      if(qt) {
+        for(int row = 0; row < qt->numRows(); ++row) {
+          for(int col = 0; col < qt->numCols(); ++col) {
+            qt->setText(row, col, QString::null);
+          }
+        }
       }
       break;
 
@@ -240,6 +299,7 @@ QString BCAttributeWidget::text() const {
   KComboBox* kc;
   QCheckBox* cb;
   KURLRequester* ku;
+  QTable* qt;
 
   switch(m_type) {
     case BCAttribute::Line:
@@ -269,11 +329,11 @@ QString BCAttributeWidget::text() const {
     case BCAttribute::Bool:
       cb = dynamic_cast<QCheckBox*>(m_editWidget);
       if(cb && cb->isChecked()) {
-        text = QString::fromLatin1("1");
+        text = QString::fromLatin1("true");
       }
       break;
 
-    case BCAttribute::Year:
+    case BCAttribute::Number:
       kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         text = kl->text();
@@ -288,6 +348,39 @@ QString BCAttributeWidget::text() const {
       if(ku) {
         text = ku->url();
       }
+      break;
+
+    case BCAttribute::Table:
+    case BCAttribute::Table2:
+      qt = dynamic_cast<QTable*>(m_editWidget);
+      if(qt) {
+        QString delim, rowStr;
+        for(int row = 0; row < qt->numRows(); ++row) {
+          rowStr.truncate(0);
+          for(int col = 0; col < qt->numCols(); ++col) {
+            rowStr += qt->text(row, col).simplifyWhiteSpace();
+            if(!rowStr.isEmpty() && col < qt->numCols()-1) {
+              rowStr += QString::fromLatin1("::");
+            }
+          }
+          if(rowStr.isEmpty() && text.isEmpty()) {
+            delim += QString::fromLatin1("; ");
+          } else if(!rowStr.isEmpty()) {
+            text += delim + rowStr + QString::fromLatin1("; ");
+          }
+        }
+        if(!text.isEmpty()) {
+          text.truncate(text.length()-2); // remove last semi-colon and space
+        }
+
+        // now reduce number of rows if necessary
+        while(qt->numRows() > MIN_TABLE_ROWS
+              && qt->text(qt->numRows()-1, 0).isEmpty()
+              && qt->text(qt->numRows()-1, qt->numCols()-1).isEmpty()) {
+          qt->removeRow(qt->numRows()-1);
+        }
+      }
+      break;
 
     default:
       break;
@@ -302,6 +395,7 @@ void BCAttributeWidget::setText(const QString& text_) {
   KComboBox* kc;
   QCheckBox* cb;
   KURLRequester* ku;
+  QTable* qt;
 
   m_editWidget->blockSignals(true);
   blockSignals(true);
@@ -346,11 +440,13 @@ void BCAttributeWidget::setText(const QString& text_) {
     case BCAttribute::Bool:
       cb = dynamic_cast<QCheckBox*>(m_editWidget);
       if(cb) {
-        cb->setChecked(text_ == QString::fromLatin1("1"));
+        // be lax, don't have to check for "1" or "true"
+        // just check for a non-empty string
+        cb->setChecked(!text_.isEmpty());
       }
       break;
 
-    case BCAttribute::Year:
+    case BCAttribute::Number:
       kl = dynamic_cast<KLineEdit*>(m_editWidget);
       if(kl) {
         kl->setText(text_);
@@ -361,7 +457,38 @@ void BCAttributeWidget::setText(const QString& text_) {
       ku = dynamic_cast<KURLRequester*>(m_editWidget);
       if(ku) {
         ku->setURL(text_);
+        static_cast<KURLLabel*>(m_label)->setURL(text_);
       }
+      break;
+
+    case BCAttribute::Table:
+      qt = dynamic_cast<QTable*>(m_editWidget);
+      if(qt) {
+        QStringList list = QStringList::split(QString::fromLatin1("; "), text_, true);
+        if(static_cast<int>(list.count()) > qt->numRows()) {
+          qt->insertRows(qt->numRows(), list.count()-qt->numRows());
+        }
+        for(unsigned row = 0; row < list.count(); ++row) {
+          qt->setText(row, 0, list[row]);
+        }
+        qt->adjustColumn(0);
+      }
+      break;
+
+    case BCAttribute::Table2:
+      qt = dynamic_cast<QTable*>(m_editWidget);
+      if(qt) {
+        QStringList list = QStringList::split(QString::fromLatin1("; "), text_, true);
+        if(static_cast<int>(list.count()) > qt->numRows()) {
+          qt->insertRows(qt->numRows(), list.count()-qt->numRows());
+        }
+        for(unsigned row = 0; row < list.count(); ++row) {
+          qt->setText(row, 0, list[row].section(QString::fromLatin1("::"), 0, 0));
+          qt->setText(row, 1, list[row].section(QString::fromLatin1("::"), 1));
+        }
+        qt->adjustColumn(1);
+      }
+      break;
 
     default:
       break;
@@ -412,7 +539,6 @@ void BCAttributeWidget::editMultiple(bool show_) {
   }
 #endif
 
-
   // TODO: maybe modified should only be signaled when the button is toggle on
   if(show_) {
     m_editMultiple->show();
@@ -427,7 +553,8 @@ void BCAttributeWidget::editMultiple(bool show_) {
   m_editWidget->updateGeometry();
 }
 
-void BCAttributeWidget::setHighlighted(const QString& highlight_) const {
+// TODO: someday, make just the actual string highlighted
+void BCAttributeWidget::setHighlighted(const QString&) const {
   if(m_isTextEdit) {
     KLineEdit* kl;
     QTextEdit* te;
@@ -449,7 +576,7 @@ void BCAttributeWidget::setHighlighted(const QString& highlight_) const {
         }
         break;
 
-      case BCAttribute::Year:
+      case BCAttribute::Number:
         kl = dynamic_cast<KLineEdit*>(m_editWidget);
         if(kl) {
           kl->selectAll();
@@ -469,16 +596,25 @@ void BCAttributeWidget::setHighlighted(const QString& highlight_) const {
   }
 }
 
-void BCAttributeWidget::openURL(const QString& url_) {
+void BCAttributeWidget::slotOpenURL(const QString& url_) {
   KURL url(url_);
   if(url.isValid()) {
     m_run = new KRun(url);
   }
 }
 
+void BCAttributeWidget::slotCheckRows(int row_, int) {
+  QTable* qt = dynamic_cast<QTable*>(m_editWidget);
+  if(qt && row_ == qt->numRows()-1) { // if is last row
+    qt->insertRows(qt->numRows());
+    qt->adjustColumn(qt->numCols()-1);
+  }
+}
+
 void BCAttributeWidget::updateAttribute(BCAttribute* att_) {
   m_label->setText(att_->title() + QString::fromLatin1(":"));
   QWhatsThis::add(m_label, att_->description());
+  QWhatsThis::add(m_editWidget, att_->description());
   // TODO: fix if the validator might have changed
   if(m_type == BCAttribute::Choice) {
     KComboBox* kc = dynamic_cast<KComboBox*>(m_editWidget);
@@ -491,8 +627,8 @@ void BCAttributeWidget::updateAttribute(BCAttribute* att_) {
   } else if(m_type == BCAttribute::Line) {
     KLineEdit* kl = dynamic_cast<KLineEdit*>(m_editWidget);
     if(kl) {
-      BCUnitEditWidget* w = BCUnitEditWidgetAncestor(parent());
       if(att_->flags() & BCAttribute::AllowCompletion) {
+        BCUnitEditWidget* w = static_cast<BCUnitEditWidget*>(QObjectAncestor(parent(), "BCUnitEditWidget"));
         kl->completionObject()->setItems(w->m_currColl->valuesByAttributeName(att_->name()));
       } else {
         kl->completionObject()->clear();

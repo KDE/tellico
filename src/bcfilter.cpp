@@ -80,14 +80,14 @@ bool BCFilterRule::equals(const BCUnit* const unit_) const {
   // empty attribute name means search all
   if(m_attributeName.isEmpty()) {
     QStringList list = unit_->attributeValues();
-    QStringList::ConstIterator it;
-    for(it = list.begin(); it != list.end(); ++it) {
+    for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
       if(QString::compare((*it).lower(), m_pattern.lower()) == 0) {
         match = true;
         break;
       }
     }
   } else {
+    // TODO: for Bool types, should match anything?
     QString value = unit_->attribute(m_attributeName);
     match = (QString::compare(value.lower(), m_pattern.lower()) == 0);
   }
@@ -102,8 +102,7 @@ bool BCFilterRule::contains(const BCUnit* const unit_) const {
   if(m_attributeName.isEmpty()) {
     QStringList list = unit_->attributeValues();
     // match is true if any strings match
-    QStringList::ConstIterator it;
-    for(it = list.begin(); it != list.end(); ++it) {
+    for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
       if((*it).find(m_pattern, 0, false) >= 0) {
         match = true;
         break;
@@ -124,8 +123,7 @@ bool BCFilterRule::matchesRegExp(const BCUnit* const unit_) const {
   // empty attribute name means search all
   if(m_attributeName.isEmpty()) {
     QStringList list = unit_->attributeValues();
-    QStringList::ConstIterator it;
-    for(it = list.begin(); it != list.end(); ++it) {
+    for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
       if((*it).find(rx) >= 0) {
         match = true;
         break;

@@ -2,7 +2,7 @@
 
 SUBDIRS = src po doc icons xslt admin 
 
-EXTRA_DIST = COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.spec bookcase.dtd x-bookcase.desktop configure.in.in AUTHORS NEWS 
+EXTRA_DIST = COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.spec bookcase.dtd x-bookcase.desktop configure.in.in AUTHORS NEWS bookcase.tips bookcase.desktop preparetips 
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
@@ -29,7 +29,7 @@ mimedir = $(kde_mimedir)/application
 mime_DATA = x-bookcase.desktop
 
 datadir = $(kde_datadir)/bookcase
-data_DATA = bookcase.dtd
+data_DATA = bookcase.dtd bookcase.tips
 
 DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz
 
@@ -40,6 +40,12 @@ package-messages:
 	$(MAKE) -f admin/Makefile.common package-messages
 	$(MAKE) -C po merge
 
+messages:
+	rm -f tips.cpp; \
+	$(PERL) ./preparetips < bookcase.tips > tips.cpp; \
+	$(XGETTEXT) tips.cpp -c++ -j -o $(podir)/bookcase.pot; \
+	rm -f tips.cpp
+  
 dist-hook:
 # am_edit needs to modify the Makefile.in files, so they must be writeable
 	-find $(distdir) -exec chmod a+w {} \;

@@ -2,7 +2,7 @@
                                finddialog.cpp
                              -------------------
     begin                : Wed Feb 27 2002
-    copyright            : (C) 2002 by Robby Stephenson
+    copyright            : (C) 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -172,13 +172,7 @@ void FindDialog::updateAttributeList() {
 
   m_attributes->insertItem(i18n("All Fields"));
 
-  QStringList titles;
-  // TODO: fix for multiple collection types
-  BCAttributeList list = m_bookcase->doc()->uniqueAttributes(BCCollection::Book);
-  BCAttributeListIterator it(list);
-  for( ; it.current(); ++it) {
-    titles += it.current()->title();
-  }
+  QStringList titles = m_bookcase->doc()->collection()->attributeTitles();
 
   if(titles.count() > 0) {
     m_attributes->insertStringList(titles);

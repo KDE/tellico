@@ -2,7 +2,7 @@
                               configdialogh.h
                              -------------------
     begin                : Wed Dec 5 2001
-    copyright            : (C) 2001 by Robby Stephenson
+    copyright            : (C) 2001, 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,12 +17,8 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-class BookcaseDoc;
-
 class KConfig;
 class KLineEdit;
-class KListBox;
-class KComboBox;
 
 #include <kdialogbase.h>
 
@@ -35,7 +31,7 @@ class KComboBox;
  * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h,v 1.2 2003/04/01 03:30:41 robby Exp $
+ * @version $Id: configdialog.h 178 2003-10-11 03:36:05Z robby $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT
@@ -44,11 +40,10 @@ public:
   /**
    * The constructor sets up the Tabbed dialog pages.
    *
-   * @param doc A pointer to the BookcaseDoc, used for filling out fields
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  ConfigDialog(BookcaseDoc* doc, QWidget* parent, const char* name=0);
+  ConfigDialog(QWidget* parent, const char* name=0);
 
   /**
    * Reads the current configuration. Only the options which are not saved somewhere
@@ -75,18 +70,6 @@ protected:
    * Sets-up the page for printing options.
    */
   void setupPrintingPage();
-  /**
-   * Sets-up the page for the book collection options.
-   */
-//  void setupBookPage();
-  /**
-   * Sets-up the page for the audio collection options.
-   */
-//  void setupAudioPage();
-  /**
-   * Sets-up the page for the video collection options.
-   */
-//  void setupVideoPage();
 
 protected slots:
   /**
@@ -101,11 +84,11 @@ protected slots:
    * Called when the Default button is clicked.
    */
   void slotDefault();
-  void slotFieldLeft();
-  void slotFieldRight();
-  void slotFieldUp();
-  void slotFieldDown();
-  void slotTogglePrintGrouped(bool checked);
+  /**
+   * Enable the checkboxes for formatting if formatting is enabled.
+   *
+   * @param checked The formatting checkbox is checkeed
+   */
   void slotToggleFormatted(bool checked);
 
 signals:
@@ -115,8 +98,8 @@ signals:
   void signalConfigChanged();
 
 private:
-  BookcaseDoc* m_doc;
   QCheckBox* m_cbOpenLastFile;
+  QCheckBox* m_cbShowTipDay;
   QCheckBox* m_cbCapitalize;
   QCheckBox* m_cbFormat;
   QCheckBox* m_cbShowCount;
@@ -128,9 +111,6 @@ private:
   QCheckBox* m_cbPrintFormatted;
   QCheckBox* m_cbPrintGrouped;
   QStringList m_groupAttributes;
-  KComboBox* m_cbPrintGroupAttribute;
-  KListBox* m_lbAvailableFields;
-  KListBox* m_lbSelectedFields;
 
   QDict<QCheckBox> m_cbDict;
 };

@@ -1,0 +1,85 @@
+<tip category="Bookcase">
+<html>
+<p>...that if a book has more than one author, you should separate
+their names by a semi-colon, so that Bookcase will know to split them
+and use them separately.</p>
+<p>Any other field which allows multiple values should be entered the
+same way. with a semi-colon (;) separating each value.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can rename a collection by right-clicking on
+the top collection item in the left column.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can change which fields are shown in the list view by
+right-clicking on the column header.
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can add, edit, or modify the fields in the collection using
+the Field Editor. The arrow buttons below the field list can be used to change the
+position of the field in the list, which affects the placement in the entry
+editor.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that if you want to filter by a checkbox field, a value of
+"true" should be used. If you'd like to filter to
+show only the science fiction books which you've not read, for
+example, check the <em>Match all of the
+following</em> button,  set the first rule to have "Genre"
+"contains" "Science Fiction" (no quotes) and the second rule to
+have "Read" "does not contain" "true" (no quotes).</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that if a non-word character is used in the Quick Filter, the text is
+interpreted as a regular expression.</p>
+<p>To show only books which are by Weber or Bujold, for example, then
+type "weber|bujold" (no quotes) in the filter box.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can edit more than one entry at a time, by holding down
+the Shift or Ctrl key and selecting multiple entries.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can convert an existing book collection to a bibliography,
+which can then be exported to Bibtex or Bibtexml format.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can add, edit, and delete string macros for bibliographies.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that if more than one field is formatted as a name, then an additional
+group named "People" is added to the collection, allowing authors and editors
+to be sorted or printed together, for example.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can modify the appearance of the printed output by modifying
+the <tt>bookcase-printing.xsl</tt> file. The file generates HTML, and the CSS
+within the stylesheet governs things like the font, the margins, etc.</p>
+</html>
+</tip>
+<tip category="Bookcase">
+<html>
+<p>...that you can import and export using any generic XSL stylesheet which
+outputs a valid Bookcase XML file.</p>
+</html>
+</tip>

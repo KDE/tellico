@@ -2,7 +2,7 @@
                              bclabelaction.cpp
                              -------------------
     begin                : Sat Nov 9 2002
-    copyright            : (C) 2002 by Robby Stephenson
+    copyright            : (C) 2002, 2003 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,6 +19,33 @@
 #include <ktoolbar.h>
 #include <klineedit.h>
 
+#if KDE_VERSION > 309
+#include <qlabel.h>
+// KWidgetAction(QWidget *widget,
+//               const QString &text,
+//               const KShortcut &cut,
+//               const QObject *receiver,
+//               const char *slot,
+//               KActionCollection *parent
+//               const char *name)
+BCLabelAction::BCLabelAction(const QString& text_, int accel_,
+                             KActionCollection* parent_, const char* name_/*=0*/)
+    : KWidgetAction(new QLabel(text_, 0, "kde toolbar widget"),
+                    text_,
+                    accel_,
+                    0,
+                    0,
+                    parent_,
+                    name_) {
+  QLabel* label = static_cast<QLabel*>(widget());
+  // asthetically, I want a space in front of and afterthe text
+  label->setText(QString::fromLatin1(" ") + label->text());
+  label->setBackgroundMode(Qt::PaletteButton);
+  label->adjustSize();
+}
+
+// If compiling under KDE version < 3.1
+#else
 #include <qtoolbutton.h>
 #include <qstyle.h>
 
@@ -47,7 +74,7 @@ protected:
 };
 
 BCLabelAction::BCLabelAction(const QString& text_, int accel_,
-                             QObject* parent_/*=0*/, const char* name_/*=0*/)
+                             KActionCollection* parent_/*=0*/, const char* name_/*=0*/)
  : KAction(text_, accel_, parent_, name_), m_label(0) {
 }
 
@@ -56,7 +83,8 @@ int BCLabelAction::plug(QWidget* widget_, int index_) {
 
   int id = KAction::getToolButtonID();
 
-  m_label = new ToolBarLabel(text(), tb);
+  // asthetically, I want a space in front of and after the text
+  m_label = new ToolBarLabel(QString::fromLatin1(" ") + text(), tb);
   tb->insertWidget(id, m_label->width(), m_label, index_);
 
   addContainer(tb, id);
@@ -79,10 +107,11 @@ void BCLabelAction::unplug(QWidget* widget_) {
 
   m_label = 0;
 }
+#endif // end KDE < 3.1
 
 // largely copied from KonqComboAction
 BCLineEditAction::BCLineEditAction(const QString& text_, int accel_,
-                                   QObject* parent_/*=0*/, const char* name_/*=0*/)
+                                   KActionCollection* parent_/*=0*/, const char* name_/*=0*/)
  : KAction(text_, accel_, parent_, name_), m_lineEdit(0L) {
 }
 
