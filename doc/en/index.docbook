@@ -17,6 +17,9 @@
   <!ENTITY config-dialog "<interface>Configuration Dialog</interface>">
   <!ENTITY find-dialog "<interface>Find Dialog</interface>">
   <!ENTITY quick-filter "<interface>Quick Filter</interface>">
+  <!ENTITY filter-dialog "<interface>Advanced Filter Dialog</interface>">
+  <!ENTITY shortcut-dialog "<interface>Keyboard Shortcut Configuration Dialog</interface>">
+  <!ENTITY toolbar-dialog "<interface>Toolbar Configuration Dialog</interface>">
   
   <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
   <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">

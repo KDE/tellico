@@ -63,7 +63,8 @@ Field::Field(const QString& name_, const QString& title_, const QStringList& all
 Field::Field(const Field& field_)
     : m_name(field_.name()), m_title(field_.title()), m_category(field_.category()),
       m_desc(field_.description()), m_type(field_.type()),
-      m_flags(field_.flags()), m_formatFlag(field_.formatFlag()) {
+      m_flags(field_.flags()), m_formatFlag(field_.formatFlag()),
+      m_properties(field_.propertyList()) {
   if(m_type == Choice) {
     m_allowed = field_.allowed();
   }
@@ -81,6 +82,7 @@ Field& Field::operator=(const Field& field_) {
     }
     m_flags = field_.flags();
     m_formatFlag = field_.formatFlag();
+    m_properties = field_.propertyList();
   }
   return *this;
 }

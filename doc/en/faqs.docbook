@@ -44,7 +44,7 @@ Bookcase.  </para>
 <answer>
 
 <para>Author names should be separated by a semi-colon, like so:
-"Brian W. Kernighan; Dennis M. Ritchie" (without the quotes). Don't
+<userinput>Brian W. Kernighan; Dennis M. Ritchie</userinput>. Don't
 include the word "and" or anything similar, even if you have 20
 authors. If you have the auto-format option checked, then the last
 name will automatically be shown first for each author.</para>
@@ -62,18 +62,20 @@ separating each value.</para>
 </question>
 <answer>
 
-<para>Yes, most certainly. Find the file bookcase-printing.xsl which
- should be in the $KDEDIR/share/apps/bookcase/ directory. You can copy
- that to $KDEHOME/share/apps/bookcase/ for personal modifications.
+<para>Yes, most certainly. Find the file <filename>bookcase-printing.xsl</filename> which
+ should be in the $<envar>KDEDIR</envar>/share/apps/bookcase/ directory. You can copy
+ that to $<envar>KDEHOME</envar>/share/apps/bookcase/ for personal modifications.
  You'll have to know <ulink
- url="http://www.w3.org/TR/xslt">XSLT</ulink>, but modifying that file
- is how you change the printing layout. HTML is generated from the
+ url="http://www.w3.org/TR/xslt"><acronym>XSLT</acronym></ulink>, but modifying that file
+ is how you change the printing layout. <acronym>HTML</acronym> is generated from the
  file, and the easiest way to change the appearance of the printout is
- to modify the CSS in the top portiong. Feel free to <ulink
- url="mailto:&email;">email me</ulink> with questions.  If I end up
- with some alternate XSLT printing files, I'll put them on <ulink
- url="&homepage;">the Bookcase website</ulink>.</para>
-
+ to modify the CSS in the top portion. Feel free to <ulink
+ url="mailto:&email;">email me</ulink> with questions. Any alternate <acronym>XSLT</acronym> printing files will be available on <ulink
+ url="&homepage;">the &bookcase; website</ulink>.</para>
+ 
+<para>Be aware that the <filename>bookcase-printing.xsl</filename> references another file, <filename>bookcase-common.xsl</filename>, that contains some common <acronym>XSLT</acronym> templates. If you copy 
+<filename>bookcase-printing.xsl</filename> to $<envar>KDEHOME</envar>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename>bookcase-common.xsl</filename> file or copy the common file as well.
+</para>
 </answer>
 </qandaentry>
 <qandaentry>

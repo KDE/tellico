@@ -9,15 +9,15 @@ By default, &bookcase; starts with an empty book collection. If you want some ot
 </para>
 
 <para>
-New entries can be added by using the &entry-editor;. The <menuchoice><guimenu>Collection</guimenu><guimenuitem>New Entry</guimenuitem></menuchoice> menu item will open the &entry-editor; with an empty entry ready for editing. The &entry-editor; can also be opened by using the  <menuchoice><guimenu>Settings</guimenu><guimenuitem>Show &entry-editor;</guimenuitem></menuchoice> menu item. Once you've entered the values for the entry, you can save it to the collection by using the <guibutton>Save Entry</guibutton> button in the &entry-editor; dialog, which remains open in case you want to continue adding new entries. Once you've saved an entry in the collection, you can modify it by clicking on it in the main window. If the &entry-editor; is not already open, you can double click an entry to open the editor and start editing.
+New entries can be added by using the <link linkend="entry-editor">&entry-editor;</link>. The <menuchoice><guimenu>Collection</guimenu><guimenuitem>New Entry</guimenuitem></menuchoice> menu item will open the &entry-editor; with an empty entry ready for editing. The &entry-editor; can also be opened by using the  <menuchoice><guimenu>Settings</guimenu><guimenuitem>Show &entry-editor;</guimenuitem></menuchoice> menu item. Once you've entered the values for the entry, you can save it to the collection by using the <guibutton>Save Entry</guibutton> button in the &entry-editor; dialog, which remains open in case you want to continue adding new entries. Once you've saved an entry in the collection, you can modify it by clicking on it in the main window. If the &entry-editor; is not already open, you can double click an entry to open the editor and start editing.
 </para>
 
 <para>
-If you want to include an image in the entry, you can use the standard &kde; File Selector by clicking the <guibutton>Select Image...</guibutton> button in the &entry-editor;, or you can drag an image from the file manager or web browser into the &entry-editor;.
+If you want to include an image in the entry, you can use the standard &kde; File Selector by clicking the <guibutton>Select Image...</guibutton> button in the <link linkend="entry-editor">&entry-editor;</link>, or you can drag an image from the file manager or web browser into the &entry-editor;.
 </para>
 
 <para>
-When you select an entry, the &entry-view; shows a formatted view of the entry's contents. You can change the template used for showing the entry in the &config-dialog;.
+When you select an entry, the <link linkend="entry-view">&entry-view;</link> shows a formatted view of the entry's contents. You can change the template used for showing the entry in the <link linkend="configuration">&config-dialog;</link>.
 </para>
 
 <para>
@@ -25,7 +25,7 @@ The entries in the collection are grouped together when they share the same valu
 </para>
 
 <para>
-You can use the &quick-filter; in the toolbar to quickly limit the visible entries to ones which contain the word you type. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the &detailed-view; will only show the entries that match the filter. The statusbar shows you how many entries are in the collection, and how many are currently being filtered.
+You can use the &quick-filter; in the toolbar to quickly limit the visible entries to ones which contain the word you type. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the <link linkend="detailed-view">&detailed-view;</link> will only show the entries that match the filter. The statusbar shows you how many entries are in the collection, and how many are currently being filtered.
 </para>
 
 </sect1>
@@ -63,7 +63,7 @@ of the data for a single entry in the lower left.
 <screenshot>
 <screeninfo>The &bookcase; Main Window</screeninfo>
 <mediaobject>
-<imageobject><imagedata format="PNG" fileref="mainwindow.png"/></imageobject>
+<imageobject><imagedata format="PNG" fileref="main-window.png"/></imageobject>
 <textobject><phrase>The &bookcase; Main Window</phrase></textobject>
 <caption><para>The &bookcase; Main Window</para></caption>
 </mediaobject>
@@ -125,11 +125,11 @@ The &entry-editor; is used to add and modify entries in the collection. Double-c
 </screenshot>
 
 <para>
-Clicking the field title for a <emphasis>&URL;</emphasis> field will open the link using the default &kde; file associations. The <guiicon>&URL; selector</guiicon> button beside the text entry will open the default &kde; File Open Dialog, but the field is not limited to local files. Any &URL; may be entered.
+Clicking the field title for a <link linkend="url"><emphasis>&URL;</emphasis></link> field will open the link using the default &kde; file associations. The <guiicon>&URL; selector</guiicon> button beside the text entry will open the default &kde; File Open Dialog, but the field is not limited to local files. Any &URL; may be entered.
 </para>
 
 <para>
-For <emphasis>Image</emphasis> fields, the <guibutton>Select Image...</guibutton> button opens up the &kde; image file selection dialog. The image is saved in the collection in the original format, and a scaled version is shown in the &entry-editor;. The image may be cleared by using the <guibutton>Clear</guibutton> button. Cleared images are removed from the collection. The edit widget also supports drag-and-drop. Dragging an image file from a &konqueror; window does the same thing as selecting the image in the File Selector. Dragging an image from the edit widget into a &konqueror; file manager window will save the image in that folder.
+For <link linkend="image"><emphasis>Image</emphasis></link> fields, the <guibutton>Select Image...</guibutton> button opens up the &kde; image file selection dialog. The image is saved in the collection in the original format, and a scaled version is shown in the &entry-editor;. The image may be cleared by using the <guibutton>Clear</guibutton> button. Cleared images are removed from the collection. The edit widget also supports drag-and-drop. Dragging an image file from a &konqueror; window does the same thing as selecting the image in the File Selector. Dragging an image from the edit widget into a &konqueror; file manager window will save the image in that folder.
 </para>
 
 <screenshot>
@@ -142,7 +142,7 @@ For <emphasis>Image</emphasis> fields, the <guibutton>Select Image...</guibutton
 </screenshot>
 
 <para>
-<emphasis>Table</emphasis> fields begin with five rows, but moving the cursor to the last row automatically adds another. For 2-column tables, only the first column is used for grouping or formatting.
+<link linkend="table"><emphasis>Table</emphasis></link> fields begin with five rows, but moving the cursor to the last row automatically adds another. For 2-column tables, only the first column is used for grouping or formatting.
 </para>
 
 <screenshot>
@@ -173,7 +173,7 @@ The &fields-dialog; allows you to add new fields to the collection, to modify th
 <screenshot>
 <screeninfo>The &bookcase; &fields-dialog;</screeninfo>
 <mediaobject>
-<imageobject><imagedata format="PNG" fileref="fieldsdialog.png"/></imageobject>
+<imageobject><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
 <textobject><phrase>The &bookcase; &fields-dialog;</phrase></textobject>
 <caption><para>The &bookcase; &fields-dialog;</para></caption>
 </mediaobject>
@@ -303,6 +303,22 @@ For efficiency, do not enable auto-completion unless you need it for the fields.
 </para>
 
 </sect2>
+</sect1>
+
+<sect1 id="filter-dialog">
+<title>&filter-dialog;</title>
+<para>
+The &filter-dialog; allows you to limit the entries visible in the <link linkend="detailed-view">&detailed-view;</link> to those that match one or more filter rules.
+</para>
+
+<screenshot>
+<screeninfo>The &bookcase; &filter-dialog;</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
+<textobject><phrase>The &bookcase; &filter-dialog;</phrase></textobject>
+<caption><para>The &bookcase; &filter-dialog;</para></caption>
+</mediaobject>
+</screenshot>
 </sect1>
 
 </chapter>

@@ -52,8 +52,8 @@ Bookcase::Data::Collection* XSLTImporter::collection() {
     return 0;
   }
 //  kdDebug() << text() << endl;
-  // FIXME: is there anyway to know if the text is in utf-8 or not?
-  QString str = handler.applyStylesheet(text(), false);
+  // FIXME: is there anyway to know if the text is in utf-8 or not? Assume it is.
+  QString str = handler.applyStylesheet(text(), true);
 //  kdDebug() << str << endl;
 
   Import::BookcaseImporter imp(str);
@@ -68,9 +68,10 @@ QWidget* XSLTImporter::widget(QWidget* parent_, const char* name_) {
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
   QGroupBox* box = new QGroupBox(1, Qt::Vertical, i18n("XSLT Options"), m_widget);
+  l->addWidget(box);
+
   (void) new QLabel(i18n("XSLT File:"), box);
   m_URLRequester = new KURLRequester(box);
-  l->addWidget(box);
 
   l->addStretch(1);
   return m_widget;

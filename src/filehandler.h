@@ -25,6 +25,7 @@ class QFile;
 #include <qcstring.h> // needed for QByteArray
 
 namespace Bookcase {
+  class ImageFactory;
   namespace Data {
     class Image;
   }
@@ -33,12 +34,13 @@ namespace Bookcase {
  * The FileHandler class contains some utility functions for reading files.
  *
  * @author Robby Stephenson
- * @version $Id: filehandler.h 586 2004-04-03 23:06:46Z robby $
+ * @version $Id: filehandler.h 657 2004-05-13 04:52:31Z robby $
  */
 class FileHandler {
 
 friend class MainWindow;
-friend const Data::Image& addImage(const KURL& url);
+friend class ImageFactory;
+//friend class Data::Image;
 
 public:
   /**

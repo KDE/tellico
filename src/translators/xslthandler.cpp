@@ -69,11 +69,11 @@ XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
     m_docOut(0),
     m_numParams(0) {
   init();
-  if(xsltURL_.isValid()) {
+  if(xsltURL_.isValid() && xsltURL_.isLocalFile()) {
 #if LIBXML_VERSION >= 20600
-    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.url().utf8(), NULL, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.path().utf8(), NULL, xslt_options);
 #else
-    xmlDocPtr xsltDoc = xmlParseFile(xsltURL_.url().utf8());
+    xmlDocPtr xsltDoc = xmlParseFile(xsltURL_.path().utf8());
 #endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
@@ -145,8 +145,8 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
       if(pi.data().lower().contains(QString::fromLatin1("encoding"))) {
         if(!pi.data().lower().contains(QString::fromLatin1("utf-8"))) {
           utf8 = false;
-        } else {
-          kdDebug() << "XSLTHandler::setXSLTDoc() - PI = " << pi.data() << endl;
+//        } else {
+//          kdDebug() << "XSLTHandler::setXSLTDoc() - PI = " << pi.data() << endl;
         }
         break;
       }
@@ -156,15 +156,17 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
   xmlDocPtr xsltDoc;
   if(utf8) {
 #if LIBXML_VERSION >= 20600
-    xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().utf8().data(), xsltFile_, NULL, xslt_options);
+    xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().utf8().data(), xsltFile_.data(), NULL, xslt_options);
 #else
     xsltDoc = xmlParseDoc((xmlChar *)dom_.toString().utf8().data());
+    xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data());
 #endif
   } else {
 #if LIBXML_VERSION >= 20600
-    xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().local8Bit().data(), NULL, NULL, xslt_options);
+    xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().local8Bit().data(), xsltFile_.data(), NULL, xslt_options);
 #else
     xsltDoc = xmlParseDoc((xmlChar *)dom_.toString().local8Bit().data());
+    xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data());
 #endif
   }
 
@@ -254,8 +256,8 @@ QString XSLTHandler::process() {
     return result;
   }
 
-//  xmlOutputBufferFlush(outp);
-  xmlOutputBufferClose(outp);
+  xmlOutputBufferClose(outp); //also flushes
 
+//  kdDebug() << "RESULT: " << result << endl;
   return result;
 }

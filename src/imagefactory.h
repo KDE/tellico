@@ -15,6 +15,7 @@
 #define IMAGEFACTORY_H
 
 #include "image.h"
+#include "filehandler.h"
 
 #include <kurl.h>
 
@@ -24,7 +25,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imagefactory.h 612 2004-04-17 18:04:45Z robby $
+ * @version $Id: imagefactory.h 657 2004-05-13 04:52:31Z robby $
  */
 class ImageFactory {
 public:

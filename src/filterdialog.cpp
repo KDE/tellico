@@ -240,8 +240,8 @@ static const int FILTER_MIN_WIDTH = 600;
 
 // make the Apply button the default, so the user can see if the filter is good
 FilterDialog::FilterDialog(MainWindow* parent_, const char* name_/*=0*/)
-    : KDialogBase(parent_, name_, false, i18n("Advanced Filter"), Ok|Apply|Cancel, Ok,
-                  false), m_bookcase(parent_) {
+    : KDialogBase(parent_, name_, false, i18n("Advanced Filter"), Help|Ok|Apply|Cancel, Ok, false),
+      m_bookcase(parent_) {
   QWidget* page = new QWidget(this);
   setMainWidget(page);
   QVBoxLayout* topLayout = new QVBoxLayout(page, 0, KDialog::spacingHint());
@@ -260,6 +260,7 @@ FilterDialog::FilterDialog(MainWindow* parent_, const char* name_/*=0*/)
   connect(m_ruleLister, SIGNAL(widgetRemoved()), SLOT(slotShrink()));
 
   setMinimumWidth(FILTER_MIN_WIDTH);
+  setHelp(QString::fromLatin1("filter-dialog"));
 }
 
 void FilterDialog::setFilter(const Filter* filter_) {

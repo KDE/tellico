@@ -1,15 +1,40 @@
 <chapter id="importing-exporting">
 <title>Importing and Exporting Data</title>
 
-<para>&bookcase; is able to import and export a wide variety of data. In addition, since the underlying data file is stored in &XML; format, <acronym>XSLT</acronym> allows &bookcase; to import or export any text format at all.
-</para>
+<para>&bookcase; is able to import and export a wide variety of data.</para>
 
 <sect1 id="importing">
 <title>Importing Data</title>
 
 <para>
-To be written...
+&bookcase; offers three different actions when importing data. <guilabel>Replace collection</guilabel> indicates the current collection should be closed, and a new one created with the data from the imported file. <guilabel>Append collection</guilabel> tells &bookcase; to add all the entries in the imported collection to the current one, and to add any fields which don't currently exist. The <guilabel>Merge collection</guilabel> action is the same as appending, except that each imported entry is compared to the current ones, and any identical entries are skipped. Future plans include an improved heuristic for identifying matching entries, but currently, they must be identical for every field.
 </para>
+
+<sect2 id="importing-bookcase">
+<title>Bookcase Data</title>
+
+<para>
+Other &bookcase; data files may be imported.
+</para>
+</sect2>
+
+<sect2 id="importing-csv">
+<title>CSV Data</title>
+
+<para>
+Comma-separated values (CSV) are a common way of importing and exporting tabular data.
+</para>
+
+<screenshot>
+<screeninfo>The CSV Import Dialog</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="csv-dialog.png"/></imageobject>
+<textobject><phrase>The CSV Import Dialog</phrase></textobject>
+<caption><para>The CSV Import Dialog</para></caption>
+</mediaobject>
+</screenshot>
+</sect2>
+
 </sect1>
 
 <sect1 id="exporting">

@@ -28,7 +28,13 @@ QDict<int> ImageFactory::s_imageFileDict;
 QString ImageFactory::s_tempDir;
 
 const Bookcase::Data::Image& ImageFactory::addImage(const KURL& url_) {
+  if(url_.isEmpty() || !url_.isValid()) {
+    return s_null;
+  }
   Data::Image* img = FileHandler::readImageFile(url_);
+  if(!img) {
+    return s_null;
+  }
   const Data::Image& img2 = imageById(img->id());
   if(!img2.isNull()) {
     delete img;

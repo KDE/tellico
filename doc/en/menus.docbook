@@ -39,7 +39,7 @@ performs a menu item function, the default shortcut is listed with the menu item
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>o</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>O</keycap></keycombo>
   </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Open...</guimenuitem>
@@ -69,7 +69,7 @@ that contains a list of recently opened files.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>s</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>S</keycap></keycombo>
   </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Save...</guimenuitem>
@@ -101,7 +101,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>p</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>P</keycap></keycombo>
   </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Print...</guimenuitem>
@@ -109,7 +109,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>prints the collection</action>. Printing options may be set in the <link linkend="printing-options">&config-dialog;</link>.</para>
+<para>This command <action>prints the collection</action>. Printing options may be set in the &config-dialog;.</para>
 </listitem>
 </varlistentry>
 
@@ -143,7 +143,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>q</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>Q</keycap></keycombo>
   </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Quit</guimenuitem>
@@ -171,7 +171,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>x</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>X</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Cut</guimenuitem>
@@ -187,7 +187,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>x</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>C</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Copy</guimenuitem>
@@ -203,7 +203,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>v</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>V</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Paste</guimenuitem>
@@ -219,7 +219,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>a</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>A</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Select All</guimenuitem>
@@ -235,7 +235,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>Shift</keycap><keycap>a</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>&Shift;</keycap><keycap>A</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Deselect</guimenuitem>
@@ -251,7 +251,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>f</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>F</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Find...</guimenuitem>
@@ -300,6 +300,7 @@ modified.</para>
 </para>
 </sect2>
 
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
 <title>The <guimenu>Collection</guimenu> Menu</title>
 <para>
@@ -310,7 +311,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>n</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>N</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>New Entry</guimenuitem>
@@ -326,7 +327,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>e</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>E</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Edit Entry</guimenuitem>
@@ -342,7 +343,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>y</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>Y</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Copy Entry</guimenuitem>
@@ -358,7 +359,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>d</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>D</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Delete Entry</guimenuitem>
@@ -374,7 +375,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>r</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>R</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Rename Collection</guimenuitem>
@@ -390,7 +391,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>u</keycap></keycombo>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>U</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Collection Fields...</guimenuitem>
@@ -411,7 +412,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>converts a book collection to a bibliography</action> by adding certain fields necessary for Bibtex export, and it is only enabled when a book collection is opened.</para>
+<para>This command <action>converts a book collection to a bibliography</action> by adding certain fields necessary for Bibtex export, and it is only enabled when a book collection is open.</para>
 </listitem>
 </varlistentry>
 
@@ -424,7 +425,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens a dialog box for editing the Bibtex string macros</action> in the collection and is specific to bibliographies.</para>
+<para>This command <action>opens a dialog box for editing the Bibtex string macros</action> in the collection. It is only enabled when editing a bibliography.</para>
 </listitem>
 </varlistentry>
 
@@ -437,7 +438,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>sends a citation for the selected entries</action> to the so-called <emphasis><link linkend="bibtex-options">lyxpipe</link></emphasis> for use in <application>LyX</application>, <application>Kile</application>, or other LaTeX applications.</para>
+<para>This command <action>sends a citation for the selected entries</action> to the so-called <emphasis><link linkend="bibtex-options">lyxpipe</link></emphasis> for use in <application>LyX</application>, <application>Kile</application>, or other LaTeX applications. It is only enabled when editing a bibliography.</para>
 </listitem>
 </varlistentry>
 
@@ -446,6 +447,7 @@ modified.</para>
 </para>
 </sect2>
 
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
 <title>The <guimenu>Settings</guimenu> Menu</title>
 <para>
@@ -461,7 +463,127 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action></action>..</para>
+<para>This command <action>toggles the display of the toolbars</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Show Statusbar</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>toggles the display of the statusbar</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Show &group-view;</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>toggles the display of the &group-view;</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Show &entry-editor;</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>toggles the display of the &entry-editor;</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Show &entry-view;</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>toggles the display of the &entry-view;</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Group Selection</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>changes the field used to group the entries</action> in the collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>J</keycap></keycombo>
+  </shortcut>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Advanced Filter...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &filter-dialog;</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Configure Shortcuts...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the the &kde; &shortcut-dialog;</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Configure Toolbars...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the the &kde; &toolbar-dialog;</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Configure &bookcase;...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &bookcase; &config-dialog;</action>.</para>
 </listitem>
 </varlistentry>
 

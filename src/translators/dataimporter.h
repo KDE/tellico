@@ -22,7 +22,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: dataimporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: dataimporter.h 650 2004-05-08 02:35:42Z robby $
  */
 class DataImporter : public Importer {
 Q_OBJECT
@@ -33,9 +33,11 @@ public:
    */
   DataImporter(const KURL& url) : Importer(url), m_data(FileHandler::readDataFile(url)) {}
   /**
-   * @param url The URL of the file to import
+   * Since the conversion to a QCString appends a \0 character at the end, remove it.
+   *
+   * @param text The XML text. It MUST be in UTF-8.
    */
-  DataImporter(const QString& text) : Importer(KURL()), m_data(text.utf8()) {}
+  DataImporter(const QString& text) : Importer(KURL()), m_data(text.utf8()) { m_data.truncate(m_data.size()-1); }
   /**
    */
   virtual ~DataImporter() {}

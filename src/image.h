@@ -14,8 +14,6 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include "filehandler.h"
-
 #include <qimage.h>
 
 namespace Bookcase {
@@ -25,12 +23,12 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: image.h 568 2004-03-23 02:28:56Z robby $
+ * @version $Id: image.h 657 2004-05-13 04:52:31Z robby $
  */
 class Image : public QImage {
 
-friend class Bookcase::ImageFactory;
-friend Image* FileHandler::readImageFile(const KURL& url);
+friend class ImageFactory;
+friend class FileHandler;
 
 public:
   Image() : QImage(), m_id(QString::null) {}

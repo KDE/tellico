@@ -78,11 +78,6 @@ void ImageWidget::setImage(const Data::Image& image_) {
 }
 
 void ImageWidget::slotClear() {
-  // if already null, no need to clear
-  if(m_image.isNull()) {
-    return;
-  }
-
   m_image = Data::Image();
   m_pixmap = QPixmap();
   m_scaled = m_pixmap;

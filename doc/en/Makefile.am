@@ -15,11 +15,13 @@ entry-editor1.png \
 entry-editor2.png \
 entry-editor3.png \
 entry-editor4.png \
-fieldsdialog.png \
+fields-dialog.png \
 general-options.png \
-mainwindow.png \
+main-window.png \
 print-options.png \
-template-options.png
+template-options.png \
+filter-dialog.png \
+csv-dialog.png
 
 
 ####### kdevelop will overwrite this part!!! (end)############

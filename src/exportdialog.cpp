@@ -14,6 +14,7 @@
 #include "exportdialog.h"
 #include "collection.h"
 #include "mainwindow.h"
+#include "filehandler.h"
 
 #include "translators/exporter.h"
 #include "translators/bookcasexmlexporter.h"

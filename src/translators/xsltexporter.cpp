@@ -54,6 +54,7 @@ QWidget* XSLTExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   l->addWidget(group);
 
   QHBox* box = new QHBox(group);
+  box->setSpacing(4);
   (void) new QLabel(i18n("XSLT File:"), box);
   m_URLRequester = new KURLRequester(box);
   QWhatsThis::add(m_URLRequester, i18n("Choose the XSLT file used to transform the Bookcase XML data."));

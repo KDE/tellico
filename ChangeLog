@@ -1,3 +1,21 @@
+2004-05-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with xslt import with libxml < 2.6.
+	* Fixed bug with losing extended properties when cloning fields/
+
+2004-05-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Added some fixes for compiling with gcc 3.4.
+	* Added initial template for importing MODS collections.
+
+2004-05-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with XSLT importer.
+
+2004-05-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Branched 0.9.x
+
 2004-05-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Changed Fields Dialog to close when creating a new collection or opening one.
