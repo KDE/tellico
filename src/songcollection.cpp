@@ -22,36 +22,35 @@ SongCollection::SongCollection(int id_, const QString& title_ /* = i18n("My Song
   BCAttribute* att;
 
   att = new BCAttribute(QString::fromLatin1("artist"), i18n("Artist"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowGrouped);
+  att->setCategory(i18n("&General"));
+  att->setFlags(BCAttribute::AllowCompletion | BCAttribute::AllowGrouped);
   addAttribute(att);
   setDefaultGroupAttribute(att->name());
 
   att = new BCAttribute(QString::fromLatin1("album"), i18n("Album"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowGrouped);
+  att->setCategory(i18n("&General"));
+  att->setFlags(BCAttribute::AllowCompletion | BCAttribute::AllowGrouped);
   addAttribute(att);
 
   att = new BCAttribute(QString::fromLatin1("year"), i18n("Year"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::NoComplete | BCAttribute::AllowGrouped);
+  att->setCategory(i18n("&General"));
+  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
   addAttribute(att);
 
   att = new BCAttribute(QString::fromLatin1("genre"), i18n("Genre"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
+  att->setCategory(i18n("&General"));
+  att->setFlags(BCAttribute::AllowCompletion | BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
   addAttribute(att);
 
   QStringList list;
   list << i18n("CD") << i18n("Cassette");
   att = new BCAttribute(QString::fromLatin1("medium"), i18n("Medium"), list);
-  att->setCategory(i18n("General"));
+  att->setCategory(i18n("&General"));
   att->setFlags(BCAttribute::AllowGrouped);
   addAttribute(att);
 
   att = new BCAttribute(QString::fromLatin1("comments"), i18n("Comments"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::NoComplete);
+  att->setCategory(i18n("&General"));
   addAttribute(att);
   
   // have to do this at end since addAttribute() sets it to true;

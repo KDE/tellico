@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="bookcase" version="3">
+<kpartgui name="bookcase" version="4">
 <MenuBar>
  <Menu name="file">
   <Menu name="import"><text>I&amp;mport</text>
@@ -13,15 +13,26 @@
    <Action name="export_bibtexml"/>
 <!--   <Action name="export_xslt"/>-->
   </Menu>
+<!--  <Action name="lookup_dialog"/>-->
+ </Menu>
+ <Menu name="edit">
+  <Action name="edit_fields"/>
  </Menu>
  <Menu name="settings">
   <Action name="toggle_collection_bar" append="show_merge"/>
   <Action name="change_unit_grouping" append="show_merge"/>
+  <Action name="filter_dialog" append="show_merge"/>
  </Menu>
 </MenuBar>
+<ToolBar name="mainToolBar">
+  <Action name="edit_fields"/>
+  <Action name="filter_dialog"/>
+</ToolBar>
 <ToolBar name="collectionToolBar">
   <text>Collection Toolbar</text>
   <Action name="change_unit_grouping_label"/>
   <Action name="change_unit_grouping"/>
+  <Action name="quick_filter_label"/>
+  <Action name="quick_filter"/>
 </ToolBar>
 </kpartgui>

@@ -36,8 +36,10 @@
 /*
  * VERSION 2 added namespaces, changed to multiple elements,
  * and changed the "keywords" attribute to "keyword"
+ *
+ * VERSION 3 broek out the formatFlag, and change NoComplete to AllowCompletion
  */
-static const int SYNTAX_VERSION = 2;
+static const int SYNTAX_VERSION = 3;
 
 static const int OPEN_SIGNAL_STEP_SIZE = 10;
 //static const int SAVE_SIGNAL_STEP_SIZE = 10;
@@ -48,7 +50,7 @@ BookcaseDoc::BookcaseDoc(QWidget* parent_, const char* name_/*=0*/)
   newDocument();
 }
 
-void BookcaseDoc::setModified(bool m_) {
+void BookcaseDoc::slotSetModified(bool m_/*=true*/) {
   m_isModified = m_;
   if(m_) {
     emit signalModified();
@@ -79,7 +81,7 @@ bool BookcaseDoc::newDocument() {
   m_collList.append(coll);
   emit signalCollectionAdded(coll);
 
-  setModified(false);
+  slotSetModified(false);
   m_url.setFileName(i18n("Untitled"));
 
   return true;
@@ -88,7 +90,7 @@ bool BookcaseDoc::newDocument() {
 QDomDocument* BookcaseDoc::readDocument(const KURL& url_) const {
   QString tmpfile;
   if(!KIO::NetAccess::download(url_, tmpfile)) {
-    Bookcase* app = bookcaseParent(parent());
+    Bookcase* app = BookcaseAncestor(parent());
     QString str;
     if(url_.isLocalFile()) {
       str = i18n("Bookcase is unable to find the file - %1.").arg(url_.fileName());
@@ -101,7 +103,7 @@ QDomDocument* BookcaseDoc::readDocument(const KURL& url_) const {
 
   QFile f(tmpfile);
   if(!f.open(IO_ReadOnly)) {
-    Bookcase* app = bookcaseParent(parent());
+    Bookcase* app = BookcaseAncestor(parent());
     QString str(i18n("Bookcase is unable to open the file - %1.").arg(tmpfile));
     KMessageBox::sorry(app, str);
     KIO::NetAccess::removeTempFile(tmpfile);
@@ -111,7 +113,7 @@ QDomDocument* BookcaseDoc::readDocument(const KURL& url_) const {
   char buf[6];
   if(f.readBlock(buf, 5) < 5) {
     f.close();
-    Bookcase* app = bookcaseParent(parent());
+    Bookcase* app = BookcaseAncestor(parent());
     QString str(i18n("Bookcase is unable to read the file - %1.").arg(tmpfile));
     KMessageBox::sorry(app, str);
     KIO::NetAccess::removeTempFile(tmpfile);
@@ -121,7 +123,7 @@ QDomDocument* BookcaseDoc::readDocument(const KURL& url_) const {
   // Is it plain XML ?
   if(strncasecmp(buf, "<?xml", 5) != 0) {
     f.close();
-    Bookcase* app = bookcaseParent(parent());
+    Bookcase* app = BookcaseAncestor(parent());
     QString str(i18n("Bookcase is unable to load the file - %1.").arg(url_.fileName()));
     KMessageBox::sorry(app, str);
     KIO::NetAccess::removeTempFile(tmpfile);
@@ -134,9 +136,9 @@ QDomDocument* BookcaseDoc::readDocument(const KURL& url_) const {
   int errorLine, errorColumn; 
   if(!dom->setContent(&f, false, &errorMsg, &errorLine, &errorColumn)) {
     f.close();
-    Bookcase* app = bookcaseParent(parent());
+    Bookcase* app = BookcaseAncestor(parent());
     QString str = i18n("Bookcase is unable to load the file - %1.").arg(url_.fileName());
-    QString details = i18n("There is an XML parsing error in line %1, column %1.").arg(errorLine).arg(errorColumn);
+    QString details = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
     details += QString::fromLatin1("\n");
     details += i18n("The error message from Qt is:");
     details += QString::fromLatin1("\n");
@@ -161,13 +163,13 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
   bool success = loadDomDocument(url_, *dom);
   delete dom;
   if(success) {
-    setModified(false);
+    slotSetModified(false);
   }
   return success;
 }
 
 bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {  
-  Bookcase* app = bookcaseParent(parent());
+  Bookcase* app = BookcaseAncestor(parent());
   QDomElement root = dom_.documentElement();
   if(root.tagName() != QString::fromLatin1("bookcase")) {
     QString str(i18n("Bookcase is unable to load the file - %1.").arg(url_.fileName()));
@@ -234,20 +236,24 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
     // do not do this yet, we want the collection to have all of its attributes first
     // slotAddCollection(coll);
 
+    // I don't want the attribute added and unit added signals to happen
+    coll->blockSignals(true);
+
     // there will only be attributes if it's a custom collection
     QDomNodeList attelems = collelem.elementsByTagName(QString::fromLatin1("attribute"));
 //    kdDebug() << QString("BookcaseDoc::openDocument() - There are %1 attribute(s).\n").arg(attelems.count());
 
+    QString attName, attTitle, attTypeStr, attFormatStr;
     for(unsigned j = 0; j < attelems.count(); ++j) {
       QDomElement attelem = attelems.item(j).toElement();
       
-      QString attName  = attelem.attribute(QString::fromLatin1("name"),
-                                           QString::fromLatin1("unknown"));
-      QString attTitle = attelem.attribute(QString::fromLatin1("title"),
-                                           i18n("Unknown"));
-      QString attTypeStr = attelem.attribute(QString::fromLatin1("type"));
+      attName  = attelem.attribute(QString::fromLatin1("name"), QString::fromLatin1("unknown"));
+      attTitle = attelem.attribute(QString::fromLatin1("title"), i18n("Unknown"));
+
+      attTypeStr = attelem.attribute(QString::fromLatin1("type"), QString::number(BCAttribute::Line));
       // is it ok to cast from an enum to an int?
       BCAttribute::AttributeType attType = static_cast<BCAttribute::AttributeType>(attTypeStr.toInt());
+
       BCAttribute* att;
       if(attType == BCAttribute::Choice) {
         QString attAllowed = attelem.attribute(QString::fromLatin1("allowed"));
@@ -260,16 +266,29 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
       if(attelem.hasAttribute(QString::fromLatin1("category"))) {
         att->setCategory(attelem.attribute(QString::fromLatin1("category")));
       }
+      
       if(attelem.hasAttribute(QString::fromLatin1("flags"))) {
-        att->setFlags(attelem.attribute(QString::fromLatin1("flags")).toInt());
+        int flags = attelem.attribute(QString::fromLatin1("flags")).toInt();
+        att->setFlags(flags);
       }
+
+      attFormatStr = attelem.attribute(QString::fromLatin1("format"), QString::number(BCAttribute::FormatPlain));
+      BCAttribute::FormatFlag format = static_cast<BCAttribute::FormatFlag>(attFormatStr.toInt());
+      att->setFormatFlag(format);
+      
       if(attelem.hasAttribute(QString::fromLatin1("description"))) {
         att->setDescription(attelem.attribute(QString::fromLatin1("description")));
       }
-      coll->addAttribute(att);
+      
+      // before syntax version 3, the only custom attribute would have been bibtex-id
+      if(syntaxVersion > 2) {
+        coll->addAttribute(att);
+      } else if(att->name() == QString::fromLatin1("bibtex-id")) {
+        att->setFlags(0); // I changed the enum numbers. A no-no, I know, but I did it anyway
+        coll->addAttribute(att);
+      }
 //      kdDebug() << QString("  Added attribute: %1, %2").arg(att->name()).arg(att->title()) << endl;
     }
-    coll->blockSignals(true);
     // do this now that we have all the attributes
     slotAddCollection(coll);
 
@@ -332,7 +351,7 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
 
   // be sure to do this to properly close out progress bar
   emit signalFractionDone(1.0);
-
+  
   return true;
 }
 
@@ -340,7 +359,7 @@ bool BookcaseDoc::saveModified() {
   bool completed = true;
 
   if(isModified()) {
-    Bookcase* app = bookcaseParent(parent());
+    Bookcase* app = BookcaseAncestor(parent());
     QString str(i18n("The current file has been modified.\n"
                      "Do you want to save it?"));
     int want_save = KMessageBox::warningYesNoCancel(app, str, i18n("Warning!"),
@@ -358,7 +377,7 @@ bool BookcaseDoc::saveModified() {
         break;
 
       case KMessageBox::No:
-        setModified(false);
+        slotSetModified(false);
         deleteContents();
         completed = true;
         break;
@@ -382,16 +401,17 @@ bool BookcaseDoc::saveDocument(const KURL& url_) {
   bool success = writeURL(url_,  dom.toString());
   
   if(success) {
+    setURL(url_);
     // if successful, doc is no longer modified
-    setModified(false);
+    slotSetModified(false);
   }
   return success;
 }
 
-bool BookcaseDoc::writeURL(const KURL& url_,  const QString& text_) const {
+bool BookcaseDoc::writeURL(const KURL& url_,  const QString& text_, bool locale_/*=false*/) const {
   if(KIO::NetAccess::exists(url_)) {
     if(url_ != m_url) {
-      Bookcase* app = bookcaseParent(parent());
+      Bookcase* app = BookcaseAncestor(parent());
       QString str = i18n("A file named \"%1\" already exists. "
                          "Are you sure you want to overwrite it?").arg(url_.fileName());
       int want_continue = KMessageBox::warningContinueCancel(app, str,
@@ -412,17 +432,17 @@ bool BookcaseDoc::writeURL(const KURL& url_,  const QString& text_) const {
   bool success;
   if(url_.isLocalFile()) {
     QFile f(url_.path());
-    success = writeFile(f, text_);
+    success = writeFile(f, text_, locale_);
     f.close();
   } else {
     KTempFile tempfile;
     QFile f(tempfile.name());
-    success = writeFile(f, text_);
+    success = writeFile(f, text_, locale_);
     f.close();
     if(success) {
       bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_);
       if(!uploaded) {
-        Bookcase* app = bookcaseParent(parent());
+        Bookcase* app = BookcaseAncestor(parent());
         QString str(i18n("Bookcase is unable to upload the file - %1.").arg(url_.url()));
         KMessageBox::sorry(app, str);
       }
@@ -433,17 +453,21 @@ bool BookcaseDoc::writeURL(const KURL& url_,  const QString& text_) const {
   return success;
 }
 
-bool BookcaseDoc::writeFile(QFile& f_, const QString& text_) const {
+bool BookcaseDoc::writeFile(QFile& f_, const QString& text_, bool locale_) const {
   if(f_.open(IO_WriteOnly)) {
     QTextStream t(&f_);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    if(locale_) {
+      t.setEncoding(QTextStream::Locale);
+    } else {
+      t.setEncoding(QTextStream::UnicodeUTF8);
+    }
 //    kdDebug() << "-----------------------------" << endl
 //              << text_ << endl
 //              << "-----------------------------" << endl;
     t << text_;
     return true;
   } else {
-    Bookcase* app = bookcaseParent(parent());
+    Bookcase* app = BookcaseAncestor(parent());
     QString str(i18n("Bookcase is unable to write the file - %1.").arg(f_.name()));
     KMessageBox::sorry(app, str);
     return false;
@@ -486,7 +510,7 @@ const BCCollectionList& BookcaseDoc::collectionList() const{
   return m_collList;
 }
 
-QDomDocument BookcaseDoc::exportXML(bool format_/*=false*/) {
+QDomDocument BookcaseDoc::exportXML(bool format_/*=false*/) const {
   QDomImplementation impl;
   QDomDocumentType doctype = impl.createDocumentType(QString::fromLatin1("bookcase"),
                                                      QString::null,
@@ -496,119 +520,24 @@ QDomDocument BookcaseDoc::exportXML(bool format_/*=false*/) {
 
   QDomDocument doc = impl.createDocument(ns, QString::fromLatin1("bookcase"), doctype);
 
+  // root bookcase element
+  QDomElement bcelem = doc.documentElement();
+
   // createDocument creates a root node, insert the processing instruction before it
   // Is it truly UTF_8 encoding? Yes, QDomDocument::toCString() returns UTF-8
   doc.insertBefore(doc.createProcessingInstruction(QString::fromLatin1("xml"),
                                                    QString::fromLatin1("version=\"1.0\" "
                                                                        "encoding=\"UTF-8\"")),
-                                                   doc.documentElement());
+                                                   bcelem);
 
-//  QDomElement bcelem = doc.createElementNS(ns, QString::fromLatin1("bookcase"));
-  QDomElement bcelem = doc.documentElement();
   bcelem.setAttribute(QString::fromLatin1("syntaxVersion"), SYNTAX_VERSION);
-  doc.appendChild(bcelem);
 
   BCCollectionListIterator collIt(m_collList);
-  // need i counter for progress bar
-  for(int i = 0; collIt.current(); ++collIt, ++i) {
-    BCCollection* coll = collIt.current();
-    QDomElement collElem = doc.createElement(QString::fromLatin1("collection"));
-    doc.documentElement().appendChild(collElem);
-    collElem.setAttribute(QString::fromLatin1("title"),     coll->title());
-    collElem.setAttribute(QString::fromLatin1("unit"),      coll->unitName());
-    collElem.setAttribute(QString::fromLatin1("unitTitle"), coll->unitTitle());
-
-    // if the collection is custom, include the attributes in the doc file
-    // TODO: fixme, this is a hack to get the attributes in the output when formatted
-    // this is because I know that the only time I'm asking for formatted entried is
-    // when I'm printing the document, and my printing stylesheet needs to map from the
-    // attribute name to its title
-    if(coll->isCustom() || format_) {
-      QDomElement attsElem = doc.createElement(QString::fromLatin1("attributes"));
-      collElem.appendChild(attsElem);
-      BCAttributeListIterator attIt(coll->attributeList());
-      QDomElement attElem;
-      for( ; attIt.current(); ++attIt) {
-        attElem = doc.createElement(QString::fromLatin1("attribute"));
-        attsElem.appendChild(attElem);
-        attElem.setAttribute(QString::fromLatin1("name"),          attIt.current()->name());
-        attElem.setAttribute(QString::fromLatin1("title"),         attIt.current()->title());
-        attElem.setAttribute(QString::fromLatin1("category"),      attIt.current()->category());
-        attElem.setAttribute(QString::fromLatin1("type"),          attIt.current()->type());
-        if(attIt.current()->type() == BCAttribute::Choice) {
-          attElem.setAttribute(QString::fromLatin1("allowed"),     attIt.current()->allowed().join(QString::fromLatin1(";")));
-        }
-        attElem.setAttribute(QString::fromLatin1("flags"),         attIt.current()->flags());
-        if(!attIt.current()->description().isEmpty()) {
-          attElem.setAttribute(QString::fromLatin1("description"), attIt.current()->description());
-        }
-      } // end attribute loop
-     } // end attribute save
-
-    // element for the whole unit
-    QDomElement unitElem;
-    // parent element if attribute contains multiple values, child of unitElem
-    QDomElement attParElem;
-    // element for attributte value, child of eith unitElem or attParElem
-    QDomElement attElem;
-    // iterate through every attribute for each unit, go ahead and create iterator here
-    BCAttributeListIterator attIt(coll->attributeList());
-    // iterate over every unit in collecction
-    QPtrListIterator<BCUnit> unitIt(coll->unitList());
-    
-    // the j counter is for progress
-    for(int j = 0; unitIt.current(); ++unitIt, ++j) {
-      unitElem = doc.createElement(coll->unitName());
-      collElem.appendChild(unitElem);
-
-      // reset attribtue iterator, and loop over all
-      for(attIt.toFirst(); attIt.current(); ++attIt) {
-        QString attName = attIt.current()->name();
-        QString attValue;
-        if(format_) {
-          attValue = unitIt.current()->attributeFormatted(attName, attIt.current()->flags());
-        } else {
-          attValue = unitIt.current()->attribute(attName);
-        }
-          
-        // if empty, then no element is added
-        if(!attValue.isEmpty()) {
-          // if multiple version are allowed, split them into separate elements
-          if(attIt.current()->flags() & BCAttribute::AllowMultiple) {
-            // who cares about grammar, just add an 's' to the name
-            attParElem = doc.createElement(attName + QString::fromLatin1("s"));
-            unitElem.appendChild(attParElem);
-            // the space after the semi-colon is enforced when the attribute is set for the unit
-            QStringList atts = QStringList::split(QString::fromLatin1("; "), attValue);
-            QStringList::Iterator it;
-            for(it = atts.begin(); it != atts.end(); ++it) {
-              attElem = doc.createElement(attName);
-              // never going to be BCAttribute::Bool, so don't bother to check
-              attElem.appendChild(doc.createTextNode(*it));
-              attParElem.appendChild(attElem);
-            }
-          } else {
-            attElem = doc.createElement(attName);
-            unitElem.appendChild(attElem);
-            if(attIt.current()->type() != BCAttribute::Bool) {
-              attElem.appendChild(doc.createTextNode(attValue));
-            }
-          }
-        }
-      } // end attribute loop
-
-//      if(j%SAVE_SIGNAL_STEP_SIZE == 0) {
-//        // allocate equal time to each collection in document, leave 20% for later file write
-//        // i is number of collection
-//        // j is number of unit
-//        float f = i+static_cast<float>(j)/static_cast<float>(coll->unitCount());
-//        f *= 0.8/static_cast<float>(collectionCount());
-//        emit signalFractionDone(f);
-//      }
-    } // end unit loop
-  } // end collection loop
+  for( ; collIt.current(); ++collIt) {
+    exportCollectionXML(doc, bcelem, collIt.current(), format_);
+  }
   
-//  QFile f("/tmp/test.xml");
+//  QFile f(QString::fromLatin1("/tmp/test.xml"));
 //  if(f.open(IO_WriteOnly)) {
 //    QTextStream t(&f);
 //    t << doc.toCString().data();
@@ -618,7 +547,7 @@ QDomDocument BookcaseDoc::exportXML(bool format_/*=false*/) {
   return doc;
 }
 
-QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) {
+QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) const {
   QDomImplementation impl;
   QDomDocumentType doctype = impl.createDocumentType(QString::fromLatin1("bookcase"),
                                                      QString::null,
@@ -628,36 +557,31 @@ QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) {
 
   QDomDocument doc = impl.createDocument(ns, QString::fromLatin1("bookcase"), doctype);
   
+  // root bookcase element
+  QDomElement bcelem = doc.documentElement();
+
   // createDocument creates a root node, insert the processing instruction before it
   // Is it truly UTF_8 encoding? Yes, QDomDocument::toCString() returns UTF-8
   doc.insertBefore(doc.createProcessingInstruction(QString::fromLatin1("xml"),
                                                    QString::fromLatin1("version=\"1.0\" "
                                                                        "encoding=\"UTF-8\"")),
-                                                   doc.documentElement());
+                                                   bcelem);
 
-//  QDomElement bcelem = doc.createElementNS(ns, QString::fromLatin1("bookcase"));
-  QDomElement bcelem = doc.documentElement();
   bcelem.setAttribute(QString::fromLatin1("syntaxVersion"), SYNTAX_VERSION);
-  doc.appendChild(bcelem);
 
   BCCollectionListIterator collIt(m_collList);
   for( ; collIt.current(); ++collIt) {
     QDomElement collElem = doc.createElement(QString::fromLatin1("collection"));
-    doc.documentElement().appendChild(collElem);
+    bcelem.appendChild(collElem);
     collElem.setAttribute(QString::fromLatin1("title"), collIt.current()->title());
 
     QDomElement attsElem = doc.createElement(QString::fromLatin1("attributes"));
     collElem.appendChild(attsElem);
 
     // the XSLT sheet gets the header title from this
-    // outside the loop for efficiency;
-    QDomElement attElem;
     BCAttributeListIterator attIt(collIt.current()->attributeList());
-    for(attIt.toFirst(); attIt.current(); ++attIt) {
-      attElem = doc.createElement(QString::fromLatin1("attribute"));
-      attElem.setAttribute(QString::fromLatin1("name"),  attIt.current()->name());
-      attElem.setAttribute(QString::fromLatin1("title"), attIt.current()->title());
-      attsElem.appendChild(attElem);
+    for( ; attIt.current(); ++attIt) {
+      exportAttributeXML(doc, attsElem, attIt.current());
     }
 
     QString value;
@@ -694,7 +618,7 @@ QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) {
 
           if(format_) {
             value = it.current()->attributeFormatted(attIt.current()->name(),
-                                                     attIt.current()->flags());
+                                                     attIt.current()->formatFlag());
           } else {
             value = it.current()->attribute(attIt.current()->name());
           }
@@ -731,7 +655,7 @@ void BookcaseDoc::slotAddCollection(BCCollection* coll_) {
   m_collList.append(coll_);
   emit signalCollectionAdded(coll_);
 
-  setModified(true);
+  slotSetModified(true);
 }
 
 void BookcaseDoc::slotDeleteCollection(BCCollection* coll_) {
@@ -742,7 +666,7 @@ void BookcaseDoc::slotDeleteCollection(BCCollection* coll_) {
   emit signalCollectionDeleted(coll_);
   m_collList.remove(coll_);
 
-  setModified(true);
+  slotSetModified(true);
 }
 
 void BookcaseDoc::slotSaveUnit(BCUnit* unit_) {
@@ -750,7 +674,7 @@ void BookcaseDoc::slotSaveUnit(BCUnit* unit_) {
     return;
   }
 
-  if(unit_->collection()->unitList().containsRef(unit_) == 0) {
+  if(!unit_->isOwned()) {
     slotAddUnit(unit_);
     return;
   }
@@ -759,7 +683,7 @@ void BookcaseDoc::slotSaveUnit(BCUnit* unit_) {
   unit_->collection()->updateDicts(unit_);
   emit signalUnitModified(unit_);
 
-  setModified(true);
+  slotSetModified(true);
 }
 
 void BookcaseDoc::slotAddUnit(BCUnit* unit_) {
@@ -771,7 +695,7 @@ void BookcaseDoc::slotAddUnit(BCUnit* unit_) {
 
   unit_->collection()->addUnit(unit_);
   emit signalUnitAdded(unit_);
-  setModified(true);
+  slotSetModified(true);
 }
 
 void BookcaseDoc::slotDeleteUnit(BCUnit* unit_) {
@@ -786,11 +710,11 @@ void BookcaseDoc::slotDeleteUnit(BCUnit* unit_) {
   bool deleted = unit_->collection()->deleteUnit(unit_);
 
   if(deleted) {
-    setModified(true);
+    slotSetModified(true);
   } else {
     // revert the signal???
     emit signalUnitAdded(unit_);
-    setModified(false);
+    slotSetModified(false);
   }
 }
 
@@ -798,7 +722,7 @@ void BookcaseDoc::slotRenameCollection(int id_, const QString& newTitle_) {
   BCCollection* coll = collectionById(id_);
   if(coll) {
     coll->setTitle(newTitle_);
-    setModified(true);
+    slotSetModified(true);
   }
 }
 
@@ -825,19 +749,7 @@ QDomDocument* BookcaseDoc::importBibtex(const KURL& url_) {
 
 void BookcaseDoc::search(const QString& text_, const QString& attTitle_, int options_) {
 //  kdDebug() << "BookcaseDoc::search() - looking for " << text_ << " in " << attTitle_ << endl;
-  BCAttribute* att = 0;
-  BCCollection* coll = 0;
-
-  BCAttributeList empty;
-  BCAttributeListIterator attIt(empty);
-
-  bool searchAll     = (options_ & AllAttributes);
-  bool backwards     = (options_ & FindBackwards);
-  bool asRegExp      = (options_ & AsRegExp);
-  bool fromBeginning = (options_ & FromBeginning);
-  bool caseSensitive = (options_ & CaseSensitive);
-
-  Bookcase* app = bookcaseParent(parent());
+  Bookcase* app = BookcaseAncestor(parent());
   BCUnitItem* item = app->selectedOrFirstItem();
   if(!item) {
 //    kdDebug() << "BookcaseDoc::search() - empty document" << endl;
@@ -845,9 +757,18 @@ void BookcaseDoc::search(const QString& text_, const QString& attTitle_, int opt
     return;
   }
 
+  bool searchAll     = (options_ & AllAttributes);
+  bool backwards     = (options_ & FindBackwards);
+  bool asRegExp      = (options_ & AsRegExp);
+  bool fromBeginning = (options_ & FromBeginning);
+  bool caseSensitive = (options_ & CaseSensitive);
+
+  BCAttribute* att = 0;
+  BCCollection* coll = 0;
+
   // if fromBeginning is used, then take the first one
   if(fromBeginning) {
-    // if backwards and beginning, start at end, this is slow to travers
+    // if backwards and beginning, start at end, this is slow to traverse
     if(backwards) {
       item = static_cast<BCUnitItem*>(item->listView()->lastItem());
     } else {
@@ -856,7 +777,7 @@ void BookcaseDoc::search(const QString& text_, const QString& attTitle_, int opt
   } else {
     // don't want to continually search the same one, so if the returned item
     // is the same as the selected one, then skip to the next
-    if(item == static_cast<BCUnitItem*>(item->listView()->selectedItem())) {
+    if(item->isSelected()) {
       if(backwards) {
         item = static_cast<BCUnitItem*>(item->itemAbove());
       } else {
@@ -865,8 +786,11 @@ void BookcaseDoc::search(const QString& text_, const QString& attTitle_, int opt
     }
   }
 
+  BCAttributeList empty;
+  BCAttributeListIterator attIt(empty);
 
   bool found = false;
+  QString matchedText;
   BCUnit* unit;
   while(item) {
     unit = item->unit();
@@ -897,19 +821,22 @@ void BookcaseDoc::search(const QString& text_, const QString& attTitle_, int opt
         if(caseSensitive) {
           rx.setCaseSensitive(true);
         }
-        if(unit->attribute(att->name()).contains(rx)) {
+        if(rx.search(unit->attribute(att->name())) > -1) {
           found = true;
+          matchedText = rx.capturedTexts().first();
         }
       // else if not a regexp
       } else {
         if(caseSensitive) {
           if(unit->attribute(att->name()).contains(text_)) {
             found = true;
+            matchedText = text_;
           }
         } else {
           // we're not case sensitive so compare lower-case to lower-case
           if(unit->attribute(att->name()).lower().contains(text_.lower())) {
             found = true;
+            matchedText = text_.lower();
           }
         }
       } // end of while(att ...
@@ -917,7 +844,7 @@ void BookcaseDoc::search(const QString& text_, const QString& attTitle_, int opt
       // if a unit is found, emit selected signal and return
       if(found) {
 //        kdDebug() << "\tfound " << unit->attribute(att->name()) << endl;
-        emit signalUnitSelected(unit);
+        emit signalUnitSelected(unit, matchedText);
         return;      
       }
 
@@ -965,3 +892,131 @@ BCAttributeList BookcaseDoc::uniqueAttributes(int type_ /* =0 */) const {
   return list;
 }
 
+QString BookcaseDoc::attributeNameByTitle(const QString& title_, int type_ /* =0 */) {
+  BCAttribute* att;
+  BCCollectionListIterator it(collectionList());
+  for( ; it.current(); ++it) {
+    if(type_ == 0 || it.current()->collectionType() == type_) {
+      att = it.current()->attributeByTitle(title_);
+      if(att) {
+        return att->name();
+      }
+    }
+  }
+  kdDebug() << "BookcaseDoc::attributeNameByTitle() - no attribute titled " << title_ << endl;
+  return QString::null;
+}
+
+QString BookcaseDoc::attributeTitleByName(const QString& name_, int type_ /* =0 */) {
+  BCAttribute* att;
+  BCCollectionListIterator it(collectionList());
+  for( ; it.current(); ++it) {
+    if(type_ == 0 || it.current()->collectionType() == type_) {
+      att = it.current()->attributeByName(name_);
+      if(att) {
+        return att->title();
+      }
+    }
+  }
+  kdDebug() << "BookcaseDoc::attributeNameByTitle() - no attribute named " << name_ << endl;
+  return QString::null;
+}
+
+void BookcaseDoc::exportCollectionXML(QDomDocument& doc_, QDomElement& parent_, BCCollection* coll_, bool format_) const {
+  QDomElement collElem = doc_.createElement(QString::fromLatin1("collection"));
+  
+  collElem.setAttribute(QString::fromLatin1("title"),     coll_->title());
+  collElem.setAttribute(QString::fromLatin1("unit"),      coll_->unitName());
+  collElem.setAttribute(QString::fromLatin1("unitTitle"), coll_->unitTitle());
+
+  QDomElement attsElem = doc_.createElement(QString::fromLatin1("attributes"));
+  collElem.appendChild(attsElem);
+  BCAttributeListIterator attIt(coll_->attributeList());
+  for( ; attIt.current(); ++attIt) {
+    exportAttributeXML(doc_, attsElem, attIt.current());
+  }
+
+  // iterate over every unit in collecction
+  BCUnitListIterator unitIt(coll_->unitList());
+
+  for( ; unitIt.current(); ++unitIt) {
+    exportUnitXML(doc_, collElem, unitIt.current(), format_);
+  }
+
+  parent_.appendChild(collElem);
+}
+
+void BookcaseDoc::exportAttributeXML(QDomDocument& doc_, QDomElement& parent_, BCAttribute* att_) const {
+  QDomElement attElem = doc_.createElement(QString::fromLatin1("attribute"));
+
+  attElem.setAttribute(QString::fromLatin1("name"),          att_->name());
+  attElem.setAttribute(QString::fromLatin1("title"),         att_->title());
+  attElem.setAttribute(QString::fromLatin1("category"),      att_->category());
+  attElem.setAttribute(QString::fromLatin1("type"),          att_->type());
+  attElem.setAttribute(QString::fromLatin1("flags"),         att_->flags());
+  attElem.setAttribute(QString::fromLatin1("format"),        att_->formatFlag());
+
+  if(att_->type() == BCAttribute::Choice) {
+    attElem.setAttribute(QString::fromLatin1("allowed"),     att_->allowed().join(QString::fromLatin1(";")));
+  }
+
+  // only save description if it's not equal to title, which is the default
+  // title is never empty, so this indirectly checks for empty descriptions
+  if(att_->description() != att_->title()) {
+    attElem.setAttribute(QString::fromLatin1("description"), att_->description());
+  }
+
+  parent_.appendChild(attElem);
+}
+
+void BookcaseDoc::exportUnitXML(QDomDocument& doc_, QDomElement& parent_, BCUnit* unit_, bool format_) const {
+  QDomElement unitElem = doc_.createElement(unit_->collection()->unitName());
+
+  // is it really faster to put these outside the loop?
+  // parent element if attribute contains multiple values, child of unitElem
+  QDomElement attParElem;
+  // element for attribute value, child of eith unitElem or attParElem
+  QDomElement attElem;
+
+  // iterate through every attribute for the unit
+  BCAttributeListIterator attIt(unit_->collection()->attributeList());
+  for( ; attIt.current(); ++attIt) {
+    QString attName = attIt.current()->name();
+    QString attValue;
+    if(format_) {
+      attValue = unit_->attributeFormatted(attName, attIt.current()->formatFlag());
+    } else {
+      attValue = unit_->attribute(attName);
+    }
+
+    // if empty, then no attribute element is added and just continue
+    if(attValue.isEmpty()) {
+      continue;
+    }
+
+    // if multiple versions are allowed, split them into separate elements
+    if(attIt.current()->flags() & BCAttribute::AllowMultiple) {
+      // who cares about grammar, just add an 's' to the name
+      attParElem = doc_.createElement(attName + QString::fromLatin1("s"));
+      unitElem.appendChild(attParElem);
+      
+      // the space after the semi-colon is enforced when the attribute is set for the unit
+      QStringList atts = QStringList::split(QString::fromLatin1("; "), attValue);
+      QStringList::ConstIterator it;
+      for(it = atts.begin(); it != atts.end(); ++it) {
+        attElem = doc_.createElement(attName);
+        // never going to be BCAttribute::Bool, so don't bother to check
+        attElem.appendChild(doc_.createTextNode(*it));
+        attParElem.appendChild(attElem);
+      }
+    } else {
+      attElem = doc_.createElement(attName);
+      unitElem.appendChild(attElem);
+      if(attIt.current()->type() != BCAttribute::Bool) {
+        attElem.appendChild(doc_.createTextNode(attValue));
+      }
+    }
+  } // end attribute loop
+  
+  parent_.appendChild(unitElem);
+}

@@ -11,9 +11,9 @@
    ================================================================
    Bookcase XSLT file - used for exporting to bibtexml format
 
-   $Id: bookcase2bibtexml.xsl,v 1.12 2003/03/22 02:22:53 robby Exp $
+   $Id: bookcase2bibtexml.xsl,v 1.3 2003/05/03 05:50:26 robby Exp $
 
-   Copyright (c) 2003 Robby Stephenson
+   Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with XML data files
    from the 'Bookcase' application, which can be found at:
@@ -28,7 +28,7 @@
 
 <xsl:strip-space elements="*"/>
 
-<xsl:variable name="current-syntax" select="'2'"/>
+<xsl:variable name="current-syntax" select="'3'"/>
 
 <!--make lowercase easier -->
 <xsl:variable name="lc" select="'abcdefghijklmnopqrstuvwxyz'"/>
@@ -47,7 +47,7 @@
   <xsl:message>
    <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
    <xsl:value-of select="$current-syntax"/>
-   <xsl:text>,</xsl:text>
+   <xsl:text>, </xsl:text>
    <xsl:value-of select="$endl"/>
    <xsl:text>but the data file is version </xsl:text>
    <xsl:value-of select="@syntaxVersion"/>

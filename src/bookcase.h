@@ -31,6 +31,10 @@ class ConfigDialog;
 class BCCollection;
 class FindDialog;
 class BCUnitItem;
+class LookupDialog;
+class BCLineEditAction;
+class BCFilterDialog;
+class BCCollectionPropDialog;
 
 class KProgress;
 class KToolBar;
@@ -58,7 +62,7 @@ class QSplitter;
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: bookcase.h,v 1.46 2003/03/15 04:47:38 robby Exp $
+ * @version $Id: bookcase.h,v 1.4 2003/05/03 05:39:08 robby Exp $
  */
 class Bookcase : public KMainWindow {
 Q_OBJECT
@@ -185,12 +189,6 @@ public slots:
    */
   void slotUpdateFractionDone(float f);
   /**
-   * Handles deleting a unit from a collection
-   *
-   * @param unit The unit to be deleted
-   */
-  void slotDeleteUnit(BCUnit* unit);
-  /**
    * Handles updating everything when the configuration is changed
    * via the configuration dialog. This slot is called when the OK or Apply
    * button is clicked in the dialog
@@ -237,6 +235,30 @@ public slots:
    * Checks to see if the last file should be opened, or opens a command-line file
    */
   void slotInitFileOpen();
+  /**
+   * Shows the lookup dialog for the application.
+   */
+  void slotShowLookupDialog();
+  /**
+   * Hides the lookup dialog for the application.
+   */
+  void slotHideLookupDialog();
+  /**
+   * Shows the filter dialog for the application.
+   */
+  void slotShowFilterDialog();
+  /**
+   * Hides the filter dialog for the application.
+   */
+  void slotHideFilterDialog();
+  /**
+   * Shows the collection propreties dialog for the application.
+   */
+  void slotShowCollectionPropertiesDialog(int id=0);
+  /**
+   * Hides the collection properties dialog for the application.
+   */
+  void slotHideCollectionPropertiesDialog();
 
 private:
   /**
@@ -317,10 +339,6 @@ private:
    * @param url The url to open
    */
   bool openURL(const KURL& url);
-  /**
-   * Initializes the collection toolbar.
-   */
-  void updateCollectionToolBar();
   /*
    * Helper method to handle the printing duties.
    *
@@ -328,7 +346,7 @@ private:
    */
   void doPrint(const QString& html);
 
-  bool exportUsingXSLT(const QString& xsltFileName, const QString& filter);
+  bool exportUsingXSLT(const QString& xsltFileName, const QString& filter, bool locale=false);
   
   void XSLTError();
 
@@ -350,6 +368,11 @@ protected slots:
    * @param coll A pointer to the collection
    */
   void saveCollectionOptions(BCCollection* coll);
+  void slotUpdateFilter(const QString& text);
+  /**
+   * Updates the collection toolbar.
+   */
+  void slotUpdateCollectionToolBar(BCCollection* coll=0);
 
 private:
   BookcaseDoc* m_doc;
@@ -368,6 +391,7 @@ private:
   KAction* m_editPaste;
   KAction* m_editFind;
   KAction* m_editFindNext;
+  KAction* m_editFields;
   KToggleAction* m_toggleToolBar;
   KToggleAction* m_toggleStatusBar;
   KAction* m_preferences;
@@ -378,8 +402,11 @@ private:
   KAction* m_exportBibtex;
   KAction* m_exportBibtexml;
   KAction* m_exportXSLT;
+  KAction* m_lookup;
+  KAction* m_filter;
   KSelectAction* m_unitGrouping;
   KToggleAction* m_toggleCollectionBar;
+  BCLineEditAction* m_quickFilter;
 
   QSplitter* m_split;
 
@@ -389,6 +416,9 @@ private:
   BCGroupView* m_groupView;
   ConfigDialog* m_configDlg;
   FindDialog* m_findDlg;
+  LookupDialog* m_lookupDlg;
+  BCFilterDialog* m_filterDlg;
+  BCCollectionPropDialog* m_collPropDlg;
 };
  
 #endif // BOOKCASE_H

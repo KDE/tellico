@@ -3,11 +3,11 @@ bin_PROGRAMS = bookcase
 
 ## INCLUDES were found outside kdevelop specific part
 
-bookcase_SOURCES = bcunititem.cpp songcollection.cpp videocollection.cpp bookcollection.cpp xslthandler.cpp bclabelaction.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp 
+bookcase_SOURCES = bccollectionpropdialog.cpp bcattributewidget.cpp kwidgetlister.cpp bcfilterdialog.cpp bcfilter.cpp bcunititem.cpp songcollection.cpp videocollection.cpp bookcollection.cpp xslthandler.cpp bclabelaction.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp 
 bookcase_LDADD   = -lkdeprint -lxml2 -lxslt -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET)
 
 
-EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcasedoc.cpp bookcasedoc.h bookcaseui.rc bcattribute.cpp bcattribute.h bccollection.cpp bccollection.h bcgroupview.cpp bcgroupview.h bcdetailedlistview.cpp bcdetailedlistview.h bctabcontrol.cpp bctabcontrol.h bcunit.cpp bcuniteditwidget.cpp bcuniteditwidget.h bcunit.h bcunititem.h configdialog.cpp configdialog.h finddialog.cpp finddialog.h isbnvalidator.cpp isbnvalidator.h bcunitgroup.h bclabelaction.cpp bclabelaction.h xslthandler.cpp xslthandler.h bookcollection.cpp bookcollection.h videocollection.cpp videocollection.h songcollection.cpp songcollection.h bcutils.h bcunititem.cpp 
+EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcasedoc.cpp bookcasedoc.h bookcaseui.rc bcattribute.cpp bcattribute.h bccollection.cpp bccollection.h bcgroupview.cpp bcgroupview.h bcdetailedlistview.cpp bcdetailedlistview.h bctabcontrol.cpp bctabcontrol.h bcunit.cpp bcuniteditwidget.cpp bcuniteditwidget.h bcunit.h bcunititem.h configdialog.cpp configdialog.h finddialog.cpp finddialog.h isbnvalidator.cpp isbnvalidator.h bcunitgroup.h bclabelaction.cpp bclabelaction.h xslthandler.cpp xslthandler.h bookcollection.cpp bookcollection.h videocollection.cpp videocollection.h songcollection.cpp songcollection.h bcutils.h bcunititem.cpp bcfilter.cpp bcfilter.h bcfilterdialog.cpp bcfilterdialog.h kwidgetlister.cpp kwidgetlister.h bcattributewidget.cpp bcattributewidget.h bccollectionpropdialog.h bccollectionpropdialog.cpp 
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -35,6 +35,8 @@ EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcasedoc.cpp bookcasedoc.h book
 INCLUDES= $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
 
 METASOURCES = AUTO
+
+KDE_OPTIONS = noautodist
 
 # the library search path. 
 bookcase_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH)

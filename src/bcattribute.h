@@ -21,6 +21,7 @@ class BCAttribute;
 
 #include <qstringlist.h>
 #include <qstring.h>
+#include <qmap.h>
 
 typedef QPtrList<BCAttribute> BCAttributeList;
 typedef QPtrListIterator<BCAttribute> BCAttributeListIterator;
@@ -32,7 +33,7 @@ typedef QPtrListIterator<BCAttribute> BCAttributeListIterator;
  * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: bcattribute.h,v 1.31 2003/03/15 05:54:03 robby Exp $
+ * @version $Id: bcattribute.h,v 1.3 2003/05/02 06:04:21 robby Exp $
  */
 class BCAttribute {
 public:
@@ -41,7 +42,8 @@ public:
    * a Para is a QMultiLineEdit encompassing multiple lines, a Choice is
    * limited to set values shown in a KComboBox, and a Bool is either true
    * or not and is thus a QCheckBox. A Year type is obvious.
-   * A ReadOnly is a hidden value.
+   * A ReadOnly is a hidden value. A URL is obvious, too.
+   * Don't forget to change BCAttribute::typeMap(), too.
    *
    * @see KLineEdit
    * @see QMultiLineEdit
@@ -54,30 +56,36 @@ public:
     Choice   = 3,
     Bool     = 4,
     ReadOnly = 5,
-    Year     = 6
+    Year     = 6,
+    URL      = 7
   };
 
   /**
-   * The attribute flags. All the visibility and formatting properties are smushed into
-   * one single flags variable. The properties should be bit-wise OR'd together.
-   * @li NoComplete - Don't include a completion object in the lineedit
+   * The attribute flags. The properties should be bit-wise OR'd together.
+   *
+   * @li AllowCompletion - Include a completion object in the lineedit.
    * @li AllowMultiple - Multiple values are allowed in one attribute and are
    *                     separated by a semi-colon (";").
+   * @li AllowGrouped - Units may be grouped by this attribute.
+   */
+  enum AttributeFlags {
+    AllowMultiple   = 1 << 0,   // allow multiple values, separated by a semi-colon
+    AllowGrouped    = 1 << 1,   // this attribute can be used to group units
+    AllowCompletion = 1 << 2    // allow auto-completion
+  };
+
+  /**
+   * The attribute formatting flags.
+   *
    * @li FormatTitle - The attribute should be formatted as a title
    * @li FormatName - The attribute should be formatted as a personal name
    * @li FormatDate - The attribute should be formatted as a date.
-   * @li AllowGrouped - Units may be grouped by this attribute.
-   *
-   * Obviously, the three format options are mutually exclusive, but this is
-   * neither checked nor enforced.
    */
-  enum AttributeFlags {
-    NoComplete      = 1 << 0,   // don't allow auto-completion
-    AllowMultiple   = 1 << 2,   // allow multiple values, separated by a semi-colon
-    FormatTitle     = 1 << 3,   // format as a title, i.e. shift articles to end
-    FormatName      = 1 << 4,   // format as a personal full name
-    FormatDate      = 1 << 5,   // format as a date
-    AllowGrouped    = 1 << 6    // this attribute can be used to group units
+  enum FormatFlag {
+    FormatPlain     = 0,   // format plain
+    FormatTitle     = 1,   // format as a title, i.e. shift articles to end
+    FormatName      = 2,   // format as a personal full name
+    FormatDate      = 3    // format as a date
   };
 
   /**
@@ -100,6 +108,14 @@ public:
    * @param allowed The allowed values of the attribute
    */
   BCAttribute(const QString& name, const QString& title, const QStringList& allowed);
+  /**
+   * The copy constructor
+   */
+  BCAttribute(const BCAttribute& att);
+  /**
+   * The assignment operator
+   */
+  BCAttribute& operator=(const BCAttribute& att);
 
   /**
    * Returns the name of the attribute.
@@ -108,11 +124,12 @@ public:
    */
   const QString& name() const;
   /**
-   * Sets the name of the attribute.
+   * Sets the name of the attribute. This should only be changed before the attribute is added
+   * to a collection, i.e. before any units use it, etc.
    *
    * @param name The attribute name
    */
-//  void setName(const QString& name);
+  void setName(const QString& name);
   /**
    * Returns the title of the attribute.
    *
@@ -144,24 +161,48 @@ public:
    */
   const QStringList& allowed() const;
   /**
+   * Sets the allowed values of the attribute.
+   *
+   * @param allowed The allowed values
+   */
+  void setAllowed(const QStringList& allowed);
+  /**
    * Returns the type of the attribute.
    *
    * @return The attribute type
    */
   AttributeType type() const;
   /**
-   * Returns the visibility and formatting flags for the attribute.
+   * Sets the type of the attribute. Be careful with this!
+   *
+   * @param type The attribute type
+   */
+  void setType(AttributeType type);
+  /**
+   * Returns the flags for the attribute.
    *
    * @return The attribute flags
    */
   int flags() const;
   /**
-   * Sets the visibility and formatting flags of the attribute. The value is
+   * Sets the flags of the attribute. The value is
    * set to the argument, so old flags are effectively removed.
    *
    * @param flags The attribute flags
    */
   void setFlags(int flags);
+  /**
+   * Returns the formatting flag for the attribute.
+   *
+   * @return The format flag
+   */
+  FormatFlag formatFlag() const;
+  /**
+   * Sets the formatting flag of the attribute.
+   *
+   * @param flags The attribute flags
+   */
+  void setFormatFlag(FormatFlag flag);
   /**
    * Returns the description for the attribute.
    *
@@ -181,7 +222,7 @@ public:
    * A wrapper method around all the format functions. The flags
    * determine which is called on the string.
    */
-   static QString format(const QString& value, int flags);
+   static QString format(const QString& value, FormatFlag flag);
   /**
    * A convenience function to format a string as a title.
    * At the moment, this means that some articles such as "the" are placed
@@ -235,15 +276,33 @@ public:
   /**
    * Returns the list of suffixes used in personal names.
    *
-   * @return The article list
+   * @return The suffix list
    */
   static const QStringList& suffixList();
   /**
    * Set the words used as suffixes in personal names.
    *
-   * @param list The list if articles
+   * @param list The list of suffixes
    */
   static void setSuffixList(const QStringList& list);
+  /**
+   * Returns the default surname prefix list.
+   *
+   * @return The prefix list
+   */
+  static QStringList defaultSurnamePrefixList();
+  /**
+   * Returns the list of surname prefixes used in personal names.
+   *
+   * @return The prefix list
+   */
+  static const QStringList& surnamePrefixList();
+  /**
+   * Set the words used as surname prefixes in personal names.
+   *
+   * @param list The list of prefixes
+   */
+  static void setSurnamePrefixList(const QStringList& list);
   /**
    * Returns true if the capitalization of titles and authors is set to be consistent.
    *
@@ -274,16 +333,10 @@ public:
    * @param str String to fix
    */
   static QString capitalize(QString str);
-
-private:
   /**
-   * The copy constructor is private, to ensure that it's never used.
+   * Returns a mapping of the AttribtueType enum to translated titles for the types.
    */
-  BCAttribute(const BCAttribute& att);
-  /**
-   * The assignment operator is private, to ensure that it's never used.
-   */
-  BCAttribute operator=(const BCAttribute& att);
+  static QMap<BCAttribute::AttributeType, QString> typeMap();
 
 private:
   QString m_name;
@@ -293,9 +346,12 @@ private:
   AttributeType m_type;
   QStringList m_allowed;
   int m_flags;
+  FormatFlag m_formatFlag;
 
   static QStringList m_articles;
   static QStringList m_suffixes;
+  static QStringList m_surnamePrefixes;
+  static QStringList m_noCapitalize;
   static bool m_autoCapitalize;
   static bool m_autoFormat;
 };

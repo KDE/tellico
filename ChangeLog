@@ -1,3 +1,48 @@
+2003-05-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase version 0.6
+	* Changed Bibtex export to use the Locale character encoding instead of UTF-8
+
+2003-04-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added a URL attribute type
+	* Changed articles, surname prefixes, and suffixes to be case-insensitive so the config value no longer has to include both capitalized and lower-case values
+	* Broke out the attribute format flag for cleaner code
+
+2003-04-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Added multiple selection, batch editing
+
+2003-04-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Added RegExp Editor button to find dialog
+	* Added Quick and Advanced filtering in the detailed list view
+
+2003-04-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added new "person" icon for grouping when the group is a name
+
+2003-04-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Convert from KTabCtrl to QTabWidget, which has more documentation and is actively developed
+
+2003-04-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with column order not retained on save
+
+2003-04-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with validating multiple copyright years
+
+2003-03-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Added surname prefixes like 'de' and 'von'
+
+2003-03-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed debug mistake.
+	* Released Bookcase version 0.5.2a
+
 2003-03-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase version 0.5.2
@@ -50,6 +95,7 @@
 	* Changed "Language" and "Copyright Year" to allow multiple entries.
 
 2002-12-12  Robby Stephenson  <robby@periapsis.org>
+	
 	* Added namespaces to document file
   
 2002-12-11  Robby Stephenson  <robby@periapsis.org>
@@ -94,47 +140,47 @@
 	* Added printing support using KHTML
 	* Added RPM spec file to automake
 
-2002-02-21    <robby@radiojodi.com>
+2002-02-21  Robby Stephenson  <robby@radiojodi.com>
 
 	* Released Bookcase version 0.2
 
-2002-02-20    <robby@radiojodi.com>
+2002-02-20  Robby Stephenson  <robby@radiojodi.com>
 
 	* Added BCColumnView::slotShowUnit() so to ensure that the proper listview in the stack is shown.
 	* Added BCAttribute::capitalize for auto capitalization of names and titles.
 
-2002-02-08    <robby@radiojodi.com>
+2002-02-08  Robby Stephenson  <robby@radiojodi.com>
 
 	* Changed selection behavior so the two listviews do not sync now. Clicking in one clears the other.
 
-2002-02-03    <robby@radiojodi.com>
+2002-02-03  Robby Stephenson  <robby@radiojodi.com>
 
 	* Added article and suffix list to options in config dialog.
 
-2002-01-11    <robby@radiojodi.com>
+2002-01-11  Robby Stephenson  <robby@radiojodi.com>
 
 	* BCListView is now BCColumnView and can flip between different collections. Woo-hoo! Now multiple collections behave properly. Also started adding configuration options.
 
-2002-01-10    <robby@radiojodi.com>
+2002-01-10  Robby Stephenson  <robby@radiojodi.com>
 
 	* bctabcontrol.{h,cpp} Need KTabCtl::showTab to be public, so subclassed it.
 
-2002-01-10    <robby@radiojodi.com>
+2002-01-10  Robby Stephenson  <robby@radiojodi.com>
 
 	* configdialog.{h,cpp} Added beginnings of configuration dialog.
 
-2001-12-06    <robby@radiojodi.com>
+2001-12-06  Robby Stephenson  <robby@radiojodi.com>
 
 	* bcgroupview.cpp, bcattribute.cpp Fixed the bug for formatting names with suffixes like Jr.
 
-2001-11-05    <robby@radiojodi.com>
+2001-11-05  Robby Stephenson  <robby@radiojodi.com>
 
 	* bookcase.h Removed the File->Close() action item.
 
-2001-11-05    <robby@radiojodi.com>
+2001-11-05  Robby Stephenson  <robby@radiojodi.com>
 
 	* bcgroupview.cpp Fixed the bug where clicking the collapse or expand menu item on a BCUnitItem caused the pixmap to change to a folder.
 
-2001-11-04    <robby@radiojodi.com>
+2001-11-04  Robby Stephenson  <robby@radiojodi.com>
 
 	* Released Bookcase version 0.1

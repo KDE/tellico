@@ -1,5 +1,5 @@
 /***************************************************************************
-                             bctabcontrol.cpp
+                              bctabcontrol.cpp
                              -------------------
     begin                : Sun Jan 6 2002
     copyright            : (C) 2002 by Robby Stephenson
@@ -16,34 +16,42 @@
 
 #include "bctabcontrol.h"
 
+#include <kdebug.h>
+
+#include <qtabbar.h>
 #include <qobjectlist.h>
+#include <qlayout.h>
 
 BCTabControl::BCTabControl(QWidget* parent_, const char* name_/*=0*/)
-    : KTabCtl(parent_, name_) {
+    : QTabWidget(parent_, name_) {
+  connect(tabBar(), SIGNAL(selected(int)), SLOT(setFocusToChild(int)));
 }
 
-void BCTabControl::showTab(int i) {
-  KTabCtl::showTab(i);
-}
-
-// TODO: fix this
 void BCTabControl::setFocusToChild(int tabNum_) {
-  //find the first focusable child in the visible tab
-  QPtrListIterator<QObject> it(*pages[tabNum_]->children());
+  // I had some screwy errors and this fixed them, though
+  // I don't know why QTabeBar::selected() would signal a non-existent page
+  if(!page(tabNum_)) {
+    return;
+  }
+  //find the first focusable widget in the visible tab
+  QObjectList* list = page(tabNum_)->queryList("QWidget");
+  QPtrListIterator<QObject> it(*list);
   QWidget* w;
   for( ; it.current(); ++it) {
     w = static_cast<QWidget*>(it.current());
-    // for some reason isFocusEnabled() crashes things
-//    if(w->isFocusEnabled()) {
-    if(w->focusPolicy() == QWidget::TabFocus
-        || w->focusPolicy() == QWidget::ClickFocus
-        || w->focusPolicy() == QWidget::StrongFocus) {
-      //w->setFocus();
+    if(w->isFocusEnabled()) {
+      w->setFocus();
       break;
     }
   }
 }
 
-int BCTabControl::count() {
-  return tabs->count();
+void BCTabControl::clear() {
+  for(int i = count(); i > 0; --i) {
+    QWidget* w = page(i-1);
+    if(w) {
+      removePage(w);
+      delete w;
+    }
+  }
 }

@@ -22,7 +22,7 @@
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h,v 1.9 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: isbnvalidator.h,v 1.3 2003/05/02 06:04:21 robby Exp $
  *
  * Parts of this card are based on Java code
  * copyright (c) 1998-2002 Roedy Green, Canadian Mind Products which
@@ -47,7 +47,7 @@ public:
    * @param pos The position of the cursor
    * @return The condition of the text
    */
-  QValidator::State validate(QString& input, int& pos) const;
+  virtual QValidator::State validate(QString& input, int& pos) const;
 
   /**
    * The input string is examined. Hyphens are inserted appropriately,

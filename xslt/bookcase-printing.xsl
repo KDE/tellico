@@ -10,9 +10,9 @@
    ================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl,v 1.15 2003/03/22 02:22:53 robby Exp $
+   $Id: bookcase-printing.xsl,v 1.3 2003/05/03 05:50:26 robby Exp $
 
-   Copyright (c) 2003 Robby Stephenson
+   Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
    application, which can be found at http://periapsis.org/bookcase/
@@ -39,7 +39,7 @@
 
 <xsl:strip-space elements="*"/>
 
-<xsl:variable name="current-syntax" select="'2'"/>
+<xsl:variable name="current-syntax" select="'3'"/>
 
 <!-- To choose which properties for the books are printed, change the
      string to a space separated list of attribute names.
@@ -93,6 +93,11 @@
 
 <xsl:variable name="columns" select="str:tokenize($column-names)"/>
 
+<xsl:variable name="endl">
+<xsl:text>
+</xsl:text>
+</xsl:variable>
+
 <xsl:template match="/">
  <xsl:apply-templates select="bc:bookcase"/>
 </xsl:template>
@@ -102,7 +107,7 @@
   <xsl:message>
    <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
    <xsl:value-of select="$current-syntax"/>
-   <xsl:text>,</xsl:text>
+   <xsl:text>, </xsl:text>
    <xsl:value-of select="$endl"/>
    <xsl:text>but the data file is version </xsl:text>
    <xsl:value-of select="@syntaxVersion"/>

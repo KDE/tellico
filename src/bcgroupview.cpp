@@ -41,20 +41,17 @@ BCGroupView::BCGroupView(QWidget* parent_, const char* name_/*=0*/)
   setTreeStepSize(10);
   // turn off the alternate background color
   setAlternateBackground(QColor());
+  setSelectionMode(QListView::Extended);
 
-  QPixmap rename, expand, collapse, remove;
+  QPixmap rename, fields, expand, collapse, remove;
   rename = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("editclear"), KIcon::Small);
+  fields = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("edit"), KIcon::Small);
   expand = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("2downarrow"), KIcon::Small);
   collapse = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("2uparrow"), KIcon::Small);
   remove = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("remove"), KIcon::Small);
 
-  // TODO: maybe allow this to be customized
-  m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder_open"),
-                                                      KIcon::Small);
-  m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder"),
-                                                        KIcon::Small);
-
-  m_collMenu.insertItem(rename, i18n("Rename Collection"), this, SLOT(slotHandleRename()));
+  m_collMenu.insertItem(rename, i18n("Rename Collection..."), this, SLOT(slotHandleRename()));
+  m_collMenu.insertItem(fields, i18n("Edit Collection Fields..."), this, SLOT(slotHandleProperties()));
 
   m_groupMenu.insertItem(expand, i18n("Expand All Groups"), this, SLOT(slotExpandAll()));
   m_groupMenu.insertItem(collapse, i18n("Collapse All Groups"), this, SLOT(slotCollapseAll()));
@@ -66,8 +63,8 @@ BCGroupView::BCGroupView(QWidget* parent_, const char* name_/*=0*/)
 
 //  connect(this, SIGNAL(clicked(QListViewItem*)), SLOT(slotSelected(QListViewItem*)));
 
-  connect(this, SIGNAL(selectionChanged(QListViewItem*)),
-          SLOT(slotSelected(QListViewItem*)));
+  connect(this, SIGNAL(selectionChanged()),
+          SLOT(slotSelectionChanged()));
 
   connect(this, SIGNAL(doubleClicked(QListViewItem*)),
           SLOT(slotToggleItem(QListViewItem*)));
@@ -77,6 +74,15 @@ BCGroupView::BCGroupView(QWidget* parent_, const char* name_/*=0*/)
 
   connect(this, SIGNAL(collapsed(QListViewItem*)),
           SLOT(slotCollapsed(QListViewItem*)));
+          
+  // TODO: maybe allow this to be customized
+  m_collOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder_open"),
+                                                      KIcon::Small);
+  m_collClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder"),
+                                                        KIcon::Small);
+  m_groupOpenPixmap = m_collOpenPixmap;
+  m_groupClosedPixmap = m_collClosedPixmap;
+
 }
 
 ParentItem* BCGroupView::insertItem(ParentItem* collItem_, BCUnitGroup* group_) {
@@ -129,6 +135,7 @@ const QString& BCGroupView::collGroupBy(const QString& type_) const {
 void BCGroupView::slotReset() {
   // don't really need to clear the collGroupBy map
   m_groupDict.clear();
+  m_selectedUnits.clear();
   clear();
 }
 
@@ -182,6 +189,7 @@ void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
     } else {
       // if it's not in the group, delete it
 //      kdDebug() << "\tdeleting unit - " << unit->title() << endl;
+      m_selectedUnits.removeRef(unit);
       next = item->nextSibling();
       delete item;
       item = next;
@@ -212,7 +220,9 @@ void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
     item->setPixmap(0, icon);
     if(isUpdatesEnabled()) {
       ensureItemVisible(item);
-      setSelected(item, true);
+//      blockSignals(true);
+//      setSelected(item, true);
+//      blockSignals(false);
       par->setOpen(true);
     }
   }
@@ -222,23 +232,47 @@ void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
   root->setOpen(true);
 }
 
-void BCGroupView::slotSelected(QListViewItem* item_) {
-  // catch the case of a NULL pointer, i.e. not clicking on an item
-  if(!item_) {
-    emit signalClear();
-    return;
+void BCGroupView::slotSelectionChanged() {
+  // since the group view might have multiple unit items
+  // that point to the same unit, need to keep track separately
+  BCUnitList newSelected;
+
+  // all items with depth of 2 in the listview are unitItems
+  BCUnitItem* item;
+  QListViewItemIterator it(this);
+  for( ; it.current(); ++it) {
+    if(!it.current()->isSelected()) {
+      continue;
+    }
+    // it'd be nice if I could figure out how to enforce
+    // only one collection or group being selected, while allowing multiple
+    // unit items to be selected
+    if(it.current()->depth() == 0) {
+      ParentItem* pItem = static_cast<ParentItem*>(it.current());
+      emit signalCollectionSelected(pItem->id());
+    } else if(it.current()->depth() == 2) {
+      item = static_cast<BCUnitItem*>(it.current());
+      newSelected.append(item->unit());
+
+      if(item->unit() && !m_selectedUnits.containsRef(item->unit())) {
+        // the reason I do it this way is because I want the first item in the list
+        // to be the first item that was selected, so the edit widget can fill its
+        // contents with the first unit
+        m_selectedUnits.append(item->unit());
+      }
+    }
   }
 
-  // unitItems always have a depth of 2
-  if(item_->depth() == 2) {
-    BCUnitItem* item = static_cast<BCUnitItem*>(item_);
-    if(item->unit()) {
-      emit signalUnitSelected(item->unit());
+  // now if any units in m_selectedUnits are not in newSelected, remove them
+  BCUnitListIterator uIt(m_selectedUnits);
+  for( ; uIt.current(); ++uIt) {
+    if(!newSelected.containsRef(uIt.current())) {
+      m_selectedUnits.removeRef(uIt.current());
+      --uIt; // when a unit is removed, the iterator goes to next
     }
-  } else if(item_->depth() == 0) {   // collections are at the root
-    ParentItem* item = static_cast<ParentItem*>(item_);
-    emit signalCollectionSelected(item->id());
   }
+
+  emit signalUnitSelected(m_selectedUnits);
 }
 
 void BCGroupView::slotSetSelected(BCUnit* unit_) {
@@ -289,6 +323,7 @@ void BCGroupView::slotSetSelected(BCUnit* unit_) {
     }
   }
 
+  slotClearSelection();
   blockSignals(true);
   setSelected(unitItem, true);
   blockSignals(false);
@@ -398,22 +433,38 @@ void BCGroupView::slotHandleRename() {
   }
 }
 
+void BCGroupView::slotHandleProperties() {
+  QListViewItem* item = currentItem();
+  // items at depth==0 are for collections
+  if(item && item->depth() == 0) {
+    emit signalModifyCollection(static_cast<ParentItem*>(item)->id());
+  }
+}
+
 void BCGroupView::slotCollapsed(QListViewItem* item_) {
   // only change icon for collection and group items
-  if(item_->depth() < 2) {
+  if(item_->depth() == 0) {
+    item_->setPixmap(0, m_collClosedPixmap);
+  } else if(item_->depth() == 1) {
     item_->setPixmap(0, m_groupClosedPixmap);
   }
 }
 
 void BCGroupView::slotExpanded(QListViewItem* item_) {
   // only change icon for collection and group items
-  if(item_->depth() < 2) {
+  if(item_->depth() == 0) {
+    item_->setPixmap(0, m_collOpenPixmap);
+  } else if(item_->depth() == 1) {
     item_->setPixmap(0, m_groupOpenPixmap);
   }
 }
 
 void BCGroupView::slotClearSelection() {
+//  kdDebug() << "BCGroupView::slotClearSelection()" << endl;
+  blockSignals(true);
   selectAll(false);
+  blockSignals(false);
+  m_selectedUnits.clear();
 }
 
 void BCGroupView::slotAddCollection(BCCollection* coll_) {
@@ -449,6 +500,11 @@ void BCGroupView::slotAddCollection(BCCollection* coll_) {
 void BCGroupView::setGroupAttribute(BCCollection* coll_, const QString& groupAtt_) {
 //  kdDebug() << "BCGroupView::setGroupAttribute - " << groupAtt_ << endl;
 
+  BCAttribute* att = coll_->attributeByName(groupAtt_);
+  if(!att) {
+    return;
+  }
+  
   // as a hack, when a new collection is added,  this gets called
   // if the collection item is empty, go ahead and populate it
   // even if the group attribute has not changed
@@ -458,16 +514,27 @@ void BCGroupView::setGroupAttribute(BCCollection* coll_, const QString& groupAtt
      || m_collGroupBy.find(unitName).data() != groupAtt_
      || collItem->childCount() == 0) {
     m_collGroupBy.insert(unitName, groupAtt_);
+    int flags = att->flags();
+    if(flags & BCAttribute::FormatName) {
+      m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person-open"),
+                                                          KIcon::Small);
+      m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person"),
+                                                            KIcon::Small);
+    } else {
+      m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder_open"),
+                                                          KIcon::Small);
+      m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder"),
+                                                            KIcon::Small);
+    }
     populateCollection(coll_, groupAtt_);
   }
-//  kdDebug() << "BCGroupView::setGroupAttribute - done" << endl;
 }
 
 bool BCGroupView::showCount() const {
   return m_showCount;
 }
 
-void BCGroupView::showCount(bool showCount_, const BCCollectionList& list_) {
+void BCGroupView::showCount(bool showCount_) {
 //  kdDebug() << "BCGroupView::showCount()" << endl;
   if(m_showCount != showCount_) {
     m_showCount = showCount_;

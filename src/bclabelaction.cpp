@@ -17,6 +17,7 @@
 #include "bclabelaction.h"
 
 #include <ktoolbar.h>
+#include <klineedit.h>
 
 #include <qtoolbutton.h>
 #include <qstyle.h>
@@ -32,51 +33,87 @@ protected:
   void drawButton(QPainter* p_) {
     // Draw the background
     style().drawComplexControl(QStyle::CC_ToolButton, p_, this, rect(), colorGroup(),
-                                QStyle::Style_Enabled, QStyle::SC_ToolButton);
+                               QStyle::Style_Enabled, QStyle::SC_ToolButton);
     // Draw the label
     style().drawControl(QStyle::CE_ToolButtonLabel, p_, this, rect(), colorGroup(),
-                         QStyle::Style_Enabled);
+                        QStyle::Style_Enabled);
   }
 };
 
 BCLabelAction::BCLabelAction(const QString& text_, int accel_,
-                              QObject* parent_/*=0*/, const char *name_/*=0*/)
+                             QObject* parent_/*=0*/, const char* name_/*=0*/)
  : KAction(text_, accel_, parent_, name_), m_label(0) {
 }
 
 int BCLabelAction::plug(QWidget* widget_, int index_) {
-  //do not call the previous implementation here
+  KToolBar* tb = static_cast<KToolBar *>(widget_);
 
-  if(widget_->inherits("KToolBar")) {
-    KToolBar* tb = static_cast<KToolBar *>(widget_);
+  int id = KAction::getToolButtonID();
 
-    int id = KAction::getToolButtonID();
+  m_label = new ToolBarLabel(text(), tb);
+  tb->insertWidget(id, m_label->width(), m_label, index_);
 
-    m_label = new ToolBarLabel(text(), tb);
-    tb->insertWidget(id, m_label->width(), m_label, index_);
+  addContainer(tb, id);
 
-    addContainer(tb, id);
+  connect(tb, SIGNAL(destroyed()),
+          this, SLOT(slotDestroyed()));
 
-    connect(tb, SIGNAL(destroyed()), this, SLOT(slotDestroyed()));
-
-    return containerCount() - 1;
-  }
-
-  return -1;
+  return containerCount() - 1;
 }
 
 void BCLabelAction::unplug(QWidget* widget_) {
-  if(widget_->inherits("KToolBar")) {
-    KToolBar* tb = static_cast<KToolBar *>(widget_);
+  KToolBar* tb = static_cast<KToolBar *>(widget_);
 
-    int idx = findContainer(tb);
+  int idx = findContainer(tb);
 
-    if(idx != -1) {
-      tb->removeItem(itemId(idx));
-      removeContainer(idx);
-    }
-
-    m_label = 0;
-    return;
+  if(idx != -1) {
+    tb->removeItem(itemId(idx));
+    removeContainer(idx);
   }
+
+  m_label = 0;
+}
+
+// largely copied from KonqComboAction
+BCLineEditAction::BCLineEditAction(const QString& text_, int accel_,
+                                   QObject* parent_/*=0*/, const char* name_/*=0*/)
+ : KAction(text_, accel_, parent_, name_), m_lineEdit(0L) {
+}
+
+int BCLineEditAction::plug(QWidget* widget_, int index_) {
+  KToolBar* tb = static_cast<KToolBar *>(widget_);
+
+  int id = KAction::getToolButtonID();
+
+  m_lineEdit = new KLineEdit(tb);
+  m_lineEdit->setFixedWidth(m_lineEdit->fontMetrics().maxWidth()*5);
+  
+  tb->insertWidget(id, m_lineEdit->width(), m_lineEdit, index_);
+
+  connect(m_lineEdit, SIGNAL(textChanged(const QString&)),
+          this, SIGNAL(textChanged(const QString&)));
+
+  addContainer(tb, id);
+
+  connect(tb, SIGNAL(destroyed()), this, SLOT(slotDestroyed()));
+
+  emit plugged();
+  return containerCount() - 1;
+}
+
+void BCLineEditAction::unplug(QWidget* widget_) {
+  KToolBar* tb = static_cast<KToolBar *>(widget_);
+
+  int idx = findContainer(widget_);
+
+  if(idx != -1) {
+    tb->removeItem(itemId(idx));
+    removeContainer(idx);
+  }
+
+  m_lineEdit = 0L;
+}
+
+void BCLineEditAction::clear() {
+  m_lineEdit->clear();
 }

@@ -44,7 +44,7 @@ typedef QPtrListIterator<BCCollection> BCCollectionListIterator;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bccollection.h,v 1.34 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: bccollection.h,v 1.4 2003/05/03 05:39:08 robby Exp $
  */
 class BCCollection : public QObject {
 Q_OBJECT
@@ -119,7 +119,7 @@ public:
   /**
    * Sets the name of the icon used for units in the collection.
    *
-   * @param title The new icon name
+   * @param name The new icon name
    */
   void setIconName(const QString& name);
   /**
@@ -134,13 +134,6 @@ public:
    * @return The list of attributes
    */
   const BCAttributeList& attributeList() const;
-  /**
-   * Returns a list of all the attributes, filtered by its flags.
-   *
-   * @param filter The filter
-   * @return The list of attributes
-   */
-  BCAttributeList attributeList(int filter) const;
   /**
    * Returns a reference to the list of attribute groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.
@@ -195,6 +188,9 @@ public:
    * @return A boolean indicating if the attribute was added or not
    */
   bool addAttribute(BCAttribute* att);
+  bool modifyAttribute(BCAttribute* att);
+  bool deleteAttribute(BCAttribute* att, bool force=false);
+
   /**
    * Determines whether or not a certain value is allowed for an attribute.
    *
@@ -232,7 +228,7 @@ public:
   /**
    * Returns the name of an attribute, given its title.
    *
-   * @param name The attribute title
+   * @param title The attribute title
    * @return The attribute name
    */
   const QString& attributeNameByTitle(const QString& title) const;
@@ -313,6 +309,9 @@ public:
 
 signals:
   void signalGroupModified(BCCollection* coll, BCUnitGroup* group);
+  void signalAttributeAdded(BCCollection* coll, BCAttribute* att);
+  void signalAttributeModified(BCCollection* coll, BCAttribute* newAtt, BCAttribute* oldAtt);
+  void signalAttributeDeleted(BCCollection* coll, BCAttribute* att);
   
 protected:
   /**

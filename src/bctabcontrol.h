@@ -17,17 +17,13 @@
 #ifndef BCTABCONTROL_H
 #define BCTABCONTROL_H
 
-#include <ktabctl.h>
+#include <qtabwidget.h>
 
 /**
- * BCTabControl subclasses KTabCtl and makes a few changes.
- *
- * The @ref KTabCtl::showTab slot is made public. A method is added to move the focus.
- *
  * @author Robby Stephenson
- * @version $Id: bctabcontrol.h,v 1.10 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: bctabcontrol.h,v 1.4 2003/05/02 06:04:21 robby Exp $
  */
-class BCTabControl : public KTabCtl {
+class BCTabControl : public QTabWidget {
 Q_OBJECT
 
 public:
@@ -35,26 +31,15 @@ public:
    * Constructor
    */
   BCTabControl(QWidget* parent, const char* name=0);
+
+public slots:
   /**
    * Sets the focus to the first focusable widget on a certain tab page.
    *
    * @param tabNum The tab number
    */
   void setFocusToChild(int tabNum);
-  /**
-   * Returns the numbers of tabs in the widget.
-   *
-   * @return The number of tabs
-   */
-  int count();
-
-public slots:
-  /**
-   * Calls the parent method. Essentialy just making @ref KTabCtl#showTab public.
-   *
-   * @param i The id of the tab to show
-   */
-  void showTab(int i);
+  void clear();
 };
 
 #endif

@@ -37,9 +37,16 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
   // only allow up to a single "X" or "x"
   // the "X" or "x" can only be the last character
   // only allow up to 10 digits
-  QRegExp validChars(QString::fromLatin1("[\\d-Xx]{0,13}"));
-  if(!validChars.exactMatch(input_)
-      || input_.contains(QString::fromLatin1("-")) > 3
+  QRegExp validChars(QString::fromLatin1("[\\d-X]{0,13}"));
+  if(!validChars.exactMatch(input_)) {
+    QRegExp rx(QString::fromLatin1("[^\\d-X]"));
+    input_.replace(rx, QString::null);
+    input_.truncate(13);
+    while(pos_ > input_.length()) {
+      --pos_;
+    }
+  }
+  if(input_.contains(QString::fromLatin1("-")) > 3
       || input_.contains(QString::fromLatin1("X"), false) > 1
       || (input_.find(QString::fromLatin1("X"), 0, false) != -1
           && input_.find(QString::fromLatin1("X"), 0, false) < input_.length()-1)
@@ -80,7 +87,7 @@ void ISBNValidator::fixup(QString& input_) const {
   //replace "x" with "X"
   input_.replace(QRegExp(QString::fromLatin1("x")), QString::fromLatin1("X"));
   // remove dashes
-  input_.replace(QRegExp(QString::fromLatin1("-")), QString());
+  input_.replace(QRegExp(QString::fromLatin1("-")), QString::null);
   // only add the checksum if more than 8 digits are present
   if(input_.length() > 8) {
     checkSum(input_);

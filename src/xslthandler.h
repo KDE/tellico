@@ -33,7 +33,7 @@ static const int MAX_PARAMS = 16;
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h,v 1.6 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: xslthandler.h,v 1.2 2003/04/01 03:30:41 robby Exp $
  */
 class XSLTHandler {
 

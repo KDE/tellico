@@ -23,6 +23,7 @@ class BCUnit;
 
 // for QColorGroup
 #include <qpalette.h>
+//#include <qguardedptr.h>
 
 /**
  * The BCUnitItem is a subclass of KListViewItem containing a pointer to a BCUnit.
@@ -32,7 +33,7 @@ class BCUnit;
  * @see BCUnit
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.22 2003/03/15 03:40:13 robby Exp $
+ * @version $Id: bcunititem.h,v 1.4 2003/05/03 08:11:46 robby Exp $
  */
 class BCUnitItem : public KListViewItem {
 public:
@@ -63,6 +64,7 @@ public:
   BCUnit* const unit() const { return m_unit; }
 
 private:
+  // if I make this a QGuardedPtr, the app crashes, why?
   BCUnit* m_unit;
 };
 
@@ -74,7 +76,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.22 2003/03/15 03:40:13 robby Exp $
+ * @version $Id: bcunititem.h,v 1.4 2003/05/03 08:11:46 robby Exp $
  */
 class ParentItem : public KListViewItem {
 public:
@@ -131,6 +133,11 @@ public:
 private:
   int m_id;
   int m_count;
+
+// since I do an expensive RegExp match for the surname prefixes, I want to
+// cache the text and the resulting key
+  mutable QString m_text;
+  mutable QString m_key;
 };
 
 #endif

@@ -17,20 +17,19 @@
 #ifndef BCUNITEDITWIDGET_H
 #define BCUNITEDITWIDGET_H
 
-class BCUnit;
-class BCCollection;
 class BCTabControl;
 class BookcaseDoc;
 
-class QListViewItem;
 class QPushButton;
 
-#include <klineedit.h>
-#include <kcombobox.h>
+#include "bcattributewidget.h"
+#include "bcunit.h" // needed for BCUnitList definition
+#include "bcattribute.h"
+#include "bcunitgroup.h" // needed for linking for some reason
 
-#include <qtextedit.h>
-#include <qcheckbox.h>
 #include <qdict.h>
+
+//#define SHOW_COPY_BTN
 
 /**
  * The BCUnitEditWidget classes allows for the editing of the unit information. It is a
@@ -38,10 +37,13 @@ class QPushButton;
  * edit controls and so on.
  *
  * @author Robby Stephenson
- * @version $Id: bcuniteditwidget.h,v 1.29 2003/03/10 02:50:52 robby Exp $
+ * @version $Id: bcuniteditwidget.h,v 1.4 2003/05/02 06:04:21 robby Exp $
  */
-class BCUnitEditWidget : public QWidget  {
+class BCUnitEditWidget : public QWidget {
 Q_OBJECT
+
+// needed for completion object support
+friend class BCAttributeWidget;
 
 public: 
   /**
@@ -54,6 +56,7 @@ public:
   BCUnitEditWidget(QWidget* parent, const char* name=0);
 
   bool queryModified();
+//  void keyReleaseEvent(QKeyEvent* ev);
 
 public slots:
   void slotSetLayout(BCCollection* coll);
@@ -66,8 +69,10 @@ public slots:
    * Sets the contents of the input controls to match the contents of a unit.
    *
    * @param unit A pointer to the unit
+   * @param highlight An optional string to highlight
    */
-  void slotSetContents(BCUnit* unit);
+  void slotSetContents(BCUnit* unit, const QString& highlight=QString::null);
+  void slotSetContents(const BCUnitList& list);
   /**
    * Updates the completion objects in the edit boxes to include values
    * contained in a certain unit.
@@ -81,13 +86,17 @@ public slots:
    * and the first tab is shown.
    */
   void slotHandleSave();
-
-protected:
   /**
-   * Used to nullify all pointers, delete the child objects, and fully reset the
-   * data contained in the class.
+   * Clears all of the input controls in the widget. The pointer to the
+   * current unit is nullified, but not the pointer to the current collection.
    */
-//  void clearWidgets();
+  void slotHandleClear();
+  /**
+   * This slot is called whenever anything is modified. It's public so I can call it
+   * from a @ref BCAttributeEditWidget.
+   */
+  void slotSetModified(bool modified=true);
+  void slotUpdateAttribute(BCCollection* coll, BCAttribute* att);
 
 protected slots:
   /**
@@ -101,26 +110,13 @@ protected slots:
    */
   void slotHandleCopy();
   /**
-   * Clears all of the input controls in the widget. The pointer to the
-   * current unit is nullified, but not the pointer to the current collection.
-   */
-  void slotHandleClear();
-  /**
    * Handles clicking the Delete button. If the parent collection of the current unit
    * includes the unit object, then @ref signalDoUnitDelete is made. The widget is then
    * cleared.
    */
   void slotHandleDelete();
-  /**
-   * Switches the focus to the first text box in the visible widget page.
-   *
-   * @param tabNum The number of the page shown
-   */
-  void slotSwitchFocus(int tabNum);
-  /**
-   * This slot is called whenever anything is modified.
-   */
-  void slotSetModified();
+
+  void slotHandleReturn();
 
 signals:
   /**
@@ -138,19 +134,20 @@ signals:
 
 private:
   BCCollection* m_currColl;
-  BCUnit* m_currUnit;
+  BCUnitList m_currUnits;
   BCTabControl* m_tabs;
-  QDict<KLineEdit> m_editDict;
-  QDict<QTextEdit> m_multiDict;
-  QDict<KComboBox> m_comboDict;
-  QDict<QCheckBox> m_checkDict;
+  QDict<BCAttributeWidget> m_widgetDict;
   QPushButton* m_new;
+#ifdef SHOW_COPY_BTN
   QPushButton* m_copy;
+#endif
   QPushButton* m_save;
   QPushButton* m_delete;
-  QPushButton* m_clear;
+//  QPushButton* m_clear;
 
   bool m_modified;
+  bool m_completionActivated;
+  bool m_isOrphan;
 };
 
 #endif

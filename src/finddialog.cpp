@@ -24,6 +24,9 @@
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kmessagebox.h>
+#include <kpushbutton.h>
+#include <kparts/componentfactory.h>
+#include <kregexpeditorinterface.h>
 
 #include <qlayout.h>
 #include <qlabel.h>
@@ -38,7 +41,7 @@
 //                  parent_, name_, false, false, i18n("&Find")), m_bookcase(parent_) {
 FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, false, i18n("Find Text"), User1|Cancel, User1,
-                  false, i18n("&Find")), m_bookcase(parent_) {
+                  false, i18n("&Find")), m_bookcase(parent_), m_editRegExpDialog(0) {
   QWidget* page = new QWidget(this);
   setMainWidget(page);
         
@@ -48,7 +51,7 @@ FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
 
   m_pattern = new KHistoryCombo(true, page);
   QWhatsThis::add(m_pattern, i18n("The search string"));
-  m_pattern->setMinimumWidth(fontMetrics().maxWidth()*20);
+  m_pattern->setMinimumWidth(fontMetrics().maxWidth()*15);
   m_pattern->setMaxCount(10);
   m_pattern->setDuplicatesEnabled(false);
   topLayout->addWidget(m_pattern);
@@ -62,27 +65,7 @@ FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
 
   m_attributes = new KComboBox(page);
   QWhatsThis::add(m_attributes, i18n("Select which field should be searched."));
-  m_attributes->insertItem(i18n("All Fields"));
-
-  QStringList attributes;
-  BCCollectionListIterator it(m_bookcase->doc()->collectionList());
-  for( ; it.current(); ++it) {
-    if(attributes.isEmpty()) {
-      attributes += it.current()->attributeTitles();
-    } else {
-      QStringList attTitles = it.current()->attributeTitles();
-      QStringList::Iterator tIt = attTitles.begin();
-      for( ; tIt != attTitles.end(); ++tIt) {
-        if(attributes.contains(*tIt) == 0) {
-          attributes.append(*tIt);
-        }
-      }
-    }
-  }
-
-  if(attributes.count() > 0) {
-    m_attributes->insertStringList(attributes);
-  }
+  updateAttributeList();
   topLayout->addWidget(m_attributes);
 
   QGroupBox* optionsGroup = new QGroupBox(2, Qt::Horizontal, i18n("Options"), page);
@@ -95,11 +78,18 @@ FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
   QWhatsThis::add(m_findBackwards, i18n("If checked, the document is searched in reverse."));
   m_wholeWords = new QCheckBox(i18n("&Whole Words Only"), optionsGroup);
   QWhatsThis::add(m_wholeWords, i18n("If checked, the search is limited to whole words."));
-  m_asRegExp = new QCheckBox(i18n("As &Regular Expression"), optionsGroup);
-  QWhatsThis::add(m_asRegExp, i18n("If checked, the search string is used as a regular expression."));
   m_fromBeginning = new QCheckBox(i18n("&From Beginning"), optionsGroup);
   QWhatsThis::add(m_fromBeginning, i18n("If checked, the document is searched from the beginning."));
- 
+  m_asRegExp = new QCheckBox(i18n("As &Regular Expression"), optionsGroup);
+  QWhatsThis::add(m_asRegExp, i18n("If checked, the search string is used as a regular expression."));
+
+  if(!KTrader::self()->query(QString::fromLatin1("KRegExpEditor/KRegExpEditor")).isEmpty()) {
+    m_editRegExp = new KPushButton(i18n("&Edit Regular Expression..."), optionsGroup);
+    m_editRegExp->setEnabled(false);
+    connect(m_asRegExp, SIGNAL(toggled(bool)), m_editRegExp, SLOT(setEnabled(bool)));
+    connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp())); 
+  }
+
   topLayout->addStretch(1);
 
   m_pattern->setFocus();
@@ -160,4 +150,38 @@ void FindDialog::slotPatternChanged(const QString& text_) {
 void FindDialog::showEvent(QShowEvent* e_) {
   m_pattern->lineEdit()->selectAll();
   KDialogBase::showEvent(e_);
+}
+
+void FindDialog::slotEditRegExp() {
+  if(m_editRegExpDialog == 0) {
+    m_editRegExpDialog = KParts::ComponentFactory::createInstanceFromQuery<QDialog>(QString::fromLatin1("KRegExpEditor/KRegExpEditor"),
+                                                                                    QString::null, this);
+  }
+
+  KRegExpEditorInterface* iface = static_cast<KRegExpEditorInterface *>(m_editRegExpDialog->qt_cast(QString::fromLatin1("KRegExpEditorInterface")));
+  if(iface) {
+    iface->setRegExp(m_pattern->currentText());
+    if(m_editRegExpDialog->exec() == QDialog::Accepted) {
+      m_pattern->changeItem(iface->regExp(), m_pattern->currentItem());
+    }
+  }
+}
+
+void FindDialog::updateAttributeList() {
+  m_attributes->clear();
+
+  m_attributes->insertItem(i18n("All Fields"));
+
+  QStringList titles;
+  // TODO: fix for multiple collection types
+  BCAttributeList list = m_bookcase->doc()->uniqueAttributes(BCCollection::Book);
+  BCAttributeListIterator it(list);
+  for( ; it.current(); ++it) {
+    titles += it.current()->title();
+  }
+
+  if(titles.count() > 0) {
+    m_attributes->insertStringList(titles);
+  }
+  m_attributes->adjustSize();
 }

@@ -32,8 +32,8 @@ BCCollection::BCCollection(int id_, const QString& title_, const QString& unitNa
 
   // all collections have a title attribute for their units
   BCAttribute* att = new BCAttribute(QString::fromLatin1("title"), i18n("Title"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::FormatTitle | BCAttribute::NoComplete);
+  att->setCategory(i18n("&General"));
+  att->setFormatFlag(BCAttribute::FormatTitle);
   addAttribute(att);
 }
 
@@ -82,7 +82,8 @@ bool BCCollection::addAttribute(BCAttribute* att_) {
   // attributeByName() returns 0 if there's no attribute by that name
   // this essentially checks for duplicates
   if(attributeByName(att_->name())) {
-    return false;
+//    kdDebug() << "BCCollection::addAttribute() - replacing " << att_->name() << endl;
+    deleteAttribute(attributeByName(att_->name()), true);
   }
 
   m_attributeList.append(att_);
@@ -104,6 +105,146 @@ bool BCCollection::addAttribute(BCAttribute* att_) {
     m_unitGroups << att_->name();
   }
 
+  BCUnitListIterator it(m_unitList);
+  for( ; it.current(); ++it) {
+    populateDicts(it.current());
+  }
+  emit signalAttributeAdded(this, att_);
+  m_isCustom = true;
+  return true;
+}
+
+// att_ is the new variable
+// find the old variable with the same name, and modify it
+bool BCCollection::modifyAttribute(BCAttribute* newAtt) {
+  if(!newAtt) {
+    return false;
+  }
+//  kdDebug() << "BCCollection::modifyAttribute()" << endl;
+  BCAttribute* oldAtt = attributeByName(newAtt->name());
+  if(!oldAtt) {
+    kdDebug() << "BCCollection::modifyAttribute() - no attribute named " << newAtt->title() << endl;
+    return false;
+  }
+
+  // do this before emitting signal because unitGroup() gets called in
+  // Bookcase::slotUpdateCollectionToolBar() and it might have changed
+  m_unitGroups.remove(newAtt->name());
+  if(newAtt->flags() & BCAttribute::AllowGrouped) {
+    if(!m_unitGroupDicts.find(newAtt->name())) {
+      BCUnitGroupDict* dict = new BCUnitGroupDict();
+      m_unitGroupDicts.insert(newAtt->name(), dict);
+
+      BCUnitGroup* group;
+      BCUnitListIterator it(m_unitList);
+      for( ; it.current(); ++it) {
+        QStringList groups = it.current()->groupNamesByAttributeName(newAtt->name());
+        QStringList::ConstIterator groupIt;
+        for(groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
+          if(dict->isEmpty() || !(group = dict->find(*groupIt))) {
+            group = new BCUnitGroup(*groupIt, newAtt->name());
+            dict->insert(*groupIt, group);
+          }
+          it.current()->addToGroup(group);
+        }
+      }
+    }
+    m_unitGroups << newAtt->name();
+  }
+
+  // need to emit this before oldAtt gets updated
+  emit signalAttributeModified(this, newAtt, oldAtt);
+
+  // I don't actually keep the new pointer, I just copy the different properties
+  // TODO: revisit this decision to improve speed?
+  // BCCollectionPropDialog or whatever called this function should delete the newAtt pointer
+
+  // change title
+  if(oldAtt->title() != newAtt->title()) {
+    m_attributeTitleDict.remove(oldAtt->title());
+    oldAtt->setTitle(newAtt->title());
+    m_attributeTitleDict.insert(oldAtt->title(), oldAtt);
+  }
+
+  // change category
+  if(oldAtt->category() != newAtt->category()) {
+    if(attributesByCategory(oldAtt->category()).count() == 1) {
+      m_attributeCategories.remove(newAtt->category());
+    }
+    oldAtt->setCategory(newAtt->category());
+    if(m_attributeCategories.contains(oldAtt->category()) == 0) {
+      m_attributeCategories << oldAtt->category();
+    }
+  }
+
+  // type won't can't be changed, but allowed can for Choice
+  if(oldAtt->type() == BCAttribute::Choice && oldAtt->allowed() != newAtt->allowed()) {
+    oldAtt->setAllowed(newAtt->allowed());
+  }
+
+  // change description
+  if(oldAtt->description() != newAtt->description()) {
+    oldAtt->setDescription(newAtt->description());
+  }
+
+  // change flags
+  if(oldAtt->flags() != newAtt->flags()) {
+    oldAtt->setFlags(newAtt->flags());
+  }
+
+  // change format flag
+  if(oldAtt->formatFlag() != newAtt->formatFlag()) {
+    oldAtt->setFormatFlag(newAtt->formatFlag());
+    // invalidate cached format strings of all unit attributes of this name
+    BCUnitListIterator it(m_unitList);
+    for( ; it.current(); ++it) {
+      it.current()->invalidateFormattedAttributeValue(oldAtt->name());
+    }
+  }
+
+  return true;
+}
+
+// force allows me to force the deleting of the title attribute if I need to
+bool BCCollection::deleteAttribute(BCAttribute* att_, bool force_/*=false*/) {
+  if(!att_ || !m_attributeList.containsRef(att_)) {
+    return false;
+  }
+
+  // can't delete the title attribute
+  if(att_->name() == QString::fromLatin1("title") && !force_) {
+    return false;
+  }
+  
+  m_attributeNameDict.remove(att_->name());
+  m_attributeTitleDict.remove(att_->title());
+  
+  if(attributesByCategory(att_->category()).count() == 1) {
+    m_attributeCategories.remove(att_->category());
+  }
+  
+  if(att_->flags() & BCAttribute::AllowGrouped) {
+    BCUnitListIterator it(m_unitList);
+    for( ; it.current(); ++it) {
+      // setting the attribute to an empty string remove the value from the unit's list
+      // and also removes the unit from any groups of that attribute
+      it.current()->setAttribute(att_->name(), QString::null);
+    }
+    // if the attribute is not a groupable one, then all the units retain that value in
+    // their maps, but not big deal, it's never read. Only might be a problem later if the user
+    // adds an attribute with the same name as the deleted one. TODO: fix this some day
+    // I could just set an empty string on every unit in the collection, but that would mean the
+    // group iterator loops for every unit over every group the unit belongs to
+
+    m_unitGroupDicts.remove(att_->name());
+    m_unitGroups.remove(att_->name());
+    if(att_->name() == m_defaultGroupAttribute) {
+      setDefaultGroupAttribute(m_unitGroups[0]);
+    }
+  }
+  
+  emit signalAttributeDeleted(this, att_); // emit before actually deleting
+  m_attributeList.removeRef(att_); // auto deleted
   m_isCustom = true;
   return true;
 }
@@ -125,10 +266,10 @@ void BCCollection::addUnit(BCUnit* unit_) {
 }
 
 void BCCollection::removeUnitFromDicts(BCUnit* unit_) {
-  QPtrListIterator<BCUnitGroup> it(unit_->groups());
   BCUnitGroup* group;
+  QPtrListIterator<BCUnitGroup> it(unit_->groups());
   while(it.current()) {
-    group = static_cast<BCUnitGroup*>(it.current());
+    group = it.current();
     BCUnitGroupDict* dict = m_unitGroupDicts.find(group->attributeName());
     // removeFromGroup will delete the group if it becomes empty
     // so just see if there's only one unit in the group, because that
@@ -162,24 +303,13 @@ bool BCCollection::deleteUnit(BCUnit* unit_) {
     return false;
   }
 
-  kdDebug() << "BCCollection::deleteUnit() - deleted unit - " << unit_->title() << endl;
+//  kdDebug() << "BCCollection::deleteUnit() - deleted unit - " << unit_->title() << endl;
   removeUnitFromDicts(unit_);
   return m_unitList.remove(unit_);
 }
 
 const BCAttributeList& BCCollection::attributeList() const {
   return m_attributeList;
-}
-
-BCAttributeList BCCollection::attributeList(int filter_) const {
-  BCAttributeList list;
-  BCAttributeListIterator it(m_attributeList);
-  for( ; it.current(); ++it) {
-    if(it.current()->flags() & filter_) {
-      list.append(it.current());
-    }
-  }
-  return list;
 }
 
 const QStringList& BCCollection::attributeCategories() const {
@@ -221,6 +351,7 @@ const QString& BCCollection::attributeNameByTitle(const QString& title_) const {
   BCAttribute* att = attributeByTitle(title_);
   if(!att) {
     kdWarning() << "BCCollection::attributeNameByTitle() - no attribute titled " << title_ << endl;
+    return QString::null;
   }
   return att->name();
 }
@@ -229,6 +360,7 @@ const QString& BCCollection::attributeTitleByName(const QString& name_) const {
   BCAttribute* att = attributeByName(name_);
   if(!att) {
     kdWarning() << "BCCollection::attributeTitleByName() - no attribute named " << name_ << endl;
+    return QString::null;
   }
   return att->title();
 }
@@ -353,25 +485,15 @@ void BCCollection::populateDicts(BCUnit* unit_) {
     BCUnitGroupDict* dict = dictIt.current();
     QString attName = dictIt.currentKey();
 
-    QStringList groups = unit_->groupsByAttributeName(attName);
+    BCUnitGroup* group = 0;
 
-    QStringList::Iterator groupIt;
+    QStringList groups = unit_->groupNamesByAttributeName(attName);
+    QStringList::ConstIterator groupIt;
     for(groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
-      QString groupName = static_cast<QString>(*groupIt);
-//      kdDebug() << "\tnew group - " << groupName << endl;
-      BCUnitGroup* group;
-
-      // surely there's a more efficient way of doing this
-      // app crashes if find() is called on an empty dict
-      if(dict->isEmpty()) {
-        group = new BCUnitGroup(groupName, attName);
-        dict->insert(groupName, group);
-      } else {
-        group = dict->find(groupName);
-        if(!group) {
-          group = new BCUnitGroup(groupName, attName);
-          dict->insert(groupName, group);
-        }
+      // if the dict is empty, or doesn't contain this particular group, create it
+      if(dict->isEmpty() || !(group = dict->find(*groupIt))) {
+        group = new BCUnitGroup(*groupIt, attName);
+        dict->insert(*groupIt, group);
       }
       unit_->addToGroup(group);
     } // end group loop
@@ -385,4 +507,3 @@ QString BCCollection::emptyGroupName() {
 void BCCollection::groupModified(BCUnitGroup* group_) {
   emit signalGroupModified(this, group_);
 }
-

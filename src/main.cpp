@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
   KAboutData aboutData("bookcase", I18N_NOOP("Bookcase"),
     version, description, KAboutData::License_GPL,
     "(c) 2001-2003, Robby Stephenson", 0,
-    "http://periapsis.org/bookcase/", "robby@periapsis.org");
+    "http://www.periapsis.org/bookcase/", "robby@periapsis.org");
   aboutData.addAuthor("Robby Stephenson", 0, "robby@periapsis.org");
   
   KCmdLineArgs::init(argc, argv, &aboutData);

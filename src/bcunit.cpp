@@ -17,15 +17,18 @@
 #include "bcunit.h"
 #include "bccollection.h"
 #include "bcunitgroup.h"
-#include "bcattribute.h"
 
 #include <kdebug.h>
 
 #include <qregexp.h>
 
-BCUnit::BCUnit(BCCollection* coll_) : m_id(coll_->unitCount()), m_coll(coll_) {
+BCUnit::BCUnit(BCCollection* coll_) : , m_title(QString::null), m_id(coll_->unitCount()), m_coll(coll_) {
   // keep the title in the attributes, too.
   setAttribute(QString::fromLatin1("title"), m_title);
+
+  if(!coll_) {
+    kdWarning() << "BCUnit() - null collection pointer!" << endl;
+  }
 }
 
 BCUnit::BCUnit(const BCUnit& unit_) : m_title(unit_.m_title),
@@ -56,6 +59,7 @@ QString BCUnit::title() const {
 
 QString BCUnit::attribute(const QString& attName_) const {
   if(attName_ == QString::fromLatin1("title")) {
+//    return BCAttribute::autoCapitalize() ? BCAttribute::capitalize(m_title) : m_title;
     return m_title;
   }
   
@@ -66,23 +70,21 @@ QString BCUnit::attribute(const QString& attName_) const {
   return value;
 }
 
-QString BCUnit::attributeFormatted(const QString& attName_, int flags_/*=0*/) const {
+QString BCUnit::attributeFormatted(const QString& attName_, BCAttribute::FormatFlag flag_/*=FormatPlain*/) const {
   // if auto format is not set, then just return the value
   if(!BCAttribute::autoFormat()) {
     return attribute(attName_);
   }
   
-  // I should really have separated format flags
-  // if none of the format flags are set, just return the attribute, maybe capitalized
-  if( !(flags_ & BCAttribute::FormatTitle
-         || flags_ & BCAttribute::FormatName
-         || flags_ & BCAttribute::FormatDate) ) {
+  // if format is plain, just return the attribute, maybe capitalized
+  if(flag_ == BCAttribute::FormatPlain) {
     if(BCAttribute::autoCapitalize()) {
       return BCAttribute::capitalize(attribute(attName_));
     } else {
       return attribute(attName_);
     }
   }
+  
   QString value;
   if(m_formattedAttributes.isEmpty() || !m_formattedAttributes.contains(attName_)) {
     if(attName_ == QString::fromLatin1("title")) {
@@ -91,7 +93,7 @@ QString BCUnit::attributeFormatted(const QString& attName_, int flags_/*=0*/) co
       value = attribute(attName_);
     }
     if(!value.isEmpty()) {
-      value = BCAttribute::format(value, flags_);
+      value = BCAttribute::format(value, flag_);
       m_formattedAttributes.insert(attName_, value);
     }
   } else {
@@ -101,12 +103,15 @@ QString BCUnit::attributeFormatted(const QString& attName_, int flags_/*=0*/) co
 }
 
 bool BCUnit::setAttribute(const QString& attName_, const QString& attValue_) {
-  QString attValue = attValue_;
-  // enforce rule to have a space after a semi-colon and a comma
-  attValue.replace(QRegExp(QString::fromLatin1(";")), QString::fromLatin1("; "));
-  attValue.replace(QRegExp(QString::fromLatin1(",")), QString::fromLatin1(", "));
-  attValue = attValue.simplifyWhiteSpace();
-  
+  // an empty value means remove the attribute
+  if(attValue_.isEmpty()) {
+    if(!m_attributes.isEmpty() && m_attributes.contains(attName_)) {
+      m_attributes.remove(attName_);
+    }
+    invalidateFormattedAttributeValue(attName_);
+    return true;
+  }
+    
   // the title is actually stored in two places
   // I started out with treating it as any other attribute
   // then decided it was special and gave it its own variable
@@ -120,15 +125,13 @@ bool BCUnit::setAttribute(const QString& attName_, const QString& attValue_) {
     return false;
   }
 
-  if(!m_coll->isAllowed(attName_, attValue)) {
-    kdDebug() << "BCUnit::setAttribute() - value is not allowed - " << attValue << endl;
+  if(!m_coll->isAllowed(attName_, attValue_)) {
+    kdDebug() << "BCUnit::setAttribute() - value is not allowed - " << attValue_ << endl;
     return false;
   }
 
-  m_attributes.insert(attName_, attValue);
-  if(m_formattedAttributes.contains(attName_)) {
-    m_formattedAttributes.remove(attName_);
-  }
+  m_attributes.insert(attName_, attValue_);
+  invalidateFormattedAttributeValue(attName_);
   return true;
 }
 
@@ -141,12 +144,12 @@ int BCUnit::id() const {
 }
 
 bool BCUnit::addToGroup(BCUnitGroup* group_) {
-  if(m_groups.containsRef(group_)) {
+  if(!group_ || m_groups.containsRef(group_)) {
     return false;
   } else {
+//    kdDebug() << "BCUnit::addToGroup() - adding group (" << group_->groupName() << ")" << endl;
     m_groups.append(group_);
     group_->append(this);
-//    kdDebug() << "BCUnit::addToGroup() - adding group (" << group_->groupName() << ")" << endl;
     m_coll->groupModified(group_);
     return true;
   }
@@ -177,19 +180,33 @@ const QPtrList<BCUnitGroup>& BCUnit::groups() const {
 // this function gets called before m_groups is updated. In fact, it is used to
 // update that list. This is the function that actually parses the attribute values
 // and returns the list of the group names.
-QStringList BCUnit::groupsByAttributeName(const QString& attName_) const {
+QStringList BCUnit::groupNamesByAttributeName(const QString& attName_) const {
 //  kdDebug() << "BCUnit::groupsByAttributeName() - " << attName_ << endl;
   QStringList groups;
   BCAttribute* att = m_coll->attributeByName(attName_);
-  int flags = att->flags();
-  QString attValue = attributeFormatted(attName_, flags);
+  
+  QString attValue = attributeFormatted(attName_, att->formatFlag());
   if(attValue.isEmpty()) {
     groups += BCCollection::emptyGroupName();
-  } else if(flags & BCAttribute::AllowMultiple) {
-    // the space after the semi-colon is enforced elsewhere
-    groups += QStringList::split(QString::fromLatin1("; "), attValue);
+    // attributeByName() had better now return 0
+  } else if(att->flags() & BCAttribute::AllowMultiple) {
+    groups += QStringList::split(QRegExp(QString::fromLatin1(";\\s*")), attValue);
   } else {
     groups += attValue;
   }
   return groups;
+}
+
+QStringList BCUnit::attributeValues() const {
+  return m_attributes.values();
+}
+
+bool BCUnit::isOwned() const {
+  return (m_coll && m_coll->unitList().count() > 0 && m_coll->unitList().containsRef(this) > 0);
+}
+
+void BCUnit::invalidateFormattedAttributeValue(const QString& name_) {
+  if(!m_formattedAttributes.isEmpty() && m_formattedAttributes.contains(name_)) {
+    m_formattedAttributes.remove(name_);
+  } 
 }

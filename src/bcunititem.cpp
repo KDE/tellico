@@ -19,10 +19,35 @@
 #include "bccollection.h"
 
 #include <qpainter.h>
+#include <qregexp.h>
 
+// prepend a tab character to always sort the empty group name first
+// also check for surname prefixes
 QString ParentItem::key(int col_, bool) const {
-  bool empty = (text(col_) == BCCollection::emptyGroupName());
-  return (col_ == 0 && empty) ? QString::fromLatin1("\t") : text(col_);
+  if(col_ > 0) {
+    return text(col_);
+  }
+
+  if(text(col_) == BCCollection::emptyGroupName()) {
+    return QString::fromLatin1("\t");
+  }
+  
+  if(m_text.isEmpty() || m_text != text(col_)) {
+    m_text = text(col_);
+    if(BCAttribute::autoFormat()) {
+      QString prefixes = BCAttribute::surnamePrefixList().join(QString::fromLatin1("|"));
+      QRegExp rx(QString::fromLatin1("^(") + prefixes + QString::fromLatin1(")\\s*"));
+      if(rx.search(m_text) > -1) {
+        m_key = m_text.mid(rx.matchedLength());
+      } else {
+        m_key = m_text;
+      }
+    } else {
+      m_key = m_text;
+    }
+  }
+
+  return m_key;
 }
 
 // if the parent listview is a BCGroupView, column=0, and showCount is true, then
@@ -56,8 +81,8 @@ void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
       if(isSelected()) {
         p_->setPen(cg_.highlightedText());
       } else {
-        //TODO: make configurable
-        p_->setPen(QColor("blue"));
+//        p_->setPen(QColor("blue"));
+        p_->setPen(cg_.highlight());
       }
 
       // don't call ParentItem::width() because that includes the count already

@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.5.2a
+%define version 0.6
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
@@ -17,7 +17,7 @@ BuildRequires: gcc-c++ libqt3-devel kdelibs-devel libxslt1-devel >= 1.0.19
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
-Bookcase is a personal catalog application for your book collection.
+Bookcase is a KDE application for keeping track of your book collection.
 
 %prep
 rm -rf $RPM_BUILD_ROOT
@@ -63,7 +63,8 @@ EOF
 %doc AUTHORS COPYING ChangeLog INSTALL README TODO
 %{_bindir}/*
 #%{_mandir}/man1/*
-#%{_datadir}/applnk/Applications/bookcase.desktop
+%{_datadir}/applnk/Applications/bookcase.desktop
+%{_datadir}/mimelnk/application/x-bookcase.desktop
 %{_libdir}/menu/*
 %{_datadir}/apps/%{name}/
 %{_iconsdir}/*/*/*/*.png
@@ -74,6 +75,10 @@ EOF
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Thu Apr  3 2003 Robby Stephenson <robby@periapsis.org> 0.6.0-1rls
+- Version 0.6
+- Fix application and mime desktop files
+
 * Sun Mar 23 2003 Robby Stephenson <robby@periapsis.org> 0.5.2a-1rls
 - Version 0.5.2a
 

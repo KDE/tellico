@@ -35,7 +35,7 @@ class KComboBox;
  * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h,v 1.13 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: configdialog.h,v 1.2 2003/04/01 03:30:41 robby Exp $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT
@@ -106,6 +106,7 @@ protected slots:
   void slotFieldUp();
   void slotFieldDown();
   void slotTogglePrintGrouped(bool checked);
+  void slotToggleFormatted(bool checked);
 
 signals:
   /**
@@ -121,6 +122,7 @@ private:
   QCheckBox* m_cbShowCount;
   KLineEdit* m_leArticles;
   KLineEdit* m_leSuffixes;
+  KLineEdit* m_lePrefixes;
 
   QCheckBox* m_cbPrintHeaders;
   QCheckBox* m_cbPrintFormatted;

@@ -7,9 +7,9 @@
    ================================================================
    Bookcase summary XSLT file
 
-   $Id: summary.xsl,v 1.5 2003/03/22 02:22:53 robby Exp $
+   $Id: summary.xsl,v 1.2 2003/04/01 03:30:41 robby Exp $
 
-   Copyright (c) 2003 Robby Stephenson
+   Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with XML data files
    from the 'bookcase' application, which can be found at:

@@ -17,25 +17,30 @@
 #ifndef BCDETAILEDLISTVIEW_H
 #define BCDETAILEDLISTVIEW_H
 
-class BCUnit;
 class BCUnitItem;
 class BCCollection;
+class BCAttribute;
 class BookcaseDoc;
+class BCFilter;
+
+// needed for BCUnitList definition
+#include <bcunit.h>
 
 #include <klistview.h>
 #include <kpopupmenu.h>
 
 #include <qpoint.h>
 #include <qstringlist.h>
-#include <qmap.h>
 #include <qpixmap.h>
+#include <qvaluevector.h>
+#include <qguardedptr.h>
 
 /**
  * The BCDetailedListView class shows detailed information about units in the
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: bcdetailedlistview.h,v 1.31 2003/03/10 02:13:49 robby Exp $
+ * @version $Id: bcdetailedlistview.h,v 1.3 2003/05/02 06:04:21 robby Exp $
  */
 class BCDetailedListView : public KListView {
 Q_OBJECT
@@ -51,21 +56,17 @@ public:
   BCDetailedListView(BookcaseDoc* doc, QWidget* parent, const char* name=0);
   ~BCDetailedListView();
   
-  /**
-   * Returns the names of the attributes being shown. This is NOT the text in the
-   * header; that is the attribute title.
-   *
-   * @return The list of column names
-   */
-  const QStringList& columnNames() const;
   bool eventFilter(QObject* obj, QEvent* ev);
   /**
    * Rearranges the columns, given the names of the attributes.
    *
    * @param colNames A list of the attribute names in the order to be shown
    */
-  void setColumns(BCCollection* coll, const QStringList& colNames);
-  
+  void setColumns(BCCollection* coll, const QValueList<int>& colNames);
+  QStringList visibleColumns() const;
+  void setFilter(const BCFilter* filter);
+  const BCFilter* filter() const;
+   
 public slots:
   /**
    */
@@ -109,6 +110,10 @@ public slots:
    * to the current list item.
    */
   void slotHandleDelete();
+  void slotRefresh();
+  void slotAddColumn(BCCollection*, BCAttribute* att);
+  void slotModifyColumn(BCCollection*, BCAttribute* newAtt, BCAttribute* oldAtt);
+  void slotRemoveColumn(BCCollection*, BCAttribute* att);
 
 protected:
   /**
@@ -119,6 +124,8 @@ protected:
    * @param item A pointer to the item
    */
   void populateItem(BCUnitItem* item);
+  void setPixmapAndText(BCUnitItem* item, int col, BCAttribute* att);
+  
   /**
    * A helper method to locate any item which refers to a certain unit. If none
    * is found, a NULL pointer is returned.
@@ -126,7 +133,9 @@ protected:
    * @param unit A pointer to the unit
    * @return A pointer to the item
    */
-  BCUnitItem* const locateItem(BCUnit* unit);
+  BCUnitItem* const locateItem(const BCUnit* unit);
+  void showColumn(int col);
+  void hideColumn(int col);
 
 protected slots:
   /**
@@ -139,27 +148,22 @@ protected slots:
   void slotRMB(QListViewItem* item, const QPoint& point, int col);
   /**
    * Handles everything when an item is selected. The proper signal is emitted.
-   *
-   * @param item The selected item
    */
-  void slotSelected(QListViewItem* item);
+  void slotSelectionChanged();
   /**
    * Clears the selection.
    */
   void slotClearSelection();
   void slotHeaderMenuActivated(int id);
+  void slotCacheColumnWidth(int section, int oldSize, int newSize);
 
 signals:
   /**
-   * Signals that the selection has been cleared.
-   */
-  void signalClear();
-  /**
-   * Signals a unit has been selected. Only emitted when selection changed.
+   * Signals that the selected units have changed. Zero, one or more may be selected.
    *
-   * @param unit A pointer to the unit to which the selected item refers
+   * @param list A list of the selected items, may be empty.
    */
-  void signalUnitSelected(BCUnit* unit);
+  void signalUnitSelected(const BCUnitList& list);
   /**
    * Signals a desire to delete a unit.
    *
@@ -171,10 +175,12 @@ private:
   BookcaseDoc* m_doc;
   KPopupMenu* m_itemMenu;
   KPopupMenu* m_headerMenu;
-  QMap<int, QString> m_columnMap;
-  QStringList m_colNames;
+  QValueVector<bool> m_visibleColumns;
+  QValueVector<int> m_columnWidths;
   QPixmap m_bookPix;
   QPixmap m_checkPix;
+  BCUnitList m_selectedUnits;
+  const BCFilter* m_filter;
 };
 
 #endif

@@ -7,9 +7,9 @@
    ================================================================
    Bookcase XSLT file - sort by author
 
-   $Id: bookcase-by-title.xsl,v 1.4 2003/03/22 02:22:53 robby Exp $
+   $Id: bookcase-by-title.xsl,v 1.3 2003/05/03 05:50:26 robby Exp $
 
-   Copyright (c) 2003 Robby Stephenson
+   Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with XML data files
    from the 'bookcase' application, which can be found at:
@@ -21,7 +21,12 @@
 
 <xsl:strip-space elements="*"/>
 
-<xsl:variable name="current-syntax" select="'2'"/>
+<xsl:variable name="current-syntax" select="'3'"/>
+
+<xsl:variable name="endl">
+<xsl:text>
+</xsl:text>
+</xsl:variable>
 
 <xsl:template match="/">
  <xsl:apply-templates select="bc:bookcase"/>
@@ -32,7 +37,7 @@
   <xsl:message>
    <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
    <xsl:value-of select="$current-syntax"/>
-   <xsl:text>,</xsl:text>
+   <xsl:text>, </xsl:text>
    <xsl:value-of select="$endl"/>
    <xsl:text>but the data file is version </xsl:text>
    <xsl:value-of select="@syntaxVersion"/>

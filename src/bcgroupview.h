@@ -1,5 +1,5 @@
 /***************************************************************************
-                             bcgroupview.h
+                                bcgroupview.h
                              -------------------
     begin                : Sat Oct 13 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -17,10 +17,9 @@
 #ifndef BCGROUPVIEW_H_H
 #define BCGROUPVIEW_H_H
 
-class BCUnit;
 class BCAttribute;
 
-#include <bcunititem.h>
+#include "bcunititem.h"
 #include "bccollection.h"
 
 #include <klistview.h>
@@ -42,7 +41,7 @@ class BCAttribute;
  * @see BCCollection
  *
  * @author Robby Stephenson
- * @version $Id: bcgroupview.h,v 1.15 2003/03/15 03:40:13 robby Exp $
+ * @version $Id: bcgroupview.h,v 1.3 2003/05/02 06:04:21 robby Exp $
  */
 class BCGroupView : public KListView {
 Q_OBJECT
@@ -75,13 +74,11 @@ public:
    */
   bool showCount() const;
   /**
-   * Changes the view to show or hide the number of items in the group. If the collection
-   * list is empty, the flag is simply toggled.
+   * Changes the view to show or hide the number of items in the group.
    *
    * @param showCount A boolean indicating whether or not the count should be shown
-   * @param list A list of collections to update
    */
-  void showCount(bool showCount, const BCCollectionList& list=BCCollectionList());
+  void showCount(bool showCount);
   
 public slots:
   /**
@@ -145,14 +142,15 @@ protected:
    * A helper method to locate any pointer to a listviewitem which references
    * a given BCUnitGroup
    *
-   * @param unit A pointer to the collection listviewitem
+   * @param collItem A pointer to the collection listviewitem
+   * @param group The group to be added
    * @return A pointer to the group listviewitem
    */
   ParentItem* locateItem(ParentItem* collItem, BCUnitGroup* group);
   /**
    * Inserts a listviewitem for a given group
    *
-   * @param The parent listview item, for the collection itself
+   * @param collItem The parent listview item, for the collection itself
    * @param group The group to be added
    * @return A pointer to the created @ ref ParentItem
    */
@@ -191,10 +189,8 @@ protected slots:
   /**
    * Handles everything when an item is selected. The proper signal is emitted, depending
    * on whether the item refers to a collection, a group, or a unit.
-   *
-   * @param item A pointer to the selected item
    */
-  void slotSelected(QListViewItem* item);
+  void slotSelectionChanged();
   /**
    * Toggles the open/closed status of the item if it refers to a collection or a group.
    *
@@ -215,6 +211,7 @@ protected slots:
    * the @ref signalDoCollectionRename signal is emitted.
    */
   void slotHandleRename();
+  void slotHandleProperties();
   /**
    * Handles changing the icon when an item is expanded, depended on whether it refers
    * to a collection, a group, or a unit.
@@ -241,21 +238,16 @@ protected slots:
 
 signals:
   /**
-   * Signals that the selection has been cleared.
-   */
-  void signalClear();
-  /**
-   * Signals a unit has been selected. Only emitted when selection changed, and the
-   * selection item refers to a unit.
+   * Signals that the selection has changed.
    *
-   * @param unit A pointer to the unit to which the selected item refers
+   * @param list A list of the selected items, may be empty.
    */
-  void signalUnitSelected(BCUnit* unit);
+  void signalUnitSelected(const BCUnitList& list);  
   /**
    * Signals a collection has been selected. Only emitted when selection changed, and
    * the selection item refers to a collection.
    *
-   * @param unit The id of the collection to which the selected item refers
+   * @param id The id of the collection to which the selected item refers
    */
   void signalCollectionSelected(int id);
   /**
@@ -271,15 +263,19 @@ signals:
    * @param unit A pointer to the unit
    */
   void signalDeleteUnit(BCUnit* unit);
-
+  void signalModifyCollection(int);
 private:
   QDict<ParentItem> m_groupDict;
   // maps a unit type, "book" to a group attribute, "title"
   QMap<QString, QString> m_collGroupBy;
+  BCUnitList m_selectedUnits;
 
   KPopupMenu m_collMenu;
   KPopupMenu m_groupMenu;
   KPopupMenu m_unitMenu;
+  
+  QPixmap m_collOpenPixmap;
+  QPixmap m_collClosedPixmap;
   QPixmap m_groupOpenPixmap;
   QPixmap m_groupClosedPixmap;
 

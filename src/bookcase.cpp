@@ -28,6 +28,9 @@
 #include "finddialog.h"
 #include "bcunititem.h"
 #include "bookcollection.h"
+#include "bcfilter.h"
+#include "bcfilterdialog.h"
+#include "bccollectionpropdialog.h"
 
 #include <kiconloader.h>
 #include <kfiledialog.h>
@@ -49,6 +52,7 @@
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
 #include <kstringhandler.h>
+#include <kprotocolinfo.h>
 
 // include files for QT
 #include <qdir.h>
@@ -57,6 +61,13 @@
 #include <qpaintdevicemetrics.h>
 #include <qpainter.h>
 #include <qtextedit.h>
+#include <qheader.h>
+
+#define ENABLE_Z3950R 0
+
+#if ENABLE_Z3950R
+#include "lookupdialog.h"
+#endif
 
 static const int ID_STATUS_MSG = 1;
 static const int ID_STATUS_COUNT = 2;
@@ -64,7 +75,7 @@ static const int ID_STATUS_COUNT = 2;
 
 Bookcase::Bookcase(QWidget* parent_/*=0*/, const char* name_/*=0*/)
     : KMainWindow(parent_, name_), m_doc(0), m_config(kapp->config()),
-      m_progress(0), m_configDlg(0), m_findDlg(0) {
+      m_progress(0), m_configDlg(0), m_findDlg(0), m_lookupDlg(0), m_filterDlg(0), m_collPropDlg(0) {
 
   // do main window stuff like setting the icon
   initWindow();
@@ -90,9 +101,9 @@ Bookcase::Bookcase(QWidget* parent_/*=0*/, const char* name_/*=0*/)
   slotEnableModifiedActions(false);
   
   // not yet implemented
-  m_editCut->setEnabled(false);
-  m_editCopy->setEnabled(false);
-  m_editPaste->setEnabled(false);
+//  m_editCut->setEnabled(false);
+//  m_editCopy->setEnabled(false);
+//  m_editPaste->setEnabled(false);
 
   slotUnitCount();
 }
@@ -127,12 +138,16 @@ void Bookcase::initActions() {
   m_fileSaveAs = KStdAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
   m_filePrint = KStdAction::print(this, SLOT(slotFilePrint()), actionCollection());
   m_fileQuit = KStdAction::quit(this, SLOT(slotFileQuit()), actionCollection());
-  m_editCut = KStdAction::cut(this, SLOT(slotEditCut()), actionCollection());
-  m_editCopy = KStdAction::copy(this, SLOT(slotEditCopy()), actionCollection());
-  m_editPaste = KStdAction::paste(this, SLOT(slotEditPaste()), actionCollection());
+//  m_editCut = KStdAction::cut(this, SLOT(slotEditCut()), actionCollection());
+//  m_editCopy = KStdAction::copy(this, SLOT(slotEditCopy()), actionCollection());
+//  m_editPaste = KStdAction::paste(this, SLOT(slotEditPaste()), actionCollection());
   m_editFind = KStdAction::find(this, SLOT(slotEditFind()), actionCollection());
   m_editFindNext = KStdAction::findNext(this, SLOT(slotEditFindNext()),
                                         actionCollection());
+  m_editFields = new KAction(i18n("Collection Fields..."),  QString::fromLatin1("edit"), 0, this,
+                             SLOT(slotShowCollectionPropertiesDialog()),
+                             actionCollection(),
+                             "edit_fields");
 #if KDE_VERSION < 306
   m_toggleToolBar = KStdAction::showToolbar(this, SLOT(slotToggleToolBar()),
                                             actionCollection());
@@ -163,6 +178,17 @@ void Bookcase::initActions() {
                              SLOT(slotExportXSLT()),
                              actionCollection(),
                              "export_xslt");
+                             
+#if ENABLE_Z3950R
+  m_lookup = new KAction(i18n("Lookup book..."), 0, this,
+                         SLOT(slotShowLookupDialog()),
+                         actionCollection(),
+                         "lookup_dialog");
+#endif                         
+  m_filter = new KAction(i18n("Advanced Filter..."), QString::fromLatin1("filter"), 0, this,
+                         SLOT(slotShowFilterDialog()),
+                         actionCollection(),
+                         "filter_dialog");
 
 //  m_fileNewCollection = new KAction(i18n("New &Collection"), 0, this,
 //                                    SLOT(slotFileNewCollection()),
@@ -182,6 +208,16 @@ void Bookcase::initActions() {
                                      SLOT(slotChangeGrouping()),
                                      actionCollection(),
                                      "change_unit_grouping");
+                                     
+  (void) new BCLabelAction(i18n("Quick Filter: "), 0,
+                           actionCollection(),
+                           "quick_filter_label");
+  m_quickFilter = new BCLineEditAction(i18n("Quick Filter: "), 0,
+                                       actionCollection(),
+                                       "quick_filter");
+  // want to update every time the filter text changes
+  connect(m_quickFilter, SIGNAL(textChanged(const QString&)),
+          this, SLOT(slotUpdateFilter(const QString&)));
 
   m_fileNew->setToolTip(i18n("Create a new document"));
   m_fileOpen->setToolTip(i18n("Open an existing document"));
@@ -190,10 +226,12 @@ void Bookcase::initActions() {
   m_fileSaveAs->setToolTip(i18n("Save the actual document as..."));
   m_filePrint->setToolTip(i18n("Print the contents of the document..."));
   m_fileQuit->setToolTip(i18n("Quit the application"));
-  m_editCut->setToolTip(i18n("Cut the selected section and puts it to the clipboard"));
-  m_editCopy->setToolTip(i18n("Copy the selected section to the clipboard"));
-  m_editPaste->setToolTip(i18n("Paste the clipboard contents to actual position"));
+//  m_editCut->setToolTip(i18n("Cut the selected section and puts it to the clipboard"));
+//  m_editCopy->setToolTip(i18n("Copy the selected section to the clipboard"));
+//  m_editPaste->setToolTip(i18n("Paste the clipboard contents to actual position"));
   m_editFind->setToolTip(i18n("Search in the document..."));
+  m_editFields->setToolTip(i18n("Modify the collection fields..."));
+  m_filter->setToolTip(i18n("Filter the collection to only show certain books..."));
 #if KDE_VERSION < 306
   m_toggleToolBar->setToolTip(i18n("Enable/disable the toolbar"));
 #endif
@@ -209,11 +247,18 @@ void Bookcase::initActions() {
   m_exportBibtexml->setToolTip(i18n("Export to Bibtexml file..."));
   m_exportXSLT->setToolTip(i18n("Export a file using an XSL transform..."));
 
+//  kdWarning() << "Bookcase::initActions() - change createGUI() call!" << endl;
 //  createGUI(QString::fromLatin1("/home/robby/projects/bookcase/src/bookcaseui.rc"));
   createGUI();
 
   // gets enabled once one search is done
   m_editFindNext->setEnabled(false);
+
+#if ENABLE_Z3950R
+//  m_lookup->setToolTip(i18n("Lookup a book on the internet..."));
+  bool z3950Enabled = KProtocolInfo::isKnownProtocol(QString::fromLatin1("z3950r"));
+  m_lookup->setEnabled(z3950Enabled);
+#endif
 }
 
 void Bookcase::initDocument() {
@@ -221,7 +266,7 @@ void Bookcase::initDocument() {
 
   // allow status messages from the document
   connect(m_doc, SIGNAL(signalStatusMsg(const QString&)),
-           SLOT(slotStatusMsg(const QString&)));
+          SLOT(slotStatusMsg(const QString&)));
 
   // do stuff that changes when the doc is modified
   connect(m_doc, SIGNAL(signalModified()),
@@ -273,36 +318,38 @@ void Bookcase::initView() {
 
 void Bookcase::initConnections() {
   // the two listviews signal when a unit is selected, pass it to the edit widget
-  connect(m_groupView, SIGNAL(signalUnitSelected(BCUnit*)),
-          m_editWidget, SLOT(slotSetContents(BCUnit*)));
-  connect(m_detailedView, SIGNAL(signalUnitSelected(BCUnit*)),
-          m_editWidget, SLOT(slotSetContents(BCUnit*)));
-
+  connect(m_groupView, SIGNAL(signalUnitSelected(const BCUnitList&)),
+          m_editWidget, SLOT(slotSetContents(const BCUnitList&)));
+  connect(m_detailedView, SIGNAL(signalUnitSelected(const BCUnitList&)),
+          m_editWidget, SLOT(slotSetContents(const BCUnitList&)));
+          
   // synchronize the selected signal between listviews
 //  connect(m_groupView, SIGNAL(signalUnitSelected(BCUnit*)),
 //          m_detailedView, SLOT(slotSetSelected(BCUnit*)));
 //  connect(m_detailedView, SIGNAL(signalUnitSelected(BCUnit*)),
 //          m_groupView, SLOT(slotSetSelected(BCUnit*)));
   // when one item is selected, clear the other
-  connect(m_groupView, SIGNAL(signalUnitSelected(BCUnit*)),
+  connect(m_groupView, SIGNAL(signalUnitSelected(const BCUnitList&)),
           m_detailedView, SLOT(slotClearSelection()));
-  connect(m_detailedView, SIGNAL(signalUnitSelected(BCUnit*)),
+  connect(m_detailedView, SIGNAL(signalUnitSelected(const BCUnitList&)),
           m_groupView, SLOT(slotClearSelection()));
 
   connect(m_editWidget, SIGNAL(signalSaveUnit(BCUnit*)),
           m_doc, SLOT(slotSaveUnit(BCUnit*)));
 
   connect(m_groupView, SIGNAL(signalDeleteUnit(BCUnit*)),
-          SLOT(slotDeleteUnit(BCUnit*)));
+          m_doc, SLOT(slotDeleteUnit(BCUnit*)));
   connect(m_detailedView, SIGNAL(signalDeleteUnit(BCUnit*)),
-          SLOT(slotDeleteUnit(BCUnit*)));
+          m_doc, SLOT(slotDeleteUnit(BCUnit*)));
   connect(m_editWidget, SIGNAL(signalDeleteUnit(BCUnit*)),
-          SLOT(slotDeleteUnit(BCUnit*)));
+          m_doc, SLOT(slotDeleteUnit(BCUnit*)));
 
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
           m_groupView, SLOT(slotAddCollection(BCCollection*)));
+//  connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
+//          m_editWidget, SLOT(slotSetCollection(BCCollection*)));
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
-          m_editWidget, SLOT(slotSetCollection(BCCollection*)));
+          m_editWidget, SLOT(slotSetLayout(BCCollection*)));
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
           m_detailedView, SLOT(slotAddCollection(BCCollection*)));
 
@@ -315,37 +362,33 @@ void Bookcase::initConnections() {
 
   // connect the added signal to both listviews
 // the group view receives BCCollection::signalGroupModified() so no add or modify action needed
-//  connect(m_doc, SIGNAL(signalUnitAdded(BCUnit*)),
-//          m_groupView, SLOT(slotAddItem(BCUnit*)));
   connect(m_doc, SIGNAL(signalUnitAdded(BCUnit*)),
           m_detailedView, SLOT(slotAddItem(BCUnit*)));
   connect(m_doc, SIGNAL(signalUnitAdded(BCUnit*)),
           m_editWidget, SLOT(slotUpdateCompletions(BCUnit*)));
 
   // connect the modified signal to both
-//  connect(m_doc, SIGNAL(signalUnitModified(BCUnit*)),
-//          m_groupView, SLOT(slotModifyItem(BCUnit*)));
   connect(m_doc, SIGNAL(signalUnitModified(BCUnit*)),
           m_detailedView, SLOT(slotModifyItem(BCUnit*)));
   connect(m_doc, SIGNAL(signalUnitModified(BCUnit*)),
           m_editWidget, SLOT(slotUpdateCompletions(BCUnit*)));
 
   // connect the deleted signal to both listviews
-//  connect(m_doc, SIGNAL(signalUnitDeleted(BCUnit*)),
-//          m_groupView, SLOT(slotRemoveItem(BCUnit*)));
   connect(m_doc, SIGNAL(signalUnitDeleted(BCUnit*)),
           m_detailedView, SLOT(slotRemoveItem(BCUnit*)));
           
   // if the doc wants a unit selected, show it in both detailed and group views
-  connect(m_doc, SIGNAL(signalUnitSelected(BCUnit*)),
+  connect(m_doc, SIGNAL(signalUnitSelected(BCUnit*, const QString&)),
           m_detailedView, SLOT(slotSetSelected(BCUnit*)));
-  connect(m_doc, SIGNAL(signalUnitSelected(BCUnit*)),
+  connect(m_doc, SIGNAL(signalUnitSelected(BCUnit*, const QString&)),
           m_groupView, SLOT(slotSetSelected(BCUnit*)));
-  connect(m_doc, SIGNAL(signalUnitSelected(BCUnit*)),
-          m_editWidget, SLOT(slotSetContents(BCUnit*)));
+  connect(m_doc, SIGNAL(signalUnitSelected(BCUnit*, const QString&)),
+          m_editWidget, SLOT(slotSetContents(BCUnit*, const QString&)));
 
   connect(m_groupView, SIGNAL(signalRenameCollection(int, const QString&)),
           m_doc, SLOT(slotRenameCollection(int, const QString&)));
+  connect(m_groupView, SIGNAL(signalModifyCollection(int)),
+          this, SLOT(slotShowCollectionPropertiesDialog(int)));
 }
 
 void Bookcase::slotInitFileOpen() {
@@ -400,8 +443,27 @@ void Bookcase::saveCollectionOptions(BCCollection* coll_) {
   QString groupName = coll_->unitGroups()[m_unitGrouping->currentItem()];
   m_config->writeEntry("Group By", groupName);
     
-  m_detailedView->saveLayout(m_config, QString::fromLatin1("Options - %1").arg(coll_->unitName()));
-  m_config->writeEntry("ColumnNames", m_detailedView->columnNames());
+  QValueList<int> widths, order;
+  for(int i = 0; i < m_detailedView->columns(); ++i) {
+    if(m_detailedView->columnWidthMode(i) == QListView::Manual) {
+      widths += m_detailedView->columnWidth(i);
+    } else {
+      widths += -1; // Maximum width mode
+    }
+    order += m_detailedView->header()->mapToIndex(i);
+  }
+  m_config->writeEntry("ColumnWidths", widths);
+  m_config->writeEntry("ColumnOrder", order);
+  m_config->writeEntry("SortColumn", m_detailedView->columnSorted());
+  m_config->writeEntry("SortAscending", m_detailedView->ascendingSort());
+
+//  QStringList colTitles = m_detailedView->visibleColumns();
+//  QStringList colNames;
+//  QStringList::ConstIterator it;
+//  for(it = colTitles.begin(); it != colTitles.end(); ++it) {
+//    colNames += coll_->attributeNameByTitle(*it);
+//  }
+//  m_config->writeEntry("ColumnNames", colNames);
 }
 
 void Bookcase::readOptions() {
@@ -467,6 +529,14 @@ void Bookcase::readOptions() {
   }
   BCAttribute::setSuffixList(suffixes);
 
+  QStringList prefixes;
+  if(m_config->hasKey("Surname Prefixes")) {
+    prefixes = m_config->readListEntry("Surname Prefixes", ',');
+  } else {
+    prefixes = BCAttribute::defaultSurnamePrefixList();
+  }
+  BCAttribute::setSurnamePrefixList(prefixes);
+
   // TODO: fix iteration
   BCCollectionListIterator collIt(m_doc->collectionList());
   for( ; collIt.current(); ++collIt) {
@@ -475,18 +545,56 @@ void Bookcase::readOptions() {
 
     QString defaultGroup = coll->defaultGroupAttribute();
     QString unitGroup = m_config->readEntry("Group By", defaultGroup);
+    if(!coll->unitGroups().contains(unitGroup)) {
+      unitGroup = defaultGroup;
+    }
     m_groupView->setGroupAttribute(coll, unitGroup);
 
     // make sure the right combo element is selected
-    updateCollectionToolBar();
+    slotUpdateCollectionToolBar(coll);
 
-    QStringList colNames = m_config->readListEntry("ColumnNames");
-    if(colNames.isEmpty()) {
-      colNames = BookCollection::defaultViewAttributes();
+    // the config entry was named ColumnNames when only the visible columns existed
+    // now, they just get a zero width...keep config name though
+    QStringList visibleColumns = m_config->readListEntry("ColumnNames");
+    if(visibleColumns.isEmpty()) {
+      visibleColumns = BookCollection::defaultViewAttributes();
     }
-    m_detailedView->setColumns(coll, colNames);
 
-    m_detailedView->restoreLayout(m_config, QString::fromLatin1("Options - %1").arg(coll->unitName()));
+    // this block compensates for the chance that the user added an attribute and it wasn't
+    // written to the widths. Also compensates for 0.5.x to 0.6.x column layout changes
+    QValueList<int> colWidths = m_config->readIntListEntry("ColumnWidths");
+    if(colWidths.empty()) {
+      for(unsigned i = 0; i < visibleColumns.count(); ++i) {
+        colWidths.append(-1); // automatic width
+      }
+    }
+    if(colWidths.count() < coll->attributeList().count()) {
+      QValueList<int> newWidths;
+      BCAttributeListIterator it(coll->attributeList());
+      for( ; it.current(); ++it) {
+        if(visibleColumns.contains(it.current()->name()) && colWidths.count() > 0) {
+          newWidths.push_back(colWidths[0]);
+          colWidths.pop_front();
+        } else {
+          newWidths.push_back(0);
+        }
+      }
+      colWidths = newWidths;
+    }
+    m_detailedView->setColumns(coll, colWidths);
+
+    QValueList<int> colOrder = m_config->readIntListEntry("ColumnOrder");
+    QValueList<int>::ConstIterator it;
+    int i = 0;
+    for(it = colOrder.begin(); it != colOrder.end(); ++it) {
+      m_detailedView->header()->moveSection(i++, *it);
+    }
+    
+    if(m_config->hasKey("SortColumn")) {
+      int sortCol = m_config->readNumEntry("SortColumn");
+      bool sortAsc = m_config->readBoolEntry("SortAscending", true);
+      m_detailedView->setSorting(sortCol, sortAsc);
+    }
   }
 }
 
@@ -513,7 +621,7 @@ void Bookcase::readProperties(KConfig* cfg_) {
 
     if(canRecover) {
       m_doc->openDocument(tempurl);
-      m_doc->setModified(true);
+      m_doc->slotSetModified(true);
       setCaption(tempurl.fileName(), true);
       QFile::remove(tempname);
     }
@@ -704,7 +812,11 @@ void Bookcase::slotFilePrint() {
   if(printGrouped) {
    sortby = m_config->readEntry("Print Grouped Attribute", QString::fromLatin1("author"));
    // make sure to add "bc" namespace
-   handler.addStringParam("sort-name", QString(QString::fromLatin1("bc:")+sortby).utf8());
+   QString tmp = QString::fromLatin1("bc:")+sortby;
+   if(m_doc->collectionById(0)->attributeByName(sortby)->flags() & BCAttribute::AllowMultiple) {
+     tmp = tmp + QString::fromLatin1("s/") + tmp;
+   }
+   handler.addStringParam("sort-name", tmp.utf8());
   } else {
    // this is needed since the stylesheet has a default value
    handler.addStringParam("sort-name", "");
@@ -738,7 +850,8 @@ void Bookcase::slotFilePrint() {
   if(printGrouped) {
     // first parameter is what attribute to group by
     // second parameter is whether to run the dom through BCAttribute::format
-    dom = m_doc->exportXML(sortby, printFormatted);
+//    dom = m_doc->exportXML(sortby, printFormatted);
+    dom = m_doc->exportXML(printFormatted);
   } else {
     dom = m_doc->exportXML(printFormatted);
   }
@@ -792,7 +905,10 @@ void Bookcase::slotEditFind() {
   if(!m_findDlg) {
     m_findDlg = new FindDialog(this);
     m_editFindNext->setEnabled(true);
+  } else {
+    m_findDlg->updateAttributeList();
   }
+  
   m_findDlg->show();
 }
 
@@ -889,13 +1005,6 @@ void Bookcase::slotUnitCount() {
   statusBar()->changeItem(text, ID_STATUS_COUNT);
 }
 
-void Bookcase::slotDeleteUnit(BCUnit* unit_) {
-  m_doc->slotDeleteUnit(unit_);
-  m_editWidget->slotSetContents(0);
-  m_detailedView->slotSetSelected(0);
-  m_groupView->slotSetSelected(0);
-}
-
 //void Bookcase::slotFileNewCollection() {
 //  kdDebug() << "Bookcase::slotFileNewCollection()" << endl;
 //}
@@ -923,15 +1032,16 @@ void Bookcase::slotUpdateFractionDone(float f_) {
   f_ = (f_ < 0.0) ? 0.0 : f_;
   f_ = (f_ > 1.0) ? 1.0 : f_;
 
+  if(f_ == 1.0) {
+    m_progress->hide();
+    return;
+  }
+
   if(!m_progress->isVisible()) {
     m_progress->show();
   }
   m_progress->setValue(static_cast<int>(f_ * 100.0));
   kapp->processEvents();
-
-  if(f_ == 1.0) {
-    m_progress->hide();
-  }
 }
 
 void Bookcase::slotHandleConfigChange() {
@@ -942,35 +1052,36 @@ void Bookcase::slotHandleConfigChange() {
   }
 
   bool showCount = m_configDlg->configValue(QString::fromLatin1("showCount"));
-  m_groupView->showCount(showCount, m_doc->collectionList());
+  m_groupView->showCount(showCount);
   
   m_configDlg->saveConfiguration(m_config);
 }
 
-void Bookcase::updateCollectionToolBar() {
+void Bookcase::slotUpdateCollectionToolBar(BCCollection* coll_/*=0*/) {
 //  kdDebug() << "Bookcase::updateCollectionToolBar()" << endl;
 
   //TODO fix this later
-  BCCollection* coll = m_doc->collectionById(0);
-  if(!coll) {
+  if(!coll_){
+    coll_ = m_doc->collectionById(0);
+  }
+  if(!coll_) {
     return;
   }
   
-  QString current = m_groupView->collGroupBy(coll->unitName());
-  if(current.isEmpty()) {
-    current = coll->defaultGroupAttribute();
-    m_groupView->setGroupAttribute(coll, current);
+  QString current = m_groupView->collGroupBy(coll_->unitName());
+  if(current.isEmpty() || !coll_->unitGroups().contains(current)) {
+    current = coll_->defaultGroupAttribute();
+    m_groupView->setGroupAttribute(coll_, current);
   }
 
   QStringList groupTitles;
   int index = 0;
-  QStringList groups = coll->unitGroups();
-  QStringList::Iterator it = groups.begin();
-  for(int i = 0; it != groups.end(); ++it, ++i) {
-    QString groupName = static_cast<QString>(*it);
-    BCAttribute* att = coll->attributeByName(groupName);
+  QStringList groups = coll_->unitGroups();
+  QStringList::ConstIterator groupIt = groups.begin();
+  for(int i = 0; groupIt != groups.end(); ++groupIt, ++i) {
+    BCAttribute* att = coll_->attributeByName(*groupIt);
     groupTitles << att->title();
-    if(groupName == current) {
+    if(*groupIt == current) {
       index = i;
     }
   }
@@ -1003,10 +1114,31 @@ void Bookcase::slotChangeGrouping() {
 void Bookcase::slotUpdateCollection(BCCollection* coll_) {
 //  kdDebug() << "Bookcase::slotUpdateCollection()" << endl;
   
-  updateCollectionToolBar();
+  slotUpdateCollectionToolBar(coll_);
   slotUnitCount();
   connect(coll_, SIGNAL(signalGroupModified(BCCollection*, BCUnitGroup*)),
           m_groupView, SLOT(slotModifyGroup(BCCollection*, BCUnitGroup*)));
+          
+  connect(coll_, SIGNAL(signalAttributeAdded(BCCollection*, BCAttribute*)),
+          m_editWidget, SLOT(slotSetLayout(BCCollection*)));
+  connect(coll_, SIGNAL(signalAttributeAdded(BCCollection*, BCAttribute*)),
+          m_detailedView, SLOT(slotAddColumn(BCCollection*, BCAttribute*)));
+  connect(coll_, SIGNAL(signalAttributeAdded(BCCollection*, BCAttribute*)),
+          SLOT(slotUpdateCollectionToolBar(BCCollection*)));
+
+  connect(coll_, SIGNAL(signalAttributeDeleted(BCCollection*, BCAttribute*)),
+          m_editWidget, SLOT(slotSetLayout(BCCollection*)));
+  connect(coll_, SIGNAL(signalAttributeDeleted(BCCollection*, BCAttribute*)),
+          m_detailedView, SLOT(slotRemoveColumn(BCCollection*, BCAttribute*)));
+  connect(coll_, SIGNAL(signalAttributeDeleted(BCCollection*, BCAttribute*)),
+          SLOT(slotUpdateCollectionToolBar(BCCollection*)));
+          
+  connect(coll_, SIGNAL(signalAttributeModified(BCCollection*, BCAttribute*, BCAttribute*)),
+          m_editWidget, SLOT(slotUpdateAttribute(BCCollection*, BCAttribute*)));
+  connect(coll_, SIGNAL(signalAttributeModified(BCCollection*, BCAttribute*, BCAttribute*)),
+          m_detailedView, SLOT(slotModifyColumn(BCCollection*, BCAttribute*, BCAttribute*)));
+  connect(coll_, SIGNAL(signalAttributeModified(BCCollection*, BCAttribute*, BCAttribute*)),
+          SLOT(slotUpdateCollectionToolBar(BCCollection*)));
 }
 
 void Bookcase::doPrint(const QString& html_) {
@@ -1112,7 +1244,7 @@ void Bookcase::slotExportBibtex() {
   filter += QString::fromLatin1("\n");
   filter += i18n("*|All files");
 
-  exportUsingXSLT(filename, filter);
+  exportUsingXSLT(filename, filter, true);
 
   slotStatusMsg(i18n("Ready."));
 }
@@ -1259,7 +1391,7 @@ void Bookcase::slotExportXSLT() {
   slotStatusMsg(i18n("Ready."));
 }
 
-bool Bookcase::exportUsingXSLT(const QString& xsltFileName_, const QString& filter_) {
+bool Bookcase::exportUsingXSLT(const QString& xsltFileName_, const QString& filter_, bool locale_/*=false*/) {
   QString xsltfile = KGlobal::dirs()->findResource("appdata", xsltFileName_);
   if(xsltfile.isEmpty()) {
     FileError(xsltFileName_);
@@ -1283,5 +1415,111 @@ bool Bookcase::exportUsingXSLT(const QString& xsltFileName_, const QString& filt
     return false;
   }
 
-  return m_doc->writeURL(url, text);
+  return m_doc->writeURL(url, text, locale_);
 }
+
+void Bookcase::slotShowLookupDialog() {
+#if ENABLE_Z3950R
+  if(!m_lookupDlg) {
+    m_lookupDlg = new LookupDialog(this);
+//    connect(m_lookupDlg, SIGNAL(signalConfigChanged()),
+//            SLOT(slotHandleConfigChange()));
+    connect(m_lookupDlg, SIGNAL(finished()),
+            SLOT(slotHideLookupDialog()));
+  } else {
+    KWin::setActiveWindow(m_lookupDlg->winId());
+  }
+  m_lookupDlg->show();
+#endif
+}
+
+void Bookcase::slotHideLookupDialog() {
+#if ENABLE_Z3950R
+  if(m_lookupDlg) {
+    m_lookupDlg->delayedDestruct();
+    m_lookupDlg = 0;
+  }
+#endif
+}
+
+void Bookcase::slotShowFilterDialog() {
+  if(!m_filterDlg) {
+    m_filterDlg = new BCFilterDialog(m_detailedView, this);
+    m_filterDlg->setFilter(m_detailedView->filter());
+//    connect(m_lookupDlg, SIGNAL(signalConfigChanged()),
+//            SLOT(slotHandleConfigChange()));
+    m_quickFilter->blockSignals(true);
+    connect(m_filterDlg, SIGNAL(filterApplied()),
+            m_quickFilter, SLOT(clear()));
+    connect(m_filterDlg, SIGNAL(finished()),
+            SLOT(slotHideFilterDialog()));
+  } else {
+    KWin::setActiveWindow(m_filterDlg->winId());
+  }
+  m_filterDlg->show();
+}
+
+void Bookcase::slotHideFilterDialog() {
+  m_quickFilter->blockSignals(false);
+  if(m_filterDlg) {
+    m_filterDlg->delayedDestruct();
+    m_filterDlg = 0;
+  }
+}
+
+void Bookcase::slotUpdateFilter(const QString& text_) {
+  if(m_detailedView) {
+    QString text = text_.stripWhiteSpace();
+    if(text.isEmpty()) {
+      // passing a null pointer just shows everything
+      m_detailedView->setFilter(static_cast<BCFilter*>(0));
+      if(m_filterDlg) {
+        m_filterDlg->slotClear();
+      }
+    } else {
+      BCFilter* filter = new BCFilter(BCFilter::MatchAny);
+      // the the text contains any non-Word characters, assume it's a regexp
+      QRegExp rx(QString::fromLatin1("\\W"));
+      BCFilterRule* rule;
+      if(text.find(rx) < 0) {
+        // an empty attribute string means check every attribute
+        rule = new BCFilterRule(QString::null, text, BCFilterRule::FuncContains);
+      } else {
+        // if it isn't valid, hold off on applying the filter
+        QRegExp tx(text);
+        if(!tx.isValid()) {
+          return;
+        }
+        rule = new BCFilterRule(QString::null, text, BCFilterRule::FuncRegExp);
+      }
+      filter->append(rule);
+      m_detailedView->setFilter(filter);
+      // since filter dialog isn't modal
+      if(m_filterDlg) {
+        m_filterDlg->setFilter(filter);
+      }
+    }
+  }
+}
+
+void Bookcase::slotShowCollectionPropertiesDialog(int id_/*=0*/) {
+  if(!m_collPropDlg) {
+    BCCollection* coll = m_doc->collectionById(id_);
+    m_collPropDlg = new BCCollectionPropDialog(coll, this);
+    connect(m_collPropDlg, SIGNAL(finished()),
+            SLOT(slotHideCollectionPropertiesDialog()));
+    connect(m_collPropDlg, SIGNAL(signalCollectionModified()),
+            m_doc, SLOT(slotSetModified()));
+  } else {
+    KWin::setActiveWindow(m_collPropDlg->winId());
+  }
+  m_collPropDlg->show();
+}
+
+void Bookcase::slotHideCollectionPropertiesDialog() {
+  if(m_collPropDlg) {
+    m_collPropDlg->delayedDestruct();
+    m_collPropDlg = 0;
+  }
+}
+

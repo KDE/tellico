@@ -3,7 +3,7 @@
   <!ENTITY bookcase '<application>Bookcase</application>'>
   <!ENTITY kapp "&bookcase;">
   <!ENTITY email "robby@periapsis.org">
-  <!ENTITY homepage "http://periapsis.org/bookcase/">
+  <!ENTITY homepage "http://www.periapsis.org/bookcase/">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
   
@@ -54,8 +54,8 @@ Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>17/12/2002</date>
-<releaseinfo>0.05.00</releaseinfo>
+<date>01/05/2002</date>
+<releaseinfo>0.06.00</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -129,7 +129,7 @@ patent issues. -->
 -->
 </para>
 
-
+<!--
 <sect1 id="kapp-features">
 <title>More &bookcase; features</title>
 
@@ -150,6 +150,7 @@ the &bookcase; main window. It's not a bug, it's a feature!
 </para>
 
 </sect1>
+-->
 </chapter>
 
 <chapter id="commands">
@@ -164,7 +165,7 @@ or menu bars. -->
 <sect1 id="kapp-mainwindow">
 <title>The main &bookcase; window</title>
 <para></para>
-
+<!--
 <sect2>
 <title>The File Menu</title>
 <para>
@@ -203,7 +204,7 @@ or menu bars. -->
 </para>
 
 </sect2>
-
+-->
 </sect1>
 </chapter>
 
@@ -273,11 +274,11 @@ application work. -->
 <para>How do I group by a property other than the ones listed in the toolbar?</para>
 </question>
 <answer>
-<para>Well, you can't, yet. The mechanics for changing which properties
- allow grouping are mostly all in there already, but there's no UI for
- doing it yet, and it's not guaranteed to work. In some future
- version, I hope to add the capability for adding custom properties,
- and along with that comes modifying the present ones.</para>
+<para>
+Version 0.6 added the ability to customize the collection fields. To allow
+grouping by a field which doesn't allow grouping by default, check the
+"Allow Grouping" box for that particular field in the "Edit Fields" dialog.
+</para>
 </answer>
 </qandaentry>
 
@@ -286,8 +287,8 @@ application work. -->
 <para>How do I rename my book collection?</para>
 </question>
 <answer>
-<para>In the left side column, right-click on the top-level item representing the 
-collection. Select the "Rename Collection" option.</para>
+<para>In the left side column, right-click on the top-level item representing
+the collection. Select the "Rename Collection" option.</para>
 </answer>
 </qandaentry>
 
@@ -295,17 +296,18 @@ collection. Select the "Rename Collection" option.</para>
 <question><para>Why does all that gobbledy-gook show up when I run &bookcase;?</para></question>
 <answer>
 <para>Stuff like:
-   BCGroupView::setGroupAttribute -
-   Bookcase::updateCollectionToolBar
-   BCGroupView::setGroupAttribute - author
-   BCGroupView::locateItem() - adding new collection
-   BCGroupView::slotAddCollection
-  is debug info. At compile time, this can be stopped by compiling with the
-  --disable-debug flag. You might also want to use --enable-final, too, which takes
-  a bit more memory when compiling, but is more efficient when running the application.
-  Or, if &bookcase; is already installed, run kdebugdialog and make sure that
-  "0 (generic)" is unchecked. That turns off debug messages from all generic KDE apps
-  i.e. those not distributed officially by KDE.
+<screen width="40">
+<computeroutput>Bookcase::updateCollectionToolBar</computeroutput>
+<computeroutput>BCGroupView::setGroupAttribute - author</computeroutput>
+<computeroutput>BCGroupView::slotAddCollection</computeroutput>
+</screen>
+is debug info. At compile time, this can be stopped by compiling with the
+--disable-debug flag. You might also want to use --enable-final, too, which
+takes a bit more memory when compiling, but is more efficient when running the application.</para>
+
+<para>Or, if &bookcase; is already installed, run kdebugdialog and make sure
+that "0 (generic)" is unchecked. That turns off debug messages from all
+generic KDE apps i.e. those not distributed officially by KDE.
 </para>
 </answer>
 </qandaentry>
@@ -314,6 +316,23 @@ collection. Select the "Rename Collection" option.</para>
 <question><para>How do I change which columns are shown?</para></question>
 <answer>
 <para>Right-click on the header bar. You can also drag the headers to re-order the columns, and click on them to sort by that field.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question><para>What sort of data can &bookcase; import from a <ulink url="http://bibtexml.sf.net">Bibtexml</ulink> file?</para></question>
+<answer>
+<para>The file should have a namespace of http://bibtexml.sf.net. Only the &lt;bibtex:book&gt; elements are imported; all others are ignored. The import XSL file is very simplified at the moment - the values are not checked for left-over braces or quotation marks from any Bibtex conversion.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question><para>How do I filter by something like the "Read" field?</para></question>
+<answer>
+<para>Internally, the checkbox fields in &bookcase; are saved as "1", so if you'd like to filter to show only the science fiction books which you've not read, for example, then you have two rules. Make sure the "Match all of the following" button is checked. Set the first rule to have "Genre" "contains" "Science Fiction" (no quotes) and the second rule to have "Read" "does no contain" "1" (no quotes).</para>
+
+ <para>Also, the quick filter in the toolbar will match any attribute, and if there is a non-word character, the text is interpeted as a regular expression. So if you quickly want to filter your books to show those by Weber or Bujold, then type "weber|bujold" (no quotes) in the toolbar.
+</para>
 </answer>
 </qandaentry>
 
@@ -344,7 +363,7 @@ Documentation copyright 2001-2002 Robby Stephenson <email>&email;</email>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
-&underFDL;               <!-- FDL: do not remove. Commercial development should -->
+&underFDL; <!-- FDL: do not remove. Commercial development should -->
 <!-- replace this with their copyright and either remove it or re-set this.-->
 
 <!-- Determine which license your application is licensed under, 
@@ -384,9 +403,9 @@ information here.
 -->
 
 <para>
-In order to successfully use &bookcase;, you need KDE 3.x. &bookcase; uses about 5 megs
-of memory to run, but this may vary depending on your platform and
-configuration.
+In order to successfully use &bookcase;, you need KDE 3.x.
+&bookcase; uses about 5 megs of memory to run, but this may vary
+depending on your platform and configuration.
 </para>
 
 <para>
@@ -405,18 +424,19 @@ url="&homepage;">&homepage;</ulink>.
 <title>Compilation and Installation</title>
 
 <para>
-In order to compile and install &bookcase; on your system, type the following in the
-base directory of the archive, where the third step must be done as root if you are
-installing in a system directory:
+In order to compile and install &bookcase; on your system, type the following
+in the base directory of the archive, where the third step must be done as
+root if you are installing in a system directory:
 <screen width="40">
-<prompt>%</prompt> <userinput>./configure</userinput>
+<prompt>%</prompt> <userinput>./configure --enable-final --enable-debug</userinput>
 <prompt>%</prompt> <userinput>make</userinput>
 <prompt>%</prompt> <userinput>make install</userinput>
 </screen>
 </para>
 
-<para>Since &bookcase; uses autoconf and automake you should have not trouble compiling
-it. Should you run into problems please report them to the author.</para>
+<para>Since &bookcase; uses autoconf and automake you should have not trouble
+compiling it. Should you run into problems please report them to the
+author.</para>
 
 </sect1>
 
@@ -433,16 +453,3 @@ sgml-indent-step:0
 sgml-indent-data:nil
 End:
 -->
-
-
-
-
-
-
-
-
-
-
-
-
-

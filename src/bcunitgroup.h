@@ -31,15 +31,15 @@
  * @ref attributeName() would be "author".
  *
  * @author Robby Stephenson
- * @version $Id: bcunitgroup.h,v 1.6 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: bcunitgroup.h,v 1.3 2003/05/02 06:04:21 robby Exp $
  */
+class BCUnitGroup : public QPtrList<BCUnit> {
 
-class BCUnitGroup:public QPtrList<BCUnit> {
 public:
-  BCUnitGroup(const QString& group, const QString& att) : m_group(group),
-    m_attribute(att) {}
-  BCUnitGroup(const BCUnitGroup& group) : QPtrList<BCUnit>(group),
-    m_group(group.groupName()), m_attribute(group.attributeName()) {}
+  BCUnitGroup(const QString& group, const QString& att)
+   : m_group(group), m_attribute(att) {}
+  BCUnitGroup(const BCUnitGroup& group)
+   : QPtrList<BCUnit>(group), m_group(group.groupName()), m_attribute(group.attributeName()) {}
 
   const QString& groupName() const { return m_group; }
   const QString& attributeName() const { return m_attribute; }

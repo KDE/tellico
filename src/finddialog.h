@@ -21,6 +21,7 @@ class Bookcase;
 
 class KComboBox;
 class KHistoryCombo;
+class KPushButton;
 
 class QCheckBox;
 
@@ -30,7 +31,7 @@ class QCheckBox;
  * The find dialog allows the user to search for a string in the document.
  *
  * @author Robby Stephenson
- * @version $Id: finddialog.h,v 1.4 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: finddialog.h,v 1.3 2003/05/02 06:04:21 robby Exp $
  */
 class FindDialog : public KDialogBase  {
 Q_OBJECT
@@ -43,6 +44,12 @@ public:
    * @param name The widget name
    */
   FindDialog(Bookcase* parent, const char* name=0);
+
+  /**
+   * Update the attribute list. This is needed since the parent Bookcase app
+   * doesn't delete the object once it's created. That's to retain the history list.
+   */
+  void updateAttributeList();
 
 public slots:
   /**
@@ -62,6 +69,7 @@ protected slots:
    */
   void slotPatternChanged(const QString& text);
   void showEvent(QShowEvent* e);
+  void slotEditRegExp();
 
 private:
   Bookcase* m_bookcase;
@@ -73,6 +81,9 @@ private:
   QCheckBox* m_asRegExp;
   QCheckBox* m_wholeWords;
   QCheckBox* m_fromBeginning;
+  
+  KPushButton* m_editRegExp;
+  QDialog* m_editRegExpDialog;
 };
 
 #endif

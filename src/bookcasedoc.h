@@ -37,7 +37,7 @@ class QFile;
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: bookcasedoc.h,v 1.43 2003/03/10 02:13:49 robby Exp $
+ * @version $Id: bookcasedoc.h,v 1.3 2003/05/02 06:04:21 robby Exp $
  */
 class BookcaseDoc : public QObject  {
 Q_OBJECT
@@ -52,12 +52,6 @@ public:
    */
   BookcaseDoc(QWidget* parent, const char* name=0);
 
-  /**
-   * Sets the modified flag. If it is true, the signalModified signal is made.
-   *
-   * @param m A boolean indicating the current modified status
-   */
-  void setModified(bool m=true);
   /**
    * Sets the URL associated with the document.
    *
@@ -121,9 +115,10 @@ public:
    *
    * @param url The url
    * @param text The text
+   * @param localeEncoding Whether to use Locale encoding, or UTF-8 by default
    * @return A boolean indicating success
    */
-  bool writeURL(const KURL& url, const QString& text) const;
+  bool writeURL(const KURL& url, const QString& text, bool localeEncoding=false) const;
   /**
    * Closes the document, deleting the contents. The return value is presently always true.
    *
@@ -161,16 +156,7 @@ public:
    * @param format Whether to format the attributes
    * @return The QDomDocument object
    */
-  QDomDocument exportXML(bool format=false);
-  /**
-   * Inserts the data in the document into a DOM ordered form by iterating through
-   * a certain attribute group
-   *
-   * @param dictName The attribute name
-   * @param format Whether to format the attributes
-   * @return The QDomDocument object
-   */
-  QDomDocument exportXML(const QString& dictName, bool format);
+  QDomDocument exportXML(bool format=false) const;
   /**
    * Returns true if there are no units. A doc with an empty collection is still empty.
    */
@@ -207,6 +193,8 @@ public:
   void search(const QString& text, const QString& attTitle, int options);
   
   BCAttributeList uniqueAttributes(int type = 0) const;
+  QString attributeNameByTitle(const QString& title, int type=0);
+  QString attributeTitleByName(const QString& name, int type=0);
   
 public slots:
   /**
@@ -248,6 +236,12 @@ public slots:
    * @param unit A pointer to the unit
    */
   void slotDeleteUnit(BCUnit* unit);
+  /**
+   * Sets the modified flag. If it is true, the signalModified signal is made.
+   *
+   * @param m A boolean indicating the current modified status
+   */
+  void slotSetModified(bool m=true);
 
 protected:
   /**
@@ -255,9 +249,22 @@ protected:
    *
    * @param file The file object
    * @param text The string
+   * @param localeEncoding Whether to use Locale encoding, or UTF-8 by default
    * @return A boolean indicating success
    */
-  bool writeFile(QFile& file, const QString& text) const;
+  bool writeFile(QFile& file, const QString& text, bool localeEncoding) const;
+  void exportCollectionXML(QDomDocument& doc, QDomElement& parent, BCCollection* coll, bool format) const;
+  void exportAttributeXML(QDomDocument& doc, QDomElement& parent, BCAttribute* att) const;
+  void exportUnitXML(QDomDocument& doc, QDomElement& parent, BCUnit* unit, bool format) const;
+  /**
+   * Inserts the data in the document into a DOM ordered form by iterating through
+   * a certain attribute group
+   *
+   * @param dictName The attribute name
+   * @param format Whether to format the attributes
+   * @return The QDomDocument object
+   */
+  QDomDocument exportXML(const QString& dictName, bool format) const;
 
 signals:
   /**
@@ -306,7 +313,13 @@ signals:
    * @param f The fraction, 0 =< f >= 1
    */
   void signalFractionDone(float f);
-  void signalUnitSelected(BCUnit* unit);
+  /**
+   * Signals that a unit should be selected, with an optional highlight string
+   *
+   * @param unit The unit to be selected
+   * @param highlight The string in the unit which should be highlighted
+   */
+  void signalUnitSelected(BCUnit* unit, const QString& highlight);
 
 private:
   BCCollectionList m_collList;

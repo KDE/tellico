@@ -33,7 +33,7 @@
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: songcollection.h,v 1.2 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: songcollection.h,v 1.2 2003/04/01 03:30:41 robby Exp $
  */
 class SongCollection : public BCCollection  {
 Q_OBJECT

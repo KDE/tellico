@@ -21,6 +21,8 @@ class BCCollection;
 class BCUnit;
 class BCUnitGroup;
 
+#include "bcattribute.h"
+
 #include <qstringlist.h>
 #include <qmap.h>
 #include <qstring.h>
@@ -39,7 +41,7 @@ typedef QPtrListIterator<BCUnit> BCUnitListIterator;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bcunit.h,v 1.28 2003/03/10 02:13:49 robby Exp $
+ * @version $Id: bcunit.h,v 1.4 2003/05/03 05:39:08 robby Exp $
  */
 class BCUnit {
 public:
@@ -78,10 +80,11 @@ public:
    * The second time, that lookup isn't necessary.
    *
    * @param name The attribute name
-   * @param flags The attribute flags
+   * @param flag The attribtue's format flag
    * @return The value of the attribute
    */
-  QString attributeFormatted(const QString& name, int flags = 0) const;
+  QString attributeFormatted(const QString& name,
+                             BCAttribute::FormatFlag flag = BCAttribute::FormatPlain) const;
   /**
    * Sets the value of an attribute for the unit. The method first verifies that
    * the value is allowed for that particular key.
@@ -130,11 +133,29 @@ public:
    * Returns a list containing the names of the groups for
    * a certain attribute to which the unit belongs
    *
-   * @param The name of the attribute
+   * @param attName The name of the attribute
    * @return The list of names
    */
-  QStringList groupsByAttributeName(const QString& attName) const;
-  
+  QStringList groupNamesByAttributeName(const QString& attName) const;
+  /**
+   * Returns a list of all the attribtue values contained in the unit.
+   *
+   * @return The list of attribute values
+   */
+  QStringList attributeValues() const;
+  /**
+   * Returns a boolean indicating if the unit's parent collection recognizes
+   * it existence, that is, the parent collection has this unit in its list.
+   *
+   * @return Whether the unit is ownder or not
+   */
+  bool isOwned() const;
+  /**
+   * Removes the formatted value of the attribute from the map. This should be used when
+   * the attributes format flag has changed.
+   */
+  void invalidateFormattedAttributeValue(const QString& name);
+
 private:
   QString m_title;
   int m_id;

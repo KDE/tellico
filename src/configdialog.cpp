@@ -46,7 +46,7 @@
 #include <qhbox.h>
 
 static const int CONFIG_MIN_WIDTH = 600;
-static const int CONFIG_MIN_HEIGHT = 400;
+static const int CONFIG_MIN_HEIGHT = 420;
 
 ConfigDialog::ConfigDialog(BookcaseDoc* doc_, QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(IconList, i18n("Configure Bookcase"), Ok|Apply|Cancel|Default,
@@ -56,49 +56,11 @@ ConfigDialog::ConfigDialog(BookcaseDoc* doc_, QWidget* parent_, const char* name
   //setupBookPage();
   //setupAudioPage();
   //setupVideoPage();
-  /*
-  QWidget* page = addPage(i18n("Books"));
-  QVBoxLayout* topLayout = new QVBoxLayout(page);
-  QLabel* label = new QLabel(i18n("Text"), page);
-  topLayout->addWidget(label);
 
-  KComboBox* box1 = new KComboBox(page);
-  BCCollection* books = BCCollection::Books(-1);
-  BCAttributeListIterator attIt1(books->attributeList());
-  for( ; attIt1.current(); ++attIt1) {
-    if(attIt1.current()->flags() & BCAttribute::AllowGrouped) {
-      box1->insertItem(attIt1.current()->title());
-    }
-  }
-  topLayout->addWidget(box1);
-
-  KComboBox* box2 = new KComboBox(page);
-  BCCollection* videos = BCCollection::Videos(-1);
-  BCAttributeListIterator attIt2(videos->attributeList());
-  for( ; attIt2.current(); ++attIt2) {
-    if(attIt2.current()->flags() & BCAttribute::AllowGrouped) {
-      box2->insertItem(attIt2.current()->title());
-    }
-  }
-  topLayout->addWidget(box2);
-
-  KComboBox* box3 = new KComboBox(page);
-  BCCollection* cds = BCCollection::CDs(-1);
-  BCAttributeListIterator attIt3(cds->attributeList());
-  for( ; attIt3.current(); ++attIt3) {
-    if(attIt3.current()->flags() & BCAttribute::AllowGrouped) {
-      box3->insertItem(attIt3.current()->title());
-    }
-  }
-  topLayout->addWidget(box3);
-
-  delete books;
-  delete videos;
-  delete cds;
-  */
+  updateGeometry();
   QSize s = sizeHint();
-  resize(QSize(QMAX(s.width(), CONFIG_MIN_WIDTH),
-               QMAX(s.height(), CONFIG_MIN_HEIGHT)));
+  resize(QMAX(s.width(), CONFIG_MIN_WIDTH),
+         QMAX(s.height(), CONFIG_MIN_HEIGHT));
 }
 
 void ConfigDialog::slotOk() {
@@ -117,6 +79,7 @@ void ConfigDialog::slotDefault() {
   m_cbShowCount->setChecked(false);
   m_leArticles->setText(BCAttribute::defaultArticleList().join(QString::fromLatin1(", ")));
   m_leSuffixes->setText(BCAttribute::defaultSuffixList().join(QString::fromLatin1(", ")));
+  m_lePrefixes->setText(BCAttribute::defaultSurnamePrefixList().join(QString::fromLatin1(", ")));
 
   m_cbPrintHeaders->setChecked(false);
   m_cbPrintFormatted->setChecked(true);
@@ -129,7 +92,10 @@ void ConfigDialog::slotDefault() {
   QStringList::iterator it;
   for(it = printAttNames.begin(); it != printAttNames.end(); ++it) {
     //TODO:: fix me for multiple collections
-    printAttTitles += m_doc->collectionById(0)->attributeByName(*it)->title();
+    QString title = m_doc->collectionById(0)->attributeTitleByName(*it);
+    if(!title.isEmpty()) {
+      printAttTitles += title;
+    }
   }
   m_lbSelectedFields->clear();
   m_lbSelectedFields->insertStringList(printAttTitles);
@@ -150,7 +116,7 @@ void ConfigDialog::setupGeneralPage() {
   QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("bookcase"), KIcon::User,
                                                 KIcon::SizeMedium);
   QFrame* frame = addPage(i18n("General"), i18n("General Options"), pix);
-  QVBoxLayout* l = new QVBoxLayout(frame, 0, KDialog::spacingHint());
+  QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
   m_cbOpenLastFile = new QCheckBox(i18n("Reopen file at startup"), frame);
   QWhatsThis::add(m_cbOpenLastFile, i18n("If checked, the file that was last open "
@@ -158,25 +124,29 @@ void ConfigDialog::setupGeneralPage() {
   l->addWidget(m_cbOpenLastFile);
   m_cbDict.insert(QString::fromLatin1("openLastFile"), m_cbOpenLastFile);
 
-  m_cbCapitalize = new QCheckBox(i18n("Auto capitalize titles and names"), frame);
-  QWhatsThis::add(m_cbCapitalize, i18n("If checked, titles and names will "
-                                       "be automatically capitalized."));
-  l->addWidget(m_cbCapitalize);
-  m_cbDict.insert(QString::fromLatin1("capitalize"), m_cbCapitalize);
-
-  m_cbFormat = new QCheckBox(i18n("Auto format titles and names"), frame);
-  QWhatsThis::add(m_cbFormat, i18n("If checked, titles and names will "
-                                   "be automatically formatted."));
-  l->addWidget(m_cbFormat);
-  m_cbDict.insert(QString::fromLatin1("format"), m_cbFormat);
-
   m_cbShowCount = new QCheckBox(i18n("Show number of items in group"), frame);
   QWhatsThis::add(m_cbShowCount, i18n("If checked, the number of items in the group "
                                       "will be appended to the group name."));
   l->addWidget(m_cbShowCount);
   m_cbDict.insert(QString::fromLatin1("showCount"), m_cbShowCount);
 
-  QGrid* g1 = new QGrid(2, frame);
+  QVGroupBox* formatGroup = new QVGroupBox(i18n("Formatting Options"), frame);
+  l->addWidget(formatGroup);
+
+  m_cbCapitalize = new QCheckBox(i18n("Auto capitalize titles and names"), formatGroup);
+  QWhatsThis::add(m_cbCapitalize, i18n("If checked, titles and names will "
+                                       "be automatically capitalized."));
+  m_cbDict.insert(QString::fromLatin1("capitalize"), m_cbCapitalize);
+
+  m_cbFormat = new QCheckBox(i18n("Auto format titles and names"), formatGroup);
+  QWhatsThis::add(m_cbFormat, i18n("If checked, titles and names will "
+                                   "be automatically formatted."));
+  m_cbDict.insert(QString::fromLatin1("format"), m_cbFormat);
+  connect(m_cbFormat, SIGNAL(toggled(bool)), this, SLOT(slotToggleFormatted(bool)));
+
+  QGrid* g1 = new QGrid(2, formatGroup);
+  g1->setSpacing(5);
+  
   QLabel* l1 = new QLabel(i18n("Articles:"), g1);
   m_leArticles = new KLineEdit(g1);
   QStringList articles = BCAttribute::articleList();
@@ -200,7 +170,17 @@ void ConfigDialog::setupGeneralPage() {
                            "be used in personal names."));
   QWhatsThis::add(m_leSuffixes, i18n("A comma-separated list of suffixes which might "
                                      "be used in personal names."));
-  l->addWidget(g1);
+
+  QStringList prefixes = BCAttribute::surnamePrefixList();
+  QLabel* l3 = new QLabel(i18n("Surname prefixes:"), g1);
+  m_lePrefixes = new KLineEdit(g1);
+  if(!prefixes.isEmpty()) {
+    m_lePrefixes->setText(prefixes.join(QString::fromLatin1(", ")));
+  }
+  QWhatsThis::add(l3, i18n("A comma-separated list of prefixes which might "
+                           "be used in surnames."));
+  QWhatsThis::add(m_lePrefixes, i18n("A comma-separated list of prefixes which might "
+                                     "be used in surnames."));
 
   // stretch to fill lower area
   l->addStretch(1);
@@ -213,34 +193,38 @@ void ConfigDialog::setupPrintingPage() {
   QFrame* frame = addPage(i18n("Printing"), i18n("Printing Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
   
-  QVGroupBox* optionsGroup = new QVGroupBox(i18n("Formatting Options"), frame);
-  l->addWidget(optionsGroup);
+  QVGroupBox* formatOptions = new QVGroupBox(i18n("Formatting Options"), frame);
+  l->addWidget(formatOptions);
 
-  m_cbPrintFormatted = new QCheckBox(i18n("Format titles and names"), optionsGroup);
+  m_cbPrintFormatted = new QCheckBox(i18n("Format titles and names"), formatOptions);
   QWhatsThis::add(m_cbPrintFormatted, i18n("If checked, titles and names will "
                                            "be automatically formatted."));
   m_cbDict.insert(QString::fromLatin1("printFormatted"), m_cbPrintFormatted);
 
-  m_cbPrintHeaders = new QCheckBox(i18n("Print field headers"), optionsGroup);
+  m_cbPrintHeaders = new QCheckBox(i18n("Print field headers"), formatOptions);
   QWhatsThis::add(m_cbPrintHeaders, i18n("If checked, the field names will be "
                                          "printed as table headers."));
   m_cbDict.insert(QString::fromLatin1("printHeaders"), m_cbPrintHeaders);
 
-  QHBox* groupingBox = new QHBox(optionsGroup);
+  QHGroupBox* groupOptions = new QHGroupBox(i18n("Grouping Options"), frame);
+  l->addWidget(groupOptions);
 
-  m_cbPrintGrouped = new QCheckBox(i18n("Group the books"), groupingBox);
+  m_cbPrintGrouped = new QCheckBox(i18n("Group the books"), groupOptions);
   QWhatsThis::add(m_cbPrintGrouped, i18n("If checked, the books will be grouped under "
                                          "the selected field."));
   m_cbDict.insert(QString::fromLatin1("printGrouped"), m_cbPrintGrouped);
   connect(m_cbPrintGrouped, SIGNAL(toggled(bool)), this, SLOT(slotTogglePrintGrouped(bool)));
 
-  m_cbPrintGroupAttribute = new KComboBox(groupingBox);
+  m_cbPrintGroupAttribute = new KComboBox(groupOptions);
   QWhatsThis::add(m_cbPrintGroupAttribute, i18n("The collection is grouped by this field."));
   
-  BCAttributeList list = m_doc->collectionById(0)->attributeList(BCAttribute::AllowGrouped);
+  // TODO: fix for multiple collections
+  BCAttributeList list = m_doc->collectionById(0)->attributeList();
   BCAttributeListIterator it(list);
   for( ; it.current(); ++it) {
-    m_groupAttributes += it.current()->title();
+    if(it.current()->flags() & BCAttribute::AllowGrouped) {
+      m_groupAttributes += it.current()->title();
+    }
   }
   m_cbPrintGroupAttribute->insertStringList(m_groupAttributes);
 
@@ -322,6 +306,7 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
 
   bool autoFormat = config_->readBoolEntry("Auto Format", true);
   m_cbFormat->setChecked(autoFormat);
+  slotToggleFormatted(autoFormat);
 
   bool showCount = config_->readBoolEntry("Show Group Count", false);
   m_cbShowCount->setChecked(showCount);
@@ -337,7 +322,8 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
 
   bool printGrouped = config_->readBoolEntry("Print Grouped", true);
   m_cbPrintGrouped->setChecked(printGrouped);
-  m_cbPrintGroupAttribute->setEnabled(printGrouped);
+//  m_cbPrintGroupAttribute->setEnabled(printGrouped);
+  slotTogglePrintGrouped(printGrouped);
   
   QString printGroupAttribute = config_->readEntry("Print Grouped Attribute",
                                                    QString::fromLatin1("author"));
@@ -355,7 +341,10 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
   QStringList::iterator it;
   for(it = printAttNames.begin(); it != printAttNames.end(); ++it) {
     //TODO:: fix me for multiple collections
-    printAttTitles += m_doc->collectionById(0)->attributeTitleByName(*it);
+    QString title = m_doc->collectionById(0)->attributeTitleByName(*it);
+    if(!title.isEmpty()) {
+      printAttTitles += title;
+    }
   }
   m_lbSelectedFields->clear();
   m_lbSelectedFields->insertStringList(printAttTitles);
@@ -369,7 +358,6 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
     }
   }
   m_lbAvailableFields->insertStringList(availTitles);
-
 }
 
 void ConfigDialog::saveConfiguration(KConfig* config_) {
@@ -393,20 +381,22 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
                                                      QString::fromLatin1(","));
   QStringList articles = QStringList::split(QString::fromLatin1(","), articlesStr, false);
 // ok for articles to be empty
-//  if(!articles.isEmpty()) {
-    config_->writeEntry("Articles", articles, ',');
-    BCAttribute::setArticleList(articles);
-//  }
+  config_->writeEntry("Articles", articles, ',');
+  BCAttribute::setArticleList(articles);
 
   // there might be spaces before or after the commas in the lineedit box
   QString suffixesStr = m_leSuffixes->text().replace(QRegExp(QString::fromLatin1("\\s*,\\s*")),
                                                      QString::fromLatin1(","));
   QStringList suffixes = QStringList::split(QString::fromLatin1(","), suffixesStr, false);
 // ok to be empty
-//  if(!suffixes.isEmpty()) {
-    config_->writeEntry("Name Suffixes", suffixes, ',');
-    BCAttribute::setSuffixList(suffixes);
-//  }
+  config_->writeEntry("Name Suffixes", suffixes, ',');
+  BCAttribute::setSuffixList(suffixes);
+
+  QString prefixesStr = m_lePrefixes->text().replace(QRegExp(QString::fromLatin1("\\s*,\\s*")),
+                                                     QString::fromLatin1(","));
+  QStringList prefixes = QStringList::split(QString::fromLatin1(","), prefixesStr, false);
+  config_->writeEntry("Surname Prefixes", prefixes, ',');
+  BCAttribute::setSurnamePrefixList(prefixes);
 
   config_->setGroup("Printing");
   config_->writeEntry("Print Field Headers", m_cbPrintHeaders->isChecked());
@@ -507,4 +497,10 @@ void ConfigDialog::slotFieldDown() {
 
 void ConfigDialog::slotTogglePrintGrouped(bool checked_) {
   m_cbPrintGroupAttribute->setEnabled(checked_);
+}
+
+void ConfigDialog::slotToggleFormatted(bool checked_) {
+  m_leArticles->setEnabled(checked_);
+  m_leSuffixes->setEnabled(checked_);
+  m_lePrefixes->setEnabled(checked_);
 }
