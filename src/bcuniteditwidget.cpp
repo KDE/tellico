@@ -81,6 +81,7 @@ void BCUnitEditWidget::slotReset() {
 
   m_modified = false;
   
+  // clearing the tabs deleted all their BCAttributeWidget children
   m_tabs->clear();
   m_widgetDict.setAutoDelete(false);
   m_widgetDict.clear();

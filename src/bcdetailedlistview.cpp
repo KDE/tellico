@@ -19,6 +19,7 @@
 #include "bccollection.h"
 #include "bookcasedoc.h"
 #include "bcfilter.h"
+#include "bcutils.h"
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -85,28 +86,49 @@ void BCDetailedListView::slotAddCollection(BCCollection* coll_) {
 
 //  kdDebug() << "BCDetailedListView::slotAddCollection()" << endl;
 
-  // TODO fix for multiple collections
-  // if columns already exist, check to see if any need to be removed or added
-  if(columns() > 0 && !coll_->attributeTitles().isEmpty()) {
-    QStringList colTitles;
-    for(int i = 0; i < columns(); ++i) {
-      colTitles += columnText(i);
+  if(columns() > 0 && !coll_->attributeList().isEmpty()) {
+    slotReset();
+    while(columns() > 0) {
+      removeColumn(0);
     }
-    QStringList list = coll_->attributeTitles();
-    QStringList::ConstIterator it;
-    for(it = list.begin(); it != list.end(); ++it) {
-      if(colTitles.findIndex(*it) == -1) {
-        slotAddColumn(coll_, coll_->attributeByTitle(*it));
-      }
-      colTitles.remove(*it);
-    }
-    // if colTitles is not now empty, need to remove some columns
-    if(!colTitles.isEmpty()) {
-      for(it = colTitles.begin(); it != colTitles.end(); ++it) {
-        slotRemoveColumn(coll_, *it);
-      }
-    }
+    Bookcase* bookcase = BookcaseAncestor(parent());
+    bookcase->readCollectionOptions(coll_);
   }
+
+  // if columns already exist, check to see if any need to be removed or added
+//  if(columns() > 0 && !coll_->attributeList().isEmpty()) {
+//    QStringList colTitles;
+//    for(int i = 0; i < columns(); ++i) {
+//      colTitles += columnText(i);
+//    }
+//    QStringList colNames = m_titles2Names.values();
+//    QStringList list = coll_->attributeNames();
+//    QStringList::ConstIterator it;
+//    int i = 0;
+//    for(it = list.begin(); it != list.end(); ++it, ++i) {
+//      if(colNames.findIndex(*it) == -1) {
+//        slotAddColumn(coll_, coll_->attributeByName(*it));
+//      } else {
+//        BCAttribute* att = coll_->attributeByTitle(columnText(i));
+//        if(att) {
+//          slotModifyColumn(coll_, coll_->attributeByName(*it), att);
+//        } else {
+//          slotRemoveColumn(coll_, columnText(i));
+//				}
+//      }
+//      kdDebug() << "removing " << *it << endl;
+//      colNames.remove(*it);
+//      colTitles.remove();
+//    }
+//    kdDebug() << "mark" << endl;
+//    // if colTitles is not now empty, need to remove some columns
+//    if(!colNames.isEmpty()) {
+//      for(it = colNames.begin(); it != colNames.end(); ++it) {
+//        kdDebug() << "removing " << *it << endl;
+//        slotRemoveColumn(coll_, m_titles2Names);
+//      }
+//    }
+//  }
   
   QPtrListIterator<BCUnit> unitIt(coll_->unitList());
   for( ; unitIt.current(); ++unitIt) {
@@ -115,10 +137,11 @@ void BCDetailedListView::slotAddCollection(BCCollection* coll_) {
 }
 
 void BCDetailedListView::slotReset() {
-  kdDebug() << "BCDetailedListView::slotReset()" << endl;
+//  kdDebug() << "BCDetailedListView::slotReset()" << endl;
   //clear() does not remove columns
   clear();
   m_selectedUnits.clear();
+  m_headerMenu->clear();
 //  while(columns() > 0) {
 //    removeColumn(0);
 //  }
@@ -319,10 +342,9 @@ void BCDetailedListView::slotClearSelection() {
 void BCDetailedListView::setColumns(BCCollection* coll_, const QStringList& colNames_,
                                     const QValueList<int>& colWidths_) {
 //  kdDebug() << "BCDetailedListView::setColumns() " << endl;
-//  kdDebug() << "Titles: " << colNames_.join(QString::fromLatin1(";")) << endl;
+
 //  QString widths;
-//  QValueList<int>::ConstIterator wIt;
-//  for(wIt = colWidths_.begin(); wIt != colWidths_.end(); ++wIt) {
+//  for(QValueList<int>::ConstIterator wIt = colWidths_.begin(); wIt != colWidths_.end(); ++wIt) {
 //    widths += QString::number(*wIt) + ';';
 //  }
 //  kdDebug() << "Widths: " << widths << endl;
@@ -371,7 +393,8 @@ void BCDetailedListView::setColumns(BCCollection* coll_, const QStringList& colN
     
     if(colWidths_[col] == 0) {
       header()->setResizeEnabled(false, col);
-    } else if(colNames_.findIndex(it.current()->name()) > -1) {
+//    } else if(colNames_.findIndex(it.current()->name()) > -1) {
+    } else {
       m_headerMenu->setItemChecked(col, true);
     }
   }
@@ -553,6 +576,7 @@ void BCDetailedListView::slotAddColumn(BCCollection*, BCAttribute* att_) {
 }
 
 void BCDetailedListView::slotModifyColumn(BCCollection*, BCAttribute* newAtt_, BCAttribute* oldAtt_) {
+//  kdDebug() << "BCDetailedListView::slotModifyColumn() - " << newAtt_->title() << endl;
   int sec; // I need it for after the loop
   for(sec = 0; sec < columns(); ++sec) {
     if(header()->label(sec) == oldAtt_->title()) {

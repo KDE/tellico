@@ -140,7 +140,7 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
       break;
 
     default:
-      kdDebug() << "BCAttributeWidget() - unknown attribute type  ("
+      kdDebug() << "BCAttributeWidget() - unknown attribute type ("
                 << att_->type() << ") named " << att_->name() << endl;
       break;
   } // end switch
@@ -477,7 +477,7 @@ void BCAttributeWidget::openURL(const QString& url_) {
 }
 
 void BCAttributeWidget::updateAttribute(BCAttribute* att_) {
-  m_label->setText(att_->title());
+  m_label->setText(att_->title() + QString::fromLatin1(":"));
   QWhatsThis::add(m_label, att_->description());
   // TODO: fix if the validator might have changed
   if(m_type == BCAttribute::Choice) {

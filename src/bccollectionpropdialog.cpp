@@ -45,13 +45,13 @@ BCListBoxText::BCListBoxText(QListBox* listbox_, const QString& text_)
 void BCListBoxText::setColored(bool colored_) {
   if(m_colored != colored_) {
     m_colored = colored_;
-    listBox()->update();
+    listBox()->triggerUpdate(false);
   }
 }
 
 void BCListBoxText::setText(const QString& text_) {
   QListBoxItem::setText(text_);
-  listBox()->updateGeometry();
+  listBox()->triggerUpdate(true);
 }
 
 // mostly copied from QListBoxText::paint() in Qt 3.1.1
@@ -195,6 +195,7 @@ void BCCollectionPropDialog::slotApply() {
   // now clear copied attributes
   m_copiedAttributes.setAutoDelete(true);
   m_copiedAttributes.clear();
+  m_copiedAttributes.setAutoDelete(false);
   // clear new ones, too
   m_newAttributes.clear();
 

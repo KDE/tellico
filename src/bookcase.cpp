@@ -386,7 +386,7 @@ void Bookcase::initConnections() {
 void Bookcase::slotInitFileOpen() {
   // check to see if most recent file should be opened
   m_config->setGroup("General Options");
-  if(m_config->readBoolEntry("Reopen Last File", false)
+  if(m_config->readBoolEntry("Reopen Last File", true)
       && !m_config->readEntry("Last Open File").isEmpty()) {
     KURL lastFile = KURL(m_config->readEntry("Last Open File"));
     slotFileOpen(lastFile);
@@ -428,14 +428,16 @@ void Bookcase::saveOptions() {
 }
 
 void Bookcase::saveCollectionOptions(BCCollection* coll_) {
-//  kdDebug() << "Bookcase::saveCollectionOptions()" << endl;
-  if(!coll_) {
+  if(!coll_ || coll_->unitList().isEmpty()) {
     return;
   }
 
   m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->unitName()));
-  QString groupName = coll_->unitGroups()[m_unitGrouping->currentItem()];
-  m_config->writeEntry("Group By", groupName);
+
+  if(!coll_->unitGroups().isEmpty()) {
+    QString groupName = coll_->unitGroups()[m_unitGrouping->currentItem()];
+    m_config->writeEntry("Group By", groupName);
+  }
     
   QValueList<int> widths, order;
   for(int i = 0; i < m_detailedView->columns(); ++i) {
@@ -451,6 +453,12 @@ void Bookcase::saveCollectionOptions(BCCollection* coll_) {
   m_config->writeEntry("SortColumn", m_detailedView->columnSorted());
   m_config->writeEntry("SortAscending", m_detailedView->ascendingSort());
   m_config->writeEntry("PrevSortColumn", m_detailedView->prevSortedColumn());
+
+//  QString temp;
+//  for(QValueList<int>::ConstIterator wIt = widths.begin(); wIt != widths.end(); ++wIt) {
+//    temp += QString::number(*wIt) + ';';
+//  }
+//  kdDebug() << "Saved Widths: " << temp << endl;
 
   QStringList colTitles = m_detailedView->columnTitles();
   QStringList colNames;
@@ -548,48 +556,55 @@ void Bookcase::readOptions() {
     // make sure the right combo element is selected
     slotUpdateCollectionToolBar(coll);
 
-    QStringList columnNames = m_config->readListEntry("ColumnNames");
-    if(columnNames.isEmpty()) {
-      columnNames = BookCollection::defaultViewAttributes();
-    }
+    readCollectionOptions(coll);
+  }
+}
 
-    // this block compensates for the chance that the user added an attribute and it wasn't
-    // written to the widths. Also compensates for 0.5.x to 0.6.x column layout changes
-    QValueList<int> colWidths = m_config->readIntListEntry("ColumnWidths");
-    if(colWidths.empty()) {
-      for(unsigned i = 0; i < columnNames.count(); ++i) {
-        colWidths.append(-1); // automatic width
+void Bookcase::readCollectionOptions(BCCollection* coll_) {
+  m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->unitName()));
+
+  QStringList columnNames = m_config->readListEntry("ColumnNames");
+  if(columnNames.isEmpty()) {
+//    kdDebug() << "empty column names" << endl;
+    columnNames = BookCollection::defaultViewAttributes();
+  }
+
+  // this block compensates for the chance that the user added an attribute and it wasn't
+  // written to the widths. Also compensates for 0.5.x to 0.6.x column layout changes
+  QValueList<int> colWidths = m_config->readIntListEntry("ColumnWidths");
+  if(colWidths.empty()) {
+    for(unsigned i = 0; i < columnNames.count(); ++i) {
+      colWidths.append(-1); // automatic width
+    }
+  }
+  if(colWidths.count() < coll_->attributeList().count()) {
+    QValueList<int> newWidths;
+    BCAttributeListIterator it(coll_->attributeList());
+    for( ; it.current(); ++it) {
+      if(columnNames.contains(it.current()->name()) && colWidths.count() > 0) {
+        newWidths.push_back(colWidths[0]);
+        colWidths.pop_front();
+      } else {
+        newWidths.push_back(0);
       }
     }
-    if(colWidths.count() < coll->attributeList().count()) {
-      QValueList<int> newWidths;
-      BCAttributeListIterator it(coll->attributeList());
-      for( ; it.current(); ++it) {
-        if(columnNames.contains(it.current()->name()) && colWidths.count() > 0) {
-          newWidths.push_back(colWidths[0]);
-          colWidths.pop_front();
-        } else {
-          newWidths.push_back(0);
-        }
-      }
-      colWidths = newWidths;
-    }
-    m_detailedView->setColumns(coll, columnNames, colWidths);
+    colWidths = newWidths;
+  }
+  m_detailedView->setColumns(coll_, columnNames, colWidths);
 
-    QValueList<int> colOrder = m_config->readIntListEntry("ColumnOrder");
-    int i = 0;
-    for(QValueList<int>::ConstIterator it = colOrder.begin(); it != colOrder.end(); ++it) {
-      m_detailedView->header()->moveSection(i++, *it);
-    }
-    
-    if(m_config->hasKey("SortColumn")) {
-      int sortCol = m_config->readNumEntry("SortColumn", 0);
-      bool sortAsc = m_config->readBoolEntry("SortAscending", true);
-      m_detailedView->setSorting(sortCol, sortAsc);
-      // has to be after setSorting()
-      int prevSortCol = m_config->readNumEntry("PrevSortColumn", -1);
-      m_detailedView->setPrevSortedColumn(prevSortCol);
-    }
+  QValueList<int> colOrder = m_config->readIntListEntry("ColumnOrder");
+  int i = 0;
+  for(QValueList<int>::ConstIterator it = colOrder.begin(); it != colOrder.end(); ++it) {
+    m_detailedView->header()->moveSection(i++, *it);
+  }
+
+  if(m_config->hasKey("SortColumn")) {
+    int sortCol = m_config->readNumEntry("SortColumn", 0);
+    bool sortAsc = m_config->readBoolEntry("SortAscending", true);
+    m_detailedView->setSorting(sortCol, sortAsc);
+    // has to be after setSorting()
+    int prevSortCol = m_config->readNumEntry("PrevSortColumn", -1);
+    m_detailedView->setPrevSortedColumn(prevSortCol);
   }
 }
 
@@ -715,6 +730,7 @@ bool Bookcase::openURL(const KURL& url_) {
   if(!m_editWidget->queryModified()) {
     return false;
   }
+  
 //  kdDebug() <<  "Bookcase::openURL() - " << url_.url() << endl;
  // since a lot of updates will happen with a large file, disable them
   m_detailedView->setUpdatesEnabled(false);
@@ -736,6 +752,8 @@ bool Bookcase::openURL(const KURL& url_) {
   m_detailedView->setSorting(dvSortCol, dvSortAsc);
   m_detailedView->setPrevSortedColumn(dvPrevSortCol);
   m_groupView->setSorting(0, true);
+  m_groupView->triggerUpdate();
+  m_detailedView->triggerUpdate();
 
   if(success) {
     slotEnableOpenedActions(true);
@@ -1073,11 +1091,13 @@ void Bookcase::slotUpdateCollectionToolBar(BCCollection* coll_/*=0*/) {
   QString current = m_groupView->collGroupBy(coll_->unitName());
   if(current.isEmpty() || !coll_->unitGroups().contains(current)) {
     current = coll_->defaultGroupAttribute();
-    m_groupView->setGroupAttribute(coll_, current);
+    if(coll_->attributeByName(current)) {
+      m_groupView->setGroupAttribute(coll_, current);
+    }
   }
 
   QStringList groupTitles;
-  int index = 0;
+  int index = -1;
   QStringList groups = coll_->unitGroups();
   QStringList::ConstIterator groupIt = groups.begin();
   for(int i = 0; groupIt != groups.end(); ++groupIt, ++i) {
@@ -1091,7 +1111,9 @@ void Bookcase::slotUpdateCollectionToolBar(BCCollection* coll_/*=0*/) {
 //  if(groupTitles != m_unitGrouping->items()) {
     m_unitGrouping->setItems(groupTitles);
 //  }
-  m_unitGrouping->setCurrentItem(index);
+  if(index > -1) {
+    m_unitGrouping->setCurrentItem(index);
+  }
 //  kdDebug() << "Bookcase::updateCollectionToolBar - setting index " << index << " for " << groupTitles[index] << endl;
 }
 

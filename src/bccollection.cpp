@@ -125,6 +125,7 @@ bool BCCollection::modifyAttribute(BCAttribute* newAtt) {
     return false;
   }
 //  kdDebug() << "BCCollection::modifyAttribute()" << endl;
+// the attribute name never changes
   BCAttribute* oldAtt = attributeByName(newAtt->name());
   if(!oldAtt) {
     kdDebug() << "BCCollection::modifyAttribute() - no attribute named " << newAtt->title() << endl;
@@ -356,7 +357,7 @@ const QString& BCCollection::attributeNameByTitle(const QString& title_) const {
 const QString& BCCollection::attributeTitleByName(const QString& name_) const {
   BCAttribute* att = attributeByName(name_);
   if(!att) {
-    kdWarning() << "BCCollection::attributeTitleByName() - no attribute named " << name_ << endl;
+//    kdWarning() << "BCCollection::attributeTitleByName() - no attribute named " << name_ << endl;
     return QString::null;
   }
   return att->title();

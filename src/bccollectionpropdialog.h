@@ -40,7 +40,7 @@ class QPainter;
  * and the font color can be changed
  *
  * @author Robby Stephenson
- * @version $Id: bccollectionpropdialog.h,v 1.2.2.2 2003/05/26 01:07:49 robby Exp $
+ * @version $Id: bccollectionpropdialog.h,v 1.2.2.3 2003/07/23 01:31:12 robby Exp $
  */
 class BCListBoxText : public QListBoxText {
 public:
@@ -58,7 +58,7 @@ private:
 
 /**
  * @author Robby Stephenson
- * @version $Id: bccollectionpropdialog.h,v 1.2.2.2 2003/05/26 01:07:49 robby Exp $
+ * @version $Id: bccollectionpropdialog.h,v 1.2.2.3 2003/07/23 01:31:12 robby Exp $
  */
 class BCCollectionPropDialog : public KDialogBase {
 Q_OBJECT
@@ -114,8 +114,6 @@ private:
   QCheckBox* m_complete;
   QCheckBox* m_multiple;
   QCheckBox* m_grouped;
-
-  BCCollection* m_defaultCollection;
 };
 
 #endif

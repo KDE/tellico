@@ -1,10 +1,24 @@
+2003-08-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with list view not retaining correct visible columns after save.
+	* Fixed bug with reopening last saved file.
+	* Released Bookcase 0.6.6
+
+2003-08-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Added French translation from RNB.
+
+2003-07-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug in "Edit Fields" dialog.
+
 2003-07-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase 0.6.5
 
 2003-07-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Estonian translation from Toomas Nigola
+	* Added Estonian translation from Toomas Nigola.
 
 2003-07-07  Robby Stephenson  <robby@periapsis.org>
 

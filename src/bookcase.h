@@ -87,6 +87,7 @@ public:
    * @return The item pointer
    */
   BCUnitItem* selectedOrFirstItem();
+  void readCollectionOptions(BCCollection* coll);
 
 public slots:
   /**

@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.6.5
+%define version 0.6.6
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
@@ -38,8 +38,8 @@ mkdir -p $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/pics
 #mv $RPM_BUILD_ROOT/usr/bin/i586-mandrake-linux-gnu-bookcase $RPM_BUILD_ROOT/usr/bin/bookcase
 
 (cd $RPM_BUILD_ROOT
-mkdir -p ./usr/lib/menu
-cat > ./usr/lib/menu/%{name} <<EOF
+mkdir -p ./%{_menudir}
+cat > ./%{_menudir}/%{name} <<EOF
 ?package(%{name}):\
 command="%_bindir/bookcase"\
 icon="%{name}.png"\
@@ -75,6 +75,9 @@ EOF
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Aug 16 2003 Robby Stephenson <robby@periapsis.org> 0.6.6-1rls
+- Version 0.6.6
+
 * Mon Jul 21 2003 Robby Stephenson <robby@periapsis.org> 0.6.5-1rls
 - Version 0.6.5
 

@@ -229,7 +229,7 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
        QString name = attelems.item(0).toElement().attribute(QString::fromLatin1("name"));
        addAttributes = (name != QString::fromLatin1("title"));
     }
-
+    
     BCCollection* coll = 0;
     if(unit == QString::fromLatin1("book")) {
       coll = new BookCollection(collectionCount(), addAttributes);
@@ -241,6 +241,8 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
       coll = BCCollection::Videos(collectionCount(), addAttributes);
 #endif
     } else {
+      kdWarning() << "BookcaseDoc::loadDomDocument() - unsupported collection type!" << endl;
+      kdWarning() << "Bookcase will probably crash at some point!" << endl;
       coll = new BCCollection(collectionCount(), title, unit, unitTitle);
     }
 
@@ -304,6 +306,9 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
       // before syntax version 3, the only custom attribute would have been bibtex-id
       if(syntaxVersion > 2) {
         coll->addAttribute(att);
+        if(coll->defaultGroupAttribute().isEmpty() && att->flags() & BCAttribute::AllowMultiple) {
+          coll->setDefaultGroupAttribute(att->name());
+        }
       } else if(att->name() == QString::fromLatin1("bibtex-id")) {
         att->setFlags(0); // I changed the enum numbers. A no-no, I know, but I did it anyway
         coll->addAttribute(att);
