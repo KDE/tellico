@@ -68,12 +68,7 @@
    body {
         margin: 4px;
         padding: 0px;
-<!--     
-        font-family: sans-serif;
-        color: <xsl:value-of select="$fgcolor"/>;
-        background-color: <xsl:value-of select="$bgcolor"/>;
--->
-        font-family: <xsl:value-of select="$font"/>;
+        font-family: "<xsl:value-of select="$font"/>";
         color: #000;
         background-color: #fff;
         font-size: 1em;

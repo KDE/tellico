@@ -1859,7 +1859,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=bookcase
- VERSION=0.8.1
+ VERSION=0.8.2
 
 
 cat >>confdefs.h <<_ACEOF

@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.8.1
+%define version 0.8.2
 %define release 1rls
 %define iconname %{name}.png
 %define __libtoolize /bin/true
@@ -14,7 +14,7 @@ Source: %{name}-%{version}.tar.gz
 URL: http://www.periapsis.org/bookcase/
 Requires: kdebase libxslt1 >= 1.0.19
 BuildRequires: kdelibs-devel >= 3.1 libxslt-devel >= 1.0.19
-BuildRequires: ImageMagick
+BuildRequires: ImageMagick libart_lgpl-devel
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
@@ -83,6 +83,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
+* Wed Feb  4 2004 Robby Stephenson <robby@periapsis.org> 0.8.2-1rls
+- Version 0.8.2
+
 * Tue Feb  3 2004 Robby Stephenson <robby@periapsis.org> 0.8.1-1rls
 - Version 0.8.1
 

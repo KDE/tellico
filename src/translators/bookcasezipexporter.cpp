@@ -41,14 +41,14 @@ QByteArray BookcaseZipExporter::data(bool formatFields_) {
   const Data::Collection* coll = collection();
   BookcaseXMLExporter exp(coll, entryList());
   exp.exportImages(false);
-  QString xml = exp.text(formatFields_, true);
+  QCString xml = exp.text(formatFields_, true).utf8();
 
   QByteArray data;
   QBuffer buf(data);
 
   KZip zip(&buf);
   zip.open(IO_WriteOnly);
-  zip.writeFile(QString::fromLatin1("bookcase.xml"), QString::null, QString::null, xml.length(), xml.utf8());
+  zip.writeFile(QString::fromLatin1("bookcase.xml"), QString::null, QString::null, xml.length(), xml);
 
   QStringList imageFields;
   for(Data::FieldListIterator it(coll->fieldList()); it.current(); ++it) {

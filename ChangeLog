@@ -1,3 +1,8 @@
+2004-02-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed file truncation for file with some Unicode characters.
+	* Released Bookcase 0.8.2.
+
 2004-02-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase 0.8.1.
