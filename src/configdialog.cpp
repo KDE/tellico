@@ -47,7 +47,7 @@ static const int CONFIG_MIN_HEIGHT = 420;
 using Bookcase::ConfigDialog;
 
 ConfigDialog::ConfigDialog(QWidget* parent_, const char* name_/*=0*/)
-    : KDialogBase(IconList, i18n("Configure Bookcase"), Help|Ok|Apply|Cancel|Default,
+    : KDialogBase(IconList, i18n("Configure Tellico"), Help|Ok|Apply|Cancel|Default,
                   Ok, parent_, name_, true, false) {
   setupGeneralPage();
   setupPrintingPage();
@@ -139,7 +139,7 @@ void ConfigDialog::slotDefault() {
 }
 
 void ConfigDialog::setupGeneralPage() {
-  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("bookcase"), KIcon::User);
+  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("tellico"), KIcon::User);
   QFrame* frame = addPage(i18n("General"), i18n("General Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 

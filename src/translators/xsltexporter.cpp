@@ -56,7 +56,7 @@ QWidget* XSLTExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   box->setSpacing(4);
   (void) new QLabel(i18n("XSLT File:"), box);
   m_URLRequester = new KURLRequester(box);
-  QWhatsThis::add(m_URLRequester, i18n("Choose the XSLT file used to transform the Bookcase XML data."));
+  QWhatsThis::add(m_URLRequester, i18n("Choose the XSLT file used to transform the Tellico XML data."));
 
   l->addStretch(1);
   return m_widget;

@@ -1,9 +1,9 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
-bin_PROGRAMS = bookcase
+bin_PROGRAMS = tellico
 
 ## INCLUDES were found outside kdevelop specific part
 
-bookcase_SOURCES = \
+tellico_SOURCES = \
 entryview.cpp collection.cpp mainwindow.cpp \
 controller.cpp kwidgetlister.cpp isbnvalidator.cpp \
 finddialog.cpp configdialog.cpp main.cpp image.cpp \
@@ -17,7 +17,7 @@ stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp \
 kernel.cpp viewstack.cpp entryiconview.cpp \
 datewidget.cpp multiselectionlistview.cpp
 
-bookcase_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
+tellico_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
         ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
         ./translators/pilotdb/libflatfile/liblibflatfile.a \
         ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
@@ -25,12 +25,12 @@ bookcase_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
         $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(CDDA_LIBS)
 
 if !USE_LIBBTPARSE
-  bookcase_LDADD += ./translators/btparse/libbtparse.a
+  tellico_LDADD += ./translators/btparse/libbtparse.a
 endif
 
 SUBDIRS = collections translators fetch tests
 
-EXTRA_DIST = bookcaseui.rc \
+EXTRA_DIST = tellicoui.rc \
 collection.cpp              entryview.h          imagefactory.h \
 collectionfactory.cpp       exportdialog.cpp     image.h \
 collectionfactory.h         exportdialog.h       imagewidget.cpp \
@@ -90,15 +90,15 @@ KDE_OPTIONS = noautodist
 CLEANFILES = *~ *.loT
 
 # the library search path.
-bookcase_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH)
+tellico_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH)
 
-rcdir = $(kde_datadir)/bookcase
-rc_DATA = bookcaseui.rc
+rcdir = $(kde_datadir)/tellico
+rc_DATA = tellicoui.rc
 
 messages: rc.cpp
 	LIST=`find . -name \*.h -o -name \*.hh -o -name \*.H -o -name \*.hxx -o -name \*.hpp -o -name \*.cpp -o -name \*.cc -o -name \*.cxx -o -name \*.ecpp -o -name \*.C`; \
 	if test -n "$$LIST"; then \
-          $(XGETTEXT) $$LIST -o $(podir)/bookcase.pot; \
+          $(XGETTEXT) $$LIST -o $(podir)/tellico.pot; \
         fi
 
 #include ../admin/Doxyfile.am

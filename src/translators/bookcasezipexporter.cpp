@@ -26,11 +26,11 @@
 using Bookcase::Export::BookcaseZipExporter;
 
 QString BookcaseZipExporter::formatString() const {
-  return i18n("Bookcase Zip File");
+  return i18n("Tellico Zip File");
 }
 
 QString BookcaseZipExporter::fileFilter() const {
-  return i18n("*.bc|Bookcase files(*.bc)") + QChar('\n') + i18n("*|All files");
+  return i18n("*.bc|Tellico files(*.bc)") + QChar('\n') + i18n("*|All files");
 }
 
 QByteArray BookcaseZipExporter::data(bool formatFields_) {

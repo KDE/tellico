@@ -5,7 +5,7 @@ EXTRA_DIST = Default.xsl Video.xsl Album.xsl Fancy.xsl Compact.xsl
 
 ####### kdevelop will overwrite this part!!! (end)############
 
-xsldir = $(kde_datadir)/bookcase/entry-templates
+xsldir = $(kde_datadir)/tellico/entry-templates
 xsl_DATA = Default.xsl Video.xsl Album.xsl Fancy.xsl Compact.xsl
 
 KDE_OPTIONS = noautodist

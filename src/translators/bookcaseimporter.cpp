@@ -107,13 +107,13 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   if(syntaxVersion > Export::BookcaseXMLExporter::syntaxVersion) {
     if(!url().isEmpty()) {
       QString str = i18n(loadError).arg(url().fileName()) + QChar('\n');
-      str += i18n("It is from a future version of Bookcase.");
+      str += i18n("It is from a future version of Tellico.");
       setStatusMessage(str);
     }
     return;
   } else if(syntaxVersion < Export::BookcaseXMLExporter::syntaxVersion) {
-    QString str = i18n("Bookcase is converting the file to a more recent document format. "
-                       "Information loss may occur if an older version of Bookcase is used "
+    QString str = i18n("Tellico is converting the file to a more recent document format. "
+                       "Information loss may occur if an older version of Tellico is used "
                        "to read this file in the future.");
     kdDebug() << str <<  endl;
 //    setStatusMessage(str);

@@ -233,7 +233,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
 
   handler.addStringParam("sort-title", encodeUTF8_ ? sortString.utf8() : sortString.local8Bit());
 
-  QString pageTitle = QString::fromLatin1("Bookcase: ") + coll->title();
+  QString pageTitle = QString::fromLatin1("Tellico: ") + coll->title();
   pageTitle += QString::fromLatin1(" ") + sortString;
   handler.addStringParam("page-title", encodeUTF8_ ? pageTitle.utf8() : pageTitle.local8Bit());
 

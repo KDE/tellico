@@ -262,9 +262,9 @@ x_includes = @x_includes@
 x_libraries = @x_libraries@
 
 ####### kdevelop will overwrite this part!!! (begin)##########
-bin_PROGRAMS = bookcase
+bin_PROGRAMS = tellico
 
-bookcase_SOURCES = \
+tellico_SOURCES = \
 entryview.cpp collection.cpp mainwindow.cpp \
 controller.cpp kwidgetlister.cpp isbnvalidator.cpp \
 finddialog.cpp configdialog.cpp main.cpp image.cpp \
@@ -279,7 +279,7 @@ kernel.cpp viewstack.cpp entryiconview.cpp \
 datewidget.cpp multiselectionlistview.cpp
 
 
-bookcase_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
+tellico_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
         ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
         ./translators/pilotdb/libflatfile/liblibflatfile.a \
         ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
@@ -289,7 +289,7 @@ $(am__append_1)
 
 SUBDIRS = collections translators fetch tests
 
-EXTRA_DIST = bookcaseui.rc \
+EXTRA_DIST = tellicoui.rc \
 collection.cpp              entryview.h          imagefactory.h \
 collectionfactory.cpp       exportdialog.cpp     image.h \
 collectionfactory.h         exportdialog.h       imagewidget.cpp \
@@ -350,18 +350,18 @@ KDE_OPTIONS = noautodist
 CLEANFILES = *~ *.loT
 
 # the library search path.
-bookcase_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH)
+tellico_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH)
 
-rcdir = $(kde_datadir)/bookcase
-rc_DATA = bookcaseui.rc
+rcdir = $(kde_datadir)/tellico
+rc_DATA = tellicoui.rc
 subdir = src
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
-bin_PROGRAMS = bookcase$(EXEEXT)
+bin_PROGRAMS = tellico$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_bookcase_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
+am_tellico_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
 	mainwindow.$(OBJEXT) controller.$(OBJEXT) \
 	kwidgetlister.$(OBJEXT) isbnvalidator.$(OBJEXT) \
 	finddialog.$(OBJEXT) configdialog.$(OBJEXT) main.$(OBJEXT) \
@@ -377,10 +377,10 @@ am_bookcase_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
 	entryeditdialog.$(OBJEXT) fetchdialog.$(OBJEXT) \
 	kernel.$(OBJEXT) viewstack.$(OBJEXT) entryiconview.$(OBJEXT) \
 	datewidget.$(OBJEXT) multiselectionlistview.$(OBJEXT)
-#>- bookcase_OBJECTS = $(am_bookcase_OBJECTS)
+#>- tellico_OBJECTS = $(am_tellico_OBJECTS)
 #>+ 19
-bookcase_final_OBJECTS = bookcase.all_cpp.o 
-bookcase_nofinal_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
+tellico_final_OBJECTS = tellico.all_cpp.o 
+tellico_nofinal_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
 	mainwindow.$(OBJEXT) controller.$(OBJEXT) \
 	kwidgetlister.$(OBJEXT) isbnvalidator.$(OBJEXT) \
 	finddialog.$(OBJEXT) configdialog.$(OBJEXT) main.$(OBJEXT) \
@@ -396,15 +396,15 @@ bookcase_nofinal_OBJECTS = entryview.$(OBJEXT) collection.$(OBJEXT) \
 	entryeditdialog.$(OBJEXT) fetchdialog.$(OBJEXT) \
 	kernel.$(OBJEXT) viewstack.$(OBJEXT) entryiconview.$(OBJEXT) \
 	datewidget.$(OBJEXT) multiselectionlistview.$(OBJEXT)
-@KDE_USE_FINAL_FALSE@bookcase_OBJECTS = $(bookcase_nofinal_OBJECTS)
-@KDE_USE_FINAL_TRUE@bookcase_OBJECTS = $(bookcase_final_OBJECTS)
-@USE_LIBBTPARSE_TRUE@bookcase_DEPENDENCIES = ./fetch/libfetch.a \
+@KDE_USE_FINAL_FALSE@tellico_OBJECTS = $(tellico_nofinal_OBJECTS)
+@KDE_USE_FINAL_TRUE@tellico_OBJECTS = $(tellico_final_OBJECTS)
+@USE_LIBBTPARSE_TRUE@tellico_DEPENDENCIES = ./fetch/libfetch.a \
 @USE_LIBBTPARSE_TRUE@	./collections/libcollections.a \
 @USE_LIBBTPARSE_TRUE@	./translators/libtranslators.a \
 @USE_LIBBTPARSE_TRUE@	./translators/pilotdb/libpilotdb.a \
 @USE_LIBBTPARSE_TRUE@	./translators/pilotdb/libflatfile/liblibflatfile.a \
 @USE_LIBBTPARSE_TRUE@	./translators/pilotdb/libpalm/liblibpalm.a
-@USE_LIBBTPARSE_FALSE@bookcase_DEPENDENCIES = ./fetch/libfetch.a \
+@USE_LIBBTPARSE_FALSE@tellico_DEPENDENCIES = ./fetch/libfetch.a \
 @USE_LIBBTPARSE_FALSE@	./collections/libcollections.a \
 @USE_LIBBTPARSE_FALSE@	./translators/libtranslators.a \
 @USE_LIBBTPARSE_FALSE@	./translators/pilotdb/libpilotdb.a \
@@ -443,7 +443,7 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@	./$(DEPDIR)/stringmapdialog.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/tabcontrol.Po ./$(DEPDIR)/viewstack.Po
 #>+ 54
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =   $(DEPDIR)/bookcase.all_cpp.P ./$(DEPDIR)/collection.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =   $(DEPDIR)/tellico.all_cpp.P ./$(DEPDIR)/collection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/collectionfactory.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/collectionfieldsdialog.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
@@ -515,7 +515,7 @@ CXXLD = $(CXX)
 #>+ 2
 CXXLINK = $(LIBTOOL) --mode=link --tag=CXX $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(KDE_CXXFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(bookcase_SOURCES)
+DIST_SOURCES = $(tellico_SOURCES)
 DATA = $(rc_DATA)
 
 
@@ -532,7 +532,7 @@ RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
 	check-recursive installcheck-recursive nmcheck-recursive bcheck-recursive
 DIST_COMMON = Makefile.am Makefile.in
 DIST_SUBDIRS = $(SUBDIRS)
-SOURCES = $(bookcase_SOURCES)
+SOURCES = $(tellico_SOURCES)
 
 #>- all: all-recursive
 #>+ 1
@@ -578,9 +578,9 @@ clean-binPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-bookcase$(EXEEXT): $(bookcase_OBJECTS) $(bookcase_DEPENDENCIES) 
-	@rm -f bookcase$(EXEEXT)
-	$(CXXLINK) $(bookcase_LDFLAGS) $(bookcase_OBJECTS) $(bookcase_LDADD) $(LIBS)
+tellico$(EXEEXT): $(tellico_OBJECTS) $(tellico_DEPENDENCIES) 
+	@rm -f tellico$(EXEEXT)
+	$(CXXLINK) $(tellico_LDFLAGS) $(tellico_OBJECTS) $(tellico_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -960,7 +960,7 @@ uninstall-info: uninstall-info-recursive
 messages: rc.cpp
 	LIST=`find . -name \*.h -o -name \*.hh -o -name \*.H -o -name \*.hxx -o -name \*.hpp -o -name \*.cpp -o -name \*.cc -o -name \*.cxx -o -name \*.ecpp -o -name \*.C`; \
 	if test -n "$$LIST"; then \
-          $(XGETTEXT) $$LIST -o $(podir)/bookcase.pot; \
+          $(XGETTEXT) $$LIST -o $(podir)/tellico.pot; \
         fi
 
 #include ../admin/Doxyfile.am
@@ -1195,36 +1195,36 @@ bcheck-am:
 
 
 #>+ 11
-bookcase.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/entryview.cpp $(srcdir)/collection.cpp $(srcdir)/mainwindow.cpp $(srcdir)/controller.cpp $(srcdir)/kwidgetlister.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/finddialog.cpp $(srcdir)/configdialog.cpp $(srcdir)/main.cpp $(srcdir)/image.cpp $(srcdir)/collectionfactory.cpp $(srcdir)/collectionfieldsdialog.cpp $(srcdir)/detailedlistview.cpp $(srcdir)/document.cpp $(srcdir)/entry.cpp $(srcdir)/entryitem.cpp $(srcdir)/exportdialog.cpp $(srcdir)/field.cpp $(srcdir)/fieldwidget.cpp $(srcdir)/filehandler.cpp $(srcdir)/filter.cpp $(srcdir)/filterdialog.cpp $(srcdir)/groupview.cpp $(srcdir)/importdialog.cpp $(srcdir)/labelaction.cpp $(srcdir)/tabcontrol.cpp $(srcdir)/imagewidget.cpp $(srcdir)/fieldcompletion.cpp $(srcdir)/imagefactory.cpp $(srcdir)/stringmapdialog.cpp $(srcdir)/entryeditdialog.cpp $(srcdir)/fetchdialog.cpp $(srcdir)/kernel.cpp $(srcdir)/viewstack.cpp $(srcdir)/entryiconview.cpp $(srcdir)/datewidget.cpp $(srcdir)/multiselectionlistview.cpp  configdialog.moc document.moc entryiconview.moc datewidget.moc exportdialog.moc collection.moc imagewidget.moc finddialog.moc tabcontrol.moc fieldcompletion.moc controller.moc kernel.moc groupview.moc detailedlistview.moc importdialog.moc fetchdialog.moc labelaction.moc collectionfieldsdialog.moc multiselectionlistview.moc entryeditdialog.moc mainwindow.moc entryview.moc viewstack.moc filterdialog.moc kwidgetlister.moc fieldwidget.moc stringmapdialog.moc
-	@echo 'creating bookcase.all_cpp.cpp ...'; \
-	rm -f bookcase.all_cpp.files bookcase.all_cpp.final; \
-	echo "#define KDE_USE_FINAL 1" >> bookcase.all_cpp.final; \
+tellico.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/entryview.cpp $(srcdir)/collection.cpp $(srcdir)/mainwindow.cpp $(srcdir)/controller.cpp $(srcdir)/kwidgetlister.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/finddialog.cpp $(srcdir)/configdialog.cpp $(srcdir)/main.cpp $(srcdir)/image.cpp $(srcdir)/collectionfactory.cpp $(srcdir)/collectionfieldsdialog.cpp $(srcdir)/detailedlistview.cpp $(srcdir)/document.cpp $(srcdir)/entry.cpp $(srcdir)/entryitem.cpp $(srcdir)/exportdialog.cpp $(srcdir)/field.cpp $(srcdir)/fieldwidget.cpp $(srcdir)/filehandler.cpp $(srcdir)/filter.cpp $(srcdir)/filterdialog.cpp $(srcdir)/groupview.cpp $(srcdir)/importdialog.cpp $(srcdir)/labelaction.cpp $(srcdir)/tabcontrol.cpp $(srcdir)/imagewidget.cpp $(srcdir)/fieldcompletion.cpp $(srcdir)/imagefactory.cpp $(srcdir)/stringmapdialog.cpp $(srcdir)/entryeditdialog.cpp $(srcdir)/fetchdialog.cpp $(srcdir)/kernel.cpp $(srcdir)/viewstack.cpp $(srcdir)/entryiconview.cpp $(srcdir)/datewidget.cpp $(srcdir)/multiselectionlistview.cpp  configdialog.moc document.moc entryiconview.moc datewidget.moc exportdialog.moc collection.moc imagewidget.moc finddialog.moc tabcontrol.moc fieldcompletion.moc controller.moc kernel.moc groupview.moc detailedlistview.moc importdialog.moc fetchdialog.moc labelaction.moc collectionfieldsdialog.moc multiselectionlistview.moc entryeditdialog.moc mainwindow.moc entryview.moc viewstack.moc filterdialog.moc kwidgetlister.moc fieldwidget.moc stringmapdialog.moc
+	@echo 'creating tellico.all_cpp.cpp ...'; \
+	rm -f tellico.all_cpp.files tellico.all_cpp.final; \
+	echo "#define KDE_USE_FINAL 1" >> tellico.all_cpp.final; \
 	for file in entryview.cpp collection.cpp mainwindow.cpp controller.cpp kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp kernel.cpp viewstack.cpp entryiconview.cpp datewidget.cpp multiselectionlistview.cpp ; do \
-	  echo "#include \"$$file\"" >> bookcase.all_cpp.files; \
-	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> bookcase.all_cpp.final; \
+	  echo "#include \"$$file\"" >> tellico.all_cpp.files; \
+	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> tellico.all_cpp.final; \
 	done; \
-	cat bookcase.all_cpp.final bookcase.all_cpp.files > bookcase.all_cpp.cpp; \
-	rm -f bookcase.all_cpp.final bookcase.all_cpp.files
+	cat tellico.all_cpp.final tellico.all_cpp.files > tellico.all_cpp.cpp; \
+	rm -f tellico.all_cpp.final tellico.all_cpp.files
 
 #>+ 3
 clean-final:
-	-rm -f bookcase.all_cpp.cpp
+	-rm -f tellico.all_cpp.cpp
 
 #>+ 3
 final:
-	$(MAKE) bookcase_OBJECTS="$(bookcase_final_OBJECTS)" all-am
+	$(MAKE) tellico_OBJECTS="$(tellico_final_OBJECTS)" all-am
 
 #>+ 3
 final-install:
-	$(MAKE) bookcase_OBJECTS="$(bookcase_final_OBJECTS)" install-am
+	$(MAKE) tellico_OBJECTS="$(tellico_final_OBJECTS)" install-am
 
 #>+ 3
 no-final:
-	$(MAKE) bookcase_OBJECTS="$(bookcase_nofinal_OBJECTS)" all-am
+	$(MAKE) tellico_OBJECTS="$(tellico_nofinal_OBJECTS)" all-am
 
 #>+ 3
 no-final-install:
-	$(MAKE) bookcase_OBJECTS="$(bookcase_nofinal_OBJECTS)" install-am
+	$(MAKE) tellico_OBJECTS="$(tellico_nofinal_OBJECTS)" install-am
 
 #>+ 3
 cvs-clean:

@@ -10,12 +10,12 @@
    ===================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl 752 2004-08-08 17:11:06Z robby $
+   $Id: bookcase-printing.xsl 885 2004-09-20 05:56:18Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
-   application, which can be found at http://www.periapsis.org/bookcase/
+   application, which can be found at http://www.periapsis.org/tellico/
 
    The exslt extensions from http://www.exslt.org are required.
    Specifically, the string and dynamic modules are used. For
@@ -29,7 +29,7 @@
    DOM for printing.
 
    Any version of this file in the user's home directory, such as
-   $HOME/.kde/share/apps/bookcase/, will override the system file.
+   $HOME/.kde/share/apps/tellico/, will override the system file.
    ===================================================================
 -->
 

@@ -9,7 +9,7 @@ EXTRA_DIST = bookcase-by-author.xsl bookcase-by-title.xsl \
 
 ####### kdevelop will overwrite this part!!! (end)############
 
-xsldir = $(kde_datadir)/bookcase
+xsldir = $(kde_datadir)/tellico
 xsl_DATA = bookcase-printing.xsl bookcase-by-author.xsl bookcase-by-title.xsl \
 	bookcase2html.xsl shadowAlpha.png cassette-logo.png cd-logo.png \
         dvd-logo.png record-logo.png vhs-logo.png bookcase-common.xsl \

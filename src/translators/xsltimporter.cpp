@@ -53,7 +53,7 @@ Bookcase::Data::Collection* XSLTImporter::collection() {
 
   XSLTHandler handler(m_xsltURL);
   if(!handler.isValid()) {
-    setStatusMessage(i18n("Bookcase encountered an error in XSLT processing."));
+    setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));
     return 0;
   }
 //  kdDebug() << text() << endl;

@@ -72,7 +72,7 @@ QWidget* BookcaseXMLExporter::widget(QWidget* parent_, const char* name_/*=0*/) 
   m_widget = new QWidget(parent_, name_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("Bookcase XML Options"), m_widget);
+  QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("Tellico XML Options"), m_widget);
   l->addWidget(box);
 
   m_checkIncludeImages = new QCheckBox(i18n("Include images in XML document"), box);

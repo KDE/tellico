@@ -2,7 +2,7 @@
 
 SUBDIRS = src po doc icons xslt admin
 
-EXTRA_DIST = COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.spec bookcase.dtd x-bookcase.desktop configure.in.in AUTHORS NEWS bookcase.tips bookcase.desktop
+EXTRA_DIST = COPYING ChangeLog INSTALL README TODO tellico.lsm tellico.spec tellico.dtd x-tellico.desktop configure.in.in AUTHORS NEWS tellico.tips tellico.desktop tellico-rename.upd
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
@@ -23,13 +23,16 @@ $(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/ad
 	@cd $(top_srcdir) && cat admin/acinclude.m4.in admin/libtool.m4.in > acinclude.m4
 
 appdir = $(kde_appsdir)/Applications/
-app_DATA = bookcase.desktop
+app_DATA = tellico.desktop
 
 mimedir = $(kde_mimedir)/application
-mime_DATA = x-bookcase.desktop
+mime_DATA = x-tellico.desktop
 
-localdir = $(kde_datadir)/bookcase
-local_DATA = bookcase.dtd bookcase.tips
+localdir = $(kde_datadir)/tellico
+local_DATA = tellico.dtd tellico.tips
+
+updatedir = $(kde_datadir)/kconf_update
+update_DATA = tellico-rename.upd
 
 CLEANFILES = *~ *.loT
 
@@ -44,8 +47,8 @@ package-messages:
 
 messages:
 	rm -f tips.cpp; \
-	$(PREPARETIPS) < bookcase.tips > tips.cpp; \
-	$(XGETTEXT) tips.cpp --join-existing -o $(podir)/bookcase.pot; \
+	$(PREPARETIPS) < tellico.tips > tips.cpp; \
+	$(XGETTEXT) tips.cpp --join-existing -o $(podir)/tellico.pot; \
 	rm -f tips.cpp
 
 dist-hook:
@@ -56,10 +59,10 @@ dist-hook:
 # don't include dist file inside the dist file
 #	cd $(srcdir) && rm -f $(distdir).tar.gz
 # remove any executable
-	rm -rf $(distdir)/src/bookcase
+	rm -rf $(distdir)/src/tellico
 
-PUBLIC_ID=-//Robby Stephenson/DTD Bookcase V5.0//EN
-SYSTEM_ID=http://www.periapsis.org/bookcase/dtd/v5/bookcase.dtd
+PUBLIC_ID=-//Robby Stephenson/DTD Bookcase V6.0//EN
+SYSTEM_ID=http://www.periapsis.org/bookcase/dtd/v6/bookcase.dtd
 
 install-data-local:
 	@if test x"@XML_CATALOG_FILE@" != x; then \

@@ -1,15 +1,15 @@
 Begin3
-Title:          Bookcase 
-Version:        0.11
+Title:          Tellico
+Version:        0.12
 Entered-date:   
-Description:    Bookcase is a collection manager for books,
+Description:    Tellico is a collection manager for books,
 bibliographies, video, music, comic books, coins, stamps, trading
 cards, and wines.
 Keywords:        
 Author:         Robby Stephenson <robby@periapsis.org> 
 Maintained-by:  Robby Stephenson <robby@periapsis.org> 
-Primary-site:   http://www.periapsis.org/bookcase/       
-Home-page:      http://www.periapsis.org/bookcase/
+Primary-site:   http://www.periapsis.org/tellico/       
+Home-page:      http://www.periapsis.org/tellico/
 Original-site:  
 Platforms:      Linux and other Unices
 Copying-policy: GNU Public License

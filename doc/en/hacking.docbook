@@ -1,15 +1,15 @@
 <chapter id="hacking">
-<title>Hacking &bookcase;</title>
+<title>Hacking &tellico;</title>
 
 <para>
-In the spirit of Free Software, you're welcome to hack on &bookcase; as much as you like. You should be able to write scripts to import, export, or modify data very easily. This chapter gives you more information about doing that.
+In the spirit of Free Software, you're welcome to hack on &tellico; as much as you like. You should be able to write scripts to import, export, or modify data very easily. This chapter gives you more information about doing that.
 </para>
 
 <sect1 id="file-format">
 <title>File Format</title>
 
 <para>
-The default &bookcase; data file is a zip archive, normally with a <literal role="extension">.bc</literal> file extension. Inside the archive is a top-level <filename>bookcase.xml</filename> file. Any images are placed inside the <filename>images/</filename> directory in the archive. &bookcase; can also load the &xml; file, by itself.
+The default &tellico; data file is a zip archive, normally with a <literal role="extension">.bc</literal> file extension. Inside the archive is a top-level <filename>bookcase.xml</filename> file. Any images are placed inside the <filename>images/</filename> directory in the archive. &tellico; can also load the &xml; file, by itself.
 </para>
 
 <sect2 id="xml-format">
@@ -32,7 +32,7 @@ The default &bookcase; data file is a zip archive, normally with a <literal role
 </programlisting>
 
 <para>
-The file begins with the required &xml; declaration and encoding, followed by the doctype. When a new field type is added or additional properties are set on the default fields, the doctype DTD version is incremented. &bookcase; is always able to open and read any previous DTD version, but will save files in the current version. The DTD location does point to an actual DTD file.
+The file begins with the required &xml; declaration and encoding, followed by the doctype. When a new field type is added or additional properties are set on the default fields, the doctype DTD version is incremented. &tellico; is always able to open and read any previous DTD version, but will save files in the current version. The DTD location does point to an actual DTD file.
 </para>
 
 <para>
@@ -102,7 +102,7 @@ For every field in the collection, an <markup>&lt;entry&gt;</markup> may contain
 </para>
 
 <para>
-As a result, if additional fields are added to the collection, the date file will no longer conform to the DTD. However, &bookcase; uses a non-validating &xml; parser, so additional fields do not cause problems.
+As a result, if additional fields are added to the collection, the date file will no longer conform to the DTD. However, &tellico; uses a non-validating &xml; parser, so additional fields do not cause problems.
 </para>
 </sect3>
 
@@ -163,7 +163,7 @@ The type of collection is given in the type attribute of the collection element.
 <title>Field Type Values</title>
 
 <para>
-&bookcase; will include all the default fields for a collection if the first field element has the name <emphasis>_default</emphasis>. For <emphasis>Paragraph</emphasis>, <emphasis>Table</emphasis>, or <emphasis>Image</emphasis> fields, the field category should be identical to the field title.
+&tellico; will include all the default fields for a collection if the first field element has the name <emphasis>_default</emphasis>. For <emphasis>Paragraph</emphasis>, <emphasis>Table</emphasis>, or <emphasis>Image</emphasis> fields, the field category should be identical to the field title.
 </para>
 
 <para>
@@ -247,11 +247,11 @@ The format of the field is given in the format attribute on the field element. <
 <title>Hidden Configuration Options</title>
 
 <para>
-&bookcase; has some additional configuration options that are not visible in the &config-dialog;. They are not important enough to warrant cluttering the dialog with more settings, but as they represent options which may appeal to various users, the application does read them from the configuration file.
+&tellico; has some additional configuration options that are not visible in the &config-dialog;. They are not important enough to warrant cluttering the dialog with more settings, but as they represent options which may appeal to various users, the application does read them from the configuration file.
 </para>
 
 <para>
-The settings for &bookcase; are saved in a file in the user's home folder, namely <filename>$<envar>KDEHOME</envar>/share/config/bookcaserc</filename>. Within that file, settings are put in groups, which appear with bracketed names, such as [General Options]. To add a setting to the General Options group, find the line in the settings file with that group name. If it does not appear, then create it yourself by adding a line saying [General Options]. Then, the setting can be added underneath the group name.
+The settings for &tellico; are saved in a file in the user's home folder, namely <filename>$<envar>KDEHOME</envar>/share/config/tellicorc</filename>. Within that file, settings are put in groups, which appear with bracketed names, such as [General Options]. To add a setting to the General Options group, find the line in the settings file with that group name. If it does not appear, then create it yourself by adding a line saying [General Options]. Then, the setting can be added underneath the group name.
 </para>
 
 <sect2 id="hidden-general-options">
@@ -289,7 +289,7 @@ These settings should be placed in the Amazon Web Services group.
 <title>AddLinkField</title>
 
 <para>
-If this setting is true, &bookcase; will add a collection field containing a link to <ulink url="http://amazon.com">Amazon.com</ulink> when data imported from Amazon Web Services. The default setting is true.
+If this setting is true, &tellico; will add a collection field containing a link to <ulink url="http://amazon.com">Amazon.com</ulink> when data imported from Amazon Web Services. The default setting is true.
 </para>
 </sect3>
 
@@ -305,7 +305,7 @@ Images imported from <ulink url="http://amazon.com">Amazon.com</ulink> can be do
 <title>DevToken</title>
 
 <para>
-A developer's token is required to use the Amazon Web Services. &bookcase; uses a default token, but you may wish to use a different one.
+A developer's token is required to use the Amazon Web Services. &tellico; uses a default token, but you may wish to use a different one.
 </para>
 </sect3>
 
@@ -313,7 +313,7 @@ A developer's token is required to use the Amazon Web Services. &bookcase; uses 
 <title>AssocToken</title>
 
 <para>
-An associate's token is required to use the Amazon Web Services. &bookcase; uses a default token, but you may wish to use a different one. Any links resulting from imported <ulink url="http://amazon.com">Amazon.com</ulink> data will contains the associate's token, which allows Amazon.com to track any sales generated by &bookcase; as well as to return a portion of the revenue to the &bookcase; developer.
+An associate's token is required to use the Amazon Web Services. &tellico; uses a default token, but you may wish to use a different one. Any links resulting from imported <ulink url="http://amazon.com">Amazon.com</ulink> data will contains the associate's token, which allows Amazon.com to track any sales generated by &tellico; as well as to return a portion of the revenue to the &tellico; developer.
 </para>
 </sect3>
 
@@ -355,7 +355,7 @@ The encoding of the exported data within the PilotDB file may be changed with th
 <title>XSLT Tricks</title>
 
 <para>
-Here are some tips for writing XSLT to parse &bookcase; &xml; data:
+Here are some tips for writing XSLT to parse &tellico; &xml; data:
 </para>
 </sect1>
 

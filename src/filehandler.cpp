@@ -29,9 +29,9 @@
 #include <qdom.h>
 #include <qfile.h>
 
-const char* loadError = I18N_NOOP("Bookcase is unable to load the file - %1.");
-const char* writeError = I18N_NOOP("Bookcase is unable to write the file - %1.");
-const char* uploadError = I18N_NOOP("Bookcase is unable to upload the file - %1.");
+const char* loadError = I18N_NOOP("Tellico is unable to load the file - %1.");
+const char* writeError = I18N_NOOP("Tellico is unable to write the file - %1.");
+const char* uploadError = I18N_NOOP("Tellico is unable to upload the file - %1.");
 
 using Bookcase::FileHandler;
 
@@ -122,7 +122,7 @@ Bookcase::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_)
 
   Data::Image* img = new Data::Image(f.filename);
   if(img->isNull() && !quiet_) {
-    QString str = i18n("Bookcase is unable to load the image - %1.").arg(url_.fileName());
+    QString str = i18n("Tellico is unable to load the image - %1.").arg(url_.fileName());
     KMessageBox::sorry(Kernel::self()->widget(), str);
   }
   return img;

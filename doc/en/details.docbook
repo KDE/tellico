@@ -1,11 +1,11 @@
 <chapter id="details">
-<title>&bookcase; Details</title>
+<title>&tellico; Details</title>
 
 <sect1 id="field-types">
 <title>Field Types</title>
 
 <para>
-Each collection may have an unlimited number of fields. &bookcase; supports eleven types of fields, which allow for a range of different data.
+Each collection may have an unlimited number of fields. &tellico; supports eleven types of fields, which allow for a range of different data.
 </para>
 
 <sect2 id="line">
@@ -115,7 +115,7 @@ Typically, the second column is italicized in the entry view templates, or when 
 <para>
 <emphasis>Image</emphasis> fields hold an image, of any format supported by &kde;.
 Some of the typical ones include <acronym>PNG</acronym> or <acronym>JPEG</acronym>.
-The image is saved inside the &bookcase; data file. The standard &kde; File Selector
+The image is saved inside the &tellico; data file. The standard &kde; File Selector
 is used, so you can use a &URL; or just a file available
 locally.
 </para>
@@ -151,11 +151,11 @@ may be used in the description for formatting.
 <title>Collection Types</title>
 
 <para>
-&bookcase; supports nine specific collection types by default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
+&tellico; supports nine specific collection types by default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
 </para>
 
 <para>
-In general, there's no functional difference between the collection types. You could create a custom collection for your books just as easily as using the default book collection. But &bookcase; chooses icons based on collection type, and there may be some specialized functionality that is unique to a certain collection, so if you can, you should use the defaults. So, if you want to create a wine collection, but don't like any of the default fields, go ahead and create a default wine collection, then delete all the defaults. That way, &bookcase; still knows that it's a wine collection.
+In general, there's no functional difference between the collection types. You could create a custom collection for your books just as easily as using the default book collection. But &tellico; chooses icons based on collection type, and there may be some specialized functionality that is unique to a certain collection, so if you can, you should use the defaults. So, if you want to create a wine collection, but don't like any of the default fields, go ahead and create a default wine collection, then delete all the defaults. That way, &tellico; still knows that it's a wine collection.
 </para>
 
 <sect2 id="book-collection">
@@ -191,7 +191,7 @@ Book collections have 26 default fields:
 </para>
 
 <para>
-The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> numbers are automatically formatted and the check-digit is calculated. &bookcase; recognizes the <acronym>ISBN</acronym> field if its internal field name is <emphasis>isbn</emphasis>. If you delete it, or need to add it to another type of collection, create the field with the title as <emphasis>ISBN</emphasis> and apply the change, then you can return and modify the title as you want. &bookcase; creates the internal name based on the initial title, but never changes it if the title is later updated.
+The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> numbers are automatically formatted and the check-digit is calculated. &tellico; recognizes the <acronym>ISBN</acronym> field if its internal field name is <emphasis>isbn</emphasis>. If you delete it, or need to add it to another type of collection, create the field with the title as <emphasis>ISBN</emphasis> and apply the change, then you can return and modify the title as you want. &tellico; creates the internal name based on the initial title, but never changes it if the title is later updated.
 </para>
 
 </sect2>
@@ -228,7 +228,7 @@ Although bibliographic collections are not specifically linked to Bibtex, the de
 </para>
 
 <para>
-&bookcase; does have some specialized functions for bibliographies. Bibtex string macros can be added, modified, or deleted from within &bookcase; and the Bibtex export gives you the option of expanding the macros. Bibtex citations can be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="bibtex-options">lyxpipe</link></emphasis>.
+&tellico; does have some specialized functions for bibliographies. Bibtex string macros can be added, modified, or deleted from within &tellico; and the Bibtex export gives you the option of expanding the macros. Bibtex citations can be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="bibtex-options">lyxpipe</link></emphasis>.
 </para>
 
 <para>

@@ -19,7 +19,7 @@
 #include <klocale.h>
 
 static const char* description =
-  I18N_NOOP("Bookcase - a collection manager for KDE");
+  I18N_NOOP("Tellico - a collection manager for KDE");
 
 static const char* version = VERSION;
 
@@ -30,19 +30,19 @@ static KCmdLineOptions options[] = {
 };
 
 int main(int argc, char* argv[]) {
-  KAboutData aboutData("bookcase", I18N_NOOP("Bookcase"),
+  KAboutData aboutData("tellico", I18N_NOOP("Tellico"),
                        version, description, KAboutData::License_GPL,
                        "(c) 2001-2004, Robby Stephenson", 0,
-                       "http://www.periapsis.org/bookcase/", "robby@periapsis.org");
+                       "http://www.periapsis.org/tellico/", "robby@periapsis.org");
   aboutData.addAuthor("Robby Stephenson", 0, "robby@periapsis.org");
   aboutData.addCredit("Greg Ward", I18N_NOOP("Author of btparse library"),
                       0, "http://www.gerg.ca");
-  
+
   KCmdLineArgs::init(argc, argv, &aboutData);
   KCmdLineArgs::addCmdLineOptions(options);
 
   KApplication app;
- 
+
   if(app.isRestored()) {
     RESTORE(Bookcase::MainWindow);
   } else {
@@ -64,4 +64,4 @@ int main(int argc, char* argv[]) {
   }
 
   return app.exec();
-}  
+}

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Tellico Data File
+DefaultApp=tellico
+Icon=tellico.png
+MimeType=application/x-tellico
+Patterns=*.bc;
+Type=MimeType
+X-KDE-AutoEmbed=false

@@ -3,7 +3,7 @@
 
 
 <para>
-The <interface>Configuration Dialog</interface> contains all the options for changing some of the default behaviour of &bookcase;. Clicking the <guibutton>Apply</guibutton> button <action>causes the changes to take effect immediately</action> without closing the dialog, while <guibutton>OK</guibutton> <action>applies the changes and closes the dialog</action>. <guibutton>Cancel</guibutton> closes the dialog, but any changes already made and applied will remain. The <guibutton>Default</guibutton> button <action>reverts the options</action> on the current page of the dialog to their default values, while <guibutton>Help</guibutton> <action>opens the &khelpcenter;</action> to this section of the manual.
+The <interface>Configuration Dialog</interface> contains all the options for changing some of the default behaviour of &tellico;. Clicking the <guibutton>Apply</guibutton> button <action>causes the changes to take effect immediately</action> without closing the dialog, while <guibutton>OK</guibutton> <action>applies the changes and closes the dialog</action>. <guibutton>Cancel</guibutton> closes the dialog, but any changes already made and applied will remain. The <guibutton>Default</guibutton> button <action>reverts the options</action> on the current page of the dialog to their default values, while <guibutton>Help</guibutton> <action>opens the &khelpcenter;</action> to this section of the manual.
 </para>
 
 <para>
@@ -23,11 +23,11 @@ Some settings can only be changed by editing the configuration file itself. See 
 </screenshot>
 
 <para>
-The <guilabel>General Options</guilabel> control the general behavior. When &bookcase; is started, it can automatically reopen the last file that was open. The <guilabel>Tip of the Day</guilabel> dialog contains helpful hints on using &bookcase; and appears at program startup. You may want to read through some of the hints and then disable the dialog. The <link linkend="group-view">&group-view;</link> is able to append the number of entries in each group to the group name in the tree view, and that functionality may be enabled or disabled using this option.
+The <guilabel>General Options</guilabel> control the general behavior. When &tellico; is started, it can automatically reopen the last file that was open. The <guilabel>Tip of the Day</guilabel> dialog contains helpful hints on using &tellico; and appears at program startup. You may want to read through some of the hints and then disable the dialog. The <link linkend="group-view">&group-view;</link> is able to append the number of entries in each group to the group name in the tree view, and that functionality may be enabled or disabled using this option.
 </para>
 
 <para>
-The <guilabel>Formatting Options</guilabel> control the level of automatic formatting that &bookcase; does. For examples, see the <link linkend="field-formatting">Field Formatting section</link>. Capitalization and formatting are distinct options, since a field may be capitalized without having the order of the words changed, and vice-versa. The automatic formatting includes grammatical articles in titles, along with prefixes and suffixes for personal names. The values are case-insensitive, and should be separated by a semi-colon.
+The <guilabel>Formatting Options</guilabel> control the level of automatic formatting that &tellico; does. For examples, see the <link linkend="field-formatting">Field Formatting section</link>. Capitalization and formatting are distinct options, since a field may be capitalized without having the order of the words changed, and vice-versa. The automatic formatting includes grammatical articles in titles, along with prefixes and suffixes for personal names. The values are case-insensitive, and should be separated by a semi-colon.
 </para>
 
 <para>
@@ -43,7 +43,7 @@ The formatting rules follow general English usage. Articles are appended to the 
 <title><guilabel>Printing Options</guilabel></title>
 
 <para>
-&bookcase; uses an <acronym>XSLT</acronym> template for creating <acronym>HTML</acronym> and then passes that to the &kde; printing service. Only the fields visible in the <link linkend="detailed-view">&detailed-view;</link> are printed. Furthermore, if the collection is being filtered, only the visible entries will be printed. Initially, a warning message is shown if filtering is active.
+&tellico; uses an <acronym>XSLT</acronym> template for creating <acronym>HTML</acronym> and then passes that to the &kde; printing service. Only the fields visible in the <link linkend="detailed-view">&detailed-view;</link> are printed. Furthermore, if the collection is being filtered, only the visible entries will be printed. Initially, a warning message is shown if filtering is active.
 </para>
 
 <screenshot>
@@ -80,7 +80,7 @@ The <link linkend="entry-view">&entry-view;</link> uses templates to show the fi
 </para>
 
 <para>
-Additional templates may be installed in <filename>$<envar>KDEHOME</envar>/share/apps/bookcase/entry-templates/</filename>.
+Additional templates may be installed in <filename>$<envar>KDEHOME</envar>/share/apps/tellico/entry-templates/</filename>.
 </para>
 
 <screenshot>
@@ -98,7 +98,7 @@ Additional templates may be installed in <filename>$<envar>KDEHOME</envar>/share
 <title><guilabel>Bibtex Options</guilabel></title>
 
 <para>
-When exporting to Bibtex, the field values may be escaped with braces or quotation marks. &bookcase; is also able to send <application>latex</application> citations to a pipe for use with <application>LyX</application>, <application>Kile</application>, or other <application>LaTeX</application> formatting programs. The location of the LyXpipe should not include the <literal role="extension">.in</literal> or <literal role="extension">.out</literal> extension. The target application must be running for the pipe to exist.
+When exporting to Bibtex, the field values may be escaped with braces or quotation marks. &tellico; is also able to send <application>latex</application> citations to a pipe for use with <application>LyX</application>, <application>Kile</application>, or other <application>LaTeX</application> formatting programs. The location of the LyXpipe should not include the <literal role="extension">.in</literal> or <literal role="extension">.out</literal> extension. The target application must be running for the pipe to exist.
 </para>
 
 <screenshot>

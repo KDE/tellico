@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
-  <!ENTITY bookcase '<application>Bookcase</application>'>
-  <!ENTITY kappname "&bookcase;">
+  <!ENTITY tellico '<application>Tellico</application>'>
+  <!ENTITY kappname "&tellico;">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
 
   <!ENTITY robby "Robby Stephenson">
   <!ENTITY email "robby@periapsis.org">
-  <!ENTITY homepage "http://www.periapsis.org/bookcase/">
+  <!ENTITY homepage "http://www.periapsis.org/tellico/">
   <!ENTITY xml "<acronym>XML</acronym>">
 
   <!ENTITY group-view "<interface>Group View</interface>">
@@ -55,7 +55,7 @@ Do NOT change these in the translation. -->
 <date>22/08/2004</date>
 <releaseinfo>1.0</releaseinfo>
 
-<title>The &bookcase; Handbook</title>
+<title>The &tellico; Handbook</title>
 
 <authorgroup>
 <author>
@@ -86,7 +86,7 @@ Do NOT change these in the translation. -->
 
 <abstract>
 <para>
-This document is a handbook for using &bookcase;, a collection manager software application.
+This document is a handbook for using &tellico;, a collection manager software application.
 </para>
 </abstract>
 
@@ -96,7 +96,6 @@ Please at least include KDE, the KDE package it is in, the name
 
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>bookcase</keyword>
 <keyword>book</keyword>
 <keyword>collection</keyword>
 <keyword>database</keyword>
@@ -124,10 +123,10 @@ problems. Basically a long version of the abstract.  Don't include a
 revision history. (see installation appendix comment) -->
 
 <sect1 id="bookcase-intro">
-<title>&bookcase;</title>
+<title>&tellico;</title>
 
 <para>
-&bookcase; is a program for managing collections. It began as a simple
+&tellico; is a program for managing collections. It began as a simple
 book collection manager, and has expanded to include default
 collection templates for bibliographies, comic books, videos, music,
 coins, stamps, trading cards, and wines. In addition, custom
@@ -135,10 +134,10 @@ collections can be built for any other type of collectibles.
 </para>
 
 <sect2 id="what-bookcase-is">
-<title>What &bookcase; Is</title>
+<title>What &tellico; Is</title>
 
 <para>
-&bookcase; keeps track of the items in a collection, and offers
+&tellico; keeps track of the items in a collection, and offers
 an easy way to enter data for each entry. It provides several
 field types, and allows for an unlimited number of
 user-defined fields. The entries in a collection may be grouped by any
@@ -152,10 +151,10 @@ or publication of data.
 </sect2>
 
 <sect2 id="what-bookcase-is-not">
-<title>What &bookcase; Is Not</title>
+<title>What &tellico; Is Not</title>
 
 <para>
-&bookcase; is not an audio or video player. It does not provide
+&tellico; is not an audio or video player. It does not provide
 facilities for reading or modifying multimedia files. It also does
 not provide any image-editing functionality. It is not a full-blown bibliographic reference manager.
 </para>
@@ -169,9 +168,9 @@ not provide any image-editing functionality. It is not a full-blown bibliographi
 <sect2 id="collections">
 <title>Collections</title>
 <para>
-In &bookcase;, a collection is the document. Only one collection exists in each &bookcase;
+In &tellico;, a collection is the document. Only one collection exists in each &tellico;
 file. A collection contains any number of <link linkend="entries">entries</link> and
-<link linkend="fields">fields</link>. &bookcase; supports nine specific collection types by
+<link linkend="fields">fields</link>. &tellico; supports nine specific collection types by
 default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps,
 and wines. In addition, an empty generic collection template is available for any other type of
 collectibles.
@@ -182,10 +181,10 @@ collectibles.
 <title>Collection Entries</title>
 
 <para>
-An entry is the basic record in &bookcase;. Each entry contains a single value for each field in
+An entry is the basic record in &tellico;. Each entry contains a single value for each field in
 the collection. A collection may have an unlimited number of entries, in theory, although since
 the whole collection is always resident in memory, too many entries could slow down the application.
-&bookcase; has been tested with a collection of 10,000 entries, and the speed was satisfactory, however.
+&tellico; has been tested with a collection of 10,000 entries, and the speed was satisfactory, however.
 </para>
 
 </sect2>
@@ -193,7 +192,7 @@ the whole collection is always resident in memory, too many entries could slow d
 <sect2 id="fields">
 <title>Collection Fields</title>
 <para>
-Each collection may have an unlimited number of fields. &bookcase; supports eleven types of fields,
+Each collection may have an unlimited number of fields. &tellico; supports eleven types of fields,
 which allow for a range of different data. The fields can be edited with the
 <link linkend="fields-dialog">&fields-dialog;</link> and are explained further in the
 <link linkend="field-types">Field Types</link> section.
@@ -228,7 +227,7 @@ file included in the KDE distribution. -->
 <title>Credits and License</title>
 
 <para>
-&bookcase;
+&tellico;
 </para>
 <para>
 Program copyright 2001-2004 &robby; <email>&email;</email>
@@ -253,10 +252,10 @@ Documentation copyright 2001-2004 &robby; <email>&email;</email>
 <title>Installation</title>
 
 <sect1 id="getting-bookcase">
-<title>How to obtain Bookcase</title>
+<title>How to obtain &tellico;</title>
 
 <para>
-The &bookcase; home page can be found at
+The &tellico; home page can be found at
 <ulink url="&homepage;">&homepage;</ulink>.
 Updates and news can be found there.</para>
 </sect1>
@@ -276,8 +275,8 @@ information here.
 -->
 
 <para>
-In order to successfully use &bookcase;, you need KDE 3.1.x.
-&bookcase; uses about 5 megabytes of memory to run, but this may vary
+In order to successfully use &tellico;, you need KDE 3.1.x.
+&tellico; uses about 5 megabytes of memory to run, but this may vary
 depending on your platform and configuration.
 </para>
 
@@ -297,7 +296,7 @@ url="&homepage;">&homepage;</ulink>.
 <title>Compilation and Installation</title>
 
 <para>
-In order to compile and install &bookcase; on your system, type the following
+In order to compile and install &tellico; on your system, type the following
 in the base directory of the archive, where the third step must be done as
 root if you are installing in a system directory:
 
@@ -308,7 +307,7 @@ root if you are installing in a system directory:
 </screen>
 </para>
 
-<para>Since &bookcase; uses autoconf and automake you should not have
+<para>Since &tellico; uses autoconf and automake you should not have
 any trouble compiling it. Should you run into problems please report
 them to the the author at <email>&email;</email>.</para>
 

@@ -1,11 +1,11 @@
 <chapter id="fundamentals">
-<title>Using &bookcase;</title>
+<title>Using &tellico;</title>
 
 <sect1 id="quick-start">
 <title>Quick Start</title>
 
 <para>
-By default, &bookcase; starts with an empty book collection. If you want some other type of collection, create it using the <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice> menu item, or the button on the toolbar. Collections are populated with some of the more common fields, but you can add, modify, or delete them to suit your needs.
+By default, &tellico; starts with an empty book collection. If you want some other type of collection, create it using the <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice> menu item, or the button on the toolbar. Collections are populated with some of the more common fields, but you can add, modify, or delete them to suit your needs.
 </para>
 
 <para>
@@ -43,11 +43,11 @@ of the data for a single entry, or an icon view of a group of entries, in the lo
 </para>
 
 <screenshot>
-<screeninfo>The &bookcase; Main Window</screeninfo>
+<screeninfo>The &tellico; Main Window</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="main-window.png"/></imageobject>
-<textobject><phrase>The &bookcase; Main Window</phrase></textobject>
-<caption><para>The &bookcase; Main Window</para></caption>
+<textobject><phrase>The &tellico; Main Window</phrase></textobject>
+<caption><para>The &tellico; Main Window</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -89,7 +89,7 @@ In addition, when the collection or a group item is selected in the &group-view;
 <title>Statusbar</title>
 
 <para>
-The statusbar is used to show you what &bookcase; is currently doing. It also includes a total count of the entries in the collection, and if a filter is being used, how many are currently visible.
+The statusbar is used to show you what &tellico; is currently doing. It also includes a total count of the entries in the collection, and if a filter is being used, how many are currently visible.
 </para>
 </sect2>
 
@@ -158,11 +158,11 @@ The &fields-dialog; allows you to add new fields to the collection, to modify th
 </para>
 
 <screenshot>
-<screeninfo>The &bookcase; &fields-dialog;</screeninfo>
+<screeninfo>The &tellico; &fields-dialog;</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
-<textobject><phrase>The &bookcase; &fields-dialog;</phrase></textobject>
-<caption><para>The &bookcase; &fields-dialog;</para></caption>
+<textobject><phrase>The &tellico; &fields-dialog;</phrase></textobject>
+<caption><para>The &tellico; &fields-dialog;</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -244,7 +244,7 @@ New fields may be any type, but changing the type of existing fields is restrict
 <title>Field Formatting</title>
 
 <para>
-&bookcase; provides some capability for automatic formatting of field values. The simplest is auto-capitalization, which capitalizes every word except the articles. Title formatting moves certain articles from the beginning to the end of the field, for example, changing "The Return of the King" to "Return of the King, The". The title articles are configurable. Finally, name formatting tries to break up the string so that the last, or family, name of the person is shown first. Name prefixes and suffixes are configurable. Also, the special <emphasis><link linkend="people-group">People</link></emphasis> group uses all fields with name formatting, even if the global setting is turned off.
+&tellico; provides some capability for automatic formatting of field values. The simplest is auto-capitalization, which capitalizes every word except the articles. Title formatting moves certain articles from the beginning to the end of the field, for example, changing "The Return of the King" to "Return of the King, The". The title articles are configurable. Finally, name formatting tries to break up the string so that the last, or family, name of the person is shown first. Name prefixes and suffixes are configurable. Also, the special <emphasis><link linkend="people-group">People</link></emphasis> group uses all fields with name formatting, even if the global setting is turned off.
 </para>
 
 <para>
@@ -286,11 +286,11 @@ All automatic formatting can be disabled by changing the global options in the <
 <title>Field Options</title>
 
 <para>
-Fields also have three general options. If auto-completion is enabled, &bookcase; caches the values for each field, and the &entry-editor; offers automatic completion, using the standard &kde; settings. Not all field types allow auto-completion. &bookcase; also needs to know if a field may have multiple values or may be used to group the entries. A semi-colon is used to separate multiple values when editing an entry;
+Fields also have three general options. If auto-completion is enabled, &tellico; caches the values for each field, and the &entry-editor; offers automatic completion, using the standard &kde; settings. Not all field types allow auto-completion. &tellico; also needs to know if a field may have multiple values or may be used to group the entries. A semi-colon is used to separate multiple values when editing an entry;
 </para>
 
 <para>
-For efficiency, do not enable auto-completion unless you need it for the fields. The more fields with auto-completion in the collection, the slower it takes &bookcase; to load the file.
+For efficiency, do not enable auto-completion unless you need it for the fields. The more fields with auto-completion in the collection, the slower it takes &tellico; to load the file.
 </para>
 
 </sect2>
@@ -303,11 +303,11 @@ The &filter-dialog; allows you to limit the entries visible in the <link linkend
 </para>
 
 <screenshot>
-<screeninfo>The &bookcase; &filter-dialog;</screeninfo>
+<screeninfo>The &tellico; &filter-dialog;</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
-<textobject><phrase>The &bookcase; &filter-dialog;</phrase></textobject>
-<caption><para>The &bookcase; &filter-dialog;</para></caption>
+<textobject><phrase>The &tellico; &filter-dialog;</phrase></textobject>
+<caption><para>The &tellico; &filter-dialog;</para></caption>
 </mediaobject>
 </screenshot>
 </sect1>

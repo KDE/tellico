@@ -55,7 +55,7 @@ Bookcase::Data::Collection* FreeDBImporter::collection() {
   }
   if(!drive) {
     kdDebug() << "FreeDBImporter::collection() - no drive!" << endl;
-    setStatusMessage(i18n("<qt>Bookcase was unable to access the CD-ROM device - <i>%1</i>.</qt>").arg(device));
+    setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>").arg(device));
     return 0;
   }
 
@@ -73,7 +73,7 @@ Bookcase::Data::Collection* FreeDBImporter::collection() {
 
   if(cdda_open(drive) != 0) {
     kdDebug() << "FreeDBImporter::collection() - open failed!" << endl;
-    setStatusMessage(i18n("<qt>Bookcase was unable to open the CD-ROM device - <i>%1</i>.</qt>").arg(device));
+    setStatusMessage(i18n("<qt>Tellico was unable to open the CD-ROM device - <i>%1</i>.</qt>").arg(device));
     cdda_close(drive);
     return 0;
   }
@@ -130,7 +130,7 @@ Bookcase::Data::Collection* FreeDBImporter::collection() {
       case KCDDB::CDDB::NoResponse:
       case KCDDB::CDDB::UnknownError:
       default:
-        setStatusMessage(i18n("<qt>Bookcase was unable to complete the CD lookup.</qt>"));
+        setStatusMessage(i18n("<qt>Tellico was unable to complete the CD lookup.</qt>"));
         break;
 
     }

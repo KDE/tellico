@@ -1,5 +1,5 @@
-%define name    bookcase
-%define version 0.11
+%define name    tellico
+%define version 0.12
 %define release 1rls
 %define iconname %{name}.png
 %define __libtoolize /bin/true
@@ -12,7 +12,7 @@ License: GPL
 Group: Databases
 #Source: %{name}-%{version}.tar.gz
 Source: %{name}-%{version}.tar.gz
-URL: http://www.periapsis.org/bookcase/
+URL: http://www.periapsis.org/tellico/
 Requires: kdebase libxslt1 >= 1.0.19
 # needed for kcddb
 Requires: libkdemultimedia-kscd libcdda0
@@ -22,9 +22,10 @@ BuildRequires: kdelibs-devel >= 3.1 libxslt-devel >= 1.0.19
 BuildRequires: ImageMagick libart_lgpl-devel libtaglib-devel
 BuildRequires: libkdemultimedia-kscd-devel libcdda-devel
 BuildRoot: %{_tmppath}/%{name}-buildroot
+Obsoletes: bookcase
 
 %description
-Bookcase is a KDE application for keeping track of your collection of books, bibliographies, music, movies, coins, stamps, trading cards, comic books, or wines.
+Tellico is a KDE application for keeping track of your collection of books, bibliographies, music, movies, coins, stamps, trading cards, comic books, or wines.
 
 Features:
 
@@ -61,7 +62,7 @@ convert icons/%{name}.png -geometry 48x48 %{buildroot}%{_liconsdir}/%{iconname}
 convert icons/%{name}.png -geometry 32x32 %{buildroot}%{_iconsdir}/%{iconname} 
 convert icons/%{name}.png -geometry 16x16 %{buildroot}%{_miconsdir}/%{iconname} 
 
-kdedesktop2mdkmenu.pl bookcase "More applications/Databases"    %buildroot/%_datadir/applnk/Applications/bookcase.desktop                             %buildroot/%_menudir/bookcase 
+kdedesktop2mdkmenu.pl tellico "More applications/Databases"    %buildroot/%_datadir/applnk/Applications/tellico.desktop                             %buildroot/%_menudir/tellico 
 
 %find_lang %{name}
 
@@ -77,10 +78,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr (-,root,root)
 %doc AUTHORS COPYING ChangeLog INSTALL README TODO
-%doc %dir %{_datadir}/doc/HTML/*/bookcase/*
+%doc %dir %{_datadir}/doc/HTML/*/tellico/*
 %{_bindir}/*
-%{_datadir}/applnk/Applications/bookcase.desktop
-%{_datadir}/mimelnk/application/x-bookcase.desktop
+%{_datadir}/applnk/Applications/tellico.desktop
+%{_datadir}/mimelnk/application/x-tellico.desktop
+%{_datadir}/apps/kconf_update/tellico-rename.upd
 %{_datadir}/apps/%{name}/
 %{_menudir}/%{name}
 %{_miconsdir}/%{iconname}
@@ -89,6 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
+* Sun Sep 19 2004 Robby Stephenson <robby@periapsis.org> 0.12-1rls
+- Rename to Tellico
+- Bump version number to 0.12
+
 * Thu Aug 26 2004 Robby Stephenson <robby@periapsis.org> 0.11-1rls
 - Version 0.11
 - Changed group to Databases

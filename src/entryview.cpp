@@ -128,7 +128,7 @@ void EntryView::setXSLTFile(const QString& file_) {
       m_xsltFile = KGlobal::dirs()->findResource("appdata", templateDir + QString::fromLatin1("Default.xsl"));
       if(m_xsltFile.isEmpty()) {
         QString str = QString::fromLatin1("<qt>");
-        str += i18n("Bookcase is unable to locate the default entry stylesheet.");
+        str += i18n("Tellico is unable to locate the default entry stylesheet.");
         str += QString::fromLatin1(" ");
         str += i18n("Please check your installation.");
         str += QString::fromLatin1("</qt>");
@@ -158,7 +158,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   m_handler->addStringParam("color2", cg.highlight().name().latin1());
 
   // look for a file that gets installed to know the installation directory
-  QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/bookcase.png"));
+  QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png"));
   m_handler->addStringParam("datadir", QFile::encodeName(appdir));
   m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
 

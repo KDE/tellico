@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - Entry template for videos
 
-   $Id: Video.xsl 791 2004-08-23 00:30:27Z robby $
+   $Id: Video.xsl 885 2004-09-20 05:56:18Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -17,7 +17,7 @@
      the top tables.
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
-   application, which can be found at http://www.periapsis.org/bookcase/
+   application, which can be found at http://www.periapsis.org/tellico/
    ===================================================================
 -->
 

@@ -2,15 +2,15 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Exec=bookcase -caption "%c" %i %m
-Icon=bookcase.png
-MiniIcon=bookcase.png
-DocPath=bookcase/index.html
+Exec=tellico -caption "%c" %i %m
+Icon=tellico.png
+MiniIcon=tellico.png
+DocPath=tellico/index.html
 Comment=A collection manager
 Comment[cs]=Správce sbírek
 Terminal=0
-Name=Bookcase
+Name=Tellico
 GenericName=Collection Manager
 GenericName[cs]=Správce sbírek
-MimeType=application/x-bookcase
+MimeType=application/x-tellico
 Categories=KDE;Office;Database;

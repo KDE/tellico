@@ -262,17 +262,17 @@ target_vendor = @target_vendor@
 x_includes = @x_includes@
 x_libraries = @x_libraries@
 
-EXTRA_DIST = bookcase.png book.png hi16-app-bookcase.png hi32-app-bookcase.png person-open.png person.png video.png album.png bibtex.png coin.png card.png stamp.png wine.png comic.png
+EXTRA_DIST = tellico.png book.png hi16-app-tellico.png hi32-app-tellico.png person-open.png person.png video.png album.png bibtex.png coin.png card.png stamp.png wine.png comic.png
 
 
 ####### kdevelop will overwrite this part!!! (end)############
 KDE_OPTIONS = noautodist
 
 icondir = ${kde_icondir}
-icon_ICON = bookcase
+icon_ICON = tellico
 
-picdir = ${kde_datadir}/bookcase/pics
-pic_DATA = book.png bookcase.png person.png person-open.png album.png video.png bibtex.png coin.png card.png stamp.png wine.png comic.png
+picdir = ${kde_datadir}/tellico/pics
+pic_DATA = book.png tellico.png person.png person-open.png album.png video.png bibtex.png coin.png card.png stamp.png wine.png comic.png
 subdir = icons
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -471,13 +471,13 @@ docs-am:
 #>+ 10
 install-kde-icons:
 	$(mkinstalldirs) $(DESTDIR)$(icondir)/hicolor/16x16/apps
-	$(INSTALL_DATA) $(srcdir)/hi16-app-bookcase.png $(DESTDIR)$(icondir)/hicolor/16x16/apps/bookcase.png
+	$(INSTALL_DATA) $(srcdir)/hi16-app-tellico.png $(DESTDIR)$(icondir)/hicolor/16x16/apps/tellico.png
 	$(mkinstalldirs) $(DESTDIR)$(icondir)/hicolor/32x32/apps
-	$(INSTALL_DATA) $(srcdir)/hi32-app-bookcase.png $(DESTDIR)$(icondir)/hicolor/32x32/apps/bookcase.png
+	$(INSTALL_DATA) $(srcdir)/hi32-app-tellico.png $(DESTDIR)$(icondir)/hicolor/32x32/apps/tellico.png
 
 uninstall-kde-icons:
-	-rm -f $(DESTDIR)$(icondir)/hicolor/16x16/apps/bookcase.png
-	-rm -f $(DESTDIR)$(icondir)/hicolor/32x32/apps/bookcase.png
+	-rm -f $(DESTDIR)$(icondir)/hicolor/16x16/apps/tellico.png
+	-rm -f $(DESTDIR)$(icondir)/hicolor/32x32/apps/tellico.png
 
 #>+ 6
 force-reedit:

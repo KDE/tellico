@@ -182,7 +182,7 @@ QString ImportDialog::fileFilter(ImportFormat format_) {
   QString text;
   switch(format_) {
     case BookcaseXML:
-      text = i18n("*.bc|Bookcase files (*.bc)") + QChar('\n');
+      text = i18n("*.bc|Tellico files (*.bc)") + QChar('\n');
       break;
 
     case Bibtex:

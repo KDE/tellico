@@ -292,7 +292,7 @@ export-csv.png
 
 ####### kdevelop will overwrite this part!!! (end)############
 KDE_LANG = en
-KDE_DOCS = bookcase
+KDE_DOCS = tellico
 
 CLEANFILES = *~
 subdir = doc/en
@@ -331,7 +331,9 @@ TAGS:
 ctags: CTAGS
 CTAGS:
 
-DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+#>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+#>+ 1
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 
 top_distdir = ../..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
@@ -463,26 +465,29 @@ uninstall-am: uninstall-info-am
 .NOEXPORT:
 
 
+#>+ 2
+KDE_DIST=index.cache.bz2 
+
 #>+ 24
-index.cache.bz2: $(srcdir)/index.docbook $(KDE_XSL_STYLESHEET) index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook details.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png 
+index.cache.bz2: $(srcdir)/index.docbook $(KDE_XSL_STYLESHEET) fields-dialog.png hacking.docbook index.docbook importing-exporting.docbook configuration.docbook template-options.png entry-editor1.png bibtex-options.png general-options.png entry-editor2.png entry-editor3.png entry-editor4.png export-options.png export-csv.png fundamentals.docbook details.docbook filter-dialog.png menus.docbook export-html.png print-options.png faqs.docbook fetch-dialog.png csv-dialog.png main-window.png 
 	@if test -n "$(MEINPROC)"; then echo $(MEINPROC) --check --cache index.cache.bz2 $(srcdir)/index.docbook; $(MEINPROC) --check --cache index.cache.bz2 $(srcdir)/index.docbook; fi
 
 docs-am: index.cache.bz2
 
 install-docs: docs-am install-nls
-	$(mkinstalldirs) $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase
+	$(mkinstalldirs) $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico
 	@if test -f index.cache.bz2; then \
-	echo $(INSTALL_DATA) index.cache.bz2 $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/; \
-	$(INSTALL_DATA) index.cache.bz2 $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/; \
+	echo $(INSTALL_DATA) index.cache.bz2 $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/; \
+	$(INSTALL_DATA) index.cache.bz2 $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/; \
 	elif test -f  $(srcdir)/index.cache.bz2; then \
-	echo $(INSTALL_DATA) $(srcdir)/index.cache.bz2 $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/; \
-	$(INSTALL_DATA) $(srcdir)/index.cache.bz2 $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/; \
+	echo $(INSTALL_DATA) $(srcdir)/index.cache.bz2 $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/; \
+	$(INSTALL_DATA) $(srcdir)/index.cache.bz2 $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/; \
 	fi
-	-rm -f $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/common
-	$(LN_S) $(kde_libs_htmldir)/$(KDE_LANG)/common $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/common
+	-rm -f $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/common
+	$(LN_S) $(kde_libs_htmldir)/$(KDE_LANG)/common $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/common
 
 uninstall-docs:
-	-rm -rf $(kde_htmldir)/$(KDE_LANG)/bookcase
+	-rm -rf $(kde_htmldir)/$(KDE_LANG)/tellico
 
 clean-docs:
 	-rm -f index.cache.bz2
@@ -490,21 +495,21 @@ clean-docs:
 
 #>+ 13
 install-nls:
-	$(mkinstalldirs) $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase
-	@for base in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook details.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
-	  echo $(INSTALL_DATA) $$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
-	  $(INSTALL_DATA) $(srcdir)/$$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
+	$(mkinstalldirs) $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico
+	@for base in fields-dialog.png hacking.docbook index.docbook importing-exporting.docbook configuration.docbook template-options.png entry-editor1.png bibtex-options.png general-options.png entry-editor2.png entry-editor3.png entry-editor4.png export-options.png export-csv.png fundamentals.docbook details.docbook filter-dialog.png menus.docbook export-html.png print-options.png faqs.docbook fetch-dialog.png csv-dialog.png main-window.png ; do \
+	  echo $(INSTALL_DATA) $$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/$$base ;\
+	  $(INSTALL_DATA) $(srcdir)/$$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/$$base ;\
 	done
 
 uninstall-nls:
-	for base in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook details.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
-	  rm -f $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
+	for base in fields-dialog.png hacking.docbook index.docbook importing-exporting.docbook configuration.docbook template-options.png entry-editor1.png bibtex-options.png general-options.png entry-editor2.png entry-editor3.png entry-editor4.png export-options.png export-csv.png fundamentals.docbook details.docbook filter-dialog.png menus.docbook export-html.png print-options.png faqs.docbook fetch-dialog.png csv-dialog.png main-window.png ; do \
+	  rm -f $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/$$base ;\
 	done
 
 
 #>+ 5
 distdir-nls:
-	for file in index.docbook configuration.docbook faqs.docbook csv-dialog.png fundamentals.docbook main-window.png menus.docbook details.docbook entry-editor3.png importing-exporting.docbook general-options.png print-options.png template-options.png entry-editor1.png hacking.docbook entry-editor2.png entry-editor4.png bibtex-options.png filter-dialog.png fetch-dialog.png fields-dialog.png export-options.png export-html.png export-csv.png ; do \
+	for file in fields-dialog.png hacking.docbook index.docbook importing-exporting.docbook configuration.docbook template-options.png entry-editor1.png bibtex-options.png general-options.png entry-editor2.png entry-editor3.png entry-editor4.png export-options.png export-csv.png fundamentals.docbook details.docbook filter-dialog.png menus.docbook export-html.png print-options.png faqs.docbook fetch-dialog.png csv-dialog.png main-window.png ; do \
 	  cp $(srcdir)/$$file $(distdir); \
 	done
 

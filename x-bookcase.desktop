@@ -1,8 +1,0 @@
-[Desktop Entry]
-Comment=Bookcase Data File
-DefaultApp=bookcase
-Icon=bookcase.png
-MimeType=application/x-bookcase
-Patterns=*.bc;
-Type=MimeType
-X-KDE-AutoEmbed=false

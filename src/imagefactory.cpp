@@ -114,7 +114,7 @@ void ImageFactory::createTempDir() {
        No check is made if the specified filename actually exists. Missing directories are created.
        If filename is only a directory, without a specific file, filename must have a trailing slash.
   */
-  s_tempDir = locateLocal("tmp", QString::fromLatin1("bookcase")
+  s_tempDir = locateLocal("tmp", QString::fromLatin1("tellico")
               + kapp->randomString(6)
               + QString::fromLatin1(".tmp")
               + QString::fromLatin1("/"));

@@ -8,12 +8,12 @@
    ===================================================================
    Bookcase XSLT file - some common templates.
 
-   $Id: bookcase-common.xsl 776 2004-08-21 00:26:27Z robby $
+   $Id: bookcase-common.xsl 885 2004-09-20 05:56:18Z robby $
 
    Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
-   application, which can be found at http://www.periapsis.org/bookcase/
+   application, which can be found at http://www.periapsis.org/tellico/
    ===================================================================
 -->
 

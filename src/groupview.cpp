@@ -36,7 +36,7 @@ using Bookcase::GroupView;
 GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
     : MultiSelectionListView(parent_, name_), m_showCount(false) {
   // the app name isn't translated
-  addColumn(QString::fromLatin1("Bookcase"));
+  addColumn(QString::fromLatin1("Tellico"));
   addColumn(QString::null, 0); // hide this column, use for sorting by group count
   setResizeMode(QListView::NoColumn);
   // hide the header since there's only one column

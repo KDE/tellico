@@ -37,5 +37,5 @@ INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $
 
 KDE_OPTIONS = noautodist
 
-appdir = $(kde_datadir)/bookcase
+appdir = $(kde_datadir)/tellico
 app_DATA = bibtex-translation.xml

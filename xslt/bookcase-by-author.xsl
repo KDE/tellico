@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:bc ="http://periapsis.org/bookcase/"
                 version="1.0">
 
 <!--
    ================================================================
-   Bookcase XSLT file - sort by author
+   Tellico XSLT file - sort by author
 
-   $Id: bookcase-by-author.xsl 752 2004-08-08 17:11:06Z robby $
+   $Id: bookcase-by-author.xsl 885 2004-09-20 05:56:18Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with XML data files
-   from the 'bookcase' application, which can be found at:
-   http://www.periapsis.org/bookcase/
+   from the 'tellico' application, which can be found at:
+   http://www.periapsis.org/tellico/
    ================================================================
 -->
 
@@ -64,7 +64,7 @@
          padding-top: 10px;
          padding-bottom: 10px;
          margin-bottom: 5px;
-   } 
+   }
    .title {
          padding: 4px;
          line-height: 18px;
@@ -76,14 +76,14 @@
    .subtitle {
          margin-left: 10px;
          font-size: 12px;
-   } 
+   }
    .author {
          margin-right: 3px;
          margin-bottom: 2px;
          background: #eee;
          font-size: 14px;
          font-weight: bold;
-   } 
+   }
    .books {
          background: rgb(204,204,204);
          padding-left: 4px;
@@ -95,7 +95,7 @@
    ul {
          margin: 0px;
          padding: 0px;
-   } 
+   }
    </style>
   </head>
   <body>
@@ -121,13 +121,13 @@
   </div>
   <div class="books">
    <ul>
-    <xsl:for-each select="$no-author"> 
+    <xsl:for-each select="$no-author">
      <xsl:sort select="bc:title"/>
      <xsl:apply-templates select="."/>
     </xsl:for-each>
    </ul>
   </div>
- </xsl:if> 
+ </xsl:if>
 
  <xsl:for-each select="$unique-authors">
   <xsl:sort select="."/>
@@ -136,7 +136,7 @@
   </div>
   <div class="books">
    <ul>
-    <xsl:for-each select="key('books', .)"> 
+    <xsl:for-each select="key('books', .)">
      <xsl:sort select="bc:title"/>
 <!-- or sort by series and number -->
 <!-- <xsl:sort select="bc:series"/>
@@ -145,7 +145,7 @@
     </xsl:for-each>
    </ul>
   </div>
- </xsl:for-each> 
+ </xsl:for-each>
 </xsl:template>
 
 <xsl:template match="bc:entry">

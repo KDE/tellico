@@ -40,7 +40,7 @@ EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
   setSpacing(4);
 //  setWordWrapIconText(false);
 
-  m_defaultPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("bookcase"), KIcon::User);
+  m_defaultPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("tellico"), KIcon::User);
 
   m_itemMenu = new KPopupMenu(this);
   Controller::self()->plugEntryActions(m_itemMenu);

@@ -79,7 +79,7 @@
 #include <qmetaobject.h> // needed for copy, cut, paste slots
 #include <qwhatsthis.h>
 
-//#define UIFILE QString::fromLatin1("/home/robby/projects/bookcase/src/bookcaseui.rc")
+//#define UIFILE QString::fromLatin1("/home/robby/projects/bookcase/src/tellicoui.rc")
 
 using Bookcase::MainWindow;
 
@@ -107,7 +107,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainW
   // has to be aftfer controller init
   Kernel::init(this, "kernel"); // the only time this is ever called!
 
-  setIcon(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("bookcase"), KIcon::Desktop));
+  setIcon(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("tellico"), KIcon::Desktop));
 
   // initialize the status bar and progress bar
   initStatusBar();
@@ -289,8 +289,8 @@ void MainWindow::initActions() {
   m_fileImportMenu->setDelayed(false);
 
   action = new KAction(actionCollection(), "file_import_bookcase");
-  action->setText(i18n("Import Bookcase Data"));
-  action->setToolTip(i18n("Import another Bookcase data file"));
+  action->setText(i18n("Import Tellico Data"));
+  action->setToolTip(i18n("Import another Tellico data file"));
   m_fileImportMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, ImportDialog::BookcaseXML);
@@ -372,7 +372,7 @@ void MainWindow::initActions() {
 
   action = new KAction(actionCollection(), "file_export_xml");
   action->setText(i18n("Export to XML"));
-  action->setToolTip(i18n("Export to a Bookcase XML file"));
+  action->setToolTip(i18n("Export to a Tellico XML file"));
   m_fileExportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, ExportDialog::XML);
@@ -911,7 +911,7 @@ void MainWindow::slotFileOpen() {
   slotStatusMsg(i18n("Opening file..."));
 
   if(m_editDialog->queryModified() && Kernel::self()->doc()->saveModified()) {
-    QString filter = i18n("*.bc|Bookcase files (*.bc)");
+    QString filter = i18n("*.bc|Tellico files (*.bc)");
     filter += QString::fromLatin1("\n");
     filter += i18n("*.xml|XML files (*.xml)");
     filter += QString::fromLatin1("\n");
@@ -1018,7 +1018,7 @@ void MainWindow::slotFileSaveAs() {
 
   slotStatusMsg(i18n("Saving file with a new filename..."));
 
-  QString filter = i18n("*.bc|Bookcase files (*.bc)");
+  QString filter = i18n("*.bc|Tellico files (*.bc)");
   filter += QString::fromLatin1("\n");
   filter += i18n("*|All files");
 
@@ -1280,7 +1280,7 @@ void MainWindow::slotHideConfigDialog() {
 }
 
 void MainWindow::slotShowTipOfDay(bool force_/*=true*/) {
-  QString tipfile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("bookcase.tips"));
+  QString tipfile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("tellico.tips"));
   KTipDialog::showTip(this, tipfile, force_);
 }
 
@@ -1513,7 +1513,7 @@ void MainWindow::doPrint(const QString& html_) {
   if(printer->setup(this, i18n("Print %1").arg(Kernel::self()->doc()->URL().prettyURL()))) {
     //viewport()->setCursor(waitCursor);
     printer->setFullPage(false);
-    printer->setCreator(QString::fromLatin1("Bookcase"));
+    printer->setCreator(QString::fromLatin1("Tellico"));
     printer->setDocName(Kernel::self()->doc()->URL().prettyURL());
 
     QPainter *p = new QPainter;
@@ -1571,7 +1571,7 @@ void MainWindow::doPrint(const QString& html_) {
 }
 
 void MainWindow::XSLTError() {
-  QString str = i18n("Bookcase encountered an error in XSLT processing.") + QChar('\n');
+  QString str = i18n("Tellico encountered an error in XSLT processing.") + QChar('\n');
   str += i18n("Please check your installation.");
   KMessageBox::sorry(this, str);
 }
@@ -1959,7 +1959,7 @@ void MainWindow::slotCiteEntry() {
   lyxpipe += QString::fromLatin1(".in");
 //  kdDebug() << "MainWindow::slotCiteEntry() - " << lyxpipe << endl;
 
-  QString errorStr = i18n("<qt>Bookcase is unable to write to the server pipe at <b>%1</b>.</qt>").arg(lyxpipe);
+  QString errorStr = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>").arg(lyxpipe);
   QCString pipe = QFile::encodeName(lyxpipe);
   if(!QFile::exists(pipe)) {
     KMessageBox::sorry(this, errorStr);

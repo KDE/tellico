@@ -246,7 +246,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
   QWhatsThis::add(m_complete, i18n("If checked, KDE auto-completion will be enabled in the "
                                    "text edit box for this field."));
   m_multiple = new QCheckBox(i18n("Allow multiple values"), optionsGroup);
-  QWhatsThis::add(m_multiple, i18n("If checked, Bookcase will parse the values in the field "
+  QWhatsThis::add(m_multiple, i18n("If checked, Tellico will parse the values in the field "
                                    "for multiple values, separated by a semi-colon."));
   m_grouped = new QCheckBox(i18n("Allow grouping"), optionsGroup);
   QWhatsThis::add(m_grouped, i18n("If checked, this field may be used to group the entries in "

@@ -2,13 +2,13 @@
 <title>Importing and Exporting Data</title>
 
 <para>
-&bookcase; is able to import and export a wide variety of data files, as well as search various Internet sites for information.
+&tellico; is able to import and export a wide variety of data files, as well as search various Internet sites for information.
 </para>
 
 <sect1 id="internet-search">
 <title>Importing from the Internet</title>
 <para>
-&bookcase; is able to search various Internet sites using the &fetch-dialog;. Entries may be directly imported and added to your current collection. Currently, the only available sites to search are the various ones associated with <ulink url="http://amazon.com">Amazon.com</ulink>.
+&tellico; is able to search various Internet sites using the &fetch-dialog;. Entries may be directly imported and added to your current collection. Currently, the only available sites to search are the various ones associated with <ulink url="http://amazon.com">Amazon.com</ulink>.
 </para>
 
 <para>
@@ -20,11 +20,11 @@ To facilitate the use of barcode scanners, searches can include multiple ISBN va
 </para>
 
 <screenshot>
-<screeninfo>The &bookcase; &fetch-dialog;</screeninfo>
+<screeninfo>The &tellico; &fetch-dialog;</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
-<textobject><phrase>The &bookcase; &fetch-dialog;</phrase></textobject>
-<caption><para>The &bookcase; &fetch-dialog;</para></caption>
+<textobject><phrase>The &tellico; &fetch-dialog;</phrase></textobject>
+<caption><para>The &tellico; &fetch-dialog;</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -32,7 +32,7 @@ To facilitate the use of barcode scanners, searches can include multiple ISBN va
 <title>Amazon.com</title>
 
 <para>
-Using the Amazon Web Services, &bookcase; can search four different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, and Japan. You can also <link linkend="hidden-amazon-web-services">change the settings for accessing the Amazon Web Services</link>.
+Using the Amazon Web Services, &tellico; can search four different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, and Japan. You can also <link linkend="hidden-amazon-web-services">change the settings for accessing the Amazon Web Services</link>.
 </para>
 </sect2>
 
@@ -42,14 +42,14 @@ Using the Amazon Web Services, &bookcase; can search four different internationa
 <title>Importing Data</title>
 
 <para>
-&bookcase; offers three different actions when importing data. <guilabel>Replace collection</guilabel> indicates the current collection should be closed, and a new one created with the data from the imported file. <guilabel>Append collection</guilabel> tells &bookcase; to add all the entries in the imported collection to the current one, and to add any fields which don't currently exist. The <guilabel>Merge collection</guilabel> action is the same as appending, except that each imported entry is compared to the current ones, and any identical entries are skipped. Future plans include an improved heuristic for identifying matching entries, but currently, except for music collections, they must be identical for every field. Music collections compare the artist and album only, and the tracks are merged for matching entries. The <link linkend="importing-audio-files">audio file importer</link> is able to correctly build track lists by merging entries.
+&tellico; offers three different actions when importing data. <guilabel>Replace collection</guilabel> indicates the current collection should be closed, and a new one created with the data from the imported file. <guilabel>Append collection</guilabel> tells &tellico; to add all the entries in the imported collection to the current one, and to add any fields which don't currently exist. The <guilabel>Merge collection</guilabel> action is the same as appending, except that each imported entry is compared to the current ones, and any identical entries are skipped. Future plans include an improved heuristic for identifying matching entries, but currently, except for music collections, they must be identical for every field. Music collections compare the artist and album only, and the tracks are merged for matching entries. The <link linkend="importing-audio-files">audio file importer</link> is able to correctly build track lists by merging entries.
 </para>
 
 <sect2 id="importing-bookcase">
-<title>Importing Bookcase Data</title>
+<title>Importing &tellico; Data</title>
 
 <para>
-Other &bookcase; data files may be imported. Replacing the current collection by importing a &bookcase; file is the same thing as just opening the file itself. The value of importing &bookcase; data is primarily for appending or merging two collections together.
+Other &tellico; data files may be imported. Replacing the current collection by importing a &tellico; file is the same thing as just opening the file itself. The value of importing &tellico; data is primarily for appending or merging two collections together.
 </para>
 </sect2>
 
@@ -74,7 +74,7 @@ First, select the type of collection that you are importing. If you are appendin
 </para>
 
 <para>
-In order for &bookcase; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the dropdown list and clicking the <guibutton>Assign Field</guibutton> button. If you need to add a new field to the collection, the last item in the dropdown list opens the  <link linkend="fields-dialog">&fields-dialog;</link>.
+In order for &tellico; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the dropdown list and clicking the <guibutton>Assign Field</guibutton> button. If you need to add a new field to the collection, the last item in the dropdown list opens the  <link linkend="fields-dialog">&fields-dialog;</link>.
 </para>
 
 <para>
@@ -87,7 +87,7 @@ Only the first five lines of the imported CSV file are shown in the dialog.
 <title>Importing Audio CD Data</title>
 
 <para>
-&bookcase; is able to use the <ulink url="http://freedb.org">freedb.org</ulink> service to lookup
+&tellico; is able to use the <ulink url="http://freedb.org">freedb.org</ulink> service to lookup
 information about a <acronym>CD</acronym>, including the track list.
 </para>
 </sect2>
@@ -96,7 +96,7 @@ information about a <acronym>CD</acronym>, including the track list.
 <title>Importing Audio File Metadata</title>
 
 <para>
-&bookcase; is able to scan a directory and read the tags for common audio file formats, such as <literal role="extension">mp3</literal> and <literal role="extension">ogg</literal>. The songs are entered in a music collection, where each entry is an album. If the song files contain the track number, the song name is inserted in the correct spot in the track list. The artist and genre information is also added to the entry. If the song tags contain comments, they are appended to the comments field in the entry, preceded by the file name.
+&tellico; is able to scan a directory and read the tags for common audio file formats, such as <literal role="extension">mp3</literal> and <literal role="extension">ogg</literal>. The songs are entered in a music collection, where each entry is an album. If the song files contain the track number, the song name is inserted in the correct spot in the track list. The artist and genre information is also added to the entry. If the song tags contain comments, they are appended to the comments field in the entry, preceded by the file name.
 </para>
 
 <para>
@@ -122,11 +122,11 @@ The audio file metadata importer can recursively scan a directory to find all au
 <title>Importing Bibtex Data</title>
 
 <para>
-<ulink url="http://www.ecst.csuchico.edu/~jacobsd/bib/formats/bibtex.html">Bibtex</ulink> is a bibliography format used with the LaTeX document preparation system. Various type of bibliographic references may be included in the file. &bookcase; imports bibtex files as a Bibliographic collection.
+<ulink url="http://www.ecst.csuchico.edu/~jacobsd/bib/formats/bibtex.html">Bibtex</ulink> is a bibliography format used with the LaTeX document preparation system. Various type of bibliographic references may be included in the file. &tellico; imports bibtex files as a Bibliographic collection.
 </para>
 
 <para>
-If the bibtex importer encounters fields in the file which are not in the default bibliography collection, they are added as <link linkend="line">Simple Text</link> fields, with two exceptions. If the field value contains more than 100 characters, it becomes a <link linkend="para">Paragraph</link> field. If the field value appears to contain a &URL; or a file reference, then a <link linkend="url">URL</link> field is created. &bookcase; uses an internal copy of the <ulink url="http://www.gerg.ca/software/btOOL/">btparse library</ulink> for parsing the bibtex files.
+If the bibtex importer encounters fields in the file which are not in the default bibliography collection, they are added as <link linkend="line">Simple Text</link> fields, with two exceptions. If the field value contains more than 100 characters, it becomes a <link linkend="para">Paragraph</link> field. If the field value appears to contain a &URL; or a file reference, then a <link linkend="url">URL</link> field is created. &tellico; uses an internal copy of the <ulink url="http://www.gerg.ca/software/btOOL/">btparse library</ulink> for parsing the bibtex files.
 </para>
 </sect2>
 
@@ -143,7 +143,7 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 <title>Importing MODS Data</title>
 
 <para>
-<acronym><ulink url="http://www.loc.gov/standards/mods/">MODS</ulink></acronym> is a format for representing various types of media collections. Currently, only books may be imported to &bookcase;.
+<acronym><ulink url="http://www.loc.gov/standards/mods/">MODS</ulink></acronym> is a format for representing various types of media collections. Currently, only books may be imported to &tellico;.
 </para>
 
 </sect2>
@@ -152,7 +152,7 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 <title>Importing &xml; Data via XSLT</title>
 
 <para>
-Any &xml; file may be imported into &bookcase; provided an XSL stylesheet is available to convert the file to &bookcase; format. &bookcase; automatically loads the stylesheet and performs the XSLT processing needed to load the file.
+Any &xml; file may be imported into &tellico; provided an XSL stylesheet is available to convert the file to &tellico; format. &tellico; automatically loads the stylesheet and performs the XSLT processing needed to load the file.
 </para>
 </sect2>
 
@@ -162,7 +162,7 @@ Any &xml; file may be imported into &bookcase; provided an XSL stylesheet is ava
 <title>Exporting Data</title>
 
 <para>
-When exporting the data in the collection, the entry values may be exported as entered, or with the <link linkend="field-formatting">automatic formatting</link> provided by &bookcase;. Additionally, the export may be limited to the currently selected entries of the collection as well, where the <link linkend="status-bar">statusbar</link> shows the number of selected entries.
+When exporting the data in the collection, the entry values may be exported as entered, or with the <link linkend="field-formatting">automatic formatting</link> provided by &tellico;. Additionally, the export may be limited to the currently selected entries of the collection as well, where the <link linkend="status-bar">statusbar</link> shows the number of selected entries.
 </para>
 
 <para>
@@ -182,7 +182,7 @@ Exported text files, such as Bibtex or CSV, may use the Unicode (UTF-8) characte
 <title>Exporting &xml;</title>
 
 <para>
-The file format for &bookcase; data is a zipped &xml; file. Exporting to &xml; merely creates the &xml; file without zipping it. Images may be included in the &xml; file as base64-encoded data in an image element.
+The file format for &tellico; data is a zipped &xml; file. Exporting to &xml; merely creates the &xml; file without zipping it. Images may be included in the &xml; file as base64-encoded data in an image element.
 </para>
 </sect2>
 
@@ -253,7 +253,7 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 <title>Exporting &xml; via XSLT</title>
 
 <para>
-Finally, &bookcase; is able to process its internal &xml; representation of the collection data through an external XSL stylesheet before exporting. This type of export may be useful for generating text reports or other file types.
+Finally, &tellico; is able to process its internal &xml; representation of the collection data through an external XSL stylesheet before exporting. This type of export may be useful for generating text reports or other file types.
 </para>
 </sect2>
 
