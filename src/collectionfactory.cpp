@@ -24,10 +24,10 @@
 
 #include <kdebug.h>
 
-using Bookcase::CollectionFactory;
+using Tellico::CollectionFactory;
 
 // static
-Bookcase::Data::Collection* CollectionFactory::collection(Data::Collection::Type type_, bool addFields_) {
+Tellico::Data::Collection* CollectionFactory::collection(Data::Collection::Type type_, bool addFields_, const QString& entryTitle_) {
   switch(type_) {
     case Data::Collection::Book:
       return new Data::BookCollection(addFields_);
@@ -68,7 +68,7 @@ Bookcase::Data::Collection* CollectionFactory::collection(Data::Collection::Type
     case Data::Collection::Base:
       {
         Data::Collection* c = new Data::Collection(i18n("My Collection"), QString::fromLatin1("entry"),
-                                                   i18n("Entry"));
+                                                   entryTitle_);
         Data::Field* f = new Data::Field(QString::fromLatin1("title"), i18n("Title"));
         f->setCategory(i18n("General"));
         f->setFlags(Data::Field::NoDelete);
@@ -82,7 +82,7 @@ Bookcase::Data::Collection* CollectionFactory::collection(Data::Collection::Type
       kdWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_ << endl;
       {
         Data::Collection* c = new Data::Collection(i18n("My Collection"), QString::fromLatin1("entry"),
-                                                   i18n("Entry"));
+                                                   entryTitle_);
         Data::Field* f = new Data::Field(QString::fromLatin1("title"), i18n("Title"));
         f->setCategory(i18n("General"));
         f->setFlags(Data::Field::NoDelete);
@@ -95,7 +95,7 @@ Bookcase::Data::Collection* CollectionFactory::collection(Data::Collection::Type
 }
 
 // static
-Bookcase::Data::Collection* CollectionFactory::collection(const QString& entryName_, bool addFields_) {
+Tellico::Data::Collection* CollectionFactory::collection(const QString& entryName_, bool addFields_) {
   if(entryName_ == entryName(Data::Collection::Book)) {
     return new Data::BookCollection(addFields_);
   } else if(entryName_ == entryName(Data::Collection::Album)) {
@@ -120,7 +120,7 @@ Bookcase::Data::Collection* CollectionFactory::collection(const QString& entryNa
   }
 }
 
-Bookcase::CollectionNameMap CollectionFactory::nameMap() {
+Tellico::CollectionNameMap CollectionFactory::nameMap() {
   CollectionNameMap map;
   map[Data::Collection::Book]   = i18n("Book Collection");
   map[Data::Collection::Bibtex] = i18n("Bibliography");

@@ -16,11 +16,11 @@
 
 #include <qtabwidget.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: tabcontrol.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: tabcontrol.h 862 2004-09-15 01:49:51Z robby $
  */
 class TabControl : public QTabWidget {
 Q_OBJECT

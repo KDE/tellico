@@ -14,11 +14,12 @@
 #include "fieldwidget.h"
 #include "collection.h"
 #include "isbnvalidator.h"
-#include "utils.h"
 #include "imagewidget.h"
 #include "fieldcompletion.h"
 #include "datewidget.h"
 #include "latin1literal.h"
+#include "ratingwidget.h"
+#include "tellico_kernel.h" // for Kernel::URL()
 
 #include <kcompletion.h>
 #include <kdebug.h>
@@ -26,8 +27,10 @@
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <kurllabel.h>
+#include <kurlcompletion.h>
 #include <krun.h>
 #include <kpushbutton.h>
+#include <kdeversion.h>
 
 #include <qcheckbox.h>
 #include <qtextedit.h>
@@ -35,25 +38,38 @@
 #include <qwhatsthis.h>
 #include <qtable.h>
 
-static const int MIN_TABLE_ROWS = 5;
+namespace {
+  static const int MIN_TABLE_ROWS = 5;
+}
 
-using Bookcase::FieldWidget;
+using Tellico::FieldWidget;
 
-QGuardedPtr<Bookcase::Data::Collection> FieldWidget::s_coll = 0;
+// subclass of KURLCompletion is needed so the KURLLabel
+// can open relative links. I don't want to have to have to update
+// the base directory of the completion every time a new document is opened
+QString FieldWidget::MyCompletion::makeCompletion(const QString& text_) {
+  // KURLCompletion::makeCompletion() uses an internal variable instead
+  // of calling KURLCompletion::dir() so need to set the base dir before completing
+  setDir(Kernel::self()->URL().directory());
+  return KURLCompletion::makeCompletion(text_);
+}
+
+QGuardedPtr<Tellico::Data::Collection> FieldWidget::s_coll = 0;
 const QRegExp FieldWidget::s_semiColon = QRegExp(QString::fromLatin1("\\s*;\\s*"));
 const QRegExp FieldWidget::s_comma = QRegExp(QString::fromLatin1("\\s*,\\s*"));
 
-FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, const char* name_/*=0*/)
+FieldWidget::FieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
     : QWidget(parent_, name_), m_type(field_->type()), m_run(0),
-      m_allowMultiple(field_->flags() & Data::Field::AllowMultiple) {
+      m_allowMultiple(field_->flags() & Data::Field::AllowMultiple),
+      m_isRating(false), m_relativeURL(false) {
   QHBoxLayout* l = new QHBoxLayout(this, 0, 4); // parent, margin, spacing
   l->addSpacing(4);
 
   if(m_type == Data::Field::URL) {
     // set URL to null for now
-    m_label = new KURLLabel(QString::null, field_->title() + QString::fromLatin1(":"), this);
+    m_label = new KURLLabel(QString::null, field_->title() + QChar(':'), this);
   } else {
-    m_label = new QLabel(field_->title() + QString::fromLatin1(":"), this);
+    m_label = new QLabel(field_->title() + QChar(':'), this);
   }
   m_label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 //  m_label->setAlignment(Qt::AlignVCenter);
@@ -104,8 +120,14 @@ FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, cons
       }
       break;
 
+    // it's a rating if name is rating, or extended property rating is true, and all are numbers
     case Data::Field::Choice:
-      {
+      if(RatingWidget::handleField(field_)) {
+        m_isRating = true;
+        RatingWidget* rw = new RatingWidget(field_, this);
+        connect(rw, SIGNAL(modified()), SIGNAL(modified()));
+        m_editWidget = rw;
+      } else {
         KComboBox* kc = new KComboBox(this);
         connect(kc, SIGNAL(activated(int)), SIGNAL(modified()));
         // always have empty choice
@@ -148,10 +170,14 @@ FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, cons
     case Data::Field::URL:
       {
         KURLRequester* ku = new KURLRequester(this);
+        ku->lineEdit()->setCompletionObject(new MyCompletion());
         connect(ku, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
         connect(ku, SIGNAL(textChanged(const QString&)), m_label, SLOT(setURL(const QString&)));
         connect(m_label, SIGNAL(leftClickedURL(const QString&)), SLOT(slotOpenURL(const QString&)));
         m_editWidget = ku;
+
+        // special case, remember if it's a relative url
+        m_relativeURL = field_->property(QString::fromLatin1("relative")) == Latin1Literal("true");
       }
       break;
 
@@ -278,7 +304,10 @@ void FieldWidget::clear() {
       break;
 
     case Data::Field::Choice:
-      {
+      if(m_isRating) {
+        RatingWidget* rw = static_cast<RatingWidget*>(m_editWidget);
+        rw->clear();
+      } else {
         KComboBox* kc = static_cast<KComboBox*>(m_editWidget);
         kc->setCurrentItem(0);
       }
@@ -374,7 +403,10 @@ QString FieldWidget::text() const {
       break;
 
     case Data::Field::Choice:
-      {
+      if(m_isRating) {
+        RatingWidget* rw = static_cast<RatingWidget*>(m_editWidget);
+        text = rw->text();
+      } else {
         KComboBox* kc = static_cast<KComboBox*>(m_editWidget);
         text = kc->currentText();
       }
@@ -393,6 +425,13 @@ QString FieldWidget::text() const {
       {
         KURLRequester* ku = static_cast<KURLRequester*>(m_editWidget);
         text = ku->url();
+        if(m_relativeURL) {
+#if KDE_IS_VERSION(3,1,90)
+          text = KURL::relativeURL(Kernel::self()->URL(), text);
+#else
+          kdDebug() << "KDE 3.2 or higher is required to use relative URLs." << endl;
+#endif
+        }
       }
       break;
 
@@ -400,7 +439,7 @@ QString FieldWidget::text() const {
     case Data::Field::Table2:
       {
         QTable* qt = static_cast<QTable*>(m_editWidget);
-         QString delim, rowStr;
+        QString delim, rowStr;
         for(int row = 0; row < qt->numRows(); ++row) {
           rowStr.truncate(0);
           for(int col = 0; col < qt->numCols(); ++col) {
@@ -489,7 +528,10 @@ void FieldWidget::setText(const QString& text_) {
       break;
 
     case Data::Field::Choice:
-      {
+      if(m_isRating) {
+        RatingWidget* rw = static_cast<RatingWidget*>(m_editWidget);
+        rw->setText(text_);
+      } else {
         KComboBox* kc = static_cast<KComboBox*>(m_editWidget);
         for(int i = 0; i < kc->count(); ++i) {
           if(kc->text(i) == text_) {
@@ -652,10 +694,8 @@ void FieldWidget::setHighlighted(const QString&) const {
 }
 
 void FieldWidget::slotOpenURL(const QString& url_) {
-  KURL url(url_);
-  if(url.isValid()) {
-    m_run = new KRun(url);
-  }
+  // just in case, interpret string relative to document url
+  m_run = new KRun(KURL(Kernel::self()->URL(), url_));
 }
 
 void FieldWidget::slotCheckRows(int row_, int) {
@@ -673,11 +713,15 @@ void FieldWidget::updateField(Data::Field* newField_, Data::Field* oldField_) {
   QWhatsThis::add(m_editWidget, newField_->description());
   // FIXME: fix if the validator might have changed
   if(m_type == Data::Field::Choice) {
-    KComboBox* kc = static_cast<KComboBox*>(m_editWidget);
-    kc->clear();
-    // always have empty choice
-    kc->insertItem(QString::null);
-    kc->insertStringList(newField_->allowed());
+    if(m_isRating) {
+      static_cast<RatingWidget*>(m_editWidget)->updateField(newField_);
+    } else {
+      KComboBox* kc = static_cast<KComboBox*>(m_editWidget);
+      kc->clear();
+      // always have empty choice
+      kc->insertItem(QString::null);
+      kc->insertStringList(newField_->allowed());
+    }
   } else if(m_type == Data::Field::Line) {
     KLineEdit* kl = static_cast<KLineEdit*>(m_editWidget);
     bool wasComplete = (oldField_->flags() & Data::Field::AllowCompletion);
@@ -693,6 +737,8 @@ void FieldWidget::updateField(Data::Field* newField_, Data::Field* oldField_) {
     } else if(wasComplete && !isComplete) {
       kl->completionObject()->clear();
     }
+  } else if(m_type == Data::Field::URL) {
+    m_relativeURL = newField_->property(QString::fromLatin1("relative")) == Latin1Literal("true");
   }
 }
 

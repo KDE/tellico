@@ -14,7 +14,7 @@
 #ifndef BOOKCASECONTROLLER_H
 #define BOOKCASECONTROLLER_H
 
-namespace Bookcase {
+namespace Tellico {
   class MainWindow;
   class ViewStack;
   class DetailedListView;
@@ -31,11 +31,11 @@ namespace Bookcase {
 
 #include <qobject.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: controller.h 739 2004-08-05 05:37:17Z robby $
+ * @version $Id: controller.h 862 2004-09-15 01:49:51Z robby $
  */
 class Controller : public QObject {
 Q_OBJECT
@@ -43,9 +43,11 @@ Q_OBJECT
 public:
   static Controller* self() { return s_self; }
   /**
-   * Initializes the singleton. Should just be called once, from Bookcase::MainWindow
+   * Initializes the singleton. Should just be called once, from Tellico::MainWindow
    */
-  static void init(MainWindow* parent, const char* name=0) { if(!s_self) s_self = new Controller(parent, name); }
+  static void init(MainWindow* parent, const char* name=0) {
+    if(!s_self) s_self = new Controller(parent, name);
+  }
 
   /**
    * Initialize pointers to all the main widgets.
@@ -62,6 +64,9 @@ public:
    * Plug the default entry actions into a widget
    */
   void plugEntryActions(QWidget* widget);
+  /**
+   */
+  const GroupView* const groupView() const { return m_groupView; }
 
 public slots:
   /**
@@ -71,36 +76,36 @@ public slots:
    *
    * @param coll A pointer to the collection being added
    */
-  void slotCollectionAdded(Bookcase::Data::Collection* coll);
+  void slotCollectionAdded(Tellico::Data::Collection* coll);
   /**
    * Removes a collection from all the widgets
    *
    * @param coll A pointer to the collection being added
    */
-  void slotCollectionDeleted(Bookcase::Data::Collection* coll);
+  void slotCollectionDeleted(Tellico::Data::Collection* coll);
   void slotCollectionRenamed(const QString& name);
-  void slotEntryAdded(Bookcase::Data::Entry* entry);
-  void slotEntryModified(Bookcase::Data::Entry* entry);
-  void slotEntryDeleted(Bookcase::Data::Entry* entry);
-  void slotFieldAdded(Bookcase::Data::Collection* coll, Bookcase::Data::Field* field);
-  void slotFieldDeleted(Bookcase::Data::Collection* coll, Bookcase::Data::Field* field);
-  void slotFieldModified(Bookcase::Data::Collection* coll, Bookcase::Data::Field* oldField, Bookcase::Data::Field* newField);
-  void slotFieldsReordered(Bookcase::Data::Collection* coll);
-  void slotRefreshField(Bookcase::Data::Field* field);
+  void slotEntryAdded(Tellico::Data::Entry* entry);
+  void slotEntryModified(Tellico::Data::Entry* entry);
+  void slotEntryDeleted(Tellico::Data::Entry* entry);
+  void slotFieldAdded(Tellico::Data::Collection* coll, Tellico::Data::Field* field);
+  void slotFieldDeleted(Tellico::Data::Collection* coll, Tellico::Data::Field* field);
+  void slotFieldModified(Tellico::Data::Collection* coll, Tellico::Data::Field* oldField, Tellico::Data::Field* newField);
+  void slotFieldsReordered(Tellico::Data::Collection* coll);
+  void slotRefreshField(Tellico::Data::Field* field);
 
-  void slotUpdateSelection(QWidget* widget, const Bookcase::Data::Collection* coll);
-  void slotUpdateSelection(QWidget* widget, const Bookcase::Data::EntryGroup* group);
+  void slotUpdateSelection(QWidget* widget, const Tellico::Data::Collection* coll);
+  void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryGroup* group);
   /**
    * Updates the widgets when an entry is selected.
    *
    * param widget A pointer to the widget where the entries were selected
    * @param list The list of selected entries
    */
-  void slotUpdateSelection(QWidget* widget, const Bookcase::Data::EntryList& list=Bookcase::Data::EntryList());
-  void slotUpdateSelection(Bookcase::Data::Entry* entry, const QString& highlight);
+  void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryList& list=Tellico::Data::EntryList());
+  void slotUpdateSelection(Tellico::Data::Entry* entry, const QString& highlight);
   void slotDeleteSelectedEntries();
   void slotCopySelectedEntries();
-  void slotUpdateFilter(Bookcase::Filter* filter);
+  void slotUpdateFilter(Tellico::Filter* filter);
 
 private:
   static Controller* s_self;

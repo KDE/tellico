@@ -29,18 +29,22 @@
 #include <qregexp.h>
 #include <qdom.h>
 
-using Bookcase::BibtexHandler;
+using Tellico::BibtexHandler;
 
 BibtexHandler::StringListMap BibtexHandler::s_utf8LatexMap;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
-const QString BibtexHandler::s_bibtexmlNamespace = QString::fromLatin1("http://bibtexml.sf.net/");
 const QRegExp BibtexHandler::s_badKeyChars(QString::fromLatin1("[^0-9a-zA-Z-]"));
 
 QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
+  const Data::BibtexCollection* c = dynamic_cast<const Data::BibtexCollection*>(entry_->collection());;
+  const Data::Field* f = c->fieldByBibtexName(QString::fromLatin1("key"));
+  if(f) {
+    return entry_->field(f->name());
+  }
+
   QString author;
-  const Data::BibtexCollection* c = dynamic_cast<const Data::BibtexCollection*>(entry_->collection());
-  Data::Field* authorField = c->fieldByBibtexName(QString::fromLatin1("author"));
-  if(authorField->flags() & Data::Field::AllowMultiple) {
+  const Data::Field* authorField = c->fieldByBibtexName(QString::fromLatin1("author"));
+  if(authorField && (authorField->flags() & Data::Field::AllowMultiple)) {
     QString tmp = entry_->field(authorField->name());
     author = tmp.section(';', 0, 0);
   } else {
@@ -48,16 +52,16 @@ QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
   }
   author = author.lower();
 
-  Data::Field* f = c->fieldByBibtexName(QString::fromLatin1("title"));
+  const Data::Field* titleField = c->fieldByBibtexName(QString::fromLatin1("title"));
   QString title;
-  if(f) {
-    title = entry_->field(f->name()).lower();
+  if(titleField) {
+    title = entry_->field(titleField->name()).lower();
   }
 
-  f = c->fieldByBibtexName(QString::fromLatin1("year"));
+  const Data::Field* yearField = c->fieldByBibtexName(QString::fromLatin1("year"));
   QString year;
-  if(f) {
-    year = entry_->field(f->name());
+  if(yearField) {
+    year = entry_->field(yearField->name());
   }
   if(year.isEmpty()) {
     year = entry_->field(QString::fromLatin1("pub_year"));
@@ -73,11 +77,10 @@ QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
 QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, const QString& year_) {
   QString key;
   if(author_.find(',') == -1) {
-    key += author_.section(' ', -1);
+    key += author_.section(' ', -1) + '-';
   } else {
-    key += author_.section(',', 0, 0);
+    key += author_.section(',', 0, 0) + '-';
   }
-  key += QString::fromLatin1("-");
   QStringList words = QStringList::split(' ', title_);
   for(QStringList::ConstIterator it = words.begin(); it != words.end(); ++it) {
     key += (*it).left(1);
@@ -93,7 +96,10 @@ void BibtexHandler::loadTranslationMaps() {
     return;
   }
 
-  QDomDocument dom = FileHandler::readXMLFile(KURL(mapfile));
+  KURL u;
+  u.setPath(mapfile);
+  // no namespace processing
+  QDomDocument dom = FileHandler::readXMLFile(u, false);
 
   QDomNodeList keyList = dom.elementsByTagName(QString::fromLatin1("key"));
 

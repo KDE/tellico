@@ -25,16 +25,18 @@ extern "C" {
 #include <libxslt/xsltInternals.h>
 }
 
-static const int MAX_PARAMS = 2*16;
+namespace {
+  static const int MAX_PARAMS = 2*16;
+}
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * The XSLTHandler contains all the code which uses XSLT processing to generate HTML or to
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h 828 2004-09-03 05:08:23Z robby $
+ * @version $Id: xslthandler.h 929 2004-10-24 22:29:47Z robby $
  */
 class XSLTHandler {
 

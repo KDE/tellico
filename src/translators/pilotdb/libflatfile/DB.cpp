@@ -44,13 +44,15 @@
 using namespace PalmLib::FlatFile;
 using namespace PalmLib;
 
-static const pi_uint16_t CHUNK_FIELD_NAMES         = 0;
-static const pi_uint16_t CHUNK_FIELD_TYPES         = 1;
-static const pi_uint16_t CHUNK_FIELD_DATA          = 2;
-static const pi_uint16_t CHUNK_LISTVIEW_DEFINITION = 64;
-static const pi_uint16_t CHUNK_LISTVIEW_OPTIONS    = 65;
-static const pi_uint16_t CHUNK_LFIND_OPTIONS       = 128;
-static const pi_uint16_t CHUNK_ABOUT                    = 254;
+namespace {
+  static const pi_uint16_t CHUNK_FIELD_NAMES         = 0;
+  static const pi_uint16_t CHUNK_FIELD_TYPES         = 1;
+  static const pi_uint16_t CHUNK_FIELD_DATA          = 2;
+  static const pi_uint16_t CHUNK_LISTVIEW_DEFINITION = 64;
+  static const pi_uint16_t CHUNK_LISTVIEW_OPTIONS    = 65;
+  static const pi_uint16_t CHUNK_LFIND_OPTIONS       = 128;
+  static const pi_uint16_t CHUNK_ABOUT               = 254;
+}
 
 template <class Map, class Key>
 static inline bool has_key(const Map& map, const Key& key)

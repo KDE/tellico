@@ -24,9 +24,9 @@
 #include <qlabel.h>
 #include <qgroupbox.h>
 
-using Bookcase::Import::AlexandriaImporter;
+using Tellico::Import::AlexandriaImporter;
 
-Bookcase::Data::Collection* AlexandriaImporter::collection() {
+Tellico::Data::Collection* AlexandriaImporter::collection() {
   if(!m_widget || m_library->count() == 0) {
     return 0;
   }
@@ -46,13 +46,14 @@ Bookcase::Data::Collection* AlexandriaImporter::collection() {
   const QString cover = QString::fromLatin1("cover");
   const QString comments = QString::fromLatin1("comments");
   const QStringList allowed = m_coll->fieldByName(QString::fromLatin1("rating"))->allowed();
-  const QRegExp quote(QString::fromLatin1("\\\\\"")); // equals \"
 
   // start with yaml files
   dataDir.setNameFilter(QString::fromLatin1("*.yaml"));
   QTextStream ts;
   const QStringList files = dataDir.entryList();
-  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it) {
+  const int numFiles = files.count();
+  int j = 0;
+  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it, ++j) {
     QFile file(dataDir.absFilePath(*it));
     if(!file.open(IO_ReadOnly)) {
       continue;
@@ -60,33 +61,43 @@ Bookcase::Data::Collection* AlexandriaImporter::collection() {
 
     Data::Entry* entry = new Data::Entry(m_coll);
 
-    bool readingAuthors = false;
-    QStringList authors;
-
+    bool readNextLine = true;
     ts.unsetDevice();
     ts.setDevice(&file);
-    for(QString line = ts.readLine(); !line.isNull(); line = ts.readLine()) {
+    QString line;
+    while(!ts.atEnd()) {
+      if(readNextLine) {
+        line = ts.readLine();
+      } else {
+        readNextLine = true;
+      }
       // skip the line that starts with ---
       if(line.startsWith(QString::fromLatin1("---"))) {
         continue;
       }
 
-      if(readingAuthors) {
-        if(line.startsWith(QString::fromLatin1("  - "))) {
-          line.remove(0, 4);
-          authors += line;
-          continue;
-        } else {
-          entry->setField(author, authors.join(QString::fromLatin1("; ")));
-          readingAuthors = false;
-        }
+      QString alexField = line.section(':', 0, 0);
+      QString alexValue = line.section(':', 1).stripWhiteSpace();
+      clean(alexValue);
+
+      // Alexandria uses "n/a for empty values, and it is translated
+      // only thing we can do is check for english value and continue
+      if(alexValue == Latin1Literal("n/a")) {
+        continue;
       }
 
-      QString alexField = line.section(':', 0, 0);
-      QString alexValue = line.section(':', 1, 1).stripWhiteSpace();
-
       if(alexField == Latin1Literal("authors")) {
-        readingAuthors = true;
+        QStringList authors;
+        line = ts.readLine();
+        while(!line.isNull() && line.startsWith(QString::fromLatin1("  - "))) {
+          line.remove(0, 4);
+          authors += clean(line);
+          line = ts.readLine();
+        }
+        entry->setField(author, authors.join(QString::fromLatin1("; ")));
+        // the next line has already been read
+        readNextLine = false;
+
         // Alexandria calls the edition the binding
       } else if(alexField == Latin1Literal("edition")) {
         entry->setField(binding, alexValue);
@@ -104,34 +115,16 @@ Bookcase::Data::Collection* AlexandriaImporter::collection() {
             entry->setField(cover, img.id());
           }
         }
-        ISBNValidator val(0);
+        static const ISBNValidator val(0);
         val.fixup(alexValue);
         entry->setField(isbn, alexValue);
 
       } else if(alexField == Latin1Literal("notes")) {
-        if(alexValue.startsWith(QChar('\'')) || alexValue.startsWith(QChar('"'))) {
-          alexValue.remove(0, 1);
-        }
-        if(alexValue.endsWith(QChar('\'')) || alexValue.endsWith(QChar('"'))) {
-          alexValue.truncate(alexValue.length()-1);
-        }
-        alexValue.replace(quote, QChar('"'));
         entry->setField(comments, alexValue);
 
       } else if(alexField == Latin1Literal("rating")) {
         // assume the rating is a number, and find the allowed value with that number
         entry->setField(rating, allowed.grep(alexValue)[0]);
-
-      } else if(alexField == Latin1Literal("title")) {
-        if(alexValue.startsWith(QChar('\'')) || alexValue.startsWith(QChar('"'))) {
-          alexValue.remove(0, 1);
-        }
-        if(alexValue.endsWith(QChar('\'')) || alexValue.endsWith(QChar('"'))) {
-          alexValue.truncate(alexValue.length()-1);
-        }
-        alexValue.replace(quote, QChar('"'));
-        entry->setField(title, alexValue);
-
       } else if(m_coll->fieldByName(alexField)) {
         entry->setField(alexField, alexValue);
       } else if(m_coll->fieldByTitle(alexField)) {
@@ -139,6 +132,10 @@ Bookcase::Data::Collection* AlexandriaImporter::collection() {
       }
     }
     m_coll->addEntry(entry);
+
+    if(j%s_stepSize == 0) {
+      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(numFiles));
+    }
   }
 
   return m_coll;
@@ -170,6 +167,17 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   l->addWidget(box);
   l->addStretch(1);
   return m_widget;
+}
+
+QString& AlexandriaImporter::clean(QString& str_) {
+  static const QRegExp quote(QString::fromLatin1("\\\\\"")); // equals \"
+  if(str_.startsWith(QChar('\'')) || str_.startsWith(QChar('"'))) {
+    str_.remove(0, 1);
+  }
+  if(str_.endsWith(QChar('\'')) || str_.endsWith(QChar('"'))) {
+    str_.truncate(str_.length()-1);
+  }
+  return str_.replace(quote, QChar('"'));
 }
 
 #include "alexandriaimporter.moc"

@@ -20,10 +20,10 @@ class KPopupMenu;
 
 #include <kiconview.h>
 
-namespace Bookcase {
+namespace Tellico {
 /**
  * @author Robby Stephenson
- * @version $Id: entryiconview.h 760 2004-08-12 00:29:24Z robby $
+ * @version $Id: entryiconview.h 862 2004-09-15 01:49:51Z robby $
  */
 class EntryIconView : public KIconView {
 Q_OBJECT

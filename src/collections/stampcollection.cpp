@@ -16,11 +16,13 @@
 
 #include <klocale.h>
 
-using Bookcase::Data::StampCollection;
+namespace {
+  static const char* stamp_general = I18N_NOOP("General");
+  static const char* stamp_condition = I18N_NOOP("Condition");
+  static const char* stamp_personal = I18N_NOOP("Personal");
+}
 
-static const char* stamp_general = I18N_NOOP("General");
-static const char* stamp_condition = I18N_NOOP("Condition");
-static const char* stamp_personal = I18N_NOOP("Personal");
+using Tellico::Data::StampCollection;
 
 StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(Stamp), i18n("Stamps")) {
@@ -31,7 +33,7 @@ StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("denomination"));
 }
 
-Bookcase::Data::FieldList StampCollection::defaultFields() {
+Tellico::Data::FieldList StampCollection::defaultFields() {
   FieldList list;
   Field* field;
 

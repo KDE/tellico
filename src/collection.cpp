@@ -18,13 +18,13 @@
 
 #include <qregexp.h>
 
-using Bookcase::Data::Collection;
+using Tellico::Data::Collection;
 
 const QString Collection::s_emptyGroupTitle = i18n("(Empty)");
 const QString Collection::s_peopleGroupName = QString::fromLatin1("_people");
 
 Collection::Collection(const QString& title_, const QString& entryName_, const QString& entryTitle_)
-    : QObject(), m_title(title_), m_entryName(entryName_), m_entryTitle(entryTitle_) {
+    : QObject(), m_nextEntryId(0), m_title(title_), m_entryName(entryName_), m_entryTitle(entryTitle_) {
   m_entryList.setAutoDelete(true);
   m_fieldList.setAutoDelete(true);
   m_entryGroupDicts.setAutoDelete(true);
@@ -281,6 +281,10 @@ bool Collection::modifyField(Field* newField_) {
   return true;
 }
 
+bool Collection::deleteField(const QString& name_, bool force_) {
+  return deleteField(fieldByName(name_), force_);
+}
+
 // force allows me to force the deleting of the title field if I need to
 bool Collection::deleteField(Field* field_, bool force_/*=false*/) {
   if(!field_ || !m_fieldList.containsRef(field_)) {
@@ -408,7 +412,7 @@ bool Collection::deleteEntry(Entry* entry_) {
   return m_entryList.remove(entry_);
 }
 
-Bookcase::Data::FieldList Collection::fieldsByCategory(const QString& cat_) const {
+Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) const {
 #ifndef NDEBUG
   if(m_fieldCategories.findIndex(cat_) == -1) {
     kdDebug() << "Collection::fieldsByCategory() - '" << cat_ << "' is not in category list" << endl;
@@ -476,11 +480,11 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
   return strlist;
 }
 
-Bookcase::Data::Field* const Collection::fieldByName(const QString& name_) const {
+Tellico::Data::Field* const Collection::fieldByName(const QString& name_) const {
   return m_fieldNameDict.isEmpty() ? 0 : m_fieldNameDict.find(name_);
 }
 
-Bookcase::Data::Field* const Collection::fieldByTitle(const QString& title_) const {
+Tellico::Data::Field* const Collection::fieldByTitle(const QString& title_) const {
   return m_fieldTitleDict.isEmpty() ? 0 : m_fieldTitleDict.find(title_);
 }
 
@@ -501,7 +505,7 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
   return false;
 }
 
-Bookcase::Data::EntryGroupDict* const Collection::entryGroupDictByName(const QString& name_) const {
+Tellico::Data::EntryGroupDict* const Collection::entryGroupDictByName(const QString& name_) const {
   return m_entryGroupDicts.isEmpty() ? 0 : m_entryGroupDicts.find(name_);
 }
 
@@ -519,6 +523,7 @@ void Collection::populateDicts(Entry* entry_) {
   for( ; dictIt.current(); ++dictIt) {
     EntryGroupDict* dict = dictIt.current();
     QString fieldName = dictIt.currentKey();
+//    kdDebug() << "Collection::populateDicts - field name = " << fieldName << endl;
 
     QStringList groups = entryGroupNamesByField(entry_, fieldName);
     for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
@@ -541,7 +546,9 @@ void Collection::populateDicts(Entry* entry_) {
       }
       entry_->addToGroup(group);
     } // end group loop
+//    kdDebug() << "Collection::populateDicts - end of group loop" << endl;
   } // end dict loop
+//  kdDebug() << "Collection::populateDicts - end of full loop" << endl;
 }
 
 void Collection::groupModified(EntryGroup* group_) {

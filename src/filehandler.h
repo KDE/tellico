@@ -24,7 +24,7 @@ class QFile;
 #include <qstring.h>
 #include <qcstring.h> // needed for QByteArray
 
-namespace Bookcase {
+namespace Tellico {
   class ImageFactory;
   namespace Data {
     class Image;
@@ -34,7 +34,7 @@ namespace Bookcase {
  * The FileHandler class contains some utility functions for reading files.
  *
  * @author Robby Stephenson
- * @version $Id: filehandler.h 714 2004-07-29 00:38:46Z robby $
+ * @version $Id: filehandler.h 976 2004-11-25 19:33:58Z robby $
  */
 class FileHandler {
 
@@ -48,21 +48,22 @@ public:
    * @param url The URL of the file
    * @return A string containing the contents of a file
    */
-  static QString readTextFile(const KURL& url);
+  static QString readTextFile(const KURL& url, bool quiet=false);
   /**
    * Read contents of an XML file into a QDomDocument.
    *
    * @param url The URL of the file
+   * @param processNamespace Whether to process the namespace of the XML file
    * @return A QDomDocument containing the contents of a file
    */
-  static QDomDocument readXMLFile(const KURL& url);
+  static QDomDocument readXMLFile(const KURL& url, bool processNamespace, bool quiet=false);
   /**
    * Read contents of a data file into a QByteArray.
    *
    * @param url The URL of the file
    * @return A QByteArray of the file's contents
    */
-  static QByteArray readDataFile(const KURL& url);
+  static QByteArray readDataFile(const KURL& url, bool quiet=false);
   /**
    * Writes the contents of a string to a url. If the file already exists, a "~" is appended
    * and the existing file is moved. If the file is remote, a temporary file is written and

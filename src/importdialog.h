@@ -18,10 +18,12 @@ class QRadioButton;
 class QCheckBox;
 class QShowEvent;
 
+#include "translators/translators.h"
+
 #include <kdialogbase.h>
 #include <kurl.h>
 
-namespace Bookcase {
+namespace Tellico {
   class MainWindow;
   namespace Data {
     class Collection;
@@ -32,51 +34,29 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: importdialog.h 826 2004-09-02 02:39:12Z robby $
+ * @version $Id: importdialog.h 964 2004-11-19 06:54:49Z robby $
  */
 class ImportDialog : public KDialogBase {
 Q_OBJECT
 
 public:
-  enum ImportFormat {
-    BookcaseXML,
-    Bibtex,
-    Bibtexml,
-    CSV,
-    XSLT,
-    AudioFile,
-    MODS,
-    Alexandria,
-    FreeDB
-  };
-
-  enum ImportAction {
-    Replace,
-    Append,
-    Merge
-  };
-
-  enum ImportTarget {
-   ImportNone,
-   ImportFile,
-   ImportDir
-  };
-
-  ImportDialog(ImportFormat format, const KURL& url, MainWindow* parent, const char* name);
+  ImportDialog(Import::Format format, const KURL& url, MainWindow* parent, const char* name);
   ~ImportDialog();
 
   Data::Collection* collection();
   QString statusMessage() const;
-  ImportAction action() const;
+  Import::Action action() const;
 
-  static QString fileFilter(ImportFormat format);
-  static ImportTarget importTarget(ImportFormat format);
+  static QString fileFilter(Import::Format format);
+  static Import::Target importTarget(Import::Format format);
+
+  static Data::Collection* importURL(Import::Format format, const KURL& url);
 
 private slots:
   void slotUpdateAction();
 
 private:
-  Import::Importer* importer(ImportFormat format, const KURL& url);
+  static Import::Importer* importer(Import::Format format, const KURL& url);
 
   Data::Collection* m_coll;
   Import::Importer* m_importer;

@@ -18,7 +18,7 @@
 #include "controller.h"
 
 #include "translators/exporter.h"
-#include "translators/bookcasexmlexporter.h"
+#include "translators/tellicoxmlexporter.h"
 #include "translators/htmlexporter.h"
 #include "translators/csvexporter.h"
 #include "translators/bibtexexporter.h"
@@ -39,11 +39,11 @@
 #include <qwhatsthis.h>
 #include <qtextcodec.h>
 
-using Bookcase::ExportDialog;
+using Tellico::ExportDialog;
 
-ExportDialog::ExportDialog(ExportFormat format_, Data::Collection* coll_, MainWindow* parent_, const char* name_)
+ExportDialog::ExportDialog(Export::Format format_, Data::Collection* coll_, MainWindow* parent_, const char* name_)
     : KDialogBase(parent_, name_, true /*modal*/, i18n("Export Options"), Ok|Cancel),
-      m_format(format_), m_coll(coll_), m_exporter(exporter(format_, parent_)) {
+      m_format(format_), m_coll(coll_), m_exporter(exporter(format_, parent_, coll_)) {
   QWidget* widget = new QWidget(this);
   QVBoxLayout* topLayout = new QVBoxLayout(widget, 0, spacingHint());
 
@@ -78,7 +78,7 @@ ExportDialog::ExportDialog(ExportFormat format_, Data::Collection* coll_, MainWi
   setMainWidget(widget);
   readOptions();
   // bibtex, CSV, and text are forced to locale
-  if(format_ == Bibtex || format_ == CSV || format_ == Text) {
+  if(format_ == Export::Bibtex || format_ == Export::CSV || format_ == Export::Text) {
     m_encodeUTF8->setEnabled(false);
     m_encodeLocale->setChecked(true);
 //    m_encodeLocale->setEnabled(false);
@@ -124,50 +124,51 @@ void ExportDialog::slotSaveOptions() {
   config->writeEntry("EncodeUTF8", m_encodeUTF8->isChecked());
 }
 
-Bookcase::Export::Exporter* ExportDialog::exporter(ExportFormat format_, MainWindow* bookcase_) {
+// static
+Tellico::Export::Exporter* ExportDialog::exporter(Export::Format format_, MainWindow* mainwindow_, Data::Collection* coll_) {
   Export::Exporter* exporter = 0;
 
   switch(format_) {
-    case XML:
-      exporter = new Export::BookcaseXMLExporter(m_coll);
+    case Export::TellicoXML:
+      exporter = new Export::TellicoXMLExporter(coll_);
       break;
 
-    case HTML:
+    case Export::HTML:
       {
-        Export::HTMLExporter* htmlExp = new Export::HTMLExporter(m_coll);
-        htmlExp->setGroupBy(bookcase_->groupBy());
-        htmlExp->setSortTitles(bookcase_->sortTitles());
-        htmlExp->setColumns(bookcase_->visibleColumns());
+        Export::HTMLExporter* htmlExp = new Export::HTMLExporter(coll_);
+        htmlExp->setGroupBy(mainwindow_->groupBy());
+        htmlExp->setSortTitles(mainwindow_->sortTitles());
+        htmlExp->setColumns(mainwindow_->visibleColumns());
         exporter = htmlExp;
       }
       break;
 
-    case CSV:
-      exporter = new Export::CSVExporter(m_coll);
+    case Export::CSV:
+      exporter = new Export::CSVExporter(coll_);
       break;
 
-    case Bibtex:
-      exporter = new Export::BibtexExporter(m_coll);
+    case Export::Bibtex:
+      exporter = new Export::BibtexExporter(coll_);
       break;
 
-    case Bibtexml:
-      exporter = new Export::BibtexmlExporter(m_coll);
+    case Export::Bibtexml:
+      exporter = new Export::BibtexmlExporter(coll_);
       break;
 
-    case XSLT:
-      exporter = new Export::XSLTExporter(m_coll);
+    case Export::XSLT:
+      exporter = new Export::XSLTExporter(coll_);
       break;
 
-    case PilotDB:
+    case Export::PilotDB:
       {
-        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter(m_coll);
-        pdbExp->setColumns(bookcase_->visibleColumns());
+        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter(coll_);
+        pdbExp->setColumns(mainwindow_->visibleColumns());
         exporter = pdbExp;
       }
       break;
 
-    case Alexandria:
-      exporter = new Export::AlexandriaExporter(m_coll);
+    case Export::Alexandria:
+      exporter = new Export::AlexandriaExporter(coll_);
       break;
 
     default:
@@ -189,7 +190,7 @@ bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
   m_exporter->setURL(url_);
   m_exporter->setEntryList(m_exportSelected->isChecked() ? Controller::self()->selectedEntries() : m_coll->entryList());
 
-  if(exportTarget(m_format) == ExportNone) {
+  if(exportTarget(m_format) == Export::None) {
     return m_exporter->exportEntries(m_formatFields->isChecked());
   } else {
     if(m_exporter->isText()) {
@@ -203,12 +204,12 @@ bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
 
 // alexandria is exported to known directory
 // all others are files
-ExportDialog::ExportTarget ExportDialog::exportTarget(ExportFormat format_) {
+Tellico::Export::Target ExportDialog::exportTarget(Export::Format format_) {
   switch(format_) {
-    case Alexandria:
-      return ExportNone;
+    case Export::Alexandria:
+      return Export::None;
     default:
-      return ExportFile;
+      return Export::File;
   }
 }
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,10 +16,8 @@
 #include "../latin1literal.h"
 
 #if HAVE_KCDDB
+#undef QT_NO_CAST_ASCII
 #include <libkcddb/client.h>
-extern "C" {
-#include <cdda_interface.h>
-}
 #endif
 
 #include <klocale.h>
@@ -34,12 +32,12 @@ extern "C" {
 #include <qgroupbox.h>
 #include <qwhatsthis.h>
 
-using Bookcase::Import::FreeDBImporter;
+using Tellico::Import::FreeDBImporter;
 
-FreeDBImporter::FreeDBImporter() : Bookcase::Import::Importer(), m_coll(0), m_widget(0) {
+FreeDBImporter::FreeDBImporter() : Tellico::Import::Importer(), m_coll(0), m_widget(0) {
 }
 
-Bookcase::Data::Collection* FreeDBImporter::collection() {
+Tellico::Data::Collection* FreeDBImporter::collection() {
 #if !HAVE_KCDDB
   return 0;
 #else
@@ -47,39 +45,43 @@ Bookcase::Data::Collection* FreeDBImporter::collection() {
     return m_coll;
   }
 
-  struct cdrom_drive* drive = 0;
-  QString device = m_deviceCombo->currentText();
-  QCString drivePath = QFile::encodeName(device);
-  if(!drivePath.isEmpty() && drivePath != "/") {
-    drive = cdda_identify(drivePath.data(), CDDA_MESSAGE_FORGETIT, 0);
-  }
-  if(!drive) {
+  QString drivePath = m_driveCombo->currentText();
+  QCString drive = QFile::encodeName(drivePath);
+  if(drivePath.isEmpty()) {
+    setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>").arg(drivePath));
     kdDebug() << "FreeDBImporter::collection() - no drive!" << endl;
-    setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>").arg(device));
     return 0;
   }
 
   // now it's ok to add device to saved list
-  m_deviceCombo->insertItem(device);
+  m_driveCombo->insertItem(drivePath);
   KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - FreeDB"));
-  QStringList devices;
-  for(int i = 0; i < m_deviceCombo->count(); ++i) {
-    if(devices.findIndex(m_deviceCombo->text(i)) == -1) {
-      devices += m_deviceCombo->text(i);
+  QStringList drives;
+  for(int i = 0; i < m_driveCombo->count(); ++i) {
+    if(drives.findIndex(m_driveCombo->text(i)) == -1) {
+      drives += m_driveCombo->text(i);
     }
   }
-  config.writeEntry("CD-ROM Devices", devices);
-  config.writeEntry("Last Device", device);
-
-  if(cdda_open(drive) != 0) {
-    kdDebug() << "FreeDBImporter::collection() - open failed!" << endl;
-    setStatusMessage(i18n("<qt>Tellico was unable to open the CD-ROM device - <i>%1</i>.</qt>").arg(device));
-    cdda_close(drive);
-    return 0;
-  }
+  config.writeEntry("CD-ROM Devices", drives);
+  config.writeEntry("Last Device", drivePath);
 
   KCDDB::TrackOffsetList list;
 #if 0
+  // a1107d0a - Kruder & Dorfmeister - The K&D Sessions - Disc One.
+  list
+    << 150      // First track start.
+    << 29462
+    << 66983
+    << 96785
+    << 135628
+    << 168676
+    << 194147
+    << 222158
+    << 247076
+    << 278203   // Last track start.
+    << 10       // Disc start.
+    << 316732;  // Disc end.
+/*
   list
     << 150
     << 106965
@@ -88,21 +90,19 @@ Bookcase::Data::Collection* FreeDBImporter::collection() {
     << 176085
     << 5
     << 234500;
+*/
 #else
-  const long tracks = cdda_tracks(drive);
-//  kdDebug() << "found " << tracks << " tracks" << endl;
-  for(int i = 0; i < tracks; ++i) {
-// audiocd.cpp has some hack, but ignore for now
-//    if((i+1) != hack_track) {
-      list.append(cdda_track_firstsector(drive, i + 1) + 150);
-//    } else {
-//      list.append(start_of_first_data_as_in_toc + 150);
-//    }
-  }
-
-  list.append(my_first_sector(drive)+150);
-  list.append(my_last_sector(drive)+150);
+  list = offsetList(drive);
 #endif
+
+  if(list.isEmpty()) {
+    setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>").arg(drivePath));
+    return 0;
+  }
+//  kdDebug() << KCDDB::CDDB::trackOffsetListToId(list) << endl;
+//  for(KCDDB::TrackOffsetList::iterator it = list.begin(); it != list.end(); ++it) {
+//    kdDebug() << *it << endl;
+//  }
 
 // crashes if I use the Config class
 //  KCDDB::Config c;
@@ -115,7 +115,6 @@ Bookcase::Data::Collection* FreeDBImporter::collection() {
   KCDDB::CDDB::Result r = client.lookup(list);
   if(r != KCDDB::CDDB::Success) {
     kdDebug() << "FreeDBImporter::collection() - no success! Return value = " << r << endl;
-    cdda_close(drive);
     switch(r) {
       case KCDDB::CDDB::NoRecordFound:
         setStatusMessage(i18n("<qt>No records were found to match the CD.</qt>"));
@@ -126,9 +125,13 @@ Bookcase::Data::Collection* FreeDBImporter::collection() {
         break;
 
       case KCDDB::CDDB::ServerError:
+        kdDebug() << "Server Error" << endl;
       case KCDDB::CDDB::HostNotFound:
+        kdDebug() << "Host Not Found" << endl;
       case KCDDB::CDDB::NoResponse:
+        kdDebug() << "No Repsonse" << endl;
       case KCDDB::CDDB::UnknownError:
+        kdDebug() << "Unknown Error" << endl;
       default:
         setStatusMessage(i18n("<qt>Tellico was unable to complete the CD lookup.</qt>"));
         break;
@@ -166,15 +169,11 @@ Bookcase::Data::Collection* FreeDBImporter::collection() {
   QStringList trackList;
   KCDDB::TrackInfoList t = info.trackInfoList;
   for(uint i = 0; i < t.count(); ++i) {
-//    if(cd->trk[i].data == 0) {
-      trackList << t[i].title;
-//    }
+    trackList << t[i].title;
   }
   entry->setField(QString::fromLatin1("track"), trackList.join(QString::fromLatin1("; ")));
 
   m_coll->addEntry(entry);
-
-  cdda_close(drive);
 
   return m_coll;
 #endif
@@ -187,50 +186,24 @@ QWidget* FreeDBImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   QGroupBox* box = new QGroupBox(2, Qt::Horizontal, i18n("Audio CD Options"), m_widget);
 
   (void) new QLabel(i18n("CD-ROM Device:"), box);
-  m_deviceCombo = new KComboBox(true, box);
-  m_deviceCombo->setDuplicatesEnabled(false);
-  QWhatsThis::add(m_deviceCombo, i18n("Select or input the CD-ROM device location."));
+  m_driveCombo = new KComboBox(true, box);
+  m_driveCombo->setDuplicatesEnabled(false);
+  QWhatsThis::add(m_driveCombo, i18n("Select or input the CD-ROM device location."));
 
   KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - FreeDB"));
   QStringList devices = config.readListEntry("CD-ROM Devices");
   if(devices.isEmpty()) {
     devices += QString::fromLatin1("/dev/cdrom");
   }
-  m_deviceCombo->insertStringList(devices);
+  m_driveCombo->insertStringList(devices);
   QString device = config.readEntry("Last Device");
   if(!device.isEmpty()) {
-    m_deviceCombo->setCurrentText(device);
+    m_driveCombo->setCurrentText(device);
   }
 
   l->addWidget(box);
   l->addStretch(1);
   return m_widget;
 }
-
-// Everything from here on down is copied from audiocd.cpp in kdemultimedia
-// Licensed under GPL v2
-
-/* libcdda returns for cdda_disc_lastsector() the last sector of the last
-   _audio_ track.  How broken. For CDDB Disc-ID we need the real last sector
-   to calculate the disc length.  */
-#if HAVE_KCDDB
-long FreeDBImporter::my_last_sector(cdrom_drive *drive) {
-  return cdda_track_lastsector(drive, drive->tracks);
-}
-#endif
-
-/* Stupid CDparanoia returns the first sector of the first _audio_ track
-   as first disc sector.  Equally broken to the last sector.  But what is
-   even more shitty is, that if it happens that the first audio track is
-   the first track at all, it returns a hardcoded _zero_, whatever else
-   the TOC told it. This of course happens quite often, as usually the first
-   track is audio, if there's audio at all. And usually it even works,
-   because most of the time the real TOC offset is 150 frames, which we
-   accounted for in our code. This is so unbelievable ugly. */
-#if HAVE_KCDDB
-long FreeDBImporter::my_first_sector(cdrom_drive *drive) {
-  return cdda_track_firstsector(drive, 1);
-}
-#endif
 
 #include "freedbimporter.moc"

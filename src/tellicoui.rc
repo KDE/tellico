@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="11" name="tellico">
+<kpartgui version="12" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -19,7 +19,7 @@
    </Menu>
    <Menu name="file_import">
     <text>&amp;Import</text>
-    <Action name="file_import_bookcase"/>
+    <Action name="file_import_tellico"/>
     <Action name="file_import_csv"/>
     <Separator/>
     <Action name="file_import_freedb"/>
@@ -29,6 +29,7 @@
     <Action name="file_import_bibtex"/>
     <Action name="file_import_bibtexml"/>
     <Action name="file_import_mods"/>
+    <Action name="file_import_ris"/>
     <Separator/>
     <Action name="file_import_xslt"/>
    </Menu>
@@ -70,7 +71,7 @@
    <Action append="show_merge" name="toggle_group_widget"/>
    <Action append="show_merge" name="toggle_edit_widget"/>
    <Action append="show_merge" name="toggle_entry_view"/>
-   <Action append="show_merge" name="change_unit_grouping"/>
+   <Action append="show_merge" name="change_entry_grouping"/>
    <Action append="show_merge" name="filter_dialog"/>
   </Menu>
   <Menu name="help">
@@ -90,8 +91,8 @@
   <text>Collection Toolbar</text>
   <Action name="coll_new_entry"/>
   <Action name="coll_fields"/>
-  <Action name="change_unit_grouping_label"/>
-  <Action name="change_unit_grouping"/>
+  <Action name="change_entry_grouping_label"/>
+  <Action name="change_entry_grouping"/>
   <Action name="quick_filter_label"/>
   <Action name="quick_filter"/>
   <Action name="filter_dialog"/>

@@ -16,10 +16,12 @@
 
 #include <klocale.h>
 
-using Bookcase::Data::CardCollection;
+namespace {
+  static const char* card_general = I18N_NOOP("General");
+  static const char* card_personal = I18N_NOOP("Personal");
+}
 
-static const char* card_general = I18N_NOOP("General");
-static const char* card_personal = I18N_NOOP("Personal");
+using Tellico::Data::CardCollection;
 
 CardCollection::CardCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(Card), i18n("Cards")) {
@@ -30,7 +32,7 @@ CardCollection::CardCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("series"));
 }
 
-Bookcase::Data::FieldList CardCollection::defaultFields() {
+Tellico::Data::FieldList CardCollection::defaultFields() {
   FieldList list;
   Field* field;
 

@@ -16,11 +16,11 @@
 
 #include <kcompletion.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: fieldcompletion.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: fieldcompletion.h 862 2004-09-15 01:49:51Z robby $
  */
 class FieldCompletion : public KCompletion {
 Q_OBJECT

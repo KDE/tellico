@@ -21,7 +21,7 @@
 #include <qstring.h>
 #include <qptrlist.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Entry;
     class Collection;
@@ -38,7 +38,7 @@ namespace Bookcase {
  * @ref fieldName() would be "author".
  *
  * @author Robby Stephenson
- * @version $Id: entry.h 722 2004-08-03 02:58:08Z robby $
+ * @version $Id: entry.h 862 2004-09-15 01:49:51Z robby $
  */
 class EntryGroup : public EntryList {
 
@@ -67,7 +67,7 @@ private:
  * @see Field
  *
  * @author Robby Stephenson
- * @version $Id: entry.h 722 2004-08-03 02:58:08Z robby $
+ * @version $Id: entry.h 862 2004-09-15 01:49:51Z robby $
  */
 class Entry {
   // two entries are equal if all their field values are equal

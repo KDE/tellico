@@ -42,7 +42,7 @@ static void closeQString(void* context) {
   *t += QString::fromLatin1("\n");
 }
 
-using Bookcase::XSLTHandler;
+using Tellico::XSLTHandler;
 
 int XSLTHandler::s_initCount = 0;
 

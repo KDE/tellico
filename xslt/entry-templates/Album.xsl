@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:bc="http://periapsis.org/bookcase/"
-                exclude-result-prefixes="bc"
+                xmlns:tc="http://periapsis.org/tellico/"
+                exclude-result-prefixes="tc"
                 version="1.0">
 
 <!--
    ===================================================================
-   Bookcase XSLT file - Entry template for videos
+   Tellico XSLT file - Entry template for videos
 
-   $Id: Album.xsl 885 2004-09-20 05:56:18Z robby $
+   $Id: Album.xsl 966 2004-11-20 01:41:11Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -16,18 +16,18 @@
    o If there is more an one image, there's a lot of white space under
      the top tables.
 
-   This XSLT stylesheet is designed to be used with the 'Bookcase'
+   This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
    ===================================================================
 -->
 
 <!-- import common templates -->
 <!-- location depends on being installed correctly -->
-<xsl:import href="../bookcase-common.xsl"/>
+<xsl:import href="../tellico-common.xsl"/>
 
 <xsl:output method="html"/>
 
-<xsl:param name="datadir"/> <!-- dir where Bookcase data are located -->
+<xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
 <xsl:param name="font"/> <!-- default KDE font family -->
 <xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
@@ -39,9 +39,9 @@
 
 <xsl:strip-space elements="*"/>
 
-<xsl:key name="fieldsByName" match="bc:field" use="@name"/>
-<xsl:key name="fieldsByCat" match="bc:field" use="@category"/>
-<xsl:key name="imagesById" match="bc:image" use="@id"/>
+<xsl:key name="fieldsByName" match="tc:field" use="@name"/>
+<xsl:key name="fieldsByCat" match="tc:field" use="@category"/>
+<xsl:key name="imagesById" match="tc:image" use="@id"/>
 
 <xsl:variable name="endl">
 <xsl:text>
@@ -49,18 +49,18 @@
 </xsl:variable>
 
 <!-- all the categories -->
-<xsl:variable name="categories" select="/bc:bookcase/bc:collection/bc:fields/bc:field[generate-id(.)=generate-id(key('fieldsByCat',@category)[1])]/@category"/>
+<xsl:variable name="categories" select="/tc:tellico/tc:collection/tc:fields/tc:field[generate-id(.)=generate-id(key('fieldsByCat',@category)[1])]/@category"/>
 
 <xsl:template match="/">
- <xsl:apply-templates select="bc:bookcase"/>
+ <xsl:apply-templates select="tc:tellico"/>
 </xsl:template>
 
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
-<xsl:template match="bc:bookcase">
- <!-- This stylesheet is designed for Bookcase document syntax version 6 -->
+<xsl:template match="tc:tellico">
+ <!-- This stylesheet is designed for Tellico document syntax version 7 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'6'"/>
+  <xsl:with-param name="this-version" select="'7'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -125,38 +125,38 @@
    }
   </style>
   <title>
-   <xsl:value-of select="bc:collection/bc:entry[1]//bc:title[1]"/>
+   <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
    <xsl:text> - </xsl:text>
-   <xsl:value-of select="bc:collection/@title"/>
+   <xsl:value-of select="tc:collection/@title"/>
   </title>
   </head>
   <body>
-   <xsl:apply-templates select="bc:collection"/>
+   <xsl:apply-templates select="tc:collection"/>
   </body>
  </html>
 </xsl:template>
 
 <!-- type 3 is video collections -->
 <!-- warn user that this template is meant for videos only. -->
-<xsl:template match="bc:collection[@type!=4]">
+<xsl:template match="tc:collection[@type!=4]">
  <h1>The <em>Album</em> template is meant for music collections only.</h1>
 </xsl:template>
 
-<xsl:template match="bc:collection[@type=4]">
- <xsl:apply-templates select="bc:entry[1]"/>
+<xsl:template match="tc:collection[@type=4]">
+ <xsl:apply-templates select="tc:entry[1]"/>
  <xsl:if test="$collection-file">
   <hr/>
   <h4 style="text-align:center"><a href="{$collection-file}">&lt;&lt; <xsl:value-of select="@title"/></a></h4>
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="bc:entry">
+<xsl:template match="tc:entry">
  <xsl:variable name="entry" select="."/>
  <xsl:variable name="titleCat" select="key('fieldsByName','title')/@category"/>
  <!-- there might not be a track list -->
  <xsl:variable name="trackCat">
   <xsl:choose>
-   <xsl:when test="bc:tracks">
+   <xsl:when test="tc:tracks">
     <xsl:value-of select="key('fieldsByName','track')/@category"/>
    </xsl:when>
    <xsl:otherwise>
@@ -171,7 +171,7 @@
   <tr>
    <td valign="top" rowspan="2">
     <!-- now, show all the images in the entry, type 10 -->
-    <xsl:variable name="images" select="../bc:fields/bc:field[@type=10]"/>
+    <xsl:variable name="images" select="../tc:fields/tc:field[@type=10]"/>
     <xsl:for-each select="$images">
 
      <!-- images will never be multiple, so no need to check for that -->
@@ -181,7 +181,15 @@
      <xsl:if test="$image">
       <a>
        <xsl:attribute name="href">
-        <xsl:value-of select="concat($imgdir, $image)"/>
+        <xsl:choose>
+         <!-- Amazon license requires the image to be linked to the amazon website -->
+         <xsl:when test="$entry/tc:amazon">
+          <xsl:value-of select="$entry/tc:amazon"/>
+         </xsl:when>
+         <xsl:otherwise>
+          <xsl:value-of select="concat($imgdir, $image)"/>
+         </xsl:otherwise>
+        </xsl:choose>
        </xsl:attribute>
        <img>
         <xsl:attribute name="src">
@@ -208,21 +216,21 @@
 
      <h1>
       <xsl:choose>
-       <xsl:when test="count(.//bc:artist) = 1">
-        <xsl:value-of select=".//bc:artist[1]"/>
+       <xsl:when test="count(.//tc:artist) = 1">
+        <xsl:value-of select=".//tc:artist[1]"/>
        </xsl:when>
        <xsl:otherwise>
         <xsl:text>Various</xsl:text>
        </xsl:otherwise>
       </xsl:choose>
       <xsl:text> - </xsl:text>
-      <xsl:value-of select=".//bc:title[1]"/>
+      <xsl:value-of select=".//tc:title[1]"/>
 
-      <!-- Bookcase 0.8 had multiple years in the default video collection -->
-      <xsl:if test=".//bc:year">
+      <!-- Tellico 0.8 had multiple years in the default video collection -->
+      <xsl:if test=".//tc:year">
        <span class="year">
         <xsl:text>(</xsl:text>
-        <xsl:value-of select=".//bc:year[1]"/>
+        <xsl:value-of select=".//tc:year[1]"/>
         <xsl:text>)</xsl:text>
        </span>
       </xsl:if>
@@ -256,26 +264,26 @@
   </tr>
  </table>
 
- <xsl:if test="bc:tracks">
+ <xsl:if test="tc:tracks">
   <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
    <tr class="category">
     <td colspan="3">
      <xsl:value-of select="$trackCat"/>
     </td>
    </tr>
-   <xsl:for-each select="bc:tracks/bc:track">
+   <xsl:for-each select="tc:tracks/tc:track">
     <tr>
      <th align="right">
       <xsl:value-of select="format-number(position(), '00')"/>
      </th>
      <xsl:choose>
-      <xsl:when test="bc:column">
+      <xsl:when test="tc:column">
        <td class="fieldValue" width="100%">
-        <xsl:value-of select="bc:column[1]"/>
+        <xsl:value-of select="tc:column[1]"/>
        </td>
        <td class="fieldValue" align="right">
         <em>
-         <xsl:value-of select="bc:column[2]"/>
+         <xsl:value-of select="tc:column[2]"/>
         </em>
        </td>
       </xsl:when>
@@ -288,13 +296,13 @@
     </tr>
    </xsl:for-each>
    <!-- if it has 2 columns, and the second column has a ':', add the time together -->
-   <xsl:if test="bc:tracks/bc:track[1]/bc:column and contains(bc:tracks/bc:track[1]/bc:column[2], ':')">
+   <xsl:if test="tc:tracks/tc:track[1]/tc:column and contains(tc:tracks/tc:track[1]/tc:column[2], ':')">
     <tr>
      <th colspan="2" style="text-align: right; padding-right: 10px;"><strong>Total: </strong></th>
      <td class="fieldValue">
       <em>
        <xsl:call-template name="sumTime">
-        <xsl:with-param name="nodes" select="bc:tracks//bc:column[2]"/>
+        <xsl:with-param name="nodes" select="tc:tracks//tc:column[2]"/>
        </xsl:call-template>
       </em>
      </td>
@@ -347,11 +355,11 @@
           <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
            <tr>
             <td width="50%" class="fieldValue">
-             <xsl:value-of select="bc:column[1]"/>
+             <xsl:value-of select="tc:column[1]"/>
             </td>
             <td width="50%" class="fieldValue">
              <em>
-              <xsl:value-of select="bc:column[2]"/>
+              <xsl:value-of select="tc:column[2]"/>
              </em>
             </td>
            </tr>

@@ -3,9 +3,9 @@
 @DESCRIPTION: Data and functions for internal display/manipulation of AST
               nodes.  (Stuff for external consumption, and for processing
               whole trees, is to be found in traversal.c.)
-@GLOBALS    : 
+@GLOBALS    :
 @CREATED    : 1997/08/12, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 @VERSION    : $Id: bibtex_ast.c,v 1.6 1999/11/29 01:13:10 greg Rel $
 @COPYRIGHT  : Copyright (c) 1996-99 by Gregory P. Ward.  All rights reserved.
 
@@ -22,7 +22,7 @@
 /*#include "my_dmalloc.h"*/
 
 
-char *nodetype_names[] = 
+char *nodetype_names[] =
 {
    "bogus", "entry", "key", "field", "string", "number", "macro"
 };
@@ -49,9 +49,9 @@ static void dump (AST *root, int depth)
 
       if (cur->down != NULL)
          dump (cur->down, depth+1);
-      cur = cur->right;   
+      cur = cur->right;
    }
-}      
+}
 
 
 void dump_ast (char *msg, AST *root)

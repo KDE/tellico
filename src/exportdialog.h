@@ -17,10 +17,12 @@
 class QCheckBox;
 class QRadioButton;
 
+#include "translators/translators.h"
+
 #include <kdialogbase.h>
 #include <kurl.h>
 
-namespace Bookcase {
+namespace Tellico {
   class MainWindow;
   namespace Data {
     class Collection;
@@ -31,46 +33,29 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: exportdialog.h 817 2004-08-27 07:50:40Z robby $
+ * @version $Id: exportdialog.h 867 2004-09-15 03:04:49Z robby $
  */
 class ExportDialog : public KDialogBase {
 Q_OBJECT
 
 public:
-  enum ExportFormat {
-    XML,
-    Bibtex,
-    Bibtexml,
-    HTML,
-    CSV,
-    XSLT,
-    Text,
-    PilotDB,
-    Alexandria
-  };
-
-  enum ExportTarget {
-   ExportNone,
-   ExportFile,
-   ExportDir
-  };
-
-  ExportDialog(ExportFormat format, Data::Collection* coll, MainWindow* parent, const char* name);
+  ExportDialog(Export::Format format, Data::Collection* coll, MainWindow* parent, const char* name);
   ~ExportDialog();
 
   QString fileFilter();
   bool exportURL(const KURL& url=KURL()) const;
 
-  static ExportTarget exportTarget(ExportFormat format);
+  static Export::Target exportTarget(Export::Format format);
 
 private slots:
   void slotSaveOptions();
 
 private:
-  void readOptions();
-  Export::Exporter* exporter(ExportFormat format, MainWindow* bookcase_);
+  static Export::Exporter* exporter(Export::Format format, MainWindow* mainwindow, Data::Collection* coll);
 
-  ExportFormat m_format;
+  void readOptions();
+
+  Export::Format m_format;
   Data::Collection* m_coll;
   Export::Exporter* m_exporter;
   QCheckBox* m_formatFields;

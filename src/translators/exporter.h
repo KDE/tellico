@@ -24,12 +24,12 @@ class QWidget;
 
 #include <qstring.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: exporter.h 817 2004-08-27 07:50:40Z robby $
+ * @version $Id: exporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class Exporter {
 public:

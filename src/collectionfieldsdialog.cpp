@@ -37,8 +37,8 @@
 #include <qpainter.h>
 #include <qtimer.h>
 
-using Bookcase::ListBoxText;
-using Bookcase::CollectionFieldsDialog;
+using Tellico::ListBoxText;
+using Tellico::CollectionFieldsDialog;
 
 ListBoxText::ListBoxText(QListBox* listbox_, Data::Field* field_)
     : QListBoxText(listbox_, field_->title()), m_field(field_), m_colored(false) {
@@ -603,7 +603,7 @@ void CollectionFieldsDialog::updateField() {
   }
 
   if(field->type() == Data::Field::Choice) {
-    static const QRegExp rx(QString::fromLatin1("\\s*;\\s*"));
+    const QRegExp rx(QString::fromLatin1("\\s*;\\s*"));
     field->setAllowed(QStringList::split(rx, m_allowEdit->text()));
   }
 

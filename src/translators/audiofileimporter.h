@@ -18,14 +18,14 @@ class QCheckBox;
 
 #include "importer.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
  * The AudioFileImporter class takes care of importing audio files.
  *
  * @author Robby Stephenson
- * @version $Id: audiofileimporter.h 804 2004-08-26 04:52:52Z robby $
+ * @version $Id: audiofileimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class AudioFileImporter : public Importer {
 Q_OBJECT

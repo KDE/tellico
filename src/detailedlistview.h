@@ -14,7 +14,7 @@
 #ifndef DETAILEDLISTVIEW_H
 #define DETAILEDLISTVIEW_H
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Collection;
   }
@@ -33,14 +33,14 @@ namespace Bookcase {
 #include <qvaluevector.h>
 #include <qguardedptr.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * The DetailedListView class shows detailed information about entries in the
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: detailedlistview.h 738 2004-08-05 05:12:06Z robby $
+ * @version $Id: detailedlistview.h 862 2004-09-15 01:49:51Z robby $
  */
 class DetailedListView : public MultiSelectionListView {
 Q_OBJECT
@@ -91,13 +91,13 @@ public:
   /**
    * @param coll A pointer to the collection
    */
-  void addCollection(Bookcase::Data::Collection* coll);
+  void addCollection(Tellico::Data::Collection* coll);
   /**
    * Removes all items which refers to a entry within a collection.
    *
    * @param coll A pointer to the collection
    */
-  void removeCollection(Bookcase::Data::Collection* coll);
+  void removeCollection(Tellico::Data::Collection* coll);
   /**
    * Adds a new list item showing the details for a entry.
    *
@@ -120,7 +120,7 @@ public:
   void modifyField(Data::Field* newField, Data::Field* oldField);
   void removeField(Data::Field* field);
   void reorderFields(const Data::FieldList& list);
-  void saveConfig(Bookcase::Data::Collection* coll);
+  void saveConfig(Tellico::Data::Collection* coll);
   /**
    * Select all visible items.
    */
@@ -195,7 +195,7 @@ signals:
    *
    * @param entry A pointer to the entry
    */
-  void signalDeleteEntry(Bookcase::Data::Entry* entry);
+  void signalDeleteEntry(Tellico::Data::Entry* entry);
   /**
    * Signals that a fraction of an operation has been completed.
    *

@@ -1,8 +1,5 @@
 /***************************************************************************
-                                pilotdb.cpp
-                             -------------------
-    begin                : Thu Nov 20 2003
-    copyright            : (C) 2003 by Robby Stephenson
+    copyright            : (C) 2003-2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,10 +20,12 @@
 #include <qbuffer.h>
 
 using namespace PalmLib;
-using Bookcase::Export::PilotDB;
+using Tellico::Export::PilotDB;
 
-static const int PI_HDR_SIZE          = 78;
-static const int PI_RECORD_ENT_SIZE   = 8;
+namespace {
+  static const int PI_HDR_SIZE          = 78;
+  static const int PI_RECORD_ENT_SIZE   = 8;
+}
 
 PilotDB::PilotDB() : Database(false), m_app_info(), m_sort_info(),
     m_next_record_list_id(0) {

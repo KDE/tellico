@@ -14,7 +14,7 @@
 #include "textimporter.h"
 #include "../filehandler.h"
 
-using Bookcase::Import::TextImporter;
+using Tellico::Import::TextImporter;
 
 TextImporter::TextImporter(const KURL& url_) : Import::Importer(url_) {
   // FIXME: error handling?

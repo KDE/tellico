@@ -10,22 +10,25 @@ hacking.docbook \
 importing-exporting.docbook \
 index.docbook \
 menus.docbook \
-bibtex-options.png \
 entry-editor1.png \
 entry-editor2.png \
 entry-editor3.png \
 entry-editor4.png \
+entry-editor5.png \
 fields-dialog.png \
 general-options.png \
 main-window.png \
 print-options.png \
 template-options.png \
+source-options.png \
 filter-dialog.png \
 csv-dialog.png \
 fetch-dialog.png \
 export-options.png \
 export-html.png \
-export-csv.png
+export-csv.png \
+amazon-options.png \
+z3950-options.png
 
 
 ####### kdevelop will overwrite this part!!! (end)############

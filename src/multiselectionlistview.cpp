@@ -15,8 +15,8 @@
 
 #include <kdebug.h>
 
-using Bookcase::MultiSelectionListView;
-using Bookcase::MultiSelectionListViewItem;
+using Tellico::MultiSelectionListView;
+using Tellico::MultiSelectionListViewItem;
 
 MultiSelectionListView::MultiSelectionListView(QWidget* parent_, const char* name_)
     : KListView(parent_, name_/*=0*/) {

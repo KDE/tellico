@@ -15,11 +15,12 @@
 #define BIBTEXEXPORTER_H
 
 class QCheckBox;
+class KComboBox;
 
 #include "textexporter.h"
 #include "bibtexhandler.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Export {
 
 /**
@@ -28,7 +29,7 @@ namespace Bookcase {
  * of all the attributes, with comboboxes for each Bibtex field, but I think this way is more obvious.
  *
  * @author Robby Stephenson
- * @version $Id: bibtexexporter.h 759 2004-08-11 01:28:25Z robby $
+ * @version $Id: bibtexexporter.h 905 2004-09-23 04:29:10Z robby $
  */
 class BibtexExporter : public TextExporter {
 public:
@@ -45,12 +46,12 @@ private:
   bool m_expandMacros;
   bool m_packageURL;
   bool m_skipEmptyKeys;
-  BibtexHandler::QuoteStyle m_quoteStyle;
 
   QWidget* m_widget;
   QCheckBox* m_checkExpandMacros;
   QCheckBox* m_checkPackageURL;
   QCheckBox* m_checkSkipEmpty;
+  KComboBox* m_cbBibtexStyle;
 };
 
   } // end namespace

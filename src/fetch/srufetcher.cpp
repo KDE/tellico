@@ -13,23 +13,21 @@
 
 #include "srufetcher.h"
 #include "../translators/xslthandler.h"
-#include "../translators/bookcaseimporter.h"
-#include "../kernel.h"
+#include "../translators/tellicoimporter.h"
+#include "../tellico_kernel.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 #include <kio/job.h>
 #include <kstandarddirs.h>
 
-using Bookcase::Fetch::SRUFetcher;
+#include <qlabel.h>
+#include <qlayout.h>
 
-SRUFetcher::SRUFetcher(Data::Collection* coll_, QObject* parent_, const char* name_)
-    : Fetcher(coll_, parent_, name_), m_job(0), m_xsltHandler(0), m_collMerged(false), m_started(false) {
-#ifndef NDEBUG
-  if(!coll_) {
-    kdWarning() << "SRUFetcher::SRUFetcher() - null collection pointer!" << endl;
-  }
-#endif
+using Tellico::Fetch::SRUFetcher;
+
+SRUFetcher::SRUFetcher(QObject* parent_, const char* name_)
+    : Fetcher(parent_, name_), m_job(0), m_xsltHandler(0), m_collMerged(false), m_started(false) {
   m_results.setAutoDelete(true); // entries will be handles in destructor
 }
 
@@ -55,7 +53,8 @@ void SRUFetcher::cleanUp() {
   collList.setAutoDelete(true); // will automatically delete all entries
 }
 
-void SRUFetcher::search(FetchKey key_, const QString& value_) {
+// multiple values not supported
+void SRUFetcher::search(FetchKey key_, const QString& value_, bool) {
   m_started = true;
 #if 1
   KURL u(QString::fromLatin1("http://z3950.loc.gov:7090/voyager"));
@@ -64,6 +63,7 @@ void SRUFetcher::search(FetchKey key_, const QString& value_) {
   u.addQueryItem(QString::fromLatin1("maximumRecords"), QString::fromLatin1("25"));
   u.addQueryItem(QString::fromLatin1("recordSchema"), QString::fromLatin1("mods"));
 
+  Data::Collection::Type type = Kernel::self()->collection()->type();
   QString str = QChar('"') + value_ + QChar('"');
   switch(key_) {
     case Title:
@@ -73,8 +73,7 @@ void SRUFetcher::search(FetchKey key_, const QString& value_) {
     case Person:
       {
         QString s;
-        if(collection()->type() == Data::Collection::Book
-           || collection()->type() == Data::Collection::Bibtex) {
+        if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
           s = QString::fromLatin1("author=") + str + QString::fromLatin1(" or dc.author=") + str;
         } else {
           s = QString::fromLatin1("dc.creator=") + str + QString::fromLatin1(" or dc.editor=") + str;
@@ -88,8 +87,7 @@ void SRUFetcher::search(FetchKey key_, const QString& value_) {
         // lccn searches here, don't do any isbn validation, just trust the user
         str.replace('-', QString::null);
         QString s;
-        if(collection()->type() == Data::Collection::Book
-           || collection()->type() == Data::Collection::Bibtex) {
+        if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
           s = QString::fromLatin1("bath.isbn=") + str + QString::fromLatin1(" or bath.lccn=") + str;
         } else {
           s = QString::fromLatin1("bath.isbn=") + str + QString::fromLatin1(" or bath.issn=") + str;
@@ -138,18 +136,13 @@ void SRUFetcher::stop() {
   }
   m_collMerged = false;
   m_data.truncate(0);
-  emit signalDone();
+  emit signalDone(this);
   m_started = false;
 }
 
 void SRUFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  uint oldSize = m_data.size();
-  uint addSize = data_.size();
-  m_data.resize(oldSize + addSize);
-
-  for(uint i = 0; i < addSize; ++i) {
-    m_data[oldSize + i] = data_[i];
-  }
+  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
+  stream.writeRawBytes(data_.data(), data_.size());
 }
 
 void SRUFetcher::slotComplete(KIO::Job* job_) {
@@ -175,7 +168,7 @@ void SRUFetcher::slotComplete(KIO::Job* job_) {
   }
 
   QString str = m_xsltHandler->applyStylesheet(QCString(m_data, m_data.size()+1), true);
-  Import::BookcaseImporter imp(str);
+  Import::TellicoImporter imp(str);
   Data::Collection* coll = imp.collection();
   for(Data::EntryListIterator it(coll->entryList()); it.current(); ++it) {
     QString desc;
@@ -218,24 +211,24 @@ void SRUFetcher::slotComplete(KIO::Job* job_) {
   stop();
 }
 
-Bookcase::Data::Entry* SRUFetcher::fetchEntry(uint uid_) {
+Tellico::Data::Entry* SRUFetcher::fetchEntry(uint uid_) {
   kdDebug() << "SRUFetcher::fetchEntry() - looking for " << m_results[uid_]->desc << endl;
   Data::Entry* entry = m_entries[uid_];
 
   // merge all fields
   if(!m_collMerged) {
     for(Data::FieldListIterator fIt(entry->collection()->fieldList()); fIt.current(); ++fIt) {
-      collection()->mergeField(fIt.current());
+      Kernel::self()->collection()->mergeField(fIt.current());
     }
     m_collMerged = true;
   }
-  return new Data::Entry(*entry, collection());
+  return new Data::Entry(*entry, Kernel::self()->collection());
 }
 
 void SRUFetcher::initXSLTHandler() {
-  QString xsltfile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("mods2bookcase.xsl"));
+  QString xsltfile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kdWarning() << "AmazonFetcher::initXSLTHandler() - can not locate mods2bookcase.xsl." << endl;
+    kdWarning() << "AmazonFetcher::initXSLTHandler() - can not locate mods2tellico.xsl." << endl;
     return;
   }
 
@@ -244,11 +237,22 @@ void SRUFetcher::initXSLTHandler() {
 
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kdWarning() << "AmazonFetcher::initXSLTHandler() - error in mods2bookcase.xsl." << endl;
+    kdWarning() << "AmazonFetcher::initXSLTHandler() - error in mods2tellico.xsl." << endl;
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
   }
+}
+
+Tellico::Fetch::ConfigWidget* SRUFetcher::configWidget(QWidget* parent_) {
+  return new SRUFetcher::ConfigWidget(parent_);
+}
+
+SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)
+    : Fetch::ConfigWidget(parent_) {
+  QVBoxLayout* l = new QVBoxLayout(this);
+  l->addWidget(new QLabel(i18n("This source has no options."), this));
+  l->addStretch();
 }
 
 #include "srufetcher.moc"

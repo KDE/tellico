@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BOOKCASE_H
-#define BOOKCASE_H
+#ifndef TELLICO_MAINWINDOW_H
+#define TELLICO_MAINWINDOW_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -33,11 +33,10 @@ class QSplitter;
 class QListViewItem;
 
 #include <kmainwindow.h>
-#include <kdeversion.h>
 
-#include <qvaluelist.h>
+//#include <qvaluelist.h>
 
-namespace Bookcase {
+namespace Tellico {
 // forward declarations
   namespace Data {
     class Collection;
@@ -56,9 +55,9 @@ namespace Bookcase {
   class FetchDialog;
 
 /**
- * The base class for Bookcase application windows. It sets up the main
+ * The base class for Tellico application windows. It sets up the main
  * window and reads the config file as well as providing a menubar, toolbar
- * and statusbar. Bookcase reimplements the methods that KMainWindow provides
+ * and statusbar. Tellico reimplements the methods that KMainWindow provides
  * for main window handling and supports full session management as well as
  * using KActions.
  * @see KMainWindow
@@ -66,7 +65,7 @@ namespace Bookcase {
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: mainwindow.h 817 2004-08-27 07:50:40Z robby $
+ * @version $Id: mainwindow.h 935 2004-11-01 07:10:27Z robby $
  */
 class MainWindow : public KMainWindow {
 Q_OBJECT
@@ -79,10 +78,6 @@ public:
    */
   MainWindow(QWidget* parent=0, const char* name=0);
 
-  /**
-   * Initializes some stuff that's after the object is created.
-   */
-  void init();
   /**
    * Opens the initial file.
    *
@@ -110,11 +105,34 @@ public:
    */
   QStringList visibleColumns() const;
   /**
+   * Saves the document
+   *
+   * @return Returns @p true if successful
+   */
+  bool fileSave();
+  /**
+   * Saves a document by a new filename
+   *
+   * @return Returns @p true if successful
+   */
+  bool fileSaveAs();
+  /**
    * @return Returns whether the current collection is still the non-saved default one
    */
   bool isNewDocument() const { return m_newDocument; }
+  /**
+   * Used by main() to import file from command line.
+   *
+   * @param format The file format
+   * @param url The url
+   */
+  void importFile(int format, const KURL& url);
 
 public slots:
+  /**
+   * Initializes some stuff after the object is created.
+   */
+  void slotInit();
   /**
    * Cleans up everything and then opens a new document.
    *
@@ -408,14 +426,14 @@ private slots:
    *
    * @param coll The collection pointer
    */
-  void readCollectionOptions(Bookcase::Data::Collection* coll);
+  void readCollectionOptions(Tellico::Data::Collection* coll);
   /**
    * Saves the options relevant for a collection. I was having problems with the collection
    * being destructed before I could save info.
    *
    * @param coll A pointer to the collection
    */
-  void saveCollectionOptions(Bookcase::Data::Collection* coll);
+  void saveCollectionOptions(Tellico::Data::Collection* coll);
   /**
    * Queue a filter update. The timer adds a 200 millisecond delay before actually
    * updating the filter.
@@ -429,7 +447,7 @@ private slots:
   /**
    * Updates the collection toolbar.
    */
-  void slotUpdateCollectionToolBar(Bookcase::Data::Collection* coll);
+  void slotUpdateCollectionToolBar(Tellico::Data::Collection* coll);
   /**
    * Make sure the edit dialog is visible and start a new entry.
    */

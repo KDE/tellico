@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,14 +14,21 @@
 #ifndef AMAZONFETCHER_H
 #define AMAZONFETCHER_H
 
-namespace Bookcase {
+namespace Tellico {
   class XSLTHandler;
 }
 namespace KIO {
   class Job;
 }
 
+class KLineEdit;
+class KComboBox;
+
+class QCheckBox;
+class QLabel;
+
 #include "fetcher.h"
+#include "configwidget.h"
 
 #include <kurl.h>
 #include <kio/job.h>
@@ -30,20 +37,22 @@ namespace KIO {
 #include <qintdict.h>
 #include <qguardedptr.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Fetch {
 
 /**
  * A fetcher for Amazon.com.
  *
  * @author Robby Stephenson
- * @version $Id: amazonfetcher.h 762 2004-08-12 01:26:48Z robby $
+ * @version $Id: amazonfetcher.h 969 2004-11-20 06:55:20Z robby $
  */
 class AmazonFetcher : public Fetcher {
 Q_OBJECT
 
 public:
+  // must be in order, starting at 0
   enum Site {
+    Unknown = -1,
     US = 0,
     UK = 1,
     DE = 2,
@@ -53,12 +62,13 @@ public:
   enum ImageSize {
     SmallImage=0,
     MediumImage=1,
-    LargeImage=2
+    LargeImage=2,
+    NoImage=3
   };
 
   /**
    */
-  AmazonFetcher(Site site, Data::Collection* coll, QObject* parent, const char* name = 0);
+  AmazonFetcher(Site site, QObject* parent, const char* name = 0);
   /**
    */
   virtual ~AmazonFetcher();
@@ -67,15 +77,24 @@ public:
    */
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
+  virtual void search(FetchKey key, const QString& value, bool multiple);
+  // amazon can search title, person, isbn, or keyword. No Raw for now.
+  virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k != Raw; }
   virtual void stop();
   virtual Data::Entry* fetchEntry(uint uid);
+  virtual Type type() const { return Amazon; }
+  virtual bool canFetch(Data::Collection::Type type) {
+    return type == Data::Collection::Book
+           || type == Data::Collection::Bibtex
+           || type == Data::Collection::Album
+           || type == Data::Collection::Video;
+  }
+  virtual void readConfig(KConfig* config, const QString& group);
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent);
 
-private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
-
-private:
   struct SiteData {
     QString title;
     KURL url;
@@ -88,27 +107,49 @@ private:
   };
   static const SiteData& siteData(Site site);
 
-  void initXSLTHandler();
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    ConfigWidget(QWidget* parent_, AmazonFetcher* fetcher = 0);
+
+    virtual void saveConfig(KConfig* config_);
+
+  private:
+    KLineEdit* m_assocEdit;
+    KComboBox* m_siteCombo;
+    KComboBox* m_imageCombo;
+  };
+  friend class ConfigWidget;
+
+private slots:
+  void slotData(KIO::Job* job, const QByteArray& data);
+  void slotComplete(KIO::Job* job);
+
+private:
+  static XSLTHandler* s_xsltHandler;
+  static void initXSLTHandler();
+
   void cleanUp();
 
   Site m_site;
   bool m_primaryMode;
   ImageSize m_imageSize;
+  QString m_name;
   QString m_token;
   QString m_assoc;
+  bool m_addLinkField;
 
   QByteArray m_data;
   int m_page;
   int m_total;
   QIntDict<SearchResult> m_results;
   QIntDict<Data::Entry> m_entries;
+  QStringList m_isbnList;
   QGuardedPtr<KIO::Job> m_job;
-  XSLTHandler* m_xsltHandler;
 
   FetchKey m_key;
   QString m_value;
+  bool m_multiple;
   bool m_started;
-  bool m_addLinkField;
 };
 
   } // end namespace

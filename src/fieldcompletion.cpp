@@ -14,7 +14,7 @@
 #include "fieldcompletion.h"
 #include "field.h"
 
-using Bookcase::FieldCompletion;
+using Tellico::FieldCompletion;
 
 FieldCompletion::FieldCompletion(bool multiple_) : KCompletion(), m_multiple(multiple_) {
 }

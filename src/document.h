@@ -25,18 +25,18 @@
 #include <qptrlist.h>
 #include <qobject.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Collection;
     class Entry;
 
 /**
  * The Document contains everything needed to deal with the contents, thus separated from
- * the viewer, the Bookcase object. It can take of opening and saving documents, and contains
+ * the viewer, the Tellico object. It can take of opening and saving documents, and contains
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: document.h 722 2004-08-03 02:58:08Z robby $
+ * @version $Id: document.h 935 2004-11-01 07:10:27Z robby $
  */
 class Document : public QObject {
 Q_OBJECT
@@ -60,20 +60,20 @@ public:
    *
    * @param url The URL
    */
-  void setURL(const KURL& url);
+  void setURL(const KURL& url) { m_url = url; }
   /**
    * Checks the modified flag, which indicates if the document has changed since the
    * last save.
    *
    * @return A boolean indicating the modified status
    */
-  bool isModified() const;
+  bool isModified() const { return m_isModified; }
   /**
    * Returns the current url associated with the document
    *
    * @return The url
    */
-  const KURL& URL() const;
+  const KURL& URL() const { return m_url; }
   /**
    * Initializes a new document. The signalNewDoc() signal is emitted. The return
    * value is currently always true, but should indicate whether or not a new document
@@ -145,7 +145,7 @@ public:
    * Replace the current collection with a new one. Effectively, this is equivalent to opening
    * a new file containg this collection.
    *
-   * @param coll A Pointer to the new collection. @ref BookcaseDoc takes ownership.
+   * @param coll A Pointer to the new collection, the document takes ownership.
    */
   void replaceCollection(Collection* coll);
   /**
@@ -165,35 +165,13 @@ public:
    * @param coll A pointer to the collection to be merged.
    */
   void mergeCollection(Collection* coll);
-
-  /**
-   * Flags used for searching The options should be bit-wise OR'd together.
-   * @li AllFields - Search through all fields
-   * @li AsRegExp - Use the text as the pattern for a regexp search
-   * @li FindBackwards - search backwards
-   * @li CaseSensitive - Case sensitive search
-   * @li FromBeginning - Search from beginning
-   */
-  enum SearchOptions {
-    AllFields     = 1 << 0,
-    AsRegExp      = 1 << 1,
-    FindBackwards = 1 << 2,
-    CaseSensitive = 1 << 3,
-    FromBeginning = 1 << 4
-  };
-  /**
-   * @param text Text to search for
-   * @param title Title of field to search, or empty for all
-   * @param options The options, bit-wise OR'd together
-   */
-  void search(const QString& text, const QString& title, int options);
   /**
    * Saves a list of entries. If the entry is already in a collection, the slotAddEntry() method is called;
    * otherwise, the signalEntryModified() signal is made.
    *
    * @param entry A pointer to the entry
    */
-  void saveEntry(Bookcase::Data::Entry* entry);
+  void saveEntry(Tellico::Data::Entry* entry);
 
 public slots:
   /**
@@ -207,20 +185,20 @@ public slots:
    *
    * @param entry A pointer to the entry
    */
-  void slotSaveEntries(const Bookcase::Data::EntryList& entryList);
+  void slotSaveEntries(const Tellico::Data::EntryList& entryList);
   /**
    * Adds a entry to the document. It already contains a pointer to its proper collection
    * parent. The signalEntryAdded() signal is made.
    *
    * @param entry A pointer to the entry
    */
-  void slotAddEntry(Bookcase::Data::Entry* entry);
+  void slotAddEntry(Tellico::Data::Entry* entry);
   /**
    * Removes a entry from the document. The signalEntryDeleted() signal is made.
    *
    * @param entry A pointer to the entry
    */
-  void slotDeleteEntry(Bookcase::Data::Entry* entry);
+  void slotDeleteEntry(Tellico::Data::Entry* entry);
   /**
    * Sets the modified flag. If it is true, the signalModified signal is made.
    *

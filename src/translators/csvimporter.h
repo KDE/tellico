@@ -29,14 +29,12 @@ class QTable;
 #include "textimporter.h"
 #include "../collectionfactory.h" // needed for CollectionNameMap
 
-#include <qobject.h>
-
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
  * @author Robby Stephenson
- * @version $Id: csvimporter.h 633 2004-05-01 03:16:22Z robby $
+ * @version $Id: csvimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class CSVImporter : public TextImporter {
 Q_OBJECT

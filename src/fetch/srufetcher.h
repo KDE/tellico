@@ -14,19 +14,21 @@
 #ifndef SRUFETCHER_H
 #define SRUFETCHER_H
 
+namespace Tellico {
+  class XSLTHandler;
+}
+namespace KIO {
+  class Job;
+}
+
 #include "fetcher.h"
+#include "configwidget.h"
 
 #include <qcstring.h> // for QByteARray
 #include <qintdict.h>
 #include <qguardedptr.h>
 
-namespace KIO {
-  class Job;
-}
-
-namespace Bookcase {
-  class XSLTHandler;
-
+namespace Tellico {
   namespace Fetch {
 
 /**
@@ -34,7 +36,7 @@ namespace Bookcase {
  * Right now, only MODS is supported.
  *
  * @author Robby Stephenson
- * @version $Id: srufetcher.h 725 2004-08-03 14:00:57Z robby $
+ * @version $Id: srufetcher.h 960 2004-11-18 05:41:01Z robby $
  */
 class SRUFetcher : public Fetcher {
 Q_OBJECT
@@ -42,7 +44,7 @@ Q_OBJECT
 public:
   /**
    */
-  SRUFetcher(Data::Collection* coll, QObject* parent, const char* name = 0);
+  SRUFetcher(QObject* parent, const char* name = 0);
   /**
    */
   virtual ~SRUFetcher();
@@ -51,9 +53,24 @@ public:
    */
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
+  virtual void search(FetchKey key, const QString& value, bool multiple);
+  // only search title, person, isbn, or keyword. No Raw for now.
+  virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k != Raw; }
   virtual void stop();
   virtual Data::Entry* fetchEntry(uint uid);
+  virtual Type type() const { return SRU; }
+  virtual bool canFetch(Data::Collection::Type type) {
+    return type == Data::Collection::Book || type == Data::Collection::Bibtex;
+  }
+  virtual void readConfig(KConfig*, const QString&) {};
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent);
+
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    ConfigWidget(QWidget* parent_);
+
+    virtual void saveConfig(KConfig*) {}
+  };
 
 private slots:
   void slotData(KIO::Job* job, const QByteArray& data);

@@ -13,7 +13,7 @@
 
 #include "alexandriaexporter.h"
 #include "../collection.h"
-#include "../kernel.h"
+#include "../tellico_kernel.h"
 #include "../imagefactory.h"
 
 #include <klocale.h>
@@ -22,10 +22,12 @@
 
 #include <qdir.h>
 
-static const int ALEXANDRIA_MAX_SIZE_SMALL = 60;
-static const int ALEXANDRIA_MAX_SIZE_MEDIUM = 140;
+namespace {
+  static const int ALEXANDRIA_MAX_SIZE_SMALL = 60;
+  static const int ALEXANDRIA_MAX_SIZE_MEDIUM = 140;
+}
 
-using Bookcase::Export::AlexandriaExporter;
+using Tellico::Export::AlexandriaExporter;
 
 QString AlexandriaExporter::formatString() const {
   return i18n("Alexandria");
@@ -36,10 +38,10 @@ bool AlexandriaExporter::exportEntries(bool formatFields_) const {
 
   QDir libraryDir = QDir::home();
   if(!libraryDir.cd(QString::fromLatin1(".alexandria"))) {
-    if(!libraryDir.mkdir(QString::fromLatin1(".alexandria"))) {
+    if(!libraryDir.mkdir(QString::fromLatin1(".alexandria"))
+       || !libraryDir.cd(QString::fromLatin1(".alexandria"))) {
       return false;
     }
-    libraryDir.cd(QString::fromLatin1(".alexandria"));
   }
 
   // the collection title is the name of the directory to create
@@ -111,7 +113,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Data::Entry* entry_, bool f
                   entry_->field(QString::fromLatin1("publisher"));
   pub.replace('"', QString::fromLatin1("\\\""));
   // publisher uses n/a when empty
-  ts << "publisher: \"" << (pub.isEmpty() ? "n/a" : pub) << "\"\n";
+  ts << "publisher: \"" << (pub.isEmpty() ? QString::fromLatin1("n/a") : pub) << "\"\n";
   QString rating = entry_->field(QString::fromLatin1("rating"));
   for(uint pos = 0; pos < rating.length(); ++pos) {
     if(rating[pos].isDigit()) {
@@ -142,8 +144,8 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Data::Entry* entry_, bool f
   } else {
     img2 = img1.smoothScale(ALEXANDRIA_MAX_SIZE_MEDIUM, ALEXANDRIA_MAX_SIZE_MEDIUM, QImage::ScaleMin); // scale up
   }
-  if(!img1.save(filename + QString::fromLatin1("_medium.jpg"), "JPEG") ||
-     !img2.save(filename + QString::fromLatin1("_small.jpg"), "JPEG")) {
+  if(!img1.save(filename + QString::fromLatin1("_medium.jpg"), "JPEG")
+     || !img2.save(filename + QString::fromLatin1("_small.jpg"), "JPEG")) {
     return false;
   }
   return true;

@@ -20,7 +20,7 @@ class KRun;
 
 #include <qguardedptr.h>
 
-namespace Bookcase {
+namespace Tellico {
   class XSLTHandler;
   namespace Data {
     class Entry;
@@ -28,7 +28,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryview.h 702 2004-07-08 03:25:19Z robby $
+ * @version $Id: entryview.h 862 2004-09-15 01:49:51Z robby $
  */
 class EntryView : public KHTMLPart {
 Q_OBJECT

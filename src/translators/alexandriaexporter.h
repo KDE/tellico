@@ -18,7 +18,7 @@ class QDir;
 
 #include "exporter.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Entry;
   }
@@ -26,7 +26,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: alexandriaexporter.h 821 2004-08-27 23:26:04Z robby $
+ * @version $Id: alexandriaexporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class AlexandriaExporter : public Exporter {
 public:

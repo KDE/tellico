@@ -14,7 +14,7 @@
 #ifndef BIBTEXIMPORTER_H
 #define BIBTEXIMPORTER_H
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class BibtexCollection;
   }
@@ -33,10 +33,7 @@ extern "C" {
 
 #include <qptrlist.h>
 
-typedef QPtrList<AST> ASTList;
-typedef QPtrListIterator<AST> ASTListIterator;
-
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
@@ -44,7 +41,7 @@ namespace Bookcase {
  * parse the text and generate a @ref BibtexCollection.
  *
  * @author Robby Stephenson
- * @version $Id: bibteximporter.h 828 2004-09-03 05:08:23Z robby $
+ * @version $Id: bibteximporter.h 914 2004-10-10 23:03:28Z robby $
  */
 class BibtexImporter : public TextImporter {
 Q_OBJECT
@@ -71,7 +68,9 @@ public:
   virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Bibtex); }
 
 private:
-  QPtrList<AST> parseText(const QString& text) const;
+  typedef QPtrList<AST> ASTList;
+  typedef QPtrListIterator<AST> ASTListIterator;
+  ASTList parseText(const QString& text) const;
 
   Data::BibtexCollection* m_coll;
 };

@@ -16,7 +16,7 @@
 
 #include "../collection.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
 
 /**

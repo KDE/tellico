@@ -16,11 +16,11 @@
 
 #include <klocale.h>
 
-using Bookcase::Import::XMLImporter;
+using Tellico::Import::XMLImporter;
 
 XMLImporter::XMLImporter(const KURL& url_) : Import::Importer(url_) {
   if(url_.isValid()) {
-    m_dom = FileHandler::readXMLFile(url_);
+    m_dom = FileHandler::readXMLFile(url_, true);
   }
 }
 

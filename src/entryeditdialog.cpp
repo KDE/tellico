@@ -32,10 +32,12 @@
 #include <qobjectlist.h>
 #include <qtabbar.h>
 
-// must be an even number
-static const int NCOLS = 2; // number of columns of FieldWidgets
+namespace {
+  // must be an even number
+  static const int NCOLS = 2; // number of columns of FieldWidgets
+}
 
-using Bookcase::EntryEditDialog;
+using Tellico::EntryEditDialog;
 
 EntryEditDialog::EntryEditDialog(QWidget* parent_, const char* name_)
     : KDialogBase(parent_, name_, false, i18n("Edit Entry"), Help|User1|User2|Close, User1, false,
@@ -149,13 +151,13 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
 
       m_widgetDict.insert(QString::number(m_currColl->id()) + f->name(), widget);
 
-      maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
+      maxWidth[count%NCOLS] = KMAX(maxWidth[count%NCOLS], widget->labelWidth());
       if(widget->expands()) {
         expands[count%NCOLS] = true;
       }
       widget->updateGeometry();
       if(!f->isSingleCategory()) {
-        maxHeight = QMAX(maxHeight, widget->minimumSizeHint().height());
+        maxHeight = KMAX(maxHeight, widget->minimumSizeHint().height());
       }
       ++count;
     }
@@ -264,9 +266,9 @@ void EntryEditDialog::slotHandleSave() {
     for(Data::EntryListIterator entryIt(m_currEntries); entryIt.current(); ++entryIt) {
       names += entryIt.current()->title();
     }
-    QString str(i18n("Do you really want to modify these books?"));
-    QString dontAsk = QString::fromLatin1("SaveMultipleBooks");
-    int ret = KMessageBox::questionYesNoList(this, str, names, i18n("Modify Multiple Books?"),
+    QString str(i18n("Do you really want to modify these entries?"));
+    QString dontAsk = QString::fromLatin1("SaveMultipleBooks"); // don't change 'books', invisible anyway
+    int ret = KMessageBox::questionYesNoList(this, str, names, i18n("Modify Multiple Entries?"),
                                              KStdGuiItem::yes(), KStdGuiItem::no(), dontAsk);
     if(ret != KMessageBox::Yes) {
       return;
@@ -495,7 +497,7 @@ void EntryEditDialog::removeField(Data::Field* field_) {
           layout->remove(widget);
           layout->addWidget(widget, count/NCOLS, count%NCOLS);
 
-          maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
+          maxWidth[count%NCOLS] = KMAX(maxWidth[count%NCOLS], widget->labelWidth());
           if(widget->expands()) {
             expands[count%NCOLS] = true;
           }
@@ -611,10 +613,10 @@ void EntryEditDialog::slotUpdateField(Data::Collection* coll_, Data::Field* newF
     // need to update label widths
     if(newField_->title() != oldField_->title()) {
       int maxWidth = 0;
-      QObjectList* childList = widget->parentWidget()->queryList("Bookcase::FieldWidget", 0, false, false);
+      QObjectList* childList = widget->parentWidget()->queryList("Tellico::FieldWidget", 0, false, false);
       QObjectListIt it(*childList);
       for(it.toFirst(); it.current(); ++it) {
-        maxWidth = QMAX(maxWidth, static_cast<FieldWidget*>(it.current())->labelWidth());
+        maxWidth = KMAX(maxWidth, static_cast<FieldWidget*>(it.current())->labelWidth());
       }
       for(it.toFirst(); it.current(); ++it) {
         static_cast<FieldWidget*>(it.current())->setLabelWidth(maxWidth);

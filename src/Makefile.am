@@ -3,26 +3,23 @@ bin_PROGRAMS = tellico
 
 ## INCLUDES were found outside kdevelop specific part
 
-tellico_SOURCES = \
-entryview.cpp collection.cpp mainwindow.cpp \
-controller.cpp kwidgetlister.cpp isbnvalidator.cpp \
-finddialog.cpp configdialog.cpp main.cpp image.cpp \
-collectionfactory.cpp collectionfieldsdialog.cpp \
-detailedlistview.cpp document.cpp entry.cpp \
-entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp \
-filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp \
-importdialog.cpp labelaction.cpp tabcontrol.cpp \
-imagewidget.cpp fieldcompletion.cpp imagefactory.cpp \
-stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp \
-kernel.cpp viewstack.cpp entryiconview.cpp \
-datewidget.cpp multiselectionlistview.cpp
+tellico_SOURCES = entryview.cpp collection.cpp mainwindow.cpp \
+controller.cpp kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp \
+configdialog.cpp main.cpp image.cpp collectionfactory.cpp \
+collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp \
+entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp \
+filter.cpp filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp \
+tabcontrol.cpp imagewidget.cpp fieldcompletion.cpp imagefactory.cpp \
+stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp tellico_kernel.cpp \
+viewstack.cpp entryiconview.cpp datewidget.cpp multiselectionlistview.cpp \
+ratingwidget.cpp tellico_strings.cpp tellico_utils.cpp
 
 tellico_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
         ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
         ./translators/pilotdb/libflatfile/liblibflatfile.a \
         ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
-        $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET) \
-        $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(CDDA_LIBS)
+        $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
+        $(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS)
 
 if !USE_LIBBTPARSE
   tellico_LDADD += ./translators/btparse/libbtparse.a
@@ -51,12 +48,13 @@ entryeditdialog.h           finddialog.h         stringmapdialog.h \
 entry.h                     groupview.cpp        latin1literal.h \
 entryitem.cpp               groupview.h          tabcontrol.cpp \
 entryitem.h                 image.cpp            tabcontrol.h \
-entryview.cpp               imagefactory.cpp     utils.h \
-fetchdialog.h               fetchdialog.cpp      kernel.h \
-kernel.cpp                  viewstack.h          viewstack.cpp \
+entryview.cpp               imagefactory.cpp     tellico_utils.h \
+fetchdialog.h               fetchdialog.cpp      tellico_kernel.h \
+tellico_kernel.cpp          viewstack.h          viewstack.cpp \
 entryiconview.h             entryiconview.cpp    datewidget.h \
 datewidget.cpp              multiselectionlistview.h \
-multiselectionlistview.cpp
+multiselectionlistview.cpp  ratingwidget.h       ratingwidget.cpp \
+tellico_strings.h           tellico_strings.cpp  tellico_utils.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -97,7 +95,7 @@ rc_DATA = tellicoui.rc
 
 messages: rc.cpp
 	LIST=`find . -name \*.h -o -name \*.hh -o -name \*.H -o -name \*.hxx -o -name \*.hpp -o -name \*.cpp -o -name \*.cc -o -name \*.cxx -o -name \*.ecpp -o -name \*.C`; \
-	if test -n "$$LIST"; then \
+        if test -n "$$LIST"; then \
           $(XGETTEXT) $$LIST -o $(podir)/tellico.pot; \
         fi
 

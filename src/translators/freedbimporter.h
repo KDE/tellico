@@ -18,18 +18,15 @@
 #include "../../config.h"
 
 class KComboBox;
-#if HAVE_KCDDB
-struct cdrom_drive;
-#endif
 
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
  * The FreeDBImporter class takes care of importing audio files.
  *
  * @author Robby Stephenson
- * @version $Id: freedbimporter.h 831 2004-09-03 05:57:18Z robby $
+ * @version $Id: freedbimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class FreeDBImporter : public Importer {
 Q_OBJECT
@@ -48,14 +45,11 @@ public:
   virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Album); }
 
 private:
-#if HAVE_KCDDB
-  long my_last_sector(cdrom_drive* drive);
-  long my_first_sector(cdrom_drive* drive);
-#endif
+  static QValueList<uint> FreeDBImporter::offsetList(QCString drive);
 
   Data::Collection* m_coll;
   QWidget* m_widget;
-  KComboBox* m_deviceCombo;
+  KComboBox* m_driveCombo;
 };
 
   } // end namespace

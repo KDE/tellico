@@ -20,7 +20,7 @@
 
 #include <qwhatsthis.h>
 
-using Bookcase::ViewStack;
+using Tellico::ViewStack;
 
 ViewStack::ViewStack(QWidget* parent_, const char* name_/*=0*/) : QWidgetStack(parent_, name_),
     m_entryView(new EntryView(this)), m_iconView(new EntryIconView(this)) {

@@ -18,7 +18,7 @@
 #include <qtabbar.h>
 #include <qobjectlist.h>
 
-using Bookcase::TabControl;
+using Tellico::TabControl;
 
 TabControl::TabControl(QWidget* parent_, const char* name_/*=0*/)
     : QTabWidget(parent_, name_), m_resetFocus(true) {

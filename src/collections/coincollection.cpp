@@ -16,10 +16,12 @@
 
 #include <klocale.h>
 
-using Bookcase::Data::CoinCollection;
+namespace {
+  static const char* coin_general = I18N_NOOP("General");
+  static const char* coin_personal = I18N_NOOP("Personal");
+}
 
-static const char* coin_general = I18N_NOOP("General");
-static const char* coin_personal = I18N_NOOP("Personal");
+using Tellico::Data::CoinCollection;
 
 CoinCollection::CoinCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(Coin), i18n("Coins")) {
@@ -30,7 +32,7 @@ CoinCollection::CoinCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("denomination"));
 }
 
-Bookcase::Data::FieldList CoinCollection::defaultFields() {
+Tellico::Data::FieldList CoinCollection::defaultFields() {
   FieldList list;
   Field* field;
 

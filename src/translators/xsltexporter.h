@@ -18,12 +18,12 @@ class KURLRequester;
 
 #include "textexporter.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: xsltexporter.h 759 2004-08-11 01:28:25Z robby $
+ * @version $Id: xsltexporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class XSLTExporter : public TextExporter {
 public:

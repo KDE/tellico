@@ -1,11 +1,12 @@
 <chapter id="details">
-<title>&tellico; Details</title>
+<title>&appname; Details</title>
 
 <sect1 id="field-types">
 <title>Field Types</title>
 
 <para>
-Each collection may have an unlimited number of fields. &tellico; supports eleven types of fields, which allow for a range of different data.
+Each collection may have an unlimited number of fields. &appname; supports
+eleven types of fields, which allow for a range of different data.
 </para>
 
 <sect2 id="line">
@@ -26,13 +27,14 @@ which aren't expected to have long values, such as the author or the genre.
 The <emphasis>Number</emphasis> type is identical to the
 <emphasis>Simple Text</emphasis>, except that the data is restricted
 to being numerical. Entries will be sorted numerically in the column
-view if a <emphasis>Number</emphasis> field column is clicked. Again,
-the standard line edit is used for data entry. No formatting is ever
+view if a <emphasis>Number</emphasis> field column is clicked. The
+standard line edit, with small arrow buttons for increasing or decreasing
+the value, is used for data entry. No formatting is ever
 applied.</para>
 
 </sect2>
 <sect2 id="url">
-<title>URL</title>
+<title>&URL;</title>
 
 <para>
 The <emphasis>&URL;</emphasis> type allows for links to other documents,
@@ -40,11 +42,23 @@ using the standard &kde; file type associations for opening the linked
 documents. No validation is done on the actual value of a
 <emphasis>&URL;</emphasis> field, but non-valid links are not
 opened. The data entry is a line edit with a button for opening the
-standard File-Open dialog, but any &URL; may be used. In the <link linkend="entry-editor">&entry-editor;</link>,
+standard File-Open dialog, but any &URL; may be used.
+</para>
+
+<para>
+In the <link linkend="entry-editor">&entry-editor;</link>,
 the label becomes the link, while in the <link linkend="entry-view">&entry-view;</link>, an actual
 hyperlink is used. This field type is convenient for linking to <acronym>PDF</acronym>
 files of bibliographic entries, or to movie reviews, for example. No
 formatting is ever applied.</para>
+
+<para>
+Relative &URL;s may also be used. They are interpreted relative to the location of the
+&appname; data file. In the <link linkend="entry-editor">&entry-editor;</link>, the line
+edit provides auto-completion for local file locations. If you want the &URL; from the &kde;
+File Selector Dialog Box to be interpreted relative to the document location, then an extended
+property for the &URL; field should be set to <emphasis>relative</emphasis> : <emphasis>true</emphasis>.
+</para>
 
 </sect2>
 <sect2 id="para">
@@ -77,8 +91,8 @@ For fields which take a yes or no value, the
 <emphasis>Checkbox</emphasis> type is available. By default, the field
 is toggled off. <emphasis>Checkbox</emphasis> fields are not formatted
 and are limited to single values. Internally, the field values are
-carried as <constant>true</constant> or
-<constant>false</constant>. Some examples are gift or loaned
+carried as <emphasis><constant>true</constant></emphasis> or
+<emphasis><constant>false</constant></emphasis>. Some examples are gift or loaned
 fields.</para>
 
 </sect2>
@@ -87,8 +101,9 @@ fields.</para>
 
 <para>
 <emphasis>Table</emphasis> fields hold a single-column list of unlimited values.
-In the <link linkend="entry-editor">&entry-editor;</link>, the field is presented using a spreadsheet-like view, with
-numbered rows. When the last row is selected, an additional row is then added.  Auto-completion is not available.
+In the <link linkend="entry-editor">&entry-editor;</link>, the field is presented using a
+spreadsheet-like view, with numbered rows. When the last row is selected, an additional
+row is then added.  Auto-completion is not available.
 This field is useful for a list of chapters in a book, scenes in a movie, or songs in an album.
 <emphasis>Table</emphasis> fields are always a category by themselves.
 </para>
@@ -115,7 +130,7 @@ Typically, the second column is italicized in the entry view templates, or when 
 <para>
 <emphasis>Image</emphasis> fields hold an image, of any format supported by &kde;.
 Some of the typical ones include <acronym>PNG</acronym> or <acronym>JPEG</acronym>.
-The image is saved inside the &tellico; data file. The standard &kde; File Selector
+The image is saved inside the &appname; data file. The standard &kde; File Selector
 is used, so you can use a &URL; or just a file available
 locally.
 </para>
@@ -151,11 +166,11 @@ may be used in the description for formatting.
 <title>Collection Types</title>
 
 <para>
-&tellico; supports nine specific collection types by default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
+&appname; supports nine specific collection types by default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
 </para>
 
 <para>
-In general, there's no functional difference between the collection types. You could create a custom collection for your books just as easily as using the default book collection. But &tellico; chooses icons based on collection type, and there may be some specialized functionality that is unique to a certain collection, so if you can, you should use the defaults. So, if you want to create a wine collection, but don't like any of the default fields, go ahead and create a default wine collection, then delete all the defaults. That way, &tellico; still knows that it's a wine collection.
+In general, there's no functional difference between the collection types. You could create a custom collection for your books just as easily as using the default book collection. But &appname; chooses icons based on collection type, and there may be some specialized functionality that is unique to a certain collection, so if you can, you should use the defaults. So, if you want to create a wine collection, but don't like any of the default fields, go ahead and create a default wine collection, then delete all the defaults. That way, &appname; still knows that it's a wine collection.
 </para>
 
 <sect2 id="book-collection">
@@ -191,7 +206,7 @@ Book collections have 26 default fields:
 </para>
 
 <para>
-The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> numbers are automatically formatted and the check-digit is calculated. &tellico; recognizes the <acronym>ISBN</acronym> field if its internal field name is <emphasis>isbn</emphasis>. If you delete it, or need to add it to another type of collection, create the field with the title as <emphasis>ISBN</emphasis> and apply the change, then you can return and modify the title as you want. &tellico; creates the internal name based on the initial title, but never changes it if the title is later updated.
+The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> numbers are automatically formatted and the check-digit is calculated. &appname; recognizes the <acronym>ISBN</acronym> field if its internal field name is <emphasis>isbn</emphasis>. If you delete it, or need to add it to another type of collection, create the field with the title as <emphasis>ISBN</emphasis> and apply the change, then you can return and modify the title as you want. &appname; creates the internal name based on the initial title, but never changes it if the title is later updated.
 </para>
 
 </sect2>
@@ -199,7 +214,7 @@ The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> n
 <sect2 id="bibliography">
 <title>Bibliographies</title>
 <para>
-Bibliographies have 21 default fields:
+Bibliographies have 22 default fields:
 <emphasis>Title</emphasis>,
 <emphasis>Entry Type</emphasis>,
 <emphasis>Author</emphasis>,
@@ -208,6 +223,7 @@ Bibliographies have 21 default fields:
 <emphasis>Editor</emphasis>,
 <emphasis>Organization</emphasis>,
 <emphasis>Publisher</emphasis>,
+<emphasis>Address</emphasis>,
 <emphasis>Edition</emphasis>,
 <emphasis>Pages</emphasis>,
 <emphasis>Year</emphasis>,
@@ -224,11 +240,11 @@ Bibliographies have 21 default fields:
 </para>
 
 <para>
-Although bibliographic collections are not specifically linked to Bibtex, the default set of fields is taken from a typical set of Bibtex fields. When exporting to Bibtex, an extended property called <emphasis>bibtex</emphasis> is used for each fields to define the corresponding Bibtex field. If you add an additional field to a bibliography and want to export it to Bibtex, be sure to set the <emphasis>bibtex</emphasis> extended property.
+Although bibliographic collections are not specifically linked to bibtex, the default set of fields is taken from a typical set of bibtex fields. When exporting to bibtex, an extended property called <emphasis>bibtex</emphasis> is used for each fields to define the corresponding bibtex field. If you add an additional field to a bibliography and want to export it to bibtex, be sure to set the <emphasis>bibtex</emphasis> extended property.
 </para>
 
 <para>
-&tellico; does have some specialized functions for bibliographies. Bibtex string macros can be added, modified, or deleted from within &tellico; and the Bibtex export gives you the option of expanding the macros. Bibtex citations can be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="bibtex-options">lyxpipe</link></emphasis>.
+&appname; does have some specialized functions for bibliographies. Bibtex string macros can be added, modified, or deleted from within &appname; and the bibtex export gives you the option of expanding the macros. Bibtex citations can be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="hidden-bibtex-options">lyxpipe</link></emphasis>.
 </para>
 
 <para>

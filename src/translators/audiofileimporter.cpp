@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2004 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -35,14 +35,14 @@
 #include <qdir.h>
 #include <qwhatsthis.h>
 
-using Bookcase::Import::AudioFileImporter;
+using Tellico::Import::AudioFileImporter;
 
-AudioFileImporter::AudioFileImporter(const KURL& url_) : Bookcase::Import::Importer(url_),
+AudioFileImporter::AudioFileImporter(const KURL& url_) : Tellico::Import::Importer(url_),
     m_coll(0),
     m_widget(0) {
 }
 
-Bookcase::Data::Collection* AudioFileImporter::collection() {
+Tellico::Data::Collection* AudioFileImporter::collection() {
 #if !HAVE_TAGLIB
   return 0;
 #else
@@ -88,7 +88,7 @@ Bookcase::Data::Collection* AudioFileImporter::collection() {
   progressDlg.setMinimumDuration(files.count() > 20 ? 500 : 2000); // default is 2000
 
   QStringList directoryFiles;
-  const uint stepSize = QMAX(1, files.count() / 100);
+  const uint stepSize = KMAX(static_cast<uint>(1), files.count() / 100);
   uint step = 1;
   for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it, ++step) {
     if(progressDlg.wasCancelled()) {
@@ -105,10 +105,12 @@ Bookcase::Data::Collection* AudioFileImporter::collection() {
     TagLib::Tag* tag = f.tag();
     Data::Entry* entry = 0;
     QString album = TStringToQString(tag->album());
-    if(album.isEmpty()) {
+    if(album.stripWhiteSpace().isEmpty()) {
       // can't do anything
       continue;
     }
+    bool various = false;
+    QString initialArtist;
     bool exists = true;
     if(!(entry = dict[album])) {
       entry = new Data::Entry(m_coll);
@@ -118,7 +120,15 @@ Bookcase::Data::Collection* AudioFileImporter::collection() {
     // album entries use the album name as the title
     entry->setField(title, album);
     if(!tag->artist().isEmpty()) {
-      entry->setField(artist, TStringToQString(tag->artist()));
+      QString a = TStringToQString(tag->artist());
+      if(exists && entry->field(artist) != a) {
+        various = true;
+        // TODO: after removing string freeze, do this, also change check below for empty initalArtist
+//        a = i18n("Various");
+        a = QString::null;
+        initialArtist = entry->field(artist);
+      }
+      entry->setField(artist, a);
     }
     if(tag->year() > 0) {
       entry->setField(year, QString::number(tag->year()));
@@ -127,7 +137,29 @@ Bookcase::Data::Collection* AudioFileImporter::collection() {
       entry->setField(genre, TStringToQString(tag->genre()));
     }
     if(!tag->title().isEmpty() && tag->track() > 0) {
-      entry->setField(track, insertValue(entry->field(track), TStringToQString(tag->title()), tag->track()));
+      if(various) {
+        Data::Field* f = m_coll->fieldByName(track);
+        if(f->type() != Data::Field::Table2) {
+          f->setType(Data::Field::Table2);
+        }
+        if(!initialArtist.isEmpty()) {
+          // also need to add artist for the first song added to the collection
+          QString other = entry->field(track);
+          int i = 0;
+          while(i < other.contains(';') && other.section(';', i, i).stripWhiteSpace().isEmpty()) {
+            ++i;
+          }
+          other = other.section(';', i, i).stripWhiteSpace();
+          if(!other.isEmpty()) {
+            other += QString::fromLatin1("::") + initialArtist;
+            entry->setField(track, insertValue(QString::null, other, i));
+          }
+        }
+        QString t = TStringToQString(tag->title()) + QString::fromLatin1("::") + TStringToQString(tag->artist());
+        entry->setField(track, insertValue(entry->field(track), t, tag->track()));
+      } else {
+        entry->setField(track, insertValue(entry->field(track), TStringToQString(tag->title()), tag->track()));
+      }
     } else {
       kdDebug() << *it << " contains no track number, so the song title is not imported." << endl;
     }
@@ -216,7 +248,7 @@ QWidget* AudioFileImporter::widget(QWidget* parent_, const char* name_) {
 
 // pos_ is NOT zero-indexed!
 QString AudioFileImporter::insertValue(const QString& str_, const QString& value_, uint pos_) {
-  static const QString sep = QString::fromLatin1("; ");
+  static const QString& sep = KGlobal::staticQString("; ");
   QStringList list = Data::Field::split(str_, true);
   for(uint i = list.count(); i < pos_; ++i) {
     list += QString::null;

@@ -14,7 +14,7 @@
 #ifndef BIBTEXMLIMPORTER_H
 #define BIBTEXMLIMPORTER_H
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Data;
   }
@@ -25,7 +25,7 @@ class Entry;
 
 #include <qdom.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**

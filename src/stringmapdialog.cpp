@@ -23,7 +23,7 @@
 #include <qhbox.h>
 #include <qwhatsthis.h>
 
-using Bookcase::StringMapDialog;
+using Tellico::StringMapDialog;
 
 StringMapDialog::StringMapDialog(const Data::StringMap& map_, QWidget* parent_, const char* name_/*=0*/, bool modal_/*=false*/)
     : KDialogBase(parent_, name_, modal_, QString::null, Ok|Cancel) {
@@ -100,7 +100,7 @@ void StringMapDialog::setLabels(const QString& label1_, const QString& label2_) 
   m_listView->header()->show();
 }
 
-Bookcase::Data::StringMap StringMapDialog::stringMap() {
+Tellico::Data::StringMap StringMapDialog::stringMap() {
   Data::StringMap map;
   for(QListViewItem* item = m_listView->firstChild(); item; item = item->nextSibling()) {
     map.insert(item->text(0), item->text(1));

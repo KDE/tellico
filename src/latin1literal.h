@@ -20,7 +20,7 @@
 
 #include <qstring.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * A class for explicit marking of string literals encoded in the ISO
@@ -33,10 +33,10 @@ namespace Bookcase {
  *     if (s == Latin1Literal("o")) { ..... }
  * \endcode
  *
- * @version $Id: latin1literal.h 820 2004-08-27 23:25:16Z robby $
+ * @version $Id: latin1literal.h 862 2004-09-15 01:49:51Z robby $
  */
 #define Latin1Literal(s) \
-    Bookcase::Latin1LiteralInternal((s), sizeof(s)/sizeof(char)-1)
+    Tellico::Latin1LiteralInternal((s), sizeof(s)/sizeof(char)-1)
 
 class Latin1LiteralInternal {
 
@@ -53,7 +53,7 @@ public:
 } // end namespace
 
 inline
-bool operator==(const QString& s1, const Bookcase::Latin1LiteralInternal& s2) {
+bool operator==(const QString& s1, const Tellico::Latin1LiteralInternal& s2) {
   const QChar* uc = s1.unicode();
   const char* c = s2.str;
   if(!c || !uc) {
@@ -74,17 +74,17 @@ bool operator==(const QString& s1, const Bookcase::Latin1LiteralInternal& s2) {
 }
 
 inline
-bool operator!=(const QString& s1, const Bookcase::Latin1LiteralInternal& s2) {
+bool operator!=(const QString& s1, const Tellico::Latin1LiteralInternal& s2) {
   return !(s1 == s2);
 }
 
 inline
-bool operator==(const Bookcase::Latin1LiteralInternal& s1, const QString& s2) {
+bool operator==(const Tellico::Latin1LiteralInternal& s1, const QString& s2) {
   return s2 == s1;
 }
 
 inline
-bool operator!=(const Bookcase::Latin1LiteralInternal& s1, const QString& s2) {
+bool operator!=(const Tellico::Latin1LiteralInternal& s1, const QString& s2) {
   return !(s2 == s1);
 }
 

@@ -25,7 +25,7 @@
 #include <qdict.h>
 #include <qobject.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     typedef QDict<EntryGroup> EntryGroupDict;
 
@@ -41,7 +41,7 @@ namespace Bookcase {
  * @see Field
  *
  * @author Robby Stephenson
- * @version $Id: collection.h 652 2004-05-11 04:57:03Z robby $
+ * @version $Id: collection.h 950 2004-11-15 04:46:42Z robby $
  */
 class Collection : public QObject {
 Q_OBJECT
@@ -123,6 +123,10 @@ public:
    * @param name The new icon name
    */
   void setIconName(const QString& name) { m_iconName = name; }
+  /**
+   * Returns the id for the next entry to be added.
+   */
+  int nextEntryId() const { return ++m_nextEntryId; }
   /**
    * Returns a reference to the list of all the entries in the collection.
    *
@@ -210,6 +214,7 @@ public:
   virtual bool mergeField(Field* field);
   virtual bool modifyField(Field* field);
   virtual bool deleteField(Field* field, bool force=false);
+  virtual bool deleteField(const QString& name, bool force=false);
   void reorderFields(const FieldList& list);
 
   /**
@@ -322,12 +327,12 @@ public:
   static const QString s_peopleGroupName;
 
 signals:
-  void signalGroupModified(Bookcase::Data::Collection* coll, const Bookcase::Data::EntryGroup* group);
-  void signalFieldAdded(Bookcase::Data::Collection* coll, Bookcase::Data::Field* field);
-  void signalFieldModified(Bookcase::Data::Collection* coll, Bookcase::Data::Field* newField, Bookcase::Data::Field* oldField);
-  void signalFieldDeleted(Bookcase::Data::Collection* coll, Bookcase::Data::Field* field);
-  void signalFieldsReordered(Bookcase::Data::Collection* coll);
-  void signalRefreshField(Bookcase::Data::Field* field);
+  void signalGroupModified(Tellico::Data::Collection* coll, const Tellico::Data::EntryGroup* group);
+  void signalFieldAdded(Tellico::Data::Collection* coll, Tellico::Data::Field* field);
+  void signalFieldModified(Tellico::Data::Collection* coll, Tellico::Data::Field* newField, Tellico::Data::Field* oldField);
+  void signalFieldDeleted(Tellico::Data::Collection* coll, Tellico::Data::Field* field);
+  void signalFieldsReordered(Tellico::Data::Collection* coll);
+  void signalRefreshField(Tellico::Data::Field* field);
 
 protected:
   void removeEntryFromDicts(Entry* entry);
@@ -350,6 +355,7 @@ private:
   Collection operator=(const Collection& coll);
 
   int m_id;
+  mutable int m_nextEntryId;
   QString m_title;
   QString m_entryName;
   QString m_entryTitle;

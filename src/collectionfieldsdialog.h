@@ -29,7 +29,7 @@ class QPainter;
 #include <qmap.h>
 #include <qlistbox.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Collection;
   }
@@ -39,7 +39,7 @@ namespace Bookcase {
  * and the font color can be changed
  *
  * @author Robby Stephenson
- * @version $Id: collectionfieldsdialog.h 767 2004-08-18 03:07:53Z robby $
+ * @version $Id: collectionfieldsdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class ListBoxText : public QListBoxText {
 public:
@@ -61,7 +61,7 @@ private:
 
 /**
  * @author Robby Stephenson
- * @version $Id: collectionfieldsdialog.h 767 2004-08-18 03:07:53Z robby $
+ * @version $Id: collectionfieldsdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class CollectionFieldsDialog : public KDialogBase {
 Q_OBJECT

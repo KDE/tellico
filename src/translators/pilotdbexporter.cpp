@@ -29,9 +29,9 @@
 #include <qwhatsthis.h>
 #include <qtextcodec.h>
 
-using Bookcase::Export::PilotDBExporter;
+using Tellico::Export::PilotDBExporter;
 
-PilotDBExporter::PilotDBExporter(const Data::Collection* coll_) : Bookcase::Export::DataExporter(coll_),
+PilotDBExporter::PilotDBExporter(const Data::Collection* coll_) : Tellico::Export::DataExporter(coll_),
       m_backup(true),
       m_widget(0),
       m_checkBackup(0) {
@@ -104,8 +104,10 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
 
       case Data::Field::Para:
         if(hasNote) { // only one is allowed, according to palm-db-tools documentation
+          kdDebug() << "adding note as string" << endl;
           db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
+          kdDebug() << "adding note" << endl;
           db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::NOTE);
           hasNote = true;
         }
@@ -134,9 +136,9 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
       lv.push_back(col);
     }
     db.appendListView(lv);
-  } else {
-    // add view with all fields
-    db.appendListView(PalmLib::FlatFile::ListView());
+//  } else {
+//    // add view with all fields
+//    db.appendListView(PalmLib::FlatFile::ListView());
   }
 
   QString value;

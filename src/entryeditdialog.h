@@ -24,12 +24,12 @@ class QPushButton;
 
 #include <qdict.h>
 
-namespace Bookcase {
+namespace Tellico {
   class TabControl;
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryeditdialog.h 714 2004-07-29 00:38:46Z robby $
+ * @version $Id: entryeditdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class EntryEditDialog : public KDialogBase {
 Q_OBJECT
@@ -94,7 +94,7 @@ public slots:
    *
    * @param entry A pointer to the entry
    */
-  void slotUpdateCompletions(Bookcase::Data::Entry* entry);
+  void slotUpdateCompletions(Tellico::Data::Entry* entry);
   /**
    * Handles clicking the New button. The old entry pointer is destroyed and a
    * new one is created, but not added to any collection.
@@ -119,7 +119,7 @@ public slots:
    * @param newField A pointer to the new field
    * @param oldField A pointer to the old field, which should have the same name as the new one
    */
-  void slotUpdateField(Bookcase::Data::Collection* coll, Bookcase::Data::Field* newField, Bookcase::Data::Field* oldField);
+  void slotUpdateField(Tellico::Data::Collection* coll, Tellico::Data::Field* newField, Tellico::Data::Field* oldField);
 
 signals:
   /**
@@ -127,7 +127,7 @@ signals:
    *
    * @param entry A pointer to the entry to be saved
    */
-  void signalSaveEntries(const Bookcase::Data::EntryList& entryList);
+  void signalSaveEntries(const Tellico::Data::EntryList& entryList);
 
 private:
   Data::Collection* m_currColl;

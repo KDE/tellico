@@ -16,7 +16,7 @@
 
 #include "exporter.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Export {
 
 /**
@@ -24,7 +24,7 @@ namespace Bookcase {
  * whether it be XML, Bibtex, or whatever.
  *
  * @author Robby Stephenson
- * @version $Id: textexporter.h 817 2004-08-27 07:50:40Z robby $
+ * @version $Id: textexporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class TextExporter : public Exporter {
 public:

@@ -18,8 +18,8 @@
 
 #include <qregexp.h>
 
-using Bookcase::Filter;
-using Bookcase::FilterRule;
+using Tellico::Filter;
+using Tellico::FilterRule;
 
 FilterRule::FilterRule() : m_function(FuncEquals) {
 }

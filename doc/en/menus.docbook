@@ -10,7 +10,7 @@ or menu bars.
 -->
 
 <sect1 id="main-window-menus">
-<title>The Main &tellico; Window</title>
+<title>The Main &appname; Window</title>
 
 <para>Each menu item is discussed below. When there is a keyboard shortcut that
 performs a menu item function, the default shortcut is listed with the menu item.
@@ -31,7 +31,7 @@ performs a menu item function, the default shortcut is listed with the menu item
 </term>
 
 <listitem>
-<para>This command <action>creates a new collection</action>. &tellico; supports <link linkend="collection-types">nine default collection types</link> along with an empty user-defined custom collection.</para>
+<para>This command <action>creates a new collection</action>. &appname; supports <link linkend="collection-types">nine default collection types</link> along with an empty user-defined custom collection.</para>
 </listitem>
 </varlistentry>
 
@@ -47,7 +47,7 @@ performs a menu item function, the default shortcut is listed with the menu item
 </term>
 
 <listitem>
-<para>This command <action>opens a &tellico; file</action>.</para>
+<para>This command <action>opens a &appname; file</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -122,7 +122,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>imports data from another file</action>. &tellico; can import data from a number of <link linkend="importing">other formats</link>.</para>
+<para>This command <action>imports data from another file</action>. &appname; can import data from a number of <link linkend="importing">other formats</link>.</para>
 </listitem>
 </varlistentry>
 
@@ -135,7 +135,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>exports the collection to another format</action>. &tellico; can export data to a number of <link linkend="exporting">other formats</link>.</para>
+<para>This command <action>exports the collection to another format</action>. &appname; can export data to a number of <link linkend="exporting">other formats</link>.</para>
 </listitem>
 </varlistentry>
 
@@ -151,7 +151,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>closes the &tellico; window</action>. If the collection has unsaved changes, you will be prompted to save them before continuing.</para>
+<para>This command <action>closes the &appname; window</action>. If the collection has unsaved changes, you will be prompted to save them before continuing.</para>
 </listitem>
 </varlistentry>
 
@@ -451,7 +451,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>sends a citation for the selected entries</action> to the so-called <emphasis><link linkend="bibtex-options">lyxpipe</link></emphasis> for use in <application>LyX</application>, <application>Kile</application>, or other LaTeX applications. It is only enabled when editing a bibliography.</para>
+<para>This command <action>sends a citation for the selected entries</action> to the so-called <emphasis><link linkend="hidden-bibtex-options">lyxpipe</link></emphasis> for use in <application>LyX</application>, <application>Kile</application>, or other LaTeX applications. It is only enabled when editing a bibliography.</para>
 </listitem>
 </varlistentry>
 
@@ -591,12 +591,12 @@ modified.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Configure &tellico;...</guimenuitem>
+  <guimenuitem>Configure &appname;...</guimenuitem>
  </menuchoice>
 </term>
 
 <listitem>
-<para>This command <action>opens the &tellico; &config-dialog;</action>.</para>
+<para>This command <action>opens the &appname; &config-dialog;</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -615,12 +615,12 @@ modified.</para>
 <term>
  <menuchoice>
   <guimenu>Help</guimenu>
-  <guimenuitem>&tellico; Handbook</guimenuitem>
+  <guimenuitem>&appname; Handbook</guimenuitem>
  </menuchoice>
 </term>
 
 <listitem>
-<para>This command <action>opens the &tellico; Handbook</action>.</para>
+<para>This command <action>opens the &appname; Handbook</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -671,12 +671,12 @@ a bug or a problem, if you have a suggestion for improvement, or a translation c
 <term>
  <menuchoice>
   <guimenu>Help</guimenu>
-  <guimenuitem>About &tellico;</guimenuitem>
+  <guimenuitem>About &appname;</guimenuitem>
  </menuchoice>
 </term>
 
 <listitem>
-<para>This command <action>opens the About &tellico; dialog</action>, showing version and author information for the application.</para>
+<para>This command <action>opens the About &appname; dialog</action>, showing version and author information for the application.</para>
 </listitem>
 </varlistentry>
 

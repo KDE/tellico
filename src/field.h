@@ -19,7 +19,7 @@
 #include <qmap.h>
 #include <qregexp.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     typedef QMap<QString, QString> StringMap;
 
@@ -30,7 +30,7 @@ namespace Bookcase {
  * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: field.h 751 2004-08-08 06:36:35Z robby $
+ * @version $Id: field.h 862 2004-09-15 01:49:51Z robby $
  */
 class Field {
 public:
@@ -185,6 +185,12 @@ public:
    * @param allowed The allowed values
    */
   void setAllowed(const QStringList& allowed) { m_allowed = allowed; }
+  /**
+   * Add a value to the allowed list
+   *
+   * @param value The value to allow
+   */
+  void addAllowed(const QString& value);
   /**
    * Returns the type of the field.
    *
@@ -402,7 +408,7 @@ public:
    *
    * @return The delimeter regexp
    */
-  static QRegExp delimiter() { return s_delimiter; }
+  static const QRegExp& delimiter() { return s_delimiter; }
 
 private:
   QString m_name;

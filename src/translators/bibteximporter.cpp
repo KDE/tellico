@@ -22,9 +22,9 @@
 #include <qptrlist.h>
 #include <qregexp.h>
 
-using Bookcase::Import::BibtexImporter;
+using Tellico::Import::BibtexImporter;
 
-BibtexImporter::BibtexImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_), m_coll(0) {
+BibtexImporter::BibtexImporter(const KURL& url_) : Tellico::Import::TextImporter(url_), m_coll(0) {
   bt_initialize();
 }
 
@@ -32,14 +32,14 @@ BibtexImporter::~BibtexImporter() {
   bt_cleanup();
 }
 
-Bookcase::Data::Collection* BibtexImporter::collection() {
+Tellico::Data::Collection* BibtexImporter::collection() {
   if(m_coll) {
     return m_coll;
   }
 
   ASTList list = parseText(text());
   if(list.isEmpty()) {
-    setStatusMessage(i18n("No valid Bibtex entries were found in file - %1").arg(url().fileName()));
+    setStatusMessage(i18n("No valid bibtex entries were found in file - %1").arg(url().fileName()));
     return 0;
   } else {
 //    kdDebug() << "BibtexImporter::collection() - found " << list.count() << " entries" << endl;
@@ -74,16 +74,16 @@ Bookcase::Data::Collection* BibtexImporter::collection() {
     }
 
     // now we're parsing a regular entrry
-    Data::Entry* unit = new Data::Entry(m_coll);
+    Data::Entry* entry = new Data::Entry(m_coll);
 
     text = QString::fromLatin1(bt_entry_type(it.current()));
 //    kdDebug() << "entry type: " << text << endl;
     // text is automatically put into lower-case by btparse
-    BibtexHandler::setFieldValue(unit, QString::fromLatin1("entry-type"), text);
+    BibtexHandler::setFieldValue(entry, QString::fromLatin1("entry-type"), text);
 
     text = QString::fromLatin1(bt_entry_key(it.current()));
 //    kdDebug() << "entry key: " << text << endl;
-    BibtexHandler::setFieldValue(unit, QString::fromLatin1("key"), text);
+    BibtexHandler::setFieldValue(entry, QString::fromLatin1("key"), text);
 
     char* name;
     AST* field = 0;
@@ -114,14 +114,14 @@ Bookcase::Data::Collection* BibtexImporter::collection() {
         // remove last character '#'
         text.truncate(text.length() - 1);
       }
-      QString attName = QString::fromLatin1(name);
-      if(attName == Latin1Literal("author") || attName == Latin1Literal("editor")) {
+      QString fieldName = QString::fromLatin1(name);
+      if(fieldName == Latin1Literal("author") || fieldName == Latin1Literal("editor")) {
         text.replace(QRegExp(QString::fromLatin1("\\sand\\s")), QString::fromLatin1("; "));
       }
-      BibtexHandler::setFieldValue(unit, attName, text);
+      BibtexHandler::setFieldValue(entry, fieldName, text);
     }
 
-    m_coll->addEntry(unit);
+    m_coll->addEntry(entry);
 
     if(j%s_stepSize == 0) {
       emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));
@@ -137,7 +137,7 @@ Bookcase::Data::Collection* BibtexImporter::collection() {
   return m_coll;
 }
 
-ASTList BibtexImporter::parseText(const QString& text) const {
+Tellico::Import::BibtexImporter::ASTList BibtexImporter::parseText(const QString& text) const {
   ushort bt_options = 0; // ushort is defined in btparse.h
   boolean ok; // boolean is defined in btparse.h as an int
 

@@ -17,6 +17,7 @@
 #include "filter.h"
 #include "imagefactory.h"
 #include "controller.h"
+#include "ratingwidget.h"
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -31,9 +32,11 @@
 #include <qvaluelist.h>
 #include <qheader.h>
 
-static const int MIN_COL_WIDTH = 50;
+namespace {
+  static const int MIN_COL_WIDTH = 50;
+}
 
-using Bookcase::DetailedListView;
+using Tellico::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
     : MultiSelectionListView(parent_, name_), m_filter(0),
@@ -75,7 +78,7 @@ DetailedListView::~DetailedListView() {
   m_filter = 0;
 }
 
-void DetailedListView::addCollection(Bookcase::Data::Collection* coll_) {
+void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
   if(!coll_) {
     return;
   }
@@ -277,7 +280,7 @@ void DetailedListView::removeEntry(Data::Entry* entry_) {
   setSelected(nextItem, true);
 }
 
-void DetailedListView::removeCollection(Bookcase::Data::Collection* coll_) {
+void DetailedListView::removeCollection(Tellico::Data::Collection* coll_) {
   if(!coll_) {
     kdWarning() << "DetailedListView::removeCollection() - null coll pointer!" << endl;
     return;
@@ -361,13 +364,14 @@ void DetailedListView::setEntrySelected(Data::Entry* entry_) {
   EntryItem* item = locateItem(entry_);
 
   blockSignals(true);
+  clearSelection();
   setSelected(item, true);
   setCurrentItem(item);
   blockSignals(false);
   ensureItemVisible(item);
 }
 
-Bookcase::EntryItem* const DetailedListView::locateItem(const Data::Entry* entry_) {
+Tellico::EntryItem* const DetailedListView::locateItem(const Data::Entry* entry_) {
   for(QListViewItemIterator it(this); it.current(); ++it) {
     EntryItem* item = static_cast<EntryItem*>(it.current());
     if(item->entry() == entry_) {
@@ -459,6 +463,9 @@ void DetailedListView::setPixmapAndText(EntryItem* item_, int col_, Data::Field*
     const Data::Image& img = ImageFactory::imageById(item_->entry()->field(field_->name()));
     item_->setPixmap(col_, img.isNull() ? QPixmap() : img.convertToPixmap(m_pixWidth, m_pixHeight));
     item_->setText(col_, QString::null);
+  } else if(RatingWidget::handleField(field_)) {
+    item_->setPixmap(col_, RatingWidget::pixmap(item_->entry()->field(field_->name())));
+    item_->setText(col_, QString::null);
   } else { // for everything else, there's no pixmap, unless it's the first column
     item_->setPixmap(col_, col_ == m_firstSection ? m_entryPix : QPixmap());
     item_->setText(col_, item_->entry()->formattedField(field_->name()));
@@ -472,9 +479,9 @@ void DetailedListView::showColumn(int col_) {
   if(w == 0) {
     setColumnWidthMode(col_, QListView::Maximum);
     for(QListViewItemIterator it(this); it.current(); ++it) {
-      w = QMAX(it.current()->width(fontMetrics(), this, col_), w);
+      w = KMAX(it.current()->width(fontMetrics(), this, col_), w);
     }
-    w = QMAX(w, MIN_COL_WIDTH);
+    w = KMAX(w, MIN_COL_WIDTH);
   } else {
     setColumnWidthMode(col_, QListView::Manual);
   }
@@ -556,7 +563,7 @@ void DetailedListView::addField(Data::Field* field_, int width_) {
 
   // width might be -1, which means set the width to maximum
   // but m_columnWidths is the cached width, so just set it to 0
-  m_columnWidths.push_back(QMAX(width_, 0));
+  m_columnWidths.push_back(KMAX(width_, 0));
 
   m_isNumber.push_back(field_->type() == Data::Field::Number);
   m_isDirty.push_back(true);
@@ -724,7 +731,7 @@ void DetailedListView::slotUpdatePixmap() {
   }
 }
 
-void DetailedListView::saveConfig(Bookcase::Data::Collection* coll_) {
+void DetailedListView::saveConfig(Tellico::Data::Collection* coll_) {
   KConfig* config = kapp->config();
   config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->entryName()));
 
@@ -773,24 +780,21 @@ QStringList DetailedListView::visibleColumns() const {
   return titles;
 }
 
-Bookcase::Data::EntryList DetailedListView::visibleEntries() {
+Tellico::Data::EntryList DetailedListView::visibleEntries() {
   // We could just return the full collection entry list if the filter is 0
   // but printing depends on the sorted order
   Data::EntryList list;
 #if QT_VERSION >= 0x030200
-  QListViewItemIterator it(this, QListViewItemIterator::Visible);
-#else
-  QListViewItemIterator it(this);
-#endif
-  for( ; it.current(); ++it) {
-#if QT_VERSION < 0x030200
-    if(it.current()->isVisible()) {
-#endif
-      list.append(static_cast<EntryItem*>(it.current())->entry());
-#if QT_VERSION < 0x030200
-    }
-#endif
+  for(QListViewItemIterator it(this, QListViewItemIterator::Visible); it.current(); ++it) {
+    list.append(static_cast<EntryItem*>(it.current())->entry());
   }
+#else
+  for(QListViewItemIterator it(this); it.current(); ++it) {
+    if(it.current()->isVisible()) {
+      list.append(static_cast<EntryItem*>(it.current())->entry());
+    }
+  }
+#endif
   return list;
 }
 

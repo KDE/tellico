@@ -25,11 +25,11 @@ class QDropEvent;
 #include <qwidget.h>
 #include <qpixmap.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imagewidget.h 459 2004-02-14 21:20:30Z robby $
+ * @version $Id: imagewidget.h 862 2004-09-15 01:49:51Z robby $
  */
 class ImageWidget : public QWidget {
 Q_OBJECT

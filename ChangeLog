@@ -1,3 +1,133 @@
+2004-12-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Enabled relative URLs in URL fields.
+	* Disabled running executables in URL fields.
+	* Released Tellico 0.13.
+
+2004-11-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Removed all the KStaticDeleter references. Don't get fancy.
+	* Updated title sorts to work for articles ending with an
+	apostrophe.
+	* Updated audio file metadata importer to recognize albums with
+	multiple artists and change track list accordingly.
+	* Fixed CSV importer to properly find pre-existing, non-default fields.
+
+2004-11-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Added stars for up to a 10 rating.
+	* Added checkmark in entry templates for bool fields.
+
+2004-11-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Spanish tips translation from ventolera.
+
+2004-11-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 0.13pre3.
+
+2004-11-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Added command-line options for loading bibtex, MODS, and RIS files.
+
+2004-11-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Amazon fetcher to work with more than 10 ISBN.
+	* Updated z39.50 fetcher to work with more than 10 ISBN.
+	* Added language lookup table to mods2tellico.xsl.
+	* Updated lyxpipe cite to auto-generate bibtex key if necessary.
+	* Added "load ISBN list from file" to search dialog.
+
+2004-11-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 0.13pre2.
+
+2004-11-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved printing speed.
+	* Added user and password config for z39.50.
+	* Added address field to default bibliography.
+
+2004-11-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated French translation, thanks to Regis Boudin.
+	* Fixed layout bug in config dialog.
+
+2004-11-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added fix similar to kde bug 86188 for including linux/cdrom.h.
+	* Changed latex cite to separate multiple cites with ", " instead
+	of "," to better match pybliographer.
+
+2004-11-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Added host config to IMDB.
+	* Added image download option to Amazon and IMDB.
+	* Updated kde-common/admin/cvs.sh to allow other automake versions.
+	* Released Tellico 0.13pre1.
+
+2004-11-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Added character set config to z39.50.
+	* Changed main document to tellico.xml.
+
+2004-10-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated initial minimum width to 600 pixels.
+	* Added group selection entry to collection menu.
+	* Updated Find Dialog to remove FromBeginning (didn't make sense)
+
+2004-10-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated HTML export and printing stylesheets a bit.
+
+2004-10-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Added patch to compile on g++ 2.95 from Markus Brueffer.
+
+2004-10-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added patch from wwp to fix saving file on quit.
+
+2004-10-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Added confirm message box when deleting an entry.
+
+2004-09-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed default file textension to .tc.
+
+2004-09-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Unrated certification to default video collection.
+
+2004-09-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Renamed Bookcase to Tellico
+	* Added IMDB fetcher.
+	* Incremented DTD version to 7, changed root element to tellico.
+	* Changed zip file to use maindoc.xml as do the KOffice files.
+
+2004-09-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added new icons from Virginie Quesnay.
+
+2004-09-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated French translation, thanks to Regis Boudin.
+	* Removed libcdda (cdparanoia) dependency, using cd-discid code
+	instead.
+	* Added rating widget in entry editor, using stars.
+
+2004-09-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Really fixed gcc 2.95 compilation.
+	* Added RIS importer.
+
+2004-09-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.11.
+
 2004-09-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Added FreeDB importer.
@@ -18,7 +148,7 @@
 
 2004-08-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Added suport for reading audio file meta-data.
+	* Added support for reading audio file meta-data.
 
 2004-08-22  Robby Stephenson  <robby@periapsis.org>
 

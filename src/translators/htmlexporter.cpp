@@ -13,11 +13,12 @@
 
 #include "htmlexporter.h"
 #include "xslthandler.h"
-#include "bookcasexmlexporter.h"
+#include "tellicoxmlexporter.h"
 #include "../collection.h"
 #include "../filehandler.h"
 #include "../imagefactory.h"
 #include "../latin1literal.h"
+#include "tellico_xml.h"
 
 #include <kstandarddirs.h>
 #include <kconfig.h>
@@ -39,16 +40,16 @@
 //#include <qdir.h>
 #include <qapplication.h>
 
-using Bookcase::Export::HTMLExporter;
+using Tellico::Export::HTMLExporter;
 
-HTMLExporter::HTMLExporter(const Data::Collection* coll_) : Bookcase::Export::TextExporter(coll_),
+HTMLExporter::HTMLExporter(const Data::Collection* coll_) : Tellico::Export::TextExporter(coll_),
     m_printHeaders(true),
     m_printGrouped(false),
     m_exportEntryFiles(false),
     m_imageWidth(0),
     m_imageHeight(0),
     m_widget(0),
-    m_xsltfile(QString::fromLatin1("bookcase2html.xsl")),
+    m_xsltfile(QString::fromLatin1("tellico2html.xsl")),
     m_columns(QString::fromLatin1("title")) {
 }
 
@@ -119,7 +120,10 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
 
   KURL u;
   u.setPath(xsltfile);
-  QDomDocument dom = FileHandler::readXMLFile(u);
+  // do NOT do namespace processing, it messes up the XSL declaration since
+  // QDom thinks there are no elements with the Tellico namespace and as a result
+  // removes the namespace declaration
+  QDomDocument dom = FileHandler::readXMLFile(u, false);
   if(dom.isNull()) {
     return QString::null;
   }
@@ -128,18 +132,25 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
   // the stylesheet prints utf-8 by default, if using locale encoding, need
   // to change the encoding attribute on the xsl:output element
   if(!encodeUTF8_) {
-    QDomNodeList outNodes = dom.elementsByTagName(QString::fromLatin1("xsl:output"));
-    const QString encoding = QString::fromLatin1(QTextCodec::codecForLocale()->name());
-    outNodes.item(0).toElement().setAttribute(QString::fromLatin1("encoding"), encoding);
+    const QDomNodeList childs = dom.documentElement().childNodes();
+    for(unsigned j = 0; j < childs.count(); ++j) {
+      if(childs.item(j).isElement() && childs.item(j).nodeName() == Latin1Literal("xsl:output")) {
+        QDomElement e = childs.item(j).toElement();
+        const QString encoding = QString::fromLatin1(QTextCodec::codecForLocale()->name());
+        e.setAttribute(QString::fromLatin1("encoding"), encoding);
+        break;
+      }
+    }
   }
 
   if(m_groupBy.isEmpty()) {
     m_printGrouped = false; // can't group if no groups exist
   }
 
+  #if 0
   if(m_printGrouped) {
     // since the XSL stylesheet can't use a parameter as a key name, need to replace keys
-    QDomNodeList keyNodes = dom.elementsByTagName(QString::fromLatin1("xsl:key"));
+    QDomNodeList keyNodes = dom.elementsByTagNameNS(XML::nsXSL, QString::fromLatin1("key"));
     for(unsigned i = 0; i < keyNodes.count(); ++i) {
       QDomElement elem = keyNodes.item(i).toElement();
       // dont't forget bc namespace
@@ -171,7 +182,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
         elem.setAttribute(QString::fromLatin1("match"), s);
       }
     }
-    QDomNodeList varNodes = dom.elementsByTagName(QString::fromLatin1("xsl:variable"));
+    QDomNodeList varNodes = dom.elementsByTagNameNS(XML::nsXSL, QString::fromLatin1("variable"));
     for(unsigned i = 0; i < varNodes.count(); ++i) {
       QDomElement elem = varNodes.item(i).toElement();
       if(elem.attribute(QString::fromLatin1("name"), QString::null) == Latin1Literal("all-groups")) {
@@ -190,9 +201,11 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
       }
     }
   }
+  #endif
 
-//  kdDebug() << dom.toString() << endl;
+//  kdDebug() << dom.toString(2) << endl;
   XSLTHandler handler(dom, QFile::encodeName(xsltfile));
+//  XSLTHandler handler(u);
   handler.addParam("show-headers", m_printHeaders ? "true()" : "false()");
   handler.addParam("group-entries", m_printGrouped ? "true()" : "false()");
 
@@ -209,11 +222,13 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     sortTitles << m_sort3;
   }
 
-  handler.addStringParam("sort-name1", coll->fieldNameByTitle(sortTitles[0]).utf8());
-  if(sortTitles.count() > 1) {
-    handler.addStringParam("sort-name2", coll->fieldNameByTitle(sortTitles[1]).utf8());
-    if(sortTitles.count() > 2) {
-      handler.addStringParam("sort-name3", coll->fieldNameByTitle(sortTitles[2]).utf8());
+  if(sortTitles.count() > 0) {
+    handler.addStringParam("sort-name1", coll->fieldNameByTitle(sortTitles[0]).utf8());
+    if(sortTitles.count() > 1) {
+      handler.addStringParam("sort-name2", coll->fieldNameByTitle(sortTitles[1]).utf8());
+      if(sortTitles.count() > 2) {
+        handler.addStringParam("sort-name3", coll->fieldNameByTitle(sortTitles[2]).utf8());
+      }
     }
   }
 
@@ -226,7 +241,32 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     } else {
       s = coll->fieldTitleByName(m_groupBy[0]);
     }
-    sortString = i18n("(grouped by %1; sorted by %2)").arg(s).arg(sortTitles.join(QString::fromLatin1(", ")));
+    if(sortTitles.isEmpty()) {
+      sortString = i18n("(grouped by %1)").arg(s);
+    } else {
+      sortString = i18n("(grouped by %1; sorted by %2)").arg(s).arg(sortTitles.join(QString::fromLatin1(", ")));
+    }
+
+    QString groupFields;
+    for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
+      Data::Field* f = coll->fieldByName(*it);
+      if(!f) {
+        continue;
+      }
+      if(f->flags() & Data::Field::AllowMultiple) {
+        groupFields += QString::fromLatin1("tc:") + *it + QString::fromLatin1("s/tc:") + *it;
+      } else {
+        groupFields += QString::fromLatin1("tc:") + *it;
+      }
+      if(f->type() == Data::Field::Table2) {
+        groupFields += QString::fromLatin1("/tc:column[1]");
+      }
+      if(*it != m_groupBy.last()) {
+        groupFields += '|';
+      }
+    }
+//    kdDebug() << groupFields << endl;
+    handler.addStringParam("group-fields", groupFields.utf8());
   } else {
     sortString = i18n("(sorted by %1)").arg(sortTitles.join(QString::fromLatin1(", ")));
   }
@@ -234,7 +274,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
   handler.addStringParam("sort-title", encodeUTF8_ ? sortString.utf8() : sortString.local8Bit());
 
   QString pageTitle = QString::fromLatin1("Tellico: ") + coll->title();
-  pageTitle += QString::fromLatin1(" ") + sortString;
+  pageTitle += QChar(' ') + sortString;
   handler.addStringParam("page-title", encodeUTF8_ ? pageTitle.utf8() : pageTitle.local8Bit());
 
   QStringList printFields;
@@ -242,12 +282,12 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     printFields << coll->fieldNameByTitle(*it);
   }
   handler.addStringParam("column-names",
-                         encodeUTF8_ ? printFields.join(QString::fromLatin1(" ")).utf8()
-                                     : printFields.join(QString::fromLatin1(" ")).local8Bit());
+                         encodeUTF8_ ? printFields.join(QChar(' ')).utf8()
+                                     : printFields.join(QChar(' ')).local8Bit());
 
-  BookcaseXMLExporter exporter(coll);
+  TellicoXMLExporter exporter(coll);
   exporter.setEntryList(entryList());
-  exporter.includeID(true);
+  exporter.setIncludeGroups(m_printGrouped);
   QDomDocument output = exporter.exportXML(formatFields_, encodeUTF8_);
 
   // where the file will be saved
@@ -343,14 +383,21 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
   if(m_exportEntryFiles) {
     KURL u;
     u.setPath(m_entryXSLTFile);
-    QDomDocument dom = FileHandler::readXMLFile(u);
+    // no namespace processing
+    QDomDocument dom = FileHandler::readXMLFile(u, false);
     handler.addParam("link-entries", "true()");
     // the stylesheet prints utf-8 by default, if using locale encoding, need
     // to change the encoding attribute on the xsl:output element
     if(!encodeUTF8_) {
-      QDomNodeList outNodes = dom.elementsByTagName(QString::fromLatin1("xsl:output"));
-      const QString encoding = QString::fromLatin1(QTextCodec::codecForLocale()->name());
-      outNodes.item(0).toElement().setAttribute(QString::fromLatin1("encoding"), encoding);
+      const QDomNodeList childs = dom.documentElement().childNodes();
+      for(unsigned j = 0; j < childs.count(); ++j) {
+        if(childs.item(j).isElement() && childs.item(j).nodeName() == Latin1Literal("xsl:output")) {
+          QDomElement e = childs.item(j).toElement();
+          const QString encoding = QString::fromLatin1(QTextCodec::codecForLocale()->name());
+          e.setAttribute(QString::fromLatin1("encoding"), encoding);
+          break;
+        }
+      }
     }
 
     XSLTHandler entryHandler(dom, QFile::encodeName(m_entryXSLTFile));
@@ -385,7 +432,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
 
       // now worry about actually exporting entry files
       // I can't reliable encode a string as a URI, so I'm punting, and I'll just replace everything but
-      // a-zA-Z0-9 with an underscore. This MUST match the filename template in bookcase2html.xsl
+      // a-zA-Z0-9 with an underscore. This MUST match the filename template in tellico2html.xsl
       // the id is used so uniqueness is guaranteed
       const QRegExp badChars(QString::fromLatin1("[^-a-zA-Z0-9]"));
       for(entryIt.toFirst(); entryIt.current(); ++entryIt) {
@@ -408,7 +455,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
 
         Data::EntryList list;
         list.append(entryIt.current());
-        BookcaseXMLExporter exporter(collection());
+        TellicoXMLExporter exporter(collection());
         exporter.setEntryList(list);
         // exportXML(bool formatValues, bool encodeUTF8);
         QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);

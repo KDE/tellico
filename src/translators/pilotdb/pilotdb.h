@@ -25,12 +25,12 @@
 
 #include <qcstring.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: pilotdb.h 316 2003-12-08 01:08:00Z robby $
+ * @version $Id: pilotdb.h 862 2004-09-15 01:49:51Z robby $
  */
 class PilotDB : public PalmLib::Database {
 public:

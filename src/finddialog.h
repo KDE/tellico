@@ -22,13 +22,13 @@ class QCheckBox;
 
 #include <kdialogbase.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * The find dialog allows the user to search for a string in the document.
  *
  * @author Robby Stephenson
- * @version $Id: finddialog.h 691 2004-06-09 02:48:54Z robby $
+ * @version $Id: finddialog.h 935 2004-11-01 07:10:27Z robby $
  */
 class FindDialog : public KDialogBase {
 Q_OBJECT
@@ -37,13 +37,13 @@ public:
   /**
    * The constructor sets up the dialog.
    *
-   * @param parent A pointer to the parent widget, a Bookcase object
+   * @param parent A pointer to the parent widget, a Tellico object
    * @param name The widget name
    */
   FindDialog(QWidget* parent, const char* name=0);
 
   /**
-   * Update the field list. This is needed since the parent Bookcase app
+   * Update the field list. This is needed since the parent Tellico app
    * doesn't delete the object once it's created. That's to retain the history list.
    */
   void updateFieldList();
@@ -79,7 +79,6 @@ private:
   QCheckBox* m_findBackwards;
   QCheckBox* m_asRegExp;
   QCheckBox* m_wholeWords;
-  QCheckBox* m_fromBeginning;
 
   KPushButton* m_editRegExp;
   QDialog* m_editRegExpDialog;

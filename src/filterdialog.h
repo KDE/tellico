@@ -30,7 +30,7 @@ class QDialog;
 #include <qstring.h>
 #include <qstringlist.h>
 
-namespace Bookcase {
+namespace Tellico {
   class Filter;
   class FilterRule;
   class FilterDialog;
@@ -44,7 +44,7 @@ namespace Bookcase {
  * This class borrows heavily from KMSearchRule in kmail by Marc Mutz
  *
  * @author Robby Stephenson
- * @version $Id: filterdialog.h 691 2004-06-09 02:48:54Z robby $
+ * @version $Id: filterdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class FilterRuleWidget : public QHBox {
 Q_OBJECT
@@ -109,7 +109,7 @@ protected:
 
 /**
  * @author Robby Stephenson
- * @version $Id: filterdialog.h 691 2004-06-09 02:48:54Z robby $
+ * @version $Id: filterdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class FilterDialog : public KDialogBase {
 Q_OBJECT
@@ -134,7 +134,7 @@ protected slots:
   void slotShrink();
 
 signals:
-  void signalUpdateFilter(Bookcase::Filter*);
+  void signalUpdateFilter(Tellico::Filter*);
 
 private:
   QRadioButton* m_matchAll;

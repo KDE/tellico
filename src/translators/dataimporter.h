@@ -17,12 +17,12 @@
 #include "importer.h"
 #include "../filehandler.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
  * @author Robby Stephenson
- * @version $Id: dataimporter.h 816 2004-08-27 05:51:02Z robby $
+ * @version $Id: dataimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class DataImporter : public Importer {
 Q_OBJECT

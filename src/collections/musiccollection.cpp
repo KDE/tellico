@@ -16,10 +16,12 @@
 
 #include <klocale.h>
 
-using Bookcase::Data::MusicCollection;
+namespace {
+  static const char* music_general = I18N_NOOP("General");
+  static const char* music_personal = I18N_NOOP("Personal");
+}
 
-static const char* music_general = I18N_NOOP("General");
-static const char* music_personal = I18N_NOOP("Personal");
+using Tellico::Data::MusicCollection;
 
 MusicCollection::MusicCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(Album), i18n("Albums")) {
@@ -30,7 +32,7 @@ MusicCollection::MusicCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("artist"));
 }
 
-Bookcase::Data::FieldList MusicCollection::defaultFields() {
+Tellico::Data::FieldList MusicCollection::defaultFields() {
   FieldList list;
   Field* field;
 

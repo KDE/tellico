@@ -1,5 +1,5 @@
 %define name    tellico
-%define version 0.12
+%define version 0.13
 %define release 1rls
 %define iconname %{name}.png
 %define __libtoolize /bin/true
@@ -15,12 +15,12 @@ Source: %{name}-%{version}.tar.gz
 URL: http://www.periapsis.org/tellico/
 Requires: kdebase libxslt1 >= 1.0.19
 # needed for kcddb
-Requires: libkdemultimedia-kscd libcdda0
+Requires: libkdemultimedia-common
 # needed for audio file metadata import
 Requires: taglib
 BuildRequires: kdelibs-devel >= 3.1 libxslt-devel >= 1.0.19
 BuildRequires: ImageMagick libart_lgpl-devel libtaglib-devel
-BuildRequires: libkdemultimedia-kscd-devel libcdda-devel
+BuildRequires: libkdemultimedia-kscd-devel
 BuildRoot: %{_tmppath}/%{name}-buildroot
 Obsoletes: bookcase
 
@@ -40,9 +40,9 @@ o Supports collection searching and view filtering
 o Sorts and groups collection by various properties
 o Automatically validates ISBN
 o Allows customizable entry templates through XSLT
-o Imports Bibtex, Bibtexml, CSV, MODS, and XSLT-filtered data
+o Imports Bibtex, Bibtexml, RIS, CSV, MODS, and XSLT-filtered data
 o Exports to Bibtex, Bibtexml, CSV, HTML, PilotDB, and XSLT-filtered data
-
+o Searches and adds items from Amazon.com, imdb.com, and z39.50 servers
 
 %prep
 rm -rf $RPM_BUILD_ROOT
@@ -62,7 +62,7 @@ convert icons/%{name}.png -geometry 48x48 %{buildroot}%{_liconsdir}/%{iconname}
 convert icons/%{name}.png -geometry 32x32 %{buildroot}%{_iconsdir}/%{iconname} 
 convert icons/%{name}.png -geometry 16x16 %{buildroot}%{_miconsdir}/%{iconname} 
 
-kdedesktop2mdkmenu.pl tellico "More applications/Databases"    %buildroot/%_datadir/applnk/Applications/tellico.desktop                             %buildroot/%_menudir/tellico 
+kdedesktop2mdkmenu.pl Tellico "More applications/Databases"    %buildroot/%_datadir/applnk/Applications/tellico.desktop                             %buildroot/%_menudir/tellico 
 
 %find_lang %{name}
 
@@ -91,9 +91,24 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
-* Sun Sep 19 2004 Robby Stephenson <robby@periapsis.org> 0.12-1rls
-- Rename to Tellico
-- Bump version number to 0.12
+* Sat Nov 20 2004 Robby Stephenson <robby@periapsis.org> 0.13-1rls
+- Version 0.13.
+- Updated description.
+- Updated requires for libkdemultimedia-common.
+
+* Thu Nov 18 2004 Robby Stephenson <robby@periapsis.org> 0.13-0.pre3.1rls
+- Version 0.13pre3.
+
+* Wed Nov 10 2004 Robby Stephenson <robby@periapsis.org> 0.13.0.pre2.1rls
+- Version 0.13pre2.
+
+* Sun Nov  7 2004 Robby Stephenson <robby@periapsis.org> 0.13-0.pre1.1rls
+- Version 0.13pre1
+- Removed dependence on libcdda (cdparanoia)
+
+* Tue Sep 14 2004 Robby Stephenson <robby@periapsis.org> 0.12-1rls
+- Renamed to Tellico
+- Version 0.12
 
 * Thu Aug 26 2004 Robby Stephenson <robby@periapsis.org> 0.11-1rls
 - Version 0.11

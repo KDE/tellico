@@ -15,15 +15,15 @@
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../latin1literal.h"
+#include "../tellico_strings.h"
+#include "tellico_xml.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 
-extern const char* loadError;
+using Tellico::Import::BibtexmlImporter;
 
-using Bookcase::Import::BibtexmlImporter;
-
-Bookcase::Data::Collection* BibtexmlImporter::collection() {
+Tellico::Data::Collection* BibtexmlImporter::collection() {
   if(!m_coll) {
     loadDomDocument();
   }
@@ -32,12 +32,12 @@ Bookcase::Data::Collection* BibtexmlImporter::collection() {
 
 void BibtexmlImporter::loadDomDocument() {
   QDomElement root = domDocument().documentElement();
-  if(root.tagName() != Latin1Literal("file")) {
-    setStatusMessage(i18n(loadError).arg(url().fileName()));
+  if(root.isNull() || root.localName() != Latin1Literal("file")) {
+    setStatusMessage(i18n(errorLoad).arg(url().fileName()));
     return;
   }
 
-  QString ns = BibtexHandler::s_bibtexmlNamespace;
+  const QString& ns = XML::nsBibtexml;
   m_coll = new Data::BibtexCollection(true);
 
   QDomNodeList entryelems = root.elementsByTagNameNS(ns, QString::fromLatin1("entry"));
@@ -50,13 +50,13 @@ void BibtexmlImporter::loadDomDocument() {
     if(j%s_stepSize == 0) {
       emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));
     }
-  } // end unit loop
+  } // end entry loop
 }
 
 void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
   QDomNode node = const_cast<QDomNode&>(entryNode_);
 
-  Data::Entry* unit = new Data::Entry(m_coll);
+  Data::Entry* entry = new Data::Entry(m_coll);
 
 /* The Bibtexml format looks like
   <entry id="...">
@@ -67,9 +67,9 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
     <publisher>...</publisher> */
 
   QString type = node.firstChild().toElement().tagName();
-  unit->setField(QString::fromLatin1("entry-type"), type);
+  entry->setField(QString::fromLatin1("entry-type"), type);
   QString id = node.toElement().attribute(QString::fromLatin1("id"));
-  unit->setField(QString::fromLatin1("bibtex-key"), id);
+  entry->setField(QString::fromLatin1("bibtex-key"), id);
 
   QString name, value;
   // field values are first child of first child of entry node
@@ -88,7 +88,7 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
           name = n2.toElement().tagName();
           value = n2.toElement().text();
           if(!name.isEmpty() && !value.isEmpty()) {
-            BibtexHandler::setFieldValue(unit, name, value.simplifyWhiteSpace());
+            BibtexHandler::setFieldValue(entry, name, value.simplifyWhiteSpace());
           }
         }
         name.truncate(0);
@@ -133,11 +133,11 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
       }
     }
     if(!name.isEmpty() && !value.isEmpty()) {
-      BibtexHandler::setFieldValue(unit, name, value.simplifyWhiteSpace());
+      BibtexHandler::setFieldValue(entry, name, value.simplifyWhiteSpace());
     }
   }
 
-  m_coll->addEntry(unit);
+  m_coll->addEntry(entry);
 }
 
 #include "bibtexmlimporter.moc"

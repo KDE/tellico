@@ -14,27 +14,38 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
+namespace Tellico {
+  class SourceListViewItem;
+  namespace Fetch {
+    class ConfigWidget;
+  }
+}
+
 class KConfig;
 class KLineEdit;
 class KComboBox;
 class KIntSpinBox;
+class KPushButton;
 
 class QCheckBox;
 
+#include "fetch/fetch.h"
+
 #include <kdialogbase.h>
 #include <kcombobox.h>
+#include <klistview.h>
 
 #include <qstringlist.h>
 #include <qintdict.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * The configuration dialog class allows the user to change the global application
  * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h 634 2004-05-01 14:40:38Z robby $
+ * @version $Id: configdialog.h 964 2004-11-19 06:54:49Z robby $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT
@@ -57,7 +68,7 @@ public:
   void readConfiguration(KConfig* config);
   /**
    * Saves the configuration. @ref KConfigBase::sync is called. This method is called
-   * from the main Bookcase object.
+   * from the main Tellico object.
    *
    * @param config A pointer to the KConfig object
    */
@@ -76,10 +87,7 @@ protected:
    * Sets-up the page for template options.
    */
   void setupTemplatePage();
-  /**
-   * Sets-up the page for bibtex options.
-   */
-  void setupBibliographyPage();
+  void setupFetchPage();
 
 protected slots:
   /**
@@ -114,6 +122,22 @@ protected slots:
    * @param w The page
    */
   void slotUpdateHelpLink(QWidget* w);
+  /**
+   * Create a new Internet source
+   */
+  void slotNewSourceClicked();
+  /**
+   * Modify a Internet source
+   */
+  void slotModifySourceClicked();
+  /**
+   * Remove a Internet source
+   */
+  void slotRemoveSourceClicked();
+  /**
+   * Check source
+   */
+  void slotSourceChanged();
 
 signals:
   /**
@@ -122,6 +146,8 @@ signals:
   void signalConfigChanged();
 
 private:
+  bool m_modifying;
+
   QCheckBox* m_cbOpenLastFile;
   QCheckBox* m_cbShowTipDay;
   QCheckBox* m_cbCapitalize;
@@ -139,8 +165,34 @@ private:
 
   QIntDict<KComboBox> m_cbTemplates;
 
-  KLineEdit* m_leLyxpipe;
-  KComboBox* m_cbBibtexStyle;
+  KListView* m_sourceListView;
+  QMap<SourceListViewItem*, Fetch::ConfigWidget*> m_configWidgets;
+  KPushButton* m_newSourceBtn;
+  KPushButton* m_modifySourceBtn;
+  KPushButton* m_removeSourceBtn;
+};
+
+class SourceListViewItem : public KListViewItem {
+public:
+  SourceListViewItem(KListView* parent, QListViewItem* after_, const QString& name_, Fetch::Type type_,
+                     const QString& groupName_ = QString::null)
+    : KListViewItem(parent, after_, name_), m_fetchType(type_),
+      m_configGroup(groupName_), m_newSource(groupName_.isNull()) {}
+  SourceListViewItem(KListView* parent, const QString& name_, Fetch::Type type_,
+                     const QString& groupName_ = QString::null)
+    : KListViewItem(parent, name_), m_fetchType(type_),
+      m_configGroup(groupName_), m_newSource(groupName_.isNull()) {}
+
+  void setConfigGroup(const QString& s) { m_configGroup = s; }
+  const QString& configGroup() const { return m_configGroup; }
+  const Fetch::Type& fetchType() const { return m_fetchType; }
+  void setNewSource(bool b) { m_newSource = b; }
+  bool isNewSource() const { return m_newSource; }
+
+private:
+  Fetch::Type m_fetchType;
+  QString m_configGroup;
+  bool m_newSource;
 };
 
 } // end namespace

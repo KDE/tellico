@@ -22,12 +22,14 @@
 #include <kpopupmenu.h>
 #include <kstringhandler.h>
 
-static const unsigned MIN_ENTRY_ICON_SIZE = 32;
-static const unsigned MAX_ENTRY_ICON_SIZE = 128;
-static const unsigned ENTRY_ICON_SIZE_PAD = 4;
+namespace {
+  static const unsigned MIN_ENTRY_ICON_SIZE = 32;
+  static const unsigned MAX_ENTRY_ICON_SIZE = 128;
+  static const unsigned ENTRY_ICON_SIZE_PAD = 4;
+}
 
-using Bookcase::EntryIconView;
-using Bookcase::EntryIconViewItem;
+using Tellico::EntryIconView;
+using Tellico::EntryIconViewItem;
 
 EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
     : KIconView(parent_, name_), m_coll(0), m_group(0), m_maxIconWidth(MAX_ENTRY_ICON_SIZE) {
@@ -71,7 +73,7 @@ const QString& EntryIconView::imageField() {
 }
 
 void EntryIconView::setMaxIconWidth(const unsigned& width_) {
-  m_maxIconWidth = QMAX(MIN_ENTRY_ICON_SIZE, QMIN(MAX_ENTRY_ICON_SIZE, width_));
+  m_maxIconWidth = KMAX(MIN_ENTRY_ICON_SIZE, KMIN(MAX_ENTRY_ICON_SIZE, width_));
   refresh();
 }
 
@@ -83,8 +85,8 @@ void EntryIconView::fillView(const Data::EntryList& list_) {
   QIconViewItem* item;
   for(Data::EntryListIterator it(list_); it.current(); ++it) {
     item = new EntryIconViewItem(this, it.current());
-    maxWidth = QMAX(maxWidth, item->width());
-    maxHeight = QMAX(maxWidth, item->pixmapRect().height());
+    maxWidth = KMAX(maxWidth, item->width());
+    maxHeight = KMAX(maxWidth, item->pixmapRect().height());
   }
   setGridX(maxWidth + 2*ENTRY_ICON_SIZE_PAD); // the pad is so the text can be wider than the icon
   setGridY(maxHeight + fontMetrics().height());
@@ -93,10 +95,12 @@ void EntryIconView::fillView(const Data::EntryList& list_) {
 }
 
 void EntryIconView::refresh() {
-  findImageField();
+  if(!m_coll && !m_group) {
+    return;
+  }
   if(m_coll) {
     showCollection(m_coll);
-  } else if(m_group) {
+  } else {
     showEntryGroup(m_group);
   }
 }
@@ -144,8 +148,8 @@ void EntryIconView::removeEntry(Data::Entry* entry_) {
 }
 
 void EntryIconView::slotSelectionChanged() {
-  const QPtrList<EntryIconViewItem>& items = selectedItems();
   Data::EntryList list;
+  const QPtrList<EntryIconViewItem>& items = selectedItems();
   for(QPtrListIterator<EntryIconViewItem> it(items); it.current(); ++it) {
     list.append(it.current()->entry());
   }

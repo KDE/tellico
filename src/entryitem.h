@@ -20,7 +20,7 @@
 #include <qpalette.h>
 //#include <qguardedptr.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Entry;
     class EntryGroup;
@@ -34,7 +34,7 @@ namespace Bookcase {
  * @see Entry
  *
  * @author Robby Stephenson
- * @version $Id: entryitem.h 722 2004-08-03 02:58:08Z robby $
+ * @version $Id: entryitem.h 862 2004-09-15 01:49:51Z robby $
  */
 class EntryItem : public MultiSelectionListViewItem {
 public:
@@ -45,7 +45,7 @@ public:
    * @param entry A pointer to the entry to which the item refers
    */
   EntryItem(MultiSelectionListView* parent, Data::Entry* entry)
-      : MultiSelectionListViewItem(parent), m_entry(entry), m_customSort(parent->isA("Bookcase::DetailedListView")) {}
+      : MultiSelectionListViewItem(parent), m_entry(entry), m_customSort(parent->isA("Tellico::DetailedListView")) {}
   /**
    * This constructor is for items which have other KListViewItems as parents. It
    * initializes the text in the first column, as well.
@@ -95,7 +95,7 @@ private:
   // if I make this a QGuardedPtr, the app crashes, why?
   Data::Entry* m_entry;
   // if the parent is a DetailedListView
-  // this way, I don't have to call listView()->isA("Bookcase::DetailedListView") every time
+  // this way, I don't have to call listView()->isA("Tellico::DetailedListView") every time
   // when I want to do funky comparisons
   bool m_customSort;
 };
@@ -108,7 +108,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: entryitem.h 722 2004-08-03 02:58:08Z robby $
+ * @version $Id: entryitem.h 862 2004-09-15 01:49:51Z robby $
  */
 class ParentItem : public MultiSelectionListViewItem {
 public:

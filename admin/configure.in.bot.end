@@ -12,6 +12,24 @@ if test -n "$kde_libs_prefix" -a -n "$given_prefix"; then
   fi
 fi
 
+if test -z "$TAGLIB_CONFIG"; then
+    echo "  *** You don't have the TagLib headers on your system"
+    echo "  *** Support for reading audio files is disabled"
+    echo ""
+fi
+
+if test -z "$YAZ_CONFIG"; then
+    echo "  *** You don't have the yaz headers on your system"
+    echo "  *** Support for z39.50 searches is disabled"
+    echo ""
+fi
+
+if test x$kcddb != xyes; then
+    echo "  *** You don't have the kcddb headers on your system"
+    echo "  *** Support for fetching CDDB info is disabled"
+    echo ""
+fi
+
 if test "$all_tests" = "bad"; then
   if test ! "$cache_file" = "/dev/null"; then
     echo ""

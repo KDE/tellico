@@ -23,20 +23,22 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kconfig.h>
+#include <kcombobox.h>
 
 #include <qregexp.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qgroupbox.h>
 #include <qwhatsthis.h>
+#include <qlabel.h>
+#include <qhbox.h>
 
-using Bookcase::Export::BibtexExporter;
+using Tellico::Export::BibtexExporter;
 
-BibtexExporter::BibtexExporter(const Data::Collection* coll_) : Bookcase::Export::TextExporter(coll_),
+BibtexExporter::BibtexExporter(const Data::Collection* coll_) : Tellico::Export::TextExporter(coll_),
    m_expandMacros(false),
    m_packageURL(true),
    m_skipEmptyKeys(false),
-   m_quoteStyle(BibtexHandler::BRACES),
    m_widget(0) {
 }
 
@@ -74,6 +76,21 @@ QWidget* BibtexExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   QWhatsThis::add(m_checkSkipEmpty, i18n("If checked, any entries without a bibtex citation key "
                                          "will be skipped."));
 
+  QHBox* hbox = new QHBox(box);
+  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:"), hbox);
+  m_cbBibtexStyle = new KComboBox(hbox);
+  m_cbBibtexStyle->insertItem(i18n("Braces"));
+  m_cbBibtexStyle->insertItem(i18n("Quotes"));
+  QString whats = i18n("<qt>The quotation style used when exporting bibtex. All field values will "
+                       " be escaped with either braces or quotation marks.</qt>");
+  QWhatsThis::add(l1, whats);
+  QWhatsThis::add(m_cbBibtexStyle, whats);
+  if(BibtexHandler::s_quoteStyle == BibtexHandler::BRACES) {
+    m_cbBibtexStyle->setCurrentItem(i18n("Braces"));
+  } else {
+    m_cbBibtexStyle->setCurrentItem(i18n("Quotes"));
+  }
+
   l->addStretch(1);
   return m_widget;
 }
@@ -83,6 +100,12 @@ void BibtexExporter::readOptions(KConfig* config_) {
   m_expandMacros = config_->readBoolEntry("Expand Macros", m_expandMacros);
   m_packageURL = config_->readBoolEntry("URL Package", m_packageURL);
   m_skipEmptyKeys = config_->readBoolEntry("Skip Empty Keys", m_skipEmptyKeys);
+
+  if(config_->readBoolEntry("Use Braces", true)) {
+    BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
+  } else {
+    BibtexHandler::s_quoteStyle = BibtexHandler::QUOTES;
+  }
 }
 
 void BibtexExporter::saveOptions(KConfig* config_) {
@@ -93,6 +116,14 @@ void BibtexExporter::saveOptions(KConfig* config_) {
   config_->writeEntry("URL Package", m_packageURL);
   m_skipEmptyKeys = m_checkSkipEmpty->isChecked();
   config_->writeEntry("Skip Empty Keys", m_skipEmptyKeys);
+
+  bool useBraces = m_cbBibtexStyle->currentText() == i18n("Braces");
+  config_->writeEntry("Use Braces", useBraces);
+  if(useBraces) {
+    BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
+  } else {
+    BibtexHandler::s_quoteStyle = BibtexHandler::QUOTES;
+  }
 }
 
 QString BibtexExporter::text(bool formatFields_, bool) {
@@ -115,7 +146,7 @@ QString BibtexExporter::text(bool formatFields_, bool) {
   }
 
   if(typeField.isEmpty() || keyField.isEmpty()) {
-    kdWarning() << "BibtexExporter::text() - the collection must have attributes defining "
+    kdWarning() << "BibtexExporter::text() - the collection must have fields defining "
                    "the entry-type and the key of the entry" << endl;
     return QString::null;
   }

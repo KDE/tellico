@@ -19,7 +19,7 @@
 
 #include <qbuffer.h>
 
-using Bookcase::Data::Image;
+using Tellico::Data::Image;
 
 // I'm using the MD5 hash as the id. I consider it rather unlikely that two images in one
 // collection could ever have the same hash, and this lets me do a fast comparison of two images

@@ -14,7 +14,9 @@
 #include "configdialog.h"
 #include "field.h"
 #include "collectionfactory.h"
-#include "translators/bibtexhandler.h" // needed for bibtex quote style options
+#include "fetch/fetcher.h"
+#include "fetch/fetchmanager.h"
+#include "fetch/configwidget.h"
 
 #include <klineedit.h>
 #include <klocale.h>
@@ -24,6 +26,7 @@
 #include <kstandarddirs.h>
 #include <kdialogbase.h>
 #include <knuminput.h>
+#include <kpushbutton.h>
 
 #include <qsize.h>
 #include <qlayout.h>
@@ -40,24 +43,27 @@
 #include <qvbox.h>
 #include <qhbox.h>
 #include <qfileinfo.h>
+#include <qwidgetstack.h>
 
-static const int CONFIG_MIN_WIDTH = 600;
-static const int CONFIG_MIN_HEIGHT = 420;
+namespace {
+  static const int CONFIG_MIN_WIDTH = 600;
+  static const int CONFIG_MIN_HEIGHT = 420;
+}
 
-using Bookcase::ConfigDialog;
+using Tellico::ConfigDialog;
 
 ConfigDialog::ConfigDialog(QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(IconList, i18n("Configure Tellico"), Help|Ok|Apply|Cancel|Default,
-                  Ok, parent_, name_, true, false) {
+                  Ok, parent_, name_, true, false), m_modifying(false) {
   setupGeneralPage();
   setupPrintingPage();
   setupTemplatePage();
-  setupBibliographyPage();
+  setupFetchPage();
 
   updateGeometry();
   QSize s = sizeHint();
-  resize(QMAX(s.width(), CONFIG_MIN_WIDTH),
-         QMAX(s.height(), CONFIG_MIN_HEIGHT));
+  resize(KMAX(s.width(), CONFIG_MIN_WIDTH),
+         KMAX(s.height(), CONFIG_MIN_HEIGHT));
 
   enableButtonOK(false);
   enableButtonApply(false);
@@ -81,7 +87,7 @@ void ConfigDialog::slotUpdateHelpLink(QWidget* w_) {
       break;
 
     case 3:
-      setHelp(QString::fromLatin1("bibtex-options"));
+      setHelp(QString::fromLatin1("internet-sources-options"));
       break;
 
     default:
@@ -127,13 +133,6 @@ void ConfigDialog::slotDefault() {
         // not translated since it's the file name
         it.current()->setCurrentItem(QString::fromLatin1("Default"));
       }
-      break;
-
-    case 3:
-      // bibtex options
-      m_cbBibtexStyle->setCurrentItem(i18n("Braces"));
-      // FIXME: should use KShell::homeDir() ?
-      m_leLyxpipe->setText(QString::fromLatin1("$HOME/.lyx/lyxpipe"));
       break;
   }
 }
@@ -302,44 +301,49 @@ void ConfigDialog::setupTemplatePage() {
   l->addStretch(1);
 }
 
-void ConfigDialog::setupBibliographyPage() {
-  // FIXME: need a bibtex icon?
-  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("document"), KIcon::Desktop);
-  QFrame* frame = addPage(i18n("Bibtex"), i18n("Bibtex Options"), pix);
-  QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
+void ConfigDialog::setupFetchPage() {
+  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Desktop);
+  QFrame* frame = addPage(i18n("Data Sources"), i18n("Data Source Options"), pix);
+  QHBoxLayout* l = new QHBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
-  QGrid* grid = new QGrid(2, frame);
-  grid->setSpacing(5);
-  l->addWidget(grid);
+  m_sourceListView = new KListView(frame);
+  m_sourceListView->addColumn(i18n("Source"));
+  m_sourceListView->setResizeMode(QListView::LastColumn);
+  m_sourceListView->setSorting(-1); // no sorting
+  l->addWidget(m_sourceListView, 1);
+  connect(m_sourceListView, SIGNAL(selectionChanged()), SLOT(slotSourceChanged()));
+  connect(m_sourceListView, SIGNAL(doubleClicked(QListViewItem*, const QPoint&, int)), SLOT(slotModifySourceClicked()));
 
-  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:"), grid);
-  m_cbBibtexStyle = new KComboBox(grid);
-  m_cbBibtexStyle->insertItem(i18n("Braces"));
-  m_cbBibtexStyle->insertItem(i18n("Quotes"));
-  QString whats = i18n("<qt>The quotation style used when exporting bibtex. All field values will be escaped with either "
-                       " braces or quotation marks.</qt>");
-  QWhatsThis::add(l1, whats);
-  QWhatsThis::add(m_cbBibtexStyle, whats);
-  if(BibtexHandler::s_quoteStyle == BibtexHandler::BRACES) {
-    m_cbBibtexStyle->setCurrentItem(i18n("Braces"));
-  } else {
-    m_cbBibtexStyle->setCurrentItem(i18n("Quotes"));
+  // these icons are rather arbitrary, but seem to vaguely fit
+  QVBoxLayout* vlay = new QVBoxLayout(l);
+  m_newSourceBtn = new KPushButton(i18n("&New..."), frame);
+  m_newSourceBtn->setIconSet(KGlobal::iconLoader()->loadIconSet(QString::fromLatin1("knewstuff"),
+                                                                KIcon::Small));
+  m_modifySourceBtn = new KPushButton(i18n("&Modify..."), frame);
+  m_modifySourceBtn->setIconSet(KGlobal::iconLoader()->loadIconSet(QString::fromLatin1("network"),
+                                                                   KIcon::Small));
+  m_removeSourceBtn = new KPushButton(i18n("Remo&ve"), frame);
+  m_removeSourceBtn->setIconSet(KGlobal::iconLoader()->loadIconSet(QString::fromLatin1("remove"),
+                                                                   KIcon::Small));
+  vlay->addWidget(m_newSourceBtn);
+  vlay->addWidget(m_modifySourceBtn);
+  vlay->addWidget(m_removeSourceBtn);
+  vlay->addStretch(1);
+
+  connect(m_newSourceBtn, SIGNAL(clicked()), SLOT(slotNewSourceClicked()));
+  connect(m_modifySourceBtn, SIGNAL(clicked()), SLOT(slotModifySourceClicked()));
+  connect(m_removeSourceBtn, SIGNAL(clicked()), SLOT(slotRemoveSourceClicked()));
+
+  // set initial state
+  if(Fetch::Manager::sourceMap().isEmpty()) {
+    m_newSourceBtn->setEnabled(false);
   }
-  connect(m_cbBibtexStyle, SIGNAL(activated(int)), SLOT(slotModified()));
-
-  QLabel* l2 = new QLabel(i18n("Path to LyX server:"), grid);
-  m_leLyxpipe = new KLineEdit(grid);
-  whats = i18n("<qt>The location of the LyX server for citing bibliographic entries. Also used by other "
-               "applications such as Kile or Pybliographer. Do not include the trailing .in suffix.</qt>");
-  QWhatsThis::add(l2, whats);
-  QWhatsThis::add(m_leLyxpipe, whats);
-  connect(m_leLyxpipe, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
-
-  // stretch to fill lower area
-  l->addStretch(1);
+  slotSourceChanged();
 }
 
 void ConfigDialog::readConfiguration(KConfig* config_) {
+  m_modifying = true;
+
   config_->setGroup("TipOfDay");
   bool showTipDay = config_->readBoolEntry("RunOnStart", true);
   m_cbShowTipDay->setChecked(showTipDay);
@@ -384,14 +388,25 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
     it.current()->setCurrentItem(config_->readEntry("Entry Template", QString::fromLatin1("Default")));
   }
 
-  QString entryName = CollectionFactory::entryName(Data::Collection::Bibtex);
-  config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
-  QString lyxpipe = config_->readPathEntry("lyxpipe", QString::fromLatin1("$HOME/.lyx/lyxpipe"));
-  m_leLyxpipe->setText(lyxpipe);
-
-  // since all the modified signals got sent...
-  enableButtonOK(false);
-  enableButtonApply(false);
+  // fetchers
+  const Fetch::FetcherList& fetchers = Fetch::Manager::self()->fetcherList();
+  for(Fetch::FetcherListIterator it(fetchers); it.current(); ++it) {
+    SourceListViewItem* item = new SourceListViewItem(m_sourceListView,  m_sourceListView->lastItem(),
+                                                      it.current()->source(),
+                                                      it.current()->type());
+    // grab the config widget, taking ownership
+    Fetch::ConfigWidget* cw = it.current()->configWidget(this);
+    if(cw) { // might return 0 when no widget available for fetcher type
+      m_configWidgets.insert(item, cw);
+      // there's weird layout bug if it's not hidden
+      cw->hide();
+    }
+  }
+  if(m_sourceListView->childCount() == 0) {
+    m_modifySourceBtn->setEnabled(false);
+    m_removeSourceBtn->setEnabled(false);
+  }
+  m_modifying = false;
 }
 
 void ConfigDialog::saveConfiguration(KConfig* config_) {
@@ -452,21 +467,35 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
     config_->writeEntry("Entry Template", it.current()->currentText());
   }
 
-  // the groups may look odd, but the bibtex export may someday be divorced from the bibliography collection altogether
-  config_->setGroup(QString::fromLatin1("ExportOptions - Bibtex"));
-  bool useBraces = m_cbBibtexStyle->currentText() == i18n("Braces");
-  config_->writeEntry("Use Braces", useBraces);
-  if(useBraces) {
-    BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
-  } else {
-    BibtexHandler::s_quoteStyle = BibtexHandler::QUOTES;
+  bool reloadFetchers = false;
+  int count = 0; // start group numbering at 1
+  for(QListViewItemIterator it(m_sourceListView); it.current(); ++it, ++count) {
+    SourceListViewItem* item = static_cast<SourceListViewItem*>(it.current());
+    Fetch::ConfigWidget* cw = m_configWidgets[item];
+    if(!cw || (!cw->shouldSave() && !item->isNewSource())) {
+      continue;
+    }
+    QString group = QString::fromLatin1("Data Source %1").arg(count);
+    // in case we later change the order, clear the group now
+    config_->deleteGroup(group);
+    KConfigGroupSaver saver(config_, group);
+    config_->writeEntry("Name", item->text(0));
+    config_->writeEntry("Type", item->fetchType());
+    cw->saveConfig(config_);
+    item->setNewSource(false);
+    // in case the ordering changed
+    item->setConfigGroup(group);
+    reloadFetchers = true;
   }
-
-  QString entryName = CollectionFactory::entryName(Data::Collection::Bibtex);
-  config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
-  config_->writePathEntry("lyxpipe", m_leLyxpipe->text());
+  // now update total number of sources
+  config_->setGroup("Data Sources");
+  config_->writeEntry("Sources Count", count);
 
   config_->sync();
+
+  if(reloadFetchers) {
+    Fetch::Manager::self()->reloadFetchers();
+  }
 }
 
 void ConfigDialog::slotToggleFormatted(bool checked_) {
@@ -476,8 +505,204 @@ void ConfigDialog::slotToggleFormatted(bool checked_) {
 }
 
 void ConfigDialog::slotModified() {
+  if(m_modifying) {
+    return;
+  }
   enableButtonOK(true);
   enableButtonApply(true);
+}
+
+// alot of code is duplicated between slotNewSourceClicked() and slotModifySourceClicked()
+void ConfigDialog::slotNewSourceClicked() {
+  KDialogBase* dlg = new KDialogBase(this, "fetcher dialog",
+                                     true, i18n("Data Source Properties"),
+                                     KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Help);
+  dlg->setMinimumWidth(2*CONFIG_MIN_WIDTH/3);
+  dlg->setHelp(QString::fromLatin1("data-sources-options"));
+
+  QWidget* widget = new QWidget(dlg);
+  QBoxLayout* topLayout = new QHBoxLayout(widget, KDialog::spacingHint());
+
+  QBoxLayout* vlay1 = new QVBoxLayout(topLayout, KDialog::spacingHint());
+  QLabel* icon = new QLabel(widget);
+  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"),
+                  KIcon::Panel, 64));
+  vlay1->addWidget(icon);
+  vlay1->addStretch(1);
+
+  QBoxLayout* vlay2 = new QVBoxLayout(topLayout, KDialog::spacingHint());
+
+  QGridLayout* gl = new QGridLayout(vlay2, 2, 2, KDialog::spacingHint());
+
+  QLabel* label = new QLabel(i18n("&Source name: "), widget);
+  gl->addWidget(label, 0, 0);
+  QString w = i18n("The name identifies the data source and should be unique and informative.");
+  QWhatsThis::add(label, w);
+
+  KLineEdit* editName = new KLineEdit(i18n("Default"), widget);
+  gl->addWidget(editName, 0, 1);
+  editName->setFocus();
+  QWhatsThis::add(editName, w);
+  label->setBuddy(editName);
+
+  label = new QLabel(i18n("Source type: "), widget);
+  gl->addWidget(label, 1, 0);
+  w = i18n("Tellico currently supports three source types: Amazon.com, IMDB, and z39.50.");
+  QWhatsThis::add(label, w);
+
+  KComboBox* cbox = new KComboBox(widget);
+  gl->addWidget(cbox, 1, 1);
+  QWhatsThis::add(cbox, w);
+  label->setBuddy(cbox);
+
+  QHGroupBox* gbox = new QHGroupBox(i18n("Source Options"), widget);
+  vlay2->addWidget(gbox);
+  QWidgetStack* stack = new QWidgetStack(gbox);
+  connect(cbox, SIGNAL(activated(int)), stack, SLOT(raiseWidget(int)));
+
+  const Fetch::FetchMap fetchMap = Fetch::Manager::sourceMap();
+  bool hasZ3950 = false;
+  int idx = 0;
+  for(Fetch::FetchMap::ConstIterator it = fetchMap.begin(); it != fetchMap.end(); ++it) {
+    // create an empty default widget, could return 0 if no widget for a certain fetch type
+    Fetch::ConfigWidget* cw = Fetch::Manager::configWidget(it.key(), stack);
+    if(cw) {
+      cbox->insertItem(it.data(), idx);
+      stack->addWidget(cw, idx);
+      ++idx;
+    }
+    if(it.key() == Fetch::Z3950) {
+      hasZ3950 = true;
+    }
+  }
+  // z39.50 is most likely to be the new item, so go ahead and select it
+  if(hasZ3950) {
+    cbox->setCurrentItem(idx-1);
+    stack->raiseWidget(idx-1);
+  }
+
+  dlg->setMainWidget(widget);
+  if(dlg->exec() == QDialog::Accepted) {
+    Fetch::Type type = Fetch::Unknown;
+    for(Fetch::FetchMap::ConstIterator it = fetchMap.begin(); it != fetchMap.end(); ++it) {
+      if(it.data() == cbox->currentText()) {
+        type = it.key();
+        break;
+      }
+    }
+    if(type != Fetch::Unknown) {
+      SourceListViewItem* item = new SourceListViewItem(m_sourceListView, m_sourceListView->lastItem(),
+                                                        editName->text(), type);
+      m_sourceListView->setSelected(item, true);
+      Fetch::ConfigWidget* cw = dynamic_cast<Fetch::ConfigWidget*>(stack->visibleWidget());
+      if(cw) {
+        cw->setAccepted(true);
+        cw->slotSetModified();
+        cw->reparent(this, QPoint()); // keep the config widget arround
+        m_configWidgets.insert(item, cw);
+      }
+      m_modifySourceBtn->setEnabled(true);
+      m_removeSourceBtn->setEnabled(true);
+      slotModified(); // toggle apply button
+    }
+  }
+  dlg->delayedDestruct();
+}
+
+// there's a lot of duplicated code between here and slotNewSourceCLicked()
+void ConfigDialog::slotModifySourceClicked() {
+  SourceListViewItem* item = static_cast<SourceListViewItem*>(m_sourceListView->selectedItem());
+  if(!item) {
+    return;
+  }
+
+  Fetch::ConfigWidget* cw = 0;
+  if(m_configWidgets.contains(item)) {
+    cw = m_configWidgets[item];
+  }
+  if(!cw) {
+    // no config widget for this one
+    // might be because support was compiled out
+    return;
+  }
+  KDialogBase* dlg = new KDialogBase(this, "fetcher dialog",
+                                     true, i18n("Data Source Properties"),
+                                     KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Help);
+  dlg->setMinimumWidth(2*CONFIG_MIN_WIDTH/3);
+  dlg->setHelp(QString::fromLatin1("data-sources-options"));
+
+  QWidget* widget = new QWidget(dlg);
+  QBoxLayout* topLayout = new QHBoxLayout(widget, KDialog::spacingHint());
+
+  QBoxLayout* vlay1 = new QVBoxLayout(topLayout, KDialog::spacingHint());
+  QLabel* icon = new QLabel(widget);
+  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"),
+                  KIcon::Panel, 64));
+  vlay1->addWidget(icon);
+  vlay1->addStretch(1);
+
+  QBoxLayout* vlay2 = new QVBoxLayout(topLayout, KDialog::spacingHint());
+
+  QGridLayout* gl = new QGridLayout(vlay2, 2, 2, KDialog::spacingHint());
+
+  QLabel* label = new QLabel(i18n("&Source name: "), widget);
+  gl->addWidget(label, 0, 0);
+  QString w = i18n("The name identifies the data source and should be unique and informative.");
+  QWhatsThis::add(label, w);
+
+  KLineEdit* editName = new KLineEdit(item->text(0), widget);
+  gl->addWidget(editName, 0, 1);
+  editName->setFocus();
+  QWhatsThis::add(editName, w);
+  label->setBuddy(editName);
+
+  label = new QLabel(i18n("Source type: "), widget);
+  gl->addWidget(label, 1, 0);
+  w = i18n("Tellico currently supports three source types: Amazon.com, IMDB, and z39.50.");
+  QWhatsThis::add(label, w);
+
+  QLabel* lab = new QLabel(Fetch::Manager::sourceMap()[item->fetchType()], widget);
+  gl->addWidget(lab, 1, 1);
+  QWhatsThis::add(lab, w);
+
+  QHGroupBox* gbox = new QHGroupBox(i18n("Source Options"), widget);
+  gbox->setMargin(KDialog::marginHint());
+  cw->reparent(gbox, QPoint());
+  vlay2->addWidget(gbox);
+  dlg->setMainWidget(widget);
+
+  if(dlg->exec() == QDialog::Accepted) {
+    cw->setAccepted(true); // mark to save
+    if(editName->text() != item->text(0)) {
+      item->setText(0, editName->text());
+      cw->slotSetModified();
+    }
+    slotModified(); // toggle apply button
+  }
+  cw->reparent(this, QPoint()); // keep the config widget arround
+  dlg->delayedDestruct();
+}
+
+void ConfigDialog::slotRemoveSourceClicked() {
+  SourceListViewItem* item = static_cast<SourceListViewItem*>(m_sourceListView->selectedItem());
+  if(!item) {
+    return;
+  }
+
+  Fetch::ConfigWidget* cw = m_configWidgets[item];
+  m_configWidgets.remove(item);
+  delete item;
+  delete cw;
+  slotModified(); // toggle apply button
+}
+
+void ConfigDialog::slotSourceChanged() {
+  SourceListViewItem* item = static_cast<SourceListViewItem*>(m_sourceListView->selectedItem());
+  if(!item) {
+    return;
+  }
+
+//  m_removeSourceBtn->setEnabled(Fetch::Manager::canRemove(item->fetchType()));
 }
 
 #include "configdialog.moc"

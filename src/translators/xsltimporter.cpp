@@ -13,7 +13,7 @@
 
 #include "xsltimporter.h"
 #include "xslthandler.h"
-#include "bookcaseimporter.h"
+#include "tellicoimporter.h"
 #include "../filehandler.h"
 
 #include <klocale.h>
@@ -25,15 +25,15 @@
 #include <qlayout.h>
 #include <qgroupbox.h>
 
-using Bookcase::Import::XSLTImporter;
+using Tellico::Import::XSLTImporter;
 
-XSLTImporter::XSLTImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_),
+XSLTImporter::XSLTImporter(const KURL& url_) : Tellico::Import::TextImporter(url_),
     m_coll(0),
     m_widget(0),
     m_URLRequester(0) {
 }
 
-Bookcase::Data::Collection* XSLTImporter::collection() {
+Tellico::Data::Collection* XSLTImporter::collection() {
   if(m_coll) {
     return m_coll;
   }
@@ -61,7 +61,7 @@ Bookcase::Data::Collection* XSLTImporter::collection() {
   QString str = handler.applyStylesheet(text(), true);
 //  kdDebug() << str << endl;
 
-  Import::BookcaseImporter imp(str);
+  Import::TellicoImporter imp(str);
   connect(&imp, SIGNAL(signalFractionDone(float)), SIGNAL(signalFractionDone(float)));
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());

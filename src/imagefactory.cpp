@@ -19,15 +19,15 @@
 
 #include <qdir.h>
 
-using Bookcase::ImageFactory;
+using Tellico::ImageFactory;
 
-const Bookcase::Data::Image ImageFactory::s_null;
+const Tellico::Data::Image ImageFactory::s_null;
 
-QDict<Bookcase::Data::Image> ImageFactory::s_imageDict;
+QDict<Tellico::Data::Image> ImageFactory::s_imageDict;
 QDict<int> ImageFactory::s_imageFileDict;
 QString ImageFactory::s_tempDir;
 
-const Bookcase::Data::Image& ImageFactory::addImage(const KURL& url_, bool quiet_) {
+const Tellico::Data::Image& ImageFactory::addImage(const KURL& url_, bool quiet_) {
   if(url_.isEmpty() || !url_.isValid()) {
     return s_null;
   }
@@ -45,7 +45,7 @@ const Bookcase::Data::Image& ImageFactory::addImage(const KURL& url_, bool quiet
   return *img;
 }
 
-const Bookcase::Data::Image& ImageFactory::addImage(const QImage& image_, const QString& format_) {
+const Tellico::Data::Image& ImageFactory::addImage(const QImage& image_, const QString& format_) {
   Data::Image* img = new Data::Image(image_, format_);
   const Data::Image& img2 = imageById(img->id());
   if(!img2.isNull()) {
@@ -58,8 +58,8 @@ const Bookcase::Data::Image& ImageFactory::addImage(const QImage& image_, const 
   return *img;
 }
 
-const Bookcase::Data::Image& ImageFactory::addImage(const QByteArray& data_, const QString& format_,
-                                                    const QString& id_) {
+const Tellico::Data::Image& ImageFactory::addImage(const QByteArray& data_, const QString& format_,
+                                                   const QString& id_) {
   const Data::Image& image = imageById(id_);
   if(!image.isNull()) {
     return image;
@@ -75,7 +75,7 @@ const Bookcase::Data::Image& ImageFactory::addImage(const QByteArray& data_, con
   return *img;
 }
 
-const Bookcase::Data::Image& ImageFactory::imageById(const QString& id_) {
+const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(s_imageDict.isEmpty() || id_.isEmpty()) {
     return s_null;
   }

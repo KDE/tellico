@@ -14,17 +14,20 @@
 #include "bibtexcollection.h"
 #include "../collectionfactory.h"
 #include "../latin1literal.h"
+#include "../translators/bibtexhandler.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 
 #include <qfile.h>
 
-using Bookcase::Data::BibtexCollection;
+using Tellico::Data::BibtexCollection;
 
-static const char* bibtex_general = I18N_NOOP("General");
-static const char* bibtex_publishing = I18N_NOOP("Publishing");
-static const char* bibtex_misc = I18N_NOOP("Miscellaneous");
+namespace {
+  static const char* bibtex_general = I18N_NOOP("General");
+  static const char* bibtex_publishing = I18N_NOOP("Publishing");
+  static const char* bibtex_misc = I18N_NOOP("Miscellaneous");
+}
 
 BibtexCollection::BibtexCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(Bibtex), i18n("Entries")) {
@@ -49,7 +52,7 @@ BibtexCollection::BibtexCollection(bool addFields_, const QString& title_ /*=nul
   addMacro(QString::fromLatin1("dec"), QString::null);
 }
 
-Bookcase::Data::FieldList BibtexCollection::defaultFields() {
+Tellico::Data::FieldList BibtexCollection::defaultFields() {
   FieldList list;
   Field* field;
 
@@ -125,11 +128,11 @@ Bookcase::Data::FieldList BibtexCollection::defaultFields() {
   field->setFormatFlag(Field::FormatPlain);
   list.append(field);
 
-//  field = new Field(QString::fromLatin1("address"), i18n("Address"));
-//  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("address"));
-//  field->setCategory(i18n(bibtex_publishing));
-//  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-//  list.append(field);
+  field = new Field(QString::fromLatin1("address"), i18n("Address"));
+  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("address"));
+  field->setCategory(i18n(bibtex_publishing));
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
+  list.append(field);
 
   field = new Field(QString::fromLatin1("edition"), i18n("Edition"));
   field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("edition"));
@@ -164,7 +167,7 @@ Bookcase::Data::FieldList BibtexCollection::defaultFields() {
 
   // could make this a string list, but since bibtex import could have funky values
   // keep it an editbox
-  field = new Field(QString::fromLatin1("month"), i18n("Month"),  Field::Number);
+  field = new Field(QString::fromLatin1("month"), i18n("Month"), Field::Number);
   field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("month"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion);
@@ -260,7 +263,7 @@ bool BibtexCollection::deleteField(Field* field_, bool force_) {
   return success && Collection::deleteField(field_, force_);
 }
 
-Bookcase::Data::Field* const BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
+Tellico::Data::Field* const BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
   return m_bibtexFieldDict.isEmpty() ? 0 : m_bibtexFieldDict.find(bibtex_);
 }
 
@@ -338,17 +341,16 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
 }
 
 void BibtexCollection::citeEntries(QFile& lyxpipe_, const EntryList& list_) {
-//  kdDebug() << "BibtexCollection::citeEntries()" << endl;
-  QString refs;
-  const Data::Field* f = fieldByBibtexName(QString::fromLatin1("key"));
-  if(!f || list_.isEmpty()) {
+  if(list_.isEmpty()) {
     return;
   }
-
+//  kdDebug() << "BibtexCollection::citeEntries()" << endl;
+  QString refs;
   for(Data::EntryListIterator it(list_); it.current(); ++it) {
-    refs += it.current()->field(f->name());
+    refs += BibtexHandler::bibtexKey(it.current());
     if(!it.atLast()) {
-      refs += QString::fromLatin1(",");
+          // pybliographer uses comma-space, and pyblink expects the space there
+      refs += QString::fromLatin1(", ");
     }
   }
 

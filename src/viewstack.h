@@ -16,7 +16,7 @@
 
 #include <qwidgetstack.h>
 
-namespace Bookcase {
+namespace Tellico {
   class EntryView;
   class EntryIconView;
   namespace Data {
@@ -27,7 +27,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: viewstack.h 701 2004-07-07 05:44:13Z robby $
+ * @version $Id: viewstack.h 862 2004-09-15 01:49:51Z robby $
  */
 class ViewStack : public QWidgetStack {
 Q_OBJECT

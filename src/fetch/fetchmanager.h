@@ -14,44 +14,71 @@
 #ifndef FETCHMANAGER_H
 #define FETCHMANAGER_H
 
-#include "fetcher.h"
-
-#include <qobject.h>
-#include <qptrlist.h>
-
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Collection;
   }
   namespace Fetch {
+    class Fetcher;
+    class SearchResult;
+    class ConfigWidget;
+  }
+}
+
+#include "fetch.h"
+
+#include <qobject.h>
+#include <qptrlist.h>
+#include <qguardedptr.h>
+
+namespace Tellico {
+  namespace Fetch {
+
+typedef QMap<Type, QString> FetchMap;
+typedef QMap<FetchKey, QString> FetchKeyMap;
+typedef QPtrList<Fetcher> FetcherList;
+typedef QPtrListIterator<Fetcher> FetcherListIterator;
 
 /**
  * A manager for handling all the different classes of Fetcher.
  *
  * @author Robby Stephenson
- * @version $Id: fetchmanager.h 727 2004-08-04 01:38:57Z robby $
+ * @version $Id: fetchmanager.h 978 2004-11-26 17:30:59Z robby $
  */
 class Manager : public QObject {
 Q_OBJECT
 
 public:
-  Manager(Data::Collection* coll, QObject* parent, const char* name = 0);
+  static Manager* self() {  if(!s_self) s_self = new Manager(); return s_self; }
 
   QStringList sources() const;
-  void startSearch(const QString& source, FetchKey key, const QString& value);
+  QStringList keys(const QString& source) const;
+  void startSearch(const QString& source, FetchKey key, const QString& value, bool multiple);
   void stop();
+  bool canFetch() const;
+  void reloadFetchers();
+  const FetcherList& fetcherList() const { return m_fetchers; }
+
+  static ConfigWidget* configWidget(Type type, QWidget* parent);
+  static FetchMap sourceMap();
+  static FetchKey fetchKey(const QString& key);
+  static QString fetchKeyString(FetchKey key);
 
 signals:
   void signalStatus(const QString& status);
-  void signalResultFound(const Bookcase::Fetch::SearchResult& result);
+  void signalResultFound(const Tellico::Fetch::SearchResult& result);
   void signalDone();
 
 private slots:
-  void slotFetcherDone();
+  void slotFetcherDone(Tellico::Fetch::Fetcher*);
 
 private:
-  typedef QPtrList<Fetcher> FetcherList;
-  typedef QPtrListIterator<Fetcher> FetcherListIterator;
+  static Manager* s_self;
+  Manager();
+
+  static FetchKeyMap s_keyMap;
+  static void initMap();
+
   FetcherList m_fetchers;
   unsigned m_count;
 };

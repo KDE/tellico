@@ -20,23 +20,23 @@ class QRegExp;
 
 #include <qmap.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Entry;
   }
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexhandler.h 588 2004-04-09 21:47:06Z robby $
+ * @version $Id: bibtexhandler.h 921 2004-10-13 06:36:33Z robby $
  */
 class BibtexHandler {
 public:
   enum QuoteStyle { BRACES=0, QUOTES=1 };
-  static QString bibtexKey(Data::Entry* unit);
+  static QString bibtexKey(Data::Entry* entry);
   static QString bibtexKey(const QString& author, const QString& title, const QString& year);
   static QString importText(char* text);
   static QString exportText(const QString& text, const QStringList& macros);
-  static bool setFieldValue(Data::Entry* unit, const QString& bibtexField, const QString& value);
+  static bool setFieldValue(Data::Entry* entry, const QString& bibtexField, const QString& value);
   /**
    * Strips the text of all vestiges of Latex.
    *
@@ -45,7 +45,6 @@ public:
    */
   static QString& cleanText(QString& text);
 
-  static const QString s_bibtexmlNamespace;
   static QuoteStyle s_quoteStyle;
 
 private:

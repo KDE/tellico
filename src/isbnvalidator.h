@@ -16,11 +16,11 @@
 
 #include <qvalidator.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h 750 2004-08-08 05:58:09Z robby $
+ * @version $Id: isbnvalidator.h 862 2004-09-15 01:49:51Z robby $
  *
  * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
  * @see http://www.eblong.com/zarf/bookscan/

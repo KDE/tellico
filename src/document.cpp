@@ -13,18 +13,17 @@
 
 #include "document.h"
 #include "mainwindow.h" // needed for loading progress
-#include "entryitem.h" // needed for searching
 #include "collectionfactory.h"
-#include "translators/bookcaseimporter.h"
-#include "translators/bookcasezipexporter.h"
+#include "translators/tellicoimporter.h"
+#include "translators/tellicozipexporter.h"
 #include "filehandler.h"
 #include "controller.h"
-#include "utils.h" // needed for macro expansion
-#include "kernel.h"
+#include "tellico_kernel.h"
 
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <klocale.h>
+#include <kdeversion.h>
 #if KDE_IS_VERSION(3,1,90)
 #include <kinputdialog.h>
 #else
@@ -33,7 +32,7 @@
 
 #include <qregexp.h>
 
-using Bookcase::Data::Document;
+using Tellico::Data::Document;
 
 Document::Document(QObject* parent_, const char* name_/*=0*/)
     : QObject(parent_, name_), m_coll(0), m_isModified(false) {
@@ -52,18 +51,6 @@ void Document::slotSetModified(bool m_/*=true*/) {
   }
 }
 
-bool Document::isModified() const {
-  return m_isModified;
-}
-
-void Document::setURL(const KURL& url_) {
-  m_url = url_;
-}
-
-const KURL& Document::URL() const {
-  return m_url;
-}
-
 bool Document::newDocument(int type_) {
 //  kdDebug() << "Document::newDocument()" << endl;
   deleteContents();
@@ -79,14 +66,17 @@ bool Document::newDocument(int type_) {
 }
 
 bool Document::openDocument(const KURL& url_) {
-  MainWindow* bookcase = dynamic_cast<MainWindow*>(Kernel::self()->widget());
+  MainWindow* mainwindow = static_cast<MainWindow*>(Kernel::self()->widget());
 
-  Import::BookcaseImporter importer(url_);
+  Import::TellicoImporter importer(url_);
   connect(&importer, SIGNAL(signalFractionDone(float)),
-          bookcase, SLOT(slotUpdateFractionDone(float)));
+          mainwindow, SLOT(slotUpdateFractionDone(float)));
 
   Collection* coll = importer.collection();
   if(!coll) {
+    if(!importer.statusMessage().isEmpty()) {
+      KMessageBox::sorry(mainwindow, importer.statusMessage());
+    }
     return false;
   }
 
@@ -109,13 +99,10 @@ bool Document::saveModified() {
                                                     KStdGuiItem::save(), KStdGuiItem::discard());
     switch(want_save) {
       case KMessageBox::Yes:
-        if(app->isNewDocument()) {
-          app->slotFileSaveAs();
-        } else {
-          saveDocument(URL());
+        completed = app->fileSave();
+        if(completed) {
+          deleteContents();
         }
-        deleteContents();
-        completed = true;
         break;
 
       case KMessageBox::No:
@@ -139,7 +126,7 @@ bool Document::saveModified() {
 
 bool Document::saveDocument(const KURL& url_) {
   // will always save as zip file, no matter if has images or not
-  Export::BookcaseZipExporter exporter(m_coll);
+  Export::TellicoZipExporter exporter(m_coll);
   exporter.setEntryList(m_coll->entryList());
   QByteArray data = exporter.data(false);
   bool success = FileHandler::writeDataURL(url_, data);
@@ -253,7 +240,7 @@ void Document::mergeCollection(Collection* coll_) {
 
   // only append if match, but special case importing books into bibliographies
   if(coll_->type() != m_coll->type()
-     || (m_coll->type() == Collection::Bibtex && coll_->type() == Collection::Book)) {
+     && (m_coll->type() != Collection::Bibtex || coll_->type() != Collection::Book)) {
     kdWarning() << "Document::mergeCollection() - merged collections must "
                    "be the same type!" << endl;
     return;
@@ -268,9 +255,9 @@ void Document::mergeCollection(Collection* coll_) {
   // music collection get a special case because of the audio file metadata might
   // be read on a per-track basis, allow merging of entries with identical titles and artists
   bool isMusic = (m_coll->type() == Collection::Album);
-  static const QString sep = QString::fromLatin1("; ");
-  static const QString artist = QString::fromLatin1("artist");
-  static const QString track = QString::fromLatin1("track");
+  static const QString& sep = KGlobal::staticQString("; ");
+  static const QString& artist = KGlobal::staticQString("artist");
+  static const QString& track = KGlobal::staticQString("track");
 
   EntryListIterator currIt(m_coll->entryList());
   for(EntryListIterator newIt(coll_->entryList()); newIt.current(); ++newIt) {
@@ -383,132 +370,6 @@ void Document::slotRenameCollection() {
 bool Document::isEmpty() const {
   //an empty doc may contain a collection, but no entries
   return (m_coll == 0 || m_coll->entryList().isEmpty());
-}
-
-void Document::search(const QString& text_, const QString& attTitle_, int options_) {
-//  kdDebug() << "Document::search() - looking for " << text_ << " in " << attTitle_ << endl;
-  EntryItem* item = static_cast<MainWindow*>(Kernel::self()->widget())->selectedOrFirstItem();
-  if(!item) {
-//    kdDebug() << "Document::search() - empty document" << endl;
-    // doc has no items
-    return;
-  }
-
-  bool searchAll     = (options_ & AllFields);
-  bool backwards     = (options_ & FindBackwards);
-  bool asRegExp      = (options_ & AsRegExp);
-  bool fromBeginning = (options_ & FromBeginning);
-  bool caseSensitive = (options_ & CaseSensitive);
-
-  Field* field = 0;
-  Collection* coll = 0;
-
-  // if fromBeginning is used, then take the first one
-  if(fromBeginning) {
-    // if backwards and beginning, start at end, this is slow to traverse
-    if(backwards) {
-      item = static_cast<EntryItem*>(item->listView()->lastItem());
-    } else {
-      item = static_cast<EntryItem*>(item->listView()->firstChild());
-    }
-  } else {
-    // don't want to continually search the same one, so if the returned item
-    // is the same as the selected one, then skip to the next
-    while(item && item->isSelected()) {
-      // there is no QListViewItem::prevSibling()
-      // itemABove() works since I know there are no parents in the detailed view
-      if(backwards) {
-        item = static_cast<EntryItem*>(item->itemAbove());
-      } else {
-        item = static_cast<EntryItem*>(item->nextSibling());
-      }
-    }
-  }
-
-  FieldList empty;
-  FieldListIterator fIt(empty);
-
-  bool found = false;
-  QString matchedText;
-  Entry* entry;
-  while(item) {
-    entry = item->entry();
-//    kdDebug() << "\tsearching " << entry->title() << endl;;
-
-    // if there's no current collection, or the collection has changed, update
-    // the pointer and the field pointer and iterator
-    if(!coll || coll != entry->collection()) {
-      coll = entry->collection();
-      if(searchAll) {
-        fIt = FieldListIterator(coll->fieldList());
-      } else {
-        field = coll->fieldByTitle(attTitle_);
-      }
-    }
-
-    // reset if we're searching all
-    if(searchAll) {
-      field = fIt.toFirst();
-    }
-    // if we're not searching all, then we break out
-    // if we are searching all, then field will finally be 0 when the iterator gets to the end
-    while(field && !found) {
-//      kdDebug() << "\t\tsearching " << field->title() << endl;
-      // if RegExp is used, then the text is a regexp pattern
-      if(asRegExp) {
-        QRegExp rx(text_);
-        if(caseSensitive) {
-          rx.setCaseSensitive(true);
-        }
-        if(rx.search(entry->field(field->name())) > -1) {
-          found = true;
-          matchedText = rx.capturedTexts().first();
-        }
-      // else if not a regexp
-      } else {
-        if(caseSensitive) {
-          if(entry->field(field->name()).contains(text_)) {
-            found = true;
-            matchedText = text_;
-          }
-        } else {
-          // we're not case sensitive so compare lower-case to lower-case
-          if(entry->field(field->name()).lower().contains(text_.lower())) {
-            found = true;
-            matchedText = text_.lower();
-          }
-        }
-      } // end of while(field ...
-
-      // if a entry is found, emit selected signal and return
-      if(found) {
-//        kdDebug() << "\tfound " << entry->field(field->name()) << endl;
-        Controller::self()->slotUpdateSelection(entry, matchedText);
-        return;
-      }
-
-      // if not, then continue the search. If we're searching all, update the pointer,
-      // otherwise break out and go to next item
-      if(searchAll) {
-        ++fIt;
-        field = fIt.current();
-      } else {
-        break;
-      }
-    }
-
-    // get next item
-    if(backwards) {
-      // there is no QListViewItem::prevSibling()
-      // itemABove() works since I know there is only one level of items int he lsitview
-      item = static_cast<EntryItem*>(item->itemAbove());
-    } else {
-      item = static_cast<EntryItem*>(item->nextSibling());
-    }
-  }
-
-  // if this point is reached, no match was found
-  KMessageBox::information(Kernel::self()->widget(), i18n("Search string '%1' not found.").arg(text_));
 }
 
 #include "document.moc"

@@ -23,18 +23,18 @@ class QWidget;
 #include <qobject.h>
 #include <qstring.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
- * The top-level abstract class for importing other document formats into Bookcase.
+ * The top-level abstract class for importing other document formats into Tellico.
  *
  * The Importer classes import a file, and return a pointer to a newly created
  * @ref Data::Collection. Any errors or warnings are added to a status message queue.
  * The calling function owns the collection pointer.
  *
  * @author Robby Stephenson
- * @version $Id: importer.h 816 2004-08-27 05:51:02Z robby $
+ * @version $Id: importer.h 934 2004-11-01 03:33:54Z robby $
  */
 class Importer : public QObject {
 Q_OBJECT
@@ -71,8 +71,6 @@ public:
    * Returns a widget with the setting specific to this importer, or 0 if no
    * options are needed.
    *
-   * @param parent The parent of the @ref QWidget
-   * @param name The widget name
    * @return A pointer to the setting widget
    */
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
@@ -118,4 +116,5 @@ private:
 
   } // end namespace
 } // end namespace
+
 #endif

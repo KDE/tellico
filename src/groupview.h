@@ -14,7 +14,7 @@
 #ifndef GROUPVIEW_H_H
 #define GROUPVIEW_H_H
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Collection;
   }
@@ -30,7 +30,7 @@ class KPopupMenu;
 #include <qpoint.h>
 #include <qpixmap.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * The GroupView is the main listview for the class, showing only the titles.
@@ -39,10 +39,10 @@ namespace Bookcase {
  * by the field defined by each collection. A @ref QDict is used to keep track of the
  * group items.
  *
- * @see Bookcase::Data::Collection
+ * @see Tellico::Data::Collection
  *
  * @author Robby Stephenson
- * @version $Id: groupview.h 744 2004-08-07 22:00:00Z robby $
+ * @version $Id: groupview.h 862 2004-09-15 01:49:51Z robby $
  */
 class GroupView : public MultiSelectionListView {
 Q_OBJECT
@@ -129,7 +129,7 @@ public slots:
    * @param coll A pointer to the collection of the gorup
    * @param group A pointer to the modified group
    */
-  void slotModifyGroup(Bookcase::Data::Collection* coll, const Bookcase::Data::EntryGroup* group);
+  void slotModifyGroup(Tellico::Data::Collection* coll, const Tellico::Data::EntryGroup* group);
   /**
    * Expands all items at a certain depth. If depth is -1, the current selected item
    * is expanded. If depth is equal to either 0 or 1, then all items at that depth
@@ -239,13 +239,13 @@ signals:
    *
    * @param entry A pointer to the entry
    */
-  void signalDeleteEntry(Bookcase::Data::Entry* entry);
+  void signalDeleteEntry(Tellico::Data::Entry* entry);
   /**
    * Signals a desire to filter the view.
    *
    * @param filter A pointer to the filter
    */
-  void signalUpdateFilter(Bookcase::Filter* filter);
+  void signalUpdateFilter(Tellico::Filter* filter);
 
 private:
   QDict<ParentItem> m_groupDict;

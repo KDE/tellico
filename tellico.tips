@@ -55,7 +55,7 @@ the Shift or Ctrl key and selecting multiple entries.</p>
 <tip category="Tellico">
 <html>
 <p>...that you can convert an existing book collection to a bibliography,
-which can then be exported to Bibtex or Bibtexml format.</p>
+which can then be exported to bibtex or Bibtexml format.</p>
 </html>
 </tip>
 <tip category="Tellico">
@@ -73,7 +73,7 @@ to be sorted or printed together, for example.</p>
 <tip category="Tellico">
 <html>
 <p>...that you can modify the appearance of the printed output by modifying
-the <tt>bookcase-printing.xsl</tt> file. The file generates HTML, and the CSS
+the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the CSS
 within the stylesheet governs things like the font, the margins, etc.</p>
 </html>
 </tip>

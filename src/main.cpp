@@ -12,22 +12,26 @@
  ***************************************************************************/
 
 #include "mainwindow.h"
+#include "translators/translators.h" // needed for file type enum
 
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <klocale.h>
 
-static const char* description =
-  I18N_NOOP("Tellico - a collection manager for KDE");
+namespace {
+  static const char* description = I18N_NOOP("Tellico - a collection manager for KDE");
+  static const char* version = VERSION;
 
-static const char* version = VERSION;
-
-static KCmdLineOptions options[] = {
-  { "+[filename]", I18N_NOOP("File to open"), 0 },
-  { "nofile", I18N_NOOP("Do not reopen the last open file"), 0 },
-  KCmdLineLastOption
-};
+  static KCmdLineOptions options[] = {
+    { "nofile", I18N_NOOP("Do not reopen the last open file"), 0 },
+    { "bibtex", I18N_NOOP("Import <filename> as a bibtex file"), 0 },
+    { "mods", I18N_NOOP("Import <filename> as a MODS file"), 0 },
+    { "ris", I18N_NOOP("Import <filename> as a RIS file"), 0 },
+    { "+[filename]", I18N_NOOP("File to open"), 0 },
+    KCmdLineLastOption
+  };
+}
 
 int main(int argc, char* argv[]) {
   KAboutData aboutData("tellico", I18N_NOOP("Tellico"),
@@ -37,6 +41,8 @@ int main(int argc, char* argv[]) {
   aboutData.addAuthor("Robby Stephenson", 0, "robby@periapsis.org");
   aboutData.addCredit("Greg Ward", I18N_NOOP("Author of btparse library"),
                       0, "http://www.gerg.ca");
+  aboutData.addCredit("Virginie Quesnay", I18N_NOOP("Icons"),
+                      0, 0);
 
   KCmdLineArgs::init(argc, argv, &aboutData);
   KCmdLineArgs::addCmdLineOptions(options);
@@ -44,21 +50,28 @@ int main(int argc, char* argv[]) {
   KApplication app;
 
   if(app.isRestored()) {
-    RESTORE(Bookcase::MainWindow);
+    RESTORE(Tellico::MainWindow);
   } else {
-    Bookcase::MainWindow* bookcase = new Bookcase::MainWindow();
-    bookcase->init();
-    bookcase->show();
-    bookcase->slotShowTipOfDay(false);
+    Tellico::MainWindow* tellico = new Tellico::MainWindow();
+    tellico->show();
+    tellico->slotShowTipOfDay(false);
 
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
     if(args->count() > 0) {
-      bookcase->slotFileOpen(args->url(0));
+      if(args->isSet("bibtex")) {
+        tellico->importFile(Tellico::Import::Bibtex, args->url(0));
+      } else if(args->isSet("mods")) {
+        tellico->importFile(Tellico::Import::MODS, args->url(0));
+      } else if(args->isSet("ris")) {
+        tellico->importFile(Tellico::Import::RIS, args->url(0));
+      } else {
+        tellico->slotFileOpen(args->url(0));
+      }
     } else {
       // bit of a hack, I just want the --nofile option
       // if --nofile is NOT passed, then the file option is set
       // is it's set, then go ahead and check for opening previous file
-      bookcase->initFileOpen(!args->isSet("file"));
+      tellico->initFileOpen(!args->isSet("file"));
     }
     args->clear();
   }

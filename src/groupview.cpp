@@ -30,7 +30,7 @@
 #include <qregexp.h>
 #include <qheader.h>
 
-using Bookcase::GroupView;
+using Tellico::GroupView;
 
 // by default don't show the number of items
 GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
@@ -96,7 +96,7 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
   m_groupClosedPixmap = m_collClosedPixmap;
 }
 
-Bookcase::ParentItem* GroupView::insertItem(ParentItem* collItem_, const Data::EntryGroup* group_) {
+Tellico::ParentItem* GroupView::insertItem(ParentItem* collItem_, const Data::EntryGroup* group_) {
   QString text = group_->groupName();
 
   ParentItem* par = new ParentItem(collItem_, text, group_);
@@ -108,7 +108,7 @@ Bookcase::ParentItem* GroupView::insertItem(ParentItem* collItem_, const Data::E
   return par;
 }
 
-Bookcase::ParentItem* GroupView::locateItem(ParentItem* collItem_, const Data::EntryGroup* group_) {
+Tellico::ParentItem* GroupView::locateItem(ParentItem* collItem_, const Data::EntryGroup* group_) {
   ParentItem* par = m_groupDict.find(group_->groupName());
   if(par) {
     return par;
@@ -117,7 +117,7 @@ Bookcase::ParentItem* GroupView::locateItem(ParentItem* collItem_, const Data::E
   return insertItem(collItem_, group_);
 }
 
-Bookcase::ParentItem* GroupView::locateItem(Data::Collection* coll_) {
+Tellico::ParentItem* GroupView::locateItem(Data::Collection* coll_) {
   ParentItem* root = 0;
   // iterate over the collections, which are the top-level children
   for(QListViewItem* collItem = firstChild(); collItem; collItem = collItem->nextSibling()) {
@@ -149,15 +149,6 @@ void GroupView::removeCollection(Data::Collection* coll_) {
   }
 //  kdDebug() << "GroupView::removeCollection() - " << coll_->title() << endl;
 
-#if 0 // since there is never more than one collection
-  ParentItem* collItem = locateItem(coll_);
-  // first remove all groups in collection from dict
-  for(QListViewItem* groupItem = collItem->firstChild(); groupItem; groupItem = groupItem->nextSibling()) {
-    m_groupDict.remove(groupKey(coll_, groupItem));
-  }
-  // automatically deletes all children
-  delete collItem;
-#endif
   blockSignals(true);
   clear();
   m_groupDict.clear();
@@ -313,10 +304,10 @@ void GroupView::setEntrySelected(Data::Entry* entry_) {
     return;
   }
 
+  clearSelection();
   for(QListViewItem* item = par->firstChild(); item; item = item->nextSibling()) {
     EntryItem* entryItem = static_cast<EntryItem*>(item);
     if(entryItem->entry() == entry_) {
-      clearSelection();
       blockSignals(true);
       setSelected(item, true);
       setCurrentItem(item);
@@ -490,7 +481,7 @@ void GroupView::showCount(bool showCount_) {
   }
 }
 
-Bookcase::ParentItem* GroupView::populateCollection(Data::Collection* coll_) {
+Tellico::ParentItem* GroupView::populateCollection(Data::Collection* coll_) {
 //  kdDebug() << "GroupView::populateCollection() - " << m_groupBy << endl;
   if(m_groupBy.isEmpty()) {
     m_groupBy = coll_->defaultGroupField();
@@ -601,7 +592,7 @@ void GroupView::slotDoubleClicked(QListViewItem* item_) {
   }
 
   // otherwise, open entry editor
-  EntryItem* i = dynamic_cast<Bookcase::EntryItem*>(item_);
+  EntryItem* i = dynamic_cast<Tellico::EntryItem*>(item_);
   if(i) {
     Controller::self()->editEntry(*i->entry());
   }

@@ -12,8 +12,7 @@
  ***************************************************************************/
 
 #include "finddialog.h"
-#include "document.h"
-#include "kernel.h"
+#include "tellico_kernel.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -27,66 +26,71 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qstringlist.h>
-#include <qgroupbox.h>
+#include <qvgroupbox.h>
+#include <qhgroupbox.h>
+#include <qhbox.h>
 #include <qcheckbox.h>
 #include <qregexp.h>
 #include <qwhatsthis.h>
 
-using Bookcase::FindDialog;
+using Tellico::FindDialog;
 
-//FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
-//    : KDialogBase(Plain, i18n("Find"), User1|Cancel, User1,
-//                  parent_, name_, false, false, i18n("&Find")), m_bookcase(parent_) {
 FindDialog::FindDialog(QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, false, i18n("Find Text"), User1|Cancel, User1,
                   false, i18n("&Find")), m_editRegExp(0), m_editRegExpDialog(0) {
   QWidget* page = new QWidget(this);
   setMainWidget(page);
 
-  QVBoxLayout* topLayout = new QVBoxLayout(page, 0, KDialog::spacingHint());
+  QVBoxLayout* topLayout = new QVBoxLayout(page);
+  topLayout->setSpacing(KDialog::spacingHint());
 
-  topLayout->addWidget(new QLabel(i18n("Text To Find:"), page));
+  QVGroupBox* findGroup = new QVGroupBox(i18n("Find"), page);
+  findGroup->layout()->setSpacing(KDialog::spacingHint());
+//  QGridLayout* findLayout = new QGridLayout(findGroup->layout());
 
-  m_pattern = new KHistoryCombo(true, page);
+  QLabel* findLabel = new QLabel(i18n("&Text to find:"), findGroup);
+
+  m_pattern = new KHistoryCombo(true, findGroup);
   QWhatsThis::add(m_pattern, i18n("The search string"));
   m_pattern->setMinimumWidth(fontMetrics().maxWidth()*15);
   m_pattern->setMaxCount(10);
   m_pattern->setDuplicatesEnabled(false);
-  topLayout->addWidget(m_pattern);
-
+  findLabel->setBuddy(m_pattern);
   connect(m_pattern, SIGNAL(activated(const QString&)),
           m_pattern, SLOT(addToHistory(const QString&)));
   connect(m_pattern, SIGNAL(textChanged(const QString&)),
           this, SLOT(slotPatternChanged(const QString&)));
 
-  topLayout->addWidget(new QLabel(i18n("Search In:"), page));
+  QHBox* rxBox = new QHBox(findGroup);
+  m_asRegExp = new QCheckBox(i18n("As regular e&xpression"), rxBox);
+  QWhatsThis::add(m_asRegExp, i18n("If checked, the search string is used as a regular expression."));
+  if(!KTrader::self()->query(QString::fromLatin1("KRegExpEditor/KRegExpEditor")).isEmpty()) {
+    m_editRegExp = new KPushButton(i18n("&Edit regular expression..."), rxBox);
+    m_editRegExp->setEnabled(false);
+    connect(m_asRegExp, SIGNAL(toggled(bool)), m_editRegExp, SLOT(setEnabled(bool)));
+    connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp()));
+  }
+  topLayout->addWidget(findGroup);
 
-  m_fields = new KComboBox(page);
+  QHGroupBox* fieldsGroup = new QHGroupBox(i18n("Field"), page);
+  fieldsGroup->layout()->setSpacing(KDialog::spacingHint());
+  QLabel* fieldsLabel = new QLabel(i18n("Search in:"), fieldsGroup);
+  m_fields = new KComboBox(fieldsGroup);
   QWhatsThis::add(m_fields, i18n("Select which field should be searched."));
   updateFieldList();
-  topLayout->addWidget(m_fields);
+  fieldsLabel->setBuddy(m_fields);
+  topLayout->addWidget(fieldsGroup);
 
   QGroupBox* optionsGroup = new QGroupBox(2, Qt::Horizontal, i18n("Options"), page);
   optionsGroup->layout()->setSpacing(KDialog::spacingHint());
   topLayout->addWidget(optionsGroup);
 
-  m_caseSensitive = new QCheckBox(i18n("Case &Sensitive"), optionsGroup);
+  m_caseSensitive = new QCheckBox(i18n("C&ase sensitive"), optionsGroup);
   QWhatsThis::add(m_caseSensitive, i18n("If checked, the search is case-sensitive."));
-  m_findBackwards = new QCheckBox(i18n("Find &Backwards"), optionsGroup);
+  m_findBackwards = new QCheckBox(i18n("Find &backwards"), optionsGroup);
   QWhatsThis::add(m_findBackwards, i18n("If checked, the document is searched in reverse."));
-  m_wholeWords = new QCheckBox(i18n("&Whole Words Only"), optionsGroup);
+  m_wholeWords = new QCheckBox(i18n("&Whole words only"), optionsGroup);
   QWhatsThis::add(m_wholeWords, i18n("If checked, the search is limited to whole words."));
-  m_fromBeginning = new QCheckBox(i18n("&From Beginning"), optionsGroup);
-  QWhatsThis::add(m_fromBeginning, i18n("If checked, the document is searched from the beginning."));
-  m_asRegExp = new QCheckBox(i18n("As &Regular Expression"), optionsGroup);
-  QWhatsThis::add(m_asRegExp, i18n("If checked, the search string is used as a regular expression."));
-
-  if(!KTrader::self()->query(QString::fromLatin1("KRegExpEditor/KRegExpEditor")).isEmpty()) {
-    m_editRegExp = new KPushButton(i18n("&Edit Regular Expression..."), optionsGroup);
-    m_editRegExp->setEnabled(false);
-    connect(m_asRegExp, SIGNAL(toggled(bool)), m_editRegExp, SLOT(setEnabled(bool)));
-    connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp()));
-  }
 
   topLayout->addStretch(1);
 
@@ -103,12 +107,12 @@ void FindDialog::slotUser1() {
   int options = 0;
 
   if(field == i18n("All Fields")) {
-    options |= Data::Document::AllFields;
+    options |= Kernel::AllFields;
   }
 
   // if checking whole words, then necessitates a regexp search
   if(m_asRegExp->isChecked() || m_wholeWords->isChecked()) {
-    options = (options & Data::Document::AsRegExp);
+    options = (options & Kernel::AsRegExp);
     if(!QRegExp(text).isValid()) {
       // FIXME: but what about when just checked whole words? Need to escape stuff if there's
       // critical characters in the string, fix later
@@ -123,18 +127,14 @@ void FindDialog::slotUser1() {
   }
 
   if(m_findBackwards->isChecked()) {
-    options |= Data::Document::FindBackwards;
+    options |= Kernel::FindBackwards;
   }
 
   if(m_caseSensitive->isChecked()) {
-    options |= Data::Document::CaseSensitive;
+    options |= Kernel::CaseSensitive;
   }
 
-  if(m_fromBeginning->isChecked()) {
-    options |= Data::Document::FromBeginning;
-  }
-
-  Kernel::self()->doc()->search(text, field, options);
+  Kernel::self()->searchDocument(text, field, options);
 }
 
 void FindDialog::slotFindNext() {

@@ -22,7 +22,7 @@
 #include "imagefactory.h"
 #include "filter.h"
 #include "filterdialog.h"
-#include "kernel.h"
+#include "tellico_kernel.h"
 #include "latin1literal.h"
 #include "collection.h"
 #include "document.h"
@@ -32,7 +32,7 @@
 #include <kmessagebox.h>
 #include <kaction.h>
 
-using Bookcase::Controller;
+using Tellico::Controller;
 
 Controller* Controller::s_self = 0;
 
@@ -76,19 +76,19 @@ void Controller::slotCollectionAdded(Data::Collection* coll_) {
   m_mainWindow->slotEntryCount();
   updateActions();
 
-  connect(coll_, SIGNAL(signalGroupModified(Bookcase::Data::Collection*, const Bookcase::Data::EntryGroup*)),
-          m_groupView, SLOT(slotModifyGroup(Bookcase::Data::Collection*, const Bookcase::Data::EntryGroup*)));
+  connect(coll_, SIGNAL(signalGroupModified(Tellico::Data::Collection*, const Tellico::Data::EntryGroup*)),
+          m_groupView, SLOT(slotModifyGroup(Tellico::Data::Collection*, const Tellico::Data::EntryGroup*)));
 
-  connect(coll_, SIGNAL(signalFieldAdded(Bookcase::Data::Collection*, Bookcase::Data::Field*)),
-          this, SLOT(slotFieldAdded(Bookcase::Data::Collection*, Bookcase::Data::Field*)));
-  connect(coll_, SIGNAL(signalFieldDeleted(Bookcase::Data::Collection*, Bookcase::Data::Field*)),
-          this, SLOT(slotFieldDeleted(Bookcase::Data::Collection*, Bookcase::Data::Field*)));
-  connect(coll_, SIGNAL(signalFieldModified(Bookcase::Data::Collection*, Bookcase::Data::Field*, Bookcase::Data::Field*)),
-          this, SLOT(slotFieldModified(Bookcase::Data::Collection*, Bookcase::Data::Field*, Bookcase::Data::Field*)));
-  connect(coll_, SIGNAL(signalFieldsReordered(Bookcase::Data::Collection*)),
-          this, SLOT(slotFieldsReordered(Bookcase::Data::Collection*)));
-  connect(coll_, SIGNAL(signalRefreshField(Bookcase::Data::Field*)),
-          this, SLOT(slotRefreshField(Bookcase::Data::Field*)));
+  connect(coll_, SIGNAL(signalFieldAdded(Tellico::Data::Collection*, Tellico::Data::Field*)),
+          this, SLOT(slotFieldAdded(Tellico::Data::Collection*, Tellico::Data::Field*)));
+  connect(coll_, SIGNAL(signalFieldDeleted(Tellico::Data::Collection*, Tellico::Data::Field*)),
+          this, SLOT(slotFieldDeleted(Tellico::Data::Collection*, Tellico::Data::Field*)));
+  connect(coll_, SIGNAL(signalFieldModified(Tellico::Data::Collection*, Tellico::Data::Field*, Tellico::Data::Field*)),
+          this, SLOT(slotFieldModified(Tellico::Data::Collection*, Tellico::Data::Field*, Tellico::Data::Field*)));
+  connect(coll_, SIGNAL(signalFieldsReordered(Tellico::Data::Collection*)),
+          this, SLOT(slotFieldsReordered(Tellico::Data::Collection*)));
+  connect(coll_, SIGNAL(signalRefreshField(Tellico::Data::Field*)),
+          this, SLOT(slotRefreshField(Tellico::Data::Field*)));
 }
 
 void Controller::slotCollectionDeleted(Data::Collection* coll_) {
@@ -238,10 +238,13 @@ void Controller::slotUpdateSelection(Data::Entry* entry_, const QString& highlig
   if(m_working) {
     return;
   }
-  m_working = true;
 //  kdDebug() << "Controller::slotUpdateSelection()" << endl;
 
-  slotUpdateSelection(0, Data::EntryList());
+  // first clear selection
+//  slotUpdateSelection(0, Data::EntryList());
+
+  blockAllSignals(true);
+  m_working = true;
   m_detailedView->setEntrySelected(entry_);
   m_groupView->setEntrySelected(entry_);
   m_editDialog->setContents(entry_, highlight_);
@@ -250,6 +253,7 @@ void Controller::slotUpdateSelection(Data::Entry* entry_, const QString& highlig
   m_selectedEntries.append(entry_);
   updateActions();
   m_working = false;
+  blockAllSignals(false);
 }
 
 void Controller::slotDeleteSelectedEntries() {
@@ -261,45 +265,44 @@ void Controller::slotDeleteSelectedEntries() {
   // must iterate over a copy of the list
   Data::EntryList entriesToDelete = m_selectedEntries;
   Data::EntryListIterator it(entriesToDelete);
-  // add a message box if multiple items are to be deleted
-  if(m_selectedEntries.count() > 1) {
+  // confirm delete
+  if(m_selectedEntries.count() == 1) {
+    QString str = i18n("Do you really want to delete this entry?");
+    QString dontAsk = QString::fromLatin1("DeleteEntry");
+    int ret = KMessageBox::questionYesNo(Kernel::self()->widget(), str, i18n("Delete Entry?"),
+                                         KStdGuiItem::yes(), KStdGuiItem::no(), dontAsk);
+    if(ret != KMessageBox::Yes) {
+      return;
+    }
+  } else {
     QStringList names;
     for(it.toFirst(); it.current(); ++it) {
       names += it.current()->title();
     }
     QString str = i18n("Do you really want to delete these entries?");
+    // historically called DeleteMultipleBooks, don't change
     QString dontAsk = QString::fromLatin1("DeleteMultipleBooks");
-    int ret = KMessageBox::questionYesNoList(m_mainWindow, str, names, i18n("Delete Multiple Entries?"),
+    int ret = KMessageBox::questionYesNoList(Kernel::self()->widget(), str, names,
+                                             i18n("Delete Multiple Entries?"),
                                              KStdGuiItem::yes(), KStdGuiItem::no(), dontAsk);
     if(ret != KMessageBox::Yes) {
       return;
     }
   }
 
-  // deleting more than one ends up clearing the selection, so keep a pointer
-/*
-  QListViewItem* curr = m_detailedView->currentItem();
-  EntryItem* item = 0;
-  if(curr) {
-    item = dynamic_cast<EntryItem*>(curr->nextSibling());
-  }
-*/
   for(it.toFirst(); it.current(); ++it) {
     Kernel::self()->doc()->slotDeleteEntry(it.current());
   }
-  m_selectedEntries.clear();
   updateActions();
-/*
-  // special case, the detailed list view selects the next item, so handle that
-  if(item && item->isSelected()) {
-    Data::EntryList newList;
-    newList.append(item->entry());
-    slotUpdateSelection(m_detailedView, newList);
-  } else {
-    slotUpdateSelection(0, Data::EntryList());
-  }
-  */
+
   m_working = false;
+
+  // special case, the detailed list view selects the next item, so handle that
+  Data::EntryList newList;
+  for(QPtrListIterator<MultiSelectionListViewItem> it(m_detailedView->selectedItems()); it.current(); ++it) {
+    newList.append(static_cast<EntryItem*>(it.current())->entry());
+  }
+  slotUpdateSelection(m_detailedView, newList);
 }
 
 void Controller::slotRefreshField(Data::Field* field_) {
@@ -354,13 +357,14 @@ void Controller::slotUpdateFilter(Filter* filter_) {
   m_mainWindow->slotEntryCount();
 }
 
-void Controller::editEntry(const Data::Entry& entry) const {
+void Controller::editEntry(const Data::Entry&) const {
   m_mainWindow->slotShowEntryEditor();
 }
 
 void Controller::plugCollectionActions(QWidget* widget_) {
   m_mainWindow->action("coll_rename_collection")->plug(widget_);
   m_mainWindow->action("coll_fields")->plug(widget_);
+  m_mainWindow->action("change_entry_grouping")->plug(widget_);
 }
 
 void Controller::plugEntryActions(QWidget* widget_) {
@@ -371,15 +375,10 @@ void Controller::plugEntryActions(QWidget* widget_) {
 }
 
 void Controller::updateActions() const {
-  if(m_selectedEntries.isEmpty()) {
-    m_mainWindow->m_editEntry->setEnabled(false);
-    m_mainWindow->m_copyEntry->setEnabled(false);
-    m_mainWindow->m_deleteEntry->setEnabled(false);
-  } else {
-    m_mainWindow->m_editEntry->setEnabled(true);
-    m_mainWindow->m_copyEntry->setEnabled(true);
-    m_mainWindow->m_deleteEntry->setEnabled(true);
-  }
+  bool emptySelection = m_selectedEntries.isEmpty();
+  m_mainWindow->m_editEntry->setEnabled(!emptySelection);
+  m_mainWindow->m_copyEntry->setEnabled(!emptySelection);
+  m_mainWindow->m_deleteEntry->setEnabled(!emptySelection);
 
   if(m_selectedEntries.count() < 2) {
     m_mainWindow->m_editEntry->setText(i18n("&Edit Entry"));

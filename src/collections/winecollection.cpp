@@ -16,10 +16,12 @@
 
 #include <klocale.h>
 
-using Bookcase::Data::WineCollection;
+namespace {
+  static const char* wine_general = I18N_NOOP("General");
+  static const char* wine_personal = I18N_NOOP("Personal");
+}
 
-static const char* wine_general = I18N_NOOP("General");
-static const char* wine_personal = I18N_NOOP("Personal");
+using Tellico::Data::WineCollection;
 
 WineCollection::WineCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(Wine), i18n("Wines")) {
@@ -30,7 +32,7 @@ WineCollection::WineCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("type"));
 }
 
-Bookcase::Data::FieldList WineCollection::defaultFields() {
+Tellico::Data::FieldList WineCollection::defaultFields() {
   FieldList list;
   Field* field;
 

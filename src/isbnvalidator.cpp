@@ -15,7 +15,7 @@
 
 #include <kdebug.h>
 
-using Bookcase::ISBNValidator;
+using Tellico::ISBNValidator;
 
 ISBNValidator::ISBNValidator(QObject* parent_, const char* name_/*=0*/)
     : QValidator(parent_, name_) {

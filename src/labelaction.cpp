@@ -15,8 +15,8 @@
 
 #include <ktoolbar.h>
 
-using Bookcase::LabelAction;
-using Bookcase::LineEditAction;
+using Tellico::LabelAction;
+using Tellico::LineEditAction;
 
 #include <qlabel.h>
 // KWidgetAction(QWidget *widget,

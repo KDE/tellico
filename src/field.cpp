@@ -21,15 +21,17 @@
 #include <qregexp.h>
 #include <qdatetime.h>
 
-static const QRegExp comma_split = QRegExp(QString::fromLatin1("\\s*,\\s*"));
+namespace {
+  static const QRegExp comma_split = QRegExp(QString::fromLatin1("\\s*,\\s*"));
+}
 
-using Bookcase::Data::Field;
+using Tellico::Data::Field;
 
 //these get overwritten, but are here since they're static
-QStringList Field::s_articles = QStringList();
-QStringList Field::s_articlesApos = QStringList();
-QStringList Field::s_suffixes = QStringList();
-QStringList Field::s_surnamePrefixes = QStringList();
+QStringList Field::s_articles;
+QStringList Field::s_articlesApos;
+QStringList Field::s_suffixes;
+QStringList Field::s_surnamePrefixes;
 // put into i18n for translation
 // and allow spaces in the regexp, someone might accidently put one there
 QStringList Field::s_noCapitalize = QStringList::split(comma_split,
@@ -168,10 +170,11 @@ QString Field::format(const QString& value_, FormatFlag flag_) {
 QString Field::formatTitle(const QString& title_) {
   QString newTitle = title_;
   // special case for 2-column tables, assume user never has '::' in a value
+  const QString colonColon = QString::fromLatin1("::");
   QString tail;
-  if(newTitle.find(QString::fromLatin1("::")) > -1) {
-    tail = QString::fromLatin1("::") + newTitle.section(QString::fromLatin1("::"), 1);
-    newTitle = newTitle.section(QString::fromLatin1("::"), 0, 0);
+  if(newTitle.find(colonColon) > -1) {
+    tail = colonColon + newTitle.section(colonColon, 1);
+    newTitle = newTitle.section(colonColon, 0, 0);
   }
 
   if(autoCapitalize()) {
@@ -183,11 +186,14 @@ QString Field::formatTitle(const QString& title_) {
     for(QStringList::ConstIterator it = s_articles.begin(); it != s_articles.end(); ++it) {
       // assume white space is already stripped
       // the articles are already in lower-case
-      if(newTitle.lower().startsWith(*it + QString::fromLatin1(" "))) {
-        QRegExp regexp(QString::fromLatin1("^") + QRegExp::escape(*it) + QString::fromLatin1("\\s"));
-        regexp.setCaseSensitive(false);
+      QString lower = newTitle.lower();
+      if(lower.startsWith(*it + QChar(' '))) {
+        QRegExp regexp(QChar('^') + QRegExp::escape(*it) + QString::fromLatin1("\\s*"), false);
+        // can't just use *it since it's in lower-case
         QString article = newTitle.left((*it).length());
-        newTitle = newTitle.replace(regexp, QString()).append(QString::fromLatin1(", ")).append(article);
+        newTitle = newTitle.replace(regexp, QString::null)
+                           .append(QString::fromLatin1(", "))
+                           .append(article);
         break;
       }
     }
@@ -199,6 +205,8 @@ QString Field::formatTitle(const QString& title_) {
 }
 
 QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
+  static const QRegExp spaceComma(QString::fromLatin1("[\\s,]"));
+
   QStringList entries;
   if(multiple_) {
     // split by semi-colon, optionally preceded or followed by white spacee
@@ -209,26 +217,27 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
 
   QRegExp lastWord;
   lastWord.setCaseSensitive(false);
+  const QString colonColon = QString::fromLatin1("::");
+  // the ending look-ahead is so that a space is not added at the end
+  const QRegExp periodSpace(QString::fromLatin1("\\.\\s*(?=.)"));
 
   QStringList names;
   for(QStringList::ConstIterator it = entries.begin(); it != entries.end(); ++it) {
     QString name = *it;
     // special case for 2-column tables, assume user never has '::' in a value
     QString tail;
-    if(name.find(QString::fromLatin1("::")) > -1) {
-      tail = QString::fromLatin1("::") + name.section(QString::fromLatin1("::"), 1);
-      name = name.section(QString::fromLatin1("::"), 0, 0);
+    if(name.find(colonColon) > -1) {
+      tail = colonColon + name.section(colonColon, 1);
+      name = name.section(colonColon, 0, 0);
     }
-    // the ending look-ahead is so that a space is not added at the end
-    QRegExp periodSpace(QString::fromLatin1("\\.\\s*(?=.)"));
     name.replace(periodSpace, QString::fromLatin1(". "));
     if(autoCapitalize()) {
       name = capitalize(name);
     }
 
     // split the name by white space and commas
-    QStringList words = QStringList::split(QRegExp(QString::fromLatin1("[\\s,]")), name, false);
-    lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
+    QStringList words = QStringList::split(spaceComma, name, false);
+    lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
 
     // if it contains a comma already and the last word is not a suffix, don't format it
     if(!autoFormat() || name.find(',') > -1 && s_suffixes.grep(lastWord).isEmpty()) {
@@ -243,26 +252,26 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
     if(words.count() > 1) {
       // if the last word is a suffix, it has to be kept with last name
       if(s_suffixes.grep(lastWord).count() > 0) {
-        words.prepend(words.last().append(QString::fromLatin1(",")));
+        words.prepend(words.last().append(QChar(',')));
         words.remove(words.fromLast());
       }
 
       // now move the word
       // adding comma here when there had been a suffix is because it was originally split with space or comma
-      words.prepend(words.last().append(QString::fromLatin1(",")));
+      words.prepend(words.last().append(QChar(',')));
       words.remove(words.fromLast());
 
       // update last word regexp
-      lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
+      lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
 
       // this is probably just something for me, limited to english
       while(s_surnamePrefixes.grep(lastWord).count() > 0) {
         words.prepend(words.last());
         words.remove(words.fromLast());
-        lastWord.setPattern(QString::fromLatin1("^") + QRegExp::escape(words.last()) + QString::fromLatin1("$"));
+        lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
       }
 
-      names << words.join(QString::fromLatin1(" ")) + tail;
+      names << words.join(QChar(' ')) + tail;
     } else {
       names << name + tail;
     }
@@ -300,19 +309,20 @@ QString Field::formatDate(const QString& date_) {
 }
 
 QString Field::capitalize(QString str_) {
+  // regexp to split words
+  static const QRegExp rx(QString::fromLatin1("[-\\s,.;]"));
+
   if(str_.isEmpty()) {
     return str_;
   }
   // first letter is always capitalized
   str_.replace(0, 1, str_.at(0).upper());
 
-  // regexp to split words
-  static const QRegExp rx(QString::fromLatin1("[-\\s,.;]"));
-
   // special case for french words like l'espace
 
   int pos = str_.find(rx, 1);
   int nextPos;
+
   QRegExp wordRx;
   wordRx.setCaseSensitive(false);
 
@@ -350,7 +360,7 @@ QString Field::capitalize(QString str_) {
     }
 
     if(!aposMatch)  {
-      wordRx.setPattern(QString::fromLatin1("^") + QRegExp::escape(word) + QString::fromLatin1("$"));
+      wordRx.setPattern(QChar('^') + QRegExp::escape(word) + QChar('$'));
       if(notCap.grep(wordRx).isEmpty() && nextPos-pos > 1) {
         str_.replace(pos+1, 1, str_.at(pos+1).upper());
       }
@@ -373,7 +383,7 @@ void Field::setArticleList(const QStringList& list_) {
   s_articlesApos.clear();
   for(QStringList::Iterator it = s_articles.begin(); it != s_articles.end(); ++it) {
     (*it) = (*it).lower();
-    if((*it).endsWith(QString::fromLatin1("'"))) {
+    if((*it).endsWith(QChar('\''))) {
       s_articlesApos += (*it);
     }
   }
@@ -386,25 +396,25 @@ QStringList Field::defaultSuffixList() {
 
 QStringList Field::defaultSurnamePrefixList() {
 // put the articles in i18n() so they can be translated
-  return QStringList::split(comma_split, i18n("de,van der,von"), false);
+  return QStringList::split(comma_split, i18n("de,van,der,von"), false);
 }
 
 // if these are changed, then CollectionFieldsDialog should be checked since it
 // checks for equality against some of these strings
 QMap<Field::Type, QString> Field::typeMap() {
   QMap<Field::Type, QString> map;
-  map[Field::Line] = i18n("Simple Text");
-  map[Field::Para] = i18n("Paragraph");
-  map[Field::Choice] = i18n("Choice");
-  map[Field::Bool] = i18n("Checkbox");
-  map[Field::Number] = i18n("Number");
-  map[Field::URL] = i18n("URL");
-  map[Field::Table] = i18n("Table");
-  map[Field::Table2] = i18n("Table (2 Columns)");
-  map[Field::Image] = i18n("Image");
+  map[Field::Line]      = i18n("Simple Text");
+  map[Field::Para]      = i18n("Paragraph");
+  map[Field::Choice]    = i18n("Choice");
+  map[Field::Bool]      = i18n("Checkbox");
+  map[Field::Number]    = i18n("Number");
+  map[Field::URL]       = i18n("URL");
+  map[Field::Table]     = i18n("Table");
+  map[Field::Table2]    = i18n("Table (2 Columns)");
+  map[Field::Image]     = i18n("Image");
   map[Field::Dependent] = i18n("Dependent");
 //  map[Field::ReadOnly] = i18n("Read Only");
-  map[Field::Date] = i18n("Date");
+  map[Field::Date]      = i18n("Date");
   return map;
 }
 
@@ -428,4 +438,13 @@ QStringList Field::typeTitles() {
 
 QStringList Field::split(const QString& string_, bool allowEmpty_) {
   return string_.isEmpty() ? QStringList() : QStringList::split(s_delimiter, string_, allowEmpty_);
+}
+
+void Field::addAllowed(const QString& value_) {
+  if(m_type != Choice) {
+    return;
+  }
+  if(m_allowed.findIndex(value_) == -1) {
+    m_allowed += value_;
+  }
 }

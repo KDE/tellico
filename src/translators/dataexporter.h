@@ -16,14 +16,14 @@
 
 #include "exporter.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Export {
 
 /**
  * The DataExporter class is meant as an abstract class for any exporter which operates on binary files.
  *
  * @author Robby Stephenson
- * @version $Id: dataexporter.h 817 2004-08-27 07:50:40Z robby $
+ * @version $Id: dataexporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class DataExporter : public Exporter {
 public:

@@ -18,14 +18,14 @@ class KURLRequester;
 
 #include "textimporter.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
  * The XSLTImporter class takes care of transforming XML data using an XSL stylesheet.
  *
  * @author Robby Stephenson
- * @version $Id: xsltimporter.h 768 2004-08-19 01:13:22Z robby $
+ * @version $Id: xsltimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class XSLTImporter : public TextImporter {
 Q_OBJECT

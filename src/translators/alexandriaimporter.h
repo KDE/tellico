@@ -20,7 +20,7 @@ class KComboBox;
 
 #include <qdir.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
@@ -31,7 +31,7 @@ namespace Bookcase {
  * adds new fields or types, this will have to be updated.
  *
  * @author Robby Stephenson
- * @version $Id: alexandriaimporter.h 821 2004-08-27 23:26:04Z robby $
+ * @version $Id: alexandriaimporter.h 875 2004-09-16 03:49:07Z robby $
  */
 class AlexandriaImporter : public Importer {
 Q_OBJECT
@@ -53,6 +53,8 @@ public:
   virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Book); }
 
 private:
+  static QString& clean(QString& str);
+
   Data::Collection* m_coll;
   QWidget* m_widget;
   KComboBox* m_library;

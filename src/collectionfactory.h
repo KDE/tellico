@@ -18,7 +18,7 @@
 
 #include <qmap.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 typedef QMap<Data::Collection::Type, QString> CollectionNameMap;
 
@@ -26,11 +26,12 @@ typedef QMap<Data::Collection::Type, QString> CollectionNameMap;
  * A factory class for dealing with the different types of collections.
  *
  * @author Robby Stephenson
- * @version $Id: collectionfactory.h 822 2004-08-27 23:27:34Z robby $
+ * @version $Id: collectionfactory.h 862 2004-09-15 01:49:51Z robby $
  */
 class CollectionFactory {
 public:
-  static Data::Collection* collection(Data::Collection::Type type, bool addFields);
+  static Data::Collection* collection(Data::Collection::Type type, bool addFields,
+                                      const QString& entryTitle=QString::null);
   static Data::Collection* collection(const QString& entryName, bool addFields);
   static Data::FieldList defaultFields(Data::Collection::Type type);
   static CollectionNameMap nameMap();

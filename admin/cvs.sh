@@ -309,7 +309,7 @@ if test -f configure.in.in; then
    fi
 fi
 if test -z "$VERSION" || test "$VERSION" = "@VERSION@"; then
-     VERSION="\"3.2.92\""
+     VERSION="\"3.3.1\""
 fi
 if test -z "$modulename" || test "$modulename" = "@MODULENAME@"; then
    modulename=`pwd`; 
@@ -575,7 +575,7 @@ for subdir in $dirs; do
 	    echo "$subdir has *.rc, *.ui or *.kcfg files, but not correct messages line"
 	fi
    fi
-   if test -n "`grep -r KAboutData *.c* *.C* 2>/dev/null`"; then
+   if test -n "`find . -name \*.c\* -o -name \*.h\* | xargs grep -s KAboutData 2>/dev/null`"; then
 	echo -e 'i18n("_: NAME OF TRANSLATORS\\n"\n"Your names")\ni18n("_: EMAIL OF TRANSLATORS\\n"\n"Your emails")' > _translatorinfo.cpp
    else echo " " > _translatorinfo.cpp
    fi
@@ -605,7 +605,7 @@ for i in `ls -1 po/*.pot 2>/dev/null | sed -e "s#po/##"`; do
    egrep -v '^#([^:]|$)' po/$i | egrep '^.*[^ ]+.*$' | grep -v "\"POT-Creation" > temp.pot
   if test -f po.backup/$i && test -n "`diff temp.pot po.backup/$i`"; then
 	echo "will update $i"
-        sed -e 's,^"Content-Type: text/plain; charset=CHARSET\\n"$,"Content-Type: text/plain; charset=UTF-8\\n",' po.backup/$backup_$i > po/$i.new && mv po/$i.new po.backup/backup_$i
+        sed -e 's,^"Content-Type: text/plain; charset=CHARSET\\n"$,"Content-Type: text/plain; charset=UTF-8\\n",' po.backup/backup_$i > po/$i.new && mv po/$i.new po.backup/backup_$i
 	msgmerge -q po.backup/backup_$i po/$i > temp.pot
 	mv temp.pot po/$i
   else

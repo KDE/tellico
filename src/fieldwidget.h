@@ -21,10 +21,12 @@ class KRun;
 
 #include "field.h"
 
+#include <kurlcompletion.h>
+
 #include <qwidget.h>
 #include <qguardedptr.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Collection;
   }
@@ -34,13 +36,13 @@ namespace Bookcase {
  * on the field type, and then a checkbox for multiple editing.
  *
  * @author Robby Stephenson
- * @version $Id: fieldwidget.h 719 2004-08-01 22:12:46Z robby $
+ * @version $Id: fieldwidget.h 985 2004-12-02 03:34:56Z robby $
  */
 class FieldWidget : public QWidget {
 Q_OBJECT
 
 public:
-  FieldWidget(const Data::Field* const field, QWidget* parent, const char* name=0);
+  FieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
   ~FieldWidget();
 
   QString text() const;
@@ -54,7 +56,7 @@ public:
   void setHighlighted(const QString& highlight) const;
   void updateField(Data::Field* newField, Data::Field* oldField);
 
-  // the EntryEditDialog sets this so the completion object can be easily updates
+  // the EntryEditDialog sets this so the completion object can be easily updated
   static QGuardedPtr<Data::Collection> s_coll;
 
 public slots:
@@ -69,6 +71,12 @@ protected slots:
   void slotCheckRows(int row, int col);
 
 private:
+  class MyCompletion : public KURLCompletion {
+  public:
+    MyCompletion() : KURLCompletion() {}
+    virtual QString makeCompletion(const QString& text);
+  };
+
   static const QRegExp s_semiColon;
   static const QRegExp s_comma;
 
@@ -81,6 +89,8 @@ private:
 
   bool m_expands;
   bool m_allowMultiple;
+  bool m_isRating;
+  bool m_relativeURL;
 };
 
 } // end namespace

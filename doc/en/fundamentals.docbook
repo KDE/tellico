@@ -1,11 +1,11 @@
 <chapter id="fundamentals">
-<title>Using &tellico;</title>
+<title>Using &appname;</title>
 
 <sect1 id="quick-start">
 <title>Quick Start</title>
 
 <para>
-By default, &tellico; starts with an empty book collection. If you want some other type of collection, create it using the <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice> menu item, or the button on the toolbar. Collections are populated with some of the more common fields, but you can add, modify, or delete them to suit your needs.
+By default, &appname; starts with an empty book collection. To work with some other type of collection, create it using the <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice> menu item, or the button on the toolbar. Collections are populated with some of the more common fields, but you can add, modify, or delete them to suit your needs.
 </para>
 
 <para>
@@ -39,15 +39,15 @@ in a different manner. The primary view is the <link linkend="detailed-view">&de
 the upper right area, where the value of every field for each entry may be shown. On the left side, the
 <link linkend="group-view">&group-view;</link> can be used to sort the entries into groups in a
 tree-structure. Finally, the <link linkend="entry-view">&entry-view;</link> shows a formatted view
-of the data for a single entry, or an icon view of a group of entries, in the lower left.
+of the data for a single entry, or an icon view of a group of entries, in the lower right.
 </para>
 
 <screenshot>
-<screeninfo>The &tellico; Main Window</screeninfo>
+<screeninfo>The &appname; Main Window</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="main-window.png"/></imageobject>
-<textobject><phrase>The &tellico; Main Window</phrase></textobject>
-<caption><para>The &tellico; Main Window</para></caption>
+<textobject><phrase>The &appname; Main Window</phrase></textobject>
+<caption><para>The &appname; Main Window</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -55,7 +55,7 @@ of the data for a single entry, or an icon view of a group of entries, in the lo
 <title>&detailed-view;</title>
 
 <para>
-Any of the fields in the collections may be shown in the &detailed-view;, although <emphasis>Paragraph</emphasis> and <emphasis>Table</emphasis> fields will probably not be useful. Right-clicking on the header of the view opens a menu for selecting the visible fields. The columns may be resized and reordered in any way, and the settings will be saved between sessions.
+Any of the fields in the collections may be shown in the &detailed-view;, although <emphasis><link linkend="para">Paragraph</link></emphasis> and <emphasis><link linkend="table">Table</link></emphasis> fields will probably not be useful. Right-clicking on the header of the view opens a menu for selecting the visible fields. The columns may be resized and reordered in any way, and the settings will be saved between sessions.
 </para>
 </sect2>
 
@@ -63,24 +63,27 @@ Any of the fields in the collections may be shown in the &detailed-view;, althou
 <title>&group-view;</title>
 
 <para>
-The &group-view; groups the entries in a tree-view by any field which <link linkend="field-options">allows grouping</link>. The number of entries in each group may be shown next to the group name. The <link linkend="general-options">&config-dialog;</link> has an option for showing that group entry count. Groups may be expanded or collapsed by clicking the plus sign, or by double-clicking the item. Expanding and contracting all the groups are options in the right-click menu. The tree may be sorted either by the group name, or by the count, by right-clicking on a group item, and the group may be used as a filter for the <link linkend="detailed-view">&detailed-view;</link>
+The &group-view; groups the entries in a tree-view by any field which <link linkend="field-options">allows grouping</link>. The number of entries in each group may be shown next to the group name by achanging an option in the <link linkend="general-options">&config-dialog;</link>. Groups may be expanded or collapsed by clicking the plus sign, or by double-clicking the item. Expanding and contracting all the groups are options in the right-click context menu. The tree may be sorted either by the group name, or by the count, by right-clicking on a group item. The group may also be used as a filter for the <link linkend="detailed-view">&detailed-view;</link>
 </para>
 
 <para id="people-group">
-When more than one field in the collection has <link linkend="fields-dialog"><guilabel>Format as name</guilabel></link> turned on, an additional group is added to combine all those fields into one single <emphasis>People</emphasis> pseudo-group.
+When more than one field in the collection has <emphasis><link linkend="fields-dialog"><guilabel>Format as name</guilabel></link></emphasis> turned on, an additional group is added to combine all those fields into one single <emphasis>People</emphasis> pseudo-group.
 </para>
 
+<para>
+If an entry does not contain a value for the field being used to form the groups, it is placed in the <emphasis>(Empty)</emphasis> group.
+</para>
 </sect2>
 
 <sect2 id="entry-view">
 <title>&entry-view;</title>
 
 <para>
-A formatted representation of the entry's values is shown in the &entry-view;. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options">&config-dialog;</link>. The default templates make &URL; fields active, which will open up with the default &kde; association. Some template allow you to open images, as well. When exporting to <acronym>HTML</acronym>, the current template is used for exporting the individual entry files.
+A formatted representation of the entry's values is shown in the &entry-view;. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options">&config-dialog;</link>. The default templates make &URL; fields active, which will open up with the default &kde; file association. When exporting to &html;, the current template is used for exporting the individual entry files.
 </para>
 
 <para>
-In addition, when the collection or a group item is selected in the &group-view;, an icon view of the entries is show, using the first <link linkend="image">Image field</link> in the collection. Entries may be selected as in the &detailed-view;.
+In addition, when the collection or a group item is selected in the &group-view;, an icon view of the entries is shown, using the first <link linkend="image">Image</link> field in the collection. Entries may be selected as in the &detailed-view;.
 </para>
 
 </sect2>
@@ -89,7 +92,7 @@ In addition, when the collection or a group item is selected in the &group-view;
 <title>Statusbar</title>
 
 <para>
-The statusbar is used to show you what &tellico; is currently doing. It also includes a total count of the entries in the collection, and if a filter is being used, how many are currently visible.
+The statusbar is used to show you what &appname; is currently doing. It also includes a total count of the entries in the collection, and if a filter is being used, how many are currently visible.
 </para>
 </sect2>
 
@@ -99,7 +102,9 @@ The statusbar is used to show you what &tellico; is currently doing. It also inc
 <title>Editing Entries</title>
 
 <para>
-The &entry-editor; is used to add and modify entries in the collection. Double-clicking on an entry in either the &group-view; or the &detailed-view; opens the &entry-editor; with that entry. New entries may be created either using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself. Closing the &entry-editor; when changes have been made but not saved will cause a warning message to appear. The fields are grouped by Category and appear in the order that they appear in the <link linkend="fields-dialog">&fields-dialog;</link>. They may also be reordered.
+The &entry-editor; is used to add and modify entries in the collection. Double-clicking on an entry in either the &group-view; or the &detailed-view; opens the &entry-editor; with that entry. New entries may be created using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself.</para>
+ 
+<para>Closing the &entry-editor; when changes have been made but not saved will cause a warning message to appear. The fields are grouped by category and appear in the order that they appear in the <link linkend="fields-dialog">&fields-dialog;</link>. They may also be reordered.
 </para>
 
 <screenshot>
@@ -112,12 +117,11 @@ The &entry-editor; is used to add and modify entries in the collection. Double-c
 </screenshot>
 
 <para>
-Clicking the field title for a <link linkend="url"><emphasis>&URL;</emphasis></link> field will open the link using the default &kde; file associations. The <guiicon>&URL; selector</guiicon> button beside the text entry will open the default &kde; File Open Dialog, but the field is not limited to local files. Any &URL; may be entered.
+Clicking the field title for a <link linkend="url"><emphasis>&URL;</emphasis></link> field will open the link using the default &kde; file association. The <guiicon>&URL; selector</guiicon> button beside the text entry will open the default &kde; File Open Dialog, but the field is not limited to local files. Any &URL; may be entered. Relative &URL;s are not currently supported, as the value is interpreted relative to the location of the template stylesheet.
 </para>
 
 <para>
-For <link linkend="image"><emphasis>Image</emphasis></link> fields, the <guibutton>Select Image...</guibutton> button opens up the &kde; image file selection dialog. The image is saved in the collection in the original format, and a scaled version is shown in the &entry-editor;. The image may be cleared by using the <guibutton>Clear</guibutton> button. Cleared images are removed from the collection. The edit widget also supports drag-and-drop. Dragging an image file from a &konqueror; window does the same thing as selecting the image in the File Selector. Dragging an image from the edit widget into a &konqueror; file manager window will save the image in that folder.
-</para>
+For <link linkend="image"><emphasis>Image</emphasis></link> fields, the <guibutton>Select Image...</guibutton> button opens up the &kde; image file selection dialog. The image is saved in the collection in the original format, and a scaled version is shown in the &entry-editor;. The image may be cleared by using the <guibutton>Clear</guibutton> button. Cleared images are removed from the collection. </para>
 
 <screenshot>
 <screeninfo>The &entry-editor; for <emphasis>Image</emphasis> fields</screeninfo>
@@ -127,6 +131,16 @@ For <link linkend="image"><emphasis>Image</emphasis></link> fields, the <guibutt
 <caption><para>The &entry-editor; for <emphasis>Image</emphasis> fields</para></caption>
 </mediaobject>
 </screenshot>
+
+<para>
+The edit widget also supports drag-and-drop. Dragging an image file from a &konqueror; window does the same thing as selecting the image in the File Selector. Dragging an image from the edit widget into a &konqueror; file manager window will save the image in that folder.
+</para>
+
+<warning>
+<para>
+Since the images are stored in the collection data file, too many images will cause &appname; to slow down significantly as well as generate a very large data file. The problem may be alleviated by limiting stored images to small thumbnails, or linking images using <link linkend="url">URL</link> fields.
+</para>
+</warning>
 
 <para>
 <link linkend="table"><emphasis>Table</emphasis></link> fields begin with five rows, but moving the cursor to the last row automatically adds another. For 2-column tables, only the first column is used for grouping or formatting.
@@ -144,8 +158,22 @@ For <link linkend="image"><emphasis>Image</emphasis></link> fields, the <guibutt
 <sect2 id="edit-multiple">
 <title>Editing Multiple Entries</title>
 <para>
-Multiple entries may be edited at the same time by selecting more than one in either the &group-view; or the &detailed-view;. If multiple entries are selected, the fields which contain the same value in every entry are enabled. If entries have different values, then the fields are disabled. Checkboxes are added to the extreme right for each field entry which control whether the field is enabled or not. Only enabled fields will be modified when the entries are saved, which makes large-scale editing much easier. For example, to set the Medium of all the video entries in the collection, and make sure the Medium field is enabled. Change it to <acronym>DVD</acronym>, then save the entries. Only the Medium field will be modified, preserving all the other field values for the entries.
+Multiple entries may be edited at the same time by selecting more than one in either the &group-view; or the &detailed-view;. If multiple entries are selected, the fields which contain the same value in every entry are enabled. If entries have different values, then the fields are disabled. Checkboxes are added to the extreme right for each field entry which control whether the field is enabled or not, as shown in the screenshot below.
 </para>
+
+<para>
+Only enabled fields will be modified when the entries are saved, which makes large-scale editing much easier. For example, to set the Medium of all the video entries in the collection, and make sure the Medium field is enabled. Change it to <acronym>DVD</acronym>, then save the entries. Only the Medium field will be modified, preserving all the other field values for the entries.
+</para>
+
+<screenshot>
+<screeninfo>The &entry-editor; for multiple entries</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
+<textobject><phrase>The &entry-editor; for multiple entries</phrase></textobject>
+<caption><para>The &entry-editor; for multiple entries</para></caption>
+</mediaobject>
+</screenshot>
+
 </sect2>
 
 </sect1>
@@ -158,11 +186,11 @@ The &fields-dialog; allows you to add new fields to the collection, to modify th
 </para>
 
 <screenshot>
-<screeninfo>The &tellico; &fields-dialog;</screeninfo>
+<screeninfo>The &appname; &fields-dialog;</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
-<textobject><phrase>The &tellico; &fields-dialog;</phrase></textobject>
-<caption><para>The &tellico; &fields-dialog;</para></caption>
+<textobject><phrase>The &appname; &fields-dialog;</phrase></textobject>
+<caption><para>The &appname; &fields-dialog;</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -221,7 +249,13 @@ New fields may be any type, but changing the type of existing fields is restrict
 </row>
 <row>
 <entry><emphasis>Table</emphasis></entry>
-<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Table</emphasis></entry>
+<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Table</emphasis>,
+<emphasis>Table (2 Columns)</emphasis></entry>
+</row>
+<row>
+<entry><emphasis>Table (2 Columns)</emphasis></entry>
+<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Table</emphasis>,
+<emphasis>Table (2 Columns)</emphasis></entry>
 </row>
 <row>
 <entry><emphasis>Image</emphasis></entry>
@@ -244,7 +278,7 @@ New fields may be any type, but changing the type of existing fields is restrict
 <title>Field Formatting</title>
 
 <para>
-&tellico; provides some capability for automatic formatting of field values. The simplest is auto-capitalization, which capitalizes every word except the articles. Title formatting moves certain articles from the beginning to the end of the field, for example, changing "The Return of the King" to "Return of the King, The". The title articles are configurable. Finally, name formatting tries to break up the string so that the last, or family, name of the person is shown first. Name prefixes and suffixes are configurable. Also, the special <emphasis><link linkend="people-group">People</link></emphasis> group uses all fields with name formatting, even if the global setting is turned off.
+&appname; provides some capability for automatic formatting of field values. The simplest is auto-capitalization, which capitalizes every word except the articles. Title formatting moves certain articles from the beginning to the end of the field, for example, changing "The Return of the King" to "Return of the King, The". The title articles are configurable. Finally, name formatting tries to break up the string so that the last, or family, name of the person is shown first. Name prefixes and suffixes are configurable. Also, the special <emphasis><link linkend="people-group">People</link></emphasis> group uses all fields with name formatting, even if the global setting is turned off.
 </para>
 
 <para>
@@ -286,11 +320,11 @@ All automatic formatting can be disabled by changing the global options in the <
 <title>Field Options</title>
 
 <para>
-Fields also have three general options. If auto-completion is enabled, &tellico; caches the values for each field, and the &entry-editor; offers automatic completion, using the standard &kde; settings. Not all field types allow auto-completion. &tellico; also needs to know if a field may have multiple values or may be used to group the entries. A semi-colon is used to separate multiple values when editing an entry;
+Fields also have three general options. If auto-completion is enabled, &appname; caches the values for each field, and the &entry-editor; offers automatic completion, using the standard &kde; settings. Not all field types allow auto-completion. &appname; also needs to know if a field may have multiple values or may be used to group the entries. A semi-colon is used to separate multiple values when editing an entry;
 </para>
 
 <para>
-For efficiency, do not enable auto-completion unless you need it for the fields. The more fields with auto-completion in the collection, the slower it takes &tellico; to load the file.
+For efficiency, do not enable auto-completion unless you need it for the fields. The more fields with auto-completion in the collection, the slower it takes &appname; to load the file.
 </para>
 
 </sect2>
@@ -300,16 +334,39 @@ For efficiency, do not enable auto-completion unless you need it for the fields.
 <title>Filtering Entries</title>
 <para>
 The &filter-dialog; allows you to limit the entries visible in the <link linkend="detailed-view">&detailed-view;</link> to those that match one or more filter rules.
+The filter may be used to find the entries that meet all of the rules in the dialog, or just to
+find those that meet any of them.
 </para>
 
 <screenshot>
-<screeninfo>The &tellico; &filter-dialog;</screeninfo>
+<screeninfo>The &appname; &filter-dialog;</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
-<textobject><phrase>The &tellico; &filter-dialog;</phrase></textobject>
-<caption><para>The &tellico; &filter-dialog;</para></caption>
+<textobject><phrase>The &appname; &filter-dialog;</phrase></textobject>
+<caption><para>The &appname; &filter-dialog;</para></caption>
 </mediaobject>
 </screenshot>
+
+<para>
+Each row contains a single filter rule. Select the field to match in the first box in the row, then select a matching rule in the center. Rules may match values that contain a certain word, or are exactly equal. A regular expression may also be used to match entries, in which case the <guibutton>Edit...</guibutton> button becomes active for editing the expression. Finally, the word or string to match should be entered in the text box.
+</para>
+
+<para>
+Up to eight (8) rules may be used in the filter. The <guibutton>More</guibutton> and <guibutton>Fewer</guibutton> buttons may be used to add or remove rules.
+</para>
+
+<informalexample>
+<para>
+To find the science fiction books you've not read, check the <guilabel>Match all of the following</guilabel>
+button, set the first rule to <emphasis>Genre contains Science Fiction</emphasis> and the second to <emphasis>Read does not contain true</emphasis>. (For <link linkend="bool">Checkbox</link> fields, the internal value is <emphasis>true</emphasis>).
+</para>
+
+<para>
+To find the books by Bujold or Weber, check the <guilabel>Match any of the following</guilabel>
+button, set the first rule to <emphasis>Author contains Bujold</emphasis> and the second to <emphasis>Author contains Weber</emphasis>.
+</para>
+</informalexample>
+
 </sect1>
 
 </chapter>

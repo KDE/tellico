@@ -13,7 +13,7 @@
 
 #include "xsltexporter.h"
 #include "xslthandler.h"
-#include "bookcasexmlexporter.h"
+#include "tellicoxmlexporter.h"
 #include "../filehandler.h"
 
 #include <klocale.h>
@@ -26,7 +26,7 @@
 #include <qdom.h>
 #include <qwhatsthis.h>
 
-using Bookcase::Export::XSLTExporter;
+using Tellico::Export::XSLTExporter;
 
 XSLTExporter::XSLTExporter(const Data::Collection* coll_) : Export::TextExporter(coll_),
     m_widget(0),
@@ -70,7 +70,7 @@ QString XSLTExporter::text(bool formatFields_, bool encodeUTF8_) {
   //  XSLTHandler handler(FileHandler::readXMLFile(url));
   XSLTHandler handler(url);
 
-  BookcaseXMLExporter exporter(collection());
+  TellicoXMLExporter exporter(collection());
   exporter.setEntryList(entryList());
   QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
   return handler.applyStylesheet(dom.toString(), encodeUTF8_);

@@ -1,32 +1,32 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:bc="http://periapsis.org/bookcase/"
-                exclude-result-prefixes="bc"
+                xmlns:tc="http://periapsis.org/tellico/"
+                exclude-result-prefixes="tc"
                 version="1.0">
 
 <!--
    ===================================================================
-   Bookcase XSLT file - fancy template for viewing entry data
+   Tellico XSLT file - fancy template for viewing entry data
 
-   $Id: Fancy.xsl 885 2004-09-20 05:56:18Z robby $
+   $Id: Fancy.xsl 977 2004-11-26 07:33:15Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
    The drop-shadow effect is based on the "A List Apart" method
    at http://www.alistapart.com/articles/cssdropshadows/
 
-   This XSLT stylesheet is designed to be used with the 'Bookcase'
+   This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
    ===================================================================
 -->
 
 <!-- import common templates -->
 <!-- location depends on being installed correctly -->
-<xsl:import href="../bookcase-common.xsl"/>
+<xsl:import href="../tellico-common.xsl"/>
 
 <xsl:output method="html" version="xhtml"/>
 
-<xsl:param name="datadir"/> <!-- dir where Bookcase data are located -->
+<xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
 <xsl:param name="font"/> <!-- default KDE font family -->
 <xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
@@ -36,9 +36,9 @@
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
-<xsl:key name="fieldsByName" match="bc:field" use="@name"/>
-<xsl:key name="fieldsByCat" match="bc:field" use="@category"/>
-<xsl:key name="imagesById" match="bc:image" use="@id"/>
+<xsl:key name="fieldsByName" match="tc:field" use="@name"/>
+<xsl:key name="fieldsByCat" match="tc:field" use="@category"/>
+<xsl:key name="imagesById" match="tc:image" use="@id"/>
 
 <xsl:variable name="image-width" select="'150'"/>
 <xsl:variable name="image-height" select="'200'"/>
@@ -48,20 +48,20 @@
 </xsl:variable>
 
 <!-- all the categories -->
-<xsl:variable name="categories" select="/bc:bookcase/bc:collection/bc:fields/bc:field[generate-id(.)=generate-id(key('fieldsByCat',@category)[1])]/@category"/>
+<xsl:variable name="categories" select="/tc:tellico/tc:collection/tc:fields/tc:field[generate-id(.)=generate-id(key('fieldsByCat',@category)[1])]/@category"/>
 <!-- layout changes depending on whether there are images or not -->
-<xsl:variable name="num-images" select="count(bc:bookcase/bc:collection/bc:entry[1]/*[key('fieldsByName',local-name(.))/@type = 10])"/>
+<xsl:variable name="num-images" select="count(tc:tellico/tc:collection/tc:entry[1]/*[key('fieldsByName',local-name(.))/@type = 10])"/>
 
 <xsl:template match="/">
- <xsl:apply-templates select="bc:bookcase"/>
+ <xsl:apply-templates select="tc:tellico"/>
 </xsl:template>
 
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
-<xsl:template match="bc:bookcase">
- <!-- This stylesheet is designed for Bookcase document syntax version 6 -->
+<xsl:template match="tc:tellico">
+ <!-- This stylesheet is designed for Tellico document syntax version 7 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'6'"/>
+  <xsl:with-param name="this-version" select="'7'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -173,32 +173,32 @@
   }
   </style>
   <title>
-   <xsl:value-of select="bc:collection/bc:entry[1]//bc:title[1]"/>
+   <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
    <xsl:text> - </xsl:text>
-   <xsl:value-of select="bc:collection/@title"/>
+   <xsl:value-of select="tc:collection/@title"/>
   </title>
   </head>
   <body>
-   <xsl:apply-templates select="bc:collection"/>
+   <xsl:apply-templates select="tc:collection"/>
   </body>
  </html>
 </xsl:template>
 
-<xsl:template match="bc:collection">
- <xsl:apply-templates select="bc:entry[1]"/>
+<xsl:template match="tc:collection">
+ <xsl:apply-templates select="tc:entry[1]"/>
  <xsl:if test="$collection-file">
   <hr/>
   <h4 style="text-align:center"><a href="{$collection-file}">&lt;&lt; <xsl:value-of select="@title"/></a></h4>
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="bc:entry">
+<xsl:template match="tc:entry">
  <xsl:variable name="entry" select="."/>
 
  <!-- first, show the title -->
- <xsl:if test=".//bc:title">
+ <xsl:if test=".//tc:title">
   <h1>
-   <xsl:value-of select=".//bc:title[1]"/>
+   <xsl:value-of select=".//tc:title[1]"/>
   </h1>
  </xsl:if>
 
@@ -207,7 +207,7 @@
  <xsl:if test="$num-images &gt; 0">
   <div id="images">
    <!-- images are field type 10 -->
-   <xsl:for-each select="../bc:fields/bc:field[@type=10]">
+   <xsl:for-each select="../tc:fields/tc:field[@type=10]">
     
     <!-- find the value of the image field in the entry -->
     <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
@@ -216,7 +216,15 @@
      <div class="img-shadow">
       <a>
        <xsl:attribute name="href">
-        <xsl:value-of select="concat($imgdir, $image)"/>
+        <xsl:choose>
+         <!-- Amazon license requires the image to be linked to the amazon website -->
+         <xsl:when test="$entry/tc:amazon">
+          <xsl:value-of select="$entry/tc:amazon"/>
+         </xsl:when>
+         <xsl:otherwise>
+          <xsl:value-of select="concat($imgdir, $image)"/>
+         </xsl:otherwise>
+        </xsl:choose>
        </xsl:attribute>
        <img>
         <xsl:attribute name="src">
@@ -319,24 +327,24 @@
        <xsl:for-each select="$entry//*[local-name(.) = $fields[1]/@name]">
         <tr>
          <td class="column1">
-          <xsl:value-of select="bc:column[1]"/>
+          <xsl:value-of select="tc:column[1]"/>
          </td>
          <td class="column2">
-          <xsl:value-of select="bc:column[2]"/>
+          <xsl:value-of select="tc:column[2]"/>
          </td>
         </tr>
        </xsl:for-each>
       </tbody>
      </table>
     </xsl:when>
-    
+
     <xsl:otherwise>
      <table>
       <tbody>
        <!-- already used title, so skip it -->
        <xsl:for-each select="$fields[@name != 'title']">
         <tr>
-         <th class="fieldName">
+         <th class="fieldName" valign="top">
           <xsl:value-of select="@title"/>
           <xsl:text>:</xsl:text>
          </th>

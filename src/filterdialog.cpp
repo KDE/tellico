@@ -16,7 +16,7 @@
 
 #include "filterdialog.h"
 #include "filter.h"
-#include "kernel.h"
+#include "tellico_kernel.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -35,9 +35,9 @@
 #include <qlabel.h>
 #include <qapplication.h>
 
-using Bookcase::FilterRuleWidget;
-using Bookcase::FilterRuleWidgetLister;
-using Bookcase::FilterDialog;
+using Tellico::FilterRuleWidget;
+using Tellico::FilterRuleWidgetLister;
+using Tellico::FilterDialog;
 
 FilterRuleWidget::FilterRuleWidget(FilterRule* rule_, QWidget* parent_, const char* name_/*=0*/)
     : QHBox(parent_, name_), m_editRegExp(0), m_editRegExpDialog(0) {
@@ -144,7 +144,7 @@ void FilterRuleWidget::setRule(const FilterRule* rule_) {
   blockSignals(false);
 }
 
-Bookcase::FilterRule* FilterRuleWidget::rule() const {
+Tellico::FilterRule* FilterRuleWidget::rule() const {
   QString field; // empty string
   if(m_ruleField->currentItem() > 0) { // 0 is "All Fields", field is empty
     field = Kernel::self()->fieldNameByTitle(m_ruleField->currentText());
@@ -172,7 +172,10 @@ void FilterRuleWidget::reset() {
 
 /***************************************************************/
 
-static const int FILTER_MIN_RULE_WIDGETS = 2;
+namespace {
+  static const int FILTER_MIN_RULE_WIDGETS = 2;
+  static const int FILTER_MAX_RULES = 8;
+}
 
 FilterRuleWidgetLister::FilterRuleWidgetLister(QWidget* parent_, const char* name_)
     : KWidgetLister(FILTER_MIN_RULE_WIDGETS, FILTER_MAX_RULES, parent_, name_) {
@@ -195,7 +198,7 @@ void FilterRuleWidgetLister::setFilter(const Filter* filter_) {
   }
 
   // set the right number of widgets
-  setNumberOfShownWidgetsTo(QMAX(static_cast<int>(filter_->count()), mMinWidgets));
+  setNumberOfShownWidgetsTo(KMAX(static_cast<int>(filter_->count()), mMinWidgets));
 
   // load the actions into the widgets
   QPtrListIterator<QWidget> wIt(mWidgetList);
@@ -214,7 +217,7 @@ void FilterRuleWidgetLister::reset() {
 }
 
 QWidget* FilterRuleWidgetLister::createWidget(QWidget* parent_) {
-  return new FilterRuleWidget(static_cast<Bookcase::FilterRule*>(0), parent_);
+  return new FilterRuleWidget(static_cast<Tellico::FilterRule*>(0), parent_);
 }
 
 void FilterRuleWidgetLister::clearWidget(QWidget* widget_) {
@@ -229,7 +232,9 @@ const QPtrList<QWidget>& FilterRuleWidgetLister::widgetList() const {
 
 /***************************************************************/
 
-static const int FILTER_MIN_WIDTH = 600;
+namespace {
+  static const int FILTER_MIN_WIDTH = 600;
+}
 
 // make the Apply button the default, so the user can see if the filter is good
 FilterDialog::FilterDialog(QWidget* parent_, const char* name_/*=0*/)
@@ -251,7 +256,7 @@ FilterDialog::FilterDialog(QWidget* parent_, const char* name_/*=0*/)
   m_ruleLister = new FilterRuleWidgetLister(m_matchGroup);
   connect(m_ruleLister, SIGNAL(widgetRemoved()), SLOT(slotShrink()));
 
-  setMinimumWidth(QMAX(minimumWidth(), FILTER_MIN_WIDTH));
+  setMinimumWidth(KMAX(minimumWidth(), FILTER_MIN_WIDTH));
   setHelp(QString::fromLatin1("filter-dialog"));
 }
 
@@ -276,7 +281,7 @@ void FilterDialog::slotOk() {
 }
 
 void FilterDialog::slotApply() {
-  Bookcase::Filter* filter;
+  Tellico::Filter* filter;
   if(m_matchAny->isChecked()) {
     filter = new Filter(Filter::MatchAny);
   } else {

@@ -19,7 +19,7 @@
 
 #include <qguardedptr.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * There isn't an easy way to insert a label using the XML-GUI in KDE 3.0.x.
@@ -29,7 +29,7 @@ namespace Bookcase {
  * @see KWidgetAction
  *
  * @author Robby Stephenson
- * @version $Id: labelaction.h 626 2004-04-28 03:54:00Z robby $
+ * @version $Id: labelaction.h 862 2004-09-15 01:49:51Z robby $
  */
 class LabelAction : public KWidgetAction {
 Q_OBJECT
@@ -45,7 +45,7 @@ public:
  * @see KAction
  *
  * @author Robby Stephenson
- * @version $Id: labelaction.h 626 2004-04-28 03:54:00Z robby $
+ * @version $Id: labelaction.h 862 2004-09-15 01:49:51Z robby $
  */
 class LineEditAction : public KAction {
 Q_OBJECT

@@ -15,9 +15,10 @@
 #include "entry.h"
 #include "filehandler.h"
 #include "translators/xslthandler.h"
-#include "translators/bookcasexmlexporter.h"
+#include "translators/tellicoxmlexporter.h"
 #include "collection.h"
 #include "imagefactory.h"
+#include "tellico_kernel.h"
 
 #include <kstandarddirs.h>
 #include <kdebug.h>
@@ -25,11 +26,12 @@
 #include <krun.h>
 #include <kmessagebox.h>
 #include <khtmlview.h>
+#include <dom/dom_element.h>
 
 #include <qfile.h>
 #include <qapplication.h> // needed for default palette
 
-using Bookcase::EntryView;
+using Tellico::EntryView;
 
 EntryView::EntryView(QWidget* parent_, const char* name_) : KHTMLPart(parent_, name_),
     m_entry(0), m_handler(0), m_run(0) {
@@ -78,11 +80,11 @@ void EntryView::showEntry(const Data::Entry* entry_) {
 
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
-  begin(m_xsltFile);
+  begin(KURL::fromPathOrURL(m_xsltFile));
 
   Data::EntryList list;
   list.append(entry_);
-  Export::BookcaseXMLExporter exporter(entry_->collection());
+  Export::TellicoXMLExporter exporter(entry_->collection());
   exporter.setEntryList(list);
   // exportXML(bool formatValues, bool encodeUTF8);
   QDomDocument dom = exporter.exportXML(false, true);
@@ -114,7 +116,7 @@ void EntryView::showEntry(const Data::Entry* entry_) {
 }
 
 void EntryView::setXSLTFile(const QString& file_) {
-  static const QString templateDir = QString::fromLatin1("entry-templates/");
+  static const QString& templateDir = KGlobal::staticQString("entry-templates/");
 
   // if starts with slash, then absolute path
   if(file_.at(0) == '/') {
@@ -129,7 +131,7 @@ void EntryView::setXSLTFile(const QString& file_) {
       if(m_xsltFile.isEmpty()) {
         QString str = QString::fromLatin1("<qt>");
         str += i18n("Tellico is unable to locate the default entry stylesheet.");
-        str += QString::fromLatin1(" ");
+        str += QChar(' ');
         str += i18n("Please check your installation.");
         str += QString::fromLatin1("</qt>");
         KMessageBox::error(view(), str);
@@ -171,11 +173,23 @@ void EntryView::refresh() {
   showEntry(m_entry);
 }
 
+// do some contortions in case the url is relative
+// need to interpret it relative to document URL instead of xslt file
+// assume the current node under the mouse is the text node inside
+// the anchor node, and look at the href attribute
 void EntryView::slotOpenURL(const KURL& url_) {
-//  kdDebug() << "EntryView::slotOpenURL() - " << url_.path() << endl;
-  if(!url_.isEmpty() && url_.isValid()) {
-    m_run = new KRun(url_);
+  DOM::Node node = nodeUnderMouse().parentNode();
+  if(node.nodeType() == DOM::Node::ELEMENT_NODE && static_cast<DOM::Element>(node).tagName() == "a") {
+    QString href = static_cast<DOM::Element>(node).getAttribute("href").string();
+    if(!href.isEmpty() && KURL::isRelativeURL(href)) {
+      // interpet url relative to document url
+      m_run = new KRun(KURL(Kernel::self()->URL(), href));
+      return; // done
+    }
   }
+
+  // otherwise, just open the url
+  m_run = new KRun(url_);
 }
 
 #include "entryview.moc"

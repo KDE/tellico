@@ -16,12 +16,14 @@
 
 #include <klocale.h>
 
-using Bookcase::Data::ComicBookCollection;
+namespace {
+  static const char* comic_general = I18N_NOOP("General");
+  static const char* comic_publishing = I18N_NOOP("Publishing");
+  static const char* comic_classification = I18N_NOOP("Classification");
+  static const char* comic_personal = I18N_NOOP("Personal");
+}
 
-static const QString comic_general = QString::fromLatin1(I18N_NOOP("General"));
-static const QString comic_publishing = QString::fromLatin1(I18N_NOOP("Publishing"));
-static const QString comic_classification = QString::fromLatin1(I18N_NOOP("Classification"));
-static const QString comic_personal = QString::fromLatin1(I18N_NOOP("Personal"));
+using Tellico::Data::ComicBookCollection;
 
 ComicBookCollection::ComicBookCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(ComicBook), i18n("Comics")) {
@@ -32,7 +34,7 @@ ComicBookCollection::ComicBookCollection(bool addFields_, const QString& title_ 
   setDefaultGroupField(QString::fromLatin1("series"));
 }
 
-Bookcase::Data::FieldList ComicBookCollection::defaultFields() {
+Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   FieldList list;
   Field* field;
 

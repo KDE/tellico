@@ -24,7 +24,7 @@ class QVBox;
 #include <qlineedit.h>
 #include <qdatetime.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 class SpinBox : public QSpinBox {
 Q_OBJECT
@@ -40,7 +40,7 @@ public:
 
 /**
  * @author Robby Stephenson
- * @version $Id: datewidget.h 717 2004-07-31 01:08:59Z robby $
+ * @version $Id: datewidget.h 862 2004-09-15 01:49:51Z robby $
  */
 class DateWidget : public QWidget {
 Q_OBJECT

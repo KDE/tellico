@@ -1,5 +1,8 @@
 /* config.h.in.  Generated from configure.in by autoheader.  */
 
+/* Define to 1 if Amazon.com searching should be enabled */
+#undef AMAZON_SUPPORT
+
 /* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
    systems. This function is required for `alloca.c' support on those systems.
    */
@@ -36,14 +39,11 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if you have libkcddb and libcdda */
+/* Define to 1 if you have libkcddb */
 #undef HAVE_KCDDB
 
 /* Define to 1 if you have the `btparse' library (-lbtparse). */
 #undef HAVE_LIBBTPARSE
-
-/* Define to 1 if you have the `cdda_paranoia' library (-lcdda_paranoia). */
-#undef HAVE_LIBCDDA_PARANOIA
 
 /* Define if you have libjpeg */
 #undef HAVE_LIBJPEG
@@ -128,6 +128,12 @@
 
 /* Define if you want Xinerama support */
 #undef HAVE_XINERAMA
+
+/* Define to 1 if you have the yaz library */
+#undef HAVE_YAZ
+
+/* Define to 1 if IMDb searching should be enabled */
+#undef IMDB_SUPPORT
 
 /* Suffix for lib directories */
 #undef KDELIBSUFF

@@ -14,11 +14,10 @@
 #ifndef FETCHDIALOG_H
 #define FETCHDIALOG_H
 
-namespace Bookcase {
+namespace Tellico {
   class EntryView;
   namespace Fetch {
     class Fetcher;
-    class Manager;
     class SearchResult;
   }
 }
@@ -35,12 +34,16 @@ class QCheckBox;
 
 #include <kdialogbase.h>
 #include <klistview.h>
+#include <ktextedit.h>
 
-namespace Bookcase {
+#include <qintdict.h>
+#include <qguardedptr.h>
+
+namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: fetchdialog.h 766 2004-08-18 01:40:39Z robby $
+ * @version $Id: fetchdialog.h 988 2004-12-02 06:42:31Z robby $
  */
 class FetchDialog : public KDialogBase {
 Q_OBJECT
@@ -49,11 +52,11 @@ public:
   /**
    * Constructor
    */
-  FetchDialog(Data::Collection* coll, QWidget* parent, const char* name = 0);
+  FetchDialog(QWidget* parent, const char* name = 0);
   ~FetchDialog();
 
 signals:
-  void signalAddEntries(const Bookcase::Data::EntryList&);
+  void signalAddEntries(const Tellico::Data::EntryList&);
 
 private slots:
   void slotSearchClicked();
@@ -64,22 +67,24 @@ private slots:
 
   void slotUpdateStatus(const QString& status);
   void slotFetchDone();
-  void slotResultFound(const Bookcase::Fetch::SearchResult& result);
+  void slotResultFound(const Tellico::Fetch::SearchResult& result);
   void slotKeyChanged(const QString& key);
+  void slotSourceChanged(const QString& source);
   void slotMultipleISBN(bool toggle);
   void slotEditMultipleISBN();
+  void slotInit();
+  void slotLoadISBNList();
 
 private:
   void startProgress();
   void stopProgress();
 
-  class SearchResultItem : public QListViewItem {
+  class SearchResultItem : public KListViewItem {
     friend class FetchDialog;
-    SearchResultItem(QListView* lv, const Fetch::SearchResult& r);
+    SearchResultItem(KListView* lv, const Fetch::SearchResult& r);
     const Fetch::SearchResult& m_result;
   };
 
-  Data::Collection* m_coll;
   KComboBox* m_sourceCombo;
   KComboBox* m_keyCombo;
   KLineEdit* m_valueLineEdit;
@@ -92,10 +97,12 @@ private:
   KStatusBar* m_statusBar;
   QProgressBar* m_progress;
   QTimer* m_timer;
+  QGuardedPtr<KTextEdit> m_isbnTextEdit;
 
-  Fetch::Manager* m_fetchManager;
   bool m_started;
+  int m_origCount;
   QStringList m_isbnList;
+  QIntDict<Data::Entry> m_entries;
 };
 
 } //end namespace

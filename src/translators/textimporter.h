@@ -16,14 +16,14 @@
 
 #include "importer.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Import {
 
 /**
  * The TextImporter class is meant as an abstract class for any importer which reads text files.
  *
  * @author Robby Stephenson
- * @version $Id: textimporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: textimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class TextImporter : public Importer {
 Q_OBJECT

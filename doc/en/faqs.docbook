@@ -19,20 +19,20 @@ application work. -->
 </question>
 <answer>
 
-<para>After downloading and unpacking &tellico;, run
+<para>After downloading and unpacking &appname;, run
 <userinput><command>configure</command>
 <option>--disable-debug</option>
 <option>--enable-final</option></userinput> to configure
 everything. You may need to modify some of the command line
 options. After that, running
 <userinput><command>make</command></userinput> will compile
-&tellico;. Then, as root, run <userinput><command>make
+&appname;. Then, as root, run <userinput><command>make
 install</command></userinput> to install everything. Being root is
 only necessary if you install somewhere where you don't have write
-permissions. The command line to start &tellico; is
+permissions. The command line to start &appname; is
 <userinput><command>tellico</command></userinput>. If you install one
 of the pre-packaged binaries, a menu item will be inserted for
-&tellico;.  </para>
+&appname;.  </para>
 
 </answer>
 </qandaentry>
@@ -62,19 +62,18 @@ separating each value.</para>
 </question>
 <answer>
 
-<para>Yes, most certainly. Find the file <filename>bookcase-printing.xsl</filename> which
+<para>Yes, most certainly. Find the file <filename>tellico-printing.xsl</filename> which
  should be in the $<envar>KDEDIR</envar>/share/apps/tellico/ directory. You can copy
  that to $<envar>KDEHOME</envar>/share/apps/tellico/ for personal modifications.
  You'll have to know <ulink
- url="http://www.w3.org/TR/xslt"><acronym>XSLT</acronym></ulink>, but modifying that file
- is how you change the printing layout. <acronym>HTML</acronym> is generated from the
+ url="http://www.w3.org/TR/xslt">&xslt;</ulink>, but modifying that file
+ is how you change the printing layout. &html; is generated from the
  file, and the easiest way to change the appearance of the printout is
- to modify the CSS in the top portion. Feel free to <ulink
- url="mailto:&email;">email me</ulink> with questions. Any alternate <acronym>XSLT</acronym> printing files will be available on <ulink
- url="&homepage;">the &tellico; website</ulink>.</para>
+ to modify the CSS in the top portion. Feel free to email me with questions. Any alternate &xslt; printing files will be available on <ulink
+ url="&homepage;">the &appname; website</ulink>.</para>
  
-<para>Be aware that the <filename>bookcase-printing.xsl</filename> references another file, <filename>bookcase-common.xsl</filename>, that contains some common <acronym>XSLT</acronym> templates. If you copy 
-<filename>bookcase-printing.xsl</filename> to $<envar>KDEHOME</envar>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename>bookcase-common.xsl</filename> file or copy the common file as well.
+<para>Be aware that the <filename>tellico-printing.xsl</filename> references another file, <filename>tellico-common.xsl</filename>, that contains some common &xslt; templates. If you copy 
+<filename>tellico-printing.xsl</filename> to $<envar>KDEHOME</envar>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename>tellico-common.xsl</filename> file or copy the common file as well.
 </para>
 </answer>
 </qandaentry>
@@ -92,7 +91,7 @@ To allow grouping by a field which doesn't allow grouping by default, check the
 
 <qandaentry>
 <question>
-<para>How do I rename my book collection?</para>
+<para>How do I rename my collection?</para>
 </question>
 <answer>
 <para>In the left side column, right-click on the top-level item representing
@@ -101,11 +100,11 @@ the collection. Select the "Rename Collection" option.</para>
 </qandaentry>
 
 <qandaentry>
-<question><para>Why does all that gobbledy-gook show up when I run &tellico;?</para></question>
+<question><para>Why does all that gobbledy-gook show up when I run &appname;?</para></question>
 <answer>
 <para>Stuff like:
 <screen width="40">
-<computeroutput>Bookcase::updateCollectionToolBar</computeroutput>
+<computeroutput>Tellico::updateCollectionToolBar</computeroutput>
 <computeroutput>BCGroupView::setGroupAttribute - author</computeroutput>
 <computeroutput>BCGroupView::slotAddCollection</computeroutput>
 <computeroutput>QCheckBox::property( "title" ) failed: property invalid
@@ -122,7 +121,7 @@ running the application.</para>
 <para>The last message is slightly different, it just means your Qt
  installation was compiled with some debugging information.</para>
 
-<para>Or, if &tellico; is already installed, run
+<para>Or, if &appname; is already installed, run
 <userinput><command>kdebugdialog</command></userinput> and make sure
 that "0 (generic)" is unchecked. That turns off debug messages from
 all generic KDE apps i.e. those not distributed officially by
@@ -144,7 +143,7 @@ the columns, and click on them to sort by that field.</para>
 field?</para></question>
 <answer>
 <para>Internally, the checkbox
-fields in &tellico; are saved as "true", so if you'd like to filter
+fields in &appname; are saved as "true", so if you'd like to filter
 to show only the science fiction books which you've not read, for
 example, then you have two rules. Make sure the "Match all of the
 following" button is checked. Set the first rule to have "Genre"
@@ -164,9 +163,9 @@ the toolbar.</para>
 
 <answer>
 <para>Entry templates should be saved in
-<filename>$<envar>KDEHOME</envar>/share/apps/tellico/entry-templates/</filename>
+<filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/entry-templates/</filename>
 for access for a single user or
-<filename>$<envar>KDEDIR</envar>/share/apps/tellico/entry-templates/</filename>
+<filename class="directory">$<envar>KDEDIR</envar>/share/apps/tellico/entry-templates/</filename>
 for access by everyone. Templates in $<envar>KDEHOME</envar> will
 override any files by the same name in $<envar>KDEDIRS</envar>. The
 entry templates can be set on a per collection-type basis in the
@@ -176,17 +175,17 @@ settings dialog.</para>
 
 <qandaentry>
 <question><para>Compiling and installing went
-fine, but when &tellico; starts up, the window is blank. What's
+fine, but when &appname; starts up, the window is blank. What's
 wrong?</para></question>
 
 <answer>
 <para>KDE programs look for data in the locations defined in the
  $<envar>KDEDIRS</envar> environmental variable. If you install in
- <filename>/usr/local</filename> for example, but
- $<envar>KDEDIRS</envar> is empty or just <filename>/usr</filename>,
- then &tellico; won't be able to find the files it needs. This is
+ <filename class="directory">/usr/local</filename> for example, but
+ $<envar>KDEDIRS</envar> is empty or just <filename class="directory">/usr</filename>,
+ then &appname; won't be able to find the files it needs. This is
  particularly true for SuSE, for which you should compile with
- <userinput><option>--prefix</option>=<filename>/opt/kde3</filename></userinput>. Alternatively,
+ <userinput><option>--prefix</option>=<filename class="directory">/opt/kde3</filename></userinput>. Alternatively,
  you could add a line to your <filename>.profile</filename> file to
  set $<envar>KDEDIRS</envar>. Check the documentation for your
  shell.</para>
@@ -196,12 +195,49 @@ wrong?</para></question>
 <qandaentry>
 <question><para>How do I export additional bibtex fields?</para></question>
 <answer>
-<para>&tellico; uses the <emphasis>bibtex</emphasis> property to know how to export
+<para>&appname; uses the <emphasis>bibtex</emphasis> property to know how to export
  bibtex fields. If you want to add additional fields to export, such
  as an abstract, open up the &fields-dialog;, and click the <guibutton>Extended
  Properties</guibutton> button. Add a <emphasis>bibtex</emphasis> property with value
  <emphasis>abstract</emphasis>. Then, when you export to bibtex or bibtexml, that
  property will be used for the bibtex field name.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para>What happened to Bookcase?</para>
+</question>
+
+<answer>
+<para>Due to a trademark conflict, Bookcase was renamed Tellico in September 2004.
+Tellico 0.12 was then released, which was identical to
+Bookcase 0.11, except for the name change.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para>What does the name Tellico have to do with anything?</para>
+</question>
+
+<answer>
+<para>I thought about <ulink url="http://www.periapsis.org/archives/2004/09/13/renaming_bookcase.html">several
+other names</ulink>, a few of which were connected with book collections. However,
+Tellico can handle more than just books, and besides, this is a hobby, so I chose
+a neat-sounding (to me) name, one taken from a town close to where I grew up.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question>
+<para>What do you include those links to Amazon.com in the search results?</para>
+</question>
+
+<answer>
+<para>
+The <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=3440661">terms of agreement for accessing the Amazon.com Web Services</ulink> require all images pulled from the service to be linked back to Amazon.com, as well as an additional link. The Amazon.com associate's ID is neccessarily included, so any referral payments are duly collected.
+</para>
 </answer>
 </qandaentry>
 

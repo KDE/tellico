@@ -1,19 +1,20 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 
 
-EXTRA_DIST = bookcase-by-author.xsl bookcase-by-title.xsl \
-             bookcase-printing.xsl bookcase2html.xsl shadowAlpha.png \
+EXTRA_DIST = tellico-by-author.xsl tellico-by-title.xsl \
+             tellico-printing.xsl tellico2html.xsl shadowAlpha.png \
              cd-logo.png dvd-logo.png cassette-logo.png record-logo.png \
-             vhs-logo.png bookcase-common.xsl mods2bookcase.xsl \
-             amazon2bookcase.xsl
+             vhs-logo.png tellico-common.xsl mods2tellico.xsl \
+             amazon2tellico.xsl MARC21slim2MODS3.xsl MARC21slimUtils.xsl
 
 ####### kdevelop will overwrite this part!!! (end)############
 
 xsldir = $(kde_datadir)/tellico
-xsl_DATA = bookcase-printing.xsl bookcase-by-author.xsl bookcase-by-title.xsl \
-	bookcase2html.xsl shadowAlpha.png cassette-logo.png cd-logo.png \
-        dvd-logo.png record-logo.png vhs-logo.png bookcase-common.xsl \
-        mods2bookcase.xsl amazon2bookcase.xsl
+xsl_DATA = tellico-printing.xsl tellico-by-author.xsl tellico-by-title.xsl \
+	tellico2html.xsl shadowAlpha.png cassette-logo.png cd-logo.png \
+        dvd-logo.png record-logo.png vhs-logo.png tellico-common.xsl \
+        mods2tellico.xsl amazon2tellico.xsl MARC21slim2MODS3.xsl \
+        MARC21slimUtils.xsl
 
 SUBDIRS = entry-templates
 

@@ -16,14 +16,14 @@
 
 #include <qimage.h>
 
-namespace Bookcase {
+namespace Tellico {
   class ImageFactory;
 
   namespace Data {
 
 /**
  * @author Robby Stephenson
- * @version $Id: image.h 652 2004-05-11 04:57:03Z robby $
+ * @version $Id: image.h 862 2004-09-15 01:49:51Z robby $
  */
 class Image : public QImage {
 
@@ -54,7 +54,7 @@ private:
   } // end namespace
 } // end namespace
 
-inline bool operator== (const Bookcase::Data::Image& img1, const Bookcase::Data::Image& img2) {
+inline bool operator== (const Tellico::Data::Image& img1, const Tellico::Data::Image& img2) {
   return img1.id() == img2.id();
 };
 

@@ -12,11 +12,11 @@
  ***************************************************************************/
 
 #include "filehandler.h"
-#include "kernel.h"
+#include "tellico_kernel.h"
 #include "document.h"
 #include "image.h"
-#include "utils.h" // needed for version macros
-#include "kernel.h"
+#include "tellico_kernel.h"
+#include "tellico_strings.h"
 
 #include <kurl.h>
 #include <klocale.h>
@@ -24,16 +24,13 @@
 #include <kio/netaccess.h>
 #include <ktempfile.h>
 #include <ksavefile.h>
+#include <kapplication.h>
 #include <kdebug.h>
 
 #include <qdom.h>
 #include <qfile.h>
 
-const char* loadError = I18N_NOOP("Tellico is unable to load the file - %1.");
-const char* writeError = I18N_NOOP("Tellico is unable to write the file - %1.");
-const char* uploadError = I18N_NOOP("Tellico is unable to upload the file - %1.");
-
-using Bookcase::FileHandler;
+using Tellico::FileHandler;
 
 FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : file(0), isValid(false) {
   if(url_.isEmpty()) {
@@ -46,14 +43,18 @@ FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : file(0), isValid(
   if(!KIO::NetAccess::download(url_, filename)) {
 #endif
     if(!quiet_) {
-      KMessageBox::sorry(Kernel::self()->widget(), i18n(loadError).arg(url_.fileName()));
+      kapp->restoreOverrideCursor();
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(errorLoad).arg(url_.fileName()));
+      kapp->setOverrideCursor(Qt::waitCursor);
     }
     return;
   }
 
   file = new QFile(filename);
   if(!file->open(IO_ReadOnly)) {
-    KMessageBox::sorry(Kernel::self()->widget(), i18n(loadError).arg(url_.fileName()));
+    kapp->restoreOverrideCursor();
+    KMessageBox::sorry(Kernel::self()->widget(), i18n(errorLoad).arg(url_.fileName()));
+    kapp->setOverrideCursor(Qt::waitCursor);
     delete file;
     file = 0;
     KIO::NetAccess::removeTempFile(filename);
@@ -75,8 +76,8 @@ FileHandler::FileRef::~FileRef() {
   isValid = false;
 }
 
-QString FileHandler::readTextFile(const KURL& url_) {
-  FileRef f(url_);
+QString FileHandler::readTextFile(const KURL& url_, bool quiet_) {
+  FileRef f(url_, quiet_);
   if(!f.isValid) {
     return QString::null;
   }
@@ -85,8 +86,8 @@ QString FileHandler::readTextFile(const KURL& url_) {
   return stream.read();
 }
 
-QDomDocument FileHandler::readXMLFile(const KURL& url_) {
-  FileRef f(url_);
+QDomDocument FileHandler::readXMLFile(const KURL& url_, bool processNamespace_, bool quiet_) {
+  FileRef f(url_, quiet_);
   if(!f.isValid) {
     return QDomDocument();
   }
@@ -94,19 +95,21 @@ QDomDocument FileHandler::readXMLFile(const KURL& url_) {
   QDomDocument doc;
   QString errorMsg;
   int errorLine, errorColumn;
-  if(!doc.setContent(f.file, false, &errorMsg, &errorLine, &errorColumn)) {
-    QString details = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
-    details += QString::fromLatin1("\n");
-    details += i18n("The error message from Qt is:");
-    details += QString::fromLatin1("\n\t") + errorMsg;
-    KMessageBox::detailedSorry(Kernel::self()->widget(), i18n(loadError).arg(url_.fileName()), details);
+  if(!doc.setContent(f.file, processNamespace_, &errorMsg, &errorLine, &errorColumn)) {
+    if(!quiet_) {
+      QString details = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
+      details += QString::fromLatin1("\n");
+      details += i18n("The error message from Qt is:");
+      details += QString::fromLatin1("\n\t") + errorMsg;
+      KMessageBox::detailedSorry(Kernel::self()->widget(), i18n(errorLoad).arg(url_.fileName()), details);
+    }
     return QDomDocument();
   }
   return doc;
 }
 
-QByteArray FileHandler::readDataFile(const KURL& url_) {
-  FileRef f(url_);
+QByteArray FileHandler::readDataFile(const KURL& url_, bool quiet_) {
+  FileRef f(url_, quiet_);
   if(!f.isValid) {
     return QByteArray();
   }
@@ -114,7 +117,7 @@ QByteArray FileHandler::readDataFile(const KURL& url_) {
   return f.file->readAll();
 }
 
-Bookcase::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_) {
+Tellico::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid) {
     return 0;
@@ -136,12 +139,14 @@ bool FileHandler::queryExists(const KURL& url_) {
   if(KIO::NetAccess::exists(url_, false)) {
 #endif
     if(url_ != Kernel::self()->doc()->URL()) {
+      kapp->restoreOverrideCursor();
       QString str = i18n("A file named \"%1\" already exists. "
                          "Are you sure you want to overwrite it?").arg(url_.fileName());
       int want_continue = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str,
                                                              i18n("Overwrite File?"),
                                                              i18n("Overwrite"));
 
+      kapp->setOverrideCursor(Qt::waitCursor);
       if(want_continue == KMessageBox::Cancel) {
         return false;
       }
@@ -157,21 +162,25 @@ bool FileHandler::queryExists(const KURL& url_) {
     success = KIO::NetAccess::copy(url_, backup);
 #endif
     if(!success) {
-      KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(backup.fileName()));
+      kapp->restoreOverrideCursor();
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(errorWrite).arg(backup.fileName()));
+      kapp->setOverrideCursor(Qt::waitCursor);
     }
   }
   return success;
 }
 
 bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool encodeUTF8_, bool force_) {
-  if(!force_ && !queryExists(url_)) {
+  if((!force_ && !queryExists(url_)) || text_.isNull()) {
     return false;
   }
 
   if(url_.isLocalFile()) {
     KSaveFile f(url_.path());
     if(f.status() != 0) {
-      KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(url_.fileName()));
+      kapp->restoreOverrideCursor();
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(errorWrite).arg(url_.fileName()));
+      kapp->setOverrideCursor(Qt::waitCursor);
       return false;
     }
     return FileHandler::writeTextFile(f, text_, encodeUTF8_);
@@ -182,7 +191,9 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
   KSaveFile f(tempfile.name());
   if(f.status() != 0) {
     tempfile.unlink();
-    KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(url_.fileName()));
+    kapp->restoreOverrideCursor();
+    KMessageBox::sorry(Kernel::self()->widget(), i18n(errorWrite).arg(url_.fileName()));
+    kapp->setOverrideCursor(Qt::waitCursor);
     return false;
   }
 
@@ -195,7 +206,9 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
 #endif
     if(!uploaded) {
       tempfile.unlink();
-      KMessageBox::sorry(Kernel::self()->widget(), i18n(uploadError).arg(url_.fileName()));
+      kapp->restoreOverrideCursor();
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(errorUpload).arg(url_.fileName()));
+      kapp->setOverrideCursor(Qt::waitCursor);
       success = false;
     }
   }
@@ -216,9 +229,11 @@ bool FileHandler::writeTextFile(KSaveFile& f_, const QString& text_, bool encode
 //              << "-----------------------------" << endl;
   (*t) << text_;
   bool success = f_.close();
+#ifndef NDEBUG
   if(!success) {
     kdDebug() << "FileHandler::writeTextFile() - status = " << f_.status();
   }
+#endif
   return success;
 }
 
@@ -230,7 +245,9 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
   if(url_.isLocalFile()) {
     KSaveFile f(url_.path());
     if(f.status() != 0) {
-      KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(url_.fileName()));
+      kapp->restoreOverrideCursor();
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(errorWrite).arg(url_.fileName()));
+      kapp->setOverrideCursor(Qt::waitCursor);
       return false;
     }
     return FileHandler::writeDataFile(f, data_);
@@ -240,7 +257,9 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
   KTempFile tempfile;
   KSaveFile f(tempfile.name());
   if(f.status() != 0) {
-    KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(url_.fileName()));
+    kapp->restoreOverrideCursor();
+    KMessageBox::sorry(Kernel::self()->widget(), i18n(errorWrite).arg(url_.fileName()));
+    kapp->setOverrideCursor(Qt::waitCursor);
     return false;
   }
 
@@ -252,7 +271,9 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
     bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_);
 #endif
     if(!uploaded) {
-      KMessageBox::sorry(Kernel::self()->widget(), i18n(uploadError).arg(url_.fileName()));
+      kapp->restoreOverrideCursor();
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(errorUpload).arg(url_.fileName()));
+      kapp->setOverrideCursor(Qt::waitCursor);
       success = false;
     }
   }

@@ -14,10 +14,10 @@
 #include "importdialog.h"
 #include "mainwindow.h"
 #include "document.h"
-#include "kernel.h"
+#include "tellico_kernel.h"
 
 #include "translators/importer.h"
-#include "translators/bookcaseimporter.h"
+#include "translators/tellicoimporter.h"
 #include "translators/bibteximporter.h"
 #include "translators/bibtexmlimporter.h"
 #include "translators/csvimporter.h"
@@ -25,10 +25,12 @@
 #include "translators/audiofileimporter.h"
 #include "translators/alexandriaimporter.h"
 #include "translators/freedbimporter.h"
+#include "translators/risimporter.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
+#include <kmessagebox.h>
 
 #include <qlayout.h>
 #include <qbuttongroup.h>
@@ -38,11 +40,11 @@
 #include <qtimer.h>
 
 // really according to taste or computer speed
-const unsigned Bookcase::Import::Importer::s_stepSize = 20;
+const unsigned Tellico::Import::Importer::s_stepSize = 20;
 
-using Bookcase::ImportDialog;
+using Tellico::ImportDialog;
 
-ImportDialog::ImportDialog(ImportFormat format_, const KURL& url_, MainWindow* parent_, const char* name_)
+ImportDialog::ImportDialog(Import::Format format_, const KURL& url_, MainWindow* parent_, const char* name_)
     : KDialogBase(parent_, name_, true /*modal*/, i18n("Import Options"), Ok|Cancel),
       m_coll(0),
       m_importer(importer(format_, url_)) {
@@ -95,7 +97,7 @@ ImportDialog::~ImportDialog() {
   m_importer = 0;
 }
 
-Bookcase::Data::Collection* ImportDialog::collection() {
+Tellico::Data::Collection* ImportDialog::collection() {
   if(m_importer && !m_coll) {
     m_coll = m_importer->collection();
   }
@@ -106,63 +108,68 @@ QString ImportDialog::statusMessage() const {
   return m_importer ? m_importer->statusMessage() : QString::null;
 }
 
-ImportDialog::ImportAction ImportDialog::action() const {
+Tellico::Import::Action ImportDialog::action() const {
   if(m_radioReplace->isChecked()) {
-    return Replace;
+    return Import::Replace;
   } else if(m_radioAppend->isChecked()) {
-    return Append;
+    return Import::Append;
   } else {
-    return Merge;
+    return Import::Merge;
   }
 }
 
-Bookcase::Import::Importer* ImportDialog::importer(ImportFormat format_, const KURL& url_) {
+// static
+Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const KURL& url_) {
   Import::Importer* importer = 0;
   switch(format_) {
-    case BookcaseXML:
-      importer = new Import::BookcaseImporter(url_);
+    case Import::TellicoXML:
+      importer = new Import::TellicoImporter(url_);
       break;
 
-    case Bibtex:
+    case Import::Bibtex:
       importer = new Import::BibtexImporter(url_);
       break;
 
-    case Bibtexml:
+    case Import::Bibtexml:
       importer = new Import::BibtexmlImporter(url_);
       break;
 
-    case CSV:
+    case Import::CSV:
       importer = new Import::CSVImporter(url_);
       break;
 
-    case XSLT:
+    case Import::XSLT:
       importer = new Import::XSLTImporter(url_);
       break;
 
-    case MODS:
+    case Import::MODS:
       importer = new Import::XSLTImporter(url_);
       {
-        QString xsltFile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("mods2bookcase.xsl"));
+        QString xsltFile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
           KURL u;
           u.setPath(xsltFile);
           static_cast<Import::XSLTImporter*>(importer)->setXSLTURL(u);
         } else {
-          kdWarning() << "ImportDialog::importer - unable to find mods2bookcase.xml!" << endl;
+          kdWarning() << "ImportDialog::importer - unable to find mods2tellico.xml!" << endl;
         }
       }
       break;
 
-    case AudioFile:
+    case Import::AudioFile:
       importer = new Import::AudioFileImporter(url_);
       break;
 
-    case Alexandria:
+    case Import::Alexandria:
       importer = new Import::AlexandriaImporter();
       break;
 
-    case FreeDB:
+    case Import::FreeDB:
       importer = new Import::FreeDBImporter();
+      break;
+
+    case Import::RIS:
+      importer = new Import::RISImporter(url_);
       break;
 
     default:
@@ -170,7 +177,7 @@ Bookcase::Import::Importer* ImportDialog::importer(ImportFormat format_, const K
       break;
   }
 #ifndef NDEBUG
-  if(!m_importer) {
+  if(!importer) {
     kdWarning() << "ImportDialog::importer() - importer not created!" << endl;
   }
 #endif
@@ -178,33 +185,37 @@ Bookcase::Import::Importer* ImportDialog::importer(ImportFormat format_, const K
 }
 
 // static
-QString ImportDialog::fileFilter(ImportFormat format_) {
+QString ImportDialog::fileFilter(Import::Format format_) {
   QString text;
   switch(format_) {
-    case BookcaseXML:
-      text = i18n("*.bc|Tellico files (*.bc)") + QChar('\n');
+    case Import::TellicoXML:
+      text = i18n("*.bc *.tc|Tellico files (*.tc)") + QChar('\n');
       break;
 
-    case Bibtex:
+    case Import::Bibtex:
       text = i18n("*.bib|Bibtex files (*.bib)") + QChar('\n');
       break;
 
-    case CSV:
+    case Import::CSV:
       text = i18n("*.csv|CSV files (*.csv)") + QChar('\n');
       break;
 
-    case Bibtexml:
-    case XSLT:
+    case Import::Bibtexml:
+    case Import::XSLT:
       text = i18n("*.xml|XML files (*.xml)") + QChar('\n');
       break;
 
-    case MODS:
+    case Import::MODS:
       text = i18n("*.xml|XML files (*.xml)") + QChar('\n');
       break;
 
-    case AudioFile:
-    case Alexandria:
-    case FreeDB:
+    case Import::RIS:
+      text = i18n("*.ris|RIS files (*.ris)") + QChar('\n');
+      break;
+
+    case Import::AudioFile:
+    case Import::Alexandria:
+    case Import::FreeDB:
     default:
       break;
   }
@@ -215,15 +226,15 @@ QString ImportDialog::fileFilter(ImportFormat format_) {
 // audio files are imported by directory
 // alexandria is a defined location, as is freedb
 // all others are files
-ImportDialog::ImportTarget ImportDialog::importTarget(ImportFormat format_) {
+Tellico::Import::Target ImportDialog::importTarget(Import::Format format_) {
   switch(format_) {
-    case AudioFile:
-      return ImportDir;
-    case Alexandria:
-    case FreeDB:
-      return ImportNone;
+    case Import::AudioFile:
+      return Import::Dir;
+    case Import::Alexandria:
+    case Import::FreeDB:
+      return Import::None;
     default:
-      return ImportFile;
+      return Import::File;
   }
 }
 
@@ -234,5 +245,17 @@ void ImportDialog::slotUpdateAction() {
   QButtonGroup* bg = dynamic_cast<QButtonGroup*>(m_radioAppend->parentWidget());
   m_importer->slotActionChanged(bg->id(bg->selected()));
 }
+
+// static
+Tellico::Data::Collection* ImportDialog::importURL(Import::Format format_, const KURL& url_) {
+  Import::Importer* imp = importer(format_, url_);
+  Data::Collection* c = imp->collection();
+  if(!c && !imp->statusMessage().isEmpty()) {
+    KMessageBox::sorry(Kernel::self()->widget(), imp->statusMessage());
+  }
+  delete imp;
+  return c;
+}
+
 
 #include "importdialog.moc"

@@ -17,16 +17,14 @@
 #include <qptrlist.h>
 #include <qstring.h>
 
-static const int FILTER_MAX_RULES = 8;
-
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
     class Entry;
   }
 
 /**
  * @author Robby Stephenson
- * @version $Id: filter.h 722 2004-08-03 02:58:08Z robby $
+ * @version $Id: filter.h 929 2004-10-24 22:29:47Z robby $
  */
 class FilterRule {
 
@@ -96,7 +94,7 @@ private:
  * Borrows from KMSearchPattern by Marc Mutz
  *
  * @author Robby Stephenson
- * @version $Id: filter.h 722 2004-08-03 02:58:08Z robby $
+ * @version $Id: filter.h 929 2004-10-24 22:29:47Z robby $
  */
 class Filter : public QPtrList<FilterRule> {
 

@@ -16,7 +16,7 @@
 
 #include "../collection.h"
 
-namespace Bookcase {
+namespace Tellico {
   namespace Data {
 
 /**
@@ -30,7 +30,7 @@ namespace Bookcase {
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: videocollection.h 652 2004-05-11 04:57:03Z robby $
+ * @version $Id: videocollection.h 862 2004-09-15 01:49:51Z robby $
  */
 class VideoCollection : public Collection {
 Q_OBJECT

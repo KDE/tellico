@@ -13,9 +13,11 @@
 
 #include "fetchdialog.h"
 #include "fetch/fetchmanager.h"
+#include "fetch/fetcher.h"
 #include "entryview.h"
 #include "isbnvalidator.h"
-#include "kernel.h"
+#include "tellico_kernel.h"
+#include "filehandler.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -29,6 +31,7 @@
 #include <kiconloader.h>
 #include <kdialogbase.h>
 #include <kmessagebox.h>
+#include <kfiledialog.h>
 
 #include <qlayout.h>
 #include <qhbox.h>
@@ -37,56 +40,52 @@
 #include <qtimer.h>
 #include <qwhatsthis.h>
 #include <qcheckbox.h>
-#include <qtextedit.h>
 #include <qvbox.h>
+#include <qtimer.h>
 
-static const int FETCH_STATUS_ID = 0;
-static const int FETCH_PROGRESS_ID = 0;
-static const int FETCH_MIN_WIDTH = 600;
+namespace {
+  static const int FETCH_STATUS_ID = 0;
+  static const int FETCH_PROGRESS_ID = 0;
+  static const int FETCH_MIN_WIDTH = 600;
 
-static const char* FETCH_STRING_SEARCH = I18N_NOOP("&Search");
-static const char* FETCH_STRING_STOP   = I18N_NOOP("&Stop");
-
-using Bookcase::FetchDialog;
-
-FetchDialog::SearchResultItem::SearchResultItem(QListView* lv, const Fetch::SearchResult& r)
-    : QListViewItem(lv, QString::null, r.title, r.desc, r.fetcher->source()), m_result(r) {
+  static const char* FETCH_STRING_SEARCH = I18N_NOOP("&Search");
+  static const char* FETCH_STRING_STOP   = I18N_NOOP("&Stop");
 }
 
-FetchDialog::FetchDialog(Data::Collection* coll_, QWidget* parent_, const char* name_)
+using Tellico::FetchDialog;
+
+// always add to end
+FetchDialog::SearchResultItem::SearchResultItem(KListView* lv, const Fetch::SearchResult& r)
+    : KListViewItem(lv, lv->lastItem(), QString::null, r.title, r.desc, r.fetcher->source()), m_result(r) {
+}
+
+FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
     : KDialogBase(parent_, name_, false, i18n("Internet Search"), 0),
-      m_coll(coll_), m_timer(new QTimer(this)),
-      m_fetchManager(new Fetch::Manager(coll_, this)), m_started(false) {
+      m_timer(new QTimer(this)), m_started(false) {
+  m_entries.setAutoDelete(true);
   QWidget* mainWidget = new QWidget(this, "FetchDialog mainWidget");
   setMainWidget(mainWidget);
   QVBoxLayout* topLayout = new QVBoxLayout(mainWidget, 0, KDialog::spacingHint());
-//  mainWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
-//  setSizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
 
   QVGroupBox* queryBox = new QVGroupBox(i18n("Search Query"), mainWidget, "FetchDialog queryBox");
   topLayout->addWidget(queryBox);
 
   QHBox* box1 = new QHBox(queryBox, "FetchDialog box1");
   box1->setSpacing(KDialog::spacingHint());
-//  topLayout->addWidget(box1);
 
   (void) new QLabel(i18n("Search:"), box1);
 
   m_valueLineEdit = new KLineEdit(box1);
   QWhatsThis::add(m_valueLineEdit, i18n("Enter a search value. An ISBN search must include the full ISBN."));
   m_keyCombo = new KComboBox(box1);
-  // these should match FetcherKey enums in fetcher.h
-  m_keyCombo->insertItem(i18n("Title"));
-  m_keyCombo->insertItem(i18n("Person"));
-  m_keyCombo->insertItem(i18n("ISBN"));
-  m_keyCombo->insertItem(i18n("Keyword"));
-  // FIXME allow raw searches
-//  m_keyCombo->insertItem(i18n("Raw Query"));
-  m_keyCombo->setCurrentItem(2); // make ISBN the default
+  m_keyCombo->insertStringList(Fetch::Manager::self()->keys(QString::null));
   connect(m_keyCombo, SIGNAL(activated(const QString&)), SLOT(slotKeyChanged(const QString&)));
   QWhatsThis::add(m_keyCombo, i18n("Choose the type of search"));
 
-  m_searchButton = new KPushButton(i18n(FETCH_STRING_STOP), box1);
+  m_searchButton = new KPushButton(box1);
+  m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
+                             KGlobal::iconLoader()->loadIcon(QString::fromLatin1("cancel"),
+                                                             KIcon::Small)));
   connect(m_searchButton, SIGNAL(clicked()), SLOT(slotSearchClicked()));
   QWhatsThis::add(m_searchButton, i18n("Click to start or stop the search"));
 
@@ -94,8 +93,10 @@ FetchDialog::FetchDialog(Data::Collection* coll_, QWidget* parent_, const char* 
   // I don't want it resizing, so figure out the maximum size and set that
   m_searchButton->polish();
   int maxWidth = m_searchButton->sizeHint().width();
-  m_searchButton->setText(i18n(FETCH_STRING_SEARCH));
-  maxWidth = QMAX(maxWidth, m_searchButton->sizeHint().width());
+  m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
+                             KGlobal::iconLoader()->loadIcon(QString::fromLatin1("find"),
+                                                             KIcon::Small)));
+  maxWidth = KMAX(maxWidth, m_searchButton->sizeHint().width());
   m_searchButton->setMinimumWidth(maxWidth);
 
   QHBox* box2 = new QHBox(queryBox);
@@ -115,7 +116,8 @@ FetchDialog::FetchDialog(Data::Collection* coll_, QWidget* parent_, const char* 
 
   (void) new QLabel(i18n("Search Source:"), box2);
   m_sourceCombo = new KComboBox(box2);
-  m_sourceCombo->insertStringList(m_fetchManager->sources());
+  m_sourceCombo->insertStringList(Fetch::Manager::self()->sources());
+  connect(m_sourceCombo, SIGNAL(activated(const QString&)), SLOT(slotSourceChanged(const QString&)));
   QWhatsThis::add(m_sourceCombo, i18n("Select the database to search"));
 
   QSplitter* split = new QSplitter(QSplitter::Vertical, mainWidget);
@@ -175,30 +177,25 @@ FetchDialog::FetchDialog(Data::Collection* coll_, QWidget* parent_, const char* 
 
   connect(m_timer, SIGNAL(timeout()), SLOT(slotMoveProgress()));
 
-  setMinimumWidth(QMAX(minimumWidth(), FETCH_MIN_WIDTH));
+  setMinimumWidth(KMAX(minimumWidth(), FETCH_MIN_WIDTH));
   slotUpdateStatus(i18n("Ready."));
 
   resize(configDialogSize(QString::fromLatin1("Fetch Dialog Options")));
+
   KConfig* config = kapp->config();
   KConfigGroupSaver group(config, "Fetch Dialog Options");
   QValueList<int> splitList = config->readIntListEntry("Splitter Sizes");
   if(!splitList.empty()) {
     split->setSizes(splitList);
   }
-  QString key = config->readEntry("Search Key");
-  if(!key.isEmpty()) {
-    m_keyCombo->setCurrentText(key);
-  }
-  slotKeyChanged(m_keyCombo->currentText()); // be sure to initialize validator
-  QString source = config->readEntry("Search Source");
-  if(!source.isEmpty()) {
-    m_sourceCombo->setCurrentText(source);
-  }
 
-  connect(m_fetchManager, SIGNAL(signalResultFound(const Bookcase::Fetch::SearchResult&)),
-                          SLOT(slotResultFound(const Bookcase::Fetch::SearchResult&)));
-  connect(m_fetchManager, SIGNAL(signalStatus(const QString&)), SLOT(slotUpdateStatus(const QString&)));
-  connect(m_fetchManager, SIGNAL(signalDone()), SLOT(slotFetchDone()));
+  connect(Fetch::Manager::self(), SIGNAL(signalResultFound(const Tellico::Fetch::SearchResult&)),
+                          SLOT(slotResultFound(const Tellico::Fetch::SearchResult&)));
+  connect(Fetch::Manager::self(), SIGNAL(signalStatus(const QString&)), SLOT(slotUpdateStatus(const QString&)));
+  connect(Fetch::Manager::self(), SIGNAL(signalDone()), SLOT(slotFetchDone()));
+
+  // initialie combos
+  QTimer::singleShot(0, this, SLOT(slotInit()));
 }
 
 FetchDialog::~FetchDialog() {
@@ -213,25 +210,32 @@ FetchDialog::~FetchDialog() {
 
 void FetchDialog::slotSearchClicked() {
   if(m_started) {
-    m_fetchManager->stop();
+    Fetch::Manager::self()->stop();
     slotFetchDone();
   } else {
     m_started = true;
-    m_searchButton->setText(i18n(FETCH_STRING_STOP));
+    m_origCount = m_listView->childCount();
+    m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
+                               KGlobal::iconLoader()->loadIcon(QString::fromLatin1("cancel"),
+                                                               KIcon::Small)));
     startProgress();
 //    kapp->setOverrideCursor(Qt::waitCursor);
     slotUpdateStatus(i18n("Searching..."));
-    m_fetchManager->startSearch(m_sourceCombo->currentText(),
-                                static_cast<Fetch::FetchKey>(m_keyCombo->currentItem()),
-                                m_valueLineEdit->text().simplifyWhiteSpace());
+    kapp->processEvents();
+    bool multiple = m_multipleISBN->isEnabled() && m_multipleISBN->isChecked();
+    Fetch::Manager::self()->startSearch(m_sourceCombo->currentText(),
+                                        Fetch::Manager::fetchKey(m_keyCombo->currentText()),
+                                        m_valueLineEdit->text().simplifyWhiteSpace(),
+                                        multiple);
   }
 }
 
 void FetchDialog::slotClearClicked() {
   slotFetchDone();
+  m_origCount = 0;
   m_listView->clear();
   m_entryView->clear();
-  m_fetchManager->stop();
+  Fetch::Manager::self()->stop();
   m_valueLineEdit->clear();
   m_addButton->setEnabled(false);
   m_isbnList.clear();
@@ -245,10 +249,18 @@ void FetchDialog::slotUpdateStatus(const QString& status_) {
 void FetchDialog::slotFetchDone() {
 //  kdDebug() << "FetchDialog::slotFetchDone()" << endl;
   m_started = false;
-  m_searchButton->setText(i18n(FETCH_STRING_SEARCH));
+  m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
+                             KGlobal::iconLoader()->loadIcon(QString::fromLatin1("find"),
+                                                             KIcon::Small)));
   stopProgress();
 //  kapp->restoreOverrideCursor();
-  slotUpdateStatus(i18n("The search returned %1 item(s).").arg(m_listView->childCount()));
+  if(m_listView->childCount() == 0) {
+    slotUpdateStatus(i18n("The search returned no items."));
+  } else {
+    slotUpdateStatus(i18n("The search returned 1 item.",
+                          "The search returned %n items.",
+                          m_listView->childCount() - m_origCount));
+  }
 }
 
 void FetchDialog::slotResultFound(const Fetch::SearchResult& result_) {
@@ -269,7 +281,15 @@ void FetchDialog::slotAddEntry() {
     SearchResultItem* item = static_cast<SearchResultItem*>(it.current());
 
     const Fetch::SearchResult& r = item->m_result;
-    list.append(r.fetcher->fetchEntry(r.uid));
+    Data::Entry* entry = m_entries[r.uid];
+    if(!entry) {
+      entry = r.fetcher->fetchEntry(r.uid);
+    }
+    list.append(entry);
+    // remove it from the dict, since all left over get deleted
+    m_entries.setAutoDelete(false);
+    m_entries.remove(r.uid);
+    m_entries.setAutoDelete(true);
     item->setPixmap(0, KGlobal::iconLoader()->loadIcon(QString::fromLatin1("ok"), KIcon::Small));
   }
 
@@ -286,10 +306,13 @@ void FetchDialog::slotShowEntry(QListViewItem* item_) {
 
   m_addButton->setEnabled(true);
   SearchResultItem* item = static_cast<SearchResultItem*>(item_);
-  //FIXME: these entries should be cached and saved
   const Fetch::SearchResult& r = item->m_result;
   slotUpdateStatus(i18n("Fetching %1...").arg(r.title));
-  Data::Entry* entry = r.fetcher->fetchEntry(r.uid);
+  Data::Entry* entry = m_entries[r.uid];
+  if(!entry) {
+    entry = r.fetcher->fetchEntry(r.uid);
+    m_entries.insert(r.uid, entry);
+  }
   slotUpdateStatus(i18n("Ready."));
 
   m_entryView->showEntry(entry);
@@ -309,16 +332,54 @@ void FetchDialog::stopProgress() {
   m_progress->hide();
 }
 
+void FetchDialog::slotInit() {
+  if(!Fetch::Manager::self()->canFetch()) {
+    m_searchButton->setEnabled(false);
+    KMessageBox::sorry(this, i18n("No Internet sources are available for your current collection type."));
+  }
+
+  KConfig* config = kapp->config();
+  KConfigGroupSaver group(config, "Fetch Dialog Options");
+  QString key = config->readEntry("Search Key");
+  // only change key if valid
+  if(!key.isEmpty() && Fetch::Manager::self()->fetchKey(key) != Fetch::FetchFirst) {
+    slotKeyChanged(key);
+    m_keyCombo->setCurrentText(key);
+  }
+  // only change source if a fetcher by that name exists
+  QString source = config->readEntry("Search Source");
+  if(!source.isEmpty() && Fetch::Manager::self()->sources().findIndex(source) > -1) {
+    slotSourceChanged(source);
+    m_sourceCombo->setCurrentText(source);
+  }
+
+  m_valueLineEdit->setFocus();
+  m_searchButton->setDefault(true);
+}
+
 void FetchDialog::slotKeyChanged(const QString& key_) {
   if(key_ == i18n("ISBN")) {
     m_multipleISBN->setEnabled(true);
-    if(m_coll->type() == Data::Collection::Book || m_coll->type() == Data::Collection::Bibtex) {
+    if(Kernel::self()->collection()->type() == Data::Collection::Book
+       || Kernel::self()->collection()->type() == Data::Collection::Bibtex) {
       m_valueLineEdit->setValidator(new ISBNValidator(this));
     }
   } else {
     m_multipleISBN->setEnabled(false);
     m_valueLineEdit->setValidator(0);
   }
+}
+
+void FetchDialog::slotSourceChanged(const QString& source_) {
+  QString s = m_keyCombo->currentText();
+  m_keyCombo->clear();
+  QStringList sources = Fetch::Manager::self()->keys(source_);
+  m_keyCombo->insertStringList(sources);
+  int idx = sources.findIndex(s);
+  if(idx > -1) {
+    m_keyCombo->setCurrentItem(idx);
+  }
+  slotKeyChanged(m_keyCombo->currentText());
 }
 
 void FetchDialog::slotMultipleISBN(bool toggle_) {
@@ -332,35 +393,50 @@ void FetchDialog::slotEditMultipleISBN() {
 
   QVBox* box = new QVBox(dlg);
   box->setSpacing(10);
-  (void) new QLabel(i18n("<qt>Enter the ISBN values, one per line, up to a maximum of 10 values.</qt>"), box);
-  QTextEdit* textEdit = new QTextEdit(box, "isbn text edit");
-  textEdit->setText(m_isbnList.join(QChar('\n')));
-  QWhatsThis::add(textEdit, i18n("<qt>Enter the ISBN values, one per line, up to a maximum of 10 values.</qt>"));
+  (void) new QLabel(i18n("<qt>Enter the ISBN values, one per line.</qt>"), box);
+  m_isbnTextEdit = new KTextEdit(box, "isbn text edit");
+  m_isbnTextEdit->setText(m_isbnList.join(QChar('\n')));
+  QWhatsThis::add(m_isbnTextEdit, i18n("<qt>Enter the ISBN values, one per line.</qt>"));
+  KPushButton* fromFileBtn = new KPushButton(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("fileopen"), KIcon::Small), i18n("Load From File"), box);
+  QWhatsThis::add(fromFileBtn, i18n("<qt>Load the ISBN list from a text file.</qt>"));
+  connect(fromFileBtn, SIGNAL(clicked()), SLOT(slotLoadISBNList()));
   dlg->setMainWidget(box);
 
   if(dlg->exec() == QDialog::Accepted) {
-    m_isbnList = QStringList::split('\n', textEdit->text());
+    m_isbnList = QStringList::split('\n', m_isbnTextEdit->text());
     const QValidator* val = m_valueLineEdit->validator();
     if(val) {
       for(QStringList::Iterator it = m_isbnList.begin(); it != m_isbnList.end(); ++it) {
         val->fixup(*it);
         if((*it).isEmpty()) {
           it = m_isbnList.remove(it);
+          // this is next item, shift backward
+          --it;
         }
       }
     }
-    // Amazon is limited to 10 queries for a 'heavy' type search
-    if(m_isbnList.count() > 10) {
-      KMessageBox::sorry(Kernel::self()->widget(), i18n("<qt>Because of restrictions with the Amazon.com Web Services, "
-                                                        "a search can contain a maximum of 10 ISBN values. Only the first "
-                                                        "10 values in your list will be used.</qt>"));
+    if(m_isbnList.count() > 100) {
+      KMessageBox::sorry(Kernel::self()->widget(), i18n("<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
+                                                        "100 values in your list will be used.</qt>"));
     }
-    while(m_isbnList.count() > 10) {
+    while(m_isbnList.count() > 100) {
       m_isbnList.pop_back();
     }
     m_valueLineEdit->setText(m_isbnList.join(QString::fromLatin1("; ")));
   }
   dlg->delayedDestruct();
+}
+
+void FetchDialog::slotLoadISBNList() {
+  if(!m_isbnTextEdit) {
+    return;
+  }
+  KURL u = KFileDialog::getOpenURL(QString::null, QString::null, this);
+  if(u.isValid()) {
+    m_isbnTextEdit->setText(m_isbnTextEdit->text() + FileHandler::readTextFile(u));
+    m_isbnTextEdit->moveCursor(QTextEdit::MoveEnd, false);
+    m_isbnTextEdit->scrollToBottom();
+  }
 }
 
 #include "fetchdialog.moc"

@@ -5,7 +5,14 @@ noinst_LIBRARIES = libtranslators.a
 
 libtranslators_a_METASOURCES = AUTO
 
-libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp
+libtranslators_a_SOURCES = \
+pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp \
+tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp \
+bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp \
+bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp \
+xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp \
+alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp \
+risimporter.cpp freedb_util.cpp tellico_xml.cpp
 
 SUBDIRS = pilotdb
 
@@ -13,10 +20,12 @@ if !USE_LIBBTPARSE
   SUBDIRS += btparse
 endif
 
+CLEANFILES = *~
+
 EXTRA_DIST = bibtex-translation.xml \
-bibtexexporter.cpp       bookcasexmlexporter.h    pilotdbexporter.cpp \
-bibtexexporter.h         bookcasezipexporter.cpp  pilotdbexporter.h \
-bibtexhandler.cpp        bookcasezipexporter.h    textexporter.h \
+bibtexexporter.cpp       tellicoxmlexporter.h     pilotdbexporter.cpp \
+bibtexexporter.h         tellicozipexporter.cpp   pilotdbexporter.h \
+bibtexhandler.cpp        tellicozipexporter.h     textexporter.h \
 bibtexhandler.h          csvexporter.cpp          textimporter.cpp \
 bibteximporter.cpp       csvexporter.h            textimporter.h \
 bibteximporter.h         csvimporter.cpp          xmlimporter.cpp \
@@ -24,12 +33,14 @@ bibtexmlexporter.cpp     csvimporter.h            xmlimporter.h \
 bibtexmlexporter.h       dataexporter.h           xsltexporter.cpp \
 bibtexmlimporter.cpp     dataimporter.h           xsltexporter.h \
 bibtexmlimporter.h       exporter.h               xslthandler.cpp \
-bookcaseimporter.cpp     htmlexporter.cpp         xslthandler.h \
-bookcaseimporter.h       htmlexporter.h           xsltimporter.cpp \
-bookcasexmlexporter.cpp  importer.h               xsltimporter.h \
+tellicoimporter.cpp      htmlexporter.cpp         xslthandler.h \
+tellicoimporter.h        htmlexporter.h           xsltimporter.cpp \
+tellicoxmlexporter.cpp   importer.h               xsltimporter.h \
 audiofileimporter.h      audiofileimporter.cpp    alexandriaimporter.h \
 alexandriaimporter.cpp   alexandriaexporter.h     alexandriaexporter.cpp \
-freedbimporter.h         freedbimporter.cpp
+freedbimporter.h         freedbimporter.cpp       freedb_util.cpp \
+risimporter.h            risimporter.cpp          tellico_xml.h \
+tellico_xml.cpp          translators.h
 
 ####### kdevelop will overwrite this part!!! (end)############
 

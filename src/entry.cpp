@@ -19,7 +19,7 @@
 
 #include <qregexp.h>
 
-using Bookcase::Data::Entry;
+using Tellico::Data::Entry;
 
 Entry::Entry(Collection* coll_) : m_coll(coll_) {
   if(!coll_) {
@@ -27,19 +27,31 @@ Entry::Entry(Collection* coll_) : m_coll(coll_) {
     m_id = -1;
     return;
   }
-  m_id = coll_->entryCount();
+  m_id = coll_->nextEntryId();
 }
 
 Entry::Entry(const Entry& entry_) :
     m_coll(entry_.m_coll),
-    m_id(entry_.m_coll->entryCount()),
+    m_id(entry_.m_coll->nextEntryId()),
     m_fields(entry_.m_fields) {
 }
 
 Entry::Entry(const Entry& entry_, Collection* coll_) :
     m_coll(coll_),
-    m_id(coll_->entryCount()),
+    m_id(coll_->nextEntryId()),
     m_fields(entry_.m_fields) {
+  // merge fields from old collection
+  for(FieldListIterator it(entry_.collection()->fieldList()); it.current(); ++it) {
+    // only add field if there's a value in the collection
+    if(!entry_.field(it.current()->name()).isEmpty()) {
+      coll_->mergeField(it.current());
+    }
+  }
+  // special case for adding a book entry to a bibliography
+  if(m_coll->type() == Collection::Bibtex && entry_.collection()->type() == Collection::Book
+     && field(QString::fromLatin1("entry-type")).isEmpty()) {
+    setField(QString::fromLatin1("entry-type"), QString::fromLatin1("book"));
+  }
 }
 
 QString Entry::title() const {

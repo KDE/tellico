@@ -26,9 +26,9 @@
 #include <qradiobutton.h>
 #include <qwhatsthis.h>
 
-using Bookcase::Export::CSVExporter;
+using Tellico::Export::CSVExporter;
 
-CSVExporter::CSVExporter(const Data::Collection* coll_) : Bookcase::Export::TextExporter(coll_),
+CSVExporter::CSVExporter(const Data::Collection* coll_) : Tellico::Export::TextExporter(coll_),
     m_includeTitles(true),
     m_delimiter(QString::fromLatin1(",")),
     m_widget(0) {
@@ -134,13 +134,13 @@ void CSVExporter::saveOptions(KConfig* config_) {
 QString CSVExporter::text(bool formatFields_, bool) {
   QString text;
 
-  Data::FieldListIterator attIt(collection()->fieldList());
+  Data::FieldListIterator fIt(collection()->fieldList());
 
   if(m_includeTitles) {
-    for(attIt.toFirst(); attIt.current(); ++attIt) {
-      QString title = attIt.current()->title();
+    for(fIt.toFirst(); fIt.current(); ++fIt) {
+      QString title = fIt.current()->title();
       text += escapeText(title);
-      if(!attIt.atLast()) {
+      if(!fIt.atLast()) {
         text += m_delimiter;
       }
     }
@@ -149,18 +149,18 @@ QString CSVExporter::text(bool formatFields_, bool) {
 
   QString tmp;
   for(Data::EntryListIterator entryIt(entryList()); entryIt.current(); ++entryIt) {
-    for(attIt.toFirst() ; attIt.current(); ++attIt) {
+    for(fIt.toFirst() ; fIt.current(); ++fIt) {
       if(formatFields_) {
-        tmp = entryIt.current()->formattedField(attIt.current()->name());
+        tmp = entryIt.current()->formattedField(fIt.current()->name());
       } else {
-        tmp = entryIt.current()->field(attIt.current()->name());
+        tmp = entryIt.current()->field(fIt.current()->name());
       }
       text += escapeText(tmp);
-      if(!attIt.atLast()) {
+      if(!fIt.atLast()) {
         text += m_delimiter;
       }
     }
-    attIt.toFirst();
+    fIt.toFirst();
     text += QString::fromLatin1("\n");
   }
 

@@ -7,7 +7,7 @@
 #include <kdebug.h>
 
 bool check(QString a, QString b) {
-  static const Bookcase::ISBNValidator val(0);
+  static const Tellico::ISBNValidator val(0);
   val.fixup(a);
   if(a == b) {
     kdDebug() << "checking '" << a << "' against expected value '" << b << "'... " << "ok" << endl;
@@ -18,24 +18,8 @@ bool check(QString a, QString b) {
   return true;
 }
 
-bool check(QString a, QString b, QValidator::State expect) {
-  static const Bookcase::ISBNValidator val(0);
-  // enum State { Invalid, Intermediate, Valid=Intermediate, Acceptable };
-  static char* s[] = {"Invalid", "Intermediate", "Acceptable"};
-
-  int i;
-  QValidator::State result = val.validate(a, i);
-  if(result == expect) {
-    kdDebug() << a << " : got expected value '" << s[result] << "'... " << "ok" << endl;
-  } else {
-    kdDebug() << a << " : expected '" << s[expect] << "', got '" << s[result] << "'... " << "KO!" << endl;
-    exit(1);
-  }
-  return true;
-}
-
 int main(int, char**) {
-  kdDebug() << "\n*****************************************************\n" << endl;
+  kdDebug() << "\n*****************************************************" << endl;
 
   // initial checks
   check("0-446-60098-9", "0-446-60098-9");
@@ -60,12 +44,6 @@ int main(int, char**) {
   // check garbage
   check("My name is robby", "");
   check("http://www.abclinuxu.cz/clanky/show/63080", "6-3080");
-
-//  check("0-446-60098-9", "0-446-60098-9", QValidator::Acceptable);
-//  check("0-446-60098", QValidator::Intermediate);
-//  check("", QValidator::Intermediate);
-//  check("0X", QValidator::Intermediate);
-//  check("0X-", QValidator::Invalid);
 
   kdDebug() << "\n ISBN Validator Test OK !" << endl;
   kdDebug() << "\n*****************************************************" << endl;

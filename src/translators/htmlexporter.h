@@ -20,12 +20,12 @@ class QCheckBox;
 
 #include <qstringlist.h>
 
-namespace Bookcase {
+namespace Tellico {
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: htmlexporter.h 759 2004-08-11 01:28:25Z robby $
+ * @version $Id: htmlexporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class HTMLExporter : public TextExporter {
 public:

@@ -26,10 +26,12 @@
 #include <qdragobject.h>
 #include <qapplication.h> // needed for drag distance
 
-static const uint button_margin = 8;
-static const uint image_margin = 4;
+namespace {
+  static const uint button_margin = 8;
+  static const uint image_margin = 4;
+}
 
-using Bookcase::ImageWidget;
+using Tellico::ImageWidget;
 
 ImageWidget::ImageWidget(QWidget* parent_, const char* name_) : QWidget(parent_, name_) {
   QHBoxLayout* l = new QHBoxLayout(this);

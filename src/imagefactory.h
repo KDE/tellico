@@ -21,11 +21,11 @@
 
 #include <qdict.h>
 
-namespace Bookcase {
+namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imagefactory.h 669 2004-05-20 04:04:00Z robby $
+ * @version $Id: imagefactory.h 862 2004-09-15 01:49:51Z robby $
  */
 class ImageFactory {
 public:

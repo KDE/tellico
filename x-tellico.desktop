@@ -1,8 +1,9 @@
 [Desktop Entry]
+Encoding=UTF-8
 Comment=Tellico Data File
 DefaultApp=tellico
 Icon=tellico.png
 MimeType=application/x-tellico
-Patterns=*.bc;
+Patterns=*.bc;*.tc;
 Type=MimeType
 X-KDE-AutoEmbed=false

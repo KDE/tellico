@@ -16,12 +16,14 @@
 
 #include <klocale.h>
 
-using Bookcase::Data::BookCollection;
+namespace {
+  static const char* book_general = I18N_NOOP("General");
+  static const char* book_publishing = I18N_NOOP("Publishing");
+  static const char* book_classification = I18N_NOOP("Classification");
+  static const char* book_personal = I18N_NOOP("Personal");
+}
 
-static const char* book_general = I18N_NOOP("General");
-static const char* book_publishing = I18N_NOOP("Publishing");
-static const char* book_classification = I18N_NOOP("Classification");
-static const char* book_personal = I18N_NOOP("Personal");
+using Tellico::Data::BookCollection;
 
 BookCollection::BookCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(Book), i18n("Books")) {
@@ -32,7 +34,7 @@ BookCollection::BookCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("author"));
 }
 
-Bookcase::Data::FieldList BookCollection::defaultFields() {
+Tellico::Data::FieldList BookCollection::defaultFields() {
   FieldList list;
   Field* field;
 

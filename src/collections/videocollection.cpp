@@ -18,12 +18,14 @@
 
 #include <qregexp.h>
 
-using Bookcase::Data::VideoCollection;
+namespace {
+  static const char* video_general = I18N_NOOP("General");
+  static const char* video_people = I18N_NOOP("Other People");
+  static const char* video_features = I18N_NOOP("Features");
+  static const char* video_personal = I18N_NOOP("Personal");
+}
 
-static const char* video_general = I18N_NOOP("General");
-static const char* video_people = I18N_NOOP("Other People");
-static const char* video_features = I18N_NOOP("Features");
-static const char* video_personal = I18N_NOOP("Personal");
+using Tellico::Data::VideoCollection;
 
 VideoCollection::VideoCollection(bool addFields_, const QString& title_ /*=null*/)
    : Collection(title_, CollectionFactory::entryName(Video), i18n("Videos")) {
@@ -34,7 +36,7 @@ VideoCollection::VideoCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("genre"));
 }
 
-Bookcase::Data::FieldList VideoCollection::defaultFields() {
+Tellico::Data::FieldList VideoCollection::defaultFields() {
   FieldList list;
   Field* field;
 
@@ -58,8 +60,8 @@ Bookcase::Data::FieldList VideoCollection::defaultFields() {
 
   QStringList cert = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
                                         i18n("_:Movie ratings\n"
-                                             "G (USA),PG (USA),PG-13 (USA),R (USA)",
-                                             "G (USA),PG (USA),PG-13 (USA),R (USA)"),
+                                             "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
+                                             "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"),
                                         false);
   field = new Field(QString::fromLatin1("certification"), i18n("Certification"), cert);
   field->setCategory(i18n(video_general));
@@ -155,7 +157,6 @@ Bookcase::Data::FieldList VideoCollection::defaultFields() {
 
   field = new Field(QString::fromLatin1("running-time"), i18n("Running Time"), Field::Number);
   field->setCategory(i18n(video_features));
-
   field->setDescription(i18n("The running time of the video (in minutes)"));
   list.append(field);
 

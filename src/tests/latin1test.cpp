@@ -8,7 +8,7 @@
 #include <assert.h>
 
 int main(int, char**) {
-  kdDebug() << "\n*****************************************************\n" << endl;
+  kdDebug() << "\n*****************************************************" << endl;
 
   assert(QString::null == Latin1Literal(0));
   assert(QString::null != Latin1Literal(""));
