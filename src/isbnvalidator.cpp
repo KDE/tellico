@@ -9,9 +9,8 @@
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
  ***************************************************************************/
 
@@ -38,12 +37,13 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
   // only allow up to a single "X" or "x"
   // the "X" or "x" can only be the last character
   // only allow up to 10 digits
-  QRegExp validChars("[\\d-Xx]{0,13}");
+  QRegExp validChars(QString::fromLatin1("[\\d-Xx]{0,13}"));
   if(!validChars.exactMatch(input_)
-      || input_.contains("-") > 3
-      || input_.contains("X", false) > 1
-      || (input_.find("X", 0, false) != -1 && input_.find("X", 0, false) < input_.length()-1)
-      || input_.contains(QRegExp("\\d")) > 10) {
+      || input_.contains(QString::fromLatin1("-")) > 3
+      || input_.contains(QString::fromLatin1("X"), false) > 1
+      || (input_.find(QString::fromLatin1("X"), 0, false) != -1
+          && input_.find(QString::fromLatin1("X"), 0, false) < input_.length()-1)
+      || input_.contains(QRegExp(QString::fromLatin1("\\d"))) > 10) {
     return QValidator::Invalid;
   }
   // remember if the cursor is at the end
@@ -51,15 +51,15 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
   // fix the case where the user attempts to delete a character from a non-checksum
   // position; the solution is to delete the checksum, but only if it's X
   if(pos_ != input_.length()
-      && input_.contains(QRegExp("-[Xx]"))) {
-    input_ = input_.left(input_.length()-2);
+      && input_.contains(QRegExp(QString::fromLatin1("-[Xx]$")))) {
+    input_.truncate(input_.length()-2);
   }
   // fix the case where the user attempts to delete the checksum; the
   // solution is to delete the last digit as well
   if(pos_ == input_.length()
-      && input_.contains(QRegExp("\\d")) == 9
+      && input_.contains(QRegExp(QString::fromLatin1("\\d"))) == 9
       && input_[pos_-1] == '-') {
-    input_ = input_.left(input_.length()-2);
+    input_.truncate(input_.length()-2);
     pos_ -= 2;
   }
   // now fixup the hyphens and maybe add a checksum
@@ -68,7 +68,7 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
     pos_ = input_.length();
   }
   
-  QRegExp re("(\\d-?){9}[\\dX]");
+  QRegExp re(QString::fromLatin1("(\\d-?){9}[\\dX]"));
   if(re.exactMatch(input_)) {
     return QValidator::Acceptable;
   } else {
@@ -78,9 +78,9 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
 
 void ISBNValidator::fixup(QString& input_) const {
   //replace "x" with "X"
-  input_.replace(QRegExp("x"), "X");
+  input_.replace(QRegExp(QString::fromLatin1("x")), QString::fromLatin1("X"));
   // remove dashes
-  input_.replace(QRegExp("-"), "");
+  input_.replace(QRegExp(QString::fromLatin1("-")), QString());
   // only add the checksum if more than 8 digits are present
   if(input_.length() > 8) {
     checkSum(input_);
@@ -89,11 +89,6 @@ void ISBNValidator::fixup(QString& input_) const {
 }
 
 void ISBNValidator::checkSum(QString& input_) const {
-  // should never happen, but check
-  if(input_.length() < 9) {
-    kdDebug() << "ISBNValidator::checkSum() - less than 9 digits." << endl;
-    return;
-  }
   int sum = 0;
   int multiplier = 10;
 
@@ -104,9 +99,9 @@ void ISBNValidator::checkSum(QString& input_) const {
   sum %= 11;
   sum = 11-sum;
   if(sum == 10) {
-    input_.append("X");
+    input_.append(QString::fromLatin1("X"));
   } else if(sum == 11) {
-    input_.append("0");
+    input_.append(QString::fromLatin1("0"));
   } else {
     input_.append(QString::number(sum));
   }
@@ -228,21 +223,21 @@ void ISBNValidator::insertDashes(QString& input_) const{
       break;
     }
   if(input_.length() > whereFirstDash) {
-    input_.insert(whereFirstDash, "-");
+    input_.insert(whereFirstDash, QString::fromLatin1("-"));
     // 0 means the middle dash is not to be inserted
     if(whereMidDash > 0) {
-      whereMidDash++;
+      ++whereMidDash;
     }
-    whereLastDash++;
+    ++whereLastDash;
   }
   if(whereMidDash > 0 && input_.length() > whereMidDash) {
     //add 1 since one "-" has already been inserted
-    input_.insert(whereMidDash, "-");
-    whereLastDash++;
+    input_.insert(whereMidDash, QString::fromLatin1("-"));
+    ++whereLastDash;
   }
   // add a "-" before the checkdigit
   if(input_.length() > whereLastDash) {
-    input_.insert(whereLastDash, "-");
+    input_.insert(whereLastDash, QString::fromLatin1("-"));
   }
 }
 
@@ -287,7 +282,7 @@ void ISBNValidator::buildValidGroupLookup() {
 
 /* List of legal groups as of 5 October 2002
    Taken from http://www.isbn.spk-berlin.de/html/prefix/allpref.htm  */
-const int ISBNValidator::validGroups[] = {
+const long ISBNValidator::validGroups[] = {
       0,
       1,
       2,
@@ -429,6 +424,6 @@ const int ISBNValidator::validGroups[] = {
       99940
    };
 
-const int ISBNValidator::numGroups = sizeof(ISBNValidator::validGroups)/sizeof(int);
+const int ISBNValidator::numGroups = sizeof(ISBNValidator::validGroups)/sizeof(long);
 
 #endif

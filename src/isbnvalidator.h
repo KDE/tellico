@@ -9,9 +9,8 @@
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
  ***************************************************************************/
 
@@ -23,7 +22,7 @@
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h,v 1.7 2002/11/26 05:46:19 robby Exp $
+ * @version $Id: isbnvalidator.h,v 1.9 2003/03/08 18:24:47 robby Exp $
  *
  * Parts of this card are based on Java code
  * copyright (c) 1998-2002 Roedy Green, Canadian Mind Products which
@@ -59,7 +58,8 @@ public:
   void fixup(QString& input) const;
 
 private:
-  /** This function calculates the checksum and adds it to the number. The
+  /**
+   * This function calculates the checksum and adds it to the number. The
    * algorithm is based on some code by Andrew Plotkin, available at 
    * http://www.eblong.com/zarf/bookscan/
    *
@@ -122,7 +122,7 @@ private:
 
   QBitArray validGroupLookup;
 
-  static const int validGroups[];
+  static const long validGroups[];
   static const int numGroups;
 #endif
 };

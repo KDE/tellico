@@ -1,22 +1,23 @@
-/* *************************************************************************
+/***************************************************************************
                                bccollection.h
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BCCOLLECTION_H
 #define BCCOLLECTION_H
+
+class BCCollection;
 
 #include "bcattribute.h"
 #include "bcunitgroup.h"
@@ -28,6 +29,8 @@
 #include <qobject.h>
 
 typedef QDict<BCUnitGroup> BCUnitGroupDict;
+typedef QPtrList<BCCollection> BCCollectionList;
+typedef QPtrListIterator<BCCollection> BCCollectionListIterator;
 
 /**
  * The BCCollection class is the primary data object, holding a list of attributes and units.
@@ -41,29 +44,40 @@ typedef QDict<BCUnitGroup> BCUnitGroupDict;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bccollection.h,v 1.26 2002/11/25 00:56:22 robby Exp $
+ * @version $Id: bccollection.h,v 1.34 2003/03/08 18:24:47 robby Exp $
  */
 class BCCollection : public QObject {
 Q_OBJECT
 
 public:
+  enum CollectionType {
+    Base = 1,
+    Book = 2,
+    Video = 3,
+    Song = 4
+  };
+
   /**
    * The constructor is only used to create custom collections. It adds a title attribute,
-   * in the "General" group, and sets the unitGroupAttribute to a NULL pointer.
+   * in the "General" group. The iconName is set to be the unitName;
    *
    * @param id The id of the collection, which should be unique. The collection
    *            does not itself guarantee uniqueness.
    * @param title The title of the collection itself
    * @param unitName The name of the units that the collection holds (not translated)
    * @param unitTitle The title of the units, which can be translated
-   * @param iconName The name of the icon used to represent the units in the collection
    */
-  BCCollection(int id, const QString& title, const QString& unitName,
-               const QString& unitTitle, const QString& iconName=QString("unknown"));
+  BCCollection(int id, const QString& title, const QString& unitName, const QString& unitTitle);
   /**
    */
   ~BCCollection();
 
+  /**
+   * Returns the type of the collection.
+   *
+   * @return The type
+   */
+  virtual BCCollection::CollectionType collectionType() const;
   /**
    * Returns the id of the collection.
    *
@@ -83,13 +97,15 @@ public:
    */
   void setTitle(const QString& title);
   /**
-   * Returns the name of the units in the collection.
+   * Returns the name of the units in the collection, e.g. "book".
+   * Not translated.
    *
    * @return The unit name
    */
   const QString& unitName() const;
   /**
-   * Returns the title of the units in the collection.
+   * Returns the title of the units in the collection, e.g. "Book".
+   * Translated.
    *
    * @return The unit title
    */
@@ -117,7 +133,14 @@ public:
    *
    * @return The list of attributes
    */
-  const QPtrList<BCAttribute>& attributeList() const;
+  const BCAttributeList& attributeList() const;
+  /**
+   * Returns a list of all the attributes, filtered by its flags.
+   *
+   * @param filter The filter
+   * @return The list of attributes
+   */
+  BCAttributeList attributeList(int filter) const;
   /**
    * Returns a reference to the list of attribute groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.
@@ -190,19 +213,29 @@ public:
   /**
    * Returns a list of all the attribute names.
    *
-   * @param all Whether all attributes should be included or only those which have the
-   *            visible flag set
    * @return The list of names
    */
-  QStringList attributeNames(bool all=true) const;
+  QStringList attributeNames() const;
   /**
    * Returns a list of all the attribute titles.
    *
-   * @param all Whether all attributes should be included or only those which have the
-   *            visible flag set
    * @return The list of titles
    */
-  QStringList attributeTitles(bool all=true) const;
+  QStringList attributeTitles() const;
+  /**
+   * Returns the title of an attribute, given its name.
+   *
+   * @param name The attribute name
+   * @return The attribute title
+   */
+  const QString& attributeTitleByName(const QString& name) const;
+  /**
+   * Returns the name of an attribute, given its title.
+   *
+   * @param name The attribute title
+   * @return The attribute name
+   */
+  const QString& attributeNameByTitle(const QString& title) const;
   /**
    * Returns a list of the values of a given attribute for every unit
    * in the collection. The values in the list are not repeated. Attribute
@@ -219,7 +252,7 @@ public:
    * @param category The name of the category
    * @return The attribute list
    */
-  QPtrList<BCAttribute> attributesByCategory(const QString& category) const;
+  BCAttributeList attributesByCategory(const QString& category) const;
   /**
    * Returns a pointer to an attribute given its name. If none is found, a NULL pointer
    * is returned.
@@ -227,7 +260,15 @@ public:
    * @param name The attribute name
    * @return The attribute pointer
    */
-  BCAttribute* attributeByName(const QString& name) const;
+  BCAttribute* const attributeByName(const QString& name) const;
+  /**
+   * Returns a pointer to an attribute given its title. If none is found, a NULL pointer
+   * is returned. This lookup is slower than by name.
+   *
+   * @param name The attribute title
+   * @return The attribute pointer
+   */
+  BCAttribute* const attributeByTitle(const QString& title) const;
   /**
    * Returns a list of all the possible unit groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.
@@ -242,7 +283,7 @@ public:
    * @param name The name of the attribute by which the units are grouped
    * @return The list of group names
    */
-  BCUnitGroupDict* unitGroupDictByName(const QString& name) const;
+  BCUnitGroupDict* const unitGroupDictByName(const QString& name) const;
   /**
    * A helper method to emit @ref signalGroupModified, since signals are not public
    * This typically gets called via a unit.
@@ -250,75 +291,30 @@ public:
    * @param group The group that was modified
    */
   void groupModified(BCUnitGroup* group);
+  /**
+   * Returns if it is a collection of books
+   */
+  virtual bool isBook() const;
+  /**
+   * Returns if it is a collection of songs
+   */
+  virtual bool isSong() const;
+  /**
+   * Returns if it is a collection of videos
+   */
+  virtual bool isVideo() const;
 
   /**
-   * Returns the string used for empty values.
+   * Returns the string used for empty values. This forces consistency.
    *
    * @return The empty string
    */
   static QString emptyGroupName();
-  /**
-   * A convenience function to return a pointer a the standard book collection.
-   * It has the following attributes:
-   * @li Title
-   * @li Subtitle
-   * @li Author
-   * @li Binding
-   * @li Purchase Date
-   * @li Purchase Price
-   * @li Publisher
-   * @li Edition
-   * @li Copyright Year
-   * @li Publication Year
-   * @li ISBN Number
-   * @li Library of Congress Catalog Number
-   * @li Pages
-   * @li Language
-   * @li Genre
-   * @li Keywords
-   * @li Series
-   * @li Series Number
-   * @li Condition
-   * @li Signed
-   * @li Read
-   * @li Gift
-   * @li Loaned
-   * @li Rating
-   * @li Comments
-   *
-   * @param id The id for the collection
-   */
-  static BCCollection* Books(int id);
-#if 0
-  /**
-   * A convenience function to return a pointer to a standard CD collection.
-   * It has the following attributes:
-   * @li Title
-   * @li Artist
-   * @li Year
-   * @li Genre
-   * @li Comments
-   *
-   * @param id The id for the collection
-   */
-  static BCCollection* CDs(int id);
-  /**
-   * A convenience function to return a pointer to a standard video collection.
-   * It has the following attributes:
-   * @li Title
-   * @li Year
-   * @li Medium
-   * @li Comments
-   *
-   * @param id The id for the collection
-   */
-  static BCCollection* Videos(int id);
-#endif
 
 signals:
   void signalGroupModified(BCCollection* coll, BCUnitGroup* group);
   
-private:
+protected:
   /**
    * The copy constructor is private, to ensure that it's never used.
    */
@@ -338,8 +334,9 @@ private:
   QString m_defaultGroupAttribute;
   bool m_isCustom;
   
-  QPtrList<BCAttribute> m_attributeList;
-  QDict<BCAttribute> m_attributeDict;
+  BCAttributeList m_attributeList;
+  QDict<BCAttribute> m_attributeNameDict;
+  QDict<BCAttribute> m_attributeTitleDict;
   QStringList m_attributeCategories;
   
   BCUnitList m_unitList;

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=MimeType
+MimeType=application/x-bookcase
+Icon=bookcase.png
+Patterns=*.bc;
+DefaultApp=bookcase
+Comment=Bookcase Data File

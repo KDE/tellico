@@ -1,19 +1,18 @@
-/* *************************************************************************
+/***************************************************************************
                              bctabcontrol.h
                              -------------------
     begin                : Sun Jan 6 2002
     copyright            : (C) 2002 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BCTABCONTROL_H
 #define BCTABCONTROL_H
@@ -26,7 +25,7 @@
  * The @ref KTabCtl::showTab slot is made public. A method is added to move the focus.
  *
  * @author Robby Stephenson
- * @version $Id: bctabcontrol.h,v 1.8 2002/11/10 00:38:29 robby Exp $
+ * @version $Id: bctabcontrol.h,v 1.10 2003/03/08 18:24:47 robby Exp $
  */
 class BCTabControl : public KTabCtl {
 Q_OBJECT
@@ -41,7 +40,7 @@ public:
    *
    * @param tabNum The tab number
    */
-  void setFocusToLineEdit(int tabNum);
+  void setFocusToChild(int tabNum);
   /**
    * Returns the numbers of tabs in the widget.
    *

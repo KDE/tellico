@@ -73,9 +73,6 @@
 /* Define to 1 if you have the `vsnprintf' function. */
 #undef HAVE_VSNPRINTF
 
-/* Define if you want Xinerama support */
-#undef HAVE_XINERAMA
-
 /* Suffix for lib directories */
 #undef KDELIBSUFF
 

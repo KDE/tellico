@@ -9,9 +9,8 @@
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
  ***************************************************************************/
 
@@ -22,33 +21,33 @@
 #include "bcdetailedlistview.h"
 #include "bctabcontrol.h"
 #include "isbnvalidator.h"
-#include "lccnvalidator.h"
+#include "bookcase.h"
+#include "bcutils.h"
 
-#include <klineedit.h>
-#include <kcombobox.h>
 #include <kcompletion.h>
 #include <kbuttonbox.h>
 #include <klocale.h>
 #include <kdebug.h>
+#include <kmessagebox.h>
 
 #include <qlayout.h>
-#include <qcheckbox.h>
 #include <qstringlist.h>
 #include <qlabel.h>
-#include <qmultilineedit.h>
 #include <qlistview.h>
 #include <qptrlist.h>
-#include <qdict.h>
 #include <qgrid.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
+#include <qvbox.h>
+
+//#define SHOW_COPY_BTN
 
 // must be an even number
 static const int NCOLS = 4;
 
 BCUnitEditWidget::BCUnitEditWidget(QWidget* parent_, const char* name_/*=0*/)
  : QWidget(parent_, name_), m_currColl(0), m_currUnit(0),
-   m_tabs(new BCTabControl(this)) {
+   m_tabs(new BCTabControl(this)), m_modified(false) {
 //  kdDebug() << "BCUnitEditWidget()" << endl;
   QVBoxLayout* topLayout = new QVBoxLayout(this);
 
@@ -60,42 +59,36 @@ BCUnitEditWidget::BCUnitEditWidget(QWidget* parent_, const char* name_/*=0*/)
   topLayout->addWidget(m_tabs, 1);
 
   KButtonBox* bb = new KButtonBox(this);
+  bb->addStretch();
   m_new = bb->addButton(i18n("New Book"), this, SLOT(slotHandleNew()));
-//  m_copy = bb->addButton(i18n("Copy"), this, SLOT(slotHandleCopy()));
+#ifdef SHOW_COPY_BTN
+  m_copy = bb->addButton(i18n("Duplicate Book"), this, SLOT(slotHandleCopy()));
+#endif
   m_save = bb->addButton(i18n("Enter Book"), this, SLOT(slotHandleSave()));
   m_delete = bb->addButton(i18n("Delete Book"), this, SLOT(slotHandleDelete()));
-  m_clear = bb->addButton(i18n("Clear Data"), this, SLOT(slotHandleClear()));
+//  m_clear = bb->addButton(i18n("Clear Data"), this, SLOT(slotHandleClear()));
+  bb->addStretch();
   // stretch = 0, so the height of the buttonbox is constant
   topLayout->addWidget(bb, 0, Qt::AlignBottom | Qt::AlignHCenter);
 
+  m_save->setEnabled(false);
   // no currUnit exists, so disable the Copy and Delete button
-//  m_copy->setEnabled(false);
+#ifdef SHOW_COPY_BTN
+  m_copy->setEnabled(false);
+#endif
   m_delete->setEnabled(false);
 }
 
-BCUnitEditWidget::~BCUnitEditWidget() {
-//  if(m_currUnit && m_currUnit->collection() && m_currUnit->collection()->unitList().containsRef(m_currUnit) == 0) {
-//    // this means we created a pointer but haven't added it to the collection yet
-//    // TODO: ask user if he wants to save it
-//    delete m_currUnit;
-//  }
-//  kdDebug() << "~BCUnitEditWidget()" << endl;
-}
-
 void BCUnitEditWidget::slotReset() {
-  kdDebug() << "BCUnitEditWidget::slotReset()" << endl;
-
-//  if(m_currUnit && m_currUnit->collection() && m_currUnit->collection()->unitList().containsRef(m_currUnit) == 0) {
-//    // this means we created a pointer but haven't added it to the collection yet
-//    // TODO: ask user if he wants to save it
-//    delete m_currUnit;
-//  }
+//  kdDebug() << "BCUnitEditWidget::slotReset()" << endl;
 
   m_currUnit = 0;
+  m_save->setEnabled(false);
   m_delete->setEnabled(false);
   m_save->setText(i18n("Enter Book"));
   m_currColl = 0;
 
+  //TODO might need this when support multiple collection types
 // clear all the dicts
 //  m_editDict.clear();
 //  m_multiDict.clear();
@@ -108,14 +101,16 @@ void BCUnitEditWidget::slotSetCollection(BCCollection* coll_) {
     return;
   }
 //  kdDebug() << "BCUnitEditWidget::slotSetCollection() - " << coll_->title() << endl;
+
 // for now, reset, but if multiple collections are supported, this has to change
   slotHandleClear();
   m_currColl = coll_;
   m_currUnit = new BCUnit(m_currColl);
 
-  if(m_tabs->count() == 0) {
-    slotSetLayout(coll_);
-  }
+// don't do this, ,it would cause infinite looping
+//  if(m_tabs->count() == 0) {
+//    slotSetLayout(coll_);
+//  }
   
   // go back to first tab, with title, etc...
   m_tabs->showTab(0);
@@ -125,16 +120,18 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
   if(!coll_) {
     return;
   }
-//  kdDebug() << "BCUnitEditWidget::slotSetLayout() - " << coll_->title() << endl;
-//  slotSetCollection(coll_);
+  
+//  kdDebug() << "BCUnitEditWidget::slotSetLayout()" << endl;
 
   if(m_tabs->count() > 0) {
     kdDebug() << "BCUnitEditWidget::slotSetLayout() - tabs already exist." << endl;
     return;
   }
 
+  slotSetCollection(coll_);
+
   KLineEdit* kl;
-  QMultiLineEdit* mle;
+  QTextEdit* te;
   KComboBox* kc;
   QCheckBox* cb;
 
@@ -146,41 +143,42 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
     grid->setSpacing(5);
 
     QString catName = static_cast<QString>(*catIt);
-    QPtrList<BCAttribute> list = m_currColl->attributesByCategory(catName);
-    QPtrListIterator<BCAttribute> it(list);
+    BCAttributeList list = m_currColl->attributesByCategory(catName);
+    BCAttributeListIterator it(list);
     for( ; it.current(); ++it) {
-      QLabel* la = new QLabel(it.current()->title() + ":", grid);
+      QLabel* la = new QLabel(it.current()->title() + QString::fromLatin1(":"), grid);
       la->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
       QWhatsThis::add(la, it.current()->description());
 
       switch(it.current()->type()) {
         case BCAttribute::Line:
           kl = new KLineEdit(QString::null, grid);
+          connect(kl, SIGNAL(textChanged(const QString&)), this, SLOT(slotSetModified()));
           QWhatsThis::add(kl, it.current()->description());
-          if(! (it.current()->flags() & BCAttribute::DontComplete)) {
+          if(! (it.current()->flags() & BCAttribute::NoComplete)) {
             kl->completionObject()->setItems(m_currColl->valuesByAttributeName(it.current()->name()));
             kl->setAutoDeleteCompletionObject(true);
           }
-          if(it.current()->name() == "isbn") {
+          
+          if(it.current()->name() == QString::fromLatin1("isbn")) {
             ISBNValidator* isbn = new ISBNValidator(this);
             kl->setValidator(isbn);
-          } else if(it.current()->name() == "lccn") {
-//            LCCNValidator* lccn = new LCCNValidator(this);
-//            kl->setValidator(lccn);
           }
+          
           m_editDict.insert(QString::number(m_currColl->id()) + it.current()->name(), kl);
-          connect(kl, SIGNAL(returnPressed(const QString&)), SLOT(slotHandleReturn(const QString&)));
           break;
 
         case BCAttribute::Para:
-          mle = new QMultiLineEdit(grid);
-          mle->setWordWrap(QMultiLineEdit::WidgetWidth);
-          QWhatsThis::add(mle, it.current()->description());
-          m_multiDict.insert(QString::number(m_currColl->id()) + it.current()->name(), mle);
+          te = new QTextEdit(grid);
+          te->setTextFormat(Qt::PlainText);
+          connect(te, SIGNAL(textChanged()), this, SLOT(slotSetModified()));
+          QWhatsThis::add(te, it.current()->description());
+          m_multiDict.insert(QString::number(m_currColl->id()) + it.current()->name(), te);
           break;
 
         case BCAttribute::Choice:
           kc = new KComboBox(grid);
+          connect(kc, SIGNAL(activated(int)), this, SLOT(slotSetModified()));
           QWhatsThis::add(kc, it.current()->description());
           // always have empty choice
           kc->insertItem(QString::null);
@@ -191,36 +189,50 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
 
         case BCAttribute::Bool:
           cb = new QCheckBox(grid);
+          connect(cb, SIGNAL(clicked()), this, SLOT(slotSetModified()));
           QWhatsThis::add(cb, it.current()->description());
           m_checkDict.insert(QString::number(m_currColl->id()) + it.current()->name(), cb);
+          break;
+          
+        case BCAttribute::Year:
+          kl = new KLineEdit(QString::null, grid);
+          connect(kl, SIGNAL(textChanged(const QString&)), this, SLOT(slotSetModified()));
+          QWhatsThis::add(kl, it.current()->description());
+
+          kl->setMaxLength(4);
+          kl->setValidator(new QIntValidator(1000, 9999, this));
+            
+          m_editDict.insert(QString::number(m_currColl->id()) + it.current()->name(), kl);
+          break;
+
+        case BCAttribute::ReadOnly:
           break;
 
         default:
           kdDebug() << "BCUnitEditWidget() - unknown attribute type  ("
-            "" << it.current()->type() << ") named " << it.current()->name() << endl;
+                    << it.current()->type() << ") named " << it.current()->name() << endl;
          break;
       } // end switch
     }
+    // I don't want anything to be hidden
+    grid->setMinimumHeight(grid->sizeHint().height());
     m_tabs->addTab(grid, catName);
   }
 
-  // maybe this should be sizePolicy() reimplemented instead
-//  setMinimumHeight(minimumSizeHint().height());
-//  setMaximumHeight(minimumSizeHint().height());
-  setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed));
-
-  // no currUnit exists, so disable the Copy and Delete button
-//  m_copy->setEnabled(false);
-  m_delete->setEnabled(false);
-}
-void BCUnitEditWidget::slotHandleReturn(const QString&) {
-  //slotHandleSave();
+// this doesn't seem to work
+//  setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum));
+// so do this instead
+  setMinimumHeight(sizeHint().height());
+  setMaximumHeight(sizeHint().height());
 }
 
 void BCUnitEditWidget::slotHandleNew() {
+  if(!queryModified()) {
+    return;
+  }
   slotHandleClear();
   m_currUnit = new BCUnit(m_currColl);
-  m_save->setText(i18n("Enter Book"));
+//  m_save->setText(i18n("Enter Book"));
 }
 
 void BCUnitEditWidget::slotHandleCopy() {
@@ -254,11 +266,12 @@ void BCUnitEditWidget::slotHandleSave() {
   // boolean to keep track if every possible attribute is empty
   bool empty = true;
   KLineEdit* kl;
-  QMultiLineEdit* mle;
+  QTextEdit* te;
   KComboBox* kc;
   QCheckBox* cb;
+  
   QString temp;
-  QPtrListIterator<BCAttribute> it(m_currColl->attributeList());
+  BCAttributeListIterator it(m_currColl->attributeList());
   for( ; it.current(); ++it) {
     switch(it.current()->type()) {
       case BCAttribute::Line:
@@ -271,21 +284,17 @@ void BCUnitEditWidget::slotHandleSave() {
             empty = false;
           }
           // the completion object is updated when slotUpdateCompletions is called
-        } else {
-          kdDebug() << "BCUnitEditWidget::slotHandleSave() - no lineedit object!\n";
         }
         break;
 
       case BCAttribute::Para:
-        mle = m_multiDict.find(QString::number(m_currColl->id()) + it.current()->name());
-        if(mle) {
-          temp = mle->text().simplifyWhiteSpace();
+        te = m_multiDict.find(QString::number(m_currColl->id()) + it.current()->name());
+        if(te) {
+          temp = te->text().simplifyWhiteSpace();
           m_currUnit->setAttribute(it.current()->name(), temp);
           if(!temp.isEmpty()) {
             empty = false;
           }
-        } else {
-          kdDebug() << "BCUnitEditWidget::slotHandleSave() - no multilineedit object!\n";
         }
         break;
 
@@ -296,10 +305,8 @@ void BCUnitEditWidget::slotHandleSave() {
           // ok to set attribute empty
           m_currUnit->setAttribute(it.current()->name(), temp);
           if(!temp.isEmpty()) {
-            empty = false;
+            //empty = false;
           }
-        } else {
-          kdDebug() << "BCUnitEditWidget::slotHandleSave() - no combobox object!\n";
         }
         break;
 
@@ -307,12 +314,25 @@ void BCUnitEditWidget::slotHandleSave() {
         cb = m_checkDict.find(QString::number(m_currColl->id()) + it.current()->name());
         if(cb) {
           if(cb->isChecked()) {
-            m_currUnit->setAttribute(it.current()->name(), "1");
-            empty = false;
+            // "1" means checked
+            m_currUnit->setAttribute(it.current()->name(), QString::fromLatin1("1"));
+            //empty = false;
+          } else {
+            m_currUnit->setAttribute(it.current()->name(), QString());
           }
-        } else {
-          kdDebug() << "BCUnitEditWidget::slotHandleSave() - no checkbox object!\n";
         }
+        break;
+
+      case BCAttribute::Year:
+        kl = m_editDict.find(QString::number(m_currColl->id()) + it.current()->name());
+        if(kl) {
+          temp = kl->text();
+          // ok to set attribute empty string
+          m_currUnit->setAttribute(it.current()->name(), temp);
+        }
+        break;
+              
+      case BCAttribute::ReadOnly:
         break;
 
       default:
@@ -325,17 +345,20 @@ void BCUnitEditWidget::slotHandleSave() {
 
   // if something was not empty, signal a save, and then clear everything
   if(!empty) {
+    // this has to be before signal, since slotSetContents() gets called
+    m_modified = false;
     emit signalSaveUnit(m_currUnit);
+  } else {
+    // go back to first tab, with title, etc...
+    m_tabs->showTab(0);
   }
-  slotHandleClear();
 
-  // go back to first tab, with title, etc...
-  m_tabs->showTab(0);
+  slotHandleNew();
 }
 
 void BCUnitEditWidget::slotHandleDelete() {
   if(m_currUnit && m_currColl->unitList().containsRef(m_currUnit) > 0) {
-    kdDebug() << "BCUnitEditWidget::slotHandleDelete() - item " << m_currUnit->attribute("title") << endl;
+//    kdDebug() << "BCUnitEditWidget::slotHandleDelete() - item " << m_currUnit->title() << endl;
     // this widget does not actually delete the unit
     emit signalDeleteUnit(m_currUnit);
   }
@@ -346,6 +369,7 @@ void BCUnitEditWidget::slotHandleDelete() {
 
 void BCUnitEditWidget::slotHandleClear() {
 //  kdDebug() << "BCUnitEditWidget::slotHandleClear()" << endl;
+
   // clear the linedits
   QDictIterator<KLineEdit> it1(m_editDict);
   for( ; it1.current(); ++it1) {
@@ -353,7 +377,7 @@ void BCUnitEditWidget::slotHandleClear() {
   }
 
   // clear the linedits
-  QDictIterator<QMultiLineEdit> it2(m_multiDict);
+  QDictIterator<QTextEdit> it2(m_multiDict);
   for( ; it2.current(); ++it2) {
     it2.current()->clear();
   }
@@ -382,17 +406,28 @@ void BCUnitEditWidget::slotHandleClear() {
   m_currUnit = 0;
 
   // disable the copy and delete buttons
-//  m_copy->setEnabled(false);
+#ifdef SHOW_COPY_BTN
+  m_copy->setEnabled(false);
+#endif
   m_delete->setEnabled(false);
   m_save->setText(i18n("Enter Book"));
+  m_save->setEnabled(false);
+
+  m_modified = false;
 }
 
 void BCUnitEditWidget::slotSetContents(BCUnit* unit_) {
+  bool ok = queryModified();
+  if(!ok) {
+    return;
+  }
+  
   if(!unit_) {
     slotHandleClear();
     return;
   }
-//  kdDebug() << "BCUnitEditWidget::slotSetContents() - " << unit_->attribute("title") << endl;
+
+//  kdDebug() << "BCUnitEditWidget::slotSetContents() - " << unit_->title() << endl;
   m_currUnit = unit_;
 //  m_currColl = unit_->collection();
   if(m_currColl != unit_->collection()) {
@@ -400,30 +435,33 @@ void BCUnitEditWidget::slotSetContents(BCUnit* unit_) {
     m_currColl = unit_->collection();
   }
   
+  //disable save button
+  m_save->setEnabled(false);
   // enable copy and delete buttons
-//  m_copy->setEnabled(true);
+#ifdef SHOW_COPY_BTN
+  m_copy->setEnabled(true);
+#endif
   m_delete->setEnabled(true);
 
-  m_tabs->showTab(0);
+//  m_tabs->showTab(0);
 
   KLineEdit* kl;
-  QMultiLineEdit* mle;
+  QTextEdit* te;
   KComboBox* kc;
   QCheckBox* cb;
-  QPtrListIterator<BCAttribute> it(m_currColl->attributeList());
+  
+  BCAttributeListIterator it(m_currColl->attributeList());
   for( ; it.current(); ++it) {
     switch(it.current()->type()) {
       case BCAttribute::Line:
         kl = m_editDict.find(QString::number(m_currColl->id()) + it.current()->name());
         if(kl) {
           kl->setText(unit_->attribute(it.current()->name()));
-        } else {
-          kdDebug() << "BCUnitEditWidget:slotSetContents() - no line edit found for " << it.current()->name() << endl;
         }
         break;
 
       case BCAttribute::Para:
-        mle = m_multiDict.find(QString::number(m_currColl->id()) + it.current()->name());
+        te = m_multiDict.find(QString::number(m_currColl->id()) + it.current()->name());
         break;
 
       case BCAttribute::Choice:
@@ -438,9 +476,23 @@ void BCUnitEditWidget::slotSetContents(BCUnit* unit_) {
 
       case BCAttribute::Bool:
         cb = m_checkDict.find(QString::number(m_currColl->id()) + it.current()->name());
-        if(cb && !m_currUnit->attribute(it.current()->name()).isEmpty()) {
-          cb->setChecked(true);
+        if(cb) {
+          if(m_currUnit->attribute(it.current()->name()).isEmpty()) {
+            cb->setChecked(false);
+          } else {
+            cb->setChecked(true);
+          }
         }
+        break;
+
+      case BCAttribute::Year:
+        kl = m_editDict.find(QString::number(m_currColl->id()) + it.current()->name());
+        if(kl) {
+          kl->setText(unit_->attribute(it.current()->name()));
+        }
+        break;
+
+      case BCAttribute::ReadOnly:
         break;
 
       default:
@@ -449,17 +501,25 @@ void BCUnitEditWidget::slotSetContents(BCUnit* unit_) {
         break;
     } //end switch
   } // end attribute loop
+  
   if(m_currUnit && m_currColl->unitList().containsRef(m_currUnit) > 0) {
     m_save->setText(i18n("Modify Book"));
+    m_save->setEnabled(false);
   }
+  m_modified = false;
 }
 
 void BCUnitEditWidget::slotUpdateCompletions(BCUnit* unit_) {
-  QPtrListIterator<BCAttribute> it(unit_->collection()->attributeList());
+  if(m_currColl != unit_->collection()) {
+    kdDebug() << "BCUnitEditWidget::slotUpdateCompletions - inconsistent colleection pointers!" << endl;
+    m_currColl = unit_->collection();
+  }
+  
+  BCAttributeListIterator it(m_currColl->attributeList());
   for( ; it.current(); ++it) {
     if(it.current()->type() == BCAttribute::Line
-                  && !(it.current()->flags() & BCAttribute::DontComplete)) {
-      QString key = QString::number(unit_->collection()->id()) + it.current()->name();
+                  && !(it.current()->flags() & BCAttribute::NoComplete)) {
+      QString key = QString::number(m_currColl->id()) + it.current()->name();
       KLineEdit* kl = m_editDict.find(key);
       if(kl) {
         QString value = unit_->attribute(it.current()->name());
@@ -470,5 +530,38 @@ void BCUnitEditWidget::slotUpdateCompletions(BCUnit* unit_) {
 }
 
 void BCUnitEditWidget::slotSwitchFocus(int tabNum_) {
-  m_tabs->setFocusToLineEdit(tabNum_);
+  m_tabs->setFocusToChild(tabNum_);
+}
+
+void BCUnitEditWidget::slotSetModified() {
+  m_modified = true;
+  m_save->setEnabled(true);
+}
+
+bool BCUnitEditWidget::queryModified() {
+  bool ok = true;
+  if(m_modified) {
+    Bookcase* app = bookcaseParent(parent());
+    QString str(i18n("The current book has been modified.\n"
+                      "Do you want to enter the changes?"));
+    int want_save = KMessageBox::warningYesNoCancel(app, str, i18n("Warning!"),
+                                                    i18n("Enter Book"),
+                                                    KStdGuiItem::discard());
+    switch(want_save) {
+      case KMessageBox::Yes:
+        slotHandleSave();
+        ok = true;
+        break;
+
+      case KMessageBox::No:
+        m_modified = false;
+        ok = true;
+        break;
+
+      case KMessageBox::Cancel:
+        ok = false;
+        break;
+    }
+  }
+  return ok;
 }

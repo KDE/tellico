@@ -1,19 +1,18 @@
-/* *************************************************************************
+/***************************************************************************
                                   bcunit.h
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BCUNIT_H
 #define BCUNIT_H
@@ -28,6 +27,7 @@ class BCUnitGroup;
 #include <qptrlist.h>
 
 typedef QPtrList<BCUnit> BCUnitList;
+typedef QPtrListIterator<BCUnit> BCUnitListIterator;
 
 /**
  * The BCUnit class represents a book, a CD, or whatever is the basic entity
@@ -39,7 +39,7 @@ typedef QPtrList<BCUnit> BCUnitList;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bcunit.h,v 1.21 2002/11/17 02:53:03 robby Exp $
+ * @version $Id: bcunit.h,v 1.28 2003/03/10 02:13:49 robby Exp $
  */
 class BCUnit {
 public:
@@ -60,6 +60,10 @@ public:
   BCUnit operator= (const BCUnit& unit);
 
   /**
+   * Every unit has a title.
+   */
+  QString title() const;
+  /**
    * Returns the value of the attribute with a given key name. If the key doesn't
    * exist, the method returns @ref QString::null.
    *
@@ -69,7 +73,7 @@ public:
   QString attribute(const QString& name) const;
   /**
    * Returns the formatted value of the attribute with a given key name. If the
-   * key doesn't exist, the method returns @ref QString::null. The value is cache,
+   * key doesn't exist, the method returns @ref QString::null. The value is cached,
    * so the first time the value is requested, @ref BCAttribute::format is called.
    * The second time, that lookup isn't necessary.
    *
@@ -77,7 +81,7 @@ public:
    * @param flags The attribute flags
    * @return The value of the attribute
    */
-  QString attributeFormatted(const QString& name, int flags = 0);
+  QString attributeFormatted(const QString& name, int flags = 0) const;
   /**
    * Sets the value of an attribute for the unit. The method first verifies that
    * the value is allowed for that particular key.
@@ -92,7 +96,7 @@ public:
    *
    * @return The collection pointer
    */
-  BCCollection* collection() const;
+  BCCollection* const collection() const;
   /**
    * Returns the id of the unit
    *
@@ -129,14 +133,14 @@ public:
    * @param The name of the attribute
    * @return The list of names
    */
-  QStringList groupsByAttributeName(const QString& attName);
+  QStringList groupsByAttributeName(const QString& attName) const;
   
 private:
+  QString m_title;
   int m_id;
   BCCollection* m_coll;
   QMap<QString, QString> m_attributes;
-  // formatted attributes
-  QMap<QString, QString> m_attributesF;
+  mutable QMap<QString, QString> m_formattedAttributes;
   QPtrList<BCUnitGroup> m_groups;
 };
 

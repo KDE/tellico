@@ -1,13 +1,26 @@
 <?xml version="1.0"?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="bookcase" version="2">
+<kpartgui name="bookcase" version="3">
 <MenuBar>
+ <Menu name="file">
+  <Menu name="import"><text>I&amp;mport</text>
+<!--   <Action name="import_bibtex"/>-->
+   <Action name="import_bibtexml"/>
+   <Action name="import_xml"/>
+  </Menu>
+  <Menu name="export"><text>E&amp;xport</text>
+   <Action name="export_bibtex"/>
+   <Action name="export_bibtexml"/>
+<!--   <Action name="export_xslt"/>-->
+  </Menu>
+ </Menu>
  <Menu name="settings">
   <Action name="toggle_collection_bar" append="show_merge"/>
+  <Action name="change_unit_grouping" append="show_merge"/>
  </Menu>
 </MenuBar>
 <ToolBar name="collectionToolBar">
-  <text>Collection ToolBar</text>
+  <text>Collection Toolbar</text>
   <Action name="change_unit_grouping_label"/>
   <Action name="change_unit_grouping"/>
 </ToolBar>

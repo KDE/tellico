@@ -1,19 +1,18 @@
-/* *************************************************************************
+/***************************************************************************
                          bookcase.h
                      -------------------
         begin        : Wed Aug 29 21:00:54 CEST 2001
         copyright    : (C) 2001 by Robby Stephenson
         email        : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BOOKCASE_H
 #define BOOKCASE_H
@@ -30,6 +29,8 @@ class BCGroupView;
 class BCUnit;
 class ConfigDialog;
 class BCCollection;
+class FindDialog;
+class BCUnitItem;
 
 class KProgress;
 class KToolBar;
@@ -44,8 +45,6 @@ class QSplitter;
 #include <kaction.h>
 
 // include files for Qt
-//#include <qmap.h>
-//#include <qdict.h>
 #include <qvaluelist.h>
 
 /**
@@ -59,7 +58,7 @@ class QSplitter;
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: bookcase.h,v 1.30 2002/11/25 00:56:22 robby Exp $
+ * @version $Id: bookcase.h,v 1.46 2003/03/15 04:47:38 robby Exp $
  */
 class Bookcase : public KMainWindow {
 Q_OBJECT
@@ -77,13 +76,13 @@ public:
    */
   BookcaseDoc* doc();
   /**
-   * Returns a list of the column widths for collections using a certain unit type,
-   * read from the config file.
+   * Returns a pointer to the selected item in the detailed list view.
+   * Used for searching, to go sequentially through the collections.
+   * If there is no selected item, then the first child is returned.
    *
-   * @param unitName The name of the unit
-   * @return The ValueList of column widths
+   * @return The item pointer
    */
-  QValueList<int> readColumnWidths(const QString& unitName);
+  BCUnitItem* selectedOrFirstItem();
 
 public slots:
   /**
@@ -148,7 +147,7 @@ public slots:
    */
   void slotEditFindNext();
   /**
-   * Toggles the toolbar.
+   * Toggles the toolbar. Not needed for KDE 3.1 or greater.
    */
   void slotToggleToolBar();
   /**
@@ -160,14 +159,14 @@ public slots:
    */
   void slotShowConfigDialog();
   /**
-   * Hide the configuration dialog for the application.
+   * Hides the configuration dialog for the application.
    */
   void slotHideConfigDialog();
   /**
    * Shows the new collection dialog and then adds it to the document.
    * Not yet implemented!
    */
-  void slotFileNewCollection();
+//  void slotFileNewCollection();
   /**
    * Changes the statusbar contents for the standard label permanently,
    * used to indicate current actions being made.
@@ -207,15 +206,39 @@ public slots:
    * by the parent app. The colleection toolbar is updated, the unit count is set, and
    * the collection's modified signal is connected to the @ref BCGroupView widget.
    *
-   * @param coll A pointer the collection being added
+   * @param coll A pointer to the collection being added
    */
   void slotUpdateCollection(BCCollection* coll);
   /**
-   * Toggles the collection toolbar.
+   * Toggles the collection toolbar. Not needed for KDE 3.1 or greater.
    */
   void slotToggleCollectionBar();
+  /**
+   * Imports a bibtex file.
+   */
+  void slotImportBibtex();
+  /**
+   * Imports a bibtexml file.
+   */
+  void slotImportBibtexml();
+  /**
+   * Exports the document into Bibtex format.
+   */
+  void slotExportBibtex();
+  /**
+   * Exports the document into Bibtexml format.
+   */
+  void slotExportBibtexml();
+  /**
+   * Exports using any XSLT file.
+   */
+  void slotExportXSLT();
+  /**
+   * Checks to see if the last file should be opened, or opens a command-line file
+   */
+  void slotInitFileOpen();
 
-protected:
+private:
   /**
    * Saves the general options like all toolbar positions and status as well as the
    * geometry and the recent file list to the configuration file.
@@ -304,14 +327,33 @@ protected:
    * @param html The HTML string representing the doc to print
    */
   void doPrint(const QString& html);
+
+  bool exportUsingXSLT(const QString& xsltFileName, const QString& filter);
+  
+  void XSLTError();
+
+  void FileError(const QString& filename);
   
 protected slots:
   /**
+   * Updates the actions when a file is opened.
+   */
+  void slotEnableOpenedActions(bool opened = true);
+  /**
    * Updates the save action and the caption when the document is modified.
    */
-  void slotEnableModifiedActions();
+  void slotEnableModifiedActions(bool modified = true);
+  /**
+   * Saves the options relevant for a collection. I was having problems with the collection
+   * being destructed before I could save info.
+   *
+   * @param coll A pointer to the collection
+   */
+  void saveCollectionOptions(BCCollection* coll);
 
 private:
+  BookcaseDoc* m_doc;
+
   KConfig* m_config;
 
   KAction* m_fileNew;
@@ -330,7 +372,12 @@ private:
   KToggleAction* m_toggleStatusBar;
   KAction* m_preferences;
 
-  KAction* m_fileNewCollection;
+//  KAction* m_fileNewCollection;
+  KAction* m_importBibtex;
+  KAction* m_importBibtexml;
+  KAction* m_exportBibtex;
+  KAction* m_exportBibtexml;
+  KAction* m_exportXSLT;
   KSelectAction* m_unitGrouping;
   KToggleAction* m_toggleCollectionBar;
 
@@ -340,8 +387,8 @@ private:
   BCDetailedListView* m_detailedView;
   BCUnitEditWidget* m_editWidget;
   BCGroupView* m_groupView;
-  BookcaseDoc* m_doc;
   ConfigDialog* m_configDlg;
+  FindDialog* m_findDlg;
 };
  
 #endif // BOOKCASE_H

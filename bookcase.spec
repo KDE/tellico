@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.4.1
+%define version 0.5
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
@@ -11,7 +11,7 @@ Release: %{release}
 License: GPL
 Group: Graphical Desktop/KDE
 Source: %{name}-%{version}.tar.gz
-URL: http://periapsis.org/bookcase/
+URL: http://www.periapsis.org/bookcase/
 Requires: kdebase libxslt1 >= 1.0.19
 BuildRequires: gcc-c++ libqt3-devel kdelibs-devel libxslt1-devel >= 1.0.19
 BuildRoot: %{_tmppath}/%{name}-buildroot
@@ -25,7 +25,7 @@ rm -rf $RPM_BUILD_ROOT
 %setup -q
 
 %build
-%configure --disable-debug --enable-final
+./configure --disable-debug --enable-final
 make
 
 %install
@@ -74,6 +74,9 @@ EOF
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Dec 4 2002 Robby Stephenson <robby@periapsis.org> 0.4.1-1rls
+- Version 0.4.1
+
 * Sun Nov 24 2002 Robby Stephenson <robby@periapsis.org> 0.4-1rls
 - Fixed so it actually makes an RPM
 - Workaround for libtool "unrecognized option --tag=CXX"

@@ -9,9 +9,8 @@
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
  ***************************************************************************/
 
@@ -23,10 +22,11 @@
 #include <qstringlist.h>
 #include <qregexp.h>
 
-//these get overwritten, but are here to allow them to be static
+//these get overwritten, but are here since they're static
 QStringList BCAttribute::m_articles = QStringList();
 QStringList BCAttribute::m_suffixes = QStringList();
-bool BCAttribute::m_autoCapitalization = false;
+bool BCAttribute::m_autoCapitalize = true;
+bool BCAttribute::m_autoFormat = true;
 
 // this constructor is for anything but Choice type
 BCAttribute::BCAttribute(const QString& name_, const QString& title_, AttributeType type_/*=Line*/)
@@ -35,6 +35,7 @@ BCAttribute::BCAttribute(const QString& name_, const QString& title_, AttributeT
 
   if(m_type == BCAttribute::Choice) {
     kdWarning() << "BCAttribute() - A different constructor should be called for multiple choice attributes." << endl;
+    kdWarning() << "Constructing a BCAttribute with name = " << name_ << endl;
   }
 }
 
@@ -84,16 +85,18 @@ const QString& BCAttribute::description() const {
   return m_desc;
 }
 
+// changing the name is not a good idea.  I need this because
+// between document version 2 and 3, I changed the name of "keywords" to "keyword"
+//void BCAttribute::setName(const QString& name_) {
+//  m_name = name_;
+//}
+
 void BCAttribute::setTitle(const QString& title_) {
   m_title = title_;
 }
 
 void BCAttribute::setCategory(const QString& category_) {
   m_category = category_;
-}
-
-void BCAttribute::setAllowed(const QStringList& list_) {
-  m_allowed = list_;
 }
 
 void BCAttribute::setFlags(int flags_) {
@@ -104,107 +107,120 @@ void BCAttribute::setDescription(const QString& desc_) {
   m_desc = desc_;
 }
 
-QString& BCAttribute::format(QString& value_, int flags_) {
+QString BCAttribute::format(const QString& value_, int flags_) {
+  if(value_.isEmpty()) {
+    return value_;
+  }
+  
+  QString text;
+
   if(flags_ & FormatTitle) {
-    formatTitle(value_);
+    text = formatTitle(value_);
 
   } else if(flags_ & FormatName) {
-    formatName(value_);
+    text = formatName(value_);
 
   } else if(flags_ & FormatDate) {
-    formatDate(value_);
+    text = formatDate(value_);
 
   } else {
-    value_ = value_.simplifyWhiteSpace();
+    text = value_.simplifyWhiteSpace();
   }
-  return value_;
+  return text;
 }
 
-QString& BCAttribute::formatTitle(QString& title_) {
-  if(isAutoCapitalization()) {
-    capitalize(title_);
+QString BCAttribute::formatTitle(const QString& title_) {
+  QString newTitle = title_;
+  if(autoCapitalize()) {
+    newTitle = capitalize(newTitle);
   }
 
   // TODO if the title has ",the" at the end, put it at the front
   for(QStringList::Iterator it = m_articles.begin(); it != m_articles.end(); ++it) {
     // assume white space is already stripped
     QString article = static_cast<QString>(*it);
-    if(title_.startsWith(article + " ")) {
-      QRegExp regexp = QRegExp("^" + article + "\\s");
-      title_ = title_.replace(regexp, "") + ", " + article;
+    if(newTitle.startsWith(article + QString::fromLatin1(" "))) {
+      QString rx = article;
+      rx.prepend(QString::fromLatin1("^")).append(QString::fromLatin1("\\s"));
+      QRegExp regexp(rx);
+      newTitle = newTitle.replace(regexp, QString()).append(QString::fromLatin1(", ")).append(article);
       break;
     }
   }
 
   // also, arbitrarily impose rule that a space must follow every comma
-  // lazy method, replace comma with comma<space> and then simplifyWhiteSpace()
-  title_.replace(QRegExp(","), ", ");
-  title_ = title_.simplifyWhiteSpace();
-  return title_;
+  newTitle.replace(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::fromLatin1(", "));
+  return newTitle;
 }
 
-QString& BCAttribute::formatName(QString& name_, bool multiple_/*=true*/) {
+QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
   QStringList entries;
   if(multiple_) {
-    entries = QStringList::split(";", name_, false);
+    // split by semi-color, optionally precedded or followed by white spacee
+    entries = QStringList::split(QRegExp(QString::fromLatin1("\\s*;\\s*")), name_, false);
   } else {
     entries << name_;
   }
 
-  QStringList text;
+  QStringList names;
   QStringList::Iterator it;
   for(it = entries.begin(); it != entries.end(); ++it) {
     QString name = static_cast<QString>(*it);
-    if(isAutoCapitalization()) {
-      capitalize(name);
+    if(autoCapitalize()) {
+      name = capitalize(name);
     }
 
     // split the name by white space and commas
-    QStringList words = QStringList::split(QRegExp("[\\s,]"), name, false);
+    QStringList words = QStringList::split(QRegExp(QString::fromLatin1("[\\s,]")), name, false);
     // if it contains a comma already and the last word is not a suffix, don't format it
-    if(name.contains(",") > 0 && m_suffixes.contains(words.last().stripWhiteSpace()) == 0) {
-      // arbitrarily impose rule that a space must follow every comma
-      // lazy method, replace comma with comma<space> and then simplifyWhiteSpace()
-      name.replace(QRegExp(","), ", ");
-      text << name.simplifyWhiteSpace();
+    if(name.contains(QString::fromLatin1(",")) > 0
+       && m_suffixes.contains(words.last().stripWhiteSpace()) == 0) {
+      // arbitrarily impose rule that no spacecs before a comma and
+      // a single space after every comma
+      name.replace(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::fromLatin1(", "));
+      names << name;
       break;
     }
     // otherwise split it by white space, move the last word to the front
     // but only if there is more than one word
     if(words.count() > 1) {
       // if the last word is a suffix, it has to be kept with last name
-      if(m_suffixes.contains(words.last().stripWhiteSpace()) > 0) {
-        words.prepend(words.last() + ",");
+      if(m_suffixes.contains(words.last()) > 0) {
+        words.prepend(words.last().append(QString::fromLatin1(",")));
         words.remove(words.fromLast());
       }
-      words.prepend(words.last() + ",");
+      words.prepend(words.last().append(QString::fromLatin1(",")));
       words.remove(words.fromLast());
-      text << words.join(" ").simplifyWhiteSpace();
+      names << words.join(QString::fromLatin1(" "));
     } else {
-      text << name;
+      names << name;
     }
   }
-  name_ = text.join("; ").simplifyWhiteSpace();
-  return name_;
+  return names.join(QString::fromLatin1("; "));
 }
 
-QString& BCAttribute::formatDate(QString& date_) {
+QString BCAttribute::formatDate(const QString& date_) {
   // TODO:: format as a date
   return date_;
 }
 
-void BCAttribute::capitalize(QString& str_) {
+QString BCAttribute::capitalize(QString str_) {
+  if(str_.isEmpty()) {
+    return str_;
+  }
   // nothing is done to the last character which saves a position check
   // first letter is always capitalized
   str_.replace(0, 1, str_.at(0).upper());
 
   // regexp to split words
-  QRegExp rx("[\\s,.-;]");
+  QRegExp rx(QString::fromLatin1("[\\s,.-;]"));
   int pos = str_.find(rx);
   int nextPos;
   QString word;
   // put into i18n for translation
-  QStringList notCap = QStringList::split(",", i18n("a,an,in,of,the,to"), false);
+  // and allow spaces in the regexp, someone might accidently put one there
+  QStringList notCap = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
+                                          i18n("a,an,and,in,of,the,to"), false);
   while(pos != -1) {
     // also need to compare against list of non-capitalized words
     nextPos = str_.find(rx, pos+1);
@@ -217,12 +233,14 @@ void BCAttribute::capitalize(QString& str_) {
     }
     pos = str_.find(rx, pos+1);
   }
+  return str_;
 }
 
 QStringList BCAttribute::defaultArticleList() {
 // put the articles in i18n() so they can be translated
 // prob better way to do case insensitive than repeating, but I'm lazy
-  return QStringList::split(",", i18n("The,the"), false);
+  return QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
+                            i18n("The,the"), false);
 }
 
 void BCAttribute::setArticleList(const QStringList& list_) {
@@ -236,7 +254,8 @@ const QStringList& BCAttribute::articleList() {
 QStringList BCAttribute::defaultSuffixList() {
 // put the suffixes in i18n() so they can be translated
 // prob better way to do case insensitive than repeating, but I'm lazy
-  return QStringList::split(",", i18n("Jr.,Jr,jr.,jr,III,iii,IV,iv"), false);
+  return QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
+                            i18n("Jr.,Jr,jr.,jr,III,iii,IV,iv"), false);
 }
 
 void BCAttribute::setSuffixList(const QStringList& list_) {
@@ -247,10 +266,19 @@ const QStringList& BCAttribute::suffixList() {
   return m_suffixes;
 }
 
-void BCAttribute::setAutoCapitalization(bool auto_) {
-  m_autoCapitalization = auto_;
+void BCAttribute::setAutoCapitalize(bool auto_) {
+  m_autoCapitalize = auto_;
 }
 
-bool BCAttribute::isAutoCapitalization() {
-  return m_autoCapitalization;
+bool BCAttribute::autoCapitalize() {
+  return m_autoCapitalize;
 }
+
+void BCAttribute::setAutoFormat(bool auto_) {
+  m_autoFormat = auto_;
+}
+
+bool BCAttribute::autoFormat() {
+  return m_autoFormat;
+}
+

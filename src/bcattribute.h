@@ -1,25 +1,29 @@
-/* *************************************************************************
+/***************************************************************************
                                 bcattribute.h
                              -------------------
     begin                : Sun Sep 23 2001
     copyright            : (C) 2001 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BCATTRIBUTE_H
 #define BCATTRIBUTE_H
 
+class BCAttribute;
+
 #include <qstringlist.h>
 #include <qstring.h>
+
+typedef QPtrList<BCAttribute> BCAttributeList;
+typedef QPtrListIterator<BCAttribute> BCAttributeListIterator;
 
 /**
  * The BCAttribute class encapsulates all the possible properties of a unit.
@@ -28,7 +32,7 @@
  * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: bcattribute.h,v 1.20 2002/11/10 00:38:29 robby Exp $
+ * @version $Id: bcattribute.h,v 1.31 2003/03/15 05:54:03 robby Exp $
  */
 class BCAttribute {
 public:
@@ -36,7 +40,8 @@ public:
    * The possible attribute types. A Line is represented by a KLineEdit,
    * a Para is a QMultiLineEdit encompassing multiple lines, a Choice is
    * limited to set values shown in a KComboBox, and a Bool is either true
-   * or not and is thus a QCheckBox.
+   * or not and is thus a QCheckBox. A Year type is obvious.
+   * A ReadOnly is a hidden value.
    *
    * @see KLineEdit
    * @see QMultiLineEdit
@@ -44,17 +49,18 @@ public:
    * @see QCheckBox
    **/
   enum AttributeType {
-    Line = 1,
-    Para = 2,
-    Choice = 3,
-    Bool = 4
+    Line     = 1,
+    Para     = 2,
+    Choice   = 3,
+    Bool     = 4,
+    ReadOnly = 5,
+    Year     = 6
   };
 
   /**
    * The attribute flags. All the visibility and formatting properties are smushed into
-   * one single flags variable. The properties should be bit-wise AND'd together.
-   * @li DontComplete - Don't include a completion object in the lineedit
-   * @li DontShow - Don't show this attribute in the listviews.
+   * one single flags variable. The properties should be bit-wise OR'd together.
+   * @li NoComplete - Don't include a completion object in the lineedit
    * @li AllowMultiple - Multiple values are allowed in one attribute and are
    *                     separated by a semi-colon (";").
    * @li FormatTitle - The attribute should be formatted as a title
@@ -66,13 +72,12 @@ public:
    * neither checked nor enforced.
    */
   enum AttributeFlags {
-    DontComplete    = 1 << 0,   // don't allow auto-completion
-    DontShow        = 1 << 1,   // dont show in list view
-    AllowMultiple   = 1 << 2,   // allow multiple values, separated by a comma
+    NoComplete      = 1 << 0,   // don't allow auto-completion
+    AllowMultiple   = 1 << 2,   // allow multiple values, separated by a semi-colon
     FormatTitle     = 1 << 3,   // format as a title, i.e. shift articles to end
     FormatName      = 1 << 4,   // format as a personal full name
     FormatDate      = 1 << 5,   // format as a date
-    AllowGrouped    = 1 << 6    // can be used to group units
+    AllowGrouped    = 1 << 6    // this attribute can be used to group units
   };
 
   /**
@@ -103,6 +108,12 @@ public:
    */
   const QString& name() const;
   /**
+   * Sets the name of the attribute.
+   *
+   * @param name The attribute name
+   */
+//  void setName(const QString& name);
+  /**
    * Returns the title of the attribute.
    *
    * @return The attribute title
@@ -132,12 +143,6 @@ public:
    * @return The attribute name
    */
   const QStringList& allowed() const;
-  /**
-   * Sets the list of the allowed values of the attribute.
-   *
-   * @param list The allowed attribute values
-   */
-  void setAllowed(const QStringList& list);
   /**
    * Returns the type of the attribute.
    *
@@ -170,33 +175,39 @@ public:
    */
   void setDescription(const QString& desc);
 
-  static QString& format(QString& value, int flags);
+  /*************************** STATIC **********************************/
+
+  /**
+   * A wrapper method around all the format functions. The flags
+   * determine which is called on the string.
+   */
+   static QString format(const QString& value, int flags);
   /**
    * A convenience function to format a string as a title.
    * At the moment, this means that some articles such as "the" are placed
-   * at the end of the title.
+   * at the end of the title. If autoCapitalize() is true, the title is capitalized.
    *
    * @param title The string to be formatted
    */
-  static QString& formatTitle(QString& title);
+  static QString formatTitle(const QString& title);
   /**
    * A convenience function to format a string as a personal name.
    * At the moment, this means that the name is split at the last white space,
    * and the last name is moved in front. If multiple=true, then the string
    * is split using a semi-colon (";"), and each string is formatted and then
-   * joined back together.
+   * joined back together. If autoCapitalize() is true, the names are capitalized.
    *
    * @param name The string to be formatted
    * @param multiple A boolean indicating if the string can contain multiple values
    */
-  static QString& formatName(QString& name, bool multiple=true);
+  static QString formatName(const QString& name, bool multiple=true);
   /**
    * A convenience function to format a string as a date.
    * At the moment, this does nothing.
    *
    * @param date The string to be formatted
    */
-  static QString& formatDate(QString& date);
+  static QString formatDate(const QString& date);
   /**
    * Returns the default article list.
    *
@@ -204,7 +215,7 @@ public:
    */
   static QStringList defaultArticleList();
   /**
-   * Returns the list of articles.
+   * Returns the current list of articles.
    *
    * @return The article list
    */
@@ -236,15 +247,33 @@ public:
   /**
    * Returns true if the capitalization of titles and authors is set to be consistent.
    *
-   * @return If capitalization is automatically fixed
+   * @return If capitalization is automatically done
    */
-  static bool isAutoCapitalization();
+  static bool autoCapitalize();
   /**
    * Set whether the capitalization of titles and authors is automatic.
    *
-   * @param fix
+   * @param autoCapitalize Whether to capitalize or not
    */
-  static void setAutoCapitalization(bool autoCapital);
+  static void setAutoCapitalize(bool autoCapitalize);
+  /**
+   * Returns true if the titles and authors should be formatted.
+   *
+   * @return If formatting is done
+   */
+  static bool autoFormat();
+  /**
+   * Set whether the formatting of titles and authors is automatic.
+   *
+   * @param autoFormat Whether to format or not
+   */
+  static void setAutoFormat(bool autoFormat);
+  /**
+   * Helper method to fix capitalization.
+   *
+   * @param str String to fix
+   */
+  static QString capitalize(QString str);
 
 private:
   /**
@@ -255,12 +284,6 @@ private:
    * The assignment operator is private, to ensure that it's never used.
    */
   BCAttribute operator=(const BCAttribute& att);
-  /**
-   * Helper method to fix capitalization.
-   *
-   * @param str String to fix
-   */
-  static void capitalize(QString& str);
 
 private:
   QString m_name;
@@ -273,6 +296,7 @@ private:
 
   static QStringList m_articles;
   static QStringList m_suffixes;
-  static bool m_autoCapitalization;
+  static bool m_autoCapitalize;
+  static bool m_autoFormat;
 };
 #endif

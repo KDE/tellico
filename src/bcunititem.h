@@ -1,28 +1,28 @@
-/* *************************************************************************
+/***************************************************************************
                                 bcunititem.h
                              -------------------
     begin                : Sat Oct 20 2001
     copyright            : (C) 2001 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BCUNITITEM_H
 #define BCUNITITEM_H
 
 class BCUnit;
 
-#include <bccollection.h>
-
 #include <klistview.h>
+
+// for QColorGroup
+#include <qpalette.h>
 
 /**
  * The BCUnitItem is a subclass of KListViewItem containing a pointer to a BCUnit.
@@ -32,7 +32,7 @@ class BCUnit;
  * @see BCUnit
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.17 2002/11/25 17:17:12 robby Exp $
+ * @version $Id: bcunititem.h,v 1.22 2003/03/15 03:40:13 robby Exp $
  */
 class BCUnitItem : public KListViewItem {
 public:
@@ -60,7 +60,7 @@ public:
    *
    * @return The unit pointer
    */
-  BCUnit* unit() const { return m_unit; }
+  BCUnit* const unit() const { return m_unit; }
 
 private:
   BCUnit* m_unit;
@@ -74,7 +74,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.17 2002/11/25 17:17:12 robby Exp $
+ * @version $Id: bcunititem.h,v 1.22 2003/03/15 03:40:13 robby Exp $
  */
 class ParentItem : public KListViewItem {
 public:
@@ -101,6 +101,12 @@ public:
       : KListViewItem(parent, text), m_id(-1) {}
 
   /**
+   * Sets the count for the number of items.
+   *
+   * @param c The count
+   */
+  void setCount(int c) { m_count = c; }
+  /**
    * Returns the id reference number of the ParentItem.
    *
    * @return The id number
@@ -115,12 +121,16 @@ public:
    * @param col The column number
    * @return The key
    */
-  QString key (int col, bool) const {
-    return text(col).startsWith(BCCollection::emptyGroupName()) ? QString("_") : text(col);
-  }
+  QString key(int col, bool) const;
+
+  /** paints the cell */
+  virtual void paintCell(QPainter* p, const QColorGroup& cg,
+                         int column, int width, int align);
+  virtual int width(const QFontMetrics& fm, const QListView* lv, int c) const;
 
 private:
   int m_id;
+  int m_count;
 };
 
 #endif

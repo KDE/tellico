@@ -9,9 +9,8 @@
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
  ***************************************************************************/
 
@@ -21,14 +20,14 @@
 #include <kaction.h>
 
 /**
- * KDE 3.0.x didn't include an easy way to insert a label using the XML-GUI.
- * BCLabelAction is pretty much a copy of the old KonqLabelAction from KDE 3.0.x.
- * It should be superceded by @ref KWidgetAction in KDE 3.1.
+ * There isn't an easy way to insert a label using the XML-GUI in KDE 3.0.x.
+ * BCLabelAction is pretty much a copy of the KonqLabelAction class from KDE 3.0.x.
+ * It is superceded by @ref KWidgetAction in KDE 3.1.
  *
  * @see KWidgetAction
  *
  * @author Robby Stephenson
- * @version $Id: bclabelaction.h,v 1.3 2002/11/11 03:47:06 robby Exp $
+ * @version $Id: bclabelaction.h,v 1.5 2003/03/08 18:24:47 robby Exp $
  */
 class BCLabelAction : public KAction {
 Q_OBJECT

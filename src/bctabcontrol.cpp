@@ -1,19 +1,18 @@
-/* *************************************************************************
+/***************************************************************************
                              bctabcontrol.cpp
                              -------------------
     begin                : Sun Jan 6 2002
     copyright            : (C) 2002 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #include "bctabcontrol.h"
 
@@ -27,16 +26,19 @@ void BCTabControl::showTab(int i) {
   KTabCtl::showTab(i);
 }
 
-void BCTabControl::setFocusToLineEdit(int tabNum_) {
+// TODO: fix this
+void BCTabControl::setFocusToChild(int tabNum_) {
   //find the first focusable child in the visible tab
   QPtrListIterator<QObject> it(*pages[tabNum_]->children());
   QWidget* w;
   for( ; it.current(); ++it) {
     w = static_cast<QWidget*>(it.current());
+    // for some reason isFocusEnabled() crashes things
+//    if(w->isFocusEnabled()) {
     if(w->focusPolicy() == QWidget::TabFocus
         || w->focusPolicy() == QWidget::ClickFocus
         || w->focusPolicy() == QWidget::StrongFocus) {
-      w->setFocus();
+      //w->setFocus();
       break;
     }
   }

@@ -3,6 +3,7 @@
   <!ENTITY bookcase '<application>Bookcase</application>'>
   <!ENTITY kapp "&bookcase;">
   <!ENTITY email "robby@periapsis.org">
+  <!ENTITY homepage "http://periapsis.org/bookcase/">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
   
@@ -10,9 +11,6 @@
   <!-- Do not define any other entities; instead, use the entities
        from kde-genent.entities and $LANG/user.entities. -->
 ]>
-<!-- kdoctemplate v0.8 October 1 1999 
-     Minor update to "Credits and Licenses" section on August 24, 2000
-     Removed "Revision history" section on 22 January 2001   -->
 
 <!-- ................................................................ -->
 
@@ -41,6 +39,7 @@ as Authors, publish date, the abstract, and Keywords -->
 <copyright>
 <year>2001</year>
 <year>2002</year>
+<year>2003</year>
 <holder>Robby Stephenson</holder>
 </copyright>
 <!-- Translators: put here the copyright notice of the translation -->
@@ -55,8 +54,8 @@ Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>10/21/2002</date>
-<releaseinfo>0.04.00</releaseinfo>
+<date>17/12/2002</date>
+<releaseinfo>0.05.00</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -98,8 +97,9 @@ problems. Basically a long version of the abstract.  Don't include a
 revision history. (see installation appendix comment) -->
 
 <para>
-&bookcase; is a program that helps you keep track of your book collection. Please report
-any problems or feature requests to the author.
+&bookcase; is a program that helps you keep track of your book collection.
+Please report any problems or feature requests to
+<ulink url="mailto:&email;">the author</ulink>.
 </para>
 </chapter>
 
@@ -114,19 +114,15 @@ your application. -->
 
 <!-- Note that all graphics should be in .png format. Use no gifs because of
 patent issues. -->
-
 <!--
 <screenshot>
 <screeninfo>Here's a screenshot of &bookcase;</screeninfo>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="screenshot.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="screenshot.eps" format="EPS"/>
+	    <imagedata fileref="main_screen.png" format="PNG"/>
 	  </imageobject>
 	  <textobject>
-	    <phrase>Screenshot</phrase>
+	    <phrase>Screenshot of Bookcase Main Window, ,version 0.4</phrase>
 	  </textobject>
 	</mediaobject>
 </screenshot>
@@ -267,9 +263,9 @@ application work. -->
  which should be in the same directory. You'll have to know
  <ulink url="http://www.w3.org/TR/xslt">XSLT</ulink>, but
  modifying that file is how you change the printing layout. Feel free
- to <ulink url="mailto:robby@periapsis.org">email me</ulink> with questions.
+ to <ulink url="mailto:&email;">email me</ulink> with questions.
  If I end up with some alternate XSLT printing files, I'll put them on
- this website.</para>
+ <ulink url="&homepage;">the Bookcase website</ulink>.</para>
 </answer>
 </qandaentry>
 <qandaentry>
@@ -284,6 +280,43 @@ application work. -->
  and along with that comes modifying the present ones.</para>
 </answer>
 </qandaentry>
+
+<qandaentry>
+<question>
+<para>How do I rename my book collection?</para>
+</question>
+<answer>
+<para>In the left side column, right-click on the top-level item representing the 
+collection. Select the "Rename Collection" option.</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question><para>Why does all that gobbledy-gook show up when I run &bookcase;?</para></question>
+<answer>
+<para>Stuff like:
+   BCGroupView::setGroupAttribute -
+   Bookcase::updateCollectionToolBar
+   BCGroupView::setGroupAttribute - author
+   BCGroupView::locateItem() - adding new collection
+   BCGroupView::slotAddCollection
+  is debug info. At compile time, this can be stopped by compiling with the
+  --disable-debug flag. You might also want to use --enable-final, too, which takes
+  a bit more memory when compiling, but is more efficient when running the application.
+  Or, if &bookcase; is already installed, run kdebugdialog and make sure that
+  "0 (generic)" is unchecked. That turns off debug messages from all generic KDE apps
+  i.e. those not distributed officially by KDE.
+</para>
+</answer>
+</qandaentry>
+
+<qandaentry>
+<question><para>How do I change which columns are shown?</para></question>
+<answer>
+<para>Right-click on the header bar. You can also drag the headers to re-order the columns, and click on them to sort by that field.</para>
+</answer>
+</qandaentry>
+
 </qandaset>
 </chapter>
 
@@ -300,13 +333,13 @@ distribution. -->
 &bookcase;
 </para>
 <para>
-Program copyright 2001-2002 Robby Stephenson <email>robby@periapsis.org</email>
+Program copyright 2001-2002 Robby Stephenson <email>&email;</email>
 </para>
 <para>
 </para>
 
 <para>
-Documentation copyright 2002 Robby Stephenson <email>&email;</email>
+Documentation copyright 2001-2002 Robby Stephenson <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -332,7 +365,7 @@ Documentation copyright 2002 Robby Stephenson <email>&email;</email>
 
 <para>
 The &bookcase; home page can be found at
-<ulink url="http://periapsis.org/bookcase/">http://periapsis.org/bookcase/</ulink>.
+<ulink url="&homepage;">&homepage;</ulink>.
 Updates and news can be found there.</para>
 </sect1>
 
@@ -364,7 +397,7 @@ KDE can be found at <ulink url="http://www.kde.org">the KDE home page</ulink>.
 or the ChangeLog file, or ... -->
 <para>
 You can find a list of changes at <ulink
-url="http://periapsis.org/bookcase/">http://periapsis.org/bookcase/</ulink>.
+url="&homepage;">&homepage;</ulink>.
 </para>
 </sect1>
 

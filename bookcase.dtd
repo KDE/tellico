@@ -2,7 +2,7 @@
    ================================================================
    Bookcase XML DTD version 1.0
 
-   $Id: bookcase.dtd,v 1.8 2002/11/25 00:12:03 robby Exp $
+   $Id: bookcase.dtd,v 1.10 2003/03/15 06:54:26 robby Exp $
 
    Copyright (c) 2002 Robby Stephenson
 
@@ -30,24 +30,29 @@
 <!ATTLIST attribute allowed CDATA #IMPLIED>
 <!ATTLIST attribute flags CDATA #IMPLIED>
 <!ATTLIST attribute description CDATA #IMPLIED>
-<!ATTLIST attribute type (1|2|3|4) #IMPLIED> 
-<!ELEMENT book (title?, subtitle?, author?, binding?, pur_date?, pur_price?, publisher?, edition?, cr_year?, pub_year?, isbn?, lccn?, pages?, language?, genre?, keywords?, series?, series_num?, condition?, signed?, read?, gift?, loaned?, rating?, comments?)>
+<!ATTLIST attribute type (1|2|3|4|5|6) #IMPLIED> 
+<!ELEMENT book (title?, subtitle?, authors?, binding?, pur_date?, pur_price?, publisher?, edition?, cr_years?, pub_year?, isbn?, lccn?, pages?, languages?, genres?, keywords?, series?, series_num?, condition?, signed?, read?, gift?, loaned?, rating?, comments?)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT subtitle (#PCDATA)>
+<!ELEMENT authors (author+)>
 <!ELEMENT author (#PCDATA)>
 <!ELEMENT binding (#PCDATA)>
 <!ELEMENT pur_date (#PCDATA)>
 <!ELEMENT pur_price (#PCDATA)>
 <!ELEMENT publisher (#PCDATA)>
 <!ELEMENT edition (#PCDATA)>
+<!ELEMENT cr_years (cr_year+)>
 <!ELEMENT cr_year (#PCDATA)>
 <!ELEMENT pub_year (#PCDATA)>
 <!ELEMENT isbn (#PCDATA)>
 <!ELEMENT lccn (#PCDATA)>
 <!ELEMENT pages (#PCDATA)>
+<!ELEMENT languages (language+)>
 <!ELEMENT language (#PCDATA)>
+<!ELEMENT genres (genre+)>
 <!ELEMENT genre (#PCDATA)>
-<!ELEMENT keywords (#PCDATA)>
+<!ELEMENT keywords (keyword+)>
+<!ELEMENT keyword (#PCDATA)>
 <!ELEMENT series (#PCDATA)>
 <!ELEMENT series_num (#PCDATA)>
 <!ELEMENT condition (#PCDATA)>

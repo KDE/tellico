@@ -1,28 +1,26 @@
-/* *************************************************************************
+/***************************************************************************
                              bcgroupview.h
                              -------------------
     begin                : Sat Oct 13 2001
     copyright            : (C) 2001 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BCGROUPVIEW_H_H
 #define BCGROUPVIEW_H_H
 
 class BCUnit;
 class BCAttribute;
-class BCUnitGroup;
 
-#include "bcunititem.h"
+#include <bcunititem.h>
 #include "bccollection.h"
 
 #include <klistview.h>
@@ -32,6 +30,7 @@ class BCUnitGroup;
 #include <qptrlist.h>
 #include <qpoint.h>
 #include <qpixmap.h>
+#include <qmap.h>
 
 /**
  * The BCGroupView is the main listview for the class, showing only the titles.
@@ -43,7 +42,7 @@ class BCUnitGroup;
  * @see BCCollection
  *
  * @author Robby Stephenson
- * @version $Id: bcgroupview.h,v 1.6 2002/11/25 00:56:22 robby Exp $
+ * @version $Id: bcgroupview.h,v 1.15 2003/03/15 03:40:13 robby Exp $
  */
 class BCGroupView : public KListView {
 Q_OBJECT
@@ -56,12 +55,14 @@ public:
    * @param name The widget name
    */
   BCGroupView(QWidget* parent, const char* name=0);
+
   /**
    * Returns the name of the attribute by which the units are grouped
    *
+   * @param unitName The name of the unit, e.g. "book"
    * @return The attribute name
    */
-  const QString& groupAttribute() const;
+  const QString& collGroupBy(const QString& unitName) const;
   /**
    * Sets the name of the attribute by which the units are grouped
    *
@@ -69,7 +70,19 @@ public:
    * @param groupAttName The attribute name
    */
   void setGroupAttribute(BCCollection* coll, const QString& groupAttName);
-
+  /**
+   * Returns true if the view should show the number of items in each group.
+   */
+  bool showCount() const;
+  /**
+   * Changes the view to show or hide the number of items in the group. If the collection
+   * list is empty, the flag is simply toggled.
+   *
+   * @param showCount A boolean indicating whether or not the count should be shown
+   * @param list A list of collections to update
+   */
+  void showCount(bool showCount, const BCCollectionList& list=BCCollectionList());
+  
 public slots:
   /**
    * Resets the list view, clearing and deleting all items.
@@ -118,12 +131,6 @@ public slots:
    * @param coll A pointer to the collection being added
    */
   void slotAddCollection(BCCollection* coll);
-  /**
-   * Changes the view to show or hide the number if items in the group.
-   *
-   * @param showCount A boolean indicating whether or not the count should be shown
-   */
-  void slotShowCount(bool showCount);
 
 protected:
   /**
@@ -150,6 +157,35 @@ protected:
    * @return A pointer to the created @ ref ParentItem
    */
   ParentItem* insertItem(ParentItem* collItem, BCUnitGroup* group);
+  /**
+   * A helper method to make sure that the key used for the groups
+   * is consistant. For now, the key is the id of the unit's collection
+   * concatenated with the text of the group name.
+   */
+  QString groupKey(ParentItem* par_, QListViewItem* item_) const {
+    return QString::number(par_->id()) + item_->text(0);
+  }
+  /**
+   * Identical to the previous function.
+   */
+  QString groupKey(ParentItem* par_, BCUnitGroup* group_) const {
+    return QString::number(par_->id()) + group_->groupName();
+  }
+  /**
+   * Identical to the previous function.
+   */
+  QString groupKey(BCCollection* coll_, QListViewItem* item_) const {
+    return QString::number(coll_->id()) + item_->text(0);
+  }
+  /**
+   * Identical to the previous function.
+   */
+  QString groupKey(BCCollection* coll_, BCUnitGroup* group_) const {
+    return QString::number(coll_->id()) + group_->groupName();
+  }
+  /**
+   */
+  ParentItem* populateCollection(BCCollection* coll, const QString& groupBy=QString::null);
   
 protected slots:
   /**
@@ -197,6 +233,11 @@ protected slots:
    * Clears the selection.
    */
   void slotClearSelection();
+  /**
+   * Handles emitting the signal indicating a desire to delete the unit attached
+   * to the current list item.
+   */
+  void slotHandleDelete();
 
 signals:
   /**
@@ -224,10 +265,17 @@ signals:
    * @param newName The new name of the collection
    */
   void signalRenameCollection(int id, const QString& newName);
+  /**
+   * Signals a desire to delete a unit.
+   *
+   * @param unit A pointer to the unit
+   */
+  void signalDeleteUnit(BCUnit* unit);
 
 private:
   QDict<ParentItem> m_groupDict;
-  QString m_groupAttribute;
+  // maps a unit type, "book" to a group attribute, "title"
+  QMap<QString, QString> m_collGroupBy;
 
   KPopupMenu m_collMenu;
   KPopupMenu m_groupMenu;

@@ -1,0 +1,70 @@
+<!DOCTYPE kdevelop>
+<kdevelop>
+  <general>
+    <author>Robby Stephenson</author>
+    <email>robby@periapsis.org</email>
+    <projectmanagement>KDevKDEAutoProject</projectmanagement>
+    <primarylanguage>C++</primarylanguage>
+    <keywords>
+      <keyword>Qt</keyword>
+      <keyword>KDE</keyword>
+    </keywords>
+  </general>
+  <kdevfileview>
+    <groups>
+      <group pattern="*.cpp;*.cxx;*.h" name="Sources" />
+      <group pattern="*.ui" name="User Interface" />
+      <group pattern="*.png" name="Icons" />
+      <group pattern="*.po;*.ts" name="Translations" />
+      <group pattern="*" name="Others" />
+    </groups>
+    <tree>
+      <hidenonprojectfiles>false</hidenonprojectfiles>
+      <hidepatterns>*.o,*.lo,CVS</hidepatterns>
+    </tree>
+  </kdevfileview>
+  <kdevdoctreeview>
+    <ignoretocs>
+      <toc>gtk</toc>
+      <toc>gnustep</toc>
+      <toc>python</toc>
+      <toc>php</toc>
+      <toc>perl</toc>
+    </ignoretocs>
+  </kdevdoctreeview>
+  <kdevdebugger>
+    <general>
+      <dbgshell>libtool</dbgshell>
+    </general>
+  </kdevdebugger>
+  <kdevautoproject>
+    <makeenvvars>
+      <envvar value="1" name="WANT_AUTOCONF_2_5" />
+      <envvar value="1" name="WANT_AUTOMAKE_1_6" />
+    </makeenvvars>
+  </kdevautoproject>
+  <dist>
+    <custom>false</custom>
+    <bzip>true</bzip>
+    <archname/>
+    <appname/>
+    <version/>
+    <release/>
+    <vendor/>
+    <licence/>
+    <summary/>
+    <group/>
+    <packager/>
+    <description/>
+    <changelog/>
+    <devpackage>false</devpackage>
+    <docspackage>false</docspackage>
+    <appicon>false</appicon>
+    <arch>0</arch>
+    <genHTML>false</genHTML>
+    <useRPM>false</useRPM>
+    <ftpkde>false</ftpkde>
+    <appskde>false</appskde>
+    <url/>
+  </dist>
+</kdevelop>

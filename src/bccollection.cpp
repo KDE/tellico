@@ -9,9 +9,8 @@
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
  ***************************************************************************/
 
@@ -24,17 +23,17 @@
 
 //using the c'tor makes this a custom collection
 BCCollection::BCCollection(int id_, const QString& title_, const QString& unitName_,
-                           const QString& unitTitle_, const QString& iconName_/*="unknown"*/)
+                           const QString& unitTitle_)
     : QObject(), m_id(id_), m_title(title_), m_unitName(unitName_),
-      m_unitTitle(unitTitle_), m_iconName(iconName_), m_isCustom(true) {
+      m_unitTitle(unitTitle_), m_iconName(unitName_) {
   m_unitList.setAutoDelete(true);
   m_attributeList.setAutoDelete(true);
   m_unitGroupDicts.setAutoDelete(true);
 
   // all collections have a title attribute for their units
-  BCAttribute* att = new BCAttribute("title", i18n("Title"));
+  BCAttribute* att = new BCAttribute(QString::fromLatin1("title"), i18n("Title"));
   att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::FormatTitle | BCAttribute::DontComplete);
+  att->setFlags(BCAttribute::FormatTitle | BCAttribute::NoComplete);
   addAttribute(att);
 }
 
@@ -48,11 +47,27 @@ BCCollection BCCollection::operator=(const BCCollection& coll_) {
 }
 
 BCCollection::~BCCollection() {
-  m_unitList.clear();
-  m_attributeList.clear();
-  m_attributeCategories.clear();
-  m_unitGroupDicts.clear();
-  m_unitGroups.clear();
+//  m_unitList.clear();
+//  m_attributeList.clear();
+//  m_attributeCategories.clear();
+//  m_unitGroupDicts.clear();
+//  m_unitGroups.clear();
+}
+
+BCCollection::CollectionType BCCollection::collectionType() const {
+  return BCCollection::Base;
+}
+
+bool BCCollection::isBook() const {
+  return false;
+}
+
+bool BCCollection::isSong() const {
+  return false;
+}
+
+bool BCCollection::isVideo() const {
+  return false;
 }
 
 unsigned BCCollection::unitCount() const {
@@ -71,7 +86,8 @@ bool BCCollection::addAttribute(BCAttribute* att_) {
   }
 
   m_attributeList.append(att_);
-  m_attributeDict.insert(att_->name(), att_);
+  m_attributeNameDict.insert(att_->name(), att_);
+  m_attributeTitleDict.insert(att_->title(), att_);
 
   //att_->category() will never be empty
   if(m_attributeCategories.contains(att_->category()) == 0) {
@@ -103,8 +119,8 @@ void BCCollection::addUnit(BCUnit* unit_) {
   }
 
   m_unitList.append(unit_);
-//  kdDebug() << "BCCollection::addUnit() - added unit (" << unit_->attribute("title") << ")\n";
-
+//  kdDebug() << "BCCollection::addUnit() - added unit (" << unit_->title() << ")" << endl;
+  
   populateDicts(unit_);
 }
 
@@ -146,22 +162,33 @@ bool BCCollection::deleteUnit(BCUnit* unit_) {
     return false;
   }
 
-  kdDebug() << "BCCollection::deleteUnit() - deleted unit (" << unit_->attribute("title") << ")\n";
+  kdDebug() << "BCCollection::deleteUnit() - deleted unit - " << unit_->title() << endl;
   removeUnitFromDicts(unit_);
   return m_unitList.remove(unit_);
 }
 
-const QPtrList<BCAttribute>& BCCollection::attributeList() const {
+const BCAttributeList& BCCollection::attributeList() const {
   return m_attributeList;
+}
+
+BCAttributeList BCCollection::attributeList(int filter_) const {
+  BCAttributeList list;
+  BCAttributeListIterator it(m_attributeList);
+  for( ; it.current(); ++it) {
+    if(it.current()->flags() & filter_) {
+      list.append(it.current());
+    }
+  }
+  return list;
 }
 
 const QStringList& BCCollection::attributeCategories() const {
   return m_attributeCategories;
 }
 
-QPtrList<BCAttribute> BCCollection::attributesByCategory(const QString& cat_) const {
-  QPtrList<BCAttribute> list;
-  QPtrListIterator<BCAttribute> it(m_attributeList);
+BCAttributeList BCCollection::attributesByCategory(const QString& cat_) const {
+  BCAttributeList list;
+  BCAttributeListIterator it(m_attributeList);
   for( ; it.current(); ++it) {
     if(it.current()->category() == cat_) {
       list.append(it.current());
@@ -170,28 +197,40 @@ QPtrList<BCAttribute> BCCollection::attributesByCategory(const QString& cat_) co
   return list;
 }
 
-QStringList BCCollection::attributeNames(bool all_/*=true*/) const {
+QStringList BCCollection::attributeNames() const {
 //  kdDebug() << "BCCollection::attributeNames()" << endl;
   QStringList strlist;
-  QPtrListIterator<BCAttribute> it(m_attributeList);
+  BCAttributeListIterator it(m_attributeList);
   for ( ; it.current(); ++it) {
-    if(all_ || !(it.current()->flags() & BCAttribute::DontShow)) {
-      strlist << it.current()->name();
-    }
+    strlist << it.current()->name();
   }
   return strlist;
 }
 
-QStringList BCCollection::attributeTitles(bool all_/*=true*/) const {
+QStringList BCCollection::attributeTitles() const {
 //  kdDebug() << "BCCollection::attributeTitles()" << endl;
   QStringList strlist;
-  QPtrListIterator<BCAttribute> it(m_attributeList);
+  BCAttributeListIterator it(m_attributeList);
   for( ; it.current(); ++it) {
-    if(all_ || !(it.current()->flags() & BCAttribute::DontShow)) {
-      strlist << it.current()->title();
-    }
+    strlist << it.current()->title();
   }
   return strlist;
+}
+
+const QString& BCCollection::attributeNameByTitle(const QString& title_) const {
+  BCAttribute* att = attributeByTitle(title_);
+  if(!att) {
+    kdWarning() << "BCCollection::attributeNameByTitle() - no attribute titled " << title_ << endl;
+  }
+  return att->name();
+}
+
+const QString& BCCollection::attributeTitleByName(const QString& name_) const {
+  BCAttribute* att = attributeByName(name_);
+  if(!att) {
+    kdWarning() << "BCCollection::attributeTitleByName() - no attribute named " << name_ << endl;
+  }
+  return att->title();
 }
 
 QStringList BCCollection::valuesByAttributeName(const QString& name_) const {
@@ -203,7 +242,7 @@ QStringList BCCollection::valuesByAttributeName(const QString& name_) const {
     if(strlist.contains(value) == 0) { // haven't inserted it yet
       if(attributeByName(name_)->flags() & BCAttribute::AllowMultiple) {
         // the space after the semi-colon is enforced elsewhere
-        strlist += QStringList::split("; ", value);
+        strlist += QStringList::split(QString::fromLatin1("; "), value);
       } else { // multiple values not allowed
         // no need to call value.simplifyWhiteSpace()
         strlist += value;
@@ -214,8 +253,12 @@ QStringList BCCollection::valuesByAttributeName(const QString& name_) const {
   return strlist;
 }
 
-BCAttribute* BCCollection::attributeByName(const QString& name_) const {
-  return m_attributeDict.isEmpty() ? 0 : m_attributeDict.find(name_);
+BCAttribute* const BCCollection::attributeByName(const QString& name_) const {
+  return m_attributeNameDict.isEmpty() ? 0 : m_attributeNameDict.find(name_);
+}
+
+BCAttribute* const BCCollection::attributeByTitle(const QString& title_) const {
+  return m_attributeTitleDict.isEmpty() ? 0 : m_attributeTitleDict.find(title_);
 }
 
 bool BCCollection::isAllowed(const QString& key_, const QString& value_) const {
@@ -291,7 +334,7 @@ const QStringList& BCCollection::unitGroups() const {
   return m_unitGroups;
 }
 
-BCUnitGroupDict* BCCollection::unitGroupDictByName(const QString& name_) const {
+BCUnitGroupDict* const BCCollection::unitGroupDictByName(const QString& name_) const {
   return m_unitGroupDicts.isEmpty() ? 0 : m_unitGroupDicts.find(name_);
 }
 
@@ -313,7 +356,7 @@ void BCCollection::populateDicts(BCUnit* unit_) {
     QStringList groups = unit_->groupsByAttributeName(attName);
 
     QStringList::Iterator groupIt;
-    for(groupIt = groups.begin() ; groupIt != groups.end(); ++groupIt) {
+    for(groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
       QString groupName = static_cast<QString>(*groupIt);
 //      kdDebug() << "\tnew group - " << groupName << endl;
       BCUnitGroup* group;
@@ -343,213 +386,3 @@ void BCCollection::groupModified(BCUnitGroup* group_) {
   emit signalGroupModified(this, group_);
 }
 
-BCCollection* BCCollection::Books(int id_) {
-  BCCollection* coll = new BCCollection(id_, i18n("My Books"), "book",
-                                        i18n("Book"), "book");
-
-  BCAttribute* att;
-
-  att = new BCAttribute("subtitle", i18n("Subtitle"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::FormatName);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("author", i18n("Author"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::FormatName | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-  coll->setDefaultGroupAttribute(att->name());
-
-  QStringList binding;
-  binding << i18n("Hardback") << i18n("Paperback") << i18n("Trade Paperback")
-     << i18n("E-Book") << i18n("Magazine") << i18n("Journal");
-  att = new BCAttribute("binding", i18n("Binding"), binding);
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("pur_date", i18n("Purchase Date"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete | BCAttribute::FormatDate);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("pur_price", i18n("Purchase Price"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("publisher", i18n("Publisher"));
-  att->setCategory(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("edition", i18n("Edition"));
-  att->setCategory(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("cr_year", i18n("Copyright Year"));
-  att->setCategory(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("pub_year", i18n("Publication Year"));
-  att->setCategory(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("isbn", i18n("ISBN#"));
-  att->setCategory(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
-  att->setDescription(i18n("International Standard Book Number"));
-  coll->addAttribute(att);
-
-  att = new BCAttribute("lccn", i18n("LCCN#"));
-  att->setCategory(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
-  att->setDescription(i18n("Library of Congress Control Number"));
-  coll->addAttribute(att);
-
-  att = new BCAttribute("pages", i18n("Pages"));
-  att->setCategory(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("language", i18n("Language"));
-  att->setCategory(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("genre", i18n("Genre"));
-  att->setCategory(i18n("Classification"));
-  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("keywords", i18n("Keywords"));
-  att->setCategory(i18n("Classification"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("series", i18n("Series"));
-  att->setCategory(i18n("Classification"));
-  att->setFlags(BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("series_num", i18n("Series Number"));
-  att->setCategory(i18n("Classification"));
-  att->setFlags(BCAttribute::DontComplete | BCAttribute::DontShow);
-  coll->addAttribute(att);
-
-  QStringList cond;
-  cond << i18n("New") << i18n("Used");
-  att = new BCAttribute("condition", i18n("Condition"), cond);
-  att->setCategory(i18n("Classification"));
-  att->setFlags(BCAttribute::DontShow);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("signed", i18n("Signed"), BCAttribute::Bool);
-  att->setCategory(i18n("Personal"));
-  att->setFlags(BCAttribute::DontShow);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("read", i18n("Read"), BCAttribute::Bool);
-  att->setCategory(i18n("Personal"));
-  att->setFlags(BCAttribute::DontShow);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("gift", i18n("Gift"), BCAttribute::Bool);
-  att->setCategory(i18n("Personal"));
-  att->setFlags(BCAttribute::DontShow);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("loaned", i18n("Loaned"), BCAttribute::Bool);
-  att->setCategory(i18n("Personal"));
-  att->setFlags(BCAttribute::DontShow);
-  coll->addAttribute(att);
-
-  QStringList rating;
-  rating << i18n("5 - Best") << i18n("4 - Good") << i18n("3 - Neutral") << i18n("2 - Bad") << i18n("1 - Worst");
-  att = new BCAttribute("rating", i18n("Rating"), rating);
-  att->setCategory(i18n("Personal"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("comments", i18n("Comments"));
-  att->setCategory(i18n("Personal"));
-  att->setFlags(BCAttribute::DontComplete);
-  coll->addAttribute(att);
-
-  coll->m_isCustom = false;
-  return coll;
-}
-
-#if 0
-BCCollection* BCCollection::CDs(int id_) {
-  BCCollection* coll = new BCCollection(id_, i18n("My CDs"), "cd", i18n("CD"), "cd");
-
-  BCAttribute* att;
-
-  att = new BCAttribute("artist", i18n("Artist"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-  coll->setDefaultGroupAttribute(att->name());
-
-  att = new BCAttribute("year", i18n("Year"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::DontComplete | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("genre", i18n("Genre"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  QStringList list;
-  list << i18n("CD") << i18n("Cassette") << i18n("8-track");
-  att = new BCAttribute("medium", i18n("Medium"), list);
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("comments", i18n("Comments"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::DontComplete);
-  coll->addAttribute(att);
-
-  coll->m_isCustom = false;
-  return coll;
-}
-
-BCCollection* BCCollection::Videos(int id_) {
-  BCCollection* coll = new BCCollection(id_, i18n("My Videos"), "video", i18n("Video"), "video");
-
-  BCAttribute* att;
-
-  att = new BCAttribute("date", i18n("Date"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::DontComplete);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("genre", i18n("Genre"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-  coll->setDefaultGroupAttribute(att->name());
-
-  QStringList list;
-  list << i18n("DVD") << i18n("VHS") << i18n("DivX") << i18n("8mm") << i18n("VCD") << i18n("LaserDisc") << i18n("Betamax");
-  att = new BCAttribute("medium", i18n("Medium"), list);
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::AllowGrouped);
-  coll->addAttribute(att);
-
-  att = new BCAttribute("comments", i18n("Comments"));
-  att->setCategory(i18n("General"));
-  att->setFlags(BCAttribute::DontComplete);
-  coll->addAttribute(att);
-
-  coll->m_isCustom = false;
-  return coll;
-}
-#endif

@@ -9,19 +9,14 @@
 /***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
  ***************************************************************************/
 
 #include "bcgroupview.h"
-#include "bccollection.h"
 #include "bcattribute.h"
-#include "bcunititem.h"
 #include "bcunitgroup.h"
-#include "bookcasedoc.h"
-#include "bookcase.h"
 
 #include <klineeditdlg.h>
 #include <klocale.h>
@@ -39,7 +34,7 @@
 BCGroupView::BCGroupView(QWidget* parent_, const char* name_/*=0*/)
     : KListView(parent_, name_), m_showCount(false) {
   // the app name isn't translated
-  addColumn("Bookcase");
+  addColumn(QString::fromLatin1("Bookcase"));
   // hide the header since there's only one column
   header()->hide();
   setRootIsDecorated(true);
@@ -47,46 +42,58 @@ BCGroupView::BCGroupView(QWidget* parent_, const char* name_/*=0*/)
   // turn off the alternate background color
   setAlternateBackground(QColor());
 
-  QPixmap rename, expand, collapse;
-  rename = KGlobal::iconLoader()->loadIcon("editclear", KIcon::Small);
-  expand = KGlobal::iconLoader()->loadIcon("2downarrow", KIcon::Small);
-  collapse = KGlobal::iconLoader()->loadIcon("2uparrow", KIcon::Small);
+  QPixmap rename, expand, collapse, remove;
+  rename = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("editclear"), KIcon::Small);
+  expand = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("2downarrow"), KIcon::Small);
+  collapse = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("2uparrow"), KIcon::Small);
+  remove = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("remove"), KIcon::Small);
 
-  m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon("folder_red_open", KIcon::Small);
-  m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon("folder_red", KIcon::Small);
+  // TODO: maybe allow this to be customized
+  m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder_open"),
+                                                      KIcon::Small);
+  m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("folder"),
+                                                        KIcon::Small);
 
   m_collMenu.insertItem(rename, i18n("Rename Collection"), this, SLOT(slotHandleRename()));
 
   m_groupMenu.insertItem(expand, i18n("Expand All Groups"), this, SLOT(slotExpandAll()));
   m_groupMenu.insertItem(collapse, i18n("Collapse All Groups"), this, SLOT(slotCollapseAll()));
 
+  m_unitMenu.insertItem(remove, i18n("Delete Book"), this, SLOT(slotHandleDelete()));
+
   connect(this, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&, int)),
           SLOT(slotRMB(QListViewItem*, const QPoint&, int)));
 
 //  connect(this, SIGNAL(clicked(QListViewItem*)), SLOT(slotSelected(QListViewItem*)));
 
-  connect(this, SIGNAL(selectionChanged(QListViewItem*)), SLOT(slotSelected(QListViewItem*)));
+  connect(this, SIGNAL(selectionChanged(QListViewItem*)),
+          SLOT(slotSelected(QListViewItem*)));
 
-  connect(this, SIGNAL(doubleClicked(QListViewItem*)), SLOT(slotToggleItem(QListViewItem*)));
+  connect(this, SIGNAL(doubleClicked(QListViewItem*)),
+          SLOT(slotToggleItem(QListViewItem*)));
 
-  connect(this, SIGNAL(expanded(QListViewItem*)), SLOT(slotExpanded(QListViewItem*)));
+  connect(this, SIGNAL(expanded(QListViewItem*)),
+          SLOT(slotExpanded(QListViewItem*)));
 
-  connect(this, SIGNAL(collapsed(QListViewItem*)), SLOT(slotCollapsed(QListViewItem*)));
+  connect(this, SIGNAL(collapsed(QListViewItem*)),
+          SLOT(slotCollapsed(QListViewItem*)));
 }
 
 ParentItem* BCGroupView::insertItem(ParentItem* collItem_, BCUnitGroup* group_) {
   QString text = group_->groupName();
-  if(m_showCount) {
-   text += " (" + QString::number(group_->count()) + ")";
-  }
+  
   ParentItem* par = new ParentItem(collItem_, text);
   par->setPixmap(0, m_groupClosedPixmap);
-  m_groupDict.insert(QString::number(collItem_->id()) + group_->groupName(), par);
+  par->setCount(group_->count());
+  
+  QString key = groupKey(collItem_, group_);
+  m_groupDict.insert(key, par);
+  
   return par;
 }
 
 ParentItem* BCGroupView::locateItem(ParentItem* collItem_, BCUnitGroup* group_) {
-  QString key = QString::number(collItem_->id()) + group_->groupName();
+  QString key = groupKey(collItem_, group_);
   ParentItem* par = m_groupDict.find(key);
   if(par) {
     return par;
@@ -94,7 +101,6 @@ ParentItem* BCGroupView::locateItem(ParentItem* collItem_, BCUnitGroup* group_) 
 
   return insertItem(collItem_, group_);
 }
-
 
 ParentItem* BCGroupView::locateItem(BCCollection* coll_) {
   ParentItem* root = 0;
@@ -110,63 +116,83 @@ ParentItem* BCGroupView::locateItem(BCCollection* coll_) {
     }
   }
   if(!root) {
-    kdDebug() << "BCGroupView::locateItem() - adding new collection" << endl;
+//    kdDebug() << "BCGroupView::locateItem() - adding new collection" << endl;
     root = new ParentItem(this, coll_->title(), coll_->id());
   }
   return root;
 }
 
-const QString& BCGroupView::groupAttribute() const {
-  return m_groupAttribute;
+const QString& BCGroupView::collGroupBy(const QString& type_) const {
+  return m_collGroupBy.find(type_).data();
 }
 
 void BCGroupView::slotReset() {
+  // don't really need to clear the collGroupBy map
   m_groupDict.clear();
   clear();
 }
 
 void BCGroupView::slotRemoveItem(BCCollection* coll_) {
   if(!coll_) {
+    kdWarning() << "BCGroupView::slotRemoveItem() - null coll pointer!" << endl;
     return;
   }
+//  kdDebug() << "BCGroupView::slotRemoveItem(BCCollection) - " << coll_->title() << endl;
 
-//  kdDebug() << "BCGroupView::slotRemoveItem() - " << unit_->attribute("title") << endl;
   ParentItem* collItem = locateItem(coll_);
   // first remove all groups in collection from dict
   QListViewItem* groupItem = collItem->firstChild();
   for( ; groupItem; groupItem = groupItem->nextSibling()) {
-    m_groupDict.remove(QString::number(coll_->id()) + groupItem->text(0));
+    QString key = groupKey(coll_, groupItem);
+    m_groupDict.remove(key);
   }
   // automatically deletes all children
   delete collItem;
 }
 
 void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
-  if(!coll_ || !group_ || m_groupAttribute != group_->attributeName()) {
+  if(!coll_ || !group_) {
+    kdWarning() << "BCGroupView::slotModifyGroup() - null coll or group pointer!" << endl;
     return;
   }
+
+  // if the units aren't grouped by attribute of the modified group,
+  // we don't care, so return
+  QString unitName = coll_->unitName();
+  if(m_collGroupBy.contains(unitName)
+      && m_collGroupBy.find(unitName).data() != group_->attributeName()) {
+    return;
+  }
+  
 //  kdDebug() << "BCGroupView::slotModifyGroup() - " << group_->attributeName() << endl;
 
   ParentItem* root = locateItem(coll_);
   ParentItem* par = locateItem(root, group_);
+  //make a copy of the group
   BCUnitGroup leftover(*group_);
 
-  // first delete all items not in the group
+  // first delete all items in this view but no longer in the group
   QListViewItem* item = par->firstChild();
+  QListViewItem* next;
   while(item) {
     BCUnit* unit = static_cast<BCUnitItem*>(item)->unit();
     if(group_->containsRef(unit)) {
       leftover.removeRef(unit);
       item = item->nextSibling();
     } else {
-//      kdDebug() << "\tdeleting unit - " << unit->attribute("title") << endl;
-      QListViewItem* next = item->nextSibling();
+      // if it's not in the group, delete it
+//      kdDebug() << "\tdeleting unit - " << unit->title() << endl;
+      next = item->nextSibling();
       delete item;
       item = next;
     }
   }
+  
+  // if there are no more child items in the group, no units in the leftover group
+  // then delete the parent item
   if(par->childCount() == 0 && leftover.isEmpty()) {
-    m_groupDict.remove(QString::number(coll_->id()) + par->text(0));
+    QString key = groupKey(coll_, par);
+    m_groupDict.remove(key);
     delete par;
     return;
   }
@@ -175,16 +201,12 @@ void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
   icon = KGlobal::iconLoader()->loadIcon(coll_->iconName(), KIcon::User);
 
   // in case the number of units in the group changed
-  if(m_showCount) {
-    par->setText(0, group_->groupName() + " (" + QString::number(group_->count()) + ")");
-  }
-
-  // next add new listViewItems for items in the group, but not in the view
+  par->repaint();
+  
+  // next add new listViewItems for items in the group, but not currently in the view
   QPtrListIterator<BCUnit> it(leftover);
   for( ; it.current(); ++it) {
-    // guaranteed to have a "title" attribute
-    QString title = it.current()->attribute("title");
-    BCAttribute::formatTitle(title);
+    QString title = it.current()->title();
 
     BCUnitItem* item = new BCUnitItem(par, title, it.current());
     item->setPixmap(0, icon);
@@ -194,6 +216,9 @@ void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
       par->setOpen(true);
     }
   }
+
+  // need to refresh
+  triggerUpdate();
   root->setOpen(true);
 }
 
@@ -217,33 +242,56 @@ void BCGroupView::slotSelected(QListViewItem* item_) {
 }
 
 void BCGroupView::slotSetSelected(BCUnit* unit_) {
+//  kdDebug() << "BCGroupView::slotSetSelected()" << endl;
   // if unit_ is null pointer, set no selected
   if(!unit_) {
     setSelected(currentItem(), false);
     return;
   }
 
-  // just grab the listitem for the first group
-  BCUnitGroup* group = unit_->groups().getFirst();
-  QString dictKey = QString::number(unit_->collection()->id()) + group->groupName();
-  ParentItem* par = m_groupDict.find(dictKey);
+  if(selectedItem() && unit_ == static_cast<BCUnitItem*>(selectedItem())->unit()) {
+    return;
+  }
+
+  // have to find a group whose attribute is the same as currently shown
+  QString unitName = unit_->collection()->unitName();
+  if(!m_collGroupBy.contains(unitName)) {
+    kdDebug() << "BCGroupView::slotSetSelected() - no group attribute for " << unitName << endl;
+    return;
+  }
+
+  BCUnitGroup* group = 0;
+  QString currentGroup = m_collGroupBy.find(unitName).data();
+  QPtrListIterator<BCUnitGroup> groupIt(unit_->groups());
+  for( ; groupIt.current(); ++groupIt) {
+    if(groupIt.current()->attributeName() == currentGroup) {
+      group = groupIt.current();
+      break;
+    }
+  }
+  if(!group) {
+    kdDebug() << "BCGroupView::slotSetSelected() - unit is not in any current groups!" << endl;
+    return;
+  }
+  
+  QString key = groupKey(unit_->collection(), group);
+  ParentItem* par = m_groupDict.find(key);
   if(!par) {
     return;
   }
 
   BCUnitItem* unitItem = 0;
   QListViewItem* item = par->firstChild();
-  for( ; item; item->nextSibling()) {
+  for( ; item; item = item->nextSibling()) {
     unitItem = static_cast<BCUnitItem*>(item);
     if(unitItem->unit() == unit_) {
       break;
     }
   }
 
-  // this ends up calling BCUnitEditWidget::slotSetContents() twice
-  // since the selectedItem() signal gets sent by both this object and the
-  // detailed listview
+  blockSignals(true);
   setSelected(unitItem, true);
+  blockSignals(false);
   ensureItemVisible(unitItem);
 }
 
@@ -286,6 +334,10 @@ void BCGroupView::slotExpandAll(int depth_/*=-1*/) {
 }
 
 void BCGroupView::slotCollapseAll(int depth_/*=-1*/) {
+  if(childCount() == 0) {
+    return;
+  }
+
   QListViewItem* item;
 
   if(depth_ == -1) {
@@ -295,7 +347,7 @@ void BCGroupView::slotCollapseAll(int depth_/*=-1*/) {
     }
     depth_ = item->depth();
   }
-
+  
   switch(depth_) {
     //TODO: should be iterating over all collections
     case 0:
@@ -322,6 +374,7 @@ void BCGroupView::slotRMB(QListViewItem* item_, const QPoint& point_, int) {
   }
 
   setSelected(item_, true);
+  
   if(item_->depth() == 0 && m_collMenu.count() > 0) {
     m_collMenu.popup(point_);
   } else if(item_->depth() == 1 && m_groupMenu.count() > 0) {
@@ -333,6 +386,7 @@ void BCGroupView::slotRMB(QListViewItem* item_, const QPoint& point_, int) {
 
 void BCGroupView::slotHandleRename() {
   QListViewItem* item = currentItem();
+  // items at depth==0 are for collections
   if(item && item->depth() == 0) {
     QString newName;
     bool ok;
@@ -364,49 +418,27 @@ void BCGroupView::slotClearSelection() {
 
 void BCGroupView::slotAddCollection(BCCollection* coll_) {
   if(!coll_) {
+    kdWarning() << "BCGroupView::slotAddCollection() - null coll pointer!" << endl;
     return;
   }
-  kdDebug() << "BCGroupView::slotAddCollection" << endl;
+  
+//  kdDebug() << "BCGroupView::slotAddCollection" << endl;
 
-  if(m_groupAttribute.isEmpty()) {
-    m_groupAttribute = coll_->defaultGroupAttribute();
-    kdDebug() << "\tm_groupAttribute was empty, now is " << m_groupAttribute << endl;
+  QString groupBy;
+  QString unitName = coll_->unitName();
+  if(m_collGroupBy.contains(unitName)) {
+    groupBy = m_collGroupBy.find(unitName).data();
+  } else {
+    groupBy = coll_->defaultGroupAttribute();
+    m_collGroupBy.insert(unitName, groupBy);
+//    kdDebug() << "\tm_groupAttribute was empty, now is " << groupBy << endl;
   }
 
-  BCUnitGroupDict* dict = coll_->unitGroupDictByName(m_groupAttribute);
-  if(!dict) {
-//    kdDebug() << "\tno dict found" << endl;
+  ParentItem* collItem = populateCollection(coll_, groupBy);
+  if(!collItem) {
     return;
   }
-
-  ParentItem* collItem = locateItem(coll_);
-  // delete all the children;
-  if(collItem->childCount() > 0) {
-    QListViewItem* child = collItem->firstChild();
-    QListViewItem* next;
-    while(child) {
-      next = child->nextSibling();
-      m_groupDict.remove(QString::number(collItem->id()) + child->text(0));
-      delete child;
-      child = next;
-    }
-  }
-
-  QPixmap icon = KGlobal::iconLoader()->loadIcon(coll_->iconName(), KIcon::User);
-
-  QDictIterator<BCUnitGroup> it(*dict);
-  for( ; it.current(); ++it) {
-    ParentItem* par = insertItem(collItem, it.current());
-
-    QPtrListIterator<BCUnit> unitIt(*it.current());
-    for( ; unitIt.current(); ++unitIt) {
-      QString title = unitIt.current()->attribute("title");
-      BCAttribute::formatTitle(title);
-      BCUnitItem* item = new BCUnitItem(par, title, unitIt.current());
-      item->setPixmap(0, icon);
-    }
-  }
-
+  
   setSelected(collItem, true);
   slotCollapseAll();
   ensureItemVisible(collItem);
@@ -415,31 +447,104 @@ void BCGroupView::slotAddCollection(BCCollection* coll_) {
 }
 
 void BCGroupView::setGroupAttribute(BCCollection* coll_, const QString& groupAtt_) {
-  kdDebug() << "BCGroupView::setGroupAttribute - " << groupAtt_ << endl;
-  // this gets called when a file is read and then, the groupAttributes match
-  // but there's no children yet, so check for that, too
-  if(!coll_) {
-    m_groupAttribute = groupAtt_;
-//    kdDebug() << "\tempty collection - done" << endl;
-    return;
-  }
+//  kdDebug() << "BCGroupView::setGroupAttribute - " << groupAtt_ << endl;
 
+  // as a hack, when a new collection is added,  this gets called
+  // if the collection item is empty, go ahead and populate it
+  // even if the group attribute has not changed
   ParentItem* collItem = locateItem(coll_);
-  if(m_groupAttribute != groupAtt_ || collItem->childCount() == 0) {
-    m_groupAttribute = groupAtt_;
-    slotAddCollection(coll_);
+  QString unitName = coll_->unitName();
+  if(!m_collGroupBy.contains(unitName)
+     || m_collGroupBy.find(unitName).data() != groupAtt_
+     || collItem->childCount() == 0) {
+    m_collGroupBy.insert(unitName, groupAtt_);
+    populateCollection(coll_, groupAtt_);
   }
 //  kdDebug() << "BCGroupView::setGroupAttribute - done" << endl;
 }
 
-void BCGroupView::slotShowCount(bool showCount_) {
-  kdDebug() << "BCGroupView::slotShowCount" << endl;
+bool BCGroupView::showCount() const {
+  return m_showCount;
+}
+
+void BCGroupView::showCount(bool showCount_, const BCCollectionList& list_) {
+//  kdDebug() << "BCGroupView::showCount()" << endl;
   if(m_showCount != showCount_) {
     m_showCount = showCount_;
-    // TODO: fix this for multiple collections
-    // parent is actually a qsplit. take parent of parent
-    Bookcase* app = static_cast<Bookcase*>(parent()->parent());
-    BCCollection* coll = app->doc()->collectionById(0);
-    slotAddCollection(coll);
+
+    // now just repaint all the child items, paintCell(() will take care of the update
+    QListViewItemIterator it(this);
+    for( ; it.current(); ++it) {
+      if(it.current()->depth() == 1) {
+        it.current()->repaint();
+      }
+    }
   }
+}
+
+ParentItem* BCGroupView::populateCollection(BCCollection* coll_,
+  const QString& groupBy_/*=QString::null*/) {
+
+//  kdDebug() << "BCGroupView::populateCollection()" << endl;
+  BCUnitGroupDict* dict;
+  if(groupBy_.isEmpty()) {
+    QString groupBy;
+    QString unitName = coll_->unitName();
+    if(m_collGroupBy.contains(unitName)) {
+      groupBy = m_collGroupBy.find(unitName).data();
+    } else {
+      groupBy = coll_->defaultGroupAttribute();
+      m_collGroupBy.insert(unitName, groupBy);
+//      kdDebug() << "\tm_groupAttribute was empty, now is " << groupBy << endl;
+    }
+    dict = coll_->unitGroupDictByName(groupBy);
+  } else {
+    dict = coll_->unitGroupDictByName(groupBy_);
+    if(!dict) {
+      kdDebug() << "BCGroupView::populateCollection() - no dict found for " << groupBy_ << endl;
+      return 0;
+    }
+  }
+
+  //if there is not a root item for the collection, it is created
+  ParentItem* collItem = locateItem(coll_);
+  // delete all the children;
+  if(collItem->childCount() > 0) {
+//    kdDebug() << "\tdeleting all the children" << endl;
+    QListViewItem* child = collItem->firstChild();
+    QListViewItem* next;
+    while(child) {
+      next = child->nextSibling();
+      QString key = groupKey(collItem, child);
+      m_groupDict.remove(key);
+      delete child;
+      child = next;
+    }
+  }
+
+  QPixmap icon = KGlobal::iconLoader()->loadIcon(coll_->iconName(), KIcon::User);
+
+  // iterate over all the groups in the dict
+  // e.g. if the dict is "author", loop over all the author groups
+  QDictIterator<BCUnitGroup> it(*dict);
+  for( ; it.current(); ++it) {
+    ParentItem* par = insertItem(collItem, it.current());
+
+    QPtrListIterator<BCUnit> unitIt(*it.current());
+    for( ; unitIt.current(); ++unitIt) {
+      QString title = unitIt.current()->title();
+      BCUnitItem* item = new BCUnitItem(par, title, unitIt.current());
+      item->setPixmap(0, icon);
+    }
+  }
+  return collItem;
+}
+
+void BCGroupView::slotHandleDelete() {
+  BCUnitItem* item = static_cast<BCUnitItem*>(currentItem());
+  if(!item || !item->unit()) {
+    return;
+  }
+
+  emit signalDeleteUnit(item->unit());
 }

@@ -1,19 +1,18 @@
-/* *************************************************************************
+/***************************************************************************
                              bcuniteditwidget.h
                              -------------------
     begin                : Wed Sep 26 2001
     copyright            : (C) 2001 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BCUNITEDITWIDGET_H
 #define BCUNITEDITWIDGET_H
@@ -21,13 +20,15 @@
 class BCUnit;
 class BCCollection;
 class BCTabControl;
+class BookcaseDoc;
+
 class QListViewItem;
 class QPushButton;
 
 #include <klineedit.h>
 #include <kcombobox.h>
 
-#include <qmultilineedit.h>
+#include <qtextedit.h>
 #include <qcheckbox.h>
 #include <qdict.h>
 
@@ -37,7 +38,7 @@ class QPushButton;
  * edit controls and so on.
  *
  * @author Robby Stephenson
- * @version $Id: bcuniteditwidget.h,v 1.23 2002/11/25 00:56:22 robby Exp $
+ * @version $Id: bcuniteditwidget.h,v 1.29 2003/03/10 02:50:52 robby Exp $
  */
 class BCUnitEditWidget : public QWidget  {
 Q_OBJECT
@@ -51,9 +52,8 @@ public:
    * @param name The widget name
    */
   BCUnitEditWidget(QWidget* parent, const char* name=0);
-  /**
-   */
-  ~BCUnitEditWidget();
+
+  bool queryModified();
 
 public slots:
   void slotSetLayout(BCCollection* coll);
@@ -75,6 +75,12 @@ public slots:
    * @param unit A pointer to the unit
    */
   void slotUpdateCompletions(BCUnit* unit);
+  /**
+   * Handles clicking the Save button. All the values in the entry widgets are
+   * copied into the unit object. @ref signalDoUnitSave is made. The widget is cleared,
+   * and the first tab is shown.
+   */
+  void slotHandleSave();
 
 protected:
   /**
@@ -85,12 +91,6 @@ protected:
 
 protected slots:
   /**
-   * Handles a keypress of <return>. Doesn't do anything at the moment.
-   *
-   * @param text The text in the edit box
-   */
-  void slotHandleReturn(const QString& text);
-  /**
    * Handles clicking the New button. The old unit pointer is destroyed and a
    * new one is created, but not added to any collection.
    */
@@ -100,12 +100,6 @@ protected slots:
    * to the parent collection.
    */
   void slotHandleCopy();
-  /**
-   * Handles clicking the Save button. All the values in the entry widgets are
-   * copied into the unit object. @ref signalDoUnitSave is made. The widget is cleared,
-   * and the first tab is shown.
-   */
-  void slotHandleSave();
   /**
    * Clears all of the input controls in the widget. The pointer to the
    * current unit is nullified, but not the pointer to the current collection.
@@ -123,6 +117,10 @@ protected slots:
    * @param tabNum The number of the page shown
    */
   void slotSwitchFocus(int tabNum);
+  /**
+   * This slot is called whenever anything is modified.
+   */
+  void slotSetModified();
 
 signals:
   /**
@@ -143,7 +141,7 @@ private:
   BCUnit* m_currUnit;
   BCTabControl* m_tabs;
   QDict<KLineEdit> m_editDict;
-  QDict<QMultiLineEdit> m_multiDict;
+  QDict<QTextEdit> m_multiDict;
   QDict<KComboBox> m_comboDict;
   QDict<QCheckBox> m_checkDict;
   QPushButton* m_new;
@@ -151,6 +149,8 @@ private:
   QPushButton* m_save;
   QPushButton* m_delete;
   QPushButton* m_clear;
+
+  bool m_modified;
 };
 
 #endif

@@ -1,7 +1,51 @@
+2003-03-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Put the book count in color.
+	* Took out general export function for now.
+	* Released Bookcase version 0.5
+
+2003-03-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Added a new printing page in the configuration dialog
+	* Added a checkmark pixmap for the boolean fields
+	* Added a header menu to be able to select which fields to show in
+	the detailed list view
+
+2003-03-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed character encoding bug for latin2
+
+2003-01-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed focus bug
+
+2003-01-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed FORMAT_VERSION to 2
+	* Changed document format so that attributes which allow multiple
+	entries are saved in multiple XML elements
+	* Changed "keywords" attribute to "keyword"
+	* Added check for document format version so that incompatible versions
+	are not loaded. Older versions will be properly loaded, but once saved,
+	previous versions of Bookcase will not load the new files properly.
+	* Changed "Language" and "Copyright Year" to allow multiple entries.
+
+2002-12-12  Robby Stephenson  <robby@periapsis.org>
+	* Added namespaces to document file
+  
+2002-12-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added import from Bibtexml using XSLT
+
+2002-12-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Added export to Bibtex using XSLT
+	* Added export to Bibtexml using XSLT
+
 2002-12-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase version 0.4.1
-	* Added a romanian translation from Iulian Ursache <iulianu@cs.tuiasi.ro>
+	* Added a Romanian translation from Iulian Ursache <iulianu@cs.tuiasi.ro>
 
 2002-11-29  Robby Stephenson  <robby@periapsis.org>
 
@@ -14,7 +58,7 @@
 
 2002-11-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added an italian translation from FaUsT <faust@inventati.org> 
+	* Added an Italian translation from FaUsT <faust@inventati.org> 
 
 2002-11-05  Robby Stephenson  <robby@periapsis.org>
 

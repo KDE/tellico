@@ -284,7 +284,7 @@ AC_DEFUN(KDE_CHECK_UIC_FLAG,
         cat >conftest.ui <<EOT
         <!DOCTYPE UI><UI version="3" stdsetdef="1"></UI>
 EOT
-        ac_uic_testrun="$UIC -$1 $2 conftest.ui >/dev/null"
+        ac_uic_testrun="$UIC_PATH -$1 $2 conftest.ui >/dev/null"
         if AC_TRY_EVAL(ac_uic_testrun); then
             eval "kde_cv_prog_uic_$kde_cache=yes"
         else
@@ -323,14 +323,15 @@ AC_DEFUN(AC_PATH_QT_MOC_UIC,
 
    KDE_FIND_PATH(moc, MOC, [$qt_bindirs], [KDE_MOC_ERROR_MESSAGE])
    if test -z "$UIC_NOT_NEEDED"; then
-     KDE_FIND_PATH(uic, UIC, [$qt_bindirs], [UIC=""])
-     if test -z "$UIC" ; then
+     KDE_FIND_PATH(uic, UIC_PATH, [$qt_bindirs], [UIC_PATH=""])
+     if test -z "$UIC_PATH" ; then
        KDE_UIC_ERROR_MESSAGE
        exit 1
      elif test $kde_qtver = 3; then
        KDE_CHECK_UIC_FLAG(L,[/nonexistant],ac_uic_supports_libpath=yes,ac_uic_supports_libpath=no)
        KDE_CHECK_UIC_FLAG(nounload,,ac_uic_supports_nounload=yes,ac_uic_supports_nounload=no)
 
+       UIC=$UIC_PATH
        if test x$ac_uic_supports_libpath = xyes; then
            UIC="$UIC -L \$(kde_widgetdir)"
        fi
@@ -535,6 +536,7 @@ AC_DEFUN(KDE_SUBST_PROGRAMS,
 [
 
         kde_default_bindirs="/usr/bin /usr/local/bin /opt/local/bin /usr/X11R6/bin /opt/kde/bin /opt/kde3/bin /usr/kde/bin /usr/local/kde/bin"
+        test -n "$KDEDIR" && kde_default_bindirs="$KDEDIR/bin $kde_default_bindirs"
         if test -n "$KDEDIRS"; then
            kde_save_IFS=$IFS
            IFS=:
@@ -750,7 +752,7 @@ support])
 
    KDE_CHECK_TYPES
    KDE_CHECK_LIBDL
-
+   
 AH_VERBATIM(_AIX_STRINGS_H_BZERO,
 [
 /*
@@ -970,53 +972,6 @@ can't find it itself, we stop here assuming that make wouldn't find
 them either.])
 fi
 
-AC_MSG_CHECKING(for Xinerama)
-
- AC_ARG_WITH(xinerama,
-  [  --with-xinerama         enable support for Xinerama ],
-  [
-    no_xinerama=no
-  ], [
-    no_xinerama=yes
-  ]
-)
-
-kde_save_LDFLAGS="$LDFLAGS"
-kde_save_CFLAGS="$CFLAGS"
-kde_save_LIBS="$LIBS"
-LDFLAGS="$LDFLAGS $X_LDFLAGS $USER_LDFLAGS"
-CFLAGS="$CFLAGS -I$x_includes"
-LIBS="-lXinerama -lXext"
-
-if test "x$no_xinerama" = "xno"; then
-
-  AC_CACHE_VAL(ac_cv_have_xinerama,
-  [
-	  AC_TRY_LINK([#include <X11/Xlib.h>
-  			#include <X11/extensions/Xinerama.h>],
-	  	  [XineramaIsActive(NULL);],
-		  [ac_cv_have_xinerama="yes"],
-		  [ac_cv_have_xinerama="no"])
-  ])
-else
-  ac_cv_have_xinerama=no;
-fi
-
-AC_MSG_RESULT($ac_cv_have_xinerama)
-
-LIBXINERAMA=""
-
-if test "$ac_cv_have_xinerama" = "yes"; then
-  AC_DEFINE(HAVE_XINERAMA, 1, [Define if you want Xinerama support])
-  LIBXINERAMA="-lXinerama"
-fi
-
-AC_SUBST(LIBXINERAMA)
-
-LDFLAGS="$kde_save_LDFLAGS"
-CFLAGS="$kde_save_CFLAGS"
-LIBS="$kde_save_LIBS"
-
 LIB_XEXT="-lXext"
 QTE_NORTTI=""
 
@@ -1066,7 +1021,9 @@ EOF
 
 if test $kde_qtsubver -gt 0; then
 cat >> conftest.$ac_ext <<EOF
-#include <qiconview.h>
+#if QT_VERSION < 210
+#error 1
+#endif
 EOF
 fi
 fi
@@ -1093,8 +1050,6 @@ cat >> conftest.$ac_ext <<EOF
 EOF
 if test $kde_qtsubver -gt 0; then
 cat >> conftest.$ac_ext <<EOF
-    QIconView iv(0);
-    iv.setWordWrapIconText(false);
     QString s;
     s.setLatin1("Elvis is alive", 14);
 EOF
@@ -1115,6 +1070,7 @@ EOF
 AC_DEFUN(KDE_USE_QT,
 [
 if test -z "$1"; then
+  # Current default Qt version: 3.1
   kde_qtver=3
   kde_qtsubver=1
 else
@@ -1138,7 +1094,11 @@ if test -z "$2"; then
     fi
   fi
   if test "$kde_qtver" = "3"; then
-    kde_qt_minversion=">= Qt 3.0.3"
+    if test $kde_qtsubver -gt 0; then
+      kde_qt_minversion=">= Qt 3.0.3"
+    else
+      kde_qt_minversion=">= Qt 3.0"
+    fi
   fi
   if test "$kde_qtver" = "1"; then
     kde_qt_minversion=">= 1.42 and < 2.0"
@@ -1149,7 +1109,11 @@ fi
 
 if test -z "$3"; then
    if test $kde_qtver = 3; then
-     kde_qt_verstring="QT_VERSION >= 303"
+     if test $kde_qtsubver -gt 0; then
+       kde_qt_verstring="QT_VERSION >= 303"
+     else
+       kde_qt_verstring="QT_VERSION >= 300"
+     fi
    fi
    if test $kde_qtver = 2; then
      if test $kde_qtsubver -gt 0; then
@@ -1538,6 +1502,52 @@ AC_DEFUN(AC_PATH_QT,
 AC_PATH_QT_1_3
 ])
 
+AC_DEFUN(KDE_CHECK_UIC_PLUGINS,
+[
+AC_REQUIRE([AC_PATH_QT_MOC_UIC])
+
+if test x$ac_uic_supports_libpath = xyes; then
+
+AC_MSG_CHECKING([if UIC has KDE plugins available])
+AC_CACHE_VAL(kde_cv_uic_plugins,
+[
+cat > actest.ui << EOF
+<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<class>NewConnectionDialog</class>
+<widget class="QDialog">
+   <widget class="KLineEdit">
+        <property name="name">
+           <cstring>testInput</cstring>
+        </property>
+   </widget>
+</widget>
+</UI>
+EOF
+       
+
+
+kde_cv_uic_plugins=no
+kde_line="$UIC_PATH -L $kde_widgetdir"
+if test x$ac_uic_supports_nounload = xyes; then
+   kde_line="$kde_line -nounload"
+fi
+kde_line="$kde_line -impl actest.h actest.ui > actest.cpp"
+if AC_TRY_EVAL(kde_line); then
+	if test -f actest.cpp && grep klineedit actest.cpp > /dev/null; then
+		kde_cv_uic_plugins=yes
+	fi
+fi
+rm -f actest.ui actest.cpp
+])
+
+if test "$kde_cv_uic_plugins" = yes; then
+	AC_MSG_RESULT([yes])
+else
+	AC_MSG_ERROR([not found - you need to install kdelibs first.])
+fi
+fi
+])
+
 AC_DEFUN(KDE_CHECK_FINAL,
 [
   AC_ARG_ENABLE(final, [  --enable-final          build size optimized apps (experimental - needs lots of memory)],
@@ -1656,7 +1666,6 @@ if test -n "$kde_widgetdir"; then
     kde_widgetdir="$kde_widgetdir/kde3/plugins/designer"
 fi
 
-ac_kde_libraries="$kde_libdir"
 
 if test "$ac_kde_includes" = NO || test "$ac_kde_libraries" = NO || test "$kde_widgetdir" = NO; then
   ac_cv_have_kde="have_kde=no"
@@ -1665,8 +1674,7 @@ else
     ac_kde_includes=$ac_kde_includes ac_kde_libraries=$ac_kde_libraries"
 fi
 
-
-
+KDE_CHECK_UIC_PLUGINS
 
 else dnl test -z $1
 
@@ -1727,7 +1735,10 @@ all_includes="$all_includes $USER_INCLUDES"
 AC_SUBST(all_includes)
 AC_SUBST(all_libraries)
 
+ac_kde_libraries="$kde_libdir"
+
 AC_SUBST(AUTODIRS)
+
 
 ])
 
@@ -1878,6 +1889,7 @@ AC_DEFUN(KDE_CHECK_KIMGIO,
    AC_REQUIRE([AC_FIND_TIFF])
    AC_REQUIRE([AC_FIND_JPEG])
    AC_REQUIRE([AC_FIND_PNG])
+   AC_REQUIRE([AC_FIND_JASPER])
    AC_REQUIRE([KDE_CREATE_LIBS_ALIASES])
 
    if test "$1" = "existance"; then
@@ -1913,6 +1925,7 @@ if test $kde_qtver = 3; then
    AC_SUBST(LIB_KIO, "-lkio")
    AC_SUBST(LIB_SMB, "-lsmb")
    AC_SUBST(LIB_KAB, "-lkab")
+   AC_SUBST(LIB_KABC, "-lkabc")
    AC_SUBST(LIB_KHTML, "-lkhtml")
    AC_SUBST(LIB_KSPELL, "-lkspell")
    AC_SUBST(LIB_KPARTS, "-lkparts")
@@ -1988,7 +2001,7 @@ $3
 kde_cv_func_$1=yes,
 kde_cv_func_$1=no)
 CXXFLAGS="$save_CXXFLAGS"
-LIBS=$kde_safe_LIBS
+LIBS="$kde_safe_LIBS"
 AC_LANG_RESTORE
 ])
 
@@ -2001,7 +2014,7 @@ if test "x$kde_cv_func_$1" = xyes; then
   kde_cv_proto_$1=no
 else
   case "$1" in
-	setenv|unsetenv|usleep|getdomainname|random|srandom|seteuid|mkstemps|mkstemp|revoke)
+	setenv|unsetenv|usleep|getdomainname|random|srandom|seteuid|mkstemps|mkstemp|revoke|vsnprintf|strlcpy|strlcat)
 		kde_cv_proto_$1="yes - in libkdefakes"
 		;;
 	*)
@@ -2152,22 +2165,11 @@ initgroups(buffer, 27);
 	[INITGROUPS])
 ])
 
-AC_DEFUN(AC_CHECK_MKSTEMP,
-[
-	KDE_CHECK_FUNC_EXT(mkstemp, [
-#include <stdlib.h>
-],
-	[
-mkstemp("/tmp/aaaXXXXXX");
-],
-	[int mkstemp(char *)],
-	[MKSTEMP])
-])
-
 AC_DEFUN(AC_CHECK_MKSTEMPS,
 [
 	KDE_CHECK_FUNC_EXT(mkstemps, [
 #include <stdlib.h>
+#include <unistd.h>
 ],
 	[
 mkstemps("/tmp/aaaXXXXXX", 6);
@@ -2186,6 +2188,31 @@ res_init();
 ],
  	[int res_init (void)],
 	[RES_INIT])
+])
+
+AC_DEFUN(AC_CHECK_STRLCPY,
+[
+	KDE_CHECK_FUNC_EXT(strlcpy, [
+#include <string.h>
+],
+[ char buf[20];
+  strlcpy(buf, "KDE function test", sizeof(buf));
+],
+ 	[unsigned int strlcpy(char*, const char*, unsigned int)],
+	[STRLCPY])
+])
+
+AC_DEFUN(AC_CHECK_STRLCAT,
+[
+	KDE_CHECK_FUNC_EXT(strlcat, [
+#include <string.h>
+],
+[ char buf[20];
+  buf[0]='\0';
+  strlcat(buf, "KDE function test", sizeof(buf));
+],
+ 	[unsigned int strlcat(char*, const char*, unsigned int)],
+	[STRLCAT])
 ])
 
 AC_DEFUN(AC_FIND_GIF,
@@ -2488,6 +2515,43 @@ else
 fi
 ])
 
+
+AC_DEFUN(AC_FIND_JASPER,
+[
+AC_REQUIRE([KDE_CHECK_EXTRA_LIBS])
+AC_REQUIRE([AC_FIND_JPEG])
+AC_MSG_CHECKING([for jasper])
+AC_CACHE_VAL(ac_cv_jasper,
+[
+kde_save_LIBS="$LIBS"
+LIBS="$LIBS $all_libraries $USER_LDFLAGS -ljasper $LIBJPEG -lm"
+kde_save_CFLAGS="$CFLAGS"
+CFLAGS="$CFLAGS $all_includes $USER_INCLUDES"
+AC_LANG_C
+AC_TRY_LINK(dnl
+    [
+    #include<jasper/jasper.h>
+    ],
+    [
+    return( jas_init() );
+    ],
+    eval "ac_cv_jasper='-ljasper $LIBJPEG -lm'",
+    eval "ac_cv_jasper=no"
+)
+LIBS="$kde_save_LIBS"
+CFLAGS="$kde_save_CFLAGS"
+])dnl
+if eval "test ! \"`echo $ac_cv_jasper`\" = no"; then
+  AC_DEFINE_UNQUOTED(HAVE_JASPER, 1, [Define if you have jasper])
+  LIB_JASPER="$ac_cv_jasper"
+  AC_MSG_RESULT($ac_cv_jasper)
+else
+  AC_MSG_RESULT(no)
+  LIB_JASPER=""
+fi
+AC_SUBST(LIB_JASPER)
+])
+
 AC_DEFUN(AC_CHECK_BOOL,
 [
   AC_DEFINE_UNQUOTED(HAVE_BOOL, 1, [You _must_ have bool])
@@ -2605,7 +2669,7 @@ AC_DEFUN(AC_CHECK_COMPILERS,
   ])
 
   dnl Just for configure --help
-  AC_ARG_ENABLE(dummyoption,[  --disable-debug         disables debug output and debug symbols [default=yes]],[],[])
+  AC_ARG_ENABLE(dummyoption,[  --disable-debug         disables debug output and debug symbols [default=no]],[],[])
 
   AC_ARG_ENABLE(strict,[  --enable-strict         compiles with strict compiler options (may not work!)],
    [
@@ -3117,7 +3181,7 @@ AC_DEFUN(AM_KDE_GNU_GETTEXT,
    AC_REQUIRE([AC_FUNC_ALLOCA])dnl
    AC_REQUIRE([AC_FUNC_MMAP])dnl
    AC_REQUIRE([AM_KDE_WITH_NLS])dnl
-   AC_CHECK_HEADERS([argz.h limits.h locale.h nl_types.h string.h values.h alloca.h])
+   AC_CHECK_HEADERS([limits.h locale.h nl_types.h string.h values.h alloca.h])
    AC_CHECK_FUNCS([getcwd munmap putenv setlocale strchr strcasecmp \
 __argz_count __argz_stringify __argz_next])
 
@@ -4439,12 +4503,14 @@ AC_DEFUN(KDE_CHECK_HEADER,
 
 AC_DEFUN(KDE_CHECK_HEADERS,
 [
+   AH_CHECK_HEADERS([$1])
    AC_LANG_SAVE
    kde_safe_cppflags=$CPPFLAGS
    CPPFLAGS="$CPPFLAGS $all_includes"
    AC_LANG_CPLUSPLUS
-   for k_header in $1; do
-      AC_CHECK_HEADER($k_header, $2, $3)
+   for k_header in $1
+   do
+      AC_CHECK_HEADER($k_header, [AC_DEFINE_UNQUOTED(AS_TR_CPP(HAVE_$k_header)) $2], [$3])
    done
    CPPFLAGS=$kde_safe_cppflags
    AC_LANG_RESTORE
@@ -5054,6 +5120,218 @@ else
 
 fi
 AM_CONDITIONAL(include_BZIP2, test -n "$BZIP2DIR")
+])
+
+dnl ------------------------------------------------------------------------
+dnl Try to find the SSL headers and libraries.
+dnl $(SSL_LDFLAGS) will be -Lsslliblocation (if needed)
+dnl and $(SSL_INCLUDES) will be -Isslhdrlocation (if needed)
+dnl ------------------------------------------------------------------------
+dnl
+AC_DEFUN(KDE_CHECK_SSL,
+[
+LIBSSL="-lssl -lcrypto"
+AC_REQUIRE([KDE_CHECK_LIB64])
+
+ac_ssl_includes=NO ac_ssl_libraries=NO
+ssl_libraries=""
+ssl_includes=""
+AC_ARG_WITH(ssl-dir,
+    [  --with-ssl-dir=DIR      where the root of OpenSSL is installed],
+    [  ac_ssl_includes="$withval"/include
+       ac_ssl_libraries="$withval"/lib$kdelibsuff
+    ])
+
+want_ssl=yes
+AC_ARG_WITH(ssl,
+    [  --without-ssl           disable SSL checks],
+    [want_ssl=$withval])
+
+if test $want_ssl = yes; then
+
+AC_MSG_CHECKING(for OpenSSL)
+
+AC_CACHE_VAL(ac_cv_have_ssl,
+[#try to guess OpenSSL locations
+  
+  ssl_incdirs="/usr/include /usr/local/include /usr/ssl/include /usr/local/ssl/include $prefix/include $kde_extra_includes"
+  ssl_incdirs="$ac_ssl_includes $ssl_incdirs"
+  AC_FIND_FILE(openssl/ssl.h, $ssl_incdirs, ssl_incdir)
+  ac_ssl_includes="$ssl_incdir"
+
+  ssl_libdirs="/usr/lib$kdelibsuff /usr/local/lib$kdelibsuff /usr/ssl/lib$kdelibsuff /usr/local/ssl/lib$kdelibsuff $libdir $prefix/lib$kdelibsuff $exec_prefix/lib$kdelibsuff $kde_extra_libs"
+  if test ! "$ac_ssl_libraries" = "NO"; then
+    ssl_libdirs="$ac_ssl_libraries $ssl_libdirs"
+  fi
+
+  test=NONE
+  ssl_libdir=NONE
+  for dir in $ssl_libdirs; do
+    try="ls -1 $dir/libssl*"
+    if test=`eval $try 2> /dev/null`; then ssl_libdir=$dir; break; else echo "tried $dir" >&AC_FD_CC ; fi
+  done
+
+  ac_ssl_libraries="$ssl_libdir"
+
+  AC_LANG_SAVE
+  AC_LANG_C
+
+  ac_cflags_safe="$CFLAGS"
+  ac_ldflags_safe="$LDFLAGS"
+  ac_libs_safe="$LIBS"
+
+  CFLAGS="$CFLAGS -I$ssl_incdir $all_includes"
+  LDFLAGS="$LDFLAGS -L$ssl_libdir $all_libraries"
+  LIBS="$LIBS $LIBSSL -lRSAglue -lrsaref"
+
+  AC_TRY_LINK(,void RSAPrivateEncrypt(void);RSAPrivateEncrypt();,
+  ac_ssl_rsaref="yes"
+  ,
+  ac_ssl_rsaref="no"
+  )
+
+  CFLAGS="$ac_cflags_safe"
+  LDFLAGS="$ac_ldflags_safe"
+  LIBS="$ac_libs_safe"
+
+  AC_LANG_RESTORE
+
+  if test "$ac_ssl_includes" = NO || test "$ac_ssl_libraries" = NO; then
+    have_ssl=no
+  else
+    have_ssl=yes;
+  fi
+
+  ])
+
+  eval "$ac_cv_have_ssl"
+
+  AC_MSG_RESULT([libraries $ac_ssl_libraries, headers $ac_ssl_includes])
+
+  AC_MSG_CHECKING([whether OpenSSL uses rsaref])
+  AC_MSG_RESULT($ac_ssl_rsaref)
+
+  AC_MSG_CHECKING([for easter eggs])
+  AC_MSG_RESULT([none found])
+
+else
+  have_ssl=no
+fi
+
+if test "$have_ssl" = yes; then
+  AC_MSG_CHECKING(for OpenSSL version)
+  dnl Check for SSL version
+  AC_CACHE_VAL(ac_cv_ssl_version,
+  [
+    AC_LANG_SAVE
+    AC_LANG_C 
+
+    cat >conftest.$ac_ext <<EOF
+#include <openssl/opensslv.h>
+#include <stdio.h>
+    int main() {
+ 
+#ifndef OPENSSL_VERSION_NUMBER
+      printf("ssl_version=\\"error\\"\n");
+#else
+      if (OPENSSL_VERSION_NUMBER < 0x00906000)
+        printf("ssl_version=\\"old\\"\n");
+      else
+        printf("ssl_version=\\"ok\\"\n");
+#endif
+     return (0);
+    }
+EOF
+
+    ac_compile='${CC-gcc} $CFLAGS -I$ac_ssl_includes conftest.$ac_ext -o conftest'
+    if AC_TRY_EVAL(ac_compile); then 
+
+      if eval `./conftest 2>&5`; then
+        if test $ssl_version = error; then
+          AC_MSG_ERROR([$ssl_incdir/openssl/opensslv.h doesn't define OPENSSL_VERSION_NUMBER !])
+        else
+          if test $ssl_version = old; then
+            AC_MSG_WARN([OpenSSL version too old. Upgrade to 0.9.6 at least, see http://www.openssl.org. SSL support disabled.])
+            have_ssl=no
+          fi
+        fi
+        ac_cv_ssl_version="ssl_version=$ssl_version"
+      else
+        AC_MSG_ERROR([Your system couldn't run a small SSL test program.
+        Check config.log, and if you can't figure it out, send a mail to 
+        David Faure <faure@kde.org>, attaching your config.log])
+      fi
+
+    else
+      AC_MSG_ERROR([Your system couldn't link a small SSL test program.
+      Check config.log, and if you can't figure it out, send a mail to 
+      David Faure <faure@kde.org>, attaching your config.log])
+    fi 
+
+    AC_LANG_RESTORE
+
+  ])
+
+  eval "$ac_cv_ssl_version"
+  AC_MSG_RESULT($ssl_version)
+fi
+
+if test "$have_ssl" != yes; then
+  LIBSSL="";
+else
+  AC_DEFINE(HAVE_SSL, 1, [If we are going to use OpenSSL])
+  ac_cv_have_ssl="have_ssl=yes \
+    ac_ssl_includes=$ac_ssl_includes ac_ssl_libraries=$ac_ssl_libraries ac_ssl_rsaref=$ac_ssl_rsaref"
+  
+  
+  ssl_libraries="$ac_ssl_libraries"
+  ssl_includes="$ac_ssl_includes"
+
+  if test "$ac_ssl_rsaref" = yes; then
+    LIBSSL="-lssl -lcrypto -lRSAglue -lrsaref" 
+  fi
+
+  if test $ssl_version = "old"; then
+    AC_DEFINE(HAVE_OLD_SSL_API, 1, [Define if you have OpenSSL < 0.9.6])
+  fi
+fi
+
+if test "$ssl_includes" = "/usr/include" || test  "$ssl_includes" = "/usr/local/include" || test -z "$ssl_includes"; then
+ SSL_INCLUDES="";
+else
+ SSL_INCLUDES="-I$ssl_includes"
+fi
+
+if test "$ssl_libraries" = "/usr/lib" || test "$ssl_libraries" = "/usr/local/lib" || test -z "$ssl_libraries"; then
+ SSL_LDFLAGS=""
+else
+ SSL_LDFLAGS="-L$ssl_libraries -R$ssl_libraries"
+fi
+
+AC_SUBST(SSL_INCLUDES)
+AC_SUBST(SSL_LDFLAGS)
+AC_SUBST(LIBSSL)
+])
+
+AC_DEFUN(KDE_CHECK_STRLCPY,
+[
+  AC_REQUIRE([AC_CHECK_STRLCAT])
+  AC_REQUIRE([AC_CHECK_STRLCPY])
+  AC_CHECK_SIZEOF(size_t)
+  AC_CHECK_SIZEOF(unsigned int)
+
+  AC_MSG_CHECKING([sizeof size_t == sizeof unsigned int])
+  AC_TRY_COMPILE(,[
+    #if SIZEOF_SIZE_T != SIZEOF_UNSIGNED_INT
+       choke me
+    #endif
+    ],AC_MSG_RESULT([yes]),[
+      AC_MSG_RESULT(no)
+      AC_MSG_ERROR([
+       Apparently on your system our assumption sizeof size_t == sizeof unsigned int
+       does not apply. Please mail kde-devel@kde.org with a description of your system!
+      ])
+  ])
 ])
 # libtool.m4 - Configure libtool for the host system. -*-Autoconf-*-
 

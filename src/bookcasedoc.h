@@ -1,19 +1,18 @@
-/* *************************************************************************
+/***************************************************************************
                                 bookcasedoc.h
                              -------------------
     begin                : Sun Sep 9 2001
     copyright            : (C) 2001 by Robby Stephenson
     email                : robby@periapsis.org
- * *************************************************************************/
+ ***************************************************************************/
 
-/* *************************************************************************
+/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
  *                                                                         *
- * *************************************************************************/
+ ***************************************************************************/
 
 #ifndef BOOKCASEDOC_H
 #define BOOKCASEDOC_H
@@ -22,9 +21,7 @@
 #include <config.h>
 #endif
 
-class BCUnit;
 class QFile;
-class QCString;
 
 #include "bccollection.h"
 
@@ -40,7 +37,7 @@ class QCString;
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: bookcasedoc.h,v 1.28 2002/11/25 00:56:22 robby Exp $
+ * @version $Id: bookcasedoc.h,v 1.43 2003/03/10 02:13:49 robby Exp $
  */
 class BookcaseDoc : public QObject  {
 Q_OBJECT
@@ -53,7 +50,7 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  BookcaseDoc(QWidget *parent, const char *name=0);
+  BookcaseDoc(QWidget* parent, const char* name=0);
 
   /**
    * Sets the modified flag. If it is true, the signalModified signal is made.
@@ -99,6 +96,10 @@ public:
    */
   bool openDocument(const KURL& url);
   /**
+   * Loads a DomDocument into a BookcaseDoc
+   */
+  bool loadDomDocument(const KURL& url, const QDomDocument& dom);
+  /**
    * Checks to see if the document has been modified before deleting the contents.
    * If it has, then a message box asks the user if the document should be saved,
    * and then acts on the result.
@@ -107,13 +108,22 @@ public:
    */
   bool saveModified();
   /**
-   * Saves the document contents to a location in XML format. The signalFractionDone() signal
-   * is made periodically.
+   * Saves the document contents to a file.
    *
    * @param url The location to save the file
    * @return A boolean indicating success
    */
   bool saveDocument(const KURL& url);
+  /**
+   * Writes the contents of a string to a url. If the file already exists, a "~" is appended
+   * and the existing file is moved. The the file is remote, a temporary file is written and
+   * then uploaded.
+   *
+   * @param url The url
+   * @param text The text
+   * @return A boolean indicating success
+   */
+  bool writeURL(const KURL& url, const QString& text) const;
   /**
    * Closes the document, deleting the contents. The return value is presently always true.
    *
@@ -143,14 +153,15 @@ public:
    *
    * @return The collection list
    */
-  const QPtrList<BCCollection>& collectionList() const;
+  const BCCollectionList& collectionList() const;
   /**
    * Inserts the data in the document into a DOM ordered form by iterating over
    * the units in the whole document.
    *
+   * @param format Whether to format the attributes
    * @return The QDomDocument object
    */
-  QDomDocument exportXML();
+  QDomDocument exportXML(bool format=false);
   /**
    * Inserts the data in the document into a DOM ordered form by iterating through
    * a certain attribute group
@@ -161,19 +172,41 @@ public:
    */
   QDomDocument exportXML(const QString& dictName, bool format);
   /**
-   * Takes the XML exported by the document and passes it through
-   * the XSLT transformation.
-   *
-   * @param xsltFilename The XSLT file
-   * @param format Whether to format the data according to
-                    @ref BCAttribute::formatName(), etc...
-   * @return The HTML text
-   */
-  QString exportHTML(const QString& xsltFilename, const QString& param, bool format=false);
-  /**
    * Returns true if there are no units. A doc with an empty collection is still empty.
    */
   bool isEmpty() const; 
+  /**
+   * Loads the contents of a file into a QDomDocument.
+   *
+   * @param url The url of the file
+   * @return A pointer to the QDomDocument, it must be deleted!
+   */
+  QDomDocument* readDocument(const KURL& url) const;
+
+  static QDomDocument* importBibtex(const KURL& url);
+  /**
+   * Flags used for searching The options should be bit-wise OR'd together.
+   * @li AllAttributes - Search through all attributes
+   * @li AsRegExp - Use the text as the pattern for a regexp search
+   * @li FindBackwards - search backwards
+   * @li CaseSensitive - Case sensitive search
+   * @li FromBeginning - Search from beginning
+   */
+  enum SearchOptions {
+    AllAttributes = 1 << 0,
+    AsRegExp      = 1 << 1,
+    FindBackwards = 1 << 2,
+    CaseSensitive = 1 << 3,
+    FromBeginning = 1 << 4
+  };
+  /**
+   * @param text Text to search for
+   * @param attTitle Title of attribute to search, or empty for all
+   * @param options The options, bit-wise OR'd together
+   */
+  void search(const QString& text, const QString& attTitle, int options);
+  
+  BCAttributeList uniqueAttributes(int type = 0) const;
   
 public slots:
   /**
@@ -220,11 +253,11 @@ protected:
   /**
    * Writes the contents of a string to a file.
    *
-   * @param f The file object
-   * @param s The string
+   * @param file The file object
+   * @param text The string
    * @return A boolean indicating success
    */
-  bool writeDocument(QFile& f, const QCString& s);
+  bool writeFile(QFile& file, const QString& text) const;
 
 signals:
   /**
@@ -273,9 +306,10 @@ signals:
    * @param f The fraction, 0 =< f >= 1
    */
   void signalFractionDone(float f);
+  void signalUnitSelected(BCUnit* unit);
 
 private:
-  QPtrList<BCCollection> m_collList;
+  BCCollectionList m_collList;
   bool m_isModified;
   KURL m_url;
 };
