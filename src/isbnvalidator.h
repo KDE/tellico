@@ -23,7 +23,7 @@
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h,v 1.5 2002/10/20 16:36:52 robby Exp $
+ * @version $Id: isbnvalidator.h,v 1.6 2002/11/10 00:38:29 robby Exp $
  *
  * Parts of this card are based on Java code
  * copyright (c) 1998-2002 Roedy Green, Canadian Mind Products
@@ -35,7 +35,6 @@
 class ISBNValidator : public QValidator  {
 public:
   ISBNValidator(QObject* parent, const char* name=0);
-  ~ISBNValidator();
 
   /**
    * Certain conditions are checked. Character, length and position
@@ -113,7 +112,8 @@ private:
    */
   void insertDashes(QString& input) const;
 #if 0
-  /** This function takes the list of valid group numbers and populates a
+  /**
+   * This function takes the list of valid group numbers and populates a
    * QBitArray. This is necessary since not all groups have the same number
    * of digits.
    */

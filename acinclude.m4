@@ -2593,7 +2593,7 @@ AC_DEFUN(AC_CHECK_COMPILERS,
   ])
 
   dnl Just for configure --help
-  AC_ARG_ENABLE(dummyoption,[  --disable-debug         disables debug output and debug symbols [default=no]],[],[])
+  AC_ARG_ENABLE(dummyoption,[  --disable-debug         disables debug output and debug symbols [default=yes]],[],[])
 
   AC_ARG_ENABLE(strict,[  --enable-strict         compiles with strict compiler options (may not work!)],
    [

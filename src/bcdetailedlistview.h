@@ -30,13 +30,11 @@ class QListViewItem;
 #include <qpoint.h>
 
 /**
- * The BCDetailedListView class shows detailed information about units in a specific collection.
- *
- * A QWidgetStack flips between list views for each collection. Obviously, only units
- * in a common collection are shown at a time.
+ * The BCDetailedListView class shows detailed information about units in the
+ * collection.
  *
  * @author Robby Stephenson
- * @version $Id: bcdetailedlistview.h,v 1.22 2002/10/20 16:36:52 robby Exp $
+ * @version $Id: bcdetailedlistview.h,v 1.24 2002/11/10 06:23:51 robby Exp $
  */
 class BCDetailedListView : public KListView {
 Q_OBJECT
@@ -49,9 +47,6 @@ public:
    * @param name The widget name
    */
   BCDetailedListView(QWidget* parent, const char* name=0);
-  /**
-   */
-  ~BCDetailedListView();
 
 public slots:
   /**

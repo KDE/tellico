@@ -26,10 +26,14 @@
 class BookcaseDoc;
 class BCDetailedListView;
 class BCUnitEditWidget;
-class BCCollectionView;
+class BCGroupView;
 class BCUnit;
 class ConfigDialog;
+class BCCollection;
+
 class KProgress;
+class KToolBar;
+
 class QCloseEvent;
 class QSplitter;
 
@@ -43,19 +47,19 @@ class QSplitter;
 //#include <qmap.h>
 //#include <qdict.h>
 #include <qvaluelist.h>
-#include <qdom.h>
 
 /**
  * The base class for Bookcase application windows. It sets up the main
  * window and reads the config file as well as providing a menubar, toolbar
- * and statusbar. Bookcase reimplements the methods that KDockMainWindow provides
- * for main window handling and supports full session management as well as using KActions.
+ * and statusbar. Bookcase reimplements the methods that KMainWindow provides
+ * for main window handling and supports full session management as well as
+ * using KActions.
  * @see KMainWindow
  * @see KApplication
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: bookcase.h,v 1.19 2002/10/12 06:01:03 robby Exp $
+ * @version $Id: bookcase.h,v 1.30 2002/11/25 00:56:22 robby Exp $
  */
 class Bookcase : public KMainWindow {
 Q_OBJECT
@@ -65,9 +69,6 @@ public:
    * Constructor of Bookcase, calls all init functions to create the application.
    */
   Bookcase(QWidget* parent=0, const char* name=0);
-  /**
-   */
-  ~Bookcase();
 
   /**
    * Returns a pointer to the document object.
@@ -155,14 +156,6 @@ public slots:
    */
   void slotToggleStatusBar();
   /**
-   * Toggles the editing widget.
-   */
-//  void slotToggleEditWidget();
-  /**
-   * Toggles the detail widget.
-   */
-//  void slotToggleDetailWidget();
-  /**
    * Shows the configuration dialog for the application.
    */
   void slotShowConfigDialog();
@@ -175,11 +168,6 @@ public slots:
    * Not yet implemented!
    */
   void slotFileNewCollection();
-  /**
-   * hows a full report of the document's contents.
-   * Not yet implemented!
-   */
-  void slotReportsFull();
   /**
    * Changes the statusbar contents for the standard label permanently,
    * used to indicate current actions being made.
@@ -205,22 +193,32 @@ public slots:
   void slotDeleteUnit(BCUnit* unit);
   /**
    * Handles updating everything when the configuration is changed
-   * vis the configuration dialog. This slot is called when the OK or Apply
+   * via the configuration dialog. This slot is called when the OK or Apply
    * button is clicked in the dialog
    */
   void slotHandleConfigChange();
   /**
-   * Returns the tree from the collection view. This has the advantage of the
-   * authors and titles being already formatted.
-   *
-   * @return The QDomDocument object
+   * Changes the grouping of the units in the @ref BCGroupView. The current value
+   * of the combobox in the toolbar is used.
    */
-  QDomDocument collectionViewTree();
+  void slotChangeGrouping();
+  /**
+   * When a collection is added to the document, certain actions need to be taken
+   * by the parent app. The colleection toolbar is updated, the unit count is set, and
+   * the collection's modified signal is connected to the @ref BCGroupView widget.
+   *
+   * @param coll A pointer the collection being added
+   */
+  void slotUpdateCollection(BCCollection* coll);
+  /**
+   * Toggles the collection toolbar.
+   */
+  void slotToggleCollectionBar();
 
 protected:
   /**
-   * Saves the general options like all bar positions and status as well as the geometry
-   * and the recent file list to the configuration file.
+   * Saves the general options like all toolbar positions and status as well as the
+   * geometry and the recent file list to the configuration file.
    */
   void saveOptions();
   /**
@@ -296,7 +294,17 @@ protected:
    * @param url The url to open
    */
   bool openURL(const KURL& url);
-
+  /**
+   * Initializes the collection toolbar.
+   */
+  void updateCollectionToolBar();
+  /*
+   * Helper method to handle the printing duties.
+   *
+   * @param html The HTML string representing the doc to print
+   */
+  void doPrint(const QString& html);
+  
 protected slots:
   /**
    * Updates the save action and the caption when the document is modified.
@@ -323,14 +331,15 @@ private:
   KAction* m_preferences;
 
   KAction* m_fileNewCollection;
-  KAction* m_reportsFull;
+  KSelectAction* m_unitGrouping;
+  KToggleAction* m_toggleCollectionBar;
 
   QSplitter* m_split;
 
   KProgress* m_progress;
-  BCDetailedListView* m_columnView;
+  BCDetailedListView* m_detailedView;
   BCUnitEditWidget* m_editWidget;
-  BCCollectionView* m_collView;
+  BCGroupView* m_groupView;
   BookcaseDoc* m_doc;
   ConfigDialog* m_configDlg;
 };

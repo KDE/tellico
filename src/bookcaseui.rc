@@ -1,21 +1,14 @@
-<!DOCTYPE kpartgui>
-<kpartgui name="bookcase" version="0.1">
+<?xml version="1.0"?>
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="bookcase" version="2">
 <MenuBar>
-<!--  <Menu name="file"><text>&amp;File</text>
-    <Action name="file_new_window"/>
-    <Menu name="file_new"><text>&amp;New...</text>
-      <Action name="file_new_collection"/>
-    </Menu>
-  </Menu>
-  <Menu name="settings"><text>Show Browse Toolbar</text>
-    <Action name="settings_show_browsetoolbar"/>
-  </Menu>
- <Menu name="settings"><text>&amp;Settings</text>
-  <Action name="toggle_edit_widget"/>
-  <Action name="toggle_detail_widget"/>
- </Menu>
- <Menu name="reports"><text>&amp;Reports</text>
-  <Action name="reports_full"/>-->
+ <Menu name="settings">
+  <Action name="toggle_collection_bar" append="show_merge"/>
  </Menu>
 </MenuBar>
+<ToolBar name="collectionToolBar">
+  <text>Collection ToolBar</text>
+  <Action name="change_unit_grouping_label"/>
+  <Action name="change_unit_grouping"/>
+</ToolBar>
 </kpartgui>

@@ -248,8 +248,6 @@ qt_includes = @qt_includes@
 qt_libraries = @qt_libraries@
 x_includes = @x_includes@
 x_libraries = @x_libraries@
-
-EXTRA_DIST = install-sh 
 subdir = admin
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -269,7 +267,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  admin/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/admin/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/admin/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -407,7 +405,7 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  admin/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/admin/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/admin/Makefile.in
 
 
 #>+ 2

@@ -1,6 +1,6 @@
 #MIN_CONFIG(3)
 
-AM_INIT_AUTOMAKE(bookcase,0.3)
+AM_INIT_AUTOMAKE(bookcase,0.4)
 
 dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
 dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
@@ -10,12 +10,12 @@ dnl KDE_NEED_FLEX dnl __kdevelop__
 dnl AC_PROG_YACC dnl __kdevelop__
 
 KDE_FIND_PATH(xml2-config, XML_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [
-  AC_MSG_WARN([Could not find libxml2 anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.8.])
+  AC_MSG_WARN([Could not find xml2-config anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.23. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxml2-devel or something similar.])
 ])
 
 if test -n "$XML_CONFIG"; then
   vers=`$XML_CONFIG --version 2>/dev/null | sed -e 's/libxml //' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  if test -n "$vers" && test "$vers" -ge 2004008
+  if test -n "$vers" && test "$vers" -ge 2004023
   then
     LIBXML_LIBS="`$XML_CONFIG --libs`"
     LIBXML_RPATH=
@@ -32,19 +32,19 @@ if test -n "$XML_CONFIG"; then
 #    KDE_FIND_PATH(xmllint, XMLLINT, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [XMLLINT=""])
 #    AC_DEFINE_UNQUOTED(XMLLINT, "$XMLLINT", [Defines the executable of xmllint])
   else
-    AC_MSG_WARN([You need at least libxml 2.4.8])
+    AC_MSG_WARN([You need at least libxml 2.4.23])
     HELP_SUBDIR=
   fi
 fi
 
 KDE_FIND_PATH(xslt-config, XSLT_CONFIG, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [
-  AC_MSG_WARN([Could not find libxslt anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.7.])
+  AC_MSG_WARN([Could not find xslt-config anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.19. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxslt-devel or something similar.])
   HELP_SUBDIR=
 ])
 
 if test -n "$XSLT_CONFIG"; then
   vers=`$XSLT_CONFIG --version 2>/dev/null | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  if test -n "$vers" && test "$vers" -ge 1000007; then
+  if test -n "$vers" && test "$vers" -ge 1000019; then
     LIBXSLT_LIBS="`$XSLT_CONFIG --libs`"
     LIBXSLT_RPATH=
     for args in $LIBXSLT_LIBS; do
@@ -58,7 +58,7 @@ if test -n "$XSLT_CONFIG"; then
     LIBXSLT_CFLAGS="`$XSLT_CONFIG --cflags`"
 
   else
-    AC_MSG_WARN([You need at least libxslt 1.0.7])
+    AC_MSG_WARN([You need at least libxslt 1.0.19])
   fi
 fi
 

@@ -1,6 +1,7 @@
 General
   Allow for multiple collections in one document, will require major changes.
-  Work on documentation
+  Work on documentation.
+  Allow exporting to a Bibtex file (suggestion from Arne Henningsen)
 
 BCAttribute::formatTitle()
   If the user enters an article at the end of the title, like so: "new title, a" because

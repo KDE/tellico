@@ -55,8 +55,8 @@ Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>10/10/2002</date>
-<releaseinfo>0.03.00</releaseinfo>
+<date>10/21/2002</date>
+<releaseinfo>0.04.00</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -98,13 +98,13 @@ problems. Basically a long version of the abstract.  Don't include a
 revision history. (see installation appendix comment) -->
 
 <para>
-&bookcase; is a program that lets you do absolutely nothing. Please report
-any problems or feature requests to the KDE mailing lists.
+&bookcase; is a program that helps you keep track of your book collection. Please report
+any problems or feature requests to the author.
 </para>
 </chapter>
 
 <chapter id="using-kapp">
-<title>Using Bookcase</title>
+<title>Using &bookcase;</title>
 
 <!-- This chapter should tell the user how to use your app. You should use as
 many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
@@ -115,6 +115,7 @@ your application. -->
 <!-- Note that all graphics should be in .png format. Use no gifs because of
 patent issues. -->
 
+<!--
 <screenshot>
 <screeninfo>Here's a screenshot of &bookcase;</screeninfo>
 	<mediaobject>
@@ -129,6 +130,7 @@ patent issues. -->
 	  </textobject>
 	</mediaobject>
 </screenshot>
+-->
 </para>
 
 
@@ -164,7 +166,7 @@ menus or toolbars. This may not be necessary for small apps or apps with no tool
 or menu bars. -->
 
 <sect1 id="kapp-mainwindow">
-<title>The main Bookcase window</title>
+<title>The main &bookcase; window</title>
 <para></para>
 
 <sect2>
@@ -209,24 +211,6 @@ or menu bars. -->
 </sect1>
 </chapter>
 
-<chapter id="developers">
-<title>Developer's Guide to Bookcase</title>
-
-<!-- (OPTIONAL) A Programming/Scripting reference chapter should be
-used for apps that use plugins or that provide their own scripting hooks
-and/or development libraries. -->
-
-<para>
-Programming &bookcase; plugins is a joy to behold. Just read through the next
-66 pages of API's to learn how!
-</para>
-
-<!-- Use refentries to describe APIs.  Refentries are fairly complicated and you
-should consult the docbook reference for further details. The example below was
-taken from that reference and shortened a bit for readability. -->
-
-</chapter>
-
 <chapter id="faq">
 <title>Questions and Answers</title>
 
@@ -249,7 +233,55 @@ application work. -->
 <para>How do I enter multiple authors?</para>
 </question>
 <answer>
-<para>Authors may be separated by a semi-colon.</para>
+<para>Author names should be separated by a semi-colon, like so: "Brian
+ W. Kernighan; Dennis M. Ritchie" (without the quotes). Don't
+ include the word "and" or anything similar, even if you have
+ 20 authors. If you have the auto-format option checked, then the last
+ name will automatically be shown first for each author.</para>
+
+ <para>Other properties which allow multiple values, like "genre"
+ and "keywords", are entered in the same way, with a semi-colon
+ (;) separating each value.</para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para>How do I add page numbers when I print?</para>
+</question>
+<answer>
+<para>KDE 3.1 added an option for printing headers on HTML files (which
+ is the mechanism that &bookcase; uses). So using KDE 3.1 or
+ later will have an option in the expanded print dialog to print the
+ header, which includes the filename and the page number.</para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para>Well, then can I modify what the printed page looks like?</para>
+</question>
+<answer>
+<para>Yes, most certainly. If you're using &bookcase;
+ 0.3, find the file bookcase-by-author.xsl which should be in the
+ $KDEDIR/share/apps/bookcase/ directory. If you're using
+ &bookcase; 0.4, find the file bookcase-printing.xsl
+ which should be in the same directory. You'll have to know
+ <ulink url="http://www.w3.org/TR/xslt">XSLT</ulink>, but
+ modifying that file is how you change the printing layout. Feel free
+ to <ulink url="mailto:robby@periapsis.org">email me</ulink> with questions.
+ If I end up with some alternate XSLT printing files, I'll put them on
+ this website.</para>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<para>How do I group by a property other than the ones listed in the toolbar?</para>
+</question>
+<answer>
+<para>Well, you can't, yet. The mechanics for changing which properties
+ allow grouping are mostly all in there already, but there's no UI for
+ doing it yet, and it's not guaranteed to work. In some future
+ version, I hope to add the capability for adding custom properties,
+ and along with that comes modifying the present ones.</para>
 </answer>
 </qandaentry>
 </qandaset>
@@ -299,11 +331,9 @@ Documentation copyright 2002 Robby Stephenson <email>&email;</email>
 <title>How to obtain Bookcase</title>
 
 <para>
-&bookcase; is part of the KDE project
-<ulink url="http://www.kde.org">http://www.kde.org</ulink>.
-&bookcase; can be found in the kdeutils package on
-<ulink url="ftp://ftp.kde.org/pub/kde/">ftp://ftp.kde.org/pub/kde/</ulink>, the
-main ftp site of the KDE project. </para>
+The &bookcase; home page can be found at
+<ulink url="http://periapsis.org/bookcase/">http://periapsis.org/bookcase/</ulink>.
+Updates and news can be found there.</para>
 </sect1>
 
 <sect1 id="requirements">
@@ -321,14 +351,13 @@ information here.
 -->
 
 <para>
-In order to successfully use &bookcase;, you need KDE 3.x. &bookcase; uses about 5 megs of
-memory to run, but this may vary depending on your platform and
+In order to successfully use &bookcase;, you need KDE 3.x. &bookcase; uses about 5 megs
+of memory to run, but this may vary depending on your platform and
 configuration.
 </para>
 
 <para>
-All required libraries as well as &bookcase; itself can be found
-on <ulink url="http://periapsis.org/bookcase/">The &bookcase; home page</ulink>.
+KDE can be found at <ulink url="http://www.kde.org">the KDE home page</ulink>.
 </para>
 
 <!-- For a list of updates, you may refer to the application web site
@@ -343,8 +372,9 @@ url="http://periapsis.org/bookcase/">http://periapsis.org/bookcase/</ulink>.
 <title>Compilation and Installation</title>
 
 <para>
-In order to compile and install &bookcase; on your system, type the following in the base
-directory of the Icon Editor distribution:
+In order to compile and install &bookcase; on your system, type the following in the
+base directory of the archive, where the third step must be done as root if you are
+installing in a system directory:
 <screen width="40">
 <prompt>%</prompt> <userinput>./configure</userinput>
 <prompt>%</prompt> <userinput>make</userinput>
@@ -352,16 +382,8 @@ directory of the Icon Editor distribution:
 </screen>
 </para>
 
-<para>Since &bookcase; uses autoconf and automake you should have not trouble compiling it.
-Should you run into problems please report them to the author.</para>
-
-</sect1>
-
-<sect1 id="configuration">
-<title>Configuration</title>
-
-<para>Don't forget to tell your system to start the <filename>dtd</filename>
-dicer-toaster daemon first, or &bookcase; won't work !</para>
+<para>Since &bookcase; uses autoconf and automake you should have not trouble compiling
+it. Should you run into problems please report them to the author.</para>
 
 </sect1>
 

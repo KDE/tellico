@@ -1,5 +1,5 @@
 /* *************************************************************************
-                             bccollectionview.h
+                             bcgroupview.h
                              -------------------
     begin                : Sat Oct 13 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -15,12 +15,12 @@
  *                                                                         *
  * *************************************************************************/
 
-#ifndef BCCOLLECTIONVIEW_H
-#define BCCOLLECTIONVIEW_H
+#ifndef BCGROUPVIEW_H_H
+#define BCGROUPVIEW_H_H
 
 class BCUnit;
 class BCAttribute;
-class QListViewItem;
+class BCUnitGroup;
 
 #include "bcunititem.h"
 #include "bccollection.h"
@@ -29,12 +29,12 @@ class QListViewItem;
 #include <kpopupmenu.h>
 
 #include <qdict.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include <qpoint.h>
 #include <qpixmap.h>
 
 /**
- * The BCCollectionView is the main listview for the class, showing only the titles.
+ * The BCGroupView is the main listview for the class, showing only the titles.
  *
  * There is one root item for each collection in the document. The units are grouped
  * by the attribute defined by each collection. A @ref QDict is used to keep track of the
@@ -43,9 +43,9 @@ class QListViewItem;
  * @see BCCollection
  *
  * @author Robby Stephenson
- * @version $Id: bccollectionview.h,v 1.19 2002/10/20 16:36:52 robby Exp $
+ * @version $Id: bcgroupview.h,v 1.6 2002/11/25 00:56:22 robby Exp $
  */
-class BCCollectionView : public KListView {
+class BCGroupView : public KListView {
 Q_OBJECT
 
 public:
@@ -55,10 +55,20 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  BCCollectionView(QWidget* parent, const char* name=0);
+  BCGroupView(QWidget* parent, const char* name=0);
   /**
+   * Returns the name of the attribute by which the units are grouped
+   *
+   * @return The attribute name
    */
-  ~BCCollectionView();
+  const QString& groupAttribute() const;
+  /**
+   * Sets the name of the attribute by which the units are grouped
+   *
+   * @param coll A pointer to the collection being grouped
+   * @param groupAttName The attribute name
+   */
+  void setGroupAttribute(BCCollection* coll, const QString& groupAttName);
 
 public slots:
   /**
@@ -66,25 +76,12 @@ public slots:
    */
   void slotReset();
   /**
-   * Adds a new root item for a collection.
+   * Adds or removes listview items when a group is modified.
    *
-   * @param coll A pointer to the collection
+   * @param coll A pointer to the collection of the gorup
+   * @param group A pointer to the modified group
    */
-  void slotAddItem(BCCollection* coll);
-  /**
-   * Adds a new list item for a unit. If a new group is needed, it will be created.
-   *
-   * @param unit A pointer to the unit
-   */
-  void slotAddItem(BCUnit* unit);
-  /**
-   * Modifies any items which refer to a unit. This slot is called when the unit is
-   * modified, regardless of whether or not the title actually changed. If the group
-   * attribute value has changed, all relevant groups are created, modified, or deleted.
-   *
-   * @param unit A pointer to the unit
-   */
-  void slotModifyItem(BCUnit* unit);
+  void slotModifyGroup(BCCollection* coll, BCUnitGroup* group);
   /**
    * Removes a root collection item, and all of its children.
    *
@@ -92,71 +89,68 @@ public slots:
    */
   void slotRemoveItem(BCCollection* coll);
   /**
-   * Removes all items which refer to a certain unit. Any empty groups will also
-   * be deleted.
-   *
-   * @param unit A pointer to the unit
-   */
-  void slotRemoveItem(BCUnit* unit);
-  /**
    * Selects the first item which refers to a certain unit.
    *
    * @param unit A pointer to the unit
    */
   void slotSetSelected(BCUnit* unit);
   /**
-   * Expands all items at the same depth as the current selected item.
-   */
-  void slotExpandAll();
-  /**
-   * Overloads the previous method, to allow custom depth expansion. If depth is
-   * equal to either 0 or 1, then all items at that depth are expanded.
+   * Expands all items at a certain depth. If depth is -1, the current selected item
+   * is expanded. If depth is equal to either 0 or 1, then all items at that depth
+   * are expanded.
    *
    * @param depth The depth value
    */
-  void slotExpandAll(int depth);
+  void slotExpandAll(int depth=-1);
   /**
-   * Collapses all items at the same depth as the current selected item.
-   */
-  void slotCollapseAll();
-  /**
-   * Overloads the previous method, to allow custom depth collapsing. If depth is
-   * equal to either 0 or 1, then all items at that depth are collapsed.
+   * Collapses all items at a certain depth. If depth is -1, the current selected item
+   * is collapsed. If depth is equal to either 0 or 1, then all items at that depth
+   * are collapsed.
    *
    * @param depth The depth value
    */
-  void slotCollapseAll(int depth);
+  void slotCollapseAll(int depth=-1);
+  /**
+   * Adds a collection, along with all all the groups for the collection in
+   * the groupAttribute. This method gets called as well when the groupAttribute
+   * is changed, since it essentially repopulates the listview.
+   *
+   * @param coll A pointer to the collection being added
+   */
+  void slotAddCollection(BCCollection* coll);
+  /**
+   * Changes the view to show or hide the number if items in the group.
+   *
+   * @param showCount A boolean indicating whether or not the count should be shown
+   */
+  void slotShowCount(bool showCount);
 
 protected:
-  /**
-   * A helper method to insert an item using the value of the group attribute, setting
-   * the parent collection item and referring to the unit. The method takes care if the
-   * group attribute can have multiple values separated by a semi-colon. The inserted
-   * item is made visible, and its parent is opened. If a new group item is needed, it's
-   * created.
-   *
-   * @param group A pointer to the group attribute
-   * @param root A pointer to the root collection parent item
-   * @param unit A pointer to the unit
-   */
-  void insertItem(BCAttribute* group, ParentItem* root, BCUnit* unit);
-  /**
-   * A helper method to locate all items which refer to a certain unit. Since multiple
-   * items could exist, a QList is returned.
-   *
-   * @param unit A pointer to the unit
-   * @return A list of BCUnitItems which refer to the unit
-   */
-  QList<BCUnitItem> locateItem(BCUnit* unit);
   /**
    * Returns a pointer to the root item for the collection. If none exists, then one
    * is created.
    *
    * @param coll A pointer to the collection
-   * @return A pointer to the parent item
+   * @return A pointer to the collection listviewitem
    */
   ParentItem* locateItem(BCCollection* coll);
-
+  /**
+   * A helper method to locate any pointer to a listviewitem which references
+   * a given BCUnitGroup
+   *
+   * @param unit A pointer to the collection listviewitem
+   * @return A pointer to the group listviewitem
+   */
+  ParentItem* locateItem(ParentItem* collItem, BCUnitGroup* group);
+  /**
+   * Inserts a listviewitem for a given group
+   *
+   * @param The parent listview item, for the collection itself
+   * @param group The group to be added
+   * @return A pointer to the created @ ref ParentItem
+   */
+  ParentItem* insertItem(ParentItem* collItem, BCUnitGroup* group);
+  
 protected slots:
   /**
    * Handles everything when an item is selected. The proper signal is emitted, depending
@@ -233,12 +227,15 @@ signals:
 
 private:
   QDict<ParentItem> m_groupDict;
+  QString m_groupAttribute;
 
   KPopupMenu m_collMenu;
   KPopupMenu m_groupMenu;
   KPopupMenu m_unitMenu;
   QPixmap m_groupOpenPixmap;
   QPixmap m_groupClosedPixmap;
+
+  bool m_showCount;
 };
 
 #endif

@@ -20,11 +20,8 @@
 #include <kdebug.h>
 
 ISBNValidator::ISBNValidator(QObject* parent_, const char* name_/*=0*/)
- : QValidator(parent_, name_) {
+    : QValidator(parent_, name_) {
 //  buildValidGroupLookup();
-}
-
-ISBNValidator::~ISBNValidator() {
 }
 
 QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
@@ -433,4 +430,5 @@ const int ISBNValidator::validGroups[] = {
    };
 
 const int ISBNValidator::numGroups = sizeof(ISBNValidator::validGroups)/sizeof(int);
+
 #endif

@@ -249,7 +249,7 @@ qt_libraries = @qt_libraries@
 x_includes = @x_includes@
 x_libraries = @x_libraries@
 
-EXTRA_DIST = summary.xsl bookcase-by-author.xsl bookcase-by-title.xsl 
+EXTRA_DIST = bookcase-by-author.xsl bookcase-by-title.xsl bookcase-printing.xsl 
 subdir = xslt
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -267,7 +267,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  xslt/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/xslt/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/xslt/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -283,7 +283,12 @@ uninstall-info-am:
 tags: TAGS
 TAGS:
 
-DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+#>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+#>+ 4
+KDE_DIST=summary.xsl 
+
+DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
+
 
 top_distdir = ..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
@@ -401,6 +406,12 @@ install-data-local:
 #>- 	$(INSTALL_DATA) $(srcdir)/bookcase-by-title.xsl $(kde_datadir)/bookcase/bookcase-by-title.xsl
 #>+ 1
 	$(INSTALL_DATA) $(srcdir)/bookcase-by-title.xsl $(DESTDIR)$(kde_datadir)/bookcase/bookcase-by-title.xsl
+#>- 	$(mkinstalldirs) $(kde_datadir)/bookcase/
+#>+ 1
+	$(mkinstalldirs) $(DESTDIR)$(kde_datadir)/bookcase/
+#>- 	$(INSTALL_DATA) $(srcdir)/bookcase-printing.xsl $(kde_datadir)/bookcase/bookcase-printing.xsl
+#>+ 1
+	$(INSTALL_DATA) $(srcdir)/bookcase-printing.xsl $(DESTDIR)$(kde_datadir)/bookcase/bookcase-printing.xsl
 
 uninstall-local:
 #>- 	-rm -f $(kde_datadir)/bookcase/bookcase-by-author.xsl
@@ -409,6 +420,9 @@ uninstall-local:
 #>- 	-rm -f $(kde_datadir)/bookcase/bookcase-by-title.xsl
 #>+ 1
 	-rm -f $(DESTDIR)$(kde_datadir)/bookcase/bookcase-by-title.xsl
+#>- 	-rm -f $(kde_datadir)/bookcase/bookcase-printing.xsl
+#>+ 1
+	-rm -f $(DESTDIR)$(kde_datadir)/bookcase/bookcase-printing.xsl
 
 ####### kdevelop will overwrite this part!!! (end)############
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
@@ -423,7 +437,7 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  xslt/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/xslt/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/xslt/Makefile.in
 
 
 #>+ 2

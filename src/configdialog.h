@@ -25,10 +25,11 @@ class KLineEdit;
 #include <kdialogbase.h>
 
 /**
- * The configuration dialog class allows the user to change the global application preferences.
+ * The configuration dialog class allows the user to change the global application
+ * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h,v 1.5 2002/07/20 17:01:49 robby Exp $
+ * @version $Id: configdialog.h,v 1.8 2002/11/20 05:54:15 robby Exp $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT
@@ -41,21 +42,18 @@ public:
    * @param name The widget name
    */
   ConfigDialog(QWidget* parent, const char* name=0);
-  /**
-   */
-  ~ConfigDialog();
 
   /**
-   * Reads the current configuration. Only the options which are not saved somewhere else
-   * are read at this point.
+   * Reads the current configuration. Only the options which are not saved somewhere
+   * else are read at this point.
    *
    * @param config A pointer to the KConfig object
    */
   void readConfiguration(KConfig* config);
 
   /**
-   * Saves the configuration. @ref KConfigBase::sync is called. This method is called from
-   * the main Bookcase object.
+   * Saves the configuration. @ref KConfigBase::sync is called. This method is called
+   * from the main Bookcase object.
    *
    * @param config A pointer to the KConfig object
    */
@@ -88,16 +86,22 @@ protected slots:
    * Called when the Apply button is clicked.
    */
   void slotApply();
+  /**
+   * Called when the Default button is clicked.
+   */
+  void slotDefault();
 
 signals:
   /**
    * Emitted whenever the Ok or Apply button is clicked.
    */
   void signalConfigChanged();
+  void signalShowCount(bool showCount);
 
 private:
   QCheckBox* m_cbOpenLastFile;
   QCheckBox* m_cbCapitalize;
+  QCheckBox* m_cbShowCount;
   KLineEdit* m_leArticles;
   KLineEdit* m_leSuffixes;
 };

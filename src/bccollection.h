@@ -18,12 +18,16 @@
 #ifndef BCCOLLECTION_H
 #define BCCOLLECTION_H
 
-#include "bcunit.h"
 #include "bcattribute.h"
+#include "bcunitgroup.h"
+
 #include <qstringlist.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include <qstring.h>
-#include <qstringlist.h>
+#include <qdict.h>
+#include <qobject.h>
+
+typedef QDict<BCUnitGroup> BCUnitGroupDict;
 
 /**
  * The BCCollection class is the primary data object, holding a list of attributes and units.
@@ -37,13 +41,15 @@
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bccollection.h,v 1.17 2002/09/22 03:31:43 robby Exp $
+ * @version $Id: bccollection.h,v 1.26 2002/11/25 00:56:22 robby Exp $
  */
-class BCCollection {
+class BCCollection : public QObject {
+Q_OBJECT
+
 public:
   /**
    * The constructor is only used to create custom collections. It adds a title attribute,
-   * in the "General" group, and sets the groupAttribute to a NULL pointer.
+   * in the "General" group, and sets the unitGroupAttribute to a NULL pointer.
    *
    * @param id The id of the collection, which should be unique. The collection
    *            does not itself guarantee uniqueness.
@@ -105,35 +111,32 @@ public:
    *
    * @return The list of units
    */
-  const QList<BCUnit>& unitList() const;
+  const BCUnitList& unitList() const;
   /**
    * Returns a reference to the list of the collection attributes.
    *
    * @return The list of attributes
    */
-  const QList<BCAttribute>& attributeList() const;
+  const QPtrList<BCAttribute>& attributeList() const;
   /**
    * Returns a reference to the list of attribute groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.
    *
    * @return The list of group names
    */
-  const QStringList& attributeGroups() const;
+  const QStringList& attributeCategories() const;
   /**
-   * Returns a pointer to the specific attribute which should be used to group
-   * the units. Only one exists for each collection. The groupAttribute is different
-   * and separate from the attribute groups themselves.
+   * Returns the name of the attribute used to group the units by default.
    *
-   * @return A pointer to the group attribute
+   * @return The attribute name
    */
-  BCAttribute* groupAttribute();
+  const QString& defaultGroupAttribute() const;
   /**
-   * Sets the attribute used to group the units. It is distinct and separate from the
-   * attribute groups themselves.
+   * Sets the name of the default attribute used to group the units.
    *
-   * @param att A pointer to the group attribute
+   * @param name The name of the attribute
    */
-  void setGroupAttribute(BCAttribute* att);
+  void setDefaultGroupAttribute(const QString& name);
   /**
    * Returns the number of units in the collection.
    *
@@ -141,17 +144,17 @@ public:
    */
   unsigned unitCount() const;
   /**
-   * Returns the number of attributes in the collection.
-   *
-   * @return The number of attributes
-   */
-  unsigned attributeCount() const;
-  /**
    * Adds a unit to the collection. The collection takes ownership of the unit object.
    *
    * @param unit A pointer to the unit
    */
   void addUnit(BCUnit* unit);
+  /**
+   * Updates the dicts that include the unit.
+   *
+   * @param unit A pointer to the unit
+   */
+  void updateDicts(BCUnit* unit);
   /**
    * Deletes a unit from the collection.
    *
@@ -176,7 +179,7 @@ public:
    * @param value The desired value
    * @return A boolean indicating if the value is an allowed value for that attribute
    */
-  bool allowed(const QString& key, const QString& value);
+  bool isAllowed(const QString& key, const QString& value) const;
   /**
    * Returns a boolean indicating if the collection is a custom one, i.e.
    * different from a collection returned from one of the static methods
@@ -209,7 +212,14 @@ public:
    * @param name The name of the attribute
    * @return The list of values
    */
-  QStringList valuesByAttributeName(const QString& name);
+  QStringList valuesByAttributeName(const QString& name) const;
+  /**
+   * Returns a list of all the attributes in a given category.
+   *
+   * @param category The name of the category
+   * @return The attribute list
+   */
+  QPtrList<BCAttribute> attributesByCategory(const QString& category) const;
   /**
    * Returns a pointer to an attribute given its name. If none is found, a NULL pointer
    * is returned.
@@ -217,15 +227,36 @@ public:
    * @param name The attribute name
    * @return The attribute pointer
    */
-  BCAttribute* attributeByName(const QString& name);
+  BCAttribute* attributeByName(const QString& name) const;
   /**
-   * Returns a list of all the attributes in a given group.
+   * Returns a list of all the possible unit groups. This value is cached rather
+   * than generated with each call, so the method should be fairly fast.
    *
-   * @param group The title of the group
-   * @return The attribute list
+   * @return The list of groups
    */
-  QList<BCAttribute> attributeListByGroup(const QString& group) const;
+  const QStringList& unitGroups() const;
+  /**
+   * Returns a pointer to a const dict of all the units grouped by
+   * a certain attribute
+   *
+   * @param name The name of the attribute by which the units are grouped
+   * @return The list of group names
+   */
+  BCUnitGroupDict* unitGroupDictByName(const QString& name) const;
+  /**
+   * A helper method to emit @ref signalGroupModified, since signals are not public
+   * This typically gets called via a unit.
+   *
+   * @param group The group that was modified
+   */
+  void groupModified(BCUnitGroup* group);
 
+  /**
+   * Returns the string used for empty values.
+   *
+   * @return The empty string
+   */
+  static QString emptyGroupName();
   /**
    * A convenience function to return a pointer a the standard book collection.
    * It has the following attributes:
@@ -283,7 +314,11 @@ public:
    */
   static BCCollection* Videos(int id);
 #endif
-protected:
+
+signals:
+  void signalGroupModified(BCCollection* coll, BCUnitGroup* group);
+  
+private:
   /**
    * The copy constructor is private, to ensure that it's never used.
    */
@@ -292,18 +327,25 @@ protected:
    * The assignment operator is private, to ensure that it's never used.
    */
   BCCollection operator=(const BCCollection& coll);
+  void removeUnitFromDicts(BCUnit* unit);
+  void populateDicts(BCUnit* unit);
 
-private:
   int m_id;
   QString m_title;
   QString m_unitName;
   QString m_unitTitle;
   QString m_iconName;
-  BCAttribute* m_groupAttribute;
-  QList<BCAttribute> m_attributeList;
-  QStringList m_attributeGroups;
-  QList<BCUnit> m_unitList;
+  QString m_defaultGroupAttribute;
   bool m_isCustom;
+  
+  QPtrList<BCAttribute> m_attributeList;
+  QDict<BCAttribute> m_attributeDict;
+  QStringList m_attributeCategories;
+  
+  BCUnitList m_unitList;
+  
+  QDict<BCUnitGroupDict> m_unitGroupDicts;
+  QStringList m_unitGroups;
 };
 
 #endif

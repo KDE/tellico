@@ -11,8 +11,8 @@
    <pur_price>my price</pur_price>
    <publisher>my publisher</publisher>
    <edition>my edition</edition>
-   <cr_year>my cr year</cr_year>
-   <pub_year>my pub year</pub_year>
+   <cr_year>1900</cr_year>
+   <pub_year>2000</pub_year>
    <isbn>3-24876276-4</isbn>
    <lccn>2348975629</lccn>
    <pages>3746</pages>

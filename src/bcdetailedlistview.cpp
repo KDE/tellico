@@ -27,7 +27,7 @@
 #include <kdebug.h>
 //#include <klistview.h>
 
-#include <qlist.h>
+#include <qptrlist.h>
 //#include <qlayout.h>
 #include <qstringlist.h>
 //#include <qregexp.h>
@@ -35,7 +35,7 @@
 #include <qvaluelist.h>
 
 BCDetailedListView::BCDetailedListView(QWidget* parent_, const char* name_/*=0*/)
- : KListView(parent_, name_) {
+    : KListView(parent_, name_) {
 //  kdDebug() << "BCDetailedListView()\n";
   setAllColumnsShowFocus(true);
   setShowSortIndicator(true);
@@ -54,12 +54,8 @@ BCDetailedListView::BCDetailedListView(QWidget* parent_, const char* name_/*=0*/
   m_menu.insertItem(remove, i18n("Delete"), this, SLOT(slotHandleDelete()));
 }
 
-BCDetailedListView::~BCDetailedListView() {
-//  kdDebug() << "~BCDetailedListWidget()" << endl;
-}
-
 void BCDetailedListView::slotReset() {
-	clear();
+  clear();
 }
 
 void BCDetailedListView::slotSetContents(BCCollection* coll_) {
@@ -90,7 +86,7 @@ void BCDetailedListView::slotSetContents(BCCollection* coll_) {
     setColumnWidth(i, static_cast<int>(*wIt));
   }
 
-  QListIterator<BCUnit> unitIt(coll_->unitList());
+  QPtrListIterator<BCUnit> unitIt(coll_->unitList());
   for( ; unitIt.current(); ++unitIt) {
     slotAddItem(unitIt.current());
   }
@@ -104,11 +100,14 @@ void BCDetailedListView::slotAddItem(BCUnit* unit_) {
 //  kdDebug() << "BCDetailedListView::slotAddItem() - " << unit_->attribute("title") << endl;
 
   BCUnitItem* item = new BCUnitItem(this, unit_);
+
   KIconLoader* loader = KGlobal::iconLoader();
   if(loader) {
     item->setPixmap(0, loader->loadIcon(unit_->collection()->iconName(), KIcon::User));
   }
+
   populateItem(item);
+
   if(isUpdatesEnabled()) {
     sort();
     ensureItemVisible(item);
@@ -154,18 +153,11 @@ void BCDetailedListView::populateItem(BCUnitItem* item_) {
   }
 
   unsigned colNum = 0;
-  QListIterator<BCAttribute> it(unit->collection()->attributeList());
+  QPtrListIterator<BCAttribute> it(unit->collection()->attributeList());
   for( ; it.current(); ++it) {
     int flags = it.current()->flags();
     if(!(flags & BCAttribute::DontShow)) {
-      QString text = unit->attribute(it.current()->name());
-      if(flags & BCAttribute::FormatTitle) {
-        text = BCAttribute::formatTitle(text);
-      } else if(flags & BCAttribute::FormatName) {
-        text = BCAttribute::formatName(text, (flags & BCAttribute::AllowMultiple));
-      } else if(flags & BCAttribute::FormatDate) {
-        text = BCAttribute::formatDate(text);
-      }
+      QString text = unit->attributeFormatted(it.current()->name(), flags);
 
       if(columnText(colNum) != it.current()->title()) {
         // TODO: if the visible columns have changed, need to account for that

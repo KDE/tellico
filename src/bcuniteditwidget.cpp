@@ -22,6 +22,7 @@
 #include "bcdetailedlistview.h"
 #include "bctabcontrol.h"
 #include "isbnvalidator.h"
+#include "lccnvalidator.h"
 
 #include <klineedit.h>
 #include <kcombobox.h>
@@ -36,7 +37,7 @@
 #include <qlabel.h>
 #include <qmultilineedit.h>
 #include <qlistview.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include <qdict.h>
 #include <qgrid.h>
 #include <qpushbutton.h>
@@ -46,10 +47,11 @@
 static const int NCOLS = 4;
 
 BCUnitEditWidget::BCUnitEditWidget(QWidget* parent_, const char* name_/*=0*/)
- : QWidget(parent_, name_) {
+ : QWidget(parent_, name_), m_currColl(0), m_currUnit(0),
+   m_tabs(new BCTabControl(this)) {
 //  kdDebug() << "BCUnitEditWidget()" << endl;
   QVBoxLayout* topLayout = new QVBoxLayout(this);
-  m_tabs = new BCTabControl(this);
+
   connect(m_tabs, SIGNAL(tabSelected(int)), SLOT(slotSwitchFocus(int)));
 
   topLayout->setSpacing(5);
@@ -69,9 +71,6 @@ BCUnitEditWidget::BCUnitEditWidget(QWidget* parent_, const char* name_/*=0*/)
   // no currUnit exists, so disable the Copy and Delete button
 //  m_copy->setEnabled(false);
   m_delete->setEnabled(false);
-
-  m_currUnit = 0;
-  m_currColl = 0;
 }
 
 BCUnitEditWidget::~BCUnitEditWidget() {
@@ -117,6 +116,9 @@ void BCUnitEditWidget::slotSetCollection(BCCollection* coll_) {
   if(m_tabs->count() == 0) {
     slotSetLayout(coll_);
   }
+  
+  // go back to first tab, with title, etc...
+  m_tabs->showTab(0);
 }
 
 void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
@@ -136,15 +138,16 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
   KComboBox* kc;
   QCheckBox* cb;
 
-  QStringList groupList = m_currColl->attributeGroups();
-  QStringList::ConstIterator groupIt = groupList.begin();
-  for( ; groupIt != groupList.end(); ++groupIt) {
+  QStringList catList = m_currColl->attributeCategories();
+  QStringList::ConstIterator catIt = catList.begin();
+  for( ; catIt != catList.end(); ++catIt) {
     QGrid* grid = new QGrid(NCOLS, m_tabs);
     grid->setMargin(10);
     grid->setSpacing(5);
 
-    QList<BCAttribute> list = m_currColl->attributeListByGroup(static_cast<QString>(*groupIt));
-    QListIterator<BCAttribute> it(list);
+    QString catName = static_cast<QString>(*catIt);
+    QPtrList<BCAttribute> list = m_currColl->attributesByCategory(catName);
+    QPtrListIterator<BCAttribute> it(list);
     for( ; it.current(); ++it) {
       QLabel* la = new QLabel(it.current()->title() + ":", grid);
       la->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -159,8 +162,11 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
             kl->setAutoDeleteCompletionObject(true);
           }
           if(it.current()->name() == "isbn") {
-            ISBNValidator* val = new ISBNValidator(this);
-            kl->setValidator(val);
+            ISBNValidator* isbn = new ISBNValidator(this);
+            kl->setValidator(isbn);
+          } else if(it.current()->name() == "lccn") {
+//            LCCNValidator* lccn = new LCCNValidator(this);
+//            kl->setValidator(lccn);
           }
           m_editDict.insert(QString::number(m_currColl->id()) + it.current()->name(), kl);
           connect(kl, SIGNAL(returnPressed(const QString&)), SLOT(slotHandleReturn(const QString&)));
@@ -195,7 +201,7 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
          break;
       } // end switch
     }
-    m_tabs->addTab(grid, static_cast<QString>(*groupIt));
+    m_tabs->addTab(grid, catName);
   }
 
   // maybe this should be sizePolicy() reimplemented instead
@@ -252,7 +258,7 @@ void BCUnitEditWidget::slotHandleSave() {
   KComboBox* kc;
   QCheckBox* cb;
   QString temp;
-  QListIterator<BCAttribute> it(m_currColl->attributeList());
+  QPtrListIterator<BCAttribute> it(m_currColl->attributeList());
   for( ; it.current(); ++it) {
     switch(it.current()->type()) {
       case BCAttribute::Line:
@@ -404,7 +410,7 @@ void BCUnitEditWidget::slotSetContents(BCUnit* unit_) {
   QMultiLineEdit* mle;
   KComboBox* kc;
   QCheckBox* cb;
-  QListIterator<BCAttribute> it(m_currColl->attributeList());
+  QPtrListIterator<BCAttribute> it(m_currColl->attributeList());
   for( ; it.current(); ++it) {
     switch(it.current()->type()) {
       case BCAttribute::Line:
@@ -449,7 +455,7 @@ void BCUnitEditWidget::slotSetContents(BCUnit* unit_) {
 }
 
 void BCUnitEditWidget::slotUpdateCompletions(BCUnit* unit_) {
-  QListIterator<BCAttribute> it(unit_->collection()->attributeList());
+  QPtrListIterator<BCAttribute> it(unit_->collection()->attributeList());
   for( ; it.current(); ++it) {
     if(it.current()->type() == BCAttribute::Line
                   && !(it.current()->flags() & BCAttribute::DontComplete)) {

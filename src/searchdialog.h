@@ -26,7 +26,7 @@
  * The search dialog allows the user to search for a string in the document.
  *
  * @author Robby Stephenson
- * @version $Id: searchdialog.h,v 1.3 2002/10/20 16:36:52 robby Exp $
+ * @version $Id: searchdialog.h,v 1.4 2002/11/10 00:38:29 robby Exp $
  */
 class SearchDialog : public KDialogBase  {
 Q_OBJECT
@@ -39,9 +39,6 @@ public:
    * @param name The widget name
    */
   SearchDialog(QWidget* parent=0, const char* name=0);
-  /**
-   */
-  ~SearchDialog();
 
 protected slots:
   /**

@@ -1,14 +1,14 @@
 Begin3
 Title:          Bookcase 
-Version:        0.1
+Version:        0.4
 Entered-date:   
-Description:    
+Description:    Bookcase is a personal catalog application for your book collection.
 Keywords:        
-Author:         Robby Stephenson <robby@radiojodi.com> 
-Maintained-by:  Robby Stephenson <robby@radiojodi.com> 
-Primary-site:   	        
-Home-page:      http:// 
+Author:         Robby Stephenson <robby@periapsis.org> 
+Maintained-by:  Robby Stephenson <robby@periapsis.org> 
+Primary-site:   http://periapsis.org/bookcase/       
+Home-page:      http://periapsis.org/bookcase/
 Original-site:  
-Platforms:       Linux and other Unices
+Platforms:      Linux and other Unices
 Copying-policy: GNU Public License
 End

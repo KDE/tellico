@@ -249,9 +249,9 @@ qt_libraries = @qt_libraries@
 x_includes = @x_includes@
 x_libraries = @x_libraries@
 
-SUBDIRS = src po doc icons xslt test 
+SUBDIRS = src po doc icons xslt test admin 
 
-EXTRA_DIST = bookcase.kdevprj admin AUTHORS COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.spec bookcase.dtd 
+EXTRA_DIST = bookcase.kdevprj AUTHORS COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.spec bookcase.dtd 
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
@@ -290,7 +290,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --foreign  Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)
 
@@ -426,7 +426,7 @@ distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
 #>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=configure.files bookcase.doxygen Makefile.dist configure.in.in autogen.sh stamp-h.in subdirs stamp-h2 bookcase.spec.in bookcase.kdevses 
+KDE_DIST=configure.files stamp-h3 Makefile.dist Doxyfile configure.in.in autogen.sh stamp-h.in subdirs stamp-h2 
 
 DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 
@@ -665,7 +665,7 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --foreign  Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/Makefile.in
 
 
 #>+ 2

@@ -17,19 +17,17 @@
 
 #include "bookcasedoc.h"
 #include "bookcase.h"
-#include "bccollection.h"
 
 #include <kio/netaccess.h>
 #include <kio/job.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
-#include <kurl.h>
 #include <ktempfile.h>
 #include <klocale.h>
 
 #include <qwidget.h>
-#include <qstring.h>
 #include <qfile.h>
+#include <qstring.h>
 #include <qtextstream.h>
 
 #include <libxml/HTMLtree.h>
@@ -37,6 +35,7 @@
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
+#include <libexslt/exslt.h>
 
 const int FORMAT_VERSION = 1;
 const int OPEN_SIGNAL_STEP_SIZE = 10;
@@ -45,26 +44,20 @@ const int SAVE_SIGNAL_STEP_SIZE = 10;
 extern int xmlLoadExtDtdDefaultValue;
 
 /* some functions to pass to the XSLT libs */
-int writeToQString(void * context, const char * buffer, int len) {
-  QString *t = (QString*)context;
+int ::writeToQString(void* context, const char* buffer, int len) {
+  QString *t = static_cast<QString*>(context);
   *t += QString::fromUtf8(buffer, len);
   return len;
 }
 
-void closeQString(void * context) {
-  QString *t = (QString*)context;
+void ::closeQString(void* context) {
+  QString *t = static_cast<QString*>(context);;
   *t += QString::fromLatin1("\n");
 }
 
-
 BookcaseDoc::BookcaseDoc(QWidget* parent_, const char* name_/*=0*/)
- : QObject(parent_, name_), m_isModified(false) {
+    : QObject(parent_, name_), m_isModified(false) {
   m_collList.setAutoDelete(true);
-
-//  newDocument();
-}
-
-BookcaseDoc::~BookcaseDoc() {
 }
 
 void BookcaseDoc::setModified(bool m_) {
@@ -105,9 +98,10 @@ bool BookcaseDoc::newDocument() {
 }
 
 bool BookcaseDoc::openDocument(const KURL& url_) {
+  Bookcase* app = static_cast<Bookcase*>(parent());
+
   QString tmpfile;
   if(!KIO::NetAccess::download(url_, tmpfile)) {
-    Bookcase* app = static_cast<Bookcase*>(parent());
     QString str(i18n("Unable to download file - %1.").arg(url_.url()));
     KMessageBox::sorry(app, str);
     return false;
@@ -115,7 +109,6 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
 
   QFile f(tmpfile);
   if(!f.open(IO_ReadOnly)) {
-    Bookcase* app = static_cast<Bookcase*>(parent());
     QString str(i18n("Unable to open file - %1.").arg(tmpfile));
     KMessageBox::sorry(app, str);
     KIO::NetAccess::removeTempFile(tmpfile);
@@ -125,7 +118,6 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
   char buf[6];
   if(f.readBlock(buf, 5) < 5) {
     f.close();
-    Bookcase* app = static_cast<Bookcase*>(parent());
     QString str(i18n("Unable to read file - %1.").arg(tmpfile));
     KMessageBox::sorry(app, str);
     KIO::NetAccess::removeTempFile(tmpfile);
@@ -135,7 +127,6 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
   // Is it plain XML ?
   if(strncasecmp(buf, "<?xml", 5) != 0) {
     f.close();
-    Bookcase* app = static_cast<Bookcase*>(parent());
     QString str(i18n("File is not in XML format - %1.").arg(url_.url()));
     KMessageBox::sorry(app, str);
     KIO::NetAccess::removeTempFile(tmpfile);
@@ -148,7 +139,6 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
   QDomElement root = doc.documentElement();
   if(root.tagName() != "bookcase") {
     f.close();
-    Bookcase* app = static_cast<Bookcase*>(parent());
     QString str(i18n("File is not a Bookcase data file - %1.").arg(url_.url()));
     KMessageBox::sorry(app, str);
     KIO::NetAccess::removeTempFile(tmpfile);
@@ -163,7 +153,8 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
 
   QDomNodeList collelems = root.elementsByTagName("collection");
   if(collelems.count() > 1) {
-    kdWarning() << "BookcaseDoc::openDocument() - There is more than one collection." << endl;
+    kdWarning() << "BookcaseDoc::openDocument() - There is more than one collection."
+      "This isn't supported at the moment." << endl;
   }
 
 // for now, don't support more than one collection
@@ -193,7 +184,7 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
     // slotAddCollection(coll);
 
     QDomNodeList attelems = collelem.elementsByTagName("attribute");
-    kdDebug() << QString("BookcaseDoc::openDocument() - There are %1 attribute(s).\n").arg(attelems.count());
+//    kdDebug() << QString("BookcaseDoc::openDocument() - There are %1 attribute(s).\n").arg(attelems.count());
 
     for(unsigned j = 0; j < attelems.count(); ++j) {
       QDomElement attelem = attelems.item(j).toElement();
@@ -203,13 +194,16 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
         att->setAllowed(QStringList::split(";", attelem.attribute("allowed")));
       }
       coll->addAttribute(att);
-      kdDebug() << QString("  Added attribute: %1, %2").arg(att->name()).arg(att->title()) << endl;
+//      kdDebug() << QString("  Added attribute: %1, %2").arg(att->name()).arg(att->title()) << endl;
     }
     // do this now that we have all the attributes
     slotAddCollection(coll);
+    // the collection sends a signal for groupModified when a unit is added
+    // quicker to do this all at once in this case, so block signals
+    coll->blockSignals(true);
 
     QDomNodeList unitelems = collelem.elementsByTagName(unit);
-    kdDebug() << QString("BookcaseDoc::openDocument() - There are %1 %2(s) in the collection.").arg(unitelems.count()).arg(unit) << endl;
+//    kdDebug() << QString("BookcaseDoc::openDocument() - There are %1 %2(s) in the collection.").arg(unitelems.count()).arg(unit) << endl;
 
     for(unsigned j = 0; j < unitelems.count(); ++j) {
       BCUnit* unit = new BCUnit(coll);
@@ -236,6 +230,10 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
         emit signalFractionDone(f);
       }
     } // end unit loop
+    coll->blockSignals(false);
+    // now the groupview needs to be updated
+    // this only works since the group view totally populates when grouping is changed
+    app->slotChangeGrouping();
   } // end collection loop
 
   // be sure to do this to properly close out progress bar
@@ -253,7 +251,7 @@ bool BookcaseDoc::saveModified() {
   if(isModified()) {
     Bookcase* app = static_cast<Bookcase*>(parent());
     QString str(i18n("The current file has been modified.\n"
-                     "Do you want to save it?"));
+                      "Do you want to save it?"));
     int want_save = KMessageBox::warningYesNoCancel(app, str, i18n("Warning!"));
     switch(want_save) {
       case KMessageBox::Yes:
@@ -337,7 +335,7 @@ bool BookcaseDoc::closeDocument() {
 }
 
 void BookcaseDoc::deleteContents() {
-  QListIterator<BCCollection> it(m_collList);
+  QPtrListIterator<BCCollection> it(m_collList);
   for( ; it.current(); ++it) {
     slotDeleteCollection(it.current());
   }
@@ -350,7 +348,7 @@ unsigned BookcaseDoc::collectionCount() const {
 
 BCCollection* BookcaseDoc::collectionById(int id_) {
   BCCollection* coll = 0;
-  QListIterator<BCCollection> it(m_collList);
+  QPtrListIterator<BCCollection> it(m_collList);
   for( ; it.current(); ++it) {
     if(it.current()->id() == id_) {
       coll = it.current();
@@ -363,7 +361,7 @@ BCCollection* BookcaseDoc::collectionById(int id_) {
   return coll;
 }
 
-const QList<BCCollection>& BookcaseDoc::collectionList() const{
+const QPtrList<BCCollection>& BookcaseDoc::collectionList() const{
   return m_collList;
 }
 
@@ -374,7 +372,7 @@ QDomDocument BookcaseDoc::exportXML() {
   bcelem.setAttribute("version", FORMAT_VERSION);
   doc.appendChild(bcelem);
 
-  QListIterator<BCCollection> collIt(m_collList);
+  QPtrListIterator<BCCollection> collIt(m_collList);
   // need i counter for progress bar
   for(int i = 0; collIt.current(); ++collIt, ++i) {
     BCCollection* coll = collIt.current();
@@ -388,14 +386,14 @@ QDomDocument BookcaseDoc::exportXML() {
     if(coll->isCustom()) {
       QDomElement attsElem = doc.createElement("attributes");
       collElem.appendChild(attsElem);
-      QListIterator<BCAttribute> attIt(coll->attributeList());
+      QPtrListIterator<BCAttribute> attIt(coll->attributeList());
       QDomElement attElem;
       for( ; attIt.current(); ++attIt) {
         attElem = doc.createElement("attribute");
         attsElem.appendChild(attElem);
         attElem.setAttribute("name", attIt.current()->name());
         attElem.setAttribute("title", attIt.current()->title());
-        attElem.setAttribute("group", attIt.current()->group());
+        attElem.setAttribute("category", attIt.current()->category());
         attElem.setAttribute("type", attIt.current()->type());
         if(attIt.current()->type() == BCAttribute::Choice) {
           attElem.setAttribute("allowed", attIt.current()->allowed().join(";"));
@@ -407,8 +405,8 @@ QDomDocument BookcaseDoc::exportXML() {
 
     QDomElement attElem;
     QDomElement unitElem;
-    QListIterator<BCAttribute> attIt(coll->attributeList());
-    QListIterator<BCUnit> unitIt(coll->unitList());
+    QPtrListIterator<BCAttribute> attIt(coll->attributeList());
+    QPtrListIterator<BCUnit> unitIt(coll->unitList());
     // the j counter is for progress
     for(int j = 0; unitIt.current(); ++unitIt, ++j) {
       unitElem = doc.createElement(coll->unitName());
@@ -423,7 +421,7 @@ QDomDocument BookcaseDoc::exportXML() {
           }
         }
       } // end attribute loop
-      
+
 //      if(j%SAVE_SIGNAL_STEP_SIZE == 0) {
 //        // allocate equal time to each collection in document, leave 20% for later file write
 //        // i is number of collection
@@ -438,64 +436,172 @@ QDomDocument BookcaseDoc::exportXML() {
   return doc;
 }
 
-QString BookcaseDoc::exportHTML(const QString& xsltFilename_, bool format_/*=false*/) {
+QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) {
+  QDomDocument doc("bookcase");
+  doc.appendChild(doc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""));
+  QDomElement bcelem = doc.createElement("bookcase");
+  doc.appendChild(bcelem);
+
+  QPtrListIterator<BCCollection> collIt(m_collList);
+  for( ; collIt.current(); ++collIt) {
+    QDomElement collElem = doc.createElement("collection");
+    doc.documentElement().appendChild(collElem);
+    collElem.setAttribute("title", collIt.current()->title());
+
+    BCUnitGroupDict* dict = collIt.current()->unitGroupDictByName(dictName_);
+    if(!dict) {
+      kdDebug() << "BookcaseDoc::exportXML() - no dict found for " << dictName_ << endl;
+      return QDomDocument();
+    }
+
+    // outside the loop for efficiency;
+    QString title;
+    QDomElement attElem, unitElem, titleElem, valueElem;
+    QPtrListIterator<BCAttribute> attIt(collIt.current()->attributeList());
+    for(attIt.toFirst(); attIt.current(); ++attIt) {
+      attElem = doc.createElement("attribute");
+      attElem.setAttribute("name", attIt.current()->name());
+      attElem.setAttribute("title", attIt.current()->title());
+      collElem.appendChild(attElem);
+    }
+
+    QString value;
+        
+    // dictName_ equals group->attributeName() for all these
+    QDictIterator<BCUnitGroup> groupIt(*dict);
+    for( ; groupIt.current(); ++groupIt) {
+      QPtrListIterator<BCUnit> it(*groupIt.current());
+      for( ; it.current(); ++it) {
+        unitElem = doc.createElement(collIt.current()->unitName());
+
+        title = it.current()->attribute("title");
+        BCAttribute::formatTitle(title);
+        titleElem = doc.createElement("title");
+        titleElem.appendChild(doc.createTextNode(title));
+        unitElem.appendChild(titleElem);
+
+        valueElem = doc.createElement(dictName_);
+        valueElem.appendChild(doc.createTextNode(groupIt.current()->groupName()));
+        unitElem.appendChild(valueElem);
+
+        for(attIt.toFirst(); attIt.current(); ++attIt) {
+          // don't include the grouped attribute twice nor the title again
+          if(attIt.current()->name() == dictName_
+             || attIt.current()->name() == "title") {
+            continue;
+          }
+
+          if(format_) {
+            value = it.current()->attributeFormatted(attIt.current()->name(),
+                                                     attIt.current()->flags());
+          } else {
+            value = it.current()->attribute(attIt.current()->name());
+          }
+          
+          if(!value.isEmpty()) {
+            valueElem = doc.createElement(attIt.current()->name());
+            unitElem.appendChild(valueElem);
+            if(attIt.current()->type() != BCAttribute::Bool) {
+              valueElem.appendChild(doc.createTextNode(value));
+            }
+          }
+        } // end attribute loop
+
+        collElem.appendChild(unitElem);
+      } // end unit loop
+    } // end group loop
+  } // end collection loop
+
+  return doc;
+}
+
+QString BookcaseDoc::exportHTML(const QString& xsltFilename_, const QString& sortby_,
+                                bool format_/*=false*/) {
   QString html;
   QDomDocument dom;
-  
+
   xmlSubstituteEntitiesDefault(1);
   xmlLoadExtDtdDefaultValue = 1;
+  // register the string library
+  exsltStrRegister();
+  // register the dynamic library
+  exsltDynRegister();
 
-  dom = exportXML();
-  Bookcase* app = static_cast<Bookcase*>(parent());
-  dom = app->collectionViewTree();
-  if(format_) {
-    // TODO: fix this if multiple collections become supported
-    QListIterator<BCAttribute> attIt(collectionById(0)->attributeList());
-    int flags;
-    QDomNodeList nodes;
-    QDomNode textNode;
-    QString text;
-    for( ; attIt.current(); ++attIt) {
-      flags = attIt.current()->flags();
-      nodes = dom.elementsByTagName(attIt.current()->name());
-//      kdDebug() << nodes.count() << " nodes for " << attIt.current()->name() << endl;
-      for(unsigned i = 0; i < nodes.count(); ++i) {
-        textNode = nodes.item(i).firstChild();
-        if(textNode.isText() && !textNode.nodeValue().isEmpty()) {
-          text = textNode.nodeValue();
-          if(flags & BCAttribute::FormatTitle) {
-            text = BCAttribute::formatTitle(text);
-          } else if(flags & BCAttribute::FormatName) {
-            text = BCAttribute::formatName(text, (flags & BCAttribute::AllowMultiple));
-          } else if(flags & BCAttribute::FormatDate) {
-            text = BCAttribute::formatDate(text);
-          }
-          textNode.setNodeValue(text);
-          // nodes.item(i).replaceChild(dom.createTextNode(text), textNode);
-        }
-      } // end node loop
-    } // end attribute loop
+  dom = exportXML(sortby_, format_);
+  if(dom.isNull()) {
+    return QString::null;
   }
+
+//  QFile f("/tmp/test.xml");
+//  writeDocument(f, dom.toCString());
+//  f.close();
+
   xmlDocPtr doc = xmlParseDoc((xmlChar *)dom.toCString().data());
-
-  xsltStylesheetPtr stylesheet = xsltParseStylesheetFile((const xmlChar *)xsltFilename_.latin1());
+  if(!doc) {
+    return QString::null;
+  }
+  
+  xsltStylesheetPtr stylesheet;
+  stylesheet = xsltParseStylesheetFile((const xmlChar *)xsltFilename_.latin1());
   if(!stylesheet) {
-    return html;
+    xmlFreeDoc(doc);
+    xsltCleanupGlobals();
+    xmlCleanupParser();
+    return QString::null;
   }
 
-  const char *params[1];
-  params[0] = NULL;
+  const char* params[3];
+  params[0] = "doc-url";
+  // for some reason, putting this in crashes my version of libxslt (1.0.21)
+//  params[1] = QString("'"+m_url.filename()+"'").latin1();
+//  kdDebug() << QString("'"+m_url.filename()+"'") << endl;
+  params[1] = "'Bookcase'";
+  params[2] = NULL;
+
+  // returns NULL on error
   xmlDocPtr out = xsltApplyStylesheet(stylesheet, doc, params);
-
-  xmlOutputBufferPtr outp = xmlOutputBufferCreateIO(writeToQString,
-                              (xmlOutputCloseCallback)closeQString, &html, 0);
+  if(!out) {
+    xmlFreeDoc(doc);
+    xsltFreeStylesheet(stylesheet);
+    xsltCleanupGlobals();
+    xmlCleanupParser();
+    return QString::null;
+  }
+  
+  xmlOutputBufferPtr outp = xmlOutputBufferCreateIO(::writeToQString,
+                             (xmlOutputCloseCallback)::closeQString, &html, 0);
+  if(!outp) {
+    xmlFreeDoc(doc);
+    xsltFreeStylesheet(stylesheet);
+    xmlFreeDoc(out);
+    xsltCleanupGlobals();
+    xmlCleanupParser();
+    return QString::null;
+  }
   outp->written = 0;
-  xsltSaveResultTo(outp, out, stylesheet);
-  xmlOutputBufferFlush(outp);
+  int num_bytes = xsltSaveResultTo(outp, out, stylesheet);
+  if(num_bytes == -1) {
+    xmlFreeDoc(doc);
+    xsltFreeStylesheet(stylesheet);
+    xmlFreeDoc(out);
+    xsltCleanupGlobals();
+    xmlCleanupParser();
+    return QString::null;
+  }
+  
+  num_bytes = xmlOutputBufferFlush(outp);
+  if(num_bytes == -1) {
+    xmlFreeDoc(doc);
+    xsltFreeStylesheet(stylesheet);
+    xmlFreeDoc(out);
+    xsltCleanupGlobals();
+    xmlCleanupParser();
+    return QString::null;
+  }
 
+  xmlFreeDoc(doc);
   xsltFreeStylesheet(stylesheet);
   xmlFreeDoc(out);
-  xmlFreeDoc(doc);
   xsltCleanupGlobals();
   xmlCleanupParser();
 
@@ -534,7 +640,8 @@ void BookcaseDoc::slotSaveUnit(BCUnit* unit_) {
     return;
   }
 
-  kdDebug() << "BookcaseDoc::slotSaveUnit() - modifying an existing unit." << endl;
+//  kdDebug() << "BookcaseDoc::slotSaveUnit() - modifying an existing unit." << endl;
+  unit_->collection()->updateDicts(unit_);
   emit signalUnitModified(unit_);
 
   setModified(true);
@@ -579,3 +686,20 @@ void BookcaseDoc::slotRenameCollection(int id_, const QString& newTitle_) {
   }
   setModified(true);
 }
+
+bool BookcaseDoc::isEmpty() const {
+  //an empty doc may contain a collection, but no units
+  if(m_collList.isEmpty()) {
+    return true;
+  }
+
+  QPtrListIterator<BCCollection> collIt(m_collList);
+  for( ; collIt.current(); ++collIt) {
+    if(!collIt.current()->unitList().isEmpty()) {
+      return false;
+    }
+  }
+
+  return true;
+}
+  

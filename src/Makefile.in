@@ -250,10 +250,10 @@ x_libraries = @x_libraries@
 ####### kdevelop will overwrite this part!!! (begin)##########
 bin_PROGRAMS = bookcase
 
-bookcase_SOURCES = isbnvalidator.cpp searchdialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bccollectionview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp 
-bookcase_LDADD = -lkdeprint -lxml2 -lxslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET)
+bookcase_SOURCES = bclabelaction.cpp lccnvalidator.cpp isbnvalidator.cpp searchdialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp 
+bookcase_LDADD = -lkdeprint -lxml2 -lxslt -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET)
 
-EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcasedoc.cpp bookcasedoc.h bookcaseui.rc bcattribute.cpp bcattribute.h bccollection.cpp bccollection.h bccollectionview.cpp bccollectionview.h bcdetailedlistview.cpp bcdetailedlistview.h bctabcontrol.cpp bctabcontrol.h bcunit.cpp bcuniteditwidget.cpp bcuniteditwidget.h bcunit.h bcunititem.h configdialog.cpp configdialog.h searchdialog.cpp searchdialog.h isbnvalidator.cpp isbnvalidator.h 
+EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcasedoc.cpp bookcasedoc.h bookcaseui.rc bcattribute.cpp bcattribute.h bccollection.cpp bccollection.h bcgroupview.cpp bcgroupview.h bcdetailedlistview.cpp bcdetailedlistview.h bctabcontrol.cpp bctabcontrol.h bcunit.cpp bcuniteditwidget.cpp bcuniteditwidget.h bcunit.h bcunititem.h configdialog.cpp configdialog.h searchdialog.cpp searchdialog.h isbnvalidator.cpp isbnvalidator.h lccnvalidator.cpp lccnvalidator.h bcunitgroup.h bclabelaction.cpp bclabelaction.h 
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -294,22 +294,24 @@ CONFIG_CLEAN_FILES =
 bin_PROGRAMS = bookcase$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_bookcase_OBJECTS = isbnvalidator.$(OBJEXT) searchdialog.$(OBJEXT) \
+am_bookcase_OBJECTS = bclabelaction.$(OBJEXT) lccnvalidator.$(OBJEXT) \
+	isbnvalidator.$(OBJEXT) searchdialog.$(OBJEXT) \
 	configdialog.$(OBJEXT) bcuniteditwidget.$(OBJEXT) \
 	bcunit.$(OBJEXT) bctabcontrol.$(OBJEXT) \
-	bcdetailedlistview.$(OBJEXT) bccollectionview.$(OBJEXT) \
+	bcdetailedlistview.$(OBJEXT) bcgroupview.$(OBJEXT) \
 	bccollection.$(OBJEXT) bcattribute.$(OBJEXT) \
 	bookcasedoc.$(OBJEXT) bookcase.$(OBJEXT) main.$(OBJEXT)
 #>- bookcase_OBJECTS = $(am_bookcase_OBJECTS)
-#>+ 10
+#>+ 11
 bookcase_final_OBJECTS = bookcase.all_cpp.o 
-bookcase_nofinal_OBJECTS = isbnvalidator.$(OBJEXT) searchdialog.$(OBJEXT) \
+bookcase_nofinal_OBJECTS = bclabelaction.$(OBJEXT) lccnvalidator.$(OBJEXT) \
+	isbnvalidator.$(OBJEXT) searchdialog.$(OBJEXT) \
 	configdialog.$(OBJEXT) bcuniteditwidget.$(OBJEXT) \
 	bcunit.$(OBJEXT) bctabcontrol.$(OBJEXT) \
-	bcdetailedlistview.$(OBJEXT) bccollectionview.$(OBJEXT) \
+	bcdetailedlistview.$(OBJEXT) bcgroupview.$(OBJEXT) \
 	bccollection.$(OBJEXT) bcattribute.$(OBJEXT) \
 	bookcasedoc.$(OBJEXT) bookcase.$(OBJEXT) main.$(OBJEXT)\
-configdialog.moc.o bcdetailedlistview.moc.o searchdialog.moc.o bookcasedoc.moc.o bookcase.moc.o bcuniteditwidget.moc.o bctabcontrol.moc.o bccollectionview.moc.o 
+configdialog.moc.o bookcasedoc.moc.o bookcase.moc.o bclabelaction.moc.o bccollection.moc.o bcdetailedlistview.moc.o searchdialog.moc.o bcgroupview.moc.o bctabcontrol.moc.o bcuniteditwidget.moc.o 
 @KDE_USE_FINAL_FALSE@bookcase_OBJECTS = $(bookcase_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@bookcase_OBJECTS = $(bookcase_final_OBJECTS)
 bookcase_DEPENDENCIES =
@@ -323,34 +325,40 @@ depcomp = $(SHELL) $(top_srcdir)/admin/depcomp
 am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/bcattribute.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bccollection.Po \
-#>- @AMDEP_TRUE@	./$(DEPDIR)/bccollectionview.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcdetailedlistview.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bcgroupview.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/bclabelaction.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bctabcontrol.Po ./$(DEPDIR)/bcunit.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bcuniteditwidget.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/bookcase.Po ./$(DEPDIR)/bookcasedoc.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
-#>- @AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po ./$(DEPDIR)/main.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po \
+#>- @AMDEP_TRUE@	./$(DEPDIR)/lccnvalidator.Po ./$(DEPDIR)/main.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/searchdialog.Po
-#>+ 21
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/configdialog.moc.P $(DEPDIR)/bcdetailedlistview.moc.P $(DEPDIR)/searchdialog.moc.P $(DEPDIR)/bookcasedoc.moc.P $(DEPDIR)/bookcase.moc.P $(DEPDIR)/bcuniteditwidget.moc.P $(DEPDIR)/bctabcontrol.moc.P $(DEPDIR)/bccollectionview.moc.P  $(DEPDIR)/bookcase.all_cpp.P  ./$(DEPDIR)/bcattribute.Po \
+#>+ 25
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/configdialog.moc.P $(DEPDIR)/bookcasedoc.moc.P $(DEPDIR)/bookcase.moc.P $(DEPDIR)/bclabelaction.moc.P $(DEPDIR)/bccollection.moc.P $(DEPDIR)/bcdetailedlistview.moc.P $(DEPDIR)/searchdialog.moc.P $(DEPDIR)/bcgroupview.moc.P $(DEPDIR)/bctabcontrol.moc.P $(DEPDIR)/bcuniteditwidget.moc.P  $(DEPDIR)/bookcase.all_cpp.P  ./$(DEPDIR)/bcattribute.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollection.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollectionview.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcdetailedlistview.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcgroupview.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bclabelaction.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bctabcontrol.Po ./$(DEPDIR)/bcunit.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bcuniteditwidget.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcase.Po ./$(DEPDIR)/bookcasedoc.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po ./$(DEPDIR)/main.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/lccnvalidator.Po ./$(DEPDIR)/main.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/searchdialog.Po
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/configdialog.moc.P $(DEPDIR)/bcdetailedlistview.moc.P $(DEPDIR)/searchdialog.moc.P $(DEPDIR)/bookcasedoc.moc.P $(DEPDIR)/bookcase.moc.P $(DEPDIR)/bcuniteditwidget.moc.P $(DEPDIR)/bctabcontrol.moc.P $(DEPDIR)/bccollectionview.moc.P  ./$(DEPDIR)/bcattribute.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/configdialog.moc.P $(DEPDIR)/bookcasedoc.moc.P $(DEPDIR)/bookcase.moc.P $(DEPDIR)/bclabelaction.moc.P $(DEPDIR)/bccollection.moc.P $(DEPDIR)/bcdetailedlistview.moc.P $(DEPDIR)/searchdialog.moc.P $(DEPDIR)/bcgroupview.moc.P $(DEPDIR)/bctabcontrol.moc.P $(DEPDIR)/bcuniteditwidget.moc.P  ./$(DEPDIR)/bcattribute.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollection.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bccollectionview.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcdetailedlistview.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcgroupview.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bclabelaction.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bctabcontrol.Po ./$(DEPDIR)/bcunit.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bcuniteditwidget.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcase.Po ./$(DEPDIR)/bookcasedoc.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/configdialog.Po \
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po ./$(DEPDIR)/main.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/isbnvalidator.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/lccnvalidator.Po ./$(DEPDIR)/main.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/searchdialog.Po
 
 #>- CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -390,7 +398,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  src/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/src/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/src/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
@@ -434,8 +442,9 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcattribute.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bccollection.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bccollectionview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcdetailedlistview.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcgroupview.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bclabelaction.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bctabcontrol.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcunit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bcuniteditwidget.Po@am__quote@
@@ -443,6 +452,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bookcasedoc.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/configdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/isbnvalidator.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lccnvalidator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/searchdialog.Po@am__quote@
 
@@ -664,14 +674,6 @@ configdialog.moc.cpp: $(srcdir)/configdialog.h
 	$(MOC) $(srcdir)/configdialog.h -o configdialog.moc.cpp
 
 #>+ 3
-bcdetailedlistview.moc.cpp: $(srcdir)/bcdetailedlistview.h
-	$(MOC) $(srcdir)/bcdetailedlistview.h -o bcdetailedlistview.moc.cpp
-
-#>+ 3
-searchdialog.moc.cpp: $(srcdir)/searchdialog.h
-	$(MOC) $(srcdir)/searchdialog.h -o searchdialog.moc.cpp
-
-#>+ 3
 bookcasedoc.moc.cpp: $(srcdir)/bookcasedoc.h
 	$(MOC) $(srcdir)/bookcasedoc.h -o bookcasedoc.moc.cpp
 
@@ -680,20 +682,36 @@ bookcase.moc.cpp: $(srcdir)/bookcase.h
 	$(MOC) $(srcdir)/bookcase.h -o bookcase.moc.cpp
 
 #>+ 3
-bcuniteditwidget.moc.cpp: $(srcdir)/bcuniteditwidget.h
-	$(MOC) $(srcdir)/bcuniteditwidget.h -o bcuniteditwidget.moc.cpp
+bclabelaction.moc.cpp: $(srcdir)/bclabelaction.h
+	$(MOC) $(srcdir)/bclabelaction.h -o bclabelaction.moc.cpp
+
+#>+ 3
+bccollection.moc.cpp: $(srcdir)/bccollection.h
+	$(MOC) $(srcdir)/bccollection.h -o bccollection.moc.cpp
+
+#>+ 3
+bcdetailedlistview.moc.cpp: $(srcdir)/bcdetailedlistview.h
+	$(MOC) $(srcdir)/bcdetailedlistview.h -o bcdetailedlistview.moc.cpp
+
+#>+ 3
+searchdialog.moc.cpp: $(srcdir)/searchdialog.h
+	$(MOC) $(srcdir)/searchdialog.h -o searchdialog.moc.cpp
+
+#>+ 3
+bcgroupview.moc.cpp: $(srcdir)/bcgroupview.h
+	$(MOC) $(srcdir)/bcgroupview.h -o bcgroupview.moc.cpp
 
 #>+ 3
 bctabcontrol.moc.cpp: $(srcdir)/bctabcontrol.h
 	$(MOC) $(srcdir)/bctabcontrol.h -o bctabcontrol.moc.cpp
 
 #>+ 3
-bccollectionview.moc.cpp: $(srcdir)/bccollectionview.h
-	$(MOC) $(srcdir)/bccollectionview.h -o bccollectionview.moc.cpp
+bcuniteditwidget.moc.cpp: $(srcdir)/bcuniteditwidget.h
+	$(MOC) $(srcdir)/bcuniteditwidget.h -o bcuniteditwidget.moc.cpp
 
 #>+ 3
 clean-metasources:
-	-rm -f  configdialog.moc.cpp bcdetailedlistview.moc.cpp searchdialog.moc.cpp bookcasedoc.moc.cpp bookcase.moc.cpp bcuniteditwidget.moc.cpp bctabcontrol.moc.cpp bccollectionview.moc.cpp
+	-rm -f  configdialog.moc.cpp bookcasedoc.moc.cpp bookcase.moc.cpp bclabelaction.moc.cpp bccollection.moc.cpp bcdetailedlistview.moc.cpp searchdialog.moc.cpp bcgroupview.moc.cpp bctabcontrol.moc.cpp bcuniteditwidget.moc.cpp
 
 #>+ 2
 docs-am:
@@ -702,15 +720,15 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  src/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/src/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/src/Makefile.in
 
 
 #>+ 11
-bookcase.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/isbnvalidator.cpp $(srcdir)/searchdialog.cpp $(srcdir)/configdialog.cpp $(srcdir)/bcuniteditwidget.cpp $(srcdir)/bcunit.cpp $(srcdir)/bctabcontrol.cpp $(srcdir)/bcdetailedlistview.cpp $(srcdir)/bccollectionview.cpp $(srcdir)/bccollection.cpp $(srcdir)/bcattribute.cpp $(srcdir)/bookcasedoc.cpp $(srcdir)/bookcase.cpp $(srcdir)/main.cpp configdialog.moc.cpp bookcase.moc.cpp bookcasedoc.moc.cpp bcdetailedlistview.moc.cpp searchdialog.moc.cpp bcuniteditwidget.moc.cpp bctabcontrol.moc.cpp bccollectionview.moc.cpp 
+bookcase.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/bclabelaction.cpp $(srcdir)/lccnvalidator.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/searchdialog.cpp $(srcdir)/configdialog.cpp $(srcdir)/bcuniteditwidget.cpp $(srcdir)/bcunit.cpp $(srcdir)/bctabcontrol.cpp $(srcdir)/bcdetailedlistview.cpp $(srcdir)/bcgroupview.cpp $(srcdir)/bccollection.cpp $(srcdir)/bcattribute.cpp $(srcdir)/bookcasedoc.cpp $(srcdir)/bookcase.cpp $(srcdir)/main.cpp configdialog.moc.cpp bookcase.moc.cpp bookcasedoc.moc.cpp bclabelaction.moc.cpp bccollection.moc.cpp bcdetailedlistview.moc.cpp searchdialog.moc.cpp bcuniteditwidget.moc.cpp bctabcontrol.moc.cpp bcgroupview.moc.cpp 
 	@echo 'creating bookcase.all_cpp.cpp ...'; \
 	rm -f bookcase.all_cpp.files bookcase.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> bookcase.all_cpp.final; \
-	for file in isbnvalidator.cpp searchdialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bccollectionview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp configdialog.moc.cpp bookcase.moc.cpp bookcasedoc.moc.cpp bcdetailedlistview.moc.cpp searchdialog.moc.cpp bcuniteditwidget.moc.cpp bctabcontrol.moc.cpp bccollectionview.moc.cpp ; do \
+	for file in bclabelaction.cpp lccnvalidator.cpp isbnvalidator.cpp searchdialog.cpp configdialog.cpp bcuniteditwidget.cpp bcunit.cpp bctabcontrol.cpp bcdetailedlistview.cpp bcgroupview.cpp bccollection.cpp bcattribute.cpp bookcasedoc.cpp bookcase.cpp main.cpp configdialog.moc.cpp bookcase.moc.cpp bookcasedoc.moc.cpp bclabelaction.moc.cpp bccollection.moc.cpp bcdetailedlistview.moc.cpp searchdialog.moc.cpp bcuniteditwidget.moc.cpp bctabcontrol.moc.cpp bcgroupview.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> bookcase.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> bookcase.all_cpp.final; \
 	done; \

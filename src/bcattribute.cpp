@@ -30,18 +30,18 @@ bool BCAttribute::m_autoCapitalization = false;
 
 // this constructor is for anything but Choice type
 BCAttribute::BCAttribute(const QString& name_, const QString& title_, AttributeType type_/*=Line*/)
- : m_name(name_), m_title(title_), m_type(type_), m_flags(0) {
-  m_group = i18n("General");
+    : m_name(name_), m_title(title_),  m_category(i18n("General")),
+      m_type(type_), m_flags(0) {
+
   if(m_type == BCAttribute::Choice) {
-    kdDebug() << "BCAttribute() - A different constructor should be called for multiple choice attributes." << endl;
+    kdWarning() << "BCAttribute() - A different constructor should be called for multiple choice attributes." << endl;
   }
 }
 
 // if this constructor is called, the type is necessarily Choice
 BCAttribute::BCAttribute(const QString& name_, const QString& title_, const QStringList& allowed_)
- : m_name(name_), m_title(title_), m_allowed(allowed_), m_flags(0) {
-  m_group = i18n("General");
-  m_type = BCAttribute::Choice;
+    : m_name(name_), m_title(title_), m_category(i18n("General")),
+      m_type(BCAttribute::Choice), m_allowed(allowed_), m_flags(0) {
 }
 
 BCAttribute::BCAttribute(const BCAttribute&) {
@@ -53,10 +53,7 @@ BCAttribute BCAttribute::operator=(const BCAttribute& att_) {
   return BCAttribute(att_);
 }
 
-BCAttribute::~BCAttribute() {
-}
-
-BCAttribute::AttributeType BCAttribute::type() const {
+BCAttribute::AttributeType BCAttribute::type() const{
   return m_type;
 }
 
@@ -68,13 +65,13 @@ const QString& BCAttribute::title() const {
   return m_title;
 }
 
-const QString& BCAttribute::group() const {
-  return m_group;
+const QString& BCAttribute::category() const {
+  return m_category;
 }
 
 const QStringList& BCAttribute::allowed() const {
   if(m_type != BCAttribute::Choice) {
-    kdDebug() << "BCAttribute::allowed() - attribute is not of type Choice" << endl;
+    kdWarning() << "BCAttribute::allowed() - attribute is not of type Choice" << endl;
   }
   return m_allowed;
 }
@@ -91,8 +88,8 @@ void BCAttribute::setTitle(const QString& title_) {
   m_title = title_;
 }
 
-void BCAttribute::setGroup(const QString& group_) {
-  m_group = group_;
+void BCAttribute::setCategory(const QString& category_) {
+  m_category = category_;
 }
 
 void BCAttribute::setAllowed(const QStringList& list_) {
@@ -107,31 +104,46 @@ void BCAttribute::setDescription(const QString& desc_) {
   m_desc = desc_;
 }
 
-QString BCAttribute::formatTitle(const QString& title_) {
-  // yeah, this defeats purpose of const modifier in method parameter...so?
-  QString text = title_;
+QString& BCAttribute::format(QString& value_, int flags_) {
+  if(flags_ & FormatTitle) {
+    formatTitle(value_);
+
+  } else if(flags_ & FormatName) {
+    formatName(value_);
+
+  } else if(flags_ & FormatDate) {
+    formatDate(value_);
+
+  } else {
+    value_ = value_.simplifyWhiteSpace();
+  }
+  return value_;
+}
+
+QString& BCAttribute::formatTitle(QString& title_) {
   if(isAutoCapitalization()) {
-    text = BCAttribute::capitalize(text);
+    capitalize(title_);
   }
 
   // TODO if the title has ",the" at the end, put it at the front
   for(QStringList::Iterator it = m_articles.begin(); it != m_articles.end(); ++it) {
     // assume white space is already stripped
     QString article = static_cast<QString>(*it);
-    if(text.startsWith(article + " ")) {
+    if(title_.startsWith(article + " ")) {
       QRegExp regexp = QRegExp("^" + article + "\\s");
-      text = text.replace(regexp, "") + ", " + article;
+      title_ = title_.replace(regexp, "") + ", " + article;
       break;
     }
   }
 
   // also, arbitrarily impose rule that a space must follow every comma
   // lazy method, replace comma with comma<space> and then simplifyWhiteSpace()
-  text.replace(QRegExp(","), ", ");
-  return text.simplifyWhiteSpace();
+  title_.replace(QRegExp(","), ", ");
+  title_ = title_.simplifyWhiteSpace();
+  return title_;
 }
 
-QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
+QString& BCAttribute::formatName(QString& name_, bool multiple_/*=true*/) {
   QStringList entries;
   if(multiple_) {
     entries = QStringList::split(";", name_, false);
@@ -144,7 +156,7 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
   for(it = entries.begin(); it != entries.end(); ++it) {
     QString name = static_cast<QString>(*it);
     if(isAutoCapitalization()) {
-      name = BCAttribute::capitalize(name);
+      capitalize(name);
     }
 
     // split the name by white space and commas
@@ -172,40 +184,39 @@ QString BCAttribute::formatName(const QString& name_, bool multiple_/*=true*/) {
       text << name;
     }
   }
-  return text.join("; ").simplifyWhiteSpace();
+  name_ = text.join("; ").simplifyWhiteSpace();
+  return name_;
 }
 
-QString BCAttribute::formatDate(const QString& date_) {
+QString& BCAttribute::formatDate(QString& date_) {
   // TODO:: format as a date
   return date_;
 }
 
-QString BCAttribute::capitalize(const QString& str_) {
+void BCAttribute::capitalize(QString& str_) {
   // nothing is done to the last character which saves a position check
-  QString s = str_;
   // first letter is always capitalized
-  s.replace(0, 1, s.at(0).upper());
+  str_.replace(0, 1, str_.at(0).upper());
 
   // regexp to split words
   QRegExp rx("[\\s,.-;]");
-  int pos = s.find(rx);
+  int pos = str_.find(rx);
   int nextPos;
   QString word;
   // put into i18n for translation
   QStringList notCap = QStringList::split(",", i18n("a,an,in,of,the,to"), false);
   while(pos != -1) {
     // also need to compare against list of non-capitalized words
-    nextPos = s.find(rx, pos+1);
+    nextPos = str_.find(rx, pos+1);
     if(nextPos == -1) {
-      nextPos = s.length();
+      nextPos = str_.length();
     }
-    word = s.mid(pos+1, nextPos-pos-1);
+    word = str_.mid(pos+1, nextPos-pos-1);
     if(notCap.contains(word) == 0 && !word.isEmpty()) {
-      s.replace(pos+1, 1, s.at(pos+1).upper());
+      str_.replace(pos+1, 1, str_.at(pos+1).upper());
     }
-    pos = s.find(rx, pos+1);
+    pos = str_.find(rx, pos+1);
   }
-  return s;
 }
 
 QStringList BCAttribute::defaultArticleList() {

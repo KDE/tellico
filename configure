@@ -996,7 +996,7 @@ Optional Features:
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --disable-fast-perl     disable fast Makefile generation (needs perl)
   --enable-debug=ARG    enables debug symbols (yes|no|full) default=no
-  --disable-debug         disables debug output and debug symbols default=no
+  --disable-debug         disables debug output and debug symbols default=yes
   --enable-strict         compiles with strict compiler options (may not work!)
   --disable-warnings      disables compilation with -Wall and similiar
   --enable-profile        creates profiling infos default=no
@@ -1770,7 +1770,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=bookcase
- VERSION=0.3
+ VERSION=0.4
 
 
 cat >>confdefs.h <<_ACEOF
@@ -23778,8 +23778,8 @@ fi
       echo "$as_me:$LINENO: result: not found" >&5
 echo "${ECHO_T}not found" >&6
 
-  { echo "$as_me:$LINENO: WARNING: Could not find libxml2 anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.8." >&5
-echo "$as_me: WARNING: Could not find libxml2 anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.8." >&2;}
+  { echo "$as_me:$LINENO: WARNING: Could not find xml2-config anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.23. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxml2-devel or something similar." >&5
+echo "$as_me: WARNING: Could not find xml2-config anywhere, check ftp://xmlsoft.org/ for libxml >= 2.4.23. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxml2-devel or something similar." >&2;}
 
    else
       echo "$as_me:$LINENO: result: $kde_cv_path" >&5
@@ -23791,7 +23791,7 @@ echo "${ECHO_T}$kde_cv_path" >&6
 
 if test -n "$XML_CONFIG"; then
   vers=`$XML_CONFIG --version 2>/dev/null | sed -e 's/libxml //' | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  if test -n "$vers" && test "$vers" -ge 2004008
+  if test -n "$vers" && test "$vers" -ge 2004023
   then
     LIBXML_LIBS="`$XML_CONFIG --libs`"
     LIBXML_RPATH=
@@ -23808,8 +23808,8 @@ if test -n "$XML_CONFIG"; then
 #    KDE_FIND_PATH(xmllint, XMLLINT, [${prefix}/bin ${exec_prefix}/bin /usr/local/bin /opt/local/bin], [XMLLINT=""])
 #    AC_DEFINE_UNQUOTED(XMLLINT, "$XMLLINT", [Defines the executable of xmllint])
   else
-    { echo "$as_me:$LINENO: WARNING: You need at least libxml 2.4.8" >&5
-echo "$as_me: WARNING: You need at least libxml 2.4.8" >&2;}
+    { echo "$as_me:$LINENO: WARNING: You need at least libxml 2.4.23" >&5
+echo "$as_me: WARNING: You need at least libxml 2.4.23" >&2;}
     HELP_SUBDIR=
   fi
 fi
@@ -23865,8 +23865,8 @@ fi
       echo "$as_me:$LINENO: result: not found" >&5
 echo "${ECHO_T}not found" >&6
 
-  { echo "$as_me:$LINENO: WARNING: Could not find libxslt anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.7." >&5
-echo "$as_me: WARNING: Could not find libxslt anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.7." >&2;}
+  { echo "$as_me:$LINENO: WARNING: Could not find xslt-config anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.19. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxslt-devel or something similar." >&5
+echo "$as_me: WARNING: Could not find xslt-config anywhere, check ftp://xmlsoft.org/ for libxslt >= 1.0.19. If you are using pre-packaged libraries, be sure to have the development files installed as well, which may be called libxslt-devel or something similar." >&2;}
   HELP_SUBDIR=
 
    else
@@ -23879,7 +23879,7 @@ echo "${ECHO_T}$kde_cv_path" >&6
 
 if test -n "$XSLT_CONFIG"; then
   vers=`$XSLT_CONFIG --version 2>/dev/null | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-  if test -n "$vers" && test "$vers" -ge 1000007; then
+  if test -n "$vers" && test "$vers" -ge 1000019; then
     LIBXSLT_LIBS="`$XSLT_CONFIG --libs`"
     LIBXSLT_RPATH=
     for args in $LIBXSLT_LIBS; do
@@ -23893,8 +23893,8 @@ if test -n "$XSLT_CONFIG"; then
     LIBXSLT_CFLAGS="`$XSLT_CONFIG --cflags`"
 
   else
-    { echo "$as_me:$LINENO: WARNING: You need at least libxslt 1.0.7" >&5
-echo "$as_me: WARNING: You need at least libxslt 1.0.7" >&2;}
+    { echo "$as_me:$LINENO: WARNING: You need at least libxslt 1.0.19" >&5
+echo "$as_me: WARNING: You need at least libxslt 1.0.19" >&2;}
   fi
 fi
 

@@ -24,11 +24,11 @@
 /**
  * The BCAttribute class encapsulates all the possible properties of a unit.
  *
- * An attribute can be one of four types. It has a name, a title, and a group, along with
- * some flags characterizing certain properties
+ * An attribute can be one of four types. It has a name, a title, and a category,
+ * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: bcattribute.h,v 1.17 2002/10/09 00:53:15 robby Exp $
+ * @version $Id: bcattribute.h,v 1.20 2002/11/10 00:38:29 robby Exp $
  */
 class BCAttribute {
 public:
@@ -77,8 +77,8 @@ public:
 
   /**
    * The constructor for all types except Choice. The default type is Line.
-   * By default, the attribute group is set to "General", and should be modified using
-   * the @ref setGroup() method.
+   * By default, the attribute category is set to "General", and should be modified
+   * using the @ref setCategory() method.
    *
    * @param name The attribute name
    * @param title The attribute title
@@ -87,17 +87,14 @@ public:
   BCAttribute(const QString& name, const QString& title, AttributeType type = Line);
   /**
    * The constructor for Choice types attributes.
-   * By default, the attribute group is set to "General", and should be modified using
-   * the @ref setGroup() method.
+   * By default, the attribute category is set to "General", and should be modified
+   * using the @ref setCategory() method.
    *
    * @param name The attribute name
    * @param title The attribute title
    * @param allowed The allowed values of the attribute
    */
   BCAttribute(const QString& name, const QString& title, const QStringList& allowed);
-  /**
-   */
-  ~BCAttribute();
 
   /**
    * Returns the name of the attribute.
@@ -118,17 +115,17 @@ public:
    */
   void setTitle(const QString& title);
   /**
-   * Returns the group name of the attribute.
+   * Returns the category of the attribute.
    *
-   * @return The attribute group name
+   * @return The attribute category
    */
-  const QString& group() const;
+  const QString& category() const;
   /**
-   * Sets the group name of the attribute.
+   * Sets the category of the attribute.
    *
-   * @param group The attribute group name
+   * @param category The attribute category
    */
-  void setGroup(const QString& group);
+  void setCategory(const QString& category);
   /**
    * Returns the name of the attribute.
    *
@@ -173,15 +170,15 @@ public:
    */
   void setDescription(const QString& desc);
 
+  static QString& format(QString& value, int flags);
   /**
    * A convenience function to format a string as a title.
    * At the moment, this means that some articles such as "the" are placed
    * at the end of the title.
    *
    * @param title The string to be formatted
-   * @return The formatted string
    */
-  static QString formatTitle(const QString& title);
+  static QString& formatTitle(QString& title);
   /**
    * A convenience function to format a string as a personal name.
    * At the moment, this means that the name is split at the last white space,
@@ -191,17 +188,15 @@ public:
    *
    * @param name The string to be formatted
    * @param multiple A boolean indicating if the string can contain multiple values
-   * @return The formatted string
    */
-  static QString formatName(const QString& name, bool multiple=true);
+  static QString& formatName(QString& name, bool multiple=true);
   /**
    * A convenience function to format a string as a date.
    * At the moment, this does nothing.
    *
    * @param date The string to be formatted
-   * @return The formatted string
    */
-  static QString formatDate(const QString& date);
+  static QString& formatDate(QString& date);
   /**
    * Returns the default article list.
    *
@@ -251,7 +246,7 @@ public:
    */
   static void setAutoCapitalization(bool autoCapital);
 
-protected:
+private:
   /**
    * The copy constructor is private, to ensure that it's never used.
    */
@@ -265,12 +260,12 @@ protected:
    *
    * @param str String to fix
    */
-  static QString capitalize(const QString& str);
+  static void capitalize(QString& str);
 
 private:
   QString m_name;
   QString m_title;
-  QString m_group;
+  QString m_category;
   QString m_desc;
   AttributeType m_type;
   QStringList m_allowed;

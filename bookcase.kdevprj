@@ -22,16 +22,16 @@ bin_program=bookcase
 cflags=
 cppflags=
 cxxflags=\s-O3 -Wall
-ldadd=-lkdeprint -lxml2 -lxslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)
-ldflags=\s                 \s
+ldadd=-lkdeprint -lxml2 -lxslt -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)
+ldflags=\s                        \s
 
 [General]
 AMChanged=false
 author=Robby Stephenson
-configure_args=\s--build=i386-linux --host=i386-linux --target=i386-linux --prefix=/usr/local -enable-debug\s
+configure_args=\s--build=i386-linux --host=i386-linux --target=i386-linux --prefix=/usr/local -enable-debug
 email=robby@periapsis.org
 kdevprj_version=1.3
-lfv_open_groups=Others,Sources,User Interface
+lfv_open_groups=Others,Sources,Translations,User Interface
 make_options=\s-j1
 makefiles=Makefile.am,src/Makefile.am,doc/Makefile.am,doc/en/Makefile.am,po/Makefile.am,icons/Makefile.am,xslt/Makefile.am,test/Makefile.am,admin/Makefile.am
 modifyMakefiles=true
@@ -40,7 +40,7 @@ project_type=normal_kde2
 sgml_file=/home/robby/projects/bookcase/doc/en/index.docbook
 short_info=
 sub_dir=src/
-version=0.3
+version=0.4
 version_control=CVS
 workspace=1
 
@@ -49,6 +49,15 @@ dist=true
 install=false
 install_location=
 type=DATA
+
+[KPP]
+kpp_appgrp=Graphical Desktop/KDE
+kpp_bldroot=
+kpp_icon=0
+kpp_license=5
+kpp_summary=Personal book collection database
+kpp_url=http://periapsis.org/bookcase/
+kpp_version=0.4
 
 [LFV Groups]
 GNU=AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,NEWS
@@ -60,7 +69,7 @@ User Interface=*.kdevdlg,*.ui,*.rc,*.dlg
 groups=Headers,Sources,User Interface,Translations,GNU,Others
 
 [Makefile.am]
-files=bookcase.kdevprj,AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,bookcase.lsm,bookcase.desktop,bookcase.spec.in,bookcase.spec,bookcase.dtd
+files=bookcase.kdevprj,AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,bookcase.lsm,bookcase.desktop,bookcase.spec,bookcase.dtd
 sub_dirs=src,po,doc,icons,xslt,test,admin
 type=normal
 
@@ -77,15 +86,9 @@ install_location=
 type=DATA
 
 [admin/Makefile.am]
-files=admin/install-sh
+files=
 sub_dirs=
 type=normal
-
-[admin/install-sh]
-dist=true
-install=false
-install_location=
-type=DATA
 
 [bookcase.desktop]
 dist=true
@@ -113,12 +116,6 @@ type=DATA
 
 [bookcase.spec]
 dist=true
-install=false
-install_location=
-type=DATA
-
-[bookcase.spec.in]
-dist=false
 install=false
 install_location=
 type=DATA
@@ -156,7 +153,7 @@ install_location=
 type=DATA
 
 [icons/cd.png]
-dist=true
+dist=false
 install=false
 install_location=
 type=DATA
@@ -174,11 +171,24 @@ install_location=
 type=DATA
 
 [po/Makefile.am]
+files=po/it.po,po/bookcase.pot
 sub_dirs=
 type=normal
 
+[po/bookcase.pot]
+dist=true
+install=false
+install_location=
+type=DATA
+
+[po/it.po]
+dist=false
+install=false
+install_location=
+type=PO
+
 [src/Makefile.am]
-files=src/main.cpp,src/bookcase.cpp,src/bookcase.h,src/bookcasedoc.cpp,src/bookcasedoc.h,src/bookcaseui.rc,src/bcattribute.cpp,src/bcattribute.h,src/bccollection.cpp,src/bccollection.h,src/bccollectionview.cpp,src/bccollectionview.h,src/bcdetailedlistview.cpp,src/bcdetailedlistview.h,src/bctabcontrol.cpp,src/bctabcontrol.h,src/bcunit.cpp,src/bcuniteditwidget.cpp,src/bcuniteditwidget.h,src/bcunit.h,src/bcunititem.h,src/configdialog.cpp,src/configdialog.h,src/searchdialog.cpp,src/searchdialog.h,src/isbnvalidator.cpp,src/isbnvalidator.h
+files=src/main.cpp,src/bookcase.cpp,src/bookcase.h,src/bookcasedoc.cpp,src/bookcasedoc.h,src/bookcaseui.rc,src/bcattribute.cpp,src/bcattribute.h,src/bccollection.cpp,src/bccollection.h,src/bcgroupview.cpp,src/bcgroupview.h,src/bcdetailedlistview.cpp,src/bcdetailedlistview.h,src/bctabcontrol.cpp,src/bctabcontrol.h,src/bcunit.cpp,src/bcuniteditwidget.cpp,src/bcuniteditwidget.h,src/bcunit.h,src/bcunititem.h,src/configdialog.cpp,src/configdialog.h,src/searchdialog.cpp,src/searchdialog.h,src/isbnvalidator.cpp,src/isbnvalidator.h,src/lccnvalidator.cpp,src/lccnvalidator.h,src/bcunitgroup.h,src/bclabelaction.cpp,src/bclabelaction.h
 sub_dirs=
 type=prog_main
 
@@ -206,18 +216,6 @@ install=false
 install_location=
 type=HEADER
 
-[src/bccollectionview.cpp]
-dist=true
-install=false
-install_location=
-type=SOURCE
-
-[src/bccollectionview.h]
-dist=true
-install=false
-install_location=
-type=HEADER
-
 [src/bcdetailedlistview.cpp]
 dist=true
 install=false
@@ -225,6 +223,30 @@ install_location=
 type=SOURCE
 
 [src/bcdetailedlistview.h]
+dist=true
+install=false
+install_location=
+type=HEADER
+
+[src/bcgroupview.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[src/bcgroupview.h]
+dist=true
+install=false
+install_location=
+type=HEADER
+
+[src/bclabelaction.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[src/bclabelaction.h]
 dist=true
 install=false
 install_location=
@@ -261,6 +283,12 @@ install_location=
 type=SOURCE
 
 [src/bcuniteditwidget.h]
+dist=true
+install=false
+install_location=
+type=HEADER
+
+[src/bcunitgroup.h]
 dist=true
 install=false
 install_location=
@@ -326,6 +354,18 @@ install=false
 install_location=
 type=HEADER
 
+[src/lccnvalidator.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[src/lccnvalidator.h]
+dist=true
+install=false
+install_location=
+type=HEADER
+
 [src/main.cpp]
 dist=true
 install=false
@@ -368,7 +408,7 @@ install_location=
 type=DATA
 
 [xslt/Makefile.am]
-files=xslt/summary.xsl,xslt/bookcase-by-author.xsl,xslt/bookcase-by-title.xsl
+files=xslt/summary.xsl,xslt/bookcase-by-author.xsl,xslt/bookcase-by-title.xsl,xslt/bookcase-printing.xsl
 sub_dirs=
 type=normal
 
@@ -384,8 +424,14 @@ install=true
 install_location=$$(kde_datadir)/bookcase/bookcase-by-title.xsl
 type=DATA
 
-[xslt/summary.xsl]
+[xslt/bookcase-printing.xsl]
 dist=true
+install=true
+install_location=$$(kde_datadir)/bookcase/bookcase-printing.xsl
+type=DATA
+
+[xslt/summary.xsl]
+dist=false
 install=false
 install_location=
 type=DATA

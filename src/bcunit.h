@@ -19,12 +19,19 @@
 #define BCUNIT_H
 
 class BCCollection;
+class BCUnit;
+class BCUnitGroup;
 
+#include <qstringlist.h>
 #include <qmap.h>
 #include <qstring.h>
+#include <qptrlist.h>
+
+typedef QPtrList<BCUnit> BCUnitList;
 
 /**
- * The BCUnit class represents a book, a CD, or whatever is the basic entity in the collection.
+ * The BCUnit class represents a book, a CD, or whatever is the basic entity
+ * in the collection.
  *
  * Each BCUnit object has a set of attribute values, such as title, artist, or format,
  * and must belong to a collection. A unique id number identifies each unit.
@@ -32,7 +39,7 @@ class BCCollection;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bcunit.h,v 1.11 2002/07/08 05:37:54 robby Exp $
+ * @version $Id: bcunit.h,v 1.21 2002/11/17 02:53:03 robby Exp $
  */
 class BCUnit {
 public:
@@ -51,23 +58,31 @@ public:
    * The assignment operator is overloaded, since the id must be different.
    */
   BCUnit operator= (const BCUnit& unit);
-  /**
-   */
-  ~BCUnit();
 
   /**
    * Returns the value of the attribute with a given key name. If the key doesn't
-   * exist, the method returns QString::null.
+   * exist, the method returns @ref QString::null.
    *
    * @param name The attribute name
    * @return The value of the attribute
    */
   QString attribute(const QString& name) const;
   /**
+   * Returns the formatted value of the attribute with a given key name. If the
+   * key doesn't exist, the method returns @ref QString::null. The value is cache,
+   * so the first time the value is requested, @ref BCAttribute::format is called.
+   * The second time, that lookup isn't necessary.
+   *
+   * @param name The attribute name
+   * @param flags The attribute flags
+   * @return The value of the attribute
+   */
+  QString attributeFormatted(const QString& name, int flags = 0);
+  /**
    * Sets the value of an attribute for the unit. The method first verifies that
    * the value is allowed for that particular key.
    *
-   * @param name The key name of the attribute
+   * @param name The name of the attribute
    * @param value The value of the attribute
    * @return A boolean indicating whether or not the attribute was successfully set
    */
@@ -77,18 +92,52 @@ public:
    *
    * @return The collection pointer
    */
-  BCCollection* collection();
+  BCCollection* collection() const;
   /**
    * Returns the id of the unit
    *
    * @return The id
    */
   int id() const;
-
+  /**
+   * Adds the unit to a group. The group list within the unit is updated
+   * and the unit is added to the group.
+   *
+   * @param group The group
+   * @return a bool indicating if it was successfully added. If the unit was already
+   * in the group, the return value is false
+   */
+  bool addToGroup(BCUnitGroup* group);
+  /**
+   * Removes the unit from a group. The group list within the unit is updated
+   * and the unit is removed from the group.
+   *
+   * @param group The group
+   * @return a bool indicating if the group was successfully removed
+   */
+  bool removeFromGroup(BCUnitGroup* group);
+  /**
+   * Returns a list of the groups to which the unit belongs
+   *
+   * @return The list of groups
+   */
+  const QPtrList<BCUnitGroup>& groups() const;
+  /**
+   * Returns a list containing the names of the groups for
+   * a certain attribute to which the unit belongs
+   *
+   * @param The name of the attribute
+   * @return The list of names
+   */
+  QStringList groupsByAttributeName(const QString& attName);
+  
 private:
   int m_id;
   BCCollection* m_coll;
   QMap<QString, QString> m_attributes;
+  // formatted attributes
+  QMap<QString, QString> m_attributesF;
+  QPtrList<BCUnitGroup> m_groups;
 };
 
 #endif

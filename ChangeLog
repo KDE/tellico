@@ -1,3 +1,16 @@
+2002-11-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added an italian translation fromFaUsT <faust@inventati.org> 
+
+2002-11-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Added a new toolbar for changing the grouping of the units
+	* Changed the bookcase.spec file to add proper files
+
+2002-10-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase version 0.3
+  
 2002-08-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Added two new XSLT files
@@ -35,7 +48,7 @@
 
 2001-12-06    <robby@radiojodi.com>
 
-	* bccollectionview.cpp, bcattribute.cpp Fixed the bug for formatting names with suffixes like Jr.
+	* bcgroupview.cpp, bcattribute.cpp Fixed the bug for formatting names with suffixes like Jr.
 
 2001-11-05    <robby@radiojodi.com>
 
@@ -43,7 +56,7 @@
 
 2001-11-05    <robby@radiojodi.com>
 
-	* bccollectionview.cpp Fixed the bug where clicking the collapse or expand menu item on a BCUnitItem caused the pixmap to change to a folder.
+	* bcgroupview.cpp Fixed the bug where clicking the collapse or expand menu item on a BCUnitItem caused the pixmap to change to a folder.
 
 2001-11-04    <robby@radiojodi.com>
 

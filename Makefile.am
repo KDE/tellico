@@ -1,8 +1,8 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 
-SUBDIRS = src po doc icons xslt test 
+SUBDIRS = src po doc icons xslt test admin 
 
-EXTRA_DIST = bookcase.kdevprj admin AUTHORS COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.spec bookcase.dtd 
+EXTRA_DIST = bookcase.kdevprj AUTHORS COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.spec bookcase.dtd 
 
 install-data-local:
 	$(mkinstalldirs) $(kde_datadir)/bookcase/

@@ -24,14 +24,11 @@ class BCTabControl;
 class QListViewItem;
 class QPushButton;
 
-//#include "bccollection.h"
-
 #include <klineedit.h>
 #include <kcombobox.h>
 
 #include <qmultilineedit.h>
 #include <qcheckbox.h>
-#include <qlist.h>
 #include <qdict.h>
 
 /**
@@ -40,7 +37,7 @@ class QPushButton;
  * edit controls and so on.
  *
  * @author Robby Stephenson
- * @version $Id: bcuniteditwidget.h,v 1.21 2002/10/12 02:54:44 robby Exp $
+ * @version $Id: bcuniteditwidget.h,v 1.23 2002/11/25 00:56:22 robby Exp $
  */
 class BCUnitEditWidget : public QWidget  {
 Q_OBJECT

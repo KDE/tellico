@@ -249,8 +249,13 @@ qt_libraries = @qt_libraries@
 x_includes = @x_includes@
 x_libraries = @x_libraries@
 
+EXTRA_DIST = bookcase.pot 
+
 ####### kdevelop will overwrite this part!!! (end)############
-POFILES = AUTO
+#>- POFILES = AUTO
+#>+ 2
+POFILES = it.po
+GMOFILES = it.gmo
 subdir = po
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -259,7 +264,7 @@ DIST_SOURCES =
 DIST_COMMON = Makefile.am Makefile.in
 #>- all: all-am
 #>+ 1
-all: docs-am  all-am
+all: all-nls docs-am  all-am
 
 .SUFFIXES:
 $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
@@ -268,7 +273,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  po/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/po/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/po/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -286,15 +291,21 @@ TAGS:
 
 #>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=bookcase.pot 
+KDE_DIST=messages.mo it.gmo it.po 
 
-DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
+#>- DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
+#>+ 1
+DISTFILES = $(GMOFILES) $(POFILES) $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
+
+DISTFILES = $(GMOFILES) $(POFILES) $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 
 
 top_distdir = ..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
-distdir: $(DISTFILES)
+#>- distdir: $(DISTFILES)
+#>+ 1
+distdir: distdir-nls  $(DISTFILES)
 	@list='$(DISTFILES)'; for file in $$list; do \
 	  if test -f $$file || test -d $$file; then d=.; else d=$(srcdir); fi; \
 	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
@@ -324,7 +335,9 @@ installdirs:
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
-uninstall: uninstall-am
+#>- uninstall: uninstall-am
+#>+ 1
+uninstall: uninstall-nls  uninstall-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
@@ -363,7 +376,9 @@ info: info-am
 
 info-am:
 
-install-data-am:
+#>- install-data-am:
+#>+ 1
+install-data-am: install-nls 
 
 install-exec-am:
 
@@ -373,7 +388,9 @@ install-man:
 
 installcheck-am:
 
-maintainer-clean: maintainer-clean-am
+#>- maintainer-clean: maintainer-clean-am
+#>+ 1
+maintainer-clean: clean-nls  maintainer-clean-am
 
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -397,6 +414,47 @@ uninstall-am: uninstall-info-am
 .NOEXPORT:
 
 
+#>+ 4
+it.gmo: it.po
+	rm -f it.gmo; $(GMSGFMT) -o it.gmo $(srcdir)/it.po
+	test ! -f it.gmo || touch it.gmo
+
+#>+ 3
+clean-nls:
+	-rm -f  it.gmo
+
+#>+ 10
+install-nls:
+	@for base in it ; do \
+	  echo $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
+	  $(mkinstalldirs) $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES ; \
+	  if test -f $$base.gmo; then $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
+	  elif test -f $(srcdir)/$$base.gmo; then $(INSTALL_DATA) $(srcdir)/$$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
+	  fi ;\
+	done
+
+
+#>+ 3
+uninstall-nls:
+	rm -f $(DESTDIR)$(kde_locale)/it/LC_MESSAGES/$(PACKAGE).mo
+
+#>+ 2
+all-nls: $(GMOFILES)
+
+#>+ 8
+distdir-nls:$(GMOFILES)
+	for file in $(POFILES); do \
+	  cp $(srcdir)/$$file $(distdir); \
+	done
+	for file in $(GMOFILES); do \
+	  cp $(srcdir)/$$file $(distdir); \
+	done
+
+#>+ 4
+merge:
+	$(MAKE) -f $(top_srcdir)/admin/Makefile.common package-merge POFILES="${POFILES}" PACKAGE=${PACKAGE}
+
+
 #>+ 2
 docs-am:
 
@@ -404,7 +462,7 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  po/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/po/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/po/Makefile.in
 
 
 #>+ 2

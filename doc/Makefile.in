@@ -273,7 +273,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  doc/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/doc/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/doc/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -521,7 +521,7 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  doc/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.3/doc/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/doc/Makefile.in
 
 
 #>+ 2

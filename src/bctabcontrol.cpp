@@ -20,10 +20,7 @@
 #include <qobjectlist.h>
 
 BCTabControl::BCTabControl(QWidget* parent_, const char* name_/*=0*/)
- : KTabCtl(parent_, name_) {
-}
-
-BCTabControl::~BCTabControl() {
+    : KTabCtl(parent_, name_) {
 }
 
 void BCTabControl::showTab(int i) {
@@ -31,21 +28,20 @@ void BCTabControl::showTab(int i) {
 }
 
 void BCTabControl::setFocusToLineEdit(int tabNum_) {
-	//find the first focusable child in the visible tab
-	QWidget* topwidget = pages[tabNum_];
-	QPtrListIterator<QObject> it(*topwidget->children());
-	QWidget* w;
-	for( ; it.current(); ++it) {
-		w = static_cast<QWidget*>(it.current());
-		if (w->focusPolicy() == QWidget::TabFocus ||
-				w->focusPolicy() == QWidget::ClickFocus ||
-				w->focusPolicy() == QWidget::StrongFocus) {
-			w->setFocus();
-			break;
-		}
-	}
+  //find the first focusable child in the visible tab
+  QPtrListIterator<QObject> it(*pages[tabNum_]->children());
+  QWidget* w;
+  for( ; it.current(); ++it) {
+    w = static_cast<QWidget*>(it.current());
+    if(w->focusPolicy() == QWidget::TabFocus
+        || w->focusPolicy() == QWidget::ClickFocus
+        || w->focusPolicy() == QWidget::StrongFocus) {
+      w->setFocus();
+      break;
+    }
+  }
 }
 
 int BCTabControl::count() {
-	return tabs->count();
+  return tabs->count();
 }

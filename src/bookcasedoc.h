@@ -22,17 +22,17 @@
 #include <config.h>
 #endif
 
-class BCCollection;
+class BCUnit;
+class QFile;
+class QCString;
 
-#include "bcunit.h"
+#include "bccollection.h"
 
 #include <kurl.h>
 
-#include <qlist.h>
-#include <qfile.h>
-#include <qcstring.h>
-#include <qobject.h>
+#include <qptrlist.h>
 #include <qdom.h>
+#include <qobject.h>
 
 /**
  * The BookcaseDoc contains everything needed to deal with the contents, thus separated from
@@ -40,7 +40,7 @@ class BCCollection;
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: bookcasedoc.h,v 1.21 2002/10/12 06:01:03 robby Exp $
+ * @version $Id: bookcasedoc.h,v 1.28 2002/11/25 00:56:22 robby Exp $
  */
 class BookcaseDoc : public QObject  {
 Q_OBJECT
@@ -54,9 +54,6 @@ public:
    * @param name The widget name
    */
   BookcaseDoc(QWidget *parent, const char *name=0);
-  /**
-   */
-  ~BookcaseDoc();
 
   /**
    * Sets the modified flag. If it is true, the signalModified signal is made.
@@ -146,13 +143,23 @@ public:
    *
    * @return The collection list
    */
-  const QList<BCCollection>& collectionList() const;
+  const QPtrList<BCCollection>& collectionList() const;
   /**
-   * Inserts the data in the document into a DOM ordered form
+   * Inserts the data in the document into a DOM ordered form by iterating over
+   * the units in the whole document.
    *
    * @return The QDomDocument object
    */
   QDomDocument exportXML();
+  /**
+   * Inserts the data in the document into a DOM ordered form by iterating through
+   * a certain attribute group
+   *
+   * @param dictName The attribute name
+   * @param format Whether to format the attributes
+   * @return The QDomDocument object
+   */
+  QDomDocument exportXML(const QString& dictName, bool format);
   /**
    * Takes the XML exported by the document and passes it through
    * the XSLT transformation.
@@ -162,8 +169,12 @@ public:
                     @ref BCAttribute::formatName(), etc...
    * @return The HTML text
    */
-  QString exportHTML(const QString& xsltFilename, bool format=false);
-
+  QString exportHTML(const QString& xsltFilename, const QString& param, bool format=false);
+  /**
+   * Returns true if there are no units. A doc with an empty collection is still empty.
+   */
+  bool isEmpty() const; 
+  
 public slots:
   /**
    * Adds a collection to the document. The signalCollectionAdded() signal is made.
@@ -227,21 +238,11 @@ signals:
    */
   void signalStatusMsg(const QString& str);
   /**
-   * Signals that a new document has been initialized.
-   */
-//  void signalNewDoc();
-  /**
    * Signals that a new collection has been added.
    *
    * @param coll A pointer to the collection
    */
   void signalCollectionAdded(BCCollection* coll);
-  /**
-   * Signals that a collection has been modified.
-   *
-   * @param coll A pointer to the collection
-   */
-  void signalCollectionModified(BCCollection* coll);
   /**
    * Signals that a collection has been removed.
    *
@@ -274,7 +275,7 @@ signals:
   void signalFractionDone(float f);
 
 private:
-  QList<BCCollection> m_collList;
+  QPtrList<BCCollection> m_collList;
   bool m_isModified;
   KURL m_url;
 };
