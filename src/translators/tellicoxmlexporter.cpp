@@ -333,15 +333,26 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
   if(!rItem) {
     return;
   }
+  // TODO: find a better way to do this
+  bool exportAll = collection()->entryList().count() == entryList().count();
+  Data::EntryList list;
+  if(!exportAll) {
+    list = entryList(); // need a non-const list for findRef()
+  }
   for(QListViewItem* gItem = rItem->firstChild(); gItem; gItem = gItem->nextSibling()) {
     QDomElement groupElem = dom_.createElement(QString::fromLatin1("group"));
     groupElem.setAttribute(QString::fromLatin1("title"), gItem->text(0));
     // now iterate over all entry items in the group
     for(QListViewItem* eItem = gItem->firstChild(); eItem; eItem = eItem->nextSibling()) {
+      if(!exportAll && list.findRef(static_cast<EntryItem*>(eItem)->entry()) == -1) {
+        continue;
+      }
       QDomElement entryRefElem = dom_.createElement(QString::fromLatin1("entryRef"));
       entryRefElem.setAttribute(QString::fromLatin1("id"), static_cast<EntryItem*>(eItem)->entry()->id());
       groupElem.appendChild(entryRefElem);
     }
-    parent_.appendChild(groupElem);
+    if(groupElem.hasChildNodes()) {
+      parent_.appendChild(groupElem);
+    }
   }
 }

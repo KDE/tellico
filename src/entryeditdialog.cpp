@@ -297,9 +297,11 @@ void EntryEditDialog::slotHandleSave() {
   // if something was not empty, signal a save
   if(!empty) {
     m_isOrphan = false;
+    // some bug might clear the selected entries, it's fixed better in next major version
+    Data::EntryList list = m_currEntries;
     emit signalSaveEntries(m_currEntries);
-    if(!m_currEntries.getFirst()->title().isEmpty()) {
-      setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + m_currEntries.getFirst()->title());
+    if(list.getFirst() && !list.getFirst()->title().isEmpty()) {
+      setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + list.getFirst()->title());
     }
   }
 

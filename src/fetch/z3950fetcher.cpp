@@ -319,7 +319,7 @@ void Z3950Fetcher::process() {
     }
     int len;
 //    kdDebug() << ZOOM_record_get(rec, "syntax", &len) << endl;
-    QCString data(ZOOM_record_get(rec, dataOptions, &len));
+    QString data = QString::fromUtf8(ZOOM_record_get(rec, dataOptions, &len), len+1);
     if(len == 0) {
       kdDebug() << "Z3950Fetcher::process() - empty record found, maybe the character encoding or record format is wrong?" << endl;
       continue;

@@ -1,3 +1,28 @@
+2005-02-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 0.13.4
+
+2005-02-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Added a configure param to disable cddb even if kcddb headers found.
+
+2005-02-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated bibtex translation map, fixing some bugs.
+	* Fixed bug with Amazon search character encoding.
+
+2005-02-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with enabling grouping for paragraphs in fields dialog.
+
+2005-02-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with exporting empty groups in HTML.
+
+2005-02-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with RIS importer messing up entry types.
+
 2005-02-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 0.13.3.

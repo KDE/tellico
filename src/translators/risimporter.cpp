@@ -147,13 +147,14 @@ Tellico::Data::Collection* RISImporter::collection() {
   Data::Entry* entry = new Data::Entry(m_coll);
   // technically, the spec requires a space immediately after the hyphen
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
-  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s\\s-\\s?(.*)$"));
+  // so just strip the white space later
+  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s\\s-(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
     rx.search(currLine);
     QString tag = rx.cap(1);
-    QString value = rx.cap(2);
+    QString value = rx.cap(2).stripWhiteSpace();
     if(tag.isEmpty()) {
       continue;
     }
@@ -170,12 +171,9 @@ Tellico::Data::Collection* RISImporter::collection() {
       entry = new Data::Entry(m_coll);
       deleteEntry = true;
       continue;
-    } else if(tag == Latin1Literal("TY")) { // for entry-type, switch it to normalized type name
+    } else if(tag == Latin1Literal("TY") && s_typeMap->contains(value)) {
+      // for entry-type, switch it to normalized type name
       value = (*s_typeMap)[value];
-      // fall back to value if empty
-      if(value.isEmpty()) {
-        value = rx.cap(2);
-      }
     } else if(tag == Latin1Literal("YR") || tag == Latin1Literal("PY")) {  // for now, just grab the year
       value = value.section('/', 0, 0);
     }

@@ -34,6 +34,7 @@
 #include <qlabel.h>
 #include <qwhatsthis.h>
 #include <qcheckbox.h>
+#include <qfile.h>
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
@@ -280,7 +281,7 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
 
   m_job = KIO::get(u, false, false);
 #else
-  m_job = KIO::get(KURL::fromPathOrURL(QString::fromLatin1("/home/robby/delpy-heavy.xml")), false, false);
+  m_job = KIO::get(KURL::fromPathOrURL(QString::fromLatin1("/tmp/test.xml")), false, false);
 #endif
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
           SLOT(slotData(KIO::Job*, const QByteArray&)));
@@ -330,9 +331,11 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
   }
 
 #if 0
+kdWarning() << "Remove debug from amazonfetcher.cpp: " << len << endl;
   QFile f(QString::fromLatin1("/tmp/test.xml"));
   if(f.open(IO_WriteOnly)) {
     QTextStream t(&f);
+    t.setEncoding(QTextStream::UnicodeUTF8);
     t << QCString(m_data, m_data.size()+1);
   }
   f.close();
@@ -343,6 +346,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
     if(!dom.setContent(m_data, false)) {
       kdWarning() << "AmazonFetcher::slotComplete() - server did not return valid XML." << endl;
       stop();
+      return;
     }
     // find TotalResults element
     // it's in the first level under the root element
@@ -366,7 +370,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
   }
 
   // assume amazon is always utf-8
-  QString str = s_xsltHandler->applyStylesheet(QCString(m_data, m_data.size()+1));
+  QString str = s_xsltHandler->applyStylesheet(QString::fromUtf8(m_data));
   Import::TellicoImporter imp(str);
   Data::Collection* coll = imp.collection();
   for(Data::EntryListIterator it(coll->entryList()); it.current(); ++it) {

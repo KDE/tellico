@@ -467,7 +467,7 @@ void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
   m_complete->setEnabled(isText);
 
   // grouping is not possible with paragraphs or images
-  m_grouped->setEnabled(type_ != Data::Field::Para && type != Data::Field::Image);
+  m_grouped->setEnabled(type != Data::Field::Para && type != Data::Field::Image);
 }
 
 void CollectionFieldsDialog::slotHighlightedChanged(int index_) {

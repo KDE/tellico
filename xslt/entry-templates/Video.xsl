@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - Entry template for videos
 
-   $Id: Video.xsl 966 2004-11-20 01:41:11Z robby $
+   $Id: Video.xsl 1122 2005-02-27 23:17:47Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -188,7 +188,7 @@
     </img>
    </xsl:when>
    <xsl:when test="$datadir and tc:medium = 'VHS'">
-    <img width="108" height="58" align="right" id="logo">
+    <img width="56" height="30" align="right" id="logo">
      <xsl:attribute name="src">
       <xsl:value-of select="concat($datadir,'vhs-logo.png')"/>
      </xsl:attribute>

@@ -36,7 +36,7 @@ namespace {
 int main(int argc, char* argv[]) {
   KAboutData aboutData("tellico", I18N_NOOP("Tellico"),
                        version, description, KAboutData::License_GPL,
-                       "(c) 2001-2004, Robby Stephenson", 0,
+                       "(c) 2001-2005, Robby Stephenson", 0,
                        "http://www.periapsis.org/tellico/", "robby@periapsis.org");
   aboutData.addAuthor("Robby Stephenson", 0, "robby@periapsis.org");
   aboutData.addCredit("Greg Ward", I18N_NOOP("Author of btparse library"),

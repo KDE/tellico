@@ -5,9 +5,6 @@
 <!-- Most of these key mappings were taken, with permission, from the -->
 <!-- CharacterConversion.plist file in the Bibdesk program by Michael McCracken -->
 <keymap version="0.8">
-  <key char="¡">
-    <string>{!'}</string>
-  </key>
   <key char="Å">
     <string>{\AA}</string>
   </key>
@@ -25,9 +22,11 @@
   </key>
   <key char="Ã">
     <string>{\~A}</string>
+    <string>\~{A}</string>
   </key>
   <key char="Ä">
     <string>{\"A}</string>
+    <string>\"{A}</string>
   </key>
   <key char="Æ">
     <string>{\AE}</string>
@@ -45,12 +44,15 @@
   </key>
   <key char="â">
     <string>{\^a}</string>
+    <string>\^{a}</string>
   </key>
   <key char="ã">
     <string>{\~a}</string>
+    <string>\~{a}</string>
   </key>
   <key char="ä">
     <string>{\"a}</string>
+    <string>\"{a}</string>
   </key>
   <key char="å">
     <string>{\aa}</string>
@@ -59,26 +61,28 @@
     <string>{\ae}</string>
   </key>
   <key char="Ç">
-    <string>{\cC}</string>
+    <string>{\c C}</string>
+    <string>\c{C}</string>
   </key>
   <key char="Č">
-    <string>{\uC}</string>
+    <string>{\u C}</string>
+    <string>\u{C}</string>
   </key>
   <key char="Č">
-    <string>{\vC}</string>
+    <string>{\v C}</string>
+    <string>\v{C}</string>
   </key>
   <key char="ç">
-    <string>{\cc}</string>
+    <string>{\c c}</string>
     <string>\c{c}</string>
   </key>
   <key char="ć">
     <string>{\'c}</string>
+    <string>\'{c}</string>
   </key>
   <key char="č">
-    <string>{\uc}</string>
-  </key>
-  <key char="č">
-    <string>{\vc}</string>
+    <string>{\v c}</string>
+    <string>\v{c}</string>
   </key>
   <key char="È">
     <string>{\`E}</string>
@@ -86,6 +90,7 @@
   </key>
   <key char="Ê">
     <string>{\^E}</string>
+    <string>\^{E}</string>
   </key>
   <key char="É">
     <string>{\'E}</string>
@@ -93,6 +98,7 @@
   </key>
   <key char="Ë">
     <string>{\"E}</string>
+    <string>\"{E}</string>
   </key>
   <key char="è">
     <string>{\`e}</string>
@@ -104,18 +110,23 @@
   </key>
   <key char="ê">
     <string>{\^e}</string>
+    <string>\^{e}</string>
   </key>
   <key char="ë">
     <string>{\"e}</string>
+    <string>\"{e}</string>
   </key>
   <key char="Î">
     <string>{\^E}</string>
+    <string>\^{E}</string>
   </key>
   <key char="Í">
     <string>{\'I}</string>
+    <string>\'{I}</string>
   </key>
   <key char="Ï">
     <string>{\"I}</string>
+    <string>\"{I}</string>
   </key>
   <key char="ì">
     <string>{\`i}</string>
@@ -127,27 +138,34 @@
   </key>
   <key char="î">
     <string>{\^i}</string>
+    <string>\^{i}</string>
   </key>
   <key char="ï">
     <string>{\"i}</string>
+    <string>\"{i}</string>
   </key>
   <key char="Ñ">
     <string>{\~N}</string>
+    <string>\~{N}</string>
   </key>
   <key char="ñ">
     <string>{\~n}</string>
+    <string>\~{n}</string>
   </key>
   <key char="Ó">
     <string>{\'O}</string>
+    <string>\'{O}</string>
   </key>
   <key char="Ô">
     <string>{\^O}</string>
+    <string>\^{O}</string>
   </key>
   <key char="Ø">
     <string>{\O}</string>
   </key>
   <key char="Ö">
     <string>{\"O}</string>
+    <string>\"{O}</string>
   </key>
   <key char="Œ">
     <string>{\OE}</string>
@@ -162,12 +180,15 @@
   </key>
   <key char="ô">
     <string>{\^o}</string>
+    <string>\^{o}</string>
   </key>
   <key char="õ">
     <string>{\~o}</string>
+    <string>\~{o}</string>
   </key>
   <key char="ö">
     <string>{\"o}</string>
+    <string>\"{o}</string>
   </key>
   <key char="œ">
     <string>{\oe}</string>
@@ -176,16 +197,20 @@
     <string>{\o}</string>
   </key>
   <key char="ş">
-    <string>{\cs}</string>
+    <string>{\c s}</string>
+    <string>\c{s}</string>
   </key>
   <key char="š">
-    <string>{\vs}</string>
+    <string>{\v s}</string>
+    <string>\v{s}</string>
   </key>
   <key char="Ú">
     <string>{\'U}</string>
+    <string>\'{U}</string>
   </key>
   <key char="Û">
     <string>{\^U}</string>
+    <string>\^{U}</string>
   </key>
   <key char="Ü">
     <string>{\"U}</string>
@@ -201,6 +226,7 @@
   </key>
   <key char="û">
     <string>{\^u}</string>
+    <string>\^{u}</string>
   </key>
   <key char="ü">
     <string>{\"u}</string>
@@ -208,15 +234,19 @@
   </key>
   <key char="Ÿ">
     <string>{\"Y}</string>
+    <string>\"{Y}</string>
   </key>
   <key char="ÿ">
     <string>{\"y}</string>
+    <string>\"{y}</string>
   </key>
   <key char="Ž">
-    <string>{\vZ}</string>
+    <string>{\v Z}</string>
+    <string>\v{Z}</string>
   </key>
   <key char="ž">
-    <string>{\vz}</string>
+    <string>{\v z}</string>
+    <string>\v{z}</string>
   </key>
   <key char="ß">
     <string>{\ss}</string>
@@ -252,6 +282,6 @@
     <string>{\texttrademark}</string>
   </key>
   <key char="°">
-    <string>$\,^{\circ}$</string>
+    <string>$^{\circ}$</string>
   </key>
 </keymap>

@@ -167,7 +167,7 @@ void SRUFetcher::slotComplete(KIO::Job* job_) {
     }
   }
 
-  QString str = m_xsltHandler->applyStylesheet(QString(m_data));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(m_data));
   Import::TellicoImporter imp(str);
   Data::Collection* coll = imp.collection();
   for(Data::EntryListIterator it(coll->entryList()); it.current(); ++it) {

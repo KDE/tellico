@@ -1,6 +1,6 @@
 #MIN_CONFIG(3)
 
-AM_INIT_AUTOMAKE(tellico,0.13.3)
+AM_INIT_AUTOMAKE(tellico,0.13.4)
 
 dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
 dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
@@ -230,6 +230,14 @@ dnl ---------- END YAZ CHECK ----------
 
 dnl ---------- KCDDB CHECK ----------
 
+AC_ARG_ENABLE(kcddb,
+    AC_HELP_STRING([--disable-kcddb], [disable kcddb, default=enable if found]),
+    [enable_kcddb=$enableval],
+    [enable_kcddb=yes]
+)
+
+if test x$enable_kcddb = xyes; then
+
 AC_LANG_SAVE
 AC_LANG_CPLUSPLUS
 
@@ -265,6 +273,12 @@ else
     KCDDB_LIBS=
 fi
 
+dnl -- kcddb was disabled ---
+else
+    AC_DEFINE(HAVE_KCDDB, 0, [Define to 1 if you have libkcddb])
+    KCDDB_LIBS=
+fi
+
 AC_SUBST(KCDDB_LIBS)
 
 dnl ---------- END KCDDB CHECK ----------
@@ -289,7 +303,7 @@ fi
 dnl ---------- AMAZON CHECK ----------
 
 AC_ARG_ENABLE(amazon,
-    AC_HELP_STRING([--disable-amazon], [disable Amazon.com searching [default=enable]]),
+    AC_HELP_STRING([--disable-amazon], [disable Amazon.com searching, default=enable]),
     [enable_amazon=$enableval],
     [enable_amazon=yes]
 )
@@ -305,7 +319,7 @@ dnl ---------- END AMAZON CHECK ----------
 dnl ---------- IMDB CHECK ----------
 
 AC_ARG_ENABLE(imdb,
-    AC_HELP_STRING([--disable-imdb], [disable IMDb searching [default=enable]]),
+    AC_HELP_STRING([--disable-imdb], [disable IMDb searching, default=enable]),
     [enable_imdb=$enableval],
     [enable_imdb=yes]
 )
