@@ -30,7 +30,7 @@
 #include <kcombobox.h>
 #include <kmessagebox.h>
 
-#include <qfile.h>
+//#include <qfile.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
@@ -319,7 +319,7 @@ void Z3950Fetcher::process() {
     }
     int len;
 //    kdDebug() << ZOOM_record_get(rec, "syntax", &len) << endl;
-    QString data = QString::fromUtf8(ZOOM_record_get(rec, dataOptions, &len), len+1);
+    QString data = QString::fromUtf8(ZOOM_record_get(rec, dataOptions, &len), len);
     if(len == 0) {
       kdDebug() << "Z3950Fetcher::process() - empty record found, maybe the character encoding or record format is wrong?" << endl;
       continue;

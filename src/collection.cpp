@@ -34,6 +34,17 @@ Collection::Collection(const QString& title_, const QString& entryName_, const Q
 }
 
 Collection::~Collection() {
+ // remove entries first
+ while(!m_entryList.isEmpty()) {
+   if(!deleteEntry(m_entryList.getFirst())) { // the pointer gets auto-deleted
+//     kdDebug() << "Collection::~Collection() - problem deleting entry" << endl;
+   }
+ }
+ while(!m_fieldList.isEmpty()) {
+   if(!deleteField(m_fieldList.getFirst(), true)) {
+//     kdDebug() << "Collection::~Collection() - problem deleting field" << endl;
+   }
+ }
 }
 
 bool Collection::addFields(const FieldList& list_) {
@@ -122,7 +133,7 @@ bool Collection::mergeField(Field* newField_) {
     if(type() == Album && currField->type() == Field::Table && newField_->type() == Field::Table2) {
       currField->setType(Field::Table2);
     } else {
-      kdDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
+//      kdDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
       return false;
     }
   }
@@ -415,7 +426,7 @@ bool Collection::deleteEntry(Entry* entry_) {
 
 //  kdDebug() << "Collection::deleteEntry() - deleted entry - " << entry_->title() << endl;
   removeEntryFromDicts(entry_);
-  return m_entryList.remove(entry_);
+  return m_entryList.removeRef(entry_);
 }
 
 Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) const {
@@ -541,6 +552,7 @@ void Collection::populateDicts(Entry* entry_) {
         // as long as it's not the empty group name
         // be careful that the group might be the people group
         if(fieldName != s_peopleGroupName
+           && fieldByName(fieldName)
            && fieldByName(fieldName)->type() == Field::Bool
            && (*groupIt) != s_emptyGroupTitle) {
           group = new EntryGroup(fieldTitleByName(fieldName), fieldName);

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2005-02-10 20:22-0800\n"
+"POT-Creation-Date: 2005-03-08 18:50-0800\n"
 "PO-Revision-Date: 2004-12-03 17:17+0100\n"
 "Last-Translator: Leif Mathis Gaup <lmgaup@nsn.no>\n"
 "Language-Team: Norsk bokmål\n"
@@ -32,12 +32,12 @@ msgid "General"
 msgstr "Hovedvalg"
 
 #: collections/bibtexcollection.cpp:28 collections/bookcollection.cpp:21
-#: collections/comicbookcollection.cpp:21 translators/risimporter.cpp:251
+#: collections/comicbookcollection.cpp:21 translators/risimporter.cpp:249
 msgid "Publishing"
 msgstr "Utgivelse"
 
 #: collections/bookcollection.cpp:22 collections/comicbookcollection.cpp:22
-#: translators/risimporter.cpp:245
+#: translators/risimporter.cpp:243
 msgid "Classification"
 msgstr "Klassifisering"
 
@@ -121,18 +121,16 @@ msgstr "Sjanger"
 
 #: collections/bookcollection.cpp:123 collections/cardcollection.cpp:102
 #: collections/comicbookcollection.cpp:114 collections/musiccollection.cpp:103
-#: translators/risimporter.cpp:243
+#: translators/risimporter.cpp:241
 msgid "Keywords"
 msgstr "Nøkkelord"
 
 #: collections/comicbookcollection.cpp:122
 msgid ""
-"_: _:Comic book grade levels\n"
-"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor\n"
+"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
+"Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
-"_: _:Nivåer for tegneserien\n"
-"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor\n"
 "Perfekt,Som ny - uten feil,Nydelig,Fin,Helt OK,Godt brukt,Slitt,Elendig"
 
 #: collections/bookcollection.cpp:139 collections/comicbookcollection.cpp:124
@@ -211,13 +209,9 @@ msgstr "Scott#"
 
 #: collections/stampcollection.cpp:80
 msgid ""
-"_: _:Stamp grade levels\n"
-"Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
+"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
-"_: _:Gradering av frimerker\n"
-"Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
-"Perfekt,Ekstremt fin, Veldig fin,Fin,Gjennomsnittlig,Dårlig"
+msgstr "Perfekt,Ekstremt fin, Veldig fin,Fin,Gjennomsnittlig,Dårlig"
 
 #: collections/coincollection.cpp:88 collections/stampcollection.cpp:82
 msgid "Grade"
@@ -275,31 +269,22 @@ msgstr "Myntsett"
 
 #: collections/coincollection.cpp:83
 msgid ""
-"_: _:Coin grade levels\n"
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair\n"
+"_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
+"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
+"Fine-20,Fine-12,Very Good-8,Good-4,Fair\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
-"_: _:Gradering av mynter\n"
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 
 #: collections/coincollection.cpp:96
 msgid ""
-"_: _:Coin grading services\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI\n"
+"_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr ""
-"_: _:Myntgraderingstjeneste\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI"
+msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
 #: collections/coincollection.cpp:98
 msgid "Grading Service"
@@ -357,11 +342,11 @@ msgstr "Omslag"
 msgid "Copyright Year"
 msgstr "Kopirettsår"
 
-#: collections/bookcollection.cpp:97 translators/risimporter.cpp:248
+#: collections/bookcollection.cpp:97 translators/risimporter.cpp:246
 msgid "ISBN#"
 msgstr "ISBN"
 
-#: collections/bookcollection.cpp:99 translators/risimporter.cpp:252
+#: collections/bookcollection.cpp:99 translators/risimporter.cpp:250
 msgid "International Standard Book Number"
 msgstr "Internasjonalt Standard Bok Nummer"
 
@@ -509,12 +494,9 @@ msgstr "Produksjonsår"
 
 #: collections/videocollection.cpp:64
 msgid ""
-"_: _:Movie ratings\n"
-"G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
+"_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
-"_: _:Filmratifisering7 (Norge),10 (Norge),16 (Norge),18 (Norge)\n"
-"7 (Norge),10 (Norge),16 (Norge),18 (Norge)"
+msgstr "7 (Norge),10 (Norge),16 (Norge),18 (Norge)"
 
 #: collections/videocollection.cpp:66
 msgid "Certification"
@@ -861,7 +843,7 @@ msgstr "Valg"
 msgid "Checkbox"
 msgstr "Avkrysningsboks"
 
-#: field.cpp:415 translators/risimporter.cpp:254
+#: field.cpp:415 translators/risimporter.cpp:252
 msgid "URL"
 msgstr "URL"
 
@@ -1706,78 +1688,78 @@ msgstr "Alle felter"
 msgid "Invalid regular expression."
 msgstr "Ugyldig regulært uttrykk."
 
-#: fetch/amazonfetcher.cpp:52
+#: fetch/amazonfetcher.cpp:53
 msgid "Amazon (US)"
 msgstr "Amazon (USA)"
 
-#: fetch/amazonfetcher.cpp:61
+#: fetch/amazonfetcher.cpp:62
 msgid "Amazon (UK)"
 msgstr "Amazon (UK)"
 
-#: fetch/amazonfetcher.cpp:70
+#: fetch/amazonfetcher.cpp:71
 msgid "Amazon (Germany)"
 msgstr "Amazon (Tyskland)"
 
-#: fetch/amazonfetcher.cpp:79
+#: fetch/amazonfetcher.cpp:80
 msgid "Amazon (Japan)"
 msgstr "Amazon (Japan)"
 
-#: fetch/amazonfetcher.cpp:88
+#: fetch/amazonfetcher.cpp:89
 #, fuzzy
 msgid "Amazon (France)"
 msgstr "Amazon (Tyskland)"
 
-#: fetch/amazonfetcher.cpp:97
+#: fetch/amazonfetcher.cpp:98
 #, fuzzy
 msgid "Amazon (Canada)"
 msgstr "Amazon (Japan)"
 
-#: fetch/amazonfetcher.cpp:209
+#: fetch/amazonfetcher.cpp:210
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 tillater ikke søk for samlinger av denne typen."
 
-#: fetch/amazonfetcher.cpp:422
+#: fetch/amazonfetcher.cpp:429
 msgid "Results from %1: %2/%3"
 msgstr "Resultater fra %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:460 fetch/z3950fetcher.cpp:388
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:388
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Ingen treff for søk etter følgende ISBN-nummer:</qt>"
 
-#: fetch/amazonfetcher.cpp:500
+#: fetch/amazonfetcher.cpp:507
 msgid "The cover image could not be loaded."
 msgstr "Omslagsbilde kunne ikke lastes."
 
-#: fetch/amazonfetcher.cpp:560
+#: fetch/amazonfetcher.cpp:567
 msgid "Co&untry: "
 msgstr "Land"
 
-#: fetch/amazonfetcher.cpp:564
+#: fetch/amazonfetcher.cpp:571
 msgid "United States"
 msgstr "USA"
 
-#: fetch/amazonfetcher.cpp:565
+#: fetch/amazonfetcher.cpp:572
 msgid "United Kingdom"
 msgstr "Storbritania"
 
-#: fetch/amazonfetcher.cpp:566
+#: fetch/amazonfetcher.cpp:573
 msgid "Germany"
 msgstr "Tyskland"
 
-#: fetch/amazonfetcher.cpp:567
+#: fetch/amazonfetcher.cpp:574
 msgid "Japan"
 msgstr "Japan"
 
-#: fetch/amazonfetcher.cpp:568
+#: fetch/amazonfetcher.cpp:575
 #, fuzzy
 msgid "France"
 msgstr "Bueparanteser"
 
-#: fetch/amazonfetcher.cpp:569
+#: fetch/amazonfetcher.cpp:576
 msgid "Canada"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:572
+#: fetch/amazonfetcher.cpp:579
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -1785,27 +1767,27 @@ msgstr ""
 "Amazon.com tilbyr data fra flere lokaliserte steder. Velg ett sted du vil "
 "bruke som datakilde."
 
-#: fetch/amazonfetcher.cpp:578
+#: fetch/amazonfetcher.cpp:585
 msgid "&Image size: "
 msgstr "Bildestørrelse:"
 
-#: fetch/amazonfetcher.cpp:582
+#: fetch/amazonfetcher.cpp:589
 msgid "Small Image"
 msgstr "Lite bilde"
 
-#: fetch/amazonfetcher.cpp:583
+#: fetch/amazonfetcher.cpp:590
 msgid "Medium Image"
 msgstr "Medium bilde"
 
-#: fetch/amazonfetcher.cpp:584
+#: fetch/amazonfetcher.cpp:591
 msgid "Large Image"
 msgstr "Stort bilde"
 
-#: fetch/amazonfetcher.cpp:585
+#: fetch/amazonfetcher.cpp:592
 msgid "No Image"
 msgstr "Ingen bilder"
 
-#: fetch/amazonfetcher.cpp:588 fetch/imdbfetcher.cpp:788
+#: fetch/amazonfetcher.cpp:595 fetch/imdbfetcher.cpp:788
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1813,11 +1795,11 @@ msgstr ""
 "Omslagsbildet kan også lastes ned. Bemerk at for mange store bilder i "
 "samlingen kan føre til dårligere ytelse."
 
-#: fetch/amazonfetcher.cpp:594
+#: fetch/amazonfetcher.cpp:601
 msgid "&Associate's ID: "
 msgstr "Tilknytt ID:"
 
-#: fetch/amazonfetcher.cpp:599
+#: fetch/amazonfetcher.cpp:606
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -2327,7 +2309,7 @@ msgstr ""
 "Dette dokumentet er endret.\n"
 "Vil du lagre?"
 
-#: document.cpp:98 entryeditdialog.cpp:567
+#: document.cpp:98 entryeditdialog.cpp:569
 msgid "Warning!"
 msgstr "Advarsel!"
 
@@ -2851,12 +2833,12 @@ msgstr ""
 msgid "Select Image..."
 msgstr "Velg bilde..."
 
-#: entryeditdialog.cpp:43 entryeditdialog.cpp:302 entryeditdialog.cpp:323
-#: entryeditdialog.cpp:367 entryeditdialog.cpp:419
+#: entryeditdialog.cpp:43 entryeditdialog.cpp:304 entryeditdialog.cpp:325
+#: entryeditdialog.cpp:369 entryeditdialog.cpp:421
 msgid "Edit Entry"
 msgstr "Endre innslag"
 
-#: entryeditdialog.cpp:78 entryeditdialog.cpp:334 entryeditdialog.cpp:455
+#: entryeditdialog.cpp:78 entryeditdialog.cpp:336 entryeditdialog.cpp:457
 msgid "Sa&ve Entry"
 msgstr "&Lagre innslag"
 
@@ -2868,11 +2850,11 @@ msgstr "Vil du virkelig endre disse innslagene?"
 msgid "Modify Multiple Entries?"
 msgstr "Endre flere innslag?"
 
-#: entryeditdialog.cpp:395
+#: entryeditdialog.cpp:397
 msgid "Sa&ve Entries"
 msgstr "L&agre innslag"
 
-#: entryeditdialog.cpp:565
+#: entryeditdialog.cpp:567
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -2880,7 +2862,7 @@ msgstr ""
 "Innslaget har blitt endret.\n"
 "Vil du lagre endringene?"
 
-#: entryeditdialog.cpp:568
+#: entryeditdialog.cpp:570
 msgid "Save Entry"
 msgstr "Lagre innslag"
 
@@ -3062,16 +3044,16 @@ msgstr "Datafelter i denne kolonnen:"
 msgid "Assign Field"
 msgstr "Sett til felt"
 
-#: translators/risimporter.cpp:238
+#: translators/risimporter.cpp:236
 msgid "Abstract"
 msgstr "Abstrakt"
 
-#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:256
-#: translators/risimporter.cpp:260 translators/tellicoimporter.cpp:212
+#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:254
+#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:219
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: translators/risimporter.cpp:258
+#: translators/risimporter.cpp:256
 msgid "PDF"
 msgstr "PDF"
 
@@ -3254,25 +3236,13 @@ msgstr ""
 "Tellico konverterer filen til et nyere format. Informasjonstap kan opptre om "
 "en eldre versjon av Tellico blir brukt til å lese denne filen senere."
 
-#: translators/tellicoimporter.cpp:429
+#: translators/tellicoimporter.cpp:436
 msgid "The file is empty."
 msgstr "Filer er tom."
 
-#: translators/tellicoimporter.cpp:442
+#: translators/tellicoimporter.cpp:449
 msgid "The file contains no collection data."
 msgstr "Filen inneholder ingen data for samling."
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Ny"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Samling"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Verktøylinjen Samling"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -3292,6 +3262,18 @@ msgstr "Tellico klarte ikke å laste opp filen - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Søkestrengen '%1' ble ikke funnet."
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Ny"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Samling"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Verktøylinjen Samling"
 
 #: _translatorinfo.cpp:1
 msgid ""

@@ -275,21 +275,6 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
           fieldElem.appendChild(e);
           e.appendChild(dom_.createTextNode(s[2]));
         }
-// relative URLs are not ready yet
-#if 0
-      // special case for saving relative URLs
-      } else if(fIt.current()->type() == Data::Field::URL
-                && fIt.current()->property(QString::fromLatin1("relative")) == Latin1Literal("true")) {
-        QString s = fieldValue;
-        if(!KURL::isRelativeURL(s)) {
-#if KDE_IS_VERSION(3,1,90)
-          s = KURL::relativeURL(url(), KURL(fieldValue));
-#else
-          s = Tellico::relativeURL(url(), KURL(fieldValue));
-#endif
-        }
-        fieldElem.appendChild(dom_.createTextNode(s));
-#endif
       } else {
         fieldElem.appendChild(dom_.createTextNode(fieldValue));
       }

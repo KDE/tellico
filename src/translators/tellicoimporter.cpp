@@ -107,13 +107,20 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   }
 
   m_namespace = syntaxVersion > 6 ? XML::nsTellico : XML::nsBookcase;
-  QDomNodeList collelems = root.elementsByTagNameNS(m_namespace, QString::fromLatin1("collection"));
-  if(collelems.count() > 1) {
-    kdWarning() << "TellicoImporter::loadDomDocument() - There is more than one collection."
-                   "This isn't supported at the moment. Only the first will be loaded." << endl;
+
+  // the colleciton item should be the first dom element child of the root
+  QDomElement collelem;
+  QDomNodeList childs = root.childNodes();
+  for(uint i = 0; i < childs.length(); ++i) {
+    if(childs.item(i).isElement() && childs.item(i).localName() == Latin1Literal("collection")) {
+      collelem = childs.item(i).toElement();
+      break;
+    }
+  }
+  if(collelem.isNull()) {
+    kdWarning() << "TellicoImporter::loadDomDocument() - No collection item found." << endl;
   }
 
-  QDomElement collelem = collelems.item(0).toElement();
   QString title = collelem.attribute(QString::fromLatin1("title"));
   QString entryTitle = collelem.attribute((syntaxVersion > 6) ? QString::fromLatin1("entryTitle")
                                            : QString::fromLatin1("unitTitle"));

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -59,7 +59,7 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   list.append(field);
 
   QStringList cert = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                        i18n("_:Movie ratings\n"
+                                        i18n("Movie ratings - "
                                              "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
                                              "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"),
                                         false);

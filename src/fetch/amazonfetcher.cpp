@@ -167,11 +167,11 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
   const SiteData& data = siteData(m_site);
 #if 1
   KURL u = data.url;
-  u.addQueryItem(QString::fromLatin1("t"), m_assoc);
+  u.addQueryItem(QString::fromLatin1("t"),     m_assoc);
   u.addQueryItem(QString::fromLatin1("dev-t"), m_token);
-  u.addQueryItem(QString::fromLatin1("type"), QString::fromLatin1("heavy"));
-  u.addQueryItem(QString::fromLatin1("f"), QString::fromLatin1("xml"));
-  u.addQueryItem(QString::fromLatin1("page"), QString::number(m_page));
+  u.addQueryItem(QString::fromLatin1("type"),  QString::fromLatin1("heavy"));
+  u.addQueryItem(QString::fromLatin1("f"),     QString::fromLatin1("xml"));
+  u.addQueryItem(QString::fromLatin1("page"),  QString::number(m_page));
 
   if(!data.locale.isEmpty()) {
     u.addQueryItem(QString::fromLatin1("locale"), data.locale);
@@ -212,24 +212,27 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
       return;
   }
 
+  // a mibenum of 106 is utf-8, 0 means use user's locale
+  QString value = KURL::encode_string_no_slash(value_, m_site == AmazonFetcher::JP ? 106 : 0);
+
   switch(key_) {
     case Title:
       // power search is only valid for books
       if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
-        u.addQueryItem(QString::fromLatin1("PowerSearch"), QString::fromLatin1("title: ") + value_);
+        u.addQueryItem(QString::fromLatin1("PowerSearch"), QString::fromLatin1("title: ") + value);
       } else {
-        u.addQueryItem(QString::fromLatin1("KeywordSearch"), value_);
+        u.addQueryItem(QString::fromLatin1("KeywordSearch"), value);
       }
       break;
 
     case Person:
       if(type == Data::Collection::Video) {
-        u.addQueryItem(QString::fromLatin1("ActorSearch"), value_);
-        u.addQueryItem(QString::fromLatin1("DirectorSearch"), value_);
+        u.addQueryItem(QString::fromLatin1("ActorSearch"), value);
+        u.addQueryItem(QString::fromLatin1("DirectorSearch"), value);
       } else if(type == Data::Collection::Album) {
-        u.addQueryItem(QString::fromLatin1("ArtistSearch"), value_);
+        u.addQueryItem(QString::fromLatin1("ArtistSearch"), value);
       } else if(type== Data::Collection::Book) {
-        u.addQueryItem(QString::fromLatin1("AuthorSearch"), value_);
+        u.addQueryItem(QString::fromLatin1("AuthorSearch"), value);
       }
       break;
 
@@ -240,7 +243,7 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
           // keep a list of isbn value we're searching for
           // but only set it when it's not set before
           if(m_isbnList.isEmpty()) {
-            m_isbnList = QStringList::split(QString::fromLatin1("; "), m_value);
+            m_isbnList = QStringList::split(QString::fromLatin1("; "), value_);
           }
           // static const QRegExp& badChars = Kernel::staticQRegExp("[^\\dX,]");
           // str.replace(badChars, QString::null);
@@ -262,13 +265,13 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
       break;
 
     case Keyword:
-      u.addQueryItem(QString::fromLatin1("KeywordSearch"), value_);
+      u.addQueryItem(QString::fromLatin1("KeywordSearch"), value);
       break;
 
     case Raw:
       {
-        QString key = value_.section('=', 0, 0).stripWhiteSpace();
-        QString str = value_.section('=', 1).stripWhiteSpace();
+        QString key = value.section('=', 0, 0).stripWhiteSpace();
+        QString str = value.section('=', 1).stripWhiteSpace();
         u.addQueryItem(key, str);
       }
       break;
@@ -370,7 +373,7 @@ kdWarning() << "Remove debug from amazonfetcher.cpp: " << len << endl;
   }
 
   // assume amazon is always utf-8
-  QString str = s_xsltHandler->applyStylesheet(QString::fromUtf8(m_data));
+  QString str = s_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
   Import::TellicoImporter imp(str);
   Data::Collection* coll = imp.collection();
   for(Data::EntryListIterator it(coll->entryList()); it.current(); ++it) {

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -117,7 +117,7 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   list.append(field);
 
   QStringList cond = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                        i18n("_:Comic book grade levels\n"
+                                        i18n("Comic book grade levels - "
                                              "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor",
                                              "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"),
                                         false);

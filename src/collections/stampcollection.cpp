@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -75,7 +75,7 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   list.append(field);
 
   QStringList grade = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                         i18n("_:Stamp grade levels\n"
+                                         i18n("Stamp grade levels - "
                                               "Superb,Extremely Fine,Very Fine,Fine,Average,Poor",
                                               "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"),
                                          false);

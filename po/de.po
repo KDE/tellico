@@ -5,20 +5,20 @@
 # Copyright (C) 2003 Robby Stephenson <robby@periapsis.org>
 # This file is distributed under the same license as the tellico package.
 # Robby Stephenson <robby@periapsis.org>, 2003.
-# Gerrit M. Albrecht <mail@gerrit-albrecht.de>, 2003, 2004.
+# Gerrit M. Albrecht <mail@gerrit-albrecht.de>, 2003, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2005-02-10 20:22-0800\n"
-"PO-Revision-Date: 2004-08-20 01:13+0200\n"
+"POT-Creation-Date: 2005-03-08 18:50-0800\n"
+"PO-Revision-Date: 2005-03-01 19:21+0100\n"
 "Last-Translator: Gerrit M. Albrecht <mail@gerrit-albrecht.de>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: collectionfactory.cpp:73 collectionfactory.cpp:87
 #: collections/bibtexcollection.cpp:27 collections/bibtexcollection.cpp:62
@@ -33,12 +33,12 @@ msgid "General"
 msgstr "Allgemein"
 
 #: collections/bibtexcollection.cpp:28 collections/bookcollection.cpp:21
-#: collections/comicbookcollection.cpp:21 translators/risimporter.cpp:251
+#: collections/comicbookcollection.cpp:21 translators/risimporter.cpp:249
 msgid "Publishing"
 msgstr "Ausgabe"
 
 #: collections/bookcollection.cpp:22 collections/comicbookcollection.cpp:22
-#: translators/risimporter.cpp:245
+#: translators/risimporter.cpp:243
 msgid "Classification"
 msgstr "Zuordnung"
 
@@ -123,19 +123,16 @@ msgstr "Gattung"
 # XXX: IMHO "Genre"
 #: collections/bookcollection.cpp:123 collections/cardcollection.cpp:102
 #: collections/comicbookcollection.cpp:114 collections/musiccollection.cpp:103
-#: translators/risimporter.cpp:243
+#: translators/risimporter.cpp:241
 msgid "Keywords"
 msgstr "Schlüsselwörter"
 
 #: collections/comicbookcollection.cpp:122
 msgid ""
-"_: _:Comic book grade levels\n"
-"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor\n"
+"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
+"Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
-"_: _:Comic-Buch-Bewertungsstufen\n"
-"Ausgezeichnet,Fast Ausgezeichnet,Super Toll,Toll,Sehr "
-"Gut,Gut,Durchschnitt,Schlecht\n"
 "Ausgezeichnet,Fast Ausgezeichnet,Super Toll,Toll,Sehr "
 "Gut,Gut,Durchschnitt,Schlecht"
 
@@ -217,13 +214,9 @@ msgstr "Markenkennung#"
 
 #: collections/stampcollection.cpp:80
 msgid ""
-"_: _:Stamp grade levels\n"
-"Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
+"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
-"_: _:Bewertungsstufen für Briefmarken\n"
-"Ausgezeichnet,Extrem Gut,Sehr Gut,Gut,Durchschnitt,Schlecht\n"
-"Ausgezeichnet,Extrem Gut,Sehr Gut,Gut,Durchschnitt,Schlecht"
+msgstr "Ausgezeichnet,Extrem Gut,Sehr Gut,Gut,Durchschnitt,Schlecht"
 
 #: collections/coincollection.cpp:88 collections/stampcollection.cpp:82
 msgid "Grade"
@@ -282,31 +275,22 @@ msgstr "Münzen-Satz"
 # soll/darf man das übersetzen?
 #: collections/coincollection.cpp:83
 msgid ""
-"_: _:Coin grade levels\n"
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair\n"
+"_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
+"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
+"Fine-20,Fine-12,Very Good-8,Good-4,Fair\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
-"_: _:Münzbewertungsstufen\n"
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 
 #: collections/coincollection.cpp:96
 msgid ""
-"_: _:Coin grading services\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI\n"
+"_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr ""
-"_: _:Münzbewertungs-Dienstleister\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI"
+msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
 #: collections/coincollection.cpp:98
 msgid "Grading Service"
@@ -366,11 +350,11 @@ msgstr "Bindung"
 msgid "Copyright Year"
 msgstr "Copyright (Jahr)"
 
-#: collections/bookcollection.cpp:97 translators/risimporter.cpp:248
+#: collections/bookcollection.cpp:97 translators/risimporter.cpp:246
 msgid "ISBN#"
 msgstr "ISBN-Nr."
 
-#: collections/bookcollection.cpp:99 translators/risimporter.cpp:252
+#: collections/bookcollection.cpp:99 translators/risimporter.cpp:250
 msgid "International Standard Book Number"
 msgstr "Internationale Standardbuchnummer"
 
@@ -520,15 +504,10 @@ msgstr "Produktion (Jahr)"
 
 # was soll ich hier eintragen? kenne mich damit nicht aus :-(
 #: collections/videocollection.cpp:64
-#, fuzzy
 msgid ""
-"_: _:Movie ratings\n"
-"G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
+"_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
-"_: _:Film-Bewertungen\n"
-"G (USA),PG (USA),PG-13 (USA),R (USA)\n"
-"G (USA),PG (USA),PG-13 (USA),R (USA)"
+msgstr "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 
 #: collections/videocollection.cpp:66
 msgid "Certification"
@@ -737,7 +716,7 @@ msgstr "Unternehmen"
 
 #: collections/bibtexcollection.cpp:131
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #: collections/bibtexcollection.cpp:170
 msgid "Month"
@@ -881,7 +860,7 @@ msgstr "Wahl"
 msgid "Checkbox"
 msgstr "Checkbox"
 
-#: field.cpp:415 translators/risimporter.cpp:254
+#: field.cpp:415 translators/risimporter.cpp:252
 msgid "URL"
 msgstr "URL"
 
@@ -985,9 +964,8 @@ msgid "*.xml|XML files (*.xml)"
 msgstr "*.xml|XML-Dateien (*.xml)"
 
 #: importdialog.cpp:213
-#, fuzzy
 msgid "*.ris|RIS files (*.ris)"
-msgstr "*.xsl|XSL-Dateien (*.xsl)"
+msgstr "*.ris|RIS-Dateien (*.ris)"
 
 #: importdialog.cpp:223 mainwindow.cpp:998 mainwindow.cpp:1112
 #: translators/bibtexexporter.cpp:50 translators/bibtexmlexporter.cpp:40
@@ -1141,23 +1119,20 @@ msgid "Import a CSV file"
 msgstr "Importiere eine CSV-Datei"
 
 #: mainwindow.cpp:321
-#, fuzzy
 msgid "Import MODS Data"
-msgstr "Importiere CSV-Daten"
+msgstr "Importiere MODS-Daten"
 
 #: mainwindow.cpp:322
-#, fuzzy
 msgid "Import a MODS data file"
-msgstr "Importiere eine CSV-Datei"
+msgstr "Importiere eine MODS-Datei"
 
 #: mainwindow.cpp:328
-#, fuzzy
 msgid "Import Alexandria Data"
-msgstr "Importiere Bibtex-Daten"
+msgstr "Importiere Alexandria-Daten"
 
 #: mainwindow.cpp:329
 msgid "Import data from the Alexandria book collection manager"
-msgstr ""
+msgstr "Importiere Daten von der Alexandria-Bücherverwaltung"
 
 #: mainwindow.cpp:335
 msgid "Import Bibtex Data"
@@ -1176,32 +1151,28 @@ msgid "Import a Bibtexml bibliography file"
 msgstr "Importiere ein Literaturverzeichnis aus einer Bibtexml-Datei"
 
 #: mainwindow.cpp:349
-#, fuzzy
 msgid "Import RIS Data"
-msgstr "Importiere CSV-Daten"
+msgstr "Importiere RIS-Daten"
 
 #: mainwindow.cpp:350
-#, fuzzy
 msgid "Import an RIS reference file"
-msgstr "Importiere eine CSV-Datei"
+msgstr "Importiere eine RIS-Referenz-Datei"
 
 #: mainwindow.cpp:356
 msgid "Import Audio File Metadata"
-msgstr ""
+msgstr "Importiere Audio-Datei-Metadaten"
 
 #: mainwindow.cpp:357
-#, fuzzy
 msgid "Import meta-data from audio files"
-msgstr "Importiere eine CSV-Datei"
+msgstr "Importiere Meta-Daten von Audio-Dateien"
 
 #: mainwindow.cpp:366
-#, fuzzy
 msgid "Import Audio CD Data"
-msgstr "Importiere CSV-Daten"
+msgstr "Importiere Audio-CD-Daten"
 
 #: mainwindow.cpp:367
 msgid "Import audio CD information from FreeDB"
-msgstr ""
+msgstr "Importiere Audio-CD-Informationen aus der FreeDB"
 
 #: mainwindow.cpp:376
 msgid "Import XSL Transform"
@@ -1252,14 +1223,12 @@ msgid "Export to a PilotDB database"
 msgstr "Exportiere in eine PilotDB-Datenbank"
 
 #: mainwindow.cpp:424
-#, fuzzy
 msgid "Export to Alexandria"
-msgstr "Importiere Bibtex-Daten"
+msgstr "Exportiere Alexandria-Daten"
 
 #: mainwindow.cpp:425
-#, fuzzy
 msgid "Export to an Alexandria library"
-msgstr "Importiere Bibtex-Daten"
+msgstr "Exportiere in eine Alexandria-Bibliothek"
 
 #: mainwindow.cpp:431
 msgid "Export to Bibtex"
@@ -1546,9 +1515,8 @@ msgstr "Seite %1"
 
 #: fetch/z3950fetcher.cpp:233 mainwindow.cpp:1669
 #: translators/xsltimporter.cpp:56
-#, fuzzy
 msgid "Tellico encountered an error in XSLT processing."
-msgstr "Tellico bemerkte einen Fehler bei der XSL-Transformation.\n"
+msgstr "Tellico bemerkte einen Fehler bei einer XSL-Transformation."
 
 #: entryview.cpp:137 mainwindow.cpp:1670
 msgid "Please check your installation."
@@ -1641,15 +1609,12 @@ msgid "Overwrite"
 msgstr "Überschreiben"
 
 #: controller.cpp:270
-#, fuzzy
 msgid "Do you really want to delete this entry?"
-msgstr "Wollen Sie diese Einträge wirklich löschen?"
+msgstr "Wollen Sie diesen Eintrag wirklich löschen?"
 
-# Einfach mal das L als Kürzel ausgewählt. Testen.
 #: controller.cpp:272
-#, fuzzy
 msgid "Delete Entry?"
-msgstr "&Lösche Eintrag"
+msgstr "Lösche Eintrag?"
 
 #: controller.cpp:282
 msgid "Do you really want to delete these entries?"
@@ -1685,9 +1650,8 @@ msgid "&Find"
 msgstr "&Suchen"
 
 #: finddialog.cpp:47
-#, fuzzy
 msgid "Find"
-msgstr "&Suchen"
+msgstr "Suchen"
 
 #: finddialog.cpp:51
 msgid "&Text to find:"
@@ -1710,9 +1674,8 @@ msgid "&Edit regular expression..."
 msgstr "&Bearbeite Regulären Ausdruck..."
 
 #: finddialog.cpp:75
-#, fuzzy
 msgid "Field"
-msgstr "Irgendein Feld"
+msgstr "Feld"
 
 #: finddialog.cpp:77
 msgid "Search in:"
@@ -1756,124 +1719,128 @@ msgstr "Alle Felder"
 msgid "Invalid regular expression."
 msgstr "Unerlaubter regulärer Ausdruck."
 
-#: fetch/amazonfetcher.cpp:52
+#: fetch/amazonfetcher.cpp:53
 msgid "Amazon (US)"
 msgstr "Amazon (US)"
 
-#: fetch/amazonfetcher.cpp:61
+#: fetch/amazonfetcher.cpp:62
 msgid "Amazon (UK)"
 msgstr "Amazon (UK)"
 
-#: fetch/amazonfetcher.cpp:70
+#: fetch/amazonfetcher.cpp:71
 msgid "Amazon (Germany)"
 msgstr "Amazon (Deutschland)"
 
-#: fetch/amazonfetcher.cpp:79
+#: fetch/amazonfetcher.cpp:80
 msgid "Amazon (Japan)"
 msgstr "Amazon (Japan)"
 
-#: fetch/amazonfetcher.cpp:88
-#, fuzzy
+#: fetch/amazonfetcher.cpp:89
 msgid "Amazon (France)"
-msgstr "Amazon (Deutschland)"
+msgstr "Amazon (Frankreich)"
 
-#: fetch/amazonfetcher.cpp:97
-#, fuzzy
+#: fetch/amazonfetcher.cpp:98
 msgid "Amazon (Canada)"
-msgstr "Amazon (Japan)"
+msgstr "Amazon (Kanada)"
 
-#: fetch/amazonfetcher.cpp:209
+#: fetch/amazonfetcher.cpp:210
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 erlaubt kein Suchen für diese Sammlungs-Art."
 
-#: fetch/amazonfetcher.cpp:422
+#: fetch/amazonfetcher.cpp:429
 msgid "Results from %1: %2/%3"
 msgstr "Ergebnisse von %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:460 fetch/z3950fetcher.cpp:388
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:388
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
+"<qt>Für die folgenden ISBN-Daten konnten keine Einträge gefunden "
+"werden:</qt>"
 
-#: fetch/amazonfetcher.cpp:500
+#: fetch/amazonfetcher.cpp:507
 msgid "The cover image could not be loaded."
 msgstr "Das Bild des Einbands konnte nicht geladen werden."
 
-#: fetch/amazonfetcher.cpp:560
-#, fuzzy
-msgid "Co&untry: "
-msgstr "Land"
-
-#: fetch/amazonfetcher.cpp:564
-msgid "United States"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:565
-msgid "United Kingdom"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:566
-#, fuzzy
-msgid "Germany"
-msgstr "Amazon (Deutschland)"
-
+# Einfach mal das L als Kürzel genommen. Noch testen.
 #: fetch/amazonfetcher.cpp:567
-msgid "Japan"
-msgstr ""
+msgid "Co&untry: "
+msgstr "&Land: "
 
-#: fetch/amazonfetcher.cpp:568
-#, fuzzy
-msgid "France"
-msgstr "Geschweifte Klammern"
-
-#: fetch/amazonfetcher.cpp:569
-msgid "Canada"
-msgstr ""
+#: fetch/amazonfetcher.cpp:571
+msgid "United States"
+msgstr "Vereinigte Staaten von Amerika"
 
 #: fetch/amazonfetcher.cpp:572
+msgid "United Kingdom"
+msgstr "Großbritannien und Nordirland"
+
+#: fetch/amazonfetcher.cpp:573
+msgid "Germany"
+msgstr "Deutschland"
+
+#: fetch/amazonfetcher.cpp:574
+msgid "Japan"
+msgstr "Japan"
+
+#: fetch/amazonfetcher.cpp:575
+msgid "France"
+msgstr "Frankreich"
+
+#: fetch/amazonfetcher.cpp:576
+msgid "Canada"
+msgstr "Kanada"
+
+#: fetch/amazonfetcher.cpp:579
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
-
-#: fetch/amazonfetcher.cpp:578
-msgid "&Image size: "
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:582
-#, fuzzy
-msgid "Small Image"
-msgstr "Etikett"
-
-#: fetch/amazonfetcher.cpp:583
-#, fuzzy
-msgid "Medium Image"
-msgstr "Medium"
-
-#: fetch/amazonfetcher.cpp:584
-#, fuzzy
-msgid "Large Image"
-msgstr "Etikett"
+"Amazon.com stellt Daten von verschiedenen lokalisierten Sites zur "
+"Verfügung. Wählen Sie diejenige, welche Sie als Datenquelle benutzen "
+"möchten."
 
 #: fetch/amazonfetcher.cpp:585
-#, fuzzy
-msgid "No Image"
-msgstr "Bild"
+msgid "&Image size: "
+msgstr "B&ildgröße:"
 
-#: fetch/amazonfetcher.cpp:588 fetch/imdbfetcher.cpp:788
+#: fetch/amazonfetcher.cpp:589
+msgid "Small Image"
+msgstr "Kleines Bild"
+
+#: fetch/amazonfetcher.cpp:590
+msgid "Medium Image"
+msgstr "Mittleres Bild"
+
+#: fetch/amazonfetcher.cpp:591
+msgid "Large Image"
+msgstr "Großes Bild"
+
+#: fetch/amazonfetcher.cpp:592
+msgid "No Image"
+msgstr "Kein Bild"
+
+# Ich weiss, Performanz, aber so sieht's besser aus, oder?
+#: fetch/amazonfetcher.cpp:595 fetch/imdbfetcher.cpp:788
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
 msgstr ""
+"Das Umschlagbild kann ebenfalls heruntergeladen werden, allerdings können "
+"zu viele große Bilder in der Sammlung die Performance beeinträchtigen."
 
-#: fetch/amazonfetcher.cpp:594
+# Ist der Buchstabe M noch frei?
+#: fetch/amazonfetcher.cpp:601
 msgid "&Associate's ID: "
-msgstr ""
+msgstr "&Mitglieds-ID: "
 
-#: fetch/amazonfetcher.cpp:599
+#: fetch/amazonfetcher.cpp:606
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
 msgstr ""
+"Die Mitglieds-ID identifiziert die Person, welche auf die Amazon.com "
+"Web-Dienste zugreift. Sie ist Bestandteil von allen Links zur Amazon.com "
+"Website."
 
 #: fetch/fetchmanager.cpp:208
 msgid "Person"
@@ -1888,130 +1855,140 @@ msgstr "ISBN"
 msgid "Keyword"
 msgstr "Schlüsselwort"
 
+# Oder unbearbeitet?
 #: fetch/fetchmanager.cpp:211
-#, fuzzy
 msgid "Raw Query"
-msgstr "Such-Anfrage"
+msgstr "Grobe Anfrage"
 
 #: fetch/fetchmanager.cpp:270
 msgid "Amazon.com Web Services"
-msgstr ""
+msgstr "Amazon.com Web-Dienste"
 
 #: fetch/fetchmanager.cpp:273 fetch/imdbfetcher.cpp:91
 msgid "Internet Movie Database"
-msgstr ""
+msgstr "Internet Film Datenbank (IMDB)"
 
 #: fetch/fetchmanager.cpp:276
 msgid "z39.50"
-msgstr ""
+msgstr "z39.50"
 
 #: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:407
-#, fuzzy
 msgid "Library of Congress (US)"
-msgstr "Kongressbibliothek"
+msgstr "Kongressbibliothek (US)"
 
 #: fetch/srufetcher.cpp:254
 msgid "This source has no options."
-msgstr ""
+msgstr "Diese Quelle besitzt keine Optionen."
 
 #: fetch/imdbfetcher.cpp:409
 msgid "Select IMDB Result"
-msgstr ""
+msgstr "Wähle IMDB-Ergebnis aus"
 
 #: fetch/imdbfetcher.cpp:412
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
+"<qt>Ihre Suche lieferte mehrere Treffer zurück. Bitte wählen Sie einen "
+"weiter unten aus.</qt>"
 
 #: fetch/imdbfetcher.cpp:419
 msgid "<qt>Select a search result.</qt>"
-msgstr ""
+msgstr "<qt>Wähle ein Suchergebnis aus.</qt>"
 
 #: fetch/imdbfetcher.cpp:539
 msgid "Alternative Titles"
-msgstr ""
+msgstr "Alternative Titel"
 
 #: fetch/imdbfetcher.cpp:757
-#, fuzzy
 msgid "Certifications"
-msgstr "Zertifizierung"
+msgstr "Zertifikate"
 
+# R noch frei?
 #: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:418
 msgid "&Host: "
-msgstr ""
+msgstr "&Rechner: "
 
 #: fetch/imdbfetcher.cpp:779
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
 msgstr ""
+"Die Internet Film Datenbank (IMDB) benutzt verschiedene Server. Wählen Sie "
+"einen zur Nutzung aus."
 
 #: fetch/imdbfetcher.cpp:785
 msgid "Download cover image"
-msgstr ""
+msgstr "Umschlagbild herunterladen"
 
 #: fetch/z3950fetcher.cpp:260
 msgid "Connection error %1: %2"
-msgstr ""
+msgstr "Verbindungs-Fehler %1: %2"
 
 #: fetch/z3950fetcher.cpp:272
 msgid "Query error!"
-msgstr ""
+msgstr "Anfrage-Fehler!"
 
 #: fetch/z3950fetcher.cpp:290
 msgid "Connection search error %1: %2"
-msgstr ""
+msgstr "Fehler bei der Verbindungssuche %1: %2"
 
 #: fetch/z3950fetcher.cpp:423
 msgid "Enter the host name of the z39.50 server."
-msgstr ""
+msgstr "Geben Sie den Rechner-Namen des z39.50-Servers ein."
 
 #: fetch/z3950fetcher.cpp:428
 msgid "&Port: "
-msgstr ""
+msgstr "&Port: "
 
 #: fetch/z3950fetcher.cpp:433
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr ""
+"Geben Sie die Port-Nummer des z39.50-Servers ein. Der Vorgabewert ist %1."
 
 #: fetch/z3950fetcher.cpp:438
 msgid "&Database: "
-msgstr ""
+msgstr "&Datenbank: "
 
 #: fetch/z3950fetcher.cpp:443
 msgid "Enter the database name used by the z39.50 server."
-msgstr ""
+msgstr "Geben Sie den Datenbank-Namen zur Nutzung durch den z39.50-Server ein."
 
 #: fetch/z3950fetcher.cpp:448
 msgid "Ch&aracter set: "
-msgstr ""
+msgstr "&Zeichenmenge:"
 
 #: fetch/z3950fetcher.cpp:457
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
+"Geben Sie die Zeichensatz-Kodierung für den z39.50-Server ein. Die "
+"wahrscheinlichste Wahl ist MARC-8, aber auch ISO-8859-1 ist gebräuchlich."
 
 #: fetch/z3950fetcher.cpp:463
 msgid "&User: "
-msgstr ""
+msgstr "&Benutzer: "
 
 #: fetch/z3950fetcher.cpp:468
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
+"Geben Sie den Benutzernamen zur Authentifikation ein, den die "
+"z39.50-Datenbank benutzen soll. Die meisten Server benötigen keinen."
 
 #: fetch/z3950fetcher.cpp:474
 msgid "Pass&word: "
-msgstr ""
+msgstr "Pass&wort:"
 
 #: fetch/z3950fetcher.cpp:480
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
+"Geben Sie das Authentifikations-Passwort für die Nutzung durch die "
+"z39.50-Datenbank ein. Die meisten Server benötigen keins."
 
 #: collectionfieldsdialog.cpp:81
 msgid "Collection Fields"
@@ -2025,9 +2002,7 @@ msgstr "Aktuelle Felder"
 msgid ""
 "_: New Field\n"
 "New"
-msgstr ""
-"_: Neues Feld\n"
-"Neu"
+msgstr "Neu"
 
 #: collectionfieldsdialog.cpp:111
 msgid "Add a new field to the collection"
@@ -2037,9 +2012,7 @@ msgstr "Füge ein neues Feld zur Sammlung hinzu"
 msgid ""
 "_: Delete Field\n"
 "Delete"
-msgstr ""
-"_: Lösche Feld\n"
-"Lösche"
+msgstr "Lösche"
 
 #: collectionfieldsdialog.cpp:114
 msgid "Remove a field from the collection"
@@ -2295,10 +2268,14 @@ msgid ""
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
+"<qt>Das Entfernen von erlaubten Werten des <i>%1</i>-Felds, welches zur Zeit "
+"in der Sammlung existiert, könnte Datenfehler erzeugen. Möchten Sie Ihre "
+"veränderten Werte erhalten oder Abbrechen und zu den aktuellen Werten "
+"zurückkehren?</qt>"
 
 #: collectionfieldsdialog.cpp:320
 msgid "Keep modified values"
-msgstr ""
+msgstr "Veränderte Werte übernehmen"
 
 #: collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:381
 #: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
@@ -2379,7 +2356,7 @@ msgstr ""
 "Die aktuelle Datei wurde verändert.\n"
 "Soll sie gespeichert werden?"
 
-#: document.cpp:98 entryeditdialog.cpp:567
+#: document.cpp:98 entryeditdialog.cpp:569
 msgid "Warning!"
 msgstr "Warnung!"
 
@@ -2565,61 +2542,57 @@ msgid "Template Options"
 msgstr "Vorlage-Optionen"
 
 #: configdialog.cpp:312
-#, fuzzy
 msgid "Data Sources"
-msgstr "Quelle"
+msgstr "Datenquellen"
 
 #: configdialog.cpp:312
-#, fuzzy
 msgid "Data Source Options"
-msgstr "Vorlage-Optionen"
+msgstr "Datenquellen-Optionen"
 
 #: configdialog.cpp:316 fetchdialog.cpp:136
 msgid "Source"
 msgstr "Quelle"
 
 #: configdialog.cpp:325
-#, fuzzy
 msgid "&New..."
-msgstr "&Neu"
+msgstr "&Neu..."
 
 #: configdialog.cpp:328
 msgid "&Modify..."
-msgstr ""
+msgstr "&Verändern..."
 
 #: configdialog.cpp:331
 msgid "Remo&ve"
-msgstr ""
+msgstr "&Entfernen"
 
 #: configdialog.cpp:524 configdialog.cpp:635
-#, fuzzy
 msgid "Data Source Properties"
-msgstr "Feld-Eigenschaften"
+msgstr "Datenquellen-Eigenschaften"
 
 #: configdialog.cpp:543 configdialog.cpp:654
-#, fuzzy
 msgid "&Source name: "
-msgstr "Quelle"
+msgstr "Name der &Quelle: "
 
 #: configdialog.cpp:545 configdialog.cpp:656
 msgid ""
 "The name identifies the data source and should be unique and informative."
 msgstr ""
+"Der Name identifiziert die Datenquelle und sollte einmalig und informativ "
+"sein."
 
 #: configdialog.cpp:554 configdialog.cpp:665
-#, fuzzy
 msgid "Source type: "
-msgstr "Quelle"
+msgstr "Art der Quelle: "
 
 #: configdialog.cpp:556 configdialog.cpp:667
 msgid ""
 "Tellico currently supports three source types: Amazon.com, IMDB, and z39.50."
 msgstr ""
+"Tellico unterstützt derzeit drei Quellarten: Amazon.com, IMDB und z39.50."
 
 #: configdialog.cpp:564 configdialog.cpp:674
-#, fuzzy
 msgid "Source Options"
-msgstr "CSV-Optionen"
+msgstr "Quellen-Optionen"
 
 #: main.cpp:23
 msgid "Tellico - a collection manager for KDE"
@@ -2630,19 +2603,16 @@ msgid "Do not reopen the last open file"
 msgstr "Die letzte offene Datei nicht erneut öffnen"
 
 #: main.cpp:28
-#, fuzzy
 msgid "Import <filename> as a bibtex file"
-msgstr "Exportiere in eine Bibtex-Datei"
+msgstr "Importiere <Dateiname> als eine Bibtex-Datei"
 
 #: main.cpp:29
-#, fuzzy
 msgid "Import <filename> as a MODS file"
-msgstr "Importiere eine CSV-Datei"
+msgstr "Importiere <Dateiname> als eine MODS-Datei"
 
 #: main.cpp:30
-#, fuzzy
 msgid "Import <filename> as a RIS file"
-msgstr "Importiere eine CSV-Datei"
+msgstr "Importiere <Dateiname> als eine RIS-Datei"
 
 #: main.cpp:31
 msgid "File to open"
@@ -2657,9 +2627,8 @@ msgid "Author of btparse library"
 msgstr "Autor der btparse Bibliothek"
 
 #: main.cpp:44
-#, fuzzy
 msgid "Icons"
-msgstr "enthält"
+msgstr "Ikons"
 
 #: collectionfactory.cpp:70 collectionfactory.cpp:84
 msgid "My Collection"
@@ -2739,14 +2708,12 @@ msgstr ""
 "automatisch formatiert."
 
 #: exportdialog.cpp:56
-#, fuzzy
 msgid "Export selected entries only"
-msgstr "Kopiere die ausgewählten Einträge"
+msgstr "Exportiere nur die ausgewählten Einträge"
 
 #: exportdialog.cpp:58
-#, fuzzy
 msgid "If checked, only the currently selected entries will be exported."
-msgstr "Wenn markiert, wird das Dokument rückwärts durchsucht."
+msgstr "Wenn markiert, werden nur die ausgewählten Einträge exportiert."
 
 #: exportdialog.cpp:61
 msgid "Encoding"
@@ -2804,20 +2771,22 @@ msgstr "Klicke, um die Suche zu beginnen oder zu beenden"
 
 #: fetchdialog.cpp:105
 msgid "Multiple ISBN search"
-msgstr ""
+msgstr "Mehrfach-ISBN-Suche"
 
 #: fetchdialog.cpp:106
 msgid "Check this box to search for multiple ISBN values."
-msgstr ""
+msgstr "Markieren Sie dieses Feld, um nach mehreren ISBN-Werten zu suchen."
 
 #: fetchdialog.cpp:109
 msgid "Edit ISBN list..."
-msgstr ""
+msgstr "Bearbeite ISBN-Liste..."
 
 #: fetchdialog.cpp:111
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr ""
+"Klicken Sie hier, um einen Text-Editor zu öffnen, um mehrere ISBN-Werte zu "
+"bearbeiten oder einzugeben."
 
 #: fetchdialog.cpp:117
 msgid "Search Source:"
@@ -2861,16 +2830,17 @@ msgid "Searching..."
 msgstr "Suchen..."
 
 #: fetchdialog.cpp:260
-#, fuzzy
 msgid "The search returned no items."
-msgstr "Die Suche lieferte %1 Treffer."
+msgstr "Die Suche lieferte keine Treffer."
 
 #: fetchdialog.cpp:263
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
-msgstr "Die Suche lieferte %1 Treffer."
+msgstr ""
+"_n: Die Suche lieferte 1 Treffer.\n"
+"Die Suche lieferte %n Treffer."
 
 #: fetchdialog.cpp:312
 msgid "Fetching %1..."
@@ -2879,80 +2849,81 @@ msgstr "Hole %1..."
 #: fetchdialog.cpp:340
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
+"Für Ihre aktuelle Art der Sammlung sind keine Internet-Quellen verfügbar."
 
 #: fetchdialog.cpp:393
 msgid "Edit ISBN Values"
-msgstr ""
+msgstr "Bearbeite ISDN-Werte"
 
 #: fetchdialog.cpp:398 fetchdialog.cpp:401
 msgid "<qt>Enter the ISBN values, one per line.</qt>"
-msgstr ""
+msgstr "<qt>Geben Sie die ISBN-Werte (einen pro Zeile) ein.</qt>"
 
 #: fetchdialog.cpp:402
 msgid "Load From File"
-msgstr ""
+msgstr "Lade aus Datei"
 
 #: fetchdialog.cpp:403
 msgid "<qt>Load the ISBN list from a text file.</qt>"
-msgstr ""
+msgstr "<qt>Lade die ISBN-Liste aus einer Text-Datei.</qt>"
 
 #: fetchdialog.cpp:421
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
 msgstr ""
+"<qt>Eine ISBN-Suche kann maximal 100 ISBN-Nummern enthalten. Nur die ersten "
+"100 Werte Ihrer Liste werden benutzt.</qt>"
 
 # ???
 #: kwidgetlister.cpp:56
 msgid ""
 "_: more widgets\n"
 "More"
-msgstr "Mehr Felder"
+msgstr "Mehr"
 
 # ???
 #: kwidgetlister.cpp:59
 msgid ""
 "_: fewer widgets\n"
 "Fewer"
-msgstr "Weniger Felder"
+msgstr "Weniger"
 
 # Das hier klappt irgendwie nicht so richtig, ich sehe die komplette Übersetzung als Button-Text! Oder darf ich da nur einen Wert eintragen?
 #: kwidgetlister.cpp:65
 msgid ""
 "_: clear widgets\n"
 "Clear"
-msgstr "Lösche Felder"
+msgstr "Löschen"
 
 #: imagewidget.cpp:48
 msgid "Select Image..."
 msgstr "Bild auswählen..."
 
-#: entryeditdialog.cpp:43 entryeditdialog.cpp:302 entryeditdialog.cpp:323
-#: entryeditdialog.cpp:367 entryeditdialog.cpp:419
+#: entryeditdialog.cpp:43 entryeditdialog.cpp:304 entryeditdialog.cpp:325
+#: entryeditdialog.cpp:369 entryeditdialog.cpp:421
 msgid "Edit Entry"
 msgstr "Bearbeite Eintrag"
 
 # Einfach mal das P als Kürzel ausgewählt. Testen.
-#: entryeditdialog.cpp:78 entryeditdialog.cpp:334 entryeditdialog.cpp:455
+#: entryeditdialog.cpp:78 entryeditdialog.cpp:336 entryeditdialog.cpp:457
 msgid "Sa&ve Entry"
 msgstr "S&peichere Eintrag"
 
 #: entryeditdialog.cpp:269
-#, fuzzy
 msgid "Do you really want to modify these entries?"
-msgstr "Wollen Sie diese Einträge wirklich löschen?"
+msgstr "Wollen Sie diese Einträge wirklich ändern?"
 
 #: entryeditdialog.cpp:271
-#, fuzzy
 msgid "Modify Multiple Entries?"
-msgstr "Mehrere Bücher ändern?"
+msgstr "Mehrere Einträge ändern?"
 
 # Kürzel testen
-#: entryeditdialog.cpp:395
+#: entryeditdialog.cpp:397
 msgid "Sa&ve Entries"
 msgstr "S&peichere Einträge"
 
-#: entryeditdialog.cpp:565
+#: entryeditdialog.cpp:567
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -2960,7 +2931,7 @@ msgstr ""
 "Der aktuelle Eintrag wurde verändert.\n"
 "Sollen die Änderungen eingefügt werden?"
 
-#: entryeditdialog.cpp:568
+#: entryeditdialog.cpp:570
 msgid "Save Entry"
 msgstr "Speichere Eintrag"
 
@@ -2969,15 +2940,16 @@ msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico kann den Stylesheet für den Vorgabe-Datensatz nicht finden."
 
 #: translators/alexandriaexporter.cpp:33
-#, fuzzy
 msgid "Alexandria"
-msgstr "Allgemeine Optionen"
+msgstr "Alexandria"
 
 #: translators/alexandriaexporter.cpp:50
 msgid ""
 "<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
 "books in that library could be overwritten.</qt>"
 msgstr ""
+"<qt>Eine Alexandria-Bibliothek namens <i>%1</i> existiert bereits. Alle "
+"existierenden Bücher in dieser Bibliothek werden überschrieben.</qt>"
 
 #: translators/bibtexmlexporter.cpp:36
 msgid "Bibtexml"
@@ -3045,7 +3017,6 @@ msgid "Quotes"
 msgstr "Anführungszeichen"
 
 #: translators/bibtexexporter.cpp:84
-#, fuzzy
 msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will  "
 "be escaped with either braces or quotation marks.</qt>"
@@ -3151,36 +3122,35 @@ msgstr "Daten-Feld in dieser Spalte:"
 msgid "Assign Field"
 msgstr "Feld zuweisen"
 
-#: translators/risimporter.cpp:238
+#: translators/risimporter.cpp:236
 msgid "Abstract"
-msgstr ""
+msgstr "Kurzfassung"
 
-#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:256
-#: translators/risimporter.cpp:260 translators/tellicoimporter.cpp:212
+#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:254
+#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:219
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: translators/risimporter.cpp:258
+#: translators/risimporter.cpp:256
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: translators/audiofileimporter.cpp:86
-#, fuzzy
 msgid "Scanning audio files..."
-msgstr "Speichere Datei..."
+msgstr "Taste Audio-Dateien ab..."
 
 #: translators/audiofileimporter.cpp:240
-#, fuzzy
 msgid "Audio File Options"
-msgstr "Feld-Optionen"
+msgstr "Audio-Datei-Optionen"
 
 #: translators/audiofileimporter.cpp:242
 msgid "Recursive folder search"
-msgstr ""
+msgstr "Rekursive Verzeichnissuche"
 
 #: translators/audiofileimporter.cpp:243
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
+"Wenn markiert, werden Verzeichnisse rekursiv nach Audio-Dateien abgesucht."
 
 #: translators/csvexporter.cpp:38
 msgid "CSV"
@@ -3219,39 +3189,35 @@ msgid "*.bc *.tc|Tellico files(*.tc)"
 msgstr "*.bc *.tc|Tellico-Dateien (*.tc)"
 
 #: translators/freedbimporter.cpp:58 translators/freedbimporter.cpp:106
-#, fuzzy
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
 msgstr ""
-"<qt>Tellico kann nicht schreibend auf die Server-Pipe in <b>%1</b> "
-"zugreifen.</qt> "
+"<qt>Tellico konnte nicht auf das CD-Laufwerk zugreifen - <i>%1</i>.</qt>"
 
 #: translators/freedbimporter.cpp:127
 msgid "<qt>No records were found to match the CD.</qt>"
-msgstr ""
+msgstr "<qt>Es wurden keine zur CD passende Aufzeichnungen gefunden.</qt>"
 
 #: translators/freedbimporter.cpp:131
 msgid "<qt>Multiple records were found to match the CD.</qt>"
-msgstr ""
+msgstr "<qt>Mehrere zur CD passende Aufzeichnungen wurden gefunden.</qt>"
 
 #: translators/freedbimporter.cpp:143
-#, fuzzy
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr ""
-"<qt>Tellico kann nicht schreibend auf die Server-Pipe in <b>%1</b> "
-"zugreifen.</qt> "
+"<qt>Tellico war nicht in der Lage, das Nachschlagen der CD "
+"abzuschliessen.</qt> "
 
 #: translators/freedbimporter.cpp:193
-#, fuzzy
 msgid "Audio CD Options"
-msgstr "Feld-Optionen"
+msgstr "Audio-CD-Optionen"
 
 #: translators/freedbimporter.cpp:195
 msgid "CD-ROM Device:"
-msgstr ""
+msgstr "CD-Laufwerk:"
 
 #: translators/freedbimporter.cpp:198
 msgid "Select or input the CD-ROM device location."
-msgstr ""
+msgstr "Wählen Sie das CD-Laufwerk aus oder geben Sie die Position ein."
 
 #: translators/xsltimporter.cpp:44 translators/xsltimporter.cpp:50
 msgid "A valid XSLT file is needed to import the file."
@@ -3280,13 +3246,12 @@ msgstr ""
 "benutzt wird."
 
 #: translators/alexandriaimporter.cpp:155
-#, fuzzy
 msgid "Alexandria Options"
-msgstr "Allgemeine Optionen"
+msgstr "Alexandria-Optionen"
 
 #: translators/alexandriaimporter.cpp:156
 msgid "Library:"
-msgstr ""
+msgstr "Bibliothek:"
 
 #: translators/htmlexporter.cpp:57
 msgid "HTML"
@@ -3310,9 +3275,8 @@ msgstr ""
 "Wenn markiert, werden für jeden Eintrag individuelle Dateien erstellt."
 
 #: translators/htmlexporter.cpp:192
-#, fuzzy
 msgid "(grouped by %1)"
-msgstr "(sortiert nach %1)"
+msgstr "(gruppiert nach %1)"
 
 #: translators/htmlexporter.cpp:194
 msgid "(grouped by %1; sorted by %2)"
@@ -3356,25 +3320,13 @@ msgstr ""
 "einem Informationsverlust kommen, falls eine ältere Tellico-Version benutzt "
 "wird, um die neue Datei einzulesen."
 
-#: translators/tellicoimporter.cpp:429
+#: translators/tellicoimporter.cpp:436
 msgid "The file is empty."
-msgstr ""
+msgstr "Die Datei ist leer."
 
-#: translators/tellicoimporter.cpp:442
+#: translators/tellicoimporter.cpp:449
 msgid "The file contains no collection data."
-msgstr ""
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Neu"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Sammlung"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Sammlungs-Werkzeugleiste"
+msgstr "Die Datei enthält keine Sammlungs-Daten."
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -3394,6 +3346,18 @@ msgstr "Tellico kann die Datei nicht hochladen - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Zu suchende Zeichenkette '%1' nicht gefunden."
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Neu"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Sammlung"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Sammlungs-Werkzeugleiste"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -3454,7 +3418,6 @@ msgstr ""
 "Das beeinflusst die Positionierung im Datensatz-Editor.</p>\n"
 
 #: tips.cpp:28
-#, fuzzy
 msgid ""
 "<p>...that if you want to filter by a Checkbox field, a value of\n"
 "\"true\" should be used. If you'd like to filter to\n"
@@ -3464,7 +3427,7 @@ msgid ""
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
-"<p>...dass, falls Sie mit einer Checkbox filtern wollen, als Wert\n"
+"<p>...dass, falls Sie nach einem Markierfeld filtern wollen, der Wert\n"
 "\"true\" benutzt werden sollte. Falls Sie beispielsweise nur die\n"
 "noch ungelesenen Science-Fiction-Bücher anzeigen möchten,\n"
 "markieren Sie die <em>Trifft auf alle der folgenden zu</em>-Schaltfläche,\n"
@@ -3557,46 +3520,15 @@ msgid ""
 "as\n"
 "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 msgstr ""
+"<p>...dass Sie zu Formatierzwecken HTML-Tags zu jedem Absatz-Feld "
+"hinzufügen können. Zum Beispiel:\n"
+"&lt;b&gt;fett&lt;/b&gt; or &lt;i&gt;kursiv&lt;/i&gt;.</p>\n"
 
 #: tips.cpp:85
 msgid ""
 "<p>...that in the Detailed View, you can press a letter on the\n"
 "keyboard to skip to the next entry that starts with that letter.</p>\n"
 msgstr ""
-
-#, fuzzy
-#~ msgid "*.bc .tc|Tellico files (*.tc)"
-#~ msgstr "*.bc *.tc|Tellico-Dateien (*.tc)"
-
-#~ msgid "&From Beginning"
-#~ msgstr "&Vom Anfang"
-
-#~ msgid "If checked, the document is searched from the beginning."
-#~ msgstr "Wenn markiert, wird das Dokument beginnend vom Anfang durchsucht."
-
-#~ msgid "Path to LyX server:"
-#~ msgstr "Pfad zum LyX-Server:"
-
-#~ msgid ""
-#~ "<qt>The location of the LyX server for citing bibliographic entries. Also "
-#~ "used by other applications such as Kile or Pybliographer. Do not include the "
-#~ "trailing .in suffix.</qt>"
-#~ msgstr ""
-#~ "<qt>Die Position des LyX-Servers zum Zitieren von bibliografischen "
-#~ "Einträgen. Wird auch von anderen Anwendungen wie beispielsweise Kile oder "
-#~ "Pybliographer benutzt. Ohne die angehängte .in-Endung angeben.</qt>"
-
-#~ msgid "Entry"
-#~ msgstr "Eintrag"
-
-#, fuzzy
-#~ msgid "<qt>Tellico was unable to open the CD-ROM device - <i>%1</i>.</qt>"
-#~ msgstr ""
-#~ "<qt>Tellico kann nicht schreibend auf die Server-Pipe in <b>%1</b> "
-#~ "zugreifen.</qt> "
-
-#~ msgid "Do you really want to modify these books?"
-#~ msgstr "Wollen Sie diese Bücher wirklich ändern?"
-
-#~ msgid "*.ogg|Ogg files (*.ogg)"
-#~ msgstr "*.ogg|Ogg-Dateien (*.ogg) "
+"<p>...dass Sie in der Detail-Ansicht einen Buchstaben auf der\n"
+"Tastatur drücken können, um zum nächsten Eintrag zu springen,\n"
+"der mit diesem Buchstaben beginnt.</p>\n"

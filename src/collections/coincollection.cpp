@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -75,7 +75,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   list.append(field);
 
   QStringList grade = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                         i18n("_:Coin grade levels\n"
+                                         i18n("Coin grade levels - "
                                               "Proof-65,Proof-60,Mint State-65,Mint State-60,"
                                               "Almost Uncirculated-55,Almost Uncirculated-50,"
                                               "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
@@ -91,7 +91,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   list.append(field);
 
   QStringList service = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                           i18n("_:Coin grading services\n"
+                                           i18n("Coin grading services - "
                                                 "PCGS,NGC,ANACS,ICG,ASA,PCI",
                                                 "PCGS,NGC,ANACS,ICG,ASA,PCI"),
                                            false);

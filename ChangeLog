@@ -1,3 +1,17 @@
+2005-03-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed some i18n generated strings.
+	* Released Tellico 0.13.5.
+
+2005-03-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated German translation, thanks to Gerrit Albrecht.
+
+2005-03-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crash for some amazon searches.
+	* Fixed character encoding for Japanese amazon searches.
+
 2005-02-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 0.13.4

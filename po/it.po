@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2005-02-10 20:22-0800\n"
+"POT-Creation-Date: 2005-03-08 18:50-0800\n"
 "PO-Revision-Date: 2004-05-27 20:03+0200\n"
 "Last-Translator: FaUsT <faust@inventati.org>\n"
 "Language-Team: Italiano <kde-i18n-it@kde.org>\n"
@@ -30,12 +30,12 @@ msgid "General"
 msgstr "Generale"
 
 #: collections/bibtexcollection.cpp:28 collections/bookcollection.cpp:21
-#: collections/comicbookcollection.cpp:21 translators/risimporter.cpp:251
+#: collections/comicbookcollection.cpp:21 translators/risimporter.cpp:249
 msgid "Publishing"
 msgstr "Pubblicazione"
 
 #: collections/bookcollection.cpp:22 collections/comicbookcollection.cpp:22
-#: translators/risimporter.cpp:245
+#: translators/risimporter.cpp:243
 msgid "Classification"
 msgstr "Classificazione"
 
@@ -119,19 +119,16 @@ msgstr "Genere"
 
 #: collections/bookcollection.cpp:123 collections/cardcollection.cpp:102
 #: collections/comicbookcollection.cpp:114 collections/musiccollection.cpp:103
-#: translators/risimporter.cpp:243
+#: translators/risimporter.cpp:241
 msgid "Keywords"
 msgstr "Parole chiave"
 
 #: collections/comicbookcollection.cpp:122
 msgid ""
-"_: _:Comic book grade levels\n"
-"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor\n"
+"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
+"Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
-"_: _:Gradi di conservazione dei fumetti\n"
-"Mint,Near Mint,Molto soddisfacente,Soddisfacente,Molto "
-"buono,Buono,Insomma,Cattivo\n"
 "Mint,Near Mint,Molto soddisfacente,Soddisfacente,Molto "
 "buono,Buono,Insomma,Cattivo"
 
@@ -211,13 +208,9 @@ msgstr "Scott#"
 
 #: collections/stampcollection.cpp:80
 msgid ""
-"_: _:Stamp grade levels\n"
-"Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
+"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr ""
-"_: _:Gradi di conservazione dei francobolli\n"
-"Mint,Near Mint,Molto soddisfacente,Soddisfacente,Molto "
-"buono,Buono,Insomma,Cattivo\n"
 "Mint,Near Mint,Molto soddisfacente,Soddisfacente,Molto "
 "buono,Buono,Insomma,Cattivo"
 
@@ -277,31 +270,22 @@ msgstr "Set di monete"
 
 #: collections/coincollection.cpp:83
 msgid ""
-"_: _:Coin grade levels\n"
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair\n"
+"_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
+"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
+"Fine-20,Fine-12,Very Good-8,Good-4,Fair\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
-"_: _:Grado di conservazione delle monete\n"
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 
 #: collections/coincollection.cpp:96
 msgid ""
-"_: _:Coin grading services\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI\n"
+"_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr ""
-"_: _:Servizi di valutazione monete\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI"
+msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
 #: collections/coincollection.cpp:98
 msgid "Grading Service"
@@ -359,11 +343,11 @@ msgstr "Rilegatura"
 msgid "Copyright Year"
 msgstr "Copyright (anno)"
 
-#: collections/bookcollection.cpp:97 translators/risimporter.cpp:248
+#: collections/bookcollection.cpp:97 translators/risimporter.cpp:246
 msgid "ISBN#"
 msgstr "num. ISBN"
 
-#: collections/bookcollection.cpp:99 translators/risimporter.cpp:252
+#: collections/bookcollection.cpp:99 translators/risimporter.cpp:250
 msgid "International Standard Book Number"
 msgstr "Numero Standard Internazionale per i libri"
 
@@ -510,15 +494,10 @@ msgid "Production Year"
 msgstr "Anno di produzione"
 
 #: collections/videocollection.cpp:64
-#, fuzzy
 msgid ""
-"_: _:Movie ratings\n"
-"G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
+"_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
-"_: _:Classificazione del film\n"
-" G (USA),PG (USA),PG-13 (USA),R (USA)\n"
-"G (USA),PG (USA),PG-13 (USA),R (USA)"
+msgstr "G (USA),PG (USA),PG-13 (USA),R (USA)"
 
 #: collections/videocollection.cpp:66
 msgid "Certification"
@@ -866,7 +845,7 @@ msgstr "Scelta"
 msgid "Checkbox"
 msgstr "Checkbox"
 
-#: field.cpp:415 translators/risimporter.cpp:254
+#: field.cpp:415 translators/risimporter.cpp:252
 msgid "URL"
 msgstr "URL"
 
@@ -1725,118 +1704,118 @@ msgstr "Tutti i campi"
 msgid "Invalid regular expression."
 msgstr "Espressione regolare non valida."
 
-#: fetch/amazonfetcher.cpp:52
+#: fetch/amazonfetcher.cpp:53
 msgid "Amazon (US)"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:61
+#: fetch/amazonfetcher.cpp:62
 msgid "Amazon (UK)"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:70
+#: fetch/amazonfetcher.cpp:71
 msgid "Amazon (Germany)"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:79
+#: fetch/amazonfetcher.cpp:80
 msgid "Amazon (Japan)"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:88
+#: fetch/amazonfetcher.cpp:89
 msgid "Amazon (France)"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:97
+#: fetch/amazonfetcher.cpp:98
 msgid "Amazon (Canada)"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:209
+#: fetch/amazonfetcher.cpp:210
 msgid "%1 does not allow searching for this collection type."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:422
+#: fetch/amazonfetcher.cpp:429
 msgid "Results from %1: %2/%3"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:460 fetch/z3950fetcher.cpp:388
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:388
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:500
+#: fetch/amazonfetcher.cpp:507
 msgid "The cover image could not be loaded."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:560
+#: fetch/amazonfetcher.cpp:567
 #, fuzzy
 msgid "Co&untry: "
 msgstr "Paese"
 
-#: fetch/amazonfetcher.cpp:564
+#: fetch/amazonfetcher.cpp:571
 msgid "United States"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:565
+#: fetch/amazonfetcher.cpp:572
 msgid "United Kingdom"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:566
+#: fetch/amazonfetcher.cpp:573
 msgid "Germany"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:567
+#: fetch/amazonfetcher.cpp:574
 msgid "Japan"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:568
+#: fetch/amazonfetcher.cpp:575
 #, fuzzy
 msgid "France"
 msgstr "Sostegni"
 
-#: fetch/amazonfetcher.cpp:569
+#: fetch/amazonfetcher.cpp:576
 msgid "Canada"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:572
+#: fetch/amazonfetcher.cpp:579
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:578
+#: fetch/amazonfetcher.cpp:585
 #, fuzzy
 msgid "&Image size: "
 msgstr "Directory per le immagini:"
 
-#: fetch/amazonfetcher.cpp:582
+#: fetch/amazonfetcher.cpp:589
 #, fuzzy
 msgid "Small Image"
 msgstr "Immagine dell'etichetta"
 
-#: fetch/amazonfetcher.cpp:583
+#: fetch/amazonfetcher.cpp:590
 #, fuzzy
 msgid "Medium Image"
 msgstr "Supporto"
 
-#: fetch/amazonfetcher.cpp:584
+#: fetch/amazonfetcher.cpp:591
 #, fuzzy
 msgid "Large Image"
 msgstr "Immagine dell'etichetta"
 
-#: fetch/amazonfetcher.cpp:585
+#: fetch/amazonfetcher.cpp:592
 #, fuzzy
 msgid "No Image"
 msgstr "Immagine"
 
-#: fetch/amazonfetcher.cpp:588 fetch/imdbfetcher.cpp:788
+#: fetch/amazonfetcher.cpp:595 fetch/imdbfetcher.cpp:788
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:594
+#: fetch/amazonfetcher.cpp:601
 msgid "&Associate's ID: "
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:599
+#: fetch/amazonfetcher.cpp:606
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -1997,9 +1976,7 @@ msgstr "Campi attuali"
 msgid ""
 "_: New Field\n"
 "New"
-msgstr ""
-"_: Nuovo campo\n"
-"Nuovo"
+msgstr "Nuovo"
 
 #: collectionfieldsdialog.cpp:111
 msgid "Add a new field to the collection"
@@ -2009,9 +1986,7 @@ msgstr "Aggiungi un campo alla collezione"
 msgid ""
 "_: Delete Field\n"
 "Delete"
-msgstr ""
-"_: Cancella il campo\n"
-"Cancella"
+msgstr "Cancella"
 
 #: collectionfieldsdialog.cpp:114
 msgid "Remove a field from the collection"
@@ -2336,7 +2311,7 @@ msgstr ""
 "Il file attuale �stato modificato.\n"
 "Lo vuoi salvare?"
 
-#: document.cpp:98 entryeditdialog.cpp:567
+#: document.cpp:98 entryeditdialog.cpp:569
 msgid "Warning!"
 msgstr "Attenzione!"
 
@@ -2850,36 +2825,30 @@ msgstr ""
 msgid ""
 "_: more widgets\n"
 "More"
-msgstr ""
-"_: più oggetti grafici\n"
-"Più"
+msgstr "Più"
 
 #: kwidgetlister.cpp:59
 msgid ""
 "_: fewer widgets\n"
 "Fewer"
-msgstr ""
-"_: meno oggetti grafici\n"
-"Meno"
+msgstr "Meno"
 
 #: kwidgetlister.cpp:65
 msgid ""
 "_: clear widgets\n"
 "Clear"
-msgstr ""
-"_: cancella oggetti grafici\n"
-"Cancella"
+msgstr "Cancella"
 
 #: imagewidget.cpp:48
 msgid "Select Image..."
 msgstr "Seleziona immagine ..."
 
-#: entryeditdialog.cpp:43 entryeditdialog.cpp:302 entryeditdialog.cpp:323
-#: entryeditdialog.cpp:367 entryeditdialog.cpp:419
+#: entryeditdialog.cpp:43 entryeditdialog.cpp:304 entryeditdialog.cpp:325
+#: entryeditdialog.cpp:369 entryeditdialog.cpp:421
 msgid "Edit Entry"
 msgstr "Modifica elemento"
 
-#: entryeditdialog.cpp:78 entryeditdialog.cpp:334 entryeditdialog.cpp:455
+#: entryeditdialog.cpp:78 entryeditdialog.cpp:336 entryeditdialog.cpp:457
 msgid "Sa&ve Entry"
 msgstr "Sal&va elemento"
 
@@ -2893,11 +2862,11 @@ msgstr "Vuoi davvero cancellare questi elementi?"
 msgid "Modify Multiple Entries?"
 msgstr "Modificare vari libri?"
 
-#: entryeditdialog.cpp:395
+#: entryeditdialog.cpp:397
 msgid "Sa&ve Entries"
 msgstr "Sal&va elementi"
 
-#: entryeditdialog.cpp:565
+#: entryeditdialog.cpp:567
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -2905,7 +2874,7 @@ msgstr ""
 "Il file attuale �stato modificato.\n"
 "Lo vuoi salvare?"
 
-#: entryeditdialog.cpp:568
+#: entryeditdialog.cpp:570
 msgid "Save Entry"
 msgstr "Salva Elemento"
 
@@ -3092,16 +3061,16 @@ msgstr "Campo di dati in questa colonna:"
 msgid "Assign Field"
 msgstr "Tutti i campi"
 
-#: translators/risimporter.cpp:238
+#: translators/risimporter.cpp:236
 msgid "Abstract"
 msgstr ""
 
-#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:256
-#: translators/risimporter.cpp:260 translators/tellicoimporter.cpp:212
+#: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:254
+#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:219
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: translators/risimporter.cpp:258
+#: translators/risimporter.cpp:256
 msgid "PDF"
 msgstr ""
 
@@ -3291,25 +3260,13 @@ msgstr ""
 "venisse usata una versione più vecchia di Tellico per aprire il documento "
 "potrebbero verificarsi perdite di dati."
 
-#: translators/tellicoimporter.cpp:429
+#: translators/tellicoimporter.cpp:436
 msgid "The file is empty."
 msgstr ""
 
-#: translators/tellicoimporter.cpp:442
+#: translators/tellicoimporter.cpp:449
 msgid "The file contains no collection data."
 msgstr ""
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Nuovo"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Collezione"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Barra degli strumenti-collezione"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -3329,6 +3286,18 @@ msgstr "Impossibile uploadare il file - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Stringa '%1' non trovata."
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Nuovo"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Collezione"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Barra degli strumenti-collezione"
 
 #: _translatorinfo.cpp:1
 msgid ""
