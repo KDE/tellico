@@ -292,7 +292,7 @@ CTAGS:
 
 #>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=libtool.m4.in detect-autoconf.sh conf.change.pl debianrules am_edit configure.in.min cvs-clean.pl acinclude.m4.in am_edit.py cvs.sh Makefile.common configure.in.bot.end config.pl Doxyfile.am 
+KDE_DIST=config.pl am_edit.py am_edit Makefile.common libtool.m4.in Doxyfile.am conf.change.pl cvs-clean.pl debianrules cvs.sh configure.in.min detect-autoconf.sh configure.in.bot.end acinclude.m4.in 
 
 DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 

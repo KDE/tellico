@@ -64,7 +64,7 @@ class QSplitter;
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: bookcase.h 260 2003-11-05 06:06:18Z robby $
+ * @version $Id: bookcase.h 307 2003-11-26 01:45:44Z robby $
  */
 class Bookcase : public KMainWindow {
 Q_OBJECT
@@ -103,6 +103,10 @@ public:
    * @return Returns the name of the fields currently visible in the column view.
    */
   QStringList visibleColumns() const;
+  /**
+   * @return Returns whether the current collection is still the non-saved default one
+   */
+  bool isNewDocument() const { return m_newDocument; }
 
 public slots:
   /**
@@ -450,6 +454,9 @@ private:
   // the loading process goes through several steps, keep track of the factor
   unsigned m_currentStep;
   unsigned m_maxSteps;
+
+  // need to keep track of whether the current collection is the initial default one
+  bool m_newDocument;
 };
  
 #endif // BOOKCASE_H

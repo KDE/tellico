@@ -282,7 +282,7 @@ libcollections_a_final_OBJECTS = libcollections_a.all_cpp.o
 libcollections_a_nofinal_OBJECTS = bibtexcollection.$(OBJEXT) \
 	musiccollection.$(OBJEXT) videocollection.$(OBJEXT) \
 	bookcollection.$(OBJEXT)\
-bibtexcollection.moc.o musiccollection.moc.o videocollection.moc.o bookcollection.moc.o 
+videocollection.moc.o bookcollection.moc.o musiccollection.moc.o bibtexcollection.moc.o 
 @KDE_USE_FINAL_FALSE@libcollections_a_OBJECTS = $(libcollections_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libcollections_a_OBJECTS = $(libcollections_a_final_OBJECTS)
 
@@ -294,11 +294,11 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@	./$(DEPDIR)/musiccollection.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/videocollection.Po
 #>+ 9
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/bibtexcollection.moc.P $(DEPDIR)/musiccollection.moc.P $(DEPDIR)/videocollection.moc.P $(DEPDIR)/bookcollection.moc.P  $(DEPDIR)/libcollections_a.all_cpp.P  ./$(DEPDIR)/bibtexcollection.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/videocollection.moc.P $(DEPDIR)/bookcollection.moc.P $(DEPDIR)/musiccollection.moc.P $(DEPDIR)/bibtexcollection.moc.P  $(DEPDIR)/libcollections_a.all_cpp.P  ./$(DEPDIR)/bibtexcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/musiccollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/videocollection.Po
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/bibtexcollection.moc.P $(DEPDIR)/musiccollection.moc.P $(DEPDIR)/videocollection.moc.P $(DEPDIR)/bookcollection.moc.P  ./$(DEPDIR)/bibtexcollection.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/videocollection.moc.P $(DEPDIR)/bookcollection.moc.P $(DEPDIR)/musiccollection.moc.P $(DEPDIR)/bibtexcollection.moc.P  ./$(DEPDIR)/bibtexcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/musiccollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/videocollection.Po
@@ -592,14 +592,6 @@ uninstall-am: uninstall-info-am
 
 
 #>+ 3
-bibtexcollection.moc.cpp: $(srcdir)/bibtexcollection.h
-	$(MOC) $(srcdir)/bibtexcollection.h -o bibtexcollection.moc.cpp
-
-#>+ 3
-musiccollection.moc.cpp: $(srcdir)/musiccollection.h
-	$(MOC) $(srcdir)/musiccollection.h -o musiccollection.moc.cpp
-
-#>+ 3
 videocollection.moc.cpp: $(srcdir)/videocollection.h
 	$(MOC) $(srcdir)/videocollection.h -o videocollection.moc.cpp
 
@@ -608,8 +600,16 @@ bookcollection.moc.cpp: $(srcdir)/bookcollection.h
 	$(MOC) $(srcdir)/bookcollection.h -o bookcollection.moc.cpp
 
 #>+ 3
+musiccollection.moc.cpp: $(srcdir)/musiccollection.h
+	$(MOC) $(srcdir)/musiccollection.h -o musiccollection.moc.cpp
+
+#>+ 3
+bibtexcollection.moc.cpp: $(srcdir)/bibtexcollection.h
+	$(MOC) $(srcdir)/bibtexcollection.h -o bibtexcollection.moc.cpp
+
+#>+ 3
 clean-metasources:
-	-rm -f  bibtexcollection.moc.cpp musiccollection.moc.cpp videocollection.moc.cpp bookcollection.moc.cpp
+	-rm -f  videocollection.moc.cpp bookcollection.moc.cpp musiccollection.moc.cpp bibtexcollection.moc.cpp
 
 #>+ 2
 docs-am:
@@ -632,11 +632,11 @@ bcheck-am:
 	test ! -s bchecktest.cc.oldclass || test ! -s bchecktest.cc.class || cmp -s bchecktest.cc.oldclass bchecktest.cc.class
 
 #>+ 11
-libcollections_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/bibtexcollection.cpp $(srcdir)/musiccollection.cpp $(srcdir)/videocollection.cpp $(srcdir)/bookcollection.cpp bibtexcollection.moc.cpp bookcollection.moc.cpp videocollection.moc.cpp musiccollection.moc.cpp 
+libcollections_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/bibtexcollection.cpp $(srcdir)/musiccollection.cpp $(srcdir)/videocollection.cpp $(srcdir)/bookcollection.cpp videocollection.moc.cpp bookcollection.moc.cpp musiccollection.moc.cpp bibtexcollection.moc.cpp 
 	@echo 'creating libcollections_a.all_cpp.cpp ...'; \
 	rm -f libcollections_a.all_cpp.files libcollections_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libcollections_a.all_cpp.final; \
-	for file in bibtexcollection.cpp musiccollection.cpp videocollection.cpp bookcollection.cpp bibtexcollection.moc.cpp bookcollection.moc.cpp videocollection.moc.cpp musiccollection.moc.cpp ; do \
+	for file in bibtexcollection.cpp musiccollection.cpp videocollection.cpp bookcollection.cpp videocollection.moc.cpp bookcollection.moc.cpp musiccollection.moc.cpp bibtexcollection.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> libcollections_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libcollections_a.all_cpp.final; \
 	done; \

@@ -177,6 +177,7 @@ void ISBNValidator::insertDashesNonEnglish(QString& input_) const {
     }
   }
   // now pos1 is the position in the input string where the publisher group ends
+  // shift by one, so that now, pos1 is where the rest of the string starts
   if(input_[pos1] == '-') {
     ++pos1;
   }
@@ -197,7 +198,7 @@ void ISBNValidator::insertDashesNonEnglish(QString& input_) const {
 
   QString middle;
   if(pos3 == -1) {
-    middle = input_.mid(pos1);
+    middle = input_.mid(pos1, pos2-pos1);
   } else {
     middle = input_.mid(pos1, pos3-pos1);
   }

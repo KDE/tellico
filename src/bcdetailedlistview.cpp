@@ -104,17 +104,43 @@ void BCDetailedListView::addCollection(BCCollection* coll_) {
   if(colWidths.empty()) {
     colWidths.insert(colWidths.begin(), colNames.count(), -1); // automatic width
   }
-  // if the user runs Bookcase in another language, the column titles being viewed don't get
-  // saved correctly. Here, sort the widths just to find out if there are any non-zero values
-  // if not, then also need default attributes
-  //QValueList<int> newList = colWidths;
-  //qHeapSort(newList);
+
+  QValueList<int> colOrder = config->readIntListEntry("ColumnOrder");
+
+  // need to remove values for fields which don't exist in the current collection
+  QStringList newCols;
+  QValueList<int> newWidths, removeCols;
+  for(unsigned i = 0; i < colNames.count(); ++i) {
+    if(coll_->attributeByName(colNames[i]) != 0) {
+      newCols += colNames[i];
+      newWidths += colWidths[i];
+    } else {
+      removeCols += i;
+    }
+  }
+  colNames = newCols;
+  colWidths = newWidths;
+
+  qHeapSort(removeCols);
+  // now need to shift values in the order if any columns were removed
+  // only need to shift by number of "holes"
+  QValueList<int> newOrder;
+  for(QValueList<int>::ConstIterator it = colOrder.begin(); it != colOrder.end(); ++it) {
+    if(removeCols.findIndex(*it) == -1) {
+      int i = *it;
+      for(unsigned j = 0; j < removeCols.count() && removeCols[j] < i; ++j) {
+        --i;
+      }
+      newOrder += i;
+    }
+  }
+  colOrder = newOrder;
+
   bool none = true;
-  BCAttributeListIterator attIt(coll_->attributeList());
-  for( ; attIt.current(); ++attIt) {
-    if(colNames.contains(attIt.current()->name()) && colWidths.count() > 0) {
+  for(BCAttributeListIterator attIt(coll_->attributeList()); attIt.current(); ++attIt) {
+    if(colNames.findIndex(attIt.current()->name()) > -1 && colWidths.count() > 0) {
       addAttribute(attIt.current(), colWidths.front());
-      if(colWidths.front() > 0) {
+      if(none && colWidths.front() != 0) {
         none = false;
       }
       colWidths.pop_front();
@@ -123,10 +149,9 @@ void BCDetailedListView::addCollection(BCCollection* coll_) {
     }
   }
   if(none && columns() > 0) {
-    showColumn(0);
+    showColumn(coll_->attributeNames().findIndex(colNames[0]));
   }
 
-  QValueList<int> colOrder = config->readIntListEntry("ColumnOrder");
   QValueList<int>::ConstIterator it = colOrder.begin();
   for(int i = 0; it != colOrder.end(); ++it) {
     header()->moveSection(i++, *it);
@@ -368,69 +393,6 @@ void BCDetailedListView::clearSelection() {
   m_selectedUnits.clear();
 }
 
-// this is JUST for the initial setup
-// showing or hiding columsn should use showColumn()
-void BCDetailedListView::setColumns(BCCollection* coll_, const QStringList& colNames_,
-                                    const QValueList<int>& colWidths_) {
-//  kdDebug() << "BCDetailedListView::setColumns() " << endl;
-//  kdDebug() << "Titles: " << colNames_.join(QString::fromLatin1(";")) << endl;
-//  QString widths;
-//  QValueList<int>::ConstIterator wIt;
-//  for(wIt = colWidths_.begin(); wIt != colWidths_.end(); ++wIt) {
-//    widths += QString::number(*wIt) + ';';
-//  }
-//  kdDebug() << "Widths: " << widths << endl;
-  
-  if(!coll_) {
-    return;
-  }
-
-  if(columns() > 0) {
-    kdWarning() << "BCDetailedListView::setColumns() called when columns already exist!" << endl;
-    return;
-  }
-      
-  BCAttributeList list = coll_->attributeList();
-  
-  // initialize the width cache
-  m_columnWidths.resize(list.count(), 0);
-  
-  // iterate over the all the attributes
-  BCAttributeListIterator it(list);
-  for( ; it.current(); ++it) {
-//    kdDebug() << "BCDetailedListView::setColumns() - adding column " << it.current()->title() << endl;
-    // columns get added for every attribute
-    int col = addColumn(it.current()->title());
-    m_headerMenu->insertItem(it.current()->title(), col);
-    
-    // keep track of which columns should be compared numerically
-    m_isNumber.push_back(it.current()->type() == BCAttribute::Number);
-    
-    // bools have a checkmark pixmap, so center it. Numbers, too.
-    if(it.current()->type() == BCAttribute::Bool || it.current()->type() == BCAttribute::Number) {
-      setColumnAlignment(col, Qt::AlignHCenter);
-    }
-
-    // keep track of which columns should be compared numerically
-    m_isNumber.push_back(it.current()->type() == BCAttribute::Number);
-
-    // if the width is -1, then leave the width alone
-    // otherwise, set it
-    if(colWidths_[col] > -1) {
-      setColumnWidth(col, colWidths_[col]);
-      setColumnWidthMode(col, QListView::Manual);
-      m_columnWidths[header()->mapToSection(col)] = colWidths_[col];
-    }
-    
-    if(colWidths_[col] == 0) {
-      header()->setResizeEnabled(false, col);
-    } else if(colNames_.findIndex(it.current()->name()) > -1) {
-      m_headerMenu->setItemChecked(col, true);
-    }
-  }
-  slotUpdatePixmap();
-}
-
 bool BCDetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
   if(ev_->type() == QEvent::MouseButtonPress
       && static_cast<QMouseEvent*>(ev_)->button() == Qt::RightButton
@@ -612,10 +574,6 @@ void BCDetailedListView::modifyAttribute(BCAttribute* newAtt_, BCAttribute* oldA
   m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), newAtt_->title()); // add 1 since menu has title
 }
 
-//void BCDetailedListView::slotRemoveColumn(BCCollection* coll_, BCAttribute* att_) {
-//  slotRemoveColumn(coll_, att_->title());
-//}
-//
 void BCDetailedListView::removeAttribute(BCAttribute* att_) {
 //  kdDebug() << "BCDetailedListView::slotRemoveColumn() - " << att_->title() << endl;
 
@@ -650,6 +608,7 @@ void BCDetailedListView::removeAttribute(BCAttribute* att_) {
 
 void BCDetailedListView::reorderAttributes(const BCAttributeList& list_) {
 //  kdDebug() << "BCDetailedListView::reorderAttributes()" << endl;
+  // find the first out of place field
   int sec = 0;
   BCAttributeListIterator it(list_);
   for(sec = 0; it.current() && sec < columns(); ++sec, ++it) {
@@ -658,9 +617,12 @@ void BCDetailedListView::reorderAttributes(const BCAttributeList& list_) {
     }
   }
 
+  QStringList visible = visibleColumns();
   for( ; it.current() && sec < columns();  ++sec, ++it) {
     header()->setLabel(sec, it.current()->title());
+    bool isVisible = (visible.findIndex(it.current()->title()) > -1);
     m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), it.current()->title());
+    m_headerMenu->setItemChecked(m_headerMenu->idAt(sec+1), isVisible);
     m_columnWidths[sec] = 0;
     if(it.current()->type() == BCAttribute::Bool || it.current()->type() == BCAttribute::Number) {
       setColumnAlignment(header()->mapToIndex(sec), Qt::AlignHCenter);
@@ -668,6 +630,12 @@ void BCDetailedListView::reorderAttributes(const BCAttributeList& list_) {
       setColumnAlignment(header()->mapToIndex(sec), Qt::AlignLeft);
     }
     m_isNumber[sec] = (it.current()->type() == BCAttribute::Number);
+
+    if(isVisible) {
+      showColumn(sec);
+    } else {
+      hideColumn(sec);
+    }
   }
 
   slotRefresh();
@@ -725,6 +693,12 @@ void BCDetailedListView::slotUpdatePixmap() {
 }
 
 void BCDetailedListView::saveConfig(BCCollection* coll_) {
+  // only save if not-empty, or not initial startup collection
+  if(childCount() == 0 &&
+     static_cast<Bookcase*>(QObjectAncestor(parent(), "Bookcase"))->isNewDocument()) {
+    return;
+  }
+
   KConfig* config = kapp->config();
   config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->unitName()));
 

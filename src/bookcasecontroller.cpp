@@ -184,4 +184,5 @@ void BookcaseController::slotDeleteSelectedUnits() {
     m_bookcase->doc()->slotDeleteUnit(it.current());
   }
   m_selectedUnits.clear();
+  m_bookcase->slotUnitCount(m_selectedUnits.count());
 }

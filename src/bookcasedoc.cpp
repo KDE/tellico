@@ -44,7 +44,6 @@ BookcaseDoc::BookcaseDoc(Bookcase* parent_, const char* name_/*=0*/)
     : QObject(parent_, name_),
       m_coll(0),
       m_isModified(false) {
-//  m_url.setFileName(i18n("Untitled"));
   newDocument(BCCollection::Book);
 }
 
@@ -124,7 +123,7 @@ bool BookcaseDoc::saveModified() {
                                                     KStdGuiItem::discard());
     switch(want_save) {
       case KMessageBox::Yes:
-        if(m_url.fileName() == i18n("Untitled")) {
+        if(app->isNewDocument()) {
           app->slotFileSaveAs();
         } else {
           saveDocument(URL());
@@ -234,7 +233,8 @@ void BookcaseDoc::appendCollection(BCCollection* coll_) {
   }
 
   if(coll_->collectionType() != m_coll->collectionType()) {
-    kdWarning() << "BookcaseDoc::appendCollection() - appended collections must be the same type!" << endl;
+    kdWarning() << "BookcaseDoc::appendCollection() - appended collections must "
+                   "be the same type!" << endl;
     return;
   }
 

@@ -296,7 +296,7 @@ libtranslators_a_nofinal_OBJECTS = bibtexexporter.$(OBJEXT) \
 	textimporter.$(OBJEXT) bibtexhandler.$(OBJEXT) \
 	bibtexmlexporter.$(OBJEXT) htmlexporter.$(OBJEXT) \
 	csvexporter.$(OBJEXT)\
-textimporter.moc.o importer.moc.o xsltimporter.moc.o bibtexmlimporter.moc.o csvimporter.moc.o bookcasexmlimporter.moc.o bibteximporter.moc.o 
+xsltimporter.moc.o bookcasexmlimporter.moc.o importer.moc.o bibtexmlimporter.moc.o bibteximporter.moc.o textimporter.moc.o csvimporter.moc.o 
 @KDE_USE_FINAL_FALSE@libtranslators_a_OBJECTS = $(libtranslators_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libtranslators_a_OBJECTS = $(libtranslators_a_final_OBJECTS)
 
@@ -318,7 +318,7 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/xsltimporter.Po
 #>+ 29
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/textimporter.moc.P $(DEPDIR)/xsltimporter.moc.P $(DEPDIR)/bibtexmlimporter.moc.P $(DEPDIR)/csvimporter.moc.P $(DEPDIR)/bookcasexmlimporter.moc.P $(DEPDIR)/bibteximporter.moc.P  $(DEPDIR)/libtranslators_a.all_cpp.P  ./$(DEPDIR)/bibtexexporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/xsltimporter.moc.P $(DEPDIR)/bookcasexmlimporter.moc.P $(DEPDIR)/bibtexmlimporter.moc.P $(DEPDIR)/bibteximporter.moc.P $(DEPDIR)/textimporter.moc.P $(DEPDIR)/csvimporter.moc.P  $(DEPDIR)/libtranslators_a.all_cpp.P  ./$(DEPDIR)/bibtexexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexhandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibteximporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexmlexporter.Po \
@@ -332,7 +332,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xsltexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xslthandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/xsltimporter.Po
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/textimporter.moc.P $(DEPDIR)/xsltimporter.moc.P $(DEPDIR)/bibtexmlimporter.moc.P $(DEPDIR)/csvimporter.moc.P $(DEPDIR)/bookcasexmlimporter.moc.P $(DEPDIR)/bibteximporter.moc.P  ./$(DEPDIR)/bibtexexporter.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/xsltimporter.moc.P $(DEPDIR)/bookcasexmlimporter.moc.P $(DEPDIR)/bibtexmlimporter.moc.P $(DEPDIR)/bibteximporter.moc.P $(DEPDIR)/textimporter.moc.P $(DEPDIR)/csvimporter.moc.P  ./$(DEPDIR)/bibtexexporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexhandler.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibteximporter.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bibtexmlexporter.Po \
@@ -766,36 +766,36 @@ uninstall-info: uninstall-info-recursive
 
 
 #>+ 3
-textimporter.moc.cpp: $(srcdir)/textimporter.h
-	$(MOC) $(srcdir)/textimporter.h -o textimporter.moc.cpp
-
-#>+ 3
-importer.moc.cpp: $(srcdir)/importer.h
-	$(MOC) $(srcdir)/importer.h -o importer.moc.cpp
-
-#>+ 3
 xsltimporter.moc.cpp: $(srcdir)/xsltimporter.h
 	$(MOC) $(srcdir)/xsltimporter.h -o xsltimporter.moc.cpp
-
-#>+ 3
-bibtexmlimporter.moc.cpp: $(srcdir)/bibtexmlimporter.h
-	$(MOC) $(srcdir)/bibtexmlimporter.h -o bibtexmlimporter.moc.cpp
-
-#>+ 3
-csvimporter.moc.cpp: $(srcdir)/csvimporter.h
-	$(MOC) $(srcdir)/csvimporter.h -o csvimporter.moc.cpp
 
 #>+ 3
 bookcasexmlimporter.moc.cpp: $(srcdir)/bookcasexmlimporter.h
 	$(MOC) $(srcdir)/bookcasexmlimporter.h -o bookcasexmlimporter.moc.cpp
 
 #>+ 3
+importer.moc.cpp: $(srcdir)/importer.h
+	$(MOC) $(srcdir)/importer.h -o importer.moc.cpp
+
+#>+ 3
+bibtexmlimporter.moc.cpp: $(srcdir)/bibtexmlimporter.h
+	$(MOC) $(srcdir)/bibtexmlimporter.h -o bibtexmlimporter.moc.cpp
+
+#>+ 3
 bibteximporter.moc.cpp: $(srcdir)/bibteximporter.h
 	$(MOC) $(srcdir)/bibteximporter.h -o bibteximporter.moc.cpp
 
 #>+ 3
+textimporter.moc.cpp: $(srcdir)/textimporter.h
+	$(MOC) $(srcdir)/textimporter.h -o textimporter.moc.cpp
+
+#>+ 3
+csvimporter.moc.cpp: $(srcdir)/csvimporter.h
+	$(MOC) $(srcdir)/csvimporter.h -o csvimporter.moc.cpp
+
+#>+ 3
 clean-metasources:
-	-rm -f  textimporter.moc.cpp importer.moc.cpp xsltimporter.moc.cpp bibtexmlimporter.moc.cpp csvimporter.moc.cpp bookcasexmlimporter.moc.cpp bibteximporter.moc.cpp
+	-rm -f  xsltimporter.moc.cpp bookcasexmlimporter.moc.cpp importer.moc.cpp bibtexmlimporter.moc.cpp bibteximporter.moc.cpp textimporter.moc.cpp csvimporter.moc.cpp
 
 #>+ 2
 docs-am:
@@ -818,11 +818,11 @@ bcheck-am:
 	test ! -s bchecktest.cc.oldclass || test ! -s bchecktest.cc.class || cmp -s bchecktest.cc.oldclass bchecktest.cc.class
 
 #>+ 11
-libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/bookcasexmlimporter.cpp $(srcdir)/bookcasexmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp importer.moc.cpp textimporter.moc.cpp xsltimporter.moc.cpp csvimporter.moc.cpp bibtexmlimporter.moc.cpp bibteximporter.moc.cpp bookcasexmlimporter.moc.cpp 
+libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/bookcasexmlimporter.cpp $(srcdir)/bookcasexmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp xsltimporter.moc.cpp importer.moc.cpp bookcasexmlimporter.moc.cpp bibteximporter.moc.cpp bibtexmlimporter.moc.cpp textimporter.moc.cpp csvimporter.moc.cpp 
 	@echo 'creating libtranslators_a.all_cpp.cpp ...'; \
 	rm -f libtranslators_a.all_cpp.files libtranslators_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libtranslators_a.all_cpp.final; \
-	for file in bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp importer.moc.cpp textimporter.moc.cpp xsltimporter.moc.cpp csvimporter.moc.cpp bibtexmlimporter.moc.cpp bibteximporter.moc.cpp bookcasexmlimporter.moc.cpp ; do \
+	for file in bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp xsltimporter.moc.cpp importer.moc.cpp bookcasexmlimporter.moc.cpp bibteximporter.moc.cpp bibtexmlimporter.moc.cpp textimporter.moc.cpp csvimporter.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> libtranslators_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libtranslators_a.all_cpp.final; \
 	done; \

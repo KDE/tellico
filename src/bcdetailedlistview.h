@@ -39,7 +39,7 @@ class BCFilter;
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: bcdetailedlistview.h 260 2003-11-05 06:06:18Z robby $
+ * @version $Id: bcdetailedlistview.h 307 2003-11-26 01:45:44Z robby $
  */
 class BCDetailedListView : public KListView {
 Q_OBJECT
@@ -65,14 +65,6 @@ public:
    * @param unit A pointer to the unit
    */
   void setUnitSelected(BCUnit* unit);
-  /**
-   * Rearranges the columns, given the names of the attributes.
-   *
-   * @param coll A pointer to the collection
-   * @param colTitles The column titles
-   * @param colWidths A list of the column widths
-   */
-  void setColumns(BCCollection* coll, const QStringList& colTitles, const QValueList<int>& colWidths);
   void setFilter(const BCFilter* filter);
   const BCFilter* filter() const;
   
@@ -131,6 +123,9 @@ public slots:
    * Resets the list view, clearing and deleting all items.
    */
   void slotReset();
+  /**
+   * Refreshes the view, repopulating all items.
+   */
   void slotRefresh();
 
 protected:

@@ -94,7 +94,8 @@ Bookcase::Bookcase(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainWindo
     m_filterDlg(0),
     m_collFieldsDlg(0),
     m_currentStep(1),
-    m_maxSteps(2) {
+    m_maxSteps(2),
+    m_newDocument(true) {
 
   // do main window stuff like setting the icon
   initWindow();
@@ -616,10 +617,10 @@ void Bookcase::saveOptions() {
   toolBar("collectionToolBar")->saveSettings(m_config, QString::fromLatin1("CollectionToolBar"));
 #endif
   m_fileOpenRecent->saveEntries(m_config, QString::fromLatin1("Recent Files"));
-  if(m_doc->URL().fileName() != i18n("Untitled")) {
+  if(!isNewDocument()) {
     m_config->writeEntry("Last Open File", m_doc->URL().url());
   } else {
-    // decided I didn't want the entry over-written when exited with an eempty document
+    // decided I didn't want the entry over-written when exited with an empty document
 //    m_config->writeEntry("Last Open File", QString::null);
   }
 
@@ -643,8 +644,9 @@ void Bookcase::readCollectionOptions(BCCollection* coll_) {
 }
 
 void Bookcase::saveCollectionOptions(BCCollection* coll_) {
-//  kdDebug() << "Bookcase::saveCollectionOptions() = " coll_->unitName() << endl;
-  if(!coll_ || coll_->unitList().isEmpty()) {
+//  kdDebug() << "Bookcase::saveCollectionOptions() = " << coll_->unitName() << endl;
+  // don't save initial collection options
+  if(!coll_ || isNewDocument()) {
     return;
   }
 
@@ -739,22 +741,11 @@ void Bookcase::readOptions() {
   }
   BCAttribute::setSurnamePrefixList(prefixes);
 
-  BCCollection* coll = m_doc->collection();
-  m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll->unitName()));
-
-  QString defaultGroup = coll->defaultGroupAttribute();
-  QString unitGroup = m_config->readEntry("Group By", defaultGroup);
-  if(!coll->unitGroups().contains(unitGroup)) {
-    unitGroup = defaultGroup;
-  }
-  m_groupView->setGroupAttribute(coll, unitGroup);
-
-  // make sure the right combo element is selected
-  slotUpdateCollectionToolBar(coll);
+  readCollectionOptions(m_doc->collection());
 }
 
 void Bookcase::saveProperties(KConfig* cfg_) {
-  if(m_doc->URL().fileName() != i18n("Untitled") && !m_doc->isModified()) {
+  if(!isNewDocument() && !m_doc->isModified()) {
     // saving to tempfile not necessary
   } else {
     KURL url = m_doc->URL();
@@ -819,6 +810,7 @@ void Bookcase::slotFileNew(int type_) {
     m_doc->newDocument(type_);
     slotEnableOpenedActions(true);
     slotEnableModifiedActions(false);
+    m_newDocument = true;
   }
 
   slotStatusMsg(i18n(ready));
@@ -883,6 +875,7 @@ bool Bookcase::openURL(const KURL& url_) {
     slotUpdateFilter(QString::null);
     slotEnableOpenedActions(true);
     slotEnableModifiedActions(false);
+    m_newDocument = false;
   }
 
   return success;
@@ -894,10 +887,11 @@ void Bookcase::slotFileSave() {
   }
   slotStatusMsg(i18n("Saving file..."));
 
-  if(m_doc->URL().fileName() == i18n("Untitled")) {
+  if(isNewDocument()) {
     slotFileSaveAs();
   } else {
     m_doc->saveDocument(m_doc->URL());
+    m_newDocument = false;
   }
   m_fileSave->setEnabled(false);
   setCaption(m_doc->URL().fileName(), false);
@@ -947,6 +941,7 @@ void Bookcase::slotFileSaveAs() {
     m_doc->saveDocument(url);
     m_fileOpenRecent->addURL(url);
     setCaption(m_doc->URL().fileName(), false);
+    m_newDocument = false;
   }
 
   slotStatusMsg(i18n(ready));

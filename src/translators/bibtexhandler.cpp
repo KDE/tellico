@@ -202,5 +202,10 @@ QString& BibtexHandler::cleanText(QString& text_) {
   rx.setMinimal(true);
   text_.replace(rx, QString::null);
   text_.replace(QRegExp(QString::fromLatin1("[{}]")), QString::null);
+#if QT_VERSION >= 0x030100
+  text_.replace('~', ' ');
+#else
+  text_.replace(QRegExp(QString::fromLatin1("~")), QString::fromLatin1(" "));
+#endif
   return text_;
 }

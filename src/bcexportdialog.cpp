@@ -83,7 +83,7 @@ BCExportDialog::BCExportDialog(ExportFormat format_, BCCollection* coll_, Bookca
   if(format_ == Bibtex || format_ == CSV || format_ == Text) {
     m_encodeUTF8->setEnabled(false);
     m_encodeLocale->setChecked(true);
-    m_encodeLocale->setEnabled(false);
+//    m_encodeLocale->setEnabled(false);
   }
   connect(this, SIGNAL(okClicked()), SLOT(slotSaveOptions()));
 }

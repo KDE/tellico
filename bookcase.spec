@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.7.1
+%define version 0.7.2
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
@@ -80,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/doc/HTML/*/bookcase/*
 
 %changelog
+* Tue Nov 25 2003 Robby Stephenson <robby@periapsis.org> 0.7.2-1rls
+- Version 0.7.2
+
 * Sun Nov  9 2003 Robby Stephenson <robby@periapsis.org> 0.7.1-1rls
 - Version 0.7.1
 

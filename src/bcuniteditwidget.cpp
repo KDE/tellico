@@ -154,9 +154,7 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
         hasEdit[count%NCOLS] = true;
       }
       widget->updateGeometry();
-      if(it.current()->type() != BCAttribute::Para &&
-         it.current()->type() != BCAttribute::Table &&
-         it.current()->type() != BCAttribute::Table2) {
+      if(!it.current()->isSingleCategory()) {
         maxHeight = QMAX(maxHeight, widget->sizeHint().height());
       }
       ++count;

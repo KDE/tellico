@@ -1,3 +1,28 @@
+2003-11-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug in remembering visible columns for custom fields.
+
+2003-11-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed another ISBN format bug for non-english publishers.
+
+2003-11-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with auto-capitalization when global setting was turned off.
+	* Fixed bug with not saving options for empty collections.
+	* Fixed bug with reordering visible fields.
+
+2003-11-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug to update status line after deleting entries.
+
+2003-11-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated German tranlation, thanks to Gerrit Albrecht.
+	* Added Swedish translation, thanks to Karolina Lindqvist.
+	* Fixed bug with adding a 2-column table.
+	* Cut the 0.7.x branch.	
+
 2003-11-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed charset encoding bug.

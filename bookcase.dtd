@@ -17,7 +17,8 @@
    ================================================================
 -->
 <!ELEMENT bookcase (collection+)>
-<!ATTLIST bookcase syntexVersion CDATA #REQUIRED>
+<!ATTLIST bookcase syntaxVersion CDATA #REQUIRED>
+<!ATTLIST bookcase xmlns CDATA #FIXED "http://periapsis.org/bookcase/">
 
 <!ELEMENT collection (fields*, bibtex-preamble*, macros*, entry*)>
 <!ATTLIST collection title CDATA #REQUIRED>
@@ -46,7 +47,7 @@
 <!ELEMENT subtitle (#PCDATA)>
 <!ELEMENT authors (author+)>
 <!ELEMENT author (#PCDATA)>
-<!ELEMENT binding (#PCDA11TA)>
+<!ELEMENT binding (#PCDATA)>
 <!ELEMENT pur_date (#PCDATA)>
 <!ELEMENT pur_price (#PCDATA)>
 <!ELEMENT publisher (#PCDATA)>

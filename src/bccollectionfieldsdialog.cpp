@@ -479,13 +479,10 @@ void BCCollectionFieldsDialog::slotHighlightedChanged(int index_) {
 
   int flags = att->flags();
   m_complete->setChecked(flags & BCAttribute::AllowCompletion);
-
   m_multiple->setChecked(flags & BCAttribute::AllowMultiple);
-  m_multiple->setEnabled(att->name() != QString::fromLatin1("title"));
-
   m_grouped->setChecked(flags & BCAttribute::AllowGrouped);
 
-  m_btnDelete->setEnabled(!(att->flags() & BCAttribute::NoDelete));
+  m_btnDelete->setEnabled(!(flags & BCAttribute::NoDelete));
 
   // default button is enabled only if default collection contains the attribute
   if(m_defaultCollection) {

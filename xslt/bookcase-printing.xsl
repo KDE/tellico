@@ -11,7 +11,7 @@
    ===================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl 264 2003-11-06 07:04:54Z robby $
+   $Id: bookcase-printing.xsl 295 2003-11-22 07:40:03Z robby $
 
    Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
@@ -45,7 +45,7 @@
 <xsl:param name="column-names" select="'title'"/>
 <xsl:variable name="columns" select="str:tokenize($column-names)"/>
 
-<!-- If you want the header row printed, showing which attributes
+<!-- If you want the header row printed, showing which fields
      are printed, change this to true(), otherwise false() -->
 <xsl:param name="show-headers" select="false()"/>
 

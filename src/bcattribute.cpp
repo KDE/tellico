@@ -46,7 +46,7 @@ BCAttribute::BCAttribute(const QString& name_, const QString& title_, AttributeT
   if(isSingleCategory()) {
     m_category = m_title;
   }
-  if(m_type == Table) {
+  if(m_type == Table || m_type == Table2) {
     m_flags = AllowMultiple;
   }
 }
@@ -131,6 +131,12 @@ void BCAttribute::setType(BCAttribute::AttributeType type_) {
   if(m_type != BCAttribute::Choice) {
     m_allowed = QString::null;
   }
+  if(m_type == Table || m_type == Table2) {
+    m_flags |= AllowMultiple;
+  }
+  if(isSingleCategory()) {
+    m_category = m_title;
+  }
 }
 
 void BCAttribute::setAllowed(const QStringList& allowed_) {
@@ -180,9 +186,7 @@ QString BCAttribute::format(const QString& value_, FormatFlag flag_) {
       text = formatDate(value_);
       break;
     case FormatPlain:
-      if(autoCapitalize()) {
-        text = capitalize(value_);
-      }
+      text = autoCapitalize() ? capitalize(value_) : value_;
       break;
     default:
       text = value_.simplifyWhiteSpace();
