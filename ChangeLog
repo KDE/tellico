@@ -1,3 +1,13 @@
+2002-08-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Added two new XSLT files
+	* Added printing support using KHTML
+	* Added RPM spec file to automake
+
+2002-02-21    <robby@radiojodi.com>
+
+	* Released Bookcase version 0.2
+
 2002-02-20    <robby@radiojodi.com>
 
 	* Added BCColumnView::slotShowUnit() so to ensure that the proper listview in the stack is shown.

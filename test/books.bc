@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bookcase>
+<bookcase version="1" >
+<collection unitTitle="Book" title="My Books" unit="book" >
+<book>
+<title>my title</title>
+   <subtitle>my subtitle</subtitle>
+   <author>my author</author>
+   <binding>Paperback</binding>
+   <pur_date>my date</pur_date>
+   <pur_price>my price</pur_price>
+   <publisher>my publisher</publisher>
+   <edition>my edition</edition>
+   <cr_year>my cr year</cr_year>
+   <pub_year>my pub year</pub_year>
+   <isbn>3-24876276-4</isbn>
+   <lccn>2348975629</lccn>
+   <pages>3746</pages>
+   <language>Klingon</language>
+   <genre>Science Fiction</genre>
+   <keywords>lots of keywords; another</keywords>
+   <series>my series</series>
+   <series_num>2</series_num>
+   <condition>Used</condition>
+   <signed/>
+   <read/>
+   <gift/>
+   <loaned/>
+   <rating>3 - Neutral</rating>
+   <comments>a very long comment about the book and something that struck me while I was reading it</comments>  </book> </collection></bookcase>

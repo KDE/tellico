@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sun Sep 23 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -16,9 +16,12 @@
  ***************************************************************************/
 
 #include "bcattribute.h"
+
 #include <klocale.h>
 #include <kdebug.h>
+
 #include <qstringlist.h>
+#include <qregexp.h>
 
 //these get overwritten, but are here to allow them to be static
 QStringList BCAttribute::m_articles = QStringList();
@@ -80,6 +83,10 @@ int BCAttribute::flags() const {
   return m_flags;
 }
 
+const QString& BCAttribute::description() const {
+  return m_desc;
+}
+
 void BCAttribute::setTitle(const QString& title_) {
   m_title = title_;
 }
@@ -94,6 +101,10 @@ void BCAttribute::setAllowed(const QStringList& list_) {
 
 void BCAttribute::setFlags(int flags_) {
   m_flags = flags_;
+}
+
+void BCAttribute::setDescription(const QString& desc_) {
+  m_desc = desc_;
 }
 
 QString BCAttribute::formatTitle(const QString& title_) {
@@ -170,10 +181,11 @@ QString BCAttribute::formatDate(const QString& date_) {
 }
 
 QString BCAttribute::capitalize(const QString& str_) {
-  // we know that nothing is done to the last character and it saves a position check
+  // nothing is done to the last character which saves a position check
   QString s = str_;
   // first letter is always capitalized
   s.replace(0, 1, s.at(0).upper());
+
   // regexp to split words
   QRegExp rx("[\\s,.-;]");
   int pos = s.find(rx);
@@ -188,7 +200,7 @@ QString BCAttribute::capitalize(const QString& str_) {
       nextPos = s.length();
     }
     word = s.mid(pos+1, nextPos-pos-1);
-    if(notCap.contains(word) == 0) {
+    if(notCap.contains(word) == 0 && !word.isEmpty()) {
       s.replace(pos+1, 1, s.at(pos+1).upper());
     }
     pos = s.find(rx, pos+1);

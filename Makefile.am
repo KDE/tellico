@@ -1,8 +1,15 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 
-SUBDIRS = src po doc icons 
+SUBDIRS = src po doc icons xslt test 
 
-EXTRA_DIST = bookcase.kdevprj AUTHORS COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.dtd bookcase.spec 
+EXTRA_DIST = bookcase.kdevprj admin AUTHORS COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.desktop bookcase.spec bookcase.dtd 
+
+install-data-local:
+	$(mkinstalldirs) $(kde_datadir)/bookcase/
+	$(INSTALL_DATA) $(srcdir)/bookcase.dtd $(kde_datadir)/bookcase/bookcase.dtd
+
+uninstall-local:
+	-rm -f $(kde_datadir)/bookcase/bookcase.dtd
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
@@ -18,16 +25,11 @@ $(top_srcdir)/subdirs:
 $(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/admin/libtool.m4.in
 	@cd $(top_srcdir) && cat admin/acinclude.m4.in admin/libtool.m4.in > acinclude.m4
 
-MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files 
-
-kdelnkdir = $(kde_appsdir)/Applications
-kdelnk_DATA = bookcase.desktop
+MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files bookcase.spec
 
 package-messages:
 	$(MAKE) -f admin/Makefile.common package-messages
 	$(MAKE) -C po merge
-
-EXTRA_DIST = admin 
 
 dist-hook:
 	cd $(top_distdir) && perl admin/am_edit -padmin

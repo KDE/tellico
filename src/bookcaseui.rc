@@ -9,12 +9,12 @@
   </Menu>
   <Menu name="settings"><text>Show Browse Toolbar</text>
     <Action name="settings_show_browsetoolbar"/>
-  </Menu>-->
+  </Menu>
  <Menu name="settings"><text>&amp;Settings</text>
   <Action name="toggle_edit_widget"/>
   <Action name="toggle_detail_widget"/>
  </Menu>
-<1-- <Menu name="reports"><text>&amp;Reports</text>
+ <Menu name="reports"><text>&amp;Reports</text>
   <Action name="reports_full"/>-->
  </Menu>
 </MenuBar>

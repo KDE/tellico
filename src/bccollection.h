@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -37,7 +37,7 @@
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bccollection.h,v 1.15 2002/01/12 03:11:01 robby Exp $
+ * @version $Id: bccollection.h,v 1.17 2002/09/22 03:31:43 robby Exp $
  */
 class BCCollection {
 public:
@@ -258,6 +258,7 @@ public:
    * @param id The id for the collection
    */
   static BCCollection* Books(int id);
+#if 0
   /**
    * A convenience function to return a pointer to a standard CD collection.
    * It has the following attributes:
@@ -281,7 +282,7 @@ public:
    * @param id The id for the collection
    */
   static BCCollection* Videos(int id);
-
+#endif
 protected:
   /**
    * The copy constructor is private, to ensure that it's never used.

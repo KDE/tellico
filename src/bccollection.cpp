@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,13 +24,13 @@ BCCollection::BCCollection(int id_, const QString& title_, const QString& unitNa
   : m_id(id_), m_title(title_), m_unitName(unitName_), m_unitTitle(unitTitle_), m_iconName(iconName_) {
   m_unitList.setAutoDelete(true);
   m_attributeList.setAutoDelete(true);
-  m_groupAttribute = NULL;
+  m_groupAttribute = 0;
   m_isCustom = true;
 
   // all collections have a title attribute for their units
   BCAttribute* att = new BCAttribute("title", i18n("Title"));
   att->setGroup(i18n("General"));
-  att->setFlags(BCAttribute::FormatTitle);
+  att->setFlags(BCAttribute::FormatTitle | BCAttribute::DontComplete);
   addAttribute(att);
 }
 
@@ -87,7 +87,7 @@ void BCCollection::addUnit(BCUnit* unit_) {
   }
 
   m_unitList.append(unit_);
-  kdDebug() << "BCCollection::addUnit() - added unit (" << unit_->attribute("title") << ")\n";
+//  kdDebug() << "BCCollection::addUnit() - added unit (" << unit_->attribute("title") << ")\n";
 }
 
 bool BCCollection::deleteUnit(BCUnit* unit_) {
@@ -180,7 +180,7 @@ BCAttribute* BCCollection::attributeByName(const QString& name_) {
       return it.current();
     }
   }
-  return NULL;
+  return 0;
 }
 
 // can't be const since attributeByName() is not const
@@ -307,11 +307,13 @@ BCCollection* BCCollection::Books(int id_) {
   att = new BCAttribute("isbn", i18n("ISBN#"));
   att->setGroup(i18n("Publishing"));
   att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
+  att->setDescription(i18n("International Standard Book Number"));
   coll->addAttribute(att);
 
   att = new BCAttribute("lccn", i18n("LCCN#"));
   att->setGroup(i18n("Publishing"));
   att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
+  att->setDescription(i18n("Library of Congress Control Number"));
   coll->addAttribute(att);
 
   att = new BCAttribute("pages", i18n("Pages"));
@@ -387,6 +389,7 @@ BCCollection* BCCollection::Books(int id_) {
   return coll;
 }
 
+#if 0
 BCCollection* BCCollection::CDs(int id_) {
   BCCollection* coll = new BCCollection(id_, i18n("My CDs"), "cd", i18n("CD"), "cd");
 
@@ -455,3 +458,4 @@ BCCollection* BCCollection::Videos(int id_) {
   coll->m_isCustom = false;
   return coll;
 }
+#endif

@@ -3,7 +3,7 @@
                      -------------------
         begin        : Wed Aug 29 21:00:54 CEST 2001
         copyright    : (C) 2001 by Robby Stephenson
-        email        : robby@radiojodi.com
+        email        : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -24,17 +24,18 @@
 
 // forward declarations
 class BookcaseDoc;
-class BCColumnView;
+class BCDetailedListView;
 class BCUnitEditWidget;
 class BCCollectionView;
 class BCUnit;
 class ConfigDialog;
 class KProgress;
 class QCloseEvent;
+class QSplitter;
 
 // include files for KDE
-#include <kapp.h>
-#include <kdockwidget.h>
+#include <kapplication.h>
+#include <kmainwindow.h>
 #include <kaccel.h>
 #include <kaction.h>
 
@@ -42,20 +43,21 @@ class QCloseEvent;
 //#include <qmap.h>
 //#include <qdict.h>
 #include <qvaluelist.h>
+#include <qdom.h>
 
 /**
  * The base class for Bookcase application windows. It sets up the main
  * window and reads the config file as well as providing a menubar, toolbar
  * and statusbar. Bookcase reimplements the methods that KDockMainWindow provides
  * for main window handling and supports full session management as well as using KActions.
- * @see KDockMainWindow
+ * @see KMainWindow
  * @see KApplication
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: bookcase.h,v 1.14 2002/01/13 22:33:25 robby Exp $
+ * @version $Id: bookcase.h,v 1.19 2002/10/12 06:01:03 robby Exp $
  */
-class Bookcase : public KDockMainWindow {
+class Bookcase : public KMainWindow {
 Q_OBJECT
 
 public:
@@ -155,11 +157,11 @@ public slots:
   /**
    * Toggles the editing widget.
    */
-  void slotToggleEditWidget();
+//  void slotToggleEditWidget();
   /**
    * Toggles the detail widget.
    */
-  void slotToggleDetailWidget();
+//  void slotToggleDetailWidget();
   /**
    * Shows the configuration dialog for the application.
    */
@@ -207,6 +209,13 @@ public slots:
    * button is clicked in the dialog
    */
   void slotHandleConfigChange();
+  /**
+   * Returns the tree from the collection view. This has the advantage of the
+   * authors and titles being already formatted.
+   *
+   * @return The QDomDocument object
+   */
+  QDomDocument collectionViewTree();
 
 protected:
   /**
@@ -311,16 +320,15 @@ private:
   KAction* m_editFindNext;
   KToggleAction* m_toggleToolBar;
   KToggleAction* m_toggleStatusBar;
-  KToggleAction* m_toggleEditWidget;
-  KToggleAction* m_toggleDetailWidget;
   KAction* m_preferences;
 
   KAction* m_fileNewCollection;
   KAction* m_reportsFull;
 
-  KProgress* m_progress;
+  QSplitter* m_split;
 
-  BCColumnView* m_columnView;
+  KProgress* m_progress;
+  BCDetailedListView* m_columnView;
   BCUnitEditWidget* m_editWidget;
   BCCollectionView* m_collView;
   BookcaseDoc* m_doc;

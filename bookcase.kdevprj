@@ -19,26 +19,28 @@ type=DATA
 [Config for BinMakefileAm]
 addcxxflags=
 bin_program=bookcase
-cxxflags=\s-O3 -g3 -Wall
-ldadd=\s$(LIB_KFILE) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)
-ldflags=
+cflags=
+cppflags=
+cxxflags=\s-O3 -Wall
+ldadd=-lkdeprint -lxml2 -lxslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)
+ldflags=\s                 \s
 
 [General]
 AMChanged=false
 author=Robby Stephenson
-configure_args=--enable-debug --prefix=/usr/local
-email=robby@radiojodi.com
+configure_args=\s--build=i386-linux --host=i386-linux --target=i386-linux --prefix=/usr/local -enable-debug\s
+email=robby@periapsis.org
 kdevprj_version=1.3
 lfv_open_groups=Others,Sources,User Interface
 make_options=\s-j1
-makefiles=Makefile.am,src/Makefile.am,doc/Makefile.am,doc/en/Makefile.am,po/Makefile.am,icons/Makefile.am
+makefiles=Makefile.am,src/Makefile.am,doc/Makefile.am,doc/en/Makefile.am,po/Makefile.am,icons/Makefile.am,xslt/Makefile.am,test/Makefile.am,admin/Makefile.am
 modifyMakefiles=true
 project_name=Bookcase
 project_type=normal_kde2
-sgml_file=/home/robby/kde/bookcase/doc/en/index.docbook
+sgml_file=/home/robby/projects/bookcase/doc/en/index.docbook
 short_info=
-sub_dir=src
-version=0.2
+sub_dir=src/
+version=0.3
 version_control=CVS
 workspace=1
 
@@ -48,27 +50,19 @@ install=false
 install_location=
 type=DATA
 
-[KPP]
-kpp_appgrp=
-kpp_bldroot=
-kpp_icon=0
-kpp_license=5
-kpp_summary=
-kpp_url=http://radiojodi.com/bookcase/
-kpp_version=0.2
-
 [LFV Groups]
 GNU=AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,NEWS
 Headers=*.h,*.hh,*.hxx,*.hpp,*.H
 Others=*
 Sources=*.cpp,*.c,*.cc,*.C,*.cxx,*.ec,*.ecpp,*.lxx,*.l++,*.ll,*.l
 Translations=*.po
-User Interface=*.kdevdlg,*.ui,*.rc
+User Interface=*.kdevdlg,*.ui,*.rc,*.dlg
 groups=Headers,Sources,User Interface,Translations,GNU,Others
 
 [Makefile.am]
-files=bookcase.kdevprj,AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,bookcase.lsm,bookcase.desktop,bookcase.dtd,bookcase.spec
-sub_dirs=src,po,doc,icons
+files=bookcase.kdevprj,AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,bookcase.lsm,bookcase.desktop,bookcase.spec.in,bookcase.spec,bookcase.dtd
+sub_dirs=src,po,doc,icons,xslt,test,admin
+type=normal
 
 [README]
 dist=true
@@ -82,6 +76,17 @@ install=false
 install_location=
 type=DATA
 
+[admin/Makefile.am]
+files=admin/install-sh
+sub_dirs=
+type=normal
+
+[admin/install-sh]
+dist=true
+install=false
+install_location=
+type=DATA
+
 [bookcase.desktop]
 dist=true
 install=false
@@ -90,8 +95,8 @@ type=DATA
 
 [bookcase.dtd]
 dist=true
-install=false
-install_location=
+install=true
+install_location=$$(kde_datadir)/bookcase/bookcase.dtd
 type=DATA
 
 [bookcase.kdevprj]
@@ -112,6 +117,12 @@ install=false
 install_location=
 type=DATA
 
+[bookcase.spec.in]
+dist=false
+install=false
+install_location=
+type=DATA
+
 [doc/Makefile.am]
 sub_dirs=en
 type=normal
@@ -124,11 +135,11 @@ type=normal
 [doc/en/index.docbook]
 dist=true
 install=false
-install_location=
+install_location=$$(kde_icondir)/locolor/16x16/apps/bookcase.png
 type=DATA
 
 [icons/Makefile.am]
-files=icons/hi32-app-bookcase.png,icons/hi16-app-bookcase.png,icons/cd.png,icons/book.png,icons/bookcase.png
+files=icons/bookcase.png,icons/book.png,icons/cd.png,icons/hi16-app-bookcase.png,icons/hi32-app-bookcase.png
 sub_dirs=
 type=normal
 
@@ -164,10 +175,10 @@ type=DATA
 
 [po/Makefile.am]
 sub_dirs=
-type=po
+type=normal
 
 [src/Makefile.am]
-files=src/main.cpp,src/bookcase.cpp,src/bookcase.h,src/bookcaseui.rc,src/bccolumnview.cpp,src/bccolumnview.h,src/bookcasedoc.cpp,src/bookcasedoc.h,src/bccollection.cpp,src/bccollection.h,src/bcunit.cpp,src/bcunit.h,src/bcattribute.cpp,src/bcattribute.h,src/bcuniteditwidget.cpp,src/bcuniteditwidget.h,src/bccollectionview.cpp,src/bccollectionview.h,src/bcunititem.h,src/configdialog.h,src/bcprefsdialog.h,src/bcprefsdialog.cpp,src/bctabcontrol.cpp,src/bctabcontrol.h,src/configdialog.cpp
+files=src/main.cpp,src/bookcase.cpp,src/bookcase.h,src/bookcasedoc.cpp,src/bookcasedoc.h,src/bookcaseui.rc,src/bcattribute.cpp,src/bcattribute.h,src/bccollection.cpp,src/bccollection.h,src/bccollectionview.cpp,src/bccollectionview.h,src/bcdetailedlistview.cpp,src/bcdetailedlistview.h,src/bctabcontrol.cpp,src/bctabcontrol.h,src/bcunit.cpp,src/bcuniteditwidget.cpp,src/bcuniteditwidget.h,src/bcunit.h,src/bcunititem.h,src/configdialog.cpp,src/configdialog.h,src/searchdialog.cpp,src/searchdialog.h,src/isbnvalidator.cpp,src/isbnvalidator.h
 sub_dirs=
 type=prog_main
 
@@ -207,29 +218,17 @@ install=false
 install_location=
 type=HEADER
 
-[src/bccolumnview.cpp]
+[src/bcdetailedlistview.cpp]
 dist=true
 install=false
 install_location=
 type=SOURCE
 
-[src/bccolumnview.h]
+[src/bcdetailedlistview.h]
 dist=true
 install=false
 install_location=
 type=HEADER
-
-[src/bcprefsdialog.cpp]
-dist=false
-install=false
-install_location=
-type=DATA
-
-[src/bcprefsdialog.h]
-dist=false
-install=false
-install_location=
-type=DATA
 
 [src/bctabcontrol.cpp]
 dist=true
@@ -315,20 +314,78 @@ install=false
 install_location=
 type=HEADER
 
+[src/isbnvalidator.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[src/isbnvalidator.h]
+dist=true
+install=false
+install_location=
+type=HEADER
+
 [src/main.cpp]
 dist=true
 install=false
 install_location=
 type=SOURCE
 
-[srcbctabcontrl.h]
+[src/searchdialog.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[src/searchdialog.h]
 dist=true
 install=false
 install_location=
 type=HEADER
 
-[srcbctabcontrol.h]
+[test/Makefile.am]
+files=test/bookcase-test.bc,test/books.bc,test/cds.bc
+sub_dirs=
+type=normal
+
+[test/bookcase-test.bc]
+dist=false
+install=false
+install_location=
+type=DATA
+
+[test/books.bc]
+dist=false
+install=false
+install_location=
+type=DATA
+
+[test/cds.bc]
+dist=false
+install=false
+install_location=
+type=DATA
+
+[xslt/Makefile.am]
+files=xslt/summary.xsl,xslt/bookcase-by-author.xsl,xslt/bookcase-by-title.xsl
+sub_dirs=
+type=normal
+
+[xslt/bookcase-by-author.xsl]
+dist=true
+install=true
+install_location=$$(kde_datadir)/bookcase/bookcase-by-author.xsl
+type=DATA
+
+[xslt/bookcase-by-title.xsl]
+dist=true
+install=true
+install_location=$$(kde_datadir)/bookcase/bookcase-by-title.xsl
+type=DATA
+
+[xslt/summary.xsl]
 dist=true
 install=false
 install_location=
-type=HEADER
+type=DATA

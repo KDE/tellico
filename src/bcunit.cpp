@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -17,9 +17,12 @@
 
 #include "bcunit.h"
 #include "bccollection.h"
+
 #include <kdebug.h>
+
 #include <qstringlist.h>
 #include <qstring.h>
+#include <qregexp.h>
 
 BCUnit::BCUnit(BCCollection* coll_) : m_coll(coll_) {
   m_id = m_coll->unitCount();
@@ -50,9 +53,15 @@ QString BCUnit::attribute(const QString& key_) const {
 
 bool BCUnit::setAttribute(const QString& key_, const QString& value_) {
   bool successful = false;
+  QString value = value_;
+  // enforce rule to have a space after a semi-colon and a comma
+  value.replace(QRegExp(";"), "; ");
+  value.replace(QRegExp(","), ", ");
+  value = value.simplifyWhiteSpace();
+  
   if(m_coll->attributeNames().contains(key_)) {
-    if(m_coll->allowed(key_, value_)) {
-      m_attributes.insert(key_, value_);
+    if(m_coll->allowed(key_, value)) {
+      m_attributes.insert(key_, value);
       successful = true;
     } else {
       kdDebug() << QString("BCUnit::setAttribute() -- value (%1) not allowed for attribute (%2)").arg(value_).arg(key_) << endl;

@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sun Jan 6 2002
     copyright            : (C) 2002 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -21,13 +21,12 @@
 #include <ktabctl.h>
 
 /**
- * BCTabControl subclasses KTabCtl merely to make the @ref KTabCtl::showTab slot public.
+ * BCTabControl subclasses KTabCtl and makes a few changes.
  *
- * The class is empty and thus identical to @ref KTabCtl except that showTab()
- * is redeclared to be public.
+ * The @ref KTabCtl::showTab slot is made public. A method is added to move the focus.
  *
  * @author Robby Stephenson
- * @version $Id: bctabcontrol.h,v 1.4 2002/01/17 04:19:42 robby Exp $
+ * @version $Id: bctabcontrol.h,v 1.7 2002/09/22 03:31:43 robby Exp $
  */
 class BCTabControl : public KTabCtl {
 Q_OBJECT
@@ -40,6 +39,9 @@ public:
    */
   ~BCTabControl();
 
+  void setFocusToLineEdit(int tabNum);
+  int count();
+	
 public slots:
   /**
    * Calls the parent method.

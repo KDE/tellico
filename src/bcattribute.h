@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sun Sep 23 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -28,7 +28,7 @@
  * some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: bcattribute.h,v 1.13 2002/02/09 07:11:25 robby Exp $
+ * @version $Id: bcattribute.h,v 1.17 2002/10/09 00:53:15 robby Exp $
  */
 class BCAttribute {
 public:
@@ -62,8 +62,9 @@ public:
    * @li FormatDate - The attribute should be formatted as a date.
    * @li AllowGrouped - Units may be grouped by this attribute.
    *
-   * Obviously, the last three are mutually exclusive, but this is neither checked nor enforced.
-   **/
+   * Obviously, the three format options are mutually exclusive, but this is
+   * neither checked nor enforced.
+   */
   enum AttributeFlags {
     DontComplete    = 1 << 0,   // don't allow auto-completion
     DontShow        = 1 << 1,   // dont show in list view
@@ -159,6 +160,18 @@ public:
    * @param flags The attribute flags
    */
   void setFlags(int flags);
+  /**
+   * Returns the description for the attribute.
+   *
+   * @return The attribute description
+   */
+  const QString& description() const;
+  /**
+   * Sets the description of the attribute.
+   *
+   * @param desc The attribute description
+   */
+  void setDescription(const QString& desc);
 
   /**
    * A convenience function to format a string as a title.
@@ -258,6 +271,7 @@ private:
   QString m_name;
   QString m_title;
   QString m_group;
+  QString m_desc;
   AttributeType m_type;
   QStringList m_allowed;
   int m_flags;

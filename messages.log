@@ -1,4 +1,0 @@
-gmake[2]: Entering directory `/home/robby/kde/bookcase/src'
-/usr/include/kde.pot: warning: Charset "CHARSET" is not a portable encoding name.
-                               Message conversion to user's charset might not work.
-gmake[2]: Leaving directory `/home/robby/kde/bookcase/src'

@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sat Oct 13 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -19,11 +19,13 @@
 #include "bccollection.h"
 #include "bcattribute.h"
 #include "bcunititem.h"
+
 #include <klineeditdlg.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <kglobal.h>
+
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qlist.h>
@@ -33,8 +35,9 @@
 
 BCCollectionView::BCCollectionView(QWidget* parent_, const char* name_/*=0*/)
  : KListView(parent_, name_) {
-  //kdDebug() << "BCCollectionView()" << endl;
-  addColumn(i18n("Bookcase"));
+//  kdDebug() << "BCCollectionView()" << endl;
+  // the app name isn't translated
+  addColumn("Bookcase");
   // hide the header since there's only one column
   header()->hide();
   setRootIsDecorated(true);
@@ -72,6 +75,7 @@ BCCollectionView::BCCollectionView(QWidget* parent_, const char* name_/*=0*/)
 }
 
 BCCollectionView::~BCCollectionView() {
+//  kdDebug() << "~BCCollectionView()" << endl;
 }
 
 void BCCollectionView::insertItem(BCAttribute* att_, ParentItem* root_, BCUnit* unit_) {
@@ -158,7 +162,7 @@ QList<BCUnitItem> BCCollectionView::locateItem(BCUnit* unit_) {
 }
 
 ParentItem* BCCollectionView::locateItem(BCCollection* coll_) {
-  ParentItem* root = NULL;
+  ParentItem* root = 0;
   // iterate over the collections, which are the top-level children
   for(QListViewItem* collItem = firstChild(); collItem; collItem = collItem->nextSibling()) {
     // find the collItem matching the unit's collection and insert item inside
@@ -183,6 +187,8 @@ void BCCollectionView::slotAddItem(BCCollection* coll_) {
     return;
   }
 
+// for now, reset, but if multiple collections are supported, this has to change
+  slotReset();
 //  kdDebug() << "BCCollectionView::slotAddItem() - collection: " << coll_->name() << endl;
   ParentItem* collItem = new ParentItem(this, coll_->title(), coll_->id());
   if(coll_->unitCount() == 0) {
@@ -338,9 +344,9 @@ void BCCollectionView::slotSelected(QListViewItem* item_) {
     if(item->unit()) {
       emit signalUnitSelected(item->unit());
     }
-  } else {
-    // TODO: does anything happen when a collection or group is selected?
-    //emit signalCollectionSelected();
+  } else if(item_->depth() == 0) {   // collections are at the root
+    ParentItem* item = static_cast<ParentItem*>(item_);
+    emit signalCollectionSelected(item->id());
   }
 }
 
@@ -354,7 +360,7 @@ void BCCollectionView::slotSetSelected(BCUnit* unit_) {
   QList<BCUnitItem> list = locateItem(unit_);
   // just select the first one
   // this ends up calling BCUnitEditWidget::slotSetContents() twice
-  // since the selectedItem() signal gets sent by both this object and the other listview
+  // since the selectedItem() signal gets sent by both this object and the detailed listview
   setSelected(list.getFirst(), true);
   ensureItemVisible(list.getFirst());
 }
@@ -479,7 +485,7 @@ void BCCollectionView::slotHandleRename() {
     newName = KLineEditDlg::getText(i18n("New Collection Name"), item->text(0), &ok, this);
     if(ok) {
       item->setText(0, newName);
-      emit signalDoCollectionRename(static_cast<ParentItem*>(item)->id(), newName);
+      emit signalRenameCollection(static_cast<ParentItem*>(item)->id(), newName);
     }
   }
 }

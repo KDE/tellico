@@ -3,7 +3,7 @@
                              -------------------
     begin                : Wed Aug 29 21:00:54 CEST 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -17,7 +17,7 @@
 
 // application specific includes
 #include "bookcasedoc.h"
-#include "bccolumnview.h"
+#include "bcdetailedlistview.h"
 #include "bcunit.h"
 #include "bcunititem.h"
 #include "bookcase.h"
@@ -25,7 +25,7 @@
 #include "bccollectionview.h"
 #include "configdialog.h"
 
-//#include <kiconloader.h>
+#include <kiconloader.h>
 //#include <kmessagebox.h>
 #include <kfiledialog.h>
 #include <kmenubar.h>
@@ -39,22 +39,33 @@
 #include <kaction.h>
 #include <kdebug.h>
 #include <kwin.h>
+#include <kprogress.h>
+#include <kstatusbar.h>
+//#include <kprinter.h>
+#include <khtml_part.h>
+#include <khtmlview.h>
+#include <kglobal.h>
+#include <kstandarddirs.h>
 
 // include files for QT
 #include <qdir.h>
+#include <qsplitter.h>
+#include <qvbox.h>
 //#include <qprinter.h>
-//#include <qpainter.h>
+//#include <qpaintdevicemetrics.h>
+#include <qpainter.h>
+#include <qtextedit.h>
 
 const int ID_STATUS_MSG = 1;
-const int ID_UNIT_COUNT = 2;
+const int ID_STATUS_COUNT = 2;
 
 Bookcase::Bookcase(QWidget* parent_/*=0*/, const char* name_/*=0*/)
- : KDockMainWindow(parent_, name_) {
+ : KMainWindow(parent_, name_) {
   m_config = kapp->config();
 
   // the code checks these to see if they're NULL before allocating
-  m_configDlg = NULL;
-  m_progress = NULL;
+  m_configDlg = 0;
+  m_progress = 0;
 
   initWindow();
   initStatusBar();
@@ -66,7 +77,7 @@ Bookcase::Bookcase(QWidget* parent_/*=0*/, const char* name_/*=0*/)
   readOptions();
 
   m_fileSave->setEnabled(false);
-  m_filePrint->setEnabled(false);
+  m_fileSaveAs->setEnabled(false);
   m_editCut->setEnabled(false);
   m_editCopy->setEnabled(false);
   m_editPaste->setEnabled(false);
@@ -78,30 +89,29 @@ Bookcase::Bookcase(QWidget* parent_/*=0*/, const char* name_/*=0*/)
   m_config->setGroup("General Options");
   if(m_config->readBoolEntry("Reopen Last File", false)
       && !m_config->readEntry("Last Open File").isEmpty()) {
-    slotFileOpen(KURL(m_config->readEntry("Last Open File")));
+  	KURL lastFile = KURL(m_config->readEntry("Last Open File"));
+    slotFileOpen(lastFile);
   } else {
-    // for now, always start with a book collection
-    doc()->slotAddCollection(BCCollection::Books(doc()->collectionCount()));
-    doc()->setModified(false);
-    m_fileSave->setEnabled(true);
+  	// this is needed to do the initial layout in the widgets, a bit redundant
+   	m_doc->newDocument();
   }
 }
 
 Bookcase::~Bookcase() {
   // there's probably no need to do all this deleting, but it doesn't hurt
   // and I can't figure out what Qt deletes and what it doesn't.
-  delete m_doc;
-  m_doc = NULL;
+//  delete m_doc;
+//  m_doc = 0;
   delete m_collView;
-  m_collView = NULL;
+  m_collView = 0;
   delete m_columnView;
-  m_columnView = NULL;
+  m_columnView = 0;
   delete m_editWidget;
-  m_editWidget = NULL;
-  delete m_configDlg;
-  m_configDlg = NULL;
-  delete m_progress;
-  m_progress = NULL;
+  m_editWidget = 0;
+//  delete m_configDlg;
+//  m_configDlg = 0;
+//  delete m_progress;
+//  m_progress = 0;
 }
 
 void Bookcase::initActions() {
@@ -122,12 +132,6 @@ void Bookcase::initActions() {
                                              actionCollection());
   m_toggleStatusBar = KStdAction::showStatusbar(this, SLOT(slotToggleStatusBar()),
                                                  actionCollection());
-  m_toggleEditWidget = new KToggleAction(i18n("Show Editing Widget"), 0, this,
-                        SLOT(slotToggleEditWidget()), actionCollection(),
-                        "toggle_edit_widget");
-  m_toggleDetailWidget = new KToggleAction(i18n("Show Detail Widget"), 0, this,
-                        SLOT(slotToggleDetailWidget()), actionCollection(),
-                        "toggle_detail_widget");
   m_preferences = KStdAction::preferences(this, SLOT(slotShowConfigDialog()), actionCollection());
 
   m_fileNewCollection = new KAction(i18n("New &Collection"), 0, this,
@@ -150,8 +154,6 @@ void Bookcase::initActions() {
   m_editFind->setStatusText(i18n("Searches in the document"));
   m_toggleToolBar->setStatusText(i18n("Enables/disables the toolbar"));
   m_toggleStatusBar->setStatusText(i18n("Enables/disables the statusbar"));
-  m_toggleEditWidget->setStatusText(i18n("Enables/disables the editing widget"));
-  m_toggleDetailWidget->setStatusText(i18n("Enables/disables the detail widget"));
   m_preferences->setStatusText(i18n("Configure the options for the application"));
   m_reportsFull->setStatusText(i18n("Creates a full report"));
 
@@ -162,10 +164,10 @@ void Bookcase::initStatusBar() {
   statusBar()->insertItem(i18n("Ready."), ID_STATUS_MSG);
   statusBar()->setItemAlignment(ID_STATUS_MSG, Qt::AlignLeft | Qt::AlignVCenter);
 
-  statusBar()->insertItem("", ID_UNIT_COUNT, 0, true);
-  statusBar()->setItemAlignment(ID_UNIT_COUNT, Qt::AlignLeft | Qt::AlignVCenter);
+  statusBar()->insertItem("", ID_STATUS_COUNT, 0, true);
+  statusBar()->setItemAlignment(ID_STATUS_COUNT, Qt::AlignLeft | Qt::AlignVCenter);
 
-  m_progress = new KProgress(0, 100, 0, KProgress::Horizontal, statusBar());
+  m_progress = new KProgress(100, statusBar());
   m_progress->setFixedHeight(statusBar()->minimumSizeHint().height());
   statusBar()->addWidget(m_progress);
   m_progress->hide();
@@ -176,24 +178,18 @@ void Bookcase::initWindow() {
 }
 
 void Bookcase::initView() {
-  KDockWidget* mainDock = createDockWidget(i18n("Document Contents"), QPixmap());
-  mainDock->setToolTipString(i18n("Collection Contents"));
-  m_collView = new BCCollectionView(mainDock);
-  mainDock->setWidget(m_collView);
-  setView(mainDock);
-  setMainDockWidget(mainDock);
 
-  KDockWidget* listDock = createDockWidget(i18n("Collection Details"), QPixmap());
-  listDock->setToolTipString(i18n("Collection Details"));
-  m_columnView = new BCColumnView(listDock);
-  listDock->setWidget(m_columnView);
-  listDock->manualDock(mainDock, KDockWidget::DockRight, 20);
+  m_split = new QSplitter(this);
+  setCentralWidget(m_split);
 
-  KDockWidget* editDock = createDockWidget(i18n("Bookcase Editing"), QPixmap());
-  editDock->setToolTipString(i18n("Collection Editing"));
-  m_editWidget = new BCUnitEditWidget(editDock);
-  editDock->setWidget(m_editWidget);
-  editDock->manualDock(listDock, KDockWidget::DockBottom, 70);
+	m_collView = new BCCollectionView(m_split);
+//  m_collView->slotAddItem(m_doc->collectionById(0));
+
+	QVBox* vbox = new QVBox(m_split);
+	m_columnView = new BCDetailedListView(vbox);
+//  m_columnView->slotSetContents(m_doc->collectionById(0));
+	m_editWidget = new BCUnitEditWidget(vbox);
+//  m_editWidget->slotSetLayout(m_doc->collectionById(0));
 }
 
 void Bookcase::initDocument() {
@@ -204,14 +200,6 @@ void Bookcase::initConnections() {
   // allow status messages from the document
   connect(m_doc, SIGNAL(signalStatusMsg(const QString&)),
           this, SLOT(slotStatusMsg(const QString&)));
-
-  // when a new document is initialized, the listviews must be reset
-  connect(m_doc, SIGNAL(signalNewDoc()),
-          m_editWidget, SLOT(slotReset()));
-  connect(m_doc, SIGNAL(signalNewDoc()),
-          m_collView, SLOT(slotReset()));
-  connect(m_doc, SIGNAL(signalNewDoc()),
-          m_columnView, SLOT(slotReset()));
 
   // the two listviews signal when a unit is selected, pass it to the edit widget
   connect(m_collView, SIGNAL(signalUnitSelected(BCUnit*)),
@@ -229,9 +217,6 @@ void Bookcase::initConnections() {
           m_columnView, SLOT(slotClearSelection()));
   connect(m_columnView, SIGNAL(signalUnitSelected(BCUnit*)),
           m_collView, SLOT(slotClearSelection()));
-  // still need to flip to proper widget in bccv
-  connect(m_collView, SIGNAL(signalUnitSelected(BCUnit*)),
-          m_columnView, SLOT(slotShowUnit(BCUnit*)));
 
   // the two listviews also signal when they're cleared
 //  connect(m_collView, SIGNAL(signalClear()),
@@ -239,12 +224,12 @@ void Bookcase::initConnections() {
 //  connect(m_columnView, SIGNAL(signalClear()),
 //          m_editWidget,  SLOT(slotHandleClear()));
 
-  connect(m_editWidget, SIGNAL(signalDoUnitSave(BCUnit*)),
+  connect(m_editWidget, SIGNAL(signalSaveUnit(BCUnit*)),
           m_doc, SLOT(slotSaveUnit(BCUnit*)));
 
-  connect(m_columnView, SIGNAL(signalDoUnitDelete(BCUnit*)),
+  connect(m_columnView, SIGNAL(signalDeleteUnit(BCUnit*)),
           this, SLOT(slotDeleteUnit(BCUnit*)));
-  connect(m_editWidget, SIGNAL(signalDoUnitDelete(BCUnit*)),
+  connect(m_editWidget, SIGNAL(signalDeleteUnit(BCUnit*)),
           this, SLOT(slotDeleteUnit(BCUnit*)));
 
   connect(m_doc, SIGNAL(signalModified()),
@@ -254,26 +239,22 @@ void Bookcase::initConnections() {
           this, SLOT(slotUnitCount()));
 
   // connect the modified signal
-  connect(m_doc, SIGNAL(signalCollectionModified(BCCollection*)),
-          m_collView, SLOT(slotReset()));
-  connect(m_doc, SIGNAL(signalCollectionModified(BCCollection*)),
-          m_columnView, SLOT(slotReset()));
-  connect(m_doc, SIGNAL(signalCollectionModified(BCCollection*)),
-          m_editWidget, SLOT(slotReset()));
+//  connect(m_doc, SIGNAL(signalCollectionModified(BCCollection*)),
+//          m_collView, SLOT(slotReset()));
+//  connect(m_doc, SIGNAL(signalCollectionModified(BCCollection*)),
+//          m_columnView, SLOT(slotReset()));
+//  connect(m_doc, SIGNAL(signalCollectionModified(BCCollection*)),
+//          m_editWidget, SLOT(slotReset()));
 
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
           m_collView, SLOT(slotAddItem(BCCollection*)));
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
-          m_columnView, SLOT(slotAddPage(BCCollection*)));
+          m_editWidget, SLOT(slotSetCollection(BCCollection*)));
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
-          m_editWidget, SLOT(slotAddPage(BCCollection*)));
+          m_columnView, SLOT(slotSetContents(BCCollection*)));
 
   connect(m_doc, SIGNAL(signalCollectionDeleted(BCCollection*)),
           m_collView, SLOT(slotRemoveItem(BCCollection*)));
-  connect(m_doc, SIGNAL(signalCollectionDeleted(BCCollection*)),
-          m_columnView, SLOT(slotRemovePage(BCCollection*)));
-  connect(m_doc, SIGNAL(signalCollectionDeleted(BCCollection*)),
-          m_editWidget, SLOT(slotRemovePage(BCCollection*)));
 
   // connect the added signal to both listviews
   connect(m_doc, SIGNAL(signalUnitAdded(BCUnit*)),
@@ -297,7 +278,7 @@ void Bookcase::initConnections() {
   connect(m_doc, SIGNAL(signalUnitDeleted(BCUnit*)),
           m_columnView, SLOT(slotRemoveItem(BCUnit*)));
 
-  connect(m_collView, SIGNAL(signalDoCollectionRename(int, const QString&)),
+  connect(m_collView, SIGNAL(signalRenameCollection(int, const QString&)),
           m_doc, SLOT(slotRenameCollection(int, const QString&)));
 
   connect(m_doc, SIGNAL(signalFractionDone(float)),
@@ -308,7 +289,7 @@ void Bookcase::initConnections() {
 // The options that can be changed in the "Configuration..." dialog
 // are taken care of by the BCConfigDlg object.
 void Bookcase::saveOptions() {
-  kdDebug() << "Bookcase::saveOptions()" << endl;
+//  kdDebug() << "Bookcase::saveOptions()" << endl;
   // for some reason, the m_config pointer is getting changed, but
   // I can't figure out where, so just to be on the safe side
   if(m_config != kapp->config()) {
@@ -318,8 +299,6 @@ void Bookcase::saveOptions() {
   m_config->writeEntry("Geometry", size());
   m_config->writeEntry("Show Toolbar", m_toggleToolBar->isChecked());
   m_config->writeEntry("Show Statusbar", m_toggleStatusBar->isChecked());
-  m_config->writeEntry("Show Edit Widget", m_toggleEditWidget->isChecked());
-  m_config->writeEntry("Show Detail Widget", m_toggleDetailWidget->isChecked());
   m_config->writeEntry("ToolBarPos", static_cast<int>(toolBar("mainToolBar")->barPos()));
   m_fileOpenRecent->saveEntries(m_config, "Recent Files");
   if(m_doc->URL().fileName() != i18n("Untitled")) {
@@ -329,16 +308,15 @@ void Bookcase::saveOptions() {
   QListIterator<BCCollection> collIt(doc()->collectionList());
   for( ; collIt.current(); ++collIt) {
     QValueList<int> widthList;
-    KListView* view = m_columnView->listView(collIt.current()->id());
-    for(int i = 0; view && i < view->columns(); ++i) {
-      widthList.append(view->columnWidth(i));
+    for(int i = 0; i < m_columnView->columns(); ++i) {
+      widthList.append(m_columnView->columnWidth(i));
     }
     m_config->writeEntry("Column Widths - " + collIt.current()->unitName(), widthList);
   }
 
-  // this freezes the program at shut-down, why?
-  //writeDockConfig(m_config, "Dock Config");
-  kdDebug() << "Bookcase::saveOptions - done" << endl;
+  m_config->writeEntry("Main Window Splitter Sizes", m_split->sizes());
+  
+//  kdDebug() << "Bookcase::saveOptions - done" << endl;
 }
 
 void Bookcase::readOptions() {
@@ -358,14 +336,6 @@ void Bookcase::readOptions() {
   m_toggleStatusBar->setChecked(bViewStatusBar);
   slotToggleStatusBar();
 
-  bool bViewEditWidget = m_config->readBoolEntry("Show Edit Widget", true);
-  m_toggleEditWidget->setChecked(bViewEditWidget);
-  slotToggleEditWidget();
-
-  bool bViewDetailWidget = m_config->readBoolEntry("Show Detail Widget", true);
-  m_toggleDetailWidget->setChecked(bViewDetailWidget);
-  slotToggleDetailWidget();
-
   // bar position settings
   KToolBar::BarPosition toolBarPos;
   toolBarPos = static_cast<KToolBar::BarPosition>(m_config->readNumEntry("ToolBarPos",
@@ -380,7 +350,10 @@ void Bookcase::readOptions() {
     resize(size);
   }
 
-  readDockConfig(m_config, "Dock Config");
+  QValueList<int> splitList = m_config->readIntListEntry("Main Window Splitter Sizes");
+  if(!splitList.empty()) {
+    m_split->setSizes(splitList);
+  }
 
   bool autoCapitals = m_config->readBoolEntry("Auto Capitalization", true);
   BCAttribute::setAutoCapitalization(autoCapitals);
@@ -405,9 +378,7 @@ QValueList<int> Bookcase::readColumnWidths(const QString& unitName_) {
     m_config = kapp->config();
   }
   m_config->setGroup("General Options");
-  QValueList<int> list;
-  list = kapp->config()->readIntListEntry("Column Widths - " + unitName_);
-  return list;
+  return m_config->readIntListEntry("Column Widths - " + unitName_);
 }
 
 void Bookcase::saveProperties(KConfig* cfg_) {
@@ -448,12 +419,12 @@ void Bookcase::readProperties(KConfig* cfg_) {
 }
 
 bool Bookcase::queryClose() {
-  kdDebug() << "Bookcase::queryClose()" << endl;
+//  kdDebug() << "Bookcase::queryClose()" << endl;
   return m_doc->saveModified();
 }
 
 bool Bookcase::queryExit() {
-  kdDebug() << "Bookcase::queryExit()" << endl;
+//  kdDebug() << "Bookcase::queryExit()" << endl;
   saveOptions();
   return true;
 }
@@ -461,10 +432,6 @@ bool Bookcase::queryExit() {
 BookcaseDoc* Bookcase::doc() {
   return m_doc;
 }
-
-/////////////////////////////////////////////////////////////////////
-// SLOT IMPLEMENTATION
-/////////////////////////////////////////////////////////////////////
 
 void Bookcase::slotFileNew() {
   slotStatusMsg(i18n("Creating new document..."));
@@ -525,10 +492,7 @@ bool Bookcase::openURL(const KURL& url_) {
   m_columnView->setUpdatesEnabled(false);
   m_collView->setUpdatesEnabled(false);
   // disable sorting
-  // check to see if there's a visible listview yet
-  if(m_columnView->visibleListView()) {
-    m_columnView->visibleListView()->setSorting(-1);
-  }
+  m_columnView->setSorting(-1);
   m_collView->setSorting(-1);
 
   // try to open document
@@ -538,10 +502,7 @@ bool Bookcase::openURL(const KURL& url_) {
   m_columnView->setUpdatesEnabled(true);
   m_collView->setUpdatesEnabled(true);
   // re-enable sorting
-  // check to see if there's a visible listview yet
-  if(m_columnView->visibleListView()) {
-    m_columnView->visibleListView()->setSorting(0, true);
-  }
+  m_columnView->setSorting(0, true);
   m_collView->setSorting(0, true);
 
   if(success) {
@@ -553,6 +514,7 @@ bool Bookcase::openURL(const KURL& url_) {
     m_collView->slotExpandAll(0);
     // disable save action since the file is just opened
     m_fileSave->setEnabled(false);
+    m_fileSaveAs->setEnabled(true);
   }
 
   return success;
@@ -589,19 +551,49 @@ void Bookcase::slotFileSaveAs() {
 
 void Bookcase::slotFilePrint() {
   slotStatusMsg(i18n("Printing..."));
-//
-//  QPrinter printer;
-//  if(printer.setup(this)) {
-//    view->print(&printer);
-//  }
 
+  QString filename("bookcase-by-author.xsl");
+  QString xsltfile = KGlobal::dirs()->findResource("appdata", filename);
+  if(xsltfile.isNull()) {
+    kdWarning() << i18n("Unable to find %1 in standard KDE directories.").arg(filename) << endl;
+  } else {
+    QString html = doc()->exportHTML(xsltfile, true);
+    KHTMLPart *w = new KHTMLPart();
+    w->begin();
+    w->write(html);
+    w->end();
+    w->view()->print();
+    delete w;
+    
+//  KPrinter* printer = new KPrinter();
+//
+//  if(printer->setup(this)) {
+//    QTextEdit* view = new QTextEdit(this);
+//    view->setTextFormat(Qt::RichText);
+//    view->setText(html);
+//
+//    QPainter painter;
+//
+//    // start painting
+//    painter.begin(printer);
+//    painter.drawPixmap(0, 0, QPixmap::grabWidget(view));
+//
+//    // stop painting, this will automatically send the print data to the printer
+//    painter.end();
+//  }
+//
+//  delete printer;
+
+  }
+  
   slotStatusMsg(i18n("Ready."));
 }
 
 void Bookcase::slotFileQuit() {
   slotStatusMsg(i18n("Exiting..."));
 
-  saveOptions();
+  // this gets called in queryExit() anyway
+  //saveOptions();
   close();
 
   slotStatusMsg(i18n("Ready."));
@@ -655,34 +647,6 @@ void Bookcase::slotToggleStatusBar() {
   slotStatusMsg(i18n("Ready."));
 }
 
-void Bookcase::slotToggleEditWidget() {
-  slotStatusMsg(i18n("Toggling editing widget..."));
-
-  if(m_toggleEditWidget->isChecked()) {
-    KDockWidget* w = static_cast<KDockWidget*>(m_editWidget->parent());
-    makeDockVisible(w);
-  } else {
-    KDockWidget* w = static_cast<KDockWidget*>(m_editWidget->parent());
-    makeDockInvisible(w);
-  }
-
-  slotStatusMsg(i18n("Ready."));
-}
-
-void Bookcase::slotToggleDetailWidget() {
-  slotStatusMsg(i18n("Toggling detail widget..."));
-
-  if(m_toggleDetailWidget->isChecked()) {
-    KDockWidget* w = static_cast<KDockWidget*>(m_columnView->parent());
-    makeDockVisible(w);
-  } else {
-    KDockWidget* w = static_cast<KDockWidget*>(m_columnView->parent());
-    makeDockInvisible(w);
-  }
-
-  slotStatusMsg(i18n("Ready."));
-}
-
 void Bookcase::slotShowConfigDialog() {
   if(!m_configDlg) {
     m_configDlg = new ConfigDialog(this);
@@ -698,33 +662,31 @@ void Bookcase::slotShowConfigDialog() {
 void Bookcase::slotHideConfigDialog() {
   if(m_configDlg) {
     m_configDlg->delayedDestruct();
-    m_configDlg = NULL;
+    m_configDlg = 0;
   }
 }
 
 void Bookcase::slotStatusMsg(const QString& text_) {
   statusBar()->clear();
-  statusBar()->changeItem(QString(" ")+text_, ID_STATUS_MSG);
+  // add a space at the beginning and end for asthetic reasons
+  statusBar()->changeItem(" "+text_+" ", ID_STATUS_MSG);
 }
 
 void Bookcase::slotUnitCount() {
   QString text(" ");
   QListIterator<BCCollection> it(m_doc->collectionList());
   for( ; it.current(); ++it) {
-    text += it.current()->unitTitle();
-    text += ": " + QString::number(it.current()->unitCount());
-    text += "; ";
+    text += i18n("%1 %2").arg(it.current()->unitTitle()).arg(i18n("Total"));
+    text += ": " + QString::number(it.current()->unitCount()) + " ";
   }
-  // now remove that final semi-colon
-  text.remove(text.length()-2, 1);
-  statusBar()->changeItem(text, ID_UNIT_COUNT);
+  statusBar()->changeItem(text, ID_STATUS_COUNT);
 }
 
 void Bookcase::slotDeleteUnit(BCUnit* unit_) {
   m_doc->slotDeleteUnit(unit_);
-  m_editWidget->slotHandleClear();
-  m_columnView->slotSetSelected(NULL);
-  m_collView->slotSetSelected(NULL);
+  m_editWidget->slotSetContents(0);
+  m_columnView->slotSetSelected(0);
+  m_collView->slotSetSelected(0);
 }
 
 void Bookcase::slotFileNewCollection() {
@@ -763,4 +725,41 @@ void Bookcase::slotHandleConfigChange() {
     m_config = kapp->config();
   }
   m_configDlg->saveConfiguration(m_config);
+}
+
+QDomDocument Bookcase::collectionViewTree() {
+  QDomDocument doc("bookcase");
+  doc.appendChild(doc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""));
+  QDomElement bcelem = doc.createElement("bookcase");
+  doc.appendChild(bcelem);
+
+  ParentItem* collItem = (ParentItem*)m_collView->firstChild();
+  for( ; collItem; collItem = (ParentItem*)collItem->nextSibling()) {
+    QDomElement collElem = doc.createElement("collection");
+    doc.documentElement().appendChild(collElem);
+    collElem.setAttribute("title", collItem->text(0));
+
+    ParentItem* authorItem = (ParentItem*)collItem->firstChild();
+    for( ; authorItem; authorItem = (ParentItem*)authorItem->nextSibling()) {
+    
+      BCUnitItem* bookItem = (BCUnitItem*)authorItem->firstChild();
+      for( ; bookItem; bookItem = (BCUnitItem*)bookItem->nextSibling()) {
+      
+        QString unitName = m_doc->collectionById(collItem->id())->unitName();
+        QDomElement unitElem = doc.createElement(unitName);
+        
+        QDomElement titleElem = doc.createElement("title");
+        titleElem.appendChild(doc.createTextNode(bookItem->text(0)));
+        
+        QDomElement authorElem = doc.createElement("author");
+        authorElem.appendChild(doc.createTextNode(authorItem->text(0)));
+        
+        unitElem.appendChild(titleElem);
+        unitElem.appendChild(authorElem);
+        collElem.appendChild(unitElem);
+      } // end book loop
+    } // end author loop
+  } // end collection loop
+
+  return doc;
 }

@@ -3,7 +3,7 @@
                              -------------------
     begin                : Wed Sep 26 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -19,14 +19,16 @@
 #define BCUNITEDITWIDGET_H
 
 class BCUnit;
-class KTabCtl;
+class BCCollection;
+class BCTabControl;
 class QListViewItem;
 class QPushButton;
-class QWidgetStack;
 
-#include "bccollection.h"
+//#include "bccollection.h"
+
 #include <klineedit.h>
 #include <kcombobox.h>
+
 #include <qmultilineedit.h>
 #include <qcheckbox.h>
 #include <qlist.h>
@@ -38,7 +40,7 @@ class QWidgetStack;
  * edit controls and so on.
  *
  * @author Robby Stephenson
- * @version $Id: bcuniteditwidget.h,v 1.15 2002/01/17 04:19:24 robby Exp $
+ * @version $Id: bcuniteditwidget.h,v 1.21 2002/10/12 02:54:44 robby Exp $
  */
 class BCUnitEditWidget : public QWidget  {
 Q_OBJECT
@@ -46,7 +48,7 @@ Q_OBJECT
 public: 
   /**
    * The constructor doesn't do much, except added a tabbed control. Most of the layout
-   * happens in slotAddPage().
+   * happens in @ref slotSetLayout().
    *
    * @param parent A pointer to the parent widget
    * @param name The widget name
@@ -57,17 +59,12 @@ public:
   ~BCUnitEditWidget();
 
 public slots:
-  void slotAddPage(BCCollection* coll);
-  void slotRemovePage(BCCollection* coll);
+  void slotSetLayout(BCCollection* coll);
+  void slotSetCollection(BCCollection* coll);
   /**
    * Resets the widget, deleting all of its contents
    */
   void slotReset();
-  /**
-   * Clears all of the input controls in the widget. The pointer to the
-   * current unit is nullified, but not the pointer to the current collection.
-   */
-  void slotHandleClear();
   /**
    * Sets the contents of the input controls to match the contents of a unit.
    *
@@ -87,7 +84,7 @@ protected:
    * Used to nullify all pointers, delete the child objects, and fully reset the
    * data contained in the class.
    */
-  void clearWidgets();
+//  void clearWidgets();
 
 protected slots:
   /**
@@ -113,6 +110,11 @@ protected slots:
    */
   void slotHandleSave();
   /**
+   * Clears all of the input controls in the widget. The pointer to the
+   * current unit is nullified, but not the pointer to the current collection.
+   */
+  void slotHandleClear();
+  /**
    * Handles clicking the Delete button. If the parent collection of the current unit
    * includes the unit object, then @ref signalDoUnitDelete is made. The widget is then
    * cleared.
@@ -131,18 +133,18 @@ signals:
    *
    * @param unit A pointer to the unit to be saved
    */
-  void signalDoUnitSave(BCUnit* unit);
+  void signalSaveUnit(BCUnit* unit);
   /**
    * Signals a desire on the part of the user to delete a unit from a collection.
    *
    * @param unit A pointer to the unit to be deleted
    */
-  void signalDoUnitDelete(BCUnit* unit);
+  void signalDeleteUnit(BCUnit* unit);
 
 private:
   BCCollection* m_currColl;
   BCUnit* m_currUnit;
-  QWidgetStack* m_stack;
+  BCTabControl* m_tabs;
   QDict<KLineEdit> m_editDict;
   QDict<QMultiLineEdit> m_multiDict;
   QDict<KComboBox> m_comboDict;

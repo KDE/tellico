@@ -2,13 +2,13 @@
    ================================================================
    Bookcase XML DTD version 1.0
 
-   $Id: bookcase.dtd,v 1.6 2002/02/22 00:24:06 robby Exp $
+   $Id: bookcase.dtd,v 1.7 2002/10/12 02:54:44 robby Exp $
 
    Copyright (c) 2002 Robby Stephenson
 
    This DTD is designed to be used with XML data files for the 
    'bookcase' application, which can be found at:
-   http://radiojodi.com/bookcase/
+   http://periapsis.org/bookcase/
 
    The formal public identifer for this DTD should be:
    
@@ -44,7 +44,7 @@
 <!ATTLIST attribute group CDATA #REQUIRED>
 <!ATTLIST attribute allowed CDATA #IMPLIED>
 <!ATTLIST attribute flags CDATA #IMPLIED>
-<!ATTLIST attribute binding CDATA #IMPLIED>
+<!ATTLIST attribute description CDATA #IMPLIED>
 <!ATTLIST attribute type (1|2|3|4) #IMPLIED> 
 <!ELEMENT book (title?, subtitle?, author?, binding?, pur_date?, pur_price?, publisher?, edition?, cr_year?, pub_year?, isbn?, lccn?, pages?, language?, genre?, keywords?, series?, series_num?, condition?, signed?, read?, gift?, loaned?, rating?, comments?)>
 <!ELEMENT title (#PCDATA)>

@@ -3,7 +3,7 @@
                              -------------------
     begin                : Wed Aug 29 21:00:54 CEST 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -34,9 +34,10 @@ static KCmdLineOptions options[] = {
 int main(int argc, char *argv[]) {
   KAboutData aboutData("bookcase", I18N_NOOP("Bookcase"),
     version, description, KAboutData::License_GPL,
-    "(c) 2001, Robby Stephenson", 0,
-    "http://radiojodi.com/bookcase/", "robby@radiojodi.com");
-  aboutData.addAuthor("Robby Stephenson", 0, "robby@radiojodi.com");
+    "(c) 2001-2002, Robby Stephenson", 0,
+    "http://periapsis.org/bookcase/", "robby@periapsis.org");
+  aboutData.addAuthor("Robby Stephenson", 0, "robby@periapsis.org");
+  
   KCmdLineArgs::init(argc, argv, &aboutData);
   KCmdLineArgs::addCmdLineOptions(options);
 

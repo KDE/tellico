@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -32,7 +32,7 @@ class BCCollection;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bcunit.h,v 1.10 2002/01/12 04:42:17 robby Exp $
+ * @version $Id: bcunit.h,v 1.11 2002/07/08 05:37:54 robby Exp $
  */
 class BCUnit {
 public:

@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sun Sep 9 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -25,11 +25,14 @@
 class BCCollection;
 
 #include "bcunit.h"
+
 #include <kurl.h>
+
 #include <qlist.h>
 #include <qfile.h>
 #include <qcstring.h>
 #include <qobject.h>
+#include <qdom.h>
 
 /**
  * The BookcaseDoc contains everything needed to deal with the contents, thus separated from
@@ -37,14 +40,15 @@ class BCCollection;
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: bookcasedoc.h,v 1.14 2002/01/12 06:46:40 robby Exp $
+ * @version $Id: bookcasedoc.h,v 1.21 2002/10/12 06:01:03 robby Exp $
  */
 class BookcaseDoc : public QObject  {
 Q_OBJECT
 
 public:
   /**
-   * The constructor initializes the document.
+   * The constructor initializes the document. A new collection is created and added
+   * to the document.
    *
    * @param parent A pointer to the parent widget
    * @param name The widget name
@@ -79,7 +83,6 @@ public:
    * @return The url
    */
   const KURL& URL() const;
-
   /**
    * Initializes a new document. The signalNewDoc() signal is emitted. The return
    * value is currently always true, but should indicate whether or not a new document
@@ -144,6 +147,22 @@ public:
    * @return The collection list
    */
   const QList<BCCollection>& collectionList() const;
+  /**
+   * Inserts the data in the document into a DOM ordered form
+   *
+   * @return The QDomDocument object
+   */
+  QDomDocument exportXML();
+  /**
+   * Takes the XML exported by the document and passes it through
+   * the XSLT transformation.
+   *
+   * @param xsltFilename The XSLT file
+   * @param format Whether to format the data according to
+                    @ref BCAttribute::formatName(), etc...
+   * @return The HTML text
+   */
+  QString exportHTML(const QString& xsltFilename, bool format=false);
 
 public slots:
   /**
@@ -210,7 +229,7 @@ signals:
   /**
    * Signals that a new document has been initialized.
    */
-  void signalNewDoc();
+//  void signalNewDoc();
   /**
    * Signals that a new collection has been added.
    *

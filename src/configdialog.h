@@ -3,7 +3,7 @@
                              -------------------
     begin                : Wed Dec 5 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -28,7 +28,7 @@ class KLineEdit;
  * The configuration dialog class allows the user to change the global application preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h,v 1.3 2002/02/09 07:11:25 robby Exp $
+ * @version $Id: configdialog.h,v 1.5 2002/07/20 17:01:49 robby Exp $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT

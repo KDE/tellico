@@ -3,7 +3,7 @@
                              -------------------
     begin                : Wed Dec 5 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -35,13 +35,13 @@
 #include <qpixmap.h>
 #include <qgrid.h>
 #include <qwhatsthis.h>
+#include <qregexp.h>
 
 static const int CONFIG_MIN_WIDTH = 400;
 static const int CONFIG_MIN_HEIGHT = 250;
 
 ConfigDialog::ConfigDialog(QWidget* parent_, const char* name_/*=0*/)
- : KDialogBase(IconList, i18n("Configure"),
-               KDialogBase::Ok|KDialogBase::Apply|KDialogBase::Cancel,
+ : KDialogBase(IconList, i18n("Configure"), Ok|Apply|Cancel,
                Ok, parent_, name_, true, false) {
 
   setupGeneralPage();

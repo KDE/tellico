@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sat Oct 13 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -24,8 +24,10 @@ class QListViewItem;
 
 #include "bcunititem.h"
 #include "bccollection.h"
+
 #include <klistview.h>
 #include <kpopupmenu.h>
+
 #include <qdict.h>
 #include <qlist.h>
 #include <qpoint.h>
@@ -41,7 +43,7 @@ class QListViewItem;
  * @see BCCollection
  *
  * @author Robby Stephenson
- * @version $Id: bccollectionview.h,v 1.15 2002/02/09 07:11:25 robby Exp $
+ * @version $Id: bccollectionview.h,v 1.19 2002/10/20 16:36:52 robby Exp $
  */
 class BCCollectionView : public KListView {
 Q_OBJECT
@@ -215,12 +217,19 @@ signals:
    */
   void signalUnitSelected(BCUnit* unit);
   /**
+   * Signals a collection has been selected. Only emitted when selection changed, and
+   * the selection item refers to a collection.
+   *
+   * @param unit The id of the collection to which the selected item refers
+   */
+  void signalCollectionSelected(int id);
+  /**
    * Signals a desire to rename the collection having a certain id.
    *
    * @param id The collection id
    * @param newName The new name of the collection
    */
-  void signalDoCollectionRename(int id, const QString& newName);
+  void signalRenameCollection(int id, const QString& newName);
 
 private:
   QDict<ParentItem> m_groupDict;

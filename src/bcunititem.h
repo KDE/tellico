@@ -3,7 +3,7 @@
                              -------------------
     begin                : Sat Oct 20 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -30,7 +30,7 @@ class BCUnit;
  * @see BCUnit
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.8 2002/01/13 22:41:26 robby Exp $
+ * @version $Id: bcunititem.h,v 1.9 2002/07/08 05:37:54 robby Exp $
  */
 class BCUnitItem : public KListViewItem {
 public:
@@ -75,7 +75,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.8 2002/01/13 22:41:26 robby Exp $
+ * @version $Id: bcunititem.h,v 1.9 2002/07/08 05:37:54 robby Exp $
  */
 class ParentItem : public KListViewItem {
 public:

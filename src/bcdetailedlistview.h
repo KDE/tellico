@@ -1,9 +1,9 @@
 /* *************************************************************************
-                                bccolumnview.h
+                                bcdetailedlistview.h
                              -------------------
     begin                : Tue Sep 4 2001
     copyright            : (C) 2001 by Robby Stephenson
-    email                : robby@radiojodi.com
+    email                : robby@periapsis.org
  * *************************************************************************/
 
 /* *************************************************************************
@@ -15,30 +15,30 @@
  *                                                                         *
  * *************************************************************************/
 
-#ifndef BCCOLUMNVIEW_H
-#define BCCOLUMNVIEW_H
+#ifndef BCDETAILEDLISTVIEW_H
+#define BCDETAILEDLISTVIEW_H
 
 class BCUnit;
 class BCUnitItem;
 class BCCollection;
-class KListView;
-class QListViewItem;
-class QWidgetStack;
 
-//#include <klistview.h>
+class QListViewItem;
+
+#include <klistview.h>
 #include <kpopupmenu.h>
+
 #include <qpoint.h>
 
 /**
- * The BCColumnView class shows detailed information about units in a specific collection.
+ * The BCDetailedListView class shows detailed information about units in a specific collection.
  *
  * A QWidgetStack flips between list views for each collection. Obviously, only units
  * in a common collection are shown at a time.
  *
  * @author Robby Stephenson
- * @version $Id: bccolumnview.h,v 1.16 2002/02/09 07:11:25 robby Exp $
+ * @version $Id: bcdetailedlistview.h,v 1.22 2002/10/20 16:36:52 robby Exp $
  */
-class BCColumnView : public QWidget {
+class BCDetailedListView : public KListView {
 Q_OBJECT
 
 public:
@@ -48,26 +48,10 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  BCColumnView(QWidget* parent, const char* name=0);
+  BCDetailedListView(QWidget* parent, const char* name=0);
   /**
    */
-  ~BCColumnView();
-
-  /**
-   * Returns the visible KListView object or NULL if none exists.
-   * Basically just a wrapper around a cast and a call to @ref QWidgetStack::visibleWidget.
-   *
-   * @return A pointer to the KListView object
-   */
-  KListView* visibleListView();
-  /**
-   * Returns a listview by id number or NULL if none exists.
-   * Basically just a wrapper around a cast and a call to @ref QWidgetStack::widget.
-   *
-   * @param id The id number
-   * @return A pointer to the KListView object
-   */
-  KListView* listView(int id);
+  ~BCDetailedListView();
 
 public slots:
   /**
@@ -80,13 +64,7 @@ public slots:
    *
    * @param coll A pointer to the collection added
    */
-  void slotAddPage(BCCollection* coll);
-  /**
-   * Removes the page corresponding to a certain collection.
-   *
-   * @param coll A pointer to the collection being removed
-   */
-   void slotRemovePage(BCCollection* coll);
+  void slotSetContents(BCCollection* coll);
   /**
    * Adds a new list item showing the details for a unit.
    *
@@ -112,12 +90,6 @@ public slots:
    */
   void slotSetSelected(BCUnit* unit);
   /**
-   * Ensures that the unit is visible, bringing container list view to front
-   *
-   * @param unit A point to the unit
-   */
-  void slotShowUnit(BCUnit* unit);
-  /**
    * Handles emitting the signal indicating a desire to delete the unit attached
    * to the current list item.
    */
@@ -137,10 +109,9 @@ protected:
    * is found, a NULL pointer is returned.
    *
    * @param unit A pointer to the unit
-   * @param view A pointer to the listview to which the item belongs, if known
    * @return A pointer to the item
    */
-  BCUnitItem* locateItem(BCUnit* unit, KListView* view=0);
+  BCUnitItem* locateItem(BCUnit* unit);
 
 protected slots:
   /**
@@ -178,11 +149,10 @@ signals:
    *
    * @param unit A pointer to the unit
    */
-  void signalDoUnitDelete(BCUnit* unit);
+  void signalDeleteUnit(BCUnit* unit);
 
 private:
   BCCollection* m_currColl;
-  QWidgetStack* m_stack;
   KPopupMenu m_menu;
 };
 
