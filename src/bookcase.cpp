@@ -796,7 +796,7 @@ void Bookcase::slotEditFindNext() {
 }
 
 void Bookcase::slotToggleToolBar() {
-#if KDE_VERION < 306
+#if KDE_VERSION < 306
   slotStatusMsg(i18n("Toggling toolbar..."));
 
   if(m_toggleToolBar->isChecked()) {
@@ -1075,14 +1075,12 @@ void Bookcase::doPrint(const QString& html_) {
   delete w;
 }
 
-inline
 void Bookcase::XSLTError() {
   QString str = i18n("Bookcase encountered an error in XSLT processing.\n");
   str += i18n("Please check your installation.");
   KMessageBox::sorry(this, str);
 }
 
-inline
 void Bookcase::FileError(const QString& filename) {
   QString str = i18n("Bookcase is unable to find a required file - %1.\n").arg(filename);
   str += i18n("Please check your installation.");

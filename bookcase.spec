@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.5
+%define version 0.5.1
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
@@ -35,7 +35,7 @@ make
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/pics
 %makeinstall_std
 # why does this happen?
-mv $RPM_BUILD_ROOT/usr/bin/i586-mandrake-linux-gnu-bookcase $RPM_BUILD_ROOT/usr/bin/bookcase
+#mv $RPM_BUILD_ROOT/usr/bin/i586-mandrake-linux-gnu-bookcase $RPM_BUILD_ROOT/usr/bin/bookcase
 
 (cd $RPM_BUILD_ROOT
 mkdir -p ./usr/lib/menu

@@ -1,3 +1,8 @@
+2003-03-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed types and compile problems. Thanks, Dre!
+	* Released Bookcase version 0.5.1
+
 2003-03-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Put the book count in color.

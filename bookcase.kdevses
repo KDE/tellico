@@ -3,7 +3,7 @@
 <KDevPrjSession>
  <LastCompileConfig>(Default)</LastCompileConfig>
  <Mainframe MaximizeMode="1" />
- <DocsAndViews NumberOfDocuments="11" >
+ <DocsAndViews NumberOfDocuments="12" >
   <Doc0 CursorPosLine="65" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="80" FileName="/home/robby/projects/bookcase/src/bcunititem.cpp" >
    <View0 Top="0" Width="915" Attach="1" Height="575" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc0>
@@ -19,11 +19,11 @@
   <Doc4 CursorPosLine="36" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/robby/projects/bookcase/src/bcunitgroup.h" >
    <View0 Top="0" Width="915" Attach="1" Height="575" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc4>
-  <Doc5 CursorPosLine="1254" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="37" FileName="/home/robby/projects/bookcase/src/bookcase.cpp" >
+  <Doc5 CursorPosLine="1082" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/robby/projects/bookcase/src/bookcase.cpp" >
    <View0 Top="0" Width="915" Attach="1" Height="572" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc5>
-  <Doc6 CursorPosLine="49" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/robby/projects/bookcase/src/bookcasedoc.cpp" >
-   <View0 Top="0" Width="915" Attach="1" Height="575" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  <Doc6 CursorPosLine="636" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="29" FileName="/home/robby/projects/bookcase/src/bookcasedoc.cpp" >
+   <View0 Top="0" Width="915" Attach="1" Height="572" Left="0" Focus="1" Type="KWriteView" MinMaxMode="0" />
   </Doc6>
   <Doc7 CursorPosLine="546" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="79" FileName="/home/robby/projects/bookcase/src/bcuniteditwidget.cpp" >
    <View0 Top="0" Width="915" Attach="1" Height="575" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
@@ -32,10 +32,13 @@
    <View0 Top="0" Width="915" Attach="1" Height="575" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc8>
   <Doc9 CursorPosLine="54" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/robby/projects/bookcase/src/bookcasedoc.h" >
-   <View0 Top="0" Width="915" Attach="1" Height="572" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+   <View0 Top="0" Width="915" Attach="1" Height="575" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc9>
   <Doc10 CursorPosLine="74" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="27" FileName="/home/robby/projects/bookcase/src/bclabelaction.cpp" >
-   <View0 Top="0" Width="915" Attach="1" Height="572" Left="0" Focus="1" Type="KWriteView" MinMaxMode="0" />
+   <View0 Top="0" Width="915" Attach="1" Height="572" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc10>
+  <Doc11 CursorPosLine="499" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="18" FileName="/home/robby/projects/bookcase/src/configdialog.cpp" >
+   <View0 Top="0" Width="915" Attach="1" Height="572" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc11>
  </DocsAndViews>
 </KDevPrjSession>

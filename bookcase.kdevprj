@@ -23,7 +23,7 @@ cflags=
 cppflags=
 cxxflags=\s-O3 -pg -g1 -Wall
 ldadd=-lkdeprint -lxml2 -lxslt -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)
-ldflags=\s                                                                    \s
+ldflags=\s                                                                     \s
 
 [General]
 AMChanged=false
@@ -40,7 +40,7 @@ project_type=normal_kde2
 sgml_file=/home/robby/projects/bookcase/doc/en/index.docbook
 short_info=
 sub_dir=src/
-version=0.5
+version=0.5.1
 version_control=CVS
 workspace=1
 

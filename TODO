@@ -1,17 +1,12 @@
 General
   Allow for multiple collections in one document, will require major changes.
   Work on documentation.
-  Allow exporting to a Bibtex file (suggestion from Arne Henningsen)
 
 BCAttribute::formatTitle()
   If the user enters an article at the end of the title, like so: "new title, a" because
   he/she doesn't know that it gets switched automatically, it should get saved in the proper
   place at the beginning, and then the normal switch is made.
 
-BCAttribute::formatName()
-  Need to implement first name/last name sorting.
-
 Bookcase::slotFileSave() or whatever
   Figure out how to include a graphic of the book cover or whatever. Should probably move to a
   KTarGz file format like koffice.
-

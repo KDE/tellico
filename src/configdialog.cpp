@@ -429,7 +429,12 @@ bool ConfigDialog::configValue(const QString& key_) {
 }
 
 void ConfigDialog::slotFieldLeft() {
-  QListBoxItem* item = m_lbSelectedFields->selectedItem();
+  QListBoxItem* item;
+#if QT_VERSION >= 0x030100
+  item = m_lbSelectedFields->selectedItem();
+#else
+  item = m_lbSelectedFields->item(m_lbSelectedFields->currentItem());
+#endif
   if(item) {
     m_lbAvailableFields->insertItem(item->text());
     if(item->next()) {
@@ -445,7 +450,12 @@ void ConfigDialog::slotFieldLeft() {
 }
 
 void ConfigDialog::slotFieldRight() {
-  QListBoxItem* item = m_lbAvailableFields->selectedItem();
+  QListBoxItem* item;
+#if QT_VERSION >= 0x030100
+  item = m_lbAvailableFields->selectedItem();
+#else
+  item = m_lbAvailableFields->item(m_lbAvailableFields->currentItem());
+#endif
   if(item) {
     m_lbSelectedFields->insertItem(item->text());
     if(item->next()) {
@@ -461,7 +471,12 @@ void ConfigDialog::slotFieldRight() {
 }
 
 void ConfigDialog::slotFieldUp() {
-  QListBoxItem* item = m_lbSelectedFields->selectedItem();
+  QListBoxItem* item;
+#if QT_VERSION >= 0x030100
+  item = m_lbSelectedFields->selectedItem();
+#else
+  item = m_lbSelectedFields->item(m_lbSelectedFields->currentItem());
+#endif
   if(item) {
     QListBoxItem* prev = item->prev(); // could be 0
     if(prev) {
@@ -472,7 +487,12 @@ void ConfigDialog::slotFieldUp() {
 }
 
 void ConfigDialog::slotFieldDown() {
-  QListBoxItem* item = m_lbSelectedFields->selectedItem();
+  QListBoxItem* item;
+#if QT_VERSION >= 0x030100
+  item = m_lbSelectedFields->selectedItem();
+#else
+  item = m_lbSelectedFields->item(m_lbSelectedFields->currentItem());
+#endif
   if(item) {
     QListBoxItem* next = item->next(); // could be 0
     if(next) {

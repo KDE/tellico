@@ -485,7 +485,6 @@ QDomDocument BookcaseDoc::exportXML(bool format_/*=false*/) {
   QDomDocumentType doctype = impl.createDocumentType(QString::fromLatin1("bookcase"),
                                                      QString::null,
                                                      QString::fromLatin1("bookcase.dtd"));
-
   //default namespace
   QString ns = QString::fromLatin1("http://periapsis.org/bookcase/");
 
@@ -498,8 +497,8 @@ QDomDocument BookcaseDoc::exportXML(bool format_/*=false*/) {
                                                                        "encoding=\"UTF-8\"")),
                                                    doc.documentElement());
 
+//  QDomElement bcelem = doc.createElementNS(ns, QString::fromLatin1("bookcase"));
   QDomElement bcelem = doc.documentElement();
-  // attributes do not inherit the default namespace
   bcelem.setAttribute(QString::fromLatin1("syntaxVersion"), SYNTAX_VERSION);
   doc.appendChild(bcelem);
 
@@ -614,23 +613,25 @@ QDomDocument BookcaseDoc::exportXML(bool format_/*=false*/) {
 }
 
 QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) {
-  //QDomDocument doc("bookcase");
   QDomImplementation impl;
   QDomDocumentType doctype = impl.createDocumentType(QString::fromLatin1("bookcase"),
                                                      QString::null,
                                                      QString::fromLatin1("bookcase.dtd"));
-  QDomDocument doc = impl.createDocument(QString::null, QString::null, doctype);
-  //QDomImplementation::creatDocument() creates a root element as well, remove it
-  doc.removeChild(doc.firstChild());
-
-  doc.appendChild(doc.createProcessingInstruction(QString::fromLatin1("xml"),
-                                                  QString::fromLatin1("version=\"1.0\" "
-                                                  "encoding=\"UTF-8\"")));
-
   //default namespace
   QString ns = QString::fromLatin1("http://periapsis.org/bookcase/");
-  QDomElement bcelem = doc.createElementNS(ns, QString::fromLatin1("bookcase"));
-//  QDomElement bcelem = doc.createElement("bookcase");
+
+  QDomDocument doc = impl.createDocument(ns, QString::fromLatin1("bookcase"), doctype);
+  
+  // createDocument creates a root node, insert the processing instruction before it
+  // Is it truly UTF_8 encoding? Yes, QDomDocument::toCString() returns UTF-8
+  doc.insertBefore(doc.createProcessingInstruction(QString::fromLatin1("xml"),
+                                                   QString::fromLatin1("version=\"1.0\" "
+                                                                       "encoding=\"UTF-8\"")),
+                                                   doc.documentElement());
+
+//  QDomElement bcelem = doc.createElementNS(ns, QString::fromLatin1("bookcase"));
+  QDomElement bcelem = doc.documentElement();
+  bcelem.setAttribute(QString::fromLatin1("syntaxVersion"), SYNTAX_VERSION);
   doc.appendChild(bcelem);
 
   BCCollectionListIterator collIt(m_collList);
@@ -706,12 +707,12 @@ QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) {
     } // end group loop
   } // end collection loop
   
-//  QFile f(QString::fromLatin1("/tmp/test.xml"));
-//  if(f.open(IO_WriteOnly)) {
-//    QTextStream t(&f);
-//    t << doc.toCString().data();
-//  }
-//  f.close();
+  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  if(f.open(IO_WriteOnly)) {
+    QTextStream t(&f);
+    t << doc.toCString().data();
+  }
+  f.close();
 
   return doc;
 }
