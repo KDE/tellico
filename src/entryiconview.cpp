@@ -23,9 +23,9 @@
 #include <kstringhandler.h>
 
 namespace {
-  static const unsigned MIN_ENTRY_ICON_SIZE = 32;
-  static const unsigned MAX_ENTRY_ICON_SIZE = 128;
-  static const unsigned ENTRY_ICON_SIZE_PAD = 4;
+  static const uint MIN_ENTRY_ICON_SIZE = 32;
+  static const uint MAX_ENTRY_ICON_SIZE = 128;
+  static const uint ENTRY_ICON_SIZE_PAD = 4;
 }
 
 using Tellico::EntryIconView;
@@ -72,7 +72,7 @@ const QString& EntryIconView::imageField() {
   return m_imageField;
 }
 
-void EntryIconView::setMaxIconWidth(const unsigned& width_) {
+void EntryIconView::setMaxIconWidth(uint width_) {
   m_maxIconWidth = KMAX(MIN_ENTRY_ICON_SIZE, KMIN(MAX_ENTRY_ICON_SIZE, width_));
   refresh();
 }

@@ -5,29 +5,12 @@ if test -n "$kde_libs_prefix" -a -n "$given_prefix"; then
     echo ""
     echo "Warning: you chose to install this package in $given_prefix,"
     echo "but KDE was found in $kde_libs_prefix."
-    echo "For this to work, you will need to tell KDE about the new prefix, by ensuring"
-    echo "that KDEDIRS contains it, e.g. export KDEDIRS=$given_prefix:$kde_libs_prefix"
+    echo "For this to work, you will need to tell KDE about the new prefix,"
+    echo "by ensuring that KDEDIRS contains it, e.g."
+    echo "   export KDEDIRS=$given_prefix:$kde_libs_prefix"
     echo "Then restart KDE."
     echo ""
   fi
-fi
-
-if test -z "$TAGLIB_CONFIG"; then
-    echo "  *** You don't have the TagLib headers on your system"
-    echo "  *** Support for reading audio files is disabled"
-    echo ""
-fi
-
-if test -z "$YAZ_CONFIG"; then
-    echo "  *** You don't have the yaz headers on your system"
-    echo "  *** Support for z39.50 searches is disabled"
-    echo ""
-fi
-
-if test x$kcddb != xyes; then
-    echo "  *** You don't have the kcddb headers on your system"
-    echo "  *** Support for fetching CDDB info is disabled"
-    echo ""
 fi
 
 if test "$all_tests" = "bad"; then

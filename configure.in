@@ -40,7 +40,7 @@ dnl Perform program name transformation
 AC_ARG_PROGRAM
 
 dnl Automake doc recommends to do this only here. (Janos)
-AM_INIT_AUTOMAKE(tellico, 0.13) dnl searches for some needed programs
+AM_INIT_AUTOMAKE(tellico, 0.13.1) dnl searches for some needed programs
 
 KDE_SET_PREFIX
 
@@ -401,6 +401,30 @@ AC_CONFIG_FILES([ src/translators/pilotdb/libpalm/Makefile ])
 AC_CONFIG_FILES([ xslt/Makefile ])
 AC_CONFIG_FILES([ xslt/entry-templates/Makefile ])
 AC_OUTPUT
+echo ""
+
+if test -z "$TAGLIB_CONFIG"; then
+    echo "  ****************************************************"
+    echo "  *** You don't have the TagLib headers on your system"
+    echo "  *** Support for reading audio files is disabled"
+    echo "  ****************************************************"
+    echo ""
+fi
+
+if test -z "$YAZ_CONFIG"; then
+    echo "  ****************************************************"
+    echo "  *** You don't have the yaz headers on your system"
+    echo "  *** Support for z39.50 searches is disabled"
+    echo "  ****************************************************"
+    echo ""
+fi
+
+if test x$kcddb != xyes; then
+    echo "  ****************************************************"
+    echo "  *** You don't have the kcddb headers on your system"
+    echo "  *** Support for fetching CDDB info is disabled"
+    echo "  ****************************************************"
+fi
 # Check if KDE_SET_PREFIX was called, and --prefix was passed to configure
 if test -n "$kde_libs_prefix" -a -n "$given_prefix"; then
   # And if so, warn when they don't match
@@ -408,29 +432,12 @@ if test -n "$kde_libs_prefix" -a -n "$given_prefix"; then
     echo ""
     echo "Warning: you chose to install this package in $given_prefix,"
     echo "but KDE was found in $kde_libs_prefix."
-    echo "For this to work, you will need to tell KDE about the new prefix, by ensuring"
-    echo "that KDEDIRS contains it, e.g. export KDEDIRS=$given_prefix:$kde_libs_prefix"
+    echo "For this to work, you will need to tell KDE about the new prefix,"
+    echo "by ensuring that KDEDIRS contains it, e.g."
+    echo "   export KDEDIRS=$given_prefix:$kde_libs_prefix"
     echo "Then restart KDE."
     echo ""
   fi
-fi
-
-if test -z "$TAGLIB_CONFIG"; then
-    echo "  *** You don't have the TagLib headers on your system"
-    echo "  *** Support for reading audio files is disabled"
-    echo ""
-fi
-
-if test -z "$YAZ_CONFIG"; then
-    echo "  *** You don't have the yaz headers on your system"
-    echo "  *** Support for z39.50 searches is disabled"
-    echo ""
-fi
-
-if test x$kcddb != xyes; then
-    echo "  *** You don't have the kcddb headers on your system"
-    echo "  *** Support for fetching CDDB info is disabled"
-    echo ""
 fi
 
 if test "$all_tests" = "bad"; then

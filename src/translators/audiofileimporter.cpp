@@ -88,7 +88,7 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
   progressDlg.setMinimumDuration(files.count() > 20 ? 500 : 2000); // default is 2000
 
   QStringList directoryFiles;
-  const uint stepSize = KMAX(static_cast<uint>(1), files.count() / 100);
+  const uint stepSize = KMAX(static_cast<size_t>(1), files.count() / 100);
   uint step = 1;
   for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it, ++step) {
     if(progressDlg.wasCancelled()) {

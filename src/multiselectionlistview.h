@@ -23,7 +23,7 @@ namespace Tellico {
  * whether child items may be selected or not.
  *
  * @author Robby Stephenson
- * @version $Id: multiselectionlistview.h 862 2004-09-15 01:49:51Z robby $
+ * @version $Id: multiselectionlistview.h 1005 2004-12-11 23:08:59Z robby $
  */
 class MultiSelectionListView : public KListView {
 Q_OBJECT
@@ -47,6 +47,14 @@ public:
    * @return Whether the item may be selected
    */
   virtual bool isSelectable(MultiSelectionListViewItem*) const { return true; }
+  // taken from KDE bug 59791
+  void setShadeSortColumn(bool shade_);
+  bool shadeSortColumn() const { return m_shadeSortColumn; }
+  const QColor& background2() const { return m_backColor2; }
+  const QColor& alternateBackground2() const { return m_altColor2; }
+
+private slots:
+  void slotUpdateColors();
 
 private:
   /**
@@ -56,12 +64,16 @@ private:
    * @param s Selected or not
    */
   void updateSelected(MultiSelectionListViewItem* item, bool s) const;
+
   mutable QPtrList<MultiSelectionListViewItem> m_selectedItems;
+  bool m_shadeSortColumn;
+  QColor m_backColor2;
+  QColor m_altColor2;
 };
 
 /**
  * @author Robby Stephenson
- * @version $Id: multiselectionlistview.h 862 2004-09-15 01:49:51Z robby $
+ * @version $Id: multiselectionlistview.h 1005 2004-12-11 23:08:59Z robby $
  */
 class MultiSelectionListViewItem : public KListViewItem {
 public:
@@ -72,7 +84,10 @@ public:
   MultiSelectionListViewItem(MultiSelectionListView* parent, const QString& text) : KListViewItem(parent, text) {}
   MultiSelectionListViewItem(MultiSelectionListViewItem* parent, const QString& text) : KListViewItem(parent, text) {}
 
-  virtual void setSelected(bool s);
+  virtual void setSelected(bool selected);
+  const QColor& backgroundColor(int column);
+  virtual void paintCell(QPainter* painter, const QColorGroup& colorGroup,
+                         int column, int width, int alignment);
 };
 
 } // end namespace

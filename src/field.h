@@ -30,7 +30,7 @@ namespace Tellico {
  * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: field.h 862 2004-09-15 01:49:51Z robby $
+ * @version $Id: field.h 1005 2004-12-11 23:08:59Z robby $
  */
 class Field {
 public:
@@ -227,7 +227,7 @@ public:
    *
    * @param flag The field flag
    */
-  void setFormatFlag(FormatFlag flag) { m_formatFlag = flag; }
+  void setFormatFlag(FormatFlag flag);
   /**
    * Returns the description for the field.
    *

@@ -85,9 +85,10 @@ void PalmLib::FlatFile::DB::extract_chunks(const PalmLib::Block& appinfo)
             /* Stop the loop if there is not enough room for even one
              * chunk header.
              */
-//            if (i + 4 >= appinfo.size())
+            if (i + 4 >= appinfo.size()) {
 //                throw PalmLib::error("header is corrupt");
-
+                 kdDebug() << "header is corrupt" << endl;
+            }
             // Copy the chunk type and size into the local buffer.
             chunk_type = get_short(appinfo.data() + i);
             chunk_size = get_short(appinfo.data() + i + 2);
@@ -104,10 +105,13 @@ void PalmLib::FlatFile::DB::extract_chunks(const PalmLib::Block& appinfo)
 
         // If everything was correct, then we should be exactly at the
         // end of the block.
-//        if (i != appinfo.size())
+        if (i != appinfo.size()) {
 //            throw PalmLib::error("header is corrupt");
-//    } else {
+            kdDebug() << "header is corrupt" << endl;
+        }
+    } else {
 //        throw PalmLib::error("header is corrupt");
+        kdDebug() << "header is corrupt" << endl;
     }
 }
 
@@ -116,9 +120,11 @@ void PalmLib::FlatFile::DB::extract_schema(unsigned numFields)
     unsigned i;
 
     if (!has_key(m_chunks, CHUNK_FIELD_NAMES)
-        || !has_key(m_chunks, CHUNK_FIELD_TYPES))
-        return;
+        || !has_key(m_chunks, CHUNK_FIELD_TYPES)) {
 //        throw PalmLib::error("database is missing its schema");
+        kdDebug() << "database is missing its schema" << endl;
+        return;
+    }
 
     Chunk names_chunk = m_chunks[CHUNK_FIELD_NAMES][0];
     Chunk types_chunk = m_chunks[CHUNK_FIELD_TYPES][0];
@@ -126,9 +132,10 @@ void PalmLib::FlatFile::DB::extract_schema(unsigned numFields)
     pi_char_t* q = types_chunk.data();
 
     // Ensure that the types chunk has the expected size.
-//    if (types_chunk.size() != numFields * sizeof(pi_uint16_t))
+    if (types_chunk.size() != numFields * sizeof(pi_uint16_t)) {
 //        throw PalmLib::error("types chunk is corrupt");
-
+        kdDebug() << "types chunk is corrupt" << endl;
+    }
     // Loop for each field and extract the name and type.
     for (i = 0; i < numFields; ++i) {
         PalmLib::FlatFile::Field::FieldType type;
@@ -138,8 +145,10 @@ void PalmLib::FlatFile::DB::extract_schema(unsigned numFields)
         // string does not go beyond the end of the chunk.
         pi_char_t* null_p = reinterpret_cast<pi_char_t*>
             (memchr(p, 0, names_chunk.size() - (p - names_chunk.data())));
-//        if (!null_p)
+        if (!null_p) {
 //            throw PalmLib::error("names chunk is corrupt");
+            kdDebug() << "names chunk is corrupt" << endl;
+        }
         len = null_p - p;
 
         switch (PalmLib::get_short(q)) {
@@ -217,9 +226,10 @@ void PalmLib::FlatFile::DB::extract_listviews()
         const Chunk& chunk = (*iter);
         PalmLib::FlatFile::ListView lv;
 
-//        if (chunk.size() < (2 + 2 + 32))
+        if (chunk.size() < (2 + 2 + 32)) {
 //            throw PalmLib::error("list view is corrupt");
-
+            kdDebug() << "list view is corrupt" << endl;
+        }
         pi_uint16_t flags = PalmLib::get_short(chunk.data());
         pi_uint16_t num_cols = PalmLib::get_short(chunk.data() + 2);
 
@@ -227,9 +237,10 @@ void PalmLib::FlatFile::DB::extract_listviews()
         if (flags & VIEWFLAG_USE_IN_EDITVIEW)
           lv.editoruse = true;
 
-//        if (chunk.size() != static_cast<unsigned> (2 + 2 + 32 + num_cols * 4))
-//            throw PalmLib::error("list view is corrupt");
-
+        if (chunk.size() != static_cast<unsigned> (2 + 2 + 32 + num_cols * 4)) {
+//           throw PalmLib::error("list view is corrupt");
+           kdDebug() << "list view is corrupt" << endl;
+        }
         // Determine the length of the name string.
         pi_char_t* null_ptr = reinterpret_cast<pi_char_t*>
             (memchr(chunk.data() + 4, 0, 32));
@@ -245,9 +256,10 @@ void PalmLib::FlatFile::DB::extract_listviews()
             pi_uint16_t width = PalmLib::get_short(p + 2);
             p += 2 * sizeof(pi_uint16_t);
 
-//            if (field >= getNumOfFields())
+            if (field >= getNumOfFields()) {
 //                throw PalmLib::error("list view is corrupt");
-
+                kdDebug() << "list view is corrupt" << endl;
+            }
             PalmLib::FlatFile::ListViewColumn col(field, width);
             lv.push_back(col);
         }
@@ -396,7 +408,7 @@ std::string PalmLib::FlatFile::DB::extract_fieldsdata(pi_uint16_t field_search, 
         break;
 
         default:
-//            throw PalmLib::error("unknown field type");
+            kdDebug() << "unknown field type" << endl;
             break;
         }
     }
@@ -422,15 +434,18 @@ void PalmLib::FlatFile::DB::parse_record(PalmLib::Record& record,
     unsigned i;
 
     // Ensure that enough space for the offset table exists.
-//    if (record.size() < getNumOfFields() * sizeof(pi_uint16_t))
+    if (record.size() < getNumOfFields() * sizeof(pi_uint16_t)) {
 //        throw PalmLib::error("record is corrupt");
-
+        kdDebug() << "record is corrupt" << endl;
+    }
     // Extract the offsets from the record. Determine field pointers.
     std::vector<pi_uint16_t> offsets(getNumOfFields());
     for (i = 0; i < getNumOfFields(); ++i) {
         offsets[i] = get_short(record.data() + i * sizeof(pi_uint16_t));
-//        if (offsets[i] >= record.size())
+        if (offsets[i] >= record.size()) {
 //            throw PalmLib::error("record is corrupt");
+            kdDebug() << "record is corrupt" << endl;
+        }
         ptrs.push_back(record.data() + offsets[i]);
     }
 
@@ -579,7 +594,7 @@ PalmLib::FlatFile::DB::DB(PalmLib::Database& pdb)
                 } break;
 
                     default:
-//                            throw PalmLib::error("unknown field type");
+                            kdDebug() << "unknown field type" << endl;
                             break;
             }
 
@@ -653,7 +668,7 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
         break;
 
         default:
-//            throw PalmLib::error("unsupported field type");
+            kdDebug() << "unsupported field type" << endl;
             break;
         }
     }
@@ -685,8 +700,8 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
             break;
 
         case PalmLib::FlatFile::Field::NOTE:
-//          if (setNote)
-//            throw PalmLib::error("unsupported field type");
+          if (setNote)
+            kdDebug() << "unsupported field type";
             memcpy(p, fieldData.v_string.c_str(), fieldData.v_string.length() + 1);
             p += fieldData.v_string.length() + 1;
             noteOffsetOffset = p;
@@ -768,7 +783,7 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
         break;
 
         default:
-//            throw PalmLib::error("unsupported field type");
+            kdDebug() << "unsupported field type";
             break;
         }
     if (setNote) {
@@ -1029,7 +1044,7 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
         break;
 
         default:
-//            throw PalmLib::error("unknown field type");
+            kdDebug() << "unknown field type" << endl;
             break;
         }
 
@@ -1143,7 +1158,7 @@ void PalmLib::FlatFile::DB::build_standard_chunks(std::vector<DB::Chunk>& chunks
             break;
 
         default:
-//            throw PalmLib::error("unsupported field type");
+            kdDebug() << "unsupported field type" << endl;
             break;
         }
 

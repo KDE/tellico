@@ -137,6 +137,12 @@ void Field::setFlags(int flags_) {
   }
 }
 
+void Field::setFormatFlag(FormatFlag flag_) {
+  if(m_type != Date) {
+    m_formatFlag = flag_;
+  }
+}
+
 bool Field::isSingleCategory() const {
   return (m_type == Para || m_type == Table || m_type == Table2 || m_type == Image);
 }
@@ -290,12 +296,10 @@ QString Field::formatDate(const QString& date_) {
   int y = s.count() > 0 ? s[0].toInt(&ok) : QDate::currentDate().year();
   if(!ok) {
     y = QDate::currentDate().year();
-    ok = true;
   }
   int m = s.count() > 1 ? s[1].toInt(&ok) : 1;
   if(!ok) {
     m = 1;
-    ok = true;
   }
   int d = s.count() > 2 ? s[2].toInt(&ok) : 1;
   if(!ok) {
@@ -305,7 +309,7 @@ QString Field::formatDate(const QString& date_) {
   // rather use ISO date formatting than locale formatting for now. Primarily, it makes sorting just work.
   return date.toString(Qt::ISODate);
   // use short form
-//  return KGlobal::locale()->formatDate(date,  true);
+//  return KGlobal::locale()->formatDate(date, true);
 }
 
 QString Field::capitalize(QString str_) {

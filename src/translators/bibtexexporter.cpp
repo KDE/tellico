@@ -77,7 +77,7 @@ QWidget* BibtexExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
                                          "will be skipped."));
 
   QHBox* hbox = new QHBox(box);
-  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:"), hbox);
+  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:") + ' ', hbox); // add a space for astheticss
   m_cbBibtexStyle = new KComboBox(hbox);
   m_cbBibtexStyle->insertItem(i18n("Braces"));
   m_cbBibtexStyle->insertItem(i18n("Quotes"));

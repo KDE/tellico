@@ -34,7 +34,7 @@ namespace Tellico {
  * The calling function owns the collection pointer.
  *
  * @author Robby Stephenson
- * @version $Id: importer.h 934 2004-11-01 03:33:54Z robby $
+ * @version $Id: importer.h 997 2004-12-07 14:35:31Z robby $
  */
 class Importer : public QObject {
 Q_OBJECT
@@ -107,7 +107,7 @@ protected:
    */
   void setStatusMessage(const QString& msg) { if(!msg.isEmpty()) m_statusMsg += msg + QChar(' '); }
 
-  static const unsigned s_stepSize;
+  static const uint s_stepSize;
 
 private:
   KURL m_url;

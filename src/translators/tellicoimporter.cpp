@@ -185,7 +185,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     m_coll = c;
   }
 
-  unsigned const count = entryelems.count();
+  const uint count = entryelems.count();
   for(unsigned j = 0; j < count; ++j) {
     readEntry(syntaxVersion, entryelems.item(j));
 

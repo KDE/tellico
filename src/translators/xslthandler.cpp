@@ -32,13 +32,13 @@ static int xslt_options = xml_options;
 
 /* some functions to pass to the XSLT libs */
 static int writeToQString(void* context, const char* buffer, int len) {
-  QString *t = static_cast<QString*>(context);
+  QString* t = static_cast<QString*>(context);
   *t += QString::fromUtf8(buffer, len);
   return len;
 }
 
 static void closeQString(void* context) {
-  QString *t = static_cast<QString*>(context);;
+  QString* t = static_cast<QString*>(context);
   *t += QString::fromLatin1("\n");
 }
 
@@ -49,8 +49,7 @@ int XSLTHandler::s_initCount = 0;
 XSLTHandler::XSLTHandler(const QCString& xsltFile_) :
     m_stylesheet(0),
     m_docIn(0),
-    m_docOut(0),
-    m_numParams(0) {
+    m_docOut(0) {
   init();
   if(!xsltFile_.isNull()) {
 #if LIBXML_VERSION >= 20600
@@ -68,8 +67,7 @@ XSLTHandler::XSLTHandler(const QCString& xsltFile_) :
 XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
     m_stylesheet(0),
     m_docIn(0),
-    m_docOut(0),
-    m_numParams(0) {
+    m_docOut(0) {
   init();
   if(xsltURL_.isValid() && xsltURL_.isLocalFile()) {
 #if LIBXML_VERSION >= 20600
@@ -87,8 +85,7 @@ XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
 XSLTHandler::XSLTHandler(const QDomDocument& xsltDoc_, const QCString& xsltFile_) :
     m_stylesheet(0),
     m_docIn(0),
-    m_docOut(0),
-    m_numParams(0) {
+    m_docOut(0) {
   init();
   if(!xsltDoc_.isNull()) {
     setXSLTDoc(xsltDoc_, xsltFile_);
@@ -115,10 +112,6 @@ XSLTHandler::~XSLTHandler() {
     xsltCleanupGlobals();
     xmlCleanupParser();
   }
-
-  for(int i = 0; i < m_numParams; ++i) {
-    delete[] m_params[i];
-  }
 }
 
 void XSLTHandler::init() {
@@ -131,7 +124,7 @@ void XSLTHandler::init() {
   }
   ++s_initCount;
 
-  m_params[0] = NULL;
+  m_params.clear();
 }
 
 void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_) {
@@ -181,25 +174,18 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
 }
 
 void XSLTHandler::addParam(const QCString& name_, const QCString& value_) {
-  if(m_numParams < MAX_PARAMS) {
-    m_params[m_numParams]     = qstrdup(name_);
-    m_params[m_numParams + 1] = qstrdup(value_);
-    m_params[m_numParams + 2] = 0;
-    m_numParams += 2;
-//    kdDebug() << "XSLTHandler::addParam() - " << name_ << ":" << value_ << endl;
-  } else {
-    kdWarning() << "XSLTHandler::addParam() - too many params to add " << name_ << ":" << value_ << endl;
-  }
+  m_params.insert(name_, value_);
+//  kdDebug() << "XSLTHandler::addParam() - " << name_ << ":" << value_ << endl;
 }
 
 void XSLTHandler::addStringParam(const QCString& name_, const QCString& value_) {
   QCString value = value_;
-//  value.replace('&', "&amp;");
-//  value.replace('<', "&lt;");
-//  value.replace('>', "&gt;");
-//  value.replace('"', "&quot;");
   value.replace('\'', "&apos;");
   addParam(name_, QCString("'") + value + QCString("'"));
+}
+
+void XSLTHandler::removeParam(const QCString& name_) {
+  m_params.remove(name_);
 }
 
 QString XSLTHandler::applyStylesheet(const QCString& text_) {
@@ -246,8 +232,22 @@ QString XSLTHandler::process() {
     return QString::null;
   }
 
+  const char* params[2*m_params.count() + 1];
+  params[0] = NULL;
+  // Qt 3.1 doesn't have constBegin()
+  QMap<QCString, QCString>::Iterator it = m_params.begin();
+  QMap<QCString, QCString>::Iterator end = m_params.end();
+  for(uint i = 0; it != end; ++it) {
+    params[i  ] = qstrdup(it.key());
+    params[i+1] = qstrdup(it.data());
+    params[i+2] = NULL;
+    i += 2;
+  }
   // returns NULL on error
-  m_docOut = xsltApplyStylesheet(m_stylesheet, m_docIn, m_params);
+  m_docOut = xsltApplyStylesheet(m_stylesheet, m_docIn, params);
+  for(uint i = 0; i < 2*m_params.count(); ++i) {
+    delete[] params[i];
+  }
   if(!m_docOut) {
     kdDebug() << "XSLTHandler::applyStylesheet() - error applying stylesheet!" << endl;
     return QString::null;
@@ -260,6 +260,7 @@ QString XSLTHandler::process() {
                                                      &result, 0);
   if(!outp) {
     kdDebug() << "XSLTHandler::applyStylesheet() - error writing output buffer!" << endl;
+    xmlOutputBufferClose(outp); //also flushes
     return result;
   }
 
@@ -268,6 +269,7 @@ QString XSLTHandler::process() {
   int num_bytes = xsltSaveResultTo(outp, m_docOut, m_stylesheet);
   if(num_bytes == -1) {
     kdDebug() << "XSLTHandler::applyStylesheet() - error saving output buffer!" << endl;
+    xmlOutputBufferClose(outp); //also flushes
     return result;
   }
 

@@ -28,7 +28,7 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryview.h 862 2004-09-15 01:49:51Z robby $
+ * @version $Id: entryview.h 998 2004-12-09 02:08:39Z robby $
  */
 class EntryView : public KHTMLPart {
 Q_OBJECT
@@ -56,16 +56,18 @@ public:
    */
   void clear();
   /**
-   * Helper function to refresh view.
-   */
-  void refresh();
-  /**
    * Sets the XSLT file. If the file name does not start with a back-slash, then the
    * standard directories are searched.
    *
    * @param file The XSLT file name
    */
   void setXSLTFile(const QString& file);
+
+public slots:
+  /**
+   * Helper function to refresh view.
+   */
+  void slotRefresh();
 
 private slots:
   /**

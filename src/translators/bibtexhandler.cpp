@@ -36,10 +36,17 @@ BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
 const QRegExp BibtexHandler::s_badKeyChars(QString::fromLatin1("[^0-9a-zA-Z-]"));
 
 QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
-  const Data::BibtexCollection* c = dynamic_cast<const Data::BibtexCollection*>(entry_->collection());;
+  const Data::BibtexCollection* c = dynamic_cast<const Data::BibtexCollection*>(entry_->collection());
+  if(!c) {
+    return QString::null;
+  }
+
   const Data::Field* f = c->fieldByBibtexName(QString::fromLatin1("key"));
   if(f) {
-    return entry_->field(f->name());
+    QString key = entry_->field(f->name());
+    if(!key.isEmpty()) {
+      return key;
+    }
   }
 
   QString author;
@@ -50,12 +57,11 @@ QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
   } else {
     author = entry_->field(authorField->name());
   }
-  author = author.lower();
 
   const Data::Field* titleField = c->fieldByBibtexName(QString::fromLatin1("title"));
   QString title;
   if(titleField) {
-    title = entry_->field(titleField->name()).lower();
+    title = entry_->field(titleField->name());
   }
 
   const Data::Field* yearField = c->fieldByBibtexName(QString::fromLatin1("year"));
@@ -69,21 +75,25 @@ QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
       year = entry_->field(QString::fromLatin1("cr_year"));
     }
   }
-  year = year.section(QString::fromLatin1("; "), 0, 0);
+  year = year.section(';', 0, 0);
 
   return bibtexKey(author, title, year);
 }
 
 QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, const QString& year_) {
   QString key;
-  if(author_.find(',') == -1) {
-    key += author_.section(' ', -1) + '-';
-  } else {
-    key += author_.section(',', 0, 0) + '-';
+  // if no comma, take the last word
+  if(!author_.isEmpty()) {
+    if(author_.find(',') == -1) {
+      key += author_.section(' ', -1).lower() + '-';
+    } else {
+      // if there is a comma, take the string up to the first comma
+      key += author_.section(',', 0, 0).lower() + '-';
+    }
   }
   QStringList words = QStringList::split(' ', title_);
   for(QStringList::ConstIterator it = words.begin(); it != words.end(); ++it) {
-    key += (*it).left(1);
+    key += (*it).left(1).lower();
   }
   key += year_;
   // bibtex key may only contain [0-9a-zA-Z-]

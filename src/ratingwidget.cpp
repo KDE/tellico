@@ -112,7 +112,7 @@ RatingWidget::RatingWidget(const Data::Field* field_, QWidget* parent_, const ch
 
 void RatingWidget::init() {
   updateAllowed();
-  m_total = KMIN(m_allowed.count(), m_widgets.count());
+  m_total = KMIN(m_allowed.count(), static_cast<size_t>(m_widgets.count()));
   uint i = 0;
   for( ; static_cast<int>(i) < m_total; ++i) {
     m_widgets.at(i)->setPixmap(m_pixOff);
@@ -150,7 +150,7 @@ void RatingWidget::update() {
 
 void RatingWidget::mousePressEvent(QMouseEvent* event_) {
   // only react to left button
-  if(event_->button() != LeftButton) {
+  if(event_->button() != Qt::LeftButton) {
     return;
   }
 

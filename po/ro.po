@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-12-01 23:37-0800\n"
+"POT-Creation-Date: 2004-12-11 16:16-0800\n"
 "PO-Revision-Date: 2002-12-03 17:29-0800\n"
 "Last-Translator: Iulian Ursache <iulianu@cs.tuiasi.ro>\n"
 "Language-Team: Română <ro@li.org>\n"
@@ -244,7 +244,7 @@ msgstr ""
 msgid "Location"
 msgstr "Opţiuni colecţii cărţi"
 
-#: collections/stampcollection.cpp:125 field.cpp:414
+#: collections/stampcollection.cpp:125 field.cpp:418
 #, fuzzy
 msgid "Image"
 msgstr "Pagini"
@@ -738,7 +738,7 @@ msgstr ""
 msgid "Month"
 msgstr ""
 
-#: collections/bibtexcollection.cpp:176 field.cpp:410
+#: collections/bibtexcollection.cpp:176 field.cpp:414
 #, fuzzy
 msgid "Number"
 msgstr "Nr. în serie"
@@ -776,7 +776,7 @@ msgstr ""
 msgid "Album"
 msgstr ""
 
-#: collections/musiccollection.cpp:46 translators/freedbimporter.cpp:161
+#: collections/musiccollection.cpp:46 translators/freedbimporter.cpp:168
 msgid "Compact Disc"
 msgstr ""
 
@@ -853,53 +853,53 @@ msgstr ""
 msgid "a,an,and,in,of,the,to"
 msgstr ""
 
-#: field.cpp:376
+#: field.cpp:380
 msgid "the"
 msgstr ""
 
-#: field.cpp:394
+#: field.cpp:398
 msgid "jr.,jr,iii,iv"
 msgstr ""
 
-#: field.cpp:399
+#: field.cpp:403
 msgid "de,van,der,von"
 msgstr ""
 
-#: field.cpp:406
+#: field.cpp:410
 #, fuzzy
 msgid "Simple Text"
 msgstr "Caută"
 
-#: field.cpp:407
+#: field.cpp:411
 msgid "Paragraph"
 msgstr ""
 
-#: field.cpp:408
+#: field.cpp:412
 msgid "Choice"
 msgstr ""
 
-#: field.cpp:409
+#: field.cpp:413
 msgid "Checkbox"
 msgstr ""
 
-#: field.cpp:411 translators/risimporter.cpp:252
+#: field.cpp:415 translators/risimporter.cpp:252
 msgid "URL"
 msgstr ""
 
-#: field.cpp:412
+#: field.cpp:416
 #, fuzzy
 msgid "Table"
 msgstr "Titlu"
 
-#: field.cpp:413
+#: field.cpp:417
 msgid "Table (2 Columns)"
 msgstr ""
 
-#: field.cpp:415
+#: field.cpp:419
 msgid "Dependent"
 msgstr ""
 
-#: field.cpp:417
+#: field.cpp:421
 msgid "Date"
 msgstr "Data"
 
@@ -1012,15 +1012,15 @@ msgstr ""
 #: importdialog.cpp:223 mainwindow.cpp:991 mainwindow.cpp:1105
 #: translators/bibtexexporter.cpp:50 translators/bibtexmlexporter.cpp:40
 #: translators/csvexporter.cpp:42 translators/htmlexporter.cpp:61
-#: translators/pilotdbexporter.cpp:45 translators/tellicoxmlexporter.cpp:48
+#: translators/pilotdbexporter.cpp:46 translators/tellicoxmlexporter.cpp:48
 #: translators/tellicozipexporter.cpp:33 translators/xsltexporter.cpp:41
 #: translators/xsltimporter.cpp:87
 #, fuzzy
 msgid "*|All files"
 msgstr "Opţiuni colecţii audio"
 
-#: detailedlistview.cpp:66 detailedlistview.cpp:297
-#: translators/pilotdbexporter.cpp:132
+#: detailedlistview.cpp:67 detailedlistview.cpp:298
+#: translators/pilotdbexporter.cpp:138
 msgid "View Columns"
 msgstr ""
 
@@ -1648,7 +1648,7 @@ msgstr ""
 "Eroare în procesarea XSLT.\n"
 "Vă rog verificaţi instalarea."
 
-#: entryview.cpp:135 mainwindow.cpp:1660
+#: entryview.cpp:137 mainwindow.cpp:1660
 #, fuzzy
 msgid "Please check your installation."
 msgstr ""
@@ -1887,7 +1887,7 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:442 fetch/z3950fetcher.cpp:382
+#: fetch/amazonfetcher.cpp:442 fetch/z3950fetcher.cpp:390
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 
@@ -1993,7 +1993,7 @@ msgstr ""
 msgid "z39.50"
 msgstr ""
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:401
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:409
 msgid "Library of Congress (US)"
 msgstr ""
 
@@ -2023,7 +2023,7 @@ msgstr ""
 msgid "Certifications"
 msgstr "Clasificare"
 
-#: fetch/imdbfetcher.cpp:761 fetch/z3950fetcher.cpp:412
+#: fetch/imdbfetcher.cpp:761 fetch/z3950fetcher.cpp:420
 #, fuzzy
 msgid "&Host: "
 msgstr "Ies..."
@@ -2046,57 +2046,57 @@ msgstr ""
 msgid "Query error!"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:289
+#: fetch/z3950fetcher.cpp:290
 msgid "Connection search error %1: %2"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:417
+#: fetch/z3950fetcher.cpp:425
 msgid "Enter the host name of the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:422
+#: fetch/z3950fetcher.cpp:430
 #, fuzzy
 msgid "&Port: "
 msgstr "Ies..."
 
-#: fetch/z3950fetcher.cpp:427
+#: fetch/z3950fetcher.cpp:435
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:432
+#: fetch/z3950fetcher.cpp:440
 msgid "&Database: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:437
+#: fetch/z3950fetcher.cpp:445
 msgid "Enter the database name used by the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:442
+#: fetch/z3950fetcher.cpp:450
 msgid "Ch&aracter set: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:451
+#: fetch/z3950fetcher.cpp:459
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:457
+#: fetch/z3950fetcher.cpp:465
 msgid "&User: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:462
+#: fetch/z3950fetcher.cpp:470
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:468
+#: fetch/z3950fetcher.cpp:476
 msgid "Pass&word: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:474
+#: fetch/z3950fetcher.cpp:482
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -3043,7 +3043,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "Şterge carte"
 
-#: entryview.cpp:133
+#: entryview.cpp:135
 #, fuzzy
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Nu pot deschide fişierul - %1."
@@ -3238,7 +3238,7 @@ msgstr "Opţiuni colecţii audio"
 msgid "Abstract"
 msgstr ""
 
-#: translators/bibtexhandler.cpp:205 translators/risimporter.cpp:254
+#: translators/bibtexhandler.cpp:215 translators/risimporter.cpp:254
 #: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:212
 msgid "Unknown"
 msgstr "necunoscut"
@@ -3280,11 +3280,11 @@ msgstr ""
 "Dacă bifaţi, ultimul fişier deschis va fi deschis din nou la pornirea "
 "programului."
 
-#: translators/pilotdbexporter.cpp:41
+#: translators/pilotdbexporter.cpp:42
 msgid "PilotDB"
 msgstr ""
 
-#: translators/pilotdbexporter.cpp:45
+#: translators/pilotdbexporter.cpp:46
 #, fuzzy
 msgid "*.pdb|Pilot Database files(*.pdb)"
 msgstr ""
@@ -3292,12 +3292,12 @@ msgstr ""
 "*.xml|Fişiere XML (*.xml)\n"
 "*|Toate fişierele"
 
-#: translators/pilotdbexporter.cpp:176
+#: translators/pilotdbexporter.cpp:198
 #, fuzzy
 msgid "PilotDB Options"
 msgstr "Opţiuni generale"
 
-#: translators/pilotdbexporter.cpp:179 translators/pilotdbexporter.cpp:181
+#: translators/pilotdbexporter.cpp:201 translators/pilotdbexporter.cpp:203
 msgid "Set PDA backup flag for database"
 msgstr ""
 
@@ -3314,34 +3314,34 @@ msgstr ""
 "*.xml|Fişiere XML (*.xml)\n"
 "*|Toate fişierele"
 
-#: translators/freedbimporter.cpp:51 translators/freedbimporter.cpp:99
+#: translators/freedbimporter.cpp:58 translators/freedbimporter.cpp:106
 #, fuzzy
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
 msgstr "Nu pot deschide fişierul - %1."
 
-#: translators/freedbimporter.cpp:120
+#: translators/freedbimporter.cpp:127
 msgid "<qt>No records were found to match the CD.</qt>"
 msgstr ""
 
-#: translators/freedbimporter.cpp:124
+#: translators/freedbimporter.cpp:131
 msgid "<qt>Multiple records were found to match the CD.</qt>"
 msgstr ""
 
-#: translators/freedbimporter.cpp:136
+#: translators/freedbimporter.cpp:143
 #, fuzzy
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "Nu pot deschide fişierul - %1."
 
-#: translators/freedbimporter.cpp:186
+#: translators/freedbimporter.cpp:193
 #, fuzzy
 msgid "Audio CD Options"
 msgstr "Opţiuni generale"
 
-#: translators/freedbimporter.cpp:188
+#: translators/freedbimporter.cpp:195
 msgid "CD-ROM Device:"
 msgstr ""
 
-#: translators/freedbimporter.cpp:191
+#: translators/freedbimporter.cpp:198
 msgid "Select or input the CD-ROM device location."
 msgstr ""
 

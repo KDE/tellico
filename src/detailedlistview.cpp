@@ -45,6 +45,7 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
 //  kdDebug() << "DetailedListView()" << endl;
   setAllColumnsShowFocus(true);
   setShowSortIndicator(true);
+  setShadeSortColumn(true);
 
   connect(this, SIGNAL(selectionChanged()), SLOT(slotSelectionChanged()));
   connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),

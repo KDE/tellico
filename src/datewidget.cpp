@@ -93,7 +93,7 @@ void DateWidget::slotDateChanged() {
   day = KMIN(KMAX(day, m_daySpin->minValue()), m_daySpin->maxValue());
 
   int m = m_monthCombo->currentItem();
-  m = KMIN(KMAX(m,0), m_monthCombo->count()-1);
+  m = KMIN(KMAX(m, 0), m_monthCombo->count()-1);
 
   int y = m_yearSpin->value();
   y = KMIN(KMAX(y, m_yearSpin->minValue()), m_yearSpin->maxValue());

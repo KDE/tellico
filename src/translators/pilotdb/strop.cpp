@@ -24,6 +24,7 @@
 #include <sstream>
 
 #include "strop.h"
+#include <kdebug.h>
 
 extern std::ostream* err;
 
@@ -133,8 +134,8 @@ PalmLib::FlatFile::Field::FieldType StrOps::string2type(std::string typestr)
         return PalmLib::FlatFile::Field::LINKED;
     else if (typestr == "calculated")
         return PalmLib::FlatFile::Field::CALCULATED;
-//    else
-//        throw std::invalid_argument("unknown field type");
+    else
+        kdDebug() << "unknown field type" << endl;
     return PalmLib::FlatFile::Field::STRING;
 }
 
@@ -204,7 +205,7 @@ StrOps::string_list_t StrOps::csv_to_array(const std::string& str, char delim, b
         result.push_back(elem);
     break;
     case STATE_QUOTES:
-//        throw StrOps::csv_unterminated_quote("unterminated quotes");
+        kdDebug() << "unterminated quotes" << endl;
     break;
     }
 
@@ -266,12 +267,12 @@ StrOps::str_to_array(const std::string& str, const std::string& delim,
             else
                 elem += *p;
             break;
-            
+
         case STATE_BACKSLASH:
             elem += *p;
             state = STATE_NORMAL;
         break;
-            
+
         case STATE_BACKSLASH_DOUBLEQUOTE:
             switch (*p) {
             case '\\':
@@ -303,10 +304,10 @@ StrOps::str_to_array(const std::string& str, const std::string& delim,
                 char buf[3];
 
                 // Extract and check the first hexadecimal character.
-//                if ((p + 1) == str.end())
-//                    throw StrOps::csv_parse_error("truncated escape");
-//                if (! isxdigit(*(p + 1)))
-//                    throw StrOps::csv_parse_error("invalid hex character");
+                if ((p + 1) == str.end())
+                    kdDebug() << "truncated escape" << endl;
+                if (! isxdigit(*(p + 1)))
+                    kdDebug() << "invalid hex character" << endl;
                 buf[0] = *++p;
 
                 // Extract and check the second (if any) hex character.
@@ -339,16 +340,16 @@ StrOps::str_to_array(const std::string& str, const std::string& delim,
     break;
 
     case STATE_QUOTE_DOUBLE:
-//        throw StrOps::csv_unterminated_quote("unterminated double quotes");
+        kdDebug() << "unterminated double quotes" << endl;
     break;
 
     case STATE_QUOTE_SINGLE:
-//        throw StrOps::csv_unterminated_quote("unterminated single quotes");
+        kdDebug() << "unterminated single quotes" << endl;
     break;
 
     case STATE_BACKSLASH:
     case STATE_BACKSLASH_DOUBLEQUOTE:
-//        throw StrOps::csv_parse_error("an escape character must follow a backslash");
+        kdDebug() << "an escape character must follow a backslash" << endl;
     break;
 
     default:
@@ -358,7 +359,7 @@ StrOps::str_to_array(const std::string& str, const std::string& delim,
     return result;
 }
 
-PalmLib::pi_uint32_t 
+PalmLib::pi_uint32_t
 StrOps::get_current_time(void)
 {
     time_t now;
@@ -549,7 +550,7 @@ StrOps::quote_string(std::string str, bool extended_mode)
             } else if (*c == '\n' || *c == '\r') {
                 error << "use extended csv mode for newlines\n";
                 *err << error.str();
-//                throw CLP::parse_error(error.str());
+               kdDebug() << error.str().c_str() << endl;
             } else {
                 result += *c;
             }
@@ -561,7 +562,7 @@ StrOps::quote_string(std::string str, bool extended_mode)
 }
 
 std::string
-StrOps::concatenatepath(std::string p_Path, 
+StrOps::concatenatepath(std::string p_Path,
         std::string p_FileName, std::string p_Ext)
 {
     std::string l_FilePath;

@@ -26,7 +26,7 @@ ViewStack::ViewStack(QWidget* parent_, const char* name_/*=0*/) : QWidgetStack(p
     m_entryView(new EntryView(this)), m_iconView(new EntryIconView(this)) {
   QWhatsThis::add(m_entryView->view(), i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
   QWhatsThis::add(m_iconView, i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
-                                     "an icon, which may be an image in the entry.</qt>"));
+                                   "an icon, which may be an image in the entry.</qt>"));
 }
 
 void ViewStack::clear() {
@@ -35,7 +35,7 @@ void ViewStack::clear() {
 }
 
 void ViewStack::refresh() {
-  m_entryView->refresh();
+  m_entryView->slotRefresh();
   m_iconView->refresh();
 }
 

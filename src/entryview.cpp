@@ -27,9 +27,9 @@
 #include <kmessagebox.h>
 #include <khtmlview.h>
 #include <dom/dom_element.h>
+#include <kapplication.h>
 
 #include <qfile.h>
-#include <qapplication.h> // needed for default palette
 
 using Tellico::EntryView;
 
@@ -43,6 +43,7 @@ EntryView::EntryView(QWidget* parent_, const char* name_) : KHTMLPart(parent_, n
 
   connect(browserExtension(), SIGNAL(openURLRequest(const KURL&, const KParts::URLArgs&)),
           this, SLOT(slotOpenURL(const KURL&)));
+  connect(kapp, SIGNAL(kdisplayPaletteChanged()), SLOT(slotRefresh()));
 }
 
 EntryView::~EntryView() {
@@ -112,6 +113,7 @@ void EntryView::showEntry(const Data::Entry* entry_) {
 //  kdDebug() << html << endl;
   write(html);
   end();
+  // not need anymore?
   view()->layout(); // I need this because some of the margins and widths may get messed up
 }
 
@@ -168,7 +170,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   showEntry(m_entry);
 }
 
-void EntryView::refresh() {
+void EntryView::slotRefresh() {
   setXSLTFile(m_xsltFile);
   showEntry(m_entry);
 }

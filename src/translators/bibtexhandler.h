@@ -27,13 +27,12 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexhandler.h 921 2004-10-13 06:36:33Z robby $
+ * @version $Id: bibtexhandler.h 1001 2004-12-10 01:05:24Z robby $
  */
 class BibtexHandler {
 public:
   enum QuoteStyle { BRACES=0, QUOTES=1 };
   static QString bibtexKey(Data::Entry* entry);
-  static QString bibtexKey(const QString& author, const QString& title, const QString& year);
   static QString importText(char* text);
   static QString exportText(const QString& text, const QStringList& macros);
   static bool setFieldValue(Data::Entry* entry, const QString& bibtexField, const QString& value);
@@ -50,6 +49,7 @@ public:
 private:
   typedef QMap<QString, QStringList> StringListMap;
 
+  static QString bibtexKey(const QString& author, const QString& title, const QString& year);
   static void loadTranslationMaps();
   static StringListMap s_utf8LatexMap;
   static const QRegExp s_badKeyChars;

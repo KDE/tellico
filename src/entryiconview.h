@@ -23,7 +23,7 @@ class KPopupMenu;
 namespace Tellico {
 /**
  * @author Robby Stephenson
- * @version $Id: entryiconview.h 862 2004-09-15 01:49:51Z robby $
+ * @version $Id: entryiconview.h 997 2004-12-07 14:35:31Z robby $
  */
 class EntryIconView : public KIconView {
 Q_OBJECT
@@ -45,8 +45,8 @@ public:
   void addEntry(Data::Entry* entry);
   void removeEntry(Data::Entry* entry);
   const QString& imageField();
-  void setMaxIconWidth(const unsigned& width);
-  const unsigned& maxIconWidth() const { return m_maxIconWidth; };
+  void setMaxIconWidth(uint width);
+  uint maxIconWidth() const { return m_maxIconWidth; };
 
   const QPixmap& defaultPixmap() { return m_defaultPixmap; }
   /**
@@ -79,7 +79,7 @@ private:
   QString m_imageField;
   QPixmap m_defaultPixmap;
   KPopupMenu* m_itemMenu;
-  unsigned m_maxIconWidth;
+  uint m_maxIconWidth;
 };
 
 class EntryIconViewItem : public KIconViewItem {

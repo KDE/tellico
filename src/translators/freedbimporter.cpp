@@ -16,8 +16,15 @@
 #include "../latin1literal.h"
 
 #if HAVE_KCDDB
+#ifdef QT_NO_CAST_ASCII
+#define HAD_QT_NO_CAST_ASCII
 #undef QT_NO_CAST_ASCII
+#endif
 #include <libkcddb/client.h>
+#ifdef HAD_QT_NO_CAST_ASCII
+#define QT_NO_CAST_ASCII
+#undef HAD_QT_NO_CAST_ASCII
+#endif
 #endif
 
 #include <klocale.h>

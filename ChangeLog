@@ -1,3 +1,33 @@
+2004-12-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a bug in PilotDB exporting, I think.
+	* Added PilotDB export support for Date fields.
+	* Released Tellico 0.13.1.
+
+2004-12-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed some date formatting.
+
+2004-12-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed auto bibtex key generation for empty keys.
+
+2004-12-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Entry View to react to changes in the color palette.
+
+2004-12-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Increased maz z39.50 port to 999999.
+	* Fixed some KMAX, KMIN template issues with casts.
+	* Added column shading for detailed view, per KDE bug 59791.
+
+2004-12-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Finnish translation, thanks to Tuevo Eloranta.
+	* Updated Norwegian translation, thanks to Leif Mathis Gaup.
+	* Fixed *BSD compile, with patch from Markus Brüffer.
+
 2004-12-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Enabled relative URLs in URL fields.

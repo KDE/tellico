@@ -257,7 +257,7 @@ void Z3950Fetcher::process() {
   const char* addinfo;
   errcode = ZOOM_connection_error(conn, &errmsg, &addinfo);
   if(errcode != 0) {
-    QString s = i18n("Connection error %1: %2").arg(errcode).arg(addinfo);
+    QString s = i18n("Connection error %1: %2").arg(errcode).arg(QString::fromLatin1(addinfo));
     signalStatus(s);
     kdDebug() << s << endl;
     ZOOM_options_destroy(conn_opt);
@@ -282,11 +282,12 @@ void Z3950Fetcher::process() {
 
   ZOOM_resultset_option_set(resultSet, "elementSetName",        m_esn.local8Bit());
   ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", m_rs.local8Bit());
+//  ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", "sutrs");
   ZOOM_resultset_option_set(resultSet, "count",                 QCString().setNum(m_max));
 
   errcode = ZOOM_connection_error(conn, &errmsg, &addinfo);
   if(errcode != 0) {
-    QString s = i18n("Connection search error %1: %2").arg(errcode).arg(addinfo);
+    QString s = i18n("Connection search error %1: %2").arg(errcode).arg(QString::fromLatin1(addinfo));
     signalStatus(s);
     kdDebug() << s << endl;
     ZOOM_options_destroy(conn_opt);
@@ -306,8 +307,6 @@ void Z3950Fetcher::process() {
       kdDebug() << "Z3950Fetcher::process() - no record returned for index " << i << endl;
       continue;
     }
-    int len;
-//    kdDebug() << ZOOM_record_get(rec, "syntax", &len) << endl;
     QCString dataOptions;
     if(m_sourceCharSet.isEmpty()) {
       // take whatever we get
@@ -318,17 +317,26 @@ void Z3950Fetcher::process() {
       // limit user input to 64 chars
       dataOptions = QCString("xml; charset=") + m_sourceCharSet.left(64).local8Bit() + QCString(",utf8");
     }
+    int len;
+//    kdDebug() << ZOOM_record_get(rec, "syntax", &len) << endl;
     QCString data(ZOOM_record_get(rec, dataOptions, &len));
-    // assume always utf-8
-    QString str = s_MARCXMLHandler->applyStylesheet(data);
+    if(len == 0) {
+      kdDebug() << "Z3950Fetcher::process() - empty record found, maybe the character encoding or record format is wrong?" << endl;
+      continue;
+    }
 #if 0
-    kdWarning() << "Remove debug from 3950fetcher.cpp" << endl;
+    kdWarning() << "Remove debug from z3950fetcher.cpp: " << len << endl;
     QFile f1(QString::fromLatin1("/tmp/marc.xml"));
     if(f1.open(IO_WriteOnly)) {
       QTextStream t(&f1);
       t << data;
     }
     f1.close();
+#endif
+    // assume always utf-8
+    QString str = s_MARCXMLHandler->applyStylesheet(data);
+#if 0
+    kdWarning() << "Remove debug from z3950fetcher.cpp" << endl;
     QFile f2(QString::fromLatin1("/tmp/mods.xml"));
     if(f2.open(IO_WriteOnly)) {
       QTextStream t(&f2);
@@ -421,7 +429,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, Z3950Fetcher* fetcher
 
   label = new QLabel(i18n("&Port: "), this);
   l->addWidget(label, 1, 0);
-  m_portSpinBox = new KIntSpinBox(0, 9999, 1, Z3950_DEFAULT_PORT, 10, this);
+  m_portSpinBox = new KIntSpinBox(0, 999999, 1, Z3950_DEFAULT_PORT, 10, this);
   connect(m_portSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSetModified()));
   l->addWidget(m_portSpinBox, 1, 1);
   w = i18n("Enter the port number of the z39.50 server. The default is %1.").arg(Z3950_DEFAULT_PORT);

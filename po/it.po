@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
-"POT-Creation-Date: 2004-12-01 23:37-0800\n"
+"POT-Creation-Date: 2004-12-11 16:16-0800\n"
 "PO-Revision-Date: 2004-05-27 20:03+0200\n"
 "Last-Translator: FaUsT <faust@inventati.org>\n"
 "Language-Team: Italiano <kde-i18n-it@kde.org>\n"
@@ -246,7 +246,7 @@ msgstr "Adesivo"
 msgid "Location"
 msgstr "Provenienza"
 
-#: collections/stampcollection.cpp:125 field.cpp:414
+#: collections/stampcollection.cpp:125 field.cpp:418
 msgid "Image"
 msgstr "Immagine"
 
@@ -730,7 +730,7 @@ msgstr ""
 msgid "Month"
 msgstr "Mese"
 
-#: collections/bibtexcollection.cpp:176 field.cpp:410
+#: collections/bibtexcollection.cpp:176 field.cpp:414
 msgid "Number"
 msgstr "Numero"
 
@@ -766,7 +766,7 @@ msgstr "La mia musica"
 msgid "Album"
 msgstr "Album"
 
-#: collections/musiccollection.cpp:46 translators/freedbimporter.cpp:161
+#: collections/musiccollection.cpp:46 translators/freedbimporter.cpp:168
 msgid "Compact Disc"
 msgstr "Compact Disc"
 
@@ -838,51 +838,51 @@ msgstr "Verifica alme&no uno dei criteri seguenti"
 msgid "a,an,and,in,of,the,to"
 msgstr "uno,un,una,un',in,di,del,della,il,la,lo,a"
 
-#: field.cpp:376
+#: field.cpp:380
 msgid "the"
 msgstr "il,lo,la,l',i,gli,le"
 
-#: field.cpp:394
+#: field.cpp:398
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: field.cpp:399
+#: field.cpp:403
 msgid "de,van,der,von"
 msgstr "de,De,di,Di,van,der,von,mc"
 
-#: field.cpp:406
+#: field.cpp:410
 msgid "Simple Text"
 msgstr "Testo semplice"
 
-#: field.cpp:407
+#: field.cpp:411
 msgid "Paragraph"
 msgstr "Paragrafo"
 
-#: field.cpp:408
+#: field.cpp:412
 msgid "Choice"
 msgstr "Scelta"
 
-#: field.cpp:409
+#: field.cpp:413
 msgid "Checkbox"
 msgstr "Checkbox"
 
-#: field.cpp:411 translators/risimporter.cpp:252
+#: field.cpp:415 translators/risimporter.cpp:252
 msgid "URL"
 msgstr "URL"
 
-#: field.cpp:412
+#: field.cpp:416
 msgid "Table"
 msgstr "Tabella"
 
-#: field.cpp:413
+#: field.cpp:417
 msgid "Table (2 Columns)"
 msgstr "Tabella (2 Colonne)"
 
-#: field.cpp:415
+#: field.cpp:419
 msgid "Dependent"
 msgstr "Dipendente"
 
-#: field.cpp:417
+#: field.cpp:421
 msgid "Date"
 msgstr "Data"
 
@@ -977,14 +977,14 @@ msgstr "*.xml|file XML (*.xml)"
 #: importdialog.cpp:223 mainwindow.cpp:991 mainwindow.cpp:1105
 #: translators/bibtexexporter.cpp:50 translators/bibtexmlexporter.cpp:40
 #: translators/csvexporter.cpp:42 translators/htmlexporter.cpp:61
-#: translators/pilotdbexporter.cpp:45 translators/tellicoxmlexporter.cpp:48
+#: translators/pilotdbexporter.cpp:46 translators/tellicoxmlexporter.cpp:48
 #: translators/tellicozipexporter.cpp:33 translators/xsltexporter.cpp:41
 #: translators/xsltimporter.cpp:87
 msgid "*|All files"
 msgstr "*|Tutti i file"
 
-#: detailedlistview.cpp:66 detailedlistview.cpp:297
-#: translators/pilotdbexporter.cpp:132
+#: detailedlistview.cpp:67 detailedlistview.cpp:298
+#: translators/pilotdbexporter.cpp:138
 msgid "View Columns"
 msgstr "Vedi colonne"
 
@@ -1528,7 +1528,7 @@ msgstr "Pagina %1"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico ha rilevato un errore processando XSLT. \n"
 
-#: entryview.cpp:135 mainwindow.cpp:1660
+#: entryview.cpp:137 mainwindow.cpp:1660
 msgid "Please check your installation."
 msgstr "Controlla la tua installazione, grazie."
 
@@ -1749,7 +1749,7 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:442 fetch/z3950fetcher.cpp:382
+#: fetch/amazonfetcher.cpp:442 fetch/z3950fetcher.cpp:390
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 
@@ -1857,7 +1857,7 @@ msgstr ""
 msgid "z39.50"
 msgstr ""
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:401
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:409
 #, fuzzy
 msgid "Library of Congress (US)"
 msgstr "Numero di Controllo della Biblioteca del Congresso"
@@ -1888,7 +1888,7 @@ msgstr ""
 msgid "Certifications"
 msgstr "Certificazione"
 
-#: fetch/imdbfetcher.cpp:761 fetch/z3950fetcher.cpp:412
+#: fetch/imdbfetcher.cpp:761 fetch/z3950fetcher.cpp:420
 #, fuzzy
 msgid "&Host: "
 msgstr "A colori"
@@ -1911,58 +1911,58 @@ msgstr ""
 msgid "Query error!"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:289
+#: fetch/z3950fetcher.cpp:290
 msgid "Connection search error %1: %2"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:417
+#: fetch/z3950fetcher.cpp:425
 msgid "Enter the host name of the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:422
+#: fetch/z3950fetcher.cpp:430
 #, fuzzy
 msgid "&Port: "
 msgstr "A colori"
 
-#: fetch/z3950fetcher.cpp:427
+#: fetch/z3950fetcher.cpp:435
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:432
+#: fetch/z3950fetcher.cpp:440
 #, fuzzy
 msgid "&Database: "
 msgstr "Tipo di dato:"
 
-#: fetch/z3950fetcher.cpp:437
+#: fetch/z3950fetcher.cpp:445
 msgid "Enter the database name used by the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:442
+#: fetch/z3950fetcher.cpp:450
 msgid "Ch&aracter set: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:451
+#: fetch/z3950fetcher.cpp:459
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:457
+#: fetch/z3950fetcher.cpp:465
 msgid "&User: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:462
+#: fetch/z3950fetcher.cpp:470
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:468
+#: fetch/z3950fetcher.cpp:476
 msgid "Pass&word: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:474
+#: fetch/z3950fetcher.cpp:482
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -2892,7 +2892,7 @@ msgstr ""
 msgid "Save Entry"
 msgstr "Salva Elemento"
 
-#: entryview.cpp:133
+#: entryview.cpp:135
 #, fuzzy
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico non è in grado di trovare"
@@ -3079,7 +3079,7 @@ msgstr "Tutti i campi"
 msgid "Abstract"
 msgstr ""
 
-#: translators/bibtexhandler.cpp:205 translators/risimporter.cpp:254
+#: translators/bibtexhandler.cpp:215 translators/risimporter.cpp:254
 #: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:212
 msgid "Unknown"
 msgstr "Sconosciuto"
@@ -3118,19 +3118,19 @@ msgstr "Includi i titoli degli elementi com header della colonna"
 msgid "If checked, a header row will be added with the field titles."
 msgstr "Se selezionato, verrà aggiunta una riga con i titoli dei campi."
 
-#: translators/pilotdbexporter.cpp:41
+#: translators/pilotdbexporter.cpp:42
 msgid "PilotDB"
 msgstr "PilotDB"
 
-#: translators/pilotdbexporter.cpp:45
+#: translators/pilotdbexporter.cpp:46
 msgid "*.pdb|Pilot Database files(*.pdb)"
 msgstr "*.pdb|File di database Pilot (*.pdb)"
 
-#: translators/pilotdbexporter.cpp:176
+#: translators/pilotdbexporter.cpp:198
 msgid "PilotDB Options"
 msgstr "Opzioni PilotDB"
 
-#: translators/pilotdbexporter.cpp:179 translators/pilotdbexporter.cpp:181
+#: translators/pilotdbexporter.cpp:201 translators/pilotdbexporter.cpp:203
 msgid "Set PDA backup flag for database"
 msgstr "Imposta la flag di backup del palmare per il database"
 
@@ -3142,34 +3142,34 @@ msgstr "File Zip Tellico"
 msgid "*.bc *.tc|Tellico files(*.tc)"
 msgstr "*.bc *.tc|File di Tellico (*.tc)"
 
-#: translators/freedbimporter.cpp:51 translators/freedbimporter.cpp:99
+#: translators/freedbimporter.cpp:58 translators/freedbimporter.cpp:106
 #, fuzzy
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
 msgstr "<qt>Tellico non riesce a scrivere sulla server pipe in <b>%1</b>.</qt>"
 
-#: translators/freedbimporter.cpp:120
+#: translators/freedbimporter.cpp:127
 msgid "<qt>No records were found to match the CD.</qt>"
 msgstr ""
 
-#: translators/freedbimporter.cpp:124
+#: translators/freedbimporter.cpp:131
 msgid "<qt>Multiple records were found to match the CD.</qt>"
 msgstr ""
 
-#: translators/freedbimporter.cpp:136
+#: translators/freedbimporter.cpp:143
 #, fuzzy
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "Impossibile aprire il file - %1."
 
-#: translators/freedbimporter.cpp:186
+#: translators/freedbimporter.cpp:193
 #, fuzzy
 msgid "Audio CD Options"
 msgstr "Opzioni del campo"
 
-#: translators/freedbimporter.cpp:188
+#: translators/freedbimporter.cpp:195
 msgid "CD-ROM Device:"
 msgstr ""
 
-#: translators/freedbimporter.cpp:191
+#: translators/freedbimporter.cpp:198
 msgid "Select or input the CD-ROM device location."
 msgstr ""
 

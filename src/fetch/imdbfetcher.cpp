@@ -552,7 +552,7 @@ void IMDBFetcher::doPlot(const QString& str_, Data::Entry* entry_, const KURL& b
   bool useUserSummary = false;
 
   if(useUserSummary) {
-    QRegExp idRx("title/(tt\\d+)");
+    QRegExp idRx(QString::fromLatin1("title/(tt\\d+)"));
     idRx.search(baseURL_.path());
     KURL plotURL = baseURL_;
     plotURL.setPath(QString::fromLatin1("/title/") + idRx.cap(1) + QString::fromLatin1("/plotsummary"));
@@ -562,7 +562,7 @@ void IMDBFetcher::doPlot(const QString& str_, Data::Entry* entry_, const KURL& b
     if(plotPage.isEmpty()) {
       useUserSummary = false;
     } else {
-      QRegExp plotRx("<p\\s+class\\s*=\\s*\"plotpar\">(.*)</p");
+      QRegExp plotRx(QString::fromLatin1("<p\\s+class\\s*=\\s*\"plotpar\">(.*)</p"));
       plotRx.setMinimal(true);
       if(plotRx.search(plotPage) > -1) {
         QString plot = plotRx.cap(1);
@@ -614,7 +614,7 @@ void IMDBFetcher::doCast(const QString& str_, Data::Entry* entry_, const KURL& b
   // that's usually a lot of people
   // but since it can be in billing order, the main actors might not
   // be in the short list
-  QRegExp idRx("title/(tt\\d+)");
+  QRegExp idRx(QString::fromLatin1("title/(tt\\d+)"));
   idRx.search(baseURL_.path());
   KURL castURL = baseURL_;
   castURL.setPath(QString::fromLatin1("/title/") + idRx.cap(1) + QString::fromLatin1("/fullcredits"));

@@ -60,6 +60,7 @@ extern "C" {
 
 #elif defined(__FreeBSD__)
 
+#include <netinet/in.h>
 #include <sys/cdio.h>
 #define        CDROM_LBA       CD_LBA_FORMAT   /* first frame is 0 */
 #define        CD_MSF_OFFSET   150     /* MSF offset of first frame */
@@ -77,6 +78,7 @@ extern "C" {
 
 #elif defined(__OpenBSD__) || defined(__NetBSD__)
 
+#include <netinet/in.h>
 #include <sys/cdio.h>
 #define        CDROM_LBA       CD_LBA_FORMAT   /* first frame is 0 */
 #define        CD_MSF_OFFSET   150     /* MSF offset of first frame */

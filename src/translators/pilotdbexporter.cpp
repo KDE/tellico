@@ -28,6 +28,7 @@
 #include <qcheckbox.h>
 #include <qwhatsthis.h>
 #include <qtextcodec.h>
+#include <qdatetime.h>
 
 using Tellico::Export::PilotDBExporter;
 
@@ -72,7 +73,7 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
   db.title(codec->fromUnicode(coll->title()).data());
 
   // set backup option
-  db.setOption("backup", (m_checkBackup && m_checkBackup->isChecked()) ? "true" : "false");
+//  db.setOption("backup", (m_checkBackup && m_checkBackup->isChecked()) ? "true" : "false");
 
   // all fields are added
   // except that only one field of type NOTE
@@ -104,13 +105,18 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
 
       case Data::Field::Para:
         if(hasNote) { // only one is allowed, according to palm-db-tools documentation
-          kdDebug() << "adding note as string" << endl;
+          kdDebug() << "PilotDBExporter::data() - adding note as string" << endl;
           db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
-          kdDebug() << "adding note" << endl;
+          kdDebug() << "PilotDBExporter::data() - adding note" << endl;
           db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::NOTE);
           hasNote = true;
         }
+        outputFields.append(fIt.current());
+        break;
+
+      case Data::Field::Date:
+        db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::DATE);
         outputFields.append(fIt.current());
         break;
 
@@ -136,10 +142,8 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
       lv.push_back(col);
     }
     db.appendListView(lv);
-//  } else {
-//    // add view with all fields
-//    db.appendListView(PalmLib::FlatFile::ListView());
   }
+  db.doneWithSchema();
 
   QString value;
   for(Data::EntryListIterator entryIt(entryList()); entryIt.current(); ++entryIt) {
@@ -150,6 +154,24 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
         value = entryIt.current()->formattedField(fIt.current()->name());
       } else {
         value = entryIt.current()->field(fIt.current()->name());
+      }
+      if(fIt.current()->type() == Data::Field::Date) {
+        QStringList s = QStringList::split('-', value, true);
+        bool ok = true;
+        int y = s.count() > 0 ? s[0].toInt(&ok) : QDate::currentDate().year();
+        if(!ok) {
+          y = QDate::currentDate().year();
+        }
+        int m = s.count() > 1 ? s[1].toInt(&ok) : 1;
+        if(!ok) {
+          m = 1;
+        }
+        int d = s.count() > 2 ? s[2].toInt(&ok) : 1;
+        if(!ok) {
+          d = 1;
+        }
+        QDate date(y, m, d);
+        value = date.toString(QString::fromLatin1("yyyy/MM/dd"));
       }
       // the number of fields in the record must match the number of fields in the database
       record.appendField(PilotDB::string2field(db.field_type(i),

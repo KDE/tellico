@@ -24,11 +24,16 @@ using Tellico::Export::PilotDB;
 
 namespace {
   static const int PI_HDR_SIZE          = 78;
+  static const int PI_RESOURCE_ENT_SIZE = 10;
   static const int PI_RECORD_ENT_SIZE   = 8;
 }
 
 PilotDB::PilotDB() : Database(false), m_app_info(), m_sort_info(),
     m_next_record_list_id(0) {
+  pi_int32_t now = StrOps::get_current_time();
+  creation_time(now);
+  modification_time(now);
+  backup_time(now);
 }
 
 PilotDB::~PilotDB() {
@@ -42,7 +47,8 @@ QByteArray PilotDB::data() {
   b.open(IO_WriteOnly);
 
   pi_char_t buf[PI_HDR_SIZE];
-  pi_int16_t offset = PI_HDR_SIZE + m_records.size() * PI_RECORD_ENT_SIZE + 2;
+  pi_int16_t ent_hdr_size = isResourceDB() ? PI_RESOURCE_ENT_SIZE : PI_RECORD_ENT_SIZE;
+  std::streampos offset = PI_HDR_SIZE + m_records.size() * ent_hdr_size + 2;
 
   memcpy(buf, name().c_str(), 32);
   set_short(buf + 32, flags());
@@ -75,11 +81,18 @@ QByteArray PilotDB::data() {
   for(record_list_t::iterator i = m_records.begin(); i != m_records.end(); ++i) {
     Block* entry = *i;
 
-    Record* record = reinterpret_cast<Record *>(entry);
-    set_long(buf, offset);
-    buf[4] = record->attrs();
-    set_treble(buf + 5, record->unique_id());
-    b.writeBlock(reinterpret_cast<char *>(buf), PI_RECORD_ENT_SIZE);
+    if(isResourceDB()) {
+      Resource * resource = reinterpret_cast<Resource *> (entry);
+      set_long(buf, resource->type());
+      set_short(buf + 4, resource->id());
+      set_long(buf + 6, offset);
+    } else {
+      Record * record = reinterpret_cast<Record *> (entry);
+      set_long(buf, offset);
+      buf[4] = record->attrs();
+      set_treble(buf + 5, record->unique_id());
+    }
+    b.writeBlock(reinterpret_cast<char *>(buf), ent_hdr_size);
     offset += entry->raw_size();
   }
 
@@ -107,14 +120,14 @@ QByteArray PilotDB::data() {
 // the returned RawRecord object.
 Record PilotDB::getRecord(unsigned index) const
 {
-//    if (index >= m_records.size()) throw std::out_of_range("invalid index");
+    if (index >= m_records.size()) kdDebug() << "invalid index" << endl;
     return *(reinterpret_cast<Record *> (m_records[index]));
 }
 
 // Set the record identified by the given index to the given record.
 void PilotDB::setRecord(unsigned index, const Record& rec)
 {
-//    if (index >= m_records.size()) throw std::out_of_range("invalid index");
+//    if (index >= m_records.size()) kdDebug() << "invalid index");
     *(reinterpret_cast<Record *> (m_records[index])) = rec;
 }
 
@@ -165,14 +178,14 @@ Resource PilotDB::getResourceByType(pi_uint32_t type, pi_uint32_t id) const
 // object.
 Resource PilotDB::getResourceByIndex(unsigned index) const
 {
-//    if (index >= m_records.size()) throw std::out_of_range("invalid index");
+    if (index >= m_records.size()) kdDebug() << "invalid index" << endl;
     return *(reinterpret_cast<Resource *> (m_records[index]));
 }
 
 // Set the resouce at given index to passed RawResource object.
 void PilotDB::setResource(unsigned index, const Resource& resource)
 {
-//    if (index >= m_records.size()) throw std::out_of_range("invalid index");
+    if (index >= m_records.size()) kdDebug() << "invalid index" << endl;
     *(reinterpret_cast<Resource *> (m_records[index])) = resource;
 }
 
@@ -225,6 +238,31 @@ FlatFile::Field PilotDB::string2field(FlatFile::Field::FieldType type, const std
     case FlatFile::Field::CALCULATED:
       field.type = FlatFile::Field::CALCULATED;
       field.v_string = fldstr;
+      break;
+
+    case FlatFile::Field::DATE:
+      field.type = FlatFile::Field::DATE;
+      struct tm time;
+      if (!fldstr.empty()) {
+#ifdef strptime
+        if(!strptime(fldstr.c_str(), "%Y/%m/%d", &time)) {
+#else
+        if(!StrOps::strptime(fldstr.c_str(), "%Y/%m/%d", &time)) {
+#endif
+          kdDebug() << "invalid date in field" << endl;
+        }
+        field.v_date.month = time.tm_mon + 1;
+        field.v_date.day = time.tm_mday;
+        field.v_date.year = time.tm_year + 1900;
+        field.v_time.hour = time.tm_hour;
+        field.v_time.minute = time.tm_min;
+      } else {
+        field.v_date.month = 0;
+        field.v_date.day = 0;
+        field.v_date.year = 0;
+        field.v_time.hour = 24;
+        field.v_time.minute = 0;
+      }
       break;
 
     default:

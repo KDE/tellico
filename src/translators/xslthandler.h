@@ -17,16 +17,13 @@
 #include <kurl.h>
 
 #include <qdom.h>
+#include <qmap.h>
 
 extern "C" {
 // for xmlDocPtr
 #include <libxml/tree.h>
 // for xsltStyleSheetPtr
 #include <libxslt/xsltInternals.h>
-}
-
-namespace {
-  static const int MAX_PARAMS = 2*16;
 }
 
 namespace Tellico {
@@ -36,7 +33,7 @@ namespace Tellico {
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h 929 2004-10-24 22:29:47Z robby $
+ * @version $Id: xslthandler.h 998 2004-12-09 02:08:39Z robby $
  */
 class XSLTHandler {
 
@@ -74,6 +71,7 @@ public:
    * Adds a string param
    */
   void addStringParam(const QCString& name, const QCString& value);
+  void removeParam(const QCString& name);
   /**
    * Processes text through the XSLT transformation.
    *
@@ -92,8 +90,7 @@ private:
   xmlDocPtr m_docIn;
   xmlDocPtr m_docOut;
 
-  int m_numParams;
-  const char* m_params[MAX_PARAMS + 1];
+  QMap<QCString, QCString> m_params;
 
   static int s_initCount;
 };
