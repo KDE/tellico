@@ -215,6 +215,8 @@ void FetchDialog::slotSearchClicked() {
     Fetch::Manager::self()->stop();
     slotFetchDone();
   } else {
+    m_listView->clear();
+    m_entryView->clear();
     m_started = true;
     m_origCount = m_listView->childCount();
     m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
@@ -239,6 +241,7 @@ void FetchDialog::slotClearClicked() {
   m_entryView->clear();
   Fetch::Manager::self()->stop();
   m_valueLineEdit->clear();
+  m_valueLineEdit->setFocus();
   m_addButton->setEnabled(false);
   m_isbnList.clear();
   slotUpdateStatus(i18n("Ready.")); // because slotFetchDone() writes text

@@ -30,7 +30,7 @@
 #include <kcombobox.h>
 #include <kmessagebox.h>
 
-//#include <qfile.h>
+#include <qfile.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
@@ -319,7 +319,7 @@ void Z3950Fetcher::process() {
     }
     int len;
 //    kdDebug() << ZOOM_record_get(rec, "syntax", &len) << endl;
-    QString data = QString::fromUtf8(ZOOM_record_get(rec, dataOptions, &len), len);
+    QString data = QString::fromUtf8(ZOOM_record_get(rec, dataOptions, &len));
     if(len == 0) {
       kdDebug() << "Z3950Fetcher::process() - empty record found, maybe the character encoding or record format is wrong?" << endl;
       continue;
@@ -347,6 +347,10 @@ void Z3950Fetcher::process() {
     Import::TellicoImporter imp(s_MODSHandler->applyStylesheet(str));
     Data::Collection* coll = imp.collection();
     if(!coll) {
+      if(!imp.statusMessage().isEmpty()) {
+        signalStatus(imp.statusMessage());
+      }
+      kdDebug() << "Z3950Fetcher::process() - no collection pointer" << endl;
       continue;
     }
     for(Data::EntryListIterator it(coll->entryList()); it.current(); ++it) {

@@ -827,4 +827,12 @@ void DetailedListView::slotDoubleClicked(QListViewItem* item_) {
   }
 }
 
+bool DetailedListView::isSelectable(MultiSelectionListViewItem* item_) const {
+  // don't allow hidden items to be selected
+  if(!item_->isVisible()) {
+    return false;
+  }
+  return true;
+}
+
 #include "detailedlistview.moc"

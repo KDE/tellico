@@ -527,11 +527,28 @@ Tellico::Data::Entry* AmazonFetcher::fetchEntry(uint uid_) {
     entry->collection()->deleteField(entry->collection()->fieldByName(QString::fromLatin1("amazon")));
   }
   // don't pollute existing collection with image urls
-  entry->collection()->deleteField(QString::fromLatin1("small-image"));
-  entry->collection()->deleteField(QString::fromLatin1("medium-image"));
-  entry->collection()->deleteField(QString::fromLatin1("large-image"));
+  // but, if the fields are removed from the fecthers collection, subsequent fetchENtry()
+  // calls don't return an image, so check to see if the user doesn't have them, and
+  // then delete them afterwards
+  bool hadSmall = (Kernel::self()->collection()->fieldByName(QString::fromLatin1("small-image")) != 0);
+  bool hadMedium = (Kernel::self()->collection()->fieldByName(QString::fromLatin1("medium-image")) != 0);
+  bool hadLarge = (Kernel::self()->collection()->fieldByName(QString::fromLatin1("large-image")) != 0);
+  entry->setField(QString::fromLatin1("small-image"), QString::null);
+  entry->setField(QString::fromLatin1("medium-image"), QString::null);
+  entry->setField(QString::fromLatin1("large-image"), QString::null);
 
-  return new Data::Entry(*entry, Kernel::self()->collection());
+  Data::Entry* newEntry = new Data::Entry(*entry, Kernel::self()->collection());
+  if(!hadSmall) {
+    Kernel::self()->collection()->deleteField(QString::fromLatin1("small-image"));
+  }
+  if(!hadMedium) {
+    Kernel::self()->collection()->deleteField(QString::fromLatin1("medium-image"));
+  }
+  if(!hadLarge) {
+    Kernel::self()->collection()->deleteField(QString::fromLatin1("large-image"));
+  }
+
+  return newEntry;
 }
 
 Tellico::Fetch::ConfigWidget* AmazonFetcher::configWidget(QWidget* parent_) {

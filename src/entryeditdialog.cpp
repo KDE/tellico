@@ -208,9 +208,11 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
 
   // update keyboard accels
   // only want to manage tabBar(), but KDE bug 71769 means the parent widget must be used
+  // for some eason, RedHat 9 with KDE 3.1 barfs on KAcceleratorManager
+  // so disable it for all KDE 3.1
 #if KDE_IS_VERSION(3,2,90)
   KAcceleratorManager::manage(m_tabs->tabBar());
-#else
+#elif KDE_IS_VERSION(3,1,90)
   KAcceleratorManager::manage(m_tabs->tabBar()->parentWidget());
 #endif
 
@@ -532,7 +534,7 @@ void EntryEditDialog::slotUpdateCompletions(Data::Entry* entry_) {
 #ifndef NDEBUG
   if(m_currColl != entry_->collection()) {
     kdDebug() << "EntryEditDialog::slotUpdateCompletions - inconsistent collection pointers!" << endl;
-    m_currColl = entry_->collection();
+//    m_currColl = entry_->collection();
   }
 #endif
 

@@ -59,6 +59,11 @@ QString Entry::title() const {
 }
 
 QString Entry::field(const QString& fieldName_) const {
+  // paranoia
+  if(!m_coll) {
+    return QString::null;
+  }
+
   Field* f = m_coll->fieldByName(fieldName_);
   if(!f) {
     return QString::null;
@@ -74,6 +79,11 @@ QString Entry::field(const QString& fieldName_) const {
 }
 
 QString Entry::formattedField(const QString& fieldName_) const {
+  // paranoia
+  if(!m_coll) {
+    return QString::null;
+  }
+
   Field* f = m_coll->fieldByName(fieldName_);
   if(!f) {
     return QString::null;

@@ -62,7 +62,6 @@ void EntryIconView::findImageField() {
   if(!list.isEmpty()) {
     m_imageField = list.getFirst()->name();
   }
-//  kdDebug() << "EntryIconView::findImageField() - image field = " << m_imageField << endl;
 }
 
 const QString& EntryIconView::imageField() {
@@ -98,6 +97,8 @@ void EntryIconView::refresh() {
   if(!m_coll && !m_group) {
     return;
   }
+  // force a reset of the image field
+  m_imageField.truncate(0);
   if(m_coll) {
     showCollection(m_coll);
   } else {
@@ -113,22 +114,26 @@ void EntryIconView::clear() {
 }
 
 void EntryIconView::showCollection(const Data::Collection* coll_) {
-  clear();
+  QIconView::clear();
+  m_coll = 0;
+  m_group = 0;
+  // don't call clear(), forces unneccesary resetting of the imageField name
   if(!coll_) {
     return;
   }
   m_coll = coll_;
-  findImageField();
   fillView(coll_->entryList());
 }
 
 void EntryIconView::showEntryGroup(const Data::EntryGroup* group_) {
-  clear();
+  QIconView::clear();
+  m_coll = 0;
+  m_group = 0;
+  // don't call clear(), forces unneccesary resetting of the imageField name
   if(!group_) {
     return;
   }
   m_group = group_;
-  findImageField();
   fillView(*group_);
 }
 
@@ -174,6 +179,13 @@ void EntryIconView::updateSelected(EntryIconViewItem* item_, bool s_) const {
 void EntryIconView::slotShowContextMenu(QIconViewItem* item_, const QPoint& point_) {
   if(item_ && m_itemMenu->count() > 0) {
     m_itemMenu->popup(point_);
+  }
+}
+
+// sole purpose is to nullify group pointer when it gets deleted
+void EntryIconView::slotGroupModified(Tellico::Data::Collection*, const Data::EntryGroup* group_) {
+  if(group_ == m_group && m_group->isEmpty()) {
+    clear();
   }
 }
 

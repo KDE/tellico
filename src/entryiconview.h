@@ -20,10 +20,12 @@ class KPopupMenu;
 
 #include <kiconview.h>
 
+#include <qguardedptr.h>
+
 namespace Tellico {
 /**
  * @author Robby Stephenson
- * @version $Id: entryiconview.h 997 2004-12-07 14:35:31Z robby $
+ * @version $Id: entryiconview.h 1160 2005-04-01 02:50:24Z robby $
  */
 class EntryIconView : public KIconView {
 Q_OBJECT
@@ -56,6 +58,9 @@ public:
    */
   const QPtrList<EntryIconViewItem>& selectedItems() const { return m_selectedItems; }
 
+public slots:
+  void slotGroupModified(Tellico::Data::Collection*, const Tellico::Data::EntryGroup* group);
+
 private slots:
   void slotSelectionChanged();
   void slotDoubleClicked(QIconViewItem* item);
@@ -74,7 +79,7 @@ private:
   void findImageField();
   void fillView(const Data::EntryList& list);
 
-  const Data::Collection* m_coll;
+  QGuardedPtr<const Data::Collection> m_coll;
   const Data::EntryGroup* m_group;
   QString m_imageField;
   QPixmap m_defaultPixmap;

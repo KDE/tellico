@@ -78,6 +78,9 @@ void Controller::slotCollectionAdded(Data::Collection* coll_) {
 
   connect(coll_, SIGNAL(signalGroupModified(Tellico::Data::Collection*, const Tellico::Data::EntryGroup*)),
           m_groupView, SLOT(slotModifyGroup(Tellico::Data::Collection*, const Tellico::Data::EntryGroup*)));
+  // this slot only exists to nullify the group pointer in the icon view
+  connect(coll_, SIGNAL(signalGroupModified(Tellico::Data::Collection*, const Tellico::Data::EntryGroup*)),
+          m_viewStack->iconView(), SLOT(slotGroupModified(Tellico::Data::Collection*, const Tellico::Data::EntryGroup*)));
 
   connect(coll_, SIGNAL(signalFieldAdded(Tellico::Data::Collection*, Tellico::Data::Field*)),
           this, SLOT(slotFieldAdded(Tellico::Data::Collection*, Tellico::Data::Field*)));

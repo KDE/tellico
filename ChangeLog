@@ -1,3 +1,25 @@
+2005-04-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 0.13.6.
+
+2005-03-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed some DTD declarations.
+	* Refactor some of the icon view code to try to prevent some
+	phantom crashes.
+
+2005-03-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with adding multiple entries from fetch dialog not
+        added additional images.
+	* Added Portuguese translation, thanks to Ligia Moreira.
+
+2005-03-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed internet search dialog to clear results when running a
+	new search.
+	* Changed selection so that hidden items are not selected.
+
 2005-03-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed some i18n generated strings.

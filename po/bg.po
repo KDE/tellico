@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
-"POT-Creation-Date: 2005-03-08 18:50-0800\n"
+"POT-Creation-Date: 2005-04-01 22:41-0800\n"
 "PO-Revision-Date: 2003-07-01 11:27+0300\n"
 "Last-Translator: Boyan Ivanov <boyan17@bulgaria.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -999,8 +999,8 @@ msgstr "*|Всички файлове"
 msgid "View Columns"
 msgstr "Показва колони"
 
-#: controller.cpp:73 fetchdialog.cpp:183 fetchdialog.cpp:244
-#: fetchdialog.cpp:318 mainwindow.cpp:89
+#: controller.cpp:73 fetchdialog.cpp:183 fetchdialog.cpp:247
+#: fetchdialog.cpp:321 mainwindow.cpp:89
 msgid "Ready."
 msgstr "Готово."
 
@@ -1394,7 +1394,7 @@ msgstr "Дуплициране на книга"
 msgid "Create a new entry"
 msgstr "Създава нов документ"
 
-#: controller.cpp:384 mainwindow.cpp:499
+#: controller.cpp:387 mainwindow.cpp:499
 #, fuzzy
 msgid "&Edit Entry"
 msgstr "Изтрий книга"
@@ -1404,7 +1404,7 @@ msgstr "Изтрий книга"
 msgid "Edit the selected entries"
 msgstr "Изтриване на няколко книги ?"
 
-#: controller.cpp:385 mainwindow.cpp:503
+#: controller.cpp:388 mainwindow.cpp:503
 #, fuzzy
 msgid "&Copy Entry"
 msgstr "Дуплициране на книга"
@@ -1414,7 +1414,7 @@ msgstr "Дуплициране на книга"
 msgid "Copy the selected entries"
 msgstr "Изтриване на няколко книги ?"
 
-#: controller.cpp:386 mainwindow.cpp:507
+#: controller.cpp:389 mainwindow.cpp:507
 #, fuzzy
 msgid "&Delete Entry"
 msgstr "Изтриване на поле"
@@ -1712,41 +1712,41 @@ msgstr "Презаписване на файл?"
 msgid "Overwrite"
 msgstr "Презаписване"
 
-#: controller.cpp:270
+#: controller.cpp:273
 #, fuzzy
 msgid "Do you really want to delete this entry?"
 msgstr ""
 "Наистина ли жалете да изтриете тези книги "
 "?"
 
-#: controller.cpp:272
+#: controller.cpp:275
 #, fuzzy
 msgid "Delete Entry?"
 msgstr "Изтриване на поле"
 
-#: controller.cpp:282
+#: controller.cpp:285
 #, fuzzy
 msgid "Do you really want to delete these entries?"
 msgstr ""
 "Наистина ли жалете да изтриете тези книги "
 "?"
 
-#: controller.cpp:286
+#: controller.cpp:289
 #, fuzzy
 msgid "Delete Multiple Entries?"
 msgstr "Изтриване на няколко книги ?"
 
-#: controller.cpp:388
+#: controller.cpp:391
 #, fuzzy
 msgid "&Edit Entries"
 msgstr "Изтрий книга"
 
-#: controller.cpp:389
+#: controller.cpp:392
 #, fuzzy
 msgid "&Copy Entries"
 msgstr "Дуплициране на книга"
 
-#: controller.cpp:390
+#: controller.cpp:393
 #, fuzzy
 msgid "&Delete Entries"
 msgstr "Изтриване на поле"
@@ -1872,7 +1872,7 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:388
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:389
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 
@@ -1880,77 +1880,77 @@ msgstr ""
 msgid "The cover image could not be loaded."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:567
+#: fetch/amazonfetcher.cpp:584
 #, fuzzy
 msgid "Co&untry: "
 msgstr "Показва колони"
 
-#: fetch/amazonfetcher.cpp:571
+#: fetch/amazonfetcher.cpp:588
 msgid "United States"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:572
+#: fetch/amazonfetcher.cpp:589
 msgid "United Kingdom"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:573
+#: fetch/amazonfetcher.cpp:590
 msgid "Germany"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:574
+#: fetch/amazonfetcher.cpp:591
 msgid "Japan"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:575
+#: fetch/amazonfetcher.cpp:592
 #, fuzzy
 msgid "France"
 msgstr "&Търси"
 
-#: fetch/amazonfetcher.cpp:576
+#: fetch/amazonfetcher.cpp:593
 msgid "Canada"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:579
+#: fetch/amazonfetcher.cpp:596
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:585
+#: fetch/amazonfetcher.cpp:602
 msgid "&Image size: "
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:589
+#: fetch/amazonfetcher.cpp:606
 #, fuzzy
 msgid "Small Image"
 msgstr "Заглавие"
 
-#: fetch/amazonfetcher.cpp:590
+#: fetch/amazonfetcher.cpp:607
 #, fuzzy
 msgid "Medium Image"
 msgstr "Медия"
 
-#: fetch/amazonfetcher.cpp:591
+#: fetch/amazonfetcher.cpp:608
 #, fuzzy
 msgid "Large Image"
 msgstr "Заглавие"
 
-#: fetch/amazonfetcher.cpp:592
+#: fetch/amazonfetcher.cpp:609
 #, fuzzy
 msgid "No Image"
 msgstr "Страници"
 
-#: fetch/amazonfetcher.cpp:595 fetch/imdbfetcher.cpp:788
+#: fetch/amazonfetcher.cpp:612 fetch/imdbfetcher.cpp:788
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:601
+#: fetch/amazonfetcher.cpp:618
 msgid "&Associate's ID: "
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:606
+#: fetch/amazonfetcher.cpp:623
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -1961,7 +1961,7 @@ msgstr ""
 msgid "Person"
 msgstr "Лични"
 
-#: fetch/fetchmanager.cpp:209 fetchdialog.cpp:363
+#: fetch/fetchmanager.cpp:209 fetchdialog.cpp:366
 #, fuzzy
 msgid "ISBN"
 msgstr "ISBN"
@@ -1987,7 +1987,7 @@ msgstr ""
 msgid "z39.50"
 msgstr ""
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:407
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:408
 #, fuzzy
 msgid "Library of Congress (US)"
 msgstr ""
@@ -2019,7 +2019,7 @@ msgstr ""
 msgid "Certifications"
 msgstr "Класификация"
 
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:418
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:419
 #, fuzzy
 msgid "&Host: "
 msgstr "Е&кспортиране"
@@ -2046,54 +2046,54 @@ msgstr ""
 msgid "Connection search error %1: %2"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:423
+#: fetch/z3950fetcher.cpp:424
 msgid "Enter the host name of the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:428
+#: fetch/z3950fetcher.cpp:429
 #, fuzzy
 msgid "&Port: "
 msgstr "Е&кспортиране"
 
-#: fetch/z3950fetcher.cpp:433
+#: fetch/z3950fetcher.cpp:434
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:438
+#: fetch/z3950fetcher.cpp:439
 #, fuzzy
 msgid "&Database: "
 msgstr "Тип:"
 
-#: fetch/z3950fetcher.cpp:443
+#: fetch/z3950fetcher.cpp:444
 msgid "Enter the database name used by the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:448
+#: fetch/z3950fetcher.cpp:449
 msgid "Ch&aracter set: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:457
+#: fetch/z3950fetcher.cpp:458
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:463
+#: fetch/z3950fetcher.cpp:464
 msgid "&User: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:468
+#: fetch/z3950fetcher.cpp:469
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:474
+#: fetch/z3950fetcher.cpp:475
 msgid "Pass&word: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:480
+#: fetch/z3950fetcher.cpp:481
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -2437,7 +2437,7 @@ msgstr ""
 "Текущият файл бе променен.\n"
 "Желаете ли да го запишете?"
 
-#: document.cpp:98 entryeditdialog.cpp:569
+#: document.cpp:98 entryeditdialog.cpp:571
 msgid "Warning!"
 msgstr "Предупреждение !"
 
@@ -2935,48 +2935,48 @@ msgstr "Създава нов документ"
 msgid "Clear all search fields and results"
 msgstr ""
 
-#: fetchdialog.cpp:225
+#: fetchdialog.cpp:227
 #, fuzzy
 msgid "Searching..."
 msgstr "Търси в :"
 
-#: fetchdialog.cpp:260
+#: fetchdialog.cpp:263
 #, fuzzy
 msgid "The search returned no items."
 msgstr "Стринг за търсене"
 
-#: fetchdialog.cpp:263
+#: fetchdialog.cpp:266
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
 msgstr ""
 
-#: fetchdialog.cpp:312
+#: fetchdialog.cpp:315
 msgid "Fetching %1..."
 msgstr ""
 
-#: fetchdialog.cpp:340
+#: fetchdialog.cpp:343
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 
-#: fetchdialog.cpp:393
+#: fetchdialog.cpp:396
 msgid "Edit ISBN Values"
 msgstr ""
 
-#: fetchdialog.cpp:398 fetchdialog.cpp:401
+#: fetchdialog.cpp:401 fetchdialog.cpp:404
 msgid "<qt>Enter the ISBN values, one per line.</qt>"
 msgstr ""
 
-#: fetchdialog.cpp:402
+#: fetchdialog.cpp:405
 msgid "Load From File"
 msgstr ""
 
-#: fetchdialog.cpp:403
+#: fetchdialog.cpp:406
 msgid "<qt>Load the ISBN list from a text file.</qt>"
 msgstr ""
 
-#: fetchdialog.cpp:421
+#: fetchdialog.cpp:424
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
@@ -3008,35 +3008,35 @@ msgstr "изчиства интерфейсните елементи"
 msgid "Select Image..."
 msgstr "Избор на XSLT файл..."
 
-#: entryeditdialog.cpp:43 entryeditdialog.cpp:304 entryeditdialog.cpp:325
-#: entryeditdialog.cpp:369 entryeditdialog.cpp:421
+#: entryeditdialog.cpp:43 entryeditdialog.cpp:306 entryeditdialog.cpp:327
+#: entryeditdialog.cpp:371 entryeditdialog.cpp:423
 #, fuzzy
 msgid "Edit Entry"
 msgstr "Изтрий книга"
 
-#: entryeditdialog.cpp:78 entryeditdialog.cpp:336 entryeditdialog.cpp:457
+#: entryeditdialog.cpp:78 entryeditdialog.cpp:338 entryeditdialog.cpp:459
 #, fuzzy
 msgid "Sa&ve Entry"
 msgstr "Дуплициране на книга"
 
-#: entryeditdialog.cpp:269
+#: entryeditdialog.cpp:271
 #, fuzzy
 msgid "Do you really want to modify these entries?"
 msgstr ""
 "Наистина ли жалете да изтриете тези книги "
 "?"
 
-#: entryeditdialog.cpp:271
+#: entryeditdialog.cpp:273
 #, fuzzy
 msgid "Modify Multiple Entries?"
 msgstr "Редакция на няколко книги ?"
 
-#: entryeditdialog.cpp:397
+#: entryeditdialog.cpp:399
 #, fuzzy
 msgid "Sa&ve Entries"
 msgstr "Изтриване на поле"
 
-#: entryeditdialog.cpp:567
+#: entryeditdialog.cpp:569
 #, fuzzy
 msgid ""
 "The current entry has been modified.\n"
@@ -3045,7 +3045,7 @@ msgstr ""
 "Текущата книга бе променена.\n"
 "Желаете ли да запазите промените?"
 
-#: entryeditdialog.cpp:570
+#: entryeditdialog.cpp:572
 #, fuzzy
 msgid "Save Entry"
 msgstr "Дуплициране на книга"
@@ -3456,6 +3456,20 @@ msgstr ""
 msgid "The file contains no collection data."
 msgstr ""
 
+#: rc.cpp:2
+#, fuzzy
+msgid "&New"
+msgstr "Нова"
+
+#: rc.cpp:5
+#, fuzzy
+msgid "&Collection"
+msgstr "BCCollection"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Летна \"Колекция\""
+
 #: tellico_strings.cpp:18
 #, c-format
 msgid "Tellico is unable to load the file - %1."
@@ -3474,20 +3488,6 @@ msgstr "Tellico не може да качи файла %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Търсеният низ \"%1\" не бе намерен."
-
-#: rc.cpp:2
-#, fuzzy
-msgid "&New"
-msgstr "Нова"
-
-#: rc.cpp:5
-#, fuzzy
-msgid "&Collection"
-msgstr "BCCollection"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Летна \"Колекция\""
 
 #: _translatorinfo.cpp:1
 msgid ""

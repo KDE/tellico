@@ -40,7 +40,7 @@ namespace Tellico {
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: detailedlistview.h 862 2004-09-15 01:49:51Z robby $
+ * @version $Id: detailedlistview.h 1157 2005-04-01 01:09:26Z robby $
  */
 class DetailedListView : public MultiSelectionListView {
 Q_OBJECT
@@ -126,6 +126,13 @@ public:
    */
   void selectAllVisible();
   int visibleItems() const { return m_filter ? m_visibleItems : childCount(); }
+  /**
+   * Used to determine whether an item may be selected without having to setSelectable on
+   * every child item. The default implementation always returns @p true;
+   *
+   * @return Whether the item may be selected
+   */
+  virtual bool isSelectable(MultiSelectionListViewItem*) const;
   /**
    * Set max size of pixmaps.
    *

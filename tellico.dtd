@@ -2,7 +2,7 @@
    ================================================================
    Tellico XML DTD version 7.0
 
-   $Id: tellico.dtd 868 2004-09-15 03:07:58Z robby $
+   $Id: tellico.dtd 1158 2005-04-01 01:24:27Z robby $
 
    Copyright (c) 2004 Robby Stephenson
 
@@ -34,7 +34,7 @@
 
 <!ELEMENT fields (field+)>
 <!ELEMENT field (prop*)>
-<!ATTLIST field i18n CDATA (true) #IMPLIED>
+<!ATTLIST field i18n CDATA #IMPLIED>
 <!ATTLIST field name CDATA #REQUIRED>
 <!ATTLIST field title CDATA #REQUIRED>
 <!ATTLIST field category CDATA #REQUIRED>
@@ -57,8 +57,7 @@
 <!-- columns are used in 2-column tables to split the values -->
 <!ELEMENT column (#PCDATA)>
 <!-- year, month, day are used in dates, not in any default collections -->
-<!ELEMENT year (#PCDATA)>
-<!ELEMENT month (#PCDATA)>
+<!-- month and year are already defined for bibtex -->
 <!ELEMENT day (#PCDATA)>
 
 <!ELEMENT entry (title | subtitle | authors | binding | pur_date |
