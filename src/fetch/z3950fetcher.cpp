@@ -344,9 +344,7 @@ void Z3950Fetcher::process() {
     }
     f2.close();
 #endif
-    // comes back as utf-8
-    str = s_MODSHandler->applyStylesheet(str, true);
-    Import::TellicoImporter imp(str);
+    Import::TellicoImporter imp(s_MODSHandler->applyStylesheet(str));
     Data::Collection* coll = imp.collection();
     if(!coll) {
       continue;

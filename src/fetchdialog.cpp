@@ -135,6 +135,8 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   m_listView->addColumn(i18n("Description"));
   m_listView->addColumn(i18n("Source"));
   connect(m_listView, SIGNAL(clicked(QListViewItem*)), SLOT(slotShowEntry(QListViewItem*)));
+  // double clicking should add the entry
+  connect(m_listView, SIGNAL(doubleClicked(QListViewItem*)), SLOT(slotAddEntry()));
   QWhatsThis::add(m_listView, i18n("As results are found, they are added to this list. Selecting one "
                                    "will fetch the complete entry and show it in the view below."));
 

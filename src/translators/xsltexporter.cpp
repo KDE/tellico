@@ -73,5 +73,5 @@ QString XSLTExporter::text(bool formatFields_, bool encodeUTF8_) {
   TellicoXMLExporter exporter(collection());
   exporter.setEntryList(entryList());
   QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
-  return handler.applyStylesheet(dom.toString(), encodeUTF8_);
+  return handler.applyStylesheet(dom.toString());
 }

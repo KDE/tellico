@@ -47,7 +47,7 @@ Tellico::XSLTHandler* AmazonFetcher::s_xsltHandler = 0;
 
 // static
 const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
-  static SiteData dataVector[4] = {
+  static SiteData dataVector[6] = {
     {
       i18n("Amazon (US)"),
       "http://xml.amazon.com/onca/xml3",
@@ -84,6 +84,24 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
       QString::fromLatin1("vhs-jp"),
       QString::fromLatin1("music-jp"),
       QString::fromLatin1("classical-jp")
+    }, {
+      i18n("Amazon (France)"),
+      "http://xml.amazon.fr/onca/xml3",
+      QString::fromLatin1("fr"),
+      QString::fromLatin1("books-fr"),
+      QString::fromLatin1("dvd-fr"),
+      QString::fromLatin1("vhs-fr"),
+      QString::fromLatin1("music-fr"),
+      QString::fromLatin1("classical-fr")
+    }, {
+      i18n("Amazon (Canada)"),
+      "http://xml.amazon.ca/onca/xml3",
+      QString::fromLatin1("ca"),
+      QString::fromLatin1("books-ca"),
+      QString::fromLatin1("dvd-ca"),
+      QString::fromLatin1("vhs-ca"),
+      QString::fromLatin1("music-ca"),
+      QString::fromLatin1("classical-ca")
     }
   };
 
@@ -547,6 +565,8 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, AmazonFetcher* fetch
   m_siteCombo->insertItem(i18n("United Kingdom"));
   m_siteCombo->insertItem(i18n("Germany"));
   m_siteCombo->insertItem(i18n("Japan"));
+  m_siteCombo->insertItem(i18n("France"));
+  m_siteCombo->insertItem(i18n("Canada"));
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   l->addWidget(m_siteCombo, 0, 1);
   QString w = i18n("Amazon.com provides data from several different localized sites. Choose the one "

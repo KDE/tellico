@@ -231,56 +231,30 @@ void IMDBFetcher::parseSingleTitleResult() {
 
 void IMDBFetcher::parseMultipleTitleResults() {
 //  kdDebug() << "IMDBFetcher::parseMultipleTitleResults()" << endl;
-  QRegExp akaRx;
-  akaRx.setPattern(QString::fromLatin1("aka (.*)</td>"));
-  akaRx.setMinimal(true);
-  akaRx.setCaseSensitive(false);
-
-  // the exact results are in the first table after the "exact results" text
   QString output = Tellico::decodeHTML(QString(m_data));
-  int pos = output.find(QString::fromLatin1("Exact Matches"), 0, false);
 
-  // find beginning of partial matches
-  int end = output.find(QString::fromLatin1("Partial Matches"), KMAX(pos, 0), false);
-  if(end == -1) {
-    end = output.length();
+  // IMDb can return three title lists, popular, exact, and partial
+  // the popular titles are in the first table, after the "Popular Results" text
+  int pos_popular = output.find(QString::fromLatin1("Popular Titles"),  0,                    false);
+  int pos_exact   = output.find(QString::fromLatin1("Exact Matches"),   KMAX(pos_popular, 0), false);
+  int pos_partial = output.find(QString::fromLatin1("Partial Matches"), KMAX(pos_exact, 0),   false);
+  int end_popular = pos_exact; // keep track of where to end
+  if(end_popular == -1) {
+    end_popular = pos_partial == -1 ? output.length() : pos_partial;
+  }
+  int end_exact = pos_partial; // keep track of where to end
+  if(end_exact == -1) {
+    end_exact = output.length();
+  }
+
+  // if found popular matches
+  if(pos_popular > -1) {
+    parseTitleBlock(output.mid(pos_popular, end_popular-pos_popular));
   }
 
   // if found exact matches
-  if(pos > -1) {
-    pos = s_anchorRx2->search(output, pos+13);
-    while(pos > -1 && pos < end && m_matches.size() < IMDB_MAX_RESULTS) {
-      // split title at parenthesis
-      const QString cap2 = s_anchorRx2->cap(2);
-      int pPos = cap2.find('(');
-      // FIXME: maybe remove parentheses here?
-      QString desc = (pPos == -1 ? QString::null : cap2.mid(pPos));
-      // multiple matches might have 'aka' info
-      int trPos = output.find(QString::fromLatin1("tr>"), pos+1, false);
-      if(trPos > -1) {
-        int akaPos = akaRx.search(output.mid(pos, trPos-pos));
-        if(akaPos > -1) {
-          desc += QChar(' ') + akaRx.cap(1).stripWhiteSpace().remove(*s_tagRx);
-        }
-      }
-      SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
-      m_results.insert(r->uid, r);
-      KURL u;
-      if(KURL::isRelativeURL(s_anchorRx2->cap(1))) {
-        u.setProtocol(m_url.protocol());
-        u.setHost(m_url.host());
-        u.setPath(s_anchorRx2->cap(1));
-      } else {
-        u = KURL(s_anchorRx2->cap(1));
-      }
-      m_matches.insert(r->uid, u);
-      emit signalResultFound(*r);
-      pos = s_anchorRx2->search(output, pos+s_anchorRx2->cap(0).length());
-    }
-#ifndef NDEBUG
-  } else {
-    kdDebug() << "IMDBFetcher::parseMultipleTitleResults() - no exact matches found." << endl;
-#endif
+  if(pos_exact > -1) {
+    parseTitleBlock(output.mid(pos_exact, end_exact-pos_exact));
   }
 
   // if there are enough exact matches, stop now
@@ -290,26 +264,8 @@ void IMDBFetcher::parseMultipleTitleResults() {
   }
 
   // go ahead and search for partial matches
-  pos = s_anchorRx2->search(output, end);
-  while(pos > -1 && m_matches.size() < IMDB_MAX_RESULTS) {
-    // split title at parenthesis
-    const QString cap2 = s_anchorRx2->cap(2);
-    int pPos = cap2.find('(');
-    QString desc = (pPos == -1 ? QString::null : cap2.mid(pPos));
-    // multiple matches might have 'aka' info
-    int trPos = output.find(QString::fromLatin1("tr>"), pos+1, false);
-    if(trPos > -1) {
-      int akaPos = akaRx.search(output.mid(pos, trPos-pos));
-      if(akaPos > -1) {
-        desc += QChar(' ') + akaRx.cap(1).stripWhiteSpace().remove(*s_tagRx);
-      }
-    }
-    SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
-    m_results.insert(r->uid, r);
-    KURL u(m_url, s_anchorRx2->cap(1)); // relative URL constructor
-    m_matches.insert(r->uid, u);
-    emit signalResultFound(*r);
-    pos = s_anchorRx2->search(output, pos+s_anchorRx2->cap(0).length());
+  if(pos_partial > -1) {
+    parseTitleBlock(output.mid(pos_partial));
   }
 
 #ifndef NDEBUG
@@ -319,6 +275,63 @@ void IMDBFetcher::parseMultipleTitleResults() {
 #endif
 
   stop();
+}
+
+void IMDBFetcher::parseTitleBlock(const QString& str_) {
+  QRegExp akaRx;
+  akaRx.setPattern(QString::fromLatin1("aka (.*)</li>"));
+  akaRx.setMinimal(true);
+  akaRx.setCaseSensitive(false);
+
+  int start = s_anchorRx2->search(str_);
+  while(start > -1 && m_matches.size() < IMDB_MAX_RESULTS) {
+    // split title at parenthesis
+    const QString cap1 = s_anchorRx2->cap(1); // the anchor url
+    const QString cap2 = s_anchorRx2->cap(2); // the anchor text
+    int pPos = cap2.find('('); // if it has parentheses, use that for description
+    QString desc;
+    if(pPos > -1) {
+      int pPos2 = cap2.find(')', pPos+1);
+      if(pPos2 > -1) {
+        desc = cap2.mid(pPos+1, pPos2-pPos-1);
+      }
+    } else {
+      // parenthesis might be outside anchor tag
+      int end = s_anchorRx2->search(str_, start+1);
+      if(end == -1) {
+        end = str_.length();
+      }
+      // remove tags
+      QString text = str_.mid(start, end-start).remove(*s_tagRx);
+      pPos = text.find('(');
+      if(pPos > -1) {
+        int pPos2 = text.find(')', pPos);
+        if(pPos2 > -1) {
+          desc = text.mid(pPos+1, pPos2-pPos-1);
+        }
+      }
+    }
+    // multiple matches might have 'aka' info
+    int end = s_anchorRx2->search(str_, start+1);
+    int akaPos = akaRx.search(str_, start+1);
+    if(akaPos > -1 && akaPos < end) {
+      desc += QChar(' ') + akaRx.cap(1).stripWhiteSpace().remove(*s_tagRx);
+    }
+
+    SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
+    m_results.insert(r->uid, r);
+    KURL u;
+    if(KURL::isRelativeURL(cap1)) {
+      u.setProtocol(m_url.protocol());
+      u.setHost(m_url.host());
+      u.setPath(cap1);
+    } else {
+      u = KURL(cap1);
+    }
+    m_matches.insert(r->uid, u);
+    emit signalResultFound(*r);
+    start = s_anchorRx2->search(str_, start+cap2.length());
+  }
 }
 
 void IMDBFetcher::parseSingleNameResult() {
@@ -618,8 +631,8 @@ void IMDBFetcher::doCast(const QString& str_, Data::Entry* entry_, const KURL& b
   idRx.search(baseURL_.path());
   KURL castURL = baseURL_;
   castURL.setPath(QString::fromLatin1("/title/") + idRx.cap(1) + QString::fromLatin1("/fullcredits"));
-  // be quiet about failure
-  QString castPage = FileHandler::readTextFile(castURL, true);
+  // be quiet about failure and be sure to translate entities
+  QString castPage = Tellico::decodeHTML(FileHandler::readTextFile(castURL, true));
 
   QStringList cast;
   int pos;

@@ -145,7 +145,9 @@ Tellico::Data::Collection* RISImporter::collection() {
   const int totalChars = str.length();
   int j = 0;
   Data::Entry* entry = new Data::Entry(m_coll);
-  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s\\s-\\s(.*)$"));
+  // technically, the spec requires a space immediately after the hyphen
+  // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
+  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s\\s-\\s?(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();

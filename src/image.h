@@ -18,17 +18,18 @@
 
 namespace Tellico {
   class ImageFactory;
+  class FileHandler;
 
   namespace Data {
 
 /**
  * @author Robby Stephenson
- * @version $Id: image.h 862 2004-09-15 01:49:51Z robby $
+ * @version $Id: image.h 1064 2005-02-02 02:15:51Z robby $
  */
 class Image : public QImage {
 
-friend class ImageFactory;
-friend class FileHandler;
+friend class Tellico::ImageFactory;
+friend class Tellico::FileHandler;
 
 public:
   Image() : QImage(), m_id(QString::null) {}

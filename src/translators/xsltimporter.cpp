@@ -57,8 +57,7 @@ Tellico::Data::Collection* XSLTImporter::collection() {
     return 0;
   }
 //  kdDebug() << text() << endl;
-  // FIXME: is there anyway to know if the text is in utf-8 or not? Assume it is.
-  QString str = handler.applyStylesheet(text(), true);
+  QString str = handler.applyStylesheet(text());
 //  kdDebug() << str << endl;
 
   Import::TellicoImporter imp(str);

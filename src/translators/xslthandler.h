@@ -33,7 +33,7 @@ namespace Tellico {
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h 998 2004-12-09 02:08:39Z robby $
+ * @version $Id: xslthandler.h 1077 2005-02-05 20:35:51Z robby $
  */
 class XSLTHandler {
 
@@ -79,8 +79,7 @@ public:
    * @param encodedUTF8 Whether the text is encoded in utf-8 or not
    * @return The transformed text
    */
-  QString applyStylesheet(const QCString& text);
-  QString applyStylesheet(const QString& text, bool encodedUTF8);
+  QString applyStylesheet(const QString& text);
 
 private:
   void init();

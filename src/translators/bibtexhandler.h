@@ -27,7 +27,7 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexhandler.h 1001 2004-12-10 01:05:24Z robby $
+ * @version $Id: bibtexhandler.h 1063 2005-02-02 01:59:11Z robby $
  */
 class BibtexHandler {
 public:
@@ -51,7 +51,7 @@ private:
 
   static QString bibtexKey(const QString& author, const QString& title, const QString& year);
   static void loadTranslationMaps();
-  static StringListMap s_utf8LatexMap;
+  static StringListMap* s_utf8LatexMap;
   static const QRegExp s_badKeyChars;
 };
 

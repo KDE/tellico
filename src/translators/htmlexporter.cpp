@@ -118,6 +118,10 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     return QString::null;
   }
 
+  // notes about utf-8 encoding:
+  // all params should be passed to XSLTHandler in utf8
+  // input string to XSLTHandler should be in utf-8, EVEN IF DOM STRING SAYS OTHERWISE
+
   KURL u;
   u.setPath(xsltfile);
   // do NOT do namespace processing, it messes up the XSL declaration since
@@ -147,63 +151,6 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     m_printGrouped = false; // can't group if no groups exist
   }
 
-  #if 0
-  if(m_printGrouped) {
-    // since the XSL stylesheet can't use a parameter as a key name, need to replace keys
-    QDomNodeList keyNodes = dom.elementsByTagNameNS(XML::nsXSL, QString::fromLatin1("key"));
-    for(unsigned i = 0; i < keyNodes.count(); ++i) {
-      QDomElement elem = keyNodes.item(i).toElement();
-      // dont't forget bc namespace
-      // the entries key needs to use the groupName as the property
-      if(elem.attribute(QString::fromLatin1("name"), QString::null) == Latin1Literal("entries")) {
-        QString s;
-        for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
-          s += QString::fromLatin1(".//bc:") + *it;
-          if(coll->fieldByName(*it)->type() == Data::Field::Table2) {
-            s += QString::fromLatin1("/bc:column[1]");
-          }
-          if(*it != m_groupBy.last()) {
-            s += QString::fromLatin1("|");
-          }
-        }
-        elem.setAttribute(QString::fromLatin1("use"), s);
-      // the groups key needs to use the groupName as the match
-      } else if(elem.attribute(QString::fromLatin1("name"), QString::null) == Latin1Literal("groups")) {
-        QString s;
-        for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
-          s += QString::fromLatin1("bc:") + *it;
-          if(coll->fieldByName(*it)->type() == Data::Field::Table2) {
-            s += QString::fromLatin1("/bc:column[1]");
-          }
-          if(*it != m_groupBy.last()) {
-            s += QString::fromLatin1("|");
-          }
-        }
-        elem.setAttribute(QString::fromLatin1("match"), s);
-      }
-    }
-    QDomNodeList varNodes = dom.elementsByTagNameNS(XML::nsXSL, QString::fromLatin1("variable"));
-    for(unsigned i = 0; i < varNodes.count(); ++i) {
-      QDomElement elem = varNodes.item(i).toElement();
-      if(elem.attribute(QString::fromLatin1("name"), QString::null) == Latin1Literal("all-groups")) {
-        QString s;
-        for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
-          s += QString::fromLatin1("//bc:") + *it;
-          if(coll->fieldByName(*it)->type() == Data::Field::Table2) {
-            s += QString::fromLatin1("/bc:column[1]");
-          }
-          if(*it != m_groupBy.last()) {
-            s += QString::fromLatin1("|");
-          }
-        }
-        elem.setAttribute(QString::fromLatin1("select"), s);
-        break;
-      }
-    }
-  }
-  #endif
-
-//  kdDebug() << dom.toString(2) << endl;
   XSLTHandler handler(dom, QFile::encodeName(xsltfile));
 //  XSLTHandler handler(u);
   handler.addParam("show-headers", m_printHeaders ? "true()" : "false()");
@@ -271,24 +218,23 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     sortString = i18n("(sorted by %1)").arg(sortTitles.join(QString::fromLatin1(", ")));
   }
 
-  handler.addStringParam("sort-title", encodeUTF8_ ? sortString.utf8() : sortString.local8Bit());
+  handler.addStringParam("sort-title", sortString.utf8());
 
   QString pageTitle = QString::fromLatin1("Tellico: ") + coll->title();
   pageTitle += QChar(' ') + sortString;
-  handler.addStringParam("page-title", encodeUTF8_ ? pageTitle.utf8() : pageTitle.local8Bit());
+  handler.addStringParam("page-title", pageTitle.utf8());
 
   QStringList printFields;
   for(QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
     printFields << coll->fieldNameByTitle(*it);
   }
-  handler.addStringParam("column-names",
-                         encodeUTF8_ ? printFields.join(QChar(' ')).utf8()
-                                     : printFields.join(QChar(' ')).local8Bit());
+  handler.addStringParam("column-names", printFields.join(QChar(' ')).utf8());
 
   TellicoXMLExporter exporter(coll);
   exporter.setEntryList(entryList());
   exporter.setIncludeGroups(m_printGrouped);
-  QDomDocument output = exporter.exportXML(formatFields_, encodeUTF8_);
+// yes, this should be in utf8, always
+  QDomDocument output = exporter.exportXML(formatFields_, true);
 
   // where the file will be saved
   const KURL& targetURL = url();
@@ -321,7 +267,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     handler.addStringParam("imgdir", QFile::encodeName(imageDir.fileName()+'/'));
     if(m_exportEntryFiles) {
       QString entryDir = targetURL.fileName().section('.', 0, 0) + QString::fromLatin1("_entries/");
-      handler.addStringParam("entrydir", encodeUTF8_ ? entryDir.utf8() : entryDir.local8Bit());
+      handler.addStringParam("entrydir", entryDir.utf8());
     }
   }
 //  kdDebug() << "HTMLExporter::text() - image dir = " << imageDir.path() << endl;
@@ -404,18 +350,18 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     if(entryHandler.isValid()) {
       // add system colors to stylesheet
       const QColorGroup& cg = QApplication::palette().active();
-      entryHandler.addStringParam("font", KGlobalSettings::generalFont().family().latin1());
-      entryHandler.addStringParam("bgcolor", cg.base().name().latin1());
-      entryHandler.addStringParam("fgcolor", cg.text().name().latin1());
-      entryHandler.addStringParam("color1", cg.highlightedText().name().latin1());
-      entryHandler.addStringParam("color2", cg.highlight().name().latin1());
+      entryHandler.addStringParam("font", KGlobalSettings::generalFont().family().utf8());
+      entryHandler.addStringParam("bgcolor", cg.base().name().utf8());
+      entryHandler.addStringParam("fgcolor", cg.text().name().utf8());
+      entryHandler.addStringParam("color1", cg.highlightedText().name().utf8());
+      entryHandler.addStringParam("color2", cg.highlight().name().utf8());
 
       // ok to use relative in HTML output
       // need to add "../" since the entry file is in a depper level
       entryHandler.addStringParam("imgdir", QFile::encodeName(QString::fromLatin1("../")+imageDir.fileName()+'/'));
       // relative to entry files, will be "../"
       QString s = QString::fromLatin1("../") + targetURL.fileName();
-      entryHandler.addStringParam("collection-file", encodeUTF8_ ? s.utf8() : s.local8Bit());
+      entryHandler.addStringParam("collection-file", s.utf8());
 
       KURL entryDir = targetURL;
       entryDir.cd(QString::fromLatin1(".."));
@@ -459,7 +405,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
         exporter.setEntryList(list);
         // exportXML(bool formatValues, bool encodeUTF8);
         QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
-        FileHandler::writeTextURL(url, entryHandler.applyStylesheet(dom.toString(), encodeUTF8_), encodeUTF8_, true);
+        FileHandler::writeTextURL(url, entryHandler.applyStylesheet(dom.toString()), encodeUTF8_, true);
 
         if(++count == processCount) {
           kapp->processEvents();
@@ -472,5 +418,5 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
   }
 
   kapp->restoreOverrideCursor();
-  return handler.applyStylesheet(output.toString(), encodeUTF8_);
+  return handler.applyStylesheet(output.toString());
 }

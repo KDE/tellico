@@ -31,16 +31,16 @@
 
 using Tellico::BibtexHandler;
 
-BibtexHandler::StringListMap BibtexHandler::s_utf8LatexMap;
+BibtexHandler::StringListMap* BibtexHandler::s_utf8LatexMap = 0;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
 const QRegExp BibtexHandler::s_badKeyChars(QString::fromLatin1("[^0-9a-zA-Z-]"));
 
 QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
-  const Data::BibtexCollection* c = dynamic_cast<const Data::BibtexCollection*>(entry_->collection());
-  if(!c) {
+  if(!entry_ || !entry_->collection() || entry_->collection()->type() != Data::Collection::Bibtex) {
     return QString::null;
   }
 
+  const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(entry_->collection());
   const Data::Field* f = c->fieldByBibtexName(QString::fromLatin1("key"));
   if(f) {
     QString key = entry_->field(f->name());
@@ -54,7 +54,7 @@ QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
   if(authorField && (authorField->flags() & Data::Field::AllowMultiple)) {
     QString tmp = entry_->field(authorField->name());
     author = tmp.section(';', 0, 0);
-  } else {
+  } else if(authorField) {
     author = entry_->field(authorField->name());
   }
 
@@ -106,6 +106,8 @@ void BibtexHandler::loadTranslationMaps() {
     return;
   }
 
+  s_utf8LatexMap = new StringListMap();
+
   KURL u;
   u.setPath(mapfile);
   // no namespace processing
@@ -116,11 +118,10 @@ void BibtexHandler::loadTranslationMaps() {
   for(unsigned i = 0; i < keyList.count(); ++i) {
     QDomNodeList strList = keyList.item(i).toElement().elementsByTagName(QString::fromLatin1("string"));
     // the strList might have more than one node since there are multiple ways
-    // to represent a character in LaTex. Iterate backwards so that the first one listed
-    // becomes the 'primary' key
+    // to represent a character in LaTex.
     QString s = keyList.item(i).toElement().attribute(QString::fromLatin1("char"));
-    for(int j = strList.count()-1; j > -1; --j) {
-      s_utf8LatexMap[s].append(strList.item(j).toElement().text());
+    for(unsigned j = 0; j < strList.count(); ++j) {
+      (*s_utf8LatexMap)[s].append(strList.item(j).toElement().text());
 //      kdDebug() << "BibtexHandler::loadTranslationMaps - "
 //       << s << " = " << strList.item(j).toElement().text() << endl;
     }
@@ -128,21 +129,22 @@ void BibtexHandler::loadTranslationMaps() {
 }
 
 QString BibtexHandler::importText(char* text_) {
-  if(s_utf8LatexMap.empty()) {
+  if(!s_utf8LatexMap) {
     loadTranslationMaps();
   }
 
   QString str = QString::fromLatin1(text_);
-  for(StringListMap::Iterator it = s_utf8LatexMap.begin(); it != s_utf8LatexMap.end(); ++it) {
+  for(StringListMap::Iterator it = s_utf8LatexMap->begin(); it != s_utf8LatexMap->end(); ++it) {
     for(QStringList::Iterator sit = it.data().begin(); sit != it.data().end(); ++sit) {
-    str.replace(*sit, it.key());
-}
+      str.replace(*sit, it.key());
+    }
   }
+
   return str;
 }
 
 QString BibtexHandler::exportText(const QString& text_, const QStringList& macros_) {
-  if(s_utf8LatexMap.empty()) {
+  if(!s_utf8LatexMap) {
     loadTranslationMaps();
   }
 
@@ -160,7 +162,7 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
 
   QString text = text_;
 
-  for(StringListMap::Iterator it = s_utf8LatexMap.begin(); it != s_utf8LatexMap.end(); ++it) {
+  for(StringListMap::Iterator it = s_utf8LatexMap->begin(); it != s_utf8LatexMap->end(); ++it) {
     text.replace(it.key(), it.data()[0]);
   }
 

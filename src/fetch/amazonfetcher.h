@@ -44,7 +44,7 @@ namespace Tellico {
  * A fetcher for Amazon.com.
  *
  * @author Robby Stephenson
- * @version $Id: amazonfetcher.h 969 2004-11-20 06:55:20Z robby $
+ * @version $Id: amazonfetcher.h 1068 2005-02-03 02:09:57Z robby $
  */
 class AmazonFetcher : public Fetcher {
 Q_OBJECT
@@ -56,7 +56,9 @@ public:
     US = 0,
     UK = 1,
     DE = 2,
-    JP = 3
+    JP = 3,
+    FR = 4,
+    CA = 5
   };
 
   enum ImageSize {

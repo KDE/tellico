@@ -587,6 +587,13 @@ void MainWindow::initActions() {
   connect(m_quickFilter, SIGNAL(textChanged(const QString&)),
           this, SLOT(slotQueueFilter()));
 
+  // show tool tips in status bar
+  actionCollection()->setHighlightingEnabled(true);
+  connect(actionCollection(), SIGNAL(actionStatusText(const QString &)),
+          this, SLOT(slotStatusMsg(const QString &)));
+  connect(actionCollection(), SIGNAL(clearStatusText()),
+          statusBar(), SLOT(clear()));
+
 #ifdef UIFILE
   kdWarning() << "MainWindow::initActions() - change createGUI() call!" << endl;
   createGUI(UIFILE);
@@ -1371,6 +1378,9 @@ void MainWindow::slotShowTipOfDay(bool force_/*=true*/) {
 
 void MainWindow::slotStatusMsg(const QString& text_) {
   statusBar()->clear();
+  if(text_.isEmpty()) {
+    return;
+  }
   // add a space at the beginning and end for asthetic reasons
   statusBar()->changeItem(QString::fromLatin1(" ")+text_+QString::fromLatin1(" "), ID_STATUS_MSG);
   kapp->processEvents();

@@ -129,7 +129,7 @@ bool Document::saveDocument(const KURL& url_) {
   Export::TellicoZipExporter exporter(m_coll);
   exporter.setEntryList(m_coll->entryList());
   QByteArray data = exporter.data(false);
-  bool success = FileHandler::writeDataURL(url_, data);
+  bool success = Tellico::FileHandler::writeDataURL(url_, data);
 
 #ifndef NDEBUG
   if(!success) {

@@ -188,40 +188,17 @@ void XSLTHandler::removeParam(const QCString& name_) {
   m_params.remove(name_);
 }
 
-QString XSLTHandler::applyStylesheet(const QCString& text_) {
+QString XSLTHandler::applyStylesheet(const QString& text_) {
   if(!m_stylesheet) {
     kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
     return QString::null;
   }
 
 #if LIBXML_VERSION >= 20600
-  m_docIn = xmlReadDoc((xmlChar *)text_.data(), NULL, NULL, xml_options);
+  m_docIn = xmlReadDoc((xmlChar *)text_.utf8().data(), NULL, NULL, xml_options);
 #else
-  m_docIn = xmlParseDoc((xmlChar *)text_.data());
+  m_docIn = xmlParseDoc((xmlChar *)text_.utf8().data());
 #endif
-
-  return process();
-}
-
-QString XSLTHandler::applyStylesheet(const QString& text_, bool encodedUTF8_) {
-  if(!m_stylesheet) {
-    kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
-    return QString::null;
-  }
-
-  if(encodedUTF8_) {
-#if LIBXML_VERSION >= 20600
-    m_docIn = xmlReadDoc((xmlChar *)text_.utf8().data(), NULL, NULL, xml_options);
-#else
-    m_docIn = xmlParseDoc((xmlChar *)text_.utf8().data());
-#endif
-  } else {
-#if LIBXML_VERSION >= 20600
-    m_docIn = xmlReadDoc((xmlChar *)text_.local8Bit().data(), NULL, NULL, xml_options);
-#else
-    m_docIn = xmlParseDoc((xmlChar *)text_.local8Bit().data());
-#endif
-  }
 
   return process();
 }

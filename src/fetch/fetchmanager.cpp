@@ -105,6 +105,8 @@ void Manager::reloadFetchers() {
     m_fetchers.append(new AmazonFetcher(AmazonFetcher::UK, this));
     m_fetchers.append(new AmazonFetcher(AmazonFetcher::DE, this));
     m_fetchers.append(new AmazonFetcher(AmazonFetcher::JP, this));
+    m_fetchers.append(new AmazonFetcher(AmazonFetcher::FR, this));
+    m_fetchers.append(new AmazonFetcher(AmazonFetcher::CA, this));
 #endif
 #if IMDB_SUPPORT
     m_fetchers.append(new IMDBFetcher(this));

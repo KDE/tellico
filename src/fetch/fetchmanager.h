@@ -29,7 +29,6 @@ namespace Tellico {
 
 #include <qobject.h>
 #include <qptrlist.h>
-#include <qguardedptr.h>
 
 namespace Tellico {
   namespace Fetch {
@@ -43,7 +42,7 @@ typedef QPtrListIterator<Fetcher> FetcherListIterator;
  * A manager for handling all the different classes of Fetcher.
  *
  * @author Robby Stephenson
- * @version $Id: fetchmanager.h 978 2004-11-26 17:30:59Z robby $
+ * @version $Id: fetchmanager.h 1065 2005-02-02 02:51:05Z robby $
  */
 class Manager : public QObject {
 Q_OBJECT

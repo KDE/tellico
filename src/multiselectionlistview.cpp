@@ -23,11 +23,14 @@ using Tellico::MultiSelectionListView;
 using Tellico::MultiSelectionListViewItem;
 
 MultiSelectionListView::MultiSelectionListView(QWidget* parent_, const char* name_)
-    : KListView(parent_, name_/*=0*/), m_shadeSortColumn(false) {
+    : KListView(parent_, name_/*=0*/) {
   setSelectionMode(QListView::Extended);
-  connect(kapp, SIGNAL(kdisplayPaletteChanged()), SLOT(slotUpdateColors()));
+#if !KDE_IS_VERSION(3,3,90)
+  m_shadeSortColumn = false;
   // call it once to initialize
   slotUpdateColors();
+  connect(kapp, SIGNAL(kdisplayPaletteChanged()), SLOT(slotUpdateColors()));
+#endif
 }
 
 void MultiSelectionListView::updateSelected(MultiSelectionListViewItem* item_, bool s_) const {
@@ -38,14 +41,17 @@ void MultiSelectionListView::updateSelected(MultiSelectionListViewItem* item_, b
   }
 }
 
+#if !KDE_IS_VERSION(3,3,90)
 void MultiSelectionListView::setShadeSortColumn(bool shade_) {
   if(m_shadeSortColumn != shade_) {
     m_shadeSortColumn = shade_;
     repaint();
   }
 }
+#endif
 
 void MultiSelectionListView::slotUpdateColors() {
+#if !KDE_IS_VERSION(3,3,90)
   m_backColor2 = viewport()->colorGroup().base();
   if(m_backColor2 == Qt::black) {
     m_backColor2 = QColor(50, 50, 50);  // dark gray
@@ -71,6 +77,7 @@ void MultiSelectionListView::slotUpdateColors() {
       m_altColor2 = m_altColor2.light(120);
     }
   }
+#endif
   repaint();
 }
 
@@ -91,6 +98,7 @@ void MultiSelectionListViewItem::setSelected(bool s_) {
   KListViewItem::setSelected(s_);
 }
 
+#if !KDE_IS_VERSION(3,3,90)
 const QColor& MultiSelectionListViewItem::backgroundColor(int column_) {
   MultiSelectionListView* view = static_cast<MultiSelectionListView*>(listView());
   if(view->columns() > 1 && view->shadeSortColumn() && column_ == view->sortColumn()) {
@@ -116,5 +124,6 @@ void MultiSelectionListViewItem::paintCell(QPainter* p_, const QColorGroup& cg_,
   // don't call KListViewItem::paintCell() since that also does alternate painting, etc...
   QListViewItem::paintCell(p_, cg, column_, width_, alignment_);
 }
+#endif
 
 #include "multiselectionlistview.moc"

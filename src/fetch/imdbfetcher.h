@@ -34,7 +34,7 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imdbfetcher.h 976 2004-11-25 19:33:58Z robby $
+ * @version $Id: imdbfetcher.h 1069 2005-02-04 04:36:49Z robby $
  */
 class IMDBFetcher : public Fetcher {
 Q_OBJECT
@@ -94,6 +94,7 @@ private:
   void parseSingleTitleResult();
   void parseSingleNameResult();
   void parseMultipleTitleResults();
+  void parseTitleBlock(const QString& str);
   void parseMultipleNameResults();
   Data::Entry* parseEntry(const QString& str);
 

@@ -2,8 +2,8 @@
 <!DOCTYPE keymap>
 <!-- Some bibtex file may incorrectly place the braces. -->
 <!-- The first string element should be the correct representation -->
-<!-- These key mappings were taken, with permission, from the CharacterConversion.plist -->
-<!-- file in the Bibdesk program by Michael McCracken -->
+<!-- Most of these key mappings were taken, with permission, from the -->
+<!-- CharacterConversion.plist file in the Bibdesk program by Michael McCracken -->
 <keymap version="0.8">
   <key char="¡">
     <string>{!'}</string>
@@ -27,7 +27,7 @@
     <string>{\~A}</string>
   </key>
   <key char="Ä">
-    <string>{\&quot;A}</string>
+    <string>{\"A}</string>
   </key>
   <key char="Æ">
     <string>{\AE}</string>
@@ -50,7 +50,7 @@
     <string>{\~a}</string>
   </key>
   <key char="ä">
-    <string>{\&quot;a}</string>
+    <string>{\"a}</string>
   </key>
   <key char="å">
     <string>{\aa}</string>
@@ -58,34 +58,64 @@
   <key char="æ">
     <string>{\ae}</string>
   </key>
+  <key char="Ç">
+    <string>{\cC}</string>
+  </key>
+  <key char="Č">
+    <string>{\uC}</string>
+  </key>
+  <key char="Č">
+    <string>{\vC}</string>
+  </key>
   <key char="ç">
     <string>{\cc}</string>
     <string>\c{c}</string>
   </key>
-  <key char="É">
+  <key char="ć">
+    <string>{\'c}</string>
+  </key>
+  <key char="č">
+    <string>{\uc}</string>
+  </key>
+  <key char="č">
+    <string>{\vc}</string>
+  </key>
+  <key char="È">
     <string>{\`E}</string>
     <string>\`{E}</string>
+  </key>
+  <key char="Ê">
+    <string>{\^E}</string>
+  </key>
+  <key char="É">
+    <string>{\'E}</string>
+    <string>\'{E}</string>
+  </key>
+  <key char="Ë">
+    <string>{\"E}</string>
   </key>
   <key char="è">
     <string>{\`e}</string>
     <string>\`{e}</string>
   </key>
-  <key char="È">
-    <string>{\'E}</string>
-    <string>\'{E}</string>
-  </key>
   <key char="é">
     <string>{\'e}</string>
     <string>\'{e}</string>
-  </key>
-  <key char="Ê">
-    <string>{\^E}</string>
   </key>
   <key char="ê">
     <string>{\^e}</string>
   </key>
   <key char="ë">
-    <string>{\&quot;e}</string>
+    <string>{\"e}</string>
+  </key>
+  <key char="Î">
+    <string>{\^E}</string>
+  </key>
+  <key char="Í">
+    <string>{\'I}</string>
+  </key>
+  <key char="Ï">
+    <string>{\"I}</string>
   </key>
   <key char="ì">
     <string>{\`i}</string>
@@ -99,13 +129,28 @@
     <string>{\^i}</string>
   </key>
   <key char="ï">
-    <string>{\&quot;i}</string>
+    <string>{\"i}</string>
   </key>
   <key char="Ñ">
     <string>{\~N}</string>
   </key>
   <key char="ñ">
     <string>{\~n}</string>
+  </key>
+  <key char="Ó">
+    <string>{\'O}</string>
+  </key>
+  <key char="Ô">
+    <string>{\^O}</string>
+  </key>
+  <key char="Ø">
+    <string>{\O}</string>
+  </key>
+  <key char="Ö">
+    <string>{\"O}</string>
+  </key>
+  <key char="Œ">
+    <string>{\OE}</string>
   </key>
   <key char="ò">
     <string>{\`o}</string>
@@ -122,16 +167,29 @@
     <string>{\~o}</string>
   </key>
   <key char="ö">
-    <string>{\&quot;o}</string>
+    <string>{\"o}</string>
   </key>
   <key char="œ">
     <string>{\oe}</string>
   </key>
-  <key char="Œ">
-    <string>{\OE}</string>
-  </key>
   <key char="ø">
     <string>{\o}</string>
+  </key>
+  <key char="ş">
+    <string>{\cs}</string>
+  </key>
+  <key char="š">
+    <string>{\vs}</string>
+  </key>
+  <key char="Ú">
+    <string>{\'U}</string>
+  </key>
+  <key char="Û">
+    <string>{\^U}</string>
+  </key>
+  <key char="Ü">
+    <string>{\"U}</string>
+    <string>\"{U}</string>
   </key>
   <key char="ù">
     <string>{\`u}</string>
@@ -144,21 +202,56 @@
   <key char="û">
     <string>{\^u}</string>
   </key>
-  <key char="Ü">
-    <string>{\&quot;U}</string>
-    <string>\&quot;{U}</string>
-  </key>
   <key char="ü">
-    <string>{\&quot;u}</string>
-    <string>\&quot;{u}</string>
+    <string>{\"u}</string>
+    <string>\"{u}</string>
+  </key>
+  <key char="Ÿ">
+    <string>{\"Y}</string>
   </key>
   <key char="ÿ">
-    <string>{\&quot;y}</string>
+    <string>{\"y}</string>
+  </key>
+  <key char="Ž">
+    <string>{\vZ}</string>
+  </key>
+  <key char="ž">
+    <string>{\vz}</string>
   </key>
   <key char="ß">
     <string>{\ss}</string>
   </key>
   <key char="£">
     <string>\pounds</string>
+  </key>
+  <key char="±">
+    <string>$\pm$</string>
+  </key>
+  <key char="–">
+    <string>--</string>
+  </key>
+  <key char="—">
+    <string>---</string>
+  </key>
+  <key char="•">
+    <string>*</string>
+  </key>
+  <key char="…">
+    <string>{\ldots}</string>
+  </key>
+  <key char="§">
+    <string>{\S}</string>
+  </key>
+  <key char="©">
+    <string>{\copyright}</string>
+  </key>
+  <key char="®">
+    <string>{\textregistered}</string>
+  </key>
+  <key char="™">
+    <string>{\texttrademark}</string>
+  </key>
+  <key char="°">
+    <string>$\,^{\circ}$</string>
   </key>
 </keymap>

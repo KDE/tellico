@@ -1,3 +1,28 @@
+2005-02-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Update some bibtex character translations.
+	* Released Tellico 0.13.2.
+
+2005-02-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed IMDb import.
+	* Double-clicking in fetch dialog adds entry.
+	* Fixed bug with locale encoding for HTML export.
+	* Changed statusbar to show tooltips for menu items.
+
+2005-02-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Added France and Canada locales to Amazon.com sources.
+
+2005-02-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Swedish translation, thanks to Peter Landgren.
+	* Fixed bug with importing RIS with no final space.
+	* Fixed Debian bug #290467 for gcc 4.0 compilation, thanks to Regis Boudin.
+        * Fixed Debian bug #292165 with bibtex export of umlauts.
+	* Fixed bug with decoding HTML entities in IMDb cast page, thanks
+	to Rafa Kortes.
+
 2004-12-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed a bug in PilotDB exporting, I think.

@@ -91,7 +91,7 @@ void EntryView::showEntry(const Data::Entry* entry_) {
   QDomDocument dom = exporter.exportXML(false, true);
 //  kdDebug() << dom.toString() << endl;
 
-  QString html = m_handler->applyStylesheet(dom.toString(), true);
+  QString html = m_handler->applyStylesheet(dom.toString());
   // write out image files
   for(Data::FieldListIterator it(entry_->collection()->imageFields()); it.current(); ++it) {
     const QString& id = entry_->field(it.current()->name());
