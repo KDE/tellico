@@ -21,11 +21,11 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bookcasezipexporter.h 580 2004-03-27 03:34:33Z robby $
+ * @version $Id: bookcasezipexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class BookcaseZipExporter : public DataExporter {
 public:
-  BookcaseZipExporter(const Data::Collection* coll, const Data::EntryList& list);
+  BookcaseZipExporter(const Data::Collection* coll) : DataExporter(coll) {};
 
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual QString formatString() const;

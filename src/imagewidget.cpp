@@ -78,6 +78,10 @@ void ImageWidget::setImage(const Data::Image& image_) {
 }
 
 void ImageWidget::slotClear() {
+//  if(m_image.isNull()) {
+//    return;
+//  }
+
   m_image = Data::Image();
   m_pixmap = QPixmap();
   m_scaled = m_pixmap;
@@ -196,3 +200,5 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
     }
   }
 }
+
+#include "imagewidget.moc"

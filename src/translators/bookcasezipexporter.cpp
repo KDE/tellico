@@ -25,21 +25,18 @@
 
 using Bookcase::Export::BookcaseZipExporter;
 
-BookcaseZipExporter::BookcaseZipExporter(const Data::Collection* coll_, const Data::EntryList& list_)
-    : Bookcase::Export::DataExporter(coll_, list_) {
-}
-
 QString BookcaseZipExporter::formatString() const {
   return i18n("Bookcase Zip File");
 }
 
 QString BookcaseZipExporter::fileFilter() const {
-  return i18n("*.bc|Bookcase files(*.bc)") + QString::fromLatin1("\n") + i18n("*|All files");
+  return i18n("*.bc|Bookcase files(*.bc)") + QChar('\n') + i18n("*|All files");
 }
 
 QByteArray BookcaseZipExporter::data(bool formatFields_) {
   const Data::Collection* coll = collection();
-  BookcaseXMLExporter exp(coll, entryList());
+  BookcaseXMLExporter exp(coll);
+  exp.setEntryList(entryList());
   exp.includeImages(false); // do not include images in XML
   QCString xml = exp.text(formatFields_, true).utf8();
 

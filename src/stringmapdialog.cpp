@@ -107,3 +107,5 @@ Bookcase::Data::StringMap StringMapDialog::stringMap() {
   }
   return map;
 }
+
+#include "stringmapdialog.moc"

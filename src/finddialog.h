@@ -14,9 +14,6 @@
 #ifndef FINDDIALOG_H
 #define FINDDIALOG_H
 
-namespace Bookcase {
-  class MainWindow;
-}
 class KComboBox;
 class KHistoryCombo;
 class KPushButton;
@@ -31,19 +28,19 @@ namespace Bookcase {
  * The find dialog allows the user to search for a string in the document.
  *
  * @author Robby Stephenson
- * @version $Id: finddialog.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: finddialog.h 691 2004-06-09 02:48:54Z robby $
  */
 class FindDialog : public KDialogBase {
 Q_OBJECT
 
-public: 
+public:
   /**
    * The constructor sets up the dialog.
    *
    * @param parent A pointer to the parent widget, a Bookcase object
    * @param name The widget name
    */
-  FindDialog(MainWindow* parent, const char* name=0);
+  FindDialog(QWidget* parent, const char* name=0);
 
   /**
    * Update the field list. This is needed since the parent Bookcase app
@@ -76,8 +73,6 @@ protected slots:
   void slotEditRegExp();
 
 private:
-  MainWindow* m_bookcase;
-  
   KHistoryCombo* m_pattern;
   KComboBox* m_fields;
   QCheckBox* m_caseSensitive;
@@ -85,7 +80,7 @@ private:
   QCheckBox* m_asRegExp;
   QCheckBox* m_wholeWords;
   QCheckBox* m_fromBeginning;
-  
+
   KPushButton* m_editRegExp;
   QDialog* m_editRegExpDialog;
 };

@@ -65,3 +65,5 @@ void TabControl::clear() {
 void TabControl::setResetFocus(bool reset_) {
   m_resetFocus = reset_;
 }
+
+#include "tabcontrol.moc"

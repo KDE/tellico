@@ -21,6 +21,9 @@
 using Bookcase::Filter;
 using Bookcase::FilterRule;
 
+FilterRule::FilterRule() : m_function(FuncEquals) {
+}
+
 FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Function func_)
  : m_fieldName(fieldName_), m_function(func_), m_pattern(pattern_) {
 }

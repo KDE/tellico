@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.9.3
+%define version 0.10
 %define release 1rls
 %define iconname %{name}.png
 %define __libtoolize /bin/true
@@ -10,6 +10,7 @@ Version: %{version}
 Release: %{release}
 License: GPL
 Group: Office
+#Source: %{name}-%{version}.tar.gz
 Source: %{name}-%{version}.tar.gz
 URL: http://www.periapsis.org/bookcase/
 Requires: kdebase libxslt1 >= 1.0.19
@@ -22,8 +23,8 @@ Bookcase is a KDE application for keeping track of your collection of books, bib
 
 Features:
 
-o Supports any number of user-defined fields, of ten different types:
-   o text, paragraph, list, checkbox, year, URL
+o Supports any number of user-defined fields, of eleven different types:
+   o text, paragraph, list, checkbox, year, URL, date
    o tables of one or two columns.
    o images
    o combinations of other fields
@@ -33,7 +34,7 @@ o Supports collection searching and view filtering
 o Sorts and groups collection by various properties
 o Automatically validates ISBN
 o Allows customizable entry templates through XSLT
-o Imports Bibtex, Bibtexml, CSV, and XSLT-filtered data
+o Imports Bibtex, Bibtexml, CSV, MODS, and XSLT-filtered data
 o Exports to Bibtex, Bibtexml, CSV, HTML, PilotDB, and XSLT-filtered data
 
 
@@ -83,8 +84,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
-* Wed May 12 2004 Robby Stephenson <robby@periapsis.org> 0.9.2-1rls
-- Version 0.9.2
+* Tue Aug 10 2004 Robby Stephenson <robby@periapsis.org> 0.10-1rls
+- Version 0.10
+
+* Mon Aug  9 2004 Robby Stephenson <robby@periapsis.org> 0.10pre2-1rls
+- Version 0.10pre2
+
+* Sun Aug  8 2004 Robby Stephenson <robby@periapsis.org> 0.10pre1-1rls
+- Version 0.10pre1
 
 * Wed Apr 21 2004 Robby Stephenson <robby@periapsis.org> 0.9.1-1rls
 - Version 0.9.1

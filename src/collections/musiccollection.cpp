@@ -41,7 +41,7 @@ Bookcase::Data::FieldList MusicCollection::defaultFields() {
   list.append(field);
 
   QStringList media;
-  media << i18n("Compact Disc") << i18n("Cassette") << i18n("Vinyl");
+  media << i18n("Compact Disc") << i18n("DVD") << i18n("Cassette") << i18n("Vinyl");
   field = new Field(QString::fromLatin1("medium"), i18n("Medium"), media);
   field->setCategory(i18n(music_general));
   field->setFlags(Field::AllowGrouped);
@@ -112,3 +112,5 @@ Bookcase::Data::FieldList MusicCollection::defaultFields() {
 
   return list;
 }
+
+#include "musiccollection.moc"

@@ -28,7 +28,7 @@ namespace Bookcase {
  * @li Title
  *
  * @author Robby Stephenson
- * @version $Id: bibtexcollection.h 546 2004-03-16 02:12:05Z robby $
+ * @version $Id: bibtexcollection.h 652 2004-05-11 04:57:03Z robby $
  */
 class BibtexCollection : public Collection {
 Q_OBJECT
@@ -45,7 +45,7 @@ public:
    */
   virtual ~BibtexCollection() {}
 
-  virtual CollectionType collectionType() const { return Bibtex; }
+  virtual Type type() const { return Bibtex; }
   virtual bool addField(Field* field);
   virtual bool modifyField(Field* field);
   virtual bool deleteField(Field* field, bool force=false);

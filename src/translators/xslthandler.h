@@ -32,7 +32,7 @@ namespace Bookcase {
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h 586 2004-04-03 23:06:46Z robby $
+ * @version $Id: xslthandler.h 744 2004-08-07 22:00:00Z robby $
  */
 class XSLTHandler {
 
@@ -77,6 +77,7 @@ public:
    * @param encodedUTF8 Whether the text is encoded in utf-8 or not
    * @return The transformed text
    */
+  QString applyStylesheet(const QCString& text);
   QString applyStylesheet(const QString& text, bool encodedUTF8);
 
 private:

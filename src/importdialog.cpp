@@ -24,6 +24,7 @@
 
 #include <klocale.h>
 #include <kdebug.h>
+#include <kstandarddirs.h>
 
 #include <qlayout.h>
 #include <qbuttongroup.h>
@@ -128,6 +129,18 @@ Bookcase::Import::Importer* ImportDialog::importer(ImportFormat format_, const K
       importer = new Import::XSLTImporter(url_);
       break;
 
+    case MODS:
+      importer = new Import::XSLTImporter(url_);
+      {
+        QString xsltFile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("mods2bookcase.xsl"));
+        if(!xsltFile.isEmpty()) {
+          KURL u;
+          u.setPath(xsltFile);
+          static_cast<Import::XSLTImporter*>(importer)->setXSLTURL(u);
+        }
+      }
+      break;
+
     case AudioFile:
     default:
       kdDebug() << "ImportDialog::importer() - not implemented!" << endl;
@@ -141,25 +154,29 @@ QString ImportDialog::fileFilter(ImportFormat format_) {
   QString text;
   switch(format_) {
     case BookcaseXML:
-      text = i18n("*.bc|Bookcase files (*.bc)") + QString::fromLatin1("\n");
+      text = i18n("*.bc|Bookcase files (*.bc)") + QChar('\n');
       break;
 
     case Bibtex:
-      text = i18n("*.bib|Bibtex files (*.bib)") + QString::fromLatin1("\n");
+      text = i18n("*.bib|Bibtex files (*.bib)") + QChar('\n');
       break;
 
     case CSV:
-      text = i18n("*.csv|CSV files (*.csv)") + QString::fromLatin1("\n");
+      text = i18n("*.csv|CSV files (*.csv)") + QChar('\n');
       break;
 
     case Bibtexml:
     case XSLT:
-      text = i18n("*.xml|XML files (*.xml)") + QString::fromLatin1("\n");
+      text = i18n("*.xml|XML files (*.xml)") + QChar('\n');
       break;
 
     case AudioFile:
       // FIXME: add mp3, too?
-      text = i18n("*.ogg|Ogg files (*.ogg)") + QString::fromLatin1("\n");
+      text = i18n("*.ogg|Ogg files (*.ogg)") + QChar('\n');
+      break;
+
+    case MODS:
+      text = i18n("*.xml|XML files (*.xml)") + QChar('\n');
       break;
 
     default:
@@ -180,3 +197,5 @@ void ImportDialog::slotUpdateAction() {
   QButtonGroup* bg = dynamic_cast<QButtonGroup*>(m_radioAppend->parentWidget());
   m_importer->slotActionChanged(bg->id(bg->selected()));
 }
+
+#include "importdialog.moc"

@@ -31,8 +31,7 @@
 
 using Bookcase::Export::PilotDBExporter;
 
-PilotDBExporter::PilotDBExporter(const Data::Collection* coll_, const Data::EntryList& list_)
-    : Bookcase::Export::DataExporter(coll_, list_),
+PilotDBExporter::PilotDBExporter(const Data::Collection* coll_) : Bookcase::Export::DataExporter(coll_),
       m_backup(true),
       m_widget(0),
       m_checkBackup(0) {
@@ -43,7 +42,7 @@ QString PilotDBExporter::formatString() const {
 }
 
 QString PilotDBExporter::fileFilter() const {
-  return i18n("*.pdb|Pilot Database files(*.pdb)") + QString::fromLatin1("\n") + i18n("*|All files");
+  return i18n("*.pdb|Pilot Database files(*.pdb)") + QChar('\n') + i18n("*|All files");
 }
 
 QByteArray PilotDBExporter::data(bool formatFields_) {

@@ -16,7 +16,8 @@
 #include "../collectionfactory.h"
 #include "../collections/bibtexcollection.h"
 #include "../imagefactory.h"
-#include "../error_strings.h"
+#include "../isbnvalidator.h"
+#include "../latin1literal.h"
 
 #include <klocale.h>
 #include <kmdcodec.h>
@@ -24,6 +25,8 @@
 #include <kdebug.h>
 
 #include <qbuffer.h>
+
+extern const char* loadError;
 
 using Bookcase::Import::BookcaseImporter;
 
@@ -38,6 +41,9 @@ using Bookcase::Import::BookcaseImporter;
  *
  * VERSION 5 moved the bibtex-field and any other extended field properties to property elements
  * inside the field element, and added the image element.
+ *
+ * VERSION 6 added id, i18n attributes, and year, month, day elements in date fields with a calendar name
+ * attribute.
  */
 
 BookcaseImporter::BookcaseImporter(const KURL& url_) : DataImporter(url_), m_coll(0)  {
@@ -55,7 +61,6 @@ Bookcase::Data::Collection* BookcaseImporter::collection() {
     // need to decide if the data is xml text, or a zip file
     // if the first 5 characters are <?xml then treat it like text
     if(ba[0] == '<' && ba[1] == '?' && ba[2] == 'x' && ba[3] == 'm' && ba[4] == 'l') {
-      m_fraction = 1.0;
       loadXMLData(ba, true);
     } else {
       loadZipData(ba);
@@ -69,7 +74,7 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   QString errorMsg;
   int errorLine, errorColumn;
   if(!dom.setContent(data_, false, &errorMsg, &errorLine, &errorColumn)) {
-    QString str = i18n(loadError).arg(url().fileName()) + QString::fromLatin1("\n");
+    QString str = i18n(loadError).arg(url().fileName()) + QChar('\n');
     str += i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
     str += QString::fromLatin1("\n");
     str += i18n("The error message from Qt is:");
@@ -79,7 +84,7 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   }
 
   QDomElement root = dom.documentElement();
-  if(root.tagName() != QString::fromLatin1("bookcase")) {
+  if(root.tagName() != Latin1Literal("bookcase")) {
     if(!url().isEmpty()) {
       setStatusMessage(i18n(loadError).arg(url().fileName()));
     }
@@ -101,8 +106,7 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   if(syntaxVersion > Export::BookcaseXMLExporter::syntaxVersion) {
     if(!url().isEmpty()) {
-      QString str = i18n(loadError).arg(url().fileName());
-      str += QString::fromLatin1("\n");
+      QString str = i18n(loadError).arg(url().fileName()) + QChar('\n');
       str += i18n("It is from a future version of Bookcase.");
       setStatusMessage(str);
     }
@@ -138,8 +142,9 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   bool addFields = (fieldelems.count() == 0);
   if(!addFields) {
     QString name = fieldelems.item(0).toElement().attribute(QString::fromLatin1("name"));
-    addFields = (name == QString::fromLatin1("_default"));
+    addFields = (name == Latin1Literal("_default"));
     // removeChild only works for immediate children
+    // remove _default field
     if(addFields) {
       fieldelems.item(0).parentNode().removeChild(fieldelems.item(0));
     }
@@ -155,7 +160,7 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   } else {
     entryName = QString::fromLatin1("entry");
     QString typeStr = collelem.attribute(QString::fromLatin1("type"));
-    Data::Collection::CollectionType type = static_cast<Data::Collection::CollectionType>(typeStr.toInt());
+    Data::Collection::Type type = static_cast<Data::Collection::Type>(typeStr.toInt());
     m_coll = CollectionFactory::collection(type, addFields);
   }
 
@@ -167,7 +172,7 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     readField(syntaxVersion, fieldelems.item(j).toElement());
   }
 
-  if(m_coll->collectionType() == Data::Collection::Bibtex) {
+  if(m_coll->type() == Data::Collection::Bibtex) {
     Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(m_coll);
     QDomNodeList macroelems = collelem.elementsByTagName(QString::fromLatin1("macro"));
 //    kdDebug() << "BookcaseDoc::loadDomDocument() - found " << macroelems.count() << " macros" << endl;
@@ -188,19 +193,19 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 //                         "in the collection.").arg(unitelems.count()).arg(entryName) << endl;
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex
-  if(syntaxVersion < 4 && m_coll->collectionType() == Data::Collection::Book
+  if(syntaxVersion < 4 && m_coll->type() == Data::Collection::Book
      && m_coll->fieldByName(QString::fromLatin1("bibtex-id")) != 0) {
     Data::BibtexCollection* c = Data::BibtexCollection::convertBookCollection(m_coll);
     delete m_coll;
     m_coll = c;
   }
 
-  unsigned count = entryelems.count();
+  unsigned const count = entryelems.count();
   for(unsigned j = 0; j < count; ++j) {
     readEntry(syntaxVersion, entryelems.item(j));
 
     if(j%QMAX(s_stepSize, count/100) == 0) {
-      emit signalFractionDone(m_fraction*static_cast<float>(j)/static_cast<float>(count));
+      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));
     }
   } // end entry loop
 
@@ -215,16 +220,27 @@ void BookcaseImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 }
 
 void BookcaseImporter::readField(unsigned syntaxVersion_, const QDomElement& elem_) {
+  // special case: if the i18n attribute equals true, then translate the title, description, and category
+  bool isI18n = elem_.attribute(QString::fromLatin1("i18n")) == Latin1Literal("true");
+
   QString name  = elem_.attribute(QString::fromLatin1("name"), QString::fromLatin1("unknown"));
   QString title = elem_.attribute(QString::fromLatin1("title"), i18n("Unknown"));
+  if(isI18n) {
+    title = i18n(title.utf8());
+  }
 
   QString typeStr = elem_.attribute(QString::fromLatin1("type"), QString::number(Data::Field::Line));
-  Data::Field::FieldType type = static_cast<Data::Field::FieldType>(typeStr.toInt());
+  Data::Field::Type type = static_cast<Data::Field::Type>(typeStr.toInt());
 
   Data::Field* field;
   if(type == Data::Field::Choice) {
-    QString allowed = elem_.attribute(QString::fromLatin1("allowed"));
-    field = new Data::Field(name, title, QStringList::split(QString::fromLatin1(";"), allowed));
+    QStringList allowed = QStringList::split(QString::fromLatin1(";"), elem_.attribute(QString::fromLatin1("allowed")));
+    if(isI18n) {
+      for(QStringList::Iterator it = allowed.begin(); it != allowed.end(); ++it) {
+        (*it) = i18n((*it).utf8());
+      }
+    }
+    field = new Data::Field(name, title, allowed);
   } else {
     field = new Data::Field(name, title, type);
   }
@@ -233,8 +249,10 @@ void BookcaseImporter::readField(unsigned syntaxVersion_, const QDomElement& ele
     // at one point, the categories had keyboard accels
     QString cat = elem_.attribute(QString::fromLatin1("category"));
     if(cat.find('&') > -1) {
-      // Qt 3.0.x doesn't have QString::replace(QChar, ...)
-      cat.replace('&', QString::null);
+      cat.remove('&');
+    }
+    if(isI18n) {
+      cat = i18n(cat.utf8());
     }
     field->setCategory(cat);
   }
@@ -243,13 +261,13 @@ void BookcaseImporter::readField(unsigned syntaxVersion_, const QDomElement& ele
     int flags = elem_.attribute(QString::fromLatin1("flags")).toInt();
     // I also changed the enum values for syntax 3, but the only custom field
     // would have been bibtex-id
-    if(syntaxVersion_ < 3 && field->name() == QString::fromLatin1("bibtex-id")) {
+    if(syntaxVersion_ < 3 && field->name() == Latin1Literal("bibtex-id")) {
       flags = 0;
     }
 
     // in syntax version 4, added a flag to disallow deleting attributes
     // if it's a version before that and is the title, then add the flag
-    if(syntaxVersion_ < 4 && field->name() == QString::fromLatin1("title")) {
+    if(syntaxVersion_ < 4 && field->name() == Latin1Literal("title")) {
       flags |= Data::Field::NoDelete;
     }
     field->setFlags(flags);
@@ -260,7 +278,11 @@ void BookcaseImporter::readField(unsigned syntaxVersion_, const QDomElement& ele
   field->setFormatFlag(format);
 
   if(elem_.hasAttribute(QString::fromLatin1("description"))) {
-    field->setDescription(elem_.attribute(QString::fromLatin1("description")));
+    QString desc = elem_.attribute(QString::fromLatin1("description"));
+    if(isI18n) {
+      desc = i18n(desc.utf8());
+    }
+    field->setDescription(desc);
   }
 
   if(syntaxVersion_ >= 5) {
@@ -281,13 +303,20 @@ void BookcaseImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryN
   Data::Entry* entry = new Data::Entry(m_coll);
   // ierate over all field value children
   for(QDomNode node = entryNode_.firstChild(); !node.isNull(); node = node.nextSibling()) {
+    QDomElement elem = node.toElement();
+    if(elem.isNull()) {
+      continue;
+    }
+
+    bool isI18n = elem.attribute(QString::fromLatin1("i18n")) == Latin1Literal("true");
+
     // Entry::setField checks to see if an field of 'name' is allowed
     // in version 3 and prior, checkbox attributes had no text(), set it to "true" now
-    if(syntaxVersion_ < 4 && node.toElement().text().isEmpty()) {
+    if(syntaxVersion_ < 4 && elem.text().isEmpty()) {
       // "true" means checked
-      entry->setField(node.toElement().tagName(), QString::fromLatin1("true"));
+      entry->setField(elem.tagName(), QString::fromLatin1("true"));
     } else {
-      QString name = node.toElement().tagName();
+      QString name = elem.tagName();
       Data::Field* f = m_coll->fieldByName(name);
 
       // if the first child of the node is a text node, just set the attribute text
@@ -300,11 +329,53 @@ void BookcaseImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryN
         if(f->type() == Data::Field::Dependent) {
           continue;
         }
+        // special case for Date fields
+        if(f->type() == Data::Field::Date) {
+          if(elem.hasChildNodes()) {
+            QString value;
+            QDomNode yNode = elem.elementsByTagName(QString::fromLatin1("year")).item(0);
+            if(!yNode.isNull()) {
+              value += yNode.toElement().text();
+            }
+            value += '-';
+            QDomNode mNode = elem.elementsByTagName(QString::fromLatin1("month")).item(0);
+            if(!mNode.isNull()) {
+              value += mNode.toElement().text();
+            }
+            value += '-';
+            QDomNode dNode = elem.elementsByTagName(QString::fromLatin1("day")).item(0);
+            if(!dNode.isNull()) {
+              value += dNode.toElement().text();
+            }
+            entry->setField(name, value);
+          } else {
+            // if no child nodes, the code will later assume the value to be the year
+            entry->setField(name, elem.text());
+          }
+          // go to next value in loop
+          continue;
+        }
+        QString value = elem.text();
+        if(value.isEmpty()) {
+          continue;
+        }
         // in version 2, "keywords" changed to "keyword"
-        if(syntaxVersion_ < 2 && name == QString::fromLatin1("keywords")) {
+        if(syntaxVersion_ < 2 && name == Latin1Literal("keywords")) {
           name = QString::fromLatin1("keyword");
         }
-        entry->setField(name, node.toElement().text());
+        // special case: if the i18n attribute equals true, then translate the title, description, and category
+        if(isI18n) {
+          entry->setField(name, i18n(value.utf8()));
+        } else {
+          // special case for isbn fields, go ahead and validate
+          if(name == Latin1Literal("isbn")) {
+            static const ISBNValidator val(0);
+            if(elem.attribute(QString::fromLatin1("validate")) != Latin1Literal("no")) {
+              val.fixup(value);
+            }
+          }
+          entry->setField(name, value);
+        }
       } else { // if not, then it has children, iterate through them
         // the field name has the final 's', so remove it
         name.truncate(name.length() - 1);
@@ -316,17 +387,25 @@ void BookcaseImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryN
         }
 
         QString value;
-        QDomNode childNode = node.firstChild();
         // is it a 2-column table
         bool isTable2 = (f->type() == Data::Field::Table2);
         // concatenate values
-        for( ; !childNode.isNull(); childNode = childNode.nextSibling()) {
+        for(QDomNode childNode = node.firstChild(); !childNode.isNull(); childNode = childNode.nextSibling()) {
+          // don't worry about i18n here, Tables are never translated
           if(isTable2) {
             value += childNode.firstChild().toElement().text();
-            value += QString::fromLatin1("::");
-            value += childNode.lastChild().toElement().text();
+            if(childNode.childNodes().count() == 2) {
+              value += QString::fromLatin1("::");
+              value += childNode.lastChild().toElement().text();
+            }
           } else {
-            value += childNode.toElement().text();
+            // this causes problems with some characters
+            // japanese, for instance, where i18n(text) != text
+            if(isI18n) {
+              value += i18n(childNode.toElement().text().utf8());
+            } else {
+              value += childNode.toElement().text();
+            }
           }
           value += QString::fromLatin1("; ");
         }
@@ -371,9 +450,7 @@ void BookcaseImporter::loadZipData(const QByteArray& data_) {
   }
 
   const QByteArray xmlData = static_cast<const KArchiveFile*>(entry)->data();
-  m_fraction = static_cast<float>(xmlData.size())/static_cast<float>(data_.size());
   loadXMLData(xmlData, false);
-  m_fraction = 1.0;
   if(!m_coll) {
     return;
   }
@@ -384,18 +461,15 @@ void BookcaseImporter::loadZipData(const QByteArray& data_) {
   }
 
   QStringList images = static_cast<const KArchiveDirectory*>(imgDir)->entries();
-  unsigned count = images.count();
-  unsigned j = 0;
-  for(QStringList::ConstIterator it = images.begin(); it != images.end(); ++it, ++j) {
+  for(QStringList::ConstIterator it = images.begin(); it != images.end(); ++it) {
     const KArchiveEntry* file = static_cast<const KArchiveDirectory*>(imgDir)->entry(*it);
     if(file && file->isFile()) {
       ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
                              (*it).section('.', -1).upper(), *it);
     }
-    if(j%QMAX(s_stepSize, count/100) == 0) {
-      emit signalFractionDone(m_fraction*static_cast<float>(j)/static_cast<float>(count));
-    }
   }
 
   zip.close();
 }
+
+#include "bookcaseimporter.moc"

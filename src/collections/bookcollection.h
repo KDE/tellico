@@ -52,7 +52,7 @@ namespace Bookcase {
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: bookcollection.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: bookcollection.h 652 2004-05-11 04:57:03Z robby $
  */
 class BookCollection : public Collection {
 Q_OBJECT
@@ -66,7 +66,7 @@ public:
    */
   BookCollection(bool addFields, const QString& title = QString::null);
 
-  virtual CollectionType collectionType() const { return Book; }
+  virtual Type type() const { return Book; }
 
   static FieldList defaultFields();
 };

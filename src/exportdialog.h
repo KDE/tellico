@@ -32,7 +32,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: exportdialog.h 615 2004-04-17 20:32:47Z robby $
+ * @version $Id: exportdialog.h 759 2004-08-11 01:28:25Z robby $
  */
 class ExportDialog : public KDialogBase {
 Q_OBJECT
@@ -65,6 +65,7 @@ private:
   Data::Collection* m_coll;
   Export::Exporter* m_exporter;
   QCheckBox* m_formatFields;
+  QCheckBox* m_exportSelected;
   QRadioButton* m_encodeUTF8;
   QRadioButton* m_encodeLocale;
 };

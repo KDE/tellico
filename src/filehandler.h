@@ -34,11 +34,10 @@ namespace Bookcase {
  * The FileHandler class contains some utility functions for reading files.
  *
  * @author Robby Stephenson
- * @version $Id: filehandler.h 657 2004-05-13 04:52:31Z robby $
+ * @version $Id: filehandler.h 714 2004-07-29 00:38:46Z robby $
  */
 class FileHandler {
 
-friend class MainWindow;
 friend class ImageFactory;
 //friend class Data::Image;
 
@@ -94,7 +93,7 @@ private:
    */
   class FileRef {
     friend class FileHandler;
-    FileRef(const KURL& url);
+    FileRef(const KURL& url, bool quiet=false);
     ~FileRef();
     QFile* file;
     QString filename;
@@ -107,9 +106,10 @@ private:
    * ImageFactory methods.
    *
    * @param url The URL of the file
+   * @param quiet If errors should be quiet
    * @return The image
    */
-  static Data::Image* readImageFile(const KURL& url);
+  static Data::Image* readImageFile(const KURL& url, bool quiet=false);
   /**
    * Checks to see if a URL exists already, and if so, queries the user.
    *
@@ -134,8 +134,6 @@ private:
    * @return A boolean indicating success
    */
   static bool writeDataFile(KSaveFile& file, const QByteArray& data);
-
-  static MainWindow* s_mainWindow;
 };
 
 } // end namespace

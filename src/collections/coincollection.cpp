@@ -129,3 +129,5 @@ Bookcase::Data::FieldList CoinCollection::defaultFields() {
 
   return list;
 }
+
+#include "coincollection.moc"

@@ -14,10 +14,12 @@
 #include "bibtexmlimporter.h"
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
-#include "../error_strings.h"
+#include "../latin1literal.h"
 
 #include <klocale.h>
 #include <kdebug.h>
+
+extern const char* loadError;
 
 using Bookcase::Import::BibtexmlImporter;
 
@@ -30,7 +32,7 @@ Bookcase::Data::Collection* BibtexmlImporter::collection() {
 
 void BibtexmlImporter::loadDomDocument() {
   QDomElement root = domDocument().documentElement();
-  if(root.tagName() != QString::fromLatin1("file")) {
+  if(root.tagName() != Latin1Literal("file")) {
     setStatusMessage(i18n(loadError).arg(url().fileName()));
     return;
   }
@@ -81,7 +83,7 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
     } else {
       // is either titlelist, authorlist, editorlist, or keywords
       QString parName = n.toElement().tagName();
-      if(parName == QString::fromLatin1("titlelist")) {
+      if(parName == Latin1Literal("titlelist")) {
         for(QDomNode n2 = node.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
           name = n2.toElement().tagName();
           value = n2.toElement().text();
@@ -93,13 +95,13 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
         value.truncate(0);
       } else {
         name = n.firstChild().toElement().tagName();
-        if(name == QString::fromLatin1("keyword")) {
+        if(name == Latin1Literal("keyword")) {
           name = QString::fromLatin1("keywords");
         }
         value.truncate(0);
         for(QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
           // n2 could have first, middle, lastname elements...
-          if(name == QString::fromLatin1("person")) {
+          if(name == Latin1Literal("person")) {
             QStringList names;
             names << QString::fromLatin1("initials") << QString::fromLatin1("first")
                   << QString::fromLatin1("middle") << QString::fromLatin1("prelast")
@@ -138,3 +140,4 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
   m_coll->addEntry(unit);
 }
 
+#include "bibtexmlimporter.moc"

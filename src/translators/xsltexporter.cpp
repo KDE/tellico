@@ -28,8 +28,7 @@
 
 using Bookcase::Export::XSLTExporter;
 
-XSLTExporter::XSLTExporter(const Data::Collection* coll_, Data::EntryList list_)
-  : Export::TextExporter(coll_, list_),
+XSLTExporter::XSLTExporter(const Data::Collection* coll_) : Export::TextExporter(coll_),
     m_widget(0),
     m_URLRequester(0) {
 }
@@ -71,7 +70,8 @@ QString XSLTExporter::text(bool formatFields_, bool encodeUTF8_) {
   //  XSLTHandler handler(FileHandler::readXMLFile(url));
   XSLTHandler handler(url);
 
-  BookcaseXMLExporter exporter(collection(), entryList());
+  BookcaseXMLExporter exporter(collection());
+  exporter.setEntryList(entryList());
   QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
   return handler.applyStylesheet(dom.toString(), encodeUTF8_);
 }

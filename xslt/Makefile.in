@@ -171,6 +171,8 @@ UIC_TR = @UIC_TR@
 USER_INCLUDES = @USER_INCLUDES@
 USER_LDFLAGS = @USER_LDFLAGS@
 USE_EXCEPTIONS = @USE_EXCEPTIONS@
+USE_LIBBTPARSE_FALSE = @USE_LIBBTPARSE_FALSE@
+USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
@@ -255,14 +257,22 @@ target_vendor = @target_vendor@
 x_includes = @x_includes@
 x_libraries = @x_libraries@
 
-EXTRA_DIST = bookcase-by-author.xsl bookcase-by-title.xsl bookcase-printing.xsl bookcase2html.xsl shadowAlpha.png \
-cd-logo.png dvd-logo.png cassette-logo.png record-logo.png vhs-logo.png bookcase-common.xsl mods2bookcase.xsl
+EXTRA_DIST = bookcase-by-author.xsl bookcase-by-title.xsl \
+             bookcase-printing.xsl bookcase2html.xsl shadowAlpha.png \
+             cd-logo.png dvd-logo.png cassette-logo.png record-logo.png \
+             vhs-logo.png bookcase-common.xsl mods2bookcase.xsl \
+             amazon2bookcase.xsl
 
 
 
 ####### kdevelop will overwrite this part!!! (end)############
 xsldir = $(kde_datadir)/bookcase
-xsl_DATA = bookcase-printing.xsl bookcase-by-author.xsl bookcase-by-title.xsl bookcase2html.xsl shadowAlpha.png cassette-logo.png cd-logo.png dvd-logo.png record-logo.png vhs-logo.png bookcase-common.xsl mods2bookcase.xsl
+xsl_DATA = bookcase-printing.xsl bookcase-by-author.xsl bookcase-by-title.xsl \
+	bookcase2html.xsl shadowAlpha.png cassette-logo.png cd-logo.png \
+        dvd-logo.png record-logo.png vhs-logo.png bookcase-common.xsl \
+        mods2bookcase.xsl amazon2bookcase.xsl
+
+
 SUBDIRS = entry-templates
 
 KDE_OPTIONS = noautodist

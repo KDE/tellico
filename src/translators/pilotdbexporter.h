@@ -25,11 +25,11 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: pilotdbexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: pilotdbexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class PilotDBExporter : public DataExporter {
-public: 
-  PilotDBExporter(const Data::Collection* coll, const Data::EntryList& list);
+public:
+  PilotDBExporter(const Data::Collection* coll);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;

@@ -118,29 +118,27 @@ void ParentItem::paintCell(QPainter* p_, const QColorGroup& cg_,
   // always paint the cell
   KListViewItem::paintCell(p_, cg_, column_, width_, align_);
 
-  GroupView* groupView = dynamic_cast<GroupView*>(listView());
+  GroupView* groupView = dynamic_cast<Bookcase::GroupView*>(listView());
   if(!groupView) {
     return;
   }
 
   // show count is only for first column and depth of 1
-  if(column_ == 0 && depth() == 1) {
-    if(groupView->showCount()) {
-      int marg = groupView->itemMargin();
+  if(column_ == 0 && depth() == 1 && groupView->showCount()) {
+    int marg = groupView->itemMargin();
 
-      QString numText = QString::fromLatin1(" (%1)").arg(m_count);
+    QString numText = QString::fromLatin1(" (%1)").arg(m_count);
 
-      if(isSelected()) {
-        p_->setPen(cg_.highlightedText());
-      } else {
-        p_->setPen(cg_.highlight());
-      }
-
-      // don't call ParentItem::width() because that includes the count already
-      int w = KListViewItem::width(p_->fontMetrics(), groupView, column_);
-
-      p_->drawText(w-marg, 0, width_-marg-w, height(), align_ | Qt::AlignVCenter, numText);
+    if(isSelected()) {
+      p_->setPen(cg_.highlightedText());
+    } else {
+      p_->setPen(cg_.highlight());
     }
+
+    // don't call ParentItem::width() because that includes the count already
+    int w = KListViewItem::width(p_->fontMetrics(), groupView, column_);
+
+    p_->drawText(w-marg, 0, width_-marg-w, height(), align_ | Qt::AlignVCenter, numText);
   }
 }
 

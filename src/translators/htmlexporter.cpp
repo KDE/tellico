@@ -17,6 +17,7 @@
 #include "../collection.h"
 #include "../filehandler.h"
 #include "../imagefactory.h"
+#include "../latin1literal.h"
 
 #include <kstandarddirs.h>
 #include <kconfig.h>
@@ -40,11 +41,12 @@
 
 using Bookcase::Export::HTMLExporter;
 
-HTMLExporter::HTMLExporter(const Data::Collection* coll_, Data::EntryList list_)
-  : Bookcase::Export::TextExporter(coll_, list_),
+HTMLExporter::HTMLExporter(const Data::Collection* coll_) : Bookcase::Export::TextExporter(coll_),
     m_printHeaders(true),
     m_printGrouped(false),
     m_exportEntryFiles(false),
+    m_imageWidth(0),
+    m_imageHeight(0),
     m_widget(0),
     m_xsltfile(QString::fromLatin1("bookcase2html.xsl")),
     m_columns(QString::fromLatin1("title")) {
@@ -55,7 +57,7 @@ QString HTMLExporter::formatString() const {
 }
 
 QString HTMLExporter::fileFilter() const {
-  return i18n("*.html|HTML files (*.html)") + QString::fromLatin1("\n") + i18n("*|All files");
+  return i18n("*.html|HTML files (*.html)") + QChar('\n') + i18n("*|All files");
 }
 
 QWidget* HTMLExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
@@ -135,14 +137,14 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     m_printGrouped = false; // can't group if no groups exist
   }
 
-  if(m_printGrouped && !m_groupBy.isEmpty()) {
+  if(m_printGrouped) {
     // since the XSL stylesheet can't use a parameter as a key name, need to replace keys
     QDomNodeList keyNodes = dom.elementsByTagName(QString::fromLatin1("xsl:key"));
     for(unsigned i = 0; i < keyNodes.count(); ++i) {
       QDomElement elem = keyNodes.item(i).toElement();
       // dont't forget bc namespace
       // the entries key needs to use the groupName as the property
-      if(elem.attribute(QString::fromLatin1("name"), QString::null) == QString::fromLatin1("entries")) {
+      if(elem.attribute(QString::fromLatin1("name"), QString::null) == Latin1Literal("entries")) {
         QString s;
         for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
           s += QString::fromLatin1(".//bc:") + *it;
@@ -155,7 +157,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
         }
         elem.setAttribute(QString::fromLatin1("use"), s);
       // the groups key needs to use the groupName as the match
-      } else if(elem.attribute(QString::fromLatin1("name"), QString::null) == QString::fromLatin1("groups")) {
+      } else if(elem.attribute(QString::fromLatin1("name"), QString::null) == Latin1Literal("groups")) {
         QString s;
         for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
           s += QString::fromLatin1("bc:") + *it;
@@ -172,7 +174,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     QDomNodeList varNodes = dom.elementsByTagName(QString::fromLatin1("xsl:variable"));
     for(unsigned i = 0; i < varNodes.count(); ++i) {
       QDomElement elem = varNodes.item(i).toElement();
-      if(elem.attribute(QString::fromLatin1("name"), QString::null) == QString::fromLatin1("all-groups")) {
+      if(elem.attribute(QString::fromLatin1("name"), QString::null) == Latin1Literal("all-groups")) {
         QString s;
         for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
           s += QString::fromLatin1("//bc:") + *it;
@@ -243,12 +245,15 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
                          encodeUTF8_ ? printFields.join(QString::fromLatin1(" ")).utf8()
                                      : printFields.join(QString::fromLatin1(" ")).local8Bit());
 
-  BookcaseXMLExporter exporter(coll, entryList());
+  BookcaseXMLExporter exporter(coll);
+  exporter.setEntryList(entryList());
   exporter.includeID(true);
   QDomDocument output = exporter.exportXML(formatFields_, encodeUTF8_);
 
-  // now handle exporting images.
+  // where the file will be saved
   const KURL& targetURL = url();
+
+  // now handle exporting images.
   // if the target URL is empty, then the images should be saved to the default ImageFactory::TempDir()
   // otherwise save to a directory named by the collection title
   KURL imageDir;
@@ -274,13 +279,16 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     // ok to use relative in HTML output
 //    kdDebug() << "HTMLExporter::text() - relative image dir = " << imageDir.fileName()+'/' << endl;
     handler.addStringParam("imgdir", QFile::encodeName(imageDir.fileName()+'/'));
+    if(m_exportEntryFiles) {
+      QString entryDir = targetURL.fileName().section('.', 0, 0) + QString::fromLatin1("_entries/");
+      handler.addStringParam("entrydir", encodeUTF8_ ? entryDir.utf8() : entryDir.local8Bit());
+    }
   }
 //  kdDebug() << "HTMLExporter::text() - image dir = " << imageDir.path() << endl;
 
   if(m_imageWidth > 0 && m_imageHeight > 0) {
     handler.addParam("image-width", QCString().setNum(m_imageWidth));
     handler.addParam("image-height", QCString().setNum(m_imageHeight));
-//    kdDebug() << "HTMLExporter::text() - size = " << m_imageWidth << " x " << m_imageHeight << endl;
   }
 
   // keep track of which image fields to write, this is for field names
@@ -332,7 +340,6 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
     }
   }
 
-  // now worry about actually exporting entry files
   if(m_exportEntryFiles) {
     KURL u;
     u.setPath(m_entryXSLTFile);
@@ -357,8 +364,26 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
       entryHandler.addStringParam("color2", cg.highlight().name().latin1());
 
       // ok to use relative in HTML output
-      entryHandler.addStringParam("imgdir", QFile::encodeName(imageDir.fileName()+'/'));
+      // need to add "../" since the entry file is in a depper level
+      entryHandler.addStringParam("imgdir", QFile::encodeName(QString::fromLatin1("../")+imageDir.fileName()+'/'));
+      // relative to entry files, will be "../"
+      QString s = QString::fromLatin1("../") + targetURL.fileName();
+      entryHandler.addStringParam("collection-file", encodeUTF8_ ? s.utf8() : s.local8Bit());
 
+      KURL entryDir = targetURL;
+      entryDir.cd(QString::fromLatin1(".."));
+      entryDir.addPath(targetURL.fileName().section('.', 0, 0) + QString::fromLatin1("_entries/"));
+#if KDE_IS_VERSION(3,1,90)
+      if(!KIO::NetAccess::exists(entryDir, false, m_widget)) {
+        KIO::NetAccess::mkdir(entryDir, m_widget);
+      }
+#else
+      if(!KIO::NetAccess::exists(entryDir, false)) {
+        KIO::NetAccess::mkdir(entryDir);
+      }
+#endif
+
+      // now worry about actually exporting entry files
       // I can't reliable encode a string as a URI, so I'm punting, and I'll just replace everything but
       // a-zA-Z0-9 with an underscore. This MUST match the filename template in bookcase2html.xsl
       // the id is used so uniqueness is guaranteed
@@ -370,17 +395,21 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
         } else {
           file = entryIt.current()->field(QString::fromLatin1("title"));
         }
+        // but only use the first title if it has multiple
+        if(collection()->fieldByName(QString::fromLatin1("title"))->flags() && Data::Field::AllowMultiple) {
+          file = file.section(';', 0, 0);
+        }
         file.replace(badChars, QString::fromLatin1("_"));
         file += QString::fromLatin1("-") + QString::number(entryIt.current()->id());
         file += QString::fromLatin1(".html");
 
-        KURL url = targetURL;
-        url.cd(QString::fromLatin1(".."));
+        KURL url = entryDir;
         url.addPath(file);
 
         Data::EntryList list;
         list.append(entryIt.current());
-        BookcaseXMLExporter exporter(collection(), list);
+        BookcaseXMLExporter exporter(collection());
+        exporter.setEntryList(list);
         // exportXML(bool formatValues, bool encodeUTF8);
         QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
         FileHandler::writeTextURL(url, entryHandler.applyStylesheet(dom.toString(), encodeUTF8_), encodeUTF8_, true);

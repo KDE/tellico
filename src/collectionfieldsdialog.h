@@ -39,7 +39,7 @@ namespace Bookcase {
  * and the font color can be changed
  *
  * @author Robby Stephenson
- * @version $Id: collectionfieldsdialog.h 599 2004-04-10 20:29:54Z robby $
+ * @version $Id: collectionfieldsdialog.h 767 2004-08-18 03:07:53Z robby $
  */
 class ListBoxText : public QListBoxText {
 public:
@@ -61,7 +61,7 @@ private:
 
 /**
  * @author Robby Stephenson
- * @version $Id: collectionfieldsdialog.h 599 2004-04-10 20:29:54Z robby $
+ * @version $Id: collectionfieldsdialog.h 767 2004-08-18 03:07:53Z robby $
  */
 class CollectionFieldsDialog : public KDialogBase {
 Q_OBJECT
@@ -98,7 +98,7 @@ protected:
   void updateField();
   bool checkValues();
   ListBoxText* findItem(const QListBox* box, const Data::Field* field);
-  QStringList newTypesAllowed(unsigned type=0);
+  QStringList newTypesAllowed(Data::Field::Type type);
 
 private slots:
   void slotSelectInitial();
@@ -106,13 +106,14 @@ private slots:
 private:
   Data::Collection* m_coll;
   Data::Collection* m_defaultCollection;
-  QMap<Data::Field::FieldType, QString> m_typeMap;
+  QMap<Data::Field::Type, QString> m_typeMap;
   Data::FieldList m_copiedFields;
   Data::FieldList m_newFields;
   Data::Field* m_currentField;
   bool m_modified;
   bool m_updatingValues;
   bool m_reordered;
+  int m_oldIndex;
 
   QListBox* m_fieldsBox;
   KPushButton* m_btnNew;

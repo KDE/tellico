@@ -28,8 +28,7 @@
 
 using Bookcase::Export::CSVExporter;
 
-CSVExporter::CSVExporter(const Data::Collection* coll_, const Data::EntryList& list_)
-  : Bookcase::Export::TextExporter(coll_, list_),
+CSVExporter::CSVExporter(const Data::Collection* coll_) : Bookcase::Export::TextExporter(coll_),
     m_includeTitles(true),
     m_delimiter(QString::fromLatin1(",")),
     m_widget(0) {
@@ -40,7 +39,7 @@ QString CSVExporter::formatString() const {
 }
 
 QString CSVExporter::fileFilter() const {
-  return i18n("*.csv|CSV files (*.csv)") + QString::fromLatin1("\n") + i18n("*|All files");
+  return i18n("*.csv|CSV files (*.csv)") + QChar('\n') + i18n("*|All files");
 }
 
 QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
@@ -93,11 +92,11 @@ QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   QObject::connect(m_radioOther, SIGNAL(toggled(bool)),
                    m_editOther, SLOT(setEnabled(bool)));
 
-  if(m_delimiter == QString::fromLatin1(",")) {
+  if(m_delimiter == ',') {
     m_radioComma->setChecked(true);
-  } else if(m_delimiter == QString::fromLatin1(";")) {
+  } else if(m_delimiter == ';') {
     m_radioSemicolon->setChecked(true);
-  } else if(m_delimiter == QString::fromLatin1("\t")) {
+  } else if(m_delimiter == '\t') {
     m_radioTab->setChecked(true);
   } else {
     m_radioOther->setChecked(true);
@@ -118,11 +117,11 @@ void CSVExporter::readOptions(KConfig* config_) {
 void CSVExporter::saveOptions(KConfig* config_) {
   m_includeTitles = m_checkIncludeTitles->isChecked();
   if(m_radioComma->isChecked()) {
-    m_delimiter = QString::fromLatin1(",");
+    m_delimiter = ',';
   } else if(m_radioSemicolon->isChecked()) {
-    m_delimiter = QString::fromLatin1(";");
+    m_delimiter = ';';
   } else if(m_radioTab->isChecked()) {
-    m_delimiter = QString::fromLatin1("\t");
+    m_delimiter = '\t';
   } else {
     m_delimiter = m_editOther->text();
   }

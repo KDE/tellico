@@ -32,7 +32,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: importdialog.h 633 2004-05-01 03:16:22Z robby $
+ * @version $Id: importdialog.h 768 2004-08-19 01:13:22Z robby $
  */
 class ImportDialog : public KDialogBase {
 Q_OBJECT
@@ -44,7 +44,8 @@ public:
     Bibtexml,
     CSV,
     XSLT,
-    AudioFile
+    AudioFile,
+    MODS
   };
 
   enum ImportAction {

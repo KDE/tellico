@@ -52,7 +52,7 @@ bool Collection::addField(Field* field_) {
   // fieldByName() returns 0 if there's no field by that name
   // this essentially checks for duplicates
   if(fieldByName(field_->name())) {
-//    kdDebug() << "Collection::addField() - replacing " << field_->name() << endl;
+    kdDebug() << "Collection::addField() - replacing " << field_->name() << endl;
     deleteField(fieldByName(field_->name()), true);
   }
 
@@ -82,7 +82,7 @@ bool Collection::addField(Field* field_) {
   }
 
   if(field_->flags() & Field::AllowGrouped) {
-    // m_entryGroupDicts autoDeletes each QDict when the Collection d'tor is called
+    // m_entryGroups autoDeletes each QDict when the Collection d'tor is called
     EntryGroupDict* dict = new EntryGroupDict();
     // don't autoDelete, since the group is deleted when it becomes
     // empty in Entry::removeFromGroup()
@@ -205,18 +205,17 @@ bool Collection::modifyField(Field* newField_) {
     }
   }
 
+  // keep track of if the entriey groups will need to be reset
+  bool resetGroups = false;
+
   // if format is different, go ahead and invalidate all formatted entry values
   if(oldField->formatFlag() != newField_->formatFlag()) {
     // invalidate cached format strings of all entry attributes of this name
     for(EntryListIterator it(m_entryList); it.current(); ++it) {
       it.current()->invalidateFormattedFieldValue(fieldName);
     }
+    resetGroups = true;
   }
-
-  // keep track of if the entries will need to be added to groups
-  bool addToGroups = false;
-  // keep track of if the entries will need to be removed from groups
-  bool removeFromGroups = false;
 
   // check to see if the people "pseudo-group" needs to be updated
   // only if only one of the two is a name
@@ -225,7 +224,7 @@ bool Collection::modifyField(Field* newField_) {
   if(wasPeople) {
     m_peopleFields.removeRef(oldField);
     if(!isPeople) {
-      removeFromGroups = true;
+      resetGroups = true;
     }
   }
   if(isPeople) {
@@ -237,7 +236,7 @@ bool Collection::modifyField(Field* newField_) {
     }
     m_peopleFields.append(newField_);
     if(!wasPeople) {
-      addToGroups = true;
+      resetGroups = true;
     }
   }
 
@@ -248,15 +247,16 @@ bool Collection::modifyField(Field* newField_) {
       // in order to keep list in the same order, don't remove unless new field is not groupable
       m_entryGroups.remove(fieldName);
       m_entryGroupDicts.remove(fieldName);
-      removeFromGroups = true;
+      resetGroups = true;
     } else {
-      m_entryGroupDicts.replace(fieldName, new EntryGroupDict());
+      // don't do this, it wipes out the old groups!
+//      m_entryGroupDicts.replace(fieldName, new EntryGroupDict());
     }
   } else if(isGrouped) {
     m_entryGroupDicts.insert(fieldName, new EntryGroupDict());
     // cache the possible groups of entries
     m_entryGroups << fieldName;
-    addToGroups = true;
+    resetGroups = true;
   }
 
   if(oldField->type() == Field::Image) {
@@ -266,7 +266,7 @@ bool Collection::modifyField(Field* newField_) {
     m_imageFields.append(newField_);
   }
 
-  if(removeFromGroups || addToGroups) {
+  if(resetGroups) {
     invalidateGroups();
   }
 
@@ -603,3 +603,5 @@ int Collection::getID() {
   static int id = 0;
   return ++id;
 }
+
+#include "collection.moc"

@@ -295,6 +295,19 @@ modified.</para>
 </listitem>
 </varlistentry>
 
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Internet Search</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &fields-dialog;</action> to search for and import entries from various Internet sites, including <ulink url="http://amazon.com">Amazon.com</ulink>.</para>
+</listitem>
+</varlistentry>
+
 </variablelist>
 
 </para>

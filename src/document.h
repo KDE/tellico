@@ -26,8 +26,6 @@
 #include <qobject.h>
 
 namespace Bookcase {
-  class MainWindow;
-
   namespace Data {
     class Collection;
     class Entry;
@@ -38,7 +36,7 @@ namespace Bookcase {
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: document.h 633 2004-05-01 03:16:22Z robby $
+ * @version $Id: document.h 722 2004-08-03 02:58:08Z robby $
  */
 class Document : public QObject {
 Q_OBJECT
@@ -51,7 +49,7 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  Document(MainWindow* parent, const char* name=0);
+  Document(QObject* parent, const char* name=0);
   /**
    * Destructor
    */
@@ -128,7 +126,7 @@ public:
    */
   Collection* collection() { return m_coll; }
   /**
-   * Returns true if there are no units. A doc with an empty collection is still empty.
+   * Returns true if there are no entries. A doc with an empty collection is still empty.
    */
   bool isEmpty() const;
   /**
@@ -241,49 +239,6 @@ signals:
    * @param str The message
    */
   void signalStatusMsg(const QString& str);
-  /**
-   * Signals that a new collection has been added.
-   *
-   * @param coll A pointer to the collection
-   */
-  void signalCollectionAdded(Bookcase::Data::Collection* coll);
-  /**
-   * Signals that a collection has been removed.
-   *
-   * @param coll A pointer to the collection
-   */
-  void signalCollectionDeleted(Bookcase::Data::Collection* coll);
-  /**
-   * Signals that the collection has been renamed.
-   *
-   * @param name The new collection name
-   */
-  void signalCollectionRenamed(const QString& name);
-  /**
-   * Signals that a new entry has been added.
-   *
-   * @param entry A pointer to the entry
-   */
-  void signalEntryAdded(Bookcase::Data::Entry* entry);
-  /**
-   * Signals that a entry has been modified.
-   *
-   * @param entry A pointer to the entry
-   */
-  void signalEntryModified(Bookcase::Data::Entry* entry);
-  /**
-   * Signals that a entry has been removed.
-   *
-   * @param entry A pointer to the entry
-   */
-  void signalEntryDeleted(Bookcase::Data::Entry* entry);
-  /**
-   * Signals that a entry should be selected, with an optional highlight string
-   *
-   * @param entry The entry to be selected
-   * @param highlight The string in the entry which should be highlighted
-   */
-  void signalEntrySelected(Bookcase::Data::Entry* entry, const QString& highlight);
 
 private:
   Collection* m_coll;

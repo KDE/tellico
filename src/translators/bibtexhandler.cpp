@@ -16,6 +16,7 @@
 #include "../entry.h"
 #include "../collection.h"
 #include "../filehandler.h"
+#include "../latin1literal.h"
 
 #include <kglobal.h>
 #include <kstandarddirs.h>
@@ -185,8 +186,8 @@ bool BibtexHandler::setFieldValue(Data::Entry* entry_, const QString& bibtexFiel
     if(value_.length() < 100) {
       // special case, try to detect URLs
       // In qt 3.1, QString::startsWith() is always case-sensitive
-      if(bibtexField_ == QString::fromLatin1("url")
-         || value_.lower().startsWith(QString::fromLatin1("http")) // might have https: too
+      if(bibtexField_ == Latin1Literal("url")
+         || value_.lower().startsWith(QString::fromLatin1("http")) // may also be https
          || value_.lower().startsWith(QString::fromLatin1("ftp:/"))
          || value_.lower().startsWith(QString::fromLatin1("file:/"))
          || value_.lower().startsWith(QString::fromLatin1("/"))) { // assume this indicates a local path

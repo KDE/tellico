@@ -56,12 +56,12 @@ QByteArray Image::byteArray() const {
 }
 
 QPixmap Image::convertToPixmap() const {
-  KPixmapIO io;
+  static KPixmapIO io;
   return io.convertToPixmap(*this);
 }
 
 QPixmap Image::convertToPixmap(int w_, int h_) const {
-  KPixmapIO io;
+  static KPixmapIO io;
   return io.convertToPixmap(this->smoothScale(w_, h_, ScaleMin));
 }
 

@@ -14,10 +14,17 @@
 #ifndef DETAILEDLISTVIEW_H
 #define DETAILEDLISTVIEW_H
 
-// needed for EntryList definition
+namespace Bookcase {
+  namespace Data {
+    class Collection;
+  }
+  class Filter;
+  class EntryItem;
+}
+
+#include "multiselectionlistview.h"
 #include "entry.h"
 
-#include <klistview.h>
 #include <kpopupmenu.h>
 
 #include <qpoint.h>
@@ -27,20 +34,15 @@
 #include <qguardedptr.h>
 
 namespace Bookcase {
-  namespace Data {
-    class Collection;
-  }
-  class Filter;
-  class EntryItem;
 
 /**
- * The DetailedListView class shows detailed information about units in the
+ * The DetailedListView class shows detailed information about entries in the
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: detailedlistview.h 609 2004-04-17 00:44:36Z robby $
+ * @version $Id: detailedlistview.h 738 2004-08-05 05:12:06Z robby $
  */
-class DetailedListView : public KListView {
+class DetailedListView : public MultiSelectionListView {
 Q_OBJECT
 
 public:
@@ -174,7 +176,7 @@ protected slots:
    * @param point The location point
    * @param col The column number, not currently used
    */
-  void slotRMB(QListViewItem* item, const QPoint& point, int col);
+  void contextMenuRequested(QListViewItem* item, const QPoint& point, int col);
   /**
    * Handles everything when an item is selected. The proper signal is emitted.
    */
@@ -185,15 +187,9 @@ protected slots:
    * Slot to update the position of the pixmap
    */
   void slotUpdatePixmap();
+  void slotDoubleClicked(QListViewItem* item);
 
 signals:
-  /**
-   * Signals that the selected units have changed. Zero, one or more may be selected.
-   *
-   * @param widget A pointer to the widget where the selection changed, this widget
-   * @param list A list of the selected items, may be empty.
-   */
-  void signalEntrySelected(QWidget* widget, const Bookcase::Data::EntryList& list);
   /**
    * Signals a desire to delete a entry.
    *
@@ -215,7 +211,6 @@ private:
   QValueVector<bool> m_isDirty;
   QPixmap m_entryPix;
   QPixmap m_checkPix;
-  Data::EntryList m_selectedEntries;
   const Filter* m_filter;
   int m_prevSortColumn;
   int m_prev2SortColumn;

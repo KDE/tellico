@@ -35,7 +35,7 @@ namespace Bookcase {
  * @ref Data::Collection. Any errors or warnings are added to a status message queue.
  *
  * @author Robby Stephenson
- * @version $Id: importer.h 633 2004-05-01 03:16:22Z robby $
+ * @version $Id: importer.h 768 2004-08-19 01:13:22Z robby $
  */
 class Importer : public QObject {
 Q_OBJECT
@@ -100,7 +100,7 @@ protected:
    *
    * @param msg A string containing a warning or error.
    */
-  void setStatusMessage(const QString& msg) { if(!msg.isEmpty()) m_statusMsg += msg + QString::fromLatin1(" "); }
+  void setStatusMessage(const QString& msg) { if(!msg.isEmpty()) m_statusMsg += msg + QChar(' '); }
 
   static const unsigned s_stepSize;
 

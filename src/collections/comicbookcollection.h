@@ -39,7 +39,7 @@ public:
    */
   ComicBookCollection(bool addFields, const QString& title = QString::null);
 
-  virtual CollectionType collectionType() const { return ComicBook; }
+  virtual Type type() const { return ComicBook; }
 
   static FieldList defaultFields();
 };

@@ -45,7 +45,7 @@ public:
    */
   StampCollection(bool addFields, const QString& title = QString::null);
 
-  virtual CollectionType collectionType() const { return Stamp; }
+  virtual Type type() const { return Stamp; }
 
   static FieldList defaultFields();
 };

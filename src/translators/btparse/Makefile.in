@@ -169,6 +169,8 @@ UIC_TR = @UIC_TR@
 USER_INCLUDES = @USER_INCLUDES@
 USER_LDFLAGS = @USER_LDFLAGS@
 USE_EXCEPTIONS = @USE_EXCEPTIONS@
+USE_LIBBTPARSE_FALSE = @USE_LIBBTPARSE_FALSE@
+USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
@@ -253,14 +255,15 @@ target_vendor = @target_vendor@
 x_includes = @x_includes@
 x_libraries = @x_libraries@
 
+
 ####### kdevelop will overwrite this part!!! (begin)##########
-noinst_LIBRARIES = libbtparse.a
+@USE_LIBBTPARSE_FALSE@noinst_LIBRARIES = libbtparse.a
 
-INCLUDES = $(all_includes)
+@USE_LIBBTPARSE_FALSE@INCLUDES = $(all_includes)
 
-#>- libbtparse_a_METASOURCES = AUTO
+@USE_LIBBTPARSE_FALSE@libbtparse_a_METASOURCES = AUTO
 
-libbtparse_a_SOURCES = bibtex_ast.c bibtex.c err.c ast.c scan.c util.c lex_auxiliary.c parse_auxiliary.c format_name.c string_util.c tex_tree.c names.c modify.c traversal.c sym.c macros.c error.c postprocess.c input.c init.c 
+@USE_LIBBTPARSE_FALSE@libbtparse_a_SOURCES = bibtex_ast.c bibtex.c err.c ast.c scan.c util.c lex_auxiliary.c parse_auxiliary.c format_name.c string_util.c tex_tree.c names.c modify.c traversal.c sym.c macros.c error.c postprocess.c input.c init.c 
 
 EXTRA_DIST = btparse.h init.c stdpccts.h attrib.h lex_auxiliary.h error.h parse_auxiliary.h prototypes.h tokens.h mode.h input.c postprocess.c error.c macros.c sym.h sym.c bt_debug.h traversal.c modify.c names.c my_alloca.h tex_tree.c string_util.c format_name.c antlr.h ast.h config.h dlgdef.h parse_auxiliary.c lex_auxiliary.c util.c scan.c dlgauto.h ast.c err.h err.c bibtex.c bibtex_ast.c 
 
@@ -275,25 +278,39 @@ LIBRARIES = $(noinst_LIBRARIES)
 
 libbtparse_a_AR = $(AR) cru
 libbtparse_a_LIBADD =
-am_libbtparse_a_OBJECTS = bibtex_ast.$(OBJEXT) bibtex.$(OBJEXT) \
-	err.$(OBJEXT) ast.$(OBJEXT) scan.$(OBJEXT) util.$(OBJEXT) \
-	lex_auxiliary.$(OBJEXT) parse_auxiliary.$(OBJEXT) \
-	format_name.$(OBJEXT) string_util.$(OBJEXT) tex_tree.$(OBJEXT) \
-	names.$(OBJEXT) modify.$(OBJEXT) traversal.$(OBJEXT) \
-	sym.$(OBJEXT) macros.$(OBJEXT) error.$(OBJEXT) \
-	postprocess.$(OBJEXT) input.$(OBJEXT) init.$(OBJEXT)
-#>- libbtparse_a_OBJECTS = $(am_libbtparse_a_OBJECTS)
-#>+ 10
-libbtparse_a_final_OBJECTS = bibtex_ast.o bibtex.o err.o ast.o scan.o util.o lex_auxiliary.o parse_auxiliary.o format_name.o string_util.o tex_tree.o names.o modify.o traversal.o sym.o macros.o error.o postprocess.o input.o init.o 
-libbtparse_a_nofinal_OBJECTS = bibtex_ast.$(OBJEXT) bibtex.$(OBJEXT) \
-	err.$(OBJEXT) ast.$(OBJEXT) scan.$(OBJEXT) util.$(OBJEXT) \
-	lex_auxiliary.$(OBJEXT) parse_auxiliary.$(OBJEXT) \
-	format_name.$(OBJEXT) string_util.$(OBJEXT) tex_tree.$(OBJEXT) \
-	names.$(OBJEXT) modify.$(OBJEXT) traversal.$(OBJEXT) \
-	sym.$(OBJEXT) macros.$(OBJEXT) error.$(OBJEXT) \
-	postprocess.$(OBJEXT) input.$(OBJEXT) init.$(OBJEXT)
-@KDE_USE_FINAL_FALSE@libbtparse_a_OBJECTS = $(libbtparse_a_nofinal_OBJECTS)
-@KDE_USE_FINAL_TRUE@libbtparse_a_OBJECTS = $(libbtparse_a_final_OBJECTS)
+am__libbtparse_a_SOURCES_DIST = bibtex_ast.c bibtex.c err.c ast.c scan.c \
+	util.c lex_auxiliary.c parse_auxiliary.c format_name.c \
+	string_util.c tex_tree.c names.c modify.c traversal.c sym.c \
+	macros.c error.c postprocess.c input.c init.c
+#>- @USE_LIBBTPARSE_FALSE@am_libbtparse_a_OBJECTS = bibtex_ast.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	bibtex.$(OBJEXT) err.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	ast.$(OBJEXT) scan.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	util.$(OBJEXT) lex_auxiliary.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	parse_auxiliary.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	format_name.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	string_util.$(OBJEXT) tex_tree.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	names.$(OBJEXT) modify.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	traversal.$(OBJEXT) sym.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	macros.$(OBJEXT) error.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	postprocess.$(OBJEXT) input.$(OBJEXT) \
+#>- @USE_LIBBTPARSE_FALSE@	init.$(OBJEXT)
+#>+ 15
+@USE_LIBBTPARSE_FALSE@am_libbtparse_a_final_OBJECTS = bibtex_ast.o bibtex.o err.o ast.o scan.o util.o lex_auxiliary.o parse_auxiliary.o format_name.o string_util.o tex_tree.o names.o modify.o traversal.o sym.o macros.o error.o postprocess.o input.o init.o 
+@USE_LIBBTPARSE_FALSE@am_libbtparse_a_nofinal_OBJECTS = bibtex_ast.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	bibtex.$(OBJEXT) err.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	ast.$(OBJEXT) scan.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	util.$(OBJEXT) lex_auxiliary.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	parse_auxiliary.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	format_name.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	string_util.$(OBJEXT) tex_tree.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	names.$(OBJEXT) modify.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	traversal.$(OBJEXT) sym.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	macros.$(OBJEXT) error.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	postprocess.$(OBJEXT) input.$(OBJEXT) \
+@USE_LIBBTPARSE_FALSE@	init.$(OBJEXT)
+@KDE_USE_FINAL_FALSE@@USE_LIBBTPARSE_FALSE@am_libbtparse_a_OBJECTS = $(@USE_LIBBTPARSE_FALSE@am_libbtparse_a_nofinal_OBJECTS)
+@KDE_USE_FINAL_TRUE@@USE_LIBBTPARSE_FALSE@am_libbtparse_a_OBJECTS = $(@USE_LIBBTPARSE_FALSE@am_libbtparse_a_final_OBJECTS)
+libbtparse_a_OBJECTS = $(am_libbtparse_a_OBJECTS)
 
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/admin/depcomp
@@ -328,7 +345,7 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(libbtparse_a_SOURCES)
+DIST_SOURCES = $(am__libbtparse_a_SOURCES_DIST)
 DIST_COMMON = Makefile.am Makefile.in
 SOURCES = $(libbtparse_a_SOURCES)
 
@@ -648,19 +665,19 @@ bcheck-am:
 
 #>+ 3
 final:
-	$(MAKE) libbtparse_a_OBJECTS="$(libbtparse_a_final_OBJECTS)" all-am
+	$(MAKE) @USE_LIBBTPARSE_FALSE@am_libbtparse_a_OBJECTS="$(@USE_LIBBTPARSE_FALSE@am_libbtparse_a_final_OBJECTS)" all-am
 
 #>+ 3
 final-install:
-	$(MAKE) libbtparse_a_OBJECTS="$(libbtparse_a_final_OBJECTS)" install-am
+	$(MAKE) @USE_LIBBTPARSE_FALSE@am_libbtparse_a_OBJECTS="$(@USE_LIBBTPARSE_FALSE@am_libbtparse_a_final_OBJECTS)" install-am
 
 #>+ 3
 no-final:
-	$(MAKE) libbtparse_a_OBJECTS="$(libbtparse_a_nofinal_OBJECTS)" all-am
+	$(MAKE) @USE_LIBBTPARSE_FALSE@am_libbtparse_a_OBJECTS="$(@USE_LIBBTPARSE_FALSE@am_libbtparse_a_nofinal_OBJECTS)" all-am
 
 #>+ 3
 no-final-install:
-	$(MAKE) libbtparse_a_OBJECTS="$(libbtparse_a_nofinal_OBJECTS)" install-am
+	$(MAKE) @USE_LIBBTPARSE_FALSE@am_libbtparse_a_OBJECTS="$(@USE_LIBBTPARSE_FALSE@am_libbtparse_a_nofinal_OBJECTS)" install-am
 
 #>+ 3
 cvs-clean:

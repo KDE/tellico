@@ -169,6 +169,8 @@ UIC_TR = @UIC_TR@
 USER_INCLUDES = @USER_INCLUDES@
 USER_LDFLAGS = @USER_LDFLAGS@
 USE_EXCEPTIONS = @USE_EXCEPTIONS@
+USE_LIBBTPARSE_FALSE = @USE_LIBBTPARSE_FALSE@
+USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
@@ -281,14 +283,13 @@ am_libcollections_a_OBJECTS = winecollection.$(OBJEXT) \
 	bibtexcollection.$(OBJEXT) musiccollection.$(OBJEXT) \
 	videocollection.$(OBJEXT) bookcollection.$(OBJEXT)
 #>- libcollections_a_OBJECTS = $(am_libcollections_a_OBJECTS)
-#>+ 9
+#>+ 8
 libcollections_a_final_OBJECTS = libcollections_a.all_cpp.o 
 libcollections_a_nofinal_OBJECTS = winecollection.$(OBJEXT) \
 	stampcollection.$(OBJEXT) comicbookcollection.$(OBJEXT) \
 	cardcollection.$(OBJEXT) coincollection.$(OBJEXT) \
 	bibtexcollection.$(OBJEXT) musiccollection.$(OBJEXT) \
-	videocollection.$(OBJEXT) bookcollection.$(OBJEXT)\
-winecollection.moc.o stampcollection.moc.o comicbookcollection.moc.o musiccollection.moc.o videocollection.moc.o coincollection.moc.o bookcollection.moc.o bibtexcollection.moc.o cardcollection.moc.o 
+	videocollection.$(OBJEXT) bookcollection.$(OBJEXT)
 @KDE_USE_FINAL_FALSE@libcollections_a_OBJECTS = $(libcollections_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libcollections_a_OBJECTS = $(libcollections_a_final_OBJECTS)
 
@@ -305,7 +306,7 @@ am__depfiles_maybe = depfiles
 #>- @AMDEP_TRUE@	./$(DEPDIR)/videocollection.Po \
 #>- @AMDEP_TRUE@	./$(DEPDIR)/winecollection.Po
 #>+ 18
-@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =  $(DEPDIR)/winecollection.moc.P $(DEPDIR)/stampcollection.moc.P $(DEPDIR)/comicbookcollection.moc.P $(DEPDIR)/musiccollection.moc.P $(DEPDIR)/videocollection.moc.P $(DEPDIR)/coincollection.moc.P $(DEPDIR)/bibtexcollection.moc.P $(DEPDIR)/cardcollection.moc.P  $(DEPDIR)/libcollections_a.all_cpp.P ./$(DEPDIR)/bibtexcollection.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_TRUE@DEP_FILES =   $(DEPDIR)/libcollections_a.all_cpp.P ./$(DEPDIR)/bibtexcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/cardcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/coincollection.Po \
@@ -314,7 +315,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/stampcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/videocollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_TRUE@	@AMDEP_TRUE@	./$(DEPDIR)/winecollection.Po
-@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  $(DEPDIR)/winecollection.moc.P $(DEPDIR)/stampcollection.moc.P $(DEPDIR)/comicbookcollection.moc.P $(DEPDIR)/musiccollection.moc.P $(DEPDIR)/videocollection.moc.P $(DEPDIR)/coincollection.moc.P $(DEPDIR)/bibtexcollection.moc.P $(DEPDIR)/cardcollection.moc.P ./$(DEPDIR)/bibtexcollection.Po \
+@AMDEP_TRUE@@KDE_USE_FINAL_FALSE@DEP_FILES =  ./$(DEPDIR)/bibtexcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/bookcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/cardcollection.Po \
 @AMDEP_TRUE@@KDE_USE_FINAL_FALSE@	@AMDEP_TRUE@	./$(DEPDIR)/coincollection.Po \
@@ -617,71 +618,71 @@ uninstall-am: uninstall-info-am
 
 
 #>+ 3
-winecollection.moc.cpp: $(srcdir)/winecollection.h
-	$(MOC) $(srcdir)/winecollection.h -o winecollection.moc.cpp
+winecollection.moc: $(srcdir)/winecollection.h
+	$(MOC) $(srcdir)/winecollection.h -o winecollection.moc
 
 #>+ 2
-mocs: winecollection.moc.cpp
+mocs: winecollection.moc
 
 #>+ 3
-stampcollection.moc.cpp: $(srcdir)/stampcollection.h
-	$(MOC) $(srcdir)/stampcollection.h -o stampcollection.moc.cpp
+stampcollection.moc: $(srcdir)/stampcollection.h
+	$(MOC) $(srcdir)/stampcollection.h -o stampcollection.moc
 
 #>+ 2
-mocs: stampcollection.moc.cpp
+mocs: stampcollection.moc
 
 #>+ 3
-comicbookcollection.moc.cpp: $(srcdir)/comicbookcollection.h
-	$(MOC) $(srcdir)/comicbookcollection.h -o comicbookcollection.moc.cpp
+comicbookcollection.moc: $(srcdir)/comicbookcollection.h
+	$(MOC) $(srcdir)/comicbookcollection.h -o comicbookcollection.moc
 
 #>+ 2
-mocs: comicbookcollection.moc.cpp
+mocs: comicbookcollection.moc
 
 #>+ 3
-musiccollection.moc.cpp: $(srcdir)/musiccollection.h
-	$(MOC) $(srcdir)/musiccollection.h -o musiccollection.moc.cpp
+musiccollection.moc: $(srcdir)/musiccollection.h
+	$(MOC) $(srcdir)/musiccollection.h -o musiccollection.moc
 
 #>+ 2
-mocs: musiccollection.moc.cpp
+mocs: musiccollection.moc
 
 #>+ 3
-videocollection.moc.cpp: $(srcdir)/videocollection.h
-	$(MOC) $(srcdir)/videocollection.h -o videocollection.moc.cpp
+videocollection.moc: $(srcdir)/videocollection.h
+	$(MOC) $(srcdir)/videocollection.h -o videocollection.moc
 
 #>+ 2
-mocs: videocollection.moc.cpp
+mocs: videocollection.moc
 
 #>+ 3
-coincollection.moc.cpp: $(srcdir)/coincollection.h
-	$(MOC) $(srcdir)/coincollection.h -o coincollection.moc.cpp
+coincollection.moc: $(srcdir)/coincollection.h
+	$(MOC) $(srcdir)/coincollection.h -o coincollection.moc
 
 #>+ 2
-mocs: coincollection.moc.cpp
+mocs: coincollection.moc
 
 #>+ 3
-bookcollection.moc.cpp: $(srcdir)/bookcollection.h
-	$(MOC) $(srcdir)/bookcollection.h -o bookcollection.moc.cpp
+bookcollection.moc: $(srcdir)/bookcollection.h
+	$(MOC) $(srcdir)/bookcollection.h -o bookcollection.moc
 
 #>+ 2
-mocs: bookcollection.moc.cpp
+mocs: bookcollection.moc
 
 #>+ 3
-bibtexcollection.moc.cpp: $(srcdir)/bibtexcollection.h
-	$(MOC) $(srcdir)/bibtexcollection.h -o bibtexcollection.moc.cpp
+bibtexcollection.moc: $(srcdir)/bibtexcollection.h
+	$(MOC) $(srcdir)/bibtexcollection.h -o bibtexcollection.moc
 
 #>+ 2
-mocs: bibtexcollection.moc.cpp
+mocs: bibtexcollection.moc
 
 #>+ 3
-cardcollection.moc.cpp: $(srcdir)/cardcollection.h
-	$(MOC) $(srcdir)/cardcollection.h -o cardcollection.moc.cpp
+cardcollection.moc: $(srcdir)/cardcollection.h
+	$(MOC) $(srcdir)/cardcollection.h -o cardcollection.moc
 
 #>+ 2
-mocs: cardcollection.moc.cpp
+mocs: cardcollection.moc
 
 #>+ 3
 clean-metasources:
-	-rm -f  winecollection.moc.cpp stampcollection.moc.cpp comicbookcollection.moc.cpp musiccollection.moc.cpp videocollection.moc.cpp coincollection.moc.cpp bookcollection.moc.cpp bibtexcollection.moc.cpp cardcollection.moc.cpp
+	-rm -f  winecollection.moc stampcollection.moc comicbookcollection.moc musiccollection.moc videocollection.moc coincollection.moc bookcollection.moc bibtexcollection.moc cardcollection.moc
 
 #>+ 2
 docs-am:
@@ -716,11 +717,11 @@ bcheck-am:
 
 
 #>+ 11
-libcollections_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/winecollection.cpp $(srcdir)/stampcollection.cpp $(srcdir)/comicbookcollection.cpp $(srcdir)/cardcollection.cpp $(srcdir)/coincollection.cpp $(srcdir)/bibtexcollection.cpp $(srcdir)/musiccollection.cpp $(srcdir)/videocollection.cpp $(srcdir)/bookcollection.cpp stampcollection.moc.cpp winecollection.moc.cpp comicbookcollection.moc.cpp musiccollection.moc.cpp videocollection.moc.cpp coincollection.moc.cpp cardcollection.moc.cpp bookcollection.moc.cpp bibtexcollection.moc.cpp 
+libcollections_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/winecollection.cpp $(srcdir)/stampcollection.cpp $(srcdir)/comicbookcollection.cpp $(srcdir)/cardcollection.cpp $(srcdir)/coincollection.cpp $(srcdir)/bibtexcollection.cpp $(srcdir)/musiccollection.cpp $(srcdir)/videocollection.cpp $(srcdir)/bookcollection.cpp  stampcollection.moc winecollection.moc comicbookcollection.moc musiccollection.moc videocollection.moc coincollection.moc cardcollection.moc bookcollection.moc bibtexcollection.moc
 	@echo 'creating libcollections_a.all_cpp.cpp ...'; \
 	rm -f libcollections_a.all_cpp.files libcollections_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libcollections_a.all_cpp.final; \
-	for file in winecollection.cpp stampcollection.cpp comicbookcollection.cpp cardcollection.cpp coincollection.cpp bibtexcollection.cpp musiccollection.cpp videocollection.cpp bookcollection.cpp stampcollection.moc.cpp winecollection.moc.cpp comicbookcollection.moc.cpp musiccollection.moc.cpp videocollection.moc.cpp coincollection.moc.cpp cardcollection.moc.cpp bookcollection.moc.cpp bibtexcollection.moc.cpp ; do \
+	for file in winecollection.cpp stampcollection.cpp comicbookcollection.cpp cardcollection.cpp coincollection.cpp bibtexcollection.cpp musiccollection.cpp videocollection.cpp bookcollection.cpp ; do \
 	  echo "#include \"$$file\"" >> libcollections_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libcollections_a.all_cpp.final; \
 	done; \
@@ -755,6 +756,24 @@ cvs-clean:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 3
+#>+ 21
+videocollection.lo: videocollection.moc 
+coincollection.o: coincollection.moc 
+bibtexcollection.o: bibtexcollection.moc 
+musiccollection.o: musiccollection.moc 
+bibtexcollection.lo: bibtexcollection.moc 
+stampcollection.lo: stampcollection.moc 
 nmcheck: 
+bookcollection.o: bookcollection.moc 
+comicbookcollection.lo: comicbookcollection.moc 
+musiccollection.lo: musiccollection.moc 
+videocollection.o: videocollection.moc 
 nmcheck-am: nmcheck
+winecollection.o: winecollection.moc 
+cardcollection.o: cardcollection.moc 
+coincollection.lo: coincollection.moc 
+bookcollection.lo: bookcollection.moc 
+winecollection.lo: winecollection.moc 
+comicbookcollection.o: comicbookcollection.moc 
+cardcollection.lo: cardcollection.moc 
+stampcollection.o: stampcollection.moc 

@@ -40,7 +40,7 @@ public:
    */
   CoinCollection(bool addFields, const QString& title = QString::null);
 
-  virtual CollectionType collectionType() const { return Coin; }
+  virtual Type type() const { return Coin; }
 
   static FieldList defaultFields();
 };

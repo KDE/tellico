@@ -41,10 +41,8 @@ namespace Bookcase {
 // forward declarations
   namespace Data {
     class Collection;
-    class Document;
   }
-  class Controller;
-  class EntryView;
+  class ViewStack;
   class DetailedListView;
   class FilterDialog;
   class EntryEditDialog;
@@ -55,6 +53,7 @@ namespace Bookcase {
   class StringMapDialog;
   class EntryItem;
   class LineEditAction;
+  class FetchDialog;
 
 /**
  * The base class for Bookcase application windows. It sets up the main
@@ -67,7 +66,7 @@ namespace Bookcase {
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: mainwindow.h 626 2004-04-28 03:54:00Z robby $
+ * @version $Id: mainwindow.h 739 2004-08-05 05:37:17Z robby $
  */
 class MainWindow : public KMainWindow {
 Q_OBJECT
@@ -90,12 +89,6 @@ public:
    * @param nofile If true, even if the config option to reopen last file is set, no file is opened
    */
   void initFileOpen(bool nofile);
-  /**
-   * Returns a pointer to the document object.
-   *
-   * @return The document pointer
-   */
-  Data::Document* doc() { return m_doc; }
   /**
    * Returns a pointer to the selected item in the detailed list view.
    * Used for searching, to go sequentially through the collections.
@@ -220,6 +213,14 @@ public slots:
    */
   void slotHideConfigDialog();
   /**
+   * Shows the fetch dialog.
+   */
+  void slotShowFetchDialog();
+  /**
+   * Hides the fetch dialog.
+   */
+  void slotHideFetchDialog();
+  /**
    * Changes the statusbar contents for the standard label permanently,
    * used to indicate current actions being made.
    *
@@ -239,7 +240,7 @@ public slots:
    */
   void slotConfigKeys();
   /**
-   * Updates the unit count in the status bar.
+   * Updates the entry count in the status bar.
    */
   void slotEntryCount();
   /**
@@ -255,7 +256,7 @@ public slots:
    */
   void slotHandleConfigChange();
   /**
-   * Changes the grouping of the units in the @ref GroupView. The current value
+   * Changes the grouping of the entries in the @ref GroupView. The current value
    * of the combobox in the toolbar is used.
    */
   void slotChangeGrouping();
@@ -318,17 +319,13 @@ private:
   void initActions();
   /**
    * Sets up the statusbar for the main window by initializing a status label
-   * and inserting a progress bar and unit counter.
+   * and inserting a progress bar and entry counter.
    */
   void initStatusBar();
   /**
    * Initiates the view, setting up all the dock windows and so on.
    */
   void initView();
-  /**
-   * Initiates the window for such things as the application icon.
-   */
-  void initWindow();
   /**
    * Initiates the document.
    */
@@ -442,10 +439,6 @@ private slots:
    */
   void slotEditDialogFinished();
   /**
-   * Handle an entry item being double clicked
-   */
-  void slotShowEntryEditor(QListViewItem* item=0);
-  /**
    * Handle the Ok button being clicked in the string macros dialog.
    */
   void slotStringMacroDialogOk();
@@ -462,10 +455,12 @@ private slots:
    * Send a citation for the selected entries through the lyxpipe
    */
   void slotCiteEntry();
+  /**
+   * Show the entry editor and update menu item.
+   */
+  void slotShowEntryEditor();
 
 private:
-  Data::Document* m_doc;
-
   KConfig* m_config;
 
   KRecentFilesAction* m_fileOpenRecent;
@@ -480,6 +475,7 @@ private:
   KAction* m_editFindNext;
   KAction* m_editFindPrev;
   KAction* m_newEntry;
+  KAction* m_editEntry;
   KAction* m_copyEntry;
   KAction* m_deleteEntry;
   KAction* m_convertBibtex;
@@ -501,17 +497,17 @@ private:
 
   KProgress* m_progress;
 
-  Controller* m_controller;
   DetailedListView* m_detailedView;
   EntryEditDialog* m_editDialog;
   GroupView* m_groupView;
-  EntryView* m_entryView;
+  ViewStack* m_viewStack;
 
   ConfigDialog* m_configDlg;
   FindDialog* m_findDlg;
   FilterDialog* m_filterDlg;
   CollectionFieldsDialog* m_collFieldsDlg;
   StringMapDialog* m_stringMacroDlg;
+  FetchDialog* m_fetchDlg;
 
   // the loading process goes through several steps, keep track of the factor
   unsigned m_currentStep;

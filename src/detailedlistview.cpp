@@ -15,9 +15,8 @@
 #include "entryitem.h"
 #include "collection.h"
 #include "filter.h"
-#include "mainwindow.h"
-#include "utils.h"
 #include "imagefactory.h"
+#include "controller.h"
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -37,17 +36,19 @@ static const int MIN_COL_WIDTH = 50;
 using Bookcase::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
-    : KListView(parent_, name_), m_filter(0),
+    : MultiSelectionListView(parent_, name_), m_filter(0),
     m_prevSortColumn(-1), m_prev2SortColumn(-1), m_firstSection(-1),
     m_pixWidth(50), m_pixHeight(50) {
 //  kdDebug() << "DetailedListView()" << endl;
   setAllColumnsShowFocus(true);
   setShowSortIndicator(true);
-  setSelectionMode(QListView::Extended);
 
   connect(this, SIGNAL(selectionChanged()), SLOT(slotSelectionChanged()));
-  connect(this, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&, int)),
-          SLOT(slotRMB(QListViewItem*, const QPoint&, int)));
+  connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),
+          SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
+  // when an entry is double clicked, make sure the editor is visible
+  connect(this, SIGNAL(doubleClicked(QListViewItem*)),
+          SLOT(slotDoubleClicked(QListViewItem*)));
   connect(header(), SIGNAL(indexChange(int, int, int)),
           SLOT(slotUpdatePixmap()));
 
@@ -63,11 +64,8 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
   connect(m_headerMenu, SIGNAL(activated(int)),
           this, SLOT(slotHeaderMenuActivated(int)));
 
-  MainWindow* mainWindow = static_cast<MainWindow*>(QObjectAncestor(parent_, "Bookcase::MainWindow"));
   m_itemMenu = new KPopupMenu(this);
-  mainWindow->action("coll_edit_entry")->plug(m_itemMenu);
-  mainWindow->action("coll_copy_entry")->plug(m_itemMenu);
-  mainWindow->action("coll_delete_entry")->plug(m_itemMenu);
+  Controller::self()->plugEntryActions(m_itemMenu);
 
   m_checkPix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("ok"), KIcon::Small);
 }
@@ -182,7 +180,6 @@ void DetailedListView::slotReset() {
 //  kdDebug() << "DetailedListView::slotReset()" << endl;
   //clear() does not remove columns
   clear();
-  m_selectedEntries.clear();
 //  while(columns() > 0) {
 //    removeColumn(0);
 //  }
@@ -198,8 +195,10 @@ void DetailedListView::addEntry(Data::Entry* entry_) {
 
   if(m_entryPix.isNull()) {
     m_entryPix = KGlobal::iconLoader()->loadIcon(entry_->collection()->entryName(), KIcon::User);
+    if(m_entryPix.isNull()) {
+      kdDebug() << "DetailedListView::addEntry() - can't find entry pix" << endl;
+    }
   }
-
 //  kdDebug() << "DetailedListView::addEntry() - " << entry_->title() << endl;
 
   EntryItem* item = new EntryItem(this, entry_);
@@ -215,7 +214,7 @@ void DetailedListView::addEntry(Data::Entry* entry_) {
     sort();
     ensureItemVisible(item);
     setCurrentItem(item);
-    if(m_selectedEntries.count() > 0) {
+    if(!selectedItems().isEmpty()) {
       blockSignals(true);
       clearSelection();
       setSelected(item, true);
@@ -247,7 +246,7 @@ void DetailedListView::modifyEntry(Data::Entry* entry_) {
 //      ensureItemVisible(item);
     }
 
-    if(!item->isSelected() && m_selectedEntries.count() > 0) {
+    if(!item->isSelected() && !selectedItems().isEmpty()) {
       blockSignals(true);
       clearSelection();
       setSelected(item, true);
@@ -268,7 +267,14 @@ void DetailedListView::removeEntry(Data::Entry* entry_) {
 //  kdDebug() << "DetailedListView::removeEntry() - " << entry_->title() << endl;
 
   clearSelection();
-  delete locateItem(entry_);
+  EntryItem* item = locateItem(entry_);
+  // move focus to next sibling
+  QListViewItem* nextItem = 0;
+  if(item == currentItem() && selectedItems().isEmpty()) {
+    nextItem = item->nextSibling();
+  }
+  delete item;
+  setSelected(nextItem, true);
 }
 
 void DetailedListView::removeCollection(Bookcase::Data::Collection* coll_) {
@@ -290,8 +296,6 @@ void DetailedListView::removeCollection(Bookcase::Data::Collection* coll_) {
   m_columnWidths.clear();
   m_isNumber.clear();
   m_entryPix = QPixmap();
-
-  m_selectedEntries.clear();
 
   // clear the filter, too
   delete m_filter;
@@ -331,33 +335,19 @@ void DetailedListView::populateItem(EntryItem* item_) {
   }
 }
 
-void DetailedListView::slotRMB(QListViewItem* item_, const QPoint& point_, int) {
+void DetailedListView::contextMenuRequested(QListViewItem* item_, const QPoint& point_, int) {
   if(item_ && m_itemMenu->count() > 0) {
-//    setSelected(item_, true);
     m_itemMenu->popup(point_);
   }
 }
 
 void DetailedListView::slotSelectionChanged() {
-//  kdDebug() << "DetailedListView::slotSelectionChanged()" << endl;
-  // all items in the listview are entryItems
-  EntryItem* item;
-  for(QListViewItemIterator it(this); it.current(); ++it) {
-    item = static_cast<EntryItem*>(it.current());
-    if(item->isSelected()) {
-      if(item->entry() && !m_selectedEntries.containsRef(item->entry())) {
-        // the reason I do it this way is because I want the first item in the list
-        // to be the first item that was selected, so the edit widget can fill its
-        // contents with the first entry
-//        kdDebug() << "DetailedListView::slotSelectionChanged() - adding " << item->entry()->title() << endl;
-        m_selectedEntries.append(item->entry());;
-      }
-    } else { // it's ok to call this even when entry not in list
-      m_selectedEntries.removeRef(item->entry());
-    }
+  const QPtrList<MultiSelectionListViewItem>& items = selectedItems();
+  Data::EntryList list;
+  for(QPtrListIterator<MultiSelectionListViewItem> it(items); it.current(); ++it) {
+    list.append(static_cast<EntryItem*>(it.current())->entry());
   }
-
-  emit signalEntrySelected(this, m_selectedEntries);
+  Controller::self()->slotUpdateSelection(this, list);
 }
 
 // don't shadow QListView::setSelected
@@ -391,12 +381,10 @@ Bookcase::EntryItem* const DetailedListView::locateItem(const Data::Entry* entry
 void DetailedListView::clearSelection() {
 //  kdDebug() << "DetailedListView::clearSelection()" << endl;
   blockSignals(true);
-  if(!m_selectedEntries.isEmpty()) {
+  if(!selectedItems().isEmpty()) {
     selectAll(false);
   }
-  setCurrentItem(0);
   blockSignals(false);
-  m_selectedEntries.clear();
 }
 
 bool DetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
@@ -467,7 +455,7 @@ void DetailedListView::setPixmapAndText(EntryItem* item_, int col_, Data::Field*
     QString value = item_->entry()->field(field_->name());
     item_->setPixmap(col_, value.isEmpty() ? QPixmap() : m_checkPix);
     item_->setText(col_, QString::null);
-  } else if(field_->type() == Data::Field::Image) {
+  } else if(field_->type() == Data::Field::Image && columnWidth(col_) > 0) {
     const Data::Image& img = ImageFactory::imageById(item_->entry()->field(field_->name()));
     item_->setPixmap(col_, img.isNull() ? QPixmap() : img.convertToPixmap(m_pixWidth, m_pixHeight));
     item_->setText(col_, QString::null);
@@ -475,6 +463,7 @@ void DetailedListView::setPixmapAndText(EntryItem* item_, int col_, Data::Field*
     item_->setPixmap(col_, col_ == m_firstSection ? m_entryPix : QPixmap());
     item_->setText(col_, item_->entry()->formattedField(field_->name()));
   }
+  item_->widthChanged(col_);
 }
 
 void DetailedListView::showColumn(int col_) {
@@ -490,10 +479,10 @@ void DetailedListView::showColumn(int col_) {
     setColumnWidthMode(col_, QListView::Manual);
   }
 
+  setColumnWidth(col_, w);
   if(m_isDirty[col_]) {
     populateColumn(col_);
   }
-  setColumnWidth(col_, w);
   header()->setResizeEnabled(true, col_);
   triggerUpdate();
 }
@@ -527,7 +516,9 @@ void DetailedListView::slotCacheColumnWidth(int section_, int oldSize_, int newS
     m_headerMenu->setItemChecked(m_headerMenu->idAt(section_+1), true); // add 1 for title item
   }
 
-  m_columnWidths[section_] = newSize_;
+  if(newSize_ > 0) {
+    m_columnWidths[section_] = newSize_;
+  }
   setColumnWidthMode(section_, QListView::Manual);
 }
 
@@ -655,9 +646,9 @@ void DetailedListView::reorderFields(const Data::FieldList& list_) {
     if(it.current()->type() == Data::Field::Bool
        || it.current()->type() == Data::Field::Number
        || it.current()->type() == Data::Field::Image) {
-      setColumnAlignment(header()->mapToIndex(sec), Qt::AlignHCenter);
+      setColumnAlignment(sec, Qt::AlignHCenter);
     } else {
-      setColumnAlignment(header()->mapToIndex(sec), Qt::AlignLeft);
+      setColumnAlignment(sec, Qt::AlignLeft);
     }
     m_isNumber[sec] = (it.current()->type() == Data::Field::Number);
 
@@ -701,9 +692,9 @@ bool DetailedListView::isNumber(int column_) const {
 
 void DetailedListView::updateFirstSection() {
   for(int numCol = 0; numCol < columns(); ++numCol) {
-    if(columnWidth(numCol) > 0) {
+    if(columnWidth(header()->mapToSection(numCol)) > 0) {
       m_firstSection = header()->mapToSection(numCol);
-      return;
+      break;
     }
   }
 }
@@ -820,6 +811,15 @@ void DetailedListView::selectAllVisible() {
 #endif
   }
   blockSignals(false);
+  // FIXME: not write with MultiSelectionListView
   slotSelectionChanged();
 }
 
+void DetailedListView::slotDoubleClicked(QListViewItem* item_) {
+  EntryItem* i = static_cast<EntryItem*>(item_);
+  if(i) {
+    Controller::self()->editEntry(*i->entry());
+  }
+}
+
+#include "detailedlistview.moc"

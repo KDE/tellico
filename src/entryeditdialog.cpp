@@ -14,6 +14,7 @@
 #include "entryeditdialog.h"
 #include "tabcontrol.h"
 #include "collection.h"
+#include "controller.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -226,10 +227,10 @@ void EntryEditDialog::slotHandleNew() {
   m_tabs->setResetFocus(true);
   m_tabs->setCurrentPage(0);
   clear();
-  emit signalClearSelection(this);
+  Controller::self()->slotUpdateSelection(this); // FIXME:should have a clearSelection() function
 
-  Data::Entry* unit = new Data::Entry(m_currColl);
-  m_currEntries.append(unit);
+  Data::Entry* entry = new Data::Entry(m_currColl);
+  m_currEntries.append(entry);
   m_isOrphan = true;
 
 // special case for purchase date, insert current year
@@ -295,7 +296,11 @@ void EntryEditDialog::slotHandleSave() {
   if(!empty) {
     m_isOrphan = false;
     emit signalSaveEntries(m_currEntries);
+    if(!m_currEntries.getFirst()->title().isEmpty()) {
+      setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + m_currEntries.getFirst()->title());
+    }
   }
+
 
   kapp->restoreOverrideCursor();
   m_modified = false;
@@ -312,6 +317,8 @@ void EntryEditDialog::clear() {
     it.current()->setEnabled(true);
     it.current()->clear();
   }
+
+  setCaption(i18n("Edit Entry"));
 
   if(m_isOrphan) {
     if(m_currEntries.count() > 1) {
@@ -354,7 +361,10 @@ void EntryEditDialog::setContents(const Data::EntryList& list_) {
     return;
   }
 
-  // keep track of the units
+  // multiple entries, so don't set caption
+  setCaption(i18n("Edit Entry"));
+
+  // keep track of the entries
   m_currEntries = list_;
 
   blockSignals(true);
@@ -402,6 +412,10 @@ void EntryEditDialog::setContents(Data::Entry* entry_, const QString& highlight_
   clear();
   blockSignals(false);
   m_currEntries.append(entry_);
+
+  if(!entry_->title().isEmpty()) {
+    setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + entry_->title());
+  }
 
   // I'll end up nulling the highlight string, so make a copy
   QString highlight = highlight_;
@@ -615,3 +629,5 @@ void EntryEditDialog::slotUpdateField(Data::Collection* coll_, Data::Field* newF
     }
   }
 }
+
+#include "entryeditdialog.moc"

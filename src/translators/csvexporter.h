@@ -28,11 +28,11 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: csvexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: csvexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class CSVExporter : public TextExporter {
-public: 
-  CSVExporter(const Data::Collection* coll, const Data::EntryList& list);
+public:
+  CSVExporter(const Data::Collection* coll);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;
@@ -43,7 +43,7 @@ public:
 
 private:
   QString& escapeText(QString& text);
-  
+
   bool m_includeTitles;
   QString m_delimiter;
 

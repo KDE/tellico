@@ -32,13 +32,20 @@
 #include <kdebug.h>
 #endif
 
+// see http://sourcefrog.net/weblog/software/languages/C/warn-unused.html
+#ifdef __GNUC__
+#  define WARN_UNUSED  __attribute__((warn_unused_result))
+#else
+#  define WARN_UNUSED
+#endif
+
 #include <qobject.h>
 
 /**
  * This file contains utility functions.
  *
  * @author Robby Stephenson
- * @version $Id: utils.h 391 2004-01-24 06:27:14Z robby $
+ * @version $Id: utils.h 753 2004-08-09 02:38:10Z robby $
  */
 inline
 QObject* QObjectAncestor(QObject* obj, const char* className_) {

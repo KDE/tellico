@@ -7,7 +7,11 @@ libtranslators_a_METASOURCES = AUTO
 
 libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp bookcasexmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp bookcasezipexporter.cpp xmlimporter.cpp bookcaseimporter.cpp
 
-SUBDIRS = btparse pilotdb
+SUBDIRS = pilotdb
+
+if !USE_LIBBTPARSE
+  SUBDIRS += btparse
+endif
 
 EXTRA_DIST = bibtex-translation.xml \
 bibtexexporter.cpp       bookcasexmlexporter.h    pilotdbexporter.cpp \

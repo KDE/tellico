@@ -153,7 +153,7 @@ namespace PalmLib {
        * type. This method is abstract since only the subclasses
        * know which field types are supported.
        *
-       * @param type The field type that should be checked for support. 
+       * @param type The field type that should be checked for support.
        */
       virtual bool supportsFieldType(const Field::FieldType& type) const = 0;
 
@@ -272,7 +272,7 @@ namespace PalmLib {
         {
             about.information = _string;
         }
-        
+
       virtual std::string getAboutInformation() const
         {
             return about.information;

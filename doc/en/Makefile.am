@@ -21,7 +21,11 @@ main-window.png \
 print-options.png \
 template-options.png \
 filter-dialog.png \
-csv-dialog.png
+csv-dialog.png \
+fetch-dialog.png \
+export-options.png \
+export-html.png \
+export-csv.png
 
 
 ####### kdevelop will overwrite this part!!! (end)############

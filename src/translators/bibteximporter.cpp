@@ -14,6 +14,7 @@
 #include "bibteximporter.h"
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
+#include "../latin1literal.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -114,7 +115,7 @@ Bookcase::Data::Collection* BibtexImporter::collection() {
         text.truncate(text.length() - 1);
       }
       QString attName = QString::fromLatin1(name);
-      if(attName == QString::fromLatin1("author") || attName == QString::fromLatin1("editor")) {
+      if(attName == Latin1Literal("author") || attName == Latin1Literal("editor")) {
         text.replace(QRegExp(QString::fromLatin1("\\sand\\s")), QString::fromLatin1("; "));
       }
       BibtexHandler::setFieldValue(unit, attName, text);
@@ -148,7 +149,7 @@ ASTList BibtexImporter::parseText(const QString& text) const {
   ASTList list;
   QString entry;
   QRegExp rx(QString::fromLatin1("[{}]"));
-  
+
   int brace = 0;
   int startpos = 0;
   int pos = text.find(rx, 0);
@@ -177,3 +178,5 @@ ASTList BibtexImporter::parseText(const QString& text) const {
 
   return list;
 }
+
+#include "bibteximporter.moc"

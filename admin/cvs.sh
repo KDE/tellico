@@ -66,7 +66,7 @@ case $AUTOMAKE_STRING in
     echo "*** KDE requires automake $required_automake_version"
     exit 1
     ;;
-  automake*1.6.* | automake*1.7* | automake*1.8* ) : ;;
+  automake*1.6.* | automake*1.7* | automake*1.8* | automake*1.9*) : ;;
   "" )
     echo "*** AUTOMAKE NOT FOUND!."
     echo "*** KDE requires automake $required_automake_version"
@@ -233,12 +233,12 @@ echo "KDE_CREATE_SUBDIRSLIST" >> configure.in.new
 if test -f Makefile.am.in; then
   subdirs=`cat subdirs`
   for dir in $subdirs; do
-    dir=`echo $dir | sed -e "s,[-+.],_,g"`
-    echo "AM_CONDITIONAL($dir""_SUBDIR_included, test \"x\$$dir""_SUBDIR_included\" = xyes)" >> configure.in.new
-    if test -f $dir/configure.in; then
-	echo "if test \"x\$$dir""_SUBDIR_included\" = xyes; then " >> configure.in.new
-	echo "  AC_CONFIG_SUBDIRS($dir)" >> configure.in.new
-	echo "fi" >> configure.in.new
+    vdir=`echo $dir | sed -e 's,[-+.@],_,g'`
+    echo "AM_CONDITIONAL($vdir""_SUBDIR_included, test \"x\$$vdir""_SUBDIR_included\" = xyes)" >> configure.in.new
+    if test -f "$dir/configure.in"; then
+        echo "if test \"x\$$vdir""_SUBDIR_included\" = xyes; then " >> configure.in.new
+        echo "  AC_CONFIG_SUBDIRS($dir)" >> configure.in.new
+        echo "fi" >> configure.in.new
     fi
   done
 fi
@@ -309,7 +309,7 @@ if test -f configure.in.in; then
    fi
 fi
 if test -z "$VERSION" || test "$VERSION" = "@VERSION@"; then
-     VERSION="\"3.2.90\""
+     VERSION="\"3.2.92\""
 fi
 if test -z "$modulename" || test "$modulename" = "@MODULENAME@"; then
    modulename=`pwd`; 
@@ -459,8 +459,21 @@ if test -f Makefile.am.in; then
     esac
   done
 
+  adds=`fgrep '$(top_srcdir)/acinclude.m4:' Makefile.am.in | sed -e 's,^[^:]*: *,,; s,\$(top_srcdir)/,,g'`
+  if echo "$adds" | fgrep "*" >/dev/null ; then
+    adds=`ls -d -1 $adds 2>/dev/null`
+    fgrep -v  '$(top_srcdir)/acinclude.m4:' Makefile.am.in > Makefile.am.in.adds
+    str='$(top_srcdir)/acinclude.m4:'
+    for add in $adds; do 
+	str="$str \$(top_srcdir)/$add"
+    done
+    echo $str >> Makefile.am.in.adds
+  else
+    cat Makefile.am.in > Makefile.am.in.adds
+  fi
+
   if test -n "$UNSERMAKE"; then
-    cat Makefile.am.in > Makefile.am
+    cat Makefile.am.in.adds > Makefile.am
     topsubdirs=
     for i in $compilefirst $dirs $compilelast; do
        vari=`echo $i | sed -e "s,[-+],_,g"`
@@ -471,11 +484,12 @@ if test -f Makefile.am.in; then
     done
     echo "SUBDIRS=$topsubdirs" >> Makefile.am
   else
-    cat Makefile.am.in | \
+    cat Makefile.am.in.adds | \
         sed -e 's,^\s*\(COMPILE_BEFORE.*\),# \1,' | \
         sed -e 's,^\s*\(COMPILE_AFTER.*\),# \1,' > Makefile.am
     echo "SUBDIRS="'$(TOPSUBDIRS)' >> Makefile.am
   fi
+  rm Makefile.am.in.adds
 fi
 }
 
@@ -486,8 +500,12 @@ acinclude_m4()
   if grep '\$(top_srcdir)/acinclude.m4:' $makefile_am >/dev/null; then 
     strip_makefile
     rm -f acinclude.m4
-    $MAKE -f $makefile_wo top_srcdir=. ./acinclude.m4 || exit 1
     adds=`grep '\$(top_srcdir)/acinclude.m4:' $makefile_wo | sed -e 's,^[^:]*: *,,; s,\$(top_srcdir),.,g'`
+    if echo $adds | fgrep "*" >/dev/null ; then
+      adds=`ls -d -1 $adds 2>/dev/null`
+    else
+      $MAKE -f $makefile_wo top_srcdir=. ./acinclude.m4 || exit 1
+    fi
   else
     rm -f acinclude.m4
   fi
@@ -563,9 +581,10 @@ for subdir in $dirs; do
    fi
    perl -e '$mes=0; while (<STDIN>) { next if (/^(if\s|else\s|endif)/); if (/^messages:/) { $mes=1; print $_; next; } if ($mes) { if (/$\\(XGETTEXT\)/ && / -o/) { s/ -o \$\(podir\)/ _translatorinfo.cpp -o \$\(podir\)/ } print $_; } else { print $_; } }' < Makefile.am | egrep -v '^include ' > _transMakefile
 
+   kdepotpath=${includedir:-${KDEDIR:-`kde-config --prefix`}/include}/kde.pot
+
    $MAKE -s -f _transMakefile podir=$podir EXTRACTRC="$EXTRACTRC" PREPARETIPS="$PREPARETIPS" \
-	XGETTEXT="${XGETTEXT:-xgettext} -C -ki18n -ktr2i18n -kI18N_NOOP -kaliasLocale -x ${includedir:-${KDEDIR:-/usr/local/kde}/include}/kde.pot" \
-	messages 
+	XGETTEXT="${XGETTEXT:-xgettext} -C -ki18n -ktr2i18n -kI18N_NOOP -kaliasLocale -x $kdepotpath" messages 
    exit_code=$?
    if test "$exit_code" != 0; then
        echo "make exit code: $exit_code"

@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - fancy template for viewing entry data
 
-   $Id: Fancy.xsl 614 2004-04-17 18:52:48Z robby $
+   $Id: Fancy.xsl 788 2004-08-23 00:17:00Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -34,7 +34,7 @@
 <xsl:param name="color1"/> <!-- default KDE highlighted text color -->
 <xsl:param name="color2"/> <!-- default KDE highlighted background color -->
 
-<xsl:strip-space elements="*"/>
+<xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
 <xsl:key name="fieldsByName" match="bc:field" use="@name"/>
 <xsl:key name="fieldsByCat" match="bc:field" use="@category"/>
@@ -59,9 +59,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="bc:bookcase">
- <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
+ <!-- This stylesheet is designed for Bookcase document syntax version 6 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'5'"/>
+  <xsl:with-param name="this-version" select="'6'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -119,35 +119,27 @@
     text-align: center;
     background-color: #cccccc;
     min-height: 1em;
+    overflow: hidden;
   }
-  span.categoryName {
-    float: right;
+  h2 {
     color: <xsl:value-of select="$color1"/>;
     background-color: <xsl:value-of select="$color2"/>;
-    border-left: 1px outset;
     border-bottom: 1px outset;
     border-color: <xsl:value-of select="$fgcolor"/>;
-    padding: 0px 4px 0px 4px;
-    margin: 0px 0px 0px 6px;
+    padding: 0px 5px 0px 0px;
+    margin: 0px 0px 2px -5px;
     font-size: 1.0em;
-    position: relative;
     top: -1px;
     font-style: normal;
-  }
-  /* for the category in a div, no padding */
-  div span.categoryName {
-    right: -1px;
-  }
-  /* for the category in a table cell, 10px of padding */
-  td span.categoryName {
-    right: -11px;
+    text-align: right;
   }
   table {
     border-collapse: collapse;
     border-spacing: 0px;
+    max-width: 100%;
   }
   th.fieldName {
-    font-weight: bold;
+    font-weight: bolder;
     text-align: left;
     padding: 0px 4px 0px 2px;
     white-space: nowrap;
@@ -181,7 +173,7 @@
   }
   </style>
   <title>
-   <xsl:value-of select="bc:collection/bc:entry[1]/bc:title"/>
+   <xsl:value-of select="bc:collection/bc:entry[1]//bc:title[1]"/>
    <xsl:text> - </xsl:text>
    <xsl:value-of select="bc:collection/@title"/>
   </title>
@@ -194,15 +186,21 @@
 
 <xsl:template match="bc:collection">
  <xsl:apply-templates select="bc:entry[1]"/>
+ <xsl:if test="$collection-file">
+  <hr/>
+  <h4 style="text-align:center"><a href="{$collection-file}">&lt;&lt; <xsl:value-of select="@title"/></a></h4>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="bc:entry">
  <xsl:variable name="entry" select="."/>
 
  <!-- first, show the title -->
- <h1>
-  <xsl:value-of select="bc:title"/>
- </h1>
+ <xsl:if test=".//bc:title">
+  <h1>
+   <xsl:value-of select=".//bc:title[1]"/>
+  </h1>
+ </xsl:if>
 
  <!-- all the images are in a div, aligned to the right side and floated -->
  <!-- only want this div if there are any images in the entry -->
@@ -269,14 +267,17 @@
  <xsl:variable name="fields" select="key('fieldsByCat', $category)"/>
  <xsl:variable name="first-type" select="$fields[1]/@type"/>
 
- <!-- only output stuff if the entry has values in this category -->
  <xsl:variable name="n" select="count($entry//*[key('fieldsByName',local-name(.))/@category=$category])"/>
- <xsl:if test="$n &gt; 0">
+ <xsl:if test="$n &gt; 0 or $num-images = 0">
   <div class="category">
-
+   
    <xsl:if test="$num-images = 0 and $first-type != 2">
     <xsl:attribute name="style">
      <xsl:text>float: left; margin-left: 1%; margin-right: 1%; width: 47%;</xsl:text>
+     <!-- two columns of divs -->
+     <xsl:if test="$categories[. = $category and position() mod 2 = 1]">
+      <xsl:text>clear: left;</xsl:text>
+     </xsl:if>
     </xsl:attribute>
    </xsl:if>
    <xsl:if test="$num-images = 0 and $first-type = 2">
@@ -285,34 +286,23 @@
     </xsl:attribute>
    </xsl:if>
    
-   
-   <!--
-   I'd really like to put the h2 category here, but the problem is that
-   the float doesn't behave well with tables. So instead, the h2 goes in the
-   first row of the tables 
    <h2>
     <xsl:value-of select="$category"/>
    </h2>
-   -->   
    <!-- ok, big xsl:choose loop for field type -->
    <xsl:choose>
     
     <!-- paragraphs are field type 2 -->
     <xsl:when test="$first-type = 2">
-     <span class="categoryName">
-      <xsl:value-of select="$category"/>
-     </span>
      <p>
-      <xsl:value-of select="$entry/*[local-name(.) = $fields[1]/@name]"/>
+      <!-- disabling the output escaping allows html -->
+      <xsl:value-of select="$entry/*[local-name(.) = $fields[1]/@name]" disable-output-escaping="yes"/>
      </p>
     </xsl:when>
     
     <!-- single-column tables are field type 8 -->
     <!-- ok to put category name inside div instead of table here -->
     <xsl:when test="$first-type = 8">
-     <span class="categoryName">
-      <xsl:value-of select="$category"/>
-     </span>
      <ul>
       <xsl:for-each select="$entry//*[local-name(.) = $fields[1]/@name]">
        <li>
@@ -324,7 +314,7 @@
     
     <!-- double-column tables are field type 9 -->
     <xsl:when test="$first-type = 9">
-     <table style="width:100%;">
+     <table>
       <tbody>
        <xsl:for-each select="$entry//*[local-name(.) = $fields[1]/@name]">
         <tr>
@@ -332,11 +322,6 @@
           <xsl:value-of select="bc:column[1]"/>
          </td>
          <td class="column2">
-          <xsl:if test="position()=1">
-           <span class="categoryName">
-            <xsl:value-of select="$category"/>
-           </span>
-          </xsl:if>
           <xsl:value-of select="bc:column[2]"/>
          </td>
         </tr>
@@ -346,7 +331,7 @@
     </xsl:when>
     
     <xsl:otherwise>
-     <table style="width:100%;">
+     <table>
       <tbody>
        <!-- already used title, so skip it -->
        <xsl:for-each select="$fields[@name != 'title']">
@@ -356,11 +341,6 @@
           <xsl:text>:</xsl:text>
          </th>
          <td class="fieldValue">
-          <xsl:if test="position()=1">
-           <span class="categoryName">
-            <xsl:value-of select="$category"/>
-           </span>
-          </xsl:if>
           <xsl:call-template name="simple-field-value">
            <xsl:with-param name="entry" select="$entry"/>
            <xsl:with-param name="field" select="@name"/>
@@ -371,15 +351,11 @@
       </tbody>
      </table>
      
-     <!-- just to be sure the category title doesn't spill over the div height -->
-     <xsl:if test="count($fields) = 1">
-      <br/>
-     </xsl:if>
     </xsl:otherwise>
    </xsl:choose>
-
+   
   </div>
- </xsl:if>
+ </xsl:if> 
 </xsl:template>
-
+ 
 </xsl:stylesheet>

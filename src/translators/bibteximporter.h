@@ -23,7 +23,12 @@ namespace Bookcase {
 class Entry;
 
 #include "textimporter.h"
+#include "../../config.h"
+#ifdef HAVE_LIBBTPARSE
+#include <btparse.h>
+#else
 #include "btparse/btparse.h"
+#endif
 
 #include <qptrlist.h>
 
@@ -38,7 +43,7 @@ namespace Bookcase {
  * parse the text and generate a @ref BibtexCollection.
  *
  * @author Robby Stephenson
- * @version $Id: bibteximporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: bibteximporter.h 731 2004-08-04 03:25:22Z robby $
  */
 class BibtexImporter : public TextImporter {
 Q_OBJECT

@@ -20,6 +20,11 @@
 #include <kconfig.h>
 #include <kmdcodec.h>
 #include <kdebug.h>
+#include <kglobal.h>
+#include <kdeversion.h>
+#if KDE_IS_VERSION(3,1,90)
+#include <kcalendarsystem.h>
+#endif
 
 #include <qlayout.h>
 #include <qgroupbox.h>
@@ -41,8 +46,11 @@ using Bookcase::Export::BookcaseXMLExporter;
  *
  * VERSION 5 moved the bibtex-field and any other extended field property to property elements
  * inside the field element, and added the image element.
+ *
+ * VERSION 6 added id, i18n attributes, and year, month, day elements in date fields with a calendar name
+ * attribute.
  */
-const unsigned BookcaseXMLExporter::syntaxVersion = 5;
+const unsigned BookcaseXMLExporter::syntaxVersion = 6;
 
 static const char* BOOKCASE_NAMESPACE = "http://periapsis.org/bookcase/";
 static const char* BOOKCASE_PUBLIC = "-//Robby Stephenson/DTD Bookcase V%1.0//EN";
@@ -53,7 +61,7 @@ QString BookcaseXMLExporter::formatString() const {
 }
 
 QString BookcaseXMLExporter::fileFilter() const {
-  return i18n("*.xml|XML files (*.xml)") + QString::fromLatin1("\n") + i18n("*|All files");
+  return i18n("*.xml|XML files (*.xml)") + QChar('\n') + i18n("*|All files");
 }
 
 QWidget* BookcaseXMLExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
@@ -129,7 +137,7 @@ QDomDocument BookcaseXMLExporter::exportXML(bool format_, bool encodeUTF8_) cons
 void BookcaseXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& parent_, bool format_) const {
   QDomElement collElem = dom_.createElement(QString::fromLatin1("collection"));
 
-  collElem.setAttribute(QString::fromLatin1("type"),      collection()->collectionType());
+  collElem.setAttribute(QString::fromLatin1("type"),      collection()->type());
   collElem.setAttribute(QString::fromLatin1("title"),     collection()->title());
   // it's unitTitle and not entryTitle for historical reasons...
   collElem.setAttribute(QString::fromLatin1("unitTitle"), collection()->entryTitle());
@@ -140,7 +148,7 @@ void BookcaseXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& p
     exportFieldXML(dom_, attsElem, fIt.current());
   }
 
-  if(collection()->collectionType() == Data::Collection::Bibtex) {
+  if(collection()->type() == Data::Collection::Bibtex) {
     const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(collection());
     if(c) {
       if(!c->preamble().isEmpty()) {
@@ -221,7 +229,9 @@ void BookcaseXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent
   // iterate through every field for the entry
   for(Data::FieldListIterator fIt(entry_->collection()->fieldList()); fIt.current(); ++fIt) {
     QString fieldName = fIt.current()->name();
-    QString fieldValue = format_ ? entry_->formattedField(fieldName) : entry_->field(fieldName);
+
+    // Date fields are special, don't format in export
+    QString fieldValue = (format_ && fIt.current()->type() != Data::Field::Date) ? entry_->formattedField(fieldName) : entry_->field(fieldName);
 
     // if empty, then no field element is added and just continue
     if(fieldValue.isEmpty()) {
@@ -257,7 +267,32 @@ void BookcaseXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent
     } else {
       QDomElement fieldElem = dom_.createElement(fieldName);
       entryElem.appendChild(fieldElem);
-      fieldElem.appendChild(dom_.createTextNode(fieldValue));
+      // Date fields get special treatment
+      if(fIt.current()->type() != Data::Field::Date) {
+        fieldElem.appendChild(dom_.createTextNode(fieldValue));
+      } else {
+#if KDE_IS_VERSION(3,1,90)
+        fieldElem.setAttribute(QString::fromLatin1("calendar"), KGlobal::locale()->calendar()->calendarName());
+#else
+        fieldElem.setAttribute(QString::fromLatin1("calendar"), QString::fromLatin1("gregorian"));
+#endif
+        QStringList s = QStringList::split('-', fieldValue, true);
+        if(s.count() > 0 && !s[0].isEmpty()) {
+          QDomElement e = dom_.createElement(QString::fromLatin1("year"));
+          fieldElem.appendChild(e);
+          e.appendChild(dom_.createTextNode(s[0]));
+        }
+        if(s.count() > 1 && !s[1].isEmpty()) {
+          QDomElement e = dom_.createElement(QString::fromLatin1("month"));
+          fieldElem.appendChild(e);
+          e.appendChild(dom_.createTextNode(s[1]));
+        }
+        if(s.count() > 2 && !s[2].isEmpty()) {
+          QDomElement e = dom_.createElement(QString::fromLatin1("day"));
+          fieldElem.appendChild(e);
+          e.appendChild(dom_.createTextNode(s[2]));
+        }
+      }
     }
 
     if(fIt.current()->type() == Data::Field::Image) {

@@ -18,6 +18,7 @@
 #include "bibtexexporter.h"
 #include "../collection.h"
 #include "../collections/bibtexcollection.h"
+#include "../latin1literal.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -31,8 +32,7 @@
 
 using Bookcase::Export::BibtexExporter;
 
-BibtexExporter::BibtexExporter(const Data::Collection* coll_, const Data::EntryList& list_)
- : Bookcase::Export::TextExporter(coll_, list_),
+BibtexExporter::BibtexExporter(const Data::Collection* coll_) : Bookcase::Export::TextExporter(coll_),
    m_expandMacros(false),
    m_packageURL(true),
    m_skipEmptyKeys(false),
@@ -45,7 +45,7 @@ QString BibtexExporter::formatString() const {
 }
 
 QString BibtexExporter::fileFilter() const {
-  return i18n("*.bib|Bibtex files (*.bib)") + QString::fromLatin1("\n") + i18n("*|All files");
+  return i18n("*.bib|Bibtex files (*.bib)") + QChar('\n') + i18n("*|All files");
 }
 
 QWidget* BibtexExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
@@ -105,9 +105,9 @@ QString BibtexExporter::text(bool formatFields_, bool) {
   Data::FieldList list;
   for(Data::FieldListIterator it(collection()->fieldList()); it.current(); ++it) {
     QString bibtex = it.current()->property(QString::fromLatin1("bibtex"));
-    if(bibtex == QString::fromLatin1("entry-type")) {
+    if(bibtex == Latin1Literal("entry-type")) {
       typeField = it.current()->name();
-    } else if(bibtex == QString::fromLatin1("key")) {
+    } else if(bibtex == Latin1Literal("key")) {
       keyField = it.current()->name();
     } else if(!bibtex.isEmpty()) {
       list.append(it.current());

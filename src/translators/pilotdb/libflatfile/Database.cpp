@@ -79,7 +79,7 @@ PalmLib::FlatFile::Database::appendField(PalmLib::FlatFile::FType field)
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields())
           return;
 //        throw PalmLib::error("maximum number of fields reached");
-    
+
     m_fields.push_back(field);
 }
 
@@ -97,7 +97,7 @@ PalmLib::FlatFile::Database::appendField(const std::string& name,
         return;
       }
 //        throw PalmLib::error("maximum number of fields reached");
-    
+
 /*    m_fields.push_back(std::make_pair(name, type));*/
 /*    m_fields.push_back(PalmLib::FlatFile::make_ftype(name, type));*/
     m_fields.push_back(PalmLib::FlatFile::FType(name, type, data));
@@ -112,7 +112,7 @@ PalmLib::FlatFile::Database::insertField(int i, PalmLib::FlatFile::FType field)
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields())
         return;
 //        throw PalmLib::error("maximum number of fields reached");
-    
+
 /*    m_fields.push_back(std::make_pair(name, type));*/
 /*    m_fields.push_back(PalmLib::FlatFile::make_ftype(name, type));*/
     m_fields.insert(m_fields.begin() + i, field);
@@ -128,7 +128,7 @@ PalmLib::FlatFile::Database::insertField(int i, const std::string& name,
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields())
           return;
 //        throw PalmLib::error("maximum number of fields reached");
-    
+
 /*    m_fields.push_back(std::make_pair(name, type));*/
 /*    m_fields.push_back(PalmLib::FlatFile::make_ftype(name, type));*/
     m_fields.insert(m_fields.begin() + i, PalmLib::FlatFile::FType(name, type, data));
@@ -232,7 +232,7 @@ PalmLib::FlatFile::Database::appendListView(const ListView& lv)
     m_listviews.push_back(lv);
 }
 
-void 
+void
 PalmLib::FlatFile::Database::removeListView(unsigned index)
 {
     if (index < getNumOfListViews())

@@ -116,3 +116,5 @@ Bookcase::Data::FieldList WineCollection::defaultFields() {
 
   return list;
 }
+
+#include "winecollection.moc"

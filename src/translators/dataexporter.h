@@ -23,11 +23,11 @@ namespace Bookcase {
  * The DataExporter class is meant as an abstract class for any exporter which operates on binary files.
  *
  * @author Robby Stephenson
- * @version $Id: dataexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: dataexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class DataExporter : public Exporter {
 public:
-  DataExporter(const Data::Collection* coll, const Data::EntryList& list) : Exporter(coll, list) {}
+  DataExporter(const Data::Collection* coll) : Exporter(coll) {}
 
   virtual bool isText() const { return false; }
   /**

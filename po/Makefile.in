@@ -171,6 +171,8 @@ UIC_TR = @UIC_TR@
 USER_INCLUDES = @USER_INCLUDES@
 USER_LDFLAGS = @USER_LDFLAGS@
 USE_EXCEPTIONS = @USE_EXCEPTIONS@
+USE_LIBBTPARSE_FALSE = @USE_LIBBTPARSE_FALSE@
+USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
@@ -260,8 +262,8 @@ EXTRA_DIST = bookcase.pot
 ####### kdevelop will overwrite this part!!! (end)############
 #>- POFILES = AUTO
 #>+ 2
-POFILES = cs.po es.po fr.po sv.po de.po bg.po ee.po nl.po it.po hu.po fi.po nb.po ro.po
-GMOFILES = cs.gmo es.gmo fr.gmo sv.gmo de.gmo bg.gmo ee.gmo nl.gmo it.gmo hu.gmo fi.gmo nb.gmo ro.gmo
+POFILES = es.po de.po nl.po bg.po it.po hu.po nb.po ro.po ee.po cs.po fr.po sv.po fi.po
+GMOFILES = es.gmo de.gmo nl.gmo bg.gmo it.gmo hu.gmo nb.gmo ro.gmo ee.gmo cs.gmo fr.gmo sv.gmo fi.gmo
 subdir = po
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -436,56 +438,56 @@ uninstall-am: uninstall-info-am
 
 
 #>+ 2
-KDE_DIST=cs.gmo nl.po sv.gmo ro.po bg.gmo messages.mo bg.po nb.gmo fi.po it.gmo sv.po fi.gmo hu.po ee.gmo de.gmo de.po es.po fr.gmo es.gmo nb.po it.po fr.po ro.gmo hu.gmo nl.gmo ee.po cs.po 
+KDE_DIST=cs.gmo nl.po sv.gmo ro.po bg.gmo messages.mo bg.po nb.gmo fi.po it.gmo sv.po fi.gmo hu.po ee.gmo de.gmo de.po es.po fr.gmo es.gmo fr.po nb.po it.po ro.gmo hu.gmo nl.gmo cs.po ee.po 
 
 #>+ 40
-cs.gmo: cs.po
-	rm -f cs.gmo; $(GMSGFMT) -o cs.gmo $(srcdir)/cs.po
-	test ! -f cs.gmo || touch cs.gmo
 es.gmo: es.po
 	rm -f es.gmo; $(GMSGFMT) -o es.gmo $(srcdir)/es.po
 	test ! -f es.gmo || touch es.gmo
-fr.gmo: fr.po
-	rm -f fr.gmo; $(GMSGFMT) -o fr.gmo $(srcdir)/fr.po
-	test ! -f fr.gmo || touch fr.gmo
-sv.gmo: sv.po
-	rm -f sv.gmo; $(GMSGFMT) -o sv.gmo $(srcdir)/sv.po
-	test ! -f sv.gmo || touch sv.gmo
 de.gmo: de.po
 	rm -f de.gmo; $(GMSGFMT) -o de.gmo $(srcdir)/de.po
 	test ! -f de.gmo || touch de.gmo
-bg.gmo: bg.po
-	rm -f bg.gmo; $(GMSGFMT) -o bg.gmo $(srcdir)/bg.po
-	test ! -f bg.gmo || touch bg.gmo
-ee.gmo: ee.po
-	rm -f ee.gmo; $(GMSGFMT) -o ee.gmo $(srcdir)/ee.po
-	test ! -f ee.gmo || touch ee.gmo
 nl.gmo: nl.po
 	rm -f nl.gmo; $(GMSGFMT) -o nl.gmo $(srcdir)/nl.po
 	test ! -f nl.gmo || touch nl.gmo
+bg.gmo: bg.po
+	rm -f bg.gmo; $(GMSGFMT) -o bg.gmo $(srcdir)/bg.po
+	test ! -f bg.gmo || touch bg.gmo
 it.gmo: it.po
 	rm -f it.gmo; $(GMSGFMT) -o it.gmo $(srcdir)/it.po
 	test ! -f it.gmo || touch it.gmo
 hu.gmo: hu.po
 	rm -f hu.gmo; $(GMSGFMT) -o hu.gmo $(srcdir)/hu.po
 	test ! -f hu.gmo || touch hu.gmo
-fi.gmo: fi.po
-	rm -f fi.gmo; $(GMSGFMT) -o fi.gmo $(srcdir)/fi.po
-	test ! -f fi.gmo || touch fi.gmo
 nb.gmo: nb.po
 	rm -f nb.gmo; $(GMSGFMT) -o nb.gmo $(srcdir)/nb.po
 	test ! -f nb.gmo || touch nb.gmo
 ro.gmo: ro.po
 	rm -f ro.gmo; $(GMSGFMT) -o ro.gmo $(srcdir)/ro.po
 	test ! -f ro.gmo || touch ro.gmo
+ee.gmo: ee.po
+	rm -f ee.gmo; $(GMSGFMT) -o ee.gmo $(srcdir)/ee.po
+	test ! -f ee.gmo || touch ee.gmo
+cs.gmo: cs.po
+	rm -f cs.gmo; $(GMSGFMT) -o cs.gmo $(srcdir)/cs.po
+	test ! -f cs.gmo || touch cs.gmo
+fr.gmo: fr.po
+	rm -f fr.gmo; $(GMSGFMT) -o fr.gmo $(srcdir)/fr.po
+	test ! -f fr.gmo || touch fr.gmo
+sv.gmo: sv.po
+	rm -f sv.gmo; $(GMSGFMT) -o sv.gmo $(srcdir)/sv.po
+	test ! -f sv.gmo || touch sv.gmo
+fi.gmo: fi.po
+	rm -f fi.gmo; $(GMSGFMT) -o fi.gmo $(srcdir)/fi.po
+	test ! -f fi.gmo || touch fi.gmo
 
 #>+ 3
 clean-nls:
-	-rm -f  cs.gmo es.gmo fr.gmo sv.gmo de.gmo bg.gmo ee.gmo nl.gmo it.gmo hu.gmo fi.gmo nb.gmo ro.gmo
+	-rm -f  es.gmo de.gmo nl.gmo bg.gmo it.gmo hu.gmo nb.gmo ro.gmo ee.gmo cs.gmo fr.gmo sv.gmo fi.gmo
 
 #>+ 10
 install-nls:
-	@for base in cs es fr sv de bg ee nl it hu fi nb ro ; do \
+	@for base in es de nl bg it hu nb ro ee cs fr sv fi ; do \
 	  echo $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
 	  $(mkinstalldirs) $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES ; \
 	  if test -f $$base.gmo; then $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
@@ -496,19 +498,19 @@ install-nls:
 
 #>+ 15
 uninstall-nls:
-	rm -f $(DESTDIR)$(kde_locale)/cs/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/es/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/fr/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/sv/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/de/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/bg/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/ee/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/nl/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/bg/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/it/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/hu/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/fi/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/nb/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/ro/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/ee/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/cs/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/fr/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/sv/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/fi/LC_MESSAGES/$(PACKAGE).mo
 
 #>+ 2
 all-nls: $(GMOFILES)

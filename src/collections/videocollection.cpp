@@ -215,3 +215,5 @@ Bookcase::Data::FieldList VideoCollection::defaultFields() {
 
   return list;
 }
+
+#include "videocollection.moc"

@@ -25,7 +25,7 @@ namespace Bookcase {
  * Reading the @ref Bookcase data files is done by the BookcaseImporter.
  *
  * @author Robby Stephenson
- * @version $Id: bookcaseimporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: bookcaseimporter.h 770 2004-08-19 06:00:17Z robby $
  */
 class BookcaseImporter : public DataImporter {
 Q_OBJECT
@@ -55,7 +55,6 @@ private:
   void readImage(const QDomElement& elem);
 
   Data::Collection* m_coll;
-  float m_fraction;
 };
 
   } // end namespace

@@ -28,7 +28,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryview.h 580 2004-03-27 03:34:33Z robby $
+ * @version $Id: entryview.h 702 2004-07-08 03:25:19Z robby $
  */
 class EntryView : public KHTMLPart {
 Q_OBJECT
@@ -46,26 +46,27 @@ public:
   virtual ~EntryView();
 
   /**
-   * Clear the widget and set Entry pointer to NULL
-   */
-  void clear();
-  /**
    * Uses the xslt handler to convert an entry to html, and then writes that html to the view
    *
    * @param entry The entry to show
    */
-  void showEntry(const Data::Entry* const entry);
+  void showEntry(const Data::Entry* entry);
+    /**
+   * Clear the widget and set Entry pointer to NULL
+   */
+  void clear();
   /**
    * Helper function to refresh view.
    */
   void refresh();
   /**
-   * Sets the XSLT file used to show the entry. The file name is passed, not the path, and the
+   * Sets the XSLT file. If the file name does not start with a back-slash, then the
    * standard directories are searched.
    *
    * @param file The XSLT file name
    */
   void setXSLTFile(const QString& file);
+
 private slots:
   /**
    * Open a URL.
@@ -76,11 +77,8 @@ private slots:
 
 private:
   const Data::Entry* m_entry;
-  XSLTHandler* m_xsltHandler;
-  // need to keep track of xslt file so images used in view can be found
+  XSLTHandler* m_handler;
   QString m_xsltFile;
-  // keep track if the image directory has been set in the xslt handler
-  bool m_imageDirSet;
 
   // to run any clicked processes
   QGuardedPtr<KRun> m_run;

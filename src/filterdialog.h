@@ -31,7 +31,6 @@ class QDialog;
 #include <qstringlist.h>
 
 namespace Bookcase {
-  class MainWindow;
   class Filter;
   class FilterRule;
   class FilterDialog;
@@ -45,7 +44,7 @@ namespace Bookcase {
  * This class borrows heavily from KMSearchRule in kmail by Marc Mutz
  *
  * @author Robby Stephenson
- * @version $Id: filterdialog.h 578 2004-03-27 01:28:16Z robby $
+ * @version $Id: filterdialog.h 691 2004-06-09 02:48:54Z robby $
  */
 class FilterRuleWidget : public QHBox {
 Q_OBJECT
@@ -110,7 +109,7 @@ protected:
 
 /**
  * @author Robby Stephenson
- * @version $Id: filterdialog.h 578 2004-03-27 01:28:16Z robby $
+ * @version $Id: filterdialog.h 691 2004-06-09 02:48:54Z robby $
  */
 class FilterDialog : public KDialogBase {
 Q_OBJECT
@@ -122,15 +121,9 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  FilterDialog(MainWindow* parent, const char* name=0);
+  FilterDialog(QWidget* parent, const char* name=0);
 
   void setFilter(const Filter* filter);
-
-  // These are just wrappers so that FilterRuleWidget doesn't have to know
-  // anything about collections or documents
-  QStringList fieldTitles() const;
-  QString fieldNameByTitle(const QString& title) const;
-  QString fieldTitleByName(const QString& name) const;
 
 public slots:
   void slotClear();
@@ -144,8 +137,6 @@ signals:
   void signalUpdateFilter(Bookcase::Filter*);
 
 private:
-  MainWindow* m_bookcase;
-
   QRadioButton* m_matchAll;
   QRadioButton* m_matchAny;
   FilterRuleWidgetLister* m_ruleLister;

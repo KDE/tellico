@@ -157,14 +157,14 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
     xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().utf8().data(), xsltFile_.data(), NULL, xslt_options);
 #else
     xsltDoc = xmlParseDoc((xmlChar *)dom_.toString().utf8().data());
-    xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data());
+    xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data()); // needed in case of xslt includes
 #endif
   } else {
 #if LIBXML_VERSION >= 20600
     xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().local8Bit().data(), xsltFile_.data(), NULL, xslt_options);
 #else
     xsltDoc = xmlParseDoc((xmlChar *)dom_.toString().local8Bit().data());
-    xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data());
+    xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data()); // needed in case of xslt includes
 #endif
   }
 
@@ -198,6 +198,21 @@ void XSLTHandler::addStringParam(const QCString& name_, const QCString& value_) 
 //  value.replace('"', "&quot;");
   value.replace('\'', "&apos;");
   addParam(name_, QCString("'") + value + QCString("'"));
+}
+
+QString XSLTHandler::applyStylesheet(const QCString& text_) {
+  if(!m_stylesheet) {
+    kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
+    return QString::null;
+  }
+
+#if LIBXML_VERSION >= 20600
+  m_docIn = xmlReadDoc((xmlChar *)text_.data(), NULL, NULL, xml_options);
+#else
+  m_docIn = xmlParseDoc((xmlChar *)text_.data());
+#endif
+
+  return process();
 }
 
 QString XSLTHandler::applyStylesheet(const QString& text_, bool encodedUTF8_) {

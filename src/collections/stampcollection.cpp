@@ -128,3 +128,5 @@ Bookcase::Data::FieldList StampCollection::defaultFields() {
 
   return list;
 }
+
+#include "stampcollection.moc"

@@ -23,7 +23,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: image.h 657 2004-05-13 04:52:31Z robby $
+ * @version $Id: image.h 652 2004-05-11 04:57:03Z robby $
  */
 class Image : public QImage {
 

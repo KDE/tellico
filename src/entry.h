@@ -38,7 +38,7 @@ namespace Bookcase {
  * @ref fieldName() would be "author".
  *
  * @author Robby Stephenson
- * @version $Id: entry.h 583 2004-03-27 04:05:49Z robby $
+ * @version $Id: entry.h 722 2004-08-03 02:58:08Z robby $
  */
 class EntryGroup : public EntryList {
 
@@ -62,12 +62,12 @@ private:
  * in the collection.
  *
  * Each Entry object has a set of field values, such as title, artist, or format,
- * and must belong to a collection. A unique id number identifies each unit.
+ * and must belong to a collection. A unique id number identifies each entry.
  *
  * @see Field
  *
  * @author Robby Stephenson
- * @version $Id: entry.h 583 2004-03-27 04:05:49Z robby $
+ * @version $Id: entry.h 722 2004-08-03 02:58:08Z robby $
  */
 class Entry {
   // two entries are equal if all their field values are equal
@@ -86,7 +86,7 @@ class Entry {
 public:
   /**
    * The constructor, which automatically sets the id to the current number
-   * of units in the collection.
+   * of entries in the collection.
    *
    * @param coll A pointer to the parent collection object
    */
@@ -94,11 +94,11 @@ public:
   /**
    * The copy constructor, needed since the id must be different.
    */
-  Entry(const Entry& unit);
+  Entry(const Entry& entry);
   /**
-   * If a copy of the unit is needed in a new collection, needs another pointer.
+   * If a copy of the entry is needed in a new collection, needs another pointer.
    */
-  Entry(const Entry& unit, Collection* coll);
+  Entry(const Entry& entry, Collection* coll);
   /**
    * The assignment operator is overloaded, since the id must be different.
    */
@@ -138,7 +138,7 @@ public:
    */
   QStringList fields(const QString& field, bool format) const;
   /**
-   * Sets the value of an field for the unit. The method first verifies that
+   * Sets the value of an field for the entry. The method first verifies that
    * the value is allowed for that particular key.
    *
    * @param name The name of the field
@@ -147,65 +147,65 @@ public:
    */
   bool setField(const QString& name, const QString& value);
   /**
-   * Returns a pointer to the parent collection of the unit.
+   * Returns a pointer to the parent collection of the entry.
    *
    * @return The collection pointer
    */
   Collection* const collection() const { return m_coll; }
   /**
-   * Returns the id of the unit
+   * Returns the id of the entry
    *
    * @return The id
    */
   int id() const { return m_id; }
   /**
-   * Adds the unit to a group. The group list within the unit is updated
-   * and the unit is added to the group.
+   * Adds the entry to a group. The group list within the entry is updated
+   * and the entry is added to the group.
    *
    * @param group The group
-   * @return a bool indicating if it was successfully added. If the unit was already
+   * @return a bool indicating if it was successfully added. If the entry was already
    * in the group, the return value is false
    */
   bool addToGroup(EntryGroup* group);
   /**
-   * Removes the unit from a group. The group list within the unit is updated
-   * and the unit is removed from the group.
+   * Removes the entry from a group. The group list within the entry is updated
+   * and the entry is removed from the group.
    *
    * @param group The group
    * @return a bool indicating if the group was successfully removed
    */
   bool removeFromGroup(EntryGroup* group);
   /**
-   * Returns a list of the groups to which the unit belongs
+   * Returns a list of the groups to which the entry belongs
    *
    * @return The list of groups
    */
   const QPtrList<EntryGroup>& groups() const { return m_groups; }
   /**
    * Returns a list containing the names of the groups for
-   * a certain field to which the unit belongs
+   * a certain field to which the entry belongs
    *
    * @param fieldName The name of the field
    * @return The list of names
    */
   QStringList groupNamesByFieldName(const QString& fieldName) const;
   /**
-   * Returns a list of all the field values contained in the unit.
+   * Returns a list of all the field values contained in the entry.
    *
    * @return The list of field values
    */
   QStringList fieldValues() const { return m_fields.values(); }
   /**
-   * Returns a list of all the formatted field values contained in the unit.
+   * Returns a list of all the formatted field values contained in the entry.
    *
    * @return The list of field values
    */
   QStringList formattedFieldValues() const { return m_formattedFields.values(); }
   /**
-   * Returns a boolean indicating if the unit's parent collection recognizes
-   * it existence, that is, the parent collection has this unit in its list.
+   * Returns a boolean indicating if the entry's parent collection recognizes
+   * it existence, that is, the parent collection has this entry in its list.
    *
-   * @return Whether the unit is owned or not
+   * @return Whether the entry is owned or not
    */
   bool isOwned() const;
   /**
@@ -220,7 +220,7 @@ protected:
   /**
    * Construct the derived valued for an field. The format string should be
    * of the form "%{name1} %{name2}" where the names are replaced by the value
-   * of that field for the unit. Whether or not formatting is done on the
+   * of that field for the entry. Whether or not formatting is done on the
    * strings themselves shoudl be taken into account.
    *
    * @param formatString The format string

@@ -31,7 +31,7 @@ namespace Bookcase {
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: musiccollection.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: musiccollection.h 652 2004-05-11 04:57:03Z robby $
  */
 class MusicCollection : public Collection {
 Q_OBJECT
@@ -45,7 +45,7 @@ public:
    */
   MusicCollection(bool addFields, const QString& title = QString::null);
 
-  virtual CollectionType collectionType() const { return Album; }
+  virtual Type type() const { return Album; }
 
   static FieldList defaultFields();
 };

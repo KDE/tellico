@@ -77,7 +77,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
     QString value = field(fieldName_);
     if(!value.isEmpty()) {
       // special for Bibtex collections
-      if(m_coll->collectionType() == Collection::Bibtex) {
+      if(m_coll->type() == Collection::Bibtex) {
         BibtexHandler::cleanText(value);
       }
       value = Field::format(value, flag);
@@ -104,14 +104,14 @@ bool Entry::setField(const QString& name_, const QString& value_) {
   }
 
 #ifndef NDEBUG
-  if(m_coll->fieldList().count() == 0 || m_coll->fieldByName(name_) == 0) {
+  if(m_coll && (m_coll->fieldList().count() == 0 || m_coll->fieldByName(name_) == 0)) {
     kdDebug() << "Entry::setField() - unknown collection entry field - "
               << name_ << endl;
     return false;
   }
 #endif
 
-  if(!m_coll->isAllowed(name_, value_)) {
+  if(m_coll && !m_coll->isAllowed(name_, value_)) {
     kdDebug() << "Entry::setField() - for " << name_
               << ", value is not allowed - " << value_ << endl;
     return false;

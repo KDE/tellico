@@ -20,21 +20,21 @@
 
 namespace Bookcase {
 
-typedef QMap<Data::Collection::CollectionType, QString> CollectionNameMap;
+typedef QMap<Data::Collection::Type, QString> CollectionNameMap;
 
 /**
  * A factory class for dealing with the different types of collections.
  *
  * @author Robby Stephenson
- * @version $Id: collectionfactory.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: collectionfactory.h 652 2004-05-11 04:57:03Z robby $
  */
 class CollectionFactory {
 public:
-  static Data::Collection* collection(Data::Collection::CollectionType type, bool addFields);
+  static Data::Collection* collection(Data::Collection::Type type, bool addFields);
   static Data::Collection* collection(const QString& entryName, bool addFields);
-  static Data::FieldList defaultFields(Data::Collection::CollectionType type);
+  static Data::FieldList defaultFields(Data::Collection::Type type);
   static CollectionNameMap nameMap();
-  static QString entryName(Data::Collection::CollectionType type);
+  static QString entryName(Data::Collection::Type type);
 };
 
 } // end namespace

@@ -25,7 +25,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imagefactory.h 657 2004-05-13 04:52:31Z robby $
+ * @version $Id: imagefactory.h 669 2004-05-20 04:04:00Z robby $
  */
 class ImageFactory {
 public:
@@ -34,9 +34,10 @@ public:
    * @ref ImageWidget.
    *
    * @param url The URL of the image, anything KIO can handle
+   * @param quiet If any error should not be reported.
    * @return The image
    */
-  static const Data::Image& addImage(const KURL& url);
+  static const Data::Image& addImage(const KURL& url, bool quiet=false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't

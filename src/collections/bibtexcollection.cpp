@@ -13,6 +13,7 @@
 
 #include "bibtexcollection.h"
 #include "../collectionfactory.h"
+#include "../latin1literal.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -272,29 +273,29 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
     QString name = field->name();
 
     // this first group has bibtex field names the same as their own field name
-    if(name == QString::fromLatin1("title")
-       || name == QString::fromLatin1("author")
-       || name == QString::fromLatin1("editor")
-       || name == QString::fromLatin1("edition")
-       || name == QString::fromLatin1("publisher")
-       || name == QString::fromLatin1("isbn")
-       || name == QString::fromLatin1("lccn")
-       || name == QString::fromLatin1("url")
-       || name == QString::fromLatin1("language")
-       || name == QString::fromLatin1("pages")
-       || name == QString::fromLatin1("series")) {
+    if(name == Latin1Literal("title")
+       || name == Latin1Literal("author")
+       || name == Latin1Literal("editor")
+       || name == Latin1Literal("edition")
+       || name == Latin1Literal("publisher")
+       || name == Latin1Literal("isbn")
+       || name == Latin1Literal("lccn")
+       || name == Latin1Literal("url")
+       || name == Latin1Literal("language")
+       || name == Latin1Literal("pages")
+       || name == Latin1Literal("series")) {
       field->setProperty(bibtex, name);
-    } else if(name == QString::fromLatin1("series_num")) {
+    } else if(name == Latin1Literal("series_num")) {
       field->setProperty(bibtex, QString::fromLatin1("number"));
-    } else if(name == QString::fromLatin1("pur_price")) {
+    } else if(name == Latin1Literal("pur_price")) {
       field->setProperty(bibtex, QString::fromLatin1("price"));
-    } else if(name == QString::fromLatin1("cr_year")) {
+    } else if(name == Latin1Literal("cr_year")) {
       field->setProperty(bibtex, QString::fromLatin1("year"));
-    } else if(name == QString::fromLatin1("bibtex-id")) {
+    } else if(name == Latin1Literal("bibtex-id")) {
       field->setProperty(bibtex, QString::fromLatin1("key"));
-    } else if(name == QString::fromLatin1("keyword")) {
+    } else if(name == Latin1Literal("keyword")) {
       field->setProperty(bibtex, QString::fromLatin1("keywords"));
-    } else if(name == QString::fromLatin1("comments")) {
+    } else if(name == Latin1Literal("comments")) {
       field->setProperty(bibtex, QString::fromLatin1("note"));
     }
     coll->addField(field);
@@ -308,7 +309,7 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
     next = list.next();
     if(coll->fieldByName(cur->name()) == 0 && (cur->flags() & Field::NoDelete)) {
       // but don't add a Bibtex Key if there's already a bibtex-id
-      if(static_cast<Field*>(cur)->property(bibtex) != QString::fromLatin1("key")
+      if(static_cast<Field*>(cur)->property(bibtex) != Latin1Literal("key")
          || coll->fieldByName(QString::fromLatin1("bibtex-id")) == 0) {
         coll->addField(cur);
       }
@@ -357,3 +358,5 @@ void BibtexCollection::citeEntries(QFile& lyxpipe_, const EntryList& list_) {
 //  ts << "LYXSRV:bookcase:bye\n";
   lyxpipe_.flush();
 }
+
+#include "bibtexcollection.moc"

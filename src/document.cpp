@@ -12,13 +12,15 @@
  ***************************************************************************/
 
 #include "document.h"
-#include "mainwindow.h"
+#include "mainwindow.h" // needed for loading progress
 #include "entryitem.h" // needed for searching
 #include "collectionfactory.h"
 #include "translators/bookcaseimporter.h"
 #include "translators/bookcasezipexporter.h"
 #include "filehandler.h"
+#include "controller.h"
 #include "utils.h" // needed for macro expansion
+#include "kernel.h"
 
 #include <kdebug.h>
 #include <kmessagebox.h>
@@ -29,13 +31,11 @@
 #include <klineeditdlg.h>
 #endif
 
-#include <qwidget.h>
-#include <qstring.h>
 #include <qregexp.h>
 
 using Bookcase::Data::Document;
 
-Document::Document(MainWindow* parent_, const char* name_/*=0*/)
+Document::Document(QObject* parent_, const char* name_/*=0*/)
     : QObject(parent_, name_), m_coll(0), m_isModified(false) {
   newDocument(Collection::Book);
 }
@@ -68,9 +68,8 @@ bool Document::newDocument(int type_) {
 //  kdDebug() << "Document::newDocument()" << endl;
   deleteContents();
 
-  m_coll = CollectionFactory::collection(static_cast<Collection::CollectionType>(type_), true);
+  m_coll = CollectionFactory::collection(static_cast<Collection::Type>(type_), true);
 
-  emit signalCollectionAdded(m_coll);
   slotSetModified(false);
   KURL url;
   url.setFileName(i18n("Untitled"));
@@ -80,7 +79,7 @@ bool Document::newDocument(int type_) {
 }
 
 bool Document::openDocument(const KURL& url_) {
-  MainWindow* bookcase = static_cast<MainWindow*>(parent());
+  MainWindow* bookcase = dynamic_cast<MainWindow*>(Kernel::self()->widget());
 
   Import::BookcaseImporter importer(url_);
   connect(&importer, SIGNAL(signalFractionDone(float)),
@@ -103,7 +102,7 @@ bool Document::saveModified() {
   bool completed = true;
 
   if(m_isModified) {
-    MainWindow* app = static_cast<MainWindow*>(parent());
+    MainWindow* app = dynamic_cast<MainWindow*>(Kernel::self()->widget());
     QString str = i18n("The current file has been modified.\n"
                        "Do you want to save it?");
     int want_save = KMessageBox::warningYesNoCancel(app, str, i18n("Warning!"),
@@ -139,8 +138,9 @@ bool Document::saveModified() {
 }
 
 bool Document::saveDocument(const KURL& url_) {
-  // will always save as zip file, not matter if has images or not
-  Export::BookcaseZipExporter exporter(m_coll, m_coll->entryList());
+  // will always save as zip file, no matter if has images or not
+  Export::BookcaseZipExporter exporter(m_coll);
+  exporter.setEntryList(m_coll->entryList());
   QByteArray data = exporter.data(false);
   bool success = FileHandler::writeDataURL(url_, data);
 
@@ -174,7 +174,7 @@ void Document::addCollection(Collection* coll_) {
 
   delete m_coll;
   m_coll = coll_;
-  emit signalCollectionAdded(coll_);
+  Controller::self()->slotCollectionAdded(coll_);
 
   slotSetModified(true);
 }
@@ -188,7 +188,7 @@ void Document::deleteCollection(Collection* coll_) {
     kdDebug() << "Document::slotDeleteCollection() - pointers don't match" << endl;
   }
 //  kdDebug() << "Document::slotDeleteCollection() - deleting " << coll_->title() << endl;
-  emit signalCollectionDeleted(m_coll);
+  Controller::self()->slotCollectionDeleted(m_coll);
   delete m_coll;
   m_coll = 0;
 
@@ -210,7 +210,7 @@ void Document::replaceCollection(Collection* coll_) {
   setURL(url);
 
   m_coll = coll_;
-  emit signalCollectionAdded(m_coll);
+  Controller::self()->slotCollectionAdded(m_coll);
 
   slotSetModified(true);
 }
@@ -220,7 +220,9 @@ void Document::appendCollection(Collection* coll_) {
     return;
   }
 
-  if(coll_->collectionType() != m_coll->collectionType()) {
+  // only append if match, but special case importing books into bibliographies
+  if(coll_->type() != m_coll->type()
+     || (m_coll->type() == Collection::Bibtex && coll_->type() == Collection::Book)) {
     kdWarning() << "Document::appendCollection() - appended collections must "
                    "be the same type!" << endl;
     return;
@@ -238,8 +240,8 @@ void Document::appendCollection(Collection* coll_) {
   m_coll->blockSignals(false);
   // easiest thing is to signal collection deleted, then added?
   // FIXME: fixme Signals for delete collection and then added are yucky
-  emit signalCollectionDeleted(m_coll);
-  emit signalCollectionAdded(m_coll);
+  Controller::self()->slotCollectionDeleted(m_coll);
+  Controller::self()->slotCollectionAdded(m_coll);
 
   slotSetModified(true);
 }
@@ -249,7 +251,9 @@ void Document::mergeCollection(Collection* coll_) {
     return;
   }
 
-  if(coll_->collectionType() != m_coll->collectionType()) {
+  // only append if match, but special case importing books into bibliographies
+  if(coll_->type() != m_coll->type()
+     || (m_coll->type() == Collection::Bibtex && coll_->type() == Collection::Book)) {
     kdWarning() << "Document::mergeCollection() - merged collections must "
                    "be the same type!" << endl;
     return;
@@ -277,8 +281,8 @@ void Document::mergeCollection(Collection* coll_) {
   m_coll->blockSignals(false);
   // easiest thing is to signal collection deleted, then added?
   // FIXME: fixme Signals for delete collection and then added are yucky
-  emit signalCollectionDeleted(m_coll);
-  emit signalCollectionAdded(m_coll);
+  Controller::self()->slotCollectionDeleted(m_coll);
+  Controller::self()->slotCollectionAdded(m_coll);
 
   slotSetModified(true);
 }
@@ -301,7 +305,7 @@ void Document::saveEntry(Entry* entry_) {
 
 //  kdDebug() << "Document::slotSaveEntry() - modifying an existing entry." << endl;
   entry_->collection()->updateDicts(entry_);
-  emit signalEntryModified(entry_);
+  Controller::self()->slotEntryModified(entry_);
 
   slotSetModified(true);
 }
@@ -312,7 +316,7 @@ void Document::slotAddEntry(Entry* entry_) {
   }
 
   entry_->collection()->addEntry(entry_);
-  emit signalEntryAdded(entry_);
+  Controller::self()->slotEntryAdded(entry_);
   slotSetModified(true);
 }
 
@@ -322,14 +326,15 @@ void Document::slotDeleteEntry(Entry* entry_) {
   }
 
   // must emit the signal before the entry is deleted since otherwise, the pointer is null
-  emit signalEntryDeleted(entry_);
+  Controller::self()->slotEntryDeleted(entry_);
   bool deleted = entry_->collection()->deleteEntry(entry_);
 
   if(deleted) {
     slotSetModified(true);
   } else {
     // revert the signal???
-    emit signalEntryAdded(entry_);
+    kdWarning() << "Document::slotDeleteEntry() - unsuccessful delete" << endl;
+    Controller::self()->slotEntryAdded(entry_);
     slotSetModified(false);
   }
 }
@@ -346,12 +351,12 @@ void Document::slotRenameCollection() {
   if(ok) {
     m_coll->setTitle(newName);
     slotSetModified(true);
-    emit signalCollectionRenamed(newName);
+    Controller::self()->slotCollectionRenamed(newName);
   }
 }
 
 bool Document::isEmpty() const {
-  //an empty doc may contain a collection, but no units
+  //an empty doc may contain a collection, but no entries
   return (m_coll == 0 || m_coll->entryList().isEmpty());
 }
 
@@ -454,7 +459,7 @@ void Document::search(const QString& text_, const QString& attTitle_, int option
       // if a entry is found, emit selected signal and return
       if(found) {
 //        kdDebug() << "\tfound " << entry->field(field->name()) << endl;
-        emit signalEntrySelected(entry, matchedText);
+        Controller::self()->slotUpdateSelection(entry, matchedText);
         return;
       }
 
@@ -481,3 +486,5 @@ void Document::search(const QString& text_, const QString& attTitle_, int option
   // if this point is reached, no match was found
   KMessageBox::information(app, i18n("Search string '%1' not found.").arg(text_));
 }
+
+#include "document.moc"

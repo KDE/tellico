@@ -1,0 +1,207 @@
+/***************************************************************************
+    copyright            : (C) 2002-2004 by Robby Stephenson
+    email                : robby@periapsis.org
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
+ *                                                                         *
+ ***************************************************************************/
+
+#include "entryiconview.h"
+#include "collection.h"
+#include "imagefactory.h"
+#include "controller.h"
+
+#include <kglobal.h>
+#include <kiconloader.h>
+#include <kdebug.h>
+#include <kpopupmenu.h>
+#include <kstringhandler.h>
+
+static const unsigned MIN_ENTRY_ICON_SIZE = 32;
+static const unsigned MAX_ENTRY_ICON_SIZE = 128;
+static const unsigned ENTRY_ICON_SIZE_PAD = 4;
+
+using Bookcase::EntryIconView;
+using Bookcase::EntryIconViewItem;
+
+EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
+    : KIconView(parent_, name_), m_coll(0), m_group(0), m_maxIconWidth(MAX_ENTRY_ICON_SIZE) {
+  setAutoArrange(true);
+  setSorting(true);
+  setSpacing(10);
+  setItemsMovable(false);
+  setSelectionMode(Extended);
+  setResizeMode(QIconView::Adjust);
+  setMode(Select);
+  setSpacing(4);
+
+  m_defaultPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("bookcase"), KIcon::User);
+
+  m_itemMenu = new KPopupMenu(this);
+  Controller::self()->plugEntryActions(m_itemMenu);
+
+  connect(this, SIGNAL(selectionChanged()), SLOT(slotSelectionChanged()));
+  connect(this, SIGNAL(doubleClicked(QIconViewItem*)), SLOT(slotDoubleClicked(QIconViewItem*)));
+  connect(this, SIGNAL(contextMenuRequested(QIconViewItem*, const QPoint&)),
+          SLOT(slotShowContextMenu(QIconViewItem*, const QPoint&)));
+}
+
+void EntryIconView::findImageField() {
+  if(!m_coll && (!m_group || m_group->isEmpty())) {
+    m_imageField.truncate(0);
+    return;
+  }
+  const Data::FieldList& list = m_coll ? m_coll->fieldList() : m_group->getFirst()->collection()->fieldList();
+  for(Data::FieldListIterator it(list); it.current(); ++it) {
+    if(it.current()->type() == Data::Field::Image) {
+      m_imageField = it.current()->name();
+      break;
+    }
+  }
+//  kdDebug() << "EntryIconView::findImageField() - image field = " << m_imageField << endl;
+}
+
+const QString& EntryIconView::imageField() {
+  if(m_imageField.isEmpty()) {
+    findImageField();
+  }
+  return m_imageField;
+}
+
+void EntryIconView::setMaxIconWidth(const unsigned& width_) {
+  m_maxIconWidth = QMAX(MIN_ENTRY_ICON_SIZE, QMIN(MAX_ENTRY_ICON_SIZE, width_));
+  refresh();
+}
+
+void EntryIconView::fillView(const Data::EntryList& list_) {
+  setSorting(false);
+  setGridX(m_maxIconWidth + 2*ENTRY_ICON_SIZE_PAD); // set default spacing initially
+  int maxWidth = MIN_ENTRY_ICON_SIZE;
+  QIconViewItem* item;
+  for(Data::EntryListIterator it(list_); it.current(); ++it) {
+    item = new EntryIconViewItem(this, it.current());
+    maxWidth = QMAX(maxWidth, item->width());
+  }
+  setGridX(maxWidth + 2*ENTRY_ICON_SIZE_PAD); // the pad is so the text can be wider than the icon
+  sort();
+  setSorting(true);
+}
+
+void EntryIconView::refresh() {
+  findImageField();
+  if(m_coll) {
+    showCollection(m_coll);
+  } else if(m_group) {
+    showEntryGroup(m_group);
+  }
+}
+
+void EntryIconView::clear() {
+  QIconView::clear();
+  m_coll = 0;
+  m_group = 0;
+  m_imageField.truncate(0);
+}
+
+void EntryIconView::showCollection(const Data::Collection* coll_) {
+  clear();
+  if(!coll_) {
+    return;
+  }
+  m_coll = coll_;
+  fillView(coll_->entryList());
+}
+
+void EntryIconView::showEntryGroup(const Data::EntryGroup* group_) {
+  clear();
+  if(!group_) {
+    return;
+  }
+  m_group = group_;
+  fillView(*group_);
+}
+
+void EntryIconView::addEntry(Data::Entry* entry_) {
+  new EntryIconViewItem(this, entry_);
+}
+
+void EntryIconView::removeEntry(Data::Entry* entry_) {
+  for(QIconViewItem* item = firstItem(); item; item = item->nextItem()) {
+    if(static_cast<EntryIconViewItem*>(item)->entry() == entry_) {
+      m_selectedItems.removeRef(static_cast<EntryIconViewItem*>(item));
+      delete item;
+      arrangeItemsInGrid();
+      break;
+    }
+  }
+}
+
+void EntryIconView::slotSelectionChanged() {
+  const QPtrList<EntryIconViewItem>& items = selectedItems();
+  Data::EntryList list;
+  for(QPtrListIterator<EntryIconViewItem> it(items); it.current(); ++it) {
+    list.append(it.current()->entry());
+  }
+  Controller::self()->slotUpdateSelection(this, list);
+}
+
+void EntryIconView::slotDoubleClicked(QIconViewItem* item_) {
+  EntryIconViewItem* i = static_cast<EntryIconViewItem*>(item_);
+  if(i) {
+    Controller::self()->editEntry(*i->entry());
+  }
+}
+
+void EntryIconView::updateSelected(EntryIconViewItem* item_, bool s_) const {
+  if(s_) {
+    m_selectedItems.append(item_);
+  } else {
+    m_selectedItems.removeRef(item_);
+  }
+}
+
+void EntryIconView::slotShowContextMenu(QIconViewItem* item_, const QPoint& point_) {
+  if(item_ && m_itemMenu->count() > 0) {
+    m_itemMenu->popup(point_);
+  }
+}
+
+EntryIconViewItem::EntryIconViewItem(EntryIconView* parent_, Data::Entry* entry_)
+    : KIconViewItem(parent_, entry_->title()), m_entry(entry_) {
+  const QString& imageField = parent_->imageField();
+  if(imageField.isEmpty()) {
+    setPixmap(parent_->defaultPixmap());
+  } else {
+    const Data::Image& img = ImageFactory::imageById(entry_->field(imageField));
+    if(img.isNull()) {
+      setPixmap(parent_->defaultPixmap());
+    } else {
+      setPixmap(img.convertToPixmap(parent_->maxIconWidth(), parent_->maxIconWidth()));
+    }
+  }
+}
+
+EntryIconViewItem::~EntryIconViewItem() {
+  // be sure to remove from selected list when it's deleted
+  EntryIconView* v = static_cast<EntryIconView*>(iconView());
+  if(v) {
+    v->updateSelected(this, false);
+  }
+}
+
+void EntryIconViewItem::setSelected(bool s_) {
+  setSelected(s_, false);
+}
+
+void EntryIconViewItem::setSelected(bool s_, bool cb_) {
+  EntryIconView* v = static_cast<EntryIconView*>(iconView());
+  v->updateSelected(this, s_);
+  KIconViewItem::setSelected(s_, cb_);
+}
+
+#include "entryiconview.moc"

@@ -1,7 +1,42 @@
 <chapter id="importing-exporting">
 <title>Importing and Exporting Data</title>
 
-<para>&bookcase; is able to import and export a wide variety of data.</para>
+<para>
+&bookcase; is able to import and export a wide variety of data files, as well as search various Internet sites for information.
+</para>
+
+<sect1 id="internet-search">
+<title>Importing from the Internet</title>
+<para>
+&bookcase; is able to search various Internet sites using the &fetch-dialog;. Entries may be directly imported and added to your current collection. Currently, the only available sites to search are the various ones associated with <ulink url="http://amazon.com">Amazon.com</ulink>.
+</para>
+
+<para>
+Searches may use four different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, or <guilabel>Keyword</guilabel>. Once a search is initiated, the <guilabel>Search</guilabel> button becomes <guilabel>Stop</guilabel> which will end a search. As results are found, they are added to the list directly under the search box, and selecting an item will show the result without adding it to the collection. Clicking the <guilabel>Add Entry</guilabel> button will add all the selected items to your collection. Clicking <guilabel>Clear</guilabel> will remove all the current results and reset the search.
+</para>
+
+<para>
+To facilitate the use of barcode scanners, searches can include multiple ISBN values, up to 10 at once. Selecting the <guilabel>Multiple ISBN search</guilabel> checkbox will disable the search box and enable the <guilabel>Edit ISBN list...</guilabel> button, which will open a multi-line text entry box. Each ISBN should be entered on a line by itself. After closing the box, each ISBN will be validated for correct formatting. The ISBN validation is able to convert 13-digit EAN values, as well as full <acronym>UPC</acronym> codes, to the proper formatting.
+</para>
+
+<screenshot>
+<screeninfo>The &bookcase; &fetch-dialog;</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
+<textobject><phrase>The &bookcase; &fetch-dialog;</phrase></textobject>
+<caption><para>The &bookcase; &fetch-dialog;</para></caption>
+</mediaobject>
+</screenshot>
+
+<sect2 id="amazon-com">
+<title>Amazon.com</title>
+
+<para>
+Using the Amazon Web Services, &bookcase; can search four different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, and Japan. You can also <link linkend="hidden-amazon-web-services">change the settings for accessing the Amazon Web Services</link>.
+</para>
+</sect2>
+
+</sect1>
 
 <sect1 id="importing">
 <title>Importing Data</title>
@@ -39,11 +74,20 @@ First, select the type of collection that you are importing. If you are appendin
 </para>
 
 <para>
-In order for &bookcase; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the dropdown list and clicking the <guibutton>Set</guibutton> button. If you need to add a new field to the collection, the last item in the dropdown list opens the  <link linkend="fields-dialog">&fields-dialog;</link>.
+In order for &bookcase; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the dropdown list and clicking the <guibutton>Assign Field</guibutton> button. If you need to add a new field to the collection, the last item in the dropdown list opens the  <link linkend="fields-dialog">&fields-dialog;</link>.
 </para>
 
 <para>
 Only the first five lines of the imported CSV file are shown in the dialog.
+</para>
+
+</sect2>
+
+<sect2 id="importing-mods">
+<title>Importing MODS Data</title>
+
+<para>
+<acronym><ulink url="http://www.loc.gov/standards/mods/">MODS</ulink></acronym> is a format for representing various types of media collections. Currently, only books may be imported to &bookcase;.
 </para>
 
 </sect2>
@@ -83,14 +127,27 @@ Any XML file may be imported into &bookcase; provided an XSL stylesheet is avail
 <title>Exporting Data</title>
 
 <para>
-To be written...
+When exporting the data in the collection, the entry values may be exported as entered, or with the <link linkend="field-formatting">automatic formatting</link> provided by &bookcase;. Additionally, the export may be limited to the currently selected entries of the collection as well, where the <link linkend="status-bar">statusbar</link> shows the number of selected entries.
 </para>
+
+<para>
+Exported text files, such as Bibtex or CSV, may use the Unicode (UTF-8) character encoding, or the current locale of the operating system.
+</para>
+
+<screenshot>
+<screeninfo>General Export Options</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="export-options.png"/></imageobject>
+<textobject><phrase>General Export Options</phrase></textobject>
+<caption><para>General Export Options</para></caption>
+</mediaobject>
+</screenshot>
 
 <sect2 id="exporting-xml">
 <title>Exporting XML</title>
 
 <para>
-The file format for &bookcase; data is a zipped XML file. Exporting to XML merely skips the zip compression. Images may be included in the XML file as base64-encoded data in image elements.
+The file format for &bookcase; data is a zipped XML file. Exporting to XML merely creates the XML file without zipping it. Images may be included in the XML file as base64-encoded data in an image element.
 </para>
 </sect2>
 
@@ -98,14 +155,42 @@ The file format for &bookcase; data is a zipped XML file. Exporting to XML merel
 <title>Exporting HTML</title>
 
 <para>
+The HTML export uses the <filename>bookcase2html.xsl</filename> stylesheet. Images are exported to a folder with the same name as the exported HTML file with <emphasis><filename>-images</filename></emphasis> appended.
 </para>
+
+<para>
+The default format is similar to the printed output, and allows various options for modifying the HTML. Field headers may be printed at the top of each column, but unfortunately, &kde; does not yet allow the table headers to be be repeated on each page. The entries may be grouped as in the &group-view;, as well.
+</para>
+
+<para>
+Additionally, individual files may be created for each entry in the collection, with links created in the top-level HTML file. The entry files will be created in a folder with the same name as the exported HTML file, with <emphasis><filename>-entries</filename></emphasis> appended. The entry HTML files will use the current stylesheet template, as shown in the &entry-view;.
+</para>
+
+<screenshot>
+<screeninfo>HTML Export Options</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="export-html.png"/></imageobject>
+<textobject><phrase>HTML Export Options</phrase></textobject>
+<caption><para>HTML Export Options</para></caption>
+</mediaobject>
+</screenshot>
 </sect2>
 
 <sect2 id="exporting-csv">
 <title>Exporting CSV</title>
 
 <para>
+Comma-separated values (CSV) are a common way of importing and exporting tabular data. Each field value is separated by a comma, with one entry per line. The field titles may be included as headers in the first line. Any character or string other than a comma may also be used to delimit the fields.
 </para>
+
+<screenshot>
+<screeninfo>CSV Export Options</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="export-csv.png"/></imageobject>
+<textobject><phrase>CSV Export Options</phrase></textobject>
+<caption><para>CSV Export Options</para></caption>
+</mediaobject>
+</screenshot>
 </sect2>
 
 <sect2 id="exporting-pilotdb">
@@ -133,6 +218,7 @@ The file format for &bookcase; data is a zipped XML file. Exporting to XML merel
 <title>Exporting XML via XSLT</title>
 
 <para>
+Finally, &bookcase; is able to process its internal XML representation of the collection data through an external XSL stylesheet before exporting. This type of export may be useful for generating text reports or other file types.
 </para>
 </sect2>
 

@@ -85,3 +85,5 @@ void LineEditAction::unplug(QWidget* widget_) {
 void LineEditAction::clear() {
   m_lineEdit->clear();
 }
+
+#include "labelaction.moc"

@@ -30,26 +30,8 @@ You can use the &quick-filter; in the toolbar to quickly limit the visible entri
 
 </sect1>
 
-<!--
-
-<para>It slices! It dices! and it comes with a free toaster!</para>
-<para>
-The Squiggle Tool <guiicon><inlinemediaobject>
-	  <imageobject>
-	    <imagedata fileref="squiggle.png" format="PNG"/>
-	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="squiggle.eps" format="EPS"/>
-	  </imageobject>
-	  <textobject>
-	    <phrase>Squiggle</phrase>
-	  </textobject>
-</inlinemediaobject></guiicon> is used to draw squiggly lines all over
-the &bookcase; main window. It's not a bug, it's a feature!
-</para>
--->
 <sect1 id="main-window">
-<title>Main Window</title>
+<title>General Usage</title>
 
 <para>
 The main window has three distinct areas, all of which show information about the collection
@@ -57,7 +39,7 @@ in a different manner. The primary view is the <link linkend="detailed-view">&de
 the upper right area, where the value of every field for each entry may be shown. On the left side, the
 <link linkend="group-view">&group-view;</link> can be used to sort the entries into groups in a
 tree-structure. Finally, the <link linkend="entry-view">&entry-view;</link> shows a formatted view
-of the data for a single entry in the lower left.
+of the data for a single entry, or an icon view of a group of entries, in the lower left.
 </para>
 
 <screenshot>
@@ -96,6 +78,11 @@ When more than one field in the collection has <link linkend="fields-dialog"><gu
 <para>
 A formatted representation of the entry's values is shown in the &entry-view;. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options">&config-dialog;</link>. The default templates make &URL; fields active, which will open up with the default &kde; association. Some template allow you to open images, as well. When exporting to <acronym>HTML</acronym>, the current template is used for exporting the individual entry files.
 </para>
+
+<para>
+In addition, when the collection or a group item is selected in the &group-view;, an icon view of the entries is show, using the first <link linkend="image">Image field</link> in the collection. Entries may be selected as in the &detailed-view;.
+</para>
+
 </sect2>
 
 <sect2 id="status-bar">
@@ -109,10 +96,10 @@ The statusbar is used to show you what &bookcase; is currently doing. It also in
 </sect1>
 
 <sect1 id="entry-editor">
-<title>&entry-editor;</title>
+<title>Editing Entries</title>
 
 <para>
-The &entry-editor; is used to add and modify entries in the collection. Double-clicking on an entry in either the &group-view; or the &detailed-view; opens the &entry-editor; with that entry. New entries may be created either using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself. Closing the &entry-editor; when changes have been made but not saved will cause a warning message to appear. The fields are grouped by Category and appear in the order that they appear in the in the <link linkend="fields-dialog">&fields-dialog;</link>. They may also be reordered.
+The &entry-editor; is used to add and modify entries in the collection. Double-clicking on an entry in either the &group-view; or the &detailed-view; opens the &entry-editor; with that entry. New entries may be created either using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself. Closing the &entry-editor; when changes have been made but not saved will cause a warning message to appear. The fields are grouped by Category and appear in the order that they appear in the <link linkend="fields-dialog">&fields-dialog;</link>. They may also be reordered.
 </para>
 
 <screenshot>
@@ -164,7 +151,7 @@ Multiple entries may be edited at the same time by selecting more than one in ei
 </sect1>
 
 <sect1 id="fields-dialog">
-<title>&fields-dialog;</title>
+<title>Editing Fields</title>
 
 <para>
 The &fields-dialog; allows you to add new fields to the collection, to modify the existing ones, or to delete fields altogether.
@@ -191,7 +178,7 @@ On the left side of the dialog is the list of the current fields. Modified field
 <title>Field Properties</title>
 
 <para>
-A field is defined by its title, type, category, description, and possibly some allowed values. The title is used everywhere to refer to the field in the user interface. The &entry-editor; uses it to prompt for values. The &detailed-view; uses it as a column header. The ten different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the &entry-editor;, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
+A field is defined by its title, type, category, description, and possibly some allowed values. The title is used everywhere to refer to the field in the user interface. The &entry-editor; uses it to prompt for values. The &detailed-view; uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the &entry-editor;, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
 </para>
 
 <para>
@@ -239,6 +226,10 @@ New fields may be any type, but changing the type of existing fields is restrict
 <row>
 <entry><emphasis>Image</emphasis></entry>
 <entry><emphasis>Image</emphasis></entry>
+</row>
+<row>
+<entry><emphasis>Date</emphasis></entry>
+<entry><emphasis>Simple Text</emphasis>, <emphasis>Date</emphasis></entry>
 </row>
 <row>
 <entry><emphasis>Dependent</emphasis></entry>
@@ -299,14 +290,14 @@ Fields also have three general options. If auto-completion is enabled, &bookcase
 </para>
 
 <para>
-For efficiency, do not enable auto-completion unless you need it for the fields. The more field with auto-completion in the collection, the slower it takes &bookcase; to load the file.
+For efficiency, do not enable auto-completion unless you need it for the fields. The more fields with auto-completion in the collection, the slower it takes &bookcase; to load the file.
 </para>
 
 </sect2>
 </sect1>
 
 <sect1 id="filter-dialog">
-<title>&filter-dialog;</title>
+<title>Filtering Entries</title>
 <para>
 The &filter-dialog; allows you to limit the entries visible in the <link linkend="detailed-view">&detailed-view;</link> to those that match one or more filter rules.
 </para>

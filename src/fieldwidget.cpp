@@ -17,6 +17,8 @@
 #include "utils.h"
 #include "imagewidget.h"
 #include "fieldcompletion.h"
+#include "datewidget.h"
+#include "latin1literal.h"
 
 #include <kcompletion.h>
 #include <kdebug.h>
@@ -42,7 +44,8 @@ const QRegExp FieldWidget::s_semiColon = QRegExp(QString::fromLatin1("\\s*;\\s*"
 const QRegExp FieldWidget::s_comma = QRegExp(QString::fromLatin1("\\s*,\\s*"));
 
 FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, const char* name_/*=0*/)
-    : QWidget(parent_, name_), m_type(field_->type()), m_run(0) {
+    : QWidget(parent_, name_), m_type(field_->type()), m_run(0),
+      m_allowMultiple(field_->flags() & Data::Field::AllowMultiple) {
   QHBoxLayout* l = new QHBoxLayout(this, 0, 4); // parent, margin, spacing
   l->addSpacing(4);
 
@@ -64,7 +67,8 @@ FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, cons
                || m_type == Data::Field::URL
                || m_type == Data::Field::Table
                || m_type == Data::Field::Table2
-               || m_type == Data::Field::Image);
+               || m_type == Data::Field::Image
+               || m_type == Data::Field::Date);
 
   switch (m_type) {
     case Data::Field::Line:
@@ -83,7 +87,7 @@ FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, cons
           kl->setAutoDeleteCompletionObject(true);
         }
 
-        if(field_->name() == QString::fromLatin1("isbn")) {
+        if(field_->name() == Latin1Literal("isbn")) {
           kl->setValidator(new ISBNValidator(this));
         }
 
@@ -121,21 +125,23 @@ FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, cons
       break;
 
     case Data::Field::Number:
-      {
+      if(m_allowMultiple) {
         KLineEdit* kl = new KLineEdit(this);
         connect(kl, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
         // connect(kl, SIGNAL(returnPressed(const QString&)), this, SLOT(slotHandleReturn()));
 
-        if(field_->flags() & Data::Field::AllowMultiple) {
-          // regexp is any number of digits followed optionally by any number of
-          // groups of a semi-colon followed optionally by a space, followed by digits
-          QRegExp rx(QString::fromLatin1("-?\\d*(; ?-?\\d*)*"));
-          kl->setValidator(new QRegExpValidator(rx, this));
-        } else {
-          kl->setValidator(new QIntValidator(this));
-        }
-
+        // regexp is any number of digits followed optionally by any number of
+        // groups of a semi-colon followed optionally by a space, followed by digits
+        QRegExp rx(QString::fromLatin1("-?\\d*(; ?-?\\d*)*"));
+        kl->setValidator(new QRegExpValidator(rx, this));
         m_editWidget = kl;
+      } else {
+        // intentionally allow only positive numbers
+        SpinBox* sb = new SpinBox(-1, INT_MAX, this);
+        connect(sb, SIGNAL(valueChanged(int)), SIGNAL(modified()));
+        // I want to allow no value, so set space as special text. Empty text is ignored
+        sb->setSpecialValueText(QString::fromLatin1(" "));
+        m_editWidget = sb;
       }
       break;
 
@@ -200,6 +206,14 @@ FieldWidget::FieldWidget(const Data::Field* const field_, QWidget* parent_, cons
       }
       break;
 
+    case Data::Field::Date:
+      {
+        DateWidget* w = new DateWidget(this);
+        connect(w, SIGNAL(signalModified()), SIGNAL(modified()));
+        m_editWidget = w;
+      }
+      break;
+
     case Data::Field::ReadOnly:
       kdDebug() << "FieldWidget() - read-only field, this shouldn't have been called" << endl;
       break;
@@ -239,10 +253,20 @@ FieldWidget::~FieldWidget() {
 void FieldWidget::clear() {
   switch (m_type) {
     case Data::Field::Line:
-    case Data::Field::Number:
       {
         KLineEdit* kl = static_cast<KLineEdit*>(m_editWidget);
         kl->clear();
+      }
+      break;
+
+    case Data::Field::Number:
+      if(m_allowMultiple) {
+        KLineEdit* kl = static_cast<KLineEdit*>(m_editWidget);
+        kl->clear();
+      } else {
+        SpinBox* sb = static_cast<SpinBox*>(m_editWidget);
+        // show empty special value text
+        sb->setValue(sb->minValue());
       }
       break;
 
@@ -293,7 +317,15 @@ void FieldWidget::clear() {
       }
       break;
 
+    case Data::Field::Date:
+      {
+        DateWidget* w = static_cast<DateWidget*>(m_editWidget);
+        w->clear();
+      }
+      break;
+
     default:
+      kdDebug() << "FieldWidget::clear() - unknown field type : " << m_type << endl;
       break;
   }
 
@@ -305,7 +337,6 @@ QString FieldWidget::text() const {
 
   switch(m_type) {
     case Data::Field::Line:
-    case Data::Field::Number:
       {
         KLineEdit* kl = static_cast<KLineEdit*>(m_editWidget);
         text = kl->text();
@@ -315,13 +346,30 @@ QString FieldWidget::text() const {
       }
       break;
 
+    case Data::Field::Number:
+      if(m_allowMultiple) {
+        KLineEdit* kl = static_cast<KLineEdit*>(m_editWidget);
+        text = kl->text();
+        text.replace(s_semiColon, QString::fromLatin1("; "));
+        text.replace(s_comma, QString::fromLatin1(", "));
+        text.simplifyWhiteSpace();
+      } else {
+        SpinBox* sb = static_cast<SpinBox*>(m_editWidget);
+        // minValue = special empty text
+        if(sb->value() > sb->minValue()) {
+          text = QString::number(sb->value());
+        }
+      }
+      break;
+
     case Data::Field::Para:
       {
         QTextEdit* te = static_cast<QTextEdit*>(m_editWidget);
         text = te->text();
-        if(text.simplifyWhiteSpace().isEmpty()) {
-          text = QString();
-        }
+        text.replace('\n', QString::fromLatin1("<br/>"));
+//        if(text.simplifyWhiteSpace().isEmpty()) {
+//          text = QString();
+//        }
       }
       break;
 
@@ -387,7 +435,15 @@ QString FieldWidget::text() const {
       }
       break;
 
+    case Data::Field::Date:
+      {
+        DateWidget* w = static_cast<DateWidget*>(m_editWidget);
+        text = w->text();
+      }
+      break;
+
     default:
+      kdDebug() << "FieldWidget::text() - unknown field type : " << m_type << endl;
       break;
   }
   return text;
@@ -399,17 +455,36 @@ void FieldWidget::setText(const QString& text_) {
 
   switch (m_type) {
     case Data::Field::Line:
-    case Data::Field::Number:
       {
         KLineEdit* kl = static_cast<KLineEdit*>(m_editWidget);
         kl->setText(text_);
       }
       break;
 
+    case Data::Field::Number:
+      if(m_allowMultiple) {
+        KLineEdit* kl = static_cast<KLineEdit*>(m_editWidget);
+        kl->setText(text_);
+      } else {
+        SpinBox* sb = static_cast<SpinBox*>(m_editWidget);
+        bool ok;
+        int n = text_.toInt(&ok);
+        if(ok) {
+          // did just allow positive
+          if(n < 0) {
+            sb->setMinValue(INT_MIN+1);
+          }
+          sb->setValue(n);
+        }
+      }
+      break;
+
     case Data::Field::Para:
       {
         QTextEdit* te = static_cast<QTextEdit*>(m_editWidget);
-        te->setText(text_);
+        QString s = text_;
+        s.replace(QString::fromLatin1("<br/>"), QChar('\n'));
+        te->setText(s);
       }
       break;
 
@@ -478,7 +553,15 @@ void FieldWidget::setText(const QString& text_) {
       }
       break;
 
+    case Data::Field::Date:
+      {
+        DateWidget* w = static_cast<DateWidget*>(m_editWidget);
+        w->setDate(text_);
+      }
+      break;
+
     default:
+      kdDebug() << "FieldWidget::setText() - unknown field type : " << m_type << endl;
       break;
   }
 
@@ -612,3 +695,5 @@ void FieldWidget::updateField(Data::Field* newField_, Data::Field* oldField_) {
     }
   }
 }
+
+#include "fieldwidget.moc"

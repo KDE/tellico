@@ -19,6 +19,7 @@
 #include "bibtexhandler.h"
 #include "../collection.h"
 #include "../collections/bibtexcollection.h"
+#include "../latin1literal.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -37,11 +38,11 @@ QString BibtexmlExporter::formatString() const {
 }
 
 QString BibtexmlExporter::fileFilter() const {
-  return i18n("*.xml|Bibtexml files (*.xml)") + QString::fromLatin1("\n") + i18n("*|All files");
+  return i18n("*.xml|Bibtexml files (*.xml)") + QChar('\n') + i18n("*|All files");
 }
 
 QString BibtexmlExporter::text(bool formatFields_, bool encodeUTF8_) {
-  if(collection()->collectionType() != Data::Collection::Bibtex) {
+  if(collection()->type() != Data::Collection::Bibtex) {
     return QString::null;
   }
 
@@ -54,9 +55,9 @@ QString BibtexmlExporter::text(bool formatFields_, bool encodeUTF8_) {
   Data::FieldList fieldList;
   for(Data::FieldListIterator it(collection()->fieldList()); it.current(); ++it) {
     QString bibtex = it.current()->property(QString::fromLatin1("bibtex"));
-    if(bibtex == QString::fromLatin1("entry-type")) {
+    if(bibtex == Latin1Literal("entry-type")) {
       typeField = it.current()->name();
-    } else if(bibtex == QString::fromLatin1("key")) {
+    } else if(bibtex == Latin1Literal("key")) {
       keyField = it.current()->name();
     } else if(!bibtex.isEmpty()) {
       fieldList.append(it.current());
@@ -133,13 +134,13 @@ QString BibtexmlExporter::text(bool formatFields_, bool encodeUTF8_) {
       QString elemName = fieldIt.current()->property(QString::fromLatin1("bibtex"));
       // split text for author, editor, and keywords
       if(fieldIt.current()->flags() & Data::Field::AllowMultiple
-         && (elemName == QString::fromLatin1("author")
-             || elemName == QString::fromLatin1("editor")
-             || elemName == QString::fromLatin1("keywords"))) {
+         && (elemName == Latin1Literal("author")
+             || elemName == Latin1Literal("editor")
+             || elemName == Latin1Literal("keywords"))) {
         QString parElemName;
-        if(elemName == QString::fromLatin1("author")) {
+        if(elemName == Latin1Literal("author")) {
           parElemName = QString::fromLatin1("authorlist");
-        } else if(elemName == QString::fromLatin1("editor")) {
+        } else if(elemName == Latin1Literal("editor")) {
           parElemName = QString::fromLatin1("editorlist");
         } else { // keywords
           parElemName = QString::fromLatin1("keywords");

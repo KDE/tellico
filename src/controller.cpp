@@ -16,11 +16,14 @@
 #include "groupview.h"
 #include "detailedlistview.h"
 #include "entryeditdialog.h"
+#include "viewstack.h"
 #include "entryview.h"
+#include "entryiconview.h"
 #include "imagefactory.h"
 #include "filter.h"
 #include "filterdialog.h"
-
+#include "kernel.h"
+#include "latin1literal.h"
 #include "collection.h"
 #include "document.h"
 
@@ -31,16 +34,17 @@
 
 using Bookcase::Controller;
 
+Controller* Controller::s_self = 0;
+
 Controller::Controller(MainWindow* parent_, const char* name_)
-    : QObject(parent_, name_), m_mainWindow(parent_) {
+    : QObject(parent_, name_), m_mainWindow(parent_), m_working (false) {
 }
 
-void Controller::setWidgets(GroupView* groupView_, DetailedListView* detailedView_,
-                            EntryEditDialog* editDialog_, EntryView* entryView_) {
-  m_groupView = groupView_;
-  m_detailedView = detailedView_;
-  m_editDialog = editDialog_;
-  m_entryView = entryView_;
+void Controller::initWidgets() {
+  m_groupView = m_mainWindow->m_groupView;
+  m_detailedView = m_mainWindow->m_detailedView;
+  m_editDialog = m_mainWindow->m_editDialog;
+  m_viewStack = m_mainWindow->m_viewStack;
 }
 
 void Controller::slotCollectionAdded(Data::Collection* coll_) {
@@ -70,6 +74,7 @@ void Controller::slotCollectionAdded(Data::Collection* coll_) {
 
   m_selectedEntries.clear();
   m_mainWindow->slotEntryCount();
+  updateActions();
 
   connect(coll_, SIGNAL(signalGroupModified(Bookcase::Data::Collection*, const Bookcase::Data::EntryGroup*)),
           m_groupView, SLOT(slotModifyGroup(Bookcase::Data::Collection*, const Bookcase::Data::EntryGroup*)));
@@ -93,7 +98,7 @@ void Controller::slotCollectionDeleted(Data::Collection* coll_) {
   m_mainWindow->saveCollectionOptions(coll_);
   m_groupView->removeCollection(coll_);
   m_detailedView->removeCollection(coll_);
-  m_entryView->clear();
+  m_viewStack->clear();
   blockAllSignals(false);
 
   // disconnect all signals from the collection to the controller
@@ -112,27 +117,30 @@ void Controller::slotEntryAdded(Data::Entry* entry_) {
 // the group view gets called from the groupModified signal
   m_detailedView->addEntry(entry_);
   m_editDialog->slotUpdateCompletions(entry_);
-  m_entryView->refresh();
+  m_viewStack->iconView()->addEntry(entry_);
 }
 
 void Controller::slotEntryModified(Data::Entry* entry_) {
 // the group view gets called from the groupModified signal
   m_detailedView->modifyEntry(entry_);
   m_editDialog->slotUpdateCompletions(entry_);
-  m_entryView->refresh();
+  m_viewStack->refresh();
 }
 
 void Controller::slotEntryDeleted(Data::Entry* entry_) {
 // the group view gets called from the groupModified signal
   m_detailedView->removeEntry(entry_);
   m_editDialog->clear();
-  m_entryView->clear();
+  if(entry_ == m_selectedEntries.getFirst()) {
+    m_viewStack->entryView()->clear();
+  }
+  m_viewStack->iconView()->removeEntry(entry_);
 }
 
 void Controller::slotFieldAdded(Data::Collection* coll_, Data::Field* field_) {
   m_editDialog->setLayout(coll_);
   m_detailedView->addField(field_, 0); // hide by default
-  m_entryView->refresh();
+  m_viewStack->refresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
 }
 
@@ -140,7 +148,7 @@ void Controller::slotFieldDeleted(Data::Collection* coll_, Data::Field* field_) 
 //  kdDebug() << "Controller::slotFieldDeleted() - " << field_->name() << endl;
   m_editDialog->removeField(field_);
   m_detailedView->removeField(field_);
-  m_entryView->refresh();
+  m_viewStack->refresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
 }
 
@@ -148,18 +156,57 @@ void Controller::slotFieldModified(Data::Collection* coll_, Data::Field* oldFiel
   m_editDialog->slotUpdateField(coll_, oldField_, newField_);
   m_detailedView->modifyField(oldField_, newField_);
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
-  m_entryView->refresh();
+  m_viewStack->refresh();
 }
 
 void Controller::slotFieldsReordered(Data::Collection* coll_) {
   m_editDialog->setLayout(coll_);
   m_detailedView->reorderFields(coll_->fieldList());
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
-  m_entryView->refresh();
+  m_viewStack->refresh();
+}
+
+void Controller::slotUpdateSelection(QWidget*, const Data::Collection* coll_) {
+  if(m_working) {
+    return;
+  }
+  m_working = true;
+
+  blockAllSignals(true);
+  m_detailedView->clearSelection();
+  m_editDialog->setContents(Data::EntryList());
+  m_viewStack->showCollection(coll_);
+  blockAllSignals(false);
+
+  m_mainWindow->m_copyEntry->setEnabled(false);
+  m_mainWindow->m_deleteEntry->setEnabled(false);
+  m_working = false;
+}
+
+void Controller::slotUpdateSelection(QWidget*, const Data::EntryGroup* group_) {
+  if(m_working) {
+    return;
+  }
+  m_working = true;
+
+  blockAllSignals(true);
+  m_detailedView->clearSelection();
+  m_editDialog->setContents(*group_);
+  m_viewStack->showEntryGroup(group_);
+  blockAllSignals(false);
+
+  m_selectedEntries = *group_;
+  updateActions();
+  m_mainWindow->slotEntryCount();
+  m_working = false;
 }
 
 void Controller::slotUpdateSelection(QWidget* widget_, const Data::EntryList& list_) {
-//  kdDebug() << "Controller::slotUpdateSelection() - " << list_.count() << endl;
+  if(m_working) {
+    return;
+  }
+  m_working = true;
+//  kdDebug() << "Controller::slotUpdateSelection() entryList - " << list_.count() << endl;
 
   blockAllSignals(true);
 // in the list view and group view, if entries are selected in one, clear selection in other
@@ -172,31 +219,37 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Data::EntryList& li
   if(widget_ != m_editDialog) {
     m_editDialog->setContents(list_);
   }
-  blockAllSignals(false);
   // entry view only shows one
-  m_entryView->showEntry(list_.getFirst());
-
-  if(list_.isEmpty()) {
-    m_mainWindow->m_copyEntry->setEnabled(false);
-    m_mainWindow->m_deleteEntry->setEnabled(false);
-  } else {
-    m_mainWindow->m_copyEntry->setEnabled(true);
-    m_mainWindow->m_deleteEntry->setEnabled(true);
+  if(widget_ != m_viewStack->iconView()) {
+    m_viewStack->iconView()->clearSelection();
+    if(widget_) {
+      m_viewStack->showEntry(list_.getFirst());
+    }
   }
+  blockAllSignals(false);
+
   m_selectedEntries = list_;
+  updateActions();
   m_mainWindow->slotEntryCount();
+  m_working = false;
 }
 
 void Controller::slotUpdateSelection(Data::Entry* entry_, const QString& highlight_) {
+  if(m_working) {
+    return;
+  }
+  m_working = true;
 //  kdDebug() << "Controller::slotUpdateSelection()" << endl;
 
   slotUpdateSelection(0, Data::EntryList());
   m_detailedView->setEntrySelected(entry_);
   m_groupView->setEntrySelected(entry_);
   m_editDialog->setContents(entry_, highlight_);
-  m_entryView->showEntry(entry_);
+  m_viewStack->showEntry(entry_);
   m_selectedEntries.clear();
   m_selectedEntries.append(entry_);
+  updateActions();
+  m_working = false;
 }
 
 void Controller::slotDeleteSelectedEntries() {
@@ -204,7 +257,10 @@ void Controller::slotDeleteSelectedEntries() {
     return;
   }
 
-  Data::EntryListIterator it(m_selectedEntries);
+  m_working = true;
+  // must iterate over a copy of the list
+  Data::EntryList entriesToDelete = m_selectedEntries;
+  Data::EntryListIterator it(entriesToDelete);
   // add a message box if multiple items are to be deleted
   if(m_selectedEntries.count() > 1) {
     QStringList names;
@@ -220,20 +276,39 @@ void Controller::slotDeleteSelectedEntries() {
     }
   }
 
+  // deleting more than one ends up clearing the selection, so keep a pointer
+/*
+  QListViewItem* curr = m_detailedView->currentItem();
+  EntryItem* item = 0;
+  if(curr) {
+    item = dynamic_cast<EntryItem*>(curr->nextSibling());
+  }
+*/
   for(it.toFirst(); it.current(); ++it) {
-    m_mainWindow->doc()->slotDeleteEntry(it.current());
+    Kernel::self()->doc()->slotDeleteEntry(it.current());
   }
   m_selectedEntries.clear();
-  slotUpdateSelection(0, m_selectedEntries);
+  updateActions();
+/*
+  // special case, the detailed list view selects the next item, so handle that
+  if(item && item->isSelected()) {
+    Data::EntryList newList;
+    newList.append(item->entry());
+    slotUpdateSelection(m_detailedView, newList);
+  } else {
+    slotUpdateSelection(0, Data::EntryList());
+  }
+  */
+  m_working = false;
 }
 
 void Controller::slotRefreshField(Data::Field* field_) {
   // group view only needs to refresh if it's the title
-  if(field_->name() == QString::fromLatin1("title")) {
-    m_groupView->populateCollection(m_mainWindow->doc()->collection());
+  if(field_->name() == Latin1Literal("title")) {
+    m_groupView->populateCollection(Kernel::self()->collection());
   }
   m_detailedView->slotRefresh();
-  m_entryView->refresh();
+  m_viewStack->refresh();
 }
 
 void Controller::slotCopySelectedEntries() {
@@ -241,24 +316,32 @@ void Controller::slotCopySelectedEntries() {
     return;
   }
 
-  // need a copy because the selected list changes
-  Data::EntryList list = m_selectedEntries;
-  m_mainWindow->doc()->slotSaveEntries(list);
-  m_selectedEntries = list;
-  slotUpdateSelection(0, Data::EntryList());
+  // keep copy of selected entries
+  Data::EntryList old = m_selectedEntries;
+
+  // need to create copies
+  Data::EntryList list;
+  for(Data::EntryListIterator it(m_selectedEntries); it.current(); ++it) {
+    list.append(new Data::Entry(*it.current()));
+  }
+  Kernel::self()->doc()->slotSaveEntries(list);
+  slotUpdateSelection(0, old);
 }
 
-void Controller::blockAllSignals(bool block_) {
+void Controller::blockAllSignals(bool block_) const {
   m_detailedView->blockSignals(block_);
   m_groupView->blockSignals(block_);
   m_editDialog->blockSignals(block_);
+  m_viewStack->iconView()->blockSignals(block_);
 }
 
 void Controller::slotUpdateFilter(Filter* filter_) {
   // the view takes over ownership of the filter
   m_detailedView->clearSelection();
   m_selectedEntries.clear();
+  updateActions();
   m_detailedView->setFilter(filter_);
+  m_viewStack->iconView()->clearSelection();
 
   // since filter dialog isn't modal
   if(m_mainWindow->m_filterDlg) {
@@ -270,3 +353,43 @@ void Controller::slotUpdateFilter(Filter* filter_) {
   }
   m_mainWindow->slotEntryCount();
 }
+
+void Controller::editEntry(const Data::Entry& entry) const {
+  m_mainWindow->slotShowEntryEditor();
+}
+
+void Controller::plugCollectionActions(QWidget* widget_) {
+  m_mainWindow->action("coll_rename_collection")->plug(widget_);
+  m_mainWindow->action("coll_fields")->plug(widget_);
+}
+
+void Controller::plugEntryActions(QWidget* widget_) {
+  m_mainWindow->m_newEntry->plug(widget_);
+  m_mainWindow->m_editEntry->plug(widget_);
+  m_mainWindow->m_copyEntry->plug(widget_);
+  m_mainWindow->m_deleteEntry->plug(widget_);
+}
+
+void Controller::updateActions() const {
+  if(m_selectedEntries.isEmpty()) {
+    m_mainWindow->m_editEntry->setEnabled(false);
+    m_mainWindow->m_copyEntry->setEnabled(false);
+    m_mainWindow->m_deleteEntry->setEnabled(false);
+  } else {
+    m_mainWindow->m_editEntry->setEnabled(true);
+    m_mainWindow->m_copyEntry->setEnabled(true);
+    m_mainWindow->m_deleteEntry->setEnabled(true);
+  }
+
+  if(m_selectedEntries.count() < 2) {
+    m_mainWindow->m_editEntry->setText(i18n("&Edit Entry"));
+    m_mainWindow->m_copyEntry->setText(i18n("&Copy Entry"));
+    m_mainWindow->m_deleteEntry->setText(i18n("&Delete Entry"));
+  } else {
+    m_mainWindow->m_editEntry->setText(i18n("&Edit Entries"));
+    m_mainWindow->m_copyEntry->setText(i18n("&Copy Entries"));
+    m_mainWindow->m_deleteEntry->setText(i18n("&Delete Entries"));
+  }
+}
+
+#include "controller.moc"

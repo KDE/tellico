@@ -22,3 +22,5 @@ TextImporter::TextImporter(const KURL& url_) : Import::Importer(url_) {
     m_text = FileHandler::readTextFile(url_);
   }
 }
+
+#include "textimporter.moc"

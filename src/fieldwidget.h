@@ -34,7 +34,7 @@ namespace Bookcase {
  * on the field type, and then a checkbox for multiple editing.
  *
  * @author Robby Stephenson
- * @version $Id: fieldwidget.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: fieldwidget.h 719 2004-08-01 22:12:46Z robby $
  */
 class FieldWidget : public QWidget {
 Q_OBJECT
@@ -72,7 +72,7 @@ private:
   static const QRegExp s_semiColon;
   static const QRegExp s_comma;
 
-  Data::Field::FieldType m_type;
+  Data::Field::Type m_type;
   QLabel* m_label;
   QWidget* m_editWidget;
   QCheckBox* m_editMultiple;
@@ -80,6 +80,7 @@ private:
   QGuardedPtr<KRun> m_run;
 
   bool m_expands;
+  bool m_allowMultiple;
 };
 
 } // end namespace

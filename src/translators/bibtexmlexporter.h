@@ -21,11 +21,11 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexmlexporter.h 580 2004-03-27 03:34:33Z robby $
+ * @version $Id: bibtexmlexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class BibtexmlExporter : public TextExporter {
 public:
-  BibtexmlExporter(const Data::Collection* coll, const Data::EntryList& list) : TextExporter(coll, list) {}
+  BibtexmlExporter(const Data::Collection* coll) : TextExporter(coll) {}
 
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual QString formatString() const;

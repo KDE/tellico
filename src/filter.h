@@ -26,7 +26,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: filter.h 576 2004-03-26 01:21:30Z robby $
+ * @version $Id: filter.h 722 2004-08-03 02:58:08Z robby $
  */
 class FilterRule {
 
@@ -42,6 +42,7 @@ public:
     FuncRegExp, FuncNotRegExp
   };
 
+  FilterRule();
   FilterRule(const QString& fieldName, const QString& text, Function func);
 
   /**
@@ -53,7 +54,7 @@ public:
    *
    * @return Returns true if the entry is matched by the rule.
    */
-  bool matches(const Data::Entry* const unit) const;
+  bool matches(const Data::Entry* const entry) const;
 
   /**
    * Return filter function. This can be any of the operators
@@ -82,9 +83,9 @@ public:
 //  void setPattern(const QString& pattern) { m_pattern = pattern; }
 
 private:
-  bool equals(const Data::Entry* const unit_) const;
-  bool contains(const Data::Entry* const unit_) const;
-  bool matchesRegExp(const Data::Entry* const unit_) const;
+  bool equals(const Data::Entry* const entry) const;
+  bool contains(const Data::Entry* const entry) const;
+  bool matchesRegExp(const Data::Entry* const entry) const;
 
   QString m_fieldName;
   Function m_function;
@@ -95,7 +96,7 @@ private:
  * Borrows from KMSearchPattern by Marc Mutz
  *
  * @author Robby Stephenson
- * @version $Id: filter.h 576 2004-03-26 01:21:30Z robby $
+ * @version $Id: filter.h 722 2004-08-03 02:58:08Z robby $
  */
 class Filter : public QPtrList<FilterRule> {
 
@@ -108,7 +109,7 @@ public:
   Filter(FilterOp op_) : QPtrList<FilterRule>(), m_op(op_) { setAutoDelete(true); }
 
   FilterOp op() const { return m_op; }
-  bool matches(const Data::Entry* const unit) const;
+  bool matches(const Data::Entry* const entry) const;
 
 private:
   FilterOp m_op;

@@ -30,7 +30,7 @@ namespace Bookcase {
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: videocollection.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: videocollection.h 652 2004-05-11 04:57:03Z robby $
  */
 class VideoCollection : public Collection {
 Q_OBJECT
@@ -44,7 +44,7 @@ public:
    */
   VideoCollection(bool addFields, const QString& title = QString::null);
 
-  virtual CollectionType collectionType() const { return Video; }
+  virtual Type type() const { return Video; }
 
   static FieldList defaultFields();
 };

@@ -10,7 +10,7 @@
    ===================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl 627 2004-04-29 02:36:44Z robby $
+   $Id: bookcase-printing.xsl 752 2004-08-08 17:11:06Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -91,9 +91,9 @@
 </xsl:template>
 
 <xsl:template match="bc:bookcase">
- <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
+ <!-- This stylesheet is designed for Bookcase document syntax version 6 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'5'"/>
+  <xsl:with-param name="this-version" select="'6'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 

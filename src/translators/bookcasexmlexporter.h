@@ -14,6 +14,13 @@
 #ifndef BOOKCASEXMLEXPORTER_H
 #define BOOKCASEXMLEXPORTER_H
 
+namespace Bookcase {
+  namespace Data {
+    class Field;
+    class Entry;
+  }
+}
+
 class QDomDocument;
 class QDomElement;
 class QCheckBox;
@@ -24,20 +31,15 @@ class QCheckBox;
 #include "qstringlist.h"
 
 namespace Bookcase {
-  namespace Data {
-    class Field;
-    class Entry;
-  }
-
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bookcasexmlexporter.h 586 2004-04-03 23:06:46Z robby $
+ * @version $Id: bookcasexmlexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class BookcaseXMLExporter : public TextExporter {
 public:
-  BookcaseXMLExporter(const Data::Collection* coll, const Data::EntryList& list) : TextExporter(coll, list),
+  BookcaseXMLExporter(const Data::Collection* coll) : TextExporter(coll),
      m_includeImages(false), m_includeID(false), m_widget(0) {}
 
   virtual QWidget* widget(QWidget*, const char*);

@@ -41,14 +41,13 @@ namespace Bookcase {
  * @see Field
  *
  * @author Robby Stephenson
- * @version $Id: collection.h 607 2004-04-14 02:13:07Z robby $
+ * @version $Id: collection.h 652 2004-05-11 04:57:03Z robby $
  */
 class Collection : public QObject {
 Q_OBJECT
 
 public:
-
-  enum CollectionType {
+  enum Type {
     Base = 1,
     Book = 2,
     Video = 3,
@@ -79,7 +78,7 @@ public:
    *
    * @return The type
    */
-  virtual CollectionType collectionType() const { return Base; }
+  virtual Type type() const { return Base; }
   /**
    * Returns the id of the collection.
    *

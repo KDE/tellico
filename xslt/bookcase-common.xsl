@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - some common templates.
 
-   $Id: bookcase-common.xsl 620 2004-04-22 02:38:47Z robby $
+   $Id: bookcase-common.xsl 776 2004-08-21 00:26:27Z robby $
 
    Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
 
@@ -23,11 +23,11 @@
 <xsl:template name="syntax-version">
  <xsl:param name="this-version"/>
  <xsl:param name="data-version"/>
- <xsl:if test="$data-version != $this-version">
+ <xsl:if test="$data-version &gt; $this-version">
   <xsl:message>
    <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
    <xsl:value-of select="$this-version"/>
-   <xsl:text>, &#xa;but the input data file is version </xsl:text>
+   <xsl:text> or earlier, &#xa;but the input data file is version </xsl:text>
    <xsl:value-of select="$data-version"/>
    <xsl:text>. There might be some &#xa;problems with the output.</xsl:text>
   </xsl:message>
@@ -108,6 +108,15 @@
      </a>
     </xsl:when>
 
+    <!-- if it's a date, format with hyphens -->
+    <xsl:when test="key('fieldsByName',$field)/@type=12">
+     <xsl:value-of select="$child/bc:year"/>
+     <xsl:text>-</xsl:text>
+     <xsl:value-of select="$child/bc:month"/>
+     <xsl:text>-</xsl:text>
+     <xsl:value-of select="$child/bc:day"/>
+    </xsl:when>
+
     <xsl:otherwise>
      <xsl:value-of select="$child"/>
      <!-- hack for running-time in videos -->
@@ -129,6 +138,64 @@
     </xsl:if>
    </xsl:for-each>
   </xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
+
+<xsl:template name="msqueeze">
+ <xsl:param name="str"/>
+ <xsl:param name="len"/>
+
+ <xsl:variable name="slen" select="string-length($str)"/>
+ <xsl:variable name="mid" select="floor($len div 2)"/>
+
+ <xsl:choose>
+  <xsl:when test="$slen &gt; $len">
+   <xsl:value-of select="substring($str, 0, $mid - 2)"/>
+   <xsl:text>[...]</xsl:text>
+   <xsl:value-of select="substring($str, $slen - $mid + 3, $mid - 2)"/>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:value-of select="$str"/>   
+  </xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
+
+<!-- sums all nodes, assuming they are in MM:SS format -->
+<xsl:template name="sumTime">
+ <xsl:param name="nodes" select="/.."/>
+ <xsl:param name="totalMin" select="0"/>
+ <xsl:param name="totalSec" select="0"/>
+
+ <xsl:choose>
+
+  <xsl:when test="not($nodes)">
+   <xsl:value-of select="$totalMin + round($totalSec div 60)"/>
+   <xsl:text>:</xsl:text>
+   <xsl:value-of select="format-number($totalSec mod 60, '00')"/>
+  </xsl:when>
+
+  <xsl:when test="string-length($nodes[1]) &gt; 0">
+   <xsl:variable name="min">
+    <xsl:value-of select="substring-before($nodes[1], ':')"/>
+   </xsl:variable>
+   <xsl:variable name="sec">
+    <xsl:value-of select="substring-after($nodes[1], ':')"/>
+   </xsl:variable>
+   <xsl:call-template name="sumTime">
+    <xsl:with-param name="nodes" select="$nodes[position() != 1]"/>
+    <xsl:with-param name="totalMin" select="$totalMin + $min"/>
+    <xsl:with-param name="totalSec" select="$totalSec + $sec"/>
+   </xsl:call-template>
+  </xsl:when>
+
+  <xsl:otherwise>
+   <xsl:call-template name="sumTime">
+    <xsl:with-param name="nodes" select="$nodes[position() != 1]"/>
+    <xsl:with-param name="totalMin" select="$totalMin"/>
+    <xsl:with-param name="totalSec" select="$totalSec"/>
+   </xsl:call-template>   
+  </xsl:otherwise>
+
  </xsl:choose>
 </xsl:template>
 

@@ -170,3 +170,5 @@ Bookcase::Data::FieldList BookCollection::defaultFields() {
 
   return list;
 }
+
+#include "bookcollection.moc"

@@ -11,18 +11,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ERROR_STRINGS_H
-#define ERROR_STRINGS_H
+#include "kernel.h"
+#include "document.h"
+#include "collection.h"
 
-#include <klocale.h>
+using Bookcase::Kernel;
 
-/*
- * @author Robby Stephenson
- * @version $Id: error_strings.h 469 2004-02-18 03:03:59Z robby $
- */
+Kernel* Kernel::s_self = 0;
 
-static const char* loadError = I18N_NOOP("Bookcase is unable to load the file - %1.");
-static const char* writeError = I18N_NOOP("Bookcase is unable to write the file - %1.");
-static const char* uploadError = I18N_NOOP("Bookcase is unable to upload the file - %1.");
+Kernel::Kernel(QWidget* parent_, const char* name_/*=0*/) : QObject(parent_, name_) {
+  m_doc = new Data::Document(this);
+}
 
-#endif
+Bookcase::Data::Collection* Kernel::collection() {
+  return m_doc->collection();
+}
+
+const QStringList& Kernel::fieldTitles() const {
+  return m_doc->collection()->fieldTitles();
+}
+
+QString Kernel::fieldNameByTitle(const QString& title_) const {
+  return m_doc->collection()->fieldNameByTitle(title_);
+}
+
+QString Kernel::fieldTitleByName(const QString& name_) const {
+  return m_doc->collection()->fieldTitleByName(name_);
+}
+
+#include "kernel.moc"

@@ -23,11 +23,11 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: xsltexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: xsltexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class XSLTExporter : public TextExporter {
-public: 
-  XSLTExporter(const Data::Collection* coll, Data::EntryList list);
+public:
+  XSLTExporter(const Data::Collection* coll);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;

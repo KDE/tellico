@@ -9,7 +9,7 @@
    ===================================================================
    Bookcase XSLT file - used for importing MODS files.
 
-   $Id: mods2bookcase.xsl 687 2004-05-28 01:00:48Z robby $
+   $Id: mods2bookcase.xsl 752 2004-08-08 17:11:06Z robby $
 
    Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
 
@@ -22,11 +22,11 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Bookcase V5.0//EN"
-            doctype-system="http://periapsis.org/bookcase/dtd/v5/bookcase.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Bookcase V6.0//EN"
+            doctype-system="http://periapsis.org/bookcase/dtd/v6/bookcase.dtd"/>
 
 <xsl:template match="/">
- <bookcase syntaxVersion="5">
+ <bookcase syntaxVersion="6">
   <collection unitTitle="Books" title="MODS Import" type="2">
    <fields>
     <field name="_default"/>

@@ -29,26 +29,31 @@ using Bookcase::Import::XSLTImporter;
 
 XSLTImporter::XSLTImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_),
     m_coll(0),
-    m_widget(0) {
+    m_widget(0),
+    m_URLRequester(0) {
 }
 
 Bookcase::Data::Collection* XSLTImporter::collection() {
-  if(!m_widget) {
-    return 0;
-  }
-
   if(m_coll) {
     return m_coll;
   }
 
-  KURL url = m_URLRequester->url();
-  if(url.isEmpty() || !url.isValid()) {
+  if(m_xsltURL.isEmpty()) {
+    // if there's also no widget, then something went wrong
+    if(!m_widget) {
+      setStatusMessage(i18n("A valid XSLT file is needed to import the file."));
+      return 0;
+    }
+    m_xsltURL = m_URLRequester->url();
+  }
+  if(m_xsltURL.isEmpty() || !m_xsltURL.isValid()) {
     setStatusMessage(i18n("A valid XSLT file is needed to import the file."));
     return 0;
   }
 
-  XSLTHandler handler(url);
+  XSLTHandler handler(m_xsltURL);
   if(!handler.isValid()) {
+    setStatusMessage(i18n("Bookcase encountered an error in XSLT processing."));
     return 0;
   }
 //  kdDebug() << text() << endl;
@@ -64,6 +69,11 @@ Bookcase::Data::Collection* XSLTImporter::collection() {
 }
 
 QWidget* XSLTImporter::widget(QWidget* parent_, const char* name_) {
+  // if the url has already been set, then there's no widget
+  if(!m_xsltURL.isEmpty()) {
+    return 0;
+  }
+
   m_widget = new QWidget(parent_, name_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
@@ -73,6 +83,12 @@ QWidget* XSLTImporter::widget(QWidget* parent_, const char* name_) {
   (void) new QLabel(i18n("XSLT File:"), box);
   m_URLRequester = new KURLRequester(box);
 
+  QString filter = i18n("*.xsl|XSL files (*.xsl)") + QChar('\n');
+  filter += i18n("*|All files");
+  m_URLRequester->setFilter(filter);
+
   l->addStretch(1);
   return m_widget;
 }
+
+#include "xsltimporter.moc"

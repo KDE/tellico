@@ -12,11 +12,11 @@
  ***************************************************************************/
 
 #include "filehandler.h"
-#include "mainwindow.h"
+#include "kernel.h"
 #include "document.h"
 #include "image.h"
 #include "utils.h" // needed for version macros
-#include "error_strings.h" // needed for error strings
+#include "kernel.h"
 
 #include <kurl.h>
 #include <klocale.h>
@@ -29,27 +29,31 @@
 #include <qdom.h>
 #include <qfile.h>
 
+const char* loadError = I18N_NOOP("Bookcase is unable to load the file - %1.");
+const char* writeError = I18N_NOOP("Bookcase is unable to write the file - %1.");
+const char* uploadError = I18N_NOOP("Bookcase is unable to upload the file - %1.");
+
 using Bookcase::FileHandler;
 
-Bookcase::MainWindow* FileHandler::s_mainWindow = 0;
-
-FileHandler::FileRef::FileRef(const KURL& url_) : file(0), isValid(false) {
+FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : file(0), isValid(false) {
   if(url_.isEmpty()) {
     return;
   }
 
 #if KDE_IS_VERSION(3,1,90)
-  if(!KIO::NetAccess::download(url_, filename, FileHandler::s_mainWindow)) {
+  if(!KIO::NetAccess::download(url_, filename, Kernel::self()->widget())) {
 #else
   if(!KIO::NetAccess::download(url_, filename)) {
 #endif
-    KMessageBox::sorry(FileHandler::s_mainWindow, i18n(loadError).arg(url_.fileName()));
+    if(!quiet_) {
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(loadError).arg(url_.fileName()));
+    }
     return;
   }
 
   file = new QFile(filename);
   if(!file->open(IO_ReadOnly)) {
-    KMessageBox::sorry(FileHandler::s_mainWindow, i18n(loadError).arg(url_.fileName()));
+    KMessageBox::sorry(Kernel::self()->widget(), i18n(loadError).arg(url_.fileName()));
     delete file;
     file = 0;
     KIO::NetAccess::removeTempFile(filename);
@@ -95,7 +99,7 @@ QDomDocument FileHandler::readXMLFile(const KURL& url_) {
     details += QString::fromLatin1("\n");
     details += i18n("The error message from Qt is:");
     details += QString::fromLatin1("\n\t") + errorMsg;
-    KMessageBox::detailedSorry(s_mainWindow, i18n(loadError).arg(url_.fileName()), details);
+    KMessageBox::detailedSorry(Kernel::self()->widget(), i18n(loadError).arg(url_.fileName()), details);
     return QDomDocument();
   }
   return doc;
@@ -110,16 +114,16 @@ QByteArray FileHandler::readDataFile(const KURL& url_) {
   return f.file->readAll();
 }
 
-Bookcase::Data::Image* FileHandler::readImageFile(const KURL& url_) {
-  FileRef f(url_);
+Bookcase::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_) {
+  FileRef f(url_, quiet_);
   if(!f.isValid) {
     return 0;
   }
 
   Data::Image* img = new Data::Image(f.filename);
-  if(img->isNull()) {
+  if(img->isNull() && !quiet_) {
     QString str = i18n("Bookcase is unable to load the image - %1.").arg(url_.fileName());
-    KMessageBox::sorry(s_mainWindow, str);
+    KMessageBox::sorry(Kernel::self()->widget(), str);
   }
   return img;
 }
@@ -127,14 +131,14 @@ Bookcase::Data::Image* FileHandler::readImageFile(const KURL& url_) {
 bool FileHandler::queryExists(const KURL& url_) {
   bool success = true;
 #if KDE_IS_VERSION(3,1,90)
-  if(KIO::NetAccess::exists(url_, false, s_mainWindow)) {
+  if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
 #else
   if(KIO::NetAccess::exists(url_, false)) {
 #endif
-    if(url_ != s_mainWindow->doc()->URL()) {
+    if(url_ != Kernel::self()->doc()->URL()) {
       QString str = i18n("A file named \"%1\" already exists. "
                          "Are you sure you want to overwrite it?").arg(url_.fileName());
-      int want_continue = KMessageBox::warningContinueCancel(s_mainWindow, str,
+      int want_continue = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str,
                                                              i18n("Overwrite File?"),
                                                              i18n("Overwrite"));
 
@@ -146,14 +150,14 @@ bool FileHandler::queryExists(const KURL& url_) {
     KURL backup(url_);
     backup.setPath(backup.path() + QString::fromLatin1("~"));
 #if KDE_IS_VERSION(3,1,90)
-    KIO::NetAccess::del(backup, s_mainWindow); // might fail if backup doesn't exist, that's ok
-    success = KIO::NetAccess::copy(url_, backup, s_mainWindow);
+    KIO::NetAccess::del(backup, Kernel::self()->widget()); // might fail if backup doesn't exist, that's ok
+    success = KIO::NetAccess::copy(url_, backup, Kernel::self()->widget());
 #else
     KIO::NetAccess::del(backup); // might fail if backup doesn't exist, that's ok
     success = KIO::NetAccess::copy(url_, backup);
 #endif
     if(!success) {
-      KMessageBox::sorry(s_mainWindow, i18n(writeError).arg(backup.fileName()));
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(backup.fileName()));
     }
   }
   return success;
@@ -167,7 +171,7 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
   if(url_.isLocalFile()) {
     KSaveFile f(url_.path());
     if(f.status() != 0) {
-      KMessageBox::sorry(s_mainWindow, i18n(writeError).arg(url_.fileName()));
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(url_.fileName()));
       return false;
     }
     return FileHandler::writeTextFile(f, text_, encodeUTF8_);
@@ -178,20 +182,20 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
   KSaveFile f(tempfile.name());
   if(f.status() != 0) {
     tempfile.unlink();
-    KMessageBox::sorry(s_mainWindow, i18n(writeError).arg(url_.fileName()));
+    KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(url_.fileName()));
     return false;
   }
 
   bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
   if(success) {
 #if KDE_IS_VERSION(3,1,90)
-    bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_, s_mainWindow);
+    bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_, Kernel::self()->widget());
 #else
     bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_);
 #endif
     if(!uploaded) {
       tempfile.unlink();
-      KMessageBox::sorry(s_mainWindow, i18n(uploadError).arg(url_.fileName()));
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(uploadError).arg(url_.fileName()));
       success = false;
     }
   }
@@ -226,7 +230,7 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
   if(url_.isLocalFile()) {
     KSaveFile f(url_.path());
     if(f.status() != 0) {
-      KMessageBox::sorry(s_mainWindow, i18n(writeError).arg(url_.fileName()));
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(url_.fileName()));
       return false;
     }
     return FileHandler::writeDataFile(f, data_);
@@ -236,19 +240,19 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
   KTempFile tempfile;
   KSaveFile f(tempfile.name());
   if(f.status() != 0) {
-    KMessageBox::sorry(s_mainWindow, i18n(writeError).arg(url_.fileName()));
+    KMessageBox::sorry(Kernel::self()->widget(), i18n(writeError).arg(url_.fileName()));
     return false;
   }
 
   bool success = FileHandler::writeDataFile(f, data_);
   if(success) {
 #if KDE_IS_VERSION(3,1,90)
-    bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_, s_mainWindow);
+    bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_, Kernel::self()->widget());
 #else
     bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_);
 #endif
     if(!uploaded) {
-      KMessageBox::sorry(s_mainWindow, i18n(uploadError).arg(url_.fileName()));
+      KMessageBox::sorry(Kernel::self()->widget(), i18n(uploadError).arg(url_.fileName()));
       success = false;
     }
   }

@@ -14,38 +14,37 @@
 #ifndef GROUPVIEW_H_H
 #define GROUPVIEW_H_H
 
-class KPopupMenu;
-
-#include "entry.h" // needed for EntryList
-#include "entryitem.h" // needed for Parent Item
-
-#include <klistview.h>
-
-#include <qdict.h>
-#include <qptrlist.h>
-#include <qpoint.h>
-#include <qpixmap.h>
-
 namespace Bookcase {
   namespace Data {
     class Collection;
   }
   class ParentItem;
   class Filter;
+}
+class KPopupMenu;
+
+#include "multiselectionlistview.h"
+#include "entryitem.h" // needed for Parent Item
+
+#include <qdict.h>
+#include <qpoint.h>
+#include <qpixmap.h>
+
+namespace Bookcase {
 
 /**
  * The GroupView is the main listview for the class, showing only the titles.
  *
- * There is one root item for each collection in the document. The units are grouped
+ * There is one root item for each collection in the document. The entries are grouped
  * by the field defined by each collection. A @ref QDict is used to keep track of the
  * group items.
  *
  * @see Bookcase::Data::Collection
  *
  * @author Robby Stephenson
- * @version $Id: groupview.h 573 2004-03-25 02:08:30Z robby $
+ * @version $Id: groupview.h 744 2004-08-07 22:00:00Z robby $
  */
-class GroupView : public KListView {
+class GroupView : public MultiSelectionListView {
 Q_OBJECT
 
 public:
@@ -58,13 +57,13 @@ public:
   GroupView(QWidget* parent, const char* name=0);
 
   /**
-   * Returns the name of the field by which the units are grouped
+   * Returns the name of the field by which the entries are grouped
    *
    * @return The field name
    */
   const QString& groupBy() const { return m_groupBy; }
   /**
-   * Sets the name of the field by which the units are grouped
+   * Sets the name of the field by which the entries are grouped
    *
    * @param coll A pointer to the collection being grouped
    * @param groupFieldName The field name
@@ -105,11 +104,11 @@ public:
    */
   void clearSelection();
   /**
-   * Selects the first item which refers to a certain unit.
+   * Selects the first item which refers to a certain entry.
    *
-   * @param unit A pointer to the unit
+   * @param entry A pointer to the entry
    */
-  void setEntrySelected(Data::Entry* unit);
+  void setEntrySelected(Data::Entry* entry);
   /**
    * Refresh all the items for a collection.
    *
@@ -117,6 +116,7 @@ public:
    * @return The item for the collection
    */
   ParentItem* populateCollection(Data::Collection* coll);
+  bool isSelectable(MultiSelectionListViewItem* item) const;
 
 public slots:
   /**
@@ -174,24 +174,6 @@ protected:
    */
   ParentItem* insertItem(ParentItem* collItem, const Data::EntryGroup* group);
   /**
-   * A helper method to make sure that the key used for the groups
-   * is consistant. For now, the key is the id of the unit's collection
-   * concatenated with the text of the group name.
-   */
-  QString groupKey(const ParentItem* par, QListViewItem* item) const;
-  /**
-   * Identical to the previous function.
-   */
-  QString groupKey(const ParentItem* par, const Data::EntryGroup* group_) const;
-  /**
-   * Identical to the previous function.
-   */
-  QString groupKey(const Data::Collection* coll, QListViewItem* item) const;
-  /**
-   * Identical to the previous function.
-   */
-  QString groupKey(const Data::Collection* coll, const Data::EntryGroup* group) const;
-  /**
    * Traverse all siblings at a certain depth, setting them open or closed. If depth is -1,
    * then the depth of the @ref currentItem() is used.
    *
@@ -203,15 +185,9 @@ protected:
 protected slots:
   /**
    * Handles everything when an item is selected. The proper signal is emitted, depending
-   * on whether the item refers to a collection, a group, or a unit.
+   * on whether the item refers to a collection, a group, or a entry.
    */
   void slotSelectionChanged();
-  /**
-   * Toggles the open/closed status of the item if it refers to a collection or a group.
-   *
-   * @param item A pointer to the toggled item
-   */
-  void slotToggleItem(QListViewItem* item);
   /**
    * Handles the appearance of the popup menu, determining which of the three (collection,
    * group, or entry) menus to display.
@@ -220,7 +196,7 @@ protected slots:
    * @param point The location point
    * @param col The column number, not currently used
    */
-  void slotRMB(QListViewItem* item, const QPoint& point, int col);
+  void contextMenuRequested(QListViewItem* item, const QPoint& point, int col);
   /**
    * Handles changing the icon when an item is expanded, depended on whether it refers
    * to a collection, a group, or an entry.
@@ -255,24 +231,11 @@ protected slots:
    * Filter by group
    */
   void slotFilterGroup();
+  void slotDoubleClicked(QListViewItem* item);
 
 signals:
   /**
-   * Signals that the selection has changed.
-   *
-   * @param widget A pointer to the widget where the seleection changed, this widget
-   * @param list A list of the selected items, may be empty.
-   */
-  void signalEntrySelected(QWidget* widget, const Bookcase::Data::EntryList& list);
-  /**
-   * Signals a collection has been selected. Only emitted when selection changed, and
-   * the selection item refers to a collection.
-   *
-   * @param id The id of the collection to which the selected item refers
-   */
-  void signalCollectionSelected(int id);
-  /**
-   * Signals a desire to delete a unit.
+   * Signals a desire to delete a entry.
    *
    * @param entry A pointer to the entry
    */
@@ -287,7 +250,6 @@ signals:
 private:
   QDict<ParentItem> m_groupDict;
   QString m_groupBy;
-  Data::EntryList m_selectedEntries;
 
   KPopupMenu* m_collMenu;
   KPopupMenu* m_groupMenu;

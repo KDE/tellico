@@ -14,9 +14,7 @@
 #include "csvimporter.h"
 #include "../collectionfieldsdialog.h"
 #include "../importdialog.h" // needed for ImportAction
-#include "../utils.h"
-#include "../mainwindow.h"
-#include "../document.h"
+#include "../kernel.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -121,7 +119,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
 
   QHBox* box = new QHBox(group);
   box->setSpacing(5);
-  (void) new QLabel(i18n("Data Type:"), box);
+  (void) new QLabel(i18n("Collection Type:"), box);
   m_comboType = new KComboBox(box);
   QWhatsThis::add(m_comboType, i18n("Select the type of collection being imported."));
   m_nameMap = CollectionFactory::nameMap();
@@ -172,11 +170,11 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
           m_editOther, SLOT(setEnabled(bool)));
   connect(m_editOther, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
 
-  if(m_delimiter == QString::fromLatin1(",")) {
+  if(m_delimiter == ',') {
     m_radioComma->setChecked(true);
-  } else if(m_delimiter == QString::fromLatin1(";")) {
+  } else if(m_delimiter == ';') {
     m_radioSemicolon->setChecked(true);
-  } else if(m_delimiter == QString::fromLatin1("\t")) {
+  } else if(m_delimiter == '\t') {
     m_radioTab->setChecked(true);
   } else {
     m_radioOther->setChecked(true);
@@ -206,7 +204,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   (void) new QLabel(i18n("Data field in this column:"), hbox);
   m_comboField = new KComboBox(hbox);
   connect(m_comboField, SIGNAL(activated(int)), SLOT(slotFieldChanged(int)));
-  m_setColumnBtn = new KPushButton(i18n("Set"), hbox);
+  m_setColumnBtn = new KPushButton(i18n("Assign Field"), hbox);
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
 
   slotTypeChanged(m_comboType->currentText());
@@ -435,13 +433,7 @@ void CSVImporter::slotFieldChanged(int idx_) {
 }
 
 void CSVImporter::slotActionChanged(int action_) {
-  // I need a pointer to the current collection. This is ugly and not very modular at all
-  Bookcase::MainWindow* mainWindow = dynamic_cast<Bookcase::MainWindow*>(QObjectAncestor(m_widget, "Bookcase::MainWindow"));
-  if(!mainWindow) {
-    return;
-  }
-
-  Data::Collection* m_currColl = mainWindow->doc()->collection();
+  Data::Collection* m_currColl = Kernel::self()->collection();
   if(!m_currColl) {
     m_existingCollection = 0;
     return;
@@ -461,7 +453,7 @@ void CSVImporter::slotActionChanged(int action_) {
     case ImportDialog::Append:
     case ImportDialog::Merge:
       m_comboType->clear();
-      m_comboType->insertItem(m_nameMap[m_currColl->collectionType()]);
+      m_comboType->insertItem(m_nameMap[m_currColl->type()]);
       m_existingCollection = m_currColl;
       break;
 
@@ -471,3 +463,5 @@ void CSVImporter::slotActionChanged(int action_) {
   }
   slotTypeChanged(m_comboType->currentText());
 }
+
+#include "csvimporter.moc"

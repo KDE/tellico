@@ -22,7 +22,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: dataimporter.h 650 2004-05-08 02:35:42Z robby $
+ * @version $Id: dataimporter.h 386 2004-01-24 05:12:28Z robby $
  */
 class DataImporter : public Importer {
 Q_OBJECT

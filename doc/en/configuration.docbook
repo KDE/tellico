@@ -6,6 +6,10 @@
 The <interface>Configuration Dialog</interface> contains all the options for changing some of the default behaviour of &bookcase;. Clicking the <guibutton>Apply</guibutton> button <action>causes the changes to take effect immediately</action> without closing the dialog, while <guibutton>OK</guibutton> <action>applies the changes and closes the dialog</action>. <guibutton>Cancel</guibutton> closes the dialog, but any changes already made and applied will remain. The <guibutton>Default</guibutton> button <action>reverts the options</action> on the current page of the dialog to their default values, while <guibutton>Help</guibutton> <action>opens the &khelpcenter;</action> to this section of the manual.
 </para>
 
+<para>
+Some settings can only be changed by editing the configuration file itself. See <link linkend="hidden-options">Hidden Options</link>.
+</para>
+
 <sect1 id="general-options">
 <title><guilabel>General Options</guilabel></title>
 

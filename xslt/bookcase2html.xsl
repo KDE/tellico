@@ -11,7 +11,7 @@
    ===================================================================
    Bookcase XSLT file - used for exporting to HTML
 
-   $Id: bookcase2html.xsl 624 2004-04-22 13:49:15Z robby $
+   $Id: bookcase2html.xsl 752 2004-08-08 17:11:06Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -60,8 +60,8 @@
 <xsl:param name="group-entries" select="false()"/>
 
 <!-- set the maximum image size -->
-<xsl:param name="image-height" select="'50'"/>
-<xsl:param name="image-width" select="'50'"/>
+<xsl:param name="image-height" select="'100'"/>
+<xsl:param name="image-width" select="'100'"/>
 
 <!-- DO NOT CHANGE THE NAME OF THESE KEYS -->
 <xsl:key name="entries" match="bc:entry" use=".//bc:author"/>
@@ -72,11 +72,11 @@
 <xsl:param name="sort-name1" select="'title'"/>
 <xsl:param name="sort-name2" select="''"/>
 <xsl:param name="sort-name3" select="''"/>
-<!-- This is the title just beside the collection name. It will 
+<!-- This is the title just beside the collection name. It will
      automatically list which fields are used for sorting. -->
 <xsl:param name="sort-title" select="''"/>
 
-<!-- 
+<!--
    ===================================================================
    The only thing below here that you might want to change is the CSS
    governing the appearance of the output HTML.
@@ -87,6 +87,7 @@
 <xsl:param name="page-title" select="'Bookcase'"/>
 
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
+<xsl:param name="entrydir"/> <!-- dir where entry links are located -->
 <xsl:param name="link-entries" select="false()"/> <!-- link entries -->
 
 <xsl:variable name="sort1">
@@ -121,9 +122,9 @@
 </xsl:template>
 
 <xsl:template match="bc:bookcase">
- <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
+ <!-- This stylesheet is designed for Bookcase document syntax version 6 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'5'"/>
+  <xsl:with-param name="this-version" select="'6'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -136,7 +137,7 @@
         font-size: 80%;
         </xsl:if>
         background-color: #fff;
-   }     
+   }
    #headerblock {
         padding-top: 10px;
         padding-bottom: 10px;
@@ -351,17 +352,17 @@
 <xsl:template name="filename">
  <xsl:param name="entry"/>
  <xsl:variable name="bad-chars">
-  <xsl:value-of select="translate($entry/bc:title,
+  <xsl:value-of select="translate($entry//bc:title[1],
                         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-',
                         '')"/>
  </xsl:variable>
  <xsl:variable name="name">
   <!-- there should be at least as many underscores as bad characters -->
-  <xsl:value-of select="translate($entry/bc:title,
+  <xsl:value-of select="translate($entry//bc:title[1],
                                   concat($bad-chars, $weird),
                                   '_________________________________________________________________________________')"/>
  </xsl:variable>
- <xsl:value-of select="concat($name, '-', $entry/@id, '.html')"/>
+ <xsl:value-of select="concat($entrydir, $name, '-', $entry/@id, '.html')"/>
 </xsl:template>
 
 <xsl:template match="bc:entry">
@@ -379,10 +380,10 @@
     <xsl:when test="$numvalues &gt; 0">
      <xsl:for-each select="$current[local-name() = $column]">
       <xsl:variable name="field" select="key('fieldsByName', local-name())"/>
-      
+
       <xsl:choose>
 
-       <!-- boolean values end up as 'true', output 'X' --> 
+       <!-- boolean values end up as 'true', output 'X' -->
        <xsl:when test="$field/@type=4 and . = 'true'">
         <xsl:text>X</xsl:text>
        </xsl:when>
@@ -412,13 +413,25 @@
           <xsl:with-param name="image" select="key('imagesById', .)"/>
          </xsl:call-template>
         </img>
+        <xsl:comment>
+         <xsl:value-of select="$image-width"/>
+        </xsl:comment>
        </xsl:when>
-       
+
        <!-- next, check for URLs -->
        <xsl:when test="$field/@type = 7">
         <a href="{.}">
          <xsl:value-of select="."/>
         </a>
+       </xsl:when>
+
+       <!-- if it's a date, format with hyphens -->
+       <xsl:when test="$field/@type=12">
+        <xsl:value-of select="bc:year"/>
+        <xsl:text>-</xsl:text>
+        <xsl:value-of select="bc:month"/>
+        <xsl:text>-</xsl:text>
+        <xsl:value-of select="bc:day"/>
        </xsl:when>
 
        <!-- finally, it's just a regular value -->
@@ -433,9 +446,9 @@
            </xsl:attribute>
            <xsl:value-of select="."/>
           </a>
-          <xsl:comment>
-           <xsl:value-of select="translate('jer&amp;pos;','&amp;pos;','')"/>
-          </xsl:comment>
+          <xsl:if test="position() &lt; $numvalues">
+           <br/>
+          </xsl:if>
          </xsl:when>
          <xsl:otherwise>
           <xsl:value-of select="."/>

@@ -20,7 +20,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h 677 2004-05-25 04:25:29Z robby $
+ * @version $Id: isbnvalidator.h 750 2004-08-08 05:58:09Z robby $
  *
  * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
  * @see http://www.eblong.com/zarf/bookscan/
@@ -46,25 +46,6 @@ public:
   /**
    * The input string is examined. Hyphens are inserted appropriately,
    * and the checksum is calculated.
-   *
-   * @param input The raw string, hyphens included
-   */
-  virtual void fixup(QString& input) const;
-
-private:
-  /**
-   * This function calculates and returns the ISBN checksum. The
-   * algorithm is based on some code by Andrew Plotkin, available at
-   * http://www.eblong.com/zarf/bookscan/
-   *
-   * @see http://www.eblong.com/zarf/bookscan/
-   *
-   * @param input The raw string, with no hyphens
-   */
-  QChar checkSum(const QString& input) const;
-
-  /**
-   * This function inserts hyphens in the proper positions.
    *
    * For correct presentation, the 10 digits of an ISBN must
    * be divided, by hyphens, into four parts:
@@ -128,10 +109,28 @@ private:
    *  the publisher and title for now, but allow it if the user inserts it.
    * </pre>
    *
-   * @param input The original string, with user-entered hyphens
-   * @param input The corrected digits, with check-sum
+   * @param input The raw string, hyphens included
    */
-  void insertDashes(QString& input, const QString& digits) const;
+  virtual void fixup(QString& input) const;
+
+private:
+  static struct isbn_band {
+    unsigned long MaxValue;
+    unsigned First;
+    unsigned Mid;
+    unsigned Last;
+  } bands[];
+
+  /**
+   * This function calculates and returns the ISBN checksum. The
+   * algorithm is based on some code by Andrew Plotkin, available at
+   * http://www.eblong.com/zarf/bookscan/
+   *
+   * @see http://www.eblong.com/zarf/bookscan/
+   *
+   * @param input The raw string, with no hyphens
+   */
+  QChar checkSum(const QString& input) const;
 };
 
 } // end namespace

@@ -15,11 +15,8 @@
 // which is authored by Marc Mutz <Marc@Mutz.com> under the GPL
 
 #include "filterdialog.h"
-#include "mainwindow.h"
-#include "document.h"
-#include "collection.h"
 #include "filter.h"
-#include "utils.h"
+#include "kernel.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -58,8 +55,7 @@ void FilterRuleWidget::initLists() {
   //---------- initialize list of filter fields
   if(m_ruleFieldList.isEmpty()) {
     m_ruleFieldList.append('<' + i18n("Any Field") + '>');
-    FilterDialog* dlg = static_cast<FilterDialog*>(QObjectAncestor(parent(), "Bookcase::FilterDialog"));
-    m_ruleFieldList += dlg->fieldTitles();
+    m_ruleFieldList += Kernel::self()->fieldTitles();
   }
 
   //---------- initialize list of filter operators
@@ -131,12 +127,10 @@ void FilterRuleWidget::setRule(const FilterRule* rule_) {
 
   blockSignals(true);
 
-  FilterDialog* dlg = static_cast<FilterDialog*>(QObjectAncestor(parent(), "Bookcase::FilterDialog"));
-
   if(rule_->fieldName().isEmpty()) {
     m_ruleField->setCurrentItem(0); // "All Fields"
   } else {
-    m_ruleField->setCurrentText(dlg->fieldTitleByName(rule_->fieldName()));
+    m_ruleField->setCurrentText(Kernel::self()->fieldTitleByName(rule_->fieldName()));
   }
 
   //--------------set function and contents
@@ -153,8 +147,7 @@ void FilterRuleWidget::setRule(const FilterRule* rule_) {
 Bookcase::FilterRule* FilterRuleWidget::rule() const {
   QString field; // empty string
   if(m_ruleField->currentItem() > 0) { // 0 is "All Fields", field is empty
-    FilterDialog* dlg = static_cast<FilterDialog*>(QObjectAncestor(parent(), "Bookcase::FilterDialog"));
-    field = dlg->fieldNameByTitle(m_ruleField->currentText());
+    field = Kernel::self()->fieldNameByTitle(m_ruleField->currentText());
   }
 
   return new FilterRule(field, m_ruleValue->text().stripWhiteSpace(),
@@ -239,9 +232,8 @@ const QPtrList<QWidget>& FilterRuleWidgetLister::widgetList() const {
 static const int FILTER_MIN_WIDTH = 600;
 
 // make the Apply button the default, so the user can see if the filter is good
-FilterDialog::FilterDialog(MainWindow* parent_, const char* name_/*=0*/)
-    : KDialogBase(parent_, name_, false, i18n("Advanced Filter"), Help|Ok|Apply|Cancel, Ok, false),
-      m_bookcase(parent_) {
+FilterDialog::FilterDialog(QWidget* parent_, const char* name_/*=0*/)
+    : KDialogBase(parent_, name_, false, i18n("Advanced Filter"), Help|Ok|Apply|Cancel, Ok, false) {
   QWidget* page = new QWidget(this);
   setMainWidget(page);
   QVBoxLayout* topLayout = new QVBoxLayout(page, 0, KDialog::spacingHint());
@@ -259,7 +251,7 @@ FilterDialog::FilterDialog(MainWindow* parent_, const char* name_/*=0*/)
   m_ruleLister = new FilterRuleWidgetLister(m_matchGroup);
   connect(m_ruleLister, SIGNAL(widgetRemoved()), SLOT(slotShrink()));
 
-  setMinimumWidth(FILTER_MIN_WIDTH);
+  setMinimumWidth(QMAX(minimumWidth(), FILTER_MIN_WIDTH));
   setHelp(QString::fromLatin1("filter-dialog"));
 }
 
@@ -314,14 +306,4 @@ void FilterDialog::slotShrink() {
   resize(width(), sizeHint().height());
 }
 
-QStringList FilterDialog::fieldTitles() const {
-  return m_bookcase->doc()->collection()->fieldTitles();
-}
-
-QString FilterDialog::fieldNameByTitle(const QString& title_) const {
-  return m_bookcase->doc()->collection()->fieldNameByTitle(title_);
-}
-
-QString FilterDialog::fieldTitleByName(const QString& name_) const {
-  return m_bookcase->doc()->collection()->fieldTitleByName(name_);
-}
+#include "filterdialog.moc"

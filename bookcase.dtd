@@ -1,8 +1,8 @@
 <!--
    ================================================================
-   Bookcase XML DTD version 5.0
+   Bookcase XML DTD version 6.0
 
-   $Id: bookcase.dtd 414 2004-02-02 03:48:15Z robby $
+   $Id: bookcase.dtd 752 2004-08-08 17:11:06Z robby $
 
    Copyright (c) 2004 Robby Stephenson
 
@@ -12,7 +12,7 @@
 
    The formal public identifer for this DTD should be:
    
-      "-//Robby Stephenson/DTD Bookcase V5.0//EN"
+      "-//Robby Stephenson/DTD Bookcase V6.0//EN"
 
    ================================================================
 -->
@@ -34,6 +34,7 @@
 
 <!ELEMENT fields (field+)>
 <!ELEMENT field (prop*)>
+<!ATTLIST field i18n CDATA (true) #IMPLIED>
 <!ATTLIST field name CDATA #REQUIRED>
 <!ATTLIST field title CDATA #REQUIRED>
 <!ATTLIST field category CDATA #REQUIRED>
@@ -41,7 +42,7 @@
 <!ATTLIST field flags CDATA #IMPLIED>
 <!ATTLIST field format CDATA #IMPLIED>
 <!ATTLIST field description CDATA #IMPLIED>
-<!ATTLIST field type (1|2|3|4|5|6|7|8|9|10|11) #IMPLIED>
+<!ATTLIST field type (1|2|3|4|5|6|7|8|9|10|11|12) #IMPLIED>
 
 <!ELEMENT prop (#PCDATA)>
 <!ATTLIST prop name CDATA #REQUIRED>
@@ -55,6 +56,10 @@
 <!-- general -->
 <!-- columns are used in 2-column tables to split the values -->
 <!ELEMENT column (#PCDATA)>
+<!-- year, month, day are used in dates, not in any default collections -->
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT month (#PCDATA)>
+<!ELEMENT day (#PCDATA)>
 
 <!ELEMENT entry (title | subtitle | authors | binding | pur_date |
 pur_price | publisher | edition | cr_years | pub_year | isbn | lccn |
@@ -70,6 +75,7 @@ plot | player | team | brand | location | quantity | front | back |
 mintmark | set | grade | service | obverse | reverse | issue | cover |
 description | scott | cancelled | hinged | centering | gummed |
 producer | appellation | varietal | vintage | type | drink-by)+>
+<!ATTLIST entry id CDATA #REQUIRED>
 
 
 <!ELEMENT title (#PCDATA)>

@@ -7,7 +7,7 @@
    ================================================================
    Bookcase XSLT file - sort by author
 
-   $Id: bookcase-by-title.xsl 394 2004-01-24 23:17:42Z robby $
+   $Id: bookcase-by-title.xsl 752 2004-08-08 17:11:06Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -31,12 +31,12 @@
 </xsl:template>
 
 <xsl:template match="bc:bookcase">
- <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
- <xsl:if test="@syntaxVersion != '5'">
+ <!-- This stylesheet is designed for Bookcase document syntax version 6 -->
+ <xsl:if test="@syntaxVersion &lt; '6'">
   <xsl:message>
    <xsl:text>This stylesheet was designed for Bookcase DTD version </xsl:text>
-   <xsl:value-of select="'5'"/>
-   <xsl:text>, &#xa;but the input data file is version </xsl:text>
+   <xsl:value-of select="'6'"/>
+   <xsl:text>or earlier, &#xa;but the input data file is version </xsl:text>
    <xsl:value-of select="@syntaxVersion"/>
    <xsl:text>. There might be some &#xa;problems with the output.</xsl:text>
   </xsl:message>

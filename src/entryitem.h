@@ -14,7 +14,7 @@
 #ifndef ENTRYITEM_H
 #define ENTRYITEM_H
 
-#include <klistview.h>
+#include "multiselectionlistview.h"
 
 // for QColorGroup
 #include <qpalette.h>
@@ -23,6 +23,7 @@
 namespace Bookcase {
   namespace Data {
     class Entry;
+    class EntryGroup;
   }
 
 /**
@@ -33,9 +34,9 @@ namespace Bookcase {
  * @see Entry
  *
  * @author Robby Stephenson
- * @version $Id: entryitem.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: entryitem.h 722 2004-08-03 02:58:08Z robby $
  */
-class EntryItem : public KListViewItem {
+class EntryItem : public MultiSelectionListViewItem {
 public:
   /**
    * This constructor is for items which are direct children of a KListView object.
@@ -43,8 +44,8 @@ public:
    * @param parent A pointer to the parent
    * @param entry A pointer to the entry to which the item refers
    */
-  EntryItem(KListView* parent, Data::Entry* entry)
-      : KListViewItem(parent), m_entry(entry), m_customSort(parent->isA("Bookcase::DetailedListView")) {}
+  EntryItem(MultiSelectionListView* parent, Data::Entry* entry)
+      : MultiSelectionListViewItem(parent), m_entry(entry), m_customSort(parent->isA("Bookcase::DetailedListView")) {}
   /**
    * This constructor is for items which have other KListViewItems as parents. It
    * initializes the text in the first column, as well.
@@ -53,8 +54,8 @@ public:
    * @param text The text in the first column
    * @param entry A pointer to the entry to which the item refers
    */
-  EntryItem(KListViewItem* parent, const QString& text, Data::Entry* entry)
-      : KListViewItem(parent, text), m_entry(entry), m_customSort(false) {}
+  EntryItem(MultiSelectionListViewItem* parent, const QString& text, Data::Entry* entry)
+      : MultiSelectionListViewItem(parent, text), m_entry(entry), m_customSort(false) {}
 
   /**
    * Compares one column to another, calling @ref DetailedListView::isNumber() and
@@ -107,9 +108,9 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: entryitem.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: entryitem.h 722 2004-08-03 02:58:08Z robby $
  */
-class ParentItem : public KListViewItem {
+class ParentItem : public MultiSelectionListViewItem {
 public:
   /**
    * This constructor is for items which are direct children of a KListView object.
@@ -118,8 +119,8 @@ public:
    * @param text The text in the first column
    * @param id The id number
    */
-  ParentItem(KListView* parent, const QString& text, int id)
-      : KListViewItem(parent, text), m_id(id) {}
+  ParentItem(MultiSelectionListView* parent, const QString& text, int id)
+      : MultiSelectionListViewItem(parent, text), m_id(id), m_group(0) {}
   /**
    * This constructor is for items which are children of another ParentItem and do not
    * have an id reference number. It is primarily used for grouping of the EntryItems.
@@ -130,8 +131,8 @@ public:
    * @param parent A pointer to the parent
    * @param text The text in the first column
    */
-  ParentItem(ParentItem* parent, const QString& text)
-      : KListViewItem(parent, text), m_id(-1) {}
+  ParentItem(ParentItem* parent, const QString& text, const Data::EntryGroup* group)
+      : MultiSelectionListViewItem(parent, text), m_id(-1), m_group(group) {}
 
   /**
    * Sets the count for the number of items.
@@ -145,6 +146,12 @@ public:
    * @return The id number
    */
   int id() const { return m_id; }
+  /**
+   * Returns the id reference number of the ParentItem.
+   *
+   * @return The id number
+   */
+  const Data::EntryGroup* group() const { return m_group; }
   /**
    * Returns the key for sorting the listitems. The text used for an empty
    * value should be sorted first, so the returned key is "_". Since the text may
@@ -166,6 +173,7 @@ public:
 private:
   int m_id;
   int m_count;
+  const Data::EntryGroup* m_group;
 
 // since I do an expensive RegExp match for the surname prefixes, I want to
 // cache the text and the resulting key

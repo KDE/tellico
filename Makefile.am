@@ -1,6 +1,6 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 
-SUBDIRS = src po doc icons xslt admin 
+SUBDIRS = src po doc icons xslt admin
 
 EXTRA_DIST = COPYING ChangeLog INSTALL README TODO bookcase.lsm bookcase.spec bookcase.dtd x-bookcase.desktop configure.in.in AUTHORS NEWS bookcase.tips bookcase.desktop
 
@@ -31,7 +31,7 @@ mime_DATA = x-bookcase.desktop
 localdir = $(kde_datadir)/bookcase
 local_DATA = bookcase.dtd bookcase.tips
 
-CLEANFILES = *~
+CLEANFILES = *~ *.loT
 
 DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz $(CLEANFILES)
 
@@ -45,7 +45,7 @@ package-messages:
 messages:
 	rm -f tips.cpp; \
 	$(PREPARETIPS) < bookcase.tips > tips.cpp; \
-	$(XGETTEXT) tips.cpp -c++ -j -o $(podir)/bookcase.pot; \
+	$(XGETTEXT) tips.cpp --join-existing -o $(podir)/bookcase.pot; \
 	rm -f tips.cpp
 
 dist-hook:
@@ -102,4 +102,3 @@ uninstall-local:
 # probably a better way to do this
 uninstall-hook:
 	-if [ -d $(localdir) ]; then rmdir $(localdir); fi
-

@@ -5,7 +5,7 @@
 <title>Field Types</title>
 
 <para>
-Each collection may have an unlimited number of fields. &bookcase; supports ten types of fields, which allow for a range of different data.
+Each collection may have an unlimited number of fields. &bookcase; supports eleven types of fields, which allow for a range of different data.
 </para>
 
 <sect2 id="line">
@@ -115,12 +115,22 @@ Typically, the second column is italicized in the entry view templates, or when 
 <para>
 <emphasis>Image</emphasis> fields hold an image, of any format supported by &kde;.
 Some of the typical ones include <acronym>PNG</acronym> or <acronym>JPEG</acronym>.
-The image is saved inside the &bookcase; data
-file. The standard &kde; File Selector is used, so you can use a &URL; or just a file available
+The image is saved inside the &bookcase; data file. The standard &kde; File Selector
+is used, so you can use a &URL; or just a file available
 locally.
 </para>
 
 </sect2>
+
+<sect2 id="date">
+<title>Date</title>
+
+<para>
+A <emphasis>Date</emphasis> field can include a day, month, and year. The date is shown in the standard format of YYYY-MM-DD, which allows for easy sorting. The standard &kde; Date Selector may be used to choose the date with the mouse, or it may be entered directly. The field is not required to have non-empty values for the year, month, and day; only the year may be entered, for example. Multiple values are not allowed.
+</para>
+
+</sect2>
+
 <sect2 id="dependent">
 <title>Dependent</title>
 

@@ -12,11 +12,10 @@
  ***************************************************************************/
 
 #include "groupview.h"
-#include "mainwindow.h"
 #include "collection.h"
 #include "field.h"
-#include "utils.h"
 #include "filter.h"
+#include "controller.h"
 
 #include <kpopupmenu.h>
 #include <klocale.h>
@@ -35,10 +34,10 @@ using Bookcase::GroupView;
 
 // by default don't show the number of items
 GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
-    : KListView(parent_, name_), m_showCount(false) {
+    : MultiSelectionListView(parent_, name_), m_showCount(false) {
   // the app name isn't translated
   addColumn(QString::fromLatin1("Bookcase"));
-  addColumn(QString::null, 0); // hide this column, use for sorting
+  addColumn(QString::null, 0); // hide this column, use for sorting by group count
   setResizeMode(QListView::NoColumn);
   // hide the header since there's only one column
   header()->hide();
@@ -46,17 +45,14 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
   setTreeStepSize(10);
   // turn off the alternate background color
   setAlternateBackground(QColor());
-  setSelectionMode(QListView::Extended);
 
   QPixmap expand, collapse, filter;
   expand = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("2downarrow"), KIcon::Small);
   collapse = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("2uparrow"), KIcon::Small);
   filter = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("filter"), KIcon::Small);
 
-  MainWindow* bookcase = static_cast<MainWindow*>(QObjectAncestor(parent_, "Bookcase::MainWindow"));
   m_collMenu = new KPopupMenu(this);
-  bookcase->action("coll_rename_collection")->plug(m_collMenu);
-  bookcase->action("coll_fields")->plug(m_collMenu);
+  Controller::self()->plugCollectionActions(m_collMenu);
   m_collMenu->insertSeparator();
   m_collMenu->insertItem(i18n("Sort by Group, Ascending"), this, SLOT(slotSortByGroupAscending()));
   m_collMenu->insertItem(i18n("Sort by Group, Descending"), this, SLOT(slotSortByGroupDescending()));
@@ -74,20 +70,18 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
   m_groupMenu->insertItem(i18n("Sort by Count, Descending"), this, SLOT(slotSortByCountDescending()));
 
   m_entryMenu = new KPopupMenu(this);
-  bookcase->action("coll_edit_entry")->plug(m_entryMenu);
-  bookcase->action("coll_copy_entry")->plug(m_entryMenu);
-  bookcase->action("coll_delete_entry")->plug(m_entryMenu);
+  Controller::self()->plugEntryActions(m_entryMenu);
 
-  connect(this, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&, int)),
-          SLOT(slotRMB(QListViewItem*, const QPoint&, int)));
+  connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),
+          SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
+  // when an entry is double clicked, make sure the editor is visible or toggle parent
+  connect(this, SIGNAL(doubleClicked(QListViewItem*)),
+          SLOT(slotDoubleClicked(QListViewItem*)));
 
 //  connect(this, SIGNAL(clicked(QListViewItem*)), SLOT(slotSelected(QListViewItem*)));
 
   connect(this, SIGNAL(selectionChanged()),
           SLOT(slotSelectionChanged()));
-
-  connect(this, SIGNAL(doubleClicked(QListViewItem*)),
-          SLOT(slotToggleItem(QListViewItem*)));
 
   connect(this, SIGNAL(expanded(QListViewItem*)),
           SLOT(slotExpanded(QListViewItem*)));
@@ -102,42 +96,20 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
   m_groupClosedPixmap = m_collClosedPixmap;
 }
 
-inline
-QString GroupView::groupKey(const ParentItem* par_, QListViewItem* item_) const {
-  return QString::number(par_->id()) + item_->text(0);
-}
-
-inline
-QString GroupView::groupKey(const ParentItem* par_, const Data::EntryGroup* group_) const {
-  return QString::number(par_->id()) + group_->groupName();
-}
-
-inline
-QString GroupView::groupKey(const Data::Collection* coll_, QListViewItem* item_) const {
-  return QString::number(coll_->id()) + item_->text(0);
-}
-
-inline
-QString GroupView::groupKey(const Data::Collection* coll_, const Data::EntryGroup* group_) const {
-  return QString::number(coll_->id()) + group_->groupName();
-}
-
 Bookcase::ParentItem* GroupView::insertItem(ParentItem* collItem_, const Data::EntryGroup* group_) {
   QString text = group_->groupName();
 
-  ParentItem* par = new ParentItem(collItem_, text);
+  ParentItem* par = new ParentItem(collItem_, text, group_);
   par->setPixmap(0, m_groupClosedPixmap);
   par->setCount(group_->count());
 
-  QString key = groupKey(collItem_, group_);
-  m_groupDict.insert(key, par);
+  m_groupDict.insert(group_->groupName(), par);
 
   return par;
 }
 
 Bookcase::ParentItem* GroupView::locateItem(ParentItem* collItem_, const Data::EntryGroup* group_) {
-  QString key = groupKey(collItem_, group_);
-  ParentItem* par = m_groupDict.find(key);
+  ParentItem* par = m_groupDict.find(group_->groupName());
   if(par) {
     return par;
   }
@@ -149,7 +121,7 @@ Bookcase::ParentItem* GroupView::locateItem(Data::Collection* coll_) {
   ParentItem* root = 0;
   // iterate over the collections, which are the top-level children
   for(QListViewItem* collItem = firstChild(); collItem; collItem = collItem->nextSibling()) {
-    // find the collItem matching the unit's collection and insert item inside
+    // find the collItem matching the entry's collection and insert item inside
     ParentItem* par = static_cast<ParentItem*>(collItem);
     if(par->id() == coll_->id()) {
       root = par;
@@ -167,7 +139,6 @@ Bookcase::ParentItem* GroupView::locateItem(Data::Collection* coll_) {
 void GroupView::slotReset() {
   // don't really need to clear the collGroupBy map
   m_groupDict.clear();
-  m_selectedEntries.clear();
   clear();
 }
 
@@ -191,8 +162,6 @@ void GroupView::removeCollection(Data::Collection* coll_) {
   clear();
   m_groupDict.clear();
   blockSignals(false);
-
-  m_selectedEntries.clear();
 }
 
 void GroupView::slotModifyGroup(Data::Collection* coll_, const Data::EntryGroup* group_) {
@@ -201,7 +170,7 @@ void GroupView::slotModifyGroup(Data::Collection* coll_, const Data::EntryGroup*
     return;
   }
 
-  // if the units aren't grouped by field of the modified group,
+  // if the entries aren't grouped by field of the modified group,
   // we don't care, so return
   if(m_groupBy != group_->fieldName()) {
     return;
@@ -219,32 +188,30 @@ void GroupView::slotModifyGroup(Data::Collection* coll_, const Data::EntryGroup*
   QListViewItem* item = par->firstChild();
   QListViewItem* next;
   while(item) {
-    Data::Entry* unit = static_cast<EntryItem*>(item)->entry();
-    if(group_->containsRef(unit)) {
-      leftover.removeRef(unit);
+    Data::Entry* entry = static_cast<EntryItem*>(item)->entry();
+    if(group_->containsRef(entry)) {
+      leftover.removeRef(entry);
       item = item->nextSibling();
     } else {
       // if it's not in the group, delete it
-//      kdDebug() << "\tdeleting unit - " << unit->title() << endl;
-      m_selectedEntries.removeRef(unit);
+//      kdDebug() << "\tdeleting entry - " << entry->title() << endl;
       next = item->nextSibling();
       delete item;
       item = next;
     }
   }
 
-  // if there are no more child items in the group, no units in the leftover group
+  // if there are no more child items in the group, no entries in the leftover group
   // then delete the parent item
   if(par->childCount() == 0 && leftover.isEmpty()) {
-    QString key = groupKey(coll_, par);
-    m_groupDict.remove(key);
+    m_groupDict.remove(par->text(0));
     delete par;
     return;
   }
 
   QPixmap icon = KGlobal::iconLoader()->loadIcon(coll_->entryName(), KIcon::User);
 
-  // in case the number of units in the group changed
+  // in case the number of entries in the group changed
   par->setCount(group_->count());
 
   // next add new listViewItems for items in the group, but not currently in the view
@@ -262,68 +229,50 @@ void GroupView::slotModifyGroup(Data::Collection* coll_, const Data::EntryGroup*
 
   // don't want any selected
   clearSelection();
+  sort(); // in case the count changed, or group name
 
   // need to refresh
-  triggerUpdate();
+  // triggerUpdate(); // sort does this anyway?
   root->setOpen(true);
 }
 
 void GroupView::slotSelectionChanged() {
-//  kdDebug() << "GroupView::slotSelectionChanged()" << endl;
-  // since the group view might have multiple unit items
-  // that point to the same unit, need to keep track separately
-  Data::EntryList newSelected;
+  const QPtrList<MultiSelectionListViewItem>& items = selectedItems();
 
-  // all items with depth of 2 in the listview are unitItems
-  EntryItem* item;
-#if QT_VERSION >= 0x030200
-  QListViewItemIterator it(this, QListViewItemIterator::Selected);
-#else
-  QListViewItemIterator it(this);
-#endif
-  for( ; it.current(); ++it) {
-#if QT_VERSION < 0x030200
-    if(!it.current()->isSelected()) {
-      continue;
-    }
-#endif
-    // it'd be nice if I could figure out how to enforce
-    // only one collection or group being selected, while allowing multiple
-    // unit items to be selected
-    if(it.current()->depth() == 0) {
-      ParentItem* pItem = static_cast<ParentItem*>(it.current());
-      emit signalCollectionSelected(pItem->id());
-      // only add selected if parent is open
-    } else if(it.current()->depth() == 2) {
-      if(!it.current()->parent()->isOpen()) {
-        blockSignals(true);
-        setSelected(it.current(), false);
-        blockSignals(false);
-        continue;
-      }
-      item = static_cast<EntryItem*>(it.current());
-      newSelected.append(item->entry());
-
-      if(item->entry() && !m_selectedEntries.containsRef(item->entry())) {
-        // the reason I do it this way is because I want the first item in the list
-        // to be the first item that was selected, so the edit widget can fill its
-        // contents with the first unit
-        m_selectedEntries.append(item->entry());
-      }
-    }
+  if(items.isEmpty()) {
+    // FIXME: hack, should have proper clearSelection method
+    Controller::self()->slotUpdateSelection(this, Data::EntryList());
+    return;
   }
 
-  // now if any units in m_selectedEntries are not in newSelected, remove them
-  Data::EntryListIterator uIt(m_selectedEntries);
-  while(uIt.current()) {
-    if(!newSelected.containsRef(uIt.current())) {
-      m_selectedEntries.removeRef(uIt.current()); // when a unit is removed, the iterator goes to next
-    } else {
-      ++uIt;
+  MultiSelectionListViewItem* item = items.getFirst();
+  // check to see if a collection is selected
+  if(item->depth() == 0) {
+    // FIXME
+    // if the item is empty, no way to get a collection pointer
+    if(item->childCount() == 0) {
+      return;
     }
+    // now, group the entry from the first item, and use that to get a collection points
+    EntryItem* entryItem = static_cast<EntryItem*>(item->firstChild()->firstChild());
+    Controller::self()->slotUpdateSelection(this, entryItem->entry()->collection());
+    return;
   }
 
-  emit signalEntrySelected(this, m_selectedEntries);
+  // check to see if a group is selected
+  if(item->depth() == 1) {
+    Controller::self()->slotUpdateSelection(this, static_cast<ParentItem*>(item)->group());
+    return;
+  }
+
+  // now just iterate over the selected items, making a list of entries
+  Data::EntryList list;
+  for(QPtrListIterator<MultiSelectionListViewItem> it(items); it.current(); ++it) {
+    if(!list.containsRef(static_cast<EntryItem*>(it.current())->entry())) {
+      list.append(static_cast<EntryItem*>(it.current())->entry());
+    }
+  }
+  Controller::self()->slotUpdateSelection(this, list);
 }
 
 // don't 'shadow' QListView::setSelected
@@ -336,7 +285,7 @@ void GroupView::setEntrySelected(Data::Entry* entry_) {
     return;
   }
 
-  // if the selected unit is the same as the current one, just return
+  // if the selected entry is the same as the current one, just return
   if(currentItem() && entry_ == static_cast<EntryItem*>(currentItem())->entry()) {
     return;
   }
@@ -355,12 +304,11 @@ void GroupView::setEntrySelected(Data::Entry* entry_) {
     }
   }
   if(!group) {
-    kdDebug() << "GroupView::slotSetSelected() - unit is not in any current groups!" << endl;
+    kdDebug() << "GroupView::slotSetSelected() - entry is not in any current groups!" << endl;
     return;
   }
 
-  QString key = groupKey(entry_->collection(), group);
-  ParentItem* par = m_groupDict.find(key);
+  ParentItem* par = m_groupDict.find(group->groupName());
   if(!par) {
     return;
   }
@@ -377,13 +325,6 @@ void GroupView::setEntrySelected(Data::Entry* entry_) {
       return;
     }
   }
-}
-
-void GroupView::slotToggleItem(QListViewItem* item_) {
-  if(!item_) {
-    return;
-  }
-  item_->setOpen(!item_->isOpen());
 }
 
 void GroupView::slotExpandAll(int depth_/*=-1*/) {
@@ -436,12 +377,12 @@ void GroupView::setSiblingsOpen(int depth_, bool open_) {
   }
 }
 
-void GroupView::slotRMB(QListViewItem* item_, const QPoint& point_, int) {
+void GroupView::contextMenuRequested(QListViewItem* item_, const QPoint& point_, int) {
   if(!item_) {
     return;
   }
 
-  setSelected(item_, true);
+//  setSelected(item_, true);
 
   if(item_->depth() == 0 && m_collMenu->count() > 0) {
     m_collMenu->popup(point_);
@@ -481,12 +422,11 @@ void GroupView::slotExpanded(QListViewItem* item_) {
 void GroupView::clearSelection() {
 //  kdDebug() << "GroupView::clearSelection()" << endl;
   blockSignals(true);
-  if(isUpdatesEnabled()) {
+  if(!selectedItems().isEmpty()) {
     selectAll(false);
   }
   setCurrentItem(0);
   blockSignals(false);
-  m_selectedEntries.clear();
 }
 
 void GroupView::addCollection(Data::Collection* coll_) {
@@ -499,7 +439,7 @@ void GroupView::addCollection(Data::Collection* coll_) {
 
   // if the collection doesn't have the grouped field, and it's not the pseudo-group,
   // change it to default
-  if(coll_->fieldByName(m_groupBy) == 0 && m_groupBy != Data::Collection::s_peopleGroupName) {
+  if(m_groupBy.isEmpty() || (coll_->fieldByName(m_groupBy) == 0 && m_groupBy != Data::Collection::s_peopleGroupName)) {
     m_groupBy = coll_->defaultGroupField();
   }
 
@@ -551,7 +491,7 @@ void GroupView::showCount(bool showCount_) {
 }
 
 Bookcase::ParentItem* GroupView::populateCollection(Data::Collection* coll_) {
-//  kdDebug() << "GroupView::populateCollection()" << endl;
+//  kdDebug() << "GroupView::populateCollection() - " << m_groupBy << endl;
   if(m_groupBy.isEmpty()) {
     m_groupBy = coll_->defaultGroupField();
   }
@@ -577,8 +517,7 @@ Bookcase::ParentItem* GroupView::populateCollection(Data::Collection* coll_) {
 
   // iterate over all the groups in the dict
   // e.g. if the dict is "author", loop over all the author groups
-  unsigned j = 0;
-  for(QDictIterator<Data::EntryGroup> it(*dict); it.current(); ++it, ++j) {
+  for(QDictIterator<Data::EntryGroup> it(*dict); it.current(); ++it) {
     ParentItem* par = insertItem(collItem, it.current());
 
     for(Data::EntryListIterator entryIt(*it.current()); entryIt.current(); ++entryIt) {
@@ -617,12 +556,9 @@ void GroupView::slotFilterGroup() {
   // keep track if we need to repaint
   bool update = false;
 #if QT_VERSION >= 0x030200
-  QListViewItemIterator it(this, QListViewItemIterator::Selected);
+  for(QListViewItemIterator it(this, QListViewItemIterator::Selected); it.current(); ++it) {
 #else
-  QListViewItemIterator it(this);
-#endif
-  for( ; it.current(); ++it) {
-#if QT_VERSION < 0x030200
+  for(QListViewItemIterator it(this); it.current(); ++it) {
     if(!it.current()->isSelected()) {
       continue;
     }
@@ -653,3 +589,43 @@ void GroupView::slotFilterGroup() {
   }
   emit signalUpdateFilter(filter);
 }
+
+void GroupView::slotDoubleClicked(QListViewItem* item_) {
+  if(!item_) {
+    return;
+  }
+  // if it's a collection or group, just toggle
+  if(item_->depth() < 2) {
+    item_->setOpen(!item_->isOpen());
+    return;
+  }
+
+  // otherwise, open entry editor
+  EntryItem* i = dynamic_cast<Bookcase::EntryItem*>(item_);
+  if(i) {
+    Controller::self()->editEntry(*i->entry());
+  }
+}
+
+bool GroupView::isSelectable(MultiSelectionListViewItem* item_) const {
+  // just selecting a single item is always ok
+  if(selectedItems().isEmpty()) {
+    return true;
+  }
+
+  // selecting multiple entries is ok, but not groups or collections
+  // and only select if parent is open
+  switch(item_->depth()) {
+    case 0:
+      return false;
+    case 1:
+      return false;
+    case 2:
+      return (selectedItems().getFirst()->depth() == 2 && item_->parent()->isOpen());
+  }
+
+  // default, just return true;
+  return true;
+}
+
+#include "groupview.moc"

@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - Entry template for videos
 
-   $Id: Album.xsl 614 2004-04-17 18:52:48Z robby $
+   $Id: Album.xsl 791 2004-08-23 00:30:27Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -35,6 +35,8 @@
 <xsl:param name="color1"/> <!-- default KDE highlighted text color -->
 <xsl:param name="color2"/> <!-- default KDE highlighted background color -->
 
+<xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
+
 <xsl:strip-space elements="*"/>
 
 <xsl:key name="fieldsByName" match="bc:field" use="@name"/>
@@ -56,9 +58,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="bc:bookcase">
- <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
+ <!-- This stylesheet is designed for Bookcase document syntax version 6 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'5'"/>
+  <xsl:with-param name="this-version" select="'6'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -118,9 +120,12 @@
         padding-left: 3px;
         padding-right: 3px;
    }
+   p {
+       margin-top: 0px;
+   }
   </style>
   <title>
-   <xsl:value-of select="bc:collection/bc:entry[1]/bc:title"/>
+   <xsl:value-of select="bc:collection/bc:entry[1]//bc:title[1]"/>
    <xsl:text> - </xsl:text>
    <xsl:value-of select="bc:collection/@title"/>
   </title>
@@ -139,6 +144,10 @@
 
 <xsl:template match="bc:collection[@type=4]">
  <xsl:apply-templates select="bc:entry[1]"/>
+ <xsl:if test="$collection-file">
+  <hr/>
+  <h4 style="text-align:center"><a href="{$collection-file}">&lt;&lt; <xsl:value-of select="@title"/></a></h4>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="bc:entry">
@@ -178,7 +187,7 @@
         <xsl:attribute name="src">
          <xsl:value-of select="concat($imgdir, $image)"/>
         </xsl:attribute>
-        <!-- limit to maximum widht of 200 of height of 300 -->
+        <!-- limit to maximum width of 150 and height of 200 -->
         <xsl:call-template name="image-size">
          <xsl:with-param name="limit-width" select="150"/>
          <xsl:with-param name="limit-height" select="200"/>
@@ -207,7 +216,7 @@
        </xsl:otherwise>
       </xsl:choose>
       <xsl:text> - </xsl:text>
-      <xsl:value-of select="bc:title"/>
+      <xsl:value-of select=".//bc:title[1]"/>
 
       <!-- Bookcase 0.8 had multiple years in the default video collection -->
       <xsl:if test=".//bc:year">
@@ -250,7 +259,7 @@
  <xsl:if test="bc:tracks">
   <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
    <tr class="category">
-    <td colspan="2">
+    <td colspan="3">
      <xsl:value-of select="$trackCat"/>
     </td>
    </tr>
@@ -261,23 +270,36 @@
      </th>
      <xsl:choose>
       <xsl:when test="bc:column">
-       <td class="fieldValue">
+       <td class="fieldValue" width="100%">
         <xsl:value-of select="bc:column[1]"/>
        </td>
-       <td class="fieldValue">
+       <td class="fieldValue" align="right">
         <em>
          <xsl:value-of select="bc:column[2]"/>
         </em>
        </td>
       </xsl:when>
       <xsl:otherwise>
-       <td width="100%" class="fieldValue">
+       <td class="fieldValue" width="100%">
         <xsl:value-of select="."/>
        </td>
       </xsl:otherwise>
      </xsl:choose>
     </tr>
    </xsl:for-each>
+   <!-- if it has 2 columns, and the second column has a ':', add the time together -->
+   <xsl:if test="bc:tracks/bc:track[1]/bc:column and contains(bc:tracks/bc:track[1]/bc:column[2], ':')">
+    <tr>
+     <th colspan="2" style="text-align: right; padding-right: 10px;"><strong>Total: </strong></th>
+     <td class="fieldValue">
+      <em>
+       <xsl:call-template name="sumTime">
+        <xsl:with-param name="nodes" select="bc:tracks//bc:column[2]"/>
+       </xsl:call-template>
+      </em>
+     </td>
+    </tr>
+   </xsl:if>
   </table>
  </xsl:if>
  
@@ -302,7 +324,7 @@
        <xsl:when test="@type=2">
         <td class="fieldValue">
          <p>
-          <xsl:value-of select="$entry/*[local-name(.)=current()/@name]"/>
+          <xsl:value-of select="$entry/*[local-name(.)=current()/@name]" disable-output-escaping="yes"/>
          </p>
         </td>
        </xsl:when>

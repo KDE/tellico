@@ -32,19 +32,18 @@
 using Bookcase::EntryView;
 
 EntryView::EntryView(QWidget* parent_, const char* name_) : KHTMLPart(parent_, name_),
-    m_entry(0), m_xsltHandler(0), m_run(0) {
+    m_entry(0), m_handler(0), m_run(0) {
   setJScriptEnabled(false);
   setJavaEnabled(false);
   setMetaRefreshEnabled(false);
   setPluginsEnabled(false);
+  clear(); // needed for initial layout
 
   connect(browserExtension(), SIGNAL(openURLRequest(const KURL&, const KParts::URLArgs&)),
           this, SLOT(slotOpenURL(const KURL&)));
 }
 
 EntryView::~EntryView() {
-  delete m_xsltHandler;
-  m_xsltHandler = 0;
   if(m_run) {
     m_run->abort();
   }
@@ -52,15 +51,16 @@ EntryView::~EntryView() {
 
 void EntryView::clear() {
   m_entry = 0;
+
   // just clear the view
   begin();
   end();
   view()->layout(); // I need this because some of the margins and widths may get messed up
 }
 
-void EntryView::showEntry(const Data::Entry* const entry_) {
+void EntryView::showEntry(const Data::Entry* entry_) {
 //  kdDebug() << "EntryView::showEntry()" << endl;
-  if(!entry_ || !m_xsltHandler) {
+  if(!entry_) {
     clear();
     return;
   }
@@ -68,11 +68,13 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
 #if 0
   kdDebug() << "EntryView::showEntry() - turn me off!" << endl;
   clear();
-  setXSLTFile(m_xsltFile);
+  setXSLTFile(Entry, viewData->xsltFile);
 #endif
-  if(!m_xsltHandler->isValid()) {
+  if(!m_handler || !m_handler->isValid()) {
     setXSLTFile(m_xsltFile);
   }
+
+  m_entry = entry_;
 
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
@@ -80,28 +82,19 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
 
   Data::EntryList list;
   list.append(entry_);
-  Export::BookcaseXMLExporter exporter(entry_->collection(), list);
+  Export::BookcaseXMLExporter exporter(entry_->collection());
+  exporter.setEntryList(list);
   // exportXML(bool formatValues, bool encodeUTF8);
   QDomDocument dom = exporter.exportXML(false, true);
 //  kdDebug() << dom.toString() << endl;
 
-  if(!m_imageDirSet) {
-    // look for a file that gets installed to know the installation directory
-    QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/bookcase.png"));
-    m_xsltHandler->addStringParam("datadir", QFile::encodeName(appdir));
-    m_xsltHandler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
-    m_imageDirSet = true;
-  }
-
-  QString html = m_xsltHandler->applyStylesheet(dom.toString(), true);
+  QString html = m_handler->applyStylesheet(dom.toString(), true);
   // write out image files
   for(Data::FieldListIterator it(entry_->collection()->imageFields()); it.current(); ++it) {
     const QString& id = entry_->field(it.current()->name());
-    if(!id.isEmpty()) {
-      if(!ImageFactory::writeImage(id)) {
+    if(!id.isEmpty() && !ImageFactory::writeImage(id)) {
         kdWarning() << "EntryView::showEntry() - unable to write temporary image file: "
                     << entry_->field(it.current()->name()) << endl;
-      }
     }
   }
 
@@ -118,49 +111,58 @@ void EntryView::showEntry(const Data::Entry* const entry_) {
   write(html);
   end();
   view()->layout(); // I need this because some of the margins and widths may get messed up
-
-  m_entry = entry_;
 }
 
 void EntryView::setXSLTFile(const QString& file_) {
+  static const QString templateDir = QString::fromLatin1("entry-templates/");
+
+  // if starts with slash, then absolute path
   if(file_.at(0) == '/') {
     m_xsltFile = file_;
   } else {
-    m_xsltFile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("entry-templates/") + file_);
-    if(m_xsltFile.isNull()) {
+    m_xsltFile = KGlobal::dirs()->findResource("appdata", templateDir + file_);
+    if(m_xsltFile.isEmpty()) {
       if(!file_.isEmpty()) {
         kdWarning() << "EntryView::setXSLTFile() - can't locate " << file_ << endl;
       }
-      m_xsltFile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("entry-templates/Default.xsl"));
-    }
-    if(m_xsltFile.isNull()) {
-      QString str = QString::fromLatin1("<qt>");
-      str += i18n("Bookcase is unable to locate the default entry template stylesheet.");
-      str += QString::fromLatin1(" ");
-      str += i18n("Please check your installation.");
-      str += QString::fromLatin1("</qt>");
-      KMessageBox::error(view(), str);
+      m_xsltFile = KGlobal::dirs()->findResource("appdata", templateDir + QString::fromLatin1("Default.xsl"));
+      if(m_xsltFile.isEmpty()) {
+        QString str = QString::fromLatin1("<qt>");
+        str += i18n("Bookcase is unable to locate the default entry stylesheet.");
+        str += QString::fromLatin1(" ");
+        str += i18n("Please check your installation.");
+        str += QString::fromLatin1("</qt>");
+        KMessageBox::error(view(), str);
+        clear();
+        return;
+      }
     }
   }
 
-  delete m_xsltHandler;
+  delete m_handler;
+
   // must read the file to get proper context
-  m_xsltHandler = new XSLTHandler(QFile::encodeName(m_xsltFile));
-  if(!m_xsltHandler->isValid()) {
+  m_handler = new XSLTHandler(QFile::encodeName(m_xsltFile));
+  if(!m_handler->isValid()) {
     kdWarning() << "EntryView::setXSLTFile() - invalid xslt handler" << endl;
+    clear();
     return;
   }
 
   // add system colors to stylesheet
   const QColorGroup& cg = QApplication::palette().active();
-  m_xsltHandler->addStringParam("font", KGlobalSettings::generalFont().family().latin1());
-  m_xsltHandler->addStringParam("bgcolor", cg.base().name().latin1());
-  m_xsltHandler->addStringParam("fgcolor", cg.text().name().latin1());
-  m_xsltHandler->addStringParam("color1", cg.highlightedText().name().latin1());
-  m_xsltHandler->addStringParam("color2", cg.highlight().name().latin1());
+  m_handler->addStringParam("font", KGlobalSettings::generalFont().family().latin1());
+  m_handler->addStringParam("bgcolor", cg.base().name().latin1());
+  m_handler->addStringParam("fgcolor", cg.text().name().latin1());
+  m_handler->addStringParam("color1", cg.highlightedText().name().latin1());
+  m_handler->addStringParam("color2", cg.highlight().name().latin1());
 
-  m_imageDirSet = false;
+  // look for a file that gets installed to know the installation directory
+  QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/bookcase.png"));
+  m_handler->addStringParam("datadir", QFile::encodeName(appdir));
+  m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
 
+  // refresh view
   showEntry(m_entry);
 }
 

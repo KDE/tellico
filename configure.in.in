@@ -1,6 +1,6 @@
 #MIN_CONFIG(3)
 
-AM_INIT_AUTOMAKE(bookcase,0.9.3)
+AM_INIT_AUTOMAKE(bookcase,0.10)
 
 dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
 dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
@@ -92,6 +92,24 @@ AC_SUBST(LIBXSLT_LIBS)
 AC_SUBST(LIBXSLT_CFLAGS)
 AC_SUBST(LIBXSLT_RPATH)
 
+AC_ARG_WITH([btparse],
+            AC_HELP_STRING([--with-btparse], [Link against libbtparse
+            as a shared lib (shared) or build it statically (static), default=static]),
+            [case "${withval}" in
+                 shared) btparse=shared ;;
+                 static) btparse=static ;;
+                    yes) btparse=shared ;;
+                      *) AC_MSG_ERROR(bad value ${withval} for --with-btparse) ;;
+             esac],
+            [btparse=static])
+
+AM_CONDITIONAL(USE_LIBBTPARSE, test x$btparse = xshared)
+
+if test x$btparse = xshared; then
+  AC_CHECK_LIB(btparse, bt_initialize, [], [AC_MSG_ERROR(could not find libbtparse)])
+fi
+
+
 AC_MSG_CHECKING(for ushort in <sys/types.h>)
 AC_CACHE_VAL(bt_cv_type_ushort, [
 AC_TRY_COMPILE([
@@ -134,7 +152,7 @@ AC_CHECK_SIZEOF(unsigned char, 1)
 AC_CHECK_SIZEOF(char, 1)
 
 AC_CACHE_CHECK([for std::vector::at(std::size_t)],
-	ac_cv_cxx_have_vector_at, [
+        ac_cv_cxx_have_vector_at, [
         AC_LANG_SAVE
         AC_LANG_CPLUSPLUS
         AC_TRY_COMPILE([

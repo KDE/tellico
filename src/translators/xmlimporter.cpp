@@ -57,3 +57,5 @@ XMLImporter::XMLImporter(const QByteArray& data_) : Import::Importer(KURL()) {
     return;
   }
 }
+
+#include "xmlimporter.moc"

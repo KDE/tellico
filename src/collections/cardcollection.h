@@ -40,7 +40,7 @@ public:
    */
   CardCollection(bool addFields, const QString& title = QString::null);
 
-  virtual CollectionType collectionType() const { return Card; }
+  virtual Type type() const { return Card; }
 
   static FieldList defaultFields();
 };

@@ -45,7 +45,7 @@ public:
    */
   WineCollection(bool addFields, const QString& title = QString::null);
 
-  virtual CollectionType collectionType() const { return Wine; }
+  virtual Type type() const { return Wine; }
 
   static FieldList defaultFields();
 };

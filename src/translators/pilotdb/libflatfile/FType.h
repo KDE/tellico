@@ -18,14 +18,14 @@ namespace PalmLib {
   class FType {
   public:
         friend class PalmLib::FlatFile::Field;
-        FType(std::string title, PalmLib::FlatFile::Field::FieldType type) : 
+        FType(std::string title, PalmLib::FlatFile::Field::FieldType type) :
             m_title(title), m_type(type), m_data("") { }
 
-        FType(std::string title, PalmLib::FlatFile::Field::FieldType type, std::string data) : 
+        FType(std::string title, PalmLib::FlatFile::Field::FieldType type, std::string data) :
             m_title(title), m_type(type), m_data(data) { }
 
         virtual ~FType() { }
-        
+
         std::string title() const {return m_title;}
         virtual PalmLib::FlatFile::Field::FieldType type() const
             { return m_type;}
@@ -39,7 +39,7 @@ namespace PalmLib {
     private:
         std::string         m_title;
         PalmLib::FlatFile::Field::FieldType    m_type;
-        
+
         std::string         m_data;
     };
   }

@@ -15,6 +15,7 @@
 #include "collection.h"
 #include "mainwindow.h"
 #include "filehandler.h"
+#include "controller.h"
 
 #include "translators/exporter.h"
 #include "translators/bookcasexmlexporter.h"
@@ -51,6 +52,10 @@ ExportDialog::ExportDialog(ExportFormat format_, Data::Collection* coll_, MainWi
   m_formatFields->setChecked(false);
   QWhatsThis::add(m_formatFields, i18n("If checked, the values of the fields will be "
                                        "automatically formatted according to their format type."));
+  m_exportSelected = new QCheckBox(i18n("Export selected entries only"), group1);
+  m_exportSelected->setChecked(false);
+  QWhatsThis::add(m_exportSelected, i18n("If checked, only the currently selected entries will "
+                                         "be exported."));
 
   QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, i18n("Encoding"), widget);
   topLayout->addWidget(bg, 0);
@@ -98,6 +103,8 @@ void ExportDialog::readOptions() {
   config->setGroup("ExportOptions");
   bool format = config->readBoolEntry("FormatAttributes", false);
   m_formatFields->setChecked(format);
+  bool selected = config->readBoolEntry("ExportSelectedOnly", false);
+  m_exportSelected->setChecked(selected);
   bool encode = config->readBoolEntry("EncodeUTF8", true);
   if(encode) {
     m_encodeUTF8->setChecked(true);
@@ -112,6 +119,7 @@ void ExportDialog::slotSaveOptions() {
 
   config->setGroup("ExportOptions");
   config->writeEntry("FormatAttributes", m_formatFields->isChecked());
+  config->writeEntry("ExportSelectedOnly", m_exportSelected->isChecked());
   config->writeEntry("EncodeUTF8", m_encodeUTF8->isChecked());
 }
 
@@ -120,12 +128,12 @@ Bookcase::Export::Exporter* ExportDialog::exporter(ExportFormat format_, MainWin
 
   switch(format_) {
     case XML:
-      exporter = new Export::BookcaseXMLExporter(m_coll, m_coll->entryList());
+      exporter = new Export::BookcaseXMLExporter(m_coll);
       break;
 
     case HTML:
       {
-        Export::HTMLExporter* htmlExp = new Export::HTMLExporter(m_coll, m_coll->entryList());
+        Export::HTMLExporter* htmlExp = new Export::HTMLExporter(m_coll);
         htmlExp->setGroupBy(bookcase_->groupBy());
         htmlExp->setSortTitles(bookcase_->sortTitles());
         htmlExp->setColumns(bookcase_->visibleColumns());
@@ -134,24 +142,24 @@ Bookcase::Export::Exporter* ExportDialog::exporter(ExportFormat format_, MainWin
       break;
 
     case CSV:
-      exporter = new Export::CSVExporter(m_coll, m_coll->entryList());
+      exporter = new Export::CSVExporter(m_coll);
       break;
 
     case Bibtex:
-      exporter = new Export::BibtexExporter(m_coll, m_coll->entryList());
+      exporter = new Export::BibtexExporter(m_coll);
       break;
 
     case Bibtexml:
-      exporter = new Export::BibtexmlExporter(m_coll, m_coll->entryList());
+      exporter = new Export::BibtexmlExporter(m_coll);
       break;
 
     case XSLT:
-      exporter = new Export::XSLTExporter(m_coll, m_coll->entryList());
+      exporter = new Export::XSLTExporter(m_coll);
       break;
 
     case PilotDB:
       {
-        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter(m_coll, m_coll->entryList());
+        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter(m_coll);
         pdbExp->setColumns(bookcase_->visibleColumns());
         exporter = pdbExp;
       }
@@ -174,6 +182,7 @@ bool ExportDialog::exportURL(const KURL& url_) const {
 
   // exporter might need to know final URL, say for writing images or something
   m_exporter->setURL(url_);
+  m_exporter->setEntryList(m_exportSelected->isChecked() ? Controller::self()->selectedEntries() : m_coll->entryList());
 
   if(m_exporter->isText()) {
     bool encodeUTF8 = m_encodeUTF8->isChecked();
@@ -182,3 +191,5 @@ bool ExportDialog::exportURL(const KURL& url_) const {
     return FileHandler::writeDataURL(url_, m_exporter->data(m_formatFields->isChecked()));
   }
 }
+
+#include "exportdialog.moc"

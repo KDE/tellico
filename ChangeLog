@@ -1,3 +1,69 @@
+2004-08-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated paragraph fields to remember line-breaks.
+	* Released Bookcase 0.10.
+
+2004-08-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added HTML formatting to paragraphs in entry templates.
+	* Updated German translation, thanks to Gerrit M. Albrecht.
+
+2004-08-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Latin1Literal class to speed up string comparisons.
+	* Added MODS import menu item.
+
+2004-08-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added "export selected entries only" option.
+
+2004-08-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed UI file location.
+	* Released Bookcase 0.10pre2.
+
+2004-08-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.10pre1.
+	* Added entry icon to fetch dialog button.
+
+2004-08-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug for exporting HTML for entries with multiple titles.
+	* Changed HTML export to put entry files in separate directory.
+	* Added link to parent collection file for entry templates.
+
+2004-08-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated French translation, thanks to Rui Nibau.
+	* Changed to show a spinbox for single number values;
+
+2004-07-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with capitalization of words split by dash or comma,
+	and ending with apostrophes.
+
+2004-07-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bugs with enabling apply/ok buttons in fields dialog for
+	extended properties, and disappearing groups when renaming fields.
+
+2004-07-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Added collection and group view in stack.
+
+2004-06-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with copying selected entries.
+
+2004-06-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed gcc 3.4 compilation bug in src/translators/btparse/err.h
+
+2004-06-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Update Norwegian translation, thanks to Leif Mathis Gaup.
+
 2004-05-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase 0.9.3.
@@ -13,8 +79,14 @@
 	* Added patch from Regis Boudin to add French ISBN formatting and
 	remove old copyright restricted ISBN code.
 
+2004-05-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added entry group templates.
+
 2004-05-19  Robby Stephenson  <robby@periapsis.org>
 
+	* Changed focus to move to next entry when one is deleted.
+	* Changed document loader to allow i18n attribute indicate translation.
 	* Fixed bug with empty group names.
 
 2004-05-17  Robby Stephenson  <robby@periapsis.org>
@@ -24,16 +96,17 @@
 2004-05-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with xslt import with libxml < 2.6.
-	* Fixed bug with losing extended properties when cloning fields.
+	* Fixed bug with losing extended properties when cloning fields/
 
-2004-05-12  Robby Stephenson  <robby@periapsis.org>
+2004-05-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added some fixes for compiling with gcc 3.4.
-	* Added initial template for importing MODS collections.
+	* Added Amazon fetcher.
+	* Added SRU Fetcher.
 
 2004-05-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with XSLT importer.
+	* Added MODS XSLT importer file.
 
 2004-05-06  Robby Stephenson  <robby@periapsis.org>
 

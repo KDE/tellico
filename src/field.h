@@ -30,7 +30,7 @@ namespace Bookcase {
  * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: field.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: field.h 751 2004-08-08 06:36:35Z robby $
  */
 class Field {
 public:
@@ -42,7 +42,7 @@ public:
    * to be a Year. A ReadOnly is a hidden value. A URL is obvious, too.
    * A Table looks like a small spreadsheet with one column, and a Table2
    * type has two columns.  An Image points to a QImage. A Dependent field
-   * depends on the values of other attributes.
+   * depends on the values of other attributes. A Date contains a date.
    *
    * Don't forget to change Field::typeMap().
    *
@@ -52,18 +52,20 @@ public:
    * @see QCheckBox
    * @see QTable
    **/
-  enum FieldType {
-    Line     = 1,
-    Para     = 2,
-    Choice   = 3,
-    Bool     = 4,
-    ReadOnly = 5,
-    Number   = 6,
-    URL      = 7,
-    Table    = 8,
-    Table2   = 9,
-    Image    = 10,
-    Dependent  = 11
+  enum Type {
+    Undef      = 0,
+    Line       = 1,
+    Para       = 2,
+    Choice     = 3,
+    Bool       = 4,
+    ReadOnly   = 5,
+    Number     = 6,
+    URL        = 7,
+    Table      = 8,
+    Table2     = 9,
+    Image      = 10,
+    Dependent  = 11,
+    Date       = 12
   };
 
   /**
@@ -108,7 +110,7 @@ public:
    * @param title The field title
    * @param type The field type
    */
-  Field(const QString& name, const QString& title, FieldType type = Line);
+  Field(const QString& name, const QString& title, Type type = Line);
   /**
    * The constructor for Choice types attributes.
    * By default, the field category is set to "General", and should be modified
@@ -142,7 +144,7 @@ public:
   const QString& name() const { return m_name; }
   /**
    * Sets the name of the field. This should only be changed before the field is added
-   * to a collection, i.e. before any units use it, etc.
+   * to a collection, i.e. before any entries use it, etc.
    *
    * @param name The field name
    */
@@ -188,13 +190,13 @@ public:
    *
    * @return The field type
    */
-  FieldType type() const { return m_type; }
+  Type type() const { return m_type; }
   /**
    * Sets the type of the field. Be careful with this!
    *
    * @param type The field type
    */
-  void setType(FieldType type);
+  void setType(Type type);
   /**
    * Returns the flags for the field.
    *
@@ -293,11 +295,10 @@ public:
   static QString formatName(const QString& name, bool multiple=true);
   /**
    * A convenience function to format a string as a date.
-   * At the moment, this does nothing.
    *
    * @param date The string to be formatted
    */
-  static QString formatDate(const QString& date) { return date; }
+  static QString formatDate(const QString& date);
   /**
    * Returns the default article list.
    *
@@ -385,7 +386,11 @@ public:
   /**
    * Returns a mapping of the FieldType enum to translated titles for the types.
    */
-  static QMap<Field::FieldType, QString> typeMap();
+  static QMap<Field::Type, QString> typeMap();
+  /**
+   * Returns a list of the titles of the field types.
+   */
+  static QStringList typeTitles();
   /**
    * Splits a string into multiple values;
    *
@@ -404,13 +409,15 @@ private:
   QString m_title;
   QString m_category;
   QString m_desc;
-  FieldType m_type;
+  Type m_type;
   QStringList m_allowed;
   int m_flags;
   FormatFlag m_formatFlag;
   StringMap m_properties;
 
   static QStringList s_articles;
+  // need to remember articles with apostrophes for capitalization
+  static QStringList s_articlesApos;
   static QStringList s_suffixes;
   static QStringList s_surnamePrefixes;
   static QStringList s_noCapitalize;

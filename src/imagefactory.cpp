@@ -27,20 +27,19 @@ QDict<Bookcase::Data::Image> ImageFactory::s_imageDict;
 QDict<int> ImageFactory::s_imageFileDict;
 QString ImageFactory::s_tempDir;
 
-const Bookcase::Data::Image& ImageFactory::addImage(const KURL& url_) {
+const Bookcase::Data::Image& ImageFactory::addImage(const KURL& url_, bool quiet_) {
   if(url_.isEmpty() || !url_.isValid()) {
     return s_null;
   }
-  Data::Image* img = FileHandler::readImageFile(url_);
+//  kdDebug() << "ImageFactory::addImage() - " << url_.prettyURL() << endl;
+  Data::Image* img = FileHandler::readImageFile(url_, quiet_);
   if(!img) {
     return s_null;
   }
-  const Data::Image& img2 = imageById(img->id());
-  if(!img2.isNull()) {
-    delete img;
-    return img2;
-  }
   if(!img->isNull()) {
+    s_imageDict.setAutoDelete(true);
+    s_imageDict.remove(img->id());
+    s_imageDict.setAutoDelete(false);
     s_imageDict.insert(img->id(), img);
   }
   return *img;

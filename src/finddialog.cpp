@@ -12,9 +12,8 @@
  ***************************************************************************/
 
 #include "finddialog.h"
-#include "mainwindow.h"
 #include "document.h"
-#include "collection.h"
+#include "kernel.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -38,12 +37,12 @@ using Bookcase::FindDialog;
 //FindDialog::FindDialog(Bookcase* parent_, const char* name_/*=0*/)
 //    : KDialogBase(Plain, i18n("Find"), User1|Cancel, User1,
 //                  parent_, name_, false, false, i18n("&Find")), m_bookcase(parent_) {
-FindDialog::FindDialog(MainWindow* parent_, const char* name_/*=0*/)
+FindDialog::FindDialog(QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, false, i18n("Find Text"), User1|Cancel, User1,
-                  false, i18n("&Find")), m_bookcase(parent_), m_editRegExp(0), m_editRegExpDialog(0) {
+                  false, i18n("&Find")), m_editRegExp(0), m_editRegExpDialog(0) {
   QWidget* page = new QWidget(this);
   setMainWidget(page);
-        
+
   QVBoxLayout* topLayout = new QVBoxLayout(page, 0, KDialog::spacingHint());
 
   topLayout->addWidget(new QLabel(i18n("Text To Find:"), page));
@@ -86,7 +85,7 @@ FindDialog::FindDialog(MainWindow* parent_, const char* name_/*=0*/)
     m_editRegExp = new KPushButton(i18n("&Edit Regular Expression..."), optionsGroup);
     m_editRegExp->setEnabled(false);
     connect(m_asRegExp, SIGNAL(toggled(bool)), m_editRegExp, SLOT(setEnabled(bool)));
-    connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp())); 
+    connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp()));
   }
 
   topLayout->addStretch(1);
@@ -135,7 +134,7 @@ void FindDialog::slotUser1() {
     options |= Data::Document::FromBeginning;
   }
 
-  m_bookcase->doc()->search(text, field, options);
+  Kernel::self()->doc()->search(text, field, options);
 }
 
 void FindDialog::slotFindNext() {
@@ -178,10 +177,12 @@ void FindDialog::updateFieldList() {
 
   m_fields->insertItem(i18n("All Fields"));
 
-  QStringList titles = m_bookcase->doc()->collection()->fieldTitles();
+  QStringList titles = Kernel::self()->fieldTitles();
 
   if(titles.count() > 0) {
     m_fields->insertStringList(titles);
   }
   m_fields->adjustSize();
 }
+
+#include "finddialog.moc"

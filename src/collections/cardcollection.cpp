@@ -117,3 +117,5 @@ Bookcase::Data::FieldList CardCollection::defaultFields() {
 
   return list;
 }
+
+#include "cardcollection.moc"

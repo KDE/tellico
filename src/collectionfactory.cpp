@@ -27,7 +27,7 @@
 using Bookcase::CollectionFactory;
 
 // static
-Bookcase::Data::Collection* CollectionFactory::collection(Data::Collection::CollectionType type_, bool addFields_) {
+Bookcase::Data::Collection* CollectionFactory::collection(Data::Collection::Type type_, bool addFields_) {
   switch(type_) {
     case Data::Collection::Book:
       return new Data::BookCollection(addFields_);
@@ -135,7 +135,7 @@ Bookcase::CollectionNameMap CollectionFactory::nameMap() {
   return map;
 }
 
-QString CollectionFactory::entryName(Data::Collection::CollectionType type_) {
+QString CollectionFactory::entryName(Data::Collection::Type type_) {
   switch(type_) {
     case Data::Collection::Book:
       return QString::fromLatin1("book");

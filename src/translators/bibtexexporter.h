@@ -28,11 +28,11 @@ namespace Bookcase {
  * of all the attributes, with comboboxes for each Bibtex field, but I think this way is more obvious.
  *
  * @author Robby Stephenson
- * @version $Id: bibtexexporter.h 588 2004-04-09 21:47:06Z robby $
+ * @version $Id: bibtexexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class BibtexExporter : public TextExporter {
 public:
-  BibtexExporter(const Data::Collection* coll, const Data::EntryList& list);
+  BibtexExporter(const Data::Collection* coll);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;

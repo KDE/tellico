@@ -3,10 +3,26 @@ bin_PROGRAMS = bookcase
 
 ## INCLUDES were found outside kdevelop specific part
 
-bookcase_SOURCES = entryview.cpp collection.cpp mainwindow.cpp controller.cpp kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp entryeditdialog.cpp
-bookcase_LDADD = ./collections/libcollections.a ./translators/libtranslators.a ./translators/btparse/libbtparse.a ./translators/pilotdb/libpilotdb.a ./translators/pilotdb/libflatfile/liblibflatfile.a ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET) $(LIBXSLT_LIBS)
+bookcase_SOURCES = entryview.cpp collection.cpp mainwindow.cpp controller.cpp \
+        kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp configdialog.cpp main.cpp image.cpp \
+        collectionfactory.cpp collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp \
+        entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp filter.cpp \
+        filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp tabcontrol.cpp \
+        imagewidget.cpp fieldcompletion.cpp imagefactory.cpp stringmapdialog.cpp \
+        entryeditdialog.cpp fetchdialog.cpp kernel.cpp viewstack.cpp entryiconview.cpp \
+        datewidget.cpp multiselectionlistview.cpp
 
-SUBDIRS = collections translators 
+bookcase_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
+        ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
+        ./translators/pilotdb/libflatfile/liblibflatfile.a ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
+        $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET) \
+        $(LIBXSLT_LIBS)
+
+if !USE_LIBBTPARSE
+  bookcase_LDADD += ./translators/btparse/libbtparse.a
+endif
+
+SUBDIRS = collections translators fetch tests
 
 EXTRA_DIST = bookcaseui.rc \
 collection.cpp              entryview.h          imagefactory.h \
@@ -26,10 +42,14 @@ document.h                  filterdialog.h       mainwindow.cpp \
 entry.cpp                   filter.h             mainwindow.h \
 entryeditdialog.cpp         finddialog.cpp       stringmapdialog.cpp \
 entryeditdialog.h           finddialog.h         stringmapdialog.h \
-entry.h                     groupview.cpp        error_strings.h \
+entry.h                     groupview.cpp        latin1literal.h \
 entryitem.cpp               groupview.h          tabcontrol.cpp \
 entryitem.h                 image.cpp            tabcontrol.h \
-entryview.cpp               imagefactory.cpp     utils.h
+entryview.cpp               imagefactory.cpp     utils.h \
+fetchdialog.h               fetchdialog.cpp      kernel.h \
+kernel.cpp                  viewstack.h          viewstack.cpp \
+entryiconview.h             entryiconview.cpp    datewidget.h \
+datewidget.cpp              multiselectionlistview.h multiselectionlistview.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -60,8 +80,10 @@ METASOURCES = AUTO
 
 KDE_OPTIONS = noautodist
 
-# the library search path. 
-bookcase_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH) $(TAGLIB_RPATH)
+CLEANFILES = *~ *.loT
+
+# the library search path.
+bookcase_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH)
 
 rcdir = $(kde_datadir)/bookcase
 rc_DATA = bookcaseui.rc
@@ -69,9 +91,7 @@ rc_DATA = bookcaseui.rc
 messages: rc.cpp
 	LIST=`find . -name \*.h -o -name \*.hh -o -name \*.H -o -name \*.hxx -o -name \*.hpp -o -name \*.cpp -o -name \*.cc -o -name \*.cxx -o -name \*.ecpp -o -name \*.C`; \
 	if test -n "$$LIST"; then \
-	 $(XGETTEXT) $$LIST -o $(podir)/bookcase.pot; \
-	fi
+          $(XGETTEXT) $$LIST -o $(podir)/bookcase.pot; \
+        fi
 
 #include ../admin/Doxyfile.am
-
-noinst_HEADERS = image.h imagewidget.h fieldcompletion.h imagefactory.h stringmapdialog.h entryeditdialog.h error_strings.h

@@ -379,7 +379,7 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
 
   // entry template selection
   for(QIntDictIterator<KComboBox> it(m_cbTemplates); it.current(); ++it) {
-    QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::CollectionType>(it.currentKey()));
+    QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::Type>(it.currentKey()));
     config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
     it.current()->setCurrentItem(config_->readEntry("Entry Template", QString::fromLatin1("Default")));
   }
@@ -411,8 +411,8 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
 
   config_->writeEntry("Show Group Count", m_cbShowCount->isChecked());
 
-  const QRegExp commaSpace = QRegExp(QString::fromLatin1("\\s*;\\s*"));
-  const QString sep = QString::fromLatin1(";");
+  const QRegExp commaSpace(QString::fromLatin1("\\s*;\\s*"));
+  const QChar sep = ';';
   // there might be semi-colons before or after the commas in the lineedit box
   // it was originally commas, but that was inconsistent
   QString articlesStr = m_leArticles->text().replace(commaSpace, sep);
@@ -447,7 +447,7 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
 
   // entry template selection
   for(QIntDictIterator<KComboBox> it(m_cbTemplates); it.current(); ++it) {
-    QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::CollectionType>(it.currentKey()));
+    QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::Type>(it.currentKey()));
     config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
     config_->writeEntry("Entry Template", it.current()->currentText());
   }
@@ -479,3 +479,5 @@ void ConfigDialog::slotModified() {
   enableButtonOK(true);
   enableButtonApply(true);
 }
+
+#include "configdialog.moc"

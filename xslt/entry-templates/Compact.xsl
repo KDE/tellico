@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - compact template for viewing entry data
 
-   $Id: Compact.xsl 620 2004-04-22 02:38:47Z robby $
+   $Id: Compact.xsl 791 2004-08-23 00:30:27Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -30,10 +30,13 @@
 
 <xsl:output method="html"/>
 
+<xsl:param name="datadir"/> <!-- dir where Bookcase data are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
 <xsl:param name="font"/> <!-- default KDE font family -->
 <xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
 <xsl:param name="bgcolor"/> <!-- default KDE background color -->
+
+<xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
 <xsl:strip-space elements="*"/>
 
@@ -52,9 +55,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="bc:bookcase">
- <!-- This stylesheet is designed for Bookcase document syntax version 5 -->
+ <!-- This stylesheet is designed for Bookcase document syntax version 6 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'5'"/>
+  <xsl:with-param name="this-version" select="'6'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -111,6 +114,7 @@
     padding: 0px 10px;
   }
   p {
+    margin-top: 0px;
     text-align: left;
   }
   ul {
@@ -118,7 +122,7 @@
   }
   </style>
   <title>
-   <xsl:value-of select="bc:collection/bc:entry[1]/bc:title"/>
+   <xsl:value-of select="bc:collection/bc:entry[1]//bc:title[1]"/>
    <xsl:text> - </xsl:text>
    <xsl:value-of select="bc:collection/@title"/>
   </title>
@@ -131,6 +135,10 @@
 
 <xsl:template match="bc:collection">
  <xsl:apply-templates select="bc:entry[1]"/>
+ <xsl:if test="$collection-file">
+  <hr/>
+  <h4 style="text-align:center"><a href="{$collection-file}">&lt;&lt; <xsl:value-of select="@title"/></a></h4>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="bc:entry">
@@ -172,7 +180,7 @@
  <div id="content">
 
   <!-- now for all the rest of the data -->
-  <!-- iterate over the categories, but skip paragraphs and images -->
+  <!-- iterate over the categories, but skip images -->
   <table>
    <tbody>
     <xsl:for-each select="../bc:fields/bc:field[@type!=10]">
@@ -180,7 +188,7 @@
      
      <xsl:if test="$entry//*[local-name(.) = $field/@name]">
       <tr>
-      <th class="fieldName">
+      <th class="fieldName" valign="top">
        <xsl:value-of select="@title"/>
        <xsl:text>:</xsl:text>
       </th>
@@ -192,7 +200,7 @@
         <!-- paragraphs are field type 2 -->
         <xsl:when test="@type = 2">
          <p>
-          <xsl:value-of select="$entry/*[local-name(.) = $field/@name]"/>
+          <xsl:value-of select="$entry/*[local-name(.) = $field/@name]" disable-output-escaping="yes"/>
          </p>
         </xsl:when>
         

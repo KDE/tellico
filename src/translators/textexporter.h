@@ -24,11 +24,11 @@ namespace Bookcase {
  * whether it be XML, Bibtex, or whatever.
  *
  * @author Robby Stephenson
- * @version $Id: textexporter.h 386 2004-01-24 05:12:28Z robby $
+ * @version $Id: textexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class TextExporter : public Exporter {
 public:
-  TextExporter(const Data::Collection* coll, const Data::EntryList& list) : Exporter(coll, list) {}
+  TextExporter(const Data::Collection* coll) : Exporter(coll) {}
 
   virtual bool isText() const { return true; }
   /**

@@ -25,11 +25,11 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: htmlexporter.h 586 2004-04-03 23:06:46Z robby $
+ * @version $Id: htmlexporter.h 759 2004-08-11 01:28:25Z robby $
  */
 class HTMLExporter : public TextExporter {
 public:
-  HTMLExporter(const Data::Collection* coll, Data::EntryList list);
+  HTMLExporter(const Data::Collection* coll);
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual QString formatString() const;
