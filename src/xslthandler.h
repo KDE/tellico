@@ -20,6 +20,7 @@
 #include <kurl.h>
 
 #include <qstring.h>
+#include <qfile.h>
 
 // for xmlDocPtr
 #include <libxml/tree.h>
@@ -33,7 +34,7 @@ static const int MAX_PARAMS = 16;
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h,v 1.2 2003/04/01 03:30:41 robby Exp $
+ * @version $Id: xslthandler.h,v 1.3 2003/05/10 19:21:53 robby Exp $
  */
 class XSLTHandler {
 
@@ -65,9 +66,11 @@ public:
    * @return The transformed text
    */
   QString applyStylesheet(const QString& text);
+  QString applyStylesheetToFile(const QString& file_);
   
 private:
   void readStylesheet(const QString& xsltFilename);
+  QString process();
 
   xsltStylesheetPtr m_stylesheet;
   xmlDocPtr m_docIn, m_docOut;

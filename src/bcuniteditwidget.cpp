@@ -22,6 +22,10 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
+#include <kdeversion.h>
+#if KDE_VERSION > 305
+#include <kaccelmanager.h>
+#endif
 
 #include <qlayout.h>
 #include <qstringlist.h>
@@ -83,28 +87,6 @@ void BCUnitEditWidget::slotReset() {
   m_widgetDict.setAutoDelete(true);
 }
 
-void BCUnitEditWidget::slotSetCollection(BCCollection* coll_) {
-  if(!coll_) {
-    return;
-  }
-//  kdDebug() << "BCUnitEditWidget::slotSetCollection() - " << coll_->title() << endl;
-
-// TODO: for now, reset, but if multiple collections are supported, this has to change
-//  slotHandleClear();
-  m_currColl = coll_;
-//  slotHandleNew();
-
-// don't do this, it would cause infinite looping
-//  if(m_tabs->count() == 0) {
-//    slotSetLayout(coll_);
-//  }
-  
-  // go back to first tab, with title, etc...
-  if(m_tabs->count() > 0) {
-    m_tabs->setCurrentPage(0);
-  }
-}
-
 void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
   if(!coll_) {
     return;
@@ -118,19 +100,26 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
     slotReset();
   }
 
-  slotSetCollection(coll_);
+  m_currColl = coll_;
   
+  int maxHeight = 0;
+
   QStringList catList = m_currColl->attributeCategories();
   QStringList::ConstIterator catIt;
   for(catIt = catList.begin(); catIt != catList.end(); ++catIt) {
     BCAttributeList list = m_currColl->attributesByCategory(*catIt);
 
-    int nrows = (list.count()+1)/2 + 1; // add one so last row is stretched
+    QWidget* page = new QWidget(m_tabs);
+    // (parent, margin, spacing)
+    QVBoxLayout* boxLayout = new QVBoxLayout(page, 0, 0);
 
-    QWidget* grid = new QWidget(m_tabs);
+    int nrows = (list.count()+1)/NCOLS;
+
+    QWidget* grid = new QWidget(page);
     // (parent, nrows, ncols, margin, spacing)
-    QGridLayout* layout = new QGridLayout(grid, nrows, NCOLS, 10, 5);
-    layout->setRowStretch(nrows-1, 2); // stretch the last row
+    QGridLayout* layout = new QGridLayout(grid, nrows, NCOLS, 8, 0);
+    boxLayout->addWidget(grid, 0);
+    boxLayout->addStretch(1);
 
     // if a column has a line edit or text edit, then it should have a stretch factor
     QValueVector<bool> hasEdit(NCOLS, false);
@@ -146,12 +135,17 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
       connect(widget, SIGNAL(modified()), SLOT(slotSetModified()));
 
       layout->addWidget(widget, count/NCOLS, count%NCOLS);
+      layout->setRowStretch(count/NCOLS, 1);
 
       m_widgetDict.insert(QString::number(m_currColl->id()) + it.current()->name(), widget);
 
       maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
       if(widget->isTextEdit()) {
         hasEdit[count%NCOLS] = true;
+      }
+      widget->updateGeometry();
+      if(it.current()->type() != BCAttribute::Para) {
+        maxHeight = QMAX(maxHeight, widget->sizeHint().height());
       }
       ++count;
     }
@@ -162,6 +156,7 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
       widget = m_widgetDict[QString::number(m_currColl->id()) + it.current()->name()];
       if(widget) {
         widget->setLabelWidth(maxWidth[count%NCOLS]);
+        layout->addRowSpacing(count/NCOLS, maxHeight);
         ++count;
       }
     }
@@ -175,13 +170,18 @@ void BCUnitEditWidget::slotSetLayout(BCCollection* coll_) {
     
     // I don't want anything to be hidden
     grid->setMinimumHeight(grid->sizeHint().height());
-    m_tabs->addTab(grid, *catIt);
+    m_tabs->addTab(page, *catIt);
   }
 
+    // update keyboard accels
+#if KDE_VERSION > 305
+    KAcceleratorManager::manage(m_tabs);
+#endif
+
+  setUpdatesEnabled(true);
 // this doesn't seem to work
 //  setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum));
 // so do this instead
-  setUpdatesEnabled(true);
   layout()->invalidate(); // needed so the sizeHint() gets recalculated
   setFixedHeight(sizeHint().height());
   updateGeometry();
@@ -304,7 +304,6 @@ void BCUnitEditWidget::slotHandleSave() {
 void BCUnitEditWidget::slotHandleDelete() {
   // add a message box if multiple items are to be deleted
   if(m_currUnits.count() > 1) {
-//    Bookcase* app = BookcaseAncestor(parent());
     QStringList names;
     BCUnitListIterator uIt(m_currUnits);
     for( ; uIt.current(); ++uIt) {
@@ -385,7 +384,9 @@ void BCUnitEditWidget::slotSetContents(const BCUnitList& list_) {
   
   // first set contents to first item
   slotSetContents(list_.getFirst());
-  if(list_.count() == 1) {
+  // something weird...if list count can actually be 1 before the slotSetContents call
+  // and 0 after it. Why is that? It's const!
+  if(list_.count() < 2) {
     return;
   }
 
@@ -435,7 +436,7 @@ void BCUnitEditWidget::slotSetContents(BCUnit* unit_, const QString& highlight_/
     return;
   }
 
-//  kdDebug() << "BCUnitEditWidget::slotSetContents() - " << unit_->title() << endl;
+ // kdDebug() << "BCUnitEditWidget::slotSetContents() - " << unit_->title() << endl;
   slotHandleClear();
   m_currUnits.append(unit_);
 
@@ -495,7 +496,6 @@ void BCUnitEditWidget::slotSetContents(BCUnit* unit_, const QString& highlight_/
 }
 
 void BCUnitEditWidget::slotUpdateCompletions(BCUnit* unit_) {
-  // the cast is needed because of ambiguity
   if(m_currColl != unit_->collection()) {
     kdDebug() << "BCUnitEditWidget::slotUpdateCompletions - inconsistent collection pointers!" << endl;
     m_currColl = unit_->collection();
@@ -553,6 +553,7 @@ bool BCUnitEditWidget::queryModified() {
 void BCUnitEditWidget::slotUpdateAttribute(BCCollection* coll_, BCAttribute* att_) {
   if(coll_ != m_currColl) {
     kdDebug() << "BCUnitEditWidget::slotUpdateAttribute() - wrong collection pointer!" << endl;
+    m_currColl = coll_;
   }
   QString key = QString::number(coll_->id()) + att_->name();
   BCAttributeWidget* widget = m_widgetDict[key];

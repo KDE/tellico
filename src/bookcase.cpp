@@ -53,6 +53,7 @@
 #include <kmessagebox.h>
 #include <kstringhandler.h>
 #include <kprotocolinfo.h>
+#include <kio/netaccess.h>
 
 // include files for QT
 #include <qdir.h>
@@ -97,15 +98,11 @@ Bookcase::Bookcase(QWidget* parent_/*=0*/, const char* name_/*=0*/)
   readOptions();
 
   m_fileSave->setEnabled(false);
-  slotEnableOpenedActions(false);
+  slotEnableOpenedActions(true);
   slotEnableModifiedActions(false);
-  
-  // not yet implemented
-//  m_editCut->setEnabled(false);
-//  m_editCopy->setEnabled(false);
-//  m_editPaste->setEnabled(false);
 
   slotUnitCount();
+  m_editWidget->slotSetLayout(m_doc->collectionById(0));
 }
 
 void Bookcase::initWindow() {
@@ -248,7 +245,7 @@ void Bookcase::initActions() {
   m_exportXSLT->setToolTip(i18n("Export a file using an XSL transform..."));
 
 //  kdWarning() << "Bookcase::initActions() - change createGUI() call!" << endl;
-// createGUI(QString::fromLatin1("/home/robby/projects/bookcase/src/bookcaseui.rc"));
+//  createGUI(QString::fromLatin1("/home/robby/projects/bookcase/src/bookcaseui.rc"));
   createGUI();
 
   // gets enabled once one search is done
@@ -310,6 +307,8 @@ void Bookcase::initView() {
   for( ; it.current(); ++it) {
     connect(it.current(), SIGNAL(signalGroupModified(BCCollection*, BCUnitGroup*)),
             m_groupView, SLOT(slotModifyGroup(BCCollection*, BCUnitGroup*)));
+            // since already created, need to call it now
+    slotUpdateCollection(it.current());
   }
 
   // this gets called in readOptions(), so not neccessary here
@@ -323,11 +322,6 @@ void Bookcase::initConnections() {
   connect(m_detailedView, SIGNAL(signalUnitSelected(const BCUnitList&)),
           m_editWidget, SLOT(slotSetContents(const BCUnitList&)));
           
-  // synchronize the selected signal between listviews
-//  connect(m_groupView, SIGNAL(signalUnitSelected(BCUnit*)),
-//          m_detailedView, SLOT(slotSetSelected(BCUnit*)));
-//  connect(m_detailedView, SIGNAL(signalUnitSelected(BCUnit*)),
-//          m_groupView, SLOT(slotSetSelected(BCUnit*)));
   // when one item is selected, clear the other
   connect(m_groupView, SIGNAL(signalUnitSelected(const BCUnitList&)),
           m_detailedView, SLOT(slotClearSelection()));
@@ -346,8 +340,6 @@ void Bookcase::initConnections() {
 
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
           m_groupView, SLOT(slotAddCollection(BCCollection*)));
-//  connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
-//          m_editWidget, SLOT(slotSetCollection(BCCollection*)));
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
           m_editWidget, SLOT(slotSetLayout(BCCollection*)));
   connect(m_doc, SIGNAL(signalCollectionAdded(BCCollection*)),
@@ -373,7 +365,7 @@ void Bookcase::initConnections() {
   connect(m_doc, SIGNAL(signalUnitModified(BCUnit*)),
           m_editWidget, SLOT(slotUpdateCompletions(BCUnit*)));
 
-  // connect the deleted signal to both listviews
+  // connect the deleted signal
   connect(m_doc, SIGNAL(signalUnitDeleted(BCUnit*)),
           m_detailedView, SLOT(slotRemoveItem(BCUnit*)));
           
@@ -423,6 +415,8 @@ void Bookcase::saveOptions() {
   m_fileOpenRecent->saveEntries(m_config, QString::fromLatin1("Recent Files"));
   if(m_doc->URL().fileName() != i18n("Untitled")) {
     m_config->writeEntry("Last Open File", m_doc->URL().url());
+  } else {
+    m_config->writeEntry("Last Open File", QString::null);
   }
 
   m_config->writeEntry("Main Window Splitter Sizes", m_split->sizes());
@@ -457,13 +451,13 @@ void Bookcase::saveCollectionOptions(BCCollection* coll_) {
   m_config->writeEntry("SortColumn", m_detailedView->columnSorted());
   m_config->writeEntry("SortAscending", m_detailedView->ascendingSort());
 
-//  QStringList colTitles = m_detailedView->visibleColumns();
-//  QStringList colNames;
-//  QStringList::ConstIterator it;
-//  for(it = colTitles.begin(); it != colTitles.end(); ++it) {
-//    colNames += coll_->attributeNameByTitle(*it);
-//  }
-//  m_config->writeEntry("ColumnNames", colNames);
+  QStringList colTitles = m_detailedView->columnTitles();
+  QStringList colNames;
+  QStringList::ConstIterator it;
+  for(it = colTitles.begin(); it != colTitles.end(); ++it) {
+    colNames += coll_->attributeNameByTitle(*it);
+  }
+  m_config->writeEntry("ColumnNames", colNames);
 }
 
 void Bookcase::readOptions() {
@@ -553,18 +547,16 @@ void Bookcase::readOptions() {
     // make sure the right combo element is selected
     slotUpdateCollectionToolBar(coll);
 
-    // the config entry was named ColumnNames when only the visible columns existed
-    // now, they just get a zero width...keep config name though
-    QStringList visibleColumns = m_config->readListEntry("ColumnNames");
-    if(visibleColumns.isEmpty()) {
-      visibleColumns = BookCollection::defaultViewAttributes();
+    QStringList columnNames = m_config->readListEntry("ColumnNames");
+    if(columnNames.isEmpty()) {
+      columnNames = BookCollection::defaultViewAttributes();
     }
 
     // this block compensates for the chance that the user added an attribute and it wasn't
     // written to the widths. Also compensates for 0.5.x to 0.6.x column layout changes
     QValueList<int> colWidths = m_config->readIntListEntry("ColumnWidths");
     if(colWidths.empty()) {
-      for(unsigned i = 0; i < visibleColumns.count(); ++i) {
+      for(unsigned i = 0; i < columnNames.count(); ++i) {
         colWidths.append(-1); // automatic width
       }
     }
@@ -572,7 +564,7 @@ void Bookcase::readOptions() {
       QValueList<int> newWidths;
       BCAttributeListIterator it(coll->attributeList());
       for( ; it.current(); ++it) {
-        if(visibleColumns.contains(it.current()->name()) && colWidths.count() > 0) {
+        if(columnNames.contains(it.current()->name()) && colWidths.count() > 0) {
           newWidths.push_back(colWidths[0]);
           colWidths.pop_front();
         } else {
@@ -581,12 +573,11 @@ void Bookcase::readOptions() {
       }
       colWidths = newWidths;
     }
-    m_detailedView->setColumns(coll, colWidths);
+    m_detailedView->setColumns(coll, columnNames, colWidths);
 
     QValueList<int> colOrder = m_config->readIntListEntry("ColumnOrder");
-    QValueList<int>::ConstIterator it;
     int i = 0;
-    for(it = colOrder.begin(); it != colOrder.end(); ++it) {
+    for(QValueList<int>::ConstIterator it = colOrder.begin(); it != colOrder.end(); ++it) {
       m_detailedView->header()->moveSection(i++, *it);
     }
     
@@ -662,7 +653,7 @@ void Bookcase::slotFileNew() {
 
   if(m_editWidget->queryModified() && m_doc->saveModified()) {
     m_doc->newDocument();
-    slotEnableOpenedActions(false);
+    slotEnableOpenedActions(true);
     slotEnableModifiedActions(false);
   }
 
@@ -695,7 +686,9 @@ void Bookcase::slotFileOpen(const KURL& url_) {
     bool success = openURL(url_);
     if(success) {
       m_fileOpenRecent->addURL(url_);
-    }
+    }// else {
+     // m_fileOpenRecent->removeURL(url_);
+    //}
   }
 
   slotStatusMsg(i18n("Ready."));
@@ -766,9 +759,9 @@ void Bookcase::slotFileSaveAs() {
     return;
   }
   
-  if(m_doc->isEmpty()) {
-    return;
-  }
+//  if(m_doc->isEmpty()) {
+//    return;
+//  }
 
   slotStatusMsg(i18n("Saving file with a new filename..."));
 
@@ -792,10 +785,10 @@ void Bookcase::slotFileSaveAs() {
 void Bookcase::slotFilePrint() {
   slotStatusMsg(i18n("Printing..."));
 
-  if(m_doc->isEmpty()) {
-    slotStatusMsg(i18n("Ready."));
-    return;
-  }
+//  if(m_doc->isEmpty()) {
+//    slotStatusMsg(i18n("Ready."));
+//    return;
+//  }
 
   QString filename(QString::fromLatin1("bookcase-printing.xsl"));
   QString xsltfile = KGlobal::dirs()->findResource("appdata", filename);
@@ -845,13 +838,11 @@ void Bookcase::slotFilePrint() {
   
   bool printFormatted = m_config->readBoolEntry("Print Formatted", true);
 
-  //TODO these two functions should really be rolled into one
   QDomDocument dom;
   if(printGrouped) {
     // first parameter is what attribute to group by
     // second parameter is whether to run the dom through BCAttribute::format
-//    dom = m_doc->exportXML(sortby, printFormatted);
-    dom = m_doc->exportXML(printFormatted);
+    dom = m_doc->exportXML(sortby, printFormatted);
   } else {
     dom = m_doc->exportXML(printFormatted);
   }
@@ -1014,6 +1005,7 @@ void Bookcase::slotEnableOpenedActions(bool opened_ /*= true*/) {
   m_groupView->slotCollapseAll(1);
   // expand the collections
   m_groupView->slotExpandAll(0);
+
   m_fileSaveAs->setEnabled(opened_);
   m_filePrint->setEnabled(opened_);
   m_exportBibtex->setEnabled(opened_);
@@ -1317,22 +1309,25 @@ void Bookcase::slotImportBibtexml() {
     return;
   }
   
-  XSLTHandler handler(xsltfile);
-  
-  QDomDocument* inputDom = m_doc->readDocument(infile);
-  // readDocument() has its own error messages
-  if(!inputDom || inputDom->isNull()) {
-    kdDebug() << "slotImportBibtexml() - null QDomDocument!" << endl;
-    delete inputDom;
+  QString tmpfile;
+  if(!KIO::NetAccess::download(infile, tmpfile)) {
+    QString str;
+    if(infile.isLocalFile()) {
+      str = i18n("Bookcase is unable to find the file - %1.").arg(infile.fileName());
+    } else {
+      str = i18n("Bookcase is unable to download the file - %1.").arg(infile.url());
+    }
+    KMessageBox::sorry(this, str);
     return;
   }
   
-  QString text = handler.applyStylesheet(inputDom->toString());
-  delete inputDom;
+  XSLTHandler handler(xsltfile);
+  QString text = handler.applyStylesheetToFile(tmpfile);
   if(text.isEmpty()) {
     XSLTError();
     return;
   }
+  KIO::NetAccess::removeTempFile(tmpfile);
 
   QDomDocument dom;
   if(!dom.setContent(text)) {

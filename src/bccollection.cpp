@@ -86,6 +86,7 @@ bool BCCollection::addAttribute(BCAttribute* att_) {
     deleteAttribute(attributeByName(att_->name()), true);
   }
 
+//  kdDebug() << "BCCollection::addAttribute() - adding " << att_->name() << endl;
   m_attributeList.append(att_);
   m_attributeNameDict.insert(att_->name(), att_);
   m_attributeTitleDict.insert(att_->title(), att_);
@@ -109,6 +110,7 @@ bool BCCollection::addAttribute(BCAttribute* att_) {
   for( ; it.current(); ++it) {
     populateDicts(it.current());
   }
+
   emit signalAttributeAdded(this, att_);
   m_isCustom = true;
   return true;

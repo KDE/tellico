@@ -40,7 +40,7 @@ class BCFilter;
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: bcdetailedlistview.h,v 1.3 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bcdetailedlistview.h,v 1.5 2003/05/11 00:58:41 robby Exp $
  */
 class BCDetailedListView : public KListView {
 Q_OBJECT
@@ -62,8 +62,8 @@ public:
    *
    * @param colNames A list of the attribute names in the order to be shown
    */
-  void setColumns(BCCollection* coll, const QValueList<int>& colNames);
-  QStringList visibleColumns() const;
+  void setColumns(BCCollection* coll, const QStringList& colTitles, const QValueList<int>& colNames);
+  QStringList columnTitles() const;
   void setFilter(const BCFilter* filter);
   const BCFilter* filter() const;
    
@@ -114,6 +114,7 @@ public slots:
   void slotAddColumn(BCCollection*, BCAttribute* att);
   void slotModifyColumn(BCCollection*, BCAttribute* newAtt, BCAttribute* oldAtt);
   void slotRemoveColumn(BCCollection*, BCAttribute* att);
+  void slotRemoveColumn(BCCollection*, const QString& title);
 
 protected:
   /**
@@ -156,6 +157,7 @@ protected slots:
   void slotClearSelection();
   void slotHeaderMenuActivated(int id);
   void slotCacheColumnWidth(int section, int oldSize, int newSize);
+  void verifyHeaderMenu();
 
 signals:
   /**
@@ -175,7 +177,6 @@ private:
   BookcaseDoc* m_doc;
   KPopupMenu* m_itemMenu;
   KPopupMenu* m_headerMenu;
-  QValueVector<bool> m_visibleColumns;
   QValueVector<int> m_columnWidths;
   QPixmap m_bookPix;
   QPixmap m_checkPix;

@@ -32,7 +32,7 @@
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: videocollection.h,v 1.2 2003/04/01 03:30:41 robby Exp $
+ * @version $Id: videocollection.h,v 1.3 2003/05/10 19:21:53 robby Exp $
  */
 class VideoCollection : public BCCollection  {
 Q_OBJECT
@@ -44,10 +44,11 @@ public:
    * @param id The id of the collection, which should be unique.
    * @param title The title of the collection
    */
-  VideoCollection(int id, const QString& title = i18n("My Videos"));
+  VideoCollection(int id, bool addAttributes, const QString& title = i18n("My Videos"));
 
   virtual BCCollection::CollectionType collectionType() const { return BCCollection::Video; };
   virtual bool isVideo() const { return true; };
+  virtual void addDefaultAttributes();
 };
 
 #endif

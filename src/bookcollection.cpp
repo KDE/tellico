@@ -21,9 +21,14 @@ static const QString publishing = i18n("Publishing");
 static const QString classification = i18n("Classification");
 static const QString personal = i18n("Personal");
 
-BookCollection::BookCollection(int id_, const QString& title_ /* = i18n("My Books")*/)
+BookCollection::BookCollection(int id_, bool addAttributes_, const QString& title_ /* = i18n("My Books")*/)
    : BCCollection(id_, title_, QString::fromLatin1("book"), i18n("Books")) {
+  if(addAttributes_) {
+    addDefaultAttributes();
+  }
+}
 
+void BookCollection::addDefaultAttributes() {
   BCAttribute* att;
 
   att = new BCAttribute(QString::fromLatin1("subtitle"), i18n("Subtitle"));
@@ -66,7 +71,7 @@ BookCollection::BookCollection(int id_, const QString& title_ /* = i18n("My Book
   addAttribute(att);
 
   att = new BCAttribute(QString::fromLatin1("cr_year"), i18n("Copyright Year"), BCAttribute::Year);
-  att->setCategory(i18n("&Publishing"));
+  att->setCategory(publishing);
   att->setFlags(BCAttribute::AllowGrouped | BCAttribute::AllowMultiple);
   addAttribute(att);
 

@@ -1,3 +1,24 @@
+2003-05-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.6.2
+
+2003-05-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with custom fields not showing up in column popup menu.
+	* Fixed crashing when selecting a different book after modifying the current one and not saving it.
+	* Fixed icon bug for column view.
+	* Prettied-up some of layout code.
+
+2003-05-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Norwegian translation from Leif Mathis Gaup.
+	* Fixed printing bug for books with multiple groups.
+
+2003-05-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed initial file opening so that if a new empty file was the last viewed, then no recent file is opened at next startup.
+	* Fixed bug with initial collection not updating edit widgets.
+
 2003-05-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase version 0.6.1

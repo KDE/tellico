@@ -11,7 +11,7 @@
    ================================================================
    Bookcase XSLT file - used for importing from bibtexml format
 
-   $Id: bibtexml2bookcase.xsl,v 1.5 2003/05/06 05:24:25 robby Exp $
+   $Id: bibtexml2bookcase.xsl,v 1.7 2003/05/10 19:40:25 robby Exp $
 
    Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
@@ -39,8 +39,8 @@
  <!-- if title is empty, then Bookcase uses default -->
   <collection title="" unit="book">
   <!-- want to store key (id) values -->
-  <!-- type = "5" is BCAttribute::ReadOnly -->
-   <attribute name="bibtex-id" type="5" flags="0" description="BibTex ID"/>
+  <!-- type = "1" is BCAttribute::Line -->
+   <attribute name="bibtex-id" title="Bibtex ID" type="1" flags="0"/>
    <xsl:apply-templates select="bibtexml:entry/bibtexml:book"/>
   </collection>
  </bookcase>

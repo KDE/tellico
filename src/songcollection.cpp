@@ -16,9 +16,14 @@
 
 #include "songcollection.h"
 
-SongCollection::SongCollection(int id_, const QString& title_ /* = i18n("My Songs")*/)
+SongCollection::SongCollection(int id_, bool addAttributes_, const QString& title_ /*=i18n("My Songs")*/)
    : BCCollection(id_, title_, QString::fromLatin1("song"), i18n("Song")) {
+  if(addAttributes_) {
+    addDefaultAttributes();
+  }
+}
 
+void SongCollection::addDefaultAttributes() {
   BCAttribute* att;
 
   att = new BCAttribute(QString::fromLatin1("artist"), i18n("Artist"));

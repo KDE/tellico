@@ -11,8 +11,10 @@ AUTOMAKE_OPTIONS = foreign
 
 KDE_OPTIONS = noautodist
 
-$(top_srcdir)/configure.in: configure.in.in $(top_srcdir)/subdirs
-	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common configure.in ;
+#$(top_srcdir)/configure.in: configure.in.in $(top_srcdir)/subdirs
+$(top_srcdir)/configure.in: configure.in.in
+	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common subdirs
+	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common configure.in
 
 $(top_srcdir)/subdirs:
 	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common subdirs
@@ -29,9 +31,10 @@ mime_DATA = x-bookcase.desktop
 datadir = $(kde_datadir)/bookcase
 data_DATA = bookcase.dtd
 
-MAINTAINERCLEANFILES = subdirs configure.in acinclude.m4 configure.files Makefile.in
+DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz
 
-DISTCLEANFILES = stamp-h2 $(distdir).tar.gz autom4te-2.5x.cache
+MAINTAINERCLEANFILES = subdirs configure.in aclocal.m4 acinclude.m4 configure.files Makefile.in $(DISTCLEANFILES)
+
 
 package-messages:
 	$(MAKE) -f admin/Makefile.common package-messages
@@ -39,12 +42,10 @@ package-messages:
 
 dist-hook:
 # am_edit needs to modify the Makefile.in files, so they must be writeable
-	-find $(distdir) -name Makefile.in -exec chmod a+w {} \;
+	-find $(distdir) -exec chmod a+w {} \;
 	cd $(distdir) && perl admin/am_edit -padmin
 	cd $(distdir) && $(MAKE) -f admin/Makefile.common subdirs
 # don't include dist file inside the dist file
 #	cd $(srcdir) && rm -f $(distdir).tar.gz
 # remove any executable
 	rm -rf $(distdir)/src/bookcase
-
-include admin/Doxyfile.am

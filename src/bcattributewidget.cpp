@@ -27,7 +27,6 @@
 #include <kurlrequester.h>
 #include <kurllabel.h>
 #include <krun.h>
-#include <ksqueezedtextlabel.h>
 #include <qtextedit.h>
 
 #include <qlayout.h>
@@ -37,13 +36,14 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
     : QHBox(parent_, name_), m_name(att_->name()), m_type(att_->type()), m_run(0) {
   setSpacing(4);
 
+  // do this to just add a little space in front of the widget
+  // a hack, I know
+  QWidget* w = new QWidget(this);
+
   if(m_type == BCAttribute::URL) {
     // set URL to null for now
     m_label = new KURLLabel(QString::null, att_->title() + QString::fromLatin1(":"), this);
   } else {
-  // if I try to get fancy with squeezed label, I can't figure out how to make it "non-squeezed"
-  // by default, for some styles with alrger font sizes
-//    m_label = new KSqueezedTextLabel(att_->title() + QString::fromLatin1(":"), this);
     m_label = new QLabel(att_->title() + QString::fromLatin1(":"), this);
   }
   m_label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);

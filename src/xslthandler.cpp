@@ -16,6 +16,8 @@
 
 #include "xslthandler.h"
 
+#include <qfile.h>
+
 #include <kio/netaccess.h>
 #include <kio/job.h>
 #include <kdebug.h>
@@ -93,7 +95,7 @@ void XSLTHandler::readStylesheet(const QString& xsltFilename_) {
   // TODO: what to do if this results in an error?
   // should probably check for file existence elsewhere for efficiency here
   // is latin1() the correct encoding to use? does it even matter?
-  m_stylesheet = xsltParseStylesheetFile( (const xmlChar *)xsltFilename_.latin1() );
+  m_stylesheet = xsltParseStylesheetFile((const xmlChar *)QFile::encodeName(xsltFilename_).data());
 
   m_params[0] = NULL;
 }
@@ -111,27 +113,42 @@ void XSLTHandler::addStringParam(const QCString& name_, const QCString& value_) 
   addParam(name_, QCString("'") + value_ + QCString("'"));
 }
 
-QString XSLTHandler::applyStylesheet(const QString& text_) {
-  QString result;
-
+QString XSLTHandler::applyStylesheetToFile(const QString& file_) {
   if(!m_stylesheet) {
     kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
-    return result;
+    return QString::null;
   }
 
-//  m_docIn = xmlParseDoc((xmlChar *)text_.local8Bit().data());
+  m_docIn = xmlParseFile(QFile::encodeName(file_).data());
+
+  return process();
+}
+
+QString XSLTHandler::applyStylesheet(const QString& text_) {
+  if(!m_stylesheet) {
+    kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
+    return QString::null;
+  }
+
   m_docIn = xmlParseDoc((xmlChar *)text_.utf8().data());
+
+  return process();
+}
+
+QString XSLTHandler::process() {
   if(!m_docIn) {
     kdDebug() << "XSLTHandler::applyStylesheet() - error parsing input string!" << endl;
-    return result;
+    return QString::null;
   }
 
   // returns NULL on error
   m_docOut = xsltApplyStylesheet(m_stylesheet, m_docIn, m_params);
   if(!m_docOut) {
     kdDebug() << "XSLTHandler::applyStylesheet() - error applying stylesheet!" << endl;
-    return result;
+    return QString::null;
   }
+
+  QString result;
 
   xmlOutputBufferPtr outp = xmlOutputBufferCreateIO( (xmlOutputWriteCallback)writeToQString,
                                                      (xmlOutputCloseCallback)closeQString,

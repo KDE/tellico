@@ -16,9 +16,14 @@
 
 #include "videocollection.h"
 
-VideoCollection::VideoCollection(int id_, const QString& title_ /* = i18n("My Videos")*/)
+VideoCollection::VideoCollection(int id_, bool addAttributes_, const QString& title_ /*=i18n("My Videos")*/)
    : BCCollection(id_, title_, QString::fromLatin1("video"), i18n("Videos")) {
+  if(addAttributes_) {
+    addDefaultAttributes();
+  }
+}
 
+void VideoCollection::addDefaultAttributes() {
   BCAttribute* att;
 
   att = new BCAttribute(QString::fromLatin1("year"), i18n("Year"));

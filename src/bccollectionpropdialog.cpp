@@ -115,20 +115,20 @@ BCCollectionPropDialog::BCCollectionPropDialog(BCCollection* coll_, QWidget* par
   layout->addWidget(m_titleEdit, 0, 1);
   connect(m_titleEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  layout->addWidget(new QLabel(i18n("Category:"), grid), 1, 0);
-  m_catCombo = new KComboBox(true, grid);
-  layout->addWidget(m_catCombo, 1, 1);
-  m_catCombo->insertStringList(m_coll->attributeCategories());
-  m_catCombo->setDuplicatesEnabled(false);
-  connect(m_catCombo, SIGNAL(activated(int)), SLOT(slotModified()));
-  QWhatsThis::add(m_titleEdit, i18n("The fields are grouped by common categories for editing."));
-
   layout->addWidget(new QLabel(i18n("Type:"), grid), 0, 2);
   m_typeCombo = new KComboBox(grid);
   layout->addWidget(m_typeCombo, 0, 3);
   m_typeCombo->insertStringList(m_typeMap.values());
   connect(m_typeCombo, SIGNAL(activated(int)), SLOT(slotModified()));
   connect(m_typeCombo, SIGNAL(activated(const QString&)), SLOT(slotTypeChanged(const QString&)));
+
+  layout->addWidget(new QLabel(i18n("Category:"), grid), 1, 0);
+  m_catCombo = new KComboBox(true, grid);
+  layout->addWidget(m_catCombo, 1, 1);
+  m_catCombo->insertStringList(m_coll->attributeCategories());
+  m_catCombo->setDuplicatesEnabled(false);
+  connect(m_catCombo, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  QWhatsThis::add(m_titleEdit, i18n("The fields are grouped by common categories for editing."));
 
   layout->addWidget(new QLabel(i18n("Allowed:"), grid), 2, 0);
   m_allowEdit = new KLineEdit(grid);
@@ -221,7 +221,9 @@ void BCCollectionPropDialog::slotNew() {
   m_fieldsBox->setSelected(box, true);
   box->setColored(true);
   m_fieldsBox->ensureCurrentVisible();
-  m_modified = true;
+  slotModified();
+  m_titleEdit->setFocus();
+  m_titleEdit->selectAll();
 }
 
 void BCCollectionPropDialog::slotDelete() {
@@ -251,6 +253,7 @@ void BCCollectionPropDialog::slotDelete() {
     m_fieldsBox->removeItem(m_fieldsBox->currentItem());
     m_fieldsBox->setSelected(m_fieldsBox->currentItem(), true);
     m_fieldsBox->ensureCurrentVisible();
+    enableButtonOK(true);
   }
 }
 
@@ -350,6 +353,9 @@ void BCCollectionPropDialog::slotUpdateValues(const QString& title_) {
 
   // type is only changeable for new attributes
   m_typeCombo->setEnabled(isNew);
+  
+  m_titleEdit->setFocus();
+  m_titleEdit->selectAll();
 
   m_currentAttribute = att;
   m_updatingValues = false;

@@ -41,7 +41,7 @@ typedef QPtrListIterator<BCUnit> BCUnitListIterator;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bcunit.h,v 1.4 2003/05/03 05:39:08 robby Exp $
+ * @version $Id: bcunit.h,v 1.5 2003/05/11 00:35:11 robby Exp $
  */
 class BCUnit {
 public:
@@ -80,7 +80,7 @@ public:
    * The second time, that lookup isn't necessary.
    *
    * @param name The attribute name
-   * @param flag The attribtue's format flag
+   * @param flag The attribute's format flag
    * @return The value of the attribute
    */
   QString attributeFormatted(const QString& name,
@@ -138,7 +138,7 @@ public:
    */
   QStringList groupNamesByAttributeName(const QString& attName) const;
   /**
-   * Returns a list of all the attribtue values contained in the unit.
+   * Returns a list of all the attribute values contained in the unit.
    *
    * @return The list of attribute values
    */

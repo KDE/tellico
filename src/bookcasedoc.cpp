@@ -74,8 +74,8 @@ bool BookcaseDoc::newDocument() {
   deleteContents();
 
   // a new document always has an empty book collection
-  // the 0 is the collection number
-  BookCollection* coll = new BookCollection(0);
+  // the 0 is the collection number, true mean add default attributes
+  BookCollection* coll = new BookCollection(0, true);
 
   // can't call slotAddCollection() because setModified(true) gets called
   m_collList.append(coll);
@@ -217,18 +217,33 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
     QString title = collelem.attribute(QString::fromLatin1("title"));
     QString unit = collelem.attribute(QString::fromLatin1("unit"));
     QString unitTitle = collelem.attribute(QString::fromLatin1("unitTitle"));
-    BCCollection* coll;
+
+    QDomNodeList attelems = collelem.elementsByTagName(QString::fromLatin1("attribute"));
+//    kdDebug() << QString("BookcaseDoc::openDocument() - There are %1 attribute(s).\n").arg(attelems.count());
+
+    // the dilemma is when to force the new colleciton to have all the default attributes
+    // for bibtexml import, say, I want to add a bibtex-id attribute, but not have to put all the defaults
+    // in the XSLT. So, if there are no attributes or if the first one is not the title, then add defaults
+    bool addAttributes = (attelems.count() == 0);
+    if(!addAttributes) {
+       QString name = attelems.item(0).toElement().attribute(QString::fromLatin1("name"));
+       addAttributes = (name != QString::fromLatin1("title"));
+    }
+
+    BCCollection* coll = 0;
     if(unit == QString::fromLatin1("book")) {
-        coll = new BookCollection(collectionCount());
+      coll = new BookCollection(collectionCount(), addAttributes);
+//    coll->addDefaultAttributes();
 #if 0
     } else if(unit == QString::fromLatin1("cd")) {
-      coll = BCCollection::CDs(collectionCount());
+      coll = BCCollection::CDs(collectionCount(), addAttributes);
     } else if(unit == QString::fromLatin1("video")) {
-      coll = BCCollection::Videos(collectionCount());
+      coll = BCCollection::Videos(collectionCount(), addAttributes);
 #endif
     } else {
       coll = new BCCollection(collectionCount(), title, unit, unitTitle);
     }
+
     // since the static operators have default titles
     if(!title.isEmpty()) {
       coll->setTitle(title);
@@ -238,10 +253,6 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
 
     // I don't want the attribute added and unit added signals to happen
     coll->blockSignals(true);
-
-    // there will only be attributes if it's a custom collection
-    QDomNodeList attelems = collelem.elementsByTagName(QString::fromLatin1("attribute"));
-//    kdDebug() << QString("BookcaseDoc::openDocument() - There are %1 attribute(s).\n").arg(attelems.count());
 
     QString attName, attTitle, attTypeStr, attFormatStr;
     for(unsigned j = 0; j < attelems.count(); ++j) {
@@ -264,7 +275,17 @@ bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {
       }
       
       if(attelem.hasAttribute(QString::fromLatin1("category"))) {
-        att->setCategory(attelem.attribute(QString::fromLatin1("category")));
+        // at one point, the categories had keyboard accels
+        QString cat = attelem.attribute(QString::fromLatin1("category"));
+        if(cat.find('&') > -1) {
+          // Qt 3.0.x doesn't have QString::replace(QChar, ...)
+#if QT_VERSION >= 0x030100
+          cat.replace('&', QString::null);
+#else
+          cat.replace(QRegExp(QString::fromLatin1("&")), QString::null);
+#endif
+        }
+        att->setCategory(cat);
       }
       
       if(attelem.hasAttribute(QString::fromLatin1("flags"))) {
@@ -573,7 +594,9 @@ QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) cons
   for( ; collIt.current(); ++collIt) {
     QDomElement collElem = doc.createElement(QString::fromLatin1("collection"));
     bcelem.appendChild(collElem);
-    collElem.setAttribute(QString::fromLatin1("title"), collIt.current()->title());
+    collElem.setAttribute(QString::fromLatin1("title"),     collIt.current()->title());
+    collElem.setAttribute(QString::fromLatin1("unit"),      collIt.current()->unitName());
+    collElem.setAttribute(QString::fromLatin1("unitTitle"), collIt.current()->unitTitle());
 
     QDomElement attsElem = doc.createElement(QString::fromLatin1("attributes"));
     collElem.appendChild(attsElem);
@@ -587,7 +610,7 @@ QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) cons
     QString value;
         
     // outside the loop for efficiency;
-    QDomElement unitElem, titleElem, valueElem;
+    QDomElement unitElem, titleElem, attParElem, attElem;
 
     BCUnitGroupDict* dict = collIt.current()->unitGroupDictByName(dictName_);
     if(!dict) {
@@ -597,37 +620,66 @@ QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) cons
     // dictName_ equals group->attributeName() for all these
     QDictIterator<BCUnitGroup> groupIt(*dict);
     for( ; groupIt.current(); ++groupIt) {
-      BCUnitListIterator it(*groupIt.current());
-      for( ; it.current(); ++it) {
+      BCUnitListIterator unitIt(*groupIt.current());
+      for( ; unitIt.current(); ++unitIt) {
+//        exportUnitXML(doc, collElem, unitIt.current(), format_);
         unitElem = doc.createElement(collIt.current()->unitName());
+//
+//        titleElem = doc.createElement(QString::fromLatin1("title"));
+//        titleElem.appendChild(doc.createTextNode(it.current()->title()));
+//        unitElem.appendChild(titleElem);
+//
 
-        titleElem = doc.createElement(QString::fromLatin1("title"));
-        titleElem.appendChild(doc.createTextNode(it.current()->title()));
-        unitElem.appendChild(titleElem);
-
-        valueElem = doc.createElement(dictName_);
-        valueElem.appendChild(doc.createTextNode(groupIt.current()->groupName()));
-        unitElem.appendChild(valueElem);
-
+// The attribute by which the books are grouped is special. Only the value of the current
+// dict name will be output. Essentially, for a book with two authors, two book elements are
+// created, each with a different author element value. That's how the goruped printing happens.
+        attElem = doc.createElement(dictName_);
+        attElem.appendChild(doc.createTextNode(groupIt.current()->groupName()));
+        if(collIt.current()->attributeByName(dictName_)->flags() & BCAttribute::AllowMultiple) {
+          // who cares about grammar, just add an 's' to the name
+          attParElem = doc.createElement(dictName_ + QString::fromLatin1("s"));
+          attParElem.appendChild(attElem);
+          unitElem.appendChild(attParElem);
+        } else {
+          unitElem.appendChild(attElem);
+        }
+        
         for(attIt.toFirst(); attIt.current(); ++attIt) {
-          // don't include the grouped attribute twice nor the title again
-          if(attIt.current()->name() == dictName_
-             || attIt.current()->name() == QString::fromLatin1("title")) {
+          // don't include the grouped attribute since it's special
+          if(attIt.current()->name() == dictName_) {
             continue;
           }
 
           if(format_) {
-            value = it.current()->attributeFormatted(attIt.current()->name(),
-                                                     attIt.current()->formatFlag());
+            value = unitIt.current()->attributeFormatted(attIt.current()->name(),
+                                                         attIt.current()->formatFlag());
           } else {
-            value = it.current()->attribute(attIt.current()->name());
+            value = unitIt.current()->attribute(attIt.current()->name());
           }
-          
+
           if(!value.isEmpty()) {
-            valueElem = doc.createElement(attIt.current()->name());
-            unitElem.appendChild(valueElem);
-            if(attIt.current()->type() != BCAttribute::Bool) {
-              valueElem.appendChild(doc.createTextNode(value));
+            // if multiple versions are allowed, split them into separate elements
+            if(attIt.current()->flags() & BCAttribute::AllowMultiple) {
+              QString attName = attIt.current()->name();
+              // who cares about grammar, just add an 's' to the name
+              attParElem = doc.createElement(attName + QString::fromLatin1("s"));
+              unitElem.appendChild(attParElem);
+
+              // the space after the semi-colon is enforced when the attribute is set for the unit
+              QStringList atts = QStringList::split(QString::fromLatin1("; "), value);
+              QStringList::ConstIterator it;
+              for(it = atts.begin(); it != atts.end(); ++it) {
+                attElem = doc.createElement(attName);
+                // never going to be BCAttribute::Bool, so don't bother to check
+                attElem.appendChild(doc.createTextNode(*it));
+                attParElem.appendChild(attElem);
+              }
+            } else {
+              attElem = doc.createElement(attIt.current()->name());
+              unitElem.appendChild(attElem);
+              if(attIt.current()->type() != BCAttribute::Bool) {
+                attElem.appendChild(doc.createTextNode(value));
+              }
             }
           }
         } // end attribute loop
@@ -637,12 +689,12 @@ QDomDocument BookcaseDoc::exportXML(const QString& dictName_, bool format_) cons
     } // end group loop
   } // end collection loop
   
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
-  if(f.open(IO_WriteOnly)) {
-    QTextStream t(&f);
-    t << doc.toCString().data();
-  }
-  f.close();
+//  QFile f(QString::fromLatin1("/tmp/test.xml"));
+//  if(f.open(IO_WriteOnly)) {
+//    QTextStream t(&f);
+//    t << doc.toCString().data();
+//  }
+//  f.close();
 
   return doc;
 }

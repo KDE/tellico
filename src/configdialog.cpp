@@ -133,12 +133,13 @@ void ConfigDialog::setupGeneralPage() {
   QVGroupBox* formatGroup = new QVGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);
 
-  m_cbCapitalize = new QCheckBox(i18n("Auto capitalize titles and names"), formatGroup);
+  QString restart = QString::fromLatin1(" ") + i18n("(Requires restart)");
+  m_cbCapitalize = new QCheckBox(i18n("Auto capitalize titles and names")+restart, formatGroup);
   QWhatsThis::add(m_cbCapitalize, i18n("If checked, titles and names will "
                                        "be automatically capitalized."));
   m_cbDict.insert(QString::fromLatin1("capitalize"), m_cbCapitalize);
 
-  m_cbFormat = new QCheckBox(i18n("Auto format titles and names"), formatGroup);
+  m_cbFormat = new QCheckBox(i18n("Auto format titles and names")+restart, formatGroup);
   QWhatsThis::add(m_cbFormat, i18n("If checked, titles and names will "
                                    "be automatically formatted."));
   m_cbDict.insert(QString::fromLatin1("format"), m_cbFormat);

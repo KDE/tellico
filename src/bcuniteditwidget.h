@@ -37,7 +37,7 @@ class QPushButton;
  * edit controls and so on.
  *
  * @author Robby Stephenson
- * @version $Id: bcuniteditwidget.h,v 1.5 2003/05/06 05:24:59 robby Exp $
+ * @version $Id: bcuniteditwidget.h,v 1.6 2003/05/10 19:21:53 robby Exp $
  */
 class BCUnitEditWidget : public QWidget {
 Q_OBJECT
@@ -60,7 +60,6 @@ public:
 
 public slots:
   void slotSetLayout(BCCollection* coll);
-  void slotSetCollection(BCCollection* coll);
   /**
    * Resets the widget, deleting all of its contents
    */

@@ -83,7 +83,30 @@ void BCDetailedListView::slotAddCollection(BCCollection* coll_) {
     return;
   }
 
-//  kdDebug() << "BCDetailedListView::slotAddCollection()"<< endl;
+//  kdDebug() << "BCDetailedListView::slotAddCollection()" << endl;
+
+  // TODO fix for multiple collections
+  // if columns already exist, check to see if any need to be removed or added
+  if(columns() > 0 && !coll_->attributeTitles().isEmpty()) {
+    QStringList colTitles;
+    for(int i = 0; i < columns(); ++i) {
+      colTitles += columnText(i);
+    }
+    QStringList list = coll_->attributeTitles();
+    QStringList::ConstIterator it;
+    for(it = list.begin(); it != list.end(); ++it) {
+      if(colTitles.findIndex(*it) == -1) {
+        slotAddColumn(coll_, coll_->attributeByTitle(*it));
+      }
+      colTitles.remove(*it);
+    }
+    // if colTitles is not now empty, need to remove some columns
+    if(!colTitles.isEmpty()) {
+      for(it = colTitles.begin(); it != colTitles.end(); ++it) {
+        slotRemoveColumn(coll_, *it);
+      }
+    }
+  }
   
   QPtrListIterator<BCUnit> unitIt(coll_->unitList());
   for( ; unitIt.current(); ++unitIt) {
@@ -291,9 +314,16 @@ void BCDetailedListView::slotClearSelection() {
 
 // this is JUST for the initial setup
 // showing or hiding columsn should use showColumn()
-// TODO: when attributes can be custom added, this needs to be updated
-void BCDetailedListView::setColumns(BCCollection* coll_, const QValueList<int>& colWidths_) {
+void BCDetailedListView::setColumns(BCCollection* coll_, const QStringList& colNames_,
+                                    const QValueList<int>& colWidths_) {
 //  kdDebug() << "BCDetailedListView::setColumns() " << endl;
+//  kdDebug() << "Titles: " << colNames_.join(QString::fromLatin1(";")) << endl;
+//  QString widths;
+//  QValueList<int>::ConstIterator wIt;
+//  for(wIt = colWidths_.begin(); wIt != colWidths_.end(); ++wIt) {
+//    widths += QString::number(*wIt) + ';';
+//  }
+//  kdDebug() << "Widths: " << widths << endl;
   
   if(!coll_) {
     return;
@@ -310,16 +340,17 @@ void BCDetailedListView::setColumns(BCCollection* coll_, const QValueList<int>& 
   // get all the attributes in the document which are the same unit type
   // this assumes that some day, I'll get around to using a QWidgetStack
   // or something so I can show collections of different unit types
-  BCCollection::CollectionType type = coll_->collectionType();
-  BCAttributeList list = m_doc->uniqueAttributes(type);
-
-  // initialize the visible vector and width cache
-  m_visibleColumns.resize(list.count(), false);
+//  BCCollection::CollectionType type = coll_->collectionType();
+//  BCAttributeList list = m_doc->uniqueAttributes(type);
+  BCAttributeList list = coll_->attributeList();
+  
+  // initialize the width cache
   m_columnWidths.resize(list.count(), 0);
   
   // iterate over the all the attributes
   BCAttributeListIterator it(list);
   for( ; it.current(); ++it) {
+//    kdDebug() << "BCDetailedListView::setColumns() - adding column " << it.current()->title() << endl;
     // columns gets added for every attribute
     int col = addColumn(it.current()->title());
     m_headerMenu->insertItem(it.current()->title(), col);
@@ -333,12 +364,12 @@ void BCDetailedListView::setColumns(BCCollection* coll_, const QValueList<int>& 
     if(colWidths_[col] > -1) {
       setColumnWidth(col, colWidths_[col]);
       setColumnWidthMode(col, QListView::Manual);
+      m_columnWidths[header()->mapToSection(col)] = colWidths_[col];
     }
     
     if(colWidths_[col] == 0) {
       header()->setResizeEnabled(false, col);
-    } else {
-      m_visibleColumns[col] = true;
+    } else if(colNames_.findIndex(it.current()->name()) > -1) {
       m_headerMenu->setItemChecked(col, true);
     }
   }
@@ -357,18 +388,17 @@ bool BCDetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
 // this implementation borrows from the code in the juk application
 // in the file playlistsplitter.cpp by Scott Wheeler 
 void BCDetailedListView::slotHeaderMenuActivated(int id_) {
+//  kdDebug() << "BCDetailedListView::slotHeaderMenuActivated() - " << m_headerMenu->text(id_) << endl;
   bool checked = m_headerMenu->isItemChecked(id_);
   checked = !checked; // toggle
   m_headerMenu->setItemChecked(id_, checked);
 
-  int idx = m_headerMenu->indexOf(id_);
-  idx--; // because there's a title item
-  m_visibleColumns[idx] = checked;
+  int col = m_headerMenu->indexOf(id_) - 1;  // subtract 1 because there's a title item
 
   if(checked) { // add a column
-    showColumn(idx);
+    showColumn(col);
   } else {
-    hideColumn(idx);
+    hideColumn(col);
   }
 }
 
@@ -422,25 +452,29 @@ void BCDetailedListView::setPixmapAndText(BCUnitItem* item_, int col_, BCAttribu
       // needed for sorting
       item_->setText(col_, QString::fromLatin1(" "));
     }
-  } else { // for everything else, there's no pixmap
-    item_->setPixmap(col_, QPixmap());
+  } else { // for everything else, there's no pixmap, unless it's the first column
+    // TODO: fix for multiple types
+    if(col_ == 0) {
+      item_->setPixmap(col_, m_bookPix);
+    } else {
+      item_->setPixmap(col_, QPixmap());
+    }
     QString value = item_->unit()->attributeFormatted(att_->name(), att_->formatFlag());
     item_->setText(col_, value);
   }
 }
 
-QStringList BCDetailedListView::visibleColumns() const {
+QStringList BCDetailedListView::columnTitles() const {
   QStringList colTitles;
   // only visible if width > 0
   for(int col = 0; col < columns(); ++col) {
-    if(columnWidth(col) > 0) {
-      colTitles += columnText(col);
-    }
+    colTitles += columnText(col);
   }
   return colTitles;
 }
 
 void BCDetailedListView::showColumn(int col_) {
+//  kdDebug() << "BCDetailedListView::showColumn() - " << columnText(col_) << endl;
   int w = m_columnWidths[col_]; // this should be safe - all were initialized to 0
   if(w == 0) {
     setColumnWidthMode(col_, QListView::Maximum);
@@ -448,6 +482,7 @@ void BCDetailedListView::showColumn(int col_) {
     for( ; it.current(); ++it) {
       w = QMAX(it.current()->width(fontMetrics(), this, col_), w);
     }
+    w = QMAX(w, 50);
   }
 
   setColumnWidth(col_, w);
@@ -456,6 +491,7 @@ void BCDetailedListView::showColumn(int col_) {
 }
 
 void BCDetailedListView::hideColumn(int col_) {
+//  kdDebug() << "BCDetailedListView::hideColumn() - " << columnText(col_) << endl;
   setColumnWidthMode(col_, QListView::Manual);
   setColumnWidth(col_, 0);
   header()->setResizeEnabled(false, col_);
@@ -464,9 +500,8 @@ void BCDetailedListView::hideColumn(int col_) {
 }
 
 void BCDetailedListView::slotCacheColumnWidth(int section_, int oldSize_, int newSize_) {
-  // if the old size was 0, update the visible flags
+  // if the old size was 0, update the menu
   if(oldSize_ == 0 && newSize_ > 0) {
-    m_visibleColumns[section_] = true;
     m_headerMenu->setItemChecked(m_headerMenu->idAt(section_+1), true); // add 1 for title item
   }
 
@@ -498,11 +533,11 @@ const BCFilter* BCDetailedListView::filter() const {
 // don't care about collection right now
 // TODO: fix when multiple collections supported
 void BCDetailedListView::slotAddColumn(BCCollection*, BCAttribute* att_) {
-  m_visibleColumns.push_back(true);
-
+//  kdDebug() << "BCDetailedListView::slotAddColumn() - " << att_->title() << endl;
   int col = addColumn(att_->title());
-  m_headerMenu->insertItem(att_->title(), col);
-  m_headerMenu->setItemChecked(col, true);
+  int id = m_headerMenu->insertItem(att_->title());
+
+  m_headerMenu->setItemChecked(id, false);
   // bools have a checkmark pixmap, so center it
   if(att_->type() == BCAttribute::Bool) {
     setColumnAlignment(col, Qt::AlignHCenter);
@@ -510,9 +545,12 @@ void BCDetailedListView::slotAddColumn(BCCollection*, BCAttribute* att_) {
 
   slotRefresh();
 //  m_columnWidths.push_back(columnWidth(col));
+  m_columnWidths.push_back(0);
   // by default, keep the new column hidden
   // easiest way to do that is to simulate selected the menu item
-  slotHeaderMenuActivated(col);
+//  slotHeaderMenuActivated(col);
+  hideColumn(col);
+  verifyHeaderMenu();
 }
 
 void BCDetailedListView::slotModifyColumn(BCCollection*, BCAttribute* newAtt_, BCAttribute* oldAtt_) {
@@ -528,31 +566,64 @@ void BCDetailedListView::slotModifyColumn(BCCollection*, BCAttribute* newAtt_, B
   m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), newAtt_->title()); // add 1 since menu has title
 }
 
+void BCDetailedListView::slotRemoveColumn(BCCollection* coll_, BCAttribute* att_) {
+  slotRemoveColumn(coll_, att_->title());
+}
+
 // don't care about collection right now
 // TODO: fix when multiple collections supported
-void BCDetailedListView::slotRemoveColumn(BCCollection*, BCAttribute* att_) {
+void BCDetailedListView::slotRemoveColumn(BCCollection*, const QString& title_) {
+//  kdDebug() << "BCDetailedListView::slotRemoveColumn() - " << title_ << endl;
+  
   int sec; // I need it for after the loop
   for(sec = 0; sec < columns(); ++sec) {
-    if(header()->label(sec) == att_->title()) {
+    if(header()->label(sec) == title_) {
+//      kdDebug() << "Removing section " << sec << endl;
       break;
     }
   }
 
   if(sec == columns()) {
-    kdWarning() << "BCDetailedListView::slotAddColumn() - no column named " << att_->title() << endl;
+    kdWarning() << "BCDetailedListView::slotRemoveColumn() - no column named " << title_ << endl;
     return;
   }
 
   m_headerMenu->removeItem(m_headerMenu->idAt(sec+1)); // add 1 since menu has title
-  m_visibleColumns.erase(&m_visibleColumns[sec]);
+
   m_columnWidths.erase(&m_columnWidths[sec]);
-  
+
   // I thought this would have to be mapped to index, but not the case
   removeColumn(sec);
 
-  // for some reason, the column resize flag doesn't get changed when a column is removed
-  for(unsigned i = header()->mapToIndex(sec); i < m_visibleColumns.size(); ++i) {
-    header()->setResizeEnabled(m_visibleColumns[i], header()->mapToSection(i));
+  for(int i = sec; i < columns(); ++i) {
+    header()->setResizeEnabled(columnWidth(i) > 0, header()->mapToSection(i));
   }
   triggerUpdate();
+  verifyHeaderMenu();
+}
+
+void BCDetailedListView::verifyHeaderMenu() {
+  for(int col = 0; col < columns(); ++col) {
+    // add one to menu index because of title item
+    if(m_headerMenu->isItemChecked(m_headerMenu->idAt(col+1)) != (columnWidth(col) > 0)) {
+      kdWarning() << "BCDetailedListView::verifyHeaderMenu()"
+                  << "\tChecked: " << (m_headerMenu->isItemChecked(m_headerMenu->idAt(col+1))?"true":"false")
+                  << "\\tWidth: " << columnWidth(col)
+                  << endl;
+    }
+    if(columnText(col) != m_headerMenu->text(m_headerMenu->idAt(col+1))) {
+      kdWarning() << "BCDetailedListView::verifyHeaderMenu()"
+                  << "\tColumn Text: " << columnText(col)
+                  << "\tMenu Text: " << m_headerMenu->text(m_headerMenu->idAt(col+1))
+                  << endl;
+    }
+//    kdDebug() << "\tColumn: " << col
+//              << "\tSection: " << header()->mapToSection(col)
+//              << "\tText: " << columnText(col)
+//              << "\t\tMenu Text: " << m_headerMenu->text(m_headerMenu->idAt(col+1))
+//              << "\tChecked: " << (m_headerMenu->isItemChecked(m_headerMenu->idAt(col+1))?"true":"false")
+//              << "\tWidth: " << columnWidth(col)
+//              << "\tCached Width: " << m_columnWidths[header()->mapToSection(col)]
+//              << endl;
+  }
 }

@@ -37,7 +37,7 @@ class QFile;
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: bookcasedoc.h,v 1.3 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bookcasedoc.h,v 1.4 2003/05/10 19:21:53 robby Exp $
  */
 class BookcaseDoc : public QObject  {
 Q_OBJECT
@@ -158,6 +158,15 @@ public:
    */
   QDomDocument exportXML(bool format=false) const;
   /**
+   * Inserts the data in the document into a DOM ordered form by iterating through
+   * a certain attribute group
+   *
+   * @param dictName The attribute name
+   * @param format Whether to format the attributes
+   * @return The QDomDocument object
+   */
+  QDomDocument exportXML(const QString& dictName, bool format) const;
+  /**
    * Returns true if there are no units. A doc with an empty collection is still empty.
    */
   bool isEmpty() const; 
@@ -256,15 +265,6 @@ protected:
   void exportCollectionXML(QDomDocument& doc, QDomElement& parent, BCCollection* coll, bool format) const;
   void exportAttributeXML(QDomDocument& doc, QDomElement& parent, BCAttribute* att) const;
   void exportUnitXML(QDomDocument& doc, QDomElement& parent, BCUnit* unit, bool format) const;
-  /**
-   * Inserts the data in the document into a DOM ordered form by iterating through
-   * a certain attribute group
-   *
-   * @param dictName The attribute name
-   * @param format Whether to format the attributes
-   * @return The QDomDocument object
-   */
-  QDomDocument exportXML(const QString& dictName, bool format) const;
 
 signals:
   /**

@@ -44,7 +44,7 @@ typedef QPtrListIterator<BCCollection> BCCollectionListIterator;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bccollection.h,v 1.4 2003/05/03 05:39:08 robby Exp $
+ * @version $Id: bccollection.h,v 1.5 2003/05/10 19:21:53 robby Exp $
  */
 class BCCollection : public QObject {
 Q_OBJECT
@@ -287,6 +287,10 @@ public:
    * @param group The group that was modified
    */
   void groupModified(BCUnitGroup* group);
+  /**
+   * Adds all the default attributes. A BCCollection has none.
+   */
+  virtual void addDefaultAttributes() { };
   /**
    * Returns if it is a collection of books
    */
