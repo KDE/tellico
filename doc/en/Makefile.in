@@ -272,7 +272,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  doc/en/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/doc/en/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/doc/en/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -288,12 +288,7 @@ uninstall-info-am:
 tags: TAGS
 TAGS:
 
-#>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-#>+ 4
-KDE_DIST=index.cache.bz2 
-
-DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
-
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
 top_distdir = ../..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
@@ -409,8 +404,9 @@ uninstall-am: uninstall-info-am
 .NOEXPORT:
 
 
+
 #>+ 24
-index.cache.bz2: $(srcdir)/index.docbook $(KDE_XSL_STYLESHEET) index.docbook index.cache.bz2 
+index.cache.bz2: $(srcdir)/index.docbook $(KDE_XSL_STYLESHEET) index.docbook 
 	@if test -n "$(MEINPROC)"; then echo $(MEINPROC) --check --cache index.cache.bz2 $(srcdir)/index.docbook; $(MEINPROC) --check --cache index.cache.bz2 $(srcdir)/index.docbook; fi
 
 docs-am: index.cache.bz2
@@ -437,20 +433,20 @@ clean-docs:
 #>+ 13
 install-nls:
 	$(mkinstalldirs) $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase
-	@for base in index.docbook index.cache.bz2 ; do \
+	@for base in index.docbook ; do \
 	  echo $(INSTALL_DATA) $$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
 	  $(INSTALL_DATA) $(srcdir)/$$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
 	done
 
 uninstall-nls:
-	for base in index.docbook index.cache.bz2 ; do \
+	for base in index.docbook ; do \
 	  rm -f $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/bookcase/$$base ;\
 	done
 
 
 #>+ 5
 distdir-nls:
-	for file in index.docbook index.cache.bz2 ; do \
+	for file in index.docbook ; do \
 	  cp $(srcdir)/$$file $(distdir); \
 	done
 
@@ -458,7 +454,7 @@ distdir-nls:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  doc/en/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/doc/en/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/doc/en/Makefile.in
 
 
 #>+ 2

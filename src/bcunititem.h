@@ -32,7 +32,7 @@ class BCUnit;
  * @see BCUnit
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.16 2002/11/25 00:56:22 robby Exp $
+ * @version $Id: bcunititem.h,v 1.17 2002/11/25 17:17:12 robby Exp $
  */
 class BCUnitItem : public KListViewItem {
 public:
@@ -74,7 +74,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.16 2002/11/25 00:56:22 robby Exp $
+ * @version $Id: bcunititem.h,v 1.17 2002/11/25 17:17:12 robby Exp $
  */
 class ParentItem : public KListViewItem {
 public:
@@ -115,8 +115,8 @@ public:
    * @param col The column number
    * @return The key
    */
-  QString key ( int col, bool ) const {
-    return text(col).startsWith( BCCollection::emptyGroupName() ) ? "_" : text(col);
+  QString key (int col, bool) const {
+    return text(col).startsWith(BCCollection::emptyGroupName()) ? QString("_") : text(col);
   }
 
 private:

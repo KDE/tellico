@@ -44,13 +44,13 @@ const int SAVE_SIGNAL_STEP_SIZE = 10;
 extern int xmlLoadExtDtdDefaultValue;
 
 /* some functions to pass to the XSLT libs */
-int ::writeToQString(void* context, const char* buffer, int len) {
+int writeToQString(void* context, const char* buffer, int len) {
   QString *t = static_cast<QString*>(context);
   *t += QString::fromUtf8(buffer, len);
   return len;
 }
 
-void ::closeQString(void* context) {
+void closeQString(void* context) {
   QString *t = static_cast<QString*>(context);;
   *t += QString::fromLatin1("\n");
 }
@@ -568,8 +568,8 @@ QString BookcaseDoc::exportHTML(const QString& xsltFilename_, const QString& sor
     return QString::null;
   }
   
-  xmlOutputBufferPtr outp = xmlOutputBufferCreateIO(::writeToQString,
-                             (xmlOutputCloseCallback)::closeQString, &html, 0);
+  xmlOutputBufferPtr outp = xmlOutputBufferCreateIO(writeToQString,
+                             (xmlOutputCloseCallback)closeQString, &html, 0);
   if(!outp) {
     xmlFreeDoc(doc);
     xsltFreeStylesheet(stylesheet);

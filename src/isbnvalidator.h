@@ -23,10 +23,11 @@
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h,v 1.6 2002/11/10 00:38:29 robby Exp $
+ * @version $Id: isbnvalidator.h,v 1.7 2002/11/26 05:46:19 robby Exp $
  *
  * Parts of this card are based on Java code
- * copyright (c) 1998-2002 Roedy Green, Canadian Mind Products
+ * copyright (c) 1998-2002 Roedy Green, Canadian Mind Products which
+ * may be copied and used freely for any purpose but military.
  *
  * @see http://mindprod.com/isbn.html
  * @see http://www.eblong.com/zarf/bookscan/

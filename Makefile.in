@@ -290,7 +290,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --foreign  Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)
 
@@ -426,7 +426,7 @@ distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
 #>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=configure.files stamp-h3 Makefile.dist Doxyfile configure.in.in autogen.sh stamp-h.in subdirs stamp-h2 
+KDE_DIST=configure.files stamp-h3 Makefile.dist Doxyfile configure.in.in autogen.sh stamp-h.in subdirs stamp-h2 bookcase.kdevses 
 
 DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 
@@ -658,6 +658,7 @@ dist-hook:
 .NOEXPORT:
 
 
+
 #>+ 2
 docs-am:
 
@@ -665,7 +666,7 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --foreign  Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/Makefile.in
 
 
 #>+ 2

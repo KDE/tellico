@@ -254,8 +254,8 @@ EXTRA_DIST = bookcase.pot
 ####### kdevelop will overwrite this part!!! (end)############
 #>- POFILES = AUTO
 #>+ 2
-POFILES = it.po
-GMOFILES = it.gmo
+POFILES = it.po ro.po
+GMOFILES = it.gmo ro.gmo
 subdir = po
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -273,7 +273,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  po/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/po/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/po/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -291,10 +291,12 @@ TAGS:
 
 #>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=messages.mo it.gmo it.po 
+KDE_DIST=ro.gmo ro.po messages.mo it.gmo it.po 
 
 #>- DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 #>+ 1
+DISTFILES = $(GMOFILES) $(POFILES) $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
+
 DISTFILES = $(GMOFILES) $(POFILES) $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 
 DISTFILES = $(GMOFILES) $(POFILES) $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
@@ -414,18 +416,22 @@ uninstall-am: uninstall-info-am
 .NOEXPORT:
 
 
-#>+ 4
+
+#>+ 7
 it.gmo: it.po
 	rm -f it.gmo; $(GMSGFMT) -o it.gmo $(srcdir)/it.po
 	test ! -f it.gmo || touch it.gmo
+ro.gmo: ro.po
+	rm -f ro.gmo; $(GMSGFMT) -o ro.gmo $(srcdir)/ro.po
+	test ! -f ro.gmo || touch ro.gmo
 
 #>+ 3
 clean-nls:
-	-rm -f  it.gmo
+	-rm -f  it.gmo ro.gmo
 
 #>+ 10
 install-nls:
-	@for base in it ; do \
+	@for base in it ro ; do \
 	  echo $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
 	  $(mkinstalldirs) $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES ; \
 	  if test -f $$base.gmo; then $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
@@ -434,9 +440,10 @@ install-nls:
 	done
 
 
-#>+ 3
+#>+ 4
 uninstall-nls:
 	rm -f $(DESTDIR)$(kde_locale)/it/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/ro/LC_MESSAGES/$(PACKAGE).mo
 
 #>+ 2
 all-nls: $(GMOFILES)
@@ -462,7 +469,7 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  po/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/po/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/po/Makefile.in
 
 
 #>+ 2

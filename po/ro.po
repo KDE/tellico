@@ -1,0 +1,693 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-11-24 21:06-0800\n"
+"PO-Revision-Date: 2002-12-03 17:29-0800\n"
+"Last-Translator: Iulian Ursache <iulianu@cs.tuiasi.ro>\n"
+"Language-Team: Română <ro@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.6\n"
+
+#: bcattribute.cpp:33 bcattribute.cpp:43 bccollection.cpp:36
+#: bccollection.cpp:353 bccollection.cpp:358 bccollection.cpp:367
+#: bccollection.cpp:372 bccollection.cpp:377 bccollection.cpp:493
+#: bccollection.cpp:499 bccollection.cpp:504 bccollection.cpp:511
+#: bccollection.cpp:516 bccollection.cpp:530 bccollection.cpp:535
+#: bccollection.cpp:543 bccollection.cpp:548 configdialog.cpp:115
+msgid "General"
+msgstr "General"
+
+#: bcattribute.cpp:207
+msgid "a,an,in,of,the,to"
+msgstr ""
+
+#: bcattribute.cpp:225
+msgid "The,the"
+msgstr ""
+
+#: bcattribute.cpp:239
+msgid "Jr.,Jr,jr.,jr,III,iii,IV,iv"
+msgstr ""
+
+#: bccollection.cpp:35
+msgid "Title"
+msgstr "Titlu"
+
+#: bccollection.cpp:339
+msgid "(Empty)"
+msgstr "(gol)"
+
+#: bccollection.cpp:347
+msgid "My Books"
+msgstr "Cărţile mele"
+
+#: bccollection.cpp:348
+msgid "Book"
+msgstr "cărţi"
+
+#: bccollection.cpp:352
+msgid "Subtitle"
+msgstr "Subtitlu"
+
+#: bccollection.cpp:357
+msgid "Author"
+msgstr "Autor"
+
+#: bccollection.cpp:364
+msgid "Hardback"
+msgstr ""
+
+#: bccollection.cpp:364
+msgid "Paperback"
+msgstr ""
+
+#: bccollection.cpp:364
+msgid "Trade Paperback"
+msgstr ""
+
+#: bccollection.cpp:365
+msgid "E-Book"
+msgstr ""
+
+#: bccollection.cpp:365
+msgid "Magazine"
+msgstr "Revistă"
+
+#: bccollection.cpp:365
+msgid "Journal"
+msgstr "Jurnal"
+
+#: bccollection.cpp:366
+msgid "Binding"
+msgstr "Legare"
+
+#: bccollection.cpp:371
+msgid "Purchase Date"
+msgstr "Data achiziţionării"
+
+#: bccollection.cpp:376
+msgid "Purchase Price"
+msgstr "Preţ achiziţie"
+
+#: bccollection.cpp:381
+msgid "Publisher"
+msgstr "Editură"
+
+#: bccollection.cpp:382 bccollection.cpp:387 bccollection.cpp:392
+#: bccollection.cpp:397 bccollection.cpp:402 bccollection.cpp:408
+#: bccollection.cpp:414 bccollection.cpp:419
+msgid "Publishing"
+msgstr "Editare"
+
+#: bccollection.cpp:386
+msgid "Edition"
+msgstr "Ediţie"
+
+#: bccollection.cpp:391
+msgid "Copyright Year"
+msgstr "An copyright"
+
+#: bccollection.cpp:396
+msgid "Publication Year"
+msgstr "An apariţie"
+
+#: bccollection.cpp:401
+msgid "ISBN#"
+msgstr "Nr. ISBN"
+
+#: bccollection.cpp:404
+msgid "International Standard Book Number"
+msgstr ""
+
+#: bccollection.cpp:407
+msgid "LCCN#"
+msgstr "Nr. LCCN"
+
+#: bccollection.cpp:410
+msgid "Library of Congress Control Number"
+msgstr ""
+
+#: bccollection.cpp:413
+msgid "Pages"
+msgstr "Pagini"
+
+#: bccollection.cpp:418
+msgid "Language"
+msgstr "Limbă"
+
+#: bccollection.cpp:423 bccollection.cpp:503 bccollection.cpp:534
+msgid "Genre"
+msgstr "Gen"
+
+#: bccollection.cpp:424 bccollection.cpp:429 bccollection.cpp:434
+#: bccollection.cpp:439 bccollection.cpp:446
+msgid "Classification"
+msgstr "Clasificare"
+
+#: bccollection.cpp:428
+msgid "Keywords"
+msgstr "Cuvinte cheie"
+
+#: bccollection.cpp:433
+msgid "Series"
+msgstr "Serie"
+
+#: bccollection.cpp:438
+msgid "Series Number"
+msgstr "Nr. în serie"
+
+#: bccollection.cpp:444
+msgid "New"
+msgstr "Nouă"
+
+#: bccollection.cpp:444
+msgid "Used"
+msgstr "Folosită"
+
+#: bccollection.cpp:445
+msgid "Condition"
+msgstr "Stare"
+
+#: bccollection.cpp:450
+msgid "Signed"
+msgstr "Semnată"
+
+#: bccollection.cpp:451 bccollection.cpp:456 bccollection.cpp:461
+#: bccollection.cpp:466 bccollection.cpp:473 bccollection.cpp:478
+msgid "Personal"
+msgstr "Personal"
+
+#: bccollection.cpp:455
+msgid "Read"
+msgstr "Citită"
+
+#: bccollection.cpp:460
+msgid "Gift"
+msgstr "Cadou"
+
+#: bccollection.cpp:465
+msgid "Loaned"
+msgstr "Împrumutată"
+
+#: bccollection.cpp:471
+msgid "5 - Best"
+msgstr "5 - F. bună"
+
+#: bccollection.cpp:471
+msgid "4 - Good"
+msgstr "4 - Bună"
+
+#: bccollection.cpp:471
+msgid "3 - Neutral"
+msgstr "3 - Medie"
+
+#: bccollection.cpp:471
+msgid "2 - Bad"
+msgstr "2 - Proastă"
+
+#: bccollection.cpp:471
+msgid "1 - Worst"
+msgstr "1 - F. proastă"
+
+#: bccollection.cpp:472
+msgid "Rating"
+msgstr "Calificativ"
+
+#: bccollection.cpp:477 bccollection.cpp:515 bccollection.cpp:547
+msgid "Comments"
+msgstr "Comentarii"
+
+#: bccollection.cpp:488
+msgid "My CDs"
+msgstr "CD-urile mele"
+
+#: bccollection.cpp:488 bccollection.cpp:509
+msgid "CD"
+msgstr "CD"
+
+#: bccollection.cpp:492
+msgid "Artist"
+msgstr "Artist"
+
+#: bccollection.cpp:498
+msgid "Year"
+msgstr "An"
+
+#: bccollection.cpp:509
+msgid "Cassette"
+msgstr "Casetă"
+
+#: bccollection.cpp:509
+msgid "8-track"
+msgstr ""
+
+#: bccollection.cpp:510 bccollection.cpp:542
+msgid "Medium"
+msgstr "Suport"
+
+#: bccollection.cpp:525
+msgid "My Videos"
+msgstr "Filmele mele"
+
+#: bccollection.cpp:525
+msgid "Video"
+msgstr "Video"
+
+#: bccollection.cpp:529
+msgid "Date"
+msgstr "Data"
+
+#: bccollection.cpp:541
+msgid "DVD"
+msgstr "DVD"
+
+#: bccollection.cpp:541
+msgid "VHS"
+msgstr "VHS"
+
+#: bccollection.cpp:541
+msgid "DivX"
+msgstr "DivX"
+
+#: bccollection.cpp:541
+msgid "8mm"
+msgstr "8mm"
+
+#: bccollection.cpp:541
+msgid "VCD"
+msgstr "VCD"
+
+#: bccollection.cpp:541
+msgid "LaserDisc"
+msgstr "LaserDisc"
+
+#: bccollection.cpp:541
+msgid "Betamax"
+msgstr "Betamax"
+
+#: bcgroupview.cpp:58
+msgid "Rename Collection"
+msgstr "Redenumeşte colecţie"
+
+#: bcgroupview.cpp:60
+msgid "Expand All Groups"
+msgstr "Desfă toate grupurile"
+
+#: bcgroupview.cpp:61
+msgid "Collapse All Groups"
+msgstr "Pliază toate grupurile"
+
+#: bcgroupview.cpp:339
+msgid "New Collection Name"
+msgstr "Nume nou colecţie"
+
+#: bcuniteditwidget.cpp:63
+msgid "New Book"
+msgstr "Carte nouă"
+
+#: bcuniteditwidget.cpp:65 bcuniteditwidget.cpp:96 bcuniteditwidget.cpp:223
+#: bcuniteditwidget.cpp:387
+msgid "Enter Book"
+msgstr "Introdu carte"
+
+#: bcuniteditwidget.cpp:66
+msgid "Delete Book"
+msgstr "Şterge carte"
+
+#: bcuniteditwidget.cpp:67
+msgid "Clear Data"
+msgstr "Curăţă datele"
+
+#: bcuniteditwidget.cpp:453
+msgid "Modify Book"
+msgstr "Modifică carte"
+
+#: bookcase.cpp:117
+msgid "New &Collection"
+msgstr "&Colecţie nouă"
+
+#: bookcase.cpp:122
+msgid "Show Co&llection ToolBar"
+msgstr "Afişează bara de co&lecţii"
+
+#: bookcase.cpp:127
+msgid "Group by: "
+msgstr "Grupează după: "
+
+#: bookcase.cpp:130
+msgid "Grouping"
+msgstr "Grupare"
+
+#: bookcase.cpp:135
+msgid "Create a new document"
+msgstr "Creează un document nou"
+
+#: bookcase.cpp:136
+msgid "Open an existing document"
+msgstr "Deschide un document existent"
+
+#: bookcase.cpp:137
+msgid "Open a recently used file"
+msgstr "Deschide un fişier utilizat recent"
+
+#: bookcase.cpp:138
+msgid "Save the actual document"
+msgstr "Salvează documentul actual"
+
+#: bookcase.cpp:139
+msgid "Save the actual document as..."
+msgstr "Salvează documentul actual ca..."
+
+#: bookcase.cpp:140
+msgid "Print the contents of the document..."
+msgstr "Imprimă conţinutul documentului..."
+
+#: bookcase.cpp:141
+msgid "Quit the application"
+msgstr "Părăseşte aplicaţia"
+
+#: bookcase.cpp:142
+msgid "Cut the selected section and puts it to the clipboard"
+msgstr "Taie regiunea selectată şi o plasează în clipboard"
+
+#: bookcase.cpp:143
+msgid "Copy the selected section to the clipboard"
+msgstr "Copie în clipboard regiunea selectată"
+
+#: bookcase.cpp:144
+msgid "Paste the clipboard contents to actual position"
+msgstr "Lipeşte conţinutul clipboard-ului în poziţia actuală"
+
+#: bookcase.cpp:145
+msgid "Search in the document..."
+msgstr "Caută în document..."
+
+#: bookcase.cpp:146
+msgid "Enable/disable the toolbar"
+msgstr "Activează/dezactivează bara de unelte"
+
+#: bookcase.cpp:147
+msgid "Enable/disable the statusbar"
+msgstr "Activează/dezactivează bara de stare"
+
+#: bookcase.cpp:148
+msgid "Configure the options for the application..."
+msgstr "Configurează opţiunile aplicaţiei..."
+
+#: bookcase.cpp:149
+msgid "Change the grouping of the collection"
+msgstr "Schimbă modul de grupare a colecţiei"
+
+#: bookcase.cpp:150
+msgid "Enable/disable the collection toolbar"
+msgstr "Activează/dezactivează bara de colecţii"
+
+#: bookcase.cpp:156 bookcase.cpp:454 bookcase.cpp:470 bookcase.cpp:480
+#: bookcase.cpp:495 bookcase.cpp:543 bookcase.cpp:558 bookcase.cpp:565
+#: bookcase.cpp:590 bookcase.cpp:600 bookcase.cpp:606 bookcase.cpp:612
+#: bookcase.cpp:618 bookcase.cpp:636 bookcase.cpp:648 bookcase.cpp:662
+msgid "Ready."
+msgstr "Gata."
+
+#: bookcase.cpp:445
+msgid "Creating new document..."
+msgstr "Creez documentul nou..."
+
+#: bookcase.cpp:458 bookcase.cpp:474 bookcase.cpp:484
+msgid "Opening file..."
+msgstr "Deschid fişierul..."
+
+#: bookcase.cpp:464 bookcase.cpp:550
+msgid ""
+"*.bc|Bookcase files (*.bc)\n"
+"*.xml|XML files (*.xml)\n"
+"*|All files"
+msgstr ""
+"*.bc|Fişiere Bookcase (*.bc)\n"
+"*.xml|Fişiere XML (*.xml)\n"
+"*|Toate fişierele"
+
+#: bookcase.cpp:465
+msgid "Open File..."
+msgstr "Deschide fişier..."
+
+#: bookcase.cpp:533
+msgid "Saving file..."
+msgstr "Salvez fişierul..."
+
+#: bookcase.cpp:547
+msgid "Saving file with a new filename..."
+msgstr "Salvez fişierul sub un nou nume..."
+
+#: bookcase.cpp:562
+msgid "Printing..."
+msgstr "Imprim..."
+
+#: bookcase.cpp:572
+msgid ""
+"Unable to find a file needed for printing - %1.\n"
+"Please check your installation."
+msgstr ""
+"Nu găsesc un fişier necesar pentru imprimare - %1.\n"
+"Vă rog verificaţi instalarea."
+
+#: bookcase.cpp:580
+msgid ""
+"Error in XSLT processing.\n"
+"Please check your installation."
+msgstr ""
+"Eroare în procesarea XSLT.\n"
+"Vă rog verificaţi instalarea."
+
+#: bookcase.cpp:594
+msgid "Exiting..."
+msgstr "Ies..."
+
+#: bookcase.cpp:604
+msgid "Cutting selection..."
+msgstr "Tai selecţia..."
+
+#: bookcase.cpp:610
+msgid "Copying selection to clipboard..."
+msgstr "Copii selecţia în clipboard..."
+
+#: bookcase.cpp:616
+msgid "Inserting clipboard contents..."
+msgstr "Inserez conţinutul clipboard-ului..."
+
+#: bookcase.cpp:628
+msgid "Toggling toolbar..."
+msgstr "Comut bara de unelte..."
+
+#: bookcase.cpp:640
+msgid "Toggle the statusbar..."
+msgstr "Comut bara de stare..."
+
+#: bookcase.cpp:652
+msgid "Toggling collection toolbar..."
+msgstr "Comut bara de colecţii..."
+
+#: bookcase.cpp:698
+msgid "%1 %2"
+msgstr "%2 %1"
+
+#: bookcase.cpp:698
+msgid "Total"
+msgstr "Total"
+
+#: bookcase.cpp:855
+msgid "Page %1"
+msgstr "Pagina %1"
+
+#: bookcasedoc.cpp:105
+msgid "Unable to download file - %1."
+msgstr "Nu pot descărca fişierul - %1."
+
+#: bookcasedoc.cpp:112
+msgid "Unable to open file - %1."
+msgstr "Nu pot deschide fişierul - %1."
+
+#: bookcasedoc.cpp:121
+msgid "Unable to read file - %1."
+msgstr "Nu pot citi fişierul - %1."
+
+#: bookcasedoc.cpp:130
+msgid "File is not in XML format - %1."
+msgstr "Fişierul nu e în format XML - %1."
+
+#: bookcasedoc.cpp:142
+msgid "File is not a Bookcase data file - %1."
+msgstr "%1 nu este un fişier de date Bookcase."
+
+#: bookcasedoc.cpp:192
+msgid "Unknown"
+msgstr "necunoscut"
+
+#: bookcasedoc.cpp:253
+msgid ""
+"The current file has been modified.\n"
+"Do you want to save it?"
+msgstr ""
+"Fişierul curent a fost modificat.\n"
+"Doriţi să îl salvaţi?"
+
+#: bookcasedoc.cpp:255
+msgid "Warning!"
+msgstr "Atenţie!"
+
+#: configdialog.cpp:115
+msgid "General Options"
+msgstr "Opţiuni generale"
+
+#: configdialog.cpp:118
+msgid "Reopen file at startup"
+msgstr "Redeschide fişierul la pornire"
+
+#: configdialog.cpp:119
+msgid ""
+"If checked, the file that was last open will be re-opened at program start-"
+"up."
+msgstr "Dacă bifaţi, ultimul fişier deschis va fi deschis din nou la pornirea programului."
+
+#: configdialog.cpp:123
+msgid "Auto capitalize titles and authors"
+msgstr "Pune automat majuscule la autori şi titluri"
+
+#: configdialog.cpp:124
+msgid "If checked, the title and the author(s) will be automatically capitalized."
+msgstr "Dacă bifaţi, iniţialele numelor de autori şi titlurilor vor fi convertite automat la majuscule."
+
+#: configdialog.cpp:128
+msgid "Show number of items in group"
+msgstr "Afişează numărul de elemente din grup."
+
+#: configdialog.cpp:129
+msgid ""
+"If checked, the number of items in the group will be appended to the group "
+"name."
+msgstr "Dacă bifaţi, la numele grupului se va adăuga şi numărul de elemente din acel grup."
+
+#: configdialog.cpp:134
+msgid "Articles:"
+msgstr "Articole:"
+
+#: configdialog.cpp:140
+msgid ""
+"A comma-separated list of words which should be considered as articles if "
+"they are the first word in a title."
+msgstr "Listă de cuvinte, separate de virgulă, care vor fi considerate articole când apar la începutul unui titlu"
+
+#: configdialog.cpp:145
+msgid "Personal suffixes:"
+msgstr "Sufixe nume:"
+
+#: configdialog.cpp:150
+msgid "A comma-separated list of suffixes which might be used in personal names."
+msgstr "O listă de sufixe pentru numele proprii, separate de virgulă."
+
+#: configdialog.cpp:161
+msgid "Books"
+msgstr "Cărţi"
+
+#: configdialog.cpp:161
+msgid "Book Collection Options"
+msgstr "Opţiuni colecţii cărţi"
+
+#: configdialog.cpp:168
+msgid "CDs"
+msgstr "CD-uri"
+
+#: configdialog.cpp:168
+msgid "Audio Collection Options"
+msgstr "Opţiuni colecţii audio"
+
+#: configdialog.cpp:175
+msgid "Videos"
+msgstr "Filme"
+
+#: configdialog.cpp:175
+msgid "Video Collection Options"
+msgstr "Opţiuni colecţii video"
+
+#: main.cpp:25
+msgid "Bookcase - a personal book collection manager for KDE"
+msgstr "Bookcase - gestionar de colecţii personale de cărţi pentru KDE"
+
+#: main.cpp:30
+msgid "File to open"
+msgstr "Fişierul de deschis"
+
+#: main.cpp:35 bookcase.moc.cpp:34 bookcase.moc.cpp:42
+msgid "Bookcase"
+msgstr "Bookcase"
+
+#: searchdialog.cpp:27
+msgid "Find"
+msgstr "Caută"
+
+#: searchdialog.cpp:28
+msgid "&Find"
+msgstr "&Caută"
+
+#: searchdialog.cpp:33
+msgid "Find:"
+msgstr "Caută:"
+
+#: configdialog.moc.cpp:34 configdialog.moc.cpp:42
+msgid "ConfigDialog"
+msgstr ""
+
+#: bookcasedoc.moc.cpp:34 bookcasedoc.moc.cpp:42
+msgid "BookcaseDoc"
+msgstr ""
+
+#: bclabelaction.moc.cpp:34 bclabelaction.moc.cpp:42
+msgid "BCLabelAction"
+msgstr ""
+
+#: bccollection.moc.cpp:34 bccollection.moc.cpp:42
+msgid "BCCollection"
+msgstr ""
+
+#: bcdetailedlistview.moc.cpp:34 bcdetailedlistview.moc.cpp:42
+msgid "BCDetailedListView"
+msgstr ""
+
+#: searchdialog.moc.cpp:34 searchdialog.moc.cpp:42
+msgid "SearchDialog"
+msgstr ""
+
+#: bcgroupview.moc.cpp:34 bcgroupview.moc.cpp:42
+msgid "BCGroupView"
+msgstr ""
+
+#: bctabcontrol.moc.cpp:34 bctabcontrol.moc.cpp:42
+msgid "BCTabControl"
+msgstr ""
+
+#: bcuniteditwidget.moc.cpp:34 bcuniteditwidget.moc.cpp:42
+msgid "BCUnitEditWidget"
+msgstr ""
+
+#: rc.cpp:1
+msgid "Collection ToolBar"
+msgstr "Bara de colecţii"
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Iulian Ursache"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "iulianu@cs.tuiasi.ro"

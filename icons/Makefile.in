@@ -276,7 +276,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  icons/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/icons/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/icons/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -429,6 +429,7 @@ uninstall-am: uninstall-kde-icons  uninstall-dataDATA uninstall-info-am
 .NOEXPORT:
 
 
+
 #>+ 2
 docs-am:
 
@@ -447,7 +448,7 @@ uninstall-kde-icons:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  icons/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/icons/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/icons/Makefile.in
 
 
 #>+ 2

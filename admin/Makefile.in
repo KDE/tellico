@@ -267,7 +267,7 @@ $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 #>+ 3
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  admin/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/admin/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/admin/Makefile.in
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -398,6 +398,7 @@ uninstall-am: uninstall-info-am
 .NOEXPORT:
 
 
+
 #>+ 2
 docs-am:
 
@@ -405,7 +406,7 @@ docs-am:
 force-reedit:
 		cd $(top_srcdir) && \
 	  $(AUTOMAKE) --gnu  admin/Makefile
-	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4/admin/Makefile.in
+	cd $(top_srcdir) && perl admin/am_edit bookcase-0.4.1/admin/Makefile.in
 
 
 #>+ 2

@@ -1,6 +1,20 @@
+2002-12-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase version 0.4.1
+	* Added a romanian translation from Iulian Ursache <iulianu@cs.tuiasi.ro>
+
+2002-11-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed compile problems with gcc 2.95
+
+2002-11-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase version 0.4
+	* Printing improvements in XSLT layout
+
 2002-11-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added an italian translation fromFaUsT <faust@inventati.org> 
+	* Added an italian translation from FaUsT <faust@inventati.org> 
 
 2002-11-05  Robby Stephenson  <robby@periapsis.org>
 

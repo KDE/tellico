@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.4
+%define version 0.4.1
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
