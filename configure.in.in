@@ -1,6 +1,6 @@
 #MIN_CONFIG(3)
 
-AM_INIT_AUTOMAKE(bookcase,0.6)
+AM_INIT_AUTOMAKE(bookcase,0.6.1)
 
 dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
 dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__
@@ -69,4 +69,3 @@ AC_SUBST(LIBXSLT_RPATH)
 AC_SUBST(LIBXML_LIBS)
 AC_SUBST(LIBXML_CFLAGS)
 AC_SUBST(LIBXML_RPATH)
-AC_OUTPUT(Makefile src/Makefile doc/Makefile doc/en/Makefile po/Makefile icons/Makefile xslt/Makefile admin/Makefile )

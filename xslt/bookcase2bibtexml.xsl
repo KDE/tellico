@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:bc="http://periapsis.org/bookcase/"
                 xmlns:str="http://exslt.org/strings"
-                xmlns:bibtexml="http://bibtexml.sourceforge.net/"
+                xmlns:bibtexml="http://bibtexml.sf.net/"
                 extension-element-prefixes="str"
                 exclude-result-prefixes="bc str"
                 version="1.0">
@@ -11,7 +11,7 @@
    ================================================================
    Bookcase XSLT file - used for exporting to bibtexml format
 
-   $Id: bookcase2bibtexml.xsl,v 1.3 2003/05/03 05:50:26 robby Exp $
+   $Id: bookcase2bibtexml.xsl,v 1.4 2003/05/06 05:10:55 robby Exp $
 
    Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 

@@ -17,6 +17,10 @@
 #include "bctabcontrol.h"
 
 #include <kdebug.h>
+#include <kdeversion.h>
+#if KDE_VERSION > 305
+#include <kaccelmanager.h>
+#endif
 
 #include <qtabbar.h>
 #include <qobjectlist.h>
@@ -25,6 +29,10 @@
 BCTabControl::BCTabControl(QWidget* parent_, const char* name_/*=0*/)
     : QTabWidget(parent_, name_) {
   connect(tabBar(), SIGNAL(selected(int)), SLOT(setFocusToChild(int)));
+
+#if KDE_VERSION > 305
+  KAcceleratorManager::manage(tabBar());
+#endif
 }
 
 void BCTabControl::setFocusToChild(int tabNum_) {

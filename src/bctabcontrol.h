@@ -21,7 +21,7 @@
 
 /**
  * @author Robby Stephenson
- * @version $Id: bctabcontrol.h,v 1.4 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bctabcontrol.h,v 1.5 2003/05/06 05:24:59 robby Exp $
  */
 class BCTabControl : public QTabWidget {
 Q_OBJECT
@@ -31,7 +31,7 @@ public:
    * Constructor
    */
   BCTabControl(QWidget* parent, const char* name=0);
-
+  
 public slots:
   /**
    * Sets the focus to the first focusable widget on a certain tab page.

@@ -35,7 +35,7 @@ bool BCAttribute::m_autoFormat = true;
 
 // this constructor is for anything but Choice type
 BCAttribute::BCAttribute(const QString& name_, const QString& title_, AttributeType type_/*=Line*/)
-    : m_name(name_), m_title(title_),  m_category(i18n("&General")), m_desc(title_),
+    : m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
       m_type(type_), m_flags(0), m_formatFlag(FormatPlain) {
 
   if(m_type == Choice) {
@@ -50,7 +50,7 @@ BCAttribute::BCAttribute(const QString& name_, const QString& title_, AttributeT
 
 // if this constructor is called, the type is necessarily Choice
 BCAttribute::BCAttribute(const QString& name_, const QString& title_, const QStringList& allowed_)
-    : m_name(name_), m_title(title_), m_category(i18n("&General")), m_desc(title_),
+    : m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
       m_type(BCAttribute::Choice), m_allowed(allowed_), m_flags(0), m_formatFlag(FormatPlain) {
 }
 

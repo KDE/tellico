@@ -103,18 +103,16 @@ Please report any problems or feature requests to
 </para>
 </chapter>
 
+<!--
 <chapter id="using-kapp">
 <title>Using &bookcase;</title>
 
-<!-- This chapter should tell the user how to use your app. You should use as
+This chapter should tell the user how to use your app. You should use as
 many sections (Chapter, Sect1, Sect3, etc...) as is necessary to fully document
-your application. -->
+your application.
 
 <para>
 
-<!-- Note that all graphics should be in .png format. Use no gifs because of
-patent issues. -->
-<!--
 <screenshot>
 <screeninfo>Here's a screenshot of &bookcase;</screeninfo>
 	<mediaobject>
@@ -126,10 +124,9 @@ patent issues. -->
 	  </textobject>
 	</mediaobject>
 </screenshot>
--->
+
 </para>
 
-<!--
 <sect1 id="kapp-features">
 <title>More &bookcase; features</title>
 
@@ -150,22 +147,23 @@ the &bookcase; main window. It's not a bug, it's a feature!
 </para>
 
 </sect1>
--->
-</chapter>
 
+</chapter>
+-->
+<!--
 <chapter id="commands">
 <title>Command Reference</title>
 
-<!-- (OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
+(OPTIONAL, BUT RECOMMENDED) This chapter should list all of the
 application windows and their menubar and toolbar commands for easy reference.
 Also include any keys that have a special function but have no equivalent in the
 menus or toolbars. This may not be necessary for small apps or apps with no tool
-or menu bars. -->
+or menu bars.
 
 <sect1 id="kapp-mainwindow">
 <title>The main &bookcase; window</title>
 <para></para>
-<!--
+
 <sect2>
 <title>The File Menu</title>
 <para>
@@ -204,10 +202,9 @@ or menu bars. -->
 </para>
 
 </sect2>
--->
 </sect1>
 </chapter>
-
+-->
 <chapter id="faq">
 <title>Questions and Answers</title>
 
@@ -329,9 +326,9 @@ generic KDE apps i.e. those not distributed officially by KDE.
 <qandaentry>
 <question><para>How do I filter by something like the "Read" field?</para></question>
 <answer>
-<para>Internally, the checkbox fields in &bookcase; are saved as "1", so if you'd like to filter to show only the science fiction books which you've not read, for example, then you have two rules. Make sure the "Match all of the following" button is checked. Set the first rule to have "Genre" "contains" "Science Fiction" (no quotes) and the second rule to have "Read" "does no contain" "1" (no quotes).</para>
+<para>Internally, the checkbox fields in &bookcase; are saved as "1", so if you'd like to filter to show only the science fiction books which you've not read, for example, then you have two rules. Make sure the "Match all of the following" button is checked. Set the first rule to have "Genre" "contains" "Science Fiction" (no quotes) and the second rule to have "Read" "does not contain" "1" (no quotes).</para>
 
- <para>Also, the quick filter in the toolbar will match any attribute, and if there is a non-word character, the text is interpeted as a regular expression. So if you quickly want to filter your books to show those by Weber or Bujold, then type "weber|bujold" (no quotes) in the toolbar.
+ <para>Also, the quick filter in the toolbar will match any attribute, and if there is a non-word character, the text is interpreted as a regular expression. So if you quickly want to filter your books to show those by Weber or Bujold, then type "weber|bujold" (no quotes) in the toolbar.
 </para>
 </answer>
 </qandaentry>

@@ -36,7 +36,7 @@ dnl Perform program name transformation
 AC_ARG_PROGRAM
 
 dnl Automake doc recommends to do this only here. (Janos)
-AM_INIT_AUTOMAKE(bookcase, 0.6) dnl searches for some needed programs
+AM_INIT_AUTOMAKE(bookcase, 0.6.1) dnl searches for some needed programs
 
 KDE_SET_PREFIX
 
@@ -126,7 +126,6 @@ AC_SUBST(LIBXSLT_RPATH)
 AC_SUBST(LIBXML_LIBS)
 AC_SUBST(LIBXML_CFLAGS)
 AC_SUBST(LIBXML_RPATH)
-AC_OUTPUT(Makefile src/Makefile doc/Makefile doc/en/Makefile po/Makefile icons/Makefile xslt/Makefile admin/Makefile )
 KDE_CREATE_SUBDIRSLIST
 AC_CONFIG_FILES([ Makefile ])
 AC_CONFIG_FILES([ admin/Makefile ])

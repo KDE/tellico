@@ -17,7 +17,6 @@
 #ifndef BCCOLLECTIONPROPDIALOG_H
 #define BCCOLLECTIONPROPDIALOG_H
 
-class Bookcase;
 class BCCollection;
 
 class KComboBox;
@@ -25,8 +24,8 @@ class KLineEdit;
 
 class QRadioButton;
 class QCheckBox;
-class QListBox;
 class QPushButton;
+class QPainter;
 
 #include "bcattribute.h"
 
@@ -34,22 +33,44 @@ class QPushButton;
 
 #include <qmap.h>
 #include <qdict.h>
+#include <qlistbox.h>
+
+/**
+ * BCListBoxText subclasses QListBoxText so that @ref setText() can be made public,
+ * and the font color can be changed
+ *
+ * @author Robby Stephenson
+ * @version $Id: bccollectionpropdialog.h,v 1.2 2003/05/03 22:50:46 robby Exp $
+ */
+class BCListBoxText : public QListBoxText {
+public:
+  BCListBoxText(QListBox* listbox, const QString& text);
+
+  void setColored(bool colored);
+  void setText(const QString& text);
+
+protected:
+  virtual void paint(QPainter* painter);
+
+private:
+  bool m_colored;
+};
 
 /**
  * @author Robby Stephenson
- * @version $Id: bccollectionpropdialog.h,v 1.1 2003/05/02 06:50:28 robby Exp $
+ * @version $Id: bccollectionpropdialog.h,v 1.2 2003/05/03 22:50:46 robby Exp $
  */
-class BCCollectionPropDialog : public KDialogBase  {
+class BCCollectionPropDialog : public KDialogBase {
 Q_OBJECT
 
 public: 
   /**
    * The constructor sets up the dialog.
    *
-   * @param parent A pointer to the parent widget, a Bookcase object
+   * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  BCCollectionPropDialog(BCCollection* coll, Bookcase* parent, const char* name=0);
+  BCCollectionPropDialog(BCCollection* coll, QWidget* parent, const char* name=0);
 
 signals:
   void signalCollectionModified();
@@ -68,7 +89,6 @@ protected:
   void updateAttribute();
 
 private:
-  Bookcase* m_bookcase;
   BCCollection* m_coll;
   QMap<BCAttribute::AttributeType, QString> m_typeMap;
   QDict<BCAttribute> m_copiedAttributes;

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bookcase.hu\n"
-"POT-Creation-Date: 2003-05-03 01:34-0700\n"
+"POT-Creation-Date: 2003-05-05 22:36-0700\n"
 "PO-Revision-Date: 2003-03-17 16:11+0100\n"
 "Last-Translator: Marcel Hilzinger <hili@suselinux.hu>\n"
 "Language-Team: hungarian <kde-lista@sophia.jpte.hu>\n"
@@ -21,13 +21,11 @@ msgid "a,an,and,in,of,the,to"
 msgstr "a,an,and,in,of,the,to"
 
 #: bcattribute.cpp:38 bcattribute.cpp:53 bccollection.cpp:35
-#: bookcollection.cpp:25 bookcollection.cpp:30 bookcollection.cpp:40
-#: bookcollection.cpp:45 bookcollection.cpp:50 videocollection.cpp:25
+#: configdialog.cpp:118 bookcollection.cpp:19 videocollection.cpp:25
 #: videocollection.cpp:30 videocollection.cpp:38 videocollection.cpp:43
 #: songcollection.cpp:25 songcollection.cpp:31 songcollection.cpp:36
 #: songcollection.cpp:41 songcollection.cpp:48 songcollection.cpp:53
-#, fuzzy
-msgid "&General"
+msgid "General"
 msgstr "Általános"
 
 #: bcattribute.cpp:299
@@ -42,17 +40,17 @@ msgstr "jr.,jr,iii,iv"
 msgid "de,van der,von"
 msgstr ""
 
-#: bcattribute.cpp:358 bccollectionpropdialog.cpp:211
+#: bcattribute.cpp:358 bccollectionpropdialog.cpp:261
 #, fuzzy
 msgid "Simple Text"
 msgstr "Szöveg keresése"
 
-#: bcattribute.cpp:359 bccollectionpropdialog.cpp:209
-#: bccollectionpropdialog.cpp:222
+#: bcattribute.cpp:359 bccollectionpropdialog.cpp:259
+#: bccollectionpropdialog.cpp:272
 msgid "Paragraph"
 msgstr ""
 
-#: bcattribute.cpp:360 bccollectionpropdialog.cpp:208
+#: bcattribute.cpp:360 bccollectionpropdialog.cpp:258
 #, fuzzy
 msgid "List"
 msgstr "Előadó"
@@ -62,11 +60,11 @@ msgid "Checkbox"
 msgstr ""
 
 #: bcattribute.cpp:362 videocollection.cpp:24 songcollection.cpp:35
-#: bccollectionpropdialog.cpp:216
+#: bccollectionpropdialog.cpp:266
 msgid "Year"
 msgstr "Év"
 
-#: bcattribute.cpp:363 bccollectionpropdialog.cpp:219
+#: bcattribute.cpp:363 bccollectionpropdialog.cpp:269
 msgid "URL"
 msgstr ""
 
@@ -96,11 +94,11 @@ msgid "Collapse All Groups"
 msgstr "Csoportok összecsukása"
 
 #: bcgroupview.cpp:59 bcdetailedlistview.cpp:67 bcuniteditwidget.cpp:52
-#: bcuniteditwidget.cpp:484
+#: bcuniteditwidget.cpp:491
 msgid "Delete Book"
 msgstr "Könyv törlése"
 
-#: bcgroupview.cpp:428
+#: bcgroupview.cpp:431
 msgid "New Collection Name"
 msgstr "Új gyűjtemény-név"
 
@@ -112,8 +110,8 @@ msgstr "Oszlopok megtekintése"
 msgid "New Book"
 msgstr "Új könyv"
 
-#: bcuniteditwidget.cpp:51 bcuniteditwidget.cpp:74 bcuniteditwidget.cpp:361
-#: bcuniteditwidget.cpp:525
+#: bcuniteditwidget.cpp:51 bcuniteditwidget.cpp:74 bcuniteditwidget.cpp:365
+#: bcuniteditwidget.cpp:532
 msgid "Enter Book"
 msgstr "Könyv hozzáadása"
 
@@ -121,39 +119,39 @@ msgstr "Könyv hozzáadása"
 msgid "Duplicate Book"
 msgstr "Könyv duplikálása"
 
-#: bcuniteditwidget.cpp:259
+#: bcuniteditwidget.cpp:262
 msgid "Do you really want to modify these books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:261
+#: bcuniteditwidget.cpp:264
 #, fuzzy
 msgid "Modify Multiple Books?"
 msgstr "Könyv módosítása"
 
-#: bcuniteditwidget.cpp:309
+#: bcuniteditwidget.cpp:313
 msgid "Do you really want to delete these books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:311
+#: bcuniteditwidget.cpp:315
 #, fuzzy
 msgid "Delete Multiple Books?"
 msgstr "Könyv törlése"
 
-#: bcuniteditwidget.cpp:414
+#: bcuniteditwidget.cpp:422
 #, fuzzy
 msgid "Modify Books"
 msgstr "Könyv módosítása"
 
-#: bcuniteditwidget.cpp:415
+#: bcuniteditwidget.cpp:423
 #, fuzzy
 msgid "Delete Books"
 msgstr "Könyv törlése"
 
-#: bcuniteditwidget.cpp:479
+#: bcuniteditwidget.cpp:486
 msgid "Modify Book"
 msgstr "Könyv módosítása"
 
-#: bcuniteditwidget.cpp:522
+#: bcuniteditwidget.cpp:529
 msgid ""
 "The current book has been modified.\n"
 "Do you want to enter the changes?"
@@ -161,7 +159,7 @@ msgstr ""
 "A jelenlegi könyv megváltozott.\n"
 "Menti a módosításokat?"
 
-#: bcuniteditwidget.cpp:524 bookcasedoc.cpp:365
+#: bcuniteditwidget.cpp:531 bookcasedoc.cpp:365
 msgid "Warning!"
 msgstr "Figyelem!"
 
@@ -513,10 +511,6 @@ msgid "Configure Bookcase"
 msgstr "Bookcase beállítása"
 
 #: configdialog.cpp:118
-msgid "General"
-msgstr "Általános"
-
-#: configdialog.cpp:118
 msgid "General Options"
 msgstr "Általános beállítások"
 
@@ -675,186 +669,187 @@ msgstr "Megnyitandó fájl"
 msgid "Bookcase"
 msgstr "Bookcase"
 
-#: bookcollection.h:67 bookcollection.cpp:170
+#: bookcollection.h:67 bookcollection.cpp:175
 msgid "My Books"
 msgstr "Könyvgyűjteményem"
 
-#: bookcollection.cpp:20 bookcollection.cpp:174
+#: bookcollection.cpp:20
+#, fuzzy
+msgid "Publishing"
+msgstr "Kiadói adatok"
+
+#: bookcollection.cpp:21
+#, fuzzy
+msgid "Classification"
+msgstr "Osztályozás"
+
+#: bookcollection.cpp:22
+#, fuzzy
+msgid "Personal"
+msgstr "Személyes"
+
+#: bookcollection.cpp:25 bookcollection.cpp:179
 msgid "Books"
 msgstr "Könyvek"
 
-#: bookcollection.cpp:24
+#: bookcollection.cpp:29
 msgid "Subtitle"
 msgstr "Alcím"
 
-#: bookcollection.cpp:29
+#: bookcollection.cpp:34
 msgid "Author"
 msgstr "Szerző"
 
-#: bookcollection.cpp:37
+#: bookcollection.cpp:42
 msgid "Hardback"
 msgstr "Kemény tábla"
 
-#: bookcollection.cpp:37
+#: bookcollection.cpp:42
 msgid "Paperback"
 msgstr "Kartonált"
 
-#: bookcollection.cpp:37
+#: bookcollection.cpp:42
 msgid "Trade Paperback"
 msgstr "Papírtábla"
 
-#: bookcollection.cpp:38
+#: bookcollection.cpp:43
 msgid "E-Book"
 msgstr "E-könyv"
 
-#: bookcollection.cpp:38
+#: bookcollection.cpp:43
 msgid "Magazine"
 msgstr "Újság"
 
-#: bookcollection.cpp:38
+#: bookcollection.cpp:43
 msgid "Journal"
 msgstr "Füzet"
 
-#: bookcollection.cpp:39
+#: bookcollection.cpp:44
 msgid "Binding"
 msgstr "Kötészet"
 
-#: bookcollection.cpp:44
+#: bookcollection.cpp:49
 msgid "Purchase Date"
 msgstr "Vásárlás dátuma"
 
-#: bookcollection.cpp:49
+#: bookcollection.cpp:54
 msgid "Purchase Price"
 msgstr "Vásárlási ár"
 
-#: bookcollection.cpp:53
+#: bookcollection.cpp:58
 msgid "Publisher"
 msgstr "Kiadó"
 
-#: bookcollection.cpp:54 bookcollection.cpp:59 bookcollection.cpp:64
-#: bookcollection.cpp:69 bookcollection.cpp:74 bookcollection.cpp:79
-#: bookcollection.cpp:84 bookcollection.cpp:88
+#: bookcollection.cpp:63
+msgid "Edition"
+msgstr "Kiadás"
+
+#: bookcollection.cpp:68
+msgid "Copyright Year"
+msgstr "Copyright éve"
+
+#: bookcollection.cpp:69
 #, fuzzy
 msgid "&Publishing"
 msgstr "Kiadói adatok"
 
-#: bookcollection.cpp:58
-msgid "Edition"
-msgstr "Kiadás"
-
-#: bookcollection.cpp:63
-msgid "Copyright Year"
-msgstr "Copyright éve"
-
-#: bookcollection.cpp:68
+#: bookcollection.cpp:73
 msgid "Publication Year"
 msgstr "Kiadás éve"
 
-#: bookcollection.cpp:73
+#: bookcollection.cpp:78
 msgid "ISBN#"
 msgstr "ISBN#"
 
-#: bookcollection.cpp:75
+#: bookcollection.cpp:80
 msgid "International Standard Book Number"
 msgstr "International Standard Book Number"
 
-#: bookcollection.cpp:78
+#: bookcollection.cpp:83
 msgid "LCCN#"
 msgstr "LCCN#"
 
-#: bookcollection.cpp:80
+#: bookcollection.cpp:85
 msgid "Library of Congress Control Number"
 msgstr "Library of Congress Control Number"
 
-#: bookcollection.cpp:83
+#: bookcollection.cpp:88
 msgid "Pages"
 msgstr "Oldalak"
 
-#: bookcollection.cpp:87
+#: bookcollection.cpp:92
 msgid "Language"
 msgstr "Nyelv"
 
-#: bookcollection.cpp:92 videocollection.cpp:29 songcollection.cpp:40
+#: bookcollection.cpp:97 videocollection.cpp:29 songcollection.cpp:40
 msgid "Genre"
 msgstr "Fajta"
 
-#: bookcollection.cpp:93 bookcollection.cpp:100 bookcollection.cpp:105
-#: bookcollection.cpp:110 bookcollection.cpp:116
-#, fuzzy
-msgid "&Classification"
-msgstr "Osztályozás"
-
-#: bookcollection.cpp:99
+#: bookcollection.cpp:104
 msgid "Keywords"
 msgstr "Kulcsszavak"
 
-#: bookcollection.cpp:104
+#: bookcollection.cpp:109
 msgid "Series"
 msgstr "Sorozat"
 
-#: bookcollection.cpp:109
+#: bookcollection.cpp:114
 msgid "Series Number"
 msgstr "Sorozatszám"
 
-#: bookcollection.cpp:114
+#: bookcollection.cpp:119
 msgid "New"
 msgstr "Új"
 
-#: bookcollection.cpp:114
+#: bookcollection.cpp:119
 msgid "Used"
 msgstr "Használt"
 
-#: bookcollection.cpp:115
+#: bookcollection.cpp:120
 msgid "Condition"
 msgstr "Állapot"
 
-#: bookcollection.cpp:119
+#: bookcollection.cpp:124
 msgid "Signed"
 msgstr "Dedikált"
 
-#: bookcollection.cpp:120 bookcollection.cpp:124 bookcollection.cpp:128
-#: bookcollection.cpp:132 bookcollection.cpp:138 bookcollection.cpp:143
-#, fuzzy
-msgid "Pe&rsonal"
-msgstr "Személyes"
-
-#: bookcollection.cpp:123
+#: bookcollection.cpp:128
 msgid "Read"
 msgstr "Olvasva"
 
-#: bookcollection.cpp:127
+#: bookcollection.cpp:132
 msgid "Gift"
 msgstr "Ajándék"
 
-#: bookcollection.cpp:131
+#: bookcollection.cpp:136
 msgid "Loaned"
 msgstr "Kölcsön adva"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "5 - Best"
 msgstr "5 - Nagyon jó"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "4 - Good"
 msgstr "4 - Jó"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "3 - Neutral"
 msgstr "3 - Semleges"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "2 - Bad"
 msgstr "2 - Rossz"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "1 - Worst"
 msgstr "1 - Nagyon rossz"
 
-#: bookcollection.cpp:137
+#: bookcollection.cpp:142
 msgid "Rating"
 msgstr "Értékelés"
 
-#: bookcollection.cpp:142 videocollection.cpp:42 songcollection.cpp:52
+#: bookcollection.cpp:147 videocollection.cpp:42 songcollection.cpp:52
 msgid "Comments"
 msgstr "Megjegyzések"
 
@@ -1074,104 +1069,104 @@ msgstr ""
 msgid "clear widgets"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:43
+#: bccollectionpropdialog.cpp:73
 #, fuzzy
 msgid "Edit Collection Fields"
 msgstr "Zenegyűjtemény beállításai"
 
-#: bccollectionpropdialog.cpp:50
+#: bccollectionpropdialog.cpp:80
 #, fuzzy
 msgid "Current Fields"
 msgstr "Kiválasztott mezők"
 
-#: bccollectionpropdialog.cpp:59 bccollectionpropdialog.cpp:161
-#: bccollectionpropdialog.cpp:164
+#: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
+#: bccollectionpropdialog.cpp:212
 #, fuzzy
 msgid "New Field"
 msgstr "Minden mező"
 
-#: bccollectionpropdialog.cpp:61
+#: bccollectionpropdialog.cpp:97
 #, fuzzy
 msgid "Delete Field"
 msgstr "Kiválasztott mezők"
 
-#: bccollectionpropdialog.cpp:71
+#: bccollectionpropdialog.cpp:107
 msgid "Field Properties"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:77
+#: bccollectionpropdialog.cpp:113
 #, fuzzy
 msgid "Title:"
 msgstr "Cím"
 
-#: bccollectionpropdialog.cpp:82
+#: bccollectionpropdialog.cpp:118
 msgid "Category:"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:88
+#: bccollectionpropdialog.cpp:124
 msgid "The fields are grouped by common categories for editing."
 msgstr ""
 
-#: bccollectionpropdialog.cpp:90
+#: bccollectionpropdialog.cpp:126
 msgid "Type:"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:97
+#: bccollectionpropdialog.cpp:133
 msgid "Allowed:"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:101
+#: bccollectionpropdialog.cpp:137
 msgid "Allowed values for this field are separated by a semi-colon."
 msgstr ""
 
-#: bccollectionpropdialog.cpp:103
+#: bccollectionpropdialog.cpp:139
 msgid "Description:"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:109
+#: bccollectionpropdialog.cpp:145
 #, fuzzy
 msgid "Format Options"
 msgstr "Formázási beállítások"
 
-#: bccollectionpropdialog.cpp:110
+#: bccollectionpropdialog.cpp:146
 msgid "No formatting"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:111
+#: bccollectionpropdialog.cpp:147
 #, fuzzy
 msgid "Format as a title"
 msgstr "Címek és nevek formázása"
 
-#: bccollectionpropdialog.cpp:112
+#: bccollectionpropdialog.cpp:148
 #, fuzzy
 msgid "Format as a name"
 msgstr "Címek és nevek formázása"
 
-#: bccollectionpropdialog.cpp:115
+#: bccollectionpropdialog.cpp:151
 #, fuzzy
 msgid "Field Options"
 msgstr "Általános beállítások"
 
-#: bccollectionpropdialog.cpp:116
+#: bccollectionpropdialog.cpp:152
 msgid "Enable auto-completion"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:117
+#: bccollectionpropdialog.cpp:153
 msgid "Allow multiple values"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:118
+#: bccollectionpropdialog.cpp:154
 #, fuzzy
 msgid "Allow grouping"
 msgstr "Csoportosítás"
 
-#: bccollectionpropdialog.cpp:191
+#: bccollectionpropdialog.cpp:241
 msgid ""
 "Do you really want to delete the %1 field? This action occurs immediately "
 "and can not be undone!"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:194
+#: bccollectionpropdialog.cpp:244
 #, fuzzy
 msgid "Delete Field?"
 msgstr "Kiválasztott mezők"
@@ -1198,6 +1193,10 @@ msgstr "Kiválasztott mezők"
 
 #~ msgid "FindDialog"
 #~ msgstr "FindDialog"
+
+#, fuzzy
+#~ msgid "BCFilterRuleWidget"
+#~ msgstr "BCUnitEditWidget"
 
 #, fuzzy
 #~ msgid "BCFilterDialog"
@@ -1228,22 +1227,6 @@ msgstr "Kiválasztott mezők"
 #~ msgid "BCUnitEditWidget"
 #~ msgstr "BCUnitEditWidget"
 
-#, fuzzy
-#~ msgid "Lookup"
-#~ msgstr "Könyv"
-
-#, fuzzy
-#~ msgid "Search field:"
-#~ msgstr "Keresés itt:"
-
-#, fuzzy
-#~ msgid "Search text:"
-#~ msgstr "Keresés itt:"
-
-#, fuzzy
-#~ msgid "Search Results"
-#~ msgstr "Keresés itt:"
-
 #~ msgid "Cut the selected section and puts it to the clipboard"
 #~ msgstr "Kivágja a kiválasztott szöveget és átmásolja a vágólapra"
 
@@ -1252,14 +1235,6 @@ msgstr "Kiválasztott mezők"
 
 #~ msgid "Paste the clipboard contents to actual position"
 #~ msgstr "A vágolap tartalmának beillesztése ide"
-
-#, fuzzy
-#~ msgid "BCComboAction"
-#~ msgstr "BCCollection"
-
-#, fuzzy
-#~ msgid "test"
-#~ msgstr "Előadó"
 
 #~ msgid "My CDs"
 #~ msgstr "CD gyűjteményem"

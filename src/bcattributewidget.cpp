@@ -160,6 +160,7 @@ BCAttributeWidget::BCAttributeWidget(BCAttribute* att_, QWidget* parent_, const 
   m_editMultiple = new QCheckBox(this);
   m_editMultiple->setChecked(true);
   m_editMultiple->setFixedWidth(m_editMultiple->sizeHint().width()); // don't let it have any extra space
+  m_editMultiple->setPaletteForegroundColor(QColor("red"));
   m_editMultiple->hide();
   connect(m_editMultiple, SIGNAL(toggled(bool)), SLOT(setEnabled(bool)));
 

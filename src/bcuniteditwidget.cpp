@@ -35,7 +35,7 @@ static const int NCOLS = 2;
 
 BCUnitEditWidget::BCUnitEditWidget(QWidget* parent_, const char* name_/*=0*/)
     : QWidget(parent_, name_), m_currColl(0),
-      m_tabs(new BCTabControl(this)), m_modified(false), m_completionActivated(false) {
+      m_tabs(new BCTabControl(this)), m_modified(false), m_isSaving(false) {
 //  kdDebug() << "BCUnitEditWidget()" << endl;
   m_widgetDict.setAutoDelete(true);
   QVBoxLayout* topLayout = new QVBoxLayout(this);
@@ -242,8 +242,11 @@ void BCUnitEditWidget::slotHandleSave() {
   if(!m_currColl) {
     // big problem
     kdDebug() << "BCUnitEditWidget::slotHandleSave() - no valid collection pointer" << endl;
+    return;
   }
 
+  m_isSaving = true;
+  
   if(m_currUnits.isEmpty()) {
     m_currUnits.append(new BCUnit(m_currColl));
     m_isOrphan = true;
@@ -294,6 +297,7 @@ void BCUnitEditWidget::slotHandleSave() {
     }
   }
   m_modified = false;
+  m_isSaving = false;
   slotHandleNew();
 }
 
@@ -365,6 +369,11 @@ void BCUnitEditWidget::slotHandleClear() {
 }
 
 void BCUnitEditWidget::slotSetContents(const BCUnitList& list_) {
+  // this slot might get called if we try to save multiple items, so just return
+  if(m_isSaving) {
+    return;
+  }
+
   if(list_.isEmpty()) {
     if(!m_isOrphan && m_modified) {
       slotHandleNew();
@@ -393,8 +402,7 @@ void BCUnitEditWidget::slotSetContents(const BCUnitList& list_) {
   for( ; aIt.current(); ++aIt) {
     key = QString::number(m_currColl->id()) + aIt.current()->name();
     widget = m_widgetDict.find(key);
-    if(!widget) {
-      kdDebug() << "BCUnitEditWidget::slotSetContents() - no widget for " << aIt.current()->name() << endl;
+    if(!widget) { // probably read-only
       continue;
     }
     widget->editMultiple(true);
@@ -458,8 +466,7 @@ void BCUnitEditWidget::slotSetContents(BCUnit* unit_, const QString& highlight_/
   for( ; it.current(); ++it) {
     key = QString::number(m_currColl->id()) + it.current()->name();
     widget = m_widgetDict.find(key);
-    if(!widget) {
-      kdDebug() << "BCUnitEditWidget::slotSetContents() - no widget for " << it.current()->name() << endl;
+    if(!widget) { // is probably read-only
       continue;
     }
 

@@ -1,3 +1,18 @@
+2003-05-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase version 0.6.1
+	* Fixed automake 1.7 error with configure.in.in
+	* Fixed UIC variable usage, primarily for *BSD platforms
+	* Fixed double encoding bug on bibtexml inport
+	* Fixed wrong namespace on bibtexml export
+	* Changed to use KAcceleratorManager for keyboard accels on tabs
+	* Fixed bug with the group view icon not getting changed back to the folder
+
+2003-05-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with editing multiple books and getting asked every time if I'm sure.
+	* Changed modified field names in the "Edit Fields" dialog to be colored, an din italic font instead of having an asterisk in front.
+
 2003-05-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase version 0.6

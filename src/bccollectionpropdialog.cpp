@@ -15,7 +15,6 @@
  ***************************************************************************/
 
 #include "bccollectionpropdialog.h"
-#include "bookcase.h"
 #include "bccollection.h"
 
 #include <klocale.h>
@@ -34,14 +33,45 @@
 #include <qradiobutton.h>
 #include <qbuttongroup.h>
 #include <qcheckbox.h>
-#include <qlistbox.h>
 #include <qpushbutton.h>
 #include <qregexp.h>
 #include <qwhatsthis.h>
+#include <qpainter.h>
 
-BCCollectionPropDialog::BCCollectionPropDialog(BCCollection* coll_, Bookcase* parent_, const char* name_/*=0*/)
+BCListBoxText::BCListBoxText(QListBox* listbox_, const QString& text_)
+    : QListBoxText(listbox_, text_), m_colored(false) {
+}
+
+void BCListBoxText::setColored(bool colored_) {
+  if(m_colored != colored_) {
+    m_colored = colored_;
+    listBox()->update();
+  }
+}
+
+void BCListBoxText::setText(const QString& text_) {
+  QListBoxItem::setText(text_);
+  listBox()->updateGeometry();
+}
+
+// mostly copied from QListBoxText::paint() in Qt 3.1.1
+void BCListBoxText::paint(QPainter* painter_) {
+  int itemHeight = height(listBox());
+  QFontMetrics fm = painter_->fontMetrics();
+  int yPos = ((itemHeight - fm.height()) / 2) + fm.ascent();
+  if(!isSelected() && m_colored) {
+    QFont font = painter_->font();
+    font.setBold(true);
+    font.setItalic(true);
+    painter_->setFont(font);
+    painter_->setPen(listBox()->colorGroup().highlight());
+  }
+  painter_->drawText(3, yPos, text());
+}
+
+BCCollectionPropDialog::BCCollectionPropDialog(BCCollection* coll_, QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, false, i18n("Edit Collection Fields"), Ok|Apply|Cancel, Ok, false),
-      m_bookcase(parent_), m_coll(coll_), m_typeMap(BCAttribute::typeMap()), m_currentAttribute(0),
+      m_coll(coll_), m_typeMap(BCAttribute::typeMap()), m_currentAttribute(0),
       m_modified(false), m_updatingValues(false) {
   QWidget* page = new QWidget(this);
   setMainWidget(page);
@@ -51,7 +81,13 @@ BCCollectionPropDialog::BCCollectionPropDialog(BCCollection* coll_, Bookcase* pa
   topLayout->addWidget(fieldsGroup, 1);
   m_fieldsBox = new QListBox(fieldsGroup);
   m_fieldsBox->setMinimumWidth(150);
-  m_fieldsBox->insertStringList(m_coll->attributeTitles()); // this will include ReadOnly types! TODO
+  BCAttributeListIterator it(m_coll->attributeList());
+  for( ; it.current(); ++it) {
+    if(it.current()->type() != BCAttribute::ReadOnly) {
+      (void) new BCListBoxText(m_fieldsBox, it.current()->title());
+    }
+  }
+//  m_fieldsBox->insertStringList(m_coll->attributeTitles()); // this will include ReadOnly types! TODO
   connect(m_fieldsBox, SIGNAL(highlighted(const QString&)), SLOT(slotUpdateValues(const QString&)));
 
   QHBox* hb = new QHBox(fieldsGroup);
@@ -123,15 +159,13 @@ BCCollectionPropDialog::BCCollectionPropDialog(BCCollection* coll_, Bookcase* pa
   m_fieldsBox->setSelected(0, true);
   // need to call this since the text isn't actually changed when it's set initially
   slotTypeChanged(m_typeCombo->currentText());
+
+  enableButtonOK(false);
+  enableButtonApply(false);
 }
 
 void BCCollectionPropDialog::slotOk() {
   slotApply();
-  // now clear copied attributes
-  m_copiedAttributes.setAutoDelete(true);
-  m_copiedAttributes.clear();
-  // clear new ones, too
-  m_newAttributes.clear();
   accept();
 }
 
@@ -147,10 +181,24 @@ void BCCollectionPropDialog::slotApply() {
   for( ; it2.current(); ++it2) {
     m_coll->addAttribute(it2.current());
   }
+
+  // set all text not to be colored
+  QListBoxItem* item;
+  for(item = m_fieldsBox->firstItem(); item; item = item->next()) {
+    static_cast<BCListBoxText*>(item)->setColored(false);
+  }
   
   if(m_newAttributes.count() > 0 || m_copiedAttributes.count() > 0) {
     emit signalCollectionModified();
   }
+
+  // now clear copied attributes
+  m_copiedAttributes.setAutoDelete(true);
+  m_copiedAttributes.clear();
+  // clear new ones, too
+  m_newAttributes.clear();
+
+  enableButtonApply(false);
 }
 
 void BCCollectionPropDialog::slotNew() {
@@ -168,8 +216,10 @@ void BCCollectionPropDialog::slotNew() {
   m_newAttributes.append(att);
 //  kdDebug() << "BCCollectionPropDialog::slotNew() - adding new attribute " << title << endl;
   
-  m_fieldsBox->insertItem(title);
-  m_fieldsBox->setSelected(m_fieldsBox->count()-1, true);
+//  m_fieldsBox->insertItem(title);
+  BCListBoxText* box = new BCListBoxText(m_fieldsBox, title);
+  m_fieldsBox->setSelected(box, true);
+  box->setColored(true);
   m_fieldsBox->ensureCurrentVisible();
   m_modified = true;
 }
@@ -223,10 +273,6 @@ void BCCollectionPropDialog::slotTypeChanged(const QString& type_) {
 }
 
 void BCCollectionPropDialog::slotUpdateValues(const QString& title_) {
-  QString title = title_;
-  if(title.at(0) == '*') {
-    title = title.mid(1);
-  }
 //  kdDebug() << "BCCollectionPropDialog::slotUpdateValues() - " << title << endl;
 
   // use this instead of blocking signals everywhere
@@ -241,7 +287,7 @@ void BCCollectionPropDialog::slotUpdateValues(const QString& title_) {
   BCAttribute* att = 0;
   BCAttributeListIterator it(m_newAttributes);
   for( ; it.current(); ++it) {
-    if(it.current()->title() == title) {
+    if(it.current()->title() == title_) {
       att = it.current();
       isNew = true;
 //      kdDebug() << "BCCollectionPropDialog::slotUpdateValues() - found new attribute " << endl;
@@ -251,15 +297,15 @@ void BCCollectionPropDialog::slotUpdateValues(const QString& title_) {
 
   // if none found, check copied list
   if(!att) {
-    att = m_copiedAttributes[title];
+    att = m_copiedAttributes[title_];
   }
   // if none found, check attributes in collection
   if(!att) {
-    att = m_coll->attributeByTitle(title);
+    att = m_coll->attributeByTitle(title_);
   }
   // now we're in trouble if none found
   if(!att) {
-    kdDebug() << "BCCollectionPropDialog::slotUpdateValues() - no attribute named " << title << endl;
+    kdDebug() << "BCCollectionPropDialog::slotUpdateValues() - no attribute named " << title_ << endl;
     return;
   }
 
@@ -395,6 +441,16 @@ void BCCollectionPropDialog::slotModified() {
 
   m_modified = true;
   
+  enableButtonOK(true);
+  enableButtonApply(true);
+  
+  // color the text
+#if QT_VERSION >= 0x030100
+  static_cast<BCListBoxText*>(m_fieldsBox->selectedItem())->setColored(true);
+#else
+  static_cast<BCListBoxText*>(m_fieldsBox->item(m_fieldsBox->currentItem()))->setColored(true);
+#endif
+
   QString title = m_fieldsBox->currentText();
 
   // check if copy exists already
@@ -426,25 +482,12 @@ void BCCollectionPropDialog::slotModified() {
 void BCCollectionPropDialog::slotUpdateTitle(const QString& title_) {
 //  kdDebug() << "BCCollectionPropDialog::slotUpdateTitle()" << endl;
 
-//  if(m_currentAttribute && m_currentAttribute->title() != title_) {
-  if(m_currentAttribute) {
+  if(m_currentAttribute && m_currentAttribute->title() != title_) {
     m_fieldsBox->blockSignals(true);
-    QListBoxItem* oldItem = m_fieldsBox->findItem(m_currentAttribute->title());
-    int index = m_fieldsBox->index(oldItem);
-
-    // changeItem() changes the selected item to the changed item, so keep copy
-#if QT_VERSION >= 0x030100
-    QListBoxItem* item = m_fieldsBox->selectedItem();
-#else
-    QListBoxItem* item = m_fieldsBox->item(m_fieldsBox->currentItem());
-#endif
-    if(m_newAttributes.containsRef(m_currentAttribute)
-       || m_copiedAttributes[m_currentAttribute->title()]) {
-      m_fieldsBox->changeItem(QString::fromLatin1("*") + title_, index);
-    } else {
-      m_fieldsBox->changeItem(title_, index);
-    }
-    m_fieldsBox->setSelected(item, true);
+    BCListBoxText* oldItem = static_cast<BCListBoxText*>(m_fieldsBox->findItem(m_currentAttribute->title()));
+    oldItem->setText(title_);
+    // will always be colred since it's new
+    oldItem->setColored(true);
 
     if(m_copiedAttributes[m_currentAttribute->title()]) {
       m_copiedAttributes.remove(m_currentAttribute->title());

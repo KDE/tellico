@@ -169,7 +169,7 @@ bool BookcaseDoc::openDocument(const KURL& url_) {
 }
 
 bool BookcaseDoc::loadDomDocument(const KURL& url_, const QDomDocument& dom_) {  
-  Bookcase* app = BookcaseAncestor(parent());
+  Bookcase* app = BookcaseAncestor(parent());  
   QDomElement root = dom_.documentElement();
   if(root.tagName() != QString::fromLatin1("bookcase")) {
     QString str(i18n("Bookcase is unable to load the file - %1.").arg(url_.fileName()));

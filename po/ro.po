@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-03 01:34-0700\n"
+"POT-Creation-Date: 2003-05-05 22:36-0700\n"
 "PO-Revision-Date: 2002-12-03 17:29-0800\n"
 "Last-Translator: Iulian Ursache <iulianu@cs.tuiasi.ro>\n"
 "Language-Team: Română <ro@li.org>\n"
@@ -20,13 +20,11 @@ msgid "a,an,and,in,of,the,to"
 msgstr ""
 
 #: bcattribute.cpp:38 bcattribute.cpp:53 bccollection.cpp:35
-#: bookcollection.cpp:25 bookcollection.cpp:30 bookcollection.cpp:40
-#: bookcollection.cpp:45 bookcollection.cpp:50 videocollection.cpp:25
+#: configdialog.cpp:118 bookcollection.cpp:19 videocollection.cpp:25
 #: videocollection.cpp:30 videocollection.cpp:38 videocollection.cpp:43
 #: songcollection.cpp:25 songcollection.cpp:31 songcollection.cpp:36
 #: songcollection.cpp:41 songcollection.cpp:48 songcollection.cpp:53
-#, fuzzy
-msgid "&General"
+msgid "General"
 msgstr "General"
 
 #: bcattribute.cpp:299
@@ -41,17 +39,17 @@ msgstr ""
 msgid "de,van der,von"
 msgstr ""
 
-#: bcattribute.cpp:358 bccollectionpropdialog.cpp:211
+#: bcattribute.cpp:358 bccollectionpropdialog.cpp:261
 #, fuzzy
 msgid "Simple Text"
 msgstr "Caută"
 
-#: bcattribute.cpp:359 bccollectionpropdialog.cpp:209
-#: bccollectionpropdialog.cpp:222
+#: bcattribute.cpp:359 bccollectionpropdialog.cpp:259
+#: bccollectionpropdialog.cpp:272
 msgid "Paragraph"
 msgstr ""
 
-#: bcattribute.cpp:360 bccollectionpropdialog.cpp:208
+#: bcattribute.cpp:360 bccollectionpropdialog.cpp:258
 #, fuzzy
 msgid "List"
 msgstr "Artist"
@@ -61,11 +59,11 @@ msgid "Checkbox"
 msgstr ""
 
 #: bcattribute.cpp:362 videocollection.cpp:24 songcollection.cpp:35
-#: bccollectionpropdialog.cpp:216
+#: bccollectionpropdialog.cpp:266
 msgid "Year"
 msgstr "An"
 
-#: bcattribute.cpp:363 bccollectionpropdialog.cpp:219
+#: bcattribute.cpp:363 bccollectionpropdialog.cpp:269
 msgid "URL"
 msgstr ""
 
@@ -95,11 +93,11 @@ msgid "Collapse All Groups"
 msgstr "Pliază toate grupurile"
 
 #: bcgroupview.cpp:59 bcdetailedlistview.cpp:67 bcuniteditwidget.cpp:52
-#: bcuniteditwidget.cpp:484
+#: bcuniteditwidget.cpp:491
 msgid "Delete Book"
 msgstr "Şterge carte"
 
-#: bcgroupview.cpp:428
+#: bcgroupview.cpp:431
 msgid "New Collection Name"
 msgstr "Nume nou colecţie"
 
@@ -111,8 +109,8 @@ msgstr ""
 msgid "New Book"
 msgstr "Carte nouă"
 
-#: bcuniteditwidget.cpp:51 bcuniteditwidget.cpp:74 bcuniteditwidget.cpp:361
-#: bcuniteditwidget.cpp:525
+#: bcuniteditwidget.cpp:51 bcuniteditwidget.cpp:74 bcuniteditwidget.cpp:365
+#: bcuniteditwidget.cpp:532
 msgid "Enter Book"
 msgstr "Introdu carte"
 
@@ -121,39 +119,39 @@ msgstr "Introdu carte"
 msgid "Duplicate Book"
 msgstr "Şterge carte"
 
-#: bcuniteditwidget.cpp:259
+#: bcuniteditwidget.cpp:262
 msgid "Do you really want to modify these books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:261
+#: bcuniteditwidget.cpp:264
 #, fuzzy
 msgid "Modify Multiple Books?"
 msgstr "Modifică carte"
 
-#: bcuniteditwidget.cpp:309
+#: bcuniteditwidget.cpp:313
 msgid "Do you really want to delete these books?"
 msgstr ""
 
-#: bcuniteditwidget.cpp:311
+#: bcuniteditwidget.cpp:315
 #, fuzzy
 msgid "Delete Multiple Books?"
 msgstr "Şterge carte"
 
-#: bcuniteditwidget.cpp:414
+#: bcuniteditwidget.cpp:422
 #, fuzzy
 msgid "Modify Books"
 msgstr "Modifică carte"
 
-#: bcuniteditwidget.cpp:415
+#: bcuniteditwidget.cpp:423
 #, fuzzy
 msgid "Delete Books"
 msgstr "Şterge carte"
 
-#: bcuniteditwidget.cpp:479
+#: bcuniteditwidget.cpp:486
 msgid "Modify Book"
 msgstr "Modifică carte"
 
-#: bcuniteditwidget.cpp:522
+#: bcuniteditwidget.cpp:529
 #, fuzzy
 msgid ""
 "The current book has been modified.\n"
@@ -162,7 +160,7 @@ msgstr ""
 "Fişierul curent a fost modificat.\n"
 "Doriţi să îl salvaţi?"
 
-#: bcuniteditwidget.cpp:524 bookcasedoc.cpp:365
+#: bcuniteditwidget.cpp:531 bookcasedoc.cpp:365
 msgid "Warning!"
 msgstr "Atenţie!"
 
@@ -560,10 +558,6 @@ msgid "Configure Bookcase"
 msgstr "Bookcase"
 
 #: configdialog.cpp:118
-msgid "General"
-msgstr "General"
-
-#: configdialog.cpp:118
 msgid "General Options"
 msgstr "Opţiuni generale"
 
@@ -731,186 +725,187 @@ msgstr "Fişierul de deschis"
 msgid "Bookcase"
 msgstr "Bookcase"
 
-#: bookcollection.h:67 bookcollection.cpp:170
+#: bookcollection.h:67 bookcollection.cpp:175
 msgid "My Books"
 msgstr "Cărţile mele"
 
-#: bookcollection.cpp:20 bookcollection.cpp:174
+#: bookcollection.cpp:20
+#, fuzzy
+msgid "Publishing"
+msgstr "Editare"
+
+#: bookcollection.cpp:21
+#, fuzzy
+msgid "Classification"
+msgstr "Clasificare"
+
+#: bookcollection.cpp:22
+#, fuzzy
+msgid "Personal"
+msgstr "Personal"
+
+#: bookcollection.cpp:25 bookcollection.cpp:179
 msgid "Books"
 msgstr "Cărţi"
 
-#: bookcollection.cpp:24
+#: bookcollection.cpp:29
 msgid "Subtitle"
 msgstr "Subtitlu"
 
-#: bookcollection.cpp:29
+#: bookcollection.cpp:34
 msgid "Author"
 msgstr "Autor"
 
-#: bookcollection.cpp:37
+#: bookcollection.cpp:42
 msgid "Hardback"
 msgstr ""
 
-#: bookcollection.cpp:37
+#: bookcollection.cpp:42
 msgid "Paperback"
 msgstr ""
 
-#: bookcollection.cpp:37
+#: bookcollection.cpp:42
 msgid "Trade Paperback"
 msgstr ""
 
-#: bookcollection.cpp:38
+#: bookcollection.cpp:43
 msgid "E-Book"
 msgstr ""
 
-#: bookcollection.cpp:38
+#: bookcollection.cpp:43
 msgid "Magazine"
 msgstr "Revistă"
 
-#: bookcollection.cpp:38
+#: bookcollection.cpp:43
 msgid "Journal"
 msgstr "Jurnal"
 
-#: bookcollection.cpp:39
+#: bookcollection.cpp:44
 msgid "Binding"
 msgstr "Legare"
 
-#: bookcollection.cpp:44
+#: bookcollection.cpp:49
 msgid "Purchase Date"
 msgstr "Data achiziţionării"
 
-#: bookcollection.cpp:49
+#: bookcollection.cpp:54
 msgid "Purchase Price"
 msgstr "Preţ achiziţie"
 
-#: bookcollection.cpp:53
+#: bookcollection.cpp:58
 msgid "Publisher"
 msgstr "Editură"
 
-#: bookcollection.cpp:54 bookcollection.cpp:59 bookcollection.cpp:64
-#: bookcollection.cpp:69 bookcollection.cpp:74 bookcollection.cpp:79
-#: bookcollection.cpp:84 bookcollection.cpp:88
+#: bookcollection.cpp:63
+msgid "Edition"
+msgstr "Ediţie"
+
+#: bookcollection.cpp:68
+msgid "Copyright Year"
+msgstr "An copyright"
+
+#: bookcollection.cpp:69
 #, fuzzy
 msgid "&Publishing"
 msgstr "Editare"
 
-#: bookcollection.cpp:58
-msgid "Edition"
-msgstr "Ediţie"
-
-#: bookcollection.cpp:63
-msgid "Copyright Year"
-msgstr "An copyright"
-
-#: bookcollection.cpp:68
+#: bookcollection.cpp:73
 msgid "Publication Year"
 msgstr "An apariţie"
 
-#: bookcollection.cpp:73
+#: bookcollection.cpp:78
 msgid "ISBN#"
 msgstr "Nr. ISBN"
 
-#: bookcollection.cpp:75
+#: bookcollection.cpp:80
 msgid "International Standard Book Number"
 msgstr ""
 
-#: bookcollection.cpp:78
+#: bookcollection.cpp:83
 msgid "LCCN#"
 msgstr "Nr. LCCN"
 
-#: bookcollection.cpp:80
+#: bookcollection.cpp:85
 msgid "Library of Congress Control Number"
 msgstr ""
 
-#: bookcollection.cpp:83
+#: bookcollection.cpp:88
 msgid "Pages"
 msgstr "Pagini"
 
-#: bookcollection.cpp:87
+#: bookcollection.cpp:92
 msgid "Language"
 msgstr "Limbă"
 
-#: bookcollection.cpp:92 videocollection.cpp:29 songcollection.cpp:40
+#: bookcollection.cpp:97 videocollection.cpp:29 songcollection.cpp:40
 msgid "Genre"
 msgstr "Gen"
 
-#: bookcollection.cpp:93 bookcollection.cpp:100 bookcollection.cpp:105
-#: bookcollection.cpp:110 bookcollection.cpp:116
-#, fuzzy
-msgid "&Classification"
-msgstr "Clasificare"
-
-#: bookcollection.cpp:99
+#: bookcollection.cpp:104
 msgid "Keywords"
 msgstr "Cuvinte cheie"
 
-#: bookcollection.cpp:104
+#: bookcollection.cpp:109
 msgid "Series"
 msgstr "Serie"
 
-#: bookcollection.cpp:109
+#: bookcollection.cpp:114
 msgid "Series Number"
 msgstr "Nr. în serie"
 
-#: bookcollection.cpp:114
+#: bookcollection.cpp:119
 msgid "New"
 msgstr "Nouă"
 
-#: bookcollection.cpp:114
+#: bookcollection.cpp:119
 msgid "Used"
 msgstr "Folosită"
 
-#: bookcollection.cpp:115
+#: bookcollection.cpp:120
 msgid "Condition"
 msgstr "Stare"
 
-#: bookcollection.cpp:119
+#: bookcollection.cpp:124
 msgid "Signed"
 msgstr "Semnată"
 
-#: bookcollection.cpp:120 bookcollection.cpp:124 bookcollection.cpp:128
-#: bookcollection.cpp:132 bookcollection.cpp:138 bookcollection.cpp:143
-#, fuzzy
-msgid "Pe&rsonal"
-msgstr "Personal"
-
-#: bookcollection.cpp:123
+#: bookcollection.cpp:128
 msgid "Read"
 msgstr "Citită"
 
-#: bookcollection.cpp:127
+#: bookcollection.cpp:132
 msgid "Gift"
 msgstr "Cadou"
 
-#: bookcollection.cpp:131
+#: bookcollection.cpp:136
 msgid "Loaned"
 msgstr "Împrumutată"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "5 - Best"
 msgstr "5 - F. bună"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "4 - Good"
 msgstr "4 - Bună"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "3 - Neutral"
 msgstr "3 - Medie"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "2 - Bad"
 msgstr "2 - Proastă"
 
-#: bookcollection.cpp:136
+#: bookcollection.cpp:141
 msgid "1 - Worst"
 msgstr "1 - F. proastă"
 
-#: bookcollection.cpp:137
+#: bookcollection.cpp:142
 msgid "Rating"
 msgstr "Calificativ"
 
-#: bookcollection.cpp:142 videocollection.cpp:42 songcollection.cpp:52
+#: bookcollection.cpp:147 videocollection.cpp:42 songcollection.cpp:52
 msgid "Comments"
 msgstr "Comentarii"
 
@@ -1133,107 +1128,111 @@ msgstr ""
 msgid "clear widgets"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:43
+#: bccollectionpropdialog.cpp:73
 #, fuzzy
 msgid "Edit Collection Fields"
 msgstr "Opţiuni colecţii audio"
 
-#: bccollectionpropdialog.cpp:50
+#: bccollectionpropdialog.cpp:80
 msgid "Current Fields"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:59 bccollectionpropdialog.cpp:161
-#: bccollectionpropdialog.cpp:164
+#: bccollectionpropdialog.cpp:95 bccollectionpropdialog.cpp:209
+#: bccollectionpropdialog.cpp:212
 msgid "New Field"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:61
+#: bccollectionpropdialog.cpp:97
 #, fuzzy
 msgid "Delete Field"
 msgstr "Şterge carte"
 
-#: bccollectionpropdialog.cpp:71
+#: bccollectionpropdialog.cpp:107
 msgid "Field Properties"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:77
+#: bccollectionpropdialog.cpp:113
 #, fuzzy
 msgid "Title:"
 msgstr "Titlu"
 
-#: bccollectionpropdialog.cpp:82
+#: bccollectionpropdialog.cpp:118
 msgid "Category:"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:88
+#: bccollectionpropdialog.cpp:124
 msgid "The fields are grouped by common categories for editing."
 msgstr ""
 
-#: bccollectionpropdialog.cpp:90
+#: bccollectionpropdialog.cpp:126
 msgid "Type:"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:97
+#: bccollectionpropdialog.cpp:133
 msgid "Allowed:"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:101
+#: bccollectionpropdialog.cpp:137
 msgid "Allowed values for this field are separated by a semi-colon."
 msgstr ""
 
-#: bccollectionpropdialog.cpp:103
+#: bccollectionpropdialog.cpp:139
 msgid "Description:"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:109
+#: bccollectionpropdialog.cpp:145
 #, fuzzy
 msgid "Format Options"
 msgstr "Opţiuni generale"
 
-#: bccollectionpropdialog.cpp:110
+#: bccollectionpropdialog.cpp:146
 msgid "No formatting"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:111
+#: bccollectionpropdialog.cpp:147
 #, fuzzy
 msgid "Format as a title"
 msgstr "Pune automat majuscule la autori şi titluri"
 
-#: bccollectionpropdialog.cpp:112
+#: bccollectionpropdialog.cpp:148
 #, fuzzy
 msgid "Format as a name"
 msgstr "Pune automat majuscule la autori şi titluri"
 
-#: bccollectionpropdialog.cpp:115
+#: bccollectionpropdialog.cpp:151
 #, fuzzy
 msgid "Field Options"
 msgstr "Opţiuni generale"
 
-#: bccollectionpropdialog.cpp:116
+#: bccollectionpropdialog.cpp:152
 msgid "Enable auto-completion"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:117
+#: bccollectionpropdialog.cpp:153
 msgid "Allow multiple values"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:118
+#: bccollectionpropdialog.cpp:154
 msgid "Allow grouping"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:191
+#: bccollectionpropdialog.cpp:241
 msgid ""
 "Do you really want to delete the %1 field? This action occurs immediately "
 "and can not be undone!"
 msgstr ""
 
-#: bccollectionpropdialog.cpp:194
+#: bccollectionpropdialog.cpp:244
 msgid "Delete Field?"
 msgstr ""
 
 #, fuzzy
 #~ msgid "BookcaseDoc"
 #~ msgstr "Bookcase"
+
+#, fuzzy
+#~ msgid "BCLabelAction"
+#~ msgstr "Opţiuni colecţii cărţi"
 
 #, fuzzy
 #~ msgid "BCLineEditAction"
@@ -1248,6 +1247,10 @@ msgstr ""
 #~ msgstr "Opţiuni colecţii cărţi"
 
 #, fuzzy
+#~ msgid "BCFilterDialog"
+#~ msgstr "Opţiuni colecţii cărţi"
+
+#, fuzzy
 #~ msgid "BCCollection"
 #~ msgstr "Opţiuni colecţii cărţi"
 
@@ -1259,10 +1262,6 @@ msgstr ""
 #~ msgid "BookCollection"
 #~ msgstr "Opţiuni colecţii cărţi"
 
-#, fuzzy
-#~ msgid "Lookup"
-#~ msgstr "cărţi"
-
 #~ msgid "Cut the selected section and puts it to the clipboard"
 #~ msgstr "Taie regiunea selectată şi o plasează în clipboard"
 
@@ -1271,14 +1270,6 @@ msgstr ""
 
 #~ msgid "Paste the clipboard contents to actual position"
 #~ msgstr "Lipeşte conţinutul clipboard-ului în poziţia actuală"
-
-#, fuzzy
-#~ msgid "BCComboAction"
-#~ msgstr "Opţiuni colecţii cărţi"
-
-#, fuzzy
-#~ msgid "test"
-#~ msgstr "Artist"
 
 #~ msgid "Clear Data"
 #~ msgstr "Curăţă datele"

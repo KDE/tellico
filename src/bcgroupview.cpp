@@ -227,6 +227,8 @@ void BCGroupView::slotModifyGroup(BCCollection* coll_, BCUnitGroup* group_) {
     }
   }
 
+  // don't want any selected
+  slotClearSelection();
   // need to refresh
   triggerUpdate();
   root->setOpen(true);
@@ -283,6 +285,7 @@ void BCGroupView::slotSetSelected(BCUnit* unit_) {
     return;
   }
 
+  // if the selected unit is the same as the current one, just return
   if(selectedItem() && unit_ == static_cast<BCUnitItem*>(selectedItem())->unit()) {
     return;
   }
@@ -514,8 +517,7 @@ void BCGroupView::setGroupAttribute(BCCollection* coll_, const QString& groupAtt
      || m_collGroupBy.find(unitName).data() != groupAtt_
      || collItem->childCount() == 0) {
     m_collGroupBy.insert(unitName, groupAtt_);
-    int flags = att->flags();
-    if(flags & BCAttribute::FormatName) {
+    if(att->formatFlag() == BCAttribute::FormatName) {
       m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person-open"),
                                                           KIcon::Small);
       m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("person"),

@@ -119,6 +119,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
     return result;
   }
 
+//  m_docIn = xmlParseDoc((xmlChar *)text_.local8Bit().data());
   m_docIn = xmlParseDoc((xmlChar *)text_.utf8().data());
   if(!m_docIn) {
     kdDebug() << "XSLTHandler::applyStylesheet() - error parsing input string!" << endl;

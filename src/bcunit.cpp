@@ -22,7 +22,7 @@
 
 #include <qregexp.h>
 
-BCUnit::BCUnit(BCCollection* coll_) : , m_title(QString::null), m_id(coll_->unitCount()), m_coll(coll_) {
+BCUnit::BCUnit(BCCollection* coll_) : m_title(QString::null), m_id(coll_->unitCount()), m_coll(coll_) {
   // keep the title in the attributes, too.
   setAttribute(QString::fromLatin1("title"), m_title);
 

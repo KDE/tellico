@@ -32,7 +32,7 @@ BCCollection::BCCollection(int id_, const QString& title_, const QString& unitNa
 
   // all collections have a title attribute for their units
   BCAttribute* att = new BCAttribute(QString::fromLatin1("title"), i18n("Title"));
-  att->setCategory(i18n("&General"));
+  att->setCategory(i18n("General"));
   att->setFormatFlag(BCAttribute::FormatTitle);
   addAttribute(att);
 }

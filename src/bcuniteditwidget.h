@@ -37,7 +37,7 @@ class QPushButton;
  * edit controls and so on.
  *
  * @author Robby Stephenson
- * @version $Id: bcuniteditwidget.h,v 1.4 2003/05/02 06:04:21 robby Exp $
+ * @version $Id: bcuniteditwidget.h,v 1.5 2003/05/06 05:24:59 robby Exp $
  */
 class BCUnitEditWidget : public QWidget {
 Q_OBJECT
@@ -146,8 +146,8 @@ private:
 //  QPushButton* m_clear;
 
   bool m_modified;
-  bool m_completionActivated;
   bool m_isOrphan;
+  bool m_isSaving;
 };
 
 #endif

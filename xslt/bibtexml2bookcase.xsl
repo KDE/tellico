@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/bookcase/"
                 xmlns:str="http://exslt.org/strings"
-                xmlns:bibtexml="http://bibtexml.sourceforge.net/"
+                xmlns:bibtexml="http://bibtexml.sf.net/"
                 extension-element-prefixes="str"
                 exclude-result-prefixes="bibtexml str"
                 version="1.0">
@@ -11,7 +11,7 @@
    ================================================================
    Bookcase XSLT file - used for importing from bibtexml format
 
-   $Id: bibtexml2bookcase.xsl,v 1.3 2003/05/03 05:50:26 robby Exp $
+   $Id: bibtexml2bookcase.xsl,v 1.5 2003/05/06 05:24:25 robby Exp $
 
    Copyright (c) 2003 Robby Stephenson - robby@periapsis.org
 
@@ -40,7 +40,7 @@
   <collection title="" unit="book">
   <!-- want to store key (id) values -->
   <!-- type = "5" is BCAttribute::ReadOnly -->
-   <attribute name="bibtex-id" type="5" flags="1" description="BibTex ID"/>
+   <attribute name="bibtex-id" type="5" flags="0" description="BibTex ID"/>
    <xsl:apply-templates select="bibtexml:entry/bibtexml:book"/>
   </collection>
  </bookcase>

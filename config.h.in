@@ -58,6 +58,18 @@
 /* Define to 1 if you have the <string.h> header file. */
 #undef HAVE_STRING_H
 
+/* Define if you have strlcat */
+#undef HAVE_STRLCAT
+
+/* Define if you have the strlcat prototype */
+#undef HAVE_STRLCAT_PROTO
+
+/* Define if you have strlcpy */
+#undef HAVE_STRLCPY
+
+/* Define if you have the strlcpy prototype */
+#undef HAVE_STRLCPY_PROTO
+
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #undef HAVE_SYS_STAT_H
 
@@ -72,6 +84,9 @@
 
 /* Define to 1 if you have the `vsnprintf' function. */
 #undef HAVE_VSNPRINTF
+
+/* Define if you want Xinerama support */
+#undef HAVE_XINERAMA
 
 /* Suffix for lib directories */
 #undef KDELIBSUFF
@@ -94,9 +109,6 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* The size of a `char', as computed by sizeof. */
-#undef SIZEOF_CHAR
-
 /* The size of a `char *', as computed by sizeof. */
 #undef SIZEOF_CHAR_P
 
@@ -105,6 +117,12 @@
 
 /* The size of a `long', as computed by sizeof. */
 #undef SIZEOF_LONG
+
+/* The size of a `size_t', as computed by sizeof. */
+#undef SIZEOF_SIZE_T
+
+/* The size of a `unsigned long', as computed by sizeof. */
+#undef SIZEOF_UNSIGNED_LONG
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
@@ -139,6 +157,24 @@
 extern "C"
 #endif
 int res_init (void);
+#endif
+
+
+
+#if !defined(HAVE_STRLCAT_PROTO)
+#ifdef __cplusplus
+extern "C"
+#endif
+unsigned long strlcat(char*, const char*, unsigned long);
+#endif
+
+
+
+#if !defined(HAVE_STRLCPY_PROTO)
+#ifdef __cplusplus
+extern "C"
+#endif
+unsigned long strlcpy(char*, const char*, unsigned long);
 #endif
 
 

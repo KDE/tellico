@@ -248,7 +248,7 @@ void Bookcase::initActions() {
   m_exportXSLT->setToolTip(i18n("Export a file using an XSL transform..."));
 
 //  kdWarning() << "Bookcase::initActions() - change createGUI() call!" << endl;
-//  createGUI(QString::fromLatin1("/home/robby/projects/bookcase/src/bookcaseui.rc"));
+// createGUI(QString::fromLatin1("/home/robby/projects/bookcase/src/bookcaseui.rc"));
   createGUI();
 
   // gets enabled once one search is done
