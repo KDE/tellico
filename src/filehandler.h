@@ -33,13 +33,12 @@ namespace Bookcase {
  * The FileHandler class contains some utility functions for reading files.
  *
  * @author Robby Stephenson
- * @version $Id: filehandler.h 468 2004-02-18 02:59:14Z robby $
+ * @version $Id: filehandler.h 514 2004-03-05 04:26:08Z robby $
  */
 class FileHandler {
 
 friend class MainWindow;
 friend const Data::Image& addImage(const KURL& url);
-friend class FileRef;
 
 public:
   /**
@@ -97,6 +96,7 @@ private:
     QString filename;
     bool isValid;
   };
+  friend class FileRef; // gcc 2.95 needs this
 
   /**
    * Read contents of a file into an image. It's private since everything should use the

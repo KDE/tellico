@@ -57,14 +57,17 @@ QByteArray BookcaseZipExporter::data(bool formatFields_) {
     }
   }
 
+  // use a dict for fast random access to keep track of which images were written to the file
+  QDict<int> imageDict;
   for(Data::EntryListIterator it(coll->entryList()); it.current(); ++it) {
     for(QStringList::ConstIterator fIt = imageFields.begin(); fIt != imageFields.end(); ++fIt) {
       const Data::Image& img = ImageFactory::imageById(it.current()->field(*fIt));
-      if(!img.isNull()) {
+      if(!img.isNull() && !imageDict[img.id()]) {
         QByteArray ba = img.byteArray();
 //        kdDebug() << "BookcaseZipExporter::data() - writing image id = " << it.current()->field(*fIt) << endl;
         zip.writeFile(QString::fromLatin1("images/") + it.current()->field(*fIt),
                       QString::null, QString::null, ba.size(), ba);
+        imageDict.insert(img.id(), reinterpret_cast<const int *>(1));
       }
     }
   }

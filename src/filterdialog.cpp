@@ -324,7 +324,6 @@ void FilterDialog::slotShrink() {
   resize(width(), sizeHint().height());
 }
 
-// TODO: fix when multiple collections supported
 QStringList FilterDialog::fieldTitles() const {
   return m_bookcase->doc()->collection()->fieldTitles();
 }

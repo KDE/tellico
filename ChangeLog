@@ -1,3 +1,32 @@
+2004-03-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase 0.8.5.
+
+2004-03-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug in Video template for when there's no Cast field.
+
+2004-03-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with filter dialog layout and KDE 3.2.
+
+2004-03-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with corrupt zip files when more than one entry
+	references the same image.
+
+2004-02-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed the gcc 2.95 compile bug for sure.
+
+2004-02-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug in Data::Entry::field().
+
+2004-02-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with HTML entities in XSLT stylesheet params.
+
 2004-02-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with duplicate menu items in KDE 3.2.x.

@@ -94,7 +94,7 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
 
   int maxHeight = 0;
   QPtrList<QWidget> gridList;
-  
+
   QStringList catList = m_currColl->fieldCategories();
   QStringList::ConstIterator catIt;
   for(catIt = catList.begin(); catIt != catList.end(); ++catIt) {
@@ -128,7 +128,7 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
          || it.current()->type() == Data::Field::Dependent) {
         continue;
       }
-      
+
       widget = new FieldWidget(it.current(), grid);
       connect(widget, SIGNAL(modified()), SLOT(slotSetModified()));
 
@@ -176,6 +176,7 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
     }
     // I don't want anything to be hidden, Keramik has a bug if I don't do this
     it.current()->setMinimumHeight(it.current()->sizeHint().height());
+    it.current()->parentWidget()->layout()->invalidate();
     it.current()->parentWidget()->setMinimumHeight(it.current()->parentWidget()->sizeHint().height());
   }
 
@@ -194,7 +195,7 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
 #endif
 
   m_tabs->setCurrentPage(0);
-  
+
   slotHandleNew();
   m_modified = false; // because the year is inserted
 }

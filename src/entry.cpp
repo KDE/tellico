@@ -47,8 +47,12 @@ QString Entry::title() const {
 }
 
 QString Entry::field(const QString& fieldName_) const {
-  if(m_coll->fieldByName(fieldName_)->type() == Field::Dependent) {
-    return dependentValue(m_coll->fieldByName(fieldName_)->description(), false);
+  Field* f = m_coll->fieldByName(fieldName_);
+  if(!f) {
+    return QString::null;
+  }
+  if(f->type() == Field::Dependent) {
+    return dependentValue(f->description(), false);
   }
 
   if(!m_fields.isEmpty() && m_fields.contains(fieldName_)) {
@@ -68,7 +72,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
   if(!Field::autoFormat() || flag == Field::FormatNone) {
     return field(fieldName_);
   }
-  
+
   if(m_formattedFields.isEmpty() || !m_formattedFields.contains(fieldName_)) {
     QString value = field(fieldName_);
     if(!value.isEmpty()) {
@@ -122,7 +126,7 @@ bool Entry::addToGroup(EntryGroup* group_) {
   if(!group_ || m_groups.containsRef(group_)) {
     return false;
   }
-  
+
 //  kdDebug() << "Entry::addToGroup() - adding group (" << group_->groupName() << ")" << endl;
   m_groups.append(group_);
   group_->append(this);
@@ -188,7 +192,7 @@ bool Entry::isOwned() const {
 void Entry::invalidateFormattedFieldValue(const QString& name_) {
   if(!m_formattedFields.isEmpty() && m_formattedFields.contains(name_)) {
     m_formattedFields.remove(name_);
-  } 
+  }
 }
 
 // format is something like "%{year} %{author}"

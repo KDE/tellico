@@ -64,7 +64,7 @@ XSLTHandler::~XSLTHandler() {
   if(m_docOut) {
     xmlFreeDoc(m_docOut);
   }
-  
+
   xsltCleanupGlobals();
   xmlCleanupParser();
 
@@ -111,7 +111,13 @@ void XSLTHandler::addParam(const QCString& name_, const QCString& value_) {
 }
 
 void XSLTHandler::addStringParam(const QCString& name_, const QCString& value_) {
-  addParam(name_, QCString("'") + value_ + QCString("'"));
+  QCString value = value_;
+//  value.replace('&', "&amp;");
+//  value.replace('<', "&lt;");
+//  value.replace('>', "&gt;");
+//  value.replace('"', "&quot;");
+  value.replace('\'', "&apos;");
+  addParam(name_, QCString("'") + value + QCString("'"));
 }
 
 QString XSLTHandler::applyStylesheet(const QString& text_, bool encodedUTF8_) {
@@ -159,15 +165,15 @@ QString XSLTHandler::process() {
     kdDebug() << "XSLTHandler::applyStylesheet() - error writing output buffer!" << endl;
     return result;
   }
-  
+
   outp->written = 0;
-  
+
   int num_bytes = xsltSaveResultTo(outp, m_docOut, m_stylesheet);
   if(num_bytes == -1) {
     kdDebug() << "XSLTHandler::applyStylesheet() - error saving output buffer!" << endl;
     return result;
   }
-  
+
   xmlOutputBufferFlush(outp);
 
   return result;

@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - Entry template for videos
 
-   $Id: Video.xsl 491 2004-02-21 06:12:49Z robby $
+   $Id: Video.xsl 518 2004-03-07 16:55:23Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -146,7 +146,17 @@
 <xsl:template match="bc:entry">
  <xsl:variable name="entry" select="."/>
  <xsl:variable name="titleCat" select="key('fieldsByName','title')/@category"/>
- <xsl:variable name="castCat" select="key('fieldsByName','cast')/@category"/>
+ <!-- there might not be a cast -->
+ <xsl:variable name="castCat">
+  <xsl:choose>
+   <xsl:when test="bc:casts">
+    <xsl:value-of select="key('fieldsByName','cast')/@category"/>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="''"/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:variable>
 
  <div id="banner">
   <!-- do format logo -->
@@ -304,8 +314,9 @@
 
  <!-- now for every thing else -->
  <!-- write categories other than general and images -->
+ <!-- $castcat might be empty, be careful -->
  <xsl:for-each select="$categories[. != $titleCat and
-                                   . != $castCat and
+                                   ($castCat = '' or . != $castCat) and
                                    key('fieldsByCat',.)[1]/@type != 10]">
   <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
    <tr class="category">
@@ -315,63 +326,61 @@
    </tr>
    <xsl:for-each select="key('fieldsByCat', .)[@name != 'directors-cut' and
                                                @name != 'widescreen']">
-    <xsl:if test="$entry//*[local-name(.)=current()/@name]">
-     <tr>
-      <xsl:choose>
-       <!-- paragraphs -->
-       <xsl:when test="@type=2">
-        <td>
-         <p>
-          <xsl:value-of select="$entry/*[local-name(.)=current()/@name]"/>
-         </p>
-        </td>
-       </xsl:when>
-       <!-- single-column table -->
-       <xsl:when test="@type=8">
-        <td>
-         <ul>
-          <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
-           <li>
-            <xsl:value-of select="."/>
-           </li>
-          </xsl:for-each>
-         </ul>
-        </td>
-       </xsl:when>
-       <!-- double-column table -->
-       <xsl:when test="@type=9">
-        <td>
-         <table width="100%" cellspacing="0" cellpadding="0">
-          <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
-           <tr>
-            <td width="50%">
-             <xsl:value-of select="bc:column[1]"/>
-            </td>
-            <td width="50%">
-             <em>
-              <xsl:value-of select="bc:column[2]"/>
-             </em>
-            </td>
-           </tr>
-          </xsl:for-each>
-         </table>
-        </td>
-       </xsl:when>
-       <!-- everything else -->
-       <xsl:otherwise>
-        <th>
-         <xsl:value-of select="@title"/>
-        </th>
-        <td width="50%">
-         <xsl:call-template name="output-field">
-          <xsl:with-param name="entry" select="$entry"/>
-          <xsl:with-param name="field" select="@name"/>
-         </xsl:call-template>
-        </td>
-       </xsl:otherwise>
-      </xsl:choose>
-     </tr>
-    </xsl:if>
+    <tr>
+     <xsl:choose>
+      <!-- paragraphs -->
+      <xsl:when test="@type=2">
+       <td>
+        <p>
+         <xsl:value-of select="$entry/*[local-name(.)=current()/@name]"/>
+        </p>
+       </td>
+      </xsl:when>
+      <!-- single-column table -->
+      <xsl:when test="@type=8">
+       <td>
+        <ul>
+         <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
+          <li>
+           <xsl:value-of select="."/>
+          </li>
+         </xsl:for-each>
+        </ul>
+       </td>
+      </xsl:when>
+      <!-- double-column table -->
+      <xsl:when test="@type=9">
+       <td>
+        <table width="100%" cellspacing="0" cellpadding="0">
+         <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
+          <tr>
+           <td width="50%">
+            <xsl:value-of select="bc:column[1]"/>
+           </td>
+           <td width="50%">
+            <em>
+             <xsl:value-of select="bc:column[2]"/>
+            </em>
+           </td>
+          </tr>
+         </xsl:for-each>
+        </table>
+       </td>
+      </xsl:when>
+      <!-- everything else -->
+      <xsl:otherwise>
+       <th>
+        <xsl:value-of select="@title"/>
+       </th>
+       <td width="50%">
+        <xsl:call-template name="output-field">
+         <xsl:with-param name="entry" select="$entry"/>
+         <xsl:with-param name="field" select="@name"/>
+        </xsl:call-template>
+       </td>
+      </xsl:otherwise>
+     </xsl:choose>
+    </tr>
    </xsl:for-each>
   </table>
   <xsl:if test="position() mod 2 = 0">

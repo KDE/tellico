@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.8.4
+%define version 0.8.5
 %define release 1rls
 %define iconname %{name}.png
 %define __libtoolize /bin/true
