@@ -13,6 +13,10 @@
 
 #include "csvimporter.h"
 #include "../collectionfieldsdialog.h"
+#include "../importdialog.h" // needed for ImportAction
+#include "../utils.h"
+#include "../mainwindow.h"
+#include "../document.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -39,6 +43,7 @@ const QChar CSVImporter::s_quote('"');
 
 CSVImporter::CSVImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_),
     m_coll(0),
+    m_existingCollection(0),
     m_firstRowHeader(false),
     m_delimiter(QString::fromLatin1(",")),
     m_widget(0) {
@@ -46,7 +51,7 @@ CSVImporter::CSVImporter(const KURL& url_) : Bookcase::Import::TextImporter(url_
 
 Bookcase::Data::Collection* CSVImporter::collection() {
   // don't just check if m_coll is non-null since the collection can be created elsewhere
-  if(!m_coll->entryList().isEmpty()) {
+  if(m_coll && !m_coll->entryList().isEmpty()) {
     return m_coll;
   }
 
@@ -80,12 +85,20 @@ Bookcase::Data::Collection* CSVImporter::collection() {
   int numLines = str.contains(QString::fromLatin1("\n"));
   int j = 0;
   for(QString line = t.readLine(); !line.isNull(); line = t.readLine(), ++j) {
-    Data::Entry* unit = new Data::Entry(m_coll);
+    bool empty = true;
+    Data::Entry* entry = new Data::Entry(m_coll);
     QStringList values = splitLine(line);
     for(unsigned i = 0; i < cols.size(); ++i) {
-      unit->setField(names[i], values[cols[i]].simplifyWhiteSpace());
+      entry->setField(names[i], values[cols[i]].simplifyWhiteSpace());
+      if(empty && !entry->field(names[i]).isEmpty()) {
+        empty = false;
+      }
     }
-    m_coll->addEntry(unit);
+    if(empty) {
+      delete entry;
+    } else {
+      m_coll->addEntry(entry);
+    }
 
     if(j%s_stepSize == 0) {
       emit signalFractionDone(static_cast<float>(j)/static_cast<float>(numLines));
@@ -283,6 +296,7 @@ void CSVImporter::fillTable() {
   QString str = text();
   QTextStream t(&str, IO_ReadOnly);
 
+  int maxCols = 0;
   // want first two lines
   for(int row = 0; row < m_table->numRows(); ++row) {
     QString line = t.readLine();
@@ -293,19 +307,20 @@ void CSVImporter::fillTable() {
       m_colSpinBox->setMaxValue(values.count());
     }
     int col = 0;
-    for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
+    for(QStringList::ConstIterator it = values.begin(); it != values.end(); ++it) {
       m_table->setText(row, col, *it);
-//      m_table->adjustColumn(col);
+      m_table->adjustColumn(col);
       ++col;
     }
-    m_table->setNumCols(col);
-//    for( ; col < m_table->numCols(); ++col) {
-//      m_table->clearCell(row, col);
-//    }
+    if(col > maxCols) {
+      maxCols = col;
+    }
   }
+  m_table->setNumCols(maxCols);
 }
 
 void CSVImporter::slotTypeChanged(const QString& name_) {
+//  kdDebug() << "CSVImporter::slotTypeChanged() - new type = " << name_ << endl;
   // iterate over the collection names until it matches the text of the combo box
   for(CollectionNameMap::Iterator it = m_nameMap.begin(); it != m_nameMap.end(); ++it) {
     if(it.data() == name_) {
@@ -318,7 +333,7 @@ void CSVImporter::slotTypeChanged(const QString& name_) {
 
   updateHeader(true);
   m_comboField->clear();
-  m_comboField->insertStringList(m_coll->fieldTitles());
+  m_comboField->insertStringList(m_existingCollection ? m_existingCollection->fieldTitles() : m_coll->fieldTitles());
   m_comboField->insertItem('<' + i18n("New Field") + '>');
 }
 
@@ -399,16 +414,60 @@ void CSVImporter::updateHeader(bool force_) {
 }
 
 void CSVImporter::slotFieldChanged(int idx_) {
-  // only care if it's not the last item
+  // only care if it's the last item -> add new field
   if(idx_ < m_comboField->count()-1) {
     return;
   }
-  CollectionFieldsDialog dlg(m_coll, m_widget);
+
+  Data::Collection* c = m_existingCollection ? m_existingCollection : m_coll;
+  unsigned count = c->fieldTitles().count();
+  CollectionFieldsDialog dlg(c, m_widget);
 //  dlg.setModal(true);
   if(dlg.exec() == QDialog::Accepted) {
     m_comboField->clear();
-    m_comboField->insertStringList(m_coll->fieldTitles());
+    m_comboField->insertStringList(c->fieldTitles());
     m_comboField->insertItem('<' + i18n("New Field") + '>');
+    if(count != c->fieldTitles().count()) {
+      fillTable();
+    }
+    m_comboField->setCurrentItem(0);
   }
-  m_comboField->setCurrentItem(0);
+}
+
+void CSVImporter::slotActionChanged(int action_) {
+  // I need a pointer to the current collection. This is ugly and not very modular at all
+  Bookcase::MainWindow* mainWindow = dynamic_cast<Bookcase::MainWindow*>(QObjectAncestor(m_widget, "Bookcase::MainWindow"));
+  if(!mainWindow) {
+    return;
+  }
+
+  Data::Collection* m_currColl = mainWindow->doc()->collection();
+  if(!m_currColl) {
+    m_existingCollection = 0;
+    return;
+  }
+
+  switch(action_) {
+    case ImportDialog::Replace:
+      {
+        QString currText = m_comboType->currentText();
+        m_comboType->clear();
+        m_comboType->insertStringList(m_nameMap.values());
+        m_comboType->setCurrentText(currText);
+        m_existingCollection = 0;
+      }
+      break;
+
+    case ImportDialog::Append:
+    case ImportDialog::Merge:
+      m_comboType->clear();
+      m_comboType->insertItem(m_nameMap[m_currColl->collectionType()]);
+      m_existingCollection = m_currColl;
+      break;
+
+
+    default:
+      break;
+  }
+  slotTypeChanged(m_comboType->currentText());
 }

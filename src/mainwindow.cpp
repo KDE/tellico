@@ -71,6 +71,7 @@
 #include <qsplitter.h>
 //#include <qpainter.h>
 #include <qsignalmapper.h>
+#include <qtimer.h>
 #include <qmetaobject.h> // needed for copy, cut, paste slots
 
 //#define UIFILE QString::fromLatin1("/home/robby/projects/bookcase/src/bookcaseui.rc")
@@ -94,6 +95,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainW
     m_stringMacroDlg(0),
     m_currentStep(1),
     m_maxSteps(2),
+    m_queuedFilters(0),
     m_initialized(false),
     m_newDocument(true) {
 
@@ -520,7 +522,7 @@ void MainWindow::initActions() {
   m_quickFilter->setToolTip(i18n("Filter the collection"));
   // want to update every time the filter text changes
   connect(m_quickFilter, SIGNAL(textChanged(const QString&)),
-          this, SLOT(slotUpdateFilter(const QString&)));
+          this, SLOT(slotQueueFilter()));
 
 #ifdef UIFILE
   kdWarning() << "MainWindow::initActions() - change createGUI() call!" << endl;
@@ -588,8 +590,8 @@ void MainWindow::initConnections() {
   connect(m_doc, SIGNAL(signalEntrySelected(Bookcase::Data::Entry*, const QString&)),
           m_controller, SLOT(slotUpdateSelection(Bookcase::Data::Entry*, const QString&)));
 
-  connect(m_editDialog, SIGNAL(signalSaveEntry(Bookcase::Data::Entry*)),
-          m_doc, SLOT(slotSaveEntry(Bookcase::Data::Entry*)));
+  connect(m_editDialog, SIGNAL(signalSaveEntries(const Bookcase::Data::EntryList&)),
+          m_doc, SLOT(slotSaveEntries(const Bookcase::Data::EntryList&)));
 
   connect(m_groupView, SIGNAL(signalDeleteEntry(Bookcase::Data::Entry*)),
           m_doc, SLOT(slotDeleteEntry(Bookcase::Data::Entry*)));
@@ -609,19 +611,12 @@ void MainWindow::initConnections() {
 }
 
 void MainWindow::initFileOpen(bool nofile_) {
-  bool lastFileSuccess = false; // default is false so if config option is not set, everything works
-
   // check to see if most recent file should be opened
   m_config->setGroup("General Options");
   if(!nofile_ && m_config->readBoolEntry("Reopen Last File", true)) {
     KURL lastFile(m_config->readEntry("Last Open File")); // empty string is actually ok, it gets handled
     slotFileOpen(lastFile);
-    // if lastFile doesn't exist, or has some problem opening, need to check for that
-    // easiest way is to see if current URL equals lastFile
-    lastFileSuccess = (m_doc->URL() == lastFile);
-  }
-
-  if(!lastFileSuccess) {
+  } else {
     // the doc object is created with an initial book collection, continue with that
     m_controller->slotCollectionAdded(m_doc->collection());
 
@@ -875,6 +870,9 @@ Bookcase::EntryItem* MainWindow::selectedOrFirstItem() {
 void MainWindow::slotFileNew(int type_) {
   slotStatusMsg(i18n("Creating new document..."));
 
+  // close the fields dialog
+  slotHideCollectionFieldsDialog();
+
   if(m_editDialog->queryModified() && m_doc->saveModified()) {
     m_doc->newDocument(type_);
     m_fileOpenRecent->setCurrentItem(-1);
@@ -908,6 +906,9 @@ void MainWindow::slotFileOpen() {
 void MainWindow::slotFileOpen(const KURL& url_) {
   slotStatusMsg(i18n("Opening file..."));
 
+  // close the fields dialog
+  slotHideCollectionFieldsDialog();
+
   if(m_editDialog->queryModified() && m_doc->saveModified()) {
     if(openURL(url_)) {
       m_fileOpenRecent->addURL(url_);
@@ -920,6 +921,9 @@ void MainWindow::slotFileOpen(const KURL& url_) {
 
 void MainWindow::slotFileOpenRecent(const KURL& url_) {
   slotStatusMsg(i18n("Opening file..."));
+
+  // close the fields dialog
+  slotHideCollectionFieldsDialog();
 
   if(m_editDialog->queryModified() && m_doc->saveModified()) {
     bool success = openURL(url_);
@@ -972,11 +976,14 @@ void MainWindow::slotFileSave() {
   if(isNewDocument()) {
     slotFileSaveAs();
   } else {
-    m_doc->saveDocument(m_doc->URL());
-    m_newDocument = false;
+    kapp->setOverrideCursor(Qt::waitCursor);
+    if(m_doc->saveDocument(m_doc->URL())) {
+      m_newDocument = false;
+      setCaption(m_doc->URL().fileName(), false);
+      m_fileSave->setEnabled(false);
+    }
+    kapp->restoreOverrideCursor();
   }
-  m_fileSave->setEnabled(false);
-  setCaption(m_doc->URL().fileName(), false);
 
   slotStatusMsg(i18n(ready));
 }
@@ -1013,11 +1020,15 @@ void MainWindow::slotFileSaveAs() {
   }
 
   if(!url.isEmpty() && url.isValid()) {
-    KRecentDocument::add(url);
-    m_doc->saveDocument(url);
-    m_fileOpenRecent->addURL(url);
-    setCaption(m_doc->URL().fileName(), false);
-    m_newDocument = false;
+    kapp->setOverrideCursor(Qt::waitCursor);
+    if(m_doc->saveDocument(url)) {
+      KRecentDocument::add(url);
+      m_fileOpenRecent->addURL(url);
+      setCaption(m_doc->URL().fileName(), false);
+      m_newDocument = false;
+      m_fileSave->setEnabled(false);
+    }
+    kapp->restoreOverrideCursor();
   }
 
   slotStatusMsg(i18n(ready));
@@ -1579,10 +1590,20 @@ void MainWindow::slotHideFilterDialog() {
   }
 }
 
-void MainWindow::slotUpdateFilter(const QString& text_) {
+void MainWindow::slotQueueFilter() {
+  m_queuedFilters++;
+  QTimer::singleShot(200, this, SLOT(slotUpdateFilter()));
+}
+
+void MainWindow::slotUpdateFilter() {
+  m_queuedFilters--;
+  if(m_queuedFilters > 0) {
+    return;
+  }
+
   Filter* filter = 0;
 
-  QString text = text_.stripWhiteSpace();
+  QString text = m_quickFilter->text().stripWhiteSpace();
   if(!text.isEmpty()) {
     filter = new Filter(Filter::MatchAny);
     // if the text contains any non-Word characters, assume it's a regexp

@@ -67,7 +67,7 @@ namespace Bookcase {
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: mainwindow.h 611 2004-04-17 17:54:35Z robby $
+ * @version $Id: mainwindow.h 626 2004-04-28 03:54:00Z robby $
  */
 class MainWindow : public KMainWindow {
 Q_OBJECT
@@ -420,12 +420,15 @@ private slots:
    */
   void saveCollectionOptions(Bookcase::Data::Collection* coll);
   /**
-   * Update the filter to match any field with text. If a non-word character appears, the
-   * text is interpreted as a regexp
-   *
-   * @param text The filter text
+   * Queue a filter update. The timer adds a 200 millisecond delay before actually
+   * updating the filter.
    */
-  void slotUpdateFilter(const QString& text);
+  void slotQueueFilter();
+  /**
+   * Update the filter to match any field with text. If a non-word character appears, the
+   * text is interpreted as a regexp.
+   */
+  void slotUpdateFilter();
   /**
    * Updates the collection toolbar.
    */
@@ -513,6 +516,9 @@ private:
   // the loading process goes through several steps, keep track of the factor
   unsigned m_currentStep;
   unsigned m_maxSteps;
+
+  // keep track of the number of queued filter updates
+  unsigned m_queuedFilters;
 
   // keep track whether everything gets initialized
   bool m_initialized;

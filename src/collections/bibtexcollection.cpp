@@ -353,7 +353,7 @@ void BibtexCollection::citeEntries(QFile& lyxpipe_, const EntryList& list_) {
 
   QTextStream ts(&lyxpipe_);
 //  ts << "LYXSRV:bookcase:hello\n";
-  ts << QString::fromLatin1("LYXSRV:bookcase:citation-insert:%1\n").arg(refs).latin1();
+  ts << QString::fromLatin1("LYXCMD:bookcase:citation-insert:%1\n").arg(refs).latin1();
 //  ts << "LYXSRV:bookcase:bye\n";
   lyxpipe_.flush();
 }

@@ -36,7 +36,7 @@
 #include <qhbox.h>
 #include <qlabel.h>
 //#include <qdir.h>
-#include <qapp.h>
+#include <qapplication.h>
 
 using Bookcase::Export::HTMLExporter;
 
@@ -276,7 +276,7 @@ QString HTMLExporter::text(bool formatFields_, bool encodeUTF8_) {
   if(m_imageWidth > 0 && m_imageHeight > 0) {
     handler.addParam("image-width", QCString().setNum(m_imageWidth));
     handler.addParam("image-height", QCString().setNum(m_imageHeight));
-    kdDebug() << "HTMLExporter::text() - size = " << m_imageWidth << " x " << m_imageHeight << endl;
+//    kdDebug() << "HTMLExporter::text() - size = " << m_imageWidth << " x " << m_imageHeight << endl;
   }
 
   // keep track of which image fields to write, this is for field names

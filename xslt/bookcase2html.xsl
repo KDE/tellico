@@ -11,7 +11,7 @@
    ===================================================================
    Bookcase XSLT file - used for exporting to HTML
 
-   $Id: bookcase2html.xsl 613 2004-04-17 18:07:28Z robby $
+   $Id: bookcase2html.xsl 624 2004-04-22 13:49:15Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -135,6 +135,7 @@
         <xsl:if test="count($columns) &gt; 3">
         font-size: 80%;
         </xsl:if>
+        background-color: #fff;
    }     
    #headerblock {
         padding-top: 10px;
@@ -153,7 +154,7 @@
    td.groupName {
         margin-top: 10px;
         margin-bottom: 2px;
-        background: #eee;
+        background: #ccc;
         font-size: 1.2em;
         font-weight: bolder;
    }
@@ -171,8 +172,12 @@
    tr.entry2 {
         background-color: #eee;
    }
-   tr.groupEntry {
+   tr.groupEntry1 {
         padding-left: 20px;
+   }
+   tr.groupEntry2 {
+        padding-left: 20px;
+        background-color: #eee;
    }
    td.field {
         margin-left: 0px;
@@ -302,7 +307,19 @@
       <xsl:sort select="dyn:evaluate($sort1)"/>
       <xsl:sort select="dyn:evaluate($sort2)"/>
       <xsl:sort select="dyn:evaluate($sort3)"/>
-      <tr class="groupEntry">
+      <tr>
+       <xsl:choose>
+        <xsl:when test="position() mod 2 = 1">
+         <xsl:attribute name="class">
+          <xsl:text>groupEntry1</xsl:text>
+         </xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+         <xsl:attribute name="class">
+          <xsl:text>groupEntry2</xsl:text>
+         </xsl:attribute>
+        </xsl:otherwise>
+       </xsl:choose>
        <xsl:apply-templates select="."/>
       </tr>
      </xsl:for-each>

@@ -18,6 +18,8 @@
 #include <config.h>
 #endif
 
+#include "entry.h"
+
 #include <kurl.h>
 
 #include <qptrlist.h>
@@ -36,7 +38,7 @@ namespace Bookcase {
  * a list of the collections in the document.
  *
  * @author Robby Stephenson
- * @version $Id: document.h 546 2004-03-16 02:12:05Z robby $
+ * @version $Id: document.h 633 2004-05-01 03:16:22Z robby $
  */
 class Document : public QObject {
 Q_OBJECT
@@ -187,6 +189,13 @@ public:
    * @param options The options, bit-wise OR'd together
    */
   void search(const QString& text, const QString& title, int options);
+  /**
+   * Saves a list of entries. If the entry is already in a collection, the slotAddEntry() method is called;
+   * otherwise, the signalEntryModified() signal is made.
+   *
+   * @param entry A pointer to the entry
+   */
+  void saveEntry(Bookcase::Data::Entry* entry);
 
 public slots:
   /**
@@ -195,25 +204,25 @@ public slots:
    */
   void slotRenameCollection();
   /**
-   * Saves a unit. If the unit is already in a collection, the slotAddEntry() method is called;
+   * Saves a list of entries. If the entry is already in a collection, the slotAddEntry() method is called;
    * otherwise, the signalEntryModified() signal is made.
    *
-   * @param unit A pointer to the unit
+   * @param entry A pointer to the entry
    */
-  void slotSaveEntry(Bookcase::Data::Entry* unit);
+  void slotSaveEntries(const Bookcase::Data::EntryList& entryList);
   /**
-   * Adds a unit to the document. It already contains a pointer to its proper collection
+   * Adds a entry to the document. It already contains a pointer to its proper collection
    * parent. The signalEntryAdded() signal is made.
    *
-   * @param unit A pointer to the unit
+   * @param entry A pointer to the entry
    */
-  void slotAddEntry(Bookcase::Data::Entry* unit);
+  void slotAddEntry(Bookcase::Data::Entry* entry);
   /**
-   * Removes a unit from the document. The signalEntryDeleted() signal is made.
+   * Removes a entry from the document. The signalEntryDeleted() signal is made.
    *
-   * @param unit A pointer to the unit
+   * @param entry A pointer to the entry
    */
-  void slotDeleteEntry(Bookcase::Data::Entry* unit);
+  void slotDeleteEntry(Bookcase::Data::Entry* entry);
   /**
    * Sets the modified flag. If it is true, the signalModified signal is made.
    *
@@ -251,30 +260,30 @@ signals:
    */
   void signalCollectionRenamed(const QString& name);
   /**
-   * Signals that a new unit has been added.
+   * Signals that a new entry has been added.
    *
-   * @param unit A pointer to the unit
+   * @param entry A pointer to the entry
    */
-  void signalEntryAdded(Bookcase::Data::Entry* unit);
+  void signalEntryAdded(Bookcase::Data::Entry* entry);
   /**
-   * Signals that a unit has been modified.
+   * Signals that a entry has been modified.
    *
-   * @param unit A pointer to the unit
+   * @param entry A pointer to the entry
    */
-  void signalEntryModified(Bookcase::Data::Entry* unit);
+  void signalEntryModified(Bookcase::Data::Entry* entry);
   /**
-   * Signals that a unit has been removed.
+   * Signals that a entry has been removed.
    *
-   * @param unit A pointer to the unit
+   * @param entry A pointer to the entry
    */
-  void signalEntryDeleted(Bookcase::Data::Entry* unit);
+  void signalEntryDeleted(Bookcase::Data::Entry* entry);
   /**
-   * Signals that a unit should be selected, with an optional highlight string
+   * Signals that a entry should be selected, with an optional highlight string
    *
-   * @param unit The unit to be selected
-   * @param highlight The string in the unit which should be highlighted
+   * @param entry The entry to be selected
+   * @param highlight The string in the entry which should be highlighted
    */
-  void signalEntrySelected(Bookcase::Data::Entry* unit, const QString& highlight);
+  void signalEntrySelected(Bookcase::Data::Entry* entry, const QString& highlight);
 
 private:
   Collection* m_coll;

@@ -10,7 +10,7 @@
    ===================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl 586 2004-04-03 23:06:46Z robby $
+   $Id: bookcase-printing.xsl 627 2004-04-29 02:36:44Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 
@@ -105,6 +105,7 @@
         <xsl:if test="count($columns) &gt; 3">
         font-size: 80%;
         </xsl:if>
+        background-color: #fff;
    }     
    #headerblock {
         padding-top: 10px;
@@ -137,8 +138,12 @@
    tr.entry2 {
         background-color: #eee;
    }
-   tr.groupEntry {
+   tr.groupEntry1 {
         padding-left: 20px;
+   }
+   tr.groupEntry2 {
+        padding-left: 20px;
+        background-color: #eee;
    }
    td.field {
         margin-left: 0px;
@@ -232,7 +237,19 @@
      </tr>
      <!-- now loop through every entry with this group value -->
      <xsl:for-each select="key('entries', .)">
-      <tr class="groupEntry">
+      <tr>
+       <xsl:choose>
+        <xsl:when test="position() mod 2 = 1">
+         <xsl:attribute name="class">
+          <xsl:text>groupEntry1</xsl:text>
+         </xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+         <xsl:attribute name="class">
+          <xsl:text>groupEntry2</xsl:text>
+         </xsl:attribute>
+        </xsl:otherwise>
+       </xsl:choose>
        <xsl:apply-templates select="."/>
       </tr>
      </xsl:for-each>

@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - some common templates.
 
-   $Id: Fancy.xsl 565 2004-03-20 06:37:53Z robby $
+   $Id: bookcase-common.xsl 620 2004-04-22 02:38:47Z robby $
 
    Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
 

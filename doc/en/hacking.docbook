@@ -31,7 +31,7 @@ Images may also be included in the <acronym>XML</acronym> stream as base64-encod
 </sect1>
 
 <sect1 id="collection-type-values">
-<title>Collection Types</title>
+<title>Collection Type Values</title>
 
 <para>
 The type of collection is given in the type attribute of the collection element. The value is equal to the CollectionType enum value in <filename>src/collection.h</filename>.
@@ -65,7 +65,7 @@ The type of collection is given in the type attribute of the collection element.
 </sect1>
 
 <sect1 id="field-type-values">
-<title>Field Types</title>
+<title>Field Type Values</title>
 
 <para>
 &bookcase; will include all the default fields for a collection if the first field element has the name <emphasis>_default</emphasis>. For <emphasis>Paragraph</emphasis>, <emphasis>Table</emphasis>, or <emphasis>Image</emphasis> fields, the field category should be identical to the field title.

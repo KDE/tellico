@@ -14,9 +14,8 @@
 #ifndef LABELACTION_H
 #define LABELACTION_H
 
-class KLineEdit;
-
 #include <kaction.h>
+#include <klineedit.h>
 
 #include <qguardedptr.h>
 
@@ -30,7 +29,7 @@ namespace Bookcase {
  * @see KWidgetAction
  *
  * @author Robby Stephenson
- * @version $Id: labelaction.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: labelaction.h 626 2004-04-28 03:54:00Z robby $
  */
 class LabelAction : public KWidgetAction {
 Q_OBJECT
@@ -46,7 +45,7 @@ public:
  * @see KAction
  *
  * @author Robby Stephenson
- * @version $Id: labelaction.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: labelaction.h 626 2004-04-28 03:54:00Z robby $
  */
 class LineEditAction : public KAction {
 Q_OBJECT
@@ -56,6 +55,8 @@ public:
 
   virtual int plug(QWidget* w, int index = -1);
   virtual void unplug(QWidget* w);
+
+  QString text() const { return m_lineEdit ? m_lineEdit->text() : QString::null; }
 
 public slots:
   void clear();

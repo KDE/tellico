@@ -1,13 +1,14 @@
 <chapter id="importing-exporting">
 <title>Importing and Exporting Data</title>
 
-<para>&bookcase; is able to import and export a wide variety of data. In addition, since the underlying data file is stored in XML format, XSLT allows &bookcase; to import or export any text format at all.
+<para>&bookcase; is able to import and export a wide variety of data. In addition, since the underlying data file is stored in &XML; format, <acronym>XSLT</acronym> allows &bookcase; to import or export any text format at all.
 </para>
 
 <sect1 id="importing">
 <title>Importing Data</title>
 
 <para>
+To be written...
 </para>
 </sect1>
 
@@ -15,6 +16,7 @@
 <title>Exporting Data</title>
 
 <para>
+To be written...
 </para>
 </sect1>
 

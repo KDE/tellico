@@ -30,6 +30,7 @@
 #include <qradiobutton.h>
 #include <qcheckbox.h>
 #include <qwhatsthis.h>
+#include <qtimer.h>
 
 // really according to taste or computer speed
 const unsigned Bookcase::Import::Importer::s_stepSize = 20;
@@ -60,18 +61,22 @@ ImportDialog::ImportDialog(ImportFormat format_, const KURL& url_, MainWindow* p
   // append by default?
   m_radioAppend->setChecked(true);
 
-
   QWidget* w = m_importer->widget(widget, "importer_widget");
 //  m_importer->readOptions(KGlobal::config());
   if(w) {
     topLayout->addWidget(w, 0);
   }
 
+  connect(bg, SIGNAL(clicked(int)), m_importer, SLOT(slotActionChanged(int)));
   connect(m_importer, SIGNAL(signalFractionDone(float)),
           parent_, SLOT(slotUpdateFractionDone(float)));
 
   topLayout->addStretch();
   setMainWidget(widget);
+
+  // want to grab default button action, too
+  // since the importer might do something with widgets, don't just call it, do it after layout is done
+  QTimer::singleShot(0, this, SLOT(slotUpdateAction()));
 }
 
 ImportDialog::~ImportDialog() {
@@ -166,4 +171,12 @@ QString ImportDialog::fileFilter(ImportFormat format_) {
 
 bool ImportDialog::selectFileFirst(ImportFormat format_) {
   return (format_ != AudioFile);
+}
+
+void ImportDialog::slotUpdateAction() {
+  // distasteful hack
+  // selectedId() is new in QT 3.2
+//  m_importer->slotActionChanged(dynamic_cast<QButtonGroup*>(m_radioAppend->parentWidget())->selectedId());
+  QButtonGroup* bg = dynamic_cast<QButtonGroup*>(m_radioAppend->parentWidget());
+  m_importer->slotActionChanged(bg->id(bg->selected()));
 }

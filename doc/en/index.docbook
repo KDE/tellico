@@ -14,16 +14,18 @@
   <!ENTITY entry-view "<interface>Entry View</interface>">
   <!ENTITY entry-editor "<interface>Entry Editor</interface>">
   <!ENTITY fields-dialog "<interface>Collection Fields Dialog</interface>">
+  <!ENTITY config-dialog "<interface>Configuration Dialog</interface>">
+  <!ENTITY find-dialog "<interface>Find Dialog</interface>">
+  <!ENTITY quick-filter "<interface>Quick Filter</interface>">
   
   <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
   <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
   <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
-  <!ENTITY collections-chapter SYSTEM "collections.docbook">
   <!ENTITY fields-chapter SYSTEM "fields.docbook">
   <!ENTITY menus-chapter SYSTEM "menus.docbook">
-  <!ENTITY customization-chapter SYSTEM "customization.docbook">
   <!ENTITY hacking-chapter SYSTEM "hacking.docbook">
   <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
+  <!ENTITY details-chapter SYSTEM "details.docbook">
 
 ]>
 
@@ -115,6 +117,9 @@ application that explains what it does and where to report
 problems. Basically a long version of the abstract.  Don't include a
 revision history. (see installation appendix comment) -->
 
+<sect1 id="bookcase-intro">
+<title>&bookcase;</title>
+
 <para>
 &bookcase; is a program for managing collections. It began as a simple
 book collection manager, and has expanded to include default
@@ -123,7 +128,7 @@ coins, stamps, trading cards, and wines. In addition, custom
 collections can be built for any other type of collectibles.
 </para>
 
-<sect1 id="what-bookcase-is">
+<sect2 id="what-bookcase-is">
 <title>What &bookcase; Is</title>
 
 <para> &bookcase; keeps track of the items in a collection, and offers
@@ -132,24 +137,51 @@ different field types, and allows for an unlimited number of
 user-defined fields. The entries in a collection may be grouped by any
 field for easy organization, and customizable views show as much or as
 little information as you like. Full text searching is available, as
-well as filtering to show a subset of your collection.
-</para>
-
-<para>
-Collections may be imported or exported using a variety of formats, to
+well as filtering to show a subset of your collection. Collections may be imported or exported using a variety of formats, to
 to allow for easy exchange or publication of data.
 </para>
 
-</sect1>
+</sect2>
 
-<sect1 id="what-bookcase-is-not">
+<sect2 id="what-bookcase-is-not">
 <title>What &bookcase; Is Not</title>
 
 <para>
 &bookcase; is not an audio or video player. It does not provide
 facilities for reading or modifying multimedia files. It also does
-not provide any image-editing functionality.
+not provide any image-editing functionality. It is not a full-blown bibliographic reference manager.
 </para>
+
+</sect2>
+</sect1>
+
+<sect1 id="terminology">
+<title>Terminology</title>
+
+<sect2 id="collections">
+<title>Collections</title>
+<para>
+In &bookcase;, a collection is the document. Only one collection exists in each &bookcase;
+file. A collection contains any number of <link linkend="entries">entries</link> and
+<link linkend="fields">fields</link>. &bookcase; supports nine specific collection types by default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other type of collectibles.
+</para>
+</sect2>
+
+<sect2 id="entries">
+<title>Collection Entries</title>
+
+<para>
+An entry is the basic record in &bookcase;. Each entry contains a single value for each field in the collection. A collection may have an unlimited number of entries, in theory, although since the whole collection is always resident in memory, too many entries could slow down the application. &bookcase; has been tested with a collection of 10,000 entries, and the speed was satisfactory, however.
+</para>
+
+</sect2>
+
+<sect2 id="fields">
+<title>Collection Fields</title>
+<para>
+Each collection may have an unlimited number of fields. &bookcase; supports ten types of fields, which allow for a range of different data. The fields can be edited with the <link linkend="fields-dialog">&fields-dialog;</link> and are explained further in the <link linkend="field-types">Field Types</link> section.
+</para>
+</sect2>
 
 </sect1>
 
@@ -157,17 +189,13 @@ not provide any image-editing functionality.
 
 &fundamentals-chapter;
 
+&details-chapter;
+
 &importing-exporting-chapter;
 
 &configuration-chapter;
 
-<!--&collections-chapter;
-
-&fields-chapter;-->
-
 &menus-chapter;
-
-&customization-chapter;
 
 &hacking-chapter;
 

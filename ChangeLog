@@ -1,3 +1,30 @@
+2004-05-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed Fields Dialog to close when creating a new collection or opening one.
+	* Removed GCJ/java checks from configure.
+	* Released Bookcase 0.9.1
+
+2004-04-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed i18n extraction for UI and gettext extensions.
+	* Removed Japanese translation because of encoding errors.
+	* Updated CSV import to know about current fields when appending or merging
+
+2004-04-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated German translation from Gerrit Albrecht.
+
+2004-04-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with lyxpipe using LYXSRV insted of LYXCMD.
+	* Changed quick filter to wait 200 ms before updating the filter.
+
+2004-04-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Added wait cursor for file saving.
+	* Fixed bug with created a double collection when failing to load the initial file.
+	* Make sure column view updates when an image is cleared.
+
 2004-04-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Bookcase 0.9.

@@ -57,6 +57,9 @@ XSLTHandler::XSLTHandler(const QCString& xsltFile_) :
     xmlDocPtr xsltDoc = xmlParseFile(xsltFile_);
 #endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
+    if(!m_stylesheet) {
+      kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
+    }
   }
 }
 
@@ -73,6 +76,9 @@ XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
     xmlDocPtr xsltDoc = xmlParseFile(xsltURL_.url().utf8());
 #endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
+    if(!m_stylesheet) {
+      kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltURL_.path() << endl;
+    }
   }
 }
 
@@ -166,6 +172,9 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
     xsltFreeStylesheet(m_stylesheet);
   }
   m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
+  if(!m_stylesheet) {
+    kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
+  }
 //  xmlFreeDoc(xsltDoc); // this causes a crash for some reason
 }
 

@@ -243,8 +243,8 @@ void DetailedListView::modifyEntry(Data::Entry* entry_) {
 
     if(isUpdatesEnabled() && match) {
       sort();
-      setCurrentItem(item);
-      ensureItemVisible(item);
+//      setCurrentItem(item);
+//      ensureItemVisible(item);
     }
 
     if(!item->isSelected() && m_selectedEntries.count() > 0) {
@@ -469,9 +469,7 @@ void DetailedListView::setPixmapAndText(EntryItem* item_, int col_, Data::Field*
     item_->setText(col_, QString::null);
   } else if(field_->type() == Data::Field::Image) {
     const Data::Image& img = ImageFactory::imageById(item_->entry()->field(field_->name()));
-    if(!img.isNull()) {
-      item_->setPixmap(col_, img.convertToPixmap(m_pixWidth, m_pixHeight));
-    }
+    item_->setPixmap(col_, img.isNull() ? QPixmap() : img.convertToPixmap(m_pixWidth, m_pixHeight));
     item_->setText(col_, QString::null);
   } else { // for everything else, there's no pixmap, unless it's the first column
     item_->setPixmap(col_, col_ == m_firstSection ? m_entryPix : QPixmap());

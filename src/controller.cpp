@@ -243,9 +243,7 @@ void Controller::slotCopySelectedEntries() {
 
   // need a copy because the selected list changes
   Data::EntryList list = m_selectedEntries;
-  for(Data::EntryListIterator it(list); it.current(); ++it) {
-    m_mainWindow->doc()->slotSaveEntry(new Data::Entry(*it.current()));
-  }
+  m_mainWindow->doc()->slotSaveEntries(list);
   m_selectedEntries = list;
   slotUpdateSelection(0, Data::EntryList());
 }

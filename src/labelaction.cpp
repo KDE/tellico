@@ -14,7 +14,6 @@
 #include "labelaction.h"
 
 #include <ktoolbar.h>
-#include <klineedit.h>
 
 using Bookcase::LabelAction;
 using Bookcase::LineEditAction;

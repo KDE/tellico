@@ -4669,263 +4669,6 @@ AC_DEFUN([KDE_CHECK_LIB],
      LIBS="$kde_save_LIBS"
 ])
 
-AC_DEFUN([KDE_JAVA_PREFIX],
-[
-	dir=`dirname "$1"`
-	base=`basename "$1"`
-	list=`ls -1 $dir 2> /dev/null`
-	for entry in $list; do 
-		if test -d $dir/$entry/bin; then
-			case $entry in
-			   $base)
-				javadirs="$javadirs $dir/$entry/bin"
-				;;
-			esac
-		elif test -d $dir/$entry/jre/bin; then
-			case $entry in
-			   $base)
-				javadirs="$javadirs $dir/$entry/jre/bin"
-				;;
-			esac
-		fi
-	done
-])
-
-dnl KDE_CHEC_JAVA_DIR(onlyjre)
-AC_DEFUN([KDE_CHECK_JAVA_DIR],
-[
-
-AC_ARG_WITH(java,
-AC_HELP_STRING([--with-java=javadir],[use java installed in javadir, --without-java disables]),
-[  ac_java_dir=$withval
-], ac_java_dir=""
-)
-
-AC_MSG_CHECKING([for Java])
-
-dnl at this point ac_java_dir is either a dir, 'no' to disable, or '' to say look in $PATH
-if test "x$ac_java_dir" = "xno"; then
-   kde_java_bindir=no
-   kde_java_includedir=no
-   kde_java_libjvmdir=no
-   kde_java_libgcjdir=no
-   kde_java_libhpidir=no
-else
-  if test "x$ac_java_dir" = "x"; then
-     
-     
-      dnl No option set -> collect list of candidate paths
-      if test -n "$JAVA_HOME"; then
-        KDE_JAVA_PREFIX($JAVA_HOME)
-      fi
-      KDE_JAVA_PREFIX(/usr/j2se)
-      KDE_JAVA_PREFIX(/usr/lib/j2se)
-      KDE_JAVA_PREFIX(/usr/j*dk*)
-      KDE_JAVA_PREFIX(/usr/lib/j*dk*)
-      KDE_JAVA_PREFIX(/opt/j*sdk*)
-      KDE_JAVA_PREFIX(/usr/lib/java*)
-      KDE_JAVA_PREFIX(/usr/java*)
-      KDE_JAVA_PREFIX(/usr/java/j*dk*)
-      KDE_JAVA_PREFIX(/usr/java/j*re*)
-      KDE_JAVA_PREFIX(/usr/lib/SunJava2*)
-      KDE_JAVA_PREFIX(/usr/lib/SunJava*)
-      KDE_JAVA_PREFIX(/usr/lib/IBMJava2*)
-      KDE_JAVA_PREFIX(/usr/lib/IBMJava*)
-      KDE_JAVA_PREFIX(/opt/java*)
-
-      kde_cv_path="NONE"
-      kde_save_IFS=$IFS
-      IFS=':'
-      for dir in $PATH; do
-	  if test -d "$dir"; then
-	      javadirs="$javadirs $dir"
-	  fi
-      done
-      IFS=$kde_save_IFS
-      jredirs=
-
-      dnl Now javadirs contains a list of paths that exist, all ending with bin/
-      for dir in $javadirs; do
-          dnl Check for the java executable
-	  if test -x "$dir/java"; then
-	      dnl And also check for a libjvm.so somewhere under there
-	      dnl Since we have to go to the parent dir, /usr/bin is excluded, /usr is too big.
-              if test "$dir" != "/usr/bin"; then
-                  libjvmdir=`find $dir/.. -name libjvm.so | sed 's,libjvm.so,,'|head -n 1`
-		  if test ! -f $libjvmdir/libjvm.so; then continue; fi
-		  jredirs="$jredirs $dir"
-	      fi
-	  fi
-      done
-
-      dnl Now jredirs contains a reduced list, of paths where both java and ../**/libjvm.so was found
-      JAVAC=
-      JAVA=
-      kde_java_bindir=no
-      for dir in $jredirs; do
-	  JAVA="$dir/java"
-	  kde_java_bindir=$dir
-	  if test -x "$dir/javac"; then
-		JAVAC="$dir/javac"
-                break
-	  fi
-      done
-
-      if test -n "$JAVAC"; then
-          dnl this substitution might not work - well, we test for jni.h below
-          kde_java_includedir=`echo $JAVAC | sed -e 's,bin/javac$,include/,'`
-      else
-          kde_java_includedir=no
-      fi
-  else
-    dnl config option set
-    kde_java_bindir=$ac_java_dir/bin
-    if test -x $ac_java_dir/bin/java && test ! -x $ac_java_dir/bin/javac; then
-	kde_java_includedir=no
-    else
-        kde_java_includedir=$ac_java_dir/include
-    fi
-  fi
-fi
-
-dnl At this point kde_java_bindir and kde_java_includedir are either set or "no"
-if test "x$kde_java_bindir" != "xno"; then
-
-  dnl Look for libjvm.so
-  kde_java_libjvmdir=`find $kde_java_bindir/.. -name libjvm.so | sed 's,libjvm.so,,'|head -n 1`
-  dnl Look for libgcj.so
-  kde_java_libgcjdir=`find $kde_java_bindir/.. -name libgcj.so | sed 's,libgcj.so,,'|head -n 1`
-  dnl Look for libhpi.so and avoid green threads
-  kde_java_libhpidir=`find $kde_java_bindir/.. -name libhpi.so | grep -v green | sed 's,libhpi.so,,' | head -n 1`
-
-  dnl Now check everything's fine under there
-  dnl the include dir is our flag for having the JDK
-  if test -d "$kde_java_includedir"; then
-    if test ! -x "$kde_java_bindir/javac"; then
-      AC_MSG_ERROR([javac not found under $kde_java_bindir - it seems you passed a wrong --with-java.])
-    fi
-    if test ! -x "$kde_java_bindir/javah"; then
-      AC_MSG_ERROR([javah not found under $kde_java_bindir. javac was found though! Use --with-java or --without-java.])
-    fi
-    if test ! -x "$kde_java_bindir/jar"; then
-      AC_MSG_ERROR([jar not found under $kde_java_bindir. javac was found though! Use --with-java or --without-java.])
-    fi
-    if test ! -r "$kde_java_includedir/jni.h"; then
-      AC_MSG_ERROR([jni.h not found under $kde_java_includedir. Use --with-java or --without-java.])
-    fi
-
-    jni_includes="-I$kde_java_includedir"
-    dnl Strange thing, jni.h requires jni_md.h which is under genunix here..
-    dnl and under linux here.. 
-    
-    dnl not needed for gcj
-
-    if test "x$kde_java_libgcjdir" = "x"; then 
-      test -d "$kde_java_includedir/linux" && jni_includes="$jni_includes -I$kde_java_includedir/linux"
-      test -d "$kde_java_includedir/solaris" && jni_includes="$jni_includes -I$kde_java_includedir/solaris"
-      test -d "$kde_java_includedir/genunix" && jni_includes="$jni_includes -I$kde_java_includedir/genunix"
-    fi
-
-  else
-    JAVAC=
-    jni_includes=
-  fi
-
-  if test "x$kde_java_libgcjdir" = "x"; then 
-     if test ! -r "$kde_java_libjvmdir/libjvm.so"; then
-        AC_MSG_ERROR([libjvm.so not found under $kde_java_libjvmdir. Use --without-java.])
-     fi 
-  else
-     if test ! -r "$kde_java_libgcjdir/libgcj.so"; then
-        AC_MSG_ERROR([libgcj.so not found under $kde_java_libgcjdir. Use --without-java.])
-     fi 
-  fi
-
-  if test ! -x "$kde_java_bindir/java"; then
-      AC_MSG_ERROR([java not found under $kde_java_bindir. javac was found though! Use --with-java or --without-java.])
-  fi
-
-  dnl not needed for gcj compile
-
-  if test "x$kde_java_libgcjdir" = "x"; then 
-      if test ! -r "$kde_java_libhpidir/libhpi.so"; then
-        AC_MSG_ERROR([libhpi.so not found under $kde_java_libhpidir. Use --without-java.])
-      fi
-  fi
-
-  if test -n "$jni_includes"; then
-    dnl Check for JNI version
-    AC_LANG_SAVE
-    AC_LANG_CPLUSPLUS
-    ac_cxxflags_safe="$CXXFLAGS"
-    CXXFLAGS="$CXXFLAGS $all_includes $jni_includes"
-
-    AC_TRY_COMPILE([
-  #include <jni.h>
-	      ],
-	      [
-  #ifndef JNI_VERSION_1_2
-  Syntax Error
-  #endif
-	      ],[ kde_jni_works=yes ],
-	      [ kde_jni_works=no ])
-
-    if test $kde_jni_works = no; then
-      AC_MSG_ERROR([Incorrect version of $kde_java_includedir/jni.h.
-		    You need to have Java Development Kit (JDK) version 1.2. 
-
-		    Use --with-java to specify another location.
-		    Use --without-java to configure without java support.
-		    Or download a newer JDK and try again. 
-		    See e.g. http://java.sun.com/products/jdk/1.2 ])
-    fi
-
-    CXXFLAGS="$ac_cxxflags_safe"    
-    AC_LANG_RESTORE
-
-    dnl All tests ok, inform and subst the variables
-
-    JAVAC=$kde_java_bindir/javac
-    JAVAH=$kde_java_bindir/javah
-    JAR=$kde_java_bindir/jar
-    AC_DEFINE_UNQUOTED(PATH_JAVA, "$kde_java_bindir/java", [Define where your java executable is])
-    if test "x$kde_java_libgcjdir" = "x"; then 
-      JVMLIBS="-L$kde_java_libjvmdir -ljvm -L$kde_java_libhpidir -lhpi"
-    else
-      JVMLIBS="-L$kde_java_libgcjdir -lgcj"
-    fi
-    AC_MSG_RESULT([java JDK in $kde_java_bindir])
-
-  else
-      AC_DEFINE_UNQUOTED(PATH_JAVA, "$kde_java_bindir/java", [Define where your java executable is])
-      AC_MSG_RESULT([java JRE in $kde_java_bindir])
-  fi
-elif test -d "/Library/Java/Home"; then
-  kde_java_bindir="/Library/Java/Home/bin"
-  jni_includes="-I/Library/Java/Home/include"
-
-  JAVAC=$kde_java_bindir/javac
-  JAVAH=$kde_java_bindir/javah
-  JAR=$kde_java_bindir/jar
-  JVMLIBS="-Xlinker -framework -Xlinker JavaVM"
-
-  AC_DEFINE_UNQUOTED(PATH_JAVA, "$kde_java_bindir/java", [Define where your java executable is])
-  AC_MSG_RESULT([Apple Java Framework])
-else
-  AC_MSG_RESULT([none found])
-fi
-
-AC_SUBST(JAVAC)
-AC_SUBST(JAVAH)
-AC_SUBST(JAR)
-AC_SUBST(JVMLIBS)
-AC_SUBST(jni_includes)
-
-# for backward compat
-kde_cv_java_includedir=$kde_java_includedir
-kde_cv_java_bindir=$kde_java_bindir
-])
-
 dnl this is a redefinition of autoconf 2.5x's AC_FOREACH.
 dnl When the argument list becomes big, as in KDE for AC_OUTPUT in
 dnl big packages, m4_foreach is dog-slow.  So use our own version of
@@ -4941,122 +4684,6 @@ m4_define([_mm_foreach],
                                                    [$3])])])
 m4_define([AC_FOREACH],
 [mm_foreach([$1], m4_split(m4_normalize([$2])), [$3])])
-
-AC_DEFUN([KDE_NEED_FLEX],
-[
-kde_libs_safe=$LIBS
-LIBS="$LIBS $USER_LDFLAGS"
-AM_PROG_LEX
-LIBS=$kde_libs_safe
-if test -z "$LEXLIB"; then
-    AC_MSG_ERROR([You need to have flex installed.])
-fi
-AC_SUBST(LEXLIB)
-])
-
-AC_DEFUN([AC_PATH_QTOPIA],
-[
-  dnl TODO: use AC_CACHE_VAL
-
-  if test -z "$1"; then
-    qtopia_minver_maj=1
-    qtopia_minver_min=5
-    qtopia_minver_pat=0
-  else
-    qtopia_minver_maj=`echo "$1" | sed -e "s/^\(.*\)\..*\..*$/\1/"`
-    qtopia_minver_min=`echo "$1" | sed -e "s/^.*\.\(.*\)\..*$/\1/"`
-    qtopia_minver_pat=`echo "$1" | sed -e "s/^.*\..*\.\(.*\)$/\1/"`
-  fi
-
-  qtopia_minver="$qtopia_minver_maj$qtopia_minver_min$qtopia_minver_pat"
-  qtopia_minverstr="$qtopia_minver_maj.$qtopia_minver_min.$qtopia_minver_pat"
-
-  AC_REQUIRE([AC_PATH_QT])
-
-  AC_MSG_CHECKING([for Qtopia])
-
-  LIB_QTOPIA="-lqpe"
-  AC_SUBST(LIB_QTOPIA)
-
-  kde_qtopia_dirs="$QPEDIR /opt/Qtopia"
-
-  ac_qtopia_incdir=NO
-
-  AC_ARG_WITH(qtopia-dir,
-              AC_HELP_STRING([--with-qtopia-dir=DIR],[where the root of Qtopia is installed]),
-              [  ac_qtopia_incdir="$withval"/include] ) 
-  
-  qtopia_incdirs=""
-  for dir in $kde_qtopia_dirs; do
-    qtopia_incdirs="$qtopia_incdirs $dir/include"
-  done
-
-  if test ! "$ac_qtopia_incdir" = "NO"; then
-    qtopia_incdirs="$ac_qtopia_incdir $qtopia_incdirs"
-  fi
-
-  qtopia_incdir=""
-  AC_FIND_FILE(qpe/qpeapplication.h, $qtopia_incdirs, qtopia_incdir)
-  ac_qtopia_incdir="$qtopia_incdir"
-
-  if test -z "$qtopia_incdir"; then
-    AC_MSG_ERROR([Cannot find Qtopia headers. Please check your installation.])
-  fi
-
-  qtopia_ver_maj=`cat $qtopia_incdir/qpe/version.h | sed -n -e 's,.*QPE_VERSION "\(.*\)\..*\..*".*,\1,p'`;
-  qtopia_ver_min=`cat $qtopia_incdir/qpe/version.h | sed -n -e 's,.*QPE_VERSION ".*\.\(.*\)\..*".*,\1,p'`;
-  qtopia_ver_pat=`cat $qtopia_incdir/qpe/version.h | sed -n -e 's,.*QPE_VERSION ".*\..*\.\(.*\)".*,\1,p'`;
-
-  qtopia_ver="$qtopia_ver_maj$qtopia_ver_min$qtopia_ver_pat"
-  qtopia_verstr="$qtopia_ver_maj.$qtopia_ver_min.$qtopia_ver_pat"
-  if test "$qtopia_ver" -lt "$qtopia_minver"; then
-    AC_MSG_ERROR([found Qtopia version $qtopia_verstr but version $qtopia_minverstr
-is required.])
-  fi
-
-  AC_LANG_SAVE
-  AC_LANG_CPLUSPLUS
-
-  ac_cxxflags_safe="$CXXFLAGS"
-  ac_ldflags_safe="$LDFLAGS"
-  ac_libs_safe="$LIBS"
-
-  CXXFLAGS="$CXXFLAGS -I$qtopia_incdir $all_includes"
-  LDFLAGS="$LDFLAGS $QT_LDFLAGS $all_libraries $USER_LDFLAGS $KDE_MT_LDFLAGS"
-  LIBS="$LIBS $LIB_QTOPIA $LIBQT"
-
-  cat > conftest.$ac_ext <<EOF
-#include "confdefs.h"
-#include <qpe/qpeapplication.h>
-#include <qpe/version.h>
-
-int main( int argc, char **argv )
-{
-    QPEApplication app( argc, argv );
-    return 0;
-}
-EOF
-
-  if AC_TRY_EVAL(ac_link) && test -s conftest; then
-    rm -f conftest*
-  else
-    rm -f conftest*
-    AC_MSG_ERROR([Cannot link small Qtopia Application. For more details look at
-the end of config.log])
-  fi
-
-  CXXFLAGS="$ac_cxxflags_safe"
-  LDFLAGS="$ac_ldflags_safe"
-  LIBS="$ac_libs_safe"
-
-  AC_LANG_RESTORE
-
-  QTOPIA_INCLUDES="-I$qtopia_incdir"
-  AC_SUBST(QTOPIA_INCLUDES)
-
-  AC_MSG_RESULT([found version $qtopia_verstr with headers at $qtopia_incdir])
-])
-
 
 AC_DEFUN([KDE_INIT_DOXYGEN],
 [
@@ -5092,276 +4719,6 @@ if test -n "$DOXYGEN" && test -x "$DOXYGEN" && test -f $QTDOCDIR/qsql.html; then
 fi
 AC_SUBST(KDE_HAS_DOXYGEN)
 
-])
-
-
-AC_DEFUN([AC_FIND_BZIP2],
-[
-AC_MSG_CHECKING([for bzDecompress in libbz2])
-AC_CACHE_VAL(ac_cv_lib_bzip2,
-[
-AC_LANG_SAVE
-AC_LANG_CPLUSPLUS
-kde_save_LIBS="$LIBS"
-LIBS="$all_libraries $USER_LDFLAGS -lbz2 $LIBSOCKET"
-kde_save_CXXFLAGS="$CXXFLAGS"
-CXXFLAGS="$CXXFLAGS $all_includes $USER_INCLUDES"
-AC_TRY_LINK(dnl
-[
-#define BZ_NO_STDIO
-#include<bzlib.h>
-],
-            [ bz_stream s; (void) bzDecompress(&s); ],
-            eval "ac_cv_lib_bzip2='-lbz2'",
-            eval "ac_cv_lib_bzip2=no")
-LIBS="$kde_save_LIBS"
-CXXFLAGS="$kde_save_CXXFLAGS"
-AC_LANG_RESTORE
-])dnl
-AC_MSG_RESULT($ac_cv_lib_bzip2)
-
-if test ! "$ac_cv_lib_bzip2" = no; then
-  BZIP2DIR=bzip2
-
-  LIBBZ2="$ac_cv_lib_bzip2"
-  AC_SUBST(LIBBZ2)
-
-else
-
-   cxx_shared_flag=
-   ld_shared_flag=
-   KDE_CHECK_COMPILER_FLAG(shared, [
-	ld_shared_flag="-shared"
-   ])
-   KDE_CHECK_COMPILER_FLAG(fPIC, [
-        cxx_shared_flag="-fPIC"
-   ])
-
-   AC_MSG_CHECKING([for BZ2_bzDecompress in (shared) libbz2])
-   AC_CACHE_VAL(ac_cv_lib_bzip2_prefix,
-   [
-   AC_LANG_SAVE
-   AC_LANG_CPLUSPLUS
-   kde_save_LIBS="$LIBS"
-   LIBS="$all_libraries $USER_LDFLAGS $ld_shared_flag -lbz2 $LIBSOCKET"
-   kde_save_CXXFLAGS="$CXXFLAGS"
-   CXXFLAGS="$CFLAGS $cxx_shared_flag $all_includes $USER_INCLUDES"
-
-   AC_TRY_LINK(dnl
-   [
-   #define BZ_NO_STDIO
-   #include<bzlib.h>
-   ],
-               [ bz_stream s; (void) BZ2_bzDecompress(&s); ],
-               eval "ac_cv_lib_bzip2_prefix='-lbz2'",
-               eval "ac_cv_lib_bzip2_prefix=no")
-   LIBS="$kde_save_LIBS"
-   CXXFLAGS="$kde_save_CXXFLAGS"
-   AC_LANG_RESTORE
-   ])dnl
-
-   AC_MSG_RESULT($ac_cv_lib_bzip2_prefix)
-   
-   if test ! "$ac_cv_lib_bzip2_prefix" = no; then
-     BZIP2DIR=bzip2
-    
-     LIBBZ2="$ac_cv_lib_bzip2_prefix"
-     AC_SUBST(LIBBZ2)
-
-     AC_DEFINE(NEED_BZ2_PREFIX, 1, [Define if the libbz2 functions need the BZ2_ prefix])
-   dnl else, we just ignore this
-   fi
-
-fi
-AM_CONDITIONAL(include_BZIP2, test -n "$BZIP2DIR")
-])
-
-dnl ------------------------------------------------------------------------
-dnl Try to find the SSL headers and libraries.
-dnl $(SSL_LDFLAGS) will be -Lsslliblocation (if needed)
-dnl and $(SSL_INCLUDES) will be -Isslhdrlocation (if needed)
-dnl ------------------------------------------------------------------------
-dnl
-AC_DEFUN([KDE_CHECK_SSL],
-[
-LIBSSL="-lssl -lcrypto"
-AC_REQUIRE([KDE_CHECK_LIB64])
-
-ac_ssl_includes=NO ac_ssl_libraries=NO
-ssl_libraries=""
-ssl_includes=""
-AC_ARG_WITH(ssl-dir,
-    AC_HELP_STRING([--with-ssl-dir=DIR],[where the root of OpenSSL is installed]),
-    [  ac_ssl_includes="$withval"/include
-       ac_ssl_libraries="$withval"/lib$kdelibsuff
-    ])
-
-want_ssl=yes
-AC_ARG_WITH(ssl,
-    AC_HELP_STRING([--without-ssl],[disable SSL checks]),
-    [want_ssl=$withval])
-
-if test $want_ssl = yes; then
-
-AC_MSG_CHECKING(for OpenSSL)
-
-AC_CACHE_VAL(ac_cv_have_ssl,
-[#try to guess OpenSSL locations
-  
-  ssl_incdirs="/usr/include /usr/local/include /usr/ssl/include /usr/local/ssl/include $prefix/include $kde_extra_includes"
-  ssl_incdirs="$ac_ssl_includes $ssl_incdirs"
-  AC_FIND_FILE(openssl/ssl.h, $ssl_incdirs, ssl_incdir)
-  ac_ssl_includes="$ssl_incdir"
-
-  ssl_libdirs="/usr/lib$kdelibsuff /usr/local/lib$kdelibsuff /usr/ssl/lib$kdelibsuff /usr/local/ssl/lib$kdelibsuff $libdir $prefix/lib$kdelibsuff $exec_prefix/lib$kdelibsuff $kde_extra_libs"
-  if test ! "$ac_ssl_libraries" = "NO"; then
-    ssl_libdirs="$ac_ssl_libraries $ssl_libdirs"
-  fi
-
-  test=NONE
-  ssl_libdir=NONE
-  for dir in $ssl_libdirs; do
-    try="ls -1 $dir/libssl*"
-    if test=`eval $try 2> /dev/null`; then ssl_libdir=$dir; break; else echo "tried $dir" >&AC_FD_CC ; fi
-  done
-
-  ac_ssl_libraries="$ssl_libdir"
-
-  ac_ldflags_safe="$LDFLAGS"
-  ac_libs_safe="$LIBS"
-
-  LDFLAGS="$LDFLAGS -L$ssl_libdir $all_libraries"
-  LIBS="$LIBS $LIBSSL -lRSAglue -lrsaref"
-
-  AC_TRY_LINK(,void RSAPrivateEncrypt(void);RSAPrivateEncrypt();,
-  ac_ssl_rsaref="yes"
-  ,
-  ac_ssl_rsaref="no"
-  )
-
-  LDFLAGS="$ac_ldflags_safe"
-  LIBS="$ac_libs_safe"
-
-  if test "$ac_ssl_includes" = NO || test "$ac_ssl_libraries" = NO; then
-    have_ssl=no
-  else
-    have_ssl=yes;
-  fi
-
-  ])
-
-  eval "$ac_cv_have_ssl"
-
-  AC_MSG_RESULT([libraries $ac_ssl_libraries, headers $ac_ssl_includes])
-
-  AC_MSG_CHECKING([whether OpenSSL uses rsaref])
-  AC_MSG_RESULT($ac_ssl_rsaref)
-
-  AC_MSG_CHECKING([for easter eggs])
-  AC_MSG_RESULT([none found])
-
-else
-  have_ssl=no
-fi
-
-if test "$have_ssl" = yes; then
-  AC_MSG_CHECKING(for OpenSSL version)
-  dnl Check for SSL version
-  AC_CACHE_VAL(ac_cv_ssl_version,
-  [
-
-    cat >conftest.$ac_ext <<EOF
-#include <openssl/opensslv.h>
-#include <stdio.h>
-    int main() {
- 
-#ifndef OPENSSL_VERSION_NUMBER
-      printf("ssl_version=\\"error\\"\n");
-#else
-      if (OPENSSL_VERSION_NUMBER < 0x00906000)
-        printf("ssl_version=\\"old\\"\n");
-      else
-        printf("ssl_version=\\"ok\\"\n");
-#endif
-     return (0);
-    }
-EOF
-
-    ac_save_CPPFLAGS=$CPPFLAGS
-    if test "$ac_ssl_includes" != "/usr/include"; then
-        CPPFLAGS="$CPPFLAGS -I$ac_ssl_includes"
-    fi
-
-    if AC_TRY_EVAL(ac_link); then 
-
-      if eval `./conftest 2>&5`; then
-        if test $ssl_version = error; then
-          AC_MSG_ERROR([$ssl_incdir/openssl/opensslv.h doesn't define OPENSSL_VERSION_NUMBER !])
-        else
-          if test $ssl_version = old; then
-            AC_MSG_WARN([OpenSSL version too old. Upgrade to 0.9.6 at least, see http://www.openssl.org. SSL support disabled.])
-            have_ssl=no
-          fi
-        fi
-        ac_cv_ssl_version="ssl_version=$ssl_version"
-      else
-        AC_MSG_ERROR([Your system couldn't run a small SSL test program.
-        Check config.log, and if you can't figure it out, send a mail to 
-        David Faure <faure@kde.org>, attaching your config.log])
-      fi
-
-    else
-      AC_MSG_ERROR([Your system couldn't link a small SSL test program.
-      Check config.log, and if you can't figure it out, send a mail to 
-      David Faure <faure@kde.org>, attaching your config.log])
-    fi 
-    CPPFLAGS=$ac_save_CPPFLAGS
-
-  ])
-
-  eval "$ac_cv_ssl_version"
-  AC_MSG_RESULT($ssl_version)
-fi
-
-if test "$have_ssl" != yes; then
-  LIBSSL="";
-else
-  AC_DEFINE(HAVE_SSL, 1, [If we are going to use OpenSSL])
-  ac_cv_have_ssl="have_ssl=yes \
-    ac_ssl_includes=$ac_ssl_includes ac_ssl_libraries=$ac_ssl_libraries ac_ssl_rsaref=$ac_ssl_rsaref"
-  
-  
-  ssl_libraries="$ac_ssl_libraries"
-  ssl_includes="$ac_ssl_includes"
-
-  if test "$ac_ssl_rsaref" = yes; then
-    LIBSSL="-lssl -lcrypto -lRSAglue -lrsaref" 
-  fi
-
-  if test $ssl_version = "old"; then
-    AC_DEFINE(HAVE_OLD_SSL_API, 1, [Define if you have OpenSSL < 0.9.6])
-  fi
-fi
-
-SSL_INCLUDES=
-
-if test "$ssl_includes" = "/usr/include"; then
-  if test -f /usr/kerberos/include/krb5.h; then
-	SSL_INCLUDES="-I/usr/kerberos/include"
-  fi
-elif test  "$ssl_includes" != "/usr/local/include" && test -n "$ssl_includes"; then
-  SSL_INCLUDES="-I$ssl_includes"
-fi
-
-if test "$ssl_libraries" = "/usr/lib" || test "$ssl_libraries" = "/usr/local/lib" || test -z "$ssl_libraries" || test "$ssl_libraries" = "NONE"; then
- SSL_LDFLAGS=""
-else
- SSL_LDFLAGS="-L$ssl_libraries -R$ssl_libraries"
-fi
-
-AC_SUBST(SSL_INCLUDES)
-AC_SUBST(SSL_LDFLAGS)
-AC_SUBST(LIBSSL)
 ])
 
 AC_DEFUN([KDE_CHECK_STRLCPY],
@@ -5410,16 +4767,6 @@ better disable the optional version scripts.
   AC_MSG_RESULT($kde_supports_versionmaps)
 ])
 
-AC_DEFUN([AM_PROG_OBJC],[
-AC_CHECK_PROGS(OBJC, gcc, gcc)
-test -z "$OBJC" && AC_MSG_ERROR([no acceptable objective-c gcc found in \$PATH])
-if test "x${OBJCFLAGS-unset}" = xunset; then
-   OBJCFLAGS="-g -O2"
-fi
-AC_SUBST(OBJCFLAGS)
-_AM_IF_OPTION([no-dependencies],, [_AM_DEPENDENCIES(OBJC)])
-])
-
 AC_DEFUN([KDE_CHECK_PERL],
 [
 	KDE_FIND_PATH(perl, PERL, [$bindir $exec_prefix/bin $prefix/bin], [
@@ -5443,22 +4790,6 @@ dnl immediately, otherwise, hook it in at the end of AC_PROG_CXX.
     [define([AC_PROG_CXX], defn([AC_PROG_CXX])[AC_LIBTOOL_CXX
   ])])
 
-dnl Quote A][M_PROG_GCJ so that aclocal doesn't bring it in needlessly.
-dnl If either AC_PROG_GCJ or A][M_PROG_GCJ have already been expanded, run
-dnl AC_LIBTOOL_GCJ immediately, otherwise, hook it in at the end of both.
-  AC_PROVIDE_IFELSE([AC_PROG_GCJ],
-    [AC_LIBTOOL_GCJ],
-    [AC_PROVIDE_IFELSE([A][M_PROG_GCJ],
-      [AC_LIBTOOL_GCJ],
-      [AC_PROVIDE_IFELSE([LT_AC_PROG_GCJ],
-	[AC_LIBTOOL_GCJ],
-      [ifdef([AC_PROG_GCJ],
-	     [define([AC_PROG_GCJ], defn([AC_PROG_GCJ])[AC_LIBTOOL_GCJ])])
-       ifdef([A][M_PROG_GCJ],
-	     [define([A][M_PROG_GCJ], defn([A][M_PROG_GCJ])[AC_LIBTOOL_GCJ])])
-       ifdef([LT_AC_PROG_GCJ],
-	     [define([LT_AC_PROG_GCJ],
-		defn([LT_AC_PROG_GCJ])[AC_LIBTOOL_GCJ])])])])
 ])])# AC_PROG_LIBTOOL
 
 
@@ -5467,7 +4798,6 @@ dnl AC_LIBTOOL_GCJ immediately, otherwise, hook it in at the end of both.
 AC_DEFUN([_AC_PROG_LIBTOOL],
 [AC_REQUIRE([AC_LIBTOOL_SETUP])dnl
 AC_BEFORE([$0],[AC_LIBTOOL_CXX])dnl
-AC_BEFORE([$0],[AC_LIBTOOL_GCJ])dnl
 
 # This can be used to rebuild libtool when needed
 LIBTOOL_DEPS="$ac_aux_dir/ltmain.sh"
@@ -6255,9 +5585,7 @@ AC_CACHE_CHECK([if $compiler supports -c -o file.$ac_objext],
    ifelse([$1],[],[save_CFLAGS="$CFLAGS"
 		   CFLAGS="$CFLAGS -o out/conftest2.$ac_objext"],
 	  [$1],[CXX],[save_CXXFLAGS="$CXXFLAGS"
-		   CXXFLAGS="$CXXFLAGS -o out/conftest2.$ac_objext"],
-	  [$1],[GCJ],[save_GCJFLAGS="$GCJFLAGS"
-		   GCJFLAGS="$GCJFLAGS -o out/conftest2.$ac_objext"])
+		   CXXFLAGS="$CXXFLAGS -o out/conftest2.$ac_objext"])
    echo "$lt_simple_compile_test_code" > conftest.$ac_ext
 
    # According to Tom Tromey, Ian Lance Taylor reported there are C compilers
@@ -6279,8 +5607,7 @@ AC_CACHE_CHECK([if $compiler supports -c -o file.$ac_objext],
      fi
    fi
    ifelse([$1],[],[CFLAGS="$save_CFLAGS"],
-	  [$1],[CXX],[CXXFLAGS="$save_CXXFLAGS"],
-	  [$1],[GCJ],[GCJFLAGS="$save_GCJFLAGS"])
+	  [$1],[CXX],[CXXFLAGS="$save_CXXFLAGS"])
    chmod u+w .
    $rm conftest* out/*
    rmdir out
@@ -6855,9 +6182,9 @@ test "$dynamic_linker" = no && can_build_shared=no
 AC_DEFUN([_LT_AC_TAGCONFIG],
 [AC_ARG_WITH([tags],
     [AC_HELP_STRING([--with-tags=TAGS],
-	[include additional configurations @<:@CXX,GCJ@:>@])],
+	[include additional configurations @<:@CXX@:>@])],
     [tagnames="$withval"],
-    [tagnames="CXX,GCJ"
+    [tagnames="CXX"
     case $host_os in
       mingw*|cygwin*) tagnames="$tagnames,RC" ;;
     esac])
@@ -6902,14 +6229,6 @@ if test -f "$ltmain" && test -n "$tagnames"; then
       case $tagname in
       CXX)
 	AC_LIBTOOL_LANG_CXX_CONFIG
-	;;
-
-      GCJ)
-	AC_LIBTOOL_LANG_GCJ_CONFIG
-	;;
-
-      RC)
-	AC_LIBTOOL_LANG_RC_CONFIG
 	;;
 
       *)
@@ -7603,34 +6922,6 @@ AC_DEFUN([_LT_AC_LANG_CXX],
 [AC_REQUIRE([AC_PROG_CXX])
 AC_REQUIRE([AC_PROG_CXXCPP])
 ])# _LT_AC_LANG_CXX
-
-
-# AC_LIBTOOL_GCJ
-# --------------
-# enable support for GCJ libraries
-AC_DEFUN([AC_LIBTOOL_GCJ],
-[AC_REQUIRE([_LT_AC_LANG_GCJ])
-])# AC_LIBTOOL_GCJ
-
-
-# _LT_AC_LANG_GCJ
-# ---------------
-AC_DEFUN([_LT_AC_LANG_GCJ],
-[AC_PROVIDE_IFELSE([AC_PROG_GCJ],[],
-  [AC_PROVIDE_IFELSE([A][M_PROG_GCJ],[],
-    [AC_PROVIDE_IFELSE([LT_AC_PROG_GCJ],[],
-      [ifdef([AC_PROG_GCJ],[AC_REQUIRE([AC_PROG_GCJ])],
-	 [ifdef([A][M_PROG_GCJ],[AC_REQUIRE([A][M_PROG_GCJ])],
-	   [AC_REQUIRE([A][C_PROG_GCJ_OR_A][M_PROG_GCJ])])])])])])
-])# _LT_AC_LANG_GCJ
-
-
-# AC_LIBTOOL_RC
-# --------------
-# enable support for Windows resource files
-AC_DEFUN([AC_LIBTOOL_RC],
-[AC_REQUIRE([AC_PROG_RC])
-])# AC_LIBTOOL_RC
 
 
 # AC_LIBTOOL_LANG_C_CONFIG
@@ -8551,14 +7842,6 @@ CC="$lt_save_CC"
 ])# AC_LIBTOOL_LANG_CXX_CONFIG
 
 
-# AC_LIBTOOL_LANG_GCJ_CONFIG
-# --------------------------
-# Ensure that the configuration vars for the C compiler are
-# suitably defined.  Those variables are subsequently used by
-# AC_LIBTOOL_CONFIG to write the compiler configuration to `libtool'.
-AC_DEFUN([AC_LIBTOOL_LANG_GCJ_CONFIG], [_LT_AC_LANG_GCJ_CONFIG(GCJ)])
-AC_DEFUN([_LT_AC_LANG_GCJ_CONFIG],
-[AC_LANG_SAVE
 
 # Source file extension for C test sources.
 ac_ext=java
@@ -8573,74 +7856,6 @@ lt_simple_compile_test_code="class foo {}"
 # Code to be used in simple link tests
 lt_simple_link_test_code='public class conftest { public static void main(String[] argv) {}; }'
 
-# ltmain only uses $CC for tagged configurations so make sure $CC is set.
-_LT_AC_SYS_COMPILER
-
-# Allow CC to be a program name with arguments.
-lt_save_CC="$CC"
-CC=${GCJ-"gcj"}
-set dummy $CC
-compiler="[$]2"
-_LT_AC_TAGVAR(compiler, $1)=$CC
-
-# GCJ did not exist at the time GCC didn't implicitly link libc in.
-_LT_AC_TAGVAR(archive_cmds_need_lc, $1)=no
-
-AC_LIBTOOL_PROG_COMPILER_NO_RTTI($1)
-AC_LIBTOOL_PROG_COMPILER_PIC($1)
-AC_LIBTOOL_PROG_CC_C_O($1)
-AC_LIBTOOL_SYS_HARD_LINK_LOCKS($1)
-AC_LIBTOOL_PROG_LD_SHLIBS($1)
-AC_LIBTOOL_PROG_LD_HARDCODE_LIBPATH($1)
-AC_LIBTOOL_SYS_LIB_STRIP
-AC_LIBTOOL_SYS_DYNAMIC_LINKER($1)
-AC_LIBTOOL_DLOPEN_SELF($1)
-
-AC_LIBTOOL_CONFIG($1)
-
-AC_LANG_RESTORE
-CC="$lt_save_CC"
-])# AC_LIBTOOL_LANG_GCJ_CONFIG
-
-
-# AC_LIBTOOL_LANG_RC_CONFIG
-# --------------------------
-# Ensure that the configuration vars for the Windows resource compiler are
-# suitably defined.  Those variables are subsequently used by
-# AC_LIBTOOL_CONFIG to write the compiler configuration to `libtool'.
-AC_DEFUN([AC_LIBTOOL_LANG_RC_CONFIG], [_LT_AC_LANG_RC_CONFIG(RC)])
-AC_DEFUN([_LT_AC_LANG_RC_CONFIG],
-[AC_LANG_SAVE
-
-# Source file extension for RC test sources.
-ac_ext=rc
-
-# Object file extension for compiled RC test sources.
-objext=o
-_LT_AC_TAGVAR(objext, $1)=$objext
-
-# Code to be used in simple compile tests
-lt_simple_compile_test_code='sample MENU { MENUITEM "&Soup", 100, CHECKED }'
-
-# Code to be used in simple link tests
-lt_simple_link_test_code="$lt_simple_compile_test_code"
-
-# ltmain only uses $CC for tagged configurations so make sure $CC is set.
-_LT_AC_SYS_COMPILER
-
-# Allow CC to be a program name with arguments.
-lt_save_CC="$CC"
-CC=${RC-"windres"}
-set dummy $CC
-compiler="[$]2"
-_LT_AC_TAGVAR(compiler, $1)=$CC
-_LT_AC_TAGVAR(lt_cv_prog_compiler_c_o, $1)=yes
-
-AC_LIBTOOL_CONFIG($1)
-
-AC_LANG_RESTORE
-CC="$lt_save_CC"
-])# AC_LIBTOOL_LANG_RC_CONFIG
 
 
 # AC_LIBTOOL_CONFIG([TAGNAME])
@@ -10699,15 +9914,6 @@ AC_DEFUN([AM_PROG_NM],        [AC_PROG_NM])
 # This is just to silence aclocal about the macro not being used
 ifelse([AC_DISABLE_FAST_INSTALL])
 
-AC_DEFUN([LT_AC_PROG_GCJ],
-[AC_CHECK_TOOL(GCJ, gcj, no)
-  test "x${GCJFLAGS+set}" = xset || GCJFLAGS="-g -O2"
-  AC_SUBST(GCJFLAGS)
-])
-
-AC_DEFUN([LT_AC_PROG_RC],
-[AC_CHECK_TOOL(RC, windres, no)
-])
 
 # NOTE: This macro has been submitted for inclusion into   #
 #  GNU Autoconf as AC_PROG_SED.  When it is available in   #
@@ -11563,39 +10769,6 @@ AC_SUBST(am__quote)
 AC_MSG_RESULT($_am_result)
 rm -f confinc confmf
 ])
-
-
-# Copyright 1998, 1999, 2000, 2001, 2002 Free Software Foundation, Inc.
-
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2, or (at your option)
-# any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
-# 02111-1307, USA.
-
-# serial 3
-
-AC_PREREQ(2.50)
-
-# AM_PROG_LEX
-# -----------
-# Autoconf leaves LEX=: if lex or flex can't be found.  Change that to a
-# "missing" invocation, for better error output.
-AC_DEFUN([AM_PROG_LEX],
-[AC_REQUIRE([AM_MISSING_HAS_RUN])dnl
-AC_REQUIRE([AC_PROG_LEX])dnl
-if test "$LEX" = :; then
-  LEX=${am_missing_run}flex
-fi])
 
 # Like AC_CONFIG_HEADER, but automatically create stamp file. -*- Autoconf -*-
 

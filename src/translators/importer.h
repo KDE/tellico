@@ -35,7 +35,7 @@ namespace Bookcase {
  * @ref Data::Collection. Any errors or warnings are added to a status message queue.
  *
  * @author Robby Stephenson
- * @version $Id: importer.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: importer.h 633 2004-05-01 03:16:22Z robby $
  */
 class Importer : public QObject {
 Q_OBJECT
@@ -76,6 +76,9 @@ public:
    * @return A pointer to the setting widget
    */
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
+
+public slots:
+  virtual void slotActionChanged(int) {}
 
 signals:
   /**

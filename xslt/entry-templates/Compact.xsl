@@ -8,7 +8,7 @@
    ===================================================================
    Bookcase XSLT file - compact template for viewing entry data
 
-   $Id: Fancy.xsl 528 2004-03-11 02:39:45Z robby $
+   $Id: Compact.xsl 620 2004-04-22 02:38:47Z robby $
 
    Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
 

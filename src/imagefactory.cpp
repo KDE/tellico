@@ -71,7 +71,7 @@ const Bookcase::Data::Image& ImageFactory::addImage(const QByteArray& data_, con
 }
 
 const Bookcase::Data::Image& ImageFactory::imageById(const QString& id_) {
-  if(s_imageDict.isEmpty() || id_.isNull()) {
+  if(s_imageDict.isEmpty() || id_.isEmpty()) {
     return s_null;
   }
   Data::Image* img = s_imageDict.find(id_);

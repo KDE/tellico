@@ -260,8 +260,8 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
 DIST_COMMON = Makefile.am Makefile.in config.guess config.sub depcomp \
-	install-sh ltcf-c.sh ltcf-cxx.sh ltcf-gcj.sh ltconfig ltmain.sh \
-	missing mkinstalldirs ylwrap
+	install-sh ltcf-c.sh ltcf-cxx.sh ltconfig ltmain.sh missing \
+	mkinstalldirs ylwrap
 #>- all: all-am
 #>+ 1
 all: docs-am  all-am

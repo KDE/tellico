@@ -24,7 +24,7 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qdragobject.h>
-#include <qapp.h> // needed for drag distance
+#include <qapplication.h> // needed for drag distance
 
 static const uint button_margin = 8;
 static const uint image_margin = 4;

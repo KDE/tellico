@@ -283,7 +283,13 @@ void Document::mergeCollection(Collection* coll_) {
   slotSetModified(true);
 }
 
-void Document::slotSaveEntry(Entry* entry_) {
+void Document::slotSaveEntries(const EntryList& list_) {
+  for(EntryListIterator it(list_); it.current(); ++it) {
+    saveEntry(it.current());
+  }
+}
+
+void Document::saveEntry(Entry* entry_) {
   if(!entry_) {
     return;
   }

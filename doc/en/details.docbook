@@ -1,0 +1,431 @@
+<chapter id="details">
+<title>&bookcase; Details</title>
+
+<sect1 id="field-types">
+<title>Field Types</title>
+
+<para>
+Each collection may have an unlimited number of fields. &bookcase; supports ten types of fields, which allow for a range of different data.
+</para>
+
+<sect2 id="line">
+<title>Simple Text</title>
+
+<para>
+The most basic field type is called <emphasis>Simple Text</emphasis>.
+No restrictions are placed on the field values, and the data entry
+widget is the standard line edit. This type is appropriate for fields
+which aren't expected to have long values, such as the author or the genre.
+</para>
+
+</sect2>
+<sect2 id="number">
+<title>Number</title>
+
+<para>
+The <emphasis>Number</emphasis> type is identical to the
+<emphasis>Simple Text</emphasis>, except that the data is restricted
+to being numerical. Entries will be sorted numerically in the column
+view if a <emphasis>Number</emphasis> field column is clicked. Again,
+the standard line edit is used for data entry. No formatting is ever
+applied.</para>
+
+</sect2>
+<sect2 id="url">
+<title>URL</title>
+
+<para>
+The <emphasis>&URL;</emphasis> type allows for links to other documents,
+using the standard &kde; file type associations for opening the linked
+documents. No validation is done on the actual value of a
+<emphasis>&URL;</emphasis> field, but non-valid links are not
+opened. The data entry is a line edit with a button for opening the
+standard File-Open dialog, but any &URL; may be used. In the <link linkend="entry-editor">&entry-editor;</link>,
+the label becomes the link, while in the <link linkend="entry-view">&entry-view;</link>, an actual
+hyperlink is used. This field type is convenient for linking to <acronym>PDF</acronym>
+files of bibliographic entries, or to movie reviews, for example. No
+formatting is ever applied.</para>
+
+</sect2>
+<sect2 id="para">
+<title>Paragraph</title>
+
+<para>
+For longer text fields, the <emphasis>Paragraph</emphasis> type offers
+a larger text edit area, and is always in its own category. A
+<emphasis>Paragraph</emphasis> field may not have multiple values, nor
+is it automatically formatted. It cannot be used for grouping. Abstracts, plot
+summaries, or reviews should be entered using this field type.</para>
+
+</sect2>
+<sect2 id="choice">
+<title>Choice</title>
+
+<para>
+When a field should be limited to a few preset values, a
+<emphasis>Choice</emphasis> type is used. The acceptable values are
+presented in a drop-down box for selection. Obviously, multiple values
+are not applicable. Fields such as bibliography type or personal rating
+are <emphasis>Choice</emphasis>-type fields.</para>
+
+</sect2>
+<sect2 id="bool">
+<title>Checkbox</title>
+
+<para>
+For fields which take a yes or no value, the
+<emphasis>Checkbox</emphasis> type is available. By default, the field
+is toggled off. <emphasis>Checkbox</emphasis> fields are not formatted
+and are limited to single values. Internally, the field values are
+carried as <constant>true</constant> or
+<constant>false</constant>. Some examples are gift or loaned
+fields.</para>
+
+</sect2>
+<sect2 id="table">
+<title>Table</title>
+
+<para>
+<emphasis>Table</emphasis> fields hold a single-column list of unlimited values.
+In the <link linkend="entry-editor">&entry-editor;</link>, the field is presented using a spreadsheet-like view, with
+numbered rows. When the last row is selected, an additional row is then added.  Auto-completion is not available.
+This field is useful for a list of chapters in a book, scenes in a movie, or songs in an album.
+<emphasis>Table</emphasis> fields are always a category by themselves.
+</para>
+
+</sect2>
+<sect2 id="table2">
+<title>Table (2 Columns)</title>
+
+<para>
+Some fields may need two columns of data, which is available as a
+<emphasis>Table (2 Columns)</emphasis> type. It is identical to the
+previous <emphasis>Table</emphasis> type, but has an additional column. The default
+video collection uses a 2-column field for the cast, with the first column holding
+the actor's name and the second column holding the name of the character. Only the first column
+can be auto-formatted, and only the first column is used for grouping. Auto-completion is not available.
+Typically, the second column is italicized in the entry view templates, or when exporting to HTML.
+<emphasis>Table</emphasis> fields are always a category by themselves.
+</para>
+
+</sect2>
+<sect2 id="image">
+<title>Image</title>
+
+<para>
+<emphasis>Image</emphasis> fields hold an image, of any format supported by &kde;.
+Some of the typical ones include <acronym>PNG</acronym> or <acronym>JPEG</acronym>.
+The image is saved inside the &bookcase; data
+file. The standard &kde; File Selector is used, so you can use a &URL; or just a file available
+locally.
+</para>
+
+</sect2>
+<sect2 id="dependent">
+<title>Dependent</title>
+
+<para>
+The final field type is the <emphasis>Dependent</emphasis> field. You probably won't use
+this one very often. It is used to combine values from other fields using a format
+string in the field description. For example, if a <emphasis>Dependent</emphasis> field has
+a description of <userinput>%{title} %{year}</userinput>, then the value of that field will
+be the title, followed by the year. This field type is used primarily for the title field in
+the coin, stamp, trading card, and wine collections. Either the internal field name or the field title
+may be used in the description for formatting.
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-types">
+<title>Collection Types</title>
+
+<para>
+&bookcase; supports nine specific collection types by default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
+</para>
+
+<para>
+In general, there's no functional difference between the collection types. You could create a custom collection for your books just as easily as using the default book collection. But &bookcase; chooses icons based on collection type, and there may be some specialized functionality that is unique to a certain collection, so if you can, you should use the defaults. So, if you want to create a wine collection, but don't like any of the default fields, go ahead and create a default wine collection, then delete all the defaults. That way, &bookcase; still knows that it's a wine collection.
+</para>
+
+<sect2 id="book-collection">
+<title>Book Collections</title>
+<para>
+Book collections have 26 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Subtitle</emphasis>,
+<emphasis>Author</emphasis>,
+<emphasis>Binding</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Publisher</emphasis>,
+<emphasis>Edition</emphasis>,
+<emphasis>Copyright Year</emphasis>,
+<emphasis>Publication Year</emphasis>,
+<emphasis>ISBN#</emphasis>,
+<emphasis>LCCN#</emphasis>,
+<emphasis>Pages</emphasis>,
+<emphasis>Language</emphasis>,
+<emphasis>Genre</emphasis>,
+<emphasis>Keywords</emphasis>,
+<emphasis>Series</emphasis>,
+<emphasis>Series Number</emphasis>,
+<emphasis>Condition</emphasis>,
+<emphasis>Signed</emphasis>,
+<emphasis>Read</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Loaned</emphasis>,
+<emphasis>Rating</emphasis>,
+<emphasis>Front Cover</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+<para>
+The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> numbers are automatically formatted and the check-digit is calculated. &bookcase; recognizes the <acronym>ISBN</acronym> field if its internal field name is <emphasis>isbn</emphasis>. If you delete it, or need to add it to another type of collection, create the field with the title as <emphasis>ISBN</emphasis> and apply the change, then you can return and modify the title as you want. &bookcase; creates the internal name based on the initial title, but never changes it if the title is later updated.
+</para>
+
+</sect2>
+
+<sect2 id="bibliography">
+<title>Bibliographies</title>
+<para>
+Bibliographies have 21 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Entry Type</emphasis>,
+<emphasis>Author</emphasis>,
+<emphasis>Bibtex Key</emphasis>,
+<emphasis>Book Title</emphasis>,
+<emphasis>Editor</emphasis>,
+<emphasis>Organization</emphasis>,
+<emphasis>Publisher</emphasis>,
+<emphasis>Edition</emphasis>,
+<emphasis>Pages</emphasis>,
+<emphasis>Year</emphasis>,
+<emphasis>Journal</emphasis>,
+<emphasis>Month</emphasis>,
+<emphasis>Number</emphasis>,
+<emphasis>How Published</emphasis>,
+<emphasis>Chapter</emphasis>,
+<emphasis>Series</emphasis>,
+<emphasis>Series</emphasis>,
+<emphasis>Volume</emphasis>,
+<emphasis>Cross-Reference</emphasis>, and
+<emphasis>Notes</emphasis>.
+</para>
+
+<para>
+Although bibliographic collections are not specifically linked to Bibtex, the default set of fields is taken from a typical set of Bibtex fields. When exporting to Bibtex, an extended property called <emphasis>bibtex</emphasis> is used for each fields to define the corresponding Bibtex field. If you add an additional field to a bibliography and want to export it to Bibtex, be sure to set the <emphasis>bibtex</emphasis> extended property.
+</para>
+
+<para>
+&bookcase; does have some specialized functions for bibliographies. Bibtex string macros can be added, modified, or deleted from within &bookcase; and the Bibtex export gives you the option of expanding the macros. Bibtex citations can be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="bibtex-options">lyxpipe</link></emphasis>.
+</para>
+
+<para>
+Book collections can be converted to bibliographies. Default bibtex fields are added, and the extended properties are set. This functionality exists primarily to convert old collections, before the bibliography type was separated from the book collection type.
+</para>
+</sect2>
+
+<sect2 id="comic-book-collection">
+<title>Comic Book Collections</title>
+<para>
+Comic book collections have 22 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Subtitle</emphasis>,
+<emphasis>Writer</emphasis>,
+<emphasis>Artist</emphasis>,
+<emphasis>Series</emphasis>,
+<emphasis>Issues</emphasis>,
+<emphasis>Publisher</emphasis>,
+<emphasis>Edition</emphasis>,
+<emphasis>Publication Year</emphasis>,
+<emphasis>Pages</emphasis>,
+<emphasis>Country</emphasis>,
+<emphasis>Language</emphasis>,
+<emphasis>Genre</emphasis>,
+<emphasis>Keywords</emphasis>,
+<emphasis>Condition</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Signed</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Loaned</emphasis>,
+<emphasis>Front Cover</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="video-collection">
+<title>Video Collections</title>
+<para>
+Video collections have 30 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Medium</emphasis>,
+<emphasis>Production Year</emphasis>,
+<emphasis>Certification</emphasis>,
+<emphasis>Genre</emphasis>,
+<emphasis>Region</emphasis>,
+<emphasis>Nationality</emphasis>,
+<emphasis>Format</emphasis>,
+<emphasis>Cast</emphasis>,
+<emphasis>Director</emphasis>,
+<emphasis>Producer</emphasis>,
+<emphasis>Writer</emphasis>,
+<emphasis>Composer</emphasis>,
+<emphasis>Studio</emphasis>,
+<emphasis>Language Tracks</emphasis>,
+<emphasis>Subtitle Languages</emphasis>,
+<emphasis>Audio Tracks</emphasis>,
+<emphasis>Running Time</emphasis>,
+<emphasis>Aspect Ratio</emphasis>,
+<emphasis>Widescreen</emphasis>,
+<emphasis>Color Mode</emphasis>,
+<emphasis>Director's Cut</emphasis>,
+<emphasis>Plot Summary</emphasis>,
+<emphasis>Personal Rating</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Loaned</emphasis>,
+<emphasis>Cover</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+<para>
+The <emphasis>Cast</emphasis> field is a <link linkend="table2">2-column table</link>, and the name of the actor is intended to be in the first column, with their role in the second. The <emphasis>Running Time</emphasis> is meant to be in minutes, though you can change that, of course.
+</para>
+</sect2>
+
+<sect2 id="music-collection">
+<title>Music Collections</title>
+<para>
+Music collections have 15 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Medium</emphasis>,
+<emphasis>Artist</emphasis>,
+<emphasis>Label</emphasis>,
+<emphasis>Year</emphasis>,
+<emphasis>Genre</emphasis>,
+<emphasis>Tracks</emphasis>,
+<emphasis>Rating</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Loaned</emphasis>,
+<emphasis>Keywords</emphasis>,
+<emphasis>Cover</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="card-collection">
+<title>Card Collections</title>
+<para>
+Trading card collections have 17 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Player</emphasis>,
+<emphasis>Team</emphasis>,
+<emphasis>Brand</emphasis>,
+<emphasis>Card Number</emphasis>,
+<emphasis>Year</emphasis>,
+<emphasis>Series</emphasis>,
+<emphasis>Card Type</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Location</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Keywords</emphasis>,
+<emphasis>Quantity</emphasis>,
+<emphasis>Front Image</emphasis>,
+<emphasis>Back Image</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="coin-collection">
+<title>Coin Collections</title>
+<para>
+Coin collections have 16 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Type</emphasis>,
+<emphasis>Denomination</emphasis>,
+<emphasis>Year</emphasis>,
+<emphasis>Mint Mark</emphasis>,
+<emphasis>Country</emphasis>,
+<emphasis>Coin Set</emphasis>,
+<emphasis>Grade</emphasis>,
+<emphasis>Grading Service</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Location</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Obverse</emphasis>,
+<emphasis>Reverse</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="stamp-collection">
+<title>Stamp Collections</title>
+<para>
+Stamp ollections have 18 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Description</emphasis>,
+<emphasis>Denomination</emphasis>,
+<emphasis>Country</emphasis>,
+<emphasis>Issue Year</emphasis>,
+<emphasis>Color</emphasis>,
+<emphasis>Scott#</emphasis>,
+<emphasis>Grade</emphasis>,
+<emphasis>Cancelled</emphasis>,
+<emphasis>Hinged</emphasis>,
+<emphasis>Centering</emphasis>,
+<emphasis>Gummed</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Location</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Image</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="wine-collection">
+<title>Wine Collections</title>
+<para>
+Wine collections have 15 default fields.
+<emphasis>Title</emphasis>,
+<emphasis>Producer</emphasis>,
+<emphasis>Appellation</emphasis>,
+<emphasis>Varietal</emphasis>,
+<emphasis>Type</emphasis>,
+<emphasis>Country</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Location</emphasis>,
+<emphasis>Quantity</emphasis>,
+<emphasis>Drink By</emphasis>,
+<emphasis>Rating</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Label Image</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="custom-collection">
+<title>Custom Collections</title>
+<para>
+Custom collections have one default field, the <emphasis>Title</emphasis>. They should be used when the collectible item is not one of the nine default types.
+</para>
+
+</sect2>
+
+</sect1>
+
+</chapter>

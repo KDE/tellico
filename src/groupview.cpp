@@ -253,10 +253,11 @@ void GroupView::slotModifyGroup(Data::Collection* coll_, const Data::EntryGroup*
 
     EntryItem* item = new EntryItem(par, title, it.current());
     item->setPixmap(0, icon);
-    if(isUpdatesEnabled()) {
-      ensureItemVisible(item);
-      par->setOpen(true);
-    }
+    // no don't do this after all
+//    if(isUpdatesEnabled()) {
+//      ensureItemVisible(item);
+//      par->setOpen(true);
+//    }
   }
 
   // don't want any selected

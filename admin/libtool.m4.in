@@ -35,22 +35,6 @@ dnl immediately, otherwise, hook it in at the end of AC_PROG_CXX.
     [define([AC_PROG_CXX], defn([AC_PROG_CXX])[AC_LIBTOOL_CXX
   ])])
 
-dnl Quote A][M_PROG_GCJ so that aclocal doesn't bring it in needlessly.
-dnl If either AC_PROG_GCJ or A][M_PROG_GCJ have already been expanded, run
-dnl AC_LIBTOOL_GCJ immediately, otherwise, hook it in at the end of both.
-  AC_PROVIDE_IFELSE([AC_PROG_GCJ],
-    [AC_LIBTOOL_GCJ],
-    [AC_PROVIDE_IFELSE([A][M_PROG_GCJ],
-      [AC_LIBTOOL_GCJ],
-      [AC_PROVIDE_IFELSE([LT_AC_PROG_GCJ],
-	[AC_LIBTOOL_GCJ],
-      [ifdef([AC_PROG_GCJ],
-	     [define([AC_PROG_GCJ], defn([AC_PROG_GCJ])[AC_LIBTOOL_GCJ])])
-       ifdef([A][M_PROG_GCJ],
-	     [define([A][M_PROG_GCJ], defn([A][M_PROG_GCJ])[AC_LIBTOOL_GCJ])])
-       ifdef([LT_AC_PROG_GCJ],
-	     [define([LT_AC_PROG_GCJ],
-		defn([LT_AC_PROG_GCJ])[AC_LIBTOOL_GCJ])])])])
 ])])# AC_PROG_LIBTOOL
 
 
@@ -59,7 +43,6 @@ dnl AC_LIBTOOL_GCJ immediately, otherwise, hook it in at the end of both.
 AC_DEFUN([_AC_PROG_LIBTOOL],
 [AC_REQUIRE([AC_LIBTOOL_SETUP])dnl
 AC_BEFORE([$0],[AC_LIBTOOL_CXX])dnl
-AC_BEFORE([$0],[AC_LIBTOOL_GCJ])dnl
 
 # This can be used to rebuild libtool when needed
 LIBTOOL_DEPS="$ac_aux_dir/ltmain.sh"
@@ -847,9 +830,7 @@ AC_CACHE_CHECK([if $compiler supports -c -o file.$ac_objext],
    ifelse([$1],[],[save_CFLAGS="$CFLAGS"
 		   CFLAGS="$CFLAGS -o out/conftest2.$ac_objext"],
 	  [$1],[CXX],[save_CXXFLAGS="$CXXFLAGS"
-		   CXXFLAGS="$CXXFLAGS -o out/conftest2.$ac_objext"],
-	  [$1],[GCJ],[save_GCJFLAGS="$GCJFLAGS"
-		   GCJFLAGS="$GCJFLAGS -o out/conftest2.$ac_objext"])
+		   CXXFLAGS="$CXXFLAGS -o out/conftest2.$ac_objext"])
    echo "$lt_simple_compile_test_code" > conftest.$ac_ext
 
    # According to Tom Tromey, Ian Lance Taylor reported there are C compilers
@@ -871,8 +852,7 @@ AC_CACHE_CHECK([if $compiler supports -c -o file.$ac_objext],
      fi
    fi
    ifelse([$1],[],[CFLAGS="$save_CFLAGS"],
-	  [$1],[CXX],[CXXFLAGS="$save_CXXFLAGS"],
-	  [$1],[GCJ],[GCJFLAGS="$save_GCJFLAGS"])
+	  [$1],[CXX],[CXXFLAGS="$save_CXXFLAGS"])
    chmod u+w .
    $rm conftest* out/*
    rmdir out
@@ -1447,9 +1427,9 @@ test "$dynamic_linker" = no && can_build_shared=no
 AC_DEFUN([_LT_AC_TAGCONFIG],
 [AC_ARG_WITH([tags],
     [AC_HELP_STRING([--with-tags=TAGS],
-	[include additional configurations @<:@CXX,GCJ@:>@])],
+	[include additional configurations @<:@CXX@:>@])],
     [tagnames="$withval"],
-    [tagnames="CXX,GCJ"
+    [tagnames="CXX"
     case $host_os in
       mingw*|cygwin*) tagnames="$tagnames,RC" ;;
     esac])
@@ -1494,14 +1474,6 @@ if test -f "$ltmain" && test -n "$tagnames"; then
       case $tagname in
       CXX)
 	AC_LIBTOOL_LANG_CXX_CONFIG
-	;;
-
-      GCJ)
-	AC_LIBTOOL_LANG_GCJ_CONFIG
-	;;
-
-      RC)
-	AC_LIBTOOL_LANG_RC_CONFIG
 	;;
 
       *)
@@ -2195,34 +2167,6 @@ AC_DEFUN([_LT_AC_LANG_CXX],
 [AC_REQUIRE([AC_PROG_CXX])
 AC_REQUIRE([AC_PROG_CXXCPP])
 ])# _LT_AC_LANG_CXX
-
-
-# AC_LIBTOOL_GCJ
-# --------------
-# enable support for GCJ libraries
-AC_DEFUN([AC_LIBTOOL_GCJ],
-[AC_REQUIRE([_LT_AC_LANG_GCJ])
-])# AC_LIBTOOL_GCJ
-
-
-# _LT_AC_LANG_GCJ
-# ---------------
-AC_DEFUN([_LT_AC_LANG_GCJ],
-[AC_PROVIDE_IFELSE([AC_PROG_GCJ],[],
-  [AC_PROVIDE_IFELSE([A][M_PROG_GCJ],[],
-    [AC_PROVIDE_IFELSE([LT_AC_PROG_GCJ],[],
-      [ifdef([AC_PROG_GCJ],[AC_REQUIRE([AC_PROG_GCJ])],
-	 [ifdef([A][M_PROG_GCJ],[AC_REQUIRE([A][M_PROG_GCJ])],
-	   [AC_REQUIRE([A][C_PROG_GCJ_OR_A][M_PROG_GCJ])])])])])])
-])# _LT_AC_LANG_GCJ
-
-
-# AC_LIBTOOL_RC
-# --------------
-# enable support for Windows resource files
-AC_DEFUN([AC_LIBTOOL_RC],
-[AC_REQUIRE([AC_PROG_RC])
-])# AC_LIBTOOL_RC
 
 
 # AC_LIBTOOL_LANG_C_CONFIG
@@ -3151,14 +3095,6 @@ CC="$lt_save_CC"
 ])# AC_LIBTOOL_LANG_CXX_CONFIG
 
 
-# AC_LIBTOOL_LANG_GCJ_CONFIG
-# --------------------------
-# Ensure that the configuration vars for the C compiler are
-# suitably defined.  Those variables are subsequently used by
-# AC_LIBTOOL_CONFIG to write the compiler configuration to `libtool'.
-AC_DEFUN([AC_LIBTOOL_LANG_GCJ_CONFIG], [_LT_AC_LANG_GCJ_CONFIG(GCJ)])
-AC_DEFUN([_LT_AC_LANG_GCJ_CONFIG],
-[AC_LANG_SAVE
 
 # Source file extension for C test sources.
 ac_ext=java
@@ -3173,78 +3109,6 @@ lt_simple_compile_test_code="class foo {}"
 # Code to be used in simple link tests
 lt_simple_link_test_code='public class conftest { public static void main(String[] argv) {}; }'
 
-# ltmain only uses $CC for tagged configurations so make sure $CC is set.
-_LT_AC_SYS_COMPILER
-
-# Allow CC to be a program name with arguments.
-lt_save_CC="$CC"
-CC=${GCJ-"gcj"}
-set dummy $CC
-compiler="[$]2"
-_LT_AC_TAGVAR(compiler, $1)=$CC
-
-# GCJ did not exist at the time GCC didn't implicitly link libc in.
-_LT_AC_TAGVAR(archive_cmds_need_lc, $1)=no
-
-## CAVEAT EMPTOR:
-## There is no encapsulation within the following macros, do not change
-## the running order or otherwise move them around unless you know exactly
-## what you are doing...
-AC_LIBTOOL_PROG_COMPILER_NO_RTTI($1)
-AC_LIBTOOL_PROG_COMPILER_PIC($1)
-AC_LIBTOOL_PROG_CC_C_O($1)
-AC_LIBTOOL_SYS_HARD_LINK_LOCKS($1)
-AC_LIBTOOL_PROG_LD_SHLIBS($1)
-AC_LIBTOOL_PROG_LD_HARDCODE_LIBPATH($1)
-AC_LIBTOOL_SYS_LIB_STRIP
-AC_LIBTOOL_SYS_DYNAMIC_LINKER($1)
-AC_LIBTOOL_DLOPEN_SELF($1)
-
-AC_LIBTOOL_CONFIG($1)
-
-AC_LANG_RESTORE
-CC="$lt_save_CC"
-])# AC_LIBTOOL_LANG_GCJ_CONFIG
-
-
-# AC_LIBTOOL_LANG_RC_CONFIG
-# --------------------------
-# Ensure that the configuration vars for the Windows resource compiler are
-# suitably defined.  Those variables are subsequently used by
-# AC_LIBTOOL_CONFIG to write the compiler configuration to `libtool'.
-AC_DEFUN([AC_LIBTOOL_LANG_RC_CONFIG], [_LT_AC_LANG_RC_CONFIG(RC)])
-AC_DEFUN([_LT_AC_LANG_RC_CONFIG],
-[AC_LANG_SAVE
-
-# Source file extension for RC test sources.
-ac_ext=rc
-
-# Object file extension for compiled RC test sources.
-objext=o
-_LT_AC_TAGVAR(objext, $1)=$objext
-
-# Code to be used in simple compile tests
-lt_simple_compile_test_code='sample MENU { MENUITEM "&Soup", 100, CHECKED }'
-
-# Code to be used in simple link tests
-lt_simple_link_test_code="$lt_simple_compile_test_code"
-
-# ltmain only uses $CC for tagged configurations so make sure $CC is set.
-_LT_AC_SYS_COMPILER
-
-# Allow CC to be a program name with arguments.
-lt_save_CC="$CC"
-CC=${RC-"windres"}
-set dummy $CC
-compiler="[$]2"
-_LT_AC_TAGVAR(compiler, $1)=$CC
-_LT_AC_TAGVAR(lt_cv_prog_compiler_c_o, $1)=yes
-
-AC_LIBTOOL_CONFIG($1)
-
-AC_LANG_RESTORE
-CC="$lt_save_CC"
-])# AC_LIBTOOL_LANG_RC_CONFIG
 
 
 # AC_LIBTOOL_CONFIG([TAGNAME])
@@ -5303,15 +5167,6 @@ AC_DEFUN([AM_PROG_NM],        [AC_PROG_NM])
 # This is just to silence aclocal about the macro not being used
 ifelse([AC_DISABLE_FAST_INSTALL])
 
-AC_DEFUN([LT_AC_PROG_GCJ],
-[AC_CHECK_TOOL(GCJ, gcj, no)
-  test "x${GCJFLAGS+set}" = xset || GCJFLAGS="-g -O2"
-  AC_SUBST(GCJFLAGS)
-])
-
-AC_DEFUN([LT_AC_PROG_RC],
-[AC_CHECK_TOOL(RC, windres, no)
-])
 
 ############################################################
 # NOTE: This macro has been submitted for inclusion into   #

@@ -117,12 +117,12 @@ bool Collection::mergeField(Field* newField_) {
 
   // the original field type is kept
   if(currField->type() != newField_->type()) {
-    kdDebug() << "Document::appendCollection() - skipping, field type mismatch for " << currField->title() << endl;
+    kdDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
     return false;
   }
 
   // if field is a Choice, then make sure all values are there
-  if(currField->type() == Field::Choice) {
+  if(currField->type() == Field::Choice && currField->allowed() != newField_->allowed()) {
     QStringList allowed = currField->allowed();
     const QStringList& newAllowed = newField_->allowed();
     for(QStringList::ConstIterator it = newAllowed.begin(); it != newAllowed.end(); ++it) {
@@ -133,7 +133,7 @@ bool Collection::mergeField(Field* newField_) {
     currField->setAllowed(allowed);
   }
 
-  // don't change original format
+  // don't change original format flags
   // don't change original category
   // add new description if current is empty
   if(currField->description().isEmpty()) {

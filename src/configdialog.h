@@ -34,7 +34,7 @@ namespace Bookcase {
  * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h 601 2004-04-10 21:14:02Z robby $
+ * @version $Id: configdialog.h 634 2004-05-01 14:40:38Z robby $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT
@@ -82,6 +82,10 @@ protected:
   void setupBibliographyPage();
 
 protected slots:
+  /**
+   * Called when anything gets changed
+   */
+  void slotModified();
   /**
    * Called when the Ok button is clicked.
    */

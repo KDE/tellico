@@ -29,7 +29,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryeditdialog.h 564 2004-03-20 02:23:33Z robby $
+ * @version $Id: entryeditdialog.h 622 2004-04-22 05:17:09Z robby $
  */
 class EntryEditDialog : public KDialogBase {
 Q_OBJECT
@@ -127,7 +127,7 @@ signals:
    *
    * @param entry A pointer to the entry to be saved
    */
-  void signalSaveEntry(Bookcase::Data::Entry* entry);
+  void signalSaveEntries(const Bookcase::Data::EntryList& entryList);
   /**
    * Signals a desire to clear the global selection
    *

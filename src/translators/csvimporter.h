@@ -36,7 +36,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: csvimporter.h 527 2004-03-11 02:38:36Z robby $
+ * @version $Id: csvimporter.h 633 2004-05-01 03:16:22Z robby $
  */
 class CSVImporter : public TextImporter {
 Q_OBJECT
@@ -54,6 +54,9 @@ public:
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
 
+public slots:
+  void slotActionChanged(int action);
+
 private slots:
   void slotTypeChanged(const QString& name);
   void slotFieldChanged(int idx);
@@ -70,6 +73,7 @@ private:
   void updateHeader(bool force);
 
   Data::Collection* m_coll;
+  Data::Collection* m_existingCollection; // used to grab fields from current collection in window
   CollectionNameMap m_nameMap;
   bool m_firstRowHeader;
   QString m_delimiter;

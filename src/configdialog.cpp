@@ -59,13 +59,15 @@ ConfigDialog::ConfigDialog(QWidget* parent_, const char* name_/*=0*/)
   resize(QMAX(s.width(), CONFIG_MIN_WIDTH),
          QMAX(s.height(), CONFIG_MIN_HEIGHT));
 
+  enableButtonOK(false);
+  enableButtonApply(false);
+
   setHelp(QString::fromLatin1("general-options"));
   connect(this, SIGNAL(aboutToShowPage(QWidget*)), SLOT(slotUpdateHelpLink(QWidget*)));
 }
 
 void ConfigDialog::slotUpdateHelpLink(QWidget* w_) {
-  int idx = pageIndex(w_);
-  switch(idx) {
+  switch(pageIndex(w_)) {
     case 0:
       setHelp(QString::fromLatin1("general-options"));
       break;
@@ -94,6 +96,7 @@ void ConfigDialog::slotOk() {
 
 void ConfigDialog::slotApply() {
   emit signalConfigChanged();
+  enableButtonApply(false);
 }
 
 void ConfigDialog::slotDefault() {
@@ -144,16 +147,19 @@ void ConfigDialog::setupGeneralPage() {
   QWhatsThis::add(m_cbOpenLastFile, i18n("If checked, the file that was last open "
                                          "will be re-opened at program start-up."));
   l->addWidget(m_cbOpenLastFile);
+  connect(m_cbOpenLastFile, SIGNAL(clicked()), SLOT(slotModified()));
 
   m_cbShowTipDay = new QCheckBox(i18n("Show \"Tip of the Day\" at startup"), frame);
   QWhatsThis::add(m_cbShowTipDay, i18n("If checked, the \"Tip of the Day\" will be "
                                        "shown at program start-up."));
   l->addWidget(m_cbShowTipDay);
+  connect(m_cbShowTipDay, SIGNAL(clicked()), SLOT(slotModified()));
 
   m_cbShowCount = new QCheckBox(i18n("Show number of items in group"), frame);
   QWhatsThis::add(m_cbShowCount, i18n("If checked, the number of items in the group "
                                       "will be appended to the group name."));
   l->addWidget(m_cbShowCount);
+  connect(m_cbShowCount, SIGNAL(clicked()), SLOT(slotModified()));
 
   QVGroupBox* formatGroup = new QVGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);
@@ -161,11 +167,13 @@ void ConfigDialog::setupGeneralPage() {
   m_cbCapitalize = new QCheckBox(i18n("Auto capitalize titles and names"), formatGroup);
   QWhatsThis::add(m_cbCapitalize, i18n("If checked, titles and names will "
                                        "be automatically capitalized."));
+  connect(m_cbCapitalize, SIGNAL(clicked()), SLOT(slotModified()));
 
   m_cbFormat = new QCheckBox(i18n("Auto format titles and names"), formatGroup);
   QWhatsThis::add(m_cbFormat, i18n("If checked, titles and names will "
                                    "be automatically formatted."));
-  connect(m_cbFormat, SIGNAL(toggled(bool)), this, SLOT(slotToggleFormatted(bool)));
+  connect(m_cbFormat, SIGNAL(toggled(bool)), SLOT(slotToggleFormatted(bool)));
+  connect(m_cbFormat, SIGNAL(clicked()), SLOT(slotModified()));
 
   QGrid* g1 = new QGrid(2, formatGroup);
   g1->setSpacing(5);
@@ -182,6 +190,7 @@ void ConfigDialog::setupGeneralPage() {
                        "should be separated by a semi-colon.</qt>");
   QWhatsThis::add(l1, whats);
   QWhatsThis::add(m_leArticles, whats);
+  connect(m_leArticles, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   QStringList suffixes = Data::Field::suffixList();
   QLabel* l2 = new QLabel(i18n("Personal suffixes:"), g1);
@@ -193,6 +202,7 @@ void ConfigDialog::setupGeneralPage() {
                "should be separated by a semi-colon.</qt>");
   QWhatsThis::add(l2, whats);
   QWhatsThis::add(m_leSuffixes, whats);
+  connect(m_leSuffixes, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   QStringList prefixes = Data::Field::surnamePrefixList();
   QLabel* l3 = new QLabel(i18n("Surname prefixes:"), g1);
@@ -204,6 +214,7 @@ void ConfigDialog::setupGeneralPage() {
                "should be separated by a semi-colon.</qt>");
   QWhatsThis::add(l3, whats);
   QWhatsThis::add(m_lePrefixes, whats);
+  connect(m_lePrefixes, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   // stretch to fill lower area
   l->addStretch(1);
@@ -219,15 +230,18 @@ void ConfigDialog::setupPrintingPage() {
 
   m_cbPrintFormatted = new QCheckBox(i18n("Format titles and names"), formatOptions);
   QWhatsThis::add(m_cbPrintFormatted, i18n("If checked, titles and names will be automatically formatted."));
+  connect(m_cbPrintFormatted, SIGNAL(clicked()), SLOT(slotModified()));
 
   m_cbPrintHeaders = new QCheckBox(i18n("Print field headers"), formatOptions);
   QWhatsThis::add(m_cbPrintHeaders, i18n("If checked, the field names will be printed as table headers."));
+  connect(m_cbPrintHeaders, SIGNAL(clicked()), SLOT(slotModified()));
 
   QHGroupBox* groupOptions = new QHGroupBox(i18n("Grouping Options"), frame);
   l->addWidget(groupOptions);
 
   m_cbPrintGrouped = new QCheckBox(i18n("Group the entries"), groupOptions);
   QWhatsThis::add(m_cbPrintGrouped, i18n("If checked, the entries will be grouped by the selected field."));
+  connect(m_cbPrintGrouped, SIGNAL(clicked()), SLOT(slotModified()));
 
   QVGroupBox* imageOptions = new QVGroupBox(i18n("Image Options"), frame);
   l->addWidget(imageOptions);
@@ -235,21 +249,23 @@ void ConfigDialog::setupPrintingPage() {
   QGrid* grid = new QGrid(3, imageOptions);
   grid->setSpacing(5);
 
-  QLabel* l1 = new QLabel(i18n("Maximum Image Width:"), grid);
+  QLabel* l1 = new QLabel(i18n("Maximum image width:"), grid);
   m_imageWidthBox = new KIntSpinBox(0, 999, 1, 50, 10, grid);
   m_imageWidthBox->setSuffix(QString::fromLatin1(" px"));
   (void) new QWidget(grid);
   QString whats = i18n("The maximum width of the images in the printout. The aspect ration is preserved.");
   QWhatsThis::add(l1, whats);
   QWhatsThis::add(m_imageWidthBox, whats);
+  connect(m_imageWidthBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
 
-  QLabel* l2 = new QLabel(i18n("Maximum Image Height:"), grid);
+  QLabel* l2 = new QLabel(i18n("Maximum image height:"), grid);
   m_imageHeightBox = new KIntSpinBox(0, 999, 1, 50, 10, grid);
   m_imageHeightBox->setSuffix(QString::fromLatin1(" px"));
   (void) new QWidget(grid);
   whats = i18n("The maximum height of the images in the printout. The aspect ration is preserved.");
   QWhatsThis::add(l2, whats);
   QWhatsThis::add(m_imageHeightBox, whats);
+  connect(m_imageHeightBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
 
   // stretch to fill lower area
   l->addStretch(1);
@@ -263,7 +279,7 @@ void ConfigDialog::setupTemplatePage() {
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QString::fromLatin1("entry-templates/*.xsl"),
                                                         false, true);
   QStringList templates;
-  for(QStringList::Iterator it = files.begin(); it != files.end(); ++it) {
+  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it) {
     QFileInfo fi(*it);
     templates << fi.fileName().section('.', 0, 0);
   }
@@ -279,6 +295,7 @@ void ConfigDialog::setupTemplatePage() {
     KComboBox* cb = new KComboBox(grid);
     cb->insertStringList(templates);
     m_cbTemplates.insert(it.key(), cb);
+    connect(cb, SIGNAL(activated(int)), SLOT(slotModified()));
   }
 
   // stretch to fill lower area
@@ -308,6 +325,7 @@ void ConfigDialog::setupBibliographyPage() {
   } else {
     m_cbBibtexStyle->setCurrentItem(i18n("Quotes"));
   }
+  connect(m_cbBibtexStyle, SIGNAL(activated(int)), SLOT(slotModified()));
 
   QLabel* l2 = new QLabel(i18n("Path to LyX server:"), grid);
   m_leLyxpipe = new KLineEdit(grid);
@@ -315,6 +333,7 @@ void ConfigDialog::setupBibliographyPage() {
                "applications such as Kile or Pybliographer. Do not include the trailing .in suffix.</qt>");
   QWhatsThis::add(l2, whats);
   QWhatsThis::add(m_leLyxpipe, whats);
+  connect(m_leLyxpipe, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   // stretch to fill lower area
   l->addStretch(1);
@@ -369,6 +388,10 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
   config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
   QString lyxpipe = config_->readPathEntry("lyxpipe", QString::fromLatin1("$HOME/.lyx/lyxpipe"));
   m_leLyxpipe->setText(lyxpipe);
+
+  // since all the modified signals got sent...
+  enableButtonOK(false);
+  enableButtonApply(false);
 }
 
 void ConfigDialog::saveConfiguration(KConfig* config_) {
@@ -452,3 +475,7 @@ void ConfigDialog::slotToggleFormatted(bool checked_) {
   m_lePrefixes->setEnabled(checked_);
 }
 
+void ConfigDialog::slotModified() {
+  enableButtonOK(true);
+  enableButtonApply(true);
+}

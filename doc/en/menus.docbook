@@ -9,70 +9,557 @@ menus or toolbars. This may not be necessary for small apps or apps with no tool
 or menu bars.
 -->
 
-<sect1 id="mainwindow">
-<title>The main &bookcase; window</title>
+<sect1 id="main-window-menus">
+<title>The Main &bookcase; Window</title>
 
-<para></para>
+<para>Each menu item is discussed below. When there is a keyboard shortcut that
+performs a menu item function, the default shortcut is listed with the menu item.
+</para>
 
 <sect2>
-<title>The File Menu</title>
+<title>The <guimenu>File</guimenu> Menu</title>
+
 <para>
 <variablelist>
+
 <varlistentry>
-<term><menuchoice>
-<shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>n</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>New</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Creates a new document</action></para></listitem>
+<term>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>New</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>creates a new collection</action>. &bookcase; supports <link linkend="collection-types">nine default collection types</link> along with an empty user-defined custom collection.</para>
+</listitem>
 </varlistentry>
+
 <varlistentry>
-<term><menuchoice>
-<shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>s</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Save</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Saves the document</action></para></listitem>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>o</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Open...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens a &bookcase; file</action>.</para>
+</listitem>
 </varlistentry>
+
 <varlistentry>
-<term><menuchoice>
-<shortcut>
-<keycombo><keycap>Ctrl</keycap><keycap>q</keycap></keycombo>
-</shortcut>
-<guimenu>File</guimenu>
-<guimenuitem>Quit</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Quits</action> &bookcase;</para></listitem>
+<term>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Open Recent</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens a file</action> from a submenu
+that contains a list of recently opened files.</para>
+</listitem>
 </varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>s</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Save...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>saves the collection</action>. If the file is
+<emphasis>Untitled</emphasis> then <guimenuitem>Save...</guimenuitem> is equivalent to
+<guimenuitem>Save As</guimenuitem>. It is only enabled when the collection has been
+modified.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Save As...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>saves the collection to a new file</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>p</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Print...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>prints the collection</action>. Printing options may be set in the <link linkend="printing-options">&config-dialog;</link>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Import</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>imports data from another file</action>. &bookcase; can import data from a number of <link linkend="importing">other formats</link>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>File</guimenu>
+  <guimenuitem>Export</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>exports the collection to another format</action>. &bookcase; can export data to a number of <link linkend="exporting">other formats</link>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>q</keycap></keycombo>
+  </shortcut>
+  <guimenu>File</guimenu>
+  <guimenuitem>Quit</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>closes the &bookcase; window</action>. If the collection has unsaved changes, you will be prompted to save them before continuing.</para>
+</listitem>
+</varlistentry>
+
 </variablelist>
 </para>
 </sect2>
 
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
-<title>The Edit Menu</title>
+<title>The <guimenu>Edit</guimenu> Menu</title>
+
 <para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>x</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Cut</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>removes the selected text</action>, if any, and <action>places a copy of the removed text in the clipboard</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>x</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Copy</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>copies the selected text</action>, if any, to the clipboard.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>v</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Paste</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>pastes the text in the clipboard</action>,if any, into the editor at the cursor position.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>a</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Select All</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>selects all the entries</action> in the collection, in the &detailed-view;.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>Shift</keycap><keycap>a</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Deselect</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>deselects all the entries</action> in the collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>f</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Find...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &find-dialog;</action> to search the collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>F3</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Find Next</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>finds the next occurrence</action> of the text which was searched for previously.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>Shift</keycap><keycap>F3</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Find Previous</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>finds the previous occurrence</action> of the text which was searched for previously.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
 </para>
 </sect2>
 
 <sect2>
-<title>The Collection Menu</title>
+<title>The <guimenu>Collection</guimenu> Menu</title>
 <para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>n</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>New Entry</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &entry-editor; to edit a new entry</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>e</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Edit Entry</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &entry-editor; to edit the selected entries</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>y</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Copy Entry</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>copies the selected entries</action> as new entries in the collection.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>d</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Delete Entry</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>deletes the selected entries</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>r</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Rename Collection</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens a dialog box for renaming the collection</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>u</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Collection Fields...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &fields-dialog;</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Convert to Bibliography</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>converts a book collection to a bibliography</action> by adding certain fields necessary for Bibtex export, and it is only enabled when a book collection is opened.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>String Macros...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens a dialog box for editing the Bibtex string macros</action> in the collection and is specific to bibliographies.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Cite Entry</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>sends a citation for the selected entries</action> to the so-called <emphasis><link linkend="bibtex-options">lyxpipe</link></emphasis> for use in <application>LyX</application>, <application>Kile</application>, or other LaTeX applications.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
 </para>
 </sect2>
 
 <sect2>
-<title>The Settings Menu</title>
+<title>The <guimenu>Settings</guimenu> Menu</title>
 <para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Settings</guimenu>
+  <guimenuitem>Toolbars</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action></action>..</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
 </para>
 </sect2>
 
 <sect2>
-<title>The Help Menu</title>
+<title>The <guimenu>Help</guimenu> Menu</title>
 <para>
+
+<variablelist>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Help</guimenu>
+  <guimenuitem>&bookcase; Handbook</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &bookcase; Handbook</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Shift;</keycap><keycap>F1</keycap></keycombo>
+  </shortcut>
+  <guimenu>Help</guimenu>
+  <guimenuitem>What's This?</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>changes the mouse cursor to an arrow with a question mark</action>. Clicking on items in the window will show a small tooltip (if one exists for that item) explaining what the item does.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Help</guimenu>
+  <guimenuitem>Tip of the Day</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the Tip of the Day dialog</action>. You can page through all the tips by using the buttons on the dialog.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Help</guimenu>
+  <guimenuitem>Report Bug...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>open the Submit Bug Report dialog</action>. If you find
+a bug or a problem, if you have a suggestion for improvement, or a translation correction, use this interface to send the author an email.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Help</guimenu>
+  <guimenuitem>About &bookcase;</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the About &bookcase; dialog</action>, showing version and author information for the application.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Help</guimenu>
+  <guimenuitem>About &kde;</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the About &kde; dialog</action>, showing the &kde; version and other information about the desktop environment.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
 </para>
 </sect2>
 

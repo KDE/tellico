@@ -21,6 +21,7 @@
 #include <kiconloader.h>
 #include <kaccelmanager.h>
 #include <kdeversion.h>
+#include <kapplication.h> // for cursor
 
 #include <qlayout.h>
 #include <qstringlist.h>
@@ -271,11 +272,11 @@ void EntryEditDialog::slotHandleSave() {
     }
   }
 
+  kapp->setOverrideCursor(Qt::waitCursor);
   Data::FieldListIterator fIt(m_currColl->fieldList());
+  // boolean to keep track if every possible field is empty
+  bool empty = true;
   for(Data::EntryListIterator entryIt(m_currEntries); entryIt.current(); ++entryIt) {
-    // boolean to keep track if every possible field is empty
-    bool empty = true;
-
     for(fIt.toFirst(); fIt.current(); ++fIt) {
       QString key = QString::number(m_currColl->id()) + fIt.current()->name();
       FieldWidget* widget = m_widgetDict.find(key);
@@ -288,13 +289,15 @@ void EntryEditDialog::slotHandleSave() {
         }
       }
     }
-
-    // if something was not empty, signal a save
-    if(!empty) {
-      m_isOrphan = false;
-      emit signalSaveEntry(entryIt.current());
-    }
   }
+
+  // if something was not empty, signal a save
+  if(!empty) {
+    m_isOrphan = false;
+    emit signalSaveEntries(m_currEntries);
+  }
+
+  kapp->restoreOverrideCursor();
   m_modified = false;
   m_isSaving = false;
   enableButton(User1, false);

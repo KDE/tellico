@@ -32,7 +32,7 @@ namespace Bookcase {
 
 /**
  * @author Robby Stephenson
- * @version $Id: importdialog.h 615 2004-04-17 20:32:47Z robby $
+ * @version $Id: importdialog.h 633 2004-05-01 03:16:22Z robby $
  */
 class ImportDialog : public KDialogBase {
 Q_OBJECT
@@ -62,6 +62,9 @@ public:
 
   static QString fileFilter(ImportFormat format);
   static bool selectFileFirst(ImportFormat format);
+
+private slots:
+  void slotUpdateAction();
 
 private:
   Import::Importer* importer(ImportFormat format, const KURL& url);
