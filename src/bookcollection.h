@@ -52,7 +52,7 @@
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: bookcollection.h,v 1.2 2003/03/08 18:24:47 robby Exp $
+ * @version $Id: bookcollection.h,v 1.3 2003/03/19 04:59:52 robby Exp $
  */
 class BookCollection : public BCCollection  {
 Q_OBJECT
@@ -71,6 +71,8 @@ public:
 
   static QStringList defaultViewAttributes();
   static QStringList defaultPrintAttributes();
+  static QString defaultTitle();
+  static QString defaultUnitTitle();
 };
 
 #endif

@@ -392,19 +392,21 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   QString articlesStr = m_leArticles->text().replace(QRegExp(QString::fromLatin1("\\s*,\\s*")),
                                                      QString::fromLatin1(","));
   QStringList articles = QStringList::split(QString::fromLatin1(","), articlesStr, false);
-  if(!articles.isEmpty()) {
+// ok for articles to be empty
+//  if(!articles.isEmpty()) {
     config_->writeEntry("Articles", articles, ',');
     BCAttribute::setArticleList(articles);
-  }
+//  }
 
   // there might be spaces before or after the commas in the lineedit box
   QString suffixesStr = m_leSuffixes->text().replace(QRegExp(QString::fromLatin1("\\s*,\\s*")),
                                                      QString::fromLatin1(","));
   QStringList suffixes = QStringList::split(QString::fromLatin1(","), suffixesStr, false);
-  if(!suffixes.isEmpty()) {
+// ok to be empty
+//  if(!suffixes.isEmpty()) {
     config_->writeEntry("Name Suffixes", suffixes, ',');
     BCAttribute::setSuffixList(suffixes);
-  }
+//  }
 
   config_->setGroup("Printing");
   config_->writeEntry("Print Field Headers", m_cbPrintHeaders->isChecked());

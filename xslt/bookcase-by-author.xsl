@@ -7,13 +7,13 @@
    ================================================================
    Bookcase XSLT file - sort by author
 
-   $Id: bookcase-by-author.xsl,v 1.7 2003/03/15 06:33:31 robby Exp $
+   $Id: bookcase-by-author.xsl,v 1.8 2003/03/22 02:22:53 robby Exp $
 
-   Copyright (c) 2002 Robby Stephenson
+   Copyright (c) 2003 Robby Stephenson
 
    This XSLT stylesheet is designed to be used with XML data files
    from the 'bookcase' application, which can be found at:
-   http://periapsis.org/bookcase/
+   http://www.periapsis.org/bookcase/
    ================================================================
 -->
 

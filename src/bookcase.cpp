@@ -451,14 +451,18 @@ void Bookcase::readOptions() {
   bool showCount = m_config->readBoolEntry("Show Group Count", false);
   m_groupView->showCount(showCount);
 
-  QStringList articles = m_config->readListEntry("Articles", ',');
-  if(articles.isEmpty()) {
+  QStringList articles;
+  if(m_config->hasKey("Articles")) {
+    articles = m_config->readListEntry("Articles", ',');
+  } else {
     articles = BCAttribute::defaultArticleList();
   }
   BCAttribute::setArticleList(articles);
 
-  QStringList suffixes = m_config->readListEntry("Name Suffixes", ',');
-  if(suffixes.isEmpty()) {
+  QStringList suffixes;
+  if(m_config->hasKey("Name Suffixes")) {
+    suffixes = m_config->readListEntry("Name Suffixes", ',');
+  } else {
     suffixes = BCAttribute::defaultSuffixList();
   }
   BCAttribute::setSuffixList(suffixes);
@@ -566,7 +570,8 @@ void Bookcase::slotFileOpen() {
     filter += i18n("*.xml|XML files (*.xml)");
     filter += QString::fromLatin1("\n");
     filter += i18n("*|All files");
-    KURL url = KFileDialog::getOpenURL(QString::null, filter,
+    // keyword 'open'
+    KURL url = KFileDialog::getOpenURL(QString::fromLatin1(":open"), filter,
                                        this, i18n("Open File..."));
     if(!url.isEmpty()) {
       slotFileOpen(url);
@@ -664,7 +669,8 @@ void Bookcase::slotFileSaveAs() {
   filter += i18n("*.xml|XML files (*.xml)");
   filter += QString::fromLatin1("\n");
   filter += i18n("*|All files");
-  KURL url = KFileDialog::getSaveURL(QString::null, filter,
+  // keyword 'open'
+  KURL url = KFileDialog::getSaveURL(QString::fromLatin1(":open"), filter,
                                      this, i18n("Save as..."));
   if(!url.isEmpty()) {
     m_doc->saveDocument(url);
@@ -700,11 +706,16 @@ void Bookcase::slotFilePrint() {
    // make sure to add "bc" namespace
    handler.addStringParam("sort-name", QString(QString::fromLatin1("bc:")+sortby).utf8());
   } else {
-   // this is needed since the styelsheet has a default value
+   // this is needed since the stylesheet has a default value
    handler.addStringParam("sort-name", "");
   }
   
   handler.addStringParam("doc-url", m_doc->URL().fileName().utf8());
+
+  // TODO: fix for multiple collections
+  QString sortTitle = m_doc->collectionById(0)->attributeTitleByName(sortby).lower();
+  QString sortString = i18n("(sorted by %1)").arg(sortTitle);
+  handler.addStringParam("sort-title", sortString.utf8());
 
   bool printHeaders = m_config->readBoolEntry("Print Field Headers", false);
   if(printHeaders) {
@@ -1131,7 +1142,8 @@ void Bookcase::slotImportBibtex() {
   QString filter = i18n("*.bib|Bibtex files (*.bib)");
   filter += QString::fromLatin1("\n");
   filter += i18n("*|All files");
-  KURL infile = KFileDialog::getOpenURL(QString::null, filter,
+  // use keyword import
+  KURL infile = KFileDialog::getOpenURL(QString::fromLatin1(":import"), filter,
                                         this, i18n("Import from Bibtex..."));
   if(infile.isEmpty()) {
     return;
@@ -1165,7 +1177,8 @@ void Bookcase::slotImportBibtexml() {
   QString filter = i18n("*.xml|Bibtexml files (*.xml)");
   filter += QString::fromLatin1("\n");
   filter += i18n("*|All files");
-  KURL infile = KFileDialog::getOpenURL(QString::null, filter,
+  // keyword 'import'
+  KURL infile = KFileDialog::getOpenURL(QString::fromLatin1(":import"), filter,
                                         this, i18n("Import from Bibtexml..."));
 
   if(infile.isEmpty()) {
@@ -1175,6 +1188,13 @@ void Bookcase::slotImportBibtexml() {
   XSLTHandler handler(xsltfile);
   
   QDomDocument* inputDom = m_doc->readDocument(infile);
+  // readDocument() has its own error messages
+  if(!inputDom || inputDom->isNull()) {
+    kdDebug() << "slotImportBibtexml() - null QDomDocument!" << endl;
+    delete inputDom;
+    return;
+  }
+  
   QString text = handler.applyStylesheet(inputDom->toString());
   delete inputDom;
   if(text.isEmpty()) {
@@ -1212,7 +1232,7 @@ void Bookcase::slotExportXSLT() {
   QString filter = i18n("*.xsl|XSLT files (*.xsl)");
   filter += QString::fromLatin1("\n");
   filter += i18n("*|All files");
-  KURL xsltfile = KFileDialog::getOpenURL(QString::null, filter,
+  KURL xsltfile = KFileDialog::getOpenURL(QString::fromLatin1(":export"), filter,
                                           this, i18n("Select XSLT file..."));
   if(xsltfile.isEmpty()) {
     slotStatusMsg(i18n("Ready."));
@@ -1229,7 +1249,7 @@ void Bookcase::slotExportXSLT() {
     return;
   }
 
-  KURL url = KFileDialog::getSaveURL(QString::null,
+  KURL url = KFileDialog::getSaveURL(QString::fromLatin1(":export"),
                                      i18n("*|All files"),
                                      this, i18n("Export..."));
   if(!url.isEmpty()) {
@@ -1256,7 +1276,8 @@ bool Bookcase::exportUsingXSLT(const QString& xsltFileName_, const QString& filt
     return false;
   }
 
-  KURL url = KFileDialog::getSaveURL(QString::null, filter_,
+  // use keyword 'export'
+  KURL url = KFileDialog::getSaveURL(QString::fromLatin1(":export"), filter_,
                                      this, i18n("Export..."));
   if(url.isEmpty()) {
     return false;

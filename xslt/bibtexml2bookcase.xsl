@@ -11,13 +11,13 @@
    ================================================================
    Bookcase XSLT file - used for importing from bibtexml format
 
-   $Id: bibtexml2bookcase.xsl,v 1.7 2003/03/15 06:33:31 robby Exp $
+   $Id: bibtexml2bookcase.xsl,v 1.9 2003/03/22 02:22:53 robby Exp $
 
-   Copyright (c) 2002 Robby Stephenson
+   Copyright (c) 2003 Robby Stephenson
 
    This XSLT stylesheet is designed to be used with XML data files
    from the 'Bookcase' application, which can be found at:
-   http://periapsis.org/bookcase/
+   http://www.periapsis.org/bookcase/
    ================================================================
 -->
 
@@ -41,8 +41,8 @@
 
 <xsl:template match="bibtexml:file">
  <bookcase version="{$current-syntax}">
- <!-- any way not to have to put defaults here? -->
-  <collection unitTitle="Book" title="My Books" unit="book">
+ <!-- if title is empty, then Bookcase uses default -->
+  <collection title="" unit="book">
   <!-- want to store key (id) values -->
   <!-- type = "5" is BCAttribute::ReadOnly -->
    <attribute name="bibtex-id" type="5" flags="1" description="BibTex ID"/>
@@ -64,7 +64,8 @@
 
 <xsl:template match="bibtexml:title|bibtexml:publisher|bibtexml:isbn|bibtexml:lccn|bibtexml:edition|bibtexml:series|bibtexml:price">
  <xsl:element name="{local-name()}">
-  <xsl:value-of select="."/>
+<!--  <xsl:value-of select="."/> -->
+  <xsl:call-template name="clean-up-entry"/>
  </xsl:element>
 </xsl:template>
 
@@ -72,7 +73,9 @@
  <authors>
   <xsl:for-each select="str:tokenize(., ';,')">
    <author>
-    <xsl:value-of select="normalize-space()"/>
+    <xsl:call-template name="clean-up-entry">
+     <xsl:with-param name="norm-space" select="true()"/>
+    </xsl:call-template>
    </author>
   </xsl:for-each>
  </authors>
@@ -81,14 +84,14 @@
 <xsl:template match="bibtexml:year">
  <cr_years>
   <cr_year>
-   <xsl:value-of select="."/>
+   <xsl:call-template name="clean-up-entry"/>
   </cr_year>
  </cr_years>
 </xsl:template>
 
 <xsl:template match="bibtexml:number">
  <series_num>
-  <xsl:value-of select="."/>
+  <xsl:call-template name="clean-up-entry"/>
  </series_num>
 </xsl:template>
 
@@ -106,7 +109,9 @@
  <languages>
   <xsl:for-each select="str:tokenize(., ',')">
    <language>
-    <xsl:value-of select="normalize-space()"/>
+    <xsl:call-template name="clean-up-entry">
+     <xsl:with-param name="norm-space" select="true()"/>
+    </xsl:call-template>
    </language>
   </xsl:for-each>
  </languages>
@@ -116,6 +121,25 @@
  <comments>
   <xsl:value-of select="."/>
  </comments>
+</xsl:template>
+
+<!-- remove braces, backslashes, and quotes -->
+<xsl:template name="clean-up-entry">
+ <!-- should normalize-space be called? -->
+ <xsl:param name="norm-space" select="false()"/>
+ 
+ <xsl:variable name="temp">
+  <xsl:choose>
+   <xsl:when test="$norm-space">
+    <xsl:value-of select="normalize-space(.)"/>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="."/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:variable>
+ 
+ <xsl:value-of select="translate($temp, '{}\&quot;', '')"/>
 </xsl:template>
 
 </xsl:stylesheet>

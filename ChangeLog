@@ -1,3 +1,17 @@
+2003-03-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Bookcase version 0.5.2
+
+2003-03-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Added German translation from Gerrit M. Albrecht
+	* Fixed bugs with empty suffix and article list
+	* Fixed some i18n issues
+
+2003-03-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Hungarian translation from Marcel Hilzinger
+
 2003-03-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed types and compile problems. Thanks, Dre!

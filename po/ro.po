@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-03-14 21:19-0800\n"
+"POT-Creation-Date: 2003-03-21 22:43-0800\n"
 "PO-Revision-Date: 2002-12-03 17:29-0800\n"
 "Last-Translator: Iulian Ursache <iulianu@cs.tuiasi.ro>\n"
 "Language-Team: Română <ro@li.org>\n"
@@ -61,7 +61,7 @@ msgstr "Pliază toate grupurile"
 msgid "Delete Book"
 msgstr "Şterge carte"
 
-#: bcgroupview.cpp:399
+#: bcgroupview.cpp:393
 msgid "New Collection Name"
 msgstr "Nume nou colecţie"
 
@@ -79,6 +79,7 @@ msgid "Duplicate Book"
 msgstr "Şterge carte"
 
 #: bcuniteditwidget.cpp:67 bcuniteditwidget.cpp:88 bcuniteditwidget.cpp:413
+#: bcuniteditwidget.cpp:548
 msgid "Enter Book"
 msgstr "Introdu carte"
 
@@ -95,17 +96,17 @@ msgstr ""
 "Fişierul curent a fost modificat.\n"
 "Doriţi să îl salvaţi?"
 
-#: bcuniteditwidget.cpp:547 bookcasedoc.cpp:340
+#: bcuniteditwidget.cpp:547 bookcasedoc.cpp:346
 msgid "Warning!"
 msgstr "Atenţie!"
 
-#: bookcase.cpp:105 bookcase.cpp:557 bookcase.cpp:575 bookcase.cpp:588
-#: bookcase.cpp:601 bookcase.cpp:648 bookcase.cpp:675 bookcase.cpp:682
-#: bookcase.cpp:741 bookcase.cpp:749 bookcase.cpp:759 bookcase.cpp:765
-#: bookcase.cpp:771 bookcase.cpp:777 bookcase.cpp:808 bookcase.cpp:821
-#: bookcase.cpp:836 bookcase.cpp:1096 bookcase.cpp:1108 bookcase.cpp:1115
-#: bookcase.cpp:1127 bookcase.cpp:1154 bookcase.cpp:1201 bookcase.cpp:1208
-#: bookcase.cpp:1218 bookcase.cpp:1239
+#: bookcase.cpp:105 bookcase.cpp:557 bookcase.cpp:576 bookcase.cpp:589
+#: bookcase.cpp:602 bookcase.cpp:649 bookcase.cpp:677 bookcase.cpp:684
+#: bookcase.cpp:748 bookcase.cpp:756 bookcase.cpp:766 bookcase.cpp:772
+#: bookcase.cpp:778 bookcase.cpp:784 bookcase.cpp:815 bookcase.cpp:828
+#: bookcase.cpp:843 bookcase.cpp:1101 bookcase.cpp:1113 bookcase.cpp:1120
+#: bookcase.cpp:1132 bookcase.cpp:1160 bookcase.cpp:1217 bookcase.cpp:1224
+#: bookcase.cpp:1234 bookcase.cpp:1255
 msgid "Ready."
 msgstr "Gata."
 
@@ -235,15 +236,15 @@ msgstr "Ies..."
 msgid "Creating new document..."
 msgstr "Creez documentul nou..."
 
-#: bookcase.cpp:561 bookcase.cpp:579 bookcase.cpp:592
+#: bookcase.cpp:561 bookcase.cpp:580 bookcase.cpp:593
 msgid "Opening file..."
 msgstr "Deschid fişierul..."
 
-#: bookcase.cpp:564 bookcase.cpp:662
+#: bookcase.cpp:564 bookcase.cpp:663
 msgid "*.bc|Bookcase files (*.bc)"
 msgstr ""
 
-#: bookcase.cpp:566 bookcase.cpp:664
+#: bookcase.cpp:566 bookcase.cpp:665
 #, fuzzy
 msgid "*.xml|XML files (*.xml)"
 msgstr ""
@@ -251,98 +252,102 @@ msgstr ""
 "*.xml|Fişiere XML (*.xml)\n"
 "*|Toate fişierele"
 
-#: bookcase.cpp:568 bookcase.cpp:666 bookcase.cpp:1104 bookcase.cpp:1123
-#: bookcase.cpp:1135 bookcase.cpp:1169 bookcase.cpp:1214 bookcase.cpp:1233
+#: bookcase.cpp:568 bookcase.cpp:667 bookcase.cpp:1109 bookcase.cpp:1128
+#: bookcase.cpp:1140 bookcase.cpp:1175 bookcase.cpp:1230 bookcase.cpp:1249
 msgid "*|All files"
 msgstr ""
 
-#: bookcase.cpp:570
+#: bookcase.cpp:571
 msgid "Open File..."
 msgstr "Deschide fişier..."
 
-#: bookcase.cpp:638
+#: bookcase.cpp:639
 msgid "Saving file..."
 msgstr "Salvez fişierul..."
 
-#: bookcase.cpp:660
+#: bookcase.cpp:661
 msgid "Saving file with a new filename..."
 msgstr "Salvez fişierul sub un nou nume..."
 
-#: bookcase.cpp:668
+#: bookcase.cpp:670
 msgid "Save as..."
 msgstr ""
 
-#: bookcase.cpp:679 bookcase.cpp:746
+#: bookcase.cpp:681 bookcase.cpp:753
 msgid "Printing..."
 msgstr "Imprim..."
 
-#: bookcase.cpp:737
+#: bookcase.cpp:713
+msgid "(sorted by %1)"
+msgstr ""
+
+#: bookcase.cpp:744
 #, fuzzy
 msgid "Processing document..."
 msgstr "Creez documentul nou..."
 
-#: bookcase.cpp:753
+#: bookcase.cpp:760
 msgid "Exiting..."
 msgstr "Ies..."
 
-#: bookcase.cpp:763
+#: bookcase.cpp:770
 msgid "Cutting selection..."
 msgstr "Tai selecţia..."
 
-#: bookcase.cpp:769
+#: bookcase.cpp:776
 msgid "Copying selection to clipboard..."
 msgstr "Copii selecţia în clipboard..."
 
-#: bookcase.cpp:775
+#: bookcase.cpp:782
 msgid "Inserting clipboard contents..."
 msgstr "Inserez conţinutul clipboard-ului..."
 
-#: bookcase.cpp:800
+#: bookcase.cpp:807
 msgid "Toggling toolbar..."
 msgstr "Comut bara de unelte..."
 
-#: bookcase.cpp:813
+#: bookcase.cpp:820
 msgid "Toggle the statusbar..."
 msgstr "Comut bara de stare..."
 
-#: bookcase.cpp:826
+#: bookcase.cpp:833
 msgid "Toggling collection toolbar..."
 msgstr "Comut bara de colecţii..."
 
-#: bookcase.cpp:873
+#: bookcase.cpp:880
 #, fuzzy
 msgid "%1 Total"
 msgstr "Total"
 
-#: bookcase.cpp:1052
+#: bookcase.cpp:1059
 msgid "Page %1"
 msgstr "Pagina %1"
 
-#: bookcase.cpp:1080
+#: bookcase.cpp:1086
 #, fuzzy
 msgid "Bookcase encountered an error in XSLT processing.\n"
 msgstr ""
 "Eroare în procesarea XSLT.\n"
 "Vă rog verificaţi instalarea."
 
-#: bookcase.cpp:1081 bookcase.cpp:1088
+#: bookcase.cpp:1087 bookcase.cpp:1093
 #, fuzzy
 msgid "Please check your installation."
 msgstr ""
 "Eroare în procesarea XSLT.\n"
 "Vă rog verificaţi instalarea."
 
-#: bookcase.cpp:1087
+#: bookcase.cpp:1092
 #, fuzzy
 msgid "Bookcase is unable to find a required file - %1.\n"
 msgstr "Nu pot deschide fişierul - %1."
 
-#: bookcase.cpp:1093 bookcase.cpp:1112 bookcase.cpp:1205
+#: bookcase.cpp:1098 bookcase.cpp:1117 bookcase.cpp:1221
 #, fuzzy
 msgid "Exporting..."
 msgstr "Ies..."
 
-#: bookcase.cpp:1102 bookcase.cpp:1133
+#: bookcase.cpp:1107 bookcase.cpp:1138
 #, fuzzy
 msgid "*.bib|Bibtex files (*.bib)"
 msgstr ""
@@ -350,7 +355,7 @@ msgstr ""
 "*.xml|Fişiere XML (*.xml)\n"
 "*|Toate fişierele"
 
-#: bookcase.cpp:1121 bookcase.cpp:1167
+#: bookcase.cpp:1126 bookcase.cpp:1173
 #, fuzzy
 msgid "*.xml|Bibtexml files (*.xml)"
 msgstr ""
@@ -358,24 +363,24 @@ msgstr ""
 "*.xml|Fişiere XML (*.xml)\n"
 "*|Toate fişierele"
 
-#: bookcase.cpp:1131
+#: bookcase.cpp:1136
 msgid "Importing from Bibtex..."
 msgstr ""
 
-#: bookcase.cpp:1137
+#: bookcase.cpp:1143
 #, fuzzy
 msgid "Import from Bibtex..."
 msgstr "Imprim..."
 
-#: bookcase.cpp:1158
+#: bookcase.cpp:1164
 msgid "Importing from Bibtexml..."
 msgstr ""
 
-#: bookcase.cpp:1171
+#: bookcase.cpp:1178
 msgid "Import from Bibtexml..."
 msgstr ""
 
-#: bookcase.cpp:1212
+#: bookcase.cpp:1228
 #, fuzzy
 msgid "*.xsl|XSLT files (*.xsl)"
 msgstr ""
@@ -383,11 +388,11 @@ msgstr ""
 "*.xml|Fişiere XML (*.xml)\n"
 "*|Toate fişierele"
 
-#: bookcase.cpp:1216
+#: bookcase.cpp:1232
 msgid "Select XSLT file..."
 msgstr ""
 
-#: bookcase.cpp:1234 bookcase.cpp:1260
+#: bookcase.cpp:1250 bookcase.cpp:1277
 #, fuzzy
 msgid "Export..."
 msgstr "Ies..."
@@ -412,21 +417,29 @@ msgstr "Nu pot deschide fişierul - %1."
 msgid "Bookcase is unable to read the file - %1."
 msgstr "Nu pot deschide fişierul - %1."
 
-#: bookcasedoc.cpp:125 bookcasedoc.cpp:137 bookcasedoc.cpp:167
-#: bookcasedoc.cpp:179 bookcasedoc.cpp:185
+#: bookcasedoc.cpp:125 bookcasedoc.cpp:138 bookcasedoc.cpp:173
+#: bookcasedoc.cpp:185 bookcasedoc.cpp:191
 #, fuzzy
 msgid "Bookcase is unable to load the file - %1."
 msgstr "Nu pot deschide fişierul - %1."
 
-#: bookcasedoc.cpp:187
+#: bookcasedoc.cpp:139
+msgid "There is an XML parsing error in line %1, column %1."
+msgstr ""
+
+#: bookcasedoc.cpp:141
+msgid "The error message from Qt is:"
+msgstr ""
+
+#: bookcasedoc.cpp:193
 msgid "It is from a future version of Bookcase."
 msgstr ""
 
-#: bookcasedoc.cpp:241
+#: bookcasedoc.cpp:247
 msgid "Unknown"
 msgstr "necunoscut"
 
-#: bookcasedoc.cpp:338
+#: bookcasedoc.cpp:344
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
@@ -434,30 +447,30 @@ msgstr ""
 "Fişierul curent a fost modificat.\n"
 "Doriţi să îl salvaţi?"
 
-#: bookcasedoc.cpp:387
+#: bookcasedoc.cpp:395
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 
-#: bookcasedoc.cpp:390
+#: bookcasedoc.cpp:398
 msgid "Overwrite File?"
 msgstr ""
 
-#: bookcasedoc.cpp:391
+#: bookcasedoc.cpp:399
 msgid "Overwrite"
 msgstr ""
 
-#: bookcasedoc.cpp:417
+#: bookcasedoc.cpp:426
 #, fuzzy
 msgid "Bookcase is unable to upload the file - %1."
 msgstr "Nu pot deschide fişierul - %1."
 
-#: bookcasedoc.cpp:438
+#: bookcasedoc.cpp:447
 #, fuzzy
 msgid "Bookcase is unable to write the file - %1."
 msgstr "Nu pot deschide fişierul - %1."
 
-#: bookcasedoc.cpp:935
+#: bookcasedoc.cpp:945
 msgid "Search string '%1' not found."
 msgstr ""
 
@@ -620,11 +633,11 @@ msgstr "Fişierul de deschis"
 msgid "Bookcase"
 msgstr "Bookcase"
 
-#: bookcollection.h:67
+#: bookcollection.h:67 bookcollection.cpp:175
 msgid "My Books"
 msgstr "Cărţile mele"
 
-#: bookcollection.cpp:20
+#: bookcollection.cpp:20 bookcollection.cpp:179
 msgid "Books"
 msgstr "Cărţi"
 
@@ -958,16 +971,12 @@ msgstr "DivX"
 msgid "Medium"
 msgstr "Suport"
 
-#: bcgroupview.moc.cpp:34 bcgroupview.moc.cpp:42
-msgid "BCGroupView"
-msgstr ""
-
 #: videocollection.h:47
 msgid "My Videos"
 msgstr "Filmele mele"
 
-#: bctabcontrol.moc.cpp:34 bctabcontrol.moc.cpp:42
-msgid "BCTabControl"
+#: bcgroupview.moc.cpp:34 bcgroupview.moc.cpp:42
+msgid "BCGroupView"
 msgstr ""
 
 #: songcollection.h:48
@@ -994,6 +1003,10 @@ msgstr "CD"
 #: songcollection.cpp:46
 msgid "Cassette"
 msgstr "Casetă"
+
+#: bctabcontrol.moc.cpp:34 bctabcontrol.moc.cpp:42
+msgid "BCTabControl"
+msgstr ""
 
 #: bcuniteditwidget.moc.cpp:34 bcuniteditwidget.moc.cpp:42
 msgid "BCUnitEditWidget"

@@ -170,3 +170,12 @@ QStringList BookCollection::defaultPrintAttributes() {
   names += QString::fromLatin1("isbn");
   return names;
 }
+
+QString BookCollection::defaultTitle() {
+  return i18n("My Books");
+}
+
+QString BookCollection::defaultUnitTitle() {
+  return i18n("Books");
+}
+

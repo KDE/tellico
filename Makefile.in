@@ -455,7 +455,7 @@ distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
 #>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 4
-KDE_DIST=configure.files stamp-h3 Makefile.dist configure.in.in autogen.sh stamp-h.in subdirs bookcase.kdevprj Bookcase.kdevses Bookcase.kdevelop bookcase.kdevses 
+KDE_DIST=configure.files stamp-h3 Makefile.dist configure.in.in autogen.sh stamp-h.in subdirs bookcase.kdevprj 
 
 DISTFILES= $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
 

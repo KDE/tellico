@@ -18,6 +18,7 @@
 
 #include <kio/netaccess.h>
 #include <kio/job.h>
+#include <kdebug.h>
 
 //extern int xmlLoadExtDtdDefaultValue;
 
@@ -39,11 +40,13 @@ static void closeQString(void* context) {
   *t += QString::fromLatin1("\n");
 }
 
-XSLTHandler::XSLTHandler(const QString& xsltFilename_) : m_numParams(0) {
+XSLTHandler::XSLTHandler(const QString& xsltFilename_) : m_stylesheet(0), m_docIn(0),
+                                                         m_docOut(0), m_numParams(0) {
   readStylesheet(xsltFilename_);
 }
 
-XSLTHandler::XSLTHandler(const KURL& xsltURL_) : m_numParams(0) {
+XSLTHandler::XSLTHandler(const KURL& xsltURL_) : m_stylesheet(0), m_docIn(0),
+                                                 m_docOut(0), m_numParams(0) {
   if(xsltURL_.isLocalFile()) {
     readStylesheet(xsltURL_.path());
     return;
@@ -58,10 +61,17 @@ XSLTHandler::XSLTHandler(const KURL& xsltURL_) : m_numParams(0) {
 }
 
 XSLTHandler::~XSLTHandler() {
-  xmlFreeDoc(m_docIn);
-  xmlFreeDoc(m_docOut);
+  if(m_stylesheet) {
+    xsltFreeStylesheet(m_stylesheet);
+  }
 
-  xsltFreeStylesheet(m_stylesheet);
+  if(m_docIn) {
+    xmlFreeDoc(m_docIn);
+  }
+
+  if(m_docOut) {
+    xmlFreeDoc(m_docOut);
+  }
   
   xsltCleanupGlobals();
   xmlCleanupParser();
@@ -92,7 +102,7 @@ void XSLTHandler::addParam(const QCString& name_, const QCString& value_) {
   if(m_numParams < MAX_PARAMS) {
     m_params[m_numParams]     = qstrdup(name_);
     m_params[m_numParams + 1] = qstrdup(value_);
-    m_params[m_numParams + 2] = NULL;
+    m_params[m_numParams + 2] = 0;
     m_numParams += 2;
   }
 }
@@ -105,17 +115,20 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
   QString result;
 
   if(!m_stylesheet) {
+    kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
     return result;
   }
 
   m_docIn = xmlParseDoc((xmlChar *)text_.utf8().data());
   if(!m_docIn) {
+    kdDebug() << "XSLTHandler::applyStylesheet() - error parsing input string!" << endl;
     return result;
   }
 
   // returns NULL on error
   m_docOut = xsltApplyStylesheet(m_stylesheet, m_docIn, m_params);
   if(!m_docOut) {
+    kdDebug() << "XSLTHandler::applyStylesheet() - error applying stylesheet!" << endl;
     return result;
   }
 
@@ -123,6 +136,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
                                                      (xmlOutputCloseCallback)closeQString,
                                                      &result, 0);
   if(!outp) {
+    kdDebug() << "XSLTHandler::applyStylesheet() - error writing output buffer!" << endl;
     return result;
   }
   
@@ -130,6 +144,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
   
   int num_bytes = xsltSaveResultTo(outp, m_docOut, m_stylesheet);
   if(num_bytes == -1) {
+    kdDebug() << "XSLTHandler::applyStylesheet() - error saving output buffer!" << endl;
     return result;
   }
   

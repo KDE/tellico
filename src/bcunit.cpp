@@ -67,6 +67,11 @@ QString BCUnit::attribute(const QString& attName_) const {
 }
 
 QString BCUnit::attributeFormatted(const QString& attName_, int flags_/*=0*/) const {
+  // if auto format is not set, then just return the value
+  if(!BCAttribute::autoFormat()) {
+    return attribute(attName_);
+  }
+  
   // I should really have separated format flags
   // if none of the format flags are set, just return the attribute, maybe capitalized
   if( !(flags_ & BCAttribute::FormatTitle

@@ -1,5 +1,5 @@
 %define name    bookcase
-%define version 0.5.1
+%define version 0.5.2a
 %define release 1rls
 # get around stupid Mandrake libtool tag CXX bug
 %define __libtoolize true
@@ -68,12 +68,27 @@ EOF
 %{_datadir}/apps/%{name}/
 %{_iconsdir}/*/*/*/*.png
 %{_datadir}/locale/*/*/*
-%{_datadir}/doc/HTML/*/*/*
+%{_datadir}/doc/HTML/*/bookcase/*
 
 %clean 
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Mar 23 2003 Robby Stephenson <robby@periapsis.org> 0.5.2a-1rls
+- Version 0.5.2a
+
+* Sat Mar 22 2003 Robby Stephenson <robby@periapsis.org> 0.5.2-2rls
+- Fix doc files
+
+* Fri Mar 21 2003 Robby Stephenson <robby@periapsis.org> 0.5.2-1rls
+- Getting ready for version 0.5.2
+
+* Sat Mar 15 2003 Robby Stephenson <robby@periapsis.org> 0.5.1-1rls
+- Version 0.5.1
+
+* Fri Mar 14 2003 Robby Stephenson <robby@periapsis.org> 0.5-1rls
+- Version 0.5
+
 * Sun Dec 4 2002 Robby Stephenson <robby@periapsis.org> 0.4.1-1rls
 - Version 0.4.1
 

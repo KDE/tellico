@@ -10,9 +10,9 @@
    ================================================================
    Bookcase XSLT file - used for printing
 
-   $Id: bookcase-printing.xsl,v 1.13 2003/03/15 06:33:31 robby Exp $
+   $Id: bookcase-printing.xsl,v 1.15 2003/03/22 02:22:53 robby Exp $
 
-   Copyright (c) 2002 Robby Stephenson
+   Copyright (c) 2003 Robby Stephenson
 
    This XSLT stylesheet is designed to be used with the 'Bookcase'
    application, which can be found at http://periapsis.org/bookcase/
@@ -87,6 +87,9 @@
 <!-- The doc-url parameter is a string containing the url of the
      file being printed -->
 <xsl:param name="doc-url" select="'Bookcase'"/>
+
+<!-- The sort-title parameter is a string sontaining a description of the sort -->
+<xsl:param name="sort-title" select="'(sorted by author)'"/>
 
 <xsl:variable name="columns" select="str:tokenize($column-names)"/>
 
@@ -168,16 +171,23 @@
  <div id="headerblock">
   <div class="colltitle">
    <xsl:value-of select="@title"/>
-    <xsl:if test="string-length($sort-name) &gt; 0">
-     <span class="subtitle">
-     <xsl:text>(sorted by </xsl:text>
-     <xsl:call-template name="attribute-title">
-      <xsl:with-param name="attributes" select="bc:attributes"/>
-      <xsl:with-param name="name" select="$sort-name"/>
-     </xsl:call-template>
-     <xsl:text>)</xsl:text>
+    <span class="subtitle">
+     <xsl:choose>
+      <xsl:when test="string-length($sort-title) &gt; 0">
+       <xsl:value-of select="$sort-title"/>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:if test="string-length($sort-name) &gt; 0">
+        <xsl:text>(sorted by </xsl:text>
+        <xsl:call-template name="attribute-title">
+         <xsl:with-param name="attributes" select="bc:attributes"/>
+         <xsl:with-param name="name" select="$sort-name"/>
+        </xsl:call-template>
+        <xsl:text>)</xsl:text>
+       </xsl:if>
+      </xsl:otherwise>
+     </xsl:choose>
     </span>
-   </xsl:if>
   </div>
  </div>
 

@@ -131,11 +131,17 @@ QDomDocument* BookcaseDoc::readDocument(const KURL& url_) const {
   f.at(0); // reset file pointer to beginning
   QDomDocument* dom = new QDomDocument();
   QString errorMsg;
-  if(!dom->setContent(&f, &errorMsg)) {
+  int errorLine, errorColumn; 
+  if(!dom->setContent(&f, false, &errorMsg, &errorLine, &errorColumn)) {
     f.close();
     Bookcase* app = bookcaseParent(parent());
-    QString str(i18n("Bookcase is unable to load the file - %1.").arg(url_.fileName()));
-    KMessageBox::detailedSorry(app, str, errorMsg);
+    QString str = i18n("Bookcase is unable to load the file - %1.").arg(url_.fileName());
+    QString details = i18n("There is an XML parsing error in line %1, column %1.").arg(errorLine).arg(errorColumn);
+    details += QString::fromLatin1("\n");
+    details += i18n("The error message from Qt is:");
+    details += QString::fromLatin1("\n");
+    details += QString::fromLatin1("\t") + errorMsg;
+    KMessageBox::detailedSorry(app, str, details);
     KIO::NetAccess::removeTempFile(tmpfile);
     delete dom;
     return 0;
