@@ -1,0 +1,40 @@
+2002-02-20    <robby@radiojodi.com>
+
+	* Added BCColumnView::slotShowUnit() so to ensure that the proper listview in the stack is shown.
+	* Added BCAttribute::capitalize for auto capitalization of names and titles.
+
+2002-02-08    <robby@radiojodi.com>
+
+	* Changed selection behavior so the two listviews do not sync now. Clicking in one clears the other.
+
+2002-02-03    <robby@radiojodi.com>
+
+	* Added article and suffix list to options in config dialog.
+
+2002-01-11    <robby@radiojodi.com>
+
+	* BCListView is now BCColumnView and can flip between different collections. Woo-hoo! Now multiple collections behave properly. Also started adding configuration options.
+
+2002-01-10    <robby@radiojodi.com>
+
+	* bctabcontrol.{h,cpp} Need KTabCtl::showTab to be public, so subclassed it.
+
+2002-01-10    <robby@radiojodi.com>
+
+	* configdialog.{h,cpp} Added beginnings of configuration dialog.
+
+2001-12-06    <robby@radiojodi.com>
+
+	* bccollectionview.cpp, bcattribute.cpp Fixed the bug for formatting names with suffixes like Jr.
+
+2001-11-05    <robby@radiojodi.com>
+
+	* bookcase.h Removed the File->Close() action item.
+
+2001-11-05    <robby@radiojodi.com>
+
+	* bccollectionview.cpp Fixed the bug where clicking the collapse or expand menu item on a BCUnitItem caused the pixmap to change to a folder.
+
+2001-11-04    <robby@radiojodi.com>
+
+	* Released Bookcase version 0.1

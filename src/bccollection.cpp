@@ -1,5 +1,5 @@
 /***************************************************************************
-                          bccollection.cpp  -  description
+                              bccollection.cpp
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -25,12 +25,22 @@ BCCollection::BCCollection(int id_, const QString& title_, const QString& unitNa
   m_unitList.setAutoDelete(true);
   m_attributeList.setAutoDelete(true);
   m_groupAttribute = NULL;
+  m_isCustom = true;
 
   // all collections have a title attribute for their units
   BCAttribute* att = new BCAttribute("title", i18n("Title"));
   att->setGroup(i18n("General"));
   att->setFlags(BCAttribute::FormatTitle);
   addAttribute(att);
+}
+
+BCCollection::BCCollection(const BCCollection&) {
+  kdWarning() << "BCCollection copy constructor - should not be used!!!" << endl;
+}
+
+BCCollection BCCollection::operator=(const BCCollection& coll_) {
+  kdWarning() << "BCCollection assignment operator - should not be used!!!" << endl;
+  return BCCollection(coll_);
 }
 
 BCCollection::~BCCollection() {
@@ -61,6 +71,8 @@ bool BCCollection::addAttribute(BCAttribute* att_) {
   if(!att_->group().isEmpty() && m_attributeGroups.contains(att_->group()) == 0) {
     m_attributeGroups << att_->group();
   }
+
+  m_isCustom = true;
   return true;
 }
 
@@ -68,10 +80,12 @@ void BCCollection::addUnit(BCUnit* unit_) {
   if(!unit_) {
     return;
   }
+
   if(unit_->collection() != this) {
     // should the addUnit() call be done in the BCUnit constructor?
     kdDebug() << "BCCollection::addUnit() - unit is not being added to its proper collection" << endl;
   }
+
   m_unitList.append(unit_);
   kdDebug() << "BCCollection::addUnit() - added unit (" << unit_->attribute("title") << ")\n";
 }
@@ -80,6 +94,7 @@ bool BCCollection::deleteUnit(BCUnit* unit_) {
   if(!unit_) {
     return false;
   }
+
   kdDebug() << "BCCollection::deleteUnit() - deleted unit (" << unit_->attribute("title") << ")\n";
   return m_unitList.remove(unit_);
 }
@@ -137,20 +152,23 @@ QStringList BCCollection::valuesByAttributeName(const QString& name_) {
   QListIterator<BCUnit> it(m_unitList);
   for( ; it.current(); ++it) {
     QString value = it.current()->attribute(name_);
-    if(strlist.contains(value) == 0) {
+
+    if(strlist.contains(value) == 0) { // haven't inserted it yet
       if(attributeByName(name_)->flags() & BCAttribute::AllowMultiple) {
         // careful, the semi-colon is used as a separator for things like multiple authors
         QStringList values = QStringList::split(";", value);
         // possible to have "; " or ";" so need to strip white space for each value
-        QStringList::Iterator it2 = values.begin();
-        for( ; it2 != values.end(); ++it2) {
+        QStringList::Iterator it2;
+        for(it2 = values.begin(); it2 != values.end(); ++it2) {
           strlist << static_cast<QString>(*it2).simplifyWhiteSpace();
         }
-      } else {
+      } else { // multiple values not allowed
+        // no need to call value.simplifyWhiteSpace()
         strlist << value;
       }
     }
-  }
+
+  } // end unit loop
   return strlist;
 }
 
@@ -165,6 +183,7 @@ BCAttribute* BCCollection::attributeByName(const QString& name_) {
   return NULL;
 }
 
+// can't be const since attributeByName() is not const
 bool BCCollection::allowed(const QString& key_, const QString& value_) {
   // empty string is always allowed
   if(value_.isEmpty()) {
@@ -180,6 +199,10 @@ bool BCCollection::allowed(const QString& key_, const QString& value_) {
   }
 
   return false;
+}
+
+bool BCCollection::isCustom() const {
+  return m_isCustom;
 }
 
 int BCCollection::id() const {
@@ -207,6 +230,9 @@ const QString& BCCollection::iconName() const {
 }
 
 void BCCollection::setIconName(const QString& name_) {
+  if(name_ != iconName()) {
+    m_isCustom = true;
+  }
   m_iconName = name_;
 }
 
@@ -215,6 +241,9 @@ BCAttribute* BCCollection::groupAttribute() {
 }
 
 void BCCollection::setGroupAttribute(BCAttribute* att_) {
+  if(att_ != groupAttribute()) {
+    m_isCustom = true;
+  }
   m_groupAttribute = att_;
 }
 
@@ -222,53 +251,8 @@ const QList<BCUnit>& BCCollection::unitList() const {
   return m_unitList;
 }
 
-void BCCollection::saveXML(QDomDocument* doc_) {
-  QDomElement collElem = doc_->createElement("collection");
-  doc_->documentElement().appendChild(collElem);
-  collElem.setAttribute("title", m_title);
-  collElem.setAttribute("unit", m_unitName);
-  collElem.setAttribute("unitTitle", m_unitTitle);
-
-  QDomElement attsElem = doc_->createElement("attributes");
-  collElem.appendChild(attsElem);
-  QListIterator<BCAttribute> attIt(m_attributeList);
-  QDomElement attElem;
-  for( ; attIt.current(); ++attIt) {
-    attElem = doc_->createElement("attribute");
-    attsElem.appendChild(attElem);
-    attElem.setAttribute("name", attIt.current()->name());
-    attElem.setAttribute("title", attIt.current()->title());
-    attElem.setAttribute("group", attIt.current()->group());
-    attElem.setAttribute("type", attIt.current()->type());
-    if(attIt.current()->type() == BCAttribute::Choice) {
-      attElem.setAttribute("allowed", attIt.current()->allowed().join(";"));
-    }
-    attElem.setAttribute("flags", attIt.current()->flags());
-  }
-  // reset the attribute iterator
-  attIt.toFirst();
-
-  QDomElement unitElem;
-  QListIterator<BCUnit> unitIt(m_unitList);
-  for( ; unitIt.current(); ++unitIt) {
-    unitElem = doc_->createElement(m_unitName);
-    collElem.appendChild(unitElem);
-    for( ; attIt.current(); ++attIt) {
-      QString attValue = unitIt.current()->attribute(attIt.current()->name());
-      if(!attValue.isEmpty()) {
-        attElem = doc_->createElement(attIt.current()->name());
-        unitElem.appendChild(attElem);
-        if(attIt.current()->type() != BCAttribute::Bool) {
-          attElem.appendChild(doc_->createTextNode(attValue));
-        }
-      }
-    }
-    attIt.toFirst();
-  }
-}
-
 BCCollection* BCCollection::Books(int id_) {
-  BCCollection* coll = new BCCollection(id_, i18n("My Books"), "book", i18n("book"), "book");
+  BCCollection* coll = new BCCollection(id_, i18n("My Books"), "book", i18n("Book"), "book");
 
   BCAttribute* att;
 
@@ -279,15 +263,15 @@ BCCollection* BCCollection::Books(int id_) {
 
   att = new BCAttribute("author", i18n("Author"));
   att->setGroup(i18n("General"));
-  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::FormatName);
+  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::FormatName | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
   coll->setGroupAttribute(att);
 
   QStringList binding;
-  binding << i18n("Hardback") << i18n("Paperback") << i18n("Trade Paperback");
+  binding << i18n("Hardback") << i18n("Paperback") << i18n("Trade Paperback") << i18n("E-Book");
   att = new BCAttribute("binding", i18n("Binding"), binding);
   att->setGroup(i18n("General"));
-  att->setFlags(BCAttribute::DontShow);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("pur_date", i18n("Purchase Date"));
@@ -302,22 +286,22 @@ BCCollection* BCCollection::Books(int id_) {
 
   att = new BCAttribute("publisher", i18n("Publisher"));
   att->setGroup(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("edition", i18n("Edition"));
   att->setGroup(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("cr_year", i18n("Copyright Year"));
   att->setGroup(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("pub_year", i18n("Publication Year"));
   att->setGroup(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::DontComplete | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("isbn", i18n("ISBN#"));
@@ -337,21 +321,22 @@ BCCollection* BCCollection::Books(int id_) {
 
   att = new BCAttribute("language", i18n("Language"));
   att->setGroup(i18n("Publishing"));
-  att->setFlags(BCAttribute::DontShow);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("genre", i18n("Genre"));
   att->setGroup(i18n("Classification"));
-  att->setFlags(BCAttribute::AllowMultiple);
+  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("keywords", i18n("Keywords"));
   att->setGroup(i18n("Classification"));
-  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowMultiple);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("series", i18n("Series"));
   att->setGroup(i18n("Classification"));
+  att->setFlags(BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("series_num", i18n("Series Number"));
@@ -363,7 +348,7 @@ BCCollection* BCCollection::Books(int id_) {
   cond << i18n("New") << i18n("Used");
   att = new BCAttribute("condition", i18n("Condition"), cond);
   att->setGroup(i18n("Classification"));
-  att->setFlags(BCAttribute::DontShow);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("signed", i18n("Signed"), BCAttribute::Bool);
@@ -390,7 +375,7 @@ BCCollection* BCCollection::Books(int id_) {
   rating << i18n("5 - Best") << i18n("4 - Good") << i18n("3 - Neutral") << i18n("2 - Bad") << i18n("1 - Worst");
   att = new BCAttribute("rating", i18n("Rating"), rating);
   att->setGroup(i18n("Personal"));
-  att->setFlags(BCAttribute::DontShow);
+  att->setFlags(BCAttribute::DontShow | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("comments", i18n("Comments"));
@@ -398,6 +383,7 @@ BCCollection* BCCollection::Books(int id_) {
   att->setFlags(BCAttribute::DontComplete);
   coll->addAttribute(att);
 
+  coll->m_isCustom = false;
   return coll;
 }
 
@@ -408,17 +394,25 @@ BCCollection* BCCollection::CDs(int id_) {
 
   att = new BCAttribute("artist", i18n("Artist"));
   att->setGroup(i18n("General"));
+  att->setFlags(BCAttribute::AllowGrouped);
   coll->addAttribute(att);
   coll->setGroupAttribute(att);
 
   att = new BCAttribute("year", i18n("Year"));
   att->setGroup(i18n("General"));
-  att->setFlags(BCAttribute::DontComplete);
+  att->setFlags(BCAttribute::DontComplete | BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("genre", i18n("Genre"));
   att->setGroup(i18n("General"));
-  att->setFlags(BCAttribute::AllowMultiple);
+  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
+  coll->addAttribute(att);
+
+  QStringList list;
+  list << i18n("CD") << i18n("Cassette") << i18n("8-track");
+  att = new BCAttribute("medium", i18n("Medium"), list);
+  att->setGroup(i18n("General"));
+  att->setFlags(BCAttribute::AllowGrouped);
   coll->addAttribute(att);
 
   att = new BCAttribute("comments", i18n("Comments"));
@@ -426,11 +420,12 @@ BCCollection* BCCollection::CDs(int id_) {
   att->setFlags(BCAttribute::DontComplete);
   coll->addAttribute(att);
 
+  coll->m_isCustom = false;
   return coll;
 }
 
 BCCollection* BCCollection::Videos(int id_) {
-  BCCollection* coll = new BCCollection(id_, i18n("My Videos"), "video", i18n("video"), "video");
+  BCCollection* coll = new BCCollection(id_, i18n("My Videos"), "video", i18n("Video"), "video");
 
   BCAttribute* att;
 
@@ -439,17 +434,24 @@ BCCollection* BCCollection::Videos(int id_) {
   att->setFlags(BCAttribute::DontComplete);
   coll->addAttribute(att);
 
+  att = new BCAttribute("genre", i18n("Genre"));
+  att->setGroup(i18n("General"));
+  att->setFlags(BCAttribute::AllowMultiple | BCAttribute::AllowGrouped);
+  coll->addAttribute(att);
+  coll->setGroupAttribute(att);
+
   QStringList list;
   list << i18n("DVD") << i18n("VHS") << i18n("8mm") << i18n("VCD") << i18n("LaserDisc") << i18n("Beta");
   att = new BCAttribute("medium", i18n("Medium"), list);
   att->setGroup(i18n("General"));
+  att->setFlags(BCAttribute::AllowGrouped);
   coll->addAttribute(att);
-  coll->setGroupAttribute(att);
 
   att = new BCAttribute("comments", i18n("Comments"));
   att->setGroup(i18n("General"));
   att->setFlags(BCAttribute::DontComplete);
   coll->addAttribute(att);
 
+  coll->m_isCustom = false;
   return coll;
 }

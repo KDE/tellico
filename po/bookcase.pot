@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-11-04 20:44-0800\n"
+"POT-Creation-Date: 2002-02-21 20:29-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,421 +14,470 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bcattribute.cpp:26 bcattribute.cpp:35 bccollection.cpp:31
-#: bccollection.cpp:276 bccollection.cpp:281 bccollection.cpp:289
-#: bccollection.cpp:294 bccollection.cpp:299 bccollection.cpp:410
-#: bccollection.cpp:415 bccollection.cpp:420 bccollection.cpp:425
-#: bccollection.cpp:438 bccollection.cpp:445 bccollection.cpp:450
+#: bcattribute.cpp:31 bcattribute.cpp:40 bccollection.cpp:32
+#: bccollection.cpp:260 bccollection.cpp:265 bccollection.cpp:273
+#: bccollection.cpp:278 bccollection.cpp:283 bccollection.cpp:396
+#: bccollection.cpp:402 bccollection.cpp:407 bccollection.cpp:414
+#: bccollection.cpp:419 bccollection.cpp:433 bccollection.cpp:438
+#: bccollection.cpp:446 bccollection.cpp:451 configdialog.cpp:111
 msgid "General"
 msgstr ""
 
-#: bcattribute.cpp:89
-msgid "The:the"
+#: bcattribute.cpp:183
+msgid "a,an,in,of,the,to"
 msgstr ""
 
-#: bccollection.cpp:30
+#: bcattribute.cpp:202
+msgid "The,the"
+msgstr ""
+
+#: bcattribute.cpp:216
+msgid "Jr.,Jr,jr.,jr,III,iii,IV,iv"
+msgstr ""
+
+#: bccollection.cpp:31
 msgid "Title"
 msgstr ""
 
-#: bccollection.cpp:271
+#: bccollection.cpp:255
 msgid "My Books"
 msgstr ""
 
-#: bccollection.cpp:271
-msgid "book"
+#: bccollection.cpp:255
+msgid "Book"
 msgstr ""
 
-#: bccollection.cpp:275
+#: bccollection.cpp:259
 msgid "Subtitle"
 msgstr ""
 
-#: bccollection.cpp:280
+#: bccollection.cpp:264
 msgid "Author"
 msgstr ""
 
-#: bccollection.cpp:287
+#: bccollection.cpp:271
 msgid "Hardback"
 msgstr ""
 
-#: bccollection.cpp:287
+#: bccollection.cpp:271
 msgid "Paperback"
 msgstr ""
 
-#: bccollection.cpp:287
+#: bccollection.cpp:271
 msgid "Trade Paperback"
 msgstr ""
 
-#: bccollection.cpp:288
+#: bccollection.cpp:271
+msgid "E-Book"
+msgstr ""
+
+#: bccollection.cpp:272
 msgid "Binding"
 msgstr ""
 
-#: bccollection.cpp:293
+#: bccollection.cpp:277
 msgid "Purchase Date"
 msgstr ""
 
-#: bccollection.cpp:298
+#: bccollection.cpp:282
 msgid "Purchase Price"
 msgstr ""
 
-#: bccollection.cpp:303
+#: bccollection.cpp:287
 msgid "Publisher"
 msgstr ""
 
-#: bccollection.cpp:304 bccollection.cpp:309 bccollection.cpp:314
-#: bccollection.cpp:319 bccollection.cpp:324 bccollection.cpp:329
-#: bccollection.cpp:334 bccollection.cpp:339
+#: bccollection.cpp:288 bccollection.cpp:293 bccollection.cpp:298
+#: bccollection.cpp:303 bccollection.cpp:308 bccollection.cpp:313
+#: bccollection.cpp:318 bccollection.cpp:323
 msgid "Publishing"
 msgstr ""
 
-#: bccollection.cpp:308
+#: bccollection.cpp:292
 msgid "Edition"
 msgstr ""
 
-#: bccollection.cpp:313
+#: bccollection.cpp:297
 msgid "Copyright Year"
 msgstr ""
 
-#: bccollection.cpp:318
+#: bccollection.cpp:302
 msgid "Publication Year"
 msgstr ""
 
-#: bccollection.cpp:323
+#: bccollection.cpp:307
 msgid "ISBN#"
 msgstr ""
 
-#: bccollection.cpp:328
+#: bccollection.cpp:312
 msgid "LCCN#"
 msgstr ""
 
-#: bccollection.cpp:333
+#: bccollection.cpp:317
 msgid "Pages"
 msgstr ""
 
-#: bccollection.cpp:338
+#: bccollection.cpp:322
 msgid "Language"
 msgstr ""
 
-#: bccollection.cpp:343 bccollection.cpp:419
+#: bccollection.cpp:327 bccollection.cpp:406 bccollection.cpp:437
 msgid "Genre"
 msgstr ""
 
-#: bccollection.cpp:344 bccollection.cpp:349 bccollection.cpp:354
-#: bccollection.cpp:358 bccollection.cpp:365
+#: bccollection.cpp:328 bccollection.cpp:333 bccollection.cpp:338
+#: bccollection.cpp:343 bccollection.cpp:350
 msgid "Classification"
 msgstr ""
 
-#: bccollection.cpp:348
+#: bccollection.cpp:332
 msgid "Keywords"
 msgstr ""
 
-#: bccollection.cpp:353
+#: bccollection.cpp:337
 msgid "Series"
 msgstr ""
 
-#: bccollection.cpp:357
+#: bccollection.cpp:342
 msgid "Series Number"
 msgstr ""
 
-#: bccollection.cpp:363 bcuniteditwidget.cpp:205
+#: bccollection.cpp:348 bcuniteditwidget.cpp:168
 msgid "New"
 msgstr ""
 
-#: bccollection.cpp:363
+#: bccollection.cpp:348
 msgid "Used"
 msgstr ""
 
-#: bccollection.cpp:364
+#: bccollection.cpp:349
 msgid "Condition"
 msgstr ""
 
-#: bccollection.cpp:369
+#: bccollection.cpp:354
 msgid "Signed"
 msgstr ""
 
-#: bccollection.cpp:370 bccollection.cpp:375 bccollection.cpp:380
-#: bccollection.cpp:385 bccollection.cpp:392 bccollection.cpp:397
+#: bccollection.cpp:355 bccollection.cpp:360 bccollection.cpp:365
+#: bccollection.cpp:370 bccollection.cpp:377 bccollection.cpp:382
 msgid "Personal"
 msgstr ""
 
-#: bccollection.cpp:374
+#: bccollection.cpp:359
 msgid "Read"
 msgstr ""
 
-#: bccollection.cpp:379
+#: bccollection.cpp:364
 msgid "Gift"
 msgstr ""
 
-#: bccollection.cpp:384
+#: bccollection.cpp:369
 msgid "Loaned"
 msgstr ""
 
-#: bccollection.cpp:390
+#: bccollection.cpp:375
 msgid "5 - Best"
 msgstr ""
 
-#: bccollection.cpp:390
+#: bccollection.cpp:375
 msgid "4 - Good"
 msgstr ""
 
-#: bccollection.cpp:390
+#: bccollection.cpp:375
 msgid "3 - Neutral"
 msgstr ""
 
-#: bccollection.cpp:390
+#: bccollection.cpp:375
 msgid "2 - Bad"
 msgstr ""
 
-#: bccollection.cpp:390
+#: bccollection.cpp:375
 msgid "1 - Worst"
 msgstr ""
 
-#: bccollection.cpp:391
+#: bccollection.cpp:376
 msgid "Rating"
 msgstr ""
 
-#: bccollection.cpp:396 bccollection.cpp:424 bccollection.cpp:449
+#: bccollection.cpp:381 bccollection.cpp:418 bccollection.cpp:450
 msgid "Comments"
 msgstr ""
 
-#: bccollection.cpp:405
+#: bccollection.cpp:391
 msgid "My CDs"
 msgstr ""
 
-#: bccollection.cpp:405
+#: bccollection.cpp:391 bccollection.cpp:412
 msgid "CD"
 msgstr ""
 
-#: bccollection.cpp:409
+#: bccollection.cpp:395
 msgid "Artist"
 msgstr ""
 
-#: bccollection.cpp:414
+#: bccollection.cpp:401
 msgid "Year"
 msgstr ""
 
-#: bccollection.cpp:433
-msgid "My Videos"
+#: bccollection.cpp:412
+msgid "Cassette"
 msgstr ""
 
-#: bccollection.cpp:433
-msgid "video"
+#: bccollection.cpp:412
+msgid "8-track"
 msgstr ""
 
-#: bccollection.cpp:437
-msgid "Date"
-msgstr ""
-
-#: bccollection.cpp:443
-msgid "DVD"
-msgstr ""
-
-#: bccollection.cpp:443
-msgid "VHS"
-msgstr ""
-
-#: bccollection.cpp:443
-msgid "8mm"
-msgstr ""
-
-#: bccollection.cpp:443
-msgid "VCD"
-msgstr ""
-
-#: bccollection.cpp:443
-msgid "LaserDisc"
-msgstr ""
-
-#: bccollection.cpp:443
-msgid "Beta"
-msgstr ""
-
-#: bccollection.cpp:444
+#: bccollection.cpp:413 bccollection.cpp:445
 msgid "Medium"
 msgstr ""
 
-#: bookcase.cpp:184
+#: bccollection.cpp:428
+msgid "My Videos"
+msgstr ""
+
+#: bccollection.cpp:428
+msgid "Video"
+msgstr ""
+
+#: bccollection.cpp:432
+msgid "Date"
+msgstr ""
+
+#: bccollection.cpp:444
+msgid "DVD"
+msgstr ""
+
+#: bccollection.cpp:444
+msgid "VHS"
+msgstr ""
+
+#: bccollection.cpp:444
+msgid "8mm"
+msgstr ""
+
+#: bccollection.cpp:444
+msgid "VCD"
+msgstr ""
+
+#: bccollection.cpp:444
+msgid "LaserDisc"
+msgstr ""
+
+#: bccollection.cpp:444
+msgid "Beta"
+msgstr ""
+
+#: bookcase.cpp:125
+msgid "Show Editing Widget"
+msgstr ""
+
+#: bookcase.cpp:128
+msgid "Show Detail Widget"
+msgstr ""
+
+#: bookcase.cpp:133
 msgid "New &Collection"
 msgstr ""
 
-#: bookcase.cpp:187
+#: bookcase.cpp:136
+msgid "Full Contents"
+msgstr ""
+
+#: bookcase.cpp:140
 msgid "Creates a new document"
 msgstr ""
 
-#: bookcase.cpp:188
+#: bookcase.cpp:141
 msgid "Opens an existing document"
 msgstr ""
 
-#: bookcase.cpp:189
+#: bookcase.cpp:142
 msgid "Opens a recently used file"
 msgstr ""
 
-#: bookcase.cpp:190
+#: bookcase.cpp:143
 msgid "Saves the actual document"
 msgstr ""
 
-#: bookcase.cpp:191
+#: bookcase.cpp:144
 msgid "Saves the actual document as..."
 msgstr ""
 
-#: bookcase.cpp:192
-msgid "Closes the actual document"
-msgstr ""
-
-#: bookcase.cpp:193
+#: bookcase.cpp:145
 msgid "Prints out the actual document"
 msgstr ""
 
-#: bookcase.cpp:194
+#: bookcase.cpp:146
 msgid "Quits the application"
 msgstr ""
 
-#: bookcase.cpp:195
+#: bookcase.cpp:147
 msgid "Cuts the selected section and puts it to the clipboard"
 msgstr ""
 
-#: bookcase.cpp:196
+#: bookcase.cpp:148
 msgid "Copies the selected section to the clipboard"
 msgstr ""
 
-#: bookcase.cpp:197
+#: bookcase.cpp:149
 msgid "Pastes the clipboard contents to actual position"
 msgstr ""
 
-#: bookcase.cpp:198
+#: bookcase.cpp:150
 msgid "Searches in the document"
 msgstr ""
 
-#: bookcase.cpp:199
+#: bookcase.cpp:151
 msgid "Enables/disables the toolbar"
 msgstr ""
 
-#: bookcase.cpp:200
+#: bookcase.cpp:152
 msgid "Enables/disables the statusbar"
 msgstr ""
 
-#: bookcase.cpp:201
+#: bookcase.cpp:153
+msgid "Enables/disables the editing widget"
+msgstr ""
+
+#: bookcase.cpp:154
+msgid "Enables/disables the detail widget"
+msgstr ""
+
+#: bookcase.cpp:155
 msgid "Configure the options for the application"
 msgstr ""
 
-#: bookcase.cpp:207 bookcase.cpp:373 bookcase.cpp:388 bookcase.cpp:400
-#: bookcase.cpp:416 bookcase.cpp:437 bookcase.cpp:451 bookcase.cpp:459
-#: bookcase.cpp:470 bookcase.cpp:479 bookcase.cpp:485 bookcase.cpp:491
-#: bookcase.cpp:497 bookcase.cpp:515 bookcase.cpp:527
+#: bookcase.cpp:156
+msgid "Creates a full report"
+msgstr ""
+
+#: bookcase.cpp:162 bookcase.cpp:478 bookcase.cpp:494 bookcase.cpp:504
+#: bookcase.cpp:519 bookcase.cpp:571 bookcase.cpp:586 bookcase.cpp:597
+#: bookcase.cpp:606 bookcase.cpp:612 bookcase.cpp:618 bookcase.cpp:624
+#: bookcase.cpp:642 bookcase.cpp:654 bookcase.cpp:668 bookcase.cpp:682
 msgid "Ready."
 msgstr ""
 
-#: bookcase.cpp:220 bookcase.cpp:221
+#: bookcase.cpp:179
+msgid "Document Contents"
+msgstr ""
+
+#: bookcase.cpp:180
 msgid "Collection Contents"
 msgstr ""
 
-#: bookcase.cpp:228
+#: bookcase.cpp:186 bookcase.cpp:187
 msgid "Collection Details"
 msgstr ""
 
-#: bookcase.cpp:229
-msgid "ListView"
+#: bookcase.cpp:192
+msgid "Bookcase Editing"
 msgstr ""
 
-#: bookcase.cpp:235
+#: bookcase.cpp:193
 msgid "Collection Editing"
 msgstr ""
 
-#: bookcase.cpp:236
-msgid "Editing"
-msgstr ""
-
-#: bookcase.cpp:364
+#: bookcase.cpp:469
 msgid "Creating new document..."
 msgstr ""
 
-#: bookcase.cpp:377 bookcase.cpp:392 bookcase.cpp:404
+#: bookcase.cpp:482 bookcase.cpp:498 bookcase.cpp:508
 msgid "Opening file..."
 msgstr ""
 
-#: bookcase.cpp:383 bookcase.cpp:444
+#: bookcase.cpp:488 bookcase.cpp:578
 msgid ""
 "*.bc|Bookcase files (*.bc)\n"
 "*.xml|XML files (*.xml)\n"
 "*|All files"
 msgstr ""
 
-#: bookcase.cpp:383
+#: bookcase.cpp:489
 msgid "Open File..."
 msgstr ""
 
-#: bookcase.cpp:397
-msgid "Sorry, the file you selected is unable to be opened."
-msgstr ""
-
-#: bookcase.cpp:411
-msgid "Sorry, the file you selected does not exist."
-msgstr ""
-
-#: bookcase.cpp:429
+#: bookcase.cpp:561
 msgid "Saving file..."
 msgstr ""
 
-#: bookcase.cpp:441
+#: bookcase.cpp:575
 msgid "Saving file with a new filename..."
 msgstr ""
 
-#: bookcase.cpp:455
-msgid "Closing file..."
-msgstr ""
-
-#: bookcase.cpp:463
+#: bookcase.cpp:590
 msgid "Printing..."
 msgstr ""
 
-#: bookcase.cpp:474
+#: bookcase.cpp:601
 msgid "Exiting..."
 msgstr ""
 
-#: bookcase.cpp:483
+#: bookcase.cpp:610
 msgid "Cutting selection..."
 msgstr ""
 
-#: bookcase.cpp:489
+#: bookcase.cpp:616
 msgid "Copying selection to clipboard..."
 msgstr ""
 
-#: bookcase.cpp:495
+#: bookcase.cpp:622
 msgid "Inserting clipboard contents..."
 msgstr ""
 
-#: bookcase.cpp:507
+#: bookcase.cpp:634
 msgid "Toggling toolbar..."
 msgstr ""
 
-#: bookcase.cpp:519
+#: bookcase.cpp:646
 msgid "Toggle the statusbar..."
 msgstr ""
 
-#: bookcasedoc.cpp:91
+#: bookcase.cpp:658
+msgid "Toggling editing widget..."
+msgstr ""
+
+#: bookcase.cpp:672
+msgid "Toggling detail widget..."
+msgstr ""
+
+#: bookcasedoc.cpp:82
+#, c-format
+msgid "Unable to download file - %1."
+msgstr ""
+
+#: bookcasedoc.cpp:90
 #, c-format
 msgid "Unable to open file - %1."
 msgstr ""
 
-#: bookcasedoc.cpp:152
+#: bookcasedoc.cpp:100
+#, c-format
+msgid "Unable to read file - %1."
+msgstr ""
+
+#: bookcasedoc.cpp:110
+#, c-format
+msgid "File is not in XML format - %1."
+msgstr ""
+
+#: bookcasedoc.cpp:123
+#, c-format
+msgid "File is not a Bookcase data file - %1."
+msgstr ""
+
+#: bookcasedoc.cpp:166
 msgid "Unknown"
 msgstr ""
 
-#: bookcasedoc.cpp:195
+#: bookcasedoc.cpp:220
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
 msgstr ""
 
-#: bookcasedoc.cpp:197
+#: bookcasedoc.cpp:222
 msgid "Warning!"
-msgstr ""
-
-#: bookcasedoc.cpp:349
-msgid "Adding a new %1..."
-msgstr ""
-
-#: bookcasedoc.cpp:361
-msgid "Deleting the %1..."
 msgstr ""
 
 #: main.cpp:25
@@ -436,10 +485,10 @@ msgid "Bookcase - a personal book collection manager for KDE"
 msgstr ""
 
 #: main.cpp:30
-msgid "file to open"
+msgid "File to open"
 msgstr ""
 
-#: bccollectionview.cpp:36 bookcase.moc.cpp:42 bookcase.moc.cpp:47 main.cpp:36
+#: bccollectionview.cpp:37 bookcase.moc.cpp:42 bookcase.moc.cpp:47 main.cpp:35
 msgid "Bookcase"
 msgstr ""
 
@@ -447,8 +496,8 @@ msgstr ""
 msgid "BookcaseDoc"
 msgstr ""
 
-#: bclistview.moc.cpp:42 bclistview.moc.cpp:47
-msgid "BCListView"
+#: bccolumnview.moc.cpp:42 bccolumnview.moc.cpp:47
+msgid "BCColumnView"
 msgstr ""
 
 #: bcuniteditwidget.moc.cpp:42 bcuniteditwidget.moc.cpp:47
@@ -459,24 +508,98 @@ msgstr ""
 msgid "BCCollectionView"
 msgstr ""
 
-#: bccollectionview.cpp:56
+#: configdialog.moc.cpp:42 configdialog.moc.cpp:47
+msgid "ConfigDialog"
+msgstr ""
+
+#: bccollectionview.cpp:53
 msgid "Rename"
 msgstr ""
 
-#: bccollectionview.cpp:57
+#: bccollectionview.cpp:54 bccollectionview.cpp:57
 msgid "Expand All"
 msgstr ""
 
-#: bccollectionview.cpp:58
+#: bccollectionview.cpp:55 bccollectionview.cpp:58
 msgid "Collapse All"
 msgstr ""
 
-#: bccollectionview.cpp:93
+#: bccollectionview.cpp:87
 msgid "(None)"
 msgstr ""
 
-#: bccollectionview.cpp:408
+#: bccollectionview.cpp:479
 msgid "New Collection Name"
+msgstr ""
+
+#: bctabcontrol.moc.cpp:42 bctabcontrol.moc.cpp:47
+msgid "BCTabControl"
+msgstr ""
+
+#: configdialog.cpp:111
+msgid "General Options"
+msgstr ""
+
+#: configdialog.cpp:114
+msgid "Reopen file at startup"
+msgstr ""
+
+#: configdialog.cpp:115
+msgid ""
+"If checked, the file that was last open will be re-opened at program start-"
+"up."
+msgstr ""
+
+#: configdialog.cpp:119
+msgid "Auto capitalization in titles and authors"
+msgstr ""
+
+#: configdialog.cpp:121
+msgid ""
+"If checked, the title and the author(s) will be automatically capitalized."
+msgstr ""
+
+#: configdialog.cpp:126
+msgid "Articles: "
+msgstr ""
+
+#: configdialog.cpp:132
+msgid ""
+"A comma-separated list of words which should be considered as articles if "
+"they are the first word in a title."
+msgstr ""
+
+#: configdialog.cpp:137
+msgid "Personal Suffixes: "
+msgstr ""
+
+#: configdialog.cpp:142
+msgid ""
+"A comma-separated list of suffixes which might be used in personal names."
+msgstr ""
+
+#: configdialog.cpp:151
+msgid "Books"
+msgstr ""
+
+#: configdialog.cpp:151
+msgid "Book Collection Options"
+msgstr ""
+
+#: configdialog.cpp:158
+msgid "CDs"
+msgstr ""
+
+#: configdialog.cpp:158
+msgid "Audio Collection Options"
+msgstr ""
+
+#: configdialog.cpp:165
+msgid "Videos"
+msgstr ""
+
+#: configdialog.cpp:165
+msgid "Video Collection Options"
 msgstr ""
 
 #: rc.cpp:2
@@ -485,6 +608,10 @@ msgstr ""
 
 #: rc.cpp:3
 msgid "Show Browse Toolbar"
+msgstr ""
+
+#: rc.cpp:5
+msgid "&Reports"
 msgstr ""
 
 #: _translatorinfo.cpp:1

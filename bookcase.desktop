@@ -1,0 +1,10 @@
+# KDE Config File  
+[Desktop Entry]
+Type=Application
+Exec=bookcase -caption "%c" %i %m  
+Icon=bookcase.png
+MiniIcon=bookcase.png
+DocPath=bookcase/index.html
+Comment=A personal book collection manager
+Terminal=0
+Name=Bookcase

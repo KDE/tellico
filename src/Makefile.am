@@ -1,10 +1,10 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 bin_PROGRAMS = bookcase
-bookcase_SOURCES = bccollectionview.cpp bcuniteditwidget.cpp bcattribute.cpp bcunit.cpp bccollection.cpp bookcasedoc.cpp bclistview.cpp bookcase.cpp main.cpp 
+bookcase_SOURCES = configdialog.cpp bctabcontrol.cpp bccollectionview.cpp bcuniteditwidget.cpp bcattribute.cpp bcunit.cpp bccollection.cpp bookcasedoc.cpp bccolumnview.cpp bookcase.cpp main.cpp 
 bookcase_LDADD   =  $(LIB_KFILE) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) $(LIBSOCKET)
 
 
-EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcaseui.rc bclistview.cpp bclistview.h bookcasedoc.cpp bookcasedoc.h bccollection.cpp bccollection.h bcunit.cpp bcunit.h bcattribute.cpp bcattribute.h bcuniteditwidget.cpp bcuniteditwidget.h bccollectionview.cpp bccollectionview.h bcunititem.h 
+EXTRA_DIST = main.cpp bookcase.cpp bookcase.h bookcaseui.rc bccolumnview.cpp bccolumnview.h bookcasedoc.cpp bookcasedoc.h bccollection.cpp bccollection.h bcunit.cpp bcunit.h bcattribute.cpp bcattribute.h bcuniteditwidget.cpp bcuniteditwidget.h bccollectionview.cpp bccollectionview.h bcunititem.h configdialog.h bctabcontrol.cpp bctabcontrol.h configdialog.cpp 
 
 ####### kdevelop will overwrite this part!!! (end)############
 # this 10 paths are KDE specific. Use them:
@@ -36,4 +36,3 @@ messages: rc.cpp
 	if test -n "$$LIST"; then \
 	 $(XGETTEXT) $$LIST -o $(podir)/bookcase.pot; \
 	fi
-

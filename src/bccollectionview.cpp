@@ -1,5 +1,5 @@
 /***************************************************************************
-                          bccollectionview.cpp  -  description
+                             bccollectionview.cpp
                              -------------------
     begin                : Sat Oct 13 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -19,7 +19,6 @@
 #include "bccollection.h"
 #include "bcattribute.h"
 #include "bcunititem.h"
-#include <kpopupmenu.h>
 #include <klineeditdlg.h>
 #include <klocale.h>
 #include <kdebug.h>
@@ -29,33 +28,34 @@
 #include <qstringlist.h>
 #include <qlist.h>
 #include <qcolor.h>
+#include <qregexp.h>
+#include <qheader.h>
 
 BCCollectionView::BCCollectionView(QWidget* parent_, const char* name_/*=0*/)
  : KListView(parent_, name_) {
   //kdDebug() << "BCCollectionView()" << endl;
   addColumn(i18n("Bookcase"));
+  // hide the header since there's only one column
+  header()->hide();
   setRootIsDecorated(true);
   setTreeStepSize(10);
   // turn off the alternate background color
   setAlternateBackground(QColor());
 
-  m_groupDict = new QDict<ParentItem>();
-  //m_groupDict->setAutoDelete(true);
-
-  m_menu = new KPopupMenu(this);
-  KIconLoader* loader = KGlobal::iconLoader();
   QPixmap rename, expand, collapse;
-  if(loader) {
-    rename = loader->loadIcon("editclear", KIcon::Small);
-    expand = loader->loadIcon("2downarrow", KIcon::Small);
-    collapse = loader->loadIcon("2uparrow", KIcon::Small);
+  rename = KGlobal::iconLoader()->loadIcon("editclear", KIcon::Small);
+  expand = KGlobal::iconLoader()->loadIcon("2downarrow", KIcon::Small);
+  collapse = KGlobal::iconLoader()->loadIcon("2uparrow", KIcon::Small);
 
-    m_groupOpen = loader->loadIcon("folder_red_open", KIcon::Small);
-    m_groupClosed = loader->loadIcon("folder_red", KIcon::Small);
-  }
-  m_menu->insertItem(rename, i18n("Rename"), this, SLOT(slotHandleRename()));
-  m_menu->insertItem(expand, i18n("Expand All"), this, SLOT(slotExpandAll()));
-  m_menu->insertItem(collapse, i18n("Collapse All"), this, SLOT(slotCollapseAll()));
+  m_groupOpenPixmap = KGlobal::iconLoader()->loadIcon("folder_red_open", KIcon::Small);
+  m_groupClosedPixmap = KGlobal::iconLoader()->loadIcon("folder_red", KIcon::Small);
+
+  m_collMenu.insertItem(rename, i18n("Rename"), this, SLOT(slotHandleRename()));
+  m_collMenu.insertItem(expand, i18n("Expand All"), this, SLOT(slotExpandAll()));
+  m_collMenu.insertItem(collapse, i18n("Collapse All"), this, SLOT(slotCollapseAll()));
+
+  m_groupMenu.insertItem(expand, i18n("Expand All"), this, SLOT(slotExpandAll()));
+  m_groupMenu.insertItem(collapse, i18n("Collapse All"), this, SLOT(slotCollapseAll()));
 
   connect(this, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&, int)),
           SLOT(slotRMB(QListViewItem*, const QPoint&, int)));
@@ -72,8 +72,6 @@ BCCollectionView::BCCollectionView(QWidget* parent_, const char* name_/*=0*/)
 }
 
 BCCollectionView::~BCCollectionView() {
-  delete m_groupDict;
-  m_groupDict = NULL;
 }
 
 void BCCollectionView::insertItem(BCAttribute* att_, ParentItem* root_, BCUnit* unit_) {
@@ -85,25 +83,27 @@ void BCCollectionView::insertItem(BCAttribute* att_, ParentItem* root_, BCUnit* 
   int flags = att_->flags();
   QStringList groups;
   QString attValue = unit_->attribute(att_->name());
-  if((flags & BCAttribute::AllowMultiple) && !attValue.isEmpty()) {
-    groups = QStringList::split(";", attValue);
-  } else if(!attValue.isEmpty()) {
-    groups << attValue;
-  } else {
+  if(attValue.isEmpty()) {
     groups << i18n("(None)");
+  } else {
+    if(flags & BCAttribute::AllowMultiple) {
+      // the semi-colon could be followed by a space or not
+      // lazy way to work around that is to remove space, then split
+      attValue.replace(QRegExp("; "), ";");
+      groups = QStringList::split(";", attValue);
+    } else {
+      groups << attValue;
+    }
   }
 
-  KIconLoader* loader = KGlobal::iconLoader();
   QPixmap icon;
-  if(loader) {
-    icon = loader->loadIcon(unit_->collection()->iconName(), KIcon::User);
-  }
+  icon = KGlobal::iconLoader()->loadIcon(unit_->collection()->iconName(), KIcon::User);
 
   // guaranteed to have a "title" attribute
   QString title = unit_->attribute("title");
   QStringList::Iterator groupIt;
   for(groupIt = groups.begin() ; groupIt != groups.end(); ++groupIt) {
-    QString group = static_cast<QString>(*groupIt).simplifyWhiteSpace();
+    QString group = static_cast<QString>(*groupIt);
     if(flags & BCAttribute::FormatTitle) {
       group = BCAttribute::formatTitle(group);
     } else if(flags & BCAttribute::FormatName) {
@@ -112,16 +112,22 @@ void BCCollectionView::insertItem(BCAttribute* att_, ParentItem* root_, BCUnit* 
       group = BCAttribute::formatDate(group);
     }
 
-    ParentItem* par = m_groupDict->find(QString::number(unit_->collection()->id()) + group);
+    ParentItem* par = m_groupDict.find(QString::number(unit_->collection()->id()) + group);
     if(!par) {
       par = new ParentItem(root_, group);
-      par->setPixmap(0, m_groupClosed);
-      m_groupDict->insert(QString::number(unit_->collection()->id()) + group, par);
+      //kdDebug() << "BCCollectionView::insertItem() -- adding group (" << group << ")" << endl;
+      par->setPixmap(0, m_groupClosedPixmap);
+      m_groupDict.insert(QString::number(unit_->collection()->id()) + group, par);
     }
     BCUnitItem* item =  new BCUnitItem(par, BCAttribute::formatTitle(title), unit_);
     item->setPixmap(0, icon);
-    ensureItemVisible(item);
-    par->setOpen(true);
+    if(isUpdatesEnabled()) {
+      ensureItemVisible(item);
+      setSelected(item, true);
+      par->setOpen(true);
+    } else {
+      root_->setOpen(true);
+    }
   }
 }
 
@@ -138,11 +144,14 @@ QList<BCUnitItem> BCCollectionView::locateItem(BCUnit* unit_) {
 
         // unitItems always have a depth of 2
         if(it.current()->depth() == 2) {
-          if(static_cast<BCUnitItem*>(it.current())->unit() == unit_) {
-            list.append(static_cast<BCUnitItem*>(it.current()));
+          BCUnitItem* unitItem = static_cast<BCUnitItem*>(it.current());
+          if(unitItem->unit() == unit_) {
+            list.append(unitItem);
           }
         }
+
       } // end UnitItem for loop
+      break;
     }
   } // end collection for loop
   return list;
@@ -165,7 +174,7 @@ ParentItem* BCCollectionView::locateItem(BCCollection* coll_) {
 }
 
 void BCCollectionView::slotReset() {
-  m_groupDict->clear();
+  m_groupDict.clear();
   clear();
 }
 
@@ -200,7 +209,7 @@ void BCCollectionView::slotRemoveItem(BCCollection* coll_) {
   // first remove all groups in collection from dict
   QListViewItem* groupItem = collItem->firstChild();
   for( ; groupItem; groupItem = groupItem->nextSibling()) {
-    m_groupDict->remove(QString::number(coll_->id()) + groupItem->text(0));
+    m_groupDict.remove(QString::number(coll_->id()) + groupItem->text(0));
   }
   // automatically deletes all children
   delete collItem;
@@ -239,6 +248,9 @@ void BCCollectionView::slotModifyItem(BCUnit* unit_) {
 
   QStringList groups;
   if(flags & BCAttribute::AllowMultiple) {
+    // the semi-colon could be followed by a space or not
+    // lazy way to work around that is to remove space, then split
+    groupText.replace(QRegExp("; "), ";");
     groups = QStringList::split(";", groupText);
   } else {
     groups << groupText;
@@ -257,12 +269,10 @@ void BCCollectionView::slotModifyItem(BCUnit* unit_) {
       par->setOpen(true);
       // remove the string from the list we're checking
       groups.remove(par->text(0));
-      // no longer have to worry about that item
-      list.remove(it.current());
     } else {
       delete it.current();
       if(par->childCount() == 0) {
-        m_groupDict->remove(QString::number(unit_->collection()->id()) + par->text(0));
+        m_groupDict.remove(QString::number(unit_->collection()->id()) + par->text(0));
         delete par;
       }
       // triggerUpdate();
@@ -274,11 +284,8 @@ void BCCollectionView::slotModifyItem(BCUnit* unit_) {
     return;
   }
 
-  KIconLoader* loader = KGlobal::iconLoader();
   QPixmap icon;
-  if(loader) {
-    icon = loader->loadIcon(unit_->collection()->iconName(), KIcon::User);
-  }
+  icon = KGlobal::iconLoader()->loadIcon(unit_->collection()->iconName(), KIcon::User);
 
   // but if any groups are left, they either need to be created or a new item inserted
   ParentItem* root = locateItem(unit_->collection());
@@ -286,11 +293,11 @@ void BCCollectionView::slotModifyItem(BCUnit* unit_) {
   for( ; groupIt != groups.end(); ++groupIt) {
     QString groupName = static_cast<QString>(*groupIt).simplifyWhiteSpace();
     // kdDebug() << groupName << endl;
-    ParentItem* par = m_groupDict->find(QString::number(unit_->collection()->id()) + groupName);
+    ParentItem* par = m_groupDict.find(QString::number(unit_->collection()->id()) + groupName);
     if(!par) {
       par = new ParentItem(root, groupName);
-      par->setPixmap(0, m_groupClosed);
-      m_groupDict->insert(QString::number(unit_->collection()->id()) + groupName, par);
+      par->setPixmap(0, m_groupClosedPixmap);
+      m_groupDict.insert(QString::number(unit_->collection()->id()) + groupName, par);
     }
     BCUnitItem* item = new BCUnitItem(par, BCAttribute::formatTitle(unit_->attribute("title")), unit_);
     item->setPixmap(0, icon);
@@ -312,7 +319,7 @@ void BCCollectionView::slotRemoveItem(BCUnit* unit_) {
     delete it.current();
     // if the parent now has no children, delete it
     if(par->childCount() == 0) {
-      m_groupDict->remove(QString::number(unit_->collection()->id()) + par->text(0));
+      m_groupDict.remove(QString::number(unit_->collection()->id()) + par->text(0));
       delete par;
     }
   }
@@ -367,8 +374,35 @@ void BCCollectionView::slotExpandAll() {
 
   if(item->depth() == 0) { // collection item, close all top-level items
     item = firstChild();
-  } else {
+  } else if (item->depth() == 1) {
     item = item->parent()->firstChild();
+  } else {
+    // selected item refers to a unit
+    return;
+  }
+
+  // now open all siblings
+  for( ; item; item = item->nextSibling()) {
+    item->setOpen(true);
+  }
+}
+
+void BCCollectionView::slotExpandAll(int depth_) {
+  QListViewItem* item;
+
+  switch(depth_) {
+    //TODO: should be iterating over all collections
+    case 0:
+      item = firstChild();
+      break;
+
+    case 1:
+      item = firstChild()->firstChild();
+      break;
+
+    default:
+      kdDebug() << "BCCollectionView::slotExpandAll() - stupid depth #" << depth_ << endl;
+      return;
   }
 
   // now open all siblings
@@ -385,8 +419,35 @@ void BCCollectionView::slotCollapseAll() {
 
   if(item->depth() == 0) { // collection item, close all top-level items
     item = firstChild();
-  } else {
+  } else if (item->depth() == 1) {
     item = item->parent()->firstChild();
+  } else {
+    // selected item refers to a unit
+    return;
+  }
+
+  // now open all siblings
+  for( ; item; item = item->nextSibling()) {
+    item->setOpen(false);
+  }
+}
+
+void BCCollectionView::slotCollapseAll(int depth_) {
+  QListViewItem* item;
+
+  switch(depth_) {
+    //TODO: should be iterating over all collections
+    case 0:
+      item = firstChild();
+      break;
+
+    case 1:
+      item = firstChild()->firstChild();
+      break;
+
+    default:
+      kdDebug() << "BCCollectionView::slotCollapseAll() - stupid depth #" << depth_ << endl;
+      return;
   }
 
   // now close all siblings
@@ -396,9 +457,17 @@ void BCCollectionView::slotCollapseAll() {
 }
 
 void BCCollectionView::slotRMB(QListViewItem* item_, const QPoint& point_, int) {
-  if(item_ && m_menu->count() > 0) {
-    setSelected(item_, true);
-    m_menu->popup(point_);
+  if(!item_) {
+    return;
+  }
+
+  setSelected(item_, true);
+  if(item_->depth() == 0 && m_collMenu.count() > 0) {
+    m_collMenu.popup(point_);
+  } else if(item_->depth() == 1 && m_groupMenu.count() > 0) {
+    m_groupMenu.popup(point_);
+  } else if(item_->depth() == 2 && m_unitMenu.count() > 0) {
+    m_unitMenu.popup(point_);
   }
 }
 
@@ -416,9 +485,19 @@ void BCCollectionView::slotHandleRename() {
 }
 
 void BCCollectionView::slotCollapsed(QListViewItem* item_) {
-  item_->setPixmap(0, m_groupClosed);
+  // only change icon for collection and group items
+  if(item_->depth() < 2) {
+    item_->setPixmap(0, m_groupClosedPixmap);
+  }
 }
 
 void BCCollectionView::slotExpanded(QListViewItem* item_) {
-  item_->setPixmap(0, m_groupOpen);
+  // only change icon for collection and group items
+  if(item_->depth() < 2) {
+    item_->setPixmap(0, m_groupOpenPixmap);
+  }
+}
+
+void BCCollectionView::slotClearSelection() {
+  selectAll(false);
 }

@@ -1326,7 +1326,6 @@ sub tag_POFILES ()
     if ($tmp =~ /^\s*AUTO\s*$/)
     {
         opendir (THISDIR, ".");
-	next if ($tmp eq "CVS" || $tmp =~ /^\./  || $tmp =~ /^Makefile/ || $tmp =~ /~$/ || $tmp =~ /^#.*#$/);
 	$pofiles =  join(" ", grep(/\.po$/, readdir(THISDIR)));
         closedir (THISDIR);
         print STDOUT "pofiles found = $pofiles\n"   if ($verbose);
@@ -1863,7 +1862,7 @@ sub updateMakefile ()
     open (FILEOUT, "> $makefile")
                         || die "Could not create $makefile: $!\n";
 
-    print FILEOUT "\# $progId - " . '$Revision: 1.3 $ '  . "\n";
+    print FILEOUT "\# $progId - " . '$Revision: 1.4 $ '  . "\n";
     $MakefileData =~ s/\034/\\\n\t/g;    # Restore continuation lines
     print FILEOUT $MakefileData;
     close FILEOUT;

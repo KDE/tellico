@@ -380,11 +380,10 @@ Section</link> for the answer.</para>
 </qandaentry>
 <qandaentry>
 <question>
-<para>Why can't I twiddle my documents?</para>
+<para>How do I input multiple authors?</para>
 </question>
 <answer>
-<para>You can only twiddle your documents if you have the foobar.lib
-installed.</para>
+<para>Multiple authors can be input by separating their names with a semi-colon (;).</para>
 </answer>
 </qandaentry>
 </qandaset>
@@ -403,7 +402,7 @@ distribution. -->
 &bookcase;
 </para>
 <para>
-Program copyright 1997 John Q. Hacker <email>jqh@kde.org</email>
+Program copyright 2001 Robby Stephenson <email>robby@radiojodi.com</email>
 </para>
 <para>
 Contributors:
@@ -416,7 +415,7 @@ Contributors:
 </para>
 
 <para>
-Documentation copyright 1999 George N. Ugnacious <email>gnu@kde.org</email>
+Documentation copyright 2001 Robby Stephenson <email>robby@radiojodi.com</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -431,9 +430,6 @@ Documentation copyright 1999 George N. Ugnacious <email>gnu@kde.org</email>
      regardless of what license the application uses) -->
 
 &underGPL;        	 <!-- GPL License -->
-&underBSDLicense;        <!-- BSD License -->
-&underArtisticLicense;   <!-- BSD Artistic License -->
-&underX11License;        <!-- X11 License  -->
 
 </chapter>
 

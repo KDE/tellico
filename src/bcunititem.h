@@ -1,5 +1,5 @@
 /* *************************************************************************
-                          bcunititem.h  -  description
+                                bcunititem.h
                              -------------------
     begin                : Sat Oct 20 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -30,7 +30,7 @@ class BCUnit;
  * @see BCUnit
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.7 2001/11/03 18:15:05 robby Exp $
+ * @version $Id: bcunititem.h,v 1.8 2002/01/13 22:41:26 robby Exp $
  */
 class BCUnitItem : public KListViewItem {
 public:
@@ -75,7 +75,7 @@ private:
  *
  *
  * @author Robby Stephenson
- * @version $Id: bcunititem.h,v 1.7 2001/11/03 18:15:05 robby Exp $
+ * @version $Id: bcunititem.h,v 1.8 2002/01/13 22:41:26 robby Exp $
  */
 class ParentItem : public KListViewItem {
 public:

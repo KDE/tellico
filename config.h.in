@@ -15,9 +15,6 @@
 /* Define if you have the res_init function.  */
 #undef HAVE_RES_INIT
 
-/* Define if you have the <pthread/linuxthreads/pthread.h> header file.  */
-#undef HAVE_PTHREAD_LINUXTHREADS_PTHREAD_H
-
 /* Name of package */
 #undef PACKAGE
 
@@ -47,7 +44,4 @@
 
 /* Define if you have libjpeg */
 #undef HAVE_LIBJPEG
-
-/* Define if you have a working libpthread (will enable threaded code) */
-#undef HAVE_LIBPTHREAD
 

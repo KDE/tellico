@@ -1,5 +1,5 @@
 /* *************************************************************************
-                          bcunit.cpp  -  description
+                                 bcunit.cpp
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -31,7 +31,12 @@ BCUnit::BCUnit(const BCUnit& unit_) {
   m_attributes = unit_.m_attributes;
 }
 
+BCUnit BCUnit::operator= (const BCUnit& unit_) {
+  return BCUnit(unit_);
+}
+
 BCUnit::~BCUnit() {
+  // not strictly neccessary...
   m_attributes.clear();
 }
 

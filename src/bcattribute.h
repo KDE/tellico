@@ -1,5 +1,5 @@
 /* *************************************************************************
-                          bcattribute.h  -  description
+                                bcattribute.h
                              -------------------
     begin                : Sun Sep 23 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -28,7 +28,7 @@
  * some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: bcattribute.h,v 1.9 2001/11/02 07:20:04 robby Exp $
+ * @version $Id: bcattribute.h,v 1.13 2002/02/09 07:11:25 robby Exp $
  */
 class BCAttribute {
 public:
@@ -52,7 +52,7 @@ public:
 
   /**
    * The attribute flags. All the visibility and formatting properties are smushed into
-   * one single flags variable. The properties shoulbe be bit-wise AND'd together.
+   * one single flags variable. The properties should be bit-wise AND'd together.
    * @li DontComplete - Don't include a completion object in the lineedit
    * @li DontShow - Don't show this attribute in the listviews.
    * @li AllowMultiple - Multiple values are allowed in one attribute and are
@@ -60,8 +60,9 @@ public:
    * @li FormatTitle - The attribute should be formatted as a title
    * @li FormatName - The attribute should be formatted as a personal name
    * @li FormatDate - The attribute should be formatted as a date.
+   * @li AllowGrouped - Units may be grouped by this attribute.
    *
-   * Obviously, the last three are mutually exclusive, but this is not checked nor enforced.
+   * Obviously, the last three are mutually exclusive, but this is neither checked nor enforced.
    **/
   enum AttributeFlags {
     DontComplete    = 1 << 0,   // don't allow auto-completion
@@ -69,29 +70,30 @@ public:
     AllowMultiple   = 1 << 2,   // allow multiple values, separated by a comma
     FormatTitle     = 1 << 3,   // format as a title, i.e. shift articles to end
     FormatName      = 1 << 4,   // format as a personal full name
-    FormatDate      = 1 << 5    // format as a date
+    FormatDate      = 1 << 5,   // format as a date
+    AllowGrouped    = 1 << 6    // can be used to group units
   };
 
   /**
    * The constructor for all types except Choice. The default type is Line.
    * By default, the attribute group is set to "General", and should be modified using
-   * the setGroup() method.
+   * the @ref setGroup() method.
    *
    * @param name The attribute name
    * @param title The attribute title
    * @param type The attribute type
    */
-  BCAttribute(QString name, QString title, AttributeType type = Line);
+  BCAttribute(const QString& name, const QString& title, AttributeType type = Line);
   /**
    * The constructor for Choice types attributes.
    * By default, the attribute group is set to "General", and should be modified using
-   * the setGroup() method.
+   * the @ref setGroup() method.
    *
    * @param name The attribute name
    * @param title The attribute title
    * @param allowed The allowed values of the attribute
    */
-  BCAttribute(QString name, QString title, QStringList allowed);
+  BCAttribute(const QString& name, const QString& title, const QStringList& allowed);
   /**
    */
   ~BCAttribute();
@@ -187,6 +189,70 @@ public:
    * @return The formatted string
    */
   static QString formatDate(const QString& date);
+  /**
+   * Returns the default article list.
+   *
+   * @return The article list
+   */
+  static QStringList defaultArticleList();
+  /**
+   * Returns the list of articles.
+   *
+   * @return The article list
+   */
+  static const QStringList& articleList();
+  /**
+   * Set the words used as articles.
+   *
+   * @param list The list if articles
+   */
+  static void setArticleList(const QStringList& list);
+  /**
+   * Returns the default suffix list.
+   *
+   * @return The suffix list
+   */
+  static QStringList defaultSuffixList();
+  /**
+   * Returns the list of suffixes used in personal names.
+   *
+   * @return The article list
+   */
+  static const QStringList& suffixList();
+  /**
+   * Set the words used as suffixes in personal names.
+   *
+   * @param list The list if articles
+   */
+  static void setSuffixList(const QStringList& list);
+  /**
+   * Returns true if the capitalization of titles and authors is set to be consistent.
+   *
+   * @return If capitalization is automatically fixed
+   */
+  static bool isAutoCapitalization();
+  /**
+   * Set whether the capitalization of titles and authors is automatic.
+   *
+   * @param fix
+   */
+  static void setAutoCapitalization(bool autoCapital);
+
+protected:
+  /**
+   * The copy constructor is private, to ensure that it's never used.
+   */
+  BCAttribute(const BCAttribute& att);
+  /**
+   * The assignment operator is private, to ensure that it's never used.
+   */
+  BCAttribute operator=(const BCAttribute& att);
+  /**
+   * Helper method to fix capitalization.
+   *
+   * @param str String to fix
+   */
+  static QString capitalize(const QString& str);
 
 private:
   QString m_name;
@@ -195,6 +261,9 @@ private:
   AttributeType m_type;
   QStringList m_allowed;
   int m_flags;
-};
 
+  static QStringList m_articles;
+  static QStringList m_suffixes;
+  static bool m_autoCapitalization;
+};
 #endif

@@ -1,5 +1,5 @@
 /* *************************************************************************
-                          bcunit.h  -  description
+                                  bcunit.h
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -18,10 +18,10 @@
 #ifndef BCUNIT_H
 #define BCUNIT_H
 
+class BCCollection;
+
 #include <qmap.h>
 #include <qstring.h>
-
-class BCCollection;
 
 /**
  * The BCUnit class represents a book, a CD, or whatever is the basic entity in the collection.
@@ -32,7 +32,7 @@ class BCCollection;
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bcunit.h,v 1.7 2001/11/03 19:46:34 robby Exp $
+ * @version $Id: bcunit.h,v 1.10 2002/01/12 04:42:17 robby Exp $
  */
 class BCUnit {
 public:
@@ -47,6 +47,10 @@ public:
    * The copy constructor, needed since the id must be different.
    */
   BCUnit(const BCUnit& unit);
+  /**
+   * The assignment operator is overloaded, since the id must be different.
+   */
+  BCUnit operator= (const BCUnit& unit);
   /**
    */
   ~BCUnit();

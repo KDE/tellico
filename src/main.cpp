@@ -27,7 +27,7 @@ static const char *description =
 static const char *version = VERSION;
 
 static KCmdLineOptions options[] = {
-  { "+[filename]", I18N_NOOP("file to open"), 0 },
+  { "+[filename]", I18N_NOOP("File to open"), 0 },
   { 0, 0, 0 }
 };
 

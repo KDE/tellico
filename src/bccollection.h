@@ -1,5 +1,5 @@
 /* *************************************************************************
-                          bccollection.h  -  description
+                               bccollection.h
                              -------------------
     begin                : Sat Sep 15 2001
     copyright            : (C) 2001 by Robby Stephenson
@@ -24,7 +24,6 @@
 #include <qlist.h>
 #include <qstring.h>
 #include <qstringlist.h>
-#include <qdom.h>
 
 /**
  * The BCCollection class is the primary data object, holding a list of attributes and units.
@@ -38,7 +37,7 @@
  * @see BCAttribute
  *
  * @author Robby Stephenson
- * @version $Id: bccollection.h,v 1.12 2001/11/03 19:46:34 robby Exp $
+ * @version $Id: bccollection.h,v 1.15 2002/01/12 03:11:01 robby Exp $
  */
 class BCCollection {
 public:
@@ -179,6 +178,13 @@ public:
    */
   bool allowed(const QString& key, const QString& value);
   /**
+   * Returns a boolean indicating if the collection is a custom one, i.e.
+   * different from a collection returned from one of the static methods
+   *
+   * @return A boolean indicating if the collection is custom
+   */
+  bool isCustom() const;
+  /**
    * Returns a list of all the attribute names.
    *
    * @param all Whether all attributes should be included or only those which have the
@@ -219,12 +225,6 @@ public:
    * @return The attribute list
    */
   QList<BCAttribute> attributeListByGroup(const QString& group) const;
-  /**
-   * Saves the data in the collection into a QDomDocument in XML representation.
-   *
-   * @param doc The pointer to the QDomDocument
-   */
-  void saveXML(QDomDocument* doc);
 
   /**
    * A convenience function to return a pointer a the standard book collection.
@@ -282,6 +282,16 @@ public:
    */
   static BCCollection* Videos(int id);
 
+protected:
+  /**
+   * The copy constructor is private, to ensure that it's never used.
+   */
+  BCCollection(const BCCollection& coll);
+  /**
+   * The assignment operator is private, to ensure that it's never used.
+   */
+  BCCollection operator=(const BCCollection& coll);
+
 private:
   int m_id;
   QString m_title;
@@ -292,6 +302,7 @@ private:
   QList<BCAttribute> m_attributeList;
   QStringList m_attributeGroups;
   QList<BCUnit> m_unitList;
+  bool m_isCustom;
 };
 
 #endif

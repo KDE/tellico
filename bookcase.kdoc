@@ -1,0 +1,267 @@
+<! KDOC Library HTML Reference File>
+<VERSION="2.0a53">
+<BASE URL="bookcase-api">
+<PLANG="CXX">
+<LIBNAME>bookcase</LIBNAME>
+
+
+<STATS>
+<STAT NAME="Global">66</STAT>
+<STAT NAME="Methods">228</STAT>
+<STAT NAME="Types">14</STAT>
+<STAT NAME="Nested">2</STAT>
+</STATS>
+<C NAME="BCAttribute" REF="BCAttribute.html">
+<M NAME="AttributeType" REF="BCAttribute.html#AttributeType">
+<M NAME="AttributeFlags" REF="BCAttribute.html#AttributeFlags">
+<ME NAME="BCAttribute" REF="BCAttribute.html#BCAttribute">
+<ME NAME="BCAttribute" REF="BCAttribute.html#BCAttribute">
+<ME NAME="~BCAttribute" REF="BCAttribute.html#~BCAttribute">
+<ME NAME="name" REF="BCAttribute.html#name">
+<ME NAME="title" REF="BCAttribute.html#title">
+<ME NAME="setTitle" REF="BCAttribute.html#setTitle">
+<ME NAME="group" REF="BCAttribute.html#group">
+<ME NAME="setGroup" REF="BCAttribute.html#setGroup">
+<ME NAME="allowed" REF="BCAttribute.html#allowed">
+<ME NAME="setAllowed" REF="BCAttribute.html#setAllowed">
+<ME NAME="type" REF="BCAttribute.html#type">
+<ME NAME="flags" REF="BCAttribute.html#flags">
+<ME NAME="setFlags" REF="BCAttribute.html#setFlags">
+<ME NAME="formatTitle" REF="BCAttribute.html#formatTitle">
+<ME NAME="formatName" REF="BCAttribute.html#formatName">
+<ME NAME="formatDate" REF="BCAttribute.html#formatDate">
+<ME NAME="defaultArticleList" REF="BCAttribute.html#defaultArticleList">
+<ME NAME="articleList" REF="BCAttribute.html#articleList">
+<ME NAME="setArticleList" REF="BCAttribute.html#setArticleList">
+<ME NAME="defaultSuffixList" REF="BCAttribute.html#defaultSuffixList">
+<ME NAME="suffixList" REF="BCAttribute.html#suffixList">
+<ME NAME="setSuffixList" REF="BCAttribute.html#setSuffixList">
+<ME NAME="isAutoCapitalization" REF="BCAttribute.html#isAutoCapitalization">
+<ME NAME="setAutoCapitalization" REF="BCAttribute.html#setAutoCapitalization">
+<ME NAME="BCAttribute" REF="BCAttribute.html#BCAttribute">
+<ME NAME="operator=" REF="BCAttribute.html#operator=">
+<ME NAME="capitalize" REF="BCAttribute.html#capitalize">
+</C>
+<C NAME="BCCollection" REF="BCCollection.html">
+<ME NAME="BCCollection" REF="BCCollection.html#BCCollection">
+<ME NAME="~BCCollection" REF="BCCollection.html#~BCCollection">
+<ME NAME="id" REF="BCCollection.html#id">
+<ME NAME="title" REF="BCCollection.html#title">
+<ME NAME="setTitle" REF="BCCollection.html#setTitle">
+<ME NAME="unitName" REF="BCCollection.html#unitName">
+<ME NAME="unitTitle" REF="BCCollection.html#unitTitle">
+<ME NAME="iconName" REF="BCCollection.html#iconName">
+<ME NAME="setIconName" REF="BCCollection.html#setIconName">
+<ME NAME="unitList" REF="BCCollection.html#unitList">
+<ME NAME="attributeList" REF="BCCollection.html#attributeList">
+<ME NAME="attributeGroups" REF="BCCollection.html#attributeGroups">
+<ME NAME="groupAttribute" REF="BCCollection.html#groupAttribute">
+<ME NAME="setGroupAttribute" REF="BCCollection.html#setGroupAttribute">
+<ME NAME="unitCount" REF="BCCollection.html#unitCount">
+<ME NAME="attributeCount" REF="BCCollection.html#attributeCount">
+<ME NAME="addUnit" REF="BCCollection.html#addUnit">
+<ME NAME="deleteUnit" REF="BCCollection.html#deleteUnit">
+<ME NAME="addAttribute" REF="BCCollection.html#addAttribute">
+<ME NAME="allowed" REF="BCCollection.html#allowed">
+<ME NAME="isCustom" REF="BCCollection.html#isCustom">
+<ME NAME="attributeNames" REF="BCCollection.html#attributeNames">
+<ME NAME="attributeTitles" REF="BCCollection.html#attributeTitles">
+<ME NAME="valuesByAttributeName" REF="BCCollection.html#valuesByAttributeName">
+<ME NAME="attributeByName" REF="BCCollection.html#attributeByName">
+<ME NAME="attributeListByGroup" REF="BCCollection.html#attributeListByGroup">
+<ME NAME="Books" REF="BCCollection.html#Books">
+<ME NAME="CDs" REF="BCCollection.html#CDs">
+<ME NAME="Videos" REF="BCCollection.html#Videos">
+<ME NAME="BCCollection" REF="BCCollection.html#BCCollection">
+<ME NAME="operator=" REF="BCCollection.html#operator=">
+</C>
+<C NAME="BCUnit" REF="BCUnit.html">
+<ME NAME="BCUnit" REF="BCUnit.html#BCUnit">
+<ME NAME="BCUnit" REF="BCUnit.html#BCUnit">
+<ME NAME="operator= " REF="BCUnit.html#operator= ">
+<ME NAME="~BCUnit" REF="BCUnit.html#~BCUnit">
+<ME NAME="attribute" REF="BCUnit.html#attribute">
+<ME NAME="setAttribute" REF="BCUnit.html#setAttribute">
+<ME NAME="collection" REF="BCUnit.html#collection">
+<ME NAME="id" REF="BCUnit.html#id">
+</C>
+<C NAME="BCCollectionView" REF="BCCollectionView.html">
+<ME NAME="BCCollectionView" REF="BCCollectionView.html#BCCollectionView">
+<ME NAME="~BCCollectionView" REF="BCCollectionView.html#~BCCollectionView">
+<ME NAME="slotReset" REF="BCCollectionView.html#slotReset">
+<ME NAME="slotAddItem" REF="BCCollectionView.html#slotAddItem">
+<ME NAME="slotAddItem" REF="BCCollectionView.html#slotAddItem">
+<ME NAME="slotModifyItem" REF="BCCollectionView.html#slotModifyItem">
+<ME NAME="slotRemoveItem" REF="BCCollectionView.html#slotRemoveItem">
+<ME NAME="slotRemoveItem" REF="BCCollectionView.html#slotRemoveItem">
+<ME NAME="slotSetSelected" REF="BCCollectionView.html#slotSetSelected">
+<ME NAME="slotExpandAll" REF="BCCollectionView.html#slotExpandAll">
+<ME NAME="slotExpandAll" REF="BCCollectionView.html#slotExpandAll">
+<ME NAME="slotCollapseAll" REF="BCCollectionView.html#slotCollapseAll">
+<ME NAME="slotCollapseAll" REF="BCCollectionView.html#slotCollapseAll">
+<ME NAME="insertItem" REF="BCCollectionView.html#insertItem">
+<ME NAME="locateItem" REF="BCCollectionView.html#locateItem">
+<ME NAME="locateItem" REF="BCCollectionView.html#locateItem">
+<ME NAME="slotSelected" REF="BCCollectionView.html#slotSelected">
+<ME NAME="slotToggleItem" REF="BCCollectionView.html#slotToggleItem">
+<ME NAME="slotRMB" REF="BCCollectionView.html#slotRMB">
+<ME NAME="slotHandleRename" REF="BCCollectionView.html#slotHandleRename">
+<ME NAME="slotExpanded" REF="BCCollectionView.html#slotExpanded">
+<ME NAME="slotCollapsed" REF="BCCollectionView.html#slotCollapsed">
+<ME NAME="slotClearSelection" REF="BCCollectionView.html#slotClearSelection">
+<ME NAME="signalClear" REF="BCCollectionView.html#signalClear">
+<ME NAME="signalUnitSelected" REF="BCCollectionView.html#signalUnitSelected">
+<ME NAME="signalDoCollectionRename" REF="BCCollectionView.html#signalDoCollectionRename">
+</C>
+<C NAME="BCUnitItem" REF="BCUnitItem.html">
+<ME NAME="BCUnitItem" REF="BCUnitItem.html#BCUnitItem">
+<ME NAME="BCUnitItem" REF="BCUnitItem.html#BCUnitItem">
+<ME NAME="~BCUnitItem" REF="BCUnitItem.html#~BCUnitItem">
+<ME NAME="unit" REF="BCUnitItem.html#unit">
+</C>
+<C NAME="BCColumnView" REF="BCColumnView.html">
+<ME NAME="BCColumnView" REF="BCColumnView.html#BCColumnView">
+<ME NAME="~BCColumnView" REF="BCColumnView.html#~BCColumnView">
+<ME NAME="visibleListView" REF="BCColumnView.html#visibleListView">
+<ME NAME="listView" REF="BCColumnView.html#listView">
+<ME NAME="slotReset" REF="BCColumnView.html#slotReset">
+<ME NAME="slotAddPage" REF="BCColumnView.html#slotAddPage">
+<ME NAME="slotRemovePage" REF="BCColumnView.html#slotRemovePage">
+<ME NAME="slotAddItem" REF="BCColumnView.html#slotAddItem">
+<ME NAME="slotModifyItem" REF="BCColumnView.html#slotModifyItem">
+<ME NAME="slotRemoveItem" REF="BCColumnView.html#slotRemoveItem">
+<ME NAME="slotSetSelected" REF="BCColumnView.html#slotSetSelected">
+<ME NAME="slotShowUnit" REF="BCColumnView.html#slotShowUnit">
+<ME NAME="slotHandleDelete" REF="BCColumnView.html#slotHandleDelete">
+<ME NAME="populateItem" REF="BCColumnView.html#populateItem">
+<ME NAME="locateItem" REF="BCColumnView.html#locateItem">
+<ME NAME="slotRMB" REF="BCColumnView.html#slotRMB">
+<ME NAME="slotSelected" REF="BCColumnView.html#slotSelected">
+<ME NAME="slotClearSelection" REF="BCColumnView.html#slotClearSelection">
+<ME NAME="signalClear" REF="BCColumnView.html#signalClear">
+<ME NAME="signalUnitSelected" REF="BCColumnView.html#signalUnitSelected">
+<ME NAME="signalDoUnitDelete" REF="BCColumnView.html#signalDoUnitDelete">
+</C>
+<C NAME="BCTabControl" REF="BCTabControl.html">
+<ME NAME="BCTabControl" REF="BCTabControl.html#BCTabControl">
+<ME NAME="~BCTabControl" REF="BCTabControl.html#~BCTabControl">
+<ME NAME="showTab" REF="BCTabControl.html#showTab">
+</C>
+<C NAME="BCUnitEditWidget" REF="BCUnitEditWidget.html">
+<ME NAME="BCUnitEditWidget" REF="BCUnitEditWidget.html#BCUnitEditWidget">
+<ME NAME="~BCUnitEditWidget" REF="BCUnitEditWidget.html#~BCUnitEditWidget">
+<ME NAME="slotAddPage" REF="BCUnitEditWidget.html#slotAddPage">
+<ME NAME="slotRemovePage" REF="BCUnitEditWidget.html#slotRemovePage">
+<ME NAME="slotReset" REF="BCUnitEditWidget.html#slotReset">
+<ME NAME="slotHandleClear" REF="BCUnitEditWidget.html#slotHandleClear">
+<ME NAME="slotSetContents" REF="BCUnitEditWidget.html#slotSetContents">
+<ME NAME="slotUpdateCompletions" REF="BCUnitEditWidget.html#slotUpdateCompletions">
+<ME NAME="clearWidgets" REF="BCUnitEditWidget.html#clearWidgets">
+<ME NAME="slotHandleReturn" REF="BCUnitEditWidget.html#slotHandleReturn">
+<ME NAME="slotHandleNew" REF="BCUnitEditWidget.html#slotHandleNew">
+<ME NAME="slotHandleCopy" REF="BCUnitEditWidget.html#slotHandleCopy">
+<ME NAME="slotHandleSave" REF="BCUnitEditWidget.html#slotHandleSave">
+<ME NAME="slotHandleDelete" REF="BCUnitEditWidget.html#slotHandleDelete">
+<ME NAME="slotSwitchFocus" REF="BCUnitEditWidget.html#slotSwitchFocus">
+<ME NAME="signalDoUnitSave" REF="BCUnitEditWidget.html#signalDoUnitSave">
+<ME NAME="signalDoUnitDelete" REF="BCUnitEditWidget.html#signalDoUnitDelete">
+</C>
+<C NAME="ParentItem" REF="ParentItem.html">
+<ME NAME="ParentItem" REF="ParentItem.html#ParentItem">
+<ME NAME="ParentItem" REF="ParentItem.html#ParentItem">
+<ME NAME="~ParentItem" REF="ParentItem.html#~ParentItem">
+<ME NAME="id" REF="ParentItem.html#id">
+</C>
+<C NAME="BookcaseDoc" REF="BookcaseDoc.html">
+<ME NAME="BookcaseDoc" REF="BookcaseDoc.html#BookcaseDoc">
+<ME NAME="~BookcaseDoc" REF="BookcaseDoc.html#~BookcaseDoc">
+<ME NAME="setModified" REF="BookcaseDoc.html#setModified">
+<ME NAME="setURL" REF="BookcaseDoc.html#setURL">
+<ME NAME="isModified" REF="BookcaseDoc.html#isModified">
+<ME NAME="URL" REF="BookcaseDoc.html#URL">
+<ME NAME="newDocument" REF="BookcaseDoc.html#newDocument">
+<ME NAME="openDocument" REF="BookcaseDoc.html#openDocument">
+<ME NAME="saveModified" REF="BookcaseDoc.html#saveModified">
+<ME NAME="saveDocument" REF="BookcaseDoc.html#saveDocument">
+<ME NAME="closeDocument" REF="BookcaseDoc.html#closeDocument">
+<ME NAME="deleteContents" REF="BookcaseDoc.html#deleteContents">
+<ME NAME="collectionCount" REF="BookcaseDoc.html#collectionCount">
+<ME NAME="collectionById" REF="BookcaseDoc.html#collectionById">
+<ME NAME="collectionList" REF="BookcaseDoc.html#collectionList">
+<ME NAME="slotAddCollection" REF="BookcaseDoc.html#slotAddCollection">
+<ME NAME="slotDeleteCollection" REF="BookcaseDoc.html#slotDeleteCollection">
+<ME NAME="slotRenameCollection" REF="BookcaseDoc.html#slotRenameCollection">
+<ME NAME="slotSaveUnit" REF="BookcaseDoc.html#slotSaveUnit">
+<ME NAME="slotAddUnit" REF="BookcaseDoc.html#slotAddUnit">
+<ME NAME="slotDeleteUnit" REF="BookcaseDoc.html#slotDeleteUnit">
+<ME NAME="writeDocument" REF="BookcaseDoc.html#writeDocument">
+<ME NAME="signalModified" REF="BookcaseDoc.html#signalModified">
+<ME NAME="signalStatusMsg" REF="BookcaseDoc.html#signalStatusMsg">
+<ME NAME="signalNewDoc" REF="BookcaseDoc.html#signalNewDoc">
+<ME NAME="signalCollectionAdded" REF="BookcaseDoc.html#signalCollectionAdded">
+<ME NAME="signalCollectionModified" REF="BookcaseDoc.html#signalCollectionModified">
+<ME NAME="signalCollectionDeleted" REF="BookcaseDoc.html#signalCollectionDeleted">
+<ME NAME="signalUnitAdded" REF="BookcaseDoc.html#signalUnitAdded">
+<ME NAME="signalUnitModified" REF="BookcaseDoc.html#signalUnitModified">
+<ME NAME="signalUnitDeleted" REF="BookcaseDoc.html#signalUnitDeleted">
+<ME NAME="signalFractionDone" REF="BookcaseDoc.html#signalFractionDone">
+</C>
+<C NAME="ConfigDialog" REF="ConfigDialog.html">
+<ME NAME="ConfigDialog" REF="ConfigDialog.html#ConfigDialog">
+<ME NAME="~ConfigDialog" REF="ConfigDialog.html#~ConfigDialog">
+<ME NAME="readConfiguration" REF="ConfigDialog.html#readConfiguration">
+<ME NAME="saveConfiguration" REF="ConfigDialog.html#saveConfiguration">
+<ME NAME="setupGeneralPage" REF="ConfigDialog.html#setupGeneralPage">
+<ME NAME="setupBookPage" REF="ConfigDialog.html#setupBookPage">
+<ME NAME="setupAudioPage" REF="ConfigDialog.html#setupAudioPage">
+<ME NAME="setupVideoPage" REF="ConfigDialog.html#setupVideoPage">
+<ME NAME="slotOk" REF="ConfigDialog.html#slotOk">
+<ME NAME="slotApply" REF="ConfigDialog.html#slotApply">
+<ME NAME="signalConfigChanged" REF="ConfigDialog.html#signalConfigChanged">
+</C>
+<C NAME="Bookcase" REF="Bookcase.html">
+<ME NAME="Bookcase" REF="Bookcase.html#Bookcase">
+<ME NAME="~Bookcase" REF="Bookcase.html#~Bookcase">
+<ME NAME="doc" REF="Bookcase.html#doc">
+<ME NAME="readColumnWidths" REF="Bookcase.html#readColumnWidths">
+<ME NAME="slotFileNew" REF="Bookcase.html#slotFileNew">
+<ME NAME="slotFileOpen" REF="Bookcase.html#slotFileOpen">
+<ME NAME="slotFileOpen" REF="Bookcase.html#slotFileOpen">
+<ME NAME="slotFileOpenRecent" REF="Bookcase.html#slotFileOpenRecent">
+<ME NAME="slotFileSave" REF="Bookcase.html#slotFileSave">
+<ME NAME="slotFileSaveAs" REF="Bookcase.html#slotFileSaveAs">
+<ME NAME="slotFilePrint" REF="Bookcase.html#slotFilePrint">
+<ME NAME="slotFileQuit" REF="Bookcase.html#slotFileQuit">
+<ME NAME="slotEditCut" REF="Bookcase.html#slotEditCut">
+<ME NAME="slotEditCopy" REF="Bookcase.html#slotEditCopy">
+<ME NAME="slotEditPaste" REF="Bookcase.html#slotEditPaste">
+<ME NAME="slotEditFind" REF="Bookcase.html#slotEditFind">
+<ME NAME="slotEditFindNext" REF="Bookcase.html#slotEditFindNext">
+<ME NAME="slotToggleToolBar" REF="Bookcase.html#slotToggleToolBar">
+<ME NAME="slotToggleStatusBar" REF="Bookcase.html#slotToggleStatusBar">
+<ME NAME="slotToggleEditWidget" REF="Bookcase.html#slotToggleEditWidget">
+<ME NAME="slotToggleDetailWidget" REF="Bookcase.html#slotToggleDetailWidget">
+<ME NAME="slotShowConfigDialog" REF="Bookcase.html#slotShowConfigDialog">
+<ME NAME="slotHideConfigDialog" REF="Bookcase.html#slotHideConfigDialog">
+<ME NAME="slotFileNewCollection" REF="Bookcase.html#slotFileNewCollection">
+<ME NAME="slotReportsFull" REF="Bookcase.html#slotReportsFull">
+<ME NAME="slotStatusMsg" REF="Bookcase.html#slotStatusMsg">
+<ME NAME="slotUnitCount" REF="Bookcase.html#slotUnitCount">
+<ME NAME="slotUpdateFractionDone" REF="Bookcase.html#slotUpdateFractionDone">
+<ME NAME="slotDeleteUnit" REF="Bookcase.html#slotDeleteUnit">
+<ME NAME="slotHandleConfigChange" REF="Bookcase.html#slotHandleConfigChange">
+<ME NAME="saveOptions" REF="Bookcase.html#saveOptions">
+<ME NAME="readOptions" REF="Bookcase.html#readOptions">
+<ME NAME="initActions" REF="Bookcase.html#initActions">
+<ME NAME="initStatusBar" REF="Bookcase.html#initStatusBar">
+<ME NAME="initView" REF="Bookcase.html#initView">
+<ME NAME="initWindow" REF="Bookcase.html#initWindow">
+<ME NAME="initDocument" REF="Bookcase.html#initDocument">
+<ME NAME="initConnections" REF="Bookcase.html#initConnections">
+<ME NAME="saveProperties" REF="Bookcase.html#saveProperties">
+<ME NAME="readProperties" REF="Bookcase.html#readProperties">
+<ME NAME="queryClose" REF="Bookcase.html#queryClose">
+<ME NAME="queryExit" REF="Bookcase.html#queryExit">
+<ME NAME="openURL" REF="Bookcase.html#openURL">
+<ME NAME="slotEnableModifiedActions" REF="Bookcase.html#slotEnableModifiedActions">
+</C>

@@ -1,0 +1,74 @@
+<!--
+   ================================================================
+   Bookcase XML DTD version 1.0
+
+   $Id: bookcase.dtd,v 1.6 2002/02/22 00:24:06 robby Exp $
+
+   Copyright (c) 2002 Robby Stephenson
+
+   This DTD is designed to be used with XML data files for the 
+   'bookcase' application, which can be found at:
+   http://radiojodi.com/bookcase/
+
+   The formal public identifer for this DTD should be:
+   
+      "-//Robby Stephenson/DTD Bookcase V1.0//EN"
+
+   ================================================================
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
+
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
+
+     You can obtain a copy of the GPL at
+     http://www.fsf.org/copyleft/gpl.html or by writing to the
+     Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+     Boston, MA  02111-1307, USA.
+   ================================================================
+-->
+<!ELEMENT bookcase (collection+)>
+<!ATTLIST bookcase version CDATA #REQUIRED>
+<!ELEMENT collection (attributes*, book*)>
+<!ATTLIST collection title CDATA #REQUIRED>
+<!ATTLIST collection unit CDATA #REQUIRED>
+<!ATTLIST collection unitTitle CDATA #IMPLIED>
+<!ELEMENT attributes (attribute+)>
+<!ELEMENT attribute EMPTY>
+<!ATTLIST attribute name CDATA #REQUIRED>
+<!ATTLIST attribute title CDATA #REQUIRED>
+<!ATTLIST attribute group CDATA #REQUIRED>
+<!ATTLIST attribute allowed CDATA #IMPLIED>
+<!ATTLIST attribute flags CDATA #IMPLIED>
+<!ATTLIST attribute binding CDATA #IMPLIED>
+<!ATTLIST attribute type (1|2|3|4) #IMPLIED> 
+<!ELEMENT book (title?, subtitle?, author?, binding?, pur_date?, pur_price?, publisher?, edition?, cr_year?, pub_year?, isbn?, lccn?, pages?, language?, genre?, keywords?, series?, series_num?, condition?, signed?, read?, gift?, loaned?, rating?, comments?)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT subtitle (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT binding (#PCDATA)>
+<!ELEMENT pur_date (#PCDATA)>
+<!ELEMENT pur_price (#PCDATA)>
+<!ELEMENT publisher (#PCDATA)>
+<!ELEMENT edition (#PCDATA)>
+<!ELEMENT cr_year (#PCDATA)>
+<!ELEMENT pub_year (#PCDATA)>
+<!ELEMENT isbn (#PCDATA)>
+<!ELEMENT lccn (#PCDATA)>
+<!ELEMENT pages (#PCDATA)>
+<!ELEMENT language (#PCDATA)>
+<!ELEMENT genre (#PCDATA)>
+<!ELEMENT keywords (#PCDATA)>
+<!ELEMENT series (#PCDATA)>
+<!ELEMENT series_num (#PCDATA)>
+<!ELEMENT condition (#PCDATA)>
+<!ELEMENT signed EMPTY>
+<!ELEMENT read EMPTY>
+<!ELEMENT gift EMPTY>
+<!ELEMENT rating (#PCDATA)>
+<!ELEMENT loaned EMPTY>
+<!ELEMENT comments (#PCDATA)>
