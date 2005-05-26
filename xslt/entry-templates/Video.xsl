@@ -8,9 +8,9 @@
    ===================================================================
    Tellico XSLT file - Entry template for videos
 
-   $Id: Video.xsl 1122 2005-02-27 23:17:47Z robby $
+   $Id: Video.xsl 1185 2005-05-08 16:57:21Z robby $
 
-   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
 
    Known Issues:
    o If there is more an one image, there's a lot of white space under
@@ -81,6 +81,7 @@
         border-bottom: 2px ridge <xsl:value-of select="$color2"/>;
    }
    img#logo {
+        padding-left: 4px;
         padding-top: 2px; /* match h1 */
    }
    h1 {
@@ -143,7 +144,7 @@
   </title>
   </head>
   <body>
-   <xsl:apply-templates select="tc:collection"/>
+   <xsl:apply-templates select="tc:collection[1]"/>
   </body>
  </html>
 </xsl:template>
@@ -258,7 +259,7 @@
                </xsl:otherwise>
               </xsl:choose>
              </xsl:attribute>
-             <img>
+             <img style="border: 0px">
               <xsl:attribute name="src">
                <xsl:value-of select="concat($imgdir, $image)"/>
               </xsl:attribute>

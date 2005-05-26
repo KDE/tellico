@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
-"POT-Creation-Date: 2005-04-01 22:41-0800\n"
+"POT-Creation-Date: 2005-05-25 19:02-0700\n"
 "PO-Revision-Date: 2005-03-11 15:28+0100\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
@@ -1721,7 +1721,7 @@ msgstr "%1 tillåter ej sökning för denna samlingstyp."
 msgid "Results from %1: %2/%3"
 msgstr "Resultat från %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:389
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:392
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Inga poster fanns för följande ISBN värden:</qt>"
 
@@ -1833,7 +1833,7 @@ msgstr "Internetfilmdatabas"
 msgid "z39.50"
 msgstr "z39.50"
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:408
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:411
 msgid "Library of Congress (US)"
 msgstr "USA's Kongressbibliotek(US)"
 
@@ -1863,7 +1863,7 @@ msgstr "Alternativa titlar"
 msgid "Certifications"
 msgstr "Bevis"
 
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:419
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:422
 msgid "&Host: "
 msgstr "V&ärd: "
 
@@ -1891,32 +1891,32 @@ msgstr "Förfrågansfel!"
 msgid "Connection search error %1: %2"
 msgstr "Förbindelsesökningsfel %1: %2"
 
-#: fetch/z3950fetcher.cpp:424
+#: fetch/z3950fetcher.cpp:427
 msgid "Enter the host name of the z39.50 server."
 msgstr "Skriv in värdnamnet på z39.50-servern."
 
-#: fetch/z3950fetcher.cpp:429
+#: fetch/z3950fetcher.cpp:432
 msgid "&Port: "
 msgstr "&Port: "
 
-#: fetch/z3950fetcher.cpp:434
+#: fetch/z3950fetcher.cpp:437
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr "Skriv in portnummer på z39.50-servern. Standardvärdet är %1."
 
-#: fetch/z3950fetcher.cpp:439
+#: fetch/z3950fetcher.cpp:442
 msgid "&Database: "
 msgstr "&Databas: "
 
-#: fetch/z3950fetcher.cpp:444
+#: fetch/z3950fetcher.cpp:447
 msgid "Enter the database name used by the z39.50 server."
 msgstr "Skriv in det databasnamn, som z39.50-servern använder."
 
-#: fetch/z3950fetcher.cpp:449
+#: fetch/z3950fetcher.cpp:452
 msgid "Ch&aracter set: "
 msgstr "&Teckenuppsättning: "
 
-#: fetch/z3950fetcher.cpp:458
+#: fetch/z3950fetcher.cpp:461
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -1924,11 +1924,11 @@ msgstr ""
 "Skriv in den teckenuppsättningskod, som används av z39.50-servern. Det "
 "mest sannolika valet är MARC-8, fatsän ISO-8859.1 är rätt vanlig."
 
-#: fetch/z3950fetcher.cpp:464
+#: fetch/z3950fetcher.cpp:467
 msgid "&User: "
 msgstr "&Användare: "
 
-#: fetch/z3950fetcher.cpp:469
+#: fetch/z3950fetcher.cpp:472
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -1936,11 +1936,11 @@ msgstr ""
 "Skriv in dey autentiseringsanvändarnamn, som används av z39.50-servern. De "
 "flesta servrar behöver inget."
 
-#: fetch/z3950fetcher.cpp:475
+#: fetch/z3950fetcher.cpp:478
 msgid "Pass&word: "
 msgstr "Lösen&ord: "
 
-#: fetch/z3950fetcher.cpp:481
+#: fetch/z3950fetcher.cpp:484
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -1948,35 +1948,35 @@ msgstr ""
 "Skriv in det autentiseringslösenord, som används av z39.50-servern. De "
 "flesta servrar behöver inget."
 
-#: collectionfieldsdialog.cpp:81
+#: collectionfieldsdialog.cpp:82
 msgid "Collection Fields"
 msgstr "Samlingsfält"
 
-#: collectionfieldsdialog.cpp:94
+#: collectionfieldsdialog.cpp:95
 msgid "Current Fields"
 msgstr "Nuvarande fält"
 
-#: collectionfieldsdialog.cpp:109
+#: collectionfieldsdialog.cpp:110
 msgid ""
 "_: New Field\n"
 "New"
 msgstr "Nytt"
 
-#: collectionfieldsdialog.cpp:111
+#: collectionfieldsdialog.cpp:112
 msgid "Add a new field to the collection"
 msgstr "Lägg till ett nytt fält till samlingen"
 
-#: collectionfieldsdialog.cpp:112
+#: collectionfieldsdialog.cpp:113
 msgid ""
 "_: Delete Field\n"
 "Delete"
 msgstr "Tag bort"
 
-#: collectionfieldsdialog.cpp:114
+#: collectionfieldsdialog.cpp:115
 msgid "Remove a field from the collection"
 msgstr "Tag bort ett fält från samlingen"
 
-#: collectionfieldsdialog.cpp:123
+#: collectionfieldsdialog.cpp:124
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
@@ -1984,7 +1984,7 @@ msgstr ""
 "Flytta detta fält upp i listan. Listordningen är viktig för layouten i "
 "posteditorn."
 
-#: collectionfieldsdialog.cpp:127
+#: collectionfieldsdialog.cpp:128
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
@@ -1992,47 +1992,47 @@ msgstr ""
 "Flytta ned detta fält i listan. Listordningen är viktig för layouten i "
 "posteditorn."
 
-#: collectionfieldsdialog.cpp:137
+#: collectionfieldsdialog.cpp:138
 msgid "Field Properties"
 msgstr "Fältegenskaper"
 
-#: collectionfieldsdialog.cpp:143
+#: collectionfieldsdialog.cpp:144
 msgid "Title:"
 msgstr "Titel:"
 
-#: collectionfieldsdialog.cpp:147
+#: collectionfieldsdialog.cpp:148
 msgid "The title of the field"
 msgstr "Rubrik för fältet"
 
-#: collectionfieldsdialog.cpp:152
+#: collectionfieldsdialog.cpp:153
 msgid "Type:"
 msgstr "Typ:"
 
-#: collectionfieldsdialog.cpp:157
+#: collectionfieldsdialog.cpp:158
 msgid "The type of the field determines what values may be used. "
 msgstr "Fältets typ bestämmer vilka värden som kan användas. "
 
-#: collectionfieldsdialog.cpp:158
+#: collectionfieldsdialog.cpp:159
 msgid "<i>Simple Text</i> is used for most fields. "
 msgstr "<i>Enkel Text</i> änvänds till de flesta fält. "
 
-#: collectionfieldsdialog.cpp:159
+#: collectionfieldsdialog.cpp:160
 msgid "<i>Paragraph</i> is for large text blocks. "
 msgstr "<i>Stycke</i> är till för stora textblock. "
 
-#: collectionfieldsdialog.cpp:160
+#: collectionfieldsdialog.cpp:161
 msgid "<i>Choice</i> limits the field to certain values. "
 msgstr "<i>Val</i> begränsar fältet till vissa värden. "
 
-#: collectionfieldsdialog.cpp:161
+#: collectionfieldsdialog.cpp:162
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
 msgstr "<i>Kryssruta</i> är till för enkla ja/nej-värden. "
 
-#: collectionfieldsdialog.cpp:162
+#: collectionfieldsdialog.cpp:163
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
 msgstr "<i>Tal/</i> indikerar att fältet innehåller siffervärden. "
 
-#: collectionfieldsdialog.cpp:163
+#: collectionfieldsdialog.cpp:164
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
 "files. "
@@ -2040,21 +2040,21 @@ msgstr ""
 "<i>URL</i> är till för fält, som refererar till URL:er, inbegripet "
 "referenser till andra filer. "
 
-#: collectionfieldsdialog.cpp:164
+#: collectionfieldsdialog.cpp:165
 msgid "<i>Table</i>s may be a single or double column of values. "
 msgstr "<i>Tabell</i> kan ha ha värdena enkel eller dubbel kolumn. "
 
-#: collectionfieldsdialog.cpp:165
+#: collectionfieldsdialog.cpp:166
 msgid "An <i>Image</i> field holds a picture. "
 msgstr "Ett <i>bild</i> -fält innehåller en bild. "
 
-#: collectionfieldsdialog.cpp:166
+#: collectionfieldsdialog.cpp:167
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
 "Ett <i>Datum</i> -fält kan användas för värden med dag, månad och år. "
 
-#: collectionfieldsdialog.cpp:167
+#: collectionfieldsdialog.cpp:168
 msgid ""
 "A <i>Dependent</i> field depends on the values of other fields, and is "
 "formatted according to the field description. "
@@ -2062,7 +2062,7 @@ msgstr ""
 "Ett <i>Beroende</i> -fält beror på värden i andra fält, och formatteras "
 "enligt fältbeskrivningen. "
 
-#: collectionfieldsdialog.cpp:169
+#: collectionfieldsdialog.cpp:170
 msgid ""
 "A <i>Read Only</i> is for internal values, possibly useful for import and "
 "export. "
@@ -2070,19 +2070,19 @@ msgstr ""
 "Ett <i>Skrivskyddat</i> fält är till för interna värden, möjligen "
 "användbart till import och export. "
 
-#: collectionfieldsdialog.cpp:178
+#: collectionfieldsdialog.cpp:179
 msgid "Category:"
 msgstr "Kategori:"
 
-#: collectionfieldsdialog.cpp:182
+#: collectionfieldsdialog.cpp:183
 msgid "The field category determines where the field is placed in the editor."
 msgstr "Fältkategorin bestämmer var fältet placeras i editorn."
 
-#: collectionfieldsdialog.cpp:199
-msgid "Description:"
-msgstr "Beskrivning:"
+#: collectionfieldsdialog.cpp:200
+msgid "Allowed:"
+msgstr "Tillåtna:"
 
-#: collectionfieldsdialog.cpp:203
+#: collectionfieldsdialog.cpp:204
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
 "are placed in a combo box.</qt>"
@@ -2090,11 +2090,11 @@ msgstr ""
 "<qt>För <i>Val</i>-fälttypen; det här är de enda tillåtna värden. De "
 "placeras i en kombinationsbox.</qt>"
 
-#: collectionfieldsdialog.cpp:209
-msgid "Allowed:"
-msgstr "Tillåtna:"
+#: collectionfieldsdialog.cpp:210
+msgid "Description:"
+msgstr "Beskrivning:"
 
-#: collectionfieldsdialog.cpp:214
+#: collectionfieldsdialog.cpp:215
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field. For <i>Dependent</i> fields, the description is a format string such "
@@ -2104,15 +2104,15 @@ msgstr ""
 "i fältet. För <i>Beroende</i>-fält, är beskrivningen en formatsträng "
 "sådan som \"%{år} %{titel}\" där de benämnda fälten byts ut i strängen."
 
-#: collectionfieldsdialog.cpp:221
+#: collectionfieldsdialog.cpp:222
 msgid "Extended Properties:"
 msgstr "Utvidgande egenskaper:"
 
-#: collectionfieldsdialog.cpp:223
+#: collectionfieldsdialog.cpp:224
 msgid "Set..."
 msgstr "Mängd..."
 
-#: collectionfieldsdialog.cpp:225
+#: collectionfieldsdialog.cpp:226
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
@@ -2120,15 +2120,15 @@ msgstr ""
 "Utvidgande fältegenskaper används för att specificera saker som "
 "motsvarande bibtex-fält."
 
-#: collectionfieldsdialog.cpp:229
+#: collectionfieldsdialog.cpp:230
 msgid "Format Options"
 msgstr "Formateringsalternativ"
 
-#: collectionfieldsdialog.cpp:230
+#: collectionfieldsdialog.cpp:231
 msgid "No formatting"
 msgstr "Ingen formatering"
 
-#: collectionfieldsdialog.cpp:231
+#: collectionfieldsdialog.cpp:232
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
@@ -2136,22 +2136,22 @@ msgstr ""
 "Detta tillval förhindrar ett fält från att bli automatiformaterat eller "
 "att automatiskt få stor bokstav."
 
-#: collectionfieldsdialog.cpp:233
+#: collectionfieldsdialog.cpp:234
 msgid "Allow auto-capitalization only"
 msgstr "Automatiskt stor bokstav"
 
-#: collectionfieldsdialog.cpp:234
+#: collectionfieldsdialog.cpp:235
 msgid ""
 "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 "Detta tillval tillåter fältet att få automatisk stor bokstav, men inte "
 "automatiskt formaterat."
 
-#: collectionfieldsdialog.cpp:236
+#: collectionfieldsdialog.cpp:237
 msgid "Format as a title"
 msgstr "Formatera som en rubrik"
 
-#: collectionfieldsdialog.cpp:237
+#: collectionfieldsdialog.cpp:238
 msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
@@ -2159,11 +2159,11 @@ msgstr ""
 "Detta tillval ger fältet automatisk formatering och stor bokstav som en "
 "titel men endast om dessa tillval är globalt påslagna."
 
-#: collectionfieldsdialog.cpp:239
+#: collectionfieldsdialog.cpp:240
 msgid "Format as a name"
 msgstr "Formatera som ett namn"
 
-#: collectionfieldsdialog.cpp:240
+#: collectionfieldsdialog.cpp:241
 msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
@@ -2171,15 +2171,15 @@ msgstr ""
 "Detta tillval ger fältet automatisk formatering och stor bokstav som ett "
 "namn men endast om dessa tillval är globalt påslagna."
 
-#: collectionfieldsdialog.cpp:244
+#: collectionfieldsdialog.cpp:245
 msgid "Field Options"
 msgstr "Fältalternativ"
 
-#: collectionfieldsdialog.cpp:245
+#: collectionfieldsdialog.cpp:246
 msgid "Enable auto-completion"
 msgstr "Aktivera automatkomplettering"
 
-#: collectionfieldsdialog.cpp:246
+#: collectionfieldsdialog.cpp:247
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
@@ -2187,11 +2187,11 @@ msgstr ""
 "Om ikryssad, används KDEs automatkompletteringsfunktion i redigeringsrutan "
 "för detta fält."
 
-#: collectionfieldsdialog.cpp:248
+#: collectionfieldsdialog.cpp:249
 msgid "Allow multiple values"
 msgstr "Tillåt flera värden"
 
-#: collectionfieldsdialog.cpp:249
+#: collectionfieldsdialog.cpp:250
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
@@ -2199,21 +2199,21 @@ msgstr ""
 "Om ikryssad, kommer Tellico att tyda värdena i fältet som flera värden, "
 "åtskiljda av semikolon."
 
-#: collectionfieldsdialog.cpp:251
+#: collectionfieldsdialog.cpp:252
 msgid "Allow grouping"
 msgstr "Tillåt gruppering"
 
-#: collectionfieldsdialog.cpp:252
+#: collectionfieldsdialog.cpp:253
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
 "Om ikryssad, kan detta fält användas för att gruppera fält i en gruppvy."
 
-#: collectionfieldsdialog.cpp:265
+#: collectionfieldsdialog.cpp:266
 msgid "Revert the selected field's properties to the default values."
 msgstr "Återställ det valda fältets egenskaper till standardvärdena."
 
-#: collectionfieldsdialog.cpp:315
+#: collectionfieldsdialog.cpp:316
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
 "in the collection may cause data corruption. Do you want to keep your "
@@ -2223,16 +2223,16 @@ msgstr ""
 "samlingen, kan åstadkomma dataförödelse. Vill du behålla dina "
 "modifierade värdena eller avbryta och återgå till de aktuella?</qt>"
 
-#: collectionfieldsdialog.cpp:320
+#: collectionfieldsdialog.cpp:321
 msgid "Keep modified values"
 msgstr "Behåll modifierade värden"
 
-#: collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:381
+#: collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:382
 #: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
 msgid "New Field"
 msgstr "Nytt fält"
 
-#: collectionfieldsdialog.cpp:414
+#: collectionfieldsdialog.cpp:415
 msgid ""
 "<qt><p>Do you really want to delete the <em>%1</em> field? This action "
 "occurs immediately and can not be undone!</p></qt>"
@@ -2240,15 +2240,15 @@ msgstr ""
 "<qt><p>Vill du verkligen ta bort <em>%1</em>-fältet? Detta kommer att ske "
 "omedelbart och kan inte göras ogjord.</p></qt>"
 
-#: collectionfieldsdialog.cpp:417
+#: collectionfieldsdialog.cpp:418
 msgid "Delete Field?"
 msgstr "Ta bort fält?"
 
-#: collectionfieldsdialog.cpp:713
+#: collectionfieldsdialog.cpp:707
 msgid "Revert Field Properties?"
 msgstr "Återställ fältegenskaperna?"
 
-#: collectionfieldsdialog.cpp:714
+#: collectionfieldsdialog.cpp:708
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
@@ -2256,27 +2256,27 @@ msgstr ""
 "<qt><p>Vill du verkligen låta egenskaperna för <em>%1</em> återgå till "
 "standardvärdena?</p></qt>"
 
-#: collectionfieldsdialog.cpp:717
+#: collectionfieldsdialog.cpp:711
 msgid "Revert"
 msgstr "Återställ"
 
-#: collectionfieldsdialog.cpp:835
+#: collectionfieldsdialog.cpp:829
 msgid "Extended Field Properties"
 msgstr "Utvidgade fältegenskaper"
 
-#: collectionfieldsdialog.cpp:836
+#: collectionfieldsdialog.cpp:830
 msgid "Property"
 msgstr "Egenskap"
 
-#: collectionfieldsdialog.cpp:836
+#: collectionfieldsdialog.cpp:830
 msgid "Value"
 msgstr "Värde"
 
-#: collectionfieldsdialog.cpp:852
+#: collectionfieldsdialog.cpp:846
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Ett fält med denna rubrik finns redan. Byt rubrik."
 
-#: collectionfieldsdialog.cpp:861
+#: collectionfieldsdialog.cpp:855
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
 "<em>Table</em> or <em>Image</em> field. Please enter a different "
@@ -2285,7 +2285,7 @@ msgstr ""
 "<qt>Ett fält kan inte vara i samma kategori som ett <em>Stycke</em>, "
 "<em>Tabell</em> eller <em>Bild</em>-fält. Skriv in en annan kategori.</qt>"
 
-#: collectionfieldsdialog.cpp:869
+#: collectionfieldsdialog.cpp:863
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
@@ -3042,7 +3042,7 @@ msgid "Abstract"
 msgstr "Sammandrag"
 
 #: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:254
-#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:219
+#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:241
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -3229,25 +3229,13 @@ msgstr ""
 "Informationsförlust kan inträffa om en äldre version av Tellico används "
 "för att läsa den här filen i framtiden."
 
-#: translators/tellicoimporter.cpp:436
+#: translators/tellicoimporter.cpp:458
 msgid "The file is empty."
 msgstr "Filen är tom."
 
-#: translators/tellicoimporter.cpp:449
+#: translators/tellicoimporter.cpp:471
 msgid "The file contains no collection data."
 msgstr "Filen innehåller inga samlingsdata."
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Ny"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "N&y samling"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Samlingsverktygsrad"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -3267,6 +3255,18 @@ msgstr "Tellico kan inte ladda upp fil - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Söksträngen \"%1\" hittades inte."
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Ny"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "N&y samling"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Samlingsverktygsrad"
 
 #: _translatorinfo.cpp:1
 msgid ""

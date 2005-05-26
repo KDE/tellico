@@ -8,9 +8,9 @@
    ===================================================================
    Tellico XSLT file - Entry template for videos
 
-   $Id: Album.xsl 966 2004-11-20 01:41:11Z robby $
+   $Id: Album.xsl 1185 2005-05-08 16:57:21Z robby $
 
-   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
 
    Known Issues:
    o If there is more an one image, there's a lot of white space under
@@ -131,7 +131,7 @@
   </title>
   </head>
   <body>
-   <xsl:apply-templates select="tc:collection"/>
+   <xsl:apply-templates select="tc:collection[1]"/>
   </body>
  </html>
 </xsl:template>

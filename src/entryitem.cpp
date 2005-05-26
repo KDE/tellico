@@ -184,7 +184,13 @@ int ParentItem::width(const QFontMetrics& fm_, const QListView* lv_, int column_
 
 void ParentItem::setCount(int count_) {
   m_count = count_;
+  //s.sprintf("%06d", count_); // surely no one will ever have over a million entries!
+  int digits = 1;
+  while(count_ /= 10) {
+    ++digits;
+  }
   QString s;
-  s.sprintf("%06d", count_); // surely no one will ever have over a million entries!
+  s.fill('0', 6 - digits);
+  s += QString::number(m_count);
   setText(1, s);
 }

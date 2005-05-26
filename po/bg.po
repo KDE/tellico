@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
-"POT-Creation-Date: 2005-04-01 22:41-0800\n"
+"POT-Creation-Date: 2005-05-25 19:02-0700\n"
 "PO-Revision-Date: 2003-07-01 11:27+0300\n"
 "Last-Translator: Boyan Ivanov <boyan17@bulgaria.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -1872,7 +1872,7 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:389
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:392
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 
@@ -1987,7 +1987,7 @@ msgstr ""
 msgid "z39.50"
 msgstr ""
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:408
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:411
 #, fuzzy
 msgid "Library of Congress (US)"
 msgstr ""
@@ -2019,7 +2019,7 @@ msgstr ""
 msgid "Certifications"
 msgstr "Класификация"
 
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:419
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:422
 #, fuzzy
 msgid "&Host: "
 msgstr "Е&кспортиране"
@@ -2046,272 +2046,272 @@ msgstr ""
 msgid "Connection search error %1: %2"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:424
+#: fetch/z3950fetcher.cpp:427
 msgid "Enter the host name of the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:429
+#: fetch/z3950fetcher.cpp:432
 #, fuzzy
 msgid "&Port: "
 msgstr "Е&кспортиране"
 
-#: fetch/z3950fetcher.cpp:434
+#: fetch/z3950fetcher.cpp:437
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:439
+#: fetch/z3950fetcher.cpp:442
 #, fuzzy
 msgid "&Database: "
 msgstr "Тип:"
 
-#: fetch/z3950fetcher.cpp:444
+#: fetch/z3950fetcher.cpp:447
 msgid "Enter the database name used by the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:449
+#: fetch/z3950fetcher.cpp:452
 msgid "Ch&aracter set: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:458
+#: fetch/z3950fetcher.cpp:461
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:464
+#: fetch/z3950fetcher.cpp:467
 msgid "&User: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:469
+#: fetch/z3950fetcher.cpp:472
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:475
+#: fetch/z3950fetcher.cpp:478
 msgid "Pass&word: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:481
+#: fetch/z3950fetcher.cpp:484
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:81
+#: collectionfieldsdialog.cpp:82
 #, fuzzy
 msgid "Collection Fields"
 msgstr "Полета на колекцията..."
 
-#: collectionfieldsdialog.cpp:94
+#: collectionfieldsdialog.cpp:95
 msgid "Current Fields"
 msgstr "Текущи полета"
 
-#: collectionfieldsdialog.cpp:109
+#: collectionfieldsdialog.cpp:110
 #, fuzzy
 msgid ""
 "_: New Field\n"
 "New"
 msgstr "Ново поле"
 
-#: collectionfieldsdialog.cpp:111
+#: collectionfieldsdialog.cpp:112
 #, fuzzy
 msgid "Add a new field to the collection"
 msgstr "Създава нов документ"
 
-#: collectionfieldsdialog.cpp:112
+#: collectionfieldsdialog.cpp:113
 #, fuzzy
 msgid ""
 "_: Delete Field\n"
 "Delete"
 msgstr "Изтриване на поле"
 
-#: collectionfieldsdialog.cpp:114
+#: collectionfieldsdialog.cpp:115
 #, fuzzy
 msgid "Remove a field from the collection"
 msgstr "Редакция на полетата на колекцията..."
 
-#: collectionfieldsdialog.cpp:123
+#: collectionfieldsdialog.cpp:124
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:127
+#: collectionfieldsdialog.cpp:128
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:137
+#: collectionfieldsdialog.cpp:138
 msgid "Field Properties"
 msgstr "Настройки на поле"
 
-#: collectionfieldsdialog.cpp:143
+#: collectionfieldsdialog.cpp:144
 msgid "Title:"
 msgstr "Заглавие:"
 
-#: collectionfieldsdialog.cpp:147
+#: collectionfieldsdialog.cpp:148
 msgid "The title of the field"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:152
+#: collectionfieldsdialog.cpp:153
 msgid "Type:"
 msgstr "Тип:"
 
-#: collectionfieldsdialog.cpp:157
+#: collectionfieldsdialog.cpp:158
 msgid "The type of the field determines what values may be used. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:158
+#: collectionfieldsdialog.cpp:159
 msgid "<i>Simple Text</i> is used for most fields. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:159
+#: collectionfieldsdialog.cpp:160
 msgid "<i>Paragraph</i> is for large text blocks. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:160
+#: collectionfieldsdialog.cpp:161
 msgid "<i>Choice</i> limits the field to certain values. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:161
+#: collectionfieldsdialog.cpp:162
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:162
+#: collectionfieldsdialog.cpp:163
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:163
+#: collectionfieldsdialog.cpp:164
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
 "files. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:164
+#: collectionfieldsdialog.cpp:165
 msgid "<i>Table</i>s may be a single or double column of values. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:165
+#: collectionfieldsdialog.cpp:166
 msgid "An <i>Image</i> field holds a picture. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:166
+#: collectionfieldsdialog.cpp:167
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:167
+#: collectionfieldsdialog.cpp:168
 msgid ""
 "A <i>Dependent</i> field depends on the values of other fields, and is "
 "formatted according to the field description. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:169
+#: collectionfieldsdialog.cpp:170
 msgid ""
 "A <i>Read Only</i> is for internal values, possibly useful for import and "
 "export. "
 msgstr ""
 
-#: collectionfieldsdialog.cpp:178
+#: collectionfieldsdialog.cpp:179
 msgid "Category:"
 msgstr "Категория:"
 
-#: collectionfieldsdialog.cpp:182
+#: collectionfieldsdialog.cpp:183
 msgid "The field category determines where the field is placed in the editor."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:199
-msgid "Description:"
-msgstr "Описание:"
+#: collectionfieldsdialog.cpp:200
+msgid "Allowed:"
+msgstr "Позволено:"
 
-#: collectionfieldsdialog.cpp:203
+#: collectionfieldsdialog.cpp:204
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
 "are placed in a combo box.</qt>"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:209
-msgid "Allowed:"
-msgstr "Позволено:"
+#: collectionfieldsdialog.cpp:210
+msgid "Description:"
+msgstr "Описание:"
 
-#: collectionfieldsdialog.cpp:214
+#: collectionfieldsdialog.cpp:215
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field. For <i>Dependent</i> fields, the description is a format string such "
 "as \"%{year} %{title}\" where the named fields get substituted in the string."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:221
+#: collectionfieldsdialog.cpp:222
 #, fuzzy
 msgid "Extended Properties:"
 msgstr "Настройки на поле"
 
-#: collectionfieldsdialog.cpp:223
+#: collectionfieldsdialog.cpp:224
 #, fuzzy
 msgid "Set..."
 msgstr "Запиши като ..."
 
-#: collectionfieldsdialog.cpp:225
+#: collectionfieldsdialog.cpp:226
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:229
+#: collectionfieldsdialog.cpp:230
 msgid "Format Options"
 msgstr "Опции за форматиране"
 
-#: collectionfieldsdialog.cpp:230
+#: collectionfieldsdialog.cpp:231
 msgid "No formatting"
 msgstr "Без форматиране"
 
-#: collectionfieldsdialog.cpp:231
+#: collectionfieldsdialog.cpp:232
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:233
+#: collectionfieldsdialog.cpp:234
 msgid "Allow auto-capitalization only"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:234
+#: collectionfieldsdialog.cpp:235
 msgid ""
 "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:236
+#: collectionfieldsdialog.cpp:237
 msgid "Format as a title"
 msgstr "Форматиране като заглавие"
 
-#: collectionfieldsdialog.cpp:237
+#: collectionfieldsdialog.cpp:238
 msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:239
+#: collectionfieldsdialog.cpp:240
 msgid "Format as a name"
 msgstr "Форматиране като име"
 
-#: collectionfieldsdialog.cpp:240
+#: collectionfieldsdialog.cpp:241
 msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:244
+#: collectionfieldsdialog.cpp:245
 msgid "Field Options"
 msgstr "Настройки на полето"
 
-#: collectionfieldsdialog.cpp:245
+#: collectionfieldsdialog.cpp:246
 msgid "Enable auto-completion"
 msgstr "Разрешава автоматично завършване"
 
-#: collectionfieldsdialog.cpp:246
+#: collectionfieldsdialog.cpp:247
 #, fuzzy
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
@@ -2320,11 +2320,11 @@ msgstr ""
 "Ако е избрано,книгите ще бъдат групирани "
 "по даден признак."
 
-#: collectionfieldsdialog.cpp:248
+#: collectionfieldsdialog.cpp:249
 msgid "Allow multiple values"
 msgstr "Позволява няколко стойности"
 
-#: collectionfieldsdialog.cpp:249
+#: collectionfieldsdialog.cpp:250
 #, fuzzy
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
@@ -2333,11 +2333,11 @@ msgstr ""
 "Позволени стойности,за това "
 "поле,разделени с ;"
 
-#: collectionfieldsdialog.cpp:251
+#: collectionfieldsdialog.cpp:252
 msgid "Allow grouping"
 msgstr "Позволява групиране"
 
-#: collectionfieldsdialog.cpp:252
+#: collectionfieldsdialog.cpp:253
 #, fuzzy
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
@@ -2345,28 +2345,28 @@ msgstr ""
 "Ако е избрано,броя на книгите в груптата "
 "ще бъде добавен към името й."
 
-#: collectionfieldsdialog.cpp:265
+#: collectionfieldsdialog.cpp:266
 #, fuzzy
 msgid "Revert the selected field's properties to the default values."
 msgstr "Няма избрани полета в тази колекция"
 
-#: collectionfieldsdialog.cpp:315
+#: collectionfieldsdialog.cpp:316
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:320
+#: collectionfieldsdialog.cpp:321
 msgid "Keep modified values"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:381
+#: collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:382
 #: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
 msgid "New Field"
 msgstr "Ново поле"
 
-#: collectionfieldsdialog.cpp:414
+#: collectionfieldsdialog.cpp:415
 #, fuzzy
 msgid ""
 "<qt><p>Do you really want to delete the <em>%1</em> field? This action "
@@ -2375,16 +2375,16 @@ msgstr ""
 "Настина ли желаете да изтриете полето %1? "
 "Няма връщане назад,ако го изтриете."
 
-#: collectionfieldsdialog.cpp:417
+#: collectionfieldsdialog.cpp:418
 msgid "Delete Field?"
 msgstr "Изтриване на поле?"
 
-#: collectionfieldsdialog.cpp:713
+#: collectionfieldsdialog.cpp:707
 #, fuzzy
 msgid "Revert Field Properties?"
 msgstr "Настройки на поле"
 
-#: collectionfieldsdialog.cpp:714
+#: collectionfieldsdialog.cpp:708
 #, fuzzy
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
@@ -2393,37 +2393,37 @@ msgstr ""
 "Настина ли желаете да изтриете полето %1? "
 "Няма връщане назад,ако го изтриете."
 
-#: collectionfieldsdialog.cpp:717
+#: collectionfieldsdialog.cpp:711
 msgid "Revert"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:835
+#: collectionfieldsdialog.cpp:829
 #, fuzzy
 msgid "Extended Field Properties"
 msgstr "Настройки на поле"
 
-#: collectionfieldsdialog.cpp:836
+#: collectionfieldsdialog.cpp:830
 #, fuzzy
 msgid "Property"
 msgstr "Година на публикуване"
 
-#: collectionfieldsdialog.cpp:836
+#: collectionfieldsdialog.cpp:830
 #, fuzzy
 msgid "Value"
 msgstr "Показва колони"
 
-#: collectionfieldsdialog.cpp:852
+#: collectionfieldsdialog.cpp:846
 msgid "A field with this title already exists. Please enter a different title."
 msgstr ""
 
-#: collectionfieldsdialog.cpp:861
+#: collectionfieldsdialog.cpp:855
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
 "<em>Table</em> or <em>Image</em> field. Please enter a different "
 "category.</qt>"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:869
+#: collectionfieldsdialog.cpp:863
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
@@ -3243,7 +3243,7 @@ msgid "Abstract"
 msgstr ""
 
 #: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:254
-#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:219
+#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:241
 msgid "Unknown"
 msgstr "Непознат"
 
@@ -3448,27 +3448,13 @@ msgid ""
 "the future."
 msgstr ""
 
-#: translators/tellicoimporter.cpp:436
+#: translators/tellicoimporter.cpp:458
 msgid "The file is empty."
 msgstr ""
 
-#: translators/tellicoimporter.cpp:449
+#: translators/tellicoimporter.cpp:471
 msgid "The file contains no collection data."
 msgstr ""
-
-#: rc.cpp:2
-#, fuzzy
-msgid "&New"
-msgstr "Нова"
-
-#: rc.cpp:5
-#, fuzzy
-msgid "&Collection"
-msgstr "BCCollection"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Летна \"Колекция\""
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -3488,6 +3474,20 @@ msgstr "Tellico не може да качи файла %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Търсеният низ \"%1\" не бе намерен."
+
+#: rc.cpp:2
+#, fuzzy
+msgid "&New"
+msgstr "Нова"
+
+#: rc.cpp:5
+#, fuzzy
+msgid "&Collection"
+msgstr "BCCollection"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Летна \"Колекция\""
 
 #: _translatorinfo.cpp:1
 msgid ""

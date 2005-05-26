@@ -8,9 +8,9 @@
    ===================================================================
    Tellico XSLT file - default template for viewing entry data
 
-   $Id: Default.xsl 966 2004-11-20 01:41:11Z robby $
+   $Id: Default.xsl 1185 2005-05-08 16:57:21Z robby $
 
-   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
 
    Known Issues:
    o Dependent titles have no value in the entry element.
@@ -22,8 +22,7 @@
 -->
 
 <!-- import common templates -->
-<!-- location depe
-nds on being installed correctly -->
+<!-- location depends on being installed correctly -->
 <xsl:import href="../tellico-common.xsl"/>
 
 <xsl:output method="html"/>
@@ -117,7 +116,7 @@ nds on being installed correctly -->
   </title>
   </head>
   <body>
-   <xsl:apply-templates select="tc:collection"/>
+   <xsl:apply-templates select="tc:collection[1]"/>
   </body>
  </html>
 </xsl:template>
@@ -289,11 +288,6 @@ nds on being installed correctly -->
      </xsl:choose>
     </tr>
    </xsl:for-each>
-   <tr>
-    <td>
-     <br/>
-    </td>
-   </tr>
   </table>
   <xsl:if test="position() mod 2 = 0">
    <br clear="left"/>

@@ -1,20 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of nl.po to Nederlands
+# translation of nl.po to
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Fred Marchee <fred@intercookie.com>, 2005.
+# Fred Marchee <fredmarchee@gmail.com>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2005-04-01 22:41-0800\n"
-"PO-Revision-Date: 2003-06-14 19:12+0200\n"
-"Last-Translator: Liese De Vos <onlineit@mail.be>\n"
-"Language-Team: Nederlands <en@li.org>\n"
+"Project-Id-Version: nl\n"
+"POT-Creation-Date: 2005-05-25 19:02-0700\n"
+"PO-Revision-Date: 2005-05-16 00:22+0200\n"
+"Last-Translator: Fred Marchee <fredmarchee@gmail.com>\n"
+"Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.10\n"
 
 #: collectionfactory.cpp:73 collectionfactory.cpp:87
 #: collections/bibtexcollection.cpp:27 collections/bibtexcollection.cpp:62
@@ -47,12 +49,11 @@ msgstr "Persoonlijk"
 
 #: collections/comicbookcollection.cpp:29
 msgid "Comics"
-msgstr ""
+msgstr "Strips"
 
 #: collections/comicbookcollection.cpp:30
-#, fuzzy
 msgid "My Comic Books"
-msgstr "Mijn boeken"
+msgstr "Mijn strips"
 
 #: collectionfactory.cpp:72 collectionfactory.cpp:86
 #: collections/bibtexcollection.cpp:60 collections/bookcollection.cpp:41
@@ -69,7 +70,7 @@ msgstr "Ondertitel"
 
 #: collections/comicbookcollection.cpp:52 collections/videocollection.cpp:122
 msgid "Writer"
-msgstr ""
+msgstr "Auteur"
 
 #: collections/comicbookcollection.cpp:58 collections/musiccollection.cpp:52
 msgid "Artist"
@@ -82,7 +83,7 @@ msgstr "Serie"
 
 #: collections/comicbookcollection.cpp:70
 msgid "Issue"
-msgstr ""
+msgstr "Uitgave"
 
 #: collections/bibtexcollection.cpp:124 collections/bookcollection.cpp:75
 #: collections/comicbookcollection.cpp:75
@@ -96,7 +97,7 @@ msgstr "Editie"
 
 #: collections/bookcollection.cpp:92 collections/comicbookcollection.cpp:87
 msgid "Publication Year"
-msgstr "Jaar Publicatie"
+msgstr "Jaar van publicatie"
 
 #: collections/bibtexcollection.cpp:144 collections/bookcollection.cpp:107
 #: collections/comicbookcollection.cpp:92
@@ -106,7 +107,7 @@ msgstr "Pagina's"
 #: collections/coincollection.cpp:67 collections/comicbookcollection.cpp:96
 #: collections/stampcollection.cpp:57 collections/winecollection.cpp:75
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: collections/bookcollection.cpp:111 collections/comicbookcollection.cpp:102
 msgid "Language"
@@ -121,14 +122,14 @@ msgstr "Genre"
 #: collections/comicbookcollection.cpp:114 collections/musiccollection.cpp:103
 #: translators/risimporter.cpp:241
 msgid "Keywords"
-msgstr "Kernwoorden"
+msgstr "Trefwoorden"
 
 #: collections/comicbookcollection.cpp:122
 msgid ""
 "_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
 "Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr ""
+msgstr "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 
 #: collections/bookcollection.cpp:139 collections/comicbookcollection.cpp:124
 #: collections/stampcollection.cpp:21
@@ -167,7 +168,7 @@ msgstr "Geleend"
 
 #: collections/bookcollection.cpp:166 collections/comicbookcollection.cpp:149
 msgid "Front Cover"
-msgstr ""
+msgstr "Voorzijde"
 
 #: collections/bookcollection.cpp:169 collections/cardcollection.cpp:117
 #: collections/coincollection.cpp:128 collections/comicbookcollection.cpp:152
@@ -178,88 +179,78 @@ msgstr "Opmerkingen"
 
 #: collections/stampcollection.cpp:28
 msgid "Stamps"
-msgstr ""
+msgstr "Postzegels"
 
 #: collections/stampcollection.cpp:29
 msgid "My Stamps"
-msgstr ""
+msgstr "Mijn postzegels"
 
 #: collections/stampcollection.cpp:46 fetchdialog.cpp:135
-#, fuzzy
 msgid "Description"
-msgstr "Omschrijving:"
+msgstr "Omschrijving"
 
 #: collections/coincollection.cpp:51 collections/stampcollection.cpp:52
 msgid "Denomination"
-msgstr ""
+msgstr "Benaming"
 
 #: collections/stampcollection.cpp:63
 msgid "Issue Year"
-msgstr ""
+msgstr "Jaar van uitgave"
 
 #: collections/stampcollection.cpp:68 collections/videocollection.cpp:173
-#, fuzzy
 msgid "Color"
-msgstr "E&xporteren"
+msgstr "Kleur"
 
 #: collections/stampcollection.cpp:73
 msgid "Scott#"
-msgstr ""
+msgstr "Waarde#"
 
 #: collections/stampcollection.cpp:80
 msgid ""
 "_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
+msgstr "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 
 #: collections/coincollection.cpp:88 collections/stampcollection.cpp:82
-#, fuzzy
 msgid "Grade"
-msgstr "Genre"
+msgstr "Waardering"
 
 #: collections/stampcollection.cpp:87
 msgid "Cancelled"
-msgstr ""
+msgstr "Geannuleerd"
 
 #: collections/stampcollection.cpp:91
-#, fuzzy
 msgid "Hinged"
-msgstr "Gesigneerd"
+msgstr "Vals"
 
 #: collections/stampcollection.cpp:96
-#, fuzzy
 msgid "Centering"
-msgstr "Quotatie"
+msgstr "Gecentreerd"
 
 #: collections/stampcollection.cpp:101
 msgid "Gummed"
-msgstr ""
+msgstr "Gegomd"
 
 #: collections/cardcollection.cpp:93 collections/coincollection.cpp:112
 #: collections/stampcollection.cpp:115 collections/winecollection.cpp:90
-#, fuzzy
 msgid "Location"
-msgstr "BCCollection"
+msgstr "Locatie"
 
 #: collections/stampcollection.cpp:125 field.cpp:418
-#, fuzzy
 msgid "Image"
-msgstr "Pagina's"
+msgstr "Afbeelding"
 
 #: collections/coincollection.cpp:27
-#, fuzzy
 msgid "Coins"
-msgstr "bevat"
+msgstr "Munten"
 
 #: collections/coincollection.cpp:28
-#, fuzzy
 msgid "My Coins"
-msgstr "Mijn Muziek"
+msgstr "Mijn munten"
 
 #: collections/coincollection.cpp:45 collections/winecollection.cpp:70
-#, fuzzy
 msgid "Type"
-msgstr "Type:"
+msgstr "Type"
 
 #: collections/bibtexcollection.cpp:149 collections/cardcollection.cpp:68
 #: collections/coincollection.cpp:56 collections/musiccollection.cpp:64
@@ -268,12 +259,11 @@ msgstr "Jaar"
 
 #: collections/coincollection.cpp:61
 msgid "Mint Mark"
-msgstr ""
+msgstr "Mint markering"
 
 #: collections/coincollection.cpp:73
-#, fuzzy
 msgid "Coin Set"
-msgstr "bevat"
+msgstr "Set munten"
 
 #: collections/coincollection.cpp:83
 msgid ""
@@ -284,25 +274,27 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair"
 
 #: collections/coincollection.cpp:96
 msgid ""
 "_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr ""
+msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
 #: collections/coincollection.cpp:98
 msgid "Grading Service"
-msgstr ""
+msgstr "Waardering service"
 
 #: collections/coincollection.cpp:122
-#, fuzzy
 msgid "Obverse"
-msgstr "Overschrijven"
+msgstr "Voorzijde"
 
 #: collections/coincollection.cpp:125
 msgid "Reverse"
-msgstr ""
+msgstr "Achterzijde"
 
 #: collections/bookcollection.cpp:29
 msgid "Books"
@@ -318,7 +310,7 @@ msgstr "Auteur"
 
 #: collections/bookcollection.cpp:59
 msgid "Hardback"
-msgstr "Hardback"
+msgstr "Gebonden"
 
 #: collections/bookcollection.cpp:59
 msgid "Paperback"
@@ -334,7 +326,7 @@ msgstr "E-Boek"
 
 #: collections/bookcollection.cpp:60
 msgid "Magazine"
-msgstr "Magazine"
+msgstr "Tijdschrift"
 
 #: collections/bibtexcollection.cpp:161 collections/bookcollection.cpp:60
 msgid "Journal"
@@ -408,74 +400,71 @@ msgstr "1 - Heel slecht"
 #: collections/bookcollection.cpp:161 collections/musiccollection.cpp:81
 #: collections/winecollection.cpp:104
 msgid "Rating"
-msgstr "Quotatie"
+msgstr "Waardering"
 
 #: collections/winecollection.cpp:27
 msgid "Wines"
-msgstr ""
+msgstr "Wijnen"
 
 #: collections/winecollection.cpp:28
-#, fuzzy
 msgid "My Wines"
-msgstr "Mijn Video's"
+msgstr "Mijn wijnen"
 
 #: collections/videocollection.cpp:116 collections/winecollection.cpp:45
-#, fuzzy
 msgid "Producer"
-msgstr "Jaar Publicatie"
+msgstr "Producent"
 
 #: collections/winecollection.cpp:51
 msgid "Appellation"
-msgstr ""
+msgstr "Wijnstreek"
 
 #: collections/winecollection.cpp:57
 msgid "Varietal"
-msgstr ""
+msgstr "Druivensoort"
 
 #: collections/winecollection.cpp:63
 msgid "Vintage"
-msgstr ""
+msgstr "Jaartal"
 
 #: collections/winecollection.cpp:69
 msgid "Red Wine"
-msgstr ""
+msgstr "Rode wijn"
 
 #: collections/winecollection.cpp:69
 msgid "White Wine"
-msgstr ""
+msgstr "Witte wijn"
 
 #: collections/winecollection.cpp:69
 msgid "Sparkling Wine"
-msgstr ""
+msgstr "Mousserende wijn"
 
 #: collections/cardcollection.cpp:107 collections/winecollection.cpp:95
 msgid "Quantity"
-msgstr ""
+msgstr "Hoeveelheid"
 
 #: collections/winecollection.cpp:99
 msgid "Drink By"
-msgstr ""
+msgstr "Consumeren voor"
 
 #: collections/winecollection.cpp:113
-#, fuzzy
 msgid "Label Image"
-msgstr "Titel"
+msgstr "Afbeelding etiket"
 
 #: collections/videocollection.cpp:23
 msgid "Other People"
-msgstr ""
+msgstr "Overige medewerkers"
 
 #: collections/videocollection.cpp:24
 msgid "Features"
-msgstr ""
+msgstr "Mogelijkheden"
 
 #: collections/videocollection.cpp:31
 msgid "Videos"
-msgstr "Video's"
+msgstr "Films"
 
 #: collections/videocollection.cpp:32
 msgid "My Videos"
-msgstr "Mijn Video's"
+msgstr "Mijn films"
 
 #: collections/musiccollection.cpp:46 collections/videocollection.cpp:50
 msgid "DVD"
@@ -495,279 +484,258 @@ msgstr "DivX"
 
 #: collections/musiccollection.cpp:47 collections/videocollection.cpp:51
 msgid "Medium"
-msgstr "Medium"
+msgstr "Drager"
 
 #: collections/videocollection.cpp:56
-#, fuzzy
 msgid "Production Year"
-msgstr "Jaar Publicatie"
+msgstr "Productie jaar"
 
 #: collections/videocollection.cpp:64
 msgid ""
 "_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
+msgstr "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 
 #: collections/videocollection.cpp:66
-#, fuzzy
 msgid "Certification"
-msgstr "Categorie"
+msgstr "Leeftijdscategorie"
 
 #: collections/videocollection.cpp:78
 msgid "Region 1"
-msgstr ""
+msgstr "Regio 1"
 
 #: collections/videocollection.cpp:79
 msgid "Region 2"
-msgstr ""
+msgstr "Regio 2"
 
 #: collections/videocollection.cpp:80
 msgid "Region 3"
-msgstr ""
+msgstr "Regio 3"
 
 #: collections/videocollection.cpp:81
 msgid "Region 4"
-msgstr ""
+msgstr "Regio 4"
 
 #: collections/videocollection.cpp:82
 msgid "Region 5"
-msgstr ""
+msgstr "Regio 5"
 
 #: collections/videocollection.cpp:83
 msgid "Region 6"
-msgstr ""
+msgstr "Regio 6"
 
 #: collections/videocollection.cpp:84
 msgid "Region 7"
-msgstr ""
+msgstr "Regio 7"
 
 #: collections/videocollection.cpp:85
 msgid "Region 8"
-msgstr ""
+msgstr "Regio 8"
 
 #: collections/videocollection.cpp:86
 msgid "Region"
-msgstr ""
+msgstr "Regio"
 
 #: collections/videocollection.cpp:91
 msgid "Nationality"
-msgstr ""
+msgstr "Land"
 
 #: collections/videocollection.cpp:98
 msgid "NTSC"
-msgstr ""
+msgstr "NTSC"
 
 #: collections/videocollection.cpp:98
 msgid "PAL"
-msgstr ""
+msgstr "PAL"
 
 #: collections/videocollection.cpp:98
 msgid "SECAM"
-msgstr ""
+msgstr "SECAM"
 
 #: collections/videocollection.cpp:99
-#, fuzzy
 msgid "Format"
-msgstr "Opmaak Opties"
+msgstr "Videosysteem"
 
 #: collections/videocollection.cpp:104
-#, fuzzy
 msgid "Cast"
-msgstr "Cassette"
+msgstr "Acteurs"
 
 #: collections/videocollection.cpp:107
 msgid "A table for the cast members, along with the roles they play"
-msgstr ""
+msgstr "Een lijst met acteurs en de rol die zij spelen"
 
 #: collections/videocollection.cpp:110
 msgid "Director"
-msgstr ""
+msgstr "Regisseur"
 
 #: collections/videocollection.cpp:128
-#, fuzzy
 msgid "Composer"
-msgstr "E&xporteren"
+msgstr "Componist"
 
 #: collections/videocollection.cpp:134
 msgid "Studio"
-msgstr ""
+msgstr "Studio"
 
 #: collections/videocollection.cpp:140
-#, fuzzy
 msgid "Language Tracks"
-msgstr "Taal"
+msgstr "Talen"
 
 #: collections/videocollection.cpp:146
-#, fuzzy
 msgid "Subtitle Languages"
-msgstr "Ondertitel"
+msgstr "Ondertitel talen"
 
 #: collections/videocollection.cpp:152
 msgid "Audio Tracks"
-msgstr ""
+msgstr "Audiotracks"
 
 #: collections/videocollection.cpp:158
 msgid "Running Time"
-msgstr ""
+msgstr "Speeltijd"
 
 #: collections/videocollection.cpp:160
 msgid "The running time of the video (in minutes)"
-msgstr ""
+msgstr "De speeltijd van de film (in minuten)"
 
 #: collections/videocollection.cpp:163
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Beeldverhouding"
 
 #: collections/videocollection.cpp:168
 msgid "Widescreen"
-msgstr ""
+msgstr "Breedbeeld"
 
 #: collections/videocollection.cpp:173
 msgid "Black & White"
-msgstr ""
+msgstr "Zwart wit"
 
 #: collections/videocollection.cpp:174
 msgid "Color Mode"
-msgstr ""
+msgstr "Kleur standaard"
 
 #: collections/videocollection.cpp:179
 msgid "Director's Cut"
-msgstr ""
+msgstr "Director's Cut"
 
 #: collections/videocollection.cpp:183
 msgid "Plot Summary"
-msgstr ""
+msgstr "Samenvatting"
 
 #: collections/videocollection.cpp:188
-#, fuzzy
 msgid "Personal Rating"
-msgstr "Persoonlijk"
+msgstr "Persoonlijke waardering"
 
 #: collections/musiccollection.cpp:108 collections/videocollection.cpp:210
-#, fuzzy
 msgid "Cover"
-msgstr "E&xporteren"
+msgstr "Hoes"
 
 #: collections/cardcollection.cpp:27
-#, fuzzy
 msgid "Cards"
-msgstr "Cassette"
+msgstr "Kaarten"
 
 #: collections/cardcollection.cpp:28
 msgid "My Cards"
-msgstr ""
+msgstr "Mijn kaarten"
 
 #: collections/cardcollection.cpp:45
 msgid "Player"
-msgstr ""
+msgstr "Speler"
 
 #: collections/cardcollection.cpp:51
 msgid "Team"
-msgstr ""
+msgstr "Team"
 
 #: collections/cardcollection.cpp:57
 msgid "Brand"
-msgstr ""
+msgstr "Merk"
 
 #: collections/cardcollection.cpp:64
-#, fuzzy
 msgid "Card Number"
-msgstr "Serienummer"
+msgstr "Kaartnummer"
 
 #: collections/cardcollection.cpp:79
-#, fuzzy
 msgid "Card Type"
-msgstr "Type:"
+msgstr "Kaart type"
 
 #: collections/cardcollection.cpp:111
 msgid "Front Image"
-msgstr ""
+msgstr "Afbeelding voorzijde"
 
 #: collections/cardcollection.cpp:114
 msgid "Back Image"
-msgstr ""
+msgstr "Afbeelding achterzijde"
 
 #: collections/bibtexcollection.cpp:33
-#, fuzzy
 msgid "Entries"
-msgstr "Serie"
+msgstr "Items"
 
 #: collectionfactory.cpp:126 collections/bibtexcollection.cpp:34
-#, fuzzy
 msgid "Bibliography"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Bibliografie"
 
 #: collections/bibtexcollection.cpp:76
 msgid "Entry Type"
-msgstr ""
+msgstr "Item type"
 
 #: collections/bibtexcollection.cpp:80
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
 msgstr ""
+"Deze items types zijn specifiek voor BibTeX. Zie de BibTeX documentatie."
 
 #: collections/bibtexcollection.cpp:90
-#, fuzzy
 msgid "Bibtex Key"
-msgstr "Veld Opties"
+msgstr "BibTeX sleutel"
 
 #: collections/bibtexcollection.cpp:96
-#, fuzzy
 msgid "Book Title"
-msgstr "Titel"
+msgstr "Boektitel"
 
 #: collections/bibtexcollection.cpp:102
-#, fuzzy
 msgid "Editor"
-msgstr "Editie"
+msgstr "Uitgever"
 
 #: collections/bibtexcollection.cpp:109
 msgid "Organization"
-msgstr ""
+msgstr "Organisatie"
 
 #: collections/bibtexcollection.cpp:131
 msgid "Address"
-msgstr ""
+msgstr "Adres"
 
 #: collections/bibtexcollection.cpp:170
 msgid "Month"
-msgstr ""
+msgstr "Maand"
 
 #: collections/bibtexcollection.cpp:176 field.cpp:414
-#, fuzzy
 msgid "Number"
-msgstr "Serienummer"
+msgstr "Nummer"
 
 #: collections/bibtexcollection.cpp:181
-#, fuzzy
 msgid "How Published"
-msgstr "Uitgever"
+msgstr "Hoe uitgegeven"
 
 #: collections/bibtexcollection.cpp:193
-#, fuzzy
 msgid "Chapter"
-msgstr "Categorie:"
+msgstr "Hoofdstuk"
 
 #: collections/bibtexcollection.cpp:205
-#, fuzzy
 msgid "Volume"
-msgstr "Toon Kollomen"
+msgstr "Deel"
 
 #: collections/bibtexcollection.cpp:210
 msgid "Cross-Reference"
-msgstr ""
+msgstr "Verwijzingen"
 
 #: collections/bibtexcollection.cpp:220
 msgid "Notes"
-msgstr ""
+msgstr "Notities"
 
 #: collections/musiccollection.cpp:27
-#, fuzzy
 msgid "Albums"
-msgstr "Album"
+msgstr "Albums"
 
 #: collections/musiccollection.cpp:28
 msgid "My Music"
-msgstr ""
+msgstr "Mijn muziek"
 
 #: collections/musiccollection.cpp:39
 msgid "Album"
@@ -775,7 +743,7 @@ msgstr "Album"
 
 #: collections/musiccollection.cpp:46 translators/freedbimporter.cpp:168
 msgid "Compact Disc"
-msgstr ""
+msgstr "Compact Disc"
 
 #: collections/musiccollection.cpp:46
 msgid "Cassette"
@@ -783,20 +751,19 @@ msgstr "Cassette"
 
 #: collections/musiccollection.cpp:46
 msgid "Vinyl"
-msgstr ""
+msgstr "Vinyl"
 
 #: collections/musiccollection.cpp:58
-#, fuzzy
 msgid "Label"
-msgstr "Titel"
+msgstr "Label"
 
 #: collections/musiccollection.cpp:75
 msgid "Tracks"
-msgstr ""
+msgstr "Nummers"
 
 #: filterdialog.cpp:57
 msgid "Any Field"
-msgstr "Een Veld "
+msgstr "Elk veld"
 
 #: filterdialog.cpp:65
 msgid "contains"
@@ -824,15 +791,15 @@ msgstr "voldoet niet aan regexp"
 
 #: filterdialog.cpp:82
 msgid "Edit..."
-msgstr "Aanpassen..."
+msgstr "Bewerken..."
 
 #: filterdialog.cpp:241
 msgid "Advanced Filter"
-msgstr "Uitgebreide Filter"
+msgstr "Uitgebreid Filter"
 
 #: filterdialog.cpp:246
 msgid "Filter Criteria"
-msgstr "Filter Criteria"
+msgstr "Filter criteria"
 
 #: filterdialog.cpp:252
 msgid "Match a&ll of the following"
@@ -848,11 +815,11 @@ msgstr "een,en,in,van,de,naar"
 
 #: field.cpp:380
 msgid "the"
-msgstr "de,het "
+msgstr "de, het, een"
 
 #: field.cpp:398
 msgid "jr.,jr,iii,iv"
-msgstr ""
+msgstr "jr, sr"
 
 #: field.cpp:403
 msgid "de,van,der,von"
@@ -860,7 +827,7 @@ msgstr "de,van de,van,vande,vanden"
 
 #: field.cpp:410
 msgid "Simple Text"
-msgstr "Gewone Tekst"
+msgstr "Eenvoudige tekst"
 
 #: field.cpp:411
 msgid "Paragraph"
@@ -868,91 +835,88 @@ msgstr "Paragraaf"
 
 #: field.cpp:412
 msgid "Choice"
-msgstr ""
+msgstr "Keuze"
 
 #: field.cpp:413
 msgid "Checkbox"
-msgstr "Aanvinkveld"
+msgstr "Keuzevak"
 
 #: field.cpp:415 translators/risimporter.cpp:252
 msgid "URL"
-msgstr "URL"
+msgstr "URL-adres"
 
 #: field.cpp:416
-#, fuzzy
 msgid "Table"
-msgstr "Titel"
+msgstr "Tabel"
 
 #: field.cpp:417
-#, fuzzy
 msgid "Table (2 Columns)"
-msgstr "Toon Kollomen"
+msgstr "Tabel (2 kolommen)"
 
 #: field.cpp:419
 msgid "Dependent"
-msgstr ""
+msgstr "Afhankelijk van"
 
 #: field.cpp:421
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: groupview.cpp:57 groupview.cpp:67
 msgid "Sort by Group, Ascending"
-msgstr ""
+msgstr "Sorteer naar groep, oplopend"
 
 #: groupview.cpp:58 groupview.cpp:68
 msgid "Sort by Group, Descending"
-msgstr ""
+msgstr "Sorteer naar groep, aflopend"
 
 #: groupview.cpp:59 groupview.cpp:69
 msgid "Sort by Count, Ascending"
-msgstr ""
+msgstr "Sorteer naar aantal, oplopend"
 
 #: groupview.cpp:60 groupview.cpp:70
 msgid "Sort by Count, Descending"
-msgstr ""
+msgstr "Sorteer naar aantal, aflopend"
 
 #: groupview.cpp:63
 msgid "Expand All Groups"
-msgstr "Alle Groepen Uitklappen"
+msgstr "Alle groepen uitklappen"
 
 #: groupview.cpp:64
 msgid "Collapse All Groups"
-msgstr "Alle Groepen Inklappen"
+msgstr "Alle groepen inklappen"
 
 #: groupview.cpp:65
 msgid "Filter by Group"
-msgstr ""
+msgstr "Filter naar groep"
 
 #: importdialog.cpp:48 importdialog.cpp:54
-#, fuzzy
 msgid "Import Options"
-msgstr "Opmaak Opties"
+msgstr "Import opties"
 
 #: importdialog.cpp:56
-#, fuzzy
 msgid "Replace current collection"
-msgstr "Hernoem Verzameling..."
+msgstr "Vervang huidige verzameling"
 
 #: importdialog.cpp:57
 msgid "Replace the current collection with the contents of the imported file."
 msgstr ""
+"Vervang de huidige verzameling met de inhoud van het geïmporteerde bestand."
 
 #: importdialog.cpp:59
-#, fuzzy
 msgid "Append to current collection"
-msgstr "Verander de groepering van de verzameling"
+msgstr "Voeg toe aan de huidige verzameling"
 
 #: importdialog.cpp:60
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
 msgstr ""
+"Voeg de inhoud van het geïmporteerde bestand toe aan de huidige "
+"verzameling. Dit is alleen mogelijk wanneer de verzamelingen overeen komen."
 
 #: importdialog.cpp:63
-#, fuzzy
 msgid "Merge with current collection"
-msgstr "Verander de groepering van de verzameling"
+msgstr "Voeg samen met de huidige verzameling"
 
 #: importdialog.cpp:64
 msgid ""
@@ -960,6 +924,9 @@ msgid ""
 "only possible when the collection types match. Entries must match exactly in "
 "order to be merged."
 msgstr ""
+"Voeg de inhoud van het geïmporteerde bestand samen met de huidige "
+"verzameling. Dit is alleen mogelijk als de verzameling gelijk zijn. De items "
+"moeten exact gelijk zijn om te worden samengevoegd."
 
 #: importdialog.cpp:192 mainwindow.cpp:994 mainwindow.cpp:1110
 msgid "*.bc *.tc|Tellico files (*.tc)"
@@ -967,12 +934,11 @@ msgstr "*.bc *.tc|Tellico-bestanden (*.tc)"
 
 #: importdialog.cpp:196 translators/bibtexexporter.cpp:50
 msgid "*.bib|Bibtex files (*.bib)"
-msgstr "*.bib|Bibtex-bestanden (*.bib)"
+msgstr "*.bib|BibTeX-bestanden (*.bib)"
 
 #: importdialog.cpp:200 translators/csvexporter.cpp:42
-#, fuzzy
 msgid "*.csv|CSV files (*.csv)"
-msgstr "*.xsl|XSLT-bestanden (*.xsl)"
+msgstr "*.csv|CSV bestanden (*.csv)"
 
 #: importdialog.cpp:205 importdialog.cpp:209 mainwindow.cpp:996
 #: translators/tellicoxmlexporter.cpp:48
@@ -980,9 +946,8 @@ msgid "*.xml|XML files (*.xml)"
 msgstr "*.xml|XML-bestanden (*.xml)"
 
 #: importdialog.cpp:213
-#, fuzzy
 msgid "*.ris|RIS files (*.ris)"
-msgstr "*.xml|XML-bestanden (*.xml)"
+msgstr "*.ris|RIS bestanden (*.ris)"
 
 #: importdialog.cpp:223 mainwindow.cpp:998 mainwindow.cpp:1112
 #: translators/bibtexexporter.cpp:50 translators/bibtexmlexporter.cpp:40
@@ -996,7 +961,7 @@ msgstr "*|Alle bestanden"
 #: detailedlistview.cpp:67 detailedlistview.cpp:298
 #: translators/pilotdbexporter.cpp:138
 msgid "View Columns"
-msgstr "Toon Kollomen"
+msgstr "Toon Kolommen"
 
 #: controller.cpp:73 fetchdialog.cpp:183 fetchdialog.cpp:247
 #: fetchdialog.cpp:321 mainwindow.cpp:89
@@ -1004,109 +969,88 @@ msgid "Ready."
 msgstr "Klaar."
 
 #: mainwindow.cpp:184
-#, fuzzy
 msgid "Create a new collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe verzameling"
 
 #: mainwindow.cpp:188
-#, fuzzy
 msgid "New &Book Collection"
-msgstr "BookCollection"
+msgstr "Nieuwe &Boekenverzameling"
 
 #: mainwindow.cpp:191
-#, fuzzy
 msgid "Create a new book collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe boekenverzameling"
 
 #: mainwindow.cpp:197
-#, fuzzy
 msgid "New B&ibliography"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Nieuwe B&ibliografie"
 
 #: mainwindow.cpp:200
-#, fuzzy
 msgid "Create a new bibtex bibliography"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Maak een nieuwe BibTeX bibliografie"
 
 #: mainwindow.cpp:206
-#, fuzzy
 msgid "New &Comic Book Collection"
-msgstr "BookCollection"
+msgstr "Nieuwe &Stripverzameling"
 
 #: mainwindow.cpp:209
-#, fuzzy
 msgid "Create a new comic book collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe stripverzameling"
 
 #: mainwindow.cpp:215
-#, fuzzy
 msgid "New &Video Collection"
-msgstr "VideoVerzameling"
+msgstr "Nieuwe &Filmverzameling"
 
 #: mainwindow.cpp:218
-#, fuzzy
 msgid "Create a new video collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe filmverzameling"
 
 #: mainwindow.cpp:224
-#, fuzzy
 msgid "New &Music Collection"
-msgstr "Nieuwe Verzamelingsnaam"
+msgstr "Nieuwe &Muziekverzameling"
 
 #: mainwindow.cpp:227
-#, fuzzy
 msgid "Create a new music collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe muziekverzameling"
 
 #: mainwindow.cpp:233
-#, fuzzy
 msgid "New C&ard Collection"
-msgstr "VideoVerzameling"
+msgstr "Nieuwe &Kaartenverzameling"
 
 #: mainwindow.cpp:236
-#, fuzzy
 msgid "Create a new trading card collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe kaartenverzameling"
 
 #: mainwindow.cpp:242
-#, fuzzy
 msgid "New C&oin Collection"
-msgstr "Nieuwe Verzamelingsnaam"
+msgstr "Nieuwe &Muntenverzameling"
 
 #: mainwindow.cpp:245
-#, fuzzy
 msgid "Create a new coin collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe muntenverzameling"
 
 #: mainwindow.cpp:251
-#, fuzzy
 msgid "New &Stamp Collection"
-msgstr "Nieuwe Verzamelingsnaam"
+msgstr "Nieuwe &Postzegelverzameling"
 
 #: mainwindow.cpp:254
-#, fuzzy
 msgid "Create a new stamp collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe postzegelverzameling"
 
 #: mainwindow.cpp:260
-#, fuzzy
 msgid "New &Wine Collection"
-msgstr "VideoVerzameling"
+msgstr "Nieuwe &Wijnverzameling"
 
 #: mainwindow.cpp:263
-#, fuzzy
 msgid "Create a new wine collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe wijnverzameling"
 
 #: mainwindow.cpp:269
-#, fuzzy
 msgid "New C&ustom Collection"
-msgstr "Nieuwe Verzamelingsnaam"
+msgstr "Nieuwe &Eigen verzameling"
 
 #: mainwindow.cpp:272
-#, fuzzy
 msgid "Create a new custom collection"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuwe eigen verzameling"
 
 #: mainwindow.cpp:281
 msgid "Open an existing document"
@@ -1117,435 +1061,364 @@ msgid "Open a recently used file"
 msgstr "Open een recent gebruikt bestand"
 
 #: mainwindow.cpp:285
-#, fuzzy
 msgid "Save the document"
 msgstr "Sla het huidige document op"
 
 #: mainwindow.cpp:287
-#, fuzzy
 msgid "Save the document as a different file..."
-msgstr "Sla het huidig document op als ..."
+msgstr "Sla het huidig document op als..."
 
 #: mainwindow.cpp:289
 msgid "Print the contents of the document..."
-msgstr "Print de inhoud van het document..."
+msgstr "Druk de inhoud van het document af..."
 
 #: mainwindow.cpp:291
 msgid "Quit the application"
-msgstr "Sluit de applicatie"
+msgstr "Sluit de toepassing"
 
 #: mainwindow.cpp:300 rc.cpp:3
-#, fuzzy
 msgid "&Import"
 msgstr "I&mporteren"
 
 #: mainwindow.cpp:303
-#, fuzzy
 msgid "Import collection data from other formats..."
-msgstr "Filter de verzameling om enkel bepaalde boeken te tonen..."
+msgstr "Importeer verzameldata uit andere formaten..."
 
 #: mainwindow.cpp:307
-#, fuzzy
 msgid "Import Tellico Data"
-msgstr "Bibtex-Bestand Importeren..."
+msgstr "Importeer Tellico data"
 
 #: mainwindow.cpp:308
-#, fuzzy
 msgid "Import another Tellico data file"
-msgstr "Bibtex-Bestand Importeren..."
+msgstr "Importeer een ander Tellico data bestand"
 
 #: mainwindow.cpp:314
-#, fuzzy
 msgid "Import CSV Data"
-msgstr "Exporteren..."
+msgstr "Importeer CSV data"
 
 #: mainwindow.cpp:315
-#, fuzzy
 msgid "Import a CSV file"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Importeer een CSV bestand"
 
 #: mainwindow.cpp:321
-#, fuzzy
 msgid "Import MODS Data"
-msgstr "Exporteren..."
+msgstr "Importeer MODS data"
 
 #: mainwindow.cpp:322
-#, fuzzy
 msgid "Import a MODS data file"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Importeer ee MODS data bestand"
 
 #: mainwindow.cpp:328
-#, fuzzy
 msgid "Import Alexandria Data"
-msgstr "Bibtex-Bestand Importeren..."
+msgstr "Importeer Alexandria data"
 
 #: mainwindow.cpp:329
 msgid "Import data from the Alexandria book collection manager"
-msgstr ""
+msgstr "Importeer data van het Alexandria boekenverzamling programma"
 
 #: mainwindow.cpp:335
-#, fuzzy
 msgid "Import Bibtex Data"
-msgstr "Bibtex-Bestand Importeren..."
+msgstr "Importeer BibTeX data"
 
 #: mainwindow.cpp:336
-#, fuzzy
 msgid "Import a bibtex bibliography file"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Importeer een BibTeX bibliografie bestand"
 
 #: mainwindow.cpp:342
-#, fuzzy
 msgid "Import Bibtexml Data"
-msgstr "Bibtexml-Bestand Importeren..."
+msgstr "Importeer BibTeXML data"
 
 #: mainwindow.cpp:343
-#, fuzzy
 msgid "Import a Bibtexml bibliography file"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Importeer een BibTeXML bibliografie bestand"
 
 #: mainwindow.cpp:349
-#, fuzzy
 msgid "Import RIS Data"
-msgstr "Exporteren..."
+msgstr "Importeer RIS data"
 
 #: mainwindow.cpp:350
-#, fuzzy
 msgid "Import an RIS reference file"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Importeer een RIS referentie bestand"
 
 #: mainwindow.cpp:356
 msgid "Import Audio File Metadata"
-msgstr ""
+msgstr "Importeer audio file metadata"
 
 #: mainwindow.cpp:357
-#, fuzzy
 msgid "Import meta-data from audio files"
-msgstr "Importeren van Bibtexml..."
+msgstr "Importeer meta-data uit audio bestanden"
 
 #: mainwindow.cpp:366
-#, fuzzy
 msgid "Import Audio CD Data"
-msgstr "Exporteren..."
+msgstr "Importeer audio cd data"
 
 #: mainwindow.cpp:367
 msgid "Import audio CD information from FreeDB"
-msgstr ""
+msgstr "Importeer audio cd informatie van de FreeDB"
 
 #: mainwindow.cpp:376
-#, fuzzy
 msgid "Import XSL Transform"
-msgstr "Exporteer met XSL Transformatie... "
+msgstr "Importeer XSL Transformatie"
 
 #: mainwindow.cpp:377
-#, fuzzy
 msgid "Import using an XSL Transform"
-msgstr "Exporteer een bestand met gebruik van een XSL-transformatie..."
+msgstr "Importeer een bestand met gebruik van een XSL-transformatie"
 
 #: mainwindow.cpp:389 rc.cpp:4
-#, fuzzy
 msgid "&Export"
-msgstr "Exporteer..."
+msgstr "&Exporteer"
 
 #: mainwindow.cpp:392
-#, fuzzy
 msgid "Export the collection data to other formats..."
-msgstr "Filter de verzameling om enkel bepaalde boeken te tonen..."
+msgstr "Exporteer de verzameling data naar andere formaten..."
 
 #: mainwindow.cpp:396
-#, fuzzy
 msgid "Export to XML"
-msgstr "E&xporteren"
+msgstr "Exporteer naar XML"
 
 #: mainwindow.cpp:397
-#, fuzzy
 msgid "Export to a Tellico XML file"
-msgstr "Exporteer naar Bibtex-bestand..."
+msgstr "Exporteer naar een Tellico XML bestand"
 
 #: mainwindow.cpp:403
-#, fuzzy
 msgid "Export to HTML"
-msgstr "E&xporteren"
+msgstr "Exporteer naar HTML"
 
 #: mainwindow.cpp:404
-#, fuzzy
 msgid "Export to an HTML file"
-msgstr "Exporteer naar Bibtex-bestand..."
+msgstr "Exporteer naar een HTML bestand"
 
 #: mainwindow.cpp:410
-#, fuzzy
 msgid "Export to CSV"
-msgstr "E&xporteren"
+msgstr "Exporteer naar CSV"
 
 #: mainwindow.cpp:411
-#, fuzzy
 msgid "Export to a comma-separated values file"
-msgstr "Exporteer naar Bibtexml-bestand..."
+msgstr "Exporteer naar een Comma Separated Value bestand"
 
 #: mainwindow.cpp:417
-#, fuzzy
 msgid "Export to PilotDB"
-msgstr "Exporteren naar Bibtex-Bestand..."
+msgstr "Exporteer naar PilotDB"
 
 #: mainwindow.cpp:418
-#, fuzzy
 msgid "Export to a PilotDB database"
-msgstr "Exporteer naar Bibtex-bestand..."
+msgstr "Exporteer naar een PilotDB database"
 
 #: mainwindow.cpp:424
-#, fuzzy
 msgid "Export to Alexandria"
-msgstr "Bibtex-Bestand Importeren..."
+msgstr "Exporteer naar Alexandria"
 
 #: mainwindow.cpp:425
-#, fuzzy
 msgid "Export to an Alexandria library"
-msgstr "Bibtex-Bestand Importeren..."
+msgstr "Exporteer naar een Alexandria biliotheek"
 
 #: mainwindow.cpp:431
-#, fuzzy
 msgid "Export to Bibtex"
-msgstr "Exporteren naar Bibtex-Bestand..."
+msgstr "Exporteer naar BibTeX"
 
 #: mainwindow.cpp:432
-#, fuzzy
 msgid "Export to a bibtex file"
-msgstr "Exporteer naar Bibtex-bestand..."
+msgstr "Exporteer naar een BibTeX bestand"
 
 #: mainwindow.cpp:438
-#, fuzzy
 msgid "Export to Bibtexml"
-msgstr "Exporteren naar Bibtexml-Bestand..."
+msgstr "Exporteer naar BibTeXML"
 
 #: mainwindow.cpp:439
-#, fuzzy
 msgid "Export to a Bibtexml file"
-msgstr "Exporteer naar Bibtexml-bestand..."
+msgstr "Exporteer naar een BibTeXML-bestand"
 
 #: mainwindow.cpp:445
-#, fuzzy
 msgid "Export XSL Transform"
-msgstr "Exporteer met XSL Transformatie... "
+msgstr "Exporteer naar XSL Transformatie"
 
 #: mainwindow.cpp:446
-#, fuzzy
 msgid "Export using an XSL Transform"
-msgstr "Exporteer een bestand met gebruik van een XSL-transformatie..."
+msgstr "Exporteer een bestand met gebruik van een XSL-transformatie"
 
 #: mainwindow.cpp:455
-#, fuzzy
 msgid "Cut the selected text and puts it in the clipboard"
-msgstr ""
-"Schneide den ausgewählten Bereich aus und füge ihn in die Zwischenablage "
-"ein"
+msgstr "Knip de geslecteerde tekst en plaats het op het klembord"
 
 #: mainwindow.cpp:457
-#, fuzzy
 msgid "Copy the selected text to the clipboard"
-msgstr "Kopiere den ausgewählten Bereich in die Zwischenablage"
+msgstr "Kopieer de geselecteerde tekst naar het klembord"
 
 #: mainwindow.cpp:459
-#, fuzzy
 msgid "Paste the clipboard contents"
-msgstr "Füge den Inhalt der Zwischenablage an der aktuellen Position ein"
+msgstr "Plak de inhoud van het klembord"
 
 #: mainwindow.cpp:461
-#, fuzzy
 msgid "Select all the entries in the collection"
-msgstr "Dit zijn de geselecteerde velden in de verzameling."
+msgstr "Selecteer alle item in de verzameling"
 
 #: mainwindow.cpp:469
-#, fuzzy
 msgid "Deselect all the entries in the collection"
-msgstr "Dit zijn de geselecteerde velden in de verzameling."
+msgstr "Deselecteer alle item in de verzameling"
 
 #: mainwindow.cpp:472
-#, fuzzy
 msgid "Search the collection"
-msgstr "Hernoem Verzameling..."
+msgstr "Doorzoek de verzameling"
 
 #: mainwindow.cpp:474
-#, fuzzy
 msgid "Find next match in the collection"
-msgstr "Verander de groepering van de verzameling"
+msgstr "Zoek de volgende overeenkomst in de verzameling"
 
 #: mainwindow.cpp:484
-#, fuzzy
 msgid "Find previous match in the collection"
-msgstr "Verander de groepering van de verzameling"
+msgstr "Zoek de vorige overeenkomst in de verzameling"
 
 #: mainwindow.cpp:487
 msgid "Internet Search..."
-msgstr ""
+msgstr "Internet zoekopdracht..."
 
 #: mainwindow.cpp:490
-#, fuzzy
 msgid "Search the internet..."
-msgstr "Zoek in het document..."
+msgstr "Zoek op het internet..."
 
 #: entryeditdialog.cpp:44 mainwindow.cpp:495
-#, fuzzy
 msgid "&New Entry"
-msgstr "Boek Kopiëren"
+msgstr "&Nieuw item"
 
 #: mainwindow.cpp:498
-#, fuzzy
 msgid "Create a new entry"
-msgstr "Maak een nieuw document"
+msgstr "Maak een nieuw item"
 
 #: controller.cpp:387 mainwindow.cpp:499
-#, fuzzy
 msgid "&Edit Entry"
-msgstr "Verwijder Boek"
+msgstr "&Bewerk item"
 
 #: mainwindow.cpp:502
-#, fuzzy
 msgid "Edit the selected entries"
-msgstr "Meerdere boeken verwijderen ?"
+msgstr "Bewerk de geselecteerde items"
 
 #: controller.cpp:388 mainwindow.cpp:503
-#, fuzzy
 msgid "&Copy Entry"
-msgstr "Boek Kopiëren"
+msgstr "&Kopieer item"
 
 #: mainwindow.cpp:506
-#, fuzzy
 msgid "Copy the selected entries"
-msgstr "Meerdere boeken verwijderen ?"
+msgstr "Kopieer de geselecteerde items"
 
 #: controller.cpp:389 mainwindow.cpp:507
-#, fuzzy
 msgid "&Delete Entry"
-msgstr "Verwijder Veld"
+msgstr "&Wis item"
 
 #: mainwindow.cpp:510
-#, fuzzy
 msgid "Delete the selected entries"
-msgstr "Meerdere boeken verwijderen ?"
+msgstr "Wis de geselecteerde items"
 
 #: mainwindow.cpp:511
-#, fuzzy
 msgid "&Rename Collection..."
-msgstr "Hernoem Verzameling..."
+msgstr "&Hernoem verzameling..."
 
 #: mainwindow.cpp:514
-#, fuzzy
 msgid "Rename the collection"
-msgstr "Hernoem Verzameling..."
+msgstr "Hernoem de verzameling"
 
 #: mainwindow.cpp:515
-#, fuzzy
 msgid "Collection &Fields..."
-msgstr "Verzamelingsvelden..."
+msgstr "Verzamelings&velden..."
 
 #: mainwindow.cpp:518
 msgid "Modify the collection fields"
-msgstr "Pas de verzamelingsvelden aan..."
+msgstr "Pas de verzamelingsvelden aan"
 
 #: mainwindow.cpp:519
-#, fuzzy
 msgid "Convert to &Bibliography"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Converteer naar een &Bibliografie"
 
 #: mainwindow.cpp:522
-#, fuzzy
 msgid "Convert a book collection to a bibliography"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Converteer een boekenverzameling naar een bibliografie"
 
 #: mainwindow.cpp:523
-#, fuzzy
 msgid "String &Macros..."
-msgstr "Quotatie"
+msgstr "Tekenreeks &Macros..."
 
 #: mainwindow.cpp:526
 msgid "Edit the bibtex string macros"
-msgstr ""
+msgstr "Bewerk de BibTeX tekenreeks macros"
 
 #: mainwindow.cpp:527
-#, fuzzy
 msgid "C&ite Entry"
-msgstr "Verwijder Boek"
+msgstr "Item &Aanhalen"
 
 #: mainwindow.cpp:530
-#, fuzzy
 msgid "Cite the selected entries in LyX"
-msgstr "Meerdere boeken verwijderen ?"
+msgstr "De geselecteerde items in LyX aanhalen"
 
 #: mainwindow.cpp:541
 msgid "Enable/disable the statusbar"
-msgstr "Activeer/Desactiveer de statusbar"
+msgstr "Statusbalk aan/uitzetten"
 
 #: mainwindow.cpp:545
-#, fuzzy
 msgid "Show Grou&p View"
-msgstr "BCGroupView"
+msgstr "Groe&psweergave"
 
 #: mainwindow.cpp:548
-#, fuzzy
 msgid "Enable/disable the group view"
-msgstr "Activeer/Desactiveer de werkbalk"
+msgstr "Groepweergave aan/uitzetten"
 
 #: mainwindow.cpp:549
 msgid "Show Entry &Editor"
-msgstr ""
+msgstr "Toon item &editor"
 
 #: mainwindow.cpp:552
-#, fuzzy
 msgid "Enable/disable the editor"
-msgstr "Activeer/Desactiveer de werkbalk"
+msgstr "Item editor aan/uitzetten"
 
 #: mainwindow.cpp:553
-#, fuzzy
 msgid "Show Entry &View"
-msgstr "BCGroupView"
+msgstr "Toon item &weergave"
 
 #: mainwindow.cpp:556
-#, fuzzy
 msgid "Enable/disable the entry view"
-msgstr "Activeer/Desactiveer de werkbalk"
+msgstr "Itemweergave aan/uitzetten"
 
 #: mainwindow.cpp:557
-#, fuzzy
 msgid "Advanced &Filter..."
-msgstr "Uitgebreide Filter......"
+msgstr "Uitgebreid &Filter..."
 
 #: mainwindow.cpp:560 mainwindow.cpp:582 mainwindow.cpp:585
-#, fuzzy
 msgid "Filter the collection"
-msgstr "Pas de verzamelingsvelden aan..."
+msgstr "Filter de verzameling"
 
 #: mainwindow.cpp:572
 msgid "Group By:"
-msgstr "Groeperen volgens:"
+msgstr "Groeperen op:"
 
 #: mainwindow.cpp:574 mainwindow.cpp:578
 msgid "Change the grouping of the collection"
 msgstr "Verander de groepering van de verzameling"
 
 #: mainwindow.cpp:575
-#, fuzzy
 msgid "&Group Selection"
-msgstr "Groeperingsopties"
+msgstr "&Groeperings selectie"
 
 #: mainwindow.cpp:580
 msgid "Quick Filter:"
-msgstr "Snelle Filter:"
+msgstr "Snel Filter:"
 
 #: mainwindow.cpp:583
-#, fuzzy
 msgid "Filter Entry"
-msgstr "Verwijder Boek"
+msgstr "Filter item"
 
 #: mainwindow.cpp:623
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
+"<qt>De <i>Groepweergave</i> sorteert de items in groepen gebaseers op een "
+"gelecteerd veld.</qt>"
 
 #: mainwindow.cpp:629
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each "
 "entry.</qt>"
 msgstr ""
+"<qt>De <i>Kolomweergave</i> toont de inhoud van meerdere velden voor ieder "
+"item.</qt>"
 
 #: mainwindow.cpp:971
 msgid "Creating new document..."
@@ -1561,55 +1434,57 @@ msgstr "Open bestand..."
 
 #: mainwindow.cpp:1078
 msgid "Saving file..."
-msgstr "Opslaan bestand..."
+msgstr "Bestand wordt opgeslagen..."
 
 #: mainwindow.cpp:1108
 msgid "Saving file with a new filename..."
-msgstr "Opslaan bestand met nieuwe bestandsnaam..."
+msgstr "Bestand wordt opgeslagen onder een nieuwe naam..."
 
 #: mainwindow.cpp:1155 mainwindow.cpp:1202
 msgid "Printing..."
-msgstr "Afdrukken..."
+msgstr "Bezig met afdrukken..."
 
 #: mainwindow.cpp:1165
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
+"De verzameling wordt momenteel gefilterd en toont een selectie van alle "
+"items. Alleen de zichtbare items worden afgedrukt. Doorgaan?"
 
 #: mainwindow.cpp:1189
 msgid "Processing document..."
-msgstr "Verwerken dokument..."
+msgstr "Document verwerken..."
 
 #: mainwindow.cpp:1209
 msgid "Exiting..."
-msgstr "Sluiten..."
+msgstr "Programma wordt afgesloten..."
 
 #: mainwindow.cpp:1396
-#, fuzzy, c-format
+#, c-format
 msgid "Total Entries: %1"
-msgstr "Verwijder Veld"
+msgstr "Aantal items: %1"
 
 #: mainwindow.cpp:1405
 msgid "(%1 filtered; %2 selected)"
-msgstr ""
+msgstr "(%1 gefilterd; %2 geselecteerd)"
 
 #: mainwindow.cpp:1408
 msgid "(%1 filtered)"
-msgstr ""
+msgstr "(%1 gefilterd)"
 
 #: mainwindow.cpp:1411
 msgid "(%1 selected)"
-msgstr ""
+msgstr "(%1 geselecteerd)"
 
 #: mainwindow.cpp:1540 translators/htmlexporter.cpp:187
 msgid "People"
-msgstr ""
+msgstr "Mensen"
 
 #: mainwindow.cpp:1608
-#, fuzzy, c-format
+#, c-format
 msgid "Print %1"
-msgstr "Afdrukken"
+msgstr "Druk %1 af"
 
 #: mainwindow.cpp:1642
 #, c-format
@@ -1618,129 +1493,117 @@ msgstr "Pagina %1"
 
 #: fetch/z3950fetcher.cpp:233 mainwindow.cpp:1669
 #: translators/xsltimporter.cpp:56
-#, fuzzy
 msgid "Tellico encountered an error in XSLT processing."
-msgstr "Tellico kreeg een fout bij de XSLT verwerking.\n"
+msgstr "Tellico kreeg een fout bij de XSLT verwerking."
 
 #: entryview.cpp:137 mainwindow.cpp:1670
 msgid "Please check your installation."
-msgstr "Gelieve uw installatie te controleren."
+msgstr "Controleer uw installatie."
 
 #: mainwindow.cpp:1765
-#, fuzzy
 msgid "Importing data..."
-msgstr "Exporteren..."
+msgstr "Data importeren..."
 
 #: mainwindow.cpp:1774 mainwindow.cpp:1780
-#, fuzzy
 msgid "Import File..."
-msgstr "Bibtex-Bestand Importeren..."
+msgstr "Bestand importeren..."
 
 #: mainwindow.cpp:1831
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection"
 msgstr ""
+"Alleen verzamelingen met dezelfde soort items kunnen worden toegevoegd. Er "
+"zijn geen veranderingen gemaakt aan de huidige verzameling"
 
 #: mainwindow.cpp:1846
 msgid ""
 "Only collections with the same type of entries as the current one can be "
 "merged. No changes are being made to the current collection"
 msgstr ""
+"Alleen verzamelingen met dezelfde soort items kunnen worden samengevoegd. Er "
+"zijn geen veranderingen gemaakt aan de huidige verzameling"
 
 #: mainwindow.cpp:1875
-#, fuzzy
 msgid "Exporting data..."
-msgstr "Exporteren..."
+msgstr "Data exporteren..."
 
 #: mainwindow.cpp:1897
-#, fuzzy
 msgid "Export As"
-msgstr "E&xporteren"
+msgstr "Exporteer als"
 
 #: mainwindow.cpp:1935
-#, fuzzy
 msgid "String Macros"
-msgstr "Quotatie"
+msgstr "Tekenreeks macros"
 
 #: mainwindow.cpp:1936
 msgid "Macro"
-msgstr ""
+msgstr "Macro"
 
 #: mainwindow.cpp:1936
-#, fuzzy
 msgid "String"
-msgstr "Quotatie"
+msgstr "Tekenreeks"
 
 #: mainwindow.cpp:2058
-#, fuzzy
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
-msgstr "Tellico kan het bestand niet schrijven - %1."
+msgstr "<qt>Tellico naar de server pipe schrijven op <b>%1</b>.</qt>"
 
 #: filehandler.cpp:100 translators/tellicoimporter.cpp:62
 #: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
 msgid "There is an XML parsing error in line %1, column %2."
-msgstr "Er is een XML parsings error op lijn %1, kollom %2."
+msgstr "Er is een XML parsing fout op lijn %1, kolom %2."
 
 #: filehandler.cpp:102 translators/tellicoimporter.cpp:64
 #: translators/xmlimporter.cpp:37 translators/xmlimporter.cpp:54
 msgid "The error message from Qt is:"
-msgstr "De foutvermelding van QT is:"
+msgstr "De fout melding van QT is:"
 
 #: filehandler.cpp:128
-#, fuzzy, c-format
+#, c-format
 msgid "Tellico is unable to load the image - %1."
-msgstr "Tellico kan het bestand niet laden - %1."
+msgstr "Tellico kan de afbeelding niet laden - %1."
 
 #: filehandler.cpp:143
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
-"Een bestand met naam \"%1\" bestaat reeds. Bent U zeker dat U dit wil "
-"overschrijven ? "
+"Een bestand met naam \"%1\" bestaat al. Wilt u dit bestand overschrijven?"
 
 #: filehandler.cpp:146
 msgid "Overwrite File?"
-msgstr "Bestand overschrijven ?"
+msgstr "Bestand overschrijven?"
 
 #: filehandler.cpp:147
 msgid "Overwrite"
 msgstr "Overschrijven"
 
 #: controller.cpp:273
-#, fuzzy
 msgid "Do you really want to delete this entry?"
-msgstr "Wil je deze boeken echt verwijderen ?"
+msgstr "Weet u zeker dat u dit item wilt verwijderen?"
 
 #: controller.cpp:275
-#, fuzzy
 msgid "Delete Entry?"
-msgstr "Verwijder Veld"
+msgstr "Wis item?"
 
 #: controller.cpp:285
-#, fuzzy
 msgid "Do you really want to delete these entries?"
-msgstr "Wil je deze boeken echt verwijderen ?"
+msgstr "Weet u zeker dat u deze items wilt verwijderen?"
 
 #: controller.cpp:289
-#, fuzzy
 msgid "Delete Multiple Entries?"
-msgstr "Meerdere boeken verwijderen ?"
+msgstr "Meerdere items wissen?"
 
 #: controller.cpp:391
-#, fuzzy
 msgid "&Edit Entries"
-msgstr "Verwijder Boek"
+msgstr "&Bewerk items"
 
 #: controller.cpp:392
-#, fuzzy
 msgid "&Copy Entries"
-msgstr "Boek Kopiëren"
+msgstr "Items &kopiëren"
 
 #: controller.cpp:393
-#, fuzzy
 msgid "&Delete Entries"
-msgstr "Verwijder Veld"
+msgstr "&Wis items"
 
 #: collection.cpp:23
 msgid "(Empty)"
@@ -1748,45 +1611,43 @@ msgstr "(Leeg)"
 
 #: finddialog.cpp:39
 msgid "Find Text"
-msgstr "Zoek Tekst"
+msgstr "Zoek tekst"
 
 #: finddialog.cpp:40
 msgid "&Find"
 msgstr "&Zoek"
 
 #: finddialog.cpp:47
-#, fuzzy
 msgid "Find"
-msgstr "&Zoek"
+msgstr "Zoek"
 
 #: finddialog.cpp:51
 msgid "&Text to find:"
-msgstr "Zoek Tekst: "
+msgstr "Te zoeken &tekst:"
 
 #: finddialog.cpp:54
 msgid "The search string"
-msgstr "Zoekterm"
+msgstr "De zoekterm"
 
 #: finddialog.cpp:65
 msgid "As regular e&xpression"
-msgstr "Als &Reguliere Expressie"
+msgstr "Als reguliere e&xpressie"
 
 #: finddialog.cpp:66
 msgid "If checked, the search string is used as a regular expression."
-msgstr "Indien aangekruisd wordt de zoekterm als reguliere expressie gebruikt."
+msgstr "Indien aangevinkt wordt de zoekterm als reguliere expressie gebruikt."
 
 #: finddialog.cpp:68
 msgid "&Edit regular expression..."
-msgstr "Aanpassen &Reguliere Expressie..."
+msgstr "Reguliere expressie &bewerken..."
 
 #: finddialog.cpp:75
-#, fuzzy
 msgid "Field"
-msgstr "Velden"
+msgstr "Veld"
 
 #: finddialog.cpp:77
 msgid "Search in:"
-msgstr "Zoeken in: "
+msgstr "Zoeken in:"
 
 #: finddialog.cpp:79
 msgid "Select which field should be searched."
@@ -1794,27 +1655,27 @@ msgstr "Kies welk veld doorzocht moet worden."
 
 #: finddialog.cpp:88
 msgid "C&ase sensitive"
-msgstr "Hoofdletter &Gevoelig"
+msgstr "&Hoofdletter gevoelig"
 
 #: finddialog.cpp:89
 msgid "If checked, the search is case-sensitive."
-msgstr "Indien aangekruisd is het zoeken hoofdletter gevoelig."
+msgstr "Indien aangevinkt is het zoeken hoofdlettergevoelig."
 
 #: finddialog.cpp:90
 msgid "Find &backwards"
-msgstr "Zoek &Achterwaarts"
+msgstr "Zoek &achterwaarts"
 
 #: finddialog.cpp:91
 msgid "If checked, the document is searched in reverse."
-msgstr "Indien aangekruisd wordt het document achterwaarts doorzocht."
+msgstr "Indien aangevinkt wordt het document achterwaarts doorzocht."
 
 #: finddialog.cpp:92
 msgid "&Whole words only"
-msgstr "&Enkel Volledige Woorden"
+msgstr "Enkel &volledige woorden"
 
 #: finddialog.cpp:93
 msgid "If checked, the search is limited to whole words."
-msgstr "Indien aangekruisd wordt het zoeken beperkt tot volledige woorden."
+msgstr "Indien aangevinkt wordt het zoeken beperkt tot volledige woorden."
 
 #: finddialog.cpp:109 finddialog.cpp:178
 msgid "All Fields"
@@ -1826,590 +1687,613 @@ msgstr "Ongeldige reguliere expressie."
 
 #: fetch/amazonfetcher.cpp:53
 msgid "Amazon (US)"
-msgstr ""
+msgstr "Amazon (VS)"
 
 #: fetch/amazonfetcher.cpp:62
 msgid "Amazon (UK)"
-msgstr ""
+msgstr "Amazon (Engeland)"
 
 #: fetch/amazonfetcher.cpp:71
 msgid "Amazon (Germany)"
-msgstr ""
+msgstr "Amazon (Duitsland)"
 
 #: fetch/amazonfetcher.cpp:80
 msgid "Amazon (Japan)"
-msgstr ""
+msgstr "Amazon (Japan)"
 
 #: fetch/amazonfetcher.cpp:89
 msgid "Amazon (France)"
-msgstr ""
+msgstr "Amazon (Frankrijk)"
 
 #: fetch/amazonfetcher.cpp:98
 msgid "Amazon (Canada)"
-msgstr ""
+msgstr "Amazon (Canada)"
 
 #: fetch/amazonfetcher.cpp:210
 msgid "%1 does not allow searching for this collection type."
-msgstr ""
+msgstr "%1 staat niet toe dat er voor deze verzameling wordt gezocht."
 
 #: fetch/amazonfetcher.cpp:429
 msgid "Results from %1: %2/%3"
-msgstr ""
+msgstr "Resultaten van %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:389
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:392
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
-msgstr ""
+msgstr "<qt>Geen items gevonden voor de volgende ISBN waardes:</qt>"
 
 #: fetch/amazonfetcher.cpp:507
 msgid "The cover image could not be loaded."
-msgstr ""
+msgstr "De afbeelding van de voorzijde kon niet worden geladen."
 
 #: fetch/amazonfetcher.cpp:584
-#, fuzzy
 msgid "Co&untry: "
-msgstr "Toon Kollomen"
+msgstr "&Land: "
 
 #: fetch/amazonfetcher.cpp:588
 msgid "United States"
-msgstr ""
+msgstr "Verenigde Staten"
 
 #: fetch/amazonfetcher.cpp:589
 msgid "United Kingdom"
-msgstr ""
+msgstr "Engeland"
 
 #: fetch/amazonfetcher.cpp:590
 msgid "Germany"
-msgstr ""
+msgstr "Duitsland"
 
 #: fetch/amazonfetcher.cpp:591
 msgid "Japan"
-msgstr ""
+msgstr "Japan"
 
 #: fetch/amazonfetcher.cpp:592
-#, fuzzy
 msgid "France"
-msgstr "&Zoek"
+msgstr "Frankrijk"
 
 #: fetch/amazonfetcher.cpp:593
 msgid "Canada"
-msgstr ""
+msgstr "Canada"
 
 #: fetch/amazonfetcher.cpp:596
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
+"Amazon geeft data van verschillende lokale websites. Kies welke u wilt "
+"gebruiken als data bron."
 
 #: fetch/amazonfetcher.cpp:602
 msgid "&Image size: "
-msgstr ""
+msgstr "&Afbeelding grootte: "
 
 #: fetch/amazonfetcher.cpp:606
-#, fuzzy
 msgid "Small Image"
-msgstr "Titel"
+msgstr "Kleine afbeelding"
 
 #: fetch/amazonfetcher.cpp:607
-#, fuzzy
 msgid "Medium Image"
-msgstr "Medium"
+msgstr "Medium afbeelding"
 
 #: fetch/amazonfetcher.cpp:608
-#, fuzzy
 msgid "Large Image"
-msgstr "Titel"
+msgstr "Grote afbeelding"
 
 #: fetch/amazonfetcher.cpp:609
-#, fuzzy
 msgid "No Image"
-msgstr "Pagina's"
+msgstr "Geen afbeelding"
 
 #: fetch/amazonfetcher.cpp:612 fetch/imdbfetcher.cpp:788
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
 msgstr ""
+"De afbeelding van de hoes kan ook worden gedownload. Een grote hoeveelheid "
+"grote afbeeldingen kan echter wel de snelheid van het programma beïnvloeden."
 
 #: fetch/amazonfetcher.cpp:618
 msgid "&Associate's ID: "
-msgstr ""
+msgstr "&Associate's ID: "
 
 #: fetch/amazonfetcher.cpp:623
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
 msgstr ""
+"De associate's ID herkent de persoon die toegang heeft op de Amazon.com Web "
+"Services en wordt gebruikt in iedere link naar de Amazon.com website."
 
 #: fetch/fetchmanager.cpp:208
-#, fuzzy
 msgid "Person"
-msgstr "Persoonlijk"
+msgstr "Persoon"
 
 #: fetch/fetchmanager.cpp:209 fetchdialog.cpp:366
-#, fuzzy
 msgid "ISBN"
 msgstr "ISBN#"
 
 #: fetch/fetchmanager.cpp:210
-#, fuzzy
 msgid "Keyword"
-msgstr "Kernwoorden"
+msgstr "Trefwoord"
 
 #: fetch/fetchmanager.cpp:211
-#, fuzzy
 msgid "Raw Query"
-msgstr "Zoeken in: "
+msgstr "Ruwe zoekopdracht"
 
 #: fetch/fetchmanager.cpp:270
 msgid "Amazon.com Web Services"
-msgstr ""
+msgstr "Amazon.com web services"
 
 #: fetch/fetchmanager.cpp:273 fetch/imdbfetcher.cpp:91
 msgid "Internet Movie Database"
-msgstr ""
+msgstr "Internet Movie Database"
 
 #: fetch/fetchmanager.cpp:276
 msgid "z39.50"
-msgstr ""
+msgstr "z39.50"
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:408
-#, fuzzy
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:411
 msgid "Library of Congress (US)"
-msgstr "Library of Congress Control Number"
+msgstr "Library of Congress Control (VS)"
 
 #: fetch/srufetcher.cpp:254
 msgid "This source has no options."
-msgstr ""
+msgstr "Deze bron heeft geen opties."
 
 #: fetch/imdbfetcher.cpp:409
 msgid "Select IMDB Result"
-msgstr ""
+msgstr "Kies IMDB resultaat"
 
 #: fetch/imdbfetcher.cpp:412
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
+"<qt>Uw zoekopdracht heeft meerdere overeenkomsten gevonden. Kies een van de "
+"onderstaande.</qt>"
 
 #: fetch/imdbfetcher.cpp:419
 msgid "<qt>Select a search result.</qt>"
-msgstr ""
+msgstr "<qt>Kies een zoekresultaat.</qt>"
 
 #: fetch/imdbfetcher.cpp:539
 msgid "Alternative Titles"
-msgstr ""
+msgstr "Alternatieve titels"
 
 #: fetch/imdbfetcher.cpp:757
-#, fuzzy
 msgid "Certifications"
-msgstr "Categorie"
+msgstr "Leeftijdcategorie"
 
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:419
-#, fuzzy
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:422
 msgid "&Host: "
-msgstr "E&xporteren"
+msgstr "&Host: "
 
 #: fetch/imdbfetcher.cpp:779
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
 msgstr ""
+"De Internet Movie Database gebruikt verschillende servers. Kies welke u wilt "
+"gebruiken."
 
 #: fetch/imdbfetcher.cpp:785
 msgid "Download cover image"
-msgstr ""
+msgstr "Download hoesafbeelding"
 
 #: fetch/z3950fetcher.cpp:260
 msgid "Connection error %1: %2"
-msgstr ""
+msgstr "Verbindingsfout %1: %2"
 
 #: fetch/z3950fetcher.cpp:272
 msgid "Query error!"
-msgstr ""
+msgstr "Zoek fout!"
 
 #: fetch/z3950fetcher.cpp:290
 msgid "Connection search error %1: %2"
-msgstr ""
+msgstr "Verbindings zoekfout %1: %2"
 
-#: fetch/z3950fetcher.cpp:424
+#: fetch/z3950fetcher.cpp:427
 msgid "Enter the host name of the z39.50 server."
-msgstr ""
+msgstr "Geef de hostnaam van de z39.50 server."
 
-#: fetch/z3950fetcher.cpp:429
-#, fuzzy
+#: fetch/z3950fetcher.cpp:432
 msgid "&Port: "
-msgstr "E&xporteren"
+msgstr "&Poort: "
 
-#: fetch/z3950fetcher.cpp:434
+#: fetch/z3950fetcher.cpp:437
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
-msgstr ""
+msgstr "Geef het poortnummer van de z39.50 server. Standaard is %1."
 
-#: fetch/z3950fetcher.cpp:439
-#, fuzzy
+#: fetch/z3950fetcher.cpp:442
 msgid "&Database: "
-msgstr "Type:"
+msgstr "&Database: "
 
-#: fetch/z3950fetcher.cpp:444
+#: fetch/z3950fetcher.cpp:447
 msgid "Enter the database name used by the z39.50 server."
-msgstr ""
+msgstr "Geef de database naam die door de z39.50 server gebruikt wordt."
 
-#: fetch/z3950fetcher.cpp:449
+#: fetch/z3950fetcher.cpp:452
 msgid "Ch&aracter set: "
-msgstr ""
+msgstr "&Teken set: "
 
-#: fetch/z3950fetcher.cpp:458
+#: fetch/z3950fetcher.cpp:461
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
+"Geef de tekenset codering die gebruikt wordt door de z39.50 server. De meest "
+"waarschijnlijke keuze is MARC-8 hoewel ISO-8859-1 ook veel gebruikt wordt."
 
-#: fetch/z3950fetcher.cpp:464
+#: fetch/z3950fetcher.cpp:467
 msgid "&User: "
-msgstr ""
+msgstr "&Gebruiker: "
 
-#: fetch/z3950fetcher.cpp:469
+#: fetch/z3950fetcher.cpp:472
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
+"Geef de gebruikersnaam van de z39.50 database. De meeste server hebben er "
+"geen nodig."
 
-#: fetch/z3950fetcher.cpp:475
+#: fetch/z3950fetcher.cpp:478
 msgid "Pass&word: "
-msgstr ""
+msgstr "Wacht&woord: "
 
-#: fetch/z3950fetcher.cpp:481
+#: fetch/z3950fetcher.cpp:484
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
+"Geef het wachtwoord van de z39.50 database. De meeste server hebben er geen "
+"nodig."
 
-#: collectionfieldsdialog.cpp:81
-#, fuzzy
+#: collectionfieldsdialog.cpp:82
 msgid "Collection Fields"
-msgstr "Verzamelingsvelden..."
+msgstr "Verzamelingsvelden"
 
-#: collectionfieldsdialog.cpp:94
+#: collectionfieldsdialog.cpp:95
 msgid "Current Fields"
 msgstr "Huidige Velden"
 
-#: collectionfieldsdialog.cpp:109
-#, fuzzy
+#: collectionfieldsdialog.cpp:110
 msgid ""
 "_: New Field\n"
 "New"
-msgstr "Nieuw Veld"
-
-#: collectionfieldsdialog.cpp:111
-#, fuzzy
-msgid "Add a new field to the collection"
-msgstr "Maak een nieuw document"
+msgstr "Nieuw veld"
 
 #: collectionfieldsdialog.cpp:112
-#, fuzzy
+msgid "Add a new field to the collection"
+msgstr "Voeg een nieuw veld toe aan de verzameling"
+
+#: collectionfieldsdialog.cpp:113
 msgid ""
 "_: Delete Field\n"
 "Delete"
-msgstr "Verwijder Veld"
+msgstr "Wis veld"
 
-#: collectionfieldsdialog.cpp:114
-#, fuzzy
+#: collectionfieldsdialog.cpp:115
 msgid "Remove a field from the collection"
-msgstr "Pas de verzamelingsvelden aan..."
+msgstr "Verwijder een veld uit de verzameling"
 
-#: collectionfieldsdialog.cpp:123
+#: collectionfieldsdialog.cpp:124
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
+"Verplaats dit veld omhoog in de lijst. De volgorde is belangrijk voor de "
+"layout van de item editor."
 
-#: collectionfieldsdialog.cpp:127
+#: collectionfieldsdialog.cpp:128
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
+"Verplaats dit veld omlaag in de lijst. De volgorde is belangrijk voor de "
+"layout van de item editor."
 
-#: collectionfieldsdialog.cpp:137
+#: collectionfieldsdialog.cpp:138
 msgid "Field Properties"
-msgstr "Veld Eigenschappen"
+msgstr "Veldeigenschappen"
 
-#: collectionfieldsdialog.cpp:143
+#: collectionfieldsdialog.cpp:144
 msgid "Title:"
 msgstr "Titel:"
 
-#: collectionfieldsdialog.cpp:147
+#: collectionfieldsdialog.cpp:148
 msgid "The title of the field"
-msgstr ""
+msgstr "De titel van het veld"
 
-#: collectionfieldsdialog.cpp:152
+#: collectionfieldsdialog.cpp:153
 msgid "Type:"
 msgstr "Type:"
 
-#: collectionfieldsdialog.cpp:157
-msgid "The type of the field determines what values may be used. "
-msgstr ""
-
 #: collectionfieldsdialog.cpp:158
-msgid "<i>Simple Text</i> is used for most fields. "
-msgstr ""
+msgid "The type of the field determines what values may be used. "
+msgstr "Het type van het veld bepaald welke waardes mogen worden gebruikt. "
 
 #: collectionfieldsdialog.cpp:159
-msgid "<i>Paragraph</i> is for large text blocks. "
-msgstr ""
+msgid "<i>Simple Text</i> is used for most fields. "
+msgstr "<i>Eenvoudige tekst</i> wordt gebruikt voor de meeste velden. "
 
 #: collectionfieldsdialog.cpp:160
-msgid "<i>Choice</i> limits the field to certain values. "
-msgstr ""
+msgid "<i>Paragraph</i> is for large text blocks. "
+msgstr "<i>Paragraaf</i> is voor grote tekstblokken. "
 
 #: collectionfieldsdialog.cpp:161
-msgid "<i>Checkbox</i> is for a simple yes/no value. "
-msgstr ""
+msgid "<i>Choice</i> limits the field to certain values. "
+msgstr "<i>Keuze</i> beperkt de invoer tot bepaalde waardes. "
 
 #: collectionfieldsdialog.cpp:162
-msgid "<i>Number</i> indicates that the field contains a numerical value. "
-msgstr ""
+msgid "<i>Checkbox</i> is for a simple yes/no value. "
+msgstr "<i>Keuzevakje</i> is voor een eenvoudig ja/nee. "
 
 #: collectionfieldsdialog.cpp:163
+msgid "<i>Number</i> indicates that the field contains a numerical value. "
+msgstr "<i>Getal</i> geeft aan dat het veld een numerieke waarde bevat. "
+
+#: collectionfieldsdialog.cpp:164
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
 "files. "
 msgstr ""
-
-#: collectionfieldsdialog.cpp:164
-msgid "<i>Table</i>s may be a single or double column of values. "
-msgstr ""
+"<i>URL</i> is voor velden de verwijzen naar een webkoppeling of een "
+"verwijzing naar andere bestanden. "
 
 #: collectionfieldsdialog.cpp:165
-msgid "An <i>Image</i> field holds a picture. "
-msgstr ""
+msgid "<i>Table</i>s may be a single or double column of values. "
+msgstr "<i>Tabel</i> kan een enkele of dubbele kolom met waarden zijn. "
 
 #: collectionfieldsdialog.cpp:166
+msgid "An <i>Image</i> field holds a picture. "
+msgstr "Een <i>afbeelding</i> veld bevat een afbeelding. "
+
+#: collectionfieldsdialog.cpp:167
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
+"Een <i>datum</i> veld kan worden gebruikt voor waardes met een dag, maand en "
+"jaar. "
 
-#: collectionfieldsdialog.cpp:167
+#: collectionfieldsdialog.cpp:168
 msgid ""
 "A <i>Dependent</i> field depends on the values of other fields, and is "
 "formatted according to the field description. "
 msgstr ""
+"Een <i>Afhankelijk van</i> veld is afhankelijk van de waarde van andere "
+"velden en wordt opgemaakt volgens veld omschrijving. "
 
-#: collectionfieldsdialog.cpp:169
+#: collectionfieldsdialog.cpp:170
 msgid ""
 "A <i>Read Only</i> is for internal values, possibly useful for import and "
 "export. "
 msgstr ""
+"Een <i>Alleen lezen</i> veld is voor interne waarden, mogelijk handig voor "
+"import en export. "
 
-#: collectionfieldsdialog.cpp:178
+#: collectionfieldsdialog.cpp:179
 msgid "Category:"
 msgstr "Categorie:"
 
-#: collectionfieldsdialog.cpp:182
+#: collectionfieldsdialog.cpp:183
 msgid "The field category determines where the field is placed in the editor."
-msgstr ""
+msgstr "De veldcategorie bepaald waar het veld wordt geplaatst in de editor."
 
-#: collectionfieldsdialog.cpp:199
-msgid "Description:"
-msgstr "Omschrijving:"
+#: collectionfieldsdialog.cpp:200
+msgid "Allowed:"
+msgstr "Toegestaan:"
 
-#: collectionfieldsdialog.cpp:203
+#: collectionfieldsdialog.cpp:204
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
 "are placed in a combo box.</qt>"
 msgstr ""
+"<qt>Voor <i>Keuze</i> velden zijn dit de enige mogelijke waardes. Ze worden "
+"geplaats in een keuze vak.</qt>"
 
-#: collectionfieldsdialog.cpp:209
-msgid "Allowed:"
-msgstr "Toegestaan:"
+#: collectionfieldsdialog.cpp:210
+msgid "Description:"
+msgstr "Omschrijving:"
 
-#: collectionfieldsdialog.cpp:214
+#: collectionfieldsdialog.cpp:215
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field. For <i>Dependent</i> fields, the description is a format string such "
 "as \"%{year} %{title}\" where the named fields get substituted in the string."
 msgstr ""
+"De omschrijving is een geheugensteuntje voor de inhoud van een veld. Voor "
+"<i>Afhankelijk van</i> velden is de omschrijving een tekenreeks zoals "
+"\"%{jaar} %{titel}\" waarbij de velden worden vervangen in de tekenreeks."
 
-#: collectionfieldsdialog.cpp:221
-#, fuzzy
+#: collectionfieldsdialog.cpp:222
 msgid "Extended Properties:"
-msgstr "Veld Eigenschappen"
+msgstr "Uitgebreide eigenschappen:"
 
-#: collectionfieldsdialog.cpp:223
-#, fuzzy
+#: collectionfieldsdialog.cpp:224
 msgid "Set..."
-msgstr "Opslaan als..."
+msgstr "Instellen..."
 
-#: collectionfieldsdialog.cpp:225
+#: collectionfieldsdialog.cpp:226
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr ""
-
-#: collectionfieldsdialog.cpp:229
-msgid "Format Options"
-msgstr "Opmaak Opties"
+"Uitgebreide veldeigenschappen worden gebruikt om bepaalde dingen te "
+"specificeren zoals het bijbehorende BibTeX veld."
 
 #: collectionfieldsdialog.cpp:230
+msgid "Format Options"
+msgstr "Opmaak opties"
+
+#: collectionfieldsdialog.cpp:231
 msgid "No formatting"
 msgstr "Geen opmaak"
 
-#: collectionfieldsdialog.cpp:231
+#: collectionfieldsdialog.cpp:232
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
 msgstr ""
-
-#: collectionfieldsdialog.cpp:233
-msgid "Allow auto-capitalization only"
-msgstr ""
+"Deze optie voorkomt dat het veld automatisch ooit wordt opgemaakt of "
+"voorzien van hoofdletters."
 
 #: collectionfieldsdialog.cpp:234
+msgid "Allow auto-capitalization only"
+msgstr "Alleen auto-hoofdletters toestaan"
+
+#: collectionfieldsdialog.cpp:235
 msgid ""
 "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
+"Deze optie zorgt dat het veld auto-hoofdletters krijgt maar niet speciaal "
+"wordt opgemaakt."
 
-#: collectionfieldsdialog.cpp:236
+#: collectionfieldsdialog.cpp:237
 msgid "Format as a title"
 msgstr "Opmaak als titel"
 
-#: collectionfieldsdialog.cpp:237
+#: collectionfieldsdialog.cpp:238
 msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
 msgstr ""
+"Deze optie maakt het veld op als een titel met auto-hoofdletters, maar doet "
+"dit alleen als deze opties als algemeen zijn ingesteld."
 
-#: collectionfieldsdialog.cpp:239
+#: collectionfieldsdialog.cpp:240
 msgid "Format as a name"
 msgstr "Opmaak als naam"
 
-#: collectionfieldsdialog.cpp:240
+#: collectionfieldsdialog.cpp:241
 msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
 msgstr ""
+"Deze optie maakt het veld op als een naam met auto-hoofdletters, maar doet "
+"dit alleen als deze opties als algemeen zijn ingesteld."
 
-#: collectionfieldsdialog.cpp:244
+#: collectionfieldsdialog.cpp:245
 msgid "Field Options"
 msgstr "Veld Opties"
 
-#: collectionfieldsdialog.cpp:245
-msgid "Enable auto-completion"
-msgstr "Activeren auto-aanvulling "
-
 #: collectionfieldsdialog.cpp:246
-#, fuzzy
+msgid "Enable auto-completion"
+msgstr "Auto-aanvullen aanzetten"
+
+#: collectionfieldsdialog.cpp:247
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
 msgstr ""
-"Wanneer aangekruisd zullen de boeken gegroepeerd worden onder het gekozen "
-"veld."
+"Indien aangevinkt wordt auto-aanvullen van KDE aangezet in het invulvak van "
+"dit veld."
 
-#: collectionfieldsdialog.cpp:248
+#: collectionfieldsdialog.cpp:249
 msgid "Allow multiple values"
 msgstr "Meerdere waarden toestaan"
 
-#: collectionfieldsdialog.cpp:249
-#, fuzzy
+#: collectionfieldsdialog.cpp:250
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
-msgstr "Waarden toegestaan voor dit veld worden gescheiden door een puntkomma."
+msgstr ""
+"Indien aangevinkt zal Tellico de waardes in het veld ontleden in meerdere "
+"waardes gescheiden door een puntkomma."
 
-#: collectionfieldsdialog.cpp:251
+#: collectionfieldsdialog.cpp:252
 msgid "Allow grouping"
 msgstr "Groepering toestaan"
 
-#: collectionfieldsdialog.cpp:252
-#, fuzzy
+#: collectionfieldsdialog.cpp:253
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
-"Indien aangekruisd wordt het aantal van items in de groep toegevoegd aan de "
-"groepsnaam."
+"Indien aangevinkt kan dit veld worden gebruikt om item te groeperen in de "
+"groepweergave."
 
-#: collectionfieldsdialog.cpp:265
-#, fuzzy
+#: collectionfieldsdialog.cpp:266
 msgid "Revert the selected field's properties to the default values."
-msgstr "Dit zijn de geselecteerde velden in de verzameling."
+msgstr ""
+"Zet de veldeigenschappen van de geselecteerde velden terug naar de standaard "
+"waarden."
 
-#: collectionfieldsdialog.cpp:315
+#: collectionfieldsdialog.cpp:316
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
+"<qt>Het verwijderen van toegestane waardes uit het <i>%1</i> veld die "
+"voorkomen in de verzameling kan data corruptie veroorzaken. Wilt u de "
+"veranderde waardes behouden of terugkeren naar de huidige waardes?</qt>"
 
-#: collectionfieldsdialog.cpp:320
+#: collectionfieldsdialog.cpp:321
 msgid "Keep modified values"
-msgstr ""
+msgstr "Bewaar veranderde waarden"
 
-#: collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:381
+#: collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:382
 #: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
 msgid "New Field"
-msgstr "Nieuw Veld"
+msgstr "Nieuw veld"
 
-#: collectionfieldsdialog.cpp:414
-#, fuzzy
+#: collectionfieldsdialog.cpp:415
 msgid ""
 "<qt><p>Do you really want to delete the <em>%1</em> field? This action "
 "occurs immediately and can not be undone!</p></qt>"
 msgstr ""
-"Wil je het %1 veld echt verwijderen? Dit zal onmiddelijk gebeuren en kan "
-"niet meer ongedaan worden."
+"<qt><p>Weet u zeker dat u het <em>%1</em> veld wilt wissen? Deze bewerking "
+"gescheid onmiddellijk en kan niet meer ongedaan gemaakt worden!</p></qt>"
 
-#: collectionfieldsdialog.cpp:417
+#: collectionfieldsdialog.cpp:418
 msgid "Delete Field?"
-msgstr "Verwijder Veld ?"
+msgstr "Veld wissen?"
 
-#: collectionfieldsdialog.cpp:713
-#, fuzzy
+#: collectionfieldsdialog.cpp:707
 msgid "Revert Field Properties?"
-msgstr "Veld Eigenschappen"
+msgstr "Veldeigenschappen terugzetten?"
 
-#: collectionfieldsdialog.cpp:714
-#, fuzzy
+#: collectionfieldsdialog.cpp:708
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
-"Wil je het %1 veld echt verwijderen? Dit zal onmiddelijk gebeuren en kan "
-"niet meer ongedaan worden."
+"<qt><p>Weet u zeker dat u de eigenschappen van het <em>%1</em> veld terug "
+"wilt zetten naar de standaard waarde?</p></qt>"
 
-#: collectionfieldsdialog.cpp:717
+#: collectionfieldsdialog.cpp:711
 msgid "Revert"
-msgstr ""
+msgstr "Terugzetten"
 
-#: collectionfieldsdialog.cpp:835
-#, fuzzy
+#: collectionfieldsdialog.cpp:829
 msgid "Extended Field Properties"
-msgstr "Veld Eigenschappen"
+msgstr "Uitgebreide veldeigenschappen"
 
-#: collectionfieldsdialog.cpp:836
-#, fuzzy
+#: collectionfieldsdialog.cpp:830
 msgid "Property"
-msgstr "Jaar Publicatie"
+msgstr "Eigenschap"
 
-#: collectionfieldsdialog.cpp:836
-#, fuzzy
+#: collectionfieldsdialog.cpp:830
 msgid "Value"
-msgstr "Toon Kollomen"
+msgstr "Waarde"
 
-#: collectionfieldsdialog.cpp:852
+#: collectionfieldsdialog.cpp:846
 msgid "A field with this title already exists. Please enter a different title."
-msgstr ""
+msgstr "Een veld met deze titel bestaat al. Kies een andere titel."
 
-#: collectionfieldsdialog.cpp:861
+#: collectionfieldsdialog.cpp:855
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
 "<em>Table</em> or <em>Image</em> field. Please enter a different "
 "category.</qt>"
 msgstr ""
+"<qt>Een veld mag niet in dezelfde categorie zitten als een "
+"<em>Paragraaf</em>, <em>Tabel</em> of <em>Afbeelding</em> veld. Geef een "
+"andere categorie.</qt>"
 
-#: collectionfieldsdialog.cpp:869
+#: collectionfieldsdialog.cpp:863
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
 msgstr ""
+"Een veldtitel mag niet in dezelfde categorie zitten als een bestaande "
+"categorie. Geef een andere titel."
 
 #: document.cpp:96
 msgid ""
@@ -2424,55 +2308,52 @@ msgid "Warning!"
 msgstr "Waarschuwing!"
 
 #: document.cpp:357 document.cpp:360
-#, fuzzy
 msgid "Rename Collection"
-msgstr "Hernoem Verzameling..."
+msgstr "Hernoem verzameling"
 
 #: document.cpp:357 document.cpp:360
 msgid "New Collection Name"
-msgstr "Nieuwe Verzamelingsnaam"
+msgstr "Nieuwe verzamelingsnaam"
 
 #: configdialog.cpp:56
 msgid "Configure Tellico"
-msgstr "Configuratie Tellico"
+msgstr "Tellico instellen"
 
 #: configdialog.cpp:142
 msgid "General Options"
-msgstr "Algemene Opties"
+msgstr "Algemene opties"
 
 #: configdialog.cpp:145
 msgid "Reopen file at startup"
-msgstr "Open bestand bij het opstarten"
+msgstr "Open het bestand opnieuw bij het opstarten"
 
 #: configdialog.cpp:146
 msgid ""
 "If checked, the file that was last open will be re-opened at program "
 "start-up."
 msgstr ""
-"Indien aangekruisd wordt het laatste geopende bestand bij programmastart "
-"heropend."
+"Indien aangevinkt wordt het laatst geopende bestand bij het opstarten "
+"opnieuw geopend."
 
 #: configdialog.cpp:151
 msgid "Show \"Tip of the Day\" at startup"
-msgstr ""
+msgstr "Toon \"Tip van de dag\" bij het opstarten"
 
 #: configdialog.cpp:152
-#, fuzzy
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr ""
-"Indien aangekruisd wordt het laatste geopende bestand bij programmastart "
-"heropend."
+"Indien aangevinkt wordt de \"Tip van de dag\" getoond bij het opstarten."
 
 #: configdialog.cpp:157
 msgid "Show number of items in group"
-msgstr "Toon het aantal items in de groep"
+msgstr "Toon het aantal items in een groep"
 
 #: configdialog.cpp:158
 msgid ""
 "If checked, the number of items in the group will be appended to the group "
 "name."
 msgstr ""
-"Indien aangekruisd wordt het aantal van items in de groep toegevoegd aan de "
+"Indien aangevinkt wordt het aantal items in de groep toegevoegd aan de "
 "groepsnaam."
 
 #: configdialog.cpp:163 configdialog.cpp:227
@@ -2481,12 +2362,12 @@ msgstr "Opmaaksopties"
 
 #: configdialog.cpp:166
 msgid "Auto capitalize titles and names"
-msgstr "Automatische hoofdletters voor titels en namen"
+msgstr "Auto-hoofdletters voor titels en namen"
 
 #: configdialog.cpp:167
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
-"Wanneer aangekruisd zullen titels en namen automatisch hoofdletters krijgen."
+"Indien aangevinkt zullen titels en namen automatisch hoofdletters krijgen."
 
 #: configdialog.cpp:171
 msgid "Auto format titles and names"
@@ -2494,42 +2375,45 @@ msgstr "Automatische opmaak titels en namen"
 
 #: configdialog.cpp:172 configdialog.cpp:231
 msgid "If checked, titles and names will be automatically formatted."
-msgstr ""
-"Wanneer aangekruisd zullen titels en namen automatisch opgemaakt worden."
+msgstr "Indien aangevinkt zullen titels en namen automatisch opgemaakt worden."
 
 #: configdialog.cpp:180
 msgid "Articles:"
 msgstr "Lidwoorden:"
 
 #: configdialog.cpp:187
-#, fuzzy
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
 "first word in a title. Multiple values should be separated by a "
 "semi-colon.</qt>"
 msgstr ""
-"Een door komma's gescheiden lijst van woorden die aanzien moeten worden als "
-"lidwoorden als ze het eerste woord in een titel zijn "
+"<qt>Een lijst van woorden die als lidwoord moeten worden aangezien als ze "
+"het eerste woord in een titel zijn. Meerdere waarden moeten een puntkomma "
+"gescheiden woorden.</qt>"
 
 #: configdialog.cpp:195
 msgid "Personal suffixes:"
-msgstr "Naam prefix:"
+msgstr "Achtervoegsels:"
 
 #: configdialog.cpp:200
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>Een lijst van achtervoegsels, meerdere waardes moeten worden gescheiden "
+"door een puntkomma.</qt>"
 
 #: configdialog.cpp:207
 msgid "Surname prefixes:"
-msgstr "Naam voorvoegsels:"
+msgstr "Voorvoegsels:"
 
 #: configdialog.cpp:212
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
+"<qt>Een lijst van voorvoegsels, meerdere waardes moeten worden gescheiden "
+"door een puntkomma.</qt>"
 
 #: configdialog.cpp:224
 msgid "Printing"
@@ -2549,141 +2433,130 @@ msgstr "Veldnamen afdrukken"
 
 #: configdialog.cpp:235 translators/htmlexporter.cpp:76
 msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Wanneer aangekruisd zullen de veldnamen afgedrukt worden als tabel-hoofd."
+msgstr "Indien aangevinkt worden de veldnamen afgedrukt als tabel-hoofd."
 
 #: configdialog.cpp:238
 msgid "Grouping Options"
 msgstr "Groeperingsopties"
 
 #: configdialog.cpp:241 translators/htmlexporter.cpp:80
-#, fuzzy
 msgid "Group the entries"
-msgstr "Groepeer de boeken"
+msgstr "Groepeer de items"
 
 #: configdialog.cpp:242 translators/htmlexporter.cpp:81
-#, fuzzy
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
-"Wanneer aangekruisd zullen de boeken gegroepeerd worden onder het gekozen "
-"veld."
+"Indien aangevinkt zullen de items gegroepeerd worden onder het gekozen veld."
 
 #: configdialog.cpp:245
-#, fuzzy
 msgid "Image Options"
-msgstr "Opmaak Opties"
+msgstr "Afbeeldingsopties"
 
 #: configdialog.cpp:251
 msgid "Maximum image width:"
-msgstr ""
+msgstr "Maximale afbeelding breedte:"
 
 #: configdialog.cpp:255
 msgid ""
 "The maximum width of the images in the printout. The aspect ration is "
 "preserved."
 msgstr ""
+"De maximale breedte van de afbeeldingen in de afdruk. De verhoudingen "
+"blijven behouden."
 
 #: configdialog.cpp:263
 msgid "Maximum image height:"
-msgstr ""
+msgstr "Maximale afbeelding hoogte:"
 
 #: configdialog.cpp:267
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
 msgstr ""
+"De maximale hoogte van de afbeeldingen in de afdruk. De verhoudingen blijven "
+"behouden."
 
 #: configdialog.cpp:281
 msgid "Templates"
-msgstr ""
+msgstr "Sjablonen"
 
 #: configdialog.cpp:281
-#, fuzzy
 msgid "Template Options"
-msgstr "Opmaak Opties"
+msgstr "Sjabloonopties"
 
 #: configdialog.cpp:312
-#, fuzzy
 msgid "Data Sources"
-msgstr "Zoeken in: "
+msgstr "Databronnen"
 
 #: configdialog.cpp:312
-#, fuzzy
 msgid "Data Source Options"
-msgstr "Opmaak Opties"
+msgstr "Databron opties"
 
 #: configdialog.cpp:316 fetchdialog.cpp:136
 msgid "Source"
-msgstr ""
+msgstr "Bron"
 
 #: configdialog.cpp:325
-#, fuzzy
 msgid "&New..."
-msgstr "Nieuw"
+msgstr "&Nieuw..."
 
 #: configdialog.cpp:328
 msgid "&Modify..."
-msgstr ""
+msgstr "&Wijzig..."
 
 #: configdialog.cpp:331
 msgid "Remo&ve"
-msgstr ""
+msgstr "Ver&wijder"
 
 #: configdialog.cpp:524 configdialog.cpp:635
-#, fuzzy
 msgid "Data Source Properties"
-msgstr "Veld Eigenschappen"
+msgstr "Databron eigenschappen"
 
 #: configdialog.cpp:543 configdialog.cpp:654
 msgid "&Source name: "
-msgstr ""
+msgstr "&Bronnaam: "
 
 #: configdialog.cpp:545 configdialog.cpp:656
 msgid ""
 "The name identifies the data source and should be unique and informative."
-msgstr ""
+msgstr "De naam identificeert de databron en moet uniek en informatief zijn."
 
 #: configdialog.cpp:554 configdialog.cpp:665
 msgid "Source type: "
-msgstr ""
+msgstr "Brontype: "
 
 #: configdialog.cpp:556 configdialog.cpp:667
 msgid ""
 "Tellico currently supports three source types: Amazon.com, IMDB, and z39.50."
-msgstr ""
+msgstr "Tellico ondersteunt momenteel drie brontypen: Amazon, IMDB an z39.50."
 
 #: configdialog.cpp:564 configdialog.cpp:674
-#, fuzzy
 msgid "Source Options"
-msgstr "Veld Opties"
+msgstr "Bronopties"
 
 #: main.cpp:23
-#, fuzzy
 msgid "Tellico - a collection manager for KDE"
-msgstr "Tellico - een beheersprogramma voor uw boekenverzameling onder KDE"
+msgstr "Tellico - een verzameling beheerder voor de K-Desktop"
 
 #: main.cpp:27
 msgid "Do not reopen the last open file"
-msgstr ""
+msgstr "Open niet opnieuw het laatst geopende bestand"
 
 #: main.cpp:28
-#, fuzzy
 msgid "Import <filename> as a bibtex file"
-msgstr "Exporteer naar Bibtex-bestand..."
+msgstr "Importeer <filename> als een BibTeX-bestand"
 
 #: main.cpp:29
-#, fuzzy
 msgid "Import <filename> as a MODS file"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Importeer <filename> als een MODS-bestand"
 
 #: main.cpp:30
-#, fuzzy
 msgid "Import <filename> as a RIS file"
-msgstr "Importeer een Bibtexml-bestand..."
+msgstr "Importeer <filename> als een RIS-bestand"
 
 #: main.cpp:31
 msgid "File to open"
-msgstr "Bestand te openen"
+msgstr "Te openen bestand"
 
 #: main.cpp:37
 msgid "Tellico"
@@ -2691,717 +2564,678 @@ msgstr "Tellico"
 
 #: main.cpp:42
 msgid "Author of btparse library"
-msgstr ""
+msgstr "Auteur van de btparse bibliotheek"
 
 #: main.cpp:44
-#, fuzzy
 msgid "Icons"
-msgstr "bevat"
+msgstr "Pictogrammen"
 
 #: collectionfactory.cpp:70 collectionfactory.cpp:84
-#, fuzzy
 msgid "My Collection"
-msgstr "BCCollection"
+msgstr "Mijn verzameling"
 
 #: collectionfactory.cpp:125
-#, fuzzy
 msgid "Book Collection"
-msgstr "BookCollection"
+msgstr "Boekenverzameling"
 
 #: collectionfactory.cpp:127
-#, fuzzy
 msgid "Comic Book Collection"
-msgstr "BookCollection"
+msgstr "Stripverzameling"
 
 #: collectionfactory.cpp:128
-#, fuzzy
 msgid "Video Collection"
-msgstr "VideoVerzameling"
+msgstr "Filmverzameling"
 
 #: collectionfactory.cpp:129
-#, fuzzy
 msgid "Music Collection"
-msgstr "BCCollection"
+msgstr "Muziekverzameling"
 
 #: collectionfactory.cpp:130
-#, fuzzy
 msgid "Coin Collection"
-msgstr "SongCollection"
+msgstr "Muntverzameling"
 
 #: collectionfactory.cpp:131
-#, fuzzy
 msgid "Stamp Collection"
-msgstr "Hernoem Verzameling..."
+msgstr "Postverzameling"
 
 #: collectionfactory.cpp:132
-#, fuzzy
 msgid "Wine Collection"
-msgstr "VideoVerzameling"
+msgstr "Wijnverzameling"
 
 #: collectionfactory.cpp:133
-#, fuzzy
 msgid "Card Collection"
-msgstr "BCCollection"
+msgstr "Kaartenverzameling"
 
 #: collectionfactory.cpp:134
-#, fuzzy
 msgid "Custom Collection"
-msgstr "Nieuwe Verzamelingsnaam"
+msgstr "Eigen verzameling"
 
 #: viewstack.cpp:27
 msgid ""
 "<qt>The <i>Entry View</i> shows a formatted view of the entry's "
 "contents.</qt>"
 msgstr ""
+"<qt>De <i>Itemweergave</i> toont een opgemaakte weergave van items</qt>"
 
 #: viewstack.cpp:28
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
 "an icon, which may be an image in the entry.</qt>"
 msgstr ""
+"<qt>De <i>Pictogramweergave</i> toont een ieder item in de verzameling of "
+"groep als een pitogram, dit is afbeelding van dat item indien aanwezig</qt>"
 
 #: exportdialog.cpp:45
-#, fuzzy
 msgid "Export Options"
-msgstr "Opmaak Opties"
+msgstr "Exportopties"
 
 #: exportdialog.cpp:50
-#, fuzzy
 msgid "Formatting"
-msgstr "Geen opmaak"
+msgstr "Opmaak"
 
 #: exportdialog.cpp:52
-#, fuzzy
 msgid "Format all fields"
-msgstr "Opmaak als titel"
+msgstr "Alle velden opmaken"
 
 #: exportdialog.cpp:54
-#, fuzzy
 msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
-"Wanneer aangekruisd zullen titels en namen automatisch opgemaakt worden."
+"Indien aangevinkt worden de velden automatisch opgemaakt volgens hun formaat "
+"type."
 
 #: exportdialog.cpp:56
-#, fuzzy
 msgid "Export selected entries only"
-msgstr "Meerdere boeken verwijderen ?"
+msgstr "Alleen geslecteerde item exporteren"
 
 #: exportdialog.cpp:58
-#, fuzzy
 msgid "If checked, only the currently selected entries will be exported."
-msgstr ""
-"Wanneer aangekruisd zullen de veldnamen afgedrukt worden als tabel-hoofd."
+msgstr "Indien aangevinkt worden alleen de geselecteerde items geëxporteerd."
 
 #: exportdialog.cpp:61
-#, fuzzy
 msgid "Encoding"
-msgstr "Binding"
+msgstr "Codering"
 
 #: exportdialog.cpp:63
 msgid "Encode in Unicode (UTF-8)"
-msgstr ""
+msgstr "Codeer in Unicode (UTF-8)"
 
 #: exportdialog.cpp:65
 msgid "Encode the exported file in Unicode (UTF-8)."
-msgstr ""
+msgstr "Codeer het geëxporteerde bestand in Unicode (UTF-8)."
 
 #: exportdialog.cpp:66
 msgid "Encode in user locale (%1)"
-msgstr ""
+msgstr "Codeer in user locale (%1)"
 
 #: exportdialog.cpp:69
 msgid "Encode the exported file in the local format."
-msgstr ""
+msgstr "Codeer het geëxporteerde bestande in het lokale formaat."
 
 #: fetchdialog.cpp:51
-#, fuzzy
 msgid "&Search"
-msgstr "Zoeken in: "
+msgstr "&Zoeken"
 
 #: fetchdialog.cpp:52
 msgid "&Stop"
-msgstr ""
+msgstr "&Stoppen"
 
 #: fetchdialog.cpp:63
 msgid "Internet Search"
-msgstr ""
+msgstr "Internet zoekopdracht"
 
 #: fetchdialog.cpp:70
-#, fuzzy
 msgid "Search Query"
-msgstr "Zoeken in: "
+msgstr "Zoek opdracht"
 
 #: fetchdialog.cpp:76
-#, fuzzy
 msgid "Search:"
-msgstr "Zoeken in: "
+msgstr "Zoeken:"
 
 #: fetchdialog.cpp:79
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr ""
+"Geef een zoekwaarde.Een ISBN zoekopdracht moet het volledige ISBN bevatten."
 
 #: fetchdialog.cpp:83
 msgid "Choose the type of search"
-msgstr ""
+msgstr "Kies de wijze van zoeken"
 
 #: fetchdialog.cpp:90
 msgid "Click to start or stop the search"
-msgstr ""
+msgstr "Klik om het zoeken te starten of te stoppen"
 
 #: fetchdialog.cpp:105
 msgid "Multiple ISBN search"
-msgstr ""
+msgstr "Meervoudige ISBN zoekopdracht"
 
 #: fetchdialog.cpp:106
 msgid "Check this box to search for multiple ISBN values."
-msgstr ""
+msgstr "Vink aan om meerdere ISBN waardes te zoeken."
 
 #: fetchdialog.cpp:109
 msgid "Edit ISBN list..."
-msgstr ""
+msgstr "Bewerk ISBN lijst..."
 
 #: fetchdialog.cpp:111
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr ""
+"Klik om een tekstvenster te open om meerdere ISBN waardes in te geven of te "
+"bewerken."
 
 #: fetchdialog.cpp:117
-#, fuzzy
 msgid "Search Source:"
-msgstr "Zoeken in: "
+msgstr "Zoekbron:"
 
 #: fetchdialog.cpp:121
 msgid "Select the database to search"
-msgstr ""
+msgstr "Kies de database die doorzocht moet worden"
 
 #: fetchdialog.cpp:140
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
 msgstr ""
+"Wanneer er resultaten gevonden zijn worden deze toegevoegd aan deze lijst. "
+"Wanneer u een resultaat selecteert wordt het volledige item onderstaand "
+"getoond."
 
 #: fetchdialog.cpp:147
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
+"Een item kan hier worden getoond voordat u het aan de huidige verzameling "
+"toevoegt"
 
 #: fetchdialog.cpp:154
-#, fuzzy
 msgid "Add Entry"
-msgstr "Verwijder Boek"
+msgstr "Item toevoegen"
 
 #: fetchdialog.cpp:157
-#, fuzzy
 msgid "Add the selected entry to the current collection"
-msgstr "Maak een nieuw document"
+msgstr "Voeg het geselecteerde toe aan de huidige verzameling"
 
 #: fetchdialog.cpp:162
 msgid "Clear all search fields and results"
-msgstr ""
+msgstr "Wis alle zoekvelden en resultaten"
 
 #: fetchdialog.cpp:227
-#, fuzzy
 msgid "Searching..."
-msgstr "Zoeken in: "
+msgstr "Zoeken..."
 
 #: fetchdialog.cpp:263
-#, fuzzy
 msgid "The search returned no items."
-msgstr "Zoekterm"
+msgstr "De zoekopdracht gaf geen items."
 
 #: fetchdialog.cpp:266
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
-msgstr ""
+msgstr "De zoekopdracht gaf %n items."
 
 #: fetchdialog.cpp:315
 msgid "Fetching %1..."
-msgstr ""
+msgstr "%1 ophalen..."
 
 #: fetchdialog.cpp:343
 msgid "No Internet sources are available for your current collection type."
-msgstr ""
+msgstr "Er zijn geen internet bronnen beschikbaar voor uw huidige verzameling."
 
 #: fetchdialog.cpp:396
 msgid "Edit ISBN Values"
-msgstr ""
+msgstr "Bewerk ISBN waardes"
 
 #: fetchdialog.cpp:401 fetchdialog.cpp:404
 msgid "<qt>Enter the ISBN values, one per line.</qt>"
-msgstr ""
+msgstr "<qt>Geef de ISBN waardes, één per regel.</qt>"
 
 #: fetchdialog.cpp:405
 msgid "Load From File"
-msgstr ""
+msgstr "Laad van bestand"
 
 #: fetchdialog.cpp:406
 msgid "<qt>Load the ISBN list from a text file.</qt>"
-msgstr ""
+msgstr "<qt>Laad de ISBN lijst van een bestand.</qt>"
 
 #: fetchdialog.cpp:424
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
 msgstr ""
+"<qt>Een ISBN zoekopdracht kan maximaal 100 ISBN waardes tegelijkertijd aan. "
+"Alleen de eerste 100 waardes in uw lijst worden gebruikt.</qt>"
 
 #: kwidgetlister.cpp:56
-#, fuzzy
 msgid ""
 "_: more widgets\n"
 "More"
-msgstr "meer widgets"
+msgstr "Meer"
 
 #: kwidgetlister.cpp:59
-#, fuzzy
 msgid ""
 "_: fewer widgets\n"
 "Fewer"
-msgstr "minder widgets"
+msgstr "Minder"
 
 #: kwidgetlister.cpp:65
-#, fuzzy
 msgid ""
 "_: clear widgets\n"
 "Clear"
-msgstr "leeghalen widgets"
+msgstr "Wis"
 
 #: imagewidget.cpp:48
-#, fuzzy
 msgid "Select Image..."
-msgstr "Kies een XSLT bestand..."
+msgstr "Kies een afbeelding..."
 
 #: entryeditdialog.cpp:43 entryeditdialog.cpp:306 entryeditdialog.cpp:327
 #: entryeditdialog.cpp:371 entryeditdialog.cpp:423
-#, fuzzy
 msgid "Edit Entry"
-msgstr "Verwijder Boek"
+msgstr "Bewerk item"
 
 #: entryeditdialog.cpp:78 entryeditdialog.cpp:338 entryeditdialog.cpp:459
-#, fuzzy
 msgid "Sa&ve Entry"
-msgstr "Boek Kopiëren"
+msgstr "Item op&slaan"
 
 #: entryeditdialog.cpp:271
-#, fuzzy
 msgid "Do you really want to modify these entries?"
-msgstr "Wil je deze boeken echt verwijderen ?"
+msgstr "Wilt u deze items bewerken?"
 
 #: entryeditdialog.cpp:273
-#, fuzzy
 msgid "Modify Multiple Entries?"
-msgstr "Meerdere boeken aanpassen ?"
+msgstr "Meedere items bewerken?"
 
 #: entryeditdialog.cpp:399
-#, fuzzy
 msgid "Sa&ve Entries"
-msgstr "Verwijder Veld"
+msgstr "Items op&slaan"
 
 #: entryeditdialog.cpp:569
-#, fuzzy
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
 msgstr ""
-"Het huidige boek werd aangepast.\n"
-"Wil je de aanpassingen invoegen ? "
+"Het huidige item is bewerkt.\n"
+"Wilt u deze veranderen invoeren?"
 
 #: entryeditdialog.cpp:572
-#, fuzzy
 msgid "Save Entry"
-msgstr "Boek Kopiëren"
+msgstr "Item opslaan"
 
 #: entryview.cpp:135
-#, fuzzy
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr "Tellico kan het bestand niet laden - %1."
+msgstr "Tellico kan het standaard stylesheet niet vinden."
 
 #: translators/alexandriaexporter.cpp:33
-#, fuzzy
 msgid "Alexandria"
-msgstr "Algemene Opties"
+msgstr "Alexandria"
 
 #: translators/alexandriaexporter.cpp:50
 msgid ""
 "<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
 "books in that library could be overwritten.</qt>"
 msgstr ""
+"<qt>een Alexandria bibliotheek met de naam <i>%1</i> bestaat al. Ieder "
+"bestaand boek in die bibliotheek kan worden overschreven.</qt>"
 
 #: translators/bibtexmlexporter.cpp:36
-#, fuzzy
 msgid "Bibtexml"
-msgstr "Exporteren naar Bibtexml-Bestand..."
+msgstr "BibTeXML"
 
 #: translators/bibtexmlexporter.cpp:40
 msgid "*.xml|Bibtexml files (*.xml)"
-msgstr "*.xml|Bibtexml-bestanden (*.xml)"
+msgstr "*.xml|BibTeXML-bestanden (*.xml)"
 
 #: translators/bibteximporter.cpp:42
 #, c-format
 msgid "No valid bibtex entries were found in file - %1"
-msgstr ""
+msgstr "Geen geldige BibTeX items gevonden in het %1 bestand"
 
 #: translators/bibtexexporter.cpp:46
-#, fuzzy
 msgid "Bibtex"
-msgstr "Veld Opties"
+msgstr "BibTeX"
 
 #: translators/bibtexexporter.cpp:61
-#, fuzzy
 msgid "Bibtex Options"
-msgstr "Veld Opties"
+msgstr "BibTeX opties"
 
 #: translators/bibtexexporter.cpp:64
-#, fuzzy
 msgid "Expand string macros"
-msgstr "Quotatie"
+msgstr "Tekenreeks macro uitbreiden"
 
 #: translators/bibtexexporter.cpp:66
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
 msgstr ""
+"Indien aangevinkt worden de tekenreeks macros uitgebreid en worden @ "
+"tekenreeksen{} niet weggeschreven."
 
 #: translators/bibtexexporter.cpp:69
 msgid "Use URL package"
-msgstr ""
+msgstr "Gebruik URL pakket"
 
 #: translators/bibtexexporter.cpp:71
-#, fuzzy
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr ""
-"Wanneer aangekruisd zullen de veldnamen afgedrukt worden als tabel-hoofd."
+"Indien aangevinkt worden URL velden verpakt als een \\url omschrijving."
 
 #: translators/bibtexexporter.cpp:74
 msgid "Skip entries with empty citation keys"
-msgstr ""
+msgstr "Sla items over met lege citaat sleutels"
 
 #: translators/bibtexexporter.cpp:76
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr ""
+"Indien aangevinkt, zal ieder item zonder een bibtexcitaat sleutel worden "
+"overgeslagen."
 
 #: translators/bibtexexporter.cpp:80
-#, fuzzy
 msgid "Bibtex quotation style:"
-msgstr "Veld Opties"
+msgstr "BibTeX citaatstijl:"
 
 #: translators/bibtexexporter.cpp:82 translators/bibtexexporter.cpp:89
 #: translators/bibtexexporter.cpp:120
 msgid "Braces"
-msgstr ""
+msgstr "Accolades"
 
 #: translators/bibtexexporter.cpp:83 translators/bibtexexporter.cpp:91
 msgid "Quotes"
-msgstr ""
+msgstr "Aanhalingstekens"
 
 #: translators/bibtexexporter.cpp:84
 msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will  "
 "be escaped with either braces or quotation marks.</qt>"
 msgstr ""
+"<qt>De citaatstijl die gebruikt wordt wanneer BibTeX bestanden worden "
+"geëxporteerd. Alle veldenwaardes zullen worden vrijgelaten met zowel "
+"accolades als aanhalingstekens.</qt>"
 
 #: translators/csvexporter.cpp:53 translators/csvimporter.cpp:123
-#, fuzzy
 msgid "CSV Options"
-msgstr "Veld Opties"
+msgstr "CSV opties"
 
 #: translators/csvimporter.cpp:128
-#, fuzzy
 msgid "Collection Type:"
-msgstr "BCCollection"
+msgstr "Verzameling type:"
 
 #: translators/csvimporter.cpp:130
 msgid "Select the type of collection being imported."
-msgstr ""
+msgstr "Selecteer het type verzameling dat moet worden geïmporteerd."
 
 #: translators/csvimporter.cpp:138
 msgid "First row contains field titles"
-msgstr ""
+msgstr "De eerste rij bevat de veldtitels"
 
 #: translators/csvimporter.cpp:140
-#, fuzzy
 msgid "If checked, the first row is used as field titles."
-msgstr "Indien aangekruisd wordt de zoekterm als reguliere expressie gebruikt."
+msgstr "Indien aangevinkt wordt de eerste rij als veldtitel gebruikt."
 
 #: translators/csvexporter.cpp:61 translators/csvimporter.cpp:144
 msgid "Delimiter"
-msgstr ""
+msgstr "Scheidingsteken"
 
 #: translators/csvexporter.cpp:64 translators/csvimporter.cpp:147
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
 msgstr ""
+"Behalve een komma mogen ook andere tekens gebruikt worden als "
+"scheidingsteken."
 
 #: translators/csvexporter.cpp:68 translators/csvimporter.cpp:152
-#, fuzzy
 msgid "Comma"
-msgstr "Opmerkingen"
+msgstr "Komma"
 
 #: translators/csvexporter.cpp:70 translators/csvimporter.cpp:154
 msgid "Use a comma as the delimiter."
-msgstr ""
+msgstr "Gebruik een komma als scheidingsteken."
 
 #: translators/csvexporter.cpp:74 translators/csvimporter.cpp:158
 msgid "Semicolon"
-msgstr ""
+msgstr "Puntkomma"
 
 #: translators/csvexporter.cpp:75 translators/csvimporter.cpp:159
 msgid "Use a semi-colon as the delimiter."
-msgstr ""
+msgstr "Gebruik een puntkomma als scheidings teken."
 
 #: translators/csvexporter.cpp:79 translators/csvimporter.cpp:163
-#, fuzzy
 msgid "Tab"
-msgstr "Titel"
+msgstr "Tab"
 
 #: translators/csvexporter.cpp:80 translators/csvimporter.cpp:164
 msgid "Use a tab as the delimiter."
-msgstr ""
+msgstr "Gebruik een tab als scheidingsteken."
 
 #: translators/csvexporter.cpp:84 translators/csvimporter.cpp:168
-#, fuzzy
 msgid "Other"
-msgstr "de,het "
+msgstr "Ander"
 
 #: translators/csvexporter.cpp:85 translators/csvimporter.cpp:169
 msgid "Use a custom string as the delimiter."
-msgstr ""
+msgstr "Gebruik een eigen tekenreeks als scheidingteken."
 
 #: translators/csvexporter.cpp:90 translators/csvimporter.cpp:174
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
+"Een eigen tekenreeks, zoals een dubbele punt, kan worden gebruikt als "
+"scheidingsteken."
 
 #: translators/csvimporter.cpp:201
 msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
+msgstr "De tabel toont de eerste vijf regels van het CSV bestand."
 
 #: translators/csvimporter.cpp:207
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
 "column, selecting the field, then clicking the <i>Set</i> button.</qt>"
 msgstr ""
+"<qt>Stel iedere kolom in met een overeenkomstig veld in de verzameling door "
+"een kolom te selecteren, een veld te selecteren en dan op de "
+"<i>instellen</i> knop klikken.</qt>"
 
 #: translators/csvimporter.cpp:209
-#, fuzzy
 msgid "Column:"
-msgstr "Toon Kollomen"
+msgstr "Kolom:"
 
 #: translators/csvimporter.cpp:213
-#, fuzzy
 msgid "Data field in this column:"
-msgstr "Verzamelingsvelden..."
+msgstr "Dataveld in deze kolom:"
 
 #: translators/csvimporter.cpp:216
-#, fuzzy
 msgid "Assign Field"
-msgstr "Een Veld "
+msgstr "Veld toewijzen"
 
 #: translators/risimporter.cpp:236
 msgid "Abstract"
-msgstr ""
+msgstr "Samenvatting"
 
 #: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:254
-#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:219
+#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:241
 msgid "Unknown"
 msgstr "Onbekend"
 
 #: translators/risimporter.cpp:256
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: translators/audiofileimporter.cpp:86
-#, fuzzy
 msgid "Scanning audio files..."
-msgstr "Opslaan bestand..."
+msgstr "Audiobestanden doorzoeken..."
 
 #: translators/audiofileimporter.cpp:240
-#, fuzzy
 msgid "Audio File Options"
-msgstr "Veld Opties"
+msgstr "Audiobestand opties"
 
 #: translators/audiofileimporter.cpp:242
 msgid "Recursive folder search"
-msgstr ""
+msgstr "Folders recusief doorzoeken"
 
 #: translators/audiofileimporter.cpp:243
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
+"Indien aangevinkt worden folders recusief doorzocht naar audiobestanden."
 
 #: translators/csvexporter.cpp:38
 msgid "CSV"
-msgstr ""
+msgstr "CSV"
 
 #: translators/csvexporter.cpp:56
 msgid "Include field titles as column headers"
-msgstr ""
+msgstr "Gebruik veldtitels als kolom koppen"
 
 #: translators/csvexporter.cpp:58
-#, fuzzy
 msgid "If checked, a header row will be added with the field titles."
-msgstr ""
-"Wanneer aangekruisd zullen de boeken gegroepeerd worden onder het gekozen "
-"veld."
+msgstr "Indien aangevinkt wordt een koprij toegevoegd met de veldtitels."
 
 #: translators/pilotdbexporter.cpp:42
 msgid "PilotDB"
-msgstr ""
+msgstr "PilotDB"
 
 #: translators/pilotdbexporter.cpp:46
-#, fuzzy
 msgid "*.pdb|Pilot Database files(*.pdb)"
-msgstr "*.bc *.tc|Tellico-bestanden (*.tc)"
+msgstr "*.pdb|Pilot Database bestanden(*.pdb)"
 
 #: translators/pilotdbexporter.cpp:198
-#, fuzzy
 msgid "PilotDB Options"
-msgstr "Veld Opties"
+msgstr "PilotDB opties"
 
 #: translators/pilotdbexporter.cpp:201 translators/pilotdbexporter.cpp:203
 msgid "Set PDA backup flag for database"
-msgstr ""
+msgstr "Stel PDA backup flag in voor de database"
 
 #: translators/tellicozipexporter.cpp:29
-#, fuzzy
 msgid "Tellico Zip File"
-msgstr "Tellico"
+msgstr "Tellico zip bestand"
 
 #: translators/tellicozipexporter.cpp:33
-#, fuzzy
 msgid "*.bc *.tc|Tellico files(*.tc)"
 msgstr "*.bc *.tc|Tellico-bestanden (*.tc)"
 
 #: translators/freedbimporter.cpp:58 translators/freedbimporter.cpp:106
-#, fuzzy
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr "Tellico kan het bestand niet schrijven - %1."
+msgstr "<qt>Tellico kon de CD-ROM speler - <i>%1</i> niet benaderen.</qt>"
 
 #: translators/freedbimporter.cpp:127
 msgid "<qt>No records were found to match the CD.</qt>"
-msgstr ""
+msgstr "<qt>Geen dataingangen gevonden voor deze CD.</qt>"
 
 #: translators/freedbimporter.cpp:131
 msgid "<qt>Multiple records were found to match the CD.</qt>"
-msgstr ""
+msgstr "<qt>Meerdere dataingangen gevonden voor deze CD.</qt>"
 
 #: translators/freedbimporter.cpp:143
-#, fuzzy
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr "Tellico kan het bestand niet openen - %1."
+msgstr ""
+"<qt>Tellico is er niet ingeslaagd om de CD zoekopdracht volledig uit te "
+"voeren.</qt>"
 
 #: translators/freedbimporter.cpp:193
-#, fuzzy
 msgid "Audio CD Options"
-msgstr "Veld Opties"
+msgstr "Audio CD opties"
 
 #: translators/freedbimporter.cpp:195
 msgid "CD-ROM Device:"
-msgstr ""
+msgstr "CD-ROM apparaat:"
 
 #: translators/freedbimporter.cpp:198
 msgid "Select or input the CD-ROM device location."
-msgstr ""
+msgstr "Selecteer of vul de CD-Rom speler in."
 
 #: translators/xsltimporter.cpp:44 translators/xsltimporter.cpp:50
 msgid "A valid XSLT file is needed to import the file."
 msgstr ""
+"Een geldig XSLT bestand is noodzakelijk om het bestand te kunnen importeren."
 
 #: translators/xsltexporter.cpp:52 translators/xsltimporter.cpp:79
-#, fuzzy
 msgid "XSLT Options"
-msgstr "Veld Opties"
+msgstr "XSLT opties"
 
 #: translators/xsltexporter.cpp:57 translators/xsltimporter.cpp:82
-#, fuzzy
 msgid "XSLT File:"
-msgstr "Titel:"
+msgstr "XSLT bestand:"
 
 #: translators/xsltimporter.cpp:85
-#, fuzzy
 msgid "*.xsl|XSL files (*.xsl)"
-msgstr "*.xml|XML-bestanden (*.xml)"
+msgstr "*.xsl|XSL bestanden (*.xsl)"
 
 #: translators/xsltexporter.cpp:37
 msgid "XSLT"
-msgstr ""
+msgstr "XSLT"
 
 #: translators/xsltexporter.cpp:59
 msgid "Choose the XSLT file used to transform the Tellico XML data."
 msgstr ""
+"Kies het XSLT bestand dat gebruikt moet worden om de Tellico XML data te om "
+"te zetten."
 
 #: translators/alexandriaimporter.cpp:155
-#, fuzzy
 msgid "Alexandria Options"
-msgstr "Algemene Opties"
+msgstr "Alexandria opties"
 
 #: translators/alexandriaimporter.cpp:156
 msgid "Library:"
-msgstr ""
+msgstr "Bibliotheek:"
 
 #: translators/htmlexporter.cpp:57
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 #: translators/htmlexporter.cpp:61
-#, fuzzy
 msgid "*.html|HTML files (*.html)"
-msgstr "*.xml|XML-bestanden (*.xml)"
+msgstr "*.html|HTML bestanden (*.html)"
 
 #: translators/htmlexporter.cpp:72
-#, fuzzy
 msgid "HTML Options"
-msgstr "Veld Opties"
+msgstr "HTML opties"
 
 #: translators/htmlexporter.cpp:85
 msgid "Export individual entry files"
-msgstr ""
+msgstr "Exporteer individuele item bestanden"
 
 #: translators/htmlexporter.cpp:86
-#, fuzzy
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
-"Wanneer aangekruisd zullen de veldnamen afgedrukt worden als tabel-hoofd."
+"Indien aangevinkt worden individuele bestanden aangemaakt voor elk item."
 
 #: translators/htmlexporter.cpp:192
-#, fuzzy
 msgid "(grouped by %1)"
-msgstr "(gesorteerd volgens %1)"
+msgstr "(gegroepeerd naar %1)"
 
 #: translators/htmlexporter.cpp:194
-#, fuzzy
 msgid "(grouped by %1; sorted by %2)"
-msgstr "(gesorteerd volgens %1)"
+msgstr "(gegroepeerd naar %1 gesorteerd naar %2)"
 
 #: translators/htmlexporter.cpp:218
 msgid "(sorted by %1)"
-msgstr "(gesorteerd volgens %1)"
+msgstr "(gesorteerd naar %1)"
 
 #: translators/tellicoxmlexporter.cpp:44
 msgid "XML"
-msgstr ""
+msgstr "XML"
 
 #: translators/tellicoxmlexporter.cpp:59
-#, fuzzy
 msgid "Tellico XML Options"
-msgstr "TellicoDoc"
+msgstr "Tellico XML opties"
 
 #: translators/tellicoxmlexporter.cpp:62
 msgid "Include images in XML document"
-msgstr ""
+msgstr "Inclusief afbeeldingen in het XML document"
 
 #: translators/tellicoxmlexporter.cpp:64
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
 msgstr ""
+"Indien aangevinkt worden de afbeeldingen ingesloten in het XML bestande als "
+"base64 gecodeerde elementen."
 
 #: translators/tellicoimporter.cpp:97
 msgid "It is from a future version of Tellico."
-msgstr "Dit is van een jongere versie van Tellico."
+msgstr "Dit is van een toekomstige versie van Tellico."
 
 #: translators/tellicoimporter.cpp:102
 msgid ""
@@ -3409,59 +3243,60 @@ msgid ""
 "loss may occur if an older version of Tellico is used to read this file in "
 "the future."
 msgstr ""
+"Tellico zet dit bestand om naar een recenter document formaat. Dataverlies "
+"kan optreden wanneer een oudere versie van Tellico wordt gebruikt om het "
+"nieuwe bestand te lezen."
 
-#: translators/tellicoimporter.cpp:436
+#: translators/tellicoimporter.cpp:458
 msgid "The file is empty."
-msgstr ""
+msgstr "Het bestand is leeg."
 
-#: translators/tellicoimporter.cpp:449
+#: translators/tellicoimporter.cpp:471
 msgid "The file contains no collection data."
-msgstr ""
-
-#: rc.cpp:2
-#, fuzzy
-msgid "&New"
-msgstr "Nieuw"
-
-#: rc.cpp:5
-#, fuzzy
-msgid "&Collection"
-msgstr "BCCollection"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Werkbalk Verzameling"
+msgstr "Het bestand bevat geen verzamel data."
 
 #: tellico_strings.cpp:18
 #, c-format
 msgid "Tellico is unable to load the file - %1."
-msgstr "Tellico kan het bestand niet laden - %1."
+msgstr "Tellico kan het bestand %1 niet laden."
 
 #: tellico_strings.cpp:19
 #, c-format
 msgid "Tellico is unable to write the file - %1."
-msgstr "Tellico kan het bestand niet schrijven - %1."
+msgstr "Tellico kan het bestand %1 niet schrijven."
 
 #: tellico_strings.cpp:20
 #, c-format
 msgid "Tellico is unable to upload the file - %1."
-msgstr "Tellico kan het bestand niet uploaden - %1."
+msgstr "Tellico kan het bestand %1 niet uploaden."
 
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
-msgstr "Zoek string '%1' niet gevonden."
+msgstr "Zoek tekenreeks '%1' niet gevonden."
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Nieuw"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Verzameling"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Verzameling werkbalk"
 
 #: _translatorinfo.cpp:1
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr "Liese De Vos"
+msgstr "Liese de Vos, Fred Marchee"
 
 #: _translatorinfo.cpp:3
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr "onlineit@mail.be"
+msgstr "onlineit@mail.be, fredmarchee@gmail.com"
 
 #: tips.cpp:3
 msgid ""
@@ -3471,18 +3306,28 @@ msgid ""
 "<p>Any other field which allows multiple values should be entered the\n"
 "same way. with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
+"<p>...dat wanneer een boek meer dan een schrijver heeft u de namen\n"
+"moet scheiden met behulp van een puntkomma. Tellico weet dan dat\n"
+"de namen gescheiden moeten worden en apart moet worden gebruikt</p>\n"
+"<p>Ieder ander veld waar meerdere waardes zijn toegestaan moeten\n"
+"worden ingevuld op dezelfde manier met een puntkomma (;) die iedere\n"
+"waarde scheid</p>\n"
 
 #: tips.cpp:11
 msgid ""
 "<p>...that you can rename a collection by right-clicking on\n"
 "the top collection item in the left column.</p>\n"
 msgstr ""
+"<p>...dat u de verzameling kunt hernoemen door rechts te klikken\n"
+"op bovenste verzameling item in de linker kolom.</p>\n"
 
 #: tips.cpp:16
 msgid ""
 "<p>...that you can change which fields are shown in the list view by\n"
 "right-clicking on the column header.\n"
 msgstr ""
+"<p>...dat u de velden die getoond woorden in de lijstweergave door\n"
+"recht te klikken op kolom kop.\n"
 
 #: tips.cpp:21
 msgid ""
@@ -3492,6 +3337,11 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
+"<p>...dat u velden kunt toevoegen, bewerken of veranderen in de verzameling\n"
+"met behulp van de veld editor. De pijl knoppen onder de veldlijst kan "
+"worden\n"
+"gebruikt om de positie van het veld te veranderen waardoor de plaats in de\n"
+"item editor wordt gewijzigd.</p>\n"
 
 #: tips.cpp:28
 msgid ""
@@ -3503,6 +3353,12 @@ msgid ""
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
+"<p>...dat wanneer u wilt filteren op een keuzevak veld de waarde \"true\" \n"
+"moet worden gebruikt. Wanneer u bijvoorbeeld alle science fiction boeken\n"
+"die u nog niet heeft gelezen wilt tonen kies dan de <em>Voldoe aan alle\n"
+"van de volgende</em> knop en stel de volgende regels in; \"Genre\"\n"
+"bevat \"Science Fiction\" (geen aanhalingtekens) en de tweede regel\n"
+"\"Gelezen\" \"bevat niet\" \"waar\" (geen aanhalingstekens).</p>\n"
 
 #: tips.cpp:38
 msgid ""
@@ -3511,24 +3367,36 @@ msgid ""
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
 "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
 msgstr ""
+"<p>...wanneer een speciaal karakter wordt gebruikt in het snelfilter\n"
+"dit wordt geïnterpreteerd als een reguliere expressie.</p>\n"
+"<p>Om alleen boeken die bijvoorbeeld door Weber of Bujold zijn geschreven \n"
+"type dan \"weber|bujold\" (geen aanhalingstekens) in het filterveld</p>\n"
 
 #: tips.cpp:45
 msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
 msgstr ""
+"<p>...dat u meerdere items tegelijkertijd kunt bewerken, door de Shift of "
+"Ctrl toets\n"
+"ingedrukt te houden en meerdere items te selecteren.</p>\n"
 
 #: tips.cpp:50
 msgid ""
 "<p>...that you can convert an existing book collection to a bibliography,\n"
 "which can then be exported to bibtex or Bibtexml format.</p>\n"
 msgstr ""
+"<p>...dat u een bestaande boekenverzameling kunt omzetten naar een\n"
+"bibliografie die vervolgens kan worden geëxporteerd naar BibTeX of "
+"BibTeXML</p>\n"
 
 #: tips.cpp:55
 msgid ""
 "<p>...that you can add, edit, and delete string macros for "
 "bibliographies.</p>\n"
 msgstr ""
+"<p>...dat u tekenreeks macros kunt toevoegen, bewerken en wissen voor "
+"bibliografieën.</p>\n"
 
 #: tips.cpp:59
 msgid ""
@@ -3538,6 +3406,9 @@ msgid ""
 "editors\n"
 "to be sorted or printed together, for example.</p>\n"
 msgstr ""
+"<p>...dat wanneer meer dan een veld is opgemaakt als een naam een\n"
+"extra groep genaam \"mensen\"wordt toegevoegd aan de verzameling\n"
+"zodat deze groepen verzameld kunnen worden</p>\n"
 
 #: tips.cpp:65
 msgid ""
@@ -3546,16 +3417,23 @@ msgid ""
 "CSS\n"
 "within the stylesheet governs things like the font, the margins, etc.</p>\n"
 msgstr ""
+"<p>..dat u het uiterlijk van de afdruk kunt aanpassen door het bestand\n"
+"<tt>tellico-printing.xsl</tt> te bewerken. Het bestand geneert HTML en de "
+"CSS\n"
+"binnen het stylesheet regelt dingen als het lettertype, de kantlijnen "
+"enz.</p>\n"
 
 #: tips.cpp:71
 msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Tellico XML file.</p>\n"
 msgstr ""
+"<p>..dat u een XSL stylesheet kunt importeren die een \n"
+"geldige Tellico XML uitvoer maakt</p>\n"
 
 #: tips.cpp:76
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
-msgstr ""
+msgstr "<p>...dat dubbelklikken op een item de item editor opent.</p>\n"
 
 #: tips.cpp:80
 msgid ""
@@ -3563,257 +3441,15 @@ msgid ""
 "as\n"
 "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 msgstr ""
+"<p>... dat u HTML tags kunt gebruiken bij de paragraaf velden voor de juiste "
+"opmaak\n"
+"zoals &lt;b&gt;bold&lt;/b&gt; of &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 
 #: tips.cpp:85
 msgid ""
 "<p>...that in the Detailed View, you can press a letter on the\n"
 "keyboard to skip to the next entry that starts with that letter.</p>\n"
 msgstr ""
-
-#, fuzzy
-#~ msgid "*.bc .tc|Tellico files (*.tc)"
-#~ msgstr "*.bc *.tc|Tellico-bestanden (*.tc)"
-
-#~ msgid "&From Beginning"
-#~ msgstr "&Van het begin"
-
-#~ msgid "If checked, the document is searched from the beginning."
-#~ msgstr "Indien aangekruisd wordt het document van het begin doorzocht."
-
-#, fuzzy
-#~ msgid "Entry"
-#~ msgstr "Serie"
-
-#, fuzzy
-#~ msgid "<qt>Tellico was unable to open the CD-ROM device - <i>%1</i>.</qt>"
-#~ msgstr "Tellico kan het bestand niet schrijven - %1."
-
-#~ msgid "Do you really want to modify these books?"
-#~ msgstr "Wil je deze boeken echt aanpassen ? "
-
-#, fuzzy
-#~ msgid "*.ogg|Ogg files (*.ogg)"
-#~ msgstr "*.xml|XML-bestanden (*.xml)"
-
-#, fuzzy
-#~ msgid "Export images"
-#~ msgstr "E&xporteren"
-
-#~ msgid "(Requires restart)"
-#~ msgstr "(Opnieuw starten nodig)"
-
-#~ msgid ""
-#~ "A comma-separated list of suffixes which might be used in personal names."
-#~ msgstr ""
-#~ "Een door komma's gescheiden lijst van achtervoegsels die gebruikt kunnen "
-#~ "worden in persoonsnamen. "
-
-#~ msgid "A comma-separated list of prefixes which might be used in surnames."
-#~ msgstr ""
-#~ "Een door komma's gescheiden lijst van voorvoegsels die gebruikt kunnen "
-#~ "worden in namen."
-
-#~ msgid "Enable/disable the toolbar"
-#~ msgstr "Activeer/Desactiveer de werkbalk"
-
-#~ msgid "Show Co&llection ToolBar"
-#~ msgstr "Toon Verzame&lingswerkbalk "
-
-#~ msgid "Enable/disable the collection toolbar"
-#~ msgstr "Activeer/desactiveer de verzamelingswerkbalk"
-
-#, fuzzy
-#~ msgid "*.bcz|Tellico files(*.bcz)"
-#~ msgstr "*.bc *.tc|Tellico-bestanden (*.tc)"
-
-#~ msgid "List"
-#~ msgstr "Lijst"
-
-#, fuzzy
-#~ msgid "Good"
-#~ msgstr "4 - Goed"
-
-#, fuzzy
-#~ msgid "New Entry"
-#~ msgstr "Boek Kopiëren"
-
-#~ msgid "Cutting selection..."
-#~ msgstr "Selectie knippen..."
-
-#~ msgid "Copying selection to clipboard..."
-#~ msgstr "Selectie wordt naar plakbord gekopieerd..."
-
-#~ msgid "Inserting clipboard contents..."
-#~ msgstr "Plakbord inhoud wordt ingevoegd..."
-
-#~ msgid "Toggling toolbar..."
-#~ msgstr "Aan/Uitvinken werkbalk..."
-
-#~ msgid "Toggling collection toolbar..."
-#~ msgstr "Aan/Uitvinken verzamelingswerkbalk..."
-
-#~ msgid "Toggle the statusbar..."
-#~ msgstr "Aan/Uitvinken van de statusbar..."
-
-#~ msgid "Tellico is unable to find a required file - %1.\n"
-#~ msgstr "Tellico kan het vereiste bestand niet vinden - %1.\n"
-
-#, fuzzy
-#~ msgid "Duplicate Entry"
-#~ msgstr "Boek Kopiëren"
-
-#, fuzzy
-#~ msgid "&New Collection"
-#~ msgstr "Nieuwe Verzamelingsnaam"
-
-#~ msgid "BCUnitEditWidget"
-#~ msgstr "BCUnitEditWidget"
-
-#, fuzzy
-#~ msgid "TextImporter"
-#~ msgstr "I&mporteren"
-
-#, fuzzy
-#~ msgid "XSLTImporter"
-#~ msgstr "I&mporteren"
-
-#, fuzzy
-#~ msgid "Importer"
-#~ msgstr "I&mporteren"
-
-#, fuzzy
-#~ msgid "CSVImporter"
-#~ msgstr "E&xporteren"
-
-#, fuzzy
-#~ msgid "BibtexImporter"
-#~ msgstr "I&mporteren"
-
-#~ msgid "BCAttributeWidget"
-#~ msgstr "BCAttributeWidget"
-
-#~ msgid "Tellico is unable to read the file - %1."
-#~ msgstr "Tellico kan het bestand niet lezen - %1."
-
-#~ msgid "BCTabControl"
-#~ msgstr "BCTabControl"
-
-#, fuzzy
-#~ msgid "Processing new entries..."
-#~ msgstr "Verwerken dokument..."
-
-#, fuzzy
-#~ msgid "If checked, the first row is used as field headers."
-#~ msgstr ""
-#~ "Wanneer aangekruisd zullen de veldnamen afgedrukt worden als tabel-hoofd."
-
-#, fuzzy
-#~ msgid "Collection Field in this Column:"
-#~ msgstr "Verzamelingsvelden..."
-
-#, fuzzy
-#~ msgid "Delete Entries"
-#~ msgstr "Verwijder Veld"
-
-#~ msgid "Tellico is unable to find the file - %1."
-#~ msgstr "Tellico kan het bestand niet vinden - %1."
-
-#~ msgid "Tellico is unable to download the file - %1."
-#~ msgstr "Tellico kan het bestand niet downloaden - %1."
-
-#~ msgid "Edit Collection Fields"
-#~ msgstr "Verzamelingsvelden Aanpassen"
-
-#~ msgid "The fields are grouped by common categories for editing."
-#~ msgstr ""
-#~ "Deze velden worden gegroepeerd volgens veel gebruikte categorieen voor "
-#~ "aanpassing."
-
-#~ msgid "The collection is grouped by this field."
-#~ msgstr "De verzameling wordt volgens dit veld gegroepeerd."
-
-#~ msgid "Available Fields"
-#~ msgstr "Beschikbare Velden"
-
-#~ msgid "These are the available fields in the collection."
-#~ msgstr "Dit zijn de beschikbare velden in de verzameling."
-
-#~ msgid "Selected Fields"
-#~ msgstr "Geselecteerde Velden"
-
-#, fuzzy
-#~ msgid "Import..."
-#~ msgstr "Exporteer..."
-
-#, fuzzy
-#~ msgid "Group By"
-#~ msgstr "Groeperen volgens:"
-
-#, fuzzy
-#~ msgid "Read Only"
-#~ msgstr "Klaar."
-
-#, fuzzy
-#~ msgid "Text"
-#~ msgstr "Zoek Tekst"
-
-#, fuzzy
-#~ msgid "Enoding Options"
-#~ msgstr "Groeperingsopties"
-
-#~ msgid "Edit Collection Fields..."
-#~ msgstr "Verzamelingsvelden Aanpassen..."
-
-#, fuzzy
-#~ msgid "&Create new collection"
-#~ msgstr "Maak een nieuw document"
-
-#, fuzzy
-#~ msgid "*.txt|Text files (*.txt)"
-#~ msgstr "*.xsl|XSLT-bestanden (*.xsl)"
-
-#, fuzzy
-#~ msgid "Institution"
-#~ msgstr "Staat"
-
-#~ msgid "New Book"
-#~ msgstr "Nieuw Boek"
-
-#~ msgid "Enter Book"
-#~ msgstr "Boek Toevoegen"
-
-#~ msgid "Modify Books"
-#~ msgstr "Boeken Aanpassen"
-
-#~ msgid "Delete Books"
-#~ msgstr "Boeken Verwijderen"
-
-#~ msgid "Modify Book"
-#~ msgstr "Boek Aanpassen"
-
-#~ msgid "Lookup book..."
-#~ msgstr "Zoek boek op..."
-
-#~ msgid "Group Books By"
-#~ msgstr "Groepeer Boeken Volgens"
-
-#~ msgid "Configure the options for the application..."
-#~ msgstr "Configureer de opties van de applicatie..."
-
-#~ msgid "%1 Total"
-#~ msgstr "%1 Totaal"
-
-#~ msgid "Importing from Bibtex..."
-#~ msgstr "Importeer van Bibtex..."
-
-#~ msgid "Import from Bibtex..."
-#~ msgstr "Importeren van Bibtex..."
-
-#~ msgid "Importing from Bibtexml..."
-#~ msgstr "Importeren van Bibtexml..."
-
-#~ msgid "Song"
-#~ msgstr "Muziek"
-
-#~ msgid "CD"
-#~ msgstr "CD"
+"<p>...dat u in de gedetailleerde weergave een letter op uw toetsenbord\n"
+"kunt indrukken waarna u naar het volgende item dat met deze letter begint "
+"gaat.</p>\n"

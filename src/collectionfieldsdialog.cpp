@@ -15,6 +15,7 @@
 #include "collection.h"
 #include "collectionfactory.h"
 #include "stringmapdialog.h"
+#include "translators/tellico_xml.h"
 
 #include <klocale.h>
 #include <kcombobox.h>
@@ -196,8 +197,8 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
   m_catCombo->setDuplicatesEnabled(false);
   connect(m_catCombo, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  label = new QLabel(i18n("Description:"), grid);
-  layout->addWidget(label, 3, 0);
+  label = new QLabel(i18n("Allowed:"), grid);
+  layout->addWidget(label, 2, 0);
   m_allowEdit = new KLineEdit(grid);
   layout->addMultiCellWidget(m_allowEdit, 2, 2, 1, 3);
   whats = i18n("<qt>For <i>Choice</i>-type fields, these are the only values allowed. They are "
@@ -206,8 +207,8 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
   QWhatsThis::add(m_allowEdit, whats);
   connect(m_allowEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  label = new QLabel(i18n("Allowed:"), grid);
-  layout->addWidget(label, 2, 0);
+  label = new QLabel(i18n("Description:"), grid);
+  layout->addWidget(label, 3, 0);
   m_descEdit = new KLineEdit(grid);
   m_descEdit->setMinimumWidth(150);
   layout->addMultiCellWidget(m_descEdit, 3, 3, 1, 3);
@@ -574,14 +575,7 @@ void CollectionFieldsDialog::updateField() {
   // only update name if it's one of the new ones
   if(m_newFields.containsRef(field)) {
     // name needs to be a valid XML element name
-    QString name = m_titleEdit->text().lower();
-    // remove white space
-    name.replace(QRegExp(QString::fromLatin1("\\s+")), QString::fromLatin1("-"));
-    // replace non word characters, but allow dashes
-    name.replace(QRegExp(QString::fromLatin1("[^\\w-]")), QString::null);
-    while(name.at(0).isDigit() || name.at(0) == '-') {
-      name = name.mid(1);
-    }
+    QString name = XML::elementName(m_titleEdit->text().lower());
     if(name.isEmpty()) { // might end up with empty string
       name = QString::fromLatin1("custom") + QString::number(m_newFields.count()+1);
     }

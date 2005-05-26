@@ -56,7 +56,8 @@ am_entitytest_OBJECTS = entitytest.$(OBJEXT)
 #>+ 1
 entitytest_OBJECTS = entitytest.$(OBJEXT)
 am__DEPENDENCIES_1 =
-entitytest_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+entitytest_DEPENDENCIES = ../tellico_utils.o $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_formattest_OBJECTS = formattest.$(OBJEXT)
 #>- formattest_OBJECTS = $(am_formattest_OBJECTS)
 #>+ 1
@@ -338,7 +339,7 @@ isbntest_LDADD = ../isbnvalidator.o $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
 latin1test_SOURCES = latin1test.cpp
 latin1test_LDADD = $(LIB_QT) $(LIB_KDECORE)
 entitytest_SOURCES = entitytest.cpp
-entitytest_LDADD = $(LIB_QT) $(LIB_KDECORE)
+entitytest_LDADD = ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)
 formattest_SOURCES = formattest.cpp
 formattest_LDADD = ../field.o $(LIB_QT) $(LIB_KDECORE)
 #>- all: all-am
@@ -633,6 +634,7 @@ check: isbntest latin1test entitytest formattest
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
+
 
 
 #>+ 2

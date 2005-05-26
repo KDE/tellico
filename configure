@@ -1942,7 +1942,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=tellico
- VERSION=0.13.6
+ VERSION=0.13.7
 
 
 cat >>confdefs.h <<_ACEOF

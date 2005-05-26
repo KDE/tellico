@@ -125,8 +125,19 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   QString entryTitle = collelem.attribute((syntaxVersion > 6) ? QString::fromLatin1("entryTitle")
                                            : QString::fromLatin1("unitTitle"));
 
-  QDomNodeList fieldelems = collelem.elementsByTagNameNS(m_namespace, (syntaxVersion > 3) ? QString::fromLatin1("field")
-                                                : QString::fromLatin1("attribute"));
+  // be careful not to have element name collision
+  // for fields, each true field element is a child of a fields element
+  QDomNodeList fieldelems;
+  for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    // Latin1Literal is a macro, so can't say Latin1Literal(syntaxVersion > 3 ? "fields" : "attributes")
+    if((syntaxVersion > 3 && n.nodeName() == Latin1Literal("fields"))
+       || (syntaxVersion < 4 && n.nodeName() == Latin1Literal("attributes"))) {
+      QDomElement e = n.toElement();
+      fieldelems = e.elementsByTagNameNS(m_namespace, (syntaxVersion > 3) ? QString::fromLatin1("field")
+                                                                          : QString::fromLatin1("attribute"));
+      break;
+    }
+  }
 //  kdDebug() << "TellicoImporter::loadXMLData() - " << fieldelems.count() << " field(s)" << endl;
 
   // the dilemma is when to force the new collection to have all the default attributes
@@ -160,29 +171,32 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     m_coll->setTitle(title);
   }
 
-  for(unsigned j = 0; j < fieldelems.count(); ++j) {
+  for(uint j = 0; j < fieldelems.count(); ++j) {
     readField(syntaxVersion, fieldelems.item(j).toElement());
   }
 
   if(m_coll->type() == Data::Collection::Bibtex) {
     Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(m_coll);
-    QDomNodeList macroelems = collelem.elementsByTagNameNS(m_namespace, QString::fromLatin1("macro"));
+    QDomNodeList macroelems;
+    for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
+      if(n.nodeName() == Latin1Literal("macros")) {
+        macroelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("macro"));
+        break;
+      }
+    }
 //    kdDebug() << "TellicoImporter::loadXMLData() - found " << macroelems.count() << " macros" << endl;
-    for(unsigned j = 0; c && j < macroelems.count(); ++j) {
+    for(uint j = 0; c && j < macroelems.count(); ++j) {
       QDomElement elem = macroelems.item(j).toElement();
       c->addMacro(elem.attribute(QString::fromLatin1("name")), elem.text());
     }
 
-    QDomNodeList preelems = collelem.elementsByTagNameNS(m_namespace, QString::fromLatin1("bibtex-preamble"));
-    if(preelems.count() > 0) {
-      QString pre = preelems.item(0).toElement().text();
-      c->setPreamble(pre);
+    for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
+      if(n.nodeName() == Latin1Literal("bibtex-preamble")) {
+        c->setPreamble(n.toElement().text());
+        break;
+      }
     }
   }
-
-  QDomNodeList entryelems = collelem.elementsByTagNameNS(m_namespace, entryName);
-//  kdDebug() << QString("TellicoImporter::loadXMLData() - There are %1 %2(s) "
-//                         "in the collection.").arg(entryelems.count()).arg(entryName) << endl;
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex
   if(syntaxVersion < 4 && m_coll->type() == Data::Collection::Book
@@ -192,20 +206,28 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     m_coll = c;
   }
 
-  const uint count = entryelems.count();
-  for(unsigned j = 0; j < count; ++j) {
-    readEntry(syntaxVersion, entryelems.item(j));
+  uint j = 0;
+  const uint count = collelem.childNodes().count() - 2; // minus fields and images probably
+  for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling(), ++j) {
+    if(n.nodeName() == Latin1Literal("entry")) {
+      readEntry(syntaxVersion, n);
 
-    if(j%KMAX(s_stepSize, count/100) == 0) {
-      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));
+      // not exactly right, but close enough
+      if(j%KMAX(s_stepSize, count/100) == 0) {
+        emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));
+      }
     }
   } // end entry loop
 
   if(loadImages_) {
-    // images are contained in the root element, not the collection
-    QDomNodeList imgelems = root.elementsByTagNameNS(m_namespace, QString::fromLatin1("image"));
-
-    for(unsigned j = 0; j < imgelems.count(); ++j) {
+    QDomNodeList imgelems;
+    for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
+      if(n.nodeName() == Latin1Literal("images")) {
+        imgelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("image"));
+        break;
+      }
+    }
+    for(uint j = 0; j < imgelems.count(); ++j) {
       readImage(imgelems.item(j).toElement());
     }
   }
@@ -221,7 +243,7 @@ void TellicoImporter::readField(unsigned syntaxVersion_, const QDomElement& elem
     title = i18n(title.utf8());
   }
 
-  QString typeStr =elem_.attribute(QString::fromLatin1("type"), QString::number(Data::Field::Line));
+  QString typeStr = elem_.attribute(QString::fromLatin1("type"), QString::number(Data::Field::Line));
   Data::Field::Type type = static_cast<Data::Field::Type>(typeStr.toInt());
 
   Data::Field* field;

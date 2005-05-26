@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
-"POT-Creation-Date: 2005-04-01 22:41-0800\n"
+"POT-Creation-Date: 2005-05-25 19:02-0700\n"
 "PO-Revision-Date: 2004-12-07 19:26+0200\n"
 "Last-Translator: Teuvo Eloranta <teuvo@piketa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -1718,7 +1718,7 @@ msgstr "%1 ei salli etsimistä tälle kokoelmatyypille."
 msgid "Results from %1: %2/%3"
 msgstr "Tulokset: %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:389
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:392
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Seuraaville ISBN-arvoille ei löytynyt tietueita:</qt>"
 
@@ -1832,7 +1832,7 @@ msgstr "Internet Movie Database"
 msgid "z39.50"
 msgstr "z39.50"
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:408
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:411
 msgid "Library of Congress (US)"
 msgstr "Library of Congress (Yhdysvallat)"
 
@@ -1861,7 +1861,7 @@ msgstr "Vaihtoehtoiset otsikot"
 msgid "Certifications"
 msgstr "Ikärajat"
 
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:419
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:422
 msgid "&Host: "
 msgstr "&Isäntä: "
 
@@ -1889,32 +1889,32 @@ msgstr "Kysely-virhe!"
 msgid "Connection search error %1: %2"
 msgstr "Hakuvirhe yhteydessä %1: %2"
 
-#: fetch/z3950fetcher.cpp:424
+#: fetch/z3950fetcher.cpp:427
 msgid "Enter the host name of the z39.50 server."
 msgstr "Anna z39.50-palvelimen isäntänimi."
 
-#: fetch/z3950fetcher.cpp:429
+#: fetch/z3950fetcher.cpp:432
 msgid "&Port: "
 msgstr "&Portti: "
 
-#: fetch/z3950fetcher.cpp:434
+#: fetch/z3950fetcher.cpp:437
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr "Anna z39.50-palvelimen porttinumero. Oletusnumero on %1."
 
-#: fetch/z3950fetcher.cpp:439
+#: fetch/z3950fetcher.cpp:442
 msgid "&Database: "
 msgstr "&Tietokanta: "
 
-#: fetch/z3950fetcher.cpp:444
+#: fetch/z3950fetcher.cpp:447
 msgid "Enter the database name used by the z39.50 server."
 msgstr "Anna z39.50-palvelimen käyttämän tietokannan nimi."
 
-#: fetch/z3950fetcher.cpp:449
+#: fetch/z3950fetcher.cpp:452
 msgid "Ch&aracter set: "
 msgstr "Ki&rjainmerkistö:"
 
-#: fetch/z3950fetcher.cpp:458
+#: fetch/z3950fetcher.cpp:461
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -1922,11 +1922,11 @@ msgstr ""
 "Anna z39.50-palvelimen kirjainmerkistön koodaustapa. Todennäköisin "
 "vaihtoehto on MARC-8, tosin myös ISO-8859-1 on yleinen."
 
-#: fetch/z3950fetcher.cpp:464
+#: fetch/z3950fetcher.cpp:467
 msgid "&User: "
 msgstr "&Käyttäjä: "
 
-#: fetch/z3950fetcher.cpp:469
+#: fetch/z3950fetcher.cpp:472
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -1934,11 +1934,11 @@ msgstr ""
 "Anna z39.50-tietokannan käyttämä sisäänkirjautumistunnus. Useimmat "
 "palvelimet eivät tarvitse tunnusta ollenkaan."
 
-#: fetch/z3950fetcher.cpp:475
+#: fetch/z3950fetcher.cpp:478
 msgid "Pass&word: "
 msgstr "&Salasana: "
 
-#: fetch/z3950fetcher.cpp:481
+#: fetch/z3950fetcher.cpp:484
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -1946,35 +1946,35 @@ msgstr ""
 "Anna z39.50-tietokannan käyttämä sisäänkirjautumissalasana. Useimmat "
 "palvelimet eivät tarvitse salasanaa ollenkaan."
 
-#: collectionfieldsdialog.cpp:81
+#: collectionfieldsdialog.cpp:82
 msgid "Collection Fields"
 msgstr "Kokoelman kentät"
 
-#: collectionfieldsdialog.cpp:94
+#: collectionfieldsdialog.cpp:95
 msgid "Current Fields"
 msgstr "Nykyiset kentät"
 
-#: collectionfieldsdialog.cpp:109
+#: collectionfieldsdialog.cpp:110
 msgid ""
 "_: New Field\n"
 "New"
 msgstr "Uusi kenttä"
 
-#: collectionfieldsdialog.cpp:111
+#: collectionfieldsdialog.cpp:112
 msgid "Add a new field to the collection"
 msgstr "Lisää uusi kenttä kokoelmaan"
 
-#: collectionfieldsdialog.cpp:112
+#: collectionfieldsdialog.cpp:113
 msgid ""
 "_: Delete Field\n"
 "Delete"
 msgstr "Tuhoa kenttä"
 
-#: collectionfieldsdialog.cpp:114
+#: collectionfieldsdialog.cpp:115
 msgid "Remove a field from the collection"
 msgstr "Poista kenttä kokoelmasta"
 
-#: collectionfieldsdialog.cpp:123
+#: collectionfieldsdialog.cpp:124
 msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
@@ -1982,7 +1982,7 @@ msgstr ""
 "Siirrä tämä kenttä ylös listassa. Listan järjestys vaikuttaa "
 "tietue-editorin kenttien asetteluun."
 
-#: collectionfieldsdialog.cpp:127
+#: collectionfieldsdialog.cpp:128
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
@@ -1990,48 +1990,48 @@ msgstr ""
 "Siirrä tämä kenttä alas listassa. Listan järjestys vaikuttaa "
 "tietue-editorin kenttien asetteluun."
 
-#: collectionfieldsdialog.cpp:137
+#: collectionfieldsdialog.cpp:138
 msgid "Field Properties"
 msgstr "Kentän ominaisuudet"
 
-#: collectionfieldsdialog.cpp:143
+#: collectionfieldsdialog.cpp:144
 msgid "Title:"
 msgstr "Otsikko:"
 
-#: collectionfieldsdialog.cpp:147
+#: collectionfieldsdialog.cpp:148
 msgid "The title of the field"
 msgstr "Kentän otsikko"
 
-#: collectionfieldsdialog.cpp:152
+#: collectionfieldsdialog.cpp:153
 msgid "Type:"
 msgstr "Tyyppi:"
 
-#: collectionfieldsdialog.cpp:157
+#: collectionfieldsdialog.cpp:158
 msgid "The type of the field determines what values may be used. "
 msgstr ""
 "Kentän tyyppi määrittää millaisia arvoja siinä voidaan käyttää. "
 
-#: collectionfieldsdialog.cpp:158
+#: collectionfieldsdialog.cpp:159
 msgid "<i>Simple Text</i> is used for most fields. "
 msgstr "<i>Yksinkertaista tekstiä</i> käytetään useimmissa kentissä. "
 
-#: collectionfieldsdialog.cpp:159
+#: collectionfieldsdialog.cpp:160
 msgid "<i>Paragraph</i> is for large text blocks. "
 msgstr "<i>Kappale</i> on isoille tekstilohkoille. "
 
-#: collectionfieldsdialog.cpp:160
+#: collectionfieldsdialog.cpp:161
 msgid "<i>Choice</i> limits the field to certain values. "
 msgstr "<i>Valinta</i> rajaa kentän arvot tiettyihin arvoihin. "
 
-#: collectionfieldsdialog.cpp:161
+#: collectionfieldsdialog.cpp:162
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
 msgstr "<i>Valintaruutu</i> on yksinkertaisille kyllä/ei -arvoille. "
 
-#: collectionfieldsdialog.cpp:162
+#: collectionfieldsdialog.cpp:163
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
 msgstr "<i>Numero</i> kertoo että kenttä sisältää numeerison arvon. "
 
-#: collectionfieldsdialog.cpp:163
+#: collectionfieldsdialog.cpp:164
 msgid ""
 "<i>URL</i> is for fields which refer to URLs, including references to other "
 "files. "
@@ -2039,22 +2039,22 @@ msgstr ""
 "<i>URL</i> on kentille jotka viittaavat verkko-osoitteisiin, mukaanlukien "
 "viitteet toisiin tiedostoihin. "
 
-#: collectionfieldsdialog.cpp:164
+#: collectionfieldsdialog.cpp:165
 msgid "<i>Table</i>s may be a single or double column of values. "
 msgstr "<i>Taulut</i> voivat sisältää yksi- tai kaksisarakkeisia arvoja. "
 
-#: collectionfieldsdialog.cpp:165
+#: collectionfieldsdialog.cpp:166
 msgid "An <i>Image</i> field holds a picture. "
 msgstr "<i>Kuva</i>-kenttä sisältää kuvan. "
 
-#: collectionfieldsdialog.cpp:166
+#: collectionfieldsdialog.cpp:167
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr ""
 "<i>Päivämäärä</i>-kenttää voidaan käyttää ilmaistaessa päivää, "
 "kuukautta ja vuotta. "
 
-#: collectionfieldsdialog.cpp:167
+#: collectionfieldsdialog.cpp:168
 msgid ""
 "A <i>Dependent</i> field depends on the values of other fields, and is "
 "formatted according to the field description. "
@@ -2062,7 +2062,7 @@ msgstr ""
 "A <i>Riippuvainen</i>-kentän muoto riippuu muista kentistä ja se "
 "muotoillaan kentän kuvauksen mukaan. "
 
-#: collectionfieldsdialog.cpp:169
+#: collectionfieldsdialog.cpp:170
 msgid ""
 "A <i>Read Only</i> is for internal values, possibly useful for import and "
 "export. "
@@ -2070,19 +2070,19 @@ msgstr ""
 "<i>Vain lulu</i> on sisäisille arvoille, se on mahdollisesti hyödyllinen "
 "tiedon tuomisessa ja viemisessä. "
 
-#: collectionfieldsdialog.cpp:178
+#: collectionfieldsdialog.cpp:179
 msgid "Category:"
 msgstr "Kategoria:"
 
-#: collectionfieldsdialog.cpp:182
+#: collectionfieldsdialog.cpp:183
 msgid "The field category determines where the field is placed in the editor."
 msgstr "Kategoria-kenttä määrittää kentän välilehden tietue-editorissa."
 
-#: collectionfieldsdialog.cpp:199
-msgid "Description:"
-msgstr "Kuvaus:"
+#: collectionfieldsdialog.cpp:200
+msgid "Allowed:"
+msgstr "Sallittu:"
 
-#: collectionfieldsdialog.cpp:203
+#: collectionfieldsdialog.cpp:204
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
 "are placed in a combo box.</qt>"
@@ -2090,11 +2090,11 @@ msgstr ""
 "<qt>Vain nämä arvot ovat sallittuja <i>Vaihtoehto</i>-tyyppisille "
 "kentille.</qt>"
 
-#: collectionfieldsdialog.cpp:209
-msgid "Allowed:"
-msgstr "Sallittu:"
+#: collectionfieldsdialog.cpp:210
+msgid "Description:"
+msgstr "Kuvaus:"
 
-#: collectionfieldsdialog.cpp:214
+#: collectionfieldsdialog.cpp:215
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field. For <i>Dependent</i> fields, the description is a format string such "
@@ -2104,15 +2104,15 @@ msgstr ""
 "sisältää. <i>Riippuvainen</i>-kentille kuvaus on muotoilumerkkijono, "
 "kuten \"%{vuosi} %{nimi}\" missä nimetyt kentät korvautuvat merkkijonolla."
 
-#: collectionfieldsdialog.cpp:221
+#: collectionfieldsdialog.cpp:222
 msgid "Extended Properties:"
 msgstr "Laajennetut ominaisuudet:"
 
-#: collectionfieldsdialog.cpp:223
+#: collectionfieldsdialog.cpp:224
 msgid "Set..."
 msgstr "Aseta..."
 
-#: collectionfieldsdialog.cpp:225
+#: collectionfieldsdialog.cpp:226
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
@@ -2120,36 +2120,36 @@ msgstr ""
 "Laajennennettuja kentän ominaisuuksia käytetään määrittämään "
 "asioita kuten kentän vastaavuus bibtex-tietueessa."
 
-#: collectionfieldsdialog.cpp:229
+#: collectionfieldsdialog.cpp:230
 msgid "Format Options"
 msgstr "Muotoiluasetukset"
 
-#: collectionfieldsdialog.cpp:230
+#: collectionfieldsdialog.cpp:231
 msgid "No formatting"
 msgstr "Ei muotoilua"
 
-#: collectionfieldsdialog.cpp:231
+#: collectionfieldsdialog.cpp:232
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
 msgstr "Tämä valinta estää kentän automaattisen muotoilun."
 
-#: collectionfieldsdialog.cpp:233
+#: collectionfieldsdialog.cpp:234
 msgid "Allow auto-capitalization only"
 msgstr "Salli vain automaattinen isojen kirjainten käyttö"
 
-#: collectionfieldsdialog.cpp:234
+#: collectionfieldsdialog.cpp:235
 msgid ""
 "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 "Tämä valinta sallii kentässä isojen kirjainten käytön mutta ei sen "
 "erillistä muotoilua."
 
-#: collectionfieldsdialog.cpp:236
+#: collectionfieldsdialog.cpp:237
 msgid "Format as a title"
 msgstr "Muotoile kuten otsikko"
 
-#: collectionfieldsdialog.cpp:237
+#: collectionfieldsdialog.cpp:238
 msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
@@ -2157,11 +2157,11 @@ msgstr ""
 "Tämä valinta asettaa isot kirjaimet ja muotoilun kuten otsikossa mutta "
 "vain jos nämä asetukset ovat globaalisti asetettu."
 
-#: collectionfieldsdialog.cpp:239
+#: collectionfieldsdialog.cpp:240
 msgid "Format as a name"
 msgstr "Muotoile kuten nimi"
 
-#: collectionfieldsdialog.cpp:240
+#: collectionfieldsdialog.cpp:241
 msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
@@ -2169,15 +2169,15 @@ msgstr ""
 "Tämä valinta asettaa kenttän käyttämään isoja kirjaimia ja muotoilee "
 "sen kuten nimen, mutta vain jos nämä asetukset on globaalisti asetettu."
 
-#: collectionfieldsdialog.cpp:244
+#: collectionfieldsdialog.cpp:245
 msgid "Field Options"
 msgstr "Kentän asetukset"
 
-#: collectionfieldsdialog.cpp:245
+#: collectionfieldsdialog.cpp:246
 msgid "Enable auto-completion"
 msgstr "Aktivoi automaattinen tekstintäydennys"
 
-#: collectionfieldsdialog.cpp:246
+#: collectionfieldsdialog.cpp:247
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
@@ -2185,11 +2185,11 @@ msgstr ""
 "Jos valittu, tässä kentässä käytetään KDE:n automaattista "
 "tekstintäydennystä."
 
-#: collectionfieldsdialog.cpp:248
+#: collectionfieldsdialog.cpp:249
 msgid "Allow multiple values"
 msgstr "Salli monta arvoa"
 
-#: collectionfieldsdialog.cpp:249
+#: collectionfieldsdialog.cpp:250
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
@@ -2197,22 +2197,22 @@ msgstr ""
 "Jos valittu, Tellico luetteloi kentän kaikki puolipisteellä erotellut "
 "arvot omina arvoinaan."
 
-#: collectionfieldsdialog.cpp:251
+#: collectionfieldsdialog.cpp:252
 msgid "Allow grouping"
 msgstr "Salli ryhmittely"
 
-#: collectionfieldsdialog.cpp:252
+#: collectionfieldsdialog.cpp:253
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
 "Jos valittu, kenttää voidaan käyttää ryhmittelemään ryhmänäkymän "
 "tietueet."
 
-#: collectionfieldsdialog.cpp:265
+#: collectionfieldsdialog.cpp:266
 msgid "Revert the selected field's properties to the default values."
 msgstr "Palauta valittujen kenttien ominaisuudet oletusarvoihin."
 
-#: collectionfieldsdialog.cpp:315
+#: collectionfieldsdialog.cpp:316
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
 "in the collection may cause data corruption. Do you want to keep your "
@@ -2223,16 +2223,16 @@ msgstr ""
 "varmuuskopioida muokatut arvot vai keskeyttää toiminnon ja palata "
 "takaisiin nykyisiin arvoihin?</qt>"
 
-#: collectionfieldsdialog.cpp:320
+#: collectionfieldsdialog.cpp:321
 msgid "Keep modified values"
 msgstr "Pidä muokatut arvot"
 
-#: collectionfieldsdialog.cpp:378 collectionfieldsdialog.cpp:381
+#: collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:382
 #: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
 msgid "New Field"
 msgstr "Uusi kenttä"
 
-#: collectionfieldsdialog.cpp:414
+#: collectionfieldsdialog.cpp:415
 msgid ""
 "<qt><p>Do you really want to delete the <em>%1</em> field? This action "
 "occurs immediately and can not be undone!</p></qt>"
@@ -2240,15 +2240,15 @@ msgstr ""
 "<qt><p>haluatko todella tuhota<em>%1</em>kentän? Tämä toimenpide "
 "suoritetaan heti ja on peruuttamaton!</p></qt>"
 
-#: collectionfieldsdialog.cpp:417
+#: collectionfieldsdialog.cpp:418
 msgid "Delete Field?"
 msgstr "Tuhoa kenttä?"
 
-#: collectionfieldsdialog.cpp:713
+#: collectionfieldsdialog.cpp:707
 msgid "Revert Field Properties?"
 msgstr "Palauta kentän asetukset?"
 
-#: collectionfieldsdialog.cpp:714
+#: collectionfieldsdialog.cpp:708
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
@@ -2256,27 +2256,27 @@ msgstr ""
 "<qt><p>Haluatko todella palauttaa kentän <em>%1</em> asetukset "
 "oletusarvoihin?</p></qt>"
 
-#: collectionfieldsdialog.cpp:717
+#: collectionfieldsdialog.cpp:711
 msgid "Revert"
 msgstr "Palauta"
 
-#: collectionfieldsdialog.cpp:835
+#: collectionfieldsdialog.cpp:829
 msgid "Extended Field Properties"
 msgstr "Kentän laajennetut ominaisuudet"
 
-#: collectionfieldsdialog.cpp:836
+#: collectionfieldsdialog.cpp:830
 msgid "Property"
 msgstr "Ominaisuus"
 
-#: collectionfieldsdialog.cpp:836
+#: collectionfieldsdialog.cpp:830
 msgid "Value"
 msgstr "Arvo"
 
-#: collectionfieldsdialog.cpp:852
+#: collectionfieldsdialog.cpp:846
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Tämän niminen kenttä on jo olemassa. Anna joku muu nimi."
 
-#: collectionfieldsdialog.cpp:861
+#: collectionfieldsdialog.cpp:855
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
 "<em>Table</em> or <em>Image</em> field. Please enter a different "
@@ -2285,7 +2285,7 @@ msgstr ""
 "<qt>Kenttä ei voi olla samassa kategoriassa kuin <em>Kappale-</em>, "
 "<em>Taulu-</em> tai <em>Kuva</em>-kenttä. Anna joku muu kategoria."
 
-#: collectionfieldsdialog.cpp:869
+#: collectionfieldsdialog.cpp:863
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
@@ -3051,7 +3051,7 @@ msgid "Abstract"
 msgstr "Tiivistelmä"
 
 #: translators/bibtexhandler.cpp:217 translators/risimporter.cpp:254
-#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:219
+#: translators/risimporter.cpp:258 translators/tellicoimporter.cpp:241
 msgid "Unknown"
 msgstr "Tuntematon"
 
@@ -3239,25 +3239,13 @@ msgstr ""
 "Tellico muuttaa tiedostoa uudempaan muotoon. Tietoja saattaa hävitä jos "
 "jatkossa vanhempaa Tellico-ohjelmaa käytetää tämän tiedoston lukemiseen."
 
-#: translators/tellicoimporter.cpp:436
+#: translators/tellicoimporter.cpp:458
 msgid "The file is empty."
 msgstr "Tiedosto on tyhjä"
 
-#: translators/tellicoimporter.cpp:449
+#: translators/tellicoimporter.cpp:471
 msgid "The file contains no collection data."
 msgstr "Tiedosto ei sisällä kokoelma-tietoa."
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Uusi"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Kokoelma"
-
-#: rc.cpp:7
-msgid "Collection Toolbar"
-msgstr "Kokoelmatyökalupalkki"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -3277,6 +3265,18 @@ msgstr "Tellico ei pysty siirtämään tiedostoa - %1."
 #: tellico_kernel.cpp:158
 msgid "Search string '%1' not found."
 msgstr "Hakumerkkijonoa \"%1\" ei löytynyt."
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Uusi"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Kokoelma"
+
+#: rc.cpp:7
+msgid "Collection Toolbar"
+msgstr "Kokoelmatyökalupalkki"
 
 #: _translatorinfo.cpp:1
 msgid ""

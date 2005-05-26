@@ -8,9 +8,9 @@
    ===================================================================
    Tellico XSLT file - compact template for viewing entry data
 
-   $Id: Compact.xsl 966 2004-11-20 01:41:11Z robby $
+   $Id: Compact.xsl 1185 2005-05-08 16:57:21Z robby $
 
-   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
 
    The drop-shadow effect is based on the "A List Apart" method
    at http://www.alistapart.com/articles/cssdropshadows/
@@ -130,7 +130,7 @@
   </title>
   </head>
   <body>
-   <xsl:apply-templates select="tc:collection"/>
+   <xsl:apply-templates select="tc:collection[1]"/>
   </body>
  </html>
 </xsl:template>

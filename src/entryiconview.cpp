@@ -122,6 +122,7 @@ void EntryIconView::showCollection(const Data::Collection* coll_) {
     return;
   }
   m_coll = coll_;
+  findImageField();
   fillView(coll_->entryList());
 }
 
@@ -134,6 +135,7 @@ void EntryIconView::showEntryGroup(const Data::EntryGroup* group_) {
     return;
   }
   m_group = group_;
+  findImageField();
   fillView(*group_);
 }
 

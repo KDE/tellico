@@ -8,9 +8,9 @@
    ===================================================================
    Tellico XSLT file - fancy template for viewing entry data
 
-   $Id: Fancy.xsl 977 2004-11-26 07:33:15Z robby $
+   $Id: Fancy.xsl 1185 2005-05-08 16:57:21Z robby $
 
-   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
 
    The drop-shadow effect is based on the "A List Apart" method
    at http://www.alistapart.com/articles/cssdropshadows/
@@ -114,7 +114,7 @@
   }
   div.category {
     padding: 0px 0px 0px 4px;
-    margin: 10px;
+    margin: 8px;
     border: 1px inset <xsl:value-of select="$fgcolor"/>;
     text-align: center;
     background-color: #cccccc;
@@ -179,7 +179,7 @@
   </title>
   </head>
   <body>
-   <xsl:apply-templates select="tc:collection"/>
+   <xsl:apply-templates select="tc:collection[1]"/>
   </body>
  </html>
 </xsl:template>

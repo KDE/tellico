@@ -569,8 +569,13 @@ void FieldWidget::setText(const QString& text_) {
         if(static_cast<int>(list.count()) > qt->numRows()) {
           qt->insertRows(qt->numRows(), list.count()-qt->numRows());
         }
-        for(unsigned row = 0; row < list.count(); ++row) {
+        int row;
+        for(row = 0; row < list.count(); ++row) {
           qt->setText(row, 0, list[row]);
+        }
+        // now need to clear remaing rows
+        for( ; row < qt->numRows(); ++row) {
+          qt->setText(row, 0, QString::null);
         }
         qt->adjustColumn(0);
       }
@@ -583,10 +588,17 @@ void FieldWidget::setText(const QString& text_) {
         if(static_cast<int>(list.count()) > qt->numRows()) {
           qt->insertRows(qt->numRows(), list.count()-qt->numRows());
         }
-        for(unsigned row = 0; row < list.count(); ++row) {
+        int row;
+        for(row = 0; row < list.count(); ++row) {
           qt->setText(row, 0, list[row].section(QString::fromLatin1("::"), 0, 0));
           qt->setText(row, 1, list[row].section(QString::fromLatin1("::"), 1));
         }
+        // now need to clear remaing rows
+        for( ; row < qt->numRows(); ++row) {
+          qt->setText(row, 0, QString::null);
+          qt->setText(row, 1, QString::null);
+        }
+        qt->adjustColumn(0);
         qt->adjustColumn(1);
       }
       break;

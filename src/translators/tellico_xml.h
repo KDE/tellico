@@ -27,6 +27,9 @@ namespace Tellico {
     extern const QString pubTellico;
     extern const QString dtdTellico;
     extern const QString nsBookcase;
+
+    bool validXMLElementName(const QString& name);
+    QString elementName(const QString& name);
   }
 }
 

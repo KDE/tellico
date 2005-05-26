@@ -23,7 +23,7 @@ latin1test_SOURCES = latin1test.cpp
 latin1test_LDADD = $(LIB_QT) $(LIB_KDECORE)
 
 entitytest_SOURCES = entitytest.cpp
-entitytest_LDADD = $(LIB_QT) $(LIB_KDECORE)
+entitytest_LDADD = ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)
 
 formattest_SOURCES = formattest.cpp
 formattest_LDADD = ../field.o $(LIB_QT) $(LIB_KDECORE)

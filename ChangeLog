@@ -1,3 +1,30 @@
+2005-05-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 0.13.7.
+
+2005-05-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Dutch translation, thanks to Fred Marchee.
+
+2005-05-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with clearing table fields.
+
+2005-05-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed contact email to tellico-users mailing list.
+
+2005-04-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed corner case xml element naming for new fields.
+	* Fixed bug with cover images not always being shown in icon view.
+	* Fixed typo on allowed and description in fields editor.
+
+2005-04-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with having fields named after xml elements, like
+	entry or field.
+
 2005-04-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 0.13.6.
