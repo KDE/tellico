@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"POT-Creation-Date: 2005-05-25 19:02-0700\n"
+"POT-Creation-Date: 2005-06-30 07:11-0700\n"
 "PO-Revision-Date: 2005-03-01 19:21+0100\n"
 "Last-Translator: Gerrit M. Albrecht <mail@gerrit-albrecht.de>\n"
 "Language-Team: german <de@li.org>\n"
@@ -621,7 +621,7 @@ msgstr "Breitwand"
 
 #: collections/videocollection.cpp:173
 msgid "Black & White"
-msgstr "Schwarz & Weiss"
+msgstr "Schwarz & Weiß"
 
 #: collections/videocollection.cpp:174
 msgid "Color Mode"
@@ -946,7 +946,7 @@ msgstr ""
 "ist nur möglich, wenn die Sammlungs-Arten übereinstimmen. Die Datensätze "
 "müssen exakt passen, um eingefügt werden zu können."
 
-#: importdialog.cpp:192 mainwindow.cpp:994 mainwindow.cpp:1110
+#: importdialog.cpp:192
 msgid "*.bc *.tc|Tellico files (*.tc)"
 msgstr "*.bc *.tc|Tellico-Dateien (*.tc)"
 
@@ -976,7 +976,7 @@ msgstr "*.ris|RIS-Dateien (*.ris)"
 msgid "*|All files"
 msgstr "*|Alle Dateien"
 
-#: detailedlistview.cpp:67 detailedlistview.cpp:298
+#: detailedlistview.cpp:67 detailedlistview.cpp:303
 #: translators/pilotdbexporter.cpp:138
 msgid "View Columns"
 msgstr "Zeige Spalten"
@@ -1447,6 +1447,11 @@ msgstr "Erstelle ein neues Dokument..."
 msgid "Opening file..."
 msgstr "Öffne Datei..."
 
+#: mainwindow.cpp:994 mainwindow.cpp:1110
+#, fuzzy
+msgid "*.tc *.bc|Tellico files (*.tc)"
+msgstr "*.bc *.tc|Tellico-Dateien (*.tc)"
+
 #: mainwindow.cpp:1001
 msgid "Open File..."
 msgstr "Öffne Datei..."
@@ -1513,7 +1518,7 @@ msgstr "Drucke %1"
 msgid "Page %1"
 msgstr "Seite %1"
 
-#: fetch/z3950fetcher.cpp:233 mainwindow.cpp:1669
+#: fetch/z3950fetcher.cpp:243 mainwindow.cpp:1669
 #: translators/xsltimporter.cpp:56
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico bemerkte einen Fehler bei einer XSL-Transformation."
@@ -1751,7 +1756,7 @@ msgstr "%1 erlaubt kein Suchen für diese Sammlungs-Art."
 msgid "Results from %1: %2/%3"
 msgstr "Ergebnisse von %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:392
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:402
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 "<qt>Für die folgenden ISBN-Daten konnten keine Einträge gefunden "
@@ -1872,7 +1877,7 @@ msgstr "Internet Film Datenbank (IMDB)"
 msgid "z39.50"
 msgstr "z39.50"
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:411
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:421
 msgid "Library of Congress (US)"
 msgstr "Kongressbibliothek (US)"
 
@@ -1904,7 +1909,7 @@ msgid "Certifications"
 msgstr "Zertifikate"
 
 # R noch frei?
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:422
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:432
 msgid "&Host: "
 msgstr "&Rechner: "
 
@@ -1920,45 +1925,45 @@ msgstr ""
 msgid "Download cover image"
 msgstr "Umschlagbild herunterladen"
 
-#: fetch/z3950fetcher.cpp:260
+#: fetch/z3950fetcher.cpp:270
 msgid "Connection error %1: %2"
 msgstr "Verbindungs-Fehler %1: %2"
 
-#: fetch/z3950fetcher.cpp:272
+#: fetch/z3950fetcher.cpp:282
 msgid "Query error!"
 msgstr "Anfrage-Fehler!"
 
-#: fetch/z3950fetcher.cpp:290
+#: fetch/z3950fetcher.cpp:300
 msgid "Connection search error %1: %2"
 msgstr "Fehler bei der Verbindungssuche %1: %2"
 
-#: fetch/z3950fetcher.cpp:427
+#: fetch/z3950fetcher.cpp:437
 msgid "Enter the host name of the z39.50 server."
 msgstr "Geben Sie den Rechner-Namen des z39.50-Servers ein."
 
-#: fetch/z3950fetcher.cpp:432
+#: fetch/z3950fetcher.cpp:442
 msgid "&Port: "
 msgstr "&Port: "
 
-#: fetch/z3950fetcher.cpp:437
+#: fetch/z3950fetcher.cpp:447
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr ""
 "Geben Sie die Port-Nummer des z39.50-Servers ein. Der Vorgabewert ist %1."
 
-#: fetch/z3950fetcher.cpp:442
+#: fetch/z3950fetcher.cpp:452
 msgid "&Database: "
 msgstr "&Datenbank: "
 
-#: fetch/z3950fetcher.cpp:447
+#: fetch/z3950fetcher.cpp:457
 msgid "Enter the database name used by the z39.50 server."
 msgstr "Geben Sie den Datenbank-Namen zur Nutzung durch den z39.50-Server ein."
 
-#: fetch/z3950fetcher.cpp:452
+#: fetch/z3950fetcher.cpp:462
 msgid "Ch&aracter set: "
 msgstr "&Zeichenmenge:"
 
-#: fetch/z3950fetcher.cpp:461
+#: fetch/z3950fetcher.cpp:471
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -1966,11 +1971,11 @@ msgstr ""
 "Geben Sie die Zeichensatz-Kodierung für den z39.50-Server ein. Die "
 "wahrscheinlichste Wahl ist MARC-8, aber auch ISO-8859-1 ist gebräuchlich."
 
-#: fetch/z3950fetcher.cpp:467
+#: fetch/z3950fetcher.cpp:477
 msgid "&User: "
 msgstr "&Benutzer: "
 
-#: fetch/z3950fetcher.cpp:472
+#: fetch/z3950fetcher.cpp:482
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -1978,11 +1983,11 @@ msgstr ""
 "Geben Sie den Benutzernamen zur Authentifikation ein, den die "
 "z39.50-Datenbank benutzen soll. Die meisten Server benötigen keinen."
 
-#: fetch/z3950fetcher.cpp:478
+#: fetch/z3950fetcher.cpp:488
 msgid "Pass&word: "
 msgstr "Pass&wort:"
 
-#: fetch/z3950fetcher.cpp:484
+#: fetch/z3950fetcher.cpp:494
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -2060,7 +2065,7 @@ msgstr "<i>Einfacher Text</i> wird für die meisten Felder benutzt."
 
 #: collectionfieldsdialog.cpp:160
 msgid "<i>Paragraph</i> is for large text blocks. "
-msgstr "<i>Absatz</i> ist für grössere Text-Blöcke."
+msgstr "<i>Absatz</i> ist für größere Text-Blöcke."
 
 #: collectionfieldsdialog.cpp:161
 msgid "<i>Choice</i> limits the field to certain values. "
@@ -2202,7 +2207,7 @@ msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
 msgstr ""
-"Diese Option schreibt das Feld gross und formatiert es als einen Titel, aber "
+"Diese Option schreibt das Feld groß und formatiert es als einen Titel, aber "
 "nur, wenn diese Optionen global gesetzt sind."
 
 #: collectionfieldsdialog.cpp:240
@@ -2214,7 +2219,7 @@ msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
 msgstr ""
-"Diese Option schreibt das Feld gross und formatiert es als einen Namen, aber "
+"Diese Option schreibt das Feld groß und formatiert es als einen Namen, aber "
 "nur, wenn diese Optionen global gesetzt sind."
 
 #: collectionfieldsdialog.cpp:245
@@ -2278,7 +2283,7 @@ msgid "Keep modified values"
 msgstr "Veränderte Werte übernehmen"
 
 #: collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:382
-#: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
+#: translators/csvimporter.cpp:348 translators/csvimporter.cpp:450
 msgid "New Field"
 msgstr "Neues Feld"
 
@@ -2356,7 +2361,7 @@ msgstr ""
 "Die aktuelle Datei wurde verändert.\n"
 "Soll sie gespeichert werden?"
 
-#: document.cpp:98 entryeditdialog.cpp:571
+#: document.cpp:98 entryeditdialog.cpp:574
 msgid "Warning!"
 msgstr "Warnung!"
 
@@ -2900,30 +2905,30 @@ msgstr "Löschen"
 msgid "Select Image..."
 msgstr "Bild auswählen..."
 
-#: entryeditdialog.cpp:43 entryeditdialog.cpp:306 entryeditdialog.cpp:327
-#: entryeditdialog.cpp:371 entryeditdialog.cpp:423
+#: entryeditdialog.cpp:43 entryeditdialog.cpp:309 entryeditdialog.cpp:330
+#: entryeditdialog.cpp:374 entryeditdialog.cpp:426
 msgid "Edit Entry"
 msgstr "Bearbeite Eintrag"
 
 # Einfach mal das P als Kürzel ausgewählt. Testen.
-#: entryeditdialog.cpp:78 entryeditdialog.cpp:338 entryeditdialog.cpp:459
+#: entryeditdialog.cpp:78 entryeditdialog.cpp:341 entryeditdialog.cpp:462
 msgid "Sa&ve Entry"
 msgstr "S&peichere Eintrag"
 
-#: entryeditdialog.cpp:271
+#: entryeditdialog.cpp:274
 msgid "Do you really want to modify these entries?"
 msgstr "Wollen Sie diese Einträge wirklich ändern?"
 
-#: entryeditdialog.cpp:273
+#: entryeditdialog.cpp:276
 msgid "Modify Multiple Entries?"
 msgstr "Mehrere Einträge ändern?"
 
 # Kürzel testen
-#: entryeditdialog.cpp:399
+#: entryeditdialog.cpp:402
 msgid "Sa&ve Entries"
 msgstr "S&peichere Einträge"
 
-#: entryeditdialog.cpp:569
+#: entryeditdialog.cpp:572
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -2931,7 +2936,7 @@ msgstr ""
 "Der aktuelle Eintrag wurde verändert.\n"
 "Sollen die Änderungen eingefügt werden?"
 
-#: entryeditdialog.cpp:572
+#: entryeditdialog.cpp:575
 msgid "Save Entry"
 msgstr "Speichere Eintrag"
 
@@ -3380,7 +3385,7 @@ msgid ""
 "same way. with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
 "<p>...dass Sie, falls ein Buch mehr als einen Autoren hat, deren Namen\n"
-"mit einem Semikolon trennen sollten, so dass Tellico weiss,\n"
+"mit einem Semikolon trennen sollten, so dass Tellico weiß,\n"
 "wie sie getrennt und separat benutzt werden können.</p>\n"
 "<p>Jedes andere Feld, welches mehrere Werte erlaubt, sollte \n"
 "in der gleichen Art und Weise mit einem die Werte trennenden \n"

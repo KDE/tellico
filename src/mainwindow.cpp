@@ -991,7 +991,7 @@ void MainWindow::slotFileOpen() {
   slotStatusMsg(i18n("Opening file..."));
 
   if(m_editDialog->queryModified() && Kernel::self()->doc()->saveModified()) {
-    QString filter = i18n("*.bc *.tc|Tellico files (*.tc)");
+    QString filter = i18n("*.tc *.bc|Tellico files (*.tc)");
     filter += QString::fromLatin1("\n");
     filter += i18n("*.xml|XML files (*.xml)");
     filter += QString::fromLatin1("\n");
@@ -1107,7 +1107,7 @@ bool MainWindow::fileSaveAs() {
 
   slotStatusMsg(i18n("Saving file with a new filename..."));
 
-  QString filter = i18n("*.bc *.tc|Tellico files (*.tc)");
+  QString filter = i18n("*.tc *.bc|Tellico files (*.tc)");
   filter += QString::fromLatin1("\n");
   filter += i18n("*|All files");
 

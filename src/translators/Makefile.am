@@ -14,11 +14,11 @@ xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp \
 alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp \
 risimporter.cpp freedb_util.cpp tellico_xml.cpp
 
-SUBDIRS = pilotdb
-
 if !USE_LIBBTPARSE
-  SUBDIRS += btparse
+  SUBDIR_LIBBTPARSE = btparse
 endif
+
+SUBDIRS = pilotdb $(SUBDIR_LIBBTPARSE)
 
 CLEANFILES = *~
 

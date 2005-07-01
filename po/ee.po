@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ee\n"
-"POT-Creation-Date: 2005-05-25 19:02-0700\n"
+"POT-Creation-Date: 2005-06-30 07:11-0700\n"
 "PO-Revision-Date: 2004-02-13 16:58+0200\n"
 "Last-Translator: Toomas Nigola <toomas.nigola@eelk.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -943,7 +943,7 @@ msgstr ""
 "Imporditava faili sisu lisatakse käesolevale kogule. See on võimalik "
 "siiski vaid juhul, kui kogu kirjete tüübid kogudes ühtivad."
 
-#: importdialog.cpp:192 mainwindow.cpp:994 mainwindow.cpp:1110
+#: importdialog.cpp:192
 #, fuzzy
 msgid "*.bc *.tc|Tellico files (*.tc)"
 msgstr "*.bc|Tellico failid (*.bc)"
@@ -975,7 +975,7 @@ msgstr "*.xml|XML failid (*.xml)"
 msgid "*|All files"
 msgstr "*|Kõik failid"
 
-#: detailedlistview.cpp:67 detailedlistview.cpp:298
+#: detailedlistview.cpp:67 detailedlistview.cpp:303
 #: translators/pilotdbexporter.cpp:138
 msgid "View Columns"
 msgstr "Tulpadena vaatamine"
@@ -1489,6 +1489,11 @@ msgstr "Uue dokumendi loomine..."
 msgid "Opening file..."
 msgstr "Faili avamine..."
 
+#: mainwindow.cpp:994 mainwindow.cpp:1110
+#, fuzzy
+msgid "*.tc *.bc|Tellico files (*.tc)"
+msgstr "*.bc|Tellico failid (*.bc)"
+
 #: mainwindow.cpp:1001
 msgid "Open File..."
 msgstr "Faili avamine..."
@@ -1554,7 +1559,7 @@ msgstr "%1 printimine"
 msgid "Page %1"
 msgstr "Lehekülg nr %1"
 
-#: fetch/z3950fetcher.cpp:233 mainwindow.cpp:1669
+#: fetch/z3950fetcher.cpp:243 mainwindow.cpp:1669
 #: translators/xsltimporter.cpp:56
 #, fuzzy
 msgid "Tellico encountered an error in XSLT processing."
@@ -1803,7 +1808,7 @@ msgstr ""
 msgid "Results from %1: %2/%3"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:392
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:402
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 
@@ -1919,7 +1924,7 @@ msgstr ""
 msgid "z39.50"
 msgstr ""
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:411
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:421
 #, fuzzy
 msgid "Library of Congress (US)"
 msgstr "Library of Congress Control Number"
@@ -1950,7 +1955,7 @@ msgstr ""
 msgid "Certifications"
 msgstr "Sertifitseerimine"
 
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:422
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:432
 msgid "&Host: "
 msgstr ""
 
@@ -1964,64 +1969,64 @@ msgstr ""
 msgid "Download cover image"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:260
+#: fetch/z3950fetcher.cpp:270
 msgid "Connection error %1: %2"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:272
+#: fetch/z3950fetcher.cpp:282
 msgid "Query error!"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:290
+#: fetch/z3950fetcher.cpp:300
 msgid "Connection search error %1: %2"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:427
+#: fetch/z3950fetcher.cpp:437
 msgid "Enter the host name of the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:432
+#: fetch/z3950fetcher.cpp:442
 msgid "&Port: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:437
+#: fetch/z3950fetcher.cpp:447
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:442
+#: fetch/z3950fetcher.cpp:452
 msgid "&Database: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:447
+#: fetch/z3950fetcher.cpp:457
 msgid "Enter the database name used by the z39.50 server."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:452
+#: fetch/z3950fetcher.cpp:462
 msgid "Ch&aracter set: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:461
+#: fetch/z3950fetcher.cpp:471
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:467
+#: fetch/z3950fetcher.cpp:477
 msgid "&User: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:472
+#: fetch/z3950fetcher.cpp:482
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:478
+#: fetch/z3950fetcher.cpp:488
 msgid "Pass&word: "
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:484
+#: fetch/z3950fetcher.cpp:494
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -2301,7 +2306,7 @@ msgid "Keep modified values"
 msgstr ""
 
 #: collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:382
-#: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
+#: translators/csvimporter.cpp:348 translators/csvimporter.cpp:450
 msgid "New Field"
 msgstr "Uus väli"
 
@@ -2374,7 +2379,7 @@ msgstr ""
 "Käesolevat faili on muudetud.\n"
 "Soovid sa selle salvestada?"
 
-#: document.cpp:98 entryeditdialog.cpp:571
+#: document.cpp:98 entryeditdialog.cpp:574
 msgid "Warning!"
 msgstr "Tähelepanu!"
 
@@ -2916,31 +2921,31 @@ msgstr "puhasta vidinad"
 msgid "Select Image..."
 msgstr "XSLT fail valimine"
 
-#: entryeditdialog.cpp:43 entryeditdialog.cpp:306 entryeditdialog.cpp:327
-#: entryeditdialog.cpp:371 entryeditdialog.cpp:423
+#: entryeditdialog.cpp:43 entryeditdialog.cpp:309 entryeditdialog.cpp:330
+#: entryeditdialog.cpp:374 entryeditdialog.cpp:426
 #, fuzzy
 msgid "Edit Entry"
 msgstr "Kirje kustutamine"
 
-#: entryeditdialog.cpp:78 entryeditdialog.cpp:338 entryeditdialog.cpp:459
+#: entryeditdialog.cpp:78 entryeditdialog.cpp:341 entryeditdialog.cpp:462
 msgid "Sa&ve Entry"
 msgstr "Kirje sal&vestamine"
 
-#: entryeditdialog.cpp:271
+#: entryeditdialog.cpp:274
 #, fuzzy
 msgid "Do you really want to modify these entries?"
 msgstr "Kas oled kindel oma soovis kustutada need kirjed?"
 
-#: entryeditdialog.cpp:273
+#: entryeditdialog.cpp:276
 #, fuzzy
 msgid "Modify Multiple Entries?"
 msgstr "Muuta mitme raamatu kirjeid?"
 
-#: entryeditdialog.cpp:399
+#: entryeditdialog.cpp:402
 msgid "Sa&ve Entries"
 msgstr "Kirjete sal&vestamine"
 
-#: entryeditdialog.cpp:569
+#: entryeditdialog.cpp:572
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -2948,7 +2953,7 @@ msgstr ""
 "Kõnealust kirjet on muudetud.\n"
 "Kas soovid tehtud muudatused sisestada?"
 
-#: entryeditdialog.cpp:572
+#: entryeditdialog.cpp:575
 msgid "Save Entry"
 msgstr "Kirje salvestamine"
 

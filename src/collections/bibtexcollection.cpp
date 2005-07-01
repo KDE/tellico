@@ -226,6 +226,9 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
 }
 
 bool BibtexCollection::addField(Field* field_) {
+  if(!field_) {
+    return false;
+  }
 //  kdDebug() << "BibtexCollection::addField()" << endl;
   bool success = Collection::addField(field_);
   if(success) {
@@ -238,6 +241,9 @@ bool BibtexCollection::addField(Field* field_) {
 }
 
 bool BibtexCollection::modifyField(Field* newField_) {
+  if(!newField_) {
+    return false;
+  }
 //  kdDebug() << "BibtexCollection::modifyField()" << endl;
   bool success = Collection::modifyField(newField_);
   Field* oldField = fieldByName(newField_->name());
@@ -254,6 +260,9 @@ bool BibtexCollection::modifyField(Field* newField_) {
 }
 
 bool BibtexCollection::deleteField(Field* field_, bool force_) {
+  if(!field_) {
+    return false;
+  }
 //  kdDebug() << "BibtexCollection::deleteField()" << endl;
   bool success = true;
   QString bibtex = field_->property(QString::fromLatin1("bibtex"));

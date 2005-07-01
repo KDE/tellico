@@ -110,6 +110,9 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
   QStringList catList = m_currColl->fieldCategories();
   for(QStringList::ConstIterator catIt = catList.begin(); catIt != catList.end(); ++catIt) {
     Data::FieldList list = m_currColl->fieldsByCategory(*catIt);
+    if(list.isEmpty()) { // sanity check
+      continue;
+    }
 
     // if this layout model is changed, be sure to check slotUpdateField()
     QWidget* page = new QWidget(m_tabs);
@@ -144,6 +147,10 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
       }
 
       FieldWidget* widget = new FieldWidget(f, grid);
+      if(!widget->isValid()) {
+        delete widget;
+        continue;
+      }
       connect(widget, SIGNAL(modified()), SLOT(slotSetModified()));
 
       layout->addWidget(widget, count/NCOLS, count%NCOLS);

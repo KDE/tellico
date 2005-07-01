@@ -59,7 +59,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fr+rosetta\n"
-"POT-Creation-Date: 2005-05-25 19:02-0700\n"
+"POT-Creation-Date: 2005-06-30 07:11-0700\n"
 "PO-Revision-Date: 2005-05-03 22:42+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -978,7 +978,7 @@ msgstr ""
 "n'est possible que si les collections sont de même type. Les entrées "
 "doivent être exactement du même type pour pouvoir être fusionnées."
 
-#: importdialog.cpp:192 mainwindow.cpp:994 mainwindow.cpp:1110
+#: importdialog.cpp:192
 msgid "*.bc *.tc|Tellico files (*.tc)"
 msgstr "*.bc *.tc|Fichiers Tellico (*.tc)"
 
@@ -1008,7 +1008,7 @@ msgstr "*.ris|Fichiers RIS (*.ris)"
 msgid "*|All files"
 msgstr "*|Tous les Fichiers"
 
-#: detailedlistview.cpp:67 detailedlistview.cpp:298
+#: detailedlistview.cpp:67 detailedlistview.cpp:303
 #: translators/pilotdbexporter.cpp:138
 msgid "View Columns"
 msgstr "Voir les colonnes"
@@ -1478,6 +1478,11 @@ msgstr "Création d'un nouveau document..."
 msgid "Opening file..."
 msgstr "Ouverture du fichier..."
 
+#: mainwindow.cpp:994 mainwindow.cpp:1110
+#, fuzzy
+msgid "*.tc *.bc|Tellico files (*.tc)"
+msgstr "*.bc *.tc|Fichiers Tellico (*.tc)"
+
 #: mainwindow.cpp:1001
 msgid "Open File..."
 msgstr "Ouvrir le fichier..."
@@ -1541,7 +1546,7 @@ msgstr "Impression %1"
 msgid "Page %1"
 msgstr "Page %1"
 
-#: fetch/z3950fetcher.cpp:233 mainwindow.cpp:1669
+#: fetch/z3950fetcher.cpp:243 mainwindow.cpp:1669
 #: translators/xsltimporter.cpp:56
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico a rencontré une erreur dans le traitement XSLT."
@@ -1773,7 +1778,7 @@ msgstr "%1 ne permet pas la recherche pour ce type de collection."
 msgid "Results from %1: %2/%3"
 msgstr "Résultats de %1 : %2/%3"
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:392
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:402
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Aucune entrée n'a été trouvée pour les ISBN suivants:</qt>"
 
@@ -1885,7 +1890,7 @@ msgstr "Base de données de films Internet"
 msgid "z39.50"
 msgstr "z39.50"
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:411
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:421
 msgid "Library of Congress (US)"
 msgstr "Bibliothèque du Congres (US)"
 
@@ -1916,7 +1921,7 @@ msgstr "Titres alternatifs"
 msgid "Certifications"
 msgstr "Certifications"
 
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:422
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:432
 msgid "&Host: "
 msgstr "&Hôte: "
 
@@ -1932,44 +1937,44 @@ msgstr ""
 msgid "Download cover image"
 msgstr "Télécharger la couverture"
 
-#: fetch/z3950fetcher.cpp:260
+#: fetch/z3950fetcher.cpp:270
 msgid "Connection error %1: %2"
 msgstr "Erreur de connexion %1: %2"
 
-#: fetch/z3950fetcher.cpp:272
+#: fetch/z3950fetcher.cpp:282
 msgid "Query error!"
 msgstr "Erreur de requête!"
 
-#: fetch/z3950fetcher.cpp:290
+#: fetch/z3950fetcher.cpp:300
 msgid "Connection search error %1: %2"
 msgstr "Erreur de recherche %1: %2"
 
-#: fetch/z3950fetcher.cpp:427
+#: fetch/z3950fetcher.cpp:437
 msgid "Enter the host name of the z39.50 server."
 msgstr "Entrez le nom du serveur z39.50."
 
-#: fetch/z3950fetcher.cpp:432
+#: fetch/z3950fetcher.cpp:442
 msgid "&Port: "
 msgstr "&Port: "
 
-#: fetch/z3950fetcher.cpp:437
+#: fetch/z3950fetcher.cpp:447
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr "Entrez le numéro de port du serveur z39.50. Le défaut est %1."
 
-#: fetch/z3950fetcher.cpp:442
+#: fetch/z3950fetcher.cpp:452
 msgid "&Database: "
 msgstr "Base de &données : "
 
-#: fetch/z3950fetcher.cpp:447
+#: fetch/z3950fetcher.cpp:457
 msgid "Enter the database name used by the z39.50 server."
 msgstr "Entrez le nom de base de données utilisé par le serveur z39.50."
 
-#: fetch/z3950fetcher.cpp:452
+#: fetch/z3950fetcher.cpp:462
 msgid "Ch&aracter set: "
 msgstr "Jeu de c&aractères : "
 
-#: fetch/z3950fetcher.cpp:461
+#: fetch/z3950fetcher.cpp:471
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -1977,11 +1982,11 @@ msgstr ""
 "Entrez le jeu de caractères utilisé par le serveur z39.50. Le choix le "
 "plus probable est MARC-8, bien que ISO-8859-1 soit également courant."
 
-#: fetch/z3950fetcher.cpp:467
+#: fetch/z3950fetcher.cpp:477
 msgid "&User: "
 msgstr "&Utilisateur : "
 
-#: fetch/z3950fetcher.cpp:472
+#: fetch/z3950fetcher.cpp:482
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -1989,11 +1994,11 @@ msgstr ""
 "Entrez le nom de base de données utilisé par le serveur z39.50. La plupart "
 "des serveurs n'en ont pas besoin."
 
-#: fetch/z3950fetcher.cpp:478
+#: fetch/z3950fetcher.cpp:488
 msgid "Pass&word: "
 msgstr "&Mot de passe : "
 
-#: fetch/z3950fetcher.cpp:484
+#: fetch/z3950fetcher.cpp:494
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -2285,7 +2290,7 @@ msgid "Keep modified values"
 msgstr "Conserver les valeurs modifiées"
 
 #: collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:382
-#: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
+#: translators/csvimporter.cpp:348 translators/csvimporter.cpp:450
 msgid "New Field"
 msgstr "Nouveau champ"
 
@@ -2359,7 +2364,7 @@ msgstr ""
 "Le document ouvert a été modifié.\n"
 "Voulez-vous l'enregistrer ?"
 
-#: document.cpp:98 entryeditdialog.cpp:571
+#: document.cpp:98 entryeditdialog.cpp:574
 msgid "Warning!"
 msgstr "Attention !"
 
@@ -2892,28 +2897,28 @@ msgstr "Effacer"
 msgid "Select Image..."
 msgstr "Sélectionner l'image..."
 
-#: entryeditdialog.cpp:43 entryeditdialog.cpp:306 entryeditdialog.cpp:327
-#: entryeditdialog.cpp:371 entryeditdialog.cpp:423
+#: entryeditdialog.cpp:43 entryeditdialog.cpp:309 entryeditdialog.cpp:330
+#: entryeditdialog.cpp:374 entryeditdialog.cpp:426
 msgid "Edit Entry"
 msgstr "Éditer l'entrée"
 
-#: entryeditdialog.cpp:78 entryeditdialog.cpp:338 entryeditdialog.cpp:459
+#: entryeditdialog.cpp:78 entryeditdialog.cpp:341 entryeditdialog.cpp:462
 msgid "Sa&ve Entry"
 msgstr "En&registrer l'entrée"
 
-#: entryeditdialog.cpp:271
+#: entryeditdialog.cpp:274
 msgid "Do you really want to modify these entries?"
 msgstr "Voulez-vous vraiment modifier ces entrées ?"
 
-#: entryeditdialog.cpp:273
+#: entryeditdialog.cpp:276
 msgid "Modify Multiple Entries?"
 msgstr "Modifier plusieurs entrées ?"
 
-#: entryeditdialog.cpp:399
+#: entryeditdialog.cpp:402
 msgid "Sa&ve Entries"
 msgstr "En&registrer les entrées"
 
-#: entryeditdialog.cpp:569
+#: entryeditdialog.cpp:572
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -2921,7 +2926,7 @@ msgstr ""
 "L'entrée courante a été modifiée.\n"
 "Voulez-vous valider les modifications ?"
 
-#: entryeditdialog.cpp:572
+#: entryeditdialog.cpp:575
 msgid "Save Entry"
 msgstr "Enregistrer l'entrée"
 

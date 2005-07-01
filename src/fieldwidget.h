@@ -36,7 +36,7 @@ namespace Tellico {
  * on the field type, and then a checkbox for multiple editing.
  *
  * @author Robby Stephenson
- * @version $Id: fieldwidget.h 985 2004-12-02 03:34:56Z robby $
+ * @version $Id: fieldwidget.h 1305 2005-07-01 05:38:05Z robby $
  */
 class FieldWidget : public QWidget {
 Q_OBJECT
@@ -55,6 +55,8 @@ public:
   void editMultiple(bool show);
   void setHighlighted(const QString& highlight) const;
   void updateField(Data::Field* newField, Data::Field* oldField);
+
+  bool isValid() const { return m_editWidget != 0; }
 
   // the EntryEditDialog sets this so the completion object can be easily updated
   static QGuardedPtr<Data::Collection> s_coll;

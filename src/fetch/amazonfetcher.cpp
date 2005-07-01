@@ -522,12 +522,12 @@ Tellico::Data::Entry* AmazonFetcher::fetchEntry(uint uid_) {
     entry->setField(QString::fromLatin1("comments"), comments);
   }
 
-  // remove amazon field if it's not to be aded
+  // remove amazon field if it's not to be added
   if(!m_addLinkField) {
     entry->collection()->deleteField(entry->collection()->fieldByName(QString::fromLatin1("amazon")));
   }
   // don't pollute existing collection with image urls
-  // but, if the fields are removed from the fecthers collection, subsequent fetchENtry()
+  // but, if the fields are removed from the fetchers collection, subsequent fetchENtry()
   // calls don't return an image, so check to see if the user doesn't have them, and
   // then delete them afterwards
   bool hadSmall = (Kernel::self()->collection()->fieldByName(QString::fromLatin1("small-image")) != 0);

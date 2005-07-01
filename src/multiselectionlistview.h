@@ -19,13 +19,14 @@
 #include <klistview.h>
 
 namespace Tellico {
+  class MultiSelectionListViewItem;
 
 /**
  * A MultiSelectionListView keeps track of the selected items and allows subclasses to determine
  * whether child items may be selected or not.
  *
  * @author Robby Stephenson
- * @version $Id: multiselectionlistview.h 1079 2005-02-05 23:50:11Z robby $
+ * @version $Id: multiselectionlistview.h 1233 2005-06-09 04:38:04Z robby $
  */
 class MultiSelectionListView : public KListView {
 Q_OBJECT
@@ -79,7 +80,7 @@ private:
 
 /**
  * @author Robby Stephenson
- * @version $Id: multiselectionlistview.h 1079 2005-02-05 23:50:11Z robby $
+ * @version $Id: multiselectionlistview.h 1233 2005-06-09 04:38:04Z robby $
  */
 class MultiSelectionListViewItem : public KListViewItem {
 public:

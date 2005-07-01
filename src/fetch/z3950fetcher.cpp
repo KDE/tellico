@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -8,6 +8,16 @@
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of version 2 of the GNU General Public License as  *
  *   published by the Free Software Foundation;                            *
+ *                                                                         *
+ *   In addition, as a special exception, the author gives permission to   *
+ *   link the code of this program with the OpenSSL library released by    *
+ *   the OpenSSL Project (or with modified versions of OpenSSL that use    *
+ *   the same license as OpenSSL), and distribute linked combinations      *
+ *   including the two.  You must obey the GNU General Public License in   *
+ *   all respects for all of the code used other than OpenSSL.  If you     *
+ *   modify this file, you may extend this exception to your version of    *
+ *   the file, but you are not obligated to do so.  If you do not wish to  *
+ *   do so, delete this exception statement from your version.             *
  *                                                                         *
  ***************************************************************************/
 

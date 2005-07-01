@@ -14,16 +14,17 @@ stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp tellico_kernel.cpp \
 viewstack.cpp entryiconview.cpp datewidget.cpp multiselectionlistview.cpp \
 ratingwidget.cpp tellico_strings.cpp tellico_utils.cpp
 
+if !USE_LIBBTPARSE
+  LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
+endif
+
 tellico_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
         ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
         ./translators/pilotdb/libflatfile/liblibflatfile.a \
         ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
         $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
-        $(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS)
-
-if !USE_LIBBTPARSE
-  tellico_LDADD += ./translators/btparse/libbtparse.a
-endif
+        $(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS) \
+        $(LDADD_LIBBTPARSE)
 
 SUBDIRS = collections translators fetch tests
 

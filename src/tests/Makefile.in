@@ -636,7 +636,6 @@ check: isbntest latin1test entitytest formattest
 .NOEXPORT:
 
 
-
 #>+ 2
 docs-am:
 

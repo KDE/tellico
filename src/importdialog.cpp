@@ -189,7 +189,7 @@ QString ImportDialog::fileFilter(Import::Format format_) {
   QString text;
   switch(format_) {
     case Import::TellicoXML:
-      text = i18n("*.bc *.tc|Tellico files (*.tc)") + QChar('\n');
+      text = i18n("*.tc *.bc|Tellico files (*.tc)") + QChar('\n');
       break;
 
     case Import::Bibtex:

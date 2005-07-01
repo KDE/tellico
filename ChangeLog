@@ -1,3 +1,36 @@
+2005-07-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 0.13.8.
+
+2005-06-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with CSV import parsing.
+
+2005-06-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Added license exception for linking to OpenSSL.
+
+2005-06-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug for fields with empty categories.
+
+2005-06-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added initial Catalan translation from David Majà Martinez.
+
+2005-06-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed gcc4 compilation again.
+	* Fixed bug with file extension defaulting to .bc.
+
+2005-05-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with grouping by checkbox fields.
+
+2005-05-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Norwegian translation.
+
 2005-05-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 0.13.7.

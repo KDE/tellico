@@ -41,7 +41,6 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-@USE_LIBBTPARSE_FALSE@am__append_1 = btparse
 subdir = src/translators
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -377,7 +376,8 @@ xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp \
 alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp \
 risimporter.cpp freedb_util.cpp tellico_xml.cpp
 
-SUBDIRS = pilotdb $(am__append_1)
+@USE_LIBBTPARSE_FALSE@SUBDIR_LIBBTPARSE = btparse
+SUBDIRS = pilotdb $(SUBDIR_LIBBTPARSE)
 CLEANFILES = *~
 EXTRA_DIST = bibtex-translation.xml \
 bibtexexporter.cpp       tellicoxmlexporter.h     pilotdbexporter.cpp \

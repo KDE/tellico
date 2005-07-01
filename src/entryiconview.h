@@ -23,9 +23,11 @@ class KPopupMenu;
 #include <qguardedptr.h>
 
 namespace Tellico {
+  class EntryIconViewItem;
+
 /**
  * @author Robby Stephenson
- * @version $Id: entryiconview.h 1160 2005-04-01 02:50:24Z robby $
+ * @version $Id: entryiconview.h 1233 2005-06-09 04:38:04Z robby $
  */
 class EntryIconView : public KIconView {
 Q_OBJECT

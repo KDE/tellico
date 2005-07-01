@@ -290,10 +290,15 @@ QStringList CSVImporter::splitLine(const QString& line_) {
 
   // get last word, too
   tmp = line_.mid(oldpos+dn);
-  if(inquote && tmp.endsWith(s_quote)) {
-    tmp.truncate(tmp.length()-1);
+  if(tmp.endsWith(s_quote)) {
+    if(inquote) {
+      tmp.truncate(tmp.length()-1);
+      str += tmp;
+    } else if(tmp.startsWith(s_quote)) {
+      str = tmp.mid(1, tmp.length()-2);
+    }
   }
-  str += tmp;
+
   str.replace(dq, s_quote);
   values << str;
   return values;
@@ -346,6 +351,10 @@ void CSVImporter::slotTypeChanged(const QString& name_) {
   m_comboField->clear();
   m_comboField->insertStringList(m_existingCollection ? m_existingCollection->fieldTitles() : m_coll->fieldTitles());
   m_comboField->insertItem('<' + i18n("New Field") + '>');
+
+  // hack to force a resize
+  m_comboField->setFont(m_comboField->font());
+  m_comboField->updateGeometry();
 }
 
 void CSVImporter::slotFirstRowHeader(bool b_) {

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2005-05-25 19:02-0700\n"
+"POT-Creation-Date: 2005-06-30 07:11-0700\n"
 "PO-Revision-Date: 2004-12-03 17:17+0100\n"
 "Last-Translator: Leif Mathis Gaup <lmgaup@nsn.no>\n"
 "Language-Team: Norsk bokmål\n"
@@ -248,7 +248,7 @@ msgstr "Mynter"
 
 #: collections/coincollection.cpp:28
 msgid "My Coins"
-msgstr "Min mynter"
+msgstr "Mine mynter"
 
 #: collections/coincollection.cpp:45 collections/winecollection.cpp:70
 msgid "Type"
@@ -496,7 +496,7 @@ msgstr "Produksjonsår"
 msgid ""
 "_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr "7 (Norge),10 (Norge),16 (Norge),18 (Norge)"
+msgstr "7 (Norge),10 (Norge),15 (Norge),18 (Norge)"
 
 #: collections/videocollection.cpp:66
 msgid "Certification"
@@ -616,7 +616,7 @@ msgstr "Fargemodus"
 
 #: collections/videocollection.cpp:179
 msgid "Director's Cut"
-msgstr "Director's Cut"
+msgstr "Regissørens kutt"
 
 #: collections/videocollection.cpp:183
 msgid "Plot Summary"
@@ -930,7 +930,7 @@ msgstr ""
 "samlingene er av samme type. Innslag må stemme eksakt for å kunne bli lagt "
 "til."
 
-#: importdialog.cpp:192 mainwindow.cpp:994 mainwindow.cpp:1110
+#: importdialog.cpp:192
 msgid "*.bc *.tc|Tellico files (*.tc)"
 msgstr "*.bc *.tc|Tellico filer (*.tc)"
 
@@ -960,7 +960,7 @@ msgstr "*.ris|RIS filer (*.ris)"
 msgid "*|All files"
 msgstr "*|Alle filer"
 
-#: detailedlistview.cpp:67 detailedlistview.cpp:298
+#: detailedlistview.cpp:67 detailedlistview.cpp:303
 #: translators/pilotdbexporter.cpp:138
 msgid "View Columns"
 msgstr "Vis kolonner"
@@ -1372,7 +1372,7 @@ msgstr "Slå på/av redigerer"
 
 #: mainwindow.cpp:553
 msgid "Show Entry &View"
-msgstr "Vis r&innslag"
+msgstr "Vis &innslag"
 
 #: mainwindow.cpp:556
 msgid "Enable/disable the entry view"
@@ -1429,6 +1429,11 @@ msgstr "Lag nytt dokument"
 #: mainwindow.cpp:991 mainwindow.cpp:1010 mainwindow.cpp:1026
 msgid "Opening file..."
 msgstr "Åpne fil..."
+
+#: mainwindow.cpp:994 mainwindow.cpp:1110
+#, fuzzy
+msgid "*.tc *.bc|Tellico files (*.tc)"
+msgstr "*.bc *.tc|Tellico filer (*.tc)"
 
 #: mainwindow.cpp:1001
 msgid "Open File..."
@@ -1493,7 +1498,7 @@ msgstr "Skriv ut %1"
 msgid "Page %1"
 msgstr "Side %1"
 
-#: fetch/z3950fetcher.cpp:233 mainwindow.cpp:1669
+#: fetch/z3950fetcher.cpp:243 mainwindow.cpp:1669
 #: translators/xsltimporter.cpp:56
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico fikk en feil i XSLT prosesseringen."
@@ -1722,7 +1727,7 @@ msgstr "%1 tillater ikke søk for samlinger av denne typen."
 msgid "Results from %1: %2/%3"
 msgstr "Resultater fra %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:392
+#: fetch/amazonfetcher.cpp:467 fetch/z3950fetcher.cpp:402
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Ingen treff for søk etter følgende ISBN-nummer:</qt>"
 
@@ -1753,11 +1758,11 @@ msgstr "Japan"
 #: fetch/amazonfetcher.cpp:592
 #, fuzzy
 msgid "France"
-msgstr "Bueparanteser"
+msgstr "Frankrike"
 
 #: fetch/amazonfetcher.cpp:593
 msgid "Canada"
-msgstr ""
+msgstr "Kanada"
 
 #: fetch/amazonfetcher.cpp:596
 msgid ""
@@ -1835,7 +1840,7 @@ msgstr "Internet filmdatabase (IMDB)"
 msgid "z39.50"
 msgstr "z39.50"
 
-#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:411
+#: fetch/srufetcher.cpp:42 fetch/z3950fetcher.cpp:421
 msgid "Library of Congress (US)"
 msgstr "Library of Congress (USA)"
 
@@ -1864,7 +1869,7 @@ msgstr "Alternative titler"
 msgid "Certifications"
 msgstr "Sertifiseringer"
 
-#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:422
+#: fetch/imdbfetcher.cpp:774 fetch/z3950fetcher.cpp:432
 msgid "&Host: "
 msgstr "Vert"
 
@@ -1880,56 +1885,56 @@ msgstr ""
 msgid "Download cover image"
 msgstr "Last ned omslagsbilde"
 
-#: fetch/z3950fetcher.cpp:260
+#: fetch/z3950fetcher.cpp:270
 msgid "Connection error %1: %2"
 msgstr "Forbindelsesfeil %1: %2"
 
-#: fetch/z3950fetcher.cpp:272
+#: fetch/z3950fetcher.cpp:282
 msgid "Query error!"
 msgstr "Feil i spørringen"
 
-#: fetch/z3950fetcher.cpp:290
+#: fetch/z3950fetcher.cpp:300
 msgid "Connection search error %1: %2"
 msgstr "Feil i søkeforbindelsen %1: %2"
 
-#: fetch/z3950fetcher.cpp:427
+#: fetch/z3950fetcher.cpp:437
 msgid "Enter the host name of the z39.50 server."
 msgstr "Skriv inn navn på tjeneren for z30.50-tjenesten."
 
-#: fetch/z3950fetcher.cpp:432
+#: fetch/z3950fetcher.cpp:442
 msgid "&Port: "
 msgstr "Port:"
 
-#: fetch/z3950fetcher.cpp:437
+#: fetch/z3950fetcher.cpp:447
 #, c-format
 msgid "Enter the port number of the z39.50 server. The default is %1."
 msgstr "Skriv inn portnummer for z39.50-tjeneren. Standardport er%1."
 
-#: fetch/z3950fetcher.cpp:442
+#: fetch/z3950fetcher.cpp:452
 msgid "&Database: "
 msgstr "Database:"
 
-#: fetch/z3950fetcher.cpp:447
+#: fetch/z3950fetcher.cpp:457
 msgid "Enter the database name used by the z39.50 server."
 msgstr "Skriv inn databasenavnet brukt av z39.50-tjeneren."
 
-#: fetch/z3950fetcher.cpp:452
+#: fetch/z3950fetcher.cpp:462
 msgid "Ch&aracter set: "
 msgstr "Tegnsett:"
 
-#: fetch/z3950fetcher.cpp:461
+#: fetch/z3950fetcher.cpp:471
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
 "Skriv inn tegnsettet brukt av z39.50-tjeneren. Det mest sannsynlige valget "
-"er MARC-8, selc om SIO-8859-1 også er vanlig."
+"er MARC-8, selv om SIO-8859-1 også er vanlig."
 
-#: fetch/z3950fetcher.cpp:467
+#: fetch/z3950fetcher.cpp:477
 msgid "&User: "
 msgstr "Bruker:"
 
-#: fetch/z3950fetcher.cpp:472
+#: fetch/z3950fetcher.cpp:482
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -1937,11 +1942,11 @@ msgstr ""
 "Skriv inn autentifiseringsnavnet brukt av z39.50-tjeneren. De fleste "
 "tjenerene trenger ikke dette."
 
-#: fetch/z3950fetcher.cpp:478
+#: fetch/z3950fetcher.cpp:488
 msgid "Pass&word: "
 msgstr "Passord:"
 
-#: fetch/z3950fetcher.cpp:484
+#: fetch/z3950fetcher.cpp:494
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one."
@@ -2233,7 +2238,7 @@ msgid "Keep modified values"
 msgstr "Behold modifiserte verdier"
 
 #: collectionfieldsdialog.cpp:379 collectionfieldsdialog.cpp:382
-#: translators/csvimporter.cpp:348 translators/csvimporter.cpp:446
+#: translators/csvimporter.cpp:348 translators/csvimporter.cpp:450
 msgid "New Field"
 msgstr "Nytt felt"
 
@@ -2309,7 +2314,7 @@ msgstr ""
 "Dette dokumentet er endret.\n"
 "Vil du lagre?"
 
-#: document.cpp:98 entryeditdialog.cpp:571
+#: document.cpp:98 entryeditdialog.cpp:574
 msgid "Warning!"
 msgstr "Advarsel!"
 
@@ -2405,7 +2410,7 @@ msgstr ""
 
 #: configdialog.cpp:207
 msgid "Surname prefixes:"
-msgstr "Prefiks:"
+msgstr "Prefiks for etternavn:"
 
 #: configdialog.cpp:212
 msgid ""
@@ -2813,13 +2818,17 @@ msgstr ""
 msgid ""
 "_: more widgets\n"
 "More"
-msgstr "_: flere avkrysningsbokser Flere"
+msgstr ""
+"_: flere avkrysningsbokser\n"
+"Flere"
 
 #: kwidgetlister.cpp:59
 msgid ""
 "_: fewer widgets\n"
 "Fewer"
-msgstr "_: færre avkrysningsbokser Færre"
+msgstr ""
+"_: færre avkrysningsbokser \n"
+"Færre"
 
 #: kwidgetlister.cpp:65
 msgid ""
@@ -2833,28 +2842,28 @@ msgstr ""
 msgid "Select Image..."
 msgstr "Velg bilde..."
 
-#: entryeditdialog.cpp:43 entryeditdialog.cpp:306 entryeditdialog.cpp:327
-#: entryeditdialog.cpp:371 entryeditdialog.cpp:423
+#: entryeditdialog.cpp:43 entryeditdialog.cpp:309 entryeditdialog.cpp:330
+#: entryeditdialog.cpp:374 entryeditdialog.cpp:426
 msgid "Edit Entry"
 msgstr "Endre innslag"
 
-#: entryeditdialog.cpp:78 entryeditdialog.cpp:338 entryeditdialog.cpp:459
+#: entryeditdialog.cpp:78 entryeditdialog.cpp:341 entryeditdialog.cpp:462
 msgid "Sa&ve Entry"
 msgstr "&Lagre innslag"
 
-#: entryeditdialog.cpp:271
+#: entryeditdialog.cpp:274
 msgid "Do you really want to modify these entries?"
 msgstr "Vil du virkelig endre disse innslagene?"
 
-#: entryeditdialog.cpp:273
+#: entryeditdialog.cpp:276
 msgid "Modify Multiple Entries?"
 msgstr "Endre flere innslag?"
 
-#: entryeditdialog.cpp:399
+#: entryeditdialog.cpp:402
 msgid "Sa&ve Entries"
 msgstr "L&agre innslag"
 
-#: entryeditdialog.cpp:569
+#: entryeditdialog.cpp:572
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -2862,7 +2871,7 @@ msgstr ""
 "Innslaget har blitt endret.\n"
 "Vil du lagre endringene?"
 
-#: entryeditdialog.cpp:572
+#: entryeditdialog.cpp:575
 msgid "Save Entry"
 msgstr "Lagre innslag"
 
@@ -3113,7 +3122,7 @@ msgstr "*.bc *.tc|Tellico fil(*.tc)"
 
 #: translators/freedbimporter.cpp:58 translators/freedbimporter.cpp:106
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr "<qt>Tellico klarer ikke å skrive til tjeneren på <b>%1</b>.</qt>."
+msgstr "<qt>Tellico klarte ikke å få tilgang til CD-ROM på <b>%1</b>.</qt>."
 
 #: translators/freedbimporter.cpp:127
 msgid "<qt>No records were found to match the CD.</qt>"
@@ -3238,7 +3247,7 @@ msgstr ""
 
 #: translators/tellicoimporter.cpp:458
 msgid "The file is empty."
-msgstr "Filer er tom."
+msgstr "Filen er tom."
 
 #: translators/tellicoimporter.cpp:471
 msgid "The file contains no collection data."
@@ -3279,17 +3288,13 @@ msgstr "Verktøylinjen Samling"
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr ""
-"_: NAME OF TRANSLATORS\n"
-"Leif Mathis Gaup"
+msgstr "Leif Mathis Gaup"
 
 #: _translatorinfo.cpp:3
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
-msgstr ""
-"_: EMAIL OF TRANSLATORS\n"
-"lmgaup@nsn.no"
+msgstr "lmgaup@nsn.no"
 
 #: tips.cpp:3
 msgid ""
@@ -3654,7 +3659,7 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Delete Entries"
-#~ msgstr "Slett felt"
+#~ msgstr "Slett innslag"
 
 #~ msgid "Tellico is unable to find the file - %1."
 #~ msgstr "Tellico klarer ikke å finne filen - %1."

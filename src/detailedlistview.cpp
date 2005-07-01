@@ -278,7 +278,12 @@ void DetailedListView::removeEntry(Data::Entry* entry_) {
     nextItem = item->nextSibling();
   }
   delete item;
-  setSelected(nextItem, true);
+  if(nextItem) {
+    setSelected(nextItem, true);
+  } else {
+    // deleted the last item
+    setSelected(lastItem(), true);
+  }
 }
 
 void DetailedListView::removeCollection(Tellico::Data::Collection* coll_) {

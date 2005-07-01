@@ -541,20 +541,22 @@ void Collection::populateDicts(Entry* entry_) {
     EntryGroupDict* dict = dictIt.current();
     QString fieldName = dictIt.currentKey();
 //    kdDebug() << "Collection::populateDicts - field name = " << fieldName << endl;
+    bool isBool = fieldByName(fieldName) && fieldByName(fieldName)->type() == Field::Bool;
 
     QStringList groups = entryGroupNamesByField(entry_, fieldName);
     for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
       // find the group for this group name
-      EntryGroup* group = dict->find(*groupIt);
+      EntryGroup* group;
+      if(isBool && *groupIt != s_emptyGroupTitle) {
+        group = dict->find(fieldTitleByName(fieldName));
+      } else {
+        group = dict->find(*groupIt);
+      }
       // if the group doesn't exist, create it
       if(!group) {
         // if it's a bool, rather than showing "true", use field title instead of "true"
         // as long as it's not the empty group name
-        // be careful that the group might be the people group
-        if(fieldName != s_peopleGroupName
-           && fieldByName(fieldName)
-           && fieldByName(fieldName)->type() == Field::Bool
-           && (*groupIt) != s_emptyGroupTitle) {
+        if(isBool && *groupIt != s_emptyGroupTitle) {
           group = new EntryGroup(fieldTitleByName(fieldName), fieldName);
           dict->insert(fieldTitleByName(fieldName), group);
         } else {

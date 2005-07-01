@@ -59,7 +59,7 @@ const QRegExp FieldWidget::s_semiColon = QRegExp(QString::fromLatin1("\\s*;\\s*"
 const QRegExp FieldWidget::s_comma = QRegExp(QString::fromLatin1("\\s*,\\s*"));
 
 FieldWidget::FieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
-    : QWidget(parent_, name_), m_type(field_->type()), m_run(0),
+    : QWidget(parent_, name_), m_type(field_->type()), m_editWidget(0), m_run(0),
       m_allowMultiple(field_->flags() & Data::Field::AllowMultiple),
       m_isRating(false), m_relativeURL(false) {
   QHBoxLayout* l = new QHBoxLayout(this, 0, 4); // parent, margin, spacing
@@ -252,6 +252,10 @@ FieldWidget::FieldWidget(const Data::Field* field_, QWidget* parent_, const char
                 << field_->type() << ") named " << field_->name() << endl;
       break;
   } // end switch
+
+  if(!m_editWidget) {
+    return;
+  }
 
   l->addWidget(m_editWidget);
   if(m_expands) {

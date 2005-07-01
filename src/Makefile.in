@@ -42,7 +42,6 @@ build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
 bin_PROGRAMS = tellico$(EXEEXT)
-@USE_LIBBTPARSE_FALSE@am__append_1 = ./translators/btparse/libbtparse.a
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -396,14 +395,15 @@ stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp tellico_kernel.cpp \
 viewstack.cpp entryiconview.cpp datewidget.cpp multiselectionlistview.cpp \
 ratingwidget.cpp tellico_strings.cpp tellico_utils.cpp
 
+@USE_LIBBTPARSE_FALSE@LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
 tellico_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
-	./translators/libtranslators.a \
-	./translators/pilotdb/libpilotdb.a \
-	./translators/pilotdb/libflatfile/liblibflatfile.a \
-	./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
-	$(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) \
-	$(LIB_QT) $(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) \
-	$(KCDDB_LIBS) $(YAZ_LIBS) $(am__append_1)
+        ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
+        ./translators/pilotdb/libflatfile/liblibflatfile.a \
+        ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
+        $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
+        $(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS) \
+        $(LDADD_LIBBTPARSE)
+
 SUBDIRS = collections translators fetch tests
 EXTRA_DIST = tellicoui.rc \
 collection.cpp              entryview.h          imagefactory.h \
