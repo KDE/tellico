@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,6 +14,8 @@
 #ifndef FILTER_H
 #define FILTER_H
 
+#include <ksharedptr.h>
+
 #include <qptrlist.h>
 #include <qstring.h>
 
@@ -24,7 +26,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: filter.h 929 2004-10-24 22:29:47Z robby $
  */
 class FilterRule {
 
@@ -94,9 +95,8 @@ private:
  * Borrows from KMSearchPattern by Marc Mutz
  *
  * @author Robby Stephenson
- * @version $Id: filter.h 929 2004-10-24 22:29:47Z robby $
  */
-class Filter : public QPtrList<FilterRule> {
+class Filter : public QPtrList<FilterRule>, public KShared {
 
 public:
   enum FilterOp {
@@ -104,13 +104,23 @@ public:
     MatchAll
   };
 
-  Filter(FilterOp op_) : QPtrList<FilterRule>(), m_op(op_) { setAutoDelete(true); }
+  Filter(FilterOp op) : QPtrList<FilterRule>(), m_op(op) { setAutoDelete(true); }
+  Filter(const Filter& other);
 
+  void setMatch(FilterOp op) { m_op = op; }
   FilterOp op() const { return m_op; }
   bool matches(const Data::Entry* const entry) const;
 
+  void setName(const QString& name) { m_name = name; }
+  const QString& name() const { return m_name; }
+
+  uint count() const { return QPtrList<FilterRule>::count(); } // disambiguate
+
 private:
+  Filter& operator=(const Filter& other);
+
   FilterOp m_op;
+  QString m_name;
 };
 
 } // end namespace

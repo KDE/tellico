@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004 by Robby Stephenson
+    copyright            : (C) 2004-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,19 +13,21 @@
 
 #include "risimporter.h"
 #include "../collections/bibtexcollection.h"
+#include "../document.h"
+#include "../entry.h"
+#include "../field.h"
 #include "../latin1literal.h"
-#include "../tellico_kernel.h"
 
 #include <klocale.h>
+#include <kdebug.h>
 
 #include <qdict.h>
 #include <qregexp.h>
 #include <qmap.h>
 
-QMap<QString, QString>* Tellico::Import::RISImporter::s_tagMap = 0;
-QMap<QString, QString>* Tellico::Import::RISImporter::s_typeMap = 0;
-
 using Tellico::Import::RISImporter;
+QMap<QString, QString>* RISImporter::s_tagMap = 0;
+QMap<QString, QString>* RISImporter::s_typeMap = 0;
 
 // static
 void RISImporter::initTagMap() {
@@ -107,6 +109,10 @@ RISImporter::RISImporter(const KURL& url_) : Tellico::Import::TextImporter(url_)
   initTypeMap();
 }
 
+bool RISImporter::canImport(int type) const {
+  return type == Data::Collection::Bibtex;
+}
+
 Tellico::Data::Collection* RISImporter::collection() {
   if(m_coll) {
     return m_coll;
@@ -118,22 +124,23 @@ Tellico::Data::Collection* RISImporter::collection() {
 
   // need to know if any extended properties in current collection point to RIS
   // if so, add to collection
-  const Data::Collection* const m_currColl = Kernel::self()->collection();
-  for(Data::FieldListIterator it(m_currColl->fieldList()); it.current(); ++it) {
+  const Data::Collection* const m_currColl = Data::Document::self()->collection();
+  Data::FieldVec vec = m_currColl->fields();
+  for(Data::FieldVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
     // continue if property is empty
-    QString ris = it.current()->property(QString::fromLatin1("RIS"));
+    QString ris = it->property(QString::fromLatin1("RIS"));
     if(ris.isEmpty()) {
       continue;
     }
     // if current collection has one with the same name, set the property
-    Data::Field* f = m_coll->fieldByName(it.current()->name());
+    Data::Field* f = m_coll->fieldByName(it->name());
     if(f) {
       f->setProperty(QString::fromLatin1("RIS"), ris);
       risFields.insert(ris, f);
     } else {
       // else, add it
-      m_coll->addField(it.current()->clone());
-      risFields.insert(ris, m_coll->fieldByName(it.current()->name()));
+      m_coll->addField(it->clone());
+      risFields.insert(ris, m_coll->fieldByName(it->name()));
     }
   }
 
@@ -158,7 +165,7 @@ Tellico::Data::Collection* RISImporter::collection() {
     if(tag.isEmpty()) {
       continue;
     }
-
+//    kdDebug() << tag << ": " << value << endl;
     // if the next line is not empty and does not match start regexp, append to value
     while(!nextLine.isEmpty() && nextLine.find(rx) == -1) {
       value += nextLine.stripWhiteSpace();

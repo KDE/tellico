@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,7 +25,6 @@ namespace Tellico {
  * The XMLImporter class is meant as an abstract class for any importer which reads xml files.
  *
  * @author Robby Stephenson
- * @version $Id: xmlimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class XMLImporter : public Importer {
 Q_OBJECT

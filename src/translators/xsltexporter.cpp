@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,7 +28,7 @@
 
 using Tellico::Export::XSLTExporter;
 
-XSLTExporter::XSLTExporter(const Data::Collection* coll_) : Export::TextExporter(coll_),
+XSLTExporter::XSLTExporter() : Export::Exporter(),
     m_widget(0),
     m_URLRequester(0) {
 }
@@ -38,7 +38,24 @@ QString XSLTExporter::formatString() const {
 }
 
 QString XSLTExporter::fileFilter() const {
-  return i18n("*|All files");
+  return i18n("*|All Files");
+}
+
+
+bool XSLTExporter::exec() {
+  KURL u = m_URLRequester->url();
+  if(u.isEmpty() || !u.isValid()) {
+    return QString::null;
+  }
+  //  XSLTHandler handler(FileHandler::readXMLFile(url));
+  XSLTHandler handler(u);
+
+  TellicoXMLExporter exporter;
+  exporter.setEntries(entries());
+  exporter.setOptions(options());
+  QDomDocument dom = exporter.exportXML();
+  return FileHandler::writeTextURL(url(), handler.applyStylesheet(dom.toString()),
+                                   options() & ExportUTF8, options() & Export::ExportForce);
 }
 
 QWidget* XSLTExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
@@ -54,24 +71,10 @@ QWidget* XSLTExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 
   QHBox* box = new QHBox(group);
   box->setSpacing(4);
-  (void) new QLabel(i18n("XSLT File:"), box);
+  (void) new QLabel(i18n("XSLT file:"), box);
   m_URLRequester = new KURLRequester(box);
   QWhatsThis::add(m_URLRequester, i18n("Choose the XSLT file used to transform the Tellico XML data."));
 
   l->addStretch(1);
   return m_widget;
-}
-
-QString XSLTExporter::text(bool formatFields_, bool encodeUTF8_) {
-  KURL url = m_URLRequester->url();
-  if(url.isEmpty() || !url.isValid()) {
-    return QString::null;
-  }
-  //  XSLTHandler handler(FileHandler::readXMLFile(url));
-  XSLTHandler handler(url);
-
-  TellicoXMLExporter exporter(collection());
-  exporter.setEntryList(entryList());
-  QDomDocument dom = exporter.exportXML(formatFields_, encodeUTF8_);
-  return handler.applyStylesheet(dom.toString());
 }

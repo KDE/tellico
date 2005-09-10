@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004 by Robby Stephenson
+    copyright            : (C) 2004-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,7 +25,6 @@ namespace Tellico {
  * The AudioFileImporter class takes care of importing audio files.
  *
  * @author Robby Stephenson
- * @version $Id: audiofileimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class AudioFileImporter : public Importer {
 Q_OBJECT
@@ -41,11 +40,10 @@ public:
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Album); }
+  virtual bool canImport(int type) const;
 
 private:
   static QString insertValue(const QString& str, const QString& value, uint pos);
-  static QStringList findAllSubDirs(const QString& dir);
 
   Data::Collection* m_coll;
   QWidget* m_widget;

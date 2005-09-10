@@ -6,10 +6,10 @@
               (Actually, btparse.h is generated from btparse.h.in by
               the `configure' script, in order to automatically determine
               the appropriate values of HAVE_USHORT and HAVE_BOOLEAN.)
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CREATED    : 1997/01/19, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 @VERSION    : $Id: btparse.h.in,v 1.35 1999/12/28 18:23:17 greg Exp $
 @COPYRIGHT  : Copyright (c) 1996-97 by Gregory P. Ward.  All rights reserved.
 
@@ -25,7 +25,7 @@
 #include <sys/types.h>                  /* probably supplies 'ushort' */
 #include <stdio.h>
 
-#include "../../../config.h"
+#include "../../../config.h" // not btparse's config.h but Tellico's
 
 /*
  * Here we attempt to define HAVE_USHORT if a typdef for `ushort' appears
@@ -101,8 +101,8 @@ typedef enum
 
 #define NUM_METATYPES ((int) BTE_MACRODEF + 1)
 
-typedef enum 
-{ 
+typedef enum
+{
    BTAST_BOGUS,                           /* to detect uninitialized nodes */
    BTAST_ENTRY,
    BTAST_KEY,
@@ -113,8 +113,8 @@ typedef enum
 } bt_nodetype;
 
 typedef enum
-{ 
-   BTN_FIRST, BTN_VON, BTN_LAST, BTN_JR, BTN_NONE 
+{
+   BTN_FIRST, BTN_VON, BTN_LAST, BTN_JR, BTN_NONE
 } bt_namepart;
 
 typedef enum
@@ -143,7 +143,7 @@ typedef enum
 
 
 #ifdef USER_DEFINED_AST
-typedef struct _ast 
+typedef struct _ast
 {
    struct _ast *right, *down;
    char *           filename;
@@ -158,7 +158,7 @@ typedef struct _ast
 
 typedef struct
 {
-   /* 
+   /*
     * `string' is the string that has been split; items[0] ...
     * items[num_items-1] are pointers into `string', or NULL for empty
     * substrings.  Note that `string' is actually a copy of the string
@@ -196,7 +196,7 @@ typedef struct
    int         num_parts;
    bt_namepart parts[BT_MAX_NAMEPARTS];
 
-   /* 
+   /*
     * These lists are always in the order of the bt_namepart enum -- *not*
     * dependent on the particular order of parts the user specified!  (This
     * will make it a bit harder if I ever allow more than one occurrence of
@@ -213,7 +213,7 @@ typedef struct
 } bt_name_format;
 
 
-typedef enum 
+typedef enum
 {
    BTERR_NOTIFY,                /* notification about next action */
    BTERR_CONTENT,               /* warning about the content of a record */
@@ -251,7 +251,7 @@ extern "C" {
 
 /* Function prototypes */
 
-/* 
+/*
  * First, we might need a prototype for strdup() (because the zzcr_ast
  * macro uses it, and that macro is used in pccts/ast.c -- which I don't
  * want to modify if I can help it, because it's someone else's code).
@@ -260,7 +260,7 @@ extern "C" {
  * <schlotte@geo.palmod.uni-bremen.de>), and compiling bibtex.c (which
  * includes pccts/ast.c) crashes because of this (yes, yes, I know it
  * should just be a warning -- I don't know what's going on there!).
- * 
+ *
  * Unfortunately, this duplicates code in bt_config.h -- I can't include
  * bt_config.h here, because this header must be freestanding; I don't want
  * to include bt_config.h in pccts/ast.c, because I don't want to touch the
@@ -292,8 +292,8 @@ AST * bt_parse_entry   (FILE *    infile,
                         char *    filename,
                         ushort    options,
                         boolean * status);
-AST * bt_parse_file    (char *    filename, 
-                        ushort    options, 
+AST * bt_parse_file    (char *    filename,
+                        ushort    options,
                         boolean * overall_status);
 
 /* postprocess.c */
@@ -323,7 +323,7 @@ char *bt_entry_type (AST *entry);
 char *bt_entry_key (AST *entry);
 AST *bt_next_field (AST *entry, AST *prev, char **name);
 AST *bt_next_macro (AST *entry, AST *prev, char **name);
-AST *bt_next_value (AST *head, 
+AST *bt_next_value (AST *head,
                     AST *prev,
                     bt_nodetype *nodetype,
                     char **text);
@@ -341,7 +341,7 @@ bt_stringlist * bt_split_list (char *   string,
                                char *   description);
 void bt_free_list (bt_stringlist *list);
 bt_name * bt_split_name (char *  name,
-                         char *  filename, 
+                         char *  filename,
                          int     line,
                          int     name_num);
 void bt_free_name (bt_name * name);
@@ -359,13 +359,13 @@ void bt_change_case (char transform, char * string, ushort options);
 /* format_name.c */
 bt_name_format * bt_create_name_format (char * parts, boolean abbrev_first);
 void bt_free_name_format (bt_name_format * format);
-void bt_set_format_text (bt_name_format * format, 
+void bt_set_format_text (bt_name_format * format,
                          bt_namepart part,
                          char * pre_part,
                          char * post_part,
                          char * pre_token,
                          char * post_token);
-void bt_set_format_options (bt_name_format * format, 
+void bt_set_format_options (bt_name_format * format,
                             bt_namepart part,
                             boolean abbrev,
                             bt_joinmethod join_tokens,

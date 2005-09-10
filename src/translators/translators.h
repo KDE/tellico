@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -52,7 +52,8 @@ namespace Tellico {
       XSLT,
       Text,
       PilotDB,
-      Alexandria
+      Alexandria,
+      ONIX
     };
 
     enum Target {

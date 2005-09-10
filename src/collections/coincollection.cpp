@@ -32,8 +32,8 @@ CoinCollection::CoinCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("denomination"));
 }
 
-Tellico::Data::FieldList CoinCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec CoinCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);

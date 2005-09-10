@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="12" name="tellico">
+<kpartgui version="14" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -15,6 +15,7 @@
     <Action name="new_stamp_collection"/>
     <Action name="new_card_collection"/>
     <Action name="new_wine_collection"/>
+    <Action name="new_game_collection"/>
     <Action name="new_custom_collection"/>
    </Menu>
    <Menu name="file_import">
@@ -41,6 +42,7 @@
     <Action name="file_export_pilotdb"/>
     <Separator/>
     <Action name="file_export_alexandria"/>
+    <Action name="file_export_onix"/>
     <Action name="file_export_bibtex"/>
     <Action name="file_export_bibtexml"/>
     <Separator/>
@@ -48,9 +50,6 @@
    </Menu>
   </Menu>
   <Menu name="edit">
-   <Action append="edit_find_merge" name="my_edit_find_last"/>
-   <Action append="edit_select_merge" name="my_edit_deselect"/>
-   <Separator/>
    <Action name="edit_search_internet"/>
   </Menu>
   <Menu name="collection">
@@ -60,8 +59,13 @@
    <Action name="coll_copy_entry"/>
    <Action name="coll_delete_entry"/>
    <Separator/>
+   <Action name="coll_checkout"/>
+   <Action name="coll_checkin"/>
+   <Separator/>
    <Action name="coll_rename_collection"/>
    <Action name="coll_fields"/>
+   <Action name="coll_reports"/>
+   <Separator/>
    <Action name="coll_convert_bibliography"/>
    <Action name="coll_string_macros"/>
    <Action name="coll_cite_entry"/>
@@ -85,15 +89,16 @@
   <Action name="file_save"/>
   <Action name="file_print"/>
   <Separator/>
-  <Action name="edit_find"/>
+  <Action name="edit_search_internet"/>
  </ToolBar>
  <ToolBar name="collectionToolBar">
   <text>Collection Toolbar</text>
   <Action name="coll_new_entry"/>
   <Action name="coll_fields"/>
-  <Action name="change_entry_grouping_label"/>
+  <Action name="coll_reports"/>
   <Action name="change_entry_grouping"/>
-  <Action name="quick_filter_label"/>
+  <Separator lineSeparator="true"/>
+  <Action name="quick_filter_clear"/>
   <Action name="quick_filter"/>
   <Action name="filter_dialog"/>
  </ToolBar>

@@ -2,6 +2,7 @@
 
 
 EXTRA_DIST = \
+advanced.docbook \
 configuration.docbook \
 details.docbook \
 faqs.docbook \
@@ -11,7 +12,6 @@ importing-exporting.docbook \
 index.docbook \
 menus.docbook \
 entry-editor1.png \
-entry-editor2.png \
 entry-editor3.png \
 entry-editor4.png \
 entry-editor5.png \
@@ -27,8 +27,15 @@ fetch-dialog.png \
 export-options.png \
 export-html.png \
 export-csv.png \
+export-pdb.png \
+export-bibtex.png \
 amazon-options.png \
-z3950-options.png
+z3950-options.png \
+externalexec-options.png \
+report-dialog.png \
+loan-dialog.png \
+loan-view.png \
+filter-view.png
 
 
 ####### kdevelop will overwrite this part!!! (end)############

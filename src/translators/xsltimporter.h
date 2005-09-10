@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,7 +25,6 @@ namespace Tellico {
  * The XSLTImporter class takes care of transforming XML data using an XSL stylesheet.
  *
  * @author Robby Stephenson
- * @version $Id: xsltimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class XSLTImporter : public TextImporter {
 Q_OBJECT

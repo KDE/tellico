@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,51 +14,38 @@
 #ifndef TELLICO_KERNEL_H
 #define TELLICO_KERNEL_H
 
-namespace Tellico {
-  class QRegExpDict;
-  namespace Data {
-    class Document;
-    class Collection;
-  }
-}
+#include "datavectors.h"
+#include "borrower.h"
+
+#include <kcommand.h>
 
 class KURL;
 
 class QWidget;
-
-#include <qobject.h>
+class QString;
+class QStringList;
 
 namespace Tellico {
+  class MainWindow;
+  class Filter;
+  namespace Command {
+    class Group;
+  }
+  namespace Data {
+    class Collection;
+  }
 
 /**
  * @author Robby Stephenson
- * @version $Id: tellico_kernel.h 979 2004-12-01 05:26:42Z robby $
  */
-class Kernel : public QObject {
-Q_OBJECT
+class Kernel {
 
 public:
-  /**
-   * Flags used for searching. The options should be bit-wise OR'd together.
-   * @li AllFields - Search through all fields
-   * @li AsRegExp - Use the text as the pattern for a regexp search
-   * @li FindBackwards - search backwards
-   * @li CaseSensitive - Case sensitive search
-   */
-  enum SearchOptions {
-    AllFields     = 1 << 0,
-    AsRegExp      = 1 << 1,
-    FindBackwards = 1 << 2,
-    CaseSensitive = 1 << 3
-  };
-
-  ~Kernel();
-
   static Kernel* self() { return s_self; }
   /**
    * Initializes the singleton. Should just be called once, from Tellico::MainWindow
    */
-  static void init(QObject* parent, const char* name=0) { if(!s_self) s_self = new Kernel(parent, name); }
+  static void init(MainWindow* parent) { if(!s_self) s_self = new Kernel(parent); }
 
   /**
    * Returns a pointer to the parent widget. This is mainly used for error dialogs and the like.
@@ -66,24 +53,13 @@ public:
    * @return The widget pointer
    */
   QWidget* widget() { return m_widget; }
-  /**
-   * Returns a pointer to the document object.
-   *
-   * @return The document pointer
-   */
-  Data::Document* doc() { return m_doc; }
+
   /**
    * Returns the url of the current document.
    *
    * @return The URL
    */
-  const KURL& URL();
-  /**
-   * Returns a pointer to the document's collection.
-   *
-   * @return The collection pointer
-   */
-  Data::Collection* collection();
+  const KURL& URL() const;
   /**
    * Returns a list of the field titles, wraps the call to the collection itself.
    *
@@ -104,19 +80,54 @@ public:
    * @return The field title
    */
   QString fieldTitleByName(const QString& name) const;
-  /**
-   * @param text Text to search for
-   * @param title Title of field to search, or empty for all
-   * @param options The options, bit-wise OR'd together
-   */
-  void searchDocument(const QString& text, const QString& title, int options);
+  QStringList valuesByFieldName(const QString& name) const;
+
+  const QString& entryName() const;
+  int collectionType() const;
+
+  void sorry(const QString& text, QWidget* widget=0);
+
+  void beginCommandGroup(const QString& name);
+  void endCommandGroup();
+  void resetHistory();
+
+  bool addField(Data::Field* field);
+  bool modifyField(Data::Field* field);
+  bool removeField(Data::Field* field);
+
+  void saveEntries(Data::EntryVec oldEntries, Data::EntryVec entries);
+  void removeEntries(Data::EntryVec entries);
+
+  bool addLoans(Data::EntryVec entries);
+  bool modifyLoan(Data::Loan* loan);
+  bool removeLoans(Data::LoanVec loans);
+
+  void addFilter(Filter* filter);
+  bool modifyFilter(Filter* filter);
+  bool removeFilter(Filter* filter);
+
+  void reorderFields(const Data::FieldVec& fields);
+
+  void appendCollection(Data::Collection* coll);
+  void mergeCollection(Data::Collection* coll);
+  void replaceCollection(Data::Collection* coll);
+
+  void renameCollection();
+  const KCommandHistory* commandHistory() { return &m_commandHistory; }
 
 private:
-  Kernel(QObject* parent, const char* name);
   static Kernel* s_self;
 
+  // all constructors are private
+  Kernel(MainWindow* parent);
+  Kernel(const Kernel&);
+  Kernel& operator=(const Kernel&);
+
+  void doCommand(KCommand* command);
+
   QWidget* m_widget;
-  Data::Document* m_doc;
+  KCommandHistory m_commandHistory;
+  Command::Group* m_commandGroup;
 };
 
 } // end namespace

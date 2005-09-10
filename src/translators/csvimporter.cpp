@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,9 @@
 #include "csvimporter.h"
 #include "translators.h" // needed for ImportAction
 #include "../collectionfieldsdialog.h"
-#include "../tellico_kernel.h"
+#include "../document.h"
+#include "../field.h"
+#include "../entry.h"
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -22,6 +24,7 @@
 #include <kcombobox.h>
 #include <knuminput.h>
 #include <kpushbutton.h>
+#include <kaccelmanager.h>
 
 #include <qgroupbox.h>
 #include <qlayout.h>
@@ -50,7 +53,7 @@ CSVImporter::CSVImporter(const KURL& url_) : Tellico::Import::TextImporter(url_)
 
 Tellico::Data::Collection* CSVImporter::collection() {
   // don't just check if m_coll is non-null since the collection can be created elsewhere
-  if(m_coll && !m_coll->entryList().isEmpty()) {
+  if(m_coll && m_coll->entryCount() > 0) {
     return m_coll;
   }
 
@@ -125,8 +128,9 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
 
   QHBox* box = new QHBox(group);
   box->setSpacing(5);
-  (void) new QLabel(i18n("Collection Type:"), box);
+  QLabel* lab = new QLabel(i18n("Collection &type:"), box);
   m_comboType = new KComboBox(box);
+  lab->setBuddy(m_comboType);
   QWhatsThis::add(m_comboType, i18n("Select the type of collection being imported."));
   m_nameMap = CollectionFactory::nameMap();
   m_comboType->insertStringList(m_nameMap.values());
@@ -165,7 +169,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   m_delimiterGroupLayout->addWidget(m_radioTab, 2, 0);
 
   m_radioOther = new QRadioButton(m_delimiterGroup);
-  m_radioOther->setText(i18n("Other"));
+  m_radioOther->setText(i18n("Other:"));
   QWhatsThis::add(m_radioOther, i18n("Use a custom string as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioOther, 2, 1);
 
@@ -206,13 +210,17 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   hbox->setSpacing(5);
   QWhatsThis::add(hbox, i18n("<qt>Set each column to correspond to a field in the collection by choosing "
                              "a column, selecting the field, then clicking the <i>Set</i> button.</qt>"));
-  (void) new QLabel(i18n("Column:"), hbox);
+  lab = new QLabel(i18n("Column:"), hbox);
   m_colSpinBox = new KIntSpinBox(hbox);
   m_colSpinBox->setMinValue(1);
   connect(m_colSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSelectColumn(int)));
-  (void) new QLabel(i18n("Data field in this column:"), hbox);
+  lab->setBuddy(m_colSpinBox);
+
+  lab = new QLabel(i18n("Data field in this column:"), hbox);
   m_comboField = new KComboBox(hbox);
   connect(m_comboField, SIGNAL(activated(int)), SLOT(slotFieldChanged(int)));
+  lab->setBuddy(m_comboField);
+
   m_setColumnBtn = new KPushButton(i18n("Assign Field"), hbox);
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
 
@@ -220,6 +228,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   fillTable();
 
   l->addStretch(1);
+  KAcceleratorManager::manage(m_widget);
   return m_widget;
 }
 
@@ -227,13 +236,13 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
 // or quotes could surround the cell value if either the delimiter or quotes are contained
 // actual quotes may or may not be doubled
 QStringList CSVImporter::splitLine(const QString& line_) {
-  // cache double quote
-  static QString dq = QString(s_quote)+QString(s_quote);
+  // double quote
+  QString dq = QString(s_quote) + QString(s_quote);
   // delimiter length
   unsigned dn = m_delimiter.length();
   // list of eventual field values
   QStringList values;
-  if(dn==0) {
+  if(dn == 0) {
     return values;
   }
   // temporary string to hold splits, and cumulative string for quoted fields
@@ -289,7 +298,7 @@ QStringList CSVImporter::splitLine(const QString& line_) {
   }
 
   // get last word, too
-  tmp = line_.mid(oldpos+dn);
+  tmp = line_.mid(oldpos + dn);
   if(tmp.endsWith(s_quote)) {
     if(inquote) {
       tmp.truncate(tmp.length()-1);
@@ -461,7 +470,7 @@ void CSVImporter::slotFieldChanged(int idx_) {
 }
 
 void CSVImporter::slotActionChanged(int action_) {
-  Data::Collection* m_currColl = Kernel::self()->collection();
+  Data::Collection* m_currColl = Data::Document::self()->collection();
   if(!m_currColl) {
     m_existingCollection = 0;
     return;

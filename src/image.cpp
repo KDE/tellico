@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "image.h"
+#include "tellico_debug.h"
 
 #include <kmdcodec.h>
 #include <kpixmapio.h>
@@ -30,14 +31,12 @@ Image::Image(const QString& filename_) : QImage(filename_) {
   KMD5 md5(byteArray());
   // the id will eventually be used as a filename
   m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
-//  kdDebug() << "ID: " << m_id << endl;
 }
 
 Image::Image(const QImage& img_, const QString& format_) : QImage(img_), m_format(format_) {
   KMD5 md5(byteArray());
   // the id will eventually be used as a filename
   m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
-//  kdDebug() << "ID: " << m_id << endl;
 }
 
 Image::Image(const QByteArray& data_, const QString& format_, const QString& id_)

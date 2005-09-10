@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -52,8 +52,8 @@ BibtexCollection::BibtexCollection(bool addFields_, const QString& title_ /*=nul
   addMacro(QString::fromLatin1("dec"), QString::null);
 }
 
-Tellico::Data::FieldList BibtexCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec BibtexCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
 /******************* General ****************************/
@@ -269,7 +269,7 @@ bool BibtexCollection::deleteField(Field* field_, bool force_) {
   if(!bibtex.isEmpty()) {
     success &= m_bibtexFieldDict.remove(bibtex);
   }
-  return success && Collection::deleteField(field_, force_);
+  return success && Collection::removeField(field_, force_);
 }
 
 Tellico::Data::Field* const BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
@@ -280,8 +280,9 @@ Tellico::Data::Field* const BibtexCollection::fieldByBibtexName(const QString& b
 BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll_) {
   const QString bibtex = QString::fromLatin1("bibtex");
   BibtexCollection* coll = new BibtexCollection(false, coll_->title());
-  for(FieldListIterator fIt(coll_->fieldList()); fIt.current(); ++fIt) {
-    Field* field = new Field(*fIt.current());
+  FieldVec fields = coll_->fields();
+  for(FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+    Field* field = fIt->clone();
     QString name = field->name();
 
     // this first group has bibtex field names the same as their own field name
@@ -314,21 +315,15 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
   }
 
   // also need to add required fields
-  FieldList list = defaultFields();
-  Field* cur = list.first();
-  Field* next = 0;
-  while(cur) {
-    next = list.next();
-    if(coll->fieldByName(cur->name()) == 0 && (cur->flags() & Field::NoDelete)) {
+  FieldVec vec = defaultFields();
+  for(FieldVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
+    if(coll->fieldByName(it->name()) == 0 && (it->flags() & Field::NoDelete)) {
       // but don't add a Bibtex Key if there's already a bibtex-id
-      if(static_cast<Field*>(cur)->property(bibtex) != Latin1Literal("key")
+      if(it->property(bibtex) != Latin1Literal("key")
          || coll->fieldByName(QString::fromLatin1("bibtex-id")) == 0) {
-        coll->addField(cur);
+        coll->addField(it);
       }
-    } else {
-      delete cur;
     }
-    cur = next;
   }
 
   // set the entry-type to book
@@ -338,8 +333,8 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
     entryTypeName = field->name();
   }
 
-  for(EntryListIterator entryIt(coll_->entryList()); entryIt.current(); ++entryIt) {
-    Data::Entry* entry = new Entry(*entryIt.current(), coll);
+  for(EntryVec::ConstIterator entryIt = coll_->entries().begin(); entryIt != coll_->entries().end(); ++entryIt) {
+    Data::Entry* entry = new Entry(*entryIt, coll);
     coll->addEntry(entry);
     if(!entryTypeName.isEmpty()) {
       entry->setField(entryTypeName, QString::fromLatin1("book"));
@@ -349,23 +344,33 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
   return coll;
 }
 
-void BibtexCollection::citeEntries(QFile& lyxpipe_, const EntryList& list_) {
-  if(list_.isEmpty()) {
+QStringList BibtexCollection::bibtexKeys(const EntryVec& entries_) const {
+  QStringList keys;
+  for(Data::EntryVec::ConstIterator it = entries_.begin(); it != entries_.end(); ++it) {
+    keys << BibtexHandler::bibtexKey(it);
+  }
+  return keys;
+}
+
+void BibtexCollection::citeEntries(QFile& lyxpipe_, const EntryVec& entries_) const {
+  if(entries_.isEmpty()) {
     return;
   }
 //  kdDebug() << "BibtexCollection::citeEntries()" << endl;
-  QString refs;
-  for(Data::EntryListIterator it(list_); it.current(); ++it) {
-    refs += BibtexHandler::bibtexKey(it.current());
-    if(!it.atLast()) {
-          // pybliographer uses comma-space, and pyblink expects the space there
-      refs += QString::fromLatin1(", ");
-    }
-  }
+  const QStringList keys = bibtexKeys(entries_);
 
   QTextStream ts(&lyxpipe_);
 //  ts << "LYXSRV:tellico:hello\n";
-  ts << QString::fromLatin1("LYXCMD:tellico:citation-insert:%1\n").arg(refs).latin1();
+  ts << "LYXCMD:tellico:citation-insert:";
+  QStringList::ConstIterator end = keys.end();
+  for(QStringList::ConstIterator it = keys.begin(); it != end; ++it) {
+    ts << (*it).latin1();
+    if(it != keys.fromLast()) {
+      // pybliographer uses comma-space, and pyblink expects the space there
+      ts << ", ";
+    }
+  }
+  ts << "\n";
 //  ts << "LYXSRV:tellico:bye\n";
   lyxpipe_.flush();
 }

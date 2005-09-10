@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -59,11 +59,11 @@ int main(int argc, char* argv[]) {
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
     if(args->count() > 0) {
       if(args->isSet("bibtex")) {
-        tellico->importFile(Tellico::Import::Bibtex, args->url(0));
+        tellico->importFile(Tellico::Import::Bibtex, args->url(0), Tellico::Import::Replace);
       } else if(args->isSet("mods")) {
-        tellico->importFile(Tellico::Import::MODS, args->url(0));
+        tellico->importFile(Tellico::Import::MODS, args->url(0), Tellico::Import::Replace);
       } else if(args->isSet("ris")) {
-        tellico->importFile(Tellico::Import::RIS, args->url(0));
+        tellico->importFile(Tellico::Import::RIS, args->url(0), Tellico::Import::Replace);
       } else {
         tellico->slotFileOpen(args->url(0));
       }
@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
       // is it's set, then go ahead and check for opening previous file
       tellico->initFileOpen(!args->isSet("file"));
     }
-    args->clear();
+    args->clear(); // some memory savings
   }
 
   return app.exec();

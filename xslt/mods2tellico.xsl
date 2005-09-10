@@ -3,16 +3,14 @@
                 xmlns="http://periapsis.org/tellico/"
                 xmlns:mods="http://www.loc.gov/mods/v3"
                 xmlns:l="uri:langs"
-                exclude-result-prefixes="mods"
+                exclude-result-prefixes="mods l"
                 version="1.0">
 
 <!--
    ===================================================================
    Tellico XSLT file - used for importing MODS files.
 
-   $Id: mods2tellico.xsl 964 2004-11-19 06:54:49Z robby $
-
-   Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2005 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -41,6 +39,7 @@
  <l:lang id="jpn">Japanese</l:lang>
  <l:lang id="kor">Korean</l:lang>
  <l:lang id="lat">Latin</l:lang>
+ <l:lang id="lit">Lithuanian</l:lang>
  <l:lang id="nor">Norwegian</l:lang>
  <l:lang id="por">Portuguese</l:lang>
  <l:lang id="rus">Russian</l:lang>
@@ -52,11 +51,11 @@
 <xsl:variable name="langs-top" select="document('')/*/l:langs"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V7.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v7/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V8.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v8/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="7">
+ <tellico syntaxVersion="8">
   <!-- consider it a book collection, type = "2" -->
   <collection title="MODS Import" type="2">
    <fields>
@@ -70,8 +69,8 @@
     <!-- default field list does not include an abstract -->
     <xsl:if test=".//mods:mods/mods:abstract">
      <field flags="0" title="Abstract" format="4" type="2" name="abstract" i18n="true">
-    <prop name="bibtex">abstract</prop>
-   </field>
+      <prop name="bibtex">abstract</prop>
+     </field>
     </xsl:if>
     <!-- default book collection field list does not include an address -->
     <xsl:if test=".//mods:mods/mods:originInfo/mods:place/mods:placeTerm[@type='text']">
@@ -81,8 +80,9 @@
     </xsl:if>
    </fields>
 <!-- for now, go the route of bibliox, and assume only text records
-  with an originInfo/publisher element are actually books -->
-   <xsl:for-each select=".//mods:mods[mods:typeOfResource='text' and mods:originInfo/mods:publisher]">
+     with an originInfo/publisher or identifier[isbn] elements are actually books -->
+   <xsl:for-each select=".//mods:mods[(mods:typeOfResource='text' and 
+                         mods:originInfo/mods:publisher) or mods:identifier[@type='isbn']]">
     <xsl:apply-templates select="."/>
    </xsl:for-each>
   </collection>

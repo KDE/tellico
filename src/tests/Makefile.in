@@ -62,8 +62,8 @@ am_formattest_OBJECTS = formattest.$(OBJEXT)
 #>- formattest_OBJECTS = $(am_formattest_OBJECTS)
 #>+ 1
 formattest_OBJECTS = formattest.$(OBJEXT)
-formattest_DEPENDENCIES = ../field.o $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+formattest_DEPENDENCIES = ../field.o ../tellico_utils.o \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_isbntest_OBJECTS = isbntest.$(OBJEXT)
 #>- isbntest_OBJECTS = $(am_isbntest_OBJECTS)
 #>+ 1
@@ -142,6 +142,7 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+KCAL_LIBS = @KCAL_LIBS@
 KCDDB_LIBS = @KCDDB_LIBS@
 KDECONFIG = @KDECONFIG@
 KDE_EXTRA_RPATH = @KDE_EXTRA_RPATH@
@@ -331,7 +332,7 @@ x_includes = @x_includes@
 x_libraries = @x_libraries@
 INCLUDES = -I.. $(all_includes)
 KDE_OPTIONS = noautodist
-AM_LDFLAGS = $(QT_LDFLAGS) $(KDE_LDFLAGS)
+AM_LDFLAGS = $(QT_LDFLAGS) $(KDE_LDFLAGS) $(X_LDFLAGS)
 #>- METASOURCES = AUTO
 DISTCLEANFILES = *~ *.Po $(CLEANFILES)
 isbntest_SOURCES = isbntest.cpp
@@ -341,7 +342,7 @@ latin1test_LDADD = $(LIB_QT) $(LIB_KDECORE)
 entitytest_SOURCES = entitytest.cpp
 entitytest_LDADD = ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)
 formattest_SOURCES = formattest.cpp
-formattest_LDADD = ../field.o $(LIB_QT) $(LIB_KDECORE)
+formattest_LDADD = ../field.o ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)
 #>- all: all-am
 #>+ 1
 all: docs-am  all-am

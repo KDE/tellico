@@ -30,7 +30,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: pilotdb.h 862 2004-09-15 01:49:51Z robby $
  */
 class PilotDB : public PalmLib::Database {
 public:

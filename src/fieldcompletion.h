@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BOOKCASEFIELDCOMPLETION_H
-#define BOOKCASEFIELDCOMPLETION_H
+#ifndef TELLICOFIELDCOMPLETION_H
+#define TELLICOFIELDCOMPLETION_H
 
 #include <kcompletion.h>
 
@@ -20,7 +20,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: fieldcompletion.h 862 2004-09-15 01:49:51Z robby $
  */
 class FieldCompletion : public KCompletion {
 Q_OBJECT

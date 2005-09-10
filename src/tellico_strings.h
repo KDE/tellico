@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,6 +18,9 @@ namespace Tellico {
   extern const char* errorLoad;
   extern const char* errorWrite;
   extern const char* errorUpload;
+  extern const char* errorAppendType;
+  extern const char* errorMergeType;
+  extern const char* errorImageLoad;
 }
 
 #endif

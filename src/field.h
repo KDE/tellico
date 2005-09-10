@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,17 +11,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FIELD_H
-#define FIELD_H
+#ifndef TELLICO_FIELD_H
+#define TELLICO_FIELD_H
+
+#include "datavectors.h"
+
+#include <ksharedptr.h>
 
 #include <qstringlist.h>
 #include <qstring.h>
-#include <qmap.h>
 #include <qregexp.h>
 
 namespace Tellico {
   namespace Data {
-    typedef QMap<QString, QString> StringMap;
 
 /**
  * The Field class encapsulates all the possible properties of a entry.
@@ -30,9 +32,8 @@ namespace Tellico {
  * along with some flags characterizing certain properties
  *
  * @author Robby Stephenson
- * @version $Id: field.h 1005 2004-12-11 23:08:59Z robby $
  */
-class Field {
+class Field : public KShared {
 public:
   /**
    * The possible field types. A Line is represented by a KLineEdit,
@@ -62,11 +63,16 @@ public:
     Number     = 6,
     URL        = 7,
     Table      = 8,
-    Table2     = 9,
+    Table2     = 9, // deprecated in favor of property("columns")
     Image      = 10,
     Dependent  = 11,
-    Date       = 12
+    Date       = 12,
+    // Michael Zimmermann used 13 for his Keyword field, so go ahead and skip it
+    Rating     = 14 // similar to a Choice field, but allowed values are numbers only
+    // if you add your own field type, best to start at a high number
+    // say 100, to ensure uniqueness
   };
+  typedef QMap<Field::Type, QString> FieldMap;
 
   /**
    * The field flags. The properties should be bit-wise OR'd together.
@@ -132,9 +138,9 @@ public:
   /**
    * Destructor
    */
-  virtual ~Field() {};
+  ~Field();
   // default copy constructor is ok, right?
-  virtual Field* clone() { return new Field(*this); }
+  Field* clone() { return new Field(*this); }
 
   /**
    * Returns the name of the field.
@@ -252,13 +258,13 @@ public:
    * @param key The property key
    * @param value The property value
    */
-  void setProperty(const QString& key, const QString& value) { m_properties.insert(key, value); }
+  void setProperty(const QString& key, const QString& value);
   /**
    * Sets all the extended properties. Any existing ones get erased.
    *
    * @param properties The property list
    */
-  void setPropertyList(const StringMap& properties) { m_properties = properties; }
+  void setPropertyList(const StringMap& properties);
   /**
    * Return a property value.
    *
@@ -392,7 +398,7 @@ public:
   /**
    * Returns a mapping of the FieldType enum to translated titles for the types.
    */
-  static QMap<Field::Type, QString> typeMap();
+  static FieldMap typeMap();
   /**
    * Returns a list of the titles of the field types.
    */
@@ -409,6 +415,9 @@ public:
    * @return The delimeter regexp
    */
   static const QRegExp& delimiter() { return s_delimiter; }
+  /**
+   * reset if the field is a rating field used for syntax version 7 and earlier */
+  static void convertOldRating(Data::Field* field);
 
 private:
   QString m_name;
@@ -431,9 +440,6 @@ private:
   static bool s_autoFormat;
   static QRegExp s_delimiter;
 };
-
-typedef QPtrList<Field> FieldList;
-typedef QPtrListIterator<Field> FieldListIterator;
 
   } // end namespace
 } // end namespace

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,9 +13,9 @@
 
 #include "exportdialog.h"
 #include "collection.h"
-#include "mainwindow.h"
 #include "filehandler.h"
 #include "controller.h"
+#include "document.h"
 
 #include "translators/exporter.h"
 #include "translators/tellicoxmlexporter.h"
@@ -26,6 +26,7 @@
 #include "translators/xsltexporter.h"
 #include "translators/pilotdbexporter.h"
 #include "translators/alexandriaexporter.h"
+#include "translators/onixexporter.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -41,9 +42,9 @@
 
 using Tellico::ExportDialog;
 
-ExportDialog::ExportDialog(Export::Format format_, Data::Collection* coll_, MainWindow* parent_, const char* name_)
+ExportDialog::ExportDialog(Export::Format format_, Data::Collection* coll_, QWidget* parent_, const char* name_)
     : KDialogBase(parent_, name_, true /*modal*/, i18n("Export Options"), Ok|Cancel),
-      m_format(format_), m_coll(coll_), m_exporter(exporter(format_, parent_, coll_)) {
+      m_format(format_), m_coll(coll_), m_exporter(exporter(format_)) {
   QWidget* widget = new QWidget(this);
   QVBoxLayout* topLayout = new QVBoxLayout(widget, 0, spacingHint());
 
@@ -82,9 +83,7 @@ ExportDialog::ExportDialog(Export::Format format_, Data::Collection* coll_, Main
     m_encodeUTF8->setEnabled(false);
     m_encodeLocale->setChecked(true);
 //    m_encodeLocale->setEnabled(false);
-  }
-  // if binary exporter, no neeed for locale info
-  if(!m_exporter->isText()) {
+  } else if(format_ == Export::Alexandria || format_ == Export::PilotDB) {
     bg->setEnabled(false);
   }
   connect(this, SIGNAL(okClicked()), SLOT(slotSaveOptions()));
@@ -102,7 +101,7 @@ QString ExportDialog::fileFilter() {
 void ExportDialog::readOptions() {
   KConfig* config = KGlobal::config();
   config->setGroup("ExportOptions");
-  bool format = config->readBoolEntry("FormatAttributes", false);
+  bool format = config->readBoolEntry("FormatFields", false);
   m_formatFields->setChecked(format);
   bool selected = config->readBoolEntry("ExportSelectedOnly", false);
   m_exportSelected->setChecked(selected);
@@ -119,56 +118,60 @@ void ExportDialog::slotSaveOptions() {
   m_exporter->saveOptions(config);
 
   config->setGroup("ExportOptions");
-  config->writeEntry("FormatAttributes", m_formatFields->isChecked());
+  config->writeEntry("FormatFields", m_formatFields->isChecked());
   config->writeEntry("ExportSelectedOnly", m_exportSelected->isChecked());
   config->writeEntry("EncodeUTF8", m_encodeUTF8->isChecked());
 }
 
 // static
-Tellico::Export::Exporter* ExportDialog::exporter(Export::Format format_, MainWindow* mainwindow_, Data::Collection* coll_) {
+Tellico::Export::Exporter* ExportDialog::exporter(Export::Format format_) {
   Export::Exporter* exporter = 0;
 
   switch(format_) {
     case Export::TellicoXML:
-      exporter = new Export::TellicoXMLExporter(coll_);
+      exporter = new Export::TellicoXMLExporter();
       break;
 
     case Export::HTML:
       {
-        Export::HTMLExporter* htmlExp = new Export::HTMLExporter(coll_);
-        htmlExp->setGroupBy(mainwindow_->groupBy());
-        htmlExp->setSortTitles(mainwindow_->sortTitles());
-        htmlExp->setColumns(mainwindow_->visibleColumns());
+        Export::HTMLExporter* htmlExp = new Export::HTMLExporter();
+        htmlExp->setGroupBy(Controller::self()->expandedGroupBy());
+        htmlExp->setSortTitles(Controller::self()->sortTitles());
+        htmlExp->setColumns(Controller::self()->visibleColumns());
         exporter = htmlExp;
       }
       break;
 
     case Export::CSV:
-      exporter = new Export::CSVExporter(coll_);
+      exporter = new Export::CSVExporter();
       break;
 
     case Export::Bibtex:
-      exporter = new Export::BibtexExporter(coll_);
+      exporter = new Export::BibtexExporter();
       break;
 
     case Export::Bibtexml:
-      exporter = new Export::BibtexmlExporter(coll_);
+      exporter = new Export::BibtexmlExporter();
       break;
 
     case Export::XSLT:
-      exporter = new Export::XSLTExporter(coll_);
+      exporter = new Export::XSLTExporter();
       break;
 
     case Export::PilotDB:
       {
-        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter(coll_);
-        pdbExp->setColumns(mainwindow_->visibleColumns());
+        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter();
+        pdbExp->setColumns(Controller::self()->visibleColumns());
         exporter = pdbExp;
       }
       break;
 
     case Export::Alexandria:
-      exporter = new Export::AlexandriaExporter(coll_);
+      exporter = new Export::AlexandriaExporter();
+      break;
+
+    case Export::ONIX:
+      exporter = new Export::ONIXExporter();
       break;
 
     default:
@@ -188,20 +191,24 @@ bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
 
   // exporter might need to know final URL, say for writing images or something
   m_exporter->setURL(url_);
-  m_exporter->setEntryList(m_exportSelected->isChecked() ? Controller::self()->selectedEntries() : m_coll->entryList());
-
-  if(exportTarget(m_format) == Export::None) {
-    return m_exporter->exportEntries(m_formatFields->isChecked());
+  if(m_exportSelected->isChecked()) {
+    m_exporter->setEntries(Controller::self()->selectedEntries());
   } else {
-    if(m_exporter->isText()) {
-      bool encodeUTF8 = m_encodeUTF8->isChecked();
-      return FileHandler::writeTextURL(url_, m_exporter->text(m_formatFields->isChecked(), encodeUTF8), encodeUTF8);
-    } else {
-      return FileHandler::writeDataURL(url_, m_exporter->data(m_formatFields->isChecked()));
-    }
+    m_exporter->setEntries(m_coll->entries());
   }
+  int opt = Export::ExportImages | Export::ExportComplete; // for now, always export images
+  if(m_formatFields->isChecked()) {
+    opt |= Export::ExportFormatted;
+  }
+  if(m_encodeUTF8->isChecked()) {
+    opt |= Export::ExportUTF8;
+  }
+  m_exporter->setOptions(opt);
+
+  return m_exporter->exec();
 }
 
+// static
 // alexandria is exported to known directory
 // all others are files
 Tellico::Export::Target ExportDialog::exportTarget(Export::Format format_) {
@@ -211,6 +218,29 @@ Tellico::Export::Target ExportDialog::exportTarget(Export::Format format_) {
     default:
       return Export::File;
   }
+}
+
+// static
+bool ExportDialog::exportCollection(Export::Format format_, const KURL& url_) {
+  Export::Exporter* exp = exporter(format_);
+
+  exp->setURL(url_);
+  exp->setEntries(Data::Document::self()->collection()->entries());
+
+  KConfig* config = KGlobal::config();
+  config->setGroup("ExportOptions");
+  int options = 0;
+  if(config->readBoolEntry("FormatFields", false)) {
+    options |= Export::ExportFormatted;
+  }
+  if(config->readBoolEntry("EncodeUTF8", true)) {
+    options |= Export::ExportUTF8;
+  }
+  exp->setOptions(options | Export::ExportForce);
+
+  bool success = exp->exec();
+  delete exp;
+  return success;
 }
 
 #include "exportdialog.moc"

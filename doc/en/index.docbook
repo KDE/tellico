@@ -11,6 +11,7 @@
   <!ENTITY xml "<acronym>XML</acronym>">
   <!ENTITY xslt "<acronym>XSLT</acronym>">
   <!ENTITY html "<acronym>HTML</acronym>">
+  <!ENTITY css "<acronym>CSS</acronym>">
 
   <!ENTITY group-view "<interface>Group View</interface>">
   <!ENTITY detailed-view "<interface>Column View</interface>">
@@ -23,14 +24,19 @@
   <!ENTITY find-dialog "<interface>Find Dialog</interface>">
   <!ENTITY quick-filter "<interface>Quick Filter</interface>">
   <!ENTITY filter-dialog "<interface>Advanced Filter Dialog</interface>">
+  <!ENTITY loan-dialog "<interface>Loan Dialog</interface>">
+  <!ENTITY report-dialog "<interface>Report Dialog</interface>">
   <!ENTITY shortcut-dialog "<interface>Keyboard Shortcut Configuration Dialog</interface>">
   <!ENTITY toolbar-dialog "<interface>Toolbar Configuration Dialog</interface>">
+  <!ENTITY filter-view "<interface>Filter View</interface>">
+  <!ENTITY loan-view "<interface>Loan View</interface>">
   
   <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
   <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
   <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
   <!ENTITY fields-chapter SYSTEM "fields.docbook">
   <!ENTITY menus-chapter SYSTEM "menus.docbook">
+  <!ENTITY advanced-chapter SYSTEM "advanced.docbook">
   <!ENTITY hacking-chapter SYSTEM "hacking.docbook">
   <!ENTITY faqs-chapter SYSTEM "faqs.docbook">
   <!ENTITY details-chapter SYSTEM "details.docbook">
@@ -54,8 +60,8 @@ need them for translation coordination !
 Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
-<date>26/11/2004</date>
-<releaseinfo>0.13</releaseinfo>
+<date>05/08/2005</date>
+<releaseinfo>1.0</releaseinfo>
 
 <title>The &appname; Handbook</title>
 
@@ -76,6 +82,7 @@ Do NOT change these in the translation. -->
 <year>2002</year>
 <year>2003</year>
 <year>2004</year>
+<year>2005</year>
 <holder>&robby;</holder>
 </copyright>
 
@@ -132,7 +139,7 @@ revision history. (see installation appendix comment) -->
 &appname; is a program for managing collections. It began as a simple
 book collection manager, and has expanded to include default
 collection templates for bibliographies, comic books, videos, music,
-coins, stamps, trading cards, and wines. In addition, custom
+coins, stamps, trading cards, video games, and wines. In addition, custom
 collections can be built for any other type of collectibles.
 </para>
 
@@ -145,9 +152,12 @@ an easy way to enter data for each entry. It provides several
 field types, and allows for an unlimited number of
 user-defined fields. The entries in a collection may be grouped by any
 field for easy organization, and customizable views show as much or as
-little information as you like. Full text searching is available, as
-well as filtering to show a subset of your collection. Collections may be
-imported or exported using a variety of formats,  to allow for easy exchange
+little information as you like.
+</para>
+
+<para>
+Loans may be tracked, with optional integration with &korganizer;. Collections may be
+imported or exported using a variety of formats, to allow for easy exchange
 or publication of data.
 </para>
 
@@ -183,10 +193,10 @@ in the <link linkend="gnu-fdl">license declaration</link>.
 <para>
 In &appname;, a collection is the document. Only one collection exists in each &appname;
 file. A collection contains any number of <link linkend="fields">fields</link> and
-<link linkend="entries">entries</link>. &appname; supports nine specific collection types by
+<link linkend="entries">entries</link>. &appname; supports 10 specific collection types by
 default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps,
-and wines. In addition, an empty generic collection template is available for any other type of
-collectibles.
+video games, and wines. In addition, an empty generic collection template is available for any
+other type of collectibles.
 </para>
 </sect2>
 
@@ -227,13 +237,15 @@ does slow down greatly. Future versions will likely address this issue.
 
 &importing-exporting-chapter;
 
-&configuration-chapter;
+&advanced-chapter;
 
-&menus-chapter;
+&configuration-chapter;
 
 &hacking-chapter;
 
 &faqs-chapter;
+
+&menus-chapter;
 
 <chapter id="credits">
 
@@ -248,13 +260,13 @@ file included in the KDE distribution. -->
 &appname;
 </para>
 <para>
-Program copyright 2001-2004 &robby; <email>&email;</email>
+Program copyright 2001-2005 &robby; <email>&email;</email>
 </para>
 <para>
 </para>
 
 <para>
-Documentation copyright 2001-2004 &robby; <email>&email;</email>
+Documentation copyright 2001-2005 &robby; <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -295,7 +307,7 @@ information here.
 <para>
 In order to successfully use &appname;, you need KDE 3.1.x.
 &appname; uses about 5 megabytes of memory to run, but this may vary
-depending on your platform and configuration.
+depending on your platform, configuration, and collection size.
 </para>
 
 <para>

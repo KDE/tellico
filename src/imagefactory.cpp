@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "imagefactory.h"
+#include "document.h"
 
 #include <kstandarddirs.h>
 #include <kapplication.h>
@@ -24,7 +25,7 @@ using Tellico::ImageFactory;
 const Tellico::Data::Image ImageFactory::s_null;
 
 QDict<Tellico::Data::Image> ImageFactory::s_imageDict;
-QDict<int> ImageFactory::s_imageFileDict;
+Tellico::StringSet ImageFactory::s_cachedImages;
 QString ImageFactory::s_tempDir;
 
 const Tellico::Data::Image& ImageFactory::addImage(const KURL& url_, bool quiet_) {
@@ -60,15 +61,20 @@ const Tellico::Data::Image& ImageFactory::addImage(const QImage& image_, const Q
 
 const Tellico::Data::Image& ImageFactory::addImage(const QByteArray& data_, const QString& format_,
                                                    const QString& id_) {
-  const Data::Image& image = imageById(id_);
-  if(!image.isNull()) {
-    return image;
+  if(id_.isEmpty()) {
+    return s_null;
+  }
+
+  Data::Image* img = s_imageDict.find(id_);
+  if(img) {
+//    myDebug() << "ImageFactory::addImage() - image already exists in dict" << endl;
+    return *img;
   }
 
 //  kdDebug() << "ImageFactory::addImage() - " << data_.size()
 //            << " bytes, format = " << format_
 //            << ", id = "<< id_ << endl;
-  Data::Image* img = new Data::Image(data_, format_, id_);
+  img = new Data::Image(data_, format_, id_);
   if(!img->isNull()) {
     s_imageDict.insert(img->id(), img);
   }
@@ -76,12 +82,19 @@ const Tellico::Data::Image& ImageFactory::addImage(const QByteArray& data_, cons
 }
 
 const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
-  if(s_imageDict.isEmpty() || id_.isEmpty()) {
+  if(id_.isEmpty()) {
     return s_null;
   }
   Data::Image* img = s_imageDict.find(id_);
   if(img) {
     return *img;
+  }
+  // try to do a delayed loading of the image
+  if(Data::Document::self()->loadImage(id_)) {
+    img = s_imageDict.find(id_);
+    if(img) {
+      return *img;
+    }
   }
   return s_null;
 }
@@ -91,7 +104,7 @@ void ImageFactory::clean() {
 
   s_imageDict.setAutoDelete(true);
   s_imageDict.clear();
-  s_imageFileDict.clear();
+  s_cachedImages.clear();
 
   if(s_tempDir.isEmpty()) {
     return;
@@ -124,7 +137,7 @@ void ImageFactory::createTempDir() {
 bool ImageFactory::writeImage(const QString& id_, const KURL& targetDir_, bool force_) {
   const Data::Image& img = imageById(id_);
   if(img.isNull()) {
-    kdDebug() << "ImageFactory::writeImage() - null image: " << id_ << endl;
+//    kdDebug() << "ImageFactory::writeImage() - null image: " << id_ << endl;
     return false;
   }
 
@@ -145,12 +158,12 @@ bool ImageFactory::writeImage(const QString& id_, const KURL& targetDir_, bool f
   // - when forced
   // - when the save dir is not the ImageFactory() temp dir
   // - when the save dir _is_ the ImageFactory() but it has not been written yet
-  if(force_ || !track || !s_imageFileDict[id_]) {
+  if(force_ || !track || !s_cachedImages.has(id_)) {
 //    kdDebug() << "writing " << target.prettyURL() << endl;
     success = FileHandler::writeDataURL(target, img.byteArray(), force_);
     // only keep track for images saved in default tmp dir
     if(success && track) {
-      s_imageFileDict.insert(id_, reinterpret_cast<const int *>(1));
+      s_cachedImages.add(id_);
     }
   }
   return success;

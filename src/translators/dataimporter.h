@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,25 +22,30 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: dataimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class DataImporter : public Importer {
 Q_OBJECT
 
 public:
+  enum Source { URL, Text };
+
   /**
    * @param url The URL of the file to import
    */
-  DataImporter(const KURL& url) : Importer(url), m_data(FileHandler::readDataFile(url)) {}
+//  DataImporter(const KURL& url) : Importer(url), m_data(FileHandler::readDataFile(url)), m_source(URL) {}
+  DataImporter(const KURL& url) : Importer(url), m_source(URL) { m_fileRef = FileHandler::fileRef(url); }
   /**
    * Since the conversion to a QCString appends a \0 character at the end, remove it.
    *
    * @param text The XML text. It MUST be in UTF-8.
    */
-  DataImporter(const QString& text) : Importer(KURL()), m_data(text.utf8()) { m_data.truncate(m_data.size()-1); }
+  DataImporter(const QString& text) : Importer(KURL()), m_data(text.utf8()), m_source(Text), m_fileRef(0)
+    { m_data.truncate(m_data.size()-1); }
   /**
    */
-  virtual ~DataImporter() {}
+  virtual ~DataImporter() { delete m_fileRef; m_fileRef = 0; }
+
+  Source source() const { return m_source; }
 
 protected:
   /**
@@ -49,9 +54,12 @@ protected:
    * @return the file data
    */
   const QByteArray& data() const { return m_data; }
+  FileHandler::FileRef& fileRef() const { return *m_fileRef; }
 
 private:
   QByteArray m_data;
+  const Source m_source;
+  FileHandler::FileRef* m_fileRef;
 };
 
   } // end namespace

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -79,11 +79,11 @@ QWidget* XSLTImporter::widget(QWidget* parent_, const char* name_) {
   QGroupBox* box = new QGroupBox(1, Qt::Vertical, i18n("XSLT Options"), m_widget);
   l->addWidget(box);
 
-  (void) new QLabel(i18n("XSLT File:"), box);
+  (void) new QLabel(i18n("XSLT file:"), box);
   m_URLRequester = new KURLRequester(box);
 
-  QString filter = i18n("*.xsl|XSL files (*.xsl)") + QChar('\n');
-  filter += i18n("*|All files");
+  QString filter = i18n("*.xsl|XSL Files (*.xsl)") + QChar('\n');
+  filter += i18n("*|All Files");
   m_URLRequester->setFilter(filter);
 
   l->addStretch(1);

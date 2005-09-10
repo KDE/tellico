@@ -2,7 +2,7 @@
 
 SUBDIRS = src po doc icons xslt admin
 
-EXTRA_DIST = COPYING ChangeLog INSTALL README TODO tellico.lsm tellico.spec tellico.dtd x-tellico.desktop configure.in.in AUTHORS NEWS tellico.tips tellico.desktop tellico-rename.upd
+EXTRA_DIST = COPYING ChangeLog INSTALL README TODO tellico.lsm tellico.spec tellico.dtd x-tellico.desktop configure.in.in AUTHORS NEWS tellico.tips tellico.desktop tellico-rename.upd tellico.upd
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
@@ -32,7 +32,7 @@ localdir = $(kde_datadir)/tellico
 local_DATA = tellico.dtd tellico.tips
 
 updatedir = $(kde_datadir)/kconf_update
-update_DATA = tellico-rename.upd
+update_DATA = tellico-rename.upd tellico.upd
 
 CLEANFILES = *~ *.loT
 
@@ -47,9 +47,13 @@ package-messages:
 
 messages:
 	rm -f tips.cpp; \
-	$(PREPARETIPS) < tellico.tips > tips.cpp; \
+	./preparetips < tellico.tips > tips.cpp; \
 	$(XGETTEXT) tips.cpp --join-existing -o $(podir)/tellico.pot; \
 	rm -f tips.cpp
+	rm -f xslt.cpp; \
+	./prepare_i18n_xslt > xslt.cpp; \
+	$(XGETTEXT) xslt.cpp --join-existing -o $(podir)/tellico.pot; \
+	rm -f xslt.cpp
 
 dist-hook:
 # am_edit needs to modify the Makefile.in files, so they must be writeable
@@ -61,8 +65,8 @@ dist-hook:
 # remove any executable
 	rm -rf $(distdir)/src/tellico
 
-PUBLIC_ID=-//Robby Stephenson/DTD Tellico V7.0//EN
-SYSTEM_ID=http://www.periapsis.org/tellico/dtd/v7/tellico.dtd
+PUBLIC_ID=-//Robby Stephenson/DTD Tellico V8.0//EN
+SYSTEM_ID=http://www.periapsis.org/tellico/dtd/v8/tellico.dtd
 
 install-data-local:
 	@if test x"@XML_CATALOG_FILE@" != x; then \

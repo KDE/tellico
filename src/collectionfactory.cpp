@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,6 +21,8 @@
 #include "collections/stampcollection.h"
 #include "collections/cardcollection.h"
 #include "collections/winecollection.h"
+#include "collections/gamecollection.h"
+#include "field.h"
 
 #include <kdebug.h>
 
@@ -63,6 +65,10 @@ Tellico::Data::Collection* CollectionFactory::collection(Data::Collection::Type 
 
     case Data::Collection::ComicBook:
       return new Data::ComicBookCollection(addFields_);
+      break;
+
+    case Data::Collection::Game:
+      return new Data::GameCollection(addFields_);
       break;
 
     case Data::Collection::Base:
@@ -114,6 +120,8 @@ Tellico::Data::Collection* CollectionFactory::collection(const QString& entryNam
     return new Data::StampCollection(addFields_);
   } else if(entryName_ == entryName(Data::Collection::Wine)) {
     return new Data::WineCollection(addFields_);
+  } else if(entryName_ == entryName(Data::Collection::Game)) {
+    return new Data::GameCollection(addFields_);
   } else {
     kdWarning() << "CollectionFactory::collection() - collection type not implemented: " << entryName_ << endl;
     return 0;
@@ -131,6 +139,7 @@ Tellico::CollectionNameMap CollectionFactory::nameMap() {
   map[Data::Collection::Stamp]  = i18n("Stamp Collection");
   map[Data::Collection::Wine]   = i18n("Wine Collection");
   map[Data::Collection::Card]   = i18n("Card Collection");
+  map[Data::Collection::Game]   = i18n("Game Collection");
   map[Data::Collection::Base]   = i18n("Custom Collection");
   return map;
 }
@@ -171,6 +180,10 @@ QString CollectionFactory::entryName(Data::Collection::Type type_) {
 
     case Data::Collection::ComicBook:
       return QString::fromLatin1("comic");
+      break;
+
+    case Data::Collection::Game:
+      return QString::fromLatin1("game");
       break;
 
     case Data::Collection::Base:

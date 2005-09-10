@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2004 by Robby Stephenson
+    copyright            : (C) 2002-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,12 +15,16 @@
 #include "collection.h"
 #include "imagefactory.h"
 #include "controller.h"
+#include "entry.h"
+#include "field.h"
+#include "tellico_utils.h"
 
-#include <kglobal.h>
-#include <kiconloader.h>
 #include <kdebug.h>
 #include <kpopupmenu.h>
 #include <kstringhandler.h>
+#include <kapplication.h>
+#include <kglobal.h> // needed for KMAX
+#include <kiconloader.h>
 
 namespace {
   static const uint MIN_ENTRY_ICON_SIZE = 32;
@@ -32,7 +36,7 @@ using Tellico::EntryIconView;
 using Tellico::EntryIconViewItem;
 
 EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
-    : KIconView(parent_, name_), m_coll(0), m_group(0), m_maxIconWidth(MAX_ENTRY_ICON_SIZE) {
+    : KIconView(parent_, name_), m_coll(0), m_maxIconWidth(MAX_ENTRY_ICON_SIZE) {
   setAutoArrange(true);
   setSorting(true);
   setItemsMovable(false);
@@ -42,7 +46,7 @@ EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
   setSpacing(4);
 //  setWordWrapIconText(false);
 
-  m_defaultPixmap = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("tellico"), KIcon::User);
+  m_defaultPixmap = UserIcon(QString::fromLatin1("tellico"));
 
   m_itemMenu = new KPopupMenu(this);
   Controller::self()->plugEntryActions(m_itemMenu);
@@ -55,13 +59,14 @@ EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
 
 void EntryIconView::findImageField() {
   m_imageField.truncate(0);
-  if(!m_coll && (!m_group || m_group->isEmpty())) {
+  if(!m_coll) {
     return;
   }
-  const Data::FieldList& list = m_coll ? m_coll->imageFields() : m_group->getFirst()->collection()->imageFields();
-  if(!list.isEmpty()) {
-    m_imageField = list.getFirst()->name();
+  const Data::FieldVec& fields = m_coll->imageFields();
+  if(!fields.isEmpty()) {
+    m_imageField = fields[0]->name();
   }
+//  kdDebug() << "EntryIconView::findImageField() - image field = " << m_imageField << endl;
 }
 
 const QString& EntryIconView::imageField() {
@@ -76,14 +81,17 @@ void EntryIconView::setMaxIconWidth(uint width_) {
   refresh();
 }
 
-void EntryIconView::fillView(const Data::EntryList& list_) {
+void EntryIconView::fillView() {
   setSorting(false);
   setGridX(m_maxIconWidth + 2*ENTRY_ICON_SIZE_PAD); // set default spacing initially
+
+  GUI::CursorSaver cs(Qt::waitCursor);
+
   int maxWidth = MIN_ENTRY_ICON_SIZE;
   int maxHeight = 0;
   QIconViewItem* item;
-  for(Data::EntryListIterator it(list_); it.current(); ++it) {
-    item = new EntryIconViewItem(this, it.current());
+  for(Data::EntryVecIt it = m_entries.begin(); it != m_entries.end(); ++it) {
+    item = new EntryIconViewItem(this, it);
     maxWidth = KMAX(maxWidth, item->width());
     maxHeight = KMAX(maxWidth, item->pixmapRect().height());
   }
@@ -94,56 +102,39 @@ void EntryIconView::fillView(const Data::EntryList& list_) {
 }
 
 void EntryIconView::refresh() {
-  if(!m_coll && !m_group) {
+  if(!m_coll) {
     return;
   }
-  // force a reset of the image field
-  m_imageField.truncate(0);
-  if(m_coll) {
-    showCollection(m_coll);
-  } else {
-    showEntryGroup(m_group);
-  }
+  showEntries(m_entries);
 }
 
 void EntryIconView::clear() {
-  QIconView::clear();
+  KIconView::clear();
   m_coll = 0;
-  m_group = 0;
+  m_entries.clear();
   m_imageField.truncate(0);
 }
 
-void EntryIconView::showCollection(const Data::Collection* coll_) {
-  QIconView::clear();
-  m_coll = 0;
-  m_group = 0;
-  // don't call clear(), forces unneccesary resetting of the imageField name
-  if(!coll_) {
+void EntryIconView::showEntries(const Data::EntryVec& entries_) {
+  setUpdatesEnabled(false);
+  KIconView::clear(); // don't call EntryIconView::clear() since that clears the entries_ ref
+  if(entries_.isEmpty()) {
     return;
   }
-  m_coll = coll_;
+  m_coll = entries_[0]->collection();
+  m_entries = entries_;
   findImageField();
-  fillView(coll_->entryList());
-}
-
-void EntryIconView::showEntryGroup(const Data::EntryGroup* group_) {
-  QIconView::clear();
-  m_coll = 0;
-  m_group = 0;
-  // don't call clear(), forces unneccesary resetting of the imageField name
-  if(!group_) {
-    return;
-  }
-  m_group = group_;
-  findImageField();
-  fillView(*group_);
+  fillView();
+  setUpdatesEnabled(true);
 }
 
 void EntryIconView::addEntry(Data::Entry* entry_) {
+  m_entries.append(entry_);
   new EntryIconViewItem(this, entry_);
 }
 
 void EntryIconView::removeEntry(Data::Entry* entry_) {
+  m_entries.remove(entry_);
   for(QIconViewItem* item = firstItem(); item; item = item->nextItem()) {
     if(static_cast<EntryIconViewItem*>(item)->entry() == entry_) {
       m_selectedItems.removeRef(static_cast<EntryIconViewItem*>(item));
@@ -155,12 +146,12 @@ void EntryIconView::removeEntry(Data::Entry* entry_) {
 }
 
 void EntryIconView::slotSelectionChanged() {
-  Data::EntryList list;
+  Data::EntryVec entries;
   const QPtrList<EntryIconViewItem>& items = selectedItems();
   for(QPtrListIterator<EntryIconViewItem> it(items); it.current(); ++it) {
-    list.append(it.current()->entry());
+    entries.append(it.current()->entry());
   }
-  Controller::self()->slotUpdateSelection(this, list);
+  Controller::self()->slotUpdateSelection(this, entries);
 }
 
 void EntryIconView::slotDoubleClicked(QIconViewItem* item_) {
@@ -181,13 +172,6 @@ void EntryIconView::updateSelected(EntryIconViewItem* item_, bool s_) const {
 void EntryIconView::slotShowContextMenu(QIconViewItem* item_, const QPoint& point_) {
   if(item_ && m_itemMenu->count() > 0) {
     m_itemMenu->popup(point_);
-  }
-}
-
-// sole purpose is to nullify group pointer when it gets deleted
-void EntryIconView::slotGroupModified(Tellico::Data::Collection*, const Data::EntryGroup* group_) {
-  if(group_ == m_group && m_group->isEmpty()) {
-    clear();
   }
 }
 

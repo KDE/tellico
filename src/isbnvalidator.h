@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2004 by Robby Stephenson
+    copyright            : (C) 2002-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,7 +20,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: isbnvalidator.h 862 2004-09-15 01:49:51Z robby $
  *
  * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
  * @see http://www.eblong.com/zarf/bookscan/

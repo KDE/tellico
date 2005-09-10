@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,6 +14,7 @@
 #include "bibteximporter.h"
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
+#include "../entry.h"
 #include "../latin1literal.h"
 
 #include <kdebug.h>
@@ -30,6 +31,10 @@ BibtexImporter::BibtexImporter(const KURL& url_) : Tellico::Import::TextImporter
 
 BibtexImporter::~BibtexImporter() {
   bt_cleanup();
+}
+
+bool BibtexImporter::canImport(int type) const {
+  return type == Data::Collection::Bibtex;
 }
 
 Tellico::Data::Collection* BibtexImporter::collection() {

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,26 +16,28 @@
 
 class QPushButton;
 
-#include "fieldwidget.h"
-#include "entry.h" // needed for EntryList definition
-#include "field.h"
+#include "observer.h"
+#include "datavectors.h"
+#include "gui/fieldwidget.h"
 
 #include <kdialogbase.h>
 
 #include <qdict.h>
 
 namespace Tellico {
-  class TabControl;
+  namespace GUI {
+    class TabControl;
+    class FieldWidget;
+  }
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryeditdialog.h 862 2004-09-15 01:49:51Z robby $
  */
-class EntryEditDialog : public KDialogBase {
+class EntryEditDialog : public KDialogBase, public Observer {
 Q_OBJECT
 
 // needed for completion object support
-friend class FieldWidget;
+friend class GUI::FieldWidget;
 
 public:
   EntryEditDialog(QWidget* parent, const char* name);
@@ -54,30 +56,37 @@ public:
    */
   void setLayout(Data::Collection* coll);
   /**
-   * Sets the contents of the input controls to match the contents of a entry.
-   *
-   * @param entry A pointer to the entry
-   * @param highlight An optional string to highlight
-   */
-  void setContents(Data::Entry* entry, const QString& highlight=QString::null);
-  /**
    * Sets the contents of the input controls to match the contents of a list of entries.
    *
    * @param list A list of the entries. The data in the first one will be inserted in the controls, and
    * the widgets will be enabled or not, depending on whether the rest of the entries match the first one.
    */
-  void setContents(const Data::EntryList& list);
+  void setContents(Data::EntryVec entries);
   /**
    * Clears all of the input controls in the widget. The pointer to the
    * current entry is nullified, but not the pointer to the current collection.
    */
   void clear();
+
+  virtual void    addEntry(Data::Entry* entry) { updateCompletions(entry); }
+  virtual void modifyEntry(Data::Entry* entry) { updateCompletions(entry); }
+
+  virtual void    addField(Data::Collection* coll, Data::Field*) { setLayout(coll); }
+  /**
+   * Updates a widget when its field has been modified. The category may have changed, completions may have
+   * been added or removed, or what-have-you.
+   *
+   * @param coll A pointer to the parent collection
+   * @param oldField A pointer to the old field, which should have the same name as the new one
+   * @param newField A pointer to the new field
+   */
+  virtual void modifyField(Data::Collection* coll, Data::Field* oldField, Data::Field* newField);
   /**
    * Removes a field from the editor.
    *
    * @param field The field to be removed
    */
-  void removeField(Data::Field* field);
+  virtual void removeField(Data::Collection*, Data::Field* field);
 
 public slots:
   /**
@@ -88,13 +97,6 @@ public slots:
    * Resets the widget, deleting all of its contents
    */
   void slotReset();
-  /**
-   * Updates the completion objects in the edit boxes to include values
-   * contained in a certain entry.
-   *
-   * @param entry A pointer to the entry
-   */
-  void slotUpdateCompletions(Tellico::Data::Entry* entry);
   /**
    * Handles clicking the New button. The old entry pointer is destroyed and a
    * new one is created, but not added to any collection.
@@ -111,35 +113,33 @@ public slots:
    * from a @ref FieldEditWidget.
    */
   void slotSetModified(bool modified=true);
-  /**
-   * Updates a widget when its field has been modified. The category may have changed, completions may have
-   * been added or removed, or what-have-you.
-   *
-   * @param coll A pointer to the parent collection
-   * @param newField A pointer to the new field
-   * @param oldField A pointer to the old field, which should have the same name as the new one
-   */
-  void slotUpdateField(Tellico::Data::Collection* coll, Tellico::Data::Field* newField, Tellico::Data::Field* oldField);
-
-signals:
-  /**
-   * Signals a desire on the part of the user to save a entry to a collection.
-   *
-   * @param entry A pointer to the entry to be saved
-   */
-  void signalSaveEntries(const Tellico::Data::EntryList& entryList);
 
 private:
-  Data::Collection* m_currColl;
-  Data::EntryList m_currEntries;
-  TabControl* m_tabs;
-  QDict<FieldWidget> m_widgetDict;
+  /**
+   * Sets the contents of the input controls to match the contents of a entry.
+   *
+   * @param entry A pointer to the entry
+   * @param highlight An optional string to highlight
+   */
+  void setContents(Data::Entry* entry);
+  /**
+   * Updates the completion objects in the edit boxes to include values
+   * contained in a certain entry.
+   *
+   * @param entry A pointer to the entry
+   */
+  void updateCompletions(Data::Entry* entry);
+
+  KSharedPtr<Data::Collection> m_currColl;
+  Data::EntryVec m_currEntries;
+  GUI::TabControl* m_tabs;
+  QDict<GUI::FieldWidget> m_widgetDict;
   QPushButton* m_new;
   QPushButton* m_save;
 
   bool m_modified;
   bool m_isOrphan;
-  bool m_isSaving;
+  bool m_isWorking;
 };
 
 } // end namespace

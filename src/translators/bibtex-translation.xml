@@ -4,7 +4,7 @@
 <!-- The first string element should be the correct representation -->
 <!-- Most of these key mappings were taken, with permission, from the -->
 <!-- CharacterConversion.plist file in the Bibdesk program by Michael McCracken -->
-<keymap version="0.8">
+<keymap version="1.0">
   <key char="Å">
     <string>{\AA}</string>
   </key>

@@ -3,16 +3,16 @@ bin_PROGRAMS = tellico
 
 ## INCLUDES were found outside kdevelop specific part
 
-tellico_SOURCES = entryview.cpp collection.cpp mainwindow.cpp \
-controller.cpp kwidgetlister.cpp isbnvalidator.cpp finddialog.cpp \
-configdialog.cpp main.cpp image.cpp collectionfactory.cpp \
-collectionfieldsdialog.cpp detailedlistview.cpp document.cpp entry.cpp \
-entryitem.cpp exportdialog.cpp field.cpp fieldwidget.cpp filehandler.cpp \
-filter.cpp filterdialog.cpp groupview.cpp importdialog.cpp labelaction.cpp \
-tabcontrol.cpp imagewidget.cpp fieldcompletion.cpp imagefactory.cpp \
-stringmapdialog.cpp entryeditdialog.cpp fetchdialog.cpp tellico_kernel.cpp \
-viewstack.cpp entryiconview.cpp datewidget.cpp multiselectionlistview.cpp \
-ratingwidget.cpp tellico_strings.cpp tellico_utils.cpp
+tellico_SOURCES = borrowerdialog.cpp entryitem.cpp importdialog.cpp \
+		borroweritem.cpp entryview.cpp isbnvalidator.cpp exportdialog.cpp collection.cpp \
+		fetchdialog.cpp collectionfactory.cpp fieldcompletion.cpp collectionfieldsdialog.cpp \
+		field.cpp main.cpp configdialog.cpp mainwindow.cpp controller.cpp filehandler.cpp \
+		filter.cpp filterdialog.cpp reportdialog.cpp dcopinterface.skel filteritem.cpp \
+		detailedlistview.cpp document.cpp tellico_kernel.cpp entry.cpp groupview.cpp \
+		tellico_strings.cpp entryeditdialog.cpp image.cpp tellico_utils.cpp entrygroupitem.cpp \
+		imagefactory.cpp viewstack.cpp entryiconview.cpp borrower.cpp loandialog.cpp \
+		loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
+		entryiconfactory.cpp dcopinterface.cpp tellico_debug.h
 
 if !USE_LIBBTPARSE
   LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
@@ -20,42 +20,56 @@ endif
 
 tellico_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
         ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
-        ./translators/pilotdb/libflatfile/liblibflatfile.a \
-        ./translators/pilotdb/libpalm/liblibpalm.a -lkdeprint -lexslt \
+        ./translators/pilotdb/libflatfile/liblibflatfile.a ./gui/libgui.a \
+        ./translators/pilotdb/libpalm/liblibpalm.a ./commands/libcommands.a \
+	-lexslt \
         $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
         $(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS) \
+        $(LIB_KIO) $(LIB_KDEPRINT) $(LIB_KABC) $(KCAL_LIBS) \
         $(LDADD_LIBBTPARSE)
 
-SUBDIRS = collections translators fetch tests
+SUBDIRS = gui collections translators fetch tests commands
 
 EXTRA_DIST = tellicoui.rc \
-collection.cpp              entryview.h          imagefactory.h \
-collectionfactory.cpp       exportdialog.cpp     image.h \
-collectionfactory.h         exportdialog.h       imagewidget.cpp \
-collectionfieldsdialog.cpp  fieldcompletion.cpp  imagewidget.h \
-collectionfieldsdialog.h    fieldcompletion.h    importdialog.cpp \
-collection.h                field.cpp            importdialog.h \
-configdialog.cpp            field.h              isbnvalidator.cpp \
-configdialog.h              fieldwidget.cpp      isbnvalidator.h \
-controller.cpp              fieldwidget.h        kwidgetlister.cpp \
-controller.h                filehandler.cpp      kwidgetlister.h \
-detailedlistview.cpp        filehandler.h        labelaction.cpp \
-detailedlistview.h          filter.cpp           labelaction.h \
-document.cpp                filterdialog.cpp     main.cpp \
-document.h                  filterdialog.h       mainwindow.cpp \
-entry.cpp                   filter.h             mainwindow.h \
-entryeditdialog.cpp         finddialog.cpp       stringmapdialog.cpp \
-entryeditdialog.h           finddialog.h         stringmapdialog.h \
-entry.h                     groupview.cpp        latin1literal.h \
-entryitem.cpp               groupview.h          tabcontrol.cpp \
-entryitem.h                 image.cpp            tabcontrol.h \
-entryview.cpp               imagefactory.cpp     tellico_utils.h \
-fetchdialog.h               fetchdialog.cpp      tellico_kernel.h \
-tellico_kernel.cpp          viewstack.h          viewstack.cpp \
-entryiconview.h             entryiconview.cpp    datewidget.h \
-datewidget.cpp              multiselectionlistview.h \
-multiselectionlistview.cpp  ratingwidget.h       ratingwidget.cpp \
-tellico_strings.h           tellico_strings.cpp  tellico_utils.cpp
+borrowerdialog.cpp          entryiconview.h\
+borrowerdialog.h            entryitem.cpp        importdialog.cpp \
+borrower.h                  entryitem.h          importdialog.h \
+borroweritem.cpp            entryview.cpp        isbnvalidator.cpp \
+borroweritem.h              entryview.h          isbnvalidator.h \
+loanview.cpp            exportdialog.cpp     \
+loanview.h              exportdialog.h       \
+collection.cpp              fetchdialog.cpp      \
+collectionfactory.cpp       fetchdialog.h        \
+collectionfactory.h         fieldcompletion.cpp  latin1literal.h \
+collectionfieldsdialog.h    collectionfieldsdialog.cpp  fieldcompletion.h    \
+collection.h                field.h              main.cpp \
+configdialog.cpp            mainwindow.cpp \
+configdialog.h              mainwindow.h \
+controller.cpp              filehandler.cpp      \
+controller.h                filehandler.h        \
+             filter.cpp     filterdialog.cpp \
+              filterdialog.h       reportdialog.cpp \
+                filter.h             reportdialog.h \
+dcopinterface.h             filteritem.cpp       \
+dcopinterface.cpp           filteritem.h         \
+detailedlistview.cpp               \
+detailedlistview.h                 \
+document.cpp                tellico_kernel.cpp \
+document.h                  tellico_kernel.h \
+entry.cpp                   groupview.cpp        tellico_strings.cpp \
+entryeditdialog.cpp         groupview.h          tellico_strings.h \
+entryeditdialog.h           image.cpp            tellico_utils.cpp \
+entrygroupitem.cpp          imagefactory.cpp     tellico_utils.h \
+entrygroupitem.h            imagefactory.h       viewstack.cpp \
+entry.h                     image.h              viewstack.h \
+entryiconview.cpp           loandialog.h \
+loandialog.cpp ptrvector.h borrower.cpp datavectors.h \
+calendarhandler.h calendarhandler.cpp \
+loanitem.h loanitem.cpp groupiterator.h groupiterator.cpp \
+stringset.h observer.h filterview.h filterview.cpp \
+entryiconfactory.h entryiconfactory.cpp \
+tellico_debug.h
+
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -80,7 +94,7 @@ tellico_strings.h           tellico_strings.cpp  tellico_utils.cpp
 # kde_designerdir     Where Qt Designer plugins should go to (new in KDE 3).
 
 # set the include path for X, qt and KDE
-INCLUDES= $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
+INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
 
 METASOURCES = AUTO
 
@@ -101,3 +115,4 @@ messages: rc.cpp
         fi
 
 #include ../admin/Doxyfile.am
+

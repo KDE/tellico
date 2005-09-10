@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,19 +14,25 @@
 #ifndef COLLECTION_H
 #define COLLECTION_H
 
-#include "collection.h"
+#include "field.h"
 #include "entry.h"
+#include "filter.h"
+#include "borrower.h"
+#include "datavectors.h"
 
 #include <klocale.h>
+#include <ksharedptr.h>
 
 #include <qstringlist.h>
 #include <qptrlist.h>
 #include <qstring.h>
 #include <qdict.h>
+#include <qintdict.h>
 #include <qobject.h>
 
 namespace Tellico {
   namespace Data {
+    class EntryGroup;
     typedef QDict<EntryGroup> EntryGroupDict;
 
 /**
@@ -41,9 +47,8 @@ namespace Tellico {
  * @see Field
  *
  * @author Robby Stephenson
- * @version $Id: collection.h 950 2004-11-15 04:46:42Z robby $
  */
-class Collection : public QObject {
+class Collection : public QObject, public KShared {
 Q_OBJECT
 
 public:
@@ -57,7 +62,9 @@ public:
     Wine = 7,
     Coin = 8,
     Stamp = 9,
-    Card = 10
+    Card = 10,
+    Game = 11
+    // if you want to add custom collection types, use a numebr sure to be unique like 101
   };
 
   /**
@@ -124,33 +131,30 @@ public:
    */
   void setIconName(const QString& name) { m_iconName = name; }
   /**
-   * Returns the id for the next entry to be added.
-   */
-  int nextEntryId() const { return ++m_nextEntryId; }
-  /**
    * Returns a reference to the list of all the entries in the collection.
    *
    * @return The list of entries
    */
-  const EntryList& entryList() const { return m_entryList; }
+  const EntryVec& entries() const { return m_entries; }
   /**
    * Returns a reference to the list of the collection attributes.
    *
    * @return The list of fields
    */
-  const FieldList& fieldList() const { return m_fieldList; }
+  const FieldVec& fields() const { return m_fields; }
+  Entry* entryById(int id);
   /**
    * Returns a reference to the list of the collection's people fields.
    *
    * @return The list of fields
    */
-  const FieldList& peopleFields() const { return m_peopleFields; }
+  const FieldVec& peopleFields() const { return m_peopleFields; }
   /**
    * Returns a reference to the list of the collection's image fields.
    *
    * @return The list of fields
    */
-  const FieldList& imageFields() const { return m_imageFields; }
+  const FieldVec& imageFields() const { return m_imageFields; }
   /**
    * Returns a reference to the list of field groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.
@@ -175,7 +179,7 @@ public:
    *
    * @return The number of entries
    */
-  unsigned entryCount() const { return m_entryList.count(); }
+  size_t entryCount() const { return m_entries.count(); }
   /**
    * Adds a entry to the collection. The collection takes ownership of the entry object.
    *
@@ -194,7 +198,7 @@ public:
    * @param entry The pointer to the entry
    * @return A boolean indicating if the entry was in the collection and was deleted
    */
-  bool deleteEntry(Entry* entry);
+  bool removeEntry(Entry* entry);
   /**
    * Adds a whole list of attributes. It's gotta be virtual since it calls
    * @ref addField, which is virtual.
@@ -202,7 +206,7 @@ public:
    * @param list List of attributes to add
    * @return A boolean indicating if the field was added or not
    */
-  virtual bool addFields(const FieldList& list);
+  virtual bool addFields(FieldVec list);
   /**
    * Adds an field to the collection, unless an field with that name
    * already exists. The collection takes ownership of the field object.
@@ -213,9 +217,9 @@ public:
   virtual bool addField(Field* field);
   virtual bool mergeField(Field* field);
   virtual bool modifyField(Field* field);
-  virtual bool deleteField(Field* field, bool force=false);
-  virtual bool deleteField(const QString& name, bool force=false);
-  void reorderFields(const FieldList& list);
+  virtual bool removeField(Field* field, bool force=false);
+  virtual bool removeField(const QString& name, bool force=false);
+  void reorderFields(const FieldVec& list);
 
   /**
    * Determines whether or not a certain value is allowed for an field.
@@ -267,7 +271,7 @@ public:
    * @param category The name of the category
    * @return The field list
    */
-  FieldList fieldsByCategory(const QString& category) const;
+  FieldVec fieldsByCategory(const QString& category);
   /**
    * Returns a pointer to an field given its name. If none is found, a NULL pointer
    * is returned.
@@ -300,13 +304,6 @@ public:
    */
   EntryGroupDict* const entryGroupDictByName(const QString& name) const;
   /**
-   * A helper method to emit @ref signalGroupModified, since signals are not public
-   * This typically gets called via a entry.
-   *
-   * @param group The group that was modified
-   */
-  void groupModified(EntryGroup* group);
-  /**
    * Invalidates all group names in the collection.
    */
   void invalidateGroups();
@@ -316,6 +313,13 @@ public:
    * @return Returns true if the collection contains at least one Image field;
    */
   bool hasImages() const { return !m_imageFields.isEmpty(); }
+
+  void addBorrower(Data::Borrower* borrower);
+  const BorrowerVec& borrowers() const { return m_borrowers; }
+
+  void addFilter(Filter* filter);
+  bool removeFilter(Filter* filter);
+  const FilterVec& filters() const { return m_filters; }
 
   /**
    * The string used for empty values. This forces consistency.
@@ -327,11 +331,7 @@ public:
   static const QString s_peopleGroupName;
 
 signals:
-  void signalGroupModified(Tellico::Data::Collection* coll, const Tellico::Data::EntryGroup* group);
-  void signalFieldAdded(Tellico::Data::Collection* coll, Tellico::Data::Field* field);
-  void signalFieldModified(Tellico::Data::Collection* coll, Tellico::Data::Field* newField, Tellico::Data::Field* oldField);
-  void signalFieldDeleted(Tellico::Data::Collection* coll, Tellico::Data::Field* field);
-  void signalFieldsReordered(Tellico::Data::Collection* coll);
+  void signalGroupModified(Tellico::Data::Collection* coll, Tellico::Data::EntryGroup* group);
   void signalRefreshField(Tellico::Data::Field* field);
 
 protected:
@@ -355,26 +355,29 @@ private:
   Collection operator=(const Collection& coll);
 
   int m_id;
-  mutable int m_nextEntryId;
   QString m_title;
   QString m_entryName;
   QString m_entryTitle;
   QString m_iconName;
   QString m_defaultGroupField;
 
-  FieldList m_fieldList;
-  FieldList m_peopleFields; // keep separate list of attributes for people
-  FieldList m_imageFields; // keep track of image fields
+  FieldVec m_fields;
+  FieldVec m_peopleFields; // keep separate list of people fields
+  FieldVec m_imageFields; // keep track of image fields
   QDict<Field> m_fieldNameDict;
   QDict<Field> m_fieldTitleDict;
   QStringList m_fieldCategories;
   QStringList m_fieldNames;
   QStringList m_fieldTitles;
 
-  EntryList m_entryList;
+  EntryVec m_entries;
+  QIntDict<Entry> m_entryIdDict;
 
   QDict<EntryGroupDict> m_entryGroupDicts;
   QStringList m_entryGroups;
+
+  FilterVec m_filters;
+  BorrowerVec m_borrowers;
 };
 
   } // end namespace

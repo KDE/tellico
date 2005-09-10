@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 class QCheckBox;
 
-#include "dataexporter.h"
+#include "exporter.h"
 
 #include <qstringlist.h>
 
@@ -25,16 +25,16 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: pilotdbexporter.h 862 2004-09-15 01:49:51Z robby $
  */
-class PilotDBExporter : public DataExporter {
+class PilotDBExporter : public Exporter {
 public:
-  PilotDBExporter(const Data::Collection* coll);
+  PilotDBExporter();
+
+  virtual bool exec();
+  virtual QString formatString() const;
+  virtual QString fileFilter() const;
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual QString formatString() const;
-  virtual QByteArray data(bool formatFields);
-  virtual QString fileFilter() const;
   virtual void readOptions(KConfig* cfg);
   virtual void saveOptions(KConfig* cfg);
 

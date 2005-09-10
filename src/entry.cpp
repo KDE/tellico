@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,7 +13,10 @@
 
 #include "entry.h"
 #include "collection.h"
+#include "field.h"
 #include "translators/bibtexhandler.h" // needed for BibtexHandler::cleanText()
+#include "document.h"
+#include "tellico_debug.h"
 
 #include <kdebug.h>
 
@@ -21,30 +24,41 @@
 
 using Tellico::Data::Entry;
 
-Entry::Entry(Collection* coll_) : m_coll(coll_) {
+Entry::Entry(Collection* coll_) : KShared(), m_coll(coll_), m_id(-1) {
+#ifndef NDEBUG
   if(!coll_) {
     kdWarning() << "Entry() - null collection pointer!" << endl;
-    m_id = -1;
-    return;
   }
-  m_id = coll_->nextEntryId();
+#endif
+}
+
+Entry::Entry(Collection* coll_, int id_) : KShared(), m_coll(coll_), m_id(id_) {
+#ifndef NDEBUG
+  if(!coll_) {
+    kdWarning() << "Entry() - null collection pointer!" << endl;
+  }
+#endif
 }
 
 Entry::Entry(const Entry& entry_) :
+    KShared(entry_),
     m_coll(entry_.m_coll),
-    m_id(entry_.m_coll->nextEntryId()),
-    m_fields(entry_.m_fields) {
+    m_id(-1),
+    m_fields(entry_.m_fields),
+    m_formattedFields(entry_.m_formattedFields) {
 }
 
 Entry::Entry(const Entry& entry_, Collection* coll_) :
+    KShared(entry_),
     m_coll(coll_),
-    m_id(coll_->nextEntryId()),
+    m_id(-1),
     m_fields(entry_.m_fields) {
   // merge fields from old collection
-  for(FieldListIterator it(entry_.collection()->fieldList()); it.current(); ++it) {
+  Data::FieldVec fields = entry_.collection()->fields();
+  for(FieldVec::Iterator it = fields.begin(); it != fields.end(); ++it) {
     // only add field if there's a value in the collection
-    if(!entry_.field(it.current()->name()).isEmpty()) {
-      coll_->mergeField(it.current());
+    if(!entry_.field(it->name()).isEmpty()) {
+      coll_->mergeField(it);
     }
   }
   // special case for adding a book entry to a bibliography
@@ -54,14 +68,28 @@ Entry::Entry(const Entry& entry_, Collection* coll_) :
   }
 }
 
+Entry& Entry::operator=(const Entry& other_) {
+  if(this == &other_) return *this;
+
+//  kdDebug() << "Entry::operator=()" << endl;
+  static_cast<KShared&>(*this) = static_cast<const KShared&>(other_);
+  m_coll = other_.m_coll;
+  m_id = other_.m_id;
+  m_fields = other_.m_fields;
+  m_formattedFields = other_.m_formattedFields;
+  return *this;
+}
+
+Entry::~Entry() {
+}
+
 QString Entry::title() const {
   return formattedField(QString::fromLatin1("title"));
 }
 
-QString Entry::field(const QString& fieldName_) const {
-  // paranoia
-  if(!m_coll) {
-    return QString::null;
+QString Entry::field(const QString& fieldName_, bool formatted_/*=false*/) const {
+  if(formatted_) {
+    return formattedField(fieldName_);
   }
 
   Field* f = m_coll->fieldByName(fieldName_);
@@ -79,11 +107,6 @@ QString Entry::field(const QString& fieldName_) const {
 }
 
 QString Entry::formattedField(const QString& fieldName_) const {
-  // paranoia
-  if(!m_coll) {
-    return QString::null;
-  }
-
   Field* f = m_coll->fieldByName(fieldName_);
   if(!f) {
     return QString::null;
@@ -115,8 +138,8 @@ QString Entry::formattedField(const QString& fieldName_) const {
   return m_formattedFields[fieldName_];
 }
 
-QStringList Entry::fields(const QString& field_, bool format_) const {
-  return QStringList::split(QString::fromLatin1("; "), format_ ? formattedField(field_) : field(field_));
+QStringList Entry::fields(const QString& field_, bool formatted_) const {
+  return QStringList::split(QString::fromLatin1("; "), formatted_ ? formattedField(field_) : field(field_));
 }
 
 bool Entry::setField(const QString& name_, const QString& value_) {
@@ -130,7 +153,7 @@ bool Entry::setField(const QString& name_, const QString& value_) {
   }
 
 #ifndef NDEBUG
-  if(m_coll && (m_coll->fieldList().count() == 0 || m_coll->fieldByName(name_) == 0)) {
+  if(m_coll && (m_coll->fields().count() == 0 || m_coll->fieldByName(name_) == 0)) {
     kdDebug() << "Entry::setField() - unknown collection entry field - "
               << name_ << endl;
     return false;
@@ -149,31 +172,25 @@ bool Entry::setField(const QString& name_, const QString& value_) {
 }
 
 bool Entry::addToGroup(EntryGroup* group_) {
-  if(!group_ || m_groups.containsRef(group_)) {
+  if(!group_ || m_groups.contains(group_)) {
     return false;
   }
 
 //  kdDebug() << "Entry::addToGroup() - adding group (" << group_->groupName() << ")" << endl;
-  m_groups.append(group_);
+  m_groups.push_back(group_);
   group_->append(this);
-  m_coll->groupModified(group_);
+//  m_coll->groupModified(group_);
   return true;
 }
 
 bool Entry::removeFromGroup(EntryGroup* group_) {
   // if the removal isn't successful, just return
-  bool success = m_groups.removeRef(group_);
-  success = success && group_->removeRef(this);
+  bool success = m_groups.remove(group_);
+  success = success && group_->remove(this);
 //  kdDebug() << "Entry::removeFromGroup() - removing from group - "
-//              << group_->groupName() << endl;
+//              << group_->fieldName() << "::" << group_->groupName() << endl;
   if(success) {
-    m_coll->groupModified(group_);
-    // don't delete until the signal is emitted
-    if(group_->isEmpty()) {
-//      kdDebug() << "Entry::removeFromGroup() - deleting group ("
-//                << group_->groupName() << ")" << endl;
-      delete group_;
-    }
+//    m_coll->groupModified(group_);
   } else {
     kdDebug() << "Entry::removeFromGroup() failed! " << endl;
   }
@@ -187,6 +204,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
 //  kdDebug() << "Entry::groupsByfieldName() - " << fieldName_ << endl;
   Field* f = m_coll->fieldByName(fieldName_);
 
+  // easy if not allowing multiple values
   if(!(f->flags() & Field::AllowMultiple)) {
     QString value = formattedField(fieldName_);
     if(value.isEmpty()) {
@@ -199,9 +217,9 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   QStringList groups = fields(fieldName_, true);
   if(groups.isEmpty()) {
     groups += Collection::s_emptyGroupTitle;
-  } else if(f->type() == Field::Table2) {
+  } else if(f->type() == Field::Table) {
     for(QStringList::Iterator it = groups.begin(); it != groups.end(); ++it) {
-      // quick hack for 2-column tables, how often will a user have "::" in their value?
+      // quick hack for tables, how often will a user have "::" in their value?
       // only use first column for group
       (*it) = (*it).section(QString::fromLatin1("::"),  0,  0);
     }
@@ -209,8 +227,8 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   return groups;
 }
 
-bool Entry::isOwned() const {
-  return (m_coll && !m_coll->entryList().isEmpty() && m_coll->entryList().containsRef(this) > 0);
+bool Entry::isOwned() {
+  return (m_coll && m_coll->entryCount() > 0 && m_coll->entries().contains(this));
 }
 
 // a null string means invalidate all

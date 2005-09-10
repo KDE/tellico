@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -30,20 +30,19 @@ class QProgressBar;
 class QTimer;
 class QCheckBox;
 
-#include "entry.h" //needed for EntryList
+#include "datavectors.h"
 
 #include <kdialogbase.h>
 #include <klistview.h>
 #include <ktextedit.h>
 
-#include <qintdict.h>
+#include <qvaluestack.h>
 #include <qguardedptr.h>
 
 namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: fetchdialog.h 988 2004-12-02 06:42:31Z robby $
  */
 class FetchDialog : public KDialogBase {
 Q_OBJECT
@@ -55,9 +54,6 @@ public:
   FetchDialog(QWidget* parent, const char* name = 0);
   ~FetchDialog();
 
-signals:
-  void signalAddEntries(const Tellico::Data::EntryList&);
-
 private slots:
   void slotSearchClicked();
   void slotClearClicked();
@@ -65,9 +61,11 @@ private slots:
   void slotShowEntry(QListViewItem* item);
   void slotMoveProgress();
 
-  void slotUpdateStatus(const QString& status);
+  void slotStatus(const QString& status);
+  void slotUpdateStatus();
+
   void slotFetchDone();
-  void slotResultFound(const Tellico::Fetch::SearchResult& result);
+  void slotResultFound(Tellico::Fetch::SearchResult* result);
   void slotKeyChanged(const QString& key);
   void slotSourceChanged(const QString& source);
   void slotMultipleISBN(bool toggle);
@@ -78,11 +76,12 @@ private slots:
 private:
   void startProgress();
   void stopProgress();
+  void setStatus(const QString& text);
 
   class SearchResultItem : public KListViewItem {
     friend class FetchDialog;
-    SearchResultItem(KListView* lv, const Fetch::SearchResult& r);
-    const Fetch::SearchResult& m_result;
+    SearchResultItem(KListView* lv, Fetch::SearchResult* r);
+    Fetch::SearchResult* m_result;
   };
 
   KComboBox* m_sourceCombo;
@@ -100,9 +99,11 @@ private:
   QGuardedPtr<KTextEdit> m_isbnTextEdit;
 
   bool m_started;
-  int m_origCount;
+  QString m_oldSearch;
   QStringList m_isbnList;
-  QIntDict<Data::Entry> m_entries;
+  QStringList m_statusMessages;
+  QMap<int, Data::EntryPtr> m_entries;
+  QPtrList<Tellico::Fetch::SearchResult> m_results;
 };
 
 } //end namespace

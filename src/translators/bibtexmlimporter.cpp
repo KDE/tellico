@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,16 +12,22 @@
  ***************************************************************************/
 
 #include "bibtexmlimporter.h"
+#include "tellico_xml.h"
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
+#include "../field.h"
+#include "../entry.h"
 #include "../latin1literal.h"
 #include "../tellico_strings.h"
-#include "tellico_xml.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 
 using Tellico::Import::BibtexmlImporter;
+
+bool BibtexmlImporter::canImport(int type) const {
+  return type == Data::Collection::Bibtex;
+}
 
 Tellico::Data::Collection* BibtexmlImporter::collection() {
   if(!m_coll) {

@@ -1,0 +1,97 @@
+<chapter id="advanced">
+<title>Advanced Usage</title>
+
+<sect1 id="command-line">
+<title>Command Line Options</title>
+
+<para>
+When running &appname; from the command line, there are several options for opening data files. They may be seen by running <userinput>tellico --help</userinput>.
+</para>
+
+<programlisting>
+Usage: tellico [Qt-options] [KDE-options] [options] [filename]
+
+Tellico - a collection manager for KDE
+
+Options:
+  --nofile                  Do not reopen the last open file
+  --bibtex                  Import &lt;filename&gt; as a bibtex file
+  --mods                    Import &lt;filename&gt; as a MODS file
+  --ris                     Import &lt;filename&gt; as a RIS file
+
+Arguments:
+  filename                  File to open
+</programlisting>
+
+</sect1>
+
+<sect1 id="dcop-interface">
+<title>&DCOP; Interface</title>
+
+<para>
+&appname; has a minimal &DCOP; interface, which can be used for scripting or interacting with a running application from the command-line. As with all &DCOP; calls, you need to specify the application you want to interface with, and the particular interface. The &DCOP; calls described in this document are all implemented in
+&appname;'s <constant>tellico</constant> interface, while the name of the application is <constant>tellico-pid</constant>, where <emphasis>pid</emphasis> is the process id of the running application.
+</para>
+
+<sect2 id="dcop-commands">
+<title>DCOP Commands</title>
+
+<para>The full list of &DCOP; commands in the <constant>tellico</constant> object is shown below:</para>
+
+<programlisting>
+bool importTellico(QString file, QString action)
+bool importBibtex(QString file, QString action)
+bool importMODS(QString file, QString action)
+bool importRIS(QString file, QString action)
+bool exportXML(QString file)
+bool exportBibtex(QString file)
+bool exportHTML(QString file)
+bool exportCSV(QString file)
+bool exportPilotDB(QString file)
+QStringList bibtexKeys()
+</programlisting>
+
+<para>
+For the four import commands, the first argument is the file to import, and the second is the import action. Three actions are available: <emphasis>replace</emphasis>, <emphasis>append</emphasis>, and <emphasis>merge</emphasis>. Four file formats are supported for importing: Tellico XML files, Bibtex files, MODS files, and RIS files.
+</para>
+
+<para>
+The current open collection in &appname; may be exported to a file, in either Tellico XML format, Bibtex, HTML, or comma-separated values (CSV) format.
+</para>
+
+<para>
+Finally, if the current collection is a bibliography, calling <command>bibtexKeys()</command> will return the Bibtex citation key for all selected entries.
+</para>
+
+</sect2>
+
+<sect2 id="dcop-examples">
+<title>DCOP Examples</title>
+
+<para>
+Here are some examples for scripting &appname; using the &DCOP; interface. Since the <emphasis>pid</emphasis> must be know, the easiest way to include that in the shell command is like so: <userinput>dcop $(dcop | grep tellico) tellico</userinput>.
+</para>
+
+<screen width="40">
+<emphasis>Open a Bibtex file</emphasis>
+<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) tellico importBibtex ~/documents/reference.bib replace</userinput>
+<computeroutput>true</computeroutput>
+</screen>
+
+<screen width="40">
+<emphasis>Export a Bibtex file</emphasis>
+<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) tellico exportBibtex ~/documents/reference.bib</userinput>
+<computeroutput>true</computeroutput>
+</screen>
+
+<screen width="40">
+<emphasis>Echo the citation key of the current selection</emphasis>
+<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) tellico bibtexKeys</userinput>
+<computeroutput>stephenson2004</computeroutput>
+</screen>
+
+</sect2>
+
+</sect1>
+
+</chapter>

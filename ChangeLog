@@ -1,1162 +1,1309 @@
+2005-09-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.0.
+
+2005-09-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Polish translaion from Marek Janukowicz.
+
+2005-08-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with external application fetcher not reading path
+	entries correctly.
+	* Updated Spanish translation, thanks to Brian Hughes.
+
+2005-08-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Swedish, thanks to Peter Landgren.
+	* Added patch from Nix to dynamically resize table columns.
+
+2005-08-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed audio file metadata to ignore case when doing album
+	comparisons.
+	* Changed collection loader to better compensate for old rating
+	fields.
+	* Changed AddEntry command to act on multiple entries.
+
+2005-08-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Dutch translation, thanks to Fred Marchee.
+	* Updated Fininsh translation, thanks to Teuvo Eloranta.
+
+2005-08-06  Robby Stephenson  <robby@periapsis.org>
+
+        * Released Tellico 1.0pre1.
+
+2005-08-04  Robby Stephenson  <robby@periapsis.org>
+
+        * When exporting HTML, copy any relative images, etc.
+
+2005-08-01  Robby Stephenson  <robby@periapsis.org>
+
+        * Strip HTML tags from paragraph export to PilotDB.
+
+2005-07-30  Robby Stephenson  <robby@periapsis.org>
+
+        * Make the amazon importer default to medium images instead of none.
+
+2005-07-28  Robby Stephenson  <robby@periapsis.org>
+
+        * Make the 'Fancy' template default.
+
 2005-07-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Tellico 0.13.8.
+        * Released Tellico 0.13.8.
 
 2005-06-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with CSV import parsing.
+        * Fixed bug with CSV import parsing.
 
 2005-06-28  Robby Stephenson  <robby@periapsis.org>
 
-	* Added license exception for linking to OpenSSL.
+        * Added license exception for linking to OpenSSL.
+
+2005-06-25  Robby Stephenson  <robby@periapsis.org>
+
+        * Added a status message timeout for main window and fetch dialog.
 
 2005-06-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crashing bug for fields with empty categories.
+        * Fixed crashing bug for fields with empty categories.
 
 2005-06-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Added initial Catalan translation from David Majà Martinez.
+        * Added initial Catalan translation from David Majà Martínez.
+
+2005-06-20  Robby Stephenson  <robby@periapsis.org>
+
+        * Added fetcher for reading output from an external application.
+        * Fixed bug with wrong icon size for entry action.
+
+2005-06-17  Robby Stephenson  <robby@periapsis.org>
+
+        * Added video game collection type.
+
+2005-06-12  Robby Stephenson  <robby@periapsis.org>
+
+        * Added capability for recursively reading all CDDB cache files,
+        based on patch from Marco Hofmann.
 
 2005-06-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed gcc4 compilation again.
-	* Fixed bug with file extension defaulting to .bc.
+        * Fixed bug with file extension defaulting to .bc.
+
+2005-06-02  Robby Stephenson  <robby@periapsis.org>
+
+        * Changed Table field to allow up to 5 columns. Deprecated Table2 type.
+
+2005-06-01  Robby Stephenson  <robby@periapsis.org>
+
+        * Added Rating field type.
 
 2005-05-31  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with grouping by checkbox fields.
+        * Fixed bug with grouping by checkbox fields.
 
 2005-05-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Norwegian translation.
+        * Updated Norwegian translation.
+        * Added Unimarc support to z39.50 importer.
 
 2005-05-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Tellico 0.13.7.
+        * Released Tellico 0.13.7.
+
+2005-05-25  Robby Stephenson  <robby@periapsis.org>
+
+        * Changed bibtex exporter to put crossref'd entries at the
+        end. Only one level of crossref is allowed.
+
+2005-05-19  Robby Stephenson  <robby@periapsis.org>
+
+        * Fixed bug with changing between rating and normal choice field.
 
 2005-05-18  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Dutch translation, thanks to Fred Marchee.
+        * Updated Dutch translation, thanks to Fred Marchee.
 
 2005-05-13  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with clearing table fields.
+        * Fixed bug with clearing table fields.
+        * Added ONIX export, borrowing format from Alexandria.
 
 2005-05-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed contact email to tellico-users mailing list.
+        * Changed contact email to tellico-users mailing list.
 
 2005-04-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed corner case xml element naming for new fields.
-	* Fixed bug with cover images not always being shown in icon view.
-	* Fixed typo on allowed and description in fields editor.
+        * Fixed corner case xml element naming for new fields.
+        * Fixed typo on allowed and description in fields editor.
 
 2005-04-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with having fields named after xml elements, like
-	entry or field.
+        * Fixed bug with having fields named after xml elements, like
+        entry or field.
+
+2005-04-09  Robby Stephenson  <robby@periapsis.org>
+
+        * Added a PubMed search source, thanks to an  XSL stylesheet from
+        Michaël Zugaro.
+
+2005-04-08  Robby Stephenson  <robby@periapsis.org>
+
+        * Added some accelerators, thanks to patch from Felix Berger.
+
+2005-04-07  Robby Stephenson  <robby@periapsis.org>
+
+        * Added Undo/Redo framework.
 
 2005-04-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Tellico 0.13.6.
-
-2005-03-31  Robby Stephenson  <robby@periapsis.org>
-
-	* Fixed some DTD declarations.
-	* Refactor some of the icon view code to try to prevent some
-	phantom crashes.
+        * Released Tellico 0.13.6.
 
 2005-03-29  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with adding multiple entries from fetch dialog not
+        * Fixed bug with adding multiple entries from fetch dialog not
         added additional images.
-	* Added Portuguese translation, thanks to Ligia Moreira.
+        * Added Portuguese translation, thanks to Ligia Moreira.
 
 2005-03-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed internet search dialog to clear results when running a
-	new search.
-	* Changed selection so that hidden items are not selected.
+        * Changed internet search dialog to clear results when running a
+        new search.
+        * Changed selection so that hidden items are not selected.
+
+2005-03-16  Robby Stephenson  <robby@periapsis.org>
+
+        * Added shortcuts for entry grouping and filter.
 
 2005-03-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed some i18n generated strings.
-	* Released Tellico 0.13.5.
+        * Released Tellico 0.13.5.
 
 2005-03-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated German translation, thanks to Gerrit Albrecht.
+        * Updated German translation, thanks to Gerrit Albrecht.
 
 2005-03-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crash for some amazon searches.
-	* Fixed character encoding for Japanese amazon searches.
+        * Fixed crash for some amazon searches.
+        * Fixed character encoding for Japanese amazon searches.
 
 2005-02-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Tellico 0.13.4
+        * Released Tellico 0.13.4
 
 2005-02-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Added a configure param to disable cddb even if kcddb headers found.
+        * Added a configure param to disable cddb even if kcddb headers found.
 
 2005-02-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated bibtex translation map, fixing some bugs.
-	* Fixed bug with Amazon search character encoding.
+        * Updated bibtex translation map, fixing some bugs.
+        * Fixed bug with Amazon search character encoding.
+        * Changed Bibtex handler to convert {MIT} to MIT, importing and exporting.
 
 2005-02-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with enabling grouping for paragraphs in fields dialog.
+        * Fixed bug with grouping being enabled for paragraphs.
 
 2005-02-17  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with exporting empty groups in HTML.
+        * Fixed bug with exporting empty groups in HTML.
+        * Added capability for adding loan due notice to KOrganizer calendar.
 
 2005-02-14  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with RIS importer messing up entry types.
+        * Fixed bug with RIS importer messing up entry types.
 
 2005-02-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Tellico 0.13.3.
+        * Released Tellico 0.13.3.
 
 2005-02-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug in configure script for disabling amazon, thanks to
-	Markus Brueffer.
-	* Fixed bug with spin boxes not enabling Apply button in Config
-	Dialog.
-	* Fixed bug with audio file metadata import for compilations.
+        * Fixed bug in configure script for disabling amazon, thanks to
+        Markus Brueffer.
+        * Fixed bug with spin boxes not enabling Apply button in Config Dialog.
+        * Fixed bug with audio file metadata import for compilations.
 
 2005-02-05  Robby Stephenson  <robby@periapsis.org>
 
-	* Update some bibtex character translations.
-	* Released Tellico 0.13.2.
+        * Update some bibtex character translations.
+        * Released Tellico 0.13.2.
 
 2005-02-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed IMDb import.
-	* Double-clicking in fetch dialog adds entry.
-	* Fixed bug with locale encoding for HTML export.
-	* Changed statusbar to show tooltips for menu items.
+        * Updated IMDb fetcher.
+        * Updated bibtex import and export to recognize {X} constructions.
+        * Fixed bug with locale encoding for HTML export.
+        * Changed statusbar to show tooltips for menu items.
 
 2005-02-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Added France and Canada locales to Amazon.com sources.
+        * Added France and Canada locales to Amazon.com sources.
 
 2005-02-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Swedish translation, thanks to Peter Landgren.
-	* Fixed bug with importing RIS with no final space.
-	* Fixed Debian bug #290467 for gcc 4.0 compilation, thanks to Regis Boudin.
+        * Fixed bug with importing RIS with no final space.
+        * Fixed Debian bug #290467 for gcc 4.0 compilation, thanks to Regis Boudin.
+
+2005-01-28  Robby Stephenson  <robby@periapsis.org>
+
+        * Removed find dialog since the filter works so much better.
+
+2005-01-27  Robby Stephenson  <robby@periapsis.org>
+
+        * Removed option for toggling entry count show in group view.
+        * Added check-out for lending items with view.
+
+2005-01-25  Robby Stephenson  <robby@periapsis.org>
+
         * Fixed Debian bug #292165 with bibtex export of umlauts.
-	* Fixed bug with decoding HTML entities in IMDb cast page, thanks
-	to Rafa Kortes.
+
+2005-01-21  Robby Stephenson  <robby@periapsis.org>
+
+        * Updated Swedish translation, thanks to Peter Landgren.
+
+2005-01-20  Robby Stephenson  <robby@periapsis.org>
+
+        * Added saved filters with view.
+        * Changed IMDb cast page to decode HTML entities, thanks to Rafa Kortes.
+
+2005-01-12  Robby Stephenson  <robby@periapsis.org>
+
+        * Changed double click in the Internet Search dialog to add the entry.
+
+2005-01-11  Robby Stephenson  <robby@periapsis.org>
+
+        * Added collection report dialog.
+
+2005-01-06  Robby Stephenson  <robby@periapsis.org>
+
+        * Improved file loading efficiency somewhat.
+
+2005-01-05  Robby Stephenson  <robby@periapsis.org>
+
+        * Changed image loading to be on-demand for local zip files.
+
+2004-12-19  Robby Stephenson  <robby@periapsis.org>
+
+        * Added DCOP interface for exporting files.
+        * Added vertical line between columns in list view.
+        * Translated xsl entry template names.
+
+2004-12-18  Robby Stephenson  <robby@periapsis.org>
+
+        * Added DCOP interface for importing files.
+
+2004-12-17  Robby Stephenson  <robby@periapsis.org>
+
+        * Branched to 0.13.x.
+        * Updated audio file importer to use "(Various)" for multi-artist albums.
 
 2004-12-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed a bug in PilotDB exporting, I think.
-	* Added PilotDB export support for Date fields.
-	* Released Tellico 0.13.1.
+        * Fixed a bug in PilotDB exporting, I think.
+        * Added PilotDB export support for Date fields.
+        * Released Tellico 0.13.1.
 
 2004-12-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed some date formatting.
+        * Fixed some date formatting.
 
 2004-12-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed auto bibtex key generation for empty keys.
+        * Fixed auto bibtex key generation for empty keys.
 
 2004-12-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed Entry View to react to changes in the color palette.
+        * Fixed Entry View to react to changes in the color palette.
 
 2004-12-06  Robby Stephenson  <robby@periapsis.org>
 
-	* Increased maz z39.50 port to 999999.
-	* Fixed some KMAX, KMIN template issues with casts.
-	* Added column shading for detailed view, per KDE bug 59791.
+        * Increased maz z39.50 port to 999999.
+        * Fixed some KMAX, KMIN template issues with casts.
+        * Added column shading for detailed view, per KDE bug 59791.
 
 2004-12-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Finnish translation, thanks to Tuevo Eloranta.
-	* Updated Norwegian translation, thanks to Leif Mathis Gaup.
-	* Fixed *BSD compile, with patch from Markus Brüffer.
+        * Updated Finnish translation, thanks to Tuevo Eloranta.
+        * Updated Norwegian translation, thanks to Leif Mathis Gaup.
+        * Fixed *BSD compile, with patch from Markus Brüffer.
 
 2004-12-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Enabled relative URLs in URL fields.
-	* Disabled running executables in URL fields.
-	* Released Tellico 0.13.
+        * Enabled relative URLs in URL fields.
+        * Disabled running executables in URL fields.
+        * Released Tellico 0.13.
 
 2004-11-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Removed all the KStaticDeleter references. Don't get fancy.
-	* Updated title sorts to work for articles ending with an
-	apostrophe.
-	* Updated audio file metadata importer to recognize albums with
-	multiple artists and change track list accordingly.
-	* Fixed CSV importer to properly find pre-existing, non-default fields.
+        * Removed all the KStaticDeleter references. Don't get fancy.
+        * Updated title sorts to work for articles ending with an
+        apostrophe.
+        * Updated audio file metadata importer to recognize albums with
+        multiple artists and change track list accordingly.
+        * Fixed CSV importer to properly find pre-existing, non-default fields.
 
 2004-11-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Added stars for up to a 10 rating.
-	* Added checkmark in entry templates for bool fields.
+        * Added stars for up to a 10 rating.
+        * Added checkmark in entry templates for bool fields.
 
 2004-11-20  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Spanish tips translation from ventolera.
+        * Added Spanish tips translation from ventolera.
 
 2004-11-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Tellico 0.13pre3.
+        * Released Tellico 0.13pre3.
 
 2004-11-18  Robby Stephenson  <robby@periapsis.org>
 
-	* Added command-line options for loading bibtex, MODS, and RIS files.
+        * Added command-line options for loading bibtex, MODS, and RIS files.
 
 2004-11-17  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Amazon fetcher to work with more than 10 ISBN.
-	* Updated z39.50 fetcher to work with more than 10 ISBN.
-	* Added language lookup table to mods2tellico.xsl.
-	* Updated lyxpipe cite to auto-generate bibtex key if necessary.
-	* Added "load ISBN list from file" to search dialog.
+        * Updated Amazon fetcher to work with more than 10 ISBN.
+        * Updated z39.50 fetcher to work with more than 10 ISBN.
+        * Added language lookup table to mods2tellico.xsl.
+        * Updated lyxpipe cite to auto-generate bibtex key if necessary.
+        * Added "load ISBN list from file" to search dialog.
 
 2004-11-14  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Tellico 0.13pre2.
+        * Released Tellico 0.13pre2.
 
 2004-11-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Improved printing speed.
-	* Added user and password config for z39.50.
-	* Added address field to default bibliography.
+        * Improved printing speed.
+        * Added user and password config for z39.50.
+        * Added address field to default bibliography.
 
 2004-11-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated French translation, thanks to Regis Boudin.
-	* Fixed layout bug in config dialog.
+        * Updated French translation, thanks to Regis Boudin.
+        * Fixed layout bug in config dialog.
 
 2004-11-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Added fix similar to kde bug 86188 for including linux/cdrom.h.
-	* Changed latex cite to separate multiple cites with ", " instead
-	of "," to better match pybliographer.
+        * Added fix similar to kde bug 86188 for including linux/cdrom.h.
+        * Changed latex cite to separate multiple cites with ", " instead
+        of "," to better match pybliographer.
 
 2004-11-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Added host config to IMDB.
-	* Added image download option to Amazon and IMDB.
-	* Updated kde-common/admin/cvs.sh to allow other automake versions.
-	* Released Tellico 0.13pre1.
+        * Added host config to IMDB.
+        * Added image download option to Amazon and IMDB.
+        * Updated kde-common/admin/cvs.sh to allow other automake versions.
+        * Released Tellico 0.13pre1.
 
 2004-11-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Added character set config to z39.50.
-	* Changed main document to tellico.xml.
+        * Added character set config to z39.50.
+        * Changed main document to tellico.xml.
 
 2004-10-31  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated initial minimum width to 600 pixels.
-	* Added group selection entry to collection menu.
-	* Updated Find Dialog to remove FromBeginning (didn't make sense)
+        * Updated initial minimum width to 600 pixels.
+        * Added group selection entry to collection menu.
+        * Updated Find Dialog to remove FromBeginning (didn't make sense)
 
 2004-10-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated HTML export and printing stylesheets a bit.
+        * Updated HTML export and printing stylesheets a bit.
 
 2004-10-18  Robby Stephenson  <robby@periapsis.org>
 
-	* Added patch to compile on g++ 2.95 from Markus Brueffer.
+        * Added patch to compile on g++ 2.95 from Markus Brueffer.
 
 2004-10-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Added patch from wwp to fix saving file on quit.
+        * Added patch from wwp to fix saving file on quit.
 
 2004-10-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Added confirm message box when deleting an entry.
+        * Added confirm message box when deleting an entry.
 
 2004-09-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed default file textension to .tc.
+        * Changed default file textension to .tc.
 
 2004-09-15  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Unrated certification to default video collection.
+        * Added Unrated certification to default video collection.
 
 2004-09-14  Robby Stephenson  <robby@periapsis.org>
 
-	* Renamed Bookcase to Tellico
-	* Added IMDB fetcher.
-	* Incremented DTD version to 7, changed root element to tellico.
-	* Changed zip file to use maindoc.xml as do the KOffice files.
+        * Renamed Bookcase to Tellico
+        * Added IMDB fetcher.
+        * Incremented DTD version to 7, changed root element to tellico.
+        * Changed zip file to use maindoc.xml as do the KOffice files.
 
 2004-09-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added new icons from Virginie Quesnay.
+        * Added new icons from Virginie Quesnay.
 
 2004-09-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated French translation, thanks to Regis Boudin.
-	* Removed libcdda (cdparanoia) dependency, using cd-discid code
-	instead.
-	* Added rating widget in entry editor, using stars.
+        * Updated French translation, thanks to Regis Boudin.
+        * Removed libcdda (cdparanoia) dependency, using cd-discid code
+        instead.
+        * Added rating widget in entry editor, using stars.
 
 2004-09-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Really fixed gcc 2.95 compilation.
-	* Added RIS importer.
+        * Really fixed gcc 2.95 compilation.
+        * Added RIS importer.
 
 2004-09-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.11.
+        * Released Bookcase 0.11.
 
 2004-09-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Added FreeDB importer.
+        * Added FreeDB importer.
 
 2004-08-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed compile on gcc 2.95.
+        * Fixed compile on gcc 2.95.
 
 2004-08-26  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Alexandria importer.
-	* Added Alexandria exporter.
+        * Added Alexandria importer.
+        * Added Alexandria exporter.
 
 2004-08-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Norwegian translation, thanks to Leif Mathis Gaup.
-	* Read album covers from .directory files in audio file importer.
+        * Updated Norwegian translation, thanks to Leif Mathis Gaup.
+        * Read album covers from .directory files in audio file importer.
 
 2004-08-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Added support for reading audio file meta-data.
+        * Added support for reading audio file meta-data.
 
 2004-08-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated paragraph fields to remember line-breaks.
-	* Released Bookcase 0.10.
+        * Updated paragraph fields to remember line-breaks.
+        * Released Bookcase 0.10.
 
 2004-08-20  Robby Stephenson  <robby@periapsis.org>
 
-	* Added HTML formatting to paragraphs in entry templates.
-	* Updated German translation, thanks to Gerrit M. Albrecht.
+        * Added HTML formatting to paragraphs in entry templates.
+        * Updated German translation, thanks to Gerrit M. Albrecht.
 
 2004-08-18  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Latin1Literal class to speed up string comparisons.
-	* Added MODS import menu item.
+        * Added Latin1Literal class to speed up string comparisons.
+        * Added MODS import menu item.
 
 2004-08-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added "export selected entries only" option.
+        * Added "export selected entries only" option.
 
 2004-08-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed UI file location.
-	* Released Bookcase 0.10pre2.
+        * Fixed UI file location.
+        * Released Bookcase 0.10pre2.
 
 2004-08-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.10pre1.
-	* Added entry icon to fetch dialog button.
+        * Released Bookcase 0.10pre1.
+        * Added entry icon to fetch dialog button.
 
 2004-08-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug for exporting HTML for entries with multiple titles.
-	* Changed HTML export to put entry files in separate directory.
-	* Added link to parent collection file for entry templates.
+        * Fixed bug for exporting HTML for entries with multiple titles.
+        * Changed HTML export to put entry files in separate directory.
+        * Added link to parent collection file for entry templates.
 
 2004-08-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated French translation, thanks to Rui Nibau.
-	* Changed to show a spinbox for single number values;
+        * Updated French translation, thanks to Rui Nibau.
+        * Changed to show a spinbox for single number values;
 
 2004-07-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with capitalization of words split by dash or comma,
-	and ending with apostrophes.
+        * Fixed bug with capitalization of words split by dash or comma,
+        and ending with apostrophes.
 
 2004-07-13  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bugs with enabling apply/ok buttons in fields dialog for
-	extended properties, and disappearing groups when renaming fields.
+        * Fixed bugs with enabling apply/ok buttons in fields dialog for
+        extended properties, and disappearing groups when renaming fields.
 
 2004-07-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Added collection and group view in stack.
+        * Added collection and group view in stack.
 
 2004-06-26  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with copying selected entries.
+        * Fixed bug with copying selected entries.
 
 2004-06-21  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed gcc 3.4 compilation bug in src/translators/btparse/err.h
+        * Fixed gcc 3.4 compilation bug in src/translators/btparse/err.h
 
 2004-06-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Update Norwegian translation, thanks to Leif Mathis Gaup.
+        * Update Norwegian translation, thanks to Leif Mathis Gaup.
 
 2004-05-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.9.3.
-	* Updated italian translation, thanks to FaUsT.
+        * Released Bookcase 0.9.3.
+        * Updated italian translation, thanks to FaUsT.
 
 2004-05-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crashing bug for exporting when no fields can be grouped.
+        * Fixed crashing bug for exporting when no fields can be grouped.
 
 2004-05-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Restructured ISBN code to get rid of some old cruft.
-	* Added patch from Regis Boudin to add French ISBN formatting and
-	remove old copyright restricted ISBN code.
+        * Restructured ISBN code to get rid of some old cruft.
+        * Added patch from Regis Boudin to add French ISBN formatting and
+        remove old copyright restricted ISBN code.
 
 2004-05-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Added entry group templates.
+        * Added entry group templates.
 
 2004-05-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed focus to move to next entry when one is deleted.
-	* Changed document loader to allow i18n attribute indicate translation.
-	* Fixed bug with empty group names.
+        * Changed focus to move to next entry when one is deleted.
+        * Changed document loader to allow i18n attribute indicate translation.
+        * Fixed bug with empty group names.
 
 2004-05-17  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.9.2.
+        * Released Bookcase 0.9.2.
 
 2004-05-15  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with xslt import with libxml < 2.6.
-	* Fixed bug with losing extended properties when cloning fields/
+        * Fixed bug with xslt import with libxml < 2.6.
+        * Fixed bug with losing extended properties when cloning fields/
 
 2004-05-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Amazon fetcher.
-	* Added SRU Fetcher.
+        * Added Amazon fetcher.
+        * Added SRU Fetcher.
 
 2004-05-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with XSLT importer.
-	* Added MODS XSLT importer file.
+        * Fixed bug with XSLT importer.
+        * Added MODS XSLT importer file.
 
 2004-05-06  Robby Stephenson  <robby@periapsis.org>
 
-	* Branched 0.9.x
+        * Branched 0.9.x
 
 2004-05-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed Fields Dialog to close when creating a new collection or opening one.
-	* Removed GCJ/java checks from configure.
-	* Released Bookcase 0.9.1
+        * Changed Fields Dialog to close when creating a new collection or opening one.
+        * Removed GCJ/java checks from configure.
+        * Released Bookcase 0.9.1
 
 2004-04-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed i18n extraction for UI and gettext extensions.
-	* Removed Japanese translation because of encoding errors.
-	* Updated CSV import to know about current fields when appending or merging
+        * Fixed i18n extraction for UI and gettext extensions.
+        * Removed Japanese translation because of encoding errors.
+        * Updated CSV import to know about current fields when appending or merging
 
 2004-04-29  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated German translation from Gerrit Albrecht.
+        * Updated German translation from Gerrit Albrecht.
 
 2004-04-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with lyxpipe using LYXSRV insted of LYXCMD.
-	* Changed quick filter to wait 200 ms before updating the filter.
+        * Fixed bug with lyxpipe using LYXSRV insted of LYXCMD.
+        * Changed quick filter to wait 200 ms before updating the filter.
 
 2004-04-21  Robby Stephenson  <robby@periapsis.org>
 
-	* Added wait cursor for file saving.
-	* Fixed bug with created a double collection when failing to load the initial file.
-	* Make sure column view updates when an image is cleared.
+        * Added wait cursor for file saving.
+        * Fixed bug with created a double collection when failing to load the initial file.
+        * Make sure column view updates when an image is cleared.
 
 2004-04-18  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.9.
+        * Released Bookcase 0.9.
 
 2004-04-16  Robby Stephenson  <robby@periapsis.org>
 
-	* Improved visibilty of image size in Fancy.xsl.
-	* Updated Italian translation, thanks to FaUsT.
-	* Updated Finnish translation, thanks to Teuvo.
-	* Added hidden pref for pixmap size in detailed view.
-	* Changed HTML exporter to use titles as filenames.
+        * Improved visibilty of image size in Fancy.xsl.
+        * Updated Italian translation, thanks to FaUsT.
+        * Updated Finnish translation, thanks to Teuvo.
+        * Added hidden pref for pixmap size in detailed view.
+        * Changed HTML exporter to use titles as filenames.
 
 2004-04-13  Robby Stephenson  <robby@periapsis.org>
 
-	* Added hidden preference for pilotdb export charset encoding.
+        * Added hidden preference for pilotdb export charset encoding.
 
 2004-04-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Improved bibtex export to detect duplicates keys and add 'a'b,
-	'b', etc.
-	* Released Bookcase 0.9pre1
+        * Improved bibtex export to detect duplicates keys and add 'a'b,
+        'b', etc.
+        * Released Bookcase 0.9pre1
 
 2004-03-26  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated printing and HTML export to include images.
-	* Updated Detailed View to show images, too.
+        * Updated printing and HTML export to include images.
+        * Updated Detailed View to show images, too.
 
 2004-03-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Italian translation, thanks to FaUsT.
-	* Changed toolbar icon for New Entry to collection icon on top of
-	empty mime type.
+        * Updated Italian translation, thanks to FaUsT.
+        * Changed toolbar icon for New Entry to collection icon on top of
+        empty mime type.
 
 2004-03-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Added menu item in group view for filtering on groups.
-	* Added config options for image sizes in printout.
+        * Added menu item in group view for filtering on groups.
+        * Added config options for image sizes in printout.
 
 2004-03-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed another bug with HTML export character encoding.
-	* Added config panel for bibtex quotation style and lyxpipe location
+        * Fixed another bug with HTML export character encoding.
+        * Added config panel for bibtex quotation style and lyxpipe location
 
 2004-03-20  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed Paragraph fields to properly signal modified in the Entry Editor.
-	* Fixed crashing bug for fields with nothing but whitespace in the datafile.
-	* Updated printing stylesheet so that images can be included.
+        * Fixed Paragraph fields to properly signal modified in the Entry Editor.
+        * Fixed crashing bug for fields with nothing but whitespace in the datafile.
+        * Updated printing stylesheet so that images can be included.
 
 2004-03-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed document opening so that if the first field has the name
-	of "_default", all the default fields will be added.
+        * Changed document opening so that if the first field has the name
+        of "_default", all the default fields will be added.
 
 2004-03-17  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed Dependent fields to allow grouping.
-	* Changed Fields Dialog to allow changing the field types, in some
-	limited cases.
+        * Changed Dependent fields to allow grouping.
+        * Changed Fields Dialog to allow changing the field types, in some
+        limited cases.
 
 2004-03-15  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crashing bug in PilotDB export with images.
-	* Fixed bug with "other" delimiter freezing the app.
+        * Fixed crashing bug in PilotDB export with images.
+        * Fixed bug with "other" delimiter freezing the app.
 
 2004-03-13  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with trying to reopen Untitled after converting to a bibliography.
-	* Added support for lyxpipe and citing entries in bibliography.
+        * Fixed bug with trying to reopen Untitled after converting to a bibliography.
+        * Added support for lyxpipe and citing entries in bibliography.
 
 2004-03-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed to be more aggressive in creating URL fields on Bibtex import.
+        * Changed to be more aggressive in creating URL fields on Bibtex import.
 
 2004-03-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Compact and Fancy entry templates.
-	* Released Bookcase 0.8.5.
+        * Added Compact and Fancy entry templates.
+        * Released Bookcase 0.8.5.
 
 2004-03-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug in Video template for when there's no Cast template.
-	* Fixed bug with detecting old versions of gcc and vector::at.
+        * Fixed bug in Video template for when there's no Cast template.
+        * Fixed bug with detecting old versions of gcc and vector::at.
 
 2004-03-05  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with filter dialog layout and KDE 3.2.
+        * Fixed bug with filter dialog layout and KDE 3.2.
 
 2004-03-04  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with corrupt zip files when more than one entry
-	references the same image.
+        * Fixed bug with corrupt zip files when more than one entry
+        references the same image.
 
 2004-02-28  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed the gcc 2.95 compile bug for sure.
+        * Fixed the gcc 2.95 compile bug for sure.
 
 2004-02-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crashing bug in Data::Entry::field().
-	* Fixed XSLTHandler to work for URLs, so XSLT files can reference
-	other files.
+        * Fixed crashing bug in Data::Entry::field().
+        * Fixed XSLTHandler to work for URLs, so XSLT files can reference
+        other files.
 
 2004-02-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with HTML entities in XSLT stylesheet params.
+        * Fixed bug with HTML entities in XSLT stylesheet params.
 
 2004-02-20  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with duplicate menu items in KDE 3.2.x.
-	* Fixed bug to properly reorder categories when reordering fields.
-	* Released Bookcase 0.8.4.
+        * Fixed bug with duplicate menu items in KDE 3.2.x.
+        * Fixed bug to properly reorder categories when reordering fields.
+        * Released Bookcase 0.8.4.
 
 2004-02-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed auto-capitalize and auto-format to take affect immediately.
+        * Fixed auto-capitalize and auto-format to take affect immediately.
 
 2004-02-18  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Czech translation, thanks to Robert Kratky.
+        * Added Czech translation, thanks to Robert Kratky.
 
 2004-02-17  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed compilation issues for gcc 2.95 and FreeBSD.
-	* Changed the Config Dialog to use a semi-colon to separated the articles, prefixes, and suffixes instead of a comma, for consistency. They're still saved in the config file with a comma, though, so old options should be fine.
+        * Fixed compilation issues for gcc 2.95 and FreeBSD.
+        * Changed the Config Dialog to use a semi-colon to separated the articles, prefixes, and suffixes instead of a comma, for consistency. They're still saved in the config file with a comma, though, so old options should be fine.
 
 2004-02-14  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed problem when trying to reopen last file and getting error.
-	* Added drag & drop support for the image widget.
+        * Fixed problem when trying to reopen last file and getting error.
+        * Added drag & drop support for the image widget.
 
 2004-02-13  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Estonian translation, from Toomas Nigola.
-	* Changed to remember sorting config in group view.
+        * Updated Estonian translation, from Toomas Nigola.
+        * Changed to remember sorting config in group view.
 
 2004-02-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crashing bug when renaming a single-category field.
+        * Fixed crashing bug when renaming a single-category field.
 
 2004-02-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed Entry Editor to redo page layout when deleting fields.
-	* Added merge functionality when importing collections.
-	* Fixed bug with exporting HTML in non-utf8.
+        * Changed Entry Editor to redo page layout when deleting fields.
+        * Added merge functionality when importing collections.
+        * Fixed bug with exporting HTML in non-utf8.
 
 2004-02-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Spanish translation, thanks to Quique.
-	* Added sorting by group count.
+        * Updated Spanish translation, thanks to Quique.
+        * Added sorting by group count.
 
 2004-02-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Added workaround for layout bug in Keramik style.
+        * Added workaround for layout bug in Keramik style.
 
 2004-02-04  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed saving visible columns yet again.
-	* Changed XSLT parser to prevent all network calls.
-	* Fixed crashing bug when deleting a field.
-	* Fixed compilation bug when using libxml > 2.6.0 but libxslt < 1.1.
-	* Released Bookcase 0.8.3.
+        * Fixed saving visible columns yet again.
+        * Changed XSLT parser to prevent all network calls.
+        * Fixed crashing bug when deleting a field.
+        * Fixed compilation bug when using libxml > 2.6.0 but libxslt < 1.1.
+        * Released Bookcase 0.8.3.
 
 2004-02-04  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed file truncation for file with some Unicode characters.
-	* Released Bookcase 0.8.2.
+        * Fixed file truncation for file with some Unicode characters.
+        * Released Bookcase 0.8.2.
 
 2004-02-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.8.1.
+        * Released Bookcase 0.8.1.
 
 2004-02-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Album entry template.
-	* Added Finnish translation, thanks to Teuvo Eloranta.
-	* Added --with-xml-catalog configure option.
+        * Added Album entry template.
+        * Added Finnish translation, thanks to Teuvo Eloranta.
+        * Added --with-xml-catalog configure option.
 
 2004-01-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed compile bug with src/Makefile.am and libxslt.
-	* Fixed bug with $datadir param in Default entry template.
-	* Added Video entry template.
-	* Added EAN to ISBN conversion for 978 and 979 codes. Patch from Martijn Pieters.
+        * Fixed compile bug with src/Makefile.am and libxslt.
+        * Fixed bug with $datadir param in Default entry template.
+        * Added Video entry template.
+        * Added EAN to ISBN conversion for 978 and 979 codes. Patch from Martijn Pieters.
 
 2004-01-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with Select All not working.
-	* Fixed some compilation issues.
-	* Updated French translation from Rui Nibau.
+        * Fixed bug with Select All not working.
+        * Fixed some compilation issues.
+        * Updated French translation from Rui Nibau.
 
 2004-01-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed DTD for new collections.
-	* Updated some accel keys.
-	* Changed Requires to KDE 3.1 or higher since KZip is used.
-	* Released Bookcase 0.8.
+        * Fixed DTD for new collections.
+        * Updated some accel keys.
+        * Changed Requires to KDE 3.1 or higher since KZip is used.
+        * Released Bookcase 0.8.
 
 2004-01-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.8pre1
+        * Released Bookcase 0.8pre1
 
 2004-01-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Finnish translation from Teuvo Eloranta.
-	* Added "Export to XML" option since file format is Zip now.
-	* Switched to new XML parser in libxml2 > 2.6.0
+        * Added Finnish translation from Teuvo Eloranta.
+        * Added "Export to XML" option since file format is Zip now.
+        * Switched to new XML parser in libxml2 > 2.6.0
 
 2004-01-13  Robby Stephenson  <robby@periapsis.org>
 
-	* Added new Collection menu.
+        * Added new Collection menu.
 
 2004-01-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed entry method for bibtex string macros. Triple-clicking on list view items is stupid.
+        * Changed entry method for bibtex string macros. Triple-clicking on list view items is stupid.
 
 2004-01-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Added zip file format for collections with images.
+        * Added zip file format for collections with images.
 
 2004-01-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Added cut, copy, and paste functions.
-	* Added new entry and copy entry functions.
-	* Added find previous, select all, and deselection functions.
+        * Added cut, copy, and paste functions.
+        * Added new entry and copy entry functions.
+        * Added find previous, select all, and deselection functions.
 
 2003-12-31  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed double clicking an entry to show the editor.
-	* Moved entry edit widget to dialog box.
+        * Changed double clicking an entry to show the editor.
+        * Moved entry edit widget to dialog box.
 
 2003-12-13  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated French translation, thanks to RNB.
+        * Updated French translation, thanks to RNB.
 
 2003-12-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Added image fields.
-	* Changed auto-completion to account for fields with multiple values.
+        * Added image fields.
+        * Changed auto-completion to account for fields with multiple values.
 
 2003-12-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Norwegian translation, thanks to Leif Mathis Gaup.
+        * Updated Norwegian translation, thanks to Leif Mathis Gaup.
 
 
 2003-11-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug in remembering visible columns for custom fields.
-	* Added some speed-ups in loading time.
-	* Released Bookcase 0.7.2
+        * Fixed bug in remembering visible columns for custom fields.
+        * Added some speed-ups in loading time.
+        * Released Bookcase 0.7.2
 
 2003-11-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed another ISBN format bug for non-english publishers.
+        * Fixed another ISBN format bug for non-english publishers.
 
 2003-11-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with auto-capitalization when global setting was turned off.
-	* Fixed bug with not saving options for empty collections.
-	* Fixed bug with reordering visible fields.
+        * Fixed bug with auto-capitalization when global setting was turned off.
+        * Fixed bug with not saving options for empty collections.
+        * Fixed bug with reordering visible fields.
 
 2003-11-21  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Pilot-DB export option.
-	* Fixed bug to update status line after deleting entries.
+        * Added Pilot-DB export option.
+        * Fixed bug to update status line after deleting entries.
 
 2003-11-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Derived field type for concatenating values from other fields.
-	* Added default collections for trading cards, coins, stamps, comic books, and wines.
+        * Added Derived field type for concatenating values from other fields.
+        * Added default collections for trading cards, coins, stamps, comic books, and wines.
 
 2003-11-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated German tranlation, thanks to Gerrit Albrecht.
-	* Added Swedish translation, thanks to Karolina Lindqvist.
-	* Fixed bug with adding 2-column table.
-	* Cut the 0.7.x branch.	
-	* Added Derived field type.
+        * Updated German tranlation, thanks to Gerrit Albrecht.
+        * Added Swedish translation, thanks to Karolina Lindqvist.
+        * Fixed bug with adding 2-column table.
+        * Cut the 0.7.x branch.
+        * Added Derived field type.
 
 2003-11-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed charset encoding bug.
-	* Fixed compile for GCC 2.96.
-	* Changed bibtex and CSV export to default to locale encoding.
-	* Fixed bug with field editor not updating title.
-	* Released Bookcase 0.7.1.
+        * Fixed charset encoding bug.
+        * Fixed compile for GCC 2.96.
+        * Changed bibtex and CSV export to default to locale encoding.
+        * Fixed bug with field editor not updating title.
+        * Released Bookcase 0.7.1.
 
 2003-11-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.7.
+        * Released Bookcase 0.7.
 
 2003-11-05  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed the tips file translation issue.
-	* Released Bookcase 0.7pre2.
+        * Fixed the tips file translation issue.
+        * Released Bookcase 0.7pre2.
 
 2003-11-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed ISBN formatting bug for non-english language publishers.
-	* Released Bookcase 0.7pre1.
+        * Fixed ISBN formatting bug for non-english language publishers.
+        * Released Bookcase 0.7pre1.
 
 2003-10-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed documentation compile error for KDE 3.2.
-	* Added CSV importer.
-	* Changed Bibtexml importer and exporter to use internal classes rather than XSL stylesheets.
+        * Fixed documentation compile error for KDE 3.2.
+        * Added CSV importer.
+        * Changed Bibtexml importer and exporter to use internal classes rather than XSL stylesheets.
 
 2003-10-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Added string macro editor for Bibtex collections.
-	* Printing now only prints visible entries by default.
+        * Added string macro editor for Bibtex collections.
+        * Printing now only prints visible entries by default.
 
 2003-10-21  Robby Stephenson  <robby@periapsis.org>
 
-	* Added new group for all attributes formatted as names, so Editors and Authors can be grouped together.
+        * Added new group for all attributes formatted as names, so Editors and Authors can be grouped together.
 
 2003-10-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed printing to print columns as shown in the view, and group by the current grouping.
-	* Removed old options for printing fields selection.
+        * Changed printing to print columns as shown in the view, and group by the current grouping.
+        * Removed old options for printing fields selection.
 
 2003-10-04  Robby Stephenson  <robby@periapsis.org>
 
-	* Added capability to reorder fields in field editor.
+        * Added capability to reorder fields in field editor.
 
 2003-10-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Imported btparse library code to use for importing Bibtex files. It has a lot of warnings, but none should be fatal.
+        * Imported btparse library code to use for importing Bibtex files. It has a lot of warnings, but none should be fatal.
 
 2003-09-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Added "Bibtex Field" to default Bibtex collections fields to aid in exporting to Bibtex and Bibtexml.
-	* Bumped document syntax to 4.
-	* Changed "attribute" elements in document file to "field".
-	* Changed all unit elements to "entry" rather than the unit name.
-	* Changed Boolean values to save as "true" instead of an implicit value.
-	* Added CSV exporter.
-	
+        * Added "Bibtex Field" to default Bibtex collections fields to aid in exporting to Bibtex and Bibtexml.
+        * Bumped document syntax to 4.
+        * Changed "attribute" elements in document file to "field".
+        * Changed all unit elements to "entry" rather than the unit name.
+        * Changed Boolean values to save as "true" instead of an implicit value.
+        * Added CSV exporter.
+
 2003-09-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Added 2-column Table field type.
+        * Added 2-column Table field type.
 
 2003-09-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed boolean values to show title in group view.
+        * Changed boolean values to show title in group view.
 
 2003-09-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug when deleting multiple books from detailed listview.
+        * Fixed bug when deleting multiple books from detailed listview.
 
 2003-08-31  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed field completion to be case-insensitive.
-	* Fixed bug with saving listview columns.
+        * Changed field completion to be case-insensitive.
+        * Fixed bug with saving listview columns.
 
 2003-08-16  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with reopening last saved file.
+        * Fixed bug with reopening last saved file.
 
 2003-08-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Added French translation from RNB.
+        * Added French translation from RNB.
 
 2003-08-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Added menu item for configuring toolbars.
-	* Added menu item for configuring shortcut keys.
+        * Added menu item for configuring toolbars.
+        * Added menu item for configuring shortcut keys.
 
 2003-07-31  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Table field type.
+        * Added Table field type.
 
 2003-07-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug in saving visible columns.
-	* Improved loading time.
+        * Fixed bug in saving visible columns.
+        * Improved loading time.
 
 2003-07-29  Robby Stephenson  <robby@periapsis.org>
 
-	* Implemented adding file extension (.bc) when using File->Save As and an extension filter is shown.
-	* Added status bar text showing number of selected books when more than 1 is selected.
+        * Implemented adding file extension (.bc) when using File->Save As and an extension filter is shown.
+        * Added status bar text showing number of selected books when more than 1 is selected.
 
 2003-07-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Added menu comands for showing/hiding the group view and editor.
+        * Added menu comands for showing/hiding the group view and editor.
 
 2003-07-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Added "--nofile" command line option for bypassing the "Open last file" config setting.
-	* Added "Tip of the Day" dialog.
-	* Changed default for showing unit count to true.
-	* Changed Year field type to generic Number.
-	* Improved sorting to sort numerically for Number fields.
-	* Added Default button to Field Editor dialog.
-	* Added additional format option to never capitalize or format.
-	* Fixed last open file option to no longer be over-written when Bookcase is exited with an empty document.
-	* Cut the 0.6.x branch.
+        * Added "--nofile" command line option for bypassing the "Open last file" config setting.
+        * Added "Tip of the Day" dialog.
+        * Changed default for showing unit count to true.
+        * Changed Year field type to generic Number.
+        * Improved sorting to sort numerically for Number fields.
+        * Added Default button to Field Editor dialog.
+        * Added additional format option to never capitalize or format.
+        * Fixed last open file option to no longer be over-written when Bookcase is exited with an empty document.
+        * Cut the 0.6.x branch.
 
 2003-07-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crashing bug in "Edit Fields" dialog.
+        * Fixed crashing bug in "Edit Fields" dialog.
 
 2003-07-21  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.6.5
+        * Released Bookcase 0.6.5
 
 2003-07-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Estonian translation from Toomas Nigola.
+        * Added Estonian translation from Toomas Nigola.
 
 2003-07-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated German translation from Ulf-Diether Ehlert.
+        * Updated German translation from Ulf-Diether Ehlert.
 
 2003-07-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed translation bug with category names.
-	* Added Bulgarian translation from Boyan Ivanov.
+        * Fixed translation bug with category names.
+        * Added Bulgarian translation from Boyan Ivanov.
 
 2003-06-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed sorting bug for empty fields.
-	* Released Bookcase 0.6.4
+        * Fixed sorting bug for empty fields.
+        * Released Bookcase 0.6.4
 
 2003-06-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed focus to first tab when adding new book.
-	* Disabled multiple value option for title field in field editor.
-	* Fixed bug with completion object not being updated when a field is changed to all auto-completion.
-	* Fixed drawing bug with toolbar label background.
+        * Changed focus to first tab when adding new book.
+        * Disabled multiple value option for title field in field editor.
+        * Fixed bug with completion object not being updated when a field is changed to all auto-completion.
+        * Fixed drawing bug with toolbar label background.
 
 2003-06-17  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with surname matching too much with periods in regexp.
-	* Added Japanese translation from Linux Magazine.
-	* Added Dutch translation from Liese De Vos.
+        * Fixed bug with surname matching too much with periods in regexp.
+        * Added Japanese translation from Linux Magazine.
+        * Added Dutch translation from Liese De Vos.
 
 2003-05-30  Robby Stephenson  <robby@periapsis.org>
 
-	* Fix crashing bug when opening the filter dialog on KDE 3.0.
+        * Fix crashing bug when opening the filter dialog on KDE 3.0.
 
 2003-05-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.6.3
+        * Released Bookcase 0.6.3
 
 2003-05-26  Robby Stephenson  <robby@periapsis.org>
 
-	* Added feature where the column view remembers the previous sorted column, so that items with the same sort key are subsequently sorted by previous column.
+        * Added feature where the column view remembers the previous sorted column, so that items with the same sort key are subsequently sorted by previous column.
 
 2003-05-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Add Spanish translation, thanks to Quique.
-	* Updated Norwegian translation, thanks to Leif Mathis.
-	* Fix bug with collapse/expand all not working in group view.
-	* Fix bug with "Find" not properly traversing the collection.
-	* Fix bug with sorted column not being saved between document loads.
-	* Fix bug with changed category not being reflected in edit widget.
-	* Fix bug with name prefixes not being limited to word boundaries.
+        * Add Spanish translation, thanks to Quique.
+        * Updated Norwegian translation, thanks to Leif Mathis.
+        * Fix bug with collapse/expand all not working in group view.
+        * Fix bug with "Find" not properly traversing the collection.
+        * Fix bug with sorted column not being saved between document loads.
+        * Fix bug with changed category not being reflected in edit widget.
+        * Fix bug with name prefixes not being limited to word boundaries.
 
 2003-05-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase 0.6.2
+        * Released Bookcase 0.6.2
 
 2003-05-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with custom fields not showing up in column popup menu.
-	* Fixed crashing when selecting a different book after modifying the current one and not saving it.
-	* Fixed icon bug for column view.
-	* Prettied-up some of layout code.
+        * Fixed bug with custom fields not showing up in column popup menu.
+        * Fixed crashing when selecting a different book after modifying the current one and not saving it.
+        * Fixed icon bug for column view.
+        * Prettied-up some of layout code.
 
 2003-05-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Norwegian translation from Leif Mathis Gaup.
-	* Fixed printing bug for books with multiple groups.
+        * Added Norwegian translation from Leif Mathis Gaup.
+        * Fixed printing bug for books with multiple groups.
 
 2003-05-06  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed initial file opening so that if a new empty file was the last viewed, then no recent file is opened at next startup.
-	* Fixed bug with initial collection not updating edit widgets.
+        * Changed initial file opening so that if a new empty file was the last viewed, then no recent file is opened at next startup.
+        * Fixed bug with initial collection not updating edit widgets.
 
 2003-05-05  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase version 0.6.1
-	* Fixed automake 1.7 error with configure.in.in
-	* Fixed UIC variable usage, primarily for *BSD platforms
-	* Fixed double encoding bug on bibtexml inport
-	* Fixed wrong namespace on bibtexml export
-	* Changed to use KAcceleratorManager for keyboard accels on tabs
-	* Fixed bug with the group view icon not getting changed back to the folder
+        * Released Bookcase version 0.6.1
+        * Fixed automake 1.7 error with configure.in.in
+        * Fixed UIC variable usage, primarily for *BSD platforms
+        * Fixed double encoding bug on bibtexml inport
+        * Fixed wrong namespace on bibtexml export
+        * Changed to use KAcceleratorManager for keyboard accels on tabs
+        * Fixed bug with the group view icon not getting changed back to the folder
 
 2003-05-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with editing multiple books and getting asked every time if I'm sure.
-	* Changed modified field names in the "Edit Fields" dialog to be colored, an din italic font instead of having an asterisk in front.
+        * Fixed bug with editing multiple books and getting asked every time if I'm sure.
+        * Changed modified field names in the "Edit Fields" dialog to be colored, an din italic font instead of having an asterisk in front.
 
 2003-05-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase version 0.6
-	* Changed Bibtex export to use the Locale character encoding instead of UTF-8
+        * Released Bookcase version 0.6
+        * Changed Bibtex export to use the Locale character encoding instead of UTF-8
 
 2003-04-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Added a URL attribute type
-	* Changed articles, surname prefixes, and suffixes to be case-insensitive so the config value no longer has to include both capitalized and lower-case values
-	* Broke out the attribute format flag for cleaner code
+        * Added a URL attribute type
+        * Changed articles, surname prefixes, and suffixes to be case-insensitive so the config value no longer has to include both capitalized and lower-case values
+        * Broke out the attribute format flag for cleaner code
 
 2003-04-13  Robby Stephenson  <robby@periapsis.org>
 
-	* Added multiple selection, batch editing
+        * Added multiple selection, batch editing
 
 2003-04-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Added RegExp Editor button to find dialog
-	* Added Quick and Advanced filtering in the detailed list view
+        * Added RegExp Editor button to find dialog
+        * Added Quick and Advanced filtering in the detailed list view
 
 2003-04-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added new "person" icon for grouping when the group is a name
+        * Added new "person" icon for grouping when the group is a name
 
 2003-04-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Convert from KTabCtrl to QTabWidget, which has more documentation and is actively developed
+        * Convert from KTabCtrl to QTabWidget, which has more documentation and is actively developed
 
 2003-04-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with column order not retained on save
+        * Fixed bug with column order not retained on save
 
 2003-04-05  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with validating multiple copyright years
+        * Fixed bug with validating multiple copyright years
 
 2003-03-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Added surname prefixes like 'de' and 'von'
+        * Added surname prefixes like 'de' and 'von'
 
 2003-03-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed debug mistake.
-	* Released Bookcase version 0.5.2a
+        * Fixed debug mistake.
+        * Released Bookcase version 0.5.2a
 
 2003-03-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase version 0.5.2
+        * Released Bookcase version 0.5.2
 
 2003-03-21  Robby Stephenson  <robby@periapsis.org>
 
-	* Added German translation from Gerrit M. Albrecht
-	* Fixed bugs with empty suffix and article list
-	* Fixed some i18n issues
+        * Added German translation from Gerrit M. Albrecht
+        * Fixed bugs with empty suffix and article list
+        * Fixed some i18n issues
 
 2003-03-18  Robby Stephenson  <robby@periapsis.org>
 
-	* Added Hungarian translation from Marcel Hilzinger
+        * Added Hungarian translation from Marcel Hilzinger
 
 2003-03-15  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed types and compile problems. Thanks, Dre!
-	* Released Bookcase version 0.5.1
+        * Fixed types and compile problems. Thanks, Dre!
+        * Released Bookcase version 0.5.1
 
 2003-03-14  Robby Stephenson  <robby@periapsis.org>
 
-	* Put the book count in color.
-	* Took out general export function for now.
-	* Released Bookcase version 0.5
+        * Put the book count in color.
+        * Took out general export function for now.
+        * Released Bookcase version 0.5
 
 2003-03-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Added a new printing page in the configuration dialog
-	* Added a checkmark pixmap for the boolean fields
-	* Added a header menu to be able to select which fields to show in
-	the detailed list view
+        * Added a new printing page in the configuration dialog
+        * Added a checkmark pixmap for the boolean fields
+        * Added a header menu to be able to select which fields to show in
+        the detailed list view
 
 2003-03-02  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed character encoding bug for latin2
+        * Fixed character encoding bug for latin2
 
 2003-01-25  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed focus bug
+        * Fixed focus bug
 
 2003-01-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Changed FORMAT_VERSION to 2
-	* Changed document format so that attributes which allow multiple
-	entries are saved in multiple XML elements
-	* Changed "keywords" attribute to "keyword"
-	* Added check for document format version so that incompatible versions
-	are not loaded. Older versions will be properly loaded, but once saved,
-	previous versions of Bookcase will not load the new files properly.
-	* Changed "Language" and "Copyright Year" to allow multiple entries.
+        * Changed FORMAT_VERSION to 2
+        * Changed document format so that attributes which allow multiple
+        entries are saved in multiple XML elements
+        * Changed "keywords" attribute to "keyword"
+        * Added check for document format version so that incompatible versions
+        are not loaded. Older versions will be properly loaded, but once saved,
+        previous versions of Bookcase will not load the new files properly.
+        * Changed "Language" and "Copyright Year" to allow multiple entries.
 
 2002-12-12  Robby Stephenson  <robby@periapsis.org>
-	
-	* Added namespaces to document file
-  
+
+        * Added namespaces to document file
+
 2002-12-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Added import from Bibtexml using XSLT
+        * Added import from Bibtexml using XSLT
 
 2002-12-08  Robby Stephenson  <robby@periapsis.org>
 
-	* Added export to Bibtex using XSLT
-	* Added export to Bibtexml using XSLT
+        * Added export to Bibtex using XSLT
+        * Added export to Bibtexml using XSLT
 
 2002-12-03  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase version 0.4.1
-	* Added a Romanian translation from Iulian Ursache <iulianu@cs.tuiasi.ro>
+        * Released Bookcase version 0.4.1
+        * Added a Romanian translation from Iulian Ursache <iulianu@cs.tuiasi.ro>
 
 2002-11-29  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed compile problems with gcc 2.95
+        * Fixed compile problems with gcc 2.95
 
 2002-11-24  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase version 0.4
-	* Printing improvements in XSLT layout
+        * Released Bookcase version 0.4
+        * Printing improvements in XSLT layout
 
 2002-11-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added an Italian translation from FaUsT <faust@inventati.org> 
+        * Added an Italian translation from FaUsT <faust@inventati.org>
 
 2002-11-05  Robby Stephenson  <robby@periapsis.org>
 
-	* Added a new toolbar for changing the grouping of the units
-	* Changed the bookcase.spec file to add proper files
+        * Added a new toolbar for changing the grouping of the units
+        * Changed the bookcase.spec file to add proper files
 
 2002-10-20  Robby Stephenson  <robby@periapsis.org>
 
-	* Released Bookcase version 0.3
-  
+        * Released Bookcase version 0.3
+
 2002-08-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Added two new XSLT files
-	* Added printing support using KHTML
-	* Added RPM spec file to automake
+        * Added two new XSLT files
+        * Added printing support using KHTML
+        * Added RPM spec file to automake
 
 2002-02-21  Robby Stephenson  <robby@radiojodi.com>
 
-	* Released Bookcase version 0.2
+        * Released Bookcase version 0.2
 
 2002-02-20  Robby Stephenson  <robby@radiojodi.com>
 
-	* Added BCColumnView::slotShowUnit() so to ensure that the proper listview in the stack is shown.
-	* Added BCAttribute::capitalize for auto capitalization of names and titles.
+        * Added BCColumnView::slotShowUnit() so to ensure that the proper listview in the stack is shown.
+        * Added BCAttribute::capitalize for auto capitalization of names and titles.
 
 2002-02-08  Robby Stephenson  <robby@radiojodi.com>
 
-	* Changed selection behavior so the two listviews do not sync now. Clicking in one clears the other.
+        * Changed selection behavior so the two listviews do not sync now. Clicking in one clears the other.
 
 2002-02-03  Robby Stephenson  <robby@radiojodi.com>
 
-	* Added article and suffix list to options in config dialog.
+        * Added article and suffix list to options in config dialog.
 
 2002-01-11  Robby Stephenson  <robby@radiojodi.com>
 
-	* BCListView is now BCColumnView and can flip between different collections. Woo-hoo! Now multiple collections behave properly. Also started adding configuration options.
+        * BCListView is now BCColumnView and can flip between different collections. Woo-hoo! Now multiple collections behave properly. Also started adding configuration options.
 
 2002-01-10  Robby Stephenson  <robby@radiojodi.com>
 
-	* bctabcontrol.{h,cpp} Need KTabCtl::showTab to be public, so subclassed it.
+        * bctabcontrol.{h,cpp} Need KTabCtl::showTab to be public, so subclassed it.
 
 2002-01-10  Robby Stephenson  <robby@radiojodi.com>
 
-	* configdialog.{h,cpp} Added beginnings of configuration dialog.
+        * configdialog.{h,cpp} Added beginnings of configuration dialog.
 
 2001-12-06  Robby Stephenson  <robby@radiojodi.com>
 
-	* bcgroupview.cpp, bcattribute.cpp Fixed the bug for formatting names with suffixes like Jr.
+        * bcgroupview.cpp, bcattribute.cpp Fixed the bug for formatting names with suffixes like Jr.
 
 2001-11-05  Robby Stephenson  <robby@radiojodi.com>
 
-	* bookcase.h Removed the File->Close() action item.
+        * bookcase.h Removed the File->Close() action item.
 
 2001-11-05  Robby Stephenson  <robby@radiojodi.com>
 
-	* bcgroupview.cpp Fixed the bug where clicking the collapse or expand menu item on a BCUnitItem caused the pixmap to change to a folder.
+        * bcgroupview.cpp Fixed the bug where clicking the collapse or expand menu item on a BCUnitItem caused the pixmap to change to a folder.
 
 2001-11-04  Robby Stephenson  <robby@radiojodi.com>
 
-	* Released Bookcase version 0.1
+        * Released Bookcase version 0.1

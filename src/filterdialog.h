@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,7 +22,9 @@ class QRadioButton;
 class QDialog;
 
 // kwidgetlister is copied from kdepim/libkdenetwork cvs
-#include "kwidgetlister.h"
+#include "gui/kwidgetlister.h"
+#include "filter.h"
+#include "datavectors.h"
 
 #include <kdialogbase.h>
 
@@ -31,8 +33,6 @@ class QDialog;
 #include <qstringlist.h>
 
 namespace Tellico {
-  class Filter;
-  class FilterRule;
   class FilterDialog;
 
 /**
@@ -44,7 +44,6 @@ namespace Tellico {
  * This class borrows heavily from KMSearchRule in kmail by Marc Mutz
  *
  * @author Robby Stephenson
- * @version $Id: filterdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class FilterRuleWidget : public QHBox {
 Q_OBJECT
@@ -72,6 +71,12 @@ public:
    * Resets the rule currently worked on and updates the widget accordingly.
    */
   void reset();
+
+signals:
+  void signalModified();
+
+public slots:
+  void setFocus();
 
 protected slots:
   void slotEditRegExp();
@@ -101,6 +106,10 @@ public:
 
 public slots:
   void reset();
+  virtual void setFocus();
+
+signals:
+  void signalModified();
 
 protected:
   virtual void clearWidget(QWidget* widget);
@@ -109,21 +118,26 @@ protected:
 
 /**
  * @author Robby Stephenson
- * @version $Id: filterdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class FilterDialog : public KDialogBase {
 Q_OBJECT
 
 public:
+  enum Mode {
+    CreateFilter,
+    ModifyFilter
+  };
+
   /**
    * The constructor sets up the dialog.
    *
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  FilterDialog(QWidget* parent, const char* name=0);
+  FilterDialog(Mode mode, QWidget* parent, const char* name=0);
 
-  void setFilter(const Filter* filter);
+  Filter* currentFilter();
+  void setFilter(Filter* filter);
 
 public slots:
   void slotClear();
@@ -132,14 +146,23 @@ protected slots:
   virtual void slotOk();
   virtual void slotApply();
   void slotShrink();
+  void slotFilterChanged();
+  void slotSaveFilter();
 
 signals:
   void signalUpdateFilter(Tellico::Filter*);
+  void signalCollectionModified();
 
 private:
+  void init();
+
+  FilterPtr m_filter;
+  const Mode m_mode;
   QRadioButton* m_matchAll;
   QRadioButton* m_matchAny;
   FilterRuleWidgetLister* m_ruleLister;
+  KLineEdit* m_filterName;
+  KPushButton* m_saveFilter;
 };
 
 } // end namespace

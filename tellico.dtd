@@ -1,8 +1,6 @@
 <!--
    ================================================================
-   Tellico XML DTD version 7.0
-
-   $Id: tellico.dtd 1158 2005-04-01 01:24:27Z robby $
+   Tellico XML DTD version 8.0
 
    Copyright (c) 2004 Robby Stephenson
 
@@ -12,17 +10,18 @@
 
    The formal public identifer for this DTD should be:
    
-      "-//Robby Stephenson/DTD Tellico V7.0//EN"
+      "-//Robby Stephenson/DTD Tellico V8.0//EN"
 
    ================================================================
 -->
-<!ELEMENT tellico (collection+)>
-<!ATTLIST tellico syntaxVersion CDATA #REQUIRED>
+<!ELEMENT tellico (collection+, borrowers?, filters?)>
+<!ATTLIST tellico syntaxVersion CDATA #FIXED "8">
 <!ATTLIST tellico xmlns CDATA #FIXED "http://periapsis.org/tellico/">
 
-<!ELEMENT collection (fields | bibtex-preamble | macros | entry | images)+>
+<!ELEMENT collection (fields | bibtex-preamble | macros | entry |
+images | borrowers | filters)+>
 <!ATTLIST collection title CDATA #REQUIRED>
-<!ATTLIST collection type (1|2|3|4|5|6|7|8|9|10) #REQUIRED>
+<!ATTLIST collection type (1|2|3|4|5|6|7|8|9|10|11) #REQUIRED>
 <!ATTLIST collection entryTitle CDATA #IMPLIED>
 
 <!ELEMENT images (image+)>
@@ -34,7 +33,7 @@
 
 <!ELEMENT fields (field+)>
 <!ELEMENT field (prop*)>
-<!ATTLIST field i18n CDATA #IMPLIED>
+<!ATTLIST field i18n (true|false) "true">
 <!ATTLIST field name CDATA #REQUIRED>
 <!ATTLIST field title CDATA #REQUIRED>
 <!ATTLIST field category CDATA #REQUIRED>
@@ -42,7 +41,7 @@
 <!ATTLIST field flags CDATA #IMPLIED>
 <!ATTLIST field format CDATA #IMPLIED>
 <!ATTLIST field description CDATA #IMPLIED>
-<!ATTLIST field type (1|2|3|4|5|6|7|8|9|10|11|12) #IMPLIED>
+<!ATTLIST field type (1|2|3|4|5|6|7|8|9|10|11|12|14) #REQUIRED>
 
 <!ELEMENT prop (#PCDATA)>
 <!ATTLIST prop name CDATA #REQUIRED>
@@ -56,9 +55,29 @@
 <!-- general -->
 <!-- columns are used in 2-column tables to split the values -->
 <!ELEMENT column (#PCDATA)>
-<!-- year, month, day are used in dates, not in any default collections -->
-<!-- month and year are already defined for bibtex -->
+<!-- year, month, day are used in dates -->
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT month (#PCDATA)>
 <!ELEMENT day (#PCDATA)>
+
+<!-- borrowing -->
+<!ELEMENT borrowers (borrower+)>
+<!ELEMENT borrower (loan)>
+<!ELEMENT loan (#PCDATA)>
+<!ATTLIST loan dueDate CDATA #IMPLIED>
+<!ATTLIST loan loanDate CDATA #REQUIRED>
+<!ATTLIST loan entryRef CDATA #REQUIRED>
+<!ATTLIST loan uid CDATA #REQUIRED>
+
+<!-- filters -->
+<!ELEMENT filters (filter+)>
+<!ELEMENT filter (rule)>
+<!ATTLIST filter name CDATA #REQUIRED>
+<!ATTLIST filter match CDATA #REQUIRED>
+<!ELEMENT rule (#PCDATA)>
+<!ATTLIST rule field CDATA #REQUIRED>
+<!ATTLIST rule function CDATA #REQUIRED>
+<!ATTLIST rule pattern CDATA #REQUIRED>
 
 <!ELEMENT entry (title | subtitle | authors | binding | pur_date |
 pur_price | publisher | edition | cr_years | pub_year | isbn | lccn |
@@ -73,9 +92,9 @@ running-time | aspect-ratios | widescreen | color | directors-cut |
 plot | player | team | brand | location | quantity | front | back |
 mintmark | set | grade | service | obverse | reverse | issue | cover |
 description | scott | cancelled | hinged | centering | gummed |
-producer | appellation | varietal | vintage | type | drink-by)+>
+producer | appellation | varietal | vintage | type | drink-by |
+platform | publishers | developers | completed)+>
 <!ATTLIST entry id CDATA #REQUIRED>
-
 
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT subtitle (#PCDATA)>
@@ -115,9 +134,7 @@ producer | appellation | varietal | vintage | type | drink-by)+>
 <!ELEMENT editors (editor+)>
 <!ELEMENT editor (#PCDATA)>
 <!ELEMENT organization (#PCDATA)>
-<!ELEMENT year (#PCDATA)>
 <!ELEMENT journal (#PCDATA)>
-<!ELEMENT month (#PCDATA)>
 <!ELEMENT number (#PCDATA)>
 <!ELEMENT howpublished (#PCDATA)>
 <!ELEMENT chapter (#PCDATA)>
@@ -198,3 +215,11 @@ producer | appellation | varietal | vintage | type | drink-by)+>
 <!ELEMENT vintage (#PCDATA)>
 <!ELEMENT type (#PCDATA)>
 <!ELEMENT drink-by (#PCDATA)>
+
+<!-- games -->
+<!ELEMENT platform (#PCDATA)>
+<!-- publisher is defined above -->
+<!ELEMENT publishers (publisher+)>
+<!ELEMENT developers (developer+)>
+<!ELEMENT developer (#PCDATA)>
+<!ELEMENT completed (#PCDATA)>

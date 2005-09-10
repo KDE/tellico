@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2004 by Robby Stephenson
+    copyright            : (C) 2002-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,25 +11,27 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BOOKCASEENTRYICONVIEW_H
-#define BOOKCASEENTRYICONVIEW_H
+#ifndef TELLICOENTRYICONVIEW_H
+#define TELLICOENTRYICONVIEW_H
 
 class KPopupMenu;
 
+#include "observer.h"
 #include "entry.h"
+#include "datavectors.h"
 
 #include <kiconview.h>
 
-#include <qguardedptr.h>
-
 namespace Tellico {
   class EntryIconViewItem;
+  namespace Data {
+    class Collection;
+  }
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryiconview.h 1233 2005-06-09 04:38:04Z robby $
  */
-class EntryIconView : public KIconView {
+class EntryIconView : public KIconView, public Observer {
 Q_OBJECT
 
 friend class EntryIconViewItem;
@@ -39,18 +41,19 @@ public:
 
   virtual void clear();
   void refresh();
-  void showCollection(const Data::Collection* collection);
-  void showEntryGroup(const Data::EntryGroup* group);
+  void showEntries(const Data::EntryVec& entries);
   /**
    * Adds a new list item showing the details for a entry.
    *
    * @param entry A pointer to the entry
    */
-  void addEntry(Data::Entry* entry);
-  void removeEntry(Data::Entry* entry);
+  virtual void    addEntry(Data::Entry* entry);
+  virtual void modifyEntry(Data::Entry*) { refresh(); }
+  virtual void removeEntry(Data::Entry* entry);
+
   const QString& imageField();
   void setMaxIconWidth(uint width);
-  uint maxIconWidth() const { return m_maxIconWidth; };
+  uint maxIconWidth() const { return m_maxIconWidth; }
 
   const QPixmap& defaultPixmap() { return m_defaultPixmap; }
   /**
@@ -59,9 +62,6 @@ public:
    * @return The list of selected items
    */
   const QPtrList<EntryIconViewItem>& selectedItems() const { return m_selectedItems; }
-
-public slots:
-  void slotGroupModified(Tellico::Data::Collection*, const Tellico::Data::EntryGroup* group);
 
 private slots:
   void slotSelectionChanged();
@@ -79,10 +79,10 @@ private:
   mutable QPtrList<EntryIconViewItem> m_selectedItems;
 
   void findImageField();
-  void fillView(const Data::EntryList& list);
+  void fillView();
 
-  QGuardedPtr<const Data::Collection> m_coll;
-  const Data::EntryGroup* m_group;
+  KSharedPtr<Data::Collection> m_coll;
+  Data::EntryVec m_entries;
   QString m_imageField;
   QPixmap m_defaultPixmap;
   KPopupMenu* m_itemMenu;
@@ -99,7 +99,7 @@ public:
   virtual void setSelected(bool s);
 
 private:
-  Data::Entry* m_entry;
+  Data::EntryPtr m_entry;
 };
 
 } // end namespace

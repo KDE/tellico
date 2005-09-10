@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,7 +28,6 @@ namespace Tellico {
  * @li Title
  *
  * @author Robby Stephenson
- * @version $Id: bibtexcollection.h 862 2004-09-15 01:49:51Z robby $
  */
 class BibtexCollection : public Collection {
 Q_OBJECT
@@ -56,12 +55,13 @@ public:
   const StringMap& macroList() const { return m_macros; }
   void setMacroList(StringMap map) { m_macros = map; }
   void addMacro(const QString& key, const QString& value) { m_macros.insert(key, value); }
+  QStringList bibtexKeys(const EntryVec& entries) const;
   /**
    * Open a pipe to lyx and send a citation for the selected entries
    */
-  void citeEntries(QFile& lyxpipe, const EntryList& list);
+  void citeEntries(QFile& lyxpipe, const EntryVec& entries) const;
 
-  static FieldList defaultFields();
+  static FieldVec defaultFields();
   static BibtexCollection* convertBookCollection(const Collection* coll);
 
 private:

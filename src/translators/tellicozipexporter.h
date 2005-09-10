@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,23 +14,24 @@
 #ifndef TELLICOZIPEXPORTER_H
 #define TELLICOZIPEXPORTER_H
 
-#include "dataexporter.h"
+#include "exporter.h"
 
 namespace Tellico {
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: tellicozipexporter.h 867 2004-09-15 03:04:49Z robby $
  */
-class TellicoZipExporter : public DataExporter {
+class TellicoZipExporter : public Exporter {
 public:
-  TellicoZipExporter(const Data::Collection* coll) : DataExporter(coll) {};
+  TellicoZipExporter() : Exporter() {}
 
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual bool exec();
   virtual QString formatString() const;
-  virtual QByteArray data(bool formatFields);
   virtual QString fileFilter() const;
+
+  // no options
+  virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual void readOptions(KConfig*) {}
   virtual void saveOptions(KConfig*) {}
 };

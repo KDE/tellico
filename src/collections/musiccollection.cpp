@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -32,8 +32,8 @@ MusicCollection::MusicCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("artist"));
 }
 
-Tellico::Data::FieldList MusicCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec MusicCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Album"));
@@ -63,7 +63,7 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
 
   field = new Field(QString::fromLatin1("year"), i18n("Year"), Field::Number);
   field->setCategory(i18n(music_general));
-  field->setFlags(Field::AllowMultiple | Field::AllowGrouped);
+  field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QString::fromLatin1("genre"), i18n("Genre"));
@@ -76,9 +76,7 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   field->setFormatFlag(Field::FormatTitle);
   list.append(field);
 
-  QStringList rating;
-  rating << i18n("5 - Best") << i18n("4 - Good") << i18n("3 - Neutral") << i18n("2 - Bad") << i18n("1 - Worst");
-  field = new Field(QString::fromLatin1("rating"), i18n("Rating"), rating);
+  field = new Field(QString::fromLatin1("rating"), i18n("Rating"), Field::Rating);
   field->setCategory(i18n(music_personal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);

@@ -90,23 +90,13 @@ To allow grouping by a field which doesn't allow grouping by default, check the
 </qandaentry>
 
 <qandaentry>
-<question>
-<para>How do I rename my collection?</para>
-</question>
-<answer>
-<para>In the left side column, right-click on the top-level item representing
-the collection. Select the "Rename Collection" option.</para>
-</answer>
-</qandaentry>
-
-<qandaentry>
 <question><para>Why does all that gobbledy-gook show up when I run &appname;?</para></question>
 <answer>
 <para>Stuff like:
 <screen width="40">
 <computeroutput>Tellico::updateCollectionToolBar</computeroutput>
-<computeroutput>BCGroupView::setGroupAttribute - author</computeroutput>
-<computeroutput>BCGroupView::slotAddCollection</computeroutput>
+<computeroutput>GroupView::setGroupAttribute - author</computeroutput>
+<computeroutput>GroupView::slotAddCollection</computeroutput>
 <computeroutput>QCheckBox::property( "title" ) failed: property invalid
 or does not exist</computeroutput>
 </screen>
@@ -170,6 +160,9 @@ for access by everyone. Templates in $<envar>KDEHOME</envar> will
 override any files by the same name in $<envar>KDEDIRS</envar>. The
 entry templates can be set on a per collection-type basis in the
 settings dialog.</para>
+
+<para>Templates for the &report-dialog; are saved in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>.
+</para>
 </answer>
 </qandaentry>
 
@@ -241,5 +234,24 @@ The <ulink url="http://www.amazon.com/gp/browse.html/002-0927720-5265623?node=34
 </answer>
 </qandaentry>
 
+<qandaentry>
+<question>
+<para>Why don't you use a real database?</para>
+</question>
+
+<answer>
+<para>
+Part of the reason I started &appname; was to learn C++. I didn't know SQL at the time, and at the moment, I only have a faint knowledge
+of how to use it. Simply put, &appname; didn't start out as a relational database, and that won't change until sometime in the future when
+I get around to learning SQL and have the time and motivation to change the data model. If that bothers you, well, don't use &appname; then.
+</para>
+
+<para>
+Of course, anyone is welcome to make any changes they want to with the source code.
+</para>
+</answer>
+</qandaentry>
+
 </qandaset>
+
 </chapter>

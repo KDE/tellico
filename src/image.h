@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,7 +24,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: image.h 1064 2005-02-02 02:15:51Z robby $
  */
 class Image : public QImage {
 

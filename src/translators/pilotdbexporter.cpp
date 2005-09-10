@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +15,9 @@
 #include "pilotdb/pilotdb.h"
 #include "pilotdb/libflatfile/DB.h"
 
+#include "../document.h"
 #include "../collection.h"
+#include "../filehandler.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -32,7 +34,7 @@
 
 using Tellico::Export::PilotDBExporter;
 
-PilotDBExporter::PilotDBExporter(const Data::Collection* coll_) : Tellico::Export::DataExporter(coll_),
+PilotDBExporter::PilotDBExporter() : Tellico::Export::Exporter(),
       m_backup(true),
       m_widget(0),
       m_checkBackup(0) {
@@ -43,11 +45,14 @@ QString PilotDBExporter::formatString() const {
 }
 
 QString PilotDBExporter::fileFilter() const {
-  return i18n("*.pdb|Pilot Database files(*.pdb)") + QChar('\n') + i18n("*|All files");
+  return i18n("*.pdb|Pilot Database Files(*.pdb)") + QChar('\n') + i18n("*|All Files");
 }
 
-QByteArray PilotDBExporter::data(bool formatFields_) {
-  const Data::Collection* coll = collection();
+bool PilotDBExporter::exec() {
+  const Data::Collection* coll = Data::Document::self()->collection();
+  if(!coll) {
+    return false;
+  }
 
   // This is something of a hidden preference cause I don't want to put it in the GUI right now
   // Latin1 by default
@@ -57,14 +62,14 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
     KConfigGroupSaver group(KGlobal::config(), QString::fromLatin1("ExportOptions - %1").arg(formatString()));
     codec = KGlobal::charsets()->codecForName(KGlobal::config()->readEntry("Charset"));
   }
-#ifndef NDEBUG
   if(!codec) {
-    kdWarning() << "PilotDBExporter::data() - no QTextCodec!" << endl;
-    return QByteArray();
+    kdWarning() << "PilotDBExporter::exec() - no QTextCodec!" << endl;
+    return false;
+#ifndef NDEBUG
   } else {
-    kdDebug() << "PilotDBExporter::data() - encoding with " << codec->name() << endl;
-  }
+    kdDebug() << "PilotDBExporter::exec() - encoding with " << codec->name() << endl;
 #endif
+  }
 
   // DB 0.3.x format
   PalmLib::FlatFile::DB db;
@@ -78,56 +83,57 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
   // all fields are added
   // except that only one field of type NOTE
   bool hasNote = false;
-  Data::FieldList outputFields; // not all fields will be output
-  for(Data::FieldListIterator fIt(coll->fieldList()); fIt.current(); ++fIt) {
-    switch(fIt.current()->type()) {
+  Data::FieldVec outputFields; // not all fields will be output
+  Data::FieldVec fields = coll->fields();
+  for(Data::FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+    switch(fIt->type()) {
       case Data::Field::Choice:
         // the charSeparator is actually defined in DB.h
-        db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::LIST,
-                       codec->fromUnicode(fIt.current()->allowed().join(QChar('/'))).data());
-        outputFields.append(fIt.current());
+        db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::LIST,
+                       codec->fromUnicode(fIt->allowed().join(QChar('/'))).data());
+        outputFields.append(fIt);
         break;
 
       case Data::Field::Number:
         // the DB only supports single values of integers
-        if(fIt.current()->flags() & Data::Field::AllowMultiple) {
-          db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::STRING);
+        if(fIt->flags() & Data::Field::AllowMultiple) {
+          db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
-          db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::INTEGER);
+          db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::INTEGER);
         }
-        outputFields.append(fIt.current());
+        outputFields.append(fIt);
         break;
 
       case Data::Field::Bool:
-        db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::BOOLEAN);
-        outputFields.append(fIt.current());
+        db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::BOOLEAN);
+        outputFields.append(fIt);
         break;
 
       case Data::Field::Para:
         if(hasNote) { // only one is allowed, according to palm-db-tools documentation
           kdDebug() << "PilotDBExporter::data() - adding note as string" << endl;
-          db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::STRING);
+          db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
           kdDebug() << "PilotDBExporter::data() - adding note" << endl;
-          db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::NOTE);
+          db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::NOTE);
           hasNote = true;
         }
-        outputFields.append(fIt.current());
+        outputFields.append(fIt);
         break;
 
       case Data::Field::Date:
-        db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::DATE);
-        outputFields.append(fIt.current());
+        db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::DATE);
+        outputFields.append(fIt);
         break;
 
       case Data::Field::Image:
         // don't include images
-        kdDebug() << "PilotDBExporter::data() - skipping " << fIt.current()->title() << " image field" << endl;
+        kdDebug() << "PilotDBExporter::data() - skipping " << fIt->title() << " image field" << endl;
         break;
 
       default:
-        db.appendField(codec->fromUnicode(fIt.current()->title()).data(), PalmLib::FlatFile::Field::STRING);
-        outputFields.append(fIt.current());
+        db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::STRING);
+        outputFields.append(fIt);
         break;
     }
   }
@@ -145,17 +151,21 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
   }
   db.doneWithSchema();
 
+  Data::FieldVec::ConstIterator fIt, end = outputFields.constEnd();
+  bool format = options() & Export::ExportFormatted;
+
+  QRegExp br(QString::fromLatin1("<br/?>"), false /*case-sensitive*/);
+  QRegExp tags(QString::fromLatin1("<.*>"));
+  tags.setMinimal(true);
+
   QString value;
-  for(Data::EntryListIterator entryIt(entryList()); entryIt.current(); ++entryIt) {
+  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
     PalmLib::FlatFile::Record record;
     unsigned i = 0;
-    for(Data::FieldListIterator fIt(outputFields); fIt.current(); ++fIt, ++i) {
-      if(formatFields_) {
-        value = entryIt.current()->formattedField(fIt.current()->name());
-      } else {
-        value = entryIt.current()->field(fIt.current()->name());
-      }
-      if(fIt.current()->type() == Data::Field::Date) {
+    for(fIt = outputFields.constBegin(); fIt != end; ++fIt, ++i) {
+      value = entryIt->field(fIt->name(), format);
+
+      if(fIt->type() == Data::Field::Date) {
         QStringList s = QStringList::split('-', value, true);
         bool ok = true;
         int y = s.count() > 0 ? s[0].toInt(&ok) : QDate::currentDate().year();
@@ -172,6 +182,9 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
         }
         QDate date(y, m, d);
         value = date.toString(QString::fromLatin1("yyyy/MM/dd"));
+      } else if(fIt->type() == Data::Field::Para) {
+        value.replace(br, QChar('\n'));
+        value.replace(tags, QString::null);
       }
       // the number of fields in the record must match the number of fields in the database
       record.appendField(PilotDB::string2field(db.field_type(i),
@@ -184,7 +197,7 @@ QByteArray PilotDBExporter::data(bool formatFields_) {
   PilotDB pdb;
   db.outputPDB(pdb);
 
-  return pdb.data();
+  return FileHandler::writeDataURL(url(), pdb.data(), options() & Export::ExportForce);
 }
 
 QWidget* PilotDBExporter::widget(QWidget* parent_, const char* name_/*=0*/) {

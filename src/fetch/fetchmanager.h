@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,34 +15,28 @@
 #define FETCHMANAGER_H
 
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
   namespace Fetch {
-    class Fetcher;
     class SearchResult;
     class ConfigWidget;
   }
 }
 
-#include "fetch.h"
+#include "fetcher.h"
+#include "../ptrvector.h"
 
 #include <qobject.h>
-#include <qptrlist.h>
 
 namespace Tellico {
   namespace Fetch {
 
 typedef QMap<Type, QString> FetchMap;
 typedef QMap<FetchKey, QString> FetchKeyMap;
-typedef QPtrList<Fetcher> FetcherList;
-typedef QPtrListIterator<Fetcher> FetcherListIterator;
+typedef PtrVector<Fetcher> FetcherVec;
 
 /**
  * A manager for handling all the different classes of Fetcher.
  *
  * @author Robby Stephenson
- * @version $Id: fetchmanager.h 1065 2005-02-02 02:51:05Z robby $
  */
 class Manager : public QObject {
 Q_OBJECT
@@ -56,16 +50,16 @@ public:
   void stop();
   bool canFetch() const;
   void reloadFetchers();
-  const FetcherList& fetcherList() const { return m_fetchers; }
+  const FetcherVec& fetchers() const { return m_fetchers; }
+  FetchKey fetchKey(const QString& key) const;
+  const QString& fetchKeyString(FetchKey key) const;
 
   static ConfigWidget* configWidget(Type type, QWidget* parent);
   static FetchMap sourceMap();
-  static FetchKey fetchKey(const QString& key);
-  static QString fetchKeyString(FetchKey key);
 
 signals:
   void signalStatus(const QString& status);
-  void signalResultFound(const Tellico::Fetch::SearchResult& result);
+  void signalResultFound(Tellico::Fetch::SearchResult* result);
   void signalDone();
 
 private slots:
@@ -75,11 +69,9 @@ private:
   static Manager* s_self;
   Manager();
 
-  static FetchKeyMap s_keyMap;
-  static void initMap();
-
-  FetcherList m_fetchers;
-  unsigned m_count;
+  FetcherVec m_fetchers;
+  FetchKeyMap m_keyMap;
+  uint m_count;
 };
 
   } // end namespace

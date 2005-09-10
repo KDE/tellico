@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004 by Robby Stephenson
+    copyright            : (C) 2004-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,9 +17,6 @@
 namespace Tellico {
   class XSLTHandler;
 }
-namespace KIO {
-  class Job;
-}
 
 class KLineEdit;
 class KComboBox;
@@ -29,12 +26,12 @@ class QLabel;
 
 #include "fetcher.h"
 #include "configwidget.h"
+#include "../datavectors.h"
 
 #include <kurl.h>
 #include <kio/job.h>
 
 #include <qcstring.h> // for QByteArray
-#include <qintdict.h>
 #include <qguardedptr.h>
 
 namespace Tellico {
@@ -44,7 +41,6 @@ namespace Tellico {
  * A fetcher for Amazon.com.
  *
  * @author Robby Stephenson
- * @version $Id: amazonfetcher.h 1068 2005-02-03 02:09:57Z robby $
  */
 class AmazonFetcher : public Fetcher {
 Q_OBJECT
@@ -85,17 +81,12 @@ public:
   virtual void stop();
   virtual Data::Entry* fetchEntry(uint uid);
   virtual Type type() const { return Amazon; }
-  virtual bool canFetch(Data::Collection::Type type) {
-    return type == Data::Collection::Book
-           || type == Data::Collection::Bibtex
-           || type == Data::Collection::Album
-           || type == Data::Collection::Video;
-  }
+  virtual bool canFetch(int type) const;
   virtual void readConfig(KConfig* config, const QString& group);
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent);
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const ;
 
   struct SiteData {
     QString title;
@@ -106,12 +97,13 @@ public:
     QString vhs;
     QString music;
     QString classical;
+    QString games;
   };
   static const SiteData& siteData(Site site);
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent_, AmazonFetcher* fetcher = 0);
+    ConfigWidget(QWidget* parent_, const AmazonFetcher* fetcher = 0);
 
     virtual void saveConfig(KConfig* config_);
 
@@ -130,8 +122,6 @@ private:
   static XSLTHandler* s_xsltHandler;
   static void initXSLTHandler();
 
-  void cleanUp();
-
   Site m_site;
   bool m_primaryMode;
   ImageSize m_imageSize;
@@ -143,8 +133,7 @@ private:
   QByteArray m_data;
   int m_page;
   int m_total;
-  QIntDict<SearchResult> m_results;
-  QIntDict<Data::Entry> m_entries;
+  QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
   QStringList m_isbnList;
   QGuardedPtr<KIO::Job> m_job;
 

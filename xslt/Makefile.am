@@ -5,7 +5,9 @@ EXTRA_DIST = tellico-by-author.xsl tellico-by-title.xsl \
              tellico-printing.xsl tellico2html.xsl shadowAlpha.png \
              cd-logo.png dvd-logo.png cassette-logo.png record-logo.png \
              vhs-logo.png tellico-common.xsl mods2tellico.xsl \
-             amazon2tellico.xsl MARC21slim2MODS3.xsl MARC21slimUtils.xsl
+             amazon2tellico.xsl MARC21slim2MODS3.xsl MARC21slimUtils.xsl \
+             pubmed2tellico.xsl tellico2onix.xsl UNIMARC2MODS3.xsl \
+             tellico2html.js
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -14,8 +16,9 @@ xsl_DATA = tellico-printing.xsl tellico-by-author.xsl tellico-by-title.xsl \
 	tellico2html.xsl shadowAlpha.png cassette-logo.png cd-logo.png \
         dvd-logo.png record-logo.png vhs-logo.png tellico-common.xsl \
         mods2tellico.xsl amazon2tellico.xsl MARC21slim2MODS3.xsl \
-        MARC21slimUtils.xsl
+        MARC21slimUtils.xsl pubmed2tellico.xsl tellico2onix.xsl \
+	UNIMARC2MODS3.xsl tellico2html.js
 
-SUBDIRS = entry-templates
+SUBDIRS = entry-templates report-templates
 
 KDE_OPTIONS = noautodist

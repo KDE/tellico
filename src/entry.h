@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,23 +11,21 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ENTRY_H
-#define ENTRY_H
+#ifndef TELLICO_ENTRY_H
+#define TELLICO_ENTRY_H
 
-#include "field.h"
+#include "datavectors.h"
+
+#include <ksharedptr.h>
 
 #include <qstringlist.h>
-#include <qmap.h>
 #include <qstring.h>
 #include <qptrlist.h>
+#include <qguardedptr.h>
 
 namespace Tellico {
   namespace Data {
-    class Entry;
     class Collection;
-
-    typedef QPtrList<Entry> EntryList;
-    typedef QPtrListIterator<Entry> EntryListIterator;
 
 /**
  * The EntryGroup is simply a QPtrList of entries which knows the name of its group,
@@ -38,15 +36,14 @@ namespace Tellico {
  * @ref fieldName() would be "author".
  *
  * @author Robby Stephenson
- * @version $Id: entry.h 862 2004-09-15 01:49:51Z robby $
  */
-class EntryGroup : public EntryList {
+class EntryGroup : public EntryVec {
 
 public:
   EntryGroup(const QString& group, const QString& field)
-   : EntryList(), m_group(group), m_field(field) {}
+   : EntryVec(), m_group(group), m_field(field) {}
   EntryGroup(const EntryGroup& group)
-   : EntryList(group), m_group(group.groupName()), m_field(group.fieldName()) {}
+   : EntryVec(group), m_group(group.groupName()), m_field(group.fieldName()) {}
   ~EntryGroup() {}
 
   const QString& groupName() const { return m_group; }
@@ -67,9 +64,8 @@ private:
  * @see Field
  *
  * @author Robby Stephenson
- * @version $Id: entry.h 862 2004-09-15 01:49:51Z robby $
  */
-class Entry {
+class Entry : public KShared {
   // two entries are equal if all their field values are equal
   friend bool operator==(const Entry& e1, const Entry& e2) {
     if(e1.m_fields.count() != e2.m_fields.count()) {
@@ -91,6 +87,7 @@ public:
    * @param coll A pointer to the parent collection object
    */
   Entry(Collection* coll);
+  Entry(Collection* coll, int id);
   /**
    * The copy constructor, needed since the id must be different.
    */
@@ -102,7 +99,8 @@ public:
   /**
    * The assignment operator is overloaded, since the id must be different.
    */
-  Entry operator= (const Entry& entry) { return Entry(entry); }
+  Entry& operator=(const Entry& other);
+  ~Entry();
 
   /**
    * Every entry has a title.
@@ -115,9 +113,10 @@ public:
    * exist, the method returns @ref QString::null.
    *
    * @param name The field name
+   * @param formatted Whether to format the field or not.
    * @return The value of the field
    */
-  QString field(const QString& name) const;
+  QString field(const QString& name, bool formatted=false) const;
   /**
    * Returns the formatted value of the field with a given key name. If the
    * key doesn't exist, the method returns @ref QString::null. The value is cached,
@@ -136,7 +135,7 @@ public:
    * @param format Whether to format the values or not
    * @return The list of field values
    */
-  QStringList fields(const QString& field, bool format) const;
+  QStringList fields(const QString& field, bool formatted) const;
   /**
    * Sets the value of an field for the entry. The method first verifies that
    * the value is allowed for that particular key.
@@ -153,11 +152,16 @@ public:
    */
   Collection* const collection() const { return m_coll; }
   /**
+   * Changes the collection owner of the entry
+   */
+  void setCollection(Collection* coll) { m_coll = coll; }
+  /**
    * Returns the id of the entry
    *
    * @return The id
    */
   int id() const { return m_id; }
+  void setId(int id) { m_id = id; }
   /**
    * Adds the entry to a group. The group list within the entry is updated
    * and the entry is added to the group.
@@ -180,7 +184,7 @@ public:
    *
    * @return The list of groups
    */
-  const QPtrList<EntryGroup>& groups() const { return m_groups; }
+  const PtrVector<EntryGroup>& groups() const { return m_groups; }
   /**
    * Returns a list containing the names of the groups for
    * a certain field to which the entry belongs
@@ -207,7 +211,7 @@ public:
    *
    * @return Whether the entry is owned or not
    */
-  bool isOwned() const;
+  bool isOwned();
   /**
    * Removes the formatted value of the field from the map. This should be used when
    * the field's format flag has changed.
@@ -230,11 +234,11 @@ protected:
   QString dependentValue(const QString& formatString, bool autoCapitalize) const;
 
 private:
-  Collection* m_coll;
+  QGuardedPtr<Collection> m_coll;
   int m_id;
   StringMap m_fields;
   mutable StringMap m_formattedFields;
-  QPtrList<EntryGroup> m_groups;
+  PtrVector<EntryGroup> m_groups;
 };
 
   } // end namespace

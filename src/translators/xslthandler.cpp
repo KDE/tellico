@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,8 +12,11 @@
  ***************************************************************************/
 
 #include "xslthandler.h"
+#include "../latin1literal.h"
 
 #include <kdebug.h>
+
+#include <qtextcodec.h>
 
 extern "C" {
 #include <libxslt/xslt.h>
@@ -26,8 +29,8 @@ extern "C" {
 
 #if LIBXML_VERSION >= 20600
 // I don't want any network I/O at all
-static int xml_options = XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NOCDATA;
-static int xslt_options = xml_options;
+static const int xml_options = XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NOCDATA;
+static const int xslt_options = xml_options;
 #endif
 
 /* some functions to pass to the XSLT libs */
@@ -254,4 +257,18 @@ QString XSLTHandler::process() {
 
 //  kdDebug() << "RESULT: " << result << endl;
   return result;
+}
+
+//static
+QDomDocument& XSLTHandler::setLocaleEncoding(QDomDocument& dom_) {
+  const QDomNodeList childs = dom_.documentElement().childNodes();
+  for(unsigned j = 0; j < childs.count(); ++j) {
+    if(childs.item(j).isElement() && childs.item(j).nodeName() == Latin1Literal("xsl:output")) {
+      QDomElement e = childs.item(j).toElement();
+      const QString encoding = QString::fromLatin1(QTextCodec::codecForLocale()->name());
+      e.setAttribute(QString::fromLatin1("encoding"), encoding);
+      break;
+    }
+  }
+  return dom_;
 }

@@ -1,6 +1,6 @@
 /***************************************************************************
-        copyright    : (C) 2001-2004 by Robby Stephenson
-        email        : robby@periapsis.org
+    copyright            : (C) 2001-2005 by Robby Stephenson
+    email                : robby@periapsis.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -13,10 +13,6 @@
 
 #ifndef TELLICO_MAINWINDOW_H
 #define TELLICO_MAINWINDOW_H
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 
 class KProgress;
 class KToolBar;
@@ -32,27 +28,35 @@ class QCloseEvent;
 class QSplitter;
 class QListViewItem;
 
-#include <kmainwindow.h>
+#include <config.h>
+#include "dcopinterface.h"
+#include "translators/translators.h"
 
-//#include <qvaluelist.h>
+#include <kmainwindow.h>
 
 namespace Tellico {
 // forward declarations
   namespace Data {
     class Collection;
   }
+  namespace GUI {
+    class LineEdit;
+    class TabControl;
+  }
+  class Controller;
   class ViewStack;
   class DetailedListView;
   class FilterDialog;
   class EntryEditDialog;
   class GroupView;
+  class FilterView;
+  class LoanView;
   class ConfigDialog;
-  class FindDialog;
   class CollectionFieldsDialog;
   class StringMapDialog;
   class EntryItem;
-  class LineEditAction;
   class FetchDialog;
+  class ReportDialog;
 
 /**
  * The base class for Tellico application windows. It sets up the main
@@ -65,9 +69,8 @@ namespace Tellico {
  * @see KConfig
  *
  * @author Robby Stephenson
- * @version $Id: mainwindow.h 935 2004-11-01 07:10:27Z robby $
  */
-class MainWindow : public KMainWindow {
+class MainWindow : public KMainWindow, public DCOPInterface {
 Q_OBJECT
 
 friend class Controller;
@@ -85,26 +88,6 @@ public:
    */
   void initFileOpen(bool nofile);
   /**
-   * Returns a pointer to the selected item in the detailed list view.
-   * Used for searching, to go sequentially through the collections.
-   * If there is no selected item, then the first child is returned.
-   *
-   * @return The item pointer
-   */
-  EntryItem* selectedOrFirstItem();
-  /**
-   * @return Returns the name of the field being used to group the entries.
-   */
-  QStringList groupBy() const;
-  /**
-   * @return Returns a list of the names of the fields being used to sort the entries.
-   */
-  QStringList sortTitles() const;
-  /**
-   * @return Returns the name of the fields currently visible in the column view.
-   */
-  QStringList visibleColumns() const;
-  /**
    * Saves the document
    *
    * @return Returns @p true if successful
@@ -121,12 +104,21 @@ public:
    */
   bool isNewDocument() const { return m_newDocument; }
   /**
-   * Used by main() to import file from command line.
+   * Used by main() and DCOP to import file.
    *
    * @param format The file format
    * @param url The url
    */
-  void importFile(int format, const KURL& url);
+  virtual bool importFile(Import::Format format, const KURL& url, Import::Action action);
+  /**
+   * Used by DCOP to export to a file.
+   */
+  virtual bool exportCollection(Export::Format format, const KURL& url);
+  /**
+   * DCOP call to return bibtex keys. Returnd empty list if the current
+   * collection is not a bibliography.
+   */
+  virtual QStringList bibtexKeys() const;
 
 public slots:
   /**
@@ -195,18 +187,6 @@ public slots:
    */
   void slotEditDeselect();
   /**
-   * Shows the find dialog to search in the current collection.
-   */
-  void slotEditFind();
-  /**
-   * Finds the next match.
-   */
-  void slotEditFindNext();
-  /**
-   * Finds the previous match.
-   */
-  void slotEditFindPrev();
-  /**
    * Toggles the statusbar. Not needed for KDE 3.2 or greater.
    */
   void slotToggleStatusBar();
@@ -245,6 +225,7 @@ public slots:
    * @param text The text that is displayed in the statusbar
    */
   void slotStatusMsg(const QString& text);
+  void slotClearStatus();
   /**
    * Shows the configuration window for the toolbars.
    */
@@ -411,6 +392,9 @@ private:
    * @param slot The slot name
    */
   void activateEditWidgetSlot(const char* slot);
+  void addFilterView();
+  void addLoanView();
+  void updateCaption(bool modified);
 
 private slots:
   /**
@@ -477,6 +461,21 @@ private slots:
    * Show the entry editor and update menu item.
    */
   void slotShowEntryEditor();
+  /**
+   * Show the report window.
+   */
+  void slotShowReportDialog();
+  void slotGroupLabelActivated();
+  /**
+   * Show the report window.
+   */
+  void slotHideReportDialog();
+  /**
+   * Focus the filter
+   */
+  void slotFilterLabelActivated();
+  void slotClearFilter();
+  void slotRenameCollection();
 
 private:
   KConfig* m_config;
@@ -490,43 +489,46 @@ private:
   KAction* m_exportAlex;
   KAction* m_exportBibtex;
   KAction* m_exportBibtexml;
-  KAction* m_editFind;
-  KAction* m_editFindNext;
-  KAction* m_editFindPrev;
+  KAction* m_exportONIX;
   KAction* m_newEntry;
   KAction* m_editEntry;
   KAction* m_copyEntry;
   KAction* m_deleteEntry;
+  KAction* m_collReports;
   KAction* m_convertBibtex;
   KAction* m_stringMacros;
   KAction* m_citeEntry;
+  KAction* m_checkInEntry;
+  KAction* m_checkOutEntry;
   KToggleAction* m_toggleStatusBar;
   KToggleAction* m_toggleGroupWidget;
   KToggleAction* m_toggleEntryEditor;
   KToggleAction* m_toggleEntryView;
 
-//  KAction* m_lookup;
   KSelectAction* m_entryGrouping;
-  LineEditAction* m_quickFilter;
+  GUI::LineEdit* m_quickFilter;
 
-  // m_split is used between the group view on the left and the others on the right
+  // m_split is used between the stuff on the left and stuff on the right
   QSplitter* m_split;
-  // m_split2 is used between the detailed view above and the entry view below
-  QSplitter* m_split2;
+  // m_leftSplit is used between detailed view and entry view
+  QSplitter* m_rightSplit;
 
   KProgress* m_progress;
 
   DetailedListView* m_detailedView;
   EntryEditDialog* m_editDialog;
+  GUI::TabControl* m_viewTabs;
   GroupView* m_groupView;
+  FilterView* m_filterView;
+  LoanView* m_loanView;
   ViewStack* m_viewStack;
 
   ConfigDialog* m_configDlg;
-  FindDialog* m_findDlg;
   FilterDialog* m_filterDlg;
   CollectionFieldsDialog* m_collFieldsDlg;
   StringMapDialog* m_stringMacroDlg;
   FetchDialog* m_fetchDlg;
+  ReportDialog* m_reportDlg;
 
   // the loading process goes through several steps, keep track of the factor
   unsigned m_currentStep;
@@ -542,4 +544,4 @@ private:
 };
 
 } // end namespace
-#endif // BOOKCASE_H
+#endif // TELLICO_MAINWINDOW_H

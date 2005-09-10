@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,6 +13,8 @@
 
 #include "alexandriaimporter.h"
 #include "../collections/bookcollection.h"
+#include "../entry.h"
+#include "../field.h"
 #include "../latin1literal.h"
 #include "../isbnvalidator.h"
 #include "../imagefactory.h"
@@ -25,6 +27,10 @@
 #include <qgroupbox.h>
 
 using Tellico::Import::AlexandriaImporter;
+
+bool AlexandriaImporter::canImport(int type) const {
+  return type == Data::Collection::Book;
+}
 
 Tellico::Data::Collection* AlexandriaImporter::collection() {
   if(!m_widget || m_library->count() == 0) {
@@ -45,7 +51,6 @@ Tellico::Data::Collection* AlexandriaImporter::collection() {
   const QString rating = QString::fromLatin1("rating");
   const QString cover = QString::fromLatin1("cover");
   const QString comments = QString::fromLatin1("comments");
-  const QStringList allowed = m_coll->fieldByName(QString::fromLatin1("rating"))->allowed();
 
   // start with yaml files
   dataDir.setNameFilter(QString::fromLatin1("*.yaml"));
@@ -122,11 +127,9 @@ Tellico::Data::Collection* AlexandriaImporter::collection() {
       } else if(alexField == Latin1Literal("notes")) {
         entry->setField(comments, alexValue);
 
-      } else if(alexField == Latin1Literal("rating")) {
-        // assume the rating is a number, and find the allowed value with that number
-        entry->setField(rating, allowed.grep(alexValue)[0]);
       } else if(m_coll->fieldByName(alexField)) {
         entry->setField(alexField, alexValue);
+
       } else if(m_coll->fieldByTitle(alexField)) {
         entry->setField(m_coll->fieldNameByTitle(alexField), alexValue);
       }
@@ -170,7 +173,7 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 QString& AlexandriaImporter::clean(QString& str_) {
-  static const QRegExp quote(QString::fromLatin1("\\\\\"")); // equals \"
+  const QRegExp quote(QString::fromLatin1("\\\\\"")); // equals \"
   if(str_.startsWith(QChar('\'')) || str_.startsWith(QChar('"'))) {
     str_.remove(0, 1);
   }

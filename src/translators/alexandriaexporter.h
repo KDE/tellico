@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -26,43 +26,25 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: alexandriaexporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class AlexandriaExporter : public Exporter {
 public:
-  AlexandriaExporter(const Data::Collection* coll) : Exporter(coll) {}
+  AlexandriaExporter() : Exporter() {}
 
+  virtual bool exec();
   virtual QString formatString() const;
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
-  virtual bool exportEntries(bool formatFields) const;
+  virtual QString fileFilter() const { return QString::null; } // no need for this
 
-  /**
-   * This should never get called.
-   */
+  // no config options
+  virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual void readOptions(KConfig*) {}
-  /**
-   * This should never get called.
-   */
   virtual void saveOptions(KConfig*) {}
-  /**
-   * This should never get called.
-   */
-  virtual QString fileFilter() const { return QString::null; }
-  /**
-   * This should never get called.
-   */
-  virtual bool isText() const { return false; }
-  /**
-   * This should never get called.
-   */
-  virtual QString text(bool, bool) { return QString::null; }
-  /**
-   * This should never get called.
-   */
-  virtual QByteArray data(bool) { return QByteArray(); }
+
 
 private:
-  bool writeFile(const QDir& dir, Data::Entry* entry, bool formatFields) const;
+  static QString& escapeText(QString& str);
+
+  bool writeFile(const QDir& dir, const Data::Entry* entry);
 };
 
   } // end namespace

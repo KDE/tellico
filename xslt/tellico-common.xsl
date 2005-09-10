@@ -8,9 +8,7 @@
    ===================================================================
    Tellico XSLT file - some common templates.
 
-   $Id: tellico-common.xsl 977 2004-11-26 07:33:15Z robby $
-
-   Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2005 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -94,10 +92,15 @@
  <xsl:variable name="child" select="$entry/*[local-name(.)=$field]"/>
  <xsl:choose>
   <xsl:when test="$child">
-   <xsl:variable name="f" select="key('fieldsByName',$field)"/>
+   <xsl:variable name="f" select="$entry/../tc:fields/tc:field[@name = $field]"/>
 
-   <!-- if the field is a bool type, just ouput an X -->
+   <!-- if the field is a bool type, just ouput an X, or use data image -->
    <xsl:choose>
+    <!-- paragraphs need to have output escaping disabled so HTML works -->
+    <xsl:when test="$f/@type=2">
+     <xsl:value-of select="$child" disable-output-escaping="yes"/>
+    </xsl:when>
+
     <xsl:when test="$f/@type=4">
      <img height="14">
       <xsl:attribute name="src">
@@ -131,7 +134,7 @@
     </xsl:when>
 
     <!-- special case for rating -->
-    <xsl:when test="$f/@type=3 and ($f/@name='rating' or $f/tc:prop[@name='rating']='true')">
+    <xsl:when test="$f/@type=14">
      <!-- get the number, could be 10, so can't just grab first digit -->
      <xsl:variable name="n">
       <xsl:choose>
@@ -150,7 +153,7 @@
        </xsl:otherwise>
       </xsl:choose>
      </xsl:variable>
-     <xsl:if test="$n">
+     <xsl:if test="$n &gt; 0">
       <!-- the image is really 18 pixels high, but make it smaller to match default font -->
       <img height="14">
        <xsl:attribute name="src">
@@ -177,7 +180,7 @@
 
   <!-- now handle fields with multiple values -->
   <xsl:otherwise>
-   <xsl:for-each select="$entry/*[local-name(.)=concat($field,'s')]/*">
+   <xsl:for-each select="$entry/*[local-name()=concat($field,'s')]/*">
     <xsl:value-of select="."/>
     <xsl:if test="position() != last()">
      <xsl:text>; </xsl:text>

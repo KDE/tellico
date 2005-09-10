@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,7 @@
 #include "filter.h"
 #include "entry.h"
 
-#include <kdebug.h>
+#include "tellico_debug.h"
 
 #include <qregexp.h>
 
@@ -105,6 +105,13 @@ bool FilterRule::matchesRegExp(const Data::Entry* const entry_) const {
 
 
 /*******************************************************/
+
+Filter::Filter(const Filter& other_) : QPtrList<FilterRule>(), KShared(), m_op(other_.op()), m_name(other_.name()) {
+  for(QPtrListIterator<FilterRule> it(other_); it.current(); ++it) {
+    append(new FilterRule(*it.current()));
+  }
+  setAutoDelete(true);
+}
 
 bool Filter::matches(const Data::Entry* const entry_) const {
   if(isEmpty()) {

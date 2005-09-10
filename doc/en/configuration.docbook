@@ -29,7 +29,6 @@ Some minor settings can only be changed by editing the configuration file itself
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="general-options.png"/></imageobject>
 <textobject><phrase>The General Options Dialog</phrase></textobject>
-<caption><para>The General Options Dialog</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -38,8 +37,7 @@ The <guilabel>General Options</guilabel> control the general behavior. When &app
 is started, it can automatically reopen the last data file that was open. The
 <guilabel>Tip of the Day</guilabel> dialog contains helpful hints on using &appname;
 and appears at program startup. You may want to read through some of the hints and
-then disable the dialog. Finally, in the <link linkend="group-view">&group-view;</link>, the
-number of entries in each group may be added to the group name.
+then disable the dialog.
 </para>
 
 <para>
@@ -91,7 +89,6 @@ is shown if filtering is active.
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="print-options.png"/></imageobject>
 <textobject><phrase>The Print Options Dialog</phrase></textobject>
-<caption><para>The Print Options Dialog</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -109,9 +106,7 @@ at the top of the column.
 </para>
 
 <para>
-In the printout, the entries will be sorted as they are in the <link linkend="detailed-view">&detailed-view;</link>. However, they may be grouped as they
-are in the <link linkend="group-view">&group-view;</link> instead, which can be changed
-using the <guilabel>Group the entries</guilabel> option.
+In the printout, the entries will be sorted as they are in the <link linkend="detailed-view">&detailed-view;</link>. Additionally, they may be grouped as they are in the <link linkend="group-view">&group-view;</link>.
 </para>
 
 <para>
@@ -141,7 +136,6 @@ Additional templates may be installed in <filename class="directory">$<envar>KDE
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="template-options.png"/></imageobject>
 <textobject><phrase>The Template Options Dialog</phrase></textobject>
-<caption><para>The Template Options Dialog</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -152,10 +146,12 @@ Additional templates may be installed in <filename class="directory">$<envar>KDE
 
 <para>
 &appname; can use various sources for importing data, which can be configured
-in the Data Sources Dialog. Currently, there are three available types of sources:
+in the Data Sources Dialog. Currently, there are five available types of sources:
 <link linkend="amazon-web-services">Amazon.com Web Services</link>, the
-<link linkend="imdb">Internet Movie Database</link>, and
-<link linkend="z3950">z39.50 servers</link>.
+<link linkend="imdb">Internet Movie Database</link>,
+<link linkend="z3950">z39.50 servers</link>,
+<link linkend="entrez">Entrez (PubMed) databases</link>, and
+<link linkend="externalexec">external scripts or applications</link>.
 </para>
 
 <screenshot>
@@ -163,7 +159,6 @@ in the Data Sources Dialog. Currently, there are three available types of source
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="source-options.png"/></imageobject>
 <textobject><phrase>The Data Sources Options Dialog</phrase></textobject>
-<caption><para>The Data Sources Options Dialog</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -177,7 +172,7 @@ existing ones may be modified or deleted, using the <guibutton>Modify...</guibut
 <title>Amazon.com</title>
 
 <para>
-Using the Amazon Web Services, &appname; can search six different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, Japan,
+Using the Amazon Web Services, &appname; can search any of six different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, Japan,
 France, and Canada.
 </para>
 
@@ -189,7 +184,7 @@ France, and Canada.
 
 <para>
 Configuring each Amazon.com source involves three settings: the server location, image size, and associate's ID. Some information
-from <ulink url="http://amazon.com">Amazon.com</ulink> included an image, such as a book or video cover. That image may be downloaded in three different sizes, depending on the item. Because too many images slow the application, medium or large images are not recommended. The associate's ID must be used to access the Amazon.com Web Services, and is included in the links back to the item, as dictated by the license agreement for the use of the Amazon.com Web Services.
+from <ulink url="http://amazon.com">Amazon.com</ulink> included an image, such as a book or video cover. That image may be downloaded in three different sizes, depending on the item. Because too many images slow the application, large images are not recommended. The associate's ID must be used to access the Amazon.com Web Services, and is included in the links back to the item, as dictated by the license agreement for the use of the Amazon.com Web Services.
 </para>
 
 </sect2>
@@ -211,7 +206,8 @@ Obviously, more than one Amazon.com provider from the same country, or more than
 <title>z39.50 Servers</title>
 
 <para>
-The <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html">z39.50 protocol</ulink> is used to access libraries and bibliographic information providers around the world. Lists of public z39.50 servers are <ulink url="http://www.indexdata.dk/targettest/">available from indexdata.dk</ulink>, among others. &appname; is able to access any z39.50 server that provides data in the <acronym>MARC</acronym>, <acronym>MARC21</acronym>, or <acronym>USMARC</acronym> format, using the <ulink url="http://www.indexdata.dk/yaz/">yaz library</ulink>.
+The <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html">z39.50 protocol</ulink> is used to access libraries and bibliographic information providers around the world. Lists of public z39.50 servers are <ulink url="http://www.indexdata.dk/targettest/">available from indexdata.dk</ulink>, among others. &appname; 
+is able to read data in either the <acronym>MARC21</acronym> or <acronym>UNIMARC</acronym> format, using the <ulink url="http://www.indexdata.dk/yaz/">yaz library</ulink>.
 </para>
 
 <screenshot>
@@ -228,6 +224,28 @@ The default port for z39.50 access is 210, but some servers may use a different 
 Some servers require a username and password for access. &appname; can use and save that password, but be aware that is written to the &appname; configuration file in plain text and is not secure. For most public servers, the username and password fields may be left empty.
 </para>
 
+</sect2>
+
+<sect2 id="entrez">
+<title>Entrez Databases</title>
+<para>
+<ulink url="http://www.ncbi.nlm.nih.gov/Entrez/">Entrez</ulink> is the integrated, text-based search and retrieval system used at the National Center for Biotechnology Information (NCBI). The most well-known Entrez database is <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed">PubMed</ulink>, the database for life science articles from many biological journals. At the moment, the only Entrez database supported by &appname; is PubMed.</para>
+</sect2>
+
+<sect2 id="externalexec">
+<title>External Scripts or Applications</title>
+<para>
+As an easier way for &appname; to integrate with third-party plugins, external scripts or applications may be used as an interface for searching other information sources. &appname; will execute a command, and pass the search terms as command-line options.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="externalexec-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>The full path to the application should be entered in the source options. Be aware that the application is executed on the system with the same permissions as the current user, so be sure to use applications fromtrusted sources. Other arguments to the commmand may be entered; if the argument includes <userinput>%1</userinput>, the search value will be inserted. Finally, the type of entries returned by the script need to be specified.
+</para>
 </sect2>
 
 </sect1>

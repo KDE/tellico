@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,7 +22,7 @@ class QRadioButton;
 class QCheckBox;
 class QPainter;
 
-#include "field.h"
+#include "datavectors.h"
 
 #include <kdialogbase.h>
 
@@ -39,7 +39,6 @@ namespace Tellico {
  * and the font color can be changed
  *
  * @author Robby Stephenson
- * @version $Id: collectionfieldsdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class ListBoxText : public QListBoxText {
 public:
@@ -55,13 +54,12 @@ protected:
   virtual void paint(QPainter* painter);
 
 private:
-  Data::Field* m_field;
+  Data::FieldPtr m_field;
   bool m_colored;
 };
 
 /**
  * @author Robby Stephenson
- * @version $Id: collectionfieldsdialog.h 862 2004-09-15 01:49:51Z robby $
  */
 class CollectionFieldsDialog : public KDialogBase {
 Q_OBJECT
@@ -92,24 +90,23 @@ protected slots:
   void slotHighlightedChanged(int index);
   void slotModified();
   void slotUpdateTitle(const QString& title);
-  void slotShowExtendedProperties();
+  bool slotShowExtendedProperties();
 
 protected:
   void updateField();
   bool checkValues();
   ListBoxText* findItem(const QListBox* box, const Data::Field* field);
-  QStringList newTypesAllowed(Data::Field::Type type);
+  QStringList newTypesAllowed(int type);
 
 private slots:
   void slotSelectInitial();
 
 private:
-  Data::Collection* m_coll;
-  Data::Collection* m_defaultCollection;
-  QMap<Data::Field::Type, QString> m_typeMap;
-  Data::FieldList m_copiedFields;
-  Data::FieldList m_newFields;
-  Data::Field* m_currentField;
+  KSharedPtr<Data::Collection> m_coll;
+  KSharedPtr<Data::Collection> m_defaultCollection;
+  Data::FieldVec m_copiedFields;
+  Data::FieldVec m_newFields;
+  Data::FieldPtr m_currentField;
   bool m_modified;
   bool m_updatingValues;
   bool m_reordered;

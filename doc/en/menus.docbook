@@ -171,6 +171,38 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>Z</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Undo</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>undoes the previous action</action>. Not all actions are supported by Undo.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>&Shift;</keycap><keycap>Z</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Redo</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>reverts a previous Undo.</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
    <keycombo><keycap>&Ctrl;</keycap><keycap>X</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
@@ -250,56 +282,8 @@ modified.</para>
 <varlistentry>
 <term>
  <menuchoice>
-  <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>F</keycap></keycombo>
-  </shortcut>
   <guimenu>Edit</guimenu>
-  <guimenuitem>Find...</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the &find-dialog;</action> to search the collection.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <shortcut>
-   <keycombo><keycap>F3</keycap></keycombo>
-  </shortcut>
-  <guimenu>Edit</guimenu>
-  <guimenuitem>Find Next</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>finds the next occurrence</action> of the text which was searched for previously.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <shortcut>
-   <keycombo><keycap>Shift</keycap><keycap>F3</keycap></keycombo>
-  </shortcut>
-  <guimenu>Edit</guimenu>
-  <guimenuitem>Find Previous</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>finds the previous occurrence</action> of the text which was searched for previously.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Edit</guimenu>
-  <guimenuitem>Internet Search</guimenuitem>
+  <guimenuitem>Internet Search...</guimenuitem>
  </menuchoice>
 </term>
 
@@ -387,6 +371,32 @@ modified.</para>
 <varlistentry>
 <term>
  <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Check-out.</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens a dialog box for loaning the selected entries.</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Check-in</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>checks-in any of the selected entries which are currently on-loan</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
   <shortcut>
    <keycombo><keycap>&Ctrl;</keycap><keycap>R</keycap></keycombo>
   </shortcut>
@@ -413,6 +423,22 @@ modified.</para>
 
 <listitem>
 <para>This command <action>opens the &fields-dialog;</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>U</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Generate Reports...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &report-dialog;</action> for generating reports about the collection.</para>
 </listitem>
 </varlistentry>
 

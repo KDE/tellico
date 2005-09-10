@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,14 +16,15 @@
 
 class QWidget;
 
-#include "../collection.h"
-
 #include <kurl.h>
 
 #include <qobject.h>
 #include <qstring.h>
 
 namespace Tellico {
+  namespace Data {
+    class Collection;
+  }
   namespace Import {
 
 /**
@@ -34,7 +35,6 @@ namespace Tellico {
  * The calling function owns the collection pointer.
  *
  * @author Robby Stephenson
- * @version $Id: importer.h 997 2004-12-07 14:35:31Z robby $
  */
 class Importer : public QObject {
 Q_OBJECT
@@ -80,7 +80,7 @@ public:
    * @param type The collection type to check
    * @return Whether the importer could return a collection of that type
    */
-  virtual bool canImport(Data::Collection::Type) { return true; }
+  virtual bool canImport(int) const { return true; }
 
 public slots:
   virtual void slotActionChanged(int) {}

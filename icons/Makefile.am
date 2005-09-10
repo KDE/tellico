@@ -15,7 +15,7 @@ tellico.svg               tellico_mime.svg        stars10.png \
 stars1.png                stars2.png              stars3.png \
 stars4.png                stars5.png              stars6.png \
 stars7.png                stars8.png              stars9.png \
-README.icons              README.quesnay
+README.icons              README.quesnay          game.png
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -35,6 +35,7 @@ book.png \
 card.png \
 coin.png \
 comic.png \
+game.png \
 person-open.png \
 person.png \
 stamp.png \

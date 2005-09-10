@@ -1,0 +1,20 @@
+#
+# config updates for Tellico 0.14
+#
+Id=tellico-0.14
+File=tellicorc
+#
+Group=General Options
+RemoveKey=Geometry
+RemoveKey=Main Window Splitter Sizes
+RemoveKey=Show Count
+RemoveKey=Show Detail Widget
+RemoveKey=Show Toolbar
+RemoveKey=ToolBarPos
+#
+Group=Printing
+RemoveKey=Print Grouped Attribute
+RemoveKey=Print Fields - book
+#
+Group=ExportOptions
+Key=FormatAttributes,FormatFields

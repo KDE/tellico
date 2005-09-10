@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,6 +12,9 @@
  ***************************************************************************/
 
 #include "field.h"
+#include "tellico_utils.h"
+#include "latin1literal.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -43,7 +46,7 @@ QRegExp Field::s_delimiter = QRegExp(QString::fromLatin1("\\s*;\\s*"));
 
 // this constructor is for anything but Choice type
 Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
-    : m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
+    : KShared(), m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
       m_type(type_), m_flags(0), m_formatFlag(FormatNone) {
 
 #ifndef NDEBUG
@@ -58,44 +61,61 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
   }
   if(m_type == Table || m_type == Table2) {
     m_flags = AllowMultiple;
-  }
-  // hidden from user
-  if(type_ == Date) {
+    if(m_type == Table2) {
+      m_type = Table;
+      setProperty(QString::fromLatin1("columns"), QChar('2'));
+    } else {
+      setProperty(QString::fromLatin1("columns"), QChar('1'));
+    }
+  } else if(m_type == Date) {  // hidden from user
     m_formatFlag = FormatDate;
+  } else if(m_type == Rating) {
+    setProperty(QString::fromLatin1("minimum"), QChar('1'));
+    setProperty(QString::fromLatin1("maximum"), QChar('5'));
   }
 }
 
 // if this constructor is called, the type is necessarily Choice
 Field::Field(const QString& name_, const QString& title_, const QStringList& allowed_)
-    : m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
+    : KShared(), m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
       m_type(Field::Choice), m_allowed(allowed_), m_flags(0), m_formatFlag(FormatNone) {
 }
 
 Field::Field(const Field& field_)
-    : m_name(field_.name()), m_title(field_.title()), m_category(field_.category()),
+    : KShared(field_), m_name(field_.name()), m_title(field_.title()), m_category(field_.category()),
       m_desc(field_.description()), m_type(field_.type()),
       m_flags(field_.flags()), m_formatFlag(field_.formatFlag()),
       m_properties(field_.propertyList()) {
   if(m_type == Choice) {
     m_allowed = field_.allowed();
+  } else if(m_type == Table2) {
+    m_type = Table;
+    setProperty(QString::fromLatin1("columns"), QChar('2'));
   }
 }
 
 Field& Field::operator=(const Field& field_) {
-  if(this != &field_) {
-    m_name = field_.name();
-    m_title = field_.title();
-    m_category = field_.category();
-    m_desc = field_.description();
-    m_type = field_.type();
-    if(m_type == Choice) {
-      m_allowed = field_.allowed();
-    }
-    m_flags = field_.flags();
-    m_formatFlag = field_.formatFlag();
-    m_properties = field_.propertyList();
+  if(this == &field_) return *this;
+
+  static_cast<KShared&>(*this) = static_cast<const KShared&>(field_);
+  m_name = field_.name();
+  m_title = field_.title();
+  m_category = field_.category();
+  m_desc = field_.description();
+  m_type = field_.type();
+  if(m_type == Choice) {
+    m_allowed = field_.allowed();
+  } else if(m_type == Table2) {
+    m_type = Table;
+    setProperty(QString::fromLatin1("columns"), QChar('2'));
   }
+  m_flags = field_.flags();
+  m_formatFlag = field_.formatFlag();
+  m_properties = field_.propertyList();
   return *this;
+}
+
+Field::~Field() {
 }
 
 void Field::setTitle(const QString& title_) {
@@ -108,10 +128,17 @@ void Field::setTitle(const QString& title_) {
 void Field::setType(Field::Type type_) {
   m_type = type_;
   if(m_type != Field::Choice) {
-    m_allowed = QString::null;
+    m_allowed = QStringList();
   }
   if(m_type == Table || m_type == Table2) {
     m_flags |= AllowMultiple;
+    if(m_type == Table2) {
+      m_type = Table;
+      setProperty(QString::fromLatin1("columns"), QChar('2'));
+    }
+    if(property(QString::fromLatin1("columns")).isEmpty()) {
+      setProperty(QString::fromLatin1("columns"), QChar('1'));
+    }
   }
   if(isSingleCategory()) {
     m_category = m_title;
@@ -405,8 +432,8 @@ QStringList Field::defaultSurnamePrefixList() {
 
 // if these are changed, then CollectionFieldsDialog should be checked since it
 // checks for equality against some of these strings
-QMap<Field::Type, QString> Field::typeMap() {
-  QMap<Field::Type, QString> map;
+Field::FieldMap Field::typeMap() {
+  FieldMap map;
   map[Field::Line]      = i18n("Simple Text");
   map[Field::Para]      = i18n("Paragraph");
   map[Field::Choice]    = i18n("Choice");
@@ -414,17 +441,17 @@ QMap<Field::Type, QString> Field::typeMap() {
   map[Field::Number]    = i18n("Number");
   map[Field::URL]       = i18n("URL");
   map[Field::Table]     = i18n("Table");
-  map[Field::Table2]    = i18n("Table (2 Columns)");
   map[Field::Image]     = i18n("Image");
   map[Field::Dependent] = i18n("Dependent");
 //  map[Field::ReadOnly] = i18n("Read Only");
   map[Field::Date]      = i18n("Date");
+  map[Field::Rating]    = i18n("Rating");
   return map;
 }
 
 // just for formatting's sake
 QStringList Field::typeTitles() {
-  const QMap<Field::Type, QString>& map = typeMap();
+  const FieldMap& map = typeMap();
   QStringList list;
   list.append(map[Field::Line]);
   list.append(map[Field::Para]);
@@ -434,8 +461,8 @@ QStringList Field::typeTitles() {
   list.append(map[Field::URL]);
   list.append(map[Field::Date]);
   list.append(map[Field::Table]);
-  list.append(map[Field::Table2]);
   list.append(map[Field::Image]);
+  list.append(map[Field::Rating]);
   list.append(map[Field::Dependent]);
   return list;
 }
@@ -451,4 +478,45 @@ void Field::addAllowed(const QString& value_) {
   if(m_allowed.findIndex(value_) == -1) {
     m_allowed += value_;
   }
+}
+
+void Field::setProperty(const QString& key_, const QString& value_) {
+  m_properties.insert(key_, value_);
+}
+
+void Field::setPropertyList(const StringMap& props_) {
+  m_properties = props_;
+}
+
+void Field::convertOldRating(Data::Field* field_) {
+  if(field_->type() != Data::Field::Choice) {
+    return; // nothing to do
+  }
+
+  if(field_->name() != Latin1Literal("rating")
+     && field_->property(QString::fromLatin1("rating")) != Latin1Literal("true")) {
+    return; // nothing to do
+  }
+
+  int min = 10;
+  int max = 1;
+  bool ok;
+  const QStringList& allow = field_->allowed();
+  for(QStringList::ConstIterator it = allow.begin(); it != allow.end(); ++it) {
+    int n = Tellico::toUInt(*it, &ok);
+    if(!ok) {
+      return; // no need to convert
+    }
+    min = KMIN(min, n);
+    max = KMAX(max, n);
+  }
+  max = KMIN(max, 10);
+  if(min >= max) {
+    min = 1;
+    max = 5;
+  }
+  field_->setProperty(QString::fromLatin1("minimum"), QString::number(min));
+  field_->setProperty(QString::fromLatin1("maximum"), QString::number(max));
+  field_->setProperty(QString::fromLatin1("rating"), QString::null);
+  field_->setType(Rating);
 }

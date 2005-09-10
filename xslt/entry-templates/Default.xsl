@@ -6,9 +6,7 @@
 
 <!--
    ===================================================================
-   Tellico XSLT file - default template for viewing entry data
-
-   $Id: Default.xsl 1185 2005-05-08 16:57:21Z robby $
+   Tellico XSLT file - classic template for viewing entry data
 
    Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
 
@@ -37,8 +35,6 @@
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
-<xsl:strip-space elements="*"/>
-
 <xsl:key name="fieldsByName" match="tc:field" use="@name"/>
 <xsl:key name="fieldsByCat" match="tc:field" use="@category"/>
 <xsl:key name="imagesById" match="tc:image" use="@id"/>
@@ -58,9 +54,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 7 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 8 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'7'"/>
+  <xsl:with-param name="this-version" select="'8'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -108,6 +104,9 @@
    p {
         margin-top: 0px;
    }
+   img {
+        border: 0px solid;
+   }
   </style>
   <title>
    <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
@@ -117,16 +116,18 @@
   </head>
   <body>
    <xsl:apply-templates select="tc:collection[1]"/>
+   <xsl:if test="$collection-file">
+    <hr style="clear:left"/>
+    <h4 style="text-align:center">
+     <a href="{$collection-file}">&lt;&lt; <xsl:value-of select="tc:collection/@title"/></a>
+    </h4>
+   </xsl:if>
   </body>
  </html>
 </xsl:template>
 
 <xsl:template match="tc:collection">
  <xsl:apply-templates select="tc:entry[1]"/>
- <xsl:if test="$collection-file">
-  <hr/>
-  <h4 style="text-align:center"><a href="{$collection-file}">&lt;&lt; <xsl:value-of select="@title"/></a></h4>
- </xsl:if>
 </xsl:template>
 
 <xsl:template match="tc:entry">
@@ -235,44 +236,49 @@
     <tr>
      <xsl:choose>
       <!-- paragraphs -->
-      <xsl:when test="@type=2">
+      <xsl:when test="@type = 2">
        <td>
         <p>
          <xsl:value-of select="$entry/*[local-name(.)=current()/@name]" disable-output-escaping="yes"/>
         </p>
        </td>
       </xsl:when>
-      <!-- single-column table -->
-      <xsl:when test="@type=8">
+      
+      <!-- tables are field type 8 -->
+      <!-- ok to put category name inside div instead of table here -->
+      <xsl:when test="@type = 8">
        <td>
-        <ul>
-         <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
-          <li>
-           <xsl:value-of select="."/>
-          </li>
-         </xsl:for-each>
-        </ul>
+        <!-- look at number of columns -->
+        <xsl:choose>
+         <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
+          <table>
+           <tbody>
+            <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
+             <tr>
+              <xsl:for-each select="tc:column">
+               <td width="{floor(100 div count(../tc:column))}%">
+                <xsl:value-of select="."/>
+                <xsl:text>&#160;</xsl:text>
+               </td>
+              </xsl:for-each>
+             </tr>
+            </xsl:for-each>
+           </tbody>
+          </table>
+         </xsl:when>
+         <xsl:otherwise>
+          <ul>
+           <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
+            <li>
+             <xsl:value-of select="."/>
+            </li>
+           </xsl:for-each>
+          </ul>
+         </xsl:otherwise>
+        </xsl:choose>
        </td>
       </xsl:when>
-      <!-- double-column table -->
-      <xsl:when test="@type=9">
-       <td>
-        <table width="100%" cellspacing="0" cellpadding="0">
-         <xsl:for-each select="$entry//*[local-name(.)=current()/@name]">
-          <tr>
-           <td width="50%">
-            <xsl:value-of select="tc:column[1]"/>
-           </td>
-           <td width="50%">
-            <em>
-             <xsl:value-of select="tc:column[2]"/>
-            </em>
-           </td>
-          </tr>
-         </xsl:for-each>
-        </table>
-       </td>
-      </xsl:when>
+      
       <!-- everything else -->
       <xsl:otherwise>
        <th>

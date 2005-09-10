@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -33,7 +33,6 @@ namespace Tellico {
  *     if (s == Latin1Literal("o")) { ..... }
  * \endcode
  *
- * @version $Id: latin1literal.h 862 2004-09-15 01:49:51Z robby $
  */
 #define Latin1Literal(s) \
     Tellico::Latin1LiteralInternal((s), sizeof(s)/sizeof(char)-1)

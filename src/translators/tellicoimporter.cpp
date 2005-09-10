@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,43 +12,68 @@
  ***************************************************************************/
 
 #include "tellicoimporter.h"
+#include "tellico_xml.h"
 #include "../collectionfactory.h"
 #include "../collections/bibtexcollection.h"
+#include "../entry.h"
+#include "../field.h"
 #include "../imagefactory.h"
 #include "../isbnvalidator.h"
 #include "../latin1literal.h"
 #include "../tellico_strings.h"
-#include "tellico_xml.h"
+#include "../tellico_kernel.h"
+#include "../tellico_utils.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kmdcodec.h>
 #include <kzip.h>
-#include <kdebug.h>
 #include <kglobal.h> // for KMAX
 
 #include <qbuffer.h>
+#include <qfile.h>
 
 using Tellico::Import::TellicoImporter;
 
-TellicoImporter::TellicoImporter(const KURL& url_) : DataImporter(url_), m_coll(0)  {
+TellicoImporter::TellicoImporter(const KURL& url_, bool loadAllImages_) : DataImporter(url_),
+    m_coll(0), m_loadAllImages(loadAllImages_), m_format(Unknown), m_modified(false) {
 }
 
-TellicoImporter::TellicoImporter(const QString& text_) : DataImporter(text_), m_coll(0) {
+TellicoImporter::TellicoImporter(const QString& text_) : DataImporter(text_),
+    m_coll(0), m_loadAllImages(true), m_format(Unknown), m_modified(false) {
 }
 
 Tellico::Data::Collection* TellicoImporter::collection() {
-  if(!m_coll) {
-    const QByteArray& ba = data();
-    if(ba.size() < 5) {
+  if(m_coll) {
+    return m_coll;
+  }
+
+  QCString s; // read first 5 characters
+  if(source() == URL) {
+    if(!fileRef().open()) {
       return 0;
     }
-    // need to decide if the data is xml text, or a zip file
-    // if the first 5 characters are <?xml then treat it like text
-    if(ba[0] == '<' && ba[1] == '?' && ba[2] == 'x' && ba[3] == 'm' && ba[4] == 'l') {
-      loadXMLData(ba, true);
-    } else {
-      loadZipData(ba);
+    QFile* f = fileRef().file();
+    for(uint i = 0; i < 5; ++i) {
+      s += static_cast<char>(f->getch());
     }
+    f->reset();
+  } else {
+    if(data().size() < 5) {
+      m_format = Error;
+      return 0;
+    }
+    s = QCString(data(), 6);
+  }
+
+  // need to decide if the data is xml text, or a zip file
+  // if the first 5 characters are <?xml then treat it like text
+  if(s[0] == '<' && s[1] == '?' && s[2] == 'x' && s[3] == 'm' && s[4] == 'l') {
+    m_format = XML;
+    loadXMLData(source() == URL ? fileRef().file()->readAll() : data(), true);
+  } else {
+    m_format = Zip;
+    loadZipData();
   }
   return m_coll;
 }
@@ -64,6 +89,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     str += i18n("The error message from Qt is:");
     str += QString::fromLatin1("\n\t") + errorMsg;
     setStatusMessage(str);
+    m_format = Error;
     return;
   }
 
@@ -79,6 +105,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     if(!url().isEmpty()) {
       setStatusMessage(i18n(errorLoad).arg(url().fileName()));
     }
+    m_format = Error;
     return;
   }
 //  kdDebug() << "TellicoImporter::loadXMLData() - syntaxVersion = " << syntaxVersion << endl;
@@ -88,6 +115,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     if(!url().isEmpty()) {
       setStatusMessage(i18n(errorLoad).arg(url().fileName()));
     }
+    m_format = Error;
     return;
   }
 
@@ -97,6 +125,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
       str += i18n("It is from a future version of Tellico.");
       setStatusMessage(str);
     }
+    m_format = Error;
     return;
   } else if(syntaxVersion < XML::syntaxVersion) {
     QString str = i18n("Tellico is converting the file to a more recent document format. "
@@ -104,6 +133,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
                        "to read this file in the future.");
     kdDebug() << str <<  endl;
 //    setStatusMessage(str);
+    m_modified = true; // mark as modified
   }
 
   m_namespace = syntaxVersion > 6 ? XML::nsTellico : XML::nsBookcase;
@@ -123,7 +153,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   QString title = collelem.attribute(QString::fromLatin1("title"));
   QString entryTitle = collelem.attribute((syntaxVersion > 6) ? QString::fromLatin1("entryTitle")
-                                           : QString::fromLatin1("unitTitle"));
+                                                              : QString::fromLatin1("unitTitle"));
 
   // be careful not to have element name collision
   // for fields, each true field element is a child of a fields element
@@ -210,7 +240,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   const uint count = collelem.childNodes().count() - 2; // minus fields and images probably
   for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling(), ++j) {
     if(n.nodeName() == Latin1Literal("entry")) {
-      readEntry(syntaxVersion, n);
+      readEntry(syntaxVersion, n.toElement());
 
       // not exactly right, but close enough
       if(j%KMAX(s_stepSize, count/100) == 0) {
@@ -219,6 +249,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     }
   } // end entry loop
 
+  // m_loadAllImages only pertains to zip files
   if(loadImages_) {
     QDomNodeList imgelems;
     for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
@@ -230,6 +261,26 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     for(uint j = 0; j < imgelems.count(); ++j) {
       readImage(imgelems.item(j).toElement());
     }
+  }
+
+  // filters and borrowers are at document root level, not collection
+  for(QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    if(n.nodeName() == Latin1Literal("borrowers")) {
+      QDomNodeList borrowerElems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("borrower"));
+      for(uint j = 0; j < borrowerElems.count(); ++j) {
+        readBorrower(borrowerElems.item(j).toElement());
+      }
+    } else if(n.nodeName() == Latin1Literal("filters")) {
+      QDomNodeList filterElems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("filter"));
+      for(uint j = 0; j < filterElems.count(); ++j) {
+        readFilter(filterElems.item(j).toElement());
+      }
+    }
+  }
+
+  // special for user, if using an older document format, add some nice new filters
+  if(syntaxVersion < 8) {
+    addDefaultFilters();
   }
 }
 
@@ -310,14 +361,30 @@ void TellicoImporter::readField(unsigned syntaxVersion_, const QDomElement& elem
     field->setProperty(QString::fromLatin1("bibtex"), elem_.attribute(QString::fromLatin1("bibtex-field")));
   }
 
+  // Table2 is deprecated
+  if(field->type() == Data::Field::Table2) {
+    field->setType(Data::Field::Table);
+    field->setProperty(QString::fromLatin1("columns"), QChar('2'));
+  }
+  // for syntax 8, rating fields got their own type
+  if(syntaxVersion_ < 8) {
+    Data::Field::convertOldRating(field); // does all its own checking
+  }
   m_coll->addField(field);
 //  kdDebug() << QString("  Added field: %1, %2").arg(field->name()).arg(field->title()) << endl;
 }
 
-void TellicoImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryNode_) {
-  Data::Entry* entry = new Data::Entry(m_coll);
-  // ierate over all field value children
-  for(QDomNode node = entryNode_.firstChild(); !node.isNull(); node = node.nextSibling()) {
+void TellicoImporter::readEntry(unsigned syntaxVersion_, const QDomElement& entryElem_) {
+  int id = entryElem_.attribute(QString::fromLatin1("id")).toInt();
+  Data::Entry* entry;
+  if(id > 0) {
+    entry = new Data::Entry(m_coll, id);
+  } else {
+    entry = new Data::Entry(m_coll);
+  }
+
+  // iterate over all field value children
+  for(QDomNode node = entryElem_.firstChild(); !node.isNull(); node = node.nextSibling()) {
     QDomElement elem = node.toElement();
     if(elem.isNull()) {
       continue;
@@ -374,8 +441,15 @@ void TellicoImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryNo
         if(value.isEmpty()) {
           continue;
         }
+        // in version 8, old rating fields get changed
+        if(syntaxVersion_ < 8 && f->type() == Data::Field::Rating) {
+          bool ok;
+          uint i = Tellico::toUInt(value, &ok);
+          if(ok) {
+            value = QString::number(i);
+          }
+        } else if(syntaxVersion_ < 2 && name == Latin1Literal("keywords")) {
         // in version 2, "keywords" changed to "keyword"
-        if(syntaxVersion_ < 2 && name == Latin1Literal("keywords")) {
           name = QString::fromLatin1("keyword");
         }
         // special case: if the i18n attribute equals true, then translate the title, description, and category
@@ -402,16 +476,25 @@ void TellicoImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryNo
         }
 
         QString value;
-        // is it a 2-column table
-        bool isTable2 = (f->type() == Data::Field::Table2);
+        // is it a multi-column table
+        int ncols = 0;
+        if(f->type() == Data::Field::Table) {
+          bool ok;
+          ncols = Tellico::toUInt(f->property(QString::fromLatin1("columns")), &ok);
+          if(!ok) {
+            ncols = 1;
+          }
+        }
         // concatenate values
         for(QDomNode childNode = node.firstChild(); !childNode.isNull(); childNode = childNode.nextSibling()) {
           // don't worry about i18n here, Tables are never translated
-          if(isTable2) {
-            value += childNode.firstChild().toElement().text();
-            if(childNode.childNodes().count() == 2) {
-              value += QString::fromLatin1("::");
-              value += childNode.lastChild().toElement().text();
+          if(ncols > 1) {
+            QDomNodeList cols = childNode.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("column"));
+            for(uint i = 0; i < cols.count(); ++i) {
+              value += cols.item(i).toElement().text();
+              if(i < cols.count()-1) {
+                value += QString::fromLatin1("::");
+              }
             }
           } else {
             // this causes problems with some characters
@@ -435,29 +518,131 @@ void TellicoImporter::readEntry(unsigned syntaxVersion_, const QDomNode& entryNo
   m_coll->addEntry(entry);
 }
 
-void TellicoImporter::readImage(const QDomElement& imgelem) {
-  QString format = imgelem.attribute(QString::fromLatin1("format"));
-  QString id = imgelem.attribute(QString::fromLatin1("id"));
+void TellicoImporter::readImage(const QDomElement& elem_) {
+  QString format = elem_.attribute(QString::fromLatin1("format"));
+  QString id = elem_.attribute(QString::fromLatin1("id"));
 
   QByteArray ba;
-  KCodecs::base64Decode(QCString(imgelem.text().latin1()), ba);
+  KCodecs::base64Decode(QCString(elem_.text().latin1()), ba);
   ImageFactory::addImage(ba, format, id);
 }
 
-void TellicoImporter::loadZipData(const QByteArray& data_) {
-  QBuffer buf(data_);
-  KZip zip(&buf);
-  if(!zip.open(IO_ReadOnly)) {
+void TellicoImporter::readFilter(const QDomElement& elem_) {
+  Filter* f = new Filter(Filter::MatchAny);
+  f->setName(elem_.attribute(QString::fromLatin1("name")));
+
+  QString match = elem_.attribute(QString::fromLatin1("match"));
+  if(match == Latin1Literal("all")) {
+    f->setMatch(Filter::MatchAll);
+  }
+
+  QDomNodeList rules = elem_.elementsByTagNameNS(m_namespace, QString::fromLatin1("rule"));
+  for(unsigned i = 0; i < rules.count(); ++i) {
+    QDomElement e = rules.item(i).toElement();
+    if(e.isNull()) {
+      continue;
+    }
+
+    QString field = e.attribute(QString::fromLatin1("field"));
+    // empty field means match any of them
+    QString pattern = e.attribute(QString::fromLatin1("pattern"));
+    // empty pattern is bad
+    if(pattern.isEmpty()) {
+      kdWarning() << "TellicoImporter::readFilter() - empty rule!" << endl;
+      continue;
+    }
+    QString function = e.attribute(QString::fromLatin1("function")).lower();
+    FilterRule::Function func;
+    if(function == Latin1Literal("contains")) {
+      func = FilterRule::FuncContains;
+    } else if(function == Latin1Literal("notcontains")) {
+      func = FilterRule::FuncNotContains;
+    } else if(function == Latin1Literal("equals")) {
+      func = FilterRule::FuncEquals;
+    } else if(function == Latin1Literal("notequals")) {
+      func = FilterRule::FuncNotEquals;
+    } else if(function == Latin1Literal("regexp")) {
+      func = FilterRule::FuncRegExp;
+    } else if(function == Latin1Literal("notregexp")) {
+      func = FilterRule::FuncNotRegExp;
+    } else {
+      kdWarning() << "TellicoImporter::readFilter() - invalid rule function: " << function << endl;
+      continue;
+    }
+    f->append(new FilterRule(field, pattern, func));
+  }
+
+  if(f->isEmpty()) {
+    delete f;
+  } else {
+    m_coll->addFilter(f);
+  }
+}
+
+void TellicoImporter::readBorrower(const QDomElement& elem_) {
+  QString name = elem_.attribute(QString::fromLatin1("name"));
+  QString uid = elem_.attribute(QString::fromLatin1("uid"));
+  Data::Borrower* b = new Data::Borrower(name, uid);
+
+  QDomNodeList loans = elem_.elementsByTagNameNS(m_namespace, QString::fromLatin1("loan"));
+  for(unsigned i = 0; i < loans.count(); ++i) {
+    QDomElement e = loans.item(i).toElement();
+    if(e.isNull()) {
+      continue;
+    }
+    int id = e.attribute(QString::fromLatin1("entryRef")).toInt();
+    Data::Entry* entry = m_coll->entryById(id);
+    if(!entry) {
+      continue;
+    }
+    QString uid = e.attribute(QString::fromLatin1("uid"));
+    QDate loanDate, dueDate;
+    QString s = e.attribute(QString::fromLatin1("loanDate"));
+    if(!s.isEmpty()) {
+      loanDate = QDate::fromString(s, Qt::ISODate);
+    }
+    s = e.attribute(QString::fromLatin1("dueDate"));
+    if(!s.isEmpty()) {
+      dueDate = QDate::fromString(s, Qt::ISODate);
+    }
+    Data::Loan* loan = new Data::Loan(entry, loanDate, dueDate, e.text());
+    loan->setUID(uid);
+    b->addLoan(loan);
+    s = e.attribute(QString::fromLatin1("calendar"));
+    loan->setInCalendar(s == Latin1Literal("true"));
+  }
+  if(b->isEmpty()) {
+    delete b;
+  } else {
+    m_coll->addBorrower(b);
+  }
+}
+
+void TellicoImporter::loadZipData() {
+  QBuffer* buf = 0;
+  KZip* zip;
+  if(source() == URL) {
+    zip = new KZip(fileRef().fileName());
+  } else {
+    zip = new KZip(buf = new QBuffer(data()));
+  }
+  if(!zip->open(IO_ReadOnly)) {
     setStatusMessage(i18n(errorLoad).arg(url().fileName()));
+    m_format = Error;
+    delete buf;
+    delete zip;
     return;
   }
 
-  const KArchiveDirectory* dir = zip.directory();
+  const KArchiveDirectory* dir = zip->directory();
   if(!dir) {
     QString str = i18n(errorLoad).arg(url().fileName()) + QChar('\n');
     str += i18n("The file is empty.");
     setStatusMessage(str);
-    zip.close();
+    zip->close();
+    m_format = Error;
+    delete buf;
+    delete zip;
     return;
   }
 
@@ -470,33 +655,161 @@ void TellicoImporter::loadZipData(const QByteArray& data_) {
     QString str = i18n(errorLoad).arg(url().fileName()) + QChar('\n');
     str += i18n("The file contains no collection data.");
     setStatusMessage(str);
-    zip.close();
+    zip->close();
+    m_format = Error;
+    delete buf;
+    delete zip;
     return;
   }
 
   const QByteArray xmlData = static_cast<const KArchiveFile*>(entry)->data();
   loadXMLData(xmlData, false);
   if(!m_coll) {
-    zip.close();
+    zip->close();
+    m_format = Error;
+    delete buf;
+    delete zip;
     return;
   }
 
-  const KArchiveEntry* imgDir = dir->entry(QString::fromLatin1("images"));
-  if(!imgDir || !imgDir->isDirectory()) {
-    zip.close();
+  const KArchiveEntry* imgDirEntry = dir->entry(QString::fromLatin1("images"));
+  if(!imgDirEntry || !imgDirEntry->isDirectory()) {
+    zip->close();
+    delete buf;
+    delete zip;
     return;
   }
 
-  QStringList images = static_cast<const KArchiveDirectory*>(imgDir)->entries();
+  // if all the images are not to be loaded, then we're done
+  if(!m_loadAllImages) {
+    return;
+  }
+
+  const QStringList images = static_cast<const KArchiveDirectory*>(imgDirEntry)->entries();
   for(QStringList::ConstIterator it = images.begin(); it != images.end(); ++it) {
-    const KArchiveEntry* file = static_cast<const KArchiveDirectory*>(imgDir)->entry(*it);
+    const KArchiveEntry* file = static_cast<const KArchiveDirectory*>(imgDirEntry)->entry(*it);
     if(file && file->isFile()) {
       ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                             (*it).section('.', -1).upper(), *it);
+                             (*it).section('.', -1).upper(), (*it));
     }
   }
 
+  zip->close();
+  delete buf;
+  delete zip;
+}
+
+// static
+bool TellicoImporter::loadImage(const KURL& url_, const QString& id_) {
+  // only local files are allowed
+  if(url_.isEmpty() || !url_.isValid() || !url_.isLocalFile()) {
+//    kdDebug() << "TellicoImporter::loadImage() - returning" << endl;
+    return false;
+  }
+
+  // keep track of url for error reporting
+  static KURL u;
+
+  KZip zip(url_.path());
+  if(!zip.open(IO_ReadOnly)) {
+    if(u != url_) {
+      Kernel::self()->sorry(i18n(errorImageLoad).arg(url_.fileName()));
+    }
+    u = url_;
+    return false;
+  }
+
+  const KArchiveDirectory* dir = zip.directory();
+  if(!dir) {
+    if(u != url_) {
+      Kernel::self()->sorry(i18n(errorImageLoad).arg(url_.fileName()));
+    }
+    u = url_;
+    zip.close();
+    return false;
+  }
+
+  const KArchiveEntry* imgDirEntry = dir->entry(QString::fromLatin1("images"));
+  if(!imgDirEntry || !imgDirEntry->isDirectory()) {
+    zip.close();
+    return false;
+  }
+  const KArchiveEntry* file = static_cast<const KArchiveDirectory*>(imgDirEntry)->entry(id_);
+  if(!file || !file->isFile()) {
+    zip.close();
+    return false;
+  }
+  const Data::Image& img = ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
+                                                  id_.section('.', -1).upper(), id_);
   zip.close();
+  return !img.isNull();
+}
+
+void TellicoImporter::addDefaultFilters() {
+  switch(m_coll->type()) {
+    case Data::Collection::Book:
+      if(m_coll->fieldByName(QString::fromLatin1("read"))) {
+        Filter* f = new Filter(Filter::MatchAny);
+        f->setName(i18n("Unread Books"));
+        f->append(new FilterRule(QString::fromLatin1("read"), QString::fromLatin1("true"), FilterRule::FuncNotContains));
+        m_coll->addFilter(f);
+        m_modified = true;
+      }
+      break;
+
+    case Data::Collection::Video:
+      if(m_coll->fieldByName(QString::fromLatin1("year"))) {
+        Filter* f = new Filter(Filter::MatchAny);
+        f->setName(i18n("Old Movies"));
+        // old movies from before 1960
+        f->append(new FilterRule(QString::fromLatin1("year"), QString::fromLatin1("19[012345]\\d"), FilterRule::FuncRegExp));
+        m_coll->addFilter(f);
+        m_modified = true;
+      }
+      if(m_coll->fieldByName(QString::fromLatin1("widescreen"))) {
+        Filter* f = new Filter(Filter::MatchAny);
+        f->setName(i18n("Widescreen"));
+        f->append(new FilterRule(QString::fromLatin1("widescreen"), QString::fromLatin1("true"), FilterRule::FuncContains));
+        m_coll->addFilter(f);
+        m_modified = true;
+      }
+      break;
+
+    case Data::Collection::Album:
+      if(m_coll->fieldByName(QString::fromLatin1("year"))) {
+        Filter* f = new Filter(Filter::MatchAny);
+        f->setName(i18n("80's Music"));
+        f->append(new FilterRule(QString::fromLatin1("year"), QString::fromLatin1("198\\d"),FilterRule::FuncRegExp));
+        m_coll->addFilter(f);
+        m_modified = true;
+      }
+      break;
+
+    default:
+      break;
+  }
+  if(m_coll->fieldByName(QString::fromLatin1("rating"))) {
+    Filter* filter = new Filter(Filter::MatchAny);
+    filter->setName(i18n("Favorites"));
+    // check all the numbers, and use top 20% or so
+    Data::Field* field = m_coll->fieldByName(QString::fromLatin1("rating"));
+    bool ok;
+    uint min = Tellico::toUInt(field->property(QString::fromLatin1("minimum")), &ok);
+    if(!ok) {
+      min = 1;
+    }
+    uint max = Tellico::toUInt(field->property(QString::fromLatin1("maximum")), &ok);
+    if(!ok) {
+      min = 5;
+    }
+    for(uint i = KMAX(min, static_cast<uint>(0.8*(max-min+1))); i <= max; ++i) {
+      filter->append(new FilterRule(QString::fromLatin1("rating"), QString::number(i), FilterRule::FuncContains));
+    }
+    if(!filter->isEmpty()) {
+      m_coll->addFilter(filter);
+      m_modified = true;
+    }
+  }
 }
 
 #include "tellicoimporter.moc"

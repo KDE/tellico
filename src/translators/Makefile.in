@@ -68,9 +68,10 @@ am_libtranslators_a_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	audiofileimporter.$(OBJEXT) alexandriaimporter.$(OBJEXT) \
 	alexandriaexporter.$(OBJEXT) freedbimporter.$(OBJEXT) \
 	risimporter.$(OBJEXT) freedb_util.$(OBJEXT) \
-	tellico_xml.$(OBJEXT)
+	tellico_xml.$(OBJEXT) exporter.$(OBJEXT) \
+	onixexporter.$(OBJEXT)
 #>- libtranslators_a_OBJECTS = $(am_libtranslators_a_OBJECTS)
-#>+ 17
+#>+ 18
 libtranslators_a_final_OBJECTS = libtranslators_a.all_cpp.o 
 libtranslators_a_nofinal_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	bibtexexporter.$(OBJEXT) bibtexmlimporter.$(OBJEXT) \
@@ -84,7 +85,8 @@ libtranslators_a_nofinal_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	audiofileimporter.$(OBJEXT) alexandriaimporter.$(OBJEXT) \
 	alexandriaexporter.$(OBJEXT) freedbimporter.$(OBJEXT) \
 	risimporter.$(OBJEXT) freedb_util.$(OBJEXT) \
-	tellico_xml.$(OBJEXT)\
+	tellico_xml.$(OBJEXT) exporter.$(OBJEXT) \
+	onixexporter.$(OBJEXT)\
 dataimporter.moc.o importer.moc.o 
 @KDE_USE_FINAL_FALSE@libtranslators_a_OBJECTS = $(libtranslators_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libtranslators_a_OBJECTS = $(libtranslators_a_final_OBJECTS)
@@ -176,6 +178,7 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+KCAL_LIBS = @KCAL_LIBS@
 KCDDB_LIBS = @KCDDB_LIBS@
 KDECONFIG = @KDECONFIG@
 KDE_EXTRA_RPATH = @KDE_EXTRA_RPATH@
@@ -374,7 +377,7 @@ bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp \
 bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp \
 xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp \
 alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp \
-risimporter.cpp freedb_util.cpp tellico_xml.cpp
+risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp onixexporter.cpp
 
 @USE_LIBBTPARSE_FALSE@SUBDIR_LIBBTPARSE = btparse
 SUBDIRS = pilotdb $(SUBDIR_LIBBTPARSE)
@@ -382,12 +385,12 @@ CLEANFILES = *~
 EXTRA_DIST = bibtex-translation.xml \
 bibtexexporter.cpp       tellicoxmlexporter.h     pilotdbexporter.cpp \
 bibtexexporter.h         tellicozipexporter.cpp   pilotdbexporter.h \
-bibtexhandler.cpp        tellicozipexporter.h     textexporter.h \
+bibtexhandler.cpp        tellicozipexporter.h     \
 bibtexhandler.h          csvexporter.cpp          textimporter.cpp \
 bibteximporter.cpp       csvexporter.h            textimporter.h \
 bibteximporter.h         csvimporter.cpp          xmlimporter.cpp \
 bibtexmlexporter.cpp     csvimporter.h            xmlimporter.h \
-bibtexmlexporter.h       dataexporter.h           xsltexporter.cpp \
+bibtexmlexporter.h                                xsltexporter.cpp \
 bibtexmlimporter.cpp     dataimporter.h           xsltexporter.h \
 bibtexmlimporter.h       exporter.h               xslthandler.cpp \
 tellicoimporter.cpp      htmlexporter.cpp         xslthandler.h \
@@ -397,7 +400,8 @@ audiofileimporter.h      audiofileimporter.cpp    alexandriaimporter.h \
 alexandriaimporter.cpp   alexandriaexporter.h     alexandriaexporter.cpp \
 freedbimporter.h         freedbimporter.cpp       freedb_util.cpp \
 risimporter.h            risimporter.cpp          tellico_xml.h \
-tellico_xml.cpp          translators.h
+tellico_xml.cpp          translators.h            exporter.cpp \
+onixexporter.h           onixexporter.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
@@ -477,9 +481,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bibtexmlimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csvexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csvimporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/exporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/freedb_util.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/freedbimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/htmlexporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/onixexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pilotdbexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/risimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tellico_xml.Po@am__quote@
@@ -950,11 +956,11 @@ bcheck-am:
 
 
 #>+ 11
-libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/pilotdbexporter.cpp $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/tellicoxmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp $(srcdir)/tellicozipexporter.cpp $(srcdir)/xmlimporter.cpp $(srcdir)/tellicoimporter.cpp $(srcdir)/audiofileimporter.cpp $(srcdir)/alexandriaimporter.cpp $(srcdir)/alexandriaexporter.cpp $(srcdir)/freedbimporter.cpp $(srcdir)/risimporter.cpp $(srcdir)/freedb_util.cpp $(srcdir)/tellico_xml.cpp dataimporter.moc.cpp importer.moc.cpp  csvimporter.moc xsltimporter.moc alexandriaimporter.moc textimporter.moc freedbimporter.moc bibteximporter.moc xmlimporter.moc audiofileimporter.moc bibtexmlimporter.moc tellicoimporter.moc risimporter.moc
+libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/pilotdbexporter.cpp $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/tellicoxmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp $(srcdir)/tellicozipexporter.cpp $(srcdir)/xmlimporter.cpp $(srcdir)/tellicoimporter.cpp $(srcdir)/audiofileimporter.cpp $(srcdir)/alexandriaimporter.cpp $(srcdir)/alexandriaexporter.cpp $(srcdir)/freedbimporter.cpp $(srcdir)/risimporter.cpp $(srcdir)/freedb_util.cpp $(srcdir)/tellico_xml.cpp $(srcdir)/exporter.cpp $(srcdir)/onixexporter.cpp dataimporter.moc.cpp importer.moc.cpp  csvimporter.moc xsltimporter.moc alexandriaimporter.moc textimporter.moc freedbimporter.moc bibteximporter.moc xmlimporter.moc audiofileimporter.moc bibtexmlimporter.moc tellicoimporter.moc risimporter.moc
 	@echo 'creating libtranslators_a.all_cpp.cpp ...'; \
 	rm -f libtranslators_a.all_cpp.files libtranslators_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libtranslators_a.all_cpp.final; \
-	for file in pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp risimporter.cpp freedb_util.cpp tellico_xml.cpp dataimporter.moc.cpp importer.moc.cpp ; do \
+	for file in pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp onixexporter.cpp dataimporter.moc.cpp importer.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> libtranslators_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libtranslators_a.all_cpp.final; \
 	done; \

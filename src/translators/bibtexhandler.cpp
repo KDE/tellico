@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,11 +14,11 @@
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
+#include "../field.h"
 #include "../collection.h"
 #include "../filehandler.h"
 #include "../latin1literal.h"
 
-#include <kglobal.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
 #include <kurl.h>
@@ -35,7 +35,7 @@ BibtexHandler::StringListMap* BibtexHandler::s_utf8LatexMap = 0;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
 const QRegExp BibtexHandler::s_badKeyChars(QString::fromLatin1("[^0-9a-zA-Z-]"));
 
-QString BibtexHandler::bibtexKey(Data::Entry* entry_) {
+QString BibtexHandler::bibtexKey(const Data::Entry* entry_) {
   if(!entry_ || !entry_->collection() || entry_->collection()->type() != Data::Collection::Bibtex) {
     return QString::null;
   }
@@ -101,7 +101,7 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
 }
 
 void BibtexHandler::loadTranslationMaps() {
-  QString mapfile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("bibtex-translation.xml"));
+  QString mapfile = locate("appdata", QString::fromLatin1("bibtex-translation.xml"));
   if(mapfile.isEmpty()) {
     return;
   }
@@ -140,6 +140,15 @@ QString BibtexHandler::importText(char* text_) {
     }
   }
 
+  // now replace capitalized letters, such as {X}
+  // but since we don't want to turn "... X" into "... {X}" later when exporting
+  // we need to lower-case any capitalized text after the first letter that is
+  // NOT contained in braces
+
+  QRegExp rx(QString::fromLatin1("\\{([A-Z]+)\\}"));
+  rx.setMinimal(true);
+  str.replace(rx, QString::fromLatin1("\\1"));
+
   return str;
 }
 
@@ -161,6 +170,31 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
   }
 
   QString text = text_;
+
+  int inside = 0;
+  uint l = text.length();
+  // start at first letter, but skip if only the first is capitalized
+  for(uint i = 0; i < l; ++i) {
+    const QChar c = text.at(i);
+    if(inside == 0 && c >= 'A' && c <= 'Z') {
+      uint j = i+1;
+      while(text.at(j) >= 'A' && text.at(j) <= 'Z' && j < l) {
+        ++j;
+      }
+      if(i == 0 && j == 1) {
+        continue; // no need to do anything to first letter
+      }
+      text.insert(i, '{');
+      // now j should be incremented
+      text.insert(j+1, '}');
+      i = j+1;
+      l += 2; // the length changed
+    } else if(c == '{') {
+      ++inside;
+    } else if(c == '}') {
+      --inside;
+    }
+  }
 
   for(StringListMap::Iterator it = s_utf8LatexMap->begin(); it != s_utf8LatexMap->end(); ++it) {
     text.replace(it.key(), it.data()[0]);
@@ -189,9 +223,9 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
     }
   }
 
-  const QString octo = QString::fromLatin1("#");
+  const QChar octo = '#';
   text = list.join(octo);
-  text.replace(rquote+octo+lquote, octo);
+  text.replace(QString(rquote)+octo+lquote, octo);
 
   return text;
 }

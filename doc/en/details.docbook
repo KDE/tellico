@@ -33,6 +33,7 @@ the value, is used for data entry. No formatting is ever
 applied.</para>
 
 </sect2>
+
 <sect2 id="url">
 <title>&URL;</title>
 
@@ -42,7 +43,8 @@ using the standard &kde; file type associations for opening the linked
 documents. No validation is done on the actual value of a
 <emphasis>&URL;</emphasis> field, but non-valid links are not
 opened. The data entry is a line edit with a button for opening the
-standard File-Open dialog, but any &URL; may be used.
+standard File-Open dialog, but any &URL; may be used. Relative &URL;s are
+interpreted relative to the location of the data file, once it has been saved.
 </para>
 
 <para>
@@ -61,6 +63,7 @@ property for the &URL; field should be set to <emphasis>relative</emphasis> : <e
 </para>
 
 </sect2>
+
 <sect2 id="para">
 <title>Paragraph</title>
 
@@ -72,6 +75,7 @@ is it automatically formatted. It cannot be used for grouping. Abstracts, plot
 summaries, or reviews should be entered using this field type.</para>
 
 </sect2>
+
 <sect2 id="choice">
 <title>Choice</title>
 
@@ -83,6 +87,7 @@ are not applicable. Fields such as bibliography type or personal rating
 are <emphasis>Choice</emphasis>-type fields.</para>
 
 </sect2>
+
 <sect2 id="bool">
 <title>Checkbox</title>
 
@@ -96,11 +101,21 @@ carried as <emphasis><constant>true</constant></emphasis> or
 fields.</para>
 
 </sect2>
+
+<sect2 id="date">
+<title>Date</title>
+
+<para>
+A <emphasis>Date</emphasis> field can include a day, month, and year. The date is shown in the standard format of YYYY-MM-DD, which allows for easy sorting. The standard &kde; Date Selector may be used to choose the date with the mouse, or it may be entered directly. The field is not required to have non-empty values for the year, month, and day; only the year may be entered, for example. Multiple values are not allowed.
+</para>
+
+</sect2>
+
 <sect2 id="table">
 <title>Table</title>
 
 <para>
-<emphasis>Table</emphasis> fields hold a single-column list of unlimited values.
+<emphasis>Table</emphasis> fields hold a one or more columns of values.
 In the <link linkend="entry-editor">&entry-editor;</link>, the field is presented using a
 spreadsheet-like view, with numbered rows. When the last row is selected, an additional
 row is then added.  Auto-completion is not available.
@@ -108,22 +123,13 @@ This field is useful for a list of chapters in a book, scenes in a movie, or son
 <emphasis>Table</emphasis> fields are always a category by themselves.
 </para>
 
-</sect2>
-<sect2 id="table2">
-<title>Table (2 Columns)</title>
-
 <para>
-Some fields may need two columns of data, which is available as a
-<emphasis>Table (2 Columns)</emphasis> type. It is identical to the
-previous <emphasis>Table</emphasis> type, but has an additional column. The default
-video collection uses a 2-column field for the cast, with the first column holding
-the actor's name and the second column holding the name of the character. Only the first column
-can be auto-formatted, and only the first column is used for grouping. Auto-completion is not available.
-Typically, the second column is italicized in the entry view templates, or when exporting to HTML.
-<emphasis>Table</emphasis> fields are always a category by themselves.
+The number of columns, up to a maximum of five, is defined by adding a property to the field
+definition with the name <emphasis>columns</emphasis>.
 </para>
 
 </sect2>
+
 <sect2 id="image">
 <title>Image</title>
 
@@ -137,11 +143,14 @@ locally.
 
 </sect2>
 
-<sect2 id="date">
-<title>Date</title>
+<sect2 id="rating">
+<title>Rating</title>
 
 <para>
-A <emphasis>Date</emphasis> field can include a day, month, and year. The date is shown in the standard format of YYYY-MM-DD, which allows for easy sorting. The standard &kde; Date Selector may be used to choose the date with the mouse, or it may be entered directly. The field is not required to have non-empty values for the year, month, and day; only the year may be entered, for example. Multiple values are not allowed.
+<emphasis>Rating</emphasis> fields show a number of stars to represent a numerical rating
+for an entry. By default, the rating is a maximum of five. The minimum and maximum may be
+setting properties in the field definition in the &fields-dialog;, named
+<emphasis>minimum</emphasis> and <emphasis>maximum</emphasis>, respectively..
 </para>
 
 </sect2>
@@ -166,7 +175,7 @@ may be used in the description for formatting.
 <title>Collection Types</title>
 
 <para>
-&appname; supports nine specific collection types by default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
+&appname; supports ten specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
 </para>
 
 <para>
@@ -319,7 +328,7 @@ Video collections have 30 default fields:
 </para>
 
 <para>
-The <emphasis>Cast</emphasis> field is a <link linkend="table2">2-column table</link>, and the name of the actor is intended to be in the first column, with their role in the second. The <emphasis>Running Time</emphasis> is meant to be in minutes, though you can change that, of course.
+The <emphasis>Cast</emphasis> field is a <link linkend="table">table</link> with two columns, and the name of the actor is intended to be in the first column, with their role in the second. The <emphasis>Running Time</emphasis> is meant to be in minutes, though you can change that, of course.
 </para>
 </sect2>
 
@@ -340,6 +349,30 @@ Music collections have 15 default fields:
 <emphasis>Gift</emphasis>,
 <emphasis>Loaned</emphasis>,
 <emphasis>Keywords</emphasis>,
+<emphasis>Cover</emphasis>, and
+<emphasis>Comments</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="game-collection">
+<title>Game Collections</title>
+<para>
+Video game collections have 16 default fields:
+<emphasis>Title</emphasis>,
+<emphasis>Platform</emphasis>,
+<emphasis>Genre</emphasis>,
+<emphasis>Release Year</emphasis>,
+<emphasis>Publisher</emphasis>,
+<emphasis>Developer</emphasis>,
+<emphasis>ESRB Rating</emphasis>,
+<emphasis>Description</emphasis>,
+<emphasis>Personal Rating</emphasis>,
+<emphasis>Completed</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Loaned</emphasis>,
 <emphasis>Cover</emphasis>, and
 <emphasis>Comments</emphasis>.
 </para>

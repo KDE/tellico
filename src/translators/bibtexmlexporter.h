@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,23 +14,24 @@
 #ifndef BIBTEXMLEXPORTER_H
 #define BIBTEXMLEXPORTER_H
 
-#include "textexporter.h"
+#include "exporter.h"
 
 namespace Tellico {
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexmlexporter.h 862 2004-09-15 01:49:51Z robby $
  */
-class BibtexmlExporter : public TextExporter {
+class BibtexmlExporter : public Exporter {
 public:
-  BibtexmlExporter(const Data::Collection* coll) : TextExporter(coll) {}
+  BibtexmlExporter() : Exporter() {}
 
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual bool exec();
   virtual QString formatString() const;
-  virtual QString text(bool format, bool encodeUTF8);
   virtual QString fileFilter() const;
+
+  // no options
+  virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual void readOptions(KConfig*) {}
   virtual void saveOptions(KConfig*) {}
 };

@@ -1,5 +1,5 @@
 /****************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,18 +23,19 @@ namespace Tellico {
 
 class KConfig;
 class KLineEdit;
-class KComboBox;
 class KIntSpinBox;
 class KPushButton;
 
 class QCheckBox;
 
 #include "fetch/fetch.h"
+#include "gui/comboboxproxy.h"
 
 #include <kdialogbase.h>
 #include <kcombobox.h>
 #include <klistview.h>
 
+#include <qstring.h>
 #include <qstringlist.h>
 #include <qintdict.h>
 
@@ -45,7 +46,6 @@ namespace Tellico {
  * preferences.
  *
  * @author Robby Stephenson
- * @version $Id: configdialog.h 964 2004-11-19 06:54:49Z robby $
  */
 class ConfigDialog : public KDialogBase {
 Q_OBJECT
@@ -152,7 +152,6 @@ private:
   QCheckBox* m_cbShowTipDay;
   QCheckBox* m_cbCapitalize;
   QCheckBox* m_cbFormat;
-  QCheckBox* m_cbShowCount;
   KLineEdit* m_leArticles;
   KLineEdit* m_leSuffixes;
   KLineEdit* m_lePrefixes;
@@ -163,7 +162,8 @@ private:
   KIntSpinBox* m_imageWidthBox;
   KIntSpinBox* m_imageHeightBox;
 
-  QIntDict<KComboBox> m_cbTemplates;
+  typedef Tellico::GUI::ComboBoxProxy<QString> CBProxy;
+  QIntDict<CBProxy> m_cbTemplates;
 
   KListView* m_sourceListView;
   QMap<SourceListViewItem*, Fetch::ConfigWidget*> m_configWidgets;

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004 by Robby Stephenson
+    copyright            : (C) 2004-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,8 +15,10 @@
 #define FREEDBIMPORTER_H
 
 #include "importer.h"
-#include "../../config.h"
+#include <config.h>
 
+class QButtonGroup;
+class QRadioButton;
 class KComboBox;
 
 namespace Tellico {
@@ -26,7 +28,6 @@ namespace Tellico {
  * The FreeDBImporter class takes care of importing audio files.
  *
  * @author Robby Stephenson
- * @version $Id: freedbimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class FreeDBImporter : public Importer {
 Q_OBJECT
@@ -42,13 +43,22 @@ public:
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Album); }
+  virtual bool canImport(int type) const;
+
+private slots:
+  void slotClicked(int id);
 
 private:
+  Data::Collection* readCDROM();
+  Data::Collection* readCache();
+
   static QValueList<uint> FreeDBImporter::offsetList(QCString drive);
 
   Data::Collection* m_coll;
   QWidget* m_widget;
+  QButtonGroup* m_buttonGroup;
+  QRadioButton* m_radioCDROM;
+  QRadioButton* m_radioCache;
   KComboBox* m_driveCombo;
 };
 

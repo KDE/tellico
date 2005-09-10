@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -31,7 +31,6 @@ namespace Tellico {
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: winecollection.h 70 2003-07-31 03:49:14Z robby $
  */
 class WineCollection : public Collection {
 Q_OBJECT
@@ -47,7 +46,7 @@ public:
 
   virtual Type type() const { return Wine; }
 
-  static FieldList defaultFields();
+  static FieldVec defaultFields();
 };
 
   } // end namespace

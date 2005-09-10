@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,31 +14,66 @@
 #ifndef TELLICO_UTILS_H
 #define TELLICO_UTILS_H
 
-#include <kdeversion.h>
-#ifndef KDE_IS_VERSION
-#define KDE_IS_VERSION(a,b,c) ( KDE_VERSION >= KDE_MAKE_VERSION(a,b,c) )
-#endif
+class QCursor;
+class QStringList;
+class QFontMetrics;
+class QScrollView;
 
-// see http://sourcefrog.net/weblog/software/languages/C/warn-unused.html
-#ifdef __GNUC__
-#  define WARN_UNUSED  __attribute__((warn_unused_result))
-#else
-#  define WARN_UNUSED
-#endif
-
-#include <kurl.h>
+#include <qstring.h>
+#include <qcolor.h>
 
 /**
  * This file contains utility functions.
  *
  * @author Robby Stephenson
- * @version $Id: tellico_utils.h 971 2004-11-20 06:59:39Z robby $
  */
 namespace Tellico {
   /**
    * Decode HTML entities. Only numeric entities are handled currently.
    */
-  QString decodeHTML(const QString& s);
+  QString decodeHTML(QString text);
+  /**
+   * Return a random, and almost certainly unique UID.
+   *
+   * @param length The UID starts with "Tellico" and adds enough letters to be @p length long.
+   */
+  QString uid(int length=20);
+  uint toUInt(const QString& string, bool* ok);
+  /**
+   * Replace all occurences  of <i18n>text</i18n> with i18n("text")
+   */
+  QString i18nReplace(QString text);
+  /**
+   * Returns a list of the subdirectories in @param dir
+   *.Symbolic links are ignored
+   */
+  QStringList findAllSubDirs(const QString& dir);
+
+  extern QColor contrastColor;
+  void updateContrastColor(const QColorGroup& cg);
+
+  QString rPixelSqueeze(const QString& str, const QFontMetrics& fm, uint pixels);
+
+namespace GUI {
+  class CursorSaver {
+  public:
+    CursorSaver(const QCursor& cursor);
+    ~CursorSaver();
+    void restore();
+  private:
+    bool m_restored : 1;
+  };
+
+  class WidgetUpdateBlocker {
+  public:
+    WidgetUpdateBlocker(QScrollView* widget);
+    ~WidgetUpdateBlocker();
+  private:
+    QScrollView* m_widget;
+    bool m_wasEnabled : 1;
+  };
+}
+
 }
 
 #endif

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,16 +16,14 @@
 
 #include "image.h"
 #include "filehandler.h"
+#include "stringset.h"
 
 #include <kurl.h>
-
-#include <qdict.h>
 
 namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imagefactory.h 862 2004-09-15 01:49:51Z robby $
  */
 class ImageFactory {
 public:
@@ -87,10 +85,6 @@ public:
    * Clean the temp dir and remove all temporary image files
    */
   static void clean();
-  /**
-   * Are there any images in the collection?
-   */
-  static bool hasImages() { return !s_imageDict.isEmpty(); }
 
 private:
   /**
@@ -99,8 +93,7 @@ private:
   static void createTempDir();
 
   static QDict<Data::Image> s_imageDict;
-  // use a dict for fast random access to keep track of which images were written to disk
-  static QDict<int> s_imageFileDict;
+  static StringSet s_cachedImages; // the id's of the images written to disk
   static QString s_tempDir;
   static const Data::Image s_null;
 };

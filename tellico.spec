@@ -1,6 +1,6 @@
 %define name    tellico
-%define version 0.13.8
-%define release 1rls
+%define version 1.0
+%define release 1
 %define iconname %{name}.png
 %define __libtoolize /bin/true
 
@@ -20,18 +20,20 @@ Requires: libkdemultimedia-common
 Requires: taglib
 BuildRequires: kdelibs-devel >= 3.1 libxslt-devel >= 1.0.19
 BuildRequires: ImageMagick libart_lgpl-devel libtaglib-devel
-BuildRequires: libkdemultimedia-kscd-devel
+BuildRequires: libkdemultimedia-common-devel libkdemultimedia1-kscd-devel
+# specific for Mandrake versions < 10.2
+BuildRequires: mandrakelinux-create-kde-mdk-menu
 BuildRoot: %{_tmppath}/%{name}-buildroot
 Obsoletes: bookcase
 
 %description
-Tellico is a KDE application for keeping track of your collection of books, bibliographies, music, movies, coins, stamps, trading cards, comic books, or wines.
+Tellico is a KDE application for keeping track of your collection of books, bibliographies, music, movies, video games, coins, stamps, trading cards, comic books, or wines.
 
 Features:
 
 o Supports any number of user-defined fields, of eleven different types:
-   o text, paragraph, list, checkbox, year, URL, date
-   o tables of one or two columns.
+   o text, paragraph, list, checkbox, year, URL, date, ratings
+   o tables
    o images
    o combinations of other fields
 o Handles books with multiple authors, genres, keywords, etc.
@@ -42,7 +44,7 @@ o Automatically validates ISBN
 o Allows customizable entry templates through XSLT
 o Imports Bibtex, Bibtexml, RIS, CSV, MODS, and XSLT-filtered data
 o Exports to Bibtex, Bibtexml, CSV, HTML, PilotDB, and XSLT-filtered data
-o Searches and adds items from Amazon.com, imdb.com, and z39.50 servers
+o Searches and adds items from Amazon.com, imdb.com, z39.50 servers, PubMed, and external applications
 
 %prep
 rm -rf $RPM_BUILD_ROOT
@@ -83,6 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applnk/Applications/tellico.desktop
 %{_datadir}/mimelnk/application/x-tellico.desktop
 %{_datadir}/apps/kconf_update/tellico-rename.upd
+%{_datadir}/apps/kconf_update/tellico.upd
 %{_datadir}/apps/%{name}/
 %{_menudir}/%{name}
 %{_miconsdir}/%{iconname}
@@ -91,6 +94,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
+* Fri Aug 19 2005 Robby Stephenson <robby@periapsis.org> 1.0-1
+- Version 1.0.
+
+* Fri Aug 12 2005 Robby Stephenson <robby@periapsis.org> 1.0-0.pre2.1rls
+- Version 1.0pre2.
+
+* Wed Jul 27 2005 Robby Stephenson <robby@periapsis.org> 1.0-0.pre1.1rls
+- Version 1.0pre1.
+
 * Wed Jun 29 2005 Robby Stephenson <robby@periapsis.org> 0.13.8-1rls
 - Version 0.13.8.
 

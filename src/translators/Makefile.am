@@ -12,7 +12,7 @@ bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp \
 bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp \
 xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp \
 alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp \
-risimporter.cpp freedb_util.cpp tellico_xml.cpp
+risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp onixexporter.cpp
 
 if !USE_LIBBTPARSE
   SUBDIR_LIBBTPARSE = btparse
@@ -25,12 +25,12 @@ CLEANFILES = *~
 EXTRA_DIST = bibtex-translation.xml \
 bibtexexporter.cpp       tellicoxmlexporter.h     pilotdbexporter.cpp \
 bibtexexporter.h         tellicozipexporter.cpp   pilotdbexporter.h \
-bibtexhandler.cpp        tellicozipexporter.h     textexporter.h \
+bibtexhandler.cpp        tellicozipexporter.h     \
 bibtexhandler.h          csvexporter.cpp          textimporter.cpp \
 bibteximporter.cpp       csvexporter.h            textimporter.h \
 bibteximporter.h         csvimporter.cpp          xmlimporter.cpp \
 bibtexmlexporter.cpp     csvimporter.h            xmlimporter.h \
-bibtexmlexporter.h       dataexporter.h           xsltexporter.cpp \
+bibtexmlexporter.h                                xsltexporter.cpp \
 bibtexmlimporter.cpp     dataimporter.h           xsltexporter.h \
 bibtexmlimporter.h       exporter.h               xslthandler.cpp \
 tellicoimporter.cpp      htmlexporter.cpp         xslthandler.h \
@@ -40,7 +40,8 @@ audiofileimporter.h      audiofileimporter.cpp    alexandriaimporter.h \
 alexandriaimporter.cpp   alexandriaexporter.h     alexandriaexporter.cpp \
 freedbimporter.h         freedbimporter.cpp       freedb_util.cpp \
 risimporter.h            risimporter.cpp          tellico_xml.h \
-tellico_xml.cpp          translators.h
+tellico_xml.cpp          translators.h            exporter.cpp \
+onixexporter.h           onixexporter.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 

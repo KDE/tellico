@@ -20,12 +20,11 @@ Searches may use four different criteria: <guilabel>Title</guilabel>, <guilabel>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
 <textobject><phrase>The &appname; &fetch-dialog;</phrase></textobject>
-<caption><para>The &appname; &fetch-dialog;</para></caption>
 </mediaobject>
 </screenshot>
 
 <para>
-Only entries that match the current collection type will be found. The <guilabel>Description</guilabel> column provides additional information about the entry, in order to differentiate between videos on different formats, or books in different bindings. Once an entry is successfully added to the collection, an icon is added to the first column in the list.
+Only entries that match the current collection type will be found. The <guilabel>Description</guilabel> column provides additional information about the entry, in order to differentiate between videos in different formats, or books in different bindings, for example. Once an entry is successfully added to the collection, a checkmark is added to the first column in the list.
 </para>
 
 <para>
@@ -61,7 +60,6 @@ Comma-separated values (<acronym>CSV</acronym>) are a common way of importing an
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="csv-dialog.png"/></imageobject>
 <textobject><phrase>The CSV Import Dialog</phrase></textobject>
-<caption><para>The CSV Import Dialog</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -118,7 +116,7 @@ The audio file metadata importer can recursively scan a directory to find all au
 <title>Importing Bibtex Data</title>
 
 <para>
-<ulink url="http://www.ecst.csuchico.edu/~jacobsd/bib/formats/bibtex.html">Bibtex</ulink> is a bibliography format used with the LaTeX document preparation system. Various type of bibliographic references may be included in the file. &appname; imports bibtex files as a Bibliographic collection.
+<ulink url="http://en.wikipedia.org/wiki/Bibtex">Bibtex</ulink> is a bibliography format used with the LaTeX document preparation system. Various type of bibliographic references may be included in the file. &appname; imports bibtex files as a Bibliographic collection.
 </para>
 
 <para>
@@ -177,7 +175,6 @@ Exported text files, such as Bibtex or CSV, may use the Unicode (UTF-8) characte
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="export-options.png"/></imageobject>
 <textobject><phrase>General Export Options</phrase></textobject>
-<caption><para>General Export Options</para></caption>
 </mediaobject>
 </screenshot>
 
@@ -193,7 +190,7 @@ The file format for &appname; data is a zipped &xml; file. Exporting to &xml; me
 <title>Exporting HTML</title>
 
 <para>
-The HTML export uses the <filename>tellico2html.xsl</filename> stylesheet. Images are exported to a folder with the same name as the exported HTML file with <emphasis><filename>-images</filename></emphasis> appended.
+The HTML export uses the <filename>tellico2html.xsl</filename> stylesheet. Images are exported to a folder with the same name as the exported HTML file with <emphasis><filename>_files</filename></emphasis> appended.
 </para>
 
 <para>
@@ -201,7 +198,7 @@ The default format is similar to the printed output, and allows various options 
 </para>
 
 <para>
-Additionally, individual files may be created for each entry in the collection, with links created in the top-level HTML file. The entry files will be created in a folder with the same name as the exported HTML file, with <emphasis><filename>-entries</filename></emphasis> appended. The entry HTML files will use the current stylesheet template, as shown in the &entry-view;.
+Additionally, individual files may be created for each entry in the collection, with links created in the top-level HTML file. The entry files will be created in the same folder as the images. The entry HTML files will use the current stylesheet template, as shown in the &entry-view;.
 </para>
 
 <screenshot>
@@ -209,7 +206,6 @@ Additionally, individual files may be created for each entry in the collection, 
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="export-html.png"/></imageobject>
 <textobject><phrase>HTML Export Options</phrase></textobject>
-<caption><para>HTML Export Options</para></caption>
 </mediaobject>
 </screenshot>
 </sect2>
@@ -226,7 +222,6 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="export-csv.png"/></imageobject>
 <textobject><phrase>CSV Export Options</phrase></textobject>
-<caption><para>CSV Export Options</para></caption>
 </mediaobject>
 </screenshot>
 </sect2>
@@ -235,23 +230,60 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 <title>Exporting Pilot-DB</title>
 
 <para>
-TBD
+<ulink url="http://pilot-db.sourceforge.net">Pilot-DB</ulink> is a database format for Palm OS. Various desktop applications can read and write Pilot-DB files. Exported <literal role="extension">.pdb</literal> files can be transferred to a PDA, and used directly. At the moment, &appname; is not able to import Pilot-DB files.
 </para>
+
+<screenshot>
+<screeninfo>Pilot-DB Export Options</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="export-pdb.png"/></imageobject>
+<textobject><phrase>Pilot-DB Export Options</phrase></textobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="exporting-alexandri">
+<title>Exporting Alexandria</title>
+
+<para>
+<ulink url="http://alexandria.rubyforge.net">Alexandria</ulink> is a book collection manager for the <ulink url="http://www.gnome.org">GNOME</ulink> desktop environment. &appname; is able to export a limited subset of book collection fields to the default Alexandria data location.
+</para>
+
+</sect2>
+
+<sect2 id="exporting-onix">
+<title>Exporting ONIX</title>
+
+<para>
+<ulink url="http://www.editeur.org/onix.html">ONIX</ulink> is an XML format for representing and communicating book industry product information, primarily for book vendors. &appname; can export book collections using a small subset of ONIX.
+</para>
+
 </sect2>
 
 <sect2 id="exporting-bibtex">
 <title>Exporting Bibtex</title>
 
 <para>
-When exporting to Bibtex, the field values may be escaped with braces or quotation marks.
+When exporting to <ulink url="http://en.wikipedia.org/wiki/Bibtex">Bibtex</ulink>, the field values may be escaped with braces or quotation marks. If any string macros
+are used in the collection, they may optionally be exported as macros or expanded. For &URL; fields, &appname;
+may enclose the field values with the <literal>\url{...}</literal> tag. Finally, entries with no citation key may be skipped rather than have &appname; auto-generate the key.
 </para>
+
+<screenshot>
+<screeninfo>Bibtex Export Options</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="export-bibtex.png"/></imageobject>
+<textobject><phrase>Bibtex Export Options</phrase></textobject>
+</mediaobject>
+</screenshot>
 </sect2>
 
 <sect2 id="exporting-bibtexml">
 <title>Exporting Bibtexml</title>
 
 <para>
-TBD
+<ulink url="http://bibtexml.sourceforge.net">Bibtexml</ulink> is a format for expressing bibtex data via XML.
 </para>
 
 </sect2>

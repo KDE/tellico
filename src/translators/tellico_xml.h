@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -26,6 +26,7 @@ namespace Tellico {
     extern const QString nsTellico;
     extern const QString pubTellico;
     extern const QString dtdTellico;
+
     extern const QString nsBookcase;
 
     bool validXMLElementName(const QString& name);

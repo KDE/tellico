@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "importdialog.h"
-#include "mainwindow.h"
 #include "document.h"
 #include "tellico_kernel.h"
 
@@ -30,7 +29,6 @@
 #include <klocale.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
-#include <kmessagebox.h>
 
 #include <qlayout.h>
 #include <qbuttongroup.h>
@@ -44,7 +42,7 @@ const unsigned Tellico::Import::Importer::s_stepSize = 20;
 
 using Tellico::ImportDialog;
 
-ImportDialog::ImportDialog(Import::Format format_, const KURL& url_, MainWindow* parent_, const char* name_)
+ImportDialog::ImportDialog(Import::Format format_, const KURL& url_, QWidget* parent_, const char* name_)
     : KDialogBase(parent_, name_, true /*modal*/, i18n("Import Options"), Ok|Cancel),
       m_coll(0),
       m_importer(importer(format_, url_)) {
@@ -65,13 +63,20 @@ ImportDialog::ImportDialog(Import::Format format_, const KURL& url_, MainWindow*
                                      "current collection. This is only possible when the "
                                      "collection types match. Entries must match exactly "
                                      "in order to be merged."));
-  if(m_importer->canImport(Kernel::self()->collection()->type())) {
+  if(m_importer->canImport(Kernel::self()->collectionType())) {
     // append by default?
     m_radioAppend->setChecked(true);
   } else {
     m_radioReplace->setChecked(true);
     m_radioAppend->setEnabled(false);
     m_radioMerge->setEnabled(false);
+  }
+
+  // tellico files should not be imported and then used to replace
+  // the current collection since they could contain borrowers and other
+  // stuff not in a collection
+  if(format_ == Import::TellicoXML) {
+    m_radioReplace->setEnabled(false);
   }
 
   QWidget* w = m_importer->widget(widget, "importer_widget");
@@ -81,8 +86,7 @@ ImportDialog::ImportDialog(Import::Format format_, const KURL& url_, MainWindow*
   }
 
   connect(bg, SIGNAL(clicked(int)), m_importer, SLOT(slotActionChanged(int)));
-  connect(m_importer, SIGNAL(signalFractionDone(float)),
-          parent_, SLOT(slotUpdateFractionDone(float)));
+  connect(m_importer, SIGNAL(signalFractionDone(float)), SIGNAL(signalFractionDone(float)));
 
   topLayout->addStretch();
   setMainWidget(widget);
@@ -145,7 +149,7 @@ Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const 
     case Import::MODS:
       importer = new Import::XSLTImporter(url_);
       {
-        QString xsltFile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("mods2tellico.xsl"));
+        QString xsltFile = locate("appdata", QString::fromLatin1("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
           KURL u;
           u.setPath(xsltFile);
@@ -189,28 +193,28 @@ QString ImportDialog::fileFilter(Import::Format format_) {
   QString text;
   switch(format_) {
     case Import::TellicoXML:
-      text = i18n("*.tc *.bc|Tellico files (*.tc)") + QChar('\n');
+      text = i18n("*.tc *.bc|Tellico Files (*.tc)") + QChar('\n');
       break;
 
     case Import::Bibtex:
-      text = i18n("*.bib|Bibtex files (*.bib)") + QChar('\n');
+      text = i18n("*.bib|Bibtex Files (*.bib)") + QChar('\n');
       break;
 
     case Import::CSV:
-      text = i18n("*.csv|CSV files (*.csv)") + QChar('\n');
+      text = i18n("*.csv|CSV Files (*.csv)") + QChar('\n');
       break;
 
     case Import::Bibtexml:
     case Import::XSLT:
-      text = i18n("*.xml|XML files (*.xml)") + QChar('\n');
+      text = i18n("*.xml|XML Files (*.xml)") + QChar('\n');
       break;
 
     case Import::MODS:
-      text = i18n("*.xml|XML files (*.xml)") + QChar('\n');
+      text = i18n("*.xml|XML Files (*.xml)") + QChar('\n');
       break;
 
     case Import::RIS:
-      text = i18n("*.ris|RIS files (*.ris)") + QChar('\n');
+      text = i18n("*.ris|RIS Files (*.ris)") + QChar('\n');
       break;
 
     case Import::AudioFile:
@@ -220,7 +224,7 @@ QString ImportDialog::fileFilter(Import::Format format_) {
       break;
   }
 
-  return text + i18n("*|All files");
+  return text + i18n("*|All Files");
 }
 
 // audio files are imported by directory
@@ -242,7 +246,7 @@ void ImportDialog::slotUpdateAction() {
   // distasteful hack
   // selectedId() is new in QT 3.2
 //  m_importer->slotActionChanged(dynamic_cast<QButtonGroup*>(m_radioAppend->parentWidget())->selectedId());
-  QButtonGroup* bg = dynamic_cast<QButtonGroup*>(m_radioAppend->parentWidget());
+  QButtonGroup* bg = static_cast<QButtonGroup*>(m_radioAppend->parentWidget());
   m_importer->slotActionChanged(bg->id(bg->selected()));
 }
 
@@ -251,7 +255,7 @@ Tellico::Data::Collection* ImportDialog::importURL(Import::Format format_, const
   Import::Importer* imp = importer(format_, url_);
   Data::Collection* c = imp->collection();
   if(!c && !imp->statusMessage().isEmpty()) {
-    KMessageBox::sorry(Kernel::self()->widget(), imp->statusMessage());
+    Kernel::self()->sorry(imp->statusMessage());
   }
   delete imp;
   return c;

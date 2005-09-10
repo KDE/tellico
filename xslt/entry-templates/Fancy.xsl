@@ -8,8 +8,6 @@
    ===================================================================
    Tellico XSLT file - fancy template for viewing entry data
 
-   $Id: Fancy.xsl 1185 2005-05-08 16:57:21Z robby $
-
    Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
 
    The drop-shadow effect is based on the "A List Apart" method
@@ -59,9 +57,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 7 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 8 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'7'"/>
+  <xsl:with-param name="this-version" select="'8'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -112,10 +110,14 @@
     text-align: center;
     font-size: 1.1em;
   }
+  div#content {
+    padding-left: 1%;
+    padding-right: 1%;
+  }
   div.category {
     padding: 0px 0px 0px 4px;
     margin: 8px;
-    border: 1px inset <xsl:value-of select="$fgcolor"/>;
+    border: 1px solid <xsl:value-of select="$fgcolor"/>;
     text-align: center;
     background-color: #cccccc;
     min-height: 1em;
@@ -126,8 +128,8 @@
     background-color: <xsl:value-of select="$color2"/>;
     border-bottom: 1px outset;
     border-color: <xsl:value-of select="$fgcolor"/>;
-    padding: 0px 5px 0px 0px;
-    margin: 0px 0px 2px -5px;
+    padding: 0px 8px 0px 0px;
+    margin: 0px -4px 2px -5px;
     font-size: 1.0em;
     top: -1px;
     font-style: normal;
@@ -171,25 +173,30 @@
     margin: 0px 0px 0px 0px;
     padding-left: 20px;
   }
+  img {
+    border: 0px solid;
+  }
   </style>
   <title>
-   <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
+   <xsl:value-of select="tc:collection[1]/tc:entry[1]//tc:title[1]"/>
    <xsl:text> - </xsl:text>
-   <xsl:value-of select="tc:collection/@title"/>
+   <xsl:value-of select="tc:collection[1]/@title"/>
   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection[1]"/>
+   <xsl:if test="$collection-file">
+    <hr style="clear:both"/>
+    <h4 style="text-align:center">
+     <a href="{$collection-file}">&lt;&lt; <xsl:value-of select="tc:collection/@title"/></a>
+    </h4>
+   </xsl:if>
   </body>
  </html>
 </xsl:template>
 
 <xsl:template match="tc:collection">
  <xsl:apply-templates select="tc:entry[1]"/>
- <xsl:if test="$collection-file">
-  <hr/>
-  <h4 style="text-align:center"><a href="{$collection-file}">&lt;&lt; <xsl:value-of select="@title"/></a></h4>
- </xsl:if>
 </xsl:template>
 
 <xsl:template match="tc:entry">
@@ -208,7 +215,7 @@
   <div id="images">
    <!-- images are field type 10 -->
    <xsl:for-each select="../tc:fields/tc:field[@type=10]">
-    
+
     <!-- find the value of the image field in the entry -->
     <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
     <!-- check if the value is not empty -->
@@ -244,7 +251,7 @@
    </xsl:for-each>
   </div>
  </xsl:if>
- 
+
  <!-- all the data is in the content block -->
  <div id="content">
   <!-- now for all the rest of the data -->
@@ -276,30 +283,32 @@
  <xsl:variable name="first-type" select="$fields[1]/@type"/>
 
  <xsl:variable name="n" select="count($entry//*[key('fieldsByName',local-name(.))/@category=$category])"/>
- <xsl:if test="$n &gt; 0 or $num-images = 0">
+ <!-- only output if there are fields in this category, or if there are no images
+      also, special case, don't output empty paragraphs -->
+ <xsl:if test="($n &gt; 0 or $num-images = 0) and (not($first-type = 2) or $entry/*[local-name(.) = $fields[1]/@name])">
   <div class="category">
-   
+
    <xsl:if test="$num-images = 0 and $first-type != 2">
     <xsl:attribute name="style">
-     <xsl:text>float: left; margin-left: 1%; margin-right: 1%; width: 47%;</xsl:text>
+     <xsl:text>float: right; width: 47%;</xsl:text>
      <!-- two columns of divs -->
      <xsl:if test="$categories[. = $category and position() mod 2 = 1]">
-      <xsl:text>clear: left;</xsl:text>
+      <xsl:text>float: left; clear: both;</xsl:text>
      </xsl:if>
     </xsl:attribute>
    </xsl:if>
    <xsl:if test="$num-images = 0 and $first-type = 2">
     <xsl:attribute name="style">
-     <xsl:text>clear: left;</xsl:text>
+     <xsl:text>clear: both; </xsl:text>
     </xsl:attribute>
    </xsl:if>
-   
+
    <h2>
     <xsl:value-of select="$category"/>
    </h2>
    <!-- ok, big xsl:choose loop for field type -->
    <xsl:choose>
-    
+
     <!-- paragraphs are field type 2 -->
     <xsl:when test="$first-type = 2">
      <p>
@@ -307,35 +316,48 @@
       <xsl:value-of select="$entry/*[local-name(.) = $fields[1]/@name]" disable-output-escaping="yes"/>
      </p>
     </xsl:when>
-    
-    <!-- single-column tables are field type 8 -->
+
+    <!-- tables are field type 8 -->
     <!-- ok to put category name inside div instead of table here -->
     <xsl:when test="$first-type = 8">
-     <ul>
-      <xsl:for-each select="$entry//*[local-name(.) = $fields[1]/@name]">
-       <li>
-        <xsl:value-of select="."/>
-       </li>
-      </xsl:for-each>
-     </ul>
-    </xsl:when>
-    
-    <!-- double-column tables are field type 9 -->
-    <xsl:when test="$first-type = 9">
-     <table>
-      <tbody>
-       <xsl:for-each select="$entry//*[local-name(.) = $fields[1]/@name]">
-        <tr>
-         <td class="column1">
-          <xsl:value-of select="tc:column[1]"/>
-         </td>
-         <td class="column2">
-          <xsl:value-of select="tc:column[2]"/>
-         </td>
-        </tr>
-       </xsl:for-each>
-      </tbody>
-     </table>
+     <!-- look at number of columns -->
+     <xsl:choose>
+      <xsl:when test="$fields[1]/tc:prop[@name = 'columns'] &gt; 1">
+       <table>
+        <tbody>
+         <xsl:for-each select="$entry//*[local-name(.) = $fields[1]/@name]">
+          <tr>
+           <xsl:for-each select="tc:column">
+            <xsl:choose>
+             <xsl:when test="position() = 1">
+              <td class="column1">
+               <xsl:value-of select="."/>
+               <xsl:text>&#160;</xsl:text>
+              </td>
+             </xsl:when>
+             <xsl:otherwise>
+              <td class="column2">
+               <xsl:value-of select="."/>
+               <xsl:text>&#160;</xsl:text>
+              </td>
+             </xsl:otherwise>
+            </xsl:choose>           
+           </xsl:for-each>
+          </tr>
+         </xsl:for-each>
+        </tbody>
+       </table>
+      </xsl:when>
+      <xsl:otherwise>
+       <ul>
+        <xsl:for-each select="$entry//*[local-name(.) = $fields[1]/@name]">
+         <li>
+          <xsl:value-of select="."/>
+         </li>
+        </xsl:for-each>
+       </ul>
+      </xsl:otherwise>
+     </xsl:choose>
     </xsl:when>
 
     <xsl:otherwise>
@@ -358,12 +380,12 @@
        </xsl:for-each>
       </tbody>
      </table>
-     
+
     </xsl:otherwise>
    </xsl:choose>
-   
+
   </div>
- </xsl:if> 
+ </xsl:if>
 </xsl:template>
- 
+
 </xsl:stylesheet>

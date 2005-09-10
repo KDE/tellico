@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -34,7 +34,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: csvimporter.h 862 2004-09-15 01:49:51Z robby $
  */
 class CSVImporter : public TextImporter {
 Q_OBJECT

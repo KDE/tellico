@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004 by Robby Stephenson
+    copyright            : (C) 2004-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,12 +16,12 @@
 
 #include "fetcher.h"
 #include "configwidget.h"
+#include "../datavectors.h"
 
 #include <kurl.h>
 #include <kio/job.h>
 
 #include <qcstring.h> // for QByteArray
-#include <qintdict.h>
 #include <qmap.h>
 #include <qguardedptr.h>
 #include <qregexp.h>
@@ -34,7 +34,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: imdbfetcher.h 1069 2005-02-04 04:36:49Z robby $
  */
 class IMDBFetcher : public Fetcher {
 Q_OBJECT
@@ -53,13 +52,13 @@ public:
   virtual void stop();
   virtual Data::Entry* fetchEntry(uint uid);
   virtual Type type() const { return IMDB; }
-  virtual bool canFetch(Data::Collection::Type type) { return type == Data::Collection::Video; }
+  virtual bool canFetch(int type) const;
   virtual void readConfig(KConfig* config, const QString& group);
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent);
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent_, IMDBFetcher* fetcher = 0);
+    ConfigWidget(QWidget* parent_, const IMDBFetcher* fetcher = 0);
 
     virtual void saveConfig(KConfig*);
 
@@ -90,7 +89,6 @@ private:
   static void doLists(const QString& s, Data::Entry* e);
   static void doCover(const QString& s, Data::Entry* e, const KURL& baseURL);
 
-  void cleanUp();
   void parseSingleTitleResult();
   void parseSingleNameResult();
   void parseMultipleTitleResults();
@@ -99,8 +97,7 @@ private:
   Data::Entry* parseEntry(const QString& str);
 
   QByteArray m_data;
-  QIntDict<SearchResult> m_results;
-  QIntDict<Data::Entry> m_entries;
+  QMap<int, Data::ConstEntryPtr> m_entries;
   QMap<int, KURL> m_matches;
   QGuardedPtr<KIO::Job> m_job;
 

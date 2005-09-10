@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -32,8 +32,8 @@ CardCollection::CardCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("series"));
 }
 
-Tellico::Data::FieldList CardCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec CardCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);

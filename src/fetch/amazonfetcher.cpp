@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004 by Robby Stephenson
+    copyright            : (C) 2004-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,19 +17,21 @@
 #include "../imagefactory.h"
 #include "../tellico_kernel.h"
 #include "../latin1literal.h"
+#include "../collection.h"
+#include "../document.h"
+#include "../entry.h"
+#include "../field.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 #include <kio/job.h>
 #include <kstandarddirs.h>
-#include <kglobal.h>
 #include <kconfig.h>
 #include <klineedit.h>
 #include <kseparator.h>
 #include <kcombobox.h>
 #include <kmessagebox.h>
 
-//#include <qfile.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
@@ -57,7 +59,8 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
       QString::fromLatin1("dvd"),
       QString::fromLatin1("vhs"),
       QString::fromLatin1("music"),
-      QString::fromLatin1("classical")
+      QString::fromLatin1("classical"),
+      QString::fromLatin1("videogames")
     }, {
       i18n("Amazon (UK)"),
       "http://xml-eu.amazon.com/onca/xml3",
@@ -66,7 +69,8 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
       QString::fromLatin1("dvd-uk"),
       QString::fromLatin1("vhs-uk"),
       QString::fromLatin1("music"),
-      QString::fromLatin1("classical")
+      QString::fromLatin1("classical"),
+      QString::fromLatin1("video-games-uk")
     }, {
       i18n("Amazon (Germany)"),
       "http://xml-eu.amazon.com/onca/xml3",
@@ -75,7 +79,8 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
       QString::fromLatin1("dvd-de"),
       QString::fromLatin1("vhs-de"),
       QString::fromLatin1("pop-music-de"),
-      QString::fromLatin1("classical-de")
+      QString::fromLatin1("classical-de"),
+      QString::fromLatin1("video-games-de")
     }, {
       i18n("Amazon (Japan)"),
       "http://xml.amazon.co.jp/onca/xml3",
@@ -84,7 +89,8 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
       QString::fromLatin1("dvd-jp"),
       QString::fromLatin1("vhs-jp"),
       QString::fromLatin1("music-jp"),
-      QString::fromLatin1("classical-jp")
+      QString::fromLatin1("classical-jp"),
+      QString::fromLatin1("videogames-jp")
     }, {
       i18n("Amazon (France)"),
       "http://xml.amazon.fr/onca/xml3",
@@ -93,7 +99,8 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
       QString::fromLatin1("dvd-fr"),
       QString::fromLatin1("vhs-fr"),
       QString::fromLatin1("music-fr"),
-      QString::fromLatin1("classical-fr")
+      QString::fromLatin1("classical-fr"),
+      QString::fromLatin1("video-games-fr")
     }, {
       i18n("Amazon (Canada)"),
       "http://xml.amazon.ca/onca/xml3",
@@ -102,7 +109,8 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
       QString::fromLatin1("dvd-ca"),
       QString::fromLatin1("vhs-ca"),
       QString::fromLatin1("music-ca"),
-      QString::fromLatin1("classical-ca")
+      QString::fromLatin1("classical-ca"),
+      QString::fromLatin1("video-games-ca")
     }
   };
 
@@ -110,19 +118,25 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
 }
 
 AmazonFetcher::AmazonFetcher(Site site_, QObject* parent_, const char* name_)
-    : Fetcher(parent_, name_), m_site(site_), m_primaryMode(true), m_imageSize(NoImage),
+    : Fetcher(parent_, name_), m_site(site_), m_primaryMode(true), m_imageSize(MediumImage),
       m_name(siteData(site_).title), m_token(QString::fromLatin1(AMAZON_DEV_TOKEN)),
       m_assoc(QString::fromLatin1(AMAZON_ASSOC_TOKEN)), m_addLinkField(true),
       m_page(1), m_total(-1), m_job(0), m_started(false) {
-  m_results.setAutoDelete(true); // entries will be handled in destructor
 }
 
 AmazonFetcher::~AmazonFetcher() {
-  cleanUp();
 }
 
 QString AmazonFetcher::source() const {
   return m_name;
+}
+
+bool AmazonFetcher::canFetch(int type) const {
+  return type == Data::Collection::Book
+         || type == Data::Collection::Bibtex
+         || type == Data::Collection::Album
+         || type == Data::Collection::Video
+         || type == Data::Collection::Game;
 }
 
 void AmazonFetcher::readConfig(KConfig* config_, const QString& group_) {
@@ -145,17 +159,6 @@ void AmazonFetcher::readConfig(KConfig* config_, const QString& group_) {
   }
 }
 
-void AmazonFetcher::cleanUp() {
-  // need to delete collection pointers
-  QPtrList<Data::Collection> collList;
-  for(QIntDictIterator<Data::Entry> it(m_entries); it.current(); ++it) {
-    if(collList.findRef(it.current()->collection()) == -1) {
-      collList.append(it.current()->collection());
-    }
-  }
-  collList.setAutoDelete(true); // will automatically delete all entries
-}
-
 void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_) {
   m_key = key_;
   m_value = value_;
@@ -165,7 +168,6 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
 //  kdDebug() << "AmazonFetcher::search() - getting page " << m_page << endl;
   //FIXME: think about doing a lite call first, then heavy later for entries that get fetched
   const SiteData& data = siteData(m_site);
-#if 1
   KURL u = data.url;
   u.addQueryItem(QString::fromLatin1("t"),     m_assoc);
   u.addQueryItem(QString::fromLatin1("dev-t"), m_token);
@@ -177,7 +179,7 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
     u.addQueryItem(QString::fromLatin1("locale"), data.locale);
   }
 
-  Data::Collection::Type type = Kernel::self()->collection()->type();
+  const int type = Kernel::self()->collectionType();
   switch(type) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
@@ -200,6 +202,10 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
       }
       break;
 
+    case Data::Collection::Game:
+      u.addQueryItem(QString::fromLatin1("mode"), data.games);
+      break;
+
     case Data::Collection::Coin:
     case Data::Collection::Stamp:
     case Data::Collection::ComicBook:
@@ -213,26 +219,28 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
   }
 
   // a mibenum of 106 is utf-8, 0 means use user's locale
-  QString value = KURL::encode_string_no_slash(value_, m_site == AmazonFetcher::JP ? 106 : 0);
+  QString encValue = KURL::encode_string_no_slash(value_, m_site == AmazonFetcher::JP ? 106 : 0);
 
   switch(key_) {
     case Title:
       // power search is only valid for books
       if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
-        u.addQueryItem(QString::fromLatin1("PowerSearch"), QString::fromLatin1("title: ") + value);
+        u.addQueryItem(QString::fromLatin1("PowerSearch"), QString::fromLatin1("title: ") + encValue);
       } else {
-        u.addQueryItem(QString::fromLatin1("KeywordSearch"), value);
+        u.addQueryItem(QString::fromLatin1("KeywordSearch"), encValue);
       }
       break;
 
     case Person:
       if(type == Data::Collection::Video) {
-        u.addQueryItem(QString::fromLatin1("ActorSearch"), value);
-        u.addQueryItem(QString::fromLatin1("DirectorSearch"), value);
+        u.addQueryItem(QString::fromLatin1("ActorSearch"), encValue);
+        u.addQueryItem(QString::fromLatin1("DirectorSearch"), encValue);
       } else if(type == Data::Collection::Album) {
-        u.addQueryItem(QString::fromLatin1("ArtistSearch"), value);
-      } else if(type== Data::Collection::Book) {
-        u.addQueryItem(QString::fromLatin1("AuthorSearch"), value);
+        u.addQueryItem(QString::fromLatin1("ArtistSearch"), encValue);
+      } else if(type== Data::Collection::Game) {
+        u.addQueryItem(QString::fromLatin1("ManufacturerSearch"), encValue);
+      } else { // books and bibtex
+        u.addQueryItem(QString::fromLatin1("AuthorSearch"), encValue);
       }
       break;
 
@@ -265,13 +273,13 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
       break;
 
     case Keyword:
-      u.addQueryItem(QString::fromLatin1("KeywordSearch"), value);
+      u.addQueryItem(QString::fromLatin1("KeywordSearch"), encValue);
       break;
 
     case Raw:
       {
-        QString key = value.section('=', 0, 0).stripWhiteSpace();
-        QString str = value.section('=', 1).stripWhiteSpace();
+        QString key = encValue.section('=', 0, 0).stripWhiteSpace();
+        QString str = encValue.section('=', 1).stripWhiteSpace();
         u.addQueryItem(key, str);
       }
       break;
@@ -283,9 +291,6 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_, bool multiple_)
   }
 
   m_job = KIO::get(u, false, false);
-#else
-  m_job = KIO::get(KURL::fromPathOrURL(QString::fromLatin1("/tmp/test.xml")), false, false);
-#endif
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
           SLOT(slotData(KIO::Job*, const QByteArray&)));
   connect(m_job, SIGNAL(result(KIO::Job*)),
@@ -328,13 +333,13 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
   }
 
   if(m_data.isEmpty()) {
-    kdDebug() << "AmazonFetcher::slotComplete() - no data" << endl;
+    myDebug() << "AmazonFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
 #if 0
-kdWarning() << "Remove debug from amazonfetcher.cpp: " << len << endl;
+  kdWarning() << "Remove debug from amazonfetcher.cpp" << endl;
   QFile f(QString::fromLatin1("/tmp/test.xml"));
   if(f.open(IO_WriteOnly)) {
     QTextStream t(&f);
@@ -376,57 +381,63 @@ kdWarning() << "Remove debug from amazonfetcher.cpp: " << len << endl;
   QString str = s_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
   Import::TellicoImporter imp(str);
   Data::Collection* coll = imp.collection();
-  for(Data::EntryListIterator it(coll->entryList()); it.current(); ++it) {
+  Data::EntryVec entries = coll->entries();
+  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
     // special case for non-books mode and search for title
     if(m_key == Title && coll->type() != Data::Collection::Book) {
       // if the title doesn't have the search value, skip it
-      if(it.current()->field(QString::fromLatin1("title")).find(m_value, 0, false) == -1) {
+      if(entry->field(QString::fromLatin1("title")).find(m_value, 0, false) == -1) {
         continue;
       }
     }
     QString desc;
     switch(coll->type()) {
       case Data::Collection::Book:
-        desc = it.current()->field(QString::fromLatin1("author"))
+      case Data::Collection::Bibtex:
+        desc = entry->field(QString::fromLatin1("author"))
                + QChar('/')
-               + it.current()->field(QString::fromLatin1("publisher"));
-        if(!it.current()->field(QString::fromLatin1("cr_year")).isEmpty()) {
-          desc += QChar('/') + it.current()->field(QString::fromLatin1("cr_year"));
-        } else if(!it.current()->field(QString::fromLatin1("pub_year")).isEmpty()){
-          desc += QChar('/') + it.current()->field(QString::fromLatin1("pub_year"));
+               + entry->field(QString::fromLatin1("publisher"));
+        if(!entry->field(QString::fromLatin1("cr_year")).isEmpty()) {
+          desc += QChar('/') + entry->field(QString::fromLatin1("cr_year"));
+        } else if(!entry->field(QString::fromLatin1("pub_year")).isEmpty()){
+          desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
         }
         break;
 
       case Data::Collection::Video:
-        desc = it.current()->field(QString::fromLatin1("studio"))
+        desc = entry->field(QString::fromLatin1("studio"))
                + QChar('/')
-               + it.current()->field(QString::fromLatin1("director"))
+               + entry->field(QString::fromLatin1("director"))
                + QChar('/')
-               + it.current()->field(QString::fromLatin1("year"))
+               + entry->field(QString::fromLatin1("year"))
                + QChar('/')
-               + it.current()->field(QString::fromLatin1("medium"));
+               + entry->field(QString::fromLatin1("medium"));
         break;
 
       case Data::Collection::Album:
-        desc = it.current()->field(QString::fromLatin1("artist"))
+        desc = entry->field(QString::fromLatin1("artist"))
                + QChar('/')
-               + it.current()->field(QString::fromLatin1("label"))
+               + entry->field(QString::fromLatin1("label"))
                + QChar('/')
-               + it.current()->field(QString::fromLatin1("year"));
+               + entry->field(QString::fromLatin1("year"));
+        break;
+
+      case Data::Collection::Game:
+        desc = entry->field(QString::fromLatin1("platform"));
         break;
 
       default:
         break;
     }
-    SearchResult* r = new SearchResult(this, it.current()->title(), desc);
-    m_results.insert(r->uid, r);
-    m_entries.insert(r->uid, it.current());
-    emit signalResultFound(*r);
+    SearchResult* r = new SearchResult(this, entry->title(), desc);
+    m_entries.insert(r->uid, Data::EntryPtr(entry));
+    emit signalResultFound(r);
   }
 
-  if(m_page * AMAZON_RETURNS_PER_REQUEST < KMIN(m_total, AMAZON_MAX_RETURNS_TOTAL)) {
+  int total = KMIN(m_total, AMAZON_MAX_RETURNS_TOTAL);
+  if(m_page * AMAZON_RETURNS_PER_REQUEST < total) {
     int foundCount = (m_page-1) * AMAZON_RETURNS_PER_REQUEST + coll->entryCount();
-    emit signalStatus(i18n("Results from %1: %2/%3").arg(source()).arg(foundCount).arg(m_total));
+    emit signalStatus(i18n("Results from %1: %2/%3").arg(source()).arg(foundCount).arg(total));
 
     ++m_page;
     m_data.truncate(0);
@@ -452,8 +463,8 @@ kdWarning() << "Remove debug from amazonfetcher.cpp: " << len << endl;
       QStringList isbnNotFound;
       for(QStringList::ConstIterator it = m_isbnList.begin(); it != m_isbnList.end(); ++it) {
         bool found = false;
-        for(QIntDictIterator<Data::Entry> eIt(m_entries); eIt.current(); ++eIt) {
-          if(eIt.current()->field(isbn) == *it) {
+        for(QMap<int, Data::EntryPtr>::Iterator eIt = m_entries.begin(); eIt != m_entries.end(); ++eIt) {
+          if(eIt.data().data()->field(isbn) == *it) {
             found = true;
             break;
           }
@@ -463,7 +474,7 @@ kdWarning() << "Remove debug from amazonfetcher.cpp: " << len << endl;
         }
       }
       if(!isbnNotFound.isEmpty()) {
-        qHeapSort(isbnNotFound);
+        isbnNotFound.sort();
         KMessageBox::informationList(0, i18n("<qt>No entries were found for the following ISBN values:</qt>"),
                                      isbnNotFound);
       }
@@ -473,14 +484,14 @@ kdWarning() << "Remove debug from amazonfetcher.cpp: " << len << endl;
 }
 
 Tellico::Data::Entry* AmazonFetcher::fetchEntry(uint uid_) {
-  static QRegExp* stripHTML = 0;
-  if(!stripHTML) {
-    stripHTML = new QRegExp(QString::fromLatin1("<.*>"), true);
-    stripHTML->setMinimal(true);
-  }
+  QRegExp stripHTML(QString::fromLatin1("<.*>"), true);
+  stripHTML.setMinimal(true);
 
-//  kdDebug() << "AmazonFetcher::fetchEntry() - looking for " << m_results[uid_]->desc << endl;
   Data::Entry* entry = m_entries[uid_];
+  if(!entry) {
+    kdWarning() << "AmazonFetcher::fetchEntry() - no entry in dict" << endl;
+    return 0;
+  }
 
   KURL imageURL;
   switch(m_imageSize) {
@@ -514,49 +525,45 @@ Tellico::Data::Entry* AmazonFetcher::fetchEntry(uint uid_) {
   // strip HTML from comments, or plot in movies
   if(entry->collection()->type() == Data::Collection::Video) {
     QString plot = entry->field(QString::fromLatin1("plot"));
-    plot.remove(*stripHTML);
+    plot.remove(stripHTML);
     entry->setField(QString::fromLatin1("plot"), plot);
   } else {
     QString comments = entry->field(QString::fromLatin1("comments"));
-    comments.remove(*stripHTML);
+    comments.remove(stripHTML);
     entry->setField(QString::fromLatin1("comments"), comments);
   }
 
   // remove amazon field if it's not to be added
   if(!m_addLinkField) {
-    entry->collection()->deleteField(entry->collection()->fieldByName(QString::fromLatin1("amazon")));
+    entry->collection()->removeField(entry->collection()->fieldByName(QString::fromLatin1("amazon")));
   }
   // don't pollute existing collection with image urls
-  // but, if the fields are removed from the fetchers collection, subsequent fetchENtry()
+  // but, if the fields are removed from the fecthers collection, subsequent fetchENtry()
   // calls don't return an image, so check to see if the user doesn't have them, and
   // then delete them afterwards
-  bool hadSmall = (Kernel::self()->collection()->fieldByName(QString::fromLatin1("small-image")) != 0);
-  bool hadMedium = (Kernel::self()->collection()->fieldByName(QString::fromLatin1("medium-image")) != 0);
-  bool hadLarge = (Kernel::self()->collection()->fieldByName(QString::fromLatin1("large-image")) != 0);
+  bool hadSmall = (Data::Document::self()->collection()->fieldByName(QString::fromLatin1("small-image")) != 0);
+  bool hadMedium = (Data::Document::self()->collection()->fieldByName(QString::fromLatin1("medium-image")) != 0);
+  bool hadLarge = (Data::Document::self()->collection()->fieldByName(QString::fromLatin1("large-image")) != 0);
   entry->setField(QString::fromLatin1("small-image"), QString::null);
   entry->setField(QString::fromLatin1("medium-image"), QString::null);
   entry->setField(QString::fromLatin1("large-image"), QString::null);
 
-  Data::Entry* newEntry = new Data::Entry(*entry, Kernel::self()->collection());
+  Data::Entry* newEntry = new Data::Entry(*entry, Data::Document::self()->collection());
   if(!hadSmall) {
-    Kernel::self()->collection()->deleteField(QString::fromLatin1("small-image"));
+    Data::Document::self()->collection()->removeField(QString::fromLatin1("small-image"));
   }
   if(!hadMedium) {
-    Kernel::self()->collection()->deleteField(QString::fromLatin1("medium-image"));
+    Data::Document::self()->collection()->removeField(QString::fromLatin1("medium-image"));
   }
   if(!hadLarge) {
-    Kernel::self()->collection()->deleteField(QString::fromLatin1("large-image"));
+    Data::Document::self()->collection()->removeField(QString::fromLatin1("large-image"));
   }
 
   return newEntry;
 }
 
-Tellico::Fetch::ConfigWidget* AmazonFetcher::configWidget(QWidget* parent_) {
-  return new AmazonFetcher::ConfigWidget(parent_, this);
-}
-
 void AmazonFetcher::initXSLTHandler() {
-  QString xsltfile = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("amazon2tellico.xsl"));
+  QString xsltfile = locate("appdata", QString::fromLatin1("amazon2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     kdWarning() << "AmazonFetcher::initXSLTHandler() - can not locate amazon2tellico.xsl." << endl;
     return;
@@ -576,7 +583,11 @@ void AmazonFetcher::initXSLTHandler() {
   }
 }
 
-AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, AmazonFetcher* fetcher_/*=0*/)
+Tellico::Fetch::ConfigWidget* AmazonFetcher::configWidget(QWidget* parent_) const {
+  return new AmazonFetcher::ConfigWidget(parent_, this);
+}
+
+AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(this, 5, 2);
   l->setSpacing(4);
@@ -634,7 +645,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, AmazonFetcher* fetch
     m_imageCombo->setCurrentItem(fetcher_->m_imageSize);
   } else { // defaults
     m_assocEdit->setText(QString::fromLatin1(AMAZON_ASSOC_TOKEN));
-    m_imageCombo->setCurrentItem(3); // no image
+    m_imageCombo->setCurrentItem(1); // medium image
   }
 }
 

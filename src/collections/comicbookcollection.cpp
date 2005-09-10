@@ -34,8 +34,8 @@ ComicBookCollection::ComicBookCollection(bool addFields_, const QString& title_ 
   setDefaultGroupField(QString::fromLatin1("series"));
 }
 
-Tellico::Data::FieldList ComicBookCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec ComicBookCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));

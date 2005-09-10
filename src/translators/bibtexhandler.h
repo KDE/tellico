@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -27,12 +27,11 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: bibtexhandler.h 1063 2005-02-02 01:59:11Z robby $
  */
 class BibtexHandler {
 public:
   enum QuoteStyle { BRACES=0, QUOTES=1 };
-  static QString bibtexKey(Data::Entry* entry);
+  static QString bibtexKey(const Data::Entry* entry);
   static QString importText(char* text);
   static QString exportText(const QString& text, const QStringList& macros);
   static bool setFieldValue(Data::Entry* entry, const QString& bibtexField, const QString& value);

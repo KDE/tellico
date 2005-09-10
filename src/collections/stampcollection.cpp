@@ -33,8 +33,8 @@ StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("denomination"));
 }
 
-Tellico::Data::FieldList StampCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec StampCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);

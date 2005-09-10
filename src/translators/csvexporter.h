@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,23 +21,23 @@ class QWidget;
 class QCheckBox;
 class QRadioButton;
 
-#include "textexporter.h"
+#include "exporter.h"
 
 namespace Tellico {
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: csvexporter.h 862 2004-09-15 01:49:51Z robby $
  */
-class CSVExporter : public TextExporter {
+class CSVExporter : public Exporter {
 public:
-  CSVExporter(const Data::Collection* coll);
+  CSVExporter();
+
+  virtual bool exec();
+  virtual QString formatString() const;
+  virtual QString fileFilter() const;
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual QString formatString() const;
-  virtual QString text(bool format, bool encodeUTF8);
-  virtual QString fileFilter() const;
   virtual void readOptions(KConfig* config);
   virtual void saveOptions(KConfig* config);
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,7 +23,6 @@ class QRadioButton;
 #include <kurl.h>
 
 namespace Tellico {
-  class MainWindow;
   namespace Data {
     class Collection;
   }
@@ -33,25 +32,25 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: exportdialog.h 867 2004-09-15 03:04:49Z robby $
  */
 class ExportDialog : public KDialogBase {
 Q_OBJECT
 
 public:
-  ExportDialog(Export::Format format, Data::Collection* coll, MainWindow* parent, const char* name);
+  ExportDialog(Export::Format format, Data::Collection* coll, QWidget* parent, const char* name);
   ~ExportDialog();
 
   QString fileFilter();
   bool exportURL(const KURL& url=KURL()) const;
 
   static Export::Target exportTarget(Export::Format format);
+  static bool exportCollection(Export::Format format, const KURL& url);
 
 private slots:
   void slotSaveOptions();
 
 private:
-  static Export::Exporter* exporter(Export::Format format, MainWindow* mainwindow, Data::Collection* coll);
+  static Export::Exporter* exporter(Export::Format format);
 
   void readOptions();
 

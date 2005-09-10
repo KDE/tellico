@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,8 +17,7 @@
 class QCheckBox;
 class KComboBox;
 
-#include "textexporter.h"
-#include "bibtexhandler.h"
+#include "exporter.h"
 
 namespace Tellico {
   namespace Export {
@@ -29,20 +28,23 @@ namespace Tellico {
  * of all the attributes, with comboboxes for each Bibtex field, but I think this way is more obvious.
  *
  * @author Robby Stephenson
- * @version $Id: bibtexexporter.h 905 2004-09-23 04:29:10Z robby $
  */
-class BibtexExporter : public TextExporter {
+class BibtexExporter : public Exporter {
 public:
-  BibtexExporter(const Data::Collection* coll);
+  BibtexExporter();
+
+  virtual bool exec();
+  virtual QString formatString() const;
+  virtual QString fileFilter() const;
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual QString formatString() const;
-  virtual QString text(bool format, bool encodeUTF8);
-  virtual QString fileFilter() const;
   virtual void readOptions(KConfig*);
   virtual void saveOptions(KConfig*);
 
 private:
+  void writeEntryText(QString& text, const Data::FieldVec& field, const Data::Entry& entry,
+                      const QString& type, const QString& key);
+
   bool m_expandMacros;
   bool m_packageURL;
   bool m_skipEmptyKeys;

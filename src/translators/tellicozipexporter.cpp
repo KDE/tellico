@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,14 +13,18 @@
 
 #include "tellicozipexporter.h"
 #include "tellicoxmlexporter.h"
+#include "../document.h"
 #include "../collection.h"
 #include "../imagefactory.h"
+#include "../filehandler.h"
+#include "../stringset.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 #include <kconfig.h>
 #include <kzip.h>
 
+#include <qdom.h>
 #include <qbuffer.h>
 
 using Tellico::Export::TellicoZipExporter;
@@ -30,15 +34,20 @@ QString TellicoZipExporter::formatString() const {
 }
 
 QString TellicoZipExporter::fileFilter() const {
-  return i18n("*.tc *.bc|Tellico files(*.tc)") + QChar('\n') + i18n("*|All files");
+  return i18n("*.tc *.bc|Tellico Files (*.tc)") + QChar('\n') + i18n("*|All Files");
 }
 
-QByteArray TellicoZipExporter::data(bool formatFields_) {
-  const Data::Collection* coll = collection();
-  TellicoXMLExporter exp(coll);
-  exp.setEntryList(entryList());
+bool TellicoZipExporter::exec() {
+  const Data::Collection* coll = Data::Document::self()->collection();
+  if(!coll) {
+    return false;
+  }
+
+  TellicoXMLExporter exp;
+  exp.setEntries(entries());
+  exp.setOptions(options() | Export::ExportUTF8); // always export to UTF-8
   exp.setIncludeImages(false); // do not include images in XML
-  QCString xml = exp.text(formatFields_, true).utf8();
+  QCString xml = exp.exportXML().toCString(); // encoded in utf-8
 
   QByteArray data;
   QBuffer buf(data);
@@ -48,27 +57,29 @@ QByteArray TellicoZipExporter::data(bool formatFields_) {
   zip.writeFile(QString::fromLatin1("tellico.xml"), QString::null, QString::null, xml.length(), xml);
 
   QStringList imageFields;
-  for(Data::FieldListIterator it(coll->fieldList()); it.current(); ++it) {
-    if(it.current()->type() == Data::Field::Image) {
-      imageFields += it.current()->name();
+  Data::FieldVec fields = coll->fields();
+  for(Data::FieldVec::Iterator it = fields.begin(); it != fields.end(); ++it) {
+    if(it->type() == Data::Field::Image) {
+      imageFields += it->name();
     }
   }
 
-  // use a dict for fast random access to keep track of which images were written to the file
-  QDict<int> imageDict;
-  for(Data::EntryListIterator it(coll->entryList()); it.current(); ++it) {
+  StringSet imageSet;
+  for(Data::EntryVec::ConstIterator it = entries().begin(); it != entries().end(); ++it) {
     for(QStringList::ConstIterator fIt = imageFields.begin(); fIt != imageFields.end(); ++fIt) {
-      const Data::Image& img = ImageFactory::imageById(it.current()->field(*fIt));
-      if(!img.isNull() && !imageDict[img.id()]) {
-        QByteArray ba = img.byteArray();
-//        kdDebug() << "TellicoZipExporter::data() - writing image id = " << it.current()->field(*fIt) << endl;
-        zip.writeFile(QString::fromLatin1("images/") + it.current()->field(*fIt),
-                      QString::null, QString::null, ba.size(), ba);
-        imageDict.insert(img.id(), reinterpret_cast<const int *>(1));
+      const Data::Image& img = ImageFactory::imageById(it->field(*fIt));
+      // if no image or is already writen, continue
+      if(img.isNull() || imageSet.has(img.id())) {
+        continue;
       }
+      QByteArray ba = img.byteArray();
+//      kdDebug() << "TellicoZipExporter::data() - writing image id = " << it.current()->field(*fIt) << endl;
+      zip.writeFile(QString::fromLatin1("images/") + it->field(*fIt),
+                    QString::null, QString::null, ba.size(), ba);
+      imageSet.add(img.id());
     }
   }
 
   zip.close();
-  return data;
+  return FileHandler::writeDataURL(url(), data, options() & Export::ExportForce);
 }

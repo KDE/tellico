@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,9 @@
  ***************************************************************************/
 
 #include "csvexporter.h"
+#include "../document.h"
 #include "../collection.h"
+#include "../filehandler.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -28,9 +30,9 @@
 
 using Tellico::Export::CSVExporter;
 
-CSVExporter::CSVExporter(const Data::Collection* coll_) : Tellico::Export::TextExporter(coll_),
+CSVExporter::CSVExporter() : Tellico::Export::Exporter(),
     m_includeTitles(true),
-    m_delimiter(QString::fromLatin1(",")),
+    m_delimiter(QChar(',')),
     m_widget(0) {
 }
 
@@ -39,7 +41,61 @@ QString CSVExporter::formatString() const {
 }
 
 QString CSVExporter::fileFilter() const {
-  return i18n("*.csv|CSV files (*.csv)") + QChar('\n') + i18n("*|All files");
+  return i18n("*.csv|CSV Files (*.csv)") + QChar('\n') + i18n("*|All Files");
+}
+
+QString& CSVExporter::escapeText(QString& text_) {
+  bool quotes = false;
+  if(text_.find('"') != -1) {
+    quotes = true;
+    // quotation marks will be escaped by using a double pair
+    text_.replace('"', QString::fromLatin1("\"\""));
+  }
+  // if the text contains quotes or the delimiter, it needs to be surrounded by quotes
+  if(quotes || text_.find(m_delimiter) != -1) {
+    text_.prepend('"');
+    text_.append('"');
+  }
+  return text_;
+}
+
+bool CSVExporter::exec() {
+  if(!collection()) {
+    return false;
+  }
+
+  QString text;
+
+  Data::FieldVec fields = collection()->fields();
+  Data::FieldVec::Iterator fIt;
+
+  if(m_includeTitles) {
+    for(fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+      QString title = fIt->title();
+      text += escapeText(title);
+      if(!fIt.nextEnd()) {
+        text += m_delimiter;
+      }
+    }
+    text += '\n';
+  }
+
+  bool format = options() & Export::ExportFormatted;
+
+  QString tmp;
+  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
+    for(fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+      tmp = entryIt->field(fIt->name(), format);
+      text += escapeText(tmp);
+      if(!fIt.nextEnd()) {
+        text += m_delimiter;
+      }
+    }
+    fIt = fields.begin();
+    text += '\n';
+  }
+
+  return FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);
 }
 
 QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
@@ -129,55 +185,4 @@ void CSVExporter::saveOptions(KConfig* config_) {
   KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   config_->writeEntry("Include Titles", m_includeTitles);
   config_->writeEntry("Delimiter", m_delimiter);
-}
-
-QString CSVExporter::text(bool formatFields_, bool) {
-  QString text;
-
-  Data::FieldListIterator fIt(collection()->fieldList());
-
-  if(m_includeTitles) {
-    for(fIt.toFirst(); fIt.current(); ++fIt) {
-      QString title = fIt.current()->title();
-      text += escapeText(title);
-      if(!fIt.atLast()) {
-        text += m_delimiter;
-      }
-    }
-    text += QString::fromLatin1("\n");
-  }
-
-  QString tmp;
-  for(Data::EntryListIterator entryIt(entryList()); entryIt.current(); ++entryIt) {
-    for(fIt.toFirst() ; fIt.current(); ++fIt) {
-      if(formatFields_) {
-        tmp = entryIt.current()->formattedField(fIt.current()->name());
-      } else {
-        tmp = entryIt.current()->field(fIt.current()->name());
-      }
-      text += escapeText(tmp);
-      if(!fIt.atLast()) {
-        text += m_delimiter;
-      }
-    }
-    fIt.toFirst();
-    text += QString::fromLatin1("\n");
-  }
-
-  return text;
-}
-
-QString& CSVExporter::escapeText(QString& text_) {
-  bool quotes = false;
-  if(text_.find('"') != -1) {
-    quotes = true;
-    // quotation marks will be escaped by using a double pair
-    text_.replace('"', QString::fromLatin1("\"\""));
-  }
-  // if the text contains quotes or the delimiter, it needs to be surrounded by quotes
-  if(quotes || text_.find(m_delimiter) != -1) {
-    text_.prepend('"');
-    text_.append('"');
-  }
-  return text_;
 }

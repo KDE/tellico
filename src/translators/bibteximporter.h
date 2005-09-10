@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,10 +19,10 @@ namespace Tellico {
     class BibtexCollection;
   }
 }
-class Entry;
 
 #include "textimporter.h"
-#include "../../config.h"
+#include <config.h>
+
 extern "C" {
 #ifdef HAVE_LIBBTPARSE
 #include <btparse.h>
@@ -41,7 +41,6 @@ namespace Tellico {
  * parse the text and generate a @ref BibtexCollection.
  *
  * @author Robby Stephenson
- * @version $Id: bibteximporter.h 914 2004-10-10 23:03:28Z robby $
  */
 class BibtexImporter : public TextImporter {
 Q_OBJECT
@@ -65,7 +64,7 @@ public:
    * @return A pointer to a @ref BibtexCollection, or 0 if none can be created.
    */
   virtual Data::Collection* collection();
-  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Bibtex); }
+  virtual bool canImport(int type) const;
 
 private:
   typedef QPtrList<AST> ASTList;

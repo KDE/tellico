@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,12 +18,13 @@ namespace Tellico {
   namespace Data {
     class Collection;
   }
-  class Filter;
   class EntryItem;
 }
 
-#include "multiselectionlistview.h"
-#include "entry.h"
+#include "gui/listview.h"
+#include "observer.h"
+#include "datavectors.h"
+#include "filter.h"
 
 #include <kpopupmenu.h>
 
@@ -40,9 +41,8 @@ namespace Tellico {
  * collection.
  *
  * @author Robby Stephenson
- * @version $Id: detailedlistview.h 1157 2005-04-01 01:09:26Z robby $
  */
-class DetailedListView : public MultiSelectionListView {
+class DetailedListView : public GUI::ListView, public Observer {
 Q_OBJECT
 
 public:
@@ -60,17 +60,13 @@ public:
    */
   bool eventFilter(QObject* obj, QEvent* ev);
   /**
-   * Clears the selection.
-   */
-  void clearSelection();
-  /**
    * Selects the item which refers to a certain entry.
    *
    * @param entry A pointer to the entry
    */
   void setEntrySelected(Data::Entry* entry);
-  void setFilter(const Filter* filter);
-  const Filter* filter() const { return m_filter; }
+  void setFilter(Filter* filter);
+  Filter* filter() { return m_filter; }
 
   int prevSortedColumn() const;
   int prev2SortedColumn() const;
@@ -80,7 +76,7 @@ public:
   QString sortColumnTitle2() const;
   QString sortColumnTitle3() const;
   QStringList visibleColumns() const;
-  Data::EntryList visibleEntries();
+  Data::EntryVec visibleEntries();
   /**
    * Returns whether the given column is formatted as a number or not.
    *
@@ -98,41 +94,38 @@ public:
    * @param coll A pointer to the collection
    */
   void removeCollection(Tellico::Data::Collection* coll);
+
   /**
    * Adds a new list item showing the details for a entry.
    *
    * @param entry A pointer to the entry
    */
-  void addEntry(Data::Entry* entry);
+  virtual void addEntry(Data::Entry* entry);
   /**
    * Modifies any item which refers to a entry, resetting the column contents.
    *
    * @param entry A pointer to the entry
    */
-  void modifyEntry(Data::Entry* entry);
+  virtual void modifyEntry(Data::Entry* entry);
   /**
    * Removes any item which refers to a certain entry.
    *
    * @param entry A pointer to the entry
    */
-  void removeEntry(Data::Entry* entry);
+  virtual void removeEntry(Data::Entry* entry);
+
+  virtual void addField(Tellico::Data::Collection*, Data::Field* field) { addField(field, 0); /* field is hidden by default */ }
   void addField(Data::Field* field, int width);
-  void modifyField(Data::Field* newField, Data::Field* oldField);
-  void removeField(Data::Field* field);
-  void reorderFields(const Data::FieldList& list);
+  virtual void modifyField(Tellico::Data::Collection*, Data::Field* oldField, Data::Field* newField);
+  virtual void removeField(Tellico::Data::Collection*, Data::Field* field);
+
+  void reorderFields(const Data::FieldVec& fields);
   void saveConfig(Tellico::Data::Collection* coll);
   /**
    * Select all visible items.
    */
   void selectAllVisible();
   int visibleItems() const { return m_filter ? m_visibleItems : childCount(); }
-  /**
-   * Used to determine whether an item may be selected without having to setSelectable on
-   * every child item. The default implementation always returns @p true;
-   *
-   * @return Whether the item may be selected
-   */
-  virtual bool isSelectable(MultiSelectionListViewItem*) const;
   /**
    * Set max size of pixmaps.
    *
@@ -151,7 +144,7 @@ public slots:
    */
   void slotRefresh();
 
-protected:
+private:
   /**
    * A helper method to populate an item. The column text is initialized by pulling
    * the contents from the entry pointer of the item, so it should properly be set
@@ -175,7 +168,7 @@ protected:
   void hideColumn(int col);
   void updateFirstSection();
 
-protected slots:
+private slots:
   /**
    * Handles the appearance of the popup menu.
    *
@@ -194,15 +187,8 @@ protected slots:
    * Slot to update the position of the pixmap
    */
   void slotUpdatePixmap();
-  void slotDoubleClicked(QListViewItem* item);
 
 signals:
-  /**
-   * Signals a desire to delete a entry.
-   *
-   * @param entry A pointer to the entry
-   */
-  void signalDeleteEntry(Tellico::Data::Entry* entry);
   /**
    * Signals that a fraction of an operation has been completed.
    *
@@ -218,7 +204,8 @@ private:
   QValueVector<bool> m_isDirty;
   QPixmap m_entryPix;
   QPixmap m_checkPix;
-  const Filter* m_filter;
+
+  FilterPtr m_filter;
   int m_prevSortColumn;
   int m_prev2SortColumn;
   int m_firstSection;

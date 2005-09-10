@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,23 +11,24 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BOOKCASECONTROLLER_H
-#define BOOKCASECONTROLLER_H
+#ifndef TELLICOCONTROLLER_H
+#define TELLICOCONTROLLER_H
 
 namespace Tellico {
   class MainWindow;
-  class ViewStack;
-  class DetailedListView;
   class GroupView;
-  class EntryEditDialog;
-  class Filter;
+  class GroupIterator;
   namespace Data {
     class Collection;
-    class Field;
+  }
+  namespace GUI {
+    class WidgetUpdateBlocker;
   }
 }
 
-#include "entry.h" // needed for EntryList
+#include "observer.h"
+#include "entry.h"
+#include "datavectors.h"
 
 #include <qobject.h>
 
@@ -35,7 +36,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: controller.h 862 2004-09-15 01:49:51Z robby $
  */
 class Controller : public QObject {
 Q_OBJECT
@@ -49,13 +49,11 @@ public:
     if(!s_self) s_self = new Controller(parent, name);
   }
 
-  /**
-   * Initialize pointers to all the main widgets.
-   */
-  void initWidgets();
-  const Data::EntryList& selectedEntries() const { return m_selectedEntries; }
+  const Data::EntryVec& selectedEntries() const { return m_selectedEntries; }
+  Data::EntryVec visibleEntries();
 
   void editEntry(const Data::Entry& entry) const;
+  void hideTabs() const;
   /**
    * Plug the default collection actions into a widget
    */
@@ -64,9 +62,47 @@ public:
    * Plug the default entry actions into a widget
    */
   void plugEntryActions(QWidget* widget);
+
+  GroupIterator groupIterator() const;
   /**
+   * Returns the name of the field being used to group the entries.
+   * That field name may not be an actual field in the collection, since
+   * pseudo-groups like _people exist.
    */
-  const GroupView* const groupView() const { return m_groupView; }
+  QString groupBy() const;
+  /**
+   * Returns a list of the fields being used to group the entries.
+   * For ordinary fields, the list has a single item, the field name.
+   * For the pseudo-group _people, all the people fields are included.
+   */
+  QStringList expandedGroupBy() const;
+  /**
+   * Returns a list of the titles of the fields being used to sort the entries in the detailed column view.
+   */
+  QStringList sortTitles() const;
+  /**
+   * Returns the title of the fields currently visible in the detailed column view.
+   */
+  QStringList visibleColumns() const;
+
+  void    addObserver(Observer* obs);
+  void removeObserver(Observer* obs);
+
+  void addedField(Data::Collection* coll, Data::Field* field);
+  void modifiedField(Data::Collection* coll, Data::Field* oldField, Data::Field* newField);
+  void removedField(Data::Collection* coll, Data::Field* field);
+
+  void addedEntries(Data::EntryVec entries);
+  void modifiedEntry(Data::Entry* entry);
+  void removedEntries(Data::EntryVec entries);
+
+  void addedBorrower(Data::Borrower* borrower);
+  void modifiedBorrower(Data::Borrower* borrower);
+
+  void addedFilter(Filter* filter);
+  void removedFilter(Filter* filter);
+
+  void reorderedFields(Data::Collection* coll);
 
 public slots:
   /**
@@ -77,55 +113,54 @@ public slots:
    * @param coll A pointer to the collection being added
    */
   void slotCollectionAdded(Tellico::Data::Collection* coll);
+  void slotCollectionModified(Tellico::Data::Collection* coll);
   /**
    * Removes a collection from all the widgets
    *
    * @param coll A pointer to the collection being added
    */
   void slotCollectionDeleted(Tellico::Data::Collection* coll);
-  void slotCollectionRenamed(const QString& name);
-  void slotEntryAdded(Tellico::Data::Entry* entry);
-  void slotEntryModified(Tellico::Data::Entry* entry);
-  void slotEntryDeleted(Tellico::Data::Entry* entry);
-  void slotFieldAdded(Tellico::Data::Collection* coll, Tellico::Data::Field* field);
-  void slotFieldDeleted(Tellico::Data::Collection* coll, Tellico::Data::Field* field);
-  void slotFieldModified(Tellico::Data::Collection* coll, Tellico::Data::Field* oldField, Tellico::Data::Field* newField);
-  void slotFieldsReordered(Tellico::Data::Collection* coll);
   void slotRefreshField(Tellico::Data::Field* field);
 
-  void slotUpdateSelection(QWidget* widget, const Tellico::Data::Collection* coll);
-  void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryGroup* group);
+  void slotClearSelection();
   /**
-   * Updates the widgets when an entry is selected.
+   * Updates the widgets when entries are selected.
    *
    * param widget A pointer to the widget where the entries were selected
    * @param list The list of selected entries
    */
-  void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryList& list=Tellico::Data::EntryList());
-  void slotUpdateSelection(Tellico::Data::Entry* entry, const QString& highlight);
+  void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryVec& entries);
+  void slotUpdateCurrent(const Tellico::Data::EntryVec& entries);
   void slotDeleteSelectedEntries();
   void slotCopySelectedEntries();
   void slotUpdateFilter(Tellico::Filter* filter);
+  void slotCheckOut();
+  void slotCheckIn();
+  void slotCheckIn(const Data::EntryVec& entries);
 
 private:
   static Controller* s_self;
   Controller(MainWindow* parent, const char* name);
 
   void blockAllSignals(bool block) const;
+  void blockAllUpdates(bool block);
   void updateActions() const;
+  bool canCheckIn() const;
 
   MainWindow* m_mainWindow;
-  GroupView* m_groupView;
-  DetailedListView* m_detailedView;
-  EntryEditDialog* m_editDialog;
-  ViewStack* m_viewStack;
 
   bool m_working;
+
+  typedef PtrVector<Tellico::Observer> ObserverVec;
+  ObserverVec m_observers;
+
+  QPtrList<GUI::WidgetUpdateBlocker> m_widgetBlocks;
 
   /**
    * Keep track of the selected entries so that a top-level delete has something for reference
    */
-  Data::EntryList m_selectedEntries;
+  Data::EntryVec m_selectedEntries;
+  Data::EntryVec m_currentEntries;
 };
 
 } // end namespace

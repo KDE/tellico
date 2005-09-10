@@ -2787,6 +2787,11 @@ Added Log Comment
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
+	<!-- added for Tellico, don't print unrecognized datafields -->
+	<xsl:template match="marc:datafield">
+	</xsl:template>
+
 </xsl:stylesheet><!-- Stylus Studio meta-information - (c)1998-2003 Copyright Sonic Software Corporation. All rights reserved.
 <metaInformation>
 <scenarios ><scenario default="no" name="Apr 02 Test" userelativepaths="yes" externalpreview="no" url="file://n:\jackie\test_files\v3.xml" htmlbaseurl="" outputurl="file://n:\temp\x.xml" processortype="xalan" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""/><scenario default="no" name="v3Test1" userelativepaths="yes" externalpreview="no" url="file://n:\jackie\test_files\v3.xml" htmlbaseurl="" outputurl="file://n:\jackie\test_files\modsv3Converted.xml" processortype="internal" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""/><scenario default="no" name="Scenario1" userelativepaths="yes" externalpreview="no" url="file://n:\ckeith\DESKTOP\test.xml" htmlbaseurl="" outputurl="" processortype="xalan" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""/><scenario default="yes" name="Test" userelativepaths="yes" externalpreview="no" url="file://n:\jackie\MARCXML\marcxmlfile.xml" htmlbaseurl="" outputurl="" processortype="xalan" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""/></scenarios><MapperInfo srcSchemaPath="" srcSchemaRoot="" srcSchemaPathIsRelative="yes" srcSchemaInterpretAsXML="no" destSchemaPath="" destSchemaRoot="" destSchemaPathIsRelative="yes" destSchemaInterpretAsXML="no"/>

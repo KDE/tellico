@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004 by Robby Stephenson
+    copyright            : (C) 2004-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,7 +13,10 @@
 
 #include "imdbfetcher.h"
 #include "../tellico_kernel.h"
+#include "../document.h"
 #include "../collections/videocollection.h"
+#include "../entry.h"
+#include "../field.h"
 #include "../filehandler.h"
 #include "../latin1literal.h"
 #include "../imagefactory.h"
@@ -66,29 +69,21 @@ void IMDBFetcher::initRegExps() {
 }
 
 IMDBFetcher::IMDBFetcher(QObject* parent_, const char* name_) : Fetcher(parent_, name_),
-    m_job(0), m_started(false), m_fetchImages(false), m_host(QString::fromLatin1(IMDB_SERVER)) {
+    m_job(0), m_started(false), m_fetchImages(true), m_host(QString::fromLatin1(IMDB_SERVER)) {
   if(!s_tagRx) {
     initRegExps();
   }
 }
 
 IMDBFetcher::~IMDBFetcher() {
-  cleanUp();
-}
-
-void IMDBFetcher::cleanUp() {
-  // need to delete collection pointers
-  QPtrList<Data::Collection> collList;
-  for(QIntDictIterator<Data::Entry> it(m_entries); it.current(); ++it) {
-    if(collList.findRef(it.current()->collection()) == -1) {
-      collList.append(it.current()->collection());
-    }
-  }
-  collList.setAutoDelete(true); // will automatically delete all entries
 }
 
 QString IMDBFetcher::source() const {
   return i18n("Internet Movie Database");
+}
+
+bool IMDBFetcher::canFetch(int type) const {
+  return type == Data::Collection::Video;
 }
 
 void IMDBFetcher::readConfig(KConfig* config_, const QString& group_) {
@@ -111,7 +106,7 @@ void IMDBFetcher::search(FetchKey key_, const QString& value_, bool) {
   m_matches.clear();
 
 // only search if current collection is a video collection
-  if(Kernel::self()->collection()->type() != Data::Collection::Video) {
+  if(Kernel::self()->collectionType() != Data::Collection::Video) {
     kdDebug() << "IMDBFetcher::search() - collection type mismatch, stopping" << endl;
     stop();
     return;
@@ -222,9 +217,8 @@ void IMDBFetcher::parseSingleTitleResult() {
   SearchResult* r = new SearchResult(this,
                                      pPos == -1 ? cap1 : cap1.left(pPos),
                                      pPos == -1 ? QString::null : cap1.mid(pPos));
-  m_results.insert(r->uid, r);
   m_matches.insert(r->uid, m_url);
-  emit signalResultFound(*r);
+  emit signalResultFound(r);
 
   stop();
 }
@@ -319,7 +313,6 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     }
 
     SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
-    m_results.insert(r->uid, r);
     KURL u;
     if(KURL::isRelativeURL(cap1)) {
       u.setProtocol(m_url.protocol());
@@ -329,7 +322,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       u = KURL(cap1);
     }
     m_matches.insert(r->uid, u);
-    emit signalResultFound(*r);
+    emit signalResultFound(r);
     start = s_anchorRx2->search(str_, start+cap2.length());
   }
 }
@@ -353,12 +346,11 @@ void IMDBFetcher::parseSingleNameResult() {
     SearchResult* r = new SearchResult(this,
                                        pPos == -1 ? cap2 : cap2.left(pPos),
                                        pPos == -1 ? QString::null : cap2.mid(pPos));
-    m_results.insert(r->uid, r);
     KURL u(m_url, s_anchorRx2->cap(1)); // relative URL constructor
     m_matches.insert(r->uid, u);
 //    kdDebug() << u.prettyURL() << endl;
 //    kdDebug() << cap2 << endl;
-    emit signalResultFound(*r);
+    emit signalResultFound(r);
     pos = s_anchorRx2->search(output, pos+s_anchorRx2->cap(0).length());
   }
 
@@ -438,9 +430,9 @@ void IMDBFetcher::parseMultipleNameResults() {
 
 Tellico::Data::Entry* IMDBFetcher::fetchEntry(uint uid_) {
   // if we already grabbed this one, then just pull it out of the dict
-  Data::Entry* entry = m_entries[uid_];
+  const Data::Entry* entry = m_entries[uid_];
   if(entry) {
-    return new Data::Entry(*entry, Kernel::self()->collection());
+    return new Data::Entry(*entry, Data::Document::self()->collection());
   }
 
   KURL url = m_matches[uid_];
@@ -473,7 +465,7 @@ Tellico::Data::Entry* IMDBFetcher::fetchEntry(uint uid_) {
     return 0;
   }
   m_entries.insert(uid_, entry); // keep for later
-  return new Data::Entry(*entry, Kernel::self()->collection()); // clone
+  return new Data::Entry(*entry, Data::Document::self()->collection()); // clone
 }
 
 Tellico::Data::Entry* IMDBFetcher::parseEntry(const QString& str_) {
@@ -762,11 +754,11 @@ void IMDBFetcher::doLists(const QString& str_, Data::Entry* entry_) {
   }
 }
 
-Tellico::Fetch::ConfigWidget* IMDBFetcher::configWidget(QWidget* parent_) {
+Tellico::Fetch::ConfigWidget* IMDBFetcher::configWidget(QWidget* parent_) const {
   return new IMDBFetcher::ConfigWidget(parent_, this);
 }
 
-IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, IMDBFetcher* fetcher_/*=0*/)
+IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(this, 3, 2);
   l->setSpacing(4);

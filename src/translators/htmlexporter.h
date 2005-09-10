@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,30 +15,42 @@
 #define HTMLEXPORTER_H
 
 class QCheckBox;
+class KHTMLPart;
+namespace DOM {
+  class Node;
+}
 
-#include "textexporter.h"
+#include "exporter.h"
+#include "../stringset.h"
 
 #include <qstringlist.h>
 
 namespace Tellico {
+  namespace Data {
+    class Collection;
+  }
+  class XSLTHandler;
   namespace Export {
 
 /**
  * @author Robby Stephenson
- * @version $Id: htmlexporter.h 862 2004-09-15 01:49:51Z robby $
  */
-class HTMLExporter : public TextExporter {
+class HTMLExporter : public Exporter {
 public:
+  HTMLExporter();
   HTMLExporter(const Data::Collection* coll);
+  ~HTMLExporter();
+
+  virtual bool exec();
+  virtual QString formatString() const;
+  virtual QString fileFilter() const;
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual QString formatString() const;
-  virtual QString text(bool format, bool encodeUTF8);
-  virtual QString fileFilter() const;
   virtual void readOptions(KConfig*);
   virtual void saveOptions(KConfig*);
 
-  void setXSLTFile(const QString& filename) { m_xsltfile = filename; }
+  void setCollectionURL(const KURL& url) { m_collectionURL = url; m_links.clear(); }
+  void setXSLTFile(const QString& filename);
   void setPrintHeaders(bool printHeaders) { m_printHeaders = printHeaders; }
   void setPrintGrouped(bool printGrouped) { m_printGrouped = printGrouped; }
   void setMaxImageSize(int w, int h) { m_imageWidth = w; m_imageHeight = h; }
@@ -47,7 +59,22 @@ public:
     { m_sort1 = l[0]; m_sort2 = l[1]; m_sort3 = l[2]; }
   void setColumns(const QStringList& columns) { m_columns = columns; }
 
+  QString text();
+
 private:
+  void setFormattingOptions(const Data::Collection* coll);
+  void writeImages(const Data::Collection* coll);
+  bool writeEntryFiles();
+  KURL fileDir() const;
+  QString fileDirName() const;
+
+  void parseNode(DOM::Node node);
+  QString handleLink(const QString& link);
+  QString analyzeInternalCSS(const QString& string);
+  bool copyFiles();
+
+  KHTMLPart* m_part;
+  XSLTHandler* m_handler;
   bool m_printHeaders;
   bool m_printGrouped;
   bool m_exportEntryFiles;
@@ -60,13 +87,19 @@ private:
   QCheckBox* m_checkExportEntryFiles;
   QCheckBox* m_checkExportImages;
 
-  QString m_xsltfile;
+  KURL m_collectionURL;
+  QString m_xsltFile;
+  QString m_xsltFilePath;
   QStringList m_groupBy;
   QString m_sort1;
   QString m_sort2;
   QString m_sort3;
   QStringList m_columns;
   QString m_entryXSLTFile;
+
+  KURL::List m_files;
+  QMap<QString, QString> m_links;
+  StringSet m_copiedFiles;
 };
 
   } // end namespace

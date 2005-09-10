@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,7 +25,6 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: configdialog.h 911 2004-10-06 00:53:40Z robby $
  */
 class ConfigWidget : public QWidget {
 Q_OBJECT

@@ -95,6 +95,7 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+KCAL_LIBS = @KCAL_LIBS@
 KCDDB_LIBS = @KCDDB_LIBS@
 KDECONFIG = @KDECONFIG@
 KDE_EXTRA_RPATH = @KDE_EXTRA_RPATH@
@@ -287,8 +288,8 @@ EXTRA_DIST = tellico.pot
 ####### kdevelop will overwrite this part!!! (end)############
 #>- POFILES = AUTO
 #>+ 2
-POFILES = ee.po it.po fr.po de.po es.po sv.po fi.po nb.po nl.po hu.po ro.po cs.po bg.po pt.po ca.po
-GMOFILES = ee.gmo it.gmo fr.gmo de.gmo es.gmo sv.gmo fi.gmo nb.gmo nl.gmo hu.gmo ro.gmo cs.gmo bg.gmo pt.gmo ca.gmo
+POFILES = cs.po fr.po es.po nl.po it.po hu.po ro.po pt.po ca.po sv.po de.po bg.po ee.po fi.po nb.po pl.po
+GMOFILES = cs.gmo fr.gmo es.gmo nl.gmo it.gmo hu.gmo ro.gmo pt.gmo ca.gmo sv.gmo de.gmo bg.gmo ee.gmo fi.gmo nb.gmo pl.gmo
 CLEANFILES = *~
 #>- all: all-am
 #>+ 1
@@ -484,62 +485,65 @@ uninstall-am: uninstall-info-am
 
 
 #>+ 2
-KDE_DIST=nl.po sv.gmo pt.po bg.gmo nb.gmo fi.po de.po fr.gmo ca.po nb.po fr.po ro.gmo cs.po ee.po cs.gmo ro.po Makefile.in messages.mo bg.po sv.po it.gmo hu.po fi.gmo ee.gmo de.gmo es.po pt.gmo es.gmo it.po nl.gmo hu.gmo ca.gmo Makefile.am 
+KDE_DIST=nl.po sv.gmo pl.gmo pt.po bg.gmo nb.gmo fi.po de.po fr.gmo nb.po ca.po fr.po ro.gmo ee.po cs.po cs.gmo ro.po Makefile.in messages.mo bg.po it.gmo sv.po fi.gmo hu.po ee.gmo de.gmo pl.po es.po pt.gmo es.gmo it.po hu.gmo nl.gmo Makefile.am ca.gmo 
 
-#>+ 46
-ee.gmo: ee.po
-	rm -f ee.gmo; $(GMSGFMT) -o ee.gmo $(srcdir)/ee.po
-	test ! -f ee.gmo || touch ee.gmo
-it.gmo: it.po
-	rm -f it.gmo; $(GMSGFMT) -o it.gmo $(srcdir)/it.po
-	test ! -f it.gmo || touch it.gmo
+#>+ 49
+cs.gmo: cs.po
+	rm -f cs.gmo; $(GMSGFMT) -o cs.gmo $(srcdir)/cs.po
+	test ! -f cs.gmo || touch cs.gmo
 fr.gmo: fr.po
 	rm -f fr.gmo; $(GMSGFMT) -o fr.gmo $(srcdir)/fr.po
 	test ! -f fr.gmo || touch fr.gmo
-de.gmo: de.po
-	rm -f de.gmo; $(GMSGFMT) -o de.gmo $(srcdir)/de.po
-	test ! -f de.gmo || touch de.gmo
 es.gmo: es.po
 	rm -f es.gmo; $(GMSGFMT) -o es.gmo $(srcdir)/es.po
 	test ! -f es.gmo || touch es.gmo
-sv.gmo: sv.po
-	rm -f sv.gmo; $(GMSGFMT) -o sv.gmo $(srcdir)/sv.po
-	test ! -f sv.gmo || touch sv.gmo
-fi.gmo: fi.po
-	rm -f fi.gmo; $(GMSGFMT) -o fi.gmo $(srcdir)/fi.po
-	test ! -f fi.gmo || touch fi.gmo
-nb.gmo: nb.po
-	rm -f nb.gmo; $(GMSGFMT) -o nb.gmo $(srcdir)/nb.po
-	test ! -f nb.gmo || touch nb.gmo
 nl.gmo: nl.po
 	rm -f nl.gmo; $(GMSGFMT) -o nl.gmo $(srcdir)/nl.po
 	test ! -f nl.gmo || touch nl.gmo
+it.gmo: it.po
+	rm -f it.gmo; $(GMSGFMT) -o it.gmo $(srcdir)/it.po
+	test ! -f it.gmo || touch it.gmo
 hu.gmo: hu.po
 	rm -f hu.gmo; $(GMSGFMT) -o hu.gmo $(srcdir)/hu.po
 	test ! -f hu.gmo || touch hu.gmo
 ro.gmo: ro.po
 	rm -f ro.gmo; $(GMSGFMT) -o ro.gmo $(srcdir)/ro.po
 	test ! -f ro.gmo || touch ro.gmo
-cs.gmo: cs.po
-	rm -f cs.gmo; $(GMSGFMT) -o cs.gmo $(srcdir)/cs.po
-	test ! -f cs.gmo || touch cs.gmo
-bg.gmo: bg.po
-	rm -f bg.gmo; $(GMSGFMT) -o bg.gmo $(srcdir)/bg.po
-	test ! -f bg.gmo || touch bg.gmo
 pt.gmo: pt.po
 	rm -f pt.gmo; $(GMSGFMT) -o pt.gmo $(srcdir)/pt.po
 	test ! -f pt.gmo || touch pt.gmo
 ca.gmo: ca.po
 	rm -f ca.gmo; $(GMSGFMT) -o ca.gmo $(srcdir)/ca.po
 	test ! -f ca.gmo || touch ca.gmo
+sv.gmo: sv.po
+	rm -f sv.gmo; $(GMSGFMT) -o sv.gmo $(srcdir)/sv.po
+	test ! -f sv.gmo || touch sv.gmo
+de.gmo: de.po
+	rm -f de.gmo; $(GMSGFMT) -o de.gmo $(srcdir)/de.po
+	test ! -f de.gmo || touch de.gmo
+bg.gmo: bg.po
+	rm -f bg.gmo; $(GMSGFMT) -o bg.gmo $(srcdir)/bg.po
+	test ! -f bg.gmo || touch bg.gmo
+ee.gmo: ee.po
+	rm -f ee.gmo; $(GMSGFMT) -o ee.gmo $(srcdir)/ee.po
+	test ! -f ee.gmo || touch ee.gmo
+fi.gmo: fi.po
+	rm -f fi.gmo; $(GMSGFMT) -o fi.gmo $(srcdir)/fi.po
+	test ! -f fi.gmo || touch fi.gmo
+nb.gmo: nb.po
+	rm -f nb.gmo; $(GMSGFMT) -o nb.gmo $(srcdir)/nb.po
+	test ! -f nb.gmo || touch nb.gmo
+pl.gmo: pl.po
+	rm -f pl.gmo; $(GMSGFMT) -o pl.gmo $(srcdir)/pl.po
+	test ! -f pl.gmo || touch pl.gmo
 
 #>+ 3
 clean-nls:
-	-rm -f  ee.gmo it.gmo fr.gmo de.gmo es.gmo sv.gmo fi.gmo nb.gmo nl.gmo hu.gmo ro.gmo cs.gmo bg.gmo pt.gmo ca.gmo
+	-rm -f  cs.gmo fr.gmo es.gmo nl.gmo it.gmo hu.gmo ro.gmo pt.gmo ca.gmo sv.gmo de.gmo bg.gmo ee.gmo fi.gmo nb.gmo pl.gmo
 
 #>+ 10
 install-nls:
-	@for base in ee it fr de es sv fi nb nl hu ro cs bg pt ca ; do \
+	@for base in cs fr es nl it hu ro pt ca sv de bg ee fi nb pl ; do \
 	  echo $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
 	  $(mkinstalldirs) $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES ; \
 	  if test -f $$base.gmo; then $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
@@ -548,23 +552,24 @@ install-nls:
 	done
 
 
-#>+ 17
+#>+ 18
 uninstall-nls:
-	rm -f $(DESTDIR)$(kde_locale)/ee/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/it/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/cs/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/fr/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/de/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/es/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/sv/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/fi/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/nb/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/nl/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/it/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/hu/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/ro/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/cs/LC_MESSAGES/$(PACKAGE).mo
-	rm -f $(DESTDIR)$(kde_locale)/bg/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/pt/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/ca/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/sv/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/de/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/bg/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/ee/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/fi/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/nb/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/pl/LC_MESSAGES/$(PACKAGE).mo
 
 #>+ 2
 all-nls: $(GMOFILES)

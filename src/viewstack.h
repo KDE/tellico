@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2004 by Robby Stephenson
+    copyright            : (C) 2002-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,23 +11,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BOOKCASEVIEWSTACK_H
-#define BOOKCASEVIEWSTACK_H
+#ifndef TELLICO_VIEWSTACK_H
+#define TELLICO_VIEWSTACK_H
+
+#include "datavectors.h"
 
 #include <qwidgetstack.h>
 
 namespace Tellico {
   class EntryView;
   class EntryIconView;
-  namespace Data {
-    class Collection;
-    class Entry;
-    class EntryGroup;
-  }
 
 /**
  * @author Robby Stephenson
- * @version $Id: viewstack.h 862 2004-09-15 01:49:51Z robby $
  */
 class ViewStack : public QWidgetStack {
 Q_OBJECT
@@ -40,9 +36,8 @@ public:
 
   void clear();
   void refresh();
-  void showCollection(const Data::Collection* collection);
-  void showEntry(const Data::Entry* entry);
-  void showEntryGroup(const Data::EntryGroup* group);
+  void showEntry(Data::Entry* entry);
+  void showEntries(const Data::EntryVec& entries);
 
 private:
   EntryView* m_entryView;

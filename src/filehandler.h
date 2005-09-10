@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -34,7 +34,6 @@ namespace Tellico {
  * The FileHandler class contains some utility functions for reading files.
  *
  * @author Robby Stephenson
- * @version $Id: filehandler.h 976 2004-11-25 19:33:58Z robby $
  */
 class FileHandler {
 
@@ -42,6 +41,36 @@ friend class ImageFactory;
 //friend class Data::Image;
 
 public:
+  /**
+   * An internal class to handle KIO stuff. Exposed so a FileRef pointer
+   * can be returned from FileHandler.
+   */
+  class FileRef {
+  public:
+    bool open(bool quiet=false);
+    QFile* file() const { return m_file; }
+    const QString& fileName() const { return m_filename; }
+    bool isValid() const { return m_isValid; }
+    ~FileRef();
+
+  private:
+    friend class FileHandler;
+    FileRef(const KURL& url, bool quiet=false);
+    QFile* m_file;
+    QString m_filename;
+    bool m_isValid;
+  };
+  friend class FileRef; // gcc 2.95 needs this
+
+  /**
+   * Creates a FileRef for a given url. It's not meant to be used by methods in the class,
+   * Rather by a class wanted direct access to a file. The caller takes ownership of the pointer.
+   *
+   * @param url The url
+   * @param quiet Whether error messages should be shown
+   * @return The fileref
+   */
+  static FileRef* fileRef(const KURL& url, bool quiet=false);
   /**
    * Read contents of a file into a string.
    *
@@ -54,6 +83,7 @@ public:
    *
    * @param url The URL of the file
    * @param processNamespace Whether to process the namespace of the XML file
+   * @param quiet Whether error messages should be shown
    * @return A QDomDocument containing the contents of a file
    */
   static QDomDocument readXMLFile(const KURL& url, bool processNamespace, bool quiet=false);
@@ -61,6 +91,7 @@ public:
    * Read contents of a data file into a QByteArray.
    *
    * @param url The URL of the file
+   * @param quiet Whether error messages should be shown
    * @return A QByteArray of the file's contents
    */
   static QByteArray readDataFile(const KURL& url, bool quiet=false);
@@ -89,19 +120,6 @@ public:
   static bool writeDataURL(const KURL& url, const QByteArray& data, bool force=false);
 
 private:
-  /**
-   * An internal class to handle KIO stuff.
-   */
-  class FileRef {
-    friend class FileHandler;
-    FileRef(const KURL& url, bool quiet=false);
-    ~FileRef();
-    QFile* file;
-    QString filename;
-    bool isValid;
-  };
-  friend class FileRef; // gcc 2.95 needs this
-
   /**
    * Read contents of a file into an image. It's private since everything should use the
    * ImageFactory methods.

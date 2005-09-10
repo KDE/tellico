@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "alexandriaexporter.h"
+#include "../document.h"
 #include "../collection.h"
 #include "../tellico_kernel.h"
 #include "../imagefactory.h"
@@ -29,17 +30,27 @@ namespace {
 
 using Tellico::Export::AlexandriaExporter;
 
+QString& AlexandriaExporter::escapeText(QString& str_) {
+  str_.replace('"', QString::fromLatin1("\\\""));
+  return str_;
+}
+
 QString AlexandriaExporter::formatString() const {
   return i18n("Alexandria");
 }
 
-bool AlexandriaExporter::exportEntries(bool formatFields_) const {
-  const Data::Collection* coll = collection();
+bool AlexandriaExporter::exec() {
+  const Data::Collection* coll = Data::Document::self()->collection();
+  if(!coll || coll->type() != Data::Collection::Book || coll->type() != Data::Collection::Bibtex) {
+    return false;
+  }
 
+  QString alexDirName = QString::fromLatin1(".alexandria");
+
+  // create if necessary
   QDir libraryDir = QDir::home();
-  if(!libraryDir.cd(QString::fromLatin1(".alexandria"))) {
-    if(!libraryDir.mkdir(QString::fromLatin1(".alexandria"))
-       || !libraryDir.cd(QString::fromLatin1(".alexandria"))) {
+  if(!libraryDir.cd(alexDirName)) {
+    if(!libraryDir.mkdir(alexDirName) || !libraryDir.cd(alexDirName)) {
       return false;
     }
   }
@@ -53,23 +64,20 @@ bool AlexandriaExporter::exportEntries(bool formatFields_) const {
     if(ret == KMessageBox::Cancel) {
       return false;
     }
-  } else {
-    if(!libraryDir.mkdir(libraryDir.absPath() + QDir::separator() + coll->title())) {
-      return false;
-    }
-    libraryDir.cd(coll->title());
+  } else if(!libraryDir.mkdir(coll->title()) || !libraryDir.cd(coll->title())) {
+    return false; // could not create and cd to the dir
   }
 
-  for(Data::EntryListIterator it(entryList()); it.current(); ++it) {
-    writeFile(libraryDir, it.current(), formatFields_);
+  bool success = true;
+  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
+    success &= writeFile(libraryDir, entryIt);
   }
-
-  return true;
+  return success;
 }
 
 // this isn't true YAML export, of course
 // everything is put between quotes except for the rating, just to be sure it's interpreted as a string
-bool AlexandriaExporter::writeFile(const QDir& dir_, Data::Entry* entry_, bool formatFields_) const {
+bool AlexandriaExporter::writeFile(const QDir& dir_, const Data::Entry* entry_) {
   // the filename is the isbn without dashes, followed by .yaml
   QString isbn = entry_->field(QString::fromLatin1("isbn"));
   if(isbn.isEmpty()) {
@@ -82,54 +90,54 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Data::Entry* entry_, bool f
     return false;
   }
 
+  // do we format?
+  bool format = options() & Export::ExportFormatted;
+
   QTextStream ts(&file);
   // alexandria uses utf-8 all the time
   ts.setEncoding(QTextStream::UnicodeUTF8);
   ts << "--- !ruby/object:Alexandria::Book\n";
   ts << "authors:\n";
-  QStringList authors = entry_->fields(QString::fromLatin1("author"), formatFields_);
+  QStringList authors = entry_->fields(QString::fromLatin1("author"), format);
   for(QStringList::Iterator it = authors.begin(); it != authors.end(); ++it) {
-    ts << "  - " << (*it).replace('"', QString::fromLatin1("\\\"")) << "\n";
+    ts << "  - " << escapeText(*it) << "\n";
   }
   // Alexandria crashes when no authors, and uses n/a when none
   if(authors.count() == 0) {
     ts << "  - n/a\n";
   }
-  // Alexandria calls the binding, the edition
-  ts << "edition: \"" << (formatFields_ ?
-                          entry_->formattedField(QString::fromLatin1("binding")) :
-                          entry_->field(QString::fromLatin1("binding")))
-                    << "\"\n";
+
+  QString tmp = entry_->field(QString::fromLatin1("title"), format);
+  ts << "title: \"" << escapeText(tmp) << "\"\n";
+
+  // Alexandria refers to the binding as the edition
+  tmp = entry_->field(QString::fromLatin1("binding"), format);
+  ts << "edition: \"" << escapeText(tmp) << "\"\n";
+
   // sometimes Alexandria interprets the isbn as a number instead of a string
   // I have no idea how to debug ruby, so err on safe side and add quotes
   ts << "isbn: \"" << isbn << "\"\n";
-  QString notes = formatFields_ ?
-                    entry_->formattedField(QString::fromLatin1("comments")) :
-                    entry_->field(QString::fromLatin1("comments"));
-  notes.replace('"', QString::fromLatin1("\\\""));
-  ts << "notes: \"" << notes << "\"\n";
-  QString pub = formatFields_ ?
-                  entry_->formattedField(QString::fromLatin1("publisher")) :
-                  entry_->field(QString::fromLatin1("publisher"));
-  pub.replace('"', QString::fromLatin1("\\\""));
+
+  tmp = entry_->field(QString::fromLatin1("comments"), format);
+  ts << "notes: \"" << escapeText(tmp) << "\"\n";
+
+  tmp = entry_->field(QString::fromLatin1("publisher"), format);
   // publisher uses n/a when empty
-  ts << "publisher: \"" << (pub.isEmpty() ? QString::fromLatin1("n/a") : pub) << "\"\n";
-  QString rating = entry_->field(QString::fromLatin1("rating"));
-  for(uint pos = 0; pos < rating.length(); ++pos) {
-    if(rating[pos].isDigit()) {
-      ts << "rating: " << rating[pos] << "\n";
+  ts << "publisher: \"" << (tmp.isEmpty() ? QString::fromLatin1("n/a") : escapeText(tmp)) << "\"\n";
+
+  tmp = entry_->field(QString::fromLatin1("rating"));
+  // only goes up to 9!
+  for(uint pos = 0; pos < tmp.length(); ++pos) {
+    if(tmp[pos].isDigit()) {
+      ts << "rating: " << tmp[pos] << "\n";
       break;
     }
   }
-  QString title = formatFields_ ?
-                    entry_->formattedField(QString::fromLatin1("title")) :
-                    entry_->field(QString::fromLatin1("title"));
-  title.replace('"', QString::fromLatin1("\\\""));
-  ts << "title: \"" << title << "\"\n";
+
   file.close();
 
   QString cover = entry_->field(QString::fromLatin1("cover"));
-  if(cover.isEmpty()) {
+  if(cover.isEmpty() || !(options() & Export::ExportImages)) {
     return true; // all done
   }
 

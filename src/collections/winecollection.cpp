@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -32,8 +32,8 @@ WineCollection::WineCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("type"));
 }
 
-Tellico::Data::FieldList WineCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec WineCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
@@ -101,7 +101,7 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("rating"), i18n("Rating"), Field::Number);
+  field = new Field(QString::fromLatin1("rating"), i18n("Rating"), Field::Rating);
   field->setCategory(i18n(wine_personal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);

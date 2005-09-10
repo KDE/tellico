@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -30,12 +30,11 @@ namespace Tellico {
  * @li Comments
  *
  * @author Robby Stephenson
- * @version $Id: videocollection.h 862 2004-09-15 01:49:51Z robby $
  */
 class VideoCollection : public Collection {
 Q_OBJECT
 
-public: 
+public:
   /**
    * The constructor
    *
@@ -46,7 +45,7 @@ public:
 
   virtual Type type() const { return Video; }
 
-  static FieldList defaultFields();
+  static FieldVec defaultFields();
 };
 
   } // end namespace

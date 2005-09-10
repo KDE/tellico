@@ -26,26 +26,27 @@
 
 namespace Tellico {
   class XSLTHandler;
-  namespace Data {
-    class Entry;
+  namespace GUI {
+    class LineEdit;
   }
 }
 
-class KLineEdit;
 class KIntSpinBox;
 class KComboBox;
 
 #include "fetcher.h"
 #include "configwidget.h"
+#include "../datavectors.h"
 
-#include <qintdict.h>
+#include <kconfig.h>
+
+#include <qguardedptr.h>
 
 namespace Tellico {
   namespace Fetch {
 
 /**
  * @author Robby Stephenson
- * @version $Id: z3950fetcher.h 1296 2005-06-29 00:18:59Z robby $
  */
 class Z3950Fetcher : public Fetcher {
 Q_OBJECT
@@ -66,24 +67,22 @@ public:
   virtual void stop();
   virtual Data::Entry* fetchEntry(uint uid);
   virtual Type type() const { return Z3950; }
-  virtual bool canFetch(Data::Collection::Type type) {
-    return type == Data::Collection::Book || type == Data::Collection::Bibtex;
-  }
+  virtual bool canFetch(int type) const;
   virtual void readConfig(KConfig* config, const QString& group);
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent);
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent, Z3950Fetcher* fetcher = 0);
+    ConfigWidget(QWidget* parent, const Z3950Fetcher* fetcher = 0);
 
     virtual void saveConfig(KConfig* config_);
 
   private:
-    KLineEdit* m_hostEdit;
+    GUI::LineEdit* m_hostEdit;
     KIntSpinBox* m_portSpinBox;
-    KLineEdit* m_databaseEdit;
-    KLineEdit* m_userEdit;
-    KLineEdit* m_passwordEdit;
+    GUI::LineEdit* m_databaseEdit;
+    GUI::LineEdit* m_userEdit;
+    GUI::LineEdit* m_passwordEdit;
     KComboBox* m_charSetCombo;
   };
   friend class ConfigWidget;
@@ -99,20 +98,24 @@ private:
   QString m_user;
   QString m_password;
   QString m_sourceCharSet;
+  QString m_syntax;
   QString m_pqn; // prefix query notation
   QString m_esn; // element set name
-  QString m_rs; // preferred record syntax
   size_t m_max; // max number of records
+
+  QGuardedPtr<KConfig> m_config;
+  QString m_configGroup;
 
   FetchKey m_key;
   QString m_value;
-  QIntDict<SearchResult> m_results;
-  QIntDict<Data::Entry> m_entries;
+  QMap<int, Data::ConstEntryPtr> m_entries;
   bool m_started;
 
-  static XSLTHandler* s_MARCXMLHandler;
+  static XSLTHandler* s_MARC21XMLHandler;
+  static XSLTHandler* s_UNIMARCXMLHandler;
   static XSLTHandler* s_MODSHandler;
   static void initHandlers();
+  static QString toXML(const QCString& marc, const QCString& charSet);
 };
 
   } // end namespace

@@ -16,8 +16,6 @@
 
 #include <klocale.h>
 
-#include <qregexp.h>
-
 namespace {
   static const char* video_general = I18N_NOOP("General");
   static const char* video_people = I18N_NOOP("Other People");
@@ -36,8 +34,8 @@ VideoCollection::VideoCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("genre"));
 }
 
-Tellico::Data::FieldList VideoCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec VideoCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
@@ -101,7 +99,8 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("cast"), i18n("Cast"), Field::Table2);
+  field = new Field(QString::fromLatin1("cast"), i18n("Cast"), Field::Table);
+  field->setProperty(QString::fromLatin1("columns"), QChar('2'));
   field->setFormatFlag(Field::FormatName);
   field->setFlags(Field::AllowGrouped);
   field->setDescription(i18n("A table for the cast members, along with the roles they play"));
@@ -183,9 +182,7 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   field = new Field(QString::fromLatin1("plot"), i18n("Plot Summary"), Field::Para);
   list.append(field);
 
-  QStringList prating;
-  prating << i18n("5 - Best") << i18n("4 - Good") << i18n("3 - Neutral") << i18n("2 - Bad") << i18n("1 - Worst");
-  field = new Field(QString::fromLatin1("rating"), i18n("Personal Rating"), prating);
+  field = new Field(QString::fromLatin1("rating"), i18n("Personal Rating"), Field::Rating);
   field->setCategory(i18n(video_personal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -26,7 +26,6 @@ namespace Tellico {
  * @li Title
  *
  * @author Robby Stephenson
- * @version $Id: comicbookcollection.h 70 2003-07-31 03:49:14Z robby $
  */
 class ComicBookCollection : public Collection {
 Q_OBJECT
@@ -41,7 +40,7 @@ public:
 
   virtual Type type() const { return ComicBook; }
 
-  static FieldList defaultFields();
+  static FieldVec defaultFields();
 };
 
   } // end namespace

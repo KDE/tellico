@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,13 +13,6 @@
 
 #ifndef BIBTEXMLIMPORTER_H
 #define BIBTEXMLIMPORTER_H
-
-namespace Tellico {
-  namespace Data {
-    class Data;
-  }
-}
-class Entry;
 
 #include "xmlimporter.h"
 
@@ -42,7 +35,7 @@ public:
   /**
    */
   virtual Data::Collection* collection();
-  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Bibtex); }
+  virtual bool canImport(int type) const;
 
 private:
   void loadDomDocument();

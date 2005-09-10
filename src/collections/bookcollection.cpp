@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -34,8 +34,8 @@ BookCollection::BookCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("author"));
 }
 
-Tellico::Data::FieldList BookCollection::defaultFields() {
-  FieldList list;
+Tellico::Data::FieldVec BookCollection::defaultFields() {
+  FieldVec list;
   Field* field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
@@ -156,9 +156,7 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
   field->setCategory(i18n(book_personal));
   list.append(field);
 
-  QStringList rating;
-  rating << i18n("5 - Best") << i18n("4 - Good") << i18n("3 - Neutral") << i18n("2 - Bad") << i18n("1 - Worst");
-  field = new Field(QString::fromLatin1("rating"), i18n("Rating"), rating);
+  field = new Field(QString::fromLatin1("rating"), i18n("Rating"), Field::Rating);
   field->setCategory(i18n(book_personal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);

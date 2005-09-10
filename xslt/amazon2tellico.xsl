@@ -7,9 +7,7 @@
    ===================================================================
    Tellico XSLT file - used for importing Amazon Web Services data.
 
-   $Id: amazon2tellico.xsl 966 2004-11-20 01:41:11Z robby $
-
-   Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2005 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -18,13 +16,13 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V7.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v7/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V8.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v8/tellico.dtd"/>
 
 <xsl:variable name="mode" select="/ProductInfo/Request/Args/Arg[@name='mode']/@value"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="7">
+ <tellico syntaxVersion="8">
   <collection title="Amazon Import">
    <xsl:attribute name="type">
     <xsl:choose>
@@ -37,6 +35,9 @@
      <!-- also can be pop-music-de -->
      <xsl:when test="starts-with($mode,'music') or starts-with($mode,'classical') or $mode='pop-music-de'">
       <xsl:text>4</xsl:text>
+     </xsl:when>
+     <xsl:when test="starts-with($mode,'video')">
+      <xsl:text>11</xsl:text>
      </xsl:when>
     </xsl:choose>
    </xsl:attribute>
@@ -78,7 +79,7 @@
   </large-image>
 
   <xsl:choose>
-   <!-- book colleciton stuff -->
+   <!-- book collection stuff -->
    <xsl:when test="starts-with($mode,'books')">
     <authors>
      <xsl:for-each select="Authors/Author">
@@ -288,10 +289,49 @@
       </genre>   
      </xsl:for-each>  
     </genres>
+
     <plot>
      <xsl:value-of select="ProductDescription"/>
     </plot>
     
+   </xsl:when>
+   
+   <!-- video game collection stuff -->
+   <xsl:when test="starts-with($mode,'video')">
+    <publisher>
+     <xsl:value-of select="Manufacturer"/>
+    </publisher>
+
+    <!-- assume year is last four characters of ReleaseDate -->
+    <xsl:if test="ReleaseDate">
+     <year>
+      <xsl:call-template name="year">
+       <xsl:with-param name="value" select="ReleaseDate"/>
+      </xsl:call-template>
+     </year>
+    </xsl:if>
+
+    <description>
+     <xsl:value-of select="ProductDescription"/>
+    </description>
+
+    <!-- assume that the only time there are multiple platforms is when it's for multiple versions of windows -->
+    <platform i18n="true">
+     <xsl:call-template name="platform">
+      <xsl:with-param name="value" select="Platforms/Platform[1]"/>
+     </xsl:call-template>
+    </platform>
+
+    <certification i18n="true">
+     <xsl:choose>
+      <xsl:when test="EsrbRating = 'Rating Pending'">
+       <xsl:text>Pending</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:value-of select="EsrbRating"/>
+      </xsl:otherwise>    
+     </xsl:choose>
+    </certification>
    </xsl:when>
   </xsl:choose>
   
@@ -305,6 +345,30 @@
  </xsl:variable>
  <!-- assume that Amazon always encodes the date with the 4-digit year last -->
  <xsl:value-of select="substring($numbers, string-length($numbers)-3, 4)"/>
+</xsl:template>
+
+<xsl:template name="platform">
+ <xsl:param name="value"/>
+ <xsl:choose>
+  <xsl:when test="starts-with($value, 'X')">
+   <xsl:text>Xbox</xsl:text> <!-- as defined in the default field -->
+  </xsl:when>
+  <xsl:when test="$value = 'Sony PSP'">
+   <xsl:text>PSP</xsl:text> <!-- as defined in the default field -->
+  </xsl:when>
+  <xsl:when test="starts-with($value, 'Windows')">
+   <xsl:text>Windows</xsl:text> <!-- as defined in the default field -->
+  </xsl:when>
+  <xsl:when test="starts-with($value, 'Mac')">
+   <xsl:text>Mac OS</xsl:text> <!-- as defined in the default field -->
+  </xsl:when>
+  <xsl:when test="$value = 'Sega Dreamcast'">
+   <xsl:text>Dreamcast</xsl:text> <!-- as defined in the default field -->
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:value-of select="$value"/>
+  </xsl:otherwise>
+ </xsl:choose> 
 </xsl:template>
 
 </xsl:stylesheet>

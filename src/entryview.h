@@ -1,5 +1,5 @@
 /***************************************************************************
-     copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,19 +16,17 @@
 
 class KRun;
 
+#include "datavectors.h"
+
 #include <khtml_part.h>
 
 #include <qguardedptr.h>
 
 namespace Tellico {
   class XSLTHandler;
-  namespace Data {
-    class Entry;
-  }
 
 /**
  * @author Robby Stephenson
- * @version $Id: entryview.h 998 2004-12-09 02:08:39Z robby $
  */
 class EntryView : public KHTMLPart {
 Q_OBJECT
@@ -50,7 +48,7 @@ public:
    *
    * @param entry The entry to show
    */
-  void showEntry(const Data::Entry* entry);
+  void showEntry(Data::Entry* entry);
     /**
    * Clear the widget and set Entry pointer to NULL
    */
@@ -78,7 +76,7 @@ private slots:
   void slotOpenURL(const KURL& url);
 
 private:
-  const Data::Entry* m_entry;
+  Data::EntryPtr m_entry;
   XSLTHandler* m_handler;
   QString m_xsltFile;
 

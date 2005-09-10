@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,18 +14,19 @@
 #include "detailedlistview.h"
 #include "entryitem.h"
 #include "collection.h"
-#include "filter.h"
 #include "imagefactory.h"
 #include "controller.h"
-#include "ratingwidget.h"
+#include "field.h"
+#include "entry.h"
+#include "gui/ratingwidget.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
-#include <kglobal.h>
-#include <kiconloader.h>
 #include <kdebug.h>
 #include <kconfig.h>
 #include <kapplication.h>
 #include <kaction.h>
+#include <kiconloader.h>
 
 #include <qptrlist.h>
 #include <qstringlist.h>
@@ -39,7 +40,7 @@ namespace {
 using Tellico::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
-    : MultiSelectionListView(parent_, name_), m_filter(0),
+    : GUI::ListView(parent_, name_), m_filter(0),
     m_prevSortColumn(-1), m_prev2SortColumn(-1), m_firstSection(-1),
     m_pixWidth(50), m_pixHeight(50) {
 //  kdDebug() << "DetailedListView()" << endl;
@@ -47,12 +48,9 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
   setShowSortIndicator(true);
   setShadeSortColumn(true);
 
-  connect(this, SIGNAL(selectionChanged()), SLOT(slotSelectionChanged()));
+//  connect(this, SIGNAL(selectionChanged()), SLOT(slotSelectionChanged()));
   connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),
           SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
-  // when an entry is double clicked, make sure the editor is visible
-  connect(this, SIGNAL(doubleClicked(QListViewItem*)),
-          SLOT(slotDoubleClicked(QListViewItem*)));
   connect(header(), SIGNAL(indexChange(int, int, int)),
           SLOT(slotUpdatePixmap()));
 
@@ -71,12 +69,10 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
   m_itemMenu = new KPopupMenu(this);
   Controller::self()->plugEntryActions(m_itemMenu);
 
-  m_checkPix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("ok"), KIcon::Small);
+  m_checkPix = UserIcon(QString::fromLatin1("checkmark"));
 }
 
 DetailedListView::~DetailedListView() {
-  delete m_filter;
-  m_filter = 0;
 }
 
 void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
@@ -133,15 +129,16 @@ void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
   colOrder = newOrder;
 
   bool none = true;
-  for(Data::FieldListIterator fIt(coll_->fieldList()); fIt.current(); ++fIt) {
-    if(colNames.findIndex(fIt.current()->name()) > -1 && colWidths.count() > 0) {
-      addField(fIt.current(), colWidths.front());
+  Data::FieldVec fields = coll_->fields();
+  for(Data::FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+    if(colNames.findIndex(fIt->name()) > -1 && colWidths.count() > 0) {
+      addField(fIt, colWidths.front());
       if(none && colWidths.front() != 0) {
         none = false;
       }
       colWidths.pop_front();
     } else {
-      addField(fIt.current(), 0);
+      addField(fIt, 0);
     }
   }
   if(none && columns() > 0) {
@@ -165,10 +162,9 @@ void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
   kapp->processEvents();
   setUpdatesEnabled(false);
 
-  unsigned count = coll_->entryCount();
-  Data::EntryListIterator entryIt(coll_->entryList());
-  for(unsigned j = 0; entryIt.current(); ++entryIt, ++j) {
-    addEntry(entryIt.current());
+  const size_t count = coll_->entryCount();
+  for(size_t j = 0; j < count; ++j) {
+    addEntry(coll_->entries()[j]);
 
     // magic number here
     if(j%20 == 0) {
@@ -187,7 +183,6 @@ void DetailedListView::slotReset() {
 //  while(columns() > 0) {
 //    removeColumn(0);
 //  }
-  delete m_filter;
   m_filter = 0;
 }
 
@@ -198,12 +193,12 @@ void DetailedListView::addEntry(Data::Entry* entry_) {
   }
 
   if(m_entryPix.isNull()) {
-    m_entryPix = KGlobal::iconLoader()->loadIcon(entry_->collection()->entryName(), KIcon::User);
+    m_entryPix = UserIcon(entry_->collection()->entryName());
     if(m_entryPix.isNull()) {
       kdDebug() << "DetailedListView::addEntry() - can't find entry pix" << endl;
     }
   }
-//  kdDebug() << "DetailedListView::addEntry() - " << entry_->title() << endl;
+//  myDebug() << "DetailedListView::addEntry() - " << entry_->title() << endl;
 
   EntryItem* item = new EntryItem(this, entry_);
 
@@ -224,6 +219,8 @@ void DetailedListView::addEntry(Data::Entry* entry_) {
       setSelected(item, true);
       blockSignals(false);
     }
+  } else {
+    triggerUpdate();
   }
 }
 
@@ -270,20 +267,13 @@ void DetailedListView::removeEntry(Data::Entry* entry_) {
 
 //  kdDebug() << "DetailedListView::removeEntry() - " << entry_->title() << endl;
 
-  clearSelection();
   EntryItem* item = locateItem(entry_);
-  // move focus to next sibling
-  QListViewItem* nextItem = 0;
-  if(item == currentItem() && selectedItems().isEmpty()) {
-    nextItem = item->nextSibling();
+  if(!item) {
+    return;
   }
+
+  clearSelection();
   delete item;
-  if(nextItem) {
-    setSelected(nextItem, true);
-  } else {
-    // deleted the last item
-    setSelected(lastItem(), true);
-  }
 }
 
 void DetailedListView::removeCollection(Tellico::Data::Collection* coll_) {
@@ -307,7 +297,6 @@ void DetailedListView::removeCollection(Tellico::Data::Collection* coll_) {
   m_entryPix = QPixmap();
 
   // clear the filter, too
-  delete m_filter;
   m_filter = 0;
 }
 
@@ -351,12 +340,12 @@ void DetailedListView::contextMenuRequested(QListViewItem* item_, const QPoint& 
 }
 
 void DetailedListView::slotSelectionChanged() {
-  const QPtrList<MultiSelectionListViewItem>& items = selectedItems();
-  Data::EntryList list;
-  for(QPtrListIterator<MultiSelectionListViewItem> it(items); it.current(); ++it) {
-    list.append(static_cast<EntryItem*>(it.current())->entry());
+  const GUI::ListViewItemList& items = selectedItems();
+  Data::EntryVec entries;
+  for(GUI::ListViewItemListIt it(items); it.current(); ++it) {
+    entries.append(static_cast<EntryItem*>(it.current())->entry());
   }
-  Controller::self()->slotUpdateSelection(this, list);
+  Controller::self()->slotUpdateSelection(this, entries);
 }
 
 // don't shadow QListView::setSelected
@@ -386,15 +375,6 @@ Tellico::EntryItem* const DetailedListView::locateItem(const Data::Entry* entry_
   }
 
   return 0;
-}
-
-void DetailedListView::clearSelection() {
-//  kdDebug() << "DetailedListView::clearSelection()" << endl;
-  blockSignals(true);
-  if(!selectedItems().isEmpty()) {
-    selectAll(false);
-  }
-  blockSignals(false);
 }
 
 bool DetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
@@ -469,8 +449,8 @@ void DetailedListView::setPixmapAndText(EntryItem* item_, int col_, Data::Field*
     const Data::Image& img = ImageFactory::imageById(item_->entry()->field(field_->name()));
     item_->setPixmap(col_, img.isNull() ? QPixmap() : img.convertToPixmap(m_pixWidth, m_pixHeight));
     item_->setText(col_, QString::null);
-  } else if(RatingWidget::handleField(field_)) {
-    item_->setPixmap(col_, RatingWidget::pixmap(item_->entry()->field(field_->name())));
+  } else if(field_->type() == Data::Field::Rating) {
+    item_->setPixmap(col_, GUI::RatingWidget::pixmap(item_->entry()->field(field_->name())));
     item_->setText(col_, QString::null);
   } else { // for everything else, there's no pixmap, unless it's the first column
     item_->setPixmap(col_, col_ == m_firstSection ? m_entryPix : QPixmap());
@@ -535,10 +515,10 @@ void DetailedListView::slotCacheColumnWidth(int section_, int oldSize_, int newS
   setColumnWidthMode(section_, QListView::Manual);
 }
 
-void DetailedListView::setFilter(const Filter* filter_) {
-  delete m_filter;
-  m_filter = filter_;
-
+void DetailedListView::setFilter(Filter* filter_) {
+  if(m_filter.data() != filter_) { // might just be updating
+    m_filter = filter_;
+  }
 //  clearSelection();
 
   int count = 0;
@@ -584,7 +564,7 @@ void DetailedListView::addField(Data::Field* field_, int width_) {
   }
 }
 
-void DetailedListView::modifyField(Data::Field* newField_, Data::Field* oldField_) {
+void DetailedListView::modifyField(Tellico::Data::Collection*, Data::Field* oldField_, Data::Field* newField_) {
   int sec; // I need it for after the loop
   for(sec = 0; sec < columns(); ++sec) {
     if(header()->label(sec) == oldField_->title()) {
@@ -605,7 +585,7 @@ void DetailedListView::modifyField(Data::Field* newField_, Data::Field* oldField
   m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), newField_->title()); // add 1 since menu has title
 }
 
-void DetailedListView::removeField(Data::Field* field_) {
+void DetailedListView::removeField(Tellico::Data::Collection*, Data::Field* field_) {
 //  kdDebug() << "DetailedListView::removeField() - " << field_->name() << endl;
 
   int sec; // I need it for after the loop
@@ -638,32 +618,32 @@ void DetailedListView::removeField(Data::Field* field_) {
   triggerUpdate();
 }
 
-void DetailedListView::reorderFields(const Data::FieldList& list_) {
+void DetailedListView::reorderFields(const Data::FieldVec& fields_) {
 //  kdDebug() << "DetailedListView::reorderFields()" << endl;
   // find the first out of place field
   int sec = 0;
-  Data::FieldListIterator it(list_);
-  for(sec = 0; it.current() && sec < columns(); ++sec, ++it) {
-    if(header()->label(sec) != it.current()->title()) {
+  Data::FieldVec::ConstIterator it = fields_.begin();
+  for(sec = 0; it != fields_.end() && sec < columns(); ++sec, ++it) {
+    if(header()->label(sec) != it->title()) {
       break;
     }
   }
 
   QStringList visible = visibleColumns();
-  for( ; it.current() && sec < columns();  ++sec, ++it) {
-    header()->setLabel(sec, it.current()->title());
-    bool isVisible = (visible.findIndex(it.current()->title()) > -1);
-    m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), it.current()->title());
+  for( ; it != fields_.end() && sec < columns();  ++sec, ++it) {
+    header()->setLabel(sec, it->title());
+    bool isVisible = (visible.findIndex(it->title()) > -1);
+    m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), it->title());
     m_headerMenu->setItemChecked(m_headerMenu->idAt(sec+1), isVisible);
     m_columnWidths[sec] = 0;
-    if(it.current()->type() == Data::Field::Bool
-       || it.current()->type() == Data::Field::Number
-       || it.current()->type() == Data::Field::Image) {
+    if(it->type() == Data::Field::Bool
+       || it->type() == Data::Field::Number
+       || it->type() == Data::Field::Image) {
       setColumnAlignment(sec, Qt::AlignHCenter);
     } else {
       setColumnAlignment(sec, Qt::AlignLeft);
     }
-    m_isNumber[sec] = (it.current()->type() == Data::Field::Number);
+    m_isNumber[sec] = (it->type() == Data::Field::Number);
 
     if(isVisible) {
       showColumn(sec);
@@ -786,58 +766,29 @@ QStringList DetailedListView::visibleColumns() const {
   return titles;
 }
 
-Tellico::Data::EntryList DetailedListView::visibleEntries() {
+// can't be const
+Tellico::Data::EntryVec DetailedListView::visibleEntries() {
   // We could just return the full collection entry list if the filter is 0
   // but printing depends on the sorted order
-  Data::EntryList list;
-#if QT_VERSION >= 0x030200
-  for(QListViewItemIterator it(this, QListViewItemIterator::Visible); it.current(); ++it) {
-    list.append(static_cast<EntryItem*>(it.current())->entry());
-  }
-#else
+  Data::EntryVec entries;
   for(QListViewItemIterator it(this); it.current(); ++it) {
     if(it.current()->isVisible()) {
-      list.append(static_cast<EntryItem*>(it.current())->entry());
+      entries.append(static_cast<EntryItem*>(it.current())->entry());
     }
   }
-#endif
-  return list;
+  return entries;
 }
 
 void DetailedListView::selectAllVisible() {
   blockSignals(true);
-#if QT_VERSION >= 0x030200
-  QListViewItemIterator it(this, QListViewItemIterator::Visible);
-#else
-  QListViewItemIterator it(this);
-#endif
-  for( ; it.current(); ++it) {
-#if QT_VERSION < 0x030200
+  for(QListViewItemIterator it(this); it.current(); ++it) {
     if(it.current()->isVisible()) {
-#endif
       setSelected(it.current(), true);
-#if QT_VERSION < 0x030200
     }
-#endif
   }
   blockSignals(false);
-  // FIXME: not write with MultiSelectionListView
+  // FIXME: not right with MultiSelectionListView
   slotSelectionChanged();
-}
-
-void DetailedListView::slotDoubleClicked(QListViewItem* item_) {
-  EntryItem* i = static_cast<EntryItem*>(item_);
-  if(i) {
-    Controller::self()->editEntry(*i->entry());
-  }
-}
-
-bool DetailedListView::isSelectable(MultiSelectionListViewItem* item_) const {
-  // don't allow hidden items to be selected
-  if(!item_->isVisible()) {
-    return false;
-  }
-  return true;
 }
 
 #include "detailedlistview.moc"

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,6 +13,7 @@
 
 #include "entryview.h"
 #include "entry.h"
+#include "field.h"
 #include "filehandler.h"
 #include "translators/xslthandler.h"
 #include "translators/tellicoxmlexporter.h"
@@ -50,6 +51,8 @@ EntryView::~EntryView() {
   if(m_run) {
     m_run->abort();
   }
+  delete m_handler;
+  m_handler = 0;
 }
 
 void EntryView::clear() {
@@ -61,7 +64,7 @@ void EntryView::clear() {
   view()->layout(); // I need this because some of the margins and widths may get messed up
 }
 
-void EntryView::showEntry(const Data::Entry* entry_) {
+void EntryView::showEntry(Data::Entry* entry_) {
 //  kdDebug() << "EntryView::showEntry()" << endl;
   if(!entry_) {
     clear();
@@ -69,7 +72,7 @@ void EntryView::showEntry(const Data::Entry* entry_) {
   }
 
 #if 0
-  kdDebug() << "EntryView::showEntry() - turn me off!" << endl;
+  kdWarning() << "EntryView::showEntry() - turn me off!" << endl;
   clear();
   setXSLTFile(Entry, viewData->xsltFile);
 #endif
@@ -83,25 +86,27 @@ void EntryView::showEntry(const Data::Entry* entry_) {
   // by simply using a relative path in the xslt file
   begin(KURL::fromPathOrURL(m_xsltFile));
 
-  Data::EntryList list;
-  list.append(entry_);
+  Data::EntryVec vec;
+  vec.append(entry_);
   Export::TellicoXMLExporter exporter(entry_->collection());
-  exporter.setEntryList(list);
-  // exportXML(bool formatValues, bool encodeUTF8);
-  QDomDocument dom = exporter.exportXML(false, true);
+  exporter.setEntries(vec);
+  exporter.setOptions(Export::ExportUTF8);
+  QDomDocument dom = exporter.exportXML();
 //  kdDebug() << dom.toString() << endl;
 
   QString html = m_handler->applyStylesheet(dom.toString());
   // write out image files
-  for(Data::FieldListIterator it(entry_->collection()->imageFields()); it.current(); ++it) {
-    const QString& id = entry_->field(it.current()->name());
+  Data::FieldVec fields = entry_->collection()->imageFields();
+  for(Data::FieldVec::Iterator it = fields.begin(); it != fields.end(); ++it) {
+    const QString& id = entry_->field(it->name());
     if(!id.isEmpty() && !ImageFactory::writeImage(id)) {
         kdWarning() << "EntryView::showEntry() - unable to write temporary image file: "
-                    << entry_->field(it.current()->name()) << endl;
+                    << entry_->field(it->name()) << endl;
     }
   }
 
 #if 0
+  kdWarning() << "EntryView::showEntry() - turn me off!" << endl;
   QFile f(QString::fromLatin1("/tmp/test.html"));
   if(f.open(IO_WriteOnly)) {
     QTextStream t(&f);
@@ -118,18 +123,18 @@ void EntryView::showEntry(const Data::Entry* entry_) {
 }
 
 void EntryView::setXSLTFile(const QString& file_) {
-  static const QString& templateDir = KGlobal::staticQString("entry-templates/");
+  const QString templateDir = QString::fromLatin1("entry-templates/");
 
   // if starts with slash, then absolute path
   if(file_.at(0) == '/') {
     m_xsltFile = file_;
   } else {
-    m_xsltFile = KGlobal::dirs()->findResource("appdata", templateDir + file_);
+    m_xsltFile = locate("appdata", templateDir + file_);
     if(m_xsltFile.isEmpty()) {
       if(!file_.isEmpty()) {
         kdWarning() << "EntryView::setXSLTFile() - can't locate " << file_ << endl;
       }
-      m_xsltFile = KGlobal::dirs()->findResource("appdata", templateDir + QString::fromLatin1("Default.xsl"));
+      m_xsltFile = locate("appdata", templateDir + QString::fromLatin1("Fancy.xsl"));
       if(m_xsltFile.isEmpty()) {
         QString str = QString::fromLatin1("<qt>");
         str += i18n("Tellico is unable to locate the default entry stylesheet.");
@@ -154,7 +159,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   }
 
   // add system colors to stylesheet
-  const QColorGroup& cg = QApplication::palette().active();
+  const QColorGroup& cg = kapp->palette().active();
   m_handler->addStringParam("font", KGlobalSettings::generalFont().family().latin1());
   m_handler->addStringParam("bgcolor", cg.base().name().latin1());
   m_handler->addStringParam("fgcolor", cg.text().name().latin1());

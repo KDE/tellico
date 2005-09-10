@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,7 +37,9 @@ enum Type {
   Amazon = 0,
   IMDB,
   Z3950,
-  SRU
+  SRU,
+  Entrez,
+  ExecExternal
 };
 
   }

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -33,7 +33,6 @@ namespace Tellico {
  * translate to other formats.
  *
  * @author Robby Stephenson
- * @version $Id: xslthandler.h 1077 2005-02-05 20:35:51Z robby $
  */
 class XSLTHandler {
 
@@ -80,6 +79,8 @@ public:
    * @return The transformed text
    */
   QString applyStylesheet(const QString& text);
+
+  static QDomDocument& setLocaleEncoding(QDomDocument& dom);
 
 private:
   void init();

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004 by Robby Stephenson
+    copyright            : (C) 2004-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,11 +19,13 @@
 #include <qstring.h>
 
 namespace Tellico {
+  namespace Data {
+    class Field;
+  }
   namespace Import {
 
 /**
  * @author Robby Stephenson
- * @version $Id: risimporter.h 966 2004-11-20 01:41:11Z robby $
  */
 class RISImporter : public TextImporter {
 Q_OBJECT
@@ -40,7 +42,7 @@ public:
   /**
    */
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
-  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Bibtex); }
+  virtual bool canImport(int type) const;
 
   static void initTagMap();
   static void initTypeMap();

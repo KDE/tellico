@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,7 +24,6 @@ class QShowEvent;
 #include <kurl.h>
 
 namespace Tellico {
-  class MainWindow;
   namespace Data {
     class Collection;
   }
@@ -34,13 +33,12 @@ namespace Tellico {
 
 /**
  * @author Robby Stephenson
- * @version $Id: importdialog.h 964 2004-11-19 06:54:49Z robby $
  */
 class ImportDialog : public KDialogBase {
 Q_OBJECT
 
 public:
-  ImportDialog(Import::Format format, const KURL& url, MainWindow* parent, const char* name);
+  ImportDialog(Import::Format format, const KURL& url, QWidget* parent, const char* name);
   ~ImportDialog();
 
   Data::Collection* collection();
@@ -51,6 +49,14 @@ public:
   static Import::Target importTarget(Import::Format format);
 
   static Data::Collection* importURL(Import::Format format, const KURL& url);
+
+signals:
+  /**
+   * Signals that a fraction of an operation has been completed.
+   *
+   * @param f The fraction, 0 =< f >= 1
+   */
+  void signalFractionDone(float f);
 
 private slots:
   void slotUpdateAction();

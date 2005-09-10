@@ -2,7 +2,7 @@ INCLUDES = -I.. $(all_includes)
 
 KDE_OPTIONS = noautodist
 
-AM_LDFLAGS = $(QT_LDFLAGS) $(KDE_LDFLAGS)
+AM_LDFLAGS = $(QT_LDFLAGS) $(KDE_LDFLAGS) $(X_LDFLAGS)
 
 check_PROGRAMS = isbntest latin1test entitytest formattest
 
@@ -26,4 +26,4 @@ entitytest_SOURCES = entitytest.cpp
 entitytest_LDADD = ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)
 
 formattest_SOURCES = formattest.cpp
-formattest_LDADD = ../field.o $(LIB_QT) $(LIB_KDECORE)
+formattest_LDADD = ../field.o ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)

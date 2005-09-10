@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -31,7 +31,6 @@ namespace Tellico {
  * adds new fields or types, this will have to be updated.
  *
  * @author Robby Stephenson
- * @version $Id: alexandriaimporter.h 875 2004-09-16 03:49:07Z robby $
  */
 class AlexandriaImporter : public Importer {
 Q_OBJECT
@@ -50,7 +49,7 @@ public:
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual bool canImport(Data::Collection::Type type) { return (type == Data::Collection::Book); }
+  virtual bool canImport(int type) const;
 
 private:
   static QString& clean(QString& str);

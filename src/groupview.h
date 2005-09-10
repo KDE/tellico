@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,29 +11,31 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef GROUPVIEW_H_H
-#define GROUPVIEW_H_H
+#ifndef GROUPVIEW_H
+#define GROUPVIEW_H
+
+#include "gui/listview.h"
+#include "observer.h"
+
+#include <qdict.h>
+#include <qpixmap.h>
+#include <qguardedptr.h>
+
+class KPopupMenu;
 
 namespace Tellico {
   namespace Data {
     class Collection;
+    class Entry;
+    class EntryGroup;
+    class Field;
   }
-  class ParentItem;
   class Filter;
-}
-class KPopupMenu;
-
-#include "multiselectionlistview.h"
-#include "entryitem.h" // needed for Parent Item
-
-#include <qdict.h>
-#include <qpoint.h>
-#include <qpixmap.h>
-
-namespace Tellico {
+  class EntryGroupItem;
+  class GroupIterator;
 
 /**
- * The GroupView is the main listview for the class, showing only the titles.
+ * The GroupView shows the entries grouped, as well as the saved filters.
  *
  * There is one root item for each collection in the document. The entries are grouped
  * by the field defined by each collection. A @ref QDict is used to keep track of the
@@ -42,9 +44,8 @@ namespace Tellico {
  * @see Tellico::Data::Collection
  *
  * @author Robby Stephenson
- * @version $Id: groupview.h 862 2004-09-15 01:49:51Z robby $
  */
-class GroupView : public MultiSelectionListView {
+class GroupView : public GUI::ListView, public Observer {
 Q_OBJECT
 
 public:
@@ -68,17 +69,7 @@ public:
    * @param coll A pointer to the collection being grouped
    * @param groupFieldName The field name
    */
-  void setGroupField(Data::Collection* coll, const QString& groupFieldName);
-  /**
-   * Returns true if the view should show the number of items in each group.
-   */
-  bool showCount() const { return m_showCount; }
-  /**
-   * Changes the view to show or hide the number of items in the group.
-   *
-   * @param showCount A boolean indicating whether or not the count should be shown
-   */
-  void showCount(bool showCount);
+  void setGroupField(const QString& groupFieldName);
   /**
    * Adds a collection, along with all all the groups for the collection in
    * the groupFieldribute. This method gets called as well when the groupFieldribute
@@ -94,29 +85,19 @@ public:
    */
   void removeCollection(Data::Collection* coll);
   /**
-   * Renames the top-level collection item.
-   *
-   * @param name The new collection name
-   */
-  void renameCollection(const QString& name);
-  /**
-   * Clears the selection.
-   */
-  void clearSelection();
-  /**
    * Selects the first item which refers to a certain entry.
    *
    * @param entry A pointer to the entry
    */
   void setEntrySelected(Data::Entry* entry);
   /**
-   * Refresh all the items for a collection.
+   * Refresh all the items for the collection.
    *
-   * @param coll The collection
    * @return The item for the collection
    */
-  ParentItem* populateCollection(Data::Collection* coll);
-  bool isSelectable(MultiSelectionListViewItem* item) const;
+  void populateCollection();
+
+  virtual void modifyField(Data::Collection* coll, Data::Field* oldField, Data::Field* newField);
 
 public slots:
   /**
@@ -129,7 +110,7 @@ public slots:
    * @param coll A pointer to the collection of the gorup
    * @param group A pointer to the modified group
    */
-  void slotModifyGroup(Tellico::Data::Collection* coll, const Tellico::Data::EntryGroup* group);
+  void slotModifyGroup(Tellico::Data::Collection* coll, Tellico::Data::EntryGroup* group);
   /**
    * Expands all items at a certain depth. If depth is -1, the current selected item
    * is expanded. If depth is equal to either 0 or 1, then all items at that depth
@@ -147,32 +128,14 @@ public slots:
    */
   void slotCollapseAll(int depth=-1);
 
-protected:
-  /**
-   * Returns a pointer to the root item for the collection. If none exists, then one
-   * is created.
-   *
-   * @param coll A pointer to the collection
-   * @return A pointer to the collection listviewitem
-   */
-  ParentItem* locateItem(Data::Collection* coll);
-  /**
-   * A helper method to locate any pointer to a listviewitem which references
-   * a given EntryGroup
-   *
-   * @param collItem A pointer to the collection listviewitem
-   * @param group The group to be added
-   * @return A pointer to the group listviewitem
-   */
-  ParentItem* locateItem(ParentItem* collItem, const Data::EntryGroup* group);
+private:
   /**
    * Inserts a listviewitem for a given group
    *
-   * @param collItem The parent listview item, for the collection itself
    * @param group The group to be added
    * @return A pointer to the created @ ref ParentItem
    */
-  ParentItem* insertItem(ParentItem* collItem, const Data::EntryGroup* group);
+  EntryGroupItem* addGroup(Data::EntryGroup* group);
   /**
    * Traverse all siblings at a certain depth, setting them open or closed. If depth is -1,
    * then the depth of the @ref currentItem() is used.
@@ -182,12 +145,7 @@ protected:
    */
   void setSiblingsOpen(int depth, bool open);
 
-protected slots:
-  /**
-   * Handles everything when an item is selected. The proper signal is emitted, depending
-   * on whether the item refers to a collection, a group, or a entry.
-   */
-  void slotSelectionChanged();
+private slots:
   /**
    * Handles the appearance of the popup menu, determining which of the three (collection,
    * group, or entry) menus to display.
@@ -212,34 +170,11 @@ protected slots:
    */
   void slotCollapsed(QListViewItem* item);
   /**
-   * Sort groups by group name, ascending.
-   */
-  void slotSortByGroupAscending();
-  /**
-   * Sort groups by group name, descending.
-   */
-  void slotSortByGroupDescending();
-  /**
-   * Sort groups by the number of entries in each group, ascending.
-   */
-  void slotSortByCountAscending();
-  /**
-   * Sort groups by the number of entries in each group, descending.
-   */
-  void slotSortByCountDescending();
-  /**
    * Filter by group
    */
   void slotFilterGroup();
-  void slotDoubleClicked(QListViewItem* item);
 
 signals:
-  /**
-   * Signals a desire to delete a entry.
-   *
-   * @param entry A pointer to the entry
-   */
-  void signalDeleteEntry(Tellico::Data::Entry* entry);
   /**
    * Signals a desire to filter the view.
    *
@@ -248,19 +183,22 @@ signals:
   void signalUpdateFilter(Tellico::Filter* filter);
 
 private:
-  QDict<ParentItem> m_groupDict;
+  friend class GroupIterator;
+
+  virtual void setSorting(int column, bool ascending = true);
+  QString groupTitle();
+  void updateHeader();
+
+  bool m_notSortedYet;
+  QGuardedPtr<Data::Collection> m_coll;
+  QDict<EntryGroupItem> m_groupDict;
   QString m_groupBy;
 
-  KPopupMenu* m_collMenu;
   KPopupMenu* m_groupMenu;
   KPopupMenu* m_entryMenu;
 
-  QPixmap m_collOpenPixmap;
-  QPixmap m_collClosedPixmap;
   QPixmap m_groupOpenPixmap;
   QPixmap m_groupClosedPixmap;
-
-  bool m_showCount;
 };
 
 } // end namespace

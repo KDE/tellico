@@ -55,15 +55,17 @@ AR = ar
 ARFLAGS = cru
 libfetch_a_AR = $(AR) $(ARFLAGS)
 libfetch_a_LIBADD =
-am_libfetch_a_OBJECTS = srufetcher.$(OBJEXT) fetchmanager.$(OBJEXT) \
-	amazonfetcher.$(OBJEXT) z3950fetcher.$(OBJEXT) \
-	imdbfetcher.$(OBJEXT) configwidget.$(OBJEXT)
+am_libfetch_a_OBJECTS = fetchmanager.$(OBJEXT) amazonfetcher.$(OBJEXT) \
+	z3950fetcher.$(OBJEXT) imdbfetcher.$(OBJEXT) \
+	configwidget.$(OBJEXT) entrezfetcher.$(OBJEXT) \
+	execexternalfetcher.$(OBJEXT)
 #>- libfetch_a_OBJECTS = $(am_libfetch_a_OBJECTS)
-#>+ 7
+#>+ 8
 libfetch_a_final_OBJECTS = libfetch_a.all_cpp.o 
-libfetch_a_nofinal_OBJECTS = srufetcher.$(OBJEXT) fetchmanager.$(OBJEXT) \
-	amazonfetcher.$(OBJEXT) z3950fetcher.$(OBJEXT) \
-	imdbfetcher.$(OBJEXT) configwidget.$(OBJEXT)\
+libfetch_a_nofinal_OBJECTS = fetchmanager.$(OBJEXT) amazonfetcher.$(OBJEXT) \
+	z3950fetcher.$(OBJEXT) imdbfetcher.$(OBJEXT) \
+	configwidget.$(OBJEXT) entrezfetcher.$(OBJEXT) \
+	execexternalfetcher.$(OBJEXT)\
 fetcher.moc.o 
 @KDE_USE_FINAL_FALSE@libfetch_a_OBJECTS = $(libfetch_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libfetch_a_OBJECTS = $(libfetch_a_final_OBJECTS)
@@ -132,6 +134,7 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+KCAL_LIBS = @KCAL_LIBS@
 KCDDB_LIBS = @KCDDB_LIBS@
 KDECONFIG = @KDECONFIG@
 KDE_EXTRA_RPATH = @KDE_EXTRA_RPATH@
@@ -324,17 +327,21 @@ x_libraries = @x_libraries@
 noinst_LIBRARIES = libfetch.a
 INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(YAZ_CFLAGS)
 #>- libfetch_a_METASOURCES = AUTO
-libfetch_a_SOURCES = srufetcher.cpp fetchmanager.cpp amazonfetcher.cpp \
-	z3950fetcher.cpp imdbfetcher.cpp configwidget.cpp
+libfetch_a_SOURCES = \
+	fetchmanager.cpp amazonfetcher.cpp z3950fetcher.cpp \
+	imdbfetcher.cpp configwidget.cpp entrezfetcher.cpp \
+	execexternalfetcher.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
 CLEANFILES = *~
 KDE_OPTIONS = noautodist
 EXTRA_DIST = \
-fetcher.h fetchmanager.h fetchmanager.cpp srufetcher.h srufetcher.cpp \
+fetcher.h fetchmanager.h fetchmanager.cpp \
 amazonfetcher.h amazonfetcher.cpp z3950fetcher.h z3950fetcher.cpp \
-imdbfetcher.h imdbfetcher.cpp fetch.h configwidget.h configwidget.cpp
+imdbfetcher.h imdbfetcher.cpp fetch.h configwidget.h configwidget.cpp \
+entrezfetcher.h entrezfetcher.cpp \
+execexternalfetcher.h execexternalfetcher.cpp
 
 #>- all: all-am
 #>+ 1
@@ -400,9 +407,10 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/amazonfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/configwidget.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/entrezfetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/execexternalfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fetchmanager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imdbfetcher.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/srufetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/z3950fetcher.Po@am__quote@
 
 .cpp.o:
@@ -614,20 +622,6 @@ uninstall-am: uninstall-info-am
 
 
 #>+ 3
-z3950fetcher.moc: $(srcdir)/z3950fetcher.h
-	$(MOC) $(srcdir)/z3950fetcher.h -o z3950fetcher.moc
-
-#>+ 2
-mocs: z3950fetcher.moc
-
-#>+ 3
-srufetcher.moc: $(srcdir)/srufetcher.h
-	$(MOC) $(srcdir)/srufetcher.h -o srufetcher.moc
-
-#>+ 2
-mocs: srufetcher.moc
-
-#>+ 3
 amazonfetcher.moc: $(srcdir)/amazonfetcher.h
 	$(MOC) $(srcdir)/amazonfetcher.h -o amazonfetcher.moc
 
@@ -656,6 +650,27 @@ fetcher.moc.cpp: $(srcdir)/fetcher.h
 mocs: fetcher.moc.cpp
 
 #>+ 3
+execexternalfetcher.moc: $(srcdir)/execexternalfetcher.h
+	$(MOC) $(srcdir)/execexternalfetcher.h -o execexternalfetcher.moc
+
+#>+ 2
+mocs: execexternalfetcher.moc
+
+#>+ 3
+z3950fetcher.moc: $(srcdir)/z3950fetcher.h
+	$(MOC) $(srcdir)/z3950fetcher.h -o z3950fetcher.moc
+
+#>+ 2
+mocs: z3950fetcher.moc
+
+#>+ 3
+entrezfetcher.moc: $(srcdir)/entrezfetcher.h
+	$(MOC) $(srcdir)/entrezfetcher.h -o entrezfetcher.moc
+
+#>+ 2
+mocs: entrezfetcher.moc
+
+#>+ 3
 fetchmanager.moc: $(srcdir)/fetchmanager.h
 	$(MOC) $(srcdir)/fetchmanager.h -o fetchmanager.moc
 
@@ -664,7 +679,7 @@ mocs: fetchmanager.moc
 
 #>+ 3
 clean-metasources:
-	-rm -f  z3950fetcher.moc srufetcher.moc amazonfetcher.moc configwidget.moc imdbfetcher.moc fetcher.moc.cpp fetchmanager.moc
+	-rm -f  amazonfetcher.moc configwidget.moc imdbfetcher.moc fetcher.moc.cpp execexternalfetcher.moc z3950fetcher.moc entrezfetcher.moc fetchmanager.moc
 
 #>+ 2
 docs-am:
@@ -708,11 +723,11 @@ bcheck-am:
 
 
 #>+ 11
-libfetch_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/srufetcher.cpp $(srcdir)/fetchmanager.cpp $(srcdir)/amazonfetcher.cpp $(srcdir)/z3950fetcher.cpp $(srcdir)/imdbfetcher.cpp $(srcdir)/configwidget.cpp fetcher.moc.cpp  srufetcher.moc z3950fetcher.moc amazonfetcher.moc configwidget.moc imdbfetcher.moc fetchmanager.moc
+libfetch_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/fetchmanager.cpp $(srcdir)/amazonfetcher.cpp $(srcdir)/z3950fetcher.cpp $(srcdir)/imdbfetcher.cpp $(srcdir)/configwidget.cpp $(srcdir)/entrezfetcher.cpp $(srcdir)/execexternalfetcher.cpp fetcher.moc.cpp  amazonfetcher.moc configwidget.moc imdbfetcher.moc execexternalfetcher.moc z3950fetcher.moc entrezfetcher.moc fetchmanager.moc
 	@echo 'creating libfetch_a.all_cpp.cpp ...'; \
 	rm -f libfetch_a.all_cpp.files libfetch_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libfetch_a.all_cpp.final; \
-	for file in srufetcher.cpp fetchmanager.cpp amazonfetcher.cpp z3950fetcher.cpp imdbfetcher.cpp configwidget.cpp fetcher.moc.cpp ; do \
+	for file in fetchmanager.cpp amazonfetcher.cpp z3950fetcher.cpp imdbfetcher.cpp configwidget.cpp entrezfetcher.cpp execexternalfetcher.cpp fetcher.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> libfetch_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libfetch_a.all_cpp.final; \
 	done; \
@@ -747,18 +762,20 @@ cvs-clean:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 15
+#>+ 17
+entrezfetcher.o: entrezfetcher.moc 
 fetchmanager.o: fetchmanager.moc 
 configwidget.lo: configwidget.moc 
 nmcheck: 
 fetchmanager.lo: fetchmanager.moc 
-srufetcher.lo: srufetcher.moc 
+execexternalfetcher.lo: execexternalfetcher.moc 
+execexternalfetcher.o: execexternalfetcher.moc 
 nmcheck-am: nmcheck
-srufetcher.o: srufetcher.moc 
 imdbfetcher.o: imdbfetcher.moc 
 configwidget.o: configwidget.moc 
 z3950fetcher.o: z3950fetcher.moc 
+imdbfetcher.lo: imdbfetcher.moc 
 amazonfetcher.lo: amazonfetcher.moc 
 z3950fetcher.lo: z3950fetcher.moc 
-imdbfetcher.lo: imdbfetcher.moc 
 amazonfetcher.o: amazonfetcher.moc 
+entrezfetcher.lo: entrezfetcher.moc 

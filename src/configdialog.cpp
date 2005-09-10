@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2004 by Robby Stephenson
+    copyright            : (C) 2001-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,12 +21,13 @@
 #include <klineedit.h>
 #include <klocale.h>
 #include <kdebug.h>
-#include <kiconloader.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kdialogbase.h>
 #include <knuminput.h>
 #include <kpushbutton.h>
+#include <kiconloader.h>
+#include <ksortablevaluelist.h>
 
 #include <qsize.h>
 #include <qlayout.h>
@@ -60,10 +61,12 @@ ConfigDialog::ConfigDialog(QWidget* parent_, const char* name_/*=0*/)
   setupTemplatePage();
   setupFetchPage();
 
+  // the proxies do not auto-delete since they're not QObjects
+  m_cbTemplates.setAutoDelete(true);
+
   updateGeometry();
   QSize s = sizeHint();
-  resize(KMAX(s.width(), CONFIG_MIN_WIDTH),
-         KMAX(s.height(), CONFIG_MIN_HEIGHT));
+  resize(KMAX(s.width(), CONFIG_MIN_WIDTH), KMAX(s.height(), CONFIG_MIN_HEIGHT));
 
   enableButtonOK(false);
   enableButtonApply(false);
@@ -113,7 +116,6 @@ void ConfigDialog::slotDefault() {
       m_cbShowTipDay->setChecked(true);
       m_cbCapitalize->setChecked(true);
       m_cbFormat->setChecked(true);
-      m_cbShowCount->setChecked(true);
       m_leArticles->setText(Data::Field::defaultArticleList().join(QString::fromLatin1(", ")));
       m_leSuffixes->setText(Data::Field::defaultSuffixList().join(QString::fromLatin1(", ")));
       m_lePrefixes->setText(Data::Field::defaultSurnamePrefixList().join(QString::fromLatin1(", ")));
@@ -129,16 +131,23 @@ void ConfigDialog::slotDefault() {
 
     case 2:
       // entry template selection
-      for(QIntDictIterator<KComboBox> it(m_cbTemplates); it.current(); ++it) {
-        // not translated since it's the file name
-        it.current()->setCurrentItem(QString::fromLatin1("Default"));
+      for(QIntDictIterator<CBProxy> it(m_cbTemplates); it.current(); ++it) {
+        Data::Collection::Type type = static_cast<Data::Collection::Type>(it.currentKey());
+        if(type == Data::Collection::Album) {
+          it.current()->setCurrentItem(i18n("Album XSL Template", "Album"));
+        } else if(type == Data::Collection::Video) {
+          it.current()->setCurrentItem(i18n("Video XSL Template", "Video"));
+        } else {
+          it.current()->setCurrentItem(i18n("Fancy XSL Template", "Fancy"));
+        }
       }
       break;
   }
+  slotModified();
 }
 
 void ConfigDialog::setupGeneralPage() {
-  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("tellico"), KIcon::User);
+  QPixmap pix = UserIcon(QString::fromLatin1("tellico"));
   QFrame* frame = addPage(i18n("General"), i18n("General Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
@@ -153,12 +162,6 @@ void ConfigDialog::setupGeneralPage() {
                                        "shown at program start-up."));
   l->addWidget(m_cbShowTipDay);
   connect(m_cbShowTipDay, SIGNAL(clicked()), SLOT(slotModified()));
-
-  m_cbShowCount = new QCheckBox(i18n("Show number of items in group"), frame);
-  QWhatsThis::add(m_cbShowCount, i18n("If checked, the number of items in the group "
-                                      "will be appended to the group name."));
-  l->addWidget(m_cbShowCount);
-  connect(m_cbShowCount, SIGNAL(clicked()), SLOT(slotModified()));
 
   QVGroupBox* formatGroup = new QVGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);
@@ -220,7 +223,7 @@ void ConfigDialog::setupGeneralPage() {
 }
 
 void ConfigDialog::setupPrintingPage() {
-  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("print_printer"), KIcon::Desktop);
+  QPixmap pix = DesktopIcon(QString::fromLatin1("print_printer"));
   QFrame* frame = addPage(i18n("Printing"), i18n("Printing Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
@@ -277,16 +280,20 @@ void ConfigDialog::setupPrintingPage() {
 }
 
 void ConfigDialog::setupTemplatePage() {
-  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("looknfeel"), KIcon::Desktop);
+  QPixmap pix = DesktopIcon(QString::fromLatin1("looknfeel"));
   QFrame* frame = addPage(i18n("Templates"), i18n("Template Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QString::fromLatin1("entry-templates/*.xsl"),
                                                         false, true);
-  QStringList templates;
+  KSortableValueList<QString, QString> templates;
   for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it) {
     QFileInfo fi(*it);
-    templates << fi.fileName().section('.', 0, 0);
+    QString file = fi.fileName().section('.', 0, -2);
+    QString name = file;
+    name.replace('_', ' ');
+    QString title = i18n((name + QString::fromLatin1(" XSL Template")).utf8(), name.utf8());
+    templates.insert(title, file);
   }
   templates.sort();
 
@@ -294,13 +301,15 @@ void ConfigDialog::setupTemplatePage() {
   grid->setSpacing(5);
   l->addWidget(grid);
 
-  CollectionNameMap nameMap = CollectionFactory::nameMap();
+  const CollectionNameMap nameMap = CollectionFactory::nameMap();
   for(CollectionNameMap::ConstIterator it = nameMap.begin(); it != nameMap.end(); ++it) {
     (void) new QLabel(it.data() + ':', grid);
-    KComboBox* cb = new KComboBox(grid);
-    cb->insertStringList(templates);
+    CBProxy* cb = new CBProxy(grid);
+    for(KSortableValueList<QString, QString>::iterator it2 = templates.begin(); it2 != templates.end(); ++it2) {
+      cb->insertItem((*it2).index(), (*it2).value());
+    }
     m_cbTemplates.insert(it.key(), cb);
-    connect(cb, SIGNAL(activated(int)), SLOT(slotModified()));
+    connect(cb->comboBox(), SIGNAL(activated(int)), SLOT(slotModified()));
   }
 
   // stretch to fill lower area
@@ -308,7 +317,7 @@ void ConfigDialog::setupTemplatePage() {
 }
 
 void ConfigDialog::setupFetchPage() {
-  QPixmap pix = KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Desktop);
+  QPixmap pix = DesktopIcon(QString::fromLatin1("network"));
   QFrame* frame = addPage(i18n("Data Sources"), i18n("Data Source Options"), pix);
   QHBoxLayout* l = new QHBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
@@ -323,14 +332,11 @@ void ConfigDialog::setupFetchPage() {
   // these icons are rather arbitrary, but seem to vaguely fit
   QVBoxLayout* vlay = new QVBoxLayout(l);
   m_newSourceBtn = new KPushButton(i18n("&New..."), frame);
-  m_newSourceBtn->setIconSet(KGlobal::iconLoader()->loadIconSet(QString::fromLatin1("knewstuff"),
-                                                                KIcon::Small));
+  m_newSourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("knewstuff")));
   m_modifySourceBtn = new KPushButton(i18n("&Modify..."), frame);
-  m_modifySourceBtn->setIconSet(KGlobal::iconLoader()->loadIconSet(QString::fromLatin1("network"),
-                                                                   KIcon::Small));
+  m_modifySourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("network")));
   m_removeSourceBtn = new KPushButton(i18n("Remo&ve"), frame);
-  m_removeSourceBtn->setIconSet(KGlobal::iconLoader()->loadIconSet(QString::fromLatin1("remove"),
-                                                                   KIcon::Small));
+  m_removeSourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("remove")));
   vlay->addWidget(m_newSourceBtn);
   vlay->addWidget(m_modifySourceBtn);
   vlay->addWidget(m_removeSourceBtn);
@@ -341,10 +347,10 @@ void ConfigDialog::setupFetchPage() {
   connect(m_removeSourceBtn, SIGNAL(clicked()), SLOT(slotRemoveSourceClicked()));
 
   // set initial state
-  if(Fetch::Manager::sourceMap().isEmpty()) {
-    m_newSourceBtn->setEnabled(false);
-  }
-  slotSourceChanged();
+//  if(Fetch::Manager::sourceMap().isEmpty()) {
+//    m_newSourceBtn->setEnabled(false);
+//  }
+//  slotSourceChanged();
 }
 
 void ConfigDialog::readConfiguration(KConfig* config_) {
@@ -366,9 +372,6 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
   m_cbFormat->setChecked(autoFormat);
   slotToggleFormatted(autoFormat);
 
-  bool showCount = config_->readBoolEntry("Show Group Count", true);
-  m_cbShowCount->setChecked(showCount);
-
   // PRINTING
   config_->setGroup(QString::fromLatin1("Printing"));
 
@@ -388,20 +391,22 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
   m_imageHeightBox->setValue(imageHeight);
 
   // entry template selection
-  for(QIntDictIterator<KComboBox> it(m_cbTemplates); it.current(); ++it) {
+  for(QIntDictIterator<CBProxy> it(m_cbTemplates); it.current(); ++it) {
     QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::Type>(it.currentKey()));
     config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
-    it.current()->setCurrentItem(config_->readEntry("Entry Template", QString::fromLatin1("Default")));
+    QString file = config_->readEntry("Entry Template", QString::fromLatin1("Fancy"));
+    file.replace('_', ' ');
+    // added by prepare_i18n_xslt script
+    it.current()->setCurrentItem(i18n((file + QString::fromLatin1(" XSL Template")).utf8(), file.utf8()));
   }
 
   // fetchers
-  const Fetch::FetcherList& fetchers = Fetch::Manager::self()->fetcherList();
-  for(Fetch::FetcherListIterator it(fetchers); it.current(); ++it) {
+  Fetch::FetcherVec fetchers = Fetch::Manager::self()->fetchers();
+  for(Fetch::FetcherVec::ConstIterator it = fetchers.constBegin(); it != fetchers.constEnd(); ++it) {
     SourceListViewItem* item = new SourceListViewItem(m_sourceListView,  m_sourceListView->lastItem(),
-                                                      it.current()->source(),
-                                                      it.current()->type());
+                                                      it->source(), it->type());
     // grab the config widget, taking ownership
-    Fetch::ConfigWidget* cw = it.current()->configWidget(this);
+    Fetch::ConfigWidget* cw = it->configWidget(this);
     if(cw) { // might return 0 when no widget available for fetcher type
       m_configWidgets.insert(item, cw);
       // there's weird layout bug if it's not hidden
@@ -429,8 +434,6 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   bool autoFormat = m_cbFormat->isChecked();
   config_->writeEntry("Auto Format", autoFormat);
   Data::Field::setAutoFormat(autoFormat);
-
-  config_->writeEntry("Show Group Count", m_cbShowCount->isChecked());
 
   const QRegExp commaSpace(QString::fromLatin1("\\s*;\\s*"));
   const QChar sep = ';';
@@ -467,10 +470,10 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   config_->writeEntry("Max Image Height", m_imageHeightBox->value());
 
   // entry template selection
-  for(QIntDictIterator<KComboBox> it(m_cbTemplates); it.current(); ++it) {
+  for(QIntDictIterator<CBProxy> it(m_cbTemplates); it.current(); ++it) {
     QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::Type>(it.currentKey()));
     config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
-    config_->writeEntry("Entry Template", it.current()->currentText());
+    config_->writeEntry("Entry Template", it.current()->currentData());
   }
 
   bool reloadFetchers = false;
@@ -531,8 +534,7 @@ void ConfigDialog::slotNewSourceClicked() {
 
   QBoxLayout* vlay1 = new QVBoxLayout(topLayout, KDialog::spacingHint());
   QLabel* icon = new QLabel(widget);
-  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"),
-                  KIcon::Panel, 64));
+  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Panel, 64));
   vlay1->addWidget(icon);
   vlay1->addStretch(1);
 
@@ -551,9 +553,9 @@ void ConfigDialog::slotNewSourceClicked() {
   QWhatsThis::add(editName, w);
   label->setBuddy(editName);
 
-  label = new QLabel(i18n("Source type: "), widget);
+  label = new QLabel(i18n("Source &type: "), widget);
   gl->addWidget(label, 1, 0);
-  w = i18n("Tellico currently supports three source types: Amazon.com, IMDB, and z39.50.");
+  w = i18n("Tellico currently supports five source types: Amazon.com, IMDB, z39.50, Entrez, and external applications.");
   QWhatsThis::add(label, w);
 
   KComboBox* cbox = new KComboBox(widget);
@@ -568,7 +570,7 @@ void ConfigDialog::slotNewSourceClicked() {
 
   const Fetch::FetchMap fetchMap = Fetch::Manager::sourceMap();
   bool hasZ3950 = false;
-  int idx = 0;
+  int idx = 0, zId = 0;
   for(Fetch::FetchMap::ConstIterator it = fetchMap.begin(); it != fetchMap.end(); ++it) {
     // create an empty default widget, could return 0 if no widget for a certain fetch type
     Fetch::ConfigWidget* cw = Fetch::Manager::configWidget(it.key(), stack);
@@ -576,16 +578,15 @@ void ConfigDialog::slotNewSourceClicked() {
       cbox->insertItem(it.data(), idx);
       stack->addWidget(cw, idx);
       ++idx;
-    }
-    if(it.key() == Fetch::Z3950) {
-      hasZ3950 = true;
+      if(it.key() == Fetch::Z3950) {
+        hasZ3950 = true;
+        zId = idx-1;
+      }
     }
   }
   // z39.50 is most likely to be the new item, so go ahead and select it
-  if(hasZ3950) {
-    cbox->setCurrentItem(idx-1);
-    stack->raiseWidget(idx-1);
-  }
+  cbox->setCurrentItem(hasZ3950 ? zId : 0);
+  stack->raiseWidget(hasZ3950 ? zId : 0);
 
   dlg->setMainWidget(widget);
   if(dlg->exec() == QDialog::Accepted) {
@@ -634,7 +635,7 @@ void ConfigDialog::slotModifySourceClicked() {
   KDialogBase* dlg = new KDialogBase(this, "fetcher dialog",
                                      true, i18n("Data Source Properties"),
                                      KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Help);
-  dlg->setMinimumWidth(2*CONFIG_MIN_WIDTH/3);
+  dlg->setMinimumWidth(3*CONFIG_MIN_WIDTH/4);
   dlg->setHelp(QString::fromLatin1("data-sources-options"));
 
   QWidget* widget = new QWidget(dlg);
@@ -642,8 +643,7 @@ void ConfigDialog::slotModifySourceClicked() {
 
   QBoxLayout* vlay1 = new QVBoxLayout(topLayout, KDialog::spacingHint());
   QLabel* icon = new QLabel(widget);
-  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"),
-                  KIcon::Panel, 64));
+  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Panel, 64));
   vlay1->addWidget(icon);
   vlay1->addStretch(1);
 
@@ -662,9 +662,11 @@ void ConfigDialog::slotModifySourceClicked() {
   QWhatsThis::add(editName, w);
   label->setBuddy(editName);
 
-  label = new QLabel(i18n("Source type: "), widget);
+  // since the label doesn't have a buddy, we don't want an accel,
+  // but also want to reuse string we already have
+  label = new QLabel(i18n("Source &type: ").remove('&'), widget);
   gl->addWidget(label, 1, 0);
-  w = i18n("Tellico currently supports three source types: Amazon.com, IMDB, and z39.50.");
+  w = i18n("Tellico currently supports five source types: Amazon.com, IMDB, z39.50, Entrez, and external applications.");
   QWhatsThis::add(label, w);
 
   QLabel* lab = new QLabel(Fetch::Manager::sourceMap()[item->fetchType()], widget);

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2004 by Robby Stephenson
+    copyright            : (C) 2003-2005 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,9 +24,8 @@ namespace Tellico {
 }
 
 #include "fetch.h"
-#include "../entry.h"
-#include "../collection.h"
 
+#include <ksharedptr.h>
 #include <kapplication.h> // for KApplication::random()
 
 #include <qobject.h>
@@ -48,15 +47,14 @@ struct SearchResult {
  * The top-level abstract class for fetching data.
  *
  * @author Robby Stephenson
- * @version $Id: fetcher.h 960 2004-11-18 05:41:01Z robby $
  */
-class Fetcher : public QObject {
+class Fetcher : public QObject, public KShared {
 Q_OBJECT
 
 public:
   /**
    */
-  Fetcher(QObject* parent, const char* name = 0) : QObject(parent, name) {}
+  Fetcher(QObject* parent, const char* name = 0) : QObject(parent, name), KShared() {}
   /**
    */
   virtual ~Fetcher() {}
@@ -64,7 +62,7 @@ public:
   /**
    * Returns true if the fetcher might return entries from a certain collection type.
    */
-  virtual bool canFetch(Data::Collection::Type type) = 0;
+  virtual bool canFetch(int type) const = 0;
   /**
    * Returns true if the fetcher can search using a certain key.
    */
@@ -102,11 +100,11 @@ public:
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual ConfigWidget* configWidget(QWidget* parent) = 0;
+  virtual ConfigWidget* configWidget(QWidget* parent) const = 0;
 
 signals:
   void signalStatus(const QString& status);
-  void signalResultFound(const Tellico::Fetch::SearchResult& result);
+  void signalResultFound(Tellico::Fetch::SearchResult* result);
   void signalDone(Tellico::Fetch::Fetcher*);
 };
 

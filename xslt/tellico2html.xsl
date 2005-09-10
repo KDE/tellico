@@ -13,9 +13,7 @@
    ===================================================================
    Tellico XSLT file - used for exporting to HTML
 
-   $Id: tellico2html.xsl 949 2004-11-13 01:28:50Z robby $
-
-   Copyright (C) 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2005 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -46,7 +44,6 @@
 
 <xsl:output method="html" version="xhtml" encoding="utf-8"/>
 
-<xsl:strip-space elements="*"/>
 
 <!-- To choose which fields of each entry are printed, change the
      string to a space separated list of field names. To know what
@@ -131,9 +128,9 @@
 </xsl:template>
 
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 7 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 8 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'7'"/>
+  <xsl:with-param name="this-version" select="'8'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -152,14 +149,27 @@
         padding-bottom: 10px;
         margin-bottom: 5px;
    }
-   div.colltitle {
+   h1.colltitle {
         padding: 4px;
         font-size: 2em;
         border-bottom: 1px solid black;
+        margin: 0px;
    }
    span.subtitle {
         margin-left: 20px;
         font-size: 0.8em;
+   }
+   form {
+        margin-top: 10px;
+        float: right;
+   }
+   #searchText {
+        margin-left: 4px;
+        margin-right: 4px;
+        background-color: #eee;
+   }
+   #searchButton {
+        margin-bottom: 2px;
    }
    table, h4 {
         margin-left: auto;
@@ -182,14 +192,14 @@
         padding-left: 4px;
         padding-right: 4px;
    }
-   tr.entry1 {
+   tr.entry0 {
    }
-   tr.entry2 {
+   tr.entry1 {
         background-color: #eee;
    }
-   tr.groupEntry1 {
+   tr.groupEntry0 {
    }
-   tr.groupEntry2 {
+   tr.groupEntry1 {
         background-color: #eee;
    }
    td.field {
@@ -198,9 +208,16 @@
         padding-left: 5px;
         padding-right: 5px;
         border: 1px solid #eee;
-        text-align: center;
+        text-align: left;
+   }
+   a.sortheader {
+        text-decoration: none;
+        /*display: block;*/
    }
    </style>
+
+   <script language="JavaScript" src="tellico2html.js"/>
+
    <title>
     <xsl:value-of select="$page-title"/>
    </title>
@@ -213,91 +230,73 @@
 
 <xsl:template match="tc:collection">
  <div id="headerblock">
-  <div class="colltitle">
+
+  <form onsubmit="return false">
+   <input type="text" id="searchText"/>
+   <input type="button" id="searchButton" onclick="searchMovies()">
+    <xsl:attribute name="value">
+     <i18n>Search</i18n>
+    </xsl:attribute>
+   </input>
+  </form>
+  
+  <h1 class="colltitle">
    <xsl:value-of select="@title"/>
-    <span class="subtitle">
-     <xsl:choose>
-      <xsl:when test="string-length($sort-title) &gt; 0">
-       <xsl:value-of select="$sort-title"/>
-      </xsl:when>
-      <xsl:otherwise>
-       <xsl:text>(sorted by </xsl:text>
-       <xsl:if test="string-length($sort-name1) &gt; 0">
-        <xsl:call-template name="field-title">
-         <xsl:with-param name="fields" select="tc:fields"/>
-         <xsl:with-param name="name" select="$sort-name1"/>
-        </xsl:call-template>
-       </xsl:if>
-       <xsl:if test="string-length($sort-name2) &gt; 0">
-        <xsl:text>, </xsl:text>
-        <xsl:call-template name="field-title">
-         <xsl:with-param name="fields" select="tc:fields"/>
-         <xsl:with-param name="name" select="$sort-name2"/>
-        </xsl:call-template>
-       </xsl:if>
-       <xsl:if test="string-length($sort-name3) &gt; 0">
-        <xsl:text>, </xsl:text>
-        <xsl:call-template name="field-title">
-         <xsl:with-param name="fields" select="tc:fields"/>
-         <xsl:with-param name="name" select="$sort-name3"/>
-        </xsl:call-template>
-       </xsl:if>
-       <xsl:text>)</xsl:text>
-      </xsl:otherwise>
-     </xsl:choose>
-    </span>
-  </div>
+   <span class="subtitle">
+    <xsl:value-of select="$sort-title"/>
+   </span>
+  </h1>
  </div>
 
  <table>
-
-  <xsl:if test="$show-headers">
-   <xsl:variable name="fields" select="tc:fields"/>
-   <thead>
-    <tr>
-     <xsl:for-each select="$columns">
-      <xsl:variable name="column" select="."/>
-      <th>
-       <xsl:call-template name="field-title">
-        <xsl:with-param name="fields" select="$fields"/>
-        <xsl:with-param name="name" select="$column"/>
-       </xsl:call-template>
-      </th>
-     </xsl:for-each>
-    </tr>
-   </thead>
+  <!-- for now, only sort non-grouped tables -->
+  <xsl:if test="not($group-entries)">
+   <xsl:attribute name="class">
+    <xsl:text>sortable</xsl:text>
+   </xsl:attribute>
+   <xsl:attribute name="id">
+    <xsl:text>table1</xsl:text>
+   </xsl:attribute>
   </xsl:if>
+
+  <xsl:variable name="fields" select="tc:fields"/>
+  <thead>
+   <tr>
+    <xsl:if test="not($show-headers)">
+     <xsl:attribute name="style">
+      <xsl:text>display: none;</xsl:text>
+     </xsl:attribute>
+    </xsl:if>
+    <xsl:for-each select="$columns">
+     <xsl:variable name="column" select="."/>
+     <th>
+      <xsl:call-template name="field-title">
+       <xsl:with-param name="fields" select="$fields"/>
+       <xsl:with-param name="name" select="$column"/>
+      </xsl:call-template>
+     </th>
+    </xsl:for-each>
+   </tr>
+  </thead>
 
   <tbody>
    <xsl:choose>
-    
+ 
     <!-- If the entries are not being grouped, it's easy -->
     <xsl:when test="not($group-entries)">
      <xsl:for-each select="tc:entry">
       <xsl:sort select="dyn:evaluate($sort1)"/>
       <xsl:sort select="dyn:evaluate($sort2)"/>
       <xsl:sort select="dyn:evaluate($sort3)"/>
-      <tr>
-       <xsl:choose>
-        <xsl:when test="position() mod 2 = 0">
-         <xsl:attribute name="class">
-          <xsl:text>entry1</xsl:text>
-         </xsl:attribute>
-        </xsl:when>
-        <xsl:otherwise>
-         <xsl:attribute name="class">
-          <xsl:text>entry2</xsl:text>
-         </xsl:attribute>
-        </xsl:otherwise>
-       </xsl:choose>
+      <tr class="entry{position() mod 2}">
        <xsl:apply-templates select="."/>
       </tr>
      </xsl:for-each>
     </xsl:when> <!-- end ungrouped output -->
 
-    <!-- If the entries are being grouped, it's a bit more involved -->
-    <!-- Tellico helps out by creating groups, but I also want this -->
-    <!-- stylesheet to stand alone, so add additional test for groups -->
+    <!-- If the entries are being grouped, it's a bit more involved
+         Tellico helps out by creating groups, but I also want this
+         stylesheet to stand alone, so add additional test for groups -->
     <xsl:when test="$group-entries and tc:group">
      <xsl:for-each select="tc:group">
       <tr>
@@ -309,30 +308,18 @@
        </td>
       </tr>
       <xsl:for-each select="tc:entryRef">
-       <tr>
-        <xsl:choose>
-         <xsl:when test="position() mod 2 = 0">
-          <xsl:attribute name="class">
-           <xsl:text>groupEntry1</xsl:text>
-          </xsl:attribute>
-         </xsl:when>
-         <xsl:otherwise>
-          <xsl:attribute name="class">
-           <xsl:text>groupEntry2</xsl:text>
-          </xsl:attribute>
-         </xsl:otherwise>
-        </xsl:choose>
+       <tr class="groupEntry{position() mod 2}">
         <xsl:apply-templates select="key('entriesById', @id)"/>
        </tr>
       </xsl:for-each>
      </xsl:for-each>
     </xsl:when>
 
-    <!-- Now is the hard way, use XSL itself to do all thr groups -->
+    <!-- Now is the hard way, use XSL itself to do all the groups -->
     <xsl:otherwise>
-     
+
      <xsl:variable name="coll" select="."/>
-     
+
      <!-- first, copy each entry and add a group attribute -->
      <xsl:variable name="listing">
       <xsl:for-each select="tc:entry">
@@ -345,7 +332,7 @@
        </xsl:for-each>
       </xsl:for-each>
      </xsl:variable>
-     
+
      <!-- now, loop again, while sorting by group and title -->
      <xsl:variable name="sorted">
       <xsl:for-each select="exsl:node-set($listing)/tc:entry">
@@ -356,7 +343,7 @@
        </xsl:if>
       </xsl:for-each>
      </xsl:variable>
-     
+
      <!-- now finally, loop through and print out the entry -->
      <xsl:for-each select="exsl:node-set($sorted)/tc:entry">
       <xsl:variable name="g" select="@group"/>
@@ -370,19 +357,7 @@
         </td>
        </tr>
       </xsl:if>
-      <tr>
-       <xsl:choose>
-        <xsl:when test="count(preceding-sibling::tc:entry[@group=$g]) mod 2 = 0">
-         <xsl:attribute name="class">
-          <xsl:text>groupEntry1</xsl:text>
-         </xsl:attribute>
-        </xsl:when>
-        <xsl:otherwise>
-         <xsl:attribute name="class">
-          <xsl:text>groupEntry2</xsl:text>
-         </xsl:attribute>
-        </xsl:otherwise>
-       </xsl:choose>
+      <tr class="groupEntry{count(preceding-sibling::tc:entry[@group=$g]) mod 2}">
        <!-- I need the fields and images as variables since exsl:node-set
             can't use keys in the current document -->
        <xsl:apply-templates select="$coll/tc:entry[@id=current()/@id]">
@@ -407,19 +382,7 @@
         </td>
        </tr>
       </xsl:if>
-      <tr>
-       <xsl:choose>
-        <xsl:when test="position() mod 2 = 1">
-         <xsl:attribute name="class">
-          <xsl:text>groupEntry1</xsl:text>
-         </xsl:attribute>
-        </xsl:when>
-        <xsl:otherwise>
-         <xsl:attribute name="class">
-          <xsl:text>groupEntry2</xsl:text>
-         </xsl:attribute>
-        </xsl:otherwise>
-       </xsl:choose>
+      <tr class="groupEntry{position() mod 2}">
        <xsl:apply-templates select="."/>
       </tr>
      </xsl:for-each>
@@ -430,7 +393,7 @@
  </table>
 
  <hr/>
- <h4>Generated by <a href="http://www.periapsis.org/tellico/">Tellico</a>.</h4>
+ <h4 xml:space="preserve"><i18n>Generated by</i18n> <a href="http://www.periapsis.org/tellico/">Tellico</a>.</h4>
 </xsl:template>
 
 <xsl:template name="field-title">
@@ -476,15 +439,16 @@
   <xsl:variable name="numvalues" select="count($current[local-name() = $column])"/>
   <!-- if the field node exists, output its value, otherwise put in a space -->
   <td class="field">
-   <!-- first column should not be centered -->
-   <xsl:if test="position()=1">
-    <xsl:attribute name="style">
-     <xsl:text>text-align: left; padding-left: 10px</xsl:text>
-    </xsl:attribute>
-   </xsl:if>
    <xsl:choose>
     <!-- when there is at least one value... -->
-    <xsl:when test="$numvalues &gt; 0">
+    <xsl:when test="$numvalues &gt; 1">
+     <xsl:call-template name="simple-field-value">
+      <xsl:with-param name="entry" select="$entry"/>
+      <xsl:with-param name="field" select="$column"/>
+     </xsl:call-template>
+    </xsl:when>
+
+    <xsl:when test="$numvalues = 1">
      <xsl:for-each select="$current[local-name() = $column]">
       <!-- key() doesn't work when using exsl:node-set since the context node
            is no longer in the current document
@@ -494,24 +458,35 @@
 
       <xsl:choose>
 
-       <!-- boolean values end up as 'true', output 'X' -->
-       <xsl:when test="$field/@type=4 and . = 'true'">
-        <xsl:text>X</xsl:text>
+       <!-- check for multi-column table -->
+       <xsl:when test="$field/@type=8 and $field/tc:prop[@name = 'columns'] &gt; 1">
+        <!-- italicize all columns after the first -->
+        <xsl:value-of select="tc:column[1]"/>
+        <xsl:for-each select="tc:column[position &gt; 1]">
+         <xsl:text> - </xsl:text>
+         <em>
+          <xsl:value-of select="."/>
+         </em>
+        </xsl:for-each>
+        <br/>
        </xsl:when>
 
-       <!-- next, check for 2-column table -->
-       <xsl:when test="$field/@type=9">
-        <!-- italicize second column -->
-        <xsl:value-of select="tc:column[1]"/>
-        <xsl:text> - </xsl:text>
-        <em>
-         <xsl:value-of select="tc:column[2]"/>
-        </em>
-        <br/>
+       <!-- boolean and number values -->
+       <xsl:when test="$field/@type=4 or $field/@type=6">
+        <xsl:attribute name="style">
+         <xsl:text>text-align: center; padding-left: 5px</xsl:text>
+        </xsl:attribute>
+        <xsl:call-template name="simple-field-value">
+         <xsl:with-param name="entry" select="$entry"/>
+         <xsl:with-param name="field" select="$column"/>
+        </xsl:call-template>
        </xsl:when>
 
        <!-- next, check for images -->
        <xsl:when test="$field/@type=10">
+        <xsl:attribute name="style">
+         <xsl:text>text-align: center; padding-left: 5px</xsl:text>
+        </xsl:attribute>
         <img>
          <xsl:attribute name="src">
           <xsl:value-of select="concat($imgdir, .)"/>
@@ -524,26 +499,21 @@
         </img>
        </xsl:when>
 
-       <!-- next, check for URLs -->
-       <xsl:when test="$field/@type = 7">
-        <a href="{.}">
-         <xsl:value-of select="."/>
-        </a>
-       </xsl:when>
-
        <!-- if it's a date, format with hyphens -->
        <xsl:when test="$field/@type=12">
-        <xsl:value-of select="tc:year"/>
-        <xsl:text>-</xsl:text>
-        <xsl:value-of select="tc:month"/>
-        <xsl:text>-</xsl:text>
-        <xsl:value-of select="tc:day"/>
+        <xsl:attribute name="style">
+         <xsl:text>text-align: center; padding-left: 5px</xsl:text>
+        </xsl:attribute>
+        <xsl:call-template name="simple-field-value">
+         <xsl:with-param name="entry" select="$entry"/>
+         <xsl:with-param name="field" select="$column"/>
+        </xsl:call-template>
        </xsl:when>
 
-       <!-- finally, it's just a regular value -->
+        <!-- finally, it's just a regular value -->
        <xsl:otherwise>
         <xsl:choose>
-         <xsl:when test="$field/@name = 'title' and $link-entries">
+         <xsl:when test="$link-entries and $field/@name = 'title'">
           <a>
            <xsl:attribute name="href">
             <xsl:call-template name="filename">
@@ -557,11 +527,10 @@
           </xsl:if>
          </xsl:when>
          <xsl:otherwise>
-          <xsl:value-of select="."/>
-          <!-- if there is more than one value, add the semi-colon -->
-          <xsl:if test="position() &lt; $numvalues">
-           <xsl:text>; </xsl:text>
-          </xsl:if>
+          <xsl:call-template name="simple-field-value">
+           <xsl:with-param name="entry" select="$entry"/>
+           <xsl:with-param name="field" select="$column"/>
+          </xsl:call-template>
          </xsl:otherwise>
         </xsl:choose>
 

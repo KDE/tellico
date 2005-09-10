@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:tc="http://periapsis.org/tellico/"
                 exclude-result-prefixes="tc"
                 version="1.0">
@@ -8,9 +8,7 @@
    ================================================================
    Tellico XSLT file - sort by author
 
-   $Id: tellico-by-title.xsl 969 2004-11-20 06:55:20Z robby $
-
-   Copyright (C) 2003, 2004 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with XML data files
    from the 'tellico' application, which can be found at:
@@ -19,8 +17,6 @@
 -->
 
 <xsl:output method="html" version="xhtml" indent="yes"/>
-
-<xsl:strip-space elements="*"/>
 
 <xsl:variable name="endl">
 <xsl:text>
@@ -32,8 +28,8 @@
 </xsl:template>
 
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 7 -->
- <xsl:if test="@syntaxVersion &lt; '7'">
+ <!-- This stylesheet is designed for Tellico document syntax version 8 -->
+ <xsl:if test="@syntaxVersion &lt; '8'">
   <xsl:message>
    <xsl:text>This stylesheet was designed for Tellico DTD version </xsl:text>
    <xsl:value-of select="'7'"/>
@@ -57,7 +53,7 @@
          padding-top: 10px;
          padding-bottom: 10px;
          margin-bottom: 5px;
-   } 
+   }
    .title {
          padding: 4px;
          line-height: 18px;
@@ -69,7 +65,7 @@
    .subtitle {
          margin-left: 10px;
          font-size: 12px;
-   } 
+   }
    .books {
          background: rgb(204,204,204);
          padding-left: 4px;
@@ -81,7 +77,7 @@
    ul {
          margin: 0px;
          padding: 0px;
-   } 
+   }
    </style>
   </head>
   <body>
@@ -104,7 +100,7 @@
    <xsl:for-each select="/tc:tellico/tc:collection/tc:entry">
     <xsl:sort select="tc:title"/>
     <xsl:apply-templates select="."/>
-   </xsl:for-each> 
+   </xsl:for-each>
   </ol>
  </div>
 </xsl:template>
