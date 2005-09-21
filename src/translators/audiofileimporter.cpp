@@ -131,7 +131,10 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
       if(exists && entry->field(artist) != a) {
         various = true;
         a = i18n("(Various)");
-        initialArtist = entry->field(artist);
+        // but only need initial artist the first time, when it's not "Various"
+        if(entry->field(artist) != a) {
+          initialArtist = entry->field(artist);
+        }
       }
       entry->setField(artist, a);
     }
@@ -157,7 +160,8 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
           if(!other.isEmpty()) {
             other += QString::fromLatin1("::") + initialArtist;
             // position is not zero-indexed...
-            entry->setField(track, insertValue(QString::null, other, i+1));
+            myDebug() << "AudioFileImporter::collection() - compilation album, adding artist to track listing" << endl;
+            entry->setField(track, insertValue(entry->field(track), other, i+1));
           }
         }
         QString t = TStringToQString(tag->title()) + QString::fromLatin1("::") + TStringToQString(tag->artist());

@@ -224,12 +224,15 @@ void Kernel::addFilter(Filter* filter_) {
 }
 
 bool Kernel::modifyFilter(Filter* filter_) {
+  if(!filter_) {
+    return false;
+  }
+
   FilterDialog filterDlg(FilterDialog::ModifyFilter, m_widget);
   // need to create a new filter object
-  Filter* newFilter = new Filter(*filter_);
+  FilterPtr newFilter = new Filter(*filter_);
   filterDlg.setFilter(newFilter);
   if(filterDlg.exec() != QDialog::Accepted) {
-    delete newFilter;
     return false;
   }
 

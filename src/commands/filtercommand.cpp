@@ -21,7 +21,7 @@
 
 using Tellico::Command::FilterCommand;
 
-FilterCommand::FilterCommand(Mode mode_, Filter* activeFilter_, Filter* oldFilter_/*=0*/)
+FilterCommand::FilterCommand(Mode mode_, FilterPtr activeFilter_, FilterPtr oldFilter_/*=0*/)
     : KCommand()
     , m_mode(mode_)
     , m_activeFilter(activeFilter_)

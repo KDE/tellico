@@ -307,7 +307,7 @@ void GroupView::addCollection(Data::Collection* coll_) {
   m_coll = coll_;
   // if the collection doesn't have the grouped field, and it's not the pseudo-group,
   // change it to default
-  if(m_groupBy.isEmpty() || (coll_->fieldByName(m_groupBy) == 0 && m_groupBy != Data::Collection::s_peopleGroupName)) {
+  if(m_groupBy.isEmpty() || (!coll_->hasField(m_groupBy) && m_groupBy != Data::Collection::s_peopleGroupName)) {
     m_groupBy = coll_->defaultGroupField();
   }
 
@@ -327,7 +327,7 @@ void GroupView::setGroupField(const QString& groupField_) {
   }
 
   m_groupBy = groupField_;
-  if((m_coll->fieldByName(groupField_) && m_coll->fieldByName(groupField_)->formatFlag() == Data::Field::FormatName)
+  if((m_coll->hasField(groupField_) && m_coll->fieldByName(groupField_)->formatFlag() == Data::Field::FormatName)
      || groupField_ == Data::Collection::s_peopleGroupName) {
     m_groupOpenPixmap = UserIcon(QString::fromLatin1("person-open"));
     m_groupClosedPixmap = UserIcon(QString::fromLatin1("person"));

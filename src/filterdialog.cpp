@@ -179,7 +179,7 @@ void FilterRuleWidget::setFocus() {
 /***************************************************************/
 
 namespace {
-  static const int FILTER_MIN_RULE_WIDGETS = 2;
+  static const int FILTER_MIN_RULE_WIDGETS = 1;
   static const int FILTER_MAX_RULES = 8;
 }
 
@@ -305,7 +305,7 @@ void FilterDialog::init() {
   setHelp(QString::fromLatin1("filter-dialog"));
 }
 
-Tellico::Filter* FilterDialog::currentFilter() {
+Tellico::FilterPtr FilterDialog::currentFilter() {
   if(!m_filter) {
     m_filter = new Filter(Filter::MatchAny);
   }
@@ -331,7 +331,7 @@ Tellico::Filter* FilterDialog::currentFilter() {
   return m_filter;
 }
 
-void FilterDialog::setFilter(Filter* filter_) {
+void FilterDialog::setFilter(FilterPtr filter_) {
   if(!filter_) {
     slotClear();
     return;
@@ -389,7 +389,7 @@ void FilterDialog::slotSaveFilter() {
   // in this case, currentFilter() either creates a new filter or
   // updates the current one. If creating a new one, then I want to copy it
   bool wasEmpty = (m_filter == 0);
-  Tellico::Filter* filter = new Filter(*currentFilter());
+  FilterPtr filter = new Filter(*currentFilter());
   if(wasEmpty) {
     m_filter = filter;
   }

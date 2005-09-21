@@ -289,6 +289,10 @@ public:
    */
   Field* const fieldByTitle(const QString& title) const;
   /**
+   * Returns @p true if the collection contains a field named @ref name;
+   */
+  bool hasField(const QString& name) const;
+  /**
    * Returns a list of all the possible entry groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.
    *
@@ -339,8 +343,8 @@ protected:
   void populateDicts(Entry* entry);
   QStringList entryGroupNamesByField(Entry* entry, const QString& fieldName);
   /*
-   * Gets the preferred ID of the collection. A QIntDict is used to keep track of which
-   * id's are in use, and the actual ID is returned.
+   * Gets the preferred ID of the collection. Currently, it just gets incremented as
+   * new collections are created.
    */
   static int getID();
 

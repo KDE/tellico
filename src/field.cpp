@@ -73,12 +73,14 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
     setProperty(QString::fromLatin1("minimum"), QChar('1'));
     setProperty(QString::fromLatin1("maximum"), QChar('5'));
   }
+  m_id = getID();
 }
 
 // if this constructor is called, the type is necessarily Choice
 Field::Field(const QString& name_, const QString& title_, const QStringList& allowed_)
     : KShared(), m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
       m_type(Field::Choice), m_allowed(allowed_), m_flags(0), m_formatFlag(FormatNone) {
+  m_id = getID();
 }
 
 Field::Field(const Field& field_)
@@ -92,6 +94,7 @@ Field::Field(const Field& field_)
     m_type = Table;
     setProperty(QString::fromLatin1("columns"), QChar('2'));
   }
+  m_id = getID();
 }
 
 Field& Field::operator=(const Field& field_) {
@@ -112,6 +115,7 @@ Field& Field::operator=(const Field& field_) {
   m_flags = field_.flags();
   m_formatFlag = field_.formatFlag();
   m_properties = field_.propertyList();
+  m_id = getID();
   return *this;
 }
 
@@ -519,4 +523,10 @@ void Field::convertOldRating(Data::Field* field_) {
   field_->setProperty(QString::fromLatin1("maximum"), QString::number(max));
   field_->setProperty(QString::fromLatin1("rating"), QString::null);
   field_->setType(Rating);
+}
+
+// static
+int Field::getID() {
+  static int id = 0;
+  return ++id;
 }

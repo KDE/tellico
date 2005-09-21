@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "filterview.h"
-#include "filteritem.h"
 #include "controller.h"
 #include "entry.h"
 #include "collection.h"
@@ -48,10 +47,18 @@ FilterView::FilterView(QWidget* parent_, const char* name_) : GUI::ListView(pare
           SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
 }
 
-bool FilterView::isSelectable(GUI::ListViewItem*) const {
+bool FilterView::isSelectable(GUI::ListViewItem* item_) const {
+  if(!GUI::ListView::isSelectable(item_)) {
+    return false;
+  }
+
   // because the popup menu has modify and delete, only
   // allow one filter item to get selected
-  return selectedItems().isEmpty();
+  if(item_->isFilterItem()) {
+    return selectedItems().isEmpty();
+  }
+
+  return true;
 }
 
 void FilterView::contextMenuRequested(QListViewItem* item_, const QPoint& point_, int) {

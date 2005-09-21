@@ -696,8 +696,8 @@ void MainWindow::initConnections() {
           SLOT(slotUpdateFractionDone(float)));
 
   // let the group view call filters, too
-  connect(m_groupView, SIGNAL(signalUpdateFilter(Tellico::Filter*)),
-          Controller::self(), SLOT(slotUpdateFilter(Tellico::Filter*)));
+  connect(m_groupView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
+          Controller::self(), SLOT(slotUpdateFilter(Tellico::FilterPtr)));
 }
 
 void MainWindow::initFileOpen(bool nofile_) {
@@ -1042,7 +1042,11 @@ void MainWindow::slotFileOpenRecent(const KURL& url_) {
   if(m_editDialog->queryModified() && Data::Document::self()->saveModified()) {
     if(!openURL(url_)) {
       m_fileOpenRecent->removeURL(url_);
+      m_fileOpenRecent->setCurrentItem(-1);
     }
+  } else {
+    // the KAction shouldn't be checked now
+    m_fileOpenRecent->setCurrentItem(-1);
   }
 
   slotStatusMsg(i18n(ready));
@@ -1692,10 +1696,10 @@ void MainWindow::slotShowFilterDialog() {
     m_quickFilter->setEnabled(false);
     connect(m_filterDlg, SIGNAL(signalCollectionModified()),
             Data::Document::self(), SLOT(slotSetModified()));
-    connect(m_filterDlg, SIGNAL(signalUpdateFilter(Tellico::Filter*)),
+    connect(m_filterDlg, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
             m_quickFilter, SLOT(clear()));
-    connect(m_filterDlg, SIGNAL(signalUpdateFilter(Tellico::Filter*)),
-            Controller::self(), SLOT(slotUpdateFilter(Tellico::Filter*)));
+    connect(m_filterDlg, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
+            Controller::self(), SLOT(slotUpdateFilter(Tellico::FilterPtr)));
     connect(m_filterDlg, SIGNAL(finished()),
             SLOT(slotHideFilterDialog()));
   } else {

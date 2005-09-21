@@ -194,10 +194,25 @@ void ReportDialog::slotSaveAs() {
   QString filter = i18n("*.html|HTML Files (*.html)") + QChar('\n') + i18n("*|All Files");
   KURL u = KFileDialog::getSaveURL(QString::null, filter, this);
   if(!u.isEmpty() && u.isValid()) {
-    KURL old = m_exporter->url();
+    KConfigGroupSaver saver(KGlobal::config(), "ExportOptions");
+    bool encode = saver.config()->readBoolEntry("EncodeUTF8", true);
+    int oldOpt = m_exporter->options();
+
+    // turn utf8 off
+    int options = oldOpt & ~Export::ExportUTF8;
+    // now turn it on if true
+    if(encode) {
+      options |= Export::ExportUTF8;
+    }
+
+    KURL oldURL = m_exporter->url();
+    m_exporter->setOptions(options);
     m_exporter->setURL(u);
+
     m_exporter->exec();
-    m_exporter->setURL(old);
+
+    m_exporter->setURL(oldURL);
+    m_exporter->setOptions(oldOpt);
   }
 }
 

@@ -15,6 +15,8 @@
 #include "field.h"
 #include "entry.h"
 #include "tellico_debug.h"
+#include "latin1literal.h"
+#include "tellico_utils.h"
 
 #include <klocale.h>
 #include <kglobal.h> // for KMAX
@@ -50,9 +52,8 @@ bool Collection::addField(Field* field_) {
     return false;
   }
 
-  // fieldByName() returns 0 if there's no field by that name
   // this essentially checks for duplicates
-  if(fieldByName(field_->name())) {
+  if(hasField(field_->name())) {
     myDebug() << "Collection::addField() - replacing " << field_->name() << endl;
     removeField(fieldByName(field_->name()), true);
   }
@@ -112,18 +113,15 @@ bool Collection::mergeField(Field* newField_) {
     return addField(newField_->clone());
   }
 
+  if(newField_->type() == Field::Table2) {
+    newField_->setType(Data::Field::Table);
+    newField_->setProperty(QString::fromLatin1("columns"), QChar('2'));
+  }
+
   // the original field type is kept
   if(currField->type() != newField_->type()) {
-    // make special exception for music collections and the track field, ok
-    // to convert Table to Table2
-    if(type() == Album && currField->type() == Field::Table && newField_->type() == Field::Table2) {
-//      currField->setType(Field::Table2);
-      newField_->setType(Data::Field::Table);
-      currField->setProperty(QString::fromLatin1("columns"), QChar('2'));
-    } else {
-      kdDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
-      return false;
-    }
+    kdDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
+    return false;
   }
 
   // if field is a Choice, then make sure all values are there
@@ -147,8 +145,31 @@ bool Collection::mergeField(Field* newField_) {
 
   // if new field has additional extended properties, add those
   for(StringMap::ConstIterator it = newField_->propertyList().begin(); it != newField_->propertyList().end(); ++it) {
-    if(currField->property(it.key()).isEmpty()) {
-      currField->setProperty(it.key(), it.data());
+    const QString propName = it.key();
+    const QString currValue = currField->property(propName);
+    if(currValue.isEmpty()) {
+      currField->setProperty(propName, it.data());
+    } else if (it.data() != currValue) {
+      if(currField->type() == Field::URL && propName == Latin1Literal("relative")) {
+        kdWarning() << "Collection::mergeField() - relative URL property does not match for " << currField->name() << endl;
+      } else if((currField->type() == Field::Table && propName == Latin1Literal("columns"))
+             || (currField->type() == Field::Rating && propName == Latin1Literal("maximum"))) {
+        bool ok;
+        uint currNum = Tellico::toUInt(currValue, &ok);
+        uint newNum = Tellico::toUInt(it.data(), &ok);
+        if(newNum > currNum) { // bigger values
+          myDebug() << "Collection::mergeField() - changing " << propName << " for " << currField->name() << endl;
+          currField->setProperty(propName, QString::number(newNum));
+        }
+      } else if(currField->type() == Field::Rating && propName == Latin1Literal("minimum")) {
+        bool ok;
+        uint currNum = Tellico::toUInt(currValue, &ok);
+        uint newNum = Tellico::toUInt(it.data(), &ok);
+        if(newNum < currNum) { // smaller values
+          myDebug() << "Collection::mergeField() - changing " << propName << " for " << currField->name() << endl;
+          currField->setProperty(propName, QString::number(newNum));
+        }
+      }
     }
   }
 
@@ -494,6 +515,10 @@ Tellico::Data::Field* const Collection::fieldByTitle(const QString& title_) cons
   return m_fieldTitleDict.isEmpty() ? 0 : m_fieldTitleDict.find(title_);
 }
 
+bool Collection::hasField(const QString& name_) const {
+  return fieldByName(name_) != 0;
+}
+
 bool Collection::isAllowed(const QString& key_, const QString& value_) const {
   // empty string is always allowed
   if(value_.isEmpty()) {
@@ -529,7 +554,7 @@ void Collection::populateDicts(Entry* entry_) {
     EntryGroupDict* dict = dictIt.current();
     // the field name might be the people group name
     QString fieldName = dictIt.currentKey();
-    bool isBool = fieldByName(fieldName) && fieldByName(fieldName)->type() == Field::Bool;
+    bool isBool = hasField(fieldName) && fieldByName(fieldName)->type() == Field::Bool;
 
     QStringList groups = entryGroupNamesByField(entry_, fieldName);
     for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {

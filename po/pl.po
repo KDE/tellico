@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
-"POT-Creation-Date: 2005-09-09 19:59-0700\n"
+"POT-Creation-Date: 2005-09-14 19:42-0700\n"
 "PO-Revision-Date: 2005-08-31 15:46+0200\n"
 "Last-Translator: Marek Janukowicz <marek@power.com.pl>\n"
 "Language-Team:  <en@li.org>\n"
@@ -88,64 +88,64 @@ msgstr "a,an,and,in,of,the,to"
 #: collections/musiccollection.cpp:20 collections/stampcollection.cpp:20
 #: collections/videocollection.cpp:20 collections/videocollection.cpp:42
 #: collections/winecollection.cpp:20 configdialog.cpp:151 field.cpp:49
-#: field.cpp:80
+#: field.cpp:81
 msgid "General"
 msgstr "Ogólne"
 
-#: field.cpp:407
+#: field.cpp:411
 msgid "the"
 msgstr "the"
 
-#: field.cpp:425
+#: field.cpp:429
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: field.cpp:430
+#: field.cpp:434
 msgid "de,van,der,von"
 msgstr "de,van,der,von"
 
-#: field.cpp:437
+#: field.cpp:441
 msgid "Simple Text"
 msgstr "Prosty tekst"
 
-#: field.cpp:438
+#: field.cpp:442
 msgid "Paragraph"
 msgstr "Paragraf"
 
-#: field.cpp:439
+#: field.cpp:443
 msgid "Choice"
 msgstr "Lista wyboru"
 
-#: field.cpp:440
+#: field.cpp:444
 msgid "Checkbox"
 msgstr "Pole zaznaczane"
 
-#: collections/bibtexcollection.cpp:176 field.cpp:441
+#: collections/bibtexcollection.cpp:176 field.cpp:445
 msgid "Number"
 msgstr "Liczba"
 
-#: field.cpp:442 translators/risimporter.cpp:259
+#: field.cpp:446 translators/risimporter.cpp:259
 msgid "URL"
 msgstr "URL"
 
-#: field.cpp:443
+#: field.cpp:447
 msgid "Table"
 msgstr "Tabela"
 
-#: collections/stampcollection.cpp:125 field.cpp:444
+#: collections/stampcollection.cpp:125 field.cpp:448
 msgid "Image"
 msgstr "Obraz"
 
-#: field.cpp:445
+#: field.cpp:449
 msgid "Dependent"
 msgstr "Pole zależne"
 
-#: field.cpp:447
+#: field.cpp:451
 msgid "Date"
 msgstr "Data"
 
 #: collections/bookcollection.cpp:159 collections/musiccollection.cpp:79
-#: collections/winecollection.cpp:104 field.cpp:448
+#: collections/winecollection.cpp:104 field.cpp:452
 msgid "Rating"
 msgstr "Ocena"
 
@@ -171,7 +171,7 @@ msgid ""
 "Group"
 msgstr "Grupa"
 
-#: groupview.cpp:449 mainwindow.cpp:1532 translators/htmlexporter.cpp:256
+#: groupview.cpp:449 mainwindow.cpp:1536 translators/htmlexporter.cpp:256
 msgid "People"
 msgstr "Ludzie"
 
@@ -213,7 +213,7 @@ msgstr ""
 "możliwe tylko jeśli typy kolekcji się zgadzają. Wpisy muszą sobie "
 "odpowiadać by zostać połączone."
 
-#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1135
+#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1139
 #: translators/tellicozipexporter.cpp:37
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Pliki Tellico (*.tc)"
@@ -235,7 +235,7 @@ msgstr "*.xml|Pliki XML (*.xml)"
 msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.ris|Pliki RIS (*.ris)"
 
-#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1137
+#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1141
 #: reportdialog.cpp:194 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/htmlexporter.cpp:85 translators/onixexporter.cpp:66
@@ -864,7 +864,7 @@ msgstr "Wybór &grupowy"
 msgid "Change the grouping of the collection"
 msgstr "Zmienia grupowanie kolekcji"
 
-#: filterview.cpp:33 filterview.cpp:78 mainwindow.cpp:607 mainwindow.cpp:622
+#: filterview.cpp:33 filterview.cpp:86 mainwindow.cpp:607 mainwindow.cpp:622
 msgid "Filter"
 msgstr "Filtr"
 
@@ -907,19 +907,19 @@ msgstr "Otwieranie pliku..."
 msgid "Open File"
 msgstr "Otwórz plik"
 
-#: mainwindow.cpp:1104
+#: mainwindow.cpp:1108
 msgid "Saving file..."
 msgstr "Zapisywanie pliku..."
 
-#: mainwindow.cpp:1133
+#: mainwindow.cpp:1137
 msgid "Saving file with a new filename..."
 msgstr "Zapisywanie pliku pod nową nazwą..."
 
-#: mainwindow.cpp:1179 mainwindow.cpp:1230
+#: mainwindow.cpp:1183 mainwindow.cpp:1234
 msgid "Printing..."
 msgstr "Drukowanie..."
 
-#: mainwindow.cpp:1189
+#: mainwindow.cpp:1193
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -927,90 +927,90 @@ msgstr ""
 "Kolekcja jest aktualnie filtrowana i pokazuje tylko ograniczony podzbiór "
 "wpisów. Tylko widoczne wpisy zostaną wydrukowane. Kontynuować?"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1218
 msgid "Processing document..."
 msgstr "Przetwarzanie dokumentu..."
 
-#: mainwindow.cpp:1237
+#: mainwindow.cpp:1241
 msgid "Exiting..."
 msgstr "Zamykanie programu..."
 
-#: mainwindow.cpp:1396
+#: mainwindow.cpp:1400
 #, c-format
 msgid "Total entries: %1"
 msgstr "Liczba wpisów: %1"
 
-#: mainwindow.cpp:1405
+#: mainwindow.cpp:1409
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 pasujących; %2 wybranych)"
 
-#: mainwindow.cpp:1408
+#: mainwindow.cpp:1412
 msgid "(%1 filtered)"
 msgstr "(%1 pasujących)"
 
-#: mainwindow.cpp:1411
+#: mainwindow.cpp:1415
 msgid "(%1 selected)"
 msgstr "(%1 wybranych)"
 
-#: mainwindow.cpp:1624
+#: mainwindow.cpp:1628
 #, c-format
 msgid "Print %1"
 msgstr "Drukuj %1"
 
-#: mainwindow.cpp:1657
+#: mainwindow.cpp:1661
 #, c-format
 msgid "Page %1"
 msgstr "Strona %1"
 
-#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1683
+#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1687
 #: translators/xsltimporter.cpp:56
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico napotkało błąd podczas przetwarzania XSLT."
 
-#: entryview.cpp:142 mainwindow.cpp:1684
+#: entryview.cpp:142 mainwindow.cpp:1688
 msgid "Please check your installation."
 msgstr "Proszę sprawdzić swoją instalację."
 
-#: mainwindow.cpp:1778
+#: mainwindow.cpp:1782
 msgid "Importing data..."
 msgstr "Importowanie danych..."
 
-#: mainwindow.cpp:1787 mainwindow.cpp:1793
+#: mainwindow.cpp:1791 mainwindow.cpp:1797
 #, fuzzy
 msgid "Import File"
 msgstr "Importuj plik"
 
-#: mainwindow.cpp:1887
+#: mainwindow.cpp:1891
 msgid "Exporting data..."
 msgstr "Eksportowanie danych..."
 
-#: mainwindow.cpp:1909
+#: mainwindow.cpp:1913
 msgid "Export As"
 msgstr "Eksportuj jako"
 
-#: mainwindow.cpp:1946
+#: mainwindow.cpp:1950
 msgid "String Macros"
 msgstr "Makra łańcuchowe"
 
-#: mainwindow.cpp:1947
+#: mainwindow.cpp:1951
 msgid "Macro"
 msgstr "Makro"
 
-#: mainwindow.cpp:1947
+#: mainwindow.cpp:1951
 #, fuzzy
 msgid "String"
 msgstr "Łańcuch"
 
-#: mainwindow.cpp:2025
+#: mainwindow.cpp:2029
 #, fuzzy
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico nie może pisać do strumienia servera <b>%1.</qt>"
 
-#: mainwindow.cpp:2194
+#: mainwindow.cpp:2198
 msgid "Filters"
 msgstr "Filtry"
 
-#: mainwindow.cpp:2195
+#: mainwindow.cpp:2199
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
 "rules.</qt>"
@@ -1018,11 +1018,11 @@ msgstr ""
 "<qt><i>Widok przefiltrowany</i> pokazuje wpisy pasujące do wybranych reguł "
 "filtrowania.</qt>"
 
-#: mainwindow.cpp:2215
+#: mainwindow.cpp:2219
 msgid "Loans"
 msgstr "Wypożyczenia"
 
-#: mainwindow.cpp:2216
+#: mainwindow.cpp:2220
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
@@ -1065,7 +1065,7 @@ msgstr "Nadpisać"
 msgid "Delete Filter"
 msgstr "Kasuj filtr"
 
-#: filterview.cpp:80
+#: filterview.cpp:88
 #, fuzzy
 msgid "Filter (Sort by Count)"
 msgstr "Filtruj (sortuj wg. ilości)"
@@ -1095,8 +1095,8 @@ msgstr "Zmień pole %1"
 msgid "Delete %1 Field"
 msgstr "Usuń pole %1"
 
-#: commands/renamecollection.cpp:45 tellico_kernel.cpp:284
-#: tellico_kernel.cpp:287
+#: commands/renamecollection.cpp:45 tellico_kernel.cpp:287
+#: tellico_kernel.cpp:290
 msgid "Rename Collection"
 msgstr "Zmień nazwę kolekcji"
 
@@ -2780,7 +2780,7 @@ msgstr "Kolekcja gier"
 msgid "Custom Collection"
 msgstr "Kolekcja dowolna"
 
-#: loanview.cpp:33 loanview.cpp:79 xslt.cpp:15
+#: loanview.cpp:33 loanview.cpp:87 xslt.cpp:15
 msgid "Borrower"
 msgstr "Wypożyczający"
 
@@ -2792,7 +2792,7 @@ msgstr "Zwróć"
 msgid "Modify Loan..."
 msgstr "Zmień wypożyczenie..."
 
-#: loanview.cpp:81
+#: loanview.cpp:89
 #, fuzzy
 msgid "Borrower (Sort by Count)"
 msgstr "Wypożyczający (posortowane po ilości)"
@@ -3346,15 +3346,15 @@ msgstr ""
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.html|Pliki HTML (*.html)"
 
-#: tellico_kernel.cpp:245
+#: tellico_kernel.cpp:248
 msgid "Do you really want to delete this filter?"
 msgstr "Czy naprawdę chcesz usunąć ten filtr?"
 
-#: tellico_kernel.cpp:247
+#: tellico_kernel.cpp:250
 msgid "Delete Filter?"
 msgstr "Usunąć filtr?"
 
-#: tellico_kernel.cpp:284 tellico_kernel.cpp:287
+#: tellico_kernel.cpp:287 tellico_kernel.cpp:290
 msgid "New collection name:"
 msgstr "Nowa nazwa kolekcji:"
 
@@ -3624,15 +3624,15 @@ msgstr "Skanowanie plików audio..."
 msgid "(Various)"
 msgstr "(Różne)"
 
-#: translators/audiofileimporter.cpp:250
+#: translators/audiofileimporter.cpp:254
 msgid "Audio File Options"
 msgstr "Opcji plików audio"
 
-#: translators/audiofileimporter.cpp:252
+#: translators/audiofileimporter.cpp:256
 msgid "Recursive folder search"
 msgstr "Szukaj rekursywnie w folderach"
 
-#: translators/audiofileimporter.cpp:253
+#: translators/audiofileimporter.cpp:257
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Jeśli zaznaczone, foldery będą przeszukiwane rekursywnie w poszukiwaniu "
@@ -3767,11 +3767,11 @@ msgstr "XSLT"
 msgid "Choose the XSLT file used to transform the Tellico XML data."
 msgstr "Wybierz plik XSLT do przetransformowania danych XML."
 
-#: translators/alexandriaimporter.cpp:158
+#: translators/alexandriaimporter.cpp:159
 msgid "Alexandria Options"
 msgstr "Opcje Alexandrii"
 
-#: translators/alexandriaimporter.cpp:159
+#: translators/alexandriaimporter.cpp:160
 msgid "Library:"
 msgstr "Biblioteka:"
 
@@ -3844,21 +3844,13 @@ msgstr ""
 
 #: tips.cpp:11
 msgid ""
-"<p>...that you can rename a collection by right-clicking on\n"
-"the top collection item in the left column.</p>\n"
-msgstr ""
-"<p> ...że możesz zmienić nazwę kolekcji klikając prawym\n"
-"przyciskiem myszy na główny element kolekcji w lewej kolumnie.</p>\n"
-
-#: tips.cpp:16
-msgid ""
 "<p>...that you can change which fields are shown in the list view by\n"
 "right-clicking on the column header.\n"
 msgstr ""
 "<p>... że możesz zmienić pola pokazywane w widoku listy \n"
 "klikając prawym przyciskiem na nagłówku kolumny.</p>\n"
 
-#: tips.cpp:21
+#: tips.cpp:16
 msgid ""
 "<p>...that you can add, edit, or modify the fields in the collection using\n"
 "the Field Editor. The arrow buttons below the field list can be used to "
@@ -3872,7 +3864,7 @@ msgstr ""
 "zmiany pozycji pola na liście, która z kolei wpływa na pozycję w "
 "edytorze wpisów.</p>\n"
 
-#: tips.cpp:28
+#: tips.cpp:23
 msgid ""
 "<p>...that if you want to filter by a Checkbox field, a value of\n"
 "\"true\" should be used. If you'd like to filter to\n"
@@ -3892,7 +3884,7 @@ msgstr ""
 "cudzysłowów),\n"
 "a drugą na \"Przeczytana\" \"nie zawiera\" \"true\"</p>\n"
 
-#: tips.cpp:38
+#: tips.cpp:33
 msgid ""
 "<p>...that if a non-word character is used in the Quick Filter, the text is\n"
 "interpreted as a regular expression.</p>\n"
@@ -3904,7 +3896,7 @@ msgstr ""
 "<p>Np. by pokazać książki Webera lub Bujolda, należy wpisać "
 "\"weber/bujold\" (bez cudzysłowów) w polu filtra.</p>\n"
 
-#: tips.cpp:45
+#: tips.cpp:40
 msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
@@ -3912,7 +3904,7 @@ msgstr ""
 "<p>... że możesz edytowac więcej niż jeden wpis jednocześnie\n"
 "przytrzymując klawisz Shift lub Ctrl i zaznaczając wiele wpisów.<p>\n"
 
-#: tips.cpp:50
+#: tips.cpp:45
 msgid ""
 "<p>...that you can convert an existing book collection to a bibliography,\n"
 "which can then be exported to bibtex or Bibtexml format.</p>\n"
@@ -3922,7 +3914,7 @@ msgstr ""
 "która potem może zostać wyeksportowana do formatu bibtex lub "
 "Bibtexml.</p>\n"
 
-#: tips.cpp:55
+#: tips.cpp:50
 #, fuzzy
 msgid ""
 "<p>...that you can add, edit, and delete string macros for "
@@ -3931,7 +3923,7 @@ msgstr ""
 "<p>... że możesz dodawać, edytować i kasować makra łańcuchowe do "
 "bibliografii.</p>\n"
 
-#: tips.cpp:59
+#: tips.cpp:54
 msgid ""
 "<p>...that if more than one field is formatted as a name, then an "
 "additional\n"
@@ -3944,7 +3936,7 @@ msgstr ""
 "dodawana jest dodatkowa grupa \"Ludzie\", pozwalająca np. na sortowanie\n"
 "lub drukowanie zgrupowanych autorów lub edytorów.</p>\n"
 
-#: tips.cpp:65
+#: tips.cpp:60
 msgid ""
 "<p>...that you can modify the appearance of the printed output by modifying\n"
 "the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
@@ -3956,7 +3948,7 @@ msgstr ""
 "CSS\n"
 "ustala rzeczy takie jak fonty, marginesy itp.</p>\n"
 
-#: tips.cpp:71
+#: tips.cpp:66
 msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Tellico XML file.</p>\n"
@@ -3964,12 +3956,12 @@ msgstr ""
 "<p>... że możesz importować używając dowolnego szablonu XSL, który "
 "zwraca poprawny plik XML Tellico.</p>\n"
 
-#: tips.cpp:76
+#: tips.cpp:71
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
 msgstr ""
 "<p>... że podwójne kliknięcie na wpisie otwiera Edytor Wpisów.</p>\n"
 
-#: tips.cpp:80
+#: tips.cpp:75
 msgid ""
 "<p>...that you can add HTML tags to any Paragraph field for formatting, such "
 "as\n"
@@ -3978,7 +3970,7 @@ msgstr ""
 "<p>... że do pól typu Paragraf możesz dodawać tagi HTML takie jak\n"
 "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 
-#: tips.cpp:85
+#: tips.cpp:80
 msgid ""
 "<p>...that in the Detailed View, you can press a letter on the\n"
 "keyboard to skip to the next entry that starts with that letter.</p>\n"
@@ -4092,6 +4084,13 @@ msgstr "Liczba wpisów:"
 #, fuzzy
 msgid "Distinct values: "
 msgstr "Liczba różnych wartości:"
+
+#~ msgid ""
+#~ "<p>...that you can rename a collection by right-clicking on\n"
+#~ "the top collection item in the left column.</p>\n"
+#~ msgstr ""
+#~ "<p> ...że możesz zmienić nazwę kolekcji klikając prawym\n"
+#~ "przyciskiem myszy na główny element kolekcji w lewej kolumnie.</p>\n"
 
 #~ msgid "Total number of images:"
 #~ msgstr "Liczba obrazków:"

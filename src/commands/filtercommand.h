@@ -33,7 +33,7 @@ public:
     FilterRemove
   };
 
-  FilterCommand(Mode mode, Filter* activeFilter, Filter* oldFilter=0);
+  FilterCommand(Mode mode, FilterPtr activeFilter, FilterPtr oldFilter=0);
 
   virtual void execute();
   virtual void unexecute();

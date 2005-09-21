@@ -61,7 +61,7 @@ Tellico::Data::Collection* BibtexImporter::collection() {
     if(bt_entry_metatype(it.current()) == BTE_PREAMBLE) {
       char* preamble = bt_get_text(it.current());
       if(preamble) {
-        m_coll->setPreamble(QString::fromLatin1(preamble));
+        m_coll->setPreamble(QString::fromUtf8(preamble));
       }
       continue;
     }
@@ -70,7 +70,7 @@ Tellico::Data::Collection* BibtexImporter::collection() {
       char* macro;
       (void) bt_next_field(it.current(), 0, &macro);
       // FIXME: replace macros within macro definitions!
-      m_coll->addMacro(QString::fromLatin1(macro), QString::fromLatin1(bt_macro_text(macro, 0, 0)));
+      m_coll->addMacro(QString::fromUtf8(macro), QString::fromUtf8(bt_macro_text(macro, 0, 0)));
       continue;
     }
 
@@ -81,12 +81,12 @@ Tellico::Data::Collection* BibtexImporter::collection() {
     // now we're parsing a regular entrry
     Data::Entry* entry = new Data::Entry(m_coll);
 
-    text = QString::fromLatin1(bt_entry_type(it.current()));
+    text = QString::fromUtf8(bt_entry_type(it.current()));
 //    kdDebug() << "entry type: " << text << endl;
     // text is automatically put into lower-case by btparse
     BibtexHandler::setFieldValue(entry, QString::fromLatin1("entry-type"), text);
 
-    text = QString::fromLatin1(bt_entry_key(it.current()));
+    text = QString::fromUtf8(bt_entry_key(it.current()));
 //    kdDebug() << "entry key: " << text << endl;
     BibtexHandler::setFieldValue(entry, QString::fromLatin1("key"), text);
 
@@ -108,7 +108,7 @@ Tellico::Data::Collection* BibtexImporter::collection() {
             end_macro = false;
             break;
           case BTAST_MACRO:
-            text += QString::fromLatin1(svalue) + QString::fromLatin1("#");
+            text += QString::fromUtf8(svalue) + QString::fromLatin1("#");
             end_macro = true;
             break;
           default:
@@ -119,7 +119,7 @@ Tellico::Data::Collection* BibtexImporter::collection() {
         // remove last character '#'
         text.truncate(text.length() - 1);
       }
-      QString fieldName = QString::fromLatin1(name);
+      QString fieldName = QString::fromUtf8(name);
       if(fieldName == Latin1Literal("author") || fieldName == Latin1Literal("editor")) {
         text.replace(QRegExp(QString::fromLatin1("\\sand\\s")), QString::fromLatin1("; "));
       }
@@ -167,8 +167,8 @@ Tellico::Import::BibtexImporter::ASTList BibtexImporter::parseText(const QString
     if(brace == 0) {
       entry = text.mid(startpos, pos-startpos+1);
       //kdDebug() << entry.stripWhiteSpace() << endl;
-      // Assume bibtex file is always encoded as local8Bit
-      AST* node = bt_parse_entry_s(const_cast<char*>(entry.local8Bit().data()),
+      // All the downstream test processing on the AST node will assume utf-8
+      AST* node = bt_parse_entry_s(const_cast<char*>(entry.utf8().data()),
                                    const_cast<char*>(url().fileName().local8Bit().data()),
                                    0, bt_options, &ok);
       if(ok && node) {

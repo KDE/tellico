@@ -443,7 +443,7 @@ void Controller::blockAllUpdates(bool block_) {
   }
 }
 
-void Controller::slotUpdateFilter(Filter* filter_) {
+void Controller::slotUpdateFilter(FilterPtr filter_) {
 //  kdDebug() << "Controller::slotUpdateFilter()" << endl;
   blockAllSignals(true);
 

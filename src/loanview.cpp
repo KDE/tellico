@@ -13,7 +13,6 @@
 
 #include "loanview.h"
 #include "loanitem.h"
-#include "borroweritem.h"
 #include "controller.h"
 #include "borrower.h"
 #include "entry.h"
@@ -49,10 +48,18 @@ LoanView::LoanView(QWidget* parent_, const char* name_) : GUI::ListView(parent_,
           SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
 }
 
-bool LoanView::isSelectable(GUI::ListViewItem*) const {
+bool LoanView::isSelectable(GUI::ListViewItem* item_) const {
+  if(!GUI::ListView::isSelectable(item_)) {
+    return false;
+  }
+
   // because the popup menu has modify, only
-  // allow one borrower item to get selected
-  return selectedItems().isEmpty();
+  // allow one loan item to get selected
+  if(item_->isLoanItem()) {
+    return selectedItems().isEmpty();
+  }
+
+  return true;
 }
 
 void LoanView::contextMenuRequested(QListViewItem* item_, const QPoint& point_, int) {

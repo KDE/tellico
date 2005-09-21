@@ -288,8 +288,8 @@ EXTRA_DIST = tellico.pot
 ####### kdevelop will overwrite this part!!! (end)############
 #>- POFILES = AUTO
 #>+ 2
-POFILES = cs.po fr.po es.po nl.po it.po hu.po ro.po pt.po ca.po sv.po de.po bg.po ee.po fi.po nb.po pl.po
-GMOFILES = cs.gmo fr.gmo es.gmo nl.gmo it.gmo hu.gmo ro.gmo pt.gmo ca.gmo sv.gmo de.gmo bg.gmo ee.gmo fi.gmo nb.gmo pl.gmo
+POFILES = cs.po fr.po es.po nl.po it.po hu.po ro.po pt.po ca.po sv.po de.po bg.po ee.po fi.po nb.po nn.po pl.po
+GMOFILES = cs.gmo fr.gmo es.gmo nl.gmo it.gmo hu.gmo ro.gmo pt.gmo ca.gmo sv.gmo de.gmo bg.gmo ee.gmo fi.gmo nb.gmo nn.gmo pl.gmo
 CLEANFILES = *~
 #>- all: all-am
 #>+ 1
@@ -485,9 +485,9 @@ uninstall-am: uninstall-info-am
 
 
 #>+ 2
-KDE_DIST=nl.po sv.gmo pl.gmo pt.po bg.gmo nb.gmo fi.po de.po fr.gmo nb.po ca.po fr.po ro.gmo ee.po cs.po cs.gmo ro.po Makefile.in messages.mo bg.po it.gmo sv.po fi.gmo hu.po ee.gmo de.gmo pl.po es.po pt.gmo es.gmo it.po hu.gmo nl.gmo Makefile.am ca.gmo 
+KDE_DIST=nl.po sv.gmo pl.gmo pt.po nn.po bg.gmo nb.gmo fi.po de.po fr.gmo nb.po ca.po fr.po ro.gmo ee.po cs.po cs.gmo ro.po nn.gmo Makefile.in messages.mo bg.po it.gmo sv.po fi.gmo hu.po ee.gmo de.gmo pl.po es.po pt.gmo es.gmo it.po hu.gmo nl.gmo Makefile.am ca.gmo 
 
-#>+ 49
+#>+ 52
 cs.gmo: cs.po
 	rm -f cs.gmo; $(GMSGFMT) -o cs.gmo $(srcdir)/cs.po
 	test ! -f cs.gmo || touch cs.gmo
@@ -533,17 +533,20 @@ fi.gmo: fi.po
 nb.gmo: nb.po
 	rm -f nb.gmo; $(GMSGFMT) -o nb.gmo $(srcdir)/nb.po
 	test ! -f nb.gmo || touch nb.gmo
+nn.gmo: nn.po
+	rm -f nn.gmo; $(GMSGFMT) -o nn.gmo $(srcdir)/nn.po
+	test ! -f nn.gmo || touch nn.gmo
 pl.gmo: pl.po
 	rm -f pl.gmo; $(GMSGFMT) -o pl.gmo $(srcdir)/pl.po
 	test ! -f pl.gmo || touch pl.gmo
 
 #>+ 3
 clean-nls:
-	-rm -f  cs.gmo fr.gmo es.gmo nl.gmo it.gmo hu.gmo ro.gmo pt.gmo ca.gmo sv.gmo de.gmo bg.gmo ee.gmo fi.gmo nb.gmo pl.gmo
+	-rm -f  cs.gmo fr.gmo es.gmo nl.gmo it.gmo hu.gmo ro.gmo pt.gmo ca.gmo sv.gmo de.gmo bg.gmo ee.gmo fi.gmo nb.gmo nn.gmo pl.gmo
 
 #>+ 10
 install-nls:
-	@for base in cs fr es nl it hu ro pt ca sv de bg ee fi nb pl ; do \
+	@for base in cs fr es nl it hu ro pt ca sv de bg ee fi nb nn pl ; do \
 	  echo $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
 	  $(mkinstalldirs) $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES ; \
 	  if test -f $$base.gmo; then $(INSTALL_DATA) $$base.gmo $(DESTDIR)$(kde_locale)/$$base/LC_MESSAGES/$(PACKAGE).mo ;\
@@ -552,7 +555,7 @@ install-nls:
 	done
 
 
-#>+ 18
+#>+ 19
 uninstall-nls:
 	rm -f $(DESTDIR)$(kde_locale)/cs/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/fr/LC_MESSAGES/$(PACKAGE).mo
@@ -569,6 +572,7 @@ uninstall-nls:
 	rm -f $(DESTDIR)$(kde_locale)/ee/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/fi/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/nb/LC_MESSAGES/$(PACKAGE).mo
+	rm -f $(DESTDIR)$(kde_locale)/nn/LC_MESSAGES/$(PACKAGE).mo
 	rm -f $(DESTDIR)$(kde_locale)/pl/LC_MESSAGES/$(PACKAGE).mo
 
 #>+ 2

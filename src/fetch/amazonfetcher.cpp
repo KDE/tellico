@@ -541,12 +541,12 @@ Tellico::Data::Entry* AmazonFetcher::fetchEntry(uint uid_) {
   // but, if the fields are removed from the fecthers collection, subsequent fetchENtry()
   // calls don't return an image, so check to see if the user doesn't have them, and
   // then delete them afterwards
-  bool hadSmall = (Data::Document::self()->collection()->fieldByName(QString::fromLatin1("small-image")) != 0);
-  bool hadMedium = (Data::Document::self()->collection()->fieldByName(QString::fromLatin1("medium-image")) != 0);
-  bool hadLarge = (Data::Document::self()->collection()->fieldByName(QString::fromLatin1("large-image")) != 0);
-  entry->setField(QString::fromLatin1("small-image"), QString::null);
+  bool hadSmall = Data::Document::self()->collection()->hasField(QString::fromLatin1("small-image"));
+  bool hadMedium = Data::Document::self()->collection()->hasField(QString::fromLatin1("medium-image"));
+  bool hadLarge = Data::Document::self()->collection()->hasField(QString::fromLatin1("large-image"));
+  entry->setField(QString::fromLatin1("small-image"),  QString::null);
   entry->setField(QString::fromLatin1("medium-image"), QString::null);
-  entry->setField(QString::fromLatin1("large-image"), QString::null);
+  entry->setField(QString::fromLatin1("large-image"),  QString::null);
 
   Data::Entry* newEntry = new Data::Entry(*entry, Data::Document::self()->collection());
   if(!hadSmall) {

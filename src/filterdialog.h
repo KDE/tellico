@@ -136,8 +136,8 @@ public:
    */
   FilterDialog(Mode mode, QWidget* parent, const char* name=0);
 
-  Filter* currentFilter();
-  void setFilter(Filter* filter);
+  FilterPtr currentFilter();
+  void setFilter(FilterPtr filter);
 
 public slots:
   void slotClear();
@@ -150,7 +150,7 @@ protected slots:
   void slotSaveFilter();
 
 signals:
-  void signalUpdateFilter(Tellico::Filter*);
+  void signalUpdateFilter(Tellico::FilterPtr);
   void signalCollectionModified();
 
 private:

@@ -133,7 +133,7 @@ public slots:
   void slotUpdateCurrent(const Tellico::Data::EntryVec& entries);
   void slotDeleteSelectedEntries();
   void slotCopySelectedEntries();
-  void slotUpdateFilter(Tellico::Filter* filter);
+  void slotUpdateFilter(Tellico::FilterPtr filter);
   void slotCheckOut();
   void slotCheckIn();
   void slotCheckIn(const Data::EntryVec& entries);

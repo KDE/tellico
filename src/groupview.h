@@ -16,6 +16,7 @@
 
 #include "gui/listview.h"
 #include "observer.h"
+#include "datavectors.h"
 
 #include <qdict.h>
 #include <qpixmap.h>
@@ -180,7 +181,7 @@ signals:
    *
    * @param filter A pointer to the filter
    */
-  void signalUpdateFilter(Tellico::Filter* filter);
+  void signalUpdateFilter(Tellico::FilterPtr filter);
 
 private:
   friend class GroupIterator;

@@ -13,8 +13,7 @@
 
 #include "xslthandler.h"
 #include "../latin1literal.h"
-
-#include <kdebug.h>
+#include "../tellico_debug.h"
 
 #include <qtextcodec.h>
 
@@ -62,7 +61,7 @@ XSLTHandler::XSLTHandler(const QCString& xsltFile_) :
 #endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
-      kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
+      myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
     }
   }
 }
@@ -80,7 +79,7 @@ XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
 #endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
-      kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltURL_.path() << endl;
+      myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltURL_.path() << endl;
     }
   }
 }
@@ -142,7 +141,7 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
         if(!pi.data().lower().contains(QString::fromLatin1("utf-8"))) {
           utf8 = false;
 //        } else {
-//          kdDebug() << "XSLTHandler::setXSLTDoc() - PI = " << pi.data() << endl;
+//          myDebug() << "XSLTHandler::setXSLTDoc() - PI = " << pi.data() << endl;
         }
         break;
       }
@@ -171,7 +170,7 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
   }
   m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
   if(!m_stylesheet) {
-    kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
+    myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
   }
 //  xmlFreeDoc(xsltDoc); // this causes a crash for some reason
 }
@@ -193,7 +192,7 @@ void XSLTHandler::removeParam(const QCString& name_) {
 
 QString XSLTHandler::applyStylesheet(const QString& text_) {
   if(!m_stylesheet) {
-    kdDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
+    myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
     return QString::null;
   }
 
@@ -208,7 +207,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
 
 QString XSLTHandler::process() {
   if(!m_docIn) {
-    kdDebug() << "XSLTHandler::process() - error parsing input string!" << endl;
+    myDebug() << "XSLTHandler::process() - error parsing input string!" << endl;
     return QString::null;
   }
 
@@ -229,7 +228,7 @@ QString XSLTHandler::process() {
     delete[] params[i];
   }
   if(!m_docOut) {
-    kdDebug() << "XSLTHandler::applyStylesheet() - error applying stylesheet!" << endl;
+    myDebug() << "XSLTHandler::applyStylesheet() - error applying stylesheet!" << endl;
     return QString::null;
   }
 
@@ -239,7 +238,7 @@ QString XSLTHandler::process() {
                                                      (xmlOutputCloseCallback)closeQString,
                                                      &result, 0);
   if(!outp) {
-    kdDebug() << "XSLTHandler::applyStylesheet() - error writing output buffer!" << endl;
+    myDebug() << "XSLTHandler::applyStylesheet() - error writing output buffer!" << endl;
     xmlOutputBufferClose(outp); //also flushes
     return result;
   }
@@ -248,7 +247,7 @@ QString XSLTHandler::process() {
 
   int num_bytes = xsltSaveResultTo(outp, m_docOut, m_stylesheet);
   if(num_bytes == -1) {
-    kdDebug() << "XSLTHandler::applyStylesheet() - error saving output buffer!" << endl;
+    myDebug() << "XSLTHandler::applyStylesheet() - error saving output buffer!" << endl;
     xmlOutputBufferClose(outp); //also flushes
     return result;
   }

@@ -147,7 +147,7 @@ void ConfigDialog::slotDefault() {
 }
 
 void ConfigDialog::setupGeneralPage() {
-  QPixmap pix = UserIcon(QString::fromLatin1("tellico"));
+  QPixmap pix = DesktopIcon(QString::fromLatin1("tellico"), KIcon::SizeMedium);
   QFrame* frame = addPage(i18n("General"), i18n("General Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
@@ -223,7 +223,7 @@ void ConfigDialog::setupGeneralPage() {
 }
 
 void ConfigDialog::setupPrintingPage() {
-  QPixmap pix = DesktopIcon(QString::fromLatin1("print_printer"));
+  QPixmap pix = DesktopIcon(QString::fromLatin1("print_printer"), KIcon::SizeMedium);
   QFrame* frame = addPage(i18n("Printing"), i18n("Printing Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
@@ -280,7 +280,7 @@ void ConfigDialog::setupPrintingPage() {
 }
 
 void ConfigDialog::setupTemplatePage() {
-  QPixmap pix = DesktopIcon(QString::fromLatin1("looknfeel"));
+  QPixmap pix = DesktopIcon(QString::fromLatin1("looknfeel"), KIcon::SizeMedium);
   QFrame* frame = addPage(i18n("Templates"), i18n("Template Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
@@ -317,7 +317,7 @@ void ConfigDialog::setupTemplatePage() {
 }
 
 void ConfigDialog::setupFetchPage() {
-  QPixmap pix = DesktopIcon(QString::fromLatin1("network"));
+  QPixmap pix = DesktopIcon(QString::fromLatin1("network"), KIcon::SizeMedium);
   QFrame* frame = addPage(i18n("Data Sources"), i18n("Data Source Options"), pix);
   QHBoxLayout* l = new QHBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 

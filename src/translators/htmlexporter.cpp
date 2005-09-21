@@ -85,6 +85,15 @@ QString HTMLExporter::fileFilter() const {
   return i18n("*.html|HTML Files (*.html)") + QChar('\n') + i18n("*|All Files");
 }
 
+void HTMLExporter::reset() {
+  // since the ExportUTF8 option may have changed, need to delete handler
+  delete m_handler;
+  m_handler = 0;
+  m_files.clear();
+  m_links.clear();
+  m_copiedFiles.clear();
+}
+
 bool HTMLExporter::exec() {
   if(url().isEmpty() || !url().isValid()) {
     return false;
@@ -356,7 +365,7 @@ void HTMLExporter::writeImages(const Data::Collection* coll_) {
       imageSet.add(id);
       // try writing
       if(!ImageFactory::writeImage(id, ImageFactory::tempDir(), true)) {
-        kdWarning() << "HTMLExporter::write image() - unable to write image file: "
+        kdWarning() << "HTMLExporter::writeImages() - unable to write image file: "
                     << ImageFactory::tempDir() << id << endl;
       }
 
@@ -427,8 +436,7 @@ void HTMLExporter::setXSLTFile(const QString& filename_) {
 
   m_xsltFile = filename_;
   m_xsltFilePath = QString::null;
-  delete m_handler;
-  m_handler = 0;
+  reset();
 }
 
 KURL HTMLExporter::fileDir() const {
@@ -517,7 +525,7 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
   int end = 0;
   const int length = str.length();
   const QString url = QString::fromLatin1("url(");
-  for(int pos = pos = str.find(url); pos < length && pos >= 0; pos = str.find(url, pos+1)) {
+  for(int pos = str.find(url); pos < length && pos >= 0; pos = str.find(url, pos+1)) {
     pos += 4; // url(
     if(str[pos] ==  '"' || str[pos] == '\'') {
       ++pos;
@@ -596,12 +604,13 @@ bool HTMLExporter::writeEntryFiles() {
   exporter.setXSLTFile(m_entryXSLTFile);
   exporter.setCollectionURL(url());
 
+  bool multipleTitles = collection()->fieldByName(QString::fromLatin1("title"))->flags() & Data::Field::AllowMultiple;
   Data::EntryVec entries = this->entries(); // not const since the pointer has to be copied
   for(Data::EntryVecIt entryIt = entries.begin(); entryIt != entries.end(); ++entryIt) {
     QString file = entryIt->field(QString::fromLatin1("title"), formatted);
 
     // but only use the first title if it has multiple
-    if(collection()->fieldByName(QString::fromLatin1("title"))->flags() & Data::Field::AllowMultiple) {
+    if(multipleTitles) {
       file = file.section(';', 0, 0);
     }
     file.replace(badChars, QString::fromLatin1("_"));

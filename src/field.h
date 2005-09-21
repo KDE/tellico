@@ -143,6 +143,12 @@ public:
   Field* clone() { return new Field(*this); }
 
   /**
+   * Returns the id of the field.
+   *
+   * @return The id
+   */
+  int id() const { return m_id; }
+  /**
    * Returns the name of the field.
    *
    * @return The field name
@@ -420,6 +426,13 @@ public:
   static void convertOldRating(Data::Field* field);
 
 private:
+  /*
+   * Gets the preferred ID of the collection. Currently, it just gets incremented as
+   * new collections are created.
+   */
+  static int getID();
+
+  int m_id;
   QString m_name;
   QString m_title;
   QString m_category;

@@ -1,3 +1,31 @@
+2005-09-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.0.1.
+
+2005-09-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with loading utf-8 encoded bibtex files.
+
+2005-09-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with variable icon sizes in config dialog.
+
+2005-09-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug for merging field properties, which mostly showed up
+	as double-colons in music collection tracks.
+	* Fixed crashing bug with modifying filters and cancelling.
+
+2005-09-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Norwegian Nynorsk translation from Karl Ove Hufthammer.
+
+2005-09-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug in audio file metadata import that was overwriting
+	track listings incorrectly.
+	* Fixed crashing bug for selecting groups and entries in group view.
+
 2005-09-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.0.
@@ -16,6 +44,10 @@
 
 	* Updated Swedish, thanks to Peter Landgren.
 	* Added patch from Nix to dynamically resize table columns.
+
+2005-08-20  Robby Stephenson  <robby@periapsis.org>
+
+        * Released Tellico 1.0pre2.
 
 2005-08-14  Robby Stephenson  <robby@periapsis.org>
 

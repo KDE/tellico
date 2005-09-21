@@ -18,6 +18,7 @@ class KPopupMenu;
 
 #include "gui/listview.h"
 #include "observer.h"
+#include "borroweritem.h"
 
 #include <qdict.h>
 

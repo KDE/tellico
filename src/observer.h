@@ -29,6 +29,8 @@ namespace Tellico {
 class Observer {
 
 public:
+  virtual ~Observer() {}
+
   virtual void    addBorrower(Data::Borrower*) {}
   virtual void modifyBorrower(Data::Borrower*) {}
   // no removeBorrower()

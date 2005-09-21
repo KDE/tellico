@@ -1,5 +1,5 @@
 %define name    tellico
-%define version 1.0
+%define version 1.0.1
 %define release 1
 %define iconname %{name}.png
 %define __libtoolize /bin/true
@@ -31,7 +31,7 @@ Tellico is a KDE application for keeping track of your collection of books, bibl
 
 Features:
 
-o Supports any number of user-defined fields, of eleven different types:
+o Supports any number of user-defined fields, of several different types:
    o text, paragraph, list, checkbox, year, URL, date, ratings
    o tables
    o images
@@ -43,7 +43,7 @@ o Sorts and groups collection by various properties
 o Automatically validates ISBN
 o Allows customizable entry templates through XSLT
 o Imports Bibtex, Bibtexml, RIS, CSV, MODS, and XSLT-filtered data
-o Exports to Bibtex, Bibtexml, CSV, HTML, PilotDB, and XSLT-filtered data
+o Exports to Bibtex, Bibtexml, CSV, HTML, Onix, PilotDB, and XSLT-filtered data
 o Searches and adds items from Amazon.com, imdb.com, z39.50 servers, PubMed, and external applications
 
 %prep
@@ -94,6 +94,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
+* Fri Sep  9 2005 Robby Stephenson <robby@periapsis.org> 1.0.1-1
+- Version 1.0.1.
+
 * Fri Aug 19 2005 Robby Stephenson <robby@periapsis.org> 1.0-1
 - Version 1.0.
 

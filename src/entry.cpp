@@ -153,7 +153,7 @@ bool Entry::setField(const QString& name_, const QString& value_) {
   }
 
 #ifndef NDEBUG
-  if(m_coll && (m_coll->fields().count() == 0 || m_coll->fieldByName(name_) == 0)) {
+  if(m_coll && (m_coll->fields().count() == 0 || !m_coll->hasField(name_))) {
     kdDebug() << "Entry::setField() - unknown collection entry field - "
               << name_ << endl;
     return false;
@@ -218,10 +218,16 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   if(groups.isEmpty()) {
     groups += Collection::s_emptyGroupTitle;
   } else if(f->type() == Field::Table) {
-    for(QStringList::Iterator it = groups.begin(); it != groups.end(); ++it) {
       // quick hack for tables, how often will a user have "::" in their value?
       // only use first column for group
+    QStringList::Iterator it = groups.begin();
+    while(it != groups.end()) {
       (*it) = (*it).section(QString::fromLatin1("::"),  0,  0);
+      if((*it).isEmpty()) {
+        it = groups.remove(it); // points to next in list
+      } else {
+        ++it;
+      }
     }
   }
   return groups;

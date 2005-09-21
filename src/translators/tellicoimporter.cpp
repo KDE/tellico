@@ -230,7 +230,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex
   if(syntaxVersion < 4 && m_coll->type() == Data::Collection::Book
-     && m_coll->fieldByName(QString::fromLatin1("bibtex-id")) != 0) {
+     && m_coll->hasField(QString::fromLatin1("bibtex-id"))) {
     Data::BibtexCollection* c = Data::BibtexCollection::convertBookCollection(m_coll);
     delete m_coll;
     m_coll = c;
@@ -748,7 +748,7 @@ bool TellicoImporter::loadImage(const KURL& url_, const QString& id_) {
 void TellicoImporter::addDefaultFilters() {
   switch(m_coll->type()) {
     case Data::Collection::Book:
-      if(m_coll->fieldByName(QString::fromLatin1("read"))) {
+      if(m_coll->hasField(QString::fromLatin1("read"))) {
         Filter* f = new Filter(Filter::MatchAny);
         f->setName(i18n("Unread Books"));
         f->append(new FilterRule(QString::fromLatin1("read"), QString::fromLatin1("true"), FilterRule::FuncNotContains));
@@ -758,7 +758,7 @@ void TellicoImporter::addDefaultFilters() {
       break;
 
     case Data::Collection::Video:
-      if(m_coll->fieldByName(QString::fromLatin1("year"))) {
+      if(m_coll->hasField(QString::fromLatin1("year"))) {
         Filter* f = new Filter(Filter::MatchAny);
         f->setName(i18n("Old Movies"));
         // old movies from before 1960
@@ -766,7 +766,7 @@ void TellicoImporter::addDefaultFilters() {
         m_coll->addFilter(f);
         m_modified = true;
       }
-      if(m_coll->fieldByName(QString::fromLatin1("widescreen"))) {
+      if(m_coll->hasField(QString::fromLatin1("widescreen"))) {
         Filter* f = new Filter(Filter::MatchAny);
         f->setName(i18n("Widescreen"));
         f->append(new FilterRule(QString::fromLatin1("widescreen"), QString::fromLatin1("true"), FilterRule::FuncContains));
@@ -776,7 +776,7 @@ void TellicoImporter::addDefaultFilters() {
       break;
 
     case Data::Collection::Album:
-      if(m_coll->fieldByName(QString::fromLatin1("year"))) {
+      if(m_coll->hasField(QString::fromLatin1("year"))) {
         Filter* f = new Filter(Filter::MatchAny);
         f->setName(i18n("80's Music"));
         f->append(new FilterRule(QString::fromLatin1("year"), QString::fromLatin1("198\\d"),FilterRule::FuncRegExp));
@@ -788,7 +788,7 @@ void TellicoImporter::addDefaultFilters() {
     default:
       break;
   }
-  if(m_coll->fieldByName(QString::fromLatin1("rating"))) {
+  if(m_coll->hasField(QString::fromLatin1("rating"))) {
     Filter* filter = new Filter(Filter::MatchAny);
     filter->setName(i18n("Favorites"));
     // check all the numbers, and use top 20% or so

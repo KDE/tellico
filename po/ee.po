@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ee\n"
-"POT-Creation-Date: 2005-09-09 19:59-0700\n"
+"POT-Creation-Date: 2005-09-14 19:42-0700\n"
 "PO-Revision-Date: 2004-02-13 16:58+0200\n"
 "Last-Translator: Toomas Nigola <toomas.nigola@eelk.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -94,65 +94,65 @@ msgstr "a,an,and,in,of,the,to"
 #: collections/musiccollection.cpp:20 collections/stampcollection.cpp:20
 #: collections/videocollection.cpp:20 collections/videocollection.cpp:42
 #: collections/winecollection.cpp:20 configdialog.cpp:151 field.cpp:49
-#: field.cpp:80
+#: field.cpp:81
 msgid "General"
 msgstr "Üldine"
 
-#: field.cpp:407
+#: field.cpp:411
 msgid "the"
 msgstr "see"
 
-#: field.cpp:425
+#: field.cpp:429
 msgid "jr.,jr,iii,iv"
 msgstr "jr.,jr,iii,iv"
 
-#: field.cpp:430
+#: field.cpp:434
 msgid "de,van,der,von"
 msgstr "de,van,der,von"
 
-#: field.cpp:437
+#: field.cpp:441
 msgid "Simple Text"
 msgstr "Tavaline tekst"
 
-#: field.cpp:438
+#: field.cpp:442
 msgid "Paragraph"
 msgstr "Lõik"
 
-#: field.cpp:439
+#: field.cpp:443
 msgid "Choice"
 msgstr ""
 
-#: field.cpp:440
+#: field.cpp:444
 msgid "Checkbox"
 msgstr "Märkeruut"
 
-#: collections/bibtexcollection.cpp:176 field.cpp:441
+#: collections/bibtexcollection.cpp:176 field.cpp:445
 msgid "Number"
 msgstr "Number"
 
-#: field.cpp:442 translators/risimporter.cpp:259
+#: field.cpp:446 translators/risimporter.cpp:259
 msgid "URL"
 msgstr "URL"
 
-#: field.cpp:443
+#: field.cpp:447
 msgid "Table"
 msgstr "Tabel"
 
-#: collections/stampcollection.cpp:125 field.cpp:444
+#: collections/stampcollection.cpp:125 field.cpp:448
 #, fuzzy
 msgid "Image"
 msgstr "Lehekülgede arv"
 
-#: field.cpp:445
+#: field.cpp:449
 msgid "Dependent"
 msgstr ""
 
-#: field.cpp:447
+#: field.cpp:451
 msgid "Date"
 msgstr ""
 
 #: collections/bookcollection.cpp:159 collections/musiccollection.cpp:79
-#: collections/winecollection.cpp:104 field.cpp:448
+#: collections/winecollection.cpp:104 field.cpp:452
 msgid "Rating"
 msgstr "Hinnang"
 
@@ -178,7 +178,7 @@ msgid ""
 "Group"
 msgstr ""
 
-#: groupview.cpp:449 mainwindow.cpp:1532 translators/htmlexporter.cpp:256
+#: groupview.cpp:449 mainwindow.cpp:1536 translators/htmlexporter.cpp:256
 msgid "People"
 msgstr "Inimesed"
 
@@ -221,7 +221,7 @@ msgstr ""
 "Imporditava faili sisu lisatakse käesolevale kogule. See on võimalik "
 "siiski vaid juhul, kui kogu kirjete tüübid kogudes ühtivad."
 
-#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1135
+#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1139
 #: translators/tellicozipexporter.cpp:37
 #, fuzzy
 msgid "*.tc *.bc|Tellico Files (*.tc)"
@@ -248,7 +248,7 @@ msgstr "*.xml|XML failid (*.xml)"
 msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.xml|XML failid (*.xml)"
 
-#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1137
+#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1141
 #: reportdialog.cpp:194 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/htmlexporter.cpp:85 translators/onixexporter.cpp:66
@@ -948,7 +948,7 @@ msgstr "Grupeerimise valikud"
 msgid "Change the grouping of the collection"
 msgstr "Kogu grupeerimise muutmine"
 
-#: filterview.cpp:33 filterview.cpp:78 mainwindow.cpp:607 mainwindow.cpp:622
+#: filterview.cpp:33 filterview.cpp:86 mainwindow.cpp:607 mainwindow.cpp:622
 #, fuzzy
 msgid "Filter"
 msgstr "Kirje kustutamine"
@@ -993,19 +993,19 @@ msgstr "Faili avamine..."
 msgid "Open File"
 msgstr "Faili avamine..."
 
-#: mainwindow.cpp:1104
+#: mainwindow.cpp:1108
 msgid "Saving file..."
 msgstr "Faili salvestamine..."
 
-#: mainwindow.cpp:1133
+#: mainwindow.cpp:1137
 msgid "Saving file with a new filename..."
 msgstr "Faili uue nimega salvestamine..."
 
-#: mainwindow.cpp:1179 mainwindow.cpp:1230
+#: mainwindow.cpp:1183 mainwindow.cpp:1234
 msgid "Printing..."
 msgstr "Printimine..."
 
-#: mainwindow.cpp:1189
+#: mainwindow.cpp:1193
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -1013,104 +1013,104 @@ msgstr ""
 "Kogu filtreeritakse näitamaks ainult piiratud hulka kirjeid. Prinditakse "
 "ainult nähtavad kirjed. Jätkata?"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1218
 msgid "Processing document..."
 msgstr "Dokumendi töötlemine..."
 
-#: mainwindow.cpp:1237
+#: mainwindow.cpp:1241
 msgid "Exiting..."
 msgstr "Väljumine..."
 
-#: mainwindow.cpp:1396
+#: mainwindow.cpp:1400
 #, fuzzy, c-format
 msgid "Total entries: %1"
 msgstr "Kirjete sal&vestamine"
 
-#: mainwindow.cpp:1405
+#: mainwindow.cpp:1409
 #, fuzzy
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 on valitud)"
 
-#: mainwindow.cpp:1408
+#: mainwindow.cpp:1412
 #, fuzzy
 msgid "(%1 filtered)"
 msgstr "(%1 on valitud)"
 
-#: mainwindow.cpp:1411
+#: mainwindow.cpp:1415
 msgid "(%1 selected)"
 msgstr "(%1 on valitud)"
 
-#: mainwindow.cpp:1624
+#: mainwindow.cpp:1628
 #, c-format
 msgid "Print %1"
 msgstr "%1 printimine"
 
-#: mainwindow.cpp:1657
+#: mainwindow.cpp:1661
 #, c-format
 msgid "Page %1"
 msgstr "Lehekülg nr %1"
 
-#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1683
+#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1687
 #: translators/xsltimporter.cpp:56
 #, fuzzy
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico sattus veale XSLT töötluses.\n"
 
-#: entryview.cpp:142 mainwindow.cpp:1684
+#: entryview.cpp:142 mainwindow.cpp:1688
 msgid "Please check your installation."
 msgstr "Palun kontrolli oma installatsiooni."
 
-#: mainwindow.cpp:1778
+#: mainwindow.cpp:1782
 msgid "Importing data..."
 msgstr "Andmete importimine..."
 
-#: mainwindow.cpp:1787 mainwindow.cpp:1793
+#: mainwindow.cpp:1791 mainwindow.cpp:1797
 #, fuzzy
 msgid "Import File"
 msgstr "Faili importimine..."
 
-#: mainwindow.cpp:1887
+#: mainwindow.cpp:1891
 msgid "Exporting data..."
 msgstr "Andmete eksportimine..."
 
-#: mainwindow.cpp:1909
+#: mainwindow.cpp:1913
 msgid "Export As"
 msgstr "Eksport "
 
-#: mainwindow.cpp:1946
+#: mainwindow.cpp:1950
 msgid "String Macros"
 msgstr "Stringimakrod"
 
-#: mainwindow.cpp:1947
+#: mainwindow.cpp:1951
 msgid "Macro"
 msgstr "Makro"
 
-#: mainwindow.cpp:1947
+#: mainwindow.cpp:1951
 msgid "String"
 msgstr "String"
 
-#: mainwindow.cpp:2025
+#: mainwindow.cpp:2029
 #, fuzzy
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "Tellico-l ei õnnestu kirjutada faili '%1'."
 
-#: mainwindow.cpp:2194
+#: mainwindow.cpp:2198
 #, fuzzy
 msgid "Filters"
 msgstr "Kirje kustutamine"
 
-#: mainwindow.cpp:2195
+#: mainwindow.cpp:2199
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
 "rules.</qt>"
 msgstr ""
 
-#: mainwindow.cpp:2215
+#: mainwindow.cpp:2219
 #, fuzzy
 msgid "Loans"
 msgstr "Laenatud"
 
-#: mainwindow.cpp:2216
+#: mainwindow.cpp:2220
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
@@ -1151,7 +1151,7 @@ msgstr "Üle kirjutamine"
 msgid "Delete Filter"
 msgstr "Kustutada väli?"
 
-#: filterview.cpp:80
+#: filterview.cpp:88
 msgid "Filter (Sort by Count)"
 msgstr ""
 
@@ -1182,8 +1182,8 @@ msgstr "Kiirfilter"
 msgid "Delete %1 Field"
 msgstr "Kustutada väli?"
 
-#: commands/renamecollection.cpp:45 tellico_kernel.cpp:284
-#: tellico_kernel.cpp:287
+#: commands/renamecollection.cpp:45 tellico_kernel.cpp:287
+#: tellico_kernel.cpp:290
 msgid "Rename Collection"
 msgstr "Kogu nime muutmine"
 
@@ -2876,7 +2876,7 @@ msgstr "Kogu nime muutmine"
 msgid "Custom Collection"
 msgstr "Uue kogu nimi"
 
-#: loanview.cpp:33 loanview.cpp:79 xslt.cpp:15
+#: loanview.cpp:33 loanview.cpp:87 xslt.cpp:15
 msgid "Borrower"
 msgstr ""
 
@@ -2890,7 +2890,7 @@ msgstr "Märkeruut"
 msgid "Modify Loan..."
 msgstr "Raamatu kirje muutmine"
 
-#: loanview.cpp:81
+#: loanview.cpp:89
 msgid "Borrower (Sort by Count)"
 msgstr ""
 
@@ -3439,17 +3439,17 @@ msgstr ""
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.html|HTML failid (*.html)"
 
-#: tellico_kernel.cpp:245
+#: tellico_kernel.cpp:248
 #, fuzzy
 msgid "Do you really want to delete this filter?"
 msgstr "Kas oled kindel oma soovis kustutada need kirjed?"
 
-#: tellico_kernel.cpp:247
+#: tellico_kernel.cpp:250
 #, fuzzy
 msgid "Delete Filter?"
 msgstr "Kustutada väli?"
 
-#: tellico_kernel.cpp:284 tellico_kernel.cpp:287
+#: tellico_kernel.cpp:287 tellico_kernel.cpp:290
 #, fuzzy
 msgid "New collection name:"
 msgstr "Uue kogu nimi"
@@ -3725,16 +3725,16 @@ msgstr "Faili salvestamine..."
 msgid "(Various)"
 msgstr ""
 
-#: translators/audiofileimporter.cpp:250
+#: translators/audiofileimporter.cpp:254
 #, fuzzy
 msgid "Audio File Options"
 msgstr "Välja valikud"
 
-#: translators/audiofileimporter.cpp:252
+#: translators/audiofileimporter.cpp:256
 msgid "Recursive folder search"
 msgstr ""
 
-#: translators/audiofileimporter.cpp:253
+#: translators/audiofileimporter.cpp:257
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 
@@ -3874,12 +3874,12 @@ msgstr "XSLT"
 msgid "Choose the XSLT file used to transform the Tellico XML data."
 msgstr "Vali palun XSLT fail, mida kasutada Tellico XML andmete muutmiseks."
 
-#: translators/alexandriaimporter.cpp:158
+#: translators/alexandriaimporter.cpp:159
 #, fuzzy
 msgid "Alexandria Options"
 msgstr "Üldised valikud"
 
-#: translators/alexandriaimporter.cpp:159
+#: translators/alexandriaimporter.cpp:160
 msgid "Library:"
 msgstr ""
 
@@ -3955,22 +3955,13 @@ msgstr ""
 
 #: tips.cpp:11
 msgid ""
-"<p>...that you can rename a collection by right-clicking on\n"
-"the top collection item in the left column.</p>\n"
-msgstr ""
-"<p>... et saad kollektsiooni nime muuta tehes\n"
-"hiire parema klahviga klõpsu kollektsiooni ülemise nimetuse vasakul "
-"tulbal?</p>\n"
-
-#: tips.cpp:16
-msgid ""
 "<p>...that you can change which fields are shown in the list view by\n"
 "right-clicking on the column header.\n"
 msgstr ""
 "<p>...et saad muuta nimekirjas näidatavaid välju tehes hiire\n"
 "parema klahviga klõpsu tulba pealdisel?\n"
 
-#: tips.cpp:21
+#: tips.cpp:16
 msgid ""
 "<p>...that you can add, edit, or modify the fields in the collection using\n"
 "the Field Editor. The arrow buttons below the field list can be used to "
@@ -3983,7 +3974,7 @@ msgstr ""
 "muuta väljade asetust nimekirjas, mis omakorda mõjutab kirje\n"
 "paiknemist redaktoris.</p>\n"
 
-#: tips.cpp:28
+#: tips.cpp:23
 #, fuzzy
 msgid ""
 "<p>...that if you want to filter by a Checkbox field, a value of\n"
@@ -4001,7 +3992,7 @@ msgstr ""
 "\"Ulme\" (jutumärkideta) ja teiseks reegliks \"Loetud\" \"ei sisalda\"\n"
 " \"tõene\" (jutumärkideta).</p>\n"
 
-#: tips.cpp:38
+#: tips.cpp:33
 msgid ""
 "<p>...that if a non-word character is used in the Quick Filter, the text is\n"
 "interpreted as a regular expression.</p>\n"
@@ -4014,7 +4005,7 @@ msgstr ""
 "\"weber|bujold\"\n"
 "(jutumärkideta) filtriboksi.</p>\n"
 
-#: tips.cpp:45
+#: tips.cpp:40
 msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
@@ -4022,7 +4013,7 @@ msgstr ""
 "<p>... et saad redigeerida korraga rohkem kui ühte kirjet. Selleks\n"
 "hoia all Shift või Ctrl klahvi ning vali kirjed, mida soovid muuta.</p>\n"
 
-#: tips.cpp:50
+#: tips.cpp:45
 msgid ""
 "<p>...that you can convert an existing book collection to a bibliography,\n"
 "which can then be exported to bibtex or Bibtexml format.</p>\n"
@@ -4030,7 +4021,7 @@ msgstr ""
 "<p>... et saad teisendada olemasoleva raamatukollektsiooni bibliograafiaks,\n"
 "mida omakorda on võimalik eksportida Bibtex või Bibtexml vormingusse.</p>\n"
 
-#: tips.cpp:55
+#: tips.cpp:50
 msgid ""
 "<p>...that you can add, edit, and delete string macros for "
 "bibliographies.</p>\n"
@@ -4038,7 +4029,7 @@ msgstr ""
 "<p>... et saad lisada, redigeerida ja kustutada bibliograafiate "
 "srtingimakrosid.</p>\n"
 
-#: tips.cpp:59
+#: tips.cpp:54
 msgid ""
 "<p>...that if more than one field is formatted as a name, then an "
 "additional\n"
@@ -4052,7 +4043,7 @@ msgstr ""
 "redigeerijaid\n"
 "sorteerida või printida koos jne.</p>\n"
 
-#: tips.cpp:65
+#: tips.cpp:60
 #, fuzzy
 msgid ""
 "<p>...that you can modify the appearance of the printed output by modifying\n"
@@ -4064,7 +4055,7 @@ msgstr ""
 "<tt>tellico-printing.xsl</tt>.\n"
 "</p>\n"
 
-#: tips.cpp:71
+#: tips.cpp:66
 #, fuzzy
 msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
@@ -4074,18 +4065,18 @@ msgstr ""
 "mille väljundiks\n"
 "on tavaline Tellico XML fail.</p>\n"
 
-#: tips.cpp:76
+#: tips.cpp:71
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
 msgstr ""
 
-#: tips.cpp:80
+#: tips.cpp:75
 msgid ""
 "<p>...that you can add HTML tags to any Paragraph field for formatting, such "
 "as\n"
 "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 msgstr ""
 
-#: tips.cpp:85
+#: tips.cpp:80
 msgid ""
 "<p>...that in the Detailed View, you can press a letter on the\n"
 "keyboard to skip to the next entry that starts with that letter.</p>\n"
@@ -4182,6 +4173,14 @@ msgstr "Kirjete sal&vestamine"
 #: xslt.cpp:36
 msgid "Distinct values: "
 msgstr ""
+
+#~ msgid ""
+#~ "<p>...that you can rename a collection by right-clicking on\n"
+#~ "the top collection item in the left column.</p>\n"
+#~ msgstr ""
+#~ "<p>... et saad kollektsiooni nime muuta tehes\n"
+#~ "hiire parema klahviga klõpsu kollektsiooni ülemise nimetuse vasakul "
+#~ "tulbal?</p>\n"
 
 #, fuzzy
 #~ msgid "Total number of images:"

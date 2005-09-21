@@ -51,7 +51,7 @@ public:
 
   void setURL(const KURL& url_) { m_url = url_; }
   void setEntries(const Data::EntryVec& entries) { m_entries = entries; }
-  void setOptions(int options) { m_options = options; }
+  void setOptions(int options) { m_options = options; reset(); }
 
   virtual QString formatString() const = 0;
   virtual QString fileFilter() const = 0;
@@ -63,6 +63,11 @@ public:
    * Do the export
    */
   virtual bool exec() = 0;
+  /**
+   * If changing options in the exporter should cause member variables to reset, implement
+   * that here
+   */
+  virtual void reset() {}
 
   virtual QWidget* widget(QWidget* parent, const char* name=0) = 0;
   virtual void readOptions(KConfig* config) = 0;

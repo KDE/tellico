@@ -75,6 +75,7 @@ public:
    * Read contents of a file into a string.
    *
    * @param url The URL of the file
+   * @param quiet whether the importer should report errors or not
    * @return A string containing the contents of a file
    */
   static QString readTextFile(const KURL& url, bool quiet=false);

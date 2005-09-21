@@ -317,10 +317,10 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
   // also need to add required fields
   FieldVec vec = defaultFields();
   for(FieldVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
-    if(coll->fieldByName(it->name()) == 0 && (it->flags() & Field::NoDelete)) {
+    if(!coll->hasField(it->name()) && (it->flags() & Field::NoDelete)) {
       // but don't add a Bibtex Key if there's already a bibtex-id
       if(it->property(bibtex) != Latin1Literal("key")
-         || coll->fieldByName(QString::fromLatin1("bibtex-id")) == 0) {
+         || !coll->hasField(QString::fromLatin1("bibtex-id"))) {
         coll->addField(it);
       }
     }

@@ -586,7 +586,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 
   // default button is enabled only if default collection contains the field
   if(m_defaultCollection) {
-    bool hasField = (m_defaultCollection->fieldByName(field->name()) != 0);
+    bool hasField = m_defaultCollection->hasField(field->name());
     actionButton(KDialogBase::Default)->setEnabled(hasField);
   }
 
@@ -608,7 +608,7 @@ void CollectionFieldsDialog::updateField() {
     if(name.isEmpty()) { // might end up with empty string
       name = QString::fromLatin1("custom") + QString::number(m_newFields.count()+1);
     }
-    while(m_coll->fieldByName(name)) { // ensure name uniqueness
+    while(m_coll->hasField(name)) { // ensure name uniqueness
       name += QString::fromLatin1("-new");
     }
     field->setName(name);

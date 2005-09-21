@@ -279,7 +279,7 @@
      </th>
      <xsl:choose>
       <xsl:when test="tc:column">
-       <td class="fieldValue" width="100%">
+       <td class="fieldValue">
         <xsl:value-of select="tc:column[1]"/>
        </td>
        <td class="fieldValue" align="right">

@@ -30,6 +30,7 @@ namespace Tellico {
     class Collection;
   }
   class XSLTHandler;
+
   namespace Export {
 
 /**
@@ -42,6 +43,7 @@ public:
   ~HTMLExporter();
 
   virtual bool exec();
+  virtual void reset();
   virtual QString formatString() const;
   virtual QString fileFilter() const;
 

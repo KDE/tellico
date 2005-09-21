@@ -41,7 +41,7 @@ void AddLoans::execute() {
   bool wasEmpty = m_borrower->isEmpty();
 
   // if there's no loaned field, we'll add one
-  bool loanExisted = m_loans.begin()->entry()->collection()->fieldByName(QString::fromLatin1("loaned"));
+  bool loanExisted = m_loans.begin()->entry()->collection()->hasField(QString::fromLatin1("loaned"));
   m_addedLoanField = false; // assume we didn't add the field yet
 
   // add the loans to the borrower

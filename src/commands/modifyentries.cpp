@@ -40,7 +40,7 @@ void ModifyEntries::execute() {
   // loans expose a field named "loaned", and the user might modify that without
   // checking in the loan, so verify that. Heavy-handed, yes...
   const QString loaned = QString::fromLatin1("loaned");
-  bool hasLoanField = (m_coll->fieldByName(loaned) != 0);
+  bool hasLoanField = m_coll->hasField(loaned);
   for(Data::EntryVecIt entry = m_entries.begin(); entry != m_entries.end(); ++entry) {
     if(hasLoanField && entry->field(loaned).isEmpty()) {
       Data::EntryVec notLoaned;

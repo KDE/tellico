@@ -78,7 +78,7 @@ bool ListView::isSelectable(ListViewItem* item_) const {
   }
 
   // not allowed is something other than an entry is selected and current is entry
-  if(!m_selectedItems.getFirst()->isEntryItem() && item_->isEntryItem()) {
+  if(m_selectedItems.getFirst()->isEntryItem() != item_->isEntryItem()) {
     return false;
   }
 
@@ -144,6 +144,9 @@ void ListView::slotSelectionChanged() {
   if(item->isEntryItem()) {
     // now just iterate over the selected items, making a list of entries
     for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
+      if(!it.current()->isEntryItem()) {
+        continue;
+      }
       if(!entries.contains(static_cast<EntryItem*>(it.current())->entry())) {
         entries.append(static_cast<EntryItem*>(it.current())->entry());
       }

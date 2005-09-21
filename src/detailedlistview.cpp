@@ -103,7 +103,7 @@ void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
   QStringList newCols;
   QValueList<int> newWidths, removeCols;
   for(unsigned i = 0; i < colNames.count(); ++i) {
-    if(coll_->fieldByName(colNames[i]) != 0) {
+    if(coll_->hasField(colNames[i])) {
       newCols += colNames[i];
       newWidths += colWidths[i];
     } else {

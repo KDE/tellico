@@ -29,6 +29,10 @@ namespace Tellico {
   typedef Vector<Filter> FilterVec;
 
   namespace Data {
+    class Collection;
+    typedef KSharedPtr<Collection> CollPtr;
+    typedef Vector<Collection> CollVec;
+
     class Field;
     typedef KSharedPtr<Field> FieldPtr;
     typedef KSharedPtr<const Field> ConstFieldPtr;

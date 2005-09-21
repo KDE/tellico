@@ -133,7 +133,7 @@ QString BibtexHandler::importText(char* text_) {
     loadTranslationMaps();
   }
 
-  QString str = QString::fromLatin1(text_);
+  QString str = QString::fromUtf8(text_);
   for(StringListMap::Iterator it = s_utf8LatexMap->begin(); it != s_utf8LatexMap->end(); ++it) {
     for(QStringList::Iterator sit = it.data().begin(); sit != it.data().end(); ++sit) {
       str.replace(*sit, it.key());

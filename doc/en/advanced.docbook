@@ -69,7 +69,7 @@ Finally, if the current collection is a bibliography, calling <command>bibtexKey
 <title>DCOP Examples</title>
 
 <para>
-Here are some examples for scripting &appname; using the &DCOP; interface. Since the <emphasis>pid</emphasis> must be know, the easiest way to include that in the shell command is like so: <userinput>dcop $(dcop | grep tellico) tellico</userinput>.
+Here are some examples for scripting &appname; using the &DCOP; interface. Since the <emphasis>pid</emphasis> must be known, the easiest way to include that in the shell command is like so: <userinput>dcop $(dcop | grep tellico) tellico</userinput>.
 </para>
 
 <screen width="40">

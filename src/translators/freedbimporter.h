@@ -49,8 +49,10 @@ private slots:
   void slotClicked(int id);
 
 private:
+#if HAVE_KCDDB
   Data::Collection* readCDROM();
   Data::Collection* readCache();
+#endif
 
   static QValueList<uint> FreeDBImporter::offsetList(QCString drive);
 

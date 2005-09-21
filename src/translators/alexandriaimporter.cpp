@@ -127,6 +127,7 @@ Tellico::Data::Collection* AlexandriaImporter::collection() {
       } else if(alexField == Latin1Literal("notes")) {
         entry->setField(comments, alexValue);
 
+      // now try by name then title
       } else if(m_coll->fieldByName(alexField)) {
         entry->setField(alexField, alexValue);
 

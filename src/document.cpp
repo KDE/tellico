@@ -370,7 +370,7 @@ void Document::checkOutEntry(Data::Entry* entry_) {
   }
 
   const QString loaned = QString::fromLatin1("loaned");
-  if(!m_coll->fieldByName(loaned)) {
+  if(!m_coll->hasField(loaned)) {
     Field* f = new Field(loaned, i18n("Loaned"), Field::Bool);
     f->setFlags(Field::AllowGrouped);
     f->setCategory(i18n("Personal"));
@@ -386,7 +386,7 @@ void Document::checkInEntry(Data::Entry* entry_) {
   }
 
   const QString loaned = QString::fromLatin1("loaned");
-  if(!m_coll->fieldByName(loaned)) {
+  if(!m_coll->hasField(loaned)) {
     return;
   }
   entry_->setField(loaned, QString::null);

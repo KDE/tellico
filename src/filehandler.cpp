@@ -91,7 +91,7 @@ FileHandler::FileRef* FileHandler::fileRef(const KURL& url_, bool quiet_) {
   return new FileRef(url_, quiet_);
 }
 
-QString FileHandler::readTextFile(const KURL& url_, bool quiet_) {
+QString FileHandler::readTextFile(const KURL& url_, bool quiet_/*=false*/) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QString::null;
