@@ -306,6 +306,8 @@ QStringList CSVImporter::splitLine(const QString& line_) {
     } else if(tmp.startsWith(s_quote)) {
       str = tmp.mid(1, tmp.length()-2);
     }
+  } else {
+    str += tmp;
   }
 
   str.replace(dq, s_quote);

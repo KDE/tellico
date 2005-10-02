@@ -51,8 +51,8 @@ LoanDialog::LoanDialog(Data::Loan* loan_, QWidget* parent_, const char* name_/*=
 
   m_borrowerEdit->setText(m_loan->borrower()->name());
   m_loanDate->setDate(m_loan->loanDate());
-  m_dueDate->setDate(m_loan->dueDate());
   if(m_loan->dueDate().isValid()) {
+    m_dueDate->setDate(m_loan->dueDate());
     m_addEvent->setEnabled(true);
     if(m_loan->inCalendar()) {
       m_addEvent->setChecked(true);

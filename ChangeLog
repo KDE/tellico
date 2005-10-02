@@ -1,3 +1,21 @@
+2005-10-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.0.2.
+	* Updated IMDB fetcher.
+
+2005-09-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with auto-detecting MARC encoding for z39.50 import.
+
+2005-09-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with CSV importer not properly parsing some non-CSV files.
+	* Fixed bug with entry selection in icon view.
+
+2005-09-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with showing invalid loan due date.
+
 2005-09-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.0.1.

@@ -322,11 +322,14 @@ void GroupView::addCollection(Data::Collection* coll_) {
 
 void GroupView::setGroupField(const QString& groupField_) {
 //  kdDebug() << "GroupView::setGroupField - " << groupField_ << endl;
-  if(!m_coll || groupField_.isEmpty() || groupField_ == m_groupBy) {
+  if(groupField_.isEmpty() || groupField_ == m_groupBy) {
     return;
   }
 
   m_groupBy = groupField_;
+  if(!m_coll) {
+    return; // can't do anything yet, but still need to set the variable
+  }
   if((m_coll->hasField(groupField_) && m_coll->fieldByName(groupField_)->formatFlag() == Data::Field::FormatName)
      || groupField_ == Data::Collection::s_peopleGroupName) {
     m_groupOpenPixmap = UserIcon(QString::fromLatin1("person-open"));

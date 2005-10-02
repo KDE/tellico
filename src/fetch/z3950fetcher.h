@@ -84,6 +84,8 @@ public:
     GUI::LineEdit* m_userEdit;
     GUI::LineEdit* m_passwordEdit;
     KComboBox* m_charSetCombo;
+    // have to remember syntax
+    QString m_syntax;
   };
   friend class ConfigWidget;
   static Z3950Fetcher* libraryOfCongress(QObject* parent);

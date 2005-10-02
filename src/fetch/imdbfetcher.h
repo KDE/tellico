@@ -77,7 +77,8 @@ private:
   static void initRegExps();
   static QRegExp* s_tagRx;
   static QRegExp* s_anchorRx;
-  static QRegExp* s_anchorRx2;
+  static QRegExp* s_anchorTitleRx;
+  static QRegExp* s_anchorNameRx;
   static QRegExp* s_titleRx;
   static void doTitle(const QString& s, Data::Entry* e);
   static void doRunningTime(const QString& s, Data::Entry* e);

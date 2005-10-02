@@ -371,7 +371,7 @@ void Z3950Fetcher::process() {
   ZOOM_resultset_option_set(resultSet,   "elementSetName",        m_esn.local8Bit());
   ZOOM_resultset_option_set(resultSet,   "count",                 QCString().setNum(m_max));
   if(!m_syntax.isEmpty()) {
-    ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", m_syntax.utf8());
+    ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", m_syntax.local8Bit());
   }
 //  ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", "sutrs");
 
@@ -388,7 +388,6 @@ void Z3950Fetcher::process() {
     return;
   }
 
-  QStringList isbnFoundList;
   const size_t size = ZOOM_resultset_size(resultSet);
   const size_t total = KMIN(size, m_max);
 
@@ -428,12 +427,16 @@ void Z3950Fetcher::process() {
   }
 
   // save syntax change for next time
-  if(m_syntax != newSyntax && !m_syntax.isEmpty() && m_config) {
+  if(m_syntax != newSyntax) {
     m_syntax = newSyntax;
-    KConfigGroupSaver groupSaver(m_config, m_configGroup);
-    m_config->writeEntry("Syntax", m_syntax);
+    if(m_config) {
+      KConfigGroupSaver groupSaver(m_config, m_configGroup);
+      m_config->writeEntry("Syntax", m_syntax);
+      m_config->sync();
+    }
   }
 
+  QStringList isbnFoundList;
   for(size_t i = 0; i < total && m_started; ++i) {
     ZOOM_record rec = ZOOM_resultset_record(resultSet, i);
     if(!rec) {
@@ -481,7 +484,7 @@ void Z3950Fetcher::process() {
 #endif
     // assume always utf-8
     QString str = (m_syntax == Latin1Literal("unimarc")) ? s_UNIMARCXMLHandler->applyStylesheet(data)
-                                                       : s_MARC21XMLHandler->applyStylesheet(data);
+                                                         : s_MARC21XMLHandler->applyStylesheet(data);
 #if 0
     kdWarning() << "Remove debug from z3950fetcher.cpp" << endl;
     QFile f2(QString::fromLatin1("/tmp/mods.xml"));
@@ -566,7 +569,6 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(this, 7, 2);
   l->setSpacing(4);
-//  l->setAutoAdd(true);
 
   QLabel* label = new QLabel(i18n("&Host: "), this);
   l->addWidget(label, 0, 0);
@@ -648,6 +650,10 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
     m_userEdit->setText(fetcher_->m_user);
     m_passwordEdit->setText(fetcher_->m_password);
     m_charSetCombo->setCurrentText(fetcher_->m_sourceCharSet);
+    // the syntax is detected automatically by the fetcher
+    // since the config group gets deleted in the config file,
+    // the value needs to be retained here
+    m_syntax = fetcher_->m_syntax;
   }
 }
 
@@ -665,11 +671,20 @@ void Z3950Fetcher::ConfigWidget::saveConfig(KConfig* config_) {
     config_->writeEntry("Database", s);
   }
   s = m_charSetCombo->currentText();
-  config_->writeEntry("Charset", s); // an empty charset is ok
+  if(!s.isEmpty()) {
+    config_->writeEntry("Charset", s);
+  }
   s = m_userEdit->text();
-  config_->writeEntry("User", s); // empty user is ok
+  if(!s.isEmpty()) {
+    config_->writeEntry("User", s);
+  }
   s = m_passwordEdit->text();
-  config_->writeEntry("Password", s); // empty password is ok
+  if(!s.isEmpty()) {
+    config_->writeEntry("Password", s);
+  }
+  if(!m_syntax.isEmpty()) {
+    config_->writeEntry("Syntax", m_syntax);
+  }
   slotSetModified(false);
 }
 

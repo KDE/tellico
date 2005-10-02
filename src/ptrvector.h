@@ -271,10 +271,10 @@ bool Tellico::PtrVector<T>::remove(T* t) {
   if(ptr == m_baseVector.end()) {
     return false;
   }
-  m_baseVector.erase(ptr);
   if(m_autoDelete) {
     delete *ptr;
   }
+  m_baseVector.erase(ptr);
   return true;
 }
 
@@ -287,10 +287,10 @@ bool Tellico::PtrVector<T>::remove(Iterator it) {
   if(ptr == m_baseVector.end()) {
     return false;
   }
-  m_baseVector.erase(ptr);
   if(m_autoDelete) {
     delete *ptr;
   }
+  m_baseVector.erase(ptr);
   return true;
 }
 

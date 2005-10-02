@@ -6,7 +6,7 @@
 **
 *****************************************************************************/
 
-#include "/home/robby/projects/tellico/src/dcopinterface.h"
+#include "/home/robby/projects/tellico-1.0.x/src/dcopinterface.h"
 
 #include <kdatastream.h>
 #include <qasciidict.h>

@@ -204,8 +204,13 @@ void EntryIconViewItem::setSelected(bool s_) {
 
 void EntryIconViewItem::setSelected(bool s_, bool cb_) {
   EntryIconView* v = static_cast<EntryIconView*>(iconView());
-  v->updateSelected(this, s_);
-  KIconViewItem::setSelected(s_, cb_);
+  if(!v) {
+    return;
+  }
+  if(s_ != isSelected()) {
+    v->updateSelected(this, s_);
+    KIconViewItem::setSelected(s_, cb_);
+  }
 }
 
 #include "entryiconview.moc"

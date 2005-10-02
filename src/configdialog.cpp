@@ -499,6 +499,13 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   // now update total number of sources
   config_->setGroup("Data Sources");
   config_->writeEntry("Sources Count", count);
+  // and purge old config groups
+  QString group = QString::fromLatin1("Data Source %1").arg(count);
+  while(config_->hasGroup(group)) {
+    config_->deleteGroup(group);
+    ++count;
+    group = QString::fromLatin1("Data Source %1").arg(count);
+  }
 
   config_->sync();
 

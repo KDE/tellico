@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico.hu\n"
-"POT-Creation-Date: 2005-09-14 19:42-0700\n"
+"POT-Creation-Date: 2005-09-28 05:55-0700\n"
 "PO-Revision-Date: 2003-03-17 16:11+0100\n"
 "Last-Translator: Marcel Hilzinger <hili@suselinux.hu>\n"
 "Language-Team: hungarian <kde-lista@sophia.jpte.hu>\n"
@@ -15,6 +15,1946 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0\n"
+
+#: gui/stringmapdialog.cpp:57
+#, fuzzy
+msgid "&Set"
+msgstr "Mentés másként..."
+
+#: gui/kwidgetlister.cpp:56
+msgid ""
+"_: more widgets\n"
+"More"
+msgstr ""
+
+#: gui/kwidgetlister.cpp:59
+msgid ""
+"_: fewer widgets\n"
+"Fewer"
+msgstr ""
+
+#: gui/kwidgetlister.cpp:65
+msgid ""
+"_: clear widgets\n"
+"Clear"
+msgstr ""
+
+#: gui/imagewidget.cpp:48
+#, fuzzy
+msgid "Select Image..."
+msgstr "Válasszon XSLT fájlt..."
+
+#: commands/modifyentries.cpp:72
+#, fuzzy
+msgid "Save Entries"
+msgstr "Kiválasztott mezők"
+
+#: commands/addentries.cpp:57 commands/modifyentries.cpp:73
+#, fuzzy, c-format
+msgid ""
+"_: Save (Entry Title)\n"
+"Save %1"
+msgstr "Kiválasztott mezők"
+
+#: commands/renamecollection.cpp:45 tellico_kernel.cpp:287
+#: tellico_kernel.cpp:290
+#, fuzzy
+msgid "Rename Collection"
+msgstr "Gyűjtemény átnevezése..."
+
+#: commands/fieldcommand.cpp:104
+#, fuzzy
+msgid "Add %1 Field"
+msgstr "Minden mező"
+
+#: commands/fieldcommand.cpp:106
+#, fuzzy
+msgid "Modify %1 Field"
+msgstr "Könyv módosítása"
+
+#: commands/fieldcommand.cpp:108
+#, fuzzy
+msgid "Delete %1 Field"
+msgstr "Kiválasztott mezők"
+
+#: commands/filtercommand.cpp:98
+#, fuzzy
+msgid "Add Filter"
+msgstr "Fájl megnyitása..."
+
+#: commands/filtercommand.cpp:100 filterdialog.cpp:258 filterview.cpp:42
+msgid "Modify Filter"
+msgstr ""
+
+#: commands/filtercommand.cpp:102 filterview.cpp:44
+#, fuzzy
+msgid "Delete Filter"
+msgstr "Kiválasztott mezők"
+
+#: commands/modifyloans.cpp:75 loandialog.cpp:46
+#, fuzzy
+msgid "Modify Loan"
+msgstr "Könyv módosítása"
+
+#: commands/addloans.cpp:104
+#, fuzzy
+msgid "Check-out Items"
+msgstr "Könyv törlése"
+
+#: commands/addloans.cpp:105
+#, fuzzy, c-format
+msgid ""
+"_: Check-out (Entry Title)\n"
+"Check-out %1"
+msgstr "Kiválasztott mezők"
+
+#: commands/removeentries.cpp:52
+#, fuzzy
+msgid "Delete Entries"
+msgstr "Kiválasztott mezők"
+
+#: commands/removeentries.cpp:53
+#, fuzzy, c-format
+msgid ""
+"_: Delete (Entry Title)\n"
+"Delete %1"
+msgstr "Kiválasztott mezők"
+
+#: commands/collectioncommand.cpp:93
+#, fuzzy
+msgid "Append Collection"
+msgstr "Gyűjtemény átnevezése..."
+
+#: commands/collectioncommand.cpp:95
+#, fuzzy
+msgid "Merge Collection"
+msgstr "BCCollection"
+
+#: commands/collectioncommand.cpp:97
+#, fuzzy
+msgid "Replace Collection"
+msgstr "Gyűjtemény átnevezése..."
+
+#: commands/reorderfields.cpp:51
+#, fuzzy
+msgid "Reorder Fields"
+msgstr "Kiválasztott mezők"
+
+#: commands/removeloans.cpp:75
+#, fuzzy
+msgid "Check-in Entries"
+msgstr "Könyv törlése"
+
+#: commands/removeloans.cpp:76
+#, fuzzy, c-format
+msgid ""
+"_: Check-in (Entry Title)\n"
+"Check-in %1"
+msgstr "Kiválasztott mezők"
+
+#: collectionfactory.cpp:79 collectionfactory.cpp:93
+#: collections/bibtexcollection.cpp:27 collections/bibtexcollection.cpp:62
+#: collections/bibtexcollection.cpp:92 collections/bookcollection.cpp:20
+#: collections/bookcollection.cpp:42 collections/cardcollection.cpp:20
+#: collections/coincollection.cpp:20 collections/comicbookcollection.cpp:20
+#: collections/gamecollection.cpp:20 collections/gamecollection.cpp:40
+#: collections/musiccollection.cpp:20 collections/stampcollection.cpp:20
+#: collections/videocollection.cpp:20 collections/videocollection.cpp:42
+#: collections/winecollection.cpp:20 configdialog.cpp:151 field.cpp:49
+#: field.cpp:81
+msgid "General"
+msgstr "Általános"
+
+#: collections/bibtexcollection.cpp:28 collections/bookcollection.cpp:21
+#: collections/comicbookcollection.cpp:21 translators/risimporter.cpp:256
+#, fuzzy
+msgid "Publishing"
+msgstr "Kiadói adatok"
+
+#: collections/bookcollection.cpp:22 collections/comicbookcollection.cpp:22
+#: translators/risimporter.cpp:250
+#, fuzzy
+msgid "Classification"
+msgstr "Osztályozás"
+
+#: collections/bookcollection.cpp:23 collections/cardcollection.cpp:21
+#: collections/coincollection.cpp:21 collections/comicbookcollection.cpp:23
+#: collections/gamecollection.cpp:21 collections/musiccollection.cpp:21
+#: collections/stampcollection.cpp:22 collections/videocollection.cpp:23
+#: collections/winecollection.cpp:21 document.cpp:376
+#, fuzzy
+msgid "Personal"
+msgstr "Személyes"
+
+#: collections/comicbookcollection.cpp:29
+#, fuzzy
+msgid "Comics"
+msgstr "Megjegyzések"
+
+#: collections/comicbookcollection.cpp:30
+#, fuzzy
+msgid "My Comic Books"
+msgstr "Könyvgyűjteményem"
+
+#: collectionfactory.cpp:78 collectionfactory.cpp:92
+#: collections/bibtexcollection.cpp:60 collections/bookcollection.cpp:41
+#: collections/cardcollection.cpp:39 collections/coincollection.cpp:39
+#: collections/comicbookcollection.cpp:41 collections/gamecollection.cpp:39
+#: collections/stampcollection.cpp:40 collections/videocollection.cpp:41
+#: collections/winecollection.cpp:39 fetch/fetchmanager.cpp:45
+#: fetchdialog.cpp:139
+msgid "Title"
+msgstr "Cím"
+
+#: collections/bookcollection.cpp:47 collections/comicbookcollection.cpp:47
+msgid "Subtitle"
+msgstr "Alcím"
+
+#: collections/comicbookcollection.cpp:52 collections/videocollection.cpp:121
+#, fuzzy
+msgid "Writer"
+msgstr "Könyv törlése"
+
+#: collections/comicbookcollection.cpp:58 collections/musiccollection.cpp:52
+msgid "Artist"
+msgstr "Előadó"
+
+#: collections/bibtexcollection.cpp:198 collections/bookcollection.cpp:128
+#: collections/cardcollection.cpp:73 collections/comicbookcollection.cpp:64
+msgid "Series"
+msgstr "Sorozat"
+
+#: collections/comicbookcollection.cpp:70
+msgid "Issue"
+msgstr ""
+
+#: collections/bibtexcollection.cpp:124 collections/bookcollection.cpp:75
+#: collections/comicbookcollection.cpp:75 collections/gamecollection.cpp:66
+msgid "Publisher"
+msgstr "Kiadó"
+
+#: collections/bibtexcollection.cpp:137 collections/bookcollection.cpp:81
+#: collections/comicbookcollection.cpp:81
+msgid "Edition"
+msgstr "Kiadás"
+
+#: collections/bookcollection.cpp:92 collections/comicbookcollection.cpp:87
+msgid "Publication Year"
+msgstr "Kiadás éve"
+
+#: collections/bibtexcollection.cpp:144 collections/bookcollection.cpp:107
+#: collections/comicbookcollection.cpp:92
+msgid "Pages"
+msgstr "Oldalak"
+
+#: collections/coincollection.cpp:67 collections/comicbookcollection.cpp:96
+#: collections/stampcollection.cpp:57 collections/winecollection.cpp:75
+#, fuzzy
+msgid "Country"
+msgstr "Oszlopok megtekintése"
+
+#: collections/bookcollection.cpp:111 collections/comicbookcollection.cpp:102
+msgid "Language"
+msgstr "Nyelv"
+
+#: collections/bookcollection.cpp:116 collections/comicbookcollection.cpp:108
+#: collections/gamecollection.cpp:55 collections/musiccollection.cpp:69
+#: collections/videocollection.cpp:69
+msgid "Genre"
+msgstr "Fajta"
+
+#: collections/bookcollection.cpp:123 collections/cardcollection.cpp:102
+#: collections/comicbookcollection.cpp:114 collections/musiccollection.cpp:101
+#: translators/risimporter.cpp:248
+msgid "Keywords"
+msgstr "Kulcsszavak"
+
+#: collections/comicbookcollection.cpp:122
+msgid ""
+"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
+"Good,Good,Fair,Poor\n"
+"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
+msgstr ""
+
+#: collections/bookcollection.cpp:139 collections/comicbookcollection.cpp:124
+#: collections/stampcollection.cpp:21
+msgid "Condition"
+msgstr "Állapot"
+
+#: collections/bookcollection.cpp:66 collections/cardcollection.cpp:84
+#: collections/coincollection.cpp:103 collections/comicbookcollection.cpp:128
+#: collections/gamecollection.cpp:100 collections/musiccollection.cpp:84
+#: collections/stampcollection.cpp:106 collections/videocollection.cpp:190
+#: collections/winecollection.cpp:81
+msgid "Purchase Date"
+msgstr "Vásárlás dátuma"
+
+#: collections/bookcollection.cpp:71 collections/cardcollection.cpp:89
+#: collections/coincollection.cpp:108 collections/comicbookcollection.cpp:133
+#: collections/gamecollection.cpp:109 collections/musiccollection.cpp:93
+#: collections/stampcollection.cpp:111 collections/videocollection.cpp:199
+#: collections/winecollection.cpp:86
+msgid "Purchase Price"
+msgstr "Vásárlási ár"
+
+#: collections/bookcollection.cpp:143 collections/comicbookcollection.cpp:137
+msgid "Signed"
+msgstr "Dedikált"
+
+#: collections/bookcollection.cpp:151 collections/cardcollection.cpp:98
+#: collections/coincollection.cpp:118 collections/comicbookcollection.cpp:141
+#: collections/gamecollection.cpp:105 collections/musiccollection.cpp:89
+#: collections/stampcollection.cpp:121 collections/videocollection.cpp:195
+#: collections/winecollection.cpp:109
+msgid "Gift"
+msgstr "Ajándék"
+
+#: collections/bookcollection.cpp:155 collections/comicbookcollection.cpp:145
+#: collections/gamecollection.cpp:113 collections/musiccollection.cpp:97
+#: collections/videocollection.cpp:203 document.cpp:374
+msgid "Loaned"
+msgstr "Kölcsön adva"
+
+#: collections/bookcollection.cpp:164 collections/comicbookcollection.cpp:149
+#, fuzzy
+msgid "Front Cover"
+msgstr "&Exportálás"
+
+#: collections/bookcollection.cpp:167 collections/cardcollection.cpp:117
+#: collections/coincollection.cpp:128 collections/comicbookcollection.cpp:152
+#: collections/gamecollection.cpp:120 collections/musiccollection.cpp:109
+#: collections/stampcollection.cpp:128 collections/videocollection.cpp:210
+#: collections/winecollection.cpp:116
+msgid "Comments"
+msgstr "Megjegyzések"
+
+#: collections/stampcollection.cpp:28
+msgid "Stamps"
+msgstr ""
+
+#: collections/stampcollection.cpp:29
+#, fuzzy
+msgid "My Stamps"
+msgstr "Videó gyűjteményem"
+
+#: collections/gamecollection.cpp:88 collections/stampcollection.cpp:46
+#: fetchdialog.cpp:140
+msgid "Description"
+msgstr ""
+
+#: collections/coincollection.cpp:51 collections/stampcollection.cpp:52
+#, fuzzy
+msgid "Denomination"
+msgstr "BCCollection"
+
+#: collections/stampcollection.cpp:63
+msgid "Issue Year"
+msgstr ""
+
+#: collections/stampcollection.cpp:68 collections/videocollection.cpp:172
+#, fuzzy
+msgid "Color"
+msgstr "&Exportálás"
+
+#: collections/stampcollection.cpp:73
+msgid "Scott#"
+msgstr ""
+
+#: collections/stampcollection.cpp:80
+msgid ""
+"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
+"Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
+msgstr ""
+
+#: collections/coincollection.cpp:88 collections/stampcollection.cpp:82
+#, fuzzy
+msgid "Grade"
+msgstr "Fajta"
+
+#: collections/stampcollection.cpp:87
+msgid "Cancelled"
+msgstr ""
+
+#: collections/stampcollection.cpp:91
+#, fuzzy
+msgid "Hinged"
+msgstr "Dedikált"
+
+#: collections/stampcollection.cpp:96
+#, fuzzy
+msgid "Centering"
+msgstr "Értékelés"
+
+#: collections/stampcollection.cpp:101
+msgid "Gummed"
+msgstr ""
+
+#: collections/cardcollection.cpp:93 collections/coincollection.cpp:112
+#: collections/stampcollection.cpp:115 collections/winecollection.cpp:90
+#, fuzzy
+msgid "Location"
+msgstr "BCCollection"
+
+#: collections/stampcollection.cpp:125 field.cpp:448
+#, fuzzy
+msgid "Image"
+msgstr "Oldalak"
+
+#: collections/coincollection.cpp:27
+#, fuzzy
+msgid "Coins"
+msgstr "Megjegyzések"
+
+#: collections/coincollection.cpp:28
+#, fuzzy
+msgid "My Coins"
+msgstr "Dalgyűjteményem"
+
+#: collections/coincollection.cpp:45 collections/winecollection.cpp:70
+#, fuzzy
+msgid "Type"
+msgstr "Sorozatszám"
+
+#: collections/bibtexcollection.cpp:149 collections/cardcollection.cpp:68
+#: collections/coincollection.cpp:56 collections/musiccollection.cpp:64
+msgid "Year"
+msgstr "Év"
+
+#: collections/coincollection.cpp:61
+msgid "Mint Mark"
+msgstr ""
+
+#: collections/coincollection.cpp:73
+#, fuzzy
+msgid "Coin Set"
+msgstr "Megjegyzések"
+
+#: collections/coincollection.cpp:83
+msgid ""
+"_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
+"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
+"Fine-20,Fine-12,Very Good-8,Good-4,Fair\n"
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair"
+msgstr ""
+
+#: collections/coincollection.cpp:96
+msgid ""
+"_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
+"PCGS,NGC,ANACS,ICG,ASA,PCI"
+msgstr ""
+
+#: collections/coincollection.cpp:98
+msgid "Grading Service"
+msgstr ""
+
+#: collections/coincollection.cpp:122
+#, fuzzy
+msgid "Obverse"
+msgstr "Felülírás"
+
+#: collections/coincollection.cpp:125
+#, fuzzy
+msgid "Reverse"
+msgstr "Felülírás"
+
+#: collections/bookcollection.cpp:29
+msgid "Books"
+msgstr "Könyvek"
+
+#: collections/bookcollection.cpp:30
+msgid "My Books"
+msgstr "Könyvgyűjteményem"
+
+#: collections/bibtexcollection.cpp:83 collections/bookcollection.cpp:52
+msgid "Author"
+msgstr "Szerző"
+
+#: collections/bookcollection.cpp:59
+msgid "Hardback"
+msgstr "Kemény tábla"
+
+#: collections/bookcollection.cpp:59
+msgid "Paperback"
+msgstr "Kartonált"
+
+#: collections/bookcollection.cpp:59
+msgid "Trade Paperback"
+msgstr "Papírtábla"
+
+#: collections/bookcollection.cpp:60
+msgid "E-Book"
+msgstr "E-könyv"
+
+#: collections/bookcollection.cpp:60
+msgid "Magazine"
+msgstr "Újság"
+
+#: collections/bibtexcollection.cpp:161 collections/bookcollection.cpp:60
+msgid "Journal"
+msgstr "Füzet"
+
+#: collections/bookcollection.cpp:61
+msgid "Binding"
+msgstr "Kötészet"
+
+#: collections/bookcollection.cpp:87
+msgid "Copyright Year"
+msgstr "Copyright éve"
+
+#: collections/bookcollection.cpp:97 translators/risimporter.cpp:253
+msgid "ISBN#"
+msgstr "ISBN#"
+
+#: collections/bookcollection.cpp:99 translators/risimporter.cpp:257
+msgid "International Standard Book Number"
+msgstr "International Standard Book Number"
+
+#: collections/bookcollection.cpp:102
+msgid "LCCN#"
+msgstr "LCCN#"
+
+#: collections/bookcollection.cpp:104
+msgid "Library of Congress Control Number"
+msgstr "Library of Congress Control Number"
+
+#: collections/bookcollection.cpp:133
+msgid "Series Number"
+msgstr "Sorozatszám"
+
+#: collections/bookcollection.cpp:138 mainwindow.cpp:197
+msgid "New"
+msgstr "Új"
+
+#: collections/bookcollection.cpp:138
+msgid "Used"
+msgstr "Használt"
+
+#: collections/bookcollection.cpp:147
+msgid "Read"
+msgstr "Olvasva"
+
+#: collections/bookcollection.cpp:159 collections/musiccollection.cpp:79
+#: collections/winecollection.cpp:104 field.cpp:452
+msgid "Rating"
+msgstr "Értékelés"
+
+#: collections/winecollection.cpp:27
+#, fuzzy
+msgid "Wines"
+msgstr "Videó gyűjteményem"
+
+#: collections/winecollection.cpp:28
+#, fuzzy
+msgid "My Wines"
+msgstr "Videó gyűjteményem"
+
+#: collections/videocollection.cpp:115 collections/winecollection.cpp:45
+#, fuzzy
+msgid "Producer"
+msgstr "Kiadás éve"
+
+#: collections/winecollection.cpp:51
+#, fuzzy
+msgid "Appellation"
+msgstr "Gyűjtemény átnevezése..."
+
+#: collections/winecollection.cpp:57
+msgid "Varietal"
+msgstr ""
+
+#: collections/winecollection.cpp:63
+#, fuzzy
+msgid "Vintage"
+msgstr "Dedikált"
+
+#: collections/winecollection.cpp:69
+#, fuzzy
+msgid "Red Wine"
+msgstr "Videó gyűjteményem"
+
+#: collections/winecollection.cpp:69
+msgid "White Wine"
+msgstr ""
+
+#: collections/winecollection.cpp:69
+msgid "Sparkling Wine"
+msgstr ""
+
+#: collections/cardcollection.cpp:107 collections/winecollection.cpp:95
+msgid "Quantity"
+msgstr ""
+
+#: collections/winecollection.cpp:99
+msgid "Drink By"
+msgstr ""
+
+#: collections/winecollection.cpp:113
+#, fuzzy
+msgid "Label Image"
+msgstr "Cím"
+
+#: collections/videocollection.cpp:21
+msgid "Other People"
+msgstr ""
+
+#: collections/videocollection.cpp:22
+#, fuzzy
+msgid "Features"
+msgstr "Keresés itt:"
+
+#: collections/videocollection.cpp:29
+msgid "Videos"
+msgstr "Filmek"
+
+#: collections/videocollection.cpp:30
+msgid "My Videos"
+msgstr "Videó gyűjteményem"
+
+#: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
+msgid "DVD"
+msgstr "DVD"
+
+#: collections/videocollection.cpp:48
+msgid "VHS"
+msgstr "VHS"
+
+#: collections/videocollection.cpp:48
+msgid "VCD"
+msgstr "VCD"
+
+#: collections/videocollection.cpp:48
+msgid "DivX"
+msgstr "DivX"
+
+#: collections/musiccollection.cpp:47 collections/videocollection.cpp:49
+msgid "Medium"
+msgstr "Közepes"
+
+#: collections/videocollection.cpp:54
+#, fuzzy
+msgid "Production Year"
+msgstr "Kiadás éve"
+
+#: collections/videocollection.cpp:62
+msgid ""
+"_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
+"G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
+msgstr ""
+
+#: collections/videocollection.cpp:64
+#, fuzzy
+msgid "Certification"
+msgstr "Osztályozás"
+
+#: collections/videocollection.cpp:76
+msgid "Region 1"
+msgstr ""
+
+#: collections/videocollection.cpp:77
+msgid "Region 2"
+msgstr ""
+
+#: collections/videocollection.cpp:78
+msgid "Region 3"
+msgstr ""
+
+#: collections/videocollection.cpp:79
+msgid "Region 4"
+msgstr ""
+
+#: collections/videocollection.cpp:80
+msgid "Region 5"
+msgstr ""
+
+#: collections/videocollection.cpp:81
+msgid "Region 6"
+msgstr ""
+
+#: collections/videocollection.cpp:82
+msgid "Region 7"
+msgstr ""
+
+#: collections/videocollection.cpp:83
+msgid "Region 8"
+msgstr ""
+
+#: collections/videocollection.cpp:84
+msgid "Region"
+msgstr ""
+
+#: collections/videocollection.cpp:89
+msgid "Nationality"
+msgstr ""
+
+#: collections/videocollection.cpp:96
+msgid "NTSC"
+msgstr ""
+
+#: collections/videocollection.cpp:96
+msgid "PAL"
+msgstr ""
+
+#: collections/videocollection.cpp:96
+msgid "SECAM"
+msgstr ""
+
+#: collections/videocollection.cpp:97
+#, fuzzy
+msgid "Format"
+msgstr "Formázási beállítások"
+
+#: collections/videocollection.cpp:102
+#, fuzzy
+msgid "Cast"
+msgstr "Kazetta"
+
+#: collections/videocollection.cpp:106
+msgid "A table for the cast members, along with the roles they play"
+msgstr ""
+
+#: collections/videocollection.cpp:109
+msgid "Director"
+msgstr ""
+
+#: collections/videocollection.cpp:127
+#, fuzzy
+msgid "Composer"
+msgstr "&Exportálás"
+
+#: collections/videocollection.cpp:133
+msgid "Studio"
+msgstr ""
+
+#: collections/videocollection.cpp:139
+#, fuzzy
+msgid "Language Tracks"
+msgstr "Nyelv"
+
+#: collections/videocollection.cpp:145
+#, fuzzy
+msgid "Subtitle Languages"
+msgstr "Alcím"
+
+#: collections/videocollection.cpp:151
+#, fuzzy
+msgid "Audio Tracks"
+msgstr "8-sávos"
+
+#: collections/videocollection.cpp:157
+msgid "Running Time"
+msgstr ""
+
+#: collections/videocollection.cpp:159
+msgid "The running time of the video (in minutes)"
+msgstr ""
+
+#: collections/videocollection.cpp:162
+msgid "Aspect Ratio"
+msgstr ""
+
+#: collections/videocollection.cpp:167 translators/tellicoimporter.cpp:771
+msgid "Widescreen"
+msgstr ""
+
+#: collections/videocollection.cpp:172
+msgid "Black & White"
+msgstr ""
+
+#: collections/videocollection.cpp:173
+#, fuzzy
+msgid "Color Mode"
+msgstr "&Exportálás"
+
+#: collections/videocollection.cpp:178
+msgid "Director's Cut"
+msgstr ""
+
+#: collections/videocollection.cpp:182
+msgid "Plot Summary"
+msgstr ""
+
+#: collections/gamecollection.cpp:91 collections/videocollection.cpp:185
+#, fuzzy
+msgid "Personal Rating"
+msgstr "Személyes"
+
+#: collections/gamecollection.cpp:117 collections/musiccollection.cpp:106
+#: collections/videocollection.cpp:207
+#, fuzzy
+msgid "Cover"
+msgstr "&Exportálás"
+
+#: collections/gamecollection.cpp:27
+#, fuzzy
+msgid "Games"
+msgstr "Sorozatszám"
+
+#: collections/gamecollection.cpp:28
+#, fuzzy
+msgid "My Games"
+msgstr "Videó gyűjteményem"
+
+#: collections/gamecollection.cpp:46
+msgid "Xbox"
+msgstr ""
+
+#: collections/gamecollection.cpp:46
+msgid "PlayStation2"
+msgstr ""
+
+#: collections/gamecollection.cpp:46
+msgid "PlayStation"
+msgstr ""
+
+#: collections/gamecollection.cpp:46
+msgid ""
+"_: PlayStation Portable\n"
+"PSP"
+msgstr ""
+
+#: collections/gamecollection.cpp:47
+msgid "Nintendo DS"
+msgstr ""
+
+#: collections/gamecollection.cpp:47
+#, fuzzy
+msgid "GameCube"
+msgstr "Sorozatszám"
+
+#: collections/gamecollection.cpp:47
+msgid "Dreamcast"
+msgstr ""
+
+#: collections/gamecollection.cpp:48
+msgid "Game Boy Advance"
+msgstr ""
+
+#: collections/gamecollection.cpp:48
+#, fuzzy
+msgid "Game Boy Color"
+msgstr "Gyűjtemény átnevezése..."
+
+#: collections/gamecollection.cpp:48
+#, fuzzy
+msgid "Game Boy"
+msgstr "Sorozatszám"
+
+#: collections/gamecollection.cpp:49
+msgid ""
+"_: Windows Platform\n"
+"Windows"
+msgstr ""
+
+#: collections/gamecollection.cpp:49
+msgid "Mac OS"
+msgstr ""
+
+#: collections/gamecollection.cpp:50
+msgid "Platform"
+msgstr ""
+
+#: collections/gamecollection.cpp:61
+msgid "Release Year"
+msgstr ""
+
+#: collections/gamecollection.cpp:72
+msgid "Developer"
+msgstr ""
+
+#: collections/gamecollection.cpp:81
+msgid ""
+"_: Video game ratings - Unrated, Mature, Teen, Everyone, Early Childhood, "
+"Pending\n"
+"Unrated, Mature, Teen, Everyone, Early Childhood, Pending"
+msgstr ""
+
+#: collections/gamecollection.cpp:83
+#, fuzzy
+msgid "ESRB Rating"
+msgstr "Értékelés"
+
+#: collections/gamecollection.cpp:96
+#, fuzzy
+msgid "Completed"
+msgstr "Megjegyzések"
+
+#: collections/cardcollection.cpp:27
+#, fuzzy
+msgid "Cards"
+msgstr "Kazetta"
+
+#: collections/cardcollection.cpp:28
+#, fuzzy
+msgid "My Cards"
+msgstr "CD gyűjteményem"
+
+#: collections/cardcollection.cpp:45
+msgid "Player"
+msgstr ""
+
+#: collections/cardcollection.cpp:51
+msgid "Team"
+msgstr ""
+
+#: collections/cardcollection.cpp:57
+#, fuzzy
+msgid "Brand"
+msgstr "Fajta"
+
+#: collections/cardcollection.cpp:64
+#, fuzzy
+msgid "Card Number"
+msgstr "Sorozatszám"
+
+#: collections/cardcollection.cpp:79
+#, fuzzy
+msgid "Card Type"
+msgstr "Sorozatszám"
+
+#: collections/cardcollection.cpp:111
+#, fuzzy
+msgid "Front Image"
+msgstr "Oldalak"
+
+#: collections/cardcollection.cpp:114
+#, fuzzy
+msgid "Back Image"
+msgstr "Oldalak"
+
+#: collections/bibtexcollection.cpp:33
+#, fuzzy
+msgid "Entries"
+msgstr "Sorozat"
+
+#: collectionfactory.cpp:134 collections/bibtexcollection.cpp:34
+#, fuzzy
+msgid "Bibliography"
+msgstr "Bibtexml fájl importálása..."
+
+#: collections/bibtexcollection.cpp:76
+#, fuzzy
+msgid "Entry Type"
+msgstr "Sorozat"
+
+#: collections/bibtexcollection.cpp:80
+msgid "These entry types are specific to bibtex. See the bibtex documentation."
+msgstr ""
+
+#: collections/bibtexcollection.cpp:90
+#, fuzzy
+msgid "Bibtex Key"
+msgstr "Általános beállítások"
+
+#: collections/bibtexcollection.cpp:96
+#, fuzzy
+msgid "Book Title"
+msgstr "Cím"
+
+#: collections/bibtexcollection.cpp:102
+#, fuzzy
+msgid "Editor"
+msgstr "Kiadás"
+
+#: collections/bibtexcollection.cpp:109
+msgid "Organization"
+msgstr ""
+
+#: collections/bibtexcollection.cpp:131
+msgid "Address"
+msgstr ""
+
+#: collections/bibtexcollection.cpp:170
+msgid "Month"
+msgstr ""
+
+#: collections/bibtexcollection.cpp:176 field.cpp:445
+#, fuzzy
+msgid "Number"
+msgstr "Sorozatszám"
+
+#: collections/bibtexcollection.cpp:181
+#, fuzzy
+msgid "How Published"
+msgstr "Kiadó"
+
+#: collections/bibtexcollection.cpp:193
+msgid "Chapter"
+msgstr ""
+
+#: collections/bibtexcollection.cpp:205
+#, fuzzy
+msgid "Volume"
+msgstr "Oszlopok megtekintése"
+
+#: collections/bibtexcollection.cpp:210
+msgid "Cross-Reference"
+msgstr ""
+
+#: collections/bibtexcollection.cpp:220
+#, fuzzy
+msgid "Notes"
+msgstr "&Exportálás"
+
+#: collections/musiccollection.cpp:27
+#, fuzzy
+msgid "Albums"
+msgstr "Album"
+
+#: collections/musiccollection.cpp:28
+msgid "My Music"
+msgstr ""
+
+#: collections/musiccollection.cpp:39
+msgid "Album"
+msgstr "Album"
+
+#: collections/musiccollection.cpp:46 translators/freedbimporter.cpp:191
+#: translators/freedbimporter.cpp:295
+msgid "Compact Disc"
+msgstr ""
+
+#: collections/musiccollection.cpp:46
+msgid "Cassette"
+msgstr "Kazetta"
+
+#: collections/musiccollection.cpp:46
+msgid "Vinyl"
+msgstr ""
+
+#: collections/musiccollection.cpp:58
+#, fuzzy
+msgid "Label"
+msgstr "Cím"
+
+#: collections/musiccollection.cpp:75
+#, fuzzy
+msgid "Tracks"
+msgstr "8-sávos"
+
+#: fetch/entrezfetcher.cpp:48 fetch/fetchmanager.cpp:281
+msgid "Entrez Database"
+msgstr ""
+
+#: fetch/entrezfetcher.cpp:371 fetch/srufetcher.cpp:259
+msgid "This source has no options."
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:55
+msgid "Amazon (US)"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:65
+msgid "Amazon (UK)"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:75
+msgid "Amazon (Germany)"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:85
+msgid "Amazon (Japan)"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:95
+msgid "Amazon (France)"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:105
+msgid "Amazon (Canada)"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:216
+msgid "%1 does not allow searching for this collection type."
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:440
+msgid "Results from %1: %2/%3"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:478 fetch/z3950fetcher.cpp:545
+msgid "<qt>No entries were found for the following ISBN values:</qt>"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:518
+msgid "The cover image could not be loaded."
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:595
+#, fuzzy
+msgid "Co&untry: "
+msgstr "Oszlopok megtekintése"
+
+#: fetch/amazonfetcher.cpp:599
+msgid "United States"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:600
+msgid "United Kingdom"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:601
+msgid "Germany"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:602
+msgid "Japan"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:603
+#, fuzzy
+msgid "France"
+msgstr "8-sávos"
+
+#: fetch/amazonfetcher.cpp:604
+msgid "Canada"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:607
+msgid ""
+"Amazon.com provides data from several different localized sites. Choose the "
+"one you wish to use for this data source."
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:613
+msgid "&Image size: "
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:617
+#, fuzzy
+msgid "Small Image"
+msgstr "Cím"
+
+#: fetch/amazonfetcher.cpp:618
+#, fuzzy
+msgid "Medium Image"
+msgstr "Közepes"
+
+#: fetch/amazonfetcher.cpp:619
+#, fuzzy
+msgid "Large Image"
+msgstr "Cím"
+
+#: fetch/amazonfetcher.cpp:620
+#, fuzzy
+msgid "No Image"
+msgstr "Oldalak"
+
+#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:780
+msgid ""
+"The cover image may be downloaded as well. However, too many large images in "
+"the collection may degrade performance."
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:629
+msgid "&Associate's ID: "
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:634
+msgid ""
+"The associate's id identifies the person accessing the Amazon.com Web "
+"Services, and is included in any links to the Amazon.com site."
+msgstr ""
+
+#: fetch/srufetcher.cpp:44 fetch/z3950fetcher.cpp:563
+#, fuzzy
+msgid "Library of Congress (US)"
+msgstr "Library of Congress Control Number"
+
+#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:82
+msgid "Internet Movie Database"
+msgstr ""
+
+#: fetch/imdbfetcher.cpp:401
+msgid "Select IMDB Result"
+msgstr ""
+
+#: fetch/imdbfetcher.cpp:404
+msgid ""
+"<qt>Your search returned multiple matches. Please select one below.</qt>"
+msgstr ""
+
+#: fetch/imdbfetcher.cpp:411
+msgid "<qt>Select a search result.</qt>"
+msgstr ""
+
+#: fetch/imdbfetcher.cpp:531
+msgid "Alternative Titles"
+msgstr ""
+
+#: fetch/imdbfetcher.cpp:749
+#, fuzzy
+msgid "Certifications"
+msgstr "Osztályozás"
+
+#: fetch/imdbfetcher.cpp:766 fetch/z3950fetcher.cpp:573
+#, fuzzy
+msgid "&Host: "
+msgstr "&Exportálás"
+
+#: fetch/imdbfetcher.cpp:771
+msgid ""
+"The Internet Movie Database uses several different servers. Choose the one "
+"you wish to use."
+msgstr ""
+
+#: fetch/imdbfetcher.cpp:777
+msgid "Download cover image"
+msgstr ""
+
+#: fetch/fetchmanager.cpp:46
+#, fuzzy
+msgid "Person"
+msgstr "Személyes"
+
+#: fetch/fetchmanager.cpp:47 fetchdialog.cpp:396
+#, fuzzy
+msgid "ISBN"
+msgstr "ISBN#"
+
+#: fetch/fetchmanager.cpp:48
+#, fuzzy
+msgid "Keyword"
+msgstr "Kulcsszavak"
+
+#: fetch/fetchmanager.cpp:49
+#, fuzzy
+msgid "Raw Query"
+msgstr "Keresés itt:"
+
+#: fetch/fetchmanager.cpp:271
+msgid "Amazon.com Web Services"
+msgstr ""
+
+#: fetch/fetchmanager.cpp:277
+msgid "z39.50"
+msgstr ""
+
+#: fetch/fetchmanager.cpp:282
+#, fuzzy
+msgid "External Application"
+msgstr "Kilépés a programból"
+
+#: fetch/execexternalfetcher.cpp:233
+msgid "Application &path: "
+msgstr ""
+
+#: fetch/execexternalfetcher.cpp:238
+msgid ""
+"Set the path of the application to run that should output a valid Tellico "
+"data file."
+msgstr ""
+
+#: fetch/execexternalfetcher.cpp:243
+msgid "&Arguments: "
+msgstr ""
+
+#: fetch/execexternalfetcher.cpp:248
+msgid ""
+"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
+"search terms."
+msgstr ""
+
+#: fetch/execexternalfetcher.cpp:253
+#, fuzzy
+msgid "Collection &type: "
+msgstr "BCCollection"
+
+#: fetch/execexternalfetcher.cpp:262
+msgid ""
+"Set the collection type of the data returned from the external application."
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1687
+#: translators/xsltimporter.cpp:56
+#, fuzzy
+msgid "Tellico encountered an error in XSLT processing."
+msgstr "Hiba keletkezett az XSLT feldolgozásakor.\n"
+
+#: fetch/z3950fetcher.cpp:348
+#, fuzzy
+msgid "Connection error %1: %2"
+msgstr "Gyüjtemény eszköztár"
+
+#: fetch/z3950fetcher.cpp:360
+msgid "Query error!"
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:380
+msgid "Connection search error %1: %2"
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:418
+msgid "Record syntax error"
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:578
+msgid "Enter the host name of the z39.50 server."
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:583
+#, fuzzy
+msgid "&Port: "
+msgstr "&Exportálás"
+
+#: fetch/z3950fetcher.cpp:588
+#, c-format
+msgid "Enter the port number of the z39.50 server. The default is %1."
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:593
+msgid "&Database: "
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:598
+msgid "Enter the database name used by the z39.50 server."
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:603
+msgid "Ch&aracter set: "
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:612
+msgid ""
+"Enter the character set encoding used by the z39.50 server. The most likely "
+"choice is MARC-8, although ISO-8859-1 is common as well."
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:618
+msgid "&User: "
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:621 fetch/z3950fetcher.cpp:633
+#, fuzzy
+msgid "Optional"
+msgstr "Általános beállítások"
+
+#: fetch/z3950fetcher.cpp:624
+msgid ""
+"Enter the authentication user name used by the z39.50 database. Most servers "
+"do not need one."
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:630
+msgid "Pass&word: "
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:637
+msgid ""
+"Enter the authentication password used by the z39.50 database. Most servers "
+"do not need one."
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:639
+msgid ""
+"The password will be saved in plain text in the Tellico configuration file."
+msgstr ""
+
+#: translators/alexandriaexporter.cpp:39
+#, fuzzy
+msgid "Alexandria"
+msgstr "Általános beállítások"
+
+#: translators/alexandriaexporter.cpp:61
+msgid ""
+"<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
+"books in that library could be overwritten.</qt>"
+msgstr ""
+
+#: translators/bibteximporter.cpp:47
+#, c-format
+msgid "No valid bibtex entries were found in file - %1"
+msgstr ""
+
+#: translators/bibtexmlexporter.cpp:36
+#, fuzzy
+msgid "Bibtexml"
+msgstr "Exportálás Bibtexml fájlként..."
+
+#: translators/bibtexmlexporter.cpp:40
+#, fuzzy
+msgid "*.xml|Bibtexml Files (*.xml)"
+msgstr "*.xml|Bibtexml fájlok (*.xml)"
+
+#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1141
+#: reportdialog.cpp:194 translators/bibtexexporter.cpp:52
+#: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
+#: translators/htmlexporter.cpp:85 translators/onixexporter.cpp:66
+#: translators/pilotdbexporter.cpp:48 translators/tellicoxmlexporter.cpp:51
+#: translators/tellicozipexporter.cpp:37 translators/xsltexporter.cpp:41
+#: translators/xsltimporter.cpp:86
+#, fuzzy
+msgid "*|All Files"
+msgstr "*|Minden fájl"
+
+#: translators/tellicoxmlexporter.cpp:47
+msgid "XML"
+msgstr ""
+
+#: importdialog.cpp:209 importdialog.cpp:213 mainwindow.cpp:1007
+#: translators/tellicoxmlexporter.cpp:51
+#, fuzzy
+msgid "*.xml|XML Files (*.xml)"
+msgstr "*.xml|XML fájlok (*.xml)"
+
+#: translators/tellicoxmlexporter.cpp:435
+#, fuzzy
+msgid "Tellico XML Options"
+msgstr "TellicoDoc"
+
+#: translators/tellicoxmlexporter.cpp:438
+msgid "Include images in XML document"
+msgstr ""
+
+#: translators/tellicoxmlexporter.cpp:440
+#, fuzzy
+msgid ""
+"If checked, the images in the document will be included in the XML stream as "
+"base64 encoded elements."
+msgstr ""
+"Ha kijelöli ezt a pontot, akkor a csoportnév mögött a csoportban lévő "
+"elemek száma is megjelenik."
+
+#: translators/bibtexexporter.cpp:48
+#, fuzzy
+msgid "Bibtex"
+msgstr "Általános beállítások"
+
+#: importdialog.cpp:200 translators/bibtexexporter.cpp:52
+#, fuzzy
+msgid "*.bib|Bibtex Files (*.bib)"
+msgstr "*.bib|Bibtex fájlok (*.bib)"
+
+#: translators/bibtexexporter.cpp:205
+#, fuzzy
+msgid "Bibtex Options"
+msgstr "Általános beállítások"
+
+#: translators/bibtexexporter.cpp:208
+#, fuzzy
+msgid "Expand string macros"
+msgstr "SearchDialog"
+
+#: translators/bibtexexporter.cpp:210
+msgid ""
+"If checked, the string macros will be expanded and no @string{} entries will "
+"be written."
+msgstr ""
+
+#: translators/bibtexexporter.cpp:213
+msgid "Use URL package"
+msgstr ""
+
+#: translators/bibtexexporter.cpp:215
+#, fuzzy
+msgid "If checked, any URL fields will be wrapped in a \\url declaration."
+msgstr ""
+"Ha kijelöli ezt az opciót, akkor a mezőnevek fejlécként kinyomtatásra "
+"kerülnek"
+
+#: translators/bibtexexporter.cpp:218
+msgid "Skip entries with empty citation keys"
+msgstr ""
+
+#: translators/bibtexexporter.cpp:220
+msgid "If checked, any entries without a bibtex citation key will be skipped."
+msgstr ""
+
+#: translators/bibtexexporter.cpp:224
+#, fuzzy
+msgid "Bibtex quotation style:"
+msgstr "Általános beállítások"
+
+#: translators/bibtexexporter.cpp:226 translators/bibtexexporter.cpp:233
+#: translators/bibtexexporter.cpp:264
+#, fuzzy
+msgid "Braces"
+msgstr "8-sávos"
+
+#: translators/bibtexexporter.cpp:227 translators/bibtexexporter.cpp:235
+msgid "Quotes"
+msgstr ""
+
+#: translators/bibtexexporter.cpp:228
+msgid ""
+"<qt>The quotation style used when exporting bibtex. All field values will  "
+"be escaped with either braces or quotation marks.</qt>"
+msgstr ""
+
+#: translators/tellicozipexporter.cpp:33
+#, fuzzy
+msgid "Tellico Zip File"
+msgstr "Tellico"
+
+#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1139
+#: translators/tellicozipexporter.cpp:37
+#, fuzzy
+msgid "*.tc *.bc|Tellico Files (*.tc)"
+msgstr "*.tc *.bc|Tellico fájlok (*.tc)"
+
+#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:126
+#, fuzzy
+msgid "CSV Options"
+msgstr "Általános beállítások"
+
+#: translators/csvimporter.cpp:131
+#, fuzzy
+msgid "Collection &type:"
+msgstr "BCCollection"
+
+#: translators/csvimporter.cpp:134
+msgid "Select the type of collection being imported."
+msgstr ""
+
+#: translators/csvimporter.cpp:142
+msgid "First row contains field titles"
+msgstr ""
+
+#: translators/csvimporter.cpp:144
+#, fuzzy
+msgid "If checked, the first row is used as field titles."
+msgstr ""
+"Ha be van jelölve reguláris kifejezésként kerül feldolgozásra a "
+"kulcsszó."
+
+#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:148
+#, fuzzy
+msgid "Delimiter"
+msgstr "Kiválasztott mezők"
+
+#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:151
+msgid ""
+"In addition to a comma, other characters may be used as a delimiter, "
+"separating each value in the file."
+msgstr ""
+
+#: translators/csvexporter.cpp:124 translators/csvimporter.cpp:156
+#, fuzzy
+msgid "Comma"
+msgstr "Megjegyzések"
+
+#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:158
+msgid "Use a comma as the delimiter."
+msgstr ""
+
+#: translators/csvexporter.cpp:130 translators/csvimporter.cpp:162
+msgid "Semicolon"
+msgstr ""
+
+#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:163
+msgid "Use a semi-colon as the delimiter."
+msgstr ""
+
+#: translators/csvexporter.cpp:135 translators/csvimporter.cpp:167
+#, fuzzy
+msgid "Tab"
+msgstr "Cím"
+
+#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:168
+msgid "Use a tab as the delimiter."
+msgstr ""
+
+#: translators/csvimporter.cpp:172
+#, fuzzy
+msgid "Other:"
+msgstr "A(z),a(z)"
+
+#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:173
+msgid "Use a custom string as the delimiter."
+msgstr ""
+
+#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:178
+msgid "A custom string, such as a colon, may be used as a delimiter."
+msgstr ""
+
+#: translators/csvimporter.cpp:205
+msgid "The table shows up to the first five lines of the CSV file."
+msgstr ""
+
+#: translators/csvimporter.cpp:211
+msgid ""
+"<qt>Set each column to correspond to a field in the collection by choosing a "
+"column, selecting the field, then clicking the <i>Set</i> button.</qt>"
+msgstr ""
+
+#: translators/csvimporter.cpp:213
+#, fuzzy
+msgid "Column:"
+msgstr "Oszlopok megtekintése"
+
+#: translators/csvimporter.cpp:219
+#, fuzzy
+msgid "Data field in this column:"
+msgstr "Könyvgyűjtemény beállításai"
+
+#: translators/csvimporter.cpp:224
+#, fuzzy
+msgid "Assign Field"
+msgstr "Minden mező"
+
+#: collectionfieldsdialog.cpp:415 collectionfieldsdialog.cpp:418
+#: translators/csvimporter.cpp:364 translators/csvimporter.cpp:466
+#, fuzzy
+msgid "New Field"
+msgstr "Minden mező"
+
+#: filehandler.cpp:117 translators/tellicoimporter.cpp:87
+#: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
+msgid "There is an XML parsing error in line %1, column %2."
+msgstr ""
+
+#: filehandler.cpp:119 translators/tellicoimporter.cpp:89
+#: translators/xmlimporter.cpp:37 translators/xmlimporter.cpp:54
+msgid "The error message from Qt is:"
+msgstr ""
+
+#: translators/tellicoimporter.cpp:125
+msgid "It is from a future version of Tellico."
+msgstr "Ez egy későbbi verzióhoz tartozik."
+
+#: translators/tellicoimporter.cpp:131
+msgid ""
+"Tellico is converting the file to a more recent document format. Information "
+"loss may occur if an older version of Tellico is used to read this file in "
+"the future."
+msgstr ""
+
+#: translators/bibtexhandler.cpp:251 translators/risimporter.cpp:261
+#: translators/risimporter.cpp:265 translators/tellicoimporter.cpp:292
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: translators/tellicoimporter.cpp:640
+msgid "The file is empty."
+msgstr ""
+
+#: translators/tellicoimporter.cpp:656
+msgid "The file contains no collection data."
+msgstr ""
+
+#: translators/tellicoimporter.cpp:753
+#, fuzzy
+msgid "Unread Books"
+msgstr "Könyv hozzáadása"
+
+#: translators/tellicoimporter.cpp:763
+msgid "Old Movies"
+msgstr ""
+
+#: translators/tellicoimporter.cpp:781
+msgid "80's Music"
+msgstr ""
+
+#: translators/tellicoimporter.cpp:793
+#, fuzzy
+msgid "Favorites"
+msgstr "Könyv törlése"
+
+#: translators/risimporter.cpp:243
+msgid "Abstract"
+msgstr ""
+
+#: field.cpp:446 translators/risimporter.cpp:259
+msgid "URL"
+msgstr ""
+
+#: translators/risimporter.cpp:263
+msgid "PDF"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:93
+#, fuzzy
+msgid "Scanning audio files..."
+msgstr "Fájl mentése..."
+
+#: translators/audiofileimporter.cpp:133
+msgid "(Various)"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:254
+#, fuzzy
+msgid "Audio File Options"
+msgstr "Általános beállítások"
+
+#: translators/audiofileimporter.cpp:256
+msgid "Recursive folder search"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:257
+msgid "If checked, folders are recursively searched for audio files."
+msgstr ""
+
+#: translators/csvexporter.cpp:40
+msgid "CSV"
+msgstr ""
+
+#: importdialog.cpp:204 translators/csvexporter.cpp:44
+#, fuzzy
+msgid "*.csv|CSV Files (*.csv)"
+msgstr "*.xsl|XSLT fájlok (*.xsl)"
+
+#: translators/csvexporter.cpp:112
+msgid "Include field titles as column headers"
+msgstr ""
+
+#: translators/csvexporter.cpp:114
+#, fuzzy
+msgid "If checked, a header row will be added with the field titles."
+msgstr ""
+"Ha be van jelölve a pont, akkor a Tellico a kiválasztott mező alapján "
+"csoportosítja a könyveket."
+
+#: translators/csvexporter.cpp:140
+#, fuzzy
+msgid "Other"
+msgstr "A(z),a(z)"
+
+#: translators/pilotdbexporter.cpp:44
+#, fuzzy
+msgid "PilotDB"
+msgstr "Általános beállítások"
+
+#: translators/pilotdbexporter.cpp:48
+#, fuzzy
+msgid "*.pdb|Pilot Database Files(*.pdb)"
+msgstr "*.tc *.bc|Tellico fájlok (*.tc)"
+
+#: detailedlistview.cpp:65 detailedlistview.cpp:293
+#: translators/pilotdbexporter.cpp:144
+msgid "View Columns"
+msgstr "Oszlopok megtekintése"
+
+#: translators/pilotdbexporter.cpp:211
+#, fuzzy
+msgid "PilotDB Options"
+msgstr "Általános beállítások"
+
+#: translators/pilotdbexporter.cpp:214 translators/pilotdbexporter.cpp:216
+msgid "Set PDA backup flag for database"
+msgstr ""
+
+#: translators/onixexporter.cpp:62
+#, fuzzy
+msgid "ONIX Archive"
+msgstr "Általános beállítások"
+
+#: translators/onixexporter.cpp:66
+#, fuzzy
+msgid "*.zip|Zip Files (*.zip)"
+msgstr "*.bib|Bibtex fájlok (*.bib)"
+
+#: translators/onixexporter.cpp:175
+#, fuzzy
+msgid "ONIX Archive Options"
+msgstr "Általános beállítások"
+
+#: translators/onixexporter.cpp:178
+msgid "Include images in archive"
+msgstr ""
+
+#: translators/onixexporter.cpp:180
+#, fuzzy
+msgid ""
+"If checked, the images in the document will be included in the zipped ONIX "
+"archive."
+msgstr ""
+"Ha kijelöli ezt a pontot, akkor a csoportnév mögött a csoportban lévő "
+"elemek száma is megjelenik."
+
+#: translators/freedbimporter.cpp:80 translators/freedbimporter.cpp:129
+#, fuzzy
+msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
+msgstr "A Tellico nem tud a fájlba írni: %1."
+
+#: translators/freedbimporter.cpp:150
+#, fuzzy
+msgid "<qt>No records were found to match the CD.</qt>"
+msgstr "Nem sikerült a(z) %1 fájl megnyitása."
+
+#: translators/freedbimporter.cpp:154
+msgid "<qt>Multiple records were found to match the CD.</qt>"
+msgstr ""
+
+#: translators/freedbimporter.cpp:166
+#, fuzzy
+msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
+msgstr "Nem sikerült a(z) %1 fájl megnyitása."
+
+#: translators/freedbimporter.cpp:258
+#, fuzzy
+msgid "Scanning CDDB cache files..."
+msgstr "Fájl mentése..."
+
+#: translators/freedbimporter.cpp:351
+#, fuzzy
+msgid "Audio CD Options"
+msgstr "Általános beállítások"
+
+#: translators/freedbimporter.cpp:356
+msgid "Read data from CD-ROM device"
+msgstr ""
+
+#: translators/freedbimporter.cpp:360 translators/freedbimporter.cpp:361
+msgid "Select or input the CD-ROM device location."
+msgstr ""
+
+#: translators/freedbimporter.cpp:365
+#, fuzzy
+msgid "Read all CDDB cache files only"
+msgstr "Fájl mentése..."
+
+#: translators/freedbimporter.cpp:366
+msgid ""
+"Read data recursively from all the CDDB cache files contained in the default "
+"cache folders."
+msgstr ""
+
+#: translators/xsltimporter.cpp:44 translators/xsltimporter.cpp:50
+msgid "A valid XSLT file is needed to import the file."
+msgstr ""
+
+#: translators/xsltexporter.cpp:69 translators/xsltimporter.cpp:79
+#, fuzzy
+msgid "XSLT Options"
+msgstr "Általános beállítások"
+
+#: translators/xsltexporter.cpp:74 translators/xsltimporter.cpp:82
+#, fuzzy
+msgid "XSLT file:"
+msgstr "Cím"
+
+#: translators/xsltimporter.cpp:85
+#, fuzzy
+msgid "*.xsl|XSL Files (*.xsl)"
+msgstr "*.xml|XML fájlok (*.xml)"
+
+#: translators/xsltexporter.cpp:37
+msgid "XSLT"
+msgstr ""
+
+#: translators/xsltexporter.cpp:76
+msgid "Choose the XSLT file used to transform the Tellico XML data."
+msgstr ""
+
+#: translators/alexandriaimporter.cpp:159
+#, fuzzy
+msgid "Alexandria Options"
+msgstr "Általános beállítások"
+
+#: translators/alexandriaimporter.cpp:160
+msgid "Library:"
+msgstr ""
+
+#: translators/htmlexporter.cpp:81
+msgid "HTML"
+msgstr ""
+
+#: reportdialog.cpp:194 translators/htmlexporter.cpp:85
+#, fuzzy
+msgid "*.html|HTML Files (*.html)"
+msgstr "*.xml|XML fájlok (*.xml)"
+
+#: groupview.cpp:452 mainwindow.cpp:1536 translators/htmlexporter.cpp:265
+msgid "People"
+msgstr ""
+
+#: translators/htmlexporter.cpp:269
+msgid "(grouped by %1)"
+msgstr ""
+
+#: translators/htmlexporter.cpp:388
+#, fuzzy
+msgid "HTML Options"
+msgstr "Általános beállítások"
+
+#: configdialog.cpp:237 translators/htmlexporter.cpp:391
+msgid "Print field headers"
+msgstr "Mezőfejlécek nyomtatása"
+
+#: configdialog.cpp:238 translators/htmlexporter.cpp:392
+msgid "If checked, the field names will be printed as table headers."
+msgstr ""
+"Ha kijelöli ezt az opciót, akkor a mezőnevek fejlécként kinyomtatásra "
+"kerülnek"
+
+#: configdialog.cpp:244 translators/htmlexporter.cpp:396
+#, fuzzy
+msgid "Group the entries"
+msgstr "Könyvek csoportosítása"
+
+#: configdialog.cpp:245 translators/htmlexporter.cpp:397
+#, fuzzy
+msgid "If checked, the entries will be grouped by the selected field."
+msgstr ""
+"Ha be van jelölve a pont, akkor a Tellico a kiválasztott mező alapján "
+"csoportosítja a könyveket."
+
+#: translators/htmlexporter.cpp:401
+msgid "Export individual entry files"
+msgstr ""
+
+#: translators/htmlexporter.cpp:402
+#, fuzzy
+msgid "If checked, individual files will be created for each entry."
+msgstr ""
+"Ha kijelöli ezt az opciót, akkor a mezőnevek fejlécként kinyomtatásra "
+"kerülnek"
+
+#: collectionfactory.cpp:76 collectionfactory.cpp:90
+#, fuzzy
+msgid "My Collection"
+msgstr "BCCollection"
+
+#: collectionfactory.cpp:133
+#, fuzzy
+msgid "Book Collection"
+msgstr "BookCollection"
+
+#: collectionfactory.cpp:135
+#, fuzzy
+msgid "Comic Book Collection"
+msgstr "BookCollection"
+
+#: collectionfactory.cpp:136
+#, fuzzy
+msgid "Video Collection"
+msgstr "Filmgyűjtemény"
+
+#: collectionfactory.cpp:137
+#, fuzzy
+msgid "Music Collection"
+msgstr "BCCollection"
+
+#: collectionfactory.cpp:138
+#, fuzzy
+msgid "Coin Collection"
+msgstr "SongCollection"
+
+#: collectionfactory.cpp:139
+#, fuzzy
+msgid "Stamp Collection"
+msgstr "Gyűjtemény átnevezése..."
+
+#: collectionfactory.cpp:140
+#, fuzzy
+msgid "Wine Collection"
+msgstr "Filmgyűjtemény"
+
+#: collectionfactory.cpp:141
+#, fuzzy
+msgid "Card Collection"
+msgstr "BCCollection"
+
+#: collectionfactory.cpp:142
+#, fuzzy
+msgid "Game Collection"
+msgstr "Gyűjtemény átnevezése..."
+
+#: collectionfactory.cpp:143
+#, fuzzy
+msgid "Custom Collection"
+msgstr "Új &gyűjtemény"
 
 #: filterdialog.cpp:57
 #, fuzzy
@@ -55,10 +1995,6 @@ msgstr "Kilépés..."
 msgid "Advanced Filter"
 msgstr "Fájl megnyitása..."
 
-#: commands/filtercommand.cpp:100 filterdialog.cpp:258 filterview.cpp:43
-msgid "Modify Filter"
-msgstr ""
-
 #: filterdialog.cpp:270
 #, fuzzy
 msgid "Filter Criteria"
@@ -85,19 +2021,6 @@ msgstr "Fájl megnyitása..."
 #: field.cpp:41
 msgid "a,an,and,in,of,the,to"
 msgstr "a,an,and,in,of,the,to"
-
-#: collectionfactory.cpp:79 collectionfactory.cpp:93
-#: collections/bibtexcollection.cpp:27 collections/bibtexcollection.cpp:62
-#: collections/bibtexcollection.cpp:92 collections/bookcollection.cpp:20
-#: collections/bookcollection.cpp:42 collections/cardcollection.cpp:20
-#: collections/coincollection.cpp:20 collections/comicbookcollection.cpp:20
-#: collections/gamecollection.cpp:20 collections/gamecollection.cpp:40
-#: collections/musiccollection.cpp:20 collections/stampcollection.cpp:20
-#: collections/videocollection.cpp:20 collections/videocollection.cpp:42
-#: collections/winecollection.cpp:20 configdialog.cpp:151 field.cpp:49
-#: field.cpp:81
-msgid "General"
-msgstr "Általános"
 
 #: field.cpp:411
 msgid "the"
@@ -128,24 +2051,10 @@ msgstr ""
 msgid "Checkbox"
 msgstr ""
 
-#: collections/bibtexcollection.cpp:176 field.cpp:445
-#, fuzzy
-msgid "Number"
-msgstr "Sorozatszám"
-
-#: field.cpp:446 translators/risimporter.cpp:259
-msgid "URL"
-msgstr ""
-
 #: field.cpp:447
 #, fuzzy
 msgid "Table"
 msgstr "Cím"
-
-#: collections/stampcollection.cpp:125 field.cpp:448
-#, fuzzy
-msgid "Image"
-msgstr "Oldalak"
 
 #: field.cpp:449
 msgid "Dependent"
@@ -154,11 +2063,6 @@ msgstr ""
 #: field.cpp:451
 msgid "Date"
 msgstr "Dátum"
-
-#: collections/bookcollection.cpp:159 collections/musiccollection.cpp:79
-#: collections/winecollection.cpp:104 field.cpp:452
-msgid "Rating"
-msgstr "Értékelés"
 
 #: groupview.cpp:54
 msgid "Expand All Groups"
@@ -172,18 +2076,14 @@ msgstr "Csoportok összecsukása"
 msgid "Filter by Group"
 msgstr ""
 
-#: groupview.cpp:436
+#: groupview.cpp:439
 msgid "%1 (Sort by Count)"
 msgstr ""
 
-#: groupview.cpp:443
+#: groupview.cpp:446
 msgid ""
 "_: Group Name Header\n"
 "Group"
-msgstr ""
-
-#: groupview.cpp:449 mainwindow.cpp:1536 translators/htmlexporter.cpp:256
-msgid "People"
 msgstr ""
 
 #: importdialog.cpp:46 importdialog.cpp:52
@@ -223,76 +2123,10 @@ msgid ""
 "order to be merged."
 msgstr ""
 
-#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1139
-#: translators/tellicozipexporter.cpp:37
-#, fuzzy
-msgid "*.tc *.bc|Tellico Files (*.tc)"
-msgstr "*.tc *.bc|Tellico fájlok (*.tc)"
-
-#: importdialog.cpp:200 translators/bibtexexporter.cpp:52
-#, fuzzy
-msgid "*.bib|Bibtex Files (*.bib)"
-msgstr "*.bib|Bibtex fájlok (*.bib)"
-
-#: importdialog.cpp:204 translators/csvexporter.cpp:44
-#, fuzzy
-msgid "*.csv|CSV Files (*.csv)"
-msgstr "*.xsl|XSLT fájlok (*.xsl)"
-
-#: importdialog.cpp:209 importdialog.cpp:213 mainwindow.cpp:1007
-#: translators/tellicoxmlexporter.cpp:51
-#, fuzzy
-msgid "*.xml|XML Files (*.xml)"
-msgstr "*.xml|XML fájlok (*.xml)"
-
 #: importdialog.cpp:217
 #, fuzzy
 msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.xml|XML fájlok (*.xml)"
-
-#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1141
-#: reportdialog.cpp:194 translators/bibtexexporter.cpp:52
-#: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
-#: translators/htmlexporter.cpp:85 translators/onixexporter.cpp:66
-#: translators/pilotdbexporter.cpp:48 translators/tellicoxmlexporter.cpp:51
-#: translators/tellicozipexporter.cpp:37 translators/xsltexporter.cpp:41
-#: translators/xsltimporter.cpp:86
-#, fuzzy
-msgid "*|All Files"
-msgstr "*|Minden fájl"
-
-#: detailedlistview.cpp:65 detailedlistview.cpp:293
-#: translators/pilotdbexporter.cpp:144
-msgid "View Columns"
-msgstr "Oszlopok megtekintése"
-
-#: gui/stringmapdialog.cpp:57
-#, fuzzy
-msgid "&Set"
-msgstr "Mentés másként..."
-
-#: gui/kwidgetlister.cpp:56
-msgid ""
-"_: more widgets\n"
-"More"
-msgstr ""
-
-#: gui/kwidgetlister.cpp:59
-msgid ""
-"_: fewer widgets\n"
-"Fewer"
-msgstr ""
-
-#: gui/kwidgetlister.cpp:65
-msgid ""
-"_: clear widgets\n"
-"Clear"
-msgstr ""
-
-#: gui/imagewidget.cpp:48
-#, fuzzy
-msgid "Select Image..."
-msgstr "Válasszon XSLT fájlt..."
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -329,11 +2163,6 @@ msgstr "Nem sikerült a(z) %1 fájl betöltése."
 #: loandialog.cpp:40
 msgid "Loan Dialog"
 msgstr ""
-
-#: commands/modifyloans.cpp:75 loandialog.cpp:46
-#, fuzzy
-msgid "Modify Loan"
-msgstr "Könyv módosítása"
 
 #: loandialog.cpp:78
 msgid "The following items are being checked out:"
@@ -399,10 +2228,6 @@ msgstr ""
 #: fetchdialog.cpp:351 mainwindow.cpp:97
 msgid "Ready."
 msgstr "Kész."
-
-#: collections/bookcollection.cpp:138 mainwindow.cpp:197
-msgid "New"
-msgstr "Új"
 
 #: mainwindow.cpp:200
 #, fuzzy
@@ -973,7 +2798,7 @@ msgstr "Nyomtatási beállítások"
 msgid "Change the grouping of the collection"
 msgstr "A gyűjtemények csoportosításának beállítása"
 
-#: filterview.cpp:33 filterview.cpp:86 mainwindow.cpp:607 mainwindow.cpp:622
+#: filterview.cpp:32 filterview.cpp:85 mainwindow.cpp:607 mainwindow.cpp:622
 #, fuzzy
 msgid "Filter"
 msgstr "Könyv törlése"
@@ -1071,12 +2896,6 @@ msgstr "Nyomtatás"
 msgid "Page %1"
 msgstr "%1. oldal"
 
-#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1687
-#: translators/xsltimporter.cpp:56
-#, fuzzy
-msgid "Tellico encountered an error in XSLT processing."
-msgstr "Hiba keletkezett az XSLT feldolgozásakor.\n"
-
 #: entryview.cpp:142 mainwindow.cpp:1688
 msgid "Please check your installation."
 msgstr "Kérem, ellenőrizze a rendszer beállításait."
@@ -1142,16 +2961,6 @@ msgid ""
 "items from your collection.</qt>"
 msgstr ""
 
-#: filehandler.cpp:117 translators/tellicoimporter.cpp:87
-#: translators/xmlimporter.cpp:35 translators/xmlimporter.cpp:52
-msgid "There is an XML parsing error in line %1, column %2."
-msgstr ""
-
-#: filehandler.cpp:119 translators/tellicoimporter.cpp:89
-#: translators/xmlimporter.cpp:37 translators/xmlimporter.cpp:54
-msgid "The error message from Qt is:"
-msgstr ""
-
 #: filehandler.cpp:147
 #, fuzzy, c-format
 msgid "Tellico is unable to load the image - %1."
@@ -1170,108 +2979,9 @@ msgstr "Fájl felülírása?"
 msgid "Overwrite"
 msgstr "Felülírás"
 
-#: commands/filtercommand.cpp:102 filterview.cpp:45
-#, fuzzy
-msgid "Delete Filter"
-msgstr "Kiválasztott mezők"
-
-#: filterview.cpp:88
+#: filterview.cpp:87
 msgid "Filter (Sort by Count)"
 msgstr ""
-
-#: commands/modifyentries.cpp:72
-#, fuzzy
-msgid "Save Entries"
-msgstr "Kiválasztott mezők"
-
-#: commands/addentries.cpp:57 commands/modifyentries.cpp:73
-#, fuzzy, c-format
-msgid ""
-"_: Save (Entry Title)\n"
-"Save %1"
-msgstr "Kiválasztott mezők"
-
-#: commands/fieldcommand.cpp:104
-#, fuzzy
-msgid "Add %1 Field"
-msgstr "Minden mező"
-
-#: commands/fieldcommand.cpp:106
-#, fuzzy
-msgid "Modify %1 Field"
-msgstr "Könyv módosítása"
-
-#: commands/fieldcommand.cpp:108
-#, fuzzy
-msgid "Delete %1 Field"
-msgstr "Kiválasztott mezők"
-
-#: commands/renamecollection.cpp:45 tellico_kernel.cpp:287
-#: tellico_kernel.cpp:290
-#, fuzzy
-msgid "Rename Collection"
-msgstr "Gyűjtemény átnevezése..."
-
-#: commands/filtercommand.cpp:98
-#, fuzzy
-msgid "Add Filter"
-msgstr "Fájl megnyitása..."
-
-#: commands/addloans.cpp:104
-#, fuzzy
-msgid "Check-out Items"
-msgstr "Könyv törlése"
-
-#: commands/addloans.cpp:105
-#, fuzzy, c-format
-msgid ""
-"_: Check-out (Entry Title)\n"
-"Check-out %1"
-msgstr "Kiválasztott mezők"
-
-#: commands/removeentries.cpp:52
-#, fuzzy
-msgid "Delete Entries"
-msgstr "Kiválasztott mezők"
-
-#: commands/removeentries.cpp:53
-#, fuzzy, c-format
-msgid ""
-"_: Delete (Entry Title)\n"
-"Delete %1"
-msgstr "Kiválasztott mezők"
-
-#: commands/reorderfields.cpp:51
-#, fuzzy
-msgid "Reorder Fields"
-msgstr "Kiválasztott mezők"
-
-#: commands/collectioncommand.cpp:93
-#, fuzzy
-msgid "Append Collection"
-msgstr "Gyűjtemény átnevezése..."
-
-#: commands/collectioncommand.cpp:95
-#, fuzzy
-msgid "Merge Collection"
-msgstr "BCCollection"
-
-#: commands/collectioncommand.cpp:97
-#, fuzzy
-msgid "Replace Collection"
-msgstr "Gyűjtemény átnevezése..."
-
-#: commands/removeloans.cpp:75
-#, fuzzy
-msgid "Check-in Entries"
-msgstr "Könyv törlése"
-
-#: commands/removeloans.cpp:76
-#, fuzzy, c-format
-msgid ""
-"_: Check-in (Entry Title)\n"
-"Check-in %1"
-msgstr "Kiválasztott mezők"
 
 #: controller.cpp:344
 msgid "Do you really want to delete this entry?"
@@ -1313,858 +3023,50 @@ msgid ""
 "of items to lend."
 msgstr ""
 
-#: collection.cpp:26
+#: collection.cpp:28
 msgid "(Empty)"
 msgstr "(üres)"
 
-#: collections/bookcollection.cpp:139 collections/comicbookcollection.cpp:124
-#: collections/stampcollection.cpp:21
-msgid "Condition"
-msgstr "Állapot"
-
-#: collections/bookcollection.cpp:23 collections/cardcollection.cpp:21
-#: collections/coincollection.cpp:21 collections/comicbookcollection.cpp:23
-#: collections/gamecollection.cpp:21 collections/musiccollection.cpp:21
-#: collections/stampcollection.cpp:22 collections/videocollection.cpp:23
-#: collections/winecollection.cpp:21 document.cpp:376
+#: main.cpp:23
 #, fuzzy
-msgid "Personal"
-msgstr "Személyes"
+msgid "Tellico - a collection manager for KDE"
+msgstr "Tellico - könyvnyílvántartóprogram KDE-hez"
 
-#: collections/stampcollection.cpp:28
-msgid "Stamps"
+#: main.cpp:27
+msgid "Do not reopen the last open file"
 msgstr ""
 
-#: collections/stampcollection.cpp:29
+#: main.cpp:28
 #, fuzzy
-msgid "My Stamps"
-msgstr "Videó gyűjteményem"
+msgid "Import <filename> as a bibtex file"
+msgstr "Exportálás Bibtex fájlként..."
 
-#: collectionfactory.cpp:78 collectionfactory.cpp:92
-#: collections/bibtexcollection.cpp:60 collections/bookcollection.cpp:41
-#: collections/cardcollection.cpp:39 collections/coincollection.cpp:39
-#: collections/comicbookcollection.cpp:41 collections/gamecollection.cpp:39
-#: collections/stampcollection.cpp:40 collections/videocollection.cpp:41
-#: collections/winecollection.cpp:39 fetch/fetchmanager.cpp:45
-#: fetchdialog.cpp:139
-msgid "Title"
-msgstr "Cím"
-
-#: collections/gamecollection.cpp:88 collections/stampcollection.cpp:46
-#: fetchdialog.cpp:140
-msgid "Description"
-msgstr ""
-
-#: collections/coincollection.cpp:51 collections/stampcollection.cpp:52
+#: main.cpp:29
 #, fuzzy
-msgid "Denomination"
-msgstr "BCCollection"
-
-#: collections/coincollection.cpp:67 collections/comicbookcollection.cpp:96
-#: collections/stampcollection.cpp:57 collections/winecollection.cpp:75
-#, fuzzy
-msgid "Country"
-msgstr "Oszlopok megtekintése"
-
-#: collections/stampcollection.cpp:63
-msgid "Issue Year"
-msgstr ""
-
-#: collections/stampcollection.cpp:68 collections/videocollection.cpp:172
-#, fuzzy
-msgid "Color"
-msgstr "&Exportálás"
-
-#: collections/stampcollection.cpp:73
-msgid "Scott#"
-msgstr ""
-
-#: collections/stampcollection.cpp:80
-msgid ""
-"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
-"Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
-
-#: collections/coincollection.cpp:88 collections/stampcollection.cpp:82
-#, fuzzy
-msgid "Grade"
-msgstr "Fajta"
-
-#: collections/stampcollection.cpp:87
-msgid "Cancelled"
-msgstr ""
-
-#: collections/stampcollection.cpp:91
-#, fuzzy
-msgid "Hinged"
-msgstr "Dedikált"
-
-#: collections/stampcollection.cpp:96
-#, fuzzy
-msgid "Centering"
-msgstr "Értékelés"
-
-#: collections/stampcollection.cpp:101
-msgid "Gummed"
-msgstr ""
-
-#: collections/bookcollection.cpp:66 collections/cardcollection.cpp:84
-#: collections/coincollection.cpp:103 collections/comicbookcollection.cpp:128
-#: collections/gamecollection.cpp:100 collections/musiccollection.cpp:84
-#: collections/stampcollection.cpp:106 collections/videocollection.cpp:190
-#: collections/winecollection.cpp:81
-msgid "Purchase Date"
-msgstr "Vásárlás dátuma"
-
-#: collections/bookcollection.cpp:71 collections/cardcollection.cpp:89
-#: collections/coincollection.cpp:108 collections/comicbookcollection.cpp:133
-#: collections/gamecollection.cpp:109 collections/musiccollection.cpp:93
-#: collections/stampcollection.cpp:111 collections/videocollection.cpp:199
-#: collections/winecollection.cpp:86
-msgid "Purchase Price"
-msgstr "Vásárlási ár"
-
-#: collections/cardcollection.cpp:93 collections/coincollection.cpp:112
-#: collections/stampcollection.cpp:115 collections/winecollection.cpp:90
-#, fuzzy
-msgid "Location"
-msgstr "BCCollection"
-
-#: collections/bookcollection.cpp:151 collections/cardcollection.cpp:98
-#: collections/coincollection.cpp:118 collections/comicbookcollection.cpp:141
-#: collections/gamecollection.cpp:105 collections/musiccollection.cpp:89
-#: collections/stampcollection.cpp:121 collections/videocollection.cpp:195
-#: collections/winecollection.cpp:109
-msgid "Gift"
-msgstr "Ajándék"
-
-#: collections/bookcollection.cpp:167 collections/cardcollection.cpp:117
-#: collections/coincollection.cpp:128 collections/comicbookcollection.cpp:152
-#: collections/gamecollection.cpp:120 collections/musiccollection.cpp:109
-#: collections/stampcollection.cpp:128 collections/videocollection.cpp:210
-#: collections/winecollection.cpp:116
-msgid "Comments"
-msgstr "Megjegyzések"
-
-#: collections/coincollection.cpp:27
-#, fuzzy
-msgid "Coins"
-msgstr "Megjegyzések"
-
-#: collections/coincollection.cpp:28
-#, fuzzy
-msgid "My Coins"
-msgstr "Dalgyűjteményem"
-
-#: collections/coincollection.cpp:45 collections/winecollection.cpp:70
-#, fuzzy
-msgid "Type"
-msgstr "Sorozatszám"
-
-#: collections/bibtexcollection.cpp:149 collections/cardcollection.cpp:68
-#: collections/coincollection.cpp:56 collections/musiccollection.cpp:64
-msgid "Year"
-msgstr "Év"
-
-#: collections/coincollection.cpp:61
-msgid "Mint Mark"
-msgstr ""
-
-#: collections/coincollection.cpp:73
-#, fuzzy
-msgid "Coin Set"
-msgstr "Megjegyzések"
-
-#: collections/coincollection.cpp:83
-msgid ""
-"_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
-"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
-"Fine-20,Fine-12,Very Good-8,Good-4,Fair\n"
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair"
-msgstr ""
-
-#: collections/coincollection.cpp:96
-msgid ""
-"_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr ""
-
-#: collections/coincollection.cpp:98
-msgid "Grading Service"
-msgstr ""
-
-#: collections/coincollection.cpp:122
-#, fuzzy
-msgid "Obverse"
-msgstr "Felülírás"
-
-#: collections/coincollection.cpp:125
-#, fuzzy
-msgid "Reverse"
-msgstr "Felülírás"
-
-#: collections/bibtexcollection.cpp:28 collections/bookcollection.cpp:21
-#: collections/comicbookcollection.cpp:21 translators/risimporter.cpp:256
-#, fuzzy
-msgid "Publishing"
-msgstr "Kiadói adatok"
-
-#: collections/bookcollection.cpp:22 collections/comicbookcollection.cpp:22
-#: translators/risimporter.cpp:250
-#, fuzzy
-msgid "Classification"
-msgstr "Osztályozás"
-
-#: collections/bookcollection.cpp:29
-msgid "Books"
-msgstr "Könyvek"
-
-#: collections/bookcollection.cpp:30
-msgid "My Books"
-msgstr "Könyvgyűjteményem"
-
-#: collections/bookcollection.cpp:47 collections/comicbookcollection.cpp:47
-msgid "Subtitle"
-msgstr "Alcím"
-
-#: collections/bibtexcollection.cpp:83 collections/bookcollection.cpp:52
-msgid "Author"
-msgstr "Szerző"
-
-#: collections/bookcollection.cpp:59
-msgid "Hardback"
-msgstr "Kemény tábla"
-
-#: collections/bookcollection.cpp:59
-msgid "Paperback"
-msgstr "Kartonált"
-
-#: collections/bookcollection.cpp:59
-msgid "Trade Paperback"
-msgstr "Papírtábla"
-
-#: collections/bookcollection.cpp:60
-msgid "E-Book"
-msgstr "E-könyv"
-
-#: collections/bookcollection.cpp:60
-msgid "Magazine"
-msgstr "Újság"
-
-#: collections/bibtexcollection.cpp:161 collections/bookcollection.cpp:60
-msgid "Journal"
-msgstr "Füzet"
-
-#: collections/bookcollection.cpp:61
-msgid "Binding"
-msgstr "Kötészet"
-
-#: collections/bibtexcollection.cpp:124 collections/bookcollection.cpp:75
-#: collections/comicbookcollection.cpp:75 collections/gamecollection.cpp:66
-msgid "Publisher"
-msgstr "Kiadó"
-
-#: collections/bibtexcollection.cpp:137 collections/bookcollection.cpp:81
-#: collections/comicbookcollection.cpp:81
-msgid "Edition"
-msgstr "Kiadás"
-
-#: collections/bookcollection.cpp:87
-msgid "Copyright Year"
-msgstr "Copyright éve"
-
-#: collections/bookcollection.cpp:92 collections/comicbookcollection.cpp:87
-msgid "Publication Year"
-msgstr "Kiadás éve"
-
-#: collections/bookcollection.cpp:97 translators/risimporter.cpp:253
-msgid "ISBN#"
-msgstr "ISBN#"
-
-#: collections/bookcollection.cpp:99 translators/risimporter.cpp:257
-msgid "International Standard Book Number"
-msgstr "International Standard Book Number"
-
-#: collections/bookcollection.cpp:102
-msgid "LCCN#"
-msgstr "LCCN#"
-
-#: collections/bookcollection.cpp:104
-msgid "Library of Congress Control Number"
-msgstr "Library of Congress Control Number"
-
-#: collections/bibtexcollection.cpp:144 collections/bookcollection.cpp:107
-#: collections/comicbookcollection.cpp:92
-msgid "Pages"
-msgstr "Oldalak"
-
-#: collections/bookcollection.cpp:111 collections/comicbookcollection.cpp:102
-msgid "Language"
-msgstr "Nyelv"
-
-#: collections/bookcollection.cpp:116 collections/comicbookcollection.cpp:108
-#: collections/gamecollection.cpp:55 collections/musiccollection.cpp:69
-#: collections/videocollection.cpp:69
-msgid "Genre"
-msgstr "Fajta"
-
-#: collections/bookcollection.cpp:123 collections/cardcollection.cpp:102
-#: collections/comicbookcollection.cpp:114 collections/musiccollection.cpp:101
-#: translators/risimporter.cpp:248
-msgid "Keywords"
-msgstr "Kulcsszavak"
-
-#: collections/bibtexcollection.cpp:198 collections/bookcollection.cpp:128
-#: collections/cardcollection.cpp:73 collections/comicbookcollection.cpp:64
-msgid "Series"
-msgstr "Sorozat"
-
-#: collections/bookcollection.cpp:133
-msgid "Series Number"
-msgstr "Sorozatszám"
-
-#: collections/bookcollection.cpp:138
-msgid "Used"
-msgstr "Használt"
-
-#: collections/bookcollection.cpp:143 collections/comicbookcollection.cpp:137
-msgid "Signed"
-msgstr "Dedikált"
-
-#: collections/bookcollection.cpp:147
-msgid "Read"
-msgstr "Olvasva"
-
-#: collections/bookcollection.cpp:155 collections/comicbookcollection.cpp:145
-#: collections/gamecollection.cpp:113 collections/musiccollection.cpp:97
-#: collections/videocollection.cpp:203 document.cpp:374
-msgid "Loaned"
-msgstr "Kölcsön adva"
-
-#: collections/bookcollection.cpp:164 collections/comicbookcollection.cpp:149
-#, fuzzy
-msgid "Front Cover"
-msgstr "&Exportálás"
-
-#: collections/winecollection.cpp:27
-#, fuzzy
-msgid "Wines"
-msgstr "Videó gyűjteményem"
-
-#: collections/winecollection.cpp:28
-#, fuzzy
-msgid "My Wines"
-msgstr "Videó gyűjteményem"
-
-#: collections/videocollection.cpp:115 collections/winecollection.cpp:45
-#, fuzzy
-msgid "Producer"
-msgstr "Kiadás éve"
-
-#: collections/winecollection.cpp:51
-#, fuzzy
-msgid "Appellation"
-msgstr "Gyűjtemény átnevezése..."
-
-#: collections/winecollection.cpp:57
-msgid "Varietal"
-msgstr ""
-
-#: collections/winecollection.cpp:63
-#, fuzzy
-msgid "Vintage"
-msgstr "Dedikált"
-
-#: collections/winecollection.cpp:69
-#, fuzzy
-msgid "Red Wine"
-msgstr "Videó gyűjteményem"
-
-#: collections/winecollection.cpp:69
-msgid "White Wine"
-msgstr ""
-
-#: collections/winecollection.cpp:69
-msgid "Sparkling Wine"
-msgstr ""
-
-#: collections/cardcollection.cpp:107 collections/winecollection.cpp:95
-msgid "Quantity"
-msgstr ""
-
-#: collections/winecollection.cpp:99
-msgid "Drink By"
-msgstr ""
-
-#: collections/winecollection.cpp:113
-#, fuzzy
-msgid "Label Image"
-msgstr "Cím"
-
-#: collections/comicbookcollection.cpp:29
-#, fuzzy
-msgid "Comics"
-msgstr "Megjegyzések"
-
-#: collections/comicbookcollection.cpp:30
-#, fuzzy
-msgid "My Comic Books"
-msgstr "Könyvgyűjteményem"
-
-#: collections/comicbookcollection.cpp:52 collections/videocollection.cpp:121
-#, fuzzy
-msgid "Writer"
-msgstr "Könyv törlése"
-
-#: collections/comicbookcollection.cpp:58 collections/musiccollection.cpp:52
-msgid "Artist"
-msgstr "Előadó"
-
-#: collections/comicbookcollection.cpp:70
-msgid "Issue"
-msgstr ""
-
-#: collections/comicbookcollection.cpp:122
-msgid ""
-"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
-"Good,Good,Fair,Poor\n"
-"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr ""
-
-#: collections/videocollection.cpp:21
-msgid "Other People"
-msgstr ""
-
-#: collections/videocollection.cpp:22
-#, fuzzy
-msgid "Features"
-msgstr "Keresés itt:"
-
-#: collections/videocollection.cpp:29
-msgid "Videos"
-msgstr "Filmek"
-
-#: collections/videocollection.cpp:30
-msgid "My Videos"
-msgstr "Videó gyűjteményem"
-
-#: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
-msgid "DVD"
-msgstr "DVD"
-
-#: collections/videocollection.cpp:48
-msgid "VHS"
-msgstr "VHS"
-
-#: collections/videocollection.cpp:48
-msgid "VCD"
-msgstr "VCD"
-
-#: collections/videocollection.cpp:48
-msgid "DivX"
-msgstr "DivX"
-
-#: collections/musiccollection.cpp:47 collections/videocollection.cpp:49
-msgid "Medium"
-msgstr "Közepes"
-
-#: collections/videocollection.cpp:54
-#, fuzzy
-msgid "Production Year"
-msgstr "Kiadás éve"
-
-#: collections/videocollection.cpp:62
-msgid ""
-"_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
-"G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
-
-#: collections/videocollection.cpp:64
-#, fuzzy
-msgid "Certification"
-msgstr "Osztályozás"
-
-#: collections/videocollection.cpp:76
-msgid "Region 1"
-msgstr ""
-
-#: collections/videocollection.cpp:77
-msgid "Region 2"
-msgstr ""
-
-#: collections/videocollection.cpp:78
-msgid "Region 3"
-msgstr ""
-
-#: collections/videocollection.cpp:79
-msgid "Region 4"
-msgstr ""
-
-#: collections/videocollection.cpp:80
-msgid "Region 5"
-msgstr ""
-
-#: collections/videocollection.cpp:81
-msgid "Region 6"
-msgstr ""
-
-#: collections/videocollection.cpp:82
-msgid "Region 7"
-msgstr ""
-
-#: collections/videocollection.cpp:83
-msgid "Region 8"
-msgstr ""
-
-#: collections/videocollection.cpp:84
-msgid "Region"
-msgstr ""
-
-#: collections/videocollection.cpp:89
-msgid "Nationality"
-msgstr ""
-
-#: collections/videocollection.cpp:96
-msgid "NTSC"
-msgstr ""
-
-#: collections/videocollection.cpp:96
-msgid "PAL"
-msgstr ""
-
-#: collections/videocollection.cpp:96
-msgid "SECAM"
-msgstr ""
-
-#: collections/videocollection.cpp:97
-#, fuzzy
-msgid "Format"
-msgstr "Formázási beállítások"
-
-#: collections/videocollection.cpp:102
-#, fuzzy
-msgid "Cast"
-msgstr "Kazetta"
-
-#: collections/videocollection.cpp:106
-msgid "A table for the cast members, along with the roles they play"
-msgstr ""
-
-#: collections/videocollection.cpp:109
-msgid "Director"
-msgstr ""
-
-#: collections/videocollection.cpp:127
-#, fuzzy
-msgid "Composer"
-msgstr "&Exportálás"
-
-#: collections/videocollection.cpp:133
-msgid "Studio"
-msgstr ""
-
-#: collections/videocollection.cpp:139
-#, fuzzy
-msgid "Language Tracks"
-msgstr "Nyelv"
-
-#: collections/videocollection.cpp:145
-#, fuzzy
-msgid "Subtitle Languages"
-msgstr "Alcím"
-
-#: collections/videocollection.cpp:151
-#, fuzzy
-msgid "Audio Tracks"
-msgstr "8-sávos"
-
-#: collections/videocollection.cpp:157
-msgid "Running Time"
-msgstr ""
-
-#: collections/videocollection.cpp:159
-msgid "The running time of the video (in minutes)"
-msgstr ""
-
-#: collections/videocollection.cpp:162
-msgid "Aspect Ratio"
-msgstr ""
-
-#: collections/videocollection.cpp:167 translators/tellicoimporter.cpp:771
-msgid "Widescreen"
-msgstr ""
-
-#: collections/videocollection.cpp:172
-msgid "Black & White"
-msgstr ""
-
-#: collections/videocollection.cpp:173
-#, fuzzy
-msgid "Color Mode"
-msgstr "&Exportálás"
-
-#: collections/videocollection.cpp:178
-msgid "Director's Cut"
-msgstr ""
-
-#: collections/videocollection.cpp:182
-msgid "Plot Summary"
-msgstr ""
-
-#: collections/gamecollection.cpp:91 collections/videocollection.cpp:185
-#, fuzzy
-msgid "Personal Rating"
-msgstr "Személyes"
-
-#: collections/gamecollection.cpp:117 collections/musiccollection.cpp:106
-#: collections/videocollection.cpp:207
-#, fuzzy
-msgid "Cover"
-msgstr "&Exportálás"
-
-#: collections/gamecollection.cpp:27
-#, fuzzy
-msgid "Games"
-msgstr "Sorozatszám"
-
-#: collections/gamecollection.cpp:28
-#, fuzzy
-msgid "My Games"
-msgstr "Videó gyűjteményem"
-
-#: collections/gamecollection.cpp:46
-msgid "Xbox"
-msgstr ""
-
-#: collections/gamecollection.cpp:46
-msgid "PlayStation2"
-msgstr ""
-
-#: collections/gamecollection.cpp:46
-msgid "PlayStation"
-msgstr ""
-
-#: collections/gamecollection.cpp:46
-msgid ""
-"_: PlayStation Portable\n"
-"PSP"
-msgstr ""
-
-#: collections/gamecollection.cpp:47
-msgid "Nintendo DS"
-msgstr ""
-
-#: collections/gamecollection.cpp:47
-#, fuzzy
-msgid "GameCube"
-msgstr "Sorozatszám"
-
-#: collections/gamecollection.cpp:47
-msgid "Dreamcast"
-msgstr ""
-
-#: collections/gamecollection.cpp:48
-msgid "Game Boy Advance"
-msgstr ""
-
-#: collections/gamecollection.cpp:48
-#, fuzzy
-msgid "Game Boy Color"
-msgstr "Gyűjtemény átnevezése..."
-
-#: collections/gamecollection.cpp:48
-#, fuzzy
-msgid "Game Boy"
-msgstr "Sorozatszám"
-
-#: collections/gamecollection.cpp:49
-msgid ""
-"_: Windows Platform\n"
-"Windows"
-msgstr ""
-
-#: collections/gamecollection.cpp:49
-msgid "Mac OS"
-msgstr ""
-
-#: collections/gamecollection.cpp:50
-msgid "Platform"
-msgstr ""
-
-#: collections/gamecollection.cpp:61
-msgid "Release Year"
-msgstr ""
-
-#: collections/gamecollection.cpp:72
-msgid "Developer"
-msgstr ""
-
-#: collections/gamecollection.cpp:81
-msgid ""
-"_: Video game ratings - Unrated, Mature, Teen, Everyone, Early Childhood, "
-"Pending\n"
-"Unrated, Mature, Teen, Everyone, Early Childhood, Pending"
-msgstr ""
-
-#: collections/gamecollection.cpp:83
-#, fuzzy
-msgid "ESRB Rating"
-msgstr "Értékelés"
-
-#: collections/gamecollection.cpp:96
-#, fuzzy
-msgid "Completed"
-msgstr "Megjegyzések"
-
-#: collections/cardcollection.cpp:27
-#, fuzzy
-msgid "Cards"
-msgstr "Kazetta"
-
-#: collections/cardcollection.cpp:28
-#, fuzzy
-msgid "My Cards"
-msgstr "CD gyűjteményem"
-
-#: collections/cardcollection.cpp:45
-msgid "Player"
-msgstr ""
-
-#: collections/cardcollection.cpp:51
-msgid "Team"
-msgstr ""
-
-#: collections/cardcollection.cpp:57
-#, fuzzy
-msgid "Brand"
-msgstr "Fajta"
-
-#: collections/cardcollection.cpp:64
-#, fuzzy
-msgid "Card Number"
-msgstr "Sorozatszám"
-
-#: collections/cardcollection.cpp:79
-#, fuzzy
-msgid "Card Type"
-msgstr "Sorozatszám"
-
-#: collections/cardcollection.cpp:111
-#, fuzzy
-msgid "Front Image"
-msgstr "Oldalak"
-
-#: collections/cardcollection.cpp:114
-#, fuzzy
-msgid "Back Image"
-msgstr "Oldalak"
-
-#: collections/bibtexcollection.cpp:33
-#, fuzzy
-msgid "Entries"
-msgstr "Sorozat"
-
-#: collectionfactory.cpp:134 collections/bibtexcollection.cpp:34
-#, fuzzy
-msgid "Bibliography"
+msgid "Import <filename> as a MODS file"
 msgstr "Bibtexml fájl importálása..."
 
-#: collections/bibtexcollection.cpp:76
+#: main.cpp:30
 #, fuzzy
-msgid "Entry Type"
-msgstr "Sorozat"
+msgid "Import <filename> as a RIS file"
+msgstr "Bibtexml fájl importálása..."
 
-#: collections/bibtexcollection.cpp:80
-msgid "These entry types are specific to bibtex. See the bibtex documentation."
+#: main.cpp:31
+msgid "File to open"
+msgstr "Megnyitandó fájl"
+
+#: main.cpp:37
+msgid "Tellico"
+msgstr "Tellico"
+
+#: main.cpp:42
+msgid "Author of btparse library"
 msgstr ""
 
-#: collections/bibtexcollection.cpp:90
+#: main.cpp:44
 #, fuzzy
-msgid "Bibtex Key"
-msgstr "Általános beállítások"
-
-#: collections/bibtexcollection.cpp:96
-#, fuzzy
-msgid "Book Title"
-msgstr "Cím"
-
-#: collections/bibtexcollection.cpp:102
-#, fuzzy
-msgid "Editor"
-msgstr "Kiadás"
-
-#: collections/bibtexcollection.cpp:109
-msgid "Organization"
-msgstr ""
-
-#: collections/bibtexcollection.cpp:131
-msgid "Address"
-msgstr ""
-
-#: collections/bibtexcollection.cpp:170
-msgid "Month"
-msgstr ""
-
-#: collections/bibtexcollection.cpp:181
-#, fuzzy
-msgid "How Published"
-msgstr "Kiadó"
-
-#: collections/bibtexcollection.cpp:193
-msgid "Chapter"
-msgstr ""
-
-#: collections/bibtexcollection.cpp:205
-#, fuzzy
-msgid "Volume"
-msgstr "Oszlopok megtekintése"
-
-#: collections/bibtexcollection.cpp:210
-msgid "Cross-Reference"
-msgstr ""
-
-#: collections/bibtexcollection.cpp:220
-#, fuzzy
-msgid "Notes"
-msgstr "&Exportálás"
-
-#: collections/musiccollection.cpp:27
-#, fuzzy
-msgid "Albums"
-msgstr "Album"
-
-#: collections/musiccollection.cpp:28
-msgid "My Music"
-msgstr ""
-
-#: collections/musiccollection.cpp:39
-msgid "Album"
-msgstr "Album"
-
-#: collections/musiccollection.cpp:46 translators/freedbimporter.cpp:191
-#: translators/freedbimporter.cpp:295
-msgid "Compact Disc"
-msgstr ""
-
-#: collections/musiccollection.cpp:46
-msgid "Cassette"
-msgstr "Kazetta"
-
-#: collections/musiccollection.cpp:46
-msgid "Vinyl"
-msgstr ""
-
-#: collections/musiccollection.cpp:58
-#, fuzzy
-msgid "Label"
-msgstr "Cím"
-
-#: collections/musiccollection.cpp:75
-#, fuzzy
-msgid "Tracks"
-msgstr "8-sávos"
+msgid "Icons"
+msgstr "Megjegyzések"
 
 #: collectionfieldsdialog.cpp:87
 #, fuzzy
@@ -2444,12 +3346,6 @@ msgstr ""
 msgid "Keep modified values"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:415 collectionfieldsdialog.cpp:418
-#: translators/csvimporter.cpp:362 translators/csvimporter.cpp:464
-#, fuzzy
-msgid "New Field"
-msgstr "Minden mező"
-
 #: collectionfieldsdialog.cpp:747
 #, fuzzy
 msgid "Revert Field Properties"
@@ -2531,318 +3427,6 @@ msgstr ""
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Nem sikerült a(z) %1 fájl olvasása."
 
-#: fetch/entrezfetcher.cpp:48 fetch/fetchmanager.cpp:281
-msgid "Entrez Database"
-msgstr ""
-
-#: fetch/entrezfetcher.cpp:371 fetch/srufetcher.cpp:259
-msgid "This source has no options."
-msgstr ""
-
-#: fetch/srufetcher.cpp:44 fetch/z3950fetcher.cpp:560
-#, fuzzy
-msgid "Library of Congress (US)"
-msgstr "Library of Congress Control Number"
-
-#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:82
-msgid "Internet Movie Database"
-msgstr ""
-
-#: fetch/imdbfetcher.cpp:401
-msgid "Select IMDB Result"
-msgstr ""
-
-#: fetch/imdbfetcher.cpp:404
-msgid ""
-"<qt>Your search returned multiple matches. Please select one below.</qt>"
-msgstr ""
-
-#: fetch/imdbfetcher.cpp:411
-msgid "<qt>Select a search result.</qt>"
-msgstr ""
-
-#: fetch/imdbfetcher.cpp:531
-msgid "Alternative Titles"
-msgstr ""
-
-#: fetch/imdbfetcher.cpp:749
-#, fuzzy
-msgid "Certifications"
-msgstr "Osztályozás"
-
-#: fetch/imdbfetcher.cpp:766 fetch/z3950fetcher.cpp:571
-#, fuzzy
-msgid "&Host: "
-msgstr "&Exportálás"
-
-#: fetch/imdbfetcher.cpp:771
-msgid ""
-"The Internet Movie Database uses several different servers. Choose the one "
-"you wish to use."
-msgstr ""
-
-#: fetch/imdbfetcher.cpp:777
-msgid "Download cover image"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:780
-msgid ""
-"The cover image may be downloaded as well. However, too many large images in "
-"the collection may degrade performance."
-msgstr ""
-
-#: fetch/fetchmanager.cpp:46
-#, fuzzy
-msgid "Person"
-msgstr "Személyes"
-
-#: fetch/fetchmanager.cpp:47 fetchdialog.cpp:396
-#, fuzzy
-msgid "ISBN"
-msgstr "ISBN#"
-
-#: fetch/fetchmanager.cpp:48
-#, fuzzy
-msgid "Keyword"
-msgstr "Kulcsszavak"
-
-#: fetch/fetchmanager.cpp:49
-#, fuzzy
-msgid "Raw Query"
-msgstr "Keresés itt:"
-
-#: fetch/fetchmanager.cpp:271
-msgid "Amazon.com Web Services"
-msgstr ""
-
-#: fetch/fetchmanager.cpp:277
-msgid "z39.50"
-msgstr ""
-
-#: fetch/fetchmanager.cpp:282
-#, fuzzy
-msgid "External Application"
-msgstr "Kilépés a programból"
-
-#: fetch/amazonfetcher.cpp:55
-msgid "Amazon (US)"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:65
-msgid "Amazon (UK)"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:75
-msgid "Amazon (Germany)"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:85
-msgid "Amazon (Japan)"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:95
-msgid "Amazon (France)"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:105
-msgid "Amazon (Canada)"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:216
-msgid "%1 does not allow searching for this collection type."
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:440
-msgid "Results from %1: %2/%3"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:478 fetch/z3950fetcher.cpp:542
-msgid "<qt>No entries were found for the following ISBN values:</qt>"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:518
-msgid "The cover image could not be loaded."
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:595
-#, fuzzy
-msgid "Co&untry: "
-msgstr "Oszlopok megtekintése"
-
-#: fetch/amazonfetcher.cpp:599
-msgid "United States"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:600
-msgid "United Kingdom"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:601
-msgid "Germany"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:602
-msgid "Japan"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:603
-#, fuzzy
-msgid "France"
-msgstr "8-sávos"
-
-#: fetch/amazonfetcher.cpp:604
-msgid "Canada"
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:607
-msgid ""
-"Amazon.com provides data from several different localized sites. Choose the "
-"one you wish to use for this data source."
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:613
-msgid "&Image size: "
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:617
-#, fuzzy
-msgid "Small Image"
-msgstr "Cím"
-
-#: fetch/amazonfetcher.cpp:618
-#, fuzzy
-msgid "Medium Image"
-msgstr "Közepes"
-
-#: fetch/amazonfetcher.cpp:619
-#, fuzzy
-msgid "Large Image"
-msgstr "Cím"
-
-#: fetch/amazonfetcher.cpp:620
-#, fuzzy
-msgid "No Image"
-msgstr "Oldalak"
-
-#: fetch/amazonfetcher.cpp:629
-msgid "&Associate's ID: "
-msgstr ""
-
-#: fetch/amazonfetcher.cpp:634
-msgid ""
-"The associate's id identifies the person accessing the Amazon.com Web "
-"Services, and is included in any links to the Amazon.com site."
-msgstr ""
-
-#: fetch/execexternalfetcher.cpp:233
-msgid "Application &path: "
-msgstr ""
-
-#: fetch/execexternalfetcher.cpp:238
-msgid ""
-"Set the path of the application to run that should output a valid Tellico "
-"data file."
-msgstr ""
-
-#: fetch/execexternalfetcher.cpp:243
-msgid "&Arguments: "
-msgstr ""
-
-#: fetch/execexternalfetcher.cpp:248
-msgid ""
-"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
-"search terms."
-msgstr ""
-
-#: fetch/execexternalfetcher.cpp:253
-#, fuzzy
-msgid "Collection &type: "
-msgstr "BCCollection"
-
-#: fetch/execexternalfetcher.cpp:262
-msgid ""
-"Set the collection type of the data returned from the external application."
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:348
-#, fuzzy
-msgid "Connection error %1: %2"
-msgstr "Gyüjtemény eszköztár"
-
-#: fetch/z3950fetcher.cpp:360
-msgid "Query error!"
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:380
-msgid "Connection search error %1: %2"
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:419
-msgid "Record syntax error"
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:576
-msgid "Enter the host name of the z39.50 server."
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:581
-#, fuzzy
-msgid "&Port: "
-msgstr "&Exportálás"
-
-#: fetch/z3950fetcher.cpp:586
-#, c-format
-msgid "Enter the port number of the z39.50 server. The default is %1."
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:591
-msgid "&Database: "
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:596
-msgid "Enter the database name used by the z39.50 server."
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:601
-msgid "Ch&aracter set: "
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:610
-msgid ""
-"Enter the character set encoding used by the z39.50 server. The most likely "
-"choice is MARC-8, although ISO-8859-1 is common as well."
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:616
-msgid "&User: "
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:619 fetch/z3950fetcher.cpp:631
-#, fuzzy
-msgid "Optional"
-msgstr "Általános beállítások"
-
-#: fetch/z3950fetcher.cpp:622
-msgid ""
-"Enter the authentication user name used by the z39.50 database. Most servers "
-"do not need one."
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:628
-msgid "Pass&word: "
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:635
-msgid ""
-"Enter the authentication password used by the z39.50 database. Most servers "
-"do not need one."
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:637
-msgid ""
-"The password will be saved in plain text in the Tellico configuration file."
-msgstr ""
-
 #: document.cpp:109
 msgid ""
 "The current file has been modified.\n"
@@ -2863,119 +3447,6 @@ msgstr ""
 #, fuzzy
 msgid "Name"
 msgstr "Sorozatszám"
-
-#: collectionfactory.cpp:76 collectionfactory.cpp:90
-#, fuzzy
-msgid "My Collection"
-msgstr "BCCollection"
-
-#: collectionfactory.cpp:133
-#, fuzzy
-msgid "Book Collection"
-msgstr "BookCollection"
-
-#: collectionfactory.cpp:135
-#, fuzzy
-msgid "Comic Book Collection"
-msgstr "BookCollection"
-
-#: collectionfactory.cpp:136
-#, fuzzy
-msgid "Video Collection"
-msgstr "Filmgyűjtemény"
-
-#: collectionfactory.cpp:137
-#, fuzzy
-msgid "Music Collection"
-msgstr "BCCollection"
-
-#: collectionfactory.cpp:138
-#, fuzzy
-msgid "Coin Collection"
-msgstr "SongCollection"
-
-#: collectionfactory.cpp:139
-#, fuzzy
-msgid "Stamp Collection"
-msgstr "Gyűjtemény átnevezése..."
-
-#: collectionfactory.cpp:140
-#, fuzzy
-msgid "Wine Collection"
-msgstr "Filmgyűjtemény"
-
-#: collectionfactory.cpp:141
-#, fuzzy
-msgid "Card Collection"
-msgstr "BCCollection"
-
-#: collectionfactory.cpp:142
-#, fuzzy
-msgid "Game Collection"
-msgstr "Gyűjtemény átnevezése..."
-
-#: collectionfactory.cpp:143
-#, fuzzy
-msgid "Custom Collection"
-msgstr "Új &gyűjtemény"
-
-#: loanview.cpp:33 loanview.cpp:87 xslt.cpp:15
-msgid "Borrower"
-msgstr ""
-
-#: loanview.cpp:44
-msgid "Check-in"
-msgstr ""
-
-#: loanview.cpp:46
-#, fuzzy
-msgid "Modify Loan..."
-msgstr "Könyv módosítása"
-
-#: loanview.cpp:89
-msgid "Borrower (Sort by Count)"
-msgstr ""
-
-#: main.cpp:23
-#, fuzzy
-msgid "Tellico - a collection manager for KDE"
-msgstr "Tellico - könyvnyílvántartóprogram KDE-hez"
-
-#: main.cpp:27
-msgid "Do not reopen the last open file"
-msgstr ""
-
-#: main.cpp:28
-#, fuzzy
-msgid "Import <filename> as a bibtex file"
-msgstr "Exportálás Bibtex fájlként..."
-
-#: main.cpp:29
-#, fuzzy
-msgid "Import <filename> as a MODS file"
-msgstr "Bibtexml fájl importálása..."
-
-#: main.cpp:30
-#, fuzzy
-msgid "Import <filename> as a RIS file"
-msgstr "Bibtexml fájl importálása..."
-
-#: main.cpp:31
-msgid "File to open"
-msgstr "Megnyitandó fájl"
-
-#: main.cpp:37
-msgid "Tellico"
-msgstr "Tellico"
-
-#: main.cpp:42
-msgid "Author of btparse library"
-msgstr ""
-
-#: main.cpp:44
-#, fuzzy
-msgid "Icons"
-msgstr "Megjegyzések"
 
 #: configdialog.cpp:57
 msgid "Configure Tellico"
@@ -3094,32 +3565,10 @@ msgstr "Nyomtatási beállítások"
 msgid "Format titles and names"
 msgstr "Címek és nevek formázása"
 
-#: configdialog.cpp:237 translators/htmlexporter.cpp:382
-msgid "Print field headers"
-msgstr "Mezőfejlécek nyomtatása"
-
-#: configdialog.cpp:238 translators/htmlexporter.cpp:383
-msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Ha kijelöli ezt az opciót, akkor a mezőnevek fejlécként kinyomtatásra "
-"kerülnek"
-
 #: configdialog.cpp:241
 #, fuzzy
 msgid "Grouping Options"
 msgstr "Nyomtatási beállítások"
-
-#: configdialog.cpp:244 translators/htmlexporter.cpp:387
-#, fuzzy
-msgid "Group the entries"
-msgstr "Könyvek csoportosítása"
-
-#: configdialog.cpp:245 translators/htmlexporter.cpp:388
-#, fuzzy
-msgid "If checked, the entries will be grouped by the selected field."
-msgstr ""
-"Ha be van jelölve a pont, akkor a Tellico a kiválasztott mező alapján "
-"csoportosítja a könyveket."
 
 #: configdialog.cpp:248
 #, fuzzy
@@ -3182,34 +3631,51 @@ msgstr ""
 msgid "Remo&ve"
 msgstr ""
 
-#: configdialog.cpp:527 configdialog.cpp:636
+#: configdialog.cpp:534 configdialog.cpp:643
 #, fuzzy
 msgid "Data Source Properties"
 msgstr "Általános beállítások"
 
-#: configdialog.cpp:545 configdialog.cpp:654
+#: configdialog.cpp:552 configdialog.cpp:661
 msgid "&Source name: "
 msgstr ""
 
-#: configdialog.cpp:547 configdialog.cpp:656
+#: configdialog.cpp:554 configdialog.cpp:663
 msgid ""
 "The name identifies the data source and should be unique and informative."
 msgstr ""
 
-#: configdialog.cpp:556 configdialog.cpp:667
+#: configdialog.cpp:563 configdialog.cpp:674
 msgid "Source &type: "
 msgstr ""
 
-#: configdialog.cpp:558 configdialog.cpp:669
+#: configdialog.cpp:565 configdialog.cpp:676
 msgid ""
 "Tellico currently supports five source types: Amazon.com, IMDB, z39.50, "
 "Entrez, and external applications."
 msgstr ""
 
-#: configdialog.cpp:566 configdialog.cpp:676
+#: configdialog.cpp:573 configdialog.cpp:683
 #, fuzzy
 msgid "Source Options"
 msgstr "Általános beállítások"
+
+#: loanview.cpp:32 loanview.cpp:86 xslt.cpp:22
+msgid "Borrower"
+msgstr ""
+
+#: loanview.cpp:43
+msgid "Check-in"
+msgstr ""
+
+#: loanview.cpp:45
+#, fuzzy
+msgid "Modify Loan..."
+msgstr "Könyv módosítása"
+
+#: loanview.cpp:88
+msgid "Borrower (Sort by Count)"
+msgstr ""
 
 #: viewstack.cpp:28
 msgid ""
@@ -3279,6 +3745,55 @@ msgstr ""
 #: exportdialog.cpp:70
 msgid "Encode the exported file in the local format."
 msgstr ""
+
+#: entryeditdialog.cpp:47 entryeditdialog.cpp:320 entryeditdialog.cpp:343
+#: entryeditdialog.cpp:441
+#, fuzzy
+msgid "Edit Entry"
+msgstr "Könyv törlése"
+
+#: entryeditdialog.cpp:48
+#, fuzzy
+msgid "&New Entry"
+msgstr "Könyv duplikálása"
+
+#: entryeditdialog.cpp:84 entryeditdialog.cpp:353 entryeditdialog.cpp:468
+#, fuzzy
+msgid "Sa&ve Entry"
+msgstr "Könyv duplikálása"
+
+#: entryeditdialog.cpp:279
+msgid "Do you really want to modify these entries?"
+msgstr ""
+
+#: entryeditdialog.cpp:281
+#, fuzzy
+msgid "Modify Multiple Entries"
+msgstr "Könyv módosítása"
+
+#: entryeditdialog.cpp:387
+#, fuzzy
+msgid "Edit Entries"
+msgstr "Könyv törlése"
+
+#: entryeditdialog.cpp:416
+#, fuzzy
+msgid "Sa&ve Entries"
+msgstr "Kiválasztott mezők"
+
+#: entryeditdialog.cpp:580
+#, fuzzy
+msgid ""
+"The current entry has been modified.\n"
+"Do you want to enter the changes?"
+msgstr ""
+"A jelenlegi könyv megváltozott.\n"
+"Menti a módosításokat?"
+
+#: entryeditdialog.cpp:583
+#, fuzzy
+msgid "Save Entry"
+msgstr "Könyv duplikálása"
 
 #: fetchdialog.cpp:52
 #, fuzzy
@@ -3420,55 +3935,6 @@ msgid ""
 "100 values in your list will be used.</qt>"
 msgstr ""
 
-#: entryeditdialog.cpp:47 entryeditdialog.cpp:320 entryeditdialog.cpp:343
-#: entryeditdialog.cpp:441
-#, fuzzy
-msgid "Edit Entry"
-msgstr "Könyv törlése"
-
-#: entryeditdialog.cpp:48
-#, fuzzy
-msgid "&New Entry"
-msgstr "Könyv duplikálása"
-
-#: entryeditdialog.cpp:84 entryeditdialog.cpp:353 entryeditdialog.cpp:468
-#, fuzzy
-msgid "Sa&ve Entry"
-msgstr "Könyv duplikálása"
-
-#: entryeditdialog.cpp:279
-msgid "Do you really want to modify these entries?"
-msgstr ""
-
-#: entryeditdialog.cpp:281
-#, fuzzy
-msgid "Modify Multiple Entries"
-msgstr "Könyv módosítása"
-
-#: entryeditdialog.cpp:387
-#, fuzzy
-msgid "Edit Entries"
-msgstr "Könyv törlése"
-
-#: entryeditdialog.cpp:416
-#, fuzzy
-msgid "Sa&ve Entries"
-msgstr "Kiválasztott mezők"
-
-#: entryeditdialog.cpp:580
-#, fuzzy
-msgid ""
-"The current entry has been modified.\n"
-"Do you want to enter the changes?"
-msgstr ""
-"A jelenlegi könyv megváltozott.\n"
-"Menti a módosításokat?"
-
-#: entryeditdialog.cpp:583
-#, fuzzy
-msgid "Save Entry"
-msgstr "Könyv duplikálása"
-
 #: reportdialog.cpp:52
 #, fuzzy
 msgid "Collection Report"
@@ -3493,11 +3959,6 @@ msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
 
-#: reportdialog.cpp:194 translators/htmlexporter.cpp:85
-#, fuzzy
-msgid "*.html|HTML Files (*.html)"
-msgstr "*.xml|XML fájlok (*.xml)"
-
 #: tellico_kernel.cpp:248
 msgid "Do you really want to delete this filter?"
 msgstr ""
@@ -3511,467 +3972,6 @@ msgstr "Kiválasztott mezők"
 #, fuzzy
 msgid "New collection name:"
 msgstr "Új gyűjtemény-név"
-
-#: translators/bibteximporter.cpp:47
-#, c-format
-msgid "No valid bibtex entries were found in file - %1"
-msgstr ""
-
-#: translators/bibtexmlexporter.cpp:36
-#, fuzzy
-msgid "Bibtexml"
-msgstr "Exportálás Bibtexml fájlként..."
-
-#: translators/bibtexmlexporter.cpp:40
-#, fuzzy
-msgid "*.xml|Bibtexml Files (*.xml)"
-msgstr "*.xml|Bibtexml fájlok (*.xml)"
-
-#: translators/alexandriaexporter.cpp:39
-#, fuzzy
-msgid "Alexandria"
-msgstr "Általános beállítások"
-
-#: translators/alexandriaexporter.cpp:61
-msgid ""
-"<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
-"books in that library could be overwritten.</qt>"
-msgstr ""
-
-#: translators/tellicoxmlexporter.cpp:47
-msgid "XML"
-msgstr ""
-
-#: translators/tellicoxmlexporter.cpp:435
-#, fuzzy
-msgid "Tellico XML Options"
-msgstr "TellicoDoc"
-
-#: translators/tellicoxmlexporter.cpp:438
-msgid "Include images in XML document"
-msgstr ""
-
-#: translators/tellicoxmlexporter.cpp:440
-#, fuzzy
-msgid ""
-"If checked, the images in the document will be included in the XML stream as "
-"base64 encoded elements."
-msgstr ""
-"Ha kijelöli ezt a pontot, akkor a csoportnév mögött a csoportban lévő "
-"elemek száma is megjelenik."
-
-#: translators/bibtexexporter.cpp:48
-#, fuzzy
-msgid "Bibtex"
-msgstr "Általános beállítások"
-
-#: translators/bibtexexporter.cpp:205
-#, fuzzy
-msgid "Bibtex Options"
-msgstr "Általános beállítások"
-
-#: translators/bibtexexporter.cpp:208
-#, fuzzy
-msgid "Expand string macros"
-msgstr "SearchDialog"
-
-#: translators/bibtexexporter.cpp:210
-msgid ""
-"If checked, the string macros will be expanded and no @string{} entries will "
-"be written."
-msgstr ""
-
-#: translators/bibtexexporter.cpp:213
-msgid "Use URL package"
-msgstr ""
-
-#: translators/bibtexexporter.cpp:215
-#, fuzzy
-msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr ""
-"Ha kijelöli ezt az opciót, akkor a mezőnevek fejlécként kinyomtatásra "
-"kerülnek"
-
-#: translators/bibtexexporter.cpp:218
-msgid "Skip entries with empty citation keys"
-msgstr ""
-
-#: translators/bibtexexporter.cpp:220
-msgid "If checked, any entries without a bibtex citation key will be skipped."
-msgstr ""
-
-#: translators/bibtexexporter.cpp:224
-#, fuzzy
-msgid "Bibtex quotation style:"
-msgstr "Általános beállítások"
-
-#: translators/bibtexexporter.cpp:226 translators/bibtexexporter.cpp:233
-#: translators/bibtexexporter.cpp:264
-#, fuzzy
-msgid "Braces"
-msgstr "8-sávos"
-
-#: translators/bibtexexporter.cpp:227 translators/bibtexexporter.cpp:235
-msgid "Quotes"
-msgstr ""
-
-#: translators/bibtexexporter.cpp:228
-msgid ""
-"<qt>The quotation style used when exporting bibtex. All field values will  "
-"be escaped with either braces or quotation marks.</qt>"
-msgstr ""
-
-#: translators/tellicozipexporter.cpp:33
-#, fuzzy
-msgid "Tellico Zip File"
-msgstr "Tellico"
-
-#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:126
-#, fuzzy
-msgid "CSV Options"
-msgstr "Általános beállítások"
-
-#: translators/csvimporter.cpp:131
-#, fuzzy
-msgid "Collection &type:"
-msgstr "BCCollection"
-
-#: translators/csvimporter.cpp:134
-msgid "Select the type of collection being imported."
-msgstr ""
-
-#: translators/csvimporter.cpp:142
-msgid "First row contains field titles"
-msgstr ""
-
-#: translators/csvimporter.cpp:144
-#, fuzzy
-msgid "If checked, the first row is used as field titles."
-msgstr ""
-"Ha be van jelölve reguláris kifejezésként kerül feldolgozásra a "
-"kulcsszó."
-
-#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:148
-#, fuzzy
-msgid "Delimiter"
-msgstr "Kiválasztott mezők"
-
-#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:151
-msgid ""
-"In addition to a comma, other characters may be used as a delimiter, "
-"separating each value in the file."
-msgstr ""
-
-#: translators/csvexporter.cpp:124 translators/csvimporter.cpp:156
-#, fuzzy
-msgid "Comma"
-msgstr "Megjegyzések"
-
-#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:158
-msgid "Use a comma as the delimiter."
-msgstr ""
-
-#: translators/csvexporter.cpp:130 translators/csvimporter.cpp:162
-msgid "Semicolon"
-msgstr ""
-
-#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:163
-msgid "Use a semi-colon as the delimiter."
-msgstr ""
-
-#: translators/csvexporter.cpp:135 translators/csvimporter.cpp:167
-#, fuzzy
-msgid "Tab"
-msgstr "Cím"
-
-#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:168
-msgid "Use a tab as the delimiter."
-msgstr ""
-
-#: translators/csvimporter.cpp:172
-#, fuzzy
-msgid "Other:"
-msgstr "A(z),a(z)"
-
-#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:173
-msgid "Use a custom string as the delimiter."
-msgstr ""
-
-#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:178
-msgid "A custom string, such as a colon, may be used as a delimiter."
-msgstr ""
-
-#: translators/csvimporter.cpp:205
-msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
-
-#: translators/csvimporter.cpp:211
-msgid ""
-"<qt>Set each column to correspond to a field in the collection by choosing a "
-"column, selecting the field, then clicking the <i>Set</i> button.</qt>"
-msgstr ""
-
-#: translators/csvimporter.cpp:213
-#, fuzzy
-msgid "Column:"
-msgstr "Oszlopok megtekintése"
-
-#: translators/csvimporter.cpp:219
-#, fuzzy
-msgid "Data field in this column:"
-msgstr "Könyvgyűjtemény beállításai"
-
-#: translators/csvimporter.cpp:224
-#, fuzzy
-msgid "Assign Field"
-msgstr "Minden mező"
-
-#: translators/tellicoimporter.cpp:125
-msgid "It is from a future version of Tellico."
-msgstr "Ez egy későbbi verzióhoz tartozik."
-
-#: translators/tellicoimporter.cpp:131
-msgid ""
-"Tellico is converting the file to a more recent document format. Information "
-"loss may occur if an older version of Tellico is used to read this file in "
-"the future."
-msgstr ""
-
-#: translators/bibtexhandler.cpp:251 translators/risimporter.cpp:261
-#: translators/risimporter.cpp:265 translators/tellicoimporter.cpp:292
-msgid "Unknown"
-msgstr "Ismeretlen"
-
-#: translators/tellicoimporter.cpp:640
-msgid "The file is empty."
-msgstr ""
-
-#: translators/tellicoimporter.cpp:656
-msgid "The file contains no collection data."
-msgstr ""
-
-#: translators/tellicoimporter.cpp:753
-#, fuzzy
-msgid "Unread Books"
-msgstr "Könyv hozzáadása"
-
-#: translators/tellicoimporter.cpp:763
-msgid "Old Movies"
-msgstr ""
-
-#: translators/tellicoimporter.cpp:781
-msgid "80's Music"
-msgstr ""
-
-#: translators/tellicoimporter.cpp:793
-#, fuzzy
-msgid "Favorites"
-msgstr "Könyv törlése"
-
-#: translators/risimporter.cpp:243
-msgid "Abstract"
-msgstr ""
-
-#: translators/risimporter.cpp:263
-msgid "PDF"
-msgstr ""
-
-#: translators/audiofileimporter.cpp:93
-#, fuzzy
-msgid "Scanning audio files..."
-msgstr "Fájl mentése..."
-
-#: translators/audiofileimporter.cpp:133
-msgid "(Various)"
-msgstr ""
-
-#: translators/audiofileimporter.cpp:254
-#, fuzzy
-msgid "Audio File Options"
-msgstr "Általános beállítások"
-
-#: translators/audiofileimporter.cpp:256
-msgid "Recursive folder search"
-msgstr ""
-
-#: translators/audiofileimporter.cpp:257
-msgid "If checked, folders are recursively searched for audio files."
-msgstr ""
-
-#: translators/csvexporter.cpp:40
-msgid "CSV"
-msgstr ""
-
-#: translators/csvexporter.cpp:112
-msgid "Include field titles as column headers"
-msgstr ""
-
-#: translators/csvexporter.cpp:114
-#, fuzzy
-msgid "If checked, a header row will be added with the field titles."
-msgstr ""
-"Ha be van jelölve a pont, akkor a Tellico a kiválasztott mező alapján "
-"csoportosítja a könyveket."
-
-#: translators/csvexporter.cpp:140
-#, fuzzy
-msgid "Other"
-msgstr "A(z),a(z)"
-
-#: translators/pilotdbexporter.cpp:44
-#, fuzzy
-msgid "PilotDB"
-msgstr "Általános beállítások"
-
-#: translators/pilotdbexporter.cpp:48
-#, fuzzy
-msgid "*.pdb|Pilot Database Files(*.pdb)"
-msgstr "*.tc *.bc|Tellico fájlok (*.tc)"
-
-#: translators/pilotdbexporter.cpp:211
-#, fuzzy
-msgid "PilotDB Options"
-msgstr "Általános beállítások"
-
-#: translators/pilotdbexporter.cpp:214 translators/pilotdbexporter.cpp:216
-msgid "Set PDA backup flag for database"
-msgstr ""
-
-#: translators/onixexporter.cpp:62
-#, fuzzy
-msgid "ONIX Archive"
-msgstr "Általános beállítások"
-
-#: translators/onixexporter.cpp:66
-#, fuzzy
-msgid "*.zip|Zip Files (*.zip)"
-msgstr "*.bib|Bibtex fájlok (*.bib)"
-
-#: translators/onixexporter.cpp:175
-#, fuzzy
-msgid "ONIX Archive Options"
-msgstr "Általános beállítások"
-
-#: translators/onixexporter.cpp:178
-msgid "Include images in archive"
-msgstr ""
-
-#: translators/onixexporter.cpp:180
-#, fuzzy
-msgid ""
-"If checked, the images in the document will be included in the zipped ONIX "
-"archive."
-msgstr ""
-"Ha kijelöli ezt a pontot, akkor a csoportnév mögött a csoportban lévő "
-"elemek száma is megjelenik."
-
-#: translators/freedbimporter.cpp:80 translators/freedbimporter.cpp:129
-#, fuzzy
-msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr "A Tellico nem tud a fájlba írni: %1."
-
-#: translators/freedbimporter.cpp:150
-#, fuzzy
-msgid "<qt>No records were found to match the CD.</qt>"
-msgstr "Nem sikerült a(z) %1 fájl megnyitása."
-
-#: translators/freedbimporter.cpp:154
-msgid "<qt>Multiple records were found to match the CD.</qt>"
-msgstr ""
-
-#: translators/freedbimporter.cpp:166
-#, fuzzy
-msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr "Nem sikerült a(z) %1 fájl megnyitása."
-
-#: translators/freedbimporter.cpp:258
-#, fuzzy
-msgid "Scanning CDDB cache files..."
-msgstr "Fájl mentése..."
-
-#: translators/freedbimporter.cpp:351
-#, fuzzy
-msgid "Audio CD Options"
-msgstr "Általános beállítások"
-
-#: translators/freedbimporter.cpp:356
-msgid "Read data from CD-ROM device"
-msgstr ""
-
-#: translators/freedbimporter.cpp:360 translators/freedbimporter.cpp:361
-msgid "Select or input the CD-ROM device location."
-msgstr ""
-
-#: translators/freedbimporter.cpp:365
-#, fuzzy
-msgid "Read all CDDB cache files only"
-msgstr "Fájl mentése..."
-
-#: translators/freedbimporter.cpp:366
-msgid ""
-"Read data recursively from all the CDDB cache files contained in the default "
-"cache folders."
-msgstr ""
-
-#: translators/xsltimporter.cpp:44 translators/xsltimporter.cpp:50
-msgid "A valid XSLT file is needed to import the file."
-msgstr ""
-
-#: translators/xsltexporter.cpp:69 translators/xsltimporter.cpp:79
-#, fuzzy
-msgid "XSLT Options"
-msgstr "Általános beállítások"
-
-#: translators/xsltexporter.cpp:74 translators/xsltimporter.cpp:82
-#, fuzzy
-msgid "XSLT file:"
-msgstr "Cím"
-
-#: translators/xsltimporter.cpp:85
-#, fuzzy
-msgid "*.xsl|XSL Files (*.xsl)"
-msgstr "*.xml|XML fájlok (*.xml)"
-
-#: translators/xsltexporter.cpp:37
-msgid "XSLT"
-msgstr ""
-
-#: translators/xsltexporter.cpp:76
-msgid "Choose the XSLT file used to transform the Tellico XML data."
-msgstr ""
-
-#: translators/alexandriaimporter.cpp:159
-#, fuzzy
-msgid "Alexandria Options"
-msgstr "Általános beállítások"
-
-#: translators/alexandriaimporter.cpp:160
-msgid "Library:"
-msgstr ""
-
-#: translators/htmlexporter.cpp:81
-msgid "HTML"
-msgstr ""
-
-#: translators/htmlexporter.cpp:260
-msgid "(grouped by %1)"
-msgstr ""
-
-#: translators/htmlexporter.cpp:379
-#, fuzzy
-msgid "HTML Options"
-msgstr "Általános beállítások"
-
-#: translators/htmlexporter.cpp:392
-msgid "Export individual entry files"
-msgstr ""
-
-#: translators/htmlexporter.cpp:393
-#, fuzzy
-msgid "If checked, individual files will be created for each entry."
-msgstr ""
-"Ha kijelöli ezt az opciót, akkor a mezőnevek fejlécként kinyomtatásra "
-"kerülnek"
 
 #: entryview.cpp:140
 #, fuzzy
@@ -4119,82 +4119,82 @@ msgstr ""
 
 #: xslt.cpp:12
 msgid ""
+"_: Group Summary XSL Template\n"
+"Group Summary"
+msgstr ""
+
+#: xslt.cpp:13
+msgid ": Group Summary"
+msgstr ""
+
+#: xslt.cpp:14
+#, fuzzy
+msgid "Total number of fields:"
+msgstr "Kiválasztott mezők"
+
+#: xslt.cpp:15
+#, fuzzy
+msgid "Total number of entries:"
+msgstr "Kiválasztott mezők"
+
+#: xslt.cpp:16 xslt.cpp:28
+#, fuzzy
+msgid "Generated by"
+msgstr "Általános"
+
+#: xslt.cpp:17
+msgid "Distinct values: "
+msgstr ""
+
+#: xslt.cpp:19
+msgid ""
 "_: Image List XSL Template\n"
 "Image List"
 msgstr ""
 
-#: xslt.cpp:14
+#: xslt.cpp:21
 msgid ""
 "_: Loan View XSL Template\n"
 "Loan View"
 msgstr ""
 
-#: xslt.cpp:16 xslt.cpp:18
+#: xslt.cpp:23 xslt.cpp:25
 #, fuzzy
 msgid "Loan Date"
 msgstr "Kölcsön adva"
 
-#: xslt.cpp:17 xslt.cpp:20
+#: xslt.cpp:24 xslt.cpp:27
 #, fuzzy
 msgid "Note"
 msgstr "&Exportálás"
 
-#: xslt.cpp:19
+#: xslt.cpp:26
 #, fuzzy
 msgid "Due Date"
 msgstr "Dátum"
 
-#: xslt.cpp:21 xslt.cpp:35
-#, fuzzy
-msgid "Generated by"
-msgstr "Általános"
-
-#: xslt.cpp:23
-msgid ""
-"_: Title Listing (Horizontal) XSL Template\n"
-"Title Listing (Horizontal)"
-msgstr ""
-
-#: xslt.cpp:25
-msgid ""
-"_: Title Listing (Vertical) XSL Template\n"
-"Title Listing (Vertical)"
-msgstr ""
-
-#: xslt.cpp:27
+#: xslt.cpp:30
 msgid ""
 "_: Group View XSL Template\n"
 "Group View"
 msgstr ""
 
-#: xslt.cpp:29
+#: xslt.cpp:32
+msgid ""
+"_: Title Listing (Horizontal) XSL Template\n"
+"Title Listing (Horizontal)"
+msgstr ""
+
+#: xslt.cpp:34
+msgid ""
+"_: Title Listing (Vertical) XSL Template\n"
+"Title Listing (Vertical)"
+msgstr ""
+
+#: xslt.cpp:36
 msgid ""
 "_: Column View XSL Template\n"
 "Column View"
-msgstr ""
-
-#: xslt.cpp:31
-msgid ""
-"_: Group Summary XSL Template\n"
-"Group Summary"
-msgstr ""
-
-#: xslt.cpp:32
-msgid ": Group Summary"
-msgstr ""
-
-#: xslt.cpp:33
-#, fuzzy
-msgid "Total number of fields:"
-msgstr "Kiválasztott mezők"
-
-#: xslt.cpp:34
-#, fuzzy
-msgid "Total number of entries:"
-msgstr "Kiválasztott mezők"
-
-#: xslt.cpp:36
-msgid "Distinct values: "
 msgstr ""
 
 #, fuzzy

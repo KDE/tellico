@@ -185,8 +185,10 @@
   </head>
   <body>
    <xsl:apply-templates select="tc:collection[1]"/>
+   <!-- to keep khtml happy with the margins and floats, need to clear -->
+   <br style="clear: both"/>
    <xsl:if test="$collection-file">
-    <hr style="clear:both"/>
+    <hr/>
     <h4 style="text-align:center">
      <a href="{$collection-file}">&lt;&lt; <xsl:value-of select="tc:collection/@title"/></a>
     </h4>
