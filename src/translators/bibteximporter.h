@@ -67,9 +67,12 @@ public:
   virtual bool canImport(int type) const;
 
 private:
+  void parseText(const QString& text);
+
   typedef QPtrList<AST> ASTList;
   typedef QPtrListIterator<AST> ASTListIterator;
-  ASTList parseText(const QString& text) const;
+  ASTList m_nodes;
+  QMap<QString, QString> m_macros;
 
   Data::BibtexCollection* m_coll;
 };

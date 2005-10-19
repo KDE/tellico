@@ -1,13 +1,15 @@
+# translation of fi.po to Finnish
 # translation of tellico.po to Finnish
 # This file is distributed under the same license as the PACKAGE package.
+# Teuvo Eloranta <teuvo -at- piketa.fi>, 2005.
 # # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Teuvo Eloranta <teuvo -at- piketa.fi>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
-"POT-Creation-Date: 2005-09-28 05:55-0700\n"
-"PO-Revision-Date: 2005-08-07 12:52+0300\n"
+"POT-Creation-Date: 2005-10-17 22:39-0700\n"
+"PO-Revision-Date: 2005-10-03 21:22+0300\n"
 "Last-Translator: Teuvo Eloranta <teuvo -at- piketa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -816,7 +818,7 @@ msgstr "ESRB-määritys"
 
 #: collections/gamecollection.cpp:96
 msgid "Completed"
-msgstr "Loppuunsaatettu"
+msgstr "Loppuun pelattu"
 
 #: collections/cardcollection.cpp:27
 msgid "Cards"
@@ -1056,7 +1058,7 @@ msgstr "Iso kuva"
 msgid "No Image"
 msgstr "Ei kuvaa"
 
-#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:780
+#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:807
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1081,36 +1083,36 @@ msgstr ""
 msgid "Library of Congress (US)"
 msgstr "Library of Congress (Yhdysvallat)"
 
-#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:82
+#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:85
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: fetch/imdbfetcher.cpp:401
+#: fetch/imdbfetcher.cpp:425
 msgid "Select IMDB Result"
 msgstr "Valitse IMDB-hakutulos"
 
-#: fetch/imdbfetcher.cpp:404
+#: fetch/imdbfetcher.cpp:428
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr "<qt>Hakusi tuotti useita tuloksia. Valitse niistä yksi alta.</qt>"
 
-#: fetch/imdbfetcher.cpp:411
+#: fetch/imdbfetcher.cpp:435
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Valitse hakutulos.</qt>"
 
-#: fetch/imdbfetcher.cpp:531
+#: fetch/imdbfetcher.cpp:558
 msgid "Alternative Titles"
 msgstr "Vaihtoehtoiset otsikot"
 
-#: fetch/imdbfetcher.cpp:749
+#: fetch/imdbfetcher.cpp:776
 msgid "Certifications"
 msgstr "Ikärajat"
 
-#: fetch/imdbfetcher.cpp:766 fetch/z3950fetcher.cpp:573
+#: fetch/imdbfetcher.cpp:793 fetch/z3950fetcher.cpp:573
 msgid "&Host: "
 msgstr "&Isäntä: "
 
-#: fetch/imdbfetcher.cpp:771
+#: fetch/imdbfetcher.cpp:798
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -1118,7 +1120,7 @@ msgstr ""
 "Interned Movie Database käyttää useita palvelimia. Valitse mitä niistä "
 "haluat käyttää."
 
-#: fetch/imdbfetcher.cpp:777
+#: fetch/imdbfetcher.cpp:804
 msgid "Download cover image"
 msgstr "Hae kansikuva"
 
@@ -1181,7 +1183,7 @@ msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr "Aseta ulkoisen sovelluksen palauttaman kokoelman tyyppi."
 
-#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1687
+#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1689
 #: translators/xsltimporter.cpp:56
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "XSLT:n käsittelyssä tapahtui virhe."
@@ -1280,7 +1282,7 @@ msgstr ""
 "<qt><i>%1</i>-niminen Alexandria-kirjasto on jo olemassa. Kaikki siinä "
 "olevat kirjat voidaan ylikirjoittaa.</qt>"
 
-#: translators/bibteximporter.cpp:47
+#: translators/bibteximporter.cpp:48
 #, c-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Säännönmukaisia Bibtex-tietueita ei löytynyt tiedostosta - %1"
@@ -1293,7 +1295,7 @@ msgstr "Bibtexml"
 msgid "*.xml|Bibtexml Files (*.xml)"
 msgstr "*.xml|Bibtexml-tiedostot (*.xml)"
 
-#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1141
+#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1143
 #: reportdialog.cpp:194 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/htmlexporter.cpp:85 translators/onixexporter.cpp:66
@@ -1395,7 +1397,7 @@ msgstr ""
 msgid "Tellico Zip File"
 msgstr "Tellico ZIP-tiedosto"
 
-#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1139
+#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1141
 #: translators/tellicozipexporter.cpp:37
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Tellico-tiedostot (*.tc)"
@@ -1521,7 +1523,7 @@ msgstr ""
 "Tellico muuttaa tiedostoa uudempaan muotoon. Tietoja saattaa hävitä jos "
 "jatkossa vanhempaa Tellico-ohjelmaa käytetää tämän tiedoston lukemiseen."
 
-#: translators/bibtexhandler.cpp:251 translators/risimporter.cpp:261
+#: translators/bibtexhandler.cpp:226 translators/risimporter.cpp:261
 #: translators/risimporter.cpp:265 translators/tellicoimporter.cpp:292
 msgid "Unknown"
 msgstr "Tuntematon"
@@ -1733,7 +1735,7 @@ msgstr "HTML"
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.html|HTML-tiedostot (*.html)"
 
-#: groupview.cpp:452 mainwindow.cpp:1536 translators/htmlexporter.cpp:265
+#: groupview.cpp:452 mainwindow.cpp:1538 translators/htmlexporter.cpp:265
 msgid "People"
 msgstr "Ihmiset"
 
@@ -2601,19 +2603,19 @@ msgstr "Avataan tiedostoa..."
 msgid "Open File"
 msgstr "Avaa tiedosto"
 
-#: mainwindow.cpp:1108
+#: mainwindow.cpp:1110
 msgid "Saving file..."
 msgstr "Talletetaan tiedostoa..."
 
-#: mainwindow.cpp:1137
+#: mainwindow.cpp:1139
 msgid "Saving file with a new filename..."
 msgstr "Talletetaan tiedostoa uudella nimellä..."
 
-#: mainwindow.cpp:1183 mainwindow.cpp:1234
+#: mainwindow.cpp:1185 mainwindow.cpp:1236
 msgid "Printing..."
 msgstr "Tulostetaan..."
 
-#: mainwindow.cpp:1193
+#: mainwindow.cpp:1195
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -2621,82 +2623,82 @@ msgstr ""
 "Kokoelmasta on esillä suodatettu näkymä. Vain näkyvät tietueet "
 "tulostetaan, jatketaanko?"
 
-#: mainwindow.cpp:1218
+#: mainwindow.cpp:1220
 msgid "Processing document..."
 msgstr "Käsitellään dokumenttia..."
 
-#: mainwindow.cpp:1241
+#: mainwindow.cpp:1243
 msgid "Exiting..."
 msgstr "Suljetaan..."
 
-#: mainwindow.cpp:1400
+#: mainwindow.cpp:1402
 #, c-format
 msgid "Total entries: %1"
 msgstr "Tietueita yhteensä: %1"
 
-#: mainwindow.cpp:1409
+#: mainwindow.cpp:1411
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 suodatettu; %2 valittu)"
 
-#: mainwindow.cpp:1412
+#: mainwindow.cpp:1414
 msgid "(%1 filtered)"
 msgstr "(%1 suodatettu)"
 
-#: mainwindow.cpp:1415
+#: mainwindow.cpp:1417
 msgid "(%1 selected)"
 msgstr "(%1 valittu)"
 
-#: mainwindow.cpp:1628
+#: mainwindow.cpp:1630
 #, c-format
 msgid "Print %1"
 msgstr "Tulosta %1"
 
-#: mainwindow.cpp:1661
+#: mainwindow.cpp:1663
 #, c-format
 msgid "Page %1"
 msgstr "Sivu %1"
 
-#: entryview.cpp:142 mainwindow.cpp:1688
+#: entryview.cpp:142 mainwindow.cpp:1690
 msgid "Please check your installation."
 msgstr "Tarkista asennuksesi."
 
-#: mainwindow.cpp:1782
+#: mainwindow.cpp:1784
 msgid "Importing data..."
 msgstr "Tuodaan tietoja..."
 
-#: mainwindow.cpp:1791 mainwindow.cpp:1797
+#: mainwindow.cpp:1793 mainwindow.cpp:1799
 msgid "Import File"
 msgstr "Tuo tiedosto"
 
-#: mainwindow.cpp:1891
+#: mainwindow.cpp:1893
 msgid "Exporting data..."
 msgstr "Viedään tietoja..."
 
-#: mainwindow.cpp:1913
+#: mainwindow.cpp:1915
 msgid "Export As"
 msgstr "Vie muodossa"
 
-#: mainwindow.cpp:1950
+#: mainwindow.cpp:1952
 msgid "String Macros"
 msgstr "Merkkijonomakrot"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1953
 msgid "Macro"
 msgstr "Makro"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1953
 msgid "String"
 msgstr "Merkkijono"
 
-#: mainwindow.cpp:2029
+#: mainwindow.cpp:2031
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico ei pysty kirjoittamaan palvelimen putkeen: <b>%1</b>.</qt>"
 
-#: mainwindow.cpp:2198
+#: mainwindow.cpp:2200
 msgid "Filters"
 msgstr "Suodattimet"
 
-#: mainwindow.cpp:2199
+#: mainwindow.cpp:2201
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
 "rules.</qt>"
@@ -2704,11 +2706,11 @@ msgstr ""
 "<qt><i>Suodatinnäkymä</i>näyttää tietueet jotka sopivat "
 "suodatussääntöön.</qt>"
 
-#: mainwindow.cpp:2219
+#: mainwindow.cpp:2221
 msgid "Loans"
 msgstr "Lainaukset"
 
-#: mainwindow.cpp:2220
+#: mainwindow.cpp:2222
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
@@ -3981,19 +3983,3 @@ msgid ""
 "_: Column View XSL Template\n"
 "Column View"
 msgstr "Sarakenäkymä"
-
-#~ msgid ""
-#~ "<p>...that you can rename a collection by right-clicking on\n"
-#~ "the top collection item in the left column.</p>\n"
-#~ msgstr ""
-#~ "<p>...että voit uudelleennimetä kokoelman painamalla vasemmassa "
-#~ "sarakkeessa \n"
-#~ "hiiren kakkospainiketta kokoelman päällimmäisen tietueen päällä. </p>\n"
-
-#~ msgid ""
-#~ "_: Default XSL Template\n"
-#~ "Fancy"
-#~ msgstr "Hieno"
-
-#~ msgid "Total number of images:"
-#~ msgstr "Kuvia yhteensä:"

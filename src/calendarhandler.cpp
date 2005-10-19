@@ -46,7 +46,7 @@ void CalendarHandler::addLoans(Data::LoanVec loans_, KCal::CalendarResources* re
   if(resources_) {
     calendarResources = resources_;
   } else {
-    calendarResources = new KCal::CalendarResources();
+    calendarResources = new KCal::CalendarResources(timezone());
     calendarResources->readConfig();
     calendarResources->load();
     if(!checkCalendar(calendarResources)) {
@@ -83,8 +83,8 @@ void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
     return;
   }
 
-  myDebug() << "CalendarHandler::modifyLoans()" << endl;
-  KCal::CalendarResources calendarResources;
+//  myDebug() << "CalendarHandler::modifyLoans()" << endl;
+  KCal::CalendarResources calendarResources(timezone());
   calendarResources.readConfig();
   if(!checkCalendar(&calendarResources)) {
     return;
@@ -94,18 +94,17 @@ void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
   for(Data::LoanVec::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
     KCal::Todo* todo = calendarResources.todo(loan->uid());
     if(!todo) {
-      myDebug() << "couldn't find existing todo, adding a new todo" << endl;
+//      myDebug() << "couldn't find existing todo, adding a new todo" << endl;
       Data::LoanVec newLoans;
       newLoans.append(loan);
       addLoans(newLoans, &calendarResources); // add loan
       continue;
     }
     if(loan->dueDate().isNull()) {
-      myDebug() << "removing todo" << endl;
       calendarResources.deleteIncidence(todo);
       continue;
     }
-    myDebug() << "CalendarHandler::modifyLoans()- setting due date" << endl;
+//    myDebug() << "CalendarHandler::modifyLoans()- setting due date" << endl;
 
     populateTodo(todo, loan);
     todo->updated();
@@ -125,8 +124,8 @@ void CalendarHandler::removeLoans(Data::LoanVec loans_) {
     return;
   }
 
-  myDebug() << "CalendarHandler::removeLoans()" << endl;
-  KCal::CalendarResources calendarResources;
+//  myDebug() << "CalendarHandler::removeLoans()" << endl;
+  KCal::CalendarResources calendarResources(timezone());
   calendarResources.readConfig();
   if(!checkCalendar(&calendarResources)) {
     return;
@@ -217,4 +216,29 @@ void CalendarHandler::populateTodo(KCal::Todo* todo_, Data::Loan* loan_) {
   alarm->setDisplayAlarm(summary);
   alarm->setEnabled(true);
 }
+
+// taken from kpimprefs.cpp
+QString CalendarHandler::timezone() {
+  QString zone;
+
+  KConfig korgcfg(locate(QString::fromLatin1("config"), QString::fromLatin1("korganizerrc")));
+  korgcfg.setGroup("Time & Date");
+  QString tz(korgcfg.readEntry("TimeZoneId"));
+  if(!tz.isEmpty()) {
+    zone = tz;
+  } else {
+    char zonefilebuf[PATH_MAX];
+
+    int len = readlink("/etc/localtime", zonefilebuf, PATH_MAX);
+    if(len > 0 && len < PATH_MAX) {
+      zone = QString::fromLocal8Bit(zonefilebuf, len);
+      zone = zone.mid(zone.find(QString::fromLatin1("zoneinfo/")) + 9);
+    } else {
+      tzset();
+      zone = tzname[0];
+    }
+  }
+  return zone;
+}
+
 #endif

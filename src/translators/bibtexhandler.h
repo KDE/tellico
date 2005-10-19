@@ -50,6 +50,8 @@ private:
 
   static QString bibtexKey(const QString& author, const QString& title, const QString& year);
   static void loadTranslationMaps();
+  static QString& addBraces(QString& string);
+
   static StringListMap* s_utf8LatexMap;
   static const QRegExp s_badKeyChars;
 };

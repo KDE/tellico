@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"POT-Creation-Date: 2005-09-28 05:55-0700\n"
+"POT-Creation-Date: 2005-10-17 22:39-0700\n"
 "PO-Revision-Date: 2004-12-03 17:17+0100\n"
 "Last-Translator: Leif Mathis Gaup <lmgaup@nsn.no>\n"
 "Language-Team: Norsk bokmål\n"
@@ -1099,7 +1099,7 @@ msgstr "Stort bilde"
 msgid "No Image"
 msgstr "Ingen bilder"
 
-#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:780
+#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:807
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1123,36 +1123,36 @@ msgstr ""
 msgid "Library of Congress (US)"
 msgstr "Library of Congress (USA)"
 
-#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:82
+#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:85
 msgid "Internet Movie Database"
 msgstr "Internet filmdatabase (IMDB)"
 
-#: fetch/imdbfetcher.cpp:401
+#: fetch/imdbfetcher.cpp:425
 msgid "Select IMDB Result"
 msgstr "Velg resultat fra IMDB"
 
-#: fetch/imdbfetcher.cpp:404
+#: fetch/imdbfetcher.cpp:428
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr "<qt>Ditt søk returnerte flere treff. Vennligst velg ett treff.</qt>"
 
-#: fetch/imdbfetcher.cpp:411
+#: fetch/imdbfetcher.cpp:435
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Velg ett søkeresultat.</qt>"
 
-#: fetch/imdbfetcher.cpp:531
+#: fetch/imdbfetcher.cpp:558
 msgid "Alternative Titles"
 msgstr "Alternative titler"
 
-#: fetch/imdbfetcher.cpp:749
+#: fetch/imdbfetcher.cpp:776
 msgid "Certifications"
 msgstr "Sertifiseringer"
 
-#: fetch/imdbfetcher.cpp:766 fetch/z3950fetcher.cpp:573
+#: fetch/imdbfetcher.cpp:793 fetch/z3950fetcher.cpp:573
 msgid "&Host: "
 msgstr "Vert"
 
-#: fetch/imdbfetcher.cpp:771
+#: fetch/imdbfetcher.cpp:798
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -1160,7 +1160,7 @@ msgstr ""
 "Internett filmdatabasen (IMDB) benytter seg av flere forskjellige tjenere. "
 "Velg den du ønsker å benytte."
 
-#: fetch/imdbfetcher.cpp:777
+#: fetch/imdbfetcher.cpp:804
 msgid "Download cover image"
 msgstr "Last ned omslagsbilde"
 
@@ -1224,7 +1224,7 @@ msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1687
+#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1689
 #: translators/xsltimporter.cpp:56
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico fikk en feil i XSLT prosesseringen."
@@ -1324,7 +1324,7 @@ msgstr ""
 "<qt>Ett Alexandria bibliotek som heter <i>%1</i> eksisterer allerede. "
 "Eksisterende bøker i biblioteket kan bli overskrevet.</qt>"
 
-#: translators/bibteximporter.cpp:47
+#: translators/bibteximporter.cpp:48
 #, c-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Ingen gyldig Bibtex-innslag ble funnet i filen - %1"
@@ -1338,7 +1338,7 @@ msgstr "Bibtexml"
 msgid "*.xml|Bibtexml Files (*.xml)"
 msgstr "*.xml|Bibtexml filer (*.xml)"
 
-#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1141
+#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1143
 #: reportdialog.cpp:194 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/htmlexporter.cpp:85 translators/onixexporter.cpp:66
@@ -1442,7 +1442,7 @@ msgstr ""
 msgid "Tellico Zip File"
 msgstr "Tellico zipfil"
 
-#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1139
+#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1141
 #: translators/tellicozipexporter.cpp:37
 #, fuzzy
 msgid "*.tc *.bc|Tellico Files (*.tc)"
@@ -1569,7 +1569,7 @@ msgstr ""
 "Tellico konverterer filen til et nyere format. Informasjonstap kan opptre om "
 "en eldre versjon av Tellico blir brukt til å lese denne filen senere."
 
-#: translators/bibtexhandler.cpp:251 translators/risimporter.cpp:261
+#: translators/bibtexhandler.cpp:226 translators/risimporter.cpp:261
 #: translators/risimporter.cpp:265 translators/tellicoimporter.cpp:292
 msgid "Unknown"
 msgstr "Ukjent"
@@ -1794,7 +1794,7 @@ msgstr "HTML"
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.hml|HTML fil(*.html)"
 
-#: groupview.cpp:452 mainwindow.cpp:1536 translators/htmlexporter.cpp:265
+#: groupview.cpp:452 mainwindow.cpp:1538 translators/htmlexporter.cpp:265
 msgid "People"
 msgstr "Personer"
 
@@ -2698,19 +2698,19 @@ msgstr "Åpne fil..."
 msgid "Open File"
 msgstr "Åpne fil..."
 
-#: mainwindow.cpp:1108
+#: mainwindow.cpp:1110
 msgid "Saving file..."
 msgstr "Lagrer filen..."
 
-#: mainwindow.cpp:1137
+#: mainwindow.cpp:1139
 msgid "Saving file with a new filename..."
 msgstr "Lagrer fil med nytt navn..."
 
-#: mainwindow.cpp:1183 mainwindow.cpp:1234
+#: mainwindow.cpp:1185 mainwindow.cpp:1236
 msgid "Printing..."
 msgstr "Skriver ut..."
 
-#: mainwindow.cpp:1193
+#: mainwindow.cpp:1195
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -2718,84 +2718,84 @@ msgstr ""
 "Samlingen er foreløpig satt opp til å vise en begrenset antall av innslag. "
 "Bare innslag som er synlige vil bli skrevet ut. Vil du fortsette?"
 
-#: mainwindow.cpp:1218
+#: mainwindow.cpp:1220
 msgid "Processing document..."
 msgstr "Prosesserer dokument..."
 
-#: mainwindow.cpp:1241
+#: mainwindow.cpp:1243
 msgid "Exiting..."
 msgstr "Avslutter..."
 
-#: mainwindow.cpp:1400
+#: mainwindow.cpp:1402
 #, fuzzy, c-format
 msgid "Total entries: %1"
 msgstr "antall innslag: %1"
 
-#: mainwindow.cpp:1409
+#: mainwindow.cpp:1411
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrert, %2 valgt)"
 
-#: mainwindow.cpp:1412
+#: mainwindow.cpp:1414
 msgid "(%1 filtered)"
 msgstr "(%1 filtrert)"
 
-#: mainwindow.cpp:1415
+#: mainwindow.cpp:1417
 msgid "(%1 selected)"
 msgstr "(%1 valgt)"
 
-#: mainwindow.cpp:1628
+#: mainwindow.cpp:1630
 #, c-format
 msgid "Print %1"
 msgstr "Skriv ut %1"
 
-#: mainwindow.cpp:1661
+#: mainwindow.cpp:1663
 #, c-format
 msgid "Page %1"
 msgstr "Side %1"
 
-#: entryview.cpp:142 mainwindow.cpp:1688
+#: entryview.cpp:142 mainwindow.cpp:1690
 msgid "Please check your installation."
 msgstr "Vennligst sjekk din installasjon."
 
-#: mainwindow.cpp:1782
+#: mainwindow.cpp:1784
 msgid "Importing data..."
 msgstr "Importer data"
 
-#: mainwindow.cpp:1791 mainwindow.cpp:1797
+#: mainwindow.cpp:1793 mainwindow.cpp:1799
 #, fuzzy
 msgid "Import File"
 msgstr "Importer fil..."
 
-#: mainwindow.cpp:1891
+#: mainwindow.cpp:1893
 msgid "Exporting data..."
 msgstr "Eksporterer data..."
 
-#: mainwindow.cpp:1913
+#: mainwindow.cpp:1915
 msgid "Export As"
 msgstr "E&ksporter som"
 
-#: mainwindow.cpp:1950
+#: mainwindow.cpp:1952
 msgid "String Macros"
 msgstr "Tekststreng-makro"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1953
 msgid "Macro"
 msgstr "Makro"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1953
 msgid "String"
 msgstr "Tekststreng"
 
-#: mainwindow.cpp:2029
+#: mainwindow.cpp:2031
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico klarer ikke å skrive til tjeneren på <b>%1</b>.</qt>."
 
-#: mainwindow.cpp:2198
+#: mainwindow.cpp:2200
 #, fuzzy
 msgid "Filters"
 msgstr "Filtrer innslag"
 
-#: mainwindow.cpp:2199
+#: mainwindow.cpp:2201
 #, fuzzy
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
@@ -2803,12 +2803,12 @@ msgid ""
 msgstr ""
 "<qt><i>Innslagsvisning</i> gir ett formatert syn på innslagets innhold</qt>"
 
-#: mainwindow.cpp:2219
+#: mainwindow.cpp:2221
 #, fuzzy
 msgid "Loans"
 msgstr "Lånt"
 
-#: mainwindow.cpp:2220
+#: mainwindow.cpp:2222
 #, fuzzy
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "

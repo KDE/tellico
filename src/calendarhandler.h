@@ -42,6 +42,8 @@ public:
   static void removeLoans(Data::LoanVec loans);
 
 private:
+  static QString timezone();
+
 #ifdef USE_KCAL
   // helper function
   static void addLoans(Data::LoanVec loans, KCal::CalendarResources* resources);

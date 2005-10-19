@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
-"POT-Creation-Date: 2005-09-28 05:55-0700\n"
+"POT-Creation-Date: 2005-10-17 22:39-0700\n"
 "PO-Revision-Date: 2005-09-27 16:35+0200\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
@@ -1068,7 +1068,7 @@ msgstr "Stor Bild"
 msgid "No Image"
 msgstr "Ingen Bild"
 
-#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:780
+#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:807
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1092,37 +1092,37 @@ msgstr ""
 msgid "Library of Congress (US)"
 msgstr "USA's Kongressbibliotek(US)"
 
-#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:82
+#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:85
 msgid "Internet Movie Database"
 msgstr "Internetfilmdatabas"
 
-#: fetch/imdbfetcher.cpp:401
+#: fetch/imdbfetcher.cpp:425
 msgid "Select IMDB Result"
 msgstr "Välj IMDB-resultat"
 
-#: fetch/imdbfetcher.cpp:404
+#: fetch/imdbfetcher.cpp:428
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
 "<qt>Din sökning gav flera passade svar. Var snäll och välj en nedan.</qt>"
 
-#: fetch/imdbfetcher.cpp:411
+#: fetch/imdbfetcher.cpp:435
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Välj ett sökresultat.</qt>"
 
-#: fetch/imdbfetcher.cpp:531
+#: fetch/imdbfetcher.cpp:558
 msgid "Alternative Titles"
 msgstr "Alternativa titlar"
 
-#: fetch/imdbfetcher.cpp:749
+#: fetch/imdbfetcher.cpp:776
 msgid "Certifications"
 msgstr "Bevis"
 
-#: fetch/imdbfetcher.cpp:766 fetch/z3950fetcher.cpp:573
+#: fetch/imdbfetcher.cpp:793 fetch/z3950fetcher.cpp:573
 msgid "&Host: "
 msgstr "V&ärd: "
 
-#: fetch/imdbfetcher.cpp:771
+#: fetch/imdbfetcher.cpp:798
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -1130,7 +1130,7 @@ msgstr ""
 "Internetfilmdatabasen använder flera olika servrar. Välj den du vill "
 "använda."
 
-#: fetch/imdbfetcher.cpp:777
+#: fetch/imdbfetcher.cpp:804
 msgid "Download cover image"
 msgstr "Ladda ner omslagsbild"
 
@@ -1196,7 +1196,7 @@ msgid ""
 msgstr ""
 "Bestäm den samlingstypsdata, som lämnas av den externa tillämpningen. "
 
-#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1687
+#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1689
 #: translators/xsltimporter.cpp:56
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico upptäckte ett fel vid behandlingen av XSLT."
@@ -1295,7 +1295,7 @@ msgstr ""
 "<qt>Ett Alexandria-bibliotek kallat <i>%1</i> finns redan. Vilken som helst "
 "befintlig bok i det biblioteket kan be överskriven.</qt>"
 
-#: translators/bibteximporter.cpp:47
+#: translators/bibteximporter.cpp:48
 #, c-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Inga korrekta Bibtex-poster funna i filen - %1"
@@ -1308,7 +1308,7 @@ msgstr "Bibtexml"
 msgid "*.xml|Bibtexml Files (*.xml)"
 msgstr "*.xml|Bibtexml-filer (*.xml)"
 
-#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1141
+#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1143
 #: reportdialog.cpp:194 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/htmlexporter.cpp:85 translators/onixexporter.cpp:66
@@ -1409,7 +1409,7 @@ msgstr ""
 msgid "Tellico Zip File"
 msgstr "Tellico-Zip-fil"
 
-#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1139
+#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1141
 #: translators/tellicozipexporter.cpp:37
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Tellico-filer  (*.tc)"
@@ -1536,7 +1536,7 @@ msgstr ""
 "Informationsförlust kan inträffa om en äldre version av Tellico används "
 "för att läsa den här filen i framtiden."
 
-#: translators/bibtexhandler.cpp:251 translators/risimporter.cpp:261
+#: translators/bibtexhandler.cpp:226 translators/risimporter.cpp:261
 #: translators/risimporter.cpp:265 translators/tellicoimporter.cpp:292
 msgid "Unknown"
 msgstr "Okänd"
@@ -1748,7 +1748,7 @@ msgstr "HTML"
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.html|HTML-filer  (*.html)"
 
-#: groupview.cpp:452 mainwindow.cpp:1536 translators/htmlexporter.cpp:265
+#: groupview.cpp:452 mainwindow.cpp:1538 translators/htmlexporter.cpp:265
 msgid "People"
 msgstr "Folk"
 
@@ -2614,19 +2614,19 @@ msgstr "Öppnar fil..."
 msgid "Open File"
 msgstr "Öppna fil"
 
-#: mainwindow.cpp:1108
+#: mainwindow.cpp:1110
 msgid "Saving file..."
 msgstr "Sparar fil..."
 
-#: mainwindow.cpp:1137
+#: mainwindow.cpp:1139
 msgid "Saving file with a new filename..."
 msgstr "Sparar fil med ett nytt namn..."
 
-#: mainwindow.cpp:1183 mainwindow.cpp:1234
+#: mainwindow.cpp:1185 mainwindow.cpp:1236
 msgid "Printing..."
 msgstr "Skriver ut..."
 
-#: mainwindow.cpp:1193
+#: mainwindow.cpp:1195
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -2634,82 +2634,82 @@ msgstr ""
 "Samlingen är filtrerad att visa endast en begränsad delmängd av alla "
 "poster. Endast synliga fälten kommer att skrivas ut. Fortsätt?"
 
-#: mainwindow.cpp:1218
+#: mainwindow.cpp:1220
 msgid "Processing document..."
 msgstr "Bearbetar dokument..."
 
-#: mainwindow.cpp:1241
+#: mainwindow.cpp:1243
 msgid "Exiting..."
 msgstr "Avslutar..."
 
-#: mainwindow.cpp:1400
+#: mainwindow.cpp:1402
 #, c-format
 msgid "Total entries: %1"
 msgstr "Totalt antal poster: %1"
 
-#: mainwindow.cpp:1409
+#: mainwindow.cpp:1411
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrerade, %2 valda)"
 
-#: mainwindow.cpp:1412
+#: mainwindow.cpp:1414
 msgid "(%1 filtered)"
 msgstr "(%1 filtrerade)"
 
-#: mainwindow.cpp:1415
+#: mainwindow.cpp:1417
 msgid "(%1 selected)"
 msgstr "(%1 valda)"
 
-#: mainwindow.cpp:1628
+#: mainwindow.cpp:1630
 #, c-format
 msgid "Print %1"
 msgstr "Skriv ut %1"
 
-#: mainwindow.cpp:1661
+#: mainwindow.cpp:1663
 #, c-format
 msgid "Page %1"
 msgstr "Sida %1"
 
-#: entryview.cpp:142 mainwindow.cpp:1688
+#: entryview.cpp:142 mainwindow.cpp:1690
 msgid "Please check your installation."
 msgstr "Kontrollera installationen."
 
-#: mainwindow.cpp:1782
+#: mainwindow.cpp:1784
 msgid "Importing data..."
 msgstr "Importera data..."
 
-#: mainwindow.cpp:1791 mainwindow.cpp:1797
+#: mainwindow.cpp:1793 mainwindow.cpp:1799
 msgid "Import File"
 msgstr "Importera fil"
 
-#: mainwindow.cpp:1891
+#: mainwindow.cpp:1893
 msgid "Exporting data..."
 msgstr "Exporterar data..."
 
-#: mainwindow.cpp:1913
+#: mainwindow.cpp:1915
 msgid "Export As"
 msgstr "Exportera som"
 
-#: mainwindow.cpp:1950
+#: mainwindow.cpp:1952
 msgid "String Macros"
 msgstr "Strängmakron"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1953
 msgid "Macro"
 msgstr "Makro"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1953
 msgid "String"
 msgstr "Sträng"
 
-#: mainwindow.cpp:2029
+#: mainwindow.cpp:2031
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico kan inte skriva till server-röret vid <b>%1</b>.</qt>"
 
-#: mainwindow.cpp:2198
+#: mainwindow.cpp:2200
 msgid "Filters"
 msgstr "Filter"
 
-#: mainwindow.cpp:2199
+#: mainwindow.cpp:2201
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
 "rules.</qt>"
@@ -2717,11 +2717,11 @@ msgstr ""
 "<qt> <i>Filtervyn</i> visar posterna de poster, som passar vissa "
 "filterregler.</qt>"
 
-#: mainwindow.cpp:2219
+#: mainwindow.cpp:2221
 msgid "Loans"
 msgstr "Lån"
 
-#: mainwindow.cpp:2220
+#: mainwindow.cpp:2222
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"

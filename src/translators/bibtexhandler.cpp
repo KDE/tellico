@@ -171,37 +171,12 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
 
   QString text = text_;
 
-  int inside = 0;
-  uint l = text.length();
-  // start at first letter, but skip if only the first is capitalized
-  for(uint i = 0; i < l; ++i) {
-    const QChar c = text.at(i);
-    if(inside == 0 && c >= 'A' && c <= 'Z') {
-      uint j = i+1;
-      while(text.at(j) >= 'A' && text.at(j) <= 'Z' && j < l) {
-        ++j;
-      }
-      if(i == 0 && j == 1) {
-        continue; // no need to do anything to first letter
-      }
-      text.insert(i, '{');
-      // now j should be incremented
-      text.insert(j+1, '}');
-      i = j+1;
-      l += 2; // the length changed
-    } else if(c == '{') {
-      ++inside;
-    } else if(c == '}') {
-      --inside;
-    }
-  }
-
   for(StringListMap::Iterator it = s_utf8LatexMap->begin(); it != s_utf8LatexMap->end(); ++it) {
     text.replace(it.key(), it.data()[0]);
   }
 
   if(macros_.isEmpty()) {
-    return lquote + text + rquote;
+    return lquote + addBraces(text) + rquote;
   }
 
 // Now, split the text by the character '#', and examine each token to see if it is in
@@ -213,11 +188,11 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
 
 // first, split the text
   QStringList tokens = QStringList::split('#', text, true);
-  for(QStringList::ConstIterator it = tokens.begin(); it != tokens.end(); ++it) {
+  for(QStringList::Iterator it = tokens.begin(); it != tokens.end(); ++it) {
     // check to see if token is a macro
     if(macros_.findIndex((*it).stripWhiteSpace()) == -1) {
-      // the token is NOT a macro, add braces
-      list << lquote + *it + rquote;
+      // the token is NOT a macro, add braces around whole words and also around capitals
+      list << lquote + addBraces(*it) + rquote;
     } else {
       list << *it;
     }
@@ -266,4 +241,33 @@ QString& BibtexHandler::cleanText(QString& text_) {
   text_.replace(QRegExp(QString::fromLatin1("[{}]")), QString::null);
   text_.replace('~', ' ');
   return text_;
+}
+
+// add braces around capital letters
+QString& BibtexHandler::addBraces(QString& text) {
+  int inside = 0;
+  uint l = text.length();
+  // start at first letter, but skip if only the first is capitalized
+  for(uint i = 0; i < l; ++i) {
+    const QChar c = text.at(i);
+    if(inside == 0 && c >= 'A' && c <= 'Z') {
+      uint j = i+1;
+      while(text.at(j) >= 'A' && text.at(j) <= 'Z' && j < l) {
+        ++j;
+      }
+      if(i == 0 && j == 1) {
+        continue; // no need to do anything to first letter
+      }
+      text.insert(i, '{');
+      // now j should be incremented
+      text.insert(j+1, '}');
+      i = j+1;
+      l += 2; // the length changed
+    } else if(c == '{') {
+      ++inside;
+    } else if(c == '}') {
+      --inside;
+    }
+  }
+  return text;
 }

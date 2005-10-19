@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2005-09-28 05:55-0700\n"
+"POT-Creation-Date: 2005-10-17 22:39-0700\n"
 "PO-Revision-Date: 2005-08-11 11:02+0200\n"
 "Last-Translator: Fred Marchee <fredmarchee@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
@@ -1058,7 +1058,7 @@ msgstr "Grote afbeelding"
 msgid "No Image"
 msgstr "Geen afbeelding"
 
-#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:780
+#: fetch/amazonfetcher.cpp:623 fetch/imdbfetcher.cpp:807
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1082,38 +1082,38 @@ msgstr ""
 msgid "Library of Congress (US)"
 msgstr "Library of Congress Control (VS)"
 
-#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:82
+#: fetch/fetchmanager.cpp:274 fetch/imdbfetcher.cpp:85
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: fetch/imdbfetcher.cpp:401
+#: fetch/imdbfetcher.cpp:425
 msgid "Select IMDB Result"
 msgstr "Kies IMDB resultaat"
 
-#: fetch/imdbfetcher.cpp:404
+#: fetch/imdbfetcher.cpp:428
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
 "<qt>Uw zoekopdracht heeft meerdere overeenkomsten gevonden. Kies een van de "
 "onderstaande.</qt>"
 
-#: fetch/imdbfetcher.cpp:411
+#: fetch/imdbfetcher.cpp:435
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Kies een zoekresultaat.</qt>"
 
-#: fetch/imdbfetcher.cpp:531
+#: fetch/imdbfetcher.cpp:558
 msgid "Alternative Titles"
 msgstr "Alternatieve titels"
 
-#: fetch/imdbfetcher.cpp:749
+#: fetch/imdbfetcher.cpp:776
 msgid "Certifications"
 msgstr "Leeftijdcategorie"
 
-#: fetch/imdbfetcher.cpp:766 fetch/z3950fetcher.cpp:573
+#: fetch/imdbfetcher.cpp:793 fetch/z3950fetcher.cpp:573
 msgid "&Host: "
 msgstr "&Host: "
 
-#: fetch/imdbfetcher.cpp:771
+#: fetch/imdbfetcher.cpp:798
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -1121,7 +1121,7 @@ msgstr ""
 "De Internet Movie Database gebruikt verschillende servers. Kies welke u wilt "
 "gebruiken."
 
-#: fetch/imdbfetcher.cpp:777
+#: fetch/imdbfetcher.cpp:804
 msgid "Download cover image"
 msgstr "Download hoesafbeelding"
 
@@ -1188,7 +1188,7 @@ msgstr ""
 "Stel de verzameling type in voor de data die wordt teruggegeven door de "
 "externe toepassing."
 
-#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1687
+#: fetch/z3950fetcher.cpp:310 mainwindow.cpp:1689
 #: translators/xsltimporter.cpp:56
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico kreeg een fout bij de XSLT verwerking."
@@ -1289,7 +1289,7 @@ msgstr ""
 "<qt>een Alexandria bibliotheek met de naam <i>%1</i> bestaat al. Ieder "
 "bestaand boek in die bibliotheek kan worden overschreven.</qt>"
 
-#: translators/bibteximporter.cpp:47
+#: translators/bibteximporter.cpp:48
 #, c-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Geen geldige BibTeX items gevonden in het %1 bestand"
@@ -1302,7 +1302,7 @@ msgstr "BibTeXML"
 msgid "*.xml|Bibtexml Files (*.xml)"
 msgstr "*.xml|BibTeXML-bestanden (*.xml)"
 
-#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1141
+#: importdialog.cpp:227 mainwindow.cpp:1009 mainwindow.cpp:1143
 #: reportdialog.cpp:194 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/htmlexporter.cpp:85 translators/onixexporter.cpp:66
@@ -1406,7 +1406,7 @@ msgstr ""
 msgid "Tellico Zip File"
 msgstr "Tellico zip bestand"
 
-#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1139
+#: importdialog.cpp:196 mainwindow.cpp:1005 mainwindow.cpp:1141
 #: translators/tellicozipexporter.cpp:37
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Tellico-bestanden (*.tc)"
@@ -1535,7 +1535,7 @@ msgstr ""
 "kan optreden wanneer een oudere versie van Tellico wordt gebruikt om het "
 "nieuwe bestand te lezen."
 
-#: translators/bibtexhandler.cpp:251 translators/risimporter.cpp:261
+#: translators/bibtexhandler.cpp:226 translators/risimporter.cpp:261
 #: translators/risimporter.cpp:265 translators/tellicoimporter.cpp:292
 msgid "Unknown"
 msgstr "Onbekend"
@@ -1751,7 +1751,7 @@ msgstr "HTML"
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.html|HTML bestanden (*.html)"
 
-#: groupview.cpp:452 mainwindow.cpp:1536 translators/htmlexporter.cpp:265
+#: groupview.cpp:452 mainwindow.cpp:1538 translators/htmlexporter.cpp:265
 msgid "People"
 msgstr "Mensen"
 
@@ -2622,19 +2622,19 @@ msgstr "Bestand wordt geopend..."
 msgid "Open File"
 msgstr "Open bestand"
 
-#: mainwindow.cpp:1108
+#: mainwindow.cpp:1110
 msgid "Saving file..."
 msgstr "Bestand wordt opgeslagen..."
 
-#: mainwindow.cpp:1137
+#: mainwindow.cpp:1139
 msgid "Saving file with a new filename..."
 msgstr "Bestand wordt opgeslagen onder een nieuwe naam..."
 
-#: mainwindow.cpp:1183 mainwindow.cpp:1234
+#: mainwindow.cpp:1185 mainwindow.cpp:1236
 msgid "Printing..."
 msgstr "Bezig met afdrukken..."
 
-#: mainwindow.cpp:1193
+#: mainwindow.cpp:1195
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -2642,82 +2642,82 @@ msgstr ""
 "De verzameling wordt momenteel gefilterd en toont een selectie van alle "
 "items. Alleen de zichtbare items worden afgedrukt. Doorgaan?"
 
-#: mainwindow.cpp:1218
+#: mainwindow.cpp:1220
 msgid "Processing document..."
 msgstr "Document verwerken..."
 
-#: mainwindow.cpp:1241
+#: mainwindow.cpp:1243
 msgid "Exiting..."
 msgstr "Programma wordt afgesloten..."
 
-#: mainwindow.cpp:1400
+#: mainwindow.cpp:1402
 #, c-format
 msgid "Total entries: %1"
 msgstr "Aantal items: %1"
 
-#: mainwindow.cpp:1409
+#: mainwindow.cpp:1411
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 gefilterd; %2 geselecteerd)"
 
-#: mainwindow.cpp:1412
+#: mainwindow.cpp:1414
 msgid "(%1 filtered)"
 msgstr "(%1 gefilterd)"
 
-#: mainwindow.cpp:1415
+#: mainwindow.cpp:1417
 msgid "(%1 selected)"
 msgstr "(%1 geselecteerd)"
 
-#: mainwindow.cpp:1628
+#: mainwindow.cpp:1630
 #, c-format
 msgid "Print %1"
 msgstr "Druk %1 af"
 
-#: mainwindow.cpp:1661
+#: mainwindow.cpp:1663
 #, c-format
 msgid "Page %1"
 msgstr "Pagina %1"
 
-#: entryview.cpp:142 mainwindow.cpp:1688
+#: entryview.cpp:142 mainwindow.cpp:1690
 msgid "Please check your installation."
 msgstr "Controleer uw installatie."
 
-#: mainwindow.cpp:1782
+#: mainwindow.cpp:1784
 msgid "Importing data..."
 msgstr "Data importeren..."
 
-#: mainwindow.cpp:1791 mainwindow.cpp:1797
+#: mainwindow.cpp:1793 mainwindow.cpp:1799
 msgid "Import File"
 msgstr "Bestand importeren"
 
-#: mainwindow.cpp:1891
+#: mainwindow.cpp:1893
 msgid "Exporting data..."
 msgstr "Data exporteren..."
 
-#: mainwindow.cpp:1913
+#: mainwindow.cpp:1915
 msgid "Export As"
 msgstr "Exporteer als"
 
-#: mainwindow.cpp:1950
+#: mainwindow.cpp:1952
 msgid "String Macros"
 msgstr "Tekenreeks macros"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1953
 msgid "Macro"
 msgstr "Macro"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1953
 msgid "String"
 msgstr "Tekenreeks"
 
-#: mainwindow.cpp:2029
+#: mainwindow.cpp:2031
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico naar de server pipe schrijven op <b>%1</b>.</qt>"
 
-#: mainwindow.cpp:2198
+#: mainwindow.cpp:2200
 msgid "Filters"
 msgstr "Filters"
 
-#: mainwindow.cpp:2199
+#: mainwindow.cpp:2201
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
 "rules.</qt>"
@@ -2725,11 +2725,11 @@ msgstr ""
 "<qt>De <i>Filter weergave</i> toont de items die voldoen aan bepaalde "
 "filterregels.</qt>"
 
-#: mainwindow.cpp:2219
+#: mainwindow.cpp:2221
 msgid "Loans"
 msgstr "Uitgeleend"
 
-#: mainwindow.cpp:2220
+#: mainwindow.cpp:2222
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"

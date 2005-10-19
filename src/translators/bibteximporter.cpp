@@ -42,12 +42,13 @@ Tellico::Data::Collection* BibtexImporter::collection() {
     return m_coll;
   }
 
-  ASTList list = parseText(text());
-  if(list.isEmpty()) {
+  parseText(text()); // populates m_nodes
+
+  if(m_nodes.isEmpty()) {
     setStatusMessage(i18n("No valid bibtex entries were found in file - %1").arg(url().fileName()));
     return 0;
   } else {
-//    kdDebug() << "BibtexImporter::collection() - found " << list.count() << " entries" << endl;
+//    kdDebug() << "BibtexImporter::collection() - found " << m_nodes.count() << " entries" << endl;
   }
 
   m_coll = new Data::BibtexCollection(true);
@@ -55,8 +56,8 @@ Tellico::Data::Collection* BibtexImporter::collection() {
 
   QString text;
   int j = 0;
-  unsigned count = list.count();
-  for(ASTListIterator it(list); it.current(); ++it, ++j) {
+  unsigned count = m_nodes.count();
+  for(ASTListIterator it(m_nodes); it.current(); ++it, ++j) {
     // if we're parsing a macro string, comment or preamble, skip it for now
     if(bt_entry_metatype(it.current()) == BTE_PREAMBLE) {
       char* preamble = bt_get_text(it.current());
@@ -70,7 +71,8 @@ Tellico::Data::Collection* BibtexImporter::collection() {
       char* macro;
       (void) bt_next_field(it.current(), 0, &macro);
       // FIXME: replace macros within macro definitions!
-      m_coll->addMacro(QString::fromUtf8(macro), QString::fromUtf8(bt_macro_text(macro, 0, 0)));
+      // lookup lowercase macro in map
+      m_coll->addMacro(m_macros[QString::fromUtf8(macro)], QString::fromUtf8(bt_macro_text(macro, 0, 0)));
       continue;
     }
 
@@ -78,7 +80,7 @@ Tellico::Data::Collection* BibtexImporter::collection() {
       continue;
     }
 
-    // now we're parsing a regular entrry
+    // now we're parsing a regular entry
     Data::Entry* entry = new Data::Entry(m_coll);
 
     text = QString::fromUtf8(bt_entry_type(it.current()));
@@ -134,7 +136,7 @@ Tellico::Data::Collection* BibtexImporter::collection() {
   }
 
   // clean-up
-  for(ASTListIterator it(list); it.current(); ++it) {
+  for(ASTListIterator it(m_nodes); it.current(); ++it) {
     bt_free_ast(it.current());
   }
 
@@ -142,7 +144,11 @@ Tellico::Data::Collection* BibtexImporter::collection() {
   return m_coll;
 }
 
-Tellico::Import::BibtexImporter::ASTList BibtexImporter::parseText(const QString& text) const {
+void BibtexImporter::parseText(const QString& text) {
+  if(!m_nodes.isEmpty()) {
+    kdWarning() << "BibtexImporter::parseText() - already parsed the text!" << endl;
+  }
+
   ushort bt_options = 0; // ushort is defined in btparse.h
   boolean ok; // boolean is defined in btparse.h as an int
 
@@ -151,9 +157,10 @@ Tellico::Import::BibtexImporter::ASTList BibtexImporter::parseText(const QString
   bt_set_stringopts(BTE_MACRODEF, 0);
 //  bt_set_stringopts(BTE_PREAMBLE, BTO_CONVERT | BTO_EXPAND);
 
-  ASTList list;
   QString entry;
   QRegExp rx(QString::fromLatin1("[{}]"));
+  QRegExp macroName(QString::fromLatin1("@string\\s*\\{\\s*(.*)="), false /*case sensitive*/);
+  macroName.setMinimal(true);
 
   int brace = 0;
   int startpos = 0;
@@ -165,14 +172,18 @@ Tellico::Import::BibtexImporter::ASTList BibtexImporter::parseText(const QString
       --brace;
     }
     if(brace == 0) {
-      entry = text.mid(startpos, pos-startpos+1);
-      //kdDebug() << entry.stripWhiteSpace() << endl;
-      // All the downstream test processing on the AST node will assume utf-8
+      entry = text.mid(startpos, pos-startpos+1).stripWhiteSpace();
+      // All the downstream text processing on the AST node will assume utf-8
       AST* node = bt_parse_entry_s(const_cast<char*>(entry.utf8().data()),
                                    const_cast<char*>(url().fileName().local8Bit().data()),
                                    0, bt_options, &ok);
       if(ok && node) {
-        list.append(node);
+        if(bt_entry_metatype(node) == BTE_MACRODEF && macroName.search(entry) > -1) {
+          char* macro;
+          (void) bt_next_field(node, 0, &macro);
+          m_macros.insert(QString::fromUtf8(macro), macroName.cap(1).stripWhiteSpace());
+        }
+        m_nodes.append(node);
       }
       startpos = pos+1;
     }
@@ -180,8 +191,6 @@ Tellico::Import::BibtexImporter::ASTList BibtexImporter::parseText(const QString
   }
   // clean up some structures
   bt_parse_entry_s(0, 0, 1, 0, 0);
-
-  return list;
 }
 
 #include "bibteximporter.moc"

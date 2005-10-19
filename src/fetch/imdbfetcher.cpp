@@ -281,7 +281,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
   akaRx.setMinimal(true);
 
   int start = s_anchorTitleRx->search(str_);
-  while(start > -1 && m_matches.size() < IMDB_MAX_RESULTS) {
+  while(m_started && start > -1 && m_matches.size() < IMDB_MAX_RESULTS) {
     // split title at parenthesis
     const QString cap1 = s_anchorTitleRx->cap(1); // the anchor url
     const QString cap2 = s_anchorTitleRx->cap(2); // the anchor text
@@ -336,7 +336,7 @@ void IMDBFetcher::parseSingleNameResult() {
   }
 
   QString desc;
-  while(pos > -1 && m_matches.size() < IMDB_MAX_RESULTS) {
+  while(m_started && pos > -1 && m_matches.size() < IMDB_MAX_RESULTS) {
     int len = s_anchorTitleRx->cap(0).length();
     // split title at parenthesis
     const QString cap2 = s_anchorTitleRx->cap(2);

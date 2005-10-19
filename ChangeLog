@@ -1,3 +1,23 @@
+2005-10-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.0.3.
+
+2005-10-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated it.po, from Lorenzo Novaro.
+
+2005-10-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated CalendarHandler to compile with KDEPIM 3.5.
+	
+2005-10-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with bibtex macro names always being imported in lowercase.
+
+2005-10-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with initialization, patch from Marco Clemencic.
+
 2005-10-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.0.2.

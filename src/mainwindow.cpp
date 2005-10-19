@@ -1076,8 +1076,10 @@ bool MainWindow::openURL(const KURL& url_) {
     slotEnableModifiedActions(false);
 
     slotEntryCount();
-    m_initialized = true;
   }
+  // slotFileOpen(URL) gets called when opening files on the command line
+  // so go ahead and make sure m_initialized is set.
+  m_initialized = true;
 
   // remove filter and loan tabs, they'll get re-added if needed
   if(m_filterView && m_filterView->childCount() == 0) {

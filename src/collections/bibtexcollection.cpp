@@ -167,13 +167,13 @@ Tellico::Data::FieldVec BibtexCollection::defaultFields() {
 
   // could make this a string list, but since bibtex import could have funky values
   // keep it an editbox
-  field = new Field(QString::fromLatin1("month"), i18n("Month"), Field::Number);
+  field = new Field(QString::fromLatin1("month"), i18n("Month"));
   field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("month"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("number"), i18n("Number"));
+  field = new Field(QString::fromLatin1("number"), i18n("Number"), Field::Number);
   field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("number"));
   field->setCategory(i18n(bibtex_publishing));
   list.append(field);
