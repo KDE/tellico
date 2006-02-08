@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,10 +16,11 @@
 #include "../collection.h"
 #include "../tellico_kernel.h"
 #include "../imagefactory.h"
+#include "../tellico_utils.h"
+//#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kdebug.h>
 
 #include <qdir.h>
 
@@ -40,7 +41,7 @@ QString AlexandriaExporter::formatString() const {
 }
 
 bool AlexandriaExporter::exec() {
-  const Data::Collection* coll = Data::Document::self()->collection();
+  Data::CollPtr coll = collection();
   if(!coll || coll->type() != Data::Collection::Book || coll->type() != Data::Collection::Bibtex) {
     return false;
   }
@@ -70,14 +71,14 @@ bool AlexandriaExporter::exec() {
 
   bool success = true;
   for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
-    success &= writeFile(libraryDir, entryIt);
+    success &= writeFile(libraryDir, entryIt.data());
   }
   return success;
 }
 
 // this isn't true YAML export, of course
 // everything is put between quotes except for the rating, just to be sure it's interpreted as a string
-bool AlexandriaExporter::writeFile(const QDir& dir_, const Data::Entry* entry_) {
+bool AlexandriaExporter::writeFile(const QDir& dir_, Data::ConstEntryPtr entry_) {
   // the filename is the isbn without dashes, followed by .yaml
   QString isbn = entry_->field(QString::fromLatin1("isbn"));
   if(isbn.isEmpty()) {
@@ -125,13 +126,16 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, const Data::Entry* entry_) 
   // publisher uses n/a when empty
   ts << "publisher: \"" << (tmp.isEmpty() ? QString::fromLatin1("n/a") : escapeText(tmp)) << "\"\n";
 
+  tmp = entry_->field(QString::fromLatin1("pub_year"), format);
+  if(!tmp.isEmpty()) {
+    ts << "publishing_year: \"" << escapeText(tmp) << "\"\n";
+  }
+
   tmp = entry_->field(QString::fromLatin1("rating"));
-  // only goes up to 9!
-  for(uint pos = 0; pos < tmp.length(); ++pos) {
-    if(tmp[pos].isDigit()) {
-      ts << "rating: " << tmp[pos] << "\n";
-      break;
-    }
+  bool ok;
+  int rating = Tellico::toUInt(tmp, &ok);
+  if(ok) {
+    ts << "rating: " << rating << "\n";
   }
 
   file.close();
@@ -158,3 +162,5 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, const Data::Entry* entry_) 
   }
   return true;
 }
+
+#include "alexandriaexporter.moc"

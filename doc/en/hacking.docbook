@@ -9,7 +9,7 @@ In the spirit of Free Software, you're welcome to hack on &appname; as much as y
 <title>File Format</title>
 
 <para>
-The default &appname; data file is a zip archive, normally with a <literal role="extension">.tc</literal> file extension. Inside the archive is a top-level <filename>tellico.xml</filename> file. Any images are placed inside the <filename>images/</filename> directory in the archive. &appname; can also load the &xml; file, by itself.
+The default &appname; data file is a zip archive, normally with a <literal role="extension">.tc</literal> file extension. Inside the archive is a top-level <filename>tellico.xml</filename> file. Images may be included inside the <filename>images/</filename> directory in the archive., or they may be included in the &xml; data directly in a base64 encoding. Images may also be saved inside the application data directory, in which case, they are not in the data file at all. &appname; can also load the &xml; file, by itself, uncompressed.
 </para>
 
 <sect2 id="xml-format">
@@ -23,8 +23,8 @@ The default &appname; data file is a zip archive, normally with a <literal role=
 <programlisting>
 <![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V8.0//EN" "http://periapsis.org/tellico/dtd/v8/tellico.dtd">
-<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="8">
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="9">
  <collection title="My Books" type="2">
  </collection>
 </tellico>
@@ -157,6 +157,7 @@ The type of collection is given in the type attribute of the collection element.
 <row><entry>Stamp Collection</entry><entry>9</entry></row>
 <row><entry>Trading Card Collection</entry><entry>10</entry></row>
 <row><entry>Video Game Collection</entry><entry>11</entry></row>
+<row><entry>File Catalog</entry><entry>12</entry></row>
 </tbody>
 </tgroup>
 </table>
@@ -275,19 +276,9 @@ The maximum size of the icons in the &icon-view; may be changed with this settin
 </sect3>
 
 <sect3>
-<title>Load All Images</title>
-
-<para>
-As of version 0.14, &appname; delays the loading of any images in a local data file until they are needed.
-&appname; may be told to load all the images in a collection immediately on loading a file by changing this setting. Changing this to <emphasis>true</emphasis> increases memory usage while reducing slightly the delay needed for showing images.
-</para>
-</sect3>
-
-<sect3>
 <title>Example</title>
 <informalexample>
 <para><userinput>Max Icon Size=72</userinput></para>
-<para><userinput>Load All Images=true</userinput></para>
 </informalexample>
 </sect3>
 

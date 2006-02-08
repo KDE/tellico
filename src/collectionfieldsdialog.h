@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,6 +23,7 @@ class QCheckBox;
 class QPainter;
 
 #include "datavectors.h"
+#include "gui/listboxtext.h"
 
 #include <kdialogbase.h>
 
@@ -34,28 +35,16 @@ namespace Tellico {
     class Collection;
   }
 
-/**
- * ListBoxText subclasses QListBoxText so that @ref setText() can be made public,
- * and the font color can be changed
- *
- * @author Robby Stephenson
- */
-class ListBoxText : public QListBoxText {
+class FieldListBox : public GUI::ListBoxText {
 public:
-  ListBoxText(QListBox* listbox, Data::Field* field);
-  ListBoxText(QListBox* listbox, Data::Field* field, QListBoxItem* after);
+  FieldListBox(QListBox* listbox, Data::FieldPtr field);
+  FieldListBox(QListBox* listbox, Data::FieldPtr field, QListBoxItem* after);
 
-  Data::Field* field() const { return m_field; }
-  void setField(Data::Field* field) { m_field = field; }
-  void setColored(bool colored);
-  void setText(const QString& text);
-
-protected:
-  virtual void paint(QPainter* painter);
+  Data::FieldPtr field() const { return m_field; }
+  void setField(Data::FieldPtr field) { m_field = field; }
 
 private:
   Data::FieldPtr m_field;
-  bool m_colored;
 };
 
 /**
@@ -72,7 +61,7 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  CollectionFieldsDialog(Data::Collection* coll, QWidget* parent, const char* name=0);
+  CollectionFieldsDialog(Data::CollPtr coll, QWidget* parent, const char* name=0);
   ~CollectionFieldsDialog();
 
 signals:
@@ -95,15 +84,15 @@ protected slots:
 protected:
   void updateField();
   bool checkValues();
-  ListBoxText* findItem(const QListBox* box, const Data::Field* field);
+  FieldListBox* findItem(const QListBox* box, Data::FieldPtr field);
   QStringList newTypesAllowed(int type);
 
 private slots:
   void slotSelectInitial();
 
 private:
-  KSharedPtr<Data::Collection> m_coll;
-  KSharedPtr<Data::Collection> m_defaultCollection;
+  Data::CollPtr m_coll;
+  Data::CollPtr m_defaultCollection;
   Data::FieldVec m_copiedFields;
   Data::FieldVec m_newFields;
   Data::FieldPtr m_currentField;

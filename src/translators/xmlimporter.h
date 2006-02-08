@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -48,6 +48,8 @@ public:
    * @param data The Data
    */
   XMLImporter(const QByteArray& data);
+
+  virtual void setText(const QString& text);
 
 protected:
   /**

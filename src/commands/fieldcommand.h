@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,12 +18,7 @@
 
 #include <kcommand.h>
 
-#include <qguardedptr.h>
-
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
   namespace Command {
 
 /**
@@ -38,7 +33,7 @@ public:
     FieldRemove
   };
 
-  FieldCommand(Mode mode, Data::Collection* coll, Data::Field* activeField, Data::Field* oldField=0);
+  FieldCommand(Mode mode, Data::CollPtr coll, Data::FieldPtr activeField, Data::FieldPtr oldField=0);
 
   virtual void execute();
   virtual void unexecute();
@@ -46,7 +41,7 @@ public:
 
 private:
   Mode m_mode;
-  QGuardedPtr<Data::Collection> m_coll;
+  Data::CollPtr m_coll;
   Data::FieldPtr m_activeField;
   Data::FieldPtr m_oldField;
 };

@@ -117,8 +117,8 @@
     <string>\"{e}</string>
   </key>
   <key char="Î">
-    <string>{\^E}</string>
-    <string>\^{E}</string>
+    <string>{\^I}</string>
+    <string>\^{I}</string>
   </key>
   <key char="Í">
     <string>{\'I}</string>
@@ -129,20 +129,20 @@
     <string>\"{I}</string>
   </key>
   <key char="ì">
-    <string>{\`i}</string>
-    <string>\`{i}</string>
+    <string>{\`{\i}}</string>
+    <string>\`{\i}</string>
   </key>
   <key char="í">
-    <string>{\'i}</string>
-    <string>\'{i}</string>
+    <string>{\'{\i}}</string>
+    <string>\'{\i}</string>
   </key>
   <key char="î">
-    <string>{\^i}</string>
-    <string>\^{i}</string>
+    <string>{\^{\i}}</string>
+    <string>\^{\i}</string>
   </key>
   <key char="ï">
-    <string>{\"i}</string>
-    <string>\"{i}</string>
+    <string>{\"{\i}}</string>
+    <string>\"{\i}</string>
   </key>
   <key char="Ñ">
     <string>{\~N}</string>
@@ -203,6 +203,14 @@
   <key char="š">
     <string>{\v s}</string>
     <string>\v{s}</string>
+  </key>
+  <key char="Ţ">
+    <string>{\c T}</string>
+    <string>\c{T}</string>
+  </key>
+  <key char="ţ">
+    <string>{\c t}</string>
+    <string>\c{t}</string>
   </key>
   <key char="Ú">
     <string>{\'U}</string>

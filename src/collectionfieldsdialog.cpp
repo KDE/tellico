@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,7 +28,6 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kaccelmanager.h>
-#include <kdeversion.h>
 
 #include <qgroupbox.h>
 #include <qlayout.h>
@@ -40,50 +39,20 @@
 #include <qcheckbox.h>
 #include <qregexp.h>
 #include <qwhatsthis.h>
-#include <qpainter.h>
 #include <qtimer.h>
 
-using Tellico::ListBoxText;
+using Tellico::FieldListBox;
 using Tellico::CollectionFieldsDialog;
 
-ListBoxText::ListBoxText(QListBox* listbox_, Data::Field* field_)
-    : QListBoxText(listbox_, field_->title()), m_field(field_), m_colored(false) {
+FieldListBox::FieldListBox(QListBox* listbox_, Data::FieldPtr field_)
+    : GUI::ListBoxText(listbox_, field_->title()), m_field(field_) {
 }
 
-ListBoxText::ListBoxText(QListBox* listbox_, Data::Field* field_, QListBoxItem* after_)
-    : QListBoxText(listbox_, field_->title(), after_), m_field(field_), m_colored(false) {
+FieldListBox::FieldListBox(QListBox* listbox_, Data::FieldPtr field_, QListBoxItem* after_)
+    : GUI::ListBoxText(listbox_, field_->title(), after_), m_field(field_) {
 }
 
-void ListBoxText::setColored(bool colored_) {
-  if(m_colored != colored_) {
-    m_colored = colored_;
-    listBox()->triggerUpdate(false);
-  }
-}
-
-void ListBoxText::setText(const QString& text_) {
-  QListBoxText::setText(text_);
-  listBox()->triggerUpdate(true);
-}
-
-// mostly copied from QListBoxText::paint() in Qt 3.1.1
-void ListBoxText::paint(QPainter* painter_) {
-  int itemHeight = height(listBox());
-  QFontMetrics fm = painter_->fontMetrics();
-  int yPos = ((itemHeight - fm.height()) / 2) + fm.ascent();
-  if(m_colored) {
-    QFont font = painter_->font();
-    font.setBold(true);
-    font.setItalic(true);
-    painter_->setFont(font);
-    if(!isSelected()) {
-      painter_->setPen(listBox()->colorGroup().highlight());
-    }
-  }
-  painter_->drawText(3, yPos, text());
-}
-
-CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget* parent_, const char* name_/*=0*/)
+CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, false, i18n("Collection Fields"), Help|Default|Ok|Apply|Cancel, Ok, false),
       m_coll(coll_),
       m_defaultCollection(0),
@@ -105,7 +74,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
   for(Data::FieldVec::Iterator it = fields.begin(); it != fields.end(); ++it) {
     // ignore ReadOnly
     if(it->type() != Data::Field::ReadOnly) {
-      (void) new ListBoxText(m_fieldsBox, it);
+      (void) new FieldListBox(m_fieldsBox, it);
     }
   }
   connect(m_fieldsBox, SIGNAL(highlighted(int)), SLOT(slotHighlightedChanged(int)));
@@ -225,7 +194,8 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
   layout->addMultiCellWidget(m_allowEdit, 3, 3, 1, 3);
   label->setBuddy(m_allowEdit);
   whats = i18n("<qt>For <i>Choice</i>-type fields, these are the only values allowed. They are "
-               "placed in a combo box.</qt>");
+               "placed in a combo box. The possible value have to be seperated by a semi-colon, "
+               "for example: \"dog; cat; mouse\"</qt>");
   QWhatsThis::add(label, whats);
   QWhatsThis::add(m_allowEdit, whats);
   connect(m_allowEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
@@ -272,9 +242,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::Collection* coll_, QWidget*
 
   // need to stretch at bottom
   vbox->setStretchFactor(new QWidget(vbox), 1);
-#if KDE_IS_VERSION(3,1,90)
   KAcceleratorManager::manage(vbox);
-#endif
 
   // keep a default collection
   m_defaultCollection = CollectionFactory::collection(m_coll->type(), true);
@@ -343,7 +311,7 @@ void CollectionFieldsDialog::slotApply() {
           if(field->type() == Data::Field::Choice) {
             field->setAllowed(oldValues);
           } else { // rating field
-            Data::Field* oldField = m_coll->fieldByName(field->name());
+            Data::FieldPtr oldField = m_coll->fieldByName(field->name());
             field->setProperty(QString::fromLatin1("minimum"), oldField->property(QString::fromLatin1("minimum")));
             field->setProperty(QString::fromLatin1("maximum"), oldField->property(QString::fromLatin1("maximum")));
           }
@@ -361,9 +329,9 @@ void CollectionFieldsDialog::slotApply() {
   // set all text not to be colored, and get new list
   Data::FieldVec fields;
   for(QListBoxItem* item = m_fieldsBox->firstItem(); item; item = item->next()) {
-    static_cast<ListBoxText*>(item)->setColored(false);
+    static_cast<FieldListBox*>(item)->setColored(false);
     if(m_reordered) {
-      Data::Field* field = static_cast<ListBoxText*>(item)->field();
+      Data::FieldPtr field = static_cast<FieldListBox*>(item)->field();
       if(field) {
         fields.append(field);
       }
@@ -418,12 +386,12 @@ void CollectionFieldsDialog::slotNew() {
     title = i18n("New Field") + QString::fromLatin1(" %1").arg(count);
   }
 
-  Data::Field* field = new Data::Field(name, title);
+  Data::FieldPtr field = new Data::Field(name, title);
   m_newFields.append(field);
 //  kdDebug() << "CollectionFieldsDialog::slotNew() - adding new field " << title << endl;
 
 //  m_fieldsBox->insertItem(title);
-  ListBoxText* box = new ListBoxText(m_fieldsBox, field);
+  FieldListBox* box = new FieldListBox(m_fieldsBox, field);
   m_fieldsBox->setSelected(box, true);
   box->setColored(true);
   m_fieldsBox->ensureCurrentVisible();
@@ -521,7 +489,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
   m_btnUp->setEnabled(index_ > 0);
   m_btnDown->setEnabled(index_ < static_cast<int>(m_fieldsBox->count())-1);
 
-  ListBoxText* item = dynamic_cast<ListBoxText*>(m_fieldsBox->item(index_));
+  FieldListBox* item = dynamic_cast<FieldListBox*>(m_fieldsBox->item(index_));
   if(!item) {
     return;
   }
@@ -596,7 +564,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 
 void CollectionFieldsDialog::updateField() {
 //  kdDebug() << "CollectionFieldsDialog::updateField()" << endl;
-  Data::Field* field = m_currentField;
+  Data::FieldPtr field = m_currentField;
   if(!field || !m_modified) {
     return;
   }
@@ -692,11 +660,11 @@ void CollectionFieldsDialog::slotModified() {
 
   if(!m_currentField) {
     kdDebug() << "CollectionFieldsDialog::slotModified() - no current field!" << endl;
-    m_currentField = static_cast<ListBoxText*>(m_fieldsBox->selectedItem())->field();
+    m_currentField = static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->field();
   }
 
   // color the text
-  static_cast<ListBoxText*>(m_fieldsBox->selectedItem())->setColored(true);
+  static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->setColored(true);
 
   // check if copy exists already
   if(m_copiedFields.contains(m_currentField)) {
@@ -709,18 +677,18 @@ void CollectionFieldsDialog::slotModified() {
     return;
   }
 
-  Data::Field* newField = m_currentField->clone();
+  Data::FieldPtr newField = m_currentField->clone();
 
   m_copiedFields.append(newField);
   m_currentField = newField;
-  static_cast<ListBoxText*>(m_fieldsBox->selectedItem())->setField(newField);
+  static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->setField(newField);
 }
 
 void CollectionFieldsDialog::slotUpdateTitle(const QString& title_) {
 //  kdDebug() << "CollectionFieldsDialog::slotUpdateTitle()" << endl;
   if(m_currentField && m_currentField->title() != title_) {
     m_fieldsBox->blockSignals(true);
-    ListBoxText* oldItem = findItem(m_fieldsBox, m_currentField);
+    FieldListBox* oldItem = findItem(m_fieldsBox, m_currentField);
     if(!oldItem) {
       return;
     }
@@ -739,7 +707,7 @@ void CollectionFieldsDialog::slotDefault() {
     return;
   }
 
-  Data::Field* defaultField = m_defaultCollection->fieldByName(m_currentField->name());
+  Data::FieldPtr defaultField = m_defaultCollection->fieldByName(m_currentField->name());
   if(!defaultField) {
     return;
   }
@@ -811,12 +779,11 @@ void CollectionFieldsDialog::slotDefault() {
 }
 
 void CollectionFieldsDialog::slotMoveUp() {
-  QListBoxItem* item;
-  item = m_fieldsBox->selectedItem();
+  QListBoxItem* item = m_fieldsBox->selectedItem();
   if(item) {
-    ListBoxText* prev = dynamic_cast<ListBoxText*>(item->prev()); // could be 0
+    FieldListBox* prev = static_cast<FieldListBox*>(item->prev()); // could be 0
     if(prev) {
-      (void) new ListBoxText(m_fieldsBox, prev->field(), item);
+      (void) new FieldListBox(m_fieldsBox, prev->field(), item);
       delete prev;
       m_fieldsBox->ensureCurrentVisible();
       // since the current one doesn't get re-highlighted, need to highlighted doesn't get emitted
@@ -832,11 +799,11 @@ void CollectionFieldsDialog::slotMoveUp() {
 }
 
 void CollectionFieldsDialog::slotMoveDown() {
-  ListBoxText* item = dynamic_cast<ListBoxText*>(m_fieldsBox->selectedItem());
+  FieldListBox* item = dynamic_cast<FieldListBox*>(m_fieldsBox->selectedItem());
   if(item) {
     QListBoxItem* next = item->next(); // could be 0
     if(next) {
-      QListBoxItem* newItem = new ListBoxText(m_fieldsBox, item->field(), next);
+      QListBoxItem* newItem = new FieldListBox(m_fieldsBox, item->field(), next);
       delete item;
       m_fieldsBox->setSelected(newItem, true);
       m_fieldsBox->ensureCurrentVisible();
@@ -850,10 +817,10 @@ void CollectionFieldsDialog::slotMoveDown() {
   enableButtonApply(true);
 }
 
-ListBoxText* CollectionFieldsDialog::findItem(const QListBox* box_, const Data::Field* field_) {
+Tellico::FieldListBox* CollectionFieldsDialog::findItem(const QListBox* box_, Data::FieldPtr field_) {
 //  kdDebug() << "CollectionFieldsDialog::findItem()" << endl;
   for(QListBoxItem* item = box_->firstItem(); item; item = item->next()) {
-    ListBoxText* textItem = static_cast<ListBoxText*>(item);
+    FieldListBox* textItem = static_cast<FieldListBox*>(item);
     if(textItem->field() == field_) {
       return textItem;
     }
@@ -866,16 +833,14 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
     return false;
   }
 
-  StringMapDialog* dlg = new StringMapDialog(m_currentField->propertyList(), this, "ExtendedPropertiesDialog", true);
-  dlg->setCaption(i18n("Extended Field Properties"));
-  dlg->setLabels(i18n("Property"), i18n("Value"));
-  if(dlg->exec() == QDialog::Accepted) {
-    m_currentField->setPropertyList(dlg->stringMap());
-    dlg->delayedDestruct();
+  StringMapDialog dlg(m_currentField->propertyList(), this, "ExtendedPropertiesDialog", true);
+  dlg.setCaption(i18n("Extended Field Properties"));
+  dlg.setLabels(i18n("Property"), i18n("Value"));
+  if(dlg.exec() == QDialog::Accepted) {
+    m_currentField->setPropertyList(dlg.stringMap());
     slotModified();
     return true;
   }
-  dlg->delayedDestruct();
   return false;
 }
 
@@ -936,9 +901,9 @@ bool CollectionFieldsDialog::checkValues() {
     bool ok; // ok to ignore this here
     int ncols = Tellico::toUInt(m_currentField->property(QString::fromLatin1("columns")), &ok);
     // also enforced in GUI::TableFieldWidget
-    if(ncols > 5) {
-      KMessageBox::sorry(this, i18n("Tables are limited to a maximum of five columns."));
-      m_currentField->setProperty(QString::fromLatin1("columns"), QChar('5'));
+    if(ncols > 10) {
+      KMessageBox::sorry(this, i18n("Tables are limited to a maximum of ten columns."));
+      m_currentField->setProperty(QString::fromLatin1("columns"), QString::fromLatin1("10"));
     }
   }
 

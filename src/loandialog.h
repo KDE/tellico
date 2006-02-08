@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -43,7 +43,7 @@ public:
    * @param name The widget name
    */
   LoanDialog(const Data::EntryVec& entries, QWidget* parent, const char* name=0);
-  LoanDialog(Data::Loan* loan, QWidget* parent, const char* name=0);
+  LoanDialog(Data::LoanPtr loan, QWidget* parent, const char* name=0);
   virtual ~LoanDialog();
 
   KCommand* createCommand();

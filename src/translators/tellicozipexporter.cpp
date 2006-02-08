@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,16 +13,17 @@
 
 #include "tellicozipexporter.h"
 #include "tellicoxmlexporter.h"
-#include "../document.h"
 #include "../collection.h"
 #include "../imagefactory.h"
 #include "../filehandler.h"
 #include "../stringset.h"
+#include "../tellico_debug.h"
+#include "../progressmanager.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kconfig.h>
 #include <kzip.h>
+#include <kapplication.h>
 
 #include <qdom.h>
 #include <qbuffer.h>
@@ -38,48 +39,84 @@ QString TellicoZipExporter::fileFilter() const {
 }
 
 bool TellicoZipExporter::exec() {
-  const Data::Collection* coll = Data::Document::self()->collection();
+  m_cancelled = false;
+  Data::CollPtr coll = collection();
   if(!coll) {
     return false;
   }
 
+  // TODO: maybe need label?
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString::null, true);
+  item.setTotalSteps(100);
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+
   TellicoXMLExporter exp;
   exp.setEntries(entries());
-  exp.setOptions(options() | Export::ExportUTF8); // always export to UTF-8
+  long opt = options();
+  opt |= Export::ExportUTF8; // always export to UTF-8
+  if(!m_includeImages) {
+    opt &= ~Export::ExportImages; // the images are cached, so no need to even write them in the XML
+  }
+  exp.setOptions(opt);
   exp.setIncludeImages(false); // do not include images in XML
   QCString xml = exp.exportXML().toCString(); // encoded in utf-8
+  ProgressManager::self()->setProgress(this, 10);
 
   QByteArray data;
   QBuffer buf(data);
 
+  if(m_cancelled) {
+    return true; // intentionally cancelled
+  }
+
   KZip zip(&buf);
   zip.open(IO_WriteOnly);
   zip.writeFile(QString::fromLatin1("tellico.xml"), QString::null, QString::null, xml.length(), xml);
+  ProgressManager::self()->setProgress(this, 20);
 
-  QStringList imageFields;
-  Data::FieldVec fields = coll->fields();
-  for(Data::FieldVec::Iterator it = fields.begin(); it != fields.end(); ++it) {
-    if(it->type() == Data::Field::Image) {
-      imageFields += it->name();
-    }
-  }
-
-  StringSet imageSet;
-  for(Data::EntryVec::ConstIterator it = entries().begin(); it != entries().end(); ++it) {
-    for(QStringList::ConstIterator fIt = imageFields.begin(); fIt != imageFields.end(); ++fIt) {
-      const Data::Image& img = ImageFactory::imageById(it->field(*fIt));
-      // if no image or is already writen, continue
-      if(img.isNull() || imageSet.has(img.id())) {
-        continue;
+  if(m_includeImages) {
+    // gonna be lazy and just increment progress every 3 images
+    const uint stepSize = 3;
+    uint j = 0;
+    StringSet imageSet;
+    Data::FieldVec imageFields = coll->imageFields();
+    for(Data::EntryVec::ConstIterator it = entries().begin(); it != entries().end() && !m_cancelled; ++it) {
+      for(Data::FieldVec::Iterator fIt = imageFields.begin(); fIt != imageFields.end(); ++fIt) {
+        const QString id = it->field(fIt);
+        if(id.isEmpty() || imageSet.has(id)) {
+          continue;
+        }
+        const Data::Image& img = ImageFactory::imageById(id);
+        // if no image or is already writen, continue
+        if(img.isNull()) {
+          continue;
+        }
+        QByteArray ba = img.byteArray();
+//        myDebug() << "TellicoZipExporter::data() - adding image id = " << it->field(fIt) << endl;
+        zip.writeFile(QString::fromLatin1("images/") + id,
+                      QString::null, QString::null, ba.size(), ba);
+        imageSet.add(id);
+        if(j%stepSize == 0) {
+          ProgressManager::self()->setProgress(this, QMIN(20+j/stepSize, 99));
+          kapp->processEvents();
+        }
+        ++j;
       }
-      QByteArray ba = img.byteArray();
-//      kdDebug() << "TellicoZipExporter::data() - writing image id = " << it.current()->field(*fIt) << endl;
-      zip.writeFile(QString::fromLatin1("images/") + it->field(*fIt),
-                    QString::null, QString::null, ba.size(), ba);
-      imageSet.add(img.id());
     }
   }
 
   zip.close();
-  return FileHandler::writeDataURL(url(), data, options() & Export::ExportForce);
+  if(m_cancelled) {
+    return true;
+  }
+
+  bool success = FileHandler::writeDataURL(url(), data, options() & Export::ExportForce);
+  ProgressManager::self()->setDone(this);
+  return success;
 }
+
+void TellicoZipExporter::slotCancel() {
+  m_cancelled = true;
+}
+
+#include "tellicozipexporter.moc"

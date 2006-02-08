@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,14 +21,13 @@
 #include <qstringlist.h>
 #include <qstring.h>
 #include <qptrlist.h>
-#include <qguardedptr.h>
 
 namespace Tellico {
   namespace Data {
     class Collection;
 
 /**
- * The EntryGroup is simply a QPtrList of entries which knows the name of its group,
+ * The EntryGroup is simply a vector of entries which knows the name of its group,
  * and the name of the field to which that group belongs.
  *
  * An example for a book collection would be a group of books, all written by
@@ -40,11 +39,7 @@ namespace Tellico {
 class EntryGroup : public EntryVec {
 
 public:
-  EntryGroup(const QString& group, const QString& field)
-   : EntryVec(), m_group(group), m_field(field) {}
-  EntryGroup(const EntryGroup& group)
-   : EntryVec(group), m_group(group.groupName()), m_field(group.fieldName()) {}
-  ~EntryGroup() {}
+  EntryGroup(const QString& group, const QString& field);
 
   const QString& groupName() const { return m_group; }
   const QString& fieldName() const { return m_field; }
@@ -86,16 +81,12 @@ public:
    *
    * @param coll A pointer to the parent collection object
    */
-  Entry(Collection* coll);
-  Entry(Collection* coll, int id);
+  Entry(CollPtr coll);
+  Entry(CollPtr coll, int id);
   /**
    * The copy constructor, needed since the id must be different.
    */
   Entry(const Entry& entry);
-  /**
-   * If a copy of the entry is needed in a new collection, needs another pointer.
-   */
-  Entry(const Entry& entry, Collection* coll);
   /**
    * The assignment operator is overloaded, since the id must be different.
    */
@@ -112,21 +103,23 @@ public:
    * Returns the value of the field with a given key name. If the key doesn't
    * exist, the method returns @ref QString::null.
    *
-   * @param name The field name
+   * @param fieldName The field name
    * @param formatted Whether to format the field or not.
    * @return The value of the field
    */
-  QString field(const QString& name, bool formatted=false) const;
+  QString field(const QString& fieldName, bool formatted=false) const;
+  QString field(Data::FieldPtr field, bool formatted=false) const;
   /**
    * Returns the formatted value of the field with a given key name. If the
    * key doesn't exist, the method returns @ref QString::null. The value is cached,
    * so the first time the value is requested, @ref Field::format is called.
    * The second time, that lookup isn't necessary.
    *
-   * @param name The field name
+   * @param fieldName The field name
    * @return The formatted value of the field
    */
-  QString formattedField(const QString& name) const;
+  QString formattedField(const QString& fieldName) const;
+  QString formattedField(Data::FieldPtr field) const;
   /**
    * Splits a field value. This is faster than calling Data::Field::split() since
    * a regexp is not used, only a string.
@@ -135,33 +128,35 @@ public:
    * @param format Whether to format the values or not
    * @return The list of field values
    */
-  QStringList fields(const QString& field, bool formatted) const;
+  QStringList fields(const QString& fieldName, bool formatted) const;
+  QStringList fields(Data::FieldPtr field, bool formatted) const;
   /**
    * Sets the value of an field for the entry. The method first verifies that
    * the value is allowed for that particular key.
    *
-   * @param name The name of the field
+   * @param fieldName The name of the field
    * @param value The value of the field
    * @return A boolean indicating whether or not the field was successfully set
    */
-  bool setField(const QString& name, const QString& value);
+  bool setField(const QString& fieldName, const QString& value);
+  bool setField(Data::FieldPtr field, const QString& value);
   /**
    * Returns a pointer to the parent collection of the entry.
    *
    * @return The collection pointer
    */
-  Collection* const collection() const { return m_coll; }
+  CollPtr collection() const;
   /**
    * Changes the collection owner of the entry
    */
-  void setCollection(Collection* coll) { m_coll = coll; }
+  void setCollection(CollPtr coll);
   /**
    * Returns the id of the entry
    *
    * @return The id
    */
-  int id() const { return m_id; }
-  void setId(int id) { m_id = id; }
+  long id() const { return m_id; }
+  void setId(long id) { m_id = id; }
   /**
    * Adds the entry to a group. The group list within the entry is updated
    * and the entry is added to the group.
@@ -220,7 +215,9 @@ public:
    */
   void invalidateFormattedFieldValue(const QString& name=QString::null);
 
-protected:
+  static int compareValues(EntryPtr entry1, EntryPtr entry2, FieldPtr field);
+  static int compareValues(EntryPtr entry1, EntryPtr entry2, const QString& field, ConstCollPtr coll);
+
   /**
    * Construct the derived valued for an field. The format string should be
    * of the form "%{name1} %{name2}" where the names are replaced by the value
@@ -231,14 +228,27 @@ protected:
    * @param autoCapitalize Whether the inserted values should be auto-capitalized. They're never formatted.
    * @return The constructed field value
    */
-  QString dependentValue(const QString& formatString, bool autoCapitalize) const;
+  static QString dependentValue(ConstEntryPtr e, const QString& formatString, bool autoCapitalize);
 
 private:
-  QGuardedPtr<Collection> m_coll;
-  int m_id;
+  CollPtr m_coll;
+  long m_id;
   StringMap m_fields;
   mutable StringMap m_formattedFields;
   PtrVector<EntryGroup> m_groups;
+};
+
+class EntryCmp : public std::binary_function<EntryPtr, EntryPtr, bool> {
+
+public:
+  EntryCmp(const QString& field) : m_field(field) {}
+
+  bool operator()(EntryPtr e1, EntryPtr e2) const {
+    return e1->field(m_field) < e2->field(m_field);
+  }
+
+private:
+  QString m_field;
 };
 
   } // end namespace

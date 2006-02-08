@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2005 by Robby Stephenson
+    copyright            : (C) 2004-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,9 +17,11 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../latin1literal.h"
+#include "../progressmanager.h"
+#include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kdebug.h>
+#include <kglobal.h> // for KMAX
+#include <kapplication.h>
 
 #include <qdict.h>
 #include <qregexp.h>
@@ -104,7 +106,7 @@ void RISImporter::initTypeMap() {
   }
 }
 
-RISImporter::RISImporter(const KURL& url_) : Tellico::Import::TextImporter(url_), m_coll(0) {
+RISImporter::RISImporter(const KURL& url_) : Tellico::Import::TextImporter(url_), m_coll(0), m_cancelled(false) {
   initTagMap();
   initTypeMap();
 }
@@ -113,7 +115,7 @@ bool RISImporter::canImport(int type) const {
   return type == Data::Collection::Bibtex;
 }
 
-Tellico::Data::Collection* RISImporter::collection() {
+Tellico::Data::CollPtr RISImporter::collection() {
   if(m_coll) {
     return m_coll;
   }
@@ -124,40 +126,41 @@ Tellico::Data::Collection* RISImporter::collection() {
 
   // need to know if any extended properties in current collection point to RIS
   // if so, add to collection
-  const Data::Collection* const m_currColl = Data::Document::self()->collection();
-  Data::FieldVec vec = m_currColl->fields();
+  Data::CollPtr currColl = Data::Document::self()->collection();
+  Data::FieldVec vec = currColl->fields();
   for(Data::FieldVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
     // continue if property is empty
-    QString ris = it->property(QString::fromLatin1("RIS"));
+    QString ris = it->property(QString::fromLatin1("ris"));
     if(ris.isEmpty()) {
       continue;
     }
     // if current collection has one with the same name, set the property
-    Data::Field* f = m_coll->fieldByName(it->name());
-    if(f) {
-      f->setProperty(QString::fromLatin1("RIS"), ris);
-      risFields.insert(ris, f);
-    } else {
-      // else, add it
+    Data::FieldPtr f = m_coll->fieldByName(it->name());
+    if(!f) {
+      f = it->clone();
       m_coll->addField(it->clone());
-      risFields.insert(ris, m_coll->fieldByName(it->name()));
     }
+    f->setProperty(QString::fromLatin1("ris"), ris);
+    risFields.insert(ris, f);
   }
 
   QString str = text();
   QTextIStream t(&str);
 
-  bool deleteEntry = true;
-  // TODO: this might not be the smartest thing since it parses the input twice
-  const int totalChars = str.length();
-  int j = 0;
-  Data::Entry* entry = new Data::Entry(m_coll);
+  const uint length = str.length();
+  const uint stepSize = KMAX(s_stepSize, length/100);
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
+  item.setTotalSteps(length);
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+
+  uint j = 0;
+  Data::EntryPtr entry = new Data::Entry(m_coll);
   // technically, the spec requires a space immediately after the hyphen
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
   QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s\\s-(.*)$"));
   QString currLine, nextLine;
-  for(currLine = t.readLine(); !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
+  for(currLine = t.readLine(); !m_cancelled && !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
     rx.search(currLine);
     QString tag = rx.cap(1);
@@ -176,7 +179,6 @@ Tellico::Data::Collection* RISImporter::collection() {
     if(tag == Latin1Literal("ER")) {
       m_coll->addEntry(entry);
       entry = new Data::Entry(m_coll);
-      deleteEntry = true;
       continue;
     } else if(tag == Latin1Literal("TY") && s_typeMap->contains(value)) {
       // for entry-type, switch it to normalized type name
@@ -188,7 +190,7 @@ Tellico::Data::Collection* RISImporter::collection() {
     // the lookup scheme is:
     // 1. any field has an RIS property that matches the tag name
     // 2. default field mapping tag -> field name
-    Data::Field* f = risFields.find(tag);
+    Data::FieldPtr f = risFields.find(tag);
     if(!f) {
       // special case for BT
       // primary title for books, secondary for everything else
@@ -213,22 +215,22 @@ Tellico::Data::Collection* RISImporter::collection() {
     if((f->flags() & Data::Field::AllowMultiple) && !entry->field(f->name()).isEmpty()) {
       value.prepend(entry->field(f->name()) + QString::fromLatin1("; "));
     }
-    entry->setField(f->name(), value);
-    deleteEntry = false;
+    entry->setField(f, value);
 
-    if(j%s_stepSize == 0) {
-      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(totalChars));
+    if(j%stepSize == 0) {
+      ProgressManager::self()->setProgress(this, j);
+      kapp->processEvents();
     }
   }
 
-  if(deleteEntry) {
-    delete entry;
+  if(m_cancelled) {
+    m_coll = 0;
   }
   return m_coll;
 }
 
-Tellico::Data::Field* RISImporter::fieldByTag(const QString& tag_) {
-  Data::Field* f = 0;
+Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
+  Data::FieldPtr f = 0;
   const QString& fieldTag = (*s_tagMap)[tag_];
   if(!fieldTag.isEmpty()) {
     f = m_coll->fieldByName(fieldTag);
@@ -266,6 +268,10 @@ Tellico::Data::Field* RISImporter::fieldByTag(const QString& tag_) {
   }
   m_coll->addField(f);
   return f;
+}
+
+void RISImporter::slotCancel() {
+  m_cancelled = true;
 }
 
 #include "risimporter.moc"

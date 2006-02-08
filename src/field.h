@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -140,14 +140,14 @@ public:
    */
   ~Field();
   // default copy constructor is ok, right?
-  Field* clone() { return new Field(*this); }
+  FieldPtr clone() const { return new Field(*this); }
 
   /**
    * Returns the id of the field.
    *
    * @return The id
    */
-  int id() const { return m_id; }
+  long id() const { return m_id; }
   /**
    * Returns the name of the field.
    *
@@ -372,6 +372,24 @@ public:
    */
   static void setSurnamePrefixList(const QStringList& list) { s_surnamePrefixes = list; }
   /**
+   * Returns the default no capitalization list.
+   *
+   * @return The word list
+   */
+  static QStringList defaultNoCapitalizationList();
+  /**
+   * Returns the list of words which are not auto-capitalized.
+   *
+   * @return The word list
+   */
+  static const QStringList& noCapitalizeList() { return s_noCapitalize; }
+  /**
+   * Set the words which are not auto-capitalized.
+   *
+   * @param list The list of words
+   */
+  static void setNoCapitalizeList(const QStringList& list) { s_noCapitalize = list; }
+  /**
    * Returns true if the capitalization of titles and authors is set to be consistent.
    *
    * @return If capitalization is automatically done
@@ -423,16 +441,17 @@ public:
   static const QRegExp& delimiter() { return s_delimiter; }
   /**
    * reset if the field is a rating field used for syntax version 7 and earlier */
-  static void convertOldRating(Data::Field* field);
+  static void convertOldRating(Data::FieldPtr field);
+  static void stripArticles(QString& value);
 
 private:
   /*
    * Gets the preferred ID of the collection. Currently, it just gets incremented as
    * new collections are created.
    */
-  static int getID();
+  static long getID();
 
-  int m_id;
+  long m_id;
   QString m_name;
   QString m_title;
   QString m_category;

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,15 +16,15 @@
 
 class QWidget;
 
+#include "../datavectors.h"
+
+#include <klocale.h>
 #include <kurl.h>
 
 #include <qobject.h>
 #include <qstring.h>
 
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
   namespace Import {
 
 /**
@@ -48,6 +48,7 @@ public:
    * @param url The URL of the file to import
    */
   Importer(const KURL& url) : QObject(), m_url(url) {}
+  Importer(const QString& text) : QObject(), m_text(text) {}
   /**
    */
   virtual ~Importer() {}
@@ -59,7 +60,7 @@ public:
    *
    * @return A pointer to a @ref Collection created on the stack, or 0 if none could be created.
    */
-  virtual Data::Collection* collection() = 0;
+  virtual Data::CollPtr collection() = 0;
   /**
    * Returns a string containing all the messages added to the queue in the course of loading
    * and importing the file.
@@ -81,17 +82,19 @@ public:
    * @return Whether the importer could return a collection of that type
    */
   virtual bool canImport(int) const { return true; }
+  virtual void setText(const QString& text) { m_text = text; }
+  /**
+   * Returns a string useful for the ProgressManager
+   */
+  QString progressLabel() const {
+    if(url().isEmpty()) return i18n("Loading data..."); else return i18n("Loading %1...").arg(url().fileName());
+  }
 
 public slots:
-  virtual void slotActionChanged(int) {}
-
-signals:
   /**
-   * Signals that a fraction of an operation has been completed.
-   *
-   * @param f The fraction, 0 =< f >= 1
+   * The import action was changed in the import dialog
    */
-  void signalFractionDone(float f);
+  virtual void slotActionChanged(int) {}
 
 protected:
   /**
@@ -100,6 +103,7 @@ protected:
    * @return the file URL
    */
   const KURL& url() const { return m_url; }
+  const QString& text() const { return m_text; }
   /**
    * Adds a message to the status queue.
    *
@@ -111,6 +115,7 @@ protected:
 
 private:
   KURL m_url;
+  QString m_text;
   QString m_statusMsg;
 };
 

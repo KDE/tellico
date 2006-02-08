@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,10 +15,14 @@
 #define FETCHCONFIGWIDGET_H
 
 class KConfig;
+class QCheckBox;
 
 #include "fetch.h"
+#include "../datavectors.h"
 
 #include <qwidget.h>
+#include <qdict.h>
+#include <qcheckbox.h>
 
 namespace Tellico {
   namespace Fetch {
@@ -30,32 +34,32 @@ class ConfigWidget : public QWidget {
 Q_OBJECT
 
 public:
-  ConfigWidget(QWidget* parent_) : QWidget(parent_), m_modified(false), m_accepted(false) {}
+  ConfigWidget(QWidget* parent);
   virtual ~ConfigWidget() {}
 
   void setAccepted(bool accepted_) { m_accepted = accepted_; }
   bool shouldSave() const { return m_modified && m_accepted; }
-  /**
-   * Read any configuration options. The config group must be
-   * set before calling this function.
-   *
-   * @param config_ The KConfig pointer
-   */
-//  virtual void readConfig(KConfig* config_) = 0;
   /**
    * Saves any configuration options. The config group must be
    * set before calling this function.
    *
    * @param config_ The KConfig pointer
    */
-  virtual void saveConfig(KConfig* config_) = 0;
+  virtual void saveConfig(KConfig* config) = 0;
 
 public slots:
   void slotSetModified(bool modified_ = true) { m_modified = modified_; }
 
+protected:
+  QWidget* optionsWidget() { return m_optionsWidget; }
+  void addFieldsWidget(const StringMap& customFields, const QStringList& fieldsToAdd);
+  void saveFieldsConfig(KConfig* config) const;
+
 private:
   bool m_modified;
   bool m_accepted;
+  QWidget* m_optionsWidget;
+  QDict<QCheckBox> m_fields;
 };
 
   }

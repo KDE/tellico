@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,9 +14,14 @@
 #ifndef TELLICO_IMPORTER_H
 #define TELLICO_IMPORTER_H
 
+class QBuffer;
+class KZip;
+class KArchiveDirectory;
+
 #include "dataimporter.h"
 #include "../entry.h"
 #include "../datavectors.h"
+#include "../stringset.h"
 
 #include <qdom.h>
 
@@ -32,7 +37,7 @@ class TellicoImporter : public DataImporter {
 Q_OBJECT
 
 public:
-  enum Format { Unknown, Error, XML, Zip };
+  enum Format { Unknown, Error, XML, Zip, Cancel };
 
   /**
    * @param url The tellico data file.
@@ -44,6 +49,7 @@ public:
    * @param text The text
    */
   TellicoImporter(const QString& text);
+  virtual ~TellicoImporter();
 
   /**
    * sometimes, a new document format might add data
@@ -52,29 +58,40 @@ public:
 
   /**
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   Format format() const { return m_format; }
 
-  /**
-   */
-  static bool loadImage(const KURL& url, const QString& id);
+  bool hasImages() const { return m_hasImages; }
+  bool loadImage(const QString& id_);
+
+  static bool loadAllImages(const KURL& url);
+
+public slots:
+  void slotCancel();
 
 private:
   void loadXMLData(const QByteArray& data, bool loadImages);
   void loadZipData();
 
-  void readField(unsigned syntaxVersion, const QDomElement& elem);
-  void readEntry(unsigned syntaxVersion, const QDomElement& elem);
+  void readField(uint syntaxVersion, const QDomElement& elem);
+  void readEntry(uint syntaxVersion, const QDomElement& elem);
   void readImage(const QDomElement& elem);
   void readFilter(const QDomElement& elem);
   void readBorrower(const QDomElement& elem);
   void addDefaultFilters();
 
-  Data::Collection* m_coll;
+  Data::CollPtr m_coll;
   bool m_loadAllImages;
   QString m_namespace;
   Format m_format;
-  bool m_modified;
+  bool m_modified : 1;
+  bool m_cancelled : 1;
+  bool m_hasImages : 1;
+  StringSet m_images;
+
+  QBuffer* m_buffer;
+  KZip* m_zip;
+  const KArchiveDirectory* m_imgDir;
 };
 
   } // end namespace

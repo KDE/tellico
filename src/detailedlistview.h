@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,15 +15,11 @@
 #define DETAILEDLISTVIEW_H
 
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
-  class EntryItem;
+  class DetailedEntryItem;
 }
 
 #include "gui/listview.h"
 #include "observer.h"
-#include "datavectors.h"
 #include "filter.h"
 
 #include <kpopupmenu.h>
@@ -32,7 +28,6 @@ namespace Tellico {
 #include <qstringlist.h>
 #include <qpixmap.h>
 #include <qvaluevector.h>
-#include <qguardedptr.h>
 
 namespace Tellico {
 
@@ -64,9 +59,9 @@ public:
    *
    * @param entry A pointer to the entry
    */
-  void setEntrySelected(Data::Entry* entry);
-  void setFilter(Filter* filter);
-  Filter* filter() { return m_filter; }
+  void setEntrySelected(Data::EntryPtr entry);
+  void setFilter(FilterPtr filter);
+  FilterPtr filter() { return m_filter; }
 
   int prevSortedColumn() const;
   int prev2SortedColumn() const;
@@ -87,40 +82,40 @@ public:
   /**
    * @param coll A pointer to the collection
    */
-  void addCollection(Tellico::Data::Collection* coll);
+  void addCollection(Data::CollPtr coll);
   /**
    * Removes all items which refers to a entry within a collection.
    *
    * @param coll A pointer to the collection
    */
-  void removeCollection(Tellico::Data::Collection* coll);
+  void removeCollection(Data::CollPtr coll);
 
   /**
    * Adds a new list item showing the details for a entry.
    *
    * @param entry A pointer to the entry
    */
-  virtual void addEntry(Data::Entry* entry);
+  virtual void addEntries(Data::EntryVec entries);
   /**
    * Modifies any item which refers to a entry, resetting the column contents.
    *
    * @param entry A pointer to the entry
    */
-  virtual void modifyEntry(Data::Entry* entry);
+  virtual void modifyEntries(Data::EntryVec entries);
   /**
    * Removes any item which refers to a certain entry.
    *
    * @param entry A pointer to the entry
    */
-  virtual void removeEntry(Data::Entry* entry);
+  virtual void removeEntries(Data::EntryVec entries);
 
-  virtual void addField(Tellico::Data::Collection*, Data::Field* field) { addField(field, 0); /* field is hidden by default */ }
-  void addField(Data::Field* field, int width);
-  virtual void modifyField(Tellico::Data::Collection*, Data::Field* oldField, Data::Field* newField);
-  virtual void removeField(Tellico::Data::Collection*, Data::Field* field);
+  virtual void addField(Data::CollPtr, Data::FieldPtr field);
+  void addField(Data::FieldPtr field, int width);
+  virtual void modifyField(Data::CollPtr, Data::FieldPtr oldField, Data::FieldPtr newField);
+  virtual void removeField(Data::CollPtr, Data::FieldPtr field);
 
   void reorderFields(const Data::FieldVec& fields);
-  void saveConfig(Tellico::Data::Collection* coll);
+  void saveConfig(Data::CollPtr coll);
   /**
    * Select all visible items.
    */
@@ -133,6 +128,7 @@ public:
    * @param height Height
    */
   void setPixmapSize(int width, int height) { m_pixWidth = width; m_pixHeight = height; }
+  void resetEntryStatus();
 
 public slots:
   /**
@@ -145,6 +141,7 @@ public slots:
   void slotRefresh();
 
 private:
+  DetailedEntryItem* addEntryInternal(Data::EntryPtr entry);
   /**
    * A helper method to populate an item. The column text is initialized by pulling
    * the contents from the entry pointer of the item, so it should properly be set
@@ -152,9 +149,9 @@ private:
    *
    * @param item A pointer to the item
    */
-  void populateItem(EntryItem* item);
+  void populateItem(DetailedEntryItem* item);
   void populateColumn(int col);
-  void setPixmapAndText(EntryItem* item, int col, Data::Field* field);
+  void setPixmapAndText(DetailedEntryItem* item, int col, Data::FieldPtr field);
 
   /**
    * A helper method to locate any item which refers to a certain entry. If none
@@ -163,7 +160,7 @@ private:
    * @param entry A pointer to the entry
    * @return A pointer to the item
    */
-  EntryItem* const locateItem(const Data::Entry* entry);
+  DetailedEntryItem* const locateItem(Data::EntryPtr entry);
   void showColumn(int col);
   void hideColumn(int col);
   void updateFirstSection();
@@ -188,16 +185,7 @@ private slots:
    */
   void slotUpdatePixmap();
 
-signals:
-  /**
-   * Signals that a fraction of an operation has been completed.
-   *
-   * @param f The fraction, 0 =< f >= 1
-   */
-  void signalFractionDone(float f);
-
 private:
-  KPopupMenu* m_itemMenu;
   KPopupMenu* m_headerMenu;
   QValueVector<int> m_columnWidths;
   QValueVector<bool> m_isNumber;

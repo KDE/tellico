@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -47,21 +47,25 @@ public:
   virtual bool isSearching() const { return m_started; }
   // pubmed can search title, person, and keyword
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == Raw; }
-  virtual void search(FetchKey key, const QString& value, bool multiple);
+  virtual void search(FetchKey key, const QString& value);
   virtual void stop();
-  virtual Data::Entry* fetchEntry(uint uid);
-  virtual Type type() const { return IMDB; }
+  virtual Data::EntryPtr fetchEntry(uint uid);
+  virtual Type type() const { return Entrez; }
   virtual bool canFetch(int type) const;
   virtual void readConfig(KConfig* config, const QString& group);
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
+  static StringMap customFields();
+
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent_);
+    ConfigWidget(QWidget* parent_, const EntrezFetcher* fetcher=0);
 
-    virtual void saveConfig(KConfig*) {}
+    virtual void saveConfig(KConfig*);
   };
   friend class ConfigWidget;
+
+  static QString defaultName();
 
 private slots:
   void slotData(KIO::Job* job, const QByteArray& data);
@@ -88,11 +92,12 @@ private:
   int m_total;
   QString m_queryKey;
   QString m_webEnv;
-  QMap<int, Data::ConstEntryPtr> m_entries; // map from search result id to entry
+  QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry
   QMap<int, int> m_matches; // search result id to pubmed id
   QGuardedPtr<KIO::Job> m_job;
   Step m_step;
   bool m_started;
+  QStringList m_fields;
 };
 
   } // end namespace

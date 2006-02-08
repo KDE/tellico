@@ -5,14 +5,14 @@ noinst_LIBRARIES = libtranslators.a
 
 libtranslators_a_METASOURCES = AUTO
 
-libtranslators_a_SOURCES = \
-pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp \
-tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp \
-bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp \
-bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp \
-xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp \
-alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp \
-risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp onixexporter.cpp
+libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp \
+				bibtexmlimporter.cpp tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp \
+				bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp \
+				bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp xmlimporter.cpp \
+				tellicoimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp \
+				freedbimporter.cpp risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp \
+				onixexporter.cpp gcfilmsimporter.cpp gcfilmsexporter.cpp filelistingimporter.cpp \
+	grs1importer.cpp
 
 if !USE_LIBBTPARSE
   SUBDIR_LIBBTPARSE = btparse
@@ -41,11 +41,14 @@ alexandriaimporter.cpp   alexandriaexporter.h     alexandriaexporter.cpp \
 freedbimporter.h         freedbimporter.cpp       freedb_util.cpp \
 risimporter.h            risimporter.cpp          tellico_xml.h \
 tellico_xml.cpp          translators.h            exporter.cpp \
-onixexporter.h           onixexporter.cpp
+onixexporter.h           onixexporter.cpp         gcfilmsimporter.h \
+gcfilmsimporter.cpp      gcfilmsexporter.h        gcfilmsexporter.cpp \
+filelistingimporter.h    filelistingimporter.cpp  grs1importer.h \
+grs1importer.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 
-INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS)
+INCLUDES = $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS) $(all_includes)
 
 KDE_OPTIONS = noautodist
 

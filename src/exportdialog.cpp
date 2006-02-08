@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,6 +19,7 @@
 
 #include "translators/exporter.h"
 #include "translators/tellicoxmlexporter.h"
+#include "translators/tellicozipexporter.h"
 #include "translators/htmlexporter.h"
 #include "translators/csvexporter.h"
 #include "translators/bibtexexporter.h"
@@ -27,6 +28,7 @@
 #include "translators/pilotdbexporter.h"
 #include "translators/alexandriaexporter.h"
 #include "translators/onixexporter.h"
+#include "translators/gcfilmsexporter.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -42,7 +44,7 @@
 
 using Tellico::ExportDialog;
 
-ExportDialog::ExportDialog(Export::Format format_, Data::Collection* coll_, QWidget* parent_, const char* name_)
+ExportDialog::ExportDialog(Export::Format format_, Data::CollPtr coll_, QWidget* parent_, const char* name_)
     : KDialogBase(parent_, name_, true /*modal*/, i18n("Export Options"), Ok|Cancel),
       m_format(format_), m_coll(coll_), m_exporter(exporter(format_)) {
   QWidget* widget = new QWidget(this);
@@ -132,6 +134,10 @@ Tellico::Export::Exporter* ExportDialog::exporter(Export::Format format_) {
       exporter = new Export::TellicoXMLExporter();
       break;
 
+    case Export::TellicoZip:
+      exporter = new Export::TellicoZipExporter();
+      break;
+
     case Export::HTML:
       {
         Export::HTMLExporter* htmlExp = new Export::HTMLExporter();
@@ -174,6 +180,10 @@ Tellico::Export::Exporter* ExportDialog::exporter(Export::Format format_) {
       exporter = new Export::ONIXExporter();
       break;
 
+    case Export::GCfilms:
+      exporter = new Export::GCfilmsExporter();
+      break;
+
     default:
       kdDebug() << "ExportDialog::exporter() - not implemented!" << endl;
       break;
@@ -196,7 +206,7 @@ bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
   } else {
     m_exporter->setEntries(m_coll->entries());
   }
-  int opt = Export::ExportImages | Export::ExportComplete; // for now, always export images
+  long opt = Export::ExportImages | Export::ExportComplete | Export::ExportProgress; // for now, always export images
   if(m_formatFields->isChecked()) {
     opt |= Export::ExportFormatted;
   }
@@ -229,7 +239,7 @@ bool ExportDialog::exportCollection(Export::Format format_, const KURL& url_) {
 
   KConfig* config = KGlobal::config();
   config->setGroup("ExportOptions");
-  int options = 0;
+  long options = 0;
   if(config->readBoolEntry("FormatFields", false)) {
     options |= Export::ExportFormatted;
   }

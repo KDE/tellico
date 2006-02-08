@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,12 +37,12 @@ Q_OBJECT
 typedef QPtrList<QLabel> LabelList;
 
 public:
-  RatingWidget(const Data::Field* field, QWidget* parent, const char* name = 0);
+  RatingWidget(Data::FieldPtr field, QWidget* parent, const char* name = 0);
 
   void clear();
   QString text() const;
   void setText(const QString& text);
-  void updateField(const Data::Field* field);
+  void updateField(Data::FieldPtr field);
 
   static const QPixmap& pixmap(const QString& value);
 

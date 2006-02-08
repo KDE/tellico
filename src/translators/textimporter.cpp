@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,11 +16,11 @@
 
 using Tellico::Import::TextImporter;
 
-TextImporter::TextImporter(const KURL& url_) : Import::Importer(url_) {
-  // FIXME: error handling?
-  if(url_.isValid()) {
-    m_text = FileHandler::readTextFile(url_);
-  }
+TextImporter::TextImporter(const KURL& url_)
+    : Import::Importer(url_.isValid() ? FileHandler::readTextFile(url_) : QString()) {
+}
+
+TextImporter::TextImporter(const QString& text_) : Import::Importer(text_) {
 }
 
 #include "textimporter.moc"

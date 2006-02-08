@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,6 +17,7 @@
 class KComboBox;
 
 #include "importer.h"
+#include "../datavectors.h"
 
 #include <qdir.h>
 
@@ -38,27 +39,31 @@ Q_OBJECT
 public:
   /**
    */
-  AlexandriaImporter() : Importer(), m_coll(0), m_widget(0) {}
+  AlexandriaImporter() : Importer(), m_coll(0), m_widget(0), m_cancelled(false) {}
   /**
    */
   virtual ~AlexandriaImporter() {}
 
   /**
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual bool canImport(int type) const;
 
+public slots:
+  void slotCancel();
+
 private:
   static QString& clean(QString& str);
 
-  Data::Collection* m_coll;
+  Data::CollPtr m_coll;
   QWidget* m_widget;
   KComboBox* m_library;
 
   QDir m_libraryDir;
+  bool m_cancelled : 1;
 };
 
   } // end namespace

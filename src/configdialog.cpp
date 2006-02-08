@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,10 +17,12 @@
 #include "fetch/fetcher.h"
 #include "fetch/fetchmanager.h"
 #include "fetch/configwidget.h"
+#include "controller.h"
+#include "fetcherconfigdialog.h"
+#include "tellico_kernel.h"
 
 #include <klineedit.h>
 #include <klocale.h>
-#include <kdebug.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kdialogbase.h>
@@ -28,6 +30,7 @@
 #include <kpushbutton.h>
 #include <kiconloader.h>
 #include <ksortablevaluelist.h>
+#include <kaccelmanager.h>
 
 #include <qsize.h>
 #include <qlayout.h>
@@ -44,10 +47,9 @@
 #include <qvbox.h>
 #include <qhbox.h>
 #include <qfileinfo.h>
-#include <qwidgetstack.h>
 
 namespace {
-  static const int CONFIG_MIN_WIDTH = 600;
+  static const int CONFIG_MIN_WIDTH = 640;
   static const int CONFIG_MIN_HEIGHT = 420;
 }
 
@@ -116,9 +118,10 @@ void ConfigDialog::slotDefault() {
       m_cbShowTipDay->setChecked(true);
       m_cbCapitalize->setChecked(true);
       m_cbFormat->setChecked(true);
-      m_leArticles->setText(Data::Field::defaultArticleList().join(QString::fromLatin1(", ")));
-      m_leSuffixes->setText(Data::Field::defaultSuffixList().join(QString::fromLatin1(", ")));
-      m_lePrefixes->setText(Data::Field::defaultSurnamePrefixList().join(QString::fromLatin1(", ")));
+      m_leCapitals->setText(Data::Field::defaultNoCapitalizationList().join(QString::fromLatin1("; ")));
+      m_leArticles->setText(Data::Field::defaultArticleList().join(QString::fromLatin1("; ")));
+      m_leSuffixes->setText(Data::Field::defaultSuffixList().join(QString::fromLatin1("; ")));
+      m_lePrefixes->setText(Data::Field::defaultSurnamePrefixList().join(QString::fromLatin1("; ")));
       break;
 
     case 1:
@@ -151,13 +154,21 @@ void ConfigDialog::setupGeneralPage() {
   QFrame* frame = addPage(i18n("General"), i18n("General Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
-  m_cbOpenLastFile = new QCheckBox(i18n("Reopen file at startup"), frame);
+  m_cbWriteImagesInFile = new QCheckBox(i18n("&Include images in data file"), frame);
+  QWhatsThis::add(m_cbWriteImagesInFile, i18n("If checked, all images will be included in the data file, "
+                                              "rather than saved separately in the Tellico data directory. "
+                                              "Saving a lot of images in the data file cause Tellico to "
+                                              "run more slowly."));
+  l->addWidget(m_cbWriteImagesInFile);
+  connect(m_cbWriteImagesInFile, SIGNAL(clicked()), SLOT(slotModified()));
+
+  m_cbOpenLastFile = new QCheckBox(i18n("&Reopen file at startup"), frame);
   QWhatsThis::add(m_cbOpenLastFile, i18n("If checked, the file that was last open "
                                          "will be re-opened at program start-up."));
   l->addWidget(m_cbOpenLastFile);
   connect(m_cbOpenLastFile, SIGNAL(clicked()), SLOT(slotModified()));
 
-  m_cbShowTipDay = new QCheckBox(i18n("Show \"Tip of the Day\" at startup"), frame);
+  m_cbShowTipDay = new QCheckBox(i18n("&Show \"Tip of the Day\" at startup"), frame);
   QWhatsThis::add(m_cbShowTipDay, i18n("If checked, the \"Tip of the Day\" will be "
                                        "shown at program start-up."));
   l->addWidget(m_cbShowTipDay);
@@ -166,12 +177,13 @@ void ConfigDialog::setupGeneralPage() {
   QVGroupBox* formatGroup = new QVGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);
 
-  m_cbCapitalize = new QCheckBox(i18n("Auto capitalize titles and names"), formatGroup);
+  m_cbCapitalize = new QCheckBox(i18n("Auto capitalize &titles and names"), formatGroup);
   QWhatsThis::add(m_cbCapitalize, i18n("If checked, titles and names will "
                                        "be automatically capitalized."));
+  connect(m_cbCapitalize, SIGNAL(toggled(bool)), SLOT(slotToggleCapitalized(bool)));
   connect(m_cbCapitalize, SIGNAL(clicked()), SLOT(slotModified()));
 
-  m_cbFormat = new QCheckBox(i18n("Auto format titles and names"), formatGroup);
+  m_cbFormat = new QCheckBox(i18n("Auto &format titles and names"), formatGroup);
   QWhatsThis::add(m_cbFormat, i18n("If checked, titles and names will "
                                    "be automatically formatted."));
   connect(m_cbFormat, SIGNAL(toggled(bool)), SLOT(slotToggleFormatted(bool)));
@@ -180,41 +192,59 @@ void ConfigDialog::setupGeneralPage() {
   QGrid* g1 = new QGrid(2, formatGroup);
   g1->setSpacing(5);
 
-  QLabel* l1 = new QLabel(i18n("Articles:"), g1);
+  QLabel* lab = new QLabel(i18n("No capitali&zation:"), g1);
+  m_leCapitals = new KLineEdit(g1);
+  lab->setBuddy(m_leCapitals);
+  QStringList words = Data::Field::noCapitalizeList();
+  if(!words.isEmpty()) {
+    m_leCapitals->setText(words.join(QString::fromLatin1("; ")));
+  }
+  lab->setBuddy(m_leCapitals);
+
+  QString whats = i18n("<qt>A list of words which should not be capitalized. Multiple values "
+                       "should be separated by a semi-colon.</qt>");
+  QWhatsThis::add(lab, whats);
+  QWhatsThis::add(m_leCapitals, whats);
+  connect(m_leCapitals, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+
+  lab = new QLabel(i18n("Artic&les:"), g1);
   m_leArticles = new KLineEdit(g1);
+  lab->setBuddy(m_leArticles);
   QStringList articles = Data::Field::articleList();
   if(!articles.isEmpty()) {
     m_leArticles->setText(articles.join(QString::fromLatin1("; ")));
   }
 
-  QString whats = i18n("<qt>A list of words which should be considered as articles "
-                       "if they are the first word in a title. Multiple values "
-                       "should be separated by a semi-colon.</qt>");
-  QWhatsThis::add(l1, whats);
+  whats = i18n("<qt>A list of words which should be considered as articles "
+               "if they are the first word in a title. Multiple values "
+               "should be separated by a semi-colon.</qt>");
+  QWhatsThis::add(lab, whats);
   QWhatsThis::add(m_leArticles, whats);
   connect(m_leArticles, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   QStringList suffixes = Data::Field::suffixList();
-  QLabel* l2 = new QLabel(i18n("Personal suffixes:"), g1);
+  lab = new QLabel(i18n("Personal suffi&xes:"), g1);
   m_leSuffixes = new KLineEdit(g1);
+  lab->setBuddy(m_leSuffixes);
   if(!suffixes.isEmpty()) {
     m_leSuffixes->setText(suffixes.join(QString::fromLatin1("; ")));
   }
   whats = i18n("<qt>A list of suffixes which might be used in personal names. Multiple values "
                "should be separated by a semi-colon.</qt>");
-  QWhatsThis::add(l2, whats);
+  QWhatsThis::add(lab, whats);
   QWhatsThis::add(m_leSuffixes, whats);
   connect(m_leSuffixes, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   QStringList prefixes = Data::Field::surnamePrefixList();
-  QLabel* l3 = new QLabel(i18n("Surname prefixes:"), g1);
+  lab = new QLabel(i18n("Surname &prefixes:"), g1);
   m_lePrefixes = new KLineEdit(g1);
+  lab->setBuddy(m_lePrefixes);
   if(!prefixes.isEmpty()) {
     m_lePrefixes->setText(prefixes.join(QString::fromLatin1("; ")));
   }
   whats = i18n("<qt>A list of prefixes which might be used in surnames. Multiple values "
                "should be separated by a semi-colon.</qt>");
-  QWhatsThis::add(l3, whats);
+  QWhatsThis::add(lab, whats);
   QWhatsThis::add(m_lePrefixes, whats);
   connect(m_lePrefixes, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
@@ -230,18 +260,18 @@ void ConfigDialog::setupPrintingPage() {
   QVGroupBox* formatOptions = new QVGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatOptions);
 
-  m_cbPrintFormatted = new QCheckBox(i18n("Format titles and names"), formatOptions);
+  m_cbPrintFormatted = new QCheckBox(i18n("&Format titles and names"), formatOptions);
   QWhatsThis::add(m_cbPrintFormatted, i18n("If checked, titles and names will be automatically formatted."));
   connect(m_cbPrintFormatted, SIGNAL(clicked()), SLOT(slotModified()));
 
-  m_cbPrintHeaders = new QCheckBox(i18n("Print field headers"), formatOptions);
+  m_cbPrintHeaders = new QCheckBox(i18n("&Print field headers"), formatOptions);
   QWhatsThis::add(m_cbPrintHeaders, i18n("If checked, the field names will be printed as table headers."));
   connect(m_cbPrintHeaders, SIGNAL(clicked()), SLOT(slotModified()));
 
   QHGroupBox* groupOptions = new QHGroupBox(i18n("Grouping Options"), frame);
   l->addWidget(groupOptions);
 
-  m_cbPrintGrouped = new QCheckBox(i18n("Group the entries"), groupOptions);
+  m_cbPrintGrouped = new QCheckBox(i18n("&Group the entries"), groupOptions);
   QWhatsThis::add(m_cbPrintGrouped, i18n("If checked, the entries will be grouped by the selected field."));
   connect(m_cbPrintGrouped, SIGNAL(clicked()), SLOT(slotModified()));
 
@@ -251,24 +281,26 @@ void ConfigDialog::setupPrintingPage() {
   QGrid* grid = new QGrid(3, imageOptions);
   grid->setSpacing(5);
 
-  QLabel* l1 = new QLabel(i18n("Maximum image width:"), grid);
+  QLabel* lab = new QLabel(i18n("Maximum image &width:"), grid);
   m_imageWidthBox = new KIntSpinBox(0, 999, 1, 50, 10, grid);
   m_imageWidthBox->setSuffix(QString::fromLatin1(" px"));
+  lab->setBuddy(m_imageWidthBox);
   (void) new QWidget(grid);
   QString whats = i18n("The maximum width of the images in the printout. The aspect ration is preserved.");
-  QWhatsThis::add(l1, whats);
+  QWhatsThis::add(lab, whats);
   QWhatsThis::add(m_imageWidthBox, whats);
   connect(m_imageWidthBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
   // QSpinBox doesn't emit valueChanged if you edit the value with
   // the lineEdit until you change the keyboard focus
   connect(m_imageWidthBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  QLabel* l2 = new QLabel(i18n("Maximum image height:"), grid);
+  lab = new QLabel(i18n("&Maximum image height:"), grid);
   m_imageHeightBox = new KIntSpinBox(0, 999, 1, 50, 10, grid);
   m_imageHeightBox->setSuffix(QString::fromLatin1(" px"));
+  lab->setBuddy(m_imageHeightBox);
   (void) new QWidget(grid);
   whats = i18n("The maximum height of the images in the printout. The aspect ration is preserved.");
-  QWhatsThis::add(l2, whats);
+  QWhatsThis::add(lab, whats);
   QWhatsThis::add(m_imageHeightBox, whats);
   connect(m_imageHeightBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
   // QSpinBox doesn't emit valueChanged if you edit the value with
@@ -303,17 +335,20 @@ void ConfigDialog::setupTemplatePage() {
 
   const CollectionNameMap nameMap = CollectionFactory::nameMap();
   for(CollectionNameMap::ConstIterator it = nameMap.begin(); it != nameMap.end(); ++it) {
-    (void) new QLabel(it.data() + ':', grid);
+    QLabel* lab = new QLabel(i18n("Edit Label", "%1:").arg(it.data()), grid);
     CBProxy* cb = new CBProxy(grid);
     for(KSortableValueList<QString, QString>::iterator it2 = templates.begin(); it2 != templates.end(); ++it2) {
       cb->insertItem((*it2).index(), (*it2).value());
     }
     m_cbTemplates.insert(it.key(), cb);
     connect(cb->comboBox(), SIGNAL(activated(int)), SLOT(slotModified()));
+    lab->setBuddy(cb->comboBox());
   }
 
   // stretch to fill lower area
   l->addStretch(1);
+
+  KAcceleratorManager::manage(frame);
 }
 
 void ConfigDialog::setupFetchPage() {
@@ -325,32 +360,35 @@ void ConfigDialog::setupFetchPage() {
   m_sourceListView->addColumn(i18n("Source"));
   m_sourceListView->setResizeMode(QListView::LastColumn);
   m_sourceListView->setSorting(-1); // no sorting
+  m_sourceListView->setSelectionMode(QListView::Single);
   l->addWidget(m_sourceListView, 1);
-  connect(m_sourceListView, SIGNAL(selectionChanged()), SLOT(slotSourceChanged()));
+  connect(m_sourceListView, SIGNAL(selectionChanged(QListViewItem*)), SLOT(slotSelectedSourceChanged(QListViewItem*)));
   connect(m_sourceListView, SIGNAL(doubleClicked(QListViewItem*, const QPoint&, int)), SLOT(slotModifySourceClicked()));
 
   // these icons are rather arbitrary, but seem to vaguely fit
   QVBoxLayout* vlay = new QVBoxLayout(l);
-  m_newSourceBtn = new KPushButton(i18n("&New..."), frame);
-  m_newSourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("knewstuff")));
+  KPushButton* newSourceBtn = new KPushButton(i18n("&New..."), frame);
+  newSourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("knewstuff")));
   m_modifySourceBtn = new KPushButton(i18n("&Modify..."), frame);
   m_modifySourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("network")));
+  m_moveUpSourceBtn = new KPushButton(i18n("Move &Up"), frame);
+  m_moveUpSourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("up")));
+  m_moveDownSourceBtn = new KPushButton(i18n("Move &Down"), frame);
+  m_moveDownSourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("down")));
   m_removeSourceBtn = new KPushButton(i18n("Remo&ve"), frame);
   m_removeSourceBtn->setIconSet(SmallIconSet(QString::fromLatin1("remove")));
-  vlay->addWidget(m_newSourceBtn);
+  vlay->addWidget(newSourceBtn);
   vlay->addWidget(m_modifySourceBtn);
+  vlay->addWidget(m_moveUpSourceBtn);
+  vlay->addWidget(m_moveDownSourceBtn);
   vlay->addWidget(m_removeSourceBtn);
   vlay->addStretch(1);
 
-  connect(m_newSourceBtn, SIGNAL(clicked()), SLOT(slotNewSourceClicked()));
+  connect(newSourceBtn, SIGNAL(clicked()), SLOT(slotNewSourceClicked()));
   connect(m_modifySourceBtn, SIGNAL(clicked()), SLOT(slotModifySourceClicked()));
+  connect(m_moveUpSourceBtn, SIGNAL(clicked()), SLOT(slotMoveUpSourceClicked()));
+  connect(m_moveDownSourceBtn, SIGNAL(clicked()), SLOT(slotMoveDownSourceClicked()));
   connect(m_removeSourceBtn, SIGNAL(clicked()), SLOT(slotRemoveSourceClicked()));
-
-  // set initial state
-//  if(Fetch::Manager::sourceMap().isEmpty()) {
-//    m_newSourceBtn->setEnabled(false);
-//  }
-//  slotSourceChanged();
 }
 
 void ConfigDialog::readConfiguration(KConfig* config_) {
@@ -362,18 +400,22 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
 
   config_->setGroup("General Options");
 
+  bool writeImagesInFile = config_->readBoolEntry("Write Images In File", true);
+  m_cbWriteImagesInFile->setChecked(writeImagesInFile);
+
   bool openLastFile = config_->readBoolEntry("Reopen Last File", true);
   m_cbOpenLastFile->setChecked(openLastFile);
 
   bool autoCapitals = config_->readBoolEntry("Auto Capitalization", true);
   m_cbCapitalize->setChecked(autoCapitals);
+  slotToggleCapitalized(autoCapitals);
 
   bool autoFormat = config_->readBoolEntry("Auto Format", true);
   m_cbFormat->setChecked(autoFormat);
   slotToggleFormatted(autoFormat);
 
   // PRINTING
-  config_->setGroup(QString::fromLatin1("Printing"));
+  config_->setGroup("Printing");
 
   bool printHeaders = config_->readBoolEntry("Print Field Headers", true);
   m_cbPrintHeaders->setChecked(printHeaders);
@@ -392,31 +434,16 @@ void ConfigDialog::readConfiguration(KConfig* config_) {
 
   // entry template selection
   for(QIntDictIterator<CBProxy> it(m_cbTemplates); it.current(); ++it) {
-    QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::Type>(it.currentKey()));
-    config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
+    QString typeName = CollectionFactory::typeName(static_cast<Data::Collection::Type>(it.currentKey()));
+    config_->setGroup(QString::fromLatin1("Options - %1").arg(typeName));
     QString file = config_->readEntry("Entry Template", QString::fromLatin1("Fancy"));
     file.replace('_', ' ');
     // added by prepare_i18n_xslt script
     it.current()->setCurrentItem(i18n((file + QString::fromLatin1(" XSL Template")).utf8(), file.utf8()));
   }
 
-  // fetchers
-  Fetch::FetcherVec fetchers = Fetch::Manager::self()->fetchers();
-  for(Fetch::FetcherVec::ConstIterator it = fetchers.constBegin(); it != fetchers.constEnd(); ++it) {
-    SourceListViewItem* item = new SourceListViewItem(m_sourceListView,  m_sourceListView->lastItem(),
-                                                      it->source(), it->type());
-    // grab the config widget, taking ownership
-    Fetch::ConfigWidget* cw = it->configWidget(this);
-    if(cw) { // might return 0 when no widget available for fetcher type
-      m_configWidgets.insert(item, cw);
-      // there's weird layout bug if it's not hidden
-      cw->hide();
-    }
-  }
-  if(m_sourceListView->childCount() == 0) {
-    m_modifySourceBtn->setEnabled(false);
-    m_removeSourceBtn->setEnabled(false);
-  }
+  loadFetcherConfig();
+
   m_modifying = false;
 }
 
@@ -425,6 +452,14 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   config_->writeEntry("RunOnStart", m_cbShowTipDay->isChecked());
 
   config_->setGroup("General Options");
+  // write images in file is special, I only want to save the preference if the
+  // current setting is not the default or if the config key already exists in the data file
+  bool imagesInFile = m_cbWriteImagesInFile->isChecked();
+  // default is true
+  if(!imagesInFile || config_->hasKey("Write Images In File")) {
+    config_->writeEntry("Write Images In File", imagesInFile);
+    Kernel::self()->setWriteImagesInFile(imagesInFile);
+  }
   config_->writeEntry("Reopen Last File", m_cbOpenLastFile->isChecked());
 
   bool autoCapitals = m_cbCapitalize->isChecked();
@@ -435,34 +470,37 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   config_->writeEntry("Auto Format", autoFormat);
   Data::Field::setAutoFormat(autoFormat);
 
-  const QRegExp commaSpace(QString::fromLatin1("\\s*;\\s*"));
+  const QRegExp sepSpace(QString::fromLatin1("\\s*;\\s*"));
   const QChar sep = ';';
-  // there might be semi-colons before or after the commas in the lineedit box
-  // it was originally commas, but that was inconsistent
-  QString articlesStr = m_leArticles->text().replace(commaSpace, sep);
+
+  QString wordsStr = m_leCapitals->text().replace(sepSpace, sep);
+  QStringList words = QStringList::split(sep, wordsStr, false);
+// ok to be empty
+// still use a comma to write list
+  config_->writeEntry("No Capitalization", words, ',');
+  Data::Field::setNoCapitalizeList(words);
+
+  QString articlesStr = m_leArticles->text().replace(sepSpace, sep);
   QStringList articles = QStringList::split(sep, articlesStr, false);
 // ok for articles to be empty
 // still use a comma to write list
   config_->writeEntry("Articles", articles, ',');
   Data::Field::setArticleList(articles);
 
-  // there might be spaces before or after the commas in the lineedit box
-  // it was originally commas, but that was inconsistent
-  QString suffixesStr = m_leSuffixes->text().replace(commaSpace, sep);
+  QString suffixesStr = m_leSuffixes->text().replace(sepSpace, sep);
   QStringList suffixes = QStringList::split(sep, suffixesStr, false);
 // ok to be empty
 // still use a comma to write list
   config_->writeEntry("Name Suffixes", suffixes, ',');
   Data::Field::setSuffixList(suffixes);
 
-  // it was originally commas, but that was inconsistent
-  QString prefixesStr = m_lePrefixes->text().replace(commaSpace, sep);
+  QString prefixesStr = m_lePrefixes->text().replace(sepSpace, sep);
   QStringList prefixes = QStringList::split(sep, prefixesStr, false);
 // still use a comma to write list
   config_->writeEntry("Surname Prefixes", prefixes, ',');
   Data::Field::setSurnamePrefixList(prefixes);
 
-  config_->setGroup(QString::fromLatin1("Printing"));
+  config_->setGroup("Printing");
   config_->writeEntry("Print Field Headers", m_cbPrintHeaders->isChecked());
   config_->writeEntry("Print Formatted", m_cbPrintFormatted->isChecked());
   config_->writeEntry("Print Grouped", m_cbPrintGrouped->isChecked());
@@ -471,13 +509,13 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
 
   // entry template selection
   for(QIntDictIterator<CBProxy> it(m_cbTemplates); it.current(); ++it) {
-    QString entryName = CollectionFactory::entryName(static_cast<Data::Collection::Type>(it.currentKey()));
-    config_->setGroup(QString::fromLatin1("Options - %1").arg(entryName));
+    QString typeName = CollectionFactory::typeName(static_cast<Data::Collection::Type>(it.currentKey()));
+    config_->setGroup(QString::fromLatin1("Options - %1").arg(typeName));
     config_->writeEntry("Entry Template", it.current()->currentData());
   }
 
   bool reloadFetchers = false;
-  int count = 0; // start group numbering at 1
+  int count = 0; // start group numbering at 0
   for(QListViewItemIterator it(m_sourceListView); it.current(); ++it, ++count) {
     SourceListViewItem* item = static_cast<SourceListViewItem*>(it.current());
     Fetch::ConfigWidget* cw = m_configWidgets[item];
@@ -510,8 +548,41 @@ void ConfigDialog::saveConfiguration(KConfig* config_) {
   config_->sync();
 
   if(reloadFetchers) {
-    Fetch::Manager::self()->reloadFetchers();
+    Fetch::Manager::self()->loadFetchers();
+    Controller::self()->updatedFetchers();
+    // reload fetcher items
+    loadFetcherConfig();
   }
+}
+
+void ConfigDialog::loadFetcherConfig() {
+  m_sourceListView->clear();
+  m_configWidgets.clear();
+
+  Fetch::FetcherVec fetchers = Fetch::Manager::self()->fetchers();
+  for(Fetch::FetcherVec::ConstIterator it = fetchers.constBegin(); it != fetchers.constEnd(); ++it) {
+    SourceListViewItem* item = new SourceListViewItem(m_sourceListView,  m_sourceListView->lastItem(),
+                                                      it->source(), it->type());
+    // grab the config widget, taking ownership
+    Fetch::ConfigWidget* cw = it->configWidget(this);
+    if(cw) { // might return 0 when no widget available for fetcher type
+      m_configWidgets.insert(item, cw);
+      // there's weird layout bug if it's not hidden
+      cw->hide();
+    }
+  }
+
+  if(m_sourceListView->childCount() == 0) {
+    m_modifySourceBtn->setEnabled(false);
+    m_removeSourceBtn->setEnabled(false);
+  } else {
+    // go ahead and select the first one
+    m_sourceListView->setSelected(m_sourceListView->firstChild(), true);
+  }
+}
+
+void ConfigDialog::slotToggleCapitalized(bool checked_) {
+  m_leCapitals->setEnabled(checked_);
 }
 
 void ConfigDialog::slotToggleFormatted(bool checked_) {
@@ -528,102 +599,33 @@ void ConfigDialog::slotModified() {
   enableButtonApply(true);
 }
 
-// alot of code is duplicated between slotNewSourceClicked() and slotModifySourceClicked()
 void ConfigDialog::slotNewSourceClicked() {
-  KDialogBase* dlg = new KDialogBase(this, "fetcher dialog",
-                                     true, i18n("Data Source Properties"),
-                                     KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Help);
-  dlg->setMinimumWidth(2*CONFIG_MIN_WIDTH/3);
-  dlg->setHelp(QString::fromLatin1("data-sources-options"));
-
-  QWidget* widget = new QWidget(dlg);
-  QBoxLayout* topLayout = new QHBoxLayout(widget, KDialog::spacingHint());
-
-  QBoxLayout* vlay1 = new QVBoxLayout(topLayout, KDialog::spacingHint());
-  QLabel* icon = new QLabel(widget);
-  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Panel, 64));
-  vlay1->addWidget(icon);
-  vlay1->addStretch(1);
-
-  QBoxLayout* vlay2 = new QVBoxLayout(topLayout, KDialog::spacingHint());
-
-  QGridLayout* gl = new QGridLayout(vlay2, 2, 2, KDialog::spacingHint());
-
-  QLabel* label = new QLabel(i18n("&Source name: "), widget);
-  gl->addWidget(label, 0, 0);
-  QString w = i18n("The name identifies the data source and should be unique and informative.");
-  QWhatsThis::add(label, w);
-
-  KLineEdit* editName = new KLineEdit(i18n("Default"), widget);
-  gl->addWidget(editName, 0, 1);
-  editName->setFocus();
-  QWhatsThis::add(editName, w);
-  label->setBuddy(editName);
-
-  label = new QLabel(i18n("Source &type: "), widget);
-  gl->addWidget(label, 1, 0);
-  w = i18n("Tellico currently supports five source types: Amazon.com, IMDB, z39.50, Entrez, and external applications.");
-  QWhatsThis::add(label, w);
-
-  KComboBox* cbox = new KComboBox(widget);
-  gl->addWidget(cbox, 1, 1);
-  QWhatsThis::add(cbox, w);
-  label->setBuddy(cbox);
-
-  QHGroupBox* gbox = new QHGroupBox(i18n("Source Options"), widget);
-  vlay2->addWidget(gbox);
-  QWidgetStack* stack = new QWidgetStack(gbox);
-  connect(cbox, SIGNAL(activated(int)), stack, SLOT(raiseWidget(int)));
-
-  const Fetch::FetchMap fetchMap = Fetch::Manager::sourceMap();
-  bool hasZ3950 = false;
-  int idx = 0, zId = 0;
-  for(Fetch::FetchMap::ConstIterator it = fetchMap.begin(); it != fetchMap.end(); ++it) {
-    // create an empty default widget, could return 0 if no widget for a certain fetch type
-    Fetch::ConfigWidget* cw = Fetch::Manager::configWidget(it.key(), stack);
-    if(cw) {
-      cbox->insertItem(it.data(), idx);
-      stack->addWidget(cw, idx);
-      ++idx;
-      if(it.key() == Fetch::Z3950) {
-        hasZ3950 = true;
-        zId = idx-1;
-      }
-    }
+  FetcherConfigDialog dlg(this);
+  if(dlg.exec() != QDialog::Accepted) {
+    return;
   }
-  // z39.50 is most likely to be the new item, so go ahead and select it
-  cbox->setCurrentItem(hasZ3950 ? zId : 0);
-  stack->raiseWidget(hasZ3950 ? zId : 0);
 
-  dlg->setMainWidget(widget);
-  if(dlg->exec() == QDialog::Accepted) {
-    Fetch::Type type = Fetch::Unknown;
-    for(Fetch::FetchMap::ConstIterator it = fetchMap.begin(); it != fetchMap.end(); ++it) {
-      if(it.data() == cbox->currentText()) {
-        type = it.key();
-        break;
-      }
-    }
-    if(type != Fetch::Unknown) {
-      SourceListViewItem* item = new SourceListViewItem(m_sourceListView, m_sourceListView->lastItem(),
-                                                        editName->text(), type);
-      m_sourceListView->setSelected(item, true);
-      Fetch::ConfigWidget* cw = dynamic_cast<Fetch::ConfigWidget*>(stack->visibleWidget());
-      if(cw) {
-        cw->setAccepted(true);
-        cw->slotSetModified();
-        cw->reparent(this, QPoint()); // keep the config widget arround
-        m_configWidgets.insert(item, cw);
-      }
-      m_modifySourceBtn->setEnabled(true);
-      m_removeSourceBtn->setEnabled(true);
-      slotModified(); // toggle apply button
-    }
+  Fetch::Type type = dlg.sourceType();
+  if(type == Fetch::Unknown) {
+    return;
   }
-  dlg->delayedDestruct();
+
+  SourceListViewItem* item = new SourceListViewItem(m_sourceListView, m_sourceListView->lastItem(),
+                                                    dlg.sourceName(), type);
+  m_sourceListView->setSelected(item, true);
+  Fetch::ConfigWidget* cw = dlg.configWidget();
+  if(cw) {
+    cw->setAccepted(true);
+    cw->slotSetModified();
+    cw->reparent(this, QPoint()); // keep the config widget around
+    m_configWidgets.insert(item, cw);
+  }
+  m_modifySourceBtn->setEnabled(true);
+  m_removeSourceBtn->setEnabled(true);
+  slotModified(); // toggle apply button
 }
 
-// there's a lot of duplicated code between here and slotNewSourceCLicked()
+// there's a lot of duplicated code between here and slotNewSourceClicked()
 void ConfigDialog::slotModifySourceClicked() {
   SourceListViewItem* item = static_cast<SourceListViewItem*>(m_sourceListView->selectedItem());
   if(!item) {
@@ -637,65 +639,21 @@ void ConfigDialog::slotModifySourceClicked() {
   if(!cw) {
     // no config widget for this one
     // might be because support was compiled out
+    myDebug() << "ConfigDialog::slotModifySourceClicked() - no config widget for source " << item->text(0) << endl;
     return;
   }
-  KDialogBase* dlg = new KDialogBase(this, "fetcher dialog",
-                                     true, i18n("Data Source Properties"),
-                                     KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Help);
-  dlg->setMinimumWidth(3*CONFIG_MIN_WIDTH/4);
-  dlg->setHelp(QString::fromLatin1("data-sources-options"));
+  FetcherConfigDialog dlg(item->text(0), item->fetchType(), cw, this);
 
-  QWidget* widget = new QWidget(dlg);
-  QBoxLayout* topLayout = new QHBoxLayout(widget, KDialog::spacingHint());
-
-  QBoxLayout* vlay1 = new QVBoxLayout(topLayout, KDialog::spacingHint());
-  QLabel* icon = new QLabel(widget);
-  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Panel, 64));
-  vlay1->addWidget(icon);
-  vlay1->addStretch(1);
-
-  QBoxLayout* vlay2 = new QVBoxLayout(topLayout, KDialog::spacingHint());
-
-  QGridLayout* gl = new QGridLayout(vlay2, 2, 2, KDialog::spacingHint());
-
-  QLabel* label = new QLabel(i18n("&Source name: "), widget);
-  gl->addWidget(label, 0, 0);
-  QString w = i18n("The name identifies the data source and should be unique and informative.");
-  QWhatsThis::add(label, w);
-
-  KLineEdit* editName = new KLineEdit(item->text(0), widget);
-  gl->addWidget(editName, 0, 1);
-  editName->setFocus();
-  QWhatsThis::add(editName, w);
-  label->setBuddy(editName);
-
-  // since the label doesn't have a buddy, we don't want an accel,
-  // but also want to reuse string we already have
-  label = new QLabel(i18n("Source &type: ").remove('&'), widget);
-  gl->addWidget(label, 1, 0);
-  w = i18n("Tellico currently supports five source types: Amazon.com, IMDB, z39.50, Entrez, and external applications.");
-  QWhatsThis::add(label, w);
-
-  QLabel* lab = new QLabel(Fetch::Manager::sourceMap()[item->fetchType()], widget);
-  gl->addWidget(lab, 1, 1);
-  QWhatsThis::add(lab, w);
-
-  QHGroupBox* gbox = new QHGroupBox(i18n("Source Options"), widget);
-  gbox->setMargin(KDialog::marginHint());
-  cw->reparent(gbox, QPoint());
-  vlay2->addWidget(gbox);
-  dlg->setMainWidget(widget);
-
-  if(dlg->exec() == QDialog::Accepted) {
+  if(dlg.exec() == QDialog::Accepted) {
     cw->setAccepted(true); // mark to save
-    if(editName->text() != item->text(0)) {
-      item->setText(0, editName->text());
+    QString newName = dlg.sourceName();
+    if(newName != item->text(0)) {
+      item->setText(0, newName);
       cw->slotSetModified();
     }
     slotModified(); // toggle apply button
   }
-  cw->reparent(this, QPoint()); // keep the config widget arround
-  dlg->delayedDestruct();
+  cw->reparent(this, QPoint()); // keep the config widget around
 }
 
 void ConfigDialog::slotRemoveSourceClicked() {
@@ -708,16 +666,49 @@ void ConfigDialog::slotRemoveSourceClicked() {
   m_configWidgets.remove(item);
   delete item;
   delete cw;
+  m_sourceListView->setSelected(m_sourceListView->currentItem(), true);
   slotModified(); // toggle apply button
 }
 
-void ConfigDialog::slotSourceChanged() {
+void ConfigDialog::slotMoveUpSourceClicked() {
+  QListViewItem* item = m_sourceListView->selectedItem();
+  if(!item) {
+    return;
+  }
+  SourceListViewItem* prev = static_cast<SourceListViewItem*>(item->itemAbove()); // could be 0
+  if(prev) {
+    SourceListViewItem* newItem = new SourceListViewItem(m_sourceListView, item, prev->text(0),
+                                                          prev->fetchType(), prev->configGroup());
+    Fetch::ConfigWidget* cw = m_configWidgets[prev];
+    m_configWidgets.remove(prev);
+    m_configWidgets.insert(newItem, cw);
+    delete prev;
+    slotModified(); // toggle apply button
+    slotSelectedSourceChanged(item);
+  }
+}
+
+void ConfigDialog::slotMoveDownSourceClicked() {
   SourceListViewItem* item = static_cast<SourceListViewItem*>(m_sourceListView->selectedItem());
   if(!item) {
     return;
   }
+  QListViewItem* next = item->nextSibling(); // could be 0
+  if(next) {
+    SourceListViewItem* newItem = new SourceListViewItem(m_sourceListView, next, item->text(0),
+                                                         item->fetchType(), item->configGroup());
+    Fetch::ConfigWidget* cw = m_configWidgets[item];
+    m_configWidgets.remove(item);
+    m_configWidgets.insert(newItem, cw);
+    delete item;
+    slotModified(); // toggle apply button
+    m_sourceListView->setSelected(newItem, true);
+  }
+}
 
-//  m_removeSourceBtn->setEnabled(Fetch::Manager::canRemove(item->fetchType()));
+void ConfigDialog::slotSelectedSourceChanged(QListViewItem* item_) {
+  m_moveUpSourceBtn->setEnabled(item_ && item_->itemAbove());
+  m_moveDownSourceBtn->setEnabled(item_ && item_->nextSibling());
 }
 
 #include "configdialog.moc"

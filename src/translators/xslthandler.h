@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -49,7 +49,7 @@ public:
    * @param xsltDoc The XSLT DOM document
    * @param xsltFile The XSLT file, should be a url?
    */
-  XSLTHandler(const QDomDocument& xsltDoc, const QCString& xsltFile);
+  XSLTHandler(const QDomDocument& xsltDoc, const QCString& xsltFile, bool translate=false);
   /**
    */
   ~XSLTHandler();
@@ -61,7 +61,7 @@ public:
    * @param dom The XSLT DOM document
    * @param xsltFile The XSLT file, should be a url?
    */
-  void setXSLTDoc(const QDomDocument& dom, const QCString& xsltFile);
+  void setXSLTDoc(const QDomDocument& dom, const QCString& xsltFile, bool translate=false);
   /**
    * Adds a param
    */

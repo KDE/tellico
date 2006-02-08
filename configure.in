@@ -40,7 +40,7 @@ dnl Perform program name transformation
 AC_ARG_PROGRAM
 
 dnl Automake doc recommends to do this only here. (Janos)
-AM_INIT_AUTOMAKE(tellico, 1.0.3) dnl searches for some needed programs
+AM_INIT_AUTOMAKE(tellico, 1.1) dnl searches for some needed programs
 
 KDE_SET_PREFIX
 
@@ -57,13 +57,13 @@ dnl for NLS support. Call them in this order!
 dnl WITH_NLS is for the po files
 AM_KDE_WITH_NLS
 
-KDE_USE_QT(3)
+KDE_USE_QT(3.2)
 AC_PATH_KDE
 dnl =======================================================
 dnl FILE: configure.in.in
 dnl =======================================================
 
-#MIN_CONFIG(3)
+#MIN_CONFIG(3.2)
 
 dnl PACKAGE set before
 
@@ -451,6 +451,96 @@ else
 fi
 
 dnl ---------- END IMDB CHECK ----------
+
+dnl ---------- CDTEXT CHECK ----------
+dnl Not sure if my code for CDText works on all platforms, allow disabling
+
+AC_ARG_ENABLE(cdtext,
+    AC_HELP_STRING([--disable-cdtext], [disable cdtext, default=enable]),
+    [enable_cdtext=$enableval],
+    [enable_cdtext=yes]
+)
+
+if test x$enable_cdtext = xyes; then
+    AC_DEFINE(USE_CDTEXT, 1, [Define to 1 if you want to compile CD-Text support])
+else
+    AC_DEFINE(USE_CDTEXT, 0, [Define to 1 if you want to compile CD-Text support])
+fi
+
+dnl ---------- OpenOffice.org CHECK ----------
+
+AC_ARG_ENABLE(ooo,
+    AC_HELP_STRING([--enable-ooo], [enable support for OpenOffice.org, default=disable]),
+    [enable_ooo=$enableval],
+    [enable_ooo=no]
+)
+
+AM_CONDITIONAL(WITH_OOO, test x$enable_ooo = xyes)
+
+dnl Options: OpenOffice.org installation
+AC_ARG_WITH([ooo-dir],
+	    AC_HELP_STRING([--with-ooo-dir=DIR],
+			   [where the OpenOffice.org program files are installed]),
+	    [ac_ooo_libdir="${withval}/program"
+	     ac_ooo_datadir="${withval}/program"])
+AC_ARG_WITH([ooo-libdir],
+	    AC_HELP_STRING([--with-ooo-libdir=DIR],
+			   [where the OpenOffice.org program libraries are installed (<ooo-dir>/program)]),
+	    [ac_ooo_libdir="${withval}"])
+AC_ARG_WITH([ooo-datadir],
+	    AC_HELP_STRING([--with-ooo-datadir=DIR],
+			   [where the OpenOffice.org data files are installed (<ooo-dir>/program)]),
+	    [ac_ooo_datadir="${withval}"])
+
+dnl Options: OpenOffice.org SDK
+AC_ARG_WITH([ooo-sdk-dir],
+	    AC_HELP_STRING([--with-ooo-sdk-dir=DIR],
+			   [where the OpenOffice.org SDK is installed]),
+	    [ac_ooo_sdk_bindir="${withval}/linux/bin"
+	     ac_ooo_sdk_includes="${withval}/include"])
+AC_ARG_WITH([ooo-sdk-bindir],
+	    AC_HELP_STRING([--with-ooo-sdk-bindir=DIR],
+			   [where the OpenOffice.org SDK binaries are installed (<ooo-sdk-dir>/linux/bin)]),
+	    [ac_ooo_sdk_bindir="${withval}"])
+AC_ARG_WITH([ooo-sdk-includes],
+	    AC_HELP_STRING([--with-ooo-sdk-includes=DIR],
+			   [where the OpenOffice.org SDK includes are installed (<ooo-sdk-dir>/include)]),
+	    [ac_ooo_sdk_includes="${withval}"])
+
+if test x$enable_ooo = xyes; then
+
+dnl Check for UNO cpp binding
+KDE_FIND_PATH(cppumaker, CPPUMAKER, [$ac_ooo_sdk_bindir ${prefix}/bin ${exec_prefix}/bin /usr/bin /usr/local/bin /opt/local/bin], [
+  AC_MSG_ERROR([[cppumaker not found, try '--with-ooo-sdk-dir=location_of_ODK']])
+])
+
+dnl Check for ODK includes
+ac_cppflags_safe="$CPPFLAGS"
+CPPFLAGS="-I$ac_ooo_sdk_includes"
+KDE_CHECK_HEADERS([sal/config.h],
+		 [OFFICE_SDK_includes="$CPPFLAGS"],
+		 AC_MSG_ERROR([[OpenOffice.org SDK include files not found, try '--with-ooo-sdk-dir=location_of_ODK']]))
+CPPFLAGS="$ac_cppflags_safe"
+
+dnl OpenOffice.org libraries
+if test -n "$ac_ooo_libdir" ; then
+  OFFICE_libadd="-L$ac_ooo_libdir"
+  OFFICE_libdir="$ac_ooo_libdir"
+fi
+
+dnl OpenOffice.org types.rdb
+AC_CHECK_FILE([$ac_ooo_datadir/types.rdb],
+	      [OFFICE_registry="$ac_ooo_datadir"/types.rdb],
+	      AC_MSG_ERROR([[types.rdb not found, try '--with-ooo-dir=OpenOffice.org_installation_path']]))
+
+dnl Substitute the values
+AC_SUBST(OFFICE_SDK_includes)
+AC_SUBST(OFFICE_libadd)
+AC_SUBST(OFFICE_libdir)
+AC_SUBST(OFFICE_registry)
+AC_SUBST(CPPUMAKER)
+
+fi
 KDE_CREATE_SUBDIRSLIST
 AC_CONFIG_FILES([ Makefile ])
 AC_CONFIG_FILES([ admin/Makefile ])
@@ -459,6 +549,8 @@ AC_CONFIG_FILES([ doc/en/Makefile ])
 AC_CONFIG_FILES([ icons/Makefile ])
 AC_CONFIG_FILES([ po/Makefile ])
 AC_CONFIG_FILES([ src/Makefile ])
+AC_CONFIG_FILES([ src/cite/Makefile ])
+AC_CONFIG_FILES([ src/cite/ooo/Makefile ])
 AC_CONFIG_FILES([ src/collections/Makefile ])
 AC_CONFIG_FILES([ src/commands/Makefile ])
 AC_CONFIG_FILES([ src/fetch/Makefile ])

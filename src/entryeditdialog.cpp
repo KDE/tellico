@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -75,7 +75,7 @@ void EntryEditDialog::slotClose() {
 }
 
 void EntryEditDialog::slotReset() {
-//  kdDebug() << "EntryEditDialog::slotReset()" << endl;
+//  myDebug() << "EntryEditDialog::slotReset()" << endl;
   if(m_isWorking) {
     return;
   }
@@ -91,17 +91,17 @@ void EntryEditDialog::slotReset() {
   m_widgetDict.clear();
 }
 
-void EntryEditDialog::setLayout(Data::Collection* coll_) {
+void EntryEditDialog::setLayout(Data::CollPtr coll_) {
   if(!coll_ || m_isWorking) {
     return;
   }
-//  kdDebug() << "EntryEditDialog::setLayout()" << endl;
+//  myDebug() << "EntryEditDialog::setLayout()" << endl;
 
-  actionButton(User2)->setIconSet(UserIconSet(coll_->entryName()));
+  actionButton(User2)->setIconSet(UserIconSet(coll_->typeName()));
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {
-//    kdDebug() << "EntryEditDialog::setLayout() - resetting contents." << endl;
+//    myDebug() << "EntryEditDialog::setLayout() - resetting contents." << endl;
     slotReset();
   }
   m_isWorking = true;
@@ -112,6 +112,7 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
   QPtrList<QWidget> gridList;
   bool noChoices = true;
 
+  bool focusedFirst = false;
   QStringList catList = m_currColl->fieldCategories();
   for(QStringList::ConstIterator catIt = catList.begin(); catIt != catList.end(); ++catIt) {
     Data::FieldVec fields = m_currColl->fieldsByCategory(*catIt);
@@ -147,7 +148,7 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
 
     Data::FieldVec::Iterator it = fields.begin(); // needed later
     for(int count = 0; it != fields.end(); ++it) {
-      Data::Field* field = it;
+      Data::FieldPtr field = it;
       // ReadOnly and Dependent fields don't get widgets
       if(field->type() == Data::Field::ReadOnly || field->type() == Data::Field::Dependent) {
         continue;
@@ -161,6 +162,10 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
         continue;
       }
       connect(widget, SIGNAL(modified()), SLOT(slotSetModified()));
+      if(!focusedFirst && widget->isFocusEnabled()) {
+        widget->setFocus();
+        focusedFirst = true;
+      }
 
       int r = count/NCOLS;
       int c = count%NCOLS;
@@ -226,11 +231,9 @@ void EntryEditDialog::setLayout(Data::Collection* coll_) {
 
   // update keyboard accels
   // only want to manage tabBar(), but KDE bug 71769 means the parent widget must be used
-  // for some reason, RedHat 9 with KDE 3.1 barfs on KAcceleratorManager
-  // so disable it for all KDE 3.1
 #if KDE_IS_VERSION(3,2,90)
   KAcceleratorManager::manage(m_tabs->tabBar());
-#elif KDE_IS_VERSION(3,1,90)
+#else
   KAcceleratorManager::manage(m_tabs->tabBar()->parentWidget());
 #endif
 
@@ -246,14 +249,14 @@ void EntryEditDialog::slotHandleNew() {
     return;
   }
 
-  m_tabs->setResetFocus(true);
   m_tabs->setCurrentPage(0);
+  m_tabs->setFocusToFirstChild();
   clear();
   m_isWorking = true; // clear() will get called again
   Controller::self()->slotClearSelection();
   m_isWorking = false;
 
-  Data::Entry* entry = new Data::Entry(m_currColl);
+  Data::EntryPtr entry = new Data::Entry(m_currColl);
   m_currEntries.append(entry);
   m_isOrphan = true;
 }
@@ -266,6 +269,7 @@ void EntryEditDialog::slotHandleSave() {
   m_isWorking = true;
 
   if(m_currEntries.isEmpty()) {
+    myDebug() << "EntryEditDialog::slotHandleSave() - creating new entry" << endl;
     m_currEntries.append(new Data::Entry(m_currColl));
     m_isOrphan = true;
   }
@@ -291,8 +295,8 @@ void EntryEditDialog::slotHandleSave() {
   Data::EntryVec oldEntries;
 
   Data::FieldVec fields = m_currColl->fields();
-  // boolean to keep track if every possible field is empty
-  bool empty = true;
+  // boolean to keep track if any field gets changed
+  bool modified = false;
   for(Data::EntryVecIt entry = m_currEntries.begin(); entry != m_currEntries.end(); ++entry) {
     // if the entry is owned, then we're modifying an existing entry, keep a copy of the old one
     if(entry->isOwned()) {
@@ -304,20 +308,24 @@ void EntryEditDialog::slotHandleSave() {
       if(widget && widget->isEnabled()) {
         QString temp = widget->text();
         // ok to set field empty string, just not all of them
-        entry->setField(fIt->name(), temp);
-        if(!temp.isEmpty()) {
-          empty = false;
+        if(modified == false && entry->field(fIt) != temp) {
+          modified = true;
         }
+        entry->setField(fIt, temp);
       }
     }
   }
 
   // if something was not empty, signal a save
-  if(!empty) {
+  if(modified) {
     m_isOrphan = false;
-    Kernel::self()->saveEntries(oldEntries, m_currEntries);
-    if(!m_currEntries.isEmpty() && !m_currEntries[0].data()->title().isEmpty()) {
-      setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + m_currEntries[0].data()->title());
+    if(oldEntries.isEmpty()) {
+      Kernel::self()->addEntries(m_currEntries, false);
+    } else {
+      Kernel::self()->modifyEntries(oldEntries, m_currEntries);
+    }
+    if(!m_currEntries.isEmpty() && !m_currEntries[0]->title().isEmpty()) {
+      setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + m_currEntries[0]->title());
     }
   }
 
@@ -328,7 +336,7 @@ void EntryEditDialog::slotHandleSave() {
 }
 
 void EntryEditDialog::clear() {
-//  kdDebug() << "EntryEditDialog::clear()" << endl;
+//  myDebug() << "EntryEditDialog::clear()" << endl;
   if(m_isWorking) {
     return;
   }
@@ -364,7 +372,7 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
   }
 
   if(entries_.isEmpty()) {
-//    kdDebug() << "EntryEditDialog::setContents() - empty list" << endl;
+//    myDebug() << "EntryEditDialog::setContents() - empty list" << endl;
     if(queryModified()) {
       blockSignals(true);
       slotHandleNew();
@@ -373,10 +381,10 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
     return;
   }
 
-//  kdDebug() << "EntryEditDialog::setContents() - " << list_.count() << " entries" << endl;
+//  myDebug() << "EntryEditDialog::setContents() - " << list_.count() << " entries" << endl;
 
   // first set contents to first item
-  setContents(entries_[0]);
+  setContents(entries_.front());
   // something weird...if list count can actually be 1 before the setContents call
   // and 0 after it. Why is that? It's const!
   if(entries_.count() < 2) {
@@ -400,10 +408,10 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
     }
     widget->editMultiple(true);
 
-    QString value = entries_[0].data()->field(fIt->name());
+    QString value = entries_[0]->field(fIt);
     entry = entries_.constBegin();
     for(++entry; entry != entries_.constEnd(); ++entry) { // skip checking the first one
-      if(entry->field(fIt->name()) != value) {
+      if(entry->field(fIt) != value) {
         widget->setEnabled(false);
         break;
       }
@@ -416,21 +424,19 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
   setButtonText(User1, i18n("Sa&ve Entries"));
 }
 
-void EntryEditDialog::setContents(Data::Entry* entry_) {
+void EntryEditDialog::setContents(Data::EntryPtr entry_) {
   bool ok = queryModified();
   if(!ok || m_isWorking) {
     return;
   }
 
   if(!entry_) {
-    kdDebug() << "EntryEditDialog::setContents() - null entry pointer" << endl;
+    myDebug() << "EntryEditDialog::setContents() - null entry pointer" << endl;
     slotHandleNew();
     return;
   }
 
-  m_tabs->setResetFocus(false);
-
-//  kdDebug() << "EntryEditDialog::setContents() - " << entry_->title() << endl;
+//  myDebug() << "EntryEditDialog::setContents() - " << entry_->title() << endl;
   blockSignals(true);
   clear();
   blockSignals(false);
@@ -441,8 +447,8 @@ void EntryEditDialog::setContents(Data::Entry* entry_) {
     setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + entry_->title());
   }
 
-  if(m_currColl.data() != entry_->collection()) {
-    kdDebug() << "EntryEditDialog::setContents() - collections don't match" << endl;
+  if(m_currColl != entry_->collection()) {
+    myDebug() << "EntryEditDialog::setContents() - collections don't match" << endl;
     m_currColl = entry_->collection();
   }
 
@@ -451,14 +457,14 @@ void EntryEditDialog::setContents(Data::Entry* entry_) {
   slotSetModified(false);
 
   Data::FieldVec fields = m_currColl->fields();
-  for(Data::FieldVec::Iterator it = fields.begin(); it != fields.end(); ++it) {
-    QString key = QString::number(m_currColl->id()) + it->name();
+  for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+    QString key = QString::number(m_currColl->id()) + field->name();
     GUI::FieldWidget* widget = m_widgetDict.find(key);
     if(!widget) { // is probably read-only
       continue;
     }
 
-    QString value = entry_->field(it->name());
+    QString value = entry_->field(field);
     widget->setText(value);
     widget->setEnabled(true);
     widget->editMultiple(false);
@@ -473,12 +479,12 @@ void EntryEditDialog::setContents(Data::Entry* entry_) {
   m_isWorking = false;
 }
 
-void EntryEditDialog::removeField(Data::Collection*, Data::Field* field_) {
+void EntryEditDialog::removeField(Data::CollPtr, Data::FieldPtr field_) {
   if(!field_) {
     return;
   }
 
-//  kdDebug() << "EntryEditDialog::removeField - name = " << field_->name() << endl;
+//  myDebug() << "EntryEditDialog::removeField - name = " << field_->name() << endl;
   QString key = QString::number(m_currColl->id()) + field_->name();
   GUI::FieldWidget* widget = m_widgetDict.find(key);
   if(widget) {
@@ -487,7 +493,7 @@ void EntryEditDialog::removeField(Data::Collection*, Data::Field* field_) {
     // this function is called after the field has been removed from the collection,
     // so the category should be gone from the category list
     if(m_currColl->fieldCategories().findIndex(field_->category()) == -1) {
-//      kdDebug() << "last field in the category" << endl;
+//      myDebug() << "last field in the category" << endl;
       // fragile, widget's parent is the grid, whose parent is the tab page
       QWidget* w = widget->parentWidget()->parentWidget();
       m_tabs->removePage(w);
@@ -537,10 +543,10 @@ void EntryEditDialog::removeField(Data::Collection*, Data::Field* field_) {
   }
 }
 
-void EntryEditDialog::updateCompletions(Data::Entry* entry_) {
+void EntryEditDialog::updateCompletions(Data::EntryPtr entry_) {
 #ifndef NDEBUG
-  if(m_currColl.data() != entry_->collection()) {
-    kdDebug() << "EntryEditDialog::updateCompletions - inconsistent collection pointers!" << endl;
+  if(m_currColl != entry_->collection()) {
+    myDebug() << "EntryEditDialog::updateCompletions - inconsistent collection pointers!" << endl;
     m_currColl = entry_->collection();
   }
 #endif
@@ -558,7 +564,7 @@ void EntryEditDialog::updateCompletions(Data::Entry* entry_) {
       continue;
     }
     if(it->flags() & Data::Field::AllowMultiple) {
-      QStringList items = entry_->fields(it->name(), false);
+      QStringList items = entry_->fields(it, false);
       for(QStringList::ConstIterator it = items.begin(); it != items.end(); ++it) {
         widget->addCompletionObjectItem(*it);
       }
@@ -574,8 +580,12 @@ void EntryEditDialog::slotSetModified(bool mod_/*=true*/) {
 }
 
 bool EntryEditDialog::queryModified() {
-//  kdDebug() << "EntryEditDialog::queryModified() - modified is " << (m_modified?"true":"false") << endl;
+//  myDebug() << "EntryEditDialog::queryModified() - modified is " << (m_modified?"true":"false") << endl;
   bool ok = true;
+  // assume that if the dialog is hidden, we shouldn't ask the user to modify changes
+  if(!isShown()) {
+    m_modified = false;
+  }
   if(m_modified) {
     QString str(i18n("The current entry has been modified.\n"
                       "Do you want to enter the changes?"));
@@ -603,11 +613,11 @@ bool EntryEditDialog::queryModified() {
 }
 
 // modified fields will always have the same name
-void EntryEditDialog::modifyField(Data::Collection* coll_, Data::Field* oldField_, Data::Field* newField_) {
-//  kdDebug() << "EntryEditDialog::slotUpdateField() - " << newField_->name() << endl;
+void EntryEditDialog::modifyField(Data::CollPtr coll_, Data::FieldPtr oldField_, Data::FieldPtr newField_) {
+//  myDebug() << "EntryEditDialog::slotUpdateField() - " << newField_->name() << endl;
 
   if(coll_ != m_currColl) {
-    kdDebug() << "EntryEditDialog::slotUpdateField() - wrong collection pointer!" << endl;
+    myDebug() << "EntryEditDialog::slotUpdateField() - wrong collection pointer!" << endl;
     m_currColl = coll_;
   }
 
@@ -645,6 +655,25 @@ void EntryEditDialog::modifyField(Data::Collection* coll_, Data::Field* oldField
     if(newField_->category() != oldField_->category()) {
       m_tabs->setTabLabel(widget->parentWidget()->parentWidget(), newField_->category());
     }
+  }
+}
+
+void EntryEditDialog::addEntries(Data::EntryVec entries_) {
+  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+    updateCompletions(entry);
+  }
+}
+
+void EntryEditDialog::modifyEntries(Data::EntryVec entries_) {
+  bool updateContents = false;
+  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+    updateCompletions(entry);
+    if(!updateContents && m_currEntries.contains(entry)) {
+      updateContents = true;
+    }
+  }
+  if(updateContents) {
+    setContents(m_currEntries);
   }
 }
 

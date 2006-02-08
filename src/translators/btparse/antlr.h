@@ -29,7 +29,7 @@
 #ifndef ANTLR_H
 #define ANTLR_H
 
-#include "config.h"
+#include "btconfig.h"
 
 /*
  * Define all of the stack setup and manipulation of $i, #i variables.

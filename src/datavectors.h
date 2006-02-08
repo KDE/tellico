@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -31,12 +31,14 @@ namespace Tellico {
   namespace Data {
     class Collection;
     typedef KSharedPtr<Collection> CollPtr;
+    typedef KSharedPtr<const Collection> ConstCollPtr;
     typedef Vector<Collection> CollVec;
 
     class Field;
     typedef KSharedPtr<Field> FieldPtr;
     typedef KSharedPtr<const Field> ConstFieldPtr;
     typedef Vector<Field> FieldVec;
+    typedef FieldVec::Iterator FieldVecIt;
 //    typedef Vector<ConstFieldPtr> ConstFieldVec;
 
     class Entry;

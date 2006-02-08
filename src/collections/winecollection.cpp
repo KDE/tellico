@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "winecollection.h"
-#include "../collectionfactory.h"
 
 #include <klocale.h>
 
@@ -24,7 +23,7 @@ namespace {
 using Tellico::Data::WineCollection;
 
 WineCollection::WineCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(Wine), i18n("Wines")) {
+   : Collection(title_, i18n("Wines")) {
   setTitle(title_.isNull() ? i18n("My Wines") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -34,7 +33,7 @@ WineCollection::WineCollection(bool addFields_, const QString& title_ /*=null*/)
 
 Tellico::Data::FieldVec WineCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
   field->setCategory(i18n(wine_general));

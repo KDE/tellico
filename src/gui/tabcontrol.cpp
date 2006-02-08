@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2005 by Robby Stephenson
+    copyright            : (C) 2002-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,42 +13,30 @@
 
 #include "tabcontrol.h"
 
-#include <kapplication.h>
-
 #include <qtabbar.h>
 #include <qobjectlist.h>
 
 using Tellico::GUI::TabControl;
 
 TabControl::TabControl(QWidget* parent_, const char* name_/*=0*/)
-    : QTabWidget(parent_, name_), m_resetFocus(true) {
-  connect(this, SIGNAL(currentChanged(QWidget*)), SLOT(slotUpdateFocus(QWidget*)));
+    : QTabWidget(parent_, name_) {
 }
 
 QTabBar* TabControl::tabBar() const {
   return QTabWidget::tabBar();
 }
 
-void TabControl::setFocusToFirstChild(QWidget* page_) {
-  QObjectList* list = page_->queryList("QWidget");
+void TabControl::setFocusToFirstChild() {
+  QWidget* page = currentPage();
+  QObjectList* list = page->queryList("QWidget");
   for(QObjectListIt it(*list); it.current(); ++it) {
     QWidget* w = static_cast<QWidget*>(it.current());
     if(w->isFocusEnabled()) {
       w->setFocus();
-      delete list;
       break;
     }
   }
-}
-
-void TabControl::slotUpdateFocus(QWidget* page_) {
-  if(!page_) {
-    return;
-  }
-  // if nothing is currently focused, then find the first focusable child widget and setFocus there
-  if(kapp->focusWidget() == 0 || m_resetFocus) {
-    setFocusToFirstChild(page_);
-  }
+  delete list;
 }
 
 // have to loop backwards since count() gets decremented on delete
@@ -62,18 +50,9 @@ void TabControl::clear() {
   }
 }
 
-void TabControl::setResetFocus(bool reset_) {
-  m_resetFocus = reset_;
-}
-
 void TabControl::setTabBarHidden(bool hide_) {
-#if QT_VERSION >= 0x030200
   QWidget* rightcorner = cornerWidget(TopRight);
   QWidget* leftcorner = cornerWidget(TopLeft);
-#else
-  QWidget* rightcorner = 0;
-  QWidget* leftcorner = 0;
-#endif
 
   if(hide_) {
     if(leftcorner) {

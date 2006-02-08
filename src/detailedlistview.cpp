@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "detailedlistview.h"
-#include "entryitem.h"
+#include "detailedentryitem.h"
 #include "collection.h"
 #include "imagefactory.h"
 #include "controller.h"
@@ -43,7 +43,7 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
     : GUI::ListView(parent_, name_), m_filter(0),
     m_prevSortColumn(-1), m_prev2SortColumn(-1), m_firstSection(-1),
     m_pixWidth(50), m_pixHeight(50) {
-//  kdDebug() << "DetailedListView()" << endl;
+//  myDebug() << "DetailedListView()" << endl;
   setAllColumnsShowFocus(true);
   setShowSortIndicator(true);
   setShadeSortColumn(true);
@@ -66,24 +66,21 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
   connect(m_headerMenu, SIGNAL(activated(int)),
           this, SLOT(slotHeaderMenuActivated(int)));
 
-  m_itemMenu = new KPopupMenu(this);
-  Controller::self()->plugEntryActions(m_itemMenu);
-
   m_checkPix = UserIcon(QString::fromLatin1("checkmark"));
 }
 
 DetailedListView::~DetailedListView() {
 }
 
-void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
+void DetailedListView::addCollection(Data::CollPtr coll_) {
   if(!coll_) {
     return;
   }
 
-//  kdDebug() << "DetailedListView::addCollection()" << endl;
+//  myDebug() << "DetailedListView::addCollection()" << endl;
 
   KConfig* config = kapp->config();
-  config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->entryName()));
+  config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
 
   QStringList colNames = config->readListEntry("ColumnNames");
   if(colNames.isEmpty()) {
@@ -102,8 +99,8 @@ void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
   // need to remove values for fields which don't exist in the current collection
   QStringList newCols;
   QValueList<int> newWidths, removeCols;
-  for(unsigned i = 0; i < colNames.count(); ++i) {
-    if(coll_->hasField(colNames[i])) {
+  for(uint i = 0; i < colNames.count(); ++i) {
+    if(!colNames[i].isEmpty() && coll_->hasField(colNames[i])) {
       newCols += colNames[i];
       newWidths += colWidths[i];
     } else {
@@ -120,7 +117,7 @@ void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
   for(QValueList<int>::ConstIterator it = colOrder.begin(); it != colOrder.end(); ++it) {
     if(removeCols.findIndex(*it) == -1) {
       int i = *it;
-      for(unsigned j = 0; j < removeCols.count() && removeCols[j] < i; ++j) {
+      for(uint j = 0; j < removeCols.count() && removeCols[j] < i; ++j) {
         --i;
       }
       newOrder += i;
@@ -141,7 +138,7 @@ void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
       addField(fIt, 0);
     }
   }
-  if(none && columns() > 0) {
+  if(none && columns() > 0 && !colNames.isEmpty()) {
     showColumn(coll_->fieldNames().findIndex(colNames[0]));
   }
 
@@ -162,14 +159,9 @@ void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
   kapp->processEvents();
   setUpdatesEnabled(false);
 
-  const size_t count = coll_->entryCount();
-  for(size_t j = 0; j < count; ++j) {
-    addEntry(coll_->entries()[j]);
-
-    // magic number here
-    if(j%20 == 0) {
-      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));
-    }
+  Data::EntryVec entries = coll_->entries();
+  for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+    addEntryInternal(entry);
   }
 
   setUpdatesEnabled(true);
@@ -177,7 +169,7 @@ void DetailedListView::addCollection(Tellico::Data::Collection* coll_) {
 }
 
 void DetailedListView::slotReset() {
-//  kdDebug() << "DetailedListView::slotReset()" << endl;
+//  myDebug() << "DetailedListView::slotReset()" << endl;
   //clear() does not remove columns
   clear();
 //  while(columns() > 0) {
@@ -186,30 +178,21 @@ void DetailedListView::slotReset() {
   m_filter = 0;
 }
 
-void DetailedListView::addEntry(Data::Entry* entry_) {
-  if(!entry_) {
-    kdWarning() << "DetailedListView::addEntry() - null entry pointer!" << endl;
+void DetailedListView::addEntries(Data::EntryVec entries_) {
+  if(entries_.isEmpty()) {
     return;
   }
 
-  if(m_entryPix.isNull()) {
-    m_entryPix = UserIcon(entry_->collection()->entryName());
-    if(m_entryPix.isNull()) {
-      kdDebug() << "DetailedListView::addEntry() - can't find entry pix" << endl;
-    }
-  }
 //  myDebug() << "DetailedListView::addEntry() - " << entry_->title() << endl;
 
-  EntryItem* item = new EntryItem(this, entry_);
-
-  populateItem(item);
-  bool match = true;
-  if(m_filter) {
-    match = m_filter->matches(entry_);
-    item->setVisible(match);
+  DetailedEntryItem* item = 0;
+  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+    item = addEntryInternal(entry);
+    item->setState(DetailedEntryItem::New);
+    item->setVisible(!m_filter || m_filter->matches(entry.data()));
   }
 
-  if(isUpdatesEnabled() && match) {
+  if(isUpdatesEnabled() && item && item->isVisible()) {
     sort();
     ensureItemVisible(item);
     setCurrentItem(item);
@@ -224,65 +207,71 @@ void DetailedListView::addEntry(Data::Entry* entry_) {
   }
 }
 
-void DetailedListView::modifyEntry(Data::Entry* entry_) {
-  if(!entry_) {
-    kdWarning() << "DetailedListView::modifyEntry() - null entry pointer!" << endl;
+Tellico::DetailedEntryItem* DetailedListView::addEntryInternal(Data::EntryPtr entry_) {
+  if(m_entryPix.isNull()) {
+    m_entryPix = UserIcon(entry_->collection()->typeName());
+    if(m_entryPix.isNull()) {
+      kdWarning() << "DetailedListView::addEntryInternal() - can't find entry pix" << endl;
+    }
+  }
+
+  DetailedEntryItem* item = new DetailedEntryItem(this, entry_);
+  populateItem(item);
+  return item;
+}
+
+void DetailedListView::modifyEntries(Data::EntryVec entries_) {
+  if(entries_.isEmpty()) {
     return;
   }
 
-//  kdDebug() << "DetailedListView::modifyEntry() - " << entry_->title() << endl;
+  DetailedEntryItem* item = 0;
+  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+    item = locateItem(entry.data());
+    if(!item) {
+      kdWarning() << "DetailedListView::modifyEntries() - no item found for " << entry->title() << endl;
+      return;
+    }
 
-  EntryItem* item = locateItem(entry_);
-  if(item) {
     populateItem(item);
-    bool match = true;
-    if(m_filter) {
-      match = m_filter->matches(entry_);
-      item->setVisible(match);
-    }
+    item->setState(DetailedEntryItem::Modified);
+    item->setVisible(!m_filter || m_filter->matches(entry.data()));
+  }
 
-    if(isUpdatesEnabled() && match) {
-      sort();
-//      setCurrentItem(item);
-//      ensureItemVisible(item);
-    }
+  if(isUpdatesEnabled() && item && item->isVisible()) {
+    sort();
+  }
 
-    if(!item->isSelected() && !selectedItems().isEmpty()) {
-      blockSignals(true);
-      clearSelection();
-      setSelected(item, true);
-      blockSignals(false);
-    }
-  } else {
-    kdWarning() << "DetailedListView::modifyEntry() - no item found for " << entry_->title() << endl;
-    return;
+  if(item && !item->isSelected() && !selectedItems().isEmpty()) {
+    blockSignals(true);
+    clearSelection();
+    setSelected(item, true);
+    blockSignals(false);
   }
 }
 
-void DetailedListView::removeEntry(Data::Entry* entry_) {
-  if(!entry_) {
-    kdWarning() << "DetailedListView::removeEntry() - null entry pointer!" << endl;
+void DetailedListView::removeEntries(Data::EntryVec entries_) {
+  if(entries_.isEmpty()) {
     return;
   }
 
-//  kdDebug() << "DetailedListView::removeEntry() - " << entry_->title() << endl;
-
-  EntryItem* item = locateItem(entry_);
-  if(!item) {
-    return;
-  }
+//  myDebug() << "DetailedListView::removeEntries() - " << entry_->title() << endl;
 
   clearSelection();
-  delete item;
+  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+    delete locateItem(entry);
+  }
+  // update is required
+  triggerUpdate();
 }
 
-void DetailedListView::removeCollection(Tellico::Data::Collection* coll_) {
+void DetailedListView::removeCollection(Data::CollPtr coll_) {
   if(!coll_) {
     kdWarning() << "DetailedListView::removeCollection() - null coll pointer!" << endl;
     return;
   }
 
-//  kdDebug() << "DetailedListView::removeCollection() - " << coll_->title() << endl;
+//  myDebug() << "DetailedListView::removeCollection() - " << coll_->title() << endl;
 
   clear();
   while(columns() > 0) {
@@ -304,24 +293,24 @@ void DetailedListView::populateColumn(int col_) {
   if(childCount() == 0) {
     return;
   }
-//  kdDebug() << "DetailedListView::populateColumn() - " << columnText(col_) << endl;
-  EntryItem* item = static_cast<EntryItem*>(firstChild());
-  Data::Field* field = item->entry()->collection()->fieldByTitle(columnText(col_));
-  for( ; item; item = static_cast<EntryItem*>(item->nextSibling())) {
+//  myDebug() << "DetailedListView::populateColumn() - " << columnText(col_) << endl;
+  DetailedEntryItem* item = static_cast<DetailedEntryItem*>(firstChild());
+  Data::FieldPtr field = item->entry()->collection()->fieldByTitle(columnText(col_));
+  for( ; item; item = static_cast<DetailedEntryItem*>(item->nextSibling())) {
     setPixmapAndText(item, col_, field);
   }
   m_isDirty[col_] = false;
 }
 
-void DetailedListView::populateItem(EntryItem* item_) {
-  const Data::Entry* entry = item_->entry();
+void DetailedListView::populateItem(DetailedEntryItem* item_) {
+  Data::EntryPtr entry = item_->entry();
   if(!entry) {
     return;
   }
 
   for(int colNum = 0; colNum < columns(); ++colNum) {
     if(columnWidth(colNum) > 0) {
-      Data::Field* field = entry->collection()->fieldByTitle(columnText(colNum));
+      Data::FieldPtr field = entry->collection()->fieldByTitle(columnText(colNum));
       if(!field) {
         kdWarning() << "DetailedListView::populateItem() - no field found for " << columnText(colNum) << endl;
         return;
@@ -334,29 +323,32 @@ void DetailedListView::populateItem(EntryItem* item_) {
 }
 
 void DetailedListView::contextMenuRequested(QListViewItem* item_, const QPoint& point_, int) {
-  if(item_ && m_itemMenu->count() > 0) {
-    m_itemMenu->popup(point_);
+  if(!item_) {
+    return;
   }
+  KPopupMenu menu(this);
+  Controller::self()->plugEntryActions(&menu);
+  menu.exec(point_);
 }
 
 void DetailedListView::slotSelectionChanged() {
   const GUI::ListViewItemList& items = selectedItems();
   Data::EntryVec entries;
   for(GUI::ListViewItemListIt it(items); it.current(); ++it) {
-    entries.append(static_cast<EntryItem*>(it.current())->entry());
+    entries.append(static_cast<DetailedEntryItem*>(it.current())->entry());
   }
   Controller::self()->slotUpdateSelection(this, entries);
 }
 
 // don't shadow QListView::setSelected
-void DetailedListView::setEntrySelected(Data::Entry* entry_) {
-//  kdDebug() << "DetailedListView::setEntrySelected()" << endl;
+void DetailedListView::setEntrySelected(Data::EntryPtr entry_) {
+//  myDebug() << "DetailedListView::setEntrySelected()" << endl;
   // if entry_ is null pointer, just return
   if(!entry_) {
     return;
   }
 
-  EntryItem* item = locateItem(entry_);
+  DetailedEntryItem* item = locateItem(entry_);
 
   blockSignals(true);
   clearSelection();
@@ -366,9 +358,9 @@ void DetailedListView::setEntrySelected(Data::Entry* entry_) {
   ensureItemVisible(item);
 }
 
-Tellico::EntryItem* const DetailedListView::locateItem(const Data::Entry* entry_) {
+Tellico::DetailedEntryItem* const DetailedListView::locateItem(Data::EntryPtr entry_) {
   for(QListViewItemIterator it(this); it.current(); ++it) {
-    EntryItem* item = static_cast<EntryItem*>(it.current());
+    DetailedEntryItem* item = static_cast<DetailedEntryItem*>(it.current());
     if(item->entry() == entry_) {
       return item;
     }
@@ -380,7 +372,7 @@ Tellico::EntryItem* const DetailedListView::locateItem(const Data::Entry* entry_
 bool DetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
   if(ev_->type() == QEvent::MouseButtonPress
       && static_cast<QMouseEvent*>(ev_)->button() == Qt::RightButton
-      && obj_->isA("QHeader")) {
+      && obj_ == header()) {
     m_headerMenu->popup(static_cast<QMouseEvent*>(ev_)->globalPos());
     return true;
   }
@@ -388,7 +380,7 @@ bool DetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
 }
 
 void DetailedListView::slotHeaderMenuActivated(int id_) {
-//  kdDebug() << "DetailedListView::slotHeaderMenuActivated() - " << m_headerMenu->text(id_) << endl;
+//  myDebug() << "DetailedListView::slotHeaderMenuActivated() - " << m_headerMenu->text(id_) << endl;
   bool checked = m_headerMenu->isItemChecked(id_);
   checked = !checked; // toggle
   m_headerMenu->setItemChecked(id_, checked);
@@ -409,9 +401,9 @@ void DetailedListView::slotRefresh() {
   }
 
   // the algorithm here is to iterate over each column, then over every list item
-  Data::Collection* coll = static_cast<EntryItem*>(firstChild())->entry()->collection();
-  Data::Field* field;
-  EntryItem* item;
+  Data::CollPtr coll = static_cast<DetailedEntryItem*>(firstChild())->entry()->collection();
+  Data::FieldPtr field;
+  DetailedEntryItem* item;
 
   for(int colNum = 0; colNum < columns(); ++colNum) {
     field = coll->fieldByTitle(columnText(colNum));
@@ -419,7 +411,7 @@ void DetailedListView::slotRefresh() {
     // iterate over all items
 
     for(QListViewItemIterator it(this); it.current(); ++it) {
-      item = static_cast<EntryItem*>(it.current());
+      item = static_cast<DetailedEntryItem*>(it.current());
 
       setPixmapAndText(item, colNum, field);
 
@@ -435,32 +427,31 @@ void DetailedListView::slotRefresh() {
   }
 }
 
-void DetailedListView::setPixmapAndText(EntryItem* item_, int col_, Data::Field* field_) {
+void DetailedListView::setPixmapAndText(DetailedEntryItem* item_, int col_, Data::FieldPtr field_) {
   if(!item_) {
     return;
   }
 
   // if the bool is not empty, show the checkmark pixmap
   if(field_->type() == Data::Field::Bool) {
-    QString value = item_->entry()->field(field_->name());
+    QString value = item_->entry()->field(field_);
     item_->setPixmap(col_, value.isEmpty() ? QPixmap() : m_checkPix);
     item_->setText(col_, QString::null);
   } else if(field_->type() == Data::Field::Image && columnWidth(col_) > 0) {
-    const Data::Image& img = ImageFactory::imageById(item_->entry()->field(field_->name()));
-    item_->setPixmap(col_, img.isNull() ? QPixmap() : img.convertToPixmap(m_pixWidth, m_pixHeight));
+    item_->setPixmap(col_, ImageFactory::pixmap(item_->entry()->field(field_), m_pixWidth, m_pixHeight));
     item_->setText(col_, QString::null);
   } else if(field_->type() == Data::Field::Rating) {
-    item_->setPixmap(col_, GUI::RatingWidget::pixmap(item_->entry()->field(field_->name())));
+    item_->setPixmap(col_, GUI::RatingWidget::pixmap(item_->entry()->field(field_)));
     item_->setText(col_, QString::null);
   } else { // for everything else, there's no pixmap, unless it's the first column
     item_->setPixmap(col_, col_ == m_firstSection ? m_entryPix : QPixmap());
-    item_->setText(col_, item_->entry()->formattedField(field_->name()));
+    item_->setText(col_, item_->entry()->formattedField(field_));
   }
   item_->widthChanged(col_);
 }
 
 void DetailedListView::showColumn(int col_) {
-//  kdDebug() << "DetailedListView::showColumn() - " << columnText(col_) << endl;
+//  myDebug() << "DetailedListView::showColumn() - " << columnText(col_) << endl;
   int w = m_columnWidths[col_]; // this should be safe - all were initialized to 0
   if(w == 0) {
     setColumnWidthMode(col_, QListView::Maximum);
@@ -481,16 +472,16 @@ void DetailedListView::showColumn(int col_) {
 }
 
 void DetailedListView::hideColumn(int col_) {
-//  kdDebug() << "DetailedListView::hideColumn() - " << columnText(col_) << endl;
+//  myDebug() << "DetailedListView::hideColumn() - " << columnText(col_) << endl;
   setColumnWidthMode(col_, QListView::Manual);
   setColumnWidth(col_, 0);
   header()->setResizeEnabled(false, col_);
 
   // special case for images, I don't want all the items to be tall, so remove pixmaps
   if(childCount() > 0) {
-    Data::Entry* entry = static_cast<EntryItem*>(firstChild())->entry();
+    Data::EntryPtr entry = static_cast<DetailedEntryItem*>(firstChild())->entry();
     if(entry) {
-      Data::Field* field = entry->collection()->fieldByTitle(columnText(col_));
+      Data::FieldPtr field = entry->collection()->fieldByTitle(columnText(col_));
       if(field && field->type() == Data::Field::Image) {
         m_isDirty[col_] = true;
         for(QListViewItemIterator it(this); it.current(); ++it) {
@@ -515,7 +506,7 @@ void DetailedListView::slotCacheColumnWidth(int section_, int oldSize_, int newS
   setColumnWidthMode(section_, QListView::Manual);
 }
 
-void DetailedListView::setFilter(Filter* filter_) {
+void DetailedListView::setFilter(FilterPtr filter_) {
   if(m_filter.data() != filter_) { // might just be updating
     m_filter = filter_;
   }
@@ -523,9 +514,9 @@ void DetailedListView::setFilter(Filter* filter_) {
 
   int count = 0;
   // iterate over all items
-  EntryItem* item;
+  DetailedEntryItem* item;
   for(QListViewItemIterator it(this); it.current(); ++it) {
-    item = static_cast<EntryItem*>(it.current());
+    item = static_cast<DetailedEntryItem*>(it.current());
     if(m_filter && !m_filter->matches(item->entry())) {
       item->setVisible(false);
     } else {
@@ -536,15 +527,21 @@ void DetailedListView::setFilter(Filter* filter_) {
   m_visibleItems = count;
 }
 
-void DetailedListView::addField(Data::Field* field_, int width_) {
-//  kdDebug() << "DetailedListView::slotAddColumn() - " << field_->title() << endl;
+void DetailedListView::addField(Data::CollPtr, Data::FieldPtr field) {
+  addField(field, 0); /* field is hidden by default */
+}
+
+void DetailedListView::addField(Data::FieldPtr field_, int width_) {
+//  myDebug() << "DetailedListView::slotAddColumn() - " << field_->title() << endl;
   int col = addColumn(field_->title());
 
   // Bools, images, and numbers should be centered
   if(field_->type() == Data::Field::Bool
      || field_->type() == Data::Field::Number
      || field_->type() == Data::Field::Image) {
-    setColumnAlignment(col, Qt::AlignHCenter);
+    setColumnAlignment(col, Qt::AlignHCenter | Qt::AlignVCenter);
+  } else {
+    setColumnAlignment(col, Qt::AlignLeft | Qt::AlignVCenter);
   }
 
   // width might be -1, which means set the width to maximum
@@ -564,7 +561,7 @@ void DetailedListView::addField(Data::Field* field_, int width_) {
   }
 }
 
-void DetailedListView::modifyField(Tellico::Data::Collection*, Data::Field* oldField_, Data::Field* newField_) {
+void DetailedListView::modifyField(Tellico::Data::CollPtr, Data::FieldPtr oldField_, Data::FieldPtr newField_) {
   int sec; // I need it for after the loop
   for(sec = 0; sec < columns(); ++sec) {
     if(header()->label(sec) == oldField_->title()) {
@@ -578,20 +575,20 @@ void DetailedListView::modifyField(Tellico::Data::Collection*, Data::Field* oldF
   if(newField_->type() == Data::Field::Bool
      || newField_->type() == Data::Field::Number
      || newField_->type() == Data::Field::Image) {
-    setColumnAlignment(sec, Qt::AlignHCenter);
+    setColumnAlignment(sec, Qt::AlignHCenter | Qt::AlignVCenter);
   } else {
-    setColumnAlignment(sec, Qt::AlignLeft);
+    setColumnAlignment(sec, Qt::AlignLeft | Qt::AlignVCenter);
   }
   m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), newField_->title()); // add 1 since menu has title
 }
 
-void DetailedListView::removeField(Tellico::Data::Collection*, Data::Field* field_) {
-//  kdDebug() << "DetailedListView::removeField() - " << field_->name() << endl;
+void DetailedListView::removeField(Tellico::Data::CollPtr, Data::FieldPtr field_) {
+//  myDebug() << "DetailedListView::removeField() - " << field_->name() << endl;
 
   int sec; // I need it for after the loop
   for(sec = 0; sec < columns(); ++sec) {
     if(header()->label(sec) == field_->title()) {
-//      kdDebug() << "Removing section " << sec << endl;
+//      myDebug() << "Removing section " << sec << endl;
       break;
     }
   }
@@ -619,7 +616,7 @@ void DetailedListView::removeField(Tellico::Data::Collection*, Data::Field* fiel
 }
 
 void DetailedListView::reorderFields(const Data::FieldVec& fields_) {
-//  kdDebug() << "DetailedListView::reorderFields()" << endl;
+//  myDebug() << "DetailedListView::reorderFields()" << endl;
   // find the first out of place field
   int sec = 0;
   Data::FieldVec::ConstIterator it = fields_.begin();
@@ -639,9 +636,9 @@ void DetailedListView::reorderFields(const Data::FieldVec& fields_) {
     if(it->type() == Data::Field::Bool
        || it->type() == Data::Field::Number
        || it->type() == Data::Field::Image) {
-      setColumnAlignment(sec, Qt::AlignHCenter);
+      setColumnAlignment(sec, Qt::AlignHCenter | Qt::AlignVCenter);
     } else {
-      setColumnAlignment(sec, Qt::AlignLeft);
+      setColumnAlignment(sec, Qt::AlignLeft | Qt::AlignVCenter);
     }
     m_isNumber[sec] = (it->type() == Data::Field::Number);
 
@@ -699,27 +696,27 @@ void DetailedListView::slotUpdatePixmap() {
     return;
   }
 
-  Data::Entry* entry = static_cast<EntryItem*>(firstChild())->entry();
+  Data::EntryPtr entry = static_cast<DetailedEntryItem*>(firstChild())->entry();
   if(!entry) {
     return;
   }
 
-  Data::Field* field1 = entry->collection()->fieldByTitle(columnText(oldSection));
-  Data::Field* field2 = entry->collection()->fieldByTitle(columnText(m_firstSection));
+  Data::FieldPtr field1 = entry->collection()->fieldByTitle(columnText(oldSection));
+  Data::FieldPtr field2 = entry->collection()->fieldByTitle(columnText(m_firstSection));
   if(!field1 || !field2) {
     kdWarning() << "DetailedListView::slotUpdatePixmap() - no field found." << endl;
     return;
   }
 
   for(QListViewItemIterator it(this); it.current(); ++it) {
-    setPixmapAndText(static_cast<EntryItem*>(it.current()), oldSection, field1);
-    setPixmapAndText(static_cast<EntryItem*>(it.current()), m_firstSection, field2);
+    setPixmapAndText(static_cast<DetailedEntryItem*>(it.current()), oldSection, field1);
+    setPixmapAndText(static_cast<DetailedEntryItem*>(it.current()), m_firstSection, field2);
   }
 }
 
-void DetailedListView::saveConfig(Tellico::Data::Collection* coll_) {
+void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_) {
   KConfig* config = kapp->config();
-  config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->entryName()));
+  config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
 
   QValueList<int> widths, order;
   for(int i = 0; i < columns(); ++i) {
@@ -773,7 +770,7 @@ Tellico::Data::EntryVec DetailedListView::visibleEntries() {
   Data::EntryVec entries;
   for(QListViewItemIterator it(this); it.current(); ++it) {
     if(it.current()->isVisible()) {
-      entries.append(static_cast<EntryItem*>(it.current())->entry());
+      entries.append(static_cast<DetailedEntryItem*>(it.current())->entry());
     }
   }
   return entries;
@@ -789,6 +786,13 @@ void DetailedListView::selectAllVisible() {
   blockSignals(false);
   // FIXME: not right with MultiSelectionListView
   slotSelectionChanged();
+}
+
+void DetailedListView::resetEntryStatus() {
+  for(QListViewItemIterator it(this); it.current(); ++it) {
+    static_cast<DetailedEntryItem*>(it.current())->setState(DetailedEntryItem::Normal);
+  }
+  triggerUpdate();
 }
 
 #include "detailedlistview.moc"

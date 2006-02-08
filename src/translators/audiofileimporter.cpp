@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2005 by Robby Stephenson
+    copyright            : (C) 2004-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,36 +20,40 @@
 #include "../latin1literal.h"
 #include "../imagefactory.h"
 #include "../tellico_utils.h"
+#include "../tellico_kernel.h"
+#include "../progressmanager.h"
 
 #if HAVE_TAGLIB
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
+#include <taglib/audioproperties.h>
 #endif
 
 #include <klocale.h>
 #include <kdebug.h>
 #include <kapplication.h>
-#include <kprogress.h>
+#include <kglobal.h> // for KMAX
 
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qgroupbox.h>
+#include <qvgroupbox.h>
 #include <qcheckbox.h>
 #include <qdir.h>
 #include <qwhatsthis.h>
 
 using Tellico::Import::AudioFileImporter;
 
-AudioFileImporter::AudioFileImporter(const KURL& url_) : Tellico::Import::Importer(url_),
-    m_coll(0),
-    m_widget(0) {
+AudioFileImporter::AudioFileImporter(const KURL& url_) : Tellico::Import::Importer(url_)
+    , m_coll(0)
+    , m_widget(0)
+    , m_cancelled(false) {
 }
 
 bool AudioFileImporter::canImport(int type) const {
   return type == Data::Collection::Album;
 }
 
-Tellico::Data::Collection* AudioFileImporter::collection() {
+Tellico::Data::CollPtr AudioFileImporter::collection() {
 #if !HAVE_TAGLIB
   return 0;
 #else
@@ -58,8 +62,9 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
     return m_coll;
   }
 
-  m_coll = new Data::MusicCollection(true);
-  QMap<QString, Data::EntryPtr> albumMap;
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning audio files..."), true);
+  item.setTotalSteps(100);
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
 
   // TODO: allow remote audio file importing
   QStringList dirs = url().path();
@@ -67,8 +72,12 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
     dirs += Tellico::findAllSubDirs(dirs[0]);
   }
 
+  if(m_cancelled) {
+    return 0;
+  }
+
   QStringList files;
-  for(QStringList::ConstIterator it = dirs.begin(); it != dirs.end(); ++it) {
+  for(QStringList::ConstIterator it = dirs.begin(); !m_cancelled && it != dirs.end(); ++it) {
     if((*it).isEmpty()) {
       continue;
     }
@@ -82,25 +91,36 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
     kapp->processEvents();
   }
 
+  if(m_cancelled) {
+    return 0;
+  }
+  item.setTotalSteps(files.count());
+
   const QString title    = QString::fromLatin1("title");
   const QString artist   = QString::fromLatin1("artist");
   const QString year     = QString::fromLatin1("year");
   const QString genre    = QString::fromLatin1("genre");
   const QString track    = QString::fromLatin1("track");
   const QString comments = QString::fromLatin1("comments");
+  const QString file     = QString::fromLatin1("file");
 
-  KProgressDialog progressDlg(m_widget);
-  progressDlg.setLabel(i18n("Scanning audio files..."));
-  progressDlg.progressBar()->setTotalSteps(files.count());
-  progressDlg.setMinimumDuration(files.count() > 20 ? 500 : 2000); // default is 2000
+  m_coll = new Data::MusicCollection(true);
+
+  const bool addFile = m_filePath->isChecked();
+  if(addFile && !m_coll->hasField(file)) {
+    Data::FieldPtr f = new Data::Field(file, i18n("Files"), Data::Field::Table);
+    f->setProperty(QString::fromLatin1("columns"), QChar('1'));
+    f->setProperty(QString::fromLatin1("column1"), i18n("Files"));
+    m_coll->addField(f);
+  }
+
+  QMap<QString, Data::EntryPtr> albumMap;
 
   QStringList directoryFiles;
   const uint stepSize = KMAX(static_cast<size_t>(1), files.count() / 100);
-  uint step = 1;
-  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it, ++step) {
-    if(progressDlg.wasCancelled()) {
-      break;
-    }
+
+  uint j = 0;
+  for(QStringList::ConstIterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++j) {
     TagLib::FileRef f(QFile::encodeName(*it));
     if(f.isNull() || !f.tag()) {
       if((*it).endsWith(QString::fromLatin1("/.directory"))) {
@@ -110,15 +130,14 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
     }
 
     TagLib::Tag* tag = f.tag();
-    Data::Entry* entry = 0;
-    QString album = TStringToQString(tag->album());
-    if(album.stripWhiteSpace().isEmpty()) {
+    QString album = TStringToQString(tag->album()).stripWhiteSpace();
+    if(album.isEmpty()) {
       // can't do anything
       continue;
     }
     bool various = false;
-    QString initialArtist;
     bool exists = true;
+    Data::EntryPtr entry = 0;
     if(!(entry = albumMap[album.lower()])) {
       entry = new Data::Entry(m_coll);
       albumMap.insert(album.lower(), entry);
@@ -126,51 +145,67 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
     }
     // album entries use the album name as the title
     entry->setField(title, album);
-    if(!tag->artist().isEmpty()) {
-      QString a = TStringToQString(tag->artist());
-      if(exists && entry->field(artist) != a) {
+    QString a = TStringToQString(tag->artist()).stripWhiteSpace();
+    if(!a.isEmpty()) {
+      if(exists && entry->field(artist).lower() != a.lower()) {
         various = true;
-        a = i18n("(Various)");
-        // but only need initial artist the first time, when it's not "Various"
-        if(entry->field(artist) != a) {
-          initialArtist = entry->field(artist);
-        }
+        entry->setField(artist, i18n("(Various)"));
+      } else {
+        entry->setField(artist, a);
       }
-      entry->setField(artist, a);
     }
     if(tag->year() > 0) {
       entry->setField(year, QString::number(tag->year()));
     }
     if(!tag->genre().isEmpty()) {
-      entry->setField(genre, TStringToQString(tag->genre()));
+      entry->setField(genre, TStringToQString(tag->genre()).stripWhiteSpace());
     }
-    if(!tag->title().isEmpty() && tag->track() > 0) {
-      if(various) {
-        Data::Field* f = m_coll->fieldByName(track);
-        // make sure it has 2 columns
-        f->setProperty(QString::fromLatin1("columns"), QChar('2'));
-        if(!initialArtist.isEmpty()) {
-          // also need to add artist for the first song added to the collection
-          QString other = entry->field(track);
-          int i = 0;
-          while(i < other.contains(';') && other.section(';', i, i).stripWhiteSpace().isEmpty()) {
-            ++i;
-          }
-          other = other.section(';', i, i).stripWhiteSpace();
-          if(!other.isEmpty()) {
-            other += QString::fromLatin1("::") + initialArtist;
-            // position is not zero-indexed...
-            myDebug() << "AudioFileImporter::collection() - compilation album, adding artist to track listing" << endl;
-            entry->setField(track, insertValue(entry->field(track), other, i+1));
-          }
+
+    if(!tag->title().isEmpty()) {
+      int trackNum = tag->track();
+      if(trackNum <= 0) { // try to figure out track number from file name
+        QFileInfo f(*it);
+        QString fileName = f.baseName();
+        QString numString;
+        int i = 0;
+        const int len = fileName.length();
+        while(fileName[i].isNumber() && i < len) {
+          i++;
         }
-        QString t = TStringToQString(tag->title()) + QString::fromLatin1("::") + TStringToQString(tag->artist());
-        entry->setField(track, insertValue(entry->field(track), t, tag->track()));
+        if(i == 0) { // does not start with a number
+          i = len - 1;
+          while(i >= 0 && fileName[i].isNumber()) {
+            i--;
+          }
+          // file name ends with a number
+          if(i != len - 1) {
+            numString = fileName.mid(i + 1);
+          }
+        } else {
+          numString = fileName.mid(0, i);
+        }
+        bool ok;
+        int number = numString.toInt(&ok);
+        if(ok) {
+          trackNum = number;
+        }
+      }
+      if(trackNum > 0) {
+        QString t = TStringToQString(tag->title()).stripWhiteSpace();
+        t += "::" + a;
+        const int len = f.audioProperties()->length();
+        if(len > 0) {
+          t += "::" + Tellico::minutes(len);
+        }
+        entry->setField(track, insertValue(entry->field(track), t, trackNum));
+        if(addFile) {
+          entry->setField(file, insertValue(entry->field(file), *it, trackNum));
+        }
       } else {
-        entry->setField(track, insertValue(entry->field(track), TStringToQString(tag->title()), tag->track()));
+        myDebug() << *it << " contains no track number and track number cannot be determined, so the track is not imported." << endl;
       }
     } else {
-      myDebug() << *it << " contains no track number or has an empty title, so the track is not imported." << endl;
+      myDebug() << *it << " has an empty title, so the track is not imported." << endl;
     }
     if(!tag->comment().stripWhiteSpace().isEmpty()) {
       QString c = entry->field(comments);
@@ -178,16 +213,18 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
         c += QString::fromLatin1("<br/>");
       }
       if(!tag->title().isEmpty()) {
-        c += QString::fromLatin1("<em>") + TStringToQString(tag->title()) + QString::fromLatin1("</em> - ");
+        c += QString::fromLatin1("<em>") + TStringToQString(tag->title()).stripWhiteSpace() + QString::fromLatin1("</em> - ");
       }
-      c += TStringToQString(tag->comment().stripWhiteSpace());
+      c += TStringToQString(tag->comment().stripWhiteSpace()).stripWhiteSpace();
       entry->setField(comments, c);
     }
+
     if(!exists) {
       m_coll->addEntry(entry);
     }
-    if(step % stepSize == 0) {
-      progressDlg.progressBar()->setProgress(step);
+    if(j%stepSize == 0) {
+      ProgressManager::self()->setTotalSteps(this, files.count() + directoryFiles.count());
+      ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }
 
@@ -200,14 +237,15 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
     kdDebug() << "track   - \"" << tag->track()            << "\"" << endl;
     kdDebug() << "genre   - \"" << tag->genre().to8Bit()   << "\"" << endl;*/
   }
-  if(progressDlg.wasCancelled()) {
-    delete m_coll;
+
+  if(m_cancelled) {
+    m_coll = 0;
     return 0;
   }
 
   QTextStream ts;
   QRegExp iconRx(QString::fromLatin1("Icon\\s*=\\s*(.*)"));
-  for(QStringList::ConstIterator it = directoryFiles.begin(); it != directoryFiles.end(); ++it) {
+  for(QStringList::ConstIterator it = directoryFiles.begin(); !m_cancelled && it != directoryFiles.end(); ++it, ++j) {
     QFile file(*it);
     if(!file.open(IO_ReadOnly)) {
       continue;
@@ -221,7 +259,7 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
       QDir thisDir(*it);
       thisDir.cdUp();
       QFileInfo fi(thisDir, iconRx.cap(1));
-      Data::Entry* entry = albumMap[thisDir.dirName()];
+      Data::EntryPtr entry = albumMap[thisDir.dirName()];
       if(!entry) {
         continue;
       }
@@ -233,12 +271,21 @@ Tellico::Data::Collection* AudioFileImporter::collection() {
       }
       break;
     }
+
+    if(j%stepSize == 0) {
+      ProgressManager::self()->setProgress(this, j);
+      kapp->processEvents();
+    }
   }
 
-  Data::EntryVec vec = m_coll->entries();
-  for(Data::EntryVecIt entryIt = vec.begin(); entryIt != vec.end(); ++entryIt) {
-    m_coll->updateDicts(entryIt);
+  if(m_cancelled) {
+    m_coll = 0;
+    return 0;
   }
+
+  ProgressManager::self()->setDone(this);
+
+  m_coll->updateDicts(m_coll->entries());
   return m_coll;
 #endif
 }
@@ -251,12 +298,17 @@ QWidget* AudioFileImporter::widget(QWidget* parent_, const char* name_) {
   m_widget = new QWidget(parent_, name_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* box = new QGroupBox(2, Qt::Horizontal, i18n("Audio File Options"), m_widget);
+  QVGroupBox* box = new QVGroupBox(i18n("Audio File Options"), m_widget);
 
-  m_recursive = new QCheckBox(i18n("Recursive folder search"), box);
+  m_recursive = new QCheckBox(i18n("Recursive &folder search"), box);
   QWhatsThis::add(m_recursive, i18n("If checked, folders are recursively searched for audio files."));
   // by default, make it checked
   m_recursive->setChecked(true);
+
+  m_filePath = new QCheckBox(i18n("&Include file location"), box);
+  QWhatsThis::add(m_filePath, i18n("If checked, the file names for each track are added to the entries."));
+  // by default, make it checked
+  m_filePath->setChecked(false);
 
   l->addWidget(box);
   l->addStretch(1);
@@ -276,6 +328,10 @@ QString AudioFileImporter::insertValue(const QString& str_, const QString& value
   }
   list[pos_-1] = value_;
   return list.join(QString::fromLatin1("; "));
+}
+
+void AudioFileImporter::slotCancel() {
+  m_cancelled = true;
 }
 
 #include "audiofileimporter.moc"

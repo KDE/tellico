@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -160,7 +160,7 @@ void ReportDialog::slotRefresh() {
   // only print visible entries
   m_exporter->setEntries(Controller::self()->visibleEntries());
 
-  int options = Export::ExportUTF8 | Export::ExportComplete | Export::ExportImages;
+  long options = Export::ExportUTF8 | Export::ExportComplete | Export::ExportImages;
   if(Data::Field::autoFormat()) {
     options |= Export::ExportFormatted;
   }
@@ -199,7 +199,7 @@ void ReportDialog::slotSaveAs() {
     int oldOpt = m_exporter->options();
 
     // turn utf8 off
-    int options = oldOpt & ~Export::ExportUTF8;
+    long options = oldOpt & ~Export::ExportUTF8;
     // now turn it on if true
     if(encode) {
       options |= Export::ExportUTF8;

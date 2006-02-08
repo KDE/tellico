@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,11 +15,6 @@
 #define TELLICOXMLEXPORTER_H
 
 namespace Tellico {
-  namespace Data {
-    class Field;
-    class Entry;
-    class Borrower;
-  }
   class Filter;
 }
 
@@ -29,8 +24,7 @@ class QCheckBox;
 
 #include "exporter.h"
 #include "../image.h"
-
-#include "qstringlist.h"
+#include "../stringset.h"
 
 namespace Tellico {
   namespace Export {
@@ -39,11 +33,11 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class TellicoXMLExporter : public Exporter {
+Q_OBJECT
+
 public:
-  TellicoXMLExporter() : Exporter(),
-      m_includeImages(false), m_includeGroups(false), m_widget(0) {}
-  TellicoXMLExporter(const Data::Collection* coll) : Exporter(coll),
-      m_includeImages(false), m_includeGroups(false), m_widget(0) {}
+  TellicoXMLExporter();
+  TellicoXMLExporter(Data::CollPtr coll);
 
   virtual bool exec();
   virtual QString formatString() const;
@@ -65,17 +59,17 @@ public:
 
 private:
   void exportCollectionXML(QDomDocument& doc, QDomElement& parent, bool format) const;
-  void exportFieldXML(QDomDocument& doc, QDomElement& parent, Data::Field* field) const;
-  void exportEntryXML(QDomDocument& doc, QDomElement& parent, const Data::Entry* entry, bool format) const;
+  void exportFieldXML(QDomDocument& doc, QDomElement& parent, Data::FieldPtr field) const;
+  void exportEntryXML(QDomDocument& doc, QDomElement& parent, Data::EntryPtr entry, bool format) const;
   void exportImageXML(QDomDocument& doc, QDomElement& parent, const Data::Image& image) const;
   void exportGroupXML(QDomDocument& doc, QDomElement& parent) const;
-  void exportFilterXML(QDomDocument& doc, QDomElement& parent, const Filter* filter) const;
-  void exportBorrowerXML(QDomDocument& doc, QDomElement& parent, const Data::Borrower* borrower) const;
+  void exportFilterXML(QDomDocument& doc, QDomElement& parent, FilterPtr filter) const;
+  void exportBorrowerXML(QDomDocument& doc, QDomElement& parent, Data::BorrowerPtr borrower) const;
 
   // keep track of which images were written, since some entries could have same image
-  mutable QStringList m_imageList;
-  bool m_includeImages;
-  bool m_includeGroups;
+  mutable StringSet m_images;
+  bool m_includeImages : 1;
+  bool m_includeGroups : 1;
 
   QWidget* m_widget;
   QCheckBox* m_checkIncludeImages;

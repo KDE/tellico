@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -27,7 +27,7 @@ class ImageFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  ImageFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  ImageFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~ImageFieldWidget() {}
 
   virtual QString text() const;

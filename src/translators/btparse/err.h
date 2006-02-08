@@ -35,7 +35,7 @@
 #ifndef ERR_H
 #define ERR_H
 
-#include "config.h"
+#include "btconfig.h"
 
 #include <string.h>
 #include <stdarg.h>

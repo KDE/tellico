@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,9 +13,24 @@
 
 #include "exporter.h"
 #include "../document.h"
+#include "../collection.h"
 
 using Tellico::Export::Exporter;
 
-const Tellico::Data::Collection* const Exporter::collection() const {
-  return m_coll ? m_coll : Data::Document::self()->collection();
+Exporter::Exporter() : QObject(), m_options(Export::ExportUTF8 | Export::ExportComplete), m_coll(0) {
 }
+
+Exporter::Exporter(Data::CollPtr coll) : QObject(), m_options(Export::ExportUTF8), m_coll(coll) {
+}
+
+Exporter::~Exporter() {
+}
+
+Tellico::Data::CollPtr Exporter::collection() const {
+  if(m_coll) {
+    return m_coll;
+  }
+  return Data::Document::self()->collection();
+}
+
+#include "exporter.moc"

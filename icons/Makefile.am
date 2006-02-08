@@ -15,7 +15,10 @@ tellico.svg               tellico_mime.svg        stars10.png \
 stars1.png                stars2.png              stars3.png \
 stars4.png                stars5.png              stars6.png \
 stars7.png                stars8.png              stars9.png \
-README.icons              README.quesnay          game.png
+README.icons              README.quesnay          game.png \
+file.png                  nocover_book.png        nocover_video.png \
+nocover_album.png         nocover_game.png        nocover_bibtex.png \
+nocover_comic.png
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -55,7 +58,14 @@ video.png \
 wine.png \
 checkmark.png \
 README.icons \
-README.quesnay
+README.quesnay \
+file.png \
+nocover_album.png \
+nocover_book.png \
+nocover_bibtex.png \
+nocover_comic.png \
+nocover_game.png \
+nocover_video.png
 
 # probably a better way to do this
 uninstall-hook:

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,10 +24,12 @@ namespace Tellico {
  */
 class BorrowerItem : public GUI::CountedItem {
 public:
-  BorrowerItem(GUI::ListView* parent, Data::Borrower* filter);
+  BorrowerItem(GUI::ListView* parent, Data::BorrowerPtr filter);
 
   virtual bool isBorrowerItem() const { return true; }
-  Data::Borrower* borrower() { return m_borrower; }
+  Data::BorrowerPtr borrower() { return m_borrower; }
+
+  virtual int count() const;
 
 private:
   Data::BorrowerPtr m_borrower;

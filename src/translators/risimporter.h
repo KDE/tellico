@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2005 by Robby Stephenson
+    copyright            : (C) 2004-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,6 +15,7 @@
 #define RISIMPORTER_H
 
 #include "textimporter.h"
+#include "../datavectors.h"
 
 #include <qstring.h>
 
@@ -38,18 +39,23 @@ public:
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   /**
    */
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual bool canImport(int type) const;
 
+public slots:
+  void slotCancel();
+
+private:
   static void initTagMap();
   static void initTypeMap();
 
-private:
-  Data::Field* fieldByTag(const QString& tag);
-  Data::Collection* m_coll;
+  Data::FieldPtr fieldByTag(const QString& tag);
+
+  Data::CollPtr m_coll;
+  bool m_cancelled : 1;
 
   static QMap<QString, QString>* s_tagMap;
   static QMap<QString, QString>* s_typeMap;

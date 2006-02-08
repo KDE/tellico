@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FILTER_H
-#define FILTER_H
+#ifndef TELLICO_FILTER_H
+#define TELLICO_FILTER_H
+
+#include "datavectors.h"
 
 #include <ksharedptr.h>
 
@@ -53,7 +55,7 @@ public:
    *
    * @return Returns true if the entry is matched by the rule.
    */
-  bool matches(const Data::Entry* const entry) const;
+  bool matches(Data::EntryPtr entry) const;
 
   /**
    * Return filter function. This can be any of the operators
@@ -82,9 +84,9 @@ public:
 //  void setPattern(const QString& pattern) { m_pattern = pattern; }
 
 private:
-  bool equals(const Data::Entry* const entry) const;
-  bool contains(const Data::Entry* const entry) const;
-  bool matchesRegExp(const Data::Entry* const entry) const;
+  bool equals(Data::EntryPtr entry) const;
+  bool contains(Data::EntryPtr entry) const;
+  bool matchesRegExp(Data::EntryPtr entry) const;
 
   QString m_fieldName;
   Function m_function;
@@ -103,13 +105,14 @@ public:
     MatchAny,
     MatchAll
   };
+  typedef KSharedPtr<Filter> Ptr;
 
   Filter(FilterOp op) : QPtrList<FilterRule>(), m_op(op) { setAutoDelete(true); }
   Filter(const Filter& other);
 
   void setMatch(FilterOp op) { m_op = op; }
   FilterOp op() const { return m_op; }
-  bool matches(const Data::Entry* const entry) const;
+  bool matches(Data::EntryPtr entry) const;
 
   void setName(const QString& name) { m_name = name; }
   const QString& name() const { return m_name; }

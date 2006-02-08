@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -83,7 +83,6 @@ void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
     return;
   }
 
-//  myDebug() << "CalendarHandler::modifyLoans()" << endl;
   KCal::CalendarResources calendarResources(timezone());
   calendarResources.readConfig();
   if(!checkCalendar(&calendarResources)) {
@@ -101,10 +100,10 @@ void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
       continue;
     }
     if(loan->dueDate().isNull()) {
+      myDebug() << "removing todo" << endl;
       calendarResources.deleteIncidence(todo);
       continue;
     }
-//    myDebug() << "CalendarHandler::modifyLoans()- setting due date" << endl;
 
     populateTodo(todo, loan);
     todo->updated();
@@ -124,7 +123,6 @@ void CalendarHandler::removeLoans(Data::LoanVec loans_) {
     return;
   }
 
-//  myDebug() << "CalendarHandler::removeLoans()" << endl;
   KCal::CalendarResources calendarResources(timezone());
   calendarResources.readConfig();
   if(!checkCalendar(&calendarResources)) {
@@ -181,7 +179,7 @@ bool CalendarHandler::checkCalendar(KCal::CalendarResources* resources) {
   return true;
 }
 
-void CalendarHandler::populateTodo(KCal::Todo* todo_, Data::Loan* loan_) {
+void CalendarHandler::populateTodo(KCal::Todo* todo_, Data::LoanPtr loan_) {
   if(!todo_ || !loan_) {
     return;
   }

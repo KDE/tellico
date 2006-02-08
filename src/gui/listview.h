@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -65,6 +65,9 @@ public:
   SortStyle sortStyle() const { return m_sortStyle; }
   void setSortStyle(SortStyle style) { m_sortStyle = style; }
 
+  int firstVisibleColumn() const;
+  int lastVisibleColumn() const;
+
 #if !KDE_IS_VERSION(3,3,90)
   // taken from KDE bug 59791
   void setShadeSortColumn(bool shade_);
@@ -120,6 +123,7 @@ public:
   ListViewItem(ListViewItem* parent, const QString& text) : KListViewItem(parent, text), m_sortWeight(-1) {}
   virtual ~ListViewItem();
 
+  virtual int realChildCount() const { return childCount(); }
   virtual void clear();
 
   virtual bool isEntryGroupItem() const { return false; }
@@ -140,9 +144,11 @@ public:
    * @param column The column number
    * @param alternate The alternate row color can be forced
    */
-  const QColor& backgroundColor(int column, bool alternate=false);
+  virtual QColor backgroundColor(int column); // not virtual in KListViewItem!!!
   virtual void paintCell(QPainter* painter, const QColorGroup& colorGroup,
                          int column, int width, int alignment);
+
+  ListView* listView () const { return dynamic_cast<ListView*>(KListViewItem::listView()); }
 
 private:
   int m_sortWeight;

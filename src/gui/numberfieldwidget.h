@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -29,7 +29,7 @@ class NumberFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  NumberFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  NumberFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~NumberFieldWidget() {}
 
   virtual QString text() const;
@@ -40,7 +40,7 @@ public slots:
 
 protected:
   virtual QWidget* widget();
-  virtual void updateFieldHook(Data::Field* oldField, Data::Field* newField);
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
 private:
   bool isSpinBox() const { return (m_spinBox != 0); }

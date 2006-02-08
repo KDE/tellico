@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,7 +21,7 @@
 
 using Tellico::GUI::ChoiceFieldWidget;
 
-ChoiceFieldWidget::ChoiceFieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
+ChoiceFieldWidget::ChoiceFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : FieldWidget(field_, parent_, name_), m_comboBox(0) {
 
   m_comboBox = new KComboBox(this);
@@ -53,7 +53,7 @@ void ChoiceFieldWidget::clear() {
   editMultiple(false);
 }
 
-void ChoiceFieldWidget::updateFieldHook(Data::Field*, Data::Field* newField_) {
+void ChoiceFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_) {
   QString value = text();
   m_comboBox->clear();
   // always have empty choice

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,6 +18,7 @@ class QLabel;
 class QCheckBox;
 
 #include <qwidget.h>
+#include "../datavectors.h"
 
 namespace Tellico {
   namespace Data {
@@ -35,7 +36,7 @@ class FieldWidget : public QWidget {
 Q_OBJECT
 
 public:
-  FieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  FieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~FieldWidget() {}
 
   virtual QString text() const = 0;
@@ -47,13 +48,13 @@ public:
   bool expands() const;
   void editMultiple(bool show);
   // calls updateFieldHook()
-  void updateField(Data::Field* oldField, Data::Field* newField);
+  void updateField(Data::FieldPtr oldField, Data::FieldPtr newField);
 
   // only used by LineFieldWidget, really
   virtual void addCompletionObjectItem(const QString&) {}
 
   // factory function
-  static FieldWidget* create(const Data::Field* field, QWidget* parent, const char* name=0);
+  static FieldWidget* create(Data::FieldPtr field, QWidget* parent, const char* name=0);
 
 public slots:
   virtual void clear() = 0;
@@ -68,7 +69,7 @@ protected:
   void registerWidget();
 
   // not all widgets have to be updated when the field changes
-  virtual void updateFieldHook(Data::Field*, Data::Field*) {}
+  virtual void updateFieldHook(Data::FieldPtr, Data::FieldPtr) {}
 
   static const QRegExp s_semiColon;
   static const QRegExp s_comma;

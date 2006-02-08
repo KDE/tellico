@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,12 +18,7 @@
 
 #include <kcommand.h>
 
-#include <qguardedptr.h>
-
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
   namespace Command {
 
 /**
@@ -32,14 +27,14 @@ namespace Tellico {
 class AddEntries : public KCommand  {
 
 public:
-  AddEntries(Data::Collection* coll, Data::EntryVec entries);
+  AddEntries(Data::CollPtr coll, const Data::EntryVec& entries);
 
   virtual void execute();
   virtual void unexecute();
   virtual QString name() const;
 
 private:
-  QGuardedPtr<Data::Collection> m_coll;
+  Data::CollPtr m_coll;
   Data::EntryVec m_entries;
 };
 

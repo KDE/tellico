@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -41,6 +41,7 @@ public:
   QPixmap convertToPixmap(int width, int height) const;
 
   static QCString outputFormat(const QCString& inputFormat);
+  static QByteArray byteArray(const QImage& img, const QCString& outputFormat);
 
 private:
   Image(const QString& filename);

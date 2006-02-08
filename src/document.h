@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,16 +17,19 @@
 #include <config.h>
 
 #include "datavectors.h"
+#include "filter.h"
 
 #include <kurl.h>
-#include <ksharedptr.h>
 
 #include <qptrlist.h>
 #include <qobject.h>
+#include <qguardedptr.h>
 
 namespace Tellico {
+  namespace Import {
+    class TellicoImporter;
+  }
   namespace Data {
-    class Collection;
 
 /**
  * The Document contains everything needed to deal with the contents, thus separated from
@@ -76,8 +79,7 @@ public:
   /**
    * Open a document given a specified location. If, for whatever reason, the file
    * cannot be opened, a proper message box is shown, indicating the problem. The
-   * signalNewDoc() signal is made once the file contents have been confirmed. The
-   * signalFractionDone() signal is made periodically, indicating progress.
+   * signalNewDoc() signal is made once the file contents have been confirmed.
    *
    * @param url The location to open
    * @return A boolean indicating success
@@ -114,7 +116,7 @@ public:
    *
    * @return The collection
    */
-  Collection* collection() const { return m_coll; }
+  CollPtr collection() const;
   /**
    * Returns true if there are no entries. A doc with an empty collection is still empty.
    */
@@ -127,7 +129,7 @@ public:
    *
    * @param coll A pointer to the appended collection.
    */
-  void appendCollection(Collection* coll);
+  void appendCollection(CollPtr coll);
   /**
    * Merges another collection into this one. The collections must be the same type. Fields in the
    * current collection are left alone. Fields not in the current are added. The merging is slow
@@ -136,26 +138,32 @@ public:
    * @param coll A pointer to the collection to be merged.
    * @return A QPair of the merged entries, see note in datavectors.h
    */
-  MergePair mergeCollection(Collection* coll);
+  MergePair mergeCollection(CollPtr coll);
   /**
    * Replace the current collection with a new one. Effectively, this is equivalent to opening
    * a new file containg this collection.
    *
    * @param coll A Pointer to the new collection, the document takes ownership.
    */
-  void replaceCollection(Collection* coll);
-  void unAppendCollection(Collection* coll, FieldVec origFields);
-  void unMergeCollection(Collection* coll, FieldVec origFields_, MergePair entryPair);
+  void replaceCollection(CollPtr coll);
+  void unAppendCollection(CollPtr coll, FieldVec origFields);
+  void unMergeCollection(CollPtr coll, FieldVec origFields_, MergePair entryPair);
   /**
    * Attempts to load an image from the document file
    */
-  bool loadImage(const QString& id);
-  EntryVec filteredEntries(const Filter* filter) const;
+  bool loadImage(const QString& id) const;
+  bool loadAllImagesNow() const;
+  int imageCount() const;
+  EntryVec filteredEntries(Filter::Ptr filter) const;
+  /**
+   * Sort entries according to current detailed view
+   */
+  EntryVec sortEntries(EntryVec entries) const;
 
   void renameCollection(const QString& newTitle);
 
-  void checkInEntry(Data::Entry* entry);
-  void checkOutEntry(Data::Entry* entry);
+  void checkInEntry(EntryPtr entry);
+  void checkOutEntry(EntryPtr entry);
 
 public slots:
   /**
@@ -177,13 +185,12 @@ signals:
    * @param str The message
    */
   void signalStatusMsg(const QString& str);
-  /**
-   * Signals that a fraction of an operation has been completed.
-   *
-   * @param f The fraction, 0 =< f >= 1
-   */
-  void signalFractionDone(float f);
 
+private slots:
+  /**
+   * Writes all images in the current collection to the cache directory
+   */
+  void slotWriteAllImages(int cacheDir=0/*ImageFactory::TempDir*/);
 
 private:
   static Document* s_self;
@@ -194,17 +201,22 @@ private:
    *
    * @param entry A pointer to the entry
    */
-  void saveEntry(Tellico::Data::Entry* entry);
+  void saveEntry(EntryPtr entry);
+  bool Document::pruneImages();
+
   // make all constructors private
   Document();
   Document(const Document& doc);
   Document& operator=(const Document&);
+  ~Document();
 
-  KSharedPtr<Collection> m_coll;
-  bool m_isModified;
-  bool m_loadAllImages;
+  CollPtr m_coll;
+  bool m_isModified : 1;
+  bool m_loadAllImages : 1;
   KURL m_url;
-  bool m_validFile;
+  bool m_validFile : 1;
+  QGuardedPtr<Import::TellicoImporter> m_importer;
+  bool m_running : 1;
 };
 
   } // end namespace

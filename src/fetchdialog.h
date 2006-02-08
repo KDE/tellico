@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -72,6 +72,7 @@ private slots:
   void slotEditMultipleISBN();
   void slotInit();
   void slotLoadISBNList();
+  void slotUPC2ISBN();
 
 private:
   void startProgress();
@@ -99,11 +100,12 @@ private:
   QGuardedPtr<KTextEdit> m_isbnTextEdit;
 
   bool m_started;
+  int m_resultCount;
   QString m_oldSearch;
   QStringList m_isbnList;
   QStringList m_statusMessages;
   QMap<int, Data::EntryPtr> m_entries;
-  QPtrList<Tellico::Fetch::SearchResult> m_results;
+  QPtrList<Fetch::SearchResult> m_results;
 };
 
 } //end namespace

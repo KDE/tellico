@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -26,7 +26,10 @@ namespace Tellico {
       MODS,
       Alexandria,
       FreeDB,
-      RIS
+      RIS,
+      GCfilms,
+      FileListing,
+      GRS1
     };
 
     enum Action {
@@ -45,6 +48,7 @@ namespace Tellico {
   namespace Export {
     enum Format {
       TellicoXML,
+      TellicoZip,
       Bibtex,
       Bibtexml,
       HTML,
@@ -53,7 +57,8 @@ namespace Tellico {
       Text,
       PilotDB,
       Alexandria,
-      ONIX
+      ONIX,
+      GCfilms
     };
 
     enum Target {

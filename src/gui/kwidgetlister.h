@@ -35,7 +35,7 @@
 #include <qwidget.h>
 #include <qptrlist.h>
 
-class QPushButton;
+class KPushButton;
 class QVBoxLayout;
 class QHBox;
 
@@ -140,7 +140,7 @@ signals:
 private:
   void enableControls();
 
-  QPushButton *mBtnMore, *mBtnFewer, *mBtnClear;
+  KPushButton *mBtnMore, *mBtnFewer, *mBtnClear;
   QVBoxLayout *mLayout;
   QHBox       *mButtonBox;
 };

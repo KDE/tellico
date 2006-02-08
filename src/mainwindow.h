@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,6 @@
 #ifndef TELLICO_MAINWINDOW_H
 #define TELLICO_MAINWINDOW_H
 
-class KProgress;
 class KToolBar;
 class KURL;
 class KAction;
@@ -29,16 +28,15 @@ class QSplitter;
 class QListViewItem;
 
 #include <config.h>
+
 #include "dcopinterface.h"
 #include "translators/translators.h"
+#include "datavectors.h"
 
 #include <kmainwindow.h>
 
 namespace Tellico {
 // forward declarations
-  namespace Data {
-    class Collection;
-  }
   namespace GUI {
     class LineEdit;
     class TabControl;
@@ -57,6 +55,7 @@ namespace Tellico {
   class EntryItem;
   class FetchDialog;
   class ReportDialog;
+  class StatusBar;
 
 /**
  * The base class for Tellico application windows. It sets up the main
@@ -165,17 +164,14 @@ public slots:
   void slotFileQuit();
   /**
    * Puts the marked text/object into the clipboard and removes it from the document.
-   * Not yet implemented!
    */
   void slotEditCut();
   /*
    * Puts the marked text/object into the clipboard.
-   * Not yet implemented!
    */
   void slotEditCopy();
   /**
    * Pastes the clipboard into the document.
-   * Not yet implemented!
    */
   void slotEditPaste();
   /**
@@ -186,10 +182,6 @@ public slots:
    * Deselects all the entries in the collection.
    */
   void slotEditDeselect();
-  /**
-   * Toggles the statusbar. Not needed for KDE 3.2 or greater.
-   */
-  void slotToggleStatusBar();
   /**
    * Toggles the group widget.
    */
@@ -242,12 +234,6 @@ public slots:
    * Updates the entry count in the status bar.
    */
   void slotEntryCount();
-  /**
-   * Updates the progress bar in the status bar.
-   *
-   * @param f The fraction completed
-   */
-  void slotUpdateFractionDone(float f);
   /**
    * Handles updating everything when the configuration is changed
    * via the configuration dialog. This slot is called when the OK or Apply
@@ -391,10 +377,12 @@ private:
    *
    * @param slot The slot name
    */
-  void activateEditWidgetSlot(const char* slot);
+  void activateEditSlot(const char* slot);
   void addFilterView();
   void addLoanView();
   void updateCaption(bool modified);
+  void updateCollectionActions();
+  void updateEntrySources();
 
 private slots:
   /**
@@ -410,14 +398,14 @@ private slots:
    *
    * @param coll The collection pointer
    */
-  void readCollectionOptions(Tellico::Data::Collection* coll);
+  void readCollectionOptions(Tellico::Data::CollPtr coll);
   /**
    * Saves the options relevant for a collection. I was having problems with the collection
    * being destructed before I could save info.
    *
    * @param coll A pointer to the collection
    */
-  void saveCollectionOptions(Tellico::Data::Collection* coll);
+  void saveCollectionOptions(Tellico::Data::CollPtr coll);
   /**
    * Queue a filter update. The timer adds a 200 millisecond delay before actually
    * updating the filter.
@@ -431,7 +419,7 @@ private slots:
   /**
    * Updates the collection toolbar.
    */
-  void slotUpdateCollectionToolBar(Tellico::Data::Collection* coll);
+  void slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll);
   /**
    * Make sure the edit dialog is visible and start a new entry.
    */
@@ -454,9 +442,9 @@ private slots:
    */
   void slotConvertToBibliography();
   /**
-   * Send a citation for the selected entries through the lyxpipe
+   * Send a citation for the selected entries
    */
-  void slotCiteEntry();
+  void slotCiteEntry(int action);
   /**
    * Show the entry editor and update menu item.
    */
@@ -482,25 +470,13 @@ private:
 
   KRecentFilesAction* m_fileOpenRecent;
   KAction* m_fileSave;
-  KAction* m_fileSaveAs;
-  KAction* m_filePrint;
-  KActionMenu* m_fileImportMenu;
-  KActionMenu* m_fileExportMenu;
-  KAction* m_exportAlex;
-  KAction* m_exportBibtex;
-  KAction* m_exportBibtexml;
-  KAction* m_exportONIX;
   KAction* m_newEntry;
   KAction* m_editEntry;
   KAction* m_copyEntry;
   KAction* m_deleteEntry;
-  KAction* m_collReports;
-  KAction* m_convertBibtex;
-  KAction* m_stringMacros;
-  KAction* m_citeEntry;
+  KActionMenu* m_updateEntryMenu;
   KAction* m_checkInEntry;
   KAction* m_checkOutEntry;
-  KToggleAction* m_toggleStatusBar;
   KToggleAction* m_toggleGroupWidget;
   KToggleAction* m_toggleEntryEditor;
   KToggleAction* m_toggleEntryView;
@@ -513,7 +489,7 @@ private:
   // m_leftSplit is used between detailed view and entry view
   QSplitter* m_rightSplit;
 
-  KProgress* m_progress;
+  Tellico::StatusBar* m_statusBar;
 
   DetailedListView* m_detailedView;
   EntryEditDialog* m_editDialog;
@@ -530,17 +506,15 @@ private:
   FetchDialog* m_fetchDlg;
   ReportDialog* m_reportDlg;
 
-  // the loading process goes through several steps, keep track of the factor
-  unsigned m_currentStep;
-  unsigned m_maxSteps;
+  QPtrList<KAction> m_actions;
 
   // keep track of the number of queued filter updates
-  unsigned m_queuedFilters;
+  uint m_queuedFilters;
 
   // keep track whether everything gets initialized
-  bool m_initialized;
+  bool m_initialized : 1;
   // need to keep track of whether the current collection has never been saved
-  bool m_newDocument;
+  bool m_newDocument : 1;
 };
 
 } // end namespace

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "videocollection.h"
-#include "../collectionfactory.h"
 
 #include <klocale.h>
 
@@ -26,7 +25,7 @@ namespace {
 using Tellico::Data::VideoCollection;
 
 VideoCollection::VideoCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(Video), i18n("Videos")) {
+   : Collection(title_, i18n("Videos")) {
   setTitle(title_.isNull() ? i18n("My Videos") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -36,7 +35,7 @@ VideoCollection::VideoCollection(bool addFields_, const QString& title_ /*=null*
 
 Tellico::Data::FieldVec VideoCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
   field->setCategory(i18n("General"));
@@ -101,6 +100,8 @@ Tellico::Data::FieldVec VideoCollection::defaultFields() {
 
   field = new Field(QString::fromLatin1("cast"), i18n("Cast"), Field::Table);
   field->setProperty(QString::fromLatin1("columns"), QChar('2'));
+  field->setProperty(QString::fromLatin1("column1"), i18n("Actor/Actress"));
+  field->setProperty(QString::fromLatin1("column2"), i18n("Role"));
   field->setFormatFlag(Field::FormatName);
   field->setFlags(Field::AllowGrouped);
   field->setDescription(i18n("A table for the cast members, along with the roles they play"));
@@ -212,6 +213,21 @@ Tellico::Data::FieldVec VideoCollection::defaultFields() {
   list.append(field);
 
   return list;
+}
+
+int VideoCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+  // not enough for title to be equal, must also have another field
+  // ever possible for a studio to do two movies with identical titles?
+  int res = 3*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+//  if(res == 0) {
+//    myDebug() << "VideoCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
+//              << entry2_->title() << endl;
+//  }
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("year"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("director"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("studio"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("medium"), this);
+  return res;
 }
 
 #include "videocollection.moc"

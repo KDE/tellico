@@ -8,7 +8,7 @@
    ================================================================
    Tellico XSLT file - sort by author
 
-   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with XML data files
    from the 'tellico' application, which can be found at:
@@ -28,8 +28,7 @@
 </xsl:template>
 
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 8 -->
- <xsl:if test="@syntaxVersion &lt; '8'">
+ <xsl:if test="@syntaxVersion &lt; '9'">
   <xsl:message>
    <xsl:text>This stylesheet was designed for Tellico DTD version </xsl:text>
    <xsl:value-of select="'7'"/>

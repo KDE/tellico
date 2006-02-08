@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,7 +21,7 @@
 
 using Tellico::Command::AddEntries;
 
-AddEntries::AddEntries(Data::Collection* coll_, Data::EntryVec entries_)
+AddEntries::AddEntries(Data::CollPtr coll_, const Data::EntryVec& entries_)
     : KCommand()
     , m_coll(coll_)
     , m_entries(entries_)
@@ -51,8 +51,6 @@ void AddEntries::unexecute() {
 }
 
 QString AddEntries::name() const {
-  // FIXME: after string unfreeze
-//  return m_entries.count() > 1 ? i18n("Save Entries")
-//                               : i18n("Save (Entry Title)", "Save %1").arg(m_entries.begin()->title());
-  return i18n("Save (Entry Title)", "Save %1").arg(m_entries.begin()->title());
+  return m_entries.count() > 1 ? i18n("Add Entries")
+                               : i18n("Add (Entry Title)", "Add %1").arg(m_entries.begin()->title());
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,6 @@
 
 #include <kmdcodec.h>
 #include <kpixmapio.h>
-#include <kdebug.h>
 
 #include <qbuffer.h>
 
@@ -44,14 +43,7 @@ Image::Image(const QByteArray& data_, const QString& format_, const QString& id_
 }
 
 QByteArray Image::byteArray() const {
-  QByteArray ba;
-  QBuffer buf(ba);
-  buf.open(IO_WriteOnly);
-  QImageIO iio(&buf, outputFormat(m_format));
-  iio.setImage(*this);
-  iio.write();
-  buf.close();
-  return ba;
+  return byteArray(*this, outputFormat(m_format));
 }
 
 QPixmap Image::convertToPixmap() const {
@@ -61,7 +53,11 @@ QPixmap Image::convertToPixmap() const {
 
 QPixmap Image::convertToPixmap(int w_, int h_) const {
   static KPixmapIO io;
-  return io.convertToPixmap(this->smoothScale(w_, h_, ScaleMin));
+  if(w_ < width() || h_ < height()) {
+    return io.convertToPixmap(this->smoothScale(w_, h_, ScaleMin));
+  } else {
+    return io.convertToPixmap(*this);
+  }
 }
 
 QCString Image::outputFormat(const QCString& inputFormat) {
@@ -71,5 +67,17 @@ QCString Image::outputFormat(const QCString& inputFormat) {
       return inputFormat;
     }
   }
+//  myDebug() << "Image::outputFormat() - writing " << inputFormat << " as PNG" << endl;
   return "PNG";
+}
+
+QByteArray Image::byteArray(const QImage& img_, const QCString& outputFormat_) {
+  QByteArray ba;
+  QBuffer buf(ba);
+  buf.open(IO_WriteOnly);
+  QImageIO iio(&buf, outputFormat_);
+  iio.setImage(img_);
+  iio.write();
+  buf.close();
+  return ba;
 }

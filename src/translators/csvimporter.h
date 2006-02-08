@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -27,6 +27,7 @@ class QRadioButton;
 class QTable;
 
 #include "textimporter.h"
+#include "../datavectors.h"
 #include "../collectionfactory.h" // needed for CollectionNameMap
 
 namespace Tellico {
@@ -46,13 +47,14 @@ public:
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
 
 public slots:
   void slotActionChanged(int action);
+  void slotCancel();
 
 private slots:
   void slotTypeChanged(const QString& name);
@@ -69,11 +71,12 @@ private:
   void fillTable();
   void updateHeader(bool force);
 
-  Data::Collection* m_coll;
-  Data::Collection* m_existingCollection; // used to grab fields from current collection in window
+  Data::CollPtr m_coll;
+  Data::CollPtr m_existingCollection; // used to grab fields from current collection in window
   CollectionNameMap m_nameMap;
   bool m_firstRowHeader;
   QString m_delimiter;
+  bool m_cancelled : 1;
 
   QWidget* m_widget;
   KComboBox* m_comboType;

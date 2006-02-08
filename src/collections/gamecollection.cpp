@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "gamecollection.h"
-#include "../collectionfactory.h"
 
 #include <klocale.h>
 
@@ -24,7 +23,7 @@ namespace {
 using Tellico::Data::GameCollection;
 
 GameCollection::GameCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(Game), i18n("Games")) {
+   : Collection(title_, i18n("Games")) {
   setTitle(title_.isNull() ? i18n("My Games") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -34,10 +33,10 @@ GameCollection::GameCollection(bool addFields_, const QString& title_ /*=null*/)
 
 Tellico::Data::FieldVec GameCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
-  field->setCategory(i18n("General"));
+  field->setCategory(i18n(game_general));
   field->setFlags(Field::NoDelete);
   field->setFormatFlag(Field::FormatTitle);
   list.append(field);
@@ -77,8 +76,8 @@ Tellico::Data::FieldVec GameCollection::defaultFields() {
 
   QStringList cert = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
                                         i18n("Video game ratings - "
-                                             "Unrated, Mature, Teen, Everyone, Early Childhood, Pending",
-                                             "Unrated, Mature, Teen, Everyone, Early Childhood, Pending"),
+                                             "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending",
+                                             "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"),
                                         false);
   field = new Field(QString::fromLatin1("certification"), i18n("ESRB Rating"), cert);
   field->setCategory(i18n(game_general));

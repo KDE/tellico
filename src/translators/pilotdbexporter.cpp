@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +15,6 @@
 #include "pilotdb/pilotdb.h"
 #include "pilotdb/libflatfile/DB.h"
 
-#include "../document.h"
 #include "../collection.h"
 #include "../filehandler.h"
 
@@ -49,7 +48,7 @@ QString PilotDBExporter::fileFilter() const {
 }
 
 bool PilotDBExporter::exec() {
-  const Data::Collection* coll = Data::Document::self()->collection();
+  Data::CollPtr coll = collection();
   if(!coll) {
     return false;
   }
@@ -229,3 +228,5 @@ void PilotDBExporter::saveOptions(KConfig* config_) {
   m_backup = m_checkBackup->isChecked();
   config_->writeEntry("Backup", m_backup);
 }
+
+#include "pilotdbexporter.moc"

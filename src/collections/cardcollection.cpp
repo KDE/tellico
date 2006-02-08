@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "cardcollection.h"
-#include "../collectionfactory.h"
 
 #include <klocale.h>
 
@@ -24,7 +23,7 @@ namespace {
 using Tellico::Data::CardCollection;
 
 CardCollection::CardCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(Card), i18n("Cards")) {
+   : Collection(title_, i18n("Cards")) {
   setTitle(title_.isNull() ? i18n("My Cards") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -34,7 +33,7 @@ CardCollection::CardCollection(bool addFields_, const QString& title_ /*=null*/)
 
 Tellico::Data::FieldVec CardCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
   field->setCategory(i18n(card_general));

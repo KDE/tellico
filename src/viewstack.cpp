@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2005 by Robby Stephenson
+    copyright            : (C) 2002-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -41,7 +41,7 @@ void ViewStack::refresh() {
   m_iconView->refresh();
 }
 
-void ViewStack::showEntry(Data::Entry* entry_) {
+void ViewStack::showEntry(Data::EntryPtr entry_) {
   m_entryView->showEntry(entry_);
   raiseWidget(m_entryView->view());
 }

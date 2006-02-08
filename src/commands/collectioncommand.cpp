@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,7 +20,7 @@
 
 using Tellico::Command::CollectionCommand;
 
-CollectionCommand::CollectionCommand(Mode mode_, Data::Collection* origColl_, Data::Collection* newColl_)
+CollectionCommand::CollectionCommand(Mode mode_, Data::CollPtr origColl_, Data::CollPtr newColl_)
     : KCommand()
     , m_mode(mode_)
     , m_origColl(origColl_)
@@ -53,7 +53,7 @@ void CollectionCommand::execute() {
       break;
 
     case Replace:
-      // replaceCollection() makes the ULR = "Unknown"
+      // replaceCollection() makes the URL = "Unknown"
       m_origURL = Data::Document::self()->URL();
       Data::Document::self()->replaceCollection(m_newColl);
       Controller::self()->slotCollectionDeleted(m_origColl);
@@ -103,6 +103,6 @@ QString CollectionCommand::name() const {
 void CollectionCommand::copyFields() {
   m_origFields.clear();
   for(Data::FieldVec::ConstIterator field = m_origColl->fields().begin(); field != m_origColl->fields().end(); ++field) {
-    m_origFields.append(new Data::Field(*field));
+    m_origFields.append(field->clone());
   }
 }

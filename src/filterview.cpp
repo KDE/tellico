@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,12 +37,6 @@ FilterView::FilterView(QWidget* parent_, const char* name_) : GUI::ListView(pare
   setTreeStepSize(15);
   setFullWidth(true);
 
-  m_filterMenu = new KPopupMenu(this);
-  m_filterMenu->insertItem(SmallIconSet(QString::fromLatin1("filter")),
-                           i18n("Modify Filter"), this, SLOT(slotModifyFilter()));
-  m_filterMenu->insertItem(SmallIconSet(QString::fromLatin1("editdelete")),
-                           i18n("Delete Filter"), this, SLOT(slotDeleteFilter()));
-
   connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),
           SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
 }
@@ -67,8 +61,13 @@ void FilterView::contextMenuRequested(QListViewItem* item_, const QPoint& point_
   }
 
   GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(item_);
-  if(item->isFilterItem() && m_filterMenu->count() > 0) {
-    m_filterMenu->popup(point_);
+  if(item->isFilterItem()) {
+    KPopupMenu menu(this);
+    menu.insertItem(SmallIconSet(QString::fromLatin1("filter")),
+                    i18n("Modify Filter"), this, SLOT(slotModifyFilter()));
+    menu.insertItem(SmallIconSet(QString::fromLatin1("editdelete")),
+                    i18n("Delete Filter"), this, SLOT(slotDeleteFilter()));
+    menu.exec(point_);
   }
 }
 
@@ -90,29 +89,36 @@ void FilterView::setSorting(int col_, bool asc_) {
   ListView::setSorting(col_, asc_);
 }
 
-void FilterView::addCollection(Data::Collection* coll_) {
+void FilterView::addCollection(Data::CollPtr coll_) {
   FilterVec filters = coll_->filters();
   for(FilterVec::Iterator it = filters.begin(); it != filters.end(); ++it) {
     addFilter(it);
   }
 }
 
-void FilterView::addEntry(Data::Entry* entry_) {
+void FilterView::addEntries(Data::EntryVec entries_) {
   for(QListViewItem* item = firstChild(); item; item = item->nextSibling()) {
-    Filter* filter = static_cast<FilterItem*>(item)->filter();
-    if(filter && filter->matches(entry_)) {
-      new EntryItem(static_cast<FilterItem*>(item), entry_);
+    Filter::Ptr filter = static_cast<FilterItem*>(item)->filter();
+    for(Data::EntryVecIt it = entries_.begin(); it != entries_.end(); ++it) {
+      if(filter && filter->matches(it.data())) {
+        new EntryItem(static_cast<FilterItem*>(item), it);
+      }
     }
   }
 }
 
-void FilterView::modifyEntry(Data::Entry* entry_) {
+void FilterView::modifyEntries(Data::EntryVec entries_) {
+  for(Data::EntryVecIt it = entries_.begin(); it != entries_.end(); ++it) {
+    modifyEntry(it);
+  }
+}
+
+void FilterView::modifyEntry(Data::EntryPtr entry_) {
   for(QListViewItem* item = firstChild(); item; item = item->nextSibling()) {
     bool hasEntry = false;
     QListViewItem* entryItem = 0;
     // iterate over all children and find item with matching entry pointers
-    QListViewItem* i = item->firstChild();
-    while(i) {
+    for(QListViewItem* i = item->firstChild(); i; i = i->nextSibling()) {
       if(static_cast<EntryItem*>(i)->entry() == entry_) {
         i->setText(0, entry_->title());
         // only one item per filter will match
@@ -120,11 +126,10 @@ void FilterView::modifyEntry(Data::Entry* entry_) {
         entryItem = i;
         break;
       }
-      i = i->nextSibling();
     }
     // now, if the entry was there but no longer matches, delete it
     // if the entry was not there but does match, add it
-    Filter* filter = static_cast<FilterItem*>(item)->filter();
+    Filter::Ptr filter = static_cast<FilterItem*>(item)->filter();
     if(hasEntry && !filter->matches(static_cast<EntryItem*>(entryItem)->entry())) {
       delete entryItem;
     } else if(!hasEntry && filter->matches(entry_)) {
@@ -133,23 +138,23 @@ void FilterView::modifyEntry(Data::Entry* entry_) {
   }
 }
 
-void FilterView::removeEntry(Data::Entry* entry_) {
+void FilterView::removeEntries(Data::EntryVec entries_) {
   // the group modified signal gets handles separately, this is just for filters
   for(QListViewItem* item = firstChild(); item; item = item->nextSibling()) {
     // iterate over all children and delete items with matching entry pointers
-    QListViewItem* i = item->firstChild();
-    while(i) {
-      if(static_cast<EntryItem*>(i)->entry() == entry_) {
-        delete i;
-        i = 0;
-        // only one item per filter will match
-        break;
+    QListViewItem* c1 = item->firstChild();
+    while(c1) {
+      if(entries_.contains(static_cast<EntryItem*>(c1)->entry())) {
+        QListViewItem* c2 = c1;
+        c1 = c1->nextSibling();
+        delete c2;
+      } else {
+        c1 = c1->nextSibling();
       }
-      i = i->nextSibling();
     }
   }
 }
-void FilterView::addFilter(Filter* filter_) {
+void FilterView::addFilter(FilterPtr filter_) {
   FilterItem* filterItem = new FilterItem(this, filter_);
 
   Data::EntryVec entries = Data::Document::self()->filteredEntries(filter_);
@@ -176,7 +181,7 @@ void FilterView::slotDeleteFilter() {
   Kernel::self()->removeFilter(static_cast<FilterItem*>(item)->filter());
 }
 
-void FilterView::removeFilter(Filter* filter_) {
+void FilterView::removeFilter(FilterPtr filter_) {
   // paranoia
   if(!filter_) {
     return;
@@ -201,11 +206,20 @@ void FilterView::removeFilter(Filter* filter_) {
 
   // not found
   if(!found) {
-    kdDebug() << "GroupView::modifyFilter() - not found" << endl;
+    myDebug() << "GroupView::modifyFilter() - not found" << endl;
     return;
   }
 
   delete found;
+}
+
+void FilterView::slotSelectionChanged() {
+  GUI::ListView::slotSelectionChanged();
+
+  GUI::ListViewItem* item = selectedItems().getFirst();
+  if(item && item->isFilterItem()) {
+    Controller::self()->slotUpdateFilter(static_cast<FilterItem*>(item)->filter());
+  }
 }
 
 #include "filterview.moc"

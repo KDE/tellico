@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,10 +37,8 @@
 
 using Tellico::GroupView;
 
-// by default don't show the number of items
 GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
     : GUI::ListView(parent_, name_), m_notSortedYet(true), m_coll(0) {
-  // the app name isn't translated
   addColumn(QString::null); // header text gets updated later
   header()->setStretchEnabled(true, 0);
   setResizeMode(QListView::NoColumn);
@@ -48,17 +46,6 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
   setShowSortIndicator(true);
   setTreeStepSize(15);
   setFullWidth(true);
-
-  m_groupMenu = new KPopupMenu(this);
-  m_groupMenu->insertItem(SmallIconSet(QString::fromLatin1("2downarrow")),
-                          i18n("Expand All Groups"), this, SLOT(slotExpandAll()));
-  m_groupMenu->insertItem(SmallIconSet(QString::fromLatin1("2uparrow")),
-                          i18n("Collapse All Groups"), this, SLOT(slotCollapseAll()));
-  m_groupMenu->insertItem(SmallIconSet(QString::fromLatin1("filter")),
-                          i18n("Filter by Group"), this, SLOT(slotFilterGroup()));
-
-  m_entryMenu = new KPopupMenu(this);
-  Controller::self()->plugEntryActions(m_entryMenu);
 
   connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),
           SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
@@ -74,25 +61,30 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
 }
 
 Tellico::EntryGroupItem* GroupView::addGroup(Data::EntryGroup* group_) {
-  EntryGroupItem* item = new EntryGroupItem(this, group_);
+  int type = -1;
+  if(m_coll && m_coll->hasField(group_->fieldName())) {
+    type = m_coll->fieldByName(group_->fieldName())->type();
+  }
+  EntryGroupItem* item = new EntryGroupItem(this, group_, type);
   if(group_->groupName() == Data::Collection::s_emptyGroupTitle) {
     item->setPixmap(0, SmallIcon(QString::fromLatin1("folder_red")));
+    item->setSortWeight(10);
   } else {
     item->setPixmap(0, m_groupClosedPixmap);
   }
 
   m_groupDict.insert(group_->groupName(), item);
+  item->setExpandable(!group_->isEmpty());
 
   return item;
 }
 
 void GroupView::slotReset() {
   clear();
-  // don't really need to clear the collGroupBy map
   m_groupDict.clear();
 }
 
-void GroupView::removeCollection(Data::Collection* coll_) {
+void GroupView::removeCollection(Data::CollPtr coll_) {
   if(!coll_) {
     kdWarning() << "GroupView::removeCollection() - null coll pointer!" << endl;
     return;
@@ -105,7 +97,7 @@ void GroupView::removeCollection(Data::Collection* coll_) {
   blockSignals(false);
 }
 
-void GroupView::slotModifyGroup(Data::Collection* coll_, Data::EntryGroup* group_) {
+void GroupView::slotModifyGroup(Data::CollPtr coll_, Data::EntryGroup* group_) {
   if(!coll_ || !group_) {
     kdWarning() << "GroupView::slotModifyGroup() - null coll or group pointer!" << endl;
     return;
@@ -119,54 +111,32 @@ void GroupView::slotModifyGroup(Data::Collection* coll_, Data::EntryGroup* group
 
 //  kdDebug() << "GroupView::slotModifyGroup() - " << group_->fieldName() << endl;
   EntryGroupItem* par = m_groupDict.find(group_->groupName());
-  if(!par) {
+  if(par) {
+    if(group_->isEmpty()) {
+      m_groupDict.remove(par->text(0));
+      delete par;
+      return;
+    }
+    // the group might get deleted and recreated out from under us,
+    // so do a sanity check
+    par->setGroup(group_);
+  } else {
     par = addGroup(group_);
   }
 
-  //make a copy of the group
-  Data::EntryGroup leftover(*group_);
-
-  // first delete all items in this view but no longer in the group
-  QListViewItem* item = par->firstChild();
-  QListViewItem* next;
-  while(item) {
-    Data::Entry* entry = static_cast<EntryItem*>(item)->entry();
-    if(group_->contains(entry)) {
-      leftover.remove(entry);
-      item = item->nextSibling();
-    } else {
-      // if it's not in the group, delete it
-//      kdDebug() << "\tdeleting entry - " << entry->title() << endl;
-      next = item->nextSibling();
-      delete item;
-      item = next;
-    }
-  }
-
-  // if there are no more child items in the group, no entries in the leftover group
-  // then delete the parent item
-  if(par->childCount() == 0 && leftover.isEmpty()) {
-    m_groupDict.remove(par->text(0));
-    delete par;
-    return;
-  }
-
-  // next add new listViewItems for items in the group, but not currently in the view
-  for(Data::EntryVecIt it = leftover.begin(); it != leftover.end(); ++it) {
-    new EntryItem(par, it);
-  }
+  setUpdatesEnabled(false);
+  bool open = par->isOpen();
+  par->setOpen(false); // closing and opening the item will clear the items
+  par->setOpen(open);
+  setUpdatesEnabled(true);
 
   // don't want any selected
   clearSelection();
   sort(); // in case the count changed, or group name
-
-  // need to refresh
-//  triggerUpdate(); // sort does this anyway?
-//  root->setOpen(true);
 }
 
 // don't 'shadow' QListView::setSelected
-void GroupView::setEntrySelected(Data::Entry* entry_) {
+void GroupView::setEntrySelected(Data::EntryPtr entry_) {
 //  kdDebug() << "GroupView::slotSetSelected()" << endl;
   // if entry_ is null pointer, set no selected
   if(!entry_) {
@@ -266,14 +236,19 @@ void GroupView::contextMenuRequested(QListViewItem* item_, const QPoint& point_,
     return;
   }
 
-//  setSelected(item_, true);
-
+  KPopupMenu menu(this);
   GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(item_);
-  if(item->isEntryGroupItem() && m_groupMenu->count() > 0) {
-    m_groupMenu->popup(point_);
-  } else if(item->isEntryItem() && m_entryMenu->count() > 0) {
-    m_entryMenu->popup(point_);
+  if(item->isEntryGroupItem()) {
+    menu.insertItem(SmallIconSet(QString::fromLatin1("2downarrow")),
+                    i18n("Expand All Groups"), this, SLOT(slotExpandAll()));
+    menu.insertItem(SmallIconSet(QString::fromLatin1("2uparrow")),
+                    i18n("Collapse All Groups"), this, SLOT(slotCollapseAll()));
+    menu.insertItem(SmallIconSet(QString::fromLatin1("filter")),
+                    i18n("Filter by Group"), this, SLOT(slotFilterGroup()));
+  } else if(item->isEntryItem()) {
+    Controller::self()->plugEntryActions(&menu);
   }
+  menu.exec(point_);
 }
 
 void GroupView::slotCollapsed(QListViewItem* item_) {
@@ -284,21 +259,37 @@ void GroupView::slotCollapsed(QListViewItem* item_) {
     } else {
       item_->setPixmap(0, m_groupClosedPixmap);
     }
+    static_cast<GUI::ListViewItem*>(item_)->clear();
   }
 }
 
 void GroupView::slotExpanded(QListViewItem* item_) {
   // only change icon for group items
-  if(static_cast<GUI::ListViewItem*>(item_)->isEntryGroupItem()) {
-    if(item_->text(0) == Data::Collection::s_emptyGroupTitle) {
-      item_->setPixmap(0, SmallIcon(QString::fromLatin1("folder_red_open")));
-    } else {
-      item_->setPixmap(0, m_groupOpenPixmap);
-    }
+  if(!static_cast<GUI::ListViewItem*>(item_)->isEntryGroupItem()) {
+    kdWarning() << "GroupView::slotExpanded() - non entry group item - " << item_->text(0) << endl;
+    return;
   }
+
+  setUpdatesEnabled(false);
+
+  EntryGroupItem* item = static_cast<EntryGroupItem*>(item_);
+  if(item->text(0) == Data::Collection::s_emptyGroupTitle) {
+    item->setPixmap(0, SmallIcon(QString::fromLatin1("folder_red_open")));
+  } else {
+    item->setPixmap(0, m_groupOpenPixmap);
+  }
+
+  Data::EntryGroup* group = item->group();
+  for(Data::EntryVecIt entryIt = group->begin(); entryIt != group->end(); ++entryIt) {
+    new EntryItem(item, entryIt);
+  }
+
+  setUpdatesEnabled(true);
+  triggerUpdate();
 }
 
-void GroupView::addCollection(Data::Collection* coll_) {
+void GroupView::addCollection(Data::CollPtr coll_) {
+//  myDebug() << "GroupView::addCollection()" << endl;
   if(!coll_) {
     kdWarning() << "GroupView::addCollection() - null coll pointer!" << endl;
     return;
@@ -311,17 +302,22 @@ void GroupView::addCollection(Data::Collection* coll_) {
     m_groupBy = coll_->defaultGroupField();
   }
 
+  // when the coll gets set for the first time, the pixmaps need to be updated
+  if((m_coll->hasField(m_groupBy) && m_coll->fieldByName(m_groupBy)->formatFlag() == Data::Field::FormatName)
+     || m_groupBy == Data::Collection::s_peopleGroupName) {
+    m_groupOpenPixmap = UserIcon(QString::fromLatin1("person-open"));
+    m_groupClosedPixmap = UserIcon(QString::fromLatin1("person"));
+  }
+
   updateHeader();
   populateCollection();
 
-//  slotClearSelection();
-//  setSelected(collItem, true);
   slotCollapseAll();
 //  kdDebug() << "GroupView::addCollection - done" << endl;
 }
 
 void GroupView::setGroupField(const QString& groupField_) {
-//  kdDebug() << "GroupView::setGroupField - " << groupField_ << endl;
+//  myDebug() << "GroupView::setGroupField - " << groupField_ << endl;
   if(groupField_.isEmpty() || groupField_ == m_groupBy) {
     return;
   }
@@ -347,7 +343,7 @@ void GroupView::populateCollection() {
     return;
   }
 
-//  kdDebug() << "GroupView::populateCollection() - " << m_groupBy << endl;
+//  myDebug() << "GroupView::populateCollection() - " << m_groupBy << endl;
   if(m_groupBy.isEmpty()) {
     m_groupBy = m_coll->defaultGroupField();
   }
@@ -359,7 +355,6 @@ void GroupView::populateCollection() {
   // if there's no group field, just return
   if(m_groupBy.isEmpty()) {
     setUpdatesEnabled(true);
-    blockSignals(false);
     return;
   }
 
@@ -371,11 +366,7 @@ void GroupView::populateCollection() {
   // iterate over all the groups in the dict
   // e.g. if the dict is "author", loop over all the author groups
   for(QDictIterator<Data::EntryGroup> it(*dict); it.current(); ++it) {
-    EntryGroupItem* groupItem = addGroup(it.current());
-
-    for(Data::EntryVecIt entryIt = it.current()->begin(); entryIt != it.current()->end(); ++entryIt) {
-      new EntryItem(groupItem, entryIt);
-    }
+    addGroup(it.current());
   }
 
   setUpdatesEnabled(true);
@@ -390,7 +381,7 @@ void GroupView::slotFilterGroup() {
     return;
   }
 
-  Filter* filter = new Filter(Filter::MatchAny);
+  FilterPtr filter = new Filter(Filter::MatchAny);
 
   for(GUI::ListViewItemListIt it(items); it.current(); ++it) {
     if(it.current()->childCount() == 0) { //ignore empty items
@@ -398,17 +389,22 @@ void GroupView::slotFilterGroup() {
     }
     // need to check for people group
     if(m_groupBy == Data::Collection::s_peopleGroupName) {
-      Data::Entry* entry = static_cast<EntryItem*>(it.current()->firstChild())->entry();
+      Data::EntryPtr entry = static_cast<EntryItem*>(it.current()->firstChild())->entry();
       Data::FieldVec fields = entry->collection()->peopleFields();
       for(Data::FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
         filter->append(new FilterRule(fIt->name(), it.current()->text(0), FilterRule::FuncContains));
       }
     } else {
-      filter->append(new FilterRule(m_groupBy, it.current()->text(0), FilterRule::FuncContains));
+      QString s = it.current()->text(0);
+      if(s != Data::Collection::s_emptyGroupTitle) {
+        filter->append(new FilterRule(m_groupBy, it.current()->text(0), FilterRule::FuncContains));
+      }
     }
   }
 
-  emit signalUpdateFilter(filter);
+  if(!filter->isEmpty()) {
+    emit signalUpdateFilter(filter);
+  }
 }
 
 // this gets called when header() is clicked, so cycle through
@@ -425,18 +421,19 @@ void GroupView::setSorting(int col_, bool asc_) {
   ListView::setSorting(col_, asc_);
 }
 
-void GroupView::modifyField(Data::Collection*, Data::Field*, Data::Field* newField_) {
+void GroupView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr newField_) {
   if(newField_->name() != m_groupBy) {
     return;
   }
-  firstChild()->setText(0, newField_->title());
+  updateHeader(newField_);
 }
 
-void GroupView::updateHeader() {
+void GroupView::updateHeader(Data::FieldPtr field_/*=0*/) {
+  QString t = field_ ? field_->title() : groupTitle();
   if(sortStyle() == ListView::SortByText) {
-    setColumnText(0, groupTitle());
+    setColumnText(0, t);
   } else {
-    setColumnText(0, i18n("%1 (Sort by Count)").arg(groupTitle()));
+    setColumnText(0, i18n("%1 (Sort by Count)").arg(t));
   }
 }
 
@@ -445,7 +442,7 @@ QString GroupView::groupTitle() {
   if(!m_coll || m_groupBy.isEmpty()) {
     title = i18n("Group Name Header", "Group");
   } else {
-    Data::Field* f = m_coll->fieldByName(m_groupBy);
+    Data::FieldPtr f = m_coll->fieldByName(m_groupBy);
     if(f) {
       title = f->title();
     } else if(m_groupBy == Data::Collection::s_peopleGroupName) {

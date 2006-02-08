@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -29,12 +29,12 @@ typedef QMap<Data::Collection::Type, QString> CollectionNameMap;
  */
 class CollectionFactory {
 public:
-  static Data::Collection* collection(Data::Collection::Type type, bool addFields,
+  static Data::CollPtr collection(Data::Collection::Type type, bool addFields,
                                       const QString& entryTitle=QString::null);
-  static Data::Collection* collection(const QString& entryName, bool addFields);
+  static Data::CollPtr collection(const QString& typeName, bool addFields);
   static Data::FieldVec defaultFields(Data::Collection::Type type);
   static CollectionNameMap nameMap();
-  static QString entryName(Data::Collection::Type type);
+  static QString typeName(Data::Collection::Type type);
 };
 
 } // end namespace

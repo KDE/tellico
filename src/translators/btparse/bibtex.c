@@ -12,7 +12,7 @@
 #define ZZCOL
 #define USER_ZZSYN
 
-#include "config.h"
+#include "btconfig.h"
 #include "btparse.h"
 #include "attrib.h"
 #include "lex_auxiliary.h"

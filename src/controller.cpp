@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -36,11 +36,12 @@
 #include "tellico_debug.h"
 #include "groupiterator.h"
 #include "tellico_utils.h"
+#include "entryupdater.h"
 
-#include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kaction.h>
+#include <ktoolbarbutton.h>
 
 using Tellico::Controller;
 
@@ -48,7 +49,6 @@ Controller* Controller::s_self = 0;
 
 Controller::Controller(MainWindow* parent_, const char* name_)
     : QObject(parent_, name_), m_mainWindow(parent_), m_working (false) {
-  m_widgetBlocks.setAutoDelete(true);
 }
 
 void Controller::addObserver(Observer* obs) {
@@ -100,7 +100,7 @@ Tellico::Data::EntryVec Controller::visibleEntries() {
   return m_mainWindow->m_detailedView->visibleEntries();
 }
 
-void Controller::slotCollectionAdded(Data::Collection* coll_) {
+void Controller::slotCollectionAdded(Data::CollPtr coll_) {
 //  myDebug() << "Controller::slotCollectionAdded()" << endl;
   // at start-up, this might get called too early, so check and bail
   if(!m_mainWindow->m_groupView) {
@@ -109,14 +109,8 @@ void Controller::slotCollectionAdded(Data::Collection* coll_) {
 
   // do this first because the group view will need it later
   m_mainWindow->readCollectionOptions(coll_);
-
-  // these might take some time, change the status message
-  // the detailed view also has half the progress bar
-  // this slot gets called after the importer has loaded the collection
-  // so first bump it to 100% of the step, increase the step, then load
-  // the document view
-  m_mainWindow->slotUpdateFractionDone(1.0);
-  m_mainWindow->m_currentStep = m_mainWindow->m_maxSteps;
+  m_mainWindow->updateEntrySources(); // has to be called before all the addCollection()
+  // calls in the widgets since they may want menu updates
 
 //  blockAllSignals(true);
   m_mainWindow->m_detailedView->addCollection(coll_);
@@ -134,30 +128,28 @@ void Controller::slotCollectionAdded(Data::Collection* coll_) {
   }
 //  blockAllSignals(false);
 
-  // The importer doesn't ever finish the import, better to do it here
-  m_mainWindow->slotUpdateFractionDone(1.0);
-  m_mainWindow->m_currentStep = 1;
   m_mainWindow->slotStatusMsg(i18n("Ready."));
 
   m_selectedEntries.clear();
   m_mainWindow->slotEntryCount();
+
   updateActions();
 
-  connect(coll_, SIGNAL(signalGroupModified(Tellico::Data::Collection*, Tellico::Data::EntryGroup*)),
-          m_mainWindow->m_groupView, SLOT(slotModifyGroup(Tellico::Data::Collection*, Tellico::Data::EntryGroup*)));
+  connect(coll_, SIGNAL(signalGroupModified(Tellico::Data::CollPtr, Tellico::Data::EntryGroup*)),
+          m_mainWindow->m_groupView, SLOT(slotModifyGroup(Tellico::Data::CollPtr, Tellico::Data::EntryGroup*)));
 
-  connect(coll_, SIGNAL(signalRefreshField(Tellico::Data::Field*)),
-          this, SLOT(slotRefreshField(Tellico::Data::Field*)));
+  connect(coll_, SIGNAL(signalRefreshField(Tellico::Data::FieldPtr)),
+          this, SLOT(slotRefreshField(Tellico::Data::FieldPtr)));
 }
 
-void Controller::slotCollectionModified(Data::Collection* coll_) {
+void Controller::slotCollectionModified(Data::CollPtr coll_) {
   // easiest thing is to signal collection deleted, then added?
-  // FIXME: fixme Signals for delete collection and then added are yucky
+  // FIXME: Signals for delete collection and then added are yucky
   slotCollectionDeleted(coll_);
   slotCollectionAdded(coll_);
 }
 
-void Controller::slotCollectionDeleted(Data::Collection* coll_) {
+void Controller::slotCollectionDeleted(Data::CollPtr coll_) {
 //  kdDebug() << "Controller::slotCollectionDeleted()" << endl;
 
   blockAllSignals(true);
@@ -181,16 +173,14 @@ void Controller::slotCollectionDeleted(Data::Collection* coll_) {
 
 void Controller::addedEntries(Data::EntryVec entries_) {
   blockAllSignals(true);
-  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
-    for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
-      it->addEntry(entry);
-    }
+  for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
+    it->addEntries(entries_);
   }
   slotUpdateSelection(0, entries_);
   blockAllSignals(false);
 }
 
-void Controller::modifiedEntry(Data::Entry* entry_) {
+void Controller::modifiedEntries(Data::EntryVec entries_) {
   // when a new document is being loaded, loans are added to borrowers, which
   // end up calling Entry::checkIn() which called Document::saveEntry() which calls here
   // ignore that
@@ -199,30 +189,24 @@ void Controller::modifiedEntry(Data::Entry* entry_) {
   }
   blockAllSignals(true);
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
-    it->modifyEntry(entry_);
+    it->modifyEntries(entries_);
   }
-  m_mainWindow->m_viewStack->refresh(); // special case
+  m_mainWindow->m_viewStack->entryView()->slotRefresh(); // special case
   blockAllSignals(false);
 }
 
 void Controller::removedEntries(Data::EntryVec entries_) {
-  blockAllUpdates(true);
   blockAllSignals(true);
-  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
-    for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
-      it->removeEntry(entry);
-      if(!m_selectedEntries.isEmpty() && entry == m_selectedEntries[0]) {
-        m_mainWindow->m_viewStack->entryView()->clear();
-      }
-      m_selectedEntries.remove(entry);
-      m_currentEntries.remove(entry);
-    }
+  for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
+    it->removeEntries(entries_);
+    m_mainWindow->m_viewStack->entryView()->clear();
+    m_selectedEntries.clear();
+    m_currentEntries.clear();
   }
   blockAllSignals(false);
-  blockAllUpdates(false);
 }
 
-void Controller::addedField(Data::Collection* coll_, Data::Field* field_) {
+void Controller::addedField(Data::CollPtr coll_, Data::FieldPtr field_) {
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->addField(coll_, field_);
   }
@@ -230,7 +214,7 @@ void Controller::addedField(Data::Collection* coll_, Data::Field* field_) {
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
 }
 
-void Controller::removedField(Data::Collection* coll_, Data::Field* field_) {
+void Controller::removedField(Data::CollPtr coll_, Data::FieldPtr field_) {
 //  kdDebug() << "Controller::slotFieldDeleted() - " << field_->name() << endl;
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->removeField(coll_, field_);
@@ -239,7 +223,7 @@ void Controller::removedField(Data::Collection* coll_, Data::Field* field_) {
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
 }
 
-void Controller::modifiedField(Data::Collection* coll_, Data::Field* oldField_, Data::Field* newField_) {
+void Controller::modifiedField(Data::CollPtr coll_, Data::FieldPtr oldField_, Data::FieldPtr newField_) {
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->modifyField(coll_, oldField_, newField_);
   }
@@ -247,7 +231,7 @@ void Controller::modifiedField(Data::Collection* coll_, Data::Field* oldField_, 
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
 }
 
-void Controller::reorderedFields(Data::Collection* coll_) {
+void Controller::reorderedFields(Data::CollPtr coll_) {
   m_mainWindow->m_editDialog->setLayout(coll_);
   m_mainWindow->m_detailedView->reorderFields(coll_->fields());
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
@@ -332,6 +316,20 @@ void Controller::slotUpdateCurrent(const Data::EntryVec& entries_) {
   m_working = false;
 }
 
+void Controller::slotUpdateSelectedEntries(const QString& source_) {
+  if(m_selectedEntries.isEmpty()) {
+    return;
+  }
+
+  // it deletes itself when done
+  // signal mapper strings can't be empty, "_all" is set in mainwindow
+  if(source_.isEmpty() || source_ == Latin1Literal("_all")) {
+    new EntryUpdater(m_selectedEntries.front()->collection(), m_selectedEntries, this);
+  } else {
+    new EntryUpdater(source_, m_selectedEntries.front()->collection(), m_selectedEntries, this);
+  }
+}
+
 void Controller::slotDeleteSelectedEntries() {
   if(m_selectedEntries.isEmpty()) {
     return;
@@ -377,8 +375,8 @@ void Controller::slotDeleteSelectedEntries() {
 //  slotUpdateSelection(m_mainWindow->m_detailedView, newList);
 }
 
-void Controller::slotRefreshField(Data::Field* field_) {
-  kdDebug() << "Controller::slotRefreshField()" << endl;
+void Controller::slotRefreshField(Data::FieldPtr field_) {
+//  kdDebug() << "Controller::slotRefreshField()" << endl;
   // group view only needs to refresh if it's the title
   if(field_->name() == Latin1Literal("title")) {
     m_mainWindow->m_groupView->populateCollection();
@@ -400,7 +398,7 @@ void Controller::slotCopySelectedEntries() {
   for(Data::EntryVecIt it = m_selectedEntries.begin(); it != m_selectedEntries.end(); ++it) {
     entries.append(new Data::Entry(*it));
   }
-  Kernel::self()->saveEntries(Data::EntryVec(), entries);
+  Kernel::self()->addEntries(entries, false);
   slotUpdateSelection(0, old);
 }
 
@@ -421,28 +419,6 @@ void Controller::blockAllSignals(bool block_) const {
   m_mainWindow->m_viewStack->iconView()->blockSignals(block_);
 }
 
-void Controller::blockAllUpdates(bool block_) {
-  if(!m_mainWindow->m_initialized) {
-    return;
-  }
-
-  // if we don't want to block, clear and auto-delete all blocks
-  if(!block_) {
-    m_widgetBlocks.clear();
-    return;
-  }
-
-  m_widgetBlocks.append(new GUI::WidgetUpdateBlocker(m_mainWindow->m_detailedView));
-  m_widgetBlocks.append(new GUI::WidgetUpdateBlocker(m_mainWindow->m_groupView));
-  m_widgetBlocks.append(new GUI::WidgetUpdateBlocker(m_mainWindow->m_viewStack->iconView()));
-  if(m_mainWindow->m_loanView) {
-    m_widgetBlocks.append(new GUI::WidgetUpdateBlocker(m_mainWindow->m_loanView));
-  }
-  if(m_mainWindow->m_filterView) {
-    m_widgetBlocks.append(new GUI::WidgetUpdateBlocker(m_mainWindow->m_filterView));
-  }
-}
-
 void Controller::slotUpdateFilter(FilterPtr filter_) {
 //  kdDebug() << "Controller::slotUpdateFilter()" << endl;
   blockAllSignals(true);
@@ -460,7 +436,7 @@ void Controller::slotUpdateFilter(FilterPtr filter_) {
   m_mainWindow->slotEntryCount();
 }
 
-void Controller::editEntry(const Data::Entry&) const {
+void Controller::editEntry(Data::EntryPtr) const {
   m_mainWindow->slotShowEntryEditor();
 }
 
@@ -475,29 +451,45 @@ void Controller::plugEntryActions(QWidget* widget_) {
   m_mainWindow->m_editEntry->plug(widget_);
   m_mainWindow->m_copyEntry->plug(widget_);
   m_mainWindow->m_deleteEntry->plug(widget_);
+  m_mainWindow->m_updateEntryMenu->plug(widget_);
+  plugUpdateMenu(widget_);
+  if(widget_->inherits("QPopupMenu")) {
+    QPopupMenu* p = static_cast<QPopupMenu*>(widget_);
+    p->insertSeparator();
+  }
   m_mainWindow->m_checkOutEntry->plug(widget_);
 }
 
 void Controller::updateActions() const {
   bool emptySelection = m_selectedEntries.isEmpty();
-  m_mainWindow->m_editEntry->setEnabled(!emptySelection);
-  m_mainWindow->m_copyEntry->setEnabled(!emptySelection);
-  m_mainWindow->m_deleteEntry->setEnabled(!emptySelection);
-  m_mainWindow->m_checkOutEntry->setEnabled(!emptySelection);
+  m_mainWindow->stateChanged(QString::fromLatin1("empty_selection"),
+                             emptySelection ? KXMLGUIClient::StateNoReverse : KXMLGUIClient::StateReverse);
+  for(QPtrListIterator<KAction> it(m_mainWindow->m_actions); it.current(); ++it) {
+    it.current()->setEnabled(!emptySelection);
+  }
+  //only enable citation items when it's a bibliography
+  bool isBibtex = Kernel::self()->collectionType() == Data::Collection::Bibtex;
+  if(isBibtex) {
+    m_mainWindow->action("cite_clipboard")->setEnabled(!emptySelection);
+    m_mainWindow->action("cite_lyxpipe")->setEnabled(!emptySelection);
+    m_mainWindow->action("cite_openoffice")->setEnabled(!emptySelection);
+  }
   m_mainWindow->m_checkInEntry->setEnabled(canCheckIn());
 
   if(m_selectedEntries.count() < 2) {
     m_mainWindow->m_editEntry->setText(i18n("&Edit Entry..."));
     m_mainWindow->m_copyEntry->setText(i18n("&Copy Entry"));
+    m_mainWindow->m_updateEntryMenu->setText(i18n("&Update Entry"));
     m_mainWindow->m_deleteEntry->setText(i18n("&Delete Entry"));
   } else {
     m_mainWindow->m_editEntry->setText(i18n("&Edit Entries..."));
     m_mainWindow->m_copyEntry->setText(i18n("&Copy Entries"));
+    m_mainWindow->m_updateEntryMenu->setText(i18n("&Update Entries"));
     m_mainWindow->m_deleteEntry->setText(i18n("&Delete Entries"));
   }
 }
 
-void Controller::addedBorrower(Data::Borrower* borrower_) {
+void Controller::addedBorrower(Data::BorrowerPtr borrower_) {
   m_mainWindow->addLoanView(); // just in case
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->addBorrower(borrower_);
@@ -505,14 +497,14 @@ void Controller::addedBorrower(Data::Borrower* borrower_) {
   m_mainWindow->m_viewTabs->setTabBarHidden(false);
 }
 
-void Controller::modifiedBorrower(Data::Borrower* borrower_) {
+void Controller::modifiedBorrower(Data::BorrowerPtr borrower_) {
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->modifyBorrower(borrower_);
   }
   hideTabs();
 }
 
-void Controller::addedFilter(Filter* filter_) {
+void Controller::addedFilter(FilterPtr filter_) {
   m_mainWindow->addFilterView(); // just in case
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->addFilter(filter_);
@@ -520,7 +512,7 @@ void Controller::addedFilter(Filter* filter_) {
   m_mainWindow->m_viewTabs->setTabBarHidden(false);
 }
 
-void Controller::removedFilter(Filter* filter_) {
+void Controller::removedFilter(FilterPtr filter_) {
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->removeFilter(filter_);
   }
@@ -535,7 +527,7 @@ void Controller::slotCheckOut() {
   Data::EntryVec loanedEntries = m_selectedEntries;
 
   // check to see if any of the entries are already on-loan, and warn user
-  QMap<QString, Data::Entry*> alreadyLoaned;
+  QMap<QString, Data::EntryPtr> alreadyLoaned;
   const Data::BorrowerVec& borrowers = Data::Document::self()->collection()->borrowers();
   for(Data::BorrowerVec::ConstIterator it = borrowers.begin(); it != borrowers.end(); ++it) {
     const Data::LoanVec& loans = it->loans();
@@ -552,8 +544,8 @@ void Controller::slotCheckOut() {
                                       "times. They will be removed from the list of items "
                                       "to lend."),
                                       alreadyLoaned.keys());
-    QMapConstIterator<QString, Data::Entry*> it = alreadyLoaned.constBegin();
-    QMapConstIterator<QString, Data::Entry*> end = alreadyLoaned.constEnd();
+    QMapConstIterator<QString, Data::EntryPtr> it = alreadyLoaned.constBegin();
+    QMapConstIterator<QString, Data::EntryPtr> end = alreadyLoaned.constEnd();
     for( ; it != end; ++it) {
       loanedEntries.remove(it.data());
     }
@@ -583,7 +575,7 @@ void Controller::slotCheckIn(const Data::EntryVec& entries_) {
     Data::BorrowerVec vec = Data::Document::self()->collection()->borrowers();
     // vec.end() must be in the loop, do NOT cache the value, it could change!
     for(Data::BorrowerVec::Iterator bIt = vec.begin(); bIt != vec.end(); ++bIt) {
-      Data::Loan* l = bIt->loan(it);
+      Data::LoanPtr l = bIt->loan(it.data());
       if(l) {
         loans.append(l);
         // assume it's only loaned once
@@ -614,6 +606,61 @@ bool Controller::canCheckIn() const {
     }
   }
   return false;
+}
+
+void Controller::plugUpdateMenu(QWidget* widget_) {
+  // there's a bug in KActionMenu with KXMLGUIFactory::plugActionList
+  // the popup doesn't get updated
+  QPopupMenu* popup = 0;
+  if(widget_->inherits("QPopupMenu")) {
+    QPopupMenu* p = static_cast<QPopupMenu*>(widget_);
+    const uint count = p->count();
+    for(uint i = 0; i < count; ++i) {
+      QMenuItem* item = p->findItem(p->idAt(i));
+      if(item && item->text() == m_mainWindow->m_updateEntryMenu->text()) {
+        popup = item->popup();
+        break;
+      }
+    }
+  } else if(widget_->inherits("KToolBar")) {
+    KToolBar* tb = static_cast<KToolBar*>(widget_);
+    const uint count = tb->count();
+    for(uint i = 0; i < count; ++i) {
+      KToolBarButton* btn = tb->getButton(tb->idAt(i));
+      if(btn && btn->text() == m_mainWindow->m_updateEntryMenu->text()) {
+        popup = btn->popup();
+        break;
+      }
+    }
+  }
+
+  if(!popup) {
+    return;
+  }
+
+  popup->clear();
+  m_mainWindow->action("update_entry_all")->plug(popup);
+  popup->insertSeparator();
+  for(QPtrListIterator<KAction> it(m_mainWindow->m_actions); it.current(); ++it) {
+    it.current()->plug(popup);
+  }
+
+  // keep track of the widget in case we need up update the menus
+  WidgetVector::const_iterator it = qFind(m_sourcesWidgets.begin(),
+                                          m_sourcesWidgets.end(),
+                                          QGuardedPtr<QWidget>(widget_));
+  if(it != m_sourcesWidgets.end()) {
+    m_sourcesWidgets.append(widget_);
+  }
+}
+
+void Controller::updatedFetchers() {
+  m_mainWindow->updateEntrySources();
+  for(WidgetVector::iterator it = m_sourcesWidgets.begin(); it != m_sourcesWidgets.end(); ++it) {
+    if(!(*it).isNull()) {
+      plugUpdateMenu(*it);
+    }
+  }
 }
 
 #include "controller.moc"

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2005 by Robby Stephenson
+    copyright            : (C) 2004-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +15,9 @@
 #define FREEDBIMPORTER_H
 
 #include "importer.h"
-#include <config.h>
+#include "../datavectors.h"
+
+#include <qvaluevector.h>
 
 class QButtonGroup;
 class QRadioButton;
@@ -39,29 +41,43 @@ public:
 
   /**
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual bool canImport(int type) const;
 
+public slots:
+  void slotCancel();
+
 private slots:
   void slotClicked(int id);
 
 private:
-#if HAVE_KCDDB
-  Data::Collection* readCDROM();
-  Data::Collection* readCache();
-#endif
+  typedef QValueVector<QString> StringVector;
+  struct CDText {
+    friend class FreeDBImporter;
+    QString title;
+    QString artist;
+    QString message;
+    StringVector trackTitles;
+    StringVector trackArtists;
+  };
 
-  static QValueList<uint> FreeDBImporter::offsetList(QCString drive);
+  static QValueList<uint> offsetList(const QCString& drive, QValueList<uint>& trackLengths);
+  static CDText getCDText(const QCString& drive);
 
-  Data::Collection* m_coll;
+  void readCDROM();
+  void readCache();
+  void readCDText(const QCString& drive);
+
+  Data::CollPtr m_coll;
   QWidget* m_widget;
   QButtonGroup* m_buttonGroup;
   QRadioButton* m_radioCDROM;
   QRadioButton* m_radioCache;
   KComboBox* m_driveCombo;
+  bool m_cancelled : 1;
 };
 
   } // end namespace

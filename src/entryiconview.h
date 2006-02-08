@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2005 by Robby Stephenson
+    copyright            : (C) 2002-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,13 +14,12 @@
 #ifndef TELLICOENTRYICONVIEW_H
 #define TELLICOENTRYICONVIEW_H
 
-class KPopupMenu;
-
 #include "observer.h"
 #include "entry.h"
-#include "datavectors.h"
 
 #include <kiconview.h>
+
+#include <qintdict.h>
 
 namespace Tellico {
   class EntryIconViewItem;
@@ -39,6 +38,8 @@ friend class EntryIconViewItem;
 public:
   EntryIconView(QWidget* parent, const char* name = 0);
 
+  EntryIconViewItem* firstItem() const;
+
   virtual void clear();
   void refresh();
   void showEntries(const Data::EntryVec& entries);
@@ -47,15 +48,15 @@ public:
    *
    * @param entry A pointer to the entry
    */
-  virtual void    addEntry(Data::Entry* entry);
-  virtual void modifyEntry(Data::Entry*) { refresh(); }
-  virtual void removeEntry(Data::Entry* entry);
+  virtual void    addEntries(Data::EntryVec entries);
+  virtual void modifyEntries(Data::EntryVec entries);
+  virtual void removeEntries(Data::EntryVec entries);
 
   const QString& imageField();
-  void setMaxIconWidth(uint width);
-  uint maxIconWidth() const { return m_maxIconWidth; }
+  void setMaxAllowedIconWidth(int width);
+  int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
 
-  const QPixmap& defaultPixmap() { return m_defaultPixmap; }
+  const QPixmap& defaultPixmap();
   /**
    * Returns a list of the currently selected items;
    *
@@ -81,25 +82,42 @@ private:
   void findImageField();
   void fillView();
 
-  KSharedPtr<Data::Collection> m_coll;
+  Data::CollPtr m_coll;
   Data::EntryVec m_entries;
   QString m_imageField;
-  QPixmap m_defaultPixmap;
-  KPopupMenu* m_itemMenu;
-  uint m_maxIconWidth;
+  QIntDict<QPixmap> m_defaultPixmaps;
+  int m_maxAllowedIconWidth;
+  int m_maxIconWidth;
+  int m_maxIconHeight;
 };
 
 class EntryIconViewItem : public KIconViewItem {
 public:
-  EntryIconViewItem(EntryIconView* parent, Data::Entry* entry);
+  EntryIconViewItem(EntryIconView* parent, Data::EntryPtr entry);
   ~EntryIconViewItem();
 
-  Data::Entry* entry() const { return m_entry; }
+  EntryIconView* iconView() const { return static_cast<EntryIconView*>(KIconViewItem::iconView()); }
+  EntryIconViewItem* nextItem() const { return static_cast<EntryIconViewItem*>(KIconViewItem::nextItem()); }
+
+  Data::EntryPtr entry() const { return m_entry; }
   virtual void setSelected(bool s, bool cb);
   virtual void setSelected(bool s);
 
+  bool usesImage() const { return m_usesImage; }
+  void updatePixmap();
+
+  void update();
+
+protected:
+  virtual void calcRect(const QString& text = QString::null);
+  virtual void paintItem(QPainter* p, const QColorGroup& cg);
+  virtual void paintFocus(QPainter* p, const QColorGroup& cg);
+  void paintPixmap(QPainter* p, const QColorGroup& cg);
+  void paintText(QPainter* p, const QColorGroup& cg);
+
 private:
   Data::EntryPtr m_entry;
+  bool m_usesImage : 1;
 };
 
 } // end namespace

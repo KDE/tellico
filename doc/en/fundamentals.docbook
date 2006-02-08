@@ -56,7 +56,7 @@ of the data for a single entry, or an icon view of a group of entries, in the lo
 <title>&detailed-view;</title>
 
 <para>
-Any of the fields in the collections may be shown in the &detailed-view;, although <emphasis><link linkend="para">Paragraph</link></emphasis> and <emphasis><link linkend="table">Table</link></emphasis> fields will probably not be useful. Right-clicking on the header of the view opens a menu for selecting the visible fields. The columns may be resized and reordered in any way, and the settings will be saved between sessions.
+Any of the fields in the collections may be shown in the &detailed-view;, although <emphasis><link linkend="para">Paragraph</link></emphasis>, <emphasis><link linkend="image">Image</link></emphasis>, and <emphasis><link linkend="table">Table</link></emphasis> fields will probably not be useful. Right-clicking on the header of the view opens a menu for selecting the visible fields. The columns may be resized and reordered in any way, and the settings will be saved between sessions.
 </para>
 </sect2>
 
@@ -69,7 +69,7 @@ The number of entries in each group is shown next to the group name. Groups may 
 </para>
 
 <para id="people-group">
-When more than one field in the collection has <emphasis><link linkend="fields-dialog"><guilabel>Format as name</guilabel></link></emphasis> turned on, an additional group is added to combine all those fields into one single <emphasis>People</emphasis> pseudo-group.
+When more than one field in the collection has the <emphasis><link linkend="fields-dialog"><guilabel>Format as name</guilabel></link></emphasis> option turned on, an additional group is added to combine all those fields into one single <emphasis>People</emphasis> pseudo-group.
 </para>
 
 <para>
@@ -145,7 +145,7 @@ The statusbar is used to show you what &appname; is currently doing. It also inc
 
 <para>
 The &entry-editor; is used to add and modify entries in the collection. Double-clicking on an entry in either the &group-view; or the &detailed-view; opens the &entry-editor; with that entry. New entries may be created using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself.</para>
- 
+
 <para>Closing the &entry-editor; when changes have been made but not saved will cause a warning message to appear. The fields are grouped by category and appear in the order that they appear in the <link linkend="fields-dialog">&fields-dialog;</link>. They may also be reordered.
 </para>
 
@@ -173,12 +173,13 @@ For <link linkend="image"><emphasis>Image</emphasis></link> fields, the <guibutt
 </screenshot>
 
 <para>
-The edit widget also supports drag-and-drop. Dragging an image file from a &konqueror; window does the same thing as selecting the image in the File Selector. Dragging an image from the edit widget into a &konqueror; file manager window will save the image in that folder.
+The edit widget also supports drag-and-drop. Dragging an image file from a file-manager or browser window does the same thing as selecting the image in the File Selector. Dragging an image from the edit widget into a &konqueror; file manager window will save the image in that folder.
 </para>
 
 <warning>
 <para>
-Since the images are stored in the collection data file, too many images will cause &appname; to slow down significantly as well as generate a very large data file. The problem may be alleviated by limiting stored images to small thumbnails, or linking images using <link linkend="url">&URL;</link> fields.
+By default, the images are stored in the collection data file, keeping everything contained in one location. However, too many images will cause &appname; to slow down significantly as well result in a very large data file. Alternatively, &appname; can save the images separately, in the <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/data/</filename> directory. Loading and saving data files is much faster if images are stored separately, but the data files are no longer portable or archivable.
+Self-contained data files can always be created by using the <menuchoice><guimenu>File</guimenu><guimenu>Export</guimenu><guimenuitem>Export to Zip...</guimenuitem></menuchoice> menu item.
 </para>
 </warning>
 
@@ -201,7 +202,7 @@ Multiple entries may be edited at the same time by selecting more than one in ei
 </para>
 
 <para>
-Only enabled fields will be modified when the entries are saved, which makes large-scale editing much easier. For example, to set the Medium of all the video entries in the collection, and make sure the Medium field is enabled. Change it to <acronym>DVD</acronym>, then save the entries. Only the Medium field will be modified, preserving all the other field values for the entries.
+Only enabled fields will be modified when the entries are saved, which makes large-scale editing much easier. For example, to set the Medium of all the video entries in the collection, make sure the Medium field is enabled. Change it to <acronym>DVD</acronym>, then save the entries. Only the Medium field will be modified, preserving all the other field values for the entries.
 </para>
 
 <screenshot>
@@ -212,6 +213,24 @@ Only enabled fields will be modified when the entries are saved, which makes lar
 </mediaobject>
 </screenshot>
 
+</sect2>
+
+<sect2 id="updating-entries">
+<title>Updating Entry Data</title>
+
+<para>
+Entries may be automatically updated by querying the data sources available for the current collection type, which is very useful for combining information from multiple sources. For example, you may add a movie to your collection using
+the <link linkend="amazon-web-services">Amazon.com Web Services</link>, and then update the entry with additional
+information from the <link linkend="imdb">Internet Movie Database</link>.
+</para>
+
+<para>
+Only empty fields are updated! So if you want to update the movie cast, be sure to clear that data first, then run the updater. For <link linkend="externalexec">external scripts</link>, an update field must be specified in the source options.
+</para>
+
+<para>
+The entry updating may be started via the right-click menu for an entry, or by using the <menuchoice><guimenu>Collection</guimenu><guimenuitem>Update Entry</guimenuitem></menuchoice> menu item.
+</para>
 </sect2>
 
 </sect1>
@@ -391,7 +410,7 @@ Up to eight (8) rules may be used in the filter. The <guibutton>More</guibutton>
 </para>
 
 <para>
-Filters may be saved, so that all entries which match are grouped together in the &filter-view;. The view is dynamic, so ad entries are added or modified, the group is automatically updated. TO save the filter, enter a name in the tex box, and lick the <guibutton>Save Filter</guibutton> button.
+Filters may be saved, so that all entries which match are grouped together in the &filter-view;. The view is dynamic, so ad entries are added or modified, the group is automatically updated. To save the filter, enter a name in the text box, and lick the <guibutton>Save Filter</guibutton> button.
 </para>
 
 <para>

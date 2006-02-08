@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,6 +28,8 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class AlexandriaExporter : public Exporter {
+Q_OBJECT
+
 public:
   AlexandriaExporter() : Exporter() {}
 
@@ -44,7 +46,7 @@ public:
 private:
   static QString& escapeText(QString& str);
 
-  bool writeFile(const QDir& dir, const Data::Entry* entry);
+  bool writeFile(const QDir& dir, Data::ConstEntryPtr entry);
 };
 
   } // end namespace

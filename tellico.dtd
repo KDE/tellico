@@ -1,8 +1,8 @@
 <!--
    ================================================================
-   Tellico XML DTD version 8.0
+   Tellico XML DTD version 9.0
 
-   Copyright (c) 2004 Robby Stephenson
+   Copyright (c) 2006 Robby Stephenson
 
    This DTD describes the XML data files for the 
    Tellico application, which can be found at:
@@ -10,18 +10,18 @@
 
    The formal public identifer for this DTD should be:
    
-      "-//Robby Stephenson/DTD Tellico V8.0//EN"
+      "-//Robby Stephenson/DTD Tellico V9.0//EN"
 
    ================================================================
 -->
 <!ELEMENT tellico (collection+, borrowers?, filters?)>
-<!ATTLIST tellico syntaxVersion CDATA #FIXED "8">
+<!ATTLIST tellico syntaxVersion CDATA #FIXED "9">
 <!ATTLIST tellico xmlns CDATA #FIXED "http://periapsis.org/tellico/">
 
 <!ELEMENT collection (fields | bibtex-preamble | macros | entry |
 images | borrowers | filters)+>
 <!ATTLIST collection title CDATA #REQUIRED>
-<!ATTLIST collection type (1|2|3|4|5|6|7|8|9|10|11) #REQUIRED>
+<!ATTLIST collection type (1|2|3|4|5|6|7|8|9|10|11|12) #REQUIRED>
 <!ATTLIST collection entryTitle CDATA #IMPLIED>
 
 <!ELEMENT images (image+)>
@@ -93,7 +93,10 @@ plot | player | team | brand | location | quantity | front | back |
 mintmark | set | grade | service | obverse | reverse | issue | cover |
 description | scott | cancelled | hinged | centering | gummed |
 producer | appellation | varietal | vintage | type | drink-by |
-platform | publishers | developers | completed)+>
+platform | publishers | developers | completed |url | volume |
+mimetype | size | permissions | owner | group | created | modified |
+metainfos | icon | amazon | imdb | imdb-rating | alttitle |
+allcertification | address | abstract)+>
 <!ATTLIST entry id CDATA #REQUIRED>
 
 <!ELEMENT title (#PCDATA)>
@@ -141,6 +144,8 @@ platform | publishers | developers | completed)+>
 <!ELEMENT volume (#PCDATA)>
 <!ELEMENT crossref (#PCDATA)>
 <!ELEMENT note (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT abstract (#PCDATA)>
 
 <!-- music -->
 <!ELEMENT medium (#PCDATA)>
@@ -223,3 +228,25 @@ platform | publishers | developers | completed)+>
 <!ELEMENT developers (developer+)>
 <!ELEMENT developer (#PCDATA)>
 <!ELEMENT completed (#PCDATA)>
+
+<!-- file catalogs -->
+<!-- description is above -->
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT volume (#PCDATA)>
+<!ELEMENT mimetype (#PCDATA)>
+<!ELEMENT size (#PCDATA)>
+<!ELEMENT permissions (#PCDATA)>
+<!ELEMENT owner (#PCDATA)>
+<!ELEMENT group (#PCDATA)>
+<!ELEMENT created (#PCDATA)>
+<!ELEMENT modified (#PCDATA)>
+<!ELEMENT metainfos (metainfo+)>
+<!ELEMENT metainfo (#PCDATA)>
+<!ELEMENT icon (#PCDATA)>
+
+<!-- special -->
+<!ELEMENT amazon (#PCDATA)>
+<!ELEMENT imdb (#PCDATA)>
+<!ELEMENT imdb-rating (#PCDATA)>
+<!ELEMENT alttitle (#PCDATA)>
+<!ELEMENT allcertification (#PCDATA)>

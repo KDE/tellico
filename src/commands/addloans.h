@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,7 +28,7 @@ namespace Tellico {
 class AddLoans : public KCommand  {
 
 public:
-  AddLoans(Data::Borrower* borrower, Data::LoanVec loans, bool addToCalendar);
+  AddLoans(Data::BorrowerPtr borrower, Data::LoanVec loans, bool addToCalendar);
 
   virtual void execute();
   virtual void unexecute();

@@ -11,7 +11,7 @@
    ===================================================================
    Tellico XSLT file - used for printing
 
-   Copyright (C) 2004-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2006 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -83,9 +83,9 @@
 </xsl:template>
 
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 8 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 9 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'8'"/>
+  <xsl:with-param name="this-version" select="'9'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -27,7 +27,7 @@ class DateFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  DateFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  DateFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~DateFieldWidget() {}
 
   virtual QString text() const;

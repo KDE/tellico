@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -26,6 +26,7 @@
 
 #include <kdebug.h>
 #include <kurllabel.h>
+#include <klocale.h>
 
 #include <qlayout.h>
 #include <qwhatsthis.h>
@@ -44,7 +45,7 @@ using Tellico::GUI::FieldWidget;
 const QRegExp FieldWidget::s_semiColon = QRegExp(QString::fromLatin1("\\s*;\\s*"));
 const QRegExp FieldWidget::s_comma = QRegExp(QString::fromLatin1("\\s*,\\s*"));
 
-FieldWidget* FieldWidget::create(const Data::Field* field_, QWidget* parent_, const char* name_) {
+FieldWidget* FieldWidget::create(Data::FieldPtr field_, QWidget* parent_, const char* name_) {
   switch (field_->type()) {
     case Data::Field::Line:
       return new GUI::LineFieldWidget(field_, parent_, name_);
@@ -88,7 +89,7 @@ FieldWidget* FieldWidget::create(const Data::Field* field_, QWidget* parent_, co
   }
 }
 
-FieldWidget::FieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
+FieldWidget::FieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : QWidget(parent_, name_) {
   QHBoxLayout* l = new QHBoxLayout(this, 2, 2); // parent, margin, spacing
   l->addSpacing(4); // add some more space in the columns between widgets
@@ -97,11 +98,12 @@ FieldWidget::FieldWidget(const Data::Field* field_, QWidget* parent_, const char
   }
 
   Data::Field::Type type = field_->type();
+  QString s = i18n("Edit Label", "%1:").arg(field_->title());
   if(type == Data::Field::URL) {
     // set URL to null for now
-    m_label = new KURLLabel(QString::null, field_->title() + QChar(':'), this);
+    m_label = new KURLLabel(QString::null, s, this);
   } else {
-    m_label = new QLabel(field_->title() + QChar(':'), this);
+    m_label = new QLabel(s, this);
   }
   m_label->setFixedWidth(m_label->sizeHint().width());
   l->addWidget(m_label);
@@ -168,18 +170,22 @@ void FieldWidget::editMultiple(bool show_) {
 }
 
 void FieldWidget::registerWidget() {
-  m_label->setBuddy(widget());
+  QWidget* w = widget();
+  m_label->setBuddy(w);
+  if(w->isFocusEnabled()) {
+    setFocusProxy(w);
+  }
 
   QHBoxLayout* l = static_cast<QHBoxLayout*>(layout());
-  l->insertWidget(FIELD_EDIT_WIDGET_INDEX, widget(), m_expands ? 1 : 0 /*stretch*/);
+  l->insertWidget(FIELD_EDIT_WIDGET_INDEX, w, m_expands ? 1 : 0 /*stretch*/);
   if(!m_expands) {
     l->insertStretch(FIELD_EDIT_WIDGET_INDEX+1, 1 /*stretch*/);
   }
   updateGeometry();
 }
 
-void FieldWidget::updateField(Data::Field* oldField_, Data::Field* newField_) {
-  m_label->setText(newField_->title() + QString::fromLatin1(":"));
+void FieldWidget::updateField(Data::FieldPtr oldField_, Data::FieldPtr newField_) {
+  m_label->setText(i18n("Edit Label", "%1:").arg(newField_->title()));
   updateGeometry();
   QWhatsThis::add(this, newField_->description());
   updateFieldHook(oldField_, newField_);

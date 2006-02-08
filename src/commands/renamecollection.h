@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,14 +14,11 @@
 #ifndef TELLICO_RENAMECOLLECTION_H
 #define TELLICO_RENAMECOLLECTION_H
 
+#include "../datavectors.h"
+
 #include <kcommand.h>
 
-#include <qguardedptr.h>
-
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
   namespace Command {
 
 /**
@@ -29,14 +26,14 @@ namespace Tellico {
 */
 class RenameCollection : public KCommand {
 public:
-  RenameCollection(Data::Collection* coll, const QString& newTitle);
+  RenameCollection(Data::CollPtr coll, const QString& newTitle);
 
   virtual void execute();
   virtual void unexecute();
   virtual QString name() const;
 
 private:
-  QGuardedPtr<Data::Collection> m_coll;
+  Data::CollPtr m_coll;
   QString m_oldTitle;
   QString m_newTitle;
 };

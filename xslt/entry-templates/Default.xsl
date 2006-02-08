@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - classic template for viewing entry data
 
-   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
 
    Known Issues:
    o Dependent titles have no value in the entry element.
@@ -54,9 +54,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 8 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 9 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'8'"/>
+  <xsl:with-param name="this-version" select="'9'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -67,12 +67,10 @@
         margin: 4px;
         padding: 0px;
         font-family: "<xsl:value-of select="$font"/>";
-        color: #000;
-        background-color: #fff;
+        color: <xsl:value-of select="$fgcolor"/>;
+        background-color: <xsl:value-of select="$bgcolor"/>;
    }
    h1.title {
-        color: <xsl:value-of select="$color2"/>;
-        background-color: <xsl:value-of select="$color1"/>;
         font-size: 1.8em;
         padding: 0px;
         padding-top: 2px;
@@ -90,19 +88,25 @@
    tr.category {
         font-weight: bold;
         font-size: 1.2em;
-        color: #fff;
-        background-color: #666;
+        color: <xsl:value-of select="$color1"/>;
+        background-color: <xsl:value-of select="$color2"/>;
         text-align: center;
    }
    th {
         font-weight: bold;
         text-align: left;
-        background-color: #ccc;
+        color: #fff;
+        background-color: #666;
+        padding-left: 3px;
+        padding-right: 3px;
+   }
+   td {
         padding-left: 3px;
         padding-right: 3px;
    }
    p {
         margin-top: 0px;
+        text-align: justify;
    }
    img {
         border: 0px solid;
@@ -251,7 +255,25 @@
         <!-- look at number of columns -->
         <xsl:choose>
          <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
-          <table>
+          <table width="100%">
+           <xsl:if test="tc:prop[@name = 'column1']">
+            <thead>
+             <tr>
+              <th width="50%">
+               <xsl:value-of select="tc:prop[@name = 'column1']"/>
+              </th>
+              <th width="50%">
+               <xsl:value-of select="tc:prop[@name = 'column2']"/>
+              </th>
+              <xsl:call-template name="columnTitle">
+               <xsl:with-param name="index" select="3"/>
+               <xsl:with-param name="max" select="tc:prop[@name = 'columns']"/>
+               <xsl:with-param name="elem" select="'th'"/>
+               <xsl:with-param name="field" select="."/>
+              </xsl:call-template>
+             </tr>
+            </thead>
+           </xsl:if>
            <tbody>
             <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
              <tr>

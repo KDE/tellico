@@ -32,7 +32,7 @@
 #ifndef ZZDLGDEF_H
 #define ZZDLGDEF_H
 
-#include "config.h"
+#include "btconfig.h"
 
 #ifndef zzchar_t
 #ifdef ZZWCHAR_T

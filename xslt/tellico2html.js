@@ -10,12 +10,24 @@ function showAll() {
   }
 }
 
-function searchMovies() {
+function checkQuery() {
+  s = queryVariable("searchText");
+  if(s=="") {
+    return;
+  }
+  doSearch(s);
+}
+
+function searchRows() {
   s = document.getElementById("searchText").value;
   if(s=="") {
     showAll();
     return;
   }
+  doSearch(s);
+}
+
+function doSearch(s) {
   re = new RegExp(s,"i")
   tbl = document.getElementsByTagName("table")[0];
   bdy = tbl.getElementsByTagName("tbody")[0];
@@ -25,8 +37,8 @@ function searchMovies() {
     s = ts_getInnerText(rows[i]);
     if(re.test(s)) {
       rows[i].style.display="table-row";
-      if(j % 2) { rows[i].className='entry0'; }
-      else { rows[i].className='entry1'; }
+      if(j % 2) { rows[i].className='entry1'; }
+      else { rows[i].className='entry0'; }
       j++;
     } else {
       rows[i].style.display="none";
@@ -117,8 +129,8 @@ function ts_resortTable(lnk) {
 
     // We appendChild rows that already exist to the tbody, so it moves them rather than creating new ones
     for (i=0;i<newRows.length;i++) {
-       if(i % 2) { newRows[i].className='entry0'; }
-       else { newRows[i].className='entry1'; }
+       if(i % 2) { newRows[i].className='entry1'; }
+       else { newRows[i].className='entry0'; }
        table.tBodies[0].appendChild(newRows[i]);
     }
 }
@@ -195,4 +207,16 @@ function addEvent(elm, evType, fn, useCapture) {
     var r = elm.attachEvent("on"+evType, fn);
     return r;
   }
+}
+
+function queryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+  return "";
 }

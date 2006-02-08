@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -27,7 +27,7 @@ class RatingFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  RatingFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  RatingFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~RatingFieldWidget() {}
 
   virtual QString text() const;
@@ -38,7 +38,7 @@ public slots:
 
 protected:
   virtual QWidget* widget();
-  virtual void updateFieldHook(Data::Field* oldField, Data::Field* newField);
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
 private:
   RatingWidget* m_rating;

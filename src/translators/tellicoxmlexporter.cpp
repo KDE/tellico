@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,17 +22,16 @@
 #include "../groupiterator.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
+#include "../tellico_debug.h"
 #include "tellico_xml.h"
+#include "../document.h" // needed for sorting groups
+#include "../translators/bibtexhandler.h" // needed for cleaning text
 
 #include <klocale.h>
 #include <kconfig.h>
 #include <kmdcodec.h>
-#include <kdebug.h>
 #include <kglobal.h>
-#include <kdeversion.h>
-#if KDE_IS_VERSION(3,1,90)
 #include <kcalendarsystem.h>
-#endif
 
 #include <qlayout.h>
 #include <qgroupbox.h>
@@ -42,6 +41,14 @@
 #include <qtextcodec.h>
 
 using Tellico::Export::TellicoXMLExporter;
+
+TellicoXMLExporter::TellicoXMLExporter() : Exporter(),
+      m_includeImages(false), m_includeGroups(false), m_widget(0) {
+}
+
+TellicoXMLExporter::TellicoXMLExporter(Data::CollPtr coll) : Exporter(coll),
+      m_includeImages(false), m_includeGroups(false), m_widget(0) {
+}
 
 QString TellicoXMLExporter::formatString() const {
   return i18n("XML");
@@ -89,13 +96,13 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   exportCollectionXML(dom, root, options() & Export::ExportFormatted);
 
   // clear image list
-  m_imageList.clear();
+  m_images.clear();
 
   return dom;
 }
 
 void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& parent_, bool format_) const {
-  const Data::Collection* coll = collection();
+  Data::CollPtr coll = collection();
   if(!coll) {
     kdWarning() << "TellicoXMLExporter::exportCollectionXML() - no collection pointer!" << endl;
     return;
@@ -104,7 +111,8 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   QDomElement collElem = dom_.createElement(QString::fromLatin1("collection"));
   collElem.setAttribute(QString::fromLatin1("type"),       coll->type());
   collElem.setAttribute(QString::fromLatin1("title"),      coll->title());
-  collElem.setAttribute(QString::fromLatin1("entryTitle"), coll->entryTitle());
+// never used
+//  collElem.setAttribute(QString::fromLatin1("entryTitle"), coll->entryTitle());
 
   QDomElement fieldsElem = dom_.createElement(QString::fromLatin1("fields"));
   collElem.appendChild(fieldsElem);
@@ -115,7 +123,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   }
 
   if(coll->type() == Data::Collection::Bibtex) {
-    const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(coll);
+    const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(coll.data());
     if(!c->preamble().isEmpty()) {
       QDomElement preElem = dom_.createElement(QString::fromLatin1("bibtex-preamble"));
       preElem.appendChild(dom_.createTextNode(c->preamble()));
@@ -136,14 +144,16 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
     }
   }
 
-  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
-    exportEntryXML(dom_, collElem, entryIt, format_);
+  Data::EntryVec evec = entries();
+  for(Data::EntryVec::Iterator entry = evec.begin(); entry != evec.end(); ++entry) {
+    exportEntryXML(dom_, collElem, entry, format_);
   }
 
-  if(!m_imageList.isEmpty() || !(options() && Export::ExportImages)) {
+  if(!m_images.isEmpty() && (options() & Export::ExportImages)) {
     QDomElement imgsElem = dom_.createElement(QString::fromLatin1("images"));
     collElem.appendChild(imgsElem);
-    for(QStringList::ConstIterator it = m_imageList.begin(); it != m_imageList.end(); ++it) {
+    QStringList imageIds = m_images.toList();
+    for(QStringList::ConstIterator it = imageIds.begin(); it != imageIds.end(); ++it) {
       exportImageXML(dom_, imgsElem, ImageFactory::imageById(*it));
     }
   }
@@ -176,7 +186,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   }
 }
 
-void TellicoXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_, Data::Field* field_) const {
+void TellicoXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_, Data::FieldPtr field_) const {
   QDomElement elem = dom_.createElement(QString::fromLatin1("field"));
 
   elem.setAttribute(QString::fromLatin1("name"),     field_->name());
@@ -209,7 +219,7 @@ void TellicoXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_
   parent_.appendChild(elem);
 }
 
-void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_, const Data::Entry* entry_, bool format_) const {
+void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_, Data::EntryPtr entry_, bool format_) const {
   QDomElement entryElem = dom_.createElement(QString::fromLatin1("entry"));
   entryElem.setAttribute(QString::fromLatin1("id"), entry_->id());
 
@@ -219,7 +229,11 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     QString fieldName = fIt->name();
 
     // Date fields are special, don't format in export
-    QString fieldValue = (format_ && fIt->type() != Data::Field::Date) ? entry_->formattedField(fieldName) : entry_->field(fieldName);
+    QString fieldValue = (format_ && fIt->type() != Data::Field::Date) ? entry_->formattedField(fieldName)
+                                                                       : entry_->field(fieldName);
+    if(options() & ExportClean) {
+      BibtexHandler::cleanText(fieldValue);
+    }
 
     // if empty, then no field element is added and just continue
     if(fieldValue.isEmpty()) {
@@ -264,11 +278,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       entryElem.appendChild(fieldElem);
       // Date fields get special treatment
       if(fIt->type() == Data::Field::Date) {
-#if KDE_IS_VERSION(3,1,90)
         fieldElem.setAttribute(QString::fromLatin1("calendar"), KGlobal::locale()->calendar()->calendarName());
-#else
-        fieldElem.setAttribute(QString::fromLatin1("calendar"), QString::fromLatin1("gregorian"));
-#endif
         QStringList s = QStringList::split('-', fieldValue, true);
         if(s.count() > 0 && !s[0].isEmpty()) {
           QDomElement e = dom_.createElement(QString::fromLatin1("year"));
@@ -285,8 +295,6 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
           fieldElem.appendChild(e);
           e.appendChild(dom_.createTextNode(s[2]));
         }
-// KURL::relativeURL() is new to KDE 3.2.x
-#if KDE_IS_VERSION(3,1,90)
       } else if(fIt->type() == Data::Field::URL &&
                 fIt->property(QString::fromLatin1("relative")) == Latin1Literal("true") &&
                 !url().isEmpty()) {
@@ -294,7 +302,6 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
         KURL old_url(Kernel::self()->URL(), fieldValue);
         KURL new_url = KURL::relativeURL(url(), old_url);
         fieldElem.appendChild(dom_.createTextNode(new_url.url()));
-#endif
       } else {
         fieldElem.appendChild(dom_.createTextNode(fieldValue));
       }
@@ -303,9 +310,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     if(fIt->type() == Data::Field::Image) {
       // possible to have more than one entry with the same image
       // only want to include it in the output xml once
-      if(m_imageList.findIndex(fieldValue) == -1) {
-        m_imageList += fieldValue;
-      }
+      m_images.add(fieldValue);
     }
   } // end field loop
 
@@ -321,8 +326,8 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
 
   QDomElement imgElem = dom_.createElement(QString::fromLatin1("image"));
   imgElem.setAttribute(QString::fromLatin1("format"), img_.format());
-  imgElem.setAttribute(QString::fromLatin1("id"), img_.id());
-  imgElem.setAttribute(QString::fromLatin1("width"), img_.width());
+  imgElem.setAttribute(QString::fromLatin1("id"),     img_.id());
+  imgElem.setAttribute(QString::fromLatin1("width"),  img_.width());
   imgElem.setAttribute(QString::fromLatin1("height"), img_.height());
   if(m_includeImages) {
     QCString imgText = KCodecs::base64Encode(img_.byteArray());
@@ -342,7 +347,8 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
     QDomElement groupElem = dom_.createElement(QString::fromLatin1("group"));
     groupElem.setAttribute(QString::fromLatin1("title"), gIt.group()->groupName());
     // now iterate over all entry items in the group
-    for(Data::EntryVec::Iterator eIt = gIt.group()->begin(); eIt != gIt.group()->end(); ++eIt) {
+    Data::EntryVec sorted = Data::Document::self()->sortEntries(*gIt.group());
+    for(Data::EntryVec::Iterator eIt = sorted.begin(); eIt != sorted.end(); ++eIt) {
       if(!exportAll && !vec.contains(eIt)) {
         continue;
       }
@@ -356,7 +362,7 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
   }
 }
 
-void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent_, const Filter* filter_) const {
+void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent_, FilterPtr filter_) const {
   QDomElement filterElem = dom_.createElement(QString::fromLatin1("filter"));
   filterElem.setAttribute(QString::fromLatin1("name"), filter_->name());
 
@@ -396,7 +402,7 @@ void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent
 }
 
 void TellicoXMLExporter::exportBorrowerXML(QDomDocument& dom_, QDomElement& parent_,
-                                           const Data::Borrower* borrower_) const {
+                                           Data::BorrowerPtr borrower_) const {
   if(borrower_->isEmpty()) {
     return;
   }
@@ -454,3 +460,5 @@ void TellicoXMLExporter::saveOptions(KConfig* config_) {
   KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   config_->writeEntry("Include Images", m_includeImages);
 }
+
+#include "tellicoxmlexporter.moc"

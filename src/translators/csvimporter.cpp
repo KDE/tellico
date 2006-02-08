@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,14 +17,15 @@
 #include "../document.h"
 #include "../field.h"
 #include "../entry.h"
+#include "../progressmanager.h"
+#include "../tellico_debug.h"
 
-#include <kdebug.h>
-#include <klocale.h>
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <knuminput.h>
 #include <kpushbutton.h>
-#include <kaccelmanager.h>
+#include <kapplication.h>
+#include <kiconloader.h>
 
 #include <qgroupbox.h>
 #include <qlayout.h>
@@ -47,11 +48,12 @@ CSVImporter::CSVImporter(const KURL& url_) : Tellico::Import::TextImporter(url_)
     m_existingCollection(0),
     m_firstRowHeader(false),
     m_delimiter(QString::fromLatin1(",")),
+    m_cancelled(false),
     m_widget(0),
     m_table(0) {
 }
 
-Tellico::Data::Collection* CSVImporter::collection() {
+Tellico::Data::CollPtr CSVImporter::collection() {
   // don't just check if m_coll is non-null since the collection can be created elsewhere
   if(m_coll && m_coll->entryCount() > 0) {
     return m_coll;
@@ -89,26 +91,31 @@ Tellico::Data::Collection* CSVImporter::collection() {
     t.readLine();
   }
 
-  int numLines = str.contains(QChar('\n'));
-  int j = 0;
-  for(QString line = t.readLine(); !line.isNull(); line = t.readLine(), ++j) {
+  const uint length = str.length();
+  const uint stepSize = KMAX(s_stepSize, length/100);
+
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
+  item.setTotalSteps(length);
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+
+  uint j = 0;
+  for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), j += line.length()) {
     bool empty = true;
-    Data::Entry* entry = new Data::Entry(m_coll);
+    Data::EntryPtr entry = new Data::Entry(m_coll);
     QStringList values = splitLine(line);
-    for(unsigned i = 0; i < cols.size(); ++i) {
+    for(uint i = 0; i < cols.size(); ++i) {
       entry->setField(names[i], values[cols[i]].simplifyWhiteSpace());
       if(empty && !entry->field(names[i]).isEmpty()) {
         empty = false;
       }
     }
-    if(empty) {
-      delete entry;
-    } else {
+    if(!empty) {
       m_coll->addEntry(entry);
     }
 
-    if(j%s_stepSize == 0) {
-      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(numLines));
+    if(j%stepSize == 0) {
+      ProgressManager::self()->setProgress(this, j);
+      kapp->processEvents();
     }
   }
 
@@ -139,7 +146,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   QWidget* w = new QWidget(box);
   box->setStretchFactor(w, 1);
 
-  m_checkFirstRowHeader = new QCheckBox(i18n("First row contains field titles"), group);
+  m_checkFirstRowHeader = new QCheckBox(i18n("&First row contains field titles"), group);
   m_checkFirstRowHeader->setChecked(m_firstRowHeader);
   QWhatsThis::add(m_checkFirstRowHeader, i18n("If checked, the first row is used as field titles."));
   connect(m_checkFirstRowHeader, SIGNAL(toggled(bool)), SLOT(slotFirstRowHeader(bool)));
@@ -153,23 +160,23 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   connect(m_delimiterGroup, SIGNAL(clicked(int)), SLOT(slotDelimiter()));
 
   m_radioComma = new QRadioButton(m_delimiterGroup);
-  m_radioComma->setText(i18n("Comma"));
+  m_radioComma->setText(i18n("&Comma"));
   m_radioComma->setChecked(true);
   QWhatsThis::add(m_radioComma, i18n("Use a comma as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioComma, 1, 0);
 
   m_radioSemicolon = new QRadioButton( m_delimiterGroup);
-  m_radioSemicolon->setText(i18n("Semicolon"));
+  m_radioSemicolon->setText(i18n("&Semicolon"));
   QWhatsThis::add(m_radioSemicolon, i18n("Use a semi-colon as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioSemicolon, 1, 1);
 
   m_radioTab = new QRadioButton(m_delimiterGroup);
-  m_radioTab->setText(i18n("Tab"));
+  m_radioTab->setText(i18n("Ta&b"));
   QWhatsThis::add(m_radioTab, i18n("Use a tab as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioTab, 2, 0);
 
   m_radioOther = new QRadioButton(m_delimiterGroup);
-  m_radioOther->setText(i18n("Other:"));
+  m_radioOther->setText(i18n("Ot&her:"));
   QWhatsThis::add(m_radioOther, i18n("Use a custom string as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioOther, 2, 1);
 
@@ -210,25 +217,25 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   hbox->setSpacing(5);
   QWhatsThis::add(hbox, i18n("<qt>Set each column to correspond to a field in the collection by choosing "
                              "a column, selecting the field, then clicking the <i>Set</i> button.</qt>"));
-  lab = new QLabel(i18n("Column:"), hbox);
+  lab = new QLabel(i18n("Co&lumn:"), hbox);
   m_colSpinBox = new KIntSpinBox(hbox);
   m_colSpinBox->setMinValue(1);
   connect(m_colSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSelectColumn(int)));
   lab->setBuddy(m_colSpinBox);
 
-  lab = new QLabel(i18n("Data field in this column:"), hbox);
+  lab = new QLabel(i18n("&Data field in this column:"), hbox);
   m_comboField = new KComboBox(hbox);
   connect(m_comboField, SIGNAL(activated(int)), SLOT(slotFieldChanged(int)));
   lab->setBuddy(m_comboField);
 
-  m_setColumnBtn = new KPushButton(i18n("Assign Field"), hbox);
+  m_setColumnBtn = new KPushButton(i18n("&Assign Field"), hbox);
+  m_setColumnBtn->setIconSet(SmallIconSet(QString::fromLatin1("apply")));
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
 
   slotTypeChanged(m_comboType->currentText());
   fillTable();
 
   l->addStretch(1);
-  KAcceleratorManager::manage(m_widget);
   return m_widget;
 }
 
@@ -237,14 +244,15 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
 // actual quotes may or may not be doubled
 QStringList CSVImporter::splitLine(const QString& line_) {
   // double quote
-  QString dq = QString(s_quote) + QString(s_quote);
+  QString dq = QString(s_quote) + s_quote;
   // delimiter length
-  unsigned dn = m_delimiter.length();
+  uint dn = m_delimiter.length();
   // list of eventual field values
   QStringList values;
   if(dn == 0) {
     return values;
   }
+
   // temporary string to hold splits, and cumulative string for quoted fields
   QString tmp, str;
   // are we inside a quoted field or not
@@ -325,9 +333,10 @@ void CSVImporter::fillTable() {
 
   int maxCols = 0;
   // want first two lines
+  QString line;
   for(int row = 0; row < m_table->numRows(); ++row) {
-    QString line = t.readLine();
-//    kdDebug() << "CSVImporter::fillTable() - line is\n" << line << endl;
+    line = t.readLine();
+//    myDebug() << "CSVImporter::fillTable() - line is\n" << line << endl;
     QStringList values = splitLine(line);
     if(static_cast<int>(values.count()) > m_table->numCols()) {
       m_table->setNumCols(values.count());
@@ -351,8 +360,6 @@ void CSVImporter::slotTypeChanged(const QString& name_) {
   // iterate over the collection names until it matches the text of the combo box
   for(CollectionNameMap::Iterator it = m_nameMap.begin(); it != m_nameMap.end(); ++it) {
     if(it.data() == name_) {
-    // delete the old collection
-      delete m_coll;
       m_coll = CollectionFactory::collection(it.key(), true);
       break;
     }
@@ -375,12 +382,13 @@ void CSVImporter::slotFirstRowHeader(bool b_) {
 
 void CSVImporter::slotDelimiter() {
   if(m_radioComma->isChecked()) {
-    m_delimiter = QString::fromLatin1(",");
+    m_delimiter = ',';
   } else if(m_radioSemicolon->isChecked()) {
-    m_delimiter = QString::fromLatin1(";");
+    m_delimiter = ';';
   } else if(m_radioTab->isChecked()) {
-    m_delimiter = QString::fromLatin1("\t");
+    m_delimiter = '\t';
   } else {
+    m_editOther->setFocus();
     m_delimiter = m_editOther->text();
   }
   if(!m_delimiter.isEmpty()) {
@@ -439,7 +447,7 @@ void CSVImporter::updateHeader(bool force_) {
     return;
   }
 
-  Data::Collection* c = m_existingCollection ? m_existingCollection : m_coll;
+  Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
   for(int col = 0; col < m_table->numCols(); ++col) {
     if(m_firstRowHeader && m_firstRowHeader
        && c->fieldByTitle(m_table->text(0, col)) != 0) {
@@ -456,8 +464,8 @@ void CSVImporter::slotFieldChanged(int idx_) {
     return;
   }
 
-  Data::Collection* c = m_existingCollection ? m_existingCollection : m_coll;
-  unsigned count = c->fieldTitles().count();
+  Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
+  uint count = c->fieldTitles().count();
   CollectionFieldsDialog dlg(c, m_widget);
 //  dlg.setModal(true);
   if(dlg.exec() == QDialog::Accepted) {
@@ -472,8 +480,8 @@ void CSVImporter::slotFieldChanged(int idx_) {
 }
 
 void CSVImporter::slotActionChanged(int action_) {
-  Data::Collection* m_currColl = Data::Document::self()->collection();
-  if(!m_currColl) {
+  Data::CollPtr currColl = Data::Document::self()->collection();
+  if(!currColl) {
     m_existingCollection = 0;
     return;
   }
@@ -492,8 +500,8 @@ void CSVImporter::slotActionChanged(int action_) {
     case Import::Append:
     case Import::Merge:
       m_comboType->clear();
-      m_comboType->insertItem(m_nameMap[m_currColl->type()]);
-      m_existingCollection = m_currColl;
+      m_comboType->insertItem(m_nameMap[currColl->type()]);
+      m_existingCollection = currColl;
       break;
 
 
@@ -501,6 +509,10 @@ void CSVImporter::slotActionChanged(int action_) {
       break;
   }
   slotTypeChanged(m_comboType->currentText());
+}
+
+void CSVImporter::slotCancel() {
+  m_cancelled = true;
 }
 
 #include "csvimporter.moc"

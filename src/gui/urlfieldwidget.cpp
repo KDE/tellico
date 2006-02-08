@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,7 +19,6 @@
 #include <klineedit.h>
 #include <kurlrequester.h>
 #include <kurllabel.h>
-#include <kdeversion.h>
 
 using Tellico::GUI::URLFieldWidget;
 
@@ -33,7 +32,7 @@ QString URLFieldWidget::URLCompletion::makeCompletion(const QString& text_) {
   return KURLCompletion::makeCompletion(text_);
 }
 
-URLFieldWidget::URLFieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
+URLFieldWidget::URLFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : FieldWidget(field_, parent_, name_), m_run(0) {
 
   m_requester = new KURLRequester(this);
@@ -56,12 +55,7 @@ URLFieldWidget::~URLFieldWidget() {
 
 QString URLFieldWidget::text() const {
   if(m_isRelative) {
-#if KDE_IS_VERSION(3,1,90)
     return KURL::relativeURL(Kernel::self()->URL(), m_requester->url());
-#else
-    kdWarning() << "KDE 3.2 or higher is required to use relative URLs." << endl;
-    return m_requester->url();
-#endif
   }
   return m_requester->url();
 }
@@ -82,7 +76,7 @@ void URLFieldWidget::clear() {
   editMultiple(false);
 }
 
-void URLFieldWidget::updateFieldHook(Data::Field*, Data::Field* newField_) {
+void URLFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_) {
   m_isRelative = newField_->property(QString::fromLatin1("relative")) == Latin1Literal("true");
 }
 

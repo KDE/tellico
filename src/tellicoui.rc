@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="14" name="tellico">
+<kpartgui version="19" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -16,6 +16,7 @@
     <Action name="new_card_collection"/>
     <Action name="new_wine_collection"/>
     <Action name="new_game_collection"/>
+    <Action name="new_file_catalog"/>
     <Action name="new_custom_collection"/>
    </Menu>
    <Menu name="file_import">
@@ -23,20 +24,25 @@
     <Action name="file_import_tellico"/>
     <Action name="file_import_csv"/>
     <Separator/>
-    <Action name="file_import_freedb"/>
-    <Action name="file_import_audiofile"/>
-    <Separator/>
     <Action name="file_import_alexandria"/>
     <Action name="file_import_bibtex"/>
     <Action name="file_import_bibtexml"/>
     <Action name="file_import_mods"/>
     <Action name="file_import_ris"/>
     <Separator/>
+    <Action name="file_import_freedb"/>
+    <Action name="file_import_audiofile"/>
+    <Separator/>
+    <Action name="file_import_gcfilms"/>
+    <Separator/>
+    <Action name="file_import_filelisting"/>
+    <Separator/>
     <Action name="file_import_xslt"/>
    </Menu>
    <Menu name="file_export">
     <text>&amp;Export</text>
     <Action name="file_export_xml"/>
+    <Action name="file_export_zip"/>
     <Action name="file_export_html"/>
     <Action name="file_export_csv"/>
     <Action name="file_export_pilotdb"/>
@@ -45,6 +51,8 @@
     <Action name="file_export_onix"/>
     <Action name="file_export_bibtex"/>
     <Action name="file_export_bibtexml"/>
+    <Separator/>
+    <Action name="file_export_gcfilms"/>
     <Separator/>
     <Action name="file_export_xslt"/>
    </Menu>
@@ -58,6 +66,12 @@
    <Action name="coll_edit_entry"/>
    <Action name="coll_copy_entry"/>
    <Action name="coll_delete_entry"/>
+   <Menu name="coll_update_entry">
+    <text>&amp;Update Entry</text>
+    <Action name="update_entry_all"/>
+    <Separator/>
+    <ActionList name="update_entry_actions"/>
+   </Menu>
    <Separator/>
    <Action name="coll_checkout"/>
    <Action name="coll_checkin"/>
@@ -68,7 +82,9 @@
    <Separator/>
    <Action name="coll_convert_bibliography"/>
    <Action name="coll_string_macros"/>
-   <Action name="coll_cite_entry"/>
+   <Action name="cite_clipboard"/>
+   <Action name="cite_lyxpipe"/>
+   <Action name="cite_openoffice"/>
   </Menu>
   <Menu name="settings">
    <Action append="show_merge" name="toggle_collection_bar"/>
@@ -102,4 +118,60 @@
   <Action name="quick_filter"/>
   <Action name="filter_dialog"/>
  </ToolBar>
+
+<State name="collection_reset">
+ <Disable>
+  <Action name="file_export_alexandria"/>
+  <Action name="file_export_onix"/>
+  <Action name="file_export_bibtex"/>
+  <Action name="file_export_bibtexml"/>
+  <Action name="file_export_gcfilms"/>
+  <Action name="coll_convert_bibliography"/>
+  <Action name="coll_string_macros"/>
+  <Action name="cite_clipboard"/>
+  <Action name="cite_lyxpipe"/>
+  <Action name="cite_openoffice"/>
+ </Disable>
+</State>
+
+<State name="is_book">
+ <Enable>
+  <Action name="file_export_alexandria"/>
+  <Action name="file_export_onix"/>
+  <Action name="coll_convert_bibliography"/>
+ </Enable>
+</State>
+
+<State name="is_bibliography">
+ <Enable>
+  <Action name="file_export_alexandria"/>
+  <Action name="file_export_onix"/>
+  <Action name="file_export_bibtex"/>
+  <Action name="file_export_bibtexml"/>
+  <Action name="coll_string_macros"/>
+<!-- cite actions taken care in selection code
+  <Action name="cite_clipboard"/>
+  <Action name="cite_lyxpipe"/>
+  <Action name="cite_openoffice"/>
+ -->
+ </Enable>
+</State>
+
+<State name="is_video">
+ <Enable>
+  <Action name="file_export_gcfilms"/>
+ </Enable>
+</State>
+
+<State name="empty_selection">
+ <Disable>
+  <Action name="coll_edit_entry"/>
+  <Action name="coll_copy_entry"/>
+  <Action name="coll_delete_entry"/>
+  <Menu name="coll_update_entry"/>
+  <Action name="update_entry_all"/>
+  <Action name="coll_checkout"/>
+ </Disable>
+</State>
+
 </kpartgui>

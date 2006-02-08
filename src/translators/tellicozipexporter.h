@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,8 +23,10 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class TellicoZipExporter : public Exporter {
+Q_OBJECT
+
 public:
-  TellicoZipExporter() : Exporter() {}
+  TellicoZipExporter() : Exporter(), m_includeImages(true), m_cancelled(false) {}
 
   virtual bool exec();
   virtual QString formatString() const;
@@ -34,6 +36,15 @@ public:
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual void readOptions(KConfig*) {}
   virtual void saveOptions(KConfig*) {}
+
+  void setIncludeImages(bool b) { m_includeImages = b; }
+
+public slots:
+  void slotCancel();
+
+private:
+  bool m_includeImages : 1;
+  bool m_cancelled : 1;
 };
 
   } // end namespace

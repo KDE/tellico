@@ -65,9 +65,10 @@ am_libgui_a_OBJECTS = comboboxproxy.$(OBJEXT) counteditem.$(OBJEXT) \
 	tablefieldwidget.$(OBJEXT) imagefieldwidget.$(OBJEXT) \
 	datefieldwidget.$(OBJEXT) imagewidget.$(OBJEXT) \
 	fieldwidget.$(OBJEXT) ratingwidget.$(OBJEXT) \
-	ratingfieldwidget.$(OBJEXT)
+	ratingfieldwidget.$(OBJEXT) overlaywidget.$(OBJEXT) \
+	progress.$(OBJEXT) listboxtext.$(OBJEXT)
 #>- libgui_a_OBJECTS = $(am_libgui_a_OBJECTS)
-#>+ 14
+#>+ 15
 libgui_a_final_OBJECTS = libgui_a.all_cpp.o 
 libgui_a_nofinal_OBJECTS = comboboxproxy.$(OBJEXT) counteditem.$(OBJEXT) \
 	datewidget.$(OBJEXT) tabcontrol.$(OBJEXT) \
@@ -79,7 +80,8 @@ libgui_a_nofinal_OBJECTS = comboboxproxy.$(OBJEXT) counteditem.$(OBJEXT) \
 	tablefieldwidget.$(OBJEXT) imagefieldwidget.$(OBJEXT) \
 	datefieldwidget.$(OBJEXT) imagewidget.$(OBJEXT) \
 	fieldwidget.$(OBJEXT) ratingwidget.$(OBJEXT) \
-	ratingfieldwidget.$(OBJEXT)
+	ratingfieldwidget.$(OBJEXT) overlaywidget.$(OBJEXT) \
+	progress.$(OBJEXT) listboxtext.$(OBJEXT)
 @KDE_USE_FINAL_FALSE@libgui_a_OBJECTS = $(libgui_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libgui_a_OBJECTS = $(libgui_a_final_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -125,6 +127,7 @@ CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CPPUMAKER = @CPPUMAKER@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -219,6 +222,10 @@ MSGFMT = @MSGFMT@
 NOOPT_CFLAGS = @NOOPT_CFLAGS@
 NOOPT_CXXFLAGS = @NOOPT_CXXFLAGS@
 OBJEXT = @OBJEXT@
+OFFICE_SDK_includes = @OFFICE_SDK_includes@
+OFFICE_libadd = @OFFICE_libadd@
+OFFICE_libdir = @OFFICE_libdir@
+OFFICE_registry = @OFFICE_registry@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -248,6 +255,8 @@ USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
+WITH_OOO_FALSE = @WITH_OOO_FALSE@
+WITH_OOO_TRUE = @WITH_OOO_TRUE@
 WOVERLOADED_VIRTUAL = @WOVERLOADED_VIRTUAL@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -338,13 +347,11 @@ x_libraries = @x_libraries@
 INCLUDES = $(all_includes)
 noinst_LIBRARIES = libgui.a
 libgui_a_SOURCES = comboboxproxy.cpp counteditem.cpp datewidget.cpp \
-	tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp \
-	richtextlabel.cpp lineedit.cpp boolfieldwidget.cpp \
-	choicefieldwidget.cpp linefieldwidget.cpp \
-	numberfieldwidget.cpp parafieldwidget.cpp urlfieldwidget.cpp \
-	tablefieldwidget.cpp imagefieldwidget.cpp datefieldwidget.cpp \
-	imagewidget.cpp fieldwidget.cpp \
-	ratingwidget.cpp ratingfieldwidget.cpp
+	tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp richtextlabel.cpp \
+	lineedit.cpp boolfieldwidget.cpp choicefieldwidget.cpp linefieldwidget.cpp \
+	numberfieldwidget.cpp parafieldwidget.cpp urlfieldwidget.cpp tablefieldwidget.cpp \
+	imagefieldwidget.cpp datefieldwidget.cpp imagewidget.cpp fieldwidget.cpp ratingwidget.cpp \
+	ratingfieldwidget.cpp overlaywidget.cpp progress.cpp listboxtext.cpp
 
 #>- libgui_a_METASOURCES = AUTO
 KDE_OPTIONS = noautodist
@@ -369,7 +376,10 @@ urlfieldwidget.h urlfieldwidget.cpp \
 ratingwidget.h ratingwidget.cpp \
 imagewidget.h imagewidget.cpp \
 fieldwidget.h fieldwidget.cpp \
-ratingfieldwidget.h ratingfieldwidget.cpp
+ratingfieldwidget.h ratingfieldwidget.cpp \
+overlaywidget.h overlaywidget.cpp \
+progress.h progress.cpp \
+listboxtext.h listboxtext.cpp
 
 CLEANFILES = *~
 #>- all: all-am
@@ -446,9 +456,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/kwidgetlister.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lineedit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/linefieldwidget.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/listboxtext.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/listview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/numberfieldwidget.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/overlaywidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/parafieldwidget.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/progress.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ratingfieldwidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ratingwidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/richtextlabel.Po@am__quote@
@@ -722,6 +735,13 @@ listview.moc: $(srcdir)/listview.h
 mocs: listview.moc
 
 #>+ 3
+overlaywidget.moc: $(srcdir)/overlaywidget.h
+	$(MOC) $(srcdir)/overlaywidget.h -o overlaywidget.moc
+
+#>+ 2
+mocs: overlaywidget.moc
+
+#>+ 3
 richtextlabel.moc: $(srcdir)/richtextlabel.h
 	$(MOC) $(srcdir)/richtextlabel.h -o richtextlabel.moc
 
@@ -734,6 +754,13 @@ ratingfieldwidget.moc: $(srcdir)/ratingfieldwidget.h
 
 #>+ 2
 mocs: ratingfieldwidget.moc
+
+#>+ 3
+progress.moc: $(srcdir)/progress.h
+	$(MOC) $(srcdir)/progress.h -o progress.moc
+
+#>+ 2
+mocs: progress.moc
 
 #>+ 3
 imagefieldwidget.moc: $(srcdir)/imagefieldwidget.h
@@ -807,7 +834,7 @@ mocs: stringmapdialog.moc
 
 #>+ 3
 clean-metasources:
-	-rm -f  parafieldwidget.moc lineedit.moc datewidget.moc imagewidget.moc choicefieldwidget.moc tabcontrol.moc numberfieldwidget.moc listview.moc richtextlabel.moc ratingfieldwidget.moc imagefieldwidget.moc tablefieldwidget.moc urlfieldwidget.moc boolfieldwidget.moc linefieldwidget.moc ratingwidget.moc kwidgetlister.moc datefieldwidget.moc fieldwidget.moc stringmapdialog.moc
+	-rm -f  parafieldwidget.moc lineedit.moc datewidget.moc imagewidget.moc choicefieldwidget.moc tabcontrol.moc numberfieldwidget.moc listview.moc overlaywidget.moc richtextlabel.moc ratingfieldwidget.moc progress.moc imagefieldwidget.moc tablefieldwidget.moc urlfieldwidget.moc boolfieldwidget.moc linefieldwidget.moc ratingwidget.moc kwidgetlister.moc datefieldwidget.moc fieldwidget.moc stringmapdialog.moc
 
 #>+ 2
 docs-am:
@@ -851,11 +878,11 @@ bcheck-am:
 
 
 #>+ 11
-libgui_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/comboboxproxy.cpp $(srcdir)/counteditem.cpp $(srcdir)/datewidget.cpp $(srcdir)/tabcontrol.cpp $(srcdir)/kwidgetlister.cpp $(srcdir)/stringmapdialog.cpp $(srcdir)/listview.cpp $(srcdir)/richtextlabel.cpp $(srcdir)/lineedit.cpp $(srcdir)/boolfieldwidget.cpp $(srcdir)/choicefieldwidget.cpp $(srcdir)/linefieldwidget.cpp $(srcdir)/numberfieldwidget.cpp $(srcdir)/parafieldwidget.cpp $(srcdir)/urlfieldwidget.cpp $(srcdir)/tablefieldwidget.cpp $(srcdir)/imagefieldwidget.cpp $(srcdir)/datefieldwidget.cpp $(srcdir)/imagewidget.cpp $(srcdir)/fieldwidget.cpp $(srcdir)/ratingwidget.cpp $(srcdir)/ratingfieldwidget.cpp  parafieldwidget.moc lineedit.moc datewidget.moc imagewidget.moc tabcontrol.moc choicefieldwidget.moc numberfieldwidget.moc listview.moc richtextlabel.moc ratingfieldwidget.moc imagefieldwidget.moc tablefieldwidget.moc urlfieldwidget.moc boolfieldwidget.moc linefieldwidget.moc ratingwidget.moc datefieldwidget.moc kwidgetlister.moc stringmapdialog.moc fieldwidget.moc
+libgui_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/comboboxproxy.cpp $(srcdir)/counteditem.cpp $(srcdir)/datewidget.cpp $(srcdir)/tabcontrol.cpp $(srcdir)/kwidgetlister.cpp $(srcdir)/stringmapdialog.cpp $(srcdir)/listview.cpp $(srcdir)/richtextlabel.cpp $(srcdir)/lineedit.cpp $(srcdir)/boolfieldwidget.cpp $(srcdir)/choicefieldwidget.cpp $(srcdir)/linefieldwidget.cpp $(srcdir)/numberfieldwidget.cpp $(srcdir)/parafieldwidget.cpp $(srcdir)/urlfieldwidget.cpp $(srcdir)/tablefieldwidget.cpp $(srcdir)/imagefieldwidget.cpp $(srcdir)/datefieldwidget.cpp $(srcdir)/imagewidget.cpp $(srcdir)/fieldwidget.cpp $(srcdir)/ratingwidget.cpp $(srcdir)/ratingfieldwidget.cpp $(srcdir)/overlaywidget.cpp $(srcdir)/progress.cpp $(srcdir)/listboxtext.cpp  parafieldwidget.moc lineedit.moc datewidget.moc imagewidget.moc tabcontrol.moc choicefieldwidget.moc numberfieldwidget.moc listview.moc overlaywidget.moc richtextlabel.moc ratingfieldwidget.moc progress.moc imagefieldwidget.moc tablefieldwidget.moc urlfieldwidget.moc boolfieldwidget.moc linefieldwidget.moc ratingwidget.moc datefieldwidget.moc kwidgetlister.moc stringmapdialog.moc fieldwidget.moc
 	@echo 'creating libgui_a.all_cpp.cpp ...'; \
 	rm -f libgui_a.all_cpp.files libgui_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libgui_a.all_cpp.final; \
-	for file in comboboxproxy.cpp counteditem.cpp datewidget.cpp tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp richtextlabel.cpp lineedit.cpp boolfieldwidget.cpp choicefieldwidget.cpp linefieldwidget.cpp numberfieldwidget.cpp parafieldwidget.cpp urlfieldwidget.cpp tablefieldwidget.cpp imagefieldwidget.cpp datefieldwidget.cpp imagewidget.cpp fieldwidget.cpp ratingwidget.cpp ratingfieldwidget.cpp ; do \
+	for file in comboboxproxy.cpp counteditem.cpp datewidget.cpp tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp richtextlabel.cpp lineedit.cpp boolfieldwidget.cpp choicefieldwidget.cpp linefieldwidget.cpp numberfieldwidget.cpp parafieldwidget.cpp urlfieldwidget.cpp tablefieldwidget.cpp imagefieldwidget.cpp datefieldwidget.cpp imagewidget.cpp fieldwidget.cpp ratingwidget.cpp ratingfieldwidget.cpp overlaywidget.cpp progress.cpp listboxtext.cpp ; do \
 	  echo "#include \"$$file\"" >> libgui_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libgui_a.all_cpp.final; \
 	done; \
@@ -890,7 +917,7 @@ cvs-clean:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 43
+#>+ 47
 imagewidget.o: imagewidget.moc 
 datefieldwidget.o: datefieldwidget.moc 
 choicefieldwidget.lo: choicefieldwidget.moc 
@@ -899,6 +926,7 @@ linefieldwidget.lo: linefieldwidget.moc
 numberfieldwidget.o: numberfieldwidget.moc 
 stringmapdialog.lo: stringmapdialog.moc 
 ratingwidget.lo: ratingwidget.moc 
+overlaywidget.lo: overlaywidget.moc 
 boolfieldwidget.o: boolfieldwidget.moc 
 ratingfieldwidget.o: ratingfieldwidget.moc 
 choicefieldwidget.o: choicefieldwidget.moc 
@@ -912,6 +940,7 @@ nmcheck-am: nmcheck
 boolfieldwidget.lo: boolfieldwidget.moc 
 fieldwidget.lo: fieldwidget.moc 
 lineedit.o: lineedit.moc 
+overlaywidget.o: overlaywidget.moc 
 richtextlabel.lo: richtextlabel.moc 
 tabcontrol.o: tabcontrol.moc 
 tabcontrol.lo: tabcontrol.moc 
@@ -919,9 +948,10 @@ listview.o: listview.moc
 urlfieldwidget.o: urlfieldwidget.moc 
 datewidget.lo: datewidget.moc 
 ratingfieldwidget.lo: ratingfieldwidget.moc 
+progress.lo: progress.moc 
 datefieldwidget.lo: datefieldwidget.moc 
-parafieldwidget.o: parafieldwidget.moc 
 ratingwidget.o: ratingwidget.moc 
+parafieldwidget.o: parafieldwidget.moc 
 tablefieldwidget.o: tablefieldwidget.moc 
 tablefieldwidget.lo: tablefieldwidget.moc 
 nmcheck: 
@@ -933,3 +963,4 @@ stringmapdialog.o: stringmapdialog.moc
 fieldwidget.o: fieldwidget.moc 
 imagefieldwidget.lo: imagefieldwidget.moc 
 kwidgetlister.lo: kwidgetlister.moc 
+progress.o: progress.moc 

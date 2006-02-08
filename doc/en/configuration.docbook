@@ -33,7 +33,8 @@ Some minor settings can only be changed by editing the configuration file itself
 </screenshot>
 
 <para>
-The <guilabel>General Options</guilabel> control the general behavior. When &appname;
+The <guilabel>General Options</guilabel> control the general behavior. Images may be included
+in the data files, or saved separately in the &appname; application folder. Also, when &appname;
 is started, it can automatically reopen the last data file that was open. The
 <guilabel>Tip of the Day</guilabel> dialog contains helpful hints on using &appname;
 and appears at program startup. You may want to read through some of the hints and
@@ -45,7 +46,8 @@ The <guilabel>Formatting Options</guilabel> control the level of automatic forma
 that &appname; does. For examples, see the <link linkend="field-formatting">Field
 Formatting section</link>. Capitalization and formatting are distinct options, since
 a field may be capitalized without having the order of the words changed, and
-vice-versa. The automatic formatting includes grammatical articles in titles,
+vice-versa. The auto-capitalization can be changed to ignore certain words.
+The automatic formatting includes grammatical articles in titles,
 along with prefixes and suffixes for personal names. The values are case-insensitive,
 and should be separated by a semi-colon.
 </para>
@@ -146,11 +148,15 @@ Additional templates may be installed in <filename class="directory">$<envar>KDE
 
 <para>
 &appname; can use various sources for importing data, which can be configured
-in the Data Sources Dialog. Currently, there are five available types of sources:
+in the Data Sources Dialog. There are several available types of sources:
 <link linkend="amazon-web-services">Amazon.com Web Services</link>, the
 <link linkend="imdb">Internet Movie Database</link>,
 <link linkend="z3950">z39.50 servers</link>,
-<link linkend="entrez">Entrez (PubMed) databases</link>, and
+<link linkend="sru">SRU servers</link>,
+<link linkend="entrez">Entrez (PubMed) databases</link>,
+<link linkend="yahoo">Yahoo! Audio Search</link>,
+<link linkend="animenfo">AnimeNfo.com</link>,
+<link linkend="ibs">Internet Bookshop Italia</link>, and
 <link linkend="externalexec">external scripts or applications</link>.
 </para>
 
@@ -165,7 +171,14 @@ in the Data Sources Dialog. Currently, there are five available types of sources
 <para>
 New sources may be added by clicking the <guibutton>New...</guibutton> button, while
 existing ones may be modified or deleted, using the <guibutton>Modify...</guibutton> or
-<guibutton>Remove</guibutton> buttons.
+<guibutton>Remove</guibutton> buttons. The order of the sources, which shows up in the
+entry updating menus, can also be changed.
+</para>
+
+<para>
+Many of the data sources offer more information than the default fields in &appname;. Those other fields are
+shown on the right of the configuration box. If any of those fields are checked, they will be added
+to the collection when an entry is added from that source.
 </para>
 
 <sect2 id="amazon-web-services">
@@ -184,7 +197,7 @@ France, and Canada.
 
 <para>
 Configuring each Amazon.com source involves three settings: the server location, image size, and associate's ID. Some information
-from <ulink url="http://amazon.com">Amazon.com</ulink> included an image, such as a book or video cover. That image may be downloaded in three different sizes, depending on the item. Because too many images slow the application, large images are not recommended. The associate's ID must be used to access the Amazon.com Web Services, and is included in the links back to the item, as dictated by the license agreement for the use of the Amazon.com Web Services.
+from <ulink url="http://amazon.com">Amazon.com</ulink> may include an image, such as a book or video cover. That image may be downloaded in three different sizes, depending on the item. The associate's ID must be used to access the Amazon.com Web Services, and is included in the links back to the item, as dictated by the license agreement for the use of the Amazon.com Web Services.
 </para>
 
 </sect2>
@@ -193,12 +206,15 @@ from <ulink url="http://amazon.com">Amazon.com</ulink> included an image, such a
 <title>Internet Movie Database</title>
 
 <para>
-The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides information about movies and videos. When a search is conducted for a <emphasis>Person</emphasis>, if more than one possible result is returned, a dialog box is opened to allow you to select the correct person. The two configuration options include setting the web server address and whether images are grabbed or not.
+The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides information about movies and videos. When a search is conducted for a <emphasis>Person</emphasis>, if more than one possible result is returned, a dialog box is opened to allow you to select the correct person. The configuration options include setting the web server address and whether images are grabbed or not. Since IMDb can return a large number of cast members, you can limit
+that to a certain number.
 </para>
 
-<para>
-Obviously, more than one Amazon.com provider from the same country, or more than one IMDb provider is superfluous.
-</para>
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
 
 </sect2>
 
@@ -207,7 +223,8 @@ Obviously, more than one Amazon.com provider from the same country, or more than
 
 <para>
 The <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html">z39.50 protocol</ulink> is used to access libraries and bibliographic information providers around the world. Lists of public z39.50 servers are <ulink url="http://www.indexdata.dk/targettest/">available from indexdata.dk</ulink>, among others. &appname; 
-is able to read data in either the <acronym>MARC21</acronym> or <acronym>UNIMARC</acronym> format, using the <ulink url="http://www.indexdata.dk/yaz/">yaz library</ulink>.
+is able to read data in the <acronym>MODS</acronym>, <acronym>USMARC</acronym>/<acronym>MARC21</acronym>, or <acronym>UNIMARC</acronym> format, using the <ulink url="http://www.indexdata.dk/yaz/">yaz library</ulink>.
+In addition, there is limited support for the <acronym>GRS-1</acronym> format.
 </para>
 
 <screenshot>
@@ -217,7 +234,7 @@ is able to read data in either the <acronym>MARC21</acronym> or <acronym>UNIMARC
 </screenshot>
 
 <para>
-The default port for z39.50 access is 210, but some servers may use a different one. &appname; assumes the server uses the Marc-8 character encoding, unless configured otherwise. If an incorrect character encoding is used, an error message may appear on the program output, or possibly no entries are retrieved.
+The default port for z39.50 access is 210, but some servers may use a different one. &appname; assumes the server uses the MARC-8 character encoding, unless configured otherwise. If an incorrect character encoding is used, an error message may appear on the program output, or possibly no entries are retrieved.
 </para>
 
 <para>
@@ -226,10 +243,48 @@ Some servers require a username and password for access. &appname; can use and s
 
 </sect2>
 
+<sect2 id="sru">
+<title>SRU Servers</title>
+
+<para>
+SRU stands for <ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via URL</ulink> and is a standard search protocol for
+Internet searches. Some libraries use it for providing access to their data catalogs. Among them, the <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr">US Library of Congress</ulink> is probably
+the best known.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
 <sect2 id="entrez">
 <title>Entrez Databases</title>
 <para>
 <ulink url="http://www.ncbi.nlm.nih.gov/Entrez/">Entrez</ulink> is the integrated, text-based search and retrieval system used at the National Center for Biotechnology Information (NCBI). The most well-known Entrez database is <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed">PubMed</ulink>, the database for life science articles from many biological journals. At the moment, the only Entrez database supported by &appname; is PubMed.</para>
+</sect2>
+
+<sect2 id="yahoo">
+<title>Yahoo! Audio Search</title>
+<para>
+The <ulink url="http://audio.search.yahoo.com">Yahoo! Audio Search</ulink> may be used to search for music album information.
+</para>
+</sect2>
+
+<sect2 id="animenfo">
+<title>AnimeNfo.com</title>
+<para>
+<ulink url="http://www.animenfo.com">AnimeNfo</ulink> is a popular site for information on anime, or Japanese animation.
+</para>
+</sect2>
+
+<sect2 id="ibs">
+<title>Internet Bookstore Italia</title>
+<para>
+<ulink url="http://ibs.it">IBS, or Internet Bookstore Italia</ulink>, is an online Italian bookstore.
+</para>
 </sect2>
 
 <sect2 id="externalexec">
@@ -244,7 +299,16 @@ As an easier way for &appname; to integrate with third-party plugins, external s
 </mediaobject>
 </screenshot>
 
-<para>The full path to the application should be entered in the source options. Be aware that the application is executed on the system with the same permissions as the current user, so be sure to use applications fromtrusted sources. Other arguments to the commmand may be entered; if the argument includes <userinput>%1</userinput>, the search value will be inserted. Finally, the type of entries returned by the script need to be specified.
+<para>
+The collection type returned by the script must be set, along with the data format. Not only can &appname; import data from scripts that
+use the <link linkend="file-format">default &appname; &xml; format</link>, but it can also import other formats as well, such as bibtex.
+</para>
+
+<para>The full path to the application should be entered in the source options. Be aware that the application is executed on the system with the same permissions as the current user, so do not use scrips from untrusted sources. Check the boxes next to the search keys supported by the application, and enter the required command line options in the edit box. The search value will be inserted where <userinput>%1</userinput> appears.
+</para>
+
+<para>
+For updating entries already in the collection, the final checkbox and edit box are used to determine the command-line options. The entry fields used to find an update must be entered, in the same format as used for <emphasis><link linkend="dependent">Dependent</link></emphasis> fields.
 </para>
 </sect2>
 

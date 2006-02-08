@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,7 +23,7 @@
 
 using Tellico::GUI::LineFieldWidget;
 
-LineFieldWidget::LineFieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
+LineFieldWidget::LineFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : FieldWidget(field_, parent_, name_) {
 
   m_lineEdit = new KLineEdit(this);
@@ -69,7 +69,7 @@ void LineFieldWidget::addCompletionObjectItem(const QString& text_) {
   m_lineEdit->completionObject()->addItem(text_);
 }
 
-void LineFieldWidget::updateFieldHook(Data::Field* oldField_, Data::Field* newField_) {
+void LineFieldWidget::updateFieldHook(Data::FieldPtr oldField_, Data::FieldPtr newField_) {
   bool wasComplete = (oldField_->flags() & Data::Field::AllowCompletion);
   bool isComplete = (newField_->flags() & Data::Field::AllowCompletion);
   if(!wasComplete && isComplete) {

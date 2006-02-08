@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,8 +37,8 @@ QStringList Field::s_suffixes;
 QStringList Field::s_surnamePrefixes;
 // put into i18n for translation
 // and allow spaces in the regexp, someone might accidently put one there
-QStringList Field::s_noCapitalize = QStringList::split(comma_split,
-                                          i18n("a,an,and,in,of,the,to"), false);
+QStringList Field::s_noCapitalize;
+
 bool Field::s_autoCapitalize = true;
 bool Field::s_autoFormat = true;
 
@@ -206,7 +206,7 @@ QString Field::format(const QString& value_, FormatFlag flag_) {
 
 QString Field::formatTitle(const QString& title_) {
   QString newTitle = title_;
-  // special case for 2-column tables, assume user never has '::' in a value
+  // special case for multi-column tables, assume user never has '::' in a value
   const QString colonColon = QString::fromLatin1("::");
   QString tail;
   if(newTitle.find(colonColon) > -1) {
@@ -394,7 +394,7 @@ QString Field::capitalize(QString str_) {
       }
     }
 
-    if(!aposMatch)  {
+    if(!aposMatch) {
       wordRx.setPattern(QChar('^') + QRegExp::escape(word) + QChar('$'));
       if(notCap.grep(wordRx).isEmpty() && nextPos-pos > 1) {
         str_.replace(pos+1, 1, str_.at(pos+1).upper());
@@ -431,7 +431,11 @@ QStringList Field::defaultSuffixList() {
 
 QStringList Field::defaultSurnamePrefixList() {
 // put the articles in i18n() so they can be translated
-  return QStringList::split(comma_split, i18n("de,van,der,von"), false);
+  return QStringList::split(comma_split, i18n("de,van,der,van der,von"), false);
+}
+
+QStringList Field::defaultNoCapitalizationList() {
+  return QStringList::split(comma_split, i18n("a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with"), false);
 }
 
 // if these are changed, then CollectionFieldsDialog should be checked since it
@@ -492,7 +496,7 @@ void Field::setPropertyList(const StringMap& props_) {
   m_properties = props_;
 }
 
-void Field::convertOldRating(Data::Field* field_) {
+void Field::convertOldRating(Data::FieldPtr field_) {
   if(field_->type() != Data::Field::Choice) {
     return; // nothing to do
   }
@@ -526,7 +530,19 @@ void Field::convertOldRating(Data::Field* field_) {
 }
 
 // static
-int Field::getID() {
-  static int id = 0;
+long Field::getID() {
+  static long id = 0;
   return ++id;
+}
+
+void Field::stripArticles(QString& value) {
+  if(s_articles.isEmpty()) {
+    return;
+  }
+  for(QStringList::Iterator it = s_articles.begin(); it != s_articles.end(); ++it) {
+    QRegExp rx(QString::fromLatin1("\\b") + *it + QString::fromLatin1("\\b"));
+    value.remove(rx);
+  }
+  value = value.stripWhiteSpace();
+  value.remove(QRegExp(QString::fromLatin1(",$")));
 }

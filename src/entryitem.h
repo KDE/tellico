@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,10 +14,11 @@
 #ifndef ENTRYITEM_H
 #define ENTRYITEM_H
 
-#include "detailedlistview.h"
-#include "entry.h"
+#include "gui/listview.h"
+#include "datavectors.h"
 
 namespace Tellico {
+  class DetailedListView;
   namespace GUI {
     class CountedItem;
   }
@@ -40,9 +41,7 @@ public:
    * @param parent A pointer to the parent
    * @param entry A pointer to the entry to which the item refers
    */
-  EntryItem(DetailedListView* parent, Data::Entry* entry)
-      : GUI::ListViewItem(parent), m_entry(entry),
-        m_customSort(true) {}
+  EntryItem(DetailedListView* parent, Data::EntryPtr entry);
   /**
    * This constructor is for items which have other KListViewItems as parents. It
    * initializes the text in the first column, as well.
@@ -51,7 +50,7 @@ public:
    * @param text The text in the first column
    * @param entry A pointer to the entry to which the item refers
    */
-  EntryItem(GUI::CountedItem* parent, Data::Entry* entry);
+  EntryItem(GUI::CountedItem* parent, Data::EntryPtr entry);
 
   virtual bool isEntryItem() const { return true; }
 
@@ -78,7 +77,7 @@ public:
    *
    * @return The entry pointer
    */
-  Data::Entry* const entry() const { return m_entry; }
+  Data::EntryPtr const entry() const;
 
 private:
   /**

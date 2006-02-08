@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2005 by Robby Stephenson
+    copyright            : (C) 2002-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -32,29 +32,15 @@ public:
   TabControl(QWidget* parent, const char* name=0);
 
   QTabBar* tabBar() const;
-  /**
-   * Resets the focus to the first focusable widget on each page.
-   */
-//  void resetFocus();
-  void setResetFocus(bool reset);
   void setTabBarHidden(bool hide);
 
-public slots:
   /**
    * Sets the focus to the first focusable widget on the current page.
    */
-  void slotUpdateFocus(QWidget* page);
+  void setFocusToFirstChild();
+
+public slots:
   void clear();
-
-private:
-  /**
-   * Sets the focus to the first focusable widget on the page.
-   *
-   * @param page The page to set the focus
-   */
-  void setFocusToFirstChild(QWidget* page);
-
-  bool m_resetFocus;
 };
 
   } // end namespace

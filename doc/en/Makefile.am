@@ -11,6 +11,7 @@ hacking.docbook \
 importing-exporting.docbook \
 index.docbook \
 menus.docbook \
+freebsd-doc-license.html \
 entry-editor1.png \
 entry-editor3.png \
 entry-editor4.png \
@@ -35,7 +36,10 @@ externalexec-options.png \
 report-dialog.png \
 loan-dialog.png \
 loan-view.png \
-filter-view.png
+filter-view.png \
+openoffice-dialog.png \
+sru-options.png \
+imdb-options.png
 
 
 ####### kdevelop will overwrite this part!!! (end)############

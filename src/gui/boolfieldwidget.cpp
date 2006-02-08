@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,7 +21,7 @@
 
 using Tellico::GUI::BoolFieldWidget;
 
-BoolFieldWidget::BoolFieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
+BoolFieldWidget::BoolFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : FieldWidget(field_, parent_, name_) {
 
   m_checkBox = new QCheckBox(this);

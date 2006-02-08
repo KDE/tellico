@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,16 +21,13 @@ namespace Tellico {
   namespace Data {
     class Collection;
   }
-  namespace GUI {
-    class WidgetUpdateBlocker;
-  }
 }
 
 #include "observer.h"
 #include "entry.h"
-#include "datavectors.h"
 
 #include <qobject.h>
+#include <qguardedptr.h>
 
 namespace Tellico {
 
@@ -52,7 +49,7 @@ public:
   const Data::EntryVec& selectedEntries() const { return m_selectedEntries; }
   Data::EntryVec visibleEntries();
 
-  void editEntry(const Data::Entry& entry) const;
+  void editEntry(Data::EntryPtr) const;
   void hideTabs() const;
   /**
    * Plug the default collection actions into a widget
@@ -88,21 +85,22 @@ public:
   void    addObserver(Observer* obs);
   void removeObserver(Observer* obs);
 
-  void addedField(Data::Collection* coll, Data::Field* field);
-  void modifiedField(Data::Collection* coll, Data::Field* oldField, Data::Field* newField);
-  void removedField(Data::Collection* coll, Data::Field* field);
+  void addedField(Data::CollPtr coll, Data::FieldPtr field);
+  void modifiedField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
+  void removedField(Data::CollPtr coll, Data::FieldPtr field);
 
   void addedEntries(Data::EntryVec entries);
-  void modifiedEntry(Data::Entry* entry);
+  void modifiedEntries(Data::EntryVec entries);
   void removedEntries(Data::EntryVec entries);
 
-  void addedBorrower(Data::Borrower* borrower);
-  void modifiedBorrower(Data::Borrower* borrower);
+  void addedBorrower(Data::BorrowerPtr borrower);
+  void modifiedBorrower(Data::BorrowerPtr borrower);
 
-  void addedFilter(Filter* filter);
-  void removedFilter(Filter* filter);
+  void addedFilter(FilterPtr filter);
+  void removedFilter(FilterPtr filter);
 
-  void reorderedFields(Data::Collection* coll);
+  void reorderedFields(Data::CollPtr coll);
+  void updatedFetchers();
 
 public slots:
   /**
@@ -112,15 +110,15 @@ public slots:
    *
    * @param coll A pointer to the collection being added
    */
-  void slotCollectionAdded(Tellico::Data::Collection* coll);
-  void slotCollectionModified(Tellico::Data::Collection* coll);
+  void slotCollectionAdded(Tellico::Data::CollPtr coll);
+  void slotCollectionModified(Tellico::Data::CollPtr coll);
   /**
    * Removes a collection from all the widgets
    *
    * @param coll A pointer to the collection being added
    */
-  void slotCollectionDeleted(Tellico::Data::Collection* coll);
-  void slotRefreshField(Tellico::Data::Field* field);
+  void slotCollectionDeleted(Tellico::Data::CollPtr coll);
+  void slotRefreshField(Tellico::Data::FieldPtr field);
 
   void slotClearSelection();
   /**
@@ -131,8 +129,9 @@ public slots:
    */
   void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryVec& entries);
   void slotUpdateCurrent(const Tellico::Data::EntryVec& entries);
-  void slotDeleteSelectedEntries();
   void slotCopySelectedEntries();
+  void slotUpdateSelectedEntries(const QString& source);
+  void slotDeleteSelectedEntries();
   void slotUpdateFilter(Tellico::FilterPtr filter);
   void slotCheckOut();
   void slotCheckIn();
@@ -143,9 +142,9 @@ private:
   Controller(MainWindow* parent, const char* name);
 
   void blockAllSignals(bool block) const;
-  void blockAllUpdates(bool block);
   void updateActions() const;
   bool canCheckIn() const;
+  void plugUpdateMenu(QWidget* widget);
 
   MainWindow* m_mainWindow;
 
@@ -154,7 +153,9 @@ private:
   typedef PtrVector<Tellico::Observer> ObserverVec;
   ObserverVec m_observers;
 
-  QPtrList<GUI::WidgetUpdateBlocker> m_widgetBlocks;
+  typedef QGuardedPtr<QWidget> WidgetPtr;
+  typedef QValueVector<WidgetPtr> WidgetVector;
+  WidgetVector m_sourcesWidgets;
 
   /**
    * Keep track of the selected entries so that a top-level delete has something for reference

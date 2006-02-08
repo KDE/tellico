@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,8 +21,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef Z3950FETCHER_H
-#define Z3950FETCHER_H
+#ifndef TELLICO_Z3950FETCHER_H
+#define TELLICO_Z3950FETCHER_H
 
 namespace Tellico {
   class XSLTHandler;
@@ -44,6 +44,7 @@ class KComboBox;
 
 namespace Tellico {
   namespace Fetch {
+    class Z3950Connection;
 
 /**
  * @author Robby Stephenson
@@ -53,28 +54,29 @@ Q_OBJECT
 
 public:
   Z3950Fetcher(QObject* parent, const char* name = 0);
-  Z3950Fetcher(const QString& name, const QString& host, uint port, const QString& dbname,
-               const QString& user, const QString& password, const QString& sourceCharSet,
-               QObject* parent);
 
   virtual ~Z3950Fetcher();
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value, bool multiple);
-  // amazon can search title, person, isbn, or keyword. No Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k != Raw; }
+  virtual void search(FetchKey key, const QString& value);
+  // can search title, person, isbn, or keyword. No UPC or Raw for now.
+  virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k!= UPC && k != Raw; }
   virtual void stop();
-  virtual Data::Entry* fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Z3950; }
   virtual bool canFetch(int type) const;
   virtual void readConfig(KConfig* config, const QString& group);
+
+  virtual void updateEntry(Data::EntryPtr entry);
+
+  static StringMap customFields();
+
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     ConfigWidget(QWidget* parent, const Z3950Fetcher* fetcher = 0);
-
     virtual void saveConfig(KConfig* config_);
 
   private:
@@ -88,10 +90,21 @@ public:
     QString m_syntax;
   };
   friend class ConfigWidget;
-  static Z3950Fetcher* libraryOfCongress(QObject* parent);
+
+  static QString defaultName();
+
+protected:
+  virtual void customEvent(QCustomEvent* event);
 
 private:
+  bool initMARC21Handler();
+  bool initUNIMARCHandler();
+  bool initMODSHandler();
   void process();
+  void handleResult(const QString& result);
+  void done();
+
+  Z3950Connection* m_conn;
 
   QString m_name;
   QString m_host;
@@ -110,14 +123,16 @@ private:
 
   FetchKey m_key;
   QString m_value;
-  QMap<int, Data::ConstEntryPtr> m_entries;
+  QMap<int, Data::EntryPtr> m_entries;
   bool m_started;
+  QStringList m_isbnList;
 
-  static XSLTHandler* s_MARC21XMLHandler;
-  static XSLTHandler* s_UNIMARCXMLHandler;
-  static XSLTHandler* s_MODSHandler;
-  static void initHandlers();
-  static QString toXML(const QCString& marc, const QCString& charSet);
+  XSLTHandler* m_MARC21XMLHandler;
+  XSLTHandler* m_UNIMARCXMLHandler;
+  XSLTHandler* m_MODSHandler;
+  QStringList m_fields;
+
+  friend class Z3950Connection;
 };
 
   } // end namespace

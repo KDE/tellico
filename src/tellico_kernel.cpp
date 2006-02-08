@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -34,21 +34,18 @@
 #include "commands/reorderfields.h"
 #include "commands/renamecollection.h"
 
-#include <kdebug.h>
 #include <kmessagebox.h>
 #include <kglobal.h>
 #include <kiconloader.h>
-#include <kdeversion.h>
-#if KDE_IS_VERSION(3,1,90)
 #include <kinputdialog.h>
-#else
-#include <klineeditdlg.h>
-#endif
 
 using Tellico::Kernel;
 Kernel* Kernel::s_self = 0;
 
-Kernel::Kernel(MainWindow* parent) : m_widget(parent), m_commandHistory(parent->actionCollection()), m_commandGroup(0) {
+Kernel::Kernel(MainWindow* parent) : m_widget(parent)
+    , m_commandHistory(parent->actionCollection())
+    , m_commandGroup(0)
+    , m_writeImagesInFile(true) {
 }
 
 const KURL& Kernel::URL() const {
@@ -71,12 +68,12 @@ QStringList Kernel::valuesByFieldName(const QString& name_) const {
   return Data::Document::self()->collection()->valuesByFieldName(name_);
 }
 
-const QString& Kernel::entryName() const {
-  return Data::Document::self()->collection()->entryName();
-}
-
 int Kernel::collectionType() const {
   return Data::Document::self()->collection()->type();
+}
+
+QString Kernel::collectionTypeName() const {
+  return Data::Document::self()->collection()->typeName();
 }
 
 void Kernel::sorry(const QString& text_, QWidget* widget_/* =0 */) {
@@ -98,6 +95,7 @@ void Kernel::beginCommandGroup(const QString& name_) {
 void Kernel::endCommandGroup() {
   if(!m_commandGroup) {
     myDebug() << "Kernel::endCommandGroup() - beginCommandGroup() must be called first!" << endl;
+    return;
   }
   if(m_commandGroup->isEmpty()) {
     delete m_commandGroup;
@@ -113,7 +111,7 @@ void Kernel::resetHistory() {
   m_commandHistory.documentSaved();
 }
 
-bool Kernel::addField(Data::Field* field_) {
+bool Kernel::addField(Data::FieldPtr field_) {
   if(!field_) {
     return false;
   }
@@ -123,11 +121,11 @@ bool Kernel::addField(Data::Field* field_) {
   return true;
 }
 
-bool Kernel::modifyField(Data::Field* field_) {
+bool Kernel::modifyField(Data::FieldPtr field_) {
   if(!field_) {
     return false;
   }
-  Data::Field* oldField = Data::Document::self()->collection()->fieldByName(field_->name());
+  Data::FieldPtr oldField = Data::Document::self()->collection()->fieldByName(field_->name());
   if(!oldField) {
     return false;
   }
@@ -138,7 +136,7 @@ bool Kernel::modifyField(Data::Field* field_) {
   return true;
 }
 
-bool Kernel::removeField(Data::Field* field_) {
+bool Kernel::removeField(Data::FieldPtr field_) {
   if(!field_) {
     return false;
   }
@@ -148,18 +146,40 @@ bool Kernel::removeField(Data::Field* field_) {
   return true;
 }
 
-void Kernel::saveEntries(Data::EntryVec oldEntries_, Data::EntryVec newEntries_) {
+void Kernel::addEntries(Data::EntryVec entries_, bool checkFields_) {
+  if(entries_.isEmpty()) {
+    return;
+  }
+
+  KCommand* cmd = new Command::AddEntries(Data::Document::self()->collection(), entries_);
+  if(checkFields_) {
+    beginCommandGroup(cmd->name());
+    Data::FieldVec fields = entries_[0]->collection()->fields();
+    for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+      if(Data::Document::self()->collection()->hasField(field->name())) {
+        continue;
+      }
+      // add field if any values are not empty
+      for(Data::EntryVec::Iterator entry = entries_.begin(); entry != entries_.end(); ++entry) {
+        if(!entry->field(field).isEmpty()) {
+          addField(field);
+          break;
+        }
+      }
+    }
+  }
+  doCommand(cmd);
+  if(checkFields_) {
+    endCommandGroup();
+  }
+}
+
+void Kernel::modifyEntries(Data::EntryVec oldEntries_, Data::EntryVec newEntries_) {
   if(newEntries_.isEmpty()) {
     return;
   }
 
-  KCommand* cmd;
-  if(newEntries_[0]->isOwned()) {
-    cmd = new Command::ModifyEntries(Data::Document::self()->collection(), oldEntries_, newEntries_);
-  } else {
-    cmd = new Command::AddEntries(Data::Document::self()->collection(), newEntries_);
-  }
-  doCommand(cmd);
+  doCommand(new Command::ModifyEntries(Data::Document::self()->collection(), oldEntries_, newEntries_));
 }
 
 void Kernel::removeEntries(Data::EntryVec entries_) {
@@ -188,7 +208,7 @@ bool Kernel::addLoans(Data::EntryVec entries_) {
   return true;
 }
 
-bool Kernel::modifyLoan(Data::Loan* loan_) {
+bool Kernel::modifyLoan(Data::LoanPtr loan_) {
   if(!loan_) {
     return false;
   }
@@ -215,7 +235,7 @@ bool Kernel::removeLoans(Data::LoanVec loans_) {
   return true;
 }
 
-void Kernel::addFilter(Filter* filter_) {
+void Kernel::addFilter(FilterPtr filter_) {
   if(!filter_) {
     return;
   }
@@ -223,7 +243,7 @@ void Kernel::addFilter(Filter* filter_) {
   doCommand(new Command::FilterCommand(Command::FilterCommand::FilterAdd, filter_));
 }
 
-bool Kernel::modifyFilter(Filter* filter_) {
+bool Kernel::modifyFilter(FilterPtr filter_) {
   if(!filter_) {
     return false;
   }
@@ -240,7 +260,7 @@ bool Kernel::modifyFilter(Filter* filter_) {
   return true;
 }
 
-bool Kernel::removeFilter(Filter* filter_) {
+bool Kernel::removeFilter(FilterPtr filter_) {
   if(!filter_) {
     return false;
   }
@@ -263,19 +283,19 @@ void Kernel::reorderFields(const Data::FieldVec& fields_) {
                                        fields_));
 }
 
-void Kernel::appendCollection(Data::Collection* coll_) {
+void Kernel::appendCollection(Data::CollPtr coll_) {
   doCommand(new Command::CollectionCommand(Command::CollectionCommand::Append,
                                            Data::Document::self()->collection(),
                                            coll_));
 }
 
-void Kernel::mergeCollection(Data::Collection* coll_) {
+void Kernel::mergeCollection(Data::CollPtr coll_) {
   doCommand(new Command::CollectionCommand(Command::CollectionCommand::Merge,
                                            Data::Document::self()->collection(),
                                            coll_));
 }
 
-void Kernel::replaceCollection(Data::Collection* coll_) {
+void Kernel::replaceCollection(Data::CollPtr coll_) {
   doCommand(new Command::CollectionCommand(Command::CollectionCommand::Replace,
                                            Data::Document::self()->collection(),
                                            coll_));
@@ -283,13 +303,8 @@ void Kernel::replaceCollection(Data::Collection* coll_) {
 
 void Kernel::renameCollection() {
   bool ok;
-#if KDE_IS_VERSION(3,1,90)
   QString newTitle = KInputDialog::getText(i18n("Rename Collection"), i18n("New collection name:"),
                                            Data::Document::self()->collection()->title(), &ok, m_widget);
-#else
-  QString newTitle = KLineEditDlg::getText(i18n("Rename Collection"), i18n("New collection name:"),
-                                           Data::Document::self()->collection()->title(), &ok, m_widget);
-#endif
   if(ok) {
     doCommand(new Command::RenameCollection(Data::Document::self()->collection(), newTitle));
   }

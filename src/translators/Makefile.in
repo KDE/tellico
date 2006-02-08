@@ -69,9 +69,11 @@ am_libtranslators_a_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	alexandriaexporter.$(OBJEXT) freedbimporter.$(OBJEXT) \
 	risimporter.$(OBJEXT) freedb_util.$(OBJEXT) \
 	tellico_xml.$(OBJEXT) exporter.$(OBJEXT) \
-	onixexporter.$(OBJEXT)
+	onixexporter.$(OBJEXT) gcfilmsimporter.$(OBJEXT) \
+	gcfilmsexporter.$(OBJEXT) filelistingimporter.$(OBJEXT) \
+	grs1importer.$(OBJEXT)
 #>- libtranslators_a_OBJECTS = $(am_libtranslators_a_OBJECTS)
-#>+ 18
+#>+ 20
 libtranslators_a_final_OBJECTS = libtranslators_a.all_cpp.o 
 libtranslators_a_nofinal_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	bibtexexporter.$(OBJEXT) bibtexmlimporter.$(OBJEXT) \
@@ -86,7 +88,9 @@ libtranslators_a_nofinal_OBJECTS = pilotdbexporter.$(OBJEXT) \
 	alexandriaexporter.$(OBJEXT) freedbimporter.$(OBJEXT) \
 	risimporter.$(OBJEXT) freedb_util.$(OBJEXT) \
 	tellico_xml.$(OBJEXT) exporter.$(OBJEXT) \
-	onixexporter.$(OBJEXT)\
+	onixexporter.$(OBJEXT) gcfilmsimporter.$(OBJEXT) \
+	gcfilmsexporter.$(OBJEXT) filelistingimporter.$(OBJEXT) \
+	grs1importer.$(OBJEXT)\
 dataimporter.moc.o importer.moc.o 
 @KDE_USE_FINAL_FALSE@libtranslators_a_OBJECTS = $(libtranslators_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libtranslators_a_OBJECTS = $(libtranslators_a_final_OBJECTS)
@@ -156,6 +160,7 @@ CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CPPUMAKER = @CPPUMAKER@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -250,6 +255,10 @@ MSGFMT = @MSGFMT@
 NOOPT_CFLAGS = @NOOPT_CFLAGS@
 NOOPT_CXXFLAGS = @NOOPT_CXXFLAGS@
 OBJEXT = @OBJEXT@
+OFFICE_SDK_includes = @OFFICE_SDK_includes@
+OFFICE_libadd = @OFFICE_libadd@
+OFFICE_libdir = @OFFICE_libdir@
+OFFICE_registry = @OFFICE_registry@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -279,6 +288,8 @@ USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
+WITH_OOO_FALSE = @WITH_OOO_FALSE@
+WITH_OOO_TRUE = @WITH_OOO_TRUE@
 WOVERLOADED_VIRTUAL = @WOVERLOADED_VIRTUAL@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -370,14 +381,14 @@ x_libraries = @x_libraries@
 ####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = libtranslators.a
 #>- libtranslators_a_METASOURCES = AUTO
-libtranslators_a_SOURCES = \
-pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp \
-tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp \
-bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp \
-bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp \
-xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp \
-alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp \
-risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp onixexporter.cpp
+libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp \
+				bibtexmlimporter.cpp tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp \
+				bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp \
+				bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp xmlimporter.cpp \
+				tellicoimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp \
+				freedbimporter.cpp risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp \
+				onixexporter.cpp gcfilmsimporter.cpp gcfilmsexporter.cpp filelistingimporter.cpp \
+	grs1importer.cpp
 
 @USE_LIBBTPARSE_FALSE@SUBDIR_LIBBTPARSE = btparse
 SUBDIRS = pilotdb $(SUBDIR_LIBBTPARSE)
@@ -401,11 +412,14 @@ alexandriaimporter.cpp   alexandriaexporter.h     alexandriaexporter.cpp \
 freedbimporter.h         freedbimporter.cpp       freedb_util.cpp \
 risimporter.h            risimporter.cpp          tellico_xml.h \
 tellico_xml.cpp          translators.h            exporter.cpp \
-onixexporter.h           onixexporter.cpp
+onixexporter.h           onixexporter.cpp         gcfilmsimporter.h \
+gcfilmsimporter.cpp      gcfilmsexporter.h        gcfilmsexporter.cpp \
+filelistingimporter.h    filelistingimporter.cpp  grs1importer.h \
+grs1importer.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
-INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS)
+INCLUDES = $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS) $(all_includes)
 KDE_OPTIONS = noautodist
 appdir = $(kde_datadir)/tellico
 app_DATA = bibtex-translation.xml
@@ -482,8 +496,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csvexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csvimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/exporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/filelistingimporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/freedb_util.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/freedbimporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcfilmsexporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcfilmsimporter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grs1importer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/htmlexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/onixexporter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pilotdbexporter.Po@am__quote@
@@ -827,25 +845,32 @@ dataimporter.moc.cpp: $(srcdir)/dataimporter.h
 mocs: dataimporter.moc.cpp
 
 #>+ 3
-csvimporter.moc: $(srcdir)/csvimporter.h
-	$(MOC) $(srcdir)/csvimporter.h -o csvimporter.moc
+alexandriaexporter.moc: $(srcdir)/alexandriaexporter.h
+	$(MOC) $(srcdir)/alexandriaexporter.h -o alexandriaexporter.moc
 
 #>+ 2
-mocs: csvimporter.moc
+mocs: alexandriaexporter.moc
 
 #>+ 3
-xsltimporter.moc: $(srcdir)/xsltimporter.h
-	$(MOC) $(srcdir)/xsltimporter.h -o xsltimporter.moc
+bibtexexporter.moc: $(srcdir)/bibtexexporter.h
+	$(MOC) $(srcdir)/bibtexexporter.h -o bibtexexporter.moc
 
 #>+ 2
-mocs: xsltimporter.moc
+mocs: bibtexexporter.moc
 
 #>+ 3
-alexandriaimporter.moc: $(srcdir)/alexandriaimporter.h
-	$(MOC) $(srcdir)/alexandriaimporter.h -o alexandriaimporter.moc
+htmlexporter.moc: $(srcdir)/htmlexporter.h
+	$(MOC) $(srcdir)/htmlexporter.h -o htmlexporter.moc
 
 #>+ 2
-mocs: alexandriaimporter.moc
+mocs: htmlexporter.moc
+
+#>+ 3
+pilotdbexporter.moc: $(srcdir)/pilotdbexporter.h
+	$(MOC) $(srcdir)/pilotdbexporter.h -o pilotdbexporter.moc
+
+#>+ 2
+mocs: pilotdbexporter.moc
 
 #>+ 3
 textimporter.moc: $(srcdir)/textimporter.h
@@ -862,18 +887,18 @@ freedbimporter.moc: $(srcdir)/freedbimporter.h
 mocs: freedbimporter.moc
 
 #>+ 3
-bibteximporter.moc: $(srcdir)/bibteximporter.h
-	$(MOC) $(srcdir)/bibteximporter.h -o bibteximporter.moc
-
-#>+ 2
-mocs: bibteximporter.moc
-
-#>+ 3
 xmlimporter.moc: $(srcdir)/xmlimporter.h
 	$(MOC) $(srcdir)/xmlimporter.h -o xmlimporter.moc
 
 #>+ 2
 mocs: xmlimporter.moc
+
+#>+ 3
+bibteximporter.moc: $(srcdir)/bibteximporter.h
+	$(MOC) $(srcdir)/bibteximporter.h -o bibteximporter.moc
+
+#>+ 2
+mocs: bibteximporter.moc
 
 #>+ 3
 audiofileimporter.moc: $(srcdir)/audiofileimporter.h
@@ -883,13 +908,6 @@ audiofileimporter.moc: $(srcdir)/audiofileimporter.h
 mocs: audiofileimporter.moc
 
 #>+ 3
-bibtexmlimporter.moc: $(srcdir)/bibtexmlimporter.h
-	$(MOC) $(srcdir)/bibtexmlimporter.h -o bibtexmlimporter.moc
-
-#>+ 2
-mocs: bibtexmlimporter.moc
-
-#>+ 3
 tellicoimporter.moc: $(srcdir)/tellicoimporter.h
 	$(MOC) $(srcdir)/tellicoimporter.h -o tellicoimporter.moc
 
@@ -897,11 +915,18 @@ tellicoimporter.moc: $(srcdir)/tellicoimporter.h
 mocs: tellicoimporter.moc
 
 #>+ 3
-importer.moc.cpp: $(srcdir)/importer.h
-	$(MOC) $(srcdir)/importer.h -o importer.moc.cpp
+tellicozipexporter.moc: $(srcdir)/tellicozipexporter.h
+	$(MOC) $(srcdir)/tellicozipexporter.h -o tellicozipexporter.moc
 
 #>+ 2
-mocs: importer.moc.cpp
+mocs: tellicozipexporter.moc
+
+#>+ 3
+gcfilmsexporter.moc: $(srcdir)/gcfilmsexporter.h
+	$(MOC) $(srcdir)/gcfilmsexporter.h -o gcfilmsexporter.moc
+
+#>+ 2
+mocs: gcfilmsexporter.moc
 
 #>+ 3
 risimporter.moc: $(srcdir)/risimporter.h
@@ -911,8 +936,99 @@ risimporter.moc: $(srcdir)/risimporter.h
 mocs: risimporter.moc
 
 #>+ 3
+grs1importer.moc: $(srcdir)/grs1importer.h
+	$(MOC) $(srcdir)/grs1importer.h -o grs1importer.moc
+
+#>+ 2
+mocs: grs1importer.moc
+
+#>+ 3
+csvimporter.moc: $(srcdir)/csvimporter.h
+	$(MOC) $(srcdir)/csvimporter.h -o csvimporter.moc
+
+#>+ 2
+mocs: csvimporter.moc
+
+#>+ 3
+bibtexmlexporter.moc: $(srcdir)/bibtexmlexporter.h
+	$(MOC) $(srcdir)/bibtexmlexporter.h -o bibtexmlexporter.moc
+
+#>+ 2
+mocs: bibtexmlexporter.moc
+
+#>+ 3
+gcfilmsimporter.moc: $(srcdir)/gcfilmsimporter.h
+	$(MOC) $(srcdir)/gcfilmsimporter.h -o gcfilmsimporter.moc
+
+#>+ 2
+mocs: gcfilmsimporter.moc
+
+#>+ 3
+xsltimporter.moc: $(srcdir)/xsltimporter.h
+	$(MOC) $(srcdir)/xsltimporter.h -o xsltimporter.moc
+
+#>+ 2
+mocs: xsltimporter.moc
+
+#>+ 3
+tellicoxmlexporter.moc: $(srcdir)/tellicoxmlexporter.h
+	$(MOC) $(srcdir)/tellicoxmlexporter.h -o tellicoxmlexporter.moc
+
+#>+ 2
+mocs: tellicoxmlexporter.moc
+
+#>+ 3
+csvexporter.moc: $(srcdir)/csvexporter.h
+	$(MOC) $(srcdir)/csvexporter.h -o csvexporter.moc
+
+#>+ 2
+mocs: csvexporter.moc
+
+#>+ 3
+alexandriaimporter.moc: $(srcdir)/alexandriaimporter.h
+	$(MOC) $(srcdir)/alexandriaimporter.h -o alexandriaimporter.moc
+
+#>+ 2
+mocs: alexandriaimporter.moc
+
+#>+ 3
+filelistingimporter.moc: $(srcdir)/filelistingimporter.h
+	$(MOC) $(srcdir)/filelistingimporter.h -o filelistingimporter.moc
+
+#>+ 2
+mocs: filelistingimporter.moc
+
+#>+ 3
+bibtexmlimporter.moc: $(srcdir)/bibtexmlimporter.h
+	$(MOC) $(srcdir)/bibtexmlimporter.h -o bibtexmlimporter.moc
+
+#>+ 2
+mocs: bibtexmlimporter.moc
+
+#>+ 3
+exporter.moc: $(srcdir)/exporter.h
+	$(MOC) $(srcdir)/exporter.h -o exporter.moc
+
+#>+ 2
+mocs: exporter.moc
+
+#>+ 3
+importer.moc.cpp: $(srcdir)/importer.h
+	$(MOC) $(srcdir)/importer.h -o importer.moc.cpp
+
+#>+ 2
+mocs: importer.moc.cpp
+
+#>+ 3
+onixexporter.moc: $(srcdir)/onixexporter.h
+	$(MOC) $(srcdir)/onixexporter.h -o onixexporter.moc
+
+#>+ 2
+mocs: onixexporter.moc
+
+#>+ 3
 clean-metasources:
-	-rm -f  dataimporter.moc.cpp csvimporter.moc xsltimporter.moc alexandriaimporter.moc textimporter.moc freedbimporter.moc bibteximporter.moc xmlimporter.moc audiofileimporter.moc bibtexmlimporter.moc tellicoimporter.moc importer.moc.cpp risimporter.moc
+	-rm -f  dataimporter.moc.cpp alexandriaexporter.moc bibtexexporter.moc htmlexporter.moc pilotdbexporter.moc textimporter.moc freedbimporter.moc xmlimporter.moc bibteximporter.moc audiofileimporter.moc tellicoimporter.moc tellicozipexporter.moc gcfilmsexporter.moc risimporter.moc grs1importer.moc csvimporter.moc bibtexmlexporter.moc gcfilmsimporter.moc xsltimporter.moc tellicoxmlexporter.moc csvexporter.moc alexandriaimporter.moc filelistingimporter.moc bibtexmlimporter.moc exporter.moc importer.moc.cpp onixexporter.moc
 
 #>+ 2
 docs-am:
@@ -956,11 +1072,11 @@ bcheck-am:
 
 
 #>+ 11
-libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/pilotdbexporter.cpp $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/tellicoxmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp $(srcdir)/tellicozipexporter.cpp $(srcdir)/xmlimporter.cpp $(srcdir)/tellicoimporter.cpp $(srcdir)/audiofileimporter.cpp $(srcdir)/alexandriaimporter.cpp $(srcdir)/alexandriaexporter.cpp $(srcdir)/freedbimporter.cpp $(srcdir)/risimporter.cpp $(srcdir)/freedb_util.cpp $(srcdir)/tellico_xml.cpp $(srcdir)/exporter.cpp $(srcdir)/onixexporter.cpp dataimporter.moc.cpp importer.moc.cpp  csvimporter.moc xsltimporter.moc alexandriaimporter.moc textimporter.moc freedbimporter.moc bibteximporter.moc xmlimporter.moc audiofileimporter.moc bibtexmlimporter.moc tellicoimporter.moc risimporter.moc
+libtranslators_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/pilotdbexporter.cpp $(srcdir)/bibtexexporter.cpp $(srcdir)/bibtexmlimporter.cpp $(srcdir)/tellicoxmlexporter.cpp $(srcdir)/csvimporter.cpp $(srcdir)/xsltexporter.cpp $(srcdir)/xslthandler.cpp $(srcdir)/bibteximporter.cpp $(srcdir)/xsltimporter.cpp $(srcdir)/textimporter.cpp $(srcdir)/bibtexhandler.cpp $(srcdir)/bibtexmlexporter.cpp $(srcdir)/htmlexporter.cpp $(srcdir)/csvexporter.cpp $(srcdir)/tellicozipexporter.cpp $(srcdir)/xmlimporter.cpp $(srcdir)/tellicoimporter.cpp $(srcdir)/audiofileimporter.cpp $(srcdir)/alexandriaimporter.cpp $(srcdir)/alexandriaexporter.cpp $(srcdir)/freedbimporter.cpp $(srcdir)/risimporter.cpp $(srcdir)/freedb_util.cpp $(srcdir)/tellico_xml.cpp $(srcdir)/exporter.cpp $(srcdir)/onixexporter.cpp $(srcdir)/gcfilmsimporter.cpp $(srcdir)/gcfilmsexporter.cpp $(srcdir)/filelistingimporter.cpp $(srcdir)/grs1importer.cpp dataimporter.moc.cpp importer.moc.cpp  bibtexexporter.moc alexandriaexporter.moc htmlexporter.moc pilotdbexporter.moc textimporter.moc freedbimporter.moc xmlimporter.moc bibteximporter.moc audiofileimporter.moc tellicozipexporter.moc tellicoimporter.moc risimporter.moc gcfilmsexporter.moc grs1importer.moc csvimporter.moc bibtexmlexporter.moc tellicoxmlexporter.moc xsltimporter.moc gcfilmsimporter.moc csvexporter.moc alexandriaimporter.moc filelistingimporter.moc exporter.moc bibtexmlimporter.moc onixexporter.moc
 	@echo 'creating libtranslators_a.all_cpp.cpp ...'; \
 	rm -f libtranslators_a.all_cpp.files libtranslators_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libtranslators_a.all_cpp.final; \
-	for file in pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp onixexporter.cpp dataimporter.moc.cpp importer.moc.cpp ; do \
+	for file in pilotdbexporter.cpp bibtexexporter.cpp bibtexmlimporter.cpp tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp xmlimporter.cpp tellicoimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp freedbimporter.cpp risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp onixexporter.cpp gcfilmsimporter.cpp gcfilmsexporter.cpp filelistingimporter.cpp grs1importer.cpp dataimporter.moc.cpp importer.moc.cpp ; do \
 	  echo "#include \"$$file\"" >> libtranslators_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libtranslators_a.all_cpp.final; \
 	done; \
@@ -995,28 +1111,56 @@ cvs-clean:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 25
-bibtexmlimporter.lo: bibtexmlimporter.moc 
-alexandriaimporter.lo: alexandriaimporter.moc 
-csvimporter.lo: csvimporter.moc 
-csvimporter.o: csvimporter.moc 
-tellicoimporter.lo: tellicoimporter.moc 
-risimporter.o: risimporter.moc 
-audiofileimporter.lo: audiofileimporter.moc 
-xmlimporter.o: xmlimporter.moc 
+#>+ 53
+gcfilmsexporter.o: gcfilmsexporter.moc 
+filelistingimporter.lo: filelistingimporter.moc 
 bibteximporter.o: bibteximporter.moc 
-xsltimporter.lo: xsltimporter.moc 
+pilotdbexporter.lo: pilotdbexporter.moc 
 bibtexmlimporter.o: bibtexmlimporter.moc 
-audiofileimporter.o: audiofileimporter.moc 
 xsltimporter.o: xsltimporter.moc 
 textimporter.lo: textimporter.moc 
-nmcheck: 
+bibtexmlexporter.lo: bibtexmlexporter.moc 
+bibtexexporter.o: bibtexexporter.moc 
 xmlimporter.lo: xmlimporter.moc 
 textimporter.o: textimporter.moc 
+grs1importer.o: grs1importer.moc 
 nmcheck-am: nmcheck
-bibteximporter.lo: bibteximporter.moc 
-freedbimporter.o: freedbimporter.moc 
-freedbimporter.lo: freedbimporter.moc 
-risimporter.lo: risimporter.moc 
+onixexporter.lo: onixexporter.moc 
 alexandriaimporter.o: alexandriaimporter.moc 
+gcfilmsexporter.lo: gcfilmsexporter.moc 
 tellicoimporter.o: tellicoimporter.moc 
+htmlexporter.lo: htmlexporter.moc 
+exporter.lo: exporter.moc 
+bibtexmlimporter.lo: bibtexmlimporter.moc 
+alexandriaimporter.lo: alexandriaimporter.moc 
+csvimporter.o: csvimporter.moc 
+csvimporter.lo: csvimporter.moc 
+tellicoimporter.lo: tellicoimporter.moc 
+grs1importer.lo: grs1importer.moc 
+risimporter.o: risimporter.moc 
+tellicozipexporter.o: tellicozipexporter.moc 
+audiofileimporter.lo: audiofileimporter.moc 
+alexandriaexporter.lo: alexandriaexporter.moc 
+bibtexmlexporter.o: bibtexmlexporter.moc 
+pilotdbexporter.o: pilotdbexporter.moc 
+xmlimporter.o: xmlimporter.moc 
+exporter.o: exporter.moc 
+tellicozipexporter.lo: tellicozipexporter.moc 
+xsltimporter.lo: xsltimporter.moc 
+tellicoxmlexporter.o: tellicoxmlexporter.moc 
+alexandriaexporter.o: alexandriaexporter.moc 
+audiofileimporter.o: audiofileimporter.moc 
+nmcheck: 
+gcfilmsimporter.lo: gcfilmsimporter.moc 
+onixexporter.o: onixexporter.moc 
+csvexporter.lo: csvexporter.moc 
+bibteximporter.lo: bibteximporter.moc 
+csvexporter.o: csvexporter.moc 
+freedbimporter.lo: freedbimporter.moc 
+freedbimporter.o: freedbimporter.moc 
+filelistingimporter.o: filelistingimporter.moc 
+tellicoxmlexporter.lo: tellicoxmlexporter.moc 
+risimporter.lo: risimporter.moc 
+gcfilmsimporter.o: gcfilmsimporter.moc 
+bibtexexporter.lo: bibtexexporter.moc 
+htmlexporter.o: htmlexporter.moc 

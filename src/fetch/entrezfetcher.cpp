@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +15,6 @@
 #include "../tellico_kernel.h"
 #include "../latin1literal.h"
 #include "../collection.h"
-#include "../document.h"
 #include "../entry.h"
 #include "../filehandler.h"
 #include "../translators/xslthandler.h"
@@ -23,7 +22,6 @@
 
 #include <klocale.h>
 #include <kconfig.h>
-#include <kglobal.h> // for KMIN
 #include <kstandarddirs.h>
 
 #include <qdom.h>
@@ -45,14 +43,18 @@ using Tellico::Fetch::EntrezFetcher;
 Tellico::XSLTHandler* EntrezFetcher::s_xsltHandler = 0;
 
 EntrezFetcher::EntrezFetcher(QObject* parent_, const char* name_) : Fetcher(parent_, name_),
-    m_name(i18n("Entrez Database")), m_step(Begin), m_started(false) {
+    m_step(Begin), m_started(false) {
 }
 
 EntrezFetcher::~EntrezFetcher() {
 }
 
+QString EntrezFetcher::defaultName() {
+  return i18n("Entrez Database");
+}
+
 QString EntrezFetcher::source() const {
-  return m_name;
+  return m_name.isEmpty() ? defaultName() : m_name;
 }
 
 bool EntrezFetcher::canFetch(int type) const {
@@ -61,7 +63,7 @@ bool EntrezFetcher::canFetch(int type) const {
 
 void EntrezFetcher::readConfig(KConfig* config_, const QString& group_) {
   KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Name");
+  QString s = config_->readEntry("Name", defaultName());
   if(!s.isEmpty()) {
     m_name = s;
   }
@@ -69,9 +71,10 @@ void EntrezFetcher::readConfig(KConfig* config_, const QString& group_) {
   if(!s.isEmpty()) {
     m_dbname = s;
   }
+  m_fields = config_->readListEntry("Custom Fields");
 }
 
-void EntrezFetcher::search(FetchKey key_, const QString& value_, bool) {
+void EntrezFetcher::search(FetchKey key_, const QString& value_) {
   m_started = true;
 // only search if current collection is a bibliography
   if(Kernel::self()->collectionType() != Data::Collection::Bibtex) {
@@ -140,10 +143,10 @@ void EntrezFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  emit signalDone(this);
   m_data.truncate(0);
   m_started = false;
   m_step = Begin;
+  emit signalDone(this);
 }
 
 void EntrezFetcher::slotData(KIO::Job*, const QByteArray& data_) {
@@ -295,11 +298,11 @@ void EntrezFetcher::summaryResults() {
   stop(); // done searching
 }
 
-Tellico::Data::Entry* EntrezFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   // if we already grabbed this one, then just pull it out of the dict
-  const Data::Entry* entry = m_entries[uid_];
+  Data::EntryPtr entry = m_entries[uid_];
   if(entry) {
-    return new Data::Entry(*entry, Data::Document::self()->collection());
+    return entry;
   }
 
   if(!m_matches.contains(uid_)) {
@@ -310,6 +313,7 @@ Tellico::Data::Entry* EntrezFetcher::fetchEntry(uint uid_) {
     initXSLTHandler();
     if(!s_xsltHandler) { // probably an error somewhere in the stylesheet loading
       stop();
+      return 0;
     }
   }
 
@@ -328,16 +332,23 @@ Tellico::Data::Entry* EntrezFetcher::fetchEntry(uint uid_) {
   // now it's sychronous
   QString str = s_xsltHandler->applyStylesheet(FileHandler::readTextFile(m_url));
   Import::TellicoImporter imp(str);
-  Data::Collection* coll = imp.collection();
+  Data::CollPtr coll = imp.collection();
   if(coll->entryCount() == 0) {
-    kdDebug() << "EntrezFetcher::fetchEntry() - no entries in collection" << endl;
+    myDebug() << "EntrezFetcher::fetchEntry() - no entries in collection" << endl;
     return 0;
   } else if(coll->entryCount() > 1) {
-    kdDebug() << "EntrezFetcher::fetchEntry() - collection has multiple entries, taking first one" << endl;
+    myDebug() << "EntrezFetcher::fetchEntry() - collection has multiple entries, taking first one" << endl;
   }
 
-  m_entries.insert(uid_, Data::ConstEntryPtr(coll->entries()[0]));
-  return new Data::Entry(*coll->entries().begin(), Data::Document::self()->collection());
+  const StringMap customFields = EntrezFetcher::customFields();
+  for(StringMap::ConstIterator it = customFields.begin(); it != customFields.end(); ++it) {
+    if(!m_fields.contains(it.key())) {
+      coll->removeField(it.key());
+    }
+  }
+
+  m_entries.insert(uid_, coll->entries()[0]);
+  return coll->entries()[0];
 }
 
 void EntrezFetcher::initXSLTHandler() {
@@ -362,14 +373,30 @@ void EntrezFetcher::initXSLTHandler() {
 }
 
 Tellico::Fetch::ConfigWidget* EntrezFetcher::configWidget(QWidget* parent_) const {
-  return new EntrezFetcher::ConfigWidget(parent_);
+  return new EntrezFetcher::ConfigWidget(parent_, this);
 }
 
-EntrezFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)
+EntrezFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const EntrezFetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(this);
-  l->addWidget(new QLabel(i18n("This source has no options."), this));
+  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
+  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
+
+  // now add additional fields widget
+  addFieldsWidget(EntrezFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+}
+
+void EntrezFetcher::ConfigWidget::saveConfig(KConfig* config_) {
+  saveFieldsConfig(config_);
+  slotSetModified(false);
+}
+
+//static
+Tellico::StringMap EntrezFetcher::customFields() {
+  StringMap map;
+  map[QString::fromLatin1("institution")] = i18n("Institution");
+  map[QString::fromLatin1("abstract")]    = i18n("Abstract");
+  return map;
 }
 
 #include "entrezfetcher.moc"

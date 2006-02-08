@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,13 +19,13 @@
 
 using Tellico::FilterItem;
 
-FilterItem::FilterItem(GUI::ListView* parent_, Tellico::Filter* filter_)
+FilterItem::FilterItem(GUI::ListView* parent_, Filter::Ptr filter_)
     : GUI::CountedItem(parent_), m_filter(filter_) {
   setText(0, filter_->name());
   setPixmap(0, SmallIcon(QString::fromLatin1("filter")));
 }
 
-void FilterItem::updateFilter(Tellico::Filter* filter_) {
+void FilterItem::updateFilter(Filter::Ptr filter_) {
   m_filter = filter_;
   setText(0, m_filter->name());
 }

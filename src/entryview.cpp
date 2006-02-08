@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,9 +20,10 @@
 #include "collection.h"
 #include "imagefactory.h"
 #include "tellico_kernel.h"
+#include "tellico_utils.h"
+//#include "tellico_debug.h"
 
 #include <kstandarddirs.h>
-#include <kdebug.h>
 #include <kglobalsettings.h>
 #include <krun.h>
 #include <kmessagebox.h>
@@ -41,6 +42,8 @@ EntryView::EntryView(QWidget* parent_, const char* name_) : KHTMLPart(parent_, n
   setMetaRefreshEnabled(false);
   setPluginsEnabled(false);
   clear(); // needed for initial layout
+
+  ImageFactory::createStyleImages();
 
   connect(browserExtension(), SIGNAL(openURLRequest(const KURL&, const KParts::URLArgs&)),
           this, SLOT(slotOpenURL(const KURL&)));
@@ -64,7 +67,7 @@ void EntryView::clear() {
   view()->layout(); // I need this because some of the margins and widths may get messed up
 }
 
-void EntryView::showEntry(Data::Entry* entry_) {
+void EntryView::showEntry(Data::EntryPtr entry_) {
 //  kdDebug() << "EntryView::showEntry()" << endl;
   if(!entry_) {
     clear();
@@ -73,8 +76,8 @@ void EntryView::showEntry(Data::Entry* entry_) {
 
 #if 0
   kdWarning() << "EntryView::showEntry() - turn me off!" << endl;
-  clear();
-  setXSLTFile(Entry, viewData->xsltFile);
+  m_entry = 0;
+  setXSLTFile(m_xsltFile);
 #endif
   if(!m_handler || !m_handler->isValid()) {
     setXSLTFile(m_xsltFile);
@@ -86,22 +89,27 @@ void EntryView::showEntry(Data::Entry* entry_) {
   // by simply using a relative path in the xslt file
   begin(KURL::fromPathOrURL(m_xsltFile));
 
-  Data::EntryVec vec;
-  vec.append(entry_);
   Export::TellicoXMLExporter exporter(entry_->collection());
-  exporter.setEntries(vec);
-  exporter.setOptions(Export::ExportUTF8);
+  exporter.setEntries(entry_);
+  long opt = 0;
+  // on second thought, don't auto-format everything, just clean it
+//  if(Data::Field::autoFormat()) {
+//    opt = Export::ExportFormatted;
+//  }
+  if(entry_->collection()->type() == Data::Collection::Bibtex) {
+    opt = Export::ExportClean;
+  }
+  exporter.setOptions(opt | Export::ExportUTF8);
   QDomDocument dom = exporter.exportXML();
 //  kdDebug() << dom.toString() << endl;
 
   QString html = m_handler->applyStylesheet(dom.toString());
   // write out image files
   Data::FieldVec fields = entry_->collection()->imageFields();
-  for(Data::FieldVec::Iterator it = fields.begin(); it != fields.end(); ++it) {
-    const QString& id = entry_->field(it->name());
-    if(!id.isEmpty() && !ImageFactory::writeImage(id)) {
-        kdWarning() << "EntryView::showEntry() - unable to write temporary image file: "
-                    << entry_->field(it->name()) << endl;
+  for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+    QString id = entry_->field(field);
+    if(!id.isEmpty() && !ImageFactory::writeImage(id, ImageFactory::TempDir)) {
+        kdWarning() << "EntryView::showEntry() - unable to write temporary image file: " << id << endl;
     }
   }
 
@@ -178,6 +186,7 @@ void EntryView::setXSLTFile(const QString& file_) {
 void EntryView::slotRefresh() {
   setXSLTFile(m_xsltFile);
   showEntry(m_entry);
+  view()->repaint();
 }
 
 // do some contortions in case the url is relative

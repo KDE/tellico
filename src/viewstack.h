@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2005 by Robby Stephenson
+    copyright            : (C) 2002-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -36,7 +36,7 @@ public:
 
   void clear();
   void refresh();
-  void showEntry(Data::Entry* entry);
+  void showEntry(Data::EntryPtr entry);
   void showEntries(const Data::EntryVec& entries);
 
 private:

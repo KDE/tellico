@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,12 +12,13 @@
  ***************************************************************************/
 
 #include "reorderfields.h"
+#include "../collection.h"
 #include "../controller.h"
 #include "../tellico_debug.h"
 
 using Tellico::Command::ReorderFields;
 
-ReorderFields::ReorderFields(Data::Collection* coll_, const Data::FieldVec& oldFields_,
+ReorderFields::ReorderFields(Data::CollPtr coll_, const Data::FieldVec& oldFields_,
                              const Data::FieldVec& newFields_)
     : KCommand()
     , m_coll(coll_)

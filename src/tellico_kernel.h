@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -82,8 +82,8 @@ public:
   QString fieldTitleByName(const QString& name) const;
   QStringList valuesByFieldName(const QString& name) const;
 
-  const QString& entryName() const;
   int collectionType() const;
+  QString collectionTypeName() const;
 
   void sorry(const QString& text, QWidget* widget=0);
 
@@ -91,29 +91,33 @@ public:
   void endCommandGroup();
   void resetHistory();
 
-  bool addField(Data::Field* field);
-  bool modifyField(Data::Field* field);
-  bool removeField(Data::Field* field);
+  bool addField(Data::FieldPtr field);
+  bool modifyField(Data::FieldPtr field);
+  bool removeField(Data::FieldPtr field);
 
-  void saveEntries(Data::EntryVec oldEntries, Data::EntryVec entries);
+  void addEntries(Data::EntryVec entries, bool checkFields);
+  void modifyEntries(Data::EntryVec oldEntries, Data::EntryVec newEntries);
   void removeEntries(Data::EntryVec entries);
 
   bool addLoans(Data::EntryVec entries);
-  bool modifyLoan(Data::Loan* loan);
+  bool modifyLoan(Data::LoanPtr loan);
   bool removeLoans(Data::LoanVec loans);
 
-  void addFilter(Filter* filter);
-  bool modifyFilter(Filter* filter);
-  bool removeFilter(Filter* filter);
+  void addFilter(FilterPtr filter);
+  bool modifyFilter(FilterPtr filter);
+  bool removeFilter(FilterPtr filter);
 
   void reorderFields(const Data::FieldVec& fields);
 
-  void appendCollection(Data::Collection* coll);
-  void mergeCollection(Data::Collection* coll);
-  void replaceCollection(Data::Collection* coll);
+  void appendCollection(Data::CollPtr coll);
+  void mergeCollection(Data::CollPtr coll);
+  void replaceCollection(Data::CollPtr coll);
 
   void renameCollection();
   const KCommandHistory* commandHistory() { return &m_commandHistory; }
+
+  bool writeImagesInFile() const { return m_writeImagesInFile; }
+  void setWriteImagesInFile(bool b) { m_writeImagesInFile = b; }
 
 private:
   static Kernel* s_self;
@@ -128,6 +132,7 @@ private:
   QWidget* m_widget;
   KCommandHistory m_commandHistory;
   Command::Group* m_commandGroup;
+  bool m_writeImagesInFile : 1;
 };
 
 } // end namespace

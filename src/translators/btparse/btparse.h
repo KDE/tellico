@@ -1,4 +1,3 @@
-/* src/btparse.h.  Generated automatically by configure.  */
 /* ------------------------------------------------------------------------
 @NAME       : btparse.h
 @DESCRIPTION: Declarations and types for users of the btparse library.
@@ -25,7 +24,7 @@
 #include <sys/types.h>                  /* probably supplies 'ushort' */
 #include <stdio.h>
 
-#include "../../../config.h" // not btparse's config.h but Tellico's
+#include "config.h" // not btparse's config.h but Tellico's
 
 /*
  * Here we attempt to define HAVE_USHORT if a typdef for `ushort' appears

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,14 +18,12 @@ class QCheckBox;
 class QRadioButton;
 
 #include "translators/translators.h"
+#include "datavectors.h"
 
 #include <kdialogbase.h>
 #include <kurl.h>
 
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
   namespace Export {
     class Exporter;
   }
@@ -37,7 +35,7 @@ class ExportDialog : public KDialogBase {
 Q_OBJECT
 
 public:
-  ExportDialog(Export::Format format, Data::Collection* coll, QWidget* parent, const char* name);
+  ExportDialog(Export::Format format, Data::CollPtr coll, QWidget* parent, const char* name);
   ~ExportDialog();
 
   QString fileFilter();
@@ -55,7 +53,7 @@ private:
   void readOptions();
 
   Export::Format m_format;
-  Data::Collection* m_coll;
+  Data::CollPtr m_coll;
   Export::Exporter* m_exporter;
   QCheckBox* m_formatFields;
   QCheckBox* m_exportSelected;

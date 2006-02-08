@@ -10,7 +10,7 @@
    ===================================================================
    Tellico XSLT file - used for importing MODS files.
 
-   Copyright (C) 2004-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2006 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -51,11 +51,11 @@
 <xsl:variable name="langs-top" select="document('')/*/l:langs"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V8.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v8/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V9.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="8">
+ <tellico syntaxVersion="9">
   <!-- consider it a book collection, type = "2" -->
   <collection title="MODS Import" type="2">
    <fields>
@@ -81,8 +81,12 @@
    </fields>
 <!-- for now, go the route of bibliox, and assume only text records
      with an originInfo/publisher or identifier[isbn] elements are actually books -->
-   <xsl:for-each select=".//mods:mods[(mods:typeOfResource='text' and 
-                         mods:originInfo/mods:publisher) or mods:identifier[@type='isbn']]">
+<!-- Changed in Tellico 1.1, don't be so strict about the text thing, not every library
+     includes that in the mods output, so just check for publisher 
+     //mods:mods[(mods:typeOfResource='text' and -->
+   <xsl:for-each select=".//mods:mods[ mods:originInfo/mods:publisher or
+                                       mods:identifier[@type='isbn'] or
+                                       mods:identifier[@type='lccn'] ]">
     <xsl:apply-templates select="."/>
    </xsl:for-each>
   </collection>
@@ -141,23 +145,30 @@
   </xsl:choose>
 
   <!-- prefer the marc encoding for year -->
+  <!-- force numbers...is that ok? -->
   <pub_year>
    <xsl:choose>
     <xsl:when test="mods:originInfo/mods:dateIssued[@encoding='marc']">
-     <xsl:value-of select="mods:originInfo/mods:dateIssued[@encoding='marc']"/>
+     <xsl:call-template name="numbers">
+      <xsl:with-param name="value" select="mods:originInfo/mods:dateIssued[@encoding='marc'][1]"/>
+     </xsl:call-template>
     </xsl:when>
     <xsl:when test="mods:originInfo/mods:dateIssued">
-     <xsl:value-of select="mods:originInfo/mods:dateIssued[1]"/>
+     <xsl:call-template name="numbers">
+      <xsl:with-param name="value" select="mods:originInfo/mods:dateIssued[1]"/>
+     </xsl:call-template>
     </xsl:when>
    </xsl:choose>
   </pub_year>
-  
+
   <cr_year>
-   <xsl:value-of select="mods:originInfo/mods:copyrightDate[@encoding='marc']"/>  
+   <xsl:call-template name="numbers">
+    <xsl:with-param name="value" select="mods:originInfo/mods:copyrightDate[@encoding='marc']"/>
+   </xsl:call-template>
   </cr_year>
 
   <edition i18n="true">
-   <xsl:value-of select="mods:originInfo/edition"/>  
+   <xsl:value-of select="mods:originInfo/mods:edition"/>
   </edition>
 
   <languages i18n="true">
@@ -185,7 +196,7 @@
   </lccn>
 
   <comments>
-   <xsl:for-each select="mods:note">
+   <xsl:for-each select="mods:note | mods:physicalDescription/*">
     <xsl:value-of select="."/>
     <!-- add separating line, Tellico understands HTML now -->
     <xsl:text>&lt;br/&gt;&lt;br/&gt;</xsl:text>

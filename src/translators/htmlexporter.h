@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,9 +37,11 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class HTMLExporter : public Exporter {
+Q_OBJECT
+
 public:
   HTMLExporter();
-  HTMLExporter(const Data::Collection* coll);
+  HTMLExporter(Data::CollPtr coll);
   ~HTMLExporter();
 
   virtual bool exec();
@@ -60,12 +62,16 @@ public:
   void setSortTitles(const QStringList& l)
     { m_sort1 = l[0]; m_sort2 = l[1]; m_sort3 = l[2]; }
   void setColumns(const QStringList& columns) { m_columns = columns; }
+  void setParseDOM(bool parseDOM) { m_parseDOM = parseDOM; }
 
   QString text();
 
+public slots:
+  void slotCancel();
+
 private:
-  void setFormattingOptions(const Data::Collection* coll);
-  void writeImages(const Data::Collection* coll);
+  void setFormattingOptions(Data::CollPtr coll);
+  void writeImages(Data::CollPtr coll);
   bool writeEntryFiles();
   KURL fileDir() const;
   QString fileDirName() const;
@@ -74,12 +80,15 @@ private:
   QString handleLink(const QString& link);
   QString analyzeInternalCSS(const QString& string);
   bool copyFiles();
+  bool loadXSLTFile();
 
   KHTMLPart* m_part;
   XSLTHandler* m_handler;
-  bool m_printHeaders;
-  bool m_printGrouped;
-  bool m_exportEntryFiles;
+  bool m_printHeaders : 1;
+  bool m_printGrouped : 1;
+  bool m_exportEntryFiles : 1;
+  bool m_cancelled : 1;
+  bool m_parseDOM : 1;
   int m_imageWidth;
   int m_imageHeight;
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,6 +14,7 @@
 #include "xslthandler.h"
 #include "../latin1literal.h"
 #include "../tellico_debug.h"
+#include "../tellico_utils.h"
 
 #include <qtextcodec.h>
 
@@ -84,13 +85,13 @@ XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
   }
 }
 
-XSLTHandler::XSLTHandler(const QDomDocument& xsltDoc_, const QCString& xsltFile_) :
+XSLTHandler::XSLTHandler(const QDomDocument& xsltDoc_, const QCString& xsltFile_, bool translate_) :
     m_stylesheet(0),
     m_docIn(0),
     m_docOut(0) {
   init();
   if(!xsltDoc_.isNull()) {
-    setXSLTDoc(xsltDoc_, xsltFile_);
+    setXSLTDoc(xsltDoc_, xsltFile_, translate_);
   }
 }
 
@@ -129,12 +130,12 @@ void XSLTHandler::init() {
   m_params.clear();
 }
 
-void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_) {
+void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_, bool translate_) {
   bool utf8 = true; // XML defaults to utf-8
 
   // need to find out if utf-8 or not
   const QDomNodeList childs = dom_.childNodes();
-  for(unsigned j = 0; j < childs.count(); ++j) {
+  for(uint j = 0; j < childs.count(); ++j) {
     if(childs.item(j).isProcessingInstruction()) {
       QDomProcessingInstruction pi = childs.item(j).toProcessingInstruction();
       if(pi.data().lower().contains(QString::fromLatin1("encoding"))) {
@@ -148,19 +149,24 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
     }
   }
 
+  QString s = dom_.toString();
+  if(translate_) {
+    s = Tellico::i18nReplace(s);
+  }
+
   xmlDocPtr xsltDoc;
   if(utf8) {
 #if LIBXML_VERSION >= 20600
-    xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().utf8().data(), xsltFile_.data(), NULL, xslt_options);
+    xsltDoc = xmlReadDoc((xmlChar *)s.utf8().data(), xsltFile_.data(), NULL, xslt_options);
 #else
-    xsltDoc = xmlParseDoc((xmlChar *)dom_.toString().utf8().data());
+    xsltDoc = xmlParseDoc((xmlChar *)s.utf8().data());
     xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data()); // needed in case of xslt includes
 #endif
   } else {
 #if LIBXML_VERSION >= 20600
-    xsltDoc = xmlReadDoc((xmlChar *)dom_.toString().local8Bit().data(), xsltFile_.data(), NULL, xslt_options);
+    xsltDoc = xmlReadDoc((xmlChar *)s.local8Bit().data(), xsltFile_.data(), NULL, xslt_options);
 #else
-    xsltDoc = xmlParseDoc((xmlChar *)dom_.toString().local8Bit().data());
+    xsltDoc = xmlParseDoc((xmlChar *)s.local8Bit().data());
     xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data()); // needed in case of xslt includes
 #endif
   }

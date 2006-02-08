@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,16 +14,22 @@
 #include "tellico_utils.h"
 #include "tellico_kernel.h"
 #include "latin1literal.h"
+#include "tellico_debug.h"
 
 #include <kapplication.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include <kstringhandler.h>
+#include <klibloader.h>
+#include <kstandarddirs.h>
 
 #include <qregexp.h>
 #include <qdir.h>
 #include <qcursor.h>
 #include <qscrollview.h>
+
+namespace {
+  static const int STRING_STORE_SIZE = 997; // too big, too small?
+}
 
 QColor Tellico::contrastColor;
 
@@ -31,14 +37,17 @@ QString Tellico::decodeHTML(QString text) {
   QRegExp rx(QString::fromLatin1("&#(\\d+);"));
   int pos = rx.search(text);
   while(pos > -1) {
-    text.replace(pos, rx.matchedLength(), static_cast<char>(rx.cap(1).toInt()));
+    text.replace(pos, rx.matchedLength(), QChar((rx.cap(1).toInt())));
     pos = rx.search(text, pos+1);
   }
   return text;
 }
 
-QString Tellico::uid(int l) {
-  QString uid = QString::fromLatin1("Tellico");
+QString Tellico::uid(int l, bool prefix) {
+  QString uid;
+  if(prefix) {
+    uid = QString::fromLatin1("Tellico");
+  }
   uid.append(kapp->randomString(QMAX(l - uid.length(), 0)));
   return uid;
 }
@@ -70,7 +79,7 @@ QString Tellico::i18nReplace(QString text) {
   int pos = rx.search(text);
   while(pos > -1) {
     text.replace(pos, rx.matchedLength(), i18n(rx.cap(1).utf8()));
-    pos = rx.search(text, pos+1);
+    pos = rx.search(text, pos+rx.matchedLength());
   }
   return text;
 }
@@ -98,6 +107,33 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
   return allSubdirs;
 }
 
+// Based on QGDict's hash functions, Copyright (C) 1992-2000 Trolltech AS
+// and used from Juk, Copyright (C) (2003 - 2004 by Scott Wheeler
+int Tellico::stringHash(const QString& str) {
+  uint h = 0;
+  uint g = 0;
+  for(uint i = 0; i < str.length(); ++i) {
+    h = (h << 4) + str.unicode()[i].cell();
+    if((g = h & 0xf0000000)) {
+      h ^= g >> 24;
+    }
+    h &= ~g;
+  }
+
+  int index = h;
+  return index < 0 ? -index : index;
+}
+
+QString Tellico::shareString(const QString& str) {
+  static QString stringStore[STRING_STORE_SIZE];
+
+  const int hash = stringHash(str) % STRING_STORE_SIZE;
+  if(stringStore[hash] != str) {
+    stringStore[hash] = str;
+  }
+  return stringStore[hash];
+}
+
 void Tellico::updateContrastColor(const QColorGroup& cg_) {
   // if the value difference between background and highlight is more than ???
   // use highlight, else go lighter or darker
@@ -121,29 +157,44 @@ void Tellico::updateContrastColor(const QColorGroup& cg_) {
   }
 }
 
-QString Tellico::rPixelSqueeze(const QString& str_, const QFontMetrics& fm_, uint pixels_) {
-#if KDE_IS_VERSION(3,1,90)
-  return KStringHandler::rPixelSqueeze(str_, fm_, pixels_);
-#else
-  uint width = fm_.width(str_);
-  if(pixels_ < width) {
-    QString tmp = str_;
-    const uint em = fm_.maxWidth();
-    pixels_ -= fm_.width(QString::fromLatin1("..."));
-
-    while(pixels_ < width && !tmp.isEmpty()) {
-      int length = tmp.length();
-      int delta = em ? (width - pixels_) / em : length;
-      delta = kClamp(delta, 1, length);
-      tmp.remove(length - delta, delta);
-      width = fm_.width(tmp);
-    }
-
-    return tmp + QString::fromLatin1("...");
+KLibrary* Tellico::openLibrary(const QString& libName_) {
+  QString path = KLibLoader::findLibrary(QFile::encodeName(libName_));
+  if(path.isEmpty()) {
+    kdWarning() << "Tellico::openLibrary() - Could not find library '" << libName_ << "'" << endl;
+    kdWarning() << "ERROR: " << KLibLoader::self()->lastErrorMessage() << endl;
+    return 0;
   }
 
-  return str_;
-#endif
+  KLibrary* library = KLibLoader::self()->library(QFile::encodeName(path));
+  if(!library) {
+    kdWarning() << "Tellico::openLibrary() - Could not load library '" << libName_ << "'" << endl;
+    kdWarning() << " PATH: " << path << endl;
+    kdWarning() << "ERROR: " << KLibLoader::self()->lastErrorMessage() << endl;
+    return 0;
+  }
+
+  return library;
+}
+
+QColor Tellico::blendColors(const QColor& color1, const QColor& color2, int percent) {
+  const float factor2 = percent/100.0;
+  const float factor1 = 1.0 - factor2;
+
+  const int r = static_cast<int>(color1.red()   * factor1 + color2.red()   * factor2);
+  const int g = static_cast<int>(color1.green() * factor1 + color2.green() * factor2);
+  const int b = static_cast<int>(color1.blue()  * factor1 + color2.blue()  * factor2);
+
+  return QColor(r, g, b);
+}
+
+QString Tellico::minutes(int seconds) {
+  int min = seconds / 60;
+  seconds = seconds % 60;
+  return QString::number(min) + ':' + QString::number(seconds).rightJustify(2, '0');
+}
+
+QString Tellico::saveLocation(const QString& dir_) {
+  return KGlobal::dirs()->saveLocation("appdata", dir_, true);
 }
 
 Tellico::GUI::CursorSaver::CursorSaver(const QCursor& cursor_) : m_restored(false) {
@@ -159,22 +210,4 @@ Tellico::GUI::CursorSaver::~CursorSaver() {
 void Tellico::GUI::CursorSaver::restore() {
   kapp->restoreOverrideCursor();
   m_restored = true;
-}
-
-Tellico::GUI::WidgetUpdateBlocker::WidgetUpdateBlocker(QScrollView* widget_) : m_widget(widget_), m_wasEnabled(false) {
-  if(m_widget) {
-    m_wasEnabled = m_widget->isUpdatesEnabled();
-    m_widget->viewport()->setUpdatesEnabled(false);
-    m_widget->setUpdatesEnabled(false);
-  }
-}
-
-Tellico::GUI::WidgetUpdateBlocker::~WidgetUpdateBlocker() {
-  if(m_widget) {
-    // I think it's a qt bug, but the viewport for scroll view doesn't refresh properly
-    m_widget->viewport()->setUpdatesEnabled(m_wasEnabled);
-    m_widget->setUpdatesEnabled(m_wasEnabled);
-    m_widget->viewport()->update();
-    m_widget->update();
-  }
 }

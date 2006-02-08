@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,8 +13,8 @@
 
 #include "imagewidget.h"
 #include "../filehandler.h"
+#include "../tellico_debug.h"
 
-#include <kdebug.h>
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kbuttonbox.h>
@@ -27,21 +27,21 @@
 #include <qapplication.h> // needed for drag distance
 
 namespace {
-  static const uint button_margin = 8;
-  static const uint image_margin = 4;
+  static const uint IMAGE_WIDGET_BUTTON_MARGIN = 8;
+  static const uint IMAGE_WIDGET_IMAGE_MARGIN = 4;
 }
 
 using Tellico::GUI::ImageWidget;
 
 ImageWidget::ImageWidget(QWidget* parent_, const char* name_) : QWidget(parent_, name_) {
   QHBoxLayout* l = new QHBoxLayout(this);
-  l->setMargin(button_margin);
+  l->setMargin(IMAGE_WIDGET_BUTTON_MARGIN);
   m_label = new QLabel(this);
   m_label->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
   m_label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
   m_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
   l->addWidget(m_label, 1);
-  l->addSpacing(button_margin);
+  l->addSpacing(IMAGE_WIDGET_BUTTON_MARGIN);
 
   KButtonBox* box = new KButtonBox(this, Vertical);
   box->addStretch(1);
@@ -80,10 +80,6 @@ void ImageWidget::setImage(const Data::Image& image_) {
 }
 
 void ImageWidget::slotClear() {
-//  if(m_image.isNull()) {
-//    return;
-//  }
-
   m_image = Data::Image();
   m_pixmap = QPixmap();
   m_scaled = m_pixmap;
@@ -94,8 +90,8 @@ void ImageWidget::slotClear() {
 }
 
 void ImageWidget::scale() {
-  int ww = m_label->width() - 2*image_margin;
-  int wh = m_label->height() - 2*image_margin;
+  int ww = m_label->width() - 2*IMAGE_WIDGET_IMAGE_MARGIN;
+  int wh = m_label->height() - 2*IMAGE_WIDGET_IMAGE_MARGIN;
   int pw = m_pixmap.width();
   int ph = m_pixmap.height();
 
@@ -158,7 +154,7 @@ void ImageWidget::mousePressEvent(QMouseEvent* event_) {
 }
 
 void ImageWidget::mouseMoveEvent(QMouseEvent* event_) {
-  static int delay = QApplication::startDragDistance();
+  int delay = QApplication::startDragDistance();
   // Only interested in LMB
   if(event_->state() & Qt::LeftButton) {
     // only allow drag is the image is non-null, and the drag start point isn't null and the user dragged far enough
@@ -170,12 +166,13 @@ void ImageWidget::mouseMoveEvent(QMouseEvent* event_) {
 }
 
 void ImageWidget::dragEnterEvent(QDragEnterEvent* event_) {
-  event_->accept(KURLDrag::canDecode(event_) || QImageDrag::canDecode(event_));
+  event_->accept(KURLDrag::canDecode(event_) || QImageDrag::canDecode(event_) || QTextDrag::canDecode(event_));
 }
 
 void ImageWidget::dropEvent(QDropEvent* event_) {
   QImage image;
   KURL::List urls;
+  QString text;
 
   if(QImageDrag::decode(event_, image)) {
     // Qt reads PNG data by default
@@ -194,6 +191,17 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
       return;
     }
 //    kdDebug() << "ImageWidget::dropEvent() - " << url.prettyURL() << endl;
+
+    const Data::Image& img = ImageFactory::addImage(url);
+    if(!img.isNull() && img != m_image) {
+      setImage(img);
+      emit signalModified();
+    }
+  } else if(QTextDrag::decode(event_, text)) {
+    KURL url(text);
+    if(url.isEmpty() || !url.isValid()) {
+      return;
+    }
 
     const Data::Image& img = ImageFactory::addImage(url);
     if(!img.isNull() && img != m_image) {

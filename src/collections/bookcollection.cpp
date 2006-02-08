@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "bookcollection.h"
-#include "../collectionfactory.h"
 
 #include <klocale.h>
 
@@ -26,7 +25,7 @@ namespace {
 using Tellico::Data::BookCollection;
 
 BookCollection::BookCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(Book), i18n("Books")) {
+   : Collection(title_, i18n("Books")) {
   setTitle(title_.isNull() ? i18n("My Books") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -36,7 +35,7 @@ BookCollection::BookCollection(bool addFields_, const QString& title_ /*=null*/)
 
 Tellico::Data::FieldVec BookCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
   field->setCategory(i18n("General"));
@@ -169,6 +168,24 @@ Tellico::Data::FieldVec BookCollection::defaultFields() {
   list.append(field);
 
   return list;
+}
+
+int BookCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+  // equal isbn's or lccn's are easy, give it a weight of 100
+  if(Entry::compareValues(entry1_, entry2_, QString::fromLatin1("isbn"), this) > 0 ||
+     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("lccn"), this) > 0) {
+    return 100; // good match
+  }
+  int res = 3*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+//  if(res == 0) {
+//    myDebug() << "BookCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
+//              << entry2_->title() << endl;
+//  }
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("author"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("cr_year"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("pub_year"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("binding"), this);
+  return res;
 }
 
 #include "bookcollection.moc"

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -48,7 +48,7 @@ public:
    *
    * @param entry The entry to show
    */
-  void showEntry(Data::Entry* entry);
+  void showEntry(Data::EntryPtr entry);
     /**
    * Clear the widget and set Entry pointer to NULL
    */

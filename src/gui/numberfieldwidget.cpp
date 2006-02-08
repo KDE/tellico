@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,7 +22,7 @@
 
 using Tellico::GUI::NumberFieldWidget;
 
-NumberFieldWidget::NumberFieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
+NumberFieldWidget::NumberFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : FieldWidget(field_, parent_, name_), m_lineEdit(0), m_spinBox(0) {
 
   if(field_->flags() & Data::Field::AllowMultiple) {
@@ -106,7 +106,7 @@ void NumberFieldWidget::clear() {
   editMultiple(false);
 }
 
-void NumberFieldWidget::updateFieldHook(Data::Field*, Data::Field* newField_) {
+void NumberFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_) {
   bool wasLineEdit = !isSpinBox();
   bool nowLineEdit = newField_->flags() & Data::Field::AllowMultiple;
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,7 +17,6 @@
 class QPushButton;
 
 #include "observer.h"
-#include "datavectors.h"
 #include "gui/fieldwidget.h"
 
 #include <kdialogbase.h>
@@ -54,7 +53,7 @@ public:
    *
    * @param coll A pointer to the collection whose fields should be used for setting up the layout
    */
-  void setLayout(Data::Collection* coll);
+  void setLayout(Data::CollPtr coll);
   /**
    * Sets the contents of the input controls to match the contents of a list of entries.
    *
@@ -68,10 +67,10 @@ public:
    */
   void clear();
 
-  virtual void    addEntry(Data::Entry* entry) { updateCompletions(entry); }
-  virtual void modifyEntry(Data::Entry* entry) { updateCompletions(entry); }
+  virtual void    addEntries(Data::EntryVec entries);
+  virtual void modifyEntries(Data::EntryVec entries);
 
-  virtual void    addField(Data::Collection* coll, Data::Field*) { setLayout(coll); }
+  virtual void    addField(Data::CollPtr coll, Data::FieldPtr) { setLayout(coll); }
   /**
    * Updates a widget when its field has been modified. The category may have changed, completions may have
    * been added or removed, or what-have-you.
@@ -80,13 +79,13 @@ public:
    * @param oldField A pointer to the old field, which should have the same name as the new one
    * @param newField A pointer to the new field
    */
-  virtual void modifyField(Data::Collection* coll, Data::Field* oldField, Data::Field* newField);
+  virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
   /**
    * Removes a field from the editor.
    *
    * @param field The field to be removed
    */
-  virtual void removeField(Data::Collection*, Data::Field* field);
+  virtual void removeField(Data::CollPtr, Data::FieldPtr field);
 
 public slots:
   /**
@@ -121,16 +120,16 @@ private:
    * @param entry A pointer to the entry
    * @param highlight An optional string to highlight
    */
-  void setContents(Data::Entry* entry);
+  void setContents(Data::EntryPtr entry);
   /**
    * Updates the completion objects in the edit boxes to include values
    * contained in a certain entry.
    *
    * @param entry A pointer to the entry
    */
-  void updateCompletions(Data::Entry* entry);
+  void updateCompletions(Data::EntryPtr entry);
 
-  KSharedPtr<Data::Collection> m_currColl;
+  Data::CollPtr m_currColl;
   Data::EntryVec m_currEntries;
   GUI::TabControl* m_tabs;
   QDict<GUI::FieldWidget> m_widgetDict;

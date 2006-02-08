@@ -79,6 +79,7 @@ CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CPPUMAKER = @CPPUMAKER@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -173,6 +174,10 @@ MSGFMT = @MSGFMT@
 NOOPT_CFLAGS = @NOOPT_CFLAGS@
 NOOPT_CXXFLAGS = @NOOPT_CXXFLAGS@
 OBJEXT = @OBJEXT@
+OFFICE_SDK_includes = @OFFICE_SDK_includes@
+OFFICE_libadd = @OFFICE_libadd@
+OFFICE_libdir = @OFFICE_libdir@
+OFFICE_registry = @OFFICE_registry@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -202,6 +207,8 @@ USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
+WITH_OOO_FALSE = @WITH_OOO_FALSE@
+WITH_OOO_TRUE = @WITH_OOO_TRUE@
 WOVERLOADED_VIRTUAL = @WOVERLOADED_VIRTUAL@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -291,16 +298,17 @@ x_includes = @x_includes@
 x_libraries = @x_libraries@
 EXTRA_DIST = Column_View.xsl Title_Listing_(Horizontal).xsl\
 	Title_Listing_(Vertical).xsl Group_View.xsl Image_List.xsl \
-	Loan_View.xsl Group_Summary.xsl
+	Loan_View.xsl Group_Summary.xsl Tri-Column.xsl
 
 
 ####### kdevelop will overwrite this part!!! (end)############
 xsldir = $(kde_datadir)/tellico/report-templates
 xsl_DATA = Column_View.xsl Title_Listing_(Horizontal).xsl \
 	Title_Listing_(Vertical).xsl Group_View.xsl Image_List.xsl \
-	Loan_View.xsl Group_Summary.xsl
+	Loan_View.xsl Group_Summary.xsl Tri-Column.xsl
 
 KDE_OPTIONS = noautodist
+CLEANFILES = *~
 #>- all: all-am
 #>+ 1
 all: docs-am  all-am
@@ -433,6 +441,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)

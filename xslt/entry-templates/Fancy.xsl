@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - fancy template for viewing entry data
 
-   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
 
    The drop-shadow effect is based on the "A List Apart" method
    at http://www.alistapart.com/articles/cssdropshadows/
@@ -57,9 +57,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 8 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 9 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'8'"/>
+  <xsl:with-param name="this-version" select="'9'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -72,6 +72,8 @@
     font-family: "<xsl:value-of select="$font"/>";
     color: <xsl:value-of select="$fgcolor"/>;
     background-color: <xsl:value-of select="$bgcolor"/>;
+    background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_bg.png')"/>);
+    background-repeat: repeat;
   }
   h1 {
     margin: 0px;
@@ -79,6 +81,8 @@
     font-size: 1.8em;
     color: <xsl:value-of select="$color1"/>;
     background-color: <xsl:value-of select="$color2"/>;
+    background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
+    background-repeat: repeat-x; 
 /*    border: 1px solid;
     border-color: <xsl:value-of select="$fgcolor"/>;*/
     border-bottom: 1px outset black;
@@ -119,13 +123,17 @@
     margin: 8px;
     border: 1px solid <xsl:value-of select="$fgcolor"/>;
     text-align: center;
-    background-color: #cccccc;
+  /* if background is grey, text has to be black */
+    color: #000;
+    background-color: #ccc;
     min-height: 1em;
     overflow: hidden;
   }
   h2 {
     color: <xsl:value-of select="$color1"/>;
     background-color: <xsl:value-of select="$color2"/>;
+    background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
+    background-repeat: repeat-x; 
     border-bottom: 1px outset;
     border-color: <xsl:value-of select="$fgcolor"/>;
     padding: 0px 8px 0px 0px;
@@ -139,6 +147,9 @@
     border-collapse: collapse;
     border-spacing: 0px;
     max-width: 100%;
+  }
+  tr.table-columns {
+    font-style: italic;
   }
   th.fieldName {
     font-weight: bolder;
@@ -155,18 +166,19 @@
     font-weight: bold;
     text-align: left;
     padding: 0px 2px 0px 2px;
-    white-space: nowrap;
+/*    white-space: nowrap;*/
   }
   td.column2 {
     font-style: italic;
     text-align: left;
     padding: 0px 10px 0px 10px;
-    width: 90%; /* nowrap is set on the fieldName column, so just want enough width to take the rest */
+/*    width: 90%;  nowrap is set on the fieldName column, so just want enough width to take the rest */
   }
   p {
-    margin: 2px 0px 2px 0;
+    margin: 2px 10px 2px 0;
     padding: 0px;
-    text-align: left;
+    text-align: justify;
+    font-size: 90%;
   }
   ul {
     text-align: left;
@@ -325,7 +337,25 @@
      <!-- look at number of columns -->
      <xsl:choose>
       <xsl:when test="$fields[1]/tc:prop[@name = 'columns'] &gt; 1">
-       <table>
+       <table width="100%">
+        <xsl:if test="$fields[1]/tc:prop[@name = 'column1']">
+         <thead>
+          <tr class="table-columns">
+           <th width="50%">
+            <xsl:value-of select="$fields[1]/tc:prop[@name = 'column1']"/>
+           </th>
+           <th width="50%">
+            <xsl:value-of select="$fields[1]/tc:prop[@name = 'column2']"/>
+           </th>
+           <xsl:call-template name="columnTitle">
+            <xsl:with-param name="index" select="3"/>
+            <xsl:with-param name="max" select="$fields[1]/tc:prop[@name = 'columns']"/>
+            <xsl:with-param name="elem" select="'th'"/>
+            <xsl:with-param name="field" select="$fields[1]"/>
+           </xsl:call-template>
+          </tr>
+         </thead>
+        </xsl:if>
         <tbody>
          <xsl:for-each select="$entry//*[local-name(.) = $fields[1]/@name]">
           <tr>
@@ -343,7 +373,7 @@
                <xsl:text>&#160;</xsl:text>
               </td>
              </xsl:otherwise>
-            </xsl:choose>           
+            </xsl:choose>
            </xsl:for-each>
           </tr>
          </xsl:for-each>

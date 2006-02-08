@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "stampcollection.h"
-#include "../collectionfactory.h"
 
 #include <klocale.h>
 
@@ -25,7 +24,7 @@ namespace {
 using Tellico::Data::StampCollection;
 
 StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(Stamp), i18n("Stamps")) {
+   : Collection(title_, i18n("Stamps")) {
   setTitle(title_.isNull() ? i18n("My Stamps") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -35,7 +34,7 @@ StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*
 
 Tellico::Data::FieldVec StampCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
   field->setCategory(i18n(stamp_general));

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "coincollection.h"
-#include "../collectionfactory.h"
 
 #include <klocale.h>
 
@@ -24,7 +23,7 @@ namespace {
 using Tellico::Data::CoinCollection;
 
 CoinCollection::CoinCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(Coin), i18n("Coins")) {
+   : Collection(title_, i18n("Coins")) {
   setTitle(title_.isNull() ? i18n("My Coins") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -34,11 +33,12 @@ CoinCollection::CoinCollection(bool addFields_, const QString& title_ /*=null*/)
 
 Tellico::Data::FieldVec CoinCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
   field->setCategory(i18n(coin_general));
-  field->setDescription(QString::fromLatin1("%{year} %{type} %{denomination}"));
+  // not i18n()
+  field->setDescription(QString::fromLatin1("%{year}%{mintmark} %{type} %{denomination}"));
   field->setFlags(Field::NoDelete);
   list.append(field);
 

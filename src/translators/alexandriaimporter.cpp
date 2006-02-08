@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,9 +18,12 @@
 #include "../latin1literal.h"
 #include "../isbnvalidator.h"
 #include "../imagefactory.h"
+#include "../progressmanager.h"
+#include "../tellico_debug.h"
 
 #include <kcombobox.h>
-#include <kdebug.h>
+#include <kglobal.h> // for KMAX
+#include <kapplication.h>
 
 #include <qlayout.h>
 #include <qlabel.h>
@@ -32,7 +35,7 @@ bool AlexandriaImporter::canImport(int type) const {
   return type == Data::Collection::Book;
 }
 
-Tellico::Data::Collection* AlexandriaImporter::collection() {
+Tellico::Data::CollPtr AlexandriaImporter::collection() {
   if(!m_widget || m_library->count() == 0) {
     return 0;
   }
@@ -45,6 +48,7 @@ Tellico::Data::Collection* AlexandriaImporter::collection() {
 
   const QString title = QString::fromLatin1("title");
   const QString author = QString::fromLatin1("author");
+  const QString year = QString::fromLatin1("pub_year");
   const QString binding = QString::fromLatin1("binding");
   const QString isbn = QString::fromLatin1("isbn");
   const QString pub = QString::fromLatin1("publisher");
@@ -54,17 +58,23 @@ Tellico::Data::Collection* AlexandriaImporter::collection() {
 
   // start with yaml files
   dataDir.setNameFilter(QString::fromLatin1("*.yaml"));
-  QTextStream ts;
   const QStringList files = dataDir.entryList();
-  const int numFiles = files.count();
-  int j = 0;
-  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it, ++j) {
+  const uint numFiles = files.count();
+  const uint stepSize = KMAX(s_stepSize, numFiles/100);
+
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
+  item.setTotalSteps(numFiles);
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+
+  QTextStream ts;
+  uint j = 0;
+  for(QStringList::ConstIterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++j) {
     QFile file(dataDir.absFilePath(*it));
     if(!file.open(IO_ReadOnly)) {
       continue;
     }
 
-    Data::Entry* entry = new Data::Entry(m_coll);
+    Data::EntryPtr entry = new Data::Entry(m_coll);
 
     bool readNextLine = true;
     ts.unsetDevice();
@@ -105,7 +115,14 @@ Tellico::Data::Collection* AlexandriaImporter::collection() {
 
         // Alexandria calls the edition the binding
       } else if(alexField == Latin1Literal("edition")) {
+        // special case if it's "Hardcover"
+        if(alexValue.lower() == Latin1Literal("hardcover")) {
+          alexValue = i18n("Hardback");
+        }
         entry->setField(binding, alexValue);
+
+      } else if(alexField == Latin1Literal("publishing_year")) {
+        entry->setField(year, alexValue);
 
       } else if(alexField == Latin1Literal("isbn")) {
         KURL u;
@@ -120,7 +137,7 @@ Tellico::Data::Collection* AlexandriaImporter::collection() {
             entry->setField(cover, img.id());
           }
         }
-        static const ISBNValidator val(0);
+        const ISBNValidator val(0);
         val.fixup(alexValue);
         entry->setField(isbn, alexValue);
 
@@ -132,13 +149,14 @@ Tellico::Data::Collection* AlexandriaImporter::collection() {
         entry->setField(alexField, alexValue);
 
       } else if(m_coll->fieldByTitle(alexField)) {
-        entry->setField(m_coll->fieldNameByTitle(alexField), alexValue);
+        entry->setField(m_coll->fieldByTitle(alexField), alexValue);
       }
     }
     m_coll->addEntry(entry);
 
-    if(j%s_stepSize == 0) {
-      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(numFiles));
+    if(j%stepSize == 0) {
+      ProgressManager::self()->setProgress(this, j);
+      kapp->processEvents();
     }
   }
 
@@ -157,8 +175,9 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
   QGroupBox* box = new QGroupBox(2, Qt::Horizontal, i18n("Alexandria Options"), m_widget);
-  (void) new QLabel(i18n("Library:"), box);
+  QLabel* label = new QLabel(i18n("&Library:"), box);
   m_library = new KComboBox(box);
+  label->setBuddy(m_library);
 
   // .alexandria might not exist
   if(m_libraryDir.cd(QString::fromLatin1(".alexandria"))) {
@@ -182,6 +201,10 @@ QString& AlexandriaImporter::clean(QString& str_) {
     str_.truncate(str_.length()-1);
   }
   return str_.replace(quote, QChar('"'));
+}
+
+void AlexandriaImporter::slotCancel() {
+  m_cancelled = true;
 }
 
 #include "alexandriaimporter.moc"

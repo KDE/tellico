@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,7 +21,7 @@
 
 using Tellico::Command::ModifyLoans;
 
-ModifyLoans::ModifyLoans(Data::Loan* oldLoan_, Data::Loan* newLoan_, bool addToCalendar_)
+ModifyLoans::ModifyLoans(Data::LoanPtr oldLoan_, Data::LoanPtr newLoan_, bool addToCalendar_)
     : KCommand()
     , m_oldLoan(oldLoan_)
     , m_newLoan(newLoan_)
@@ -34,7 +34,7 @@ void ModifyLoans::execute() {
     return;
   }
 
-  Data::Borrower* b = m_oldLoan->borrower();
+  Data::BorrowerPtr b = m_oldLoan->borrower();
   b->removeLoan(m_oldLoan);
   b->addLoan(m_newLoan);
   Controller::self()->modifiedBorrower(b);
@@ -55,7 +55,7 @@ void ModifyLoans::unexecute() {
     return;
   }
 
-  Data::Borrower* b = m_oldLoan->borrower();
+  Data::BorrowerPtr b = m_oldLoan->borrower();
   b->removeLoan(m_newLoan);
   b->addLoan(m_oldLoan);
   Controller::self()->modifiedBorrower(b);

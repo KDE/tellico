@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,6 +16,8 @@
 
 #include "gui/counteditem.h"
 
+#include <qpixmap.h>
+
 namespace Tellico {
   namespace Data {
     class EntryGroup;
@@ -26,7 +28,7 @@ namespace Tellico {
  */
 class EntryGroupItem : public GUI::CountedItem {
 public:
-  EntryGroupItem(GUI::ListView* parent, Data::EntryGroup* group);
+  EntryGroupItem(GUI::ListView* parent, Data::EntryGroup* group, int fieldType);
 
   virtual bool isEntryGroupItem() const { return true; }
   /**
@@ -35,6 +37,13 @@ public:
    * @return The id number
    */
   Data::EntryGroup* group() const { return m_group; }
+  void setGroup(Data::EntryGroup* group) { m_group = group; }
+
+  QPixmap ratingPixmap();
+
+  virtual void setPixmap(int col, const QPixmap& pix);
+  virtual void paintCell(QPainter* p, const QColorGroup& cg,
+                         int column, int width, int align);
   /**
    * Returns the key for sorting the listitems. The text used for an empty
    * value should be sorted first, so the returned key is "\t". Since the text may
@@ -46,8 +55,13 @@ public:
    */
   virtual QString key(int col, bool) const;
 
+  virtual int count() const;
+
 private:
   Data::EntryGroup* m_group;
+  int m_fieldType;
+  QPixmap m_pix;
+  bool m_emptyGroup : 1;
 
 // since I do an expensive RegExp match for the surname prefixes, I want to
 // cache the text and the resulting key

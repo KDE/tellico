@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,7 +28,7 @@ FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Funct
  : m_fieldName(fieldName_), m_function(func_), m_pattern(pattern_) {
 }
 
-bool FilterRule::matches(const Data::Entry* const entry_) const {
+bool FilterRule::matches(Data::EntryPtr entry_) const {
   switch (m_function) {
     case FuncEquals:
       return equals(entry_);
@@ -49,7 +49,7 @@ bool FilterRule::matches(const Data::Entry* const entry_) const {
   return true;
 }
 
-bool FilterRule::equals(const Data::Entry* const entry_) const {
+bool FilterRule::equals(Data::EntryPtr entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
     QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
@@ -66,7 +66,7 @@ bool FilterRule::equals(const Data::Entry* const entry_) const {
   return false;
 }
 
-bool FilterRule::contains(const Data::Entry* const entry_) const {
+bool FilterRule::contains(Data::EntryPtr entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
     QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
@@ -84,7 +84,7 @@ bool FilterRule::contains(const Data::Entry* const entry_) const {
   return false;
 }
 
-bool FilterRule::matchesRegExp(const Data::Entry* const entry_) const {
+bool FilterRule::matchesRegExp(Data::EntryPtr entry_) const {
   QRegExp rx(m_pattern, false);
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
@@ -113,7 +113,7 @@ Filter::Filter(const Filter& other_) : QPtrList<FilterRule>(), KShared(), m_op(o
   setAutoDelete(true);
 }
 
-bool Filter::matches(const Data::Entry* const entry_) const {
+bool Filter::matches(Data::EntryPtr entry_) const {
   if(isEmpty()) {
     return true;
   }

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,6 +15,7 @@
 #include "xslthandler.h"
 #include "tellicoimporter.h"
 #include "../filehandler.h"
+#include "../collection.h"
 
 #include <klocale.h>
 #include <kurlrequester.h>
@@ -33,7 +34,7 @@ XSLTImporter::XSLTImporter(const KURL& url_) : Tellico::Import::TextImporter(url
     m_URLRequester(0) {
 }
 
-Tellico::Data::Collection* XSLTImporter::collection() {
+Tellico::Data::CollPtr XSLTImporter::collection() {
   if(m_coll) {
     return m_coll;
   }
@@ -61,7 +62,6 @@ Tellico::Data::Collection* XSLTImporter::collection() {
 //  kdDebug() << str << endl;
 
   Import::TellicoImporter imp(str);
-  connect(&imp, SIGNAL(signalFractionDone(float)), SIGNAL(signalFractionDone(float)));
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
   return m_coll;

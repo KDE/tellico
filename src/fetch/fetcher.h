@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,17 +15,15 @@
 #define FETCHER_H
 
 namespace Tellico {
-  namespace Data {
-    class Entry;
-  }
   namespace Fetch {
     class ConfigWidget;
+    class MessageHandler;
   }
 }
 
 #include "fetch.h"
+#include "../datavectors.h"
 
-#include <ksharedptr.h>
 #include <kapplication.h> // for KApplication::random()
 
 #include <qobject.h>
@@ -34,14 +32,7 @@ namespace Tellico {
 namespace Tellico {
   namespace Fetch {
 
-class Fetcher; // forward declaration
-struct SearchResult {
-  SearchResult(Fetcher* f, QString t, QString d) : uid(KApplication::random()), fetcher(f), title(t), desc(d) {}
-  uint uid;
-  Fetcher* fetcher;
-  QString title;
-  QString desc;
-};
+class SearchResult;
 
 /**
  * The top-level abstract class for fetching data.
@@ -52,9 +43,11 @@ class Fetcher : public QObject, public KShared {
 Q_OBJECT
 
 public:
+  typedef KSharedPtr<Fetcher> Ptr;
+
   /**
    */
-  Fetcher(QObject* parent, const char* name = 0) : QObject(parent, name), KShared() {}
+  Fetcher(QObject* parent, const char* name = 0) : QObject(parent, name), KShared(), m_messager(0) {}
   /**
    */
   virtual ~Fetcher() {}
@@ -67,6 +60,7 @@ public:
    * Returns true if the fetcher can search using a certain key.
    */
   virtual bool canSearch(FetchKey key) const = 0;
+  virtual bool canUpdate() const { return true; }
 
   /**
    * Returns the type of the data source.
@@ -79,7 +73,8 @@ public:
   /**
    * Starts a search, using a kew and value.
    */
-  virtual void search(FetchKey key, const QString& value, bool multiple) = 0;
+  virtual void search(FetchKey key, const QString& value) = 0;
+  virtual void updateEntry(Data::EntryPtr);
   /**
    * Returns true if the fetcher is currently searching.
    */
@@ -91,7 +86,14 @@ public:
   /**
    * Fetches an entry, given the uid of the search result.
    */
-  virtual Data::Entry* fetchEntry(uint uid) = 0;
+  virtual Data::EntryPtr fetchEntry(uint uid) = 0;
+
+  void setMessageHandler(MessageHandler* handler) { m_messager = handler; }
+  MessageHandler* messageHandler() const { return m_messager; }
+  /**
+   */
+  void message(const QString& message, int type) const;
+  void infoList(const QString& message, const QStringList& list) const;
 
   /**
    * Reads the config for the widget, given a config group.
@@ -103,9 +105,22 @@ public:
   virtual ConfigWidget* configWidget(QWidget* parent) const = 0;
 
 signals:
-  void signalStatus(const QString& status);
+//  void signalStatus(const QString& status);
   void signalResultFound(Tellico::Fetch::SearchResult* result);
-  void signalDone(Tellico::Fetch::Fetcher*);
+  void signalDone(Tellico::Fetch::Fetcher::Ptr);
+
+private:
+  MessageHandler* m_messager;
+};
+
+class SearchResult {
+public:
+  SearchResult(Fetcher::Ptr f, QString t, QString d) : uid(KApplication::random()), fetcher(f), title(t), desc(d) {}
+  Data::EntryPtr fetchEntry();
+  uint uid;
+  Fetcher::Ptr fetcher;
+  QString title;
+  QString desc;
 };
 
   } // end namespace

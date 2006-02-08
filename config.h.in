@@ -69,6 +69,9 @@
 /* Define if you have the res_init function */
 #undef HAVE_RES_INIT
 
+/* Define to 1 if you have the <sal/config.h> header file. */
+#undef HAVE_SAL_CONFIG_H
+
 /* Define to 1 if you have the `snprintf' function. */
 #undef HAVE_SNPRINTF
 
@@ -199,6 +202,9 @@
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
+
+/* Define to 1 if you want to compile CD-Text support */
+#undef USE_CDTEXT
 
 /* Version number of package */
 #undef VERSION

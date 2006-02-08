@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -42,7 +42,7 @@ LoanDialog::LoanDialog(const Data::EntryVec& entries_, QWidget* parent_, const c
   init();
 }
 
-LoanDialog::LoanDialog(Data::Loan* loan_, QWidget* parent_, const char* name_/*=0*/)
+LoanDialog::LoanDialog(Data::LoanPtr loan_, QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(parent_, name_, true, i18n("Modify Loan"), Ok|Cancel),
       m_mode(Modify), m_borrower(loan_->borrower()), m_loan(loan_) {
   m_entries.append(m_loan->entry());
@@ -182,7 +182,7 @@ void LoanDialog::slotDueDateChanged() {
 }
 
 void LoanDialog::slotGetBorrower() {
-  Data::Borrower* borrower = BorrowerDialog::getBorrower(this);
+  Data::BorrowerPtr borrower = BorrowerDialog::getBorrower(this);
   if(borrower) {
     m_borrowerEdit->setText(borrower->name());
     m_uid = borrower->uid();
@@ -258,7 +258,7 @@ KCommand* LoanDialog::modifyLoansCommand() {
     return 0;
   }
 
-  Data::Loan* newLoan = new Data::Loan(*m_loan);
+  Data::LoanPtr newLoan = new Data::Loan(*m_loan);
   newLoan->setDueDate(m_dueDate->date());
   newLoan->setNote(m_note->text());
   return new Command::ModifyLoans(m_loan, newLoan, m_addEvent->isChecked());

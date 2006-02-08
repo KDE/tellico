@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,7 +18,7 @@
 
 using Tellico::GUI::ParaFieldWidget;
 
-ParaFieldWidget::ParaFieldWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
+ParaFieldWidget::ParaFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : FieldWidget(field_, parent_, name_) {
 
   m_textEdit = new QTextEdit(this);

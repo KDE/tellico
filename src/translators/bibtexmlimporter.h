@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,6 +15,7 @@
 #define BIBTEXMLIMPORTER_H
 
 #include "xmlimporter.h"
+#include "../datavectors.h"
 
 #include <qdom.h>
 
@@ -30,18 +31,22 @@ Q_OBJECT
 public:
   /**
    */
-  BibtexmlImporter(const KURL& url) : Import::XMLImporter(url), m_coll(0) {}
+  BibtexmlImporter(const KURL& url) : Import::XMLImporter(url), m_coll(0), m_cancelled(false) {}
 
   /**
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   virtual bool canImport(int type) const;
+
+public slots:
+  void slotCancel();
 
 private:
   void loadDomDocument();
   void readEntry(const QDomNode& entryNode);
 
-  Data::Collection* m_coll;
+  Data::CollPtr m_coll;
+  bool m_cancelled : 1;
 };
 
   } // end namespace

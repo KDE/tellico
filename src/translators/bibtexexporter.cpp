@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -53,11 +53,11 @@ QString BibtexExporter::fileFilter() const {
 }
 
 bool BibtexExporter::exec() {
-  const Data::Collection* c = Data::Document::self()->collection();
+  Data::CollPtr c = collection();
   if(!c || c->type() != Data::Collection::Bibtex) {
     return false;
   }
-  const Data::BibtexCollection* coll = static_cast<const Data::BibtexCollection*>(c);
+  const Data::BibtexCollection* coll = static_cast<const Data::BibtexCollection*>(c.data());
 
 // there are some special attributes
 // the entry-type specifies the entry type - book, inproceedings, whatever
@@ -103,7 +103,7 @@ bool BibtexExporter::exec() {
                + QString::fromLatin1("}\n\n");
 
   if(!coll->preamble().isEmpty()) {
-    text += QString::fromLatin1("@preamble{") + coll->preamble() + QString::fromLatin1("}\n");
+    text += QString::fromLatin1("@preamble{") + coll->preamble() + QString::fromLatin1("}\n\n");
   }
 
   const QStringList macros = coll->macroList().keys();
@@ -124,12 +124,8 @@ bool BibtexExporter::exec() {
   // whole collection first
   StringSet crossRefKeys;
   if(hasCrossRefs) {
-    QString tmp;
     for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
-      tmp = entryIt->field(crossRefField);
-      if(!tmp.isEmpty()) {
-        crossRefKeys.add(tmp);
-      }
+      crossRefKeys.add(entryIt->field(crossRefField));
     }
   }
 
@@ -150,12 +146,12 @@ bool BibtexExporter::exec() {
       if(m_skipEmptyKeys) {
         continue;
       }
-      key = BibtexHandler::bibtexKey(entryIt);
+      key = BibtexHandler::bibtexKey(entryIt.data());
     } else {
       // check crossrefs, only counts for non-empty keys
       // if this entry is crossref'd, add it to the list, and skip it
       if(hasCrossRefs && crossRefKeys.has(key)) {
-        crossRefs.append(entryIt);
+        crossRefs.append(entryIt.data());
         continue;
       }
     }
@@ -174,7 +170,7 @@ bool BibtexExporter::exec() {
   }
 
   // now write out crossrefs
-  for(Data::ConstEntryVec::ConstIterator entryIt = crossRefs.constBegin(); entryIt != crossRefs.constEnd(); ++entryIt) {
+  for(Data::ConstEntryVec::Iterator entryIt = crossRefs.begin(); entryIt != crossRefs.end(); ++entryIt) {
     // no need to check type
 
     key = entryIt->field(keyField);
@@ -272,7 +268,7 @@ void BibtexExporter::saveOptions(KConfig* config_) {
 
 void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields_, const Data::Entry& entry_,
                                     const QString& type_, const QString& key_) {
-  const QStringList macros = static_cast<const Data::BibtexCollection*>(Data::Document::self()->collection())->macroList().keys();
+  const QStringList macros = static_cast<const Data::BibtexCollection*>(Data::Document::self()->collection().data())->macroList().keys();
   const QString bibtex = QString::fromLatin1("bibtex");
 
   text_ += '@' + type_ + '{' + key_;
@@ -307,3 +303,5 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
   }
   text_ += QString::fromLatin1("\n}\n\n");
 }
+
+#include "bibtexexporter.moc"

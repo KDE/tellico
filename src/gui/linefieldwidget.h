@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,7 +28,7 @@ class LineFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  LineFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  LineFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~LineFieldWidget() {}
 
   virtual QString text() const;
@@ -40,7 +40,7 @@ public slots:
 
 protected:
   virtual QWidget* widget();
-  virtual void updateFieldHook(Data::Field* oldField, Data::Field* newField);
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
 private:
   KLineEdit* m_lineEdit;

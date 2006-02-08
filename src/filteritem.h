@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,14 +24,14 @@ namespace Tellico {
  */
 class FilterItem : public GUI::CountedItem {
 public:
-  FilterItem(GUI::ListView* parent, Tellico::Filter* filter);
+  FilterItem(GUI::ListView* parent, Tellico::Filter::Ptr filter);
 
   virtual bool isFilterItem() const { return true; }
-  Tellico::Filter* filter() { return m_filter; }
-  void updateFilter(Tellico::Filter* filter);
+  Filter::Ptr filter() { return m_filter; }
+  void updateFilter(Filter::Ptr filter);
 
 private:
-  KSharedPtr<Filter> m_filter;
+  Filter::Ptr m_filter;
 };
 
 }

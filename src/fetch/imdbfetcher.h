@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2005 by Robby Stephenson
+    copyright            : (C) 2004-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -27,6 +27,7 @@
 #include <qregexp.h>
 
 class KLineEdit;
+class KIntSpinBox;
 class QCheckBox;
 
 namespace Tellico {
@@ -46,27 +47,34 @@ public:
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value, bool multiple);
+  virtual void search(FetchKey key, const QString& value);
   // imdb can search title, person
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
   virtual void stop();
-  virtual Data::Entry* fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return IMDB; }
   virtual bool canFetch(int type) const;
   virtual void readConfig(KConfig* config, const QString& group);
+
+  virtual void updateEntry(Data::EntryPtr entry);
+
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  static StringMap customFields();
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     ConfigWidget(QWidget* parent_, const IMDBFetcher* fetcher = 0);
-
     virtual void saveConfig(KConfig*);
 
   private:
     KLineEdit* m_hostEdit;
     QCheckBox* m_fetchImageCheck;
+    KIntSpinBox* m_numCast;
   };
   friend class ConfigWidget;
+
+  static QString defaultName();
 
 private slots:
   void slotData(KIO::Job* job, const QByteArray& data);
@@ -80,25 +88,27 @@ private:
   static QRegExp* s_anchorTitleRx;
   static QRegExp* s_anchorNameRx;
   static QRegExp* s_titleRx;
-  static void doTitle(const QString& s, Data::Entry* e);
-  static void doRunningTime(const QString& s, Data::Entry* e);
-  static void doAlsoKnownAs(const QString& s, Data::Entry* e);
-  static void doPlot(const QString& s, Data::Entry* e, const KURL& baseURL_);
-  static void doPerson(const QString& s, Data::Entry* e,
-                       const QString& imdbHeader, const QString& fieldName);
-  static void doCast(const QString& s, Data::Entry* e, const KURL& baseURL_);
-  static void doLists(const QString& s, Data::Entry* e);
-  static void doCover(const QString& s, Data::Entry* e, const KURL& baseURL);
+
+  void doTitle(const QString& s, Data::EntryPtr e);
+  void doRunningTime(const QString& s, Data::EntryPtr e);
+  void doAlsoKnownAs(const QString& s, Data::EntryPtr e);
+  void doPlot(const QString& s, Data::EntryPtr e, const KURL& baseURL_);
+  void doPerson(const QString& s, Data::EntryPtr e,
+                const QString& imdbHeader, const QString& fieldName);
+  void doCast(const QString& s, Data::EntryPtr e, const KURL& baseURL_);
+  void doLists(const QString& s, Data::EntryPtr e);
+  void doRating(const QString& s, Data::EntryPtr e);
+  void doCover(const QString& s, Data::EntryPtr e, const KURL& baseURL);
 
   void parseSingleTitleResult();
   void parseSingleNameResult();
   void parseMultipleTitleResults();
   void parseTitleBlock(const QString& str);
   void parseMultipleNameResults();
-  Data::Entry* parseEntry(const QString& str);
+  Data::EntryPtr parseEntry(const QString& str);
 
   QByteArray m_data;
-  QMap<int, Data::ConstEntryPtr> m_entries;
+  QMap<int, Data::EntryPtr> m_entries;
   QMap<int, KURL> m_matches;
   QGuardedPtr<KIO::Job> m_job;
 
@@ -106,9 +116,13 @@ private:
   QString m_value;
   bool m_started;
   bool m_fetchImages;
+  QString m_name;
   QString m_host;
+  int m_numCast;
   KURL m_url;
   bool m_redirected;
+  uint m_limit;
+  QStringList m_fields;
 };
 
   } // end namespace

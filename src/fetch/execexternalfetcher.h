@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,6 +17,8 @@
 #include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
+
+#include <qintdict.h>
 
 class KProcess;
 class KURLRequester;
@@ -43,11 +45,12 @@ public:
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  // "%1" is replaced in the process command, consider it a keyword
-  virtual bool canSearch(FetchKey k) const { return k == Keyword; }
-  virtual void search(FetchKey key, const QString& value, bool multiple);
+  virtual bool canSearch(FetchKey k) const { return m_args.contains(k); }
+  virtual bool canUpdate() const { return m_canUpdate; }
+  virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   virtual void stop();
-  virtual Data::Entry* fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return ExecExternal; }
   virtual bool canFetch(int type) const;
   virtual void readConfig(KConfig* config, const QString& group);
@@ -62,11 +65,17 @@ public:
 
   private:
     KURLRequester* m_pathEdit;
-    KLineEdit* m_argsEdit;
     typedef GUI::ComboBoxProxy<int> CBProxy;
     CBProxy* m_collCombo;
+    CBProxy* m_formatCombo;
+    QIntDict<QCheckBox> m_cbDict;
+    QIntDict<KLineEdit> m_leDict;
+    QCheckBox* m_cbUpdate;
+    KLineEdit* m_leUpdate;
   };
   friend class ConfigWidget;
+
+  static QString defaultName();
 
 private slots:
   void slotData(KProcess* proc, char* buffer, int len);
@@ -76,14 +85,20 @@ private slots:
 private:
   static QStringList parseArguments(const QString& str);
 
+  void startSearch(const QStringList& args);
+
   bool m_started;
   QString m_name;
   int m_collType;
+  int m_formatType;
   QString m_path;
-  QString m_args;
+  QMap<FetchKey, QString> m_args;
+  bool m_canUpdate : 1;
+  QString m_updateArgs;
   KProcess* m_process;
   QByteArray m_data;
-  QMap<int, Data::ConstEntryPtr> m_entries; // map from search result id to entry
+  QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry
+  QStringList m_errors;
 };
 
   } // end namespace

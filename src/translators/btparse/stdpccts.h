@@ -14,7 +14,6 @@
 #define ZZCOL
 #define USER_ZZSYN
 
-/*#include "config.h"*/
 #include "btparse.h"
 #include "attrib.h"
 #include "lex_auxiliary.h"

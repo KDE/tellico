@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -107,7 +107,7 @@ public:
    * @param force Whether to force the write
    * @return A boolean indicating success
    */
-  static bool writeTextURL(const KURL& url, const QString& text, bool encodeUTF8, bool force=false);
+  static bool writeTextURL(const KURL& url, const QString& text, bool encodeUTF8, bool force=false, bool quiet=false);
   /**
    * Writes data to a url. If the file already exists, a "~" is appended
    * and the existing file is moved. If the file is remote, a temporary file is written and
@@ -118,7 +118,14 @@ public:
    * @param force Whether to force the write
    * @return A boolean indicating success
    */
-  static bool writeDataURL(const KURL& url, const QByteArray& data, bool force=false);
+  static bool writeDataURL(const KURL& url, const QByteArray& data, bool force=false, bool quiet=false);
+  /**
+   * Checks to see if a URL exists already, and if so, queries the user.
+   *
+   * @param url The target URL
+   * @return True if it is ok to continue, false otherwise.
+   */
+  static bool queryExists(const KURL& url);
 
 private:
   /**
@@ -130,13 +137,6 @@ private:
    * @return The image
    */
   static Data::Image* readImageFile(const KURL& url, bool quiet=false);
-  /**
-   * Checks to see if a URL exists already, and if so, queries the user.
-   *
-   * @param url The target URL
-   * @return True if it is ok to continue, false otherwise.
-   */
-  static bool queryExists(const KURL& url);
   /**
    * Writes the contents of a string to a file.
    *

@@ -1,15 +1,213 @@
+2006-02-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Dual-licensed the documentation under the GFDL and the FreeBSD
+	Documentation License.
+	* Released Tellico 1.1.
+
+2006-02-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Added track length to CDDB lookup result.
+
+2006-02-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with not deleting some temporary files.
+
+2006-01-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated bibtex-translation.xml, thanks to Norbert Nemec.
+	* Updated es.po, thanks to Alejandro Hamann.
+
+2006-01-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Relaxed MODS importer to look for publisher, isbn, or lccn to
+	determine the entry is a book. Previously, a typeOfResource="text"
+	was required.
+	* Allowed z39.50 source to ask for MODS directly.
+	* Added message box for stderr output from scripts.
+	* Added simple GRS-1 importer for z39.50 fetcher.
+
+2006-01-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with potential data los for saving image files after
+	changing config option.
+	* Released Tellico 1.1pre3.
+
+2006-01-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.1pre2.
+	* Improved entry views with some graphics, a la amaroK.
+
+2006-01-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Added drag-n-drop from Mozilla Firefox to image widget.
+	* Changed default behavior to include images in data file, and
+	added a config option.
+	* Added a message box warning about performance when the user
+	first opens a file with more than 100 images.
+
+2006-01-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with parsing arguments to external data source scripts.
+
+2006-01-19  Robby Stephenson  <robby@periapsis.org>
+
+	* AnimneNfo.com source added by default, and IBS.it added if
+	Italian is in the user's language list.
+	* Alexandria exporter includes publishing year now.
+
+2006-01-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Alexandria importer includes publishing year now.
+
+2006-01-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed file saving to be smart about which images need written
+	to cache. Should improve save-time.
+	* Fixed bug with undo/redo not correctly reverting to old values.
+
+2006-01-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Russian translation, from Artur Kalimullin.
+
+2006-01-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.1pre1.
+	* Added/updated SRU fetcher.
+
+2006-01-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Internet Bookshop (ibs.it)  book source.
+
+2006-01-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added AnimeNfo.com search source.
+
+2006-01-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Debian bug #346414 in hu.po.
+
+2006-01-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed image loader to read and write images inside the Tellico
+	shared directory to speed up loading, etc.
+
+2005-12-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Merged OpenOffice.org interop. Requires SDK for compilation.
+
+2006-01-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Yahoo! Album Search source.
+	* Added Tri-Column video report template.
+
+2005-12-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Expand external app fetcher to include any of the fetch keys.
+
+2005-12-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Increased max table columns to 10.
+
+2005-12-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Amazon fetcher to allow selecting keywords or not.
+
+2005-12-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed bibtex behavior to not add braces around capital letters.
+
+2005-11-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Moved no-capitalization list to config dialog.
+
+2005-11-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Hungarian, from Csaba Zakarias.
+
+2005-11-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Added separate UPC searching for Amazon.
+
+2005-11-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Added CD-Text reading to FreeDBImporter, plus option to disable
+	compilation in case of platform issues.
+	* Move to Amazon ECS version 4.
+
+2005-11-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Added IMDB rating field to fetcher.
+
+2005-11-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Bumped minimum KDE version to 3.2 and minimum QT version to 3.2.
+
+2005-11-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Custom data source fields are now configurable.
+
+2005-11-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Made size of IMDb cast list configurable. 
+	* Broke out cite actions into submenu, and added copying bibtex to clipboard.
+
+2005-11-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Bumped XML syntax version to 9 to include file catalog and
+	changing default music collection track field to 3 columns.
+
+2005-11-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed compilation on GNU/kFreeBSD, Debian bug #336949, patch
+	from Aurelien Jarno.
+
+2005-10-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved table fields to show column titles.
+	* Changed buttons to a right-click popup.
+
+2005-10-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved audio file metadata importer to include track length as
+	an additional column in the track field.
+
+2005-10-26  Robby Stephenson  <robby@periapsis.org>
+
+	* The audio file importer now checks for track numbers in the file
+	name, patch from Andras Mantia. 
+
+2005-10-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Added a string store to reduce memory consumption.
+
 2005-10-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.0.3.
+
+2005-10-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Added buttons for inserting and removing rows from a table.
+
+2005-10-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Enabled auto-updating for certain entries and data sources.
 
 2005-10-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated it.po, from Lorenzo Novaro.
 
+2005-10-11  Robby Stephenson  <robby@periapsis.org>
+
+	* New and modified entries now show labels indicating so.
+
+2005-10-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved status bar.
+
 2005-10-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated CalendarHandler to compile with KDEPIM 3.5.
-	
+
 2005-10-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with bibtex macro names always being imported in lowercase.
@@ -31,10 +229,14 @@
 
 	* Fixed bug with CSV importer not properly parsing some non-CSV files.
 	* Fixed bug with entry selection in icon view.
+	* Added GCfilms exporter;
 
 2005-09-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with showing invalid loan due date.
+	* Added GCfilms importer.
+	* Added IMDB link when fetching info from IMDB.
+	* limited number of cast results form IMDB to 20;
 
 2005-09-20  Robby Stephenson  <robby@periapsis.org>
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -63,19 +63,19 @@ public:
     Coin = 8,
     Stamp = 9,
     Card = 10,
-    Game = 11
+    Game = 11,
+    File = 12
     // if you want to add custom collection types, use a numebr sure to be unique like 101
   };
 
   /**
    * The constructor is only used to create custom collections. It adds a title field,
-   * in the "General" group. The iconName is set to be the entryName;
+   * in the "General" group. The iconName is set to be the typeName;
    *
    * @param title The title of the collection itself
-   * @param entryName The name of the entries that the collection holds (not translated)
    * @param entryTitle The title of the entries, which can be translated
    */
-  Collection(const QString& title, const QString& entryName, const QString& entryTitle);
+  Collection(const QString& title, const QString& entryTitle);
   /**
    */
   virtual ~Collection();
@@ -91,7 +91,7 @@ public:
    *
    * @return The id
    */
-  int id() const { return m_id; }
+  long id() const { return m_id; }
   /**
    * Returns the name of the collection.
    *
@@ -108,28 +108,9 @@ public:
    * Returns the name of the entries in the collection, e.g. "book".
    * Not translated.
    *
-   * @return The entry name
+   * @return The type name
    */
-  const QString& entryName() const { return m_entryName; }
-  /**
-   * Returns the title of the entries in the collection, e.g. "Book".
-   * Translated.
-   *
-   * @return The entry title
-   */
-  const QString& entryTitle() const { return m_entryTitle; }
-  /**
-   * Returns the name of the icon used for the entries in the collection.
-   *
-   * @return The icon name
-   */
-  const QString& iconName() const { return m_iconName; }
-  /**
-   * Sets the name of the icon used for entries in the collection.
-   *
-   * @param name The new icon name
-   */
-  void setIconName(const QString& name) { m_iconName = name; }
+  QString typeName() const;
   /**
    * Returns a reference to the list of all the entries in the collection.
    *
@@ -142,7 +123,7 @@ public:
    * @return The list of fields
    */
   const FieldVec& fields() const { return m_fields; }
-  Entry* entryById(int id);
+  EntryPtr entryById(long id);
   /**
    * Returns a reference to the list of the collection's people fields.
    *
@@ -185,20 +166,20 @@ public:
    *
    * @param entry A pointer to the entry
    */
-  void addEntry(Entry* entry);
+  void addEntry(EntryPtr entry);
   /**
    * Updates the dicts that include the entry.
    *
    * @param entry A pointer to the entry
    */
-  void updateDicts(Entry* entry);
+  void updateDicts(EntryVec entries);
   /**
    * Deletes a entry from the collection.
    *
    * @param entry The pointer to the entry
    * @return A boolean indicating if the entry was in the collection and was deleted
    */
-  bool removeEntry(Entry* entry);
+  bool removeEntry(EntryPtr entry);
   /**
    * Adds a whole list of attributes. It's gotta be virtual since it calls
    * @ref addField, which is virtual.
@@ -214,12 +195,15 @@ public:
    * @param field A pointer to the field
    * @return A boolean indicating if the field was added or not
    */
-  virtual bool addField(Field* field);
-  virtual bool mergeField(Field* field);
-  virtual bool modifyField(Field* field);
-  virtual bool removeField(Field* field, bool force=false);
+  virtual bool addField(FieldPtr field);
+  virtual bool mergeField(FieldPtr field);
+  virtual bool modifyField(FieldPtr field);
+  virtual bool removeField(FieldPtr field, bool force=false);
   virtual bool removeField(const QString& name, bool force=false);
   void reorderFields(const FieldVec& list);
+
+  // the reason this is not static is so I can call it from a collection pointer
+  virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const { return 0; }
 
   /**
    * Determines whether or not a certain value is allowed for an field.
@@ -279,7 +263,7 @@ public:
    * @param name The field name
    * @return The field pointer
    */
-  Field* const fieldByName(const QString& name) const;
+  FieldPtr  fieldByName(const QString& name) const;
   /**
    * Returns a pointer to an field given its title. If none is found, a NULL pointer
    * is returned. This lookup is slower than by name.
@@ -287,7 +271,7 @@ public:
    * @param title The field title
    * @return The field pointer
    */
-  Field* const fieldByTitle(const QString& title) const;
+  FieldPtr fieldByTitle(const QString& title) const;
   /**
    * Returns @p true if the collection contains a field named @ref name;
    */
@@ -307,6 +291,7 @@ public:
    * @return The list of group names
    */
   EntryGroupDict* const entryGroupDictByName(const QString& name) const;
+  QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
   /**
    * Invalidates all group names in the collection.
    */
@@ -318,13 +303,14 @@ public:
    */
   bool hasImages() const { return !m_imageFields.isEmpty(); }
 
-  void addBorrower(Data::Borrower* borrower);
+  void addBorrower(Data::BorrowerPtr borrower);
   const BorrowerVec& borrowers() const { return m_borrowers; }
 
-  void addFilter(Filter* filter);
-  bool removeFilter(Filter* filter);
+  void addFilter(FilterPtr filter);
+  bool removeFilter(FilterPtr filter);
   const FilterVec& filters() const { return m_filters; }
 
+  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2);
   /**
    * The string used for empty values. This forces consistency.
    */
@@ -335,20 +321,18 @@ public:
   static const QString s_peopleGroupName;
 
 signals:
-  void signalGroupModified(Tellico::Data::Collection* coll, Tellico::Data::EntryGroup* group);
-  void signalRefreshField(Tellico::Data::Field* field);
+  void signalGroupModified(Tellico::Data::CollPtr coll, Tellico::Data::EntryGroup* group);
+  void signalRefreshField(Tellico::Data::FieldPtr field);
 
-protected:
-  void removeEntryFromDicts(Entry* entry);
-  void populateDicts(Entry* entry);
-  QStringList entryGroupNamesByField(Entry* entry, const QString& fieldName);
+private:
+  void removeEntriesFromDicts(EntryVec entries);
+  void populateDicts(EntryPtr entry);
   /*
    * Gets the preferred ID of the collection. Currently, it just gets incremented as
    * new collections are created.
    */
-  static int getID();
+  static long getID();
 
-private:
   /**
    * The copy constructor is private, to ensure that it's never used.
    */
@@ -358,9 +342,10 @@ private:
    */
   Collection operator=(const Collection& coll);
 
-  int m_id;
+  long m_id;
+  long m_nextEntryId;
   QString m_title;
-  QString m_entryName;
+  QString m_typeName;
   QString m_entryTitle;
   QString m_iconName;
   QString m_defaultGroupField;

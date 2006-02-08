@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - compact template for viewing entry data
 
-   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
 
    The drop-shadow effect is based on the "A List Apart" method
    at http://www.alistapart.com/articles/cssdropshadows/
@@ -51,9 +51,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 8 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 9 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'8'"/>
+  <xsl:with-param name="this-version" select="'9'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -243,7 +243,7 @@
                    <xsl:text>&#160;</xsl:text>
                   </td>
                  </xsl:otherwise>
-                </xsl:choose>           
+                </xsl:choose>
                </xsl:for-each>
               </tr>
              </xsl:for-each>

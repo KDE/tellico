@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,7 +18,7 @@
 using Tellico::Data::Loan;
 using Tellico::Data::Borrower;
 
-Loan::Loan(Data::Entry* entry, const QDate& loanDate, const QDate& dueDate, const QString& note)
+Loan::Loan(Data::EntryPtr entry, const QDate& loanDate, const QDate& dueDate, const QString& note)
     : KShared(), m_uid(Tellico::uid()), m_borrower(0), m_entry(entry), m_loanDate(loanDate), m_dueDate(dueDate),
       m_note(note), m_inCalendar(false) {
 }
@@ -26,6 +26,14 @@ Loan::Loan(Data::Entry* entry, const QDate& loanDate, const QDate& dueDate, cons
 Loan::Loan(const Loan& other) : KShared(other), m_uid(Tellico::uid()), m_borrower(other.m_borrower),
       m_entry(other.m_entry), m_loanDate(other.m_loanDate), m_dueDate(other.m_dueDate),
       m_note(other.m_note), m_inCalendar(false) {
+}
+
+Tellico::Data::BorrowerPtr Loan::borrower() const {
+  return m_borrower;
+}
+
+Tellico::Data::EntryPtr Loan::entry() const {
+  return m_entry;
 }
 
 Borrower::Borrower(const QString& name_, const QString& uid_)
@@ -46,7 +54,7 @@ Borrower& Borrower::operator=(const Borrower& other_) {
   return *this;
 }
 
-Tellico::Data::Loan* Borrower::loan(const Data::Entry* entry_) {
+Tellico::Data::LoanPtr Borrower::loan(Data::ConstEntryPtr entry_) {
   for(LoanVec::Iterator it = m_loans.begin(); it != m_loans.end(); ++it) {
     if(it->entry() == entry_) {
       return it;
@@ -55,13 +63,13 @@ Tellico::Data::Loan* Borrower::loan(const Data::Entry* entry_) {
   return 0;
 }
 
-void Borrower::addLoan(Data::Loan* loan_) {
+void Borrower::addLoan(Data::LoanPtr loan_) {
   if(loan_) {
     m_loans.append(loan_);
     loan_->setBorrower(this);
   }
 }
 
-bool Borrower::removeLoan(Data::Loan* loan_) {
+bool Borrower::removeLoan(Data::LoanPtr loan_) {
   return m_loans.remove(loan_);
 }

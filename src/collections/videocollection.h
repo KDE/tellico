@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -44,6 +44,7 @@ public:
   VideoCollection(bool addFields, const QString& title = QString::null);
 
   virtual Type type() const { return Video; }
+  virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;
 
   static FieldVec defaultFields();
 };

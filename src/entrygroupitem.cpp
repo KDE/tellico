@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,14 +15,66 @@
 #include "entry.h"
 #include "field.h"
 #include "collection.h"
+#include "gui/ratingwidget.h"
+#include "tellico_debug.h"
+#include "latin1literal.h"
 
 #include <kiconloader.h>
 
+#include <qpixmap.h>
+#include <qpainter.h>
+
 using Tellico::EntryGroupItem;
 
-EntryGroupItem::EntryGroupItem(GUI::ListView* parent_, Data::EntryGroup* group_)
-    : GUI::CountedItem(parent_), m_group(group_) {
+EntryGroupItem::EntryGroupItem(GUI::ListView* parent_, Data::EntryGroup* group_, int fieldType_)
+    : GUI::CountedItem(parent_), m_group(group_), m_fieldType(fieldType_) {
   setText(0, group_->groupName());
+  m_emptyGroup = group_->groupName() == Data::Collection::s_emptyGroupTitle;
+}
+
+QPixmap EntryGroupItem::ratingPixmap() {
+  QPixmap stars = GUI::RatingWidget::pixmap(m_group->groupName());
+  if(m_pix.isNull() && stars.isNull()) {
+    m_emptyGroup = true;
+    return QPixmap();
+  }
+
+  QPixmap newPix(m_pix.width() + 4 + stars.width(), KMAX(m_pix.height(), stars.height()));
+  newPix.fill(isSelected() ? listView()->colorGroup().highlight() : backgroundColor(0));
+  QPainter p(&newPix);
+  if(!m_pix.isNull()) {
+    p.drawPixmap(0, 0, m_pix);
+  }
+  if(!stars.isNull()) {
+    p.drawPixmap(m_pix.width() + 4, 0, stars);
+  }
+  p.end();
+  return newPix;
+}
+
+void EntryGroupItem::setPixmap(int col, const QPixmap& pix) {
+  m_pix = pix;
+  GUI::CountedItem::setPixmap(col, m_pix);
+}
+
+void EntryGroupItem::paintCell(QPainter* p_, const QColorGroup& cg_,
+                               int column_, int width_, int align_) {
+  if(column_> 0 || m_fieldType != Data::Field::Rating || m_emptyGroup) {
+    return GUI::CountedItem::paintCell(p_, cg_, column_, width_, align_);
+  }
+
+  QString oldText = text(column_);
+  // "\t\t" is the flag to not paint the item
+  // CountedItem already uses "\t"
+  if(oldText == Latin1Literal("\t\t")) {
+    return;
+  }
+
+  setText(column_, QString::fromLatin1("\t\t"));
+  GUI::CountedItem::setPixmap(column_, ratingPixmap());
+  GUI::CountedItem::paintCell(p_, cg_, column_, width_, align_);
+//  GUI::CountedItem::setPixmap(column_, m_pix);
+  setText(column_, oldText);
 }
 
 // prepend a tab character to always sort the empty group name first
@@ -32,7 +84,11 @@ QString EntryGroupItem::key(int col_, bool) const {
     return text(col_);
   }
 
-  if(text(col_) == Data::Collection::s_emptyGroupTitle) {
+  if(text(col_).isEmpty() && pixmap(col_) && !pixmap(col_)->isNull()) {
+    // a little weird, sort for width, too, in case of rating widget
+    // but sort reverse by width
+    return QChar('\t') + QString::number(1000-pixmap(col_)->width());
+  } else if(text(col_) == Data::Collection::s_emptyGroupTitle) {
     return QChar('\t');
   }
 
@@ -69,3 +125,6 @@ QString EntryGroupItem::key(int col_, bool) const {
   return m_key;
 }
 
+int EntryGroupItem::count() const {
+  return m_group ? m_group->count() : GUI::CountedItem::count();
+}

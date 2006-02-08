@@ -60,7 +60,7 @@ am_libcollections_a_OBJECTS = winecollection.$(OBJEXT) \
 	cardcollection.$(OBJEXT) coincollection.$(OBJEXT) \
 	bibtexcollection.$(OBJEXT) musiccollection.$(OBJEXT) \
 	videocollection.$(OBJEXT) bookcollection.$(OBJEXT) \
-	gamecollection.$(OBJEXT)
+	gamecollection.$(OBJEXT) filecatalog.$(OBJEXT)
 #>- libcollections_a_OBJECTS = $(am_libcollections_a_OBJECTS)
 #>+ 9
 libcollections_a_final_OBJECTS = libcollections_a.all_cpp.o 
@@ -69,7 +69,7 @@ libcollections_a_nofinal_OBJECTS = winecollection.$(OBJEXT) \
 	cardcollection.$(OBJEXT) coincollection.$(OBJEXT) \
 	bibtexcollection.$(OBJEXT) musiccollection.$(OBJEXT) \
 	videocollection.$(OBJEXT) bookcollection.$(OBJEXT) \
-	gamecollection.$(OBJEXT)
+	gamecollection.$(OBJEXT) filecatalog.$(OBJEXT)
 @KDE_USE_FINAL_FALSE@libcollections_a_OBJECTS = $(libcollections_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libcollections_a_OBJECTS = $(libcollections_a_final_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -115,6 +115,7 @@ CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CPPUMAKER = @CPPUMAKER@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -209,6 +210,10 @@ MSGFMT = @MSGFMT@
 NOOPT_CFLAGS = @NOOPT_CFLAGS@
 NOOPT_CXXFLAGS = @NOOPT_CXXFLAGS@
 OBJEXT = @OBJEXT@
+OFFICE_SDK_includes = @OFFICE_SDK_includes@
+OFFICE_libadd = @OFFICE_libadd@
+OFFICE_libdir = @OFFICE_libdir@
+OFFICE_registry = @OFFICE_registry@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -238,6 +243,8 @@ USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
+WITH_OOO_FALSE = @WITH_OOO_FALSE@
+WITH_OOO_TRUE = @WITH_OOO_TRUE@
 WOVERLOADED_VIRTUAL = @WOVERLOADED_VIRTUAL@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -330,11 +337,16 @@ x_libraries = @x_libraries@
 noinst_LIBRARIES = libcollections.a
 INCLUDES = $(all_includes)
 #>- libcollections_a_METASOURCES = AUTO
-libcollections_a_SOURCES = winecollection.cpp stampcollection.cpp comicbookcollection.cpp cardcollection.cpp coincollection.cpp bibtexcollection.cpp musiccollection.cpp videocollection.cpp bookcollection.cpp gamecollection.cpp
+libcollections_a_SOURCES = winecollection.cpp stampcollection.cpp \
+	comicbookcollection.cpp cardcollection.cpp coincollection.cpp bibtexcollection.cpp \
+	musiccollection.cpp videocollection.cpp bookcollection.cpp gamecollection.cpp \
+	filecatalog.cpp
+
 
 ####### kdevelop will overwrite this part!!! (end)############
 KDE_OPTIONS = noautodist
-EXTRA_DIST = bookcollection.cpp bookcollection.h videocollection.cpp videocollection.h musiccollection.cpp musiccollection.h bibtexcollection.cpp bibtexcollection.h coincollection.cpp coincollection.h cardcollection.cpp cardcollection.h comicbookcollection.cpp comicbookcollection.h stampcollection.cpp stampcollection.h winecollection.cpp winecollection.h gamecollection.h gamecollection.cpp
+CLEANFILES = *~ *.loT
+EXTRA_DIST = bookcollection.cpp bookcollection.h videocollection.cpp videocollection.h musiccollection.cpp musiccollection.h bibtexcollection.cpp bibtexcollection.h coincollection.cpp coincollection.h cardcollection.cpp cardcollection.h comicbookcollection.cpp comicbookcollection.h stampcollection.cpp stampcollection.h winecollection.cpp winecollection.h gamecollection.h gamecollection.cpp filecatalog.h filecatalog.cpp
 #>- all: all-am
 #>+ 1
 all: docs-am  all-am
@@ -402,6 +414,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cardcollection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/coincollection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/comicbookcollection.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/filecatalog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gamecollection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/musiccollection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/stampcollection.Po@am__quote@
@@ -535,6 +548,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
@@ -658,6 +672,13 @@ coincollection.moc: $(srcdir)/coincollection.h
 mocs: coincollection.moc
 
 #>+ 3
+filecatalog.moc: $(srcdir)/filecatalog.h
+	$(MOC) $(srcdir)/filecatalog.h -o filecatalog.moc
+
+#>+ 2
+mocs: filecatalog.moc
+
+#>+ 3
 bookcollection.moc: $(srcdir)/bookcollection.h
 	$(MOC) $(srcdir)/bookcollection.h -o bookcollection.moc
 
@@ -687,7 +708,7 @@ mocs: gamecollection.moc
 
 #>+ 3
 clean-metasources:
-	-rm -f  winecollection.moc stampcollection.moc comicbookcollection.moc musiccollection.moc videocollection.moc coincollection.moc bookcollection.moc bibtexcollection.moc cardcollection.moc gamecollection.moc
+	-rm -f  winecollection.moc stampcollection.moc comicbookcollection.moc musiccollection.moc videocollection.moc coincollection.moc filecatalog.moc bookcollection.moc bibtexcollection.moc cardcollection.moc gamecollection.moc
 
 #>+ 2
 docs-am:
@@ -731,11 +752,11 @@ bcheck-am:
 
 
 #>+ 11
-libcollections_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/winecollection.cpp $(srcdir)/stampcollection.cpp $(srcdir)/comicbookcollection.cpp $(srcdir)/cardcollection.cpp $(srcdir)/coincollection.cpp $(srcdir)/bibtexcollection.cpp $(srcdir)/musiccollection.cpp $(srcdir)/videocollection.cpp $(srcdir)/bookcollection.cpp $(srcdir)/gamecollection.cpp  stampcollection.moc winecollection.moc comicbookcollection.moc musiccollection.moc videocollection.moc coincollection.moc cardcollection.moc bookcollection.moc bibtexcollection.moc gamecollection.moc
+libcollections_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/winecollection.cpp $(srcdir)/stampcollection.cpp $(srcdir)/comicbookcollection.cpp $(srcdir)/cardcollection.cpp $(srcdir)/coincollection.cpp $(srcdir)/bibtexcollection.cpp $(srcdir)/musiccollection.cpp $(srcdir)/videocollection.cpp $(srcdir)/bookcollection.cpp $(srcdir)/gamecollection.cpp $(srcdir)/filecatalog.cpp  stampcollection.moc winecollection.moc comicbookcollection.moc musiccollection.moc videocollection.moc coincollection.moc filecatalog.moc cardcollection.moc bibtexcollection.moc bookcollection.moc gamecollection.moc
 	@echo 'creating libcollections_a.all_cpp.cpp ...'; \
 	rm -f libcollections_a.all_cpp.files libcollections_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libcollections_a.all_cpp.final; \
-	for file in winecollection.cpp stampcollection.cpp comicbookcollection.cpp cardcollection.cpp coincollection.cpp bibtexcollection.cpp musiccollection.cpp videocollection.cpp bookcollection.cpp gamecollection.cpp ; do \
+	for file in winecollection.cpp stampcollection.cpp comicbookcollection.cpp cardcollection.cpp coincollection.cpp bibtexcollection.cpp musiccollection.cpp videocollection.cpp bookcollection.cpp gamecollection.cpp filecatalog.cpp ; do \
 	  echo "#include \"$$file\"" >> libcollections_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libcollections_a.all_cpp.final; \
 	done; \
@@ -770,13 +791,15 @@ cvs-clean:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 23
+#>+ 25
 videocollection.lo: videocollection.moc 
 coincollection.o: coincollection.moc 
+filecatalog.o: filecatalog.moc 
 bibtexcollection.o: bibtexcollection.moc 
 musiccollection.o: musiccollection.moc 
 bibtexcollection.lo: bibtexcollection.moc 
 stampcollection.lo: stampcollection.moc 
+filecatalog.lo: filecatalog.moc 
 nmcheck: 
 gamecollection.lo: gamecollection.moc 
 bookcollection.o: bookcollection.moc 

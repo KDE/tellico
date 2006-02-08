@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -39,13 +39,17 @@ public:
    *
    * @param text The XML text. It MUST be in UTF-8.
    */
-  DataImporter(const QString& text) : Importer(KURL()), m_data(text.utf8()), m_source(Text), m_fileRef(0)
+  DataImporter(const QString& text) : Importer(text), m_data(text.utf8()), m_source(Text), m_fileRef(0)
     { m_data.truncate(m_data.size()-1); }
   /**
    */
   virtual ~DataImporter() { delete m_fileRef; m_fileRef = 0; }
 
   Source source() const { return m_source; }
+
+  virtual void setText(const QString& text) {
+    Importer::setText(text); m_data = text.utf8(); m_data.truncate(m_data.size()-1); m_source = Text;
+  }
 
 protected:
   /**
@@ -58,7 +62,7 @@ protected:
 
 private:
   QByteArray m_data;
-  const Source m_source;
+  Source m_source;
   FileHandler::FileRef* m_fileRef;
 };
 

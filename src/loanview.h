@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,8 +13,6 @@
 
 #ifndef TELLICO_LOANVIEW_H
 #define TELLICO_LOANVIEW_H
-
-class KPopupMenu;
 
 #include "gui/listview.h"
 #include "observer.h"
@@ -39,10 +37,10 @@ public:
 
   virtual bool isSelectable(GUI::ListViewItem*) const;
 
-  void addCollection(Data::Collection* coll);
+  void addCollection(Data::CollPtr coll);
 
-  virtual void    addBorrower(Data::Borrower*);
-  virtual void modifyBorrower(Data::Borrower*);
+  virtual void    addBorrower(Data::BorrowerPtr);
+  virtual void modifyBorrower(Data::BorrowerPtr);
 
 private slots:
   /**
@@ -53,6 +51,8 @@ private slots:
    * @param col The column number, not currently used
    */
   void contextMenuRequested(QListViewItem* item, const QPoint& point, int col);
+  void slotExpanded(QListViewItem* item);
+  void slotCollapsed(QListViewItem* item);
   void slotCheckIn();
   void slotModifyLoan();
 
@@ -60,7 +60,6 @@ private:
   virtual void setSorting(int column, bool ascending = true);
 
   bool m_notSortedYet;
-  KPopupMenu* m_loanMenu;
   QDict<BorrowerItem> m_itemDict;
 };
 

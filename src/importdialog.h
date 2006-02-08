@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,16 +19,15 @@ class QCheckBox;
 class QShowEvent;
 
 #include "translators/translators.h"
+#include "datavectors.h"
 
 #include <kdialogbase.h>
 #include <kurl.h>
 
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
   namespace Import {
     class Importer;
+    typedef QMap<Import::Format, QString> FormatMap;
   }
 
 /**
@@ -41,30 +40,23 @@ public:
   ImportDialog(Import::Format format, const KURL& url, QWidget* parent, const char* name);
   ~ImportDialog();
 
-  Data::Collection* collection();
+  Data::CollPtr collection();
   QString statusMessage() const;
   Import::Action action() const;
 
   static QString fileFilter(Import::Format format);
   static Import::Target importTarget(Import::Format format);
+  static QString startDir(Import::Format format);
+  static Import::FormatMap formatMap();
 
-  static Data::Collection* importURL(Import::Format format, const KURL& url);
-
-signals:
-  /**
-   * Signals that a fraction of an operation has been completed.
-   *
-   * @param f The fraction, 0 =< f >= 1
-   */
-  void signalFractionDone(float f);
+  static Import::Importer* importer(Import::Format format, const KURL& url);
+  static Data::CollPtr importURL(Import::Format format, const KURL& url);
 
 private slots:
   void slotUpdateAction();
 
 private:
-  static Import::Importer* importer(Import::Format format, const KURL& url);
-
-  Data::Collection* m_coll;
+  Data::CollPtr m_coll;
   Import::Importer* m_importer;
   QRadioButton* m_radioAppend;
   QRadioButton* m_radioReplace;

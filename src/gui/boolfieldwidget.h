@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,7 +28,7 @@ class BoolFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  BoolFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  BoolFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~BoolFieldWidget() {}
 
   virtual QString text() const;

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,9 +19,11 @@
 #include "../entry.h"
 #include "../latin1literal.h"
 #include "../tellico_strings.h"
+#include "../progressmanager.h"
+#include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kdebug.h>
+#include <kglobal.h> // for KMAX
+#include <kapplication.h>
 
 using Tellico::Import::BibtexmlImporter;
 
@@ -29,7 +31,7 @@ bool BibtexmlImporter::canImport(int type) const {
   return type == Data::Collection::Bibtex;
 }
 
-Tellico::Data::Collection* BibtexmlImporter::collection() {
+Tellico::Data::CollPtr BibtexmlImporter::collection() {
   if(!m_coll) {
     loadDomDocument();
   }
@@ -49,12 +51,17 @@ void BibtexmlImporter::loadDomDocument() {
   QDomNodeList entryelems = root.elementsByTagNameNS(ns, QString::fromLatin1("entry"));
 //  kdDebug() << "BibtexmlImporter::loadDomDocument - found " << entryelems.count() << " entries" << endl;
 
-  unsigned count = entryelems.count();
-  for(unsigned j = 0; j < entryelems.count(); ++j) {
+  const uint count = entryelems.count();
+  const uint stepSize = KMAX(s_stepSize, count/100);
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
+  item.setTotalSteps(count);
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  for(uint j = 0; !m_cancelled && j < entryelems.count(); ++j) {
     readEntry(entryelems.item(j));
 
-    if(j%s_stepSize == 0) {
-      emit signalFractionDone(static_cast<float>(j)/static_cast<float>(count));
+    if(j%stepSize == 0) {
+      ProgressManager::self()->setProgress(this, j);
+      kapp->processEvents();
     }
   } // end entry loop
 }
@@ -62,7 +69,7 @@ void BibtexmlImporter::loadDomDocument() {
 void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
   QDomNode node = const_cast<QDomNode&>(entryNode_);
 
-  Data::Entry* entry = new Data::Entry(m_coll);
+  Data::EntryPtr entry = new Data::Entry(m_coll);
 
 /* The Bibtexml format looks like
   <entry id="...">
@@ -144,6 +151,10 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
   }
 
   m_coll->addEntry(entry);
+}
+
+void BibtexmlImporter::slotCancel() {
+  m_cancelled = true;
 }
 
 #include "bibtexmlimporter.moc"

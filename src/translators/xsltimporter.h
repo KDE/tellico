@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,6 +17,7 @@
 class KURLRequester;
 
 #include "textimporter.h"
+#include "../datavectors.h"
 
 namespace Tellico {
   namespace Import {
@@ -36,14 +37,14 @@ public:
 
   /**
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   void setXSLTURL(const KURL& url) { m_xsltURL = url; }
 
 private:
-  Data::Collection* m_coll;
+  Data::CollPtr m_coll;
 
   QWidget* m_widget;
   KURLRequester* m_URLRequester;

@@ -12,7 +12,7 @@
    ===================================================================
    Tellico XSLT file - Collection Summary Report
 
-   Copyright (C) 2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2005-2006 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -56,6 +56,8 @@
         width: 750px;
         background-color: #ddd;
         border: solid 1px #999;
+        overflow: auto;
+        padding: 0px 0px 0px 0px;
    }
    h2 {
         font-size: 125%;
@@ -65,36 +67,38 @@
         margin-bottom: 0px;
    }
    h3 {
-        font-size: 90%;
+        font-size: 0.9em;
         color: #666;
         text-align: right;
         padding-right: 4px;
-        margin-top: -1em;
+        margin-top: -1.1em;
         margin-bottom: 0px;
+   }
+   h4 {
+        text-align: center;
    }
    table {
         margin-left: auto;
         margin-right: auto;
-        font-weight: bold;
-        font-size: 120%;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding: 10px 0px 10px 0px;
    }
    div.row {
-        height: 1em;
-        margin: 4px 0px 4px 0px;
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
         border: solid 1px transparent;
+        clear: left;
+        overflow: auto;
+        line-height: 120%;
    }
    div.group {
-        font-weight: bold;
         text-align: left;
-        padding: 2px 10px 0px 4px;
+        margin: 0px 0px 0px 0px;
+        padding: 0px 10px 0px 4px;
         float: left;
    }
    span.bar {
         width: 590px;
-        margin: 2px;
-        margin-left: 150px;
+        margin: 1px 2px 1px 150px;
         position: absolute;
         float: left;
         border-left: solid 5px #ddd; /* padding of a sort */
@@ -104,17 +108,16 @@
         border-right: outset 2px #003;
         border-bottom: outset 2px #003;
         border-left: outset 2px #669;
-        height: 1em;
         float: left;
+        position: absolute;
         background-color: #336;
-   }
-   strong {
-        padding-left: 4px;
-        color: #666;
+        color: white;
+        padding-right: 4px;
+        padding-bottom: 2px;
+        font-size: 0.9em;
+        line-height: 0.9em;
+        text-align: right;
         font-style: italic;
-   }
-   h4 {
-        text-align: center;
    }
    </style>
    <title>Tellico</title>
@@ -136,14 +139,14 @@
  <table>
   <tbody>
    <tr>
-    <td><i18n>Total number of fields:</i18n></td>
-    <td style="padding-right: 50px; color: #006;">
+    <th><i18n>Total number of fields:</i18n></th>
+    <th style="padding-right: 50px; color: #006;">
      <xsl:value-of select="count(tc:fields/tc:field)"/>
-    </td>
-    <td><i18n>Total number of entries:</i18n></td>
-    <td style="color:#006;">
+    </th>
+    <th><i18n>Total number of entries:</i18n></th>
+    <th style="color:#006;">
      <xsl:value-of select="count(tc:entry)"/>
-    </td>
+    </th>
    </tr>
   </tbody>
  </table>
@@ -210,12 +213,12 @@
  </xsl:variable>
 
  <xsl:if test="$total &gt; 2">
-   
+
   <div class="field">
    <h2>
     <xsl:value-of select="key('fieldsByName', $fieldname)/@title"/>
    </h2>
-   
+
    <xsl:for-each select="$groups">
     <xsl:sort select="@count" data-type="number" order="descending" />
     <xsl:sort select="@name"/>
@@ -229,12 +232,11 @@
         <xsl:attribute name="style">
          <xsl:text>padding-left:</xsl:text>
          <!-- the 540 is rather arbitrarily dependent on font-size, seem to work -->
-         <xsl:value-of select="540 * @count div $max"/>
+         <xsl:value-of select="floor(540 * @count div $max)"/>
          <xsl:text>px;</xsl:text>
         </xsl:attribute>
-        <xsl:text>&#160;</xsl:text>
+        (<xsl:value-of select="@count"/>)
        </span>
-       <strong>(<xsl:value-of select="@count"/>)</strong>
       </span>
      </div>
     </xsl:if>
@@ -251,10 +253,10 @@
 <xsl:template name="max-count">
  <xsl:param name="nodes" select="/.."/>
  <xsl:param name="max"/>
- 
+
  <xsl:variable name="count" select="count($nodes)"/>
  <xsl:variable name="aNode" select="$nodes[ceiling($count div 2)]"/>
- 
+
  <xsl:choose>
   <xsl:when test="$count = 0">
    <xsl:value-of select="number($max)"/>
@@ -262,7 +264,7 @@
 
   <xsl:otherwise>
    <xsl:call-template name="max-count">
-    
+
     <xsl:with-param name="nodes" select="$nodes[not(@count &lt;= number($aNode/@count))]"/>
     <xsl:with-param name="max">
      <xsl:choose>

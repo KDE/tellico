@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,9 +37,11 @@ public:
   VectorIterator(Vector<T>* vector, size_t index) : m_vector(vector), m_index(index) {}
   VectorIterator(const VectorIterator<T>& other) : m_vector(other.m_vector), m_index(other.m_index) {}
 
-  operator T*() { return m_vector->at(m_index).data(); }
+//  operator T*() { return m_vector->at(m_index).data(); }
+  operator KSharedPtr<T>() { return m_vector->at(m_index); }
   T* operator->() { return m_vector->at(m_index).data(); }
   T& operator*() { return *m_vector->at(m_index); }
+  T* data() { return m_vector->at(m_index).data(); }
 
   VectorIterator& operator++() { ++m_index; return *this; }
   VectorIterator& operator--() { --m_index; return *this; }
@@ -64,9 +66,11 @@ public:
   VectorConstIterator(const Vector<T>* vector, size_t index) : m_vector(vector), m_index(index) {}
   VectorConstIterator(const VectorIterator<T>& other) : m_vector(other.m_vector), m_index(other.m_index) {}
 
-  operator const T*() { return m_vector->at(m_index).data(); }
+//  operator const T*() { return m_vector->at(m_index).data(); }
+  operator KSharedPtr<const T>() { return m_vector->at(m_index); }
   const T* operator->() { return m_vector->at(m_index).data(); }
   const T& operator*() { return *m_vector->at(m_index); }
+  const T* data() const { return m_vector->at(m_index).data(); }
 
   VectorConstIterator& operator++() { ++m_index; return *this; }
   VectorConstIterator& operator--() { --m_index; return *this; }
@@ -92,6 +96,7 @@ public:
   typedef VectorConstIterator<T> ConstIterator;
 
   Vector() {}
+  Vector(Ptr t) { append(t); }
   Vector(const Vector<T>& v) : m_baseVector(v.m_baseVector) {}
   Vector& operator=(const Vector<T>& other) {
     if(this != &other) {
@@ -116,14 +121,19 @@ public:
   ConstIterator end() const { return ConstIterator(this, count()); }
   ConstIterator constEnd() const { return ConstIterator(this, count()); }
 
-  void clear() { m_baseVector.clear(); }
-  void append(T* t) { m_baseVector.append(t); }
+  Ptr& front() { return at(0); }
+  const Ptr& front() const { return at(0); }
+  Ptr& back() { return at(count()-1); }
+  const Ptr& back() const { return at(count()-1); }
 
-  void insert(Iterator pos, T* t) {
+  void clear() { m_baseVector.clear(); }
+  void append(Ptr t) { m_baseVector.append(t); }
+
+  void insert(Iterator pos, Ptr t) {
     m_baseVector.insert(&m_baseVector[pos.m_index], t);
   }
 
-  Iterator find(T* t) {
+  Iterator find(Ptr t) {
     for(size_t i = 0; i < count(); ++i) {
       if(m_baseVector[i].data() == t) {
         return Iterator(this, i);
@@ -132,8 +142,7 @@ public:
     return end();
   }
 
-  bool contains(T* t) const { return qFind(m_baseVector.begin(), m_baseVector.end(), Ptr(t)) != m_baseVector.end(); }
-  bool remove(T* t) { return remove(Ptr(t)); }
+  bool contains(Ptr t) const { return qFind(m_baseVector.begin(), m_baseVector.end(), Ptr(t)) != m_baseVector.end(); }
   bool remove(const Ptr& t) {
     Ptr* it = qFind(m_baseVector.begin(), m_baseVector.end(), t);
     if(it == m_baseVector.end()) return false;
@@ -241,6 +250,8 @@ public:
 
   T* front() { return count() > 0 ? m_baseVector.at(0) : 0; }
   const T* front() const { return count() > 0 ? m_baseVector.at(0) : 0; }
+  T* back() { return count() > 0 ? m_baseVector.at(count()-1) : 0; }
+  const T* back() const { return count() > 0 ? m_baseVector.at(count()-1) : 0; }
 
   void clear() { while(remove(begin())) { ; } }
 

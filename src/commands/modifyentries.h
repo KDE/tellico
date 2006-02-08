@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,12 +18,7 @@
 
 #include <kcommand.h>
 
-#include <qguardedptr.h>
-
 namespace Tellico {
-  namespace Data {
-    class Collection;
-  }
   namespace Command {
 
 /**
@@ -32,16 +27,19 @@ namespace Tellico {
 class ModifyEntries : public KCommand  {
 
 public:
-  ModifyEntries(Data::Collection* coll, Data::EntryVec oldEntries, Data::EntryVec newEntries);
+  ModifyEntries(Data::CollPtr coll, const Data::EntryVec& oldEntries, const Data::EntryVec& newEntries);
 
   virtual void execute();
   virtual void unexecute();
   virtual QString name() const;
 
 private:
-  QGuardedPtr<Data::Collection> m_coll;
+  void swapValues();
+
+  Data::CollPtr m_coll;
   Data::EntryVec m_oldEntries;
   Data::EntryVec m_entries;
+  bool m_needToSwap : 1;
 };
 
   } // end namespace

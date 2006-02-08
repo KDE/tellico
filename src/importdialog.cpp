@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,6 +25,8 @@
 #include "translators/alexandriaimporter.h"
 #include "translators/freedbimporter.h"
 #include "translators/risimporter.h"
+#include "translators/gcfilmsimporter.h"
+#include "translators/filelistingimporter.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -51,14 +53,14 @@ ImportDialog::ImportDialog(Import::Format format_, const KURL& url_, QWidget* pa
 
   QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, i18n("Import Options"), widget);
   topLayout->addWidget(bg, 0);
-  m_radioReplace = new QRadioButton(i18n("Replace current collection"), bg);
+  m_radioReplace = new QRadioButton(i18n("&Replace current collection"), bg);
   QWhatsThis::add(m_radioReplace, i18n("Replace the current collection with the contents "
                                        "of the imported file."));
-  m_radioAppend = new QRadioButton(i18n("Append to current collection"), bg);
+  m_radioAppend = new QRadioButton(i18n("A&ppend to current collection"), bg);
   QWhatsThis::add(m_radioAppend, i18n("Append the contents of the imported file to the "
                                       "current collection. This is only possible when the "
                                       "collection types match."));
-  m_radioMerge = new QRadioButton(i18n("Merge with current collection"), bg);
+  m_radioMerge = new QRadioButton(i18n("&Merge with current collection"), bg);
   QWhatsThis::add(m_radioMerge, i18n("Merge the contents of the imported file to the "
                                      "current collection. This is only possible when the "
                                      "collection types match. Entries must match exactly "
@@ -86,7 +88,6 @@ ImportDialog::ImportDialog(Import::Format format_, const KURL& url_, QWidget* pa
   }
 
   connect(bg, SIGNAL(clicked(int)), m_importer, SLOT(slotActionChanged(int)));
-  connect(m_importer, SIGNAL(signalFractionDone(float)), SIGNAL(signalFractionDone(float)));
 
   topLayout->addStretch();
   setMainWidget(widget);
@@ -101,7 +102,7 @@ ImportDialog::~ImportDialog() {
   m_importer = 0;
 }
 
-Tellico::Data::Collection* ImportDialog::collection() {
+Tellico::Data::CollPtr ImportDialog::collection() {
   if(m_importer && !m_coll) {
     m_coll = m_importer->collection();
   }
@@ -176,6 +177,14 @@ Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const 
       importer = new Import::RISImporter(url_);
       break;
 
+    case Import::GCfilms:
+      importer = new Import::GCfilmsImporter(url_);
+      break;
+
+    case Import::FileListing:
+      importer = new Import::FileListingImporter(url_);
+      break;
+
     default:
       kdDebug() << "ImportDialog::importer() - not implemented!" << endl;
       break;
@@ -194,6 +203,7 @@ QString ImportDialog::fileFilter(Import::Format format_) {
   switch(format_) {
     case Import::TellicoXML:
       text = i18n("*.tc *.bc|Tellico Files (*.tc)") + QChar('\n');
+      text += i18n("*.xml|XML Files (*.xml)") + QChar('\n');
       break;
 
     case Import::Bibtex:
@@ -217,9 +227,14 @@ QString ImportDialog::fileFilter(Import::Format format_) {
       text = i18n("*.ris|RIS Files (*.ris)") + QChar('\n');
       break;
 
+    case Import::GCfilms:
+      text = i18n("*.gcf|GCfilms Data Files (*.gcf)") + QChar('\n');
+      break;
+
     case Import::AudioFile:
     case Import::Alexandria:
     case Import::FreeDB:
+    case Import::FileListing:
     default:
       break;
   }
@@ -233,6 +248,7 @@ QString ImportDialog::fileFilter(Import::Format format_) {
 Tellico::Import::Target ImportDialog::importTarget(Import::Format format_) {
   switch(format_) {
     case Import::AudioFile:
+    case Import::FileListing:
       return Import::Dir;
     case Import::Alexandria:
     case Import::FreeDB:
@@ -240,6 +256,29 @@ Tellico::Import::Target ImportDialog::importTarget(Import::Format format_) {
     default:
       return Import::File;
   }
+}
+
+Tellico::Import::FormatMap ImportDialog::formatMap() {
+  Import::FormatMap map;
+  map[Import::TellicoXML] = QString::fromLatin1("Tellico");
+  map[Import::Bibtex]     = i18n("Bibtex");
+  map[Import::Bibtexml]   = i18n("Bibtexml");
+//  map[Import::CSV]        = i18n("CSV");
+  map[Import::MODS]       = i18n("MODS");
+  map[Import::RIS]        = i18n("RIS");
+  map[Import::GCfilms]    = i18n("GCfilms");
+  return map;
+}
+
+QString ImportDialog::startDir(Import::Format format_) {
+  if(format_ == Import::GCfilms) {
+    QDir dir = QDir::home();
+    // able to cd if exists and readable
+    if(dir.cd(QString::fromLatin1(".local/share/gcfilms/"))) {
+      return dir.absPath();
+    }
+  }
+  return QString::fromLatin1(":import");
 }
 
 void ImportDialog::slotUpdateAction() {
@@ -251,9 +290,9 @@ void ImportDialog::slotUpdateAction() {
 }
 
 // static
-Tellico::Data::Collection* ImportDialog::importURL(Import::Format format_, const KURL& url_) {
+Tellico::Data::CollPtr ImportDialog::importURL(Import::Format format_, const KURL& url_) {
   Import::Importer* imp = importer(format_, url_);
-  Data::Collection* c = imp->collection();
+  Data::CollPtr c = imp->collection();
   if(!c && !imp->statusMessage().isEmpty()) {
     Kernel::self()->sorry(imp->statusMessage());
   }

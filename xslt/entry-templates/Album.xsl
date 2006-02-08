@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - Entry template for videos
 
-   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
 
    Known Issues:
    o If there is more an one image, there's a lot of white space under
@@ -54,9 +54,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 8 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 9 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'8'"/>
+  <xsl:with-param name="this-version" select="'9'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -67,8 +67,8 @@
         margin: 4px;
         padding: 0px;
         font-family: "<xsl:value-of select="$font"/>";
-        color: #000;
-        background-color: #fff;
+        background-color: <xsl:value-of select="$color1"/>;
+        color: <xsl:value-of select="$color2"/>;
         font-size: 1em;
    }
    #banner {
@@ -81,11 +81,16 @@
    h1 {
         color: <xsl:value-of select="$color1"/>;
         background-color: <xsl:value-of select="$color2"/>;
+        background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
+        background-repeat: repeat-x; 
         font-size: 1.8em;
         text-align: left;
         padding: 4px;
         margin: 0px;
         font-weight: bold;
+   }
+   span.title {
+        font-style: italic
    }
    span.year {
         padding-left: 8px;
@@ -118,9 +123,15 @@
    }
    p {
        margin-top: 0px;
+       text-align: justify;
+       font-size: 90%;
    }
    img {
        border: 0px solid;
+   }
+  <!-- since text is our own color, links have to be, too -->
+   a {
+       color: #006;
    }
   </style>
   <title>
@@ -144,7 +155,7 @@
 <!-- type 3 is video collections -->
 <!-- warn user that this template is meant for videos only. -->
 <xsl:template match="tc:collection[@type!=4]">
- <h1>The <em>Album</em> template is meant for music collections only.</h1>
+ <h1><i18n>This template is meant for music collections only.</i18n></h1>
 </xsl:template>
 
 <xsl:template match="tc:collection[@type=4]">
@@ -221,11 +232,13 @@
         <xsl:value-of select=".//tc:artist[1]"/>
        </xsl:when>
        <xsl:otherwise>
-        <xsl:text>Various</xsl:text>
+        <i18n>(Various)</i18n>
        </xsl:otherwise>
       </xsl:choose>
       <xsl:text> - </xsl:text>
-      <xsl:value-of select=".//tc:title[1]"/>
+      <span class="title">
+       <xsl:value-of select=".//tc:title[1]"/>
+      </span>
 
       <!-- Tellico 0.8 had multiple years in the default video collection -->
       <xsl:if test=".//tc:year">
@@ -241,7 +254,7 @@
    </td>
   </tr>
   <tr>
-   <td>
+   <td valign="top">
 
     <table cellspacing="1" cellpadding="0" width="100%">
      <xsl:for-each select="key('fieldsByCat', $titleCat)">
@@ -266,44 +279,87 @@
  </table>
 
  <xsl:if test="tc:tracks">
-  <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
-   <tr class="category">
-    <td colspan="3">
-     <xsl:value-of select="$trackCat"/>
-    </td>
-   </tr>
-   <xsl:for-each select="tc:tracks/tc:track">
-    <tr>
-     <th align="right">
-      <xsl:value-of select="format-number(position(), '00')"/>
-     </th>
-     <xsl:choose>
-      <xsl:when test="tc:column">
-       <td class="fieldValue">
-        <xsl:value-of select="tc:column[1]"/>
-       </td>
-       <td class="fieldValue" align="right">
-        <em>
-         <xsl:value-of select="tc:column[2]"/>
-        </em>
-       </td>
-      </xsl:when>
-      <xsl:otherwise>
-       <td class="fieldValue" width="100%">
-        <xsl:value-of select="."/>
-       </td>
-      </xsl:otherwise>
-     </xsl:choose>
+  <table cellspacing="1" cellpadding="0" width="50%"
+         align="left" class="category">
+
+   <xsl:variable name="cols" select="count(tc:tracks/tc:track[1]/tc:column)"/>
+
+   <thead>
+    <tr class="category">
+     <td colspan="{$cols}">
+      <xsl:value-of select="$trackCat"/>
+     </td>
     </tr>
-   </xsl:for-each>
-   <!-- if it has 2 columns, and the second column has a ':', add the time together -->
-   <xsl:if test="tc:tracks/tc:track[1]/tc:column and contains(tc:tracks/tc:track[1]/tc:column[2], ':')">
+    <xsl:if test="key('fieldsByName','track')/tc:prop[@name = 'column1']">
+     <tr>
+      <th colspan="2" style="text-align:center">
+       <xsl:value-of select="key('fieldsByName','track')/tc:prop[@name = 'column1']"/>
+       <xsl:if test="not(tc:tracks/tc:track[1]/tc:column[2] = tc:artists/tc:artist[1])">
+        <xsl:text> / </xsl:text>
+        <em><xsl:value-of select="key('fieldsByName','track')/tc:prop[@name = 'column2']"/></em>
+       </xsl:if>
+      </th>
+      <th style="text-align:center">
+       <xsl:value-of select="key('fieldsByName','track')/tc:prop[@name = 'column3']"/>
+      </th>
+      <xsl:call-template name="columnTitle">
+       <xsl:with-param name="index" select="4"/>
+       <xsl:with-param name="max" select="$cols"/>
+       <xsl:with-param name="elem" select="'th'"/>
+       <xsl:with-param name="field" select="key('fieldsByName','track')"/>
+      </xsl:call-template>
+
+     </tr>
+    </xsl:if>
+   </thead>
+
+   <tbody>
+    <xsl:for-each select="tc:tracks/tc:track">
+     <tr>
+      <th style="text-align:center">
+       <xsl:value-of select="format-number(position(), '00')"/>
+      </th>
+      <xsl:choose>
+       <!-- a three column table could have an empty third column -->
+       <xsl:when test="$cols &gt; 1">
+        <!-- if it has three columns, assume first is title,
+             second is artist and third is track length. -->
+        <td class="fieldValue">
+         <xsl:if test="string-length(tc:column[1])">
+          <xsl:value-of select="tc:column[1]"/>
+         </xsl:if>
+         <xsl:if test="string-length(tc:column[2]) and not(tc:column[2] = current()/../../tc:artists/tc:artist[1])">
+          <xsl:text> / </xsl:text>
+          <em><xsl:value-of select="tc:column[2]"/></em>
+         </xsl:if>
+        </td>
+        <td class="fieldValue" style="text-align: right; padding-right: 10px">
+         <em><xsl:value-of select="tc:column[3]"/></em>
+        </td>
+       </xsl:when>
+       <xsl:otherwise>
+        <td class="fieldValue" width="100%">
+         <xsl:value-of select="."/>
+        </td>
+       </xsl:otherwise>
+      </xsl:choose>
+     </tr>
+    </xsl:for-each>
+   </tbody>
+
+   <!-- if it has multiple columns,
+        and the final one has a ':', add the time together -->
+   <!-- it should still work if the first row itself doesn't contain a ':' -->
+   <xsl:if test="$cols &gt; 1 and
+                 count(tc:tracks/tc:track[contains(tc:column[number($cols)], ':')])">
     <tr>
-     <th colspan="2" style="text-align: right; padding-right: 10px;"><strong>Total: </strong></th>
-     <td class="fieldValue">
+     <th colspan="2" style="text-align: right; padding-right: 10px;">
+      <strong><i18n>Total:</i18n> </strong>
+     </th>
+     <td class="fieldValue" style="text-align: right; padding-right: 10px">
       <em>
        <xsl:call-template name="sumTime">
-        <xsl:with-param name="nodes" select="tc:tracks//tc:column[2]"/>
+        <xsl:with-param name="nodes" select="tc:tracks//tc:column[number($cols)]"/>
        </xsl:call-template>
       </em>
      </td>
@@ -337,7 +393,7 @@
          </p>
         </td>
        </xsl:when>
-       
+
        <!-- tables are field type 8 -->
        <!-- ok to put category name inside div instead of table here -->
        <xsl:when test="@type = 8">
@@ -346,6 +402,18 @@
          <xsl:choose>
           <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
            <table>
+            <xsl:if test="tc:prop[@name = 'column1']">
+             <thead>
+              <tr>
+               <xsl:call-template name="columnTitle">
+                <xsl:with-param name="index" select="1"/>
+                <xsl:with-param name="max" select="tc:prop[@name = 'columns']"/>
+                <xsl:with-param name="elem" select="'th'"/>
+                <xsl:with-param name="field" select="."/>
+               </xsl:call-template>
+              </tr>
+             </thead>
+            </xsl:if>
             <tbody>
              <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
               <tr>

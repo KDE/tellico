@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -38,6 +38,9 @@ public:
   virtual void paintCell(QPainter* p, const QColorGroup& cg,
                          int column, int width, int align);
   virtual int width(const QFontMetrics& fm, const QListView* lv, int c) const;
+
+  virtual int count() const { return childCount(); }
+  virtual int realChildCount() const { return count(); }
 };
 
   } // end namespace

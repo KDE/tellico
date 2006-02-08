@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "comicbookcollection.h"
-#include "../collectionfactory.h"
 
 #include <klocale.h>
 
@@ -26,7 +25,7 @@ namespace {
 using Tellico::Data::ComicBookCollection;
 
 ComicBookCollection::ComicBookCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(ComicBook), i18n("Comics")) {
+   : Collection(title_, i18n("Comics")) {
   setTitle(title_.isNull() ? i18n("My Comic Books") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -36,7 +35,7 @@ ComicBookCollection::ComicBookCollection(bool addFields_, const QString& title_ 
 
 Tellico::Data::FieldVec ComicBookCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
   field->setCategory(i18n(comic_general));
@@ -55,7 +54,7 @@ Tellico::Data::FieldVec ComicBookCollection::defaultFields() {
   field->setFormatFlag(Field::FormatName);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("artist"), i18n("Artist"));
+  field = new Field(QString::fromLatin1("artist"), i18n("Comic Book Illustrator", "Artist"));
   field->setCategory(i18n(comic_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatName);

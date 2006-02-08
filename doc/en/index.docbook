@@ -8,6 +8,7 @@
   <!ENTITY robby "Robby Stephenson">
   <!ENTITY email "robby@periapsis.org">
   <!ENTITY homepage "http://www.periapsis.org/tellico/">
+  <!ENTITY maillist "http://forge.novell.com/mailman/listinfo/tellico-users">
   <!ENTITY xml "<acronym>XML</acronym>">
   <!ENTITY xslt "<acronym>XSLT</acronym>">
   <!ENTITY html "<acronym>HTML</acronym>">
@@ -60,8 +61,8 @@ need them for translation coordination !
 Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
-<date>05/08/2005</date>
-<releaseinfo>1.0</releaseinfo>
+<date>02/06/2006</date>
+<releaseinfo>1.1</releaseinfo>
 
 <title>The &appname; Handbook</title>
 
@@ -83,13 +84,43 @@ Do NOT change these in the translation. -->
 <year>2003</year>
 <year>2004</year>
 <year>2005</year>
+<year>2006</year>
 <holder>&robby;</holder>
 </copyright>
 
 <!-- Translators: put here the copyright notice of the translation -->
 <!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook 
      and in the FDL itself on how to use it. -->
-<legalnotice>&FDLNotice;</legalnotice>
+<legalnotice>
+<para>Permission is granted to copy, distribute and/or modify this
+document under the terms of the GNU Free Documentation License,
+Version 1.1 or any later version published by the Free Software
+Foundation; with &FDLInvariantSections;, with &FDLFrontCoverText;, and
+with &FDLBackCoverText;.  A copy of the license is included in
+<xref linkend="gnu-fdl"/>.</para>
+
+<para>The author of this documentation has also granted you permission to use
+the content under the terms of the <ulink
+url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose.
+See the notice in the <link linkend="gnu-fdl">licensing section</link>.</para>
+</legalnotice>
+<!--<legalnotice>&FDLNotice;</legalnotice>-->
+
+<legalnotice>
+<para>This program is free software; you can redistribute it and/or
+modify it under the terms of version 2 of the GNU General Public
+License as published by the Free Software Foundation.</para>
+
+<para>This program is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</para>
+
+<para>You should have received a copy of the GNU General Public
+License along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.</para>
+</legalnotice>
+<!--<legalnotice>&GPLNotice;</legalnotice>-->
 
 <!-- Abstract about this handbook -->
 
@@ -107,6 +138,7 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword>KDE</keyword>
 <keyword>tellico</keyword>
 <keyword>book</keyword>
+<keyword>movie</keyword>
 <keyword>collection</keyword>
 <keyword>database</keyword>
 <keyword>catalog</keyword>
@@ -139,7 +171,7 @@ revision history. (see installation appendix comment) -->
 &appname; is a program for managing collections. It began as a simple
 book collection manager, and has expanded to include default
 collection templates for bibliographies, comic books, videos, music,
-coins, stamps, trading cards, video games, and wines. In addition, custom
+coins, stamps, trading cards, video games, wines, and file listings. In addition, custom
 collections can be built for any other type of collectibles.
 </para>
 
@@ -193,10 +225,10 @@ in the <link linkend="gnu-fdl">license declaration</link>.
 <para>
 In &appname;, a collection is the document. Only one collection exists in each &appname;
 file. A collection contains any number of <link linkend="fields">fields</link> and
-<link linkend="entries">entries</link>. &appname; supports 10 specific collection types by
+<link linkend="entries">entries</link>. &appname; supports 11 specific collection types by
 default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps,
-video games, and wines. In addition, an empty generic collection template is available for any
-other type of collectibles.
+video games, wines, and file listings. In addition, an empty generic collection template is available
+for any other type of collectibles or lists.
 </para>
 </sect2>
 
@@ -222,7 +254,9 @@ the whole collection is always resident in memory, too many entries could slow d
 <para>
 &appname; has been tested with a collection of 10,000 entries, and the speed was satisfactory.
 However, if many large images are included in the collection, the loading and processing time
-does slow down greatly. Future versions will likely address this issue.
+does slow down greatly. Performance can be improved by having &appname; store images in the
+application data directory rather than inside the data file itself. More information can be found
+in the <link linkend="configuration">configuration section</link>.
 </para>
 
 </sect2>
@@ -260,21 +294,24 @@ file included in the KDE distribution. -->
 &appname;
 </para>
 <para>
-Program copyright 2001-2005 &robby; <email>&email;</email>
-</para>
-<para>
+Program copyright 2001-2006 &robby; <email>&email;</email>
 </para>
 
+&underGPL;        	 <!-- GPL License -->
+
 <para>
-Documentation copyright 2001-2005 &robby; <email>&email;</email>
+Documentation copyright 2001-2006 &robby; <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
-&underFDL; <!-- FDL: do not remove. Commercial development should -->
-<!-- replace this with their copyright and either remove it or re-set this.-->
+<para id="gnu-fdl" xreflabel="the section entitled &quot;GNU Free Documentation
+License&quot;">This documentation is licensed under the terms of the <ulink
+url="common/fdl-license.html">GNU Free Documentation
+License (GFDL)</ulink>.</para>
 
-&underGPL;        	 <!-- GPL License -->
+<para>The author of this documentation has also granted you permission to use the content under the terms of the <ulink
+url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
 
 </chapter>
 
@@ -305,9 +342,9 @@ information here.
 -->
 
 <para>
-In order to successfully use &appname;, you need KDE 3.1.x.
+In order to successfully use &appname;, you need KDE 3.2.x.
 &appname; uses about 5 megabytes of memory to run, but this may vary
-depending on your platform, configuration, and collection size.
+depending on your platform, configuration, and most of all, your collection size.
 </para>
 
 <para>
@@ -331,7 +368,7 @@ in the base directory of the archive, where the third step must be done as
 root if you are installing in a system directory:
 
 <screen width="40">
-<prompt>%</prompt> <userinput>./configure --enable-final --disable-debug</userinput>
+<prompt>%</prompt> <userinput>./configure <option>--enable-final</option> <option>--disable-debug</option></userinput>
 <prompt>%</prompt> <userinput>make</userinput>
 <prompt>%</prompt> <userinput>make install</userinput>
 </screen>
@@ -340,6 +377,30 @@ root if you are installing in a system directory:
 <para>Since &appname; uses autoconf and automake you should not have
 any trouble compiling it. Should you run into problems please report
 them to the the author at <email>&email;</email>.</para>
+
+<sect2 id="compilation-ooo">
+<title>Compiling With OpenOffice.org</title>
+<para>
+&appname; uses a special plugin for communicating with OpenOffice.org, which is not compiled by default.
+The Software Development Kit, available from <ulink url="http://www.openoffice.org/dev_docs/source/sdk/">
+http://www.openoffice.org/dev_docs/source/sdk/</ulink>, is required.
+
+<screen width="40">
+<prompt>%</prompt> <userinput>./configure <option>--enable-ooo</option> <option>--with-ooo-dir</option>=<filename class="directory">/usr/lib/openoffice</filename> <option>--with-ooo-sdk-dir</option>=<filename class="directory">/usr/lib/openoffice/SDK</filename></userinput>
+</screen>
+
+You'll need to use the correct directory locations of the OpenOffice.org libraries and SDK, of course.
+</para>
+
+<para>
+In addition, some distributions may require you to modify the <filename>/etc/ld.so.conf</filename> file
+or add a configuration file to the <filename class="directory">/etc/ld.so.conf.d</filename> directory. Check
+to see if the OpenOffice.org plugin works without any changes first. If it doesn't, try editing
+<filename>/etc/ld.so.conf</filename> and adding the location of the OpenOffice.org libraries, the same as
+you used for the <filename>configure</filename> script.
+For additional help, use the <ulink url="&maillist;">&appname; Mailing List</ulink>
+</para>
+</sect2>
 
 </sect1>
 

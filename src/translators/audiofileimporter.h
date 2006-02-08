@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2005 by Robby Stephenson
+    copyright            : (C) 2004-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,6 +17,7 @@
 class QCheckBox;
 
 #include "importer.h"
+#include "../datavectors.h"
 
 namespace Tellico {
   namespace Import {
@@ -36,18 +37,23 @@ public:
 
   /**
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   /**
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual bool canImport(int type) const;
 
+public slots:
+  void slotCancel();
+
 private:
   static QString insertValue(const QString& str, const QString& value, uint pos);
 
-  Data::Collection* m_coll;
+  Data::CollPtr m_coll;
   QWidget* m_widget;
   QCheckBox* m_recursive;
+  QCheckBox* m_filePath;
+  bool m_cancelled : 1;
 };
 
   } // end namespace

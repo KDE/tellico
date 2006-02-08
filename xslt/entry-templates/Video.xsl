@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - Entry template for videos
 
-   Copyright (C) 2003-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
 
    Known Issues:
    o If there is more an one image, there's a lot of white space under
@@ -54,9 +54,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 8 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 9 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'8'"/>
+  <xsl:with-param name="this-version" select="'9'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -67,8 +67,8 @@
         margin: 4px;
         padding: 0px;
         font-family: "<xsl:value-of select="$font"/>";
-        color: #000;
-        background-color: #fff;
+        color: <xsl:value-of select="$fgcolor"/>;
+        background-repeat: repeat;
         font-size: 1em;
    }
    #banner {
@@ -82,11 +82,9 @@
    }
    h1 {
         color: <xsl:value-of select="$color2"/>;
-        background-color: <xsl:value-of select="$color1"/>;
         font-size: 1.8em;
         text-align: left;
-        padding: 0px;
-        padding-bottom: 2px;
+        padding: 2px;
         margin: 0px;
         font-weight: bold;
    }
@@ -95,12 +93,13 @@
    }
    span.country {
         font-size: 0.8em;
-        font-style: italics;
+        font-style: italic;
    }
    h2 {
         font-size: 1.2em;
         margin: 0px;
         padding: 0px;
+        padding-left: 2px;
    }
    img {
         padding-top: 1px; /* match cellspacing of table */
@@ -113,19 +112,27 @@
    tr.category {
         font-weight: bold;
         font-size: 1.2em;
-        color: #fff;
-        background-color: #666;
+        color: <xsl:value-of select="$color1"/>;
+        background-color: <xsl:value-of select="$color2"/>;
         text-align: center;
+   }
+  /* there seems to be a khtml bug, in 3.4.x at least, repeat-x doesn't
+     work on the tr element, so have to put it on the td element */
+   tr.category td {
+        background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
+        background-repeat: repeat-x; 
    }
    th {
         font-weight: bold;
         text-align: left;
-        background-color: #ccc;
+        color: <xsl:value-of select="$color2"/>;
         padding-left: 3px;
         padding-right: 3px;
    }
    p {
         margin-top: 0px;
+        text-align: justify;
+        font-size: 90%;
    }
    ul {
         margin-top: 4px;
@@ -157,7 +164,7 @@
 <!-- type 3 is video collections -->
 <!-- warn user that this template is meant for videos only. -->
 <xsl:template match="tc:collection[@type!=3]">
- <h1>The <em>Video</em> template is meant for video collections only.</h1>
+ <h1><i18n>This template is meant for video collections only.</i18n></h1>
 </xsl:template>
 
 <xsl:template match="tc:collection[@type=3]">
@@ -201,19 +208,22 @@
   <!-- title block -->
   <h1>
    <xsl:value-of select=".//tc:title[1]"/>
-   <xsl:text> - </xsl:text>
-   <!-- Tellico 0.8 had multiple years in the default video collection -->
-   <xsl:if test=".//tc:year">
-    <span class="year">
-     <xsl:value-of select="concat(.//tc:year, ' ')"/>
-    </span>
-   </xsl:if>
-   <xsl:if test="tc:nationality">
-    <span class="country">
-     <xsl:text>(</xsl:text>
-     <xsl:value-of select="tc:nationality"/>
-     <xsl:text>)</xsl:text>
-    </span>
+   <xsl:if test=".//tc:year|tc:nationality">
+    <xsl:text> (</xsl:text>
+    <xsl:if test=".//tc:year">
+     <span class="year">
+      <xsl:value-of select=".//tc:year"/>
+     </span>
+    </xsl:if>
+    <xsl:if test="tc:nationality">
+     <xsl:if test=".//tc:year">
+      <xsl:text> </xsl:text>
+     </xsl:if>
+     <span class="country">
+      <xsl:value-of select="tc:nationality"/>
+     </span>
+    </xsl:if>
+    <xsl:text>)</xsl:text>
    </xsl:if>
   </h1>
 
@@ -314,33 +324,42 @@
     <td valign="top" width="50%">
      <!-- now for the cast -->
      <xsl:if test="tc:casts">
+      <xsl:variable name="castField" select="key('fieldsByName', 'cast')"/>
       <table cellspacing="1" cellpadding="0" width="100%">
-       <tbody>
+       <thead>
         <tr class="category">
-         <td colspan="2">
-          <xsl:value-of select="key('fieldsByName', 'cast')/@title"/>
+         <td colspan="5"> <!-- never more than 5 columns -->
+          <xsl:value-of select="$castField/@title"/>
          </td>
         </tr>
-        <tr>
-         <td>
-          <table cellspacing="0" cellpadding="0">
-           <tbody>
-            <xsl:for-each select="$entry/tc:casts/tc:cast">
-             <tr>
-              <td>
-               <xsl:value-of select="tc:column[1]"/>
-              </td>
-              <td>
-               <em>
-                <xsl:value-of select="tc:column[2]"/>
-               </em>
-              </td>
-             </tr>
-            </xsl:for-each>
-           </tbody>
-          </table>
-         </td>
-        </tr>
+        <xsl:if test="$castField/tc:prop[@name = 'column1']">
+         <xsl:variable name="castCols" select="$castField/tc:prop[@name = 'columns']"/>
+         <tr>
+          <xsl:call-template name="columnTitle">
+           <xsl:with-param name="index" select="1"/>
+           <xsl:with-param name="max" select="$castCols"/>
+           <xsl:with-param name="elem" select="'th'"/>
+           <xsl:with-param name="field" select="$castField"/>
+          </xsl:call-template>
+         </tr>
+        </xsl:if>
+       </thead>
+       <tbody>
+        <xsl:for-each select="$entry/tc:casts/tc:cast">
+         <tr>
+          <xsl:for-each select="tc:column">
+           <td width="{floor(100 div count(../tc:column))}%">
+            <xsl:if test="position() = 1">
+             <xsl:value-of select="."/>
+            </xsl:if>
+            <xsl:if test="position() &gt; 1">
+             <em><xsl:value-of select="."/></em>
+            </xsl:if>
+            <xsl:text>&#160;</xsl:text>
+           </td>
+          </xsl:for-each>
+         </tr>
+        </xsl:for-each>
        </tbody>
       </table>
      </xsl:if>
@@ -376,7 +395,7 @@
          </p>
         </td>
        </xsl:when>
-       
+
        <!-- tables are field type 8 -->
        <!-- ok to put category name inside div instead of table here -->
        <xsl:when test="@type = 8">
@@ -385,6 +404,18 @@
          <xsl:choose>
           <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
            <table>
+            <xsl:if test="tc:prop[@name = 'column1']">
+             <thead>
+              <tr>
+               <xsl:call-template name="columnTitle">
+                <xsl:with-param name="index" select="1"/>
+                <xsl:with-param name="max" select="tc:prop[@name = 'columns']"/>
+                <xsl:with-param name="elem" select="'th'"/>
+                <xsl:with-param name="field" select="."/>
+               </xsl:call-template>
+              </tr>
+             </thead>
+            </xsl:if>
             <tbody>
              <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
               <tr>
@@ -411,7 +442,7 @@
          </xsl:choose>
         </td>
        </xsl:when>
-       
+
        <!-- everything else -->
        <xsl:otherwise>
         <th>

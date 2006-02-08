@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -62,7 +62,7 @@ void LineEdit::drawContents(QPainter* painter_) {
   KLineEdit::drawContents(painter_);
 
   // no need to draw anything else if in focus or no hint
-  if(hasFocus() || !m_drawHint || m_hint.isEmpty()) {
+  if(hasFocus() || !m_drawHint || m_hint.isEmpty() || !text().isEmpty()) {
     return;
   }
 

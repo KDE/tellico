@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,7 +23,7 @@
 
 using Tellico::Command::AddLoans;
 
-AddLoans::AddLoans(Data::Borrower* borrower_, Data::LoanVec loans_, bool addToCalendar_)
+AddLoans::AddLoans(Data::BorrowerPtr borrower_, Data::LoanVec loans_, bool addToCalendar_)
     : KCommand()
     , m_borrower(borrower_)
     , m_loans(loans_)
@@ -48,11 +48,13 @@ void AddLoans::execute() {
   for(Data::LoanVec::Iterator loan = m_loans.begin(); loan != m_loans.end(); ++loan) {
     m_borrower->addLoan(loan);
     Data::Document::self()->checkOutEntry(loan->entry());
-    Controller::self()->modifiedEntry(loan->entry());
+    Data::EntryVec vec;
+    vec.append(loan->entry());
+    Controller::self()->modifiedEntries(vec);
   }
   if(!loanExisted) {
-    Data::Collection* c = m_loans.begin()->entry()->collection();
-    Data::Field* f = c->fieldByName(QString::fromLatin1("loaned"));
+    Data::CollPtr c = m_loans.begin()->entry()->collection();
+    Data::FieldPtr f = c->fieldByName(QString::fromLatin1("loaned"));
     if(f) {
       // notify everything that a new field was added
       Controller::self()->addedField(c, f);
@@ -81,11 +83,13 @@ void AddLoans::unexecute() {
   for(Data::LoanVec::Iterator loan = m_loans.begin(); loan != m_loans.end(); ++loan) {
     m_borrower->removeLoan(loan);
     Data::Document::self()->checkInEntry(loan->entry());
-    Controller::self()->modifiedEntry(loan->entry());
+    Data::EntryVec vec;
+    vec.append(loan->entry());
+    Controller::self()->modifiedEntries(vec);
   }
   if(m_addedLoanField) {
-    Data::Collection* c = m_loans.begin()->entry()->collection();
-    Data::Field* f = c->fieldByName(QString::fromLatin1("loaned"));
+    Data::CollPtr c = m_loans.begin()->entry()->collection();
+    Data::FieldPtr f = c->fieldByName(QString::fromLatin1("loaned"));
     if(f) {
       c->removeField(f);
       Controller::self()->removedField(c, f);

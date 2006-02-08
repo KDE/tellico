@@ -31,7 +31,7 @@ performs a menu item function, the default shortcut is listed with the menu item
 </term>
 
 <listitem>
-<para>This command <action>creates a new collection</action>. &appname; supports <link linkend="collection-types">nine default collection types</link> along with an empty user-defined custom collection.</para>
+<para>This command <action>creates a new collection</action>. &appname; supports <link linkend="collection-types">12 default collection types</link> along with an empty user-defined custom collection.</para>
 </listitem>
 </varlistentry>
 
@@ -372,6 +372,20 @@ modified.</para>
 <term>
  <menuchoice>
   <guimenu>Collection</guimenu>
+  <guimenuitem>Update Entry</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This menu contains a list of all available data sources, and can be used to autmatically query the
+source and <action>update the selected entries</action>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
   <guimenuitem>Check-out.</guimenuitem>
  </menuchoice>
 </term>
@@ -472,12 +486,38 @@ modified.</para>
 <term>
  <menuchoice>
   <guimenu>Collection</guimenu>
-  <guimenuitem>Cite Entry</guimenuitem>
+  <guimenuitem>Copy Bibtex to Clipboard</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>copies a Bibtex citation</action> to the clipboard so that it can pasted in a LaTeX document.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Cite Entry in Lyx</guimenuitem>
  </menuchoice>
 </term>
 
 <listitem>
 <para>This command <action>sends a citation for the selected entries</action> to the so-called <emphasis><link linkend="hidden-bibtex-options">lyxpipe</link></emphasis> for use in <application>LyX</application>, <application>Kile</application>, or other LaTeX applications. It is only enabled when editing a bibliography.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>
+ <menuchoice>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Cite Entry in OpenOffice.org</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>sends a citation for the selected entries</action> to <application>OpenOffice.org Writer</application>. It is only enabled when editing a bibliography when the OpenOffice.org plugin is available.</para>
 </listitem>
 </varlistentry>
 

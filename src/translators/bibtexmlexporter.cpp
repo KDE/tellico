@@ -1,5 +1,5 @@
 /*************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -41,11 +41,11 @@ QString BibtexmlExporter::fileFilter() const {
 }
 
 bool BibtexmlExporter::exec() {
-  const Data::Collection* c = Data::Document::self()->collection();
+  Data::CollPtr c = collection();
   if(!c || c->type() != Data::Collection::Bibtex) {
     return false;
   }
-  const Data::BibtexCollection* coll = static_cast<const Data::BibtexCollection*>(c);
+  const Data::BibtexCollection* coll = static_cast<const Data::BibtexCollection*>(c.data());
 
 // there are some special fields
 // the entry-type specifies the entry type - book, inproceedings, whatever
@@ -103,7 +103,7 @@ bool BibtexmlExporter::exec() {
   for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
     key = entryIt->field(keyField);
     if(key.isEmpty()) {
-      key = BibtexHandler::bibtexKey(entryIt);
+      key = BibtexHandler::bibtexKey(entryIt.data());
     }
     QString newKey = key;
     uint c = 'a';
@@ -131,7 +131,7 @@ bool BibtexmlExporter::exec() {
 
     // now iterate over attributes
     for(fIt = fields.constBegin(); fIt != end; ++fIt) {
-      field = fIt;
+      field = fIt.data();
       value = entryIt->field(field->name(), format);
       if(value.isEmpty()) {
         continue;
@@ -179,3 +179,5 @@ bool BibtexmlExporter::exec() {
   return FileHandler::writeTextURL(url(), dom.toString(),
                                    options() & ExportUTF8, options() & Export::ExportForce);
 }
+
+#include "bibtexmlexporter.moc"

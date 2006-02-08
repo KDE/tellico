@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -30,6 +30,8 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class BibtexExporter : public Exporter {
+Q_OBJECT
+
 public:
   BibtexExporter();
 

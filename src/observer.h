@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,13 +14,9 @@
 #ifndef TELLICO_OBSERVER_H
 #define TELLICO_OBSERVER_H
 
+#include "datavectors.h"
+
 namespace Tellico {
-  namespace Data {
-    class Borrower;
-    class Collection;
-    class Entry;
-    class Field;
-  }
   class Filter;
 
 /**
@@ -31,22 +27,22 @@ class Observer {
 public:
   virtual ~Observer() {}
 
-  virtual void    addBorrower(Data::Borrower*) {}
-  virtual void modifyBorrower(Data::Borrower*) {}
+  virtual void    addBorrower(Data::BorrowerPtr) {}
+  virtual void modifyBorrower(Data::BorrowerPtr) {}
   // no removeBorrower()
 
-  virtual void    addEntry(Data::Entry*) {}
-  virtual void modifyEntry(Data::Entry*) {}
-  virtual void removeEntry(Data::Entry*) {}
+  virtual void    addEntries(Data::EntryVec) {}
+  virtual void modifyEntries(Data::EntryVec) {}
+  virtual void removeEntries(Data::EntryVec) {}
 
-  virtual void    addField(Data::Collection*, Data::Field*) {}
+  virtual void    addField(Data::CollPtr, Data::FieldPtr) {}
   // coll, oldfield, newfield
-  virtual void modifyField(Data::Collection*, Data::Field*, Data::Field*) {}
-  virtual void removeField(Data::Collection*, Data::Field*) {}
+  virtual void modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr) {}
+  virtual void removeField(Data::CollPtr, Data::FieldPtr) {}
 
-  virtual void    addFilter(Filter*) {}
-  virtual void modifyFilter(Filter*) {}
-  virtual void removeFilter(Filter*) {}
+  virtual void    addFilter(FilterPtr) {}
+  virtual void modifyFilter(FilterPtr) {}
+  virtual void removeFilter(FilterPtr) {}
 };
 
 }

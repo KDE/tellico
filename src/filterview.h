@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,8 +13,6 @@
 
 #ifndef TELLICO_FILTERVIEW_H
 #define TELLICO_FILTERVIEW_H
-
-class KPopupMenu;
 
 #include "gui/listview.h"
 #include "observer.h"
@@ -36,15 +34,19 @@ public:
 
   virtual bool isSelectable(GUI::ListViewItem*) const;
 
-  void addCollection(Data::Collection* coll);
+  void addCollection(Data::CollPtr coll);
 
-  virtual void    addEntry(Data::Entry* entry);
-  virtual void modifyEntry(Data::Entry* entry);
-  virtual void removeEntry(Data::Entry* entry);
+  virtual void    addEntries(Data::EntryVec entries);
+  virtual void modifyEntry(Data::EntryPtr entry);
+  virtual void modifyEntries(Data::EntryVec entries);
+  virtual void removeEntries(Data::EntryVec entries);
 
-  virtual void    addFilter(Filter* filter);
-  virtual void modifyFilter(Filter*) {}
-  virtual void removeFilter(Filter* filter);
+  virtual void    addFilter(FilterPtr filter);
+  virtual void modifyFilter(FilterPtr) {}
+  virtual void removeFilter(FilterPtr filter);
+
+protected slots:
+  virtual void slotSelectionChanged();
 
 private slots:
   /**
@@ -69,7 +71,6 @@ private:
   virtual void setSorting(int column, bool ascending = true);
 
   bool m_notSortedYet;
-  KPopupMenu* m_filterMenu;
   QDict<FilterItem> m_itemDict;
 };
 

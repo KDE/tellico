@@ -12,7 +12,7 @@
 </para>
 
 <para>
-Searches may use four different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, or <guilabel>Keyword</guilabel>. Not all criteria are available for certain data sources. Once a search is initiated, the <guibutton>Search</guibutton> button becomes <guibutton>Stop</guibutton> which will end a search. As results are found, they are added to the list directly under the search box, where selecting an item will show the result without adding it to the collection. Clicking the <guibutton>Add Entry</guibutton> button will add all the selected items to your collection. Clicking <guibutton>Clear</guibutton> will remove all the current results and reset the search.
+Searches may use five different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, <guilabel>UPC/EAN</guilabel>, or <guilabel>Keyword</guilabel>. Not all criteria are available for certain data sources. Once a search is initiated, the <guibutton>Search</guibutton> button becomes <guibutton>Stop</guibutton> which will end a search. As results are found, they are added to the list directly under the search box, where selecting an item will show the result without adding it to the collection. Clicking the <guibutton>Add Entry</guibutton> button will add all the selected items to your collection. Clicking <guibutton>Clear</guibutton> will remove all the current results and reset the search.
 </para>
 
 <screenshot>
@@ -37,7 +37,7 @@ To facilitate the use of barcode scanners, searches can include multiple ISBN va
 <title>Importing Data</title>
 
 <para>
-&appname; offers three different actions when importing data. <guilabel>Replace collection</guilabel> indicates the current collection should be closed, and a new one created with the data from the imported file. <guilabel>Append collection</guilabel> tells &appname; to add all the entries in the imported collection to the current one, and to add any fields which don't currently exist. The <guilabel>Merge collection</guilabel> action is the same as appending, except that each imported entry is compared to the current ones, and any identical entries are skipped. Future plans include an improved heuristic for identifying matching entries, but currently, except for music collections, they must be identical for every field. Music collections compare the artist and album only, and the tracks are merged for matching entries. The <link linkend="importing-audio-files">audio file importer</link> is able to correctly build track lists by merging entries.
+&appname; offers three different actions when importing data. <guilabel>Replace current collection</guilabel> will close the current collection, and create a new one with the data from the imported file. <guilabel>Append to current collection</guilabel> tells &appname; to add all the entries in the imported collection to the current one, and to add any fields which don't currently exist. The <guilabel>Merge collection</guilabel> action is the same as appending, except that each imported entry is compared to the current ones, and any identical entries are skipped. Future plans include an improved heuristic for identifying matching entries, but currently, except for music collections, they must be identical for every field. Music collections compare the artist and album only, and the tracks are merged for matching entries. The <link linkend="importing-audio-files">audio file importer</link> is able to correctly build track lists by merging entries.
 </para>
 
 <sect2 id="importing-tellico">
@@ -82,7 +82,13 @@ Only the first five lines of the imported CSV file are shown in the dialog.
 
 <para>
 &appname; is able to use the <ulink url="http://freedb.org">freedb.org</ulink> service to lookup
-information about a <acronym>CD</acronym>, including the track list.
+information about a <acronym>CD</acronym>, including the track list. Depending on your distribution,
+settings for access to the service may be set in the &kde; Control Center. The CD artist, title, genre,
+year, and track listing are all added.
+</para>
+
+<para>
+In addition, if the disc contains CD-Text, that information is read and added to the imported entry.
 </para>
 </sect2>
 
@@ -98,7 +104,7 @@ In addition, if a directory contains a <filename>.directory</filename> file and 
 </para>
 
 <para>
-The audio file metadata importer can recursively scan a directory to find all audio files in any subdirectory, though symbolic links are not followed.
+The audio file metadata importer can recursively scan a directory to find all audio files in any subdirectory, though symbolic links are not followed. &appname; uses the <ulink url="http://developer.kde.org/~wheeler/taglib.html">TagLib library</ulink> for reading the audio file metadata, and so can import data from any file type that TagLib understands.
 </para>
 
 </sect2>
@@ -107,7 +113,7 @@ The audio file metadata importer can recursively scan a directory to find all au
 <title>Importing Alexandria Libraries</title>
 
 <para>
-<application><ulink url="http://alexandria.rubyforge.org">Alexandria</ulink></application> is a book collection manager for the <ulink url="http://www.gnome.org">Gnome</ulink> desktop environment. The importer offers a choice of importing any of the libraries found in <filename class="directory">$<envar>HOME</envar>/.alexandria/</filename>.
+<application><ulink url="http://alexandria.rubyforge.org">Alexandria</ulink></application> is an alternative book collection manager for the <ulink url="http://www.gnome.org">GNOME</ulink> desktop environment. The importer offers a choice of importing any of the libraries found in <filename class="directory">$<envar>HOME</envar>/.alexandria/</filename>.
 </para>
 
 </sect2>
@@ -137,7 +143,7 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 <title>Importing MODS Data</title>
 
 <para>
-<acronym><ulink url="http://www.loc.gov/standards/mods/">MODS</ulink></acronym> is a format for representing various types of media collections. Currently, only books may be imported to &appname;.
+<acronym><ulink url="http://www.loc.gov/standards/mods/">MODS</ulink></acronym> is a format for representing various types of media collections. Currently, only books are imported by &appname;, as a Bibliographic collection.
 </para>
 
 </sect2>
@@ -145,7 +151,24 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 <sect2 id="importing-ris">
 <title>Importing RIS Data</title>
 <para>
-The <ulink url="http://www.adeptscience.co.uk/kb/article/A626"><acronym>RIS</acronym> format</ulink> is a bibliographic file format used by <application>Reference Manager</application> and others.
+The <ulink url="http://www.adeptscience.co.uk/kb/article/A626"><acronym>RIS</acronym> format</ulink> is a bibliographic file format used by <application>Reference Manager</application> and others. &appname; imports bibtex files as a Bibliographic collection.
+</para>
+</sect2>
+
+<sect2 id="importing-gcfilms">
+<title>Importing GCfilms Data</title>
+
+<para>
+<application><ulink url="http://home.gna.org/gcfilms/">GCfilms</ulink></application> is an alternative movie collection manager. Normally, <application>GCfilms</application> data files are found in <filename class="directory">$<envar>HOME</envar>/.local/share/gcfilms/</filename>.
+</para>
+
+</sect2>
+
+<sect2 id="importing-file-listing">
+<title>Importing File Listings</title>
+
+<para>
+The best way to create a <link linkend="file-catalog">File Catalog</link> is to import the contents of a folder. The folder may be searched recursively, to add all files found within. This importer is most useful for backup listings and media cataloging, such as <acronym>CD</acronym> or <acronym>DVD</acronym> listings. In addition, image previews of the file contents may be generated, although it can take some time to read a large number of files. The file previews are same as those shown in the &kde; file manager.
 </para>
 </sect2>
 
@@ -182,7 +205,15 @@ Exported text files, such as Bibtex or CSV, may use the Unicode (UTF-8) characte
 <title>Exporting &xml;</title>
 
 <para>
-The file format for &appname; data is a zipped &xml; file. Exporting to &xml; merely creates the &xml; file without zipping it. Images may be included in the &xml; file as base64-encoded data in an image element.
+The file format for &appname; data is a zipped &xml; file. Exporting to &xml; merely creates the &xml; file without zipping it. Images may be included in the &xml; file as base64-encoded data in an image element, but doing so can create very large text files.
+</para>
+</sect2>
+
+<sect2 id="exporting-zip">
+<title>Exporting Zip</title>
+
+<para>
+The standard file format for &appname; is a zipped file, contained the &xml; collection file, and optionally, all the images referenced in the collection. If the images are being stored in the application folder instead, exporting to a Zip file will create a self-contained data file, which includes all the images in the collection.
 </para>
 </sect2>
 
@@ -243,11 +274,11 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 
 </sect2>
 
-<sect2 id="exporting-alexandri">
+<sect2 id="exporting-alexandria">
 <title>Exporting Alexandria</title>
 
 <para>
-<ulink url="http://alexandria.rubyforge.net">Alexandria</ulink> is a book collection manager for the <ulink url="http://www.gnome.org">GNOME</ulink> desktop environment. &appname; is able to export a limited subset of book collection fields to the default Alexandria data location.
+<application><ulink url="http://alexandria.rubyforge.net">Alexandria</ulink></application> is a book collection manager for the <ulink url="http://www.gnome.org">GNOME</ulink> desktop environment. &appname; is able to export a limited subset of book collection fields to the default Alexandria data location.
 </para>
 
 </sect2>
@@ -288,12 +319,75 @@ may enclose the field values with the <literal>\url{...}</literal> tag. Finally,
 
 </sect2>
 
+<sect2 id="exporting-gcfilms">
+<title>Exporting GCfilms</title>
+
+<para>
+<application><ulink url="http://home.gna.org/gcfilms/">GCfilms</ulink></application> is another movie collection manager. &appname; is able to export a limited subset of video collection fields to a GCfilms data file.
+</para>
+
+</sect2>
+
 <sect2 id="exporting-xslt">
 <title>Exporting &xml; via &xslt;</title>
 
 <para>
 Finally, &appname; is able to process its internal &xml; representation of the collection data through an external XSL stylesheet before exporting. This type of export may be useful for generating text reports or other file types.
 </para>
+</sect2>
+
+</sect1>
+
+<sect1 id="citations">
+<title>Working With Citations</title>
+<para>
+When working with a <link linkend="bibliography">bibliography</link>, citations for the currently selected entries
+may be generated and used in various other applications. A citation in bibtex format can be copied to the clipboard,
+and then pasted in a latex file. Bibtex citations can also be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="hidden-bibtex-options">lyxpipe</link></emphasis>. Finally, limited support is available for interacting with <application>OpenOffice.org Writer</application>.
+</para>
+
+<sect2 id="openoffice-org">
+<title>Working with OpenOffice.org</title>
+<para>
+&appname; has some limited support for sending citations to <application>OpenOffice.org Writer</application> and
+updating the bibliography of a document. A special plugin is used, and if it is available, the menu command for
+citing an entry in <application>Writer</application> is enabled. If it is not enabled, then &appname; is either
+unable to find the plugin or is unable to load it. More information about building &appname; with
+OpenOffice.org support is in <link linkend="compilation-ooo">a later section</link>.
+</para>
+
+<para>
+<application>OpenOffice.org</application> must be configured to allow interaction from other applications.
+There are two methods: named pipes and TCP/IP. Named pipes are the easier and faster. To run
+<application>Writer</application> and connect with a named pipe, the following command may be used:
+
+<screen width="40">
+<prompt>%</prompt> <userinput>oowriter "-accept=pipe,name=OOo_pipe;urp;StarOffice.ServiceManager"</userinput>
+</screen>
+
+The pipe or TCP/IP port can be configured to be open every time OpenOffice.org is used. Check
+<ulink url="http://api.openoffice.org/docs/DevelopersGuide/OfficeBean/OfficeBean.xhtml#1_5_1_Default_Configuration">the OpenOffice.org documentation</ulink> for more details.
+</para>
+
+<para>
+To insert a citation, select the entry, then use the <guimenuitem>Cite Entry in OpenOffice.org</guimenuitem>.
+<application>Writer</application> must be running already. &appname;
+will attempt to connect, and if it fails, it will ask for more information about the connection.
+</para>
+
+<screenshot>
+<screeninfo>OpenOffice.org Connection Dialog</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="openoffice-dialog.png"/></imageobject>
+<textobject><phrase>OpenOffice.org Connection Dialog</phrase></textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+Select the type of connection, either a pipe or a TCP/IP port. Enter the pipe name, or the hostname and port.
+&appname; will remember your connection settings for later use.
+</para>
+
 </sect2>
 
 </sect1>

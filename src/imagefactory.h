@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,6 +20,10 @@
 
 #include <kurl.h>
 
+#include <qcache.h>
+
+class KTempDir;
+
 namespace Tellico {
 
 /**
@@ -27,6 +31,19 @@ namespace Tellico {
  */
 class ImageFactory {
 public:
+  enum CacheDir {
+    TempDir=0,
+    DataDir
+  };
+
+  /**
+   * Returns the temporary directory where image files are saved
+   *
+   * @return The full path
+   */
+  static QString tempDir();
+  static QString dataDir();
+
   /**
    * Add an image, reading it from a URL, which is the case when adding a new image from the
    * @ref ImageWidget.
@@ -57,20 +74,8 @@ public:
    * @return The image
    */
   static const Data::Image& addImage(const QByteArray& data, const QString& format, const QString& id);
-  /**
-   * Returns an image reference given its id. If none is found, a null image
-   * is returned.
-   *
-   * @param id The image id
-   * @return The image referencenter
-   */
-  static const Data::Image& imageById(const QString& id);
-  /**
-   * Returns the temporary directory where image files are saved
-   *
-   * @return The full path
-   */
-  static const QString& tempDir() { if(s_tempDir.isEmpty()) createTempDir(); return s_tempDir; }
+
+  static const Data::Image& addCachedImage(const QString& id, CacheDir dir);
   /**
    * Writes an image to a file. ImageFactory keeps track of which images were already written
    * if the location is the same as the tempdir.
@@ -80,22 +85,34 @@ public:
    * @param force Force the image to be written, even if it already has been
    * @return Whether the save was successful
    */
-  static bool writeImage(const QString& id, const KURL& targetDir=KURL(), bool force=false);
+  static bool copyImage(const QString& id, const KURL& targetDir, bool force=false);
+  static bool writeImage(const QString& id, CacheDir dir);
+
   /**
+   * Returns an image reference given its id. If none is found, a null image
+   * is returned.
+   *
+   * @param id The image id
+   * @return The image referencenter
+   */
+  static const Data::Image& imageById(const QString& id);
+
+  static QPixmap pixmap(const QString& id_, int w=0, int h=0);
+
+/**
    * Clean the temp dir and remove all temporary image files
    */
   static void clean();
+  static void createStyleImages();
 
 private:
-  /**
-   * Create a temp dir for images to be written to disk.
-   */
-  static void createTempDir();
-
   static QDict<Data::Image> s_imageDict;
-  static StringSet s_cachedImages; // the id's of the images written to disk
-  static QString s_tempDir;
+  static QCache<Data::Image> s_imageCache;
+  static QCache<QPixmap> s_pixmapCache;
+  static StringSet s_imagesInTmpDir; // the id's of the images written to tmp directory
+  static KTempDir* s_tmpDir;
   static const Data::Image s_null;
+  static bool s_imagesCreated;
 };
 
 } // end namespace

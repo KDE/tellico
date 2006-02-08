@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -47,10 +47,8 @@ BorrowerDialog::BorrowerDialog(QWidget* parent_, const char* name_/*=0*/)
   topLayout->addWidget(m_listView);
   m_listView->addColumn(i18n("Name"));
   m_listView->setFullWidth(true);
-  connect(m_listView, SIGNAL(doubleClicked(QListViewItem*)),
-          SLOT(slotOk()));
-  connect(m_listView, SIGNAL(selectionChanged(QListViewItem*)),
-          SLOT(updateEdit(QListViewItem*)));
+  connect(m_listView, SIGNAL(doubleClicked(QListViewItem*)), SLOT(slotOk()));
+  connect(m_listView, SIGNAL(selectionChanged(QListViewItem*)), SLOT(updateEdit(QListViewItem*)));
 
   m_lineEdit = new KLineEdit(mainWidget);
   topLayout->addWidget(m_lineEdit);
@@ -77,6 +75,10 @@ void BorrowerDialog::slotLoadAddressBook() {
   const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
   for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
       it != end; ++it) {
+    // skip people with no name
+    if((*it).realName().isEmpty()) {
+      continue;
+    }
     Item* item = new Item(m_listView, *it);
     m_itemDict.insert((*it).realName(), item);
     m_lineEdit->completionObject()->addItem((*it).realName());
@@ -84,8 +86,7 @@ void BorrowerDialog::slotLoadAddressBook() {
 
   // add current borrowers, too
   const Data::BorrowerVec& borrowers = Data::Document::self()->collection()->borrowers();
-  for(Data::BorrowerVec::ConstIterator it = borrowers.constBegin(), end = borrowers.constEnd();
-      it != end; ++it) {
+  for(Data::BorrowerVec::ConstIterator it = borrowers.constBegin(); it != borrowers.constEnd(); ++it) {
     if(m_itemDict[it->name()]) {
       continue; // if an item already exists with this name
     }
@@ -117,12 +118,12 @@ void BorrowerDialog::updateEdit(QListViewItem* item_) {
   m_uid = static_cast<Item*>(item_)->uid();
 }
 
-Tellico::Data::Borrower* BorrowerDialog::borrower() {
+Tellico::Data::BorrowerPtr BorrowerDialog::borrower() {
   return new Data::Borrower(m_lineEdit->text(), m_uid);
 }
 
 // static
-Tellico::Data::Borrower* BorrowerDialog::getBorrower(QWidget* parent_) {
+Tellico::Data::BorrowerPtr BorrowerDialog::getBorrower(QWidget* parent_) {
   BorrowerDialog dlg(parent_);
 
   if(dlg.exec() == QDialog::Accepted) {

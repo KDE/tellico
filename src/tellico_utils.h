@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,9 +14,10 @@
 #ifndef TELLICO_UTILS_H
 #define TELLICO_UTILS_H
 
+class KLibrary;
+
 class QCursor;
 class QStringList;
-class QFontMetrics;
 class QScrollView;
 
 #include <qstring.h>
@@ -37,7 +38,7 @@ namespace Tellico {
    *
    * @param length The UID starts with "Tellico" and adds enough letters to be @p length long.
    */
-  QString uid(int length=20);
+  QString uid(int length=20, bool prefix=true);
   uint toUInt(const QString& string, bool* ok);
   /**
    * Replace all occurences  of <i18n>text</i18n> with i18n("text")
@@ -45,14 +46,21 @@ namespace Tellico {
   QString i18nReplace(QString text);
   /**
    * Returns a list of the subdirectories in @param dir
-   *.Symbolic links are ignored
+   * Symbolic links are ignored
    */
   QStringList findAllSubDirs(const QString& dir);
+  int stringHash(const QString& str);
+  /** take advantage string collisions to reduce memory
+  */
+  QString shareString(const QString& str);
 
   extern QColor contrastColor;
   void updateContrastColor(const QColorGroup& cg);
+  QColor blendColors(const QColor& color1, const QColor& color2, int percent);
+  QString minutes(int seconds);
+  QString saveLocation(const QString& dir);
 
-  QString rPixelSqueeze(const QString& str, const QFontMetrics& fm, uint pixels);
+  KLibrary* openLibrary(const QString& libName);
 
 namespace GUI {
   class CursorSaver {
@@ -62,15 +70,6 @@ namespace GUI {
     void restore();
   private:
     bool m_restored : 1;
-  };
-
-  class WidgetUpdateBlocker {
-  public:
-    WidgetUpdateBlocker(QScrollView* widget);
-    ~WidgetUpdateBlocker();
-  private:
-    QScrollView* m_widget;
-    bool m_wasEnabled : 1;
   };
 }
 

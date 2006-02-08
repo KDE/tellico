@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -34,17 +34,7 @@ public:
    * @param url The file to be imported
    */
   TextImporter(const KURL& url);
-
-protected:
-  /**
-   * Returns the contents of the imported file.
-   *
-   * @return The file contents
-   */
-  const QString& text() const { return m_text; }
-
-private:
-  QString m_text;
+  TextImporter(const QString& text);
 };
 
   } // end namespace

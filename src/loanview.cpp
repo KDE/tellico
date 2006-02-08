@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,15 +37,14 @@ LoanView::LoanView(QWidget* parent_, const char* name_) : GUI::ListView(parent_,
   setTreeStepSize(15);
   setFullWidth(true);
 
-  m_loanMenu = new KPopupMenu(this);
-//  Controller::self()->plugEntryActions(m_entryMenu); // this includes a lend action, though...
-  m_loanMenu->insertItem(SmallIconSet(QString::fromLatin1("2downarrow")),
-                          i18n("Check-in"), this, SLOT(slotCheckIn()));
-  m_loanMenu->insertItem(SmallIconSet(QString::fromLatin1("2downarrow")),
-                          i18n("Modify Loan..."), this, SLOT(slotModifyLoan()));
-
   connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),
           SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
+
+  connect(this, SIGNAL(expanded(QListViewItem*)),
+          SLOT(slotExpanded(QListViewItem*)));
+
+  connect(this, SIGNAL(collapsed(QListViewItem*)),
+          SLOT(slotCollapsed(QListViewItem*)));
 }
 
 bool LoanView::isSelectable(GUI::ListViewItem* item_) const {
@@ -68,8 +67,13 @@ void LoanView::contextMenuRequested(QListViewItem* item_, const QPoint& point_, 
   }
 
   GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(item_);
-  if(item->isLoanItem() && m_loanMenu->count() > 0) {
-    m_loanMenu->popup(point_);
+  if(item->isLoanItem()) {
+    KPopupMenu menu(this);
+    menu.insertItem(SmallIconSet(QString::fromLatin1("2downarrow")),
+                    i18n("Check-in"), this, SLOT(slotCheckIn()));
+    menu.insertItem(SmallIconSet(QString::fromLatin1("2downarrow")),
+                    i18n("Modify Loan..."), this, SLOT(slotModifyLoan()));
+    menu.exec(point_);
   }
 }
 
@@ -91,28 +95,24 @@ void LoanView::setSorting(int col_, bool asc_) {
   ListView::setSorting(col_, asc_);
 }
 
-void LoanView::addCollection(Data::Collection* coll_) {
+void LoanView::addCollection(Data::CollPtr coll_) {
   Data::BorrowerVec borrowers = coll_->borrowers();
   for(Data::BorrowerVec::Iterator it = borrowers.begin(); it != borrowers.end(); ++it) {
     addBorrower(it);
   }
 }
 
-void LoanView::addBorrower(Data::Borrower* borrower_) {
+void LoanView::addBorrower(Data::BorrowerPtr borrower_) {
   if(!borrower_ || borrower_->isEmpty()) {
     return;
   }
 
   BorrowerItem* borrowerItem = new BorrowerItem(this, borrower_);
+  borrowerItem->setExpandable(!borrower_->loans().isEmpty());
   m_itemDict.insert(borrower_->name(), borrowerItem);
-
-  Data::LoanVec loans = borrower_->loans();
-  for(Data::LoanVec::Iterator it = loans.begin(); it != loans.end(); ++it) {
-    new LoanItem(borrowerItem, it);
-  }
 }
 
-void LoanView::modifyBorrower(Data::Borrower* borrower_) {
+void LoanView::modifyBorrower(Data::BorrowerPtr borrower_) {
   if(!borrower_) {
     return;
   }
@@ -129,12 +129,35 @@ void LoanView::modifyBorrower(Data::Borrower* borrower_) {
     return;
   }
 
-  borrowerItem->clear(); // remove all children;
+  bool open = borrowerItem->isOpen();
+  borrowerItem->setOpen(false);
+  borrowerItem->setOpen(open);
+}
 
-  Data::LoanVec loans = borrower_->loans();
-  for(Data::LoanVec::Iterator it = loans.begin(); it != loans.end(); ++it) {
-    new LoanItem(borrowerItem, it);
+void LoanView::slotCollapsed(QListViewItem* item_) {
+  // only change icon for group items
+  if(static_cast<GUI::ListViewItem*>(item_)->isBorrowerItem()) {
+    static_cast<GUI::ListViewItem*>(item_)->clear();
   }
+}
+
+void LoanView::slotExpanded(QListViewItem* item_) {
+  // only change icon for group items
+  if(!static_cast<GUI::ListViewItem*>(item_)->isBorrowerItem()) {
+    kdWarning() << "GroupView::slotExpanded() - non entry group item - " << item_->text(0) << endl;
+    return;
+  }
+
+  setUpdatesEnabled(false);
+
+  BorrowerItem* item = static_cast<BorrowerItem*>(item_);
+  Data::LoanVec loans = item->borrower()->loans();
+  for(Data::LoanVec::Iterator it = loans.begin(); it != loans.end(); ++it) {
+    new LoanItem(item, it);
+  }
+
+  setUpdatesEnabled(true);
+  triggerUpdate();
 }
 
 void LoanView::slotCheckIn() {
@@ -147,7 +170,7 @@ void LoanView::slotCheckIn() {
   // need a copy since we may be deleting
   GUI::ListViewItemList list = selectedItems();
   for(GUI::ListViewItemListIt it(list); it.current(); ++it) {
-    Data::Entry* entry = static_cast<LoanItem*>(it.current())->entry();
+    Data::EntryPtr entry = static_cast<LoanItem*>(it.current())->entry();
     if(!entry) {
       myDebug() << "LoanView::slotCheckIn() - no entry!" << endl;
       continue;

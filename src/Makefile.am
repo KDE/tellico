@@ -4,31 +4,29 @@ bin_PROGRAMS = tellico
 ## INCLUDES were found outside kdevelop specific part
 
 tellico_SOURCES = borrowerdialog.cpp entryitem.cpp importdialog.cpp \
-		borroweritem.cpp entryview.cpp isbnvalidator.cpp exportdialog.cpp collection.cpp \
-		fetchdialog.cpp collectionfactory.cpp fieldcompletion.cpp collectionfieldsdialog.cpp \
-		field.cpp main.cpp configdialog.cpp mainwindow.cpp controller.cpp filehandler.cpp \
-		filter.cpp filterdialog.cpp reportdialog.cpp dcopinterface.skel filteritem.cpp \
-		detailedlistview.cpp document.cpp tellico_kernel.cpp entry.cpp groupview.cpp \
-		tellico_strings.cpp entryeditdialog.cpp image.cpp tellico_utils.cpp entrygroupitem.cpp \
-		imagefactory.cpp viewstack.cpp entryiconview.cpp borrower.cpp loandialog.cpp \
-		loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
-		entryiconfactory.cpp dcopinterface.cpp tellico_debug.h
+					borroweritem.cpp entryview.cpp isbnvalidator.cpp exportdialog.cpp collection.cpp \
+					fetchdialog.cpp collectionfactory.cpp fieldcompletion.cpp collectionfieldsdialog.cpp \
+					field.cpp main.cpp configdialog.cpp mainwindow.cpp controller.cpp filehandler.cpp \
+					filter.cpp filterdialog.cpp reportdialog.cpp dcopinterface.skel filteritem.cpp \
+					detailedlistview.cpp document.cpp tellico_kernel.cpp entry.cpp groupview.cpp \
+					tellico_strings.cpp entryeditdialog.cpp image.cpp tellico_utils.cpp entrygroupitem.cpp \
+					imagefactory.cpp viewstack.cpp entryiconview.cpp borrower.cpp loandialog.cpp \
+					loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
+					entryiconfactory.cpp dcopinterface.cpp entryupdater.cpp detailedentryitem.cpp statusbar.cpp \
+					progressmanager.cpp upcvalidator.cpp fetcherconfigdialog.cpp
 
 if !USE_LIBBTPARSE
   LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
 endif
 
-tellico_LDADD = ./fetch/libfetch.a ./collections/libcollections.a \
-        ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
-        ./translators/pilotdb/libflatfile/liblibflatfile.a ./gui/libgui.a \
-        ./translators/pilotdb/libpalm/liblibpalm.a ./commands/libcommands.a \
-	-lexslt \
-        $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
-        $(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS) \
-        $(LIB_KIO) $(LIB_KDEPRINT) $(LIB_KABC) $(KCAL_LIBS) \
-        $(LDADD_LIBBTPARSE)
+tellico_LDADD = ./cite/libcite.a ./fetch/libfetch.a \
+	./collections/libcollections.a ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
+	./translators/pilotdb/libflatfile/liblibflatfile.a ./gui/libgui.a ./translators/pilotdb/libpalm/liblibpalm.a \
+	./commands/libcommands.a -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
+	$(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS) $(LIB_KIO) \
+	$(LIB_KDEPRINT) $(LIB_KABC) $(KCAL_LIBS) $(LDADD_LIBBTPARSE)
 
-SUBDIRS = gui collections translators fetch tests commands
+SUBDIRS = gui collections translators fetch tests commands cite
 
 EXTRA_DIST = tellicoui.rc \
 borrowerdialog.cpp          entryiconview.h\
@@ -47,13 +45,12 @@ configdialog.cpp            mainwindow.cpp \
 configdialog.h              mainwindow.h \
 controller.cpp              filehandler.cpp      \
 controller.h                filehandler.h        \
-             filter.cpp     filterdialog.cpp \
-              filterdialog.h       reportdialog.cpp \
-                filter.h             reportdialog.h \
+filter.cpp    				 filterdialog.cpp \
+filterdialog.h      		 reportdialog.cpp \
+filter.h           			  reportdialog.h \
 dcopinterface.h             filteritem.cpp       \
 dcopinterface.cpp           filteritem.h         \
-detailedlistview.cpp               \
-detailedlistview.h                 \
+detailedlistview.h 			detailedlistview.cpp \
 document.cpp                tellico_kernel.cpp \
 document.h                  tellico_kernel.h \
 entry.cpp                   groupview.cpp        tellico_strings.cpp \
@@ -68,7 +65,13 @@ calendarhandler.h calendarhandler.cpp \
 loanitem.h loanitem.cpp groupiterator.h groupiterator.cpp \
 stringset.h observer.h filterview.h filterview.cpp \
 entryiconfactory.h entryiconfactory.cpp \
-tellico_debug.h
+tellico_debug.h \
+entryupdater.h entryupdater.cpp \
+detailedentryitem.h detailedentryitem.cpp \
+statusbar.h statusbar.cpp \
+progressmanager.h progressmanager.cpp \
+upcvalidator.h upcvalidator.cpp \
+fetcherconfigdialog.h fetcherconfigdialog.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
@@ -115,4 +118,3 @@ messages: rc.cpp
         fi
 
 #include ../admin/Doxyfile.am
-

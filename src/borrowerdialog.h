@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -33,7 +33,7 @@ class BorrowerDialog : public KDialogBase {
 Q_OBJECT
 
 public:
-  static Data::Borrower* getBorrower(QWidget* parent);
+  static Data::BorrowerPtr getBorrower(QWidget* parent);
 
 private slots:
   void selectItem(const QString& name);
@@ -48,7 +48,7 @@ private:
    * @param name The widget name
    */
   BorrowerDialog(QWidget* parent, const char* name=0);
-  Data::Borrower* borrower();
+  Data::BorrowerPtr borrower();
 
   QString m_uid;
   KListView* m_listView;

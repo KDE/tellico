@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +15,7 @@
 #include "entry.h"
 #include "gui/counteditem.h"
 #include "collection.h"
-#include "filter.h"
+#include "detailedlistview.h"
 
 #include <kdebug.h>
 #include <kiconloader.h>
@@ -24,10 +24,18 @@
 
 using Tellico::EntryItem;
 
-EntryItem::EntryItem(GUI::CountedItem* parent_, Data::Entry* entry_)
+EntryItem::EntryItem(DetailedListView* parent, Data::EntryPtr entry)
+    : GUI::ListViewItem(parent), m_entry(entry), m_customSort(true) {
+}
+
+EntryItem::EntryItem(GUI::CountedItem* parent_, Data::EntryPtr entry_)
     : GUI::ListViewItem(parent_), m_entry(entry_), m_customSort(false) {
   setText(0, m_entry->title());
-  setPixmap(0, UserIcon(entry_->collection()->entryName()));
+  setPixmap(0, UserIcon(entry_->collection()->typeName()));
+}
+
+Tellico::Data::EntryPtr const EntryItem::entry() const {
+  return m_entry;
 }
 
 // should only get called for DetailedListView parents
@@ -57,14 +65,7 @@ int EntryItem::compareColumn(QListViewItem* item_, int col_) const {
 int EntryItem::compare(QListViewItem* item_, int col_, bool asc_) const {
   // if not custom sort, do default compare
   if(!m_customSort) {
-    // but, check if depth() > 0, then assume the parent is the GroupView
-    // if sorting by column 1, always sort aphabetically ascending by column 0
-    // that way, even if reverse sorting by count, the entries are alphabetized
-    if(col_ == 1 && depth() > 0 ) {
-      return asc_ ? key(0, asc_).compare(item_->key(0, asc_)) : item_->key(0, asc_).compare(key(0, asc_));
-    } else {
-      return ListViewItem::compare(item_, col_, asc_);
-    }
+    return ListViewItem::compare(item_, col_, asc_);
   }
 
 // if keys are equal, check previous column
@@ -74,7 +75,7 @@ int EntryItem::compare(QListViewItem* item_, int col_, bool asc_) const {
     return result;
   }
 
-  Tellico::DetailedListView* lv = static_cast<Tellico::DetailedListView*>(listView());
+  DetailedListView* lv = static_cast<DetailedListView*>(listView());
   result = compareColumn(item_, lv->prevSortedColumn());
   if(result != 0) {
     return result;
@@ -84,12 +85,12 @@ int EntryItem::compare(QListViewItem* item_, int col_, bool asc_) const {
 
 // if there's a non-null pixmap and no text, return a tab character to put this one first
 QString EntryItem::key(int col_, bool) const {
-  if(pixmap(col_) && !pixmap(col_)->isNull() && text(col_).isEmpty()) {
+  if(text(col_).isEmpty() && pixmap(col_) && !pixmap(col_)->isNull()) {
     // a little weird, sort for width, too, in case of rating widget
     // but sort reverse by width
     return QChar('\t') + QString::number(1000-pixmap(col_)->width());
-  } else {
-    // empty string go last
-    return text(col_);
   }
+  // there's some sort of painting bug if the key is identical for multiple entries
+  // so for non-custom sorting, append the entry id
+  return m_customSort ? text(col_) : text(col_) + QString::number(m_entry->id());
 }

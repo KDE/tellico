@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -102,7 +102,7 @@ public:
   FilterRuleWidgetLister(QWidget* parent, const char* name=0);
 
   const QPtrList<QWidget>& widgetList() const;
-  void setFilter(const Filter* filter);
+  void setFilter(Filter::Ptr filter);
 
 public slots:
   void reset();

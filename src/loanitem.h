@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,10 +24,10 @@ namespace Tellico {
  */
 class LoanItem : public Tellico::EntryItem {
 public:
-  LoanItem(GUI::CountedItem* parent, Data::Loan* loan);
+  LoanItem(GUI::CountedItem* parent, Data::LoanPtr loan);
 
   virtual bool isLoanItem() const { return true; }
-  Data::Loan* loan() { return m_loan; }
+  Data::LoanPtr loan() { return m_loan; }
 
 private:
   Data::LoanPtr m_loan;

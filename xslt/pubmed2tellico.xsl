@@ -9,7 +9,7 @@
    Tellico XSLT file - used for importing PubMed data.
 
    Copyright (C) 2005 Michaël Zugaro <michael.zugaro@college-de-france.fr>
-                 2005 Robby Stephenson <robby@periapsis.org>
+                 2005-2006 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -37,11 +37,11 @@
 <xsl:variable name="months-top" select="document('')/*/m:months"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Bookcase V8.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v8/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Bookcase V9.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="8">
+ <tellico syntaxVersion="9">
   <collection title="PubMed Import" type="5">
    <fields>
     <field name="_default"/>

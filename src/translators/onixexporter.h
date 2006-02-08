@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -29,9 +29,11 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class ONIXExporter : public Exporter {
+Q_OBJECT
+
 public:
   ONIXExporter();
-  ONIXExporter(const Data::Collection* coll);
+  ONIXExporter(Data::CollPtr coll);
   ~ONIXExporter();
 
   virtual bool exec();

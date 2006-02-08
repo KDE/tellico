@@ -65,8 +65,8 @@ dist-hook:
 # remove any executable
 	rm -rf $(distdir)/src/tellico
 
-PUBLIC_ID=-//Robby Stephenson/DTD Tellico V8.0//EN
-SYSTEM_ID=http://www.periapsis.org/tellico/dtd/v8/tellico.dtd
+PUBLIC_ID=-//Robby Stephenson/DTD Tellico V9.0//EN
+SYSTEM_ID=http://www.periapsis.org/tellico/dtd/v9/tellico.dtd
 
 install-data-local:
 	@if test x"@XML_CATALOG_FILE@" != x; then \

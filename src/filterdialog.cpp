@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -188,7 +188,7 @@ FilterRuleWidgetLister::FilterRuleWidgetLister(QWidget* parent_, const char* nam
 //  slotClear();
 }
 
-void FilterRuleWidgetLister::setFilter(const Filter* filter_) {
+void FilterRuleWidgetLister::setFilter(Filter::Ptr filter_) {
 //  if(mWidgetList.first()) { // move this below next 'if'?
 //    mWidgetList.first()->blockSignals(true);
 //  }

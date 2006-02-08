@@ -58,7 +58,7 @@ extern "C" {
  * to compile on Solaris */
 #define cdte_track_address cdte_addr.lba
 
-#elif defined(__FreeBSD__)
+#elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
 
 #include <netinet/in.h>
 #include <sys/cdio.h>
@@ -115,31 +115,33 @@ extern "C" {
 
 }
 
-QValueList<uint> FreeDBImporter::offsetList(QCString drive_) {
+#include <config.h>
+
+QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<uint>& trackLengths_) {
   QValueList<uint> list;
 
-#if defined(__OpenBSD__) || defined(__NetBSD__)
-  struct ioc_read_toc_entry t;
-#elif defined(__APPLE__)
-  dk_cd_read_disc_info_t discInfoParams;
-#endif
-
-  int drive = open(drive_.data(), O_RDONLY | O_NONBLOCK);
+  int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
   if(drive < 0) {
+    ::close(drive);
     return list;
   }
 
   struct cdrom_tochdr hdr;
-#if defined(__APPLE__)
-  memset(&discInfoParams, 0, sizeof(discInfoParams));
+#if defined(__OpenBSD__) || defined(__NetBSD__)
+  struct ioc_read_toc_entry t;
+#elif defined(__APPLE__)
+  dk_cd_read_disc_info_t discInfoParams;
+  ::memset(&discInfoParams, 0, sizeof(discInfoParams));
   discInfoParams.buffer = &hdr;
   discInfoParams.bufferLength = sizeof(hdr);
   if(ioctl(drive, DKIOCCDREADDISCINFO, &discInfoParams) < 0
      || discInfoParams.bufferLength != sizeof(hdr)) {
+    ::close(drive);
     return list;
   }
 #else
   if(ioctl(drive, CDROMREADTOCHDR, &hdr) < 0) {
+    ::close(drive);
     return list;
   }
 #endif
@@ -151,6 +153,7 @@ QValueList<uint> FreeDBImporter::offsetList(QCString drive_) {
 
   struct cdrom_tocentry *TocEntry = (cdrom_tocentry*)malloc(len);
   if(!TocEntry) {
+    ::close(drive);
     return list;
   }
 #if defined(__OpenBSD__)
@@ -162,20 +165,20 @@ QValueList<uint> FreeDBImporter::offsetList(QCString drive_) {
   t.address_format = CDROM_LBA;
   t.data_len = len;
   t.data = TocEntry;
-  memset(TocEntry, 0, len);
+  ::memset(TocEntry, 0, len);
 
-  ioctl(drive, CDIOREADTOCENTRYS, (char *) &t);
+  ::ioctl(drive, CDIOREADTOCENTRYS, (char *) &t);
 
 #elif defined(__APPLE__)
   dk_cd_read_track_info_t trackInfoParams;
-  memset( &trackInfoParams, 0, sizeof( trackInfoParams ) );
+  ::memset( &trackInfoParams, 0, sizeof( trackInfoParams ) );
   trackInfoParams.addressType = kCDTrackInfoAddressTypeTrackNumber;
   trackInfoParams.bufferLength = sizeof( *TocEntry );
 
   for(int i = 0; i < last; ++i) {
     trackInfoParams.address = i + 1;
     trackInfoParams.buffer = &TocEntry[i];
-    ioctl(drive, DKIOCCDREADTRACKINFO, &trackInfoParams);
+    ::ioctl(drive, DKIOCCDREADTRACKINFO, &trackInfoParams);
   }
 
   /* MacOS X on G5-based systems does not report valid info for
@@ -188,12 +191,12 @@ QValueList<uint> FreeDBImporter::offsetList(QCString drive_) {
     /* tracks start with 1, but I must start with 0 on OpenBSD */
     TocEntry[i].cdte_track = i + 1;
     TocEntry[i].cdte_format = CDROM_LBA;
-    ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]);
+    ::ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]);
   }
 
   TocEntry[last].cdte_track = CDROM_LEADOUT;
   TocEntry[last].cdte_format = CDROM_LBA;
-  ioctl(drive, CDROMREADTOCENTRY, &TocEntry[last]);
+  ::ioctl(drive, CDROMREADTOCENTRY, &TocEntry[last]);
 #endif
 
 #if defined(__FreeBSD__)
@@ -210,7 +213,161 @@ QValueList<uint> FreeDBImporter::offsetList(QCString drive_) {
   list.append(TocEntry[0].cdte_track_address + CD_MSF_OFFSET);
   list.append(TocEntry[last].cdte_track_address + CD_MSF_OFFSET);
 
+  // hey, these are track lengths! :P
+  trackLengths_.clear();
+  for(int i=0; i < last; ++i) {
+    trackLengths_.append((TocEntry[i+1].cdte_track_address - TocEntry[i].cdte_track_address) / CD_FRAMES);
+  }
+
   free(TocEntry);
 
+  ::close(drive);
   return list;
 }
+
+inline
+ushort from2Byte(uchar* d) {
+  return (d[0] << 8 & 0xFF00 | d[1] & 0xFF);
+}
+
+#define SIZE 61
+// mostly taken from kover and k3b
+// licensed under GPL
+FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
+  CDText cdtext;
+#if USE_CDTEXT
+  int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
+  if(drive < 0) {
+    ::close(drive);
+    return cdtext;
+  }
+
+  struct cdrom_generic_command m_cmd;
+  ::memset(&m_cmd, 0, sizeof(struct cdrom_generic_command));
+
+  int dataLen;
+
+  int format = 5;
+  uint track = 0;
+  uchar buffer[2048];
+
+  m_cmd.cmd[0] = 0x43;
+  m_cmd.cmd[1] = 0x0;
+  m_cmd.cmd[2] = format & 0x0F;
+  m_cmd.cmd[6] = track;
+  m_cmd.cmd[8] = 2; // we only read the length first
+
+  m_cmd.buffer = buffer;
+  m_cmd.buflen = 2;
+  m_cmd.data_direction = CGC_DATA_READ;
+
+  if(ioctl(drive, CDROM_SEND_PACKET, &m_cmd) != 0) {
+    myDebug() << "FreeDBImporter::getCDText() - access error" << endl;
+    ::close(drive);
+    return cdtext;
+  }
+
+  dataLen = from2Byte(buffer) + 2;
+  m_cmd.cmd[7] = 2048 >> 8;
+  m_cmd.cmd[8] = 2048;
+  m_cmd.buflen = 2048;
+  ::ioctl(drive, CDROM_SEND_PACKET, &m_cmd);
+  dataLen = from2Byte(buffer) + 2;
+
+  ::memset(buffer, 0, dataLen);
+
+  m_cmd.cmd[7] = dataLen >> 8;
+  m_cmd.cmd[8] = dataLen;
+  m_cmd.buffer = buffer;
+  m_cmd.buflen = dataLen;
+  ::ioctl(drive, CDROM_SEND_PACKET, &m_cmd);
+
+  bool rc = false;
+  int buffer_size = (buffer[0] << 8) | buffer[1];
+  buffer_size -= 2;
+
+  char data[SIZE];
+  short pos_data = 0;
+  char old_block_no = 0xff;
+  for(uchar* bufptr = buffer + 4; buffer_size >= 18; bufptr += 18, buffer_size -= 18) {
+    char code = *bufptr;
+
+    if((code & 0x80) != 0x80) {
+      continue;
+    }
+
+    char block_no = *(bufptr + 3);
+    if(block_no & 0x80) {
+      myDebug() << "FreeDBImporter::readCDText() - double byte code not supported" << endl;
+      return cdtext;
+    }
+    block_no &= 0x70;
+
+    if(block_no != old_block_no) {
+      if(rc) {
+        break;
+      }
+      pos_data = 0;
+      old_block_no = block_no;
+    }
+
+    track = *(bufptr + 1);
+    if(track & 0x80) {
+      continue;
+    }
+
+    uchar* txtstr = bufptr + 4;
+
+    int length = 11;
+    while(length >= 0 && *(txtstr + length) == '\0') {
+      --length;
+    }
+
+    ++length;
+    if(length < 12) {
+      ++length;
+    }
+
+    for(int j = 0; j < length; ++j) {
+      char c = *(txtstr + j);
+      if(c == '\0') {
+        data[pos_data] = c;
+        if(track == 0) {
+          if(code == (char)0xFFFFFF80) {
+            cdtext.title = QString::fromUtf8(data);
+          } else if(code == (char)0xFFFFFF81) {
+            cdtext.artist = QString::fromUtf8(data);
+          } else if (code == (char)0xFFFFFF85) {
+            cdtext.message = QString::fromUtf8(data);
+          }
+        } else {
+          if(code == (char)0xFFFFFF80) {
+            if(cdtext.trackTitles.size() < track) {
+              cdtext.trackTitles.resize(track);
+            }
+            cdtext.trackTitles[track-1] = QString::fromUtf8(data);
+          } else if(code == (char)0xFFFFFF81) {
+            if(cdtext.trackArtists.size() < track) {
+              cdtext.trackArtists.resize(track);
+            }
+            cdtext.trackArtists[track-1] = QString::fromUtf8(data);
+          }
+        }
+        rc = true;
+        pos_data = 0;
+        ++track;
+      } else if(pos_data < (SIZE - 1)) {
+        data[pos_data++] = c;
+      }
+    }
+  }
+  if(cdtext.trackTitles.size() != cdtext.trackArtists.size()) {
+    int size = QMAX(cdtext.trackTitles.size(), cdtext.trackArtists.size());
+    cdtext.trackTitles.resize(size);
+    cdtext.trackArtists.resize(size);
+  }
+  ::close(drive);
+#endif
+  return cdtext;
+}
+#undef SIZE

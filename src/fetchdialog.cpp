@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,10 +16,13 @@
 #include "fetch/fetcher.h"
 #include "entryview.h"
 #include "isbnvalidator.h"
+#include "upcvalidator.h"
 #include "tellico_kernel.h"
 #include "filehandler.h"
 #include "collection.h"
 #include "entry.h"
+#include "document.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 #include <kcombobox.h>
@@ -32,7 +35,7 @@
 #include <kdialogbase.h>
 #include <kfiledialog.h>
 #include <kiconloader.h>
-#include <kdebug.h>
+#include <kaccelmanager.h>
 
 #include <qlayout.h>
 #include <qhbox.h>
@@ -104,11 +107,11 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   QHBox* box2 = new QHBox(queryBox);
   box2->setSpacing(KDialog::spacingHint());
 
-  m_multipleISBN = new QCheckBox(i18n("&Multiple ISBN search"), box2);
-  QWhatsThis::add(m_multipleISBN, i18n("Check this box to search for multiple ISBN values."));
+  m_multipleISBN = new QCheckBox(i18n("&Multiple ISBN/UPC search"), box2);
+  QWhatsThis::add(m_multipleISBN, i18n("Check this box to search for multiple ISBN or UPC values."));
   connect(m_multipleISBN, SIGNAL(toggled(bool)), SLOT(slotMultipleISBN(bool)));
 
-  m_editISBN = new KPushButton(KGuiItem(i18n("Edit &ISBN List..."), QString::fromLatin1("text_block")), box2);
+  m_editISBN = new KPushButton(KGuiItem(i18n("Edit List..."), QString::fromLatin1("text_block")), box2);
   m_editISBN->setEnabled(false);
   QWhatsThis::add(m_editISBN, i18n("Click to open a text edit box for entering or editing multiple ISBN values."));
   connect(m_editISBN, SIGNAL(clicked()), SLOT(slotEditMultipleISBN()));
@@ -157,7 +160,7 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
 
   m_addButton = new KPushButton(i18n("&Add Entry"), box3);
   m_addButton->setEnabled(false);
-  m_addButton->setIconSet(UserIconSet(Kernel::self()->entryName()));
+  m_addButton->setIconSet(UserIconSet(Kernel::self()->collectionTypeName()));
   connect(m_addButton, SIGNAL(clicked()), SLOT(slotAddEntry()));
   QWhatsThis::add(m_addButton, i18n("Add the selected entry to the current collection"));
 /*  m_viewButton = new KPushButton(i18n("View Entry"), box3);
@@ -206,6 +209,7 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   // make sure to delete results afterwards
   m_results.setAutoDelete(true);
 
+  KAcceleratorManager::manage(this);
   // initialize combos
   QTimer::singleShot(0, this, SLOT(slotInit()));
 }
@@ -231,6 +235,7 @@ void FetchDialog::slotSearchClicked() {
       m_listView->clear();
       m_entryView->clear();
     }
+    m_resultCount = 0;
     m_oldSearch = value;
     m_started = true;
     m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
@@ -238,10 +243,9 @@ void FetchDialog::slotSearchClicked() {
     startProgress();
     setStatus(i18n("Searching..."));
     kapp->processEvents();
-    bool multiple = m_multipleISBN->isEnabled() && m_multipleISBN->isChecked();
     Fetch::Manager::self()->startSearch(m_sourceCombo->currentText(),
                                         Fetch::Manager::self()->fetchKey(m_keyCombo->currentText()),
-                                        value, multiple);
+                                        value);
   }
 }
 
@@ -289,43 +293,43 @@ void FetchDialog::slotFetchDone() {
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
                                       SmallIconSet(QString::fromLatin1("find"))));
   stopProgress();
-  if(m_listView->childCount() == 0) {
+  if(m_resultCount == 0) {
     slotStatus(i18n("The search returned no items."));
   } else {
     slotStatus(i18n("The search returned 1 item.",
                     "The search returned %n items.",
-                    m_listView->childCount() ));
+                    m_resultCount));
   }
 }
 
 void FetchDialog::slotResultFound(Fetch::SearchResult* result_) {
   m_results.append(result_);
   (void) new SearchResultItem(m_listView, result_);
+  ++m_resultCount;
   kapp->processEvents();
 }
 
 void FetchDialog::slotAddEntry() {
   Data::EntryVec vec;
-#if QT_VERSION >= 0x030200
   for(QListViewItemIterator it(m_listView, QListViewItemIterator::Selected); it.current(); ++it) {
-#else
-  for(QListViewItemIterator it(m_listView); it.current(); ++it) {
-    if(!it.current()->isSelected()) {
-      continue;
-    }
-#endif
     SearchResultItem* item = static_cast<SearchResultItem*>(it.current());
 
     Fetch::SearchResult* r = item->m_result;
-    Data::Entry* entry = m_entries[r->uid];
+    Data::EntryPtr entry = m_entries[r->uid];
     if(!entry) {
-      entry = r->fetcher->fetchEntry(r->uid);
+      entry = r->fetchEntry();
+      if(!entry) {
+        continue;
+      }
       m_entries.insert(r->uid, entry);
     }
-    vec.append(entry);
+    // add a copy, intentionally allowing multiple copies to be added
+    vec.append(new Data::Entry(*entry));
     item->setPixmap(0, UserIcon(QString::fromLatin1("checkmark")));
   }
-  Kernel::self()->saveEntries(Data::EntryVec(), vec);
+  if(!vec.isEmpty()) {
+    Kernel::self()->addEntries(vec, true);
+  }
 }
 
 void FetchDialog::slotShowEntry(QListViewItem* item_) {
@@ -341,9 +345,9 @@ void FetchDialog::slotShowEntry(QListViewItem* item_) {
   SearchResultItem* item = static_cast<SearchResultItem*>(item_);
   Fetch::SearchResult* r = item->m_result;
   setStatus(i18n("Fetching %1...").arg(r->title));
-  Data::Entry* entry = m_entries[r->uid];
+  Data::EntryPtr entry = m_entries[r->uid];
   if(!entry) {
-    entry = r->fetcher->fetchEntry(r->uid);
+    entry = r->fetchEntry();
     if(entry) { // might conceivably be null
       m_entries.insert(r->uid, entry);
     }
@@ -378,14 +382,14 @@ void FetchDialog::slotInit() {
   QString key = config->readEntry("Search Key");
   // only change key if valid
   if(!key.isEmpty() && Fetch::Manager::self()->fetchKey(key) != Fetch::FetchFirst) {
-    slotKeyChanged(key);
     m_keyCombo->setCurrentText(key);
+    slotKeyChanged(key);
   }
   // only change source if a fetcher by that name exists
   QString source = config->readEntry("Search Source");
   if(!source.isEmpty() && Fetch::Manager::self()->sources().findIndex(source) > -1) {
-    slotSourceChanged(source);
     m_sourceCombo->setCurrentText(source);
+    slotSourceChanged(source);
   }
 
   m_valueLineEdit->setFocus();
@@ -393,14 +397,24 @@ void FetchDialog::slotInit() {
 }
 
 void FetchDialog::slotKeyChanged(const QString& key_) {
-  if(key_ == i18n("ISBN")) {
+  int key = Fetch::Manager::self()->fetchKey(key_);
+  if(key == Fetch::ISBN || key == Fetch::UPC) {
     m_multipleISBN->setEnabled(true);
-    if(Kernel::self()->collectionType() == Data::Collection::Book
-       || Kernel::self()->collectionType() == Data::Collection::Bibtex) {
+    if(key == Fetch::ISBN) {
       m_valueLineEdit->setValidator(new ISBNValidator(this));
+    } else {
+      UPCValidator* upc = new UPCValidator(this);
+      connect(upc, SIGNAL(signalISBN()), SLOT(slotUPC2ISBN()));
+      m_valueLineEdit->setValidator(upc);
+      // only want to convert to ISBN if ISBN is accepted by the fetcher
+      QStringList keys = Fetch::Manager::self()->keys(m_sourceCombo->currentText());
+      bool allowISBN = keys.contains(Fetch::Manager::self()->fetchKeyString(Fetch::ISBN)) > 0;
+      upc->setCheckISBN(allowISBN);
     }
   } else {
+    m_multipleISBN->setChecked(false);
     m_multipleISBN->setEnabled(false);
+//    slotMultipleISBN(false);
     m_valueLineEdit->setValidator(0);
   }
 }
@@ -408,9 +422,9 @@ void FetchDialog::slotKeyChanged(const QString& key_) {
 void FetchDialog::slotSourceChanged(const QString& source_) {
   QString s = m_keyCombo->currentText();
   m_keyCombo->clear();
-  QStringList sources = Fetch::Manager::self()->keys(source_);
-  m_keyCombo->insertStringList(sources);
-  int idx = sources.findIndex(s);
+  QStringList keys = Fetch::Manager::self()->keys(source_);
+  m_keyCombo->insertStringList(keys);
+  int idx = keys.findIndex(s);
   if(idx > -1) {
     m_keyCombo->setCurrentItem(idx);
   }
@@ -423,22 +437,23 @@ void FetchDialog::slotMultipleISBN(bool toggle_) {
 }
 
 void FetchDialog::slotEditMultipleISBN() {
-  KDialogBase* dlg = new KDialogBase(this, "isbn edit dialog", true, i18n("Edit ISBN Values"),
-                                     KDialogBase::Ok|KDialogBase::Cancel);
-
-  QVBox* box = new QVBox(dlg);
+  KDialogBase dlg(this, "isbn edit dialog", true, i18n("Edit ISBN/UPC Values"),
+                  KDialogBase::Ok|KDialogBase::Cancel);
+  QVBox* box = new QVBox(&dlg);
   box->setSpacing(10);
-  (void) new QLabel(i18n("<qt>Enter the ISBN values, one per line.</qt>"), box);
+  QString s = i18n("<qt>Enter the ISBN or UPC values, one per line.</qt>");
+  (void) new QLabel(s, box);
   m_isbnTextEdit = new KTextEdit(box, "isbn text edit");
   m_isbnTextEdit->setText(m_isbnList.join(QChar('\n')));
-  QWhatsThis::add(m_isbnTextEdit, i18n("<qt>Enter the ISBN values, one per line.</qt>"));
+  QWhatsThis::add(m_isbnTextEdit, s);
   KPushButton* fromFileBtn = new KPushButton(SmallIconSet(QString::fromLatin1("fileopen")),
                                              i18n("&Load From File..."), box);
-  QWhatsThis::add(fromFileBtn, i18n("<qt>Load the ISBN list from a text file.</qt>"));
+  QWhatsThis::add(fromFileBtn, i18n("<qt>Load the list from a text file.</qt>"));
   connect(fromFileBtn, SIGNAL(clicked()), SLOT(slotLoadISBNList()));
-  dlg->setMainWidget(box);
+  dlg.setMainWidget(box);
+  dlg.setMinimumWidth(KMAX(dlg.minimumWidth(), FETCH_MIN_WIDTH*2/3));
 
-  if(dlg->exec() == QDialog::Accepted) {
+  if(dlg.exec() == QDialog::Accepted) {
     m_isbnList = QStringList::split('\n', m_isbnTextEdit->text());
     const QValidator* val = m_valueLineEdit->validator();
     if(val) {
@@ -460,7 +475,7 @@ void FetchDialog::slotEditMultipleISBN() {
     }
     m_valueLineEdit->setText(m_isbnList.join(QString::fromLatin1("; ")));
   }
-  dlg->delayedDestruct();
+  m_isbnTextEdit = 0; // gets auto-deleted
 }
 
 void FetchDialog::slotLoadISBNList() {
@@ -472,6 +487,15 @@ void FetchDialog::slotLoadISBNList() {
     m_isbnTextEdit->setText(m_isbnTextEdit->text() + FileHandler::readTextFile(u));
     m_isbnTextEdit->moveCursor(QTextEdit::MoveEnd, false);
     m_isbnTextEdit->scrollToBottom();
+  }
+}
+
+void FetchDialog::slotUPC2ISBN() {
+  int key = Fetch::Manager::self()->fetchKey(m_keyCombo->currentText());
+  if(key == Fetch::UPC) {
+    QString newKey = Fetch::Manager::self()->fetchKeyString(Fetch::ISBN);
+    m_keyCombo->setCurrentText(newKey);
+    slotKeyChanged(newKey);
   }
 }
 

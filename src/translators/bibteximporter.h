@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,13 +14,8 @@
 #ifndef BIBTEXIMPORTER_H
 #define BIBTEXIMPORTER_H
 
-namespace Tellico {
-  namespace Data {
-    class BibtexCollection;
-  }
-}
-
 #include "textimporter.h"
+#include "../datavectors.h"
 #include <config.h>
 
 extern "C" {
@@ -63,8 +58,11 @@ public:
    *
    * @return A pointer to a @ref BibtexCollection, or 0 if none can be created.
    */
-  virtual Data::Collection* collection();
+  virtual Data::CollPtr collection();
   virtual bool canImport(int type) const;
+
+public slots:
+  void slotCancel();
 
 private:
   void parseText(const QString& text);
@@ -74,7 +72,8 @@ private:
   ASTList m_nodes;
   QMap<QString, QString> m_macros;
 
-  Data::BibtexCollection* m_coll;
+  Data::CollPtr m_coll;
+  bool m_cancelled : 1;
 };
 
   } // end namespace

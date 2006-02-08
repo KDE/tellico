@@ -2,13 +2,11 @@ INCLUDES = $(all_includes)
 
 noinst_LIBRARIES = libgui.a
 libgui_a_SOURCES = comboboxproxy.cpp counteditem.cpp datewidget.cpp \
-	tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp \
-	richtextlabel.cpp lineedit.cpp boolfieldwidget.cpp \
-	choicefieldwidget.cpp linefieldwidget.cpp \
-	numberfieldwidget.cpp parafieldwidget.cpp urlfieldwidget.cpp \
-	tablefieldwidget.cpp imagefieldwidget.cpp datefieldwidget.cpp \
-	imagewidget.cpp fieldwidget.cpp \
-	ratingwidget.cpp ratingfieldwidget.cpp
+	tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp richtextlabel.cpp \
+	lineedit.cpp boolfieldwidget.cpp choicefieldwidget.cpp linefieldwidget.cpp \
+	numberfieldwidget.cpp parafieldwidget.cpp urlfieldwidget.cpp tablefieldwidget.cpp \
+	imagefieldwidget.cpp datefieldwidget.cpp imagewidget.cpp fieldwidget.cpp ratingwidget.cpp \
+	ratingfieldwidget.cpp overlaywidget.cpp progress.cpp listboxtext.cpp
 
 libgui_a_METASOURCES = AUTO
 KDE_OPTIONS = noautodist
@@ -33,7 +31,9 @@ urlfieldwidget.h urlfieldwidget.cpp \
 ratingwidget.h ratingwidget.cpp \
 imagewidget.h imagewidget.cpp \
 fieldwidget.h fieldwidget.cpp \
-ratingfieldwidget.h ratingfieldwidget.cpp
+ratingfieldwidget.h ratingfieldwidget.cpp \
+overlaywidget.h overlaywidget.cpp \
+progress.h progress.cpp \
+listboxtext.h listboxtext.cpp
 
 CLEANFILES = *~
-

@@ -95,6 +95,7 @@ CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CPPUMAKER = @CPPUMAKER@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -189,6 +190,10 @@ MSGFMT = @MSGFMT@
 NOOPT_CFLAGS = @NOOPT_CFLAGS@
 NOOPT_CXXFLAGS = @NOOPT_CXXFLAGS@
 OBJEXT = @OBJEXT@
+OFFICE_SDK_includes = @OFFICE_SDK_includes@
+OFFICE_libadd = @OFFICE_libadd@
+OFFICE_libdir = @OFFICE_libdir@
+OFFICE_registry = @OFFICE_registry@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -218,6 +223,8 @@ USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
+WITH_OOO_FALSE = @WITH_OOO_FALSE@
+WITH_OOO_TRUE = @WITH_OOO_TRUE@
 WOVERLOADED_VIRTUAL = @WOVERLOADED_VIRTUAL@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -311,7 +318,7 @@ EXTRA_DIST = tellico-by-author.xsl tellico-by-title.xsl \
              vhs-logo.png tellico-common.xsl mods2tellico.xsl \
              amazon2tellico.xsl MARC21slim2MODS3.xsl MARC21slimUtils.xsl \
              pubmed2tellico.xsl tellico2onix.xsl UNIMARC2MODS3.xsl \
-             tellico2html.js
+             tellico2html.js yahoo2tellico.xsl
 
 
 ####### kdevelop will overwrite this part!!! (end)############
@@ -321,10 +328,11 @@ xsl_DATA = tellico-printing.xsl tellico-by-author.xsl tellico-by-title.xsl \
         dvd-logo.png record-logo.png vhs-logo.png tellico-common.xsl \
         mods2tellico.xsl amazon2tellico.xsl MARC21slim2MODS3.xsl \
         MARC21slimUtils.xsl pubmed2tellico.xsl tellico2onix.xsl \
-	UNIMARC2MODS3.xsl tellico2html.js
+	UNIMARC2MODS3.xsl tellico2html.js yahoo2tellico.xsl
 
 SUBDIRS = entry-templates report-templates
 KDE_OPTIONS = noautodist
+CLEANFILES = *~
 #>- all: all-recursive
 #>+ 1
 all: docs-am  all-recursive
@@ -587,6 +595,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)

@@ -58,15 +58,20 @@ libfetch_a_LIBADD =
 am_libfetch_a_OBJECTS = fetchmanager.$(OBJEXT) amazonfetcher.$(OBJEXT) \
 	z3950fetcher.$(OBJEXT) imdbfetcher.$(OBJEXT) \
 	configwidget.$(OBJEXT) entrezfetcher.$(OBJEXT) \
-	execexternalfetcher.$(OBJEXT)
+	execexternalfetcher.$(OBJEXT) messagehandler.$(OBJEXT) \
+	fetcher.$(OBJEXT) z3950connection.$(OBJEXT) \
+	yahoofetcher.$(OBJEXT) animenfofetcher.$(OBJEXT) \
+	ibsfetcher.$(OBJEXT) srufetcher.$(OBJEXT)
 #>- libfetch_a_OBJECTS = $(am_libfetch_a_OBJECTS)
-#>+ 8
+#>+ 10
 libfetch_a_final_OBJECTS = libfetch_a.all_cpp.o 
 libfetch_a_nofinal_OBJECTS = fetchmanager.$(OBJEXT) amazonfetcher.$(OBJEXT) \
 	z3950fetcher.$(OBJEXT) imdbfetcher.$(OBJEXT) \
 	configwidget.$(OBJEXT) entrezfetcher.$(OBJEXT) \
-	execexternalfetcher.$(OBJEXT)\
-fetcher.moc.o 
+	execexternalfetcher.$(OBJEXT) messagehandler.$(OBJEXT) \
+	fetcher.$(OBJEXT) z3950connection.$(OBJEXT) \
+	yahoofetcher.$(OBJEXT) animenfofetcher.$(OBJEXT) \
+	ibsfetcher.$(OBJEXT) srufetcher.$(OBJEXT)
 @KDE_USE_FINAL_FALSE@libfetch_a_OBJECTS = $(libfetch_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libfetch_a_OBJECTS = $(libfetch_a_final_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -112,6 +117,7 @@ CFLAGS = @CFLAGS@
 CONF_FILES = @CONF_FILES@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
+CPPUMAKER = @CPPUMAKER@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -206,6 +212,10 @@ MSGFMT = @MSGFMT@
 NOOPT_CFLAGS = @NOOPT_CFLAGS@
 NOOPT_CXXFLAGS = @NOOPT_CXXFLAGS@
 OBJEXT = @OBJEXT@
+OFFICE_SDK_includes = @OFFICE_SDK_includes@
+OFFICE_libadd = @OFFICE_libadd@
+OFFICE_libdir = @OFFICE_libdir@
+OFFICE_registry = @OFFICE_registry@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -235,6 +245,8 @@ USE_LIBBTPARSE_TRUE = @USE_LIBBTPARSE_TRUE@
 USE_RTTI = @USE_RTTI@
 USE_THREADS = @USE_THREADS@
 VERSION = @VERSION@
+WITH_OOO_FALSE = @WITH_OOO_FALSE@
+WITH_OOO_TRUE = @WITH_OOO_TRUE@
 WOVERLOADED_VIRTUAL = @WOVERLOADED_VIRTUAL@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -327,21 +339,26 @@ x_libraries = @x_libraries@
 noinst_LIBRARIES = libfetch.a
 INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(YAZ_CFLAGS)
 #>- libfetch_a_METASOURCES = AUTO
-libfetch_a_SOURCES = \
-	fetchmanager.cpp amazonfetcher.cpp z3950fetcher.cpp \
-	imdbfetcher.cpp configwidget.cpp entrezfetcher.cpp \
-	execexternalfetcher.cpp
+libfetch_a_SOURCES = fetchmanager.cpp amazonfetcher.cpp z3950fetcher.cpp \
+			imdbfetcher.cpp configwidget.cpp entrezfetcher.cpp 	execexternalfetcher.cpp \
+		messagehandler.cpp fetcher.cpp z3950connection.cpp yahoofetcher.cpp animenfofetcher.cpp ibsfetcher.cpp srufetcher.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
 CLEANFILES = *~
 KDE_OPTIONS = noautodist
 EXTRA_DIST = \
-fetcher.h fetchmanager.h fetchmanager.cpp \
+fetcher.h fetcher.cpp fetchmanager.h fetchmanager.cpp \
 amazonfetcher.h amazonfetcher.cpp z3950fetcher.h z3950fetcher.cpp \
 imdbfetcher.h imdbfetcher.cpp fetch.h configwidget.h configwidget.cpp \
 entrezfetcher.h entrezfetcher.cpp \
-execexternalfetcher.h execexternalfetcher.cpp
+execexternalfetcher.h execexternalfetcher.cpp \
+messagehandler.h messagehandler.cpp \
+z3950connection.h z3950connection.cpp \
+yahoofetcher.h yahoofetcher.cpp \
+animenfofetcher.h animenfofetcher.cpp \
+ibsfetcher.h ibsfetcher.cpp \
+srufetcher.h srufetcher.cpp
 
 #>- all: all-am
 #>+ 1
@@ -406,11 +423,18 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/amazonfetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/animenfofetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/configwidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/entrezfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/execexternalfetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fetchmanager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ibsfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imdbfetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/messagehandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/srufetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yahoofetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/z3950connection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/z3950fetcher.Po@am__quote@
 
 .cpp.o:
@@ -622,11 +646,25 @@ uninstall-am: uninstall-info-am
 
 
 #>+ 3
+ibsfetcher.moc: $(srcdir)/ibsfetcher.h
+	$(MOC) $(srcdir)/ibsfetcher.h -o ibsfetcher.moc
+
+#>+ 2
+mocs: ibsfetcher.moc
+
+#>+ 3
 amazonfetcher.moc: $(srcdir)/amazonfetcher.h
 	$(MOC) $(srcdir)/amazonfetcher.h -o amazonfetcher.moc
 
 #>+ 2
 mocs: amazonfetcher.moc
+
+#>+ 3
+animenfofetcher.moc: $(srcdir)/animenfofetcher.h
+	$(MOC) $(srcdir)/animenfofetcher.h -o animenfofetcher.moc
+
+#>+ 2
+mocs: animenfofetcher.moc
 
 #>+ 3
 configwidget.moc: $(srcdir)/configwidget.h
@@ -636,6 +674,13 @@ configwidget.moc: $(srcdir)/configwidget.h
 mocs: configwidget.moc
 
 #>+ 3
+yahoofetcher.moc: $(srcdir)/yahoofetcher.h
+	$(MOC) $(srcdir)/yahoofetcher.h -o yahoofetcher.moc
+
+#>+ 2
+mocs: yahoofetcher.moc
+
+#>+ 3
 imdbfetcher.moc: $(srcdir)/imdbfetcher.h
 	$(MOC) $(srcdir)/imdbfetcher.h -o imdbfetcher.moc
 
@@ -643,11 +688,11 @@ imdbfetcher.moc: $(srcdir)/imdbfetcher.h
 mocs: imdbfetcher.moc
 
 #>+ 3
-fetcher.moc.cpp: $(srcdir)/fetcher.h
-	$(MOC) $(srcdir)/fetcher.h -o fetcher.moc.cpp
+fetcher.moc: $(srcdir)/fetcher.h
+	$(MOC) $(srcdir)/fetcher.h -o fetcher.moc
 
 #>+ 2
-mocs: fetcher.moc.cpp
+mocs: fetcher.moc
 
 #>+ 3
 execexternalfetcher.moc: $(srcdir)/execexternalfetcher.h
@@ -655,6 +700,13 @@ execexternalfetcher.moc: $(srcdir)/execexternalfetcher.h
 
 #>+ 2
 mocs: execexternalfetcher.moc
+
+#>+ 3
+srufetcher.moc: $(srcdir)/srufetcher.h
+	$(MOC) $(srcdir)/srufetcher.h -o srufetcher.moc
+
+#>+ 2
+mocs: srufetcher.moc
 
 #>+ 3
 z3950fetcher.moc: $(srcdir)/z3950fetcher.h
@@ -679,7 +731,7 @@ mocs: fetchmanager.moc
 
 #>+ 3
 clean-metasources:
-	-rm -f  amazonfetcher.moc configwidget.moc imdbfetcher.moc fetcher.moc.cpp execexternalfetcher.moc z3950fetcher.moc entrezfetcher.moc fetchmanager.moc
+	-rm -f  ibsfetcher.moc amazonfetcher.moc animenfofetcher.moc configwidget.moc yahoofetcher.moc imdbfetcher.moc fetcher.moc execexternalfetcher.moc srufetcher.moc z3950fetcher.moc entrezfetcher.moc fetchmanager.moc
 
 #>+ 2
 docs-am:
@@ -723,11 +775,11 @@ bcheck-am:
 
 
 #>+ 11
-libfetch_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/fetchmanager.cpp $(srcdir)/amazonfetcher.cpp $(srcdir)/z3950fetcher.cpp $(srcdir)/imdbfetcher.cpp $(srcdir)/configwidget.cpp $(srcdir)/entrezfetcher.cpp $(srcdir)/execexternalfetcher.cpp fetcher.moc.cpp  amazonfetcher.moc configwidget.moc imdbfetcher.moc execexternalfetcher.moc z3950fetcher.moc entrezfetcher.moc fetchmanager.moc
+libfetch_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/fetchmanager.cpp $(srcdir)/amazonfetcher.cpp $(srcdir)/z3950fetcher.cpp $(srcdir)/imdbfetcher.cpp $(srcdir)/configwidget.cpp $(srcdir)/entrezfetcher.cpp $(srcdir)/execexternalfetcher.cpp $(srcdir)/messagehandler.cpp $(srcdir)/fetcher.cpp $(srcdir)/z3950connection.cpp $(srcdir)/yahoofetcher.cpp $(srcdir)/animenfofetcher.cpp $(srcdir)/ibsfetcher.cpp $(srcdir)/srufetcher.cpp  amazonfetcher.moc ibsfetcher.moc animenfofetcher.moc configwidget.moc yahoofetcher.moc fetcher.moc imdbfetcher.moc execexternalfetcher.moc srufetcher.moc z3950fetcher.moc entrezfetcher.moc fetchmanager.moc
 	@echo 'creating libfetch_a.all_cpp.cpp ...'; \
 	rm -f libfetch_a.all_cpp.files libfetch_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libfetch_a.all_cpp.final; \
-	for file in fetchmanager.cpp amazonfetcher.cpp z3950fetcher.cpp imdbfetcher.cpp configwidget.cpp entrezfetcher.cpp execexternalfetcher.cpp fetcher.moc.cpp ; do \
+	for file in fetchmanager.cpp amazonfetcher.cpp z3950fetcher.cpp imdbfetcher.cpp configwidget.cpp entrezfetcher.cpp execexternalfetcher.cpp messagehandler.cpp fetcher.cpp z3950connection.cpp yahoofetcher.cpp animenfofetcher.cpp ibsfetcher.cpp srufetcher.cpp ; do \
 	  echo "#include \"$$file\"" >> libfetch_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libfetch_a.all_cpp.final; \
 	done; \
@@ -762,20 +814,30 @@ cvs-clean:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 17
+#>+ 27
 entrezfetcher.o: entrezfetcher.moc 
 fetchmanager.o: fetchmanager.moc 
+yahoofetcher.lo: yahoofetcher.moc 
+animenfofetcher.lo: animenfofetcher.moc 
+yahoofetcher.o: yahoofetcher.moc 
 configwidget.lo: configwidget.moc 
 nmcheck: 
 fetchmanager.lo: fetchmanager.moc 
+srufetcher.lo: srufetcher.moc 
+ibsfetcher.o: ibsfetcher.moc 
 execexternalfetcher.lo: execexternalfetcher.moc 
 execexternalfetcher.o: execexternalfetcher.moc 
 nmcheck-am: nmcheck
-imdbfetcher.o: imdbfetcher.moc 
+ibsfetcher.lo: ibsfetcher.moc 
+srufetcher.o: srufetcher.moc 
+animenfofetcher.o: animenfofetcher.moc 
 configwidget.o: configwidget.moc 
+imdbfetcher.o: imdbfetcher.moc 
 z3950fetcher.o: z3950fetcher.moc 
-imdbfetcher.lo: imdbfetcher.moc 
-amazonfetcher.lo: amazonfetcher.moc 
+fetcher.o: fetcher.moc 
 z3950fetcher.lo: z3950fetcher.moc 
-amazonfetcher.o: amazonfetcher.moc 
+amazonfetcher.lo: amazonfetcher.moc 
+imdbfetcher.lo: imdbfetcher.moc 
+fetcher.lo: fetcher.moc 
 entrezfetcher.lo: entrezfetcher.moc 
+amazonfetcher.o: amazonfetcher.moc 

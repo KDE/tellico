@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,12 +18,11 @@ class QString;
 class QStringList;
 class QRegExp;
 
+#include "../datavectors.h"
+
 #include <qmap.h>
 
 namespace Tellico {
-  namespace Data {
-    class Entry;
-  }
 
 /**
  * @author Robby Stephenson
@@ -31,12 +30,13 @@ namespace Tellico {
 class BibtexHandler {
 public:
   enum QuoteStyle { BRACES=0, QUOTES=1 };
-  static QString bibtexKey(const Data::Entry* entry);
+  static QStringList bibtexKeys(const Data::EntryVec& entries);
+  static QString bibtexKey(Data::ConstEntryPtr entry);
   static QString importText(char* text);
   static QString exportText(const QString& text, const QStringList& macros);
-  static bool setFieldValue(Data::Entry* entry, const QString& bibtexField, const QString& value);
+  static bool setFieldValue(Data::EntryPtr entry, const QString& bibtexField, const QString& value);
   /**
-   * Strips the text of all vestiges of Latex.
+   * Strips the text of all vestiges of LaTeX.
    *
    * @param text A reference to the text
    * @return A reference to the text

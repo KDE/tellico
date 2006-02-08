@@ -33,8 +33,9 @@
 
 #include <klocale.h>
 #include <kdebug.h>
+#include <kpushbutton.h>
+#include <kiconloader.h>
 
-#include <qpushbutton.h>
 #include <qlayout.h>
 #include <qhbox.h>
 
@@ -51,18 +52,22 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   //--------- the button box
   mLayout = new QVBoxLayout(this, 0, 4);
   mButtonBox = new QHBox(this);
+  mButtonBox->setSpacing(4);
   mLayout->addWidget( mButtonBox );
 
-  mBtnMore = new QPushButton( i18n("more widgets","More"), mButtonBox );
+  mBtnMore = new KPushButton( i18n("more widgets","More"), mButtonBox );
+  mBtnMore->setIconSet(SmallIconSet(QString::fromLatin1("down")));
   mButtonBox->setStretchFactor( mBtnMore, 0 );
 
-  mBtnFewer = new QPushButton( i18n("fewer widgets","Fewer"), mButtonBox );
+  mBtnFewer = new KPushButton( i18n("fewer widgets","Fewer"), mButtonBox );
+  mBtnFewer->setIconSet(SmallIconSet(QString::fromLatin1("up")));
   mButtonBox->setStretchFactor( mBtnFewer, 0 );
 
   QWidget *spacer = new QWidget( mButtonBox );
   mButtonBox->setStretchFactor( spacer, 1 );
 
-  mBtnClear = new QPushButton( i18n("clear widgets","Clear"), mButtonBox );
+  mBtnClear = new KPushButton( i18n("clear widgets","Clear"), mButtonBox );
+  mBtnClear->setIconSet(SmallIconSet(QString::fromLatin1("locationbar_erase")));
   mButtonBox->setStretchFactor( mBtnClear, 0 );
 
   //---------- connect everything

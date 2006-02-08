@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,8 +15,10 @@
 #define TABLEFIELDWIDGET_H
 
 class QTable;
+class QEvent;
 
 #include "fieldwidget.h"
+#include "../datavectors.h"
 
 namespace Tellico {
   namespace GUI {
@@ -28,26 +30,43 @@ class TableFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  TableFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  TableFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~TableFieldWidget() {}
 
   virtual QString text() const;
   virtual void setText(const QString& text);
+
+  /**
+   * Event filter used to popup the menu
+   */
+  bool eventFilter(QObject* obj, QEvent* ev);
 
 public slots:
   virtual void clear();
 
 protected:
   virtual QWidget* widget();
-  virtual void updateFieldHook(Data::Field* oldField, Data::Field* newField);
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
 private slots:
+  void contextMenu(int row, int col, const QPoint& p);
   void slotCheckRows(int row, int col);
   void slotResizeColumn(int row, int col);
+  void slotRenameColumn();
+  void slotInsertRow();
+  void slotRemoveRow();
+  void slotMoveRowUp();
+  void slotMoveRowDown();
 
 private:
+  bool emptyRow(int row) const;
+  void labelColumns(Data::FieldPtr field);
+
   QTable* m_table;
   int m_columns;
+  Data::FieldPtr m_field;
+  int m_row;
+  int m_col;
 };
 
   } // end GUI namespace

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,8 +15,6 @@
 #define BIBTEXCOLLECTION_H
 
 #include "../collection.h"
-
-class QFile;
 
 namespace Tellico {
   namespace Data {
@@ -45,24 +43,21 @@ public:
   virtual ~BibtexCollection() {}
 
   virtual Type type() const { return Bibtex; }
-  virtual bool addField(Field* field);
-  virtual bool modifyField(Field* field);
-  virtual bool deleteField(Field* field, bool force=false);
+  virtual bool addField(FieldPtr field);
+  virtual bool modifyField(FieldPtr field);
+  virtual bool deleteField(FieldPtr field, bool force=false);
 
-  Field* const fieldByBibtexName(const QString& name) const;
+  FieldPtr fieldByBibtexName(const QString& name) const;
   const QString& preamble() const { return m_preamble; }
   void setPreamble(const QString& preamble) { m_preamble = preamble; }
   const StringMap& macroList() const { return m_macros; }
   void setMacroList(StringMap map) { m_macros = map; }
   void addMacro(const QString& key, const QString& value) { m_macros.insert(key, value); }
-  QStringList bibtexKeys(const EntryVec& entries) const;
-  /**
-   * Open a pipe to lyx and send a citation for the selected entries
-   */
-  void citeEntries(QFile& lyxpipe, const EntryVec& entries) const;
+
+  virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
   static FieldVec defaultFields();
-  static BibtexCollection* convertBookCollection(const Collection* coll);
+  static CollPtr convertBookCollection(CollPtr coll);
 
 private:
   QDict<Field> m_bibtexFieldDict;

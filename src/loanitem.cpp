@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,10 +12,10 @@
  ***************************************************************************/
 
 #include "loanitem.h"
+#include "entry.h"
 
 using Tellico::LoanItem;
 
-LoanItem::LoanItem(GUI::CountedItem* parent_, Tellico::Data::Loan* loan_)
- : Tellico::EntryItem(parent_, loan_->entry()), m_loan(loan_)
-{
+LoanItem::LoanItem(GUI::CountedItem* parent_, Tellico::Data::LoanPtr loan_)
+ : Tellico::EntryItem(parent_, loan_->entry()), m_loan(loan_) {
 }

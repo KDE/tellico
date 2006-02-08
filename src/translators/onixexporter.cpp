@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,6 @@
 #include "onixexporter.h"
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
-#include "../document.h"
 #include "../collection.h"
 #include "../filehandler.h"
 #include "../tellico_utils.h"
@@ -46,7 +45,7 @@ ONIXExporter::ONIXExporter() : Tellico::Export::Exporter(),
     m_widget(0) {
 }
 
-ONIXExporter::ONIXExporter(const Data::Collection* coll_) : Tellico::Export::Exporter(coll_),
+ONIXExporter::ONIXExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(0),
     m_xsltFile(QString::fromLatin1("tellico2onix.xsl")),
     m_includeImages(true),
@@ -67,7 +66,7 @@ QString ONIXExporter::fileFilter() const {
 }
 
 bool ONIXExporter::exec() {
-  const Data::Collection* coll = Data::Document::self()->collection();
+  Data::CollPtr coll = collection();
   if(!coll) {
     return false;
   }
@@ -105,13 +104,13 @@ bool ONIXExporter::exec() {
 QString ONIXExporter::text() {
   QString xsltfile = locate("appdata", m_xsltFile);
   if(xsltfile.isNull()) {
-    kdDebug() << "ONIXExporter::text() - no xslt file for " << m_xsltFile << endl;
+    myDebug() << "ONIXExporter::text() - no xslt file for " << m_xsltFile << endl;
     return QString::null;
   }
 
-  const Data::Collection* coll = collection();
+  Data::CollPtr coll = collection();
   if(!coll) {
-    kdDebug() << "ONIXExporter::text() - no collection pointer!" << endl;
+    myDebug() << "ONIXExporter::text() - no collection pointer!" << endl;
     return QString::null;
   }
 
@@ -126,7 +125,7 @@ QString ONIXExporter::text() {
   // removes the namespace declaration
   QDomDocument dom = FileHandler::readXMLFile(u, false);
   if(dom.isNull()) {
-    kdDebug() << "ONIXExporter::text() - error loading xslt file: " << xsltfile << endl;
+    myDebug() << "ONIXExporter::text() - error loading xslt file: " << xsltfile << endl;
     return QString::null;
   }
 
@@ -194,3 +193,5 @@ void ONIXExporter::saveOptions(KConfig* config_) {
   KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   config_->writeEntry("Include Images", m_includeImages);
 }
+
+#include "onixexporter.moc"

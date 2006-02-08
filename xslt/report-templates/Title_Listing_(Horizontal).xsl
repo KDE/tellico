@@ -10,7 +10,7 @@
    ===================================================================
    Tellico XSLT file - Title List Report
 
-   Copyright (C) 2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2005-2006 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -77,20 +77,21 @@
   <xsl:value-of select="@title"/>
  </h1>
 
+ <!-- first, build sorted list -->
+ <xsl:variable name="sorted-entries">
+  <xsl:for-each select="tc:entry">
+   <xsl:sort select=".//tc:title[1]"/>
+   <xsl:copy-of select="."/>
+  </xsl:for-each>
+ </xsl:variable>
+
  <table>
   <tbody>
 
-   <!-- first, build sorted list -->
-   <xsl:variable name="sorted-entries">
-    <xsl:for-each select="tc:entry">
-     <xsl:sort select=".//tc:title[1]"/>
-     <xsl:copy-of select="."/>
-    </xsl:for-each>
-   </xsl:variable>
-   
+<!--
    <xsl:variable name="nrows"
                  select="ceiling(count(tc:entry) div $num-columns)"/>
-
+-->
    <xsl:for-each select="exsl:node-set($sorted-entries)/tc:entry[position() mod $num-columns = 1]">
     <tr class="r{position() mod 2}">
      <xsl:apply-templates select=".|following-sibling::tc:entry[position() &lt; $num-columns]"/>
@@ -109,7 +110,7 @@
    <xsl:if test="position() &lt; last()">
     <xsl:text>; </xsl:text>
     <br/>
-   </xsl:if>   
+   </xsl:if>
   </xsl:for-each>
 </td>
 </xsl:template>

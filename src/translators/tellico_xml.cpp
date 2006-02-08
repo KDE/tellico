@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -41,8 +41,11 @@ const QString Tellico::XML::dtdBibtexml = QString::fromLatin1("bibtexml.dtd");
  * VERSION 7 changed the application name to Tellico, renamed unitTitle to entryTitle, and made the id permanent.
  *
  * VERSION 8 added loans and saved filters.
+ *
+ * VERSION 9 changed music collections to always have three columns by default, with title/artist/length and
+ * added file catalog collection.
  */
-const uint Tellico::XML::syntaxVersion = 8;
+const uint Tellico::XML::syntaxVersion = 9;
 const QString Tellico::XML::nsTellico = QString::fromLatin1("http://periapsis.org/tellico/");
 const QString Tellico::XML::pubTellico = QString::fromLatin1("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(Tellico::XML::syntaxVersion);
 const QString Tellico::XML::dtdTellico = QString::fromLatin1("http://periapsis.org/tellico/dtd/v%1/tellico.dtd").arg(Tellico::XML::syntaxVersion);

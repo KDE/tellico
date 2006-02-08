@@ -32,6 +32,7 @@ int main(int, char**) {
   kdDebug() << "\n*****************************************************" << endl;
 
   // title checks
+  Tellico::Data::Field::setNoCapitalizeList(Tellico::Data::Field::defaultNoCapitalizationList());
   Tellico::Data::Field::setArticleList(Tellico::Data::Field::defaultArticleList());
   checkTitle("Title", "Title");
   checkTitle("title", "Title");

@@ -1,5 +1,5 @@
 /****************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -32,10 +32,8 @@ class QCheckBox;
 #include "gui/comboboxproxy.h"
 
 #include <kdialogbase.h>
-#include <kcombobox.h>
 #include <klistview.h>
 
-#include <qstring.h>
 #include <qstringlist.h>
 #include <qintdict.h>
 
@@ -74,22 +72,13 @@ public:
    */
   void saveConfiguration(KConfig* config);
 
-protected:
+signals:
   /**
-   * Sets-up the page for the general options.
+   * Emitted whenever the Ok or Apply button is clicked.
    */
-  void setupGeneralPage();
-  /**
-   * Sets-up the page for printing options.
-   */
-  void setupPrintingPage();
-  /**
-   * Sets-up the page for template options.
-   */
-  void setupTemplatePage();
-  void setupFetchPage();
+  void signalConfigChanged();
 
-protected slots:
+private slots:
   /**
    * Called when anything gets changed
    */
@@ -111,11 +100,13 @@ protected slots:
    *
    * @param checked The formatting checkbox is checkeed
    */
-  void slotToggleFormatted(bool checked);
+  void slotToggleCapitalized(bool checked);
   /**
-   * Preview an entry template.
+   * Enable the checkboxes for formatting if formatting is enabled.
+   *
+   * @param checked The formatting checkbox is checkeed
    */
-//  void slotPreview();
+  void slotToggleFormatted(bool checked);
   /**
    * Update the help link for a page.
    *
@@ -135,23 +126,36 @@ protected slots:
    */
   void slotRemoveSourceClicked();
   /**
-   * Check source
+   * Load fetcher config
    */
-  void slotSourceChanged();
-
-signals:
-  /**
-   * Emitted whenever the Ok or Apply button is clicked.
-   */
-  void signalConfigChanged();
+  void loadFetcherConfig();
+  void slotSelectedSourceChanged(QListViewItem* item);
+  void slotMoveUpSourceClicked();
+  void slotMoveDownSourceClicked();
 
 private:
+  /**
+   * Sets-up the page for the general options.
+   */
+  void setupGeneralPage();
+  /**
+   * Sets-up the page for printing options.
+   */
+  void setupPrintingPage();
+  /**
+   * Sets-up the page for template options.
+   */
+  void setupTemplatePage();
+  void setupFetchPage();
+
   bool m_modifying;
 
+  QCheckBox* m_cbWriteImagesInFile;
   QCheckBox* m_cbOpenLastFile;
   QCheckBox* m_cbShowTipDay;
   QCheckBox* m_cbCapitalize;
   QCheckBox* m_cbFormat;
+  KLineEdit* m_leCapitals;
   KLineEdit* m_leArticles;
   KLineEdit* m_leSuffixes;
   KLineEdit* m_lePrefixes;
@@ -167,8 +171,9 @@ private:
 
   KListView* m_sourceListView;
   QMap<SourceListViewItem*, Fetch::ConfigWidget*> m_configWidgets;
-  KPushButton* m_newSourceBtn;
   KPushButton* m_modifySourceBtn;
+  KPushButton* m_moveUpSourceBtn;
+  KPushButton* m_moveDownSourceBtn;
   KPushButton* m_removeSourceBtn;
 };
 

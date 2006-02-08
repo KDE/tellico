@@ -28,6 +28,11 @@ int main(int, char**) {
 
   // check EAN stripping
   check("9780672323416", "0-672-32341-9");
+  // don't add checksum for EAN that start with 978 or 979
+  check("978059600", "978-059600");
+  check("978-0596000", "978-059600-0");
+  check("978-059600-05", "0-596-0005");
+  check("0-596-00053", "0-596-00053-7");
 
   // normal english-language hyphenation
   check("0446600989", "0-446-60098-9");

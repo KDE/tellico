@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,14 +12,11 @@
  ***************************************************************************/
 
 #include "bibtexcollection.h"
-#include "../collectionfactory.h"
 #include "../latin1literal.h"
-#include "../translators/bibtexhandler.h"
+#include "../document.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kdebug.h>
-
-#include <qfile.h>
 
 using Tellico::Data::BibtexCollection;
 
@@ -30,7 +27,7 @@ namespace {
 }
 
 BibtexCollection::BibtexCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, CollectionFactory::entryName(Bibtex), i18n("Entries")) {
+   : Collection(title_, i18n("Entries")) {
   setTitle(title_.isNull() ? i18n("Bibliography") : title_);
   if(addFields_) {
     addFields(defaultFields());
@@ -54,7 +51,7 @@ BibtexCollection::BibtexCollection(bool addFields_, const QString& title_ /*=nul
 
 Tellico::Data::FieldVec BibtexCollection::defaultFields() {
   FieldVec list;
-  Field* field;
+  FieldPtr field;
 
 /******************* General ****************************/
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
@@ -225,7 +222,7 @@ Tellico::Data::FieldVec BibtexCollection::defaultFields() {
   return list;
 }
 
-bool BibtexCollection::addField(Field* field_) {
+bool BibtexCollection::addField(FieldPtr field_) {
   if(!field_) {
     return false;
   }
@@ -240,13 +237,13 @@ bool BibtexCollection::addField(Field* field_) {
   return success;
 }
 
-bool BibtexCollection::modifyField(Field* newField_) {
+bool BibtexCollection::modifyField(FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
 //  kdDebug() << "BibtexCollection::modifyField()" << endl;
   bool success = Collection::modifyField(newField_);
-  Field* oldField = fieldByName(newField_->name());
+  FieldPtr oldField = fieldByName(newField_->name());
   QString oldBibtex = oldField->property(QString::fromLatin1("bibtex"));
   QString newBibtex = newField_->property(QString::fromLatin1("bibtex"));
   if(!oldBibtex.isEmpty()) {
@@ -259,7 +256,7 @@ bool BibtexCollection::modifyField(Field* newField_) {
   return success;
 }
 
-bool BibtexCollection::deleteField(Field* field_, bool force_) {
+bool BibtexCollection::deleteField(FieldPtr field_, bool force_) {
   if(!field_) {
     return false;
   }
@@ -272,19 +269,44 @@ bool BibtexCollection::deleteField(Field* field_, bool force_) {
   return success && Collection::removeField(field_, force_);
 }
 
-Tellico::Data::Field* const BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
+Tellico::Data::FieldPtr BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
   return m_bibtexFieldDict.isEmpty() ? 0 : m_bibtexFieldDict.find(bibtex_);
 }
 
+// same as BookCollection::SameEntry()
+int BibtexCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+  // equal isbn's or lccn's are easy, give it a weight of 100
+  if(Entry::compareValues(entry1_, entry2_, QString::fromLatin1("isbn"), this) > 0 ||
+     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("lccn"), this) > 0) {
+    return 100; // good match
+  }
+  int res = 3*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+//  if(res == 0) {
+//    myDebug() << "BookCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
+//              << entry2_->title() << endl;
+//  }
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("author"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("cr_year"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("pub_year"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("binding"), this);
+  return res;
+}
+
 // static
-BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll_) {
+Tellico::Data::CollPtr BibtexCollection::convertBookCollection(CollPtr coll_) {
   const QString bibtex = QString::fromLatin1("bibtex");
-  BibtexCollection* coll = new BibtexCollection(false, coll_->title());
+  KSharedPtr<BibtexCollection> coll = new BibtexCollection(false, coll_->title());
   FieldVec fields = coll_->fields();
   for(FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
-    Field* field = fIt->clone();
-    QString name = field->name();
+    FieldPtr field = fIt->clone();
+    coll->addField(field);
 
+    // if it already has a bibtex property, skip it
+    if(!field->property(bibtex).isEmpty()) {
+      continue;
+    }
+
+    QString name = field->name();
     // this first group has bibtex field names the same as their own field name
     if(name == Latin1Literal("title")
        || name == Latin1Literal("author")
@@ -311,7 +333,6 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
     } else if(name == Latin1Literal("comments")) {
       field->setProperty(bibtex, QString::fromLatin1("note"));
     }
-    coll->addField(field);
   }
 
   // also need to add required fields
@@ -327,52 +348,26 @@ BibtexCollection* BibtexCollection::convertBookCollection(const Collection* coll
   }
 
   // set the entry-type to book
-  Field* field = coll->fieldByBibtexName(QString::fromLatin1("entry-type"));
+  FieldPtr field = coll->fieldByBibtexName(QString::fromLatin1("entry-type"));
   QString entryTypeName;
   if(field) {
     entryTypeName = field->name();
+  } else {
+    kdWarning() << "BibtexCollection::convertBookCollection() - there must be an entry type field" << endl;
   }
 
   for(EntryVec::ConstIterator entryIt = coll_->entries().begin(); entryIt != coll_->entries().end(); ++entryIt) {
-    Data::Entry* entry = new Entry(*entryIt, coll);
+    Data::EntryPtr entry = new Entry(*entryIt);
     coll->addEntry(entry);
     if(!entryTypeName.isEmpty()) {
       entry->setField(entryTypeName, QString::fromLatin1("book"));
     }
   }
 
-  return coll;
-}
+  // now need to make sure all images are transferred
+  Document::self()->loadAllImagesNow();
 
-QStringList BibtexCollection::bibtexKeys(const EntryVec& entries_) const {
-  QStringList keys;
-  for(Data::EntryVec::ConstIterator it = entries_.begin(); it != entries_.end(); ++it) {
-    keys << BibtexHandler::bibtexKey(it);
-  }
-  return keys;
-}
-
-void BibtexCollection::citeEntries(QFile& lyxpipe_, const EntryVec& entries_) const {
-  if(entries_.isEmpty()) {
-    return;
-  }
-//  kdDebug() << "BibtexCollection::citeEntries()" << endl;
-  const QStringList keys = bibtexKeys(entries_);
-
-  QTextStream ts(&lyxpipe_);
-//  ts << "LYXSRV:tellico:hello\n";
-  ts << "LYXCMD:tellico:citation-insert:";
-  QStringList::ConstIterator end = keys.end();
-  for(QStringList::ConstIterator it = keys.begin(); it != end; ++it) {
-    ts << (*it).latin1();
-    if(it != keys.fromLast()) {
-      // pybliographer uses comma-space, and pyblink expects the space there
-      ts << ", ";
-    }
-  }
-  ts << "\n";
-//  ts << "LYXSRV:tellico:bye\n";
-  lyxpipe_.flush();
+  return coll.data();
 }
 
 #include "bibtexcollection.moc"

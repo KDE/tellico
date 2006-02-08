@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -29,19 +29,33 @@
 #include <qregexp.h>
 #include <qdom.h>
 
+// don't add braces around capital letters by default
+#define TELLICO_BIBTEX_BRACES 0
+
 using Tellico::BibtexHandler;
 
 BibtexHandler::StringListMap* BibtexHandler::s_utf8LatexMap = 0;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
 const QRegExp BibtexHandler::s_badKeyChars(QString::fromLatin1("[^0-9a-zA-Z-]"));
 
-QString BibtexHandler::bibtexKey(const Data::Entry* entry_) {
+QStringList BibtexHandler::bibtexKeys(const Data::EntryVec& entries_) {
+  QStringList keys;
+  for(Data::EntryVec::ConstIterator it = entries_.begin(); it != entries_.end(); ++it) {
+    QString s = bibtexKey(it.data());
+    if(!s.isEmpty()) {
+      keys << s;
+    }
+  }
+  return keys;
+}
+
+QString BibtexHandler::bibtexKey(Data::ConstEntryPtr entry_) {
   if(!entry_ || !entry_->collection() || entry_->collection()->type() != Data::Collection::Bibtex) {
     return QString::null;
   }
 
-  const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(entry_->collection());
-  const Data::Field* f = c->fieldByBibtexName(QString::fromLatin1("key"));
+  const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(entry_->collection().data());
+  Data::FieldPtr f = c->fieldByBibtexName(QString::fromLatin1("key"));
   if(f) {
     QString key = entry_->field(f->name());
     if(!key.isEmpty()) {
@@ -50,7 +64,7 @@ QString BibtexHandler::bibtexKey(const Data::Entry* entry_) {
   }
 
   QString author;
-  const Data::Field* authorField = c->fieldByBibtexName(QString::fromLatin1("author"));
+  Data::FieldPtr authorField = c->fieldByBibtexName(QString::fromLatin1("author"));
   if(authorField && (authorField->flags() & Data::Field::AllowMultiple)) {
     QString tmp = entry_->field(authorField->name());
     author = tmp.section(';', 0, 0);
@@ -58,13 +72,13 @@ QString BibtexHandler::bibtexKey(const Data::Entry* entry_) {
     author = entry_->field(authorField->name());
   }
 
-  const Data::Field* titleField = c->fieldByBibtexName(QString::fromLatin1("title"));
+  Data::FieldPtr titleField = c->fieldByBibtexName(QString::fromLatin1("title"));
   QString title;
   if(titleField) {
     title = entry_->field(titleField->name());
   }
 
-  const Data::Field* yearField = c->fieldByBibtexName(QString::fromLatin1("year"));
+  Data::FieldPtr yearField = c->fieldByBibtexName(QString::fromLatin1("year"));
   QString year;
   if(yearField) {
     year = entry_->field(yearField->name());
@@ -205,20 +219,21 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
   return text;
 }
 
-bool BibtexHandler::setFieldValue(Data::Entry* entry_, const QString& bibtexField_, const QString& value_) {
-  Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(entry_->collection());
-  Data::Field* field = c->fieldByBibtexName(bibtexField_);
+bool BibtexHandler::setFieldValue(Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_) {
+  Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(entry_->collection().data());
+  Data::FieldPtr field = c->fieldByBibtexName(bibtexField_);
   if(!field) {
     // arbitrarily say if the value has more than 100 chars, then it's a paragraph
     if(value_.length() < 100) {
+      QString vlower = value_.lower();
       // special case, try to detect URLs
       // In qt 3.1, QString::startsWith() is always case-sensitive
       if(bibtexField_ == Latin1Literal("url")
-         || value_.lower().startsWith(QString::fromLatin1("http")) // may also be https
-         || value_.lower().startsWith(QString::fromLatin1("ftp:/"))
-         || value_.lower().startsWith(QString::fromLatin1("file:/"))
-         || value_.lower().startsWith(QString::fromLatin1("/"))) { // assume this indicates a local path
-        kdDebug() << "BibtexHandler::setFieldValue() - creating a URL field for " << bibtexField_ << endl;
+         || vlower.startsWith(QString::fromLatin1("http")) // may also be https
+         || vlower.startsWith(QString::fromLatin1("ftp:/"))
+         || vlower.startsWith(QString::fromLatin1("file:/"))
+         || vlower.startsWith(QString::fromLatin1("/"))) { // assume this indicates a local path
+        myDebug() << "BibtexHandler::setFieldValue() - creating a URL field for " << bibtexField_ << endl;
         field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::URL);
       } else {
         field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::Line);
@@ -230,12 +245,13 @@ bool BibtexHandler::setFieldValue(Data::Entry* entry_, const QString& bibtexFiel
     field->setProperty(QString::fromLatin1("bibtex"), bibtexField_);
     c->addField(field);
   }
-  return field ? entry_->setField(field->name(), value_) : false;
+  return field ? entry_->setField(field, value_) : false;
 }
 
 QString& BibtexHandler::cleanText(QString& text_) {
   // FIXME: need to improve this for removing all Latex entities
-  QRegExp rx(QString::fromLatin1("(?=[^\\])\\.*{"));
+//  QRegExp rx(QString::fromLatin1("(?=[^\\\\])\\\\.+\\{"));
+  QRegExp rx(QString::fromLatin1("\\\\.+\\{"));
   rx.setMinimal(true);
   text_.replace(rx, QString::null);
   text_.replace(QRegExp(QString::fromLatin1("[{}]")), QString::null);
@@ -245,6 +261,9 @@ QString& BibtexHandler::cleanText(QString& text_) {
 
 // add braces around capital letters
 QString& BibtexHandler::addBraces(QString& text) {
+#if !TELLICO_BIBTEX_BRACES
+  return text;
+#else
   int inside = 0;
   uint l = text.length();
   // start at first letter, but skip if only the first is capitalized
@@ -270,4 +289,5 @@ QString& BibtexHandler::addBraces(QString& text) {
     }
   }
   return text;
+#endif
 }

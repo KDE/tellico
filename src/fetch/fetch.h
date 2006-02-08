@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FETCH_H
-#define FETCH_H
+#ifndef TELLICO_FETCH_H
+#define TELLICO_FETCH_H
 
 namespace Tellico {
   namespace Fetch {
@@ -26,6 +26,7 @@ enum FetchKey {
   Title,
   Person,
   ISBN,
+  UPC,
   Keyword,
   Raw,
   FetchLast
@@ -39,7 +40,10 @@ enum Type {
   Z3950,
   SRU,
   Entrez,
-  ExecExternal
+  ExecExternal,
+  Yahoo,
+  AnimeNfo,
+  IBS
 };
 
   }

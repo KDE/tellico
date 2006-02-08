@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,13 +21,17 @@
 #include <kdebug.h>
 #include <ctime>       //std::clock_t
 
+//#define TELLICO_LOG
+
 #ifndef NDEBUG
 #define TELLICO_DEBUG
 #endif
 
 namespace Debug {
+  typedef kndbgstream NoDebugStream;
 #ifndef TELLICO_DEBUG
   typedef kndbgstream DebugStream;
+  static inline DebugStream log()     { return DebugStream(); }
   static inline DebugStream debug()   { return DebugStream(); }
   static inline DebugStream warning() { return DebugStream(); }
   static inline DebugStream error()   { return DebugStream(); }
@@ -41,14 +45,21 @@ namespace Debug {
   #endif
 
 //from kdebug.h
+/*
   enum DebugLevels {
     KDEBUG_INFO  = 0,
     KDEBUG_WARN  = 1,
     KDEBUG_ERROR = 2,
     KDEBUG_FATAL = 3
   };
+*/
 
   typedef kdbgstream DebugStream;
+#ifndef TELLICO_LOG
+  static inline kndbgstream log()   { return NoDebugStream(); }
+#else
+  static inline DebugStream log()   { return kdDebug(); }
+#endif
   static inline DebugStream debug()   { return kdDebug()   << FUNC_PREFIX; }
   static inline DebugStream warning() { return kdWarning() << FUNC_PREFIX << "[WARNING!] "; }
   static inline DebugStream error()   { return kdError()   << FUNC_PREFIX << "[ERROR!] "; }
@@ -56,8 +67,6 @@ namespace Debug {
 
   #undef FUNC_PREFIX
 #endif
-
-  typedef kndbgstream NoDebugStream;
 
 class Block {
 
@@ -78,6 +87,10 @@ private :
 };
 
 #define myDebug() Debug::debug()
+#define myWarning() Debug::warning()
+
+#define myLog() Debug::log()
+#define LOG_FUNC Debug::log() << k_funcinfo << endl;
 
 /// Standard function announcer
 #define DEBUG_FUNC_INFO myDebug() << k_funcinfo << endl;

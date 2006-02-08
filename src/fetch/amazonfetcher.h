@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2005 by Robby Stephenson
+    copyright            : (C) 2004-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -64,42 +64,34 @@ public:
     NoImage=3
   };
 
-  /**
-   */
   AmazonFetcher(Site site, QObject* parent, const char* name = 0);
-  /**
-   */
   virtual ~AmazonFetcher();
 
-  /**
-   */
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value, bool multiple);
+  virtual void search(FetchKey key, const QString& value);
   // amazon can search title, person, isbn, or keyword. No Raw for now.
   virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k != Raw; }
   virtual void stop();
-  virtual Data::Entry* fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Amazon; }
   virtual bool canFetch(int type) const;
   virtual void readConfig(KConfig* config, const QString& group);
+
+  virtual void updateEntry(Data::EntryPtr entry);
+
+  struct SiteData {
+    QString title;
+    KURL url;
+  };
+  static const SiteData& siteData(Site site);
+
   /**
    * Returns a widget for modifying the fetcher's config.
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const ;
 
-  struct SiteData {
-    QString title;
-    KURL url;
-    QString locale;
-    QString books;
-    QString dvd;
-    QString vhs;
-    QString music;
-    QString classical;
-    QString games;
-  };
-  static const SiteData& siteData(Site site);
+  static StringMap customFields();
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
@@ -114,21 +106,23 @@ public:
   };
   friend class ConfigWidget;
 
+  static QString defaultName();
+
 private slots:
   void slotData(KIO::Job* job, const QByteArray& data);
   void slotComplete(KIO::Job* job);
 
 private:
-  static XSLTHandler* s_xsltHandler;
-  static void initXSLTHandler();
+  void initXSLTHandler();
 
+  XSLTHandler* m_xsltHandler;
   Site m_site;
-  bool m_primaryMode;
   ImageSize m_imageSize;
   QString m_name;
-  QString m_token;
+  QString m_access;
   QString m_assoc;
   bool m_addLinkField;
+  int m_limit;
 
   QByteArray m_data;
   int m_page;
@@ -139,8 +133,8 @@ private:
 
   FetchKey m_key;
   QString m_value;
-  bool m_multiple;
   bool m_started;
+  QStringList m_fields;
 };
 
   } // end namespace

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,7 +28,7 @@ class ParaFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  ParaFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  ParaFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~ParaFieldWidget() {}
 
   virtual QString text() const;

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -42,7 +42,9 @@ void RemoveLoans::execute() {
     }
     loan->borrower()->removeLoan(loan);
     Data::Document::self()->checkInEntry(loan->entry());
-    Controller::self()->modifiedEntry(loan->entry());
+    Data::EntryVec vec;
+    vec.append(loan->entry());
+    Controller::self()->modifiedEntries(vec);
     Controller::self()->modifiedBorrower(loan->borrower());
   }
   if(!calLoans.isEmpty()) {
@@ -63,7 +65,9 @@ void RemoveLoans::unexecute() {
     }
     loan->borrower()->addLoan(loan);
     Data::Document::self()->checkOutEntry(loan->entry());
-    Controller::self()->modifiedEntry(loan->entry());
+    Data::EntryVec vec;
+    vec.append(loan->entry());
+    Controller::self()->modifiedEntries(vec);
     Controller::self()->modifiedBorrower(loan->borrower());
   }
   if(!calLoans.isEmpty()) {

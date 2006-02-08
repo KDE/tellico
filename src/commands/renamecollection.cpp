@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,7 +19,7 @@
 
 using Tellico::Command::RenameCollection;
 
-RenameCollection::RenameCollection(Data::Collection* coll_, const QString& newTitle_)
+RenameCollection::RenameCollection(Data::CollPtr coll_, const QString& newTitle_)
     : KCommand()
     , m_coll(coll_)
     , m_newTitle(newTitle_)

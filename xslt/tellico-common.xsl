@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - some common templates.
 
-   Copyright (C) 2004-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2006 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -42,14 +42,14 @@
  <xsl:variable name="actual-height" select="$image/@height"/>
 
  <xsl:choose>
-  <xsl:when test="$actual-width &gt; $limit-width or $actual-height &gt; $limit-height">
+  <xsl:when test="$limit-width &gt; 0 and $limit-height  &gt; 0 and 
+                  ($actual-width &gt; $limit-width or $actual-height &gt; $limit-height)">
 
-   <!-- -->
    <xsl:choose>
 
     <xsl:when test="$actual-width * $limit-height &lt; $actual-height * $limit-width">
      <xsl:attribute name="height">
-      <xsl:value-of select="$limit-height"/>
+      <xsl:value-of select="round($limit-height)"/>
      </xsl:attribute>
      <xsl:attribute name="width">
       <xsl:value-of select="round($actual-width * $limit-height div $actual-height)"/>
@@ -58,7 +58,7 @@
 
     <xsl:otherwise>
      <xsl:attribute name="width">
-      <xsl:value-of select="$limit-width"/>
+      <xsl:value-of select="round($limit-width)"/>
      </xsl:attribute>
      <xsl:attribute name="height">
       <xsl:value-of select="round($actual-height * $limit-width div $actual-width)"/>
@@ -70,14 +70,14 @@
   </xsl:when>
 
   <!-- if both are smaller, no change -->
-  <xsl:otherwise>
+  <xsl:when test="$actual-width &gt; 0 and $actual-height &gt; 0">
    <xsl:attribute name="height">
     <xsl:value-of select="$actual-height"/>
    </xsl:attribute>
    <xsl:attribute name="width">
     <xsl:value-of select="$actual-width"/>
    </xsl:attribute>
-  </xsl:otherwise>
+  </xsl:when>
 
  </xsl:choose>
 </xsl:template>
@@ -218,7 +218,7 @@
  <xsl:choose>
 
   <xsl:when test="not($nodes)">
-   <xsl:value-of select="$totalMin + round($totalSec div 60)"/>
+   <xsl:value-of select="$totalMin + floor($totalSec div 60)"/>
    <xsl:text>:</xsl:text>
    <xsl:value-of select="format-number($totalSec mod 60, '00')"/>
   </xsl:when>
@@ -242,10 +242,37 @@
     <xsl:with-param name="nodes" select="$nodes[position() != 1]"/>
     <xsl:with-param name="totalMin" select="$totalMin"/>
     <xsl:with-param name="totalSec" select="$totalSec"/>
-   </xsl:call-template>   
+   </xsl:call-template>
   </xsl:otherwise>
 
  </xsl:choose>
+</xsl:template>
+
+<xsl:template name="columnTitle">
+ <xsl:param name="index" select="1"/>
+ <xsl:param name="max" select="10"/>
+ <xsl:param name="elem" select="'th'"/>
+ <xsl:param name="style"/>
+ <xsl:param name="field" select="/.."/>
+
+ <xsl:if test="not($index &gt; $max)">
+  <xsl:element name="{$elem}">
+   <xsl:if test="string-length($style)">
+    <xsl:attribute name="style">
+     <xsl:value-of select="$style"/>
+    </xsl:attribute>
+   </xsl:if>
+   <xsl:value-of select="$field/tc:prop[@name = concat('column', $index)]"/>
+  </xsl:element>
+
+  <xsl:call-template name="columnTitle">
+   <xsl:with-param name="index" select="$index + 1"/>
+   <xsl:with-param name="max" select="$max"/>
+   <xsl:with-param name="elem" select="$elem"/>
+   <xsl:with-param name="style" select="$style"/>
+   <xsl:with-param name="field" select="$field"/>
+  </xsl:call-template>
+ </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>

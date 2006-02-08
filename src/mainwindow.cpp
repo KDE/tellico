@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -47,6 +47,9 @@
 #include "tellico_utils.h"
 #include "tellico_debug.h"
 #include "entryiconfactory.h"
+#include "statusbar.h"
+#include "fetch/fetchmanager.h"
+#include "cite/actionmanager.h"
 
 // needed for fifo to lyx
 #include <sys/types.h>
@@ -59,13 +62,11 @@
 #include <kfiledialog.h>
 #include <kmenubar.h>
 #include <ktoolbar.h>
-#include <kprogress.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstdaction.h>
 #include <kwin.h>
 #include <kprogress.h>
-#include <kstatusbar.h>
 #include <kprinter.h>
 #include <khtmlview.h>
 #include <kglobal.h>
@@ -87,14 +88,10 @@
 #include <qwhatsthis.h>
 #include <qvbox.h>
 
-//#define UIFILE QString::fromLatin1("/home/robby/projects/tellico/src/tellicoui.rc")
-
 namespace {
   static const int MAIN_WINDOW_MIN_WIDTH = 600;
-  static const int ID_STATUS_MSG = 1;
-  static const int ID_STATUS_COUNT = 2;
   //static const int PRINTED_PAGE_OVERLAP = 0;
-  static const char* ready = I18N_NOOP("Ready.");
+  static const int MAX_IMAGES_WARN_PERFORMANCE = 200;
 }
 
 using Tellico::MainWindow;
@@ -102,7 +99,8 @@ using Tellico::MainWindow;
 MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainWindow(parent_, name_),
     DCOPInterface(),
     m_config(kapp->config()),
-    m_progress(0),
+    m_statusBar(0),
+    m_editDialog(0),
     m_groupView(0),
     m_filterView(0),
     m_loanView(0),
@@ -112,8 +110,6 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainW
     m_stringMacroDlg(0),
     m_fetchDlg(0),
     m_reportDlg(0),
-    m_currentStep(1),
-    m_maxSteps(2),
     m_queuedFilters(0),
     m_initialized(false),
     m_newDocument(true) {
@@ -122,6 +118,8 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainW
     kapp->dcopClient()->registerAs("tellico");
     kapp->dcopClient()->setDefaultObject(objId());
   }
+
+  m_actions.setAutoDelete(true); // these are the fetcher actions
 
   // a little bit of paranoia
   // I use KRun a lot and I don't want the user to be able to
@@ -160,6 +158,9 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainW
 }
 
 void MainWindow::slotInit() {
+  if(m_editDialog) {
+    return;
+  }
   m_editDialog = new EntryEditDialog(this, "editdialog");
   Controller::self()->addObserver(m_editDialog);
 
@@ -169,20 +170,13 @@ void MainWindow::slotInit() {
   slotToggleEntryEditor();
 
   initConnections();
+
+  // disable OOO menu item if library is not available
+  action("cite_openoffice")->setEnabled(Cite::ActionManager::isEnabled(Cite::CiteOpenOffice));
 }
 
 void MainWindow::initStatusBar() {
-  KStatusBar* sb = statusBar();
-  sb->insertItem(i18n(ready), ID_STATUS_MSG);
-  sb->setItemAlignment(ID_STATUS_MSG, Qt::AlignLeft | Qt::AlignVCenter);
-
-  sb->insertItem(QString(), ID_STATUS_COUNT, 0, true);
-  sb->setItemAlignment(ID_STATUS_COUNT, Qt::AlignLeft | Qt::AlignVCenter);
-
-  m_progress = new KProgress(100, sb);
-  m_progress->setFixedHeight(sb->minimumSizeHint().height());
-  sb->addWidget(m_progress);
-  m_progress->hide();
+  m_statusBar = new Tellico::StatusBar(this);
 }
 
 void MainWindow::initActions() {
@@ -195,7 +189,7 @@ void MainWindow::initActions() {
 
   KActionMenu* fileNewMenu = new KActionMenu(actionCollection(), "file_new_collection");
   fileNewMenu->setText(i18n("New"));
-//  fileNewMenu->setIconSet(BarIconSet(QString::fromLatin1("filenew"))); // doesn't work
+  fileNewMenu->setIconSet(BarIconSet(QString::fromLatin1("filenew"))); // doesn't work
   fileNewMenu->setIconSet(BarIcon(QString::fromLatin1("filenew")));
   fileNewMenu->setToolTip(i18n("Create a new collection"));
   fileNewMenu->setDelayed(false);
@@ -280,6 +274,14 @@ void MainWindow::initActions() {
   connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
   collectionMapper->setMapping(action, Data::Collection::Wine);
 
+  action = new KAction(actionCollection(), "new_file_catalog");
+  action->setText(i18n("New &File Catalog"));
+  action->setIconSet(UserIconSet(QString::fromLatin1("file")));
+  action->setToolTip(i18n("Create a new file catalog"));
+  fileNewMenu->insert(action);
+  connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
+  collectionMapper->setMapping(action, Data::Collection::File);
+
   action = new KAction(actionCollection(), "new_custom_collection");
   action->setText(i18n("New C&ustom Collection"));
   action->setIconSet(UserIconSet(QString::fromLatin1("filenew")));
@@ -297,10 +299,10 @@ void MainWindow::initActions() {
   m_fileOpenRecent->setToolTip(i18n("Open a recently used file"));
   m_fileSave = KStdAction::save(this, SLOT(slotFileSave()), actionCollection());
   m_fileSave->setToolTip(i18n("Save the document"));
-  m_fileSaveAs = KStdAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
-  m_fileSaveAs->setToolTip(i18n("Save the document as a different file..."));
-  m_filePrint = KStdAction::print(this, SLOT(slotFilePrint()), actionCollection());
-  m_filePrint->setToolTip(i18n("Print the contents of the document..."));
+  action = KStdAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
+  action->setToolTip(i18n("Save the document as a different file..."));
+  action = KStdAction::print(this, SLOT(slotFilePrint()), actionCollection());
+  action->setToolTip(i18n("Print the contents of the document..."));
   action = KStdAction::quit(this, SLOT(slotFileQuit()), actionCollection());
   action->setToolTip(i18n("Quit the application"));
 
@@ -310,65 +312,65 @@ void MainWindow::initActions() {
   connect(importMapper, SIGNAL(mapped(int)),
           this, SLOT(slotFileImport(int)));
 
-  m_fileImportMenu = new KActionMenu(actionCollection(), "file_import");
-  m_fileImportMenu->setText(i18n("&Import"));
-  m_fileImportMenu->setIconSet(BarIconSet(QString::fromLatin1("fileimport")));
-  m_fileImportMenu->setToolTip(i18n("Import collection data from other formats"));
-  m_fileImportMenu->setDelayed(false);
+  KActionMenu* importMenu = new KActionMenu(actionCollection(), "file_import");
+  importMenu->setText(i18n("&Import"));
+  importMenu->setIconSet(BarIconSet(QString::fromLatin1("fileimport")));
+  importMenu->setToolTip(i18n("Import collection data from other formats"));
+  importMenu->setDelayed(false);
 
   action = new KAction(actionCollection(), "file_import_tellico");
   action->setText(i18n("Import Tellico Data..."));
   action->setToolTip(i18n("Import another Tellico data file"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::TellicoXML);
 
   action = new KAction(actionCollection(), "file_import_csv");
   action->setText(i18n("Import CSV Data..."));
   action->setToolTip(i18n("Import a CSV file"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::CSV);
 
   action = new KAction(actionCollection(), "file_import_mods");
   action->setText(i18n("Import MODS Data..."));
   action->setToolTip(i18n("Import a MODS data file"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::MODS);
 
   action = new KAction(actionCollection(), "file_import_alexandria");
   action->setText(i18n("Import Alexandria Data..."));
   action->setToolTip(i18n("Import data from the Alexandria book collection manager"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Alexandria);
 
   action = new KAction(actionCollection(), "file_import_bibtex");
   action->setText(i18n("Import Bibtex Data..."));
   action->setToolTip(i18n("Import a bibtex bibliography file"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Bibtex);
 
   action = new KAction(actionCollection(), "file_import_bibtexml");
   action->setText(i18n("Import Bibtexml Data..."));
   action->setToolTip(i18n("Import a Bibtexml bibliography file"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Bibtexml);
 
   action = new KAction(actionCollection(), "file_import_ris");
   action->setText(i18n("Import RIS Data..."));
   action->setToolTip(i18n("Import an RIS reference file"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::RIS);
 
   action = new KAction(actionCollection(), "file_import_audiofile");
   action->setText(i18n("Import Audio File Metadata..."));
   action->setToolTip(i18n("Import meta-data from audio files"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::AudioFile);
 #if !HAVE_TAGLIB
@@ -377,18 +379,32 @@ void MainWindow::initActions() {
 
   action = new KAction(actionCollection(), "file_import_freedb");
   action->setText(i18n("Import Audio CD Data..."));
-  action->setToolTip(i18n("Import audio CD information from FreeDB"));
-  m_fileImportMenu->insert(action);
+  action->setToolTip(i18n("Import audio CD information"));
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::FreeDB);
 #if !HAVE_KCDDB
   action->setEnabled(false);
 #endif
 
+  action = new KAction(actionCollection(), "file_import_gcfilms");
+  action->setText(i18n("Import GCfilms Data..."));
+  action->setToolTip(i18n("Import a GCfilms data file"));
+  importMenu->insert(action);
+  connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
+  importMapper->setMapping(action, Import::GCfilms);
+
+  action = new KAction(actionCollection(), "file_import_filelisting");
+  action->setText(i18n("Import File Listing..."));
+  action->setToolTip(i18n("Import information about files in a folder"));
+  importMenu->insert(action);
+  connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
+  importMapper->setMapping(action, Import::FileListing);
+
   action = new KAction(actionCollection(), "file_import_xslt");
   action->setText(i18n("Import XSL Transform..."));
   action->setToolTip(i18n("Import using an XSL Transform"));
-  m_fileImportMenu->insert(action);
+  importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::XSLT);
 
@@ -398,72 +414,86 @@ void MainWindow::initActions() {
   connect(exportMapper, SIGNAL(mapped(int)),
           this, SLOT(slotFileExport(int)));
 
-  m_fileExportMenu = new KActionMenu(actionCollection(), "file_export");
-  m_fileExportMenu->setText(i18n("&Export"));
-  m_fileExportMenu->setIconSet(BarIconSet(QString::fromLatin1("fileexport")));
-  m_fileExportMenu->setToolTip(i18n("Export the collection data to other formats"));
-  m_fileExportMenu->setDelayed(false);
+  KActionMenu* exportMenu = new KActionMenu(actionCollection(), "file_export");
+  exportMenu->setText(i18n("&Export"));
+  exportMenu->setIconSet(BarIconSet(QString::fromLatin1("fileexport")));
+  exportMenu->setToolTip(i18n("Export the collection data to other formats"));
+  exportMenu->setDelayed(false);
 
   action = new KAction(actionCollection(), "file_export_xml");
   action->setText(i18n("Export to XML..."));
   action->setToolTip(i18n("Export to a Tellico XML file"));
-  m_fileExportMenu->insert(action);
+  exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::TellicoXML);
+
+  action = new KAction(actionCollection(), "file_export_zip");
+  action->setText(i18n("Export to Zip..."));
+  action->setToolTip(i18n("Export to a Tellico Zip file"));
+  exportMenu->insert(action);
+  connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
+  exportMapper->setMapping(action, Export::TellicoZip);
 
   action = new KAction(actionCollection(), "file_export_html");
   action->setText(i18n("Export to HTML..."));
   action->setToolTip(i18n("Export to an HTML file"));
-  m_fileExportMenu->insert(action);
+  exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::HTML);
 
   action = new KAction(actionCollection(), "file_export_csv");
   action->setText(i18n("Export to CSV..."));
   action->setToolTip(i18n("Export to a comma-separated values file"));
-  m_fileExportMenu->insert(action);
+  exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::CSV);
 
   action = new KAction(actionCollection(), "file_export_pilotdb");
   action->setText(i18n("Export to PilotDB..."));
   action->setToolTip(i18n("Export to a PilotDB database"));
-  m_fileExportMenu->insert(action);
+  exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::PilotDB);
 
-  m_exportAlex = new KAction(actionCollection(), "file_export_alexandria");
-  m_exportAlex->setText(i18n("Export to Alexandria..."));
-  m_exportAlex->setToolTip(i18n("Export to an Alexandria library"));
-  m_fileExportMenu->insert(m_exportAlex);
-  connect(m_exportAlex, SIGNAL(activated()), exportMapper, SLOT(map()));
-  exportMapper->setMapping(m_exportAlex, Export::Alexandria);
+  action = new KAction(actionCollection(), "file_export_alexandria");
+  action->setText(i18n("Export to Alexandria..."));
+  action->setToolTip(i18n("Export to an Alexandria library"));
+  exportMenu->insert(action);
+  connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
+  exportMapper->setMapping(action, Export::Alexandria);
 
-  m_exportBibtex = new KAction(actionCollection(), "file_export_bibtex");
-  m_exportBibtex->setText(i18n("Export to Bibtex..."));
-  m_exportBibtex->setToolTip(i18n("Export to a bibtex file"));
-  m_fileExportMenu->insert(m_exportBibtex);
-  connect(m_exportBibtex, SIGNAL(activated()), exportMapper, SLOT(map()));
-  exportMapper->setMapping(m_exportBibtex, Export::Bibtex);
+  action = new KAction(actionCollection(), "file_export_bibtex");
+  action->setText(i18n("Export to Bibtex..."));
+  action->setToolTip(i18n("Export to a bibtex file"));
+  exportMenu->insert(action);
+  connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
+  exportMapper->setMapping(action, Export::Bibtex);
 
-  m_exportBibtexml = new KAction(actionCollection(), "file_export_bibtexml");
-  m_exportBibtexml->setText(i18n("Export to Bibtexml..."));
-  m_exportBibtexml->setToolTip(i18n("Export to a Bibtexml file"));
-  m_fileExportMenu->insert(m_exportBibtexml);
-  connect(m_exportBibtexml, SIGNAL(activated()), exportMapper, SLOT(map()));
-  exportMapper->setMapping(m_exportBibtexml, Export::Bibtexml);
+  action = new KAction(actionCollection(), "file_export_bibtexml");
+  action->setText(i18n("Export to Bibtexml..."));
+  action->setToolTip(i18n("Export to a Bibtexml file"));
+  exportMenu->insert(action);
+  connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
+  exportMapper->setMapping(action, Export::Bibtexml);
 
-  m_exportONIX = new KAction(actionCollection(), "file_export_onix");
-  m_exportONIX->setText(i18n("Export to ONIX..."));
-  m_exportONIX->setToolTip(i18n("Export to an ONIX file"));
-  m_fileExportMenu->insert(m_exportONIX);
-  connect(m_exportONIX, SIGNAL(activated()), exportMapper, SLOT(map()));
-  exportMapper->setMapping(m_exportONIX, Export::ONIX);
+  action = new KAction(actionCollection(), "file_export_onix");
+  action->setText(i18n("Export to ONIX..."));
+  action->setToolTip(i18n("Export to an ONIX file"));
+  exportMenu->insert(action);
+  connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
+  exportMapper->setMapping(action, Export::ONIX);
+
+  action = new KAction(actionCollection(), "file_export_gcfilms");
+  action->setText(i18n("Export to GCfilms..."));
+  action->setToolTip(i18n("Export to a GCfilms data file"));
+  exportMenu->insert(action);
+  connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
+  exportMapper->setMapping(action, Export::GCfilms);
 
   action = new KAction(actionCollection(), "file_export_xslt");
   action->setText(i18n("Export XSL Transform..."));
   action->setToolTip(i18n("Export using an XSL Transform"));
-  m_fileExportMenu->insert(action);
+  exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::XSLT);
 
@@ -478,13 +508,7 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Paste the clipboard contents"));
   action = KStdAction::selectAll(this, SLOT(slotEditSelectAll()), actionCollection());
   action->setToolTip(i18n("Select all the entries in the collection"));
-  // KDE 3.1.x didn't include the action in the standard ui.rc
-  // in order not to have duplicate menu items in KDE 3.2.x, need a different name
-#if KDE_IS_VERSION(3,1,90)
   action = KStdAction::deselect(this, SLOT(slotEditDeselect()), actionCollection());
-#else
-  action = KStdAction::deselect(this, SLOT(slotEditDeselect()), actionCollection(), "my_edit_deselect");
-#endif
   action->setToolTip(i18n("Deselect all the entries in the collection"));
 
   action = new KAction(i18n("Internet Search..."), QString::fromLatin1("wizard"), CTRL + Key_M,
@@ -512,10 +536,10 @@ void MainWindow::initActions() {
                               actionCollection(), "coll_delete_entry");
   m_deleteEntry->setToolTip(i18n("Delete the selected entries"));
 
-  m_collReports = new KAction(i18n("&Generate Reports..."), QString::fromLatin1("document"), 0, this,
-                              SLOT(slotShowReportDialog()),
-                              actionCollection(), "coll_reports");
-  m_collReports->setToolTip(i18n("Generate collection reports"));
+  action = new KAction(i18n("&Generate Reports..."), QString::fromLatin1("document"), 0, this,
+                       SLOT(slotShowReportDialog()),
+                       actionCollection(), "coll_reports");
+  action->setToolTip(i18n("Generate collection reports"));
   m_checkOutEntry = new KAction(i18n("Check-&out..."), QString::fromLatin1("2uparrow"), 0,
                                 Controller::self(),  SLOT(slotCheckOut()),
                                 actionCollection(), "coll_checkout");
@@ -533,30 +557,57 @@ void MainWindow::initActions() {
                        this, SLOT(slotShowCollectionFieldsDialog()),
                        actionCollection(), "coll_fields");
   action->setToolTip(i18n("Modify the collection fields"));
-  m_convertBibtex = new KAction(i18n("Convert to &Bibliography"), 0,
-                                this, SLOT(slotConvertToBibliography()),
-                                actionCollection(), "coll_convert_bibliography");
-  m_convertBibtex->setToolTip(i18n("Convert a book collection to a bibliography"));
-  m_stringMacros = new KAction(i18n("String &Macros..."), 0,
-                               this, SLOT(slotShowStringMacroDialog()),
-                               actionCollection(), "coll_string_macros");
-  m_stringMacros->setToolTip(i18n("Edit the bibtex string macros"));
-  m_citeEntry = new KAction(i18n("C&ite Entry"), 0,
-                            this, SLOT(slotCiteEntry()),
-                            actionCollection(), "coll_cite_entry");
-  m_citeEntry->setToolTip(i18n("Cite the selected entries in LyX"));
+  action = new KAction(i18n("Convert to &Bibliography"), 0,
+                       this, SLOT(slotConvertToBibliography()),
+                       actionCollection(), "coll_convert_bibliography");
+  action->setToolTip(i18n("Convert a book collection to a bibliography"));
+  action = new KAction(i18n("String &Macros..."), 0,
+                       this, SLOT(slotShowStringMacroDialog()),
+                       actionCollection(), "coll_string_macros");
+  action->setToolTip(i18n("Edit the bibtex string macros"));
+
+  QSignalMapper* citeMapper = new QSignalMapper(this);
+  connect(citeMapper, SIGNAL(mapped(int)),
+          this, SLOT(slotCiteEntry(int)));
+
+  action = new KAction(actionCollection(), "cite_clipboard");
+  action->setText(i18n("Copy Bibtex to Cli&pboard"));
+  action->setToolTip(i18n("Copy bibtex citations to the clipboard"));
+  connect(action, SIGNAL(activated()), citeMapper, SLOT(map()));
+  citeMapper->setMapping(action, Cite::CiteClipboard);
+
+  action = new KAction(actionCollection(), "cite_lyxpipe");
+  action->setText(i18n("Cite Entry in &LyX"));
+  action->setToolTip(i18n("Cite the selected entries in LyX"));
+  connect(action, SIGNAL(activated()), citeMapper, SLOT(map()));
+  citeMapper->setMapping(action, Cite::CiteLyxpipe);
+
+  action = new KAction(actionCollection(), "cite_openoffice");
+  action->setText(i18n("Ci&te Entry in OpenOffice.org"));
+  action->setToolTip(i18n("Cite the selected entries in OpenOffice.org"));
+  connect(action, SIGNAL(activated()), citeMapper, SLOT(map()));
+  citeMapper->setMapping(action, Cite::CiteOpenOffice);
+
+  QSignalMapper* updateMapper = new QSignalMapper(this, "update_mapper");
+  connect(updateMapper, SIGNAL(mapped(const QString&)),
+          Controller::self(), SLOT(slotUpdateSelectedEntries(const QString&)));
+
+  m_updateEntryMenu = new KActionMenu(i18n("&Update Entry"), actionCollection(), "coll_update_entry");
+//  m_updateEntryMenu->setIconSet(BarIconSet(QString::fromLatin1("fileexport")));
+  m_updateEntryMenu->setDelayed(false);
+
+  action = new KAction(actionCollection(), "update_entry_all");
+  action->setText(i18n("All Sources"));
+  action->setToolTip(i18n("Update entry data from all available sources"));
+//  m_updateEntryMenu->insert(action);
+  connect(action, SIGNAL(activated()), updateMapper, SLOT(map()));
+  updateMapper->setMapping(action, QString::fromLatin1("_all"));
 
   /*************************************************
    * Settings menu
    *************************************************/
   setStandardToolBarMenuEnabled(true);
-#if KDE_IS_VERSION(3,1,90)
   createStandardStatusBarAction();
-#else
-  m_toggleStatusBar = KStdAction::showStatusbar(this, SLOT(slotToggleStatusBar()),
-                                                actionCollection());
-  m_toggleStatusBar->setToolTip(i18n("Enable/disable the statusbar"));
-#endif
   KStdAction::configureToolbars(this, SLOT(slotConfigToolbar()), actionCollection());
   KStdAction::keyBindings(this, SLOT(slotConfigKeys()), actionCollection());
   m_toggleGroupWidget = new KToggleAction(i18n("Show Grou&p View"), 0,
@@ -634,9 +685,9 @@ void MainWindow::initActions() {
 
 #ifdef UIFILE
   kdWarning() << "MainWindow::initActions() - change createGUI() call!" << endl;
-  createGUI(UIFILE);
+  createGUI(UIFILE, false);
 #else
-  createGUI();
+  createGUI(QString::null, false);
 #endif
 }
 
@@ -653,9 +704,9 @@ void MainWindow::initDocument() {
   // do stuff that changes when the doc is modified
   connect(doc, SIGNAL(signalModified(bool)),
           SLOT(slotEnableModifiedActions(bool)));
-  connect(doc, SIGNAL(signalFractionDone(float)),
-          SLOT(slotUpdateFractionDone(float)));
 
+  connect(Kernel::self()->commandHistory(), SIGNAL(commandExecuted()),
+          doc, SLOT(slotSetModified()));
   connect(Kernel::self()->commandHistory(), SIGNAL(documentRestored()),
           doc, SLOT(slotDocumentRestored()));
 }
@@ -690,17 +741,13 @@ void MainWindow::initConnections() {
   connect(m_editDialog, SIGNAL(finished()),
           this, SLOT(slotEditDialogFinished()));
 
-  // since the detailed view can take a while to populate,
-  // it gets a progress monitor, too
-  connect(m_detailedView, SIGNAL(signalFractionDone(float)),
-          SLOT(slotUpdateFractionDone(float)));
-
   // let the group view call filters, too
   connect(m_groupView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
           Controller::self(), SLOT(slotUpdateFilter(Tellico::FilterPtr)));
 }
 
 void MainWindow::initFileOpen(bool nofile_) {
+  slotInit();
   // check to see if most recent file should be opened
   bool happyStart = false;
   KConfigGroupSaver saver(m_config, "General Options");
@@ -739,9 +786,6 @@ void MainWindow::saveOptions() {
   saveMainWindowSettings(m_config, QString::fromLatin1("Main Window Options"));
 
   m_config->setGroup("General Options");
-#if !KDE_IS_VERSION(3,1,90)
-  m_config->writeEntry("Show Statusbar", m_toggleStatusBar->isChecked());
-#endif
   m_config->writeEntry("Show Group Widget", m_toggleGroupWidget->isChecked());
   m_config->writeEntry("Show Edit Widget", m_toggleEntryEditor->isChecked());
   m_config->writeEntry("Show Entry View", m_toggleEntryView->isChecked());
@@ -775,8 +819,8 @@ void MainWindow::saveOptions() {
   saveCollectionOptions(Data::Document::self()->collection());
 }
 
-void MainWindow::readCollectionOptions(Data::Collection* coll_) {
-  m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->entryName()));
+void MainWindow::readCollectionOptions(Data::CollPtr coll_) {
+  m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
 
   QString defaultGroup = coll_->defaultGroupField();
   QString entryGroup = m_config->readEntry("Group By", defaultGroup);
@@ -795,13 +839,13 @@ void MainWindow::readCollectionOptions(Data::Collection* coll_) {
   slotUpdateCollectionToolBar(coll_);
 }
 
-void MainWindow::saveCollectionOptions(Data::Collection* coll_) {
+void MainWindow::saveCollectionOptions(Data::CollPtr coll_) {
   // don't save initial collection options, or empty collections
   if(!coll_ || coll_->entryCount() == 0 || isNewDocument()) {
     return;
   }
 
-  m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->entryName()));
+  m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
   if(m_entryGrouping->currentItem() > -1 &&
      static_cast<int>(coll_->entryGroups().count()) > m_entryGrouping->currentItem()) {
     QString groupName = coll_->entryGroups()[m_entryGrouping->currentItem()];
@@ -836,16 +880,13 @@ void MainWindow::readOptions() {
 
   m_config->setGroup("General Options");
 
-  unsigned iconSize = m_config->readUnsignedNumEntry("Max Icon Size", 96);
-  m_viewStack->iconView()->setMaxIconWidth(iconSize);
+  uint iconSize = m_config->readUnsignedNumEntry("Max Icon Size", 96);
+  m_viewStack->iconView()->setMaxAllowedIconWidth(iconSize);
+
+  bool bWriteImagesInFile = m_config->readBoolEntry("Write Images In File", true);
+  Kernel::self()->setWriteImagesInFile(bWriteImagesInFile);
 
   connect(toolBar("collectionToolBar"), SIGNAL(modechange()), SLOT(slotUpdateToolbarIcons()));
-
-#if !KDE_IS_VERSION(3,1,90)
-  bool bViewStatusBar = m_config->readBoolEntry("Show Statusbar", true);
-  m_toggleStatusBar->setChecked(bViewStatusBar);
-  slotToggleStatusBar();
-#endif
 
   bool bViewGroupWidget = m_config->readBoolEntry("Show Group Widget", true);
   m_toggleGroupWidget->setChecked(bViewGroupWidget);
@@ -860,6 +901,14 @@ void MainWindow::readOptions() {
 
   bool autoCapitals = m_config->readBoolEntry("Auto Capitalization", true);
   Data::Field::setAutoCapitalize(autoCapitals);
+
+  QStringList noCaps;
+  if(m_config->hasKey("No Capitalization")) {
+    noCaps = m_config->readListEntry("No Capitalization", ',');
+  } else {
+    noCaps = Data::Field::defaultNoCapitalizationList();
+  }
+  Data::Field::setNoCapitalizeList(noCaps);
 
   bool autoFormat = m_config->readBoolEntry("Auto Format", true);
   Data::Field::setAutoFormat(autoFormat);
@@ -956,12 +1005,10 @@ void MainWindow::readProperties(KConfig* cfg_) {
 }
 
 bool MainWindow::queryClose() {
-//  kdDebug() << "MainWindow::queryClose()" << endl;
   return m_editDialog->queryModified() && Data::Document::self()->saveModified();
 }
 
 bool MainWindow::queryExit() {
-//  kdDebug() << "MainWindow::queryExit()" << endl;
   ImageFactory::clean();
   saveOptions();
   return true;
@@ -995,7 +1042,7 @@ void MainWindow::slotFileNew(int type_) {
     m_newDocument = true;
   }
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
 }
 
 void MainWindow::slotFileOpen() {
@@ -1014,7 +1061,8 @@ void MainWindow::slotFileOpen() {
       slotFileOpen(url);
     }
   }
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
 }
 
 void MainWindow::slotFileOpen(const KURL& url_) {
@@ -1023,14 +1071,17 @@ void MainWindow::slotFileOpen(const KURL& url_) {
   // close the fields dialog
   slotHideCollectionFieldsDialog();
 
-  if(m_editDialog->queryModified() && Data::Document::self()->saveModified()) {
+  // there seems' to be a race condition at start between slotInit() and initFileOpen()
+  // which means the edit dialog might not have been created yet
+  if((!m_editDialog || m_editDialog->queryModified()) && Data::Document::self()->saveModified()) {
     if(openURL(url_)) {
       m_fileOpenRecent->addURL(url_);
       m_fileOpenRecent->setCurrentItem(-1);
     }
   }
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
 }
 
 void MainWindow::slotFileOpenRecent(const KURL& url_) {
@@ -1049,7 +1100,8 @@ void MainWindow::slotFileOpenRecent(const KURL& url_) {
     m_fileOpenRecent->setCurrentItem(-1);
   }
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
 }
 
 bool MainWindow::openURL(const KURL& url_) {
@@ -1113,17 +1165,42 @@ bool MainWindow::fileSave() {
   if(isNewDocument()) {
     ret = fileSaveAs();
   } else {
+    // special check: if there are more than 100 images AND the "Write Images In File" config key
+    // is not set, then warn user that performance may suffer, and write result
+    {
+      KConfigGroupSaver saver(kapp->config(), "General Options");
+      if(!kapp->config()->hasKey("Write Images In File")
+         && Data::Document::self()->imageCount() > MAX_IMAGES_WARN_PERFORMANCE) {
+        QString msg = i18n("<qt><p>You are saving a file with many images, which causes Tellico to "
+                           "slow down significantly. Do you want to save the images separately in "
+                           "Tellico's data directory to improve performance?</p><p>Your choice can "
+                           "always be changed in the configuration dialog.</p></qt>");
+
+        KGuiItem yes = KStdGuiItem::yes();
+        yes.setText(i18n("Save Images Separately"));
+
+        KGuiItem no = KStdGuiItem::no();
+        no.setText(i18n("Save Images in File"));
+
+        int res = KMessageBox::warningYesNo(this, msg, QString::null /* caption */, yes, no);
+        kapp->config()->writeEntry("Write Images In File", res == KMessageBox::No);
+        Kernel::self()->setWriteImagesInFile(res == KMessageBox::No);
+      }
+    }
+
     GUI::CursorSaver cs(Qt::waitCursor);
     if(Data::Document::self()->saveDocument(Data::Document::self()->URL())) {
       m_newDocument = false;
       updateCaption(false);
       m_fileSave->setEnabled(false);
+      m_detailedView->resetEntryStatus();
     } else {
       ret = false;
     }
   }
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
   return ret;
 }
 
@@ -1149,21 +1226,13 @@ bool MainWindow::fileSaveAs() {
 
   int result = dlg.exec();
   if(result == QDialog::Rejected) {
-    slotStatusMsg(i18n(ready));
+    StatusBar::self()->clearStatus();
+
     return false;
   }
 
-  KURL url = dlg.selectedURL();
-
-  if(url.fileName().contains('.') == 0) {
-    QString cf = dlg.currentFilter();
-    if(cf.length() > 1 && cf[1] == '.') {
-      url.setFileName(url.fileName() + cf.mid(1));
-    }
-  }
-
   bool ret = true;
-
+  KURL url = dlg.selectedURL();
   if(!url.isEmpty() && url.isValid()) {
     GUI::CursorSaver cs(Qt::waitCursor);
     if(Data::Document::self()->saveDocument(url)) {
@@ -1172,19 +1241,21 @@ bool MainWindow::fileSaveAs() {
       updateCaption(false);
       m_newDocument = false;
       m_fileSave->setEnabled(false);
+      m_detailedView->resetEntryStatus();
     } else {
       ret = false;
     }
   }
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
   return ret;
 }
 
 void MainWindow::slotFilePrint() {
   slotStatusMsg(i18n("Printing..."));
 
-  m_config->setGroup(QString::fromLatin1("Printing"));
+  m_config->setGroup("Printing");
   bool printGrouped = m_config->readBoolEntry("Print Grouped", true);
   bool printHeaders = m_config->readBoolEntry("Print Field Headers", false);
   int imageWidth = m_config->readNumEntry("Max Image Width", 50);
@@ -1197,7 +1268,8 @@ void MainWindow::slotFilePrint() {
     int ret = KMessageBox::warningContinueCancel(this, str, QString::null, KStdGuiItem::print(),
                                                  QString::fromLatin1("WarnPrintVisible"));
     if(ret == KMessageBox::Cancel) {
-      slotStatusMsg(i18n(ready));
+      StatusBar::self()->clearStatus();
+
       return;
     }
   }
@@ -1226,7 +1298,8 @@ void MainWindow::slotFilePrint() {
   QString html = exporter.text();
   if(html.isEmpty()) {
     XSLTError();
-    slotStatusMsg(i18n(ready));
+    StatusBar::self()->clearStatus();
+
     return;
   }
 
@@ -1236,7 +1309,8 @@ void MainWindow::slotFilePrint() {
   slotStatusMsg(i18n("Printing..."));
   doPrint(html);
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
 }
 
 void MainWindow::slotFileQuit() {
@@ -1246,23 +1320,24 @@ void MainWindow::slotFileQuit() {
   //saveOptions();
   close();
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
 }
 
 void MainWindow::slotEditCut() {
-  activateEditWidgetSlot(SLOT(cut()));
+  activateEditSlot(SLOT(cut()));
 }
 
 void MainWindow::slotEditCopy() {
-  activateEditWidgetSlot(SLOT(copy()));
+  activateEditSlot(SLOT(copy()));
 }
 
 void MainWindow::slotEditPaste() {
-  activateEditWidgetSlot(SLOT(paste()));
+  activateEditSlot(SLOT(paste()));
 }
 
-void MainWindow::activateEditWidgetSlot(const char* slot_) {
-//  kdDebug() << "MainWindow::slotEditPaste() - " << slot_ << endl;
+void MainWindow::activateEditSlot(const char* slot_) {
+//  kdDebug() << "MainWindow::activateEditSlot() - " << slot_ << endl;
   // the edit widget is the only one that copies, cuts, and pastes
   QWidget* w;
   if(m_editDialog->isVisible()) {
@@ -1272,14 +1347,11 @@ void MainWindow::activateEditWidgetSlot(const char* slot_) {
   }
 
   if(w && w->isVisible()) {
-//    kdDebug() << "MainWindow::slotEditPaste() - using a " << w->className() << endl;
-    QStrList slotNames = w->metaObject()->slotNames(true);
-    // The SLOT macro adds a '1' in front of the slot name
-    // which is not present in the slotNames list, so ignore first char
-    if(slotNames.contains(slot_+sizeof(char))) {
-      QSignal signal;
-      signal.connect(w, slot_);
-      signal.activate();
+    QMetaObject* meta = w->metaObject();
+
+    int idx = meta->findSlot(slot_ + 1, true);
+    if(idx > -1) {
+      w->qt_invoke(idx, 0);
     }
   }
 }
@@ -1306,22 +1378,14 @@ void MainWindow::slotConfigToolbar() {
 void MainWindow::slotNewToolbarConfig() {
   applyMainWindowSettings(m_config, QString::fromLatin1("Main Window Options"));
 #ifdef UIFILE
-  createGUI(UIFILE);
+  createGUI(UIFILE, false);
 #else
-  createGUI();
+  createGUI(QString::null, false);
 #endif
 }
 
 void MainWindow::slotConfigKeys() {
   KKeyDialog::configure(actionCollection());
-}
-
-void MainWindow::slotToggleStatusBar() {
-  if(m_toggleStatusBar->isChecked()) {
-    statusBar()->show();
-  } else {
-    statusBar()->hide();
-  }
 }
 
 void MainWindow::slotToggleGroupWidget() {
@@ -1357,11 +1421,7 @@ void MainWindow::slotShowConfigDialog() {
     connect(m_configDlg, SIGNAL(finished()),
             SLOT(slotHideConfigDialog()));
   } else {
-#if KDE_IS_VERSION(3,1,90)
     KWin::activateWindow(m_configDlg->winId());
-#else
-    KWin::setActiveWindow(m_configDlg->winId());
-#endif
   }
   m_configDlg->show();
 }
@@ -1379,46 +1439,38 @@ void MainWindow::slotShowTipOfDay(bool force_/*=true*/) {
 }
 
 void MainWindow::slotStatusMsg(const QString& text_) {
-  statusBar()->clear();
-  if(text_.isEmpty()) {
-    return;
-  }
-  // add a space at the beginning and end for asthetic reasons
-  statusBar()->changeItem(QChar(' ')+text_+QChar(' '), ID_STATUS_MSG);
-  kapp->processEvents();
+  m_statusBar->setStatus(text_);
 }
 
 void MainWindow::slotClearStatus() {
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
 }
 
 void MainWindow::slotEntryCount() {
-  Data::Collection* coll = Data::Document::self()->collection();
+  Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
     return;
   }
 
   int count = coll->entryCount();
   QString text = i18n("Total entries: %1").arg(count);
-  // I add a space before and after for asthetic reasons
-  text.prepend(QChar(' '));
-  text.append(QChar(' '));
 
   int selectCount = Controller::self()->selectedEntries().count();
   int filterCount = m_detailedView->visibleItems();
   // if more than one book is selected, add the number of selected books
   if(filterCount < count && selectCount > 1) {
+    text += QChar(' ');
     text += i18n("(%1 filtered; %2 selected)").arg(filterCount).arg(selectCount);
-    text += QChar(' ');
   } else if(filterCount < count) {
+    text += QChar(' ');
     text += i18n("(%1 filtered)").arg(filterCount);
-    text += QChar(' ');
   } else if(selectCount > 1) {
-    text += i18n("(%1 selected)").arg(selectCount);
     text += QChar(' ');
+    text += i18n("(%1 selected)").arg(selectCount);
   }
 
-  statusBar()->changeItem(text, ID_STATUS_COUNT);
+  m_statusBar->setCount(text);
 }
 
 void MainWindow::slotEnableOpenedActions() {
@@ -1427,21 +1479,7 @@ void MainWindow::slotEnableOpenedActions() {
   // collapse all the groups (depth=1)
   m_groupView->slotCollapseAll(1);
 
-  m_fileSaveAs->setEnabled(true);
-  m_filePrint->setEnabled(true);
-  m_fileExportMenu->setEnabled(true);
-
-  if(Data::Document::self()->collection()) {
-    Data::Collection::Type type = Data::Document::self()->collection()->type();
-    bool isBibtex = (type == Data::Collection::Bibtex);
-    m_exportAlex->setEnabled(isBibtex || type == Data::Collection::Book);
-    m_exportONIX->setEnabled(isBibtex || type == Data::Collection::Book);
-    m_exportBibtex->setEnabled(isBibtex);
-    m_exportBibtexml->setEnabled(isBibtex);
-    m_convertBibtex->setEnabled(type == Data::Collection::Book);
-    m_stringMacros->setEnabled(isBibtex);
-    m_citeEntry->setEnabled(isBibtex);
-  }
+  updateCollectionActions();
 
   // close the filter dialog when a new collection is opened
   slotHideFilterDialog();
@@ -1450,37 +1488,8 @@ void MainWindow::slotEnableOpenedActions() {
 
 void MainWindow::slotEnableModifiedActions(bool modified_ /*= true*/) {
   updateCaption(modified_);
+  updateCollectionActions();
   m_fileSave->setEnabled(modified_);
-
-  // when a collection is replaced, slotEnableOpenedActions() doesn't get called automatically
-  if(Data::Document::self()->collection()) {
-    Data::Collection::Type type = Data::Document::self()->collection()->type();
-    bool isBibtex = (type == Data::Collection::Bibtex);
-    m_exportBibtex->setEnabled(isBibtex);
-    m_exportBibtexml->setEnabled(isBibtex);
-    m_convertBibtex->setEnabled(type == Data::Collection::Book);
-    m_stringMacros->setEnabled(isBibtex);
-    m_citeEntry->setEnabled(isBibtex);
-  }
-}
-
-void MainWindow::slotUpdateFractionDone(float f_) {
-//  kdDebug() << "MainWindow::slotUpdateFractionDone() - " << f_ << endl;
-  // first check bounds
-  f_ = (f_ < 0.0) ? 0.0 : ((f_ > 1.0) ? 1.0 : f_);
-
-  if(m_currentStep == m_maxSteps && f_ == 1.0) {
-    m_progress->hide();
-    return;
-  }
-
-  if(!m_progress->isVisible()) {
-    m_progress->show();
-  }
-//  float progress = (m_currentStep - 1 + f_)/static_cast<float>(m_maxSteps) * 100.0;
-//  kdDebug() << "MainWindow::slotUpdateFractionDone() - " << progress << endl;
-  m_progress->setValue(static_cast<int>((m_currentStep -1 + f_)/static_cast<float>(m_maxSteps) * 100.0));
-  kapp->processEvents();
 }
 
 void MainWindow::slotHandleConfigChange() {
@@ -1492,17 +1501,24 @@ void MainWindow::slotHandleConfigChange() {
 
   const bool autoCapitalize = Data::Field::autoCapitalize();
   const bool autoFormat = Data::Field::autoFormat();
+  QStringList articles = Data::Field::articleList();
+  QStringList nocaps = Data::Field::noCapitalizeList();
+  QStringList suffixes = Data::Field::suffixList();
 
   m_configDlg->saveConfiguration(m_config);
 
-  if(autoCapitalize != Data::Field::autoCapitalize() || autoFormat != Data::Field::autoFormat()) {
+  if(autoCapitalize != Data::Field::autoCapitalize() ||
+     autoFormat != Data::Field::autoFormat() ||
+     articles != Data::Field::articleList() ||
+     nocaps != Data::Field::noCapitalizeList() ||
+     suffixes != Data::Field::suffixList()) {
     // invalidate all groups
     Data::Document::self()->collection()->invalidateGroups();
     // refreshing the title causes the group view to refresh
     Controller::self()->slotRefreshField(Data::Document::self()->collection()->fieldByName(QString::fromLatin1("title")));
   }
 
-  m_config->setGroup(QString::fromLatin1("Options - %1").arg(Data::Document::self()->collection()->entryName()));
+  m_config->setGroup(QString::fromLatin1("Options - %1").arg(Kernel::self()->collectionTypeName()));
   QString entryXSLTFile = m_config->readEntry("Entry Template", QString::fromLatin1("Fancy"));
   if(entryXSLTFile.isEmpty()) {
     entryXSLTFile = QString::fromLatin1("Fancy"); // should never happen, but just in case
@@ -1510,8 +1526,8 @@ void MainWindow::slotHandleConfigChange() {
   m_viewStack->entryView()->setXSLTFile(entryXSLTFile + QString::fromLatin1(".xsl"));
 }
 
-void MainWindow::slotUpdateCollectionToolBar(Data::Collection* coll_) {
-//  kdDebug() << "MainWindow::updateCollectionToolBar()" << endl;
+void MainWindow::slotUpdateCollectionToolBar(Data::CollPtr coll_) {
+//  myDebug() << "MainWindow::updateCollectionToolBar()" << endl;
 
   if(!coll_) {
     kdWarning() << "MainWindow::slotUpdateCollectionToolBar() - no collection pointer!" << endl;
@@ -1570,9 +1586,9 @@ void MainWindow::slotUpdateCollectionToolBar(Data::Collection* coll_) {
 
 void MainWindow::slotChangeGrouping() {
 //  kdDebug() << "MainWindow::slotChangeGrouping()" << endl;
-  unsigned idx = m_entryGrouping->currentItem();
+  uint idx = m_entryGrouping->currentItem();
 
-  Data::Collection* coll = Data::Document::self()->collection();
+  Data::CollPtr coll = Data::Document::self()->collection();
   QString groupName;
   if(idx < coll->entryGroups().count()) {
     groupName = coll->entryGroups()[idx];
@@ -1590,11 +1606,7 @@ void MainWindow::slotShowReportDialog() {
     connect(m_reportDlg, SIGNAL(finished()),
             SLOT(slotHideReportDialog()));
   } else {
-#if KDE_IS_VERSION(3,1,90)
     KWin::activateWindow(m_reportDlg->winId());
-#else
-    KWin::setActiveWindow(m_reportDlg->winId());
-#endif
   }
   m_reportDlg->show();
 }
@@ -1620,8 +1632,6 @@ void MainWindow::doPrint(const QString& html_) {
 // top and at the bottom. Even adding the overlap parameter, there were problems.
 // KHTMLView takes care of that with a truncatedAt() parameter, but that's hidden in
 // the khtml::render_root class. So for now, just use the KHTMLView::print() method.
-// in KDE 3.1, there's an added option for printing a header with the date, url, and
-// page number
 #if 1
   w.view()->print();
 #else
@@ -1705,11 +1715,7 @@ void MainWindow::slotShowFilterDialog() {
     connect(m_filterDlg, SIGNAL(finished()),
             SLOT(slotHideFilterDialog()));
   } else {
-#if KDE_IS_VERSION(3,1,90)
     KWin::activateWindow(m_filterDlg->winId());
-#else
-    KWin::setActiveWindow(m_filterDlg->winId());
-#endif
   }
   m_filterDlg->show();
 }
@@ -1734,7 +1740,7 @@ void MainWindow::slotUpdateFilter() {
     return;
   }
 
-  Filter* filter = 0;
+  Filter::Ptr filter = 0;
 
   QString text = m_quickFilter->text().stripWhiteSpace();
   if(!text.isEmpty()) {
@@ -1764,11 +1770,7 @@ void MainWindow::slotShowCollectionFieldsDialog() {
     connect(m_collFieldsDlg, SIGNAL(finished()),
             SLOT(slotHideCollectionFieldsDialog()));
   } else {
-#if KDE_IS_VERSION(3,1,90)
     KWin::activateWindow(m_collFieldsDlg->winId());
-#else
-    KWin::setActiveWindow(m_collFieldsDlg->winId());
-#endif
   }
   m_collFieldsDlg->show();
 }
@@ -1789,14 +1791,14 @@ void MainWindow::slotFileImport(int format_) {
   KURL url;
   switch(ImportDialog::importTarget(format)) {
     case Import::File:
-      url = KFileDialog::getOpenURL(QString::fromLatin1(":import"), ImportDialog::fileFilter(format),
+      url = KFileDialog::getOpenURL(ImportDialog::startDir(format), ImportDialog::fileFilter(format),
                                     this, i18n("Import File"));
       break;
 
     case Import::Dir:
       // TODO: allow remote audiofile importing
-      url.setPath(KFileDialog::getExistingDirectory(QString::fromLatin1(":import"),
-                                                    this, i18n("Import File")));
+      url.setPath(KFileDialog::getExistingDirectory(ImportDialog::startDir(format),
+                                                    this, i18n("Import Directory")));
       break;
 
     case Import::None:
@@ -1807,21 +1809,17 @@ void MainWindow::slotFileImport(int format_) {
 
   if(checkURL) {
     bool ok = !url.isEmpty() && url.isValid();
-#if KDE_IS_VERSION(3,1,90)
     ok &= KIO::NetAccess::exists(url, true, this);
-#else
-    ok &= KIO::NetAccess::exists(url, true);
-#endif
     if(!ok) {
-      slotStatusMsg(i18n(ready));
+      StatusBar::self()->clearStatus();
       return;
     }
   }
 
   ImportDialog dlg(format, url, this, "importdlg");
-  connect(&dlg, SIGNAL(signalFractionDone(float)), SLOT(slotUpdateFractionDone(float)));
   if(dlg.exec() != QDialog::Accepted) {
-    slotStatusMsg(i18n(ready));
+    StatusBar::self()->clearStatus();
+
     return;
   }
 
@@ -1830,12 +1828,13 @@ void MainWindow::slotFileImport(int format_) {
   if(m_editDialog->queryModified() &&
      (dlg.action() != Import::Replace || Data::Document::self()->saveModified())) {
     GUI::CursorSaver cs(Qt::waitCursor);
-    Data::Collection* coll = dlg.collection();
+    Data::CollPtr coll = dlg.collection();
     if(!coll) {
       if(!dlg.statusMessage().isEmpty()) {
         Kernel::self()->sorry(dlg.statusMessage());
       }
-      slotStatusMsg(i18n(ready));
+      StatusBar::self()->clearStatus();
+
       return;
     }
 
@@ -1843,9 +1842,9 @@ void MainWindow::slotFileImport(int format_) {
       case Import::Append:
         {
           // only append if match, but special case importing books into bibliographies
-          const Data::Collection* c = Data::Document::self()->collection();
-          if(c->type() == coll->type()
-             || (c->type() == Data::Collection::Bibtex && coll->type() == Data::Collection::Book)) {
+          const Data::CollPtr currColl = Data::Document::self()->collection();
+          if(currColl->type() == coll->type()
+             || (currColl->type() == Data::Collection::Bibtex && coll->type() == Data::Collection::Book)) {
             Kernel::self()->appendCollection(coll);
             slotEnableModifiedActions(true);
           } else {
@@ -1858,9 +1857,9 @@ void MainWindow::slotFileImport(int format_) {
       case Import::Merge:
         {
           // only merge if match, but special case importing books into bibliographies
-          const Data::Collection* c = Data::Document::self()->collection();
-          if(c->type() == coll->type()
-             || (c->type() == Data::Collection::Bibtex && coll->type() == Data::Collection::Book)) {
+          const Data::CollPtr currColl = Data::Document::self()->collection();
+          if(currColl->type() == coll->type()
+             || (currColl->type() == Data::Collection::Bibtex && coll->type() == Data::Collection::Book)) {
             Kernel::self()->mergeCollection(coll);
             slotEnableModifiedActions(true);
           } else {
@@ -1882,11 +1881,10 @@ void MainWindow::slotFileImport(int format_) {
   if(failed) {
     // The progress bar is hidden by the Controller when a new collection is added
     // that doesn't happen here, so need to clear it
-    m_currentStep = m_maxSteps;
-    slotUpdateFractionDone(1.0);
-    m_currentStep = 1;
+//    slotUpdateFractionDone(1.0);
   }
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
 }
 
 void MainWindow::slotFileExport(int format_) {
@@ -1896,7 +1894,7 @@ void MainWindow::slotFileExport(int format_) {
   ExportDialog dlg(format, Data::Document::self()->collection(), this, "exportdialog");
 
   if(dlg.exec() == QDialog::Rejected) {
-    slotStatusMsg(i18n(ready));
+    StatusBar::self()->clearStatus();
     return;
   }
 
@@ -1916,21 +1914,13 @@ void MainWindow::slotFileExport(int format_) {
       fileDlg.setOperationMode(KFileDialog::Saving);
 
       if(fileDlg.exec() == QDialog::Rejected) {
-        slotStatusMsg(i18n(ready));
+        StatusBar::self()->clearStatus();
+
         return;
       }
 
       KURL url = fileDlg.selectedURL();
-
-      // if the file has no extension, add it automatically, based on the current filter
-      if(url.fileName().contains('.') == 0) {
-        QString cf = fileDlg.currentFilter();
-        if(cf.length() > 1 && cf[1] == '.') {
-          url.setFileName(url.fileName() + cf.mid(1));
-        }
-      }
-
-      if(!url.isEmpty()) {
+      if(!url.isEmpty() && url.isValid()) {
         GUI::CursorSaver cs(Qt::waitCursor);
         dlg.exportURL(url);
       }
@@ -1938,7 +1928,7 @@ void MainWindow::slotFileExport(int format_) {
     break;
   }
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
 }
 
 void MainWindow::slotShowStringMacroDialog() {
@@ -1947,18 +1937,14 @@ void MainWindow::slotShowStringMacroDialog() {
   }
 
   if(!m_stringMacroDlg) {
-    const Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(Data::Document::self()->collection());
+    const Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data());
     m_stringMacroDlg = new StringMapDialog(c->macroList(), this, "StringMacroDialog", false);
     m_stringMacroDlg->setCaption(i18n("String Macros"));
     m_stringMacroDlg->setLabels(i18n("Macro"), i18n("String"));
     connect(m_stringMacroDlg, SIGNAL(finished()), SLOT(slotHideStringMacroDialog()));
     connect(m_stringMacroDlg, SIGNAL(okClicked()), SLOT(slotStringMacroDialogOk()));
   } else {
-#if KDE_IS_VERSION(3,1,90)
     KWin::activateWindow(m_stringMacroDlg->winId());
-#else
-    KWin::setActiveWindow(m_stringMacroDlg->winId());
-#endif
   }
   m_stringMacroDlg->show();
 }
@@ -1973,7 +1959,7 @@ void MainWindow::slotHideStringMacroDialog() {
 void MainWindow::slotStringMacroDialogOk() {
   // no point in checking if collection is bibtex, as dialog would never have been created
   if(m_stringMacroDlg) {
-    static_cast<Data::BibtexCollection*>(Data::Document::self()->collection())->setMacroList(m_stringMacroDlg->stringMap());
+    static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data())->setMacroList(m_stringMacroDlg->stringMap());
     Data::Document::self()->slotSetModified(true);
   }
 }
@@ -1992,58 +1978,37 @@ void MainWindow::slotShowEntryEditor() {
   m_toggleEntryEditor->setChecked(true);
   m_editDialog->show();
 
-#if KDE_IS_VERSION(3,1,90)
   KWin::activateWindow(m_editDialog->winId());
-#else
-  KWin::setActiveWindow(m_editDialog->winId());
-#endif
 }
 
 void MainWindow::slotConvertToBibliography() {
   // only book collections can be converted to bibtex
-  Data::Collection* coll = Data::Document::self()->collection();
+  Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll || coll->type() != Data::Collection::Book) {
     return;
   }
 
-  Data::Collection* newColl = Data::BibtexCollection::convertBookCollection(coll);
+  GUI::CursorSaver cs(Qt::waitCursor);
+
+  Data::CollPtr newColl = Data::BibtexCollection::convertBookCollection(coll);
   if(newColl) {
+    m_newDocument = true;
+    Kernel::self()->replaceCollection(newColl);
+    m_fileOpenRecent->setCurrentItem(-1);
+/*
     Data::Document::self()->replaceCollection(newColl);
     m_quickFilter->clear();
-    m_fileOpenRecent->setCurrentItem(-1);
-    m_newDocument = true;
     slotEnableOpenedActions();
-    slotEnableModifiedActions(false);
+    slotEnableModifiedActions(true);
+    updateEntrySources();
+*/
+  } else {
+    kdWarning() << "MainWindow::slotConvertToBibliography() - ERROR: no bibliography created!" << endl;
   }
 }
 
-void MainWindow::slotCiteEntry() {
-  Data::Collection* coll = Data::Document::self()->collection();
-  if(!coll || coll->type() != Data::Collection::Bibtex) {
-    return;
-  }
-
-  KConfigGroupSaver saver(m_config, QString::fromLatin1("Options - %1").arg(coll->entryName()));
-  QString lyxpipe = m_config->readPathEntry("lyxpipe", QString::fromLatin1("$HOME/.lyx/lyxpipe"));
-  lyxpipe += QString::fromLatin1(".in");
-//  kdDebug() << "MainWindow::slotCiteEntry() - " << lyxpipe << endl;
-
-  QString errorStr = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>").arg(lyxpipe);
-  QCString pipe = QFile::encodeName(lyxpipe);
-  if(!QFile::exists(pipe)) {
-    Kernel::self()->sorry(errorStr);
-    return;
-  }
-
-  int pipeFd = ::open(pipe, O_WRONLY);
-  QFile file(QString::fromUtf8(pipe));
-  if(file.open(IO_WriteOnly, pipeFd)) {
-    static_cast<Data::BibtexCollection*>(coll)->citeEntries(file, Controller::self()->selectedEntries());
-    file.close();
-  } else {
-    Kernel::self()->sorry(errorStr);
-  }
-  ::close(pipeFd);
+void MainWindow::slotCiteEntry(int action_) {
+  Cite::ActionManager::self()->cite(static_cast<Cite::CiteAction>(action_), Controller::self()->selectedEntries());
 }
 
 void MainWindow::slotShowFetchDialog() {
@@ -2052,11 +2017,7 @@ void MainWindow::slotShowFetchDialog() {
     connect(m_fetchDlg, SIGNAL(finished()),
             SLOT(slotHideFetchDialog()));
   } else {
-#if KDE_IS_VERSION(3,1,90)
     KWin::activateWindow(m_fetchDlg->winId());
-#else
-    KWin::setActiveWindow(m_fetchDlg->winId());
-#endif
   }
   m_fetchDlg->show();
 }
@@ -2073,14 +2034,8 @@ bool MainWindow::importFile(Import::Format format_, const KURL& url_, Import::Ac
   GUI::CursorSaver cs(Qt::waitCursor);
 
   bool failed = false;
-  Data::Collection* coll = 0;
-  if(!url_.isEmpty() && url_.isValid() &&
-#if KDE_IS_VERSION(3,1,90)
-    KIO::NetAccess::exists(url_, true, this)
-#else
-    KIO::NetAccess::exists(url_, true)
-#endif
-    ) {
+  Data::CollPtr coll;
+  if(!url_.isEmpty() && url_.isValid() && KIO::NetAccess::exists(url_, true, this)) {
     coll = ImportDialog::importURL(format_, url_);
   } else {
     Kernel::self()->sorry(i18n(errorLoad).arg(url_.fileName()));
@@ -2112,7 +2067,7 @@ bool MainWindow::importFile(Import::Format format_, const KURL& url_, Import::Ac
       case Import::Append:
         {
           // only append if match, but special case importing books into bibliographies
-          const Data::Collection* c = Data::Document::self()->collection();
+          const Data::CollPtr c = Data::Document::self()->collection();
           if(c->type() == coll->type()
              || (c->type() == Data::Collection::Bibtex && coll->type() == Data::Collection::Book)) {
             Kernel::self()->appendCollection(coll);
@@ -2127,7 +2082,7 @@ bool MainWindow::importFile(Import::Format format_, const KURL& url_, Import::Ac
       case Import::Merge:
         {
           // only merge if match, but special case importing books into bibliographies
-          const Data::Collection* c = Data::Document::self()->collection();
+          const Data::CollPtr c = Data::Document::self()->collection();
           if(c->type() == coll->type()
              || (c->type() == Data::Collection::Bibtex && coll->type() == Data::Collection::Book)) {
             Kernel::self()->mergeCollection(coll);
@@ -2150,19 +2105,18 @@ bool MainWindow::importFile(Import::Format format_, const KURL& url_, Import::Ac
     if(failed) {
       // The progress bar is hidden by the Controller when a new collection is added
       // that doesn't happen here, so need to clear it
-      m_currentStep = m_maxSteps;
-      slotUpdateFractionDone(1.0);
-      m_currentStep = 1;
+//      slotUpdateFractionDone(1.0);
     }
   }
 
-  slotStatusMsg(i18n(ready));
+  StatusBar::self()->clearStatus();
+
   return !failed; // return true means success
 }
 
 bool MainWindow::exportCollection(Export::Format format_, const KURL& url_) {
   GUI::CursorSaver cs(Qt::waitCursor);
-  const Data::Collection* c = Data::Document::self()->collection();
+  const Data::CollPtr c = Data::Document::self()->collection();
   if(!c) {
     return false;
   }
@@ -2183,11 +2137,11 @@ bool MainWindow::exportCollection(Export::Format format_, const KURL& url_) {
 }
 
 QStringList MainWindow::bibtexKeys() const {
-  Data::Collection* coll = Data::Document::self()->collection();
+  Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll || coll->type() != Data::Collection::Bibtex) {
     return QStringList();
   }
-  return static_cast<Data::BibtexCollection*>(coll)->bibtexKeys(Controller::self()->selectedEntries());
+  return BibtexHandler::bibtexKeys(Controller::self()->selectedEntries());
 }
 
 void MainWindow::addFilterView() {
@@ -2249,7 +2203,7 @@ void MainWindow::updateCaption(bool modified_) {
 void MainWindow::slotUpdateToolbarIcons() {
   //  kdDebug() << "MainWindow::slotUpdateToolbarIcons() " << endl;
   // first change the icon for the menu item
-  m_newEntry->setIconSet(UserIconSet(Data::Document::self()->collection()->entryName()));
+  m_newEntry->setIconSet(UserIconSet(Kernel::self()->collectionTypeName()));
 
   // since the toolbar icon is probably a different size than the menu item icon
   // superimpose it on the "mime_empty" icon
@@ -2298,6 +2252,55 @@ void MainWindow::slotClearFilter() {
 
 void MainWindow::slotRenameCollection() {
   Kernel::self()->renameCollection();
+}
+
+void MainWindow::updateCollectionActions() {
+  if(!Data::Document::self()->collection()) {
+    return;
+  }
+
+  stateChanged(QString::fromLatin1("collection_reset"));
+  Data::Collection::Type type = Data::Document::self()->collection()->type();
+  switch(type) {
+    case Data::Collection::Book:
+      stateChanged(QString::fromLatin1("is_book"));
+      break;
+    case Data::Collection::Bibtex:
+      stateChanged(QString::fromLatin1("is_bibliography"));
+      break;
+    case Data::Collection::Video:
+      stateChanged(QString::fromLatin1("is_video"));
+      break;
+    default:
+      break;
+  }
+  // special case when there are no available data sources
+  if(m_actions.isEmpty() && action("update_entry_all")) {
+    action("update_entry_all")->setEnabled(false);
+  }
+}
+
+void MainWindow::updateEntrySources() {
+  QSignalMapper* mapper = ::qt_cast<QSignalMapper*>(child("update_mapper"));
+  if(!mapper) {
+    kdWarning() << "MainWindow::updateEntrySources() - no update mapper!" << endl;
+    return;
+  }
+
+  unplugActionList(QString::fromLatin1("update_entry_actions"));
+  m_actions.clear();
+
+  const QStringList sources = Fetch::Manager::self()->sources();
+  for(QStringList::ConstIterator it = sources.begin(); it != sources.end(); ++it) {
+    KAction* action = new KAction(actionCollection());
+    action->setText(*it);
+    action->setToolTip(i18n("Update entry data from %1").arg(*it));
+    m_actions.append(action);
+    connect(action, SIGNAL(activated()), mapper, SLOT(map()));
+    mapper->setMapping(action, *it);
+  }
+
+  plugActionList(QString::fromLatin1("update_entry_actions"), m_actions);
 }
 
 #include "mainwindow.moc"

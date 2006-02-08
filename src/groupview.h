@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,20 +16,13 @@
 
 #include "gui/listview.h"
 #include "observer.h"
-#include "datavectors.h"
 
 #include <qdict.h>
 #include <qpixmap.h>
-#include <qguardedptr.h>
-
-class KPopupMenu;
 
 namespace Tellico {
   namespace Data {
-    class Collection;
-    class Entry;
     class EntryGroup;
-    class Field;
   }
   class Filter;
   class EntryGroupItem;
@@ -78,19 +71,19 @@ public:
    *
    * @param coll A pointer to the collection being added
    */
-  void addCollection(Data::Collection* coll);
+  void addCollection(Data::CollPtr coll);
   /**
    * Removes a root collection item, and all of its children.
    *
    * @param coll A pointer to the collection
    */
-  void removeCollection(Data::Collection* coll);
+  void removeCollection(Data::CollPtr coll);
   /**
    * Selects the first item which refers to a certain entry.
    *
    * @param entry A pointer to the entry
    */
-  void setEntrySelected(Data::Entry* entry);
+  void setEntrySelected(Data::EntryPtr entry);
   /**
    * Refresh all the items for the collection.
    *
@@ -98,7 +91,7 @@ public:
    */
   void populateCollection();
 
-  virtual void modifyField(Data::Collection* coll, Data::Field* oldField, Data::Field* newField);
+  void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
 
 public slots:
   /**
@@ -111,7 +104,7 @@ public slots:
    * @param coll A pointer to the collection of the gorup
    * @param group A pointer to the modified group
    */
-  void slotModifyGroup(Tellico::Data::Collection* coll, Tellico::Data::EntryGroup* group);
+  void slotModifyGroup(Tellico::Data::CollPtr coll, Tellico::Data::EntryGroup* group);
   /**
    * Expands all items at a certain depth. If depth is -1, the current selected item
    * is expanded. If depth is equal to either 0 or 1, then all items at that depth
@@ -188,15 +181,12 @@ private:
 
   virtual void setSorting(int column, bool ascending = true);
   QString groupTitle();
-  void updateHeader();
+  void updateHeader(Data::FieldPtr field=0);
 
   bool m_notSortedYet;
-  QGuardedPtr<Data::Collection> m_coll;
+  Data::CollPtr m_coll;
   QDict<EntryGroupItem> m_groupDict;
   QString m_groupBy;
-
-  KPopupMenu* m_groupMenu;
-  KPopupMenu* m_entryMenu;
 
   QPixmap m_groupOpenPixmap;
   QPixmap m_groupClosedPixmap;

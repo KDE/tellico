@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2005 by Robby Stephenson
+    copyright            : (C) 2001-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,9 @@
 #include "listview.h"
 #include "../controller.h"
 #include "../entryitem.h"
+#include "../entrygroupitem.h"
 #include "../loanitem.h"
+#include "../borroweritem.h"
 #include "../filteritem.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
@@ -24,6 +26,7 @@
 
 #include <qpainter.h>
 #include <qpixmap.h>
+#include <qheader.h>
 
 using Tellico::GUI::ListView;
 using Tellico::GUI::ListViewItem;
@@ -83,6 +86,28 @@ bool ListView::isSelectable(ListViewItem* item_) const {
   }
 
   return true;
+}
+
+int ListView::firstVisibleColumn() const {
+  int col = 0;
+  while(col < columns() && columnWidth(header()->mapToSection(col)) == 0) {
+    ++col;
+  }
+  if(col == columns()) {
+    return -1;
+  }
+  return header()->mapToSection(col);
+}
+
+int ListView::lastVisibleColumn() const {
+  int col = columns()-1;
+  while(col < columns() && columnWidth(header()->mapToSection(col)) == 0) {
+    --col;
+  }
+  if(col == columns()) {
+    return -1;
+  }
+  return header()->mapToSection(col);
 }
 
 #if !KDE_IS_VERSION(3,3,90)
@@ -153,6 +178,34 @@ void ListView::slotSelectionChanged() {
     }
     Controller::self()->slotUpdateSelection(this, entries);
     return; // done now
+  } else if(item->isEntryGroupItem()) {
+    for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
+      if(!it.current()->isEntryGroupItem()) {
+        continue;
+      }
+      Data::EntryVec more = *static_cast<EntryGroupItem*>(it.current())->group();
+      for(Data::EntryVecIt entry = more.begin(); entry != more.end(); ++entry) {
+        if(!entries.contains(entry)) {
+          entries.append(entry);
+        }
+      }
+    }
+    Controller::self()->slotUpdateSelection(this, entries);
+    return; // done now
+  } else if(item->isBorrowerItem()) {
+    for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
+      if(!it.current()->isBorrowerItem()) {
+        continue;
+      }
+      Data::BorrowerPtr b = static_cast<BorrowerItem*>(it.current())->borrower();
+      for(Data::LoanVec::ConstIterator loan = b->loans().begin(); loan != b->loans().end(); ++loan) {
+        if(!entries.contains(loan->entry())) {
+          entries.append(loan->entry());
+        }
+      }
+    }
+    Controller::self()->slotUpdateSelection(this, entries);
+    return; // done now
   }
 
   // now just find all the children or grandchildren that are entry items
@@ -183,13 +236,14 @@ void ListView::slotDoubleClicked(QListViewItem* item_) {
   }
 
   // if it has children, just open it
-  if(item_->childCount() > 0) {
+  // but some items delay children creation
+  if(static_cast<ListViewItem*>(item_)->realChildCount() > 0) {
     item_->setOpen(!item_->isOpen());
   }
 
   GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(item_);
   if(item->isEntryItem()) {
-    Controller::self()->editEntry(*static_cast<EntryItem*>(item)->entry());
+    Controller::self()->editEntry(static_cast<EntryItem*>(item)->entry());
   } else if(item->isLoanItem()) {
     Kernel::self()->modifyLoan(static_cast<LoanItem*>(item)->loan());
   } else if(item->isFilterItem()) {
@@ -208,11 +262,11 @@ void ListView::drawContentsOffset(QPainter* p, int ox, int oy, int cx, int cy, i
 
 ListViewItem::~ListViewItem() {
   // I think there's a bug in qt where the children of this item are deleted after the item itself
-  // as a result, there is not listView() pointer for the children, that obvious causes
+  // as a result, there is no listView() pointer for the children, that obvious causes
   // a problem with updating the selection. So we MUST call clear() here ourselves!
   clear();
   // be sure to remove from selected list when it's deleted
-  ListView* lv = static_cast<ListView*>(listView());
+  ListView* lv = listView();
   if(lv) {
     lv->updateSelected(this, false);
   }
@@ -247,7 +301,7 @@ int ListViewItem::compare(QListViewItem* item_, int col_, bool asc_) const {
 }
 
 void ListViewItem::setSelected(bool s_) {
-  ListView* lv = static_cast<ListView*>(listView());
+  ListView* lv = listView();
   if(!lv) {
     return;
   }
@@ -260,21 +314,23 @@ void ListViewItem::setSelected(bool s_) {
   }
 }
 
-#if !KDE_IS_VERSION(3,3,90)
-const QColor& ListViewItem::backgroundColor(int column_, bool alternate_/*=false*/) {
-  ListView* view = static_cast<ListView*>(listView());
+QColor ListViewItem::backgroundColor(int column_) {
+#if KDE_IS_VERSION(3,3,90)
+  return KListViewItem::backgroundColor(column_);
+#else
+  ListView* view = listView();
   if(view->columns() > 1 && view->shadeSortColumn() && column_ == view->sortColumn()) {
-    return (isAlternate() || alternate_) ? view->alternateBackground2() : view->background2();
+    return isAlternate() ? view->alternateBackground2() : view->background2();
   }
-  return (isAlternate() || alternate_) ? view->alternateBackground() : view->viewport()->colorGroup().base();
-}
+  return isAlternate() ? view->alternateBackground() : view->viewport()->colorGroup().base();
 #endif
+}
 
 void ListViewItem::paintCell(QPainter* p_, const QColorGroup& cg_,
-                             int column_, int width_, int alignment_) {
-#if KDE_IS_VERSION(3,3,90)
-  KListViewItem::paintCell(p_, cg_, column_, width_, alignment_);
-#else
+                             int column_, int width_, int align_) {
+  // taken from klistview.cpp
+  // I can't call KListViewItem::paintCell since KListViewItem::backgroundCOlor(int) is
+  // not virtual. I need to be sure to call ListViewItem::backgroundColor(int);
   QColorGroup cg = cg_;
   const QPixmap* pm = listView()->viewport()->backgroundPixmap();
   if(pm && !pm->isNull()) {
@@ -288,12 +344,11 @@ void ListViewItem::paintCell(QPainter* p_, const QColorGroup& cg_,
   }
 
   // don't call KListViewItem::paintCell() since that also does alternate painting, etc...
-  QListViewItem::paintCell(p_, cg, column_, width_, alignment_);
-#endif
+  QListViewItem::paintCell(p_, cg, column_, width_, align_);
 
   // borrowed from amarok, draw line to left of cell
   if(!isSelected()) {
-    p_->setPen(QPen(static_cast<KListView*>(listView())->alternateBackground(), 0, Qt::SolidLine));
+    p_->setPen(QPen(listView()->alternateBackground(), 0, Qt::SolidLine));
     p_->drawLine(width_-1, 0, width_-1, height()-1);
   }
 }

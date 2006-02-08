@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -33,7 +33,7 @@ class URLFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  URLFieldWidget(const Data::Field* field, QWidget* parent, const char* name=0);
+  URLFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~URLFieldWidget();
 
   virtual QString text() const;
@@ -44,7 +44,7 @@ public slots:
 
 protected:
   virtual QWidget* widget();
-  virtual void updateFieldHook(Data::Field* oldField, Data::Field* newField);
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
 protected slots:
   void slotOpenURL(const QString& url);

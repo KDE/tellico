@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -35,7 +35,7 @@ public:
     Replace
   };
 
-  CollectionCommand(Mode mode, Data::Collection* currentColl, Data::Collection* newColl);
+  CollectionCommand(Mode mode, Data::CollPtr currentColl, Data::CollPtr newColl);
 
   virtual void execute();
   virtual void unexecute();
@@ -45,8 +45,8 @@ private:
   void copyFields();
 
   Mode m_mode;
-  KSharedPtr<Data::Collection> m_origColl;
-  KSharedPtr<Data::Collection> m_newColl;
+  Data::CollPtr m_origColl;
+  Data::CollPtr m_newColl;
 
   KURL m_origURL;
   Data::FieldVec m_origFields;

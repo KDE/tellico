@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,8 +20,8 @@
 
 using Tellico::Command::FieldCommand;
 
-FieldCommand::FieldCommand(Mode mode_, Data::Collection* coll_,
-                           Data::Field* activeField_, Data::Field* oldField_/*=0*/)
+FieldCommand::FieldCommand(Mode mode_, Data::CollPtr coll_,
+                           Data::FieldPtr activeField_, Data::FieldPtr oldField_/*=0*/)
     : KCommand()
     , m_mode(mode_)
     , m_coll(coll_)

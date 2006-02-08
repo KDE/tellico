@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -186,3 +186,5 @@ void CSVExporter::saveOptions(KConfig* config_) {
   config_->writeEntry("Include Titles", m_includeTitles);
   config_->writeEntry("Delimiter", m_delimiter);
 }
+
+#include "csvexporter.moc"

@@ -1,5 +1,5 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef BTPARSE_CONFIG_H
+#define BTPARSE_CONFIG_H
 /*
  * config.h (for ANTLR, DLG, and SORCERER)
  *

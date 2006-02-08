@@ -86,6 +86,8 @@ presented in a drop-down box for selection. Obviously, multiple values
 are not applicable. Fields such as bibliography type or personal rating
 are <emphasis>Choice</emphasis>-type fields.</para>
 
+<para>Semi-colons should be used to separated the allowed values.</para>
+
 </sect2>
 
 <sect2 id="bool">
@@ -124,8 +126,15 @@ This field is useful for a list of chapters in a book, scenes in a movie, or son
 </para>
 
 <para>
-The number of columns, up to a maximum of five, is defined by adding a property to the field
-definition with the name <emphasis>columns</emphasis>.
+The number of columns, up to a maximum of ten, is defined by adding a property to the field
+definition with the name <emphasis>columns</emphasis>. The columns may be labeled by right-clicking
+on the header, or by setting a field property named <emphasis>column1</emphasis>, etc.
+</para>
+
+<para>
+When using the &entry-editor; for <emphasis>Table</emphasis> fields, rows may be rearranged by dragging
+the mouse while holding the &Ctrl; button. A popup menu is also available by right-clicking on the table,
+which allows rows to be inserted or removed.
 </para>
 
 </sect2>
@@ -136,9 +145,9 @@ definition with the name <emphasis>columns</emphasis>.
 <para>
 <emphasis>Image</emphasis> fields hold an image, of any format supported by &kde;.
 Some of the typical ones include <acronym>PNG</acronym> or <acronym>JPEG</acronym>.
-The image is saved inside the &appname; data file. The standard &kde; File Selector
-is used, so you can use a &URL; or just a file available
-locally.
+The image can be saved inside the &appname; data file itself or in the application data
+directory. The standard &kde; File Selector is used, so you can use a &URL; or just a
+file available locally. Images can also be dragged from a file manager or browser.
 </para>
 
 </sect2>
@@ -150,7 +159,7 @@ locally.
 <emphasis>Rating</emphasis> fields show a number of stars to represent a numerical rating
 for an entry. By default, the rating is a maximum of five. The minimum and maximum may be
 setting properties in the field definition in the &fields-dialog;, named
-<emphasis>minimum</emphasis> and <emphasis>maximum</emphasis>, respectively..
+<emphasis>minimum</emphasis> and <emphasis>maximum</emphasis>, respectively.
 </para>
 
 </sect2>
@@ -175,7 +184,7 @@ may be used in the description for formatting.
 <title>Collection Types</title>
 
 <para>
-&appname; supports ten specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, and wines. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
+&appname; supports eleven specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, wines, and file catalogs. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
 </para>
 
 <para>
@@ -477,10 +486,31 @@ Wine collections have 15 default fields.
 
 </sect2>
 
+<sect2 id="file-catalog">
+<title>File Catalogs</title>
+<para>
+File catalogs have 13 default fields.
+<emphasis>Name</emphasis>,
+<emphasis>URL</emphasis>,
+<emphasis>Description</emphasis>,
+<emphasis>Volume</emphasis>,
+<emphasis>Mimetype</emphasis>,
+<emphasis>Size</emphasis>,
+<emphasis>Permissions</emphasis>,
+<emphasis>Owner</emphasis>,
+<emphasis>Group</emphasis>,
+<emphasis>Created</emphasis>,
+<emphasis>Modified</emphasis>,
+<emphasis>Meta Info</emphasis>, and
+<emphasis>Icon</emphasis>,
+</para>
+
+</sect2>
+
 <sect2 id="custom-collection">
 <title>Custom Collections</title>
 <para>
-Custom collections have one default field, the <emphasis>Title</emphasis>. They should be used when the collectible item is not one of the nine default types.
+Custom collections have one default field, the <emphasis>Title</emphasis>. They should be used when the collectible item is not one of the default types.
 </para>
 
 </sect2>

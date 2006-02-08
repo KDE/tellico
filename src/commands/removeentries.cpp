@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,7 +19,7 @@
 
 using Tellico::Command::RemoveEntries;
 
-RemoveEntries::RemoveEntries(Data::Collection* coll_, Data::EntryVec entries_)
+RemoveEntries::RemoveEntries(Data::CollPtr coll_, const Data::EntryVec& entries_)
     : KCommand()
     , m_coll(coll_)
     , m_entries(entries_)

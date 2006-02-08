@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,6 +18,7 @@ namespace Tellico {
   namespace Fetch {
     class SearchResult;
     class ConfigWidget;
+    class ManagerMessage;
   }
 }
 
@@ -31,7 +32,8 @@ namespace Tellico {
 
 typedef QMap<Type, QString> FetchMap;
 typedef QMap<FetchKey, QString> FetchKeyMap;
-typedef PtrVector<Fetcher> FetcherVec;
+typedef QMap<Fetcher::Ptr, QString> FetchConfigMap;
+typedef Vector<Fetcher> FetcherVec;
 
 /**
  * A manager for handling all the different classes of Fetcher.
@@ -44,18 +46,25 @@ Q_OBJECT
 public:
   static Manager* self() {  if(!s_self) s_self = new Manager(); return s_self; }
 
+  ~Manager();
+
   QStringList sources() const;
   QStringList keys(const QString& source) const;
-  void startSearch(const QString& source, FetchKey key, const QString& value, bool multiple);
+  void startSearch(const QString& source, FetchKey key, const QString& value);
   void stop();
   bool canFetch() const;
-  void reloadFetchers();
+  void loadFetchers();
   const FetcherVec& fetchers() const { return m_fetchers; }
   FetchKey fetchKey(const QString& key) const;
   const QString& fetchKeyString(FetchKey key) const;
 
+  // create fetcher for updating an entry
+  FetcherVec createUpdateFetchers(int collType);
+  Fetcher::Ptr createUpdateFetcher(int collType, const QString& source);
+
   static ConfigWidget* configWidget(Type type, QWidget* parent);
   static FetchMap sourceMap();
+  static QString defaultSourceName(const QString& sourceType);
 
 signals:
   void signalStatus(const QString& status);
@@ -63,15 +72,23 @@ signals:
   void signalDone();
 
 private slots:
-  void slotFetcherDone(Tellico::Fetch::Fetcher*);
+  void slotFetcherDone(Tellico::Fetch::Fetcher::Ptr);
 
 private:
+  friend class ManagerMessage;
   static Manager* s_self;
+
   Manager();
+  Fetcher::Ptr createFetcher(KConfig* config, const QString& configGroup);
+  FetcherVec defaultFetchers();
+  void updateStatus(const QString& message);
 
   FetcherVec m_fetchers;
   FetchKeyMap m_keyMap;
+  FetchConfigMap m_configMap;
+  ManagerMessage* m_messager;
   uint m_count;
+  bool m_loadDefaults : 1;
 };
 
   } // end namespace

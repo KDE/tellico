@@ -13,7 +13,7 @@
    ===================================================================
    Tellico XSLT file - used for exporting to HTML
 
-   Copyright (C) 2004-2005 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2006 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -130,7 +130,7 @@
 <xsl:template match="tc:tellico">
  <!-- This stylesheet is designed for Tellico document syntax version 8 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'8'"/>
+  <xsl:with-param name="this-version" select="'9'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -146,13 +146,13 @@
    }
    #headerblock {
         padding-top: 10px;
-        padding-bottom: 10px;
-        margin-bottom: 5px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid black;
+        overflow: auto;
    }
    h1.colltitle {
         padding: 4px;
         font-size: 2em;
-        border-bottom: 1px solid black;
         margin: 0px;
    }
    span.subtitle {
@@ -160,7 +160,7 @@
         font-size: 0.8em;
    }
    form {
-        margin-top: 10px;
+        margin-top: 5px;
         float: right;
    }
    #searchText {
@@ -168,7 +168,7 @@
         margin-right: 4px;
         background-color: #eee;
    }
-   #searchButton {
+   .button {
         margin-bottom: 2px;
    }
    table, h4 {
@@ -222,7 +222,7 @@
     <xsl:value-of select="$page-title"/>
    </title>
   </head>
-  <body>
+  <body onload="checkQuery()">
    <xsl:apply-templates select="tc:collection"/>
   </body>
  </html>
@@ -233,13 +233,18 @@
 
   <form onsubmit="return false">
    <input type="text" id="searchText"/>
-   <input type="button" id="searchButton" onclick="searchMovies()">
+   <input type="button" class="button" onclick="searchRows()">
     <xsl:attribute name="value">
      <i18n>Search</i18n>
     </xsl:attribute>
    </input>
+   <input type="button" class="button" onclick="showAll()">
+    <xsl:attribute name="value">
+     <i18n>Clear</i18n>
+    </xsl:attribute>
+   </input>
   </form>
-  
+ 
   <h1 class="colltitle">
    <xsl:value-of select="@title"/>
    <span class="subtitle">
@@ -281,7 +286,7 @@
 
   <tbody>
    <xsl:choose>
- 
+
     <!-- If the entries are not being grouped, it's easy -->
     <xsl:when test="not($group-entries)">
      <xsl:for-each select="tc:entry">

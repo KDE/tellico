@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,6 @@
 #ifndef TELLICO_BORROWER_H
 #define TELLICO_BORROWER_H
 
-#include "ptrvector.h"
 #include "datavectors.h"
 
 #include <ksharedptr.h>
@@ -27,16 +26,16 @@ namespace Tellico {
 class Loan : public KShared {
 
 public:
-  Loan(Data::Entry* entry, const QDate& loanDate, const QDate& dueDate, const QString& note);
+  Loan(Data::EntryPtr entry, const QDate& loanDate, const QDate& dueDate, const QString& note);
   Loan(const Loan& other);
 
-  Data::Borrower* borrower() const { return m_borrower; }
-  void setBorrower(Data::Borrower* b) { m_borrower = b; }
+  Data::BorrowerPtr borrower() const;
+  void setBorrower(Data::BorrowerPtr b) { m_borrower = b; }
 
   const QString& uid() const { return m_uid; }
   void setUID(const QString& uid) { m_uid = uid; }
 
-  Data::Entry* entry() const { return m_entry; }
+  Data::EntryPtr entry() const;
 
   const QDate& loanDate() const { return m_loanDate; }
 
@@ -71,21 +70,19 @@ typedef LoanVec::Iterator LoanVecIt;
 class Borrower : public KShared {
 
 public:
-//  Borrower() {}
   Borrower(const QString& name, const QString& uid);
   Borrower(const Borrower& other);
   Borrower& operator=(const Borrower& other);
 
-//  bool isNull() const { return m_name.isEmpty(); }
   const QString& uid() const { return m_uid; }
   const QString& name() const { return m_name; }
   const LoanVec& loans() const { return m_loans; }
   bool isEmpty() const { return m_loans.isEmpty(); }
+  int count() const { return m_loans.count(); }
 
-  Data::Loan* loan(const Data::Entry* entry);
-  void addLoan(Data::Loan* loan);
-  bool removeLoan(Data::Loan* loan);
-//  bool removeLoan(Data::Entry* entry);
+  Data::LoanPtr loan(Data::ConstEntryPtr entry);
+  void addLoan(Data::LoanPtr loan);
+  bool removeLoan(Data::LoanPtr loan);
 
 private:
   QString m_name;

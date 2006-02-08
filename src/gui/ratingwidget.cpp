@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -50,7 +50,7 @@ const QPixmap& RatingWidget::pixmap(const QString& value_) {
   return *pix;
 }
 
-RatingWidget::RatingWidget(const Data::Field* field_, QWidget* parent_, const char* name_/*=0*/)
+RatingWidget::RatingWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : QHBox(parent_, name_), m_field(field_), m_currIndex(-1) {
   m_pixOn = UserIcon(QString::fromLatin1("star_on"));
   m_pixOff = UserIcon(QString::fromLatin1("star_off"));
@@ -163,7 +163,7 @@ void RatingWidget::setText(const QString& text_) {
   update();
 }
 
-void RatingWidget::updateField(const Data::Field* field_) {
+void RatingWidget::updateField(Data::FieldPtr field_) {
   m_field = field_;
   init();
 }

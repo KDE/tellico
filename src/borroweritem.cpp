@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005 by Robby Stephenson
+    copyright            : (C) 2005-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,8 +18,12 @@
 
 using Tellico::BorrowerItem;
 
-BorrowerItem::BorrowerItem(GUI::ListView* parent_, Data::Borrower* borrower_)
+BorrowerItem::BorrowerItem(GUI::ListView* parent_, Data::BorrowerPtr borrower_)
     : GUI::CountedItem(parent_), m_borrower(borrower_) {
   setText(0, borrower_->name());
   setPixmap(0, SmallIcon(QString::fromLatin1("kaddressbook")));
+}
+
+int BorrowerItem::count() const {
+  return m_borrower ? m_borrower->count() : GUI::CountedItem::count();
 }

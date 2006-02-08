@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2005 by Robby Stephenson
+    copyright            : (C) 2003-2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,26 +19,16 @@
 using Tellico::Import::XMLImporter;
 
 XMLImporter::XMLImporter(const KURL& url_) : Import::Importer(url_) {
-  if(url_.isValid()) {
+  if(!url_.isEmpty() && url_.isValid()) {
     m_dom = FileHandler::readXMLFile(url_, true);
   }
 }
 
-XMLImporter::XMLImporter(const QString& text_) : Import::Importer(KURL()) {
+XMLImporter::XMLImporter(const QString& text_) : Import::Importer(text_) {
   if(text_.isEmpty()) {
     return;
   }
-
-  QString errorMsg;
-  int errorLine, errorColumn;
-  if(!m_dom.setContent(text_, false, &errorMsg, &errorLine, &errorColumn)) {
-    QString str = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
-    str += QString::fromLatin1("\n");
-    str += i18n("The error message from Qt is:");
-    str += QString::fromLatin1("\n\t") + errorMsg;
-    setStatusMessage(str);
-    return;
-  }
+  setText(text_);
 }
 
 XMLImporter::XMLImporter(const QByteArray& data_) : Import::Importer(KURL()) {
@@ -55,6 +45,19 @@ XMLImporter::XMLImporter(const QByteArray& data_) : Import::Importer(KURL()) {
     str += QString::fromLatin1("\n\t") + errorMsg;
     setStatusMessage(str);
     return;
+  }
+}
+
+void XMLImporter::setText(const QString& text_) {
+  Importer::setText(text_);
+  QString errorMsg;
+  int errorLine, errorColumn;
+  if(!m_dom.setContent(text_, false, &errorMsg, &errorLine, &errorColumn)) {
+    QString str = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
+    str += QString::fromLatin1("\n");
+    str += i18n("The error message from Qt is:");
+    str += QString::fromLatin1("\n\t") + errorMsg;
+    setStatusMessage(str);
   }
 }
 
