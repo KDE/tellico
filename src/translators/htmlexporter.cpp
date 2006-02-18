@@ -26,7 +26,6 @@
 
 #include <kstandarddirs.h>
 #include <kconfig.h>
-#include <kdebug.h>
 #include <kglobalsettings.h>
 #include <kio/netaccess.h>
 #include <kapplication.h>
@@ -99,7 +98,9 @@ void HTMLExporter::reset() {
 }
 
 bool HTMLExporter::exec() {
+  LOG_FUNC;
   if(url().isEmpty() || !url().isValid()) {
+    kdWarning() << "HTMLExporter::exec() - trying to export to invalid URL" << endl;
     return false;
   }
 
@@ -225,6 +226,7 @@ bool HTMLExporter::loadXSLTFile() {
 }
 
 QString HTMLExporter::text() {
+  LOG_FUNC;
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
     kdWarning() << "HTMLExporter::text() - error loading xslt file: " << m_xsltFile << endl;
     return QString::null;
@@ -373,6 +375,7 @@ void HTMLExporter::setFormattingOptions(Data::CollPtr coll) {
 }
 
 void HTMLExporter::writeImages(Data::CollPtr coll_) {
+  LOG_FUNC;
   // keep track of which image fields to write, this is for field names
   QStringList imageFields;
   for(QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
@@ -397,7 +400,23 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
   }
 
   // all of them are going to get written to tmp file
-  m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
+  bool useTemp = url().isEmpty();
+  KURL imgDir;
+  // really some convoluted logic here
+  // basically, four cases. 1) we're writing to a tmp file, for printing probably
+  // so then write all the images to the tmp directory, 2) we're exporting to HTML, and
+  // this is the main collection file, in which case m_parseDOM is always true;
+  // 3) we're exporting HTML, and this is the first entry file, for which parseDOM is true
+  // and exportEntryFiles is false. Then the image file will get copied in copyFiles() and is
+  // probably an image in the entry template. 4) we're exporting HTML, and this is not the 1st
+  // 1st entry file, in which case, we want to refer directoly to the target dir
+  if(useTemp || (m_parseDOM && !m_exportEntryFiles)) {
+    imgDir.setPath(ImageFactory::tempDir());
+  } else {
+    imgDir = fileDir();
+    createDir();
+  }
+  m_handler->addStringParam("imgdir", QFile::encodeName(imgDir.path()));
 
   // call kapp->processEvents(), too
   int count = 0;
@@ -413,9 +432,11 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
       }
       imageSet.add(id);
       // try writing
-      if(!ImageFactory::writeImage(id, ImageFactory::TempDir)) {
+      bool success = useTemp ? ImageFactory::writeImage(id, ImageFactory::TempDir)
+                             : ImageFactory::copyImage(id, imgDir, true);
+      if(!success) {
         kdWarning() << "HTMLExporter::writeImages() - unable to write image file: "
-                    << ImageFactory::tempDir() << id << endl;
+                    << imgDir.path() << id << endl;
       }
 
       if(++count == processCount) {
@@ -502,7 +523,8 @@ KURL HTMLExporter::fileDir() const {
 
 QString HTMLExporter::fileDirName() const {
   if(!m_collectionURL.isEmpty()) {
-    return m_collectionURL.fileName().section('.', 0, 0) + QString::fromLatin1("_files/");
+//    return QString::fromLatin1("../") + m_collectionURL.fileName().section('.', 0, 0) + QString::fromLatin1("_files/");
+    return QString::fromLatin1("/");
   }
   return url().fileName().section('.', 0, 0) + QString::fromLatin1("_files/");
 }
@@ -592,7 +614,21 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
   return str;
 }
 
+bool HTMLExporter::createDir() {
+  LOG_FUNC;
+  KURL dir = fileDir();
+  if(dir.isEmpty()) {
+    myDebug() << "HTMLExporter::createDir() - called on empty URL!" << endl;
+    return true;
+  }
+  if(KIO::NetAccess::exists(dir, false, 0)) {
+    return false;
+  }
+  return KIO::NetAccess::mkdir(dir, m_widget);
+}
+
 bool HTMLExporter::copyFiles() {
+  LOG_FUNC;
   const uint start = 20;
   const uint maxProgress = m_exportEntryFiles ? 40 : 80;
   const uint stepSize = QMAX(1, m_files.count()/maxProgress);
@@ -607,10 +643,9 @@ bool HTMLExporter::copyFiles() {
     m_copiedFiles.add((*it).url());
 
     KURL target = fileDir();
-    if(checkTarget && !KIO::NetAccess::exists(target, false, 0)) {
-      KIO::NetAccess::mkdir(target, m_widget);
+    if(checkTarget) {
       checkTarget = false;
-      createdDir = true;
+      createdDir = createDir();
     }
 
     target.addPath((*it).fileName().section('/', -1));
@@ -636,6 +671,7 @@ bool HTMLExporter::copyFiles() {
 }
 
 bool HTMLExporter::writeEntryFiles() {
+  LOG_FUNC;
   if(m_entryXSLTFile.isEmpty()) {
     kdWarning() << "HTMLExporter::writeEntryFiles() - no entry XSLT file" << endl;
     return false;
@@ -675,7 +711,7 @@ bool HTMLExporter::writeEntryFiles() {
     if(multipleTitles) {
       file = file.section(';', 0, 0);
     }
-    file.replace(badChars, QString::fromLatin1("_"));
+    file.replace(badChars, QChar('_'));
     file += QChar('-') + QString::number(entryIt->id()) + html;
     outputFile.setFileName(file);
 
@@ -687,6 +723,11 @@ bool HTMLExporter::writeEntryFiles() {
     if(parseDOM) {
       parseDOM = false;
       exporter.setParseDOM(false);
+      // this is rather stupid, but I'm too lazy to figure out the better way
+      // since we parsed the DOM for the first entry file to grab any
+      // images used in the template, need to resave it so the image links
+      // get written correctly
+      exporter.exec();
     }
 
     if(j%stepSize == 0) {

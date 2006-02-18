@@ -4,16 +4,16 @@ bin_PROGRAMS = tellico
 ## INCLUDES were found outside kdevelop specific part
 
 tellico_SOURCES = borrowerdialog.cpp entryitem.cpp importdialog.cpp \
-					borroweritem.cpp entryview.cpp isbnvalidator.cpp exportdialog.cpp collection.cpp \
-					fetchdialog.cpp collectionfactory.cpp fieldcompletion.cpp collectionfieldsdialog.cpp \
-					field.cpp main.cpp configdialog.cpp mainwindow.cpp controller.cpp filehandler.cpp \
-					filter.cpp filterdialog.cpp reportdialog.cpp dcopinterface.skel filteritem.cpp \
-					detailedlistview.cpp document.cpp tellico_kernel.cpp entry.cpp groupview.cpp \
-					tellico_strings.cpp entryeditdialog.cpp image.cpp tellico_utils.cpp entrygroupitem.cpp \
-					imagefactory.cpp viewstack.cpp entryiconview.cpp borrower.cpp loandialog.cpp \
-					loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
-					entryiconfactory.cpp dcopinterface.cpp entryupdater.cpp detailedentryitem.cpp statusbar.cpp \
-					progressmanager.cpp upcvalidator.cpp fetcherconfigdialog.cpp
+						borroweritem.cpp entryview.cpp isbnvalidator.cpp exportdialog.cpp collection.cpp \
+						fetchdialog.cpp collectionfactory.cpp fieldcompletion.cpp collectionfieldsdialog.cpp \
+						field.cpp main.cpp configdialog.cpp mainwindow.cpp controller.cpp filehandler.cpp \
+						filter.cpp filterdialog.cpp reportdialog.cpp dcopinterface.skel filteritem.cpp \
+						detailedlistview.cpp document.cpp tellico_kernel.cpp entry.cpp groupview.cpp \
+						tellico_strings.cpp entryeditdialog.cpp image.cpp tellico_utils.cpp entrygroupitem.cpp \
+						imagefactory.cpp viewstack.cpp entryiconview.cpp borrower.cpp loandialog.cpp \
+						loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
+						entryiconfactory.cpp dcopinterface.cpp entryupdater.cpp detailedentryitem.cpp statusbar.cpp \
+						progressmanager.cpp upcvalidator.cpp fetcherconfigdialog.cpp iso5426converter.cpp iso6937converter.cpp
 
 if !USE_LIBBTPARSE
   LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
@@ -34,8 +34,8 @@ borrowerdialog.h            entryitem.cpp        importdialog.cpp \
 borrower.h                  entryitem.h          importdialog.h \
 borroweritem.cpp            entryview.cpp        isbnvalidator.cpp \
 borroweritem.h              entryview.h          isbnvalidator.h \
-loanview.cpp            exportdialog.cpp     \
-loanview.h              exportdialog.h       \
+loanview.cpp                exportdialog.cpp     \
+loanview.h                  exportdialog.h       \
 collection.cpp              fetchdialog.cpp      \
 collectionfactory.cpp       fetchdialog.h        \
 collectionfactory.h         fieldcompletion.cpp  latin1literal.h \
@@ -71,8 +71,9 @@ detailedentryitem.h detailedentryitem.cpp \
 statusbar.h statusbar.cpp \
 progressmanager.h progressmanager.cpp \
 upcvalidator.h upcvalidator.cpp \
-fetcherconfigdialog.h fetcherconfigdialog.cpp
-
+fetcherconfigdialog.h fetcherconfigdialog.cpp \
+iso5426converter.h iso5426converter.cpp \
+iso6937converter.h iso6937converter.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -106,7 +107,7 @@ KDE_OPTIONS = noautodist
 CLEANFILES = *~ *.loT
 
 # the library search path.
-tellico_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIBXML_RPATH) $(LIBXSLT_RPATH)
+tellico_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 rcdir = $(kde_datadir)/tellico
 rc_DATA = tellicoui.rc
@@ -118,3 +119,4 @@ messages: rc.cpp
         fi
 
 #include ../admin/Doxyfile.am
+

@@ -27,9 +27,12 @@ namespace Tellico {
 class OOOHandler::Interface {
   friend class OOOHandler;
 
-  Interface() {}
+  Interface();
+  ~Interface();
 
+  bool isConnected() const;
   bool connect(const std::string& host, int port, const std::string& pipe);
+  bool disconnect();
   bool createDocument();
   bool updateBibliography();
   bool insertCitations(Cite::Map& fields);
@@ -48,6 +51,9 @@ private:
   com::sun::star::uno::Reference<com::sun::star::text::XTextDocument> m_doc;
   com::sun::star::uno::Reference<com::sun::star::text::XDocumentIndex> m_bib;
   com::sun::star::uno::Reference<com::sun::star::text::XTextViewCursor> m_cursor;
+
+  class EventListener;
+  EventListener* m_listener;
 };
 
   } // end namespace

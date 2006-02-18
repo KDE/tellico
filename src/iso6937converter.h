@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2006 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,44 +11,33 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_CITE_OOOHANDLER_H
-#define TELLICO_CITE_OOOHANDLER_H
+#ifndef TELLICO_ISO6937CONVERTER_H
+#define TELLICO_ISO6937CONVERTER_H
 
-#include "../handler.h"
+class QCString;
+class QString;
+class QChar;
 
-namespace rtl {
-  class OUString;
-}
+#include <qglobal.h>
 
 namespace Tellico {
-  namespace Cite {
 
 /**
  * @author Robby Stephenson
  */
-class OOOHandler : public Handler {
+class Iso6937Converter {
 public:
-  OOOHandler();
-
-  virtual State state() const;
-  virtual bool connect();
-  virtual bool cite(Cite::Map& fields);
+  static QString toUtf8(const QCString& text);
 
 private:
-//  static QString OUString2Q(const rtl::OUString& str);
-//  static rtl::OUString QString2OU(const QString& str);
-  static Cite::Map s_fieldsMap;
-  static void buildFieldsMap();
+  static bool hasNext(uint pos, uint len);
+  static bool isAscii(uchar c);
+  static bool isCombining(uchar c);
 
-  Cite::Map convertFields(Cite::Map& values);
-
-  class Interface;
-  Interface* m_interface;
-  // mutable since I want to change it inside state()
-  mutable State m_state;
+  static QChar getChar(uchar c);
+  static QChar getCombiningChar(uint c);
 };
 
-  } // end namespace
 } // end namespace
 
 #endif

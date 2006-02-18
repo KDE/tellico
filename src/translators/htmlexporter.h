@@ -81,6 +81,7 @@ private:
   QString analyzeInternalCSS(const QString& string);
   bool copyFiles();
   bool loadXSLTFile();
+  bool createDir();
 
   KHTMLPart* m_part;
   XSLTHandler* m_handler;

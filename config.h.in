@@ -66,8 +66,11 @@
 /* Define if your system needs _NSGetEnviron to set up the environment */
 #undef HAVE_NSGETENVIRON
 
-/* Define if you have the res_init function */
+/* Define if you have res_init */
 #undef HAVE_RES_INIT
+
+/* Define if you have the res_init prototype */
+#undef HAVE_RES_INIT_PROTO
 
 /* Define to 1 if you have the <sal/config.h> header file. */
 #undef HAVE_SAL_CONFIG_H
@@ -108,6 +111,9 @@
 /* Define to 1 if you have the `strupr' function. */
 #undef HAVE_STRUPR
 
+/* Define to 1 if you have the <sys/bitypes.h> header file. */
+#undef HAVE_SYS_BITYPES_H
+
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #undef HAVE_SYS_STAT_H
 
@@ -131,9 +137,6 @@
 
 /* Define to 1 if you have the `vsnprintf' function. */
 #undef HAVE_VSNPRINTF
-
-/* Define if you want Xinerama support */
-#undef HAVE_XINERAMA
 
 /* Define to 1 if you have the yaz library */
 #undef HAVE_YAZ
@@ -209,6 +212,9 @@
 /* Version number of package */
 #undef VERSION
 
+/* Defined if compiling without arts */
+#undef WITHOUT_ARTS
+
 /*
  * jpeg.h needs HAVE_BOOLEAN, when the system uses boolean in system
  * headers and I'm too lazy to write a configure test as long as only
@@ -235,6 +241,18 @@
 # include <sys/time.h>
 # include <crt_externs.h>
 # define environ (*_NSGetEnviron())
+#endif
+
+
+
+#if !defined(HAVE_RES_INIT_PROTO)
+#ifdef __cplusplus
+extern "C" {
+#endif
+int res_init(void);
+#ifdef __cplusplus
+}
+#endif
 #endif
 
 
@@ -291,8 +309,9 @@ int snprintf(char *str, size_t n, char const *fmt, ...);
 #endif
 
 
-/* Compatibility define */
-#undef ksize_t
+/* type to use in place of socklen_t if not defined */
+#undef kde_socklen_t
 
-/* Define the real type of socklen_t */
-#undef socklen_t
+/* type to use in place of socklen_t if not defined (deprecated, use
+   kde_socklen_t) */
+#undef ksize_t

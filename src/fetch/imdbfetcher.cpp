@@ -139,11 +139,11 @@ void IMDBFetcher::search(FetchKey key_, const QString& value_) {
   m_url.setPath(QString::fromLatin1("/find"));
   switch(key_) {
     case Title:
-      m_url.setQuery(QString::fromLatin1("tt=on;q=" + value_));
+      m_url.setQuery(QString::fromLatin1("tt=on;q=") + value_);
       break;
 
     case Person:
-      m_url.setQuery(QString::fromLatin1("nm=on;q=" + value_));
+      m_url.setQuery(QString::fromLatin1("nm=on;q=") + value_);
       break;
 
     default:

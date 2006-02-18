@@ -14,6 +14,7 @@
 #include "interface.h"
 
 #include <cppuhelper/bootstrap.hxx>
+#include <cppuhelper/implbase1.hxx>
 #include <com/sun/star/bridge/XUnoUrlResolver.hpp>
 #include <com/sun/star/lang/XServiceInfo.hpp>
 #include <com/sun/star/frame/XComponentLoader.hpp>
@@ -34,6 +35,8 @@
 #include <com/sun/star/sdbc/XRowUpdate.hpp>
 #include <com/sun/star/sdbc/SQLException.hpp>
 #include <com/sun/star/sdb/CommandType.hpp>
+#include <com/sun/star/document/XEventListener.hpp>
+#include <com/sun/star/document/XEventBroadcaster.hpp>
 
 #include <iostream>
 
@@ -49,8 +52,35 @@ using namespace com::sun::star::uno;
 using namespace rtl;
 using namespace cppu;
 
+typedef cppu::WeakImplHelper1<document::XEventListener> EventListenerHelper;
+class OOOHandler::Interface::EventListener : public EventListenerHelper {
+public:
+  EventListener(OOOHandler::Interface* i) : EventListenerHelper(), m_interface(i) {}
+  virtual void SAL_CALL disposing(const lang::EventObject&) throw(RuntimeException) {
+    DEBUG("Document is being disposed");
+    m_interface->disconnect();
+  }
+  virtual void SAL_CALL notifyEvent(const document::EventObject&) throw(RuntimeException) {
+//    std::cout << "Event: " << rtl::OUStringToOString(aEvent.EventName,RTL_TEXTENCODING_ISO_8859_1).getStr() << std::endl;
+  }
+private:
+  OOOHandler::Interface* m_interface;
+};
+
+OOOHandler::Interface::Interface() : m_listener(0) {
+}
+
+OOOHandler::Interface::~Interface() {
+  delete m_listener;
+  m_listener = 0;
+}
+
+bool OOOHandler::Interface::isConnected() const {
+  return m_gsmgr.is();
+}
+
 bool OOOHandler::Interface::connect(const std::string& host_, int port_, const std::string& pipe_) {
-  if(m_gsmgr.is()) {
+  if(isConnected()) {
     return true;
   }
 
@@ -109,6 +139,15 @@ bool OOOHandler::Interface::connect(const std::string& host_, int port_, const s
   return m_gsmgr.is();
 }
 
+bool OOOHandler::Interface::disconnect() {
+  m_gsmgr = 0;
+  m_dsmgr = 0;
+  m_doc = 0;
+  m_bib = 0;
+  m_cursor = 0;
+  return true;
+}
+
 bool OOOHandler::Interface::createDocument() {
   if(!m_gsmgr.is()) {
     return false;
@@ -124,7 +163,7 @@ bool OOOHandler::Interface::createDocument() {
 
   Reference<lang::XComponent> writer = desktop->getCurrentComponent();
   Reference<lang::XServiceInfo> info(writer, UNO_QUERY);
-  if(info->getImplementationName() == OUString::createFromAscii("SwXTextDocument")) {
+  if(info.is() && info->getImplementationName() == OUString::createFromAscii("SwXTextDocument")) {
     DEBUG("Document already open");
   } else {
     DEBUG("Opening a new document");
@@ -136,12 +175,18 @@ bool OOOHandler::Interface::createDocument() {
     }
 
     //get an instance of the OOowriter document
-    writer = rComponentLoader->loadComponentFromURL(
-                                        OUSTR("private:factory/swriter"),
-                                        OUSTR("_default"),
-                                        0,
-                                        Sequence<beans::PropertyValue>());
+    writer = rComponentLoader->loadComponentFromURL(OUSTR("private:factory/swriter"),
+                                                    OUSTR("_default"),
+                                                    0,
+                                                    Sequence<beans::PropertyValue>());
   }
+
+  //Manage many events with EventListener
+  Reference<document::XEventBroadcaster> eventBroadcast(writer, UNO_QUERY);
+  m_listener = new EventListener(this);
+  Reference<document::XEventListener> xEventListener = static_cast<document::XEventListener*>(m_listener);
+  eventBroadcast->addEventListener(xEventListener);
+
   Reference<frame::XController> controller = Reference<frame::XModel>(writer, UNO_QUERY)->getCurrentController();
   m_cursor = Reference<text::XTextViewCursorSupplier>(controller, UNO_QUERY)->getViewCursor();
   m_doc = Reference<text::XTextDocument>(writer, UNO_QUERY);

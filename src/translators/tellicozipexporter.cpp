@@ -60,7 +60,7 @@ bool TellicoZipExporter::exec() {
   exp.setOptions(opt);
   exp.setIncludeImages(false); // do not include images in XML
   QCString xml = exp.exportXML().toCString(); // encoded in utf-8
-  ProgressManager::self()->setProgress(this, 10);
+  ProgressManager::self()->setProgress(this, 5);
 
   QByteArray data;
   QBuffer buf(data);
@@ -72,16 +72,19 @@ bool TellicoZipExporter::exec() {
   KZip zip(&buf);
   zip.open(IO_WriteOnly);
   zip.writeFile(QString::fromLatin1("tellico.xml"), QString::null, QString::null, xml.length(), xml);
-  ProgressManager::self()->setProgress(this, 20);
+  ProgressManager::self()->setProgress(this, 10);
 
   if(m_includeImages) {
     // gonna be lazy and just increment progress every 3 images
-    const uint stepSize = 3;
+    // it might be less, might be more
     uint j = 0;
+    const QString imagesDir = QString::fromLatin1("images/");
     StringSet imageSet;
     Data::FieldVec imageFields = coll->imageFields();
+    // already took 10%, only 90% left
+    const uint stepSize = QMAX(1, (coll->entryCount() * imageFields.count()) / 90);
     for(Data::EntryVec::ConstIterator it = entries().begin(); it != entries().end() && !m_cancelled; ++it) {
-      for(Data::FieldVec::Iterator fIt = imageFields.begin(); fIt != imageFields.end(); ++fIt) {
+      for(Data::FieldVec::Iterator fIt = imageFields.begin(); fIt != imageFields.end(); ++fIt, ++j) {
         const QString id = it->field(fIt);
         if(id.isEmpty() || imageSet.has(id)) {
           continue;
@@ -93,14 +96,12 @@ bool TellicoZipExporter::exec() {
         }
         QByteArray ba = img.byteArray();
 //        myDebug() << "TellicoZipExporter::data() - adding image id = " << it->field(fIt) << endl;
-        zip.writeFile(QString::fromLatin1("images/") + id,
-                      QString::null, QString::null, ba.size(), ba);
+        zip.writeFile(imagesDir + id, QString::null, QString::null, ba.size(), ba);
         imageSet.add(id);
         if(j%stepSize == 0) {
-          ProgressManager::self()->setProgress(this, QMIN(20+j/stepSize, 99));
+          ProgressManager::self()->setProgress(this, QMIN(10+j/stepSize, 99));
           kapp->processEvents();
         }
-        ++j;
       }
     }
   }

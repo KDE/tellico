@@ -1,3 +1,24 @@
+2006-02-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed cleanup when oowriter is closed.
+	* Fixed character encoding for IMDB searches.
+	* Released Tellico 1.1.1.
+
+2006-02-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed image linking in HTML export.
+	* Updated admin/ and Makefile.am for recent KDE updates.
+	* Changed installation directory of .desktop file to use xdg_appsdir.
+
+2006-02-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed templates to scale images down to max of 150x200.
+
+2006-02-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with Video template not showing nationality.
+	* Added ISO 5426 and ISO 6937 character set converters, adapted from MARC4J;
+
 2006-02-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Dual-licensed the documentation under the GFDL and the FreeBSD

@@ -100,6 +100,14 @@ void OOOHandler::buildFieldsMap() {
 OOOHandler::OOOHandler() : Handler(), m_interface(0), m_state(NoConnection) {
 }
 
+Tellico::Cite::State OOOHandler::state() const {
+  // possibly the write got closed underneath us
+  if(m_state != NoConnection && m_interface && !m_interface->isConnected()) {
+    m_state = NoConnection;
+  }
+  return m_state;
+}
+
 bool OOOHandler::connect() {
   if(!m_interface) {
     m_interface = new Interface();
@@ -129,7 +137,9 @@ bool OOOHandler::cite(Map& fields) {
   bool success = m_interface->insertCitations(newFields) && m_interface->updateBibliography();
 //  bool success = m_interface->insertRecords(newFields);
   if(success) {
-   m_state = Success;
+    m_state = Success;
+//    m_interface->disconnect();
+//    m_state = NoConnection;
   }
   return success;
 }

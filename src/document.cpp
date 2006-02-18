@@ -179,7 +179,7 @@ bool Document::saveDocument(const KURL& url_) {
   exporter.setEntries(m_coll->entries());
   exporter.setURL(url_);
   // since we already asked about overwriting the file, force the save
-  exporter.setOptions(exporter.options() | Export::ExportForce);
+  exporter.setOptions(exporter.options() | Export::ExportForce | Export::ExportProgress);
   bool success = exporter.exec();
   ProgressManager::self()->setProgress(this, 90);
 
@@ -405,7 +405,7 @@ bool Document::isEmpty() const {
 }
 
 bool Document::loadImage(const QString& id_) const {
-  myLog() << "Document::loadImage() - id = " << id_ << endl;
+//  myLog() << "Document::loadImage() - id = " << id_ << endl;
   if(!m_coll) {
     return false;
   }

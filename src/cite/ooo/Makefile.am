@@ -64,7 +64,9 @@ UNOTYPES := \
 	com.sun.star.sdbc.XResultSetUpdate \
 	com.sun.star.sdbc.XRowUpdate \
 	com.sun.star.sdbc.SQLException \
-	com.sun.star.sdb.CommandType
+	com.sun.star.sdb.CommandType \
+        com.sun.star.document.XEventListener \
+        com.sun.star.document.XEventBroadcaster
 
 
 UNOHPPFILES = $(foreach t,$(UNOTYPES),$(UNODIR)/$(subst .,/,$(t)).hpp)

@@ -26,6 +26,9 @@
 // #include <libkcal/resourceremote.h> // this file is moving around, API differences
 #endif
 
+// needed for ::readlink
+#include <unistd.h>
+
 // most of this code came from konsolekalendar in kdepim
 
 using Tellico::CalendarHandler;
@@ -227,7 +230,7 @@ QString CalendarHandler::timezone() {
   } else {
     char zonefilebuf[PATH_MAX];
 
-    int len = readlink("/etc/localtime", zonefilebuf, PATH_MAX);
+    int len = ::readlink("/etc/localtime", zonefilebuf, PATH_MAX);
     if(len > 0 && len < PATH_MAX) {
       zone = QString::fromLocal8Bit(zonefilebuf, len);
       zone = zone.mid(zone.find(QString::fromLatin1("zoneinfo/")) + 9);

@@ -22,7 +22,6 @@
 #include "stringset.h"
 
 #include <klocale.h>
-#include <kglobal.h> // for KMAX
 
 #include <qregexp.h>
 
@@ -701,9 +700,9 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2) {
         while(parts1.count() < parts2.count()) {
           parts1 += QString();
         }
-        for(uint i = 1; i < parts2.count(); ++i) {
-          if(parts1[i].isEmpty()) {
-            parts1[i] = parts2[i];
+        for(uint j = 1; j < parts2.count(); ++j) {
+          if(parts1[j].isEmpty()) {
+            parts1[j] = parts2[j];
             addedPart = true;
           }
         }

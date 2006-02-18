@@ -91,17 +91,26 @@ void EntryView::showEntry(Data::EntryPtr entry_) {
 
   Export::TellicoXMLExporter exporter(entry_->collection());
   exporter.setEntries(entry_);
-  long opt = 0;
+  long opt = exporter.options();
   // on second thought, don't auto-format everything, just clean it
 //  if(Data::Field::autoFormat()) {
 //    opt = Export::ExportFormatted;
 //  }
   if(entry_->collection()->type() == Data::Collection::Bibtex) {
-    opt = Export::ExportClean;
+    opt |= Export::ExportClean;
   }
-  exporter.setOptions(opt | Export::ExportUTF8);
+  exporter.setOptions(opt);
   QDomDocument dom = exporter.exportXML();
 //  kdDebug() << dom.toString() << endl;
+#if 0
+  kdWarning() << "EntryView::showEntry() - turn me off!" << endl;
+  QFile f1(QString::fromLatin1("/tmp/test.xml"));
+  if(f1.open(IO_WriteOnly)) {
+    QTextStream t(&f1);
+    t << dom.toString();
+  }
+  f1.close();
+#endif
 
   QString html = m_handler->applyStylesheet(dom.toString());
   // write out image files
@@ -109,18 +118,18 @@ void EntryView::showEntry(Data::EntryPtr entry_) {
   for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
     QString id = entry_->field(field);
     if(!id.isEmpty() && !ImageFactory::writeImage(id, ImageFactory::TempDir)) {
-        kdWarning() << "EntryView::showEntry() - unable to write temporary image file: " << id << endl;
+      kdWarning() << "EntryView::showEntry() - unable to write temporary image file: " << id << endl;
     }
   }
 
 #if 0
   kdWarning() << "EntryView::showEntry() - turn me off!" << endl;
-  QFile f(QString::fromLatin1("/tmp/test.html"));
-  if(f.open(IO_WriteOnly)) {
-    QTextStream t(&f);
+  QFile f2(QString::fromLatin1("/tmp/test.html"));
+  if(f2.open(IO_WriteOnly)) {
+    QTextStream t(&f2);
     t << html;
   }
-  f.close();
+  f2.close();
 #endif
 
 //  kdDebug() << html << endl;

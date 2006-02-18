@@ -34,15 +34,15 @@
 
 <!-- template for creating attributes to scale an image to a max boundary size -->
 <xsl:template name="image-size">
- <xsl:param name="limit-height"/>
- <xsl:param name="limit-width"/>
+ <xsl:param name="limit-height" select="'0'"/>
+ <xsl:param name="limit-width" select="'0'"/>
  <xsl:param name="image"/>
 
  <xsl:variable name="actual-width" select="$image/@width"/>
  <xsl:variable name="actual-height" select="$image/@height"/>
 
  <xsl:choose>
-  <xsl:when test="$limit-width &gt; 0 and $limit-height  &gt; 0 and 
+  <xsl:when test="$limit-width &gt; 0 and $limit-height &gt; 0 and 
                   ($actual-width &gt; $limit-width or $actual-height &gt; $limit-height)">
 
    <xsl:choose>
@@ -71,11 +71,11 @@
 
   <!-- if both are smaller, no change -->
   <xsl:when test="$actual-width &gt; 0 and $actual-height &gt; 0">
-   <xsl:attribute name="height">
-    <xsl:value-of select="$actual-height"/>
-   </xsl:attribute>
    <xsl:attribute name="width">
     <xsl:value-of select="$actual-width"/>
+   </xsl:attribute>
+   <xsl:attribute name="height">
+    <xsl:value-of select="$actual-height"/>
    </xsl:attribute>
   </xsl:when>
 

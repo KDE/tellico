@@ -92,7 +92,6 @@
         font-size: 0.8em;
    }
    span.country {
-        font-size: 0.8em;
         font-style: italic;
    }
    h2 {
@@ -208,22 +207,23 @@
   <!-- title block -->
   <h1>
    <xsl:value-of select=".//tc:title[1]"/>
-   <xsl:if test=".//tc:year|tc:nationality">
-    <xsl:text> (</xsl:text>
-    <xsl:if test=".//tc:year">
+   <xsl:if test=".//tc:year|.//tc:nationality">
+    <xsl:text> </xsl:text>
      <span class="year">
-      <xsl:value-of select=".//tc:year"/>
-     </span>
-    </xsl:if>
-    <xsl:if test="tc:nationality">
-     <xsl:if test=".//tc:year">
-      <xsl:text> </xsl:text>
-     </xsl:if>
-     <span class="country">
-      <xsl:value-of select="tc:nationality"/>
-     </span>
-    </xsl:if>
-    <xsl:text>)</xsl:text>
+      <xsl:text>(</xsl:text>
+      <xsl:if test=".//tc:year">
+       <xsl:value-of select=".//tc:year[1]"/>
+      </xsl:if>
+      <xsl:if test=".//tc:nationality">
+       <xsl:if test=".//tc:year">
+        <xsl:text> </xsl:text>
+       </xsl:if>
+       <span class="country">
+        <xsl:value-of select=".//tc:nationality[1]"/>
+       </span>
+      </xsl:if>
+     <xsl:text>)</xsl:text>
+    </span>
    </xsl:if>
   </h1>
 
@@ -300,10 +300,10 @@
          <xsl:value-of select="$titleCat"/>
         </td>
        </tr>
+       <!-- the year and nationality have alreayd been shown, but the film
+            might have multiple values, so go ahead and show them again -->
        <xsl:for-each select="key('fieldsByCat', $titleCat)">
-        <xsl:if test="@name != 'title' and
-                      @name != 'year' and
-                      @name != 'nationality'">
+        <xsl:if test="@name != 'title'">
          <tr>
           <th>
            <xsl:value-of select="@title"/>

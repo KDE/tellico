@@ -44,10 +44,12 @@ using Tellico::Export::TellicoXMLExporter;
 
 TellicoXMLExporter::TellicoXMLExporter() : Exporter(),
       m_includeImages(false), m_includeGroups(false), m_widget(0) {
+  setOptions(options() | Export::ExportImages); // not included by default
 }
 
 TellicoXMLExporter::TellicoXMLExporter(Data::CollPtr coll) : Exporter(coll),
       m_includeImages(false), m_includeGroups(false), m_widget(0) {
+  setOptions(options() | Export::ExportImages); // not included by default
 }
 
 QString TellicoXMLExporter::formatString() const {
@@ -244,7 +246,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     if(fIt->flags() & Data::Field::AllowMultiple) {
       // parent element if field contains multiple values, child of entryElem
       // who cares about grammar, just add an 's' to the name
-      QDomElement parElem = dom_.createElement(fieldName + QString::fromLatin1("s"));
+      QDomElement parElem = dom_.createElement(fieldName + 's');
       entryElem.appendChild(parElem);
 
       // the space after the semi-colon is enforced when the field is set for the entry

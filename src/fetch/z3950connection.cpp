@@ -16,6 +16,8 @@
 #include "messagehandler.h"
 #include "../latin1literal.h"
 #include "../tellico_debug.h"
+#include "../iso5426converter.h"
+#include "../iso6937converter.h"
 
 #include <config.h>
 
@@ -27,7 +29,6 @@ extern "C" {
 #endif
 
 #include <klocale.h>
-#include <kglobal.h>
 
 using Tellico::Fetch::Z3950Connection;
 
@@ -145,7 +146,7 @@ void Z3950Connection::run() {
   }
 
   const size_t size = ZOOM_resultset_size(resultSet);
-  const size_t total = KMIN(size, m_max);
+  const size_t total = QMIN(size, m_max);
 
   QString newSyntax = m_syntax;
   if(size > 0) {
@@ -323,6 +324,14 @@ QString Z3950Connection::iconv(const QCString& text_, const QCString& charSet_) 
 
   yaz_iconv_t cd = yaz_iconv_open("utf-8", charSet_);
   if(!cd) {
+    // maybe it's iso 5426, which we sorta support
+    QString charSetLower = charSet_.lower();
+    charSetLower.remove('-').remove(' ');
+    if(charSetLower == Latin1Literal("iso5426")) {
+      return iconv(Iso5426Converter::toUtf8(text_).utf8(), "utf-8");
+    } else if(charSetLower == Latin1Literal("iso6937")) {
+      return iconv(Iso6937Converter::toUtf8(text_).utf8(), "utf-8");
+    }
     kdWarning() << "Z3950Fetcher::iconv() - conversion from " << charSet_ << " is unsupported" << endl;
     return QString::fromUtf8(text_);
   }
@@ -362,6 +371,14 @@ QString Z3950Connection::toXML(const QCString& marc_, const QCString& charSet_) 
 
   yaz_iconv_t cd = yaz_iconv_open("utf-8", charSet_);
   if(!cd) {
+    // maybe it's iso 5426, which we sorta support
+    QString charSetLower = charSet_.lower();
+    charSetLower.remove('-').remove(' ');
+    if(charSetLower == Latin1Literal("iso5426")) {
+      return toXML(Iso5426Converter::toUtf8(marc_).utf8(), "utf-8");
+    } else if(charSetLower == Latin1Literal("iso6937")) {
+      return toXML(Iso6937Converter::toUtf8(marc_).utf8(), "utf-8");
+    }
     kdWarning() << "Z3950Fetcher::toXML() - conversion from " << charSet_ << " is unsupported" << endl;
     return QString::null;
   }
@@ -373,7 +390,7 @@ QString Z3950Connection::toXML(const QCString& marc_, const QCString& charSet_) 
   // first 5 bytes are length
   bool ok;
   int len = marc_.left(5).toInt(&ok);
-  if (len < 25 || len > 100000) {
+  if(ok && (len < 25 || len > 100000)) {
     myDebug() << "Z3950Fetcher::toXML() - bad length: " << (ok ? len : -1) << endl;
     return QString::null;
   }

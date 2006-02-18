@@ -19,7 +19,8 @@
 // amarok is licensed under the GPL
 
 #include <kdebug.h>
-#include <ctime>       //std::clock_t
+// std::clock_t
+#include <ctime>
 
 //#define TELLICO_LOG
 

@@ -53,7 +53,7 @@ const Tellico::Data::Image& ImageFactory::addImage(const KURL& url_, bool quiet_
   if(url_.isEmpty() || !url_.isValid()) {
     return s_null;
   }
-  myLog() << "ImageFactory::addImage() - " << url_.prettyURL() << endl;
+//  myLog() << "ImageFactory::addImage() - " << url_.prettyURL() << endl;
   Data::Image* img = FileHandler::readImageFile(url_, quiet_);
   if(!img) {
 //    myDebug() << "ImageFactory::addImage() - image not found: " << url_.prettyURL() << endl;
@@ -110,7 +110,7 @@ const Tellico::Data::Image& ImageFactory::addImage(const QByteArray& data_, cons
 }
 
 const Tellico::Data::Image& ImageFactory::addCachedImage(const QString& id_, CacheDir dir_) {
-  myLog() << "ImageFactory::addCachedImage() - id = " << id_ << endl;
+//  myLog() << "ImageFactory::addCachedImage() - id = " << id_ << endl;
   KURL u;
   if(dir_ == DataDir) {
     u.setPath(dataDir() + id_);
@@ -150,7 +150,7 @@ const Tellico::Data::Image& ImageFactory::addCachedImage(const QString& id_, Cac
 }
 
 bool ImageFactory::copyImage(const QString& id_, const KURL& targetDir_, bool force_) {
-  myLog() << "ImageFactory::copyImage() - target = " << targetDir_.url() << id_ << endl;
+//  myLog() << "ImageFactory::copyImage() - target = " << targetDir_.url() << id_ << endl;
   if(targetDir_.isEmpty()) {
     myDebug() << "ImageFactory::copyImage() - empty target dir!" << endl;
     return false;
@@ -172,7 +172,7 @@ bool ImageFactory::writeImage(const QString& id_, CacheDir dir_) {
   if(id_.isEmpty()) {
     return false;
   }
-  myLog() << "ImageFactory::writeImage() - id = " << id_ << endl;
+//  myLog() << "ImageFactory::writeImage() - id = " << id_ << endl;
 
 //  myDebug() << "ImageFactory::writeCachedImage() - " << id_ << endl;
 

@@ -557,6 +557,8 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
             }
           }
         } else {
+          // really loose here, we don't even check that the element name
+          // is what we think it is
           QString s = childNode.toElement().text();
           if(isI18n && !s.isEmpty()) {
             value += i18n(s.utf8());
@@ -651,7 +653,7 @@ void TellicoImporter::readBorrower(const QDomElement& elem_) {
     if(e.isNull()) {
       continue;
     }
-    int id = e.attribute(QString::fromLatin1("entryRef")).toInt();
+    long id = e.attribute(QString::fromLatin1("entryRef")).toLong();
     Data::EntryPtr entry = m_coll->entryById(id);
     if(!entry) {
       continue;

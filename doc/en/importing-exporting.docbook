@@ -28,7 +28,7 @@ Only entries that match the current collection type will be found. The <guilabel
 </para>
 
 <para>
-To facilitate the use of barcode scanners, searches can include multiple ISBN values. Selecting the <guilabel>Multiple ISBN search</guilabel> checkbox will disable the search box and enable the <guibutton>Edit ISBN list...</guibutton> button, which will open a multi-line text entry box. Each ISBN should be entered on a line by itself. After closing the box, each ISBN will be validated for correct formatting. The ISBN validation is able to convert 13-digit EAN values, as well as full <acronym>UPC</acronym> codes, to the proper formatting. The ISBN list may also be read from a text file.
+To facilitate the use of barcode scanners, searches can include multiple ISBN values. Selecting the <guilabel>Multiple ISBN search</guilabel> check box will disable the search box and enable the <guibutton>Edit ISBN list...</guibutton> button, which will open a multi-line text entry box. Each ISBN should be entered on a line by itself. After closing the box, each ISBN will be validated for correct formatting. The ISBN validation is able to convert 13-digit EAN values, as well as full <acronym>UPC</acronym> codes, to the proper formatting. The ISBN list may also be read from a text file.
 </para>
 
 </sect1>
@@ -64,11 +64,11 @@ Comma-separated values (<acronym>CSV</acronym>) are a common way of importing an
 </screenshot>
 
 <para>
-First, select the type of collection that you are importing. If you are appending or merging to your open collection, the type is limited to your current collection type. If the first line of the CSV file contains the field titles, click the checkbox and the importer will automatically compare the titles against the fields in the current collection. If a field title matches, the header for that column changes to show that the column has been assigned to that field. If the file uses a delimiter other than a comma, be sure to change that option accordingly.
+First, select the type of collection that you are importing. If you are appending or merging to your open collection, the type is limited to your current collection type. If the first line of the CSV file contains the field titles, click the check box and the importer will automatically compare the titles against the fields in the current collection. If a field title matches, the header for that column changes to show that the column has been assigned to that field. If the file uses a delimiter other than a comma, be sure to change that option accordingly.
 </para>
 
 <para>
-In order for &appname; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the dropdown list and clicking the <guibutton>Assign Field</guibutton> button. If you need to add a new field to the collection, the last item in the dropdown list opens the  <link linkend="fields-dialog">&fields-dialog;</link>.
+In order for &appname; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the drop down box and clicking the <guibutton>Assign Field</guibutton> button. If you need to add a new field to the collection, the last item in the dropdown list opens the  <link linkend="fields-dialog">&fields-dialog;</link>.
 </para>
 
 <para>
@@ -96,15 +96,15 @@ In addition, if the disc contains CD-Text, that information is read and added to
 <title>Importing Audio File Metadata</title>
 
 <para>
-&appname; is able to scan a directory and read the tags for common audio file formats, such as <literal role="extension">mp3</literal> and <literal role="extension">ogg</literal>. The songs are entered in a music collection, where each entry is an album. If the song files contain the track number, the song name is inserted in the correct spot in the track list. The artist and genre information is also added to the entry. If the song tags contain comments, they are appended to the comments field in the entry, preceded by the file name.
+&appname; is able to scan a folder and read the tags for common audio file formats, such as <literal role="extension">mp3</literal> and <literal role="extension">ogg</literal>. The songs are entered in a music collection, where each entry is an album. If the song files contain the track number, the song name is inserted in the correct spot in the track list. The artist and genre information is also added to the entry. If the song tags contain comments, they are appended to the comments field in the entry, preceded by the file name.
 </para>
 
 <para>
-In addition, if a directory contains a <filename>.directory</filename> file and the directory name matches an album title, the <literal>Icon</literal> entry in the desktop file is used as the cover image for the album.
+In addition, if a folder contains a <filename>.directory</filename> file and the folder name matches an album title, the <literal>Icon</literal> entry in the desktop file is used as the cover image for the album.
 </para>
 
 <para>
-The audio file metadata importer can recursively scan a directory to find all audio files in any subdirectory, though symbolic links are not followed. &appname; uses the <ulink url="http://developer.kde.org/~wheeler/taglib.html">TagLib library</ulink> for reading the audio file metadata, and so can import data from any file type that TagLib understands.
+The audio file metadata importer can recursively scan a folder to find all audio files in any subfolder, though symbolic links are not followed. &appname; uses the <ulink url="http://developer.kde.org/~wheeler/taglib.html">TagLib library</ulink> for reading the audio file metadata, and so can import data from any file type that TagLib understands.
 </para>
 
 </sect2>

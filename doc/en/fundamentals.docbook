@@ -25,7 +25,7 @@ The entries in the collection are grouped together when they share the same valu
 </para>
 
 <para>
-You can use the &quick-filter; in the toolbar to quickly limit the visible entries to ones which contain the word you type. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the <link linkend="detailed-view">&detailed-view;</link> will only show the entries that match the filter. The statusbar shows you how many entries are in the collection, and how many are currently being filtered.
+You can use the &quick-filter; in the toolbar to quickly limit the visible entries to ones which contain the word you type. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the <link linkend="detailed-view">&detailed-view;</link> will only show the entries that match the filter. The status bar shows you how many entries are in the collection, and how many are currently being filtered.
 </para>
 
 </sect1>
@@ -134,7 +134,7 @@ In addition, when a group item is selected in the &group-view;, an icon view of 
 <title>Statusbar</title>
 
 <para>
-The statusbar is used to show you what &appname; is currently doing. It also includes a total count of the entries in the collection, and if a filter is being used, how many are currently visible.
+The status bar is used to show you what &appname; is currently doing. It also includes a total count of the entries in the collection, and if a filter is being used, how many are currently visible.
 </para>
 </sect2>
 
@@ -198,7 +198,7 @@ Self-contained data files can always be created by using the <menuchoice><guimen
 <sect2 id="edit-multiple">
 <title>Editing Multiple Entries</title>
 <para>
-Multiple entries may be edited at the same time by selecting more than one in either the &group-view; or the &detailed-view;. If multiple entries are selected, the fields which contain the same value in every entry are enabled. If entries have different values, then the fields are disabled. Checkboxes are added to the extreme right for each field entry which control whether the field is enabled or not, as shown in the screenshot below.
+Multiple entries may be edited at the same time by selecting more than one in either the &group-view; or the &detailed-view;. If multiple entries are selected, the fields which contain the same value in every entry are enabled. If entries have different values, then the fields are disabled. Check boxes are added to the extreme right for each field entry which control whether the field is enabled or not, as shown in the screenshot below.
 </para>
 
 <para>

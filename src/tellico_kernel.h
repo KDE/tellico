@@ -65,7 +65,7 @@ public:
    *
    * @return the field titles
    */
-  const QStringList& Kernel::fieldTitles() const;
+  const QStringList& fieldTitles() const;
   /**
    * Returns the name of an field, given its title. Wraps the call to the collection itself.
    *

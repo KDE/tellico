@@ -459,7 +459,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS build build_cpu build_vendor build_os host host_cpu host_vendor host_os target target_cpu target_vendor target_os INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar KDECONFIG kde_libs_prefix kde_libs_htmldir CONF_FILES CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE WOVERLOADED_VIRTUAL USE_EXCEPTIONS USE_RTTI CXXCPP NOOPT_CXXFLAGS NOOPT_CFLAGS KDE_USE_FINAL_TRUE KDE_USE_FINAL_FALSE KDE_USE_CLOSURE_TRUE KDE_USE_CLOSURE_FALSE KDE_NO_UNDEFINED KDE_USE_NMCHECK_TRUE KDE_USE_NMCHECK_FALSE LN_S ECHO RANLIB ac_ct_RANLIB EGREP LIBTOOL KDE_PLUGIN MSGFMT GMSGFMT XGETTEXT LIBUTIL LIBCOMPAT LIBCRYPT LIBRESOLV LIB_POLL FRAMEWORK_COREAUDIO LIBSOCKET X_EXTRA_LIBS LIBUCB LIBDL LIBXINERAMA X_PRE_LIBS LIB_X11 LIB_XRENDER LIBSM X_INCLUDES X_LDFLAGS x_includes x_libraries QTE_NORTTI LIB_XEXT LIBPTHREAD USE_THREADS KDE_MT_LDFLAGS KDE_MT_LIBS USER_INCLUDES USER_LDFLAGS LIBZ LIBPNG LIBJPEG qt_libraries qt_includes QT_INCLUDES QT_LDFLAGS PERL MOC UIC UIC_TR LIB_QT LIB_QPE kde_qtver KDE_EXTRA_RPATH KDE_RPATH X_RPATH kde_libraries kde_includes KDE_LDFLAGS KDE_INCLUDES all_includes all_libraries AUTODIRS include_ARTS_TRUE include_ARTS_FALSE DCOPIDL DCOPIDL2CPP DCOP_DEPENDENCIES MCOPIDL ARTSCCONFIG MEINPROC KDE_XSL_STYLESHEET kde_htmldir kde_appsdir kde_icondir kde_sounddir kde_datadir kde_locale kde_confdir kde_mimedir kde_wallpaperdir kde_bindir kde_templatesdir kde_servicesdir kde_servicetypesdir kde_moduledir kdeinitdir kde_styledir kde_widgetdir LIB_KDECORE LIB_KDEUI LIB_KIO LIB_SMB LIB_KAB LIB_KABC LIB_KHTML LIB_KSPELL LIB_KPARTS LIB_KDEPRINT LIB_KUTILS LIB_KDEPIM LIB_KSYCOCA LIB_KFILE LIB_KFM ALLOCA LIBXML_LIBS LIBXML_CFLAGS LIBXML_RPATH XMLCATALOG XML_CATALOG_FILE LIBXSLT_LIBS LIBXSLT_CFLAGS LIBXSLT_RPATH TAGLIB_CFLAGS TAGLIB_LIBS TAGLIB_RPATH YAZ_CFLAGS YAZ_LIBS YAZ_RPATH KCDDB_LIBS KCAL_LIBS USE_LIBBTPARSE_TRUE USE_LIBBTPARSE_FALSE WITH_OOO_TRUE WITH_OOO_FALSE OFFICE_SDK_includes OFFICE_libadd OFFICE_libdir OFFICE_registry CPPUMAKER TOPSUBDIRS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS build build_cpu build_vendor build_os host host_cpu host_vendor host_os target target_cpu target_vendor target_os INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar KDECONFIG kde_libs_prefix kde_libs_htmldir CONF_FILES CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE WOVERLOADED_VIRTUAL HAVE_GCC_VISIBILITY unsermake_enable_pch_TRUE unsermake_enable_pch_FALSE USE_EXCEPTIONS USE_RTTI CXXCPP NOOPT_CXXFLAGS NOOPT_CFLAGS ENABLE_PERMISSIVE_FLAG LDFLAGS_AS_NEEDED LDFLAGS_NEW_DTAGS KDE_USE_FINAL_TRUE KDE_USE_FINAL_FALSE KDE_USE_CLOSURE_TRUE KDE_USE_CLOSURE_FALSE KDE_NO_UNDEFINED KDE_USE_NMCHECK_TRUE KDE_USE_NMCHECK_FALSE LN_S ECHO RANLIB ac_ct_RANLIB EGREP LIBTOOL KDE_PLUGIN KDE_CHECK_PLUGIN MSGFMT GMSGFMT XGETTEXT LIBUTIL LIBCOMPAT LIBCRYPT LIBRESOLV LIB_POLL FRAMEWORK_COREAUDIO LIBSOCKET X_EXTRA_LIBS LIBUCB LIBDL X_PRE_LIBS LIB_X11 LIB_XRENDER LIBSM X_INCLUDES X_LDFLAGS x_includes x_libraries QTE_NORTTI LIB_XEXT LIBPTHREAD USE_THREADS KDE_MT_LDFLAGS KDE_MT_LIBS USER_INCLUDES USER_LDFLAGS LIBZ LIBPNG LIBJPEG qt_libraries qt_includes QT_INCLUDES QT_LDFLAGS PERL MOC UIC UIC_TR LIB_QT LIB_QPE kde_qtver KDE_EXTRA_RPATH KDE_RPATH X_RPATH kde_libraries kde_includes KDE_LDFLAGS KDE_INCLUDES all_includes all_libraries AUTODIRS include_ARTS_TRUE include_ARTS_FALSE MAKEKDEWIDGETS KCONFIG_COMPILER KCFG_DEPENDENCIES DCOPIDLNG DCOPIDL DCOPIDL2CPP DCOP_DEPENDENCIES MCOPIDL ARTSCCONFIG MEINPROC KDE_XSL_STYLESHEET XMLLINT kde_htmldir kde_appsdir kde_icondir kde_sounddir kde_datadir kde_locale kde_confdir kde_kcfgdir kde_mimedir kde_wallpaperdir kde_bindir xdg_appsdir xdg_menudir xdg_directorydir kde_templatesdir kde_servicesdir kde_servicetypesdir kde_moduledir kdeinitdir kde_styledir kde_widgetdir LIB_KDED LIB_KDECORE LIB_KDEUI LIB_KIO LIB_KJS LIB_SMB LIB_KAB LIB_KABC LIB_KHTML LIB_KSPELL LIB_KPARTS LIB_KDEPRINT LIB_KUTILS LIB_KDEPIM LIB_KIMPROXY LIB_KNEWSTUFF LIB_KDNSSD LIB_KUNITTEST LIB_KSYCOCA LIB_KFILE LIB_KFM ALLOCA LIBXML_LIBS LIBXML_CFLAGS LIBXML_RPATH XMLCATALOG XML_CATALOG_FILE LIBXSLT_LIBS LIBXSLT_CFLAGS LIBXSLT_RPATH TAGLIB_CFLAGS TAGLIB_LIBS TAGLIB_RPATH YAZ_CFLAGS YAZ_LIBS YAZ_RPATH KCDDB_LIBS KCAL_LIBS USE_LIBBTPARSE_TRUE USE_LIBBTPARSE_FALSE WITH_OOO_TRUE WITH_OOO_FALSE OFFICE_SDK_includes OFFICE_libadd OFFICE_libdir OFFICE_registry CPPUMAKER TOPSUBDIRS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1017,12 +1017,14 @@ Optional Features:
   --disable-debug         disables debug output and debug symbols default=no
   --enable-strict         compiles with strict compiler options (may not
                           work!)
-  --disable-warnings      disables compilation with -Wall and similiar
+  --disable-warnings      disables compilation with -Wall and similar
   --enable-profile        creates profiling infos default=no
   --disable-dependency-tracking  speeds up one-time build
   --enable-dependency-tracking   do not reject slow dependency extractors
   --enable-pch            enables precompiled header support (currently only
-                          KCC) default=no
+                          KCC or gcc >=3.4+unsermake) default=no
+  --enable-coverage       use gcc coverage testing
+  --enable-new-ldflags    enable the new linker flags
   --enable-final          build size optimized apps (experimental - needs lots
                           of memory)
   --enable-closure        delay template instantiation
@@ -1031,7 +1033,7 @@ Optional Features:
                           build shared libraries [default=yes]
   --enable-static[=PKGS]
                           build static libraries [default=no]
-  --enable-libsuffix      /lib directory suffix (64,32,none=default)
+  --enable-libsuffix      /lib directory suffix (64,32,none,auto=default)
   --enable-fast-install[=PKGS]
                           optimize for fast installation [default=yes]
   --disable-libtool-lock  avoid locking (might break parallel builds)
@@ -1056,14 +1058,13 @@ Optional Packages:
   --with-pic              try to use only PIC/non-PIC objects [default=use
                           both]
   --with-tags=TAGS        include additional configurations [CXX]
-  --with-xinerama         enable support for Xinerama
   --with-extra-includes=DIR
                           adds non standard include paths
   --with-extra-libs=DIR   adds non standard library paths
   --with-qt-dir=DIR       where the root of Qt is installed
   --with-qt-includes=DIR  where the Qt includes are.
   --with-qt-libraries=DIR where the Qt library is installed.
-  --without-arts          build without aRts default=yes
+  --without-arts          build without aRts default=no
   --with-xml-catalog=CATALOG
                           path to XML catalog, default=without-xml-catalog
   --with-btparse          Link against libbtparse as a shared lib (shared) or
@@ -1957,7 +1958,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=tellico
- VERSION=1.1
+ VERSION=1.1.1
 
 
 cat >>confdefs.h <<_ACEOF
@@ -2261,6 +2262,7 @@ echo "$as_me: error: $KDECONFIG --prefix outputed the non existant prefix '$kde_
    { (exit 1); exit 1; }; }
   fi
   kde_libs_htmldir=`$KDECONFIG --install html --expandvars`
+  kde_libs_suffix=`$KDECONFIG --libsuffix`
 
   echo "$as_me:$LINENO: checking where to install" >&5
 echo $ECHO_N "checking where to install... $ECHO_C" >&6
@@ -3731,7 +3733,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
       if test $kde_use_debug_code = "full"; then
         CFLAGS="-g3 -fno-inline $CFLAGS"
       else
-        CFLAGS="-g -O2 $CFLAGS"
+        CFLAGS="-g -O2 -fno-schedule-insns -fno-inline $CFLAGS"
       fi
     else
       CFLAGS="-O2 $CFLAGS"
@@ -4219,6 +4221,95 @@ fi
 
 
 
+
+  echo "$as_me:$LINENO: checking whether $CC is blacklisted" >&5
+echo $ECHO_N "checking whether $CC is blacklisted... $ECHO_C" >&6
+
+
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+#ifdef __GNUC__
+#if __GNUC__ == 4 && __GNUC_MINOR__ == 0 && __GNUC_PATCHLEVEL__ == 0
+choke me
+#endif
+#endif
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  kde_bad_compiler=no
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+kde_bad_compiler=yes
+
+fi
+rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+
+  echo "$as_me:$LINENO: result: $kde_bad_compiler" >&5
+echo "${ECHO_T}$kde_bad_compiler" >&6
+
+if test "$kde_bad_compiler" = "yes"; then
+  { { echo "$as_me:$LINENO: error:
+
+This particular compiler version is blacklisted because it
+is known to miscompile KDE. Please use a newer version, or
+if that is not yet available, choose an older version.
+
+Please do not report a bug or bother us reporting this
+configure error. We know about it, and we introduced
+it by intention to avoid untraceable bugs or crashes in KDE.
+
+" >&5
+echo "$as_me: error:
+
+This particular compiler version is blacklisted because it
+is known to miscompile KDE. Please use a newer version, or
+if that is not yet available, choose an older version.
+
+Please do not report a bug or bother us reporting this
+configure error. We know about it, and we introduced
+it by intention to avoid untraceable bugs or crashes in KDE.
+
+" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+
+
   if test "$GXX" = "yes" || test "$CXX" = "KCC"; then
     if test "$kde_use_debug_code" != "no"; then
       if test "$CXX" = "KCC"; then
@@ -4227,7 +4318,7 @@ fi
         if test "$kde_use_debug_code" = "full"; then
           CXXFLAGS="-g3 -fno-inline $CXXFLAGS"
         else
-          CXXFLAGS="-g -O2 $CXXFLAGS"
+          CXXFLAGS="-g -O2 -fno-schedule-insns -fno-inline $CXXFLAGS"
         fi
       fi
 
@@ -4519,7 +4610,7 @@ fi
 
   if test "$kde_use_warnings" = "yes"; then
       if test "$GCC" = "yes"; then
-        CXXFLAGS="-Wall -W -Wpointer-arith -Wwrite-strings $CXXFLAGS"
+        CXXFLAGS="-Wall -W -Wpointer-arith $CXXFLAGS"
         case $host in
           *-*-linux-gnu)
             CFLAGS="-std=iso9899:1990 -W -Wall -Wchar-subscripts -Wshadow -Wpointer-arith -Wmissing-prototypes -Wwrite-strings -D_XOPEN_SOURCE=500 -D_BSD_SOURCE $CFLAGS"
@@ -4876,9 +4967,9 @@ echo "${ECHO_T}no" >&6
 fi
 
 
-echo "$as_me:$LINENO: checking whether $CXX supports -Wnon-virtual-dtor" >&5
-echo $ECHO_N "checking whether $CXX supports -Wnon-virtual-dtor... $ECHO_C" >&6
-kde_cache=`echo Wnon-virtual-dtor | sed 'y% .=/+-,%____p__%'`
+echo "$as_me:$LINENO: checking whether $CXX supports -Wno-non-virtual-dtor" >&5
+echo $ECHO_N "checking whether $CXX supports -Wno-non-virtual-dtor... $ECHO_C" >&6
+kde_cache=`echo Wno-non-virtual-dtor | sed 'y% .=/+-,%____p__%'`
 if eval "test \"\${kde_cv_prog_cxx_$kde_cache+set}\" = set"; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
@@ -4895,7 +4986,7 @@ ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFL
 
 
   save_CXXFLAGS="$CXXFLAGS"
-  CXXFLAGS="$CXXFLAGS -Wnon-virtual-dtor"
+  CXXFLAGS="$CXXFLAGS -Wno-non-virtual-dtor"
   cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
@@ -4955,7 +5046,7 @@ if eval "test \"`echo '$kde_cv_prog_cxx_'$kde_cache`\" = yes"; then
  echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6
  :
- CXXFLAGS="-Wnon-virtual-dtor $CXXFLAGS"
+ CXXFLAGS="$CXXFLAGS -Wno-non-virtual-dtor"
 else
  echo "$as_me:$LINENO: result: no" >&5
 echo "${ECHO_T}no" >&6
@@ -4970,7 +5061,113 @@ fi
     CXXFLAGS="-Wcast-qual -Wshadow -Wcast-align $CXXFLAGS"
   fi
 
+  # Check whether --enable-pch or --disable-pch was given.
+if test "${enable_pch+set}" = set; then
+  enableval="$enable_pch"
+   kde_use_pch=$enableval
+else
+   kde_use_pch=no
+fi;
+
+  HAVE_GCC_VISIBILITY=0
+
+
   if test "$GXX" = "yes"; then
+    gcc_no_reorder_blocks=NO
+
+echo "$as_me:$LINENO: checking whether $CXX supports -fno-reorder-blocks" >&5
+echo $ECHO_N "checking whether $CXX supports -fno-reorder-blocks... $ECHO_C" >&6
+kde_cache=`echo fno-reorder-blocks | sed 'y% .=/+-,%____p__%'`
+if eval "test \"\${kde_cv_prog_cxx_$kde_cache+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+
+
+   ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&5'
+
+
+  save_CXXFLAGS="$CXXFLAGS"
+  CXXFLAGS="$CXXFLAGS -fno-reorder-blocks"
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+int
+main ()
+{
+ return 0;
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  eval "kde_cv_prog_cxx_$kde_cache=yes"
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+  CXXFLAGS="$save_CXXFLAGS"
+  ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+fi
+
+if eval "test \"`echo '$kde_cv_prog_cxx_'$kde_cache`\" = yes"; then
+ echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+ :
+ gcc_no_reorder_blocks=YES
+else
+ echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+ :
+
+fi
+
+    if test $kde_use_debug_code != "no" && \
+       test $kde_use_debug_code != "full" && \
+       test "YES" = "$gcc_no_reorder_blocks" ; then
+          CXXFLAGS="$CXXFLAGS -fno-reorder-blocks"
+          CFLAGS="$CFLAGS -fno-reorder-blocks"
+    fi
 
 echo "$as_me:$LINENO: checking whether $CXX supports -fno-exceptions" >&5
 echo $ECHO_N "checking whether $CXX supports -fno-exceptions... $ECHO_C" >&6
@@ -5323,18 +5520,48 @@ echo "${ECHO_T}no" >&6
  USE_EXCEPTIONS=
 fi
 
+    ENABLE_PERMISSIVE_FLAG="-fpermissive"
+
+    if test "$kde_use_pch" = "yes"; then
+        echo "$as_me:$LINENO: checking whether gcc supports precompiling c header files" >&5
+echo $ECHO_N "checking whether gcc supports precompiling c header files... $ECHO_C" >&6
+        echo >conftest.h
+        if $CC -x c-header conftest.h >/dev/null 2>/dev/null; then
+            kde_gcc_supports_pch=yes
+            echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+        else
+            kde_gcc_supports_pch=no
+            echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+        fi
+        if test "$kde_gcc_supports_pch" = "yes"; then
+            echo "$as_me:$LINENO: checking whether gcc supports precompiling c++ header files" >&5
+echo $ECHO_N "checking whether gcc supports precompiling c++ header files... $ECHO_C" >&6
+            if $CXX -x c++-header conftest.h >/dev/null 2>/dev/null; then
+                kde_gcc_supports_pch=yes
+                echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+            else
+                kde_gcc_supports_pch=no
+                echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+            fi
+        fi
+        rm -f conftest.h conftest.h.gch
+    fi
   fi
-  if test "$CXX" = "KCC"; then
 
-    # Check whether --enable-pch or --disable-pch was given.
-if test "${enable_pch+set}" = set; then
-  enableval="$enable_pch"
 
-      kde_use_pch=$enableval
-
+if test "$kde_use_pch" = "yes" && test "$kde_gcc_supports_pch" = "yes"; then
+  unsermake_enable_pch_TRUE=
+  unsermake_enable_pch_FALSE='#'
 else
-  kde_use_pch=no
-fi;
+  unsermake_enable_pch_TRUE='#'
+  unsermake_enable_pch_FALSE=
+fi
+
+  if test "$CXX" = "KCC"; then
 
     if test "$kde_use_pch" = "yes"; then
 
@@ -6291,6 +6518,222 @@ echo "${ECHO_T}no" >&6
 fi
 
 
+  # Check whether --enable-coverage or --disable-coverage was given.
+if test "${enable_coverage+set}" = set; then
+  enableval="$enable_coverage"
+
+      if test "$am_cv_CC_dependencies_compiler_type" = "gcc3"; then
+        ac_coverage_compiler="-fprofile-arcs -ftest-coverage"
+        ac_coverage_linker="-lgcc"
+      elif test "$am_cv_CC_dependencies_compiler_type" = "gcc"; then
+        ac_coverage_compiler="-fprofile-arcs -ftest-coverage"
+        ac_coverage_linker=""
+      else
+        { { echo "$as_me:$LINENO: error: coverage with your compiler is not supported" >&5
+echo "$as_me: error: coverage with your compiler is not supported" >&2;}
+   { (exit 1); exit 1; }; }
+      fi
+      CFLAGS="$CFLAGS $ac_coverage_compiler"
+      CXXFLAGS="$CXXFLAGS $ac_coverage_compiler"
+      LDFLAGS="$LDFLAGS $ac_coverage_linker"
+
+fi;
+
+
+
+
+
+
+  # Check whether --enable-new_ldflags or --disable-new_ldflags was given.
+if test "${enable_new_ldflags+set}" = set; then
+  enableval="$enable_new_ldflags"
+  kde_use_new_ldflags=$enableval
+else
+  kde_use_new_ldflags=no
+fi;
+
+  LDFLAGS_AS_NEEDED=""
+  LDFLAGS_NEW_DTAGS=""
+  if test "x$kde_use_new_ldflags" = "xyes"; then
+       LDFLAGS_NEW_DTAGS=""
+
+echo "$as_me:$LINENO: checking whether $CXX supports -Wl,--enable-new-dtags" >&5
+echo $ECHO_N "checking whether $CXX supports -Wl,--enable-new-dtags... $ECHO_C" >&6
+kde_cache=`echo Wl,--enable-new-dtags | sed 'y% .=/+-,%____p__%'`
+if eval "test \"\${kde_cv_prog_cxx_$kde_cache+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+
+
+   ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&5'
+
+
+  save_CXXFLAGS="$CXXFLAGS"
+  CXXFLAGS="$CXXFLAGS -Wl,--enable-new-dtags"
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+int
+main ()
+{
+ return 0;
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  eval "kde_cv_prog_cxx_$kde_cache=yes"
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+  CXXFLAGS="$save_CXXFLAGS"
+  ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+fi
+
+if eval "test \"`echo '$kde_cv_prog_cxx_'$kde_cache`\" = yes"; then
+ echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+ :
+ LDFLAGS_NEW_DTAGS="-Wl,--enable-new-dtags"
+else
+ echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+ :
+
+fi
+
+
+
+echo "$as_me:$LINENO: checking whether $CXX supports -Wl,--as-needed" >&5
+echo $ECHO_N "checking whether $CXX supports -Wl,--as-needed... $ECHO_C" >&6
+kde_cache=`echo Wl,--as-needed | sed 'y% .=/+-,%____p__%'`
+if eval "test \"\${kde_cv_prog_cxx_$kde_cache+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+
+
+   ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&5'
+
+
+  save_CXXFLAGS="$CXXFLAGS"
+  CXXFLAGS="$CXXFLAGS -Wl,--as-needed"
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+int
+main ()
+{
+ return 0;
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  eval "kde_cv_prog_cxx_$kde_cache=yes"
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+  CXXFLAGS="$save_CXXFLAGS"
+  ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+fi
+
+if eval "test \"`echo '$kde_cv_prog_cxx_'$kde_cache`\" = yes"; then
+ echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+ :
+ LDFLAGS_AS_NEEDED="-Wl,--as-needed"
+else
+ echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+ :
+
+fi
+
+  fi
 
 
 
@@ -6588,14 +7031,28 @@ fi;
 
 
 
-    kdelibsuff=no
+    kdelibsuff="$kde_libs_suffix"
+    if test -z "$kdelibsuff"; then
+       kdelibsuff="auto"
+    fi
     # Check whether --enable-libsuffix or --disable-libsuffix was given.
 if test "${enable_libsuffix+set}" = set; then
   enableval="$enable_libsuffix"
   kdelibsuff=$enableval
 fi;
-    # TODO: add an auto case that compiles a little C app to check
-    # where the glibc is
+
+    if test "$kdelibsuff" = "auto"; then
+
+cat > conftest.c << EOF
+#include <stdio.h>
+int main() {
+ return 0;
+}
+EOF
+        kdelibsuff=`$CC conftest.c -o conftest.out; ldd conftest.out | grep -E "libc.so"| grep -E -o "/lib[^\/]*/" | sed "s/lib//" | sed "s/\/*//g"`
+	rm -rf conftest.*
+    fi
+
     if test "$kdelibsuff" = "no"; then
        kdelibsuff=
     fi
@@ -6614,7 +7071,7 @@ _ACEOF
           fi
 
 cat >>confdefs.h <<_ACEOF
-#define KDELIBSUFF "\"${kdelibsuff}\""
+#define KDELIBSUFF "${kdelibsuff}"
 _ACEOF
 
         echo "$as_me:$LINENO: result: using lib directory suffix $kdelibsuff" >&5
@@ -7123,7 +7580,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 7126 "configure"' > conftest.$ac_ext
+  echo '#line 7583 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -10632,7 +11089,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 10635 "configure"
+#line 11092 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -10730,7 +11187,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 10733 "configure"
+#line 11190 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -10975,7 +11432,7 @@ echo "$as_me: creating $ofile" >&6;}
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# Foundation, Inc., 51 Franklin Street, Fifh Floor, Boston, MA 02110-1301, USA.
 #
 # As a special exception to the GNU General Public License, if you
 # distribute this file as part of a program that contains a
@@ -11346,7 +11803,7 @@ EOF
 #
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#  Foundation, Inc., 51 Franklin Street, Fifh Floor, Boston, MA 02110-1301, USA.
 #  */
 #
 # #include <stdio.h>		/* for printf() */
@@ -13943,7 +14400,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 13946 "configure"
+#line 14403 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -14041,7 +14498,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 14044 "configure"
+#line 14501 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -14581,6 +15038,10 @@ LIBTOOL_SHELL="/bin/sh ./libtool"
 KDE_PLUGIN="-avoid-version -module -no-undefined \$(KDE_NO_UNDEFINED) \$(KDE_RPATH) \$(KDE_MT_LDFLAGS)"
 
 
+# This hack ensures that libtool creates shared libs for kunittest plugins. By default check_LTLIBRARIES makes static libs.
+KDE_CHECK_PLUGIN="\$(KDE_PLUGIN) -rpath \$(libdir)"
+
+
 # we patch configure quite some so we better keep that consistent for incremental runs
 AUTOCONF='$(SHELL) $(top_srcdir)/admin/cvs.sh configure || touch configure'
 
@@ -14726,9 +15187,9 @@ echo "${ECHO_T}found xgettext programs is not GNU xgettext; ignore it" >&6
 
 
 if test -z "3.2"; then
-  # Current default Qt version: 3.1
+  # Current default Qt version: 3.2
   kde_qtver=3
-  kde_qtsubver=1
+  kde_qtsubver=2
 else
   kde_qtsubver=`echo "3.2" | sed -e 's#[0-9][0-9]*\.\([0-9][0-9]*\).*#\1#'`
   # following is the check if subversion isnt found in passed argument
@@ -14752,12 +15213,16 @@ if test -z ""; then
   if test "$kde_qtver" = "3"; then
     if test $kde_qtsubver -gt 0; then
 	 if test $kde_qtsubver -gt 1; then
-	    kde_qt_minversion=">= Qt 3.2"
+	    if test $kde_qtsubver -gt 2; then
+		kde_qt_minversion=">= Qt 3.3 and < 4.0"
+	    else
+	        kde_qt_minversion=">= Qt 3.2 and < 4.0"
+	    fi
 	 else
-            kde_qt_minversion=">= Qt 3.1 (20021021)"
+            kde_qt_minversion=">= Qt 3.1 (20021021) and < 4.0"
          fi
     else
-      kde_qt_minversion=">= Qt 3.0"
+      kde_qt_minversion=">= Qt 3.0 and < 4.0"
     fi
   fi
   if test "$kde_qtver" = "1"; then
@@ -14770,11 +15235,11 @@ fi
 if test -z ""; then
    if test $kde_qtver = 3; then
      if test $kde_qtsubver -gt 0; then
-       kde_qt_verstring="QT_VERSION >= 0x03@VER@00"
+       kde_qt_verstring="QT_VERSION >= 0x03@VER@00 && QT_VERSION < 0x040000"
        qtsubver=`echo "00$kde_qtsubver" | sed -e 's,.*\(..\)$,\1,'`
        kde_qt_verstring=`echo $kde_qt_verstring | sed -e "s,@VER@,$qtsubver,"`
      else
-       kde_qt_verstring="QT_VERSION >= 300"
+       kde_qt_verstring="QT_VERSION >= 300 && QT_VERSION < 0x040000"
      fi
    fi
    if test $kde_qtver = 2; then
@@ -14791,6 +15256,9 @@ else
    kde_qt_verstring=""
 fi
 
+if test $kde_qtver = 4; then
+  kde_qt_dirs="$QTDIR /usr/lib/qt4 /usr/lib/qt /usr/share/qt4"
+fi
 if test $kde_qtver = 3; then
   kde_qt_dirs="$QTDIR /usr/lib/qt3 /usr/lib/qt /usr/share/qt3"
 fi
@@ -15523,39 +15991,35 @@ _ACEOF
 
    fi
 
-  echo "$as_me:$LINENO: checking for socklen_t" >&5
+   echo "$as_me:$LINENO: checking for socklen_t" >&5
 echo $ECHO_N "checking for socklen_t... $ECHO_C" >&6
-  if test "${ac_cv_socklen_t+set}" = set; then
+   if test "${kde_cv_socklen_t+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
 
-
-
-     ac_ext=cc
+      ac_ext=cc
 ac_cpp='$CXXCPP $CPPFLAGS'
 ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
 
-ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&5'
-
-
-    cat >conftest.$ac_ext <<_ACEOF
+      kde_cv_socklen_t=no
+      cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
 cat confdefs.h >>conftest.$ac_ext
 cat >>conftest.$ac_ext <<_ACEOF
 /* end confdefs.h.  */
 
-#include <sys/types.h>
-#include <sys/socket.h>
+         #include <sys/types.h>
+         #include <sys/socket.h>
 
 int
 main ()
 {
 
-socklen_t a=0;
-getsockname(0,(struct sockaddr*)0, &a);
+         socklen_t len;
+         getpeername(0,0,&len);
 
   ;
   return 0;
@@ -15583,67 +16047,17 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
-  ac_cv_socklen_t=socklen_t
+
+         kde_cv_socklen_t=yes
+         kde_cv_socklen_t_equiv=socklen_t
+
 else
   echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-
-#include <sys/types.h>
-#include <sys/socket.h>
-
-int
-main ()
-{
-
-int a=0;
-getsockname(0,(struct sockaddr*)0, &a);
-
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext
-if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
-  (eval $ac_compile) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_cxx_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest.$ac_objext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_socklen_t=int
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_socklen_t=size_t
-
 fi
 rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-
-fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
-    ac_ext=c
+      ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
@@ -15652,21 +16066,98 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 fi
 
+   echo "$as_me:$LINENO: result: $kde_cv_socklen_t" >&5
+echo "${ECHO_T}$kde_cv_socklen_t" >&6
+   if test $kde_cv_socklen_t = no; then
+      echo "$as_me:$LINENO: checking for socklen_t equivalent for socket functions" >&5
+echo $ECHO_N "checking for socklen_t equivalent for socket functions... $ECHO_C" >&6
+      if test "${kde_cv_socklen_t_equiv+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
 
-  echo "$as_me:$LINENO: result: $ac_cv_socklen_t" >&5
-echo "${ECHO_T}$ac_cv_socklen_t" >&6
-  if test "$ac_cv_socklen_t" != "socklen_t"; then
+         kde_cv_socklen_t_equiv=int
+         ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+         for t in int size_t unsigned long "unsigned long"; do
+            cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+               #include <sys/types.h>
+               #include <sys/socket.h>
+
+int
+main ()
+{
+
+               $t len;
+               getpeername(0,0,&len);
+
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+
+               kde_cv_socklen_t_equiv="$t"
+               break
+
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+fi
+rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+         done
+         ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+fi
+
+      echo "$as_me:$LINENO: result: $kde_cv_socklen_t_equiv" >&5
+echo "${ECHO_T}$kde_cv_socklen_t_equiv" >&6
+   fi
 
 cat >>confdefs.h <<_ACEOF
-#define socklen_t $ac_cv_socklen_t
+#define kde_socklen_t $kde_cv_socklen_t_equiv
 _ACEOF
 
-  fi
 
 cat >>confdefs.h <<_ACEOF
-#define ksize_t socklen_t
+#define ksize_t $kde_cv_socklen_t_equiv
 _ACEOF
-
 
 
    echo "$as_me:$LINENO: checking for dnet_ntoa in -ldnet" >&5
@@ -16610,6 +17101,158 @@ fi
 done
 
 
+   # sys/bitypes.h is needed for uint32_t and friends on Tru64
+
+for ac_header in sys/bitypes.h
+do
+as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
+if eval "test \"\${$as_ac_Header+set}\" = set"; then
+  echo "$as_me:$LINENO: checking for $ac_header" >&5
+echo $ECHO_N "checking for $ac_header... $ECHO_C" >&6
+if eval "test \"\${$as_ac_Header+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+fi
+echo "$as_me:$LINENO: result: `eval echo '${'$as_ac_Header'}'`" >&5
+echo "${ECHO_T}`eval echo '${'$as_ac_Header'}'`" >&6
+else
+  # Is the header compilable?
+echo "$as_me:$LINENO: checking $ac_header usability" >&5
+echo $ECHO_N "checking $ac_header usability... $ECHO_C" >&6
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+$ac_includes_default
+#include <$ac_header>
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_header_compiler=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+ac_header_compiler=no
+fi
+rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+echo "$as_me:$LINENO: result: $ac_header_compiler" >&5
+echo "${ECHO_T}$ac_header_compiler" >&6
+
+# Is the header present?
+echo "$as_me:$LINENO: checking $ac_header presence" >&5
+echo $ECHO_N "checking $ac_header presence... $ECHO_C" >&6
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <$ac_header>
+_ACEOF
+if { (eval echo "$as_me:$LINENO: \"$ac_cpp conftest.$ac_ext\"") >&5
+  (eval $ac_cpp conftest.$ac_ext) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } >/dev/null; then
+  if test -s conftest.err; then
+    ac_cpp_err=$ac_c_preproc_warn_flag
+    ac_cpp_err=$ac_cpp_err$ac_c_werror_flag
+  else
+    ac_cpp_err=
+  fi
+else
+  ac_cpp_err=yes
+fi
+if test -z "$ac_cpp_err"; then
+  ac_header_preproc=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+  ac_header_preproc=no
+fi
+rm -f conftest.err conftest.$ac_ext
+echo "$as_me:$LINENO: result: $ac_header_preproc" >&5
+echo "${ECHO_T}$ac_header_preproc" >&6
+
+# So?  What about this header?
+case $ac_header_compiler:$ac_header_preproc:$ac_c_preproc_warn_flag in
+  yes:no: )
+    { echo "$as_me:$LINENO: WARNING: $ac_header: accepted by the compiler, rejected by the preprocessor!" >&5
+echo "$as_me: WARNING: $ac_header: accepted by the compiler, rejected by the preprocessor!" >&2;}
+    { echo "$as_me:$LINENO: WARNING: $ac_header: proceeding with the compiler's result" >&5
+echo "$as_me: WARNING: $ac_header: proceeding with the compiler's result" >&2;}
+    ac_header_preproc=yes
+    ;;
+  no:yes:* )
+    { echo "$as_me:$LINENO: WARNING: $ac_header: present but cannot be compiled" >&5
+echo "$as_me: WARNING: $ac_header: present but cannot be compiled" >&2;}
+    { echo "$as_me:$LINENO: WARNING: $ac_header:     check for missing prerequisite headers?" >&5
+echo "$as_me: WARNING: $ac_header:     check for missing prerequisite headers?" >&2;}
+    { echo "$as_me:$LINENO: WARNING: $ac_header: see the Autoconf documentation" >&5
+echo "$as_me: WARNING: $ac_header: see the Autoconf documentation" >&2;}
+    { echo "$as_me:$LINENO: WARNING: $ac_header:     section \"Present But Cannot Be Compiled\"" >&5
+echo "$as_me: WARNING: $ac_header:     section \"Present But Cannot Be Compiled\"" >&2;}
+    { echo "$as_me:$LINENO: WARNING: $ac_header: proceeding with the preprocessor's result" >&5
+echo "$as_me: WARNING: $ac_header: proceeding with the preprocessor's result" >&2;}
+    { echo "$as_me:$LINENO: WARNING: $ac_header: in the future, the compiler will take precedence" >&5
+echo "$as_me: WARNING: $ac_header: in the future, the compiler will take precedence" >&2;}
+    (
+      cat <<\_ASBOX
+## ------------------------------------------ ##
+## Report this to the AC_PACKAGE_NAME lists.  ##
+## ------------------------------------------ ##
+_ASBOX
+    ) |
+      sed "s/^/$as_me: WARNING:     /" >&2
+    ;;
+esac
+echo "$as_me:$LINENO: checking for $ac_header" >&5
+echo $ECHO_N "checking for $ac_header... $ECHO_C" >&6
+if eval "test \"\${$as_ac_Header+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  eval "$as_ac_Header=\$ac_header_preproc"
+fi
+echo "$as_me:$LINENO: result: `eval echo '${'$as_ac_Header'}'`" >&5
+echo "${ECHO_T}`eval echo '${'$as_ac_Header'}'`" >&6
+
+fi
+if test `eval echo '${'$as_ac_Header'}'` = yes; then
+  cat >>confdefs.h <<_ACEOF
+#define `echo "HAVE_$ac_header" | $as_tr_cpp` 1
+_ACEOF
+
+fi
+
+done
+
+
    # darwin requires a poll emulation library
    echo "$as_me:$LINENO: checking for poll in -lpoll" >&5
 echo $ECHO_N "checking for poll in -lpoll... $ECHO_C" >&6
@@ -16903,25 +17546,49 @@ rm -f conftest.err conftest.$ac_objext \
   LIBS=$kde_libs_safe
 
 
-  echo "$as_me:$LINENO: checking if res_init is available" >&5
-echo $ECHO_N "checking if res_init is available... $ECHO_C" >&6
-  cat >conftest.$ac_ext <<_ACEOF
+
+echo "$as_me:$LINENO: checking for res_init" >&5
+echo $ECHO_N "checking for res_init... $ECHO_C" >&6
+if test "${kde_cv_func_res_init+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+
+
+ ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&5'
+
+
+save_CXXFLAGS="$CXXFLAGS"
+kde_safe_LIBS="$LIBS"
+LIBS="$LIBS $X_EXTRA_LIBS"
+if test "$GXX" = "yes"; then
+CXXFLAGS="$CXXFLAGS -pedantic-errors"
+fi
+cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
 _ACEOF
 cat confdefs.h >>conftest.$ac_ext
 cat >>conftest.$ac_ext <<_ACEOF
 /* end confdefs.h.  */
 
+
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/nameser.h>
 #include <resolv.h>
 
+
 int
 main ()
 {
 
-      res_init();
+res_init()
 
   ;
   return 0;
@@ -16936,7 +17603,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
+	 { ac_try='test -z "$ac_cxx_werror_flag"
 			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
@@ -16949,24 +17616,155 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
+  kde_cv_func_res_init=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
 
-      echo "$as_me:$LINENO: result: yes" >&5
-echo "${ECHO_T}yes" >&6
+kde_cv_func_res_init=no
+fi
+rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+CXXFLAGS="$save_CXXFLAGS"
+LIBS="$kde_safe_LIBS"
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+
+fi
+
+
+echo "$as_me:$LINENO: result: $kde_cv_func_res_init" >&5
+echo "${ECHO_T}$kde_cv_func_res_init" >&6
+
+echo "$as_me:$LINENO: checking if res_init needs custom prototype" >&5
+echo $ECHO_N "checking if res_init needs custom prototype... $ECHO_C" >&6
+if test "${kde_cv_proto_res_init+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+if test "x$kde_cv_func_res_init" = xyes; then
+  kde_cv_proto_res_init=no
+else
+  case "res_init" in
+	setenv|unsetenv|usleep|random|srandom|seteuid|mkstemps|mkstemp|revoke|vsnprintf|strlcpy|strlcat)
+		kde_cv_proto_res_init="yes - in libkdefakes"
+		;;
+	*)
+		kde_cv_proto_res_init=unknown
+		;;
+  esac
+fi
+
+if test "x$kde_cv_proto_res_init" = xunknown; then
+
+
+
+ ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ac_link='rm -rf SunWS_cache; ${CXX-g++} -o conftest${ac_exeext} $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS 1>&5'
+
+
+  kde_safe_libs=$LIBS
+  LIBS="$LIBS $X_EXTRA_LIBS"
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <arpa/nameser.h>
+#include <resolv.h>
+
+
+extern "C" int res_init(void);
+
+int
+main ()
+{
+
+res_init()
+
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+   kde_cv_func_res_init=yes
+  kde_cv_proto_res_init=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+kde_cv_proto_res_init="res_init unavailable"
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+LIBS=$kde_safe_libs
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+fi
+
+fi
+
+echo "$as_me:$LINENO: result: $kde_cv_proto_res_init" >&5
+echo "${ECHO_T}$kde_cv_proto_res_init" >&6
+
+if test "x$kde_cv_func_res_init" = xyes; then
 
 cat >>confdefs.h <<\_ACEOF
 #define HAVE_RES_INIT 1
 _ACEOF
 
 
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
+fi
+if test "x$kde_cv_proto_res_init" = xno; then
 
- echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_RES_INIT_PROTO 1
+_ACEOF
 
 fi
-rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+
+
+
+
 
 
 
@@ -20337,11 +21135,11 @@ _ACEOF
 cat confdefs.h >>conftest.$ac_ext
 cat >>conftest.$ac_ext <<_ACEOF
 /* end confdefs.h.  */
-
+#include <X11/Intrinsic.h>
 int
 main ()
 {
-${x_direct_test_function}()
+${x_direct_test_function}(1)
   ;
   return 0;
 }
@@ -20530,7 +21328,7 @@ if test -z "$kde_x_libraries" || test "x$kde_x_libraries" = xNONE; then
   X_LDFLAGS="-L$x_libraries"
 fi
 all_includes="$X_INCLUDES"
-all_libraries="$X_LDFLAGS"
+all_libraries="$X_LDFLAGS $LDFLAGS_AS_NEEDED $LDFLAGS_NEW_DTAGS"
 
 # Check for libraries that X11R6 Xt/Xaw programs need.
 ac_save_LDFLAGS="$LDFLAGS"
@@ -20699,110 +21497,6 @@ them either." >&2;}
    { (exit 1); exit 1; }; }
 fi
 
-echo "$as_me:$LINENO: checking for Xinerama" >&5
-echo $ECHO_N "checking for Xinerama... $ECHO_C" >&6
-
-
-# Check whether --with-xinerama or --without-xinerama was given.
-if test "${with_xinerama+set}" = set; then
-  withval="$with_xinerama"
-
-    no_xinerama=no
-
-else
-
-    no_xinerama=yes
-
-
-fi;
-
-kde_save_LDFLAGS="$LDFLAGS"
-kde_save_CFLAGS="$CFLAGS"
-kde_save_LIBS="$LIBS"
-LDFLAGS="$LDFLAGS $X_LDFLAGS $USER_LDFLAGS"
-CFLAGS="$CFLAGS -I$x_includes"
-LIBS="-lXinerama -lXext"
-
-if test "x$no_xinerama" = "xno"; then
-
-  if test "${ac_cv_have_xinerama+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-
-	  cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-#include <X11/Xlib.h>
-  			#include <X11/extensions/Xinerama.h>
-int
-main ()
-{
-XineramaIsActive(NULL);
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_have_xinerama="yes"
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_have_xinerama="no"
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-
-fi
-
-else
-  ac_cv_have_xinerama=no;
-fi
-
-echo "$as_me:$LINENO: result: $ac_cv_have_xinerama" >&5
-echo "${ECHO_T}$ac_cv_have_xinerama" >&6
-
-LIBXINERAMA=""
-
-if test "$ac_cv_have_xinerama" = "yes"; then
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_XINERAMA 1
-_ACEOF
-
-  LIBXINERAMA="-lXinerama"
-fi
-
-
-
-LDFLAGS="$kde_save_LDFLAGS"
-CFLAGS="$kde_save_CFLAGS"
-LIBS="$kde_save_LIBS"
-
 LIB_XEXT="-lXext"
 QTE_NORTTI=""
 
@@ -20845,11 +21539,16 @@ fi
 
 
 
-  LIBPTHREAD=""
+                LIBPTHREAD=""
 
   if test -n "$PTHREAD_LIBS"; then
-    PTHREAD_LIBS_save="$PTHREAD_LIBS"
-    PTHREAD_LIBS=`echo "$PTHREAD_LIBS_save" | sed -e 's,^-l,,g'`
+    if test "x$PTHREAD_LIBS" = "x-pthread" ; then
+      LIBPTHREAD="PTHREAD"
+    else
+      PTHREAD_LIBS_save="$PTHREAD_LIBS"
+      PTHREAD_LIBS=`echo "$PTHREAD_LIBS_save" | sed -e 's,^-l,,g'`
+      echo "$as_me:$LINENO: checking for pthread_create in $PTHREAD_LIBS" >&5
+echo $ECHO_N "checking for pthread_create in $PTHREAD_LIBS... $ECHO_C" >&6
 
      kde_save_LDFLAGS="$LDFLAGS"
           kde_save_LIBS="$LIBS"
@@ -20931,10 +21630,11 @@ fi
      LDFLAGS="$kde_save_LDFLAGS"
      LIBS="$kde_save_LIBS"
 
-    PTHREAD_LIBS="$PTHREAD_LIBS_save"
+      PTHREAD_LIBS="$PTHREAD_LIBS_save"
+    fi
   fi
 
-  if test -z "$LIBPTHREAD"; then
+    if test -z "$LIBPTHREAD"; then
     echo "$as_me:$LINENO: checking for pthread_create in -lpthread" >&5
 echo $ECHO_N "checking for pthread_create in -lpthread... $ECHO_C" >&6
 if test "${ac_cv_lib_pthread_pthread_create+set}" = set; then
@@ -21003,6 +21703,69 @@ if test $ac_cv_lib_pthread_pthread_create = yes; then
   LIBPTHREAD="-lpthread"
 fi
 
+  fi
+
+    if test -z "$LIBPTHREAD" ; then
+    echo "$as_me:$LINENO: checking for pthread_create in -lpthread" >&5
+echo $ECHO_N "checking for pthread_create in -lpthread... $ECHO_C" >&6
+    kde_safe_libs=$LIBS
+    LIBS="$LIBS -lpthread"
+    cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <pthread.h>
+int
+main ()
+{
+(void)pthread_create(0,0,0,0);
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+
+        echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+        LIBPTHREAD="-lpthread"
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+
+	echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+    LIBS=$kde_safe_libs
+  fi
+
+    if test "x$LIBPTHREAD" = "xPTHREAD" ; then
+    LIBPTHREAD=""
   fi
 
 
@@ -21485,25 +22248,19 @@ _ACEOF
 cat confdefs.h >>conftest.$ac_ext
 cat >>conftest.$ac_ext <<_ACEOF
 /* end confdefs.h.  */
-/* Override any gcc2 internal prototype to avoid an error.  */
-struct jpeg_decompress_struct;
-typedef struct jpeg_decompress_struct * j_decompress_ptr;
-typedef int size_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-    void jpeg_CreateDecompress(j_decompress_ptr cinfo,
-                                    int version, size_t structsize);
+void jpeg_CreateDecompress();
 #ifdef __cplusplus
 }
 #endif
-/* We use char because int might match the return type of a gcc2
-    builtin and then its argument prototype would still apply.  */
 
 int
 main ()
 {
-jpeg_CreateDecompress(0L, 0, 0);
+jpeg_CreateDecompress();
   ;
   return 0;
 }
@@ -21569,25 +22326,19 @@ _ACEOF
 cat confdefs.h >>conftest.$ac_ext
 cat >>conftest.$ac_ext <<_ACEOF
 /* end confdefs.h.  */
-/* Override any gcc2 internal prototype to avoid an error.  */
-struct jpeg_decompress_struct;
-typedef struct jpeg_decompress_struct * j_decompress_ptr;
-typedef int size_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-    void jpeg_CreateDecompress(j_decompress_ptr cinfo,
-                                    int version, size_t structsize);
+void jpeg_CreateDecompress();
 #ifdef __cplusplus
 }
 #endif
-/* We use char because int might match the return type of a gcc2
-    builtin and then its argument prototype would still apply.  */
 
 int
 main ()
 {
-jpeg_CreateDecompress(0L, 0, 0);
+jpeg_CreateDecompress();
   ;
   return 0;
 }
@@ -21655,7 +22406,7 @@ for i in $jpeg_incdirs;
 do
   for j in jpeglib.h;
   do
-    echo "configure: 21658: $i/$j" >&5
+    echo "configure: 22409: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       jpeg_incdir=$i
@@ -21846,18 +22597,13 @@ if test -z "$LIBQT_GLOB"; then
   fi
 fi
 
-if test -z "$LIBQT"; then
-  if test "x$kde_use_qt_emb" = "xyes"; then
-    qtlib="qte"
-  else
-    qtlib="qt"
-  fi
-
-  kde_int_qt="-l$qtlib"
+if test "x$kde_use_qt_emb" = "xyes"; then
+  qtlib="qte"
 else
-  kde_int_qt="$LIBQT"
-  kde_lib_qt_set=yes
+  qtlib="qt"
 fi
+
+kde_int_qt="-l$qtlib"
 
 if test -z "$LIBQPE"; then
   if test "x$kde_use_qt_emb" = "xyes"; then
@@ -21873,13 +22619,8 @@ fi
 
 
 if test "x$kde_use_qt_mt" = "xyes"; then
-  if test -z "$LIBQT"; then
-    LIBQT="-l$qtlib-mt"
-    kde_int_qt="-l$qtlib-mt"
-  else
-    LIBQT="$qtlib-mt"
-    kde_int_qt="$qtlib-mt"
-  fi
+  LIBQT="-l$qtlib-mt"
+  kde_int_qt="-l$qtlib-mt"
   LIBQT_GLOB="lib$qtlib-mt.*"
   USING_QT_MT="using -mt"
 else
@@ -21963,7 +22704,7 @@ for i in $qt_incdirs;
 do
   for j in $kde_qt_header;
   do
-    echo "configure: 21966: $i/$j" >&5
+    echo "configure: 22707: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       qt_incdir=$i
@@ -22307,7 +23048,7 @@ if test "$qt_libraries" = "$x_libraries" || test -z "$qt_libraries"; then
  QT_LDFLAGS=""
 else
  QT_LDFLAGS="-L$qt_libraries"
- all_libraries="$all_libraries $QT_LDFLAGS"
+ all_libraries="$QT_LDFLAGS $all_libraries"
 fi
 test -z "$KDE_MT_LDFLAGS" || all_libraries="$all_libraries $KDE_MT_LDFLAGS"
 
@@ -22720,7 +23461,11 @@ fi;
 
 if test -z "$KDE_RPATH" && test "$USE_RPATH" = "yes"; then
 
-  KDE_RPATH="-R \$(kde_libraries)"
+  KDE_RPATH="-R \$(libdir)"
+
+  if test "$kde_libraries" != "$libdir"; then
+      KDE_RPATH="$KDE_RPATH -R \$(kde_libraries)"
+  fi
 
   if test -n "$qt_libraries"; then
     KDE_RPATH="$KDE_RPATH -R \$(qt_libraries)"
@@ -22792,7 +23537,7 @@ for i in $kde_incdirs;
 do
   for j in $kde_check_header;
   do
-    echo "configure: 22795: $i/$j" >&5
+    echo "configure: 23540: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       kde_incdir=$i
@@ -22822,7 +23567,7 @@ for i in $kde_libdirs;
 do
   for j in $kde_check_lib;
   do
-    echo "configure: 22825: $i/$j" >&5
+    echo "configure: 23570: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       kde_libdir=$i
@@ -22840,7 +23585,7 @@ for i in $kde_libdirs;
 do
   for j in "kde3/plugins/designer/kdewidgets.la";
   do
-    echo "configure: 22843: $i/$j" >&5
+    echo "configure: 23588: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       kde_widgetdir=$i
@@ -22933,7 +23678,7 @@ KDE_DEFAULT_CXXFLAGS="-DQT_CLEAN_NAMESPACE -DQT_NO_ASCII_CAST -DQT_NO_STL -DQT_N
 
 KDE_LDFLAGS="-L$kde_libraries"
 if test ! "$kde_libraries" = "$x_libraries" && test ! "$kde_libraries" = "$qt_libraries" ; then
- all_libraries="$all_libraries $KDE_LDFLAGS"
+ all_libraries="$KDE_LDFLAGS $all_libraries"
 fi
 
 
@@ -22999,8 +23744,24 @@ fi
 echo "$as_me:$LINENO: result: $kde_cv_uic_plugins" >&5
 echo "${ECHO_T}$kde_cv_uic_plugins" >&6
 if test "$kde_cv_uic_plugins" != yes; then
-	{ { echo "$as_me:$LINENO: error: you need to install kdelibs first." >&5
-echo "$as_me: error: you need to install kdelibs first." >&2;}
+	{ { echo "$as_me:$LINENO: error:
+you need to install kdelibs first.
+
+If you did install kdelibs, then the Qt version that is picked up by
+this configure is not the same version you used to compile kdelibs.
+The Qt Plugin installed by kdelibs is *ONLY* loadable if it is the
+_same Qt version_, compiled with the _same compiler_ and the same Qt
+configuration settings.
+" >&5
+echo "$as_me: error:
+you need to install kdelibs first.
+
+If you did install kdelibs, then the Qt version that is picked up by
+this configure is not the same version you used to compile kdelibs.
+The Qt Plugin installed by kdelibs is *ONLY* loadable if it is the
+_same Qt version_, compiled with the _same compiler_ and the same Qt
+configuration settings.
+" >&2;}
    { (exit 1); exit 1; }; }
 fi
 fi
@@ -23070,6 +23831,9 @@ if test "$ac_use_path_checking" = "default"; then
   if test -z "$kde_confdir"; then
     kde_confdir='\${datadir}/config'
   fi
+  if test -z "$kde_kcfgdir"; then
+    kde_kcfgdir='\${datadir}/config.kcfg'
+  fi
   if test -z "$kde_mimedir"; then
     kde_mimedir='\${datadir}/mimelnk'
   fi
@@ -23104,6 +23868,15 @@ if test "$ac_use_path_checking" = "default"; then
   if test -z "$kde_widgetdir"; then
     kde_widgetdir='\${libdir}/kde3/plugins/designer'
   fi
+  if test -z "$xdg_appsdir"; then
+    xdg_appsdir='\${datadir}/applications/kde'
+  fi
+  if test -z "$xdg_menudir"; then
+    xdg_menudir='\${sysconfdir}/xdg/menus'
+  fi
+  if test -z "$xdg_directorydir"; then
+    xdg_directorydir='\${datadir}/desktop-directories'
+  fi
 
 
   kde_cv_all_paths="kde_have_all_paths=\"yes\" \
@@ -23115,6 +23888,7 @@ if test "$ac_use_path_checking" = "default"; then
 	kde_locale=\"$kde_locale\" \
 	kde_cgidir=\"$kde_cgidir\" \
 	kde_confdir=\"$kde_confdir\" \
+	kde_kcfgdir=\"$kde_kcfgdir\" \
 	kde_mimedir=\"$kde_mimedir\" \
 	kde_toolbardir=\"$kde_toolbardir\" \
 	kde_wallpaperdir=\"$kde_wallpaperdir\" \
@@ -23125,6 +23899,9 @@ if test "$ac_use_path_checking" = "default"; then
 	kde_moduledir=\"$kde_moduledir\" \
 	kde_styledir=\"$kde_styledir\" \
 	kde_widgetdir=\"$kde_widgetdir\" \
+	xdg_appsdir=\"$xdg_appsdir\" \
+	xdg_menudir=\"$xdg_menudir\" \
+	xdg_directorydir=\"$xdg_directorydir\" \
 	kde_result=defaults"
 
 
@@ -23176,6 +23953,10 @@ int main() {
     printf("kde_moduledir=\\"/tmp/dummy\\"\n");
     printf("kde_styledir=\\"/tmp/dummy\\"\n");
     printf("kde_widgetdir=\\"/tmp/dummy\\"\n");
+    printf("xdg_appsdir=\\"/tmp/dummy\\"\n");
+    printf("xdg_menudir=\\"/tmp/dummy\\"\n");
+    printf("xdg_directorydir=\\"/tmp/dummy\\"\n");
+    printf("kde_kcfgdir=\\"/tmp/dummy\\"\n");
     return 0;
     }
 EOF
@@ -23269,6 +24050,7 @@ kde_have_all_paths=yes
 	kde_locale=\"$kde_locale\" \
 	kde_cgidir=\"$kde_cgidir\" \
 	kde_confdir=\"$kde_confdir\" \
+	kde_kcfgdir=\"$kde_kcfgdir\" \
 	kde_mimedir=\"$kde_mimedir\" \
 	kde_toolbardir=\"$kde_toolbardir\" \
 	kde_wallpaperdir=\"$kde_wallpaperdir\" \
@@ -23279,6 +24061,9 @@ kde_have_all_paths=yes
 	kde_moduledir=\"$kde_moduledir\" \
 	kde_styledir=\"$kde_styledir\" \
 	kde_widgetdir=\"$kde_widgetdir\" \
+	xdg_appsdir=\"$xdg_appsdir\" \
+	xdg_menudir=\"$xdg_menudir\" \
+	xdg_directorydir=\"$xdg_directorydir\" \
 	kde_result=$kde_result"
 
 
@@ -23300,11 +24085,13 @@ eval "$kde_cv_all_paths"
    test -z "$kde_icondir" || test -z "$kde_sounddir" ||
    test -z "$kde_datadir" || test -z "$kde_locale"  ||
    test -z "$kde_cgidir"  || test -z "$kde_confdir" ||
+   test -z "$kde_kcfgdir" ||
    test -z "$kde_mimedir" || test -z "$kde_toolbardir" ||
    test -z "$kde_wallpaperdir" || test -z "$kde_templatesdir" ||
    test -z "$kde_bindir" || test -z "$kde_servicesdir" ||
    test -z "$kde_servicetypesdir" || test -z "$kde_moduledir" ||
-   test -z "$kde_styledir" || test -z "$kde_widgetdir" ||
+   test -z "$kde_styledir" || test -z "kde_widgetdir" ||
+   test -z "$xdg_appsdir" || test -z "$xdg_menudir" || test -z "$xdg_directorydir" ||
    test "x$kde_have_all_paths" != "xyes"; then
      kde_have_all_paths=no
   fi
@@ -23313,12 +24100,13 @@ if test "$kde_have_all_paths" = "no" && test "$kde_cached_paths" = "yes"; then
   # wrong values were cached, may be, we can set better ones
   kde_result=
   kde_htmldir= kde_appsdir= kde_icondir= kde_sounddir=
-  kde_datadir= kde_locale=  kde_cgidir=  kde_confdir=
+  kde_datadir= kde_locale=  kde_cgidir=  kde_confdir= kde_kcfgdir=
   kde_mimedir= kde_toolbardir= kde_wallpaperdir= kde_templatesdir=
   kde_bindir= kde_servicesdir= kde_servicetypesdir= kde_moduledir=
   kde_have_all_paths=
   kde_styledir=
   kde_widgetdir=
+  xdg_appsdir = xdg_menudir= xdg_directorydir=
 
 if test "$ac_use_path_checking" = "default"; then
 
@@ -23346,6 +24134,9 @@ if test "$ac_use_path_checking" = "default"; then
   if test -z "$kde_confdir"; then
     kde_confdir='\${datadir}/config'
   fi
+  if test -z "$kde_kcfgdir"; then
+    kde_kcfgdir='\${datadir}/config.kcfg'
+  fi
   if test -z "$kde_mimedir"; then
     kde_mimedir='\${datadir}/mimelnk'
   fi
@@ -23380,6 +24171,15 @@ if test "$ac_use_path_checking" = "default"; then
   if test -z "$kde_widgetdir"; then
     kde_widgetdir='\${libdir}/kde3/plugins/designer'
   fi
+  if test -z "$xdg_appsdir"; then
+    xdg_appsdir='\${datadir}/applications/kde'
+  fi
+  if test -z "$xdg_menudir"; then
+    xdg_menudir='\${sysconfdir}/xdg/menus'
+  fi
+  if test -z "$xdg_directorydir"; then
+    xdg_directorydir='\${datadir}/desktop-directories'
+  fi
 
 
   kde_cv_all_paths="kde_have_all_paths=\"yes\" \
@@ -23391,6 +24191,7 @@ if test "$ac_use_path_checking" = "default"; then
 	kde_locale=\"$kde_locale\" \
 	kde_cgidir=\"$kde_cgidir\" \
 	kde_confdir=\"$kde_confdir\" \
+	kde_kcfgdir=\"$kde_kcfgdir\" \
 	kde_mimedir=\"$kde_mimedir\" \
 	kde_toolbardir=\"$kde_toolbardir\" \
 	kde_wallpaperdir=\"$kde_wallpaperdir\" \
@@ -23401,6 +24202,9 @@ if test "$ac_use_path_checking" = "default"; then
 	kde_moduledir=\"$kde_moduledir\" \
 	kde_styledir=\"$kde_styledir\" \
 	kde_widgetdir=\"$kde_widgetdir\" \
+	xdg_appsdir=\"$xdg_appsdir\" \
+	xdg_menudir=\"$xdg_menudir\" \
+	xdg_directorydir=\"$xdg_directorydir\" \
 	kde_result=defaults"
 
 
@@ -23452,6 +24256,10 @@ int main() {
     printf("kde_moduledir=\\"/tmp/dummy\\"\n");
     printf("kde_styledir=\\"/tmp/dummy\\"\n");
     printf("kde_widgetdir=\\"/tmp/dummy\\"\n");
+    printf("xdg_appsdir=\\"/tmp/dummy\\"\n");
+    printf("xdg_menudir=\\"/tmp/dummy\\"\n");
+    printf("xdg_directorydir=\\"/tmp/dummy\\"\n");
+    printf("kde_kcfgdir=\\"/tmp/dummy\\"\n");
     return 0;
     }
 EOF
@@ -23545,6 +24353,7 @@ kde_have_all_paths=yes
 	kde_locale=\"$kde_locale\" \
 	kde_cgidir=\"$kde_cgidir\" \
 	kde_confdir=\"$kde_confdir\" \
+	kde_kcfgdir=\"$kde_kcfgdir\" \
 	kde_mimedir=\"$kde_mimedir\" \
 	kde_toolbardir=\"$kde_toolbardir\" \
 	kde_wallpaperdir=\"$kde_wallpaperdir\" \
@@ -23555,6 +24364,9 @@ kde_have_all_paths=yes
 	kde_moduledir=\"$kde_moduledir\" \
 	kde_styledir=\"$kde_styledir\" \
 	kde_widgetdir=\"$kde_widgetdir\" \
+	xdg_appsdir=\"$xdg_appsdir\" \
+	xdg_menudir=\"$xdg_menudir\" \
+	xdg_directorydir=\"$xdg_directorydir\" \
 	kde_result=$kde_result"
 
 
@@ -23572,11 +24384,13 @@ fi
    test -z "$kde_icondir" || test -z "$kde_sounddir" ||
    test -z "$kde_datadir" || test -z "$kde_locale"  ||
    test -z "$kde_cgidir"  || test -z "$kde_confdir" ||
+   test -z "$kde_kcfgdir" ||
    test -z "$kde_mimedir" || test -z "$kde_toolbardir" ||
    test -z "$kde_wallpaperdir" || test -z "$kde_templatesdir" ||
    test -z "$kde_bindir" || test -z "$kde_servicesdir" ||
    test -z "$kde_servicetypesdir" || test -z "$kde_moduledir" ||
-   test -z "$kde_styledir" || test -z "$kde_widgetdir" ||
+   test -z "$kde_styledir" || test -z "kde_widgetdir" ||
+   test -z "$xdg_appsdir" || test -z "$xdg_menudir" || test -z "$xdg_directorydir" ||
    test "x$kde_have_all_paths" != "xyes"; then
      kde_have_all_paths=no
   fi
@@ -23617,7 +24431,7 @@ else
 fi;
 
 
-if test "$build_arts" != "no"; then
+if test "$build_arts" '!=' "no"; then
   include_ARTS_TRUE=
   include_ARTS_FALSE='#'
 else
@@ -23625,6 +24439,13 @@ else
   include_ARTS_FALSE=
 fi
 
+    if test "$build_arts" = "no"; then
+
+cat >>confdefs.h <<\_ACEOF
+#define WITHOUT_ARTS 1
+_ACEOF
+
+    fi
 
 
     kde_default_bindirs="/usr/bin /usr/local/bin /opt/local/bin /usr/X11R6/bin /opt/kde/bin /opt/kde3/bin /usr/kde/bin /usr/local/kde/bin"
@@ -23777,7 +24598,7 @@ echo "${ECHO_T}$kde_cv_path" >&6
 
    fi
 
-        if test "$build_arts" != "no"; then
+        if test "$build_arts" '!=' "no"; then
 
    echo "$as_me:$LINENO: checking for mcopidl" >&5
 echo $ECHO_N "checking for mcopidl... $ECHO_C" >&6
@@ -23983,7 +24804,302 @@ echo "${ECHO_T}$kde_cv_path" >&6
    fi
 
 
-        if test -n "$MEINPROC" && test ! "$MEINPROC" = "compiled"; then
+        kde32ornewer=1
+        kde33ornewer=1
+        if test -n "$kde_qtver" && test "$kde_qtver" -lt 3; then
+            kde32ornewer=
+            kde33ornewer=
+        else
+            if test "$kde_qtver" = "3"; then
+              if test "$kde_qtsubver" -le 1; then
+                kde32ornewer=
+              fi
+              if test "$kde_qtsubver" -le 2; then
+                kde33ornewer=
+              fi
+              if test "$KDECONFIG" != "compiled"; then
+                if test `$KDECONFIG --version | grep KDE | sed 's/KDE: \(...\).*/\1/'` = 3.2; then
+                  kde33ornewer=
+                fi
+              fi
+            fi
+        fi
+
+        if test -n "$kde32ornewer"; then
+
+   echo "$as_me:$LINENO: checking for kconfig_compiler" >&5
+echo $ECHO_N "checking for kconfig_compiler... $ECHO_C" >&6
+   if test -n "$KCONFIG_COMPILER"; then
+        kde_cv_path="$KCONFIG_COMPILER";
+   else
+        kde_cache=`echo kconfig_compiler | sed 'y%./+-%__p_%'`
+
+        if eval "test \"\${kde_cv_path_$kde_cache+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+        kde_cv_path="NONE"
+	kde_save_IFS=$IFS
+	IFS=':'
+	dirs=""
+	for dir in $PATH; do
+	  dirs="$dirs $dir"
+	done
+	if test -z ""; then  	  dirs="$kde_default_bindirs $dirs"
+        else  	  dirs="$dirs $kde_default_bindirs"
+	fi
+	IFS=$kde_save_IFS
+
+        for dir in $dirs; do
+	  if test -x "$dir/kconfig_compiler"; then
+	    if test -n ""
+	    then
+              evalstr="$dir/kconfig_compiler  2>&1 "
+	      if eval $evalstr; then
+                kde_cv_path="$dir/kconfig_compiler"
+                break
+	      fi
+            else
+		kde_cv_path="$dir/kconfig_compiler"
+                break
+	    fi
+          fi
+        done
+
+        eval "kde_cv_path_$kde_cache=$kde_cv_path"
+
+
+fi
+
+
+      eval "kde_cv_path=\"`echo '$kde_cv_path_'$kde_cache`\""
+
+   fi
+
+   if test -z "$kde_cv_path" || test "$kde_cv_path" = NONE; then
+      echo "$as_me:$LINENO: result: not found" >&5
+echo "${ECHO_T}not found" >&6
+
+    { { echo "$as_me:$LINENO: error: The important program kconfig_compiler was not found!
+Please check whether you installed KDE correctly.
+" >&5
+echo "$as_me: error: The important program kconfig_compiler was not found!
+Please check whether you installed KDE correctly.
+" >&2;}
+   { (exit 1); exit 1; }; }
+
+   else
+      echo "$as_me:$LINENO: result: $kde_cv_path" >&5
+echo "${ECHO_T}$kde_cv_path" >&6
+      KCONFIG_COMPILER=$kde_cv_path
+
+   fi
+
+
+   echo "$as_me:$LINENO: checking for dcopidlng" >&5
+echo $ECHO_N "checking for dcopidlng... $ECHO_C" >&6
+   if test -n "$DCOPIDLNG"; then
+        kde_cv_path="$DCOPIDLNG";
+   else
+        kde_cache=`echo dcopidlng | sed 'y%./+-%__p_%'`
+
+        if eval "test \"\${kde_cv_path_$kde_cache+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+        kde_cv_path="NONE"
+	kde_save_IFS=$IFS
+	IFS=':'
+	dirs=""
+	for dir in $PATH; do
+	  dirs="$dirs $dir"
+	done
+	if test -z ""; then  	  dirs="$kde_default_bindirs $dirs"
+        else  	  dirs="$dirs $kde_default_bindirs"
+	fi
+	IFS=$kde_save_IFS
+
+        for dir in $dirs; do
+	  if test -x "$dir/dcopidlng"; then
+	    if test -n ""
+	    then
+              evalstr="$dir/dcopidlng  2>&1 "
+	      if eval $evalstr; then
+                kde_cv_path="$dir/dcopidlng"
+                break
+	      fi
+            else
+		kde_cv_path="$dir/dcopidlng"
+                break
+	    fi
+          fi
+        done
+
+        eval "kde_cv_path_$kde_cache=$kde_cv_path"
+
+
+fi
+
+
+      eval "kde_cv_path=\"`echo '$kde_cv_path_'$kde_cache`\""
+
+   fi
+
+   if test -z "$kde_cv_path" || test "$kde_cv_path" = NONE; then
+      echo "$as_me:$LINENO: result: not found" >&5
+echo "${ECHO_T}not found" >&6
+
+    { { echo "$as_me:$LINENO: error: The important program dcopidlng was not found!
+Please check whether you installed KDE correctly.
+" >&5
+echo "$as_me: error: The important program dcopidlng was not found!
+Please check whether you installed KDE correctly.
+" >&2;}
+   { (exit 1); exit 1; }; }
+
+   else
+      echo "$as_me:$LINENO: result: $kde_cv_path" >&5
+echo "${ECHO_T}$kde_cv_path" >&6
+      DCOPIDLNG=$kde_cv_path
+
+   fi
+
+        fi
+        if test -n "$kde33ornewer"; then
+
+   echo "$as_me:$LINENO: checking for makekdewidgets" >&5
+echo $ECHO_N "checking for makekdewidgets... $ECHO_C" >&6
+   if test -n "$MAKEKDEWIDGETS"; then
+        kde_cv_path="$MAKEKDEWIDGETS";
+   else
+        kde_cache=`echo makekdewidgets | sed 'y%./+-%__p_%'`
+
+        if eval "test \"\${kde_cv_path_$kde_cache+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+        kde_cv_path="NONE"
+	kde_save_IFS=$IFS
+	IFS=':'
+	dirs=""
+	for dir in $PATH; do
+	  dirs="$dirs $dir"
+	done
+	if test -z ""; then  	  dirs="$kde_default_bindirs $dirs"
+        else  	  dirs="$dirs $kde_default_bindirs"
+	fi
+	IFS=$kde_save_IFS
+
+        for dir in $dirs; do
+	  if test -x "$dir/makekdewidgets"; then
+	    if test -n ""
+	    then
+              evalstr="$dir/makekdewidgets  2>&1 "
+	      if eval $evalstr; then
+                kde_cv_path="$dir/makekdewidgets"
+                break
+	      fi
+            else
+		kde_cv_path="$dir/makekdewidgets"
+                break
+	    fi
+          fi
+        done
+
+        eval "kde_cv_path_$kde_cache=$kde_cv_path"
+
+
+fi
+
+
+      eval "kde_cv_path=\"`echo '$kde_cv_path_'$kde_cache`\""
+
+   fi
+
+   if test -z "$kde_cv_path" || test "$kde_cv_path" = NONE; then
+      echo "$as_me:$LINENO: result: not found" >&5
+echo "${ECHO_T}not found" >&6
+
+    { { echo "$as_me:$LINENO: error: The important program makekdewidgets was not found!
+Please check whether you installed KDE correctly.
+" >&5
+echo "$as_me: error: The important program makekdewidgets was not found!
+Please check whether you installed KDE correctly.
+" >&2;}
+   { (exit 1); exit 1; }; }
+
+   else
+      echo "$as_me:$LINENO: result: $kde_cv_path" >&5
+echo "${ECHO_T}$kde_cv_path" >&6
+      MAKEKDEWIDGETS=$kde_cv_path
+
+   fi
+
+
+        fi
+
+   echo "$as_me:$LINENO: checking for xmllint" >&5
+echo $ECHO_N "checking for xmllint... $ECHO_C" >&6
+   if test -n "$XMLLINT"; then
+        kde_cv_path="$XMLLINT";
+   else
+        kde_cache=`echo xmllint | sed 'y%./+-%__p_%'`
+
+        if eval "test \"\${kde_cv_path_$kde_cache+set}\" = set"; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+        kde_cv_path="NONE"
+	kde_save_IFS=$IFS
+	IFS=':'
+	dirs=""
+	for dir in $PATH; do
+	  dirs="$dirs $dir"
+	done
+	if test -z ""; then  	  dirs="${prefix}/bin ${exec_prefix}/bin $dirs"
+        else  	  dirs="$dirs ${prefix}/bin ${exec_prefix}/bin"
+	fi
+	IFS=$kde_save_IFS
+
+        for dir in $dirs; do
+	  if test -x "$dir/xmllint"; then
+	    if test -n ""
+	    then
+              evalstr="$dir/xmllint  2>&1 "
+	      if eval $evalstr; then
+                kde_cv_path="$dir/xmllint"
+                break
+	      fi
+            else
+		kde_cv_path="$dir/xmllint"
+                break
+	    fi
+          fi
+        done
+
+        eval "kde_cv_path_$kde_cache=$kde_cv_path"
+
+
+fi
+
+
+      eval "kde_cv_path=\"`echo '$kde_cv_path_'$kde_cache`\""
+
+   fi
+
+   if test -z "$kde_cv_path" || test "$kde_cv_path" = NONE; then
+      echo "$as_me:$LINENO: result: not found" >&5
+echo "${ECHO_T}not found" >&6
+      XMLLINT=""
+   else
+      echo "$as_me:$LINENO: result: $kde_cv_path" >&5
+echo "${ECHO_T}$kde_cv_path" >&6
+      XMLLINT=$kde_cv_path
+
+   fi
+
+
+        if test -n "$MEINPROC" -a "$MEINPROC" != "compiled"; then
  	    kde_sharedirs="/usr/share/kde /usr/local/share /usr/share /opt/kde3/share /opt/kde/share $prefix/share"
             test -n "$KDEDIR" && kde_sharedirs="$KDEDIR/share $kde_sharedirs"
 
@@ -23992,7 +25108,7 @@ for i in $kde_sharedirs;
 do
   for j in apps/ksgmltools2/customization/kde-chunk.xsl;
   do
-    echo "configure: 23995: $i/$j" >&5
+    echo "configure: 25111: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       KDE_XSL_STYLESHEET=$i
@@ -24009,32 +25125,23 @@ done
         fi
 
         DCOP_DEPENDENCIES='$(DCOPIDL)'
+        if test -n "$kde32ornewer"; then
+            KCFG_DEPENDENCIES='$(KCONFIG_COMPILER)'
+            DCOP_DEPENDENCIES='$(DCOPIDL) $(DCOPIDLNG)'
 
 
 
-
-
-
-
-
-        if test -x "$KDECONFIG"; then # it can be "compiled"
-          kde_libs_prefix=`$KDECONFIG --prefix`
-          if test -z "$kde_libs_prefix" || test ! -x "$kde_libs_prefix"; then
-               { { echo "$as_me:$LINENO: error: $KDECONFIG --prefix outputed the non existant prefix '$kde_libs_prefix' for kdelibs.
-                          This means it has been moved since you installed it.
-                          This won't work. Please recompile kdelibs for the new prefix.
-                          " >&5
-echo "$as_me: error: $KDECONFIG --prefix outputed the non existant prefix '$kde_libs_prefix' for kdelibs.
-                          This means it has been moved since you installed it.
-                          This won't work. Please recompile kdelibs for the new prefix.
-                          " >&2;}
-   { (exit 1); exit 1; }; }
-           fi
-           kde_libs_htmldir=`$KDECONFIG --install html --expandvars`
-        else
-           kde_libs_prefix='$(prefix)'
-           kde_libs_htmldir='$(kde_htmldir)'
         fi
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -24074,11 +25181,19 @@ fi
 
 
 if test $kde_qtver = 3; then
+   case $host in
+               *cygwin*) lib_kded="-lkdeinit_kded" ;;
+               *) lib_kded="" ;;
+       esac
+   LIB_KDED=$lib_kded
+
    LIB_KDECORE="-lkdecore"
 
    LIB_KDEUI="-lkdeui"
 
    LIB_KIO="-lkio"
+
+   LIB_KJS="-lkjs"
 
    LIB_SMB="-lsmb"
 
@@ -24097,6 +25212,14 @@ if test $kde_qtver = 3; then
    LIB_KUTILS="-lkutils"
 
    LIB_KDEPIM="-lkdepim"
+
+   LIB_KIMPROXY="-lkimproxy"
+
+   LIB_KNEWSTUFF="-lknewstuff"
+
+   LIB_KDNSSD="-lkdnssd"
+
+   LIB_KUNITTEST="-lkunittest"
 
 # these are for backward compatibility
    LIB_KSYCOCA="-lkio"
@@ -27999,10 +29122,10 @@ fi
 
 
 DO_NOT_COMPILE="$DO_NOT_COMPILE CVS debian bsd-port admin"
+TOPSUBDIRS=""
 
 if test ! -s $srcdir/subdirs; then
-    TOPSUBDIRS=""
-  files=`cd $srcdir && ls -1`
+    files=`cd $srcdir && ls -1`
   dirs=`for i in $files; do if test -d $i; then echo $i; fi; done`
   for i in $dirs; do
     echo $i >> $srcdir/subdirs
@@ -28031,7 +29154,7 @@ echo $ECHO_N "checking if $i should be compiled... $ECHO_C" >&6
   fi
   echo "$as_me:$LINENO: result: $install_it" >&5
 echo "${ECHO_T}$install_it" >&6
-  vari=`echo $i | sed -e 's,[-+.],_,g'`
+  vari=`echo $i | sed -e 's,[-+.@],_,g'`
   if test $install_it = "yes"; then
     TOPSUBDIRS="$TOPSUBDIRS $i"
     eval "$vari""_SUBDIR_included=yes"
@@ -28195,6 +29318,13 @@ if test -z "${am__fastdepCXX_TRUE}" && test -z "${am__fastdepCXX_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"am__fastdepCXX\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"am__fastdepCXX\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${unsermake_enable_pch_TRUE}" && test -z "${unsermake_enable_pch_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"unsermake_enable_pch\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"unsermake_enable_pch\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -28834,11 +29964,17 @@ s,@CXXDEPMODE@,$CXXDEPMODE,;t t
 s,@am__fastdepCXX_TRUE@,$am__fastdepCXX_TRUE,;t t
 s,@am__fastdepCXX_FALSE@,$am__fastdepCXX_FALSE,;t t
 s,@WOVERLOADED_VIRTUAL@,$WOVERLOADED_VIRTUAL,;t t
+s,@HAVE_GCC_VISIBILITY@,$HAVE_GCC_VISIBILITY,;t t
+s,@unsermake_enable_pch_TRUE@,$unsermake_enable_pch_TRUE,;t t
+s,@unsermake_enable_pch_FALSE@,$unsermake_enable_pch_FALSE,;t t
 s,@USE_EXCEPTIONS@,$USE_EXCEPTIONS,;t t
 s,@USE_RTTI@,$USE_RTTI,;t t
 s,@CXXCPP@,$CXXCPP,;t t
 s,@NOOPT_CXXFLAGS@,$NOOPT_CXXFLAGS,;t t
 s,@NOOPT_CFLAGS@,$NOOPT_CFLAGS,;t t
+s,@ENABLE_PERMISSIVE_FLAG@,$ENABLE_PERMISSIVE_FLAG,;t t
+s,@LDFLAGS_AS_NEEDED@,$LDFLAGS_AS_NEEDED,;t t
+s,@LDFLAGS_NEW_DTAGS@,$LDFLAGS_NEW_DTAGS,;t t
 s,@KDE_USE_FINAL_TRUE@,$KDE_USE_FINAL_TRUE,;t t
 s,@KDE_USE_FINAL_FALSE@,$KDE_USE_FINAL_FALSE,;t t
 s,@KDE_USE_CLOSURE_TRUE@,$KDE_USE_CLOSURE_TRUE,;t t
@@ -28853,6 +29989,7 @@ s,@ac_ct_RANLIB@,$ac_ct_RANLIB,;t t
 s,@EGREP@,$EGREP,;t t
 s,@LIBTOOL@,$LIBTOOL,;t t
 s,@KDE_PLUGIN@,$KDE_PLUGIN,;t t
+s,@KDE_CHECK_PLUGIN@,$KDE_CHECK_PLUGIN,;t t
 s,@MSGFMT@,$MSGFMT,;t t
 s,@GMSGFMT@,$GMSGFMT,;t t
 s,@XGETTEXT@,$XGETTEXT,;t t
@@ -28866,7 +30003,6 @@ s,@LIBSOCKET@,$LIBSOCKET,;t t
 s,@X_EXTRA_LIBS@,$X_EXTRA_LIBS,;t t
 s,@LIBUCB@,$LIBUCB,;t t
 s,@LIBDL@,$LIBDL,;t t
-s,@LIBXINERAMA@,$LIBXINERAMA,;t t
 s,@X_PRE_LIBS@,$X_PRE_LIBS,;t t
 s,@LIB_X11@,$LIB_X11,;t t
 s,@LIB_XRENDER@,$LIB_XRENDER,;t t
@@ -28909,6 +30045,10 @@ s,@all_libraries@,$all_libraries,;t t
 s,@AUTODIRS@,$AUTODIRS,;t t
 s,@include_ARTS_TRUE@,$include_ARTS_TRUE,;t t
 s,@include_ARTS_FALSE@,$include_ARTS_FALSE,;t t
+s,@MAKEKDEWIDGETS@,$MAKEKDEWIDGETS,;t t
+s,@KCONFIG_COMPILER@,$KCONFIG_COMPILER,;t t
+s,@KCFG_DEPENDENCIES@,$KCFG_DEPENDENCIES,;t t
+s,@DCOPIDLNG@,$DCOPIDLNG,;t t
 s,@DCOPIDL@,$DCOPIDL,;t t
 s,@DCOPIDL2CPP@,$DCOPIDL2CPP,;t t
 s,@DCOP_DEPENDENCIES@,$DCOP_DEPENDENCIES,;t t
@@ -28916,6 +30056,7 @@ s,@MCOPIDL@,$MCOPIDL,;t t
 s,@ARTSCCONFIG@,$ARTSCCONFIG,;t t
 s,@MEINPROC@,$MEINPROC,;t t
 s,@KDE_XSL_STYLESHEET@,$KDE_XSL_STYLESHEET,;t t
+s,@XMLLINT@,$XMLLINT,;t t
 s,@kde_htmldir@,$kde_htmldir,;t t
 s,@kde_appsdir@,$kde_appsdir,;t t
 s,@kde_icondir@,$kde_icondir,;t t
@@ -28923,9 +30064,13 @@ s,@kde_sounddir@,$kde_sounddir,;t t
 s,@kde_datadir@,$kde_datadir,;t t
 s,@kde_locale@,$kde_locale,;t t
 s,@kde_confdir@,$kde_confdir,;t t
+s,@kde_kcfgdir@,$kde_kcfgdir,;t t
 s,@kde_mimedir@,$kde_mimedir,;t t
 s,@kde_wallpaperdir@,$kde_wallpaperdir,;t t
 s,@kde_bindir@,$kde_bindir,;t t
+s,@xdg_appsdir@,$xdg_appsdir,;t t
+s,@xdg_menudir@,$xdg_menudir,;t t
+s,@xdg_directorydir@,$xdg_directorydir,;t t
 s,@kde_templatesdir@,$kde_templatesdir,;t t
 s,@kde_servicesdir@,$kde_servicesdir,;t t
 s,@kde_servicetypesdir@,$kde_servicetypesdir,;t t
@@ -28933,9 +30078,11 @@ s,@kde_moduledir@,$kde_moduledir,;t t
 s,@kdeinitdir@,$kdeinitdir,;t t
 s,@kde_styledir@,$kde_styledir,;t t
 s,@kde_widgetdir@,$kde_widgetdir,;t t
+s,@LIB_KDED@,$LIB_KDED,;t t
 s,@LIB_KDECORE@,$LIB_KDECORE,;t t
 s,@LIB_KDEUI@,$LIB_KDEUI,;t t
 s,@LIB_KIO@,$LIB_KIO,;t t
+s,@LIB_KJS@,$LIB_KJS,;t t
 s,@LIB_SMB@,$LIB_SMB,;t t
 s,@LIB_KAB@,$LIB_KAB,;t t
 s,@LIB_KABC@,$LIB_KABC,;t t
@@ -28945,6 +30092,10 @@ s,@LIB_KPARTS@,$LIB_KPARTS,;t t
 s,@LIB_KDEPRINT@,$LIB_KDEPRINT,;t t
 s,@LIB_KUTILS@,$LIB_KUTILS,;t t
 s,@LIB_KDEPIM@,$LIB_KDEPIM,;t t
+s,@LIB_KIMPROXY@,$LIB_KIMPROXY,;t t
+s,@LIB_KNEWSTUFF@,$LIB_KNEWSTUFF,;t t
+s,@LIB_KDNSSD@,$LIB_KDNSSD,;t t
+s,@LIB_KUNITTEST@,$LIB_KUNITTEST,;t t
 s,@LIB_KSYCOCA@,$LIB_KSYCOCA,;t t
 s,@LIB_KFILE@,$LIB_KFILE,;t t
 s,@LIB_KFM@,$LIB_KFM,;t t
