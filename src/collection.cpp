@@ -33,6 +33,7 @@ const QString Collection::s_peopleGroupName = QString::fromLatin1("_people");
 Collection::Collection(const QString& title_, const QString& entryTitle_)
     : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryTitle(entryTitle_), m_entryIdDict(997) {
   m_entryGroupDicts.setAutoDelete(true);
+  m_groupsToDelete.setAutoDelete(true);
 
   m_id = getID();
 //  m_iconName = entryName_ + 's';
@@ -71,7 +72,9 @@ bool Collection::addField(FieldPtr field_) {
     if(m_peopleFields.count() > 1) {
       // the second time that a person field is added, add a "pseudo-group" for people
       if(m_entryGroupDicts.find(s_peopleGroupName) == 0) {
-        m_entryGroupDicts.insert(s_peopleGroupName, new EntryGroupDict());
+        EntryGroupDict* d = new EntryGroupDict();
+        d->setAutoDelete(true);
+        m_entryGroupDicts.insert(s_peopleGroupName, d);
         m_entryGroups.prepend(s_peopleGroupName);
       }
     }
@@ -91,6 +94,7 @@ bool Collection::addField(FieldPtr field_) {
   if(field_->flags() & Field::AllowGrouped) {
     // m_entryGroups autoDeletes each QDict when the Collection d'tor is called
     EntryGroupDict* dict = new EntryGroupDict();
+    dict->setAutoDelete(true);
     // don't autoDelete, since the group is deleted when it becomes empty
     m_entryGroupDicts.insert(field_->name(), dict);
     // cache the possible groups of entries
@@ -264,7 +268,9 @@ bool Collection::modifyField(FieldPtr newField_) {
   if(isPeople) {
     // if there's more than one people field and no people dict exists yet, add it
     if(m_peopleFields.count() > 1 && !m_entryGroupDicts.find(s_peopleGroupName)) {
-      m_entryGroupDicts.insert(s_peopleGroupName, new EntryGroupDict());
+      EntryGroupDict* d = new EntryGroupDict();
+      d->setAutoDelete(true);
+      m_entryGroupDicts.insert(s_peopleGroupName, d);
       // put it at the top of the list
       m_entryGroups.prepend(s_peopleGroupName);
     }
@@ -287,7 +293,9 @@ bool Collection::modifyField(FieldPtr newField_) {
 //      m_entryGroupDicts.replace(fieldName, new EntryGroupDict());
     }
   } else if(isGrouped) {
-    m_entryGroupDicts.insert(fieldName, new EntryGroupDict());
+    EntryGroupDict* d = new EntryGroupDict();
+    d->setAutoDelete(true);
+    m_entryGroupDicts.insert(fieldName, d);
     // cache the possible groups of entries
     m_entryGroups << fieldName;
     resetGroups = true;
@@ -398,7 +406,7 @@ void Collection::addEntry(EntryPtr entry_) {
 }
 
 void Collection::removeEntriesFromDicts(EntryVec entries_) {
-  PtrVector<EntryGroup> modifiedGroups, deleteGroups;
+  PtrVector<EntryGroup> modifiedGroups;
   for(EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
     // need a copy of the vector since it gets changed
     PtrVector<EntryGroup> groups = entry->groups();
@@ -406,23 +414,13 @@ void Collection::removeEntriesFromDicts(EntryVec entries_) {
       if(entry->removeFromGroup(group.ptr()) && !modifiedGroups.contains(group.ptr())) {
         modifiedGroups.push_back(group.ptr());
       }
-      if(group->isEmpty()) {
-        EntryGroupDict* dict = m_entryGroupDicts.find(group->fieldName());
-        if(!dict) {
-          continue;
-        }
-        dict->remove(group->groupName());
-        if(!deleteGroups.contains(group.ptr())) {
-          deleteGroups.push_back(group.ptr());
-        }
+      if(group->isEmpty() && !m_groupsToDelete.contains(group.ptr())) {
+        m_groupsToDelete.push_back(group.ptr());
       }
     }
   }
   for(PtrVector<EntryGroup>::Iterator group = modifiedGroups.begin(); group != modifiedGroups.end(); ++group) {
     emit signalGroupModified(this, group.ptr());
-  }
-  for(PtrVector<EntryGroup>::Iterator group = deleteGroups.begin(); group != deleteGroups.end(); ++group) {
-    delete group.ptr();
   }
 }
 
@@ -591,6 +589,12 @@ void Collection::populateDicts(EntryPtr entry_) {
       if(!group) {
         group = new EntryGroup(groupTitle, fieldName);
         dict->insert(groupTitle, group);
+      } else if(group->isEmpty()) {
+        // if it's empty, then it was added to the vector of groups to delete
+        // remove it from that vector now that we're adding to it
+        m_groupsToDelete.setAutoDelete(false);
+        m_groupsToDelete.remove(group);
+        m_groupsToDelete.setAutoDelete(true);
       }
       if(entry_->addToGroup(group)) {
         emit signalGroupModified(this, group);
@@ -660,6 +664,24 @@ bool Collection::removeFilter(FilterPtr filter_) {
   // TODO: test for success
   m_filters.remove(filter_);
   return true;
+}
+
+void Collection::clear() {
+  // since the collection holds a pointer to each entry and each entry
+  // hold a pointer to the collection, and they're both sharedptrs,
+  // neither will ever get deleted, unless the collection removes
+  // all held pointers, specifically to entries
+  m_fields.clear();
+  m_peopleFields.clear();
+  m_imageFields.clear();
+  m_fieldNameDict.clear();
+  m_fieldTitleDict.clear();
+  m_entries.clear();
+  m_entryIdDict.clear();
+  m_entryGroupDicts.clear();
+  m_groupsToDelete.clear();
+  m_filters.clear();
+  m_borrowers.clear();
 }
 
 // static

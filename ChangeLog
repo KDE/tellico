@@ -1,3 +1,35 @@
+2006-03-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Added patch from Karl Ove Hufthammer, for lang-specific sorting.
+	* Released Tellico 1.1.2.
+
+2006-03-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed file save permissions to remember group.
+	* Fixed backup file permissions.
+
+2006-03-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed mess with shared pointers holding shared pointers holding
+	shared pointers...
+	* Fixed button size in HTML export.
+
+2006-02-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated fr.po, thanks to Mathias Monnerville.
+	* Fixed GCfilms importer to read running time correctly.
+	* Use IMDb url for updating if available.
+	* Change IMDb default server to akas.imdb.com.
+
+2006-02-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Added pt_BR, thanks to Claudio Felix.
+
+2006-02-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed HTML export to always use relative links.
+	* Fixed Fancy template column widths, patch from Karl Ove Hufthammer.
+
 2006-02-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed cleanup when oowriter is closed.

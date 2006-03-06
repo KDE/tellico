@@ -25,6 +25,9 @@
 
 <xsl:output method="html" version="xhtml" encoding="utf-8"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
+
 <!-- To choose which fields of each entry are printed, change the
      string to a space separated list of field names. To know what
      fields are available, check the Tellico data file for <field>
@@ -122,7 +125,7 @@
   <tbody>
    <xsl:variable name="fields" select="tc:fields"/>
    <xsl:for-each select="tc:group">
-    <xsl:sort select="@title"/>
+    <xsl:sort lang="$lang" select="@title"/>
     <tr>
      <td class="groupName">
       <xsl:value-of select="@title"/>

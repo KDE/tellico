@@ -25,6 +25,9 @@
 
 <xsl:output method="html" version="xhtml" encoding="utf-8"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
+
 <xsl:variable name="image-field" select="tc:tellico/tc:collection[1]/tc:fields/tc:field[@type=10][1]/@name"/>
 
 <!-- set the maximum image size -->
@@ -107,7 +110,7 @@
  <!-- first, build sorted list -->
  <xsl:variable name="sorted-entries">
   <xsl:for-each select="tc:entry">
-   <xsl:sort select=".//tc:title[1]"/>
+   <xsl:sort lang="$lang" select=".//tc:title[1]"/>
    <xsl:copy-of select="."/>
   </xsl:for-each>
  </xsl:variable>
@@ -190,8 +193,8 @@
      </span>
      <br/>
      <span class="plot">
-      <xsl:value-of select="substring(./tc:plot, 1, 150)"/>
-      <xsl:text>...</xsl:text>
+      <xsl:value-of select="normalize-space(substring(./tc:plot, 1, 150))" disable-output-escaping="yes"/>
+      <xsl:text>&#xa0;&#x2026;</xsl:text>
      </span>
     </td>
    </tr>

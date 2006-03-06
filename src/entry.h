@@ -22,6 +22,8 @@
 #include <qstring.h>
 #include <qptrlist.h>
 
+#include <functional>
+
 namespace Tellico {
   namespace Data {
     class Collection;

@@ -305,6 +305,10 @@ public:
 
   void addBorrower(Data::BorrowerPtr borrower);
   const BorrowerVec& borrowers() const { return m_borrowers; }
+  /**
+   * Clears all vectors which contain shared ptrs
+   */
+  void clear();
 
   void addFilter(FilterPtr filter);
   bool removeFilter(FilterPtr filter);
@@ -364,6 +368,7 @@ private:
 
   QDict<EntryGroupDict> m_entryGroupDicts;
   QStringList m_entryGroups;
+  PtrVector<EntryGroup> m_groupsToDelete;
 
   FilterVec m_filters;
   BorrowerVec m_borrowers;

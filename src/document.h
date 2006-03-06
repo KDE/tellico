@@ -202,7 +202,7 @@ private:
    * @param entry A pointer to the entry
    */
   void saveEntry(EntryPtr entry);
-  bool Document::pruneImages();
+  bool pruneImages();
 
   // make all constructors private
   Document();

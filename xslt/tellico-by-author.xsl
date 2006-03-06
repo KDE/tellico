@@ -22,6 +22,9 @@
 
 <xsl:output method="html" version="xhtml" indent="yes"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
+
 <xsl:param name="version"/>
 
 <xsl:key name="books" match="tc:book" use=".//tc:author"/>
@@ -117,7 +120,7 @@
   <div class="books">
    <ul>
     <xsl:for-each select="$no-author">
-     <xsl:sort select="tc:title"/>
+     <xsl:sort lang="$lang" select="tc:title"/>
      <xsl:apply-templates select="."/>
     </xsl:for-each>
    </ul>
@@ -125,14 +128,14 @@
  </xsl:if>
 
  <xsl:for-each select="$unique-authors">
-  <xsl:sort select="."/>
+  <xsl:sort lang="$lang" select="."/>
   <div class="author">
    <xsl:value-of select="."/>
   </div>
   <div class="books">
    <ul>
     <xsl:for-each select="key('books', .)">
-     <xsl:sort select="tc:title"/>
+     <xsl:sort lang="$lang" select="tc:title"/>
 <!-- or sort by series and number -->
 <!-- <xsl:sort select="tc:series"/>
      <xsl:sort select="tc:series_num"/> -->

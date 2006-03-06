@@ -24,6 +24,9 @@
 
 <xsl:output method="html" version="xhtml" encoding="utf-8"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
+
 <xsl:param name="num-columns" select="3"/>
 
 <xsl:template match="/">
@@ -83,7 +86,7 @@
    <!-- first, build sorted list -->
    <xsl:variable name="sorted-entries">
     <xsl:for-each select="tc:entry">
-     <xsl:sort select=".//tc:title[1]"/>
+     <xsl:sort lang="$lang" select=".//tc:title[1]"/>
      <xsl:copy-of select="."/>
     </xsl:for-each>
    </xsl:variable>

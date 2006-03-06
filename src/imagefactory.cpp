@@ -179,7 +179,7 @@ bool ImageFactory::writeImage(const QString& id_, CacheDir dir_) {
   QString path = ( dir_ == DataDir ? dataDir() : tempDir() );
 
   // images in the temp directory are erased every session, so we can track
-  // whether they've already been written with a simple string set
+  // whether they've already been written with a simple string set.
   // images in the data directory are persistent, so we have to check the
   // actual file existence
   bool exists = ( dir_ == DataDir ? QFile::exists(path + id_) : s_imagesInTmpDir.has(id_) );
@@ -226,7 +226,10 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // the document does a delayed loading of the images, sometimes
   // so an image could be in the tmp dir and not be in the cache
   if(s_imagesInTmpDir.has(id_)) {
-    return addCachedImage(id_, TempDir);
+    const Data::Image& img2 = addCachedImage(id_, TempDir);
+    if(!img2.isNull()) {
+      return img2;
+    }
   }
 
   // don't check Kernel::self()->writeImagesInFile(), someday we might have problems
@@ -239,7 +242,10 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     if(!Kernel::self()->writeImagesInFile()) {
       Data::Document::self()->slotSetModified(true);
     }
-    return addCachedImage(id_, DataDir);
+    const Data::Image& img2 = addCachedImage(id_, DataDir);
+    if(!img2.isNull()) {
+      return img2;
+    }
   }
 
   // try to do a delayed loading of the image

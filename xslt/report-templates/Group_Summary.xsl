@@ -26,6 +26,9 @@
 
 <xsl:output method="html" version="xhtml" encoding="utf-8"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
+
 <xsl:variable name="limit" select="5"/>
 
 <xsl:key name="fieldsByName" match="tc:field" use="@name"/>
@@ -220,8 +223,8 @@
    </h2>
 
    <xsl:for-each select="$groups">
-    <xsl:sort select="@count" data-type="number" order="descending" />
-    <xsl:sort select="@name"/>
+    <xsl:sort lang="$lang" select="@count" data-type="number" order="descending" />
+    <xsl:sort lang="$lang" select="@name"/>
     <xsl:if test="position() &lt;= $limit">
      <div class="row">
       <div class="group">

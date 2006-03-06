@@ -300,15 +300,19 @@
  <!-- only output if there are fields in this category, or if there are no images
       also, special case, don't output empty paragraphs -->
  <xsl:if test="($n &gt; 0 or $num-images = 0) and (not($first-type = 2) or $entry/*[local-name(.) = $fields[1]/@name])">
-  <div class="category">
-
+  <div class="container">
    <xsl:if test="$num-images = 0 and $first-type != 2">
     <xsl:attribute name="style">
-     <xsl:text>float: right; width: 47%;</xsl:text>
+     <xsl:text>width: 50%; </xsl:text>
      <!-- two columns of divs -->
-     <xsl:if test="$categories[. = $category and position() mod 2 = 1]">
-      <xsl:text>float: left; clear: both;</xsl:text>
-     </xsl:if>
+     <xsl:choose>
+       <xsl:when test="$categories[. = $category and position() mod 2 = 1]">
+        <xsl:text>float: left; clear: both;</xsl:text>
+       </xsl:when>
+       <xsl:otherwise>
+        <xsl:text>float: right;</xsl:text>
+       </xsl:otherwise>
+     </xsl:choose>
     </xsl:attribute>
    </xsl:if>
    <xsl:if test="$num-images = 0 and $first-type = 2">
@@ -316,6 +320,7 @@
      <xsl:text>clear: both; </xsl:text>
     </xsl:attribute>
    </xsl:if>
+  <div class="category">
 
    <h2>
     <xsl:value-of select="$category"/>
@@ -416,6 +421,7 @@
     </xsl:otherwise>
    </xsl:choose>
 
+  </div>
   </div>
  </xsl:if>
 </xsl:template>

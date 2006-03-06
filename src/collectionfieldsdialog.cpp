@@ -767,9 +767,6 @@ void CollectionFieldsDialog::slotDefault() {
 
   m_btnDelete->setEnabled(!(defaultField->flags() & Data::Field::NoDelete));
 
-  // type is only changeable for new attributes
-  m_typeCombo->setEnabled(false);
-
 //  m_titleEdit->setFocus();
 //  m_titleEdit->selectAll();
 

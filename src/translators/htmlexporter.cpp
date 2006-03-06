@@ -27,6 +27,7 @@
 #include <kstandarddirs.h>
 #include <kconfig.h>
 #include <kglobalsettings.h>
+#include <kglobal.h>
 #include <kio/netaccess.h>
 #include <kapplication.h>
 #include <khtml_part.h>
@@ -217,8 +218,16 @@ bool HTMLExporter::loadXSLTFile() {
   }
 
   // look for a file that gets installed to know the installation directory
-  QString dataDir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png"));
-  m_handler->addStringParam("datadir", QFile::encodeName(dataDir));
+  // if parseDOM, that means we want the locations to be the actual location
+  // otherwise, we assume it'll be relative
+  if(m_parseDOM && m_dataDir.isEmpty()) {
+    m_dataDir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png"));
+  } else if(!m_parseDOM) {
+    m_dataDir.truncate(0);
+  }
+  if(!m_dataDir.isEmpty()) {
+    m_handler->addStringParam("datadir", QFile::encodeName(m_dataDir));
+  }
 
   setFormattingOptions(collection());
 
@@ -269,8 +278,8 @@ QString HTMLExporter::text() {
   if(f2.open(IO_WriteOnly)) {
     QTextStream t(&f2);
     t << text;
-    t << "\n\n-------------------------------------------------------\n\n";
-    t << Tellico::i18nReplace(text);
+//    t << "\n\n-------------------------------------------------------\n\n";
+//    t << Tellico::i18nReplace(text);
   }
   f2.close();
 #endif
@@ -372,15 +381,18 @@ void HTMLExporter::setFormattingOptions(Data::CollPtr coll) {
   m_handler->addStringParam("fgcolor", cg.text().name().utf8());
   m_handler->addStringParam("color1",  cg.highlightedText().name().utf8());
   m_handler->addStringParam("color2",  cg.highlight().name().utf8());
+
+  // add locale code to stylesheet (for sorting)
+  m_handler->addStringParam("lang",  KGlobal::locale()->languagesTwoAlpha().first().utf8());
+  ;
 }
 
 void HTMLExporter::writeImages(Data::CollPtr coll_) {
-  LOG_FUNC;
   // keep track of which image fields to write, this is for field names
-  QStringList imageFields;
+  StringSet imageFields;
   for(QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
     if(coll_->fieldByTitle(*it)->type() == Data::Field::Image) {
-      imageFields << *it;
+      imageFields.add(*it);
     }
   }
 
@@ -392,40 +404,45 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
     // add all image fields to string list
     Data::FieldVec fields = coll_->imageFields();
     for(Data::FieldVec::Iterator fieldIt = fields.begin(); fieldIt != fields.end(); ++fieldIt) {
-      const QString& fieldName = fieldIt->name();
-      if(imageFields.findIndex(fieldName) == -1) { // be sure not to have duplicate values
-        imageFields << fieldName;
-      }
+      imageFields.add(fieldIt->name());
     }
   }
 
   // all of them are going to get written to tmp file
   bool useTemp = url().isEmpty();
   KURL imgDir;
+  QString imgDirRelative;
   // really some convoluted logic here
   // basically, four cases. 1) we're writing to a tmp file, for printing probably
   // so then write all the images to the tmp directory, 2) we're exporting to HTML, and
   // this is the main collection file, in which case m_parseDOM is always true;
   // 3) we're exporting HTML, and this is the first entry file, for which parseDOM is true
   // and exportEntryFiles is false. Then the image file will get copied in copyFiles() and is
-  // probably an image in the entry template. 4) we're exporting HTML, and this is not the 1st
-  // 1st entry file, in which case, we want to refer directoly to the target dir
-  if(useTemp || (m_parseDOM && !m_exportEntryFiles)) {
+  // probably an image in the entry template. 4) we're exporting HTML, and this is not the
+  // first entry file, in which case, we want to refer directly to the target dir
+  if(useTemp) { // everything goes in the tmp dir
     imgDir.setPath(ImageFactory::tempDir());
+    imgDirRelative = imgDir.path();
+  } else if(m_parseDOM) {
+    imgDir = fileDir(); // copy to fileDir
+    imgDirRelative = ImageFactory::tempDir(); // use tempDir to read from since the DOM is parsed
+                                              // and the link will get changed later
+    createDir();
   } else {
     imgDir = fileDir();
+    imgDirRelative = KURL::relativeURL(url(), imgDir);
     createDir();
   }
-  m_handler->addStringParam("imgdir", QFile::encodeName(imgDir.path()));
+  m_handler->addStringParam("imgdir", QFile::encodeName(imgDirRelative));
 
-  // call kapp->processEvents(), too
   int count = 0;
   const int processCount = 100; // process after every 100 events
 
+  QStringList fieldsList = imageFields.toList();
   StringSet imageSet; // track which images are written
-  for(QStringList::ConstIterator fieldName = imageFields.begin(); fieldName != imageFields.end(); ++fieldName) {
+  for(QStringList::ConstIterator fieldName = fieldsList.begin(); fieldName != fieldsList.end(); ++fieldName) {
     for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
-      const QString& id = entryIt->field(*fieldName);
+      QString id = entryIt->field(*fieldName);
       // if no id or is already writen, continue
       if(id.isEmpty() || imageSet.has(id)) {
         continue;
@@ -586,7 +603,13 @@ QString HTMLExporter::handleLink(const QString& link_) {
   u.setPath(m_xsltFilePath);
   u = KURL(u, link_);
   m_files.append(u);
-  m_links.insert(link_, fileDirName() + u.fileName());
+  // if we're exporting entry files, we want pics/ to
+  // go in pics/
+  QString midDir;
+  if(link_.startsWith(m_dataDir + QString::fromLatin1("pics/"))) {
+    midDir += QString::fromLatin1("pics/");
+  }
+  m_links.insert(link_, fileDirName() + midDir + u.fileName());
   return m_links[link_];
 }
 
@@ -594,9 +617,8 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
   QString str = str_;
   int start = 0;
   int end = 0;
-  const int length = str.length();
   const QString url = QString::fromLatin1("url(");
-  for(int pos = str.find(url); pos < length && pos >= 0; pos = str.find(url, pos+1)) {
+  for(int pos = str.find(url); pos >= 0; pos = str.find(url, pos+1)) {
     pos += 4; // url(
     if(str[pos] ==  '"' || str[pos] == '\'') {
       ++pos;
@@ -628,35 +650,28 @@ bool HTMLExporter::createDir() {
 }
 
 bool HTMLExporter::copyFiles() {
-  LOG_FUNC;
   const uint start = 20;
   const uint maxProgress = m_exportEntryFiles ? 40 : 80;
   const uint stepSize = QMAX(1, m_files.count()/maxProgress);
   uint j = 0;
 
   bool checkTarget = true;
-  bool createdDir = false;
   for(KURL::List::ConstIterator it = m_files.begin(); it != m_files.end() && !m_cancelled; ++it, ++j) {
     if(m_copiedFiles.has((*it).url())) {
       continue;
     }
-    m_copiedFiles.add((*it).url());
 
     KURL target = fileDir();
     if(checkTarget) {
       checkTarget = false;
-      createdDir = createDir();
+      createDir();
     }
 
-    target.addPath((*it).fileName().section('/', -1));
-    // KIO::NetAccess::copy() doesn't force overwrite
-    // TODO: should the file be deleted?
-    // if we created the directory, we know we don't have to delete anything
-    if(!createdDir) {
-      KIO::NetAccess::del(target, m_widget);
-    }
-    bool success = KIO::NetAccess::copy(*it, target, m_widget);
-    if(!success) {
+    target.addPath((*it).fileName());
+    bool success = KIO::NetAccess::file_copy(*it, target, -1, true /* overwrite */, false /* resume */, m_widget);
+    if(success) {
+      m_copiedFiles.add((*it).url());
+    } else {
       kdWarning() << "HTMLExporter::copyFiles() - can't copy " << target << endl;
       kdWarning() << KIO::NetAccess::lastErrorString() << endl;
     }
@@ -736,6 +751,22 @@ bool HTMLExporter::writeEntryFiles() {
       }
       kapp->processEvents();
     }
+  }
+  // the images in "pics/" are special data images, copy them always
+  QStringList dataImages;
+  dataImages << QString::fromLatin1("checkmark.png");
+  for(uint i = 1; i <= 10; ++i) {
+    dataImages << QString::fromLatin1("stars%1.png").arg(i);
+  }
+  KURL dataDir;
+  dataDir.setPath(KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png")) + "pics/");
+  KURL target = fileDir();
+  target.addPath(QString::fromLatin1("pics/"));
+  KIO::NetAccess::mkdir(target, m_widget);
+  for(QStringList::ConstIterator it = dataImages.begin(); it != dataImages.end(); ++it) {
+    dataDir.setFileName(*it);
+    target.setFileName(*it);
+    KIO::NetAccess::copy(dataDir, target, m_widget);
   }
 
   return true;

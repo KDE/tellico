@@ -43,6 +43,8 @@
 <!-- This is the title just beside the collection name. It will
      automatically list which fields are used for sorting. -->
 <xsl:param name="sort-title" select="''"/>
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data files are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
@@ -146,9 +148,9 @@
 
   <tbody>
    <xsl:for-each select="tc:entry">
-    <xsl:sort select="dyn:evaluate($sort1)"/>
-    <xsl:sort select="dyn:evaluate($sort2)"/>
-    <xsl:sort select="dyn:evaluate($sort3)"/>
+    <xsl:sort lang="$lang" select="dyn:evaluate($sort1)"/>
+    <xsl:sort lang="$lang" select="dyn:evaluate($sort2)"/>
+    <xsl:sort lang="$lang" select="dyn:evaluate($sort3)"/>
     <tr class="r{position() mod 2}">
      <xsl:apply-templates select="."/>
     </tr>

@@ -57,8 +57,10 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
 
   bool convertUTF8 = false;
   QMap<QString, Data::BorrowerPtr> borrowers;
-  const QRegExp rx = QRegExp(QString::fromLatin1("\\s*,\\s*"));
-  QRegExp year = QRegExp(QString::fromLatin1("\\d{4}"));
+  const QRegExp rx(QString::fromLatin1("\\s*,\\s*"));
+  QRegExp year(QString::fromLatin1("\\d{4}"));
+  QRegExp runTimeHr(QString::fromLatin1("(\\d+)\\s?hr?"));
+  QRegExp runTimeMin(QString::fromLatin1("(\\d+)\\s?mi?n?"));
 
   bool gotFirstLine = false;
   uint total = 0;
@@ -103,15 +105,27 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
     if(year.search(values[2]) > -1) {
       entry->setField(QString::fromLatin1("year"), year.cap());
     }
-    entry->setField(QString::fromLatin1("running-time"),  QString::number(Tellico::toUInt(values[3], &ok)));
+
+    uint time = 0;
+    if(runTimeHr.search(values[3]) > -1) {
+      time = Tellico::toUInt(runTimeHr.cap(1), &ok) * 60;
+    }
+    if(runTimeMin.search(values[3]) > -1) {
+      time += Tellico::toUInt(runTimeMin.cap(1), &ok);
+    }
+    if(time > 0) {
+      entry->setField(QString::fromLatin1("running-time"),  QString::number(time));
+    }
+
     entry->setField(QString::fromLatin1("director"),      splitJoin(rx, values[4]));
     entry->setField(QString::fromLatin1("nationality"),   splitJoin(rx, values[5]));
     entry->setField(QString::fromLatin1("genre"),         splitJoin(rx, values[6]));
-    KURL u;
-    u.setPath(values[7]);
-    const Data::Image& img = ImageFactory::addImage(u, true /* quiet */);
-    if(!img.isNull()) {
-      entry->setField(QString::fromLatin1("cover"), img.id());
+    KURL u = KURL::fromPathOrURL(values[7]);
+    if(!u.isEmpty()) {
+      const Data::Image& img = ImageFactory::addImage(u, true /* quiet */);
+      if(!img.isNull()) {
+        entry->setField(QString::fromLatin1("cover"), img.id());
+      }
     }
     entry->setField(QString::fromLatin1("cast"),  splitJoin(rx, values[8]));
     // values[9] is the original title

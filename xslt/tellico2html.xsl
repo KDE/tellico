@@ -44,6 +44,8 @@
 
 <xsl:output method="html" version="xhtml" encoding="utf-8"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
 
 <!-- To choose which fields of each entry are printed, change the
      string to a space separated list of field names. To know what
@@ -168,6 +170,9 @@
         margin-right: 4px;
         background-color: #eee;
    }
+   input {
+        margin-left: 4px;
+   }
    .button {
         margin-bottom: 2px;
    }
@@ -193,9 +198,9 @@
         padding-right: 4px;
    }
    tr.entry0 {
+        background-color: #eee;
    }
    tr.entry1 {
-        background-color: #eee;
    }
    tr.groupEntry0 {
    }
@@ -290,9 +295,9 @@
     <!-- If the entries are not being grouped, it's easy -->
     <xsl:when test="not($group-entries)">
      <xsl:for-each select="tc:entry">
-      <xsl:sort select="dyn:evaluate($sort1)"/>
-      <xsl:sort select="dyn:evaluate($sort2)"/>
-      <xsl:sort select="dyn:evaluate($sort3)"/>
+      <xsl:sort lang="$lang" select="dyn:evaluate($sort1)"/>
+      <xsl:sort lang="$lang" select="dyn:evaluate($sort2)"/>
+      <xsl:sort lang="$lang" select="dyn:evaluate($sort3)"/>
       <tr class="entry{position() mod 2}">
        <xsl:apply-templates select="."/>
       </tr>
@@ -328,9 +333,9 @@
      <!-- first, copy each entry and add a group attribute -->
      <xsl:variable name="listing">
       <xsl:for-each select="tc:entry">
-       <xsl:sort select="dyn:evaluate($sort1)"/>
-       <xsl:sort select="dyn:evaluate($sort2)"/>
-       <xsl:sort select="dyn:evaluate($sort3)"/>
+       <xsl:sort lang="$lang" select="dyn:evaluate($sort1)"/>
+       <xsl:sort lang="$lang" select="dyn:evaluate($sort2)"/>
+       <xsl:sort lang="$lang" select="dyn:evaluate($sort3)"/>
        <xsl:variable name="entry" select="."/>
        <xsl:for-each select="dyn:evaluate($group-fields)">
         <tc:entry group="{.}" id="{$entry/@id}"/>
@@ -341,7 +346,7 @@
      <!-- now, loop again, while sorting by group and title -->
      <xsl:variable name="sorted">
       <xsl:for-each select="exsl:node-set($listing)/tc:entry">
-       <xsl:sort select="@group"/>
+       <xsl:sort lang="$lang" select="@group"/>
        <!-- don't repeat an entry in the same group -->
        <xsl:if test="not(preceding-sibling::*[@group=current()/@group and @id=current()/@id])">
         <xsl:copy-of select="."/>
@@ -374,9 +379,9 @@
      
      <!-- don't forget entries in no group -->
      <xsl:for-each select="dyn:evaluate(concat('tc:entry[not(',$group-fields,')]'))">
-      <xsl:sort select="dyn:evaluate($sort1)"/>
-      <xsl:sort select="dyn:evaluate($sort2)"/>
-      <xsl:sort select="dyn:evaluate($sort3)"/>
+      <xsl:sort lang="$lang" select="dyn:evaluate($sort1)"/>
+      <xsl:sort lang="$lang" select="dyn:evaluate($sort2)"/>
+      <xsl:sort lang="$lang" select="dyn:evaluate($sort3)"/>
       <xsl:if test="position()=1">
        <tr>
         <td class="groupName">

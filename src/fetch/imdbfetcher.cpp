@@ -42,7 +42,7 @@
 //#define IMDB_TEST
 
 namespace {
-  static const char* IMDB_SERVER = "www.imdb.com";
+  static const char* IMDB_SERVER = "akas.imdb.com";
   static const uint IMDB_MAX_RESULTS = 25;
   static const QString sep = QString::fromLatin1("; ");
 }
@@ -137,6 +137,7 @@ void IMDBFetcher::search(FetchKey key_, const QString& value_) {
   m_url.setProtocol(QString::fromLatin1("http"));
   m_url.setHost(m_host.isEmpty() ? QString::fromLatin1(IMDB_SERVER) : m_host);
   m_url.setPath(QString::fromLatin1("/find"));
+
   switch(key_) {
     case Title:
       m_url.setQuery(QString::fromLatin1("tt=on;q=") + value_);
@@ -629,10 +630,27 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Data::EntryPtr entry_) {
 }
 
 void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL& baseURL_) {
-  // plot summries provided by users are on a separate page
+  // plot summaries provided by users are on a separate page
   // should those be preferred?
 
   bool useUserSummary = false;
+
+  QString thisPlot;
+  // match until next opening tag
+  QRegExp plotRx(QString::fromLatin1("plot (?:outline|summary):(.*)<[^/].*</"), false);
+  plotRx.setMinimal(true);
+  QRegExp plotURLRx(QString::fromLatin1("<a\\s+.*href\\s*=\\s*\".*/title/.*/plotsummary\""), false);
+  plotURLRx.setMinimal(true);
+  if(plotRx.search(str_) > -1) {
+    thisPlot = plotRx.cap(1);
+    thisPlot.remove(*s_tagRx); // remove HTML tags
+    entry_->setField(QString::fromLatin1("plot"), thisPlot);
+    // if thisPlot ends with (more) or contains
+    // a url that ends with plotsummary, then we'll grab it, otherwise not
+    if(plotRx.cap(0).endsWith(QString::fromLatin1("(more)</")) || plotURLRx.search(plotRx.cap(0)) > -1) {
+      useUserSummary = true;
+    }
+  }
 
   if(useUserSummary) {
     QRegExp idRx(QString::fromLatin1("title/(tt\\d+)"));
@@ -642,28 +660,14 @@ void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL&
     // be quiet about failure
     QString plotPage = FileHandler::readTextFile(plotURL, true);
 
-    if(plotPage.isEmpty()) {
-      useUserSummary = false;
-    } else {
+    if(!plotPage.isEmpty()) {
       QRegExp plotRx(QString::fromLatin1("<p\\s+class\\s*=\\s*\"plotpar\">(.*)</p"));
       plotRx.setMinimal(true);
       if(plotRx.search(plotPage) > -1) {
-        QString plot = plotRx.cap(1);
-        plot.remove(*s_tagRx); // remove HTML tags
-        entry_->setField(QString::fromLatin1("plot"), plot);
+        QString userPlot = plotRx.cap(1);
+        userPlot.remove(*s_tagRx); // remove HTML tags
+        entry_->setField(QString::fromLatin1("plot"), userPlot);
       }
-    }
-  }
-
-   // this isn't an else tag since the other call may fail and set useUserSummary to false
-  if(!useUserSummary) {
-    // match until next opening tag
-    QRegExp plotRx(QString::fromLatin1("plot outline:(.*)<[^/]"), false);
-    plotRx.setMinimal(true);
-    if(plotRx.search(str_) > -1) {
-      QString plot = plotRx.cap(1);
-      plot.remove(*s_tagRx); // remove HTML tags
-      entry_->setField(QString::fromLatin1("plot"), plot);
     }
   }
 }
@@ -755,8 +759,8 @@ void IMDBFetcher::doRating(const QString& str_, Data::EntryPtr entry_) {
   }
 
   // don't add a colon, since there's a <br> at the end
-  // match until next b tag
-  QRegExp rx(QString::fromLatin1("(\\d+.?\\d*)/10"));
+  // some of the imdb images use /10.gif in their path, so check for space or bracket
+  QRegExp rx(QString::fromLatin1("[>\\s](\\d+.?\\d*)/10[<//s]"));
   rx.setMinimal(true);
   rx.setCaseSensitive(false);
 
@@ -886,8 +890,26 @@ void IMDBFetcher::updateEntry(Data::EntryPtr entry_) {
 //  myDebug() << "IMDBFetcher::updateEntry()" << endl;
   // only take first 5
   m_limit = 5;
-  // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QString::fromLatin1("title"));
+  KURL link = entry_->field(QString::fromLatin1("imdb"));
+  if(!link.isEmpty() && link.isValid()) {
+    m_key = Fetch::Title;
+    m_value = t;
+    m_started = true;
+    m_data.truncate(0);
+    m_matches.clear();
+    m_url = link;
+    m_redirected = true; // m_redirected is used as a flag later to tell if we get a single result
+    m_job = KIO::get(m_url, false, false);
+    connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
+            SLOT(slotData(KIO::Job*, const QByteArray&)));
+    connect(m_job, SIGNAL(result(KIO::Job*)),
+            SLOT(slotComplete(KIO::Job*)));
+    connect(m_job, SIGNAL(redirection(KIO::Job *, const KURL&)),
+            SLOT(slotRedirection(KIO::Job*, const KURL&)));
+    return;
+  }
+  // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   if(!t.isEmpty()) {
     search(Fetch::Title, t);
     return;

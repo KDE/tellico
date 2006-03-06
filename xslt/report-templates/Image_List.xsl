@@ -25,6 +25,9 @@
 
 <xsl:output method="html" version="xhtml" encoding="utf-8"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
+
 <!-- To choose which fields of each entry are printed, change the
      string to a space separated list of field names. To know what
      fields are available, check the Tellico data file for <field>
@@ -109,7 +112,7 @@
  <xsl:variable name="image-field" select="tc:fields/tc:field[@type=10][1]/@name"/>
  
  <xsl:for-each select="tc:entry">
-  <xsl:sort select=".//tc:title[1]"/>
+  <xsl:sort lang="$lang" select=".//tc:title[1]"/>
   <xsl:variable name="entry" select="."/>
 
   <div class="r{position() mod 2}">

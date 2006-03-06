@@ -434,11 +434,11 @@ button, set the first rule to <emphasis>Author contains Bujold</emphasis> and th
 <sect1 id="report-dialog">
 <title>Generating Reports</title>
 <para>
-&appname; can generate various reports about your current collection. The &report-dialog; checks for all &xslt; templates in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename> or <filename class="directory">$<envar>KDEDIR</envar>/share/apps/tellico/report-templates/</filename>. Some complex reports may take a while to generate for large collections.
+&appname; can generate various reports about your current collection. The &report-dialog; checks for all &xslt; templates in the installation path and in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>. So you can create new ones, and they're automatically found and included as options in the &report-dialog;. Some complex reports may take a while to generate for large collections.
 </para>
 
 <para>
-The templates that are installed with &appname; include a list of titles only, the default column view, a group view, a summary of all of the groups and the most popular values in those groups, and a large report with cover images. Select the desired template and click the <guibutton>Generate</guibutton> button. Any report may also be printed or saved to an &html; file.
+The templates that are installed with &appname; include a list of titles only, the default column view, a group view, a summary of all of the groups and the most popular values in those groups, a loan report, and a large report with cover images. Select the desired template and click the <guibutton>Generate</guibutton> button. Any report may also be printed or saved to an &html; file.
 </para>
 
 <screenshot>
@@ -449,6 +449,9 @@ The templates that are installed with &appname; include a list of titles only, t
 </mediaobject>
 </screenshot>
 
+<para>
+The entries included in the report will be limited to the ones in the &detailed-view; so if you've got an active filter, the &report-dialog; will use it.
+</para>
 </sect1>
 
 <sect1 id="loan-dialog">

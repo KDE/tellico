@@ -25,11 +25,14 @@
 #include <ktempfile.h>
 #include <ksavefile.h>
 #include <kapplication.h>
+#include <kfileitem.h>
+#include <kio/chmodjob.h>
 
 #include <qdom.h>
 #include <qfile.h>
 
 using Tellico::FileHandler;
+KFileItem* FileHandler::s_fileItem = 0;
 
 FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : m_file(0), m_isValid(false) {
   if(url_.isEmpty()) {
@@ -148,28 +151,58 @@ Tellico::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_) 
 }
 
 bool FileHandler::queryExists(const KURL& url_) {
+  if(!KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
+    return true;
+  }
+
+  // we always overwrite the current URL without asking
+  if(url_ != Kernel::self()->URL()) {
+    GUI::CursorSaver cs(Qt::arrowCursor);
+    QString str = i18n("A file named \"%1\" already exists. "
+                       "Are you sure you want to overwrite it?").arg(url_.fileName());
+    int want_continue = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str,
+                                                           i18n("Overwrite File?"),
+                                                           i18n("Overwrite"));
+
+    if(want_continue == KMessageBox::Cancel) {
+      return false;
+    }
+  }
+
+  KURL backup(url_);
+  backup.setPath(backup.path() + QString::fromLatin1("~"));
+
   bool success = true;
-  if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
-    if(url_ != Kernel::self()->URL()) {
-      GUI::CursorSaver cs(Qt::arrowCursor);
-      QString str = i18n("A file named \"%1\" already exists. "
-                         "Are you sure you want to overwrite it?").arg(url_.fileName());
-      int want_continue = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str,
-                                                             i18n("Overwrite File?"),
-                                                             i18n("Overwrite"));
+  if(url_.isLocalFile()) {
+    // KSaveFile messes up users and groups
+    // the user is always reset to the current user
+    KFileItemList list;
+    int perm;
+    QString grp;
+    if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
+      KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url_, true);
+      perm = item.permissions();
+      grp = item.group();
 
-      if(want_continue == KMessageBox::Cancel) {
-        return false;
-      }
+      delete s_fileItem;
+      s_fileItem = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, backup, true);
+      list.append(s_fileItem);
+    } else {
+      s_fileItem = 0;
     }
 
-    KURL backup(url_);
-    backup.setPath(backup.path() + QString::fromLatin1("~"));
+    success = KSaveFile::backupFile(url_.path());
+    if(s_fileItem) {
+      // have to leave the user alone
+      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+    }
+  } else {
     KIO::NetAccess::del(backup, Kernel::self()->widget()); // might fail if backup doesn't exist, that's ok
-    success = KIO::NetAccess::copy(url_, backup, Kernel::self()->widget());
-    if(!success) {
-      Kernel::self()->sorry(i18n(errorWrite).arg(backup.fileName()));
-    }
+    success = KIO::NetAccess::file_copy(url_, backup, -1 /* permissions */, true /* overwrite */,
+                                        false /* resume */, Kernel::self()->widget());
+  }
+  if(!success) {
+    Kernel::self()->sorry(i18n(errorWrite).arg(url_.fileName() + '~'));
   }
   return success;
 }
@@ -180,6 +213,21 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
   }
 
   if(url_.isLocalFile()) {
+    // KSaveFile messes up users and groups
+    // the user is always reset to the current user
+    KFileItemList list;
+    int perm;
+    QString grp;
+    if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
+      delete s_fileItem;
+      s_fileItem = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, url_, true);
+      list.append(s_fileItem);
+      perm = s_fileItem->permissions();
+      grp = s_fileItem->group();
+    } else {
+      s_fileItem = 0;
+    }
+
     KSaveFile f(url_.path());
     if(f.status() != 0) {
       if(!quiet_) {
@@ -187,7 +235,12 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
       }
       return false;
     }
-    return FileHandler::writeTextFile(f, text_, encodeUTF8_);
+    bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
+    if(s_fileItem) {
+      // have to leave the user alone
+      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+    }
+    return success;
   }
 
   // save to remote file
@@ -243,6 +296,21 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
   }
 
   if(url_.isLocalFile()) {
+    // KSaveFile messes up users and groups
+    // the user is always reset to the current user
+    KFileItemList list;
+    int perm;
+    QString grp;
+    if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
+      delete s_fileItem;
+      s_fileItem = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, url_, true);
+      list.append(s_fileItem);
+      perm = s_fileItem->permissions();
+      grp = s_fileItem->group();
+    } else {
+      s_fileItem = 0;
+    }
+
     KSaveFile f(url_.path());
     if(f.status() != 0) {
       if(!quiet_) {
@@ -250,7 +318,12 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
       }
       return false;
     }
-    return FileHandler::writeDataFile(f, data_);
+    bool success = FileHandler::writeDataFile(f, data_);
+    if(s_fileItem) {
+      // have to leave the user alone
+      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+    }
+    return success;
   }
 
   // save to remote file
@@ -265,12 +338,9 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
 
   bool success = FileHandler::writeDataFile(f, data_);
   if(success) {
-    bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_, Kernel::self()->widget());
-    if(!uploaded) {
-      if(!quiet_) {
-        Kernel::self()->sorry(i18n(errorUpload).arg(url_.fileName()));
-      }
-      success = false;
+    success = KIO::NetAccess::upload(tempfile.name(), url_, Kernel::self()->widget());
+    if(!success && !quiet_) {
+      Kernel::self()->sorry(i18n(errorUpload).arg(url_.fileName()));
     }
   }
   tempfile.unlink();

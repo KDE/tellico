@@ -68,6 +68,7 @@
         padding: 0px;
         font-family: "<xsl:value-of select="$font"/>";
         color: <xsl:value-of select="$fgcolor"/>;
+        background-color: <xsl:value-of select="$bgcolor"/>;
         background-repeat: repeat;
         font-size: 1em;
    }
@@ -144,7 +145,7 @@
   </style>
   <title>
    <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
-   <xsl:text> - </xsl:text>
+   <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection/@title"/>
   </title>
   </head>

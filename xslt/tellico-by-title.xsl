@@ -18,6 +18,9 @@
 
 <xsl:output method="html" version="xhtml" indent="yes"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
+
 <xsl:variable name="endl">
 <xsl:text>
 </xsl:text>
@@ -97,7 +100,7 @@
  <div class="books">
   <ol>
    <xsl:for-each select="/tc:tellico/tc:collection/tc:entry">
-    <xsl:sort select="tc:title"/>
+    <xsl:sort lang="$lang" select="tc:title"/>
     <xsl:apply-templates select="."/>
    </xsl:for-each>
   </ol>

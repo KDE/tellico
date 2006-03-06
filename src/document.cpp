@@ -67,6 +67,8 @@ void Document::slotDocumentRestored() {
 
 bool Document::newDocument(int type_) {
 //  kdDebug() << "Document::newDocument()" << endl;
+  delete m_importer;
+  m_importer = 0;
   deleteContents();
 
   m_coll = CollectionFactory::collection(static_cast<Collection::Type>(type_), true);
@@ -196,6 +198,8 @@ bool Document::saveDocument(const KURL& url_) {
 }
 
 bool Document::closeDocument() {
+  delete m_importer;
+  m_importer = 0;
   deleteContents();
   return true;
 }
@@ -203,6 +207,14 @@ bool Document::closeDocument() {
 void Document::deleteContents() {
   if(m_coll) {
     Controller::self()->slotCollectionDeleted(m_coll);
+  }
+  // don't delete the m_importer here, bad things will happen
+
+  // since the collection holds a pointer to each entry and each entry
+  // hold a pointer to the collection, and they're both sharedptrs,
+  // neither will ever get deleted, unless the entries are removed from the collection
+  if(m_coll) {
+    m_coll->clear();
   }
   m_coll = 0; // old collection gets deleted as a KSharedPtr
   m_running = false;
@@ -221,6 +233,7 @@ void Document::appendCollection(CollPtr coll_) {
 
   EntryVec entries = coll_->entries();
   for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+    coll_->removeEntry(entry); // necessary so the entry->groups() get cleared
     entry->setCollection(m_coll);
     m_coll->addEntry(entry);
   }
@@ -300,6 +313,7 @@ Tellico::Data::MergePair Document::mergeCollection(CollPtr coll_) {
       }
     }
     if(!matches) {
+      coll_->removeEntry(newIt); // necessary so entry->groups() get cleared
       newIt->setCollection(m_coll);
       m_coll->addEntry(newIt);
       // keep track of which entries got added
@@ -323,6 +337,10 @@ void Document::replaceCollection(CollPtr coll_) {
   setURL(url);
   m_validFile = false;
 
+  // because of the shared ptr mix, have to clear collection
+  if(m_coll) {
+    m_coll->clear();
+  }
   m_coll = coll_;
   m_running = false;
   // CollectionCommand takes care of calling Controller signals

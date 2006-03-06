@@ -74,8 +74,8 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
 }
 
 QString Tellico::i18nReplace(QString text) {
-  QRegExp rx(QString::fromLatin1("<i18n>(.*)</i18n>"));
-  rx.setMinimal(true);
+  // Because QDomDocument sticks in random newlines, go ahead and grab them too
+  QRegExp rx(QString::fromLatin1("\\n?<i18n>([^<]*)</i18n>\\n?"));
   int pos = rx.search(text);
   while(pos > -1) {
     text.replace(pos, rx.matchedLength(), i18n(rx.cap(1).utf8()));

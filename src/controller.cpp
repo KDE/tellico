@@ -165,10 +165,10 @@ void Controller::slotCollectionDeleted(Data::CollPtr coll_) {
   m_mainWindow->m_viewStack->clear();
   blockAllSignals(false);
 
-  // disconnect all signals from the collection to the controller
+  // disconnect all signals from the collection
   // this is needed because the Collection::appendCollection() and mergeCollection()
   // functions signal collection deleted then added for the same collection
-  disconnect(coll_, 0, this, 0);
+  coll_->disconnect();
 }
 
 void Controller::addedEntries(Data::EntryVec entries_) {

@@ -129,8 +129,8 @@ function ts_resortTable(lnk) {
 
     // We appendChild rows that already exist to the tbody, so it moves them rather than creating new ones
     for (i=0;i<newRows.length;i++) {
-       if(i % 2) { newRows[i].className='entry1'; }
-       else { newRows[i].className='entry0'; }
+       if(i % 2) { newRows[i].className='entry0'; }
+       else { newRows[i].className='entry1'; }
        table.tBodies[0].appendChild(newRows[i]);
     }
 }

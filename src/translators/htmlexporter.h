@@ -62,7 +62,7 @@ public:
   void setSortTitles(const QStringList& l)
     { m_sort1 = l[0]; m_sort2 = l[1]; m_sort3 = l[2]; }
   void setColumns(const QStringList& columns) { m_columns = columns; }
-  void setParseDOM(bool parseDOM) { m_parseDOM = parseDOM; }
+  void setParseDOM(bool parseDOM) { m_parseDOM = parseDOM; reset(); }
 
   QString text();
 
@@ -102,6 +102,7 @@ private:
   KURL m_collectionURL;
   QString m_xsltFile;
   QString m_xsltFilePath;
+  QString m_dataDir;
   QStringList m_groupBy;
   QString m_sort1;
   QString m_sort2;

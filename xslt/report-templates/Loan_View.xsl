@@ -25,6 +25,9 @@
 
 <xsl:output method="html" version="xhtml" encoding="utf-8"/>
 
+<!-- Sort using user's preferred language -->
+<xsl:param name="lang" select="'en'"/>
+
 <xsl:key name="entriesById" match="tc:entry" use="@id"/>
 <xsl:key name="loansByDate" match="tc:loan" use="@dueDate"/>
 
@@ -99,7 +102,7 @@
   <tbody>
    <!-- TODO: this would need to be fixed for multiple collections -->
    <xsl:for-each select="../tc:borrowers/tc:borrower/tc:loan[generate-id(.)=generate-id(key('loansByDate', @dueDate)[1])]">
-    <xsl:sort select="@dueDate"/>
+    <xsl:sort lang="$lang" select="@dueDate"/>
     <tr>
      <td class="groupName">
       <xsl:value-of select="@dueDate"/>
@@ -134,7 +137,7 @@
   <tbody>
    <!-- TODO: this would need to be fixed for multiple collections -->
    <xsl:for-each select="../tc:borrowers/tc:borrower">
-    <xsl:sort select="@name"/>
+    <xsl:sort lang="$lang" select="@name"/>
     <tr>
      <td class="groupName">
       <xsl:value-of select="@name"/>
