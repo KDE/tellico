@@ -38,6 +38,12 @@ QString Iso5426Converter::toUtf8(const QCString& text_) {
     if(isAscii(c)) {
       result[pos++] = c;
     } else if(isCombining(c) && hasNext(i, len)) {
+      // this is a hack
+      // use the diaeresis instead of umlaut
+      // works for SUDOC
+      if(c == 0xC9) {
+        c = 0xC8;
+      }
       QChar d = getCombiningChar(c * 256 + text_[i + 1]);
       if(!d.isNull()) {
         result[pos++] = d;

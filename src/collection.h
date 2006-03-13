@@ -331,6 +331,7 @@ signals:
 private:
   void removeEntriesFromDicts(EntryVec entries);
   void populateDicts(EntryPtr entry);
+  void cleanGroups();
   /*
    * Gets the preferred ID of the collection. Currently, it just gets incremented as
    * new collections are created.

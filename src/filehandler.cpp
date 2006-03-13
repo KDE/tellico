@@ -32,7 +32,16 @@
 #include <qfile.h>
 
 using Tellico::FileHandler;
-KFileItem* FileHandler::s_fileItem = 0;
+
+class FileHandler::ItemDeleter : public QObject {
+public:
+  ItemDeleter(KIO::Job* job, KFileItem* item) : QObject(), m_item(item) {
+    connect(job, SIGNAL(result(KIO::Job*)), SLOT(deleteLater()));
+  }
+  ~ItemDeleter() { delete m_item; }
+private:
+  KFileItem* m_item;
+};
 
 FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : m_file(0), m_isValid(false) {
   if(url_.isEmpty()) {
@@ -184,17 +193,15 @@ bool FileHandler::queryExists(const KURL& url_) {
       perm = item.permissions();
       grp = item.group();
 
-      delete s_fileItem;
-      s_fileItem = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, backup, true);
-      list.append(s_fileItem);
-    } else {
-      s_fileItem = 0;
+      KFileItem* backupItem = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, backup, true);
+      list.append(backupItem);
     }
 
     success = KSaveFile::backupFile(url_.path());
-    if(s_fileItem) {
+    if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      KIO::Job* job = KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      new ItemDeleter(job, list.first());
     }
   } else {
     KIO::NetAccess::del(backup, Kernel::self()->widget()); // might fail if backup doesn't exist, that's ok
@@ -219,13 +226,10 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
     int perm;
     QString grp;
     if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
-      delete s_fileItem;
-      s_fileItem = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, url_, true);
-      list.append(s_fileItem);
-      perm = s_fileItem->permissions();
-      grp = s_fileItem->group();
-    } else {
-      s_fileItem = 0;
+      KFileItem* item = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, url_, true);
+      list.append(item);
+      perm = item->permissions();
+      grp = item->group();
     }
 
     KSaveFile f(url_.path());
@@ -236,9 +240,10 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
       return false;
     }
     bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
-    if(s_fileItem) {
+    if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      KIO::Job* job = KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      new ItemDeleter(job, list.first());
     }
     return success;
   }
@@ -302,13 +307,10 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
     int perm;
     QString grp;
     if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
-      delete s_fileItem;
-      s_fileItem = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, url_, true);
-      list.append(s_fileItem);
-      perm = s_fileItem->permissions();
-      grp = s_fileItem->group();
-    } else {
-      s_fileItem = 0;
+      KFileItem* item = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, url_, true);
+      list.append(item);
+      perm = item->permissions();
+      grp = item->group();
     }
 
     KSaveFile f(url_.path());
@@ -319,9 +321,10 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
       return false;
     }
     bool success = FileHandler::writeDataFile(f, data_);
-    if(s_fileItem) {
+    if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      KIO::Job* job = KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      new ItemDeleter(job, list.first());
     }
     return success;
   }

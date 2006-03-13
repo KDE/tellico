@@ -129,9 +129,7 @@ public:
   static bool queryExists(const KURL& url);
 
 private:
-  // I'm going to accept the memory leak of holding a static pointer
-  // the final item never gets deleted, but <shrug>
-  static KFileItem* s_fileItem;
+  class ItemDeleter;
 
   /**
    * Read contents of a file into an image. It's private since everything should use the

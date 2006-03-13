@@ -1,3 +1,25 @@
+2006-03-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.1.3.
+
+2006-03-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with comc book template not showing up in a couple of
+	places in the GUI.
+	* Updated ru.po.
+
+2006-03-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed z39.50 search to use proper encoding for search terms.
+
+2006-03-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed ISO 5426 converter to grab diaeresis instead of umlaut.
+
+2006-03-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crash on HTML export.
+
 2006-03-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Added patch from Karl Ove Hufthammer, for lang-specific sorting.

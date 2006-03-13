@@ -81,12 +81,14 @@ public:
   void abort() { m_aborted = true; }
 
 private:
-  static QString iconv(const QCString& text, const QCString& charSet);
-  static QString toXML(const QCString& marc, const QCString& charSet);
+  static QCString iconv(const QCString& text, const QString& fromCharSet, const QString& toCharSet);
+  static QString toXML(const QCString& marc, const QString& fromCharSet);
 
   bool makeConnection();
   void done();
   void done(const QString& message, int type);
+  QCString toCString(const QString& text);
+  QString toString(const QCString& text);
 
   class Private;
   Private* d;

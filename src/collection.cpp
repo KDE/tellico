@@ -33,10 +33,8 @@ const QString Collection::s_peopleGroupName = QString::fromLatin1("_people");
 Collection::Collection(const QString& title_, const QString& entryTitle_)
     : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryTitle(entryTitle_), m_entryIdDict(997) {
   m_entryGroupDicts.setAutoDelete(true);
-  m_groupsToDelete.setAutoDelete(true);
 
   m_id = getID();
-//  m_iconName = entryName_ + 's';
 }
 
 Collection::~Collection() {
@@ -95,7 +93,6 @@ bool Collection::addField(FieldPtr field_) {
     // m_entryGroups autoDeletes each QDict when the Collection d'tor is called
     EntryGroupDict* dict = new EntryGroupDict();
     dict->setAutoDelete(true);
-    // don't autoDelete, since the group is deleted when it becomes empty
     m_entryGroupDicts.insert(field_->name(), dict);
     // cache the possible groups of entries
     m_entryGroups << field_->name();
@@ -437,6 +434,7 @@ void Collection::updateDicts(EntryVec entries_) {
   for(EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
     populateDicts(entry);
   }
+  cleanGroups();
 }
 
 bool Collection::removeEntry(EntryPtr entry_) {
@@ -451,7 +449,7 @@ bool Collection::removeEntry(EntryPtr entry_) {
   bool success = m_entryIdDict.remove(entry_->id());
 
   success &= m_entries.remove(entry_);
-
+  cleanGroups();
   return success;
 }
 
@@ -592,9 +590,7 @@ void Collection::populateDicts(EntryPtr entry_) {
       } else if(group->isEmpty()) {
         // if it's empty, then it was added to the vector of groups to delete
         // remove it from that vector now that we're adding to it
-        m_groupsToDelete.setAutoDelete(false);
         m_groupsToDelete.remove(group);
-        m_groupsToDelete.setAutoDelete(true);
       }
       if(entry_->addToGroup(group)) {
         emit signalGroupModified(this, group);
@@ -682,6 +678,22 @@ void Collection::clear() {
   m_groupsToDelete.clear();
   m_filters.clear();
   m_borrowers.clear();
+}
+
+void Collection::cleanGroups() {
+  for(PtrVector<EntryGroup>::Iterator it = m_groupsToDelete.begin(); it != m_groupsToDelete.end(); ++it) {
+    EntryGroupDict* dict = entryGroupDictByName(it->fieldName());
+    if(!dict) {
+      continue;
+    }
+    if(dict->count() == 1) {
+      m_entryGroupDicts.remove(it->fieldName());
+      m_entryGroups.remove(it->fieldName());
+    } else {
+      dict->remove(it->groupName());
+    }
+  }
+  m_groupsToDelete.clear();
 }
 
 // static

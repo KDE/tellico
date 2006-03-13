@@ -46,6 +46,9 @@ public:
 #endif
 };
 
+// since the character set goes into a yaz api call
+// I'm paranoid about user insertions, so just grab 64
+// characters at most
 Z3950Connection::Z3950Connection(Z3950Fetcher* fetcher,
                                  const QString& host,
                                  uint port,
@@ -53,7 +56,8 @@ Z3950Connection::Z3950Connection(Z3950Fetcher* fetcher,
                                  const QString& sourceCharSet,
                                  const QString& syntax,
                                  const QString& esn,
-                                 size_t max) : QThread()
+                                 size_t max)
+    : QThread()
     , d(new Private())
     , m_connected(false)
     , m_aborted(false)
@@ -61,7 +65,7 @@ Z3950Connection::Z3950Connection(Z3950Fetcher* fetcher,
     , m_host(QDeepCopy<QString>(host))
     , m_port(port)
     , m_dbname(QDeepCopy<QString>(dbname))
-    , m_sourceCharSet(QDeepCopy<QString>(sourceCharSet))
+    , m_sourceCharSet(QDeepCopy<QString>(sourceCharSet.left(64)))
     , m_syntax(QDeepCopy<QString>(syntax))
     , m_esn(QDeepCopy<QString>(esn))
     , m_max(max) {
@@ -93,7 +97,7 @@ void Z3950Connection::run() {
   }
 
   ZOOM_query query = ZOOM_query_create();
-  int errcode = ZOOM_query_prefix(query, m_pqn.local8Bit());
+  int errcode = ZOOM_query_prefix(query, toCString(m_pqn));
   if(errcode != 0) {
     myDebug() << "Z3950Connection::run() - query error: " << m_pqn << endl;
     ZOOM_query_destroy(query);
@@ -121,12 +125,12 @@ void Z3950Connection::run() {
     ZOOM_resultset_option_set(resultSet, "elementSetName", "mods");
     type = "xml";
   } else {
-    ZOOM_resultset_option_set(resultSet, "elementSetName", m_esn.local8Bit());
+    ZOOM_resultset_option_set(resultSet, "elementSetName", m_esn.latin1());
   }
   ZOOM_resultset_option_set(resultSet, "count", QCString().setNum(m_max));
   // search in default syntax, unless syntax is already set
   if(!m_syntax.isEmpty()) {
-    ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", m_syntax.local8Bit());
+    ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", m_syntax.latin1());
   }
 
   const char* errmsg;
@@ -137,9 +141,9 @@ void Z3950Connection::run() {
     ZOOM_query_destroy(query);
     m_connected = false;
 
-    QString s = i18n("Connection search error %1: %2").arg(errcode).arg(QString::fromLatin1(errmsg));
+    QString s = i18n("Connection search error %1: %2").arg(errcode).arg(toString(errmsg));
     if(!QCString(addinfo).isEmpty()) {
-      s += QString::fromLatin1(QCString(" (") + addinfo + ")");
+      s += " (" + toString(addinfo) + ")";
     }
     done(s, MessageHandler::Error);
     return;
@@ -177,36 +181,36 @@ void Z3950Connection::run() {
       myDebug() << "Z3950Connection::run() - changing z39.50 syntax to MODS" << endl;
       newSyntax = QString::fromLatin1("xml");
       ZOOM_resultset_option_set(resultSet, "elementSetName", "mods");
-      ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.local8Bit());
+      ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
       rec = ZOOM_resultset_record(resultSet, 0);
       ZOOM_record_get(rec, "xml", &len);
       if(len == 0) {
         // change set name back
-        ZOOM_resultset_option_set(resultSet, "elementSetName", m_esn.local8Bit());
+        ZOOM_resultset_option_set(resultSet, "elementSetName", m_esn.latin1());
         newSyntax = QString::fromLatin1("usmarc"); // try usmarc
         myDebug() << "Z3950Connection::run() - changing z39.50 syntax to USMARC" << endl;
-        ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.local8Bit());
+        ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
         newSyntax = QString::fromLatin1("marc21"); // try marc21
         myDebug() << "Z3950Connection::run() - changing z39.50 syntax to MARC21" << endl;
-        ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.local8Bit());
+        ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
         newSyntax = QString::fromLatin1("unimarc"); // try unimarc
         myDebug() << "Z3950Connection::run() - changing z39.50 syntax to UNIMARC" << endl;
-        ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.local8Bit());
+        ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
         newSyntax = QString::fromLatin1("grs-1"); // try grs-1
         myDebug() << "Z3950Connection::run() - changing z39.50 syntax to GRS-1" << endl;
-        ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.local8Bit());
+        ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
@@ -248,12 +252,12 @@ void Z3950Connection::run() {
     QString data;
     if(m_syntax == Latin1Literal("mods")) {
       // we're going to parse the rendered data, very ugly...
-      data = iconv(ZOOM_record_get(rec, "xml", &len), m_sourceCharSet.left(64).latin1());
+      data = toString(ZOOM_record_get(rec, "xml", &len));
     } else if(m_syntax == Latin1Literal("grs-1")) { // grs-1
       // we're going to parse the rendered data, very ugly...
-      data = iconv(ZOOM_record_get(rec, "render", &len), m_sourceCharSet.left(64).latin1());
+      data = toString(ZOOM_record_get(rec, "render", &len));
     } else {
-      data = toXML(ZOOM_record_get(rec, "raw", &len), m_sourceCharSet.left(64).latin1());
+      data = toXML(ZOOM_record_get(rec, "raw", &len), m_sourceCharSet);
     }
     kapp->postEvent(m_fetcher, new Z3950ResultFound(data));
   }
@@ -268,17 +272,18 @@ bool Z3950Connection::makeConnection() {
   if(m_connected) {
     return true;
   }
+
 //  myDebug() << "Z3950Connection::makeConnection() - " << m_fetcher->source() << endl;
 // I don't know what to do except assume database, user, and password are in locale encoding
 #if HAVE_YAZ
   d->conn_opt = ZOOM_options_create();
   ZOOM_options_set(d->conn_opt, "implementationName", "Tellico");
-  ZOOM_options_set(d->conn_opt, "databaseName",       m_dbname.local8Bit());
-  ZOOM_options_set(d->conn_opt, "user",               m_user.local8Bit());
-  ZOOM_options_set(d->conn_opt, "password",           m_password.local8Bit());
+  ZOOM_options_set(d->conn_opt, "databaseName",       toCString(m_dbname));
+  ZOOM_options_set(d->conn_opt, "user",               toCString(m_user));
+  ZOOM_options_set(d->conn_opt, "password",           toCString(m_password));
 
   d->conn = ZOOM_connection_create(d->conn_opt);
-  ZOOM_connection_connect(d->conn, m_host.local8Bit(), m_port);
+  ZOOM_connection_connect(d->conn, m_host.latin1(), m_port);
 
   int errcode;
   const char* errmsg; // unused: carries same info as 'errcode'
@@ -289,9 +294,9 @@ bool Z3950Connection::makeConnection() {
     ZOOM_connection_destroy(d->conn);
     m_connected = false;
 
-    QString s = i18n("Connection error %1: %2").arg(errcode).arg(QString::fromLatin1(errmsg));
+    QString s = i18n("Connection error %1: %2").arg(errcode).arg(toString(errmsg));
     if(!QCString(addinfo).isEmpty()) {
-      s += QString::fromLatin1(QCString(" (") + addinfo + ")");
+      s += " (" + toString(addinfo) + ")";
     }
     done(s, MessageHandler::Error);
     return false;
@@ -313,27 +318,40 @@ void Z3950Connection::done(const QString& msg_, int type_) {
   }
 }
 
+inline
+QCString Z3950Connection::toCString(const QString& text_) {
+  return iconv(text_.utf8(), QString::fromLatin1("utf-8"), m_sourceCharSet);
+}
+
+inline
+QString Z3950Connection::toString(const QCString& text_) {
+  return QString::fromUtf8(iconv(text_, m_sourceCharSet, QString::fromLatin1("utf-8")));
+}
+
 // static
-QString Z3950Connection::iconv(const QCString& text_, const QCString& charSet_) {
+QCString Z3950Connection::iconv(const QCString& text_, const QString& fromCharSet_, const QString& toCharSet_) {
 #if HAVE_YAZ
-//  return QString::fromUtf8(text_);
   if(text_.isEmpty()) {
-    myDebug() << "Z3950Fetcher::iconv() - empty string" << endl;
-    return QString::null;
+    return text_;
   }
 
-  yaz_iconv_t cd = yaz_iconv_open("utf-8", charSet_);
+  if(fromCharSet_ == toCharSet_) {
+    return text_;
+  }
+
+  yaz_iconv_t cd = yaz_iconv_open(toCharSet_.latin1(), fromCharSet_.latin1());
   if(!cd) {
     // maybe it's iso 5426, which we sorta support
-    QString charSetLower = charSet_.lower();
+    QString charSetLower = fromCharSet_.lower();
     charSetLower.remove('-').remove(' ');
     if(charSetLower == Latin1Literal("iso5426")) {
-      return iconv(Iso5426Converter::toUtf8(text_).utf8(), "utf-8");
+      return iconv(Iso5426Converter::toUtf8(text_).utf8(), QString::fromLatin1("utf-8"), toCharSet_);
     } else if(charSetLower == Latin1Literal("iso6937")) {
-      return iconv(Iso6937Converter::toUtf8(text_).utf8(), "utf-8");
+      return iconv(Iso6937Converter::toUtf8(text_).utf8(), QString::fromLatin1("utf-8"), toCharSet_);
     }
-    kdWarning() << "Z3950Fetcher::iconv() - conversion from " << charSet_ << " is unsupported" << endl;
-    return QString::fromUtf8(text_);
+    kdWarning() << "Z3950Fetcher::iconv() - conversion from " << fromCharSet_
+                << " to " << toCharSet_ << " is unsupported" << endl;
+    return text_;
   }
 
   const char* input = text_;
@@ -346,38 +364,38 @@ QString Z3950Connection::iconv(const QCString& text_, const QCString& charSet_) 
   int r = yaz_iconv(cd, const_cast<char**>(&input), &inlen, &result, &outlen);
   if(r <= 0) {
     myDebug() << "Z3950Fetcher::iconv() - can't decode buffer" << endl;
-    return QString::fromUtf8(text_);
+    return text_;
   }
 
   // length is pointer difference
   size_t len = result - result0;
 
-  QString output = QString::fromUtf8(QCString(result0, len+1), len+1);
+  QCString output = QCString(result0, len+1);
 //  myDebug() << "-------------------------------------------" << endl;
 //  myDebug() << output << endl;
 //  myDebug() << "-------------------------------------------" << endl;
   yaz_iconv_close(cd);
   return output;
 #endif
-  return QString::fromUtf8(text_);
+  return text_;
 }
 
-QString Z3950Connection::toXML(const QCString& marc_, const QCString& charSet_) {
+QString Z3950Connection::toXML(const QCString& marc_, const QString& charSet_) {
 #if HAVE_YAZ
   if(marc_.isEmpty()) {
     myDebug() << "Z3950Fetcher::toXML() - empty string" << endl;
     return QString::null;
   }
 
-  yaz_iconv_t cd = yaz_iconv_open("utf-8", charSet_);
+  yaz_iconv_t cd = yaz_iconv_open("utf-8", charSet_.latin1());
   if(!cd) {
     // maybe it's iso 5426, which we sorta support
     QString charSetLower = charSet_.lower();
     charSetLower.remove('-').remove(' ');
     if(charSetLower == Latin1Literal("iso5426")) {
-      return toXML(Iso5426Converter::toUtf8(marc_).utf8(), "utf-8");
+      return toXML(Iso5426Converter::toUtf8(marc_).utf8(), QString::fromLatin1("utf-8"));
     } else if(charSetLower == Latin1Literal("iso6937")) {
-      return toXML(Iso6937Converter::toUtf8(marc_).utf8(), "utf-8");
+      return toXML(Iso6937Converter::toUtf8(marc_).utf8(), QString::fromLatin1("utf-8"));
     }
     kdWarning() << "Z3950Fetcher::toXML() - conversion from " << charSet_ << " is unsupported" << endl;
     return QString::null;

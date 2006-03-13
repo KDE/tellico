@@ -1,5 +1,5 @@
 %define name    tellico
-%define version 1.1.2
+%define version 1.1.3
 %define release 1
 %define iconname %{name}.png
 %define __libtoolize /bin/true
@@ -94,6 +94,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/*/*/*  
 
 %changelog
+* Sun Mar 12 2006 Robby Stephenson <robby@periapsis.org> 1.1.3-1
+- Version 1.1.3.
+
 * Sun Mar  5 2006 Robby Stephenson <robby@periapsis.org> 1.1.2-1
 - Version 1.1.2.
 

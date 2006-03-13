@@ -116,7 +116,7 @@ Tellico::CollectionNameMap CollectionFactory::nameMap() {
   CollectionNameMap map;
   map[Data::Collection::Book]   = i18n("Book Collection");
   map[Data::Collection::Bibtex] = i18n("Bibliography");
-  map[Data::Collection::Coin]   = i18n("Comic Book Collection");
+  map[Data::Collection::ComicBook]   = i18n("Comic Book Collection");
   map[Data::Collection::Video]  = i18n("Video Collection");
   map[Data::Collection::Album]  = i18n("Music Collection");
   map[Data::Collection::Coin]   = i18n("Coin Collection");
