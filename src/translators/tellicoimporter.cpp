@@ -265,7 +265,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   uint j = 0;
   for(QDomNode n = collelem.firstChild(); !n.isNull() && !m_cancelled; n = n.nextSibling(), ++j) {
-    if(n.nodeName() == Latin1Literal("entry")) {
+    if(n.nodeName() == entryName) {
       readEntry(syntaxVersion, n.toElement());
 
       // not exactly right, but close enough
@@ -635,9 +635,7 @@ void TellicoImporter::readFilter(const QDomElement& elem_) {
     f->append(new FilterRule(field, pattern, func));
   }
 
-  if(f->isEmpty()) {
-    delete f;
-  } else {
+  if(!f->isEmpty()) {
     m_coll->addFilter(f);
   }
 }
@@ -656,6 +654,7 @@ void TellicoImporter::readBorrower(const QDomElement& elem_) {
     long id = e.attribute(QString::fromLatin1("entryRef")).toLong();
     Data::EntryPtr entry = m_coll->entryById(id);
     if(!entry) {
+      myDebug() << "TellicoImporter::readBorrower() - no entry with id = " << id << endl;
       continue;
     }
     QString uid = e.attribute(QString::fromLatin1("uid"));
@@ -674,9 +673,7 @@ void TellicoImporter::readBorrower(const QDomElement& elem_) {
     s = e.attribute(QString::fromLatin1("calendar"));
     loan->setInCalendar(s == Latin1Literal("true"));
   }
-  if(b->isEmpty()) {
-    delete b;
-  } else {
+  if(!b->isEmpty()) {
     m_coll->addBorrower(b);
   }
 }

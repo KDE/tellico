@@ -186,7 +186,7 @@
     padding-left: 20px;
   }
   img {
-    border: 0px solid;
+    border: 0px;
   }
   </style>
   <title>

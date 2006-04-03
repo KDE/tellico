@@ -61,6 +61,9 @@ GroupView::GroupView(QWidget* parent_, const char* name_/*=0*/)
 }
 
 Tellico::EntryGroupItem* GroupView::addGroup(Data::EntryGroup* group_) {
+  if(group_->isEmpty()) {
+    return 0;
+  }
   int type = -1;
   if(m_coll && m_coll->hasField(group_->fieldName())) {
     type = m_coll->fieldByName(group_->fieldName())->type();
@@ -121,6 +124,10 @@ void GroupView::slotModifyGroup(Data::CollPtr coll_, Data::EntryGroup* group_) {
     // so do a sanity check
     par->setGroup(group_);
   } else {
+    if(group_->isEmpty()) {
+      myDebug() << "GroupView::slotModifyGroup() - trying to add empty group" << endl;
+      return;
+    }
     par = addGroup(group_);
   }
 
@@ -280,8 +287,12 @@ void GroupView::slotExpanded(QListViewItem* item_) {
   }
 
   Data::EntryGroup* group = item->group();
-  for(Data::EntryVecIt entryIt = group->begin(); entryIt != group->end(); ++entryIt) {
-    new EntryItem(item, entryIt);
+  if(!group) {
+    myDebug() << "GroupView::slotExpanded() - no entry group! - " << item->text(0) << endl;
+  } else {
+    for(Data::EntryVecIt entryIt = group->begin(); entryIt != group->end(); ++entryIt) {
+      new EntryItem(item, entryIt);
+    }
   }
 
   setUpdatesEnabled(true);
@@ -421,11 +432,16 @@ void GroupView::setSorting(int col_, bool asc_) {
   ListView::setSorting(col_, asc_);
 }
 
-void GroupView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr newField_) {
-  if(newField_->name() != m_groupBy) {
-    return;
+void GroupView::modifyField(Data::CollPtr, Data::FieldPtr oldField_, Data::FieldPtr newField_) {
+  if(newField_->name() == m_groupBy) {
+    updateHeader(newField_);
   }
-  updateHeader(newField_);
+  // if the grouping changed at all, our groups got deleted out from under us
+  // so check first pointer, too. The groups could be deleted if the format type
+  // changes, too, so not enough just to check group flag
+  if(childCount() > 0 && static_cast<EntryGroupItem*>(firstChild())->group() == 0) {
+    populateCollection();
+  }
 }
 
 void GroupView::updateHeader(Data::FieldPtr field_/*=0*/) {

@@ -1009,6 +1009,7 @@ bool MainWindow::queryClose() {
 }
 
 bool MainWindow::queryExit() {
+  FileHandler::clean();
   ImageFactory::clean();
   saveOptions();
   return true;
@@ -1499,6 +1500,7 @@ void MainWindow::slotHandleConfigChange() {
     m_config = kapp->config();
   }
 
+  const bool writeImagesInFile = Kernel::self()->writeImagesInFile();
   const bool autoCapitalize = Data::Field::autoCapitalize();
   const bool autoFormat = Data::Field::autoFormat();
   QStringList articles = Data::Field::articleList();
@@ -1506,6 +1508,10 @@ void MainWindow::slotHandleConfigChange() {
   QStringList suffixes = Data::Field::suffixList();
 
   m_configDlg->saveConfiguration(m_config);
+
+  if(writeImagesInFile != Kernel::self()->writeImagesInFile()) {
+    Data::Document::self()->slotSetModified();
+  }
 
   if(autoCapitalize != Data::Field::autoCapitalize() ||
      autoFormat != Data::Field::autoFormat() ||

@@ -321,14 +321,26 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   // image
   if(!isbn.isEmpty()) {
     entry->setField(QString::fromLatin1("isbn"), isbn);
-    QRegExp imgRx(QString::fromLatin1("\\s+src\\s*=\\s*\"(http://giotto\\.ibs\\.it/.*e=%1)").arg(isbn));
+#if 0
+//    QString imgURL = QString::fromLatin1("http://www.ibs.it/cop/coplibri.asp?e=%1").arg(isbn);
+    QString imgURL = QString::fromLatin1("http://alice.ibs.it/copbookst.asp?e=%1").arg(isbn);
+    myDebug() << "IBSFetcher() - cover = " << imgURL << endl;
+    const Data::Image& img = ImageFactory::addImage(imgURL, true, QString::fromLatin1("http://internetbookshop.it"));
+    if(!img.isNull() && img.width() > 1) {
+      entry->setField(QString::fromLatin1("cover"), img.id());
+    }
+#else
+    QRegExp imgRx(QString::fromLatin1("<img\\s+[^>]*\\s*src\\s*=\\s*\"(http://[^/]*\\.ibs\\.it/[^\"]+e=%1)").arg(isbn));
+    imgRx.setMinimal(true);
     pos = imgRx.search(str_);
     if(pos > -1) {
-      const Data::Image& img = ImageFactory::addImage(imgRx.cap(1), true);
+      myLog() << "IBSFetcher() - cover = " << imgRx.cap(1) << endl;
+      const Data::Image& img = ImageFactory::addImage(imgRx.cap(1), true, QString::fromLatin1("http://internetbookshop.it"));
       if(!img.isNull() && img.width() > 1) {
         entry->setField(QString::fromLatin1("cover"), img.id());
       }
     }
+#endif
   }
 
   // now look for description

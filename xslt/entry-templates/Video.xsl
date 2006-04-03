@@ -105,6 +105,7 @@
         padding-top: 1px; /* match cellspacing of table */
         padding-right: 10px;
         padding-bottom: 9px;
+        border: 0;
    }
    table.category {
         margin-bottom: 10px;

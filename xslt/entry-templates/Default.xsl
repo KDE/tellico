@@ -81,6 +81,7 @@
    }
    img {
         padding-right: 10px;
+        border: 0;
    }
    table.category {
         margin-bottom: 10px;

@@ -210,7 +210,6 @@ bool Entry::addToGroup(EntryGroup* group_) {
     return false;
   }
 
-//  myDebug() << "Entry::addToGroup() - adding group (" << group_->groupName() << ")" << endl;
   m_groups.push_back(group_);
   group_->append(this);
 //  m_coll->groupModified(group_);
@@ -229,6 +228,10 @@ bool Entry::removeFromGroup(EntryGroup* group_) {
     myDebug() << "Entry::removeFromGroup() failed! " << endl;
   }
   return success;
+}
+
+void Entry::clearGroups() {
+  m_groups.clear();
 }
 
 // this function gets called before m_groups is updated. In fact, it is used to
@@ -250,7 +253,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
 
   QStringList groups = fields(fieldName_, true);
   if(groups.isEmpty()) {
-    groups += Collection::s_emptyGroupTitle;
+    return Collection::s_emptyGroupTitle;
   } else if(f->type() == Field::Table) {
       // quick hack for tables, how often will a user have "::" in their value?
       // only use first column for group

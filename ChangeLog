@@ -1,3 +1,25 @@
+2006-04-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed OpenOffice.org plugin build for OOo SDK 2.0.2.
+	* Released Tellico 1.1.4.
+
+2006-03-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Added referrer to IBS fetcher so images get downloaded.
+
+2006-03-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that prevented XSLT files with spaces or other non-encoded characters from being opened.
+	* Fixed bug with incorrectly setting document modified when loading images.
+	* Fixed bug with loading loans for entries with non-consecutive ids.
+	* Fixed bug that caused crashes when changing grouping options
+	for some fields.
+
+2006-03-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that prevented files saved with versions < 0.8 from
+	being opened.
+
 2006-03-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.1.3.
@@ -6,6 +28,7 @@
 
 	* Fixed bug with comc book template not showing up in a couple of
 	places in the GUI.
+	* Fixed bug with empty groups showing up after deleting entries.
 	* Updated ru.po.
 
 2006-03-09  Robby Stephenson  <robby@periapsis.org>

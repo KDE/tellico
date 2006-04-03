@@ -49,12 +49,14 @@ QString ImageFactory::dataDir() {
   return dataDir;
 }
 
-const Tellico::Data::Image& ImageFactory::addImage(const KURL& url_, bool quiet_) {
+const Tellico::Data::Image& ImageFactory::addImage(const KURL& url_, bool quiet_, const KURL& refer_) {
   if(url_.isEmpty() || !url_.isValid()) {
     return s_null;
   }
 //  myLog() << "ImageFactory::addImage() - " << url_.prettyURL() << endl;
-  Data::Image* img = FileHandler::readImageFile(url_, quiet_);
+  Data::Image* img = refer_.isEmpty()
+                     ? FileHandler::readImageFile(url_, quiet_)
+                     : FileHandler::readImageFile(url_, quiet_, refer_);
   if(!img) {
 //    myDebug() << "ImageFactory::addImage() - image not found: " << url_.prettyURL() << endl;
     return s_null;
@@ -232,22 +234,6 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     }
   }
 
-  // don't check Kernel::self()->writeImagesInFile(), someday we might have problems
-  // and the image will exist in the data dir, but the app thinks everything should
-  // be in the zip file instead
-  bool exists = QFile::exists(dataDir() + id_);
-  if(exists) {
-    // if we're loading from the data dir, but images are not being saved in the
-    // data file, then consider the document to be modified since it needs the image saved
-    if(!Kernel::self()->writeImagesInFile()) {
-      Data::Document::self()->slotSetModified(true);
-    }
-    const Data::Image& img2 = addCachedImage(id_, DataDir);
-    if(!img2.isNull()) {
-      return img2;
-    }
-  }
-
   // try to do a delayed loading of the image
   if(Data::Document::self()->loadImage(id_)) {
     // loadImage() could insert in either the cache or the dict!
@@ -261,7 +247,24 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
       return *img;
     }
   }
-  myDebug() << "ImageFactory::imageById() - not found: " << id_ << endl;
+
+  // don't check Kernel::self()->writeImagesInFile(), someday we might have problems
+  // and the image will exist in the data dir, but the app thinks everything should
+  // be in the zip file instead
+  bool exists = QFile::exists(dataDir() + id_);
+  if(exists) {
+    // if we're loading from the application dir, but images are not being saved in the
+    // data file, then consider the document to be modified since it needs the image saved
+    if(Kernel::self()->writeImagesInFile()) {
+      Data::Document::self()->slotSetModified(true);
+    }
+    const Data::Image& img2 = addCachedImage(id_, DataDir);
+    if(!img2.isNull()) {
+      return img2;
+    }
+  }
+
+//  myDebug() << "ImageFactory::imageById() - not found: " << id_ << endl;
   return s_null;
 }
 

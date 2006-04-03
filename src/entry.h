@@ -21,6 +21,7 @@
 #include <qstringlist.h>
 #include <qstring.h>
 #include <qptrlist.h>
+#include <qobject.h>
 
 #include <functional>
 
@@ -38,7 +39,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class EntryGroup : public EntryVec {
+class EntryGroup : public QObject, public EntryVec {
 
 public:
   EntryGroup(const QString& group, const QString& field);
@@ -176,6 +177,7 @@ public:
    * @return a bool indicating if the group was successfully removed
    */
   bool removeFromGroup(EntryGroup* group);
+  void clearGroups();
   /**
    * Returns a list of the groups to which the entry belongs
    *

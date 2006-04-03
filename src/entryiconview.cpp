@@ -262,6 +262,7 @@ void EntryIconView::slotShowContextMenu(QIconViewItem* item_, const QPoint& poin
 
 EntryIconViewItem::EntryIconViewItem(EntryIconView* parent_, Data::EntryPtr entry_)
     : KIconViewItem(parent_, entry_->title()), m_entry(entry_), m_usesImage(false) {
+  setDragEnabled(false);
   const QString& imageField = parent_->imageField();
   if(!imageField.isEmpty()) {
     QPixmap p = ImageFactory::pixmap(m_entry->field(imageField),

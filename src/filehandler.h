@@ -17,6 +17,9 @@
 class KURL;
 class KSaveFile;
 class KFileItem;
+namespace KIO {
+  class Job;
+}
 
 class QString;
 class QDomDocument;
@@ -24,6 +27,8 @@ class QFile;
 
 #include <qstring.h>
 #include <qcstring.h> // needed for QByteArray
+#include <qptrlist.h>
+#include <qobject.h>
 
 namespace Tellico {
   class ImageFactory;
@@ -127,9 +132,12 @@ public:
    * @return True if it is ok to continue, false otherwise.
    */
   static bool queryExists(const KURL& url);
+  static void clean();
 
 private:
   class ItemDeleter;
+  friend class ItemDeleter;
+  static QPtrList<ItemDeleter> s_deleterList;
 
   /**
    * Read contents of a file into an image. It's private since everything should use the
@@ -140,6 +148,7 @@ private:
    * @return The image
    */
   static Data::Image* readImageFile(const KURL& url, bool quiet=false);
+  static Data::Image* readImageFile(const KURL& url, bool quiet, const KURL& referrer);
   /**
    * Writes the contents of a string to a file.
    *
@@ -157,6 +166,21 @@ private:
    * @return A boolean indicating success
    */
   static bool writeDataFile(KSaveFile& file, const QByteArray& data);
+};
+
+class NetAccess : public QObject {
+Q_OBJECT
+
+friend class FileHandler;
+
+private slots:
+  void slotResult(KIO::Job* job);
+
+private:
+  NetAccess() : QObject(), ok(false) {}
+  void enter_loop();
+  bool ok;
+  QString error;
 };
 
 } // end namespace

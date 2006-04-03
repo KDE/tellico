@@ -526,6 +526,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 
   switch(field->formatFlag()) {
     case Data::Field::FormatNone:
+    case Data::Field::FormatDate: // as yet unimplemented
       m_formatNone->setChecked(true);
       break;
 
@@ -542,6 +543,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
       break;
 
     default:
+      kdWarning() << "CollectionFieldsDialog::slotHighlightedChanged() - no format type!" << endl;
       break;
   }
 
@@ -741,6 +743,7 @@ void CollectionFieldsDialog::slotDefault() {
 
   switch(defaultField->formatFlag()) {
     case Data::Field::FormatNone:
+    case Data::Field::FormatDate:
       m_formatNone->setChecked(true);
       break;
 

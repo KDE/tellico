@@ -130,6 +130,8 @@ bool Document::openDocument(const KURL& url_) {
 }
 
 bool Document::saveModified() {
+  bool wasRunning = m_running;
+  m_running = false;
   bool completed = true;
 
   if(m_isModified) {
@@ -151,6 +153,7 @@ bool Document::saveModified() {
       case KMessageBox::Cancel:
       default:
         completed = false;
+        m_running = wasRunning;
         break;
     }
   }

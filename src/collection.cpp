@@ -306,6 +306,7 @@ bool Collection::modifyField(FieldPtr newField_) {
   }
 
   if(resetGroups) {
+    myLog() << "Collection::modifyField() - invalidating groups" << endl;
     invalidateGroups();
   }
 
@@ -394,7 +395,11 @@ void Collection::addEntry(EntryPtr entry_) {
 
   if(entry_->id() >= m_nextEntryId) {
     m_nextEntryId = entry_->id() + 1;
-  } else {
+  } else if(entry_->id() == -1) {
+    entry_->setId(m_nextEntryId);
+    ++m_nextEntryId;
+  } else if(m_entryIdDict.find(entry_->id())) {
+    myDebug() << "Collection::addEntry() - the collection already has an entry with id = " << entry_->id() << endl;
     entry_->setId(m_nextEntryId);
     ++m_nextEntryId;
   }
@@ -577,12 +582,11 @@ void Collection::populateDicts(EntryPtr entry_) {
     for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
       // find the group for this group name
       // bool fields used the field title
-      EntryGroup* group;
       QString groupTitle = *groupIt;
       if(isBool && groupTitle != s_emptyGroupTitle) {
         groupTitle = fieldTitleByName(fieldName);
       }
-      group = dict->find(groupTitle);
+      EntryGroup* group = dict->find(groupTitle);
       // if the group doesn't exist, create it
       if(!group) {
         group = new EntryGroup(groupTitle, fieldName);
@@ -596,7 +600,7 @@ void Collection::populateDicts(EntryPtr entry_) {
         emit signalGroupModified(this, group);
       }
     } // end group loop
-//    kdDebug() << "Collection::populateDicts - end of group loop" << endl;
+//    kdDebug() << "Collection::populateDicts - end of group loop: " << groups.count() << endl;
   } // end dict loop
 //  kdDebug() << "Collection::populateDicts - end of full loop" << endl;
 }
@@ -624,13 +628,14 @@ void Collection::invalidateGroups() {
     dictIt.current()->clear();
   }
 
+  // populateDicts() will make signals that the group view is connected to, block those
+  blockSignals(true);
   for(EntryVecIt it = m_entries.begin(); it != m_entries.end(); ++it) {
     it->invalidateFormattedFieldValue();
-    // populateDicts() will make signals that the group view is connected to, block those
-    blockSignals(true);
+    it->clearGroups();
     populateDicts(it);
-    blockSignals(false);
   }
+  blockSignals(false);
 }
 
 Tellico::Data::EntryPtr Collection::entryById(long id_) {

@@ -33,6 +33,9 @@ EntryGroupItem::EntryGroupItem(GUI::ListView* parent_, Data::EntryGroup* group_,
 }
 
 QPixmap EntryGroupItem::ratingPixmap() {
+  if(!m_group) {
+    return QPixmap();
+  }
   QPixmap stars = GUI::RatingWidget::pixmap(m_group->groupName());
   if(m_pix.isNull() && stars.isNull()) {
     m_emptyGroup = true;
@@ -126,5 +129,8 @@ QString EntryGroupItem::key(int col_, bool) const {
 }
 
 int EntryGroupItem::count() const {
+  if(!m_group) {
+    myDebug() << "EntryGroupItem::count() - null group pointer" << endl;
+  }
   return m_group ? m_group->count() : GUI::CountedItem::count();
 }

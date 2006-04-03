@@ -54,11 +54,12 @@ XSLTHandler::XSLTHandler(const QCString& xsltFile_) :
     m_docIn(0),
     m_docOut(0) {
   init();
-  if(!xsltFile_.isNull()) {
+  QString file = KURL::encode_string(QString::fromLocal8Bit(xsltFile_));
+  if(!file.isEmpty()) {
 #if LIBXML_VERSION >= 20600
-    xmlDocPtr xsltDoc = xmlReadFile(xsltFile_, NULL, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(file.utf8(), NULL, xslt_options);
 #else
-    xmlDocPtr xsltDoc = xmlParseFile(xsltFile_);
+    xmlDocPtr xsltDoc = xmlParseFile(file.utf8());
 #endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
@@ -74,9 +75,9 @@ XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
   init();
   if(xsltURL_.isValid() && xsltURL_.isLocalFile()) {
 #if LIBXML_VERSION >= 20600
-    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.path().utf8(), NULL, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.encodedPathAndQuery().utf8(), NULL, xslt_options);
 #else
-    xmlDocPtr xsltDoc = xmlParseFile(xsltURL_.path().utf8());
+    xmlDocPtr xsltDoc = xmlParseFile(xsltURL_.encodedPathAndQuery().utf8());
 #endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {

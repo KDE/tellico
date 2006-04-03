@@ -52,7 +52,7 @@ public:
    * @param quiet If any error should not be reported.
    * @return The image
    */
-  static const Data::Image& addImage(const KURL& url, bool quiet=false);
+  static const Data::Image& addImage(const KURL& url, bool quiet=false, const KURL& referrer = KURL());
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't

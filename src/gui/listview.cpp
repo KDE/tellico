@@ -169,7 +169,7 @@ void ListView::slotSelectionChanged() {
   if(item->isEntryItem()) {
     // now just iterate over the selected items, making a list of entries
     for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
-      if(!it.current()->isEntryItem()) {
+      if(!it.current()->isEntryItem() || !static_cast<EntryItem*>(it.current())->entry()) {
         continue;
       }
       if(!entries.contains(static_cast<EntryItem*>(it.current())->entry())) {
@@ -180,7 +180,7 @@ void ListView::slotSelectionChanged() {
     return; // done now
   } else if(item->isEntryGroupItem()) {
     for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
-      if(!it.current()->isEntryGroupItem()) {
+      if(!it.current()->isEntryGroupItem() || !static_cast<EntryGroupItem*>(it.current())->group()) {
         continue;
       }
       Data::EntryVec more = *static_cast<EntryGroupItem*>(it.current())->group();
@@ -198,6 +198,9 @@ void ListView::slotSelectionChanged() {
         continue;
       }
       Data::BorrowerPtr b = static_cast<BorrowerItem*>(it.current())->borrower();
+      if(!b) {
+        continue;
+      }
       for(Data::LoanVec::ConstIterator loan = b->loans().begin(); loan != b->loans().end(); ++loan) {
         if(!entries.contains(loan->entry())) {
           entries.append(loan->entry());

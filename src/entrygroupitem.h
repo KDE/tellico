@@ -17,6 +17,7 @@
 #include "gui/counteditem.h"
 
 #include <qpixmap.h>
+#include <qguardedptr.h>
 
 namespace Tellico {
   namespace Data {
@@ -58,7 +59,7 @@ public:
   virtual int count() const;
 
 private:
-  Data::EntryGroup* m_group;
+  QGuardedPtr<Data::EntryGroup> m_group;
   int m_fieldType;
   QPixmap m_pix;
   bool m_emptyGroup : 1;
