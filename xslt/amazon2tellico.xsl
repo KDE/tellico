@@ -75,6 +75,9 @@
     <field flags="0" title="Small Image" category="Images"  format="4" type="7" name="small-image"/>
     <field flags="0" title="Medium Image" category="Images"  format="4" type="7" name="medium-image"/>
     <field flags="0" title="Large Image" category="Images" format="4" type="7" name="large-image"/>
+    <xsl:if test="$mode='VideoGames'">
+     <field flags="2" title="Platform" category="General" allowed="Xbox 360;Xbox;PlayStation2;PlayStation;PSP;Nintendo DS;GameCube;Dreamcast;Game Boy Advance;Game Boy Color;Game Boy;Windows;Mac OS" format="4" type="3" name="platform" i18n="true"/>
+    </xsl:if>
    </fields>
    <xsl:for-each select="//aws:Items/aws:Item">
     <xsl:apply-templates select="."/>
@@ -504,6 +507,9 @@
 <xsl:template name="platform">
  <xsl:param name="value"/>
  <xsl:choose>
+  <xsl:when test="contains($value, '360')">
+   <xsl:text>Xbox 360</xsl:text> <!-- as defined in the default field -->
+  </xsl:when>
   <xsl:when test="starts-with($value, 'X')">
    <xsl:text>Xbox</xsl:text> <!-- as defined in the default field -->
   </xsl:when>

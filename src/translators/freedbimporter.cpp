@@ -210,7 +210,11 @@ void FreeDBImporter::readCDROM() {
   QStringList trackList;
   KCDDB::TrackInfoList t = info.trackInfoList;
   for(uint i = 0; i < t.count(); ++i) {
+#if KDE_IS_VERSION(3,4,90)
+    QString s = t[i].get(QString::fromLatin1("title")).toString() + "::" + info.artist;
+#else
     QString s = t[i].title + "::" + info.artist;
+#endif
     if(i < lengths.count()) {
       s += "::" + Tellico::minutes(lengths[i]);
     }
@@ -319,7 +323,11 @@ void FreeDBImporter::readCache() {
     QStringList trackList;
     KCDDB::TrackInfoList t = info.trackInfoList;
     for(uint i = 0; i < t.count(); ++i) {
+#if KDE_IS_VERSION(3,4,90)
+      trackList << t[i].get(QString::fromLatin1("title")).toString();
+#else
       trackList << t[i].title;
+#endif
     }
     entry->setField(track, trackList.join(QString::fromLatin1("; ")));
 

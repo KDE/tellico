@@ -154,14 +154,17 @@ void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
       break;
     case ISBN:
       {
-        // for now, don't worry about multiple ISBN values
         m_pqn.truncate(0);
         QString s = m_value;
         s.remove('-');
         const QStringList isbnList = QStringList::split(QString::fromLatin1("; "), s);
-        for(QStringList::ConstIterator it = isbnList.begin(); it != isbnList.end(); ++it) {
-          m_pqn += QString::fromLatin1(" @attr 1=7 ") + *it;
-          if(it != isbnList.fromLast()) {
+        const int count = isbnList.count();
+        if(count > 1) {
+          m_pqn = QString::fromLatin1("@or ");
+        }
+        for(int i = 0; i < count; ++i) {
+          m_pqn += QString::fromLatin1(" @attr 1=7 ") + isbnList[i];
+          if(i < count-2) {
             m_pqn += QString::fromLatin1(" @or");
           }
         }

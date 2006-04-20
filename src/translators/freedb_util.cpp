@@ -237,6 +237,8 @@ ushort from2Byte(uchar* d) {
 FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
   CDText cdtext;
 #if USE_CDTEXT
+// only works for linux atm
+#if defined(__linux__)
   int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
   if(drive < 0) {
     ::close(drive);
@@ -368,6 +370,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
     cdtext.trackArtists.resize(size);
   }
   ::close(drive);
+#endif
 #endif
   return cdtext;
 }

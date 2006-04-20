@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "POT-Creation-Date: 2006-02-18 11:32-0800\n"
-"PO-Revision-Date: 2006-04-01 13:10+0100\n"
+"PO-Revision-Date: 2006-04-08 15:24+0100\n"
 "Last-Translator: Regis Boudin <regis@boudin.name>\n"
 "Language-Team: Francais <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -407,7 +407,7 @@ msgstr "Entrez le nom de l'emprunteur. Cliquer sur le bouton vous donne la possi
 
 #: loandialog.cpp:116
 msgid "&Loan date:"
-msgstr "Date de l'emprunt :"
+msgstr "Date de &l'emprunt :"
 
 #: loandialog.cpp:122
 msgid ""
@@ -417,7 +417,7 @@ msgstr "La date de contrôle est la date à laquelle vous avez prêté des artic
 
 #: loandialog.cpp:131
 msgid "D&ue date:"
-msgstr "Date de retour:"
+msgstr "Date de reto&ur:"
 
 #: loandialog.cpp:138
 msgid ""
@@ -494,7 +494,7 @@ msgstr "Créer une nouvelle collection musicale"
 
 #: mainwindow.cpp:238
 msgid "New &Game Collection"
-msgstr "Nouvelle collection de jeux"
+msgstr "Nouvelle collection de &jeux"
 
 #: mainwindow.cpp:240
 msgid "Create a new game collection"
@@ -842,21 +842,19 @@ msgstr "Générer des rapport de collection"
 
 #: mainwindow.cpp:543
 msgid "Check-&out..."
-msgstr "Gestion des prêts..."
+msgstr "Gesti&on des prêts..."
 
 #: mainwindow.cpp:546
-#, fuzzy
 msgid "Check-out the selected items"
-msgstr "Copier les entrées sélectionnées"
+msgstr "Prêter les entrées sélectionnées"
 
 #: mainwindow.cpp:547
 msgid "Check-&in"
-msgstr "Récupérer"
+msgstr "Récupér&er"
 
 #: mainwindow.cpp:550
-#, fuzzy
 msgid "Check-in the selected items"
-msgstr "Copier les entrées sélectionnées"
+msgstr "Retour de prêt des entrées sélectionnées"
 
 #: mainwindow.cpp:552
 msgid "&Rename Collection..."
@@ -908,7 +906,7 @@ msgstr "Citer les entrées sélectionnées dans LyX"
 
 #: mainwindow.cpp:586
 msgid "Ci&te Entry in OpenOffice.org"
-msgstr "Assigner l'entrée dans OpenOffice.org"
+msgstr "Ci&ter l'entrée dans OpenOffice.org"
 
 #: mainwindow.cpp:587
 msgid "Cite the selected entries in OpenOffice.org"
@@ -1265,9 +1263,8 @@ msgid "Replace Collection"
 msgstr "Remplacer la collection"
 
 #: commands/removeloans.cpp:79
-#, fuzzy
 msgid "Check-in Entries"
-msgstr "&Éditer les entrées"
+msgstr "Retour de prêt"
 
 #: commands/removeloans.cpp:80
 #, c-format
@@ -1850,7 +1847,7 @@ msgstr "Acteur/Actrice"
 
 #: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:406
 msgid "Role"
-msgstr "Role"
+msgstr "Rôle"
 
 #: collections/videocollection.cpp:107
 msgid "A table for the cast members, along with the roles they play"
@@ -1906,7 +1903,7 @@ msgstr "Format couleur"
 
 #: collections/videocollection.cpp:179
 msgid "Director's Cut"
-msgstr "Director's Cut"
+msgstr "Version du réalisateur"
 
 #: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:343
 msgid "Plot Summary"
@@ -1998,12 +1995,11 @@ msgid ""
 "_: Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone, Early "
 "Childhood, Pending\n"
 "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"
-msgstr ""
+msgstr "Non classé, Adultes, Matures, Adolescents, Tout public, Jeunes enfants, En cours"
 
 #: collections/gamecollection.cpp:82
-#, fuzzy
 msgid "ESRB Rating"
-msgstr "Note"
+msgstr "Classement ESRB"
 
 #: collections/gamecollection.cpp:95
 msgid "Completed"
@@ -2354,23 +2350,21 @@ msgid "A&llowed:"
 msgstr "A&utorisé :"
 
 #: collectionfieldsdialog.cpp:196
-#, fuzzy
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
 "are placed in a combo box. The possible value have to be seperated by a "
 "semi-colon, for example: \"dog; cat; mouse\"</qt>"
 msgstr ""
-"<qt>Pour les champs type <i>Liste</i>, il s'agit des seules valeurs "
-"permises. Elles sont placées dans une liste déroulante.</qt>"
+"<qt>Pour les champs type <i>Choix</i>, il s'agit des seules valeurs "
+"permises. Elles sont placées dans une liste déroulante. Les valeurs possibles doivent être séparées par un point-virgule, par exemple : \"chien; chat; souris\"</qt>"
 
 #: collectionfieldsdialog.cpp:203
 msgid "Extended &properties:"
 msgstr "&Propriétés étendues :"
 
 #: collectionfieldsdialog.cpp:205
-#, fuzzy
 msgid "&Set..."
-msgstr "Associer..."
+msgstr "&Configurer..."
 
 #: collectionfieldsdialog.cpp:209
 msgid ""
@@ -2554,10 +2548,7 @@ msgstr ""
 
 #: collectionfieldsdialog.cpp:905
 msgid "Tables are limited to a maximum of ten columns."
-msgstr ""
-"<qt>Un champ ne doit pas être dans la même catégorie qu'un "
-"<em>paragraphe</em>, un <em>tableau</em> ou une <em>image</em>. Veuillez "
-"choisir une autre catégorie.</qt>"
+msgstr "Les tableaux sont limités à un nombre maximum de dix colonnes."
 
 #: calendarhandler.cpp:161
 msgid "Default Calendar"
@@ -2682,7 +2673,7 @@ msgstr ""
 
 #: fetch/imdbfetcher.cpp:920
 msgid "&Maximum cast: "
-msgstr "Nombre maximal d'acteur :"
+msgstr "Nombre &maximal d'acteur : "
 
 #: fetch/imdbfetcher.cpp:925
 msgid ""
@@ -2845,11 +2836,11 @@ msgstr "Application externe"
 
 #: fetch/execexternalfetcher.cpp:319 translators/csvimporter.cpp:138
 msgid "Collection &type:"
-msgstr "Type de collection :"
+msgstr "&Type de collection :"
 
 #: fetch/execexternalfetcher.cpp:328
 msgid "Set the collection type of the data returned from the external application."
-msgstr "Sélectionne le type de collection des données retournées par l'application externe"
+msgstr "Sélectionne le type de collection des données retourné par l'application externe."
 
 #: fetch/execexternalfetcher.cpp:333
 msgid "&Result type: "
@@ -2861,7 +2852,7 @@ msgstr "Sélectionne le type des résultats des données retournées par l'appli
 
 #: fetch/execexternalfetcher.cpp:347
 msgid "Application &path: "
-msgstr "Chemin de l'a&pplication:"
+msgstr "Chemin de l'a&pplication : "
 
 #: fetch/execexternalfetcher.cpp:352
 msgid ""
@@ -2950,7 +2941,7 @@ msgstr "Distributeur"
 
 #: fetch/animenfofetcher.cpp:273
 msgid "Episodes"
-msgstr "Episodes"
+msgstr "Épisodes"
 
 #: fetch/z3950connection.cpp:100
 msgid "Query error!"
@@ -3034,7 +3025,7 @@ msgstr "Collection de jeux"
 
 #: collectionfactory.cpp:127
 msgid "File Catalog"
-msgstr "Cqtqlogue de fichiers"
+msgstr "Catalogue de fichiers"
 
 #: collectionfactory.cpp:128
 msgid "Custom Collection"
@@ -3175,15 +3166,14 @@ msgstr "Si cochée, les titres et les noms seront automatiquement mis en forme."
 
 #: configdialog.cpp:195
 msgid "No capitali&zation:"
-msgstr "Ne pas mettre en majuscule automatiquement"
+msgstr "Ne pas mettre en majuscule :"
 
 #: configdialog.cpp:204
-#, fuzzy
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
 msgstr ""
-"<qt>Une liste de suffixes qui peuvent être utilisés dans les surnoms. Les "
+"<qt>Une liste de mots ne devant pas être mis en majuscules. Les "
 "suffixes doivent être séparés par un point-virgule.</qt>"
 
 #: configdialog.cpp:210
@@ -3315,12 +3305,11 @@ msgstr "&Modifier..."
 
 #: configdialog.cpp:374
 msgid "Move &Up"
-msgstr "Se déplacer vers &haut"
+msgstr "Déplacer vers &haut"
 
 #: configdialog.cpp:376
-#, fuzzy
 msgid "Move &Down"
-msgstr "&Supprimer"
+msgstr "&Déplacer vers bas"
 
 #: configdialog.cpp:378
 msgid "Remo&ve"
@@ -3516,11 +3505,11 @@ msgstr "<qt>Entrez les valeurs ISBN ou UPC, une par ligne.</qt>"
 
 #: fetchdialog.cpp:450
 msgid "&Load From File..."
-msgstr "&Charger depuis un fichier"
+msgstr "&Charger depuis un fichier..."
 
 #: fetchdialog.cpp:451
 msgid "<qt>Load the list from a text file.</qt>"
-msgstr "<qt>Charge la liste depuis un fichier texte.<qt>"
+msgstr "<qt>Charge la liste depuis un fichier texte.</qt>"
 
 #: fetchdialog.cpp:470
 msgid ""
@@ -3768,7 +3757,7 @@ msgstr "Utiliser la tabulation comme séparateur."
 
 #: translators/csvimporter.cpp:179
 msgid "Ot&her:"
-msgstr "Au&tre"
+msgstr "Au&tre :"
 
 #: translators/csvexporter.cpp:141 translators/csvimporter.cpp:180
 msgid "Use a custom string as the delimiter."
@@ -3879,9 +3868,8 @@ msgid "&Include file location"
 msgstr "&Inclure l'emplacement du fichier"
 
 #: translators/audiofileimporter.cpp:309
-#, fuzzy
 msgid "If checked, the file names for each track are added to the entries."
-msgstr "Si cochée, le nom des champs sera imprimé comme des titres de tableau."
+msgstr "Si cochée, le nom de fichier de chaque plage sera ajouté aux entrées."
 
 #: translators/csvexporter.cpp:40
 msgid "CSV"
@@ -3984,9 +3972,8 @@ msgid "Select or input the CD-ROM device location."
 msgstr "Sélectionner le périphérique contenant le CD audio."
 
 #: translators/freedbimporter.cpp:427
-#, fuzzy
 msgid "Read all CDDB cache files only"
-msgstr "Analyse des fichiers audio..."
+msgstr "Lire dans le cache CDDB seulement"
 
 #: translators/freedbimporter.cpp:428
 msgid ""
@@ -4067,7 +4054,6 @@ msgid "File Listing Options"
 msgstr "Options des listes de fichiers"
 
 #: translators/filelistingimporter.cpp:203
-#, fuzzy
 msgid "Recursive folder search"
 msgstr "Recherche récursive"
 
@@ -4076,9 +4062,8 @@ msgid "If checked, folders are recursively searched for all files."
 msgstr "Si cochée, les répertoires sont sont balayés récursivement pour chercher tous les fichiers."
 
 #: translators/filelistingimporter.cpp:208
-#, fuzzy
 msgid "Generate file previews"
-msgstr "Renommer la collection"
+msgstr "Générer les prévisualisations de fichiers"
 
 #: translators/filelistingimporter.cpp:209
 msgid ""

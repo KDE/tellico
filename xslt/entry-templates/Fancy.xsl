@@ -82,17 +82,15 @@
     color: <xsl:value-of select="$color1"/>;
     background-color: <xsl:value-of select="$color2"/>;
     background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
-    background-repeat: repeat-x; 
-/*    border: 1px solid;
-    border-color: <xsl:value-of select="$fgcolor"/>;*/
+    background-repeat: repeat-x;
     border-bottom: 1px outset black;
     text-align: center;
   }
   <xsl:if test="$num-images &gt; 0">
-  #content {
-   padding-right: <xsl:value-of select="$image-width + 10"/>px;
+  div#content {
+    padding-right: <xsl:value-of select="$image-width + 10"/>px;
   }
-  #images {
+  div#images {
     margin: 10px 5px 0px 5px;
     float: right;
     min-width: <xsl:value-of select="$image-width"/>px; /* min-width instead of width, stylesheet actually scales image */
@@ -133,11 +131,11 @@
     color: <xsl:value-of select="$color1"/>;
     background-color: <xsl:value-of select="$color2"/>;
     background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
-    background-repeat: repeat-x; 
+    background-repeat: repeat-x;
     border-bottom: 1px outset;
     border-color: <xsl:value-of select="$fgcolor"/>;
     padding: 0px 8px 0px 0px;
-    margin: 0px -4px 2px -5px;
+    margin: 0px 0px 2px -4px; /* -4px to match .category padding */
     font-size: 1.0em;
     top: -1px;
     font-style: normal;
@@ -166,13 +164,11 @@
     font-weight: bold;
     text-align: left;
     padding: 0px 2px 0px 2px;
-/*    white-space: nowrap;*/
   }
   td.column2 {
     font-style: italic;
     text-align: left;
     padding: 0px 10px 0px 10px;
-/*    width: 90%;  nowrap is set on the fieldName column, so just want enough width to take the rest */
   }
   p {
     margin: 2px 10px 2px 0;
@@ -297,9 +293,9 @@
  <xsl:variable name="first-type" select="$fields[1]/@type"/>
 
  <xsl:variable name="n" select="count($entry//*[key('fieldsByName',local-name(.))/@category=$category])"/>
- <!-- only output if there are fields in this category, or if there are no images
+ <!-- only output if there are fields in this category
       also, special case, don't output empty paragraphs -->
- <xsl:if test="($n &gt; 0 or $num-images = 0) and (not($first-type = 2) or $entry/*[local-name(.) = $fields[1]/@name])">
+ <xsl:if test="$n &gt; 0 and (not($first-type = 2) or $entry/*[local-name(.) = $fields[1]/@name])">
   <div class="container">
    <xsl:if test="$num-images = 0 and $first-type != 2">
     <xsl:attribute name="style">
@@ -317,7 +313,7 @@
    </xsl:if>
    <xsl:if test="$num-images = 0 and $first-type = 2">
     <xsl:attribute name="style">
-     <xsl:text>clear: both; </xsl:text>
+     <xsl:text>width: 100%; float: left; clear: both; </xsl:text>
     </xsl:attribute>
    </xsl:if>
   <div class="category">

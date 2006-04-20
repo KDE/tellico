@@ -23,9 +23,9 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../tellico_utils.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kio/job.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
@@ -382,6 +382,21 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
       // might get aborted
       break;
     }
+
+    // UK puts the year in the title for some reason
+    if(m_site == UK && coll->type() == Data::Collection::Video) {
+      QRegExp rx(QString::fromLatin1("\\[(\\d{4})\\]"));
+      QString t = entry->title();
+      if(t.find(rx) > -1) {
+        QString y = rx.cap(1);
+        t.remove(rx).simplifyWhiteSpace();
+        entry->setField(QString::fromLatin1("title"), t);
+        if(entry->field(QString::fromLatin1("year")).isEmpty()) {
+          entry->setField(QString::fromLatin1("year"), y);
+        }
+      }
+    }
+
     QString desc;
     switch(coll->type()) {
       case Data::Collection::Book:
@@ -628,7 +643,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
     default:
       break;
   }
-//  kdDebug() << "AmazonFetcher::fetchEntry() - grabbing " << imageURL.prettyURL() << endl;
+//  myDebug() << "AmazonFetcher::fetchEntry() - grabbing " << imageURL.prettyURL() << endl;
   if(!imageURL.isEmpty()) {
     const Data::Image& img = ImageFactory::addImage(imageURL, true);
     // FIXME: need to add cover image field to bibtex collection

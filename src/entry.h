@@ -43,6 +43,7 @@ class EntryGroup : public QObject, public EntryVec {
 
 public:
   EntryGroup(const QString& group, const QString& field);
+  ~EntryGroup();
 
   const QString& groupName() const { return m_group; }
   const QString& fieldName() const { return m_field; }

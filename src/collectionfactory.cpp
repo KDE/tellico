@@ -186,3 +186,13 @@ QString CollectionFactory::typeName(Data::Collection::Type type_) {
   }
 }
 
+bool CollectionFactory::isDefaultField(Data::Collection::Type type_, const QString& name_) {
+  Data::CollPtr coll = collection(type_, true);
+  Data::FieldVec fields = coll->fields();
+  for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+    if(field->name() == name_) {
+      return true;
+    }
+  }
+  return false;
+}

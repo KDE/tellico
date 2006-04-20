@@ -88,6 +88,7 @@ bool Document::newDocument(int type_) {
 bool Document::openDocument(const KURL& url_) {
   myLog() << "Document::openDocument() - " << url_.prettyURL() << endl;
 
+  m_loadAllImages = false;
   // delayed image loading only works for local files
   if(!url_.isLocalFile()) {
     m_loadAllImages = true;
@@ -122,7 +123,7 @@ bool Document::openDocument(const KURL& url_) {
 //  if(pruneImages()) {
 //    slotSetModified(true);
 //  }
-  if(m_coll->entryCount() > 0) {
+  if(m_importer->hasImages()) {
     m_running = true;
     QTimer::singleShot(500, this, SLOT(slotWriteAllImages()));
   }
@@ -431,11 +432,7 @@ bool Document::loadImage(const QString& id_) const {
     return false;
   }
   // first try the file
-  if(!m_loadAllImages && m_validFile && m_importer && m_importer->loadImage(id_)) {
-    return true;
-  }
-  // now try loading a cache image from the data directory
-  return !ImageFactory::addCachedImage(id_, ImageFactory::TempDir).isNull();
+  return !m_loadAllImages && m_validFile && m_importer && m_importer->loadImage(id_);
 }
 
 bool Document::loadAllImagesNow() const {

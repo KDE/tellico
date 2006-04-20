@@ -357,6 +357,24 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     entry->setField(f, descRx.cap(1).simplifyWhiteSpace());
   }
 
+  // IBS switches the surname and family name of the author
+  QStringList names = entry->fields(QString::fromLatin1("author"), false);
+  if(!names.isEmpty() && !names[0].isEmpty()) {
+    for(QStringList::Iterator it = names.begin(); it != names.end(); ++it) {
+      if((*it).find(',') > -1) {
+        continue; // skip if it has a comma
+      }
+      QStringList words = QStringList::split(' ', *it);
+      if(words.isEmpty()) {
+        continue;
+      }
+      // put first word in back
+      words.append(words[0]);
+      words.pop_front();
+      *it = words.join(QChar(' '));
+    }
+    entry->setField(QString::fromLatin1("author"), names.join(QString::fromLatin1("; ")));
+  }
   return entry;
 }
 

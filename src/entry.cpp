@@ -29,6 +29,14 @@ EntryGroup::EntryGroup(const QString& group, const QString& field)
    : EntryVec(), m_group(Tellico::shareString(group)), m_field(Tellico::shareString(field)) {
 }
 
+EntryGroup::~EntryGroup() {
+  // need a copy since we remove ourselves
+  EntryVec vec = *this;
+  for(Data::EntryVecIt entry = vec.begin(); entry != vec.end(); ++entry) {
+    entry->removeFromGroup(this);
+  }
+}
+
 Entry::Entry(CollPtr coll_) : KShared(), m_coll(coll_), m_id(-1) {
 #ifndef NDEBUG
   if(!coll_) {

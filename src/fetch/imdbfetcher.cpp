@@ -666,7 +666,7 @@ void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL&
       if(plotRx.search(plotPage) > -1) {
         QString userPlot = plotRx.cap(1);
         userPlot.remove(*s_tagRx); // remove HTML tags
-        entry_->setField(QString::fromLatin1("plot"), userPlot);
+        entry_->setField(QString::fromLatin1("plot"), Tellico::decodeHTML(userPlot));
       }
     }
   }

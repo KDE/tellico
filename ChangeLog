@@ -1,3 +1,32 @@
+2006-04-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with multiple ISBN search for z29.50.
+	* Fixed "disappearing paragraph" bug in Fancy template.
+	* Fixed name order for IBS searches.
+	* Released Tellico 1.1.5.
+
+2006-04-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Added "Xbox 360" to Amazon template.
+
+2006-04-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when deleting and re-adding fields by same name.
+	* Fixed bug with HTML decoding in IMDb plot summary.
+
+2006-04-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that re-added default fields when adding search results.
+
+2006-04-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Added OS check (linux only) for enabling cd-text support.
+
+2006-04-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Spanish, thanks to Alejandro Hamann and Quique.
+	* Fixed bug with writing temporary files, even when using app data dir.
+
 2006-04-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed OpenOffice.org plugin build for OOo SDK 2.0.2.

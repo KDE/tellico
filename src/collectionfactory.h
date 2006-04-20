@@ -32,9 +32,9 @@ public:
   static Data::CollPtr collection(Data::Collection::Type type, bool addFields,
                                       const QString& entryTitle=QString::null);
   static Data::CollPtr collection(const QString& typeName, bool addFields);
-  static Data::FieldVec defaultFields(Data::Collection::Type type);
   static CollectionNameMap nameMap();
   static QString typeName(Data::Collection::Type type);
+  static bool isDefaultField(Data::Collection::Type type, const QString& name);
 };
 
 } // end namespace

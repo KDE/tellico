@@ -286,7 +286,6 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     QDomNodeList imgelems;
     for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
       if(n.nodeName() == Latin1Literal("images")) {
-        m_hasImages = true;
         imgelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("image"));
         break;
       }
@@ -587,7 +586,10 @@ void TellicoImporter::readImage(const QDomElement& elem_) {
 
   QByteArray ba;
   KCodecs::base64Decode(QCString(elem_.text().latin1()), ba);
-  ImageFactory::addImage(ba, format, id);
+  if(!ba.isEmpty()) {
+    ImageFactory::addImage(ba, format, id);
+    m_hasImages = true;
+  }
 }
 
 void TellicoImporter::readFilter(const QDomElement& elem_) {

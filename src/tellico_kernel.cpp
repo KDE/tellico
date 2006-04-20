@@ -33,6 +33,8 @@
 #include "commands/removeloans.h"
 #include "commands/reorderfields.h"
 #include "commands/renamecollection.h"
+#include "collectionfactory.h"
+#include "stringset.h"
 
 #include <kmessagebox.h>
 #include <kglobal.h>
@@ -155,8 +157,21 @@ void Kernel::addEntries(Data::EntryVec entries_, bool checkFields_) {
   if(checkFields_) {
     beginCommandGroup(cmd->name());
     Data::FieldVec fields = entries_[0]->collection()->fields();
+    Data::CollPtr coll = Data::Document::self()->collection();
     for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
-      if(Data::Document::self()->collection()->hasField(field->name())) {
+      // don't add a field if it's a default field and not in the current collection
+      if(coll->hasField(field->name()) || CollectionFactory::isDefaultField(coll->type(), field->name())) {
+        // special case for choice fields, since we might want to add a value
+        if(field->type() == Data::Field::Choice && coll->hasField(field->name())) {
+          QStringList a1 = field->allowed();
+          QStringList a2 = coll->fieldByName(field->name())->allowed();
+          if(a1 != a2) {
+            StringSet a;
+            a.add(a1);
+            a.add(a2);
+            coll->fieldByName(field->name())->setAllowed(a.toList());
+          }
+        }
         continue;
       }
       // add field if any values are not empty
