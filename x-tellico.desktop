@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=Tellico Data File
+Comment[ru]=Файл Tellico
 DefaultApp=tellico
 Icon=tellico.png
 MimeType=application/x-tellico

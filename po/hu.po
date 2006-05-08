@@ -1,28 +1,26 @@
 # translation of hu.po to
-# translation of tellico.po to hungarian
-# This file is distributed under the same license as the tellico package.
-# Copyright (C) 2004 RObby Stephenson
 # Marcel Hilzinger <hili@suselinux.hu>, 2003.
 # Csaba Zakarias <csaba.zakarias@gmail.com>, 2005.
-# Csaba Zakarias <csaba.zakarias@gmail.hu>, 2005.
+# Csaba Zakarias <csaba.zakarias@gmail.hu>, 2005, 2006.
+# This file is distributed under the same license as the tellico package.
+# Copyright (C) 2004 RObby Stephenson
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "POT-Creation-Date: 2006-03-04 21:59-0800\n"
-"PO-Revision-Date: 2005-11-24 10:02+0100\n"
+"PO-Revision-Date: 2006-04-21 18:47+0200\n"
 "Last-Translator: Csaba Zakarias <csaba.zakarias@gmail.hu>\n"
 "Language-Team:  <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
 
 #: cite/actionmanager.cpp:75
-#, fuzzy
 msgid "Creating citations..."
-msgstr "Osztályozás"
+msgstr "Idézet létrehozása..."
 
 #: cite/lyxpipe.cpp:49
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
@@ -30,64 +28,59 @@ msgstr "<qt>A Tellico nem tud a fájlba írni: <b>%1</b>.</qt>"
 
 #: cite/openoffice.cpp:80
 msgid "Connecting to OpenOffice.org..."
-msgstr ""
+msgstr "Kapcsolódás az OpenOffice.org-hoz..."
 
 #: cite/openoffice.cpp:163 cite/openoffice.cpp:182
 msgid "OpenOffice.org Connection"
-msgstr ""
+msgstr "OpenOffice.org kapcsolat"
 
 #: cite/openoffice.cpp:177
 msgid ""
 "Tellico was unable to connect to OpenOffice.org.\n"
 "Please verify the connection settings below, and\n"
 "that OpenOffice.org Writer is currently running."
-msgstr ""
+msgstr "Tellico nem tudott kapcsolódni az OpenOffice.org-hoz. \nKérem ellenőrizze a kapcsolat alábbi beállításait és azt is, hogy az OpenOffice Szöveg jelenleg fut-e."
 
 #: cite/openoffice.cpp:187
-#, fuzzy
 msgid "Pipe"
-msgstr "Személy"
+msgstr "Cső"
 
 #: cite/openoffice.cpp:189
 msgid "TCP/IP"
-msgstr ""
+msgstr "TCP/IP"
 
 #: gui/tablefieldwidget.cpp:173
-#, fuzzy
 msgid "Rename Column"
-msgstr "Gyűjtemény átnevezése..."
+msgstr "Oszlop átnevezése"
 
 #: gui/tablefieldwidget.cpp:173
-#, fuzzy
 msgid "New column name:"
-msgstr "Új gyűjteménynév:"
+msgstr "Új oszlop név:"
 
 #: gui/tablefieldwidget.cpp:197
-#, fuzzy, c-format
+#, c-format
 msgid "Column %1"
-msgstr "Oszlopok:"
+msgstr "%1 oszlop"
 
 #: gui/tablefieldwidget.cpp:235 gui/tablefieldwidget.cpp:283
-#, fuzzy
 msgid "Rename Column..."
-msgstr "&Gyűjtemény átnevezése..."
+msgstr "Oszlop átnevezése..."
 
 #: gui/tablefieldwidget.cpp:268
 msgid "Insert Row"
-msgstr ""
+msgstr "Sor beszúrása"
 
 #: gui/tablefieldwidget.cpp:270
-#, fuzzy
 msgid "Remove Row"
-msgstr "&Eltávolítás"
+msgstr "&Sor eltávolítása"
 
 #: gui/tablefieldwidget.cpp:272
 msgid "Move Row Up"
-msgstr ""
+msgstr "Sor felfele mozgatása"
 
 #: gui/tablefieldwidget.cpp:277
 msgid "Move Row Down"
-msgstr ""
+msgstr "Sor lefele mozgatása"
 
 #: gui/stringmapdialog.cpp:57
 msgid "&Set"
@@ -97,7 +90,7 @@ msgstr "&Beállítás"
 msgid ""
 "_: Edit Label\n"
 "%1:"
-msgstr ""
+msgstr "Cimke szerkesztése:"
 
 #: gui/kwidgetlister.cpp:58
 msgid ""
@@ -122,16 +115,15 @@ msgid "Select Image..."
 msgstr "Kép kiválasztása..."
 
 #: commands/modifyentries.cpp:72
-#, fuzzy
 msgid "Modify Entries"
-msgstr "Bejegyzések szerkesztése"
+msgstr "Bejegyzések módosítása"
 
 #: commands/modifyentries.cpp:73
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: Modify (Entry Title)\n"
 "Modify %1"
-msgstr "Mentés"
+msgstr "Módosítás %1"
 
 #: commands/renamecollection.cpp:45 tellico_kernel.cpp:306
 msgid "Rename Collection"
@@ -150,16 +142,15 @@ msgid "Delete %1 Field"
 msgstr "%1 mező törlése"
 
 #: commands/addentries.cpp:54
-#, fuzzy
 msgid "Add Entries"
-msgstr "Bejegyzések szerkesztése"
+msgstr "Bejegyzések hozzáadása"
 
 #: commands/addentries.cpp:55
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: Add (Entry Title)\n"
 "Add %1"
-msgstr "Mentés"
+msgstr "Hozzáadás %1"
 
 #: commands/filtercommand.cpp:98
 msgid "Add Filter"
@@ -289,7 +280,7 @@ msgstr "Szerző"
 msgid ""
 "_: Comic Book Illustrator\n"
 "Artist"
-msgstr ""
+msgstr "Képregény rajzoló"
 
 #: collections/bibtexcollection.cpp:195 collections/bookcollection.cpp:127
 #: collections/cardcollection.cpp:72 collections/comicbookcollection.cpp:63
@@ -435,8 +426,7 @@ msgstr "Épség"
 msgid ""
 "_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
-"Kíváló,Igen nagyszerű,Meglehetősen nagyszerű,Nagyszerű,Átlagos,Gyenge"
+msgstr "Kíváló,Igen nagyszerű,Meglehetősen nagyszerű,Nagyszerű,Átlagos,Gyenge"
 
 #: collections/coincollection.cpp:88 collections/stampcollection.cpp:81
 msgid "Grade"
@@ -452,7 +442,7 @@ msgstr "Fogazott"
 
 #: collections/stampcollection.cpp:95
 msgid "Centering"
-msgstr ""
+msgstr "Középre helyezés"
 
 #: collections/stampcollection.cpp:100
 msgid "Gummed"
@@ -604,9 +594,8 @@ msgid "Rating"
 msgstr "Kategória"
 
 #: collections/filecatalog.cpp:26
-#, fuzzy
 msgid "My Files"
-msgstr "Boraim"
+msgstr "Fájljaim"
 
 #: borrowerdialog.cpp:48 collections/filecatalog.cpp:37
 msgid "Name"
@@ -623,41 +612,35 @@ msgstr "Kötet"
 
 #: collections/filecatalog.cpp:56
 msgid "Mimetype"
-msgstr ""
+msgstr "Mime típus"
 
 #: collections/filecatalog.cpp:61
-#, fuzzy
 msgid "Size"
-msgstr "Dedikált"
+msgstr "Méret"
 
 #: collections/filecatalog.cpp:65
-#, fuzzy
 msgid "Permissions"
-msgstr "Személy"
+msgstr "Jogosultságok"
 
 #: collections/filecatalog.cpp:70
-#, fuzzy
 msgid "Owner"
-msgstr "Más"
+msgstr "Tulajdonos"
 
 #: collections/filecatalog.cpp:75
-#, fuzzy
 msgid "Group"
-msgstr "Csoportosítások"
+msgstr "Csoport"
 
 #: collections/filecatalog.cpp:81
-#, fuzzy
 msgid "Created"
-msgstr "Befejezve"
+msgstr "Létrehozott"
 
 #: collections/filecatalog.cpp:85
-#, fuzzy
 msgid "Modified"
-msgstr "Mezők módosítása"
+msgstr "Módosított"
 
 #: collections/filecatalog.cpp:89
 msgid "Meta Info"
-msgstr ""
+msgstr "Meta infó"
 
 #: collectionfieldsdialog.cpp:835 collections/filecatalog.cpp:91
 msgid "Property"
@@ -668,9 +651,8 @@ msgid "Value"
 msgstr "Érték"
 
 #: collections/filecatalog.cpp:95
-#, fuzzy
 msgid "Icon"
-msgstr "Ikonok"
+msgstr "Ikon"
 
 #: collections/winecollection.cpp:26
 msgid "Wines"
@@ -764,7 +746,7 @@ msgstr "Kiadás éve"
 msgid ""
 "_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr ""
+msgstr "KH,12,16,18"
 
 #: collections/videocollection.cpp:63
 msgid "Certification"
@@ -832,12 +814,11 @@ msgstr "Szereposztás"
 
 #: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:405
 msgid "Actor/Actress"
-msgstr ""
+msgstr "Művész/nő"
 
 #: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:406
-#, fuzzy
 msgid "Role"
-msgstr "Személy"
+msgstr "Szerep"
 
 #: collections/videocollection.cpp:107
 msgid "A table for the cast members, along with the roles they play"
@@ -1047,8 +1028,7 @@ msgstr "Bejegyzés típusa"
 
 #: collections/bibtexcollection.cpp:77
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr ""
-"Ez a bejegyzés típus bibtex formátumú. Lásd a bibtex dokumentációt."
+msgstr "Ez a bejegyzés típus bibtex formátumú. Lásd a bibtex dokumentációt."
 
 #: collections/bibtexcollection.cpp:87
 msgid "Bibtex Key"
@@ -1135,7 +1115,7 @@ msgstr "Sávok"
 
 #: collections/musiccollection.cpp:79 translators/tellicoimporter.cpp:403
 msgid "Length"
-msgstr ""
+msgstr "Hossz"
 
 #: fetch/execexternalfetcher.cpp:81
 msgid "External Application"
@@ -1146,22 +1126,18 @@ msgid "Collection &type:"
 msgstr "Gyűjtemény típusa:"
 
 #: fetch/execexternalfetcher.cpp:328
-msgid ""
-"Set the collection type of the data returned from the external application."
+msgid "Set the collection type of the data returned from the external application."
 msgstr ""
 "Állítsa be a külső alkalmazás által visszaadott adat gyűjtemény "
 "típusát."
 
 #: fetch/execexternalfetcher.cpp:333
 msgid "&Result type: "
-msgstr ""
+msgstr "&Eredmény típusa: "
 
 #: fetch/execexternalfetcher.cpp:342
-#, fuzzy
 msgid "Set the result type of the data returned from the external application."
-msgstr ""
-"Állítsa be a külső alkalmazás által visszaadott adat gyűjtemény "
-"típusát."
+msgstr "Állítsa be a külső alkalmazás által visszaadott adat típusát."
 
 #: fetch/execexternalfetcher.cpp:347
 msgid "Application &path: "
@@ -1177,7 +1153,7 @@ msgstr ""
 
 #: fetch/execexternalfetcher.cpp:357
 msgid "Select the search keys supported by the data source."
-msgstr ""
+msgstr "Válassza ki az adatforrásnak megfelelő keresési kulcsokat."
 
 #: fetch/execexternalfetcher.cpp:358
 msgid ""
@@ -1188,14 +1164,12 @@ msgstr ""
 "lesz helyettesítve."
 
 #: fetch/execexternalfetcher.cpp:359
-#, fuzzy
 msgid "Arguments"
-msgstr "Változók:"
+msgstr "Változók"
 
 #: fetch/execexternalfetcher.cpp:384
-#, fuzzy
 msgid "Update"
-msgstr "B&ejegyzés idézése"
+msgstr "Frissítés"
 
 #: fetch/execexternalfetcher.cpp:386
 msgid ""
@@ -1215,7 +1189,6 @@ msgid "This source has no options."
 msgstr "A forrás nem rendelkezik beállításokkal."
 
 #: fetch/entrezfetcher.cpp:397
-#, fuzzy
 msgid "Institution"
 msgstr "Állapot"
 
@@ -1229,14 +1202,12 @@ msgid "Source Options"
 msgstr "Forrás beállítások"
 
 #: fetch/configwidget.cpp:40
-#, fuzzy
 msgid "Available Fields"
-msgstr "Gyűjtemény mezői"
+msgstr "Elérhető mezők"
 
 #: fetch/srufetcher.cpp:60
-#, fuzzy
 msgid "SRU Server"
-msgstr "Visszaállítás"
+msgstr "SRU szerver"
 
 #: fetch/srufetcher.cpp:315
 msgid "Library of Congress (US)"
@@ -1244,32 +1215,29 @@ msgstr "Kongresszusi könyvtár (Egyesült Államok)"
 
 #: fetch/imdbfetcher.cpp:931 fetch/srufetcher.cpp:330
 #: fetch/z3950fetcher.cpp:467
-#, fuzzy
 msgid "Hos&t: "
-msgstr "Hoszt:"
+msgstr "&Hoszt:"
 
 #: fetch/srufetcher.cpp:335 fetch/z3950fetcher.cpp:472
-#, fuzzy
 msgid "Enter the host name of the server."
-msgstr "Adja meg a z39.50 szerver nevét."
+msgstr "Adja meg a szerver nevét."
 
 #: fetch/srufetcher.cpp:340 fetch/z3950fetcher.cpp:477
 msgid "&Port: "
 msgstr "&Port szám:"
 
 #: fetch/srufetcher.cpp:345 fetch/z3950fetcher.cpp:482
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the port number of the server. The default is %1."
-msgstr "Adja meg a z39.50 szerver nevét. Az alapértelmezett %1."
+msgstr "Adja meg a szerver port számát. Az alapértelmezett %1."
 
 #: fetch/srufetcher.cpp:350 fetch/z3950fetcher.cpp:487
 msgid "&Database: "
 msgstr "&Adatbázis"
 
 #: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:492
-#, fuzzy
 msgid "Enter the database name used by the server."
-msgstr "Adja meg a z39.50 szerver által használt adatbázis nevét."
+msgstr "Adja meg a szerver által használt adatbázis nevét."
 
 #: fetch/z3950connection.cpp:100
 msgid "Query error!"
@@ -1296,10 +1264,8 @@ msgid "Select IMDB Result"
 msgstr "Válassza ki az IMDB eredmény"
 
 #: fetch/imdbfetcher.cpp:451
-msgid ""
-"<qt>Your search returned multiple matches. Please select one below.</qt>"
-msgstr ""
-"<qt>A keresés eredménye több értékű. Kérem válasszon közülük.</qt>"
+msgid "<qt>Your search returned multiple matches. Please select one below.</qt>"
+msgstr "<qt>A keresés eredménye több értékű. Kérem válasszon közülük.</qt>"
 
 #: fetch/imdbfetcher.cpp:466
 msgid "<qt>Select a search result.</qt>"
@@ -1307,7 +1273,7 @@ msgstr "<qt>Válasszon a keresés eredményeiből.</qt>"
 
 #: fetch/imdbfetcher.cpp:553 fetch/imdbfetcher.cpp:990
 msgid "IMDB Link"
-msgstr ""
+msgstr "IMDB kapcsolat"
 
 #: fetch/animenfofetcher.cpp:263 fetch/imdbfetcher.cpp:610
 #: fetch/imdbfetcher.cpp:992
@@ -1315,9 +1281,8 @@ msgid "Alternative Titles"
 msgstr "Alternatív címek"
 
 #: fetch/imdbfetcher.cpp:770 fetch/imdbfetcher.cpp:991
-#, fuzzy
 msgid "IMDB Rating"
-msgstr "Értékelés"
+msgstr "IMDB értékelés"
 
 #: fetch/imdbfetcher.cpp:880 fetch/imdbfetcher.cpp:993
 msgid "Certifications"
@@ -1330,20 +1295,18 @@ msgid ""
 msgstr "Az IMDB több szervert használ. Válasszon közülük. "
 
 #: fetch/imdbfetcher.cpp:942
-#, fuzzy
 msgid "&Maximum cast: "
-msgstr "Maximális kép szélesség:"
+msgstr "&Maximális stáblista:"
 
 #: fetch/imdbfetcher.cpp:947
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
-msgstr ""
+msgstr "A stáb tagjainak listája sok személyt tartalmazhat. Adja meg a keresési eredmény számának maximális értékét."
 
 #: fetch/imdbfetcher.cpp:952
-#, fuzzy
 msgid "Download cover &image"
-msgstr "Fedlap kép letöltése"
+msgstr "&Fedlap kép letöltése"
 
 #: fetch/amazonfetcher.cpp:744 fetch/imdbfetcher.cpp:956
 msgid ""
@@ -1356,7 +1319,7 @@ msgstr ""
 
 #: fetch/ibsfetcher.cpp:45
 msgid "Internet Bookshop (ibs.it)"
-msgstr ""
+msgstr "Internet Bookshop (ibs.it)"
 
 #: fetch/amazonfetcher.cpp:177 fetch/animenfofetcher.cpp:78
 #: fetch/ibsfetcher.cpp:74 fetch/yahoofetcher.cpp:82
@@ -1365,7 +1328,7 @@ msgstr "%1 nem engedi meg, hogy ezt a típusú gyűjteményben keressen."
 
 #: fetch/yahoofetcher.cpp:51
 msgid "Yahoo! Audio Search"
-msgstr ""
+msgstr "Yahoo! Audió keresés"
 
 #: fetch/amazonfetcher.cpp:639 fetch/yahoofetcher.cpp:218
 msgid "The cover image could not be loaded."
@@ -1381,7 +1344,7 @@ msgstr "ISBN"
 
 #: fetch/fetchmanager.cpp:53
 msgid "UPC"
-msgstr ""
+msgstr "UPC"
 
 #: fetch/fetchmanager.cpp:54
 msgid "Keyword"
@@ -1392,7 +1355,6 @@ msgid "Raw Query"
 msgstr "Nyers lekérdezés"
 
 #: fetch/amazonfetcher.cpp:49
-#, fuzzy
 msgid "Amazon Link"
 msgstr "Amazon (Japán)"
 
@@ -1503,16 +1465,15 @@ msgstr ""
 
 #: fetch/animenfofetcher.cpp:260
 msgid "Original Title"
-msgstr ""
+msgstr "Eredeti cím"
 
 #: fetch/animenfofetcher.cpp:267
-#, fuzzy
 msgid "Distributor"
-msgstr "Rendező"
+msgstr "Nagykereskedő"
 
 #: fetch/animenfofetcher.cpp:273
 msgid "Episodes"
-msgstr ""
+msgstr "Epizódok"
 
 #: fetch/z3950fetcher.cpp:76
 msgid "z39.50"
@@ -1551,14 +1512,11 @@ msgid "Pass&word: "
 msgstr "Jelszó:"
 
 #: fetch/z3950fetcher.cpp:531
-#, fuzzy
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one. The password will be saved in plain text in the Tellico "
 "configuration file."
-msgstr ""
-"Adja meg a z39.50 adatbázishoz az érvényes jelszót. A legtöbb "
-"szervernél ez nem szükséges."
+msgstr "Adja meg a z39.50 adatbázishoz az érvényes jelszót. A legtöbb szervernél ez nem szükséges. A jelszó nyílt szövegként tárolódik a Tellico konfigurációs fájlban."
 
 #: translators/bibteximporter.cpp:56
 #, c-format
@@ -1652,12 +1610,11 @@ msgstr "Ha kijelöli, a hang fáljokat rekurzívan keresi a könyvtárakban."
 
 #: translators/audiofileimporter.cpp:308
 msgid "&Include file location"
-msgstr ""
+msgstr "&Fájl helyének belefoglalása"
 
 #: translators/audiofileimporter.cpp:309
-#, fuzzy
 msgid "If checked, the file names for each track are added to the entries."
-msgstr "Ha kijelöli, a mezőnevek fejlécként nyomtatja ki."
+msgstr "Ha kijelöli, az egyes sávok fájl nevei hozzáadódnak a bejegyzésekhez."
 
 #: translators/csvexporter.cpp:40
 msgid "CSV"
@@ -1738,35 +1695,30 @@ msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr "Egyedi karakter, pl. vessző, használható határolóként."
 
 #: translators/filelistingimporter.cpp:57
-#, fuzzy
 msgid "Scanning files..."
-msgstr "Hang fájlok átvizsgálása"
+msgstr "Fájlok átvizsgálása..."
 
 #: translators/filelistingimporter.cpp:201
-#, fuzzy
 msgid "File Listing Options"
-msgstr "Nyomtatási beállítások"
+msgstr "Fájl listázási beállítások"
 
 #: translators/filelistingimporter.cpp:203
-#, fuzzy
 msgid "Recursive folder search"
 msgstr "Rekurzív könyvtár keresés"
 
 #: translators/filelistingimporter.cpp:204
-#, fuzzy
 msgid "If checked, folders are recursively searched for all files."
-msgstr "Ha kijelöli, a hang fáljokat rekurzívan keresi a könyvtárakban."
+msgstr "Ha kijelöli, a fáljokat rekurzívan keresi a könyvtárakban."
 
 #: translators/filelistingimporter.cpp:208
-#, fuzzy
 msgid "Generate file previews"
-msgstr "&Riport létrehozása..."
+msgstr "Fájl előnézet létrehozása..."
 
 #: translators/filelistingimporter.cpp:209
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
-msgstr ""
+msgstr "Ha kijelöli, a fájl tartalmának előnézete létrejön, ez lelassíthatja a könyvtár listázást."
 
 #: translators/onixexporter.cpp:61
 msgid "ONIX Archive"
@@ -1794,8 +1746,7 @@ msgstr ""
 
 #: translators/freedbimporter.cpp:84 translators/freedbimporter.cpp:138
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr ""
-"<qt>Tellico nem tudott hozzáférni a <i>%1</i> CD-ROM eszközhöz.</qt>"
+msgstr "<qt>Tellico nem tudott hozzáférni a <i>%1</i> CD-ROM eszközhöz.</qt>"
 
 #: translators/freedbimporter.cpp:159
 msgid "<qt>No records were found to match the CD.</qt>"
@@ -1810,9 +1761,8 @@ msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "<qt>A Tellico nem tudta befejezni a CD keresését.</qt>"
 
 #: translators/freedbimporter.cpp:395
-#, fuzzy
 msgid "Various"
-msgstr "(Különböző)"
+msgstr "Különböző"
 
 #: translators/freedbimporter.cpp:414
 msgid "Audio CD Options"
@@ -1840,12 +1790,11 @@ msgstr ""
 
 #: importdialog.cpp:269 translators/gcfilmsexporter.cpp:37
 msgid "GCfilms"
-msgstr ""
+msgstr "GCfilm"
 
 #: importdialog.cpp:231 translators/gcfilmsexporter.cpp:41
-#, fuzzy
 msgid "*.gcf|GCfilms Data Files (*.gcf)"
-msgstr "*.csv|CSV fájlok (*.csv)"
+msgstr "*.gcf|GCfilm adatfájlok (*.gcf)"
 
 #: translators/xsltexporter.cpp:37
 msgid "XSLT"
@@ -1868,9 +1817,8 @@ msgid "Alexandria Options"
 msgstr "Alexandria beállítások"
 
 #: translators/alexandriaimporter.cpp:178
-#, fuzzy
 msgid "&Library:"
-msgstr "Könyvtár:"
+msgstr "&Könyvtár:"
 
 #: importdialog.cpp:265 translators/bibtexmlexporter.cpp:36
 msgid "Bibtexml"
@@ -1906,12 +1854,10 @@ msgstr ""
 "elemek száma is megjelenik."
 
 #: translators/importer.h:90
-#, fuzzy
 msgid "Loading data..."
-msgstr "Adat importálása..."
+msgstr "Adat betöltése..."
 
 #: translators/importer.h:90
-#, fuzzy
 msgid "Loading %1..."
 msgstr "%1 feldolgozása..."
 
@@ -1995,33 +1941,28 @@ msgid "Select the type of collection being imported."
 msgstr "Jelölje ki az importálandó gyűjtemény típusát."
 
 #: translators/csvimporter.cpp:149
-#, fuzzy
 msgid "&First row contains field titles"
-msgstr "Az első sor a mező címeit tartalmazza"
+msgstr "Az &első sor a mező címeit tartalmazza"
 
 #: translators/csvimporter.cpp:151
 msgid "If checked, the first row is used as field titles."
 msgstr "Ha kijelöli, az első sormező címként kerül feldolgozásra."
 
 #: translators/csvimporter.cpp:163
-#, fuzzy
 msgid "&Comma"
-msgstr "Vessző"
+msgstr "&Vessző"
 
 #: translators/csvimporter.cpp:169
-#, fuzzy
 msgid "&Semicolon"
-msgstr "Pontos vessző"
+msgstr "&Pontos vessző"
 
 #: translators/csvimporter.cpp:174
-#, fuzzy
 msgid "Ta&b"
-msgstr "Tabulátor"
+msgstr "&Tabulátor"
 
 #: translators/csvimporter.cpp:179
-#, fuzzy
 msgid "Ot&her:"
-msgstr "Más:"
+msgstr "&További:"
 
 #: translators/csvimporter.cpp:212
 msgid "The table shows up to the first five lines of the CSV file."
@@ -2037,19 +1978,16 @@ msgstr ""
 "<i>Beállítás</i> gombra.</qt>"
 
 #: translators/csvimporter.cpp:220
-#, fuzzy
 msgid "Co&lumn:"
-msgstr "Oszlopok:"
+msgstr "&Oszlopok:"
 
 #: translators/csvimporter.cpp:226
-#, fuzzy
 msgid "&Data field in this column:"
-msgstr "Adatmező az oszlopban:"
+msgstr "&Adatmező az oszlopban:"
 
 #: translators/csvimporter.cpp:231
-#, fuzzy
 msgid "&Assign Field"
-msgstr "Kapcsolt mező"
+msgstr "&Kapcsolt mező"
 
 #: collectionfieldsdialog.cpp:383 collectionfieldsdialog.cpp:386
 #: translators/csvimporter.cpp:371 translators/csvimporter.cpp:474
@@ -2083,7 +2021,7 @@ msgstr "PDA mentési jel beállítása az adatbázishoz"
 
 #: translators/gcfilmsimporter.cpp:84
 msgid "<qt>The file is not a valid GCfilms data file.</qt>"
-msgstr ""
+msgstr "<qt>A fájl nem GCfilm adatfájl.</qt>"
 
 #: translators/xsltimporter.cpp:45 translators/xsltimporter.cpp:51
 msgid "A valid XSLT file is needed to import the file."
@@ -2131,8 +2069,7 @@ msgstr "Bejegyzések csoportosítása"
 
 #: configdialog.cpp:275 translators/htmlexporter.cpp:479
 msgid "If checked, the entries will be grouped by the selected field."
-msgstr ""
-"Ha kijelöli, a kiválasztott mező alapján csoportosíthatja az elemeket."
+msgstr "Ha kijelöli, a kiválasztott mező alapján csoportosíthatja az elemeket."
 
 #: translators/htmlexporter.cpp:483
 msgid "Export individual entry files"
@@ -2151,10 +2088,8 @@ msgid "&Source name: "
 msgstr "&Forrás neve:"
 
 #: fetcherconfigdialog.cpp:72
-msgid ""
-"The name identifies the data source and should be unique and informative."
-msgstr ""
-"A név azonosítja az adatforrást, egyedinek és informatívnak kell lennie."
+msgid "The name identifies the data source and should be unique and informative."
+msgstr "A név azonosítja az adatforrást, egyedinek és informatívnak kell lennie."
 
 #: fetcherconfigdialog.cpp:82 fetcherconfigdialog.cpp:87
 msgid "Source &type: "
@@ -2162,7 +2097,7 @@ msgstr "Forrás típusa:"
 
 #: fetcherconfigdialog.cpp:90
 msgid "Tellico supports several different data sources."
-msgstr ""
+msgstr "Tellico számos különböző adatforrást támogat."
 
 #: filterdialog.cpp:57
 msgid "Any Field"
@@ -2269,29 +2204,26 @@ msgid "Date"
 msgstr "Dátum"
 
 #: entryupdater.cpp:69
-#, fuzzy
 msgid "Updating %1..."
 msgstr "%1 feldolgozása..."
 
 #: entryupdater.cpp:71
-#, fuzzy
 msgid "Updating entries..."
-msgstr "Bejegyzések szerkesztése..."
+msgstr "Bejegyzések frissítése..."
 
 #: entryupdater.cpp:114
 msgid "Updating <b>%1</b>..."
-msgstr ""
+msgstr "Frissítés <b> %1 </b>..."
 
 #: entryupdater.cpp:166
-#, fuzzy
 msgid "Select Match"
-msgstr "Válassza ki az IMDB eredmény"
+msgstr "Válassza ki az egyezőt"
 
 #: entryupdater.cpp:174
 msgid ""
 "<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
 "entry currently in the collection. Please select the correct match.</qt>"
-msgstr ""
+msgstr "<qt><b>%1</b> többszörös eredményt adott vissza, mely egyezhet <b>%2</b> -vel, az egyik bejegyzéssel a jelenlegi gyűjteményben. Kérem válassza ki a megfelelőt.</qt>"
 
 #: groupview.cpp:243
 msgid "Expand All Groups"
@@ -2320,19 +2252,16 @@ msgid "Import Options"
 msgstr "Importálás beállításai"
 
 #: importdialog.cpp:56
-#, fuzzy
 msgid "&Replace current collection"
-msgstr "Jelenlegi gyűjtemény kicserélése"
+msgstr "&Jelenlegi gyűjtemény kicserélése"
 
 #: importdialog.cpp:57
 msgid "Replace the current collection with the contents of the imported file."
-msgstr ""
-"A jelenlegi gyűjtemény kicserélése az importált fájl tartalmával."
+msgstr "A jelenlegi gyűjtemény kicserélése az importált fájl tartalmával."
 
 #: importdialog.cpp:59
-#, fuzzy
 msgid "A&ppend to current collection"
-msgstr "Hozzáfűzés a jelenlegi gyűtményhez"
+msgstr "&Hozzáfűzés a jelenlegi gyűtményhez"
 
 #: importdialog.cpp:60
 msgid ""
@@ -2343,9 +2272,8 @@ msgstr ""
 "Ez csak akkor lehetséges, ha egyezik a gyűjtemény típusa."
 
 #: importdialog.cpp:63
-#, fuzzy
 msgid "&Merge with current collection"
-msgstr "Összefésülés a jelenlegi gyűjteménnyel"
+msgstr "Ö&sszefésülés a jelenlegi gyűjteménnyel"
 
 #: importdialog.cpp:64
 msgid ""
@@ -2362,13 +2290,12 @@ msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.ris|RIS fájlok (*.ris)"
 
 #: importdialog.cpp:267
-#, fuzzy
 msgid "MODS"
-msgstr "Mac OS"
+msgstr "MODS"
 
 #: importdialog.cpp:268
 msgid "RIS"
-msgstr ""
+msgstr "RIS"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -2561,14 +2488,12 @@ msgid "Create a new wine collection"
 msgstr "Új bor gyűjtemény létrehozása"
 
 #: mainwindow.cpp:278
-#, fuzzy
 msgid "New &File Catalog"
-msgstr "Új mező"
+msgstr "Új &fájl katalógus"
 
 #: mainwindow.cpp:280
-#, fuzzy
 msgid "Create a new file catalog"
-msgstr "Új gyűjtemény létrehozása"
+msgstr "Új fájl katalógus létrehozása"
 
 #: mainwindow.cpp:286
 msgid "New C&ustom Collection"
@@ -2679,28 +2604,24 @@ msgid "Import Audio CD Data..."
 msgstr "Hang CD adat importálása..."
 
 #: mainwindow.cpp:382
-#, fuzzy
 msgid "Import audio CD information"
-msgstr "FreeDB hang CD információ importálása"
+msgstr "Audió CD információ importálása"
 
 #: mainwindow.cpp:391
-#, fuzzy
 msgid "Import GCfilms Data..."
-msgstr "CSV adat importálása"
+msgstr "GCfilm adat importálása"
 
 #: mainwindow.cpp:392
-#, fuzzy
 msgid "Import a GCfilms data file"
-msgstr "MODS adat fájl importálása..."
+msgstr "GCfilm adatfájl importálása..."
 
 #: mainwindow.cpp:398
-#, fuzzy
 msgid "Import File Listing..."
-msgstr "Fájl importálása..."
+msgstr "Fájl lista importálása..."
 
 #: mainwindow.cpp:399
 msgid "Import information about files in a folder"
-msgstr ""
+msgstr "A folderben található fájlok információinak importálása"
 
 #: mainwindow.cpp:405
 msgid "Import XSL Transform..."
@@ -2719,24 +2640,20 @@ msgid "Export the collection data to other formats"
 msgstr "Gyűjtemény adatainak exportálása más formátumba"
 
 #: mainwindow.cpp:424
-#, fuzzy
 msgid "Export to XML..."
 msgstr "Exportálás HTML-be..."
 
 #: mainwindow.cpp:425
-#, fuzzy
 msgid "Export to a Tellico XML file"
-msgstr "Exportálás Tellcio XML fájlba..."
+msgstr "Exportálás Tellcio XML fájlba"
 
 #: mainwindow.cpp:431
-#, fuzzy
 msgid "Export to Zip..."
-msgstr "Exportálás XML-be..."
+msgstr "Exportálás Zip-be..."
 
 #: mainwindow.cpp:432
-#, fuzzy
 msgid "Export to a Tellico Zip file"
-msgstr "Exportálás Tellcio XML fájlba..."
+msgstr "Exportálás Tellcio Zip fájlba..."
 
 #: mainwindow.cpp:438
 msgid "Export to HTML..."
@@ -2795,14 +2712,12 @@ msgid "Export to an ONIX file"
 msgstr "Exportálás ONIX fájlba..."
 
 #: mainwindow.cpp:487
-#, fuzzy
 msgid "Export to GCfilms..."
-msgstr "&Exportálás CSV-be..."
+msgstr "&Exportálás GCfilm-be..."
 
 #: mainwindow.cpp:488
-#, fuzzy
 msgid "Export to a GCfilms data file"
-msgstr "Exportálás Bibtex fájlba..."
+msgstr "Exportálás GCfilm adatfájlba"
 
 #: mainwindow.cpp:494
 msgid "Export XSL Transform..."
@@ -2830,8 +2745,7 @@ msgstr "A gyüjteményben lévő összes mező kiválasztása"
 
 #: mainwindow.cpp:512
 msgid "Deselect all the entries in the collection"
-msgstr ""
-"A gyüjteményben lévő összes mező kiválasztásának megszüntetése"
+msgstr "A gyüjteményben lévő összes mező kiválasztásának megszüntetése"
 
 #: mainwindow.cpp:514
 msgid "Internet Search..."
@@ -2930,47 +2844,40 @@ msgid "Edit the bibtex string macros"
 msgstr "Bibtex karakterlánc makrók szerkesztése"
 
 #: mainwindow.cpp:574
-#, fuzzy
 msgid "Copy Bibtex to Cli&pboard"
-msgstr "Átmásolja a kijelölt szöveget a vágólapra"
+msgstr "Bibtex másolása a &vágólapra"
 
 #: mainwindow.cpp:575
-#, fuzzy
 msgid "Copy bibtex citations to the clipboard"
-msgstr "Átmásolja a kijelölt szöveget a vágólapra"
+msgstr "Átmásolja a bibtex idézetet a vágólapra"
 
 #: mainwindow.cpp:580
-#, fuzzy
 msgid "Cite Entry in &LyX"
-msgstr "B&ejegyzés idézése"
+msgstr "B&ejegyzés idézése LyX-ben"
 
 #: mainwindow.cpp:581
 msgid "Cite the selected entries in LyX"
 msgstr "Kiválasztott bejegyzés idézése LyX-ben"
 
 #: mainwindow.cpp:586
-#, fuzzy
 msgid "Ci&te Entry in OpenOffice.org"
-msgstr "B&ejegyzés idézése"
+msgstr "B&ejegyzés idézése az OpenOffice.org-ban"
 
 #: mainwindow.cpp:587
-#, fuzzy
 msgid "Cite the selected entries in OpenOffice.org"
-msgstr "Kiválasztott bejegyzés idézése LyX-ben"
+msgstr "A kiválasztott bejegyzések idézése az OpenOffice.org-ban"
 
 #: controller.cpp:482 mainwindow.cpp:595 rc.cpp:6
-#, fuzzy
 msgid "&Update Entry"
-msgstr "B&ejegyzés idézése"
+msgstr "B&ejegyzés frissítése"
 
 #: mainwindow.cpp:600
-#, fuzzy
 msgid "All Sources"
-msgstr "Forrás"
+msgstr "Minden forrás"
 
 #: mainwindow.cpp:601
 msgid "Update entry data from all available sources"
-msgstr ""
+msgstr "Megjegyzés adatok frissítése az összes elérhető forrásból"
 
 #: mainwindow.cpp:613
 msgid "Show Grou&p View"
@@ -3082,15 +2989,15 @@ msgid ""
 "down significantly. Do you want to save the images separately in Tellico's "
 "data directory to improve performance?</p><p>Your choice can always be "
 "changed in the configuration dialog.</p></qt>"
-msgstr ""
+msgstr "<qt><p>Sok képet tartalmazó fájl ment, mely a Tellico működését jelentősen lelassítja. El akarja menteni képeket külön a Tellico adat könyvtárába a teljesítmény növelése érdekében?</p><p>Választását megváltoztathatja a beállítások között. </p></qt>"
 
 #: mainwindow.cpp:1180
 msgid "Save Images Separately"
-msgstr ""
+msgstr "Képen mentése külön"
 
 #: mainwindow.cpp:1183
 msgid "Save Images in File"
-msgstr ""
+msgstr "Képek mentése a fájlban"
 
 #: mainwindow.cpp:1216
 msgid "Saving file with a new filename..."
@@ -3156,9 +3063,8 @@ msgid "Import File"
 msgstr "Fájl importálása..."
 
 #: mainwindow.cpp:1801
-#, fuzzy
 msgid "Import Directory"
-msgstr "Fájl importálása..."
+msgstr "Könyvtár importálása..."
 
 #: mainwindow.cpp:1891
 msgid "Exporting data..."
@@ -3207,7 +3113,7 @@ msgstr ""
 #: mainwindow.cpp:2297
 #, c-format
 msgid "Update entry data from %1"
-msgstr ""
+msgstr "Adatok frissítése %1 helyről"
 
 #: filehandler.cpp:147
 #, c-format
@@ -3215,8 +3121,7 @@ msgid "Tellico is unable to load the image - %1."
 msgstr "Nem sikerült a(z) %1 fájl betöltése."
 
 #: filehandler.cpp:161
-msgid ""
-"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Egy \"%1\" nevű fájl már létezik. Felül akarja írni?"
 
 #: filehandler.cpp:164
@@ -3261,7 +3166,6 @@ msgid "&Copy Entries"
 msgstr "Bejegyzések &másolása"
 
 #: controller.cpp:487
-#, fuzzy
 msgid "&Update Entries"
 msgstr "Bejegyzések szerkesztése"
 
@@ -3341,7 +3245,7 @@ msgstr "Ikonok"
 
 #: main.cpp:46
 msgid "Code examples and general inspiration"
-msgstr ""
+msgstr "Példa kódok és általános segítség"
 
 #: collectionfieldsdialog.cpp:56
 msgid "Collection Fields"
@@ -3425,8 +3329,7 @@ msgstr "A <i>Kijelölés</i> egy egyszerű igen / nem érték."
 
 #: collectionfieldsdialog.cpp:139
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
-msgstr ""
-"A <i>Szám</i> azt jelenti, hogy a mező csak szám értéket tartalmazhat."
+msgstr "A <i>Szám</i> azt jelenti, hogy a mező csak szám értéket tartalmazhat."
 
 #: collectionfieldsdialog.cpp:140
 msgid ""
@@ -3443,8 +3346,7 @@ msgid "An <i>Image</i> field holds a picture. "
 msgstr "A <i>Kép</i> mező képeket tárol."
 
 #: collectionfieldsdialog.cpp:143
-msgid ""
-"A <i>Date</i> field can be used for values with a day, month, and year. "
+msgid "A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr "A <i>Dátum</i> év, hónap, nap adatot tárol."
 
 #: collectionfieldsdialog.cpp:144
@@ -3475,8 +3377,7 @@ msgstr "Kategória:"
 
 #: collectionfieldsdialog.cpp:161
 msgid "The field category determines where the field is placed in the editor."
-msgstr ""
-"A mező kategória határozza meg azt, hol van a mező a szerkesztőben."
+msgstr "A mező kategória határozza meg azt, hol van a mező a szerkesztőben."
 
 #: collectionfieldsdialog.cpp:178
 msgid "Descr&iption:"
@@ -3494,7 +3395,6 @@ msgid "A&llowed:"
 msgstr "Engedélyezett:"
 
 #: collectionfieldsdialog.cpp:196
-#, fuzzy
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
 "are placed in a combo box. The possible value have to be seperated by a "
@@ -3540,8 +3440,7 @@ msgid "Allow auto-capitalization only"
 msgstr "Csak az automatikus nagybetűsítés engedélyezett"
 
 #: collectionfieldsdialog.cpp:219
-msgid ""
-"This option allows the field to be capitalized, but not specially formatted."
+msgid "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 "Ez a beállítás engedélyezi a mező nagybetűsítését, de nem a "
 "speciális formázását."
@@ -3603,8 +3502,7 @@ msgid "Allow grouping"
 msgstr "Csoportosítás engedélyezése"
 
 #: collectionfieldsdialog.cpp:237
-msgid ""
-"If checked, this field may be used to group the entries in the group view."
+msgid "If checked, this field may be used to group the entries in the group view."
 msgstr ""
 "Ha kijelöli, a mezőt használja a csoport nézetben a bejegyzések "
 "csoportosításához."
@@ -3689,7 +3587,6 @@ msgstr ""
 "értéket."
 
 #: collectionfieldsdialog.cpp:902
-#, fuzzy
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "A táblázatok maximum 5 oszlopot tartalmazhatnak."
 
@@ -3736,19 +3633,17 @@ msgid "General Options"
 msgstr "Általános beállítások"
 
 #: configdialog.cpp:157
-#, fuzzy
 msgid "&Include images in data file"
-msgstr "Képek hozzáadása az archívumhoz"
+msgstr "Képek hozzáadása az adatfájlhoz"
 
 #: configdialog.cpp:158
 msgid ""
 "If checked, all images will be included in the data file, rather than saved "
 "separately in the Tellico data directory. Saving a lot of images in the data "
 "file cause Tellico to run more slowly."
-msgstr ""
+msgstr "Ha kijelöli, minden kép az adatfájlba kerül és nem külön mentődik el a Tellico adat könyvtárába. Több kép adatfájlban történő mentése a Tellico sokkal lassabb futását eredményezi."
 
 #: configdialog.cpp:165
-#, fuzzy
 msgid "&Reopen file at startup"
 msgstr "Fájl újbóli megnyitása a program indításakor"
 
@@ -3761,7 +3656,6 @@ msgstr ""
 "automatikusan betöltődik."
 
 #: configdialog.cpp:171
-#, fuzzy
 msgid "&Show \"Tip of the Day\" at startup"
 msgstr "Mutassa a \"Nap tippjét\" induláskor"
 
@@ -3774,7 +3668,6 @@ msgid "Formatting Options"
 msgstr "Formázási beállítások"
 
 #: configdialog.cpp:180
-#, fuzzy
 msgid "Auto capitalize &titles and names"
 msgstr "Címek és szerzők automatikusan nagybetűvel"
 
@@ -3785,7 +3678,6 @@ msgstr ""
 "íródnak."
 
 #: configdialog.cpp:186
-#, fuzzy
 msgid "Auto &format titles and names"
 msgstr "Címek és szerzők automatikus formázása"
 
@@ -3796,21 +3688,16 @@ msgstr ""
 "szerzőket."
 
 #: configdialog.cpp:195
-#, fuzzy
 msgid "No capitali&zation:"
 msgstr "Csak az automatikus nagybetűsítés engedélyezett"
 
 #: configdialog.cpp:204
-#, fuzzy
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
-msgstr ""
-"<qt>A vezetékneveknél használható előtagok listája. Többszörös "
-"értéket pontosvesszővel kell elválasztani.</qt>"
+msgstr "<qt>A vezetékneveknél használható előtagok listája. Többszörös értéket pontosvesszővel kell elválasztani.</qt>"
 
 #: configdialog.cpp:210
-#, fuzzy
 msgid "Artic&les:"
 msgstr "Névelők:"
 
@@ -3822,9 +3709,8 @@ msgid ""
 msgstr ""
 
 #: configdialog.cpp:226
-#, fuzzy
 msgid "Personal suffi&xes:"
-msgstr "Személyes adatok:"
+msgstr "&Személyi toldalék:"
 
 #: configdialog.cpp:232
 msgid ""
@@ -3835,9 +3721,8 @@ msgstr ""
 "értéket pontosvesszővel kell elválasztani.</qt>"
 
 #: configdialog.cpp:239
-#, fuzzy
 msgid "Surname &prefixes:"
-msgstr "Vezetéknév előtagjai:"
+msgstr "&Vezetéknév előtagjai:"
 
 #: configdialog.cpp:245
 msgid ""
@@ -3856,51 +3741,44 @@ msgid "Printing Options"
 msgstr "Nyomtatási beállítások"
 
 #: configdialog.cpp:263
-#, fuzzy
 msgid "&Format titles and names"
-msgstr "Címek és nevek formázása"
+msgstr "&Címek és nevek formázása"
 
 #: configdialog.cpp:267
-#, fuzzy
 msgid "&Print field headers"
-msgstr "Mező fejlécek nyomtatása"
+msgstr "&Mező fejlécek nyomtatása"
 
 #: configdialog.cpp:271
 msgid "Grouping Options"
 msgstr "Csoportosítási beállítások"
 
 #: configdialog.cpp:274
-#, fuzzy
 msgid "&Group the entries"
-msgstr "Bejegyzések csoportosítása"
+msgstr "&Bejegyzések csoportosítása"
 
 #: configdialog.cpp:278
 msgid "Image Options"
 msgstr "Kép beállítások"
 
 #: configdialog.cpp:284
-#, fuzzy
 msgid "Maximum image &width:"
-msgstr "Maximális kép szélesség:"
+msgstr "&Maximális kép szélesség:"
 
 #: configdialog.cpp:289
 msgid ""
 "The maximum width of the images in the printout. The aspect ration is "
 "preserved."
-msgstr ""
-"A nyomtatásnál a maximális kép szélesség. Az oldal arány rögzített."
+msgstr "A nyomtatásnál a maximális kép szélesség. Az oldal arány rögzített."
 
 #: configdialog.cpp:297
-#, fuzzy
 msgid "&Maximum image height:"
-msgstr "Maximális kép magasság:"
+msgstr "&Maximális kép magasság:"
 
 #: configdialog.cpp:302
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
-msgstr ""
-"A nyomtatásnál a maximális kép magasság. Az oldal arány rögzített."
+msgstr "A nyomtatásnál a maximális kép magasság. Az oldal arány rögzített."
 
 #: configdialog.cpp:316
 msgid "Templates"
@@ -3932,12 +3810,11 @@ msgstr "&Módosítás..."
 
 #: configdialog.cpp:374
 msgid "Move &Up"
-msgstr ""
+msgstr "&Felfele mozgatás"
 
 #: configdialog.cpp:376
-#, fuzzy
 msgid "Move &Down"
-msgstr "&Eltávolítás"
+msgstr "&Lefele mozgatás"
 
 #: configdialog.cpp:378
 msgid "Remo&ve"
@@ -4001,7 +3878,7 @@ msgstr "Játék gyűjtemény"
 
 #: collectionfactory.cpp:127
 msgid "File Catalog"
-msgstr ""
+msgstr "Fájl katalógus"
 
 #: collectionfactory.cpp:128
 msgid "Custom Collection"
@@ -4108,23 +3985,19 @@ msgid "Click to start or stop the search"
 msgstr "Kattintson a keresés elindításához, leállításához"
 
 #: fetchdialog.cpp:110
-#, fuzzy
 msgid "&Multiple ISBN/UPC search"
 msgstr "&Többszörös ISBN keresés"
 
 #: fetchdialog.cpp:111
-#, fuzzy
 msgid "Check this box to search for multiple ISBN or UPC values."
-msgstr "Jelölje ki a többszörös ISBN értékek kereséséhez."
+msgstr "Jelölje ki a többszörös ISBN vagy UPC értékek kereséséhez."
 
 #: fetchdialog.cpp:114
-#, fuzzy
 msgid "Edit List..."
-msgstr "ISBN lista keresése..."
+msgstr "Lista szerkesztése..."
 
 #: fetchdialog.cpp:116
-msgid ""
-"Click to open a text edit box for entering or editing multiple ISBN values."
+msgid "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr ""
 "Kattintson a szöveg szerkesztési ablak kinyitásához, ahol a "
 "többszörös ISBN értékeket megadhatja, vagy megváltoztathatja."
@@ -4190,27 +4063,23 @@ msgstr "%1 feldolgozása..."
 
 #: fetchdialog.cpp:377
 msgid "No Internet sources are available for your current collection type."
-msgstr ""
-"A jelenlegi gyűjteméyn típusához nincs elérhető internet forrás."
+msgstr "A jelenlegi gyűjteméyn típusához nincs elérhető internet forrás."
 
 #: fetchdialog.cpp:440
-#, fuzzy
 msgid "Edit ISBN/UPC Values"
-msgstr "ISBN értékek szerkesztése"
+msgstr "ISBN/UPC értékek szerkesztése"
 
 #: fetchdialog.cpp:444
-#, fuzzy
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
-msgstr "<qt>Soronként egy ISBN érték megadása.</qt>"
+msgstr "<qt>Soronként egy ISBN vagy UPC érték megadása.</qt>"
 
 #: fetchdialog.cpp:450
 msgid "&Load From File..."
 msgstr "Betöltés fájlból..."
 
 #: fetchdialog.cpp:451
-#, fuzzy
 msgid "<qt>Load the list from a text file.</qt>"
-msgstr "<qt>Szöveg fájlból ISBN lista betöltése.</qt>"
+msgstr "<qt>Lista betöltése egy szöveg fájlból.</qt>"
 
 #: fetchdialog.cpp:470
 msgid ""
@@ -4275,12 +4144,10 @@ msgstr "Létrehozás"
 
 #: reportdialog.cpp:106
 msgid "Select a report template and click <em>Generate</em>."
-msgstr ""
-"Válassza ki a riport sablont, majd kattinson a <em>Létrehozásra</em>."
+msgstr "Válassza ki a riport sablont, majd kattinson a <em>Létrehozásra</em>."
 
 #: reportdialog.cpp:107
-msgid ""
-"Some reports may take several seconds to generate for large collections."
+msgid "Some reports may take several seconds to generate for large collections."
 msgstr ""
 "Nagy méretű gyűjtemény esetén néhány riport létrehozása hosszabb "
 "időt is igénybe vehet."
@@ -4317,7 +4184,7 @@ msgstr "Gyűjtemény eszköztár"
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr "Marcel Hilzinger, Csaba Zakarias"
+msgstr "Marcel Hilzinger, Zakariás Csaba"
 
 #: _translatorinfo.cpp:3
 msgid ""
@@ -4462,17 +4329,15 @@ msgstr ""
 msgid ""
 "<p>...that in the Detailed View, you can press a letter on the\n"
 "keyboard to skip to the next entry that starts with that letter.</p>\n"
-msgstr ""
+msgstr "<p>...a Részletes nézetben nyomjon meg egy betűt a billentyűzeten az ezzel a betűvel kezdődő következő bejegyzésre ugráshoz.</p>\n"
 
 #: xslt.cpp:3
-#, fuzzy
 msgid "This template is meant for music collections only."
-msgstr "Új zene gyűjtemény létrehozása"
+msgstr "Ez a sablon csak zene gyűjteményhez használható."
 
 #: xslt.cpp:5
-#, fuzzy
 msgid "Total:"
-msgstr "&Cím:"
+msgstr "Teljes:"
 
 #: xslt.cpp:9
 msgid ""
@@ -4487,9 +4352,8 @@ msgid ""
 msgstr "Tömörített XSL sablon"
 
 #: xslt.cpp:14 xslt.cpp:43
-#, fuzzy
 msgid "This template is meant for video collections only."
-msgstr "Új film gyűjtemény létrehozása"
+msgstr "Ez a sablon csak videó gyűjteményhez használható."
 
 #: xslt.cpp:16
 msgid ""
@@ -4566,38 +4430,8 @@ msgid ""
 msgstr "Oszlop nézet XSL sablon"
 
 #: xslt.cpp:42
-#, fuzzy
 msgid ""
 "_: Tri-Column XSL Template\n"
 "Tri-Column"
-msgstr "Oszlop nézet XSL sablon"
+msgstr "3 oszlopos XSL sablon"
 
-#~ msgid "Scanning CDDB cache files..."
-#~ msgstr "CDDB gyorstár fájlok átvizsgálása..."
-
-#~ msgid "Collection &type: "
-#~ msgstr "Gyűjtemény típusa:"
-
-#~ msgid "Save Entries"
-#~ msgstr "Bejegyzések mentése"
-
-#~ msgid ""
-#~ "_: Save (Entry Title)\n"
-#~ "Save %1"
-#~ msgstr "Mentés"
-
-#~ msgid ""
-#~ "Tellico currently supports five source types: Amazon.com, IMDB, z39.50, "
-#~ "Entrez, and external applications."
-#~ msgstr ""
-#~ "A Tellcio jelenleg az alábbi öt forrás típust támogatja: Amazon.com, "
-#~ "IMDB, z39.50, Entrez és külső alkalmazások."
-
-#~ msgid ""
-#~ "The password will be saved in plain text in the Tellico configuration file."
-#~ msgstr ""
-#~ "A jelszót a Tellico a beállítási fájljában nyílt szövegként menti "
-#~ "el."
-
-#~ msgid "Enable/disable the statusbar"
-#~ msgstr "Állapotsor be/kikapcsolása"

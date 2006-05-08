@@ -43,7 +43,7 @@ using Tellico::Data::Document;
 Document* Document::s_self = 0;
 
 Document::Document() : QObject(), m_coll(0), m_isModified(false),
-    m_loadAllImages(false), m_validFile(false), m_importer(0), m_running(false) {
+    m_loadAllImages(false), m_validFile(false), m_importer(0), m_cancelImageWriting(false) {
   newDocument(Collection::Book);
 }
 
@@ -124,15 +124,13 @@ bool Document::openDocument(const KURL& url_) {
 //    slotSetModified(true);
 //  }
   if(m_importer->hasImages()) {
-    m_running = true;
+    m_cancelImageWriting = false;
     QTimer::singleShot(500, this, SLOT(slotWriteAllImages()));
   }
   return true;
 }
 
 bool Document::saveModified() {
-  bool wasRunning = m_running;
-  m_running = false;
   bool completed = true;
 
   if(m_isModified) {
@@ -154,7 +152,6 @@ bool Document::saveModified() {
       case KMessageBox::Cancel:
       default:
         completed = false;
-        m_running = wasRunning;
         break;
     }
   }
@@ -177,6 +174,7 @@ bool Document::saveDocument(const KURL& url_) {
   // the user changed the imageInFile setting from Yes to No, in which
   // case saving will over write the old file that has the images in it!
   if(!includeImages) {
+    m_cancelImageWriting = false;
     slotWriteAllImages(ImageFactory::DataDir);
   }
   ProgressManager::self()->setProgress(this, 80);
@@ -221,7 +219,7 @@ void Document::deleteContents() {
     m_coll->clear();
   }
   m_coll = 0; // old collection gets deleted as a KSharedPtr
-  m_running = false;
+  m_cancelImageWriting = true;
 }
 
 void Document::appendCollection(CollPtr coll_) {
@@ -346,7 +344,7 @@ void Document::replaceCollection(CollPtr coll_) {
     m_coll->clear();
   }
   m_coll = coll_;
-  m_running = false;
+  m_cancelImageWriting = true;
   // CollectionCommand takes care of calling Controller signals
 }
 
@@ -506,8 +504,8 @@ void Document::slotWriteAllImages(int cacheDir_) {
   StringSet images;
   Data::EntryVec entries = m_coll->entries();
   Data::FieldVec imageFields = m_coll->imageFields();
-  for(Data::EntryVec::Iterator entry = entries.begin(); m_running && entry != entries.end(); ++entry) {
-    for(Data::FieldVec::Iterator field = imageFields.begin(); m_running && field != imageFields.end(); ++field) {
+  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+    for(Data::FieldVec::Iterator field = imageFields.begin(); field != imageFields.end() && !m_cancelImageWriting; ++field) {
       id = entry->field(field);
       if(id.isEmpty() || images.has(id)) {
         continue;
@@ -522,6 +520,8 @@ void Document::slotWriteAllImages(int cacheDir_) {
     }
     ++j;
   }
+
+  m_cancelImageWriting = false;
 }
 
 bool Document::pruneImages() {

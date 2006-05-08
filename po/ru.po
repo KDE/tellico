@@ -1,20 +1,19 @@
 # translation of ru.po to Russian
-# translation of ru.po to
-# Copyright (C) 2006 Free Software Foundation, Inc.
-# , 2006.
 # Калимуллин Артур <kalimullin@gmail.com>, 2006.
 # Kalimullin Artur <kalimullin@gmail.com>, 2006.
+# translation of ru.po to
+# Copyright (C) 2006 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "POT-Creation-Date: 2006-03-04 21:59-0800\n"
-"PO-Revision-Date: 2006-03-10 15:43+0500\n"
+"PO-Revision-Date: 2006-05-06 09:44+0600\n"
 "Last-Translator: Kalimullin Artur <kalimullin@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: cite/actionmanager.cpp:75
 msgid "Creating citations..."
@@ -46,7 +45,7 @@ msgstr ""
 
 #: cite/openoffice.cpp:187
 msgid "Pipe"
-msgstr "Трубка"
+msgstr "Канал"
 
 #: cite/openoffice.cpp:189
 msgid "TCP/IP"
@@ -497,12 +496,15 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair"
 
 #: collections/coincollection.cpp:96
 msgid ""
 "_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
+msgstr "PCGS,NGC,ANACS,ICG,ASA,PCIG,ASA,PCI"
 
 #: collections/coincollection.cpp:98
 msgid "Grading Service"
@@ -882,7 +884,7 @@ msgstr "Цветной"
 
 #: collections/videocollection.cpp:179
 msgid "Director's Cut"
-msgstr "Режиссерский монтаж"
+msgstr "Режиссерская версия"
 
 #: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:343
 msgid "Plot Summary"
@@ -4353,12 +4355,19 @@ msgid ""
 "<p>Any other field which allows multiple values should be entered the\n"
 "same way. with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
+"<p>...что если книга имеет больше, чем одного автора, то вам следует разделять\n"
+"точкой с запятой (;). Таким образом, Tellico будет разделять их имена.</p>\n"
+"<p>Любое другое поле также поддерживает эту функцию. Для этого вам следует\n"
+"разделять каждые значения точкой с запятой (;).\n"
+"Например: Пушкин;Гоголь.</p>\n"
 
 #: tips.cpp:11
 msgid ""
 "<p>...that you can change which fields are shown in the list view by\n"
 "right-clicking on the column header.\n"
 msgstr ""
+"<p>...что вы можете выбрать какие поля следует показывать в списке записей,\n"
+"кликнув правой кнопкой мыши на заголовке \"таблицы\".\n"
 
 #: tips.cpp:16
 msgid ""
@@ -4368,6 +4377,9 @@ msgid ""
 "position of the field in the list, which affects the placement in the entry\n"
 "editor.</p>\n"
 msgstr ""
+"<p>...что вы можете добавлять, редактировать или удалять поля в коллекции,\n"
+"используя Редактор полей. Кнопки стрелок позволяют вам менять позицию полей в списке,\n"
+"которая влияет на расстановку в Редакторе записей.</p>\n"
 
 #: tips.cpp:23
 msgid ""
@@ -4379,6 +4391,11 @@ msgid ""
 "\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
 "have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
 msgstr ""
+"<p>...что если вы хотите отфильтровать записи по полю \"Выбор да/нет\",\n"
+"то должно использоваться значение \"да\". Например, если вы хотите посмотреть, какие детективы вы ещё не читали,\n"
+"нажмите кнопку \"Соответствует всему следующему\",\n"
+"установите первое правило на \"Жанр\"\n"
+"\"содержит\" \"Детектив\" (без кавычек) и второе правило на \"Прочитана\" \"Не содержит\" \"Да\" (без кавычек).</p>\n"
 
 #: tips.cpp:33
 msgid ""
@@ -4387,24 +4404,32 @@ msgid ""
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
 "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
 msgstr ""
+"<p>...что если в быстром фильтре используется символ, не входящий в слова (напр., ^)\n"
+"текст интерпретируется как регулярное выражение.</p>\n"
+"<p>Например, чтобы посмотреть только книги, которые написали Пушкин и Гоголь,\n"
+"введите \"Пушкин|Гоголь\" (без кавычек) в поле быстрого фильтра.</p>\n"
 
 #: tips.cpp:40
 msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
 msgstr ""
+"<p>...что за один раз вы можете отредактировать больше, чем одно поле.\n"
+"Для этого выделите несколько полей, зажимая клавиши Shift или Ctrl.</p>\n"
 
 #: tips.cpp:45
 msgid ""
 "<p>...that you can convert an existing book collection to a bibliography,\n"
 "which can then be exported to bibtex or Bibtexml format.</p>\n"
 msgstr ""
+"<p>...что вы можете конвертировать текущую коллекцию книг в библиографию,\n"
+"которая может быть экспортирована в формат Bibtex или Bibtexml.</p>\n"
 
 #: tips.cpp:50
 msgid ""
 "<p>...that you can add, edit, and delete string macros for "
 "bibliographies.</p>\n"
-msgstr ""
+msgstr "<p>...что вы можете добавлять, редактировать и удалять строковые макросы для библиографий.</p>\n"
 
 #: tips.cpp:54
 msgid ""
@@ -4414,6 +4439,8 @@ msgid ""
 "editors\n"
 "to be sorted or printed together, for example.</p>\n"
 msgstr ""
+"<p>...что если более чем одно поле форматируется как \"имя\", то в коллекцию\n"
+"добавляется дополнительная группа \"Люди\", например, для сортировки и печати вместе.</p>\n"
 
 #: tips.cpp:60
 msgid ""
@@ -4422,16 +4449,21 @@ msgid ""
 "CSS\n"
 "within the stylesheet governs things like the font, the margins, etc.</p>\n"
 msgstr ""
+"<p>...что вы можете менять внешний вид, печатаемых отчетов, редактируя\n"
+"файл <tt>tellico-printing.xsl</tt>. Этот файл создает HTML и CSS\n"
+"с такими элементами как шрифт, размер и т.д. </p>\n"
 
 #: tips.cpp:66
 msgid ""
 "<p>...that you can import using any generic XSL stylesheet which\n"
 "outputs a valid Tellico XML file.</p>\n"
 msgstr ""
+"<p>...что вы можете импортировать, используя стандартный\n"
+"лист стилей XSL, на выходе получая правильный файл Tellico XML.</p>\n"
 
 #: tips.cpp:71
 msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
-msgstr ""
+msgstr "<p>...что двойной щелчок на записи открывает редактор записей.</p>\n"
 
 #: tips.cpp:75
 msgid ""
@@ -4439,12 +4471,16 @@ msgid ""
 "as\n"
 "&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
 msgstr ""
+"<p>...что в любое поле типа \"Большой текст\" вы можете добавлять теги HTML, такие как \n"
+"&lt;b&gt;жирный шрифт&lt;/b&gt; или &lt;i&gt;курсивный&lt;/i&gt;.</p>\n"
 
 #: tips.cpp:80
 msgid ""
 "<p>...that in the Detailed View, you can press a letter on the\n"
 "keyboard to skip to the next entry that starts with that letter.</p>\n"
 msgstr ""
+"<p>...что в подробном виде вы можете нажать кнопку буквы на клавиатуре для\n"
+"перехода к записи, начинающейся с этой буквы.</p>\n"
 
 #: xslt.cpp:3
 msgid "This template is meant for music collections only."

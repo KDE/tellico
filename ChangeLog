@@ -1,3 +1,15 @@
+2006-05-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.1.6.
+
+2006-05-04  Regis Boudin
+
+	* Added French documentation.
+
+2006-05-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that prevented some images from being written to data directory.
+
 2006-04-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with multiple ISBN search for z29.50.

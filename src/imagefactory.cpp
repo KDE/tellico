@@ -152,7 +152,7 @@ const Tellico::Data::Image& ImageFactory::addCachedImage(const QString& id_, Cac
 }
 
 bool ImageFactory::copyImage(const QString& id_, const KURL& targetDir_, bool force_) {
-//  myLog() << "ImageFactory::copyImage() - target = " << targetDir_.url() << id_ << endl;
+  myLog() << "ImageFactory::copyImage() - target = " << targetDir_.url() << id_ << endl;
   if(targetDir_.isEmpty()) {
     myDebug() << "ImageFactory::copyImage() - empty target dir!" << endl;
     return false;
@@ -174,7 +174,7 @@ bool ImageFactory::writeImage(const QString& id_, CacheDir dir_) {
   if(id_.isEmpty()) {
     return false;
   }
-//  myLog() << "ImageFactory::writeImage() - id = " << id_ << endl;
+  myLog() << "ImageFactory::writeImage() - id = " << id_ << endl;
 
 //  myDebug() << "ImageFactory::writeCachedImage() - " << id_ << endl;
 

@@ -1958,7 +1958,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=tellico
- VERSION=1.1.5
+ VERSION=1.1.6
 
 
 cat >>confdefs.h <<_ACEOF
@@ -29173,6 +29173,8 @@ done
 
           ac_config_files="$ac_config_files doc/en/Makefile"
 
+          ac_config_files="$ac_config_files doc/fr/Makefile"
+
           ac_config_files="$ac_config_files icons/Makefile"
 
           ac_config_files="$ac_config_files po/Makefile"
@@ -29797,6 +29799,7 @@ do
   "admin/Makefile" ) CONFIG_FILES="$CONFIG_FILES admin/Makefile" ;;
   "doc/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
   "doc/en/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/en/Makefile" ;;
+  "doc/fr/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/fr/Makefile" ;;
   "icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES icons/Makefile" ;;
   "po/Makefile" ) CONFIG_FILES="$CONFIG_FILES po/Makefile" ;;
   "src/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;

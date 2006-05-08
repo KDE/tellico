@@ -1,0 +1,448 @@
+<chapter id="hacking">
+<title>Hacking &appname;</title>
+
+<para>
+Suivant l'esprit du Logiciel Libre, vous pouvez modifier &appname; autant que
+vous le désirez. Il devrait être très simple d'écrire des scripts pour importer,
+exporter ou modifier des données.
+Ce chapitre vous donne plus d'informations sur ce sujet.
+</para>
+
+<sect1 id="file-format">
+<title>Format de fichiers</title>
+
+<para>
+Le format de fichier par défaut de &appname; est une archive zip, normallement
+avec une extension de fichier en <literal role="extension">.tc</literal>.
+A l'intérieur de l'archive se trouve un fichier
+<filename>tellico.xml</filename>.
+Les images peuvent être placées dans le répertoire <filename>images/</filename>
+dans l'archive, ou être incluses directement dans le flux &xml; encodées au
+format base64. Les images peuvent également être enregistrées dqns le repertoire
+de données de l'application ; auquel cas elles ne sont pas du tout présentes
+dans le fichier de données.
+&appname; peut également charger le fichier &xml; directement; non compressé.
+</para>
+
+<sect2 id="xml-format">
+<title>Données &xml;</title>
+
+<para>
+</para>
+
+<sect3 id="coll-xml-data">
+<title>Collection</title>
+<programlisting>
+<![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="9">
+ <collection title="My Books" type="2">
+ </collection>
+</tellico>
+]]>
+</programlisting>
+
+<para>
+Le fichier commence par la déclaration et l'encodage &xml; requis, suivis par 
+le type de document ("doctype"). Quand un nouveau champs est ajouté ou une
+propriété aditionelle attribuée aux champs par défaut, la version de DTD du
+doctype est incrémentée.
+&appname; est toujours capable d'ouvrir et lire les versions de DTD
+précédentes, mais sauvegarde les fichiers dans la version courante. 
+La localisation DTD pointe vers le ficher DTD lui-même.
+</para>
+
+<para>
+L'élément racine est un élément <markup>&lt;tellico&gt;</markup>, contenant la
+déclaration de l'espace de nommage par défaut et la version de la syntaxe du
+fichier, qui devraient toujours etre identiques à ceux de la DTD.
+</para>
+
+<para>
+L'élément <markup>&lt;tellico&gt;</markup> contient un élément 
+<markup>&lt;collection&gt;</markup>.
+Les collections multiples sont ignorées pour le moment. L'attribut
+<markup>title</markup> contient le nom de la collection, alors que l'attribut
+<markup>type</markup> specifie quel type d'entrées est contenu dans la
+collection. La liste des types disponibles est disponible dans
+<link linkend="collection-type-values">une autre section</link>. Un attribut
+optionnel <markup>entryTitle</markup> peut être utilisé pour spécifier le nom
+des entrées dans une collection personnalisée, et devrait être au pluriel.
+</para>
+</sect3>
+
+<sect3 id="fields-xml-data">
+<title>Champs</title>
+
+<programlisting>
+<![CDATA[
+  <fields>
+   <field flags="8" title="Title" category="General" format="1" type="1" name="title" />
+   <field flags="7" title="Author" category="General" format="2" type="1" name="author" />
+   <field flags="2" title="Binding" category="General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="4" type="3" name="binding" />
+   <field flags="6" title="Publisher" category="Publishing" format="0" type="1" name="publisher" />
+   <field flags="4" title="Edition" category="Publishing" format="0" type="1" name="edition" />
+   <field flags="3" title="Copyright Year" category="Publishing" format="4" type="6" name="cr_year" />
+   <field flags="2" title="Publication Year" category="Publishing" format="4" type="6" name="pub_year" />
+   <field flags="0" title="ISBN#" category="Publishing" format="4" type="1" name="isbn" description="International Standard Book Number" />
+   <field flags="7" title="Genre" category="Classification" format="0" type="1" name="genre" />
+   <field flags="7" title="Keywords" category="Classification" format="0" type="1" name="keyword" />
+   <field flags="0" title="Front Cover" category="Front Cover" format="4" type="10" name="cover" />
+   <field flags="0" title="Comments" category="Personal" format="4" type="1" name="comments" />
+  </fields>
+]]>
+</programlisting>
+
+<para>
+Tous les champs sont définis dans un élément <markup>&lt;fields&gt;</markup>,
+qui doit être unique. Toutes les informations d'un champ, à l'exception des
+propriétés étendues, sont incluses dans l'élément
+<markup>&lt;field&gt;</markup>. Les valeurs possibles pour les attributs
+<markup>flags</markup>, <markup>format</markup>, et <markup>type</markup> sont
+données dans une <link linkend="field-type-values">section suivante</link>.
+</para>
+
+<para>
+Un élément <markup>&lt;field&gt;</markup> avec un attribut "name" égal à
+<emphasis>_default</emphasis> indique à &appname; d'inclure tous les champs
+par défaut de ce type de collection.
+</para>
+</sect3>
+
+<sect3 id="entries-xml-data">
+<title>Entrées</title>
+
+<programlisting>
+<![CDATA[
+  <entry>
+   <title>Le langage C++, édition revue et corrigée</title>
+   <authors>
+    <author>Stroustrup, Bjarne</author>
+   </authors>
+   <publisher>Pearson Education</publisher>
+   <edition>3rd</edition>
+   <pub_year>2003</pub_year>
+   <isbn>2-7440-7003-3</isbn>
+   <genres>
+    <genre>Non-Fiction</genre>
+   </genres>
+   <keywords>
+    <keyword>Programmation et langages</keyword>
+    <keyword>Informatique et Internet</keyword>
+   </keywords>
+   <cover>cf65a2f023b6cb9e9233323dca10ac7c.jpeg</cover>
+  </entry>
+]]>
+</programlisting>
+
+<para>
+Pour chaque champs de la collection, un élément <markup>&lt;entry&gt;</markup>
+peut contenir un élément dont le nom est identique à celui du champs.
+Si des valeurs multiples sont possibles pour ce champ, la lettre
+<emphasis>s</emphasis> est ajoutée au nom du champ pour créer un élément.
+Chaque valeur est ajoutée en tant que descendant de cet élément, comme c'est le
+cas pour les champs author, genre et keyword ci-dessus.
+</para>
+
+<para>
+En conséquence, si de nouveaux champs sont ajoutés à la collection, le fichier
+de données ne sera plus conforme à la DTD. Cependant, &appname; utilise un
+analyseur &xml; ne vérifiant pas la validité des champs, ceux-ci ne posent donc
+pas problème.
+</para>
+</sect3>
+
+<sect3 id="images-xml-data">
+<title>Images</title>
+<programlisting>
+<![CDATA[
+  <images>
+   <image width="111" format="JPEG" height="140" id="cf65a2f023b6cb9e9233323dca10ac7c.jpeg" />
+  </images>
+]]>
+</programlisting>
+
+<para>
+A l'intérieur de chaque élément <markup>&lt;images&gt;</markup> apparait chaque
+image référencée par une entrée, ainsi que les attributs décrivant la taille
+de l'image, son format et son numéro d'identification. Si l'image est contenue
+dans le fichier Zip, l'élément est vide. Dans le cas contraire les données de
+l'image peuvent être contenues dans le flux &xml; sous forme de text encodé au
+format base64.
+</para>
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="collection-type-values">
+<title>Valeurs des types de collections</title>
+
+<para>
+Le type de collection est donné dans l'attribut "type" de l'élément
+"collection". La valeur est égale à celle de l'enum <type>Type</type> défini
+dans <filename>src/collection.h</filename>.
+</para>
+
+<table>
+<title>Valeurs des types de collections</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Type de collection</entry>
+<entry>Valeur</entry>
+</row>
+</thead>
+<tbody>
+<row><entry>Custom Collection</entry><entry>1</entry></row>
+<row><entry>Book Collection</entry><entry>2</entry></row>
+<row><entry>Video Collection</entry><entry>3</entry></row>
+<row><entry>Music Collection</entry><entry>4</entry></row>
+<row><entry>Bibliography</entry><entry>5</entry></row>
+<row><entry>Comic Book Collection</entry><entry>6</entry></row>
+<row><entry>Wine Collection</entry><entry>7</entry></row>
+<row><entry>Coin Collection</entry><entry>8</entry></row>
+<row><entry>Stamp Collection</entry><entry>9</entry></row>
+<row><entry>Trading Card Collection</entry><entry>10</entry></row>
+<row><entry>Video Game Collection</entry><entry>11</entry></row>
+<row><entry>File Catalog</entry><entry>12</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+
+</sect1>
+
+<sect1 id="field-type-values">
+<title>Valeurs des types de champs</title>
+
+<para>
+&appname; inclut tous les champs par défaut de la collection si le premier
+élément est nommé <emphasis>_default</emphasis>. Pour les champs
+<emphasis>Paragraphe</emphasis>, <emphasis>Tableau</emphasis> ou
+<emphasis>Image</emphasis>, la catégorie du champ doit être identique au titre
+du champ.
+</para>
+
+<para>
+Le type de champ est donné dans l'attribut type de l'élément.
+La valeur est égale à celle de l'enum <type>FieldType</type> défini dans
+<filename>src/field.h</filename>. Le type <emphasis>Lecture seule</emphasis>
+était prévu pour pour les champs devant être conservés ; mais ne pouvant
+pas être modifiés par l'utilisateur, tels que les champs ajoutés lors de
+l'import d'une collection dans une autre format. Il n'est pas utilisé.
+</para>
+
+<table>
+<title>Valeurs des types de champs</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Type de champ</entry>
+<entry>Valeur</entry>
+</row>
+</thead>
+<tbody>
+<row><entry>Texte simple</entry><entry>1</entry></row>
+<row><entry>Paragraphe</entry><entry>2</entry></row>
+<row><entry>Choix</entry><entry>3</entry></row>
+<row><entry>Case à cocher</entry><entry>4</entry></row>
+<row><entry><emphasis>Lecture seule</emphasis></entry><entry>5</entry></row>
+<row><entry>Nombre</entry><entry>6</entry></row>
+<row><entry>URL</entry><entry>7</entry></row>
+<row><entry>Tableau à une colonne</entry><entry>8</entry></row>
+<row><entry>Tableau à deux colonnes</entry><entry>9</entry></row>
+<row><entry>Image</entry><entry>10</entry></row>
+<row><entry>Dépendant</entry><entry>11</entry></row>
+<row><entry>Date</entry><entry>12</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<para>
+Le champ peut avoir plusieurs options, données par la valeur d'un champ de bits
+dans l'attribut flags de l'élément du champ. L'option interdisant à
+l'utilisateur d'effacer un champ est prévue pour des données telles qu'une
+citation dans une entrée bibliographique.
+</para>
+
+<table>
+<title>Valeurs des options de champ</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Option de champ</entry>
+<entry>Valeur</entry>
+</row>
+</thead>
+<tbody>
+<row><entry>Autoriser des valeurs multiples</entry><entry><constant>0x01</constant></entry></row>
+<row><entry>Autoriser le regroupement</entry><entry><constant>0x02</constant></entry></row>
+<row><entry>Activer l'auto-complétion</entry><entry><constant>0x04</constant></entry></row>
+<row><entry><emphasis>Interdire l'effacement</emphasis></entry><entry><constant>0x08</constant></entry></row>
+</tbody>
+</tgroup>
+</table>
+
+<para>
+La mise en forme du champ est donnée dans l'attribut format de l'élément.
+<emphasis>Date</emphasis> n'est pas utilisé pour le moment. Le regroupement par
+<emphasis>Personne</emphasis> utilise tous les champs ayant une mise en forme
+de <emphasis>Nom</emphasis>.
+</para>
+
+<table>
+<title>Valeurs de mises en forme de champ</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Format de champ</entry>
+<entry>Valeur</entry>
+</row>
+</thead>
+<tbody>
+<row><entry>Capitales</entry><entry>0</entry></row>
+<row><entry>Title</entry><entry>1</entry></row>
+<row><entry>Nom</entry><entry>2</entry></row>
+<row><entry><emphasis>Date</emphasis></entry><entry>3</entry></row>
+<row><entry>Pas de mise en forme</entry><entry>4</entry></row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="hidden-options">
+<title>Options de configuration cachées</title>
+
+<para>
+&appname; dispose de certaines options de configuration qui ne sont pas visibles
+dans la &config-dialog;. Elles ne sont pas suffisament importantes pour charger
+la boite de dialogue avec plus d'options, mais puisqu'elles peuvent être utiles
+à certains utilisateurs, l'application les lit dans le fichier de configuration.
+</para>
+
+<para>
+Les paramètres de &appname; sont enregistrés dans un fichier du répertoire de
+l'utilisateur,
+<filename>$<envar>KDEHOME</envar>/share/config/tellicorc</filename>.
+Dans ce fichier; les paramètres sont rassemblés dans des groupes qui
+apparaissent avec un nom entre crochet, tel que [General Options].
+Pour ajouter un paramètre au groupe <emphasis>General Options</emphasis>,
+trouvez la ligne dans le fichier de configuration avec ce nom de groupe.
+S'il n'apparait pas, créez-le vous-même en ajoutant une ligne [General Options].
+Les paramètres peuvent alors être ajoutés sur les lignes suivantes.
+</para>
+
+<sect2 id="hidden-general-options">
+<title>[General Options]</title>
+
+<para>
+Ces paramètres doivent être placés dans le groupe
+<emphasis>General Options</emphasis>.
+</para>
+
+<sect3>
+<title>Max Icon Size</title>
+
+<para>
+La taille maximum des icones dans la &icon-view; peut être changée avec cette
+option. La valeur par défaut est 96, et peut être modifiée entre 32 et 128.
+</para>
+</sect3>
+
+<sect3>
+<title>Exemple</title>
+<informalexample>
+<para><userinput>Max Icon Size=72</userinput></para>
+</informalexample>
+</sect3>
+
+</sect2>
+
+<sect2 id="hidden-bibtex-options">
+<title>[Options - bibtex]</title>
+
+<para>
+Ces paramètres doivent être placés dans le groupe <emphasis>Options - bibtex</emphasis>.
+</para>
+
+<sect3>
+<title>lyxpipe</title>
+
+<para>
+Ce paramètre indique l'adresse lyxpipe pour envoyer les citations bibliographiques. Il ne doit pas inclure le suffixe <literal role="extension">.in</literal>.
+</para>
+</sect3>
+
+<sect3>
+<title>Exemple</title>
+<informalexample>
+<para><userinput>lyxpipe=$HOME/.lyx/lyxpipe</userinput></para>
+</informalexample>
+</sect3>
+</sect2>
+
+<sect2 id="hidden-export-options-pilotdb">
+<title>[Export Options - PilotDB]</title>
+
+<para>
+Ces paramètres doivent être placés dans le groupe <emphasis>Export Options - PilotDB</emphasis>.
+</para>
+
+<sect3>
+<title>Charset</title>
+
+<para>
+L'encodage des données exportées dans le fichier PilotDB peut être changé avec
+ce paramètre.
+La valeur par défaut est le jeu de caractères de la locale de l'utilisateur.
+</para>
+</sect3>
+
+<sect3>
+<title>Exemple</title>
+<informalexample>
+<para><userinput>Charset=Windows-1250</userinput></para>
+</informalexample>
+</sect3>
+</sect2>
+
+</sect1>
+
+<sect1 id="bibtex-translation">
+<title>Conversion de cqrqctères BibTeX</title>
+
+<para>
+Lorsque des fichiers BibTeX sont i,portés ou exportés, certains caractères sont
+convertis entre leur équivalent TeX et unicode. Ces tables de conversions sont
+contenues dans le fichier <filename>bibtex-translation.xml</filename>, se
+trouvant dans le repertoire de données installées par le logiciel. Ces tables
+de conversion peuvent être modifiée librement.
+L'élément clef contient le caractère Unicode, et les chaines contiennent les
+équivalents TeX, qui peuvent être multiples.
+Le premier est celui utilisé lors des exports qu format BibTeX.
+</para>
+
+<programlisting>
+<![CDATA[
+  <key char="Ã">
+    <string>{\`A}</string>
+    <string>\`{A}</string>
+  </key>
+]]>
+</programlisting>
+
+</sect1>
+
+<sect1 id="xslt-tricks">
+<title>Astuces XSLT</title>
+
+<para>
+Quelques astuces pour écrire du XSLT pour traiter les données &xml; de &appname; : (à écrire).
+</para>
+</sect1>
+
+</chapter>

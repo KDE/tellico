@@ -90,8 +90,10 @@ bool TellicoZipExporter::exec() {
           continue;
         }
         const Data::Image& img = ImageFactory::imageById(id);
-        // if no image or is already writen, continue
+        // if no image, continue
         if(img.isNull()) {
+          kdWarning() << "TellicoZipExporter::exec() - no image found for " << fIt->title() << " field" << endl;
+          kdWarning() << "...for the entry titled " << it->title() << endl;
           continue;
         }
         QByteArray ba = img.byteArray();

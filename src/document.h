@@ -216,7 +216,7 @@ private:
   KURL m_url;
   bool m_validFile : 1;
   QGuardedPtr<Import::TellicoImporter> m_importer;
-  bool m_running : 1;
+  bool m_cancelImageWriting : 1;
 };
 
   } // end namespace

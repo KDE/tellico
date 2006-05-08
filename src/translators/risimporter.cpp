@@ -138,7 +138,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
     Data::FieldPtr f = m_coll->fieldByName(it->name());
     if(!f) {
       f = it->clone();
-      m_coll->addField(it->clone());
+      m_coll->addField(f);
     }
     f->setProperty(QString::fromLatin1("ris"), ris);
     risFields.insert(ris, f);

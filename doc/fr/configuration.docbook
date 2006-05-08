@@ -1,0 +1,400 @@
+<chapter id="configuration">
+<title>Configuration</title>
+
+
+<para>
+La <interface>Boite de dialogue de configuration</interface> contient toutes
+les options pour changer certains comportements par défaut de &appname;.
+</para>
+
+<para>
+Cliquer sur le bouton <guibutton>Appliquer</guibutton>
+<action>applique les modification immédiatement</action>,
+sans fermer la boite de dialogue, alors que le bouton <guibutton>OK</guibutton>
+<action>applique les changements et ferme la boite de dialogue</action>.
+<guibutton>Annuler</guibutton> ferme la boite de dialogue ; mais toutes les
+modifications déjà appliquées seront conservées.
+Le bouton <guibutton>Défaut</guibutton> <action>rétablit les options</action>
+de la page courante de la boite de dialogue à leurs valeurs par défaut, alors
+que <guibutton>Aide</guibutton> <action>ouvre &khelpcenter;</action> à la
+section relative du manuel de &appname;.
+</para>
+
+<para>
+Certains paramètres ne peuvent être modifiés qu'en éditant le fichier de
+configuration à la main. Voir les
+<link linkend="hidden-options">Options de configuration cachées</link>.
+</para>
+
+<sect1 id="general-options">
+<title><guilabel>Options Générales</guilabel></title>
+
+<screenshot>
+<screeninfo>Les options générales</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="general-options.png"/></imageobject>
+<textobject><phrase>La boite de dialogue d'options générales</phrase></textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+La boite de dialogue des <guilabel>options générales</guilabel> contrôle le
+comportement global. Les images peuvent être incluses dans le fichier de
+données ; ou enregistrées dans le répertoire de &appname;. De plus, lorsque
+&appname; est démarré, il peut automatiquement ouvrir le dernier fichier ouvert.
+La boite de dialogue de l'<guilabel>astuce du jour</guilabel> contient des
+astuces utiles sur l'utilisation de &appname; et apparaît au démarrage du
+programme. Vous pouvez lire quelques astuces puis désactiver la boite de
+dialogue.
+</para>
+
+<para>
+Les <guilabel>options de mise en forme</guilabel> contrôlent le niveau de mise
+en forme automatique effectué par &appname;. Des exemples sont disponibles dans
+la section<link linkend="field-formatting">Mise en forme des champs</link>.
+La mise en majuscules et la mise en forme sont des options distinctes, un champ
+pouvant être mis en majuscules sans que l'ordre des mots soit changé et
+inversement. La mise en forme automatique inclut les articles dans les titres,
+ainsi que les préfixes et suffixes des noms propres. Les valeurs sont
+insensibles à la casse et doivent être séparées par un point)virgule.
+</para>
+
+<para>
+Les règles de mise en forme suivent les standards anglais et peuvent être
+incompatibles avec d'autres langues. Les articles sont déplacés à la fin du
+titre, précédés d'une virgule. Les noms propres sont transformés pour placer
+le nom propre en premier, suivi d'une virgule et du prénom. Les suffixes, tels
+que Jr., sont conservés avec le nom propre. Les particules, telles que
+<emphasis>von</emphasis> ou <emphasis>de</emphasis>, sont conservées avec le
+nom propre ; mais sont ignorées lorsque les noms sont triés.
+</para>
+
+<informalexample><para><emphasis>John Q. von Public, III</emphasis> 
+deviendrait <emphasis>von Public, III, John Q.</emphasis> ; et
+<emphasis>Public</emphasis> serait utilisé pour le tri.</para></informalexample>
+
+<para>
+Seuls les particules en un seul mot sont gérées. Si un nom inclut
+<emphasis>de la</emphasis>, par exemple, <emphasis>de</emphasis> et
+<emphasis>la</emphasis> doivent être inclus dans la liste des particules.
+Les articles se finissant par une apostrophe sont également gérés pour le tri.
+</para>
+
+<note><para>Les données réelles contenues dans la collection
+<emphasis>ne sont pas</emphasis> modifiées, seul le texte affiché est affecté.
+Ainsi, les options de mise en forme peuvent être modifiées sans altérer les
+données de la collection.</para></note>
+
+</sect1>
+
+<sect1 id="printing-options">
+<title><guilabel>Options d'impression</guilabel></title>
+
+<para>
+&appname; utilise une feuille de style &xslt; pour générer du &html; ; puis le
+transmet au service d'impression de &kde;. Seuls les champs visibles dans la
+<link linkend="detailed-view">&detailed-view;</link> sont imprimés. De plus, si
+la collection a des filtres appliqués, seules les entrées visibles sont
+imprimées. Un message d'avertissement est affiché si un filtre est actif.
+</para>
+
+<screenshot>
+<screeninfo>La boîte de dialogue des options d'impression</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="print-options.png"/></imageobject>
+<textobject><phrase>La boîte de dialogue des options d'impression</phrase></textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+Les <guilabel>Options d'impression</guilabel> vous permettent de modifier
+certains aspects de la mise en forme lorsque vous imprimez une collection.
+Si <guilabel>Mettre en forme les titres et noms</guilabel> est coché, les champs
+sont <link linkend="field-formatting">mis en forme automatiquement</link>.
+Dans le cas contraire, elles sont imprimées telles qu'elles ont été saisies.
+</para>
+
+<para>
+La feuille de style d'impression par défaut affiche les valeurs des champs en
+colonnes. <guilabel>Imprimer les en-têtes des champs</guilabel> contrôle si les
+titres des champs sont imprimés au sommet des colonnes.
+</para>
+
+<para>
+A l'impression, les entrées sont triées de la même manière que dans la
+<link linkend="detailed-view">&detailed-view;</link>. Cependant, elles peuvent
+être groupées selon la <link linkend="group-view">&group-view;</link> à la place
+en utilisant l'option <guilabel>Grouper les entrés</guilabel>.
+</para>
+
+<para>
+Enfin, lorsque les champs contenant des images sont inclus à l'impression, les
+images peuvent être re-dimensionnées, tout en conservant leur rapport
+largeur/hauteur. La largeur et la hauteur maximales définissent les dimensions
+à ne pas dépasser, une image n'étant jamais agrandie.
+</para>
+</sect1>
+
+<sect1 id="template-options">
+<title><guilabel>Options des modèles</guilabel></title>
+
+<para>
+La <link linkend="entry-view">&entry-view;</link> utilise des modèles pour
+afficher les valeurs des champs. Vous pouvez définir un modèle différent pour
+chaque type de collection. Certains modèles, tels que ceux définis pour les 
+<emphasis>Albums</emphasis> ou les <emphasis>Vidéos</emphasis> sont spécifiques
+à un type de collection donné ; et un message d'erreur apparaîtra dans la
+&entry-view; s'ils sont utilisés pour d'autres types de collections.
+</para>
+
+<para>
+Les modèles additionnels peuvent être installés dans
+<filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/entry-templates/</filename>.
+</para>
+
+<screenshot>
+<screeninfo>La boîte de dialogue des options de modèles</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="template-options.png"/></imageobject>
+<textobject><phrase>La boîte de dialogue des options de modèles</phrase></textobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="data-sources-options">
+<title><guilabel>Options des sources d'informations</guilabel></title>
+
+<para>
+&appname; peut utiliser différentes sources pour importer des données, qui
+peuvent être configurées dans la boîte de dialogue des sources d'informations.
+Différents types de sources sont disponibles :
+les <link linkend="amazon-web-services"> Web Services Amazon.com</link>,
+<link linkend="imdb">Internet Movie Database</link>,
+les <link linkend="z3950">serveurs z39.50</link>,
+les <link linkend="sru">serveur SRU</link>,
+les <link linkend="entrez">bases de données Entrez (PubMed)</link>,
+<link linkend="yahoo">Yahoo! Audio Search</link>,
+<link linkend="animenfo">AnimeNfo.com</link>,
+<link linkend="ibs">Internet Bookshop Italia</link>, ainsi que les 
+<link linkend="externalexec">scripts ou applications externes</link>.
+</para>
+
+<screenshot>
+<screeninfo>La boîte de dialogue des sources d'informations</screeninfo>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="source-options.png"/></imageobject>
+<textobject><phrase>La boîte de dialogue des sources d'informations</phrase></textobject>
+</mediaobject>
+</screenshot>
+
+<para>
+De nouvelles sources peuvent être ajoutées en cliquant sur le bouton
+<guibutton>Ajouter...</guibutton>. Celles existantes peuvent aisément être
+modifiées ou supprimées, à l'aide des boutons <guibutton>Modifier...</guibutton>
+<guibutton>Supprimer</guibutton>.
+</para>
+
+<para>
+Certaines sources d'informations contiennent plus d'informations que les champs
+par défaut de &appname;. Ces autres champs sont affichés sur la droite de la
+boîte de dialogue. Si l'un de ces champs est coché, il est alors ajouté à la
+collection lorsqu'une entrée de cette source est ajoutée.
+</para>
+
+<sect2 id="amazon-web-services">
+<title>Amazon.com</title>
+
+<para>
+En utilisant les Services Web Amazon, &appname; peut chercher des informations
+sur six différents sites internationaux gérés par
+<ulink url="http://amazon.com">Amazon.com</ulink> : États Unis, Royaume Uni,
+Allemagne, Japon, France et Canada.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="amazon-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>
+Configurer chaque source Amazon.com nécessite trois paramètres : l'adresse du
+serveur, la taille de l'image et l'ID de l'associé. Certaines informations de
+<ulink url="http://amazon.com">Amazon.com</ulink> contiennent une image, telle
+que la couverture d'un livre ou la jaquette d'une vidéo. Cette image peut être
+télé-chargée en trois différentes tailles, en fonction du produit. Pour éviter
+qu'un trop grand nombre d'images ralentisse l'application, les images moyennes
+ou grandes ne sont pas recommandées. L'ID de l'associé doit être utilisée pour
+accéder aux Services Web Amazon.com et sont inclus dans les liens vers les
+produits, en accord avec les conditions d'utilisation des Services Web
+Amazon.com.
+</para>
+
+</sect2>
+
+<sect2 id="imdb">
+<title>Base de données de films sur Internet (IMDb)</title>
+
+<para>
+La <ulink url="http://www.imdb.com">base de données de films sur Internet (IMDb)</ulink>
+fournit des informations à propos des films et des vidéos. Quand une recherche
+est faite pour une <emphasis>personne</emphasis>, si plus d'un résultat est
+retourné, une boîte de dialogue est ouverte pour vous permettre de choisir la
+bonne référence. Les options de configuration concernent l'adresse du serveur
+web et si les images doivent être télé-chargées ou non. IMDb pouvant donner un
+nombre important de participants à un film, vous pouvez limiter ce nombre.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="z3950">
+<title>Serveurs z39.50</title>
+
+<para>
+Le <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html">protocole z39.50</ulink>
+est utilisé pour accéder à des bibliothèques et des fournisseurs d'informations
+bibliographiques à travers le Monde. Des listes de serveurs z39.50 publics sont
+<ulink url="http://www.indexdata.dk/targettest/">disponibles sur indexdata.dk</ulink>,
+entre autres. &appname; peut accéder à tous les serveurs z39.50 fournissant des
+données dans les formats <acronym>MODS</acronym>,
+<acronym>USMARC</acronym>/<acronym>MARC21</acronym>, ou
+<acronym>UNIMARC</acronym>, en utilisant la
+<ulink url="http://www.indexdata.dk/yaz/">bibliothèque yaz</ulink>.
+Une gestion limitée du format <acronym>GRS-1</acronym> est également disponible.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>
+Le port par défaut pour accéder à un serveur z39.50 est 210, mais certains
+serveurs peuvent en utiliser un différent. &appname; considère que le serveur
+utilise l'encodage de caractères MARC-8, sauf s'il est configuré autrement. Si
+un encodage de caractères incorrect est utilisé, un message d'erreur peut être
+affiché, ou l'import peut ne donner aucun résultat.
+</para>
+
+<para>
+Certains serveurs nécessitent un nom d'utilisateur et un mot de passe pour y
+accéder. &appname; peut utiliser et sauvegarder ce mot de passe ; mais soyez
+conscient qu'il sera écrit en clair dans le fichier de configuration de
+&appname; et ne sera pas en sécurité. Pour la plupart des serveurs publics, le
+nom d'utilisateur et le mot de passe peut être laissé vides.
+</para>
+
+</sect2>
+
+<sect2 id="sru">
+<title>Serveurs SRU</title>
+
+<para>
+SRU signifie
+<ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via URL</ulink>.
+Il d'un protocole de recherche pour Internet. Certaines bibliothèques
+l'utilisent pour permettre l'accès à leurs catalogues de données. Parmi
+celles-ci, la
+<ulink url="http://www.loc.gov/z3950/lcserver.html#oppr">bibliothèque du congrès américain</ulink>
+est probablement la plus connue.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect2>
+
+<sect2 id="entrez">
+<title>Bases de données Entrez</title>
+<para>
+<ulink url="http://www.ncbi.nlm.nih.gov/Entrez/">Entrez</ulink> est un système
+de recherche et de récupération d'informations, utilisé au centre national
+d'information sur la biotechnologie américain (National Center for
+Biotechnology Information, NCBI). La base de données Entrez la plus connue est
+<ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed">PubMed</ulink>,
+la base de données d'articles sur les sciences de la vie pour de nombreux
+journaux traitant de biologie. Pour le moment, la seule base de données Entrez
+gérée par &appname; est PubMed.
+</para>
+</sect2>
+
+<sect2 id="yahoo">
+<title>Recherche Yahoo! Audio</title>
+<para>
+Le service de recherche
+<ulink url="http://audio.search.yahoo.com">Yahoo! Audio</ulink> peut être
+utilisé pour chercher les informations sur les albums de musique.
+</para>
+</sect2>
+
+<sect2 id="animenfo">
+<title>AnimeNfo.com</title>
+<para>
+<ulink url="http://www.animenfo.com">AnimeNfo</ulink> est un site populaire
+d'informations sur l'animation japonaise.
+</para>
+</sect2>
+
+<sect2 id="ibs">
+<title>Internet Bookstore Italia</title>
+<para>
+<ulink url="http://ibs.it">IBS, ou Internet Bookstore Italia</ulink>, est un
+magasin en ligne italien, vendant des livres.
+</para>
+</sect2>
+
+<sect2 id="externalexec">
+<title>Scripts ou applications externes</title>
+<para>
+Pour importer plus facilement des données externes dans &appname;, il est
+possible d'utiliser des scripts ou applications externes en tant qu'interfaces
+de recherche. &appname; exécute une commande, et passe les termes recherchés en
+tant que paramètres de ligne de commande.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="externalexec-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>
+Le type de collection renvoyé par le script soit être configuré, ainsi que le
+format de données. Non seulement &appname; peut importer des données de scripts
+utilisant le
+<link linkend="file-format">format &xml; de &appname; par défaut</link> ; mais
+il peut également gérer d'autres formats tels que BibTeX.
+</para>
+
+<para>
+Le chemin complet de l'application doit être entré dans les options de source.
+L'application est exécutée avec les droits de l'utilisateur en cours, prenez
+donc garde à ne pas utiliser de script d'origine inconnue. Vérifiez que les
+boîtes à côté des clefs de recherche sont bien gérées par l'application, et
+entrez les options de la ligne de commande.La valeur cherchée est insérée à la
+place de <userinput>%1</userinput>.
+</para>
+
+<para>
+Pour mettre à jour des entrées déjà dans la collection, les dernières à cocher
+et de saisie de texte sont utilisées pour déterminer les options de ligne de
+commande. Les champs de l'entrée utilisés pour trouver une mise à jour doivent
+être saisis dans le même format que les champs de type
+<emphasis><link linkend="dependent">Dépendant</link></emphasis>.
+</para>
+</sect2>
+
+</sect1>
+
+</chapter>

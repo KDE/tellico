@@ -39,7 +39,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-subdir = doc/en
+subdir = doc/fr
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -351,7 +351,7 @@ imdb-options.png
 
 
 ####### kdevelop will overwrite this part!!! (end)############
-KDE_LANG = en
+KDE_LANG = fr
 KDE_DOCS = tellico
 CLEANFILES = *~
 #>- all: all-am
@@ -368,9 +368,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 #>- 	      exit 1;; \
 #>- 	  esac; \
 #>- 	done; \
-#>- 	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  doc/en/Makefile'; \
+#>- 	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  doc/fr/Makefile'; \
 #>- 	cd $(top_srcdir) && \
-#>- 	  $(AUTOMAKE) --gnu  doc/en/Makefile
+#>- 	  $(AUTOMAKE) --gnu  doc/fr/Makefile
 #>+ 12
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -380,10 +380,10 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  doc/en/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  doc/fr/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  doc/en/Makefile
-	cd $(top_srcdir) && perl admin/am_edit -padmin doc/en/Makefile.in
+	  $(AUTOMAKE) --gnu  doc/fr/Makefile
+	cd $(top_srcdir) && perl admin/am_edit -padmin doc/fr/Makefile.in
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -603,10 +603,10 @@ force-reedit:
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  doc/en/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  doc/fr/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  doc/en/Makefile
-	cd $(top_srcdir) && perl admin/am_edit -padmin doc/en/Makefile.in
+	  $(AUTOMAKE) --gnu  doc/fr/Makefile
+	cd $(top_srcdir) && perl admin/am_edit -padmin doc/fr/Makefile.in
 
 
 #>+ 21

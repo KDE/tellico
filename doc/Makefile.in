@@ -325,7 +325,7 @@ x_libraries = @x_libraries@
 xdg_appsdir = @xdg_appsdir@
 xdg_directorydir = @xdg_directorydir@
 xdg_menudir = @xdg_menudir@
-SUBDIRS = en 
+SUBDIRS = en fr
 #>- all: all-recursive
 #>+ 1
 all: docs-am  all-recursive
