@@ -173,6 +173,10 @@ bool Entry::setField(Data::FieldPtr field_, const QString& value_) {
 }
 
 bool Entry::setField(const QString& name_, const QString& value_) {
+  if(name_.isEmpty()) {
+    kdWarning() << "Entry::setField() - empty field name for value: " << value_ << endl;
+    return false;
+  }
   // an empty value means remove the field
   if(value_.isEmpty()) {
     if(!m_fields.isEmpty() && m_fields.contains(name_)) {

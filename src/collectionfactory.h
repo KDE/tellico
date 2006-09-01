@@ -14,13 +14,13 @@
 #ifndef COLLECTIONFACTORY_H
 #define COLLECTIONFACTORY_H
 
-#include "collection.h"
+#include "datavectors.h"
 
 #include <qmap.h>
 
 namespace Tellico {
 
-typedef QMap<Data::Collection::Type, QString> CollectionNameMap;
+typedef QMap<int, QString> CollectionNameMap;
 
 /**
  * A factory class for dealing with the different types of collections.
@@ -29,12 +29,12 @@ typedef QMap<Data::Collection::Type, QString> CollectionNameMap;
  */
 class CollectionFactory {
 public:
-  static Data::CollPtr collection(Data::Collection::Type type, bool addFields,
-                                      const QString& entryTitle=QString::null);
+  static Data::CollPtr collection(int type, bool addFields,
+                                  const QString& entryTitle=QString::null);
   static Data::CollPtr collection(const QString& typeName, bool addFields);
   static CollectionNameMap nameMap();
-  static QString typeName(Data::Collection::Type type);
-  static bool isDefaultField(Data::Collection::Type type, const QString& name);
+  static QString typeName(int type);
+  static bool isDefaultField(int type, const QString& name);
 };
 
 } // end namespace

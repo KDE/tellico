@@ -63,7 +63,7 @@ bool Collection::addField(FieldPtr field_) {
     removeField(fieldByName(field_->name()), true);
   }
 
-//  kdDebug() << "Collection::addField() - adding " << field_->name() << endl;
+//  myDebug() << "Collection::addField() - adding " << field_->name() << endl;
   m_fields.append(field_);
   if(field_->formatFlag() == Field::FormatName) {
     m_peopleFields.append(field_); // list of people attributes
@@ -117,7 +117,7 @@ bool Collection::mergeField(FieldPtr newField_) {
   FieldPtr currField = fieldByName(newField_->name());
   if(!currField) {
     // does not exist in current collection, add it
-    Data::FieldPtr f = newField_->clone();
+    Data::FieldPtr f = new Field(*newField_);
     bool success = addField(f);
     Controller::self()->addedField(this, f);
     return success;
@@ -130,7 +130,7 @@ bool Collection::mergeField(FieldPtr newField_) {
 
   // the original field type is kept
   if(currField->type() != newField_->type()) {
-    kdDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
+    myDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
     return false;
   }
 
@@ -188,19 +188,19 @@ bool Collection::mergeField(FieldPtr newField_) {
   return true;
 }
 
-// be really careful with these field pointers, try not to call to many other functions
+// be really careful with these field pointers, try not to call too many other functions
 // which may depend on the field list
 bool Collection::modifyField(FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
-//  kdDebug() << "Collection::modifyField() - " << newField_->name() << endl;
+//  myDebug() << "Collection::modifyField() - " << newField_->name() << endl;
 
 // the field name never changes
   const QString& fieldName = newField_->name();
   FieldPtr oldField = fieldByName(fieldName);
   if(!oldField) {
-    kdDebug() << "Collection::modifyField() - no field named " << fieldName << endl;
+    myDebug() << "Collection::modifyField() - no field named " << fieldName << endl;
     return false;
   }
 
@@ -225,7 +225,7 @@ bool Collection::modifyField(FieldPtr newField_) {
     m_fields.insert(it, newField_);
     m_fields.remove(oldField);
   } else {
-    kdDebug() << "Collection::modifyField() - no index found!" << endl;
+    myDebug() << "Collection::modifyField() - no index found!" << endl;
     return false;
   }
 
@@ -305,6 +305,8 @@ bool Collection::modifyField(FieldPtr newField_) {
     m_imageFields.append(newField_);
   }
 
+
+
   if(resetGroups) {
     myLog() << "Collection::modifyField() - invalidating groups" << endl;
     invalidateGroups();
@@ -327,7 +329,7 @@ bool Collection::removeField(FieldPtr field_, bool force_/*=false*/) {
   if(!field_ || !m_fields.contains(field_)) {
     return false;
   }
-//  kdDebug() << "Collection::deleteField() - name = " << field_->name() << endl;
+//  myDebug() << "Collection::removeField() - name = " << field_->name() << endl;
 
   // can't delete the title field
   if((field_->flags() & Field::NoDelete) && !force_) {
@@ -338,6 +340,7 @@ bool Collection::removeField(FieldPtr field_, bool force_/*=false*/) {
   if(field_->formatFlag() == Field::FormatName) {
     success &= m_peopleFields.remove(field_);
   }
+
   if(field_->type() == Field::Image) {
     success &= m_imageFields.remove(field_);
   }
@@ -364,7 +367,6 @@ bool Collection::removeField(FieldPtr field_, bool force_/*=false*/) {
   }
 
   success &= m_fields.remove(field_);
-
   return success;
 }
 
@@ -391,7 +393,7 @@ void Collection::addEntry(EntryPtr entry_) {
   }
 
   m_entries.append(entry_);
-//  kdDebug() << "Collection::addEntry() - added entry (" << entry_->title() << ")" << endl;
+//  myDebug() << "Collection::addEntry() - added entry (" << entry_->title() << ")" << endl;
 
   if(entry_->id() >= m_nextEntryId) {
     m_nextEntryId = entry_->id() + 1;
@@ -447,10 +449,8 @@ bool Collection::removeEntry(EntryPtr entry_) {
     return false;
   }
 
-//  kdDebug() << "Collection::deleteEntry() - deleted entry - " << entry_->title() << endl;
-  EntryVec vec;
-  vec.append(entry_);
-  removeEntriesFromDicts(vec);
+//  myDebug() << "Collection::deleteEntry() - deleted entry - " << entry_->title() << endl;
+  removeEntriesFromDicts(EntryVec(entry_));
   bool success = m_entryIdDict.remove(entry_->id());
 
   success &= m_entries.remove(entry_);
@@ -461,11 +461,11 @@ bool Collection::removeEntry(EntryPtr entry_) {
 Tellico::Data::FieldVec Collection::fieldsByCategory(const QString& cat_) {
 #ifndef NDEBUG
   if(m_fieldCategories.findIndex(cat_) == -1) {
-    kdDebug() << "Collection::fieldsByCategory() - '" << cat_ << "' is not in category list" << endl;
+    myDebug() << "Collection::fieldsByCategory() - '" << cat_ << "' is not in category list" << endl;
   }
 #endif
   if(cat_.isEmpty()) {
-    kdDebug() << "Collection::fieldsByCategory() - empty category!" << endl;
+    myDebug() << "Collection::fieldsByCategory() - empty category!" << endl;
     return FieldVec();
   }
 
@@ -483,8 +483,7 @@ const QString& Collection::fieldNameByTitle(const QString& title_) const {
     return QString::null;
   }
   FieldPtr f = fieldByTitle(title_);
-  if(!f) {
-    kdWarning() << "Collection::fieldNameByTitle() - no field titled " << title_ << endl;
+  if(!f) { // might happen in MainWindow::saveCollectionOptions
     return QString::null;
   }
   return f->name();
@@ -508,37 +507,28 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
   }
   bool multiple = (fieldByName(name_)->flags() & Field::AllowMultiple);
 
-  QStringList strlist;
+  StringSet values;
   for(EntryVec::ConstIterator it = m_entries.begin(); it != m_entries.end(); ++it) {
     if(multiple) {
-      strlist += it->fields(name_, false);
+      values.add(it->fields(name_, false));
     } else {
-      strlist += it->field(name_);
+      values.add(it->field(name_));
     }
   } // end entry loop
-  strlist.sort();
 
-  QStringList::Iterator it = strlist.begin();
-  while(it != strlist.end()) {
-    const QString& s = *it;
-    ++it;
-    while(it != strlist.end() && s == *it) {
-      it = strlist.remove(it);
-    }
-  }
-  return strlist;
+  return values.toList();
 }
 
 Tellico::Data::FieldPtr Collection::fieldByName(const QString& name_) const {
   return m_fieldNameDict.isEmpty() ? 0 : m_fieldNameDict.find(name_);
 }
 
-Tellico::Data::FieldPtr  Collection::fieldByTitle(const QString& title_) const {
+Tellico::Data::FieldPtr Collection::fieldByTitle(const QString& title_) const {
   return m_fieldTitleDict.isEmpty() ? 0 : m_fieldTitleDict.find(title_);
 }
 
 bool Collection::hasField(const QString& name_) const {
-  return fieldByName(name_) != 0;
+  return !name_.isEmpty() && fieldByName(name_) != 0;
 }
 
 bool Collection::isAllowed(const QString& key_, const QString& value_) const {
@@ -600,9 +590,9 @@ void Collection::populateDicts(EntryPtr entry_) {
         emit signalGroupModified(this, group);
       }
     } // end group loop
-//    kdDebug() << "Collection::populateDicts - end of group loop: " << groups.count() << endl;
+//    myDebug() << "Collection::populateDicts - end of group loop" << endl;
   } // end dict loop
-//  kdDebug() << "Collection::populateDicts - end of full loop" << endl;
+//  myDebug() << "Collection::populateDicts - end of full loop" << endl;
 }
 
 // return a string list for all the groups that the entry belongs to
@@ -702,15 +692,19 @@ void Collection::cleanGroups() {
 }
 
 // static
-bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2) {
+// merges values from e2 into e1
+bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
   if(!e1 || !e2) {
     return false;
   }
   bool ret1 = false;
   FieldVec fields = e1->collection()->fields();
   for(FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
-    if(e1->field(field).isEmpty() && !e2->field(field).isEmpty()) {
-//      myDebug() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name()) << endl;
+    if(e2->field(field).isEmpty()) {
+      continue;
+    }
+    if(overwrite_ || e1->field(field).isEmpty()) {
+//      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name()) << endl;
       e1->setField(field, e2->field(field));
       ret1 = true;
     }

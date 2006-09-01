@@ -52,8 +52,13 @@ using namespace com::sun::star::uno;
 using namespace rtl;
 using namespace cppu;
 
-typedef cppu::WeakImplHelper1<document::XEventListener> EventListenerHelper;
-class OOOHandler::Interface::EventListener : public EventListenerHelper {
+namespace Tellico {
+  namespace Cite {
+    typedef cppu::WeakImplHelper1<document::XEventListener> EventListenerHelper;
+  }
+}
+
+class OOOHandler::Interface::EventListener : public cppu::WeakImplHelper1<document::XEventListener> {
 public:
   EventListener(OOOHandler::Interface* i) : EventListenerHelper(), m_interface(i) {}
   virtual void SAL_CALL disposing(const lang::EventObject&) throw(RuntimeException) {

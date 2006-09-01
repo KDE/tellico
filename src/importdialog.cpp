@@ -14,6 +14,8 @@
 #include "importdialog.h"
 #include "document.h"
 #include "tellico_kernel.h"
+#include "tellico_debug.h"
+#include "collection.h"
 
 #include "translators/importer.h"
 #include "translators/tellicoimporter.h"
@@ -27,9 +29,9 @@
 #include "translators/risimporter.h"
 #include "translators/gcfilmsimporter.h"
 #include "translators/filelistingimporter.h"
+#include "translators/amcimporter.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kstandarddirs.h>
 
 #include <qlayout.h>
@@ -72,13 +74,6 @@ ImportDialog::ImportDialog(Import::Format format_, const KURL& url_, QWidget* pa
     m_radioReplace->setChecked(true);
     m_radioAppend->setEnabled(false);
     m_radioMerge->setEnabled(false);
-  }
-
-  // tellico files should not be imported and then used to replace
-  // the current collection since they could contain borrowers and other
-  // stuff not in a collection
-  if(format_ == Import::TellicoXML) {
-    m_radioReplace->setEnabled(false);
   }
 
   QWidget* w = m_importer->widget(widget, "importer_widget");
@@ -185,8 +180,12 @@ Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const 
       importer = new Import::FileListingImporter(url_);
       break;
 
+    case Import::AMC:
+      importer = new Import::AMCImporter(url_);
+      break;
+
     default:
-      kdDebug() << "ImportDialog::importer() - not implemented!" << endl;
+      myDebug() << "ImportDialog::importer() - not implemented!" << endl;
       break;
   }
 #ifndef NDEBUG
@@ -231,6 +230,10 @@ QString ImportDialog::fileFilter(Import::Format format_) {
       text = i18n("*.gcf|GCfilms Data Files (*.gcf)") + QChar('\n');
       break;
 
+    case Import::AMC:
+      text = i18n("*.amc|AMC Data Files (*.amc)") + QChar('\n');
+      break;
+
     case Import::AudioFile:
     case Import::Alexandria:
     case Import::FreeDB:
@@ -267,6 +270,7 @@ Tellico::Import::FormatMap ImportDialog::formatMap() {
   map[Import::MODS]       = i18n("MODS");
   map[Import::RIS]        = i18n("RIS");
   map[Import::GCfilms]    = i18n("GCfilms");
+  map[Import::AMC]        = i18n("AMC");
   return map;
 }
 

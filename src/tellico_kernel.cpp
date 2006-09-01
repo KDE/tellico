@@ -29,6 +29,7 @@
 #include "commands/filtercommand.h"
 #include "commands/addentries.h"
 #include "commands/modifyentries.h"
+#include "commands/updateentries.h"
 #include "commands/removeentries.h"
 #include "commands/removeloans.h"
 #include "commands/reorderfields.h"
@@ -46,8 +47,7 @@ Kernel* Kernel::s_self = 0;
 
 Kernel::Kernel(MainWindow* parent) : m_widget(parent)
     , m_commandHistory(parent->actionCollection())
-    , m_commandGroup(0)
-    , m_writeImagesInFile(true) {
+    , m_commandGroup(0) {
 }
 
 const KURL& Kernel::URL() const {
@@ -156,31 +156,24 @@ void Kernel::addEntries(Data::EntryVec entries_, bool checkFields_) {
   KCommand* cmd = new Command::AddEntries(Data::Document::self()->collection(), entries_);
   if(checkFields_) {
     beginCommandGroup(cmd->name());
+
+    // this is the same as in Command::UpdateEntries::execute()
+    Data::CollPtr c = Data::Document::self()->collection();
     Data::FieldVec fields = entries_[0]->collection()->fields();
-    Data::CollPtr coll = Data::Document::self()->collection();
-    for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
-      // don't add a field if it's a default field and not in the current collection
-      if(coll->hasField(field->name()) || CollectionFactory::isDefaultField(coll->type(), field->name())) {
-        // special case for choice fields, since we might want to add a value
-        if(field->type() == Data::Field::Choice && coll->hasField(field->name())) {
-          QStringList a1 = field->allowed();
-          QStringList a2 = coll->fieldByName(field->name())->allowed();
-          if(a1 != a2) {
-            StringSet a;
-            a.add(a1);
-            a.add(a2);
-            coll->fieldByName(field->name())->setAllowed(a.toList());
-          }
-        }
-        continue;
+
+    QPair<Data::FieldVec, Data::FieldVec> p = mergeFields(c, fields, entries_);
+    Data::FieldVec modifiedFields = p.first;
+    Data::FieldVec addedFields = p.second;
+
+    for(Data::FieldVec::Iterator field = modifiedFields.begin(); field != modifiedFields.end(); ++field) {
+      if(c->hasField(field->name())) {
+        doCommand(new Command::FieldCommand(Command::FieldCommand::FieldModify, c,
+                                            field, c->fieldByName(field->name())));
       }
-      // add field if any values are not empty
-      for(Data::EntryVec::Iterator entry = entries_.begin(); entry != entries_.end(); ++entry) {
-        if(!entry->field(field).isEmpty()) {
-          addField(field);
-          break;
-        }
-      }
+    }
+
+    for(Data::FieldVec::Iterator field = addedFields.begin(); field != addedFields.end(); ++field) {
+      doCommand(new Command::FieldCommand(Command::FieldCommand::FieldAdd, c, field));
     }
   }
   doCommand(cmd);
@@ -195,6 +188,14 @@ void Kernel::modifyEntries(Data::EntryVec oldEntries_, Data::EntryVec newEntries
   }
 
   doCommand(new Command::ModifyEntries(Data::Document::self()->collection(), oldEntries_, newEntries_));
+}
+
+void Kernel::updateEntry(Data::EntryPtr oldEntry_, Data::EntryPtr newEntry_, bool overWrite_) {
+  if(!newEntry_) {
+    return;
+  }
+
+  doCommand(new Command::UpdateEntries(Data::Document::self()->collection(), oldEntry_, newEntry_, overWrite_));
 }
 
 void Kernel::removeEntries(Data::EntryVec entries_) {
@@ -332,4 +333,37 @@ void Kernel::doCommand(KCommand* command_) {
     m_commandHistory.addCommand(command_);
     Data::Document::self()->slotSetModified(true);
   }
+}
+
+QPair<Tellico::Data::FieldVec, Tellico::Data::FieldVec> Kernel::mergeFields(Data::CollPtr coll_,
+                                                                            Data::FieldVec fields_,
+                                                                            Data::EntryVec entries_) {
+  Data::FieldVec modified, created;
+  for(Data::FieldVec::Iterator field = fields_.begin(); field != fields_.end(); ++field) {
+    // don't add a field if it's a default field and not in the current collection
+    if(coll_->hasField(field->name()) || CollectionFactory::isDefaultField(coll_->type(), field->name())) {
+      // special case for choice fields, since we might want to add a value
+      if(field->type() == Data::Field::Choice && coll_->hasField(field->name())) {
+        QStringList a1 = field->allowed();
+        QStringList a2 = coll_->fieldByName(field->name())->allowed();
+        if(a1 != a2) {
+          StringSet a;
+          a.add(a1);
+          a.add(a2);
+          Data::FieldPtr f = new Data::Field(*coll_->fieldByName(field->name()));
+          f->setAllowed(a.toList());
+          modified.append(f);
+        }
+      }
+      continue;
+    }
+    // add field if any values are not empty
+    for(Data::EntryVec::Iterator entry = entries_.begin(); entry != entries_.end(); ++entry) {
+      if(!entry->field(field).isEmpty()) {
+        created.append(new Data::Field(*field));
+        break;
+      }
+    }
+  }
+  return qMakePair(modified, created);
 }

@@ -149,11 +149,11 @@ Tellico::Data::FieldVec BibtexCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-//  field = new Field(QString::fromLatin1("isbn"), i18n("ISBN#"));
-//  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("isbn"));
-//  field->setCategory(i18n(bibtex_publishing));
-//  field->setDescription(i18n("International Standard Book Number"));
-//  list.append(field);
+  field = new Field(QString::fromLatin1("isbn"), i18n("ISBN#"));
+  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("isbn"));
+  field->setCategory(i18n(bibtex_publishing));
+  field->setDescription(i18n("International Standard Book Number"));
+  list.append(field);
 
   field = new Field(QString::fromLatin1("journal"), i18n("Journal"));
   field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("journal"));
@@ -214,9 +214,17 @@ Tellico::Data::FieldVec BibtexCollection::defaultFields() {
 //  field->setCategory(i18n(bibtex_misc));
 //  list.append(field);
 
-  field = new Field(QString::fromLatin1("note"), i18n("Notes"));
-  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("note"));
+  field = new Field(QString::fromLatin1("keyword"), i18n("Keywords"));
   field->setCategory(i18n(bibtex_misc));
+  field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
+  list.append(field);
+
+  field = new Field(QString::fromLatin1("abstract"), i18n("Abstract"), Data::Field::Para);
+  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("abstract"));
+  list.append(field);
+
+  field = new Field(QString::fromLatin1("note"), i18n("Notes"), Field::Para);
+  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("note"));
   list.append(field);
 
   return list;
@@ -226,7 +234,7 @@ bool BibtexCollection::addField(FieldPtr field_) {
   if(!field_) {
     return false;
   }
-//  kdDebug() << "BibtexCollection::addField()" << endl;
+//  myDebug() << "BibtexCollection::addField()" << endl;
   bool success = Collection::addField(field_);
   if(success) {
     QString bibtex = field_->property(QString::fromLatin1("bibtex"));
@@ -241,7 +249,7 @@ bool BibtexCollection::modifyField(FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
-//  kdDebug() << "BibtexCollection::modifyField()" << endl;
+//  myDebug() << "BibtexCollection::modifyField()" << endl;
   bool success = Collection::modifyField(newField_);
   FieldPtr oldField = fieldByName(newField_->name());
   QString oldBibtex = oldField->property(QString::fromLatin1("bibtex"));
@@ -260,7 +268,7 @@ bool BibtexCollection::deleteField(FieldPtr field_, bool force_) {
   if(!field_) {
     return false;
   }
-//  kdDebug() << "BibtexCollection::deleteField()" << endl;
+//  myDebug() << "BibtexCollection::deleteField()" << endl;
   bool success = true;
   QString bibtex = field_->property(QString::fromLatin1("bibtex"));
   if(!bibtex.isEmpty()) {
@@ -298,14 +306,15 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(CollPtr coll_) {
   KSharedPtr<BibtexCollection> coll = new BibtexCollection(false, coll_->title());
   FieldVec fields = coll_->fields();
   for(FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
-    FieldPtr field = fIt->clone();
-    coll->addField(field);
+    FieldPtr field = new Data::Field(*fIt);
 
     // if it already has a bibtex property, skip it
     if(!field->property(bibtex).isEmpty()) {
+      coll->addField(field);
       continue;
     }
 
+    // be sure to set bibtex property before adding it though
     QString name = field->name();
     // this first group has bibtex field names the same as their own field name
     if(name == Latin1Literal("title")
@@ -333,6 +342,7 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(CollPtr coll_) {
     } else if(name == Latin1Literal("comments")) {
       field->setProperty(bibtex, QString::fromLatin1("note"));
     }
+    coll->addField(field);
   }
 
   // also need to add required fields

@@ -65,6 +65,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(numFiles);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   QTextStream ts;
   uint j = 0;
@@ -127,14 +128,14 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
       } else if(alexField == Latin1Literal("isbn")) {
         KURL u;
         u.setPath(dataDir.absFilePath(alexValue + QString::fromLatin1("_medium.jpg")));
-        const Data::Image& img = ImageFactory::addImage(u, true);
-        if(!img.isNull()) {
-          entry->setField(cover, img.id());
+        QString id = ImageFactory::addImage(u, true);
+        if(!id.isEmpty()) {
+          entry->setField(cover, id);
         } else {
           u.setPath(dataDir.absFilePath(alexValue + QString::fromLatin1("_small.jpg")));
-          const Data::Image& img = ImageFactory::addImage(u, true);
-          if(!img.isNull()) {
-            entry->setField(cover, img.id());
+          id = ImageFactory::addImage(u, true);
+          if(!id.isEmpty()) {
+            entry->setField(cover, id);
           }
         }
         const ISBNValidator val(0);

@@ -27,11 +27,9 @@ extern "C" {
 #include <libexslt/exslt.h>
 }
 
-#if LIBXML_VERSION >= 20600
 // I don't want any network I/O at all
 static const int xml_options = XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NOCDATA;
 static const int xslt_options = xml_options;
-#endif
 
 /* some functions to pass to the XSLT libs */
 static int writeToQString(void* context, const char* buffer, int len) {
@@ -47,6 +45,24 @@ static void closeQString(void* context) {
 
 using Tellico::XSLTHandler;
 
+XSLTHandler::XMLOutputBuffer::XMLOutputBuffer() : m_res(QString::null) {
+  m_buf = xmlOutputBufferCreateIO((xmlOutputWriteCallback)writeToQString,
+                                  (xmlOutputCloseCallback)closeQString,
+                                  &m_res, 0);
+  if(m_buf) {
+    m_buf->written = 0;
+  } else {
+    myDebug() << "XMLOutputBuffer::XMLOutputBuffer() - error writing output buffer!" << endl;
+  }
+}
+
+XSLTHandler::XMLOutputBuffer::~XMLOutputBuffer() {
+  if(m_buf) {
+    xmlOutputBufferClose(m_buf); //also flushes
+    m_buf = 0;
+  }
+}
+
 int XSLTHandler::s_initCount = 0;
 
 XSLTHandler::XSLTHandler(const QCString& xsltFile_) :
@@ -56,11 +72,7 @@ XSLTHandler::XSLTHandler(const QCString& xsltFile_) :
   init();
   QString file = KURL::encode_string(QString::fromLocal8Bit(xsltFile_));
   if(!file.isEmpty()) {
-#if LIBXML_VERSION >= 20600
     xmlDocPtr xsltDoc = xmlReadFile(file.utf8(), NULL, xslt_options);
-#else
-    xmlDocPtr xsltDoc = xmlParseFile(file.utf8());
-#endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
@@ -74,11 +86,7 @@ XSLTHandler::XSLTHandler(const KURL& xsltURL_) :
     m_docOut(0) {
   init();
   if(xsltURL_.isValid() && xsltURL_.isLocalFile()) {
-#if LIBXML_VERSION >= 20600
     xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.encodedPathAndQuery().utf8(), NULL, xslt_options);
-#else
-    xmlDocPtr xsltDoc = xmlParseFile(xsltURL_.encodedPathAndQuery().utf8());
-#endif
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltURL_.path() << endl;
@@ -91,8 +99,9 @@ XSLTHandler::XSLTHandler(const QDomDocument& xsltDoc_, const QCString& xsltFile_
     m_docIn(0),
     m_docOut(0) {
   init();
-  if(!xsltDoc_.isNull()) {
-    setXSLTDoc(xsltDoc_, xsltFile_, translate_);
+  QString file = KURL::encode_string(QString::fromLocal8Bit(xsltFile_));
+  if(!xsltDoc_.isNull() && !file.isEmpty()) {
+    setXSLTDoc(xsltDoc_, file.utf8(), translate_);
   }
 }
 
@@ -150,26 +159,18 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
     }
   }
 
-  QString s = dom_.toString();
+  QString s;
   if(translate_) {
-    s = Tellico::i18nReplace(s);
+    s = Tellico::i18nReplace(dom_.toString(0 /* indent */));
+  } else {
+    s = dom_.toString();
   }
 
   xmlDocPtr xsltDoc;
   if(utf8) {
-#if LIBXML_VERSION >= 20600
-    xsltDoc = xmlReadDoc((xmlChar *)s.utf8().data(), xsltFile_.data(), NULL, xslt_options);
-#else
-    xsltDoc = xmlParseDoc((xmlChar *)s.utf8().data());
-    xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data()); // needed in case of xslt includes
-#endif
+    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.utf8().data()), xsltFile_.data(), NULL, xslt_options);
   } else {
-#if LIBXML_VERSION >= 20600
-    xsltDoc = xmlReadDoc((xmlChar *)s.local8Bit().data(), xsltFile_.data(), NULL, xslt_options);
-#else
-    xsltDoc = xmlParseDoc((xmlChar *)s.local8Bit().data());
-    xsltDoc->URL = (xmlChar *)qstrdup(xsltFile_.data()); // needed in case of xslt includes
-#endif
+    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.local8Bit().data()), xsltFile_.data(), NULL, xslt_options);
   }
 
   if(m_stylesheet) {
@@ -182,19 +183,23 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QCString& xsltFile_
 //  xmlFreeDoc(xsltDoc); // this causes a crash for some reason
 }
 
-void XSLTHandler::addParam(const QCString& name_, const QCString& value_) {
-  m_params.insert(name_, value_);
-//  kdDebug() << "XSLTHandler::addParam() - " << name_ << ":" << value_ << endl;
-}
-
 void XSLTHandler::addStringParam(const QCString& name_, const QCString& value_) {
   QCString value = value_;
   value.replace('\'', "&apos;");
   addParam(name_, QCString("'") + value + QCString("'"));
 }
 
+void XSLTHandler::addParam(const QCString& name_, const QCString& value_) {
+  m_params.insert(name_, value_);
+//  myDebug() << "XSLTHandler::addParam() - " << name_ << ":" << value_ << endl;
+}
+
 void XSLTHandler::removeParam(const QCString& name_) {
   m_params.remove(name_);
+}
+
+const QCString& XSLTHandler::param(const QCString& name_) {
+  return m_params[name_];
 }
 
 QString XSLTHandler::applyStylesheet(const QString& text_) {
@@ -203,11 +208,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
     return QString::null;
   }
 
-#if LIBXML_VERSION >= 20600
-  m_docIn = xmlReadDoc((xmlChar *)text_.utf8().data(), NULL, NULL, xml_options);
-#else
-  m_docIn = xmlParseDoc((xmlChar *)text_.utf8().data());
-#endif
+  m_docIn = xmlReadDoc(reinterpret_cast<xmlChar*>(text_.utf8().data()), NULL, NULL, xml_options);
 
   return process();
 }
@@ -220,9 +221,8 @@ QString XSLTHandler::process() {
 
   const char* params[2*m_params.count() + 1];
   params[0] = NULL;
-  // Qt 3.1 doesn't have constBegin()
-  QMap<QCString, QCString>::Iterator it = m_params.begin();
-  QMap<QCString, QCString>::Iterator end = m_params.end();
+  QMap<QCString, QCString>::ConstIterator it = m_params.constBegin();
+  QMap<QCString, QCString>::ConstIterator end = m_params.constEnd();
   for(uint i = 0; it != end; ++it) {
     params[i  ] = qstrdup(it.key());
     params[i+1] = qstrdup(it.data());
@@ -239,30 +239,14 @@ QString XSLTHandler::process() {
     return QString::null;
   }
 
-  QString result;
-
-  xmlOutputBufferPtr outp = xmlOutputBufferCreateIO( (xmlOutputWriteCallback)writeToQString,
-                                                     (xmlOutputCloseCallback)closeQString,
-                                                     &result, 0);
-  if(!outp) {
-    myDebug() << "XSLTHandler::applyStylesheet() - error writing output buffer!" << endl;
-    xmlOutputBufferClose(outp); //also flushes
-    return result;
+  XMLOutputBuffer output;
+  if(output.isValid()) {
+    int num_bytes = xsltSaveResultTo(output.buffer(), m_docOut, m_stylesheet);
+    if(num_bytes == -1) {
+      myDebug() << "XSLTHandler::applyStylesheet() - error saving output buffer!" << endl;
+    }
   }
-
-  outp->written = 0;
-
-  int num_bytes = xsltSaveResultTo(outp, m_docOut, m_stylesheet);
-  if(num_bytes == -1) {
-    myDebug() << "XSLTHandler::applyStylesheet() - error saving output buffer!" << endl;
-    xmlOutputBufferClose(outp); //also flushes
-    return result;
-  }
-
-  xmlOutputBufferClose(outp); //also flushes
-
-//  kdDebug() << "RESULT: " << result << endl;
-  return result;
+  return output.result();
 }
 
 //static

@@ -30,7 +30,7 @@
 using Tellico::CollectionFactory;
 
 // static
-Tellico::Data::CollPtr CollectionFactory::collection(Data::Collection::Type type_, bool addFields_, const QString& entryTitle_) {
+Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_, const QString& entryTitle_) {
   switch(type_) {
     case Data::Collection::Book:
       return new Data::BookCollection(addFields_);
@@ -66,7 +66,7 @@ Tellico::Data::CollPtr CollectionFactory::collection(Data::Collection::Type type
       return new Data::FileCatalog(addFields_);
 
     case Data::Collection::Base:
-      break; // fall through and create custom collection
+      break;
 
     default:
       kdWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_ << endl;
@@ -116,7 +116,7 @@ Tellico::CollectionNameMap CollectionFactory::nameMap() {
   CollectionNameMap map;
   map[Data::Collection::Book]   = i18n("Book Collection");
   map[Data::Collection::Bibtex] = i18n("Bibliography");
-  map[Data::Collection::ComicBook]   = i18n("Comic Book Collection");
+  map[Data::Collection::ComicBook] = i18n("Comic Book Collection");
   map[Data::Collection::Video]  = i18n("Video Collection");
   map[Data::Collection::Album]  = i18n("Music Collection");
   map[Data::Collection::Coin]   = i18n("Coin Collection");
@@ -129,7 +129,7 @@ Tellico::CollectionNameMap CollectionFactory::nameMap() {
   return map;
 }
 
-QString CollectionFactory::typeName(Data::Collection::Type type_) {
+QString CollectionFactory::typeName(int type_) {
   switch(type_) {
     case Data::Collection::Book:
       return QString::fromLatin1("book");
@@ -147,24 +147,24 @@ QString CollectionFactory::typeName(Data::Collection::Type type_) {
       return QString::fromLatin1("bibtex");
       break;
 
-    case Data::Collection::Coin:
-      return QString::fromLatin1("coin");
-      break;
-
-    case Data::Collection::Card:
-      return QString::fromLatin1("card");
-      break;
-
-    case Data::Collection::Stamp:
-      return QString::fromLatin1("stamp");
+    case Data::Collection::ComicBook:
+      return QString::fromLatin1("comic");
       break;
 
     case Data::Collection::Wine:
       return QString::fromLatin1("wine");
       break;
 
-    case Data::Collection::ComicBook:
-      return QString::fromLatin1("comic");
+    case Data::Collection::Coin:
+      return QString::fromLatin1("coin");
+      break;
+
+    case Data::Collection::Stamp:
+      return QString::fromLatin1("stamp");
+      break;
+
+    case Data::Collection::Card:
+      return QString::fromLatin1("card");
       break;
 
     case Data::Collection::Game:
@@ -186,7 +186,7 @@ QString CollectionFactory::typeName(Data::Collection::Type type_) {
   }
 }
 
-bool CollectionFactory::isDefaultField(Data::Collection::Type type_, const QString& name_) {
+bool CollectionFactory::isDefaultField(int type_, const QString& name_) {
   Data::CollPtr coll = collection(type_, true);
   Data::FieldVec fields = coll->fields();
   for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {

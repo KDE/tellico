@@ -12,6 +12,8 @@
  ***************************************************************************/
 
 #include "imagewidget.h"
+#include "../imagefactory.h"
+#include "../image.h"
 #include "../filehandler.h"
 #include "../tellico_debug.h"
 
@@ -62,17 +64,8 @@ void ImageWidget::setImage(const QString& id_) {
     slotClear();
     return;
   }
-  const Data::Image& img = ImageFactory::imageById(id_);
-  setImage(img);
-}
-
-void ImageWidget::setImage(const Data::Image& image_) {
-  if(image_.isNull()) {
-    slotClear();
-    return;
-  }
-  m_image = image_;
-  m_pixmap = m_image.convertToPixmap();
+  m_imageID = id_;
+  m_pixmap = ImageFactory::pixmap(id_);
   m_scaled = QPixmap();
   scale();
 
@@ -80,7 +73,8 @@ void ImageWidget::setImage(const Data::Image& image_) {
 }
 
 void ImageWidget::slotClear() {
-  m_image = Data::Image();
+//  m_image = Data::Image();
+  m_imageID = QString();
   m_pixmap = QPixmap();
   m_scaled = m_pixmap;
 
@@ -105,13 +99,9 @@ void ImageWidget::scale() {
       newHeight = static_cast<int>(static_cast<float>(ph)*ww/static_cast<float>(pw));
     }
 
-    if(m_image.isNull()) {
-      QWMatrix wm;
-      wm.scale(static_cast<float>(newWidth)/pw, static_cast<float>(newHeight)/ph);
-      m_scaled = m_pixmap.xForm(wm);
-    } else {
-      m_scaled = m_image.convertToPixmap(newWidth, newHeight);
-    }
+    QWMatrix wm;
+    wm.scale(static_cast<float>(newWidth)/pw, static_cast<float>(newHeight)/ph);
+    m_scaled = m_pixmap.xForm(wm);
   } else {
     m_scaled = m_pixmap;
   }
@@ -133,9 +123,9 @@ void ImageWidget::slotGetImage() {
     return;
   }
 
-  const Data::Image& img = ImageFactory::addImage(url);
-  if(img != m_image) {
-    setImage(img);
+  const QString& id = ImageFactory::addImage(url);
+  if(id != m_imageID) {
+    setImage(id);
     emit signalModified();
   }
 }
@@ -158,9 +148,12 @@ void ImageWidget::mouseMoveEvent(QMouseEvent* event_) {
   // Only interested in LMB
   if(event_->state() & Qt::LeftButton) {
     // only allow drag is the image is non-null, and the drag start point isn't null and the user dragged far enough
-    if(!m_image.isNull() && !m_dragStart.isNull() && (m_dragStart - event_->pos()).manhattanLength() > delay) {
-      QImageDrag* drag = new QImageDrag(m_image, this);
-      drag->dragCopy();
+    if(!m_imageID.isEmpty() && !m_dragStart.isNull() && (m_dragStart - event_->pos()).manhattanLength() > delay) {
+      const Data::Image& img = ImageFactory::imageById(m_imageID);
+      if(!img.isNull()) {
+        QImageDrag* drag = new QImageDrag(img, this);
+        drag->dragCopy();
+      }
     }
   }
 }
@@ -176,9 +169,9 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
 
   if(QImageDrag::decode(event_, image)) {
     // Qt reads PNG data by default
-    const Data::Image& img = ImageFactory::addImage(image, QString::fromLatin1("PNG"));
-    if(!img.isNull() && img != m_image) {
-      setImage(img);
+    const QString& id = ImageFactory::addImage(image, QString::fromLatin1("PNG"));
+    if(!id.isEmpty() && id != m_imageID) {
+      setImage(id);
       emit signalModified();
     }
   } else if(KURLDrag::decode(event_, urls)) {
@@ -192,9 +185,9 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
     }
 //    kdDebug() << "ImageWidget::dropEvent() - " << url.prettyURL() << endl;
 
-    const Data::Image& img = ImageFactory::addImage(url);
-    if(!img.isNull() && img != m_image) {
-      setImage(img);
+    const QString& id = ImageFactory::addImage(url);
+    if(!id.isEmpty() && id != m_imageID) {
+      setImage(id);
       emit signalModified();
     }
   } else if(QTextDrag::decode(event_, text)) {
@@ -203,9 +196,9 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
       return;
     }
 
-    const Data::Image& img = ImageFactory::addImage(url);
-    if(!img.isNull() && img != m_image) {
-      setImage(img);
+    const QString& id = ImageFactory::addImage(url);
+    if(!id.isEmpty() && id != m_imageID) {
+      setImage(id);
       emit signalModified();
     }
   }

@@ -22,10 +22,17 @@
 <!-- location depends on being installed correctly -->
 <xsl:import href="../tellico-common.xsl"/>
 
-<xsl:output method="html" version="xhtml" encoding="utf-8"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01//EN"
+            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            encoding="utf-8"/>
+
+<xsl:param name="filename"/>
+<xsl:param name="cdate"/>
 
 <!-- Sort using user's preferred language -->
-<xsl:param name="lang" select="'en'"/>
+<xsl:param name="lang"/>
 
 <xsl:param name="num-columns" select="3"/>
 
@@ -41,6 +48,18 @@
         font-family: sans-serif;
         background-color: #fff;
         color: #000;
+   }
+   #header-left {
+        margin-top: 0;
+        float: left;
+        font-size: 80%;
+        font-style: italic;
+   }
+   #header-right {
+        margin-top: 0;
+        float: right;
+        font-size: 80%;
+        font-style: italic;
    }
    h1.colltitle {
         margin: 0px;
@@ -76,6 +95,8 @@
 </xsl:template>
 
 <xsl:template match="tc:collection">
+ <p id="header-left"><xsl:value-of select="$filename"/></p>
+ <p id="header-right"><xsl:value-of select="$cdate"/></p>
  <h1 class="colltitle">
   <xsl:value-of select="@title"/>
  </h1>

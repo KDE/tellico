@@ -18,6 +18,7 @@ namespace Tellico {
   class XSLTHandler;
   namespace GUI {
     class LineEdit;
+    class ComboBox;
   }
 }
 
@@ -31,7 +32,7 @@ namespace KIO {
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <qcstring.h> // for QByteARray
+#include <qcstring.h> // for QByteArray
 #include <qguardedptr.h>
 
 namespace Tellico {
@@ -67,7 +68,7 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return SRU; }
   virtual bool canFetch(int type) const;
-  virtual void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -79,11 +80,13 @@ public:
   public:
     ConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = 0);
     virtual void saveConfig(KConfig* config);
+    virtual QString preferredName() const;
 
   private:
     GUI::LineEdit* m_hostEdit;
     KIntSpinBox* m_portSpinBox;
-    GUI::LineEdit* m_databaseEdit;
+    GUI::LineEdit* m_pathEdit;
+    GUI::ComboBox* m_formatCombo;
   };
 
   static QString defaultName();
@@ -97,10 +100,10 @@ private slots:
 private:
   void initXSLTHandler();
 
-  QString m_name;
   QString m_host;
   uint m_port;
-  QString m_dbname;
+  QString m_path;
+  QString m_format;
 
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;

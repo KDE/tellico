@@ -24,7 +24,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class ModifyEntries : public KCommand  {
+class ModifyEntries : public KCommand {
 
 public:
   ModifyEntries(Data::CollPtr coll, const Data::EntryVec& oldEntries, const Data::EntryVec& newEntries);

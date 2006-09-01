@@ -15,15 +15,17 @@
 #define HTMLEXPORTER_H
 
 class QCheckBox;
-class KHTMLPart;
-namespace DOM {
-  class Node;
-}
 
 #include "exporter.h"
 #include "../stringset.h"
 
 #include <qstringlist.h>
+
+#include <libxml/xmlstring.h>
+
+extern "C" {
+  struct _xmlNode;
+}
 
 namespace Tellico {
   namespace Data {
@@ -76,20 +78,22 @@ private:
   KURL fileDir() const;
   QString fileDirName() const;
 
-  void parseNode(DOM::Node node);
+  void parseDOM(_xmlNode* node);
   QString handleLink(const QString& link);
+  const xmlChar* handleLink(const xmlChar* link);
   QString analyzeInternalCSS(const QString& string);
+  const xmlChar* analyzeInternalCSS(const xmlChar* string);
   bool copyFiles();
   bool loadXSLTFile();
-  bool createDir();
+  void createDir();
 
-  KHTMLPart* m_part;
   XSLTHandler* m_handler;
   bool m_printHeaders : 1;
   bool m_printGrouped : 1;
   bool m_exportEntryFiles : 1;
   bool m_cancelled : 1;
   bool m_parseDOM : 1;
+  bool m_checkCreateDir : 1;
   int m_imageWidth;
   int m_imageHeight;
 

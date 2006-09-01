@@ -13,12 +13,7 @@
 
 #include "listview.h"
 #include "../controller.h"
-#include "../entryitem.h"
-#include "../entrygroupitem.h"
 #include "../loanitem.h"
-#include "../borroweritem.h"
-#include "../filteritem.h"
-#include "../tellico_kernel.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
@@ -162,70 +157,13 @@ void ListView::slotSelectionChanged() {
   }
   m_isClear = false;
 
-  ListViewItem* item = static_cast<ListViewItem*>(m_selectedItems.getFirst());
-
   Data::EntryVec entries;
-  // first, check to see if they're entry items
-  if(item->isEntryItem()) {
-    // now just iterate over the selected items, making a list of entries
-    for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
-      if(!it.current()->isEntryItem() || !static_cast<EntryItem*>(it.current())->entry()) {
-        continue;
-      }
-      if(!entries.contains(static_cast<EntryItem*>(it.current())->entry())) {
-        entries.append(static_cast<EntryItem*>(it.current())->entry());
-      }
-    }
-    Controller::self()->slotUpdateSelection(this, entries);
-    return; // done now
-  } else if(item->isEntryGroupItem()) {
-    for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
-      if(!it.current()->isEntryGroupItem() || !static_cast<EntryGroupItem*>(it.current())->group()) {
-        continue;
-      }
-      Data::EntryVec more = *static_cast<EntryGroupItem*>(it.current())->group();
-      for(Data::EntryVecIt entry = more.begin(); entry != more.end(); ++entry) {
-        if(!entries.contains(entry)) {
-          entries.append(entry);
-        }
-      }
-    }
-    Controller::self()->slotUpdateSelection(this, entries);
-    return; // done now
-  } else if(item->isBorrowerItem()) {
-    for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
-      if(!it.current()->isBorrowerItem()) {
-        continue;
-      }
-      Data::BorrowerPtr b = static_cast<BorrowerItem*>(it.current())->borrower();
-      if(!b) {
-        continue;
-      }
-      for(Data::LoanVec::ConstIterator loan = b->loans().begin(); loan != b->loans().end(); ++loan) {
-        if(!entries.contains(loan->entry())) {
-          entries.append(loan->entry());
-        }
-      }
-    }
-    Controller::self()->slotUpdateSelection(this, entries);
-    return; // done now
-  }
-
   // now just find all the children or grandchildren that are entry items
   for(GUI::ListViewItemListIt it(m_selectedItems); it.current(); ++it) {
-    for(QListViewItem* child = it.current()->firstChild(); child; child = child->nextSibling()) {
-      if(static_cast<ListViewItem*>(child)->isEntryItem()) {
-        if(!entries.contains(static_cast<EntryItem*>(child)->entry())) {
-          entries.append(static_cast<EntryItem*>(child)->entry());
-        }
-        continue;
-      }
-      for(QListViewItem* grandChild = child->firstChild(); grandChild; grandChild = grandChild->nextSibling()) {
-        if(static_cast<ListViewItem*>(grandChild)->isEntryItem()) {
-          if(!entries.contains(static_cast<EntryItem*>(grandChild)->entry())) {
-            entries.append(static_cast<EntryItem*>(grandChild)->entry());
-          }
-        }
+    Data::EntryVec more = it.current()->entries();
+    for(Data::EntryVecIt entry = more.begin(); entry != more.end(); ++entry) {
+      if(!entries.contains(entry)) {
+        entries.append(entry);
       }
     }
   }
@@ -245,13 +183,7 @@ void ListView::slotDoubleClicked(QListViewItem* item_) {
   }
 
   GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(item_);
-  if(item->isEntryItem()) {
-    Controller::self()->editEntry(static_cast<EntryItem*>(item)->entry());
-  } else if(item->isLoanItem()) {
-    Kernel::self()->modifyLoan(static_cast<LoanItem*>(item)->loan());
-  } else if(item->isFilterItem()) {
-    Kernel::self()->modifyFilter(static_cast<FilterItem*>(item)->filter());
-  }
+  item->doubleClicked();
 }
 
 void ListView::drawContentsOffset(QPainter* p, int ox, int oy, int cx, int cy, int cw, int ch) {
@@ -356,5 +288,17 @@ void ListViewItem::paintCell(QPainter* p_, const QColorGroup& cg_,
   }
 }
 
+Tellico::Data::EntryVec ListViewItem::entries() const {
+  Data::EntryVec entries;
+  for(QListViewItem* child = firstChild(); child; child = child->nextSibling()) {
+    Data::EntryVec more = static_cast<GUI::ListViewItem*>(child)->entries();
+    for(Data::EntryVecIt entry = more.begin(); entry != more.end(); ++entry) {
+      if(!entries.contains(entry)) {
+        entries.append(entry);
+      }
+    }
+  }
+  return entries;
+}
 
 #include "listview.moc"

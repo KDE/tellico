@@ -38,7 +38,7 @@ XMLImporter::XMLImporter(const QByteArray& data_) : Import::Importer(KURL()) {
 
   QString errorMsg;
   int errorLine, errorColumn;
-  if(!m_dom.setContent(data_, false, &errorMsg, &errorLine, &errorColumn)) {
+  if(!m_dom.setContent(data_, true, &errorMsg, &errorLine, &errorColumn)) {
     QString str = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
     str += QString::fromLatin1("\n");
     str += i18n("The error message from Qt is:");
@@ -52,7 +52,7 @@ void XMLImporter::setText(const QString& text_) {
   Importer::setText(text_);
   QString errorMsg;
   int errorLine, errorColumn;
-  if(!m_dom.setContent(text_, false, &errorMsg, &errorLine, &errorColumn)) {
+  if(!m_dom.setContent(text_, true, &errorMsg, &errorLine, &errorColumn)) {
     QString str = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
     str += QString::fromLatin1("\n");
     str += i18n("The error message from Qt is:");

@@ -17,11 +17,12 @@
 #include "tellico_kernel.h"
 #include "collection.h"
 #include "document.h"
-#include "field.h"
 #include "entry.h"
 #include "controller.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
+#include "gui/combobox.h"
+#include "core/tellico_config.h"
 
 #include <klocale.h>
 #include <khtml_part.h>
@@ -72,12 +73,12 @@ ReportDialog::ReportDialog(QWidget* parent_, const char* name_/*=0*/)
     templates.insert(title, file);
   }
   templates.sort();
-  m_templateCombo = new CBProxy(mainWidget);
+  m_templateCombo = new GUI::ComboBox(mainWidget);
   for(KSortableValueList<QString, QString>::iterator it = templates.begin(); it != templates.end(); ++it) {
     m_templateCombo->insertItem((*it).index(), (*it).value());
   }
-  hlay->addWidget(m_templateCombo->comboBox());
-  l->setBuddy(m_templateCombo->comboBox());
+  hlay->addWidget(m_templateCombo);
+  l->setBuddy(m_templateCombo);
 
   KPushButton* pb1 = new KPushButton(SmallIconSet(QString::fromLatin1("exec")), i18n("&Generate"), mainWidget);
   hlay->addWidget(pb1);
@@ -125,10 +126,10 @@ ReportDialog::~ReportDialog() {
 void ReportDialog::slotGenerate() {
   GUI::CursorSaver cs(Qt::waitCursor);
 
-  QString fileName = QString::fromLatin1("report-templates/") + m_templateCombo->currentData();
+  QString fileName = QString::fromLatin1("report-templates/") + m_templateCombo->currentData().toString();
   QString xsltFile = locate("appdata", fileName);
   if(xsltFile.isEmpty()) {
-    kdWarning() << "ReportDialog::setXSLTFile() - can't locate " << m_templateCombo->currentData() << endl;
+    kdWarning() << "ReportDialog::setXSLTFile() - can't locate " << m_templateCombo->currentData().toString() << endl;
     return;
   }
   // if it's the same XSL file, no need to reload the XSLTHandler, just refresh
@@ -161,7 +162,7 @@ void ReportDialog::slotRefresh() {
   m_exporter->setEntries(Controller::self()->visibleEntries());
 
   long options = Export::ExportUTF8 | Export::ExportComplete | Export::ExportImages;
-  if(Data::Field::autoFormat()) {
+  if(Config::autoFormat()) {
     options |= Export::ExportFormatted;
   }
   m_exporter->setOptions(options);

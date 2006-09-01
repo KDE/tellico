@@ -14,7 +14,7 @@
 #ifndef ENTRYEDITDIALOG_H
 #define ENTRYEDITDIALOG_H
 
-class QPushButton;
+class KPushButton;
 
 #include "observer.h"
 #include "gui/fieldwidget.h"
@@ -133,8 +133,8 @@ private:
   Data::EntryVec m_currEntries;
   GUI::TabControl* m_tabs;
   QDict<GUI::FieldWidget> m_widgetDict;
-  QPushButton* m_new;
-  QPushButton* m_save;
+
+  ButtonCode m_saveBtn, m_newBtn, m_nextBtn, m_prevBtn;
 
   bool m_modified;
   bool m_isOrphan;

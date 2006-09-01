@@ -25,7 +25,7 @@
 #include <kmountpoint.h>
 #include <kio/job.h>
 #include <kio/previewjob.h>
-#include <kio/scheduler.h>
+#include <kio/netaccess.h>
 
 #include <qcheckbox.h>
 #include <qvgroupbox.h>
@@ -41,7 +41,7 @@ namespace {
 using Tellico::Import::FileListingImporter;
 
 FileListingImporter::FileListingImporter(const KURL& url_) : Importer(url_), m_coll(0), m_widget(0),
-    m_job(0), m_jobOK(true), m_cancelled(false) {
+    m_job(0), m_cancelled(false) {
   m_files.setAutoDelete(true);
 }
 
@@ -57,23 +57,18 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning files..."), true);
   item.setTotalSteps(100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   // going to assume only one volume will ever be imported
   QString volume = volumeName();
 
-  KIO::Scheduler::checkSlaveOnHold(true);
   m_job = m_recursive->isChecked()
           ? KIO::listRecursive(url(), true, false)
           : KIO::listDir(url(), true, false);
-  m_job->setWindow(Kernel::self()->widget());
   connect(m_job, SIGNAL(entries(KIO::Job*, const KIO::UDSEntryList&)),
-          this, SLOT(slotEntries(KIO::Job*, const KIO::UDSEntryList&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          this, SLOT(slotResult(KIO::Job*)));
+          SLOT(slotEntries(KIO::Job*, const KIO::UDSEntryList&)));
 
-  m_jobOK = true;
-  enter_loop();
-  if(!m_jobOK || m_cancelled) {
+  if(!KIO::NetAccess::synchronousRun(m_job, Kernel::self()->widget()) || m_cancelled) {
     return 0;
   }
 
@@ -83,6 +78,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   const QString url      = QString::fromLatin1("url");
   const QString desc     = QString::fromLatin1("description");
   const QString vol      = QString::fromLatin1("volume");
+  const QString folder   = QString::fromLatin1("folder");
   const QString type     = QString::fromLatin1("mimetype");
   const QString size     = QString::fromLatin1("size");
   const QString perm     = QString::fromLatin1("permissions");
@@ -94,7 +90,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   const QString icon     = QString::fromLatin1("icon");
 
   m_coll = new Data::FileCatalog(true);
-
+  QString tmp;
   const uint stepSize = QMAX(1, m_files.count()/100);
   item.setTotalSteps(m_files.count());
   uint j = 0;
@@ -102,17 +98,20 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     Data::EntryPtr entry = new Data::Entry(m_coll);
 
     KURL u = it.current()->url();
-    entry->setField(title, u.fileName());
-    entry->setField(url,   u.url());
-    entry->setField(desc,  it.current()->mimeComment());
-    entry->setField(vol,   volume);
-    entry->setField(type,  it.current()->mimetype());
-    entry->setField(size,  KIO::convertSize(it.current()->size()));
-    entry->setField(perm,  it.current()->permissionsString());
-    entry->setField(owner, it.current()->user());
-    entry->setField(group, it.current()->group());
+    entry->setField(title,  u.fileName());
+    entry->setField(url,    u.url());
+    entry->setField(desc,   it.current()->mimeComment());
+    entry->setField(vol,    volume);
+    tmp = KURL::relativePath(this->url().path(), u.directory());
+    // remove "./" from the string
+    entry->setField(folder, tmp.right(tmp.length()-2));
+    entry->setField(type,   it.current()->mimetype());
+    entry->setField(size,   KIO::convertSize(it.current()->size()));
+    entry->setField(perm,   it.current()->permissionsString());
+    entry->setField(owner,  it.current()->user());
+    entry->setField(group,  it.current()->group());
 
-    int t = it.current()->time(KIO::UDS_CREATION_TIME);
+    time_t t = it.current()->time(KIO::UDS_CREATION_TIME);
     if(t > 0) {
       QDateTime dt;
       dt.setTime_t(t);
@@ -142,19 +141,13 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
     if(!m_cancelled && usePreview) {
       m_pixmap = QPixmap();
-      KIO::Scheduler::checkSlaveOnHold(true);
       KFileItemList list;
       list.append(it.current());
       KIO::Job* previewJob = KIO::filePreview(list, FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE);
-      previewJob->setWindow(Kernel::self()->widget());
       connect(previewJob, SIGNAL(gotPreview(const KFileItem*, const QPixmap&)),
               this, SLOT(slotPreview(const KFileItem*, const QPixmap&)));
-      connect(previewJob, SIGNAL(result(KIO::Job*)),
-              this, SLOT(slotResult(KIO::Job*)));
 
-      m_jobOK = true;
-      enter_loop();
-      if(!m_jobOK) {
+      if(!KIO::NetAccess::synchronousRun(previewJob, Kernel::self()->widget())) {
         m_pixmap = QPixmap();
       } else if(m_pixmap.isNull()) {
         m_pixmap = it.current()->pixmap(0);
@@ -164,10 +157,10 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     }
 
     if(!m_pixmap.isNull()) {
-      const Data::Image& img = ImageFactory::addImage(m_pixmap.convertToImage(),
-                                                      QString::fromLatin1("png")); // is png best option?
-      if(!img.isNull()) {
-        entry->setField(icon, img.id());
+      // is png best option?
+      QString id = ImageFactory::addImage(m_pixmap, QString::fromLatin1("PNG"));
+      if(!id.isEmpty()) {
+        entry->setField(icon, id);
       }
     }
 
@@ -183,8 +176,6 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     m_coll = 0;
     return 0;
   }
-
-  ProgressManager::self()->setDone(this);
 
   m_coll->updateDicts(m_coll->entries());
   return m_coll;
@@ -214,23 +205,6 @@ QWidget* FileListingImporter::widget(QWidget* parent_, const char* name_) {
   l->addWidget(box);
   l->addStretch(1);
   return m_widget;
-}
-
-// this copies the method used in kio/kio/netaccess.cpp
-void qt_enter_modal(QWidget* widget);
-void qt_leave_modal(QWidget* widget);
-
-void FileListingImporter::enter_loop() {
-  QWidget dummy(0, 0, WType_Dialog | WShowModal);
-  dummy.setFocusPolicy(QWidget::NoFocus);
-  qt_enter_modal(&dummy);
-  qApp->enter_loop();
-  qt_leave_modal(&dummy);
-}
-
-void FileListingImporter::slotResult(KIO::Job* job_) {
-  m_jobOK = !job_->error();
-  qApp->exit_loop();
 }
 
 void FileListingImporter::slotEntries(KIO::Job* job_, const KIO::UDSEntryList& list_) {
@@ -289,7 +263,6 @@ void FileListingImporter::slotCancel() {
   m_cancelled = true;
   if(m_job) {
     m_job->kill();
-    m_jobOK = false;
   }
 }
 

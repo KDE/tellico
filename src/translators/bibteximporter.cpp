@@ -46,6 +46,8 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(100);
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   parseText(text()); // populates m_nodes
   if(m_cancelled) {
@@ -67,7 +69,6 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
   const uint stepSize = KMAX(s_stepSize, count/100);
 
   item.setTotalSteps(count);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
 
   uint j = 0;
   for(ASTListIterator it(m_nodes); !m_cancelled && it.current(); ++it, ++j) {

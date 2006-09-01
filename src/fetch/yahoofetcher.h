@@ -58,7 +58,7 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Yahoo; }
   virtual bool canFetch(int type) const;
-  virtual void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -71,6 +71,7 @@ public:
   public:
     ConfigWidget(QWidget* parent_, const YahooFetcher* fetcher = 0);
     virtual void saveConfig(KConfig*) {}
+    virtual QString preferredName() const;
   };
   friend class ConfigWidget;
 
@@ -86,7 +87,6 @@ private:
   QString insertValue(const QString& str, const QString& value, uint pos);
 
   XSLTHandler* m_xsltHandler;
-  QString m_name;
   int m_limit;
 
   QByteArray m_data;

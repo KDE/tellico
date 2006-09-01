@@ -30,6 +30,8 @@ public:
   Filter::Ptr filter() { return m_filter; }
   void updateFilter(Filter::Ptr filter);
 
+  virtual void doubleClicked();
+
 private:
   Filter::Ptr m_filter;
 };

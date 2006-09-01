@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/tellico/"
-                xmlns:aws="http://webservices.amazon.com/AWSECommerceService/2005-10-05"
+                xmlns:aws="http://webservices.amazon.com/AWSECommerceService/2006-06-28"
                 xmlns:exsl="http://exslt.org/common"
                 extension-element-prefixes="exsl"
                 version="1.0">
@@ -75,9 +75,6 @@
     <field flags="0" title="Small Image" category="Images"  format="4" type="7" name="small-image"/>
     <field flags="0" title="Medium Image" category="Images"  format="4" type="7" name="medium-image"/>
     <field flags="0" title="Large Image" category="Images" format="4" type="7" name="large-image"/>
-    <xsl:if test="$mode='VideoGames'">
-     <field flags="2" title="Platform" category="General" allowed="Xbox 360;Xbox;PlayStation2;PlayStation;PSP;Nintendo DS;GameCube;Dreamcast;Game Boy Advance;Game Boy Color;Game Boy;Windows;Mac OS" format="4" type="3" name="platform" i18n="true"/>
-    </xsl:if>
    </fields>
    <xsl:for-each select="//aws:Items/aws:Item">
     <xsl:apply-templates select="."/>
@@ -211,6 +208,13 @@
       <xsl:when test="contains(aws:Binding, 'Paperback')">
        <xsl:text>Paperback</xsl:text>
       </xsl:when>
+      <!-- specifically for France -->
+      <xsl:when test="aws:Binding='Broché' or aws:Binding='Poche'">
+       <xsl:text>Souple</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:value-of select="aws:Binding"/>
+      </xsl:otherwise>
      </xsl:choose>
     </binding>
 
@@ -508,7 +512,7 @@
  <xsl:param name="value"/>
  <xsl:choose>
   <xsl:when test="contains($value, '360')">
-   <xsl:text>Xbox 360</xsl:text> <!-- as defined in the default field -->
+   <xsl:text>Xbox 360</xsl:text>
   </xsl:when>
   <xsl:when test="starts-with($value, 'X')">
    <xsl:text>Xbox</xsl:text> <!-- as defined in the default field -->

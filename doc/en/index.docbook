@@ -61,8 +61,8 @@ need them for translation coordination !
 Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
-<date>02/06/2006</date>
-<releaseinfo>1.1</releaseinfo>
+<date>08/28/2006</date>
+<releaseinfo>1.2</releaseinfo>
 
 <title>The &appname; Handbook</title>
 

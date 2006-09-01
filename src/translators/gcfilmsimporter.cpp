@@ -43,6 +43,7 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   m_coll = new Data::VideoCollection(true);
   bool hasURL = false;
@@ -122,9 +123,9 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
     entry->setField(QString::fromLatin1("genre"),         splitJoin(rx, values[6]));
     KURL u = KURL::fromPathOrURL(values[7]);
     if(!u.isEmpty()) {
-      const Data::Image& img = ImageFactory::addImage(u, true /* quiet */);
-      if(!img.isNull()) {
-        entry->setField(QString::fromLatin1("cover"), img.id());
+      QString id = ImageFactory::addImage(u, true /* quiet */);
+      if(!id.isEmpty()) {
+        entry->setField(QString::fromLatin1("cover"), id);
       }
     }
     entry->setField(QString::fromLatin1("cast"),  splitJoin(rx, values[8]));

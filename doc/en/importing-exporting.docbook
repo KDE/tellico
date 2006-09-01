@@ -27,6 +27,11 @@ Searches may use five different criteria: <guilabel>Title</guilabel>, <guilabel>
 Only entries that match the current collection type will be found. The <guilabel>Description</guilabel> column provides additional information about the entry, in order to differentiate between videos in different formats, or books in different bindings, for example. Once an entry is successfully added to the collection, a checkmark is added to the first column in the list.
 </para>
 
+
+<para>
+Multiple entries can be added at once by using the standard &kde; method for multiple selection, which usually involves holding the &Shift; or &Ctrl; key when clicking on an item.
+</para>
+
 <para>
 To facilitate the use of barcode scanners, searches can include multiple ISBN values. Selecting the <guilabel>Multiple ISBN search</guilabel> check box will disable the search box and enable the <guibutton>Edit ISBN list...</guibutton> button, which will open a multi-line text entry box. Each ISBN should be entered on a line by itself. After closing the box, each ISBN will be validated for correct formatting. The ISBN validation is able to convert 13-digit EAN values, as well as full <acronym>UPC</acronym> codes, to the proper formatting. The ISBN list may also be read from a text file.
 </para>
@@ -118,6 +123,15 @@ The audio file metadata importer can recursively scan a folder to find all audio
 
 </sect2>
 
+<sect2 id="importing-amc">
+<title>Importing Ant Movie Catalog Data</title>
+
+<para>
+<application><ulink url="http://www.antp.be/software/moviecatalog/">Ant Movie Catalog</ulink></application> is an alternative movie collection manager.
+</para>
+
+</sect2>
+
 <sect2 id="importing-bibtex">
 <title>Importing Bibtex Data</title>
 
@@ -151,7 +165,7 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 <sect2 id="importing-ris">
 <title>Importing RIS Data</title>
 <para>
-The <ulink url="http://www.adeptscience.co.uk/kb/article/A626"><acronym>RIS</acronym> format</ulink> is a bibliographic file format used by <application>Reference Manager</application> and others. &appname; imports bibtex files as a Bibliographic collection.
+The <ulink url="http://www.adeptscience.co.uk/kb/article/A626"><acronym>RIS</acronym> format</ulink> is a bibliographic file format used by <application>Reference Manager</application> and others. &appname; imports RIS files as a Bibliographic collection.
 </para>
 </sect2>
 

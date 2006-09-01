@@ -36,6 +36,7 @@ public:
   const QString& id() const { return m_id; };
   const QCString& format() const { return m_format; };
   QByteArray byteArray() const;
+  bool isNull() const;
 
   QPixmap convertToPixmap() const;
   QPixmap convertToPixmap(int width, int height) const;
@@ -44,7 +45,7 @@ public:
   static QByteArray byteArray(const QImage& img, const QCString& outputFormat);
 
 private:
-  Image(const QString& filename);
+  explicit Image(const QString& filename);
   Image(const QImage& image, const QString& format);
   Image(const QByteArray& data, const QString& format, const QString& id);
 

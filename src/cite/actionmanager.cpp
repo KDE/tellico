@@ -16,9 +16,6 @@
 #include "clipboard.h"
 #include "openoffice.h"
 #include "../entry.h"
-#include "../statusbar.h"
-
-#include <klocale.h>
 
 using Tellico::Cite::ActionManager;
 
@@ -59,6 +56,10 @@ bool ActionManager::connect(CiteAction action_) {
 }
 
 bool ActionManager::cite(CiteAction action_, Data::EntryVec entries_) {
+  if(entries_.isEmpty()) {
+    myDebug() << "ActionManager::cite() - no entries to cite" << endl;
+    return false;
+  }
   if(m_action && m_action->type() != action_) {
     delete m_action;
     m_action = 0;
@@ -72,7 +73,6 @@ bool ActionManager::cite(CiteAction action_, Data::EntryVec entries_) {
     return false;
   }
 
-  StatusBar::self()->setStatus(i18n("Creating citations..."));
   return m_action->cite(entries_);
 }
 

@@ -46,6 +46,17 @@ public:
    * @param config_ The KConfig pointer
    */
   virtual void saveConfig(KConfig* config) = 0;
+  /**
+   * Called when a fetcher data source is removed. Useful for any cleanup work necessary.
+   * The ExecExternalFetcher might need to remove the script, for example.
+   * Because of the way the ConfigDialog is setup, easier to have that in the ConfigWidget
+   * class than in the Fetcher class itself
+   */
+  virtual void removed() {}
+  virtual QString preferredName() const = 0;
+
+signals:
+  void signalName(const QString& name);
 
 public slots:
   void slotSetModified(bool modified_ = true) { m_modified = modified_; }

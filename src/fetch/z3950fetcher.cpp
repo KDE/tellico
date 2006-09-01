@@ -33,6 +33,7 @@
 #include "../translators/grs1importer.h"
 #include "../tellico_debug.h"
 #include "../gui/lineedit.h"
+#include "../gui/combobox.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -41,11 +42,13 @@
 #include <kconfig.h>
 #include <kcombobox.h>
 #include <kaccelmanager.h>
+#include <kseparator.h>
 
 #include <qfile.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
+#include <qdom.h>
 
 namespace {
   static const int Z3950_DEFAULT_PORT = 210;
@@ -73,7 +76,7 @@ Z3950Fetcher::~Z3950Fetcher() {
 }
 
 QString Z3950Fetcher::defaultName() {
-  return i18n("z39.50");
+  return i18n("z39.50 Server");
 }
 
 QString Z3950Fetcher::source() const {
@@ -84,44 +87,49 @@ bool Z3950Fetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
-void Z3950Fetcher::readConfig(KConfig* config_, const QString& group_) {
+void Z3950Fetcher::readConfigHook(KConfig* config_, const QString& group_) {
   // keep a pointer to config so the syntax can be saved
   m_config = config_;
   m_configGroup = group_;
 
   KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Name", defaultName());
-  if(!s.isEmpty()) {
-    m_name = s;
+
+  QString preset = config_->readEntry("Preset");
+  if(preset.isEmpty()) {
+    m_host = config_->readEntry("Host");
+    int p = config_->readNumEntry("Port", Z3950_DEFAULT_PORT);
+    if(p > 0) {
+      m_port = p;
+    }
+    m_dbname = config_->readEntry("Database");
+    m_sourceCharSet = config_->readEntry("Charset");
+    m_syntax = config_->readEntry("Syntax");
+    m_user = config_->readEntry("User");
+    m_password = config_->readEntry("Password");
+  } else {
+    m_preset = preset;
+    QString serverFile = locate("appdata", QString::fromLatin1("z3950-servers.cfg"));
+    if(!serverFile.isEmpty()) {
+      KConfig cfg(serverFile, true /* read-only */, false /* read KDE */);
+      const QStringList servers = cfg.groupList();
+      for(QStringList::ConstIterator server = servers.begin(); server != servers.end(); ++server) {
+        cfg.setGroup(*server);
+
+        const QString id = *server;
+        if(id == preset) {
+          const QString name = cfg.readEntry("Name");
+          m_host = cfg.readEntry("Host");
+          m_port = cfg.readNumEntry("Port", Z3950_DEFAULT_PORT);
+          m_dbname = cfg.readEntry("Database");
+          m_sourceCharSet = cfg.readEntry("Charset");
+          m_syntax = cfg.readEntry("Syntax");
+          m_user = cfg.readEntry("User");
+          m_password = cfg.readEntry("Password");
+        }
+      }
+    }
   }
-  s = config_->readEntry("Host");
-  if(!s.isEmpty()) {
-    m_host = s;
-  }
-  int p = config_->readNumEntry("Port", Z3950_DEFAULT_PORT);
-  if(p > 0) {
-    m_port = p;
-  }
-  s = config_->readEntry("Database");
-  if(!s.isEmpty()) {
-    m_dbname = s;
-  }
-  s = config_->readEntry("User");
-  if(!s.isEmpty()) {
-    m_user = s;
-  }
-  s = config_->readEntry("Password");
-  if(!s.isEmpty()) {
-    m_password = s;
-  }
-  s = config_->readEntry("Charset");
-  if(!s.isEmpty()) {
-    m_sourceCharSet = s;
-  }
-  s = config_->readEntry("Syntax");
-  if(!s.isEmpty()) {
-    m_syntax = s;
-  }
+
   m_fields = config_->readListEntry("Custom Fields");
 }
 
@@ -304,14 +312,16 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 
 #if 0
   kdWarning() << "Remove debug from z3950fetcher.cpp" << endl;
-  QFile f1(QString::fromLatin1("/tmp/marc.xml"));
-  if(f1.open(IO_WriteOnly)) {
-//    if(f1.open(IO_WriteOnly | IO_Append)) {
-    QTextStream t(&f1);
-    t.setEncoding(QTextStream::UnicodeUTF8);
-    t << result_;
+  {
+    QFile f1(QString::fromLatin1("/tmp/marc.xml"));
+    if(f1.open(IO_WriteOnly)) {
+//      if(f1.open(IO_WriteOnly | IO_Append)) {
+      QTextStream t(&f1);
+      t.setEncoding(QTextStream::UnicodeUTF8);
+      t << result_;
+    }
+    f1.close();
   }
-  f1.close();
 #endif
   // assume always utf-8
   QString str, msg;
@@ -335,14 +345,16 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     }
 #if 0
     kdWarning() << "Remove debug from z3950fetcher.cpp" << endl;
-    QFile f2(QString::fromLatin1("/tmp/mods.xml"));
-//    if(f2.open(IO_WriteOnly)) {
-    if(f2.open(IO_WriteOnly | IO_Append)) {
-      QTextStream t(&f2);
-      t.setEncoding(QTextStream::UnicodeUTF8);
-      t << str;
+    {
+      QFile f2(QString::fromLatin1("/tmp/mods.xml"));
+//      if(f2.open(IO_WriteOnly)) {
+      if(f2.open(IO_WriteOnly | IO_Append)) {
+        QTextStream t(&f2);
+        t.setEncoding(QTextStream::UnicodeUTF8);
+        t << str;
+      }
+      f2.close();
     }
-    f2.close();
 #endif
     Import::TellicoImporter imp(m_MODSHandler->applyStylesheet(str));
     coll = imp.collection();
@@ -460,17 +472,30 @@ Tellico::Fetch::ConfigWidget* Z3950Fetcher::configWidget(QWidget* parent_) const
   return new Z3950Fetcher::ConfigWidget(parent_, this);
 }
 
+
 Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget(), 7, 2);
   l->setSpacing(4);
   l->setColStretch(1, 10);
 
-  int row = 0;
+  int row = -1;
+
+  m_usePreset = new QCheckBox(i18n("Use preset &server:"), optionsWidget());
+  l->addWidget(m_usePreset, ++row, 0);
+  connect(m_usePreset, SIGNAL(toggled(bool)), SLOT(slotTogglePreset(bool)));
+  m_serverCombo = new GUI::ComboBox(optionsWidget());
+  connect(m_serverCombo, SIGNAL(activated(int)), SLOT(slotPresetChanged()));
+  l->addWidget(m_serverCombo, row, 1);
+  ++row;
+  l->addMultiCellWidget(new KSeparator(optionsWidget()), row, row, 0, 1);
+  l->setRowSpacing(row, 10);
+
   QLabel* label = new QLabel(i18n("Hos&t: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_hostEdit = new GUI::LineEdit(optionsWidget());
   connect(m_hostEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_hostEdit, SIGNAL(textChanged(const QString&)), SIGNAL(signalName(const QString&)));
   l->addWidget(m_hostEdit, row, 1);
   QString w = i18n("Enter the host name of the server.");
   QWhatsThis::add(label, w);
@@ -512,6 +537,23 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   QWhatsThis::add(m_charSetCombo, w);
   label->setBuddy(m_charSetCombo);
 
+  label = new QLabel(i18n("&Format: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_syntaxCombo = new GUI::ComboBox(optionsWidget());
+  m_syntaxCombo->insertItem(i18n("Auto-detect"), QString());
+  m_syntaxCombo->insertItem(QString::fromLatin1("MODS"), QString::fromLatin1("mods"));
+  m_syntaxCombo->insertItem(QString::fromLatin1("MARC21"), QString::fromLatin1("marc21"));
+  m_syntaxCombo->insertItem(QString::fromLatin1("UNIMARC"), QString::fromLatin1("unimarc"));
+  m_syntaxCombo->insertItem(QString::fromLatin1("USMARC"), QString::fromLatin1("usmarc"));
+  m_syntaxCombo->insertItem(QString::fromLatin1("GRS-1"), QString::fromLatin1("grs-1"));
+  connect(m_syntaxCombo, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_syntaxCombo, row, 1);
+  w = i18n("Enter the data format used by the z39.50 server. Tellico will attempt to "
+           "automatically detect the best setting if <i>auto-detect</i> is selected.");
+  QWhatsThis::add(label, w);
+  QWhatsThis::add(m_syntaxCombo, w);
+  label->setBuddy(m_syntaxCombo);
+
   label = new QLabel(i18n("&User: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_userEdit = new GUI::LineEdit(optionsWidget());
@@ -543,6 +585,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   // now add additional fields widget
   addFieldsWidget(Z3950Fetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
+  loadPresets(fetcher_ ? fetcher_->m_preset : QString::null);
   if(fetcher_) {
     m_hostEdit->setText(fetcher_->m_host);
     m_portSpinBox->setValue(fetcher_->m_port);
@@ -554,11 +597,27 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
     // since the config group gets deleted in the config file,
     // the value needs to be retained here
     m_syntax = fetcher_->m_syntax;
+    m_syntaxCombo->setCurrentData(m_syntax);
   }
   KAcceleratorManager::manage(optionsWidget());
+
+  // start with presets turned off
+  m_usePreset->setChecked(fetcher_ && !fetcher_->m_preset.isEmpty());
+
+  slotTogglePreset(m_usePreset->isChecked());
+}
+
+Z3950Fetcher::ConfigWidget::~ConfigWidget() {
 }
 
 void Z3950Fetcher::ConfigWidget::saveConfig(KConfig* config_) {
+  if(m_usePreset->isChecked()) {
+    QString presetID = m_serverCombo->currentData().toString();
+    config_->writeEntry("Preset", presetID);
+    return;
+  }
+  config_->deleteEntry("Preset");
+
   QString s = m_hostEdit->text().stripWhiteSpace();
   if(!s.isEmpty()) {
     config_->writeEntry("Host", s);
@@ -583,9 +642,12 @@ void Z3950Fetcher::ConfigWidget::saveConfig(KConfig* config_) {
   if(!s.isEmpty()) {
     config_->writeEntry("Password", s);
   }
-  if(!m_syntax.isEmpty()) {
-    config_->writeEntry("Syntax", m_syntax);
+  s = m_syntaxCombo->currentData().toString();
+  if(!s.isEmpty()) {
+    m_syntax = s;
   }
+  config_->writeEntry("Syntax", m_syntax);
+
   saveFieldsConfig(config_);
   slotSetModified(false);
 }
@@ -595,7 +657,92 @@ Tellico::StringMap Z3950Fetcher::customFields() {
   StringMap map;
   map[QString::fromLatin1("address")]  = i18n("Address");
   map[QString::fromLatin1("abstract")] = i18n("Abstract");
+  map[QString::fromLatin1("illustrator")] = i18n("Illustrator");
   return map;
+}
+
+void Z3950Fetcher::ConfigWidget::slotTogglePreset(bool on) {
+  m_serverCombo->setEnabled(on);
+  if(on) {
+    emit signalName(m_serverCombo->currentText());
+  }
+  m_hostEdit->setEnabled(!on);
+  if(!on && !m_hostEdit->text().isEmpty()) {
+    emit signalName(m_hostEdit->text());
+  }
+  m_portSpinBox->setEnabled(!on);
+  m_databaseEdit->setEnabled(!on);
+  m_userEdit->setEnabled(!on);
+  m_passwordEdit->setEnabled(!on);
+  m_charSetCombo->setEnabled(!on);
+  m_syntaxCombo->setEnabled(!on);
+  if(on) {
+    emit signalName(m_serverCombo->currentText());
+  }
+}
+
+void Z3950Fetcher::ConfigWidget::slotPresetChanged() {
+  emit signalName(m_serverCombo->currentText());
+}
+
+void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
+  QString lang = KGlobal::locale()->languageList().first();
+  QString lang2A;
+  {
+    QString dummy;
+    KGlobal::locale()->splitLocale(lang, lang2A, dummy, dummy);
+  }
+
+  QString serverFile = locate("appdata", QString::fromLatin1("z3950-servers.cfg"));
+  if(serverFile.isEmpty()) {
+    kdWarning() << "Z3950Fetcher::loadPresets() - no z3950 servers file found" << endl;
+    return;
+  }
+
+  int idx = -1;
+
+  KConfig cfg(serverFile, true /* read-only */, false /* read KDE */);
+  const QStringList servers = cfg.groupList();
+  // I want the list of servers sorted by name
+  QMap<QString, QString> serverNameMap;
+  for(QStringList::ConstIterator server = servers.constBegin(); server != servers.constEnd(); ++server) {
+    if((*server).isEmpty()) {
+      myDebug() << "Z3950Fetcher::ConfigWidget::loadPresets() - empty id" << endl;
+      continue;
+    }
+    cfg.setGroup(*server);
+    const QString name = cfg.readEntry("Name");
+    if(!name.isEmpty()) {
+      serverNameMap.insert(name, *server);
+    }
+  }
+  for(QMap<QString, QString>::ConstIterator it = serverNameMap.constBegin(); it != serverNameMap.constEnd(); ++it) {
+    const QString name = it.key();
+    const QString id = it.data();
+    cfg.setGroup(id);
+
+    m_serverCombo->insertItem(i18n(name.utf8()), id);
+    if(current_.isEmpty() && idx == -1) {
+      // set the initial selection to something depending on the language
+      const QStringList locales = cfg.readListEntry("Locale");
+      if(locales.findIndex(lang) > -1 || locales.findIndex(lang2A) > -1) {
+        idx = m_serverCombo->count() - 1;
+      }
+    } else if(id == current_) {
+      idx = m_serverCombo->count() - 1;
+    }
+  }
+  if(idx > -1) {
+    m_serverCombo->setCurrentItem(idx);
+  }
+}
+
+QString Z3950Fetcher::ConfigWidget::preferredName() const {
+  if(m_usePreset->isChecked()) {
+    return m_serverCombo->currentText();
+  }
+  QString s = m_hostEdit->text();
+  return s.isEmpty() ? i18n("z39.50 Server") : s;
 }
 
 #include "z3950fetcher.moc"

@@ -28,6 +28,8 @@ namespace Tellico {
     extern const QString dtdTellico;
 
     extern const QString nsBookcase;
+    extern const QString nsDublinCore;
+    extern const QString nsZing;
 
     bool validXMLElementName(const QString& name);
     QString elementName(const QString& name);

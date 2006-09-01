@@ -13,11 +13,11 @@
 
 #include "entrygroupitem.h"
 #include "entry.h"
-#include "field.h"
 #include "collection.h"
 #include "gui/ratingwidget.h"
 #include "tellico_debug.h"
 #include "latin1literal.h"
+#include "core/tellico_config.h"
 
 #include <kiconloader.h>
 
@@ -97,23 +97,24 @@ QString EntryGroupItem::key(int col_, bool) const {
 
   if(m_text.isEmpty() || m_text != text(col_)) {
     m_text = text(col_);
-    if(Data::Field::autoFormat()) {
+    if(Config::autoFormat()) {
+      const QStringList prefixes = Config::surnamePrefixList();
       // build a regexp to match surname prefixes
       // complicated by fact that prefix could have an apostrophe
-      QString prefixes;
-      for(QStringList::ConstIterator it = Data::Field::surnamePrefixList().begin();
-                                     it != Data::Field::surnamePrefixList().end();
+      QString tokens;
+      for(QStringList::ConstIterator it = prefixes.begin();
+                                     it != prefixes.end();
                                      ++it) {
-        prefixes += (*it);
+        tokens += (*it);
         if(!(*it).endsWith(QChar('\''))) {
-          prefixes += QString::fromLatin1("\\s");
+          tokens += QString::fromLatin1("\\s");
         }
         // if it's not the last item, add a pipe
-        if(!(*it) != Data::Field::surnamePrefixList().last()) {
-          prefixes += QChar('|');
+        if(!(*it) != prefixes.last()) {
+          tokens += QChar('|');
         }
       }
-      QRegExp rx(QString::fromLatin1("^(") + prefixes + QChar(')'), false);
+      QRegExp rx(QString::fromLatin1("^(") + tokens + QChar(')'), false);
       // expensive
       if(rx.search(m_text) > -1) {
         m_key = m_text.mid(rx.matchedLength());
@@ -129,8 +130,9 @@ QString EntryGroupItem::key(int col_, bool) const {
 }
 
 int EntryGroupItem::count() const {
-  if(!m_group) {
-    myDebug() << "EntryGroupItem::count() - null group pointer" << endl;
-  }
   return m_group ? m_group->count() : GUI::CountedItem::count();
+}
+
+Tellico::Data::EntryVec EntryGroupItem::entries() const {
+  return *group();
 }

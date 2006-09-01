@@ -1,3 +1,94 @@
+2006-08-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.
+
+2006-08-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when using right-click in list view.
+
+2006-08-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Abstract and Keywords to default fields for bibliographies.
+
+2006-08-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2-pre3.
+
+2006-08-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2-pre2.
+
+2006-08-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with merging fields in CSV importer.
+
+2006-08-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2-pre1.
+
+2006-08-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added "next" and "prev" buttons to entry editor.
+
+2006-08-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed HTML export to use libxml2 instead of KHTML for parsing. That should fix the "all text on one line" problem.
+	* Bumped minimum libxml2 verstion to 2.6.0 or greater.
+
+2006-07-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Added bundled scripts for allocine.fr, Spanish Minstry of Culture, and Dark Horse Comics, all from Mathias Monnerville.
+
+2005-11-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Bumped minimum KDE version to 3.3.
+
+2006-07-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Added illustrator field to MODS translator.
+
+2006-07-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed document saving to remember what format (Zip or XML) was opened, and save the file in the same format.
+
+2006-07-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated sorting in HTML export to be locale-aware.
+	* Added auto-completion to filter dialog.
+
+2006-06-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved ISBN-13 compliance.
+
+2006-06-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with relative url links in template.
+
+2006-06-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed memory leak in image handling.
+
+2006-06-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed IMDb and Amazon to always use iso-8859-1 encoding for URL.
+
+2006-06-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with HTML export and MSIE.
+
+2006-06-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added date stamp to all report templates.
+
+2006-06-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed IMDb bug that hid partial name matches for duplicate names.
+	* Implemented workaround for NetAccess::download() that doesn't show download progress info.
+
+2006-06-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Added validator for unmodified CueCat bar code reader.
+
 2006-05-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.1.6.
@@ -10,6 +101,10 @@
 
 	* Fixed bug that prevented some images from being written to data directory.
 
+2006-04-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Add font and color config to templates.
+
 2006-04-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with multiple ISBN search for z29.50.
@@ -17,12 +112,13 @@
 	* Fixed name order for IBS searches.
 	* Released Tellico 1.1.5.
 
-2006-04-14  Robby Stephenson  <robby@periapsis.org>
+2006-04-12  Robby Stephenson  <robby@periapsis.org>
 
-	* Added "Xbox 360" to Amazon template.
+	* Added Xbox 360, Revolution and Playstation3 to game collection.
 
 2006-04-11  Robby Stephenson  <robby@periapsis.org>
 
+	* Added view config saving for custom collections based on URL.
 	* Fixed crashing bug when deleting and re-adding fields by same name.
 	* Fixed bug with HTML decoding in IMDb plot summary.
 
@@ -39,8 +135,13 @@
 	* Updated Spanish, thanks to Alejandro Hamann and Quique.
 	* Fixed bug with writing temporary files, even when using app data dir.
 
+2006-04-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved PubMed fetcher to grab URL links.
+
 2006-04-02  Robby Stephenson  <robby@periapsis.org>
 
+	* Changed grouping list to be sorted alphabetically.
 	* Fixed OpenOffice.org plugin build for OOo SDK 2.0.2.
 	* Released Tellico 1.1.4.
 
@@ -48,11 +149,25 @@
 
 	* Added referrer to IBS fetcher so images get downloaded.
 
+2006-03-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed XSL templates to output valid HTML 4.01 Strict, patch from Karl Ove Hufthammer.
+
+2006-03-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Added button for installing new templates.
+
+2006-03-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Added context menu item in table widget for clearing table.
+
 2006-03-23  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug that prevented XSLT files with spaces or other non-encoded characters from being opened.
+	* Added template preview button in configuration dialog.
+	* Added field for relative folder path to file catalog listing.
 	* Fixed bug with incorrectly setting document modified when loading images.
 	* Fixed bug with loading loans for entries with non-consecutive ids.
+	* Fixed bug that prevented XSLT files with spaces or other non-encoded characters from being opened.
 	* Fixed bug that caused crashes when changing grouping options
 	for some fields.
 
@@ -67,22 +182,19 @@
 
 2006-03-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug with comc book template not showing up in a couple of
+	* Fixed bug with comic book template not showing up in a couple of
 	places in the GUI.
-	* Fixed bug with empty groups showing up after deleting entries.
-	* Updated ru.po.
+	* Updated MARC2MODS3 stylesheet to MODS 3.1 from LoC.
+	* Added preset z39.50 server list.
 
 2006-03-09  Robby Stephenson  <robby@periapsis.org>
 
+	* Added isbndb.com fetcher.
 	* Fixed z39.50 search to use proper encoding for search terms.
 
 2006-03-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Changed ISO 5426 converter to grab diaeresis instead of umlaut.
-
-2006-03-06  Robby Stephenson  <robby@periapsis.org>
-
-	* Fixed crash on HTML export.
 
 2006-03-05  Robby Stephenson  <robby@periapsis.org>
 
@@ -105,22 +217,40 @@
 	* Updated fr.po, thanks to Mathias Monnerville.
 	* Fixed GCfilms importer to read running time correctly.
 	* Use IMDb url for updating if available.
-	* Change IMDb default server to akas.imdb.com.
 
 2006-02-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Added pt_BR, thanks to Claudio Felix.
 
-2006-02-22  Robby Stephenson  <robby@periapsis.org>
+2006-02-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Added dialog for importing new data sources.
+
+ 2006-02-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed HTML export to always use relative links.
 	* Fixed Fancy template column widths, patch from Karl Ove Hufthammer.
+
+2006-02-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Add Ant Movie Catalog file importer.
+
+2006-02-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Allow data sources to overwrite current data when updating.
+
+2006-02-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Added dialog to choose from multiple CDDB lookup responses.
+	* Fields can have default values.
+	* Changed default IMDB server to akas.imdb.com.
 
 2006-02-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed cleanup when oowriter is closed.
 	* Fixed character encoding for IMDB searches.
 	* Released Tellico 1.1.1.
+	* Branched Tellico 1.1.x.
 
 2006-02-17  Robby Stephenson  <robby@periapsis.org>
 

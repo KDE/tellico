@@ -97,6 +97,7 @@ public:
 
   void addEntries(Data::EntryVec entries, bool checkFields);
   void modifyEntries(Data::EntryVec oldEntries, Data::EntryVec newEntries);
+  void updateEntry(Data::EntryPtr oldEntry, Data::EntryPtr newEntry, bool overWrite);
   void removeEntries(Data::EntryVec entries);
 
   bool addLoans(Data::EntryVec entries);
@@ -113,11 +114,14 @@ public:
   void mergeCollection(Data::CollPtr coll);
   void replaceCollection(Data::CollPtr coll);
 
+  // adds new fields into collection if any values in entries are not empty
+  // first object is modified fields, second is new fields
+  QPair<Data::FieldVec, Data::FieldVec> mergeFields(Data::CollPtr coll,
+                                                    Data::FieldVec fields,
+                                                    Data::EntryVec entries);
+
   void renameCollection();
   const KCommandHistory* commandHistory() { return &m_commandHistory; }
-
-  bool writeImagesInFile() const { return m_writeImagesInFile; }
-  void setWriteImagesInFile(bool b) { m_writeImagesInFile = b; }
 
 private:
   static Kernel* s_self;
@@ -132,7 +136,6 @@ private:
   QWidget* m_widget;
   KCommandHistory m_commandHistory;
   Command::Group* m_commandGroup;
-  bool m_writeImagesInFile : 1;
 };
 
 } // end namespace

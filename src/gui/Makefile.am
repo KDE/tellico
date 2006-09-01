@@ -1,16 +1,17 @@
 INCLUDES = $(all_includes)
 
 noinst_LIBRARIES = libgui.a
-libgui_a_SOURCES = comboboxproxy.cpp counteditem.cpp datewidget.cpp \
-	tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp richtextlabel.cpp \
-	lineedit.cpp boolfieldwidget.cpp choicefieldwidget.cpp linefieldwidget.cpp \
-	numberfieldwidget.cpp parafieldwidget.cpp urlfieldwidget.cpp tablefieldwidget.cpp \
-	imagefieldwidget.cpp datefieldwidget.cpp imagewidget.cpp fieldwidget.cpp ratingwidget.cpp \
-	ratingfieldwidget.cpp overlaywidget.cpp progress.cpp listboxtext.cpp
+libgui_a_SOURCES = combobox.cpp counteditem.cpp datewidget.cpp \
+				tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp richtextlabel.cpp \
+				lineedit.cpp boolfieldwidget.cpp choicefieldwidget.cpp linefieldwidget.cpp \
+				numberfieldwidget.cpp parafieldwidget.cpp urlfieldwidget.cpp tablefieldwidget.cpp \
+				imagefieldwidget.cpp datefieldwidget.cpp imagewidget.cpp fieldwidget.cpp ratingwidget.cpp \
+				ratingfieldwidget.cpp overlaywidget.cpp progress.cpp listboxtext.cpp collectiontypecombo.cpp \
+	previewdialog.cpp
 
 libgui_a_METASOURCES = AUTO
 KDE_OPTIONS = noautodist
-EXTRA_DIST = comboboxproxy.h comboboxproxy.cpp \
+EXTRA_DIST = combobox.h combobox.cpp \
 counteditem.h counteditem.cpp \
 datewidget.h datewidget.cpp \
 kwidgetlister.h kwidgetlister.cpp \
@@ -34,6 +35,9 @@ fieldwidget.h fieldwidget.cpp \
 ratingfieldwidget.h ratingfieldwidget.cpp \
 overlaywidget.h overlaywidget.cpp \
 progress.h progress.cpp \
-listboxtext.h listboxtext.cpp
+listboxtext.h listboxtext.cpp \
+collectiontypecombo.h collectiontypecombo.cpp \
+previewdialog.h previewdialog.cpp
 
 CLEANFILES = *~
+

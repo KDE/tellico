@@ -51,6 +51,8 @@ const QString Tellico::XML::pubTellico = QString::fromLatin1("-//Robby Stephenso
 const QString Tellico::XML::dtdTellico = QString::fromLatin1("http://periapsis.org/tellico/dtd/v%1/tellico.dtd").arg(Tellico::XML::syntaxVersion);
 
 const QString Tellico::XML::nsBookcase = QString::fromLatin1("http://periapsis.org/bookcase/");
+const QString Tellico::XML::nsDublinCore = QString::fromLatin1("http://purl.org/dc/elements/1.1/");
+const QString Tellico::XML::nsZing = QString::fromLatin1("http://www.loc.gov/zing/srw/");
 
 bool Tellico::XML::validXMLElementName(const QString& name_) {
   return xmlValidateNameValue((xmlChar *)name_.utf8().data());

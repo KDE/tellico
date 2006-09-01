@@ -20,6 +20,10 @@ using Tellico::ProgressItem;
 using Tellico::ProgressManager;
 ProgressManager* ProgressManager::s_self = 0;
 
+ProgressItem::Done::~Done() {
+  ProgressManager::self()->setDone(m_object);
+}
+
 ProgressItem::ProgressItem(const QString& label_, bool canCancel_)
     : m_label(label_)
     , m_canCancel(canCancel_)
@@ -128,7 +132,7 @@ ProgressItem& ProgressManager::newProgressItemImpl(const QObject* owner_,
 
   connect(item, SIGNAL(signalProgress(ProgressItem*)), SIGNAL(signalItemProgress(ProgressItem*)));
   connect(item, SIGNAL(signalDone(ProgressItem*)), SLOT(slotItemDone(ProgressItem*)));
-//  connect(it, SIGNAL(signalCancelled(ProgressItem*)), SIGNAL(signalItemCancelled(ProgressItem*)));
+
   emit signalItemAdded(item);
   return *item;
 }

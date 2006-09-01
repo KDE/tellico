@@ -20,8 +20,6 @@ class QMouseEvent;
 class QDragEnterEvent;
 class QDropEvent;
 
-#include "../imagefactory.h"
-
 #include <qwidget.h>
 #include <qpixmap.h>
 
@@ -38,7 +36,7 @@ public:
   ImageWidget(QWidget* parent, const char* name = 0);
   virtual ~ImageWidget() {}
 
-  const QString& id() const { return m_image.id(); }
+  const QString& id() const { return m_imageID; }
   void setImage(const QString& id);
 
 public slots:
@@ -58,10 +56,9 @@ private slots:
   void slotGetImage();
 
 private:
-  void setImage(const Data::Image& image);
   void scale();
 
-  Data::Image m_image;
+  QString m_imageID;
   QPixmap m_pixmap;
   QPixmap m_scaled;
   QLabel* m_label;

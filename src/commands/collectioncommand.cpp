@@ -103,6 +103,6 @@ QString CollectionCommand::name() const {
 void CollectionCommand::copyFields() {
   m_origFields.clear();
   for(Data::FieldVec::ConstIterator field = m_origColl->fields().begin(); field != m_origColl->fields().end(); ++field) {
-    m_origFields.append(field->clone());
+    m_origFields.append(new Data::Field(*field));
   }
 }

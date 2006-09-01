@@ -15,10 +15,13 @@
 #include "translators.h" // needed for ImportAction
 #include "../collectionfieldsdialog.h"
 #include "../document.h"
-#include "../field.h"
-#include "../entry.h"
+#include "../collection.h"
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
+#include "../collectionfactory.h"
+#include "../gui/collectiontypecombo.h"
+#include "../latin1literal.h"
+#include "../stringset.h"
 
 #include <klineedit.h>
 #include <kcombobox.h>
@@ -26,6 +29,7 @@
 #include <kpushbutton.h>
 #include <kapplication.h>
 #include <kiconloader.h>
+#include <kconfig.h>
 
 #include <qgroupbox.h>
 #include <qlayout.h>
@@ -60,29 +64,39 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   }
 
   if(!m_coll) {
-    // iterate over the collection names until it matches the text of the combo box
-    for(CollectionNameMap::Iterator it = m_nameMap.begin(); it != m_nameMap.end(); ++it) {
-      if(it.data() == m_comboType->currentText()) {
-        m_coll = CollectionFactory::collection(it.key(), true);
-        break;
-      }
-    }
+    m_coll = CollectionFactory::collection(m_comboColl->currentType(), true);
   }
 
   QString str = text();
   QTextIStream t(&str);
 
+  const QStringList existingNames = m_coll->fieldNames();
+
   QValueVector<int> cols;
   QStringList names;
   for(int col = 0; col < m_table->numCols(); ++col) {
     QString t = m_table->horizontalHeader()->label(col);
-    if(m_coll->fieldByTitle(t)) {
+    if(m_existingCollection && m_existingCollection->fieldByTitle(t)) {
+      // the collection might have the right field, but a different title, say for translations
+      Data::FieldPtr f = m_existingCollection->fieldByTitle(t);
+      if(m_coll->hasField(f->name())) {
+        // might have different values settings
+        m_coll->removeField(f->name(), true /* force */);
+      }
+      m_coll->addField(new Data::Field(*f));
+      cols.push_back(col);
+      names << f->name();
+    } else if(m_coll->fieldByTitle(t)) {
       cols.push_back(col);
       names << m_coll->fieldNameByTitle(t);
-    } else if(m_existingCollection && m_existingCollection->fieldByTitle(t)) {
-      m_coll->addField(m_existingCollection->fieldByTitle(t)->clone());
-      cols.push_back(col);
-      names << m_coll->fieldNameByTitle(t);
+    }
+  }
+
+  // we don't want to add fields from the default collection
+  // that are not in the imported data
+  for(QStringList::ConstIterator it = existingNames.begin(); it != existingNames.end(); ++it) {
+    if(names.findIndex(*it) == -1) {
+      m_coll->removeField(*it);
     }
   }
 
@@ -91,21 +105,34 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     t.readLine();
   }
 
-  const uint length = str.length();
-  const uint stepSize = KMAX(s_stepSize, length/100);
+  const uint numLines = str.contains('\n');
+  const uint stepSize = QMAX(s_stepSize, numLines/100);
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(length);
+  item.setTotalSteps(numLines);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   uint j = 0;
-  for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), j += line.length()) {
+  for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), ++j) {
     bool empty = true;
     Data::EntryPtr entry = new Data::Entry(m_coll);
     QStringList values = splitLine(line);
-    for(uint i = 0; i < cols.size(); ++i) {
-      entry->setField(names[i], values[cols[i]].simplifyWhiteSpace());
-      if(empty && !entry->field(names[i]).isEmpty()) {
+    for(uint i = 0; i < names.size(); ++i) {
+      QString value = values[cols[i]].simplifyWhiteSpace();
+      bool success = entry->setField(names[i], value);
+      // we might need to add a new allowed value
+      // assume that if the user is importing the value, it should be allowed
+      if(!success && m_coll->fieldByName(names[i])->type() == Data::Field::Choice) {
+        Data::FieldPtr f = m_coll->fieldByName(names[i]);
+        StringSet allow;
+        allow.add(f->allowed());
+        allow.add(value);
+        f->setAllowed(allow.toList());
+        m_coll->modifyField(f);
+        success = entry->setField(names[i], value);
+      }
+      if(empty && success) {
         empty = false;
       }
     }
@@ -117,6 +144,12 @@ Tellico::Data::CollPtr CSVImporter::collection() {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }
+  }
+
+  {
+    KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - CSV"));
+    config.writeEntry("Delimiter", m_delimiter);
+    config.writeEntry("First Row Titles", m_firstRowHeader);
   }
 
   return m_coll;
@@ -136,18 +169,15 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   QHBox* box = new QHBox(group);
   box->setSpacing(5);
   QLabel* lab = new QLabel(i18n("Collection &type:"), box);
-  m_comboType = new KComboBox(box);
-  lab->setBuddy(m_comboType);
-  QWhatsThis::add(m_comboType, i18n("Select the type of collection being imported."));
-  m_nameMap = CollectionFactory::nameMap();
-  m_comboType->insertStringList(m_nameMap.values());
-  connect(m_comboType, SIGNAL(activated(const QString&)), SLOT(slotTypeChanged(const QString&)));
+  m_comboColl = new GUI::CollectionTypeCombo(box);
+  lab->setBuddy(m_comboColl);
+  QWhatsThis::add(m_comboColl, i18n("Select the type of collection being imported."));
+  connect(m_comboColl, SIGNAL(activated(const QString&)), SLOT(slotTypeChanged(const QString&)));
   // need a spacer
   QWidget* w = new QWidget(box);
   box->setStretchFactor(w, 1);
 
   m_checkFirstRowHeader = new QCheckBox(i18n("&First row contains field titles"), group);
-  m_checkFirstRowHeader->setChecked(m_firstRowHeader);
   QWhatsThis::add(m_checkFirstRowHeader, i18n("If checked, the first row is used as field titles."));
   connect(m_checkFirstRowHeader, SIGNAL(toggled(bool)), SLOT(slotFirstRowHeader(bool)));
 
@@ -181,24 +211,14 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   m_delimiterGroupLayout->addWidget(m_radioOther, 2, 1);
 
   m_editOther = new KLineEdit(m_delimiterGroup);
-  m_editOther->setEnabled(m_radioOther->isChecked());
+  m_editOther->setEnabled(false);
+  m_editOther->setFixedWidth(m_widget->fontMetrics().width('X') * 4);
   QWhatsThis::add(m_editOther, i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_delimiterGroupLayout->addWidget(m_editOther, 2, 2);
   connect(m_radioOther, SIGNAL(toggled(bool)),
           m_editOther, SLOT(setEnabled(bool)));
   connect(m_editOther, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
 
-  if(m_delimiter == ',') {
-    m_radioComma->setChecked(true);
-  } else if(m_delimiter == ';') {
-    m_radioSemicolon->setChecked(true);
-  } else if(m_delimiter == '\t') {
-    m_radioTab->setChecked(true);
-  } else {
-    m_radioOther->setChecked(true);
-    m_editOther->setEnabled(true);
-    m_editOther->setText(m_delimiter);
-  }
   w = new QWidget(hbox2);
   hbox2->setStretchFactor(w, 1);
 
@@ -209,33 +229,58 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   m_table->verticalHeader()->hide();
   m_table->horizontalHeader()->setClickEnabled(true);
   m_table->setReadOnly(true);
+  m_table->setMinimumHeight(m_widget->fontMetrics().lineSpacing() * 8);
   QWhatsThis::add(m_table, i18n("The table shows up to the first five lines of the CSV file."));
   connect(m_table, SIGNAL(currentChanged(int, int)), SLOT(slotCurrentChanged(int, int)));
   connect(m_table->horizontalHeader(), SIGNAL(clicked(int)), SLOT(slotHeaderClicked(int)));
 
-  QHBox* hbox = new QHBox(group);
-  hbox->setSpacing(5);
+  QWidget* hbox = new QWidget(group);
+  QHBoxLayout* hlay = new QHBoxLayout(hbox, 5);
+  hlay->addStretch(10);
   QWhatsThis::add(hbox, i18n("<qt>Set each column to correspond to a field in the collection by choosing "
-                             "a column, selecting the field, then clicking the <i>Set</i> button.</qt>"));
+                             "a column, selecting the field, then clicking the <i>Assign Field</i> button.</qt>"));
   lab = new QLabel(i18n("Co&lumn:"), hbox);
+  hlay->addWidget(lab);
   m_colSpinBox = new KIntSpinBox(hbox);
+  hlay->addWidget(m_colSpinBox);
   m_colSpinBox->setMinValue(1);
   connect(m_colSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSelectColumn(int)));
   lab->setBuddy(m_colSpinBox);
+  hlay->addSpacing(10);
 
   lab = new QLabel(i18n("&Data field in this column:"), hbox);
+  hlay->addWidget(lab);
   m_comboField = new KComboBox(hbox);
+  hlay->addWidget(m_comboField);
   connect(m_comboField, SIGNAL(activated(int)), SLOT(slotFieldChanged(int)));
   lab->setBuddy(m_comboField);
+  hlay->addSpacing(10);
 
   m_setColumnBtn = new KPushButton(i18n("&Assign Field"), hbox);
+  hlay->addWidget(m_setColumnBtn);
   m_setColumnBtn->setIconSet(SmallIconSet(QString::fromLatin1("apply")));
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
-
-  slotTypeChanged(m_comboType->currentText());
-  fillTable();
+  hlay->addStretch(10);
 
   l->addStretch(1);
+
+  KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - CSV"));
+  m_delimiter = config.readEntry("Delimiter", m_delimiter);
+  m_firstRowHeader = config.readBoolEntry("First Row Titles", m_firstRowHeader);
+
+  m_checkFirstRowHeader->setChecked(m_firstRowHeader);
+  if(m_delimiter == Latin1Literal(",")) {
+    m_radioComma->setChecked(true);
+  } else if(m_delimiter == Latin1Literal(";")) {
+    m_radioSemicolon->setChecked(true);
+  } else if(m_delimiter == Latin1Literal("\t")) {
+    m_radioTab->setChecked(true);
+  } else {
+    m_radioOther->setChecked(true);
+    m_editOther->setEnabled(true);
+    m_editOther->setText(m_delimiter);
+  }
+
   return m_widget;
 }
 
@@ -332,12 +377,10 @@ void CSVImporter::fillTable() {
   QTextStream t(&str, IO_ReadOnly);
 
   int maxCols = 0;
-  // want first two lines
   QString line;
   for(int row = 0; row < m_table->numRows(); ++row) {
     line = t.readLine();
-//    myDebug() << "CSVImporter::fillTable() - line is\n" << line << endl;
-    QStringList values = splitLine(line);
+    const QStringList values = splitLine(line);
     if(static_cast<int>(values.count()) > m_table->numCols()) {
       m_table->setNumCols(values.count());
       m_colSpinBox->setMaxValue(values.count());
@@ -355,15 +398,10 @@ void CSVImporter::fillTable() {
   m_table->setNumCols(maxCols);
 }
 
-void CSVImporter::slotTypeChanged(const QString& name_) {
-//  kdDebug() << "CSVImporter::slotTypeChanged() - new type = " << name_ << endl;
+void CSVImporter::slotTypeChanged(const QString&) {
   // iterate over the collection names until it matches the text of the combo box
-  for(CollectionNameMap::Iterator it = m_nameMap.begin(); it != m_nameMap.end(); ++it) {
-    if(it.data() == name_) {
-      m_coll = CollectionFactory::collection(it.key(), true);
-      break;
-    }
-  }
+  Data::Collection::Type type = static_cast<Data::Collection::Type>(m_comboColl->currentType());
+  m_coll = CollectionFactory::collection(type, true);
 
   updateHeader(true);
   m_comboField->clear();
@@ -449,9 +487,9 @@ void CSVImporter::updateHeader(bool force_) {
 
   Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
   for(int col = 0; col < m_table->numCols(); ++col) {
-    if(m_firstRowHeader && m_firstRowHeader
-       && c->fieldByTitle(m_table->text(0, col)) != 0) {
-      m_table->horizontalHeader()->setLabel(col, m_table->text(0, col));
+    const QString s = m_table->text(0, col);
+    if(m_firstRowHeader && !s.isEmpty() && c && c->fieldByTitle(s) != 0) {
+      m_table->horizontalHeader()->setLabel(col, s);
     } else {
       m_table->horizontalHeader()->setLabel(col, QString::number(col+1));
     }
@@ -489,26 +527,24 @@ void CSVImporter::slotActionChanged(int action_) {
   switch(action_) {
     case Import::Replace:
       {
-        QString currText = m_comboType->currentText();
-        m_comboType->clear();
-        m_comboType->insertStringList(m_nameMap.values());
-        m_comboType->setCurrentText(currText);
+        int currType = m_comboColl->currentType();
+        m_comboColl->reset();
+        m_comboColl->setCurrentType(currType);
         m_existingCollection = 0;
       }
       break;
 
     case Import::Append:
     case Import::Merge:
-      m_comboType->clear();
-      m_comboType->insertItem(m_nameMap[currColl->type()]);
-      m_existingCollection = currColl;
-      break;
-
-
-    default:
-      break;
+     {
+        m_comboColl->clear();
+        QString name = CollectionFactory::nameMap()[currColl->type()];
+        m_comboColl->insertItem(name, currColl->type());
+        m_existingCollection = currColl;
+     }
+     break;
   }
-  slotTypeChanged(m_comboType->currentText());
+  slotTypeChanged(m_comboColl->currentText());
 }
 
 void CSVImporter::slotCancel() {

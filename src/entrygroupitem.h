@@ -57,6 +57,7 @@ public:
   virtual QString key(int col, bool) const;
 
   virtual int count() const;
+  virtual Data::EntryVec entries() const;
 
 private:
   QGuardedPtr<Data::EntryGroup> m_group;

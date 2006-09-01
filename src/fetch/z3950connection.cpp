@@ -145,6 +145,7 @@ void Z3950Connection::run() {
     if(!QCString(addinfo).isEmpty()) {
       s += " (" + toString(addinfo) + ")";
     }
+    myDebug() << "Z3950Connection::run() - " << s << endl;
     done(s, MessageHandler::Error);
     return;
   }
@@ -272,7 +273,6 @@ bool Z3950Connection::makeConnection() {
   if(m_connected) {
     return true;
   }
-
 //  myDebug() << "Z3950Connection::makeConnection() - " << m_fetcher->source() << endl;
 // I don't know what to do except assume database, user, and password are in locale encoding
 #if HAVE_YAZ
@@ -298,6 +298,7 @@ bool Z3950Connection::makeConnection() {
     if(!QCString(addinfo).isEmpty()) {
       s += " (" + toString(addinfo) + ")";
     }
+    myDebug() << "Z3950Connection::makeConnection() - " << s << endl;
     done(s, MessageHandler::Error);
     return false;
   }

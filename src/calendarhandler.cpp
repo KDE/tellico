@@ -18,6 +18,7 @@
 
 #include <klocale.h>
 #include <kstandarddirs.h>
+#include <kconfig.h>
 
 #ifdef USE_KCAL
 #include <libkcal/calendarresources.h>

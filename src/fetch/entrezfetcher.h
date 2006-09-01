@@ -52,7 +52,7 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Entrez; }
   virtual bool canFetch(int type) const;
-  virtual void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group);
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   static StringMap customFields();
@@ -60,8 +60,8 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     ConfigWidget(QWidget* parent_, const EntrezFetcher* fetcher=0);
-
     virtual void saveConfig(KConfig*);
+    virtual QString preferredName() const;
   };
   friend class ConfigWidget;
 
@@ -85,7 +85,6 @@ private:
     Fetch
   };
 
-  QString m_name;
   KURL m_url;
   QString m_dbname;
   QByteArray m_data;

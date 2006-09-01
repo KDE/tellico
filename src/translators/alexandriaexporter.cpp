@@ -16,6 +16,7 @@
 #include "../collection.h"
 #include "../tellico_kernel.h"
 #include "../imagefactory.h"
+#include "../image.h"
 #include "../tellico_utils.h"
 //#include "../tellico_debug.h"
 

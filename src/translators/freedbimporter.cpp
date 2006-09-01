@@ -36,9 +36,9 @@
 #endif
 
 #include <kcombobox.h>
-#include <kglobal.h>
 #include <kconfig.h>
 #include <kapplication.h>
+#include <kinputdialog.h>
 
 #include <qfile.h>
 #include <qdir.h>
@@ -102,10 +102,12 @@ void FreeDBImporter::readCDROM() {
     config.writeEntry("Cache Files Only", false);
   }
 
+  QCString drive = QFile::encodeName(drivePath);
+  QValueList<uint> lengths;
   KCDDB::TrackOffsetList list;
-#if 0
+#if 1
   // a1107d0a - Kruder & Dorfmeister - The K&D Sessions - Disc One.
-  list
+/*  list
     << 150      // First track start.
     << 29462
     << 66983
@@ -118,7 +120,7 @@ void FreeDBImporter::readCDROM() {
     << 278203   // Last track start.
     << 10       // Disc start.
     << 316732;  // Disc end.
-/*
+*/
   list
     << 150
     << 106965
@@ -127,10 +129,7 @@ void FreeDBImporter::readCDROM() {
     << 176085
     << 5
     << 234500;
-*/
 #else
-  QCString drive = QFile::encodeName(drivePath);
-  QValueList<uint> lengths;
   list = offsetList(drive, lengths);
 #endif
 
@@ -143,57 +142,80 @@ void FreeDBImporter::readCDROM() {
 //    myDebug() << *it << endl;
 //  }
 
-// crashes if I use the Config class
-//  KCDDB::Config c;
-//  config.setHostname(QString::fromLatin1("freedb.freedb.org"));
-//  config.setPort(8880);
-
-//  KCDDB::Client client(c);
+  // the result info, could be multiple ones
+  KCDDB::CDInfo info;
   KCDDB::Client client;
   client.setBlockingMode(true);
   KCDDB::CDDB::Result r = client.lookup(list);
-  if(r != KCDDB::CDDB::Success) {
+  // KCDDB doesn't return MultipleRecordFound properly, so check outselves
+  if(r == KCDDB::CDDB::MultipleRecordFound || client.lookupResponse().count() > 1) {
+    QStringList list;
+    KCDDB::CDInfoList infoList = client.lookupResponse();
+    for(KCDDB::CDInfoList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
+      list.append(QString::fromLatin1("%1, %2, %3").arg((*it).artist)
+                                                   .arg((*it).title)
+                                                   .arg((*it).genre));
+    }
+
+    // switch back to pointer cursor
+    GUI::CursorSaver cs(Qt::arrowCursor);
+    bool ok;
+    QString res = KInputDialog::getItem(i18n("Select CDDB Entry"),
+                                        i18n("Select a CDDB entry:"),
+                                        list, 0, false, &ok,
+                                        Kernel::self()->widget());
+    if(ok) {
+      uint i = 0;
+      for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it, ++i) {
+        if(*it == res) {
+          break;
+        }
+      }
+      if(i < infoList.size()) {
+        info = infoList[i];
+      }
+    } else { // cancelled dialog
+      m_cancelled = true;
+    }
+  } else if(r == KCDDB::CDDB::Success) {
+    info = client.bestLookupResponse();
+  } else {
 //    myDebug() << "FreeDBImporter::readCDROM() - no success! Return value = " << r << endl;
+    QString s;
     switch(r) {
       case KCDDB::CDDB::NoRecordFound:
-        setStatusMessage(i18n("<qt>No records were found to match the CD.</qt>"));
+        s = i18n("<qt>No records were found to match the CD.</qt>");
         break;
-
-      case KCDDB::CDDB::MultipleRecordFound:
-        setStatusMessage(i18n("<qt>Multiple records were found to match the CD.</qt>"));
-        break;
-
       case KCDDB::CDDB::ServerError:
         myDebug() << "Server Error" << endl;
+        break;
       case KCDDB::CDDB::HostNotFound:
         myDebug() << "Host Not Found" << endl;
+        break;
       case KCDDB::CDDB::NoResponse:
         myDebug() << "No Response" << endl;
+        break;
       case KCDDB::CDDB::UnknownError:
         myDebug() << "Unknown Error" << endl;
-      default:
-        setStatusMessage(i18n("<qt>Tellico was unable to complete the CD lookup.</qt>"));
         break;
-
+      default:
+        break;
     }
-    // go ahead and try to read cd-text, too
-    readCDText(drive);
+    if(s.isEmpty()) {
+      s = i18n("<qt>Tellico was unable to complete the CD lookup.</qt>");
+    }
+    setStatusMessage(s);
     return;
   }
 
-/*
-  KCDDB::CDInfoList response = client.lookupResponse();
-  myDebug() << "Client::lookup returned : " << response.count() << " entries" << endl;
-
-  for(KCDDB::CDInfoList::ConstIterator it = response.begin(); it != response.end(); ++it) {
-    KCDDB::CDInfo info(*it);
-    myDebug() << "Disc title: " << info.title << endl;
-    myDebug() << "Total tracks: " << info.trackInfoList.count() << endl;
-    myDebug() << "Disc revision: '" << info.revision << "'" << endl;
+  if(!info.isValid()) {
+    // go ahead and try to read cd-text if we weren't cancelled
+    // could be the case we don't have net access
+    if(!m_cancelled) {
+      readCDText(drive);
+    }
+    return;
   }
-*/
-  KCDDB::CDInfo info = client.bestLookupResponse();
-//  myDebug() << "Best CDInfo had title: " << info.title << endl;
 
   m_coll = new Data::MusicCollection(true);
 
@@ -230,17 +252,16 @@ void FreeDBImporter::readCDROM() {
 
 void FreeDBImporter::readCache() {
 #if HAVE_KCDDB
-  QDict<Data::Entry> dict;
-
   {
+    // remember the import options
     KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - FreeDB"));
     config.writeEntry("Cache Files Only", true);
   }
 
-  KCDDB::Config* cfg = new KCDDB::Config();
-  cfg->readConfig();
+  KCDDB::Config cfg;
+  cfg.readConfig();
 
-  QStringList dirs = cfg->cacheLocations();
+  QStringList dirs = cfg.cacheLocations();
   for(QStringList::ConstIterator it = dirs.begin(); it != dirs.end(); ++it) {
     dirs += Tellico::findAllSubDirs(*it);
   }
@@ -277,11 +298,12 @@ void FreeDBImporter::readCache() {
 
   m_coll = new Data::MusicCollection(true);
 
-  const uint stepSize = KMAX(static_cast<uint>(1), numFiles / 100);
+  const uint stepSize = QMAX(1, numFiles / 100);
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(numFiles);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   uint step = 1;
 
@@ -451,6 +473,7 @@ QWidget* FreeDBImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   QStringList devices = config.readListEntry("CD-ROM Devices");
   if(devices.isEmpty()) {
     devices += QString::fromLatin1("/dev/cdrom");
+    devices += QString::fromLatin1("/dev/dvd");
   }
   m_driveCombo->insertStringList(devices);
   QString device = config.readEntry("Last Device");

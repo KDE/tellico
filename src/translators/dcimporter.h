@@ -1,0 +1,33 @@
+/***************************************************************************
+    copyright            : (C) 2006 by Robby Stephenson
+    email                : robby@periapsis.org
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
+ *                                                                         *
+ ***************************************************************************/
+
+#ifndef TELLICO_IMPORT_DCIMPORTER_H
+#define TELLICO_IMPORT_DCIMPORTER_H
+
+#include "xmlimporter.h"
+
+namespace Tellico {
+  namespace Import {
+
+class DCImporter : public XMLImporter {
+public:
+  DCImporter(const KURL& url);
+  DCImporter(const QString& text);
+  ~DCImporter() {}
+
+  virtual Data::CollPtr collection();
+};
+
+  }
+}
+#endif

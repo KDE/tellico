@@ -14,8 +14,6 @@
 #ifndef REPORTDIALOG_H
 #define REPORTDIALOG_H
 
-#include "gui/comboboxproxy.h"
-
 #include <kdialogbase.h>
 
 class KHTMLPart;
@@ -23,6 +21,9 @@ class KHTMLPart;
 namespace Tellico {
   namespace Export {
     class HTMLExporter;
+  }
+  namespace GUI {
+    class ComboBox;
   }
 
 /**
@@ -54,8 +55,7 @@ private slots:
 
 private:
   KHTMLPart* m_HTMLPart;
-  typedef Tellico::GUI::ComboBoxProxy<QString> CBProxy;
-  CBProxy* m_templateCombo;
+  GUI::ComboBox* m_templateCombo;
   Export::HTMLExporter* m_exporter;
   QString m_xsltFile;
 };

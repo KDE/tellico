@@ -54,7 +54,7 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return IMDB; }
   virtual bool canFetch(int type) const;
-  virtual void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -66,6 +66,7 @@ public:
   public:
     ConfigWidget(QWidget* parent_, const IMDBFetcher* fetcher = 0);
     virtual void saveConfig(KConfig*);
+    virtual QString preferredName() const;
 
   private:
     KLineEdit* m_hostEdit;
@@ -116,7 +117,7 @@ private:
   QString m_value;
   bool m_started;
   bool m_fetchImages;
-  QString m_name;
+
   QString m_host;
   int m_numCast;
   KURL m_url;

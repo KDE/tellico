@@ -34,16 +34,18 @@ namespace {
 }
 
 int main(int argc, char* argv[]) {
-  KAboutData aboutData("tellico", I18N_NOOP("Tellico"),
+  KAboutData aboutData("tellico", "Tellico",
                        version, description, KAboutData::License_GPL,
                        "(c) 2001-2006, Robby Stephenson", 0,
                        "http://www.periapsis.org/tellico/", "tellico-users@forge.novell.com");
   aboutData.addAuthor("Robby Stephenson", 0, "robby@periapsis.org");
-  aboutData.addCredit("Greg Ward", I18N_NOOP("Author of btparse library"),
-                      0, "http://www.gerg.ca");
+  aboutData.addCredit("Mathias Monnerville", I18N_NOOP("Data source scripts"),
+                      0, 0);
   aboutData.addCredit("Virginie Quesnay", I18N_NOOP("Icons"),
                       0, 0);
-  aboutData.addCredit("amaroK", I18N_NOOP("Code examples and general inspiration"),
+  aboutData.addCredit("Greg Ward", I18N_NOOP("Author of btparse library"),
+                      0, "http://www.gerg.ca");
+  aboutData.addCredit("Amarok", I18N_NOOP("Code examples and general inspiration"),
                       0, "http://amarok.kde.org");
 
   KCmdLineArgs::init(argc, argv, &aboutData);

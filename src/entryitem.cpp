@@ -16,8 +16,8 @@
 #include "gui/counteditem.h"
 #include "collection.h"
 #include "detailedlistview.h"
+#include "controller.h"
 
-#include <kdebug.h>
 #include <kiconloader.h>
 
 #include <qregexp.h>
@@ -93,4 +93,12 @@ QString EntryItem::key(int col_, bool) const {
   // there's some sort of painting bug if the key is identical for multiple entries
   // so for non-custom sorting, append the entry id
   return m_customSort ? text(col_) : text(col_) + QString::number(m_entry->id());
+}
+
+void EntryItem::doubleClicked() {
+  Controller::self()->editEntry(m_entry);
+}
+
+Tellico::Data::EntryVec EntryItem::entries() const {
+  return Data::EntryVec(entry());
 }

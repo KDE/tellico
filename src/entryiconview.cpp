@@ -89,7 +89,7 @@ const QPixmap& EntryIconView::defaultPixmap() {
   QPixmap tmp = loader->loadIcon(QString::fromLatin1("nocover_") + CollectionFactory::typeName(m_coll->type()),
                                  KIcon::User, 0, KIcon::DefaultState, 0, true /*canReturnNull */);
   if(tmp.isNull()) {
-    myDebug() << "EntryIconView::defaultPixmap() - null nocover image, loading tellico.png" << endl;
+    myLog() << "EntryIconView::defaultPixmap() - null nocover image, loading tellico.png" << endl;
     tmp = UserIcon(QString::fromLatin1("tellico"));
   }
   if(QMAX(tmp.width(), tmp.height()) > static_cast<int>(MIN_ENTRY_ICON_SIZE)) {
@@ -176,6 +176,11 @@ void EntryIconView::addEntries(Data::EntryVec entries_) {
   }
   if(!m_coll) {
     m_coll = entries_[0]->collection();
+  }
+  // since the view probably doesn't show all the current entries
+  // only add the new ones if the count is the total
+  if(m_entries.count() + entries_.count() < m_coll->entryCount()) {
+    return;
   }
   int w = MIN_ENTRY_ICON_SIZE;
   int h = MIN_ENTRY_ICON_SIZE;
@@ -343,7 +348,8 @@ void EntryIconViewItem::paintFocus(QPainter*, const QColorGroup&) {
 
 void EntryIconViewItem::paintPixmap(QPainter* p_, const QColorGroup& cg_) {
   // only draw the shadow if there's an image
-  if(m_usesImage && !isSelected()) {
+  // oh, and don't draw it if it's a file catalog, it doesn't look right
+  if(m_usesImage && !isSelected() && m_entry->collection()->type() != Data::Collection::File) {
     // pixmapRect() already includes shadow size, so shift the rect by that amount
     QRect r = pixmapRect(false);
     r.setLeft(r.left() + ENTRY_ICON_SHADOW_RIGHT);

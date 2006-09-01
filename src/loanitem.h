@@ -29,6 +29,8 @@ public:
   virtual bool isLoanItem() const { return true; }
   Data::LoanPtr loan() { return m_loan; }
 
+  virtual void doubleClicked();
+
 private:
   Data::LoanPtr m_loan;
 };

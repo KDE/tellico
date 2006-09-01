@@ -29,23 +29,29 @@ Q_OBJECT
 public:
   EntryUpdater(Data::CollPtr coll, Data::EntryVec entries, QObject* parent);
   EntryUpdater(const QString& fetcher, Data::CollPtr coll, Data::EntryVec entries, QObject* parent);
+  ~EntryUpdater();
 
 public slots:
   void slotResult(Tellico::Fetch::SearchResult* result);
-  void slotDone();
   void slotCancel();
 
+private slots:
+  void slotStartNext();
+  void slotDone();
+  void slotCleanup();
+
 private:
-  typedef QPtrList<Fetch::SearchResult> ResultList;
+  typedef QPair<Fetch::SearchResult*, bool> UpdateResult;
+  typedef QValueList<UpdateResult> ResultList;
 
   void init();
-  void cleanup();
   void handleResults();
-  Data::EntryPtr askUser(ResultList results);
-  void mergeCurrent(Data::EntryPtr entry);
+  UpdateResult askUser(ResultList results);
+  void mergeCurrent(Data::EntryPtr entry, bool overwrite);
 
   Data::CollPtr m_coll;
   Data::EntryVec m_entries;
+  Data::EntryVec m_fetchedEntries;
   Fetch::FetcherVec m_fetchers;
   int m_fetchIndex;
   int m_origEntryCount;

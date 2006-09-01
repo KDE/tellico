@@ -93,7 +93,7 @@ void GroupView::removeCollection(Data::CollPtr coll_) {
     return;
   }
 
-//  kdDebug() << "GroupView::removeCollection() - " << coll_->title() << endl;
+//  myDebug() << "GroupView::removeCollection() - " << coll_->title() << endl;
 
   blockSignals(true);
   slotReset();
@@ -112,7 +112,7 @@ void GroupView::slotModifyGroup(Data::CollPtr coll_, Data::EntryGroup* group_) {
     return;
   }
 
-//  kdDebug() << "GroupView::slotModifyGroup() - " << group_->fieldName() << endl;
+//  myDebug() << "GroupView::slotModifyGroup() - " << group_->fieldName() << "/" << group_->groupName() << endl;
   EntryGroupItem* par = m_groupDict.find(group_->groupName());
   if(par) {
     if(group_->isEmpty()) {
@@ -144,7 +144,7 @@ void GroupView::slotModifyGroup(Data::CollPtr coll_, Data::EntryGroup* group_) {
 
 // don't 'shadow' QListView::setSelected
 void GroupView::setEntrySelected(Data::EntryPtr entry_) {
-//  kdDebug() << "GroupView::slotSetSelected()" << endl;
+//  myDebug() << "GroupView::slotSetSelected()" << endl;
   // if entry_ is null pointer, set no selected
   if(!entry_) {
     // don't move this one outside the block since it calls setCurrentItem(0)
@@ -160,7 +160,7 @@ void GroupView::setEntrySelected(Data::EntryPtr entry_) {
 
   // have to find a group whose field is the same as currently shown
   if(m_groupBy.isEmpty()) {
-    kdDebug() << "GroupView::slotSetSelected() - no group field" << endl;
+    myDebug() << "GroupView::slotSetSelected() - no group field" << endl;
     return;
   }
 
@@ -172,7 +172,7 @@ void GroupView::setEntrySelected(Data::EntryPtr entry_) {
     }
   }
   if(!group) {
-    kdDebug() << "GroupView::slotSetSelected() - entry is not in any current groups!" << endl;
+    myDebug() << "GroupView::slotSetSelected() - entry is not in any current groups!" << endl;
     return;
   }
 
@@ -271,15 +271,13 @@ void GroupView::slotCollapsed(QListViewItem* item_) {
 }
 
 void GroupView::slotExpanded(QListViewItem* item_) {
+  EntryGroupItem* item = static_cast<EntryGroupItem*>(item_);
   // only change icon for group items
-  if(!static_cast<GUI::ListViewItem*>(item_)->isEntryGroupItem()) {
-    kdWarning() << "GroupView::slotExpanded() - non entry group item - " << item_->text(0) << endl;
+  if(!item->isEntryGroupItem()) {
     return;
   }
 
   setUpdatesEnabled(false);
-
-  EntryGroupItem* item = static_cast<EntryGroupItem*>(item_);
   if(item->text(0) == Data::Collection::s_emptyGroupTitle) {
     item->setPixmap(0, SmallIcon(QString::fromLatin1("folder_red_open")));
   } else {
@@ -324,7 +322,7 @@ void GroupView::addCollection(Data::CollPtr coll_) {
   populateCollection();
 
   slotCollapseAll();
-//  kdDebug() << "GroupView::addCollection - done" << endl;
+//  myDebug() << "GroupView::addCollection - done" << endl;
 }
 
 void GroupView::setGroupField(const QString& groupField_) {
@@ -432,7 +430,7 @@ void GroupView::setSorting(int col_, bool asc_) {
   ListView::setSorting(col_, asc_);
 }
 
-void GroupView::modifyField(Data::CollPtr, Data::FieldPtr oldField_, Data::FieldPtr newField_) {
+void GroupView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr newField_) {
   if(newField_->name() == m_groupBy) {
     updateHeader(newField_);
   }

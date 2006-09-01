@@ -13,6 +13,7 @@
 
 #include "borroweritem.h"
 #include "borrower.h"
+#include "entry.h"
 
 #include "kiconloader.h"
 
@@ -26,4 +27,14 @@ BorrowerItem::BorrowerItem(GUI::ListView* parent_, Data::BorrowerPtr borrower_)
 
 int BorrowerItem::count() const {
   return m_borrower ? m_borrower->count() : GUI::CountedItem::count();
+}
+
+Tellico::Data::EntryVec BorrowerItem::entries() const {
+  Data::EntryVec entries;
+  for(Data::LoanVec::ConstIterator loan = m_borrower->loans().begin(); loan != m_borrower->loans().end(); ++loan) {
+    if(!entries.contains(loan->entry())) {
+      entries.append(loan->entry());
+    }
+  }
+  return entries;
 }

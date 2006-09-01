@@ -32,18 +32,18 @@ int main(int, char**) {
   kdDebug() << "\n*****************************************************" << endl;
 
   // title checks
-  Tellico::Data::Field::setNoCapitalizeList(Tellico::Data::Field::defaultNoCapitalizationList());
-  Tellico::Data::Field::setArticleList(Tellico::Data::Field::defaultArticleList());
+//  Tellico::Data::Field::setNoCapitalizeList(Tellico::Data::Field::defaultNoCapitalizationList());
+//  Tellico::Data::Field::setArticleList(Tellico::Data::Field::defaultArticleList());
   checkTitle("Title", "Title");
   checkTitle("title", "Title");
   checkTitle("the title", "Title, The");
   checkTitle("the return of the king", "Return of the King, The");
 
   // name checks
-  Tellico::Data::Field::setSuffixList(Tellico::Data::Field::defaultSuffixList());
-  QStringList prefixes = Tellico::Data::Field::defaultSurnamePrefixList();
-  prefixes += QString::fromLatin1("l'");
-  Tellico::Data::Field::setSurnamePrefixList(prefixes);
+//  Tellico::Config::setSuffixList(Tellico::Data::Field::defaultSuffixList());
+//  QStringList prefixes = Tellico::Data::Field::defaultSurnamePrefixList();
+//  prefixes += QString::fromLatin1("l'");
+//  Tellico::Data::Field::setSurnamePrefixList(prefixes);
   checkName("Name", "Name");
   checkName("First Name", "Name, First");
   checkName("First Name", "Name, First", false);

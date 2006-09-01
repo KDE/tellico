@@ -73,8 +73,7 @@ When more than one field in the collection has the <emphasis><link linkend="fiel
 </para>
 
 <para>
-If an entry does not contain a value for the field being used to form the groups, it is placed in the <emphasis>(Empty)</emphasis> group,
-which uses a red folder.
+If an entry does not contain a value for the field being used to form the groups, it is placed in the <emphasis>(Empty)</emphasis> group, which uses a red folder.
 </para>
 </sect2>
 
@@ -121,7 +120,10 @@ on an entry item has an option for modifying the loan using the &loan-dialog;.
 <title>&entry-view;</title>
 
 <para>
-A formatted representation of the entry's values is shown in the &entry-view;. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options">&config-dialog;</link>. The default templates make &URL; fields active, which will open up with the default &kde; file association. When exporting to &html;, the current template is used for exporting the individual entry files.
+A formatted representation of the entry's values is shown in the &entry-view;. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options">&config-dialog;</link>, along with custom colors and fonts.</para>
+
+<para>All of the default templates honor the color and font selection, but other custom templates might now.
+The default templates also make &URL; fields active, which will open up with the default &kde; file association. When exporting to &html;, the current template is used for exporting the individual entry files.
 </para>
 
 <para>
@@ -145,6 +147,10 @@ The status bar is used to show you what &appname; is currently doing. It also in
 
 <para>
 The &entry-editor; is used to add and modify entries in the collection. Double-clicking on an entry in either the &group-view; or the &detailed-view; opens the &entry-editor; with that entry. New entries may be created using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself.</para>
+
+<para>
+The arrow buttons on the bottom will move to the previous or next entries in the current list.
+</para>
 
 <para>Closing the &entry-editor; when changes have been made but not saved will cause a warning message to appear. The fields are grouped by category and appear in the order that they appear in the <link linkend="fields-dialog">&fields-dialog;</link>. They may also be reordered.
 </para>
@@ -225,7 +231,7 @@ information from the <link linkend="imdb">Internet Movie Database</link>.
 </para>
 
 <para>
-Only empty fields are updated! So if you want to update the movie cast, be sure to clear that data first, then run the updater. For <link linkend="externalexec">external scripts</link>, an update field must be specified in the source options.
+Only empty fields are updated unless the <link linkend="data-sources-options">setting for that source</link> allows results to overwrite existing information. For <link linkend="externalexec">external scripts</link>, an update field must be specified in the source options.
 </para>
 
 <para>
@@ -262,7 +268,7 @@ On the left side of the dialog is the list of the current fields. Modified field
 <title>Field Properties</title>
 
 <para>
-A field is defined by its title, type, category, description, and possibly some allowed values. The title is used everywhere to refer to the field in the user interface. The &entry-editor; uses it to prompt for values. The &detailed-view; uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the &entry-editor;, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
+A field is defined by its title, type, category, description, and possibly a default value or some allowed values. The title is used everywhere to refer to the field in the user interface. The &entry-editor; uses it to prompt for values. The &detailed-view; uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the &entry-editor;, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The default value is automatically added when creating a new entry. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
 </para>
 
 <para>
@@ -531,7 +537,7 @@ type "weber|bujold" (no quotes) in the filter box.
 
 <tip>
 <para>You can edit more than one entry at a time, by holding down
-the Shift or Ctrl key and selecting multiple entries.
+the &Shift; or &Ctrl; key and selecting multiple entries.
 </para>
 </tip>
 

@@ -34,6 +34,7 @@
 #include <qlabel.h>
 #include <qcheckbox.h>
 #include <qstyle.h>
+#include <qtimer.h>
 
 namespace {
   // if you change this, update numberfieldwidget, too
@@ -90,7 +91,7 @@ FieldWidget* FieldWidget::create(Data::FieldPtr field_, QWidget* parent_, const 
 }
 
 FieldWidget::FieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : QWidget(parent_, name_) {
+    : QWidget(parent_, name_), m_field(field_) {
   QHBoxLayout* l = new QHBoxLayout(this, 2, 2); // parent, margin, spacing
   l->addSpacing(4); // add some more space in the columns between widgets
   if(QCString(style().name()).lower().find("keramik", 0, false) > -1) {
@@ -125,6 +126,12 @@ FieldWidget::FieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* na
   l->addWidget(m_editMultiple);
 
   QWhatsThis::add(this, field_->description());
+  // after letting the subclass get created, insert default value
+  QTimer::singleShot(0, this, SLOT(insertDefault()));
+}
+
+void FieldWidget::insertDefault() {
+  setText(m_field->defaultValue());
 }
 
 bool FieldWidget::isEnabled() {
@@ -185,6 +192,7 @@ void FieldWidget::registerWidget() {
 }
 
 void FieldWidget::updateField(Data::FieldPtr oldField_, Data::FieldPtr newField_) {
+  m_field = newField_;
   m_label->setText(i18n("Edit Label", "%1:").arg(newField_->title()));
   updateGeometry();
   QWhatsThis::add(this, newField_->description());

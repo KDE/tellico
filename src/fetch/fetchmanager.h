@@ -25,15 +25,18 @@ namespace Tellico {
 #include "fetcher.h"
 #include "../ptrvector.h"
 
+#include <ksortablevaluelist.h>
+
 #include <qobject.h>
 
 namespace Tellico {
   namespace Fetch {
 
-typedef QMap<Type, QString> FetchMap;
-typedef QMap<FetchKey, QString> FetchKeyMap;
-typedef QMap<Fetcher::Ptr, QString> FetchConfigMap;
+typedef KSortableItem<Type, QString> TypePair; // fetcher info, type and name of type
+typedef KSortableValueList<Type, QString> TypePairList;
+typedef QMap<FetchKey, QString> KeyMap; // map key type to name of key
 typedef Vector<Fetcher> FetcherVec;
+typedef Vector<const Fetcher> CFetcherVec;
 
 /**
  * A manager for handling all the different classes of Fetcher.
@@ -48,23 +51,24 @@ public:
 
   ~Manager();
 
-  QStringList sources() const;
-  QStringList keys(const QString& source) const;
+  TypePairList sources() const;
+  KeyMap keyMap(const QString& source = QString::null) const;
   void startSearch(const QString& source, FetchKey key, const QString& value);
   void stop();
   bool canFetch() const;
   void loadFetchers();
   const FetcherVec& fetchers() const { return m_fetchers; }
-  FetchKey fetchKey(const QString& key) const;
-  const QString& fetchKeyString(FetchKey key) const;
+  CFetcherVec fetchers(int type) const;
+  TypePairList typeList();
+  ConfigWidget* configWidget(QWidget* parent, Type type, const QString& name);
 
   // create fetcher for updating an entry
   FetcherVec createUpdateFetchers(int collType);
   Fetcher::Ptr createUpdateFetcher(int collType, const QString& source);
 
-  static ConfigWidget* configWidget(Type type, QWidget* parent);
-  static FetchMap sourceMap();
-  static QString defaultSourceName(const QString& sourceType);
+  static QString typeName(Type type);
+  static QPixmap fetcherIcon(Fetch::Type type);
+  static QPixmap fetcherIcon(Fetch::Fetcher::CPtr ptr);
 
 signals:
   void signalStatus(const QString& status);
@@ -83,9 +87,15 @@ private:
   FetcherVec defaultFetchers();
   void updateStatus(const QString& message);
 
+  static QString favIcon(const KURL& url);
+  static bool bundledScriptHasExecPath(const QString& specFile, KConfig* config);
+
   FetcherVec m_fetchers;
-  FetchKeyMap m_keyMap;
-  FetchConfigMap m_configMap;
+  KeyMap m_keyMap;
+  typedef QMap<Fetcher::Ptr, QString> ConfigMap;
+  ConfigMap m_configMap;
+  typedef QMap<QString, QString> StringMap;
+  StringMap m_scriptMap;
   ManagerMessage* m_messager;
   uint m_count;
   bool m_loadDefaults : 1;

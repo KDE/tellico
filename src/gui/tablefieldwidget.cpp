@@ -138,7 +138,11 @@ void TableFieldWidget::setText(const QString& text_) {
 }
 
 void TableFieldWidget::clear() {
+  bool wasEmpty = true;
   for(int row = 0; row < m_table->numRows(); ++row) {
+    if(!emptyRow(row)) {
+      wasEmpty = false;
+    }
     for(int col = 0; col < m_table->numCols(); ++col) {
       m_table->setText(row, col, QString::null);
     }
@@ -148,6 +152,9 @@ void TableFieldWidget::clear() {
     }
   }
   editMultiple(false);
+  if(!wasEmpty) {
+    emit modified();
+  }
 }
 
 QWidget* TableFieldWidget::widget() {
@@ -171,12 +178,13 @@ void TableFieldWidget::slotRenameColumn() {
   QString name = m_table->horizontalHeader()->label(m_col);
   bool ok;
   QString newName = KInputDialog::getText(i18n("Rename Column"), i18n("New column name:"),
-                                           name, &ok, this);
+                                          name, &ok, this);
   if(ok && !newName.isEmpty()) {
-    Data::FieldPtr newField = m_field->clone();
+    Data::FieldPtr newField = new Data::Field(*m_field);
     newField->setProperty(QString::fromLatin1("column%1").arg(m_col+1), newName);
     if(Kernel::self()->modifyField(newField)) {
-      labelColumns(newField);
+      m_field = newField;
+      labelColumns(m_field);
     }
   }
 }
@@ -211,10 +219,7 @@ void TableFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_)
   if(m_columns != m_table->numCols()) {
     m_table->setNumCols(m_columns);
   }
-  // adjust all columns
-  for(int col = 0; col < m_table->numCols(); ++col) {
-    m_table->adjustColumn(col);
-  }
+  m_table->horizontalHeader()->adjustHeaderSize();
   labelColumns(newField_);
 }
 
@@ -285,6 +290,9 @@ void TableFieldWidget::contextMenu(int row_, int col_, const QPoint& p_) {
   if(m_col < 0 || m_col > m_columns-1) {
     menu.setItemEnabled(id, false);
   }
+  menu.insertSeparator();
+  menu.insertItem(SmallIconSet(QString::fromLatin1("locationbar_erase")), i18n("Clear Table"),
+                  this, SLOT(clear()));
   menu.exec(p_);
 }
 

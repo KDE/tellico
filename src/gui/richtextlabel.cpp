@@ -40,8 +40,8 @@ void RichTextLabel::init() {
 
   setPaper(colorGroup().background());
 
-  setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum));
-  viewport()->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum));
+  setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding));
+  viewport()->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding));
 }
 
 #include "richtextlabel.moc"

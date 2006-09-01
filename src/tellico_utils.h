@@ -65,7 +65,7 @@ namespace Tellico {
 namespace GUI {
   class CursorSaver {
   public:
-    CursorSaver(const QCursor& cursor);
+    CursorSaver(const QCursor& cursor = Qt::waitCursor);
     ~CursorSaver();
     void restore();
   private:

@@ -35,14 +35,19 @@
  <l:lang id="heb">Hebrew</l:lang>
  <l:lang id="gre">Greek</l:lang>
  <l:lang id="hin">Hindi</l:lang>
+ <l:lang id="hun">Hungarian</l:lang>
  <l:lang id="ita">Italian</l:lang>
  <l:lang id="jpn">Japanese</l:lang>
  <l:lang id="kor">Korean</l:lang>
  <l:lang id="lat">Latin</l:lang>
  <l:lang id="lit">Lithuanian</l:lang>
+ <l:lang id="nob">Norwegian Bokm&#229;l</l:lang>
  <l:lang id="nor">Norwegian</l:lang>
+ <l:lang id="nno">Norwegian Nynorsk</l:lang>
+ <l:lang id="pol">Polish</l:lang>
  <l:lang id="por">Portuguese</l:lang>
  <l:lang id="rus">Russian</l:lang>
+ <l:lang id="slo">Slovak</l:lang>
  <l:lang id="spa">Spanish</l:lang>
  <l:lang id="swe">Swedish</l:lang>
  <l:lang id="chi">Chinese</l:lang>
@@ -78,6 +83,10 @@
       <prop name="bibtex">address</prop>
      </field>
     </xsl:if>
+    <!-- add illustrator -->
+    <xsl:if test=".//mods:mods/mods:name[@type='personal']/mods:role/mods:roleTerm[@authority='marcrelator' and @type='code'] = 'ill.'">
+     <field flags="7" title="Illustrator" category="General" format="2" type="1" name="illustrator" i18n="true"/>
+    </xsl:if>
    </fields>
 <!-- for now, go the route of bibliox, and assume only text records
      with an originInfo/publisher or identifier[isbn] elements are actually books -->
@@ -105,7 +114,8 @@
   </subtitle>
 
   <authors>
-   <xsl:for-each select="mods:name[@type='personal']">
+   <xsl:for-each select="mods:name[@type='personal' and
+                                   not(mods:role/mods:roleTerm[@authority='marcrelator' and @type='code'] = 'ill.')]">
     <!-- don't be picky right now, but could test for -->
     <!--    <xsl:if test="mods:role[mods:roleTerm/@authority='marcrelator' and mods:roleTerm='creator']">-->
      <author>
@@ -118,6 +128,20 @@
      </author>
    </xsl:for-each>
   </authors>
+
+  <illustrators>
+   <xsl:for-each select="mods:name[@type='personal' and
+                                   mods:role/mods:roleTerm[@authority='marcrelator' and @type='code'] = 'ill.']">
+    <illustrator>
+     <xsl:for-each select="mods:namePart[@type ='' or not(@type = 'date')]">
+      <xsl:value-of select="."/>
+      <xsl:if test="position() &lt; last()">
+       <xsl:text> </xsl:text>
+      </xsl:if>
+     </xsl:for-each>
+    </illustrator>
+   </xsl:for-each>
+  </illustrators>
 
   <genres i18n="true">
    <xsl:for-each select="mods:genre">

@@ -79,6 +79,9 @@ public:
    */
   Data::EntryPtr const entry() const;
 
+  virtual void doubleClicked();
+  virtual Data::EntryVec entries() const;
+
 private:
   /**
    * Compares one column to another, calling @ref DetailedListView::isNumber() and

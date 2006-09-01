@@ -26,4 +26,4 @@ entitytest_SOURCES = entitytest.cpp
 entitytest_LDADD = ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)
 
 formattest_SOURCES = formattest.cpp
-formattest_LDADD = ../field.o ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)
+formattest_LDADD = ../core/tellico_config.o ../core/tellico_config_addons.o ../field.o ../tellico_utils.o $(LIB_QT) $(LIB_KDECORE)

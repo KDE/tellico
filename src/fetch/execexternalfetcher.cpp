@@ -13,20 +13,21 @@
 
 #include "execexternalfetcher.h"
 #include "messagehandler.h"
+#include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../importdialog.h"
 #include "../translators/tellicoimporter.h"
 #include "../tellico_debug.h"
-#include "../gui/comboboxproxy.h"
-#include "../collectionfactory.h"
-#include "fetchmanager.h"
+#include "../gui/combobox.h"
+#include "../gui/lineedit.h"
+#include "../gui/collectiontypecombo.h"
+#include "../tellico_utils.h"
+#include "../newstuff/manager.h"
 
 #include <klocale.h>
 #include <kconfig.h>
 #include <kprocess.h>
-#include <klineedit.h>
-#include <kconfig.h>
 #include <kurlrequester.h>
 #include <kaccelmanager.h>
 
@@ -35,7 +36,7 @@
 #include <qwhatsthis.h>
 #include <qregexp.h>
 #include <qvgroupbox.h>
-#include <qgrid.h>
+#include <qfile.h> // needed for QFile::remove
 
 using Tellico::Fetch::ExecExternalFetcher;
 
@@ -70,7 +71,7 @@ QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
 }
 
 ExecExternalFetcher::ExecExternalFetcher(QObject* parent_, const char* name_/*=0*/) : Fetcher(parent_, name_),
-    m_started(false), m_collType(-1), m_formatType(-1), m_canUpdate(false), m_process(0) {
+    m_started(false), m_collType(-1), m_formatType(-1), m_canUpdate(false), m_process(0), m_deleteOnRemove(false) {
 }
 
 ExecExternalFetcher::~ExecExternalFetcher() {
@@ -89,13 +90,9 @@ bool ExecExternalFetcher::canFetch(int type_) const {
   return m_collType == -1 ? false : m_collType == type_;
 }
 
-void ExecExternalFetcher::readConfig(KConfig* config_, const QString& group_) {
+void ExecExternalFetcher::readConfigHook(KConfig* config_, const QString& group_) {
   KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Name");
-  if(!s.isEmpty()) {
-    m_name = s;
-  }
-  s = config_->readPathEntry("ExecPath");
+  QString s = config_->readPathEntry("ExecPath");
   if(!s.isEmpty()) {
     m_path = s;
   }
@@ -121,6 +118,8 @@ void ExecExternalFetcher::readConfig(KConfig* config_, const QString& group_) {
   }
   m_collType = config_->readNumEntry("CollectionType", -1);
   m_formatType = config_->readNumEntry("FormatType", -1);
+  m_deleteOnRemove = config_->readBoolEntry("DeleteOnRemove", false);
+  m_newStuffName = config_->readEntry("NewStuffName");
 }
 
 void ExecExternalFetcher::search(FetchKey key_, const QString& value_) {
@@ -137,6 +136,10 @@ void ExecExternalFetcher::search(FetchKey key_, const QString& value_) {
   // but first check to make sure the user didn't do that already
   // AND the "%1" wasn't used in the settings
   QString value = value_;
+  if(key_ == ISBN) {
+    value.remove('-'); // remove hyphens from isbn values
+    // shouldn't hurt and might keep from confusing stupid search sources
+  }
   QRegExp rx1(QString::fromLatin1("['\"].*\\1"));
   if(!rx1.exactMatch(value)) {
     value.prepend('"').append('"');
@@ -152,6 +155,13 @@ void ExecExternalFetcher::startSearch(const QStringList& args_) {
     stop();
     return;
   }
+
+#if 0
+  myDebug() << m_path << endl;
+  for(QStringList::ConstIterator it = args_.begin(); it != args_.end(); ++it) {
+    myDebug() << "  " << *it << endl;
+  }
+#endif
 
   m_process = new KProcess();
   connect(m_process, SIGNAL(receivedStdout(KProcess*, char*, int)), SLOT(slotData(KProcess*, char*, int)));
@@ -185,6 +195,7 @@ void ExecExternalFetcher::slotData(KProcess*, char* buffer_, int len_) {
 }
 
 void ExecExternalFetcher::slotError(KProcess*, char* buffer_, int len_) {
+  GUI::CursorSaver cs(Qt::arrowCursor);
   QString msg = QString::fromLocal8Bit(buffer_, len_);
   msg.prepend(source() + QString::fromLatin1(": "));
   myDebug() << "ExecExternalFetcher::slotError() - " << msg << endl;
@@ -275,6 +286,12 @@ void ExecExternalFetcher::slotProcessExited(KProcess*) {
         desc = entry->field(QString::fromLatin1("platform"));
         break;
 
+      case Data::Collection::ComicBook:
+        desc = entry->field(QString::fromLatin1("publisher"))
+               + QChar('/')
+               + entry->field(QString::fromLatin1("pub_year"));
+        break;
+
       default:
         break;
     }
@@ -309,40 +326,36 @@ Tellico::Fetch::ConfigWidget* ExecExternalFetcher::configWidget(QWidget* parent_
 }
 
 ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExternalFetcher* fetcher_/*=0*/)
-    : Fetch::ConfigWidget(parent_) {
+    : Fetch::ConfigWidget(parent_), m_deleteOnRemove(false) {
   QGridLayout* l = new QGridLayout(optionsWidget(), 5, 2);
   l->setSpacing(4);
   l->setColStretch(1, 10);
 
-  int row = 0;
+  int row = -1;
 
   QLabel* label = new QLabel(i18n("Collection &type:"), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_collCombo = new CBProxy(optionsWidget());
-  CollectionNameMap collMap = CollectionFactory::nameMap();
-  for(CollectionNameMap::Iterator it = collMap.begin(); it != collMap.end(); ++it) {
-    m_collCombo->insertItem(it.data(), it.key());
-  }
-  connect(m_collCombo->comboBox(), SIGNAL(activated(int)), SLOT(slotSetModified()));
-  l->addWidget(m_collCombo->comboBox(), row, 1);
+  m_collCombo = new GUI::CollectionTypeCombo(optionsWidget());
+  connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  l->addWidget(m_collCombo, row, 1);
   QString w = i18n("Set the collection type of the data returned from the external application.");
   QWhatsThis::add(label, w);
-  QWhatsThis::add(m_collCombo->comboBox(), w);
-  label->setBuddy(m_collCombo->comboBox());
+  QWhatsThis::add(m_collCombo, w);
+  label->setBuddy(m_collCombo);
 
   label = new QLabel(i18n("&Result type: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_formatCombo = new CBProxy(optionsWidget());
+  m_formatCombo = new GUI::ComboBox(optionsWidget());
   Import::FormatMap formatMap = ImportDialog::formatMap();
   for(Import::FormatMap::Iterator it = formatMap.begin(); it != formatMap.end(); ++it) {
     m_formatCombo->insertItem(it.data(), it.key());
   }
-  connect(m_formatCombo->comboBox(), SIGNAL(activated(int)), SLOT(slotSetModified()));
-  l->addWidget(m_formatCombo->comboBox(), row, 1);
+  connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  l->addWidget(m_formatCombo, row, 1);
   w = i18n("Set the result type of the data returned from the external application.");
   QWhatsThis::add(label, w);
-  QWhatsThis::add(m_formatCombo->comboBox(), w);
-  label->setBuddy(m_formatCombo->comboBox());
+  QWhatsThis::add(m_formatCombo, w);
+  label->setBuddy(m_formatCombo);
 
   label = new QLabel(i18n("Application &path: "), optionsWidget());
   l->addWidget(label, ++row, 0);
@@ -359,15 +372,23 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   QVGroupBox* box = new QVGroupBox(i18n("Arguments"), optionsWidget());
   ++row;
   l->addMultiCellWidget(box, row, row, 0, 1);
-  QGrid* grid = new QGrid(2, box);
-  for(int i = FetchFirst+1; i < FetchLast; ++i) {
-    if(i == Raw) {
+  QWidget* grid = new QWidget(box);
+  QGridLayout* gridLayout = new QGridLayout(grid);
+  gridLayout->setSpacing(2);
+  row = -1;
+  const Fetch::KeyMap keyMap = Fetch::Manager::self()->keyMap();
+  for(Fetch::KeyMap::ConstIterator it = keyMap.begin(); it != keyMap.end(); ++it) {
+    FetchKey key = it.key();
+    if(key == Raw) {
       continue;
     }
-    FetchKey key = static_cast<FetchKey>(i);
-    QCheckBox* cb = new QCheckBox(Fetch::Manager::self()->fetchKeyString(key), grid);
+    QCheckBox* cb = new QCheckBox(it.data(), grid);
+    gridLayout->addWidget(cb, ++row, 0);
     m_cbDict.insert(key, cb);
-    KLineEdit* le = new KLineEdit(grid);
+    GUI::LineEdit* le = new GUI::LineEdit(grid);
+    le->setHint(QString::fromLatin1("%1")); // for example
+    le->completionObject()->addItem(QString::fromLatin1("%1"));
+    gridLayout->addWidget(le, row, 1);
     m_leDict.insert(key, le);
     if(fetcher_ && fetcher_->m_args.contains(key)) {
       cb->setChecked(true);
@@ -382,7 +403,12 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     QWhatsThis::add(le, w2);
   }
   m_cbUpdate = new QCheckBox(i18n("Update"), grid);
-  m_leUpdate = new KLineEdit(grid);
+  gridLayout->addWidget(m_cbUpdate, ++row, 0);
+  m_leUpdate = new GUI::LineEdit(grid);
+  m_leUpdate->setHint(QString::fromLatin1("%{title}")); // for example
+  m_leUpdate->completionObject()->addItem(QString::fromLatin1("%{title}"));
+  m_leUpdate->completionObject()->addItem(QString::fromLatin1("%{isbn}"));
+  gridLayout->addWidget(m_leUpdate, row, 1);
   w2 = i18n("<p>Enter the arguments which should be used to search for available updates to an entry.</p><p>"
            "The format is the same as for <i>Dependent</i> fields, where field values "
            "are contained inside braces, such as <i>%{author}</i> See the documentation for details.</p>");
@@ -402,23 +428,76 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
 
   if(fetcher_) {
     m_pathEdit->setURL(fetcher_->m_path);
+    m_newStuffName = fetcher_->m_newStuffName;
   }
   if(fetcher_ && fetcher_->m_collType > -1) {
-    m_collCombo->comboBox()->setCurrentItem(collMap[static_cast<Data::Collection::Type>(fetcher_->m_collType)]);
+    m_collCombo->setCurrentType(fetcher_->m_collType);
   } else {
-    m_collCombo->comboBox()->setCurrentItem(collMap[Data::Collection::Book]);
+    m_collCombo->setCurrentType(Data::Collection::Book);
   }
   if(fetcher_ && fetcher_->m_formatType > -1) {
-    m_formatCombo->comboBox()->setCurrentItem(formatMap[static_cast<Import::Format>(fetcher_->m_formatType)]);
+    m_formatCombo->setCurrentItem(formatMap[static_cast<Import::Format>(fetcher_->m_formatType)]);
   } else {
-    m_formatCombo->comboBox()->setCurrentItem(formatMap[Import::TellicoXML]);
+    m_formatCombo->setCurrentItem(formatMap[Import::TellicoXML]);
   }
+  m_deleteOnRemove = fetcher_ && fetcher_->m_deleteOnRemove;
   KAcceleratorManager::manage(optionsWidget());
 }
 
 ExecExternalFetcher::ConfigWidget::~ConfigWidget() {
-  delete m_collCombo;
-  delete m_formatCombo;
+}
+
+void ExecExternalFetcher::ConfigWidget::readConfig(KConfig* config_) {
+  m_pathEdit->setURL(config_->readPathEntry("ExecPath"));
+  QValueList<int> argKeys = config_->readIntListEntry("ArgumentKeys");
+  QStringList argValues = config_->readListEntry("Arguments");
+  if(argKeys.count() != argValues.count()) {
+    kdWarning() << "ExecExternalFetcher::ConfigWidget::readConfig() - unequal number of arguments and keys" << endl;
+  }
+  int n = QMIN(argKeys.count(), argValues.count());
+  QMap<FetchKey, QString> args;
+  for(int i = 0; i < n; ++i) {
+    args[static_cast<FetchKey>(argKeys[i])] = argValues[i];
+  }
+  for(QValueList<int>::Iterator it = argKeys.begin(); it != argKeys.end(); ++it) {
+    if(*it == Raw) {
+      continue;
+    }
+    FetchKey key = static_cast<FetchKey>(*it);
+    QCheckBox* cb = m_cbDict[key];
+    KLineEdit* le = m_leDict[key];
+    if(cb && le) {
+      if(args.contains(key)) {
+        cb->setChecked(true);
+        le->setEnabled(true);
+        le->setText(args[key]);
+      } else {
+        cb->setChecked(false);
+        le->setEnabled(false);
+        le->clear();
+      }
+    }
+  }
+
+  if(config_->hasKey("UpdateArgs")) {
+    m_cbUpdate->setChecked(true);
+    m_leUpdate->setEnabled(true);
+    m_leUpdate->setText(config_->readEntry("UpdateArgs"));
+  } else {
+    m_cbUpdate->setChecked(false);
+    m_leUpdate->setEnabled(false);
+    m_leUpdate->clear();
+  }
+
+  int collType = config_->readNumEntry("CollectionType");
+  m_collCombo->setCurrentType(collType);
+
+  Import::FormatMap formatMap = ImportDialog::formatMap();
+  int formatType = config_->readNumEntry("FormatType");
+  m_formatCombo->setCurrentItem(formatMap[static_cast<Import::Format>(formatType)]);
+  m_deleteOnRemove = config_->readBoolEntry("DeleteOnRemove", false);
+  m_name = config_->readEntry("Name");
+  m_newStuffName = config_->readEntry("NewStuffName");
 }
 
 void ExecExternalFetcher::ConfigWidget::saveConfig(KConfig* config_) {
@@ -443,9 +522,27 @@ void ExecExternalFetcher::ConfigWidget::saveConfig(KConfig* config_) {
     config_->deleteEntry("UpdateArgs");
   }
 
-  config_->writeEntry("CollectionType", m_collCombo->currentData());
-  config_->writeEntry("FormatType", m_formatCombo->currentData());
+  config_->writeEntry("CollectionType", m_collCombo->currentType());
+  config_->writeEntry("FormatType", m_formatCombo->currentData().toInt());
+  config_->writeEntry("DeleteOnRemove", m_deleteOnRemove);
+  if(!m_newStuffName.isEmpty()) {
+    config_->writeEntry("NewStuffName", m_newStuffName);
+  }
   slotSetModified(false);
+}
+
+void ExecExternalFetcher::ConfigWidget::removed() {
+  if(!m_deleteOnRemove) {
+    return;
+  }
+  if(!m_newStuffName.isEmpty()) {
+    NewStuff::Manager man(this);
+    man.removeScript(m_newStuffName);
+  }
+}
+
+QString ExecExternalFetcher::ConfigWidget::preferredName() const {
+  return m_name.isEmpty() ? ExecExternalFetcher::defaultName() : m_name;
 }
 
 #include "execexternalfetcher.moc"

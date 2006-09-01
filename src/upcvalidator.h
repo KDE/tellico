@@ -36,6 +36,8 @@ signals:
   void signalISBN();
 
 private:
+  State decodeCat(QString& str) const;
+
   bool m_checkISBN : 1;
   mutable bool m_isbn : 1;
 };

@@ -37,7 +37,7 @@ public:
   /**
    * Since the conversion to a QCString appends a \0 character at the end, remove it.
    *
-   * @param text The XML text. It MUST be in UTF-8.
+   * @param text The text. It MUST be in UTF-8.
    */
   DataImporter(const QString& text) : Importer(text), m_data(text.utf8()), m_source(Text), m_fileRef(0)
     { m_data.truncate(m_data.size()-1); }

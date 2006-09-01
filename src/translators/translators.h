@@ -29,7 +29,8 @@ namespace Tellico {
       RIS,
       GCfilms,
       FileListing,
-      GRS1
+      GRS1,
+      AMC
     };
 
     enum Action {

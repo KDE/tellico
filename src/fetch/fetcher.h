@@ -14,13 +14,6 @@
 #ifndef FETCHER_H
 #define FETCHER_H
 
-namespace Tellico {
-  namespace Fetch {
-    class ConfigWidget;
-    class MessageHandler;
-  }
-}
-
 #include "fetch.h"
 #include "../datavectors.h"
 
@@ -31,8 +24,9 @@ namespace Tellico {
 
 namespace Tellico {
   namespace Fetch {
-
-class SearchResult;
+    class ConfigWidget;
+    class MessageHandler;
+    class SearchResult;
 
 /**
  * The top-level abstract class for fetching data.
@@ -44,6 +38,7 @@ Q_OBJECT
 
 public:
   typedef KSharedPtr<Fetcher> Ptr;
+  typedef KSharedPtr<const Fetcher> CPtr;
 
   /**
    */
@@ -70,6 +65,10 @@ public:
    * Returns the name of the data source, as defined by the user.
    */
   virtual QString source() const = 0;
+  /**
+   * Returns whether the fetcher will overwite existing info when updating
+   */
+  bool updateOverwrite() const { return m_updateOverwrite; }
   /**
    * Starts a search, using a kew and value.
    */
@@ -98,7 +97,8 @@ public:
   /**
    * Reads the config for the widget, given a config group.
    */
-  virtual void readConfig(KConfig* config, const QString& group) = 0;
+  void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group) = 0;
   /**
    * Returns a widget for modifying the fetcher's config.
    */
@@ -108,6 +108,10 @@ signals:
 //  void signalStatus(const QString& status);
   void signalResultFound(Tellico::Fetch::SearchResult* result);
   void signalDone(Tellico::Fetch::Fetcher::Ptr);
+
+protected:
+  QString m_name;
+  bool m_updateOverwrite : 1;
 
 private:
   MessageHandler* m_messager;

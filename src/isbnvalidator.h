@@ -120,6 +120,12 @@ private:
     unsigned Last;
   } bands[];
 
+  QValidator::State validate10(QString& input, int& pos) const;
+  QValidator::State validate13(QString& input, int& pos) const;
+
+  void fixup10(QString& input) const;
+  void fixup13(QString& input) const;
+
   /**
    * This function calculates and returns the ISBN checksum. The
    * algorithm is based on some code by Andrew Plotkin, available at
@@ -129,7 +135,8 @@ private:
    *
    * @param input The raw string, with no hyphens
    */
-  QChar checkSum(const QString& input) const;
+  QChar checkSum10(const QString& input) const;
+  QChar checkSum13(const QString& input) const;
 };
 
 } // end namespace

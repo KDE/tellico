@@ -14,6 +14,8 @@
 #ifndef TELLICO_LISTVIEW_H
 #define TELLICO_LISTVIEW_H
 
+#include "../datavectors.h"
+
 #include <klistview.h>
 #include <kdeversion.h>
 
@@ -118,6 +120,7 @@ private:
 class ListViewItem : public KListViewItem {
 public:
   ListViewItem(ListView* parent) : KListViewItem(parent), m_sortWeight(-1) {}
+  ListViewItem(ListView* parent, QListViewItem* after) : KListViewItem(parent, after), m_sortWeight(-1) {}
   ListViewItem(ListViewItem* parent) : KListViewItem(parent), m_sortWeight(-1) {}
   ListViewItem(ListView* parent, const QString& text) : KListViewItem(parent, text), m_sortWeight(-1) {}
   ListViewItem(ListViewItem* parent, const QString& text) : KListViewItem(parent, text), m_sortWeight(-1) {}
@@ -149,6 +152,9 @@ public:
                          int column, int width, int alignment);
 
   ListView* listView () const { return dynamic_cast<ListView*>(KListViewItem::listView()); }
+
+  virtual void doubleClicked() {}
+  virtual Data::EntryVec entries() const;
 
 private:
   int m_sortWeight;

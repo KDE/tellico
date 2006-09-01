@@ -49,6 +49,7 @@ bool TellicoZipExporter::exec() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString::null, true);
   item.setTotalSteps(100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   TellicoXMLExporter exp;
   exp.setEntries(entries());
@@ -114,7 +115,6 @@ bool TellicoZipExporter::exec() {
   }
 
   bool success = FileHandler::writeDataURL(url(), data, options() & Export::ExportForce);
-  ProgressManager::self()->setDone(this);
   return success;
 }
 

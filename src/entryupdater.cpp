@@ -19,12 +19,20 @@
 #include "progressmanager.h"
 #include "statusbar.h"
 #include "gui/richtextlabel.h"
+#include "document.h"
 
 #include <klocale.h>
 #include <klistview.h>
 #include <kiconloader.h>
 
 #include <qvbox.h>
+#include <qtimer.h>
+
+namespace {
+  static const int ENTRY_UPDATE_GOOD_MATCH = 10;
+  static const int ENTRY_UPDATE_PERFECT_MATCH = 20;
+  static const int CHECK_COLLECTION_IMAGES_STEP_SIZE = 10;
+}
 
 using Tellico::EntryUpdater;
 
@@ -60,35 +68,47 @@ EntryUpdater::EntryUpdater(const QString& source_, Data::CollPtr coll_, Data::En
   init();
 }
 
+EntryUpdater::~EntryUpdater() {
+  for(ResultList::Iterator res = m_results.begin(); res != m_results.end(); ++res) {
+    delete (*res).first;
+  }
+}
+
 void EntryUpdater::init() {
-  m_fetchIndex = -1;
+  m_fetchIndex = 0;
   m_origEntryCount = m_entries.count();
-  m_results.setAutoDelete(true);
   QString label;
   if(m_entries.count() == 1) {
     label = i18n("Updating %1...").arg(m_entries.front()->title());
   } else {
     label = i18n("Updating entries...");
   }
+  Kernel::self()->beginCommandGroup(i18n("Update Entries"));
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, label, true /*canCancel*/);
   item.setTotalSteps(m_fetchers.count() * m_origEntryCount);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  slotDone(); // starts fetching
+
+  // done if no fetchers available
+  if(m_fetchers.isEmpty()) {
+    QTimer::singleShot(500, this, SLOT(slotCleanup()));
+  } else {
+    slotStartNext(); // starts fetching
+  }
 }
 
-void EntryUpdater::slotResult(Fetch::SearchResult* result_) {
-  if(!result_ || m_cancelled) {
-    return;
-  }
+void EntryUpdater::slotStartNext() {
+  StatusBar::self()->setStatus(i18n("Updating <b>%1</b>...").arg(m_entries.front()->title()));
+  ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entries.count()) + m_fetchIndex);
 
-//  myDebug() << "EntryUpdater::slotResult() - " << result_->title << " [" << result_->fetcher->source() << "]" << endl;
-  m_results.append(result_);
+  Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
+//  myDebug() << "EntryUpdater::slotDone() - starting " << f->source() << endl;
+  f->updateEntry(m_entries.front());
 }
 
 void EntryUpdater::slotDone() {
   if(m_cancelled) {
-    myDebug() << "EntryUpdater::slotDone() - cancelled" << endl;
-    cleanup();
+    myLog() << "EntryUpdater::slotDone() - cancelled" << endl;
+    QTimer::singleShot(500, this, SLOT(slotCleanup()));
     return;
   }
 
@@ -106,17 +126,31 @@ void EntryUpdater::slotDone() {
     m_entries.remove(m_entries.begin());
     // if there are no more entries, and this is the last fetcher, time to delete
     if(m_entries.isEmpty()) {
-      cleanup();
+      QTimer::singleShot(500, this, SLOT(slotCleanup()));
       return;
     }
   }
   kapp->processEvents();
-  StatusBar::self()->setStatus(i18n("Updating <b>%1</b>...").arg(m_entries.front()->title()));
-  ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entries.count()) + m_fetchIndex);
+  // so the entry updater can clean up a bit
+  QTimer::singleShot(500, this, SLOT(slotStartNext()));
+}
 
-  Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
-//  myDebug() << "EntryUpdater::slotDone() - starting " << f->source() << endl;
-  f->updateEntry(m_entries.front());
+void EntryUpdater::slotResult(Fetch::SearchResult* result_) {
+  if(!result_ || m_cancelled) {
+    return;
+  }
+
+//  myDebug() << "EntryUpdater::slotResult() - " << result_->title << " [" << result_->fetcher->source() << "]" << endl;
+  m_results.append(UpdateResult(result_, m_fetchers[m_fetchIndex]->updateOverwrite()));
+  Data::EntryPtr e = result_->fetchEntry();
+  if(e) {
+    m_fetchedEntries.append(e);
+    int match = m_coll->sameEntry(m_entries.front(), e);
+    if(match > ENTRY_UPDATE_PERFECT_MATCH) {
+      result_->fetcher->stop();
+    }
+  }
+  kapp->processEvents();
 }
 
 void EntryUpdater::slotCancel() {
@@ -134,34 +168,44 @@ void EntryUpdater::handleResults() {
   Data::EntryPtr entry = m_entries.front();
   int best = 0;
   ResultList matches;
-  for(Fetch::SearchResult* res = m_results.first(); res; res = m_results.next()) {
-    int match = m_coll->sameEntry(entry, res->fetchEntry());
+  for(ResultList::Iterator res = m_results.begin(); res != m_results.end(); ++res) {
+    Data::EntryPtr e = (*res).first->fetchEntry();
+    if(!e) {
+      continue;
+    }
+    m_fetchedEntries.append(e);
+    int match = m_coll->sameEntry(entry, e);
     if(match) {
-//      myDebug() << res->fetchEntry()->title() << " matches by " << match << endl;
+//      myDebug() << e->title() << " matches by " << match << endl;
     }
     if(match > best) {
       best = match;
       matches.clear();
-      matches.append(res);
+      matches.append(*res);
     } else if(match == best && best > 0) {
-      matches.append(res);
+      matches.append(*res);
     }
   }
-  if(best < 10) {
+  if(best < ENTRY_UPDATE_GOOD_MATCH) {
     if(best > 0) {
       myDebug() << "no good match (score > 10), best match = " << best << " (" << matches.count() << " matches)" << endl;
     }
     return;
   }
 //  myDebug() << "best match = " << best << " (" << matches.count() << " matches)" << endl;
+  UpdateResult match(0, true);
   if(matches.count() == 1) {
-    mergeCurrent(matches.first()->fetchEntry());
+    match = matches.front();
   } else if(matches.count() > 1) {
-    mergeCurrent(askUser(matches));
+    match = askUser(matches);
+  }
+  // askUser() could come back with nil
+  if(match.first) {
+    mergeCurrent(match.first->fetchEntry(), match.second);
   }
 }
 
-Tellico::Data::EntryPtr EntryUpdater::askUser(ResultList results) {
+Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(ResultList results) {
   KDialogBase dlg(Kernel::self()->widget(), "entry updater dialog",
                   true, i18n("Select Match"), KDialogBase::Ok|KDialogBase::Cancel);
   QVBox* box = new QVBox(&dlg);
@@ -185,35 +229,36 @@ Tellico::Data::EntryPtr EntryUpdater::askUser(ResultList results) {
   view->setMinimumWidth(640);
   view->addColumn(i18n("Title"));
   view->addColumn(i18n("Description"));
-  QMap<KListViewItem*, Fetch::SearchResult*> map;
-  for(QPtrListIterator<Fetch::SearchResult> it(results); it.current(); ++it) {
-    map.insert(new KListViewItem(view, it.current()->fetchEntry()->title(), it.current()->desc), it.current());
+  QMap<KListViewItem*, UpdateResult> map;
+  for(ResultList::Iterator res = results.begin(); res != results.end(); ++res) {
+    map.insert(new KListViewItem(view, (*res).first->fetchEntry()->title(), (*res).first->desc), *res);
   }
 
   dlg.setMainWidget(box);
   if(dlg.exec() != QDialog::Accepted) {
-    return 0;
+    return UpdateResult(0, false);
   }
   KListViewItem* item = static_cast<KListViewItem*>(view->selectedItem());
   if(!item) {
-    return 0;
+    return UpdateResult(0, false);
   }
-  return map[item]->fetchEntry();
+  return map[item];
 }
 
-void EntryUpdater::mergeCurrent(Data::EntryPtr entry_) {
+void EntryUpdater::mergeCurrent(Data::EntryPtr entry_, bool overWrite_) {
   Data::EntryPtr currEntry = m_entries.front();
-  Data::EntryVec olds, news;
-  olds.append(new Data::Entry(*currEntry));
-  if(entry_ && Data::Collection::mergeEntry(currEntry, entry_)) {
-    news.append(currEntry);
-    Kernel::self()->modifyEntries(olds, news);
+  if(entry_) {
+    Kernel::self()->updateEntry(currEntry, entry_, overWrite_);
+    if(m_entries.count() % CHECK_COLLECTION_IMAGES_STEP_SIZE == 1) {
+      Data::Document::self()->removeImagesNotInCollection(m_fetchedEntries);
+    }
   }
 }
 
-void EntryUpdater::cleanup() {
+void EntryUpdater::slotCleanup() {
   StatusBar::self()->clearStatus();
   ProgressManager::self()->setDone(this);
+  Kernel::self()->endCommandGroup();
   deleteLater();
 }
 

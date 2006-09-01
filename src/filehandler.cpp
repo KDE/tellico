@@ -17,6 +17,7 @@
 #include "tellico_strings.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
+#include "core/netaccess.h"
 
 #include <kurl.h>
 #include <klocale.h>
@@ -27,7 +28,6 @@
 #include <kapplication.h>
 #include <kfileitem.h>
 #include <kio/chmodjob.h>
-#include <kio/scheduler.h>
 
 #include <qdom.h>
 #include <qfile.h>
@@ -57,8 +57,12 @@ FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : m_file(0), m_isVa
     return;
   }
 
-  if(!KIO::NetAccess::download(url_, m_filename, Kernel::self()->widget())) {
-    myDebug() << KIO::NetAccess::lastErrorString() << endl;
+  if(!Tellico::NetAccess::download(url_, m_filename, Kernel::self()->widget())) {
+    myDebug() << "FileRef::FileRef() - can't download " << url_ << endl;
+    QString s = KIO::NetAccess::lastErrorString();
+    if(!s.isEmpty()) {
+      myDebug() << s << endl;
+    }
     if(!quiet_) {
       Kernel::self()->sorry(i18n(errorLoad).arg(url_.fileName()));
     }
@@ -76,7 +80,7 @@ FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : m_file(0), m_isVa
 
 FileHandler::FileRef::~FileRef() {
   if(!m_filename.isEmpty()) {
-    KIO::NetAccess::removeTempFile(m_filename);
+    Tellico::NetAccess::removeTempFile(m_filename);
   }
   if(m_file) {
     m_file->close();
@@ -162,21 +166,17 @@ Tellico::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_, 
   KURL tmpURL;
   tmpURL.setPath(tmpFile.name());
   tmpFile.setAutoDelete(true);
-  NetAccess net;
-  KIO::Scheduler::checkSlaveOnHold(true);
+
   KIO::Job* job = KIO::file_copy(url_, tmpURL, -1, true /* overwrite */);
   job->addMetaData(QString::fromLatin1("referrer"), referrer_.url());
-  job->setWindow(Kernel::self()->widget());
-  net.connect(job, SIGNAL(result(KIO::Job*)), SLOT(slotResult(KIO::Job*)));
-  net.enter_loop();
-  if(!net.ok) {
-    myDebug() << net.error << endl;
+
+  if(!KIO::NetAccess::synchronousRun(job, Kernel::self()->widget())) {
     if(!quiet_) {
       Kernel::self()->sorry(i18n(errorLoad).arg(url_.fileName()));
     }
     return 0;
   }
-  return readImageFile(tmpFile.name(), quiet_);
+  return readImageFile(tmpURL, quiet_);
 }
 
 Tellico::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_) {
@@ -250,6 +250,9 @@ bool FileHandler::queryExists(const KURL& url_) {
 
 bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool encodeUTF8_, bool force_, bool quiet_) {
   if((!force_ && !queryExists(url_)) || text_.isNull()) {
+    if(text_.isNull()) {
+      myDebug() << "FileHandler::writeTextURL() - null string for " << url_ << endl;
+    }
     return false;
   }
 
@@ -395,26 +398,5 @@ bool FileHandler::writeDataFile(KSaveFile& f_, const QByteArray& data_) {
 void FileHandler::clean() {
   s_deleterList.setAutoDelete(true);
   s_deleterList.clear();
+  s_deleterList.setAutoDelete(false);
 }
-
-// this copies the method used in kio/kio/netaccess.cpp
-void qt_enter_modal(QWidget* widget);
-void qt_leave_modal(QWidget* widget);
-
-void Tellico::NetAccess::enter_loop() {
-  QWidget dummy(0, 0, WType_Dialog | WShowModal);
-  dummy.setFocusPolicy(QWidget::NoFocus);
-  qt_enter_modal(&dummy);
-  qApp->enter_loop();
-  qt_leave_modal(&dummy);
-}
-
-void Tellico::NetAccess::slotResult(KIO::Job* job_) {
-  ok = !job_->error();
-  if(!ok) {
-    error = job_->errorString();
-  }
-  qApp->exit_loop();
-}
-
-#include "filehandler.moc"

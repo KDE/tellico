@@ -60,7 +60,6 @@ public:
   /**
    * Sets the name of the field by which the entries are grouped
    *
-   * @param coll A pointer to the collection being grouped
    * @param groupFieldName The field name
    */
   void setGroupField(const QString& groupFieldName);

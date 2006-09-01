@@ -74,7 +74,7 @@ UNOTYPES := \
 
 UNOHPPFILES = $(foreach t,$(UNOTYPES),$(UNODIR)/$(subst .,/,$(t)).hpp)
 
-ooohandler.cpp: $(UNOHPPFILES) $(INCDIR)
+ooohandler.o: $(UNOHPPFILES) $(INCDIR)
 
 $(INCDIR):
 	mkdir -p $(INCDIR)

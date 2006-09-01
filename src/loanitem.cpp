@@ -13,9 +13,14 @@
 
 #include "loanitem.h"
 #include "entry.h"
+#include "tellico_kernel.h"
 
 using Tellico::LoanItem;
 
 LoanItem::LoanItem(GUI::CountedItem* parent_, Tellico::Data::LoanPtr loan_)
  : Tellico::EntryItem(parent_, loan_->entry()), m_loan(loan_) {
+}
+
+void LoanItem::doubleClicked() {
+  Kernel::self()->modifyLoan(m_loan);
 }

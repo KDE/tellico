@@ -16,8 +16,8 @@
 #include "collectionfactory.h"
 #include "translators/tellicoimporter.h"
 #include "translators/tellicozipexporter.h"
-#include "entry.h"
-#include "field.h"
+#include "translators/tellicoxmlexporter.h"
+#include "collection.h"
 #include "filehandler.h"
 #include "controller.h"
 #include "borrower.h"
@@ -25,8 +25,10 @@
 #include "latin1literal.h"
 #include "tellico_debug.h"
 #include "imagefactory.h"
+#include "image.h"
 #include "stringset.h"
 #include "progressmanager.h"
+#include "core/tellico_config.h"
 
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -36,14 +38,16 @@
 #include <qregexp.h>
 #include <qtimer.h>
 
-// use a vector we can use a sort functor
+// use a vector so we can use a sort functor
 #include <vector>
+#include <algorithm>
 
 using Tellico::Data::Document;
 Document* Document::s_self = 0;
 
 Document::Document() : QObject(), m_coll(0), m_isModified(false),
-    m_loadAllImages(false), m_validFile(false), m_importer(0), m_cancelImageWriting(false) {
+    m_loadAllImages(false), m_validFile(false), m_importer(0), m_cancelImageWriting(false),
+    m_fileFormat(Import::TellicoImporter::Unknown), m_allImagesOnDisk(!Config::writeImagesInFile()) {
   newDocument(Collection::Book);
 }
 
@@ -81,6 +85,7 @@ bool Document::newDocument(int type_) {
   url.setFileName(i18n("Untitled"));
   setURL(url);
   m_validFile = false;
+  m_fileFormat = Import::TellicoImporter::Unknown;
 
   return true;
 }
@@ -100,14 +105,19 @@ bool Document::openDocument(const KURL& url_) {
   CollPtr coll = m_importer->collection();
   // delayed image loading only works for zip files
   // format is only known AFTER collection() is called
-  if(!m_importer->hasImages() || m_importer->format() != Import::TellicoImporter::Zip) {
+
+  m_fileFormat = m_importer->format();
+  if(!m_importer->hasImages()) {
+    m_allImagesOnDisk = true;
+  }
+  if(!m_importer->hasImages() || m_fileFormat != Import::TellicoImporter::Zip) {
     m_loadAllImages = true;
   }
 
   if(!coll) {
+//    myDebug() << "Document::openDocument() - returning false" << endl;
     Kernel::self()->sorry(m_importer->statusMessage());
     m_validFile = false;
-//    myDebug() << "Document::openDocument() - returning false" << endl;
     return false;
   }
   deleteContents();
@@ -166,9 +176,10 @@ bool Document::saveDocument(const KURL& url_) {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Saving file..."), false);
   item.setTotalSteps(100);
+  ProgressItem::Done done(this);
 
   // will always save as zip file, no matter if has images or not
-  bool includeImages = Kernel::self()->writeImagesInFile();
+  bool includeImages = Config::writeImagesInFile();
   // write all images to disk cache if needed
   // have to do this before executing exporter in case
   // the user changed the imageInFile setting from Yes to No, in which
@@ -178,13 +189,19 @@ bool Document::saveDocument(const KURL& url_) {
     slotWriteAllImages(ImageFactory::DataDir);
   }
   ProgressManager::self()->setProgress(this, 80);
-  Export::TellicoZipExporter exporter;
-  exporter.setIncludeImages(includeImages);
-  exporter.setEntries(m_coll->entries());
-  exporter.setURL(url_);
+  Export::Exporter* exporter;
+  if(m_fileFormat == Import::TellicoImporter::XML) {
+    exporter = new Export::TellicoXMLExporter();
+    static_cast<Export::TellicoXMLExporter*>(exporter)->setIncludeImages(includeImages);
+  } else {
+    exporter = new Export::TellicoZipExporter();
+    static_cast<Export::TellicoZipExporter*>(exporter)->setIncludeImages(includeImages);
+  }
+  exporter->setEntries(m_coll->entries());
+  exporter->setURL(url_);
   // since we already asked about overwriting the file, force the save
-  exporter.setOptions(exporter.options() | Export::ExportForce | Export::ExportProgress);
-  bool success = exporter.exec();
+  exporter->setOptions(exporter->options() | Export::ExportForce | Export::ExportProgress);
+  bool success = exporter->exec();
   ProgressManager::self()->setProgress(this, 90);
 
   if(success) {
@@ -195,7 +212,7 @@ bool Document::saveDocument(const KURL& url_) {
   } else {
     myDebug() << "Document::saveDocument() - not successful saving to " << url_.prettyURL() << endl;
   }
-  ProgressManager::self()->setDone(this);
+  delete exporter;
   return success;
 }
 
@@ -424,13 +441,17 @@ bool Document::isEmpty() const {
   return (!m_coll || m_coll->entries().isEmpty());
 }
 
-bool Document::loadImage(const QString& id_) const {
+bool Document::loadImage(const QString& id_) {
 //  myLog() << "Document::loadImage() - id = " << id_ << endl;
   if(!m_coll) {
     return false;
   }
-  // first try the file
-  return !m_loadAllImages && m_validFile && m_importer && m_importer->loadImage(id_);
+
+  bool b = !m_loadAllImages && m_validFile && m_importer && m_importer->loadImage(id_);
+  if(b) {
+    m_allImagesOnDisk = false;
+  }
+  return b;
 }
 
 bool Document::loadAllImagesNow() const {
@@ -494,8 +515,6 @@ void Document::renameCollection(const QString& newTitle_) {
 }
 
 void Document::slotWriteAllImages(int cacheDir_) {
-  LOG_FUNC;
-
   // images get 80 steps
   const uint stepSize = 1 + QMAX(1, m_coll->entryCount()/80); // add 1 since it could round off
   uint j = 1;
@@ -510,8 +529,10 @@ void Document::slotWriteAllImages(int cacheDir_) {
       if(id.isEmpty() || images.has(id)) {
         continue;
       }
-      if(ImageFactory::writeImage(id, static_cast<ImageFactory::CacheDir>(cacheDir_))) {
+      if(ImageFactory::writeCachedImage(id, static_cast<ImageFactory::CacheDir>(cacheDir_))) {
         images.add(id);
+      } else {
+        myDebug() << "Document::slotWriteAllImages() - entry title: " << entry->title() << endl;
       }
     }
     if(j%stepSize == 0) {
@@ -525,6 +546,7 @@ void Document::slotWriteAllImages(int cacheDir_) {
 }
 
 bool Document::pruneImages() {
+  DEBUG_BLOCK;
   bool found = false;
   QString id;
   StringSet images;
@@ -540,7 +562,7 @@ bool Document::pruneImages() {
       if(img.isNull()) {
         entry->setField(field, QString::null);
         found = true;
-        myDebug() << "Document::pruneImages() - " << id << endl;
+        myDebug() << "Document::pruneImages() - removing null image for " << entry->title() << ": " << id << endl;
       } else {
         images.add(id);
       }
@@ -585,6 +607,40 @@ Tellico::Data::EntryVec Document::sortEntries(EntryVec entries_) const {
     sorted.append(*it);
   }
   return sorted;
+}
+
+void Document::removeImagesNotInCollection(Data::EntryVec entries_) {
+  // first get list of all images in collection
+  StringSet images;
+  FieldVec fields = m_coll->imageFields();
+  EntryVec allEntries = m_coll->entries();
+  for(FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
+    for(EntryVecIt e = allEntries.begin(); e != allEntries.end(); ++e) {
+      images.add(e->field(f->name()));
+    }
+  }
+
+  // now for all images not in the cache, we can clear them
+  StringSet imagesToCheck = ImageFactory::imagesNotInCache();
+
+  // if entries_ is not empty, that means we want to limit the images removed
+  // to those that are referenced in those entries
+  StringSet imagesToRemove;
+  for(FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
+    for(EntryVecIt e = entries_.begin(); e != entries_.end(); ++e) {
+      QString id = e->field(f->name());
+      if(!id.isEmpty() && imagesToCheck.has(id)) {
+        imagesToRemove.add(id);
+      }
+    }
+  }
+
+  const QStringList realImagesToRemove = imagesToRemove.toList();
+  for(QStringList::ConstIterator it = realImagesToRemove.begin(); it != realImagesToRemove.end(); ++it) {
+    if(!images.has(*it)) {
+      ImageFactory::removeImage(*it, true /* dict only */); // doesn't delete, just remove link
+    }
+  }
 }
 
 #include "document.moc"

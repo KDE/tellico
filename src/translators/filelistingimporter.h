@@ -53,19 +53,16 @@ public slots:
 
 private slots:
   void slotEntries(KIO::Job* job, const KIO::UDSEntryList& list);
-  void slotResult(KIO::Job* job);
   void slotPreview(const KFileItem* item, const QPixmap& pix);
 
 private:
   QString volumeName() const;
-  void enter_loop();
 
   Data::CollPtr m_coll;
   QWidget* m_widget;
   QCheckBox* m_recursive;
   QCheckBox* m_filePreview;
   QGuardedPtr<KIO::Job> m_job;
-  bool m_jobOK;
   KFileItemList m_files;
   QPixmap m_pixmap;
   bool m_cancelled : 1;

@@ -37,6 +37,18 @@ namespace Tellico {
 class XSLTHandler {
 
 public:
+  class XMLOutputBuffer {
+  public:
+    XMLOutputBuffer();
+    ~XMLOutputBuffer();
+    bool isValid() const { return (m_buf != 0); }
+    xmlOutputBuffer* buffer() const { return m_buf; }
+    QString result() const { return m_res; }
+  private:
+    xmlOutputBuffer* m_buf;
+    QString m_res;
+  };
+
   /**
    * @param xsltFile The XSLT file
    */
@@ -71,6 +83,7 @@ public:
    */
   void addStringParam(const QCString& name, const QCString& value);
   void removeParam(const QCString& name);
+  const QCString& param(const QCString& name);
   /**
    * Processes text through the XSLT transformation.
    *

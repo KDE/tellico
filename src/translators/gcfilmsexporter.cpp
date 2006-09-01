@@ -203,7 +203,7 @@ bool GCfilmsExporter::exec() {
     if(imageSet.has(*it)) {
       continue;
     }
-    if(ImageFactory::copyImage(*it, imageDir)) {
+    if(ImageFactory::writeImage(*it, imageDir)) {
       imageSet.add(*it);
     } else {
       kdWarning() << "GCfilmsExporter::exec() - unable to write image file: "

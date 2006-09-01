@@ -14,22 +14,8 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-namespace Tellico {
-  class SourceListViewItem;
-  namespace Fetch {
-    class ConfigWidget;
-  }
-}
-
-class KConfig;
-class KLineEdit;
-class KIntSpinBox;
-class KPushButton;
-
-class QCheckBox;
-
-#include "fetch/fetch.h"
-#include "gui/comboboxproxy.h"
+#include "fetch/fetcher.h"
+#include "gui/combobox.h"
 
 #include <kdialogbase.h>
 #include <klistview.h>
@@ -37,7 +23,21 @@ class QCheckBox;
 #include <qstringlist.h>
 #include <qintdict.h>
 
+class KConfig;
+class KLineEdit;
+class KIntSpinBox;
+class KPushButton;
+class KIntNumInput;
+class KFontCombo;
+class KColorCombo;
+
+class QCheckBox;
+
 namespace Tellico {
+  class SourceListViewItem;
+  namespace Fetch {
+    class ConfigWidget;
+  }
 
 /**
  * The configuration dialog class allows the user to change the global application
@@ -56,6 +56,7 @@ public:
    * @param name The widget name
    */
   ConfigDialog(QWidget* parent, const char* name=0);
+  virtual ~ConfigDialog();
 
   /**
    * Reads the current configuration. Only the options which are not saved somewhere
@@ -63,14 +64,14 @@ public:
    *
    * @param config A pointer to the KConfig object
    */
-  void readConfiguration(KConfig* config);
+  void readConfiguration();
   /**
    * Saves the configuration. @ref KConfigBase::sync is called. This method is called
    * from the main Tellico object.
    *
    * @param config A pointer to the KConfig object
    */
-  void saveConfiguration(KConfig* config);
+  void saveConfiguration();
 
 signals:
   /**
@@ -125,28 +126,39 @@ private slots:
    * Remove a Internet source
    */
   void slotRemoveSourceClicked();
-  /**
-   * Load fetcher config
-   */
-  void loadFetcherConfig();
   void slotSelectedSourceChanged(QListViewItem* item);
   void slotMoveUpSourceClicked();
   void slotMoveDownSourceClicked();
+  void slotNewStuffClicked();
+  void slotShowTemplatePreview();
+  void slotInstallTemplate();
+  void slotDownloadTemplate();
+  void slotDeleteTemplate();
 
 private:
   /**
    * Sets-up the page for the general options.
    */
   void setupGeneralPage();
+  void readGeneralConfig();
   /**
    * Sets-up the page for printing options.
    */
   void setupPrintingPage();
+  void readPrintingConfig();
   /**
    * Sets-up the page for template options.
    */
   void setupTemplatePage();
+  void readTemplateConfig();
   void setupFetchPage();
+  /**
+   * Load fetcher config
+   */
+  void readFetchConfig();
+
+  SourceListViewItem* findItem(const QString& path) const;
+  void loadTemplateList();
 
   bool m_modifying;
 
@@ -166,38 +178,57 @@ private:
   KIntSpinBox* m_imageWidthBox;
   KIntSpinBox* m_imageHeightBox;
 
-  typedef Tellico::GUI::ComboBoxProxy<QString> CBProxy;
-  QIntDict<CBProxy> m_cbTemplates;
+  GUI::ComboBox* m_templateCombo;
+  KPushButton* m_previewButton;
+  KFontCombo* m_fontCombo;
+  KIntNumInput* m_fontSizeInput;
+  KColorCombo* m_baseColorCombo;
+  KColorCombo* m_textColorCombo;
+  KColorCombo* m_highBaseColorCombo;
+  KColorCombo* m_highTextColorCombo;
 
   KListView* m_sourceListView;
   QMap<SourceListViewItem*, Fetch::ConfigWidget*> m_configWidgets;
+  QPtrList<Fetch::ConfigWidget> m_newStuffConfigWidgets;
+  QPtrList<Fetch::ConfigWidget> m_removedConfigWidgets;
   KPushButton* m_modifySourceBtn;
   KPushButton* m_moveUpSourceBtn;
   KPushButton* m_moveDownSourceBtn;
   KPushButton* m_removeSourceBtn;
+  KPushButton* m_newStuffBtn;
+};
+
+class GeneralFetcherInfo {
+public:
+  GeneralFetcherInfo(Fetch::Type t, const QString& n, bool o) : type(t), name(n), updateOverwrite(o) {}
+  Fetch::Type type;
+  QString name;
+  bool updateOverwrite : 1;
 };
 
 class SourceListViewItem : public KListViewItem {
 public:
-  SourceListViewItem(KListView* parent, QListViewItem* after_, const QString& name_, Fetch::Type type_,
-                     const QString& groupName_ = QString::null)
-    : KListViewItem(parent, after_, name_), m_fetchType(type_),
-      m_configGroup(groupName_), m_newSource(groupName_.isNull()) {}
-  SourceListViewItem(KListView* parent, const QString& name_, Fetch::Type type_,
-                     const QString& groupName_ = QString::null)
-    : KListViewItem(parent, name_), m_fetchType(type_),
-      m_configGroup(groupName_), m_newSource(groupName_.isNull()) {}
+  SourceListViewItem(KListView* parent, const GeneralFetcherInfo& info,
+                     const QString& groupName = QString::null);
+
+  SourceListViewItem(KListView* parent, QListViewItem* after,
+                     const GeneralFetcherInfo& info, const QString& groupName = QString::null);
 
   void setConfigGroup(const QString& s) { m_configGroup = s; }
   const QString& configGroup() const { return m_configGroup; }
-  const Fetch::Type& fetchType() const { return m_fetchType; }
+  const Fetch::Type& fetchType() const { return m_info.type; }
+  void setUpdateOverwrite(bool b) { m_info.updateOverwrite = b; }
+  bool updateOverwrite() const { return m_info.updateOverwrite; }
   void setNewSource(bool b) { m_newSource = b; }
   bool isNewSource() const { return m_newSource; }
+  void setFetcher(Fetch::Fetcher::Ptr fetcher);
+  Fetch::Fetcher::Ptr fetcher() const { return m_fetcher; }
 
 private:
-  Fetch::Type m_fetchType;
+  GeneralFetcherInfo m_info;
   QString m_configGroup;
-  bool m_newSource;
+  bool m_newSource : 1;
+  Fetch::Fetcher::Ptr m_fetcher;
 };
 
 } // end namespace

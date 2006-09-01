@@ -22,15 +22,20 @@
 <!-- location depends on being installed correctly -->
 <xsl:import href="../tellico-common.xsl"/>
 
-<xsl:output method="html" version="xhtml"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01//EN"
+            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
-<xsl:param name="font"/> <!-- default KDE font family -->
-<xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
-<xsl:param name="bgcolor"/> <!-- default KDE background color -->
-<xsl:param name="color1"/> <!-- default KDE highlighted text color -->
-<xsl:param name="color2"/> <!-- default KDE highlighted background color -->
+<xsl:param name="font"/> <!-- font family -->
+<xsl:param name="fontsize"/> <!-- font size -->
+<xsl:param name="fgcolor"/> <!-- foreground color -->
+<xsl:param name="bgcolor"/> <!-- background color -->
+<xsl:param name="color1"/> <!-- highlighted text color -->
+<xsl:param name="color2"/> <!-- highlighted background color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -70,6 +75,7 @@
     margin: 0px;
     padding: 0px;
     font-family: "<xsl:value-of select="$font"/>";
+    font-size: <xsl:value-of select="$fontsize"/>pt;
     color: <xsl:value-of select="$fgcolor"/>;
     background-color: <xsl:value-of select="$bgcolor"/>;
     background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_bg.png')"/>);
@@ -87,9 +93,6 @@
     text-align: center;
   }
   <xsl:if test="$num-images &gt; 0">
-  div#content {
-    padding-right: <xsl:value-of select="$image-width + 10"/>px;
-  }
   div#images {
     margin: 10px 5px 0px 5px;
     float: right;
@@ -158,17 +161,20 @@
   td.fieldValue {
     text-align: left;
     padding: 0px 10px 0px 2px;
+    vertical-align: top;
     width: 90%; /* nowrap is set on the fieldName column, so just want enough width to take the rest */
   }
   td.column1 {
     font-weight: bold;
     text-align: left;
     padding: 0px 2px 0px 2px;
+/*    white-space: nowrap;*/
   }
   td.column2 {
     font-style: italic;
     text-align: left;
     padding: 0px 10px 0px 10px;
+/*    width: 90%;  nowrap is set on the fieldName column, so just want enough width to take the rest */
   }
   p {
     margin: 2px 10px 2px 0;
@@ -184,22 +190,24 @@
   img {
     border: 0px;
   }
+  p.navigation {
+    font-weight: bold;
+    text-align: center;
+    clear: both;
+  }
   </style>
   <title>
    <xsl:value-of select="tc:collection[1]/tc:entry[1]//tc:title[1]"/>
-   <xsl:text> - </xsl:text>
+   <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection[1]/@title"/>
   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection[1]"/>
-   <!-- to keep khtml happy with the margins and floats, need to clear -->
-   <br style="clear: both"/>
    <xsl:if test="$collection-file">
-    <hr/>
-    <h4 style="text-align:center">
+    <p class="navigation">
      <a href="{$collection-file}">&lt;&lt; <xsl:value-of select="tc:collection/@title"/></a>
-    </h4>
+    </p>
    </xsl:if>
   </body>
  </html>
@@ -243,7 +251,7 @@
          </xsl:otherwise>
         </xsl:choose>
        </xsl:attribute>
-       <img>
+       <img alt="" style="vertical-align:bottom;">
         <xsl:attribute name="src">
          <xsl:value-of select="concat($imgdir, $image)"/>
         </xsl:attribute>
@@ -313,7 +321,7 @@
    </xsl:if>
    <xsl:if test="$num-images = 0 and $first-type = 2">
     <xsl:attribute name="style">
-     <xsl:text>width: 100%; float: left; clear: both; </xsl:text>
+     <xsl:text>width: 100%; float: left; clear: both;</xsl:text>
     </xsl:attribute>
    </xsl:if>
   <div class="category">

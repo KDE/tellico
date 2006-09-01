@@ -14,6 +14,8 @@
 #ifndef TELLICOCONTROLLER_H
 #define TELLICOCONTROLLER_H
 
+class QPopupMenu;
+
 namespace Tellico {
   class MainWindow;
   class GroupView;
@@ -54,11 +56,11 @@ public:
   /**
    * Plug the default collection actions into a widget
    */
-  void plugCollectionActions(QWidget* widget);
+  void plugCollectionActions(QPopupMenu* popup);
   /**
    * Plug the default entry actions into a widget
    */
-  void plugEntryActions(QWidget* widget);
+  void plugEntryActions(QPopupMenu* popup);
 
   GroupIterator groupIterator() const;
   /**
@@ -136,6 +138,8 @@ public slots:
   void slotCheckOut();
   void slotCheckIn();
   void slotCheckIn(const Data::EntryVec& entries);
+  void slotGoPrevEntry();
+  void slotGoNextEntry();
 
 private:
   static Controller* s_self;
@@ -144,7 +148,9 @@ private:
   void blockAllSignals(bool block) const;
   void updateActions() const;
   bool canCheckIn() const;
-  void plugUpdateMenu(QWidget* widget);
+  void plugUpdateMenu(QPopupMenu* popup);
+  enum EntryDirection { PrevEntry, NextEntry };
+  void goEntrySibling(EntryDirection dir);
 
   MainWindow* m_mainWindow;
 
@@ -152,10 +158,6 @@ private:
 
   typedef PtrVector<Tellico::Observer> ObserverVec;
   ObserverVec m_observers;
-
-  typedef QGuardedPtr<QWidget> WidgetPtr;
-  typedef QValueVector<WidgetPtr> WidgetVector;
-  WidgetVector m_sourcesWidgets;
 
   /**
    * Keep track of the selected entries so that a top-level delete has something for reference

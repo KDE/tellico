@@ -22,7 +22,10 @@
 // std::clock_t
 #include <ctime>
 
+// some logging
+#ifndef NDEBUG
 //#define TELLICO_LOG
+#endif
 
 #ifndef NDEBUG
 #define TELLICO_DEBUG
@@ -56,10 +59,10 @@ namespace Debug {
 */
 
   typedef kdbgstream DebugStream;
-#ifndef TELLICO_LOG
-  static inline kndbgstream log()   { return NoDebugStream(); }
-#else
+#ifdef TELLICO_LOG
   static inline DebugStream log()   { return kdDebug(); }
+#else
+  static inline kndbgstream log()   { return NoDebugStream(); }
 #endif
   static inline DebugStream debug()   { return kdDebug()   << FUNC_PREFIX; }
   static inline DebugStream warning() { return kdWarning() << FUNC_PREFIX << "[WARNING!] "; }

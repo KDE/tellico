@@ -294,15 +294,7 @@ bool Tellico::PtrVector<T>::remove(Iterator it) {
   if(it == end()) {
     return false;
   }
-  T** ptr = qFind(m_baseVector.begin(), m_baseVector.end(), it.ptr());
-  if(ptr == m_baseVector.end()) {
-    return false;
-  }
-  if(m_autoDelete) {
-    delete *ptr;
-  }
-  m_baseVector.erase(ptr);
-  return true;
+  return remove(it.ptr());
 }
 
 template <class T>

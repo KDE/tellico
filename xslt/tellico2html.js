@@ -4,7 +4,7 @@ function showAll() {
   bdy = tbl.getElementsByTagName("tbody")[0];
   rows = bdy.getElementsByTagName("tr");
   for(i=0;i<rows.length;i++) {
-    rows[i].style.display="table-row";
+//    rows[i].style.display="table-row";
     if(i % 2) { rows[i].className='entry0'; }
     else { rows[i].className='entry1'; }
   }
@@ -36,19 +36,17 @@ function doSearch(s) {
   for(i=0; i<rows.length; i++) {
     s = ts_getInnerText(rows[i]);
     if(re.test(s)) {
-      rows[i].style.display="table-row";
+//      rows[i].style.display="table-row";
       if(j % 2) { rows[i].className='entry1'; }
       else { rows[i].className='entry0'; }
       j++;
     } else {
-      rows[i].style.display="none";
+//      rows[i].style.display="none";
+      // for msie
+      rows[i].className='hidden';
     }
   }
 }
-
-// this table sorting script is modified from http://www.kryogenix.org/code/browser/sorttable/
-// released under the MIT license
-addEvent(window, "load", sortables_init);
 
 var SORT_COLUMN_INDEX;
 
@@ -69,7 +67,6 @@ function ts_makeSortable(table) {
         var firstRow = table.rows[0];
     }
     if (!firstRow) return;
-    
     // We have a first row: assume it's the header, and make its contents clickable links
     for (var i=0;i<firstRow.cells.length;i++) {
         var cell = firstRow.cells[i];
@@ -81,7 +78,7 @@ function ts_makeSortable(table) {
 function ts_getInnerText(el) {
 	if (typeof el == "string") return el;
 	if (typeof el == "undefined") { return el };
-	if (el.innerText) return el.innerText;	//Not needed but it is faster
+	if (el.innerText) return el.innerText; //Not needed but it is faster
 	var str = "";
 	
 	var cs = el.childNodes;
@@ -91,7 +88,7 @@ function ts_getInnerText(el) {
 			case 1: //ELEMENT_NODE
 				str += ts_getInnerText(cs[i]);
 				break;
-			case 3:	//TEXT_NODE
+			case 3: //TEXT_NODE
 				str += cs[i].nodeValue;
 				break;
 		}
@@ -103,21 +100,18 @@ function ts_resortTable(lnk) {
     var td = lnk.parentNode;
     var column = td.cellIndex;
     var table = getParent(td,'TABLE');
-    
+
     // Work out a type for the column
     if (table.rows.length <= 1) return;
-    var itm = ts_getInnerText(table.rows[1].cells[column]);
-    sortfn = ts_sort_caseinsensitive;
-    if (itm.match(/^[\d\.]+$/)) sortfn = ts_sort_numeric;
-    else if (itm.match(/^\d\d[\/-]\d\d[\/-]\d\d\d\d$/)) sortfn = ts_sort_date;
-    else if (itm.match(/^\d\d[\/-]\d\d[\/-]\d\d$/)) sortfn = ts_sort_date;
-    else if (itm.match(/^[$]/)) sortfn = ts_sort_currency;
-    SORT_COLUMN_INDEX = column;
-    var firstRow = new Array();
-    var newRows = new Array();
-    for (i=0;i<table.rows[0].length;i++) { firstRow[i] = table.rows[0][i]; }
-    for (j=1;j<table.rows.length;j++) { newRows[j-1] = table.rows[j]; }
+    var sortType = COL_SORT_ARRAY[column];
+    var sortfn = ts_sort_caseinsensitive;
+    if (sortType == 1) sortfn = ts_sort_numeric;
+    else if (sortType == 2) sortfn = ts_sort_date;
 
+    var newRows = new Array();
+    for (i=0;i<table.tBodies[0].rows.length;i++) { newRows[i] = table.tBodies[0].rows[i]; }
+
+    SORT_COLUMN_INDEX = column;
     newRows.sort(sortfn);
 
     if (lnk.getAttribute("sortdir") == 'down') {
@@ -182,19 +176,22 @@ function ts_sort_numeric(a,b) {
 function ts_sort_caseinsensitive(a,b) {
     aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]).toLowerCase();
     bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]).toLowerCase();
-    if (aa==bb) return 0;
-    if (aa<bb) return -1;
-    return 1;
+    if(aa.localeCompare) return aa.localeCompare(bb);
+    return order(aa,bb);
 }
 
 function ts_sort_default(a,b) {
     aa = ts_getInnerText(a.cells[SORT_COLUMN_INDEX]);
     bb = ts_getInnerText(b.cells[SORT_COLUMN_INDEX]);
-    if (aa==bb) return 0;
-    if (aa<bb) return -1;
-    return 1;
+    if(aa.localeCompare) return aa.localeCompare(bb);
+    return order(aa,bb);
 }
 
+function order(aa,bb) {
+  if (aa==bb) return 0;
+  if (aa<bb) return -1;
+  return 1;
+}
 
 function addEvent(elm, evType, fn, useCapture) {
 // addEvent and removeEvent
@@ -220,3 +217,8 @@ function queryVariable(variable) {
   }
   return "";
 }
+
+// this table sorting script is modified from http://www.kryogenix.org/code/browser/sorttable/
+// released under the MIT license
+addEvent(window, "load", sortables_init);
+addEvent(window, "load", checkQuery);

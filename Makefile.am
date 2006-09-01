@@ -1,8 +1,17 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 
-SUBDIRS = src po doc icons xslt admin
+SUBDIRS = src po doc icons xslt
 
-EXTRA_DIST = COPYING ChangeLog INSTALL README TODO tellico.lsm tellico.spec tellico.dtd x-tellico.desktop configure.in.in AUTHORS NEWS tellico.tips tellico.desktop tellico-rename.upd tellico.upd
+ADMIN_DIST = \
+admin/acinclude.m4.in \
+admin/am_edit \
+admin/am_edit.py \
+admin/conf.change.pl \
+admin/config.pl \
+admin/libtool.m4.in \
+admin/Makefile.common
+
+EXTRA_DIST = COPYING ChangeLog INSTALL README TODO tellico.lsm tellico.dtd x-tellico.desktop configure.in.in AUTHORS NEWS tellico.tips tellico.desktop tellico-rename.upd tellico.upd $(ADMIN_DIST)
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
@@ -45,14 +54,18 @@ package-messages:
 	$(MAKE) -C po merge
 
 messages:
-	rm -f tips.cpp; \
-	./preparetips < tellico.tips > tips.cpp; \
-	$(XGETTEXT) tips.cpp --join-existing -o $(podir)/tellico.pot; \
-	rm -f tips.cpp
-	rm -f xslt.cpp; \
+	@ rm -f tips.cpp xslt.cpp z3950.cpp scripts.cpp
+	@ touch $(podir)/tellico.pot;
+	./preparetips tellico.tips > tips.cpp; \
+	$(XGETTEXT)  --join-existing tips.cpp -o $(podir)/tellico.pot; \
 	./prepare_i18n_xslt > xslt.cpp; \
-	$(XGETTEXT) xslt.cpp --join-existing -o $(podir)/tellico.pot; \
-	rm -f xslt.cpp
+	$(XGETTEXT)  --join-existing xslt.cpp -o $(podir)/tellico.pot; \
+	./prepare_desktop src/fetch/z3950-servers.cfg > z3950.cpp; \
+	$(XGETTEXT)  --join-existing z3950.cpp -o $(podir)/tellico.pot; \
+	./prepare_desktop src/fetch/scripts/*.spec > scripts.cpp; \
+	$(XGETTEXT)  --join-existing scripts.cpp -o $(podir)/tellico.pot;
+	@ rm -f tips.cpp xslt.cpp z3950.cpp scripts.cpp
+
 
 dist-hook:
 # am_edit needs to modify the Makefile.in files, so they must be writeable

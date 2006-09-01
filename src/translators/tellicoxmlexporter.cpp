@@ -15,7 +15,6 @@
 #include "../collections/bibtexcollection.h"
 #include "../imagefactory.h"
 #include "../controller.h" // needed for getting groupView pointer
-#include "../groupview.h" // needed for exporting groups
 #include "../entryitem.h"
 #include "../latin1literal.h"
 #include "../filehandler.h"
@@ -240,6 +239,15 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     // if empty, then no field element is added and just continue
     if(fieldValue.isEmpty()) {
       continue;
+    }
+
+    // optionally, verify images exist
+    if(fIt->type() == Data::Field::Image && (options() & Export::ExportVerifyImages)) {
+      if(!ImageFactory::validImage(fieldValue)) {
+        myDebug() << "TellicoXMLExporter::exportEntryXML() - entry: " << entry_->title() << endl;
+        myDebug() << "TellicoXMLExporter::exportEntryXML() - skipping image: " << fieldValue << endl;
+        continue;
+      }
     }
 
     // if multiple versions are allowed, split them into separate elements

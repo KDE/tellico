@@ -65,11 +65,14 @@ QString BibtexHandler::bibtexKey(Data::ConstEntryPtr entry_) {
 
   QString author;
   Data::FieldPtr authorField = c->fieldByBibtexName(QString::fromLatin1("author"));
-  if(authorField && (authorField->flags() & Data::Field::AllowMultiple)) {
-    QString tmp = entry_->field(authorField->name());
-    author = tmp.section(';', 0, 0);
-  } else if(authorField) {
-    author = entry_->field(authorField->name());
+  if(authorField) {
+    if(authorField->flags() & Data::Field::AllowMultiple) {
+      // grab first author only;
+      QString tmp = entry_->field(authorField->name());
+      author = tmp.section(';', 0, 0);
+    } else {
+      author = entry_->field(authorField->name());
+    }
   }
 
   Data::FieldPtr titleField = c->fieldByBibtexName(QString::fromLatin1("title"));

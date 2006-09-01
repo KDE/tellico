@@ -5,7 +5,8 @@ libcommands_a_SOURCES = \
 	addentries.cpp modifyentries.cpp removeentries.cpp \
 	addloans.cpp modifyloans.cpp removeloans.cpp \
 	fieldcommand.cpp filtercommand.cpp reorderfields.cpp \
-	group.cpp collectioncommand.cpp renamecollection.cpp
+	group.cpp collectioncommand.cpp renamecollection.cpp \
+	updateentries.cpp
 
 libcommands_a_METASOURCES = AUTO
 KDE_OPTIONS = noautodist
@@ -21,7 +22,8 @@ EXTRA_DIST = \
 	reorderfields.h reorderfields.cpp \
 	group.h group.cpp \
 	collectioncommand.h collectioncommand.cpp \
-	renamecollection.h renamecollection.cpp
+	renamecollection.h renamecollection.cpp \
+	updateentries.h updateentries.cpp
 
 
 CLEANFILES = *~

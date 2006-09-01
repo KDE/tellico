@@ -29,21 +29,33 @@ Image::Image(const QString& filename_) : QImage(filename_) {
 
   KMD5 md5(byteArray());
   // the id will eventually be used as a filename
-  m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
+  if(!isNull()) {
+    m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
+  }
 }
 
 Image::Image(const QImage& img_, const QString& format_) : QImage(img_), m_format(format_) {
   KMD5 md5(byteArray());
   // the id will eventually be used as a filename
-  m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
+  if(!isNull()) {
+    m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
+  }
 }
 
 Image::Image(const QByteArray& data_, const QString& format_, const QString& id_)
     : QImage(data_), m_id(id_), m_format(format_) {
+  if(isNull()) {
+    m_id = QString::null;
+  }
 }
 
 QByteArray Image::byteArray() const {
   return byteArray(*this, outputFormat(m_format));
+}
+
+bool Image::isNull() const {
+  // 1x1 images are considered null for Tellico. Amazon returns some like that.
+  return QImage::isNull() || (width() < 2 && height() < 2);
 }
 
 QPixmap Image::convertToPixmap() const {

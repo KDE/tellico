@@ -1,32 +1,32 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 bin_PROGRAMS = tellico
 
-## INCLUDES were found outside kdevelop specific part
-
 tellico_SOURCES = borrowerdialog.cpp entryitem.cpp importdialog.cpp \
-						borroweritem.cpp entryview.cpp isbnvalidator.cpp exportdialog.cpp collection.cpp \
-						fetchdialog.cpp collectionfactory.cpp fieldcompletion.cpp collectionfieldsdialog.cpp \
-						field.cpp main.cpp configdialog.cpp mainwindow.cpp controller.cpp filehandler.cpp \
-						filter.cpp filterdialog.cpp reportdialog.cpp dcopinterface.skel filteritem.cpp \
-						detailedlistview.cpp document.cpp tellico_kernel.cpp entry.cpp groupview.cpp \
-						tellico_strings.cpp entryeditdialog.cpp image.cpp tellico_utils.cpp entrygroupitem.cpp \
-						imagefactory.cpp viewstack.cpp entryiconview.cpp borrower.cpp loandialog.cpp \
-						loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
-						entryiconfactory.cpp dcopinterface.cpp entryupdater.cpp detailedentryitem.cpp statusbar.cpp \
-						progressmanager.cpp upcvalidator.cpp fetcherconfigdialog.cpp iso5426converter.cpp iso6937converter.cpp
+				borroweritem.cpp entryview.cpp isbnvalidator.cpp exportdialog.cpp collection.cpp \
+				fetchdialog.cpp collectionfactory.cpp fieldcompletion.cpp collectionfieldsdialog.cpp \
+				field.cpp main.cpp configdialog.cpp mainwindow.cpp controller.cpp filehandler.cpp \
+				filter.cpp filterdialog.cpp reportdialog.cpp filteritem.cpp \
+				detailedlistview.cpp document.cpp tellico_kernel.cpp entry.cpp groupview.cpp \
+				tellico_strings.cpp entryeditdialog.cpp image.cpp tellico_utils.cpp entrygroupitem.cpp \
+				imagefactory.cpp viewstack.cpp entryiconview.cpp borrower.cpp loandialog.cpp \
+				loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
+				entryiconfactory.cpp entryupdater.cpp detailedentryitem.cpp statusbar.cpp \
+				progressmanager.cpp upcvalidator.cpp fetcherconfigdialog.cpp iso5426converter.cpp \
+				iso6937converter.cpp
 
 if !USE_LIBBTPARSE
   LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
 endif
 
-tellico_LDADD = ./cite/libcite.a ./fetch/libfetch.a \
-	./collections/libcollections.a ./translators/libtranslators.a ./translators/pilotdb/libpilotdb.a \
+tellico_LDADD = ./core/libcore.a ./cite/libcite.a ./fetch/libfetch.a \
+	./collections/libcollections.a ./translators/libtranslators.a \
+	./newstuff/libnewstuff.a ./translators/pilotdb/libpilotdb.a \
 	./translators/pilotdb/libflatfile/liblibflatfile.a ./gui/libgui.a ./translators/pilotdb/libpalm/liblibpalm.a \
 	./commands/libcommands.a -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
 	$(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS) $(LIB_KIO) \
-	$(LIB_KDEPRINT) $(LIB_KABC) $(KCAL_LIBS) $(LDADD_LIBBTPARSE)
+	$(LIB_KDEPRINT) $(LIB_KABC) $(KCAL_LIBS) $(LDADD_LIBBTPARSE) $(LIB_KNEWSTUFF)
 
-SUBDIRS = gui collections translators fetch tests commands cite
+SUBDIRS = core gui collections translators fetch tests commands cite newstuff
 
 EXTRA_DIST = tellicoui.rc \
 borrowerdialog.cpp          entryiconview.h\
@@ -48,8 +48,8 @@ controller.h                filehandler.h        \
 filter.cpp    				 filterdialog.cpp \
 filterdialog.h      		 reportdialog.cpp \
 filter.h           			  reportdialog.h \
-dcopinterface.h             filteritem.cpp       \
-dcopinterface.cpp           filteritem.h         \
+filteritem.cpp       \
+filteritem.h         \
 detailedlistview.h 			detailedlistview.cpp \
 document.cpp                tellico_kernel.cpp \
 document.h                  tellico_kernel.h \
@@ -73,7 +73,8 @@ progressmanager.h progressmanager.cpp \
 upcvalidator.h upcvalidator.cpp \
 fetcherconfigdialog.h fetcherconfigdialog.cpp \
 iso5426converter.h iso5426converter.cpp \
-iso6937converter.h iso6937converter.cpp
+iso6937converter.h iso6937converter.cpp \
+tellico_map.h
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -113,10 +114,10 @@ rcdir = $(kde_datadir)/tellico
 rc_DATA = tellicoui.rc
 
 messages: rc.cpp
+	@ touch $(podir)/tellico.pot;
 	LIST=`find . -name \*.h -o -name \*.hh -o -name \*.H -o -name \*.hxx -o -name \*.hpp -o -name \*.cpp -o -name \*.cc -o -name \*.cxx -o -name \*.ecpp -o -name \*.C`; \
         if test -n "$$LIST"; then \
-          $(XGETTEXT) $$LIST -o $(podir)/tellico.pot; \
+          $(XGETTEXT) --join-existing $$LIST -o $(podir)/tellico.pot; \
         fi
 
 #include ../admin/Doxyfile.am
-

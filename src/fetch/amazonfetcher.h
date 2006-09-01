@@ -76,7 +76,7 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Amazon; }
   virtual bool canFetch(int type) const;
-  virtual void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -84,7 +84,7 @@ public:
     QString title;
     KURL url;
   };
-  static const SiteData& siteData(Site site);
+  static const SiteData& siteData(int site);
 
   /**
    * Returns a widget for modifying the fetcher's config.
@@ -93,17 +93,7 @@ public:
 
   static StringMap customFields();
 
-  class ConfigWidget : public Fetch::ConfigWidget {
-  public:
-    ConfigWidget(QWidget* parent_, const AmazonFetcher* fetcher = 0);
-
-    virtual void saveConfig(KConfig* config_);
-
-  private:
-    KLineEdit* m_assocEdit;
-    KComboBox* m_siteCombo;
-    KComboBox* m_imageCombo;
-  };
+  class ConfigWidget;
   friend class ConfigWidget;
 
   static QString defaultName();
@@ -118,7 +108,7 @@ private:
   XSLTHandler* m_xsltHandler;
   Site m_site;
   ImageSize m_imageSize;
-  QString m_name;
+
   QString m_access;
   QString m_assoc;
   bool m_addLinkField;
@@ -135,6 +125,24 @@ private:
   QString m_value;
   bool m_started;
   QStringList m_fields;
+};
+
+class AmazonFetcher::ConfigWidget : public Fetch::ConfigWidget {
+Q_OBJECT
+
+public:
+  ConfigWidget(QWidget* parent_, const AmazonFetcher* fetcher = 0);
+
+  virtual void saveConfig(KConfig* config_);
+  virtual QString preferredName() const;
+
+private slots:
+  void slotSiteChanged();
+
+private:
+  KLineEdit* m_assocEdit;
+  KComboBox* m_siteCombo;
+  KComboBox* m_imageCombo;
 };
 
   } // end namespace

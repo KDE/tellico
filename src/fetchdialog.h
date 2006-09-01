@@ -20,12 +20,17 @@ namespace Tellico {
     class Fetcher;
     class SearchResult;
   }
+  namespace GUI {
+    class ComboBox;
+    class ListView;
+  }
 }
 
 class KComboBox;
 class KLineEdit;
 class KPushButton;
 class KStatusBar;
+class KTextEdit;
 class QProgressBar;
 class QTimer;
 class QCheckBox;
@@ -33,10 +38,7 @@ class QCheckBox;
 #include "datavectors.h"
 
 #include <kdialogbase.h>
-#include <klistview.h>
-#include <ktextedit.h>
 
-#include <qvaluestack.h>
 #include <qguardedptr.h>
 
 namespace Tellico {
@@ -58,7 +60,7 @@ private slots:
   void slotSearchClicked();
   void slotClearClicked();
   void slotAddEntry();
-  void slotShowEntry(QListViewItem* item);
+  void slotShowEntry();
   void slotMoveProgress();
 
   void slotStatus(const QString& status);
@@ -66,7 +68,7 @@ private slots:
 
   void slotFetchDone();
   void slotResultFound(Tellico::Fetch::SearchResult* result);
-  void slotKeyChanged(const QString& key);
+  void slotKeyChanged(int);
   void slotSourceChanged(const QString& source);
   void slotMultipleISBN(bool toggle);
   void slotEditMultipleISBN();
@@ -79,19 +81,15 @@ private:
   void stopProgress();
   void setStatus(const QString& text);
 
-  class SearchResultItem : public KListViewItem {
-    friend class FetchDialog;
-    SearchResultItem(KListView* lv, Fetch::SearchResult* r);
-    Fetch::SearchResult* m_result;
-  };
+  class SearchResultItem;
 
   KComboBox* m_sourceCombo;
-  KComboBox* m_keyCombo;
+  GUI::ComboBox* m_keyCombo;
   KLineEdit* m_valueLineEdit;
   KPushButton* m_searchButton;
   QCheckBox* m_multipleISBN;
   KPushButton* m_editISBN;
-  KListView* m_listView;
+  GUI::ListView* m_listView;
   EntryView* m_entryView;
   KPushButton* m_addButton;
   KStatusBar* m_statusBar;

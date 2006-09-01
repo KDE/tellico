@@ -16,6 +16,9 @@
 
 #include "filterdialog.h"
 #include "tellico_kernel.h"
+#include "document.h"
+#include "collection.h"
+#include "fieldcompletion.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -76,6 +79,8 @@ void FilterRuleWidget::initWidget() {
 
   m_ruleField = new KComboBox(this);
   connect(m_ruleField, SIGNAL(activated(int)), SIGNAL(signalModified()));
+  connect(m_ruleField, SIGNAL(activated(int)), SLOT(slotRuleFieldChanged(int)));
+
   m_ruleFunc = new KComboBox(this);
   connect(m_ruleFunc, SIGNAL(activated(int)), SIGNAL(signalModified()));
   m_ruleValue = new KLineEdit(this);
@@ -114,6 +119,29 @@ void FilterRuleWidget::slotEditRegExp() {
     if(m_editRegExpDialog->exec() == QDialog::Accepted) {
       m_ruleValue->setText(iface->regExp());
     }
+  }
+}
+
+void FilterRuleWidget::slotRuleFieldChanged(int which_) {
+  // The 5th and 6th functions are for regexps, so we don't care
+  if(which_ > 3) {
+    m_ruleValue->setCompletionObject(0);
+    return;
+  }
+  QString fieldTitle = m_ruleField->currentText();
+  if(fieldTitle.isEmpty() || fieldTitle[0] == '<') {
+    m_ruleValue->setCompletionObject(0);
+    return;
+  }
+  Data::FieldPtr field = Data::Document::self()->collection()->fieldByTitle(fieldTitle);
+  if(field && (field->flags() & Data::Field::AllowCompletion)) {
+    FieldCompletion* completion = new FieldCompletion(field->flags() & Data::Field::AllowMultiple);
+    completion->setItems(Kernel::self()->valuesByFieldName(field->name()));
+    completion->setIgnoreCase(true);
+    m_ruleValue->setCompletionObject(completion);
+    m_ruleValue->setAutoDeleteCompletionObject(true);
+  } else {
+    m_ruleValue->setCompletionObject(0);
   }
 }
 

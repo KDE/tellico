@@ -20,7 +20,6 @@
 #include "viewstack.h"
 #include "collection.h"
 #include "entry.h"
-#include "field.h"
 #include "configdialog.h"
 #include "entryitem.h"
 #include "filter.h"
@@ -50,6 +49,7 @@
 #include "statusbar.h"
 #include "fetch/fetchmanager.h"
 #include "cite/actionmanager.h"
+#include "core/tellico_config.h"
 
 // needed for fifo to lyx
 #include <sys/types.h>
@@ -99,6 +99,7 @@ using Tellico::MainWindow;
 MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainWindow(parent_, name_),
     DCOPInterface(),
     m_config(kapp->config()),
+    m_updateAll(0),
     m_statusBar(0),
     m_editDialog(0),
     m_groupView(0),
@@ -119,7 +120,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainW
     kapp->dcopClient()->setDefaultObject(objId());
   }
 
-  m_actions.setAutoDelete(true); // these are the fetcher actions
+  m_fetchActions.setAutoDelete(true); // these are the fetcher actions
 
   // a little bit of paranoia
   // I use KRun a lot and I don't want the user to be able to
@@ -164,12 +165,11 @@ void MainWindow::slotInit() {
   m_editDialog = new EntryEditDialog(this, "editdialog");
   Controller::self()->addObserver(m_editDialog);
 
-  m_config->setGroup("General Options");
-  bool bViewEditWidget = m_config->readBoolEntry("Show Edit Widget", false);
-  m_toggleEntryEditor->setChecked(bViewEditWidget);
+  m_toggleEntryEditor->setChecked(Config::showEditWidget());
   slotToggleEntryEditor();
 
   initConnections();
+  ImageFactory::init();
 
   // disable OOO menu item if library is not available
   action("cite_openoffice")->setEnabled(Cite::ActionManager::isEnabled(Cite::CiteOpenOffice));
@@ -394,6 +394,13 @@ void MainWindow::initActions() {
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::GCfilms);
 
+  action = new KAction(actionCollection(), "file_import_amc");
+  action->setText(i18n("Import Ant Movie Catalog Data..."));
+  action->setToolTip(i18n("Import an Ant Movie Catalog data file"));
+  importMenu->insert(action);
+  connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
+  importMapper->setMapping(action, Import::AMC);
+
   action = new KAction(actionCollection(), "file_import_filelisting");
   action->setText(i18n("Import File Listing..."));
   action->setToolTip(i18n("Import information about files in a folder"));
@@ -527,7 +534,7 @@ void MainWindow::initActions() {
                             this, SLOT(slotShowEntryEditor()),
                             actionCollection(), "coll_edit_entry");
   m_editEntry->setToolTip(i18n("Edit the selected entries"));
-  m_copyEntry = new KAction(i18n("&Copy Entry"), QString::fromLatin1("editcopy"), CTRL + Key_Y,
+  m_copyEntry = new KAction(i18n("D&uplicate Entry"), QString::fromLatin1("editcopy"), CTRL + Key_Y,
                             Controller::self(), SLOT(slotCopySelectedEntries()),
                             actionCollection(), "coll_copy_entry");
   m_copyEntry->setToolTip(i18n("Copy the selected entries"));
@@ -596,12 +603,12 @@ void MainWindow::initActions() {
 //  m_updateEntryMenu->setIconSet(BarIconSet(QString::fromLatin1("fileexport")));
   m_updateEntryMenu->setDelayed(false);
 
-  action = new KAction(actionCollection(), "update_entry_all");
-  action->setText(i18n("All Sources"));
-  action->setToolTip(i18n("Update entry data from all available sources"));
+  m_updateAll = new KAction(actionCollection(), "update_entry_all");
+  m_updateAll->setText(i18n("All Sources"));
+  m_updateAll->setToolTip(i18n("Update entry data from all available sources"));
 //  m_updateEntryMenu->insert(action);
-  connect(action, SIGNAL(activated()), updateMapper, SLOT(map()));
-  updateMapper->setMapping(action, QString::fromLatin1("_all"));
+  connect(m_updateAll, SIGNAL(activated()), updateMapper, SLOT(map()));
+  updateMapper->setMapping(m_updateAll, QString::fromLatin1("_all"));
 
   /*************************************************
    * Settings menu
@@ -614,23 +621,20 @@ void MainWindow::initActions() {
                                           this, SLOT(slotToggleGroupWidget()),
                                           actionCollection(), "toggle_group_widget");
   m_toggleGroupWidget->setToolTip(i18n("Enable/disable the group view"));
-#if KDE_IS_VERSION(3,2,90)
   m_toggleGroupWidget->setCheckedState(i18n("Hide Grou&p View"));
-#endif
+
   m_toggleEntryEditor = new KToggleAction(i18n("Show Entry &Editor"), 0,
                                          this, SLOT(slotToggleEntryEditor()),
                                          actionCollection(), "toggle_edit_widget");
   m_toggleEntryEditor->setToolTip(i18n("Enable/disable the editor"));
-#if KDE_IS_VERSION(3,2,90)
   m_toggleEntryEditor->setCheckedState(i18n("Hide Entry &Editor"));
-#endif
+
   m_toggleEntryView = new KToggleAction(i18n("Show Entry &View"), 0,
                                         this, SLOT(slotToggleEntryView()),
                                         actionCollection(), "toggle_entry_view");
   m_toggleEntryView->setToolTip(i18n("Enable/disable the entry view"));
-#if KDE_IS_VERSION(3,2,90)
   m_toggleEntryView->setCheckedState(i18n("Hide Entry &View"));
-#endif
+
   action = new KAction(i18n("Advanced &Filter..."), QString::fromLatin1("filter"), CTRL + Key_J,
                        this, SLOT(slotShowFilterDialog()),
                        actionCollection(), "filter_dialog");
@@ -751,8 +755,9 @@ void MainWindow::initFileOpen(bool nofile_) {
   // check to see if most recent file should be opened
   bool happyStart = false;
   KConfigGroupSaver saver(m_config, "General Options");
-  if(!nofile_ && m_config->readBoolEntry("Reopen Last File", true)) {
-    KURL lastFile(m_config->readEntry("Last Open File")); // empty string is actually ok, it gets handled
+  if(!nofile_ && Config::reopenLastFile()) {
+    // Config::lastOpenFile() is the full URL, protocol included
+    KURL lastFile(Config::lastOpenFile()); // empty string is actually ok, it gets handled
     if(!lastFile.isEmpty() && lastFile.isValid()) {
       slotFileOpen(lastFile);
       happyStart = true;
@@ -785,51 +790,70 @@ void MainWindow::saveOptions() {
 
   saveMainWindowSettings(m_config, QString::fromLatin1("Main Window Options"));
 
-  m_config->setGroup("General Options");
-  m_config->writeEntry("Show Group Widget", m_toggleGroupWidget->isChecked());
-  m_config->writeEntry("Show Edit Widget", m_toggleEntryEditor->isChecked());
-  m_config->writeEntry("Show Entry View", m_toggleEntryView->isChecked());
+  Config::setShowGroupWidget(m_toggleGroupWidget->isChecked());
+  Config::setShowEditWidget(m_toggleEntryEditor->isChecked());
+  Config::setShowEntryView(m_toggleEntryView->isChecked());
 
   m_fileOpenRecent->saveEntries(m_config, QString::fromLatin1("Recent Files"));
   if(!isNewDocument()) {
-    m_config->writeEntry("Last Open File", Data::Document::self()->URL().url());
-  } else {
-    // decided I didn't want the entry over-written when exited with an empty document
-//    m_config->writeEntry("Last Open File", QString::null);
+    Config::setLastOpenFile(Data::Document::self()->URL().url());
   }
 
-  m_config->setGroup("Main Window Options");
-  m_config->writeEntry("Main Splitter Sizes", m_split->sizes());
-  // badly named option, but no need to change
-  m_config->writeEntry("Secondary Splitter Sizes", m_rightSplit->sizes());
+  if(m_groupView->isShown()) {
+    Config::setMainSplitterSizes(m_split->sizes());
+  }
+  if(m_viewStack->isShown()) {
+    // badly named option, but no need to change
+    Config::setSecondarySplitterSizes(m_rightSplit->sizes());
+  }
 
-  m_config->setGroup("Group View Options");
-  m_config->writeEntry("SortColumn", m_groupView->sortStyle()); // ok to use SortColumn key, save semantics
-  m_config->writeEntry("SortAscending", m_groupView->ascendingSort());
+  Config::setGroupViewSortColumn(m_groupView->sortStyle()); // ok to use SortColumn key, save semantics
+  Config::setGroupViewSortAscending(m_groupView->ascendingSort());
 
   if(m_loanView) {
-    m_config->setGroup("Loan View Options");
-    m_config->writeEntry("SortColumn", m_loanView->sortStyle()); // ok to use SortColumn key, save semantics
-    m_config->writeEntry("SortAscending", m_loanView->ascendingSort());
+    Config::setLoanViewSortAscending(m_loanView->sortStyle()); // ok to use SortColumn key, save semantics
+    Config::setLoanViewSortAscending(m_loanView->ascendingSort());
+  }
+
+  if(m_filterView) {
+    Config::setFilterViewSortAscending(m_filterView->sortStyle()); // ok to use SortColumn key, save semantics
+    Config::setFilterViewSortAscending(m_filterView->ascendingSort());
   }
 
   // this is used in the EntryEditDialog constructor, too
   m_editDialog->saveDialogSize(QString::fromLatin1("Edit Dialog Options"));
 
   saveCollectionOptions(Data::Document::self()->collection());
+  Config::writeConfig();
 }
 
 void MainWindow::readCollectionOptions(Data::CollPtr coll_) {
   m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
 
   QString defaultGroup = coll_->defaultGroupField();
-  QString entryGroup = m_config->readEntry("Group By", defaultGroup);
+  QString entryGroup;
+  if(coll_->type() != Data::Collection::Base) {
+    entryGroup = m_config->readEntry("Group By", defaultGroup);
+  } else {
+    KURL url = Kernel::self()->URL();
+    for(uint i = 0; i < Config::maxCustomURLSettings(); ++i) {
+      KURL u = m_config->readEntry(QString::fromLatin1("URL_%1").arg(i));
+      if(url == u) {
+        entryGroup = m_config->readEntry(QString::fromLatin1("Group By_%1").arg(i), defaultGroup);
+        break;
+      }
+    }
+    // fall back to old setting
+    if(entryGroup.isEmpty()) {
+      entryGroup = m_config->readEntry("Group By", defaultGroup);
+    }
+  }
   if(entryGroup.isEmpty() || !coll_->entryGroups().contains(entryGroup)) {
     entryGroup = defaultGroup;
   }
   m_groupView->setGroupField(entryGroup);
 
-  QString entryXSLTFile = m_config->readEntry("Entry Template", QString::fromLatin1("Fancy"));
+  QString entryXSLTFile = Config::templateName(coll_->type());
   if(entryXSLTFile.isEmpty()) {
     entryXSLTFile = QString::fromLatin1("Fancy"); // should never happen, but just in case
   }
@@ -845,13 +869,38 @@ void MainWindow::saveCollectionOptions(Data::CollPtr coll_) {
     return;
   }
 
+  int configIndex = -1;
   m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
   if(m_entryGrouping->currentItem() > -1 &&
      static_cast<int>(coll_->entryGroups().count()) > m_entryGrouping->currentItem()) {
-    QString groupName = coll_->entryGroups()[m_entryGrouping->currentItem()];
-    m_config->writeEntry("Group By", groupName);
+    QString groupName = Kernel::self()->fieldNameByTitle(m_entryGrouping->currentText());
+    if(coll_->type() != Data::Collection::Base) {
+      m_config->writeEntry("Group By", groupName);
+    } else {
+      // all of this is to have custom settings on a per file basis
+      KURL url = Kernel::self()->URL();
+      QValueList<KURL> urls;
+      urls.append(url);
+      QStringList groupBys;
+      groupBys.append(groupName);
+      for(uint i = 0; i < Config::maxCustomURLSettings(); ++i) {
+        KURL u = m_config->readEntry(QString::fromLatin1("URL_%1").arg(i));
+        QString g = m_config->readEntry(QString::fromLatin1("Group By_%1").arg(i));
+        if(!u.isEmpty() && url != u) {
+          urls.append(u);
+          groupBys.append(g);
+        } else if(!u.isEmpty()) {
+          configIndex = i;
+        }
+      }
+      uint limit = QMIN(urls.count(), Config::maxCustomURLSettings());
+      for(uint i = 0; i < limit; ++i) {
+        m_config->writeEntry(QString::fromLatin1("URL_%1").arg(i), urls[i].url());
+        m_config->writeEntry(QString::fromLatin1("Group By_%1").arg(i), groupBys[i]);
+      }
+    }
   }
-  m_detailedView->saveConfig(coll_);
+  m_detailedView->saveConfig(coll_, configIndex);
 }
 
 void MainWindow::readOptions() {
@@ -859,7 +908,7 @@ void MainWindow::readOptions() {
   // for some reason, the m_config pointer is getting changed, but
   // I can't figure out where, so just to be on the safe side
   if(m_config != kapp->config()) {
-    kdDebug() << "MainWindow::readOptions() - inconsistent KConfig pointers!" << endl;
+    kdWarning() << "MainWindow::readOptions() - inconsistent KConfig pointers!" << endl;
     m_config = kapp->config();
   }
 
@@ -867,94 +916,41 @@ void MainWindow::readOptions() {
 
   m_config->setGroup("Main Window Options");
 
-  QValueList<int> splitList = m_config->readIntListEntry("Main Splitter Sizes");
+//  QValueList<int> splitList = m_config->readIntListEntry("Main Splitter Sizes");
+  QValueList<int> splitList = Config::mainSplitterSizes();
   if(!splitList.empty()) {
     m_split->setSizes(splitList);
   }
 
   // this config option is badly named, but no need to change it
-  splitList = m_config->readIntListEntry("Secondary Splitter Sizes");
+//  splitList = m_config->readIntListEntry("Secondary Splitter Sizes");
+  splitList = Config::secondarySplitterSizes();
   if(!splitList.empty()) {
     m_rightSplit->setSizes(splitList);
   }
 
-  m_config->setGroup("General Options");
-
-  uint iconSize = m_config->readUnsignedNumEntry("Max Icon Size", 96);
-  m_viewStack->iconView()->setMaxAllowedIconWidth(iconSize);
-
-  bool bWriteImagesInFile = m_config->readBoolEntry("Write Images In File", true);
-  Kernel::self()->setWriteImagesInFile(bWriteImagesInFile);
+  m_viewStack->iconView()->setMaxAllowedIconWidth(Config::maxIconSize());
 
   connect(toolBar("collectionToolBar"), SIGNAL(modechange()), SLOT(slotUpdateToolbarIcons()));
 
-  bool bViewGroupWidget = m_config->readBoolEntry("Show Group Widget", true);
-  m_toggleGroupWidget->setChecked(bViewGroupWidget);
+  m_toggleGroupWidget->setChecked(Config::showGroupWidget());
   slotToggleGroupWidget();
 
-  bool bViewEntryView = m_config->readBoolEntry("Show Entry View", true);
-  m_toggleEntryView->setChecked(bViewEntryView);
+  m_toggleEntryView->setChecked(Config::showEntryView());
   slotToggleEntryView();
 
   // initialize the recent file list
   m_fileOpenRecent->loadEntries(m_config, QString::fromLatin1("Recent Files"));
 
-  bool autoCapitals = m_config->readBoolEntry("Auto Capitalization", true);
-  Data::Field::setAutoCapitalize(autoCapitals);
+  // sort by count if column = 1
+  int sortStyle = Config::groupViewSortColumn();
+  m_groupView->setSortStyle(static_cast<GUI::ListView::SortStyle>(sortStyle));
+  bool sortAscending = Config::groupViewSortAscending();
+  m_groupView->setSortOrder(sortAscending ? Qt::Ascending : Qt::Descending);
 
-  QStringList noCaps;
-  if(m_config->hasKey("No Capitalization")) {
-    noCaps = m_config->readListEntry("No Capitalization", ',');
-  } else {
-    noCaps = Data::Field::defaultNoCapitalizationList();
-  }
-  Data::Field::setNoCapitalizeList(noCaps);
+  m_detailedView->setPixmapSize(Config::maxPixmapWidth(), Config::maxPixmapHeight());
 
-  bool autoFormat = m_config->readBoolEntry("Auto Format", true);
-  Data::Field::setAutoFormat(autoFormat);
-
-  // even though the GUI separates the values with a semi-colon in the config dialog
-  // they're saved with a comma separator. I should have been consistent in the beginning, but I wasn't.
-  QStringList articles;
-  if(m_config->hasKey("Articles")) {
-    articles = m_config->readListEntry("Articles", ',');
-  } else {
-    articles = Data::Field::defaultArticleList();
-  }
-  Data::Field::setArticleList(articles);
-
-  QStringList suffixes;
-  if(m_config->hasKey("Name Suffixes")) {
-    suffixes = m_config->readListEntry("Name Suffixes", ',');
-  } else {
-    suffixes = Data::Field::defaultSuffixList();
-  }
-  Data::Field::setSuffixList(suffixes);
-
-  QStringList prefixes;
-  if(m_config->hasKey("Surname Prefixes")) {
-    prefixes = m_config->readListEntry("Surname Prefixes", ',');
-  } else {
-    prefixes = Data::Field::defaultSurnamePrefixList();
-  }
-  Data::Field::setSurnamePrefixList(prefixes);
-
-  m_config->setGroup("Group View Options");
-  if(m_config->hasKey("SortColumn")) {
-    // sort by count if column = 1
-    int sortStyle = m_config->readNumEntry("SortColumn", 0);
-    m_groupView->setSortStyle(static_cast<GUI::ListView::SortStyle>(sortStyle));
-    bool sortAscending = m_config->readBoolEntry("SortAscending", true);
-    m_groupView->setSortOrder(sortAscending ? Qt::Ascending : Qt::Descending);
-  }
-
-  m_config->setGroup("Detailed View Options");
-  int maxPixWidth = m_config->readNumEntry("MaxPixmapWidth", 50);
-  int maxPixHeight = m_config->readNumEntry("MaxPixmapHeight", 50);
-  m_detailedView->setPixmapSize(maxPixWidth, maxPixHeight);
-
-  m_config->setGroup(QString::fromLatin1("ExportOptions - Bibtex"));
-  bool useBraces = m_config->readBoolEntry("Use Braces", true);
+  bool useBraces = Config::useBraces();
   if(useBraces) {
     BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
   } else {
@@ -1082,7 +1078,6 @@ void MainWindow::slotFileOpen(const KURL& url_) {
   }
 
   StatusBar::self()->clearStatus();
-
 }
 
 void MainWindow::slotFileOpenRecent(const KURL& url_) {
@@ -1168,25 +1163,19 @@ bool MainWindow::fileSave() {
   } else {
     // special check: if there are more than 100 images AND the "Write Images In File" config key
     // is not set, then warn user that performance may suffer, and write result
-    {
-      KConfigGroupSaver saver(kapp->config(), "General Options");
-      if(!kapp->config()->hasKey("Write Images In File")
-         && Data::Document::self()->imageCount() > MAX_IMAGES_WARN_PERFORMANCE) {
-        QString msg = i18n("<qt><p>You are saving a file with many images, which causes Tellico to "
-                           "slow down significantly. Do you want to save the images separately in "
-                           "Tellico's data directory to improve performance?</p><p>Your choice can "
-                           "always be changed in the configuration dialog.</p></qt>");
+    if(Config::askWriteImagesInFile()
+       && Data::Document::self()->imageCount() > MAX_IMAGES_WARN_PERFORMANCE) {
+      QString msg = i18n("<qt><p>You are saving a file with many images, which causes Tellico to "
+                         "slow down significantly. Do you want to save the images separately in "
+                         "Tellico's data directory to improve performance?</p><p>Your choice can "
+                         "always be changed in the configuration dialog.</p></qt>");
 
-        KGuiItem yes = KStdGuiItem::yes();
-        yes.setText(i18n("Save Images Separately"));
+      KGuiItem yes(i18n("Save Images Separately"));
+      KGuiItem no(i18n("Save Images in File"));
 
-        KGuiItem no = KStdGuiItem::no();
-        no.setText(i18n("Save Images in File"));
-
-        int res = KMessageBox::warningYesNo(this, msg, QString::null /* caption */, yes, no);
-        kapp->config()->writeEntry("Write Images In File", res == KMessageBox::No);
-        Kernel::self()->setWriteImagesInFile(res == KMessageBox::No);
-      }
+      int res = KMessageBox::warningYesNo(this, msg, QString::null /* caption */, yes, no);
+      Config::setWriteImagesInFile(res == KMessageBox::No);
+      Config::setAskWriteImagesInFile(false);
     }
 
     GUI::CursorSaver cs(Qt::waitCursor);
@@ -1256,11 +1245,10 @@ bool MainWindow::fileSaveAs() {
 void MainWindow::slotFilePrint() {
   slotStatusMsg(i18n("Printing..."));
 
-  m_config->setGroup("Printing");
-  bool printGrouped = m_config->readBoolEntry("Print Grouped", true);
-  bool printHeaders = m_config->readBoolEntry("Print Field Headers", false);
-  int imageWidth = m_config->readNumEntry("Max Image Width", 50);
-  int imageHeight = m_config->readNumEntry("Max Image Height", 50);
+  bool printGrouped = Config::printGrouped();
+  bool printHeaders = Config::printFieldHeaders();
+  int imageWidth = Config::maxImageWidth();
+  int imageHeight = Config::maxImageHeight();
 
   // If the collection is being filtered, warn the user
   if(m_detailedView->filter() != 0) {
@@ -1416,7 +1404,7 @@ void MainWindow::slotToggleEntryView() {
 void MainWindow::slotShowConfigDialog() {
   if(!m_configDlg) {
     m_configDlg = new ConfigDialog(this);
-    m_configDlg->readConfiguration(m_config);
+    m_configDlg->readConfiguration();
     connect(m_configDlg, SIGNAL(signalConfigChanged()),
             SLOT(slotHandleConfigChange()));
     connect(m_configDlg, SIGNAL(finished()),
@@ -1500,35 +1488,34 @@ void MainWindow::slotHandleConfigChange() {
     m_config = kapp->config();
   }
 
-  const bool writeImagesInFile = Kernel::self()->writeImagesInFile();
-  const bool autoCapitalize = Data::Field::autoCapitalize();
-  const bool autoFormat = Data::Field::autoFormat();
-  QStringList articles = Data::Field::articleList();
-  QStringList nocaps = Data::Field::noCapitalizeList();
-  QStringList suffixes = Data::Field::suffixList();
+  const bool writeImagesInFile = Config::writeImagesInFile();
+  const bool autoCapitalize = Config::autoCapitalization();
+  const bool autoFormat = Config::autoFormat();
+  QStringList articles = Config::articleList();
+  QStringList nocaps = Config::noCapitalizationList();
+  QStringList suffixes = Config::nameSuffixList();
+  QStringList prefixes = Config::surnamePrefixList();
 
-  m_configDlg->saveConfiguration(m_config);
+  m_configDlg->saveConfiguration();
 
-  if(writeImagesInFile != Kernel::self()->writeImagesInFile()) {
+  // only modified if there are entries
+  if(writeImagesInFile != Config::writeImagesInFile() && !Data::Document::self()->isEmpty()) {
     Data::Document::self()->slotSetModified();
   }
 
-  if(autoCapitalize != Data::Field::autoCapitalize() ||
-     autoFormat != Data::Field::autoFormat() ||
-     articles != Data::Field::articleList() ||
-     nocaps != Data::Field::noCapitalizeList() ||
-     suffixes != Data::Field::suffixList()) {
+  if(autoCapitalize != Config::autoCapitalization() ||
+    autoFormat != Config::autoFormat() ||
+    articles != Config::articleList() ||
+    nocaps != Config::noCapitalizationList() ||
+    suffixes != Config::nameSuffixList() ||
+    prefixes != Config::surnamePrefixList()) {
     // invalidate all groups
     Data::Document::self()->collection()->invalidateGroups();
     // refreshing the title causes the group view to refresh
     Controller::self()->slotRefreshField(Data::Document::self()->collection()->fieldByName(QString::fromLatin1("title")));
   }
 
-  m_config->setGroup(QString::fromLatin1("Options - %1").arg(Kernel::self()->collectionTypeName()));
-  QString entryXSLTFile = m_config->readEntry("Entry Template", QString::fromLatin1("Fancy"));
-  if(entryXSLTFile.isEmpty()) {
-    entryXSLTFile = QString::fromLatin1("Fancy"); // should never happen, but just in case
-  }
+  QString entryXSLTFile = Config::templateName(Kernel::self()->collectionType());
   m_viewStack->entryView()->setXSLTFile(entryXSLTFile + QString::fromLatin1(".xsl"));
 }
 
@@ -1551,28 +1538,28 @@ void MainWindow::slotUpdateCollectionToolBar(Data::CollPtr coll_) {
     return;
   }
 
-  QStringList groupTitles;
-  int index = 0;
+  QMap<QString, QString> groupMap; // use a map so they get sorted
   QStringList::ConstIterator groupIt = groups.begin();
   for(int i = 0; groupIt != groups.end(); ++groupIt, ++i) {
     // special case for people "pseudo-group"
     if(*groupIt == Data::Collection::s_peopleGroupName) {
-      groupTitles << (QString::fromLatin1("<") + i18n("People") + QString::fromLatin1(">"));
+      groupMap.insert(*groupIt, QString::fromLatin1("<") + i18n("People") + QString::fromLatin1(">"));
     } else {
-      groupTitles << coll_->fieldTitleByName(*groupIt);
-    }
-    if(*groupIt == current) {
-      index = i;
+      groupMap.insert(*groupIt, coll_->fieldTitleByName(*groupIt));
     }
   }
 
-// is it more of a performance hit to compare two stringlists then to repopulate needlessly?
-//  if(groupTitles != m_entryGrouping->items()) {
-    m_entryGrouping->setItems(groupTitles);
-//  }
+  QStringList names = groupMap.keys();
+  int index = names.findIndex(current);
+  if(index == -1) {
+    current = names[0];
+    index = 0;
+  }
+  QStringList titles = groupMap.values();
+  m_entryGrouping->setItems(titles);
   m_entryGrouping->setCurrentItem(index);
   // in case the current grouping field get modified to be non-grouping...
-  m_groupView->setGroupField(groups[index]); // don't call slotChangeGrouping() since it adds an undo item
+  m_groupView->setGroupField(current); // don't call slotChangeGrouping() since it adds an undo item
 
   // this isn't really proper, but works so the combo box width gets adjusted
   const int len = m_entryGrouping->containerCount();
@@ -1592,14 +1579,15 @@ void MainWindow::slotUpdateCollectionToolBar(Data::CollPtr coll_) {
 
 void MainWindow::slotChangeGrouping() {
 //  kdDebug() << "MainWindow::slotChangeGrouping()" << endl;
-  uint idx = m_entryGrouping->currentItem();
+  QString title = m_entryGrouping->currentText();
 
-  Data::CollPtr coll = Data::Document::self()->collection();
-  QString groupName;
-  if(idx < coll->entryGroups().count()) {
-    groupName = coll->entryGroups()[idx];
-  } else {
-    groupName = coll->defaultGroupField();
+  QString groupName = Kernel::self()->fieldNameByTitle(title);
+  if(groupName.isEmpty()) {
+    if(title == QString::fromLatin1("<") + i18n("People") + QString::fromLatin1(">")) {
+      groupName = Data::Collection::s_peopleGroupName;
+    } else {
+      groupName = Data::Document::self()->collection()->defaultGroupField();
+    }
   }
   m_groupView->setGroupField(groupName);
   m_viewTabs->showPage(m_groupView);
@@ -1825,7 +1813,6 @@ void MainWindow::slotFileImport(int format_) {
   ImportDialog dlg(format, url, this, "importdlg");
   if(dlg.exec() != QDialog::Accepted) {
     StatusBar::self()->clearStatus();
-
     return;
   }
 
@@ -1840,7 +1827,6 @@ void MainWindow::slotFileImport(int format_) {
         Kernel::self()->sorry(dlg.statusMessage());
       }
       StatusBar::self()->clearStatus();
-
       return;
     }
 
@@ -1994,27 +1980,24 @@ void MainWindow::slotConvertToBibliography() {
     return;
   }
 
-  GUI::CursorSaver cs(Qt::waitCursor);
+  GUI::CursorSaver cs;
 
   Data::CollPtr newColl = Data::BibtexCollection::convertBookCollection(coll);
   if(newColl) {
     m_newDocument = true;
     Kernel::self()->replaceCollection(newColl);
     m_fileOpenRecent->setCurrentItem(-1);
-/*
-    Data::Document::self()->replaceCollection(newColl);
-    m_quickFilter->clear();
-    slotEnableOpenedActions();
-    slotEnableModifiedActions(true);
-    updateEntrySources();
-*/
+    slotUpdateToolbarIcons();
+    updateCollectionActions();
   } else {
     kdWarning() << "MainWindow::slotConvertToBibliography() - ERROR: no bibliography created!" << endl;
   }
 }
 
 void MainWindow::slotCiteEntry(int action_) {
+  StatusBar::self()->setStatus(i18n("Creating citations..."));
   Cite::ActionManager::self()->cite(static_cast<Cite::CiteAction>(action_), Controller::self()->selectedEntries());
+  StatusBar::self()->clearStatus();
 }
 
 void MainWindow::slotShowFetchDialog() {
@@ -2121,7 +2104,12 @@ bool MainWindow::importFile(Import::Format format_, const KURL& url_, Import::Ac
 }
 
 bool MainWindow::exportCollection(Export::Format format_, const KURL& url_) {
-  GUI::CursorSaver cs(Qt::waitCursor);
+  if(!url_.isValid()) {
+    myDebug() << "MainWindow::exportCollection() - invalid URL: " << url_.url() << endl;
+    return false;
+  }
+
+  GUI::CursorSaver cs;
   const Data::CollPtr c = Data::Document::self()->collection();
   if(!c) {
     return false;
@@ -2161,14 +2149,10 @@ void MainWindow::addFilterView() {
   QWhatsThis::add(m_filterView, i18n("<qt>The <i>Filter View</i> shows the entries which meet certain "
                                      "filter rules.</qt>"));
 
-  m_config->setGroup("Filter View Options");
-  if(m_config->hasKey("SortColumn")) {
-    // sort by count if column = 1
-    int sortStyle = m_config->readNumEntry("SortColumn", 0);
-    m_filterView->setSortStyle(static_cast<GUI::ListView::SortStyle>(sortStyle));
-    bool sortAscending = m_config->readBoolEntry("SortAscending", true);
-    m_filterView->setSortOrder(sortAscending ? Qt::Ascending : Qt::Descending);
-  }
+  int sortStyle = Config::filterViewSortColumn();
+  m_filterView->setSortStyle(static_cast<GUI::ListView::SortStyle>(sortStyle));
+  bool sortAscending = Config::filterViewSortAscending();
+  m_filterView->setSortOrder(sortAscending ? Qt::Ascending : Qt::Descending);
 }
 
 void MainWindow::addLoanView() {
@@ -2182,14 +2166,10 @@ void MainWindow::addLoanView() {
   QWhatsThis::add(m_loanView, i18n("<qt>The <i>Loan View</i> shows a list of all the people who "
                                    "have borrowed items from your collection.</qt>"));
 
-  m_config->setGroup("Loan View Options");
-  if(m_config->hasKey("SortColumn")) {
-    // sort by count if column = 1
-    int sortStyle = m_config->readNumEntry("SortColumn", 0);
-    m_loanView->setSortStyle(static_cast<GUI::ListView::SortStyle>(sortStyle));
-    bool sortAscending = m_config->readBoolEntry("SortAscending", true);
-    m_loanView->setSortOrder(sortAscending ? Qt::Ascending : Qt::Descending);
-  }
+  int sortStyle = Config::loanViewSortColumn();
+  m_loanView->setSortStyle(static_cast<GUI::ListView::SortStyle>(sortStyle));
+  bool sortAscending = Config::loanViewSortAscending();
+  m_loanView->setSortOrder(sortAscending ? Qt::Ascending : Qt::Descending);
 }
 
 void MainWindow::updateCaption(bool modified_) {
@@ -2201,7 +2181,17 @@ void MainWindow::updateCaption(bool modified_) {
     if(!caption.isEmpty()) {
        caption += QString::fromLatin1(" - ");
     }
-    caption += Data::Document::self()->URL().prettyURL();
+    KURL u = Data::Document::self()->URL();
+    if(u.isLocalFile()) {
+      // for new files, the path is set to /Untitled in Data::Document
+      if(u.path() == '/' + i18n("Untitled")) {
+        caption += u.fileName();
+      } else {
+        caption += u.path();
+      }
+    } else {
+      caption += u.prettyURL();
+    }
   }
   setCaption(caption, modified_);
 }
@@ -2281,8 +2271,8 @@ void MainWindow::updateCollectionActions() {
       break;
   }
   // special case when there are no available data sources
-  if(m_actions.isEmpty() && action("update_entry_all")) {
-    action("update_entry_all")->setEnabled(false);
+  if(m_fetchActions.isEmpty() && m_updateAll) {
+    m_updateAll->setEnabled(false);
   }
 }
 
@@ -2294,19 +2284,25 @@ void MainWindow::updateEntrySources() {
   }
 
   unplugActionList(QString::fromLatin1("update_entry_actions"));
-  m_actions.clear();
+  for(QPtrListIterator<KAction> it(m_fetchActions); it.current(); ++it) {
+    it.current()->unplugAll();
+    mapper->removeMappings(it.current());
+  }
+  // autoDelete() all actions, which removes them from the actionCollection()
+  m_fetchActions.clear();
 
-  const QStringList sources = Fetch::Manager::self()->sources();
-  for(QStringList::ConstIterator it = sources.begin(); it != sources.end(); ++it) {
+  Fetch::CFetcherVec vec = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
+  for(Fetch::CFetcherVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
     KAction* action = new KAction(actionCollection());
-    action->setText(*it);
-    action->setToolTip(i18n("Update entry data from %1").arg(*it));
-    m_actions.append(action);
+    action->setText(it->source());
+    action->setToolTip(i18n("Update entry data from %1").arg(it->source()));
+    action->setIconSet(Fetch::Manager::fetcherIcon(it.data()));
     connect(action, SIGNAL(activated()), mapper, SLOT(map()));
-    mapper->setMapping(action, *it);
+    mapper->setMapping(action, it->source());
+    m_fetchActions.append(action);
   }
 
-  plugActionList(QString::fromLatin1("update_entry_actions"), m_actions);
+  plugActionList(QString::fromLatin1("update_entry_actions"), m_fetchActions);
 }
 
 #include "mainwindow.moc"

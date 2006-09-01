@@ -59,12 +59,9 @@ bool YahooFetcher::canFetch(int type) const {
   return type == Data::Collection::Album;
 }
 
-void YahooFetcher::readConfig(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Name", defaultName());
-  if(!s.isEmpty()) {
-    m_name = s;
-  }
+void YahooFetcher::readConfigHook(KConfig* config_, const QString& group_) {
+  Q_UNUSED(config_);
+  Q_UNUSED(group_);
 }
 
 void YahooFetcher::search(FetchKey key_, const QString& value_) {
@@ -209,15 +206,15 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntry(uint uid_) {
 
   KURL imageURL = entry->field(QString::fromLatin1("image"));
   if(!imageURL.isEmpty()) {
-    const Data::Image& img = ImageFactory::addImage(imageURL, true);
+    QString id = ImageFactory::addImage(imageURL, true);
     // FIXME: need to add cover image field to bibtex collection
-    if(img.isNull()) {
+    if(!id.isEmpty()) {
     // rich text causes layout issues
 //      emit signalStatus(i18n("<qt>The cover image for <i>%1</i> could not be loaded.</qt>").arg(
 //                              entry->field(QString::fromLatin1("title"))));
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     } else {
-      entry->setField(QString::fromLatin1("cover"), img.id());
+      entry->setField(QString::fromLatin1("cover"), id);
     }
   }
 
@@ -367,6 +364,10 @@ YahooFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const YahooFetcher*/*
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
+}
+
+QString YahooFetcher::ConfigWidget::preferredName() const {
+  return YahooFetcher::defaultName();
 }
 
 #include "yahoofetcher.moc"

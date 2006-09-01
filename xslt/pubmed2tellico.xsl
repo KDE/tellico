@@ -46,10 +46,13 @@
    <fields>
     <field name="_default"/>
     <field flags="0" title="Institution" category="Institution" format="4" type="2" name="institution" i18n="true">
-     <prop name="bibtex" >institution</prop>
+     <prop name="bibtex">institution</prop>
     </field>
     <field flags="0" title="Abstract" category="Abstract" format="4" type="2" name="abstract" i18n="true">
-     <prop name="bibtex" >abstract</prop>
+     <prop name="bibtex">abstract</prop>
+    </field>
+    <field flags="0" title="URL" category="Miscellaneous" format="4" type="7" name="url" i18n="true">
+     <prop name="bibtex">url</prop>
     </field>
    </fields>
    <xsl:apply-templates select="/PubmedArticleSet/PubmedArticle/MedlineCitation"/>
@@ -66,11 +69,11 @@
   <volume>
    <xsl:value-of select="Article/Journal/JournalIssue/Volume"/>  
   </volume>
-  
+
   <number>
    <xsl:value-of select="Article/Journal/JournalIssue/Issue"/>  
   </number>
-  
+
   <xsl:variable name="year">
    <xsl:variable name="year1" select="Article/Journal/JournalIssue/PubDate/Year"/>
    <xsl:variable name="year2" select="Article/Journal/JournalIssue/PubDate/MedlineDate"/>
@@ -83,48 +86,65 @@
     </xsl:otherwise>
    </xsl:choose>
   </xsl:variable>
-  
+
   <year>
    <xsl:value-of select="$year"/>  
   </year>
-  
+
   <month>
    <xsl:apply-templates select="$months-top">
     <xsl:with-param name="month-id" select="Article/Journal/JournalIssue/PubDate/Month"/>
    </xsl:apply-templates>
   </month>
-  
+
   <title>
    <xsl:value-of select="Article/ArticleTitle"/>  
   </title>
-  
+
   <pages>
    <xsl:value-of select="Article/Pagination/MedlinePgn"/>  
   </pages>
-  
+
   <abstract>
    <xsl:value-of select="Article/Abstract/AbstractText"/>  
   </abstract>
-  
+
   <institution>
-   <xsl:value-of select="Article/Affiliation"/>  
+   <xsl:value-of select="Article/Affiliation"/>
   </institution>
-  
+
   <authors>
    <xsl:for-each select="Article/AuthorList/Author">
     <author>
-     <xsl:call-template name="TransformInitials">
-      <xsl:with-param name="initials" select="Initials"/>
-     </xsl:call-template>
+     <xsl:if test="ForeName">
+      <xsl:value-of select="concat(ForeName, ' ')"/>
+     </xsl:if>
+     <xsl:if test="not(ForeName)">
+      <xsl:call-template name="TransformInitials">
+       <xsl:with-param name="initials" select="Initials"/>
+      </xsl:call-template>
+     </xsl:if>
      <xsl:value-of select="LastName"/>
-    </author>   
+    </author>
    </xsl:for-each>
   </authors>
-  
+
   <journal>
-   <xsl:value-of select="MedlineJournalInfo/MedlineTA"/>  
+   <xsl:if test="Article/Journal/Title">
+    <xsl:value-of select="Article/Journal/Title"/>
+   </xsl:if>
+   <xsl:if test="not(Article/Journal/Title)">
+    <xsl:value-of select="MedlineJournalInfo/MedlineTA"/>
+   </xsl:if>
   </journal>
-  
+
+  <keywords>
+   <xsl:for-each select="MeshHeadingList/MeshHeading/QualifierName[@MajorTopicYN='Y']">
+    <keyword>
+     <xsl:value-of select="."/>
+    </keyword>
+   </xsl:for-each>
+  </keywords>
  </entry>
 </xsl:template>
 

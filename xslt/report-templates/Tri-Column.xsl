@@ -23,10 +23,17 @@
 <!-- location depends on being installed correctly -->
 <xsl:import href="../tellico-common.xsl"/>
 
-<xsl:output method="html" version="xhtml" encoding="utf-8"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01//EN"
+            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            encoding="utf-8"/>
+
+<xsl:param name="filename"/>
+<xsl:param name="cdate"/>
 
 <!-- Sort using user's preferred language -->
-<xsl:param name="lang" select="'en'"/>
+<xsl:param name="lang"/>
 
 <xsl:variable name="image-field" select="tc:tellico/tc:collection[1]/tc:fields/tc:field[@type=10][1]/@name"/>
 
@@ -51,6 +58,18 @@
         font-family: sans-serif;
         background-color: #fff;
         color: #000;
+   }
+   #header-left {
+        margin-top: 0;
+        float: left;
+        font-size: 80%;
+        font-style: italic;
+   }
+   #header-right {
+        margin-top: 0;
+        float: right;
+        font-size: 80%;
+        font-style: italic;
    }
    h1.colltitle {
         margin: 0px;
@@ -103,6 +122,8 @@
 </xsl:template>
 
 <xsl:template match="tc:collection[@type=3]">
+ <p id="header-left"><xsl:value-of select="$filename"/></p>
+ <p id="header-right"><xsl:value-of select="$cdate"/></p>
  <h1 class="colltitle">
   <xsl:value-of select="@title"/>
  </h1>
@@ -119,6 +140,9 @@
  <xsl:variable name="coll" select="."/>
  
  <table class="tablelist" cellpadding="0" cellspacing="0" width="100%">
+   <colgroup width="33%"/>
+   <colgroup width="34%"/>
+   <colgroup width="33%"/>
   <tbody>
    <!-- three columns -->
    <!-- have to pass in image width and height because
@@ -135,17 +159,17 @@
      <!-- switch context back to document -->
      <xsl:for-each select="$coll">
       
-      <td align="left" width="33%">
+      <td>
        <xsl:apply-templates select="$e1">
         <xsl:with-param name="img" select="key('imagesById', $e1/*[local-name() = $image-field])"/>
        </xsl:apply-templates>
       </td>
-      <td align="left" width="34%">
+      <td>
        <xsl:apply-templates select="$e2">
         <xsl:with-param name="img" select="key('imagesById', $e2/*[local-name() = $image-field])"/>
        </xsl:apply-templates>
       </td>
-      <td align="left" width="33%">
+      <td>
        <xsl:apply-templates select="$e3">
         <xsl:with-param name="img" select="key('imagesById', $e3/*[local-name() = $image-field])"/>
        </xsl:apply-templates>
@@ -167,7 +191,7 @@
     <td>
      <xsl:variable name="id" select="./*[local-name() = $image-field]"/>
      <xsl:if test="$id">
-      <img class="float">
+      <img class="float" alt=" ">
        <xsl:attribute name="src">
         <xsl:value-of select="concat($imgdir, $id)"/>
        </xsl:attribute>
@@ -179,7 +203,7 @@
       </img>
      </xsl:if>
     </td>
-    <td width="100%">
+    <td>
      <span class="title">
       <xsl:value-of select=".//tc:title[1]"/>
      </span>

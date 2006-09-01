@@ -56,6 +56,8 @@ void BibtexmlImporter::loadDomDocument() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(count);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
+
   for(uint j = 0; !m_cancelled && j < entryelems.count(); ++j) {
     readEntry(entryelems.item(j));
 

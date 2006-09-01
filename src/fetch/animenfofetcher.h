@@ -45,7 +45,7 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return AnimeNfo; }
   virtual bool canFetch(int type) const;
-  virtual void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -55,6 +55,7 @@ public:
   public:
     ConfigWidget(QWidget* parent_);
     virtual void saveConfig(KConfig*) {}
+    virtual QString preferredName() const;
   };
   friend class ConfigWidget;
 
@@ -66,8 +67,6 @@ private slots:
 
 private:
   Data::EntryPtr parseEntry(const QString& str);
-
-  QString m_name;
 
   QByteArray m_data;
   int m_total;

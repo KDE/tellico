@@ -37,7 +37,11 @@
 <!-- location depends on being installed correctly -->
 <xsl:import href="tellico-common.xsl"/>
 
-<xsl:output method="html" version="xhtml" encoding="utf-8"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01//EN"
+            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            encoding="utf-8"/>
 
 <!-- To choose which fields of each entry are printed, change the
      string to a space separated list of field names. To know what

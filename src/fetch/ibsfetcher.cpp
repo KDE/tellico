@@ -38,7 +38,7 @@ namespace {
 using Tellico::Fetch::IBSFetcher;
 
 IBSFetcher::IBSFetcher(QObject* parent_, const char* name_ /*=0*/)
-    : Fetcher(parent_, name_), m_name(defaultName()) {
+    : Fetcher(parent_, name_) {
 }
 
 QString IBSFetcher::defaultName() {
@@ -53,12 +53,9 @@ bool IBSFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
-void IBSFetcher::readConfig(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Name");
-  if(!s.isEmpty()) {
-    m_name = s;
-  }
+void IBSFetcher::readConfigHook(KConfig* config_, const QString& group_) {
+  Q_UNUSED(config_);
+  Q_UNUSED(group_);
 }
 
 void IBSFetcher::search(FetchKey key_, const QString& value_) {
@@ -325,9 +322,9 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
 //    QString imgURL = QString::fromLatin1("http://www.ibs.it/cop/coplibri.asp?e=%1").arg(isbn);
     QString imgURL = QString::fromLatin1("http://alice.ibs.it/copbookst.asp?e=%1").arg(isbn);
     myDebug() << "IBSFetcher() - cover = " << imgURL << endl;
-    const Data::Image& img = ImageFactory::addImage(imgURL, true, QString::fromLatin1("http://internetbookshop.it"));
-    if(!img.isNull() && img.width() > 1) {
-      entry->setField(QString::fromLatin1("cover"), img.id());
+    QString id = ImageFactory::addImage(imgURL, true, QString::fromLatin1("http://internetbookshop.it"));
+    if(!id.isEmpty()) {
+      entry->setField(QString::fromLatin1("cover"), id);
     }
 #else
     QRegExp imgRx(QString::fromLatin1("<img\\s+[^>]*\\s*src\\s*=\\s*\"(http://[^/]*\\.ibs\\.it/[^\"]+e=%1)").arg(isbn));
@@ -335,9 +332,9 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     pos = imgRx.search(str_);
     if(pos > -1) {
       myLog() << "IBSFetcher() - cover = " << imgRx.cap(1) << endl;
-      const Data::Image& img = ImageFactory::addImage(imgRx.cap(1), true, QString::fromLatin1("http://internetbookshop.it"));
-      if(!img.isNull() && img.width() > 1) {
-        entry->setField(QString::fromLatin1("cover"), img.id());
+      QString id = ImageFactory::addImage(imgRx.cap(1), true, QString::fromLatin1("http://internetbookshop.it"));
+      if(!id.isEmpty()) {
+        entry->setField(QString::fromLatin1("cover"), id);
       }
     }
 #endif
@@ -403,6 +400,10 @@ IBSFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
+}
+
+QString IBSFetcher::ConfigWidget::preferredName() const {
+  return IBSFetcher::defaultName();
 }
 
 #include "ibsfetcher.moc"

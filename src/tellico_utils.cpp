@@ -34,7 +34,10 @@ namespace {
 QColor Tellico::contrastColor;
 
 QString Tellico::decodeHTML(QString text) {
-  QRegExp rx(QString::fromLatin1("&#(\\d+);"));
+  if(text.isEmpty()) {
+    return text;
+  }
+  static QRegExp rx(QString::fromLatin1("&#(\\d+);"));
   int pos = rx.search(text);
   while(pos > -1) {
     text.replace(pos, rx.matchedLength(), QChar((rx.cap(1).toInt())));
@@ -75,7 +78,7 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
 
 QString Tellico::i18nReplace(QString text) {
   // Because QDomDocument sticks in random newlines, go ahead and grab them too
-  QRegExp rx(QString::fromLatin1("\\n?<i18n>([^<]*)</i18n>\\n?"));
+  static QRegExp rx(QString::fromLatin1("(?:\\n+ *)*<i18n>([^<]*)</i18n>(?: *\\n+)*"));
   int pos = rx.search(text);
   while(pos > -1) {
     text.replace(pos, rx.matchedLength(), i18n(rx.cap(1).utf8()));
@@ -89,7 +92,7 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
     return QStringList();
   }
 
-  // TODO: build in symlink chekcing, for now, prohibit
+  // TODO: build in symlink checking, for now, prohibit
   QDir dir(dir_, QString::null, QDir::Name | QDir::IgnoreCase, QDir::Dirs | QDir::Readable | QDir::NoSymLinks);
 
   QStringList allSubdirs; // the whole list
@@ -108,7 +111,7 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
 }
 
 // Based on QGDict's hash functions, Copyright (C) 1992-2000 Trolltech AS
-// and used from Juk, Copyright (C) (2003 - 2004 by Scott Wheeler
+// and used from Juk, Copyright (C) 2003 - 2004 by Scott Wheeler
 int Tellico::stringHash(const QString& str) {
   uint h = 0;
   uint g = 0;

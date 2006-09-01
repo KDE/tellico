@@ -158,7 +158,7 @@ file available locally. Images can also be dragged from a file manager or browse
 <para>
 <emphasis>Rating</emphasis> fields show a number of stars to represent a numerical rating
 for an entry. By default, the rating is a maximum of five. The minimum and maximum may be
-setting properties in the field definition in the &fields-dialog;, named
+changed by setting properties in the field definition in the &fields-dialog;, named
 <emphasis>minimum</emphasis> and <emphasis>maximum</emphasis>, respectively.
 </para>
 
@@ -232,7 +232,7 @@ The <emphasis>ISBN#</emphasis> field is special, since <acronym>ISBN</acronym> n
 <sect2 id="bibliography">
 <title>Bibliographies</title>
 <para>
-Bibliographies have 22 default fields:
+Bibliographies have 25 default fields:
 <emphasis>Title</emphasis>,
 <emphasis>Entry Type</emphasis>,
 <emphasis>Author</emphasis>,
@@ -241,6 +241,7 @@ Bibliographies have 22 default fields:
 <emphasis>Editor</emphasis>,
 <emphasis>Organization</emphasis>,
 <emphasis>Publisher</emphasis>,
+<emphasis>ISBN#</emphasis>,
 <emphasis>Address</emphasis>,
 <emphasis>Edition</emphasis>,
 <emphasis>Pages</emphasis>,
@@ -254,6 +255,8 @@ Bibliographies have 22 default fields:
 <emphasis>Series</emphasis>,
 <emphasis>Volume</emphasis>,
 <emphasis>Cross-Reference</emphasis>, and
+<emphasis>Keywords</emphasis>,
+<emphasis>Abstract</emphasis>,
 <emphasis>Notes</emphasis>.
 </para>
 

@@ -65,6 +65,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning audio files..."), true);
   item.setTotalSteps(100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   // TODO: allow remote audio file importing
   QStringList dirs = url().path();
@@ -265,9 +266,9 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       }
       KURL u;
       u.setPath(fi.absFilePath());
-      const Data::Image& img = ImageFactory::addImage(u, true);
-      if(!img.isNull()) {
-        entry->setField(QString::fromLatin1("cover"), img.id());
+      QString id = ImageFactory::addImage(u, true);
+      if(!id.isEmpty()) {
+        entry->setField(QString::fromLatin1("cover"), id);
       }
       break;
     }
@@ -282,8 +283,6 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     m_coll = 0;
     return 0;
   }
-
-  ProgressManager::self()->setDone(this);
 
   m_coll->updateDicts(m_coll->entries());
   return m_coll;

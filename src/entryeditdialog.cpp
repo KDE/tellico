@@ -26,6 +26,8 @@
 #include <kaccelmanager.h>
 #include <kiconloader.h>
 #include <kdeversion.h>
+#include <kpushbutton.h>
+#include <kaccel.h>
 
 #include <qlayout.h>
 #include <qstringlist.h>
@@ -35,6 +37,7 @@
 #include <qobjectlist.h>
 #include <qtabbar.h>
 #include <qstyle.h>
+#include <qapplication.h>
 
 namespace {
   // must be an even number
@@ -44,8 +47,8 @@ namespace {
 using Tellico::EntryEditDialog;
 
 EntryEditDialog::EntryEditDialog(QWidget* parent_, const char* name_)
-    : KDialogBase(parent_, name_, false, i18n("Edit Entry"), Help|User1|User2|Close, User1, false,
-                  KStdGuiItem::save(), KGuiItem(i18n("&New Entry"))),
+    : KDialogBase(parent_, name_, false, i18n("Edit Entry"), Help|User1|User2|User3|Apply|Close, User1, false,
+                  KGuiItem(i18n("&New Entry"))),
       m_currColl(0),
       m_tabs(new GUI::TabControl(this)),
       m_modified(false),
@@ -53,10 +56,38 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_, const char* name_)
       m_isWorking(false) {
   setMainWidget(m_tabs);
 
-  enableButton(User1, false);
+  m_prevBtn = User3;
+  m_nextBtn = User2;
+  m_newBtn  = User1;
+  m_saveBtn = Apply;
+  KGuiItem save = KStdGuiItem::save();
+  save.setText(i18n("Sa&ve Entry"));
+  setButtonGuiItem(m_saveBtn, save);
+  enableButton(m_saveBtn, false);
 
-  connect(this, SIGNAL(user1Clicked()), SLOT(slotHandleSave()));
-  connect(this, SIGNAL(user2Clicked()), SLOT(slotHandleNew()));
+  connect(this, SIGNAL(applyClicked()), SLOT(slotHandleSave()));
+  connect(this, SIGNAL(user1Clicked()), SLOT(slotHandleNew()));
+  connect(this, SIGNAL(user2Clicked()), Controller::self(), SLOT(slotGoNextEntry()));
+  connect(this, SIGNAL(user3Clicked()), Controller::self(), SLOT(slotGoPrevEntry()));
+
+  KGuiItem prev;
+  prev.setIconName(QString::fromLatin1(QApplication::reverseLayout() ? "forward" : "back"));
+  prev.setToolTip(i18n("Go to the previous entry in the collection"));
+  prev.setWhatsThis(prev.toolTip());
+
+  KGuiItem next;
+  next.setIconName(QString::fromLatin1(QApplication::reverseLayout() ? "back" : "forward"));
+  next.setToolTip(i18n("Go to the next entry in the collection"));
+  next.setWhatsThis(next.toolTip());
+
+  setButtonGuiItem(m_nextBtn, next);
+  setButtonGuiItem(m_prevBtn, prev);
+
+  KAccel* accel = new KAccel(this);
+  accel->insert(QString::fromLatin1("Go Prev"), QString(), prev.toolTip(), Qt::Key_PageUp,
+                Controller::self(), SLOT(slotGoPrevEntry()));
+  accel->insert(QString::fromLatin1("Go Next"), QString(), next.toolTip(), Qt::Key_PageDown,
+                Controller::self(), SLOT(slotGoNextEntry()));
 
   setHelp(QString::fromLatin1("entry-editor"));
 
@@ -80,8 +111,8 @@ void EntryEditDialog::slotReset() {
     return;
   }
 
-  enableButton(User1, false);
-  setButtonText(User1, i18n("Sa&ve Entry"));
+  enableButton(m_saveBtn, false);
+  setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
   m_currColl = 0;
   m_currEntries.clear();
 
@@ -97,7 +128,7 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
   }
 //  myDebug() << "EntryEditDialog::setLayout()" << endl;
 
-  actionButton(User2)->setIconSet(UserIconSet(coll_->typeName()));
+  actionButton(m_newBtn)->setIconSet(UserIconSet(coll_->typeName()));
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {
@@ -230,12 +261,8 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
   m_tabs->setMinimumWidth(m_tabs->sizeHint().width());
 
   // update keyboard accels
-  // only want to manage tabBar(), but KDE bug 71769 means the parent widget must be used
-#if KDE_IS_VERSION(3,2,90)
+  // only want to manage tabBar()
   KAcceleratorManager::manage(m_tabs->tabBar());
-#else
-  KAcceleratorManager::manage(m_tabs->tabBar()->parentWidget());
-#endif
 
   m_tabs->setCurrentPage(0);
 
@@ -255,6 +282,9 @@ void EntryEditDialog::slotHandleNew() {
   m_isWorking = true; // clear() will get called again
   Controller::self()->slotClearSelection();
   m_isWorking = false;
+
+  enableButton(m_prevBtn, false);
+  enableButton(m_nextBtn, false);
 
   Data::EntryPtr entry = new Data::Entry(m_currColl);
   m_currEntries.append(entry);
@@ -293,7 +323,6 @@ void EntryEditDialog::slotHandleSave() {
   GUI::CursorSaver cs(Qt::waitCursor);
 
   Data::EntryVec oldEntries;
-
   Data::FieldVec fields = m_currColl->fields();
   // boolean to keep track if any field gets changed
   bool modified = false;
@@ -331,7 +360,7 @@ void EntryEditDialog::slotHandleSave() {
 
   m_modified = false;
   m_isWorking = false;
-  enableButton(User1, false);
+  enableButton(m_saveBtn, false);
 //  slotHandleNew();
 }
 
@@ -346,6 +375,7 @@ void EntryEditDialog::clear() {
   for(QDictIterator<GUI::FieldWidget> it(m_widgetDict); it.current(); ++it) {
     it.current()->setEnabled(true);
     it.current()->clear();
+    it.current()->insertDefault();
   }
 
   setCaption(i18n("Edit Entry"));
@@ -358,8 +388,8 @@ void EntryEditDialog::clear() {
   }
   m_currEntries.clear();
 
-  setButtonText(User1, i18n("Sa&ve Entry"));
-  enableButton(User1, false);
+  setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
+  enableButton(m_saveBtn, false);
 
   m_modified = false;
   m_isWorking = false;
@@ -381,7 +411,7 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
     return;
   }
 
-//  myDebug() << "EntryEditDialog::setContents() - " << list_.count() << " entries" << endl;
+//  myDebug() << "EntryEditDialog::setContents() - " << entries_.count() << " entries" << endl;
 
   // first set contents to first item
   setContents(entries_.front());
@@ -421,7 +451,10 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
   blockSignals(false);
   m_isWorking = false;
 
-  setButtonText(User1, i18n("Sa&ve Entries"));
+  // can't go to next entry if multiple are selected
+  enableButton(m_prevBtn, false);
+  enableButton(m_nextBtn, false);
+  setButtonText(m_saveBtn, i18n("Sa&ve Entries"));
 }
 
 void EntryEditDialog::setContents(Data::EntryPtr entry_) {
@@ -470,9 +503,11 @@ void EntryEditDialog::setContents(Data::EntryPtr entry_) {
     widget->editMultiple(false);
   } // end field loop
 
+  enableButton(m_prevBtn, true);
+  enableButton(m_nextBtn, true);
   if(entry_->isOwned()) {
-    setButtonText(User1, i18n("Sa&ve Entry"));
-    enableButton(User1, m_modified);
+    setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
+    enableButton(m_saveBtn, m_modified);
   } else {
     slotSetModified(true);
   }
@@ -547,7 +582,7 @@ void EntryEditDialog::updateCompletions(Data::EntryPtr entry_) {
 #ifndef NDEBUG
   if(m_currColl != entry_->collection()) {
     myDebug() << "EntryEditDialog::updateCompletions - inconsistent collection pointers!" << endl;
-    m_currColl = entry_->collection();
+//    m_currColl = entry_->collection();
   }
 #endif
 
@@ -576,7 +611,7 @@ void EntryEditDialog::updateCompletions(Data::EntryPtr entry_) {
 
 void EntryEditDialog::slotSetModified(bool mod_/*=true*/) {
   m_modified = mod_;
-  enableButton(User1, mod_);
+  enableButton(m_saveBtn, mod_);
 }
 
 bool EntryEditDialog::queryModified() {

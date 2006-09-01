@@ -38,7 +38,7 @@ namespace {
 using Tellico::Fetch::AnimeNfoFetcher;
 
 AnimeNfoFetcher::AnimeNfoFetcher(QObject* parent_, const char* name_ /*=0*/)
-    : Fetcher(parent_, name_), m_name(defaultName()) {
+    : Fetcher(parent_, name_) {
 }
 
 QString AnimeNfoFetcher::defaultName() {
@@ -53,13 +53,9 @@ bool AnimeNfoFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-void AnimeNfoFetcher::readConfig(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Name");
-  if(!s.isEmpty()) {
-    m_name = s;
-  }
-//  m_fields = config_->readListEntry("Custom Fields", QString::fromLatin1("keyword"));
+void AnimeNfoFetcher::readConfigHook(KConfig* config_, const QString& group_) {
+  Q_UNUSED(config_);
+  Q_UNUSED(group_);
 }
 
 void AnimeNfoFetcher::search(FetchKey key_, const QString& value_) {
@@ -324,9 +320,9 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_) {
   int pos = imgRx.search(s);
   if(pos > -1) {
     KURL imgURL(QString::fromLatin1(ANIMENFO_BASE_URL), imgRx.cap(1));
-    const Data::Image& img = ImageFactory::addImage(imgURL, true);
-    if(!img.isNull()) {
-      entry->setField(QString::fromLatin1("cover"), img.id());
+    QString id = ImageFactory::addImage(imgURL, true);
+    if(!id.isEmpty()) {
+      entry->setField(QString::fromLatin1("cover"), id);
     }
   }
 
@@ -372,6 +368,10 @@ AnimeNfoFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
+}
+
+QString AnimeNfoFetcher::ConfigWidget::preferredName() const {
+  return AnimeNfoFetcher::defaultName();
 }
 
 #include "animenfofetcher.moc"

@@ -169,16 +169,23 @@ Les modèles additionnels peuvent être installés dans
 &appname; peut utiliser différentes sources pour importer des données, qui
 peuvent être configurées dans la boîte de dialogue des sources d'informations.
 Différents types de sources sont disponibles :
-les <link linkend="amazon-web-services"> Web Services Amazon.com</link>,
-<link linkend="imdb">Internet Movie Database</link>,
-les <link linkend="z3950">serveurs z39.50</link>,
-les <link linkend="sru">serveur SRU</link>,
-les <link linkend="entrez">bases de données Entrez (PubMed)</link>,
-<link linkend="yahoo">Yahoo! Audio Search</link>,
-<link linkend="animenfo">AnimeNfo.com</link>,
-<link linkend="ibs">Internet Bookshop Italia</link>, ainsi que les 
-<link linkend="externalexec">scripts ou applications externes</link>.
 </para>
+
+<itemizedlist>
+<listitem><para><link linkend="amazon-web-services">Web Services Amazon.com</link>,</para></listitem>
+<listitem><para><link linkend="imdb">Internet Movie Database 9</link>,</para></listitem>
+<listitem><para><link linkend="z3950">Serveurs z39.50</link>,</para></listitem>
+<listitem><para><link linkend="sru">Serveurs SRU</link>,</para></listitem>
+<listitem><para><link linkend="entrez">Bases de données Entrez (PubMed)</link>,</para></listitem>
+<listitem><para><link linkend="yahoo">Yahoo! Audio Search</link>,</para></listitem>
+<listitem><para><link linkend="animenfo">AnimeNfo.com</link>,</para></listitem>
+<listitem><para><link linkend="ibs">Internet Bookshop Italia</link>,</para></listitem>
+<listitem><para><link linkend="isbndb">ISBNdb.com</link>,</para></listitem>
+<listitem><para><link linkend="allocine">Allociné.fr</link>,</para></listitem>
+<listitem><para>Le <link linkend="minculture">Ministère de la culture espagnole</link>,</para></listitem>
+<listitem><para><link linkend="darkhorse">Dark Horse Comics</link>,</para></listitem>
+<listitem><para><link linkend="externalexec">D'autres scripts ou applications externes</link></para></listitem>
+</itemizedlist>
 
 <screenshot>
 <screeninfo>La boîte de dialogue des sources d'informations</screeninfo>
@@ -351,6 +358,44 @@ d'informations sur l'animation japonaise.
 <para>
 <ulink url="http://ibs.it">IBS, ou Internet Bookstore Italia</ulink>, est un
 magasin en ligne italien, vendant des livres.
+</para>
+</sect2>
+
+<sect2 id="isbndb">
+<title>ISBNdb.com</title>
+<para>
+<ulink url="http://isbndb.com">ISBNdb.com</ulink> est une base de données en
+ligne de livres, comprenant des informations provenant de plusieurs pays.
+</para>
+</sect2>
+
+<sect2 id="allocine">
+<title>Allociné.fr</title>
+<para>
+<ulink url="http://www.allocine.fr">Allociné.fr</ulink> est une base de données
+française en ligne de filme. Cette source
+<link linkend="externalexec">fonctionne sous la forme d'un script</link> et
+nécessite l'installation de <ulink url="http://python.org">Python</ulink>.
+</para>
+</sect2>
+
+<sect2 id="minculture">
+<title>Ministre espagnol de la culture</title>
+<para>
+Le <ulink url="http://www.mcu.es">Ministre espagnol de la culture</ulink> est
+une base de données en ligne espagnole de livres. Cette source
+<link linkend="externalexec">fonctionne sous la forme d'un script</link> et
+nécessite l'installation de <ulink url="http://python.org">Python</ulink>.
+</para>
+</sect2>
+
+<sect2 id="darkhorse">
+<title>Dark Horse Comics</title>
+<para>
+<ulink url="http://darkhorse.com">Dark Horse Comics</ulink> est une éditeur de
+bandes dessinées. Cette source
+<link linkend="externalexec">fonctionne sous la forme d'un script</link> et
+nécessite l'installation de <ulink url="http://python.org">Python</ulink>.
 </para>
 </sect2>
 

@@ -139,8 +139,6 @@ public:
    * Destructor
    */
   ~Field();
-  // default copy constructor is ok, right?
-  FieldPtr clone() const { return new Field(*this); }
 
   /**
    * Returns the id of the field.
@@ -253,6 +251,18 @@ public:
    */
   void setDescription(const QString& desc) { m_desc = desc; }
   /**
+   * Returns the default value for the field.
+   *
+   * @return The field default value
+   */
+  const QString& defaultValue() const;
+  /**
+   * Sets the default value of the field.
+   *
+   * @param value The field default value
+   */
+  void setDefaultValue(const QString& value);
+  /**
    * Some attributes are always a category by themselves.
    *
    * @return Whether the field is th eonly member of its category
@@ -318,102 +328,6 @@ public:
    */
   static QString formatDate(const QString& date);
   /**
-   * Returns the default article list.
-   *
-   * @return The article list
-   */
-  static QStringList defaultArticleList();
-  /**
-   * Returns the current list of articles.
-   *
-   * @return The article list
-   */
-  static const QStringList& articleList() { return s_articles; }
-  /**
-   * Set the words used as articles.
-   *
-   * @param list The list if articles
-   */
-  static void setArticleList(const QStringList& list);
-  /**
-   * Returns the default suffix list.
-   *
-   * @return The suffix list
-   */
-  static QStringList defaultSuffixList();
-  /**
-   * Returns the list of suffixes used in personal names.
-   *
-   * @return The suffix list
-   */
-  static const QStringList& suffixList() { return s_suffixes; }
-  /**
-   * Set the words used as suffixes in personal names.
-   *
-   * @param list The list of suffixes
-   */
-  static void setSuffixList(const QStringList& list) { s_suffixes = list; }
-  /**
-   * Returns the default surname prefix list.
-   *
-   * @return The prefix list
-   */
-  static QStringList defaultSurnamePrefixList();
-  /**
-   * Returns the list of surname prefixes used in personal names.
-   *
-   * @return The prefix list
-   */
-  static const QStringList& surnamePrefixList() { return s_surnamePrefixes; }
-  /**
-   * Set the words used as surname prefixes in personal names.
-   *
-   * @param list The list of prefixes
-   */
-  static void setSurnamePrefixList(const QStringList& list) { s_surnamePrefixes = list; }
-  /**
-   * Returns the default no capitalization list.
-   *
-   * @return The word list
-   */
-  static QStringList defaultNoCapitalizationList();
-  /**
-   * Returns the list of words which are not auto-capitalized.
-   *
-   * @return The word list
-   */
-  static const QStringList& noCapitalizeList() { return s_noCapitalize; }
-  /**
-   * Set the words which are not auto-capitalized.
-   *
-   * @param list The list of words
-   */
-  static void setNoCapitalizeList(const QStringList& list) { s_noCapitalize = list; }
-  /**
-   * Returns true if the capitalization of titles and authors is set to be consistent.
-   *
-   * @return If capitalization is automatically done
-   */
-  static bool autoCapitalize() { return s_autoCapitalize; }
-  /**
-   * Set whether the capitalization of titles and authors is automatic.
-   *
-   * @param autoCapitalize Whether to capitalize or not
-   */
-  static void setAutoCapitalize(bool autoCapitalize) { s_autoCapitalize = autoCapitalize; }
-  /**
-   * Returns true if the titles and authors should be formatted.
-   *
-   * @return If formatting is done
-   */
-  static bool autoFormat() { return s_autoFormat; }
-  /**
-   * Set whether the formatting of titles and authors is automatic.
-   *
-   * @param autoFormat Whether to format or not
-   */
-  static void setAutoFormat(bool autoFormat) { s_autoFormat = autoFormat; }
-  /**
    * Helper method to fix capitalization.
    *
    * @param str String to fix
@@ -443,6 +357,8 @@ public:
    * reset if the field is a rating field used for syntax version 7 and earlier */
   static void convertOldRating(Data::FieldPtr field);
   static void stripArticles(QString& value);
+  static void articlesUpdated();
+
 
 private:
   /*
@@ -462,14 +378,8 @@ private:
   FormatFlag m_formatFlag;
   StringMap m_properties;
 
-  static QStringList s_articles;
   // need to remember articles with apostrophes for capitalization
   static QStringList s_articlesApos;
-  static QStringList s_suffixes;
-  static QStringList s_surnamePrefixes;
-  static QStringList s_noCapitalize;
-  static bool s_autoCapitalize;
-  static bool s_autoFormat;
   static QRegExp s_delimiter;
 };
 

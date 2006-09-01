@@ -30,6 +30,7 @@ public:
   Data::BorrowerPtr borrower() { return m_borrower; }
 
   virtual int count() const;
+  virtual Data::EntryVec entries() const;
 
 private:
   Data::BorrowerPtr m_borrower;

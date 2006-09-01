@@ -23,15 +23,20 @@
 <!-- location depends on being installed correctly -->
 <xsl:import href="../tellico-common.xsl"/>
 
-<xsl:output method="html"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
+            doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+            encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
-<xsl:param name="font"/> <!-- default KDE font family -->
-<xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
-<xsl:param name="bgcolor"/> <!-- default KDE background color -->
-<xsl:param name="color1"/> <!-- default KDE highlighted text color -->
-<xsl:param name="color2"/> <!-- default KDE highlighted background color -->
+<xsl:param name="font"/> <!-- font family -->
+<xsl:param name="fontsize"/> <!-- font size -->
+<xsl:param name="fgcolor"/> <!-- foreground color -->
+<xsl:param name="bgcolor"/> <!-- background color -->
+<xsl:param name="color1"/> <!-- highlighted text color -->
+<xsl:param name="color2"/> <!-- highlighted background color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -64,19 +69,20 @@
   <head>
   <style type="text/css">
    body {
-        margin: 4px;
-        padding: 0px;
-        font-family: "<xsl:value-of select="$font"/>";
+        margin: .2em 1%;
+        padding: 0;
+        font-family: "<xsl:value-of select="$font"/>", Arial, Helvetica, sans-serif;
+        font-size: <xsl:value-of select="$fontsize"/>pt;
         background-color: <xsl:value-of select="$color1"/>;
         color: <xsl:value-of select="$color2"/>;
-        font-size: 1em;
+        line-height: 1.6;
    }
    #banner {
-        padding-bottom: 2px;
-        margin-bottom: 2px;
+        padding-bottom: .2em;
+        margin-bottom: .2em;
    }
    img#logo {
-        padding-top: 2px; /* match h1 */
+        padding-top: .3em; /* match h1 */
    }
    h1 {
         color: <xsl:value-of select="$color1"/>;
@@ -85,23 +91,21 @@
         background-repeat: repeat-x; 
         font-size: 1.8em;
         text-align: left;
-        padding: 4px;
-        margin: 0px;
+        padding: .1em .5em;
+        margin: 0;
         font-weight: bold;
    }
    span.title {
         font-style: italic
    }
-   span.year {
-        padding-left: 8px;
-   }
    img {
         padding-right: 6px;
         padding-bottom: 6px;
-        border: 0;
+        border: 0px;
    }
    table.category {
-       margin-bottom: 10px;
+       margin-bottom: 6px;
+       float: left;
    }
    tr.category {
         font-weight: bold;
@@ -113,19 +117,19 @@
    th {
         font-weight: bold;
         text-align: left;
-        background-color: #ccc;
-        padding-left: 3px;
-        padding-right: 3px;
+        color: black;
+        background: #ccc;
    }
    td.fieldValue {
-        background-color: #ddd;
-        padding-left: 3px;
-        padding-right: 3px;
+        color: black;
+        background: #ddd;
+   }
+   th, td.fieldValue {
+        padding: .1em .3em;
    }
    p {
        margin-top: 0px;
        text-align: justify;
-       font-size: 90%;
    }
    img {
        border: 0px solid;
@@ -134,20 +138,24 @@
    a {
        color: #006;
    }
+   p.navigation {
+        font-weight: bold;
+        text-align: center;
+        clear: both;
+   }
   </style>
   <title>
    <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
-   <xsl:text> - </xsl:text>
+   <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection/@title"/>
   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection[1]"/>
    <xsl:if test="$collection-file">
-    <hr style="clear:left"/>
-    <h4 style="text-align:center">
+    <p class="navigation">
      <a href="{$collection-file}">&lt;&lt; <xsl:value-of select="tc:collection/@title"/></a>
-    </h4>
+    </p>
    </xsl:if>
   </body>
  </html>
@@ -180,7 +188,7 @@
 
  <!-- the top table has images in the left cell and main fields in the right.
       2 images can be on the left -->
- <table cellpadding="0" cellspacing="0" width="100%" class="category">
+ <table width="100%" class="category">
   <tr>
    <td valign="top" rowspan="2">
     <!-- now, show all the images in the entry, type 10 -->
@@ -204,7 +212,7 @@
          </xsl:otherwise>
         </xsl:choose>
        </xsl:attribute>
-       <img>
+       <img alt="">
         <xsl:attribute name="src">
          <xsl:value-of select="concat($imgdir, $image)"/>
         </xsl:attribute>
@@ -217,12 +225,10 @@
        </img>
       </a>
      </xsl:if>
-     <xsl:if test="position() mod 2 = 0">
-      <br/>
-     </xsl:if>
     </xsl:for-each>
    </td>
 
+   <!-- want all the width we can get -->
    <td valign="top" width="100%">
     <!-- now a nested table with the general fields -->
     <div id="banner">
@@ -236,7 +242,7 @@
         <i18n>(Various)</i18n>
        </xsl:otherwise>
       </xsl:choose>
-      <xsl:text> - </xsl:text>
+      <xsl:text>&#xa0;&#8211; </xsl:text>
       <span class="title">
        <xsl:value-of select=".//tc:title[1]"/>
       </span>
@@ -244,7 +250,7 @@
       <!-- Tellico 0.8 had multiple years in the default video collection -->
       <xsl:if test=".//tc:year">
        <span class="year">
-        <xsl:text>(</xsl:text>
+        <xsl:text> (</xsl:text>
         <xsl:value-of select=".//tc:year[1]"/>
         <xsl:text>)</xsl:text>
        </span>
@@ -257,14 +263,14 @@
   <tr>
    <td valign="top">
 
-    <table cellspacing="1" cellpadding="0" width="100%">
+    <table width="100%">
      <xsl:for-each select="key('fieldsByCat', $titleCat)">
       <xsl:if test="@name != 'title'">
        <tr>
         <th>
          <xsl:value-of select="@title"/>
         </th>
-        <td width="75%" class="fieldValue">
+        <td class="fieldValue" width="100%">
          <xsl:call-template name="simple-field-value">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>
@@ -280,12 +286,10 @@
  </table>
 
  <xsl:if test="tc:tracks">
-  <table cellspacing="1" cellpadding="0" width="50%"
-         align="left" class="category">
+  <table width="50%" class="category">
 
    <xsl:variable name="cols" select="count(tc:tracks/tc:track[1]/tc:column)"/>
 
-   <thead>
     <tr class="category">
      <td colspan="{$cols}">
       <xsl:value-of select="$trackCat"/>
@@ -312,9 +316,7 @@
 
      </tr>
     </xsl:if>
-   </thead>
 
-   <tbody>
     <xsl:for-each select="tc:tracks/tc:track">
      <tr>
       <th style="text-align:center">
@@ -339,15 +341,14 @@
         </td>
        </xsl:when>
        <xsl:otherwise>
-        <td class="fieldValue" width="100%">
+        <td class="fieldValue">
          <xsl:value-of select="."/>
         </td>
        </xsl:otherwise>
       </xsl:choose>
      </tr>
     </xsl:for-each>
-   </tbody>
-
+   
    <!-- if it has multiple columns,
         and the final one has a ':', add the time together -->
    <!-- it should still work if the first row itself doesn't contain a ':' -->
@@ -374,21 +375,32 @@
  <xsl:for-each select="$categories[. != $titleCat and
                                    ($trackCat = '' or . != $trackCat) and
                                    key('fieldsByCat',.)[1]/@type != 10]">
-  <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
+
+  <xsl:variable name="category" select="."/>
+  <xsl:variable name="fields" select="key('fieldsByCat', $category)"/>
+  <xsl:variable name="first-type" select="$fields[1]/@type"/>
+
+  <xsl:variable name="n" select="count($entry//*[key('fieldsByName',local-name(.))/@category=$category])"/>
+
+  <!-- only output if there are field values in this category -->
+  <xsl:if test="$n &gt; 0">
+  <table width="50%" class="category">
    <tr class="category">
     <td colspan="2">
+     <xsl:attribute name="colspan">
+      <xsl:if test="$first-type = 2">1</xsl:if>
+      <xsl:if test="not($first-type = 2)">2</xsl:if>
+     </xsl:attribute>
      <xsl:value-of select="."/>
     </td>
    </tr>
-   <xsl:for-each select="key('fieldsByCat', .)[@name != 'title' and
-                                               @name != 'artist' and
-                                               @name != 'year']">
+   <xsl:for-each select="$fields">
     <xsl:if test="$entry//*[local-name(.)=current()/@name]">
      <tr>
       <xsl:choose>
        <!-- paragraphs -->
        <xsl:when test="@type = 2">
-        <td class="fieldValue">
+        <td class="fieldValue" width="100%">
          <p>
           <xsl:value-of select="$entry/*[local-name(.)=current()/@name]" disable-output-escaping="yes"/>
          </p>
@@ -419,7 +431,7 @@
              <xsl:for-each select="$entry//*[local-name(.) = current()/@name]">
               <tr>
                <xsl:for-each select="tc:column">
-                <td width="{100 div count(../tc:column)}%">
+                <td>
                  <xsl:value-of select="."/>
                  <xsl:text>&#160;</xsl:text>
                 </td>
@@ -447,7 +459,7 @@
         <th>
          <xsl:value-of select="@title"/>
         </th>
-        <td width="50%" class="fieldValue">
+        <td class="fieldValue" width="100%">
          <xsl:call-template name="simple-field-value">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>
@@ -459,9 +471,7 @@
     </xsl:if>
    </xsl:for-each>
   </table>
-  <xsl:if test="position() mod 1 = 0">
-   <br clear="left"/>
-  </xsl:if>
+ </xsl:if>
  </xsl:for-each>
 </xsl:template>
 

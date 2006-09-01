@@ -14,7 +14,6 @@
 #include "htmlexporter.h"
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
-#include "tellico_xml.h"
 #include "../document.h"
 #include "../collection.h"
 #include "../filehandler.h"
@@ -23,16 +22,13 @@
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
 #include "../progressmanager.h"
+#include "../core/tellico_config.h"
 
 #include <kstandarddirs.h>
 #include <kconfig.h>
-#include <kglobalsettings.h>
 #include <kglobal.h>
 #include <kio/netaccess.h>
 #include <kapplication.h>
-#include <khtml_part.h>
-#include <dom/dom_doc.h>
-#include <dom/html_element.h>
 
 #include <qdom.h>
 #include <qgroupbox.h>
@@ -42,18 +38,22 @@
 #include <qfile.h>
 #include <qhbox.h>
 #include <qlabel.h>
-#include <qapplication.h>
+
+extern "C" {
+#include <libxml/HTMLparser.h>
+#include <libxml/HTMLtree.h>
+}
 
 using Tellico::Export::HTMLExporter;
 
 HTMLExporter::HTMLExporter() : Tellico::Export::Exporter(),
-    m_part(0),
     m_handler(0),
     m_printHeaders(true),
     m_printGrouped(false),
     m_exportEntryFiles(false),
     m_cancelled(false),
     m_parseDOM(true),
+    m_checkCreateDir(true),
     m_imageWidth(0),
     m_imageHeight(0),
     m_widget(0),
@@ -61,13 +61,13 @@ HTMLExporter::HTMLExporter() : Tellico::Export::Exporter(),
 }
 
 HTMLExporter::HTMLExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
-    m_part(0),
     m_handler(0),
     m_printHeaders(true),
     m_printGrouped(false),
     m_exportEntryFiles(false),
     m_cancelled(false),
     m_parseDOM(true),
+    m_checkCreateDir(true),
     m_imageWidth(0),
     m_imageHeight(0),
     m_widget(0),
@@ -75,8 +75,6 @@ HTMLExporter::HTMLExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll
 }
 
 HTMLExporter::~HTMLExporter() {
-  delete m_part;
-  m_part = 0;
   delete m_handler;
   m_handler = 0;
 }
@@ -99,7 +97,6 @@ void HTMLExporter::reset() {
 }
 
 bool HTMLExporter::exec() {
-  LOG_FUNC;
   if(url().isEmpty() || !url().isValid()) {
     kdWarning() << "HTMLExporter::exec() - trying to export to invalid URL" << endl;
     return false;
@@ -123,49 +120,38 @@ bool HTMLExporter::exec() {
     item.setTotalSteps(100);
     connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   }
+  // ok if not ExportProgress, no worries
+  ProgressItem::Done done(this);
 
-  // this is expensive, but necessary to easily crawl the DOM and fetch external images
-  if(!m_part) {
-    ProgressManager::self()->setProgress(this, 5);
-    m_part = new KHTMLPart((QWidget*)0);
-    m_part->setJScriptEnabled(false);
-    m_part->setJavaEnabled(false);
-    m_part->setMetaRefreshEnabled(false);
-    m_part->setPluginsEnabled(false);
+  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(text().utf8().data()), NULL);
+  xmlNodePtr root = xmlDocGetRootElement(htmlDoc);
+  if(root == 0) {
+    myDebug() << "HTMLExporter::exec() - no root" << endl;
+    return false;
   }
-
-  ProgressManager::self()->setProgress(this, 10);
-
-  m_part->begin();
-  m_part->write(text());
-  m_part->end();
+  parseDOM(root);
 
   if(m_cancelled) {
     return true; // intentionally cancelled
   }
   ProgressManager::self()->setProgress(this, 15);
 
-  DOM::HTMLElement e = m_part->document().documentElement();
-  // a little paranoia, the XSL transform might fail
-  if(e.isNull() || !e.hasChildNodes()) {
-    return false;
+  xmlChar* c;
+  int bytes;
+  htmlDocDumpMemory(htmlDoc, &c, &bytes);
+  QString allText;
+  if(bytes > 0) {
+    allText = QString::fromUtf8(reinterpret_cast<const char*>(c), bytes);
+    xmlFree(c);
   }
-
-  parseNode(e);
-  ProgressManager::self()->setProgress(this, 20);
 
   if(m_cancelled) {
     return true; // intentionally cancelled
   }
+  ProgressManager::self()->setProgress(this, 20);
 
-  bool success = FileHandler::writeTextURL(url(),
-                                           QString::fromLatin1("<html>")
-                                             + e.innerHTML().string()
-                                             + QString::fromLatin1("</html>"),
-                                           options() & Export::ExportUTF8,
-                                           force);
+  bool success = FileHandler::writeTextURL(url(), allText, options() & Export::ExportUTF8, force);
   success &= copyFiles() && (!m_exportEntryFiles || writeEntryFiles());
-  ProgressManager::self()->setDone(this);
   return success;
 }
 
@@ -235,7 +221,6 @@ bool HTMLExporter::loadXSLTFile() {
 }
 
 QString HTMLExporter::text() {
-  LOG_FUNC;
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
     kdWarning() << "HTMLExporter::text() - error loading xslt file: " << m_xsltFile << endl;
     return QString::null;
@@ -251,8 +236,7 @@ QString HTMLExporter::text() {
     m_printGrouped = false; // can't group if no groups exist
   }
 
-  GUI::CursorSaver cs(Qt::waitCursor);
-
+  GUI::CursorSaver cs;
   writeImages(coll);
 
   // now grab the XML
@@ -289,6 +273,11 @@ QString HTMLExporter::text() {
 }
 
 void HTMLExporter::setFormattingOptions(Data::CollPtr coll) {
+  QString file = Kernel::self()->URL().fileName();
+  if(file != i18n("Untitled")) {
+    m_handler->addStringParam("filename", QFile::encodeName(file));
+  }
+  m_handler->addStringParam("cdate", KGlobal::locale()->formatDate(QDate::currentDate()).utf8());
   m_handler->addParam("show-headers", m_printHeaders ? "true()" : "false()");
   m_handler->addParam("group-entries", m_printGrouped ? "true()" : "false()");
 
@@ -375,16 +364,16 @@ void HTMLExporter::setFormattingOptions(Data::CollPtr coll) {
   }
 
   // add system colors to stylesheet
-  const QColorGroup& cg = QApplication::palette().active();
-  m_handler->addStringParam("font",    KGlobalSettings::generalFont().family().utf8());
-  m_handler->addStringParam("bgcolor", cg.base().name().utf8());
-  m_handler->addStringParam("fgcolor", cg.text().name().utf8());
-  m_handler->addStringParam("color1",  cg.highlightedText().name().utf8());
-  m_handler->addStringParam("color2",  cg.highlight().name().utf8());
+  const int type = coll->type();
+  m_handler->addStringParam("font",     Config::templateFont(type).family().latin1());
+  m_handler->addStringParam("fontsize", QCString().setNum(Config::templateFont(type).pointSize()));
+  m_handler->addStringParam("bgcolor",  Config::templateBaseColor(type).name().latin1());
+  m_handler->addStringParam("fgcolor",  Config::templateTextColor(type).name().latin1());
+  m_handler->addStringParam("color1",   Config::templateHighlightedTextColor(type).name().latin1());
+  m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().latin1());
 
   // add locale code to stylesheet (for sorting)
   m_handler->addStringParam("lang",  KGlobal::locale()->languagesTwoAlpha().first().utf8());
-  ;
 }
 
 void HTMLExporter::writeImages(Data::CollPtr coll_) {
@@ -425,8 +414,7 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
     imgDirRelative = imgDir.path();
   } else if(m_parseDOM) {
     imgDir = fileDir(); // copy to fileDir
-    imgDirRelative = ImageFactory::tempDir(); // use tempDir to read from since the DOM is parsed
-                                              // and the link will get changed later
+    imgDirRelative = Data::Document::self()->allImagesOnDisk() ? ImageFactory::dataDir() : ImageFactory::tempDir();
     createDir();
   } else {
     imgDir = fileDir();
@@ -449,8 +437,8 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
       }
       imageSet.add(id);
       // try writing
-      bool success = useTemp ? ImageFactory::writeImage(id, ImageFactory::TempDir)
-                             : ImageFactory::copyImage(id, imgDir, true);
+      bool success = useTemp ? ImageFactory::writeCachedImage(id, ImageFactory::TempDir)
+                             : ImageFactory::writeImage(id, imgDir, true);
       if(!success) {
         kdWarning() << "HTMLExporter::writeImages() - unable to write image file: "
                     << imgDir.path() << id << endl;
@@ -494,26 +482,25 @@ QWidget* HTMLExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 void HTMLExporter::readOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_printHeaders = config_->readBoolEntry("Print Field Headers", m_printHeaders);
-  m_printGrouped = config_->readBoolEntry("Print Grouped", m_printGrouped);
-  m_exportEntryFiles = config_->readBoolEntry("Export Entry Files", m_exportEntryFiles);
+  KConfigGroup exportConfig(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_printHeaders = exportConfig.readBoolEntry("Print Field Headers", m_printHeaders);
+  m_printGrouped = exportConfig.readBoolEntry("Print Grouped", m_printGrouped);
+  m_exportEntryFiles = exportConfig.readBoolEntry("Export Entry Files", m_exportEntryFiles);
 
   // read current entry export template
-  config_->setGroup(QString::fromLatin1("Options - %1").arg(collection()->typeName()));
-  m_entryXSLTFile = config_->readEntry("Entry Template", QString::fromLatin1("Default"));
+  m_entryXSLTFile = Config::templateName(collection()->type());
   m_entryXSLTFile = locate("appdata", QString::fromLatin1("entry-templates/")
                                       + m_entryXSLTFile + QString::fromLatin1(".xsl"));
 }
 
 void HTMLExporter::saveOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup cfg(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_printHeaders = m_checkPrintHeaders->isChecked();
-  config_->writeEntry("Print Field Headers", m_printHeaders);
+  cfg.writeEntry("Print Field Headers", m_printHeaders);
   m_printGrouped = m_checkPrintGrouped->isChecked();
-  config_->writeEntry("Print Grouped", m_printGrouped);
+  cfg.writeEntry("Print Grouped", m_printGrouped);
   m_exportEntryFiles = m_checkExportEntryFiles->isChecked();
-  config_->writeEntry("Export Entry Files", m_exportEntryFiles);
+  cfg.writeEntry("Export Entry Files", m_exportEntryFiles);
 }
 
 void HTMLExporter::setXSLTFile(const QString& filename_) {
@@ -530,7 +517,6 @@ KURL HTMLExporter::fileDir() const {
   if(url().isEmpty()) {
     return KURL();
   }
-
   KURL fileDir = url();
   // cd to directory of target URL
   fileDir.cd(QString::fromLatin1(".."));
@@ -540,46 +526,14 @@ KURL HTMLExporter::fileDir() const {
 
 QString HTMLExporter::fileDirName() const {
   if(!m_collectionURL.isEmpty()) {
-//    return QString::fromLatin1("../") + m_collectionURL.fileName().section('.', 0, 0) + QString::fromLatin1("_files/");
     return QString::fromLatin1("/");
   }
   return url().fileName().section('.', 0, 0) + QString::fromLatin1("_files/");
 }
 
-void HTMLExporter::parseNode(DOM::Node node_) {
-  DOM::Element elem = node_;
-  if(!elem.isNull()) {
-    const DOM::DOMString nodeName = node_.nodeName().upper();
-    // to speed up things, check now for nodename
-    if(nodeName == "IMG" || nodeName == "SCRIPT" || nodeName == "LINK") {
-      DOM::DOMString attrName;
-      DOM::Attr attr;
-      DOM::NamedNodeMap attrs = elem.attributes();
-      const uint lmap = attrs.length();
-      for(uint j = 0; j < lmap; ++j) {
-        attr = static_cast<DOM::Attr>(attrs.item(j));
-        attrName = attr.name().upper();
-
-        if( (attrName == "SRC" && (nodeName == "IMG" || nodeName == "SCRIPT")) ||
-            (attrName == "HREF" && nodeName == "LINK")) {
-/*          (attrName == "BACKGROUND" && (nodeName == "BODY" ||
-                                                       nodeName == "TABLE" ||
-                                                       nodeName == "TH" ||
-                                                       nodeName == "TD"))) */
-          elem.setAttribute(attr.name(), handleLink(attr.value().string()));
-        }
-      }
-    }
-  // now it's probably a text node
-  } else if(node_.parentNode().nodeName().upper() == "STYLE") {
-    node_.setNodeValue(analyzeInternalCSS(node_.nodeValue().string()));
-  }
-
-  DOM::Node child = node_.firstChild();
-  while(!child.isNull()) {
-    parseNode(child);
-    child = child.nextSibling();
-  }
+// how ugly is this?
+const xmlChar* HTMLExporter::handleLink(const xmlChar* link_) {
+  return reinterpret_cast<xmlChar*>(qstrdup(handleLink(QString::fromUtf8(reinterpret_cast<const char*>(link_))).utf8()));
 }
 
 QString HTMLExporter::handleLink(const QString& link_) {
@@ -588,7 +542,6 @@ QString HTMLExporter::handleLink(const QString& link_) {
   }
   // assume that if the link_ is not relative, then we don't need to copy it
   if(!KURL::isRelativeURL(link_)) {
-    m_links.insert(link_, link_);
     return link_;
   }
 
@@ -602,7 +555,15 @@ QString HTMLExporter::handleLink(const QString& link_) {
   KURL u;
   u.setPath(m_xsltFilePath);
   u = KURL(u, link_);
-  m_files.append(u);
+
+  // one of the "quirks" of the html export is that img src urls are set to point to
+  // the tmpDir() when exporting entry files from a collection, but those images
+  // don't actually exist, and they get copied in writeImages() instead.
+  // so we only need to keep track of the url if it exists and is local
+  if(!u.isLocalFile() || KIO::NetAccess::exists(u, false, 0)) {
+    m_files.append(u);
+  }
+
   // if we're exporting entry files, we want pics/ to
   // go in pics/
   QString midDir;
@@ -611,6 +572,10 @@ QString HTMLExporter::handleLink(const QString& link_) {
   }
   m_links.insert(link_, fileDirName() + midDir + u.fileName());
   return m_links[link_];
+}
+
+const xmlChar* HTMLExporter::analyzeInternalCSS(const xmlChar* str_) {
+  return reinterpret_cast<xmlChar*>(qstrdup(analyzeInternalCSS(QString::fromUtf8(reinterpret_cast<const char*>(str_))).utf8()));
 }
 
 QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
@@ -636,38 +601,42 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
   return str;
 }
 
-bool HTMLExporter::createDir() {
-  LOG_FUNC;
+void HTMLExporter::createDir() {
+  if(!m_checkCreateDir) {
+    return;
+  }
   KURL dir = fileDir();
   if(dir.isEmpty()) {
     myDebug() << "HTMLExporter::createDir() - called on empty URL!" << endl;
-    return true;
+    return;
   }
   if(KIO::NetAccess::exists(dir, false, 0)) {
-    return false;
+    m_checkCreateDir = false;
+  } else {
+    m_checkCreateDir = !KIO::NetAccess::mkdir(dir, m_widget);
   }
-  return KIO::NetAccess::mkdir(dir, m_widget);
 }
 
 bool HTMLExporter::copyFiles() {
+  if(m_files.isEmpty()) {
+    return true;
+  }
   const uint start = 20;
   const uint maxProgress = m_exportEntryFiles ? 40 : 80;
   const uint stepSize = QMAX(1, m_files.count()/maxProgress);
   uint j = 0;
 
-  bool checkTarget = true;
+  createDir();
+  KURL target;
   for(KURL::List::ConstIterator it = m_files.begin(); it != m_files.end() && !m_cancelled; ++it, ++j) {
     if(m_copiedFiles.has((*it).url())) {
       continue;
     }
 
-    KURL target = fileDir();
-    if(checkTarget) {
-      checkTarget = false;
-      createDir();
+    if(target.isEmpty()) {
+      target = fileDir();
     }
-
-    target.addPath((*it).fileName());
+    target.setFileName((*it).fileName());
     bool success = KIO::NetAccess::file_copy(*it, target, -1, true /* overwrite */, false /* resume */, m_widget);
     if(success) {
       m_copiedFiles.add((*it).url());
@@ -686,7 +655,6 @@ bool HTMLExporter::copyFiles() {
 }
 
 bool HTMLExporter::writeEntryFiles() {
-  LOG_FUNC;
   if(m_entryXSLTFile.isEmpty()) {
     kdWarning() << "HTMLExporter::writeEntryFiles() - no entry XSLT file" << endl;
     return false;
@@ -774,6 +742,63 @@ bool HTMLExporter::writeEntryFiles() {
 
 void HTMLExporter::slotCancel() {
   m_cancelled = true;
+}
+
+void HTMLExporter::parseDOM(xmlNode* node_) {
+  if(node_ == 0) {
+    myDebug() << "HTMLExporter::parseDOM() - no node" << endl;
+    return;
+  }
+
+  bool parseChildren = true;
+
+  if(node_->type == XML_ELEMENT_NODE) {
+    const QCString nodeName = QCString(reinterpret_cast<const char*>(node_->name)).upper();
+    xmlElement* elem = reinterpret_cast<xmlElement*>(node_);
+    // to speed up things, check now for nodename
+    if(nodeName == "IMG" || nodeName == "SCRIPT" || nodeName == "LINK") {
+      for(xmlAttribute* attr = elem->attributes; attr; attr = attr->nexth) {
+        QCString attrName = QCString(reinterpret_cast<const char*>(attr->name)).upper();
+
+        if( (attrName == "SRC" && (nodeName == "IMG" || nodeName == "SCRIPT")) ||
+            (attrName == "HREF" && nodeName == "LINK")) {
+/*          (attrName == "BACKGROUND" && (nodeName == "BODY" ||
+                                                       nodeName == "TABLE" ||
+                                                       nodeName == "TH" ||
+                                                       nodeName == "TD"))) */
+          xmlChar* value = xmlGetProp(node_, attr->name);
+          if(value) {
+            xmlSetProp(node_, attr->name, handleLink(value));
+            xmlFree(value);
+          }
+          // each node only has one significant attribute, so break now
+          break;
+        }
+      }
+    } else if(nodeName == "STYLE") {
+      // if the first child is a CDATA, use it, otherwise replace complete node
+      xmlNode* nodeToReplace = node_;
+      xmlNode* child = node_->children;
+      if(child && child->type == XML_CDATA_SECTION_NODE) {
+        nodeToReplace = child;
+      }
+      xmlChar* value = xmlNodeGetContent(nodeToReplace);
+      if(value) {
+        xmlNodeSetContent(nodeToReplace, analyzeInternalCSS(value));
+        xmlFree(value);
+      }
+      // no longer need to parse child text nodes
+      parseChildren = false;
+    }
+  }
+
+  if(parseChildren) {
+    xmlNode* child = node_->children;
+    while(child) {
+      parseDOM(child);
+      child = child->next;
+    }
+  }
 }
 
 #include "htmlexporter.moc"

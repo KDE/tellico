@@ -7,7 +7,7 @@ EXTRA_DIST = tellico-by-author.xsl tellico-by-title.xsl \
              vhs-logo.png tellico-common.xsl mods2tellico.xsl \
              amazon2tellico.xsl MARC21slim2MODS3.xsl MARC21slimUtils.xsl \
              pubmed2tellico.xsl tellico2onix.xsl UNIMARC2MODS3.xsl \
-             tellico2html.js yahoo2tellico.xsl
+             tellico2html.js yahoo2tellico.xsl isbndb2tellico.xsl
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -17,7 +17,8 @@ xsl_DATA = tellico-printing.xsl tellico-by-author.xsl tellico-by-title.xsl \
         dvd-logo.png record-logo.png vhs-logo.png tellico-common.xsl \
         mods2tellico.xsl amazon2tellico.xsl MARC21slim2MODS3.xsl \
         MARC21slimUtils.xsl pubmed2tellico.xsl tellico2onix.xsl \
-	UNIMARC2MODS3.xsl tellico2html.js yahoo2tellico.xsl
+	UNIMARC2MODS3.xsl tellico2html.js yahoo2tellico.xsl \
+        isbndb2tellico.xsl
 
 SUBDIRS = entry-templates report-templates
 

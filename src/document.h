@@ -151,8 +151,10 @@ public:
   /**
    * Attempts to load an image from the document file
    */
-  bool loadImage(const QString& id) const;
+  bool loadImage(const QString& id);
   bool loadAllImagesNow() const;
+  bool allImagesOnDisk() const { return m_allImagesOnDisk; }
+  void setAllImagesOnDisk(bool b) { m_allImagesOnDisk = b; }
   int imageCount() const;
   EntryVec filteredEntries(Filter::Ptr filter) const;
   /**
@@ -164,6 +166,8 @@ public:
 
   void checkInEntry(EntryPtr entry);
   void checkOutEntry(EntryPtr entry);
+
+  void removeImagesNotInCollection(Data::EntryVec entries);
 
 public slots:
   /**
@@ -195,13 +199,6 @@ private slots:
 private:
   static Document* s_self;
 
-  /**
-   * Saves a list of entries. If the entry is already in a collection, the slotAddEntry() method is called;
-   * otherwise, the signalEntryModified() signal is made.
-   *
-   * @param entry A pointer to the entry
-   */
-  void saveEntry(EntryPtr entry);
   bool pruneImages();
 
   // make all constructors private
@@ -217,6 +214,8 @@ private:
   bool m_validFile : 1;
   QGuardedPtr<Import::TellicoImporter> m_importer;
   bool m_cancelImageWriting : 1;
+  int m_fileFormat;
+  bool m_allImagesOnDisk : 1;
 };
 
   } // end namespace

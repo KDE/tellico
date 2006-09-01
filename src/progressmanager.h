@@ -33,6 +33,14 @@ Q_OBJECT
 friend class ProgressManager;
 
 public:
+  class Done {
+  public:
+    Done(const QObject* obj) : m_object(obj) {}
+    ~Done();
+  private:
+    const QObject* m_object;
+  };
+
   bool canCancel() const { return m_canCancel; }
   const QString& label() const { return m_label; }
   void setLabel(const QString& label);

@@ -23,15 +23,20 @@
 <!-- location depends on being installed correctly -->
 <xsl:import href="../tellico-common.xsl"/>
 
-<xsl:output method="html"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
+            doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+            encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
-<xsl:param name="font"/> <!-- default KDE font family -->
-<xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
-<xsl:param name="bgcolor"/> <!-- default KDE background color -->
-<xsl:param name="color1"/> <!-- default KDE highlighted text color -->
-<xsl:param name="color2"/> <!-- default KDE highlighted background color -->
+<xsl:param name="font"/> <!-- font family -->
+<xsl:param name="fontsize"/> <!-- font size -->
+<xsl:param name="fgcolor"/> <!-- foreground color -->
+<xsl:param name="bgcolor"/> <!-- background color -->
+<xsl:param name="color1"/> <!-- highlighted text color -->
+<xsl:param name="color2"/> <!-- highlighted background color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -67,6 +72,7 @@
         margin: 4px;
         padding: 0px;
         font-family: "<xsl:value-of select="$font"/>";
+        font-size: <xsl:value-of select="$fontsize"/>pt;
         color: <xsl:value-of select="$fgcolor"/>;
         background-color: <xsl:value-of select="$bgcolor"/>;
    }
@@ -81,10 +87,11 @@
    }
    img {
         padding-right: 10px;
-        border: 0;
+        border: 0px;
    }
    table.category {
-        margin-bottom: 10px;
+        margin-bottom: 1em;
+	float: left;
    }
    tr.category {
         font-weight: bold;
@@ -102,8 +109,7 @@
         padding-right: 3px;
    }
    td {
-        padding-left: 3px;
-        padding-right: 3px;
+        padding: 0 .2em;
    }
    p {
         margin-top: 0px;
@@ -112,20 +118,25 @@
    img {
         border: 0px solid;
    }
+   p.navigation {
+        clear: both;
+        font-weight: bold;
+        text-align: center;
+        clear: both;
+   }
   </style>
   <title>
    <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
-   <xsl:text> - </xsl:text>
+   <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection/@title"/>
   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection[1]"/>
    <xsl:if test="$collection-file">
-    <hr style="clear:left"/>
-    <h4 style="text-align:center">
+    <p class="navigation">
      <a href="{$collection-file}">&lt;&lt; <xsl:value-of select="tc:collection/@title"/></a>
-    </h4>
+    </p>
    </xsl:if>
   </body>
  </html>
@@ -147,11 +158,11 @@
 
  <!-- put the general category and all images in top table, one cell for each -->
  <xsl:variable name="cat1" select="key('fieldsByName','title')/@category"/>
- <table cellspacing="0" cellpadding="0" width="100%">
+ <table width="100%">
   <tr>
-   <td valign="top" width="100%">
+   <td valign="top">
     <!-- show the general group, or more accurately, the title's group -->
-    <table cellspacing="1" cellpadding="0" class="category" width="100%">
+    <table class="category" width="100%">
      <tr class="category">
       <td colspan="2">
        <xsl:value-of select="$cat1"/>
@@ -186,7 +197,7 @@
      <!-- check if the value is not empty -->
      <xsl:if test="$image">
       <td valign="top">
-       <table cellspacing="1" cellpadding="0" class="category">
+       <table class="category">
         <tr class="category">
          <td>
           <xsl:value-of select="current()/@title"/>
@@ -206,7 +217,7 @@
              </xsl:otherwise>
             </xsl:choose>
            </xsl:attribute>
-           <img>
+           <img alt="">
             <xsl:attribute name="src">
              <xsl:value-of select="concat($imgdir, $image)"/>
             </xsl:attribute>
@@ -231,7 +242,7 @@
  <!-- write categories other than general and images -->
  <xsl:for-each select="$categories[. != $cat1 and
                        key('fieldsByCat',.)[1]/@type!=10]">
-  <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
+  <table width="50%" class="category">
    <tr class="category">
     <td colspan="2">
      <xsl:value-of select="."/>
@@ -307,7 +318,7 @@
        <th>
         <xsl:value-of select="@title"/>
        </th>
-       <td width="50%">
+       <td>
         <xsl:call-template name="simple-field-value">
          <xsl:with-param name="entry" select="$entry"/>
          <xsl:with-param name="field" select="@name"/>
@@ -318,9 +329,6 @@
     </tr>
    </xsl:for-each>
   </table>
-  <xsl:if test="position() mod 2 = 0">
-   <br clear="left"/>
-  </xsl:if>
  </xsl:for-each>
 </xsl:template>
 

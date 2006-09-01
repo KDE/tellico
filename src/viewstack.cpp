@@ -15,6 +15,7 @@
 #include "entryview.h"
 #include "entryiconview.h"
 #include "tellico_debug.h"
+#include "imagefactory.h"
 
 #include <khtmlview.h>
 #include <klocale.h>

@@ -27,7 +27,9 @@ class KComboBox;
 
 namespace Tellico {
   namespace GUI {
-    template <class T> class ComboBoxProxy;
+    class ComboBox;
+    class LineEdit;
+    class CollectionTypeCombo;
   }
   namespace Fetch {
 
@@ -53,25 +55,31 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return ExecExternal; }
   virtual bool canFetch(int type) const;
-  virtual void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group);
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  const QString& execPath() const { return m_path; }
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent_, const ExecExternalFetcher* fetcher = 0);
+    ConfigWidget(QWidget* parent = 0, const ExecExternalFetcher* fetcher = 0);
     ~ConfigWidget();
 
+    void readConfig(KConfig*);
     virtual void saveConfig(KConfig*);
+    virtual void removed();
+    virtual QString preferredName() const;
 
   private:
+    bool m_deleteOnRemove : 1;
+    QString m_name, m_newStuffName;
     KURLRequester* m_pathEdit;
-    typedef GUI::ComboBoxProxy<int> CBProxy;
-    CBProxy* m_collCombo;
-    CBProxy* m_formatCombo;
+    GUI::CollectionTypeCombo* m_collCombo;
+    GUI::ComboBox* m_formatCombo;
     QIntDict<QCheckBox> m_cbDict;
-    QIntDict<KLineEdit> m_leDict;
+    QIntDict<GUI::LineEdit> m_leDict;
     QCheckBox* m_cbUpdate;
-    KLineEdit* m_leUpdate;
+    GUI::LineEdit* m_leUpdate;
   };
   friend class ConfigWidget;
 
@@ -88,7 +96,6 @@ private:
   void startSearch(const QStringList& args);
 
   bool m_started;
-  QString m_name;
   int m_collType;
   int m_formatType;
   QString m_path;
@@ -99,6 +106,8 @@ private:
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry
   QStringList m_errors;
+  bool m_deleteOnRemove : 1;
+  QString m_newStuffName;
 };
 
   } // end namespace

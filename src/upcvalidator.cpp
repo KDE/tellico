@@ -14,6 +14,8 @@
 #include "upcvalidator.h"
 #include "isbnvalidator.h"
 
+#include <kmdcodec.h>
+
 using Tellico::UPCValidator;
 
 UPCValidator::UPCValidator(QObject* parent_, const char* name_/*=0*/)
@@ -21,6 +23,13 @@ UPCValidator::UPCValidator(QObject* parent_, const char* name_/*=0*/)
 }
 
 QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {
+  // check if it's a cuecat first
+  State catState = decodeCat(input_);
+  if(catState == Acceptable) {
+    pos_ = input_.length();
+    return catState;
+  }
+
   // no spaces allowed
   if(input_.contains(' ')) {
     return QValidator::Invalid;
@@ -80,6 +89,45 @@ void UPCValidator::fixup(QString& input_) const {
       input_ = s;
     }
   }
+}
+
+QValidator::State UPCValidator::decodeCat(QString& input_) const {
+  if(input_.length() < 3) {
+    return Intermediate;
+  }
+ if(!input_.startsWith(QString::fromLatin1(".C3"))) { // all cuecat codes start with .C3
+    return Invalid;
+  }
+  const int periods = input_.contains('.');
+  if(periods < 4) {
+    return Intermediate; // not enough yet
+  } else if(periods > 4) {
+    return Invalid;
+  }
+
+  // ok, let's have a go, take the third token
+  QString code = QStringList::split('.', input_)[2];
+  while(code.length() % 4 > 0) {
+    code += '=';
+  }
+
+  for(uint i = 0; i < code.length(); ++i) {
+    if(code[i] >= 'A' && code[i] <= 'Z') {
+      code.replace(i, 1, code[i].lower());
+    } else if(code[i] >= 'a' && code[i] <= 'z') {
+      code.replace(i, 1, code[i].upper());
+    }
+  }
+
+  code = QString::fromLatin1(KCodecs::base64Decode(code.latin1()));
+
+  for(uint i = 0; i < code.length(); ++i) {
+    char c = code[i].latin1() ^ 'C';
+    code.replace(i, 1, c);
+  }
+
+  input_ = code;
+  return Acceptable;
 }
 
 #include "upcvalidator.moc"

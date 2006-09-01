@@ -343,12 +343,12 @@ modified.</para>
    <keycombo><keycap>&Ctrl;</keycap><keycap>Y</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
-  <guimenuitem>Copy Entry</guimenuitem>
+  <guimenuitem>Duplicate Entry</guimenuitem>
  </menuchoice>
 </term>
 
 <listitem>
-<para>This command <action>copies the selected entries</action> as new entries in the collection.</para>
+<para>This command <action>copies, or duplicates, the selected entries</action> as new entries in the collection.</para>
 </listitem>
 </varlistentry>
 

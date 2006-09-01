@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+
+<kcfgfile name="tellicorc"/>
+<include>klocale.h</include>
+
+<group name="TipOfDay">
+    <entry key="RunOnStart" type="Bool" name="showTipOfDay">
+        <default>true</default>
+    </entry>
+</group>
+
+<group name="Main Window Options">
+    <entry key="Main Splitter Sizes" type="IntList"/>
+    <entry key="Secondary Splitter Sizes" type="IntList"/>
+</group>
+
+<group name="Detailed View Options">
+    <entry key="MaxPixmapWidth" type="Int">
+        <default>50</default>
+    </entry>
+    <entry key="MaxPixmapHeight" type="Int">
+        <default>50</default>
+    </entry>
+</group>
+
+<group name="Group View Options">
+    <entry key="SortColumn" type="Int" name="groupViewSortColumn">
+        <default>0</default>
+    </entry>
+    <entry key="SortAscending" type="Bool" name="groupViewSortAscending">
+        <default>true</default>
+    </entry>
+</group>
+
+<group name="Filter View Options">
+    <entry key="SortColumn" type="Int" name="filterViewSortColumn">
+        <default>0</default>
+    </entry>
+    <entry key="SortAscending" type="Bool" name="filterViewSortAscending">
+        <default>true</default>
+    </entry>
+</group>
+
+<group name="Loan View Options">
+    <entry key="SortColumn" type="Int" name="loanViewSortColumn">
+        <default>0</default>
+    </entry>
+    <entry key="SortAscending" type="Bool" name="loanViewSortAscending">
+        <default>true</default>
+    </entry>
+</group>
+
+<group name="Export Options - Bibtex">
+    <entry key="Use Braces" type="Bool">
+        <default>true</default>
+    </entry>
+</group>
+
+<group name="General Options">
+    <entry key="Show Group Widget" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Show Edit Widget" type="Bool">
+        <default>false</default>
+    </entry>
+    <entry key="Show Entry View" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Write Images In File" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Ask Write Images In File" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Reopen Last File" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Auto Capitalization" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Auto Format" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Last Open File" type="String"/>
+    <entry key="No Capitalization" name="noCapitalizationString" type="String">
+        <default code="true">i18n("a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with")</default>
+    </entry>
+    <entry key="Articles" name="articlesString" type="String">
+        <default code="true">i18n("the")</default>
+    </entry>
+    <entry key="Name Suffixes" name="nameSuffixesString" type="String">
+        <default code="true">i18n("jr.,jr,iii,iv")</default>
+    </entry>
+    <entry key="Surname Prefixes" name="surnamePrefixesString" type="String">
+        <default code="true">i18n("de,van,der,van der,von")</default>
+    </entry>
+    <entry key="Max Icon Size" type="Int">
+        <default>96</default>
+    </entry>
+    <entry key="Image Cache Size" type="Int">
+        <default code="true">(5 * 1024 * 1024)</default>
+    </entry>
+    <entry key="Max Custom URL Settings" type="UInt">
+        <default>9</default>
+    </entry>
+</group>
+
+<group name="Printing">
+    <entry key="Print Field Headers" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Print Formatted" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Print Grouped" type="Bool">
+        <default>true</default>
+    </entry>
+    <entry key="Max Image Width" type="Int">
+        <default>50</default>
+    </entry>
+    <entry key="Max Image Height" type="Int">
+        <default>50</default>
+    </entry>
+</group>
+
+<group name="Options - book">
+    <entry key="Entry Template" type="String" name="templateBook">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontBook">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorBook">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorBook">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorBook">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBook">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - video">
+    <entry key="Entry Template" type="String" name="templateVideo">
+        <default>Video</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontVideo">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorVideo">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorVideo">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorVideo">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorVideo">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - album">
+    <entry key="Entry Template" type="String" name="templateAlbum">
+        <default>Album</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontAlbum">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorAlbum">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorAlbum">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorAlbum">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorAlbum">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - bibtex">
+    <entry key="lyxpipe" type="Path">
+        <default>$HOME/.lyx/lyxpipe</default>
+    </entry>
+    <entry key="Entry Template" type="String" name="templateBibtex">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontBibtex">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorBibtex">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorBibtex">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorBibtex">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBibtex">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - comic">
+    <entry key="Entry Template" type="String" name="templateComicBook">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontComicBook">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorComicBook">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorComicBook">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorComicBook">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorComicBook">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - wine">
+    <entry key="Entry Template" type="String" name="templateWine">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontWine">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorWine">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorWine">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorWine">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorWine">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - coin">
+    <entry key="Entry Template" type="String" name="templateCoin">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontCoin">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorCoin">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorCoin">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorCoin">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorCoin">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - stamp">
+    <entry key="Entry Template" type="String" name="templateStamp">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontStamp">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorStamp">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorStamp">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorStamp">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorStamp">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - card">
+    <entry key="Entry Template" type="String" name="templateCard">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontCard">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorCard">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorCard">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorCard">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorCard">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - game">
+    <entry key="Entry Template" type="String" name="templateGame">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontGame">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorGame">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorGame">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorGame">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorGame">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - file">
+    <entry key="Entry Template" type="String" name="templateFile">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontFile">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorFile">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorFile">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorFile">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorFile">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - entry">
+    <entry key="Entry Template" type="String" name="templateBase">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontBase">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorBase">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorBase">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorBase">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBase">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+</kcfg>

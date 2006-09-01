@@ -18,6 +18,8 @@
 #include <qevent.h>
 #include <qdeepcopy.h>
 
+#include <ksharedptr.h>
+
 namespace Tellico {
   namespace Fetch {
     class Z3950Fetcher;
@@ -96,8 +98,7 @@ private:
   bool m_connected;
   bool m_aborted;
 
-  Z3950Fetcher* m_fetcher;
-  QString m_name;
+  KSharedPtr<Z3950Fetcher> m_fetcher;
   QString m_host;
   uint m_port;
   QString m_dbname;

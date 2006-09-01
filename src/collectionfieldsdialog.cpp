@@ -19,11 +19,11 @@
 #include "tellico_kernel.h"
 #include "translators/tellico_xml.h"
 #include "tellico_utils.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 #include <kcombobox.h>
 #include <klineedit.h>
-#include <kdebug.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
@@ -115,10 +115,11 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
   // (parent, nrows, ncols, margin, spacing)
   QGridLayout* layout = new QGridLayout(grid, 4, 4, 0, KDialog::spacingHint());
 
+  int row = -1;
   QLabel* label = new QLabel(i18n("&Title:"), grid);
-  layout->addWidget(label, 0, 0);
+  layout->addWidget(label, ++row, 0);
   m_titleEdit = new KLineEdit(grid);
-  layout->addWidget(m_titleEdit, 0, 1);
+  layout->addWidget(m_titleEdit, row, 1);
   label->setBuddy(m_titleEdit);
   QString whats = i18n("The title of the field");
   QWhatsThis::add(label, whats);
@@ -126,9 +127,9 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
   connect(m_titleEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   label = new QLabel(i18n("T&ype:"), grid);
-  layout->addWidget(label, 0, 2);
+  layout->addWidget(label, row, 2);
   m_typeCombo = new KComboBox(grid);
-  layout->addWidget(m_typeCombo, 0, 3);
+  layout->addWidget(m_typeCombo, row, 3);
   label->setBuddy(m_typeCombo);
   whats = QString::fromLatin1("<qt>");
   whats += i18n("The type of the field determines what values may be used. ");
@@ -154,9 +155,9 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
   connect(m_typeCombo, SIGNAL(activated(const QString&)), SLOT(slotTypeChanged(const QString&)));
 
   label = new QLabel(i18n("Cate&gory:"), grid);
-  layout->addWidget(label, 1, 0);
+  layout->addWidget(label, ++row, 0);
   m_catCombo = new KComboBox(true, grid);
-  layout->addWidget(m_catCombo, 1, 1);
+  layout->addWidget(m_catCombo, row, 1);
   label->setBuddy(m_catCombo);
   whats = i18n("The field category determines where the field is placed in the editor.");
   QWhatsThis::add(label, whats);
@@ -176,10 +177,10 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
   connect(m_catCombo, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   label = new QLabel(i18n("Descr&iption:"), grid);
-  layout->addWidget(label, 2, 0);
+  layout->addWidget(label, ++row, 0);
   m_descEdit = new KLineEdit(grid);
   m_descEdit->setMinimumWidth(150);
-  layout->addMultiCellWidget(m_descEdit, 2, 2, 1, 3);
+  layout->addMultiCellWidget(m_descEdit, row, row, 1, 3);
   label->setBuddy(m_descEdit);
   whats = i18n("The description is a useful reminder of what information is contained in the "
                "field. For <i>Dependent</i> fields, the description is a format string such as "
@@ -188,10 +189,20 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
   QWhatsThis::add(m_descEdit, whats);
   connect(m_descEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  label = new QLabel(i18n("A&llowed:"), grid);
-  layout->addWidget(label, 3, 0);
+  label = new QLabel(i18n("&Default value:"), grid);
+  layout->addWidget(label, ++row, 0);
+  m_defaultEdit = new KLineEdit(grid);
+  layout->addMultiCellWidget(m_defaultEdit, row, row, 1, 3);
+  label->setBuddy(m_defaultEdit);
+  whats = i18n("<qt>A default value can be set for new entries.</qt>");
+  QWhatsThis::add(label, whats);
+  QWhatsThis::add(m_defaultEdit, whats);
+  connect(m_defaultEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+
+  label = new QLabel(i18n("A&llowed values:"), grid);
+  layout->addWidget(label, ++row, 0);
   m_allowEdit = new KLineEdit(grid);
-  layout->addMultiCellWidget(m_allowEdit, 3, 3, 1, 3);
+  layout->addMultiCellWidget(m_allowEdit, row, row, 1, 3);
   label->setBuddy(m_allowEdit);
   whats = i18n("<qt>For <i>Choice</i>-type fields, these are the only values allowed. They are "
                "placed in a combo box. The possible value have to be seperated by a semi-colon, "
@@ -201,10 +212,10 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
   connect(m_allowEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   label = new QLabel(i18n("Extended &properties:"), grid);
-  layout->addWidget(label, 4, 0);
+  layout->addWidget(label, ++row, 0);
   m_btnExtended = new KPushButton(i18n("&Set..."), grid);
   m_btnExtended->setIconSet(BarIcon(QString::fromLatin1("bookmark"), KIcon::SizeSmall));
-  layout->addMultiCellWidget(m_btnExtended, 4, 4, 1, 1);
+  layout->addWidget(m_btnExtended, row, 1);
   label->setBuddy(m_btnExtended);
   whats = i18n("Extended field properties are used to specify things such as the corresponding bibtex field.");
   QWhatsThis::add(label, whats);
@@ -388,7 +399,7 @@ void CollectionFieldsDialog::slotNew() {
 
   Data::FieldPtr field = new Data::Field(name, title);
   m_newFields.append(field);
-//  kdDebug() << "CollectionFieldsDialog::slotNew() - adding new field " << title << endl;
+//  myDebug() << "CollectionFieldsDialog::slotNew() - adding new field " << title << endl;
 
 //  m_fieldsBox->insertItem(title);
   FieldListBox* box = new FieldListBox(m_fieldsBox, field);
@@ -468,7 +479,7 @@ void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
 }
 
 void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
-//  kdDebug() << "CollectionFieldsDialog::slotHighlightedChanged() - " << index_ << endl;
+//  myDebug() << "CollectionFieldsDialog::slotHighlightedChanged() - " << index_ << endl;
 
   // use this instead of blocking signals everywhere
   m_updatingValues = true;
@@ -497,7 +508,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
   // need to get a pointer to the field with the new values to insert
   Data::FieldPtr field = item->field();
   if(!field) {
-    kdDebug() << "CollectionFieldsDialog::slotHighlightedChanged() - no field found!" << endl;
+    myDebug() << "CollectionFieldsDialog::slotHighlightedChanged() - no field found!" << endl;
     return;
   }
 
@@ -523,6 +534,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 
   m_catCombo->setCurrentText(field->category()); // have to do this here
   m_descEdit->setText(field->description());
+  m_defaultEdit->setText(field->defaultValue());
 
   switch(field->formatFlag()) {
     case Data::Field::FormatNone:
@@ -565,7 +577,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 }
 
 void CollectionFieldsDialog::updateField() {
-//  kdDebug() << "CollectionFieldsDialog::updateField()" << endl;
+//  myDebug() << "CollectionFieldsDialog::updateField()" << endl;
   Data::FieldPtr field = m_currentField;
   if(!field || !m_modified) {
     return;
@@ -620,6 +632,7 @@ void CollectionFieldsDialog::updateField() {
   }
 
   field->setDescription(m_descEdit->text());
+  field->setDefaultValue(m_defaultEdit->text());
 
   if(m_formatTitle->isChecked()) {
     field->setFormatFlag(Data::Field::FormatTitle);
@@ -649,7 +662,7 @@ void CollectionFieldsDialog::updateField() {
 // The purpose here is to first set the modified flag. Then, if the field being edited is one
 // that exists in the collection already, a deep copy needs to be made.
 void CollectionFieldsDialog::slotModified() {
-//  kdDebug() << "CollectionFieldsDialog::slotModified()" << endl;
+//  myDebug() << "CollectionFieldsDialog::slotModified()" << endl;
   // if I'm just updating the values, I don't care
   if(m_updatingValues) {
     return;
@@ -661,7 +674,7 @@ void CollectionFieldsDialog::slotModified() {
   enableButtonApply(true);
 
   if(!m_currentField) {
-    kdDebug() << "CollectionFieldsDialog::slotModified() - no current field!" << endl;
+    myDebug() << "CollectionFieldsDialog::slotModified() - no current field!" << endl;
     m_currentField = static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->field();
   }
 
@@ -679,15 +692,13 @@ void CollectionFieldsDialog::slotModified() {
     return;
   }
 
-  Data::FieldPtr newField = m_currentField->clone();
-
-  m_copiedFields.append(newField);
-  m_currentField = newField;
-  static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->setField(newField);
+  m_currentField = new Data::Field(*m_currentField);
+  m_copiedFields.append(m_currentField);
+  static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->setField(m_currentField);
 }
 
 void CollectionFieldsDialog::slotUpdateTitle(const QString& title_) {
-//  kdDebug() << "CollectionFieldsDialog::slotUpdateTitle()" << endl;
+//  myDebug() << "CollectionFieldsDialog::slotUpdateTitle()" << endl;
   if(m_currentField && m_currentField->title() != title_) {
     m_fieldsBox->blockSignals(true);
     FieldListBox* oldItem = findItem(m_fieldsBox, m_currentField);
@@ -739,7 +750,7 @@ void CollectionFieldsDialog::slotDefault() {
 
   m_catCombo->setCurrentText(defaultField->category()); // have to do this here
   m_descEdit->setText(defaultField->description());
-//  m_bibtexEdit->setText(defaultField->property(QString::fromLatin1("bibtex")));
+  m_defaultEdit->setText(defaultField->defaultValue());
 
   switch(defaultField->formatFlag()) {
     case Data::Field::FormatNone:
@@ -774,7 +785,6 @@ void CollectionFieldsDialog::slotDefault() {
 //  m_titleEdit->selectAll();
 
   m_updatingValues = false;
-
   slotModified();
 }
 
@@ -818,7 +828,7 @@ void CollectionFieldsDialog::slotMoveDown() {
 }
 
 Tellico::FieldListBox* CollectionFieldsDialog::findItem(const QListBox* box_, Data::FieldPtr field_) {
-//  kdDebug() << "CollectionFieldsDialog::findItem()" << endl;
+//  myDebug() << "CollectionFieldsDialog::findItem()" << endl;
   for(QListBoxItem* item = box_->firstItem(); item; item = item->next()) {
     FieldListBox* textItem = static_cast<FieldListBox*>(item);
     if(textItem->field() == field_) {
@@ -833,11 +843,21 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
     return false;
   }
 
-  StringMapDialog dlg(m_currentField->propertyList(), this, "ExtendedPropertiesDialog", true);
+  // the default value is included in properties, but it has a
+  // separate edit box
+  QString dv = m_currentField->defaultValue();
+  StringMap props = m_currentField->propertyList();
+  props.remove(QString::fromLatin1("default"));
+
+  StringMapDialog dlg(props, this, "ExtendedPropertiesDialog", true);
   dlg.setCaption(i18n("Extended Field Properties"));
   dlg.setLabels(i18n("Property"), i18n("Value"));
   if(dlg.exec() == QDialog::Accepted) {
-    m_currentField->setPropertyList(dlg.stringMap());
+    props = dlg.stringMap();
+    if(!dv.isEmpty()) {
+      props.insert(QString::fromLatin1("default"), dv);
+    }
+    m_currentField->setPropertyList(props);
     slotModified();
     return true;
   }
@@ -979,7 +999,7 @@ QStringList CollectionFieldsDialog::newTypesAllowed(int type_ /*=0*/) {
       break;
 
     default:
-      kdDebug() << "CollectionFieldsDialog::newTypesAllowed() - no match for " << type_ << endl;
+      myDebug() << "CollectionFieldsDialog::newTypesAllowed() - no match for " << type_ << endl;
       newTypes = Data::Field::typeTitles();
       break;
   }

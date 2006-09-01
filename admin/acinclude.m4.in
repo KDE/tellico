@@ -329,15 +329,15 @@ AC_DEFUN([AC_PATH_QT_MOC_UIC],
        exit 1
      elif test $kde_qtver = 3; then
        KDE_CHECK_UIC_FLAG(L,[/nonexistant],ac_uic_supports_libpath=yes,ac_uic_supports_libpath=no)
-       KDE_CHECK_UIC_FLAG(nounload,,ac_uic_supports_nounload=yes,ac_uic_supports_nounload=no)
+         KDE_CHECK_UIC_FLAG(nounload,,ac_uic_supports_nounload=yes,ac_uic_supports_nounload=no)
 
-       if test x$ac_uic_supports_libpath = xyes; then
+         if test x$ac_uic_supports_libpath = xyes; then
            UIC="$UIC -L $kde_widgetdir"
+         fi
+         if test x$ac_uic_supports_nounload = xyes; then
+             UIC="$UIC -nounload"
+         fi
        fi
-       if test x$ac_uic_supports_nounload = xyes; then
-           UIC="$UIC -nounload"
-       fi
-     fi
    else
      UIC="echo uic not available: "
    fi
@@ -3014,6 +3014,35 @@ fi
 
 ])
 
+
+AC_DEFUN([KDE_CHECK_FOR_OPT_NOINLINE_MATCH],
+[
+  AC_CACHE_CHECK([whether system headers can cope with -O2 -fno-inline],
+    kde_cv_opt_noinline_match,
+  [
+  kde_cv_opt_noinline_match=irrelevant
+  dnl if we don't use both -O2 and -fno-inline, this check is moot
+  if echo "$CFLAGS" | grep -qe -O2 \
+     && echo "$CFLAGS" | grep -qe -fno-inline ; then
+
+    ac_cflags_save="$CFLAGS"
+    CFLAGS="$CFLAGS -D_USE_GNU"
+
+    AC_TRY_LINK([
+  #include <string.h>
+], [  const char *pt, *et;
+  et = __extension__      ({ char __a0, __a1, __a2;       (__builtin_constant_p (  ";,"  ) && ((size_t)(const void *)((   ";,"   )+ 1) - (size_t)(const void *)(   ";,"   ) == 1)        ? ((__a0 =((__const char  *) (  ";,"  ))[0], __a0 == '\0')     ? ((void) (  pt ),((void *)0) )        : ((__a1 = ((__const char *) (  ";,"  ))[1], __a1== '\0')      ? (__extension__ (__builtin_constant_p (  __a0 ) && ( __a0 ) == '\0'   ? (char *) __rawmemchr (   pt  ,   __a0)       : strchr(   pt  ,   __a0 )))   : ((__a2 = ((__const char *) (  ";,"  ))[2], __a2 == '\0')      ? __strpbrk_c2 (  pt , __a0, __a1)      :(((__const char *) (  ";,"  ))[3] == '\0'     ? __strpbrk_c3 (  pt ,__a0, __a1, __a2): strpbrk (  pt ,   ";,"  ))))) : strpbrk (  pt ,  ";,"  )); }) ;
+],
+    kde_cv_opt_noinline_match=yes,
+    kde_cv_opt_noinline_match=no
+    )
+
+    CFLAGS="$ac_cflags_save"
+  fi
+  ])
+])
+
+
 dnl AC_VALIDIFY_CXXFLAGS checks for forbidden flags the user may have given
 AC_DEFUN([AC_VALIDIFY_CXXFLAGS],
 [dnl
@@ -3228,6 +3257,11 @@ AC_DEFUN([AC_CHECK_COMPILERS],
             fi
         fi
         rm -f conftest.h conftest.h.gch
+    fi
+
+    KDE_CHECK_FOR_OPT_NOINLINE_MATCH
+    if test "x$kde_cv_opt_noinline_match" = "xno" ; then
+       CFLAGS="`echo "$CFLAGS" | sed "s/ -fno-inline//"`"
     fi
   fi
   AM_CONDITIONAL(unsermake_enable_pch, test "$kde_use_pch" = "yes" && test "$kde_gcc_supports_pch" = "yes")
@@ -5247,7 +5281,7 @@ AC_DEFUN([KDE_CHECK_PIE_SUPPORT],
     AC_LANG_CPLUSPLUS
     safe_CXXFLAGS=$CXXFLAGS
     safe_LDFLAGS=$LDFLAGS
-    CXXFLAGS="$CXXFLAGS -fpie"
+    CXXFLAGS="$CXXFLAGS -fPIE"
     LDFLAGS="$LDFLAGS -pie"
 
     AC_TRY_LINK([int foo;], [], [kde_cv_val_pie_support=yes], [kde_cv_val_pie_support=no])
@@ -5257,7 +5291,7 @@ AC_DEFUN([KDE_CHECK_PIE_SUPPORT],
     AC_LANG_RESTORE
   ])
 
-  AC_MSG_CHECKING(if enabling -pie/fpie support)
+  AC_MSG_CHECKING(if enabling -pie/fPIE support)
 
   AC_ARG_ENABLE(pie,
     AC_HELP_STRING([--enable-pie],[platform supports PIE linking [default=detect]]),
@@ -5277,7 +5311,7 @@ AC_DEFUN([KDE_CHECK_PIE_SUPPORT],
   AC_SUBST([KDE_USE_PIE])
 
   if test "$kde_has_pie_support" = "yes"; then
-    KDE_USE_FPIE="-fpie"
+    KDE_USE_FPIE="-fPIE"
     KDE_USE_PIE="-pie"
   fi
 ])

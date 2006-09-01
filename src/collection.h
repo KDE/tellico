@@ -314,7 +314,7 @@ public:
   bool removeFilter(FilterPtr filter);
   const FilterVec& filters() const { return m_filters; }
 
-  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2);
+  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, bool overwrite);
   /**
    * The string used for empty values. This forces consistency.
    */

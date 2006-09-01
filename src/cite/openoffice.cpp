@@ -174,9 +174,10 @@ bool OpenOffice::connectionDialog() {
   l->setPixmap(DesktopIcon(QString::fromLatin1("ooo_writer"), 64));
   blay->addWidget(l);
   l = new QLabel(widget);
-  l->setText(i18n("Tellico was unable to connect to OpenOffice.org.\n"
-                  "Please verify the connection settings below, and\n"
+  l->setText(i18n("Tellico was unable to connect to OpenOffice.org. "
+                  "Please verify the connection settings below, and "
                   "that OpenOffice.org Writer is currently running."));
+  l->setTextFormat(Qt::RichText);
   blay->addWidget(l);
 
   QVGroupBox* gbox = new QVGroupBox(i18n("OpenOffice.org Connection"), widget);
@@ -258,6 +259,6 @@ bool OpenOffice::connectionDialog() {
 
 bool OpenOffice::hasLibrary() {
   QString path = KLibLoader::findLibrary("tellico_ooo");
-  myDebug() << "OpenOffice::hasLibrary() - Found OOo plugin: " << path << endl;
+  if(!path.isEmpty()) myDebug() << "OpenOffice::hasLibrary() - Found OOo plugin: " << path << endl;
   return !path.isEmpty();
 }

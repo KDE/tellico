@@ -15,7 +15,7 @@
 #define TELLICO_FETCHERCONFIGDIALOG_H
 
 class KLineEdit;
-class KComboBox;
+class QCheckBox;
 class QWidgetStack;
 
 #include "fetch/configwidget.h"
@@ -25,6 +25,9 @@ class QWidgetStack;
 #include <qintdict.h>
 
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
 
 /**
  * @author Robby Stephenson
@@ -34,22 +37,28 @@ Q_OBJECT
 
 public:
   FetcherConfigDialog(QWidget* parent);
-  FetcherConfigDialog(const QString& sourceName, Fetch::Type type, Fetch::ConfigWidget* configWidget, QWidget* parent);
+  FetcherConfigDialog(const QString& sourceName, Fetch::Type type, bool updateOverwrite,
+                      Fetch::ConfigWidget* configWidget, QWidget* parent);
 
   QString sourceName() const;
   Fetch::Type sourceType() const;
+  bool updateOverwrite() const;
   Fetch::ConfigWidget* configWidget() const;
 
 private slots:
   void slotNewSourceSelected(int idx);
+  void slotNameChanged(const QString& name);
+  void slotPossibleNewName(const QString& name);
 
 private:
   void init(Fetch::Type type);
 
   bool m_newSource : 1;
+  bool m_useDefaultName : 1;
   Fetch::ConfigWidget* m_configWidget;
   KLineEdit* m_nameEdit;
-  KComboBox* m_typeCombo;
+  GUI::ComboBox* m_typeCombo;
+  QCheckBox* m_cbOverwrite;
   QWidgetStack* m_stack;
   QIntDict<Fetch::ConfigWidget> m_configWidgets;
 };

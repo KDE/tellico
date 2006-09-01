@@ -39,6 +39,7 @@ public:
   FieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
   virtual ~FieldWidget() {}
 
+  Data::FieldPtr field() const { return m_field; }
   virtual QString text() const = 0;
   virtual void setText(const QString& text) = 0;
 
@@ -57,6 +58,7 @@ public:
   static FieldWidget* create(Data::FieldPtr field, QWidget* parent, const char* name=0);
 
 public slots:
+  virtual void insertDefault();
   virtual void clear() = 0;
   void setEnabled(bool enabled);
 
@@ -75,6 +77,7 @@ protected:
   static const QRegExp s_comma;
 
 private:
+  Data::FieldPtr m_field;
   QLabel* m_label;
   QCheckBox* m_editMultiple;
 

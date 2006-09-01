@@ -137,7 +137,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
     // if current collection has one with the same name, set the property
     Data::FieldPtr f = m_coll->fieldByName(it->name());
     if(!f) {
-      f = it->clone();
+      f = new Data::Field(*it);
       m_coll->addField(f);
     }
     f->setProperty(QString::fromLatin1("ris"), ris);
@@ -152,6 +152,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(length);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   uint j = 0;
   Data::EntryPtr entry = new Data::Entry(m_coll);
@@ -245,7 +246,6 @@ Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
     f = new Data::Field(QString::fromLatin1("abstract"), i18n("Abstract"), Data::Field::Para);
     f->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("abstract"));
     f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("AB"));
-    f->setCategory(i18n("Miscellaneous"));
   } else if(tag_== Latin1Literal("KW")) {
     f = new Data::Field(QString::fromLatin1("keyword"), i18n("Keywords"));
     f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("KW"));

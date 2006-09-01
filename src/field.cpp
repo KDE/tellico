@@ -15,9 +15,9 @@
 #include "tellico_utils.h"
 #include "latin1literal.h"
 #include "tellico_debug.h"
+#include "core/tellico_config.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kglobal.h>
 
 #include <qstringlist.h>
@@ -31,17 +31,7 @@ namespace {
 using Tellico::Data::Field;
 
 //these get overwritten, but are here since they're static
-QStringList Field::s_articles;
 QStringList Field::s_articlesApos;
-QStringList Field::s_suffixes;
-QStringList Field::s_surnamePrefixes;
-// put into i18n for translation
-// and allow spaces in the regexp, someone might accidently put one there
-QStringList Field::s_noCapitalize;
-
-bool Field::s_autoCapitalize = true;
-bool Field::s_autoFormat = true;
-
 QRegExp Field::s_delimiter = QRegExp(QString::fromLatin1("\\s*;\\s*"));
 
 // this constructor is for anything but Choice type
@@ -174,6 +164,16 @@ void Field::setFormatFlag(FormatFlag flag_) {
   }
 }
 
+const QString& Field::defaultValue() const {
+  return property(QString::fromLatin1("default"));
+}
+
+void Field::setDefaultValue(const QString& value_) {
+  if(m_type != Choice || m_allowed.findIndex(value_) > -1) {
+    setProperty(QString::fromLatin1("default"), value_);
+  }
+}
+
 bool Field::isSingleCategory() const {
   return (m_type == Para || m_type == Table || m_type == Table2 || m_type == Image);
 }
@@ -195,7 +195,7 @@ QString Field::format(const QString& value_, FormatFlag flag_) {
       text = formatDate(value_);
       break;
     case FormatPlain:
-      text = autoCapitalize() ? capitalize(value_) : value_;
+      text = Config::autoCapitalization() ? capitalize(value_) : value_;
       break;
     default:
       text = value_;
@@ -214,13 +214,14 @@ QString Field::formatTitle(const QString& title_) {
     newTitle = newTitle.section(colonColon, 0, 0);
   }
 
-  if(autoCapitalize()) {
+  if(Config::autoCapitalization()) {
     newTitle = capitalize(newTitle);
   }
 
-  if(autoFormat()) {
+  if(Config::autoFormat()) {
     // TODO if the title has ",the" at the end, put it at the front
-    for(QStringList::ConstIterator it = s_articles.begin(); it != s_articles.end(); ++it) {
+    const QStringList articles = Config::articleList();
+    for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
       // assume white space is already stripped
       // the articles are already in lower-case
       QString lower = newTitle.lower();
@@ -243,6 +244,9 @@ QString Field::formatTitle(const QString& title_) {
 
 QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
   static const QRegExp spaceComma(QString::fromLatin1("[\\s,]"));
+  static const QString colonColon = QString::fromLatin1("::");
+  // the ending look-ahead is so that a space is not added at the end
+  static const QRegExp periodSpace(QString::fromLatin1("\\.\\s*(?=.)"));
 
   QStringList entries;
   if(multiple_) {
@@ -254,9 +258,6 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
 
   QRegExp lastWord;
   lastWord.setCaseSensitive(false);
-  const QString colonColon = QString::fromLatin1("::");
-  // the ending look-ahead is so that a space is not added at the end
-  const QRegExp periodSpace(QString::fromLatin1("\\.\\s*(?=.)"));
 
   QStringList names;
   for(QStringList::ConstIterator it = entries.begin(); it != entries.end(); ++it) {
@@ -268,7 +269,7 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
       name = name.section(colonColon, 0, 0);
     }
     name.replace(periodSpace, QString::fromLatin1(". "));
-    if(autoCapitalize()) {
+    if(Config::autoCapitalization()) {
       name = capitalize(name);
     }
 
@@ -277,7 +278,7 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
     lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
 
     // if it contains a comma already and the last word is not a suffix, don't format it
-    if(!autoFormat() || name.find(',') > -1 && s_suffixes.grep(lastWord).isEmpty()) {
+    if(!Config::autoFormat() || name.find(',') > -1 && Config::nameSuffixList().grep(lastWord).isEmpty()) {
       // arbitrarily impose rule that no spaces before a comma and
       // a single space after every comma
       name.replace(comma_split, QString::fromLatin1(", "));
@@ -288,7 +289,7 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
     // but only if there is more than one word
     if(words.count() > 1) {
       // if the last word is a suffix, it has to be kept with last name
-      if(s_suffixes.grep(lastWord).count() > 0) {
+      if(Config::nameSuffixList().grep(lastWord).count() > 0) {
         words.prepend(words.last().append(QChar(',')));
         words.remove(words.fromLast());
       }
@@ -302,7 +303,7 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
       lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
 
       // this is probably just something for me, limited to english
-      while(s_surnamePrefixes.grep(lastWord).count() > 0) {
+      while(Config::surnamePrefixList().grep(lastWord).count() > 0) {
         words.prepend(words.last());
         words.remove(words.fromLast());
         lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
@@ -361,10 +362,10 @@ QString Field::capitalize(QString str_) {
   QRegExp wordRx;
   wordRx.setCaseSensitive(false);
 
-  QStringList notCap = s_noCapitalize;
+  QStringList notCap = Config::noCapitalizationList();
   // don't capitalize the surname prefixes
   // does this hold true everywhere other than english?
-  notCap += Field::surnamePrefixList();
+  notCap += Config::surnamePrefixList();
 
   QString word = str_.mid(0, pos);
   // now check to see if words starts with apostrophe list
@@ -406,36 +407,15 @@ QString Field::capitalize(QString str_) {
   return str_;
 }
 
-QStringList Field::defaultArticleList() {
-// put the articles in i18n() so they can be translated
-  return QStringList::split(comma_split, i18n("the"), false);
-}
-
 // articles should all be in lower-case
-void Field::setArticleList(const QStringList& list_) {
-  s_articles = list_;
-
+void Field::articlesUpdated() {
+  const QStringList articles = Config::articleList();
   s_articlesApos.clear();
-  for(QStringList::Iterator it = s_articles.begin(); it != s_articles.end(); ++it) {
-    (*it) = (*it).lower();
+  for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
     if((*it).endsWith(QChar('\''))) {
       s_articlesApos += (*it);
     }
   }
-}
-
-QStringList Field::defaultSuffixList() {
-// put the suffixes in i18n() so they can be translated
-  return QStringList::split(comma_split, i18n("jr.,jr,iii,iv"), false);
-}
-
-QStringList Field::defaultSurnamePrefixList() {
-// put the articles in i18n() so they can be translated
-  return QStringList::split(comma_split, i18n("de,van,der,van der,von"), false);
-}
-
-QStringList Field::defaultNoCapitalizationList() {
-  return QStringList::split(comma_split, i18n("a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with"), false);
 }
 
 // if these are changed, then CollectionFieldsDialog should be checked since it
@@ -536,10 +516,11 @@ long Field::getID() {
 }
 
 void Field::stripArticles(QString& value) {
-  if(s_articles.isEmpty()) {
+  const QStringList articles = Config::articleList();
+  if(articles.isEmpty()) {
     return;
   }
-  for(QStringList::Iterator it = s_articles.begin(); it != s_articles.end(); ++it) {
+  for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
     QRegExp rx(QString::fromLatin1("\\b") + *it + QString::fromLatin1("\\b"));
     value.remove(rx);
   }

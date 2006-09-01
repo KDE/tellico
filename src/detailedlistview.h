@@ -115,7 +115,9 @@ public:
   virtual void removeField(Data::CollPtr, Data::FieldPtr field);
 
   void reorderFields(const Data::FieldVec& fields);
-  void saveConfig(Data::CollPtr coll);
+  /**
+   * saveConfig is only needed for custom collections */
+  void saveConfig(Data::CollPtr coll, int saveConfig);
   /**
    * Select all visible items.
    */
@@ -186,6 +188,16 @@ private slots:
   void slotUpdatePixmap();
 
 private:
+  struct ConfigInfo {
+    QStringList cols;
+    QValueList<int> widths;
+    QValueList<int> order;
+    int colSorted;
+    bool ascSort : 1;
+    int prevSort;
+    int prev2Sort;
+  };
+
   KPopupMenu* m_headerMenu;
   QValueVector<int> m_columnWidths;
   QValueVector<bool> m_isNumber;

@@ -28,9 +28,11 @@ class QTable;
 
 #include "textimporter.h"
 #include "../datavectors.h"
-#include "../collectionfactory.h" // needed for CollectionNameMap
 
 namespace Tellico {
+  namespace GUI {
+    class CollectionTypeCombo;
+  }
   namespace Import {
 
 /**
@@ -73,13 +75,12 @@ private:
 
   Data::CollPtr m_coll;
   Data::CollPtr m_existingCollection; // used to grab fields from current collection in window
-  CollectionNameMap m_nameMap;
-  bool m_firstRowHeader;
+  bool m_firstRowHeader : 1;
   QString m_delimiter;
   bool m_cancelled : 1;
 
   QWidget* m_widget;
-  KComboBox* m_comboType;
+  GUI::CollectionTypeCombo* m_comboColl;
   QCheckBox* m_checkFirstRowHeader;
   QButtonGroup* m_delimiterGroup;
   QRadioButton* m_radioComma;

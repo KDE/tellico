@@ -1,0 +1,8 @@
+# Code generation options for kconfig_compiler
+File=tellico_config.kcfg
+ClassName=Config
+NameSpace=Tellico
+Singleton=true
+Mutators=true
+MemberVariables=private
+CustomAdditions=true

@@ -15,6 +15,7 @@
 #define TELLICO_STRINGSET_H
 
 #include <qdict.h>
+#include <qstringlist.h>
 
 namespace Tellico {
 
@@ -33,9 +34,9 @@ public:
       add(*it);
     }
   }
-  void remove(const QString& val) { m_dict.remove(val); }
+  void remove(const QString& val) { if(!val.isEmpty()) m_dict.remove(val); }
   void clear() { m_dict.clear(); }
-  bool has(const QString& value) const { return (m_dict.find(value) != 0); }
+  bool has(const QString& val) const { return !val.isEmpty() && (m_dict.find(val) != 0); }
   bool isEmpty() const { return m_dict.isEmpty(); }
   uint count() const { return m_dict.count(); }
 

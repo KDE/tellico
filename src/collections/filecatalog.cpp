@@ -53,6 +53,11 @@ Tellico::Data::FieldVec FileCatalog::defaultFields() {
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
+  field = new Field(QString::fromLatin1("folder"), i18n("Folder"));
+  field->setCategory(i18n(file_general));
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
+  list.append(field);
+
   field = new Field(QString::fromLatin1("mimetype"), i18n("Mimetype"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);

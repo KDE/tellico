@@ -23,9 +23,11 @@
 #include "entry.h"
 #include "document.h"
 #include "tellico_debug.h"
+#include "gui/combobox.h"
+#include "gui/listview.h"
+#include "tellico_utils.h"
 
 #include <klocale.h>
-#include <kcombobox.h>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <kstatusbar.h>
@@ -36,6 +38,7 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 #include <kaccelmanager.h>
+#include <ktextedit.h>
 
 #include <qlayout.h>
 #include <qhbox.h>
@@ -58,10 +61,17 @@ namespace {
 
 using Tellico::FetchDialog;
 
-// always add to end
-FetchDialog::SearchResultItem::SearchResultItem(KListView* lv, Fetch::SearchResult* r)
-    : KListViewItem(lv, lv->lastItem(), QString::null, r->title, r->desc, r->fetcher->source()), m_result(r) {
-}
+class FetchDialog::SearchResultItem : public Tellico::GUI::ListViewItem {
+  friend class FetchDialog;
+  // always add to end
+  SearchResultItem(GUI::ListView* lv, Fetch::SearchResult* r)
+      : GUI::ListViewItem(lv, lv->lastItem()), m_result(r) {
+    setText(1, r->title);
+    setText(2, r->desc);
+    setText(3, r->fetcher->source());
+  }
+  Fetch::SearchResult* m_result;
+};
 
 FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
     : KDialogBase(parent_, name_, false, i18n("Internet Search"), 0),
@@ -81,9 +91,12 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   m_valueLineEdit = new KLineEdit(box1);
   label->setBuddy(m_valueLineEdit);
   QWhatsThis::add(m_valueLineEdit, i18n("Enter a search value. An ISBN search must include the full ISBN."));
-  m_keyCombo = new KComboBox(box1);
-  m_keyCombo->insertStringList(Fetch::Manager::self()->keys(QString::null));
-  connect(m_keyCombo, SIGNAL(activated(const QString&)), SLOT(slotKeyChanged(const QString&)));
+  m_keyCombo = new GUI::ComboBox(box1);
+  Fetch::KeyMap map = Fetch::Manager::self()->keyMap();
+  for(Fetch::KeyMap::ConstIterator it = map.begin(); it != map.end(); ++it) {
+    m_keyCombo->insertItem(it.data(), it.key());
+  }
+  connect(m_keyCombo, SIGNAL(activated(int)), SLOT(slotKeyChanged(int)));
   QWhatsThis::add(m_keyCombo, i18n("Choose the type of search"));
 
   m_searchButton = new KPushButton(box1);
@@ -122,14 +135,17 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   label = new QLabel(i18n("Search s&ource:"), box2);
   m_sourceCombo = new KComboBox(box2);
   label->setBuddy(m_sourceCombo);
-  m_sourceCombo->insertStringList(Fetch::Manager::self()->sources());
+  const Fetch::TypePairList sources = Fetch::Manager::self()->sources();
+  for(Fetch::TypePairList::ConstIterator it = sources.begin(); it != sources.end(); ++it) {
+    m_sourceCombo->insertItem((*it).index());
+  }
   connect(m_sourceCombo, SIGNAL(activated(const QString&)), SLOT(slotSourceChanged(const QString&)));
   QWhatsThis::add(m_sourceCombo, i18n("Select the database to search"));
 
   QSplitter* split = new QSplitter(QSplitter::Vertical, mainWidget);
   topLayout->addWidget(split);
 
-  m_listView = new KListView(split);
+  m_listView = new GUI::ListView(split);
 //  topLayout->addWidget(m_listView);
 //  topLayout->setStretchFactor(m_listView, 1);
   m_listView->setSorting(10); // greater than number of columns, so not sorting until user clicks column header
@@ -143,13 +159,16 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   m_listView->addColumn(i18n("Description"));
   m_listView->addColumn(i18n("Source"));
 
-  connect(m_listView, SIGNAL(clicked(QListViewItem*)), SLOT(slotShowEntry(QListViewItem*)));
+  connect(m_listView, SIGNAL(selectionChanged()), SLOT(slotShowEntry()));
   // double clicking should add the entry
   connect(m_listView, SIGNAL(doubleClicked(QListViewItem*)), SLOT(slotAddEntry()));
   QWhatsThis::add(m_listView, i18n("As results are found, they are added to this list. Selecting one "
                                    "will fetch the complete entry and show it in the view below."));
 
   m_entryView = new EntryView(split, "entry_view");
+  // don't bother creating funky gradient images for compact view
+  m_entryView->setUseGradientImages(false);
+  // set the xslt file AFTER setting the gradient image option
   m_entryView->setXSLTFile(QString::fromLatin1("Compact.xsl"));
   QWhatsThis::add(m_entryView->view(), i18n("An entry may be shown here before adding it to the "
                                             "current collection by selecting it in the list above"));
@@ -187,14 +206,13 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
 
   connect(m_timer, SIGNAL(timeout()), SLOT(slotMoveProgress()));
 
-  setMinimumWidth(KMAX(minimumWidth(), FETCH_MIN_WIDTH));
+  setMinimumWidth(QMAX(minimumWidth(), FETCH_MIN_WIDTH));
   setStatus(i18n("Ready."));
 
   resize(configDialogSize(QString::fromLatin1("Fetch Dialog Options")));
 
-  KConfig* config = kapp->config();
-  KConfigGroupSaver group(config, "Fetch Dialog Options");
-  QValueList<int> splitList = config->readIntListEntry("Splitter Sizes");
+  KConfigGroup config(kapp->config(), "Fetch Dialog Options");
+  QValueList<int> splitList = config.readIntListEntry("Splitter Sizes");
   if(!splitList.empty()) {
     split->setSizes(splitList);
   }
@@ -215,13 +233,19 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
 }
 
 FetchDialog::~FetchDialog() {
+  // we might have downloaded a lot of images we don't need to keep
+  Data::EntryVec entriesToCheck;
+  for(QMap<int, Data::EntryPtr>::Iterator it = m_entries.begin(); it != m_entries.end(); ++it) {
+    entriesToCheck.append(it.data());
+  }
+  Data::Document::self()->removeImagesNotInCollection(entriesToCheck);
+
   saveDialogSize(QString::fromLatin1("Fetch Dialog Options"));
 
-  KConfig* config = kapp->config();
-  KConfigGroupSaver group(config, "Fetch Dialog Options");
-  config->writeEntry("Splitter Sizes", static_cast<QSplitter*>(m_listView->parentWidget())->sizes());
-  config->writeEntry("Search Key", m_keyCombo->currentText());
-  config->writeEntry("Search Source", m_sourceCombo->currentText());
+  KConfigGroup config(kapp->config(), "Fetch Dialog Options");
+  config.writeEntry("Splitter Sizes", static_cast<QSplitter*>(m_listView->parentWidget())->sizes());
+  config.writeEntry("Search Key", m_keyCombo->currentData().toInt());
+  config.writeEntry("Search Source", m_sourceCombo->currentText());
 }
 
 void FetchDialog::slotSearchClicked() {
@@ -244,7 +268,7 @@ void FetchDialog::slotSearchClicked() {
     setStatus(i18n("Searching..."));
     kapp->processEvents();
     Fetch::Manager::self()->startSearch(m_sourceCombo->currentText(),
-                                        Fetch::Manager::self()->fetchKey(m_keyCombo->currentText()),
+                                        static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt()),
                                         value);
   }
 }
@@ -310,6 +334,7 @@ void FetchDialog::slotResultFound(Fetch::SearchResult* result_) {
 }
 
 void FetchDialog::slotAddEntry() {
+  GUI::CursorSaver cs;
   Data::EntryVec vec;
   for(QListViewItemIterator it(m_listView, QListViewItemIterator::Selected); it.current(); ++it) {
     SearchResultItem* item = static_cast<SearchResultItem*>(it.current());
@@ -317,11 +342,15 @@ void FetchDialog::slotAddEntry() {
     Fetch::SearchResult* r = item->m_result;
     Data::EntryPtr entry = m_entries[r->uid];
     if(!entry) {
+      setStatus(i18n("Fetching %1...").arg(r->title));
+      startProgress();
       entry = r->fetchEntry();
       if(!entry) {
         continue;
       }
       m_entries.insert(r->uid, entry);
+      stopProgress();
+      setStatus(i18n("Ready."));
     }
     // add a copy, intentionally allowing multiple copies to be added
     vec.append(new Data::Entry(*entry));
@@ -332,25 +361,34 @@ void FetchDialog::slotAddEntry() {
   }
 }
 
-void FetchDialog::slotShowEntry(QListViewItem* item_) {
-  if(!item_) {
+void FetchDialog::slotShowEntry() {
+  // just in case
+  m_statusMessages.clear();
+
+  const GUI::ListViewItemList& items = m_listView->selectedItems();
+  if(items.isEmpty()) {
     m_addButton->setEnabled(false);
     return;
   }
 
-  // just in case
-  m_statusMessages.clear();
-
   m_addButton->setEnabled(true);
-  SearchResultItem* item = static_cast<SearchResultItem*>(item_);
+  if(items.count() > 1) {
+    m_entryView->clear();
+    return;
+  }
+
+  SearchResultItem* item = static_cast<SearchResultItem*>(items.getFirst());
   Fetch::SearchResult* r = item->m_result;
   setStatus(i18n("Fetching %1...").arg(r->title));
   Data::EntryPtr entry = m_entries[r->uid];
   if(!entry) {
+    GUI::CursorSaver cs;
+    startProgress();
     entry = r->fetchEntry();
     if(entry) { // might conceivably be null
       m_entries.insert(r->uid, entry);
     }
+    stopProgress();
   }
   setStatus(i18n("Ready."));
 
@@ -377,27 +415,26 @@ void FetchDialog::slotInit() {
     Kernel::self()->sorry(i18n("No Internet sources are available for your current collection type."), this);
   }
 
-  KConfig* config = kapp->config();
-  KConfigGroupSaver group(config, "Fetch Dialog Options");
-  QString key = config->readEntry("Search Key");
+  KConfigGroup config(kapp->config(), "Fetch Dialog Options");
+  int key = config.readNumEntry("Search Key", Fetch::FetchFirst);
   // only change key if valid
-  if(!key.isEmpty() && Fetch::Manager::self()->fetchKey(key) != Fetch::FetchFirst) {
-    m_keyCombo->setCurrentText(key);
-    slotKeyChanged(key);
+  if(key > Fetch::FetchFirst) {
+    m_keyCombo->setCurrentData(key);
   }
-  // only change source if a fetcher by that name exists
-  QString source = config->readEntry("Search Source");
-  if(!source.isEmpty() && Fetch::Manager::self()->sources().findIndex(source) > -1) {
-    m_sourceCombo->setCurrentText(source);
-    slotSourceChanged(source);
+  slotKeyChanged(m_keyCombo->currentItem());
+
+  QString source = config.readEntry("Search Source");
+  if(!source.isEmpty()) {
+    m_sourceCombo->setCurrentItem(source);
   }
+  slotSourceChanged(m_sourceCombo->currentText());
 
   m_valueLineEdit->setFocus();
   m_searchButton->setDefault(true);
 }
 
-void FetchDialog::slotKeyChanged(const QString& key_) {
-  int key = Fetch::Manager::self()->fetchKey(key_);
+void FetchDialog::slotKeyChanged(int idx_) {
+  int key = m_keyCombo->data(idx_).toInt();
   if(key == Fetch::ISBN || key == Fetch::UPC) {
     m_multipleISBN->setEnabled(true);
     if(key == Fetch::ISBN) {
@@ -407,9 +444,8 @@ void FetchDialog::slotKeyChanged(const QString& key_) {
       connect(upc, SIGNAL(signalISBN()), SLOT(slotUPC2ISBN()));
       m_valueLineEdit->setValidator(upc);
       // only want to convert to ISBN if ISBN is accepted by the fetcher
-      QStringList keys = Fetch::Manager::self()->keys(m_sourceCombo->currentText());
-      bool allowISBN = keys.contains(Fetch::Manager::self()->fetchKeyString(Fetch::ISBN)) > 0;
-      upc->setCheckISBN(allowISBN);
+      Fetch::KeyMap map = Fetch::Manager::self()->keyMap(m_sourceCombo->currentText());
+      upc->setCheckISBN(map.contains(Fetch::ISBN));
     }
   } else {
     m_multipleISBN->setChecked(false);
@@ -420,15 +456,14 @@ void FetchDialog::slotKeyChanged(const QString& key_) {
 }
 
 void FetchDialog::slotSourceChanged(const QString& source_) {
-  QString s = m_keyCombo->currentText();
+  int curr = m_keyCombo->currentData().toInt();
   m_keyCombo->clear();
-  QStringList keys = Fetch::Manager::self()->keys(source_);
-  m_keyCombo->insertStringList(keys);
-  int idx = keys.findIndex(s);
-  if(idx > -1) {
-    m_keyCombo->setCurrentItem(idx);
+  Fetch::KeyMap map = Fetch::Manager::self()->keyMap(source_);
+  for(Fetch::KeyMap::ConstIterator it = map.begin(); it != map.end(); ++it) {
+    m_keyCombo->insertItem(it.data(), it.key());
   }
-  slotKeyChanged(m_keyCombo->currentText());
+  m_keyCombo->setCurrentData(curr);
+  slotKeyChanged(m_keyCombo->currentItem());
 }
 
 void FetchDialog::slotMultipleISBN(bool toggle_) {
@@ -491,11 +526,10 @@ void FetchDialog::slotLoadISBNList() {
 }
 
 void FetchDialog::slotUPC2ISBN() {
-  int key = Fetch::Manager::self()->fetchKey(m_keyCombo->currentText());
+  int key = m_keyCombo->currentData().toInt();
   if(key == Fetch::UPC) {
-    QString newKey = Fetch::Manager::self()->fetchKeyString(Fetch::ISBN);
-    m_keyCombo->setCurrentText(newKey);
-    slotKeyChanged(newKey);
+    m_keyCombo->setCurrentData(Fetch::ISBN);
+    slotKeyChanged(m_keyCombo->currentItem());
   }
 }
 

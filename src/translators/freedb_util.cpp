@@ -118,18 +118,28 @@ extern "C" {
 
 #include <config.h>
 
+namespace {
+  class CloseDrive {
+  public:
+    CloseDrive(int d) : drive(d) {}
+    ~CloseDrive() { ::close(drive); }
+  private:
+    int drive;
+  };
+}
+
 QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<uint>& trackLengths_) {
   QValueList<uint> list;
 
   int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
+  CloseDrive closer(drive);
   if(drive < 0) {
-    ::close(drive);
     return list;
   }
 
-  struct cdrom_tochdr hdr;
+  cdrom_tochdr hdr;
 #if defined(__OpenBSD__) || defined(__NetBSD__)
-  struct ioc_read_toc_entry t;
+  ioc_read_toc_entry t;
 #elif defined(__APPLE__)
   dk_cd_read_disc_info_t discInfoParams;
   ::memset(&discInfoParams, 0, sizeof(discInfoParams));
@@ -137,12 +147,10 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
   discInfoParams.bufferLength = sizeof(hdr);
   if(ioctl(drive, DKIOCCDREADDISCINFO, &discInfoParams) < 0
      || discInfoParams.bufferLength != sizeof(hdr)) {
-    ::close(drive);
     return list;
   }
 #else
   if(ioctl(drive, CDROMREADTOCHDR, &hdr) < 0) {
-    ::close(drive);
     return list;
   }
 #endif
@@ -150,13 +158,7 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
 //  uchar first = hdr.cdth_trk0;
   uchar last = hdr.cdth_trk1;
 
-  int len = (last + 1) * sizeof(struct cdrom_tocentry);
-
-  struct cdrom_tocentry *TocEntry = (cdrom_tocentry*)malloc(len);
-  if(!TocEntry) {
-    ::close(drive);
-    return list;
-  }
+  cdrom_tocentry* TocEntry = new cdrom_tocentry[last+1];
 #if defined(__OpenBSD__)
   t.starting_track = 0;
 #elif defined(__NetBSD__)
@@ -164,17 +166,16 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
 #endif
 #if defined(__OpenBSD__) || defined(__NetBSD__)
   t.address_format = CDROM_LBA;
-  t.data_len = len;
+  t.data_len = (last + 1) * sizeof(cdrom_tocentry);
   t.data = TocEntry;
-  ::memset(TocEntry, 0, len);
 
   ::ioctl(drive, CDIOREADTOCENTRYS, (char *) &t);
 
 #elif defined(__APPLE__)
   dk_cd_read_track_info_t trackInfoParams;
-  ::memset( &trackInfoParams, 0, sizeof( trackInfoParams ) );
+  ::memset(&trackInfoParams, 0, sizeof(trackInfoParams));
   trackInfoParams.addressType = kCDTrackInfoAddressTypeTrackNumber;
-  trackInfoParams.bufferLength = sizeof( *TocEntry );
+  trackInfoParams.bufferLength = sizeof(*TocEntry);
 
   for(int i = 0; i < last; ++i) {
     trackInfoParams.address = i + 1;
@@ -188,7 +189,7 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
    */
   TocEntry[last].cdte_track_address = TocEntry[last-1].trackSize + TocEntry[last-1].trackStartAddress;
 #else /* FreeBSD, Linux, Solaris */
-  for(int i=0; i < last; ++i) {
+  for(uint i = 0; i < last; ++i) {
     /* tracks start with 1, but I must start with 0 on OpenBSD */
     TocEntry[i].cdte_track = i + 1;
     TocEntry[i].cdte_format = CDROM_LBA;
@@ -204,7 +205,7 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
   TocEntry[last].cdte_track_address = ntohl(TocEntry[last].cdte_track_address);
 #endif
 
-  for(int i=0; i < last; ++i) {
+  for(uint i = 0; i < last; ++i) {
 #if defined(__FreeBSD__)
     TocEntry[i].cdte_track_address = ntohl(TocEntry[i].cdte_track_address);
 #endif
@@ -216,13 +217,11 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
 
   // hey, these are track lengths! :P
   trackLengths_.clear();
-  for(int i=0; i < last; ++i) {
+  for(uint i = 0; i < last; ++i) {
     trackLengths_.append((TocEntry[i+1].cdte_track_address - TocEntry[i].cdte_track_address) / CD_FRAMES);
   }
 
-  free(TocEntry);
-
-  ::close(drive);
+  delete[] TocEntry;
   return list;
 }
 
@@ -237,16 +236,16 @@ ushort from2Byte(uchar* d) {
 FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
   CDText cdtext;
 #if USE_CDTEXT
-// only works for linux atm
+// only works for linux ATM
 #if defined(__linux__)
   int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
+  CloseDrive closer(drive);
   if(drive < 0) {
-    ::close(drive);
     return cdtext;
   }
 
-  struct cdrom_generic_command m_cmd;
-  ::memset(&m_cmd, 0, sizeof(struct cdrom_generic_command));
+  cdrom_generic_command m_cmd;
+  ::memset(&m_cmd, 0, sizeof(cdrom_generic_command));
 
   int dataLen;
 
@@ -266,7 +265,6 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
 
   if(ioctl(drive, CDROM_SEND_PACKET, &m_cmd) != 0) {
     myDebug() << "FreeDBImporter::getCDText() - access error" << endl;
-    ::close(drive);
     return cdtext;
   }
 
@@ -302,7 +300,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
     char block_no = *(bufptr + 3);
     if(block_no & 0x80) {
       myDebug() << "FreeDBImporter::readCDText() - double byte code not supported" << endl;
-      return cdtext;
+      continue;
     }
     block_no &= 0x70;
 
@@ -369,7 +367,6 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
     cdtext.trackTitles.resize(size);
     cdtext.trackArtists.resize(size);
   }
-  ::close(drive);
 #endif
 #endif
   return cdtext;

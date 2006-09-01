@@ -21,14 +21,12 @@ namespace KIO {
   class Job;
 }
 
-class QString;
 class QDomDocument;
 class QFile;
 
 #include <qstring.h>
 #include <qcstring.h> // needed for QByteArray
 #include <qptrlist.h>
-#include <qobject.h>
 
 namespace Tellico {
   class ImageFactory;
@@ -44,7 +42,6 @@ namespace Tellico {
 class FileHandler {
 
 friend class ImageFactory;
-//friend class Data::Image;
 
 public:
   /**
@@ -66,11 +63,11 @@ public:
     QString m_filename;
     bool m_isValid;
   };
-  friend class FileRef; // gcc 2.95 needs this
+  friend class FileRef;
 
   /**
    * Creates a FileRef for a given url. It's not meant to be used by methods in the class,
-   * Rather by a class wanted direct access to a file. The caller takes ownership of the pointer.
+   * Rather by a class wanting direct access to a file. The caller takes ownership of the pointer.
    *
    * @param url The url
    * @param quiet Whether error messages should be shown
@@ -166,21 +163,6 @@ private:
    * @return A boolean indicating success
    */
   static bool writeDataFile(KSaveFile& file, const QByteArray& data);
-};
-
-class NetAccess : public QObject {
-Q_OBJECT
-
-friend class FileHandler;
-
-private slots:
-  void slotResult(KIO::Job* job);
-
-private:
-  NetAccess() : QObject(), ok(false) {}
-  void enter_loop();
-  bool ok;
-  QString error;
 };
 
 } // end namespace

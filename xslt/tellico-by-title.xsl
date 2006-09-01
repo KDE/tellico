@@ -16,10 +16,14 @@
    ================================================================
 -->
 
-<xsl:output method="html" version="xhtml" indent="yes"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01//EN"
+            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            encoding="utf-8"/>
 
 <!-- Sort using user's preferred language -->
-<xsl:param name="lang" select="'en'"/>
+<xsl:param name="lang"/>
 
 <xsl:variable name="endl">
 <xsl:text>

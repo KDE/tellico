@@ -29,7 +29,7 @@ class QListViewItem;
 
 #include <config.h>
 
-#include "dcopinterface.h"
+#include "core/dcopinterface.h"
 #include "translators/translators.h"
 #include "datavectors.h"
 
@@ -475,6 +475,7 @@ private:
   KAction* m_copyEntry;
   KAction* m_deleteEntry;
   KActionMenu* m_updateEntryMenu;
+  KAction* m_updateAll;
   KAction* m_checkInEntry;
   KAction* m_checkOutEntry;
   KToggleAction* m_toggleGroupWidget;
@@ -506,7 +507,7 @@ private:
   FetchDialog* m_fetchDlg;
   ReportDialog* m_reportDlg;
 
-  QPtrList<KAction> m_actions;
+  QPtrList<KAction> m_fetchActions;
 
   // keep track of the number of queued filter updates
   uint m_queuedFilters;

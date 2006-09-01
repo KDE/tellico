@@ -15,7 +15,11 @@
    ===================================================================
 -->
 
-<xsl:output method="html"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01//EN"
+            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            encoding="utf-8"/>
 
 <!-- Template for checking syntax version -->
 <xsl:template name="syntax-version">
@@ -102,7 +106,7 @@
     </xsl:when>
 
     <xsl:when test="$f/@type=4">
-     <img height="14">
+     <img height="14" alt="&#x2713;">
       <xsl:attribute name="src">
        <xsl:value-of select="concat($datadir,'pics/checkmark.png')"/>
       </xsl:attribute>
@@ -158,6 +162,9 @@
       <img height="14">
        <xsl:attribute name="src">
         <xsl:value-of select="concat($datadir,'pics/stars',$n,'.png')"/>
+       </xsl:attribute>
+       <xsl:attribute name="alt">
+        <xsl:value-of select="concat($n,' stars')"/>
        </xsl:attribute>
       </img>
      </xsl:if>

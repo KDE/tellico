@@ -26,13 +26,18 @@
 <!-- location depends on being installed correctly -->
 <xsl:import href="../tellico-common.xsl"/>
 
-<xsl:output method="html"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01//EN"
+            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
-<xsl:param name="font"/> <!-- default KDE font family -->
-<xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
-<xsl:param name="bgcolor"/> <!-- default KDE background color -->
+<xsl:param name="font"/> <!-- font family -->
+<xsl:param name="fontsize"/> <!-- font size -->
+<xsl:param name="fgcolor"/> <!-- foreground color -->
+<xsl:param name="bgcolor"/> <!-- background color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -64,6 +69,7 @@
     margin: 0px;
     padding: 0px;
     font-family: <xsl:value-of select="$font"/>;
+    font-size: <xsl:value-of select="$fontsize"/>pt;
     color: <xsl:value-of select="$fgcolor"/>;
     background-color: <xsl:value-of select="$bgcolor"/>;
   }
@@ -121,20 +127,24 @@
   img {
     border: 0px;
   }
+  p.navigation {
+    font-weight: bold;
+    text-align: center;
+    clear: both;
+  }
   </style>
   <title>
    <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
-   <xsl:text> - </xsl:text>
+   <xsl:text>&#xa0;&#8211; </xsl:text>
    <xsl:value-of select="tc:collection/@title"/>
   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection[1]"/>
    <xsl:if test="$collection-file">
-    <hr style="clear:left"/>
-    <h4 style="text-align:center">
+    <p class="navigation">
      <a href="{$collection-file}">&lt;&lt; <xsl:value-of select="tc:collection/@title"/></a>
-    </h4>
+    </p>
    </xsl:if>
   </body>
  </html>
@@ -142,10 +152,6 @@
 
 <xsl:template match="tc:collection">
  <xsl:apply-templates select="tc:entry[1]"/>
- <xsl:if test="tc:entry[1]/tc:amazon">
-  <hr/>
-  <p style="text-align:center">Data provided by <a href="{tc:entry[1]/tc:amazon}">Amazon.com</a></p>
- </xsl:if>
 </xsl:template>
 
 <xsl:template match="tc:entry">
@@ -173,7 +179,7 @@
         </xsl:otherwise>
        </xsl:choose>
       </xsl:attribute>
-      <img>
+      <img alt="">
        <xsl:attribute name="src">
         <xsl:value-of select="concat($imgdir, $image)"/>
        </xsl:attribute>

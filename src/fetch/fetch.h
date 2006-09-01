@@ -43,7 +43,8 @@ enum Type {
   ExecExternal,
   Yahoo,
   AnimeNfo,
-  IBS
+  IBS,
+  ISBNdb
 };
 
   }

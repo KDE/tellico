@@ -150,7 +150,7 @@ void Controller::slotCollectionModified(Data::CollPtr coll_) {
 }
 
 void Controller::slotCollectionDeleted(Data::CollPtr coll_) {
-//  kdDebug() << "Controller::slotCollectionDeleted()" << endl;
+//  myDebug() << "Controller::slotCollectionDeleted()" << endl;
 
   blockAllSignals(true);
   m_mainWindow->saveCollectionOptions(coll_);
@@ -176,6 +176,7 @@ void Controller::addedEntries(Data::EntryVec entries_) {
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->addEntries(entries_);
   }
+  m_mainWindow->slotQueueFilter();
   slotUpdateSelection(0, entries_);
   blockAllSignals(false);
 }
@@ -192,6 +193,7 @@ void Controller::modifiedEntries(Data::EntryVec entries_) {
     it->modifyEntries(entries_);
   }
   m_mainWindow->m_viewStack->entryView()->slotRefresh(); // special case
+  m_mainWindow->slotQueueFilter();
   blockAllSignals(false);
 }
 
@@ -203,6 +205,7 @@ void Controller::removedEntries(Data::EntryVec entries_) {
     m_selectedEntries.clear();
     m_currentEntries.clear();
   }
+  m_mainWindow->slotQueueFilter();
   blockAllSignals(false);
 }
 
@@ -212,15 +215,17 @@ void Controller::addedField(Data::CollPtr coll_, Data::FieldPtr field_) {
   }
   m_mainWindow->m_viewStack->refresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
+  m_mainWindow->slotQueueFilter();
 }
 
 void Controller::removedField(Data::CollPtr coll_, Data::FieldPtr field_) {
-//  kdDebug() << "Controller::slotFieldDeleted() - " << field_->name() << endl;
+//  myDebug() << "Controller::slotFieldDeleted() - " << field_->name() << endl;
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->removeField(coll_, field_);
   }
   m_mainWindow->m_viewStack->refresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
+  m_mainWindow->slotQueueFilter();
 }
 
 void Controller::modifiedField(Data::CollPtr coll_, Data::FieldPtr oldField_, Data::FieldPtr newField_) {
@@ -229,6 +234,7 @@ void Controller::modifiedField(Data::CollPtr coll_, Data::FieldPtr oldField_, Da
   }
   m_mainWindow->m_viewStack->refresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
+  m_mainWindow->slotQueueFilter();
 }
 
 void Controller::reorderedFields(Data::CollPtr coll_) {
@@ -267,7 +273,7 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Data::EntryVec& ent
     return;
   }
   m_working = true;
-//  kdDebug() << "Controller::slotUpdateSelection() entryList - " << list_.count() << endl;
+//  myDebug() << "Controller::slotUpdateSelection() entryList - " << list_.count() << endl;
 
   blockAllSignals(true);
 // in the list view and group view, if entries are selected in one, clear selection in other
@@ -300,6 +306,79 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Data::EntryVec& ent
   updateActions();
   m_mainWindow->slotEntryCount();
   m_working = false;
+}
+
+void Controller::slotGoPrevEntry() {
+  goEntrySibling(PrevEntry);
+}
+
+void Controller::slotGoNextEntry() {
+  goEntrySibling(NextEntry);
+}
+
+void Controller::goEntrySibling(EntryDirection dir_) {
+  // if there are currently multiple selected, then do nothing
+  if(m_selectedEntries.count() != 1) {
+    return;
+  }
+  // find the widget that has an entry selected
+  GUI::ListView* view = m_mainWindow->m_detailedView;
+  GUI::ListViewItemList items = view->selectedItems();
+  if(items.isEmpty()) {
+    view = m_mainWindow->m_groupView;
+    items = view->selectedItems();
+  }
+  if(items.isEmpty() && m_mainWindow->m_filterView) {
+    view = m_mainWindow->m_filterView;
+    items = view->selectedItems();
+  }
+  if(items.isEmpty() && m_mainWindow->m_loanView) {
+    view = m_mainWindow->m_loanView;
+    items = view->selectedItems();
+  }
+  if(items.count() != 1) {
+    return;
+  }
+  GUI::ListViewItem* item = items.first();
+  if(item->isEntryItem()) {
+    bool looped = false;
+    // check sanity
+    if(m_selectedEntries.front() != static_cast<EntryItem*>(item)->entry()) {
+      myDebug() << "Controller::slotGoNextEntry() - entries don't match!" << endl;
+    }
+    GUI::ListViewItem* nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
+                                                                         ? item->itemAbove()
+                                                                         : item->itemBelow());
+    if(!nextItem) {
+      // cycle through
+      nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
+                                                       ? view->lastItem()
+                                                       : view->firstChild());
+      looped = true;
+    }
+    while(nextItem && !nextItem->isEntryItem()) {
+      nextItem->setOpen(true); // have to be open to find the next one
+      nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
+                                                       ? nextItem->itemAbove()
+                                                       : nextItem->itemBelow());
+      if(!nextItem && !looped) {
+        // cycle through
+        nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
+                                                         ? view->lastItem()
+                                                         : view->firstChild());
+        looped = true;
+      }
+    }
+    if(nextItem) {
+      Data::EntryPtr e = static_cast<EntryItem*>(nextItem)->entry();
+      view->blockSignals(true);
+      view->setSelected(item, false);
+      view->setSelected(nextItem, true);
+      view->ensureItemVisible(nextItem);
+      view->blockSignals(false);
+      slotUpdateSelection(view, e);
+    }
+  }
 }
 
 void Controller::slotUpdateCurrent(const Data::EntryVec& entries_) {
@@ -376,7 +455,7 @@ void Controller::slotDeleteSelectedEntries() {
 }
 
 void Controller::slotRefreshField(Data::FieldPtr field_) {
-//  kdDebug() << "Controller::slotRefreshField()" << endl;
+//  myDebug() << "Controller::slotRefreshField()" << endl;
   // group view only needs to refresh if it's the title
   if(field_->name() == Latin1Literal("title")) {
     m_mainWindow->m_groupView->populateCollection();
@@ -420,7 +499,7 @@ void Controller::blockAllSignals(bool block_) const {
 }
 
 void Controller::slotUpdateFilter(FilterPtr filter_) {
-//  kdDebug() << "Controller::slotUpdateFilter()" << endl;
+//  myDebug() << "Controller::slotUpdateFilter()" << endl;
   blockAllSignals(true);
 
   // the view takes over ownership of the filter
@@ -440,31 +519,70 @@ void Controller::editEntry(Data::EntryPtr) const {
   m_mainWindow->slotShowEntryEditor();
 }
 
-void Controller::plugCollectionActions(QWidget* widget_) {
-  m_mainWindow->action("coll_rename_collection")->plug(widget_);
-  m_mainWindow->action("coll_fields")->plug(widget_);
-  m_mainWindow->action("change_entry_grouping")->plug(widget_);
+void Controller::plugCollectionActions(QPopupMenu* popup_) {
+  if(!popup_) {
+    return;
+  }
+
+  m_mainWindow->action("coll_rename_collection")->plug(popup_);
+  m_mainWindow->action("coll_fields")->plug(popup_);
+  m_mainWindow->action("change_entry_grouping")->plug(popup_);
 }
 
-void Controller::plugEntryActions(QWidget* widget_) {
-//  m_mainWindow->m_newEntry->plug(widget_);
-  m_mainWindow->m_editEntry->plug(widget_);
-  m_mainWindow->m_copyEntry->plug(widget_);
-  m_mainWindow->m_deleteEntry->plug(widget_);
-  m_mainWindow->m_updateEntryMenu->plug(widget_);
-  plugUpdateMenu(widget_);
-  if(widget_->inherits("QPopupMenu")) {
-    QPopupMenu* p = static_cast<QPopupMenu*>(widget_);
-    p->insertSeparator();
+void Controller::plugEntryActions(QPopupMenu* popup_) {
+  if(!popup_) {
+    return;
   }
-  m_mainWindow->m_checkOutEntry->plug(widget_);
+
+//  m_mainWindow->m_newEntry->plug(popup_);
+  m_mainWindow->m_editEntry->plug(popup_);
+  m_mainWindow->m_copyEntry->plug(popup_);
+  m_mainWindow->m_deleteEntry->plug(popup_);
+  m_mainWindow->m_updateEntryMenu->plug(popup_);
+  // there's a bug in KActionMenu with KXMLGUIFactory::plugActionList
+  // pluging the menu action isn't enough to have the popup get populated
+  plugUpdateMenu(popup_);
+  popup_->insertSeparator();
+  m_mainWindow->m_checkOutEntry->plug(popup_);
+}
+
+void Controller::plugUpdateMenu(QPopupMenu* popup_) {
+  QPopupMenu* updatePopup = 0;
+  const uint count = popup_->count();
+  for(uint i = 0; i < count; ++i) {
+    QMenuItem* item = popup_->findItem(popup_->idAt(i));
+    if(item && item->text() == m_mainWindow->m_updateEntryMenu->text()) {
+      updatePopup = item->popup();
+      break;
+    }
+  }
+
+  if(!updatePopup) {
+    return;
+  }
+
+  // I can't figure out why the actions get duplicated, but they do
+  // so clear them all
+  m_mainWindow->m_updateAll->unplug(updatePopup);
+  for(QPtrListIterator<KAction> it(m_mainWindow->m_fetchActions); it.current(); ++it) {
+    it.current()->unplug(updatePopup);
+  }
+
+  // clear separator, too
+  updatePopup->clear();
+
+  m_mainWindow->m_updateAll->plug(updatePopup);
+  updatePopup->insertSeparator();
+  for(QPtrListIterator<KAction> it(m_mainWindow->m_fetchActions); it.current(); ++it) {
+    it.current()->plug(updatePopup);
+  }
 }
 
 void Controller::updateActions() const {
   bool emptySelection = m_selectedEntries.isEmpty();
   m_mainWindow->stateChanged(QString::fromLatin1("empty_selection"),
                              emptySelection ? KXMLGUIClient::StateNoReverse : KXMLGUIClient::StateReverse);
-  for(QPtrListIterator<KAction> it(m_mainWindow->m_actions); it.current(); ++it) {
+  for(QPtrListIterator<KAction> it(m_mainWindow->m_fetchActions); it.current(); ++it) {
     it.current()->setEnabled(!emptySelection);
   }
   //only enable citation items when it's a bibliography
@@ -478,12 +596,12 @@ void Controller::updateActions() const {
 
   if(m_selectedEntries.count() < 2) {
     m_mainWindow->m_editEntry->setText(i18n("&Edit Entry..."));
-    m_mainWindow->m_copyEntry->setText(i18n("&Copy Entry"));
+    m_mainWindow->m_copyEntry->setText(i18n("D&uplicate Entry"));
     m_mainWindow->m_updateEntryMenu->setText(i18n("&Update Entry"));
     m_mainWindow->m_deleteEntry->setText(i18n("&Delete Entry"));
   } else {
     m_mainWindow->m_editEntry->setText(i18n("&Edit Entries..."));
-    m_mainWindow->m_copyEntry->setText(i18n("&Copy Entries"));
+    m_mainWindow->m_copyEntry->setText(i18n("D&uplicate Entries"));
     m_mainWindow->m_updateEntryMenu->setText(i18n("&Update Entries"));
     m_mainWindow->m_deleteEntry->setText(i18n("&Delete Entries"));
   }
@@ -608,59 +726,8 @@ bool Controller::canCheckIn() const {
   return false;
 }
 
-void Controller::plugUpdateMenu(QWidget* widget_) {
-  // there's a bug in KActionMenu with KXMLGUIFactory::plugActionList
-  // the popup doesn't get updated
-  QPopupMenu* popup = 0;
-  if(widget_->inherits("QPopupMenu")) {
-    QPopupMenu* p = static_cast<QPopupMenu*>(widget_);
-    const uint count = p->count();
-    for(uint i = 0; i < count; ++i) {
-      QMenuItem* item = p->findItem(p->idAt(i));
-      if(item && item->text() == m_mainWindow->m_updateEntryMenu->text()) {
-        popup = item->popup();
-        break;
-      }
-    }
-  } else if(widget_->inherits("KToolBar")) {
-    KToolBar* tb = static_cast<KToolBar*>(widget_);
-    const uint count = tb->count();
-    for(uint i = 0; i < count; ++i) {
-      KToolBarButton* btn = tb->getButton(tb->idAt(i));
-      if(btn && btn->text() == m_mainWindow->m_updateEntryMenu->text()) {
-        popup = btn->popup();
-        break;
-      }
-    }
-  }
-
-  if(!popup) {
-    return;
-  }
-
-  popup->clear();
-  m_mainWindow->action("update_entry_all")->plug(popup);
-  popup->insertSeparator();
-  for(QPtrListIterator<KAction> it(m_mainWindow->m_actions); it.current(); ++it) {
-    it.current()->plug(popup);
-  }
-
-  // keep track of the widget in case we need up update the menus
-  WidgetVector::const_iterator it = qFind(m_sourcesWidgets.begin(),
-                                          m_sourcesWidgets.end(),
-                                          QGuardedPtr<QWidget>(widget_));
-  if(it != m_sourcesWidgets.end()) {
-    m_sourcesWidgets.append(widget_);
-  }
-}
-
 void Controller::updatedFetchers() {
   m_mainWindow->updateEntrySources();
-  for(WidgetVector::iterator it = m_sourcesWidgets.begin(); it != m_sourcesWidgets.end(); ++it) {
-    if(!(*it).isNull()) {
-      plugUpdateMenu(*it);
-    }
-  }
 }
 
 #include "controller.moc"

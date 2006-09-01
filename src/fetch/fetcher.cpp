@@ -15,8 +15,21 @@
 #include "messagehandler.h"
 #include "../entry.h"
 
+#include <kconfig.h>
+
 using Tellico::Fetch::Fetcher;
 using Tellico::Fetch::SearchResult;
+
+void Fetcher::readConfig(KConfig* config_, const QString& group_) {
+  KConfigGroupSaver groupSaver(config_, group_);
+  QString s = config_->readEntry("Name");
+  if(!s.isEmpty()) {
+    m_name = s;
+  }
+  m_updateOverwrite = config_->readBoolEntry("UpdateOverwrite", false);
+  // be sure to read config for subclass
+  readConfigHook(config_, group_);
+}
 
 void Fetcher::message(const QString& message_, int type_) const {
   if(m_messager) {

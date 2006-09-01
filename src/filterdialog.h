@@ -80,6 +80,7 @@ public slots:
 
 protected slots:
   void slotEditRegExp();
+  void slotRuleFieldChanged(int which);
   void slotRuleFunctionChanged(int which);
 
 private:

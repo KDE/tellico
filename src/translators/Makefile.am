@@ -6,13 +6,15 @@ noinst_LIBRARIES = libtranslators.a
 libtranslators_a_METASOURCES = AUTO
 
 libtranslators_a_SOURCES = pilotdbexporter.cpp bibtexexporter.cpp \
-				bibtexmlimporter.cpp tellicoxmlexporter.cpp csvimporter.cpp xsltexporter.cpp xslthandler.cpp \
-				bibteximporter.cpp xsltimporter.cpp textimporter.cpp bibtexhandler.cpp \
-				bibtexmlexporter.cpp htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp xmlimporter.cpp \
-				tellicoimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp alexandriaexporter.cpp \
-				freedbimporter.cpp risimporter.cpp freedb_util.cpp tellico_xml.cpp exporter.cpp \
-				onixexporter.cpp gcfilmsimporter.cpp gcfilmsexporter.cpp filelistingimporter.cpp \
-	grs1importer.cpp
+bibtexmlimporter.cpp tellicoxmlexporter.cpp csvimporter.cpp \
+xsltexporter.cpp xslthandler.cpp bibteximporter.cpp xsltimporter.cpp \
+textimporter.cpp bibtexhandler.cpp bibtexmlexporter.cpp \
+htmlexporter.cpp csvexporter.cpp tellicozipexporter.cpp xmlimporter.cpp \
+tellicoimporter.cpp audiofileimporter.cpp alexandriaimporter.cpp \
+alexandriaexporter.cpp freedbimporter.cpp risimporter.cpp \
+freedb_util.cpp tellico_xml.cpp exporter.cpp onixexporter.cpp \
+gcfilmsimporter.cpp gcfilmsexporter.cpp filelistingimporter.cpp \
+grs1importer.cpp amcimporter.cpp dcimporter.cpp
 
 if !USE_LIBBTPARSE
   SUBDIR_LIBBTPARSE = btparse
@@ -44,7 +46,8 @@ tellico_xml.cpp          translators.h            exporter.cpp \
 onixexporter.h           onixexporter.cpp         gcfilmsimporter.h \
 gcfilmsimporter.cpp      gcfilmsexporter.h        gcfilmsexporter.cpp \
 filelistingimporter.h    filelistingimporter.cpp  grs1importer.h \
-grs1importer.cpp
+grs1importer.cpp         amcimporter.h            amcimporter.cpp \
+dcimporter.h             dcimporter.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 

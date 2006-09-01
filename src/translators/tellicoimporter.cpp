@@ -48,7 +48,6 @@ TellicoImporter::TellicoImporter(const QString& text_) : DataImporter(text_),
 }
 
 TellicoImporter::~TellicoImporter() {
-  myLog() << "~TellicoImporter()" << endl;
   if(m_zip) {
     m_zip->close();
   }
@@ -97,6 +96,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
 
   QDomDocument dom;
   QString errorMsg;
@@ -314,7 +314,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   if(syntaxVersion < 8) {
     addDefaultFilters();
   }
-  ProgressManager::self()->setDone(this);
+
   if(m_cancelled) {
     m_coll = 0;
   }
@@ -769,6 +769,7 @@ void TellicoImporter::loadZipData() {
 
   // if all the images are not to be loaded, then we're done
   if(!m_loadAllImages) {
+//    myLog() << "TellicoImporter::loadZipData() - delayed loading for " << m_images.count() << " images" << endl;
     return;
   }
 
@@ -794,7 +795,7 @@ void TellicoImporter::loadZipData() {
 }
 
 bool TellicoImporter::loadImage(const QString& id_) {
-  myLog() << "TellicoImporter::loadImage() - id =  " << id_ << endl;
+//  myLog() << "TellicoImporter::loadImage() - id =  " << id_ << endl;
   if(m_format != Zip || !m_imgDir) {
     return false;
   }
@@ -802,14 +803,14 @@ bool TellicoImporter::loadImage(const QString& id_) {
   if(!file || !file->isFile()) {
     return false;
   }
-  const Data::Image& img = ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                                                  id_.section('.', -1).upper(), id_);
+  QString newID = ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
+                                         id_.section('.', -1).upper(), id_);
   m_images.remove(id_);
   if(m_images.isEmpty()) {
     // give it some time
     QTimer::singleShot(3000, this, SLOT(deleteLater()));
   }
-  return !img.isNull();
+  return !newID.isEmpty();
 }
 
 // static

@@ -110,6 +110,7 @@ private:
   KLineEdit* m_titleEdit;
   KComboBox* m_typeCombo;
   KLineEdit* m_allowEdit;
+  KLineEdit* m_defaultEdit;
   KComboBox* m_catCombo;
   KLineEdit* m_descEdit;
   KPushButton* m_btnExtended;

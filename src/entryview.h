@@ -15,6 +15,7 @@
 #define ENTRYVIEW_H
 
 class KRun;
+class KTempFile;
 
 #include "datavectors.h"
 
@@ -24,6 +25,8 @@ class KRun;
 
 namespace Tellico {
   class XSLTHandler;
+  class ImageFactory;
+  class StyleOptions;
 
 /**
  * @author Robby Stephenson
@@ -49,7 +52,8 @@ public:
    * @param entry The entry to show
    */
   void showEntry(Data::EntryPtr entry);
-    /**
+
+  /**
    * Clear the widget and set Entry pointer to NULL
    */
   void clear();
@@ -60,6 +64,8 @@ public:
    * @param file The XSLT file name
    */
   void setXSLTFile(const QString& file);
+  void setXSLTOptions(const StyleOptions& options);
+  void setUseGradientImages(bool b) { m_useGradientImages = b; }
 
 public slots:
   /**
@@ -74,14 +80,21 @@ private slots:
    * @param url The URL to open
    */
   void slotOpenURL(const KURL& url);
+  void slotReloadEntry();
+  void slotResetColors();
 
 private:
+  void resetColors();
+
   Data::EntryPtr m_entry;
   XSLTHandler* m_handler;
   QString m_xsltFile;
 
   // to run any clicked processes
   QGuardedPtr<KRun> m_run;
+  KTempFile* m_tempFile;
+  bool m_useGradientImages : 1;
+  bool m_checkCommonFile : 1;
 };
 
 } //end namespace

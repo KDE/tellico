@@ -28,6 +28,7 @@ namespace Tellico {
   class XSLTHandler;
   namespace GUI {
     class LineEdit;
+    class ComboBox;
   }
 }
 
@@ -37,8 +38,6 @@ class KComboBox;
 #include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
-
-#include <kconfig.h>
 
 #include <qguardedptr.h>
 
@@ -66,29 +65,16 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Z3950; }
   virtual bool canFetch(int type) const;
-  virtual void readConfig(KConfig* config, const QString& group);
+  virtual void readConfigHook(KConfig* config, const QString& group);
 
   virtual void updateEntry(Data::EntryPtr entry);
+  const QString& host() const { return m_host; }
 
   static StringMap customFields();
 
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-  class ConfigWidget : public Fetch::ConfigWidget {
-  public:
-    ConfigWidget(QWidget* parent, const Z3950Fetcher* fetcher = 0);
-    virtual void saveConfig(KConfig* config_);
-
-  private:
-    GUI::LineEdit* m_hostEdit;
-    KIntSpinBox* m_portSpinBox;
-    GUI::LineEdit* m_databaseEdit;
-    GUI::LineEdit* m_userEdit;
-    GUI::LineEdit* m_passwordEdit;
-    KComboBox* m_charSetCombo;
-    // have to remember syntax
-    QString m_syntax;
-  };
+  class ConfigWidget;
   friend class ConfigWidget;
 
   static QString defaultName();
@@ -106,7 +92,6 @@ private:
 
   Z3950Connection* m_conn;
 
-  QString m_name;
   QString m_host;
   uint m_port;
   QString m_dbname;
@@ -126,6 +111,7 @@ private:
   QMap<int, Data::EntryPtr> m_entries;
   bool m_started;
   QStringList m_isbnList;
+  QString m_preset;
 
   XSLTHandler* m_MARC21XMLHandler;
   XSLTHandler* m_UNIMARCXMLHandler;
@@ -133,6 +119,35 @@ private:
   QStringList m_fields;
 
   friend class Z3950Connection;
+};
+
+class Z3950Fetcher::ConfigWidget : public Fetch::ConfigWidget {
+Q_OBJECT
+
+public:
+  ConfigWidget(QWidget* parent, const Z3950Fetcher* fetcher = 0);
+  virtual ~ConfigWidget();
+  virtual void saveConfig(KConfig* config_);
+  virtual QString preferredName() const;
+
+private slots:
+  void slotTogglePreset(bool on);
+  void slotPresetChanged();
+
+private:
+  void loadPresets(const QString& current);
+
+  QCheckBox* m_usePreset;
+  GUI::ComboBox* m_serverCombo;
+  GUI::LineEdit* m_hostEdit;
+  KIntSpinBox* m_portSpinBox;
+  GUI::LineEdit* m_databaseEdit;
+  GUI::LineEdit* m_userEdit;
+  GUI::LineEdit* m_passwordEdit;
+  KComboBox* m_charSetCombo;
+  GUI::ComboBox* m_syntaxCombo;
+  // have to remember syntax
+  QString m_syntax;
 };
 
   } // end namespace

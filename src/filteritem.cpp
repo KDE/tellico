@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "filteritem.h"
+#include "tellico_kernel.h"
 
 #include <kiconloader.h>
 
@@ -28,4 +29,8 @@ FilterItem::FilterItem(GUI::ListView* parent_, Filter::Ptr filter_)
 void FilterItem::updateFilter(Filter::Ptr filter_) {
   m_filter = filter_;
   setText(0, m_filter->name());
+}
+
+void FilterItem::doubleClicked() {
+  Kernel::self()->modifyFilter(m_filter);
 }

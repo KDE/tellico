@@ -39,6 +39,7 @@
 #include <qwhatsthis.h>
 #include <qcheckbox.h>
 #include <qfile.h>
+#include <qtextcodec.h>
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
@@ -52,7 +53,7 @@ namespace {
 using Tellico::Fetch::AmazonFetcher;
 
 // static
-const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
+const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
   static SiteData dataVector[6] = {
     {
       i18n("Amazon (US)"),
@@ -80,9 +81,10 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(Site site_) {
 
 AmazonFetcher::AmazonFetcher(Site site_, QObject* parent_, const char* name_)
     : Fetcher(parent_, name_), m_xsltHandler(0), m_site(site_), m_imageSize(MediumImage),
-      m_name(siteData(site_).title), m_access(QString::fromLatin1(AMAZON_ACCESS_KEY)),
+      m_access(QString::fromLatin1(AMAZON_ACCESS_KEY)),
       m_assoc(QString::fromLatin1(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
       m_page(1), m_total(-1), m_job(0), m_started(false) {
+  m_name = siteData(site_).title;
 }
 
 AmazonFetcher::~AmazonFetcher() {
@@ -106,13 +108,9 @@ bool AmazonFetcher::canFetch(int type) const {
          || type == Data::Collection::Game;
 }
 
-void AmazonFetcher::readConfig(KConfig* config_, const QString& group_) {
+void AmazonFetcher::readConfigHook(KConfig* config_, const QString& group_) {
   KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Name");
-  if(!s.isEmpty()) {
-    m_name = s;
-  }
-  s = config_->readEntry("AccessKey");
+  QString s = config_->readEntry("AccessKey");
   if(!s.isEmpty()) {
     m_access = s;
   }
@@ -143,7 +141,7 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
   u.addQueryItem(QString::fromLatin1("Operation"),      QString::fromLatin1("ItemSearch"));
   u.addQueryItem(QString::fromLatin1("ResponseGroup"),  QString::fromLatin1("Large"));
   u.addQueryItem(QString::fromLatin1("ItemPage"),       QString::number(m_page));
-  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2005-10-05"));
+  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2006-07-26"));
 
   const int type = Kernel::self()->collectionType();
   switch(type) {
@@ -179,25 +177,35 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
       return;
   }
 
-  // a mibenum of 106 is utf-8, 0 means use user's locale
-  QString encValue = KURL::encode_string_no_slash(value_, m_site == AmazonFetcher::JP ? 106 : 0);
+  // I have not been able to find any documentation about what character set to use
+  // when URL encoding the search term in the Amazon REST interface. But I do know
+  // that utf8 DOES NOT WORK. So I'm arbitrarily using iso-8859-1, except for JP.
+  // Why different for JP? Well, I've not received any bug reports from that direction yet
+
+//  QString value = KURL::decode_string(value_, 106);
+//  QString value = QString::fromLocal8Bit(value_.utf8());
+  QString value = value_;
+  // a mibenum of 106 is utf-8, 4 is iso-8859-1, 0 means use user's locale,
+  int mib = m_site == AmazonFetcher::JP ? 106 : 4;
 
   switch(key_) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("Title"), encValue);
+      u.addQueryItem(QString::fromLatin1("Title"), value, mib);
       break;
 
     case Person:
       if(type == Data::Collection::Video) {
-        u.addQueryItem(QString::fromLatin1("Actor"), encValue);
-        u.addQueryItem(QString::fromLatin1("Director"), encValue);
+        u.addQueryItem(QString::fromLatin1("Actor"),        value, mib);
+        u.addQueryItem(QString::fromLatin1("Director"),     value, mib);
       } else if(type == Data::Collection::Album) {
-        u.addQueryItem(QString::fromLatin1("Artist"), encValue);
-      } else if(type== Data::Collection::Game) {
-        u.addQueryItem(QString::fromLatin1("Manufacturer"), encValue);
+        u.addQueryItem(QString::fromLatin1("Artist"),       value, mib);
+      } else if(type == Data::Collection::Game) {
+        u.addQueryItem(QString::fromLatin1("Manufacturer"), value, mib);
       } else { // books and bibtex
-        u.addQueryItem(QString::fromLatin1("Author"), encValue);
-        u.addQueryItem(QString::fromLatin1("Publisher"), encValue);
+        QString s = QString::fromLatin1("author:%1 or publisher:%2").arg(value, value);
+//        u.addQueryItem(QString::fromLatin1("Author"),       value, mib);
+//        u.addQueryItem(QString::fromLatin1("Publisher"),    value, mib);
+        u.addQueryItem(QString::fromLatin1("Power"),    s, mib);
       }
       break;
 
@@ -241,14 +249,14 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
       break;
 
     case Keyword:
-      u.addQueryItem(QString::fromLatin1("Keywords"), encValue);
+      u.addQueryItem(QString::fromLatin1("Keywords"), value_, mib);
       break;
 
     case Raw:
       {
-        QString key = encValue.section('=', 0, 0).stripWhiteSpace();
-        QString str = encValue.section('=', 1).stripWhiteSpace();
-        u.addQueryItem(key, str);
+        QString key = value.section('=', 0, 0).stripWhiteSpace();
+        QString str = value.section('=', 1).stripWhiteSpace();
+        u.addQueryItem(key, str, mib);
       }
       break;
 
@@ -339,9 +347,17 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
                              .namedItem(QString::fromLatin1("Errors"));
     e = n.toElement();
     if(!e.isNull()) {
-      QDomNodeList nodes = e.elementsByTagName(QString::fromLatin1("Message"));
+      QDomNodeList nodes = e.elementsByTagName(QString::fromLatin1("Error"));
       for(uint i = 0; i < nodes.count(); ++i) {
-        errors << nodes.item(i).toElement().text();
+        e = nodes.item(i).toElement().namedItem(QString::fromLatin1("Code")).toElement();
+        if(!e.isNull() && e.text() == Latin1Literal("AWS.ECommerceService.NoExactMatches")) {
+          // no exact match, not a real error, so skip
+          continue;
+        }
+        e = nodes.item(i).toElement().namedItem(QString::fromLatin1("Message")).toElement();
+        if(!e.isNull()) {
+          errors << e.text();
+        }
       }
     }
   }
@@ -531,6 +547,8 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
           for(QStringList::Iterator it2 = nodes.begin(); it2 != nodes.end(); ++it2) {
             if(*it2 == Latin1Literal("General") ||
                *it2 == Latin1Literal("Subjects") ||
+               *it2 == Latin1Literal("Par prix") || // french stuff
+               *it2 == Latin1Literal("Divers") || // french stuff
                (*it2).startsWith(QChar('(')) ||
                (*it2).startsWith(QString::fromLatin1("Authors"))) {
               continue;
@@ -645,16 +663,13 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
   }
 //  myDebug() << "AmazonFetcher::fetchEntry() - grabbing " << imageURL.prettyURL() << endl;
   if(!imageURL.isEmpty()) {
-    const Data::Image& img = ImageFactory::addImage(imageURL, true);
+    QString id = ImageFactory::addImage(imageURL, true);
     // FIXME: need to add cover image field to bibtex collection
-    if(img.isNull()) {
-    // rich text causes layout issues
-//      emit signalStatus(i18n("<qt>The cover image for <i>%1</i> could not be loaded.</qt>").arg(
-//                              entry->field(QString::fromLatin1("title"))));
+    if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
-    } else if(img.width() > 1 && img.height() > 1) { // amazon serves up 1x1 gifs occasionally
+    } else { // amazon serves up 1x1 gifs occasionally, but that's caught in the image constructor
       // all relevant collection types have cover fields
-      entry->setField(QString::fromLatin1("cover"), img.id());
+      entry->setField(QString::fromLatin1("cover"), id);
     }
   }
 
@@ -727,7 +742,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   l->setSpacing(4);
   l->setColStretch(1, 10);
 
-  int row = 0;
+  int row = -1;
   QLabel* label = new QLabel(i18n("Co&untry: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_siteCombo = new KComboBox(optionsWidget());
@@ -739,6 +754,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   m_siteCombo->insertItem(i18n("France"));
   m_siteCombo->insertItem(i18n("Canada"));
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSiteChanged()));
   l->addWidget(m_siteCombo, row, 1);
   QString w = i18n("Amazon.com provides data from several different localized sites. Choose the one "
                    "you wish to use for this data source.");
@@ -801,6 +817,14 @@ void AmazonFetcher::ConfigWidget::saveConfig(KConfig* config_) {
 
   saveFieldsConfig(config_);
   slotSetModified(false);
+}
+
+QString AmazonFetcher::ConfigWidget::preferredName() const {
+  return AmazonFetcher::siteData(m_siteCombo->currentItem()).title;
+}
+
+void AmazonFetcher::ConfigWidget::slotSiteChanged() {
+  emit signalName(preferredName());
 }
 
 //static

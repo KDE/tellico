@@ -23,15 +23,20 @@
 <!-- location depends on being installed correctly -->
 <xsl:import href="../tellico-common.xsl"/>
 
-<xsl:output method="html"/>
+<xsl:output method="html"
+            indent="yes"
+            doctype-public="-//W3C//DTD HTML 4.01//EN"
+            doctype-system="http://www.w3.org/TR/html4/strict.dtd"
+            encoding="utf-8"/>
 
 <xsl:param name="datadir"/> <!-- dir where Tellico data are located -->
 <xsl:param name="imgdir"/> <!-- dir where field images are located -->
-<xsl:param name="font"/> <!-- default KDE font family -->
-<xsl:param name="fgcolor"/> <!-- default KDE foreground color -->
-<xsl:param name="bgcolor"/> <!-- default KDE background color -->
-<xsl:param name="color1"/> <!-- default KDE highlighted text color -->
-<xsl:param name="color2"/> <!-- default KDE highlighted background color -->
+<xsl:param name="font"/> <!-- font family -->
+<xsl:param name="fontsize"/> <!-- font size -->
+<xsl:param name="fgcolor"/> <!-- foreground color -->
+<xsl:param name="bgcolor"/> <!-- background color -->
+<xsl:param name="color1"/> <!-- highlighted text color -->
+<xsl:param name="color2"/> <!-- highlighted background color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
 
@@ -64,29 +69,30 @@
   <head>
   <style type="text/css">
    body {
-        margin: 4px;
-        padding: 0px;
-        font-family: "<xsl:value-of select="$font"/>";
+        margin: .2em 1%;
+        padding: 0;
+        font-family: "<xsl:value-of select="$font"/>", Arial, Helvetica, sans-serif;
+        font-size: <xsl:value-of select="$fontsize"/>pt;
         color: <xsl:value-of select="$fgcolor"/>;
-        background-color: <xsl:value-of select="$bgcolor"/>;
-        background-repeat: repeat;
-        font-size: 1em;
+        background: <xsl:value-of select="$bgcolor"/>;
+        line-height: 1.6;
    }
-   #banner {
-        padding-bottom: 5px;
-        margin-bottom: 8px;
-        border-bottom: 2px ridge <xsl:value-of select="$color2"/>;
+   div#banner {
+        padding-bottom: .1em;
+        margin-bottom: .4em;
+        border-bottom: .2em ridge <xsl:value-of select="$color2"/>;
    }
    img#logo {
-        padding-left: 4px;
-        padding-top: 2px; /* match h1 */
+        padding-left: .5em;
+        padding-top: .4em;
+        float: right;
    }
    h1 {
         color: <xsl:value-of select="$color2"/>;
         font-size: 1.8em;
         text-align: left;
-        padding: 2px;
-        margin: 0px;
+        padding: .2em;
+        margin: 0;
         font-weight: bold;
    }
    span.year {
@@ -97,29 +103,28 @@
    }
    h2 {
         font-size: 1.2em;
-        margin: 0px;
-        padding: 0px;
-        padding-left: 2px;
+        margin: 0;
+        padding: 0;
+        padding-left: .2em;
    }
    img {
-        padding-top: 1px; /* match cellspacing of table */
-        padding-right: 10px;
-        padding-bottom: 9px;
-        border: 0;
+        padding-right: 1em;
+        padding-bottom: 1em;
    }
    table.category {
-        margin-bottom: 10px;
+        margin-bottom: 1em;
+        float: left;
    }
    tr.category {
         font-weight: bold;
         font-size: 1.2em;
         color: <xsl:value-of select="$color1"/>;
-        background-color: <xsl:value-of select="$color2"/>;
+        background: <xsl:value-of select="$color2"/>;
         text-align: center;
    }
   /* there seems to be a khtml bug, in 3.4.x at least, repeat-x doesn't
-     work on the tr element, so have to put it on the td element */
-   tr.category td {
+     work on the tr element, so have to put it on the th element */
+   tr.category th {
         background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
         background-repeat: repeat-x; 
    }
@@ -127,21 +132,36 @@
         font-weight: bold;
         text-align: left;
         color: <xsl:value-of select="$color2"/>;
-        padding-left: 3px;
-        padding-right: 3px;
+        background <xsl:value-of select="$color1"/>;
+        padding-left: .2em;
+        padding-right: .2em;
+   }
+   thead th {
+        color: <xsl:value-of select="$color1"/>;
+        background <xsl:value-of select="$color2"/>;
+        text-align: center;
+   }
+   td.role {
+        font-style: italic;
    }
    p {
-        margin-top: 0px;
+        margin-top: 0;
         text-align: justify;
-        font-size: 90%;
+        font-size: .9em;
    }
    ul {
-        margin-top: 4px;
-        margin-bottom: 4px;
-        padding: 0px 0px 0px 20px;
+        margin-top: .3em;
+        margin-bottom: .3em;
+        margin-left: 0;
+        padding: 0 0 0 1.5em;
    }
    img {
-        border: 0px solid;
+        border: 0px;
+   }
+   p.navigation {
+        font-weight: bold;
+        text-align: center;
+        clear: both;
    }
   </style>
   <title>
@@ -153,10 +173,9 @@
   <body>
    <xsl:apply-templates select="tc:collection[1]"/>
    <xsl:if test="$collection-file">
-    <hr style="clear:left"/>
-    <h4 style="text-align:center">
+    <p class="navigation">
      <a href="{$collection-file}">&lt;&lt; <xsl:value-of select="tc:collection/@title"/></a>
-    </h4>
+    </p>
    </xsl:if>
   </body>
  </html>
@@ -191,14 +210,14 @@
   <!-- do format logo -->
   <xsl:choose>
    <xsl:when test="$datadir and tc:medium = 'DVD'">
-    <img width="74" height="30" align="right" id="logo">
+    <img width="74" height="30" id="logo" alt="(DVD)">
      <xsl:attribute name="src">
       <xsl:value-of select="concat($datadir,'dvd-logo.png')"/>
      </xsl:attribute>
     </img>
    </xsl:when>
    <xsl:when test="$datadir and tc:medium = 'VHS'">
-    <img width="56" height="30" align="right" id="logo">
+    <img width="56" height="30" id="logo" alt="(VHS)">
      <xsl:attribute name="src">
       <xsl:value-of select="concat($datadir,'vhs-logo.png')"/>
      </xsl:attribute>
@@ -209,16 +228,21 @@
   <!-- title block -->
   <h1>
    <xsl:value-of select=".//tc:title[1]"/>
+   <xsl:if test="tc:widescreen"><xsl:text/>
+    <xsl:text>&#xa0;&#8211; </xsl:text><xsl:value-of select="key('fieldsByName', 'widescreen')/@title"/><xsl:text/>
+   </xsl:if>
+   <xsl:if test="tc:directors-cut"><xsl:text/>
+    <xsl:text>&#xa0;&#8211; </xsl:text><xsl:value-of select="key('fieldsByName', 'directors-cut')/@title"/><xsl:text/>
+   </xsl:if>
    <xsl:if test=".//tc:year|.//tc:nationality">
-    <xsl:text> </xsl:text>
      <span class="year">
-      <xsl:text>(</xsl:text>
+      <xsl:text> (</xsl:text>
       <xsl:if test=".//tc:year">
        <xsl:value-of select=".//tc:year[1]"/>
       </xsl:if>
       <xsl:if test=".//tc:nationality">
        <xsl:if test=".//tc:year">
-        <xsl:text> </xsl:text>
+        <xsl:text>&#xa0;&#8211; </xsl:text>
        </xsl:if>
        <span class="country">
         <xsl:value-of select=".//tc:nationality[1]"/>
@@ -229,18 +253,10 @@
    </xsl:if>
   </h1>
 
-  <h2>
-   <xsl:if test="tc:widescreen">
-    <xsl:value-of select="concat(key('fieldsByName', 'widescreen')/@title, ' ')"/>
-   </xsl:if>
-   <xsl:if test="tc:directors-cut">
-    <xsl:value-of select="key('fieldsByName', 'directors-cut')/@title"/>
-   </xsl:if>
-  </h2>
  </div>
 
- <!-- the images, general group and the cast are each in a table cell -->
- <table cellspacing="1" cellpadding="0" class="category" width="100%">
+ <!-- the images and the rest of the categories are each in a table in a table cell -->
+ <table class="category" width="100%">
   <tbody>
    <tr>
     <td valign="top">
@@ -248,7 +264,7 @@
      <!-- now, show all the images in the entry, field type 10 -->
      <xsl:variable name="images" select="../tc:fields/tc:field[@type=10]"/>
      <xsl:if test="count($images) &gt; 0">
-      <table cellpadding="0" cellspacing="0">
+      <table>
        <tbody>
         <!-- now, show all the images in the entry, type 10 -->
         <xsl:for-each select="$images">
@@ -272,11 +288,11 @@
                </xsl:otherwise>
               </xsl:choose>
              </xsl:attribute>
-             <img style="border: 0px">
+             <img alt="">
               <xsl:attribute name="src">
                <xsl:value-of select="concat($imgdir, $image)"/>
               </xsl:attribute>
-              <!-- limit to maximum widht of 200 of height of 300 -->
+              <!-- limit to maximum width of 200 of height of 300 -->
               <xsl:call-template name="image-size">
                <xsl:with-param name="limit-width" select="200"/>
                <xsl:with-param name="limit-height" select="300"/>
@@ -293,16 +309,19 @@
      </xsl:if>
     </td>
 
-    <td valign="top" width="50%">
-     <!-- show the general group, or more accurately, the title's group -->
-     <table cellspacing="1" cellpadding="0" width="100%">
-      <tbody>
+    <td valign="top">
+
+     <!-- show the general group, or more accurately, the title's group -->     
+     <table width="50%" class="category">
+      <thead>
        <tr class="category">
-        <td colspan="2">
+        <th colspan="2">
          <xsl:value-of select="$titleCat"/>
-        </td>
+        </th>
        </tr>
-       <!-- the year and nationality have alreayd been shown, but the film
+       </thead>
+       <tbody>
+       <!-- the year and nationality have already been shown, but the film
             might have multiple values, so go ahead and show them again -->
        <xsl:for-each select="key('fieldsByCat', $titleCat)">
         <xsl:if test="@name != 'title'">
@@ -322,18 +341,18 @@
       </tbody>
      </table>
 
-    </td>
-    <td valign="top" width="50%">
      <!-- now for the cast -->
      <xsl:if test="tc:casts">
       <xsl:variable name="castField" select="key('fieldsByName', 'cast')"/>
-      <table cellspacing="1" cellpadding="0" width="100%">
+      <table width="50%" class="category">
        <thead>
         <tr class="category">
-         <td colspan="5"> <!-- never more than 5 columns -->
+         <th colspan="2">
           <xsl:value-of select="$castField/@title"/>
-         </td>
+         </th>
         </tr>
+       </thead>
+       <tbody>
         <xsl:if test="$castField/tc:prop[@name = 'column1']">
          <xsl:variable name="castCols" select="$castField/tc:prop[@name = 'columns']"/>
          <tr>
@@ -345,17 +364,15 @@
           </xsl:call-template>
          </tr>
         </xsl:if>
-       </thead>
-       <tbody>
         <xsl:for-each select="$entry/tc:casts/tc:cast">
          <tr>
           <xsl:for-each select="tc:column">
-           <td width="{floor(100 div count(../tc:column))}%">
+           <td>
             <xsl:if test="position() = 1">
-             <xsl:value-of select="."/>
+             <xsl:attribute name="class">person</xsl:attribute><xsl:value-of select="."/>
             </xsl:if>
             <xsl:if test="position() &gt; 1">
-             <em><xsl:value-of select="."/></em>
+             <xsl:attribute name="class">role</xsl:attribute><xsl:value-of select="."/>
             </xsl:if>
             <xsl:text>&#160;</xsl:text>
            </td>
@@ -365,12 +382,6 @@
        </tbody>
       </table>
      </xsl:if>
-    </td>
-   </tr>
-  </tbody>
- </table>
-
- <br clear="all"/>
 
  <!-- now for every thing else -->
  <!-- write categories other than general and images -->
@@ -378,20 +389,22 @@
  <xsl:for-each select="$categories[. != $titleCat and
                                    ($castCat = '' or . != $castCat) and
                                    key('fieldsByCat',.)[1]/@type != 10]">
-  <table cellspacing="1" cellpadding="0" width="50%" align="left" class="category">
-   <tbody>
+  <table width="50%" class="category">
+   <thead>
     <tr class="category">
-     <td colspan="2">
+     <th colspan="2">
       <xsl:value-of select="."/>
-     </td>
+     </th>
     </tr>
+    </thead>
+    <tbody>
     <xsl:for-each select="key('fieldsByCat', .)[@name != 'directors-cut' and
                           @name != 'widescreen']">
      <tr>
       <xsl:choose>
        <!-- paragraphs -->
        <xsl:when test="@type=2">
-        <td>
+        <td colspan="2">
          <p>
           <xsl:value-of select="$entry/*[local-name(.)=current()/@name]" disable-output-escaping="yes"/>
          </p>
@@ -401,7 +414,7 @@
        <!-- tables are field type 8 -->
        <!-- ok to put category name inside div instead of table here -->
        <xsl:when test="@type = 8">
-        <td>
+        <td colspan="2">
          <!-- look at number of columns -->
          <xsl:choose>
           <xsl:when test="tc:prop[@name = 'columns'] &gt; 1">
@@ -450,7 +463,7 @@
         <th>
          <xsl:value-of select="@title"/>
         </th>
-        <td width="50%">
+        <td>
          <xsl:call-template name="simple-field-value">
           <xsl:with-param name="entry" select="$entry"/>
           <xsl:with-param name="field" select="@name"/>
@@ -462,10 +475,12 @@
     </xsl:for-each>
    </tbody>
   </table>
-  <xsl:if test="position() mod 2 = 0">
-   <br clear="left"/>
-  </xsl:if>
  </xsl:for-each>
+</td>
+</tr>
+</tbody>
+</table>
+
 </xsl:template>
 
 </xsl:stylesheet>

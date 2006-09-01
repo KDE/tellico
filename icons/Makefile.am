@@ -18,7 +18,7 @@ stars7.png                stars8.png              stars9.png \
 README.icons              README.quesnay          game.png \
 file.png                  nocover_book.png        nocover_video.png \
 nocover_album.png         nocover_game.png        nocover_bibtex.png \
-nocover_comic.png
+nocover_comic.png         script.svg              script.png
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -65,7 +65,9 @@ nocover_book.png \
 nocover_bibtex.png \
 nocover_comic.png \
 nocover_game.png \
-nocover_video.png
+nocover_video.png \
+script.svg \
+script.png
 
 # probably a better way to do this
 uninstall-hook:
