@@ -18,6 +18,7 @@
 #include "../filehandler.h"
 #include "../tellico_utils.h"
 #include "../imagefactory.h"
+#include "../image.h"
 
 #include <config.h>
 

@@ -23,7 +23,6 @@ class QDomElement;
 class QCheckBox;
 
 #include "exporter.h"
-#include "../image.h"
 #include "../stringset.h"
 
 namespace Tellico {
@@ -61,7 +60,7 @@ private:
   void exportCollectionXML(QDomDocument& doc, QDomElement& parent, bool format) const;
   void exportFieldXML(QDomDocument& doc, QDomElement& parent, Data::FieldPtr field) const;
   void exportEntryXML(QDomDocument& doc, QDomElement& parent, Data::EntryPtr entry, bool format) const;
-  void exportImageXML(QDomDocument& doc, QDomElement& parent, const Data::Image& image) const;
+  void exportImageXML(QDomDocument& doc, QDomElement& parent, const QString& imageID) const;
   void exportGroupXML(QDomDocument& doc, QDomElement& parent) const;
   void exportFilterXML(QDomDocument& doc, QDomElement& parent, FilterPtr filter) const;
   void exportBorrowerXML(QDomDocument& doc, QDomElement& parent, Data::BorrowerPtr borrower) const;

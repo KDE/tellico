@@ -343,9 +343,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 #>- 	      exit 1;; \
 #>- 	  esac; \
 #>- 	done; \
-#>- 	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  xslt/entry-templates/Makefile'; \
+#>- 	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  xslt/entry-templates/Makefile'; \
 #>- 	cd $(top_srcdir) && \
-#>- 	  $(AUTOMAKE) --foreign  xslt/entry-templates/Makefile
+#>- 	  $(AUTOMAKE) --gnu  xslt/entry-templates/Makefile
 #>+ 12
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -355,9 +355,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  xslt/entry-templates/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  xslt/entry-templates/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  xslt/entry-templates/Makefile
+	  $(AUTOMAKE) --gnu  xslt/entry-templates/Makefile
 	cd $(top_srcdir) && perl admin/am_edit -padmin xslt/entry-templates/Makefile.in
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
@@ -554,9 +554,9 @@ force-reedit:
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  xslt/entry-templates/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  xslt/entry-templates/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  xslt/entry-templates/Makefile
+	  $(AUTOMAKE) --gnu  xslt/entry-templates/Makefile
 	cd $(top_srcdir) && perl admin/am_edit -padmin xslt/entry-templates/Makefile.in
 
 

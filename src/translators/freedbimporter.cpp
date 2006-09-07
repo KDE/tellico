@@ -105,7 +105,7 @@ void FreeDBImporter::readCDROM() {
   QCString drive = QFile::encodeName(drivePath);
   QValueList<uint> lengths;
   KCDDB::TrackOffsetList list;
-#if 1
+#if 0
   // a1107d0a - Kruder & Dorfmeister - The K&D Sessions - Disc One.
 /*  list
     << 150      // First track start.
@@ -320,7 +320,8 @@ void FreeDBImporter::readCache() {
       continue;
     }
     QTextStream ts(&file);
-    ts.setEncoding(QTextStream::Locale);
+    // libkcddb always writes the cache files in utf-8
+    ts.setEncoding(QTextStream::UnicodeUTF8);
     QString cddbData = ts.read();
     file.close();
 
@@ -459,7 +460,8 @@ QWidget* FreeDBImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
                                      "contained in the default cache folders."));
 
   // cddb cache stuff
-  m_buttonGroup = new QButtonGroup(0);
+  m_buttonGroup = new QButtonGroup(m_widget);
+  m_buttonGroup->hide(); // only use as button parent
   m_buttonGroup->setExclusive(true);
   m_buttonGroup->insert(m_radioCDROM);
   m_buttonGroup->insert(m_radioCache);

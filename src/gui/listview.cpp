@@ -13,7 +13,6 @@
 
 #include "listview.h"
 #include "../controller.h"
-#include "../loanitem.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 

@@ -31,6 +31,8 @@
 namespace {
   static const uint IMAGE_WIDGET_BUTTON_MARGIN = 8;
   static const uint IMAGE_WIDGET_IMAGE_MARGIN = 4;
+  static const uint MAX_UNSCALED_WIDTH = 640;
+  static const uint MAX_UNSCALED_HEIGHT = 640;
 }
 
 using Tellico::GUI::ImageWidget;
@@ -65,7 +67,7 @@ void ImageWidget::setImage(const QString& id_) {
     return;
   }
   m_imageID = id_;
-  m_pixmap = ImageFactory::pixmap(id_);
+  m_pixmap = ImageFactory::pixmap(id_, MAX_UNSCALED_WIDTH, MAX_UNSCALED_HEIGHT);
   m_scaled = QPixmap();
   scale();
 

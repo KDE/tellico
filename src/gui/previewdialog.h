@@ -33,10 +33,8 @@ public:
   PreviewDialog(QWidget* parent);
   ~PreviewDialog();
 
-  QString tempDir() const;
-
   void setXSLTFile(const QString& file);
-  void setXSLTOptions(const StyleOptions& options);
+  void setXSLTOptions(StyleOptions options);
   void showEntry(Data::EntryPtr entry);
 
 private:

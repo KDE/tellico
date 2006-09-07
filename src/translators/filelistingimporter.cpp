@@ -97,7 +97,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   for(KFileItemListIterator it(m_files); !m_cancelled && it.current(); ++it, ++j) {
     Data::EntryPtr entry = new Data::Entry(m_coll);
 
-    KURL u = it.current()->url();
+    const KURL u = it.current()->url();
     entry->setField(title,  u.fileName());
     entry->setField(url,    u.url());
     entry->setField(desc,   it.current()->mimeComment());

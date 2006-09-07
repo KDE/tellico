@@ -1,3 +1,27 @@
+2006-09-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.1.
+
+2006-09-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed CDDB cache importer to always assume utf-8, as in libkcddb.
+	* Changed bibtex exporter to add braces or quotes around url fields.
+
+2006-09-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed infinite loop in file listing importer.
+	* Increased default image cache size to 10 meg.
+	* Reworked image loading to avoid reloading large images as much as possible.
+
+2006-09-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with CDDB not working (always using debug for Pink Floyd!)
+
+2006-09-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with completion not working in filter dialog.
+	* Fixed bug with template image gradients not getting updated properly.
+
 2006-08-31  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.

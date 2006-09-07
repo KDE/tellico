@@ -106,7 +106,8 @@ void EntryView::showEntry(Data::EntryPtr entry_) {
   }
   exporter.setOptions(opt);
   QDomDocument dom = exporter.exportXML();
-//  kdDebug() << dom.toString() << endl;
+
+//  myDebug() << dom.toString() << endl;
 #if 0
   kdWarning() << "EntryView::showEntry() - turn me off!" << endl;
   QFile f1(QString::fromLatin1("/tmp/test.xml"));
@@ -116,12 +117,6 @@ void EntryView::showEntry(Data::EntryPtr entry_) {
   }
   f1.close();
 #endif
-
-  if(Data::Document::self()->allImagesOnDisk()) {
-    m_handler->addStringParam("imgdir",  QFile::encodeName(ImageFactory::dataDir()));
-  } else {
-    m_handler->addStringParam("imgdir",  QFile::encodeName(ImageFactory::tempDir()));
-  }
 
   QString html = m_handler->applyStylesheet(dom.toString());
   // write out image files
@@ -148,7 +143,7 @@ void EntryView::showEntry(Data::EntryPtr entry_) {
   f2.close();
 #endif
 
-//  kdDebug() << html << endl;
+//  myDebug() << html << endl;
   write(html);
   end();
   // not need anymore?
@@ -181,13 +176,14 @@ void EntryView::setXSLTFile(const QString& file_) {
     }
   }
 
+  const int type = m_entry ? m_entry->collection()->type() : Kernel::self()->collectionType();
+
   // we need to know if the colors changed from last time, in case
   // we need to do that ugly hack to reload the cache
   bool reloadImages = m_useGradientImages;
   // if m_useGradientImages is false, then we don't even need to check
   // if there's no handler, there there's _no way_ to check
   if(m_handler && reloadImages) {
-    const int type = m_entry ? m_entry->collection()->type() : Kernel::self()->collectionType();
     // the only two colors that matter for the gradients are the base color
     // and highlight base color
     const QCString& oldBase = m_handler->param("bgcolor");
@@ -206,7 +202,8 @@ void EntryView::setXSLTFile(const QString& file_) {
       m_checkCommonFile = false;
       delete m_handler;
       m_handler = new XSLTHandler(QFile::encodeName(m_xsltFile));
-    } else if(!m_handler->isValid()) {
+    }
+    if(!m_handler->isValid()) {
       kdWarning() << "EntryView::setXSLTFile() - invalid xslt handler" << endl;
       clear();
       delete m_handler;
@@ -215,13 +212,18 @@ void EntryView::setXSLTFile(const QString& file_) {
     }
   }
 
-  const int type = m_entry ? m_entry->collection()->type() : Kernel::self()->collectionType();
   m_handler->addStringParam("font",     Config::templateFont(type).family().latin1());
   m_handler->addStringParam("fontsize", QCString().setNum(Config::templateFont(type).pointSize()));
   m_handler->addStringParam("bgcolor",  Config::templateBaseColor(type).name().latin1());
   m_handler->addStringParam("fgcolor",  Config::templateTextColor(type).name().latin1());
   m_handler->addStringParam("color1",   Config::templateHighlightedTextColor(type).name().latin1());
   m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().latin1());
+
+  if(Data::Document::self()->allImagesOnDisk()) {
+    m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::dataDir()));
+  } else {
+    m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
+  }
 
   // look for a file that gets installed to know the installation directory
   QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png"));
@@ -282,13 +284,13 @@ void EntryView::slotReloadEntry() {
 }
 
 void EntryView::setXSLTOptions(const StyleOptions& opt_) {
-  m_handler->addStringParam("font", opt_.fontFamily.latin1());
+  m_handler->addStringParam("font",     opt_.fontFamily.latin1());
   m_handler->addStringParam("fontsize", QCString().setNum(opt_.fontSize));
-  m_handler->addStringParam("bgcolor", opt_.baseColor.name().latin1());
-  m_handler->addStringParam("fgcolor", opt_.textColor.name().latin1());
-  m_handler->addStringParam("color1", opt_.highlightedTextColor.name().latin1());
-  m_handler->addStringParam("color2", opt_.highlightedBaseColor.name().latin1());
-  m_handler->addStringParam("imgdir", QFile::encodeName(opt_.imgDir));
+  m_handler->addStringParam("bgcolor",  opt_.baseColor.name().latin1());
+  m_handler->addStringParam("fgcolor",  opt_.textColor.name().latin1());
+  m_handler->addStringParam("color1",   opt_.highlightedTextColor.name().latin1());
+  m_handler->addStringParam("color2",   opt_.highlightedBaseColor.name().latin1());
+  m_handler->addStringParam("imgdir",   QFile::encodeName(opt_.imgDir));
 }
 
 
@@ -303,7 +305,15 @@ void EntryView::slotResetColors() {
 void EntryView::resetColors() {
   ImageFactory::createStyleImages(); // recreate gradients
 
-  QString dir = Data::Document::self()->allImagesOnDisk() ? ImageFactory::dataDir() : ImageFactory::tempDir();
+  QString dir = m_handler ? m_handler->param("imgdir") : QString();
+  if(dir.isEmpty()) {
+    dir = Data::Document::self()->allImagesOnDisk() ? ImageFactory::dataDir() : ImageFactory::tempDir();
+  } else {
+    // it's a string param, so it has quotes on both sides
+    dir = dir.mid(1);
+    dir.truncate(dir.length()-1);
+  }
+
   // this is a rather bad hack to get around the fact that the image cache is not reloaded when
   // the gradient files are changed on disk. Setting the URLArgs for write() calls doesn't seem to
   // work. So force a reload with a temp file, then catch the completed signal and repaint

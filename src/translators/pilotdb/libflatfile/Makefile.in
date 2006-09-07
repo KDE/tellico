@@ -375,9 +375,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 #>- 	      exit 1;; \
 #>- 	  esac; \
 #>- 	done; \
-#>- 	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/translators/pilotdb/libflatfile/Makefile'; \
+#>- 	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/translators/pilotdb/libflatfile/Makefile'; \
 #>- 	cd $(top_srcdir) && \
-#>- 	  $(AUTOMAKE) --foreign  src/translators/pilotdb/libflatfile/Makefile
+#>- 	  $(AUTOMAKE) --gnu  src/translators/pilotdb/libflatfile/Makefile
 #>+ 12
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -387,9 +387,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/translators/pilotdb/libflatfile/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/translators/pilotdb/libflatfile/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  src/translators/pilotdb/libflatfile/Makefile
+	  $(AUTOMAKE) --gnu  src/translators/pilotdb/libflatfile/Makefile
 	cd $(top_srcdir) && perl admin/am_edit -padmin src/translators/pilotdb/libflatfile/Makefile.in
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
@@ -646,9 +646,9 @@ force-reedit:
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/translators/pilotdb/libflatfile/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/translators/pilotdb/libflatfile/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  src/translators/pilotdb/libflatfile/Makefile
+	  $(AUTOMAKE) --gnu  src/translators/pilotdb/libflatfile/Makefile
 	cd $(top_srcdir) && perl admin/am_edit -padmin src/translators/pilotdb/libflatfile/Makefile.in
 
 

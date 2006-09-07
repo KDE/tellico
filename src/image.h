@@ -16,6 +16,8 @@
 
 #include <qimage.h>
 
+class KPixmapIO;
+
 namespace Tellico {
   class ImageFactory;
   class FileHandler;
@@ -31,7 +33,7 @@ friend class Tellico::ImageFactory;
 friend class Tellico::FileHandler;
 
 public:
-  Image() : QImage(), m_id(QString::null) {}
+  ~Image();
 
   const QString& id() const { return m_id; };
   const QCString& format() const { return m_format; };
@@ -45,12 +47,33 @@ public:
   static QByteArray byteArray(const QImage& img, const QCString& outputFormat);
 
 private:
+  Image();
   explicit Image(const QString& filename);
   Image(const QImage& image, const QString& format);
   Image(const QByteArray& data, const QString& format, const QString& id);
 
+  //disable copy
+  Image(const Image&);
+  Image& operator=(const Image&);
+
+  void setID(const QString& id);
+  void calculateID();
+
   QString m_id;
   QCString m_format;
+
+  static KPixmapIO* s_pixmapIO;
+  static KPixmapIO* io();
+};
+
+class ImageInfo {
+public:
+  ImageInfo() {}
+  explicit ImageInfo(const Image& img);
+  QString id;
+  QCString format;
+  int width;
+  int height;
 };
 
   } // end namespace

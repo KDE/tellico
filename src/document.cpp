@@ -252,9 +252,9 @@ void Document::appendCollection(CollPtr coll_) {
 
   EntryVec entries = coll_->entries();
   for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
-    coll_->removeEntry(entry); // necessary so the entry->groups() get cleared
-    entry->setCollection(m_coll);
-    m_coll->addEntry(entry);
+    Data::EntryPtr newEntry = new Data::Entry(*entry);
+    newEntry->setCollection(m_coll);
+    m_coll->addEntry(newEntry);
   }
   // TODO: merge filters and loans
   m_coll->blockSignals(false);
@@ -332,11 +332,11 @@ Tellico::Data::MergePair Document::mergeCollection(CollPtr coll_) {
       }
     }
     if(!matches) {
-      coll_->removeEntry(newIt); // necessary so entry->groups() get cleared
-      newIt->setCollection(m_coll);
-      m_coll->addEntry(newIt);
+      Data::EntryPtr e = new Data::Entry(*newIt);
+      e->setCollection(m_coll);
+      m_coll->addEntry(e);
       // keep track of which entries got added
-      pair.first.append(newIt);
+      pair.first.append(e);
     }
   }
   // TODO: merge filters and loans
@@ -638,7 +638,7 @@ void Document::removeImagesNotInCollection(Data::EntryVec entries_) {
   const QStringList realImagesToRemove = imagesToRemove.toList();
   for(QStringList::ConstIterator it = realImagesToRemove.begin(); it != realImagesToRemove.end(); ++it) {
     if(!images.has(*it)) {
-      ImageFactory::removeImage(*it, true /* dict only */); // doesn't delete, just remove link
+      ImageFactory::removeImage(*it, false); // doesn't delete, just remove link
     }
   }
 }

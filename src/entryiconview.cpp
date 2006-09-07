@@ -310,7 +310,9 @@ void EntryIconViewItem::updatePixmap() {
   if(imageField.isEmpty()) {
     setPixmap(view->defaultPixmap());
   } else {
-    QPixmap p = ImageFactory::pixmap(m_entry->field(imageField), view->maxAllowedIconWidth(), view->maxAllowedIconWidth());
+    QPixmap p = ImageFactory::pixmap(m_entry->field(imageField),
+                                     view->maxAllowedIconWidth(),
+                                     view->maxAllowedIconWidth());
     if(p.isNull()) {
       setPixmap(view->defaultPixmap());
     } else {

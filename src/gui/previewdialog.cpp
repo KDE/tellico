@@ -14,6 +14,7 @@
 #include "previewdialog.h"
 #include "../entryview.h"
 #include "../entry.h"
+#include "../imagefactory.h" // for StyleOptions
 
 #include <klocale.h>
 #include <ktempdir.h>
@@ -38,15 +39,13 @@ PreviewDialog::~PreviewDialog() {
   m_tempDir = 0;
 }
 
-QString PreviewDialog::tempDir() const {
-  return m_tempDir->name();
-}
-
 void PreviewDialog::setXSLTFile(const QString& file_) {
   m_view->setXSLTFile(file_);
 }
 
-void PreviewDialog::setXSLTOptions(const StyleOptions& options_) {
+void PreviewDialog::setXSLTOptions(StyleOptions options_) {
+  options_.imgDir = m_tempDir->name(); // images always get written to temp dir
+  ImageFactory::createStyleImages(options_);
   m_view->setXSLTOptions(options_);
 }
 

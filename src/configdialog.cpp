@@ -944,11 +944,6 @@ void ConfigDialog::slotShowTemplatePreview() {
   options.textColor  = m_textColorCombo->color();
   options.highlightedTextColor = m_highTextColorCombo->color();
   options.highlightedBaseColor = m_highBaseColorCombo->color();
-
-  //also need to write temporary images
-  options.imgDir = dlg->tempDir();
-  ImageFactory::createStyleImages(options);
-
   dlg->setXSLTOptions(options);
 
   Data::CollPtr c = CollectionFactory::collection(Kernel::self()->collectionType(), true);
@@ -973,6 +968,8 @@ void ConfigDialog::slotShowTemplatePreview() {
 
   dlg->showEntry(e);
   dlg->show();
+  // dlg gets deleted by itself
+  // the finished() signal is connected in its constructor to delayedDestruct
 }
 
 void ConfigDialog::loadTemplateList() {

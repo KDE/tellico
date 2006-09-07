@@ -1037,6 +1037,8 @@ void MainWindow::slotFileNew(int type_) {
     slotEnableOpenedActions();
     slotEnableModifiedActions(false);
     m_newDocument = true;
+    ImageFactory::clean();
+    ImageFactory::createStyleImages(); // they get deleted when cleaned
   }
 
   StatusBar::self()->clearStatus();
@@ -1074,6 +1076,8 @@ void MainWindow::slotFileOpen(const KURL& url_) {
     if(openURL(url_)) {
       m_fileOpenRecent->addURL(url_);
       m_fileOpenRecent->setCurrentItem(-1);
+      ImageFactory::clean();
+      ImageFactory::createStyleImages(); // they get deleted when cleaned
     }
   }
 

@@ -27,6 +27,7 @@ class KTempDir;
 namespace Tellico {
   namespace Data {
     class Image;
+    class ImageInfo;
   }
 
 class StyleOptions {
@@ -95,7 +96,6 @@ public:
    */
   static QString addImage(const QByteArray& data, const QString& format, const QString& id);
 
-  static QString addCachedImage(const QString& id, CacheDir dir);
   /**
    * Writes an image to a file. ImageFactory keeps track of which images were already written
    * if the location is the same as the tempdir.
@@ -116,10 +116,11 @@ public:
    * @return The image referencenter
    */
   static const Data::Image& imageById(const QString& id);
+  static Data::ImageInfo imageInfo(const QString& id);
   // basically returns !imageById().isNull()
   static bool validImage(const QString& id);
 
-  static QPixmap pixmap(const QString& id_, int w=0, int h=0);
+  static QPixmap pixmap(const QString& id, int w, int h);
 
   /**
    * Clean the temp dir and remove all temporary image files
@@ -130,7 +131,7 @@ public:
    */
   static void createStyleImages(const StyleOptions& options = StyleOptions());
 
-  static void removeImage(const QString& id_, bool dictOnly = false, bool deleteImage = false);
+  static void removeImage(const QString& id_, bool deleteImage);
   static StringSet imagesNotInCache();
 
 private:
@@ -166,11 +167,13 @@ private:
   static const Data::Image& addImageImpl(const QByteArray& data, const QString& format, const QString& id);
 
   static const Data::Image& addCachedImageImpl(const QString& id, CacheDir dir);
+  static bool hasImage(const QString& id);
 
   static bool s_needInit;
   static QDict<Data::Image> s_imageDict;
   static QCache<Data::Image> s_imageCache;
   static QCache<QPixmap> s_pixmapCache;
+  static QMap<QString, Data::ImageInfo> s_imageInfoMap;
   static StringSet s_imagesInTmpDir; // the id's of the images written to tmp directory
   static KTempDir* s_tmpDir;
   static const Data::Image s_null;

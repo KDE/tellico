@@ -123,11 +123,7 @@ void FilterRuleWidget::slotEditRegExp() {
 }
 
 void FilterRuleWidget::slotRuleFieldChanged(int which_) {
-  // The 5th and 6th functions are for regexps, so we don't care
-  if(which_ > 3) {
-    m_ruleValue->setCompletionObject(0);
-    return;
-  }
+  Q_UNUSED(which_);
   QString fieldTitle = m_ruleField->currentText();
   if(fieldTitle.isEmpty() || fieldTitle[0] == '<') {
     m_ruleValue->setCompletionObject(0);

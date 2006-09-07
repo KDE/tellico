@@ -130,7 +130,7 @@ Config::Config(  )
   itemMaxIconSize = new KConfigSkeleton::ItemInt( currentGroup(), QString::fromLatin1( "Max Icon Size" ), mMaxIconSize, 96 );
   addItem( itemMaxIconSize, QString::fromLatin1( "MaxIconSize" ) );
   KConfigSkeleton::ItemInt  *itemImageCacheSize;
-  itemImageCacheSize = new KConfigSkeleton::ItemInt( currentGroup(), QString::fromLatin1( "Image Cache Size" ), mImageCacheSize, (5 * 1024 * 1024) );
+  itemImageCacheSize = new KConfigSkeleton::ItemInt( currentGroup(), QString::fromLatin1( "Image Cache Size" ), mImageCacheSize, (10 * 1024 * 1024) );
   addItem( itemImageCacheSize, QString::fromLatin1( "ImageCacheSize" ) );
   KConfigSkeleton::ItemUInt  *itemMaxCustomURLSettings;
   itemMaxCustomURLSettings = new KConfigSkeleton::ItemUInt( currentGroup(), QString::fromLatin1( "Max Custom URL Settings" ), mMaxCustomURLSettings, 9 );

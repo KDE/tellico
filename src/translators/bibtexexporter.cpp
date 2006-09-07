@@ -290,7 +290,10 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
     }
 
     if(m_packageURL && fIt->type() == Data::Field::URL) {
-      value = QString::fromLatin1("\\url{") + value + QString::fromLatin1("}");
+      bool b = BibtexHandler::s_quoteStyle == BibtexHandler::BRACES;
+      value = (b ? QChar('{') : QChar('"'))
+            + QString::fromLatin1("\\url{") + value + QChar('}')
+            + (b ? QChar('}') : QChar('"'));
     } else if(fIt->type() != Data::Field::Number) {
       // numbers aren't escaped, nor will they have macros
       // if m_expandMacros is true, then macros is empty, so this is ok even then

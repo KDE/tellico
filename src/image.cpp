@@ -16,37 +16,45 @@
 
 #include <kmdcodec.h>
 #include <kpixmapio.h>
+#include <kstaticdeleter.h>
 
 #include <qbuffer.h>
 
 using Tellico::Data::Image;
+using Tellico::Data::ImageInfo;
+
+KPixmapIO* Image::s_pixmapIO = 0;
+static KStaticDeleter<KPixmapIO> staticKPixmapIODeleter;
+KPixmapIO* Image::io() {
+  if(!s_pixmapIO) {
+    staticKPixmapIODeleter.setObject(s_pixmapIO, new KPixmapIO());
+  }
+  return s_pixmapIO;
+}
+
+Image::Image() : QImage(), m_id(QString::null) {
+}
 
 // I'm using the MD5 hash as the id. I consider it rather unlikely that two images in one
 // collection could ever have the same hash, and this lets me do a fast comparison of two images
 // simply by comparing their ids.
 Image::Image(const QString& filename_) : QImage(filename_) {
   m_format = QImage::imageFormat(filename_);
-
-  KMD5 md5(byteArray());
-  // the id will eventually be used as a filename
-  if(!isNull()) {
-    m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
-  }
+  calculateID();
 }
 
 Image::Image(const QImage& img_, const QString& format_) : QImage(img_), m_format(format_) {
-  KMD5 md5(byteArray());
-  // the id will eventually be used as a filename
-  if(!isNull()) {
-    m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
-  }
+  calculateID();
 }
 
 Image::Image(const QByteArray& data_, const QString& format_, const QString& id_)
     : QImage(data_), m_id(id_), m_format(format_) {
   if(isNull()) {
-    m_id = QString::null;
+    m_id = QString();
   }
+}
+
+Image::~Image() {
 }
 
 QByteArray Image::byteArray() const {
@@ -59,16 +67,14 @@ bool Image::isNull() const {
 }
 
 QPixmap Image::convertToPixmap() const {
-  static KPixmapIO io;
-  return io.convertToPixmap(*this);
+  return io()->convertToPixmap(*this);
 }
 
 QPixmap Image::convertToPixmap(int w_, int h_) const {
-  static KPixmapIO io;
   if(w_ < width() || h_ < height()) {
-    return io.convertToPixmap(this->smoothScale(w_, h_, ScaleMin));
+    return io()->convertToPixmap(this->smoothScale(w_, h_, ScaleMin));
   } else {
-    return io.convertToPixmap(*this);
+    return io()->convertToPixmap(*this);
   }
 }
 
@@ -92,4 +98,25 @@ QByteArray Image::byteArray(const QImage& img_, const QCString& outputFormat_) {
   iio.write();
   buf.close();
   return ba;
+}
+
+void Image::setID(const QString& id_) {
+  m_id = id_;
+}
+
+void Image::calculateID() {
+  // the id will eventually be used as a filename
+  if(!isNull()) {
+    KMD5 md5(byteArray());
+    m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
+  }
+}
+
+/******************************************************/
+
+ImageInfo::ImageInfo(const Image& img_)
+    : id(img_.id())
+    , format(img_.format())
+    , width(img_.width())
+    , height(img_.height()) {
 }

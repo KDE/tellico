@@ -14,6 +14,7 @@
 #include "tellicoxmlexporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../imagefactory.h"
+#include "../image.h"
 #include "../controller.h" // needed for getting groupView pointer
 #include "../entryitem.h"
 #include "../latin1literal.h"
@@ -65,7 +66,8 @@ bool TellicoXMLExporter::exec() {
     return false;
   }
   return FileHandler::writeTextURL(url(), doc.toString(),
-                                   options() & ExportUTF8, options() & Export::ExportForce);
+                                   options() & ExportUTF8,
+                                   options() & Export::ExportForce);
 }
 
 QDomDocument TellicoXMLExporter::exportXML() const {
@@ -153,9 +155,9 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   if(!m_images.isEmpty() && (options() & Export::ExportImages)) {
     QDomElement imgsElem = dom_.createElement(QString::fromLatin1("images"));
     collElem.appendChild(imgsElem);
-    QStringList imageIds = m_images.toList();
+    const QStringList imageIds = m_images.toList();
     for(QStringList::ConstIterator it = imageIds.begin(); it != imageIds.end(); ++it) {
-      exportImageXML(dom_, imgsElem, ImageFactory::imageById(*it));
+      exportImageXML(dom_, imgsElem, *it);
     }
   }
 
@@ -327,21 +329,34 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
   parent_.appendChild(entryElem);
 }
 
-void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_, const Data::Image& img_) const {
-  if(img_.isNull()) {
-//    kdDebug() << "TellicoXMLExporter::exportImageXML() - null image!" << endl;
+void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_, const QString& id_) const {
+  if(id_.isEmpty()) {
+//    myDebug() << "TellicoXMLExporter::exportImageXML() - empty image!" << endl;
     return;
   }
-//  kdDebug() << "TellicoXMLExporter::exportImageXML() - id = " << img_.id() << endl;
+//  myDebug() << "TellicoXMLExporter::exportImageXML() - id = " << id_ << endl;
 
   QDomElement imgElem = dom_.createElement(QString::fromLatin1("image"));
-  imgElem.setAttribute(QString::fromLatin1("format"), img_.format());
-  imgElem.setAttribute(QString::fromLatin1("id"),     img_.id());
-  imgElem.setAttribute(QString::fromLatin1("width"),  img_.width());
-  imgElem.setAttribute(QString::fromLatin1("height"), img_.height());
   if(m_includeImages) {
-    QCString imgText = KCodecs::base64Encode(img_.byteArray());
+    const Data::Image& img = ImageFactory::imageById(id_);
+    if(img.isNull()) {
+      return;
+    }
+    imgElem.setAttribute(QString::fromLatin1("format"), img.format());
+    imgElem.setAttribute(QString::fromLatin1("id"),     img.id());
+    imgElem.setAttribute(QString::fromLatin1("width"),  img.width());
+    imgElem.setAttribute(QString::fromLatin1("height"), img.height());
+    QCString imgText = KCodecs::base64Encode(img.byteArray());
     imgElem.appendChild(dom_.createTextNode(QString::fromLatin1(imgText)));
+  } else {
+    const Data::ImageInfo& info = ImageFactory::imageInfo(id_);
+    if(info.id.isEmpty()) {
+      return;
+    }
+    imgElem.setAttribute(QString::fromLatin1("format"), info.format);
+    imgElem.setAttribute(QString::fromLatin1("id"),     info.id);
+    imgElem.setAttribute(QString::fromLatin1("width"),  info.width);
+    imgElem.setAttribute(QString::fromLatin1("height"), info.height);
   }
   parent_.appendChild(imgElem);
 }

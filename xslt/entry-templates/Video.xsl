@@ -112,8 +112,11 @@
         padding-bottom: 1em;
    }
    table.category {
+        margin-right: 1%;
         margin-bottom: 1em;
         float: left;
+        border-collapse: collapse;
+        border-spacing: 0px;
    }
    tr.category {
         font-weight: bold;
@@ -133,13 +136,16 @@
         text-align: left;
         color: <xsl:value-of select="$color2"/>;
         background <xsl:value-of select="$color1"/>;
-        padding-left: .2em;
-        padding-right: .2em;
+        padding: 0px 0.2em 0px 0.2em;
+        white-space: nowrap;
    }
    thead th {
         color: <xsl:value-of select="$color1"/>;
         background <xsl:value-of select="$color2"/>;
         text-align: center;
+   }
+   td {
+        padding: 0px 0.2em 0px 0.2em;
    }
    td.role {
         font-style: italic;
@@ -311,8 +317,8 @@
 
     <td valign="top">
 
-     <!-- show the general group, or more accurately, the title's group -->     
-     <table width="50%" class="category">
+     <!-- show the general group, or more accurately, the title's group -->
+     <table width="49%" class="category">
       <thead>
        <tr class="category">
         <th colspan="2">
@@ -344,7 +350,7 @@
      <!-- now for the cast -->
      <xsl:if test="tc:casts">
       <xsl:variable name="castField" select="key('fieldsByName', 'cast')"/>
-      <table width="50%" class="category">
+      <table width="49%" class="category">
        <thead>
         <tr class="category">
          <th colspan="2">
@@ -389,7 +395,7 @@
  <xsl:for-each select="$categories[. != $titleCat and
                                    ($castCat = '' or . != $castCat) and
                                    key('fieldsByCat',.)[1]/@type != 10]">
-  <table width="50%" class="category">
+  <table width="49%" class="category">
    <thead>
     <tr class="category">
      <th colspan="2">
