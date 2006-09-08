@@ -222,7 +222,7 @@
       
       <!-- handle URL here, so no link created -->
       <xsl:when test="$field/@type=7">
-       <xsl:value-of select="."/>
+       <xsl:value-of select="$entry/*[local-name() = $field/@name]"/>
       </xsl:when>
 
       <!-- finally, it's just a regular value -->

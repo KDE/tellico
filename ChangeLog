@@ -1,3 +1,9 @@
+2006-09-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that could cause loss of images.
+	* Fixed URL output in Image List report.
+	* Released Tellico 1.2.2.
+
 2006-09-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.1.

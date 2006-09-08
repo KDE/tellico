@@ -56,11 +56,10 @@ bool TellicoZipExporter::exec() {
   exp.setEntries(entries());
   long opt = options();
   opt |= Export::ExportUTF8; // always export to UTF-8
-  if(!m_includeImages) {
-    opt &= ~Export::ExportImages; // the images are cached, so no need to even write them in the XML
-  }
+  opt |= Export::ExportImages; // always list the images in the xml
+  opt &= ~Export::ExportProgress; // don't show progress for xml export
   exp.setOptions(opt);
-  exp.setIncludeImages(false); // do not include images in XML
+  exp.setIncludeImages(false); // do not include the images themselves in XML
   QCString xml = exp.exportXML().toCString(); // encoded in utf-8
   ProgressManager::self()->setProgress(this, 5);
 

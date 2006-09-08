@@ -5,6 +5,7 @@
 #include "../field.h"
 
 #include <kdebug.h>
+#include <kinstance.h>
 
 bool checkTitle(QString a, QString b) {
   QString a2 = Tellico::Data::Field::formatTitle(a);
@@ -29,28 +30,23 @@ bool checkName(QString a, QString b, bool multiple=true) {
 }
 
 int main(int, char**) {
+  KInstance instance("formattest");
   kdDebug() << "\n*****************************************************" << endl;
 
   // title checks
-//  Tellico::Data::Field::setNoCapitalizeList(Tellico::Data::Field::defaultNoCapitalizationList());
-//  Tellico::Data::Field::setArticleList(Tellico::Data::Field::defaultArticleList());
   checkTitle("Title", "Title");
   checkTitle("title", "Title");
   checkTitle("the title", "Title, The");
   checkTitle("the return of the king", "Return of the King, The");
 
   // name checks
-//  Tellico::Config::setSuffixList(Tellico::Data::Field::defaultSuffixList());
-//  QStringList prefixes = Tellico::Data::Field::defaultSurnamePrefixList();
-//  prefixes += QString::fromLatin1("l'");
-//  Tellico::Data::Field::setSurnamePrefixList(prefixes);
   checkName("Name", "Name");
   checkName("First Name", "Name, First");
   checkName("First Name", "Name, First", false);
   checkName("tom swift, jr.", "Swift, Jr., Tom");
   checkName("swift, jr., tom", "Swift, Jr., Tom");
   checkName("tom de swift, jr.", "de Swift, Jr., Tom");
-  checkName("tom van der swift, jr.", "van der Swift, Jr., Tom");
+
 
   kdDebug() << "\n Formatting Test OK !" << endl;
   kdDebug() << "\n*****************************************************" << endl;

@@ -194,7 +194,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_) 
 }
 
 bool FileHandler::queryExists(const KURL& url_) {
-  if(!KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
+  if(url_.isEmpty() || !KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
     return true;
   }
 

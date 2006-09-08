@@ -199,6 +199,10 @@ bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
     return false;
   }
 
+  if(!url_.isEmpty() && !FileHandler::queryExists(url_)) {
+    return false;
+  }
+
   // exporter might need to know final URL, say for writing images or something
   m_exporter->setURL(url_);
   if(m_exportSelected->isChecked()) {
@@ -213,6 +217,9 @@ bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
   if(m_encodeUTF8->isChecked()) {
     opt |= Export::ExportUTF8;
   }
+  // since we already asked about overwriting the file, force the save
+  opt |= Export::ExportForce;
+
   m_exporter->setOptions(opt);
 
   return m_exporter->exec();

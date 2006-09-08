@@ -114,8 +114,6 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   QDomElement collElem = dom_.createElement(QString::fromLatin1("collection"));
   collElem.setAttribute(QString::fromLatin1("type"),       coll->type());
   collElem.setAttribute(QString::fromLatin1("title"),      coll->title());
-// never used
-//  collElem.setAttribute(QString::fromLatin1("entryTitle"), coll->entryTitle());
 
   QDomElement fieldsElem = dom_.createElement(QString::fromLatin1("fields"));
   collElem.appendChild(fieldsElem);
@@ -331,7 +329,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
 
 void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_, const QString& id_) const {
   if(id_.isEmpty()) {
-//    myDebug() << "TellicoXMLExporter::exportImageXML() - empty image!" << endl;
+    myDebug() << "TellicoXMLExporter::exportImageXML() - empty image!" << endl;
     return;
   }
 //  myDebug() << "TellicoXMLExporter::exportImageXML() - id = " << id_ << endl;

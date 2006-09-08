@@ -780,11 +780,11 @@ void MainWindow::initFileOpen(bool nofile_) {
 // The options that can be changed in the "Configuration..." dialog
 // are taken care of by the ConfigDialog object.
 void MainWindow::saveOptions() {
-//  kdDebug() << "MainWindow::saveOptions()" << endl;
+//  myDebug() << "MainWindow::saveOptions()" << endl;
   // for some reason, the m_config pointer is getting changed, but
   // I can't figure out where, so just to be on the safe side
   if(m_config != kapp->config()) {
-    kdDebug() << "MainWindow::saveOptions() - inconsistent KConfig pointers!" << endl;
+    myDebug() << "MainWindow::saveOptions() - inconsistent KConfig pointers!" << endl;
     m_config = kapp->config();
   }
 
@@ -904,7 +904,7 @@ void MainWindow::saveCollectionOptions(Data::CollPtr coll_) {
 }
 
 void MainWindow::readOptions() {
-//  kdDebug() << "MainWindow::readOptions()" << endl;
+//  myDebug() << "MainWindow::readOptions()" << endl;
   // for some reason, the m_config pointer is getting changed, but
   // I can't figure out where, so just to be on the safe side
   if(m_config != kapp->config()) {
@@ -1037,8 +1037,6 @@ void MainWindow::slotFileNew(int type_) {
     slotEnableOpenedActions();
     slotEnableModifiedActions(false);
     m_newDocument = true;
-    ImageFactory::clean();
-    ImageFactory::createStyleImages(); // they get deleted when cleaned
   }
 
   StatusBar::self()->clearStatus();
@@ -1076,8 +1074,6 @@ void MainWindow::slotFileOpen(const KURL& url_) {
     if(openURL(url_)) {
       m_fileOpenRecent->addURL(url_);
       m_fileOpenRecent->setCurrentItem(-1);
-      ImageFactory::clean();
-      ImageFactory::createStyleImages(); // they get deleted when cleaned
     }
   }
 
@@ -1298,7 +1294,7 @@ void MainWindow::slotFilePrint() {
 
   // don't have busy cursor when showing the print dialog
   cs.restore();
-//  kdDebug() << html << endl;
+//  myDebug() << html << endl;
   slotStatusMsg(i18n("Printing..."));
   doPrint(html);
 
@@ -1330,7 +1326,7 @@ void MainWindow::slotEditPaste() {
 }
 
 void MainWindow::activateEditSlot(const char* slot_) {
-//  kdDebug() << "MainWindow::activateEditSlot() - " << slot_ << endl;
+//  myDebug() << "MainWindow::activateEditSlot() - " << slot_ << endl;
   // the edit widget is the only one that copies, cuts, and pastes
   QWidget* w;
   if(m_editDialog->isVisible()) {
@@ -1582,7 +1578,7 @@ void MainWindow::slotUpdateCollectionToolBar(Data::CollPtr coll_) {
 }
 
 void MainWindow::slotChangeGrouping() {
-//  kdDebug() << "MainWindow::slotChangeGrouping()" << endl;
+//  myDebug() << "MainWindow::slotChangeGrouping()" << endl;
   QString title = m_entryGrouping->currentText();
 
   QString groupName = Kernel::self()->fieldNameByTitle(title);
@@ -1598,7 +1594,7 @@ void MainWindow::slotChangeGrouping() {
 }
 
 void MainWindow::slotShowReportDialog() {
-//  kdDebug() << "MainWindow::slotShowReport()" << endl;
+//  myDebug() << "MainWindow::slotShowReport()" << endl;
   if(!m_reportDlg) {
     m_reportDlg = new ReportDialog(this);
     connect(m_reportDlg, SIGNAL(finished()),
@@ -1657,7 +1653,7 @@ void MainWindow::doPrint(const QString& html_) {
     const int pageHeight = metrics.height() - 2*headerHeight;
     const int pageWidth = metrics.width();
 
-//    kdDebug() << "MainWindow::doPrint() - pageHeight = " << pageHeight << ""
+//    myDebug() << "MainWindow::doPrint() - pageHeight = " << pageHeight << ""
 //                 "; contentsHeight = " << w->view()->contentsHeight() << endl;
 
     int top = 0;
@@ -1900,7 +1896,7 @@ void MainWindow::slotFileExport(int format_) {
       break;
 
     case Export::Dir:
-      kdDebug() << "MainWindow::slotFileExport() - ExportDir not implemented!" << endl;
+      myDebug() << "MainWindow::slotFileExport() - ExportDir not implemented!" << endl;
       break;
 
     case Export::File:
@@ -2201,7 +2197,7 @@ void MainWindow::updateCaption(bool modified_) {
 }
 
 void MainWindow::slotUpdateToolbarIcons() {
-  //  kdDebug() << "MainWindow::slotUpdateToolbarIcons() " << endl;
+  //  myDebug() << "MainWindow::slotUpdateToolbarIcons() " << endl;
   // first change the icon for the menu item
   m_newEntry->setIconSet(UserIconSet(Kernel::self()->collectionTypeName()));
 
