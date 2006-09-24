@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
-"POT-Creation-Date: 2006-08-30 20:27-0700\n"
-"PO-Revision-Date: 2006-08-17 10:06+0200\n"
+"POT-Creation-Date: 2006-09-24 09:08-0700\n"
+"PO-Revision-Date: 2006-09-22 18:44+0200\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -399,31 +399,31 @@ msgstr "matchar inte reguljärt uttryck"
 msgid "Edit..."
 msgstr "Redigera..."
 
-#: filterdialog.cpp:286
+#: filterdialog.cpp:282
 msgid "Advanced Filter"
 msgstr "Avancerat filter"
 
-#: commands/filtercommand.cpp:100 filterdialog.cpp:286 filterview.cpp:67
+#: commands/filtercommand.cpp:100 filterdialog.cpp:282 filterview.cpp:67
 msgid "Modify Filter"
 msgstr "Ändra filter"
 
-#: filterdialog.cpp:298
+#: filterdialog.cpp:294
 msgid "Filter Criteria"
 msgstr "Filterkriteria"
 
-#: filterdialog.cpp:304
+#: filterdialog.cpp:300
 msgid "Match a&ll of the following"
 msgstr "Matchar a&lla följande"
 
-#: filterdialog.cpp:305
+#: filterdialog.cpp:301
 msgid "Match an&y of the following"
 msgstr "Matchar n&ågon av följande"
 
-#: filterdialog.cpp:315
+#: filterdialog.cpp:311
 msgid "Filter name:"
 msgstr "Filternamn:"
 
-#: filterdialog.cpp:323
+#: filterdialog.cpp:319
 msgid "&Save Filter"
 msgstr "&Spara filter"
 
@@ -435,7 +435,7 @@ msgstr "&Spara filter"
 #: collections/gamecollection.cpp:19 collections/musiccollection.cpp:19
 #: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
 #: collections/videocollection.cpp:41 collections/winecollection.cpp:19
-#: configdialog.cpp:191 fetch/imdbfetcher.cpp:578 fetch/imdbfetcher.cpp:800
+#: configdialog.cpp:191 fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:910
 #: field.cpp:39 field.cpp:71 translators/gcfilmsimporter.cpp:54
 msgid "General"
 msgstr "Allmänt"
@@ -552,12 +552,12 @@ msgstr ""
 "är endast möjligt då samlingstyperna är lika."
 
 #: importdialog.cpp:204 mainwindow.cpp:1049 mainwindow.cpp:1208
-#: translators/tellicozipexporter.cpp:38
+#: translators/tellicozipexporter.cpp:39
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Tellico-filer  (*.tc)"
 
 #: importdialog.cpp:205 importdialog.cpp:218 importdialog.cpp:222
-#: mainwindow.cpp:1051 translators/tellicoxmlexporter.cpp:59
+#: mainwindow.cpp:1051 translators/tellicoxmlexporter.cpp:60
 msgid "*.xml|XML Files (*.xml)"
 msgstr "*.xml|XML-filer  (*.xml)"
 
@@ -581,12 +581,12 @@ msgstr "*.gcf|GCfilms datafiler (*.gcf)"
 msgid "*.amc|AMC Data Files (*.amc)"
 msgstr "*.amc|AMC-datafiler (*.amc)"
 
-#: configdialog.cpp:1003 importdialog.cpp:245 mainwindow.cpp:1053
+#: configdialog.cpp:1005 importdialog.cpp:245 mainwindow.cpp:1053
 #: mainwindow.cpp:1210 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:87
-#: translators/onixexporter.cpp:65 translators/pilotdbexporter.cpp:47
-#: translators/tellicoxmlexporter.cpp:59 translators/tellicozipexporter.cpp:38
+#: translators/onixexporter.cpp:66 translators/pilotdbexporter.cpp:47
+#: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
 #: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:86
 msgid "*|All Files"
 msgstr "*|Alla filer"
@@ -685,11 +685,11 @@ msgid ""
 "Clear"
 msgstr "Rensa"
 
-#: gui/imagewidget.cpp:50
+#: gui/imagewidget.cpp:52
 msgid "Select Image..."
 msgstr "Välj bild..."
 
-#: gui/previewdialog.cpp:26
+#: gui/previewdialog.cpp:27
 msgid "Template Preview"
 msgstr "Mallgranskning"
 
@@ -1176,7 +1176,7 @@ msgstr "&Ny post..."
 msgid "Create a new entry"
 msgstr "Skapa en ny post"
 
-#: controller.cpp:596 mainwindow.cpp:533
+#: controller.cpp:598 mainwindow.cpp:533
 msgid "&Edit Entry..."
 msgstr "&Redigera post..."
 
@@ -1184,7 +1184,7 @@ msgstr "&Redigera post..."
 msgid "Edit the selected entries"
 msgstr "Redigera de valda posterna"
 
-#: controller.cpp:597 mainwindow.cpp:537
+#: controller.cpp:599 mainwindow.cpp:537
 msgid "D&uplicate Entry"
 msgstr "D&uplicera post"
 
@@ -1192,7 +1192,7 @@ msgstr "D&uplicera post"
 msgid "Copy the selected entries"
 msgstr "Kopiera valda poster"
 
-#: controller.cpp:599 mainwindow.cpp:541
+#: controller.cpp:601 mainwindow.cpp:541
 msgid "&Delete Entry"
 msgstr "&Tag bort post"
 
@@ -1280,7 +1280,7 @@ msgstr "Ci&tera post i OpenOffice.org"
 msgid "Cite the selected entries in OpenOffice.org"
 msgstr "Citera de valda fälten i OpenOffice.org"
 
-#: controller.cpp:598 mainwindow.cpp:602 rc.cpp:6
+#: controller.cpp:600 mainwindow.cpp:602 rc.cpp:6
 msgid "&Update Entry"
 msgstr "&Uppdatera post"
 
@@ -1470,7 +1470,7 @@ msgstr "Sida %1"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico upptäckte ett fel vid behandlingen av XSLT."
 
-#: entryview.cpp:175 mainwindow.cpp:1694
+#: entryview.cpp:170 mainwindow.cpp:1694
 msgid "Please check your installation."
 msgstr "Kontrollera installationen."
 
@@ -1668,45 +1668,45 @@ msgid ""
 "Add %1"
 msgstr "Lägg till %1"
 
-#: controller.cpp:131 fetchdialog.cpp:210 fetchdialog.cpp:286
-#: fetchdialog.cpp:353 fetchdialog.cpp:393 newstuff/dialog.cpp:296
+#: controller.cpp:131 fetchdialog.cpp:214 fetchdialog.cpp:291
+#: fetchdialog.cpp:359 fetchdialog.cpp:414 newstuff/dialog.cpp:296
 #: newstuff/dialog.cpp:323 newstuff/dialog.cpp:431 statusbar.cpp:82
 msgid "Ready."
 msgstr "Klar."
 
-#: controller.cpp:419
+#: controller.cpp:421
 msgid "Do you really want to delete this entry?"
 msgstr "Vill du verkligen ta bort denna post?"
 
-#: controller.cpp:421
+#: controller.cpp:423
 msgid "Delete Entry"
 msgstr "Tag bort post"
 
-#: controller.cpp:431
+#: controller.cpp:433
 msgid "Do you really want to delete these entries?"
 msgstr "Vill du verkligen ta bort dessa poster?"
 
-#: controller.cpp:435
+#: controller.cpp:437
 msgid "Delete Multiple Entries"
 msgstr "Ta bort flera poster"
 
-#: controller.cpp:601
+#: controller.cpp:603
 msgid "&Edit Entries..."
 msgstr "&Redigera poster..."
 
-#: controller.cpp:602
+#: controller.cpp:604
 msgid "D&uplicate Entries"
 msgstr "D&uplicera poster"
 
-#: controller.cpp:603
+#: controller.cpp:605
 msgid "&Update Entries"
 msgstr "&Uppdatera fält"
 
-#: controller.cpp:604
+#: controller.cpp:606
 msgid "&Delete Entries"
 msgstr "&Tag bort poster"
 
-#: controller.cpp:658
+#: controller.cpp:660
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
 "support lending an item multiple times. They will be removed from the list "
@@ -1746,7 +1746,7 @@ msgstr "Mina frimärken"
 #: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
 #: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
 #: collections/winecollection.cpp:38 entryupdater.cpp:230
-#: fetch/fetchmanager.cpp:61 fetchdialog.cpp:158
+#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:158
 #: translators/tellicoimporter.cpp:400
 msgid "Title"
 msgstr "Titel"
@@ -2007,7 +2007,7 @@ msgstr "Stil"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:833
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:852
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
 msgid "Keywords"
 msgstr "Nyckelord"
@@ -2478,7 +2478,7 @@ msgid "Organization"
 msgstr "Organisation"
 
 #: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:428
-#: fetch/z3950fetcher.cpp:658
+#: fetch/z3950fetcher.cpp:669
 msgid "Address"
 msgstr "Adress"
 
@@ -2503,7 +2503,7 @@ msgid "Cross-Reference"
 msgstr "Korsreferens"
 
 #: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:443
-#: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:659
+#: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:670
 #: translators/risimporter.cpp:246
 msgid "Abstract"
 msgstr "Sammandrag"
@@ -2525,7 +2525,7 @@ msgid "Album"
 msgstr "Album"
 
 #: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:224
-#: translators/freedbimporter.cpp:336 translators/freedbimporter.cpp:401
+#: translators/freedbimporter.cpp:337 translators/freedbimporter.cpp:402
 msgid "Compact Disc"
 msgstr "CD-skiva"
 
@@ -2910,7 +2910,7 @@ msgid "Keep modified values"
 msgstr "Behåll modifierade värden"
 
 #: collectionfieldsdialog.cpp:394 collectionfieldsdialog.cpp:397
-#: translators/csvimporter.cpp:409 translators/csvimporter.cpp:512
+#: translators/csvimporter.cpp:410 translators/csvimporter.cpp:513
 msgid "New Field"
 msgstr "Nytt fält"
 
@@ -2973,11 +2973,11 @@ msgstr ""
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Tabeller är begränsade till maximalt tio kolumner."
 
-#: calendarhandler.cpp:162
+#: calendarhandler.cpp:166
 msgid "Default Calendar"
 msgstr "Standardkalender"
 
-#: calendarhandler.cpp:170
+#: calendarhandler.cpp:174
 msgid ""
 "At the moment, Tellico only supports local calendar resources. The active "
 "calendar is remotely located, so your loans will not be added."
@@ -2985,11 +2985,11 @@ msgstr ""
 "För tillfället stöder Tellico bara lokala kalenderresurser. Den aktiva "
 "kalendern är fjärrlokaliserad, så dina lån kommer ej att läggas till."
 
-#: calendarhandler.cpp:175
+#: calendarhandler.cpp:179
 msgid "Active Calendar"
 msgstr "Aktiv kalender"
 
-#: calendarhandler.cpp:198
+#: calendarhandler.cpp:202
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Tellico: %1 skall till att svara \"%2\""
 
@@ -2999,7 +2999,7 @@ msgstr "Entrez Databasen"
 
 #: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:423
 #: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:365
+#: fetch/yahoofetcher.cpp:388
 msgid "This source has no options."
 msgstr "Denna källa har inga alternativ."
 
@@ -3019,20 +3019,20 @@ msgstr "Tillgängliga fält"
 msgid "SRU Server"
 msgstr "SRU Server"
 
-#: fetch/imdbfetcher.cpp:966 fetch/srufetcher.cpp:343
-#: fetch/z3950fetcher.cpp:494
+#: fetch/imdbfetcher.cpp:1076 fetch/srufetcher.cpp:343
+#: fetch/z3950fetcher.cpp:505
 msgid "Hos&t: "
 msgstr "V&ärd: "
 
-#: fetch/srufetcher.cpp:349 fetch/z3950fetcher.cpp:500
+#: fetch/srufetcher.cpp:349 fetch/z3950fetcher.cpp:511
 msgid "Enter the host name of the server."
 msgstr "Skriv in värdnamnet på  servern."
 
-#: fetch/srufetcher.cpp:354 fetch/z3950fetcher.cpp:505
+#: fetch/srufetcher.cpp:354 fetch/z3950fetcher.cpp:516
 msgid "&Port: "
 msgstr "&Port: "
 
-#: fetch/srufetcher.cpp:359 fetch/z3950fetcher.cpp:510
+#: fetch/srufetcher.cpp:359 fetch/z3950fetcher.cpp:521
 #, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Skriv in portnummer på servern. Standardvärdet är %1."
@@ -3053,42 +3053,42 @@ msgstr "Format: "
 msgid "Enter the result format used by the server."
 msgstr "Skriv in det resultatformatet, som används av servern."
 
-#: fetch/imdbfetcher.cpp:87
+#: fetch/imdbfetcher.cpp:88
 msgid "Internet Movie Database"
 msgstr "Internetfilmdatabas"
 
-#: fetch/imdbfetcher.cpp:467
+#: fetch/imdbfetcher.cpp:577
 msgid "Select IMDB Result"
 msgstr "Välj IMDB-resultat"
 
-#: fetch/imdbfetcher.cpp:470
+#: fetch/imdbfetcher.cpp:580
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
 "<qt>Din sökning gav flera passade svar. Var snäll och välj en nedan.</qt>"
 
-#: fetch/imdbfetcher.cpp:485
+#: fetch/imdbfetcher.cpp:595
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Välj ett sökresultat.</qt>"
 
-#: fetch/imdbfetcher.cpp:577 fetch/imdbfetcher.cpp:1030
+#: fetch/imdbfetcher.cpp:687 fetch/imdbfetcher.cpp:1140
 msgid "IMDB Link"
 msgstr "IMDB Länk"
 
-#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:632
-#: fetch/imdbfetcher.cpp:1032
+#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:742
+#: fetch/imdbfetcher.cpp:1142
 msgid "Alternative Titles"
 msgstr "Alternativa titlar"
 
-#: fetch/imdbfetcher.cpp:799 fetch/imdbfetcher.cpp:1031
+#: fetch/imdbfetcher.cpp:909 fetch/imdbfetcher.cpp:1141
 msgid "IMDB Rating"
 msgstr "IMDB omdöme"
 
-#: fetch/imdbfetcher.cpp:910 fetch/imdbfetcher.cpp:1033
+#: fetch/imdbfetcher.cpp:1020 fetch/imdbfetcher.cpp:1143
 msgid "Certifications"
 msgstr "Bevis"
 
-#: fetch/imdbfetcher.cpp:971
+#: fetch/imdbfetcher.cpp:1081
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -3096,11 +3096,11 @@ msgstr ""
 "Internetfilmdatabasen använder flera olika servrar. Välj den du vill "
 "använda."
 
-#: fetch/imdbfetcher.cpp:977
+#: fetch/imdbfetcher.cpp:1087
 msgid "&Maximum cast: "
 msgstr "&Maximal rollbesättning:"
 
-#: fetch/imdbfetcher.cpp:982
+#: fetch/imdbfetcher.cpp:1092
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
@@ -3108,11 +3108,11 @@ msgstr ""
 "Listan med rollinnehavare kan ta med många människor. Sätt maxtalet "
 "erhållet från sökningen."
 
-#: fetch/imdbfetcher.cpp:987
+#: fetch/imdbfetcher.cpp:1097
 msgid "Download cover &image"
 msgstr "Ladda ner omslagsb&ild"
 
-#: fetch/amazonfetcher.cpp:775 fetch/imdbfetcher.cpp:991
+#: fetch/amazonfetcher.cpp:794 fetch/imdbfetcher.cpp:1101
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -3120,23 +3120,23 @@ msgstr ""
 "Omslagsbilden kan även laddas ner. Emellertid kan för många stora bilder "
 "i samlingen försämra prestanda."
 
-#: fetch/fetchmanager.cpp:62
+#: fetch/fetchmanager.cpp:63
 msgid "Person"
 msgstr "Person"
 
-#: fetch/fetchmanager.cpp:63
+#: fetch/fetchmanager.cpp:64
 msgid "ISBN"
 msgstr "ISBN"
 
-#: fetch/fetchmanager.cpp:64
+#: fetch/fetchmanager.cpp:65
 msgid "UPC"
 msgstr "UPC"
 
-#: fetch/fetchmanager.cpp:65
+#: fetch/fetchmanager.cpp:66
 msgid "Keyword"
 msgstr "Nyckelord"
 
-#: fetch/fetchmanager.cpp:66
+#: fetch/fetchmanager.cpp:67
 msgid "Raw Query"
 msgstr "Grov förfrågan"
 
@@ -3172,53 +3172,53 @@ msgstr "Amazon (Kanada)"
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com's Web-tjänster"
 
-#: fetch/amazonfetcher.cpp:175 fetch/animenfofetcher.cpp:74
+#: fetch/amazonfetcher.cpp:189 fetch/animenfofetcher.cpp:74
 #: fetch/ibsfetcher.cpp:71 fetch/isbndbfetcher.cpp:75
-#: fetch/yahoofetcher.cpp:79
+#: fetch/yahoofetcher.cpp:92
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 tillåter ej sökning för denna samlingstyp."
 
-#: fetch/amazonfetcher.cpp:485
+#: fetch/amazonfetcher.cpp:505
 msgid "Results from %1: %2/%3"
 msgstr "Resultat från %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:514 fetch/z3950fetcher.cpp:415
+#: fetch/amazonfetcher.cpp:529 fetch/z3950fetcher.cpp:425
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Inga poster fanns för följande ISBN värden:</qt>"
 
-#: fetch/amazonfetcher.cpp:669 fetch/yahoofetcher.cpp:215
+#: fetch/amazonfetcher.cpp:688 fetch/yahoofetcher.cpp:238
 msgid "The cover image could not be loaded."
 msgstr "Omslagsbilden kunde inte laddas."
 
-#: fetch/amazonfetcher.cpp:746
+#: fetch/amazonfetcher.cpp:765
 msgid "Co&untry: "
 msgstr "&Land: "
 
-#: fetch/amazonfetcher.cpp:750
+#: fetch/amazonfetcher.cpp:769
 msgid "United States"
 msgstr "Förenta Staterna"
 
-#: fetch/amazonfetcher.cpp:751
+#: fetch/amazonfetcher.cpp:770
 msgid "United Kingdom"
 msgstr "Storbritannien"
 
-#: fetch/amazonfetcher.cpp:752
+#: fetch/amazonfetcher.cpp:771
 msgid "Germany"
 msgstr "Tyskland"
 
-#: fetch/amazonfetcher.cpp:753
+#: fetch/amazonfetcher.cpp:772
 msgid "Japan"
 msgstr "Japan"
 
-#: fetch/amazonfetcher.cpp:754
+#: fetch/amazonfetcher.cpp:773
 msgid "France"
 msgstr "Frankrike"
 
-#: fetch/amazonfetcher.cpp:755
+#: fetch/amazonfetcher.cpp:774
 msgid "Canada"
 msgstr "Kanada"
 
-#: fetch/amazonfetcher.cpp:759
+#: fetch/amazonfetcher.cpp:778
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -3226,31 +3226,31 @@ msgstr ""
 "Amazon.com lämnar data från många skilda ställen. Välj det som du "
 "önskar utnyttja som denna datakälla."
 
-#: fetch/amazonfetcher.cpp:765
+#: fetch/amazonfetcher.cpp:784
 msgid "&Image size: "
 msgstr "&Bildstorlek: "
 
-#: fetch/amazonfetcher.cpp:769
+#: fetch/amazonfetcher.cpp:788
 msgid "Small Image"
 msgstr "Liten Bild"
 
-#: fetch/amazonfetcher.cpp:770
+#: fetch/amazonfetcher.cpp:789
 msgid "Medium Image"
 msgstr "Medelstor Bild"
 
-#: fetch/amazonfetcher.cpp:771
+#: fetch/amazonfetcher.cpp:790
 msgid "Large Image"
 msgstr "Stor Bild"
 
-#: fetch/amazonfetcher.cpp:772
+#: fetch/amazonfetcher.cpp:791
 msgid "No Image"
 msgstr "Ingen Bild"
 
-#: fetch/amazonfetcher.cpp:781
+#: fetch/amazonfetcher.cpp:800
 msgid "&Associate's ID: "
 msgstr "&Kompanjons ID: "
 
-#: fetch/amazonfetcher.cpp:786
+#: fetch/amazonfetcher.cpp:805
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -3327,27 +3327,27 @@ msgstr ""
 "<i>Beroende</i> fält, där fältvärden finns inom klammer, såsom i "
 "<i>%{författare}</i> Se dokumentation för detaljer.</p>"
 
-#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:745
+#: fetch/z3950fetcher.cpp:78 fetch/z3950fetcher.cpp:756
 msgid "z39.50 Server"
 msgstr "z39.50-server"
 
-#: fetch/z3950fetcher.cpp:484
+#: fetch/z3950fetcher.cpp:495
 msgid "Use preset &server:"
 msgstr "Använd förinställd &server:"
 
-#: fetch/z3950fetcher.cpp:515
+#: fetch/z3950fetcher.cpp:526
 msgid "&Database: "
 msgstr "&Databas: "
 
-#: fetch/z3950fetcher.cpp:520
+#: fetch/z3950fetcher.cpp:531
 msgid "Enter the database name used by the server."
 msgstr "Skriv in det databasnamn, som servern använder."
 
-#: fetch/z3950fetcher.cpp:525
+#: fetch/z3950fetcher.cpp:536
 msgid "Ch&aracter set: "
 msgstr "&Teckenuppsättning: "
 
-#: fetch/z3950fetcher.cpp:534
+#: fetch/z3950fetcher.cpp:545
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -3355,15 +3355,15 @@ msgstr ""
 "Skriv in den teckenuppsättningskod, som används av z39.50-servern. Det "
 "mest sannolika valet är MARC-8, fastän ISO-8859.1 är rätt vanlig."
 
-#: fetch/z3950fetcher.cpp:540
+#: fetch/z3950fetcher.cpp:551
 msgid "&Format: "
 msgstr "&Format: "
 
-#: fetch/z3950fetcher.cpp:543
+#: fetch/z3950fetcher.cpp:554
 msgid "Auto-detect"
 msgstr "Automatisk upptäckt"
 
-#: fetch/z3950fetcher.cpp:551
+#: fetch/z3950fetcher.cpp:562
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
@@ -3372,15 +3372,15 @@ msgstr ""
 "försöka att automatiskt finna den bästa inställningen om <i>automatisk "
 "upptäckt</i> är valt."
 
-#: fetch/z3950fetcher.cpp:557
+#: fetch/z3950fetcher.cpp:568
 msgid "&User: "
 msgstr "&Användare: "
 
-#: fetch/z3950fetcher.cpp:560 fetch/z3950fetcher.cpp:572
+#: fetch/z3950fetcher.cpp:571 fetch/z3950fetcher.cpp:583
 msgid "Optional"
 msgstr "Alternativ"
 
-#: fetch/z3950fetcher.cpp:563
+#: fetch/z3950fetcher.cpp:574
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -3388,11 +3388,11 @@ msgstr ""
 "Skriv in det autentiseringsanvändarnamn, som används av z39.50-servern. De "
 "flesta servrar behöver inget."
 
-#: fetch/z3950fetcher.cpp:569
+#: fetch/z3950fetcher.cpp:580
 msgid "Pass&word: "
 msgstr "Lösen&ord: "
 
-#: fetch/z3950fetcher.cpp:576
+#: fetch/z3950fetcher.cpp:587
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one. The password will be saved in plain text in the Tellico "
@@ -3402,7 +3402,7 @@ msgstr ""
 "flesta servrar behöver inget. Lösenordet kommer att sparas som vanlig text "
 "i Tellicos konfigurationsfil."
 
-#: fetch/z3950fetcher.cpp:660
+#: fetch/z3950fetcher.cpp:671
 msgid "Illustrator"
 msgstr "Illustratör"
 
@@ -3418,19 +3418,19 @@ msgstr "Distributör"
 msgid "Episodes"
 msgstr "Episoder"
 
-#: fetch/z3950connection.cpp:104
+#: fetch/z3950connection.cpp:115
 msgid "Query error!"
 msgstr "Förfrågansfel!"
 
-#: fetch/z3950connection.cpp:144
+#: fetch/z3950connection.cpp:156
 msgid "Connection search error %1: %2"
 msgstr "Förbindelsesökningsfel %1: %2"
 
-#: fetch/z3950connection.cpp:222
+#: fetch/z3950connection.cpp:233
 msgid "Record syntax error"
 msgstr "Syntaxfel i post"
 
-#: fetch/z3950connection.cpp:297
+#: fetch/z3950connection.cpp:316
 msgid "Connection error %1: %2"
 msgstr "Förbindelsefel %1: %2"
 
@@ -3889,19 +3889,19 @@ msgstr "Nerladdning..."
 msgid "Click to download additional data sources via the Internet."
 msgstr "Klicka för att ladda ner ytterligare datakällor via Internet."
 
-#: configdialog.cpp:1001 translators/xsltimporter.cpp:85
+#: configdialog.cpp:1003 translators/xsltimporter.cpp:85
 msgid "*.xsl|XSL Files (*.xsl)"
 msgstr "*.xml|XSL-filer (*.xsl)"
 
-#: configdialog.cpp:1002
+#: configdialog.cpp:1004
 msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
 msgstr "*.tar.gz *.tgz|mallpaket (*.tar.gz)"
 
-#: configdialog.cpp:1035
+#: configdialog.cpp:1037
 msgid "Delete Template"
 msgstr "Ta bort mall"
 
-#: configdialog.cpp:1036
+#: configdialog.cpp:1038
 msgid "Select template to delete:"
 msgstr "Välj mall som skall tas bort:"
 
@@ -4054,54 +4054,62 @@ msgstr "&Lägg till post"
 msgid "Add the selected entry to the current collection"
 msgstr "Lägg till den valda posten till samlingen"
 
+#: fetchdialog.cpp:186
+msgid "Get More Results"
+msgstr "Hämta fler resultat"
+
 #: fetchdialog.cpp:189
+msgid "Fetch more results from the current data source"
+msgstr "Hämta fler resultat från den aktuella datakällan"
+
+#: fetchdialog.cpp:193
 msgid "Clear all search fields and results"
 msgstr "Rensa alla sök- och resultatfält"
 
-#: fetchdialog.cpp:253
+#: fetchdialog.cpp:257
 msgid "Cancelling the search..."
 msgstr "Avbryter sökningen..."
 
-#: fetchdialog.cpp:268
+#: fetchdialog.cpp:272 fetchdialog.cpp:380
 msgid "Searching..."
 msgstr "Söker..."
 
-#: fetchdialog.cpp:321
+#: fetchdialog.cpp:326
 msgid "The search returned no items."
 msgstr "Sökningen lämnade inga värden."
 
-#: fetchdialog.cpp:324
+#: fetchdialog.cpp:329
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
 msgstr "Sökningen lämnade %n resultat."
 
-#: fetchdialog.cpp:345 fetchdialog.cpp:382
+#: fetchdialog.cpp:351 fetchdialog.cpp:403
 msgid "Fetching %1..."
 msgstr "Hämtar %1..."
 
-#: fetchdialog.cpp:415
+#: fetchdialog.cpp:436
 msgid "No Internet sources are available for your current collection type."
 msgstr "Inga Internetkällor är tillgängliga för din aktuella samlingstyp."
 
-#: fetchdialog.cpp:475
+#: fetchdialog.cpp:496
 msgid "Edit ISBN/UPC Values"
 msgstr "Redigera ISBN/UPC-värden"
 
-#: fetchdialog.cpp:479
+#: fetchdialog.cpp:500
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Mata in ISBN- eller UPC-värden, ett per rad.</qt>"
 
-#: fetchdialog.cpp:485
+#: fetchdialog.cpp:506
 msgid "&Load From File..."
 msgstr "&Ladda från fil..."
 
-#: fetchdialog.cpp:486
+#: fetchdialog.cpp:507
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Ladda listan från en text fil.</qt>"
 
-#: fetchdialog.cpp:505
+#: fetchdialog.cpp:526
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
@@ -4217,19 +4225,19 @@ msgstr ""
 "<qt>Ett Alexandria-bibliotek kallat <i>%1</i> finns redan. Vilken som helst "
 "befintlig bok i det biblioteket kan be överskriven.</qt>"
 
-#: translators/tellicoxmlexporter.cpp:55
+#: translators/tellicoxmlexporter.cpp:56
 msgid "XML"
 msgstr "XML"
 
-#: translators/tellicoxmlexporter.cpp:451
+#: translators/tellicoxmlexporter.cpp:464
 msgid "Tellico XML Options"
 msgstr "Tellico-XML-alternativ"
 
-#: translators/tellicoxmlexporter.cpp:454
+#: translators/tellicoxmlexporter.cpp:467
 msgid "Include images in XML document"
 msgstr "Inkludera bilder i XML-dokument"
 
-#: translators/tellicoxmlexporter.cpp:456
+#: translators/tellicoxmlexporter.cpp:469
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
@@ -4299,7 +4307,7 @@ msgstr ""
 "<qt>Citatstilen, som används vid export av bibtex. Alla fältvärden kommer "
 "att omges av antingen parenteser eller citationstecken.</qt>"
 
-#: translators/tellicozipexporter.cpp:34
+#: translators/tellicozipexporter.cpp:35
 msgid "Tellico Zip File"
 msgstr "Tellico-Zip-fil"
 
@@ -4510,23 +4518,23 @@ msgstr "PilotDB-alternativ"
 msgid "Set PDA backup flag for database"
 msgstr "Sätt PDA-backuppflagga för databas"
 
-#: translators/onixexporter.cpp:61
+#: translators/onixexporter.cpp:62
 msgid "ONIX Archive"
 msgstr "ONIX Arkiv"
 
-#: translators/onixexporter.cpp:65
+#: translators/onixexporter.cpp:66
 msgid "*.zip|Zip Files (*.zip)"
 msgstr "*.zip|Zip-filer (*.zip)"
 
-#: translators/onixexporter.cpp:174
+#: translators/onixexporter.cpp:175
 msgid "ONIX Archive Options"
 msgstr "ONIX arkivalternativ"
 
-#: translators/onixexporter.cpp:177
+#: translators/onixexporter.cpp:178
 msgid "Include images in archive"
 msgstr "Inkludera bilder i arkivet"
 
-#: translators/onixexporter.cpp:179
+#: translators/onixexporter.cpp:180
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
 "archive."
@@ -4554,27 +4562,27 @@ msgstr "<qt>Inga poster funna, som passade CD:n.</qt>"
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "<qt>Tellico kunde inte slutföra CD uppslagningen. <qt>"
 
-#: translators/freedbimporter.cpp:425
+#: translators/freedbimporter.cpp:426
 msgid "Various"
 msgstr "Blandat"
 
-#: translators/freedbimporter.cpp:444
+#: translators/freedbimporter.cpp:445
 msgid "Audio CD Options"
 msgstr "Ljud-CD-alternativ"
 
-#: translators/freedbimporter.cpp:448
+#: translators/freedbimporter.cpp:449
 msgid "Read data from CD-ROM device"
 msgstr "Läser data från CD-ROM-enhet"
 
-#: translators/freedbimporter.cpp:451
+#: translators/freedbimporter.cpp:452
 msgid "Select or input the CD-ROM device location."
 msgstr "Välj eller mata in CD-ROM-enhetens plats."
 
-#: translators/freedbimporter.cpp:457
+#: translators/freedbimporter.cpp:458
 msgid "Read all CDDB cache files only"
 msgstr "Läs endast alla CDDB-cache-filer"
 
-#: translators/freedbimporter.cpp:458
+#: translators/freedbimporter.cpp:459
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
@@ -4671,7 +4679,7 @@ msgstr ""
 "Om ikryssad, genereras förhandsgranskning av filinnehållen, vilket kan "
 "slöa ner mapplistningen."
 
-#: entryview.cpp:173
+#: entryview.cpp:168
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico kan inte hitta standardpostens stilmall."
 
@@ -4694,6 +4702,18 @@ msgstr "jr.,jr,iii,iv,dy,dä,sr"
 #: core/tellico_config.cpp:127
 msgid "de,van,der,van der,von"
 msgstr "de,van,der,van der,von, af"
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Ny"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "N&y samling"
+
+#: rc.cpp:8
+msgid "Collection Toolbar"
+msgstr "Samlingsverktygsrad"
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -4782,18 +4802,6 @@ msgid ""
 msgstr ""
 "<qt><b>%1</b> returnerade flera resultat, vilket kunder matcha <b>%2</b>, "
 "aktuell post i samlingen. Välj riktig matchning.</qt>"
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Ny"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "N&y samling"
-
-#: rc.cpp:8
-msgid "Collection Toolbar"
-msgstr "Samlingsverktygsrad"
 
 #: newstuff/dialog.cpp:93
 msgid "Get Hot New Stuff"

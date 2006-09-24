@@ -70,6 +70,7 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
+  virtual void continueSearch();
   // amazon can search title, person, isbn, or keyword. No Raw for now.
   virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k != Raw; }
   virtual void stop();
@@ -104,6 +105,7 @@ private slots:
 
 private:
   void initXSLTHandler();
+  void doSearch();
 
   XSLTHandler* m_xsltHandler;
   Site m_site;
@@ -113,6 +115,7 @@ private:
   QString m_assoc;
   bool m_addLinkField;
   int m_limit;
+  int m_countOffset;
 
   QByteArray m_data;
   int m_page;

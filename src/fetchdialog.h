@@ -60,6 +60,7 @@ private slots:
   void slotSearchClicked();
   void slotClearClicked();
   void slotAddEntry();
+  void slotMoreClicked();
   void slotShowEntry();
   void slotMoveProgress();
 
@@ -92,6 +93,7 @@ private:
   GUI::ListView* m_listView;
   EntryView* m_entryView;
   KPushButton* m_addButton;
+  KPushButton* m_moreButton;
   KStatusBar* m_statusBar;
   QProgressBar* m_progress;
   QTimer* m_timer;

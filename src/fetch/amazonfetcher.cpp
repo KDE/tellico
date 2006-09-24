@@ -43,7 +43,7 @@
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
-  static const int AMAZON_MAX_RETURNS_TOTAL = 10;
+  static const int AMAZON_MAX_RETURNS_TOTAL = 20;
   static const char* AMAZON_ACCESS_KEY = "0834VQ4S71KYPVSYQD02";
   static const char* AMAZON_ASSOC_TOKEN = "tellico-20";
   // need to have these in the translation file
@@ -83,7 +83,7 @@ AmazonFetcher::AmazonFetcher(Site site_, QObject* parent_, const char* name_)
     : Fetcher(parent_, name_), m_xsltHandler(0), m_site(site_), m_imageSize(MediumImage),
       m_access(QString::fromLatin1(AMAZON_ACCESS_KEY)),
       m_assoc(QString::fromLatin1(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
-      m_page(1), m_total(-1), m_job(0), m_started(false) {
+      m_countOffset(0), m_page(1), m_total(-1), m_job(0), m_started(false) {
   m_name = siteData(site_).title;
 }
 
@@ -129,9 +129,23 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
   m_key = key_;
   m_value = value_;
   m_started = true;
+  m_page = 1;
+  m_total = -1;
+  m_countOffset = 0;
+  doSearch();
+}
 
-//  myDebug() << "AmazonFetcher::search() - value = " << m_value << endl;
-//  myDebug() << "AmazonFetcher::search() - getting page " << m_page << endl;
+void AmazonFetcher::continueSearch() {
+  m_started = true;
+  m_limit += AMAZON_MAX_RETURNS_TOTAL;
+  doSearch();
+}
+
+void AmazonFetcher::doSearch() {
+  m_data.truncate(0);
+
+//  myDebug() << "AmazonFetcher::doSearch() - value = " << m_value << endl;
+//  myDebug() << "AmazonFetcher::doSearch() - getting page " << m_page << endl;
 
   const SiteData& data = siteData(m_site);
   KURL u = data.url;
@@ -184,11 +198,11 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
 
 //  QString value = KURL::decode_string(value_, 106);
 //  QString value = QString::fromLocal8Bit(value_.utf8());
-  QString value = value_;
+  QString value = m_value;
   // a mibenum of 106 is utf-8, 4 is iso-8859-1, 0 means use user's locale,
   int mib = m_site == AmazonFetcher::JP ? 106 : 4;
 
-  switch(key_) {
+  switch(m_key) {
     case Title:
       u.addQueryItem(QString::fromLatin1("Title"), value, mib);
       break;
@@ -217,10 +231,10 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
         // keep a list of isbn value we're searching for
         // but only set it when it's not set before
         if(m_isbnList.isEmpty()) {
-          m_isbnList = QStringList::split(QString::fromLatin1("; "), value_);
+          m_isbnList = QStringList::split(QString::fromLatin1("; "), m_value);
         }
         u.removeQueryItem(QString::fromLatin1("SearchIndex"));
-        QString s = value_; // not encValue!!!
+        QString s = m_value; // not encValue!!!
         s.remove('-');
         // limit to first 10
         s.replace(QString::fromLatin1("; "), QString::fromLatin1(","));
@@ -239,7 +253,7 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
         } else {
           u.addQueryItem(QString::fromLatin1("IdType"), QString::fromLatin1("EAN"));
         }
-        QString s = value_; // not encValue!!!
+        QString s = m_value; // not encValue!!!
         s.remove('-');
         // limit to first 10
         s.replace(QString::fromLatin1("; "), QString::fromLatin1(","));
@@ -249,7 +263,7 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
       break;
 
     case Keyword:
-      u.addQueryItem(QString::fromLatin1("Keywords"), value_, mib);
+      u.addQueryItem(QString::fromLatin1("Keywords"), m_value, mib);
       break;
 
     case Raw:
@@ -261,7 +275,7 @@ void AmazonFetcher::search(FetchKey key_, const QString& value_) {
       break;
 
     default:
-      kdWarning() << "AmazonFetcher::search() - key not recognized: " << key_ << endl;
+      kdWarning() << "AmazonFetcher::search() - key not recognized: " << m_key << endl;
       stop();
       return;
   }
@@ -283,8 +297,6 @@ void AmazonFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_page = 1;
-  m_total = -1;
   m_isbnList.clear();
   m_data.truncate(0);
   m_started = false;
@@ -382,7 +394,6 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
     coll->removeField(QString::fromLatin1("amazon"));
   }
 
-  int count = 0;
   Data::EntryVec entries = coll->entries();
   if(entries.isEmpty() && !errors.isEmpty()) {
     for(QStringList::ConstIterator it = errors.constBegin(); it != errors.constEnd(); ++it) {
@@ -393,7 +404,13 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
     return;
   }
 
-  for(Data::EntryVec::Iterator entry = entries.begin(); count < m_limit && entry != entries.end(); ++entry, ++count) {
+  int count = 0;
+  for(Data::EntryVec::Iterator entry = entries.begin();
+      static_cast<int>(m_entries.count()) < m_limit && entry != entries.end();
+      ++entry, ++count) {
+    if(count < m_countOffset) {
+      continue;
+    }
     if(!m_started) {
       // might get aborted
       break;
@@ -479,18 +496,16 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
     return;
   }
 
-  int total = KMIN(m_total, m_limit);
-  if(m_page * AMAZON_RETURNS_PER_REQUEST < total) {
-    int foundCount = (m_page-1) * AMAZON_RETURNS_PER_REQUEST + coll->entryCount();
-    message(i18n("Results from %1: %2/%3").arg(source()).arg(foundCount).arg(total), MessageHandler::Status);
+  // are there any additional results to get?
+  m_hasMoreResults = m_page * AMAZON_RETURNS_PER_REQUEST < m_total;
 
+  const int currentTotal = QMIN(m_total, m_limit);
+  if(m_page * AMAZON_RETURNS_PER_REQUEST < currentTotal) {
+    int foundCount = (m_page-1) * AMAZON_RETURNS_PER_REQUEST + coll->entryCount();
+    message(i18n("Results from %1: %2/%3").arg(source()).arg(foundCount).arg(m_total), MessageHandler::Status);
     ++m_page;
-    m_data.truncate(0);
-    search(m_key, m_value);
+    doSearch();
   } else if(m_value.contains(';') > 9) {
-    m_page = 1;
-    m_total = -1;
-    m_data.truncate(0);
     search(m_key, m_value.section(';', 10));
   } else {
     // tell the user if some of his isbn values were not found
@@ -513,6 +528,10 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
         isbnNotFound.sort();
         infoList(i18n("<qt>No entries were found for the following ISBN values:</qt>"), isbnNotFound);
       }
+    }
+    m_countOffset = m_entries.count() % AMAZON_RETURNS_PER_REQUEST;
+    if(m_countOffset == 0) {
+      ++m_page; // need to go to next page
     }
     stop();
   }

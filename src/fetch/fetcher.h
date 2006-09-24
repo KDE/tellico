@@ -42,7 +42,9 @@ public:
 
   /**
    */
-  Fetcher(QObject* parent, const char* name = 0) : QObject(parent, name), KShared(), m_messager(0) {}
+  Fetcher(QObject* parent, const char* name = 0) : QObject(parent, name), KShared(),
+                                                   m_updateOverwrite(false), m_hasMoreResults(false),
+                                                   m_messager(0) {}
   /**
    */
   virtual ~Fetcher() {}
@@ -70,14 +72,20 @@ public:
    */
   bool updateOverwrite() const { return m_updateOverwrite; }
   /**
-   * Starts a search, using a kew and value.
+   * Starts a search, using a key and value.
    */
   virtual void search(FetchKey key, const QString& value) = 0;
+  virtual void continueSearch() {}
   virtual void updateEntry(Data::EntryPtr);
   /**
    * Returns true if the fetcher is currently searching.
    */
   virtual bool isSearching() const = 0;
+  /**
+   * Returns true if the fetcher can continue and fetch more results
+   * The fetcher is responsible for remembering state.
+   */
+  virtual bool hasMoreResults() const { return m_hasMoreResults; }
   /**
    * Stops the fetcher.
    */
@@ -112,6 +120,7 @@ signals:
 protected:
   QString m_name;
   bool m_updateOverwrite : 1;
+  bool m_hasMoreResults : 1;
 
 private:
   MessageHandler* m_messager;

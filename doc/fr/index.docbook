@@ -327,7 +327,7 @@ Documentation copyright 2001-2006 &robby; <email>&email;</email>
 
 <para id="gnu-fdl" xreflabel="the section entitled &quot;GNU Free Documentation
 License&quot;">This documentation is licensed under the terms of the <ulink
-url="common/fdl-license.html">&GNU; Free Documentation
+url="../en/common/fdl-license.html">&GNU; Free Documentation
 License (GFDL)</ulink>.</para>
 
 <para>The author of this documentation has also granted you permission to use the content under the terms of the <ulink

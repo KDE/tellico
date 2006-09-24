@@ -30,7 +30,7 @@
 #include <qfile.h>
 
 namespace {
-  static const int YAHOO_MAX_RETURNS_TOTAL = 10;
+  static const int YAHOO_MAX_RETURNS_TOTAL = 20;
   static const char* YAHOO_BASE_URL = "http://api.search.yahoo.com/AudioSearchService/V1/albumSearch";
   static const char* YAHOO_APP_ID = "tellico-robby";
 }
@@ -65,14 +65,27 @@ void YahooFetcher::readConfigHook(KConfig* config_, const QString& group_) {
 }
 
 void YahooFetcher::search(FetchKey key_, const QString& value_) {
+  m_key = key_;
+  m_value = value_;
   m_started = true;
+  m_start = 1;
+  m_total = -1;
+  doSearch();
+}
 
+void YahooFetcher::continueSearch() {
+  m_started = true;
+  doSearch();
+}
+
+void YahooFetcher::doSearch() {
 //  myDebug() << "YahooFetcher::search() - value = " << value_ << endl;
 
   KURL u(QString::fromLatin1(YAHOO_BASE_URL));
   u.addQueryItem(QString::fromLatin1("appid"),   QString::fromLatin1(YAHOO_APP_ID));
   u.addQueryItem(QString::fromLatin1("type"),    QString::fromLatin1("all"));
   u.addQueryItem(QString::fromLatin1("output"),  QString::fromLatin1("xml"));
+  u.addQueryItem(QString::fromLatin1("start"),   QString::number(m_start));
   u.addQueryItem(QString::fromLatin1("results"), QString::number(YAHOO_MAX_RETURNS_TOTAL));
 
   if(!canFetch(Kernel::self()->collectionType())) {
@@ -81,24 +94,24 @@ void YahooFetcher::search(FetchKey key_, const QString& value_) {
     return;
   }
 
-  switch(key_) {
+  switch(m_key) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("album"), value_);
+      u.addQueryItem(QString::fromLatin1("album"), m_value);
       break;
 
     case Person:
-      u.addQueryItem(QString::fromLatin1("artist"), value_);
+      u.addQueryItem(QString::fromLatin1("artist"), m_value);
       break;
 
     // raw is used for the entry updates
     case Raw:
 //      u.removeQueryItem(QString::fromLatin1("type"));
 //      u.addQueryItem(QString::fromLatin1("type"), QString::fromLatin1("phrase"));
-      u.setQuery(u.query() + '&' + value_);
+      u.setQuery(u.query() + '&' + m_value);
       break;
 
     default:
-      kdWarning() << "YahooFetcher::search() - key not recognized: " << key_ << endl;
+      kdWarning() << "YahooFetcher::search() - key not recognized: " << m_key << endl;
       stop();
       return;
   }
@@ -172,6 +185,14 @@ void YahooFetcher::slotComplete(KIO::Job* job_) {
     }
   }
 
+  if(m_total == -1) {
+    // total is top level element, with attribute totalResultsAvailable
+    QDomElement e = dom.documentElement();
+    if(!e.isNull()) {
+      m_total = e.attribute(QString::fromLatin1("totalResultsAvailable")).toInt();
+    }
+  }
+
   // assume yahoo is always utf-8
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
   Import::TellicoImporter imp(str);
@@ -194,6 +215,8 @@ void YahooFetcher::slotComplete(KIO::Job* job_) {
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
+  m_start = m_entries.count() + 1;
+  m_hasMoreResults = m_start <= m_total;
   stop(); // required
 }
 

@@ -1974,7 +1974,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=tellico
- VERSION=1.2.2
+ VERSION=1.2.3
 
 
 cat >>confdefs.h <<_ACEOF
@@ -32088,8 +32088,8 @@ fi
 
 
 
-    echo "$as_me:$LINENO: checking for KDE version 3.4.0 or later" >&5
-echo $ECHO_N "checking for KDE version 3.4.0 or later... $ECHO_C" >&6
+    echo "$as_me:$LINENO: checking for KDE version 3.3.1 or later" >&5
+echo $ECHO_N "checking for KDE version 3.3.1 or later... $ECHO_C" >&6
 
 
      ac_ext=cc
@@ -32111,7 +32111,7 @@ cat >>conftest.$ac_ext <<_ACEOF
 /* end confdefs.h.  */
 
         #include "kdeversion.h"
-        #if !( KDE_IS_VERSION( 3, 4, 0 ) )
+        #if !( KDE_IS_VERSION( 3, 3, 1 ) )
         #error KDE version does not meet minimum requirement
         #endif
 

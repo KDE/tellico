@@ -59,6 +59,7 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
+  virtual void continueSearch();
   // can search title, person, isbn, or keyword. No UPC or Raw for now.
   virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k!= UPC && k != Raw; }
   virtual void stop();
@@ -101,7 +102,6 @@ private:
   QString m_syntax;
   QString m_pqn; // prefix query notation
   QString m_esn; // element set name
-  size_t m_max; // max number of records
 
   QGuardedPtr<KConfig> m_config;
   QString m_configGroup;

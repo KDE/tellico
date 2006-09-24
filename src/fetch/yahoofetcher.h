@@ -52,6 +52,7 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
+  virtual void continueSearch();
   // amazon can search title or person
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
   virtual void stop();
@@ -83,16 +84,21 @@ private slots:
 
 private:
   void initXSLTHandler();
+  void doSearch();
   void getTracks(Data::EntryPtr entry);
   QString insertValue(const QString& str, const QString& value, uint pos);
 
   XSLTHandler* m_xsltHandler;
   int m_limit;
+  int m_start;
+  int m_total;
 
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
   QGuardedPtr<KIO::Job> m_job;
 
+  FetchKey m_key;
+  QString m_value;
   bool m_started;
 };
 

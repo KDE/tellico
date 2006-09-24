@@ -48,6 +48,7 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
+  virtual void continueSearch();
   // imdb can search title, person
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
   virtual void stop();
@@ -124,6 +125,13 @@ private:
   bool m_redirected;
   uint m_limit;
   QStringList m_fields;
+
+  QString m_popularTitles;
+  QString m_exactTitles;
+  QString m_partialTitles;
+  enum TitleBlock { Unknown = 0, Popular = 1, Exact = 2, Partial = 3, SinglePerson = 4};
+  TitleBlock m_currentTitleBlock;
+  int m_countOffset;
 };
 
   } // end namespace

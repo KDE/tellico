@@ -43,7 +43,7 @@
 
 namespace {
   static const char* IMDB_SERVER = "akas.imdb.com";
-  static const uint IMDB_MAX_RESULTS = 25;
+  static const uint IMDB_MAX_RESULTS = 20;
   static const QString sep = QString::fromLatin1("; ");
 }
 
@@ -74,7 +74,8 @@ void IMDBFetcher::initRegExps() {
 }
 
 IMDBFetcher::IMDBFetcher(QObject* parent_, const char* name_) : Fetcher(parent_, name_),
-    m_job(0), m_started(false), m_fetchImages(true), m_host(QString::fromLatin1(IMDB_SERVER)), m_limit(IMDB_MAX_RESULTS) {
+    m_job(0), m_started(false), m_fetchImages(true), m_host(QString::fromLatin1(IMDB_SERVER)),
+    m_limit(IMDB_MAX_RESULTS), m_countOffset(0) {
   if(!s_tagRx) {
     initRegExps();
   }
@@ -114,6 +115,11 @@ void IMDBFetcher::search(FetchKey key_, const QString& value_) {
   m_redirected = false;
   m_data.truncate(0);
   m_matches.clear();
+  m_popularTitles.truncate(0);
+  m_exactTitles.truncate(0);
+  m_partialTitles.truncate(0);
+  m_currentTitleBlock = Unknown;
+  m_countOffset = 0;
 
 // only search if current collection is a video collection
   if(Kernel::self()->collectionType() != Data::Collection::Video) {
@@ -125,10 +131,11 @@ void IMDBFetcher::search(FetchKey key_, const QString& value_) {
 #ifdef IMDB_TEST
   if(m_key == Title) {
     m_url = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/imdb-title.html"));
+    m_redirected = false;
   } else {
     m_url = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/imdb-name.html"));
+    m_redirected = true;
   }
-  m_redirected = false;
 #else
   m_url = KURL();
   m_url.setProtocol(QString::fromLatin1("http"));
@@ -164,6 +171,34 @@ void IMDBFetcher::search(FetchKey key_, const QString& value_) {
           SLOT(slotComplete(KIO::Job*)));
   connect(m_job, SIGNAL(redirection(KIO::Job *, const KURL&)),
           SLOT(slotRedirection(KIO::Job*, const KURL&)));
+}
+
+void IMDBFetcher::continueSearch() {
+  m_started = true;
+  m_limit += IMDB_MAX_RESULTS;
+
+  if(m_currentTitleBlock == Popular) {
+    parseTitleBlock(m_popularTitles);
+    // if the offset is 0, then we need to be looking at the next block
+    m_currentTitleBlock = m_countOffset == 0 ? Exact : Popular;
+  }
+
+  // current title block might have changed
+  if(m_currentTitleBlock == Exact) {
+    parseTitleBlock(m_exactTitles);
+    m_currentTitleBlock = m_countOffset == 0 ? Partial : Exact;
+  }
+
+  if(m_currentTitleBlock == Partial) {
+    parseTitleBlock(m_partialTitles);
+    m_currentTitleBlock = m_countOffset == 0 ? Unknown : Partial;
+  }
+
+  if(m_currentTitleBlock == SinglePerson) {
+    parseSingleNameResult();
+  }
+
+  stop();
 }
 
 void IMDBFetcher::stop() {
@@ -236,6 +271,7 @@ void IMDBFetcher::parseSingleTitleResult() {
   m_matches.insert(r->uid, m_url);
   emit signalResultFound(r);
 
+  m_hasMoreResults = false;
   stop();
 }
 
@@ -259,23 +295,28 @@ void IMDBFetcher::parseMultipleTitleResults() {
 
   // if found popular matches
   if(pos_popular > -1) {
-    parseTitleBlock(output.mid(pos_popular, end_popular-pos_popular));
+    m_popularTitles = output.mid(pos_popular, end_popular-pos_popular);
   }
-
   // if found exact matches
   if(pos_exact > -1) {
-    parseTitleBlock(output.mid(pos_exact, end_exact-pos_exact));
+    m_exactTitles = output.mid(pos_exact, end_exact-pos_exact);
   }
-
-  // if there are enough exact matches, stop now
-  if(m_matches.size() >= m_limit) {
-    stop();
-    return;
-  }
-
-  // go ahead and search for partial matches
   if(pos_partial > -1) {
-    parseTitleBlock(output.mid(pos_partial));
+    m_partialTitles = output.mid(pos_partial);
+  }
+
+  parseTitleBlock(m_popularTitles);
+  // if the offset is 0, then we need to be looking at the next block
+  m_currentTitleBlock = m_countOffset == 0 ? Exact : Popular;
+
+  if(m_matches.size() < m_limit) {
+    parseTitleBlock(m_exactTitles);
+    m_currentTitleBlock = m_countOffset == 0 ? Partial : Exact;
+  }
+
+  if(m_matches.size() < m_limit) {
+    parseTitleBlock(m_partialTitles);
+    m_currentTitleBlock = m_countOffset == 0 ? Unknown : Partial;
   }
 
 #ifndef NDEBUG
@@ -288,16 +329,24 @@ void IMDBFetcher::parseMultipleTitleResults() {
 }
 
 void IMDBFetcher::parseTitleBlock(const QString& str_) {
-//  myDebug() << "IMDBFetcher::parseTitleBlock()" << endl;
+  if(str_.isEmpty()) {
+    m_countOffset = 0;
+    return;
+  }
+//  myDebug() << "IMDBFetcher::parseTitleBlock() - " << m_currentTitleBlock << endl;
 
-  QRegExp akaRx(QString::fromLatin1("aka (.*)</li>"), false);
+  QRegExp akaRx(QString::fromLatin1("aka (.*)(</li>|<br)"), false);
   akaRx.setMinimal(true);
 
+  m_hasMoreResults = false;
+
+  int count = 0;
   int start = s_anchorTitleRx->search(str_);
-  while(m_started && start > -1 && m_matches.size() < m_limit) {
+  while(m_started && start > -1) {
     // split title at parenthesis
     const QString cap1 = s_anchorTitleRx->cap(1); // the anchor url
     const QString cap2 = s_anchorTitleRx->cap(2); // the anchor text
+    start += s_anchorTitleRx->matchedLength();
     int pPos = cap2.find('('); // if it has parentheses, use that for description
     QString desc;
     if(pPos > -1) {
@@ -307,25 +356,46 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       }
     } else {
       // parenthesis might be outside anchor tag
-      int end = s_anchorTitleRx->search(str_, start+1);
+      int end = s_anchorTitleRx->search(str_, start);
       if(end == -1) {
         end = str_.length();
       }
-      // remove tags
-      QString text = str_.mid(start, end-start).remove(*s_tagRx);
+      QString text = str_.mid(start, end-start);
       pPos = text.find('(');
       if(pPos > -1) {
-        int pPos2 = text.find(')', pPos);
-        if(pPos2 > -1) {
+        int pNewLine = text.find(QString::fromLatin1("<br"));
+        if(pNewLine == -1 || pPos < pNewLine) {
+          int pPos2 = text.find(')', pPos);
           desc = text.mid(pPos+1, pPos2-pPos-1);
         }
+        pPos = -1;
       }
     }
     // multiple matches might have 'aka' info
     int end = s_anchorTitleRx->search(str_, start+1);
+    if(end == -1) {
+      end = str_.length();
+    }
     int akaPos = akaRx.search(str_, start+1);
     if(akaPos > -1 && akaPos < end) {
+      // limit to 50 chars
       desc += QChar(' ') + akaRx.cap(1).stripWhiteSpace().remove(*s_tagRx);
+      if(desc.length() > 50) {
+        desc = desc.left(50) + QString::fromLatin1("...");
+      }
+    }
+
+    start = s_anchorTitleRx->search(str_, start);
+
+    if(count < m_countOffset) {
+      ++count;
+      continue;
+    }
+
+    // if we got this far, then there is a valid result
+    if(m_matches.size() >= m_limit) {
+      m_hasMoreResults = true;
+      break;
     }
 
     SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
@@ -333,12 +403,18 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     u.setQuery(QString::null);
     m_matches.insert(r->uid, u);
     emit signalResultFound(r);
-    start = s_anchorTitleRx->search(str_, start+cap2.length());
+    ++count;
   }
+  if(!m_hasMoreResults && m_currentTitleBlock != Partial) {
+    m_hasMoreResults = true;
+  }
+  m_countOffset = m_matches.size() < m_limit ? 0 : count;
 }
 
 void IMDBFetcher::parseSingleNameResult() {
 //  myDebug() << "IMDBFetcher::parseSingleNameResult()" << endl;
+
+  m_currentTitleBlock = SinglePerson;
 
   QString output = Tellico::decodeHTML(QString(m_data));
 
@@ -348,9 +424,15 @@ void IMDBFetcher::parseSingleNameResult() {
     return;
   }
 
+  QRegExp tvRegExp(QString::fromLatin1("TV\\sEpisode"), false);
+
+  int len = 0;
+  int count = 0;
   QString desc;
-  while(m_started && pos > -1 && m_matches.size() < m_limit) {
-    int len = s_anchorTitleRx->cap(0).length();
+  for( ; m_started && pos > -1; pos = s_anchorTitleRx->search(output, pos+len)) {
+    desc.truncate(0);
+    bool isEpisode = false;
+    len = s_anchorTitleRx->cap(0).length();
     // split title at parenthesis
     const QString cap2 = s_anchorTitleRx->cap(2);
     int pPos = cap2.find('(');
@@ -362,15 +444,40 @@ void IMDBFetcher::parseSingleNameResult() {
       if(aPos == -1) {
         aPos = output.length();
       }
-      QString tmp = output.mid(pos+len, aPos-pos-len).remove(*s_tagRx);;
+      QString tmp = output.mid(pos+len, aPos-pos-len);
+      if(tmp.find(tvRegExp) > -1) {
+        isEpisode = true;
+      }
       pPos = tmp.find('(');
       if(pPos > -1) {
-        int pEnd = tmp.find(')', pPos+1);
-        desc = tmp.mid(pPos+1, pEnd-pPos-1);
+        int pNewLine = tmp.find(QString::fromLatin1("<br"));
+        if(pNewLine == -1 || pPos < pNewLine) {
+          int pEnd = tmp.find(')', pPos+1);
+          desc = tmp.mid(pPos+1, pEnd-pPos-1).remove(*s_tagRx);
+        }
         // but need to indicate it wasn't found initially
         pPos = -1;
       }
     }
+
+    ;
+
+    if(count < m_countOffset) {
+      ++count;
+      continue;
+    }
+
+    ++count;
+    if(isEpisode) {
+      continue;
+    }
+
+    // if we got this far, then there is a valid result
+    if(m_matches.size() >= m_limit) {
+      m_hasMoreResults = true;
+      break;
+    }
+
     // FIXME: maybe remove parentheses here?
     SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
     KURL u(m_url, s_anchorTitleRx->cap(1)); // relative URL constructor
@@ -379,8 +486,11 @@ void IMDBFetcher::parseSingleNameResult() {
 //    myDebug() << u.prettyURL() << endl;
 //    myDebug() << cap2 << endl;
     emit signalResultFound(r);
-    pos = s_anchorTitleRx->search(output, pos+len);
   }
+  if(pos == -1) {
+    m_hasMoreResults = false;
+  }
+  m_countOffset = count - 1;
 
   stop();
 }

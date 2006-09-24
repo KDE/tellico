@@ -130,14 +130,14 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   connect(m_editISBN, SIGNAL(clicked()), SLOT(slotEditMultipleISBN()));
 
   // add for spacing
-  box2->setStretchFactor(new QWidget(box2), 1);
+  box2->setStretchFactor(new QWidget(box2), 10);
 
   label = new QLabel(i18n("Search s&ource:"), box2);
   m_sourceCombo = new KComboBox(box2);
   label->setBuddy(m_sourceCombo);
-  const Fetch::TypePairList sources = Fetch::Manager::self()->sources();
-  for(Fetch::TypePairList::ConstIterator it = sources.begin(); it != sources.end(); ++it) {
-    m_sourceCombo->insertItem((*it).index());
+  Fetch::FetcherVec sources = Fetch::Manager::self()->fetchers();
+  for(Fetch::FetcherVec::Iterator it = sources.begin(); it != sources.end(); ++it) {
+    m_sourceCombo->insertItem(Fetch::Manager::self()->fetcherIcon(it.data()), (*it).source());
   }
   connect(m_sourceCombo, SIGNAL(activated(const QString&)), SLOT(slotSourceChanged(const QString&)));
   QWhatsThis::add(m_sourceCombo, i18n("Select the database to search"));
@@ -182,17 +182,21 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   m_addButton->setIconSet(UserIconSet(Kernel::self()->collectionTypeName()));
   connect(m_addButton, SIGNAL(clicked()), SLOT(slotAddEntry()));
   QWhatsThis::add(m_addButton, i18n("Add the selected entry to the current collection"));
-/*  m_viewButton = new KPushButton(i18n("View Entry"), box3);
-  connect(m_viewButton, SIGNAL(clicked()), SLOT(slotViewEntry()));*/
+
+  m_moreButton = new KPushButton(KGuiItem(i18n("Get More Results"), SmallIconSet(QString::fromLatin1("find"))), box3);
+  m_moreButton->setEnabled(false);
+  connect(m_moreButton, SIGNAL(clicked()), SLOT(slotMoreClicked()));
+  QWhatsThis::add(m_moreButton, i18n("Fetch more results from the current data source"));
+
   KPushButton* clearButton = new KPushButton(KStdGuiItem::clear(), box3);
   connect(clearButton, SIGNAL(clicked()), SLOT(slotClearClicked()));
   QWhatsThis::add(clearButton, i18n("Clear all search fields and results"));
 
-  QHBox* box = new QHBox(mainWidget, "box");
-  topLayout->addWidget(box);
-  box->setSpacing(KDialog::spacingHint());
+  QHBox* bottombox = new QHBox(mainWidget, "box");
+  topLayout->addWidget(bottombox);
+  bottombox->setSpacing(KDialog::spacingHint());
 
-  m_statusBar = new KStatusBar(box, "statusbar");
+  m_statusBar = new KStatusBar(bottombox, "statusbar");
   m_statusBar->insertItem(QString::null, FETCH_STATUS_ID, 1, false);
   m_statusBar->setItemAlignment(FETCH_STATUS_ID, AlignLeft | AlignVCenter);
   m_progress = new QProgressBar(m_statusBar, "progress");
@@ -201,7 +205,7 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   m_progress->hide();
   m_statusBar->addWidget(m_progress, 0, true);
 
-  KPushButton* closeButton = new KPushButton(KStdGuiItem::close(), box);
+  KPushButton* closeButton = new KPushButton(KStdGuiItem::close(), bottombox);
   connect(closeButton, SIGNAL(clicked()), SLOT(slotClose()));
 
   connect(m_timer, SIGNAL(timeout()), SLOT(slotMoveProgress()));
@@ -281,6 +285,7 @@ void FetchDialog::slotClearClicked() {
   m_valueLineEdit->clear();
   m_valueLineEdit->setFocus();
   m_addButton->setEnabled(false);
+  m_moreButton->setEnabled(false);
   m_isbnList.clear();
   m_statusMessages.clear();
   setStatus(i18n("Ready.")); // because slotFetchDone() writes text
@@ -324,6 +329,7 @@ void FetchDialog::slotFetchDone() {
                     "The search returned %n items.",
                     m_resultCount));
   }
+  m_moreButton->setEnabled(Fetch::Manager::self()->hasMoreResults());
 }
 
 void FetchDialog::slotResultFound(Fetch::SearchResult* result_) {
@@ -359,6 +365,21 @@ void FetchDialog::slotAddEntry() {
   if(!vec.isEmpty()) {
     Kernel::self()->addEntries(vec, true);
   }
+}
+
+void FetchDialog::slotMoreClicked() {
+  if(m_started) {
+    myDebug() << "FetchDialog::slotMoreClicked() - can't continue whiel running" << endl;
+    return;
+  }
+
+  m_started = true;
+  m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
+                                      SmallIconSet(QString::fromLatin1("cancel"))));
+  startProgress();
+  setStatus(i18n("Searching..."));
+  kapp->processEvents();
+  Fetch::Manager::self()->continueSearch();
 }
 
 void FetchDialog::slotShowEntry() {

@@ -271,11 +271,12 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   m_checkFirstRowHeader->setChecked(m_firstRowHeader);
   if(m_delimiter == Latin1Literal(",")) {
     m_radioComma->setChecked(true);
+    slotDelimiter(); // since the comma box was already checked, the slot won't fire
   } else if(m_delimiter == Latin1Literal(";")) {
     m_radioSemicolon->setChecked(true);
   } else if(m_delimiter == Latin1Literal("\t")) {
     m_radioTab->setChecked(true);
-  } else {
+  } else if(!m_delimiter.isEmpty()) {
     m_radioOther->setChecked(true);
     m_editOther->setEnabled(true);
     m_editOther->setText(m_delimiter);

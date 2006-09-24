@@ -14,14 +14,23 @@
 #ifndef TELLICO_NEWSTUFF_NEWSCRIPT_H
 #define TELLICO_NEWSTUFF_NEWSCRIPT_H
 
+#include <kdeversion.h>
+
+#if KDE_IS_VERSION(3,3,90)
 #include <knewstuff/knewstuffsecure.h>
+#define SUPERCLASS KNewStuffSecure
+#else
+#define SUPERCLASS QObject
+#endif
+
+#include <qobject.h>
 
 namespace Tellico {
   namespace NewStuff {
 
 class Manager;
 
-class NewScript : public KNewStuffSecure {
+class NewScript : public SUPERCLASS {
 Q_OBJECT
 
 public:
@@ -32,8 +41,14 @@ private:
   virtual void installResource();
 
   Manager* m_manager;
+#if !KDE_IS_VERSION(3,3,90)
+  // KNewStuffSecure has a protected variable
+  QString m_tarName;
+#endif
 };
 
   }
 }
+
+#undef SUPERCLASS
 #endif

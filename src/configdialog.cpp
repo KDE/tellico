@@ -530,6 +530,11 @@ void ConfigDialog::setupFetchPage() {
   m_newStuffBtn->setIconSet(SmallIconSet(QString::fromLatin1("knewstuff")));
   QWhatsThis::add(m_newStuffBtn, i18n("Click to download additional data sources via the Internet."));
 
+#if !KDE_IS_VERSION(3,3,90)
+  // only available in KDE 3.4 and up
+  m_newStuffBtn->setEnabled(false);
+#endif
+
   vlay->addWidget(newSourceBtn);
   vlay->addWidget(m_modifySourceBtn);
   vlay->addWidget(m_removeSourceBtn);

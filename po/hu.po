@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"POT-Creation-Date: 2006-08-30 20:27-0700\n"
+"POT-Creation-Date: 2006-09-24 09:08-0700\n"
 "PO-Revision-Date: 2006-06-10 13:51+0200\n"
 "Last-Translator: Zakariás Csaba <csaba.zakarias@gmail.com>\n"
 "Language-Team:  <hu@li.org>\n"
@@ -403,31 +403,31 @@ msgstr "nem egyező reguláris kifejezés"
 msgid "Edit..."
 msgstr "Szerkesztés..."
 
-#: filterdialog.cpp:286
+#: filterdialog.cpp:282
 msgid "Advanced Filter"
 msgstr "Finomított szűrő"
 
-#: commands/filtercommand.cpp:100 filterdialog.cpp:286 filterview.cpp:67
+#: commands/filtercommand.cpp:100 filterdialog.cpp:282 filterview.cpp:67
 msgid "Modify Filter"
 msgstr "Szűrés módosítása"
 
-#: filterdialog.cpp:298
+#: filterdialog.cpp:294
 msgid "Filter Criteria"
 msgstr "Szűrés kritériuma"
 
-#: filterdialog.cpp:304
+#: filterdialog.cpp:300
 msgid "Match a&ll of the following"
 msgstr "Minden alábbival egyező"
 
-#: filterdialog.cpp:305
+#: filterdialog.cpp:301
 msgid "Match an&y of the following"
 msgstr "Az alábbiakkal nem egyező"
 
-#: filterdialog.cpp:315
+#: filterdialog.cpp:311
 msgid "Filter name:"
 msgstr "Szűrés neve:"
 
-#: filterdialog.cpp:323
+#: filterdialog.cpp:319
 msgid "&Save Filter"
 msgstr "&Szűrés mentése"
 
@@ -439,7 +439,7 @@ msgstr "&Szűrés mentése"
 #: collections/gamecollection.cpp:19 collections/musiccollection.cpp:19
 #: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
 #: collections/videocollection.cpp:41 collections/winecollection.cpp:19
-#: configdialog.cpp:191 fetch/imdbfetcher.cpp:578 fetch/imdbfetcher.cpp:800
+#: configdialog.cpp:191 fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:910
 #: field.cpp:39 field.cpp:71 translators/gcfilmsimporter.cpp:54
 msgid "General"
 msgstr "Általános"
@@ -558,12 +558,12 @@ msgstr ""
 "típusa. A bejegyzéseknek pontosan egyezniük kell az összefésüléshez."
 
 #: importdialog.cpp:204 mainwindow.cpp:1049 mainwindow.cpp:1208
-#: translators/tellicozipexporter.cpp:38
+#: translators/tellicozipexporter.cpp:39
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Tellico fájlok (*.tc)"
 
 #: importdialog.cpp:205 importdialog.cpp:218 importdialog.cpp:222
-#: mainwindow.cpp:1051 translators/tellicoxmlexporter.cpp:59
+#: mainwindow.cpp:1051 translators/tellicoxmlexporter.cpp:60
 msgid "*.xml|XML Files (*.xml)"
 msgstr "*.xml|XML fájlok (*.xml)"
 
@@ -588,12 +588,12 @@ msgstr "*.gcf|GCFilm adatfájlok (*.gcf)"
 msgid "*.amc|AMC Data Files (*.amc)"
 msgstr "*.gcf|GCFilm adatfájlok (*.gcf)"
 
-#: configdialog.cpp:1003 importdialog.cpp:245 mainwindow.cpp:1053
+#: configdialog.cpp:1005 importdialog.cpp:245 mainwindow.cpp:1053
 #: mainwindow.cpp:1210 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:87
-#: translators/onixexporter.cpp:65 translators/pilotdbexporter.cpp:47
-#: translators/tellicoxmlexporter.cpp:59 translators/tellicozipexporter.cpp:38
+#: translators/onixexporter.cpp:66 translators/pilotdbexporter.cpp:47
+#: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
 #: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:86
 msgid "*|All Files"
 msgstr "*|Minden fájl"
@@ -693,11 +693,11 @@ msgid ""
 "Clear"
 msgstr "Törlés"
 
-#: gui/imagewidget.cpp:50
+#: gui/imagewidget.cpp:52
 msgid "Select Image..."
 msgstr "Kép kiválasztása..."
 
-#: gui/previewdialog.cpp:26
+#: gui/previewdialog.cpp:27
 #, fuzzy
 msgid "Template Preview"
 msgstr "Sablonok"
@@ -1187,7 +1187,7 @@ msgstr "&Új bejegyzés..."
 msgid "Create a new entry"
 msgstr "Új bejegyzés létrehozása"
 
-#: controller.cpp:596 mainwindow.cpp:533
+#: controller.cpp:598 mainwindow.cpp:533
 msgid "&Edit Entry..."
 msgstr "B&ejegyzés szerkesztése..."
 
@@ -1195,7 +1195,7 @@ msgstr "B&ejegyzés szerkesztése..."
 msgid "Edit the selected entries"
 msgstr "Kiválasztott bejegyzés szerkesztése"
 
-#: controller.cpp:597 mainwindow.cpp:537
+#: controller.cpp:599 mainwindow.cpp:537
 #, fuzzy
 msgid "D&uplicate Entry"
 msgstr "B&ejegyzés frissítése"
@@ -1204,7 +1204,7 @@ msgstr "B&ejegyzés frissítése"
 msgid "Copy the selected entries"
 msgstr "Kiválasztott bejegyzés másolása"
 
-#: controller.cpp:599 mainwindow.cpp:541
+#: controller.cpp:601 mainwindow.cpp:541
 msgid "&Delete Entry"
 msgstr "B&ejegyzés törlése"
 
@@ -1292,7 +1292,7 @@ msgstr "B&ejegyzés idézése OpenOffice.org-ban"
 msgid "Cite the selected entries in OpenOffice.org"
 msgstr "Kiválasztott bejegyzés idézése OpenOffice.org-ban"
 
-#: controller.cpp:598 mainwindow.cpp:602 rc.cpp:6
+#: controller.cpp:600 mainwindow.cpp:602 rc.cpp:6
 msgid "&Update Entry"
 msgstr "B&ejegyzés frissítése"
 
@@ -1483,7 +1483,7 @@ msgstr "%1. oldal"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Hiba keletkezett az XSLT feldolgozásakor."
 
-#: entryview.cpp:175 mainwindow.cpp:1694
+#: entryview.cpp:170 mainwindow.cpp:1694
 msgid "Please check your installation."
 msgstr "Kérem, ellenőrizze a rendszer beállításait."
 
@@ -1679,46 +1679,46 @@ msgid ""
 "Add %1"
 msgstr "%1 hozzáadása"
 
-#: controller.cpp:131 fetchdialog.cpp:210 fetchdialog.cpp:286
-#: fetchdialog.cpp:353 fetchdialog.cpp:393 newstuff/dialog.cpp:296
+#: controller.cpp:131 fetchdialog.cpp:214 fetchdialog.cpp:291
+#: fetchdialog.cpp:359 fetchdialog.cpp:414 newstuff/dialog.cpp:296
 #: newstuff/dialog.cpp:323 newstuff/dialog.cpp:431 statusbar.cpp:82
 msgid "Ready."
 msgstr "Kész."
 
-#: controller.cpp:419
+#: controller.cpp:421
 msgid "Do you really want to delete this entry?"
 msgstr "Tényleg törölni akarja a bejegyzést?"
 
-#: controller.cpp:421
+#: controller.cpp:423
 msgid "Delete Entry"
 msgstr "Bejegyzés törlése"
 
-#: controller.cpp:431
+#: controller.cpp:433
 msgid "Do you really want to delete these entries?"
 msgstr "Tényleg törölni akarja a bejegyzéseket?"
 
-#: controller.cpp:435
+#: controller.cpp:437
 msgid "Delete Multiple Entries"
 msgstr "Több bejegyzés törlése"
 
-#: controller.cpp:601
+#: controller.cpp:603
 msgid "&Edit Entries..."
 msgstr "Bejegyzések szerkesztése..."
 
-#: controller.cpp:602
+#: controller.cpp:604
 #, fuzzy
 msgid "D&uplicate Entries"
 msgstr "&Bejegyzések frissítése"
 
-#: controller.cpp:603
+#: controller.cpp:605
 msgid "&Update Entries"
 msgstr "&Bejegyzések frissítése"
 
-#: controller.cpp:604
+#: controller.cpp:606
 msgid "&Delete Entries"
 msgstr "Bejegyzések &törlése"
 
-#: controller.cpp:658
+#: controller.cpp:660
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
 "support lending an item multiple times. They will be removed from the list "
@@ -1759,7 +1759,7 @@ msgstr "Bélyegeim"
 #: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
 #: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
 #: collections/winecollection.cpp:38 entryupdater.cpp:230
-#: fetch/fetchmanager.cpp:61 fetchdialog.cpp:158
+#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:158
 #: translators/tellicoimporter.cpp:400
 msgid "Title"
 msgstr "Cím"
@@ -2016,7 +2016,7 @@ msgstr "Fajta"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:833
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:852
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
 msgid "Keywords"
 msgstr "Kulcsszavak"
@@ -2492,7 +2492,7 @@ msgid "Organization"
 msgstr "Szervezet"
 
 #: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:428
-#: fetch/z3950fetcher.cpp:658
+#: fetch/z3950fetcher.cpp:669
 msgid "Address"
 msgstr "Postacím"
 
@@ -2517,7 +2517,7 @@ msgid "Cross-Reference"
 msgstr "Keresztreferencia"
 
 #: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:443
-#: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:659
+#: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:670
 #: translators/risimporter.cpp:246
 msgid "Abstract"
 msgstr "Elvont "
@@ -2539,7 +2539,7 @@ msgid "Album"
 msgstr "Album"
 
 #: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:224
-#: translators/freedbimporter.cpp:336 translators/freedbimporter.cpp:401
+#: translators/freedbimporter.cpp:337 translators/freedbimporter.cpp:402
 msgid "Compact Disc"
 msgstr "CD lemez"
 
@@ -2930,7 +2930,7 @@ msgid "Keep modified values"
 msgstr "Megváltozott értékek megtartása"
 
 #: collectionfieldsdialog.cpp:394 collectionfieldsdialog.cpp:397
-#: translators/csvimporter.cpp:409 translators/csvimporter.cpp:512
+#: translators/csvimporter.cpp:410 translators/csvimporter.cpp:513
 msgid "New Field"
 msgstr "Új mező"
 
@@ -2993,11 +2993,11 @@ msgstr ""
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "A táblázatok maximum 10 oszlopot tartalmazhatnak."
 
-#: calendarhandler.cpp:162
+#: calendarhandler.cpp:166
 msgid "Default Calendar"
 msgstr "Alapértelmezett naptár"
 
-#: calendarhandler.cpp:170
+#: calendarhandler.cpp:174
 msgid ""
 "At the moment, Tellico only supports local calendar resources. The active "
 "calendar is remotely located, so your loans will not be added."
@@ -3005,11 +3005,11 @@ msgstr ""
 "Jelenleg a Tellcio csak a helyi napárt támogatja. Az aktív naptár "
 "távoli helyen van, így a kölcsönök nem adhatók hozzá."
 
-#: calendarhandler.cpp:175
+#: calendarhandler.cpp:179
 msgid "Active Calendar"
 msgstr "Aktív naptár"
 
-#: calendarhandler.cpp:198
+#: calendarhandler.cpp:202
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Tellcio: %1 a \"%2\" miatt."
 
@@ -3019,7 +3019,7 @@ msgstr "Belépő adatbázis"
 
 #: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:423
 #: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:365
+#: fetch/yahoofetcher.cpp:388
 msgid "This source has no options."
 msgstr "A forrás nem rendelkezik beállításokkal."
 
@@ -3039,20 +3039,20 @@ msgstr "Elérhető mezők"
 msgid "SRU Server"
 msgstr "SRU szerver"
 
-#: fetch/imdbfetcher.cpp:966 fetch/srufetcher.cpp:343
-#: fetch/z3950fetcher.cpp:494
+#: fetch/imdbfetcher.cpp:1076 fetch/srufetcher.cpp:343
+#: fetch/z3950fetcher.cpp:505
 msgid "Hos&t: "
 msgstr "&Hoszt:"
 
-#: fetch/srufetcher.cpp:349 fetch/z3950fetcher.cpp:500
+#: fetch/srufetcher.cpp:349 fetch/z3950fetcher.cpp:511
 msgid "Enter the host name of the server."
 msgstr "Adja meg a szerver nevét."
 
-#: fetch/srufetcher.cpp:354 fetch/z3950fetcher.cpp:505
+#: fetch/srufetcher.cpp:354 fetch/z3950fetcher.cpp:516
 msgid "&Port: "
 msgstr "&Port szám:"
 
-#: fetch/srufetcher.cpp:359 fetch/z3950fetcher.cpp:510
+#: fetch/srufetcher.cpp:359 fetch/z3950fetcher.cpp:521
 #, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Adja meg a szerver nevét. Az alapértelmezett: %1."
@@ -3077,52 +3077,52 @@ msgstr "Formátum"
 msgid "Enter the result format used by the server."
 msgstr "Adja meg a szerver által használt adatbázis nevét."
 
-#: fetch/imdbfetcher.cpp:87
+#: fetch/imdbfetcher.cpp:88
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: fetch/imdbfetcher.cpp:467
+#: fetch/imdbfetcher.cpp:577
 msgid "Select IMDB Result"
 msgstr "Válassza ki az IMDB eredmény"
 
-#: fetch/imdbfetcher.cpp:470
+#: fetch/imdbfetcher.cpp:580
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
 "<qt>A keresés eredménye több értékű. Kérem válasszon közülük.</qt>"
 
-#: fetch/imdbfetcher.cpp:485
+#: fetch/imdbfetcher.cpp:595
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Válasszon a keresés eredményeiből.</qt>"
 
-#: fetch/imdbfetcher.cpp:577 fetch/imdbfetcher.cpp:1030
+#: fetch/imdbfetcher.cpp:687 fetch/imdbfetcher.cpp:1140
 msgid "IMDB Link"
 msgstr "IMDB kapcsolat"
 
-#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:632
-#: fetch/imdbfetcher.cpp:1032
+#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:742
+#: fetch/imdbfetcher.cpp:1142
 msgid "Alternative Titles"
 msgstr "Alternatív címek"
 
-#: fetch/imdbfetcher.cpp:799 fetch/imdbfetcher.cpp:1031
+#: fetch/imdbfetcher.cpp:909 fetch/imdbfetcher.cpp:1141
 msgid "IMDB Rating"
 msgstr "IMDB értékelés"
 
-#: fetch/imdbfetcher.cpp:910 fetch/imdbfetcher.cpp:1033
+#: fetch/imdbfetcher.cpp:1020 fetch/imdbfetcher.cpp:1143
 msgid "Certifications"
 msgstr "Osztályozás"
 
-#: fetch/imdbfetcher.cpp:971
+#: fetch/imdbfetcher.cpp:1081
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
 msgstr "Az IMDB több szervert használ. Válasszon közülük. "
 
-#: fetch/imdbfetcher.cpp:977
+#: fetch/imdbfetcher.cpp:1087
 msgid "&Maximum cast: "
 msgstr "&Maximális stáb:"
 
-#: fetch/imdbfetcher.cpp:982
+#: fetch/imdbfetcher.cpp:1092
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
@@ -3130,11 +3130,11 @@ msgstr ""
 "A stáb tagjainak listája sok személyt tartalmazhat. Adja meg a keresési "
 "eredmény számának maximális értékét."
 
-#: fetch/imdbfetcher.cpp:987
+#: fetch/imdbfetcher.cpp:1097
 msgid "Download cover &image"
 msgstr "&Fedlap kép letöltése"
 
-#: fetch/amazonfetcher.cpp:775 fetch/imdbfetcher.cpp:991
+#: fetch/amazonfetcher.cpp:794 fetch/imdbfetcher.cpp:1101
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -3143,23 +3143,23 @@ msgstr ""
 "gyűjteményben lévő túl sok nagyméretű kép csökkenti a "
 "teljesítményt."
 
-#: fetch/fetchmanager.cpp:62
+#: fetch/fetchmanager.cpp:63
 msgid "Person"
 msgstr "Személy"
 
-#: fetch/fetchmanager.cpp:63
+#: fetch/fetchmanager.cpp:64
 msgid "ISBN"
 msgstr "ISBN"
 
-#: fetch/fetchmanager.cpp:64
+#: fetch/fetchmanager.cpp:65
 msgid "UPC"
 msgstr "UPC"
 
-#: fetch/fetchmanager.cpp:65
+#: fetch/fetchmanager.cpp:66
 msgid "Keyword"
 msgstr "Kulcsszó"
 
-#: fetch/fetchmanager.cpp:66
+#: fetch/fetchmanager.cpp:67
 msgid "Raw Query"
 msgstr "Nyers lekérdezés"
 
@@ -3195,53 +3195,53 @@ msgstr "Amazon (Kanada)"
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com Web Szervízek"
 
-#: fetch/amazonfetcher.cpp:175 fetch/animenfofetcher.cpp:74
+#: fetch/amazonfetcher.cpp:189 fetch/animenfofetcher.cpp:74
 #: fetch/ibsfetcher.cpp:71 fetch/isbndbfetcher.cpp:75
-#: fetch/yahoofetcher.cpp:79
+#: fetch/yahoofetcher.cpp:92
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 nem engedi meg, hogy ezt a típusú gyűjteményben keressen."
 
-#: fetch/amazonfetcher.cpp:485
+#: fetch/amazonfetcher.cpp:505
 msgid "Results from %1: %2/%3"
 msgstr "Eredmény %1 -ből: %2/%3"
 
-#: fetch/amazonfetcher.cpp:514 fetch/z3950fetcher.cpp:415
+#: fetch/amazonfetcher.cpp:529 fetch/z3950fetcher.cpp:425
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>A következő ISBN számban nem található az érték:</qt>"
 
-#: fetch/amazonfetcher.cpp:669 fetch/yahoofetcher.cpp:215
+#: fetch/amazonfetcher.cpp:688 fetch/yahoofetcher.cpp:238
 msgid "The cover image could not be loaded."
 msgstr "Nem tölthető be a címlap kép."
 
-#: fetch/amazonfetcher.cpp:746
+#: fetch/amazonfetcher.cpp:765
 msgid "Co&untry: "
 msgstr "&Ország:"
 
-#: fetch/amazonfetcher.cpp:750
+#: fetch/amazonfetcher.cpp:769
 msgid "United States"
 msgstr "Egyesült Államok"
 
-#: fetch/amazonfetcher.cpp:751
+#: fetch/amazonfetcher.cpp:770
 msgid "United Kingdom"
 msgstr "Nagy Britannia"
 
-#: fetch/amazonfetcher.cpp:752
+#: fetch/amazonfetcher.cpp:771
 msgid "Germany"
 msgstr "Németország"
 
-#: fetch/amazonfetcher.cpp:753
+#: fetch/amazonfetcher.cpp:772
 msgid "Japan"
 msgstr "Japán"
 
-#: fetch/amazonfetcher.cpp:754
+#: fetch/amazonfetcher.cpp:773
 msgid "France"
 msgstr "Franciaország"
 
-#: fetch/amazonfetcher.cpp:755
+#: fetch/amazonfetcher.cpp:774
 msgid "Canada"
 msgstr "Kanada"
 
-#: fetch/amazonfetcher.cpp:759
+#: fetch/amazonfetcher.cpp:778
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -3249,31 +3249,31 @@ msgstr ""
 "Az Amazon.com számos különböző helyi oldalról nyújt adatokat. "
 "Válasszon egyet, melyet az adatforráshoz használni akar."
 
-#: fetch/amazonfetcher.cpp:765
+#: fetch/amazonfetcher.cpp:784
 msgid "&Image size: "
 msgstr "&Kép méret"
 
-#: fetch/amazonfetcher.cpp:769
+#: fetch/amazonfetcher.cpp:788
 msgid "Small Image"
 msgstr "Kis méretű kép"
 
-#: fetch/amazonfetcher.cpp:770
+#: fetch/amazonfetcher.cpp:789
 msgid "Medium Image"
 msgstr "Közepes méretű kép"
 
-#: fetch/amazonfetcher.cpp:771
+#: fetch/amazonfetcher.cpp:790
 msgid "Large Image"
 msgstr "Nagy méretű kép"
 
-#: fetch/amazonfetcher.cpp:772
+#: fetch/amazonfetcher.cpp:791
 msgid "No Image"
 msgstr "Kép nélkül"
 
-#: fetch/amazonfetcher.cpp:781
+#: fetch/amazonfetcher.cpp:800
 msgid "&Associate's ID: "
 msgstr "Kisegítő azonosító:"
 
-#: fetch/amazonfetcher.cpp:786
+#: fetch/amazonfetcher.cpp:805
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -3351,28 +3351,28 @@ msgstr ""
 "találhatók, például <i>%{author}%</i> További részletekért fordultjon "
 "a dokumentációhoz.</p>"
 
-#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:745
+#: fetch/z3950fetcher.cpp:78 fetch/z3950fetcher.cpp:756
 #, fuzzy
 msgid "z39.50 Server"
 msgstr "z39.50"
 
-#: fetch/z3950fetcher.cpp:484
+#: fetch/z3950fetcher.cpp:495
 msgid "Use preset &server:"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:515
+#: fetch/z3950fetcher.cpp:526
 msgid "&Database: "
 msgstr "&Adatbázis"
 
-#: fetch/z3950fetcher.cpp:520
+#: fetch/z3950fetcher.cpp:531
 msgid "Enter the database name used by the server."
 msgstr "Adja meg a szerver által használt adatbázis nevét."
 
-#: fetch/z3950fetcher.cpp:525
+#: fetch/z3950fetcher.cpp:536
 msgid "Ch&aracter set: "
 msgstr "Karakter készlet:"
 
-#: fetch/z3950fetcher.cpp:534
+#: fetch/z3950fetcher.cpp:545
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -3380,30 +3380,30 @@ msgstr ""
 "Adja meg a z39.50 szerver által használt karakter készlet kódolását. A "
 "legvalószínűbb választás a MARC-8, habár ISO-8859-1 az általános."
 
-#: fetch/z3950fetcher.cpp:540
+#: fetch/z3950fetcher.cpp:551
 #, fuzzy
 msgid "&Format: "
 msgstr "Formátum"
 
-#: fetch/z3950fetcher.cpp:543
+#: fetch/z3950fetcher.cpp:554
 msgid "Auto-detect"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:551
+#: fetch/z3950fetcher.cpp:562
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:557
+#: fetch/z3950fetcher.cpp:568
 msgid "&User: "
 msgstr "&Felhasználó:"
 
-#: fetch/z3950fetcher.cpp:560 fetch/z3950fetcher.cpp:572
+#: fetch/z3950fetcher.cpp:571 fetch/z3950fetcher.cpp:583
 msgid "Optional"
 msgstr "Opcionális"
 
-#: fetch/z3950fetcher.cpp:563
+#: fetch/z3950fetcher.cpp:574
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -3411,11 +3411,11 @@ msgstr ""
 "Adja meg a z39.50 adatbázishoz az érvényes felhasználó nevét. A "
 "legtöbb szervernél ez nem szükséges."
 
-#: fetch/z3950fetcher.cpp:569
+#: fetch/z3950fetcher.cpp:580
 msgid "Pass&word: "
 msgstr "Jelszó:"
 
-#: fetch/z3950fetcher.cpp:576
+#: fetch/z3950fetcher.cpp:587
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one. The password will be saved in plain text in the Tellico "
@@ -3425,7 +3425,7 @@ msgstr ""
 "szervernél ez nem szükséges. A jelszót nyílt szövegként a Tellico "
 "beállítási fáljba kerül elmentésre."
 
-#: fetch/z3950fetcher.cpp:660
+#: fetch/z3950fetcher.cpp:671
 msgid "Illustrator"
 msgstr ""
 
@@ -3441,19 +3441,19 @@ msgstr "Forgalmazó"
 msgid "Episodes"
 msgstr "Epizódok"
 
-#: fetch/z3950connection.cpp:104
+#: fetch/z3950connection.cpp:115
 msgid "Query error!"
 msgstr "Lekérdezési hiba!"
 
-#: fetch/z3950connection.cpp:144
+#: fetch/z3950connection.cpp:156
 msgid "Connection search error %1: %2"
 msgstr "Csatlakozás keresési hiba %1: %2"
 
-#: fetch/z3950connection.cpp:222
+#: fetch/z3950connection.cpp:233
 msgid "Record syntax error"
 msgstr "Rekord szintaxis hiba"
 
-#: fetch/z3950connection.cpp:297
+#: fetch/z3950connection.cpp:316
 msgid "Connection error %1: %2"
 msgstr "Csatlakozási hiba %1: %2"
 
@@ -3924,20 +3924,20 @@ msgstr ""
 "Kattintson a szöveg szerkesztési ablak kinyitásához, ahol a "
 "többszörös ISBN értékeket megadhatja, vagy megváltoztathatja."
 
-#: configdialog.cpp:1001 translators/xsltimporter.cpp:85
+#: configdialog.cpp:1003 translators/xsltimporter.cpp:85
 msgid "*.xsl|XSL Files (*.xsl)"
 msgstr "*.xsl|XSL fájlok (*.xsl)"
 
-#: configdialog.cpp:1002
+#: configdialog.cpp:1004
 msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
 msgstr ""
 
-#: configdialog.cpp:1035
+#: configdialog.cpp:1037
 #, fuzzy
 msgid "Delete Template"
 msgstr "Szűrés törlése"
 
-#: configdialog.cpp:1036
+#: configdialog.cpp:1038
 #, fuzzy
 msgid "Select template to delete:"
 msgstr "Adatbázis kiválasztása kereséshez"
@@ -4093,55 +4093,64 @@ msgstr "Bejegyzés hozzáadása"
 msgid "Add the selected entry to the current collection"
 msgstr "Kiválasztott bejegyzés hozzáadása a jelenlegi gyűjteményhez"
 
+#: fetchdialog.cpp:186
+#, fuzzy
+msgid "Get More Results"
+msgstr "Válassza ki az IMDB eredmény"
+
 #: fetchdialog.cpp:189
+msgid "Fetch more results from the current data source"
+msgstr ""
+
+#: fetchdialog.cpp:193
 msgid "Clear all search fields and results"
 msgstr "Az összes keresési mező és az eredmények törlése"
 
-#: fetchdialog.cpp:253
+#: fetchdialog.cpp:257
 msgid "Cancelling the search..."
 msgstr "A keresés leállítása..."
 
-#: fetchdialog.cpp:268
+#: fetchdialog.cpp:272 fetchdialog.cpp:380
 msgid "Searching..."
 msgstr "Keresés..."
 
-#: fetchdialog.cpp:321
+#: fetchdialog.cpp:326
 msgid "The search returned no items."
 msgstr "A keresés nem talált semmit."
 
-#: fetchdialog.cpp:324
+#: fetchdialog.cpp:329
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
 msgstr "A keresés %n elemet adott vissza."
 
-#: fetchdialog.cpp:345 fetchdialog.cpp:382
+#: fetchdialog.cpp:351 fetchdialog.cpp:403
 msgid "Fetching %1..."
 msgstr "%1 feldolgozása..."
 
-#: fetchdialog.cpp:415
+#: fetchdialog.cpp:436
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 "A jelenlegi gyűjteméyn típusához nincs elérhető internet forrás."
 
-#: fetchdialog.cpp:475
+#: fetchdialog.cpp:496
 msgid "Edit ISBN/UPC Values"
 msgstr "ISBN/UPC értékek szerkesztése"
 
-#: fetchdialog.cpp:479
+#: fetchdialog.cpp:500
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Soronként egy ISBN vagy UPC érték megadása.</qt>"
 
-#: fetchdialog.cpp:485
+#: fetchdialog.cpp:506
 msgid "&Load From File..."
 msgstr "Betöltés fájlból..."
 
-#: fetchdialog.cpp:486
+#: fetchdialog.cpp:507
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Szöveg fájlból lista betöltése.</qt>"
 
-#: fetchdialog.cpp:505
+#: fetchdialog.cpp:526
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
@@ -4262,19 +4271,19 @@ msgstr ""
 "<qt>A kért <i>%1</i> Alexandria könyvtár már létezik. A könyvtárban "
 "bármelyik létező könyv felülírható.</qt>"
 
-#: translators/tellicoxmlexporter.cpp:55
+#: translators/tellicoxmlexporter.cpp:56
 msgid "XML"
 msgstr "XML"
 
-#: translators/tellicoxmlexporter.cpp:451
+#: translators/tellicoxmlexporter.cpp:464
 msgid "Tellico XML Options"
 msgstr "Tellico XML beállítások"
 
-#: translators/tellicoxmlexporter.cpp:454
+#: translators/tellicoxmlexporter.cpp:467
 msgid "Include images in XML document"
 msgstr "Az XML dokumentum tartalmazza a képeket"
 
-#: translators/tellicoxmlexporter.cpp:456
+#: translators/tellicoxmlexporter.cpp:469
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
@@ -4348,7 +4357,7 @@ msgstr ""
 "zárójellel, vagy idézőjellel ellátott mezők értékét figyelmen "
 "kívül hagyja.</qt>"
 
-#: translators/tellicozipexporter.cpp:34
+#: translators/tellicozipexporter.cpp:35
 msgid "Tellico Zip File"
 msgstr "Tellico Zip fájl"
 
@@ -4559,23 +4568,23 @@ msgstr "PilotDB beállítások"
 msgid "Set PDA backup flag for database"
 msgstr "PDA mentési jel beállítása az adatbázishoz"
 
-#: translators/onixexporter.cpp:61
+#: translators/onixexporter.cpp:62
 msgid "ONIX Archive"
 msgstr "ONIX archiv"
 
-#: translators/onixexporter.cpp:65
+#: translators/onixexporter.cpp:66
 msgid "*.zip|Zip Files (*.zip)"
 msgstr "*.zip|Zip fájlok (*.zip)"
 
-#: translators/onixexporter.cpp:174
+#: translators/onixexporter.cpp:175
 msgid "ONIX Archive Options"
 msgstr "ONIX archiv beállítások"
 
-#: translators/onixexporter.cpp:177
+#: translators/onixexporter.cpp:178
 msgid "Include images in archive"
 msgstr "Képek hozzáadása az archívumhoz"
 
-#: translators/onixexporter.cpp:179
+#: translators/onixexporter.cpp:180
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
 "archive."
@@ -4606,27 +4615,27 @@ msgstr "<qt>A CD-hez nem található megfelelő rekord.</qt>"
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "<qt>A Tellico nem tudta befejezni a CD keresését.</qt>"
 
-#: translators/freedbimporter.cpp:425
+#: translators/freedbimporter.cpp:426
 msgid "Various"
 msgstr "Különböző"
 
-#: translators/freedbimporter.cpp:444
+#: translators/freedbimporter.cpp:445
 msgid "Audio CD Options"
 msgstr "Hang CD beállítások"
 
-#: translators/freedbimporter.cpp:448
+#: translators/freedbimporter.cpp:449
 msgid "Read data from CD-ROM device"
 msgstr "Adatok olvasása a CD-ROM-ról"
 
-#: translators/freedbimporter.cpp:451
+#: translators/freedbimporter.cpp:452
 msgid "Select or input the CD-ROM device location."
 msgstr "Válassza ki, vagy adja meg a CD-ROM elérését."
 
-#: translators/freedbimporter.cpp:457
+#: translators/freedbimporter.cpp:458
 msgid "Read all CDDB cache files only"
 msgstr "Csak a CDDB fájlok olvasása"
 
-#: translators/freedbimporter.cpp:458
+#: translators/freedbimporter.cpp:459
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
@@ -4722,7 +4731,7 @@ msgstr ""
 "Ha kijelöüli, a fájl tartalmának előnézete létrejön, ez "
 "lelassíthatja könyvtár listázást."
 
-#: entryview.cpp:173
+#: entryview.cpp:168
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nem találja az alapértelmezett bejegyzés stíluslapot."
 
@@ -4745,6 +4754,18 @@ msgstr "jr.,jr,iii,iv"
 #: core/tellico_config.cpp:127
 msgid "de,van,der,van der,von"
 msgstr "de,van,der,van der,von"
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "Új"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Gyűjtemény"
+
+#: rc.cpp:8
+msgid "Collection Toolbar"
+msgstr "Gyűjtemény eszköztár"
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -4838,18 +4859,6 @@ msgstr ""
 "<qt><b>%1</b> többszörös eredményt adott vissza, mely megegyezik "
 "<b>%2</b>-vel, az egyik bejegyzéssel a gyűjteményben. Kérem válassza ki "
 "a megfelelőt.</qt>"
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "Új"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Gyűjtemény"
-
-#: rc.cpp:8
-msgid "Collection Toolbar"
-msgstr "Gyűjtemény eszköztár"
 
 #: newstuff/dialog.cpp:93
 msgid "Get Hot New Stuff"

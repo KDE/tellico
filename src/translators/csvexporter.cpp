@@ -154,7 +154,7 @@ QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
     m_radioSemicolon->setChecked(true);
   } else if(m_delimiter == '\t') {
     m_radioTab->setChecked(true);
-  } else {
+  } else if(!m_delimiter.isEmpty()) {
     m_radioOther->setChecked(true);
     m_editOther->setEnabled(true);
     m_editOther->setText(m_delimiter);

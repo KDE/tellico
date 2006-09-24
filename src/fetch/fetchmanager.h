@@ -51,11 +51,12 @@ public:
 
   ~Manager();
 
-  TypePairList sources() const;
   KeyMap keyMap(const QString& source = QString::null) const;
   void startSearch(const QString& source, FetchKey key, const QString& value);
+  void continueSearch();
   void stop();
   bool canFetch() const;
+  bool hasMoreResults() const;
   void loadFetchers();
   const FetcherVec& fetchers() const { return m_fetchers; }
   CFetcherVec fetchers(int type) const;
@@ -91,6 +92,7 @@ private:
   static bool bundledScriptHasExecPath(const QString& specFile, KConfig* config);
 
   FetcherVec m_fetchers;
+  int m_currentFetcherIndex;
   KeyMap m_keyMap;
   typedef QMap<Fetcher::Ptr, QString> ConfigMap;
   ConfigMap m_configMap;

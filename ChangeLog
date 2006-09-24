@@ -1,3 +1,19 @@
+2006-09-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.3.
+
+2006-09-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added button to search dialog to get additional results.
+
+2006-09-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated to work with KDE 3.3.1 or later.
+
+2006-09-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with HTML export not including tellico2html.js.
+
 2006-09-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug that could cause loss of images.

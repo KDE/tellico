@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
-"POT-Creation-Date: 2006-08-30 20:27-0700\n"
+"POT-Creation-Date: 2006-09-24 09:08-0700\n"
 "PO-Revision-Date: 2005-10-03 21:22+0300\n"
 "Last-Translator: Teuvo Eloranta <teuvo -at- piketa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -403,31 +403,31 @@ msgstr "säännönmuk. lauseke ei sovi"
 msgid "Edit..."
 msgstr "Muokkaa..."
 
-#: filterdialog.cpp:286
+#: filterdialog.cpp:282
 msgid "Advanced Filter"
 msgstr "Tarkempi suodatin"
 
-#: commands/filtercommand.cpp:100 filterdialog.cpp:286 filterview.cpp:67
+#: commands/filtercommand.cpp:100 filterdialog.cpp:282 filterview.cpp:67
 msgid "Modify Filter"
 msgstr "Muokkaa suodatinta"
 
-#: filterdialog.cpp:298
+#: filterdialog.cpp:294
 msgid "Filter Criteria"
 msgstr "Suodattimen arvo"
 
-#: filterdialog.cpp:304
+#: filterdialog.cpp:300
 msgid "Match a&ll of the following"
 msgstr "Sopii kaikkiin &seuraaviin"
 
-#: filterdialog.cpp:305
+#: filterdialog.cpp:301
 msgid "Match an&y of the following"
 msgstr "Sopii mi&hin tahansa seuraavista"
 
-#: filterdialog.cpp:315
+#: filterdialog.cpp:311
 msgid "Filter name:"
 msgstr "Suodattimen nimi:"
 
-#: filterdialog.cpp:323
+#: filterdialog.cpp:319
 msgid "&Save Filter"
 msgstr "Tallenna &suodatin"
 
@@ -439,7 +439,7 @@ msgstr "Tallenna &suodatin"
 #: collections/gamecollection.cpp:19 collections/musiccollection.cpp:19
 #: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
 #: collections/videocollection.cpp:41 collections/winecollection.cpp:19
-#: configdialog.cpp:191 fetch/imdbfetcher.cpp:578 fetch/imdbfetcher.cpp:800
+#: configdialog.cpp:191 fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:910
 #: field.cpp:39 field.cpp:71 translators/gcfilmsimporter.cpp:54
 msgid "General"
 msgstr "Yleiset"
@@ -560,12 +560,12 @@ msgstr ""
 "tarkalleen toistensa kaltaiset."
 
 #: importdialog.cpp:204 mainwindow.cpp:1049 mainwindow.cpp:1208
-#: translators/tellicozipexporter.cpp:38
+#: translators/tellicozipexporter.cpp:39
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Tellico-tiedostot (*.tc)"
 
 #: importdialog.cpp:205 importdialog.cpp:218 importdialog.cpp:222
-#: mainwindow.cpp:1051 translators/tellicoxmlexporter.cpp:59
+#: mainwindow.cpp:1051 translators/tellicoxmlexporter.cpp:60
 msgid "*.xml|XML Files (*.xml)"
 msgstr "*.xml|XML-tiedostot (*.xml)"
 
@@ -591,12 +591,12 @@ msgstr "*.csv|CSV-tiedostot (*.csv)"
 msgid "*.amc|AMC Data Files (*.amc)"
 msgstr "*.csv|CSV-tiedostot (*.csv)"
 
-#: configdialog.cpp:1003 importdialog.cpp:245 mainwindow.cpp:1053
+#: configdialog.cpp:1005 importdialog.cpp:245 mainwindow.cpp:1053
 #: mainwindow.cpp:1210 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:87
-#: translators/onixexporter.cpp:65 translators/pilotdbexporter.cpp:47
-#: translators/tellicoxmlexporter.cpp:59 translators/tellicozipexporter.cpp:38
+#: translators/onixexporter.cpp:66 translators/pilotdbexporter.cpp:47
+#: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
 #: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:86
 msgid "*|All Files"
 msgstr "*|Kaikki tiedostot"
@@ -701,11 +701,11 @@ msgid ""
 "Clear"
 msgstr "Tyhjennä säätimet"
 
-#: gui/imagewidget.cpp:50
+#: gui/imagewidget.cpp:52
 msgid "Select Image..."
 msgstr "Valitse kuva..."
 
-#: gui/previewdialog.cpp:26
+#: gui/previewdialog.cpp:27
 #, fuzzy
 msgid "Template Preview"
 msgstr "Mallipohjat"
@@ -1206,7 +1206,7 @@ msgstr "&Uusi tietue..."
 msgid "Create a new entry"
 msgstr "Luo uusi tietue"
 
-#: controller.cpp:596 mainwindow.cpp:533
+#: controller.cpp:598 mainwindow.cpp:533
 msgid "&Edit Entry..."
 msgstr "&Muokkaa tietuetta..."
 
@@ -1214,7 +1214,7 @@ msgstr "&Muokkaa tietuetta..."
 msgid "Edit the selected entries"
 msgstr "Muokkaa valittuja tietueita"
 
-#: controller.cpp:597 mainwindow.cpp:537
+#: controller.cpp:599 mainwindow.cpp:537
 #, fuzzy
 msgid "D&uplicate Entry"
 msgstr "&Sitaatti"
@@ -1223,7 +1223,7 @@ msgstr "&Sitaatti"
 msgid "Copy the selected entries"
 msgstr "Kopioi valitut tietueet"
 
-#: controller.cpp:599 mainwindow.cpp:541
+#: controller.cpp:601 mainwindow.cpp:541
 msgid "&Delete Entry"
 msgstr "&Tuhoa tietue"
 
@@ -1316,7 +1316,7 @@ msgstr "&Sitaatti"
 msgid "Cite the selected entries in OpenOffice.org"
 msgstr "Lähetä valitut sitaatit LyX:iin"
 
-#: controller.cpp:598 mainwindow.cpp:602 rc.cpp:6
+#: controller.cpp:600 mainwindow.cpp:602 rc.cpp:6
 #, fuzzy
 msgid "&Update Entry"
 msgstr "&Sitaatti"
@@ -1505,7 +1505,7 @@ msgstr "Sivu %1"
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "XSLT:n käsittelyssä tapahtui virhe."
 
-#: entryview.cpp:175 mainwindow.cpp:1694
+#: entryview.cpp:170 mainwindow.cpp:1694
 msgid "Please check your installation."
 msgstr "Tarkista asennuksesi."
 
@@ -1705,47 +1705,47 @@ msgid ""
 "Add %1"
 msgstr "Tallenna %1"
 
-#: controller.cpp:131 fetchdialog.cpp:210 fetchdialog.cpp:286
-#: fetchdialog.cpp:353 fetchdialog.cpp:393 newstuff/dialog.cpp:296
+#: controller.cpp:131 fetchdialog.cpp:214 fetchdialog.cpp:291
+#: fetchdialog.cpp:359 fetchdialog.cpp:414 newstuff/dialog.cpp:296
 #: newstuff/dialog.cpp:323 newstuff/dialog.cpp:431 statusbar.cpp:82
 msgid "Ready."
 msgstr "Valmis."
 
-#: controller.cpp:419
+#: controller.cpp:421
 msgid "Do you really want to delete this entry?"
 msgstr "Haluatko todella tuhota tämän tietueen?"
 
-#: controller.cpp:421
+#: controller.cpp:423
 msgid "Delete Entry"
 msgstr "Tuhoa nimike"
 
-#: controller.cpp:431
+#: controller.cpp:433
 msgid "Do you really want to delete these entries?"
 msgstr "Haluatko todella tuhota valitut tietueet?"
 
-#: controller.cpp:435
+#: controller.cpp:437
 msgid "Delete Multiple Entries"
 msgstr "Tuhoa useampia nimikkeitä"
 
-#: controller.cpp:601
+#: controller.cpp:603
 msgid "&Edit Entries..."
 msgstr "&Muokkaa tietueita..."
 
-#: controller.cpp:602
+#: controller.cpp:604
 #, fuzzy
 msgid "D&uplicate Entries"
 msgstr "Muokkaa tietueita"
 
-#: controller.cpp:603
+#: controller.cpp:605
 #, fuzzy
 msgid "&Update Entries"
 msgstr "Muokkaa tietueita"
 
-#: controller.cpp:604
+#: controller.cpp:606
 msgid "&Delete Entries"
 msgstr "Tuh&oa tietueet"
 
-#: controller.cpp:658
+#: controller.cpp:660
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
 "support lending an item multiple times. They will be removed from the list "
@@ -1786,7 +1786,7 @@ msgstr "Omat postimerkit"
 #: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
 #: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
 #: collections/winecollection.cpp:38 entryupdater.cpp:230
-#: fetch/fetchmanager.cpp:61 fetchdialog.cpp:158
+#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:158
 #: translators/tellicoimporter.cpp:400
 msgid "Title"
 msgstr "Nimeke"
@@ -2045,7 +2045,7 @@ msgstr "Tyylilaji"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:833
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:852
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
 msgid "Keywords"
 msgstr "Avainsanat"
@@ -2518,7 +2518,7 @@ msgid "Organization"
 msgstr "Organisaatio"
 
 #: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:428
-#: fetch/z3950fetcher.cpp:658
+#: fetch/z3950fetcher.cpp:669
 msgid "Address"
 msgstr "Osoite"
 
@@ -2543,7 +2543,7 @@ msgid "Cross-Reference"
 msgstr "Ristiviite"
 
 #: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:443
-#: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:659
+#: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:670
 #: translators/risimporter.cpp:246
 msgid "Abstract"
 msgstr "Tiivistelmä"
@@ -2565,7 +2565,7 @@ msgid "Album"
 msgstr "Albumi"
 
 #: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:224
-#: translators/freedbimporter.cpp:336 translators/freedbimporter.cpp:401
+#: translators/freedbimporter.cpp:337 translators/freedbimporter.cpp:402
 msgid "Compact Disc"
 msgstr "CD-levy"
 
@@ -2962,7 +2962,7 @@ msgid "Keep modified values"
 msgstr "Pidä muokatut arvot"
 
 #: collectionfieldsdialog.cpp:394 collectionfieldsdialog.cpp:397
-#: translators/csvimporter.cpp:409 translators/csvimporter.cpp:512
+#: translators/csvimporter.cpp:410 translators/csvimporter.cpp:513
 msgid "New Field"
 msgstr "Uusi kenttä"
 
@@ -3025,11 +3025,11 @@ msgstr ""
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Tauluissa on viiden sarakkeen maksimirajoitus."
 
-#: calendarhandler.cpp:162
+#: calendarhandler.cpp:166
 msgid "Default Calendar"
 msgstr "Oletuskalenteri"
 
-#: calendarhandler.cpp:170
+#: calendarhandler.cpp:174
 msgid ""
 "At the moment, Tellico only supports local calendar resources. The active "
 "calendar is remotely located, so your loans will not be added."
@@ -3037,11 +3037,11 @@ msgstr ""
 "Nykyisellään Tellico tukee vai paikallisia kalentereita. Aktiivinen "
 "kalenterisi ei ole paikallinen, joten lainauksiasi ei lisätä."
 
-#: calendarhandler.cpp:175
+#: calendarhandler.cpp:179
 msgid "Active Calendar"
 msgstr "Aktiivinen kalenteri"
 
-#: calendarhandler.cpp:198
+#: calendarhandler.cpp:202
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Tellico: %1 -nimikkeen viimeinen palautuspäivämäärä on \"%2\""
 
@@ -3051,7 +3051,7 @@ msgstr "Entrez-tietokanta"
 
 #: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:423
 #: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:365
+#: fetch/yahoofetcher.cpp:388
 msgid "This source has no options."
 msgstr "Tällä lähteellä ei ole valintoja."
 
@@ -3074,22 +3074,22 @@ msgstr "Kokoelman kentät"
 msgid "SRU Server"
 msgstr "Palauta"
 
-#: fetch/imdbfetcher.cpp:966 fetch/srufetcher.cpp:343
-#: fetch/z3950fetcher.cpp:494
+#: fetch/imdbfetcher.cpp:1076 fetch/srufetcher.cpp:343
+#: fetch/z3950fetcher.cpp:505
 #, fuzzy
 msgid "Hos&t: "
 msgstr "&Isäntä: "
 
-#: fetch/srufetcher.cpp:349 fetch/z3950fetcher.cpp:500
+#: fetch/srufetcher.cpp:349 fetch/z3950fetcher.cpp:511
 #, fuzzy
 msgid "Enter the host name of the server."
 msgstr "Anna z39.50-palvelimen isäntänimi."
 
-#: fetch/srufetcher.cpp:354 fetch/z3950fetcher.cpp:505
+#: fetch/srufetcher.cpp:354 fetch/z3950fetcher.cpp:516
 msgid "&Port: "
 msgstr "&Portti: "
 
-#: fetch/srufetcher.cpp:359 fetch/z3950fetcher.cpp:510
+#: fetch/srufetcher.cpp:359 fetch/z3950fetcher.cpp:521
 #, fuzzy, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Anna z39.50-palvelimen porttinumero. Oletusnumero on %1."
@@ -3114,42 +3114,42 @@ msgstr "Formaatti"
 msgid "Enter the result format used by the server."
 msgstr "Anna z39.50-palvelimen käyttämän tietokannan nimi."
 
-#: fetch/imdbfetcher.cpp:87
+#: fetch/imdbfetcher.cpp:88
 msgid "Internet Movie Database"
 msgstr "Internet Movie Database"
 
-#: fetch/imdbfetcher.cpp:467
+#: fetch/imdbfetcher.cpp:577
 msgid "Select IMDB Result"
 msgstr "Valitse IMDB-hakutulos"
 
-#: fetch/imdbfetcher.cpp:470
+#: fetch/imdbfetcher.cpp:580
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr "<qt>Hakusi tuotti useita tuloksia. Valitse niistä yksi alta.</qt>"
 
-#: fetch/imdbfetcher.cpp:485
+#: fetch/imdbfetcher.cpp:595
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Valitse hakutulos.</qt>"
 
-#: fetch/imdbfetcher.cpp:577 fetch/imdbfetcher.cpp:1030
+#: fetch/imdbfetcher.cpp:687 fetch/imdbfetcher.cpp:1140
 msgid "IMDB Link"
 msgstr ""
 
-#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:632
-#: fetch/imdbfetcher.cpp:1032
+#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:742
+#: fetch/imdbfetcher.cpp:1142
 msgid "Alternative Titles"
 msgstr "Vaihtoehtoiset otsikot"
 
-#: fetch/imdbfetcher.cpp:799 fetch/imdbfetcher.cpp:1031
+#: fetch/imdbfetcher.cpp:909 fetch/imdbfetcher.cpp:1141
 #, fuzzy
 msgid "IMDB Rating"
 msgstr "ESRB-määritys"
 
-#: fetch/imdbfetcher.cpp:910 fetch/imdbfetcher.cpp:1033
+#: fetch/imdbfetcher.cpp:1020 fetch/imdbfetcher.cpp:1143
 msgid "Certifications"
 msgstr "Ikärajat"
 
-#: fetch/imdbfetcher.cpp:971
+#: fetch/imdbfetcher.cpp:1081
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -3157,23 +3157,23 @@ msgstr ""
 "Interned Movie Database käyttää useita palvelimia. Valitse mitä niistä "
 "haluat käyttää."
 
-#: fetch/imdbfetcher.cpp:977
+#: fetch/imdbfetcher.cpp:1087
 #, fuzzy
 msgid "&Maximum cast: "
 msgstr "Kuvan enimmäisleveys:"
 
-#: fetch/imdbfetcher.cpp:982
+#: fetch/imdbfetcher.cpp:1092
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
 msgstr ""
 
-#: fetch/imdbfetcher.cpp:987
+#: fetch/imdbfetcher.cpp:1097
 #, fuzzy
 msgid "Download cover &image"
 msgstr "Hae kansikuva"
 
-#: fetch/amazonfetcher.cpp:775 fetch/imdbfetcher.cpp:991
+#: fetch/amazonfetcher.cpp:794 fetch/imdbfetcher.cpp:1101
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -3181,23 +3181,23 @@ msgstr ""
 "Myös kansikuva voidaan hakea. Huomaa kuitenkin että kokoelman "
 "sisältäessä monia isoja kuvia, sen käyttönopeus voi hidastua."
 
-#: fetch/fetchmanager.cpp:62
+#: fetch/fetchmanager.cpp:63
 msgid "Person"
 msgstr "Henkilö"
 
-#: fetch/fetchmanager.cpp:63
+#: fetch/fetchmanager.cpp:64
 msgid "ISBN"
 msgstr "ISBN-numero"
 
-#: fetch/fetchmanager.cpp:64
+#: fetch/fetchmanager.cpp:65
 msgid "UPC"
 msgstr ""
 
-#: fetch/fetchmanager.cpp:65
+#: fetch/fetchmanager.cpp:66
 msgid "Keyword"
 msgstr "Avainsana"
 
-#: fetch/fetchmanager.cpp:66
+#: fetch/fetchmanager.cpp:67
 msgid "Raw Query"
 msgstr "Raakahaku"
 
@@ -3234,53 +3234,53 @@ msgstr "Amazon (Kanada)"
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com"
 
-#: fetch/amazonfetcher.cpp:175 fetch/animenfofetcher.cpp:74
+#: fetch/amazonfetcher.cpp:189 fetch/animenfofetcher.cpp:74
 #: fetch/ibsfetcher.cpp:71 fetch/isbndbfetcher.cpp:75
-#: fetch/yahoofetcher.cpp:79
+#: fetch/yahoofetcher.cpp:92
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 ei salli etsimistä tälle kokoelmatyypille."
 
-#: fetch/amazonfetcher.cpp:485
+#: fetch/amazonfetcher.cpp:505
 msgid "Results from %1: %2/%3"
 msgstr "Tulokset: %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:514 fetch/z3950fetcher.cpp:415
+#: fetch/amazonfetcher.cpp:529 fetch/z3950fetcher.cpp:425
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Seuraaville ISBN-arvoille ei löytynyt tietueita:</qt>"
 
-#: fetch/amazonfetcher.cpp:669 fetch/yahoofetcher.cpp:215
+#: fetch/amazonfetcher.cpp:688 fetch/yahoofetcher.cpp:238
 msgid "The cover image could not be loaded."
 msgstr "Kansikuvaa ei voitu ladata."
 
-#: fetch/amazonfetcher.cpp:746
+#: fetch/amazonfetcher.cpp:765
 msgid "Co&untry: "
 msgstr "Alkup&erämaa"
 
-#: fetch/amazonfetcher.cpp:750
+#: fetch/amazonfetcher.cpp:769
 msgid "United States"
 msgstr "Yhdysvallat"
 
-#: fetch/amazonfetcher.cpp:751
+#: fetch/amazonfetcher.cpp:770
 msgid "United Kingdom"
 msgstr "Iso-Britannia"
 
-#: fetch/amazonfetcher.cpp:752
+#: fetch/amazonfetcher.cpp:771
 msgid "Germany"
 msgstr "Saksa"
 
-#: fetch/amazonfetcher.cpp:753
+#: fetch/amazonfetcher.cpp:772
 msgid "Japan"
 msgstr "Japani"
 
-#: fetch/amazonfetcher.cpp:754
+#: fetch/amazonfetcher.cpp:773
 msgid "France"
 msgstr "Ranska"
 
-#: fetch/amazonfetcher.cpp:755
+#: fetch/amazonfetcher.cpp:774
 msgid "Canada"
 msgstr "Kanada"
 
-#: fetch/amazonfetcher.cpp:759
+#: fetch/amazonfetcher.cpp:778
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -3288,31 +3288,31 @@ msgstr ""
 "Amazon.com tarjoaa tietoa monista lokalisoiduista lähteistä. Valitse "
 "käytettävä lähde."
 
-#: fetch/amazonfetcher.cpp:765
+#: fetch/amazonfetcher.cpp:784
 msgid "&Image size: "
 msgstr "&Kuvan koko: "
 
-#: fetch/amazonfetcher.cpp:769
+#: fetch/amazonfetcher.cpp:788
 msgid "Small Image"
 msgstr "Pieni kuva"
 
-#: fetch/amazonfetcher.cpp:770
+#: fetch/amazonfetcher.cpp:789
 msgid "Medium Image"
 msgstr "Keskikokoinen kuva"
 
-#: fetch/amazonfetcher.cpp:771
+#: fetch/amazonfetcher.cpp:790
 msgid "Large Image"
 msgstr "Iso kuva"
 
-#: fetch/amazonfetcher.cpp:772
+#: fetch/amazonfetcher.cpp:791
 msgid "No Image"
 msgstr "Ei kuvaa"
 
-#: fetch/amazonfetcher.cpp:781
+#: fetch/amazonfetcher.cpp:800
 msgid "&Associate's ID: "
 msgstr "Käyttäjän tunnus:"
 
-#: fetch/amazonfetcher.cpp:786
+#: fetch/amazonfetcher.cpp:805
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -3384,29 +3384,29 @@ msgid ""
 "the documentation for details.</p>"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:745
+#: fetch/z3950fetcher.cpp:78 fetch/z3950fetcher.cpp:756
 #, fuzzy
 msgid "z39.50 Server"
 msgstr "z39.50"
 
-#: fetch/z3950fetcher.cpp:484
+#: fetch/z3950fetcher.cpp:495
 msgid "Use preset &server:"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:515
+#: fetch/z3950fetcher.cpp:526
 msgid "&Database: "
 msgstr "&Tietokanta: "
 
-#: fetch/z3950fetcher.cpp:520
+#: fetch/z3950fetcher.cpp:531
 #, fuzzy
 msgid "Enter the database name used by the server."
 msgstr "Anna z39.50-palvelimen käyttämän tietokannan nimi."
 
-#: fetch/z3950fetcher.cpp:525
+#: fetch/z3950fetcher.cpp:536
 msgid "Ch&aracter set: "
 msgstr "Ki&rjainmerkistö:"
 
-#: fetch/z3950fetcher.cpp:534
+#: fetch/z3950fetcher.cpp:545
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -3414,30 +3414,30 @@ msgstr ""
 "Anna z39.50-palvelimen kirjainmerkistön koodaustapa. Todennäköisin "
 "vaihtoehto on MARC-8, tosin myös ISO-8859-1 on yleinen."
 
-#: fetch/z3950fetcher.cpp:540
+#: fetch/z3950fetcher.cpp:551
 #, fuzzy
 msgid "&Format: "
 msgstr "Formaatti"
 
-#: fetch/z3950fetcher.cpp:543
+#: fetch/z3950fetcher.cpp:554
 msgid "Auto-detect"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:551
+#: fetch/z3950fetcher.cpp:562
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:557
+#: fetch/z3950fetcher.cpp:568
 msgid "&User: "
 msgstr "&Käyttäjä: "
 
-#: fetch/z3950fetcher.cpp:560 fetch/z3950fetcher.cpp:572
+#: fetch/z3950fetcher.cpp:571 fetch/z3950fetcher.cpp:583
 msgid "Optional"
 msgstr "Valinnainen"
 
-#: fetch/z3950fetcher.cpp:563
+#: fetch/z3950fetcher.cpp:574
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -3445,11 +3445,11 @@ msgstr ""
 "Anna z39.50-tietokannan käyttämä sisäänkirjautumistunnus. Useimmat "
 "palvelimet eivät tarvitse tunnusta ollenkaan."
 
-#: fetch/z3950fetcher.cpp:569
+#: fetch/z3950fetcher.cpp:580
 msgid "Pass&word: "
 msgstr "&Salasana: "
 
-#: fetch/z3950fetcher.cpp:576
+#: fetch/z3950fetcher.cpp:587
 #, fuzzy
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
@@ -3459,7 +3459,7 @@ msgstr ""
 "Anna z39.50-tietokannan käyttämä sisäänkirjautumissalasana. Useimmat "
 "palvelimet eivät tarvitse salasanaa ollenkaan."
 
-#: fetch/z3950fetcher.cpp:660
+#: fetch/z3950fetcher.cpp:671
 msgid "Illustrator"
 msgstr ""
 
@@ -3476,19 +3476,19 @@ msgstr "Ohjaaja"
 msgid "Episodes"
 msgstr ""
 
-#: fetch/z3950connection.cpp:104
+#: fetch/z3950connection.cpp:115
 msgid "Query error!"
 msgstr "Kysely-virhe!"
 
-#: fetch/z3950connection.cpp:144
+#: fetch/z3950connection.cpp:156
 msgid "Connection search error %1: %2"
 msgstr "Hakuvirhe yhteydessä %1: %2"
 
-#: fetch/z3950connection.cpp:222
+#: fetch/z3950connection.cpp:233
 msgid "Record syntax error"
 msgstr "Syntaksivirhe"
 
-#: fetch/z3950connection.cpp:297
+#: fetch/z3950connection.cpp:316
 msgid "Connection error %1: %2"
 msgstr "Yhteysvirhe %1: %2"
 
@@ -3968,20 +3968,20 @@ msgstr ""
 "Paina avataksesi tekstiruudun jossa voidaan syöttää/muokata monia "
 "ISBN-arvoja."
 
-#: configdialog.cpp:1001 translators/xsltimporter.cpp:85
+#: configdialog.cpp:1003 translators/xsltimporter.cpp:85
 msgid "*.xsl|XSL Files (*.xsl)"
 msgstr "*.xsl|XSL-tiedostot (*.xsl)"
 
-#: configdialog.cpp:1002
+#: configdialog.cpp:1004
 msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
 msgstr ""
 
-#: configdialog.cpp:1035
+#: configdialog.cpp:1037
 #, fuzzy
 msgid "Delete Template"
 msgstr "Tuhoa suodatin"
 
-#: configdialog.cpp:1036
+#: configdialog.cpp:1038
 #, fuzzy
 msgid "Select template to delete:"
 msgstr "Valitse etsinnässä käytettävä tietokanta"
@@ -4140,23 +4140,32 @@ msgstr "Lisää &tietue"
 msgid "Add the selected entry to the current collection"
 msgstr "Lisää valittu tietue nykyiseen kokoelmaan"
 
+#: fetchdialog.cpp:186
+#, fuzzy
+msgid "Get More Results"
+msgstr "Valitse IMDB-hakutulos"
+
 #: fetchdialog.cpp:189
+msgid "Fetch more results from the current data source"
+msgstr ""
+
+#: fetchdialog.cpp:193
 msgid "Clear all search fields and results"
 msgstr "Tyhjennä kaikki hakukentät ja -tulokset"
 
-#: fetchdialog.cpp:253
+#: fetchdialog.cpp:257
 msgid "Cancelling the search..."
 msgstr "Lopetetaan hakeminen..."
 
-#: fetchdialog.cpp:268
+#: fetchdialog.cpp:272 fetchdialog.cpp:380
 msgid "Searching..."
 msgstr "Haetaan..."
 
-#: fetchdialog.cpp:321
+#: fetchdialog.cpp:326
 msgid "The search returned no items."
 msgstr "Haku ei palauttanut tuloksia."
 
-#: fetchdialog.cpp:324
+#: fetchdialog.cpp:329
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
@@ -4165,35 +4174,35 @@ msgstr ""
 "_n: Haku palautti yhden tietueen.\n"
 "Haku palautti %n tietuetta."
 
-#: fetchdialog.cpp:345 fetchdialog.cpp:382
+#: fetchdialog.cpp:351 fetchdialog.cpp:403
 msgid "Fetching %1..."
 msgstr "Noudetaan %1..."
 
-#: fetchdialog.cpp:415
+#: fetchdialog.cpp:436
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 "Internet-tietolähteitä ei ole saatavilla nykyiselle kokoelmatyypille."
 
-#: fetchdialog.cpp:475
+#: fetchdialog.cpp:496
 #, fuzzy
 msgid "Edit ISBN/UPC Values"
 msgstr "Muokkaa ISBN-arvoja"
 
-#: fetchdialog.cpp:479
+#: fetchdialog.cpp:500
 #, fuzzy
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Anna ISBN-arvot, yksi per rivi.</qt>"
 
-#: fetchdialog.cpp:485
+#: fetchdialog.cpp:506
 msgid "&Load From File..."
 msgstr "&Lataa tiedostosta..."
 
-#: fetchdialog.cpp:486
+#: fetchdialog.cpp:507
 #, fuzzy
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Lataa ISBN-lista tekstitiedostosta.</qt>"
 
-#: fetchdialog.cpp:505
+#: fetchdialog.cpp:526
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
@@ -4312,19 +4321,19 @@ msgstr ""
 "<qt><i>%1</i>-niminen Alexandria-kirjasto on jo olemassa. Kaikki siinä "
 "olevat kirjat voidaan ylikirjoittaa.</qt>"
 
-#: translators/tellicoxmlexporter.cpp:55
+#: translators/tellicoxmlexporter.cpp:56
 msgid "XML"
 msgstr "XML"
 
-#: translators/tellicoxmlexporter.cpp:451
+#: translators/tellicoxmlexporter.cpp:464
 msgid "Tellico XML Options"
 msgstr "Tellico XML-asetukset"
 
-#: translators/tellicoxmlexporter.cpp:454
+#: translators/tellicoxmlexporter.cpp:467
 msgid "Include images in XML document"
 msgstr "Sisällytä kuvat XML-dokumenttiin"
 
-#: translators/tellicoxmlexporter.cpp:456
+#: translators/tellicoxmlexporter.cpp:469
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
@@ -4397,7 +4406,7 @@ msgstr ""
 "<qt>Sitaatin tyyli vietäessä bibtex:nä. Kaikki kenttien arvot laitetaan "
 "joko sulkeiden tai lainausmerkkien sisään.</qt>"
 
-#: translators/tellicozipexporter.cpp:34
+#: translators/tellicozipexporter.cpp:35
 msgid "Tellico Zip File"
 msgstr "Tellico ZIP-tiedosto"
 
@@ -4617,23 +4626,23 @@ msgstr "PilotDB-asetukset"
 msgid "Set PDA backup flag for database"
 msgstr "Aseta PDA varmuuskopio-asetus tietokannalle"
 
-#: translators/onixexporter.cpp:61
+#: translators/onixexporter.cpp:62
 msgid "ONIX Archive"
 msgstr "ONIX-paketti"
 
-#: translators/onixexporter.cpp:65
+#: translators/onixexporter.cpp:66
 msgid "*.zip|Zip Files (*.zip)"
 msgstr "*.zip|Zip-tiedostot (*.zip)"
 
-#: translators/onixexporter.cpp:174
+#: translators/onixexporter.cpp:175
 msgid "ONIX Archive Options"
 msgstr "ONIX-paketin asetukset"
 
-#: translators/onixexporter.cpp:177
+#: translators/onixexporter.cpp:178
 msgid "Include images in archive"
 msgstr "Sisällytä kuvat pakettiin"
 
-#: translators/onixexporter.cpp:179
+#: translators/onixexporter.cpp:180
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
 "archive."
@@ -4663,28 +4672,28 @@ msgstr "<qt>CD-levyä vastaavia hakutuloksia ei löytynyt.</qt>"
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
 msgstr "<qt>Tellico ei pystynyt suorittamaan CD-hakua loppuun.</qt>"
 
-#: translators/freedbimporter.cpp:425
+#: translators/freedbimporter.cpp:426
 #, fuzzy
 msgid "Various"
 msgstr "(Sekalaisia)"
 
-#: translators/freedbimporter.cpp:444
+#: translators/freedbimporter.cpp:445
 msgid "Audio CD Options"
 msgstr "Ääni-CD:n asetukset"
 
-#: translators/freedbimporter.cpp:448
+#: translators/freedbimporter.cpp:449
 msgid "Read data from CD-ROM device"
 msgstr "Lue tietoa CD-ROM:lta"
 
-#: translators/freedbimporter.cpp:451
+#: translators/freedbimporter.cpp:452
 msgid "Select or input the CD-ROM device location."
 msgstr "Valitse tai syötä CD-ROM-laitteen sijainti."
 
-#: translators/freedbimporter.cpp:457
+#: translators/freedbimporter.cpp:458
 msgid "Read all CDDB cache files only"
 msgstr "Lue vain kaikki CDDB-välimuistitiedostot"
 
-#: translators/freedbimporter.cpp:458
+#: translators/freedbimporter.cpp:459
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
@@ -4786,7 +4795,7 @@ msgid ""
 "the folder listing."
 msgstr ""
 
-#: entryview.cpp:173
+#: entryview.cpp:168
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico ei pysty paikantamaan tietueen oletusmuotoilutyylipohjaa."
 
@@ -4807,6 +4816,18 @@ msgstr "jr.,jr,iii,iv"
 #: core/tellico_config.cpp:127
 msgid "de,van,der,van der,von"
 msgstr "de,van,der,van der,von"
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Uusi"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Kokoelma"
+
+#: rc.cpp:8
+msgid "Collection Toolbar"
+msgstr "Kokoelmatyökalupalkki"
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -4897,18 +4918,6 @@ msgid ""
 "<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
 "entry currently in the collection. Please select the correct match.</qt>"
 msgstr ""
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Uusi"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Kokoelma"
-
-#: rc.cpp:8
-msgid "Collection Toolbar"
-msgstr "Kokoelmatyökalupalkki"
 
 #: newstuff/dialog.cpp:93
 msgid "Get Hot New Stuff"

@@ -40,7 +40,7 @@ dnl Perform program name transformation
 AC_ARG_PROGRAM
 
 dnl Automake doc recommends to do this only here. (Janos)
-AM_INIT_AUTOMAKE(tellico, 1.2.2) dnl searches for some needed programs
+AM_INIT_AUTOMAKE(tellico, 1.2.3) dnl searches for some needed programs
 
 KDE_SET_PREFIX
 
@@ -86,7 +86,7 @@ AC_DEFUN([AM_KDE_MIN_VERSION],
     CXXFLAGS=$save_CXXFLAGS
     AC_LANG_RESTORE
 ])
-AM_KDE_MIN_VERSION(3,4,0)
+AM_KDE_MIN_VERSION(3,3,1)
 
 dnl CXXFLAGS="$NOOPT_CXXFLAGS" dnl __kdevelop[noopt]__
 dnl CFLAGS="$NOOPT_CFLAGS" dnl __kdevelop[noopt]__

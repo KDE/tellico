@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Comment=Tellico Data File
 Comment[ru]=Файл Tellico
+Comment[cs]=Datový soubor Tellico
 DefaultApp=tellico
 Icon=tellico.png
 MimeType=application/x-tellico

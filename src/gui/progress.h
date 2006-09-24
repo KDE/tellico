@@ -27,7 +27,7 @@ Q_OBJECT
 
 public:
   Progress(QWidget* parent);
-  Progress(int toalSteps, QWidget* parent);
+  Progress(int totalSteps, QWidget* parent);
 
   bool isDone() const;
   void setDone();

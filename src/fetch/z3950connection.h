@@ -37,17 +37,19 @@ private:
 
 class Z3950ConnectionDone : public QCustomEvent {
 public:
-  Z3950ConnectionDone() : QCustomEvent(uid()), m_type(-1) {}
-  Z3950ConnectionDone(const QString& s, int t) : QCustomEvent(uid()), m_msg(QDeepCopy<QString>(s)), m_type(t) {}
+  Z3950ConnectionDone(bool more) : QCustomEvent(uid()), m_type(-1), m_hasMore(more) {}
+  Z3950ConnectionDone(bool more, const QString& s, int t) : QCustomEvent(uid()), m_msg(QDeepCopy<QString>(s)), m_type(t), m_hasMore(more) {}
 
   const QString& message() const { return m_msg; }
   int messageType() const { return m_type; }
+  bool hasMoreResults() const { return m_hasMore; }
 
   static int uid() { return User + 22222; }
 
 private:
   QString m_msg;
   int m_type;
+  bool m_hasMore;
 };
 
 class Z3950SyntaxChange : public QCustomEvent {
@@ -72,10 +74,10 @@ public:
                   const QString& dbname,
                   const QString& sourceCharSet,
                   const QString& syntax,
-                  const QString& esn,
-                  size_t max);
+                  const QString& esn);
   ~Z3950Connection();
 
+  void reset();
   void setQuery(const QString& query);
   void setUserPassword(const QString& user, const QString& pword);
   void run();
@@ -108,7 +110,9 @@ private:
   QString m_syntax;
   QString m_pqn;
   QString m_esn;
-  size_t m_max;
+  size_t m_start;
+  size_t m_limit;
+  bool m_hasMore;
 };
 
   } // end namespace

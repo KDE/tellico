@@ -52,15 +52,14 @@
 
 namespace {
   static const int Z3950_DEFAULT_PORT = 210;
-  static const QString Z3950_DEFAULT_ESN = QString::fromLatin1("F");;
-  static const size_t Z3950_DEFAULT_MAX_RECORDS = 25;
+  static const QString Z3950_DEFAULT_ESN = QString::fromLatin1("F");
 }
 
 using Tellico::Fetch::Z3950Fetcher;
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const char* name_)
     : Fetcher(parent_, name_), m_conn(0), m_port(Z3950_DEFAULT_PORT), m_esn(Z3950_DEFAULT_ESN),
-      m_max(Z3950_DEFAULT_MAX_RECORDS), m_config(0), m_started(false), m_MARC21XMLHandler(0),
+      m_config(0), m_started(false), m_MARC21XMLHandler(0),
       m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
 }
 
@@ -192,12 +191,23 @@ void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
 //  m_pqn = QString::fromLatin1("@attr 1=7 0253333490");
   myLog() << "Z3950Fetcher::search() - PQN query = " << m_pqn << endl;
 
+  if(m_conn) {
+    m_conn->reset(); // reset counts
+  }
+
   process();
 #else // HAVE_YAZ
   Q_UNUSED(key_);
   Q_UNUSED(value_);
   stop();
   return;
+#endif
+}
+
+void Z3950Fetcher::continueSearch() {
+#if HAVE_YAZ
+  m_started = true;
+  process();
 #endif
 }
 
@@ -294,7 +304,7 @@ void Z3950Fetcher::process() {
   if(m_conn) {
     m_conn->wait();
   } else {
-    m_conn = new Z3950Connection(this, m_host, m_port, m_dbname, m_sourceCharSet, m_syntax, m_esn, m_max);
+    m_conn = new Z3950Connection(this, m_host, m_port, m_dbname, m_sourceCharSet, m_syntax, m_esn);
     if(!m_user.isEmpty()) {
       m_conn->setUserPassword(m_user, m_password);
     }
@@ -435,6 +445,7 @@ void Z3950Fetcher::customEvent(QCustomEvent* event_) {
     if(e->messageType() > -1) {
       message(e->message(), e->messageType());
     }
+    m_hasMoreResults = e->hasMoreResults();
     m_conn->wait();
     done();
   } else if(event_->type() == Z3950SyntaxChange::uid()) {

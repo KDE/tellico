@@ -54,7 +54,8 @@
 using Tellico::Fetch::Manager;
 Manager* Manager::s_self = 0;
 
-Manager::Manager() : QObject(), m_messager(new ManagerMessage()), m_count(0), m_loadDefaults(false) {
+Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new ManagerMessage()),
+                     m_count(0), m_loadDefaults(false) {
   loadFetchers();
 
 //  m_keyMap.insert(FetchFirst, QString::null);
@@ -94,16 +95,6 @@ void Manager::loadFetchers() {
     m_fetchers = defaultFetchers();
     m_loadDefaults = true;
   }
-}
-
-Tellico::Fetch::TypePairList Manager::sources() const {
-  TypePairList sources;
-  for(FetcherVec::ConstIterator it = m_fetchers.constBegin(); it != m_fetchers.constEnd(); ++it) {
-    if(it->canFetch(Kernel::self()->collectionType())) {
-      sources.append(TypePair(it->source(), it->type()));
-    }
-  }
-  return sources;
 }
 
 Tellico::Fetch::CFetcherVec Manager::fetchers(int type_) const {
@@ -151,7 +142,9 @@ void Manager::startSearch(const QString& source_, FetchKey key_, const QString& 
   }
 
   // assume there's only one fetcher match
-  for(FetcherVec::Iterator it = m_fetchers.begin(); it != m_fetchers.end(); ++it) {
+  int i = 0;
+  m_currentFetcherIndex = -1;
+  for(FetcherVec::Iterator it = m_fetchers.begin(); it != m_fetchers.end(); ++it, ++i) {
     if(source_ == it->source()) {
       ++m_count; // Fetcher::search() might emit done(), so increment before calling search()
       connect(it.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
@@ -159,9 +152,37 @@ void Manager::startSearch(const QString& source_, FetchKey key_, const QString& 
       connect(it.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
               SLOT(slotFetcherDone(Tellico::Fetch::Fetcher::Ptr)));
       it->search(key_, value_);
+      m_currentFetcherIndex = i;
       break;
     }
   }
+}
+
+void Manager::continueSearch() {
+  if(m_currentFetcherIndex < 0 || m_currentFetcherIndex >= static_cast<int>(m_fetchers.count())) {
+    myDebug() << "Manager::continueSearch() - can't continue!" << endl;
+    emit signalDone();
+    return;
+  }
+  Fetcher::Ptr f = m_fetchers[m_currentFetcherIndex];
+  if(f && f->hasMoreResults()) {
+    ++m_count;
+    connect(f, SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
+            SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)));
+    connect(f, SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
+            SLOT(slotFetcherDone(Tellico::Fetch::Fetcher::Ptr)));
+    f->continueSearch();
+  } else {
+    emit signalDone();
+  }
+}
+
+bool Manager::hasMoreResults() const {
+  if(m_currentFetcherIndex < 0 || m_currentFetcherIndex >= static_cast<int>(m_fetchers.count())) {
+    return false;
+  }
+  Fetcher::Ptr f = m_fetchers[m_currentFetcherIndex];
+  return f && f->hasMoreResults();
 }
 
 void Manager::stop() {

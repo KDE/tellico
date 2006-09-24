@@ -560,7 +560,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   // the tmpDir() when exporting entry files from a collection, but those images
   // don't actually exist, and they get copied in writeImages() instead.
   // so we only need to keep track of the url if it exists and is local
-  if(!u.isLocalFile() || KIO::NetAccess::exists(u, false, 0)) {
+  if(u.isLocalFile() || KIO::NetAccess::exists(u, false, 0)) {
     m_files.append(u);
   }
 
@@ -757,7 +757,7 @@ void HTMLExporter::parseDOM(xmlNode* node_) {
     xmlElement* elem = reinterpret_cast<xmlElement*>(node_);
     // to speed up things, check now for nodename
     if(nodeName == "IMG" || nodeName == "SCRIPT" || nodeName == "LINK") {
-      for(xmlAttribute* attr = elem->attributes; attr; attr = attr->nexth) {
+      for(xmlAttribute* attr = elem->attributes; attr; attr = reinterpret_cast<xmlAttribute*>(attr->next)) {
         QCString attrName = QCString(reinterpret_cast<const char*>(attr->name)).upper();
 
         if( (attrName == "SRC" && (nodeName == "IMG" || nodeName == "SCRIPT")) ||

@@ -30,6 +30,10 @@ extern "C" {
 
 #include <klocale.h>
 
+namespace {
+  static const size_t Z3950_DEFAULT_MAX_RECORDS = 20;
+}
+
 using Tellico::Fetch::Z3950Connection;
 
 class Z3950Connection::Private {
@@ -55,8 +59,7 @@ Z3950Connection::Z3950Connection(Z3950Fetcher* fetcher,
                                  const QString& dbname,
                                  const QString& sourceCharSet,
                                  const QString& syntax,
-                                 const QString& esn,
-                                 size_t max)
+                                 const QString& esn)
     : QThread()
     , d(new Private())
     , m_connected(false)
@@ -68,13 +71,20 @@ Z3950Connection::Z3950Connection(Z3950Fetcher* fetcher,
     , m_sourceCharSet(QDeepCopy<QString>(sourceCharSet.left(64)))
     , m_syntax(QDeepCopy<QString>(syntax))
     , m_esn(QDeepCopy<QString>(esn))
-    , m_max(max) {
+    , m_start(0)
+    , m_limit(Z3950_DEFAULT_MAX_RECORDS)
+    , m_hasMore(false) {
 }
 
 Z3950Connection::~Z3950Connection() {
   m_connected = false;
   delete d;
   d = 0;
+}
+
+void Z3950Connection::reset() {
+  m_start = 0;
+  m_limit = Z3950_DEFAULT_MAX_RECORDS;
 }
 
 void Z3950Connection::setQuery(const QString& query_) {
@@ -89,6 +99,7 @@ void Z3950Connection::setUserPassword(const QString& user_, const QString& pword
 void Z3950Connection::run() {
 //  myDebug() << "Z3950Connection::run() - " << m_fetcher->source() << endl;
   m_aborted = false;
+  m_hasMore = false;
 #if HAVE_YAZ
 
   if(!makeConnection()) {
@@ -127,7 +138,8 @@ void Z3950Connection::run() {
   } else {
     ZOOM_resultset_option_set(resultSet, "elementSetName", m_esn.latin1());
   }
-  ZOOM_resultset_option_set(resultSet, "count", QCString().setNum(m_max));
+  ZOOM_resultset_option_set(resultSet, "start", QCString().setNum(m_start));
+  ZOOM_resultset_option_set(resultSet, "count", QCString().setNum(m_limit-m_start));
   // search in default syntax, unless syntax is already set
   if(!m_syntax.isEmpty()) {
     ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", m_syntax.latin1());
@@ -150,12 +162,11 @@ void Z3950Connection::run() {
     return;
   }
 
-  const size_t size = ZOOM_resultset_size(resultSet);
-  const size_t total = QMIN(size, m_max);
+  const size_t numResults = ZOOM_resultset_size(resultSet);
 
   QString newSyntax = m_syntax;
-  if(size > 0) {
-    myDebug() << "Z3950Connection::run() - current syntax is " << newSyntax << endl;
+  if(numResults > 0) {
+    myLog() << "Z3950Connection::run() - current syntax is " << newSyntax << endl;
     // so now we know that results exist, might have to check syntax
     int len;
     ZOOM_record rec = ZOOM_resultset_record(resultSet, 0);
@@ -163,7 +174,7 @@ void Z3950Connection::run() {
     ZOOM_record_get(rec, type, &len);
     if(len > 0 && m_syntax.isEmpty()) {
       newSyntax = QString::fromLatin1(ZOOM_record_get(rec, "syntax", &len)).lower();
-      myDebug() << "Z3950Connection::run() - syntax guess is " << newSyntax << endl;
+      myLog() << "Z3950Connection::run() - syntax guess is " << newSyntax << endl;
       if(newSyntax == Latin1Literal("mods") || newSyntax == Latin1Literal("xml")) {
         m_syntax = QString::fromLatin1("xml");
         ZOOM_resultset_option_set(resultSet, "elementSetName", "mods");
@@ -179,7 +190,7 @@ void Z3950Connection::run() {
        newSyntax != Latin1Literal("marc21") &&
        newSyntax != Latin1Literal("unimarc") &&
        newSyntax != Latin1Literal("grs-1")) {
-      myDebug() << "Z3950Connection::run() - changing z39.50 syntax to MODS" << endl;
+      myLog() << "Z3950Connection::run() - changing z39.50 syntax to MODS" << endl;
       newSyntax = QString::fromLatin1("xml");
       ZOOM_resultset_option_set(resultSet, "elementSetName", "mods");
       ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
@@ -189,40 +200,40 @@ void Z3950Connection::run() {
         // change set name back
         ZOOM_resultset_option_set(resultSet, "elementSetName", m_esn.latin1());
         newSyntax = QString::fromLatin1("usmarc"); // try usmarc
-        myDebug() << "Z3950Connection::run() - changing z39.50 syntax to USMARC" << endl;
+        myLog() << "Z3950Connection::run() - changing z39.50 syntax to USMARC" << endl;
         ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
         newSyntax = QString::fromLatin1("marc21"); // try marc21
-        myDebug() << "Z3950Connection::run() - changing z39.50 syntax to MARC21" << endl;
+        myLog() << "Z3950Connection::run() - changing z39.50 syntax to MARC21" << endl;
         ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
         newSyntax = QString::fromLatin1("unimarc"); // try unimarc
-        myDebug() << "Z3950Connection::run() - changing z39.50 syntax to UNIMARC" << endl;
+        myLog() << "Z3950Connection::run() - changing z39.50 syntax to UNIMARC" << endl;
         ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
         newSyntax = QString::fromLatin1("grs-1"); // try grs-1
-        myDebug() << "Z3950Connection::run() - changing z39.50 syntax to GRS-1" << endl;
+        myLog() << "Z3950Connection::run() - changing z39.50 syntax to GRS-1" << endl;
         ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.latin1());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
-        myDebug() << "Z3950Connection::run() - giving up" << endl;
+        myLog() << "Z3950Connection::run() - giving up" << endl;
         ZOOM_resultset_destroy(resultSet);
         ZOOM_query_destroy(query);
         done(i18n("Record syntax error"), MessageHandler::Error);
         return;
       }
-      myDebug() << "Z3950Connection::run() - final syntax is " << newSyntax << endl;
+      myLog() << "Z3950Connection::run() - final syntax is " << newSyntax << endl;
     }
   }
 
@@ -243,7 +254,9 @@ void Z3950Connection::run() {
     m_sourceCharSet = QString::fromLatin1("marc-8");
   }
 
-  for(size_t i = 0; i < total && !m_aborted; ++i) {
+  const size_t realLimit = QMIN(numResults, m_limit);
+
+  for(size_t i = m_start; i < realLimit && !m_aborted; ++i) {
     ZOOM_record rec = ZOOM_resultset_record(resultSet, i);
     if(!rec) {
       myDebug() << "Z3950Fetcher::process() - no record returned for index " << i << endl;
@@ -265,6 +278,12 @@ void Z3950Connection::run() {
 
   ZOOM_resultset_destroy(resultSet);
   ZOOM_query_destroy(query);
+
+  m_hasMore = m_limit < numResults;
+  if(m_hasMore) {
+    m_start = m_limit;
+    m_limit += Z3950_DEFAULT_MAX_RECORDS;
+  }
 #endif
   done();
 }
@@ -308,14 +327,14 @@ bool Z3950Connection::makeConnection() {
 }
 
 void Z3950Connection::done() {
-  kapp->postEvent(m_fetcher, new Z3950ConnectionDone());
+  kapp->postEvent(m_fetcher, new Z3950ConnectionDone(m_hasMore));
 }
 
 void Z3950Connection::done(const QString& msg_, int type_) {
   if(m_aborted) {
-    kapp->postEvent(m_fetcher, new Z3950ConnectionDone());
+    kapp->postEvent(m_fetcher, new Z3950ConnectionDone(m_hasMore));
   } else {
-    kapp->postEvent(m_fetcher, new Z3950ConnectionDone(msg_, type_));
+    kapp->postEvent(m_fetcher, new Z3950ConnectionDone(m_hasMore, msg_, type_));
   }
 }
 

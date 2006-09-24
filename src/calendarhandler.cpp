@@ -37,6 +37,8 @@ using Tellico::CalendarHandler;
 void CalendarHandler::addLoans(Data::LoanVec loans_) {
 #ifdef USE_KCAL
   addLoans(loans_, 0);
+#else
+  Q_UNUSED(loans_);
 #endif
 }
 
@@ -81,6 +83,7 @@ void CalendarHandler::addLoans(Data::LoanVec loans_, KCal::CalendarResources* re
 
 void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
 #ifndef USE_KCAL
+  Q_UNUSED(loans_);
   return;
 #else
   if(loans_.isEmpty()) {
@@ -121,6 +124,7 @@ void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
 
 void CalendarHandler::removeLoans(Data::LoanVec loans_) {
 #ifndef USE_KCAL
+  Q_UNUSED(loans_);
   return;
 #else
   if(loans_.isEmpty()) {

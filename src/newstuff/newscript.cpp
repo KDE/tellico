@@ -16,10 +16,16 @@
 
 #include <kurl.h>
 
+#include <qwidget.h>
+
 using Tellico::NewStuff::NewScript;
 
 NewScript::NewScript(Manager* manager_, QWidget* parentWidget_)
+#if KDE_IS_VERSION(3,3,90)
     : KNewStuffSecure(QString::fromLatin1("tellico/data-source"), parentWidget_)
+#else
+    : QObject(parentWidget_)
+#endif
     , m_manager(manager_) {
 }
 
@@ -30,4 +36,12 @@ void NewScript::installResource() {
   m_manager->installScript(u);
 }
 
+#if KDE_IS_VERSION(3,3,90)
+#include <knewstuff/knewstuffsecure.h>
+#define SUPERCLASS KNewStuffSecure
+#else
+#define SUPERCLASS QObject
+#endif
+
 #include "newscript.moc"
+#undef SUPERCLASS

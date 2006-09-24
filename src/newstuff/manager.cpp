@@ -353,9 +353,13 @@ void Manager::slotDownloadJobResult(KIO::Job* job_) {
   if(type == EntryTemplate) {
     success = installTemplate(job->destURL(), entry->name());
   } else {
+#if KDE_IS_VERSION(3,3,90)
     // needed so the GPG signature can be checked
     NewScript* newScript = new NewScript(this, Kernel::self()->widget());
     success = newScript->install(job->destURL().path());
+#else
+    success = false;
+#endif
   }
 
   if(success) {
