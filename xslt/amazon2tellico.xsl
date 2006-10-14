@@ -517,6 +517,9 @@
   <xsl:when test="starts-with($value, 'X')">
    <xsl:text>Xbox</xsl:text> <!-- as defined in the default field -->
   </xsl:when>
+  <xsl:when test="contains($value, 'Wii')">
+   <xsl:text>Nintendo Wii</xsl:text> <!-- as defined in the default field -->
+  </xsl:when>
   <xsl:when test="$value = 'Sony PSP'">
    <xsl:text>PSP</xsl:text> <!-- as defined in the default field -->
   </xsl:when>

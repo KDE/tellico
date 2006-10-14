@@ -1,3 +1,25 @@
+2006-10-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.4.
+
+2006-10-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with overwriting images when updating entries.
+
+2006-10-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved performance on loading and unloading.
+	* Changed Nintendo 'Revolution' to 'Wii'.
+
+2006-10-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed off-by-one error in file listing volume name reader.
+	* Update allocine fetcher.
+
+2006-09-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with fetch dialog showing all sources, instead of just relevant ones.
+
 2006-09-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.3.

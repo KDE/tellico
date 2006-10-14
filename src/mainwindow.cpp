@@ -1006,7 +1006,7 @@ bool MainWindow::queryClose() {
 
 bool MainWindow::queryExit() {
   FileHandler::clean();
-  ImageFactory::clean();
+  ImageFactory::clean(true);
   saveOptions();
   return true;
 }
@@ -1037,6 +1037,7 @@ void MainWindow::slotFileNew(int type_) {
     slotEnableOpenedActions();
     slotEnableModifiedActions(false);
     m_newDocument = true;
+    ImageFactory::clean(false);
   }
 
   StatusBar::self()->clearStatus();
@@ -1074,6 +1075,7 @@ void MainWindow::slotFileOpen(const KURL& url_) {
     if(openURL(url_)) {
       m_fileOpenRecent->addURL(url_);
       m_fileOpenRecent->setCurrentItem(-1);
+      ImageFactory::clean(false);
     }
   }
 
@@ -2291,8 +2293,8 @@ void MainWindow::updateEntrySources() {
   // autoDelete() all actions, which removes them from the actionCollection()
   m_fetchActions.clear();
 
-  Fetch::CFetcherVec vec = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
-  for(Fetch::CFetcherVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
+  Fetch::FetcherVec vec = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
+  for(Fetch::FetcherVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
     KAction* action = new KAction(actionCollection());
     action->setText(it->source());
     action->setToolTip(i18n("Update entry data from %1").arg(it->source()));

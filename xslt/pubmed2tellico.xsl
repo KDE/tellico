@@ -48,9 +48,6 @@
     <field flags="0" title="Institution" category="Institution" format="4" type="2" name="institution" i18n="true">
      <prop name="bibtex">institution</prop>
     </field>
-    <field flags="0" title="Abstract" category="Abstract" format="4" type="2" name="abstract" i18n="true">
-     <prop name="bibtex">abstract</prop>
-    </field>
     <field flags="0" title="URL" category="Miscellaneous" format="4" type="7" name="url" i18n="true">
      <prop name="bibtex">url</prop>
     </field>

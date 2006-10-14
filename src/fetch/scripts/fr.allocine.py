@@ -41,6 +41,25 @@ class BasicTellicoDOM:
 		self.__collection = self.__doc.createElement('collection')
 		self.__collection.setAttribute('title', 'My Movies')
 		self.__collection.setAttribute('type', '3')
+		
+		self.__fields = self.__doc.createElement('fields')
+		# Add all default (standard) fields
+		self.__dfltField = self.__doc.createElement('field')
+		self.__dfltField.setAttribute('name', '_default')
+		
+		# Add a custom 'Collection' field
+		self.__customField = self.__doc.createElement('field')
+		self.__customField.setAttribute('name', 'titre-original')
+		self.__customField.setAttribute('title', 'Original Title')
+		self.__customField.setAttribute('flags', '8')
+		self.__customField.setAttribute('category', 'General')
+		self.__customField.setAttribute('format', '1')
+		self.__customField.setAttribute('type', '1')
+		self.__customField.setAttribute('i18n', 'yes')
+		
+		self.__fields.appendChild(self.__dfltField)
+		self.__fields.appendChild(self.__customField)
+		self.__collection.appendChild(self.__fields)
 
 		self.__images = self.__doc.createElement('images')
 
@@ -98,7 +117,7 @@ class BasicTellicoDOM:
 		timeNode = self.__doc.createElement('running-time')
 		timeNode.appendChild(self.__doc.createTextNode(unicode(d['time'], 'latin-1').encode('utf-8')))
 
-		allocineNode = self.__doc.createElement(unicode('allociné-link', 'latin-1').encode('utf-8'))
+		allocineNode = self.__doc.createElement(unicode('allocinï¿½link', 'latin-1').encode('utf-8'))
 		allocineNode.appendChild(self.__doc.createTextNode(unicode(d['allocine'], 'latin-1').encode('utf-8')))
 
 		plotNode = self.__doc.createElement('plot')
@@ -145,14 +164,14 @@ class AlloCineParser:
 
 		# Define some regexps
 		self.__regExps = { 	'title' 	: '<title>(?P<title>.+?)</title>',
-							'dirs'		: 'Réalisé par <a.*?>(?P<step1>.+)</a>',
-							'actors' 	: '<h4>Avec *<a.*?>(?P<step1>.+)</a>',
-							'nat' 		: '<h4>Film *(?P<nat>.+)[,\.]',
-							'genres' 	: '<h4>Genre *: *<a.*?>(?P<step1>.+)</a>',
-							'time' 		: '<h4>Durée *: *(?P<hours>[0-9])?h *(?P<mins>[0-9]{1,2})min',
-							'year' 		: 'Année de production *: *(?P<year>[0-9]{4})',
+							'dirs'		: 'Rï¿½lisï¿½par <a.*?>(?P<step1>.+?)</a>.*?</h4>',
+							'actors' 	: '<h4>Avec *<a.*?>(?P<step1>.+?)</a>.*?</h4>',
+							'nat' 		: '<h4>Film *(?P<nat>.+?)[,\.]',
+							'genres' 	: '<h4>Genre *: *<a.*?>(?P<step1>.+?)</a>.*?</h4>',
+							'time' 		: '<h4>Durï¿½ *: *(?P<hours>[0-9])?h *(?P<mins>[0-9]{1,2})min',
+							'year' 		: 'Annï¿½ de production *: *(?P<year>[0-9]{4})',
 							# Original movie title
-							'otitle' 	: 'Titre original *: *<i>(?P<otitle>.+)</i>',
+							'otitle' 	: 'Titre original *: *<i>(?P<otitle>.+?)</i>',
 							'plot'		: """(?s)<td valign="top" style="padding:10 0 0 0"><div align="justify"><h4> *(?P<plot>.+?) *</h4>""",
 							'image'		: """<td valign="top".*?<img src="(?P<image>.+?)" border"""}
 							

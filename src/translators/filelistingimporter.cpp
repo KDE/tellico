@@ -34,8 +34,13 @@
 #include <qfile.h>
 #include <qfileinfo.h>
 
+#include <stdio.h>
+
 namespace {
   static const int FILE_PREVIEW_SIZE = 128;
+  // volume name starts at 16*2048+40 bytes into the header
+  static const int VOLUME_NAME_POS = 32808;
+  static const int VOLUME_NAME_SIZE = 32;
 }
 
 using Tellico::Import::FileListingImporter;
@@ -229,28 +234,38 @@ void FileListingImporter::slotPreview(const KFileItem*, const QPixmap& pix_) {
 }
 
 QString FileListingImporter::volumeName() const {
+  // this functions turns /media/cdrom into /dev/hdc, then reads 32 bytes after the 16 x 2048 header
   QString volume;
   const KMountPoint::List mountPoints = KMountPoint::currentMountPoints(KMountPoint::NeedRealDeviceName);
   for(KMountPoint::List::ConstIterator it = mountPoints.begin(), end = mountPoints.end(); it != end; ++it) {
-    if(url().path() == (*it)->mountPoint()) {
+    // path() could be /media/cdrom
+    // which could be the mount point of the device
+    // I know it works for iso9660 (cdrom) and udf (dvd)
+    if(url().path() == (*it)->mountPoint()
+       && ((*it)->mountType() == Latin1Literal("iso9660")
+           || (*it)->mountType() == Latin1Literal("udf"))) {
       volume = (*it)->mountPoint();
       if(!(*it)->realDeviceName().isEmpty()) {
         QString devName = (*it)->realDeviceName();
         if(devName.endsWith(QChar('/'))) {
           devName.truncate(devName.length()-1);
         }
-        QFile dev(devName);
-        if(dev.open(IO_ReadOnly)) {
-          // can't seek, it's sequential
-          for(uint i = 0; i < 32808; ++i) {
-            dev.getch();
+        // QFile can't do a sequential seek, and I don't want to do a 32808x loop on getch()
+        FILE* dev = 0;
+        if((dev = fopen(devName.latin1(), "rb")) != 0) {
+          // returns 0 on success
+          if(fseek(dev, VOLUME_NAME_POS, SEEK_SET) == 0) {
+            char buf[VOLUME_NAME_SIZE];
+            int ret = fread(buf, 1, VOLUME_NAME_SIZE, dev);
+            if(ret == VOLUME_NAME_SIZE) {
+              volume = QString::fromLatin1(buf, VOLUME_NAME_SIZE).stripWhiteSpace();
+            }
+          } else {
+            myDebug() << "FileListingImporter::volumeName() - can't seek " << devName << endl;
           }
-          char buf[33];
-          int ret = dev.readBlock(buf, 32);
-          if(ret == 32) {
-            buf[33] = '\0';
-            volume = QString::fromLatin1(buf, 32).stripWhiteSpace();
-          }
+          fclose(dev);
+        } else {
+          myDebug() << "FileListingImporter::volumeName() - can't read " << devName << endl;
         }
       }
       break;

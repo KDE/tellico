@@ -154,7 +154,6 @@ public:
   bool loadImage(const QString& id);
   bool loadAllImagesNow() const;
   bool allImagesOnDisk() const { return m_allImagesOnDisk; }
-  void setAllImagesOnDisk(bool b) { m_allImagesOnDisk = b; }
   int imageCount() const;
   EntryVec filteredEntries(Filter::Ptr filter) const;
   /**

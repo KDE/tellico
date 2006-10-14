@@ -97,9 +97,9 @@ void Manager::loadFetchers() {
   }
 }
 
-Tellico::Fetch::CFetcherVec Manager::fetchers(int type_) const {
-  CFetcherVec vec;
-  for(FetcherVec::ConstIterator it = m_fetchers.constBegin(); it != m_fetchers.constEnd(); ++it) {
+Tellico::Fetch::FetcherVec Manager::fetchers(int type_) {
+  FetcherVec vec;
+  for(FetcherVec::Iterator it = m_fetchers.begin(); it != m_fetchers.end(); ++it) {
     if(it->canFetch(type_)) {
       vec.append(it.data());
     }

@@ -231,6 +231,8 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
   if(id_.isEmpty()) {
     return false;
   }
+//  myLog() << "ImageFactory::writeCachedImage() - dir = " << (dir_ == DataDir ? "DataDir" : "TmpDir" )
+//                                                         << "; id = " << id_ << endl;
 
   QString path = ( dir_ == DataDir ? dataDir() : tempDir() );
 
@@ -390,16 +392,17 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
   return *pix;
 }
 
-void ImageFactory::clean() {
+void ImageFactory::clean(bool deleteTempDirectory_) {
   // the dict and caches all auto-delete
   s_imageDict.clear();
   s_imageInfoMap.clear();
   s_imageCache.clear();
   s_pixmapCache.clear();
-  s_imagesInTmpDir.clear();
-
-  delete s_tmpDir;
-  s_tmpDir = 0;
+  if(deleteTempDirectory_) {
+    s_imagesInTmpDir.clear();
+    delete s_tmpDir;
+    s_tmpDir = 0;
+  }
 }
 
 void ImageFactory::createStyleImages(const StyleOptions& opt_) {

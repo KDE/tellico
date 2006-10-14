@@ -462,7 +462,9 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
         break;
 
       case Data::Collection::Game:
-        desc = entry->field(QString::fromLatin1("platform"));
+        desc = entry->field(QString::fromLatin1("platform"))
+               + QChar('/')
+               + entry->field(QString::fromLatin1("year"));
         break;
 
       default:

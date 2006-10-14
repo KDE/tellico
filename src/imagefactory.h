@@ -123,9 +123,10 @@ public:
   static QPixmap pixmap(const QString& id, int w, int h);
 
   /**
-   * Clean the temp dir and remove all temporary image files
+   * Clear the image cache and dict
+   * if deleteTempDirectory = true, then clean the temp dir and remove all temporary image files
    */
-  static void clean();
+  static void clean(bool deleteTempDirectory);
   /**
    * Creates the gradient images used in the entry view.
    */

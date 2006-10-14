@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
-"POT-Creation-Date: 2006-09-24 09:08-0700\n"
+"POT-Creation-Date: 2006-10-11 07:41-0700\n"
 "PO-Revision-Date: 2003-07-01 11:27+0300\n"
 "Last-Translator: Boyan Ivanov <boyan17@bulgaria.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -425,8 +425,8 @@ msgstr "Кутийка"
 msgid "Number"
 msgstr "Номер от поредица"
 
-#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:375
-#: fetch/entrezfetcher.cpp:444 field.cpp:430
+#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:395
+#: fetch/entrezfetcher.cpp:464 field.cpp:430
 #: translators/gcfilmsimporter.cpp:53 translators/risimporter.cpp:261
 msgid "URL"
 msgstr "URL"
@@ -2146,7 +2146,7 @@ msgstr "Жанр"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:852
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:854
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
 msgid "Keywords"
 msgstr "Ключови думи"
@@ -2505,7 +2505,7 @@ msgid ""
 msgstr ""
 
 #: collections/gamecollection.cpp:47
-msgid "Revolution"
+msgid "Nintendo Wii"
 msgstr ""
 
 #: collections/gamecollection.cpp:47
@@ -2683,7 +2683,7 @@ msgstr "Показва колони"
 msgid "Cross-Reference"
 msgstr ""
 
-#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:443
+#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:463
 #: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:670
 #: translators/risimporter.cpp:246
 msgid "Abstract"
@@ -3171,18 +3171,18 @@ msgstr ""
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Tellico не може да прочете файла %1."
 
-#: fetch/entrezfetcher.cpp:55
+#: fetch/entrezfetcher.cpp:54
 #, fuzzy
 msgid "Entrez Database"
 msgstr "Тип:"
 
-#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:423
+#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:443
 #: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:388
+#: fetch/yahoofetcher.cpp:387
 msgid "This source has no options."
 msgstr ""
 
-#: fetch/entrezfetcher.cpp:442
+#: fetch/entrezfetcher.cpp:462
 #, fuzzy
 msgid "Institution"
 msgstr "Състояние"
@@ -3296,7 +3296,7 @@ msgstr ""
 msgid "Download cover &image"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:794 fetch/imdbfetcher.cpp:1101
+#: fetch/amazonfetcher.cpp:796 fetch/imdbfetcher.cpp:1101
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -3364,83 +3364,83 @@ msgstr ""
 msgid "%1 does not allow searching for this collection type."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:505
+#: fetch/amazonfetcher.cpp:507
 msgid "Results from %1: %2/%3"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:529 fetch/z3950fetcher.cpp:425
+#: fetch/amazonfetcher.cpp:531 fetch/z3950fetcher.cpp:425
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:688 fetch/yahoofetcher.cpp:238
+#: fetch/amazonfetcher.cpp:690 fetch/yahoofetcher.cpp:237
 msgid "The cover image could not be loaded."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:765
+#: fetch/amazonfetcher.cpp:767
 #, fuzzy
 msgid "Co&untry: "
 msgstr "Показва колони"
 
-#: fetch/amazonfetcher.cpp:769
+#: fetch/amazonfetcher.cpp:771
 msgid "United States"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:770
+#: fetch/amazonfetcher.cpp:772
 msgid "United Kingdom"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:771
+#: fetch/amazonfetcher.cpp:773
 msgid "Germany"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:772
+#: fetch/amazonfetcher.cpp:774
 msgid "Japan"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:773
+#: fetch/amazonfetcher.cpp:775
 #, fuzzy
 msgid "France"
 msgstr "&Търси"
 
-#: fetch/amazonfetcher.cpp:774
+#: fetch/amazonfetcher.cpp:776
 msgid "Canada"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:778
+#: fetch/amazonfetcher.cpp:780
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:784
+#: fetch/amazonfetcher.cpp:786
 msgid "&Image size: "
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:788
+#: fetch/amazonfetcher.cpp:790
 #, fuzzy
 msgid "Small Image"
 msgstr "Заглавие"
 
-#: fetch/amazonfetcher.cpp:789
+#: fetch/amazonfetcher.cpp:791
 #, fuzzy
 msgid "Medium Image"
 msgstr "Медия"
 
-#: fetch/amazonfetcher.cpp:790
+#: fetch/amazonfetcher.cpp:792
 #, fuzzy
 msgid "Large Image"
 msgstr "Заглавие"
 
-#: fetch/amazonfetcher.cpp:791
+#: fetch/amazonfetcher.cpp:793
 #, fuzzy
 msgid "No Image"
 msgstr "Страници"
 
-#: fetch/amazonfetcher.cpp:800
+#: fetch/amazonfetcher.cpp:802
 msgid "&Associate's ID: "
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:805
+#: fetch/amazonfetcher.cpp:807
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -4942,30 +4942,30 @@ msgstr ""
 msgid "<qt>The file is not a valid GCfilms data file.</qt>"
 msgstr ""
 
-#: translators/filelistingimporter.cpp:57
+#: translators/filelistingimporter.cpp:62
 #, fuzzy
 msgid "Scanning files..."
 msgstr "Записва файл..."
 
-#: translators/filelistingimporter.cpp:192
+#: translators/filelistingimporter.cpp:197
 #, fuzzy
 msgid "File Listing Options"
 msgstr "Настройки за печат"
 
-#: translators/filelistingimporter.cpp:194
+#: translators/filelistingimporter.cpp:199
 msgid "Recursive folder search"
 msgstr ""
 
-#: translators/filelistingimporter.cpp:195
+#: translators/filelistingimporter.cpp:200
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 
-#: translators/filelistingimporter.cpp:199
+#: translators/filelistingimporter.cpp:204
 #, fuzzy
 msgid "Generate file previews"
 msgstr "Създава нов документ"
 
-#: translators/filelistingimporter.cpp:200
+#: translators/filelistingimporter.cpp:205
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
@@ -4993,20 +4993,6 @@ msgstr "мл.,мл,iii,iv"
 #: core/tellico_config.cpp:127
 msgid "de,van,der,van der,von"
 msgstr "де,ван де,фон"
-
-#: rc.cpp:2
-#, fuzzy
-msgid "&New"
-msgstr "Нова"
-
-#: rc.cpp:5
-#, fuzzy
-msgid "&Collection"
-msgstr "BCCollection"
-
-#: rc.cpp:8
-msgid "Collection Toolbar"
-msgstr "Летна \"Колекция\""
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 #, fuzzy
@@ -5068,6 +5054,20 @@ msgstr ""
 #: cite/openoffice.cpp:190
 msgid "TCP/IP"
 msgstr ""
+
+#: rc.cpp:2
+#, fuzzy
+msgid "&New"
+msgstr "Нова"
+
+#: rc.cpp:5
+#, fuzzy
+msgid "&Collection"
+msgstr "BCCollection"
+
+#: rc.cpp:8
+msgid "Collection Toolbar"
+msgstr "Летна \"Колекция\""
 
 #: entryupdater.cpp:82
 msgid "Updating %1..."

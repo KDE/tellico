@@ -263,7 +263,7 @@ public:
    * @param name The field name
    * @return The field pointer
    */
-  FieldPtr  fieldByName(const QString& name) const;
+  FieldPtr fieldByName(const QString& name) const;
   /**
    * Returns a pointer to an field given its title. If none is found, a NULL pointer
    * is returned. This lookup is slower than by name.
@@ -290,8 +290,7 @@ public:
    * @param name The name of the field by which the entries are grouped
    * @return The list of group names
    */
-  EntryGroupDict* const entryGroupDictByName(const QString& name) const;
-  QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
+  EntryGroupDict* const entryGroupDictByName(const QString& name);
   /**
    * Invalidates all group names in the collection.
    */
@@ -302,6 +301,8 @@ public:
    * @return Returns true if the collection contains at least one Image field;
    */
   bool hasImages() const { return !m_imageFields.isEmpty(); }
+
+  void setTrackGroups(bool b) { m_trackGroups = b; }
 
   void addBorrower(Data::BorrowerPtr borrower);
   const BorrowerVec& borrowers() const { return m_borrowers; }
@@ -329,8 +330,10 @@ signals:
   void signalRefreshField(Tellico::Data::FieldPtr field);
 
 private:
+  QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
   void removeEntriesFromDicts(EntryVec entries);
-  void populateDicts(EntryPtr entry);
+  void populateDict(EntryGroupDict* dict, const QString& fieldName, EntryVec entries);
+  void populateCurrentDicts(EntryPtr entry);
   void cleanGroups();
   /*
    * Gets the preferred ID of the collection. Currently, it just gets incremented as
@@ -373,6 +376,8 @@ private:
 
   FilterVec m_filters;
   BorrowerVec m_borrowers;
+
+  bool m_trackGroups : 1;
 };
 
   } // end namespace

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2006-09-24 09:08-0700\n"
+"POT-Creation-Date: 2006-10-11 07:41-0700\n"
 "PO-Revision-Date: 2005-08-11 11:02+0200\n"
 "Last-Translator: Fred Marchee <fredmarchee@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
@@ -464,8 +464,8 @@ msgstr "Keuzevakje"
 msgid "Number"
 msgstr "Nummer"
 
-#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:375
-#: fetch/entrezfetcher.cpp:444 field.cpp:430
+#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:395
+#: fetch/entrezfetcher.cpp:464 field.cpp:430
 #: translators/gcfilmsimporter.cpp:53 translators/risimporter.cpp:261
 msgid "URL"
 msgstr "URL-adres"
@@ -2046,7 +2046,7 @@ msgstr "Genre"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:852
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:854
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
 msgid "Keywords"
 msgstr "Trefwoorden"
@@ -2385,7 +2385,7 @@ msgstr "PSP"
 
 #: collections/gamecollection.cpp:47
 #, fuzzy
-msgid "Revolution"
+msgid "Nintendo Wii"
 msgstr "Regio"
 
 #: collections/gamecollection.cpp:47
@@ -2543,7 +2543,7 @@ msgstr "Deel"
 msgid "Cross-Reference"
 msgstr "Verwijzingen"
 
-#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:443
+#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:463
 #: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:670
 #: translators/risimporter.cpp:246
 msgid "Abstract"
@@ -3052,17 +3052,17 @@ msgstr "Actieve kalender"
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Tellico: %1 moet \"%2\" terugbrengen"
 
-#: fetch/entrezfetcher.cpp:55
+#: fetch/entrezfetcher.cpp:54
 msgid "Entrez Database"
 msgstr "Entrez Database"
 
-#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:423
+#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:443
 #: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:388
+#: fetch/yahoofetcher.cpp:387
 msgid "This source has no options."
 msgstr "Deze bron heeft geen opties."
 
-#: fetch/entrezfetcher.cpp:442
+#: fetch/entrezfetcher.cpp:462
 #, fuzzy
 msgid "Institution"
 msgstr "Staat"
@@ -3182,7 +3182,7 @@ msgstr ""
 msgid "Download cover &image"
 msgstr "Download hoesafbeelding"
 
-#: fetch/amazonfetcher.cpp:794 fetch/imdbfetcher.cpp:1101
+#: fetch/amazonfetcher.cpp:796 fetch/imdbfetcher.cpp:1101
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -3249,47 +3249,47 @@ msgstr "Amazon.com web services"
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 staat niet toe dat er voor deze verzameling wordt gezocht."
 
-#: fetch/amazonfetcher.cpp:505
+#: fetch/amazonfetcher.cpp:507
 msgid "Results from %1: %2/%3"
 msgstr "Resultaten van %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:529 fetch/z3950fetcher.cpp:425
+#: fetch/amazonfetcher.cpp:531 fetch/z3950fetcher.cpp:425
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Geen items gevonden voor de volgende ISBN waardes:</qt>"
 
-#: fetch/amazonfetcher.cpp:688 fetch/yahoofetcher.cpp:238
+#: fetch/amazonfetcher.cpp:690 fetch/yahoofetcher.cpp:237
 msgid "The cover image could not be loaded."
 msgstr "De afbeelding van de voorzijde kon niet worden geladen."
 
-#: fetch/amazonfetcher.cpp:765
+#: fetch/amazonfetcher.cpp:767
 msgid "Co&untry: "
 msgstr "&Land: "
 
-#: fetch/amazonfetcher.cpp:769
+#: fetch/amazonfetcher.cpp:771
 msgid "United States"
 msgstr "Verenigde Staten"
 
-#: fetch/amazonfetcher.cpp:770
+#: fetch/amazonfetcher.cpp:772
 msgid "United Kingdom"
 msgstr "Engeland"
 
-#: fetch/amazonfetcher.cpp:771
+#: fetch/amazonfetcher.cpp:773
 msgid "Germany"
 msgstr "Duitsland"
 
-#: fetch/amazonfetcher.cpp:772
+#: fetch/amazonfetcher.cpp:774
 msgid "Japan"
 msgstr "Japan"
 
-#: fetch/amazonfetcher.cpp:773
+#: fetch/amazonfetcher.cpp:775
 msgid "France"
 msgstr "Frankrijk"
 
-#: fetch/amazonfetcher.cpp:774
+#: fetch/amazonfetcher.cpp:776
 msgid "Canada"
 msgstr "Canada"
 
-#: fetch/amazonfetcher.cpp:778
+#: fetch/amazonfetcher.cpp:780
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -3297,31 +3297,31 @@ msgstr ""
 "Amazon geeft data van verschillende lokale websites. Kies welke u wilt "
 "gebruiken als data bron."
 
-#: fetch/amazonfetcher.cpp:784
+#: fetch/amazonfetcher.cpp:786
 msgid "&Image size: "
 msgstr "&Afbeelding grootte: "
 
-#: fetch/amazonfetcher.cpp:788
+#: fetch/amazonfetcher.cpp:790
 msgid "Small Image"
 msgstr "Kleine afbeelding"
 
-#: fetch/amazonfetcher.cpp:789
+#: fetch/amazonfetcher.cpp:791
 msgid "Medium Image"
 msgstr "Medium afbeelding"
 
-#: fetch/amazonfetcher.cpp:790
+#: fetch/amazonfetcher.cpp:792
 msgid "Large Image"
 msgstr "Grote afbeelding"
 
-#: fetch/amazonfetcher.cpp:791
+#: fetch/amazonfetcher.cpp:793
 msgid "No Image"
 msgstr "Geen afbeelding"
 
-#: fetch/amazonfetcher.cpp:800
+#: fetch/amazonfetcher.cpp:802
 msgid "&Associate's ID: "
 msgstr "&Associate's ID: "
 
-#: fetch/amazonfetcher.cpp:805
+#: fetch/amazonfetcher.cpp:807
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -4787,33 +4787,33 @@ msgstr ""
 msgid "<qt>The file is not a valid GCfilms data file.</qt>"
 msgstr ""
 
-#: translators/filelistingimporter.cpp:57
+#: translators/filelistingimporter.cpp:62
 #, fuzzy
 msgid "Scanning files..."
 msgstr "Audiobestanden doorzoeken..."
 
-#: translators/filelistingimporter.cpp:192
+#: translators/filelistingimporter.cpp:197
 #, fuzzy
 msgid "File Listing Options"
 msgstr "Afdrukopties"
 
-#: translators/filelistingimporter.cpp:194
+#: translators/filelistingimporter.cpp:199
 #, fuzzy
 msgid "Recursive folder search"
 msgstr "Folders recursief doorzoeken"
 
-#: translators/filelistingimporter.cpp:195
+#: translators/filelistingimporter.cpp:200
 #, fuzzy
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Indien aangevinkt worden folders recursief doorzocht naar audiobestanden."
 
-#: translators/filelistingimporter.cpp:199
+#: translators/filelistingimporter.cpp:204
 #, fuzzy
 msgid "Generate file previews"
 msgstr "&Maak lijsten..."
 
-#: translators/filelistingimporter.cpp:200
+#: translators/filelistingimporter.cpp:205
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
@@ -4840,18 +4840,6 @@ msgstr "jr, sr"
 #: core/tellico_config.cpp:127
 msgid "de,van,der,van der,von"
 msgstr "de,van de,van,vande,vanden"
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Nieuw"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Verzameling"
-
-#: rc.cpp:8
-msgid "Collection Toolbar"
-msgstr "Verzameling werkbalk"
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -4911,6 +4899,18 @@ msgstr "Mensen"
 #: cite/openoffice.cpp:190
 msgid "TCP/IP"
 msgstr ""
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Nieuw"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Verzameling"
+
+#: rc.cpp:8
+msgid "Collection Toolbar"
+msgstr "Verzameling werkbalk"
 
 #: entryupdater.cpp:82
 #, fuzzy

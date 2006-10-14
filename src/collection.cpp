@@ -31,7 +31,8 @@ const QString Collection::s_emptyGroupTitle = i18n("(Empty)");
 const QString Collection::s_peopleGroupName = QString::fromLatin1("_people");
 
 Collection::Collection(const QString& title_, const QString& entryTitle_)
-    : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryTitle(entryTitle_), m_entryIdDict(997) {
+    : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryTitle(entryTitle_), m_entryIdDict(997)
+    , m_trackGroups(false) {
   m_entryGroupDicts.setAutoDelete(true);
 
   m_id = getID();
@@ -96,10 +97,6 @@ bool Collection::addField(FieldPtr field_) {
     m_entryGroupDicts.insert(field_->name(), dict);
     // cache the possible groups of entries
     m_entryGroups << field_->name();
-  }
-
-  for(EntryVecIt it = m_entries.begin(); it != m_entries.end(); ++it) {
-    populateDicts(it);
   }
 
   if(m_defaultGroupField.isEmpty() && field_->flags() & Field::AllowGrouped) {
@@ -168,7 +165,6 @@ bool Collection::mergeField(FieldPtr newField_) {
         uint currNum = Tellico::toUInt(currValue, &ok);
         uint newNum = Tellico::toUInt(it.data(), &ok);
         if(newNum > currNum) { // bigger values
-          myDebug() << "Collection::mergeField() - changing " << propName << " for " << currField->name() << endl;
           currField->setProperty(propName, QString::number(newNum));
         }
       } else if(currField->type() == Field::Rating && propName == Latin1Literal("minimum")) {
@@ -176,7 +172,6 @@ bool Collection::mergeField(FieldPtr newField_) {
         uint currNum = Tellico::toUInt(currValue, &ok);
         uint newNum = Tellico::toUInt(it.data(), &ok);
         if(newNum < currNum) { // smaller values
-          myDebug() << "Collection::mergeField() - changing " << propName << " for " << currField->name() << endl;
           currField->setProperty(propName, QString::number(newNum));
         }
       }
@@ -264,7 +259,7 @@ bool Collection::modifyField(FieldPtr newField_) {
   }
   if(isPeople) {
     // if there's more than one people field and no people dict exists yet, add it
-    if(m_peopleFields.count() > 1 && !m_entryGroupDicts.find(s_peopleGroupName)) {
+    if(m_peopleFields.count() > 1 && m_entryGroupDicts.find(s_peopleGroupName) == 0) {
       EntryGroupDict* d = new EntryGroupDict();
       d->setAutoDelete(true);
       m_entryGroupDicts.insert(s_peopleGroupName, d);
@@ -406,7 +401,9 @@ void Collection::addEntry(EntryPtr entry_) {
     ++m_nextEntryId;
   }
   m_entryIdDict.insert(entry_->id(), entry_);
-  populateDicts(entry_);
+  if(m_trackGroups) {
+    populateCurrentDicts(entry_);
+  }
 }
 
 void Collection::removeEntriesFromDicts(EntryVec entries_) {
@@ -432,14 +429,13 @@ void Collection::removeEntriesFromDicts(EntryVec entries_) {
 // groupDicts current. It first removes the entry from every group to which it belongs,
 // then it repopulates the dicts with the entry's fields
 void Collection::updateDicts(EntryVec entries_) {
-//  myDebug() << "Collection::updateDicts()" << endl;
   if(entries_.isEmpty()) {
     return;
   }
 
   removeEntriesFromDicts(entries_);
   for(EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
-    populateDicts(entry);
+    populateCurrentDicts(entry);
   }
   cleanGroups();
 }
@@ -548,11 +544,51 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
   return false;
 }
 
-Tellico::Data::EntryGroupDict* const Collection::entryGroupDictByName(const QString& name_) const {
-  return m_entryGroupDicts.isEmpty() ? 0 : m_entryGroupDicts.find(name_);
+Tellico::Data::EntryGroupDict* const Collection::entryGroupDictByName(const QString& name_) {
+//  myDebug() << "Collection::entryGroupDictByName() - " << name_ << endl;
+  EntryGroupDict* dict = m_entryGroupDicts.isEmpty() ? 0 : m_entryGroupDicts.find(name_);
+  if(dict && dict->isEmpty()) {
+    GUI::CursorSaver cs;
+    const bool b = signalsBlocked();
+    // block signals so all the group created/modified signals don't fire
+    blockSignals(true);
+    populateDict(dict, name_, m_entries);
+    blockSignals(b);
+  }
+  return dict;
 }
 
-void Collection::populateDicts(EntryPtr entry_) {
+void Collection::populateDict(EntryGroupDict* dict_, const QString& fieldName_, EntryVec entries_) {
+//  myDebug() << "Collection::populateDict() - " << fieldName_ << endl;
+  bool isBool = hasField(fieldName_) && fieldByName(fieldName_)->type() == Field::Bool;
+
+  for(EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+    QStringList groups = entryGroupNamesByField(entry, fieldName_);
+    for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
+      // find the group for this group name
+      // bool fields used the field title
+      QString groupTitle = *groupIt;
+      if(isBool && groupTitle != s_emptyGroupTitle) {
+        groupTitle = fieldTitleByName(fieldName_);
+      }
+      EntryGroup* group = dict_->find(groupTitle);
+      // if the group doesn't exist, create it
+      if(!group) {
+        group = new EntryGroup(groupTitle, fieldName_);
+        dict_->insert(groupTitle, group);
+      } else if(group->isEmpty()) {
+        // if it's empty, then it was added to the vector of groups to delete
+        // remove it from that vector now that we're adding to it
+        m_groupsToDelete.remove(group);
+      }
+      if(entry->addToGroup(group)) {
+        emit signalGroupModified(this, group);
+      }
+    } // end group loop
+  } // end entry loop
+}
+
+void Collection::populateCurrentDicts(EntryPtr entry_) {
   if(m_entryGroupDicts.isEmpty()) {
     return;
   }
@@ -563,36 +599,12 @@ void Collection::populateDicts(EntryPtr entry_) {
   // entry pointer into the dict for each value
   QDictIterator<EntryGroupDict> dictIt(m_entryGroupDicts);
   for( ; dictIt.current(); ++dictIt) {
-    EntryGroupDict* dict = dictIt.current();
-    // the field name might be the people group name
-    QString fieldName = dictIt.currentKey();
-    bool isBool = hasField(fieldName) && fieldByName(fieldName)->type() == Field::Bool;
-
-    QStringList groups = entryGroupNamesByField(entry_, fieldName);
-    for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
-      // find the group for this group name
-      // bool fields used the field title
-      QString groupTitle = *groupIt;
-      if(isBool && groupTitle != s_emptyGroupTitle) {
-        groupTitle = fieldTitleByName(fieldName);
-      }
-      EntryGroup* group = dict->find(groupTitle);
-      // if the group doesn't exist, create it
-      if(!group) {
-        group = new EntryGroup(groupTitle, fieldName);
-        dict->insert(groupTitle, group);
-      } else if(group->isEmpty()) {
-        // if it's empty, then it was added to the vector of groups to delete
-        // remove it from that vector now that we're adding to it
-        m_groupsToDelete.remove(group);
-      }
-      if(entry_->addToGroup(group)) {
-        emit signalGroupModified(this, group);
-      }
-    } // end group loop
-//    myDebug() << "Collection::populateDicts - end of group loop" << endl;
-  } // end dict loop
-//  myDebug() << "Collection::populateDicts - end of full loop" << endl;
+    // only populate if it's not empty, since they are
+    // populated on demand
+    if(!dictIt.current()->isEmpty()) {
+      populateDict(dictIt.current(), dictIt.currentKey(), entry_);
+    }
+  }
 }
 
 // return a string list for all the groups that the entry belongs to
@@ -623,7 +635,6 @@ void Collection::invalidateGroups() {
   for(EntryVecIt it = m_entries.begin(); it != m_entries.end(); ++it) {
     it->invalidateFormattedFieldValue();
     it->clearGroups();
-    populateDicts(it);
   }
   blockSignals(false);
 }
@@ -667,6 +678,7 @@ void Collection::clear() {
   m_imageFields.clear();
   m_fieldNameDict.clear();
   m_fieldTitleDict.clear();
+
   m_entries.clear();
   m_entryIdDict.clear();
   m_entryGroupDicts.clear();

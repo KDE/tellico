@@ -320,7 +320,7 @@ void EntryEditDialog::slotHandleSave() {
     }
   }
 
-  GUI::CursorSaver cs(Qt::waitCursor);
+  GUI::CursorSaver cs;
 
   Data::EntryVec oldEntries;
   Data::FieldVec fields = m_currColl->fields();

@@ -36,7 +36,6 @@ typedef KSortableItem<Type, QString> TypePair; // fetcher info, type and name of
 typedef KSortableValueList<Type, QString> TypePairList;
 typedef QMap<FetchKey, QString> KeyMap; // map key type to name of key
 typedef Vector<Fetcher> FetcherVec;
-typedef Vector<const Fetcher> CFetcherVec;
 
 /**
  * A manager for handling all the different classes of Fetcher.
@@ -59,7 +58,7 @@ public:
   bool hasMoreResults() const;
   void loadFetchers();
   const FetcherVec& fetchers() const { return m_fetchers; }
-  CFetcherVec fetchers(int type) const;
+  FetcherVec fetchers(int type);
   TypePairList typeList();
   ConfigWidget* configWidget(QWidget* parent, Type type, const QString& name);
 

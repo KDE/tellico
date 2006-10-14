@@ -39,7 +39,7 @@ using Tellico::EntryUpdater;
 // for each entry, we loop over all available fetchers
 // then we loop over all entries
 EntryUpdater::EntryUpdater(Data::CollPtr coll_, Data::EntryVec entries_, QObject* parent_)
-    : QObject(parent_), m_coll(coll_), m_entries(entries_), m_cancelled(false) {
+    : QObject(parent_), m_coll(coll_), m_entriesToUpdate(entries_), m_cancelled(false) {
   // for now, we're assuming all entries are same collection type
   m_fetchers = Fetch::Manager::self()->createUpdateFetchers(m_coll->type());
   for(Fetch::FetcherVec::Iterator it = m_fetchers.begin(); it != m_fetchers.end(); ++it) {
@@ -54,7 +54,7 @@ EntryUpdater::EntryUpdater(Data::CollPtr coll_, Data::EntryVec entries_, QObject
 EntryUpdater::EntryUpdater(const QString& source_, Data::CollPtr coll_, Data::EntryVec entries_, QObject* parent_)
     : QObject(parent_)
     , m_coll(coll_)
-    , m_entries(entries_)
+    , m_entriesToUpdate(entries_)
     , m_cancelled(false) {
   // for now, we're assuming all entries are same collection type
   Fetch::Fetcher::Ptr f = Fetch::Manager::self()->createUpdateFetcher(m_coll->type(), source_);
@@ -76,10 +76,10 @@ EntryUpdater::~EntryUpdater() {
 
 void EntryUpdater::init() {
   m_fetchIndex = 0;
-  m_origEntryCount = m_entries.count();
+  m_origEntryCount = m_entriesToUpdate.count();
   QString label;
-  if(m_entries.count() == 1) {
-    label = i18n("Updating %1...").arg(m_entries.front()->title());
+  if(m_entriesToUpdate.count() == 1) {
+    label = i18n("Updating %1...").arg(m_entriesToUpdate.front()->title());
   } else {
     label = i18n("Updating entries...");
   }
@@ -97,12 +97,12 @@ void EntryUpdater::init() {
 }
 
 void EntryUpdater::slotStartNext() {
-  StatusBar::self()->setStatus(i18n("Updating <b>%1</b>...").arg(m_entries.front()->title()));
-  ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entries.count()) + m_fetchIndex);
+  StatusBar::self()->setStatus(i18n("Updating <b>%1</b>...").arg(m_entriesToUpdate.front()->title()));
+  ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entriesToUpdate.count()) + m_fetchIndex);
 
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
 //  myDebug() << "EntryUpdater::slotDone() - starting " << f->source() << endl;
-  f->updateEntry(m_entries.front());
+  f->updateEntry(m_entriesToUpdate.front());
 }
 
 void EntryUpdater::slotDone() {
@@ -123,9 +123,9 @@ void EntryUpdater::slotDone() {
     m_fetchIndex = 0;
     // we've gone through the loop for the first entry in the vector
     // pop it and move on
-    m_entries.remove(m_entries.begin());
+    m_entriesToUpdate.remove(m_entriesToUpdate.begin());
     // if there are no more entries, and this is the last fetcher, time to delete
-    if(m_entries.isEmpty()) {
+    if(m_entriesToUpdate.isEmpty()) {
       QTimer::singleShot(500, this, SLOT(slotCleanup()));
       return;
     }
@@ -145,7 +145,7 @@ void EntryUpdater::slotResult(Fetch::SearchResult* result_) {
   Data::EntryPtr e = result_->fetchEntry();
   if(e) {
     m_fetchedEntries.append(e);
-    int match = m_coll->sameEntry(m_entries.front(), e);
+    int match = m_coll->sameEntry(m_entriesToUpdate.front(), e);
     if(match > ENTRY_UPDATE_PERFECT_MATCH) {
       result_->fetcher->stop();
     }
@@ -165,7 +165,7 @@ void EntryUpdater::slotCancel() {
 }
 
 void EntryUpdater::handleResults() {
-  Data::EntryPtr entry = m_entries.front();
+  Data::EntryPtr entry = m_entriesToUpdate.front();
   int best = 0;
   ResultList matches;
   for(ResultList::Iterator res = m_results.begin(); res != m_results.end(); ++res) {
@@ -218,7 +218,7 @@ Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(ResultList results) {
   QString s = i18n("<qt><b>%1</b> returned multiple results which could match <b>%2</b>, "
                    "the entry currently in the collection. Please select the correct match.</qt>")
               .arg(m_fetchers[m_fetchIndex]->source())
-              .arg(m_entries.front()->field(QString::fromLatin1("title")));
+              .arg(m_entriesToUpdate.front()->field(QString::fromLatin1("title")));
   GUI::RichTextLabel* l = new GUI::RichTextLabel(s, hbox);
   hbox->setStretchFactor(l, 100);
 
@@ -246,11 +246,20 @@ Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(ResultList results) {
 }
 
 void EntryUpdater::mergeCurrent(Data::EntryPtr entry_, bool overWrite_) {
-  Data::EntryPtr currEntry = m_entries.front();
+  Data::EntryPtr currEntry = m_entriesToUpdate.front();
   if(entry_) {
+    m_matchedEntries.append(entry_);
     Kernel::self()->updateEntry(currEntry, entry_, overWrite_);
-    if(m_entries.count() % CHECK_COLLECTION_IMAGES_STEP_SIZE == 1) {
-      Data::Document::self()->removeImagesNotInCollection(m_fetchedEntries);
+    if(m_entriesToUpdate.count() % CHECK_COLLECTION_IMAGES_STEP_SIZE == 1) {
+      // I don't want to remove any images in the entries that are getting
+      // updated since they'll reference them later and the command isn't
+      // executed until the command history group is finished
+      // so remove pointers to matched entries
+      Data::EntryVec nonUpdatedEntries = m_fetchedEntries;
+      for(Data::EntryVecIt match = m_matchedEntries.begin(); match != m_matchedEntries.end(); ++match) {
+        nonUpdatedEntries.remove(match);
+      }
+      Data::Document::self()->removeImagesNotInCollection(nonUpdatedEntries);
     }
   }
 }

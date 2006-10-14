@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
-"POT-Creation-Date: 2006-09-24 09:08-0700\n"
+"POT-Creation-Date: 2006-10-11 07:41-0700\n"
 "PO-Revision-Date: 2006-09-10 22:10+0200\n"
 "Last-Translator: Robert Kratky <kratky@rob.cz>\n"
 "Language-Team: čeština <cs@li.org>\n"
@@ -466,8 +466,8 @@ msgstr "Přepínač"
 msgid "Number"
 msgstr "Číslo"
 
-#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:375
-#: fetch/entrezfetcher.cpp:444 field.cpp:430
+#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:395
+#: fetch/entrezfetcher.cpp:464 field.cpp:430
 #: translators/gcfilmsimporter.cpp:53 translators/risimporter.cpp:261
 msgid "URL"
 msgstr "URL"
@@ -2015,7 +2015,7 @@ msgstr "Žánr"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:852
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:854
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
 msgid "Keywords"
 msgstr "Klíčová slova"
@@ -2352,8 +2352,8 @@ msgid ""
 msgstr "PSP"
 
 #: collections/gamecollection.cpp:47
-msgid "Revolution"
-msgstr "Revolution"
+msgid "Nintendo Wii"
+msgstr "Nintendo Wii"
 
 #: collections/gamecollection.cpp:47
 msgid "Nintendo DS"
@@ -2512,7 +2512,7 @@ msgstr "Svazek"
 msgid "Cross-Reference"
 msgstr "Křížový odkaz"
 
-#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:443
+#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:463
 #: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:670
 #: translators/risimporter.cpp:246
 msgid "Abstract"
@@ -3008,17 +3008,17 @@ msgstr "Aktivní kalendář"
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Tellico: %1 by měl vrátit \"%2\""
 
-#: fetch/entrezfetcher.cpp:55
+#: fetch/entrezfetcher.cpp:54
 msgid "Entrez Database"
 msgstr "Databáze záznamů"
 
-#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:423
+#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:443
 #: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:388
+#: fetch/yahoofetcher.cpp:387
 msgid "This source has no options."
 msgstr "Tento zdroj nemá žádné volby."
 
-#: fetch/entrezfetcher.cpp:442
+#: fetch/entrezfetcher.cpp:462
 msgid "Institution"
 msgstr "Instituce"
 
@@ -3128,7 +3128,7 @@ msgstr ""
 msgid "Download cover &image"
 msgstr "Stáhnout obrázek &obálky"
 
-#: fetch/amazonfetcher.cpp:794 fetch/imdbfetcher.cpp:1101
+#: fetch/amazonfetcher.cpp:796 fetch/imdbfetcher.cpp:1101
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -3194,48 +3194,48 @@ msgstr "Amazon.com webové služby"
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 neumožňuje vyhledávání u tohoto typu sbírky."
 
-#: fetch/amazonfetcher.cpp:505
+#: fetch/amazonfetcher.cpp:507
 msgid "Results from %1: %2/%3"
 msgstr "Výsledky z %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:529 fetch/z3950fetcher.cpp:425
+#: fetch/amazonfetcher.cpp:531 fetch/z3950fetcher.cpp:425
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 "<qt>Pro následující kódy ISBN nebyly nalezeny žádné záznamy:</qt>"
 
-#: fetch/amazonfetcher.cpp:688 fetch/yahoofetcher.cpp:238
+#: fetch/amazonfetcher.cpp:690 fetch/yahoofetcher.cpp:237
 msgid "The cover image could not be loaded."
 msgstr "Nepodařilo načíst obrázek obálky."
 
-#: fetch/amazonfetcher.cpp:765
+#: fetch/amazonfetcher.cpp:767
 msgid "Co&untry: "
 msgstr "Ze&mě: "
 
-#: fetch/amazonfetcher.cpp:769
+#: fetch/amazonfetcher.cpp:771
 msgid "United States"
 msgstr "Spojené státy"
 
-#: fetch/amazonfetcher.cpp:770
+#: fetch/amazonfetcher.cpp:772
 msgid "United Kingdom"
 msgstr "Spojené království"
 
-#: fetch/amazonfetcher.cpp:771
+#: fetch/amazonfetcher.cpp:773
 msgid "Germany"
 msgstr "Německo"
 
-#: fetch/amazonfetcher.cpp:772
+#: fetch/amazonfetcher.cpp:774
 msgid "Japan"
 msgstr "Japonsko"
 
-#: fetch/amazonfetcher.cpp:773
+#: fetch/amazonfetcher.cpp:775
 msgid "France"
 msgstr "Francie"
 
-#: fetch/amazonfetcher.cpp:774
+#: fetch/amazonfetcher.cpp:776
 msgid "Canada"
 msgstr "Kanada"
 
-#: fetch/amazonfetcher.cpp:778
+#: fetch/amazonfetcher.cpp:780
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -3243,31 +3243,31 @@ msgstr ""
 "Amazon.com poskytuje data z několika lokalizovaných stránek. Vyberte tu, "
 "kterou chcete použít pro tento datový zdroj."
 
-#: fetch/amazonfetcher.cpp:784
+#: fetch/amazonfetcher.cpp:786
 msgid "&Image size: "
 msgstr "&Velikost obrázku: "
 
-#: fetch/amazonfetcher.cpp:788
+#: fetch/amazonfetcher.cpp:790
 msgid "Small Image"
 msgstr "Malý obrázek"
 
-#: fetch/amazonfetcher.cpp:789
+#: fetch/amazonfetcher.cpp:791
 msgid "Medium Image"
 msgstr "Střední obrázek"
 
-#: fetch/amazonfetcher.cpp:790
+#: fetch/amazonfetcher.cpp:792
 msgid "Large Image"
 msgstr "Velký obrázek"
 
-#: fetch/amazonfetcher.cpp:791
+#: fetch/amazonfetcher.cpp:793
 msgid "No Image"
 msgstr "Žádný obrázek"
 
-#: fetch/amazonfetcher.cpp:800
+#: fetch/amazonfetcher.cpp:802
 msgid "&Associate's ID: "
 msgstr "&ID společníka: "
 
-#: fetch/amazonfetcher.cpp:805
+#: fetch/amazonfetcher.cpp:807
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -4677,29 +4677,29 @@ msgstr ""
 msgid "<qt>The file is not a valid GCfilms data file.</qt>"
 msgstr "<qt>Soubor není platným datovým souborem GCfilms.</qt>"
 
-#: translators/filelistingimporter.cpp:57
+#: translators/filelistingimporter.cpp:62
 msgid "Scanning files..."
 msgstr "Procházím soubory..."
 
-#: translators/filelistingimporter.cpp:192
+#: translators/filelistingimporter.cpp:197
 msgid "File Listing Options"
 msgstr "Možnosti výpisu souborů"
 
-#: translators/filelistingimporter.cpp:194
+#: translators/filelistingimporter.cpp:199
 msgid "Recursive folder search"
 msgstr "Rekurzívní hledání v adresářích"
 
-#: translators/filelistingimporter.cpp:195
+#: translators/filelistingimporter.cpp:200
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Je-li zaškrtnuto, budou v adresářích rekurzívně vyhledávány všechny "
 "soubory."
 
-#: translators/filelistingimporter.cpp:199
+#: translators/filelistingimporter.cpp:204
 msgid "Generate file previews"
 msgstr "Generovat náhledy souborů"
 
-#: translators/filelistingimporter.cpp:200
+#: translators/filelistingimporter.cpp:205
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
@@ -4730,18 +4730,6 @@ msgstr "ml., iii, iv"
 #: core/tellico_config.cpp:127
 msgid "de,van,der,van der,von"
 msgstr "de,van,der,van der,von"
-
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Nový"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Sbírka"
-
-#: rc.cpp:8
-msgid "Collection Toolbar"
-msgstr "Nástrojová lišta sbírky"
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -4803,6 +4791,18 @@ msgstr "Roura"
 #: cite/openoffice.cpp:190
 msgid "TCP/IP"
 msgstr "TCP/IP"
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Nový"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Sbírka"
+
+#: rc.cpp:8
+msgid "Collection Toolbar"
+msgstr "Nástrojová lišta sbírky"
 
 #: entryupdater.cpp:82
 msgid "Updating %1..."

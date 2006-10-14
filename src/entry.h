@@ -37,9 +37,12 @@ namespace Tellico {
  * David Weber. The @ref groupName() would be "Weber, David" and the
  * @ref fieldName() would be "author".
  *
+ * It's a QObject because EntryGroupItem holds a QGuardedPtr
+ *
  * @author Robby Stephenson
  */
 class EntryGroup : public QObject, public EntryVec {
+Q_OBJECT
 
 public:
   EntryGroup(const QString& group, const QString& field);

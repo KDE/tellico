@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
-"POT-Creation-Date: 2006-09-24 09:08-0700\n"
+"POT-Creation-Date: 2006-10-11 07:41-0700\n"
 "PO-Revision-Date: 2006-09-24 14:36+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -448,8 +448,8 @@ msgstr "Avkryssingsboks"
 msgid "Number"
 msgstr "Tal"
 
-#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:375
-#: fetch/entrezfetcher.cpp:444 field.cpp:430
+#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:395
+#: fetch/entrezfetcher.cpp:464 field.cpp:430
 #: translators/gcfilmsimporter.cpp:53 translators/risimporter.cpp:261
 msgid "URL"
 msgstr "Nettadresse"
@@ -1357,7 +1357,8 @@ msgstr "Grupper"
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
-msgstr "<qt><i>Grupperuta</i> sorterer oppføringane i grupper basert på felt.</qt>"
+msgstr ""
+"<qt><i>Grupperuta</i> sorterer oppføringane i grupper basert på felt.</qt>"
 
 #: mainwindow.cpp:734
 msgid ""
@@ -1543,8 +1544,10 @@ msgid "Tellico is unable to load the image - %1."
 msgstr "Klarte ikkja biletet «%1»."
 
 #: filehandler.cpp:204
-msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
-msgstr "Fila «%1» finst frå før. Er du sikker på at du vil skriva over ho?"
+msgid ""
+"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgstr ""
+"Fila «%1» finst frå før. Er du sikker på at du vil skriva over ho?"
 
 #: filehandler.cpp:207
 msgid "Overwrite File?"
@@ -1988,7 +1991,7 @@ msgstr "Sjanger"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:852
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:854
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
 msgid "Keywords"
 msgstr "Nøkkelord"
@@ -2325,8 +2328,8 @@ msgid ""
 msgstr "PSP"
 
 #: collections/gamecollection.cpp:47
-msgid "Revolution"
-msgstr "Revolution"
+msgid "Nintendo Wii"
+msgstr "Nintendo Wii"
 
 #: collections/gamecollection.cpp:47
 msgid "Nintendo DS"
@@ -2439,7 +2442,8 @@ msgstr "Oppføringstype"
 
 #: collections/bibtexcollection.cpp:77
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr "Desse oppføringstypane gjeld berre BibTeX. Sjå hjelpeteksten til BibTeX."
+msgstr ""
+"Desse oppføringstypane gjeld berre BibTeX. Sjå hjelpeteksten til BibTeX."
 
 #: collections/bibtexcollection.cpp:87
 msgid "Bibtex Key"
@@ -2482,7 +2486,7 @@ msgstr "Volum"
 msgid "Cross-Reference"
 msgstr "Kryssreferanse"
 
-#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:443
+#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:463
 #: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:670
 #: translators/risimporter.cpp:246
 msgid "Abstract"
@@ -2685,14 +2689,16 @@ msgstr ""
 
 #: collectionfieldsdialog.cpp:142
 msgid "A <i>Table</i> may hold one or more columns of values. "
-msgstr "Ein <i>tabell</i> kan innehelda éin eller fleire kolonnar med verdiar. "
+msgstr ""
+"Ein <i>tabell</i> kan innehelda éin eller fleire kolonnar med verdiar. "
 
 #: collectionfieldsdialog.cpp:143
 msgid "An <i>Image</i> field holds a picture. "
 msgstr "Eit <i>biletfelt</i> inneheld eit bilete. "
 
 #: collectionfieldsdialog.cpp:144
-msgid "A <i>Date</i> field can be used for values with a day, month, and year. "
+msgid ""
+"A <i>Date</i> field can be used for values with a day, month, and year. "
 msgstr "Eit <i>datofelt</i> kan brukast for verdiar med dag, månad og år. "
 
 #: collectionfieldsdialog.cpp:145
@@ -2721,7 +2727,8 @@ msgstr "&Kategori:"
 
 #: collectionfieldsdialog.cpp:162
 msgid "The field category determines where the field is placed in the editor."
-msgstr "Feltkategorien avgjer kor feltet skal plasserast i redigeringsvindauget."
+msgstr ""
+"Feltkategorien avgjer kor feltet skal plasserast i redigeringsvindauget."
 
 #: collectionfieldsdialog.cpp:179
 msgid "Descr&iption:"
@@ -2797,7 +2804,8 @@ msgid "Allow auto-capitalization only"
 msgstr "Berre endra til store forbokstavar"
 
 #: collectionfieldsdialog.cpp:230
-msgid "This option allows the field to be capitalized, but not specially formatted."
+msgid ""
+"This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 "Endra innhaldet i feltet til store forbokstavar automatisk, men ikkje "
 "formater det."
@@ -2857,7 +2865,8 @@ msgid "Allow grouping"
 msgstr "Tillèt gruppering"
 
 #: collectionfieldsdialog.cpp:248
-msgid "If checked, this field may be used to group the entries in the group view."
+msgid ""
+"If checked, this field may be used to group the entries in the group view."
 msgstr "Feltet kan brukast til å gruppera oppføringane i grupperuta."
 
 #: collectionfieldsdialog.cpp:262
@@ -2965,17 +2974,17 @@ msgstr "Aktiv kalender"
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Tellico: %1 må levera att «%2»."
 
-#: fetch/entrezfetcher.cpp:55
+#: fetch/entrezfetcher.cpp:54
 msgid "Entrez Database"
 msgstr "Entrez-database"
 
-#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:423
+#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:443
 #: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:388
+#: fetch/yahoofetcher.cpp:387
 msgid "This source has no options."
 msgstr "Kjelda inneheld ingen val."
 
-#: fetch/entrezfetcher.cpp:442
+#: fetch/entrezfetcher.cpp:462
 msgid "Institution"
 msgstr "Institusjon"
 
@@ -3034,7 +3043,8 @@ msgid "Select IMDB Result"
 msgstr "Vel IMDb-resultat"
 
 #: fetch/imdbfetcher.cpp:580
-msgid "<qt>Your search returned multiple matches. Please select one below.</qt>"
+msgid ""
+"<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr "<qt>Søket gav fleire treff. Vel eitt av dei nedanfor.</qt>"
 
 #: fetch/imdbfetcher.cpp:595
@@ -3082,7 +3092,7 @@ msgstr ""
 msgid "Download cover &image"
 msgstr "Last ned &omslag"
 
-#: fetch/amazonfetcher.cpp:794 fetch/imdbfetcher.cpp:1101
+#: fetch/amazonfetcher.cpp:796 fetch/imdbfetcher.cpp:1101
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -3148,47 +3158,47 @@ msgstr "Amazon.com-vevtenester"
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 lèt deg ikkje søkja i denne samlingstypen."
 
-#: fetch/amazonfetcher.cpp:505
+#: fetch/amazonfetcher.cpp:507
 msgid "Results from %1: %2/%3"
 msgstr "Resultat frå %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:529 fetch/z3950fetcher.cpp:425
+#: fetch/amazonfetcher.cpp:531 fetch/z3950fetcher.cpp:425
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Fann ikkje nokon oppføringar for desse ISBN-verdiane:</qt>"
 
-#: fetch/amazonfetcher.cpp:688 fetch/yahoofetcher.cpp:238
+#: fetch/amazonfetcher.cpp:690 fetch/yahoofetcher.cpp:237
 msgid "The cover image could not be loaded."
 msgstr "Klarte ikkje lasta ned omslaget."
 
-#: fetch/amazonfetcher.cpp:765
+#: fetch/amazonfetcher.cpp:767
 msgid "Co&untry: "
 msgstr "&Land: "
 
-#: fetch/amazonfetcher.cpp:769
+#: fetch/amazonfetcher.cpp:771
 msgid "United States"
 msgstr "USA"
 
-#: fetch/amazonfetcher.cpp:770
+#: fetch/amazonfetcher.cpp:772
 msgid "United Kingdom"
 msgstr "Storbritannia"
 
-#: fetch/amazonfetcher.cpp:771
+#: fetch/amazonfetcher.cpp:773
 msgid "Germany"
 msgstr "Tyskland"
 
-#: fetch/amazonfetcher.cpp:772
+#: fetch/amazonfetcher.cpp:774
 msgid "Japan"
 msgstr "Japan"
 
-#: fetch/amazonfetcher.cpp:773
+#: fetch/amazonfetcher.cpp:775
 msgid "France"
 msgstr "Frankrike"
 
-#: fetch/amazonfetcher.cpp:774
+#: fetch/amazonfetcher.cpp:776
 msgid "Canada"
 msgstr "Canada"
 
-#: fetch/amazonfetcher.cpp:778
+#: fetch/amazonfetcher.cpp:780
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -3196,31 +3206,31 @@ msgstr ""
 "Amazon.com har data på fleire forskjellige nettstadar i forskjellige land. "
 "Vel den av dei du vil bruka for denne datakjelda."
 
-#: fetch/amazonfetcher.cpp:784
+#: fetch/amazonfetcher.cpp:786
 msgid "&Image size: "
 msgstr "&Biletstorleik: "
 
-#: fetch/amazonfetcher.cpp:788
+#: fetch/amazonfetcher.cpp:790
 msgid "Small Image"
 msgstr "Lite bilete"
 
-#: fetch/amazonfetcher.cpp:789
+#: fetch/amazonfetcher.cpp:791
 msgid "Medium Image"
 msgstr "Mellomstort bilete"
 
-#: fetch/amazonfetcher.cpp:790
+#: fetch/amazonfetcher.cpp:792
 msgid "Large Image"
 msgstr "Stort bilete"
 
-#: fetch/amazonfetcher.cpp:791
+#: fetch/amazonfetcher.cpp:793
 msgid "No Image"
 msgstr "Ingen bilete"
 
-#: fetch/amazonfetcher.cpp:800
+#: fetch/amazonfetcher.cpp:802
 msgid "&Associate's ID: "
 msgstr "&Tilhøyrande ID: "
 
-#: fetch/amazonfetcher.cpp:805
+#: fetch/amazonfetcher.cpp:807
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -3239,7 +3249,8 @@ msgid "Collection &type:"
 msgstr "Samlings&type:"
 
 #: fetch/execexternalfetcher.cpp:341
-msgid "Set the collection type of the data returned from the external application."
+msgid ""
+"Set the collection type of the data returned from the external application."
 msgstr "Vel samlingstypen til data frå det eksterne programmet."
 
 #: fetch/execexternalfetcher.cpp:346
@@ -3258,7 +3269,8 @@ msgstr "Program&stig: "
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
-msgstr "Stigen til programmet som skal køyrast og gje ut ei gyldig Tellico-datafil."
+msgstr ""
+"Stigen til programmet som skal køyrast og gje ut ei gyldig Tellico-datafil."
 
 #: fetch/execexternalfetcher.cpp:370
 msgid "Select the search keys supported by the data source."
@@ -3971,7 +3983,8 @@ msgid "Edit List..."
 msgstr "Rediger liste …"
 
 #: fetchdialog.cpp:129
-msgid "Click to open a text edit box for entering or editing multiple ISBN values."
+msgid ""
+"Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr "Trykk for å opna eit skrivefelt for redigering av fleire ISBN-nummer."
 
 #: fetchdialog.cpp:135
@@ -4138,7 +4151,8 @@ msgid "Select a report template and click <em>Generate</em>."
 msgstr "Vel ein rapportmal og trykk <em>Lag</em>."
 
 #: reportdialog.cpp:108
-msgid "Some reports may take several seconds to generate for large collections."
+msgid ""
+"Some reports may take several seconds to generate for large collections."
 msgstr "Det kan ta fleire sekund å lagra rapportar for store samlingar."
 
 #: reportdialog.cpp:195 translators/htmlexporter.cpp:87
@@ -4319,7 +4333,8 @@ msgstr "Bruk sjølvvald tekst som skiljeteikn."
 
 #: translators/csvexporter.cpp:146 translators/csvimporter.cpp:216
 msgid "A custom string, such as a colon, may be used as a delimiter."
-msgstr "Du kan bruka ein sjølvvald tekst, eksempelvis eit kolon, som skiljeteikn."
+msgstr ""
+"Du kan bruka ein sjølvvald tekst, eksempelvis eit kolon, som skiljeteikn."
 
 #: translators/csvimporter.cpp:233
 msgid "The table shows up to the first five lines of the CSV file."
@@ -4590,27 +4605,27 @@ msgstr "Kopier kvar oppføring til si eiga fil."
 msgid "<qt>The file is not a valid GCfilms data file.</qt>"
 msgstr "<qt>Denne fila er ikkje ei gyldig GCfilms-datafil.</qt>"
 
-#: translators/filelistingimporter.cpp:57
+#: translators/filelistingimporter.cpp:62
 msgid "Scanning files..."
 msgstr "Søkjer gjennom …"
 
-#: translators/filelistingimporter.cpp:192
+#: translators/filelistingimporter.cpp:197
 msgid "File Listing Options"
 msgstr "Fillisteval"
 
-#: translators/filelistingimporter.cpp:194
+#: translators/filelistingimporter.cpp:199
 msgid "Recursive folder search"
 msgstr "Søk òg i undermapper"
 
-#: translators/filelistingimporter.cpp:195
+#: translators/filelistingimporter.cpp:200
 msgid "If checked, folders are recursively searched for all files."
 msgstr "Søk i mapper og i undermapper etter filer."
 
-#: translators/filelistingimporter.cpp:199
+#: translators/filelistingimporter.cpp:204
 msgid "Generate file previews"
 msgstr "Lag førehandsvisingar"
 
-#: translators/filelistingimporter.cpp:200
+#: translators/filelistingimporter.cpp:205
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
@@ -4642,18 +4657,6 @@ msgstr "jr.,jr,iii,iv"
 msgid "de,van,der,van der,von"
 msgstr "van,von"
 
-#: rc.cpp:2
-msgid "&New"
-msgstr "&Ny"
-
-#: rc.cpp:5
-msgid "&Collection"
-msgstr "&Samling"
-
-#: rc.cpp:8
-msgid "Collection Toolbar"
-msgstr "Samlingsverktøylinje"
-
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
 msgstr "Datakjeldeeigenskapar"
@@ -4663,7 +4666,8 @@ msgid "&Source name: "
 msgstr "&Kjeldenamn: "
 
 #: fetcherconfigdialog.cpp:79
-msgid "The name identifies the data source and should be unique and informative."
+msgid ""
+"The name identifies the data source and should be unique and informative."
 msgstr "Namnet identifiserer datakjelda, og bør vera unikt og informativt."
 
 #: fetcherconfigdialog.cpp:90 fetcherconfigdialog.cpp:94
@@ -4713,6 +4717,18 @@ msgstr "Røyr"
 #: cite/openoffice.cpp:190
 msgid "TCP/IP"
 msgstr "TCP/IP"
+
+#: rc.cpp:2
+msgid "&New"
+msgstr "&Ny"
+
+#: rc.cpp:5
+msgid "&Collection"
+msgstr "&Samling"
+
+#: rc.cpp:8
+msgid "Collection Toolbar"
+msgstr "Samlingsverktøylinje"
 
 #: entryupdater.cpp:82
 msgid "Updating %1..."
@@ -4856,4 +4872,3 @@ msgstr "Installer …"
 #, fuzzy
 #~ msgid "Reading files..."
 #~ msgstr "Lagrar fil …"
-

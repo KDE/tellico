@@ -50,8 +50,9 @@ private:
   void mergeCurrent(Data::EntryPtr entry, bool overwrite);
 
   Data::CollPtr m_coll;
-  Data::EntryVec m_entries;
+  Data::EntryVec m_entriesToUpdate;
   Data::EntryVec m_fetchedEntries;
+  Data::EntryVec m_matchedEntries;
   Fetch::FetcherVec m_fetchers;
   int m_fetchIndex;
   int m_origEntryCount;

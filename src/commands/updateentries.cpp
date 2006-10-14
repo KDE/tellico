@@ -28,30 +28,20 @@ namespace Tellico {
 class MergeEntries : public KCommand {
 public:
   MergeEntries(Data::EntryPtr currEntry_, Data::EntryPtr newEntry_, bool overWrite_) : KCommand()
-    , m_currentEntry(currEntry_)
-    , m_newEntry(newEntry_)
-    , m_oldEntry(m_currentEntry)
-    , m_overWrite(overWrite_) {
+    , m_oldEntry(new Data::Entry(*currEntry_)) {
+    // we merge the entries here instead of in execute() because this
+    // command is never called without also calling ModifyEntries()
+    // which takes care of copying the entry values
+    Data::Collection::mergeEntry(currEntry_, newEntry_, overWrite_);
   }
 
-  virtual void execute() {
-    *m_oldEntry = *m_currentEntry;
-    Data::Collection::mergeEntry(m_currentEntry, m_newEntry, m_overWrite);
-  }
-
-  virtual void unexecute() {
-    *m_currentEntry = *m_oldEntry;
-  }
-
-  virtual QString name() const { return QString::null; }
-
+  virtual void execute() {} // does nothing
+  virtual void unexecute() {} // does nothing
+  virtual QString name() const { return QString(); }
   Data::EntryPtr oldEntry() const { return m_oldEntry; }
 
 private:
-  Data::EntryPtr m_currentEntry;
-  Data::EntryPtr m_newEntry;
   Data::EntryPtr m_oldEntry;
-  bool m_overWrite;
 };
   }
 }
@@ -88,9 +78,16 @@ void UpdateEntries::execute() {
       addCommand(new FieldCommand(FieldCommand::FieldAdd, m_coll, field));
     }
 
+    // MergeEntries copies values from m_newEntry into m_oldEntry
+    // m_oldEntry is in the current collection
+    // m_newEntry isn't...
     MergeEntries* cmd = new MergeEntries(m_oldEntry, m_newEntry, m_overWrite);
     addCommand(cmd);
-    // now the oldEntry has the new entry values
+    // cmd->oldEntry() returns a copy of m_oldEntry before values were merged
+    // m_oldEntry has new values
+    // in the ModifyEntries command, the second entry should be owned by the current
+    // collection and contain the updated values
+    // the first one is not owned by current collection
     addCommand(new ModifyEntries(m_coll, cmd->oldEntry(), m_oldEntry));
   }
   Group::execute();

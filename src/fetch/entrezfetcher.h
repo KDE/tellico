@@ -48,6 +48,7 @@ public:
   // pubmed can search title, person, and keyword
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == Raw; }
   virtual void search(FetchKey key, const QString& value);
+  virtual void continueSearch();
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Entrez; }
@@ -72,8 +73,8 @@ private slots:
   void slotComplete(KIO::Job* job);
 
 private:
-  static XSLTHandler* s_xsltHandler;
-  static void initXSLTHandler();
+  void initXSLTHandler();
+  void doSummary();
 
   void searchResults();
   void summaryResults();
@@ -85,16 +86,21 @@ private:
     Fetch
   };
 
-  KURL m_url;
+  XSLTHandler* m_xsltHandler;
   QString m_dbname;
-  QByteArray m_data;
+
+  int m_start;
   int m_total;
-  QString m_queryKey;
-  QString m_webEnv;
+
+  QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry
   QMap<int, int> m_matches; // search result id to pubmed id
   QGuardedPtr<KIO::Job> m_job;
+
+  QString m_queryKey;
+  QString m_webEnv;
   Step m_step;
+
   bool m_started;
   QStringList m_fields;
 };

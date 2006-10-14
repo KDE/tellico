@@ -1015,6 +1015,13 @@ messages: rc.cpp
 
 
 #>+ 3
+entry.moc: $(srcdir)/entry.h
+	$(MOC) $(srcdir)/entry.h -o entry.moc
+
+#>+ 2
+mocs: entry.moc
+
+#>+ 3
 configdialog.moc: $(srcdir)/configdialog.h
 	$(MOC) $(srcdir)/configdialog.h -o configdialog.moc
 
@@ -1205,7 +1212,7 @@ mocs: entryupdater.moc
 
 #>+ 3
 clean-metasources:
-	-rm -f  configdialog.moc document.moc entryiconview.moc filterview.moc collection.moc exportdialog.moc controller.moc fieldcompletion.moc loandialog.moc groupview.moc borrowerdialog.moc detailedlistview.moc upcvalidator.moc progressmanager.moc importdialog.moc reportdialog.moc fetchdialog.moc collectionfieldsdialog.moc entryeditdialog.moc loanview.moc statusbar.moc viewstack.moc entryview.moc mainwindow.moc filterdialog.moc fetcherconfigdialog.moc entryupdater.moc
+	-rm -f  entry.moc configdialog.moc document.moc entryiconview.moc filterview.moc collection.moc exportdialog.moc controller.moc fieldcompletion.moc loandialog.moc groupview.moc borrowerdialog.moc detailedlistview.moc upcvalidator.moc progressmanager.moc importdialog.moc reportdialog.moc fetchdialog.moc collectionfieldsdialog.moc entryeditdialog.moc loanview.moc statusbar.moc viewstack.moc entryview.moc mainwindow.moc filterdialog.moc fetcherconfigdialog.moc entryupdater.moc
 
 #>+ 2
 docs-am:
@@ -1249,7 +1256,7 @@ bcheck-am:
 
 
 #>+ 11
-tellico.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/tellico_utils.cpp $(srcdir)/image.cpp $(srcdir)/tellico_strings.cpp $(srcdir)/loandialog.cpp $(srcdir)/detailedlistview.cpp $(srcdir)/fieldcompletion.cpp $(srcdir)/progressmanager.cpp $(srcdir)/importdialog.cpp $(srcdir)/reportdialog.cpp $(srcdir)/fetcherconfigdialog.cpp $(srcdir)/borrower.cpp $(srcdir)/groupiterator.cpp $(srcdir)/entryeditdialog.cpp $(srcdir)/iso5426converter.cpp $(srcdir)/viewstack.cpp $(srcdir)/borrowerdialog.cpp $(srcdir)/collectionfactory.cpp $(srcdir)/entryiconview.cpp $(srcdir)/groupview.cpp $(srcdir)/fetchdialog.cpp $(srcdir)/filterview.cpp $(srcdir)/loanitem.cpp $(srcdir)/loanview.cpp $(srcdir)/entry.cpp $(srcdir)/filteritem.cpp $(srcdir)/configdialog.cpp $(srcdir)/entryiconfactory.cpp $(srcdir)/document.cpp $(srcdir)/filter.cpp $(srcdir)/collectionfieldsdialog.cpp $(srcdir)/iso6937converter.cpp $(srcdir)/exportdialog.cpp $(srcdir)/mainwindow.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/entryview.cpp $(srcdir)/main.cpp $(srcdir)/field.cpp $(srcdir)/borroweritem.cpp $(srcdir)/filehandler.cpp $(srcdir)/statusbar.cpp $(srcdir)/detailedentryitem.cpp $(srcdir)/filterdialog.cpp $(srcdir)/entryupdater.cpp $(srcdir)/upcvalidator.cpp $(srcdir)/collection.cpp $(srcdir)/tellico_kernel.cpp $(srcdir)/calendarhandler.cpp $(srcdir)/controller.cpp $(srcdir)/imagefactory.cpp $(srcdir)/entryitem.cpp $(srcdir)/entrygroupitem.cpp  configdialog.moc entryiconview.moc document.moc exportdialog.moc collection.moc filterview.moc controller.moc fieldcompletion.moc groupview.moc loandialog.moc borrowerdialog.moc detailedlistview.moc upcvalidator.moc progressmanager.moc importdialog.moc reportdialog.moc fetchdialog.moc collectionfieldsdialog.moc loanview.moc entryeditdialog.moc mainwindow.moc entryview.moc viewstack.moc statusbar.moc filterdialog.moc fetcherconfigdialog.moc entryupdater.moc
+tellico.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/tellico_utils.cpp $(srcdir)/image.cpp $(srcdir)/tellico_strings.cpp $(srcdir)/loandialog.cpp $(srcdir)/detailedlistview.cpp $(srcdir)/fieldcompletion.cpp $(srcdir)/progressmanager.cpp $(srcdir)/importdialog.cpp $(srcdir)/reportdialog.cpp $(srcdir)/fetcherconfigdialog.cpp $(srcdir)/borrower.cpp $(srcdir)/groupiterator.cpp $(srcdir)/entryeditdialog.cpp $(srcdir)/iso5426converter.cpp $(srcdir)/viewstack.cpp $(srcdir)/borrowerdialog.cpp $(srcdir)/collectionfactory.cpp $(srcdir)/entryiconview.cpp $(srcdir)/groupview.cpp $(srcdir)/fetchdialog.cpp $(srcdir)/filterview.cpp $(srcdir)/loanitem.cpp $(srcdir)/loanview.cpp $(srcdir)/entry.cpp $(srcdir)/filteritem.cpp $(srcdir)/configdialog.cpp $(srcdir)/entryiconfactory.cpp $(srcdir)/document.cpp $(srcdir)/filter.cpp $(srcdir)/collectionfieldsdialog.cpp $(srcdir)/iso6937converter.cpp $(srcdir)/exportdialog.cpp $(srcdir)/mainwindow.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/entryview.cpp $(srcdir)/main.cpp $(srcdir)/field.cpp $(srcdir)/borroweritem.cpp $(srcdir)/filehandler.cpp $(srcdir)/statusbar.cpp $(srcdir)/detailedentryitem.cpp $(srcdir)/filterdialog.cpp $(srcdir)/entryupdater.cpp $(srcdir)/upcvalidator.cpp $(srcdir)/collection.cpp $(srcdir)/tellico_kernel.cpp $(srcdir)/calendarhandler.cpp $(srcdir)/controller.cpp $(srcdir)/imagefactory.cpp $(srcdir)/entryitem.cpp $(srcdir)/entrygroupitem.cpp  entry.moc configdialog.moc entryiconview.moc document.moc exportdialog.moc collection.moc filterview.moc controller.moc fieldcompletion.moc groupview.moc loandialog.moc borrowerdialog.moc detailedlistview.moc upcvalidator.moc progressmanager.moc reportdialog.moc importdialog.moc fetchdialog.moc collectionfieldsdialog.moc loanview.moc entryeditdialog.moc mainwindow.moc entryview.moc viewstack.moc statusbar.moc filterdialog.moc fetcherconfigdialog.moc entryupdater.moc
 	@echo 'creating tellico.all_cpp.cpp ...'; \
 	rm -f tellico.all_cpp.files tellico.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> tellico.all_cpp.final; \
@@ -1284,8 +1291,9 @@ no-final-install:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 57
+#>+ 59
 viewstack.o: viewstack.moc 
+entry.lo: entry.moc 
 groupview.o: groupview.moc 
 document.o: document.moc 
 entryview.o: entryview.moc 
@@ -1340,4 +1348,5 @@ mainwindow.o: mainwindow.moc
 borrowerdialog.lo: borrowerdialog.moc 
 entryiconview.o: entryiconview.moc 
 collection.o: collection.moc 
+entry.o: entry.moc 
 entryeditdialog.lo: entryeditdialog.moc 

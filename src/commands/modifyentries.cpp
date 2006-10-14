@@ -29,7 +29,7 @@ ModifyEntries::ModifyEntries(Data::CollPtr coll_, const Data::EntryVec& oldEntri
 {
 #ifndef NDEBUG
   if(m_oldEntries.count() != m_entries.count()) {
-    kdDebug() << "ModifyEntriesCommand() - unequal number of entries" << endl;
+    kdWarning() << "ModifyEntriesCommand() - unequal number of entries" << endl;
   }
 #endif
 }
@@ -79,7 +79,7 @@ void ModifyEntries::swapValues() {
   for(size_t i = 0; i < m_entries.count(); ++i) {
     // need to swap entry values, not just pointers
     // the id gets reset when copying, so need to keep it
-    int id = m_entries.at(i)->id();
+    long id = m_entries.at(i)->id();
     Data::Entry tmp(*m_entries.at(i)); // tmp id becomes -1
     *m_entries.at(i) = *m_oldEntries.at(i); // id becomes -1
     m_entries.at(i)->setId(id); // id becomes what was originally

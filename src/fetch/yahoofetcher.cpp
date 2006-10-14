@@ -128,7 +128,6 @@ void YahooFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "YahooFetcher::stop()" << endl;
   if(m_job) {
     m_job->kill();
     m_job = 0;

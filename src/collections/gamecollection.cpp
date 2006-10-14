@@ -44,7 +44,7 @@ Tellico::Data::FieldVec GameCollection::defaultFields() {
   QStringList platform;
   platform << i18n("Xbox 360") << i18n("Xbox")
            << i18n("PlayStation3") << i18n("PlayStation2") << i18n("PlayStation") << i18n("PlayStation Portable", "PSP")
-           << i18n("Revolution") << i18n("Nintendo DS") << i18n("GameCube") << i18n("Dreamcast")
+           << i18n("Nintendo Wii") << i18n("Nintendo DS") << i18n("GameCube") << i18n("Dreamcast")
            << i18n("Game Boy Advance") << i18n("Game Boy Color") << i18n("Game Boy")
            << i18n("Windows Platform", "Windows") << i18n("Mac OS");
   field = new Field(QString::fromLatin1("platform"), i18n("Platform"), platform);

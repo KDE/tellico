@@ -286,6 +286,10 @@ bool Tellico::PtrVector<T>::remove(T* t) {
     delete *ptr;
   }
   m_baseVector.erase(ptr);
+  // in case the pointer is in the vector multiple times
+  while(remove(t)) {
+    myDebug() << "PtrVector::remove() - pointer was duplicated in vector" << endl;
+  }
   return true;
 }
 

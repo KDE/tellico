@@ -26,7 +26,7 @@ using Tellico::Data::Entry;
 using Tellico::Data::EntryGroup;
 
 EntryGroup::EntryGroup(const QString& group, const QString& field)
-   : EntryVec(), m_group(Tellico::shareString(group)), m_field(Tellico::shareString(field)) {
+   : QObject(), EntryVec(), m_group(Tellico::shareString(group)), m_field(Tellico::shareString(field)) {
 }
 
 EntryGroup::~EntryGroup() {
@@ -398,3 +398,5 @@ int Entry::compareValues(EntryPtr e1, EntryPtr e2, FieldPtr f) {
   }
   return 0;
 }
+
+#include "entry.moc"

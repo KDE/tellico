@@ -135,7 +135,7 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   label = new QLabel(i18n("Search s&ource:"), box2);
   m_sourceCombo = new KComboBox(box2);
   label->setBuddy(m_sourceCombo);
-  Fetch::FetcherVec sources = Fetch::Manager::self()->fetchers();
+  Fetch::FetcherVec sources = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
   for(Fetch::FetcherVec::Iterator it = sources.begin(); it != sources.end(); ++it) {
     m_sourceCombo->insertItem(Fetch::Manager::self()->fetcherIcon(it.data()), (*it).source());
   }

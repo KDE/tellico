@@ -76,6 +76,7 @@ bool Document::newDocument(int type_) {
   deleteContents();
 
   m_coll = CollectionFactory::collection(static_cast<Collection::Type>(type_), true);
+  m_coll->setTrackGroups(true);
 
   Kernel::self()->resetHistory();
   Controller::self()->slotCollectionAdded(m_coll);
@@ -107,9 +108,7 @@ bool Document::openDocument(const KURL& url_) {
   // format is only known AFTER collection() is called
 
   m_fileFormat = m_importer->format();
-  if(!m_importer->hasImages()) {
-    m_allImagesOnDisk = true;
-  }
+  m_allImagesOnDisk = !m_importer->hasImages();
   if(!m_importer->hasImages() || m_fileFormat != Import::TellicoImporter::Zip) {
     m_loadAllImages = true;
   }
@@ -122,6 +121,7 @@ bool Document::openDocument(const KURL& url_) {
   }
   deleteContents();
   m_coll = coll;
+  m_coll->setTrackGroups(true);
   setURL(url_);
   m_validFile = true;
 
@@ -361,6 +361,7 @@ void Document::replaceCollection(CollPtr coll_) {
     m_coll->clear();
   }
   m_coll = coll_;
+  m_coll->setTrackGroups(true);
   m_cancelImageWriting = true;
   // CollectionCommand takes care of calling Controller signals
 }
@@ -629,7 +630,7 @@ void Document::removeImagesNotInCollection(Data::EntryVec entries_) {
   for(FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
     for(EntryVecIt e = entries_.begin(); e != entries_.end(); ++e) {
       QString id = e->field(f->name());
-      if(!id.isEmpty() && imagesToCheck.has(id)) {
+      if(!id.isEmpty() && imagesToCheck.has(id) && !images.has(id)) {
         imagesToRemove.add(id);
       }
     }
@@ -637,9 +638,7 @@ void Document::removeImagesNotInCollection(Data::EntryVec entries_) {
 
   const QStringList realImagesToRemove = imagesToRemove.toList();
   for(QStringList::ConstIterator it = realImagesToRemove.begin(); it != realImagesToRemove.end(); ++it) {
-    if(!images.has(*it)) {
-      ImageFactory::removeImage(*it, false); // doesn't delete, just remove link
-    }
+    ImageFactory::removeImage(*it, false); // doesn't delete, just remove link
   }
 }
 

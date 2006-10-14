@@ -134,5 +134,5 @@ int EntryGroupItem::count() const {
 }
 
 Tellico::Data::EntryVec EntryGroupItem::entries() const {
-  return *group();
+  return m_group ? *m_group : Data::EntryVec();
 }
