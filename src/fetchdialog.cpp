@@ -242,7 +242,8 @@ FetchDialog::~FetchDialog() {
   for(QMap<int, Data::EntryPtr>::Iterator it = m_entries.begin(); it != m_entries.end(); ++it) {
     entriesToCheck.append(it.data());
   }
-  Data::Document::self()->removeImagesNotInCollection(entriesToCheck);
+  // no additional entries to check images to keep though
+  Data::Document::self()->removeImagesNotInCollection(entriesToCheck, Data::EntryVec());
 
   saveDialogSize(QString::fromLatin1("Fetch Dialog Options"));
 

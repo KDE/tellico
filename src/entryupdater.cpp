@@ -259,7 +259,7 @@ void EntryUpdater::mergeCurrent(Data::EntryPtr entry_, bool overWrite_) {
       for(Data::EntryVecIt match = m_matchedEntries.begin(); match != m_matchedEntries.end(); ++match) {
         nonUpdatedEntries.remove(match);
       }
-      Data::Document::self()->removeImagesNotInCollection(nonUpdatedEntries);
+      Data::Document::self()->removeImagesNotInCollection(nonUpdatedEntries, m_matchedEntries);
     }
   }
 }

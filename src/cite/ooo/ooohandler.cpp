@@ -16,8 +16,6 @@
 
 #include <iostream>
 
-#define DEBUG(s) std::cout << s << std::endl;
-
 extern "C" {
   Tellico::Cite::Handler* handler() {
     return new Tellico::Cite::OOOHandler();

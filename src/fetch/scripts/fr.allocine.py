@@ -14,7 +14,7 @@
 # *                                                                         *
 # ***************************************************************************
 
-# $Id: fr_allocine.py 220 2006-05-24 13:57:12Z mathias $
+# $Id: fr_allocine.py 360 2006-10-18 09:41:23Z mathias $
 
 import sys, os, re, md5, random
 import urllib, urllib2, time, base64
@@ -23,7 +23,7 @@ import xml.dom.minidom
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 
-VERSION = "0.2"
+VERSION = "0.3"
 
 def genMD5():
 	obj = md5.new()
@@ -117,7 +117,7 @@ class BasicTellicoDOM:
 		timeNode = self.__doc.createElement('running-time')
 		timeNode.appendChild(self.__doc.createTextNode(unicode(d['time'], 'latin-1').encode('utf-8')))
 
-		allocineNode = self.__doc.createElement(unicode('allocinï¿½link', 'latin-1').encode('utf-8'))
+		allocineNode = self.__doc.createElement(unicode('allociné-link', 'latin-1').encode('utf-8'))
 		allocineNode.appendChild(self.__doc.createTextNode(unicode(d['allocine'], 'latin-1').encode('utf-8')))
 
 		plotNode = self.__doc.createElement('plot')
@@ -164,16 +164,16 @@ class AlloCineParser:
 
 		# Define some regexps
 		self.__regExps = { 	'title' 	: '<title>(?P<title>.+?)</title>',
-							'dirs'		: 'Rï¿½lisï¿½par <a.*?>(?P<step1>.+?)</a>.*?</h4>',
+							'dirs'		: 'Réalisé par <a.*?>(?P<step1>.+?)</a>.*?</h4>',
 							'actors' 	: '<h4>Avec *<a.*?>(?P<step1>.+?)</a>.*?</h4>',
 							'nat' 		: '<h4>Film *(?P<nat>.+?)[,\.]',
 							'genres' 	: '<h4>Genre *: *<a.*?>(?P<step1>.+?)</a>.*?</h4>',
-							'time' 		: '<h4>Durï¿½ *: *(?P<hours>[0-9])?h *(?P<mins>[0-9]{1,2})min',
-							'year' 		: 'Annï¿½ de production *: *(?P<year>[0-9]{4})',
+							'time' 		: '<h4>Durée *: *(?P<hours>[0-9])?h *(?P<mins>[0-9]{1,2})min',
+							'year' 		: 'Année de production *: *(?P<year>[0-9]{4})',
 							# Original movie title
 							'otitle' 	: 'Titre original *: *<i>(?P<otitle>.+?)</i>',
 							'plot'		: """(?s)<td valign="top" style="padding:10 0 0 0"><div align="justify"><h4> *(?P<plot>.+?) *</h4>""",
-							'image'		: """<td valign="top".*?<img src="(?P<image>.+?)" border"""}
+							'image'		: """<td valign="top" width="120".*?<img src="(?P<image>.+?)" border"""}
 							
 
 		self.__domTree = BasicTellicoDOM()

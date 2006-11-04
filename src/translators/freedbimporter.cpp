@@ -392,8 +392,10 @@ void FreeDBImporter::readCache() {
 void FreeDBImporter::readCDText(const QCString& drive_) {
 #if USE_CDTEXT
   Data::EntryPtr entry;
-  if(m_coll) {
-    entry = m_coll->entries().front();
+  if(m_coll && m_coll->entryCount() > 0) {
+    if(m_coll->entryCount() > 0) {
+      entry = m_coll->entries().front();
+    }
   } else {
     m_coll = new Data::MusicCollection(true);
   }

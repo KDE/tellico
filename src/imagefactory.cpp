@@ -39,6 +39,7 @@ QCache<QPixmap> ImageFactory::s_pixmapCache(10 * 1024 * 1024);
 // in the cache, so that don't have to be continually reloaded to get info
 QMap<QString, Tellico::Data::ImageInfo> ImageFactory::s_imageInfoMap;
 Tellico::StringSet ImageFactory::s_imagesInTmpDir;
+Tellico::StringSet ImageFactory::s_imagesToRelease;
 KTempDir* ImageFactory::s_tmpDir = 0;
 
 void ImageFactory::init() {
@@ -200,10 +201,13 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
     kdWarning() << "Image name is " << img->id() << endl;
     kdWarning() << "Image size is " << img->numBytes() << endl;
     kdWarning() << "Max cache size is " << s_imageCache.maxCost() << endl;
+
+    // add it back to the dict, but add the image to the list of
+    // images to release later. Necessary to avoid a memory leak since new Image()
+    // was called, we need to keep the pointer
     s_imageDict.insert(img->id(), img);
     s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
-    myLog() << "ImageFactory::addCachedImageImpl() - adding to dict: " << img->id() << endl;
-    myLog() << "ImageFactory::addCachedImageImpl() - current dict size: " << s_imageDict.count() << endl;
+    s_imagesToRelease.add(img->id());
   }
   return *img;
 }
@@ -281,6 +285,9 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   }
 //  myLog() << "ImageFactory::imageById() - " << id_ << endl;
 
+  // can't think of a better place to regularly check for images to release
+  releaseImages();
+
  // first check the cache, used for images that are in the data file, or are only temporary
  // then the dict, used for images downloaded, but not yet saved anywhere
   Data::Image* img = s_imageCache.find(id_);
@@ -295,6 +302,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
 
   // the document does a delayed loading of the images, sometimes
   // so an image could be in the tmp dir and not be in the cache
+  // or it could be too big for the cache
   if(s_imagesInTmpDir.has(id_)) {
     const Data::Image& img2 = addCachedImageImpl(id_, TempDir);
     if(!img2.isNull()) {
@@ -379,6 +387,10 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
   } else {
     pix = new QPixmap(img.convertToPixmap());
   }
+  // the image might be so big, it won't stay in the cache
+  // so the only time it ends up getting loaded is for the pixmap
+  // so try to release it
+  releaseImages();
 
   // pixmap size is w x h x d, divided by 8 bits
   if(!s_pixmapCache.insert(key, pix, pix->width()*pix->height()*pix->depth()/8)) {
@@ -394,6 +406,7 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
 
 void ImageFactory::clean(bool deleteTempDirectory_) {
   // the dict and caches all auto-delete
+  s_imagesToRelease.clear();
   s_imageDict.clear();
   s_imageInfoMap.clear();
   s_imageCache.clear();
@@ -471,4 +484,29 @@ Tellico::StringSet ImageFactory::imagesNotInCache() {
 
 bool ImageFactory::hasImage(const QString& id_) {
   return s_imageCache.find(id_, false) || s_imageDict.find(id_);
+}
+
+// the purpose here is to remove images from the dict if they're is on the disk somewhere,
+// either in tempDir() or in dataDir(). The use for this is for calling pixmap() on an
+// image too big to stay in the cache. Then it stays in the dict forever.
+void ImageFactory::releaseImages() {
+  if(s_imagesToRelease.isEmpty()) {
+    return;
+  }
+
+  const QStringList images = s_imagesToRelease.toList();
+  for(QStringList::ConstIterator it = images.begin(); it != images.end(); ++it) {
+    if(!s_imageDict.find(*it)) {
+      continue;
+    }
+//    myDebug() << "ImageFactory::releaseImage() - id = " << *it << endl;
+    if(QFile::exists(dataDir() + *it)) {
+//      myDebug() << "...exists in dataDir() - removing from dict" << endl;
+      s_imageDict.remove(*it);
+    } else if(QFile::exists(tempDir() + *it)) {
+//      myDebug() << "...exists in tempDir() - removing from dict" << endl;
+      s_imageDict.remove(*it);
+    }
+    s_imagesToRelease.remove(*it);
+  }
 }

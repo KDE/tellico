@@ -24,7 +24,7 @@ tellico_LDADD = ./core/libcore.a ./cite/libcite.a ./fetch/libfetch.a \
 	./translators/pilotdb/libflatfile/liblibflatfile.a ./gui/libgui.a ./translators/pilotdb/libpalm/liblibpalm.a \
 	./commands/libcommands.a -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
 	$(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS) $(LIB_KIO) \
-	$(LIB_KDEPRINT) $(LIB_KABC) $(KCAL_LIBS) $(LDADD_LIBBTPARSE) $(LIB_KNEWSTUFF)
+	$(LIB_KABC) $(KCAL_LIBS) $(LDADD_LIBBTPARSE) $(LIB_KNEWSTUFF)
 
 SUBDIRS = core gui collections translators fetch tests commands cite newstuff
 

@@ -593,6 +593,10 @@ void Collection::populateCurrentDicts(EntryPtr entry_) {
     return;
   }
 
+  // special case when adding an entry to a new empty collection
+  // there are no existing non-empty groups
+  bool allEmpty = true;
+
   // iterate over all the possible groupDicts
   // for each dict, get the value of that field for the entry
   // if multiple values are allowed, split the value and then insert the
@@ -603,6 +607,16 @@ void Collection::populateCurrentDicts(EntryPtr entry_) {
     // populated on demand
     if(!dictIt.current()->isEmpty()) {
       populateDict(dictIt.current(), dictIt.currentKey(), entry_);
+      allEmpty = false;
+    }
+  }
+
+  if(allEmpty) {
+    // need to populate the current group dict
+    const QString group = Controller::self()->groupBy();
+    EntryGroupDict* dict = m_entryGroupDicts[group];
+    if(dict) {
+      populateDict(dict, group, entry_);
     }
   }
 }

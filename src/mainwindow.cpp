@@ -234,22 +234,6 @@ void MainWindow::initActions() {
   connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
   collectionMapper->setMapping(action, Data::Collection::Album);
 
-  action = new KAction(actionCollection(), "new_game_collection");
-  action->setText(i18n("New &Game Collection"));
-  action->setIconSet(UserIconSet(QString::fromLatin1("game")));
-  action->setToolTip(i18n("Create a new game collection"));
-  fileNewMenu->insert(action);
-  connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
-  collectionMapper->setMapping(action, Data::Collection::Game);
-
-  action = new KAction(actionCollection(), "new_card_collection");
-  action->setText(i18n("New C&ard Collection"));
-  action->setIconSet(UserIconSet(QString::fromLatin1("card")));
-  action->setToolTip(i18n("Create a new trading card collection"));
-  fileNewMenu->insert(action);
-  connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
-  collectionMapper->setMapping(action, Data::Collection::Card);
-
   action = new KAction(actionCollection(), "new_coin_collection");
   action->setText(i18n("New C&oin Collection"));
   action->setIconSet(UserIconSet(QString::fromLatin1("coin")));
@@ -266,6 +250,14 @@ void MainWindow::initActions() {
   connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
   collectionMapper->setMapping(action, Data::Collection::Stamp);
 
+  action = new KAction(actionCollection(), "new_card_collection");
+  action->setText(i18n("New C&ard Collection"));
+  action->setIconSet(UserIconSet(QString::fromLatin1("card")));
+  action->setToolTip(i18n("Create a new trading card collection"));
+  fileNewMenu->insert(action);
+  connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
+  collectionMapper->setMapping(action, Data::Collection::Card);
+
   action = new KAction(actionCollection(), "new_wine_collection");
   action->setText(i18n("New &Wine Collection"));
   action->setIconSet(UserIconSet(QString::fromLatin1("wine")));
@@ -273,6 +265,14 @@ void MainWindow::initActions() {
   fileNewMenu->insert(action);
   connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
   collectionMapper->setMapping(action, Data::Collection::Wine);
+
+  action = new KAction(actionCollection(), "new_game_collection");
+  action->setText(i18n("New &Game Collection"));
+  action->setIconSet(UserIconSet(QString::fromLatin1("game")));
+  action->setToolTip(i18n("Create a new game collection"));
+  fileNewMenu->insert(action);
+  connect(action, SIGNAL(activated()), collectionMapper, SLOT(map()));
+  collectionMapper->setMapping(action, Data::Collection::Game);
 
   action = new KAction(actionCollection(), "new_file_catalog");
   action->setText(i18n("New &File Catalog"));
@@ -871,33 +871,34 @@ void MainWindow::saveCollectionOptions(Data::CollPtr coll_) {
 
   int configIndex = -1;
   m_config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
+  QString groupName;
   if(m_entryGrouping->currentItem() > -1 &&
      static_cast<int>(coll_->entryGroups().count()) > m_entryGrouping->currentItem()) {
-    QString groupName = Kernel::self()->fieldNameByTitle(m_entryGrouping->currentText());
+    groupName = Kernel::self()->fieldNameByTitle(m_entryGrouping->currentText());
     if(coll_->type() != Data::Collection::Base) {
       m_config->writeEntry("Group By", groupName);
-    } else {
-      // all of this is to have custom settings on a per file basis
-      KURL url = Kernel::self()->URL();
-      QValueList<KURL> urls;
-      urls.append(url);
-      QStringList groupBys;
-      groupBys.append(groupName);
-      for(uint i = 0; i < Config::maxCustomURLSettings(); ++i) {
-        KURL u = m_config->readEntry(QString::fromLatin1("URL_%1").arg(i));
-        QString g = m_config->readEntry(QString::fromLatin1("Group By_%1").arg(i));
-        if(!u.isEmpty() && url != u) {
-          urls.append(u);
-          groupBys.append(g);
-        } else if(!u.isEmpty()) {
-          configIndex = i;
-        }
+    }
+  }
+
+  if(coll_->type() == Data::Collection::Base) {
+    // all of this is to have custom settings on a per file basis
+    KURL url = Kernel::self()->URL();
+    QValueList<KURL> urls = QValueList<KURL>() << url;
+    QStringList groupBys = QStringList() << groupName;
+    for(uint i = 0; i < Config::maxCustomURLSettings(); ++i) {
+      KURL u = m_config->readEntry(QString::fromLatin1("URL_%1").arg(i));
+      QString g = m_config->readEntry(QString::fromLatin1("Group By_%1").arg(i));
+      if(!u.isEmpty() && url != u) {
+        urls.append(u);
+        groupBys.append(g);
+      } else if(!u.isEmpty()) {
+        configIndex = i;
       }
-      uint limit = QMIN(urls.count(), Config::maxCustomURLSettings());
-      for(uint i = 0; i < limit; ++i) {
-        m_config->writeEntry(QString::fromLatin1("URL_%1").arg(i), urls[i].url());
-        m_config->writeEntry(QString::fromLatin1("Group By_%1").arg(i), groupBys[i]);
-      }
+    }
+    uint limit = QMIN(urls.count(), Config::maxCustomURLSettings());
+    for(uint i = 0; i < limit; ++i) {
+      m_config->writeEntry(QString::fromLatin1("URL_%1").arg(i), urls[i].url());
+      m_config->writeEntry(QString::fromLatin1("Group By_%1").arg(i), groupBys[i]);
     }
   }
   m_detailedView->saveConfig(coll_, configIndex);

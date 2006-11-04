@@ -24,11 +24,11 @@
 
 // some logging
 #ifndef NDEBUG
-//#define TELLICO_LOG
+#define TELLICO_LOG
 #endif
 
 #ifndef NDEBUG
-#define TELLICO_DEBUG
+//#define TELLICO_DEBUG
 #endif
 
 namespace Debug {

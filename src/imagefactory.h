@@ -169,6 +169,7 @@ private:
 
   static const Data::Image& addCachedImageImpl(const QString& id, CacheDir dir);
   static bool hasImage(const QString& id);
+  static void releaseImages();
 
   static bool s_needInit;
   static QDict<Data::Image> s_imageDict;
@@ -176,6 +177,7 @@ private:
   static QCache<QPixmap> s_pixmapCache;
   static QMap<QString, Data::ImageInfo> s_imageInfoMap;
   static StringSet s_imagesInTmpDir; // the id's of the images written to tmp directory
+  static StringSet s_imagesToRelease;
   static KTempDir* s_tmpDir;
   static const Data::Image s_null;
 };

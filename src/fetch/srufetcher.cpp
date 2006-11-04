@@ -232,6 +232,12 @@ void SRUFetcher::slotComplete(KIO::Job* job_) {
     return;
   }
 
+  if(!coll) {
+    myDebug() << "SRUFetcher::slotComplete() - no collection pointer" << endl;
+    stop();
+    return;
+  }
+
   const StringMap customFields = SRUFetcher::customFields();
   for(StringMap::ConstIterator it = customFields.begin(); it != customFields.end(); ++it) {
     if(!m_fields.contains(it.key())) {

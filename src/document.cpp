@@ -610,13 +610,16 @@ Tellico::Data::EntryVec Document::sortEntries(EntryVec entries_) const {
   return sorted;
 }
 
-void Document::removeImagesNotInCollection(Data::EntryVec entries_) {
+void Document::removeImagesNotInCollection(EntryVec entries_, EntryVec entriesToKeep_) {
   // first get list of all images in collection
   StringSet images;
   FieldVec fields = m_coll->imageFields();
   EntryVec allEntries = m_coll->entries();
   for(FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
     for(EntryVecIt e = allEntries.begin(); e != allEntries.end(); ++e) {
+      images.add(e->field(f->name()));
+    }
+    for(EntryVecIt e = entriesToKeep_.begin(); e != entriesToKeep_.end(); ++e) {
       images.add(e->field(f->name()));
     }
   }

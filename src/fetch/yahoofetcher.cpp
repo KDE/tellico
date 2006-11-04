@@ -31,7 +31,7 @@
 
 namespace {
   static const int YAHOO_MAX_RETURNS_TOTAL = 20;
-  static const char* YAHOO_BASE_URL = "http://api.search.yahoo.com/AudioSearchService/V1/albumSearch";
+  static const char* YAHOO_BASE_URL = "http://search.yahooapis.com/AudioSearchService/V1/albumSearch";
   static const char* YAHOO_APP_ID = "tellico-robby";
 }
 
@@ -196,6 +196,10 @@ void YahooFetcher::slotComplete(KIO::Job* job_) {
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
+  if(!coll) {
+    stop();
+    return;
+  }
 
   int count = 0;
   Data::EntryVec entries = coll->entries();

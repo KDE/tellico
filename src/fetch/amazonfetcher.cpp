@@ -389,6 +389,12 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
+  if(!coll) {
+    myDebug() << "AmazonFetcher::slotComplete() - no collection pointer" << endl;
+    stop();
+    return;
+  }
+
   if(!m_addLinkField) {
     // remove amazon field if it's not to be added
     coll->removeField(QString::fromLatin1("amazon"));

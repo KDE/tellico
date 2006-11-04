@@ -166,7 +166,11 @@ public:
   void checkInEntry(EntryPtr entry);
   void checkOutEntry(EntryPtr entry);
 
-  void removeImagesNotInCollection(Data::EntryVec entries);
+  /**
+   * The second entry vector contains entries with images which should not be removed
+   * in addition to those already in the collection
+   */
+  void removeImagesNotInCollection(EntryVec entries, EntryVec entriesToKeep);
 
 public slots:
   /**
