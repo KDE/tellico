@@ -518,7 +518,7 @@ uninstall-am: uninstall-info-am
 
 
 #>+ 2
-KDE_DIST=nl.po sv.gmo pl.gmo pt.po nn.po bg.gmo ru.po ru.gmo en_GB.gmo nb.gmo fi.po de.po fr.gmo nb.po ca.po fr.po ro.gmo ee.po cs.po cs.gmo pt_BR.gmo ro.po nn.gmo Makefile.in messages.mo bg.po pt_BR.po it.gmo sv.po fi.gmo hu.po ee.gmo de.gmo pl.po es.po pt.gmo es.gmo en_GB.po it.po hu.gmo nl.gmo Makefile.am ca.gmo 
+KDE_DIST=nl.po sv.gmo pl.gmo pt.po nn.po bg.gmo ru.po ru.gmo en_GB.gmo nb.gmo fi.po de.po fr.gmo nb.po ca.po fr.po ro.gmo ee.po cs.po cs.gmo pt_BR.gmo ro.po nn.gmo Makefile.in bg.po pt_BR.po it.gmo sv.po fi.gmo hu.po ee.gmo de.gmo pl.po es.po pt.gmo es.gmo en_GB.po it.po hu.gmo nl.gmo Makefile.am ca.gmo 
 
 #>+ 61
 cs.gmo: cs.po
