@@ -110,7 +110,7 @@ void ProgressManager::slotItemDone(ProgressItem* item_) {
 // cancel ends up removing it from the map, so make a copy
   ProgressMap map = m_items;
   for(ProgressMap::Iterator it = map.begin(); it != map.end(); ++it) {
-    if(it.data() == item_) {
+    if(static_cast<ProgressItem*>(it.data()) == item_) {
       m_items.remove(it.key());
       break;
     }
@@ -142,7 +142,7 @@ void ProgressManager::updateTotalProgress() {
   uint total = 0;
 
   for(ProgressMap::ConstIterator it = m_items.begin(); it != m_items.end(); ++it) {
-    if(*it) {
+    if(it.data()) {
       progress += (*it)->progress();
       total += (*it)->totalSteps();
     }
@@ -160,14 +160,16 @@ void ProgressManager::slotCancelAll() {
 // cancel ends up removing it from the map, so make a copy
   ProgressMap map = m_items;
   for(ProgressMap::ConstIterator it = map.begin(), end = map.end(); it != end; ++it) {
-    it.data()->cancel();
-    setDone(it.data());
+    if(it.data()) {
+      it.data()->cancel();
+      setDone(it.data());
+    }
   }
 }
 
 bool ProgressManager::anyCanBeCancelled() const {
   for(ProgressMap::ConstIterator it = m_items.begin(), end = m_items.end(); it != end; ++it) {
-    if((*it)->canCancel()) {
+    if(it.data() && it.data()->canCancel()) {
       return true;
     }
   }

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2006-10-11 07:41-0700\n"
+"POT-Creation-Date: 2006-11-05 15:37-0800\n"
 "PO-Revision-Date: 2006-05-06 09:44+0600\n"
 "Last-Translator: Kalimullin Artur <kalimullin@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -15,388 +15,2382 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 
-#: tips.cpp:3
-msgid ""
-"<p>...that if a book has more than one author, you should separate\n"
-"their names by a semi-colon, so that Tellico will know to split them\n"
-"and use them separately.</p>\n"
-"<p>Any other field which allows multiple values should be entered the\n"
-"same way. with a semi-colon (;) separating each value.</p>\n"
+#: cite/lyxpipe.cpp:47
+msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr ""
-"<p>...что если книга имеет больше, чем "
-"одного автора, то вам следует разделять\n"
-"точкой с запятой (;). Таким образом, Tellico "
-"будет разделять их имена.</p>\n"
-"<p>Любое другое поле также поддерживает "
-"эту функцию. Для этого вам следует\n"
-"разделять каждые значения точкой с "
-"запятой (;).\n"
-"Например: Пушкин;Гоголь.</p>\n"
+"<qt>Tellico не удается записать на сервер "
+"<b>%1</b>.</qt>"
 
-#: tips.cpp:11
+#: cite/openoffice.cpp:80
+msgid "Connecting to OpenOffice.org..."
+msgstr "Соединение с OpenOffice.org..."
+
+#: cite/openoffice.cpp:163 cite/openoffice.cpp:183
+msgid "OpenOffice.org Connection"
+msgstr "Соединение с OpenOffice.org"
+
+#: cite/openoffice.cpp:177
+#, fuzzy
 msgid ""
-"<p>...that you can change which fields are shown in the list view by\n"
-"right-clicking on the column header.\n"
+"Tellico was unable to connect to OpenOffice.org. Please verify the "
+"connection settings below, and that OpenOffice.org Writer is currently "
+"running."
 msgstr ""
-"<p>...что вы можете выбрать какие поля "
-"следует показывать в списке записей,\n"
-"кликнув правой кнопкой мыши на заголовке "
-"\"таблицы\".\n"
+"Tellico не удается соединиться с OpenOffice.org.\n"
+"Проверьте настройки соединения и то,\n"
+"что OpenOffice запущен в настоящий момент"
 
-#: tips.cpp:16
+#: cite/openoffice.cpp:188
+msgid "Pipe"
+msgstr "Канал"
+
+#: cite/openoffice.cpp:190
+msgid "TCP/IP"
+msgstr "TCP/IP"
+
+#: gui/tablefieldwidget.cpp:180
+msgid "Rename Column"
+msgstr "Переименовать столбец"
+
+#: gui/tablefieldwidget.cpp:180
+msgid "New column name:"
+msgstr "Новое название столбца:"
+
+#: gui/tablefieldwidget.cpp:205
+#, c-format
+msgid "Column %1"
+msgstr "Столбец %1"
+
+#: gui/tablefieldwidget.cpp:240 gui/tablefieldwidget.cpp:288
+msgid "Rename Column..."
+msgstr "&Переименовать столбец"
+
+#: gui/tablefieldwidget.cpp:273
+msgid "Insert Row"
+msgstr "Вставить строку"
+
+#: gui/tablefieldwidget.cpp:275
+msgid "Remove Row"
+msgstr "Удалить строку"
+
+#: gui/tablefieldwidget.cpp:277
+msgid "Move Row Up"
+msgstr "Переместить строку вверх"
+
+#: gui/tablefieldwidget.cpp:282
+msgid "Move Row Down"
+msgstr "Переместить строку вниз"
+
+#: gui/tablefieldwidget.cpp:294
+#, fuzzy
+msgid "Clear Table"
+msgstr "Очистить фильтр"
+
+#: gui/previewdialog.cpp:27
+#, fuzzy
+msgid "Template Preview"
+msgstr "Шаблоны"
+
+#: gui/stringmapdialog.cpp:57
+msgid "&Set"
+msgstr "&Установить"
+
+#: gui/fieldwidget.cpp:102 gui/fieldwidget.cpp:196
 msgid ""
-"<p>...that you can add, edit, or modify the fields in the collection using\n"
-"the Field Editor. The arrow buttons below the field list can be used to "
-"change the\n"
-"position of the field in the list, which affects the placement in the entry\n"
-"editor.</p>\n"
+"_: Edit Label\n"
+"%1:"
+msgstr "%1:"
+
+#: gui/kwidgetlister.cpp:58
+msgid ""
+"_: more widgets\n"
+"More"
+msgstr "Больше"
+
+#: gui/kwidgetlister.cpp:62
+msgid ""
+"_: fewer widgets\n"
+"Fewer"
+msgstr "Меньше"
+
+#: gui/kwidgetlister.cpp:69
+msgid ""
+"_: clear widgets\n"
+"Clear"
+msgstr "Очистить"
+
+#: gui/imagewidget.cpp:52
+msgid "Select Image..."
+msgstr "Выбрать изображение..."
+
+#: commands/modifyentries.cpp:73 commands/updateentries.cpp:50
+#, c-format
+msgid ""
+"_: Modify (Entry Title)\n"
+"Modify %1"
+msgstr "Редактировать %1"
+
+#: commands/collectioncommand.cpp:93
+msgid "Append Collection"
+msgstr "Добавить коллекцию"
+
+#: commands/collectioncommand.cpp:95
+msgid "Merge Collection"
+msgstr "Соединить коллекцию"
+
+#: commands/collectioncommand.cpp:97
+msgid "Replace Collection"
+msgstr "Переместить коллекцию"
+
+#: commands/modifyentries.cpp:72
+msgid "Modify Entries"
+msgstr "Редактировать записи"
+
+#: commands/fieldcommand.cpp:104
+msgid "Add %1 Field"
+msgstr "Добавить %1 поле"
+
+#: commands/fieldcommand.cpp:106
+msgid "Modify %1 Field"
+msgstr "Редактировать %1 поле"
+
+#: commands/fieldcommand.cpp:108
+msgid "Delete %1 Field"
+msgstr "Удалить %1 поле"
+
+#: commands/addentries.cpp:54
+msgid "Add Entries"
+msgstr "Добавить записи"
+
+#: commands/addentries.cpp:55
+#, c-format
+msgid ""
+"_: Add (Entry Title)\n"
+"Add %1"
+msgstr "Добавить %1"
+
+#: commands/renamecollection.cpp:45 tellico_kernel.cpp:322
+msgid "Rename Collection"
+msgstr "Переименовать коллекцию"
+
+#: commands/modifyloans.cpp:75 loandialog.cpp:46
+msgid "Modify Loan"
+msgstr "Редактировать долг"
+
+#: commands/filtercommand.cpp:98
+msgid "Add Filter"
+msgstr "Добавить фильтр"
+
+#: commands/filtercommand.cpp:100 filterdialog.cpp:282 filterview.cpp:67
+msgid "Modify Filter"
+msgstr "Редактировать фильтр"
+
+#: commands/filtercommand.cpp:102 filterview.cpp:69
+msgid "Delete Filter"
+msgstr "Удалить фильтр"
+
+#: commands/addloans.cpp:108
+msgid "Check-out Items"
+msgstr "Дать в долг"
+
+#: commands/addloans.cpp:109
+#, c-format
+msgid ""
+"_: Check-out (Entry Title)\n"
+"Check-out %1"
+msgstr "Отдать в долг %1"
+
+#: commands/removeentries.cpp:52
+msgid "Delete Entries"
+msgstr "Удалить записи"
+
+#: commands/removeentries.cpp:53
+#, c-format
+msgid ""
+"_: Delete (Entry Title)\n"
+"Delete %1"
+msgstr "Удалить %1"
+
+#: commands/reorderfields.cpp:52
+msgid "Reorder Fields"
+msgstr "Упорядочить поля"
+
+#: commands/removeloans.cpp:79
+msgid "Check-in Entries"
+msgstr "Проверить записи"
+
+#: commands/removeloans.cpp:80
+#, c-format
+msgid ""
+"_: Check-in (Entry Title)\n"
+"Check-in %1"
+msgstr "Вернуть долг %1"
+
+#: collectionfactory.cpp:78 collections/bibtexcollection.cpp:24
+#: collections/bibtexcollection.cpp:59 collections/bibtexcollection.cpp:89
+#: collections/bookcollection.cpp:19 collections/bookcollection.cpp:41
+#: collections/cardcollection.cpp:19 collections/coincollection.cpp:19
+#: collections/comicbookcollection.cpp:19 collections/filecatalog.cpp:19
+#: collections/gamecollection.cpp:19 collections/musiccollection.cpp:19
+#: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
+#: collections/videocollection.cpp:41 collections/winecollection.cpp:19
+#: configdialog.cpp:191 fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:910
+#: field.cpp:39 field.cpp:71 translators/gcfilmsimporter.cpp:54
+msgid "General"
+msgstr "Общие"
+
+#: collections/bibtexcollection.cpp:25 collections/bookcollection.cpp:20
+#: collections/comicbookcollection.cpp:20 translators/grs1importer.cpp:58
+#: translators/grs1importer.cpp:68 translators/risimporter.cpp:258
+msgid "Publishing"
+msgstr "Издательство"
+
+#: collections/bookcollection.cpp:21 collections/comicbookcollection.cpp:21
+#: translators/grs1importer.cpp:63 translators/risimporter.cpp:252
+msgid "Classification"
+msgstr "Классификация"
+
+#: collections/bookcollection.cpp:22 collections/cardcollection.cpp:20
+#: collections/coincollection.cpp:20 collections/comicbookcollection.cpp:22
+#: collections/gamecollection.cpp:20 collections/musiccollection.cpp:20
+#: collections/stampcollection.cpp:21 collections/videocollection.cpp:22
+#: collections/winecollection.cpp:20 document.cpp:490
+msgid "Personal"
+msgstr "Личное"
+
+#: collections/comicbookcollection.cpp:28
+msgid "Comics"
+msgstr "Комиксы"
+
+#: collections/comicbookcollection.cpp:29
+msgid "My Comic Books"
+msgstr "Моя книга комиксов"
+
+#: collectionfactory.cpp:77 collections/bibtexcollection.cpp:57
+#: collections/bookcollection.cpp:40 collections/cardcollection.cpp:38
+#: collections/coincollection.cpp:38 collections/comicbookcollection.cpp:40
+#: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
+#: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
+#: collections/winecollection.cpp:38 entryupdater.cpp:230
+#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:158
+#: translators/tellicoimporter.cpp:400
+msgid "Title"
+msgstr "Заголовок"
+
+#: collections/bookcollection.cpp:46 collections/comicbookcollection.cpp:46
+msgid "Subtitle"
+msgstr "Подзаголовок"
+
+#: collections/comicbookcollection.cpp:51 collections/videocollection.cpp:122
+msgid "Writer"
+msgstr "Писатель"
+
+#: collections/comicbookcollection.cpp:57
+msgid ""
+"_: Comic Book Illustrator\n"
+"Artist"
+msgstr "Художник"
+
+#: collections/bibtexcollection.cpp:195 collections/bookcollection.cpp:127
+#: collections/cardcollection.cpp:72 collections/comicbookcollection.cpp:63
+msgid "Series"
+msgstr "Серия"
+
+#: collections/comicbookcollection.cpp:69
+msgid "Issue"
+msgstr "Издание"
+
+#: collections/bibtexcollection.cpp:121 collections/bookcollection.cpp:74
+#: collections/comicbookcollection.cpp:74 collections/gamecollection.cpp:66
+msgid "Publisher"
+msgstr "Издательство"
+
+#: collections/bibtexcollection.cpp:134 collections/bookcollection.cpp:80
+#: collections/comicbookcollection.cpp:80
+msgid "Edition"
+msgstr "Редакция"
+
+#: collections/bookcollection.cpp:91 collections/comicbookcollection.cpp:86
+msgid "Publication Year"
+msgstr "Год издания"
+
+#: collections/bibtexcollection.cpp:141 collections/bookcollection.cpp:106
+#: collections/comicbookcollection.cpp:91
+msgid "Pages"
+msgstr "Количество страниц"
+
+#: collections/coincollection.cpp:67 collections/comicbookcollection.cpp:95
+#: collections/stampcollection.cpp:56 collections/winecollection.cpp:74
+msgid "Country"
+msgstr "Страна"
+
+#: collections/bookcollection.cpp:110 collections/comicbookcollection.cpp:101
+#: translators/grs1importer.cpp:67
+msgid "Language"
+msgstr "Язык"
+
+#: collections/bookcollection.cpp:115 collections/comicbookcollection.cpp:107
+#: collections/gamecollection.cpp:55 collections/musiccollection.cpp:68
+#: collections/videocollection.cpp:68
+msgid "Genre"
+msgstr "Жанр"
+
+#: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
+#: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:860
+#: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
+msgid "Keywords"
+msgstr "Ключевые слова"
+
+#: collections/comicbookcollection.cpp:121
+msgid ""
+"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
+"Good,Good,Fair,Poor\n"
+"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
-"<p>...что вы можете добавлять, "
-"редактировать или удалять поля в "
-"коллекции,\n"
-"используя Редактор полей. Кнопки стрелок "
-"позволяют вам менять позицию полей в "
-"списке,\n"
-"которая влияет на расстановку в "
-"Редакторе записей.</p>\n"
+"Супер,Отлично,Очень "
+"хорошо,Хорошо,Средне,Ниже "
+"среднего,Плохо,Очень Плохо"
 
-#: tips.cpp:23
+#: collections/bookcollection.cpp:138 collections/comicbookcollection.cpp:123
+#: collections/stampcollection.cpp:20
+msgid "Condition"
+msgstr "Состояние"
+
+#: collections/bookcollection.cpp:65 collections/cardcollection.cpp:83
+#: collections/coincollection.cpp:103 collections/comicbookcollection.cpp:127
+#: collections/gamecollection.cpp:100 collections/musiccollection.cpp:87
+#: collections/stampcollection.cpp:105 collections/videocollection.cpp:191
+#: collections/winecollection.cpp:80
+msgid "Purchase Date"
+msgstr "Дата покупки"
+
+#: collections/bookcollection.cpp:70 collections/cardcollection.cpp:88
+#: collections/coincollection.cpp:108 collections/comicbookcollection.cpp:132
+#: collections/gamecollection.cpp:109 collections/musiccollection.cpp:96
+#: collections/stampcollection.cpp:110 collections/videocollection.cpp:200
+#: collections/winecollection.cpp:85
+msgid "Purchase Price"
+msgstr "Цена"
+
+#: collections/bookcollection.cpp:142 collections/comicbookcollection.cpp:136
+msgid "Signed"
+msgstr "Послан"
+
+#: collections/bookcollection.cpp:150 collections/cardcollection.cpp:97
+#: collections/coincollection.cpp:118 collections/comicbookcollection.cpp:140
+#: collections/gamecollection.cpp:105 collections/musiccollection.cpp:92
+#: collections/stampcollection.cpp:120 collections/videocollection.cpp:196
+#: collections/winecollection.cpp:108
+msgid "Gift"
+msgstr "Подарен"
+
+#: collections/bookcollection.cpp:154 collections/comicbookcollection.cpp:144
+#: collections/gamecollection.cpp:113 collections/musiccollection.cpp:100
+#: collections/videocollection.cpp:204 document.cpp:488
+msgid "Loaned"
+msgstr "Дан в долг"
+
+#: collections/bookcollection.cpp:163 collections/comicbookcollection.cpp:148
+msgid "Front Cover"
+msgstr "Обложка"
+
+#: collections/bookcollection.cpp:166 collections/cardcollection.cpp:116
+#: collections/coincollection.cpp:128 collections/comicbookcollection.cpp:151
+#: collections/gamecollection.cpp:120 collections/musiccollection.cpp:112
+#: collections/stampcollection.cpp:127 collections/videocollection.cpp:211
+#: collections/winecollection.cpp:115
+msgid "Comments"
+msgstr "Комментарии"
+
+#: collections/stampcollection.cpp:27
+msgid "Stamps"
+msgstr "Марки"
+
+#: collections/stampcollection.cpp:28
+msgid "My Stamps"
+msgstr "Мои марки"
+
+#: collections/filecatalog.cpp:46 collections/gamecollection.cpp:88
+#: collections/stampcollection.cpp:45 entryupdater.cpp:231 fetchdialog.cpp:159
+msgid "Description"
+msgstr "Описание"
+
+#: collections/coincollection.cpp:51 collections/stampcollection.cpp:51
+msgid "Denomination"
+msgstr "Достоинство"
+
+#: collections/stampcollection.cpp:62
+msgid "Issue Year"
+msgstr "Год издания"
+
+#: collections/stampcollection.cpp:67 collections/videocollection.cpp:173
+msgid "Color"
+msgstr "Цвет"
+
+#: collections/stampcollection.cpp:72
+msgid "Scott#"
+msgstr "Scott#"
+
+#: collections/stampcollection.cpp:79
 msgid ""
-"<p>...that if you want to filter by a Checkbox field, a value of\n"
-"\"true\" should be used. If you'd like to filter to\n"
-"show only the science fiction books which you've not read, for\n"
-"example, check the <em>Match all of the\n"
-"following</em> button,  set the first rule to have \"Genre\"\n"
-"\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
-"have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
+"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
+"Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr ""
-"<p>...что если вы хотите отфильтровать "
-"записи по полю \"Выбор да/нет\",\n"
-"то должно использоваться значение \"да\". "
-"Например, если вы хотите посмотреть, "
-"какие детективы вы ещё не читали,\n"
-"нажмите кнопку \"Соответствует всему "
-"следующему\",\n"
-"установите первое правило на \"Жанр\"\n"
-"\"содержит\" \"Детектив\" (без кавычек) и "
-"второе правило на \"Прочитана\" \"Не "
-"содержит\" \"Да\" (без кавычек).</p>\n"
+"Супер,Отлично,Хорошо,Нормально,Плохо,Очен"
+"ь плохо"
 
-#: tips.cpp:33
+#: collections/coincollection.cpp:88 collections/stampcollection.cpp:81
+msgid "Grade"
+msgstr "Оценка"
+
+#: collections/stampcollection.cpp:86
+msgid "Cancelled"
+msgstr "Обыкновенная марка"
+
+#: collections/stampcollection.cpp:90
+msgid "Hinged"
+msgstr "Как медальон"
+
+#: collections/stampcollection.cpp:95
+msgid "Centering"
+msgstr "Круглая"
+
+#: collections/stampcollection.cpp:100
+msgid "Gummed"
+msgstr "Приклеена"
+
+#: collections/cardcollection.cpp:92 collections/coincollection.cpp:112
+#: collections/stampcollection.cpp:114 collections/winecollection.cpp:89
+msgid "Location"
+msgstr "Место"
+
+#: collections/stampcollection.cpp:124 field.cpp:432
+msgid "Image"
+msgstr "Изображение"
+
+#: collections/coincollection.cpp:26
+msgid "Coins"
+msgstr "Монеты"
+
+#: collections/coincollection.cpp:27
+msgid "My Coins"
+msgstr "Мои монеты"
+
+#: collections/coincollection.cpp:45 collections/winecollection.cpp:69
+msgid "Type"
+msgstr "Тип"
+
+#: collections/bibtexcollection.cpp:146 collections/cardcollection.cpp:67
+#: collections/coincollection.cpp:56 collections/musiccollection.cpp:63
+msgid "Year"
+msgstr "Год"
+
+#: collections/coincollection.cpp:61
+msgid "Mint Mark"
+msgstr "Место чеканки"
+
+#: collections/coincollection.cpp:73
+msgid "Coin Set"
+msgstr "Набор монет"
+
+#: collections/coincollection.cpp:83
 msgid ""
-"<p>...that if a non-word character is used in the Quick Filter, the text is\n"
-"interpreted as a regular expression.</p>\n"
-"<p>To show only books which are by Weber or Bujold, for example, then\n"
-"type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
+"_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
+"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
+"Fine-20,Fine-12,Very Good-8,Good-4,Fair\n"
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair"
 msgstr ""
-"<p>...что если в быстром фильтре "
-"используется символ, не входящий в слова "
-"(напр., ^)\n"
-"текст интерпретируется как регулярное "
-"выражение.</p>\n"
-"<p>Например, чтобы посмотреть только "
-"книги, которые написали Пушкин и Гоголь,\n"
-"введите \"Пушкин|Гоголь\" (без кавычек) в "
-"поле быстрого фильтра.</p>\n"
+"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
+"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
+"Good-8,Good-4,Fair"
 
-#: tips.cpp:40
+#: collections/coincollection.cpp:96
 msgid ""
-"<p>...that you can edit more than one entry at a time, by holding down\n"
-"the Shift or Ctrl key and selecting multiple entries.</p>\n"
+"_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
+"PCGS,NGC,ANACS,ICG,ASA,PCI"
+msgstr "PCGS,NGC,ANACS,ICG,ASA,PCIG,ASA,PCI"
+
+#: collections/coincollection.cpp:98
+msgid "Grading Service"
+msgstr "Сервис оценки"
+
+#: collections/coincollection.cpp:122
+msgid "Obverse"
+msgstr "\"Орел\""
+
+#: collections/coincollection.cpp:125
+msgid "Reverse"
+msgstr "\"Решка\""
+
+#: collections/bookcollection.cpp:28
+msgid "Books"
+msgstr "Книги"
+
+#: collections/bookcollection.cpp:29
+msgid "My Books"
+msgstr "Мои книги"
+
+#: collections/bibtexcollection.cpp:80 collections/bookcollection.cpp:51
+msgid "Author"
+msgstr "Автор"
+
+#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:121
+msgid "Hardback"
+msgstr "Твердый переплет"
+
+#: collections/bookcollection.cpp:58
+msgid "Paperback"
+msgstr "Мягкий переплет"
+
+#: collections/bookcollection.cpp:58
+msgid "Trade Paperback"
+msgstr "Газета"
+
+#: collections/bookcollection.cpp:59
+msgid "E-Book"
+msgstr "Электронная книга"
+
+#: collections/bookcollection.cpp:59
+msgid "Magazine"
+msgstr "Журнал"
+
+#: collections/bibtexcollection.cpp:158 collections/bookcollection.cpp:59
+msgid "Journal"
+msgstr "Дневник"
+
+#: collections/bookcollection.cpp:60
+msgid "Binding"
+msgstr "Переплет"
+
+#: collections/bookcollection.cpp:86
+msgid "Copyright Year"
+msgstr "Год сдачи в печать"
+
+#: collections/bibtexcollection.cpp:152 collections/bookcollection.cpp:96
+#: translators/grs1importer.cpp:57 translators/risimporter.cpp:255
+msgid "ISBN#"
+msgstr "ISBN#"
+
+#: collections/bibtexcollection.cpp:155 collections/bookcollection.cpp:98
+#: translators/grs1importer.cpp:59 translators/risimporter.cpp:259
+msgid "International Standard Book Number"
 msgstr ""
-"<p>...что за один раз вы можете "
-"отредактировать больше, чем одно поле.\n"
-"Для этого выделите несколько полей, "
-"зажимая клавиши Shift или Ctrl.</p>\n"
+"Международный Стандартный Номер Книги"
 
-#: tips.cpp:45
-msgid ""
-"<p>...that you can convert an existing book collection to a bibliography,\n"
-"which can then be exported to bibtex or Bibtexml format.</p>\n"
+#: collections/bookcollection.cpp:101
+msgid "LCCN#"
+msgstr "LCCN#"
+
+#: collections/bookcollection.cpp:103
+msgid "Library of Congress Control Number"
 msgstr ""
-"<p>...что вы можете конвертировать текущую "
-"коллекцию книг в библиографию,\n"
-"которая может быть экспортирована в "
-"формат Bibtex или Bibtexml.</p>\n"
+"Контрольный Номер Библиотеки Конгресса"
 
-#: tips.cpp:50
+#: collections/bookcollection.cpp:132
+msgid "Series Number"
+msgstr "Номер Серии"
+
+#: collections/bookcollection.cpp:137 mainwindow.cpp:191
+msgid "New"
+msgstr "Новая"
+
+#: collections/bookcollection.cpp:137
+msgid "Used"
+msgstr "Подержанная"
+
+#: collections/bookcollection.cpp:146
+msgid "Read"
+msgstr "Прочитанна"
+
+#: collections/bookcollection.cpp:158 collections/musiccollection.cpp:82
+#: collections/winecollection.cpp:103 field.cpp:436 newstuff/dialog.cpp:114
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: collections/filecatalog.cpp:26
+msgid "My Files"
+msgstr "Мои файлы"
+
+#: borrowerdialog.cpp:48 collections/filecatalog.cpp:37
+#: newstuff/dialog.cpp:112
+msgid "Name"
+msgstr "Имя"
+
+#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:395
+#: fetch/entrezfetcher.cpp:464 field.cpp:430
+#: translators/gcfilmsimporter.cpp:53 translators/risimporter.cpp:261
+msgid "URL"
+msgstr "URL"
+
+#: collections/bibtexcollection.cpp:202 collections/filecatalog.cpp:51
+msgid "Volume"
+msgstr "Том"
+
+#: collections/filecatalog.cpp:56
+#, fuzzy
+msgid "Folder"
+msgstr "Фильтр"
+
+#: collections/filecatalog.cpp:61
+msgid "Mimetype"
+msgstr "Mimetype"
+
+#: collections/filecatalog.cpp:66
+msgid "Size"
+msgstr "Размер"
+
+#: collections/filecatalog.cpp:70
+msgid "Permissions"
+msgstr "Права"
+
+#: collections/filecatalog.cpp:75
+msgid "Owner"
+msgstr "Владелец"
+
+#: collections/filecatalog.cpp:80
+msgid "Group"
+msgstr "Группа"
+
+#: collections/filecatalog.cpp:86
+msgid "Created"
+msgstr "Создан"
+
+#: collections/filecatalog.cpp:90
+msgid "Modified"
+msgstr "Редактирован"
+
+#: collections/filecatalog.cpp:94
+msgid "Meta Info"
+msgstr "Дополнительная информация"
+
+#: collectionfieldsdialog.cpp:854 collections/filecatalog.cpp:96
+msgid "Property"
+msgstr "Свойство"
+
+#: collectionfieldsdialog.cpp:854 collections/filecatalog.cpp:97
+msgid "Value"
+msgstr "Значение"
+
+#: collections/filecatalog.cpp:100
+msgid "Icon"
+msgstr "Значок"
+
+#: collections/winecollection.cpp:26
+msgid "Wines"
+msgstr "Вина"
+
+#: collections/winecollection.cpp:27
+msgid "My Wines"
+msgstr "Мои вина"
+
+#: collections/videocollection.cpp:116 collections/winecollection.cpp:44
+msgid "Producer"
+msgstr "Производитель"
+
+#: collections/winecollection.cpp:50
+msgid "Appellation"
+msgstr "Название"
+
+#: collections/winecollection.cpp:56
+msgid "Varietal"
+msgstr "Сорт"
+
+#: collections/winecollection.cpp:62
+msgid "Vintage"
+msgstr "Урожай"
+
+#: collections/winecollection.cpp:68
+msgid "Red Wine"
+msgstr "Красное вино"
+
+#: collections/winecollection.cpp:68
+msgid "White Wine"
+msgstr "Белое вино"
+
+#: collections/winecollection.cpp:68
+msgid "Sparkling Wine"
+msgstr "Игристое вино"
+
+#: collections/cardcollection.cpp:106 collections/winecollection.cpp:94
+msgid "Quantity"
+msgstr "Количество"
+
+#: collections/winecollection.cpp:98
+msgid "Drink By"
+msgstr "Было выпито"
+
+#: collections/winecollection.cpp:112
+msgid "Label Image"
+msgstr "Изображение этикетки"
+
+#: collections/videocollection.cpp:20 fetch/animenfofetcher.cpp:264
+msgid "Other People"
+msgstr "Другие люди"
+
+#: collections/videocollection.cpp:21 fetch/animenfofetcher.cpp:270
+msgid "Features"
+msgstr "Особенности"
+
+#: collections/videocollection.cpp:28
+msgid "Videos"
+msgstr "Видео"
+
+#: collections/videocollection.cpp:29
+msgid "My Videos"
+msgstr "Мои видеозаписи"
+
+#: collections/musiccollection.cpp:45 collections/videocollection.cpp:47
+msgid "DVD"
+msgstr "DVD"
+
+#: collections/videocollection.cpp:47
+msgid "VHS"
+msgstr "VHS"
+
+#: collections/videocollection.cpp:47
+msgid "VCD"
+msgstr "VCD"
+
+#: collections/videocollection.cpp:47
+msgid "DivX"
+msgstr "MPEG-4"
+
+#: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
+msgid "Medium"
+msgstr "Носитель"
+
+#: collections/videocollection.cpp:53
+msgid "Production Year"
+msgstr "Год записи"
+
+#: collections/videocollection.cpp:61
 msgid ""
-"<p>...that you can add, edit, and delete string macros for "
-"bibliographies.</p>\n"
+"_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
+"G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
+msgstr "G (США),PG (США),PG-13 (США),R (USA), U (США)"
+
+#: collections/videocollection.cpp:63
+msgid "Certification"
+msgstr "Возрастной рейтинг"
+
+#: collections/videocollection.cpp:75
+msgid "Region 1"
+msgstr "Регион 1"
+
+#: collections/videocollection.cpp:76
+msgid "Region 2"
+msgstr "Регион 2"
+
+#: collections/videocollection.cpp:77
+msgid "Region 3"
+msgstr "Регион 3"
+
+#: collections/videocollection.cpp:78
+msgid "Region 4"
+msgstr "Регион 4"
+
+#: collections/videocollection.cpp:79
+msgid "Region 5"
+msgstr "Регион 5"
+
+#: collections/videocollection.cpp:80
+msgid "Region 6"
+msgstr "Регион 6"
+
+#: collections/videocollection.cpp:81
+msgid "Region 7"
+msgstr "Регион 7"
+
+#: collections/videocollection.cpp:82
+msgid "Region 8"
+msgstr "Регион 8"
+
+#: collections/videocollection.cpp:83
+msgid "Region"
+msgstr "Регион"
+
+#: collections/videocollection.cpp:88
+msgid "Nationality"
+msgstr "Страна"
+
+#: collections/videocollection.cpp:95
+msgid "NTSC"
+msgstr "NTSC"
+
+#: collections/videocollection.cpp:95
+msgid "PAL"
+msgstr "PAL"
+
+#: collections/videocollection.cpp:95
+msgid "SECAM"
+msgstr "SECAM"
+
+#: collections/videocollection.cpp:96
+msgid "Format"
+msgstr "Формат"
+
+#: collections/videocollection.cpp:101
+msgid "Cast"
+msgstr "Роли"
+
+#: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:404
+msgid "Actor/Actress"
+msgstr "Актер/Актриса"
+
+#: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:405
+msgid "Role"
+msgstr "Роли"
+
+#: collections/videocollection.cpp:107
+msgid "A table for the cast members, along with the roles they play"
 msgstr ""
-"<p>...что вы можете добавлять, "
-"редактировать и удалять строковые "
-"макросы для библиографий.</p>\n"
+"Таблица для записи актеров и ролей, "
+"которые они играли"
 
-#: tips.cpp:54
+#: collections/videocollection.cpp:110
+msgid "Director"
+msgstr "Режиссер"
+
+#: collections/videocollection.cpp:128
+msgid "Composer"
+msgstr "Композитор"
+
+#: collections/videocollection.cpp:134
+msgid "Studio"
+msgstr "Студия"
+
+#: collections/videocollection.cpp:140
+msgid "Language Tracks"
+msgstr "Языки"
+
+#: collections/videocollection.cpp:146
+msgid "Subtitle Languages"
+msgstr "Языки субтитров"
+
+#: collections/videocollection.cpp:152
+msgid "Audio Tracks"
+msgstr "Аудио треки"
+
+#: collections/videocollection.cpp:158
+msgid "Running Time"
+msgstr "Продолжительность"
+
+#: collections/videocollection.cpp:160
+msgid "The running time of the video (in minutes)"
+msgstr "Продолжительность видео (в минутах)"
+
+#: collections/videocollection.cpp:163
+msgid "Aspect Ratio"
+msgstr "Соотношение сторон"
+
+#: collections/videocollection.cpp:168 translators/tellicoimporter.cpp:886
+msgid "Widescreen"
+msgstr "Широкоэкранный"
+
+#: collections/videocollection.cpp:173
+msgid "Black & White"
+msgstr "Черно-белый"
+
+#: collections/videocollection.cpp:174
+msgid "Color Mode"
+msgstr "Цветной"
+
+#: collections/videocollection.cpp:179
+msgid "Director's Cut"
+msgstr "Режиссерская версия"
+
+#: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:352
+msgid "Plot Summary"
+msgstr "Сюжет фильма"
+
+#: collections/gamecollection.cpp:91 collections/videocollection.cpp:186
+msgid "Personal Rating"
+msgstr "Личный рейтинг"
+
+#: collections/gamecollection.cpp:117 collections/musiccollection.cpp:109
+#: collections/videocollection.cpp:208
+msgid "Cover"
+msgstr "Обложка"
+
+#: collections/gamecollection.cpp:26
+msgid "Games"
+msgstr "Игры"
+
+#: collections/gamecollection.cpp:27
+msgid "My Games"
+msgstr "Мои игры"
+
+#: collections/gamecollection.cpp:45
+#, fuzzy
+msgid "Xbox 360"
+msgstr "Xbox"
+
+#: collections/gamecollection.cpp:45
+msgid "Xbox"
+msgstr "Xbox"
+
+#: collections/gamecollection.cpp:46
+#, fuzzy
+msgid "PlayStation3"
+msgstr "PlayStation"
+
+#: collections/gamecollection.cpp:46
+msgid "PlayStation2"
+msgstr "PlayStation 2"
+
+#: collections/gamecollection.cpp:46
+msgid "PlayStation"
+msgstr "PlayStation"
+
+#: collections/gamecollection.cpp:46
 msgid ""
-"<p>...that if more than one field is formatted as a name, then an "
-"additional\n"
-"group named \"People\" is added to the collection, allowing authors and "
-"editors\n"
-"to be sorted or printed together, for example.</p>\n"
+"_: PlayStation Portable\n"
+"PSP"
+msgstr "PSP"
+
+#: collections/gamecollection.cpp:47
+#, fuzzy
+msgid "Nintendo Wii"
+msgstr "Регион"
+
+#: collections/gamecollection.cpp:47
+msgid "Nintendo DS"
+msgstr "Nintendo DS"
+
+#: collections/gamecollection.cpp:47
+msgid "GameCube"
+msgstr "GameCube"
+
+#: collections/gamecollection.cpp:47
+msgid "Dreamcast"
+msgstr "Dreamcast"
+
+#: collections/gamecollection.cpp:48
+msgid "Game Boy Advance"
+msgstr "Game Boy Advance"
+
+#: collections/gamecollection.cpp:48
+msgid "Game Boy Color"
+msgstr "Game Boy Color"
+
+#: collections/gamecollection.cpp:48
+msgid "Game Boy"
+msgstr "Game Boy"
+
+#: collections/gamecollection.cpp:49
+msgid ""
+"_: Windows Platform\n"
+"Windows"
+msgstr "Windows"
+
+#: collections/gamecollection.cpp:49
+msgid "Mac OS"
+msgstr "Mac OS"
+
+#: collections/gamecollection.cpp:50
+msgid "Platform"
+msgstr "Платформа"
+
+#: collections/gamecollection.cpp:61
+msgid "Release Year"
+msgstr "Год выпуска"
+
+#: collections/gamecollection.cpp:72
+msgid "Developer"
+msgstr "Разработчик"
+
+#: collections/gamecollection.cpp:81
+msgid ""
+"_: Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone, Early "
+"Childhood, Pending\n"
+"Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"
 msgstr ""
-"<p>...что если более чем одно поле "
-"форматируется как \"имя\", то в коллекцию\n"
-"добавляется дополнительная группа "
-"\"Люди\", например, для сортировки и печати "
-"вместе.</p>\n"
+"Без рейтинга, Для взрослых, Для "
+"подростков, Для всех, Для детей, "
+"Неизвестный"
 
-#: tips.cpp:60
-msgid ""
-"<p>...that you can modify the appearance of the printed output by modifying\n"
-"the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
-"CSS\n"
-"within the stylesheet governs things like the font, the margins, etc.</p>\n"
+#: collections/gamecollection.cpp:83
+msgid "ESRB Rating"
+msgstr "Возрастной рейтинг"
+
+#: collections/gamecollection.cpp:96
+msgid "Completed"
+msgstr "Пройдена"
+
+#: collections/cardcollection.cpp:26
+msgid "Cards"
+msgstr "Карты"
+
+#: collections/cardcollection.cpp:27
+msgid "My Cards"
+msgstr "Мои карты"
+
+#: collections/cardcollection.cpp:44
+msgid "Player"
+msgstr "Игрок"
+
+#: collections/cardcollection.cpp:50
+msgid "Team"
+msgstr "Команда"
+
+#: collections/cardcollection.cpp:56
+msgid "Brand"
+msgstr "Фирма"
+
+#: collections/cardcollection.cpp:63
+msgid "Card Number"
+msgstr "Номер карты"
+
+#: collections/cardcollection.cpp:78
+msgid "Card Type"
+msgstr "Тип карты"
+
+#: collections/cardcollection.cpp:110
+msgid "Front Image"
+msgstr "Изображение передней стороны"
+
+#: collections/cardcollection.cpp:113
+msgid "Back Image"
+msgstr "Изображение задней стороны"
+
+#: collections/bibtexcollection.cpp:30
+msgid "Entries"
+msgstr "Записи"
+
+#: collectionfactory.cpp:118 collections/bibtexcollection.cpp:31
+msgid "Bibliography"
+msgstr "Библиография"
+
+#: collections/bibtexcollection.cpp:73
+msgid "Entry Type"
+msgstr "Тип записи"
+
+#: collections/bibtexcollection.cpp:77
+msgid "These entry types are specific to bibtex. See the bibtex documentation."
 msgstr ""
-"<p>...что вы можете менять внешний вид, "
-"печатаемых отчетов, редактируя\n"
-"файл <tt>tellico-printing.xsl</tt>. Этот файл создает "
-"HTML и CSS\n"
-"с такими элементами как шрифт, размер и "
-"т.д. </p>\n"
+"Эти типы записей мпецифичны для bibtex. "
+"Смотрите документацию bibtex"
 
-#: tips.cpp:66
-msgid ""
-"<p>...that you can import using any generic XSL stylesheet which\n"
-"outputs a valid Tellico XML file.</p>\n"
-msgstr ""
-"<p>...что вы можете импортировать, "
-"используя стандартный\n"
-"лист стилей XSL, на выходе получая "
-"правильный файл Tellico XML.</p>\n"
+#: collections/bibtexcollection.cpp:87
+msgid "Bibtex Key"
+msgstr "Ключ bibtex"
 
-#: tips.cpp:71
-msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
-msgstr ""
-"<p>...что двойной щелчок на записи "
-"открывает редактор записей.</p>\n"
+#: collections/bibtexcollection.cpp:93
+msgid "Book Title"
+msgstr "Название книги"
 
-#: tips.cpp:75
-msgid ""
-"<p>...that you can add HTML tags to any Paragraph field for formatting, such "
-"as\n"
-"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
-msgstr ""
-"<p>...что в любое поле типа \"Большой текст\" "
-"вы можете добавлять теги HTML, такие как \n"
-"&lt;b&gt;жирный шрифт&lt;/b&gt; или "
-"&lt;i&gt;курсивный&lt;/i&gt;.</p>\n"
+#: collections/bibtexcollection.cpp:99
+msgid "Editor"
+msgstr "Редактор"
 
-#: tips.cpp:80
-msgid ""
-"<p>...that in the Detailed View, you can press a letter on the\n"
-"keyboard to skip to the next entry that starts with that letter.</p>\n"
-msgstr ""
-"<p>...что в подробном виде вы можете нажать "
-"кнопку буквы на клавиатуре для\n"
-"перехода к записи, начинающейся с этой "
-"буквы.</p>\n"
+#: collections/bibtexcollection.cpp:106
+msgid "Organization"
+msgstr "Организация"
 
-#: _translatorinfo.cpp:1
-msgid ""
-"_: NAME OF TRANSLATORS\n"
-"Your names"
-msgstr "Калимуллин Артур"
+#: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:434
+#: fetch/z3950fetcher.cpp:669
+msgid "Address"
+msgstr "Адрес"
 
-#: _translatorinfo.cpp:3
-msgid ""
-"_: EMAIL OF TRANSLATORS\n"
-"Your emails"
-msgstr "kalimullin@gmail.com"
+#: collections/bibtexcollection.cpp:167
+msgid "Month"
+msgstr "Месяц"
 
-#: xslt.cpp:2
-msgid ""
-"_: Album XSL Template\n"
-"Album"
+#: collections/bibtexcollection.cpp:173 field.cpp:429
+msgid "Number"
+msgstr "Номер"
+
+#: collections/bibtexcollection.cpp:178
+msgid "How Published"
+msgstr "Как издавалась"
+
+#: collections/bibtexcollection.cpp:190
+msgid "Chapter"
+msgstr "Часть"
+
+#: collections/bibtexcollection.cpp:207
+msgid "Cross-Reference"
+msgstr "Рекомендации"
+
+#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:463
+#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:670
+#: translators/risimporter.cpp:246
+msgid "Abstract"
+msgstr "Резюме"
+
+#: collections/bibtexcollection.cpp:226
+msgid "Notes"
+msgstr "Заметки"
+
+#: collections/musiccollection.cpp:26
+msgid "Albums"
+msgstr "Альбомы"
+
+#: collections/musiccollection.cpp:27
+msgid "My Music"
+msgstr "Мои аудиозаписи"
+
+#: collections/musiccollection.cpp:38
+msgid "Album"
 msgstr "Альбом"
 
-#: xslt.cpp:3
-msgid "This template is meant for music collections only."
+#: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:224
+#: translators/freedbimporter.cpp:337 translators/freedbimporter.cpp:404
+msgid "Compact Disc"
+msgstr "Компакт-диск"
+
+#: collections/musiccollection.cpp:45
+msgid "Cassette"
+msgstr "Аудиокассета"
+
+#: collections/musiccollection.cpp:45
+msgid "Vinyl"
+msgstr "Виниловая пластинка"
+
+#: collections/musiccollection.cpp:51 collections/musiccollection.cpp:78
+#: translators/tellicoimporter.cpp:401
+msgid "Artist"
+msgstr "Исполнитель"
+
+#: collections/musiccollection.cpp:57
+msgid "Label"
+msgstr "Лейбл"
+
+#: collections/musiccollection.cpp:74
+msgid "Tracks"
+msgstr "Треки"
+
+#: collections/musiccollection.cpp:79 translators/tellicoimporter.cpp:402
+msgid "Length"
+msgstr "Длина"
+
+#: core/tellico_config.cpp:118
+msgid ""
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
 msgstr ""
-"Этот шаблон предназначен только за "
-"музыкальных коллекций."
+"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
+"up,with"
+
+#: core/tellico_config.cpp:121
+msgid "the"
+msgstr "the"
+
+#: core/tellico_config.cpp:124
+msgid "jr.,jr,iii,iv"
+msgstr "мл., ст.,jr.,jr"
+
+#: core/tellico_config.cpp:127
+msgid "de,van,der,van der,von"
+msgstr "de,van,der,van der,von"
+
+#: fetch/isbndbfetcher.cpp:50
+msgid "ISBNdb.com"
+msgstr ""
+
+#: fetch/amazonfetcher.cpp:189 fetch/animenfofetcher.cpp:74
+#: fetch/ibsfetcher.cpp:71 fetch/isbndbfetcher.cpp:75
+#: fetch/yahoofetcher.cpp:92
+msgid "%1 does not allow searching for this collection type."
+msgstr "В этом типе коллекций нельзя искать %1"
+
+#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:443
+#: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
+#: fetch/yahoofetcher.cpp:391
+msgid "This source has no options."
+msgstr "Нет опций"
+
+#: fetch/entrezfetcher.cpp:54
+msgid "Entrez Database"
+msgstr "База данных Entrez"
+
+#: fetch/entrezfetcher.cpp:462
+msgid "Institution"
+msgstr "Институт"
+
+#: fetch/z3950connection.cpp:115
+msgid "Query error!"
+msgstr "Ошибка запроса"
+
+#: fetch/z3950connection.cpp:156
+msgid "Connection search error %1: %2"
+msgstr "Ошибка соединения с поиском %1: %2"
+
+#: fetch/z3950connection.cpp:233
+msgid "Record syntax error"
+msgstr "Синтаксическая ошибка"
+
+#: fetch/z3950connection.cpp:316
+msgid "Connection error %1: %2"
+msgstr "Ошибка соединения %1: %2"
+
+#: fetch/srufetcher.cpp:65
+msgid "SRU Server"
+msgstr "Сервер SRU"
+
+#: fetch/srufetcher.cpp:334 z3950.cpp:2
+msgid "Library of Congress (US)"
+msgstr "Библиотека Конгресса (США)"
+
+#: fetch/imdbfetcher.cpp:1076 fetch/srufetcher.cpp:349
+#: fetch/z3950fetcher.cpp:505
+msgid "Hos&t: "
+msgstr "&Сервер: "
+
+#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:511
+msgid "Enter the host name of the server."
+msgstr "Введите адрес сервера."
+
+#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:516
+msgid "&Port: "
+msgstr "&Порт"
+
+#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:521
+#, c-format
+msgid "Enter the port number of the server. The default is %1."
+msgstr ""
+"Введите номер порта сервера. По умолчанию "
+"выбран %1"
+
+#: fetch/srufetcher.cpp:370
+#, fuzzy
+msgid "Path: "
+msgstr "&Порт"
+
+#: fetch/srufetcher.cpp:375
+#, fuzzy
+msgid "Enter the path to the database used by the server."
+msgstr ""
+"Введите название базы данных, "
+"используемой сервером."
+
+#: fetch/srufetcher.cpp:380
+#, fuzzy
+msgid "Format: "
+msgstr "Формат"
+
+#: fetch/srufetcher.cpp:387
+#, fuzzy
+msgid "Enter the result format used by the server."
+msgstr ""
+"Введите название базы данных, "
+"используемой сервером."
+
+#: fetch/yahoofetcher.cpp:51
+msgid "Yahoo! Audio Search"
+msgstr "Аудио-поиск Yahoo!"
+
+#: fetch/amazonfetcher.cpp:696 fetch/yahoofetcher.cpp:241
+msgid "The cover image could not be loaded."
+msgstr ""
+"Не получается загрузить изображение "
+"обложки"
+
+#: fetch/amazonfetcher.cpp:50
+msgid "Amazon Link"
+msgstr "Ссылка Amazon"
+
+#: fetch/amazonfetcher.cpp:59
+msgid "Amazon (US)"
+msgstr "Amazon (США)"
+
+#: fetch/amazonfetcher.cpp:62
+msgid "Amazon (UK)"
+msgstr "Amazon (UK)"
+
+#: fetch/amazonfetcher.cpp:65
+msgid "Amazon (Germany)"
+msgstr "Amazon (Германия)"
+
+#: fetch/amazonfetcher.cpp:68
+msgid "Amazon (Japan)"
+msgstr "Amazon (Япония)"
+
+#: fetch/amazonfetcher.cpp:71
+msgid "Amazon (France)"
+msgstr "Amazon (Франция)"
+
+#: fetch/amazonfetcher.cpp:74
+msgid "Amazon (Canada)"
+msgstr "Amazon (Канада)"
+
+#: fetch/amazonfetcher.cpp:96
+msgid "Amazon.com Web Services"
+msgstr "Сервисы Amazon.com"
+
+#: fetch/amazonfetcher.cpp:513
+msgid "Results from %1: %2/%3"
+msgstr "Результаты от %1: %2/%3"
+
+#: fetch/amazonfetcher.cpp:537 fetch/z3950fetcher.cpp:425
+msgid "<qt>No entries were found for the following ISBN values:</qt>"
+msgstr ""
+"<qt>Никаких записей не было найдено по "
+"следующим номерам ISBN:</qt>"
+
+#: fetch/amazonfetcher.cpp:773
+msgid "Co&untry: "
+msgstr "Ст&рана"
+
+#: fetch/amazonfetcher.cpp:777
+msgid "United States"
+msgstr "США"
+
+#: fetch/amazonfetcher.cpp:778
+msgid "United Kingdom"
+msgstr "Великобритания"
+
+#: fetch/amazonfetcher.cpp:779
+msgid "Germany"
+msgstr "Германия"
+
+#: fetch/amazonfetcher.cpp:780
+msgid "Japan"
+msgstr "Япония"
+
+#: fetch/amazonfetcher.cpp:781
+msgid "France"
+msgstr "Франция"
+
+#: fetch/amazonfetcher.cpp:782
+msgid "Canada"
+msgstr "Канада"
+
+#: fetch/amazonfetcher.cpp:786
+msgid ""
+"Amazon.com provides data from several different localized sites. Choose the "
+"one you wish to use for this data source."
+msgstr ""
+"Amazon.com предоставляет данные из нескольких "
+"своих сайтов. Выберите источник, откуда "
+"вы хотите получить данные."
+
+#: fetch/amazonfetcher.cpp:792
+msgid "&Image size: "
+msgstr "&Размер изображения"
+
+#: fetch/amazonfetcher.cpp:796
+msgid "Small Image"
+msgstr "Маленькое изображение"
+
+#: fetch/amazonfetcher.cpp:797
+msgid "Medium Image"
+msgstr "Среднее изображние"
+
+#: fetch/amazonfetcher.cpp:798
+msgid "Large Image"
+msgstr "Большое изображение"
+
+#: fetch/amazonfetcher.cpp:799
+msgid "No Image"
+msgstr "Нет изображения"
+
+#: fetch/amazonfetcher.cpp:802 fetch/imdbfetcher.cpp:1101
+msgid ""
+"The cover image may be downloaded as well. However, too many large images in "
+"the collection may degrade performance."
+msgstr ""
+"Помните, что много больших изображений "
+"могут ухудшить удобство в работе с "
+"программой"
+
+#: fetch/amazonfetcher.cpp:808
+msgid "&Associate's ID: "
+msgstr "&Associate's ID: "
+
+#: fetch/amazonfetcher.cpp:813
+msgid ""
+"The associate's id identifies the person accessing the Amazon.com Web "
+"Services, and is included in any links to the Amazon.com site."
+msgstr ""
+"Associate's ID нужен для доступа ко многим "
+"сервисам Amazon.com"
+
+#: fetch/z3950fetcher.cpp:78 fetch/z3950fetcher.cpp:756
+#, fuzzy
+msgid "z39.50 Server"
+msgstr "z39.50"
+
+#: fetch/z3950fetcher.cpp:495
+msgid "Use preset &server:"
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:526
+msgid "&Database: "
+msgstr "&База данных"
+
+#: fetch/z3950fetcher.cpp:531
+msgid "Enter the database name used by the server."
+msgstr ""
+"Введите название базы данных, "
+"используемой сервером."
+
+#: fetch/z3950fetcher.cpp:536
+msgid "Ch&aracter set: "
+msgstr "&Кодировка:"
+
+#: fetch/z3950fetcher.cpp:545
+msgid ""
+"Enter the character set encoding used by the z39.50 server. The most likely "
+"choice is MARC-8, although ISO-8859-1 is common as well."
+msgstr ""
+"Введите кодировку, используемую сервером "
+"z39.50. Самый лучший выбор: MARC-8."
+
+#: fetch/z3950fetcher.cpp:551
+#, fuzzy
+msgid "&Format: "
+msgstr "Формат"
+
+#: fetch/z3950fetcher.cpp:554
+msgid "Auto-detect"
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:562
+msgid ""
+"Enter the data format used by the z39.50 server. Tellico will attempt to "
+"automatically detect the best setting if <i>auto-detect</i> is selected."
+msgstr ""
+
+#: fetch/z3950fetcher.cpp:568
+msgid "&User: "
+msgstr "П&ользователь"
+
+#: fetch/z3950fetcher.cpp:571 fetch/z3950fetcher.cpp:583
+msgid "Optional"
+msgstr "Необязательно"
+
+#: fetch/z3950fetcher.cpp:574
+msgid ""
+"Enter the authentication user name used by the z39.50 database. Most servers "
+"do not need one."
+msgstr ""
+"Введите имя пользователя базой данных "
+"z39.50. Для многих серверов ничего вводить "
+"не нужно."
+
+#: fetch/z3950fetcher.cpp:580
+msgid "Pass&word: "
+msgstr "Па&роль"
+
+#: fetch/z3950fetcher.cpp:587
+msgid ""
+"Enter the authentication password used by the z39.50 database. Most servers "
+"do not need one. The password will be saved in plain text in the Tellico "
+"configuration file."
+msgstr ""
+"Введите пароль для доступа к базе данных "
+"z39.50. "
+"Для многих серверов ничего вводить не "
+"нужно. Пароль будет сохранен в "
+"конфигурационном файле Tellico."
+
+#: fetch/z3950fetcher.cpp:671
+msgid "Illustrator"
+msgstr ""
+
+#: fetch/execexternalfetcher.cpp:82
+msgid "External Application"
+msgstr "Внешние приложения"
+
+#: configdialog.cpp:355 fetch/execexternalfetcher.cpp:336
+#: translators/csvimporter.cpp:171
+msgid "Collection &type:"
+msgstr "&Тип коллекции"
+
+#: fetch/execexternalfetcher.cpp:341
+msgid ""
+"Set the collection type of the data returned from the external application."
+msgstr ""
+"Выберите тип коллекции, который "
+"экспортирует внешнее приложение"
+
+#: fetch/execexternalfetcher.cpp:346
+msgid "&Result type: "
+msgstr "&Тип результата: "
+
+#: fetch/execexternalfetcher.cpp:355
+msgid "Set the result type of the data returned from the external application."
+msgstr ""
+"Выберите тип данных, возвращаемый "
+"внешним приложением"
+
+#: fetch/execexternalfetcher.cpp:360
+msgid "Application &path: "
+msgstr "&Путь к приложению"
+
+#: fetch/execexternalfetcher.cpp:365
+msgid ""
+"Set the path of the application to run that should output a valid Tellico "
+"data file."
+msgstr ""
+"Введите путь у приложению, которое "
+"выводит правильный файл Tellico"
+
+#: fetch/execexternalfetcher.cpp:370
+msgid "Select the search keys supported by the data source."
+msgstr ""
+"Выберите ключи поиска, поддерживаемы "
+"источником данных"
+
+#: fetch/execexternalfetcher.cpp:371
+msgid ""
+"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
+"search term."
+msgstr ""
+"Добавьте аргументы, которые могут "
+"понадобиться. <b>%1</b> будут заменены "
+"результатом поиска"
+
+#: fetch/execexternalfetcher.cpp:372
+msgid "Arguments"
+msgstr "&Аргументы"
+
+#: fetch/execexternalfetcher.cpp:405 newstuff/dialog.cpp:151
+msgid "Update"
+msgstr "Обновлен"
+
+#: fetch/execexternalfetcher.cpp:412
+msgid ""
+"<p>Enter the arguments which should be used to search for available updates "
+"to an entry.</p><p>The format is the same as for <i>Dependent</i> fields, "
+"where field values are contained inside braces, such as <i>%{author}</i> See "
+"the documentation for details.</p>"
+msgstr ""
+"<p>Введите аргументы, которые следует "
+"использовать для поиска возможных "
+"обновлений.</p><p>Формат должен быть таким "
+"же, как и <i>\"зависимые\"</i> поля, такие как "
+"<i>%{автор}</i> Подробнее - в документации.</p>"
+
+#: fetch/configwidget.cpp:29
+msgid "Source Options"
+msgstr "Опции источника"
+
+#: fetch/configwidget.cpp:40
+msgid "Available Fields"
+msgstr "Доступные поля"
+
+#: fetch/imdbfetcher.cpp:88
+msgid "Internet Movie Database"
+msgstr "Internet Movie Database (IMDB)"
+
+#: fetch/imdbfetcher.cpp:577
+msgid "Select IMDB Result"
+msgstr "Выберите результат IMDB"
+
+#: fetch/imdbfetcher.cpp:580
+msgid ""
+"<qt>Your search returned multiple matches. Please select one below.</qt>"
+msgstr ""
+"<qt>Ваш поиск дал несколько результатов. "
+"Пожалуйста, выберите один из них.</qt>"
+
+#: fetch/imdbfetcher.cpp:595
+msgid "<qt>Select a search result.</qt>"
+msgstr "<qt>Выберите результат поиска</qt>"
+
+#: fetch/imdbfetcher.cpp:687 fetch/imdbfetcher.cpp:1140
+msgid "IMDB Link"
+msgstr "Ссылка IMDB"
+
+#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:742
+#: fetch/imdbfetcher.cpp:1142
+msgid "Alternative Titles"
+msgstr "Альтернативные названия"
+
+#: fetch/imdbfetcher.cpp:909 fetch/imdbfetcher.cpp:1141
+msgid "IMDB Rating"
+msgstr "Рейтинг IMDB"
+
+#: fetch/imdbfetcher.cpp:1020 fetch/imdbfetcher.cpp:1143
+msgid "Certifications"
+msgstr "Сертификации"
+
+#: fetch/imdbfetcher.cpp:1081
+msgid ""
+"The Internet Movie Database uses several different servers. Choose the one "
+"you wish to use."
+msgstr ""
+"IMDB использует различные серверы. "
+"Пожалуйста, выберите тот, кторый вы "
+"хотите использовать"
+
+#: fetch/imdbfetcher.cpp:1087
+msgid "&Maximum cast: "
+msgstr "&Максимальное кол-во актеров:"
+
+#: fetch/imdbfetcher.cpp:1092
+msgid ""
+"The list of cast members may include many people. Set the maximum number "
+"returned from the search."
+msgstr ""
+"Список актреров может содержать много "
+"людей. Введите максимальное число "
+"актеров, возвращаемое поиском."
+
+#: fetch/imdbfetcher.cpp:1097
+msgid "Download cover &image"
+msgstr "Скачать изображение обложки"
+
+#: fetch/ibsfetcher.cpp:45
+msgid "Internet Bookshop (ibs.it)"
+msgstr "Интернет-магазин книг (ibs.it)"
+
+#: fetch/fetchmanager.cpp:63
+msgid "Person"
+msgstr "Человек"
+
+#: fetch/fetchmanager.cpp:64
+msgid "ISBN"
+msgstr "ISBN"
+
+#: fetch/fetchmanager.cpp:65
+msgid "UPC"
+msgstr "UPC"
+
+#: fetch/fetchmanager.cpp:66
+msgid "Keyword"
+msgstr "Ключевые слова"
+
+#: fetch/fetchmanager.cpp:67
+msgid "Raw Query"
+msgstr "Raw Query"
+
+#: fetch/animenfofetcher.cpp:256
+msgid "Original Title"
+msgstr "Оригинальный заголовок"
+
+#: fetch/animenfofetcher.cpp:263
+msgid "Distributor"
+msgstr "Распространитель"
+
+#: fetch/animenfofetcher.cpp:269
+msgid "Episodes"
+msgstr "Эпизоды"
+
+#: newstuff/dialog.cpp:93
+msgid "Get Hot New Stuff"
+msgstr ""
+
+#: newstuff/dialog.cpp:113
+#, fuzzy
+msgid "Version"
+msgstr "Человек"
+
+#: newstuff/dialog.cpp:115
+msgid "Downloads"
+msgstr ""
+
+#: newstuff/dialog.cpp:116
+#, fuzzy
+msgid "Release Date"
+msgstr "Год выпуска"
+
+#: newstuff/dialog.cpp:120
+msgid ""
+"This is a list of all the items available for download. Previously installed "
+"items have a checkmark icon, while items with new version available have an "
+"update icon"
+msgstr ""
+
+#: newstuff/dialog.cpp:136
+#, fuzzy
+msgid "The name and license of the selected item"
+msgstr "Вернуть из долга выделенные вещи"
+
+#: newstuff/dialog.cpp:139
+#, fuzzy
+msgid "The author of the selected item"
+msgstr "Отдать выделенные записи в долг"
+
+#: newstuff/dialog.cpp:141 newstuff/dialog.cpp:395
+msgid "Install"
+msgstr ""
+
+#: newstuff/dialog.cpp:160
+msgid "Download and install the selected template."
+msgstr ""
+
+#: newstuff/dialog.cpp:163
+msgid ""
+"Download and install the selected script. Some scripts may need to be "
+"configured after being installed."
+msgstr ""
+
+#: newstuff/dialog.cpp:193
+#, fuzzy
+msgid "A description of the selected item is shown here."
+msgstr "Вернуть из долга выделенные вещи"
+
+#: newstuff/dialog.cpp:223
+#, fuzzy
+msgid "Downloading information..."
+msgstr ""
+"Импорт информации об Audio CD из базы данных "
+"FreeDB"
+
+#: controller.cpp:131 fetchdialog.cpp:214 fetchdialog.cpp:292
+#: fetchdialog.cpp:360 fetchdialog.cpp:415 newstuff/dialog.cpp:296
+#: newstuff/dialog.cpp:323 newstuff/dialog.cpp:431 statusbar.cpp:82
+msgid "Ready."
+msgstr "Готово."
+
+#: newstuff/dialog.cpp:395
+msgid ""
+"_: Update Stuff\n"
+"Update"
+msgstr ""
+
+#: newstuff/dialog.cpp:412
+#, fuzzy
+msgid "Installing item..."
+msgstr "Сохранение файла...."
+
+#: translators/bibteximporter.cpp:58
+#, c-format
+msgid "No valid bibtex entries were found in file - %1"
+msgstr "Не найдено записей bibtex в этом файле - %1"
+
+#: translators/alexandriaexporter.cpp:41
+msgid "Alexandria"
+msgstr "Alexandria"
+
+#: translators/alexandriaexporter.cpp:63
+msgid ""
+"<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
+"books in that library could be overwritten.</qt>"
+msgstr ""
+"<qt>Библиотека Alexandria <i>%1</i> уже существует. "
+"Любая существующая книга в этой "
+"библиотеке будет переписана.</qt>"
+
+#: filehandler.cpp:138 translators/tellicoimporter.cpp:106
+#: translators/xmlimporter.cpp:42 translators/xmlimporter.cpp:56
+msgid "There is an XML parsing error in line %1, column %2."
+msgstr ""
+"Произошла ошибка XML в линии %1 и столбце %2"
+
+#: filehandler.cpp:140 translators/tellicoimporter.cpp:108
+#: translators/xmlimporter.cpp:44 translators/xmlimporter.cpp:58
+msgid "The error message from Qt is:"
+msgstr "Ошибка от QT:"
+
+#: translators/tellicoimporter.cpp:144
+msgid "It is from a future version of Tellico."
+msgstr "Из будущей версии Tellico"
+
+#: translators/tellicoimporter.cpp:150
+msgid ""
+"Tellico is converting the file to a more recent document format. Information "
+"loss may occur if an older version of Tellico is used to read this file in "
+"the future."
+msgstr ""
+"Вы пытаетесь импортировать информацию из "
+"файлов, созданных более ранними версиями "
+"Tellico. Это может привести к потере "
+"информации."
+
+#: translators/bibtexhandler.cpp:244 translators/risimporter.cpp:263
+#: translators/risimporter.cpp:267 translators/tellicoimporter.cpp:328
+msgid "Unknown"
+msgstr "Неизвестный"
+
+#: translators/tellicoimporter.cpp:706
+msgid "The file is empty."
+msgstr "Файл пустой"
+
+#: translators/tellicoimporter.cpp:724
+msgid "The file contains no collection data."
+msgstr "Файл не содержит данных коллекций"
+
+#: translators/tellicoimporter.cpp:868
+msgid "Unread Books"
+msgstr "Непрочитанные книги"
+
+#: translators/tellicoimporter.cpp:878
+msgid "Old Movies"
+msgstr "Старые фильмы"
+
+#: translators/tellicoimporter.cpp:896
+msgid "80's Music"
+msgstr "Музыка 80-х"
+
+#: translators/tellicoimporter.cpp:908
+msgid "Favorites"
+msgstr "Избранное"
+
+#: translators/audiofileimporter.cpp:65
+msgid "Scanning audio files..."
+msgstr "Читаются аудио-файлы..."
 
 #: translators/audiofileimporter.cpp:153 xslt.cpp:4
 msgid "(Various)"
 msgstr "(переменный)"
 
-#: xslt.cpp:5
-msgid "Total:"
-msgstr "&Всего:"
+#: translators/audiofileimporter.cpp:300
+msgid "Audio File Options"
+msgstr "Опции аудио-файлов"
 
-#: xslt.cpp:7
-msgid ""
-"_: Fancy XSL Template\n"
-"Fancy"
-msgstr "Обычный"
+#: translators/audiofileimporter.cpp:302
+msgid "Recursive &folder search"
+msgstr "Рекурсивный поиск по каталогам"
 
-#: xslt.cpp:9
-msgid ""
-"_: Default XSL Template\n"
-"Default"
-msgstr "По умолчанию"
-
-#: xslt.cpp:11
-msgid ""
-"_: Compact XSL Template\n"
-"Compact"
-msgstr "Компактный"
-
-#: xslt.cpp:13
-msgid ""
-"_: Video XSL Template\n"
-"Video"
-msgstr "Видео"
-
-#: xslt.cpp:14 xslt.cpp:43
-msgid "This template is meant for video collections only."
+#: translators/audiofileimporter.cpp:303
+msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
-"Этот шаблон предназначен только для "
-"коллекций фильмов"
+"Если отмечено, то поиск аудио-файлов "
+"будет производить по всем каталогам"
 
-#: xslt.cpp:16
+#: translators/audiofileimporter.cpp:307
+msgid "&Include file location"
+msgstr "&Включать местоположение файла"
+
+#: translators/audiofileimporter.cpp:308
+msgid "If checked, the file names for each track are added to the entries."
+msgstr ""
+"Если отмечено, то в записи будет "
+"добавлены названия файлов"
+
+#: translators/csvexporter.cpp:40
+msgid "CSV"
+msgstr "CSV"
+
+#: importdialog.cpp:213 translators/csvexporter.cpp:44
+msgid "*.csv|CSV Files (*.csv)"
+msgstr "*.csv|Файлы CSV (*.csv)"
+
+#: configdialog.cpp:1005 importdialog.cpp:245 mainwindow.cpp:1055
+#: mainwindow.cpp:1213 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
+#: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
+#: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:87
+#: translators/onixexporter.cpp:66 translators/pilotdbexporter.cpp:47
+#: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
+#: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:86
+msgid "*|All Files"
+msgstr "*|Все файлы"
+
+#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:166
+msgid "CSV Options"
+msgstr "Опции CSV"
+
+#: translators/csvexporter.cpp:112
+msgid "Include field titles as column headers"
+msgstr "Вместе с заголовками столбцов"
+
+#: translators/csvexporter.cpp:114
+msgid "If checked, a header row will be added with the field titles."
+msgstr ""
+"Если отмечено, то будет добавлена первая "
+"строка в качестве заголовка"
+
+#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:185
+msgid "Delimiter"
+msgstr "Ограничитель"
+
+#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:188
 msgid ""
-"_: Image List XSL Template\n"
-"Image List"
-msgstr "Список изображений"
+"In addition to a comma, other characters may be used as a delimiter, "
+"separating each value in the file."
+msgstr ""
+"Выберите ограничитель в файле CSV, который "
+"определяет граници каждого поля (В "
+"большинстве случаев запятая)"
 
-#: xslt.cpp:18
+#: translators/csvexporter.cpp:124
+msgid "Comma"
+msgstr "Запятая"
+
+#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:195
+msgid "Use a comma as the delimiter."
+msgstr "Использовать запятую как разделитель"
+
+#: translators/csvexporter.cpp:130
+msgid "Semicolon"
+msgstr "Точка с запятой"
+
+#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:200
+msgid "Use a semi-colon as the delimiter."
+msgstr ""
+"Использовать точку с запятой как "
+"разделитель"
+
+#: translators/csvexporter.cpp:135
+msgid "Tab"
+msgstr "Tab"
+
+#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:205
+msgid "Use a tab as the delimiter."
+msgstr "Использовать \"Tab\" как разделитель"
+
+#: translators/csvexporter.cpp:140
+msgid "Other"
+msgstr "Другой"
+
+#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:210
+msgid "Use a custom string as the delimiter."
+msgstr "Использовать другой разделить"
+
+#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:216
+msgid "A custom string, such as a colon, may be used as a delimiter."
+msgstr "Свой разделитель (напр, двоеточие)"
+
+#: translators/filelistingimporter.cpp:62
+msgid "Scanning files..."
+msgstr "Сканируются файлы..."
+
+#: translators/filelistingimporter.cpp:197
+msgid "File Listing Options"
+msgstr "Опции импортирования файлов"
+
+#: translators/filelistingimporter.cpp:199
+msgid "Recursive folder search"
+msgstr "Рекурсивный поиск по каталогам"
+
+#: translators/filelistingimporter.cpp:200
+msgid "If checked, folders are recursively searched for all files."
+msgstr ""
+"Если отмечено, будет произведен "
+"рекурсивный поиск по каталогам."
+
+#: translators/filelistingimporter.cpp:204
+msgid "Generate file previews"
+msgstr "Создавать значки файлов"
+
+#: translators/filelistingimporter.cpp:205
 msgid ""
-"_: Loan View XSL Template\n"
-"Loan View"
-msgstr "Долги"
+"If checked, previews of the file contents are generated, which can slow down "
+"the folder listing."
+msgstr ""
+"Если отмечено, то будут создаваться "
+"значки файлов (например, уменьшенная "
+"копия фотографии)."
 
-#: loanview.cpp:32 loanview.cpp:90 xslt.cpp:19
-msgid "Borrower"
-msgstr "Должник"
+#: translators/onixexporter.cpp:62
+msgid "ONIX Archive"
+msgstr "Архив ONIX"
 
-#: xslt.cpp:20 xslt.cpp:22
-msgid "Loan Date"
-msgstr "Дата дачи в долг"
+#: translators/onixexporter.cpp:66
+msgid "*.zip|Zip Files (*.zip)"
+msgstr "*.zip|Файлы ZIP (*.zip)"
 
-#: xslt.cpp:21 xslt.cpp:24
-msgid "Note"
-msgstr "Заметки"
+#: translators/onixexporter.cpp:175
+msgid "ONIX Archive Options"
+msgstr "Опции архива ONIX"
 
-#: xslt.cpp:23
-msgid "Due Date"
-msgstr "Дата окончания долга:"
+#: translators/onixexporter.cpp:178
+msgid "Include images in archive"
+msgstr "Включать изображения в архив"
 
-#: xslt.cpp:25 xslt.cpp:39 xslt.cpp:46
+#: translators/onixexporter.cpp:180
+msgid ""
+"If checked, the images in the document will be included in the zipped ONIX "
+"archive."
+msgstr ""
+"Если отмечено, то изображения будут "
+"сжиматься в ZIP-архив ONIX"
+
+#: translators/freedbimporter.cpp:84 translators/freedbimporter.cpp:137
+msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
+msgstr ""
+"<qt>Tellico не удается получить доступ к "
+"устройству CD-ROM - <i>%1</i>.</qt>"
+
+#: translators/freedbimporter.cpp:163
 #, fuzzy
-msgid "Generated by Tellico"
-msgstr "Создан"
+msgid "Select CDDB Entry"
+msgstr "Удалить запись"
 
-#: xslt.cpp:27
-msgid ""
-"_: Title Listing (Horizontal) XSL Template\n"
-"Title Listing (Horizontal)"
-msgstr "Список названий (горизонтальный)"
-
-#: xslt.cpp:29
-msgid ""
-"_: Title Listing (Vertical) XSL Template\n"
-"Title Listing (Vertical)"
-msgstr "Список названий (вертикальный)"
-
-#: xslt.cpp:31
-msgid ""
-"_: Group View XSL Template\n"
-"Group View"
-msgstr "Группы"
-
-#: xslt.cpp:33
-msgid ""
-"_: Column View XSL Template\n"
-"Column View"
-msgstr "Столбцы"
-
-#: xslt.cpp:35
-msgid ""
-"_: Group Summary XSL Template\n"
-"Group Summary"
-msgstr "Всего в группе"
-
-#: xslt.cpp:36
-msgid ": Group Summary"
-msgstr ": Всего в группе"
-
-#: xslt.cpp:37
-msgid "Total number of fields:"
-msgstr "Всего полей:"
-
-#: xslt.cpp:38
-msgid "Total number of entries:"
-msgstr "Всего записей:"
-
-#: xslt.cpp:40
-msgid "Distinct values: "
-msgstr "Точные значения:"
-
-#: xslt.cpp:42
-msgid ""
-"_: Tri-Column XSL Template\n"
-"Tri-Column"
-msgstr "В три столбца"
-
-#: xslt.cpp:44
+#: translators/freedbimporter.cpp:164
 #, fuzzy
-msgid "Search"
-msgstr "&Поиск"
+msgid "Select a CDDB entry:"
+msgstr "Выберите результат IMDB"
 
-#: fetch/srufetcher.cpp:328 z3950.cpp:2
-msgid "Library of Congress (US)"
-msgstr "Библиотека Конгресса (США)"
-
-#: z3950.cpp:4
-msgid "The British Library"
+#: translators/freedbimporter.cpp:187
+msgid "<qt>No records were found to match the CD.</qt>"
 msgstr ""
+"<qt>По вашему запросу ничего не найдено</qt>"
 
-#: z3950.cpp:6
+#: translators/freedbimporter.cpp:205
+msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
+msgstr ""
+"<qt>Tellico не удалось получить данные по "
+"всему диску.</qt>"
+
+#: translators/freedbimporter.cpp:428
+msgid "Various"
+msgstr "Переменный"
+
+#: translators/freedbimporter.cpp:447
+msgid "Audio CD Options"
+msgstr "Опции Audio CD"
+
+#: translators/freedbimporter.cpp:451
+msgid "Read data from CD-ROM device"
+msgstr "Прочитать данные с устройства CD-ROM"
+
+#: translators/freedbimporter.cpp:454
+msgid "Select or input the CD-ROM device location."
+msgstr ""
+"Выберите или введите адрес вашего "
+"устройства CD-ROM"
+
+#: translators/freedbimporter.cpp:460
+msgid "Read all CDDB cache files only"
+msgstr "Прочитать только файлы CDDB"
+
+#: translators/freedbimporter.cpp:461
+msgid ""
+"Read data recursively from all the CDDB cache files contained in the default "
+"cache folders."
+msgstr ""
+"Прочитать рекурсивно данные из файлов CDDB"
+
+#: importdialog.cpp:272 translators/gcfilmsexporter.cpp:37
+msgid "GCfilms"
+msgstr "GCfilms"
+
+#: importdialog.cpp:230 translators/gcfilmsexporter.cpp:41
+msgid "*.gcf|GCfilms Data Files (*.gcf)"
+msgstr "*.gcf|Файлы GCfilms(*.gcf)"
+
+#: translators/xsltexporter.cpp:37
+msgid "XSLT"
+msgstr "XSLT"
+
+#: translators/xsltexporter.cpp:69 translators/xsltimporter.cpp:79
+msgid "XSLT Options"
+msgstr "Опции XSLT"
+
+#: translators/xsltexporter.cpp:74 translators/xsltimporter.cpp:82
+msgid "XSLT file:"
+msgstr "Файл XSLT"
+
+#: translators/xsltexporter.cpp:76
+msgid "Choose the XSLT file used to transform the Tellico XML data."
+msgstr ""
+"Выберите файл XSLT, который будет "
+"использоваться для перевода в формат Tellico "
+"XML"
+
+#: translators/alexandriaimporter.cpp:178
+msgid "Alexandria Options"
+msgstr "Опции Alexandria"
+
+#: translators/alexandriaimporter.cpp:179
+msgid "&Library:"
+msgstr "&Библиотека:"
+
+#: importdialog.cpp:268 translators/bibtexmlexporter.cpp:36
+msgid "Bibtexml"
+msgstr "Bibtexml"
+
+#: translators/bibtexmlexporter.cpp:40
+msgid "*.xml|Bibtexml Files (*.xml)"
+msgstr "*.xml|Файлы Bibtexml (*.xml)"
+
+#: translators/tellicoxmlexporter.cpp:56
+msgid "XML"
+msgstr "XML"
+
+#: importdialog.cpp:205 importdialog.cpp:218 importdialog.cpp:222
+#: mainwindow.cpp:1053 translators/tellicoxmlexporter.cpp:60
+msgid "*.xml|XML Files (*.xml)"
+msgstr "*.xml|Файлы XML (*.xml)"
+
+#: translators/tellicoxmlexporter.cpp:464
+msgid "Tellico XML Options"
+msgstr "Опции XML (Tellico)"
+
+#: translators/tellicoxmlexporter.cpp:467
+msgid "Include images in XML document"
+msgstr "Включать изображения в файл XML"
+
+#: translators/tellicoxmlexporter.cpp:469
+msgid ""
+"If checked, the images in the document will be included in the XML stream as "
+"base64 encoded elements."
+msgstr ""
+"Если отмечено, то изображения будут "
+"включены в файл XML"
+
+#: translators/importer.h:90
+msgid "Loading data..."
+msgstr "Загружаются данные..."
+
+#: translators/importer.h:90
+msgid "Loading %1..."
+msgstr "Загружается %1..."
+
+#: importdialog.cpp:267 translators/bibtexexporter.cpp:48
+msgid "Bibtex"
+msgstr "Bibtex"
+
+#: importdialog.cpp:209 translators/bibtexexporter.cpp:52
+msgid "*.bib|Bibtex Files (*.bib)"
+msgstr "*.bib|Файлы Bibtex (*.bib)"
+
+#: translators/bibtexexporter.cpp:201
+msgid "Bibtex Options"
+msgstr "Опции Bibtex"
+
+#: translators/bibtexexporter.cpp:204
+msgid "Expand string macros"
+msgstr "Увеличить строку для макросов"
+
+#: translators/bibtexexporter.cpp:206
+msgid ""
+"If checked, the string macros will be expanded and no @string{} entries will "
+"be written."
+msgstr ""
+"Если отмечено, то строка для макросов "
+"будет увеличена и записи @string{} будут "
+"записаны"
+
+#: translators/bibtexexporter.cpp:209
+msgid "Use URL package"
+msgstr "Использовать пакеты URL"
+
+#: translators/bibtexexporter.cpp:211
+msgid "If checked, any URL fields will be wrapped in a \\url declaration."
+msgstr ""
+"Если отмечено, то любые поля URL будут "
+"записаны как //url"
+
+#: translators/bibtexexporter.cpp:214
+msgid "Skip entries with empty citation keys"
+msgstr "Пропустить пустые поля"
+
+#: translators/bibtexexporter.cpp:216
+msgid "If checked, any entries without a bibtex citation key will be skipped."
+msgstr ""
+"Если отмечено, то пустые поля будут "
+"пропущены"
+
+#: translators/bibtexexporter.cpp:220
+msgid "Bibtex quotation style:"
+msgstr "Стиль цинирования bibtex:"
+
+#: translators/bibtexexporter.cpp:222 translators/bibtexexporter.cpp:229
+#: translators/bibtexexporter.cpp:260
+msgid "Braces"
+msgstr "Связи"
+
+#: translators/bibtexexporter.cpp:223 translators/bibtexexporter.cpp:231
+msgid "Quotes"
+msgstr "Цитаты"
+
+#: translators/bibtexexporter.cpp:224
+msgid ""
+"<qt>The quotation style used when exporting bibtex. All field values will  "
+"be escaped with either braces or quotation marks.</qt>"
+msgstr ""
+"<qt>При экспорте будет использоваться "
+"стиль цитирования bibtex.</qt>"
+
+#: translators/tellicozipexporter.cpp:35
+msgid "Tellico Zip File"
+msgstr "ZIP-файл Tellico"
+
+#: importdialog.cpp:204 mainwindow.cpp:1051 mainwindow.cpp:1211
+#: translators/tellicozipexporter.cpp:39
+msgid "*.tc *.bc|Tellico Files (*.tc)"
+msgstr "*.tc *.bc|Файлы Tellico (*.tc, *bc)"
+
+#: translators/csvimporter.cpp:174
+msgid "Select the type of collection being imported."
+msgstr ""
+"Выберите тип коллеции, который будет "
+"импортирован"
+
+#: translators/csvimporter.cpp:180
+msgid "&First row contains field titles"
+msgstr ""
+"&Первая строка содержит заголовки полей"
+
+#: translators/csvimporter.cpp:181
+msgid "If checked, the first row is used as field titles."
+msgstr ""
+"Первая строка содержит заголовки полей"
+
+#: translators/csvimporter.cpp:193
+msgid "&Comma"
+msgstr "Запятая"
+
+#: translators/csvimporter.cpp:199
+msgid "&Semicolon"
+msgstr "Точка с запятой"
+
+#: translators/csvimporter.cpp:204
+msgid "Ta&b"
+msgstr "Tab"
+
+#: translators/csvimporter.cpp:209
+msgid "Ot&her:"
+msgstr "Другой:"
+
+#: translators/csvimporter.cpp:233
+msgid "The table shows up to the first five lines of the CSV file."
+msgstr ""
+"Таблица показывает первые 5 строк файла CSV"
+
+#: translators/csvimporter.cpp:240
 #, fuzzy
-msgid "Sudoc (France)"
-msgstr "Amazon (Франция)"
+msgid ""
+"<qt>Set each column to correspond to a field in the collection by choosing a "
+"column, selecting the field, then clicking the <i>Assign Field</i> "
+"button.</qt>"
+msgstr ""
+"<qt>Вы можете назначить каждому столбцу "
+"свое название. Просто выделите поле и "
+"нажмите на кнопку <i>Установить</i></qt>"
 
-#: z3950.cpp:8
-msgid "BIBSYS (Norway)"
+#: translators/csvimporter.cpp:242
+msgid "Co&lumn:"
+msgstr "Столбец"
+
+#: translators/csvimporter.cpp:251
+msgid "&Data field in this column:"
+msgstr "Название поля в этом столбце:"
+
+#: translators/csvimporter.cpp:259
+msgid "&Assign Field"
+msgstr "&Добавить поле"
+
+#: collectionfieldsdialog.cpp:394 collectionfieldsdialog.cpp:397
+#: translators/csvimporter.cpp:410 translators/csvimporter.cpp:513
+msgid "New Field"
+msgstr "Новое поле"
+
+#: translators/risimporter.cpp:265
+msgid "PDF"
+msgstr "PDF"
+
+#: translators/pilotdbexporter.cpp:43
+msgid "PilotDB"
+msgstr "PilotDB"
+
+#: translators/pilotdbexporter.cpp:47
+msgid "*.pdb|Pilot Database Files(*.pdb)"
+msgstr "*.pdb|Файлы базы данных Pilot(*.pdb)"
+
+#: detailedlistview.cpp:67 detailedlistview.cpp:296
+#: translators/pilotdbexporter.cpp:143
+msgid "View Columns"
+msgstr "Показывать столбцы"
+
+#: translators/pilotdbexporter.cpp:210
+msgid "PilotDB Options"
+msgstr "Опции PilotDB"
+
+#: translators/pilotdbexporter.cpp:213 translators/pilotdbexporter.cpp:215
+msgid "Set PDA backup flag for database"
+msgstr "Установить бэкап PDA для базы данных"
+
+#: translators/gcfilmsimporter.cpp:85
+msgid "<qt>The file is not a valid GCfilms data file.</qt>"
+msgstr "<qt>Этот файл не содержит данных GCFilms.</qt>"
+
+#: translators/xsltimporter.cpp:45 translators/xsltimporter.cpp:51
+msgid "A valid XSLT file is needed to import the file."
+msgstr "Для импорта нужен правильный файл XSLT"
+
+#: mainwindow.cpp:1696 translators/xsltimporter.cpp:57
+msgid "Tellico encountered an error in XSLT processing."
+msgstr "Произошла ошибка в XSLT"
+
+#: configdialog.cpp:1003 translators/xsltimporter.cpp:85
+msgid "*.xsl|XSL Files (*.xsl)"
+msgstr "*.xsl|Файлы XSL (*.xsl)"
+
+#: translators/htmlexporter.cpp:83
+msgid "HTML"
+msgstr "HTML"
+
+#: reportdialog.cpp:195 translators/htmlexporter.cpp:87
+msgid "*.html|HTML Files (*.html)"
+msgstr "*.html|Файлы HTML (*.html)"
+
+#: groupview.cpp:463 mainwindow.cpp:1549 mainwindow.cpp:1589
+#: translators/htmlexporter.cpp:314
+msgid "People"
+msgstr "Люди"
+
+#: translators/htmlexporter.cpp:318
+msgid "(grouped by %1)"
+msgstr "(сгруппировано по %1)"
+
+#: translators/htmlexporter.cpp:463
+msgid "HTML Options"
+msgstr "Опции HTML"
+
+#: translators/htmlexporter.cpp:466
+msgid "Print field headers"
+msgstr "Включить заголовки полей"
+
+#: configdialog.cpp:299 translators/htmlexporter.cpp:467
+msgid "If checked, the field names will be printed as table headers."
+msgstr ""
+"Если отмечено, то при экспорте в HTML будут "
+"напечатаны заголовки."
+
+#: translators/htmlexporter.cpp:471
+msgid "Group the entries"
+msgstr "Группировать записи"
+
+#: configdialog.cpp:306 translators/htmlexporter.cpp:472
+msgid "If checked, the entries will be grouped by the selected field."
+msgstr ""
+"Если отмечено, то записи будут "
+"сгруппированы по выделенному полю"
+
+#: translators/htmlexporter.cpp:476
+msgid "Export individual entry files"
+msgstr ""
+"Экспорт каждой записи в отдельный файл"
+
+#: translators/htmlexporter.cpp:477
+msgid "If checked, individual files will be created for each entry."
+msgstr ""
+"Если отмечено, то каждая запись будет "
+"выводиться в отдельный файл."
+
+#: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
+msgid "Data Source Properties"
+msgstr "Свойства источника данных"
+
+#: fetcherconfigdialog.cpp:77
+msgid "&Source name: "
+msgstr "Н&азвание источника"
+
+#: fetcherconfigdialog.cpp:79
+msgid ""
+"The name identifies the data source and should be unique and informative."
+msgstr "Название источника"
+
+#: fetcherconfigdialog.cpp:90 fetcherconfigdialog.cpp:94
+msgid "Source &type: "
+msgstr "&Тип источника"
+
+#: fetcherconfigdialog.cpp:97
+msgid "Tellico supports several different data sources."
+msgstr ""
+"Tellico также поддерживает другие источники "
+"данных"
+
+#: fetcherconfigdialog.cpp:111
+msgid "Updating from source should overwrite user data"
 msgstr ""
 
-#: z3950.cpp:10
-msgid "Italian National Library"
+#: fetcherconfigdialog.cpp:114
+#, fuzzy
+msgid "If checked, updating entries will overwrite any existing information."
 msgstr ""
-
-#: z3950.cpp:12
-msgid "Portuguese National Library"
-msgstr ""
-
-#: z3950.cpp:14
-msgid "National Library of Poland"
-msgstr ""
-
-#: z3950.cpp:16
-msgid "National Library of Canada"
-msgstr ""
-
-#: z3950.cpp:18
-msgid "Israel Union List"
-msgstr ""
-
-#: z3950.cpp:20
-msgid "National Library of Australia"
-msgstr ""
-
-#: scripts.cpp:2
-msgid "Dark Horse Comics"
-msgstr ""
-
-#: scripts.cpp:4
-msgid "Allocine.fr"
-msgstr ""
-
-#: scripts.cpp:6
-msgid "Spanish Ministry of Culture"
-msgstr ""
+"Если отмечено, то записи будут "
+"сгруппированы по выделенному полю"
 
 #: filterdialog.cpp:60
 msgid "Any Field"
@@ -434,10 +2428,6 @@ msgstr "Редактировать..."
 msgid "Advanced Filter"
 msgstr "Продвинутый фильтр"
 
-#: commands/filtercommand.cpp:100 filterdialog.cpp:282 filterview.cpp:67
-msgid "Modify Filter"
-msgstr "Редактировать фильтр"
-
 #: filterdialog.cpp:294
 msgid "Filter Criteria"
 msgstr "Критерии фильтра"
@@ -458,19 +2448,6 @@ msgstr "Название фильтра"
 msgid "&Save Filter"
 msgstr "&Сохранить фильтр"
 
-#: collectionfactory.cpp:78 collections/bibtexcollection.cpp:24
-#: collections/bibtexcollection.cpp:59 collections/bibtexcollection.cpp:89
-#: collections/bookcollection.cpp:19 collections/bookcollection.cpp:41
-#: collections/cardcollection.cpp:19 collections/coincollection.cpp:19
-#: collections/comicbookcollection.cpp:19 collections/filecatalog.cpp:19
-#: collections/gamecollection.cpp:19 collections/musiccollection.cpp:19
-#: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
-#: collections/videocollection.cpp:41 collections/winecollection.cpp:19
-#: configdialog.cpp:191 fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:910
-#: field.cpp:39 field.cpp:71 translators/gcfilmsimporter.cpp:54
-msgid "General"
-msgstr "Общие"
-
 #: field.cpp:425
 msgid "Simple Text"
 msgstr "Простой текст"
@@ -487,23 +2464,9 @@ msgstr "Выбор"
 msgid "Checkbox"
 msgstr "Выбор да/нет"
 
-#: collections/bibtexcollection.cpp:173 field.cpp:429
-msgid "Number"
-msgstr "Номер"
-
-#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:395
-#: fetch/entrezfetcher.cpp:464 field.cpp:430
-#: translators/gcfilmsimporter.cpp:53 translators/risimporter.cpp:261
-msgid "URL"
-msgstr "URL"
-
 #: field.cpp:431
 msgid "Table"
 msgstr "Таблица"
-
-#: collections/stampcollection.cpp:124 field.cpp:432
-msgid "Image"
-msgstr "Изображение"
 
 #: field.cpp:433
 msgid "Dependent"
@@ -513,10 +2476,34 @@ msgstr "Зависимость"
 msgid "Date"
 msgstr "Дата"
 
-#: collections/bookcollection.cpp:158 collections/musiccollection.cpp:82
-#: collections/winecollection.cpp:103 field.cpp:436 newstuff/dialog.cpp:114
-msgid "Rating"
-msgstr "Рейтинг"
+#: entryupdater.cpp:82
+msgid "Updating %1..."
+msgstr "Обновление %1..."
+
+#: entryupdater.cpp:84
+msgid "Updating entries..."
+msgstr "&Обновление записей..."
+
+#: entryupdater.cpp:86
+#, fuzzy
+msgid "Update Entries"
+msgstr "&Обновить записи"
+
+#: entryupdater.cpp:100
+msgid "Updating <b>%1</b>..."
+msgstr "Обновление <b>%1</b>..."
+
+#: entryupdater.cpp:210
+msgid "Select Match"
+msgstr "Выберите результат"
+
+#: entryupdater.cpp:218
+msgid ""
+"<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
+"entry currently in the collection. Please select the correct match.</qt>"
+msgstr ""
+"<qt> Поиск дал несколько результатов. "
+"Выберите то, который необходим вам.</qt>"
 
 #: groupview.cpp:250
 msgid "Expand All Groups"
@@ -539,11 +2526,6 @@ msgid ""
 "_: Group Name Header\n"
 "Group"
 msgstr "Группа"
-
-#: groupview.cpp:463 mainwindow.cpp:1546 mainwindow.cpp:1586
-#: translators/htmlexporter.cpp:314
-msgid "People"
-msgstr "Люди"
 
 #: importdialog.cpp:50 importdialog.cpp:56
 msgid "Import Options"
@@ -589,54 +2571,14 @@ msgstr ""
 "текущей коллекции. Возможно только, если "
 "типы коллекций совпадают."
 
-#: importdialog.cpp:204 mainwindow.cpp:1049 mainwindow.cpp:1208
-#: translators/tellicozipexporter.cpp:39
-msgid "*.tc *.bc|Tellico Files (*.tc)"
-msgstr "*.tc *.bc|Файлы Tellico (*.tc, *bc)"
-
-#: importdialog.cpp:205 importdialog.cpp:218 importdialog.cpp:222
-#: mainwindow.cpp:1051 translators/tellicoxmlexporter.cpp:60
-msgid "*.xml|XML Files (*.xml)"
-msgstr "*.xml|Файлы XML (*.xml)"
-
-#: importdialog.cpp:209 translators/bibtexexporter.cpp:52
-msgid "*.bib|Bibtex Files (*.bib)"
-msgstr "*.bib|Файлы Bibtex (*.bib)"
-
-#: importdialog.cpp:213 translators/csvexporter.cpp:44
-msgid "*.csv|CSV Files (*.csv)"
-msgstr "*.csv|Файлы CSV (*.csv)"
-
 #: importdialog.cpp:226
 msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.ris|Файлы RIS (*.ris)"
-
-#: importdialog.cpp:230 translators/gcfilmsexporter.cpp:41
-msgid "*.gcf|GCfilms Data Files (*.gcf)"
-msgstr "*.gcf|Файлы GCfilms(*.gcf)"
 
 #: importdialog.cpp:234
 #, fuzzy
 msgid "*.amc|AMC Data Files (*.amc)"
 msgstr "*.gcf|Файлы GCfilms(*.gcf)"
-
-#: configdialog.cpp:1005 importdialog.cpp:245 mainwindow.cpp:1053
-#: mainwindow.cpp:1210 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
-#: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
-#: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:87
-#: translators/onixexporter.cpp:66 translators/pilotdbexporter.cpp:47
-#: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
-#: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:86
-msgid "*|All Files"
-msgstr "*|Все файлы"
-
-#: importdialog.cpp:267 translators/bibtexexporter.cpp:48
-msgid "Bibtex"
-msgstr "Bibtex"
-
-#: importdialog.cpp:268 translators/bibtexmlexporter.cpp:36
-msgid "Bibtexml"
-msgstr "Bibtexml"
 
 #: importdialog.cpp:270
 msgid "MODS"
@@ -646,93 +2588,9 @@ msgstr "MODS"
 msgid "RIS"
 msgstr "RIS"
 
-#: importdialog.cpp:272 translators/gcfilmsexporter.cpp:37
-msgid "GCfilms"
-msgstr "GCfilms"
-
 #: importdialog.cpp:273
 msgid "AMC"
 msgstr ""
-
-#: detailedlistview.cpp:67 detailedlistview.cpp:296
-#: translators/pilotdbexporter.cpp:143
-msgid "View Columns"
-msgstr "Показывать столбцы"
-
-#: gui/tablefieldwidget.cpp:180
-msgid "Rename Column"
-msgstr "Переименовать столбец"
-
-#: gui/tablefieldwidget.cpp:180
-msgid "New column name:"
-msgstr "Новое название столбца:"
-
-#: gui/tablefieldwidget.cpp:205
-#, c-format
-msgid "Column %1"
-msgstr "Столбец %1"
-
-#: gui/tablefieldwidget.cpp:240 gui/tablefieldwidget.cpp:288
-msgid "Rename Column..."
-msgstr "&Переименовать столбец"
-
-#: gui/tablefieldwidget.cpp:273
-msgid "Insert Row"
-msgstr "Вставить строку"
-
-#: gui/tablefieldwidget.cpp:275
-msgid "Remove Row"
-msgstr "Удалить строку"
-
-#: gui/tablefieldwidget.cpp:277
-msgid "Move Row Up"
-msgstr "Переместить строку вверх"
-
-#: gui/tablefieldwidget.cpp:282
-msgid "Move Row Down"
-msgstr "Переместить строку вниз"
-
-#: gui/tablefieldwidget.cpp:294
-#, fuzzy
-msgid "Clear Table"
-msgstr "Очистить фильтр"
-
-#: gui/stringmapdialog.cpp:57
-msgid "&Set"
-msgstr "&Установить"
-
-#: gui/fieldwidget.cpp:102 gui/fieldwidget.cpp:196
-msgid ""
-"_: Edit Label\n"
-"%1:"
-msgstr "%1:"
-
-#: gui/kwidgetlister.cpp:58
-msgid ""
-"_: more widgets\n"
-"More"
-msgstr "Больше"
-
-#: gui/kwidgetlister.cpp:62
-msgid ""
-"_: fewer widgets\n"
-"Fewer"
-msgstr "Меньше"
-
-#: gui/kwidgetlister.cpp:69
-msgid ""
-"_: clear widgets\n"
-"Clear"
-msgstr "Очистить"
-
-#: gui/imagewidget.cpp:52
-msgid "Select Image..."
-msgstr "Выбрать изображение..."
-
-#: gui/previewdialog.cpp:27
-#, fuzzy
-msgid "Template Preview"
-msgstr "Шаблоны"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -777,10 +2635,6 @@ msgstr ""
 #: loandialog.cpp:40
 msgid "Loan Dialog"
 msgstr "Отдать в долг"
-
-#: commands/modifyloans.cpp:75 loandialog.cpp:46
-msgid "Modify Loan"
-msgstr "Редактировать долг"
 
 #: loandialog.cpp:78
 msgid "The following items are being checked out:"
@@ -851,10 +2705,6 @@ msgstr ""
 "<qt>Если отмечено, то запись о долге будет "
 "добавлена в календарь KOrganizer</qt>"
 
-#: collections/bookcollection.cpp:137 mainwindow.cpp:191
-msgid "New"
-msgstr "Новая"
-
 #: mainwindow.cpp:194
 msgid "Create a new collection"
 msgstr "Создать новую коллекцию"
@@ -900,44 +2750,44 @@ msgid "Create a new music collection"
 msgstr "Создать новую коллекцию музыки"
 
 #: mainwindow.cpp:238
-msgid "New &Game Collection"
-msgstr "Новая коллекция &игр"
-
-#: mainwindow.cpp:240
-msgid "Create a new game collection"
-msgstr "Создать новую коллекцию игр"
-
-#: mainwindow.cpp:246
-msgid "New C&ard Collection"
-msgstr "Новая коллекция к&арточек"
-
-#: mainwindow.cpp:248
-msgid "Create a new trading card collection"
-msgstr "Создать новую коллекцию карточек"
-
-#: mainwindow.cpp:254
 msgid "New C&oin Collection"
 msgstr "Новая коллекция &монет"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:240
 msgid "Create a new coin collection"
 msgstr "Создать новую коллекцию монет"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:246
 msgid "New &Stamp Collection"
 msgstr "Новая коллекция ма&рок"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:248
 msgid "Create a new stamp collection"
 msgstr "Создать новую коллекцию марок"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:254
+msgid "New C&ard Collection"
+msgstr "Новая коллекция к&арточек"
+
+#: mainwindow.cpp:256
+msgid "Create a new trading card collection"
+msgstr "Создать новую коллекцию карточек"
+
+#: mainwindow.cpp:262
 msgid "New &Wine Collection"
 msgstr "Новая коллекция &вин"
 
-#: mainwindow.cpp:272
+#: mainwindow.cpp:264
 msgid "Create a new wine collection"
 msgstr "Создать новую коллекцию вин"
+
+#: mainwindow.cpp:270
+msgid "New &Game Collection"
+msgstr "Новая коллекция &игр"
+
+#: mainwindow.cpp:272
+msgid "Create a new game collection"
+msgstr "Создать новую коллекцию игр"
 
 #: mainwindow.cpp:278
 msgid "New &File Catalog"
@@ -1453,23 +3303,23 @@ msgstr ""
 "<qt><i>Вид в столбцах</i> показывает значение "
 "нескольких полей для каждой записи</qt>"
 
-#: mainwindow.cpp:1015
+#: mainwindow.cpp:1016
 msgid "Creating new document..."
 msgstr "Создание нового документа..."
 
-#: mainwindow.cpp:1046 mainwindow.cpp:1066 mainwindow.cpp:1084
+#: mainwindow.cpp:1048 mainwindow.cpp:1068 mainwindow.cpp:1087
 msgid "Opening file..."
 msgstr "Открытие файла..."
 
-#: mainwindow.cpp:1056
+#: mainwindow.cpp:1058
 msgid "Open File"
 msgstr "Открыть файл"
 
-#: document.cpp:177 mainwindow.cpp:1158
+#: document.cpp:177 mainwindow.cpp:1161
 msgid "Saving file..."
 msgstr "Сохранение файла...."
 
-#: mainwindow.cpp:1168
+#: mainwindow.cpp:1171
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
 "down significantly. Do you want to save the images separately in Tellico's "
@@ -1484,23 +3334,23 @@ msgstr ""
 "(в файл будут записаны только \"текстовые\" "
 "данные)?</p></qt>"
 
-#: mainwindow.cpp:1173
+#: mainwindow.cpp:1176
 msgid "Save Images Separately"
 msgstr "Сохранять изображения отдельно"
 
-#: mainwindow.cpp:1174
+#: mainwindow.cpp:1177
 msgid "Save Images in File"
 msgstr "Сохранять файл вместе с изображениями"
 
-#: mainwindow.cpp:1206
+#: mainwindow.cpp:1209
 msgid "Saving file with a new filename..."
 msgstr "Сохранить файл под другим именем"
 
-#: mainwindow.cpp:1246 mainwindow.cpp:1298
+#: mainwindow.cpp:1249 mainwindow.cpp:1301
 msgid "Printing..."
 msgstr "Печать..."
 
-#: mainwindow.cpp:1255
+#: mainwindow.cpp:1258
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -1509,91 +3359,87 @@ msgstr ""
 "фильтр и будут напечатаны только видимые "
 "поля. Продолжить?"
 
-#: mainwindow.cpp:1281
+#: mainwindow.cpp:1284
 msgid "Processing document..."
 msgstr "Подождите..."
 
-#: mainwindow.cpp:1306
+#: mainwindow.cpp:1309
 msgid "Exiting..."
 msgstr "Выход..."
 
-#: mainwindow.cpp:1446
+#: mainwindow.cpp:1449
 #, c-format
 msgid "Total entries: %1"
 msgstr "Всего записей: %1"
 
-#: mainwindow.cpp:1453
+#: mainwindow.cpp:1456
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 отфильтровано; %2 выделено)"
 
-#: mainwindow.cpp:1456
+#: mainwindow.cpp:1459
 msgid "(%1 filtered)"
 msgstr "(%1 отфильтровано)"
 
-#: mainwindow.cpp:1459
+#: mainwindow.cpp:1462
 msgid "(%1 selected)"
 msgstr "(%1 выделено)"
 
-#: mainwindow.cpp:1634
+#: mainwindow.cpp:1637
 #, c-format
 msgid "Print %1"
 msgstr "Печать %1"
 
-#: mainwindow.cpp:1667
+#: mainwindow.cpp:1670
 #, c-format
 msgid "Page %1"
 msgstr "Страница %1"
 
-#: mainwindow.cpp:1693 translators/xsltimporter.cpp:57
-msgid "Tellico encountered an error in XSLT processing."
-msgstr "Произошла ошибка в XSLT"
-
-#: entryview.cpp:170 mainwindow.cpp:1694
+#: entryview.cpp:170 mainwindow.cpp:1697
 msgid "Please check your installation."
 msgstr ""
 "Пожалуйста, проверьте свою инсталляцию"
 
-#: mainwindow.cpp:1780
+#: mainwindow.cpp:1783
 msgid "Importing data..."
 msgstr "Импорт данных..."
 
-#: mainwindow.cpp:1789
+#: mainwindow.cpp:1792
 msgid "Import File"
 msgstr "Импорт файла"
 
-#: mainwindow.cpp:1795
+#: mainwindow.cpp:1798
 msgid "Import Directory"
 msgstr "Импорт каталога"
 
-#: mainwindow.cpp:1883
+#: mainwindow.cpp:1886
 msgid "Exporting data..."
 msgstr "Экспортирование данных..."
 
-#: mainwindow.cpp:1905
+#: mainwindow.cpp:1908
 msgid "Export As"
 msgstr "Экспорт как"
 
-#: mainwindow.cpp:1934
+#: mainwindow.cpp:1937
 msgid "String Macros"
 msgstr "Строка макросов"
 
-#: mainwindow.cpp:1935
+#: mainwindow.cpp:1938
 msgid "Macro"
 msgstr "Макрос"
 
-#: mainwindow.cpp:1935
+#: mainwindow.cpp:1938
 msgid "String"
 msgstr "Строка"
 
-#: mainwindow.cpp:1998
+#: mainwindow.cpp:2001
 msgid "Creating citations..."
 msgstr "Идет создание..."
 
-#: mainwindow.cpp:2148
+#: mainwindow.cpp:2151
 msgid "Filters"
 msgstr "Фильтры"
 
-#: mainwindow.cpp:2149
+#: mainwindow.cpp:2152
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
 "rules.</qt>"
@@ -1601,11 +3447,11 @@ msgstr ""
 "<qt><i>Вид по фильтру</i> показывает записи "
 "согласно примененному фильтру.</qt>"
 
-#: mainwindow.cpp:2165
+#: mainwindow.cpp:2168
 msgid "Loans"
 msgstr "Долги"
 
-#: mainwindow.cpp:2166
+#: mainwindow.cpp:2169
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
@@ -1614,21 +3460,10 @@ msgstr ""
 "которые что-то взяли в долг из вашей "
 "коллекции.</qt>"
 
-#: mainwindow.cpp:2298
+#: mainwindow.cpp:2301
 #, c-format
 msgid "Update entry data from %1"
 msgstr "Обновить данные записи из \"%1\""
-
-#: filehandler.cpp:138 translators/tellicoimporter.cpp:106
-#: translators/xmlimporter.cpp:42 translators/xmlimporter.cpp:56
-msgid "There is an XML parsing error in line %1, column %2."
-msgstr ""
-"Произошла ошибка XML в линии %1 и столбце %2"
-
-#: filehandler.cpp:140 translators/tellicoimporter.cpp:108
-#: translators/xmlimporter.cpp:44 translators/xmlimporter.cpp:58
-msgid "The error message from Qt is:"
-msgstr "Ошибка от QT:"
 
 #: filehandler.cpp:190
 #, c-format
@@ -1651,110 +3486,9 @@ msgstr "Переписать файл?"
 msgid "Overwrite"
 msgstr "Переписать"
 
-#: commands/filtercommand.cpp:102 filterview.cpp:69
-msgid "Delete Filter"
-msgstr "Удалить фильтр"
-
 #: filterview.cpp:86
 msgid "Filter (Sort by Count)"
 msgstr "Фильтр"
-
-#: commands/modifyentries.cpp:72
-msgid "Modify Entries"
-msgstr "Редактировать записи"
-
-#: commands/modifyentries.cpp:73 commands/updateentries.cpp:60
-#, c-format
-msgid ""
-"_: Modify (Entry Title)\n"
-"Modify %1"
-msgstr "Редактировать %1"
-
-#: commands/fieldcommand.cpp:104
-msgid "Add %1 Field"
-msgstr "Добавить %1 поле"
-
-#: commands/fieldcommand.cpp:106
-msgid "Modify %1 Field"
-msgstr "Редактировать %1 поле"
-
-#: commands/fieldcommand.cpp:108
-msgid "Delete %1 Field"
-msgstr "Удалить %1 поле"
-
-#: commands/renamecollection.cpp:45 tellico_kernel.cpp:322
-msgid "Rename Collection"
-msgstr "Переименовать коллекцию"
-
-#: commands/filtercommand.cpp:98
-msgid "Add Filter"
-msgstr "Добавить фильтр"
-
-#: commands/addloans.cpp:108
-msgid "Check-out Items"
-msgstr "Дать в долг"
-
-#: commands/addloans.cpp:109
-#, c-format
-msgid ""
-"_: Check-out (Entry Title)\n"
-"Check-out %1"
-msgstr "Отдать в долг %1"
-
-#: commands/removeentries.cpp:52
-msgid "Delete Entries"
-msgstr "Удалить записи"
-
-#: commands/removeentries.cpp:53
-#, c-format
-msgid ""
-"_: Delete (Entry Title)\n"
-"Delete %1"
-msgstr "Удалить %1"
-
-#: commands/reorderfields.cpp:52
-msgid "Reorder Fields"
-msgstr "Упорядочить поля"
-
-#: commands/collectioncommand.cpp:93
-msgid "Append Collection"
-msgstr "Добавить коллекцию"
-
-#: commands/collectioncommand.cpp:95
-msgid "Merge Collection"
-msgstr "Соединить коллекцию"
-
-#: commands/collectioncommand.cpp:97
-msgid "Replace Collection"
-msgstr "Переместить коллекцию"
-
-#: commands/removeloans.cpp:79
-msgid "Check-in Entries"
-msgstr "Проверить записи"
-
-#: commands/removeloans.cpp:80
-#, c-format
-msgid ""
-"_: Check-in (Entry Title)\n"
-"Check-in %1"
-msgstr "Вернуть долг %1"
-
-#: commands/addentries.cpp:54
-msgid "Add Entries"
-msgstr "Добавить записи"
-
-#: commands/addentries.cpp:55
-#, c-format
-msgid ""
-"_: Add (Entry Title)\n"
-"Add %1"
-msgstr "Добавить %1"
-
-#: controller.cpp:131 fetchdialog.cpp:214 fetchdialog.cpp:291
-#: fetchdialog.cpp:359 fetchdialog.cpp:414 newstuff/dialog.cpp:296
-#: newstuff/dialog.cpp:323 newstuff/dialog.cpp:431 statusbar.cpp:82
-msgid "Ready."
-msgstr "Готово."
 
 #: controller.cpp:421
 msgid "Do you really want to delete this entry?"
@@ -1800,914 +3534,74 @@ msgid ""
 "of items to lend."
 msgstr "Эти вещи уже были отданы в долг."
 
+#: calendarhandler.cpp:166
+msgid "Default Calendar"
+msgstr "Календарь по умолчанию"
+
+#: calendarhandler.cpp:174
+msgid ""
+"At the moment, Tellico only supports local calendar resources. The active "
+"calendar is remotely located, so your loans will not be added."
+msgstr ""
+"В данный момент Tellico поддерживает только "
+"свой календарь. Текущий календарь "
+"находится не здесь, так что ваши долги не "
+"будут занесены в него."
+
+#: calendarhandler.cpp:179
+msgid "Active Calendar"
+msgstr "Текущий календарь"
+
+#: calendarhandler.cpp:202
+msgid "Tellico: %1 is due to return \"%2\""
+msgstr "Tellico: %1 возвратил \"%2\""
+
 #: collection.cpp:30
 msgid "(Empty)"
 msgstr "(пусто)"
 
-#: collections/bookcollection.cpp:138 collections/comicbookcollection.cpp:123
-#: collections/stampcollection.cpp:20
-msgid "Condition"
-msgstr "Состояние"
+#: main.cpp:23
+msgid "Tellico - a collection manager for KDE"
+msgstr "Tellico - менеджер коллекций для KDE."
 
-#: collections/bookcollection.cpp:22 collections/cardcollection.cpp:20
-#: collections/coincollection.cpp:20 collections/comicbookcollection.cpp:22
-#: collections/gamecollection.cpp:20 collections/musiccollection.cpp:20
-#: collections/stampcollection.cpp:21 collections/videocollection.cpp:22
-#: collections/winecollection.cpp:20 document.cpp:489
-msgid "Personal"
-msgstr "Личное"
-
-#: collections/stampcollection.cpp:27
-msgid "Stamps"
-msgstr "Марки"
-
-#: collections/stampcollection.cpp:28
-msgid "My Stamps"
-msgstr "Мои марки"
-
-#: collectionfactory.cpp:77 collections/bibtexcollection.cpp:57
-#: collections/bookcollection.cpp:40 collections/cardcollection.cpp:38
-#: collections/coincollection.cpp:38 collections/comicbookcollection.cpp:40
-#: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
-#: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
-#: collections/winecollection.cpp:38 entryupdater.cpp:230
-#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:158
-#: translators/tellicoimporter.cpp:400
-msgid "Title"
-msgstr "Заголовок"
-
-#: collections/filecatalog.cpp:46 collections/gamecollection.cpp:88
-#: collections/stampcollection.cpp:45 entryupdater.cpp:231 fetchdialog.cpp:159
-msgid "Description"
-msgstr "Описание"
-
-#: collections/coincollection.cpp:51 collections/stampcollection.cpp:51
-msgid "Denomination"
-msgstr "Достоинство"
-
-#: collections/coincollection.cpp:67 collections/comicbookcollection.cpp:95
-#: collections/stampcollection.cpp:56 collections/winecollection.cpp:74
-msgid "Country"
-msgstr "Страна"
-
-#: collections/stampcollection.cpp:62
-msgid "Issue Year"
-msgstr "Год издания"
-
-#: collections/stampcollection.cpp:67 collections/videocollection.cpp:173
-msgid "Color"
-msgstr "Цвет"
-
-#: collections/stampcollection.cpp:72
-msgid "Scott#"
-msgstr "Scott#"
-
-#: collections/stampcollection.cpp:79
-msgid ""
-"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
-"Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
+#: main.cpp:27
+msgid "Do not reopen the last open file"
 msgstr ""
-"Супер,Отлично,Хорошо,Нормально,Плохо,Очен"
-"ь плохо"
+"Не открывать ещё раз последний открытый "
+"файл"
 
-#: collections/coincollection.cpp:88 collections/stampcollection.cpp:81
-msgid "Grade"
-msgstr "Оценка"
+#: main.cpp:28
+msgid "Import <filename> as a bibtex file"
+msgstr "Импортировать <filename> как файл bibtex"
 
-#: collections/stampcollection.cpp:86
-msgid "Cancelled"
-msgstr "Обыкновенная марка"
+#: main.cpp:29
+msgid "Import <filename> as a MODS file"
+msgstr "Импортировать <filename> как файл MODS"
 
-#: collections/stampcollection.cpp:90
-msgid "Hinged"
-msgstr "Как медальон"
+#: main.cpp:30
+msgid "Import <filename> as a RIS file"
+msgstr "Импортировать <filename>как файл RIS"
 
-#: collections/stampcollection.cpp:95
-msgid "Centering"
-msgstr "Круглая"
+#: main.cpp:31
+msgid "File to open"
+msgstr "Файл для открытия"
 
-#: collections/stampcollection.cpp:100
-msgid "Gummed"
-msgstr "Приклеена"
-
-#: collections/bookcollection.cpp:65 collections/cardcollection.cpp:83
-#: collections/coincollection.cpp:103 collections/comicbookcollection.cpp:127
-#: collections/gamecollection.cpp:100 collections/musiccollection.cpp:87
-#: collections/stampcollection.cpp:105 collections/videocollection.cpp:191
-#: collections/winecollection.cpp:80
-msgid "Purchase Date"
-msgstr "Дата покупки"
-
-#: collections/bookcollection.cpp:70 collections/cardcollection.cpp:88
-#: collections/coincollection.cpp:108 collections/comicbookcollection.cpp:132
-#: collections/gamecollection.cpp:109 collections/musiccollection.cpp:96
-#: collections/stampcollection.cpp:110 collections/videocollection.cpp:200
-#: collections/winecollection.cpp:85
-msgid "Purchase Price"
-msgstr "Цена"
-
-#: collections/cardcollection.cpp:92 collections/coincollection.cpp:112
-#: collections/stampcollection.cpp:114 collections/winecollection.cpp:89
-msgid "Location"
-msgstr "Место"
-
-#: collections/bookcollection.cpp:150 collections/cardcollection.cpp:97
-#: collections/coincollection.cpp:118 collections/comicbookcollection.cpp:140
-#: collections/gamecollection.cpp:105 collections/musiccollection.cpp:92
-#: collections/stampcollection.cpp:120 collections/videocollection.cpp:196
-#: collections/winecollection.cpp:108
-msgid "Gift"
-msgstr "Подарен"
-
-#: collections/bookcollection.cpp:166 collections/cardcollection.cpp:116
-#: collections/coincollection.cpp:128 collections/comicbookcollection.cpp:151
-#: collections/gamecollection.cpp:120 collections/musiccollection.cpp:112
-#: collections/stampcollection.cpp:127 collections/videocollection.cpp:211
-#: collections/winecollection.cpp:115
-msgid "Comments"
-msgstr "Комментарии"
-
-#: collections/coincollection.cpp:26
-msgid "Coins"
-msgstr "Монеты"
-
-#: collections/coincollection.cpp:27
-msgid "My Coins"
-msgstr "Мои монеты"
-
-#: collections/coincollection.cpp:45 collections/winecollection.cpp:69
-msgid "Type"
-msgstr "Тип"
-
-#: collections/bibtexcollection.cpp:146 collections/cardcollection.cpp:67
-#: collections/coincollection.cpp:56 collections/musiccollection.cpp:63
-msgid "Year"
-msgstr "Год"
-
-#: collections/coincollection.cpp:61
-msgid "Mint Mark"
-msgstr "Место чеканки"
-
-#: collections/coincollection.cpp:73
-msgid "Coin Set"
-msgstr "Набор монет"
-
-#: collections/coincollection.cpp:83
-msgid ""
-"_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
-"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
-"Fine-20,Fine-12,Very Good-8,Good-4,Fair\n"
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair"
-msgstr ""
-"Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
-"Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
-"Good-8,Good-4,Fair"
-
-#: collections/coincollection.cpp:96
-msgid ""
-"_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
-"PCGS,NGC,ANACS,ICG,ASA,PCI"
-msgstr "PCGS,NGC,ANACS,ICG,ASA,PCIG,ASA,PCI"
-
-#: collections/coincollection.cpp:98
-msgid "Grading Service"
-msgstr "Сервис оценки"
-
-#: collections/coincollection.cpp:122
-msgid "Obverse"
-msgstr "\"Орел\""
-
-#: collections/coincollection.cpp:125
-msgid "Reverse"
-msgstr "\"Решка\""
-
-#: collections/bibtexcollection.cpp:25 collections/bookcollection.cpp:20
-#: collections/comicbookcollection.cpp:20 translators/grs1importer.cpp:58
-#: translators/grs1importer.cpp:68 translators/risimporter.cpp:258
-msgid "Publishing"
-msgstr "Издательство"
-
-#: collections/bookcollection.cpp:21 collections/comicbookcollection.cpp:21
-#: translators/grs1importer.cpp:63 translators/risimporter.cpp:252
-msgid "Classification"
-msgstr "Классификация"
-
-#: collections/bookcollection.cpp:28
-msgid "Books"
-msgstr "Книги"
-
-#: collections/bookcollection.cpp:29
-msgid "My Books"
-msgstr "Мои книги"
-
-#: collections/bookcollection.cpp:46 collections/comicbookcollection.cpp:46
-msgid "Subtitle"
-msgstr "Подзаголовок"
-
-#: collections/bibtexcollection.cpp:80 collections/bookcollection.cpp:51
-msgid "Author"
-msgstr "Автор"
-
-#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:121
-msgid "Hardback"
-msgstr "Твердый переплет"
-
-#: collections/bookcollection.cpp:58
-msgid "Paperback"
-msgstr "Мягкий переплет"
-
-#: collections/bookcollection.cpp:58
-msgid "Trade Paperback"
-msgstr "Газета"
-
-#: collections/bookcollection.cpp:59
-msgid "E-Book"
-msgstr "Электронная книга"
-
-#: collections/bookcollection.cpp:59
-msgid "Magazine"
-msgstr "Журнал"
-
-#: collections/bibtexcollection.cpp:158 collections/bookcollection.cpp:59
-msgid "Journal"
-msgstr "Дневник"
-
-#: collections/bookcollection.cpp:60
-msgid "Binding"
-msgstr "Переплет"
-
-#: collections/bibtexcollection.cpp:121 collections/bookcollection.cpp:74
-#: collections/comicbookcollection.cpp:74 collections/gamecollection.cpp:66
-msgid "Publisher"
-msgstr "Издательство"
-
-#: collections/bibtexcollection.cpp:134 collections/bookcollection.cpp:80
-#: collections/comicbookcollection.cpp:80
-msgid "Edition"
-msgstr "Редакция"
-
-#: collections/bookcollection.cpp:86
-msgid "Copyright Year"
-msgstr "Год сдачи в печать"
-
-#: collections/bookcollection.cpp:91 collections/comicbookcollection.cpp:86
-msgid "Publication Year"
-msgstr "Год издания"
-
-#: collections/bibtexcollection.cpp:152 collections/bookcollection.cpp:96
-#: translators/grs1importer.cpp:57 translators/risimporter.cpp:255
-msgid "ISBN#"
-msgstr "ISBN#"
-
-#: collections/bibtexcollection.cpp:155 collections/bookcollection.cpp:98
-#: translators/grs1importer.cpp:59 translators/risimporter.cpp:259
-msgid "International Standard Book Number"
-msgstr ""
-"Международный Стандартный Номер Книги"
-
-#: collections/bookcollection.cpp:101
-msgid "LCCN#"
-msgstr "LCCN#"
-
-#: collections/bookcollection.cpp:103
-msgid "Library of Congress Control Number"
-msgstr ""
-"Контрольный Номер Библиотеки Конгресса"
-
-#: collections/bibtexcollection.cpp:141 collections/bookcollection.cpp:106
-#: collections/comicbookcollection.cpp:91
-msgid "Pages"
-msgstr "Количество страниц"
-
-#: collections/bookcollection.cpp:110 collections/comicbookcollection.cpp:101
-#: translators/grs1importer.cpp:67
-msgid "Language"
-msgstr "Язык"
-
-#: collections/bookcollection.cpp:115 collections/comicbookcollection.cpp:107
-#: collections/gamecollection.cpp:55 collections/musiccollection.cpp:68
-#: collections/videocollection.cpp:68
-msgid "Genre"
-msgstr "Жанр"
-
-#: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
-#: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:854
-#: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
-msgid "Keywords"
-msgstr "Ключевые слова"
-
-#: collections/bibtexcollection.cpp:195 collections/bookcollection.cpp:127
-#: collections/cardcollection.cpp:72 collections/comicbookcollection.cpp:63
-msgid "Series"
-msgstr "Серия"
-
-#: collections/bookcollection.cpp:132
-msgid "Series Number"
-msgstr "Номер Серии"
-
-#: collections/bookcollection.cpp:137
-msgid "Used"
-msgstr "Подержанная"
-
-#: collections/bookcollection.cpp:142 collections/comicbookcollection.cpp:136
-msgid "Signed"
-msgstr "Послан"
-
-#: collections/bookcollection.cpp:146
-msgid "Read"
-msgstr "Прочитанна"
-
-#: collections/bookcollection.cpp:154 collections/comicbookcollection.cpp:144
-#: collections/gamecollection.cpp:113 collections/musiccollection.cpp:100
-#: collections/videocollection.cpp:204 document.cpp:487
-msgid "Loaned"
-msgstr "Дан в долг"
-
-#: collections/bookcollection.cpp:163 collections/comicbookcollection.cpp:148
-msgid "Front Cover"
-msgstr "Обложка"
-
-#: collections/winecollection.cpp:26
-msgid "Wines"
-msgstr "Вина"
-
-#: collections/winecollection.cpp:27
-msgid "My Wines"
-msgstr "Мои вина"
-
-#: collections/videocollection.cpp:116 collections/winecollection.cpp:44
-msgid "Producer"
-msgstr "Производитель"
-
-#: collections/winecollection.cpp:50
-msgid "Appellation"
-msgstr "Название"
-
-#: collections/winecollection.cpp:56
-msgid "Varietal"
-msgstr "Сорт"
-
-#: collections/winecollection.cpp:62
-msgid "Vintage"
-msgstr "Урожай"
-
-#: collections/winecollection.cpp:68
-msgid "Red Wine"
-msgstr "Красное вино"
-
-#: collections/winecollection.cpp:68
-msgid "White Wine"
-msgstr "Белое вино"
-
-#: collections/winecollection.cpp:68
-msgid "Sparkling Wine"
-msgstr "Игристое вино"
-
-#: collections/cardcollection.cpp:106 collections/winecollection.cpp:94
-msgid "Quantity"
-msgstr "Количество"
-
-#: collections/winecollection.cpp:98
-msgid "Drink By"
-msgstr "Было выпито"
-
-#: collections/winecollection.cpp:112
-msgid "Label Image"
-msgstr "Изображение этикетки"
-
-#: collections/comicbookcollection.cpp:28
-msgid "Comics"
-msgstr "Комиксы"
-
-#: collections/comicbookcollection.cpp:29
-msgid "My Comic Books"
-msgstr "Моя книга комиксов"
-
-#: collections/comicbookcollection.cpp:51 collections/videocollection.cpp:122
-msgid "Writer"
-msgstr "Писатель"
-
-#: collections/comicbookcollection.cpp:57
-msgid ""
-"_: Comic Book Illustrator\n"
-"Artist"
-msgstr "Художник"
-
-#: collections/comicbookcollection.cpp:69
-msgid "Issue"
-msgstr "Издание"
-
-#: collections/comicbookcollection.cpp:121
-msgid ""
-"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
-"Good,Good,Fair,Poor\n"
-"Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
-msgstr ""
-"Супер,Отлично,Очень "
-"хорошо,Хорошо,Средне,Ниже "
-"среднего,Плохо,Очень Плохо"
-
-#: collections/videocollection.cpp:20 fetch/animenfofetcher.cpp:264
-msgid "Other People"
-msgstr "Другие люди"
-
-#: collections/videocollection.cpp:21 fetch/animenfofetcher.cpp:270
-msgid "Features"
-msgstr "Особенности"
-
-#: collections/videocollection.cpp:28
-msgid "Videos"
-msgstr "Видео"
-
-#: collections/videocollection.cpp:29
-msgid "My Videos"
-msgstr "Мои видеозаписи"
-
-#: collections/musiccollection.cpp:45 collections/videocollection.cpp:47
-msgid "DVD"
-msgstr "DVD"
-
-#: collections/videocollection.cpp:47
-msgid "VHS"
-msgstr "VHS"
-
-#: collections/videocollection.cpp:47
-msgid "VCD"
-msgstr "VCD"
-
-#: collections/videocollection.cpp:47
-msgid "DivX"
-msgstr "MPEG-4"
-
-#: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
-msgid "Medium"
-msgstr "Носитель"
-
-#: collections/videocollection.cpp:53
-msgid "Production Year"
-msgstr "Год записи"
-
-#: collections/videocollection.cpp:61
-msgid ""
-"_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
-"G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
-msgstr "G (США),PG (США),PG-13 (США),R (USA), U (США)"
-
-#: collections/videocollection.cpp:63
-msgid "Certification"
-msgstr "Возрастной рейтинг"
-
-#: collections/videocollection.cpp:75
-msgid "Region 1"
-msgstr "Регион 1"
-
-#: collections/videocollection.cpp:76
-msgid "Region 2"
-msgstr "Регион 2"
-
-#: collections/videocollection.cpp:77
-msgid "Region 3"
-msgstr "Регион 3"
-
-#: collections/videocollection.cpp:78
-msgid "Region 4"
-msgstr "Регион 4"
-
-#: collections/videocollection.cpp:79
-msgid "Region 5"
-msgstr "Регион 5"
-
-#: collections/videocollection.cpp:80
-msgid "Region 6"
-msgstr "Регион 6"
-
-#: collections/videocollection.cpp:81
-msgid "Region 7"
-msgstr "Регион 7"
-
-#: collections/videocollection.cpp:82
-msgid "Region 8"
-msgstr "Регион 8"
-
-#: collections/videocollection.cpp:83
-msgid "Region"
-msgstr "Регион"
-
-#: collections/videocollection.cpp:88
-msgid "Nationality"
-msgstr "Страна"
-
-#: collections/videocollection.cpp:95
-msgid "NTSC"
-msgstr "NTSC"
-
-#: collections/videocollection.cpp:95
-msgid "PAL"
-msgstr "PAL"
-
-#: collections/videocollection.cpp:95
-msgid "SECAM"
-msgstr "SECAM"
-
-#: collections/videocollection.cpp:96
-msgid "Format"
-msgstr "Формат"
-
-#: collections/videocollection.cpp:101
-msgid "Cast"
-msgstr "Роли"
-
-#: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:404
-msgid "Actor/Actress"
-msgstr "Актер/Актриса"
-
-#: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:405
-msgid "Role"
-msgstr "Роли"
-
-#: collections/videocollection.cpp:107
-msgid "A table for the cast members, along with the roles they play"
-msgstr ""
-"Таблица для записи актеров и ролей, "
-"которые они играли"
-
-#: collections/videocollection.cpp:110
-msgid "Director"
-msgstr "Режиссер"
-
-#: collections/videocollection.cpp:128
-msgid "Composer"
-msgstr "Композитор"
-
-#: collections/videocollection.cpp:134
-msgid "Studio"
-msgstr "Студия"
-
-#: collections/videocollection.cpp:140
-msgid "Language Tracks"
-msgstr "Языки"
-
-#: collections/videocollection.cpp:146
-msgid "Subtitle Languages"
-msgstr "Языки субтитров"
-
-#: collections/videocollection.cpp:152
-msgid "Audio Tracks"
-msgstr "Аудио треки"
-
-#: collections/videocollection.cpp:158
-msgid "Running Time"
-msgstr "Продолжительность"
-
-#: collections/videocollection.cpp:160
-msgid "The running time of the video (in minutes)"
-msgstr "Продолжительность видео (в минутах)"
-
-#: collections/videocollection.cpp:163
-msgid "Aspect Ratio"
-msgstr "Соотношение сторон"
-
-#: collections/videocollection.cpp:168 translators/tellicoimporter.cpp:886
-msgid "Widescreen"
-msgstr "Широкоэкранный"
-
-#: collections/videocollection.cpp:173
-msgid "Black & White"
-msgstr "Черно-белый"
-
-#: collections/videocollection.cpp:174
-msgid "Color Mode"
-msgstr "Цветной"
-
-#: collections/videocollection.cpp:179
-msgid "Director's Cut"
-msgstr "Режиссерская версия"
-
-#: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:352
-msgid "Plot Summary"
-msgstr "Сюжет фильма"
-
-#: collections/gamecollection.cpp:91 collections/videocollection.cpp:186
-msgid "Personal Rating"
-msgstr "Личный рейтинг"
-
-#: collections/gamecollection.cpp:117 collections/musiccollection.cpp:109
-#: collections/videocollection.cpp:208
-msgid "Cover"
-msgstr "Обложка"
-
-#: collections/gamecollection.cpp:26
-msgid "Games"
-msgstr "Игры"
-
-#: collections/gamecollection.cpp:27
-msgid "My Games"
-msgstr "Мои игры"
-
-#: collections/gamecollection.cpp:45
+#: main.cpp:42
 #, fuzzy
-msgid "Xbox 360"
-msgstr "Xbox"
-
-#: collections/gamecollection.cpp:45
-msgid "Xbox"
-msgstr "Xbox"
-
-#: collections/gamecollection.cpp:46
-#, fuzzy
-msgid "PlayStation3"
-msgstr "PlayStation"
-
-#: collections/gamecollection.cpp:46
-msgid "PlayStation2"
-msgstr "PlayStation 2"
-
-#: collections/gamecollection.cpp:46
-msgid "PlayStation"
-msgstr "PlayStation"
-
-#: collections/gamecollection.cpp:46
-msgid ""
-"_: PlayStation Portable\n"
-"PSP"
-msgstr "PSP"
-
-#: collections/gamecollection.cpp:47
-#, fuzzy
-msgid "Nintendo Wii"
-msgstr "Регион"
-
-#: collections/gamecollection.cpp:47
-msgid "Nintendo DS"
-msgstr "Nintendo DS"
-
-#: collections/gamecollection.cpp:47
-msgid "GameCube"
-msgstr "GameCube"
-
-#: collections/gamecollection.cpp:47
-msgid "Dreamcast"
-msgstr "Dreamcast"
-
-#: collections/gamecollection.cpp:48
-msgid "Game Boy Advance"
-msgstr "Game Boy Advance"
-
-#: collections/gamecollection.cpp:48
-msgid "Game Boy Color"
-msgstr "Game Boy Color"
-
-#: collections/gamecollection.cpp:48
-msgid "Game Boy"
-msgstr "Game Boy"
-
-#: collections/gamecollection.cpp:49
-msgid ""
-"_: Windows Platform\n"
-"Windows"
-msgstr "Windows"
-
-#: collections/gamecollection.cpp:49
-msgid "Mac OS"
-msgstr "Mac OS"
-
-#: collections/gamecollection.cpp:50
-msgid "Platform"
-msgstr "Платформа"
-
-#: collections/gamecollection.cpp:61
-msgid "Release Year"
-msgstr "Год выпуска"
-
-#: collections/gamecollection.cpp:72
-msgid "Developer"
-msgstr "Разработчик"
-
-#: collections/gamecollection.cpp:81
-msgid ""
-"_: Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone, Early "
-"Childhood, Pending\n"
-"Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"
-msgstr ""
-"Без рейтинга, Для взрослых, Для "
-"подростков, Для всех, Для детей, "
-"Неизвестный"
-
-#: collections/gamecollection.cpp:83
-msgid "ESRB Rating"
-msgstr "Возрастной рейтинг"
-
-#: collections/gamecollection.cpp:96
-msgid "Completed"
-msgstr "Пройдена"
-
-#: collections/cardcollection.cpp:26
-msgid "Cards"
-msgstr "Карты"
-
-#: collections/cardcollection.cpp:27
-msgid "My Cards"
-msgstr "Мои карты"
-
-#: collections/cardcollection.cpp:44
-msgid "Player"
-msgstr "Игрок"
-
-#: collections/cardcollection.cpp:50
-msgid "Team"
-msgstr "Команда"
-
-#: collections/cardcollection.cpp:56
-msgid "Brand"
-msgstr "Фирма"
-
-#: collections/cardcollection.cpp:63
-msgid "Card Number"
-msgstr "Номер карты"
-
-#: collections/cardcollection.cpp:78
-msgid "Card Type"
-msgstr "Тип карты"
-
-#: collections/cardcollection.cpp:110
-msgid "Front Image"
-msgstr "Изображение передней стороны"
-
-#: collections/cardcollection.cpp:113
-msgid "Back Image"
-msgstr "Изображение задней стороны"
-
-#: collections/bibtexcollection.cpp:30
-msgid "Entries"
-msgstr "Записи"
-
-#: collectionfactory.cpp:118 collections/bibtexcollection.cpp:31
-msgid "Bibliography"
-msgstr "Библиография"
-
-#: collections/bibtexcollection.cpp:73
-msgid "Entry Type"
-msgstr "Тип записи"
-
-#: collections/bibtexcollection.cpp:77
-msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr ""
-"Эти типы записей мпецифичны для bibtex. "
-"Смотрите документацию bibtex"
-
-#: collections/bibtexcollection.cpp:87
-msgid "Bibtex Key"
-msgstr "Ключ bibtex"
-
-#: collections/bibtexcollection.cpp:93
-msgid "Book Title"
-msgstr "Название книги"
-
-#: collections/bibtexcollection.cpp:99
-msgid "Editor"
-msgstr "Редактор"
-
-#: collections/bibtexcollection.cpp:106
-msgid "Organization"
-msgstr "Организация"
-
-#: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:428
-#: fetch/z3950fetcher.cpp:669
-msgid "Address"
-msgstr "Адрес"
-
-#: collections/bibtexcollection.cpp:167
-msgid "Month"
-msgstr "Месяц"
-
-#: collections/bibtexcollection.cpp:178
-msgid "How Published"
-msgstr "Как издавалась"
-
-#: collections/bibtexcollection.cpp:190
-msgid "Chapter"
-msgstr "Часть"
-
-#: collections/bibtexcollection.cpp:202 collections/filecatalog.cpp:51
-msgid "Volume"
-msgstr "Том"
-
-#: collections/bibtexcollection.cpp:207
-msgid "Cross-Reference"
-msgstr "Рекомендации"
-
-#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:463
-#: fetch/srufetcher.cpp:429 fetch/z3950fetcher.cpp:670
-#: translators/risimporter.cpp:246
-msgid "Abstract"
-msgstr "Резюме"
-
-#: collections/bibtexcollection.cpp:226
-msgid "Notes"
-msgstr "Заметки"
-
-#: collections/musiccollection.cpp:26
-msgid "Albums"
-msgstr "Альбомы"
-
-#: collections/musiccollection.cpp:27
-msgid "My Music"
-msgstr "Мои аудиозаписи"
-
-#: collections/musiccollection.cpp:38
-msgid "Album"
-msgstr "Альбом"
-
-#: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:224
-#: translators/freedbimporter.cpp:337 translators/freedbimporter.cpp:402
-msgid "Compact Disc"
-msgstr "Компакт-диск"
-
-#: collections/musiccollection.cpp:45
-msgid "Cassette"
-msgstr "Аудиокассета"
-
-#: collections/musiccollection.cpp:45
-msgid "Vinyl"
-msgstr "Виниловая пластинка"
-
-#: collections/musiccollection.cpp:51 collections/musiccollection.cpp:78
-#: translators/tellicoimporter.cpp:401
-msgid "Artist"
-msgstr "Исполнитель"
-
-#: collections/musiccollection.cpp:57
-msgid "Label"
-msgstr "Лейбл"
-
-#: collections/musiccollection.cpp:74
-msgid "Tracks"
-msgstr "Треки"
-
-#: collections/musiccollection.cpp:79 translators/tellicoimporter.cpp:402
-msgid "Length"
-msgstr "Длина"
-
-#: collections/filecatalog.cpp:26
-msgid "My Files"
-msgstr "Мои файлы"
-
-#: borrowerdialog.cpp:48 collections/filecatalog.cpp:37
-#: newstuff/dialog.cpp:112
-msgid "Name"
-msgstr "Имя"
-
-#: collections/filecatalog.cpp:56
-#, fuzzy
-msgid "Folder"
-msgstr "Фильтр"
-
-#: collections/filecatalog.cpp:61
-msgid "Mimetype"
-msgstr "Mimetype"
-
-#: collections/filecatalog.cpp:66
-msgid "Size"
-msgstr "Размер"
-
-#: collections/filecatalog.cpp:70
-msgid "Permissions"
-msgstr "Права"
-
-#: collections/filecatalog.cpp:75
-msgid "Owner"
-msgstr "Владелец"
-
-#: collections/filecatalog.cpp:80
-msgid "Group"
-msgstr "Группа"
-
-#: collections/filecatalog.cpp:86
-msgid "Created"
-msgstr "Создан"
-
-#: collections/filecatalog.cpp:90
-msgid "Modified"
-msgstr "Редактирован"
-
-#: collections/filecatalog.cpp:94
-msgid "Meta Info"
-msgstr "Дополнительная информация"
-
-#: collectionfieldsdialog.cpp:854 collections/filecatalog.cpp:96
-msgid "Property"
-msgstr "Свойство"
-
-#: collectionfieldsdialog.cpp:854 collections/filecatalog.cpp:97
-msgid "Value"
-msgstr "Значение"
-
-#: collections/filecatalog.cpp:100
-msgid "Icon"
-msgstr "Значок"
+msgid "Data source scripts"
+msgstr "Опции источников данных"
+
+#: main.cpp:44
+msgid "Icons"
+msgstr "Пиктограммы"
+
+#: main.cpp:46
+msgid "Author of btparse library"
+msgstr "Автор библиотеки btparse"
+
+#: main.cpp:48
+msgid "Code examples and general inspiration"
+msgstr "Примеры кода"
 
 #: collectionfieldsdialog.cpp:56
 msgid "Collection Fields"
@@ -3025,11 +3919,6 @@ msgstr ""
 msgid "Keep modified values"
 msgstr "Сохранять измененные значения"
 
-#: collectionfieldsdialog.cpp:394 collectionfieldsdialog.cpp:397
-#: translators/csvimporter.cpp:410 translators/csvimporter.cpp:513
-msgid "New Field"
-msgstr "Новое поле"
-
 #: collectionfieldsdialog.cpp:728
 msgid "Revert Field Properties"
 msgstr "Поменять свойства поля"
@@ -3098,509 +3987,6 @@ msgstr ""
 "В таблице может быть максимум десять "
 "столбцов."
 
-#: calendarhandler.cpp:166
-msgid "Default Calendar"
-msgstr "Календарь по умолчанию"
-
-#: calendarhandler.cpp:174
-msgid ""
-"At the moment, Tellico only supports local calendar resources. The active "
-"calendar is remotely located, so your loans will not be added."
-msgstr ""
-"В данный момент Tellico поддерживает только "
-"свой календарь. Текущий календарь "
-"находится не здесь, так что ваши долги не "
-"будут занесены в него."
-
-#: calendarhandler.cpp:179
-msgid "Active Calendar"
-msgstr "Текущий календарь"
-
-#: calendarhandler.cpp:202
-msgid "Tellico: %1 is due to return \"%2\""
-msgstr "Tellico: %1 возвратил \"%2\""
-
-#: fetch/entrezfetcher.cpp:54
-msgid "Entrez Database"
-msgstr "База данных Entrez"
-
-#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:443
-#: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:387
-msgid "This source has no options."
-msgstr "Нет опций"
-
-#: fetch/entrezfetcher.cpp:462
-msgid "Institution"
-msgstr "Институт"
-
-#: fetch/configwidget.cpp:29
-msgid "Source Options"
-msgstr "Опции источника"
-
-#: fetch/configwidget.cpp:40
-msgid "Available Fields"
-msgstr "Доступные поля"
-
-#: fetch/srufetcher.cpp:65
-msgid "SRU Server"
-msgstr "Сервер SRU"
-
-#: fetch/imdbfetcher.cpp:1076 fetch/srufetcher.cpp:343
-#: fetch/z3950fetcher.cpp:505
-msgid "Hos&t: "
-msgstr "&Сервер: "
-
-#: fetch/srufetcher.cpp:349 fetch/z3950fetcher.cpp:511
-msgid "Enter the host name of the server."
-msgstr "Введите адрес сервера."
-
-#: fetch/srufetcher.cpp:354 fetch/z3950fetcher.cpp:516
-msgid "&Port: "
-msgstr "&Порт"
-
-#: fetch/srufetcher.cpp:359 fetch/z3950fetcher.cpp:521
-#, c-format
-msgid "Enter the port number of the server. The default is %1."
-msgstr ""
-"Введите номер порта сервера. По умолчанию "
-"выбран %1"
-
-#: fetch/srufetcher.cpp:364
-#, fuzzy
-msgid "Path: "
-msgstr "&Порт"
-
-#: fetch/srufetcher.cpp:369
-#, fuzzy
-msgid "Enter the path to the database used by the server."
-msgstr ""
-"Введите название базы данных, "
-"используемой сервером."
-
-#: fetch/srufetcher.cpp:374
-#, fuzzy
-msgid "Format: "
-msgstr "Формат"
-
-#: fetch/srufetcher.cpp:381
-#, fuzzy
-msgid "Enter the result format used by the server."
-msgstr ""
-"Введите название базы данных, "
-"используемой сервером."
-
-#: fetch/imdbfetcher.cpp:88
-msgid "Internet Movie Database"
-msgstr "Internet Movie Database (IMDB)"
-
-#: fetch/imdbfetcher.cpp:577
-msgid "Select IMDB Result"
-msgstr "Выберите результат IMDB"
-
-#: fetch/imdbfetcher.cpp:580
-msgid ""
-"<qt>Your search returned multiple matches. Please select one below.</qt>"
-msgstr ""
-"<qt>Ваш поиск дал несколько результатов. "
-"Пожалуйста, выберите один из них.</qt>"
-
-#: fetch/imdbfetcher.cpp:595
-msgid "<qt>Select a search result.</qt>"
-msgstr "<qt>Выберите результат поиска</qt>"
-
-#: fetch/imdbfetcher.cpp:687 fetch/imdbfetcher.cpp:1140
-msgid "IMDB Link"
-msgstr "Ссылка IMDB"
-
-#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:742
-#: fetch/imdbfetcher.cpp:1142
-msgid "Alternative Titles"
-msgstr "Альтернативные названия"
-
-#: fetch/imdbfetcher.cpp:909 fetch/imdbfetcher.cpp:1141
-msgid "IMDB Rating"
-msgstr "Рейтинг IMDB"
-
-#: fetch/imdbfetcher.cpp:1020 fetch/imdbfetcher.cpp:1143
-msgid "Certifications"
-msgstr "Сертификации"
-
-#: fetch/imdbfetcher.cpp:1081
-msgid ""
-"The Internet Movie Database uses several different servers. Choose the one "
-"you wish to use."
-msgstr ""
-"IMDB использует различные серверы. "
-"Пожалуйста, выберите тот, кторый вы "
-"хотите использовать"
-
-#: fetch/imdbfetcher.cpp:1087
-msgid "&Maximum cast: "
-msgstr "&Максимальное кол-во актеров:"
-
-#: fetch/imdbfetcher.cpp:1092
-msgid ""
-"The list of cast members may include many people. Set the maximum number "
-"returned from the search."
-msgstr ""
-"Список актреров может содержать много "
-"людей. Введите максимальное число "
-"актеров, возвращаемое поиском."
-
-#: fetch/imdbfetcher.cpp:1097
-msgid "Download cover &image"
-msgstr "Скачать изображение обложки"
-
-#: fetch/amazonfetcher.cpp:796 fetch/imdbfetcher.cpp:1101
-msgid ""
-"The cover image may be downloaded as well. However, too many large images in "
-"the collection may degrade performance."
-msgstr ""
-"Помните, что много больших изображений "
-"могут ухудшить удобство в работе с "
-"программой"
-
-#: fetch/fetchmanager.cpp:63
-msgid "Person"
-msgstr "Человек"
-
-#: fetch/fetchmanager.cpp:64
-msgid "ISBN"
-msgstr "ISBN"
-
-#: fetch/fetchmanager.cpp:65
-msgid "UPC"
-msgstr "UPC"
-
-#: fetch/fetchmanager.cpp:66
-msgid "Keyword"
-msgstr "Ключевые слова"
-
-#: fetch/fetchmanager.cpp:67
-msgid "Raw Query"
-msgstr "Raw Query"
-
-#: fetch/amazonfetcher.cpp:50
-msgid "Amazon Link"
-msgstr "Ссылка Amazon"
-
-#: fetch/amazonfetcher.cpp:59
-msgid "Amazon (US)"
-msgstr "Amazon (США)"
-
-#: fetch/amazonfetcher.cpp:62
-msgid "Amazon (UK)"
-msgstr "Amazon (UK)"
-
-#: fetch/amazonfetcher.cpp:65
-msgid "Amazon (Germany)"
-msgstr "Amazon (Германия)"
-
-#: fetch/amazonfetcher.cpp:68
-msgid "Amazon (Japan)"
-msgstr "Amazon (Япония)"
-
-#: fetch/amazonfetcher.cpp:71
-msgid "Amazon (France)"
-msgstr "Amazon (Франция)"
-
-#: fetch/amazonfetcher.cpp:74
-msgid "Amazon (Canada)"
-msgstr "Amazon (Канада)"
-
-#: fetch/amazonfetcher.cpp:96
-msgid "Amazon.com Web Services"
-msgstr "Сервисы Amazon.com"
-
-#: fetch/amazonfetcher.cpp:189 fetch/animenfofetcher.cpp:74
-#: fetch/ibsfetcher.cpp:71 fetch/isbndbfetcher.cpp:75
-#: fetch/yahoofetcher.cpp:92
-msgid "%1 does not allow searching for this collection type."
-msgstr "В этом типе коллекций нельзя искать %1"
-
-#: fetch/amazonfetcher.cpp:507
-msgid "Results from %1: %2/%3"
-msgstr "Результаты от %1: %2/%3"
-
-#: fetch/amazonfetcher.cpp:531 fetch/z3950fetcher.cpp:425
-msgid "<qt>No entries were found for the following ISBN values:</qt>"
-msgstr ""
-"<qt>Никаких записей не было найдено по "
-"следующим номерам ISBN:</qt>"
-
-#: fetch/amazonfetcher.cpp:690 fetch/yahoofetcher.cpp:237
-msgid "The cover image could not be loaded."
-msgstr ""
-"Не получается загрузить изображение "
-"обложки"
-
-#: fetch/amazonfetcher.cpp:767
-msgid "Co&untry: "
-msgstr "Ст&рана"
-
-#: fetch/amazonfetcher.cpp:771
-msgid "United States"
-msgstr "США"
-
-#: fetch/amazonfetcher.cpp:772
-msgid "United Kingdom"
-msgstr "Великобритания"
-
-#: fetch/amazonfetcher.cpp:773
-msgid "Germany"
-msgstr "Германия"
-
-#: fetch/amazonfetcher.cpp:774
-msgid "Japan"
-msgstr "Япония"
-
-#: fetch/amazonfetcher.cpp:775
-msgid "France"
-msgstr "Франция"
-
-#: fetch/amazonfetcher.cpp:776
-msgid "Canada"
-msgstr "Канада"
-
-#: fetch/amazonfetcher.cpp:780
-msgid ""
-"Amazon.com provides data from several different localized sites. Choose the "
-"one you wish to use for this data source."
-msgstr ""
-"Amazon.com предоставляет данные из нескольких "
-"своих сайтов. Выберите источник, откуда "
-"вы хотите получить данные."
-
-#: fetch/amazonfetcher.cpp:786
-msgid "&Image size: "
-msgstr "&Размер изображения"
-
-#: fetch/amazonfetcher.cpp:790
-msgid "Small Image"
-msgstr "Маленькое изображение"
-
-#: fetch/amazonfetcher.cpp:791
-msgid "Medium Image"
-msgstr "Среднее изображние"
-
-#: fetch/amazonfetcher.cpp:792
-msgid "Large Image"
-msgstr "Большое изображение"
-
-#: fetch/amazonfetcher.cpp:793
-msgid "No Image"
-msgstr "Нет изображения"
-
-#: fetch/amazonfetcher.cpp:802
-msgid "&Associate's ID: "
-msgstr "&Associate's ID: "
-
-#: fetch/amazonfetcher.cpp:807
-msgid ""
-"The associate's id identifies the person accessing the Amazon.com Web "
-"Services, and is included in any links to the Amazon.com site."
-msgstr ""
-"Associate's ID нужен для доступа ко многим "
-"сервисам Amazon.com"
-
-#: fetch/execexternalfetcher.cpp:82
-msgid "External Application"
-msgstr "Внешние приложения"
-
-#: configdialog.cpp:355 fetch/execexternalfetcher.cpp:336
-#: translators/csvimporter.cpp:171
-msgid "Collection &type:"
-msgstr "&Тип коллекции"
-
-#: fetch/execexternalfetcher.cpp:341
-msgid ""
-"Set the collection type of the data returned from the external application."
-msgstr ""
-"Выберите тип коллекции, который "
-"экспортирует внешнее приложение"
-
-#: fetch/execexternalfetcher.cpp:346
-msgid "&Result type: "
-msgstr "&Тип результата: "
-
-#: fetch/execexternalfetcher.cpp:355
-msgid "Set the result type of the data returned from the external application."
-msgstr ""
-"Выберите тип данных, возвращаемый "
-"внешним приложением"
-
-#: fetch/execexternalfetcher.cpp:360
-msgid "Application &path: "
-msgstr "&Путь к приложению"
-
-#: fetch/execexternalfetcher.cpp:365
-msgid ""
-"Set the path of the application to run that should output a valid Tellico "
-"data file."
-msgstr ""
-"Введите путь у приложению, которое "
-"выводит правильный файл Tellico"
-
-#: fetch/execexternalfetcher.cpp:370
-msgid "Select the search keys supported by the data source."
-msgstr ""
-"Выберите ключи поиска, поддерживаемы "
-"источником данных"
-
-#: fetch/execexternalfetcher.cpp:371
-msgid ""
-"Add any arguments that may be needed. <b>%1</b> will be replaced by the "
-"search term."
-msgstr ""
-"Добавьте аргументы, которые могут "
-"понадобиться. <b>%1</b> будут заменены "
-"результатом поиска"
-
-#: fetch/execexternalfetcher.cpp:372
-msgid "Arguments"
-msgstr "&Аргументы"
-
-#: fetch/execexternalfetcher.cpp:405 newstuff/dialog.cpp:151
-msgid "Update"
-msgstr "Обновлен"
-
-#: fetch/execexternalfetcher.cpp:412
-msgid ""
-"<p>Enter the arguments which should be used to search for available updates "
-"to an entry.</p><p>The format is the same as for <i>Dependent</i> fields, "
-"where field values are contained inside braces, such as <i>%{author}</i> See "
-"the documentation for details.</p>"
-msgstr ""
-"<p>Введите аргументы, которые следует "
-"использовать для поиска возможных "
-"обновлений.</p><p>Формат должен быть таким "
-"же, как и <i>\"зависимые\"</i> поля, такие как "
-"<i>%{автор}</i> Подробнее - в документации.</p>"
-
-#: fetch/z3950fetcher.cpp:78 fetch/z3950fetcher.cpp:756
-#, fuzzy
-msgid "z39.50 Server"
-msgstr "z39.50"
-
-#: fetch/z3950fetcher.cpp:495
-msgid "Use preset &server:"
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:526
-msgid "&Database: "
-msgstr "&База данных"
-
-#: fetch/z3950fetcher.cpp:531
-msgid "Enter the database name used by the server."
-msgstr ""
-"Введите название базы данных, "
-"используемой сервером."
-
-#: fetch/z3950fetcher.cpp:536
-msgid "Ch&aracter set: "
-msgstr "&Кодировка:"
-
-#: fetch/z3950fetcher.cpp:545
-msgid ""
-"Enter the character set encoding used by the z39.50 server. The most likely "
-"choice is MARC-8, although ISO-8859-1 is common as well."
-msgstr ""
-"Введите кодировку, используемую сервером "
-"z39.50. Самый лучший выбор: MARC-8."
-
-#: fetch/z3950fetcher.cpp:551
-#, fuzzy
-msgid "&Format: "
-msgstr "Формат"
-
-#: fetch/z3950fetcher.cpp:554
-msgid "Auto-detect"
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:562
-msgid ""
-"Enter the data format used by the z39.50 server. Tellico will attempt to "
-"automatically detect the best setting if <i>auto-detect</i> is selected."
-msgstr ""
-
-#: fetch/z3950fetcher.cpp:568
-msgid "&User: "
-msgstr "П&ользователь"
-
-#: fetch/z3950fetcher.cpp:571 fetch/z3950fetcher.cpp:583
-msgid "Optional"
-msgstr "Необязательно"
-
-#: fetch/z3950fetcher.cpp:574
-msgid ""
-"Enter the authentication user name used by the z39.50 database. Most servers "
-"do not need one."
-msgstr ""
-"Введите имя пользователя базой данных "
-"z39.50. Для многих серверов ничего вводить "
-"не нужно."
-
-#: fetch/z3950fetcher.cpp:580
-msgid "Pass&word: "
-msgstr "Па&роль"
-
-#: fetch/z3950fetcher.cpp:587
-msgid ""
-"Enter the authentication password used by the z39.50 database. Most servers "
-"do not need one. The password will be saved in plain text in the Tellico "
-"configuration file."
-msgstr ""
-"Введите пароль для доступа к базе данных "
-"z39.50. "
-"Для многих серверов ничего вводить не "
-"нужно. Пароль будет сохранен в "
-"конфигурационном файле Tellico."
-
-#: fetch/z3950fetcher.cpp:671
-msgid "Illustrator"
-msgstr ""
-
-#: fetch/animenfofetcher.cpp:256
-msgid "Original Title"
-msgstr "Оригинальный заголовок"
-
-#: fetch/animenfofetcher.cpp:263
-msgid "Distributor"
-msgstr "Распространитель"
-
-#: fetch/animenfofetcher.cpp:269
-msgid "Episodes"
-msgstr "Эпизоды"
-
-#: fetch/z3950connection.cpp:115
-msgid "Query error!"
-msgstr "Ошибка запроса"
-
-#: fetch/z3950connection.cpp:156
-msgid "Connection search error %1: %2"
-msgstr "Ошибка соединения с поиском %1: %2"
-
-#: fetch/z3950connection.cpp:233
-msgid "Record syntax error"
-msgstr "Синтаксическая ошибка"
-
-#: fetch/z3950connection.cpp:316
-msgid "Connection error %1: %2"
-msgstr "Ошибка соединения %1: %2"
-
-#: fetch/ibsfetcher.cpp:45
-msgid "Internet Bookshop (ibs.it)"
-msgstr "Интернет-магазин книг (ibs.it)"
-
-#: fetch/yahoofetcher.cpp:51
-msgid "Yahoo! Audio Search"
-msgstr "Аудио-поиск Yahoo!"
-
-#: fetch/isbndbfetcher.cpp:50
-msgid "ISBNdb.com"
-msgstr ""
-
 #: document.cpp:148
 msgid ""
 "The current file has been modified.\n"
@@ -3616,109 +4002,6 @@ msgstr "Несохраненные изменения"
 #: borrowerdialog.cpp:41
 msgid "Select Borrower"
 msgstr "Выбрать должника"
-
-#: collectionfactory.cpp:76
-msgid "My Collection"
-msgstr "Моя коллекция"
-
-#: collectionfactory.cpp:117
-msgid "Book Collection"
-msgstr "Коллекция книг"
-
-#: collectionfactory.cpp:119
-msgid "Comic Book Collection"
-msgstr "Коллекция комиксов"
-
-#: collectionfactory.cpp:120
-msgid "Video Collection"
-msgstr "Коллекция видео"
-
-#: collectionfactory.cpp:121
-msgid "Music Collection"
-msgstr "Коллекция музыки"
-
-#: collectionfactory.cpp:122
-msgid "Coin Collection"
-msgstr "Коллекция монет"
-
-#: collectionfactory.cpp:123
-msgid "Stamp Collection"
-msgstr "Коллекция марок"
-
-#: collectionfactory.cpp:124
-msgid "Wine Collection"
-msgstr "Коллекция вин"
-
-#: collectionfactory.cpp:125
-msgid "Card Collection"
-msgstr "Коллекция карточек"
-
-#: collectionfactory.cpp:126
-msgid "Game Collection"
-msgstr "Коллекция игр"
-
-#: collectionfactory.cpp:127
-msgid "File Catalog"
-msgstr "Каталог файлов"
-
-#: collectionfactory.cpp:128
-msgid "Custom Collection"
-msgstr "Коллекция"
-
-#: loanview.cpp:73
-msgid "Check-in"
-msgstr "Вернуть из долга"
-
-#: loanview.cpp:75
-msgid "Modify Loan..."
-msgstr "Редактировать долг..."
-
-#: loanview.cpp:92
-msgid "Borrower (Sort by Count)"
-msgstr "Должники"
-
-#: main.cpp:23
-msgid "Tellico - a collection manager for KDE"
-msgstr "Tellico - менеджер коллекций для KDE."
-
-#: main.cpp:27
-msgid "Do not reopen the last open file"
-msgstr ""
-"Не открывать ещё раз последний открытый "
-"файл"
-
-#: main.cpp:28
-msgid "Import <filename> as a bibtex file"
-msgstr "Импортировать <filename> как файл bibtex"
-
-#: main.cpp:29
-msgid "Import <filename> as a MODS file"
-msgstr "Импортировать <filename> как файл MODS"
-
-#: main.cpp:30
-msgid "Import <filename> as a RIS file"
-msgstr "Импортировать <filename>как файл RIS"
-
-#: main.cpp:31
-msgid "File to open"
-msgstr "Файл для открытия"
-
-#: main.cpp:42
-#, fuzzy
-msgid "Data source scripts"
-msgstr "Опции источников данных"
-
-#: main.cpp:44
-msgid "Icons"
-msgstr "Пиктограммы"
-
-#: main.cpp:46
-msgid "Author of btparse library"
-msgstr "Автор библиотеки btparse"
-
-#: main.cpp:48
-msgid "Code examples and general inspiration"
-msgstr "Примеры кода"
 
 #: configdialog.cpp:99
 msgid "Configure Tellico"
@@ -3864,12 +4147,6 @@ msgstr "&Форматировать имена и названия"
 msgid "&Print field headers"
 msgstr "Включить заголовки полей"
 
-#: configdialog.cpp:299 translators/htmlexporter.cpp:467
-msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Если отмечено, то при экспорте в HTML будут "
-"напечатаны заголовки."
-
 #: configdialog.cpp:302
 msgid "Grouping Options"
 msgstr "Опции группировки"
@@ -3877,12 +4154,6 @@ msgstr "Опции группировки"
 #: configdialog.cpp:305
 msgid "&Group the entries"
 msgstr "&Группировать записи"
-
-#: configdialog.cpp:306 translators/htmlexporter.cpp:472
-msgid "If checked, the entries will be grouped by the selected field."
-msgstr ""
-"Если отмечено, то записи будут "
-"сгруппированы по выделенному полю"
 
 #: configdialog.cpp:309
 msgid "Image Options"
@@ -4078,10 +4349,6 @@ msgstr ""
 "текста или редактирования "
 "многогкратного поиска по ISBN"
 
-#: configdialog.cpp:1003 translators/xsltimporter.cpp:85
-msgid "*.xsl|XSL Files (*.xsl)"
-msgstr "*.xsl|Файлы XSL (*.xsl)"
-
 #: configdialog.cpp:1004
 msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
 msgstr ""
@@ -4095,6 +4362,70 @@ msgstr "Удалить фильтр"
 #, fuzzy
 msgid "Select template to delete:"
 msgstr "Выберите базу данных для поиска:"
+
+#: loanview.cpp:32 loanview.cpp:90 xslt.cpp:26
+msgid "Borrower"
+msgstr "Должник"
+
+#: loanview.cpp:73
+msgid "Check-in"
+msgstr "Вернуть из долга"
+
+#: loanview.cpp:75
+msgid "Modify Loan..."
+msgstr "Редактировать долг..."
+
+#: loanview.cpp:92
+msgid "Borrower (Sort by Count)"
+msgstr "Должники"
+
+#: collectionfactory.cpp:76
+msgid "My Collection"
+msgstr "Моя коллекция"
+
+#: collectionfactory.cpp:117
+msgid "Book Collection"
+msgstr "Коллекция книг"
+
+#: collectionfactory.cpp:119
+msgid "Comic Book Collection"
+msgstr "Коллекция комиксов"
+
+#: collectionfactory.cpp:120
+msgid "Video Collection"
+msgstr "Коллекция видео"
+
+#: collectionfactory.cpp:121
+msgid "Music Collection"
+msgstr "Коллекция музыки"
+
+#: collectionfactory.cpp:122
+msgid "Coin Collection"
+msgstr "Коллекция монет"
+
+#: collectionfactory.cpp:123
+msgid "Stamp Collection"
+msgstr "Коллекция марок"
+
+#: collectionfactory.cpp:124
+msgid "Wine Collection"
+msgstr "Коллекция вин"
+
+#: collectionfactory.cpp:125
+msgid "Card Collection"
+msgstr "Коллекция карточек"
+
+#: collectionfactory.cpp:126
+msgid "Game Collection"
+msgstr "Коллекция игр"
+
+#: collectionfactory.cpp:127
+msgid "File Catalog"
+msgstr "Каталог файлов"
+
+#: collectionfactory.cpp:128
+msgid "Custom Collection"
+msgstr "Коллекция"
 
 #: viewstack.cpp:29
 msgid ""
@@ -4268,19 +4599,19 @@ msgstr ""
 msgid "Clear all search fields and results"
 msgstr "Очистить все поля и результаты поиска"
 
-#: fetchdialog.cpp:257
+#: fetchdialog.cpp:258
 msgid "Cancelling the search..."
 msgstr "Отменить поиск..."
 
-#: fetchdialog.cpp:272 fetchdialog.cpp:380
+#: fetchdialog.cpp:273 fetchdialog.cpp:381
 msgid "Searching..."
 msgstr "Поиск..."
 
-#: fetchdialog.cpp:326
+#: fetchdialog.cpp:327
 msgid "The search returned no items."
 msgstr "Поиск не дал результатов"
 
-#: fetchdialog.cpp:329
+#: fetchdialog.cpp:330
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
@@ -4289,37 +4620,37 @@ msgstr ""
 "Поиск дал 1 результат \n"
 "Поиск дал %n результатов."
 
-#: fetchdialog.cpp:351 fetchdialog.cpp:403
+#: fetchdialog.cpp:352 fetchdialog.cpp:404
 msgid "Fetching %1..."
 msgstr "Fetching %1..."
 
-#: fetchdialog.cpp:436
+#: fetchdialog.cpp:437
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 "Нет доступных интернет-источников для "
 "типа вашей текущей коллекции"
 
-#: fetchdialog.cpp:496
+#: fetchdialog.cpp:497
 msgid "Edit ISBN/UPC Values"
 msgstr "Редактировать значения ISBN/UPC"
 
-#: fetchdialog.cpp:500
+#: fetchdialog.cpp:501
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr ""
 "<qt>Введите значения ISBN/UPC, по одному в "
 "строку.</qt>"
 
-#: fetchdialog.cpp:506
+#: fetchdialog.cpp:507
 msgid "&Load From File..."
 msgstr "&Загрузить из файла"
 
-#: fetchdialog.cpp:507
+#: fetchdialog.cpp:508
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr ""
 "<qt>Загрузить список из текстового "
 "файла.</qt>"
 
-#: fetchdialog.cpp:526
+#: fetchdialog.cpp:527
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
@@ -4407,10 +4738,6 @@ msgstr ""
 "Создание отчетов больших коллекций может "
 "занять несколько десятков секунд."
 
-#: reportdialog.cpp:195 translators/htmlexporter.cpp:87
-msgid "*.html|HTML Files (*.html)"
-msgstr "*.html|Файлы HTML (*.html)"
-
 #: tellico_kernel.cpp:284
 msgid "Do you really want to delete this filter?"
 msgstr ""
@@ -4425,609 +4752,12 @@ msgstr "Удалить фильтр?"
 msgid "New collection name:"
 msgstr "Новое название коллекции:"
 
-#: translators/bibteximporter.cpp:58
-#, c-format
-msgid "No valid bibtex entries were found in file - %1"
-msgstr "Не найдено записей bibtex в этом файле - %1"
-
-#: translators/bibtexmlexporter.cpp:40
-msgid "*.xml|Bibtexml Files (*.xml)"
-msgstr "*.xml|Файлы Bibtexml (*.xml)"
-
-#: translators/alexandriaexporter.cpp:41
-msgid "Alexandria"
-msgstr "Alexandria"
-
-#: translators/alexandriaexporter.cpp:63
-msgid ""
-"<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
-"books in that library could be overwritten.</qt>"
-msgstr ""
-"<qt>Библиотека Alexandria <i>%1</i> уже существует. "
-"Любая существующая книга в этой "
-"библиотеке будет переписана.</qt>"
-
-#: translators/tellicoxmlexporter.cpp:56
-msgid "XML"
-msgstr "XML"
-
-#: translators/tellicoxmlexporter.cpp:464
-msgid "Tellico XML Options"
-msgstr "Опции XML (Tellico)"
-
-#: translators/tellicoxmlexporter.cpp:467
-msgid "Include images in XML document"
-msgstr "Включать изображения в файл XML"
-
-#: translators/tellicoxmlexporter.cpp:469
-msgid ""
-"If checked, the images in the document will be included in the XML stream as "
-"base64 encoded elements."
-msgstr ""
-"Если отмечено, то изображения будут "
-"включены в файл XML"
-
-#: translators/importer.h:90
-msgid "Loading data..."
-msgstr "Загружаются данные..."
-
-#: translators/importer.h:90
-msgid "Loading %1..."
-msgstr "Загружается %1..."
-
-#: translators/bibtexexporter.cpp:201
-msgid "Bibtex Options"
-msgstr "Опции Bibtex"
-
-#: translators/bibtexexporter.cpp:204
-msgid "Expand string macros"
-msgstr "Увеличить строку для макросов"
-
-#: translators/bibtexexporter.cpp:206
-msgid ""
-"If checked, the string macros will be expanded and no @string{} entries will "
-"be written."
-msgstr ""
-"Если отмечено, то строка для макросов "
-"будет увеличена и записи @string{} будут "
-"записаны"
-
-#: translators/bibtexexporter.cpp:209
-msgid "Use URL package"
-msgstr "Использовать пакеты URL"
-
-#: translators/bibtexexporter.cpp:211
-msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr ""
-"Если отмечено, то любые поля URL будут "
-"записаны как //url"
-
-#: translators/bibtexexporter.cpp:214
-msgid "Skip entries with empty citation keys"
-msgstr "Пропустить пустые поля"
-
-#: translators/bibtexexporter.cpp:216
-msgid "If checked, any entries without a bibtex citation key will be skipped."
-msgstr ""
-"Если отмечено, то пустые поля будут "
-"пропущены"
-
-#: translators/bibtexexporter.cpp:220
-msgid "Bibtex quotation style:"
-msgstr "Стиль цинирования bibtex:"
-
-#: translators/bibtexexporter.cpp:222 translators/bibtexexporter.cpp:229
-#: translators/bibtexexporter.cpp:260
-msgid "Braces"
-msgstr "Связи"
-
-#: translators/bibtexexporter.cpp:223 translators/bibtexexporter.cpp:231
-msgid "Quotes"
-msgstr "Цитаты"
-
-#: translators/bibtexexporter.cpp:224
-msgid ""
-"<qt>The quotation style used when exporting bibtex. All field values will  "
-"be escaped with either braces or quotation marks.</qt>"
-msgstr ""
-"<qt>При экспорте будет использоваться "
-"стиль цитирования bibtex.</qt>"
-
-#: translators/tellicozipexporter.cpp:35
-msgid "Tellico Zip File"
-msgstr "ZIP-файл Tellico"
-
-#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:166
-msgid "CSV Options"
-msgstr "Опции CSV"
-
-#: translators/csvimporter.cpp:174
-msgid "Select the type of collection being imported."
-msgstr ""
-"Выберите тип коллеции, который будет "
-"импортирован"
-
-#: translators/csvimporter.cpp:180
-msgid "&First row contains field titles"
-msgstr ""
-"&Первая строка содержит заголовки полей"
-
-#: translators/csvimporter.cpp:181
-msgid "If checked, the first row is used as field titles."
-msgstr ""
-"Первая строка содержит заголовки полей"
-
-#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:185
-msgid "Delimiter"
-msgstr "Ограничитель"
-
-#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:188
-msgid ""
-"In addition to a comma, other characters may be used as a delimiter, "
-"separating each value in the file."
-msgstr ""
-"Выберите ограничитель в файле CSV, который "
-"определяет граници каждого поля (В "
-"большинстве случаев запятая)"
-
-#: translators/csvimporter.cpp:193
-msgid "&Comma"
-msgstr "Запятая"
-
-#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:195
-msgid "Use a comma as the delimiter."
-msgstr "Использовать запятую как разделитель"
-
-#: translators/csvimporter.cpp:199
-msgid "&Semicolon"
-msgstr "Точка с запятой"
-
-#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:200
-msgid "Use a semi-colon as the delimiter."
-msgstr ""
-"Использовать точку с запятой как "
-"разделитель"
-
-#: translators/csvimporter.cpp:204
-msgid "Ta&b"
-msgstr "Tab"
-
-#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:205
-msgid "Use a tab as the delimiter."
-msgstr "Использовать \"Tab\" как разделитель"
-
-#: translators/csvimporter.cpp:209
-msgid "Ot&her:"
-msgstr "Другой:"
-
-#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:210
-msgid "Use a custom string as the delimiter."
-msgstr "Использовать другой разделить"
-
-#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:216
-msgid "A custom string, such as a colon, may be used as a delimiter."
-msgstr "Свой разделитель (напр, двоеточие)"
-
-#: translators/csvimporter.cpp:233
-msgid "The table shows up to the first five lines of the CSV file."
-msgstr ""
-"Таблица показывает первые 5 строк файла CSV"
-
-#: translators/csvimporter.cpp:240
-#, fuzzy
-msgid ""
-"<qt>Set each column to correspond to a field in the collection by choosing a "
-"column, selecting the field, then clicking the <i>Assign Field</i> "
-"button.</qt>"
-msgstr ""
-"<qt>Вы можете назначить каждому столбцу "
-"свое название. Просто выделите поле и "
-"нажмите на кнопку <i>Установить</i></qt>"
-
-#: translators/csvimporter.cpp:242
-msgid "Co&lumn:"
-msgstr "Столбец"
-
-#: translators/csvimporter.cpp:251
-msgid "&Data field in this column:"
-msgstr "Название поля в этом столбце:"
-
-#: translators/csvimporter.cpp:259
-msgid "&Assign Field"
-msgstr "&Добавить поле"
-
-#: translators/tellicoimporter.cpp:144
-msgid "It is from a future version of Tellico."
-msgstr "Из будущей версии Tellico"
-
-#: translators/tellicoimporter.cpp:150
-msgid ""
-"Tellico is converting the file to a more recent document format. Information "
-"loss may occur if an older version of Tellico is used to read this file in "
-"the future."
-msgstr ""
-"Вы пытаетесь импортировать информацию из "
-"файлов, созданных более ранними версиями "
-"Tellico. Это может привести к потере "
-"информации."
-
-#: translators/bibtexhandler.cpp:244 translators/risimporter.cpp:263
-#: translators/risimporter.cpp:267 translators/tellicoimporter.cpp:328
-msgid "Unknown"
-msgstr "Неизвестный"
-
-#: translators/tellicoimporter.cpp:706
-msgid "The file is empty."
-msgstr "Файл пустой"
-
-#: translators/tellicoimporter.cpp:724
-msgid "The file contains no collection data."
-msgstr "Файл не содержит данных коллекций"
-
-#: translators/tellicoimporter.cpp:868
-msgid "Unread Books"
-msgstr "Непрочитанные книги"
-
-#: translators/tellicoimporter.cpp:878
-msgid "Old Movies"
-msgstr "Старые фильмы"
-
-#: translators/tellicoimporter.cpp:896
-msgid "80's Music"
-msgstr "Музыка 80-х"
-
-#: translators/tellicoimporter.cpp:908
-msgid "Favorites"
-msgstr "Избранное"
-
-#: translators/risimporter.cpp:265
-msgid "PDF"
-msgstr "PDF"
-
-#: translators/audiofileimporter.cpp:65
-msgid "Scanning audio files..."
-msgstr "Читаются аудио-файлы..."
-
-#: translators/audiofileimporter.cpp:300
-msgid "Audio File Options"
-msgstr "Опции аудио-файлов"
-
-#: translators/audiofileimporter.cpp:302
-msgid "Recursive &folder search"
-msgstr "Рекурсивный поиск по каталогам"
-
-#: translators/audiofileimporter.cpp:303
-msgid "If checked, folders are recursively searched for audio files."
-msgstr ""
-"Если отмечено, то поиск аудио-файлов "
-"будет производить по всем каталогам"
-
-#: translators/audiofileimporter.cpp:307
-msgid "&Include file location"
-msgstr "&Включать местоположение файла"
-
-#: translators/audiofileimporter.cpp:308
-msgid "If checked, the file names for each track are added to the entries."
-msgstr ""
-"Если отмечено, то в записи будет "
-"добавлены названия файлов"
-
-#: translators/csvexporter.cpp:40
-msgid "CSV"
-msgstr "CSV"
-
-#: translators/csvexporter.cpp:112
-msgid "Include field titles as column headers"
-msgstr "Вместе с заголовками столбцов"
-
-#: translators/csvexporter.cpp:114
-msgid "If checked, a header row will be added with the field titles."
-msgstr ""
-"Если отмечено, то будет добавлена первая "
-"строка в качестве заголовка"
-
-#: translators/csvexporter.cpp:124
-msgid "Comma"
-msgstr "Запятая"
-
-#: translators/csvexporter.cpp:130
-msgid "Semicolon"
-msgstr "Точка с запятой"
-
-#: translators/csvexporter.cpp:135
-msgid "Tab"
-msgstr "Tab"
-
-#: translators/csvexporter.cpp:140
-msgid "Other"
-msgstr "Другой"
-
-#: translators/pilotdbexporter.cpp:43
-msgid "PilotDB"
-msgstr "PilotDB"
-
-#: translators/pilotdbexporter.cpp:47
-msgid "*.pdb|Pilot Database Files(*.pdb)"
-msgstr "*.pdb|Файлы базы данных Pilot(*.pdb)"
-
-#: translators/pilotdbexporter.cpp:210
-msgid "PilotDB Options"
-msgstr "Опции PilotDB"
-
-#: translators/pilotdbexporter.cpp:213 translators/pilotdbexporter.cpp:215
-msgid "Set PDA backup flag for database"
-msgstr "Установить бэкап PDA для базы данных"
-
-#: translators/onixexporter.cpp:62
-msgid "ONIX Archive"
-msgstr "Архив ONIX"
-
-#: translators/onixexporter.cpp:66
-msgid "*.zip|Zip Files (*.zip)"
-msgstr "*.zip|Файлы ZIP (*.zip)"
-
-#: translators/onixexporter.cpp:175
-msgid "ONIX Archive Options"
-msgstr "Опции архива ONIX"
-
-#: translators/onixexporter.cpp:178
-msgid "Include images in archive"
-msgstr "Включать изображения в архив"
-
-#: translators/onixexporter.cpp:180
-msgid ""
-"If checked, the images in the document will be included in the zipped ONIX "
-"archive."
-msgstr ""
-"Если отмечено, то изображения будут "
-"сжиматься в ZIP-архив ONIX"
-
-#: translators/freedbimporter.cpp:84 translators/freedbimporter.cpp:137
-msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr ""
-"<qt>Tellico не удается получить доступ к "
-"устройству CD-ROM - <i>%1</i>.</qt>"
-
-#: translators/freedbimporter.cpp:163
-#, fuzzy
-msgid "Select CDDB Entry"
-msgstr "Удалить запись"
-
-#: translators/freedbimporter.cpp:164
-#, fuzzy
-msgid "Select a CDDB entry:"
-msgstr "Выберите результат IMDB"
-
-#: translators/freedbimporter.cpp:187
-msgid "<qt>No records were found to match the CD.</qt>"
-msgstr ""
-"<qt>По вашему запросу ничего не найдено</qt>"
-
-#: translators/freedbimporter.cpp:205
-msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr ""
-"<qt>Tellico не удалось получить данные по "
-"всему диску.</qt>"
-
-#: translators/freedbimporter.cpp:426
-msgid "Various"
-msgstr "Переменный"
-
-#: translators/freedbimporter.cpp:445
-msgid "Audio CD Options"
-msgstr "Опции Audio CD"
-
-#: translators/freedbimporter.cpp:449
-msgid "Read data from CD-ROM device"
-msgstr "Прочитать данные с устройства CD-ROM"
-
-#: translators/freedbimporter.cpp:452
-msgid "Select or input the CD-ROM device location."
-msgstr ""
-"Выберите или введите адрес вашего "
-"устройства CD-ROM"
-
-#: translators/freedbimporter.cpp:458
-msgid "Read all CDDB cache files only"
-msgstr "Прочитать только файлы CDDB"
-
-#: translators/freedbimporter.cpp:459
-msgid ""
-"Read data recursively from all the CDDB cache files contained in the default "
-"cache folders."
-msgstr ""
-"Прочитать рекурсивно данные из файлов CDDB"
-
-#: translators/xsltimporter.cpp:45 translators/xsltimporter.cpp:51
-msgid "A valid XSLT file is needed to import the file."
-msgstr "Для импорта нужен правильный файл XSLT"
-
-#: translators/xsltexporter.cpp:69 translators/xsltimporter.cpp:79
-msgid "XSLT Options"
-msgstr "Опции XSLT"
-
-#: translators/xsltexporter.cpp:74 translators/xsltimporter.cpp:82
-msgid "XSLT file:"
-msgstr "Файл XSLT"
-
-#: translators/xsltexporter.cpp:37
-msgid "XSLT"
-msgstr "XSLT"
-
-#: translators/xsltexporter.cpp:76
-msgid "Choose the XSLT file used to transform the Tellico XML data."
-msgstr ""
-"Выберите файл XSLT, который будет "
-"использоваться для перевода в формат Tellico "
-"XML"
-
-#: translators/alexandriaimporter.cpp:178
-msgid "Alexandria Options"
-msgstr "Опции Alexandria"
-
-#: translators/alexandriaimporter.cpp:179
-msgid "&Library:"
-msgstr "&Библиотека:"
-
-#: translators/htmlexporter.cpp:83
-msgid "HTML"
-msgstr "HTML"
-
-#: translators/htmlexporter.cpp:318
-msgid "(grouped by %1)"
-msgstr "(сгруппировано по %1)"
-
-#: translators/htmlexporter.cpp:463
-msgid "HTML Options"
-msgstr "Опции HTML"
-
-#: translators/htmlexporter.cpp:466
-msgid "Print field headers"
-msgstr "Включить заголовки полей"
-
-#: translators/htmlexporter.cpp:471
-msgid "Group the entries"
-msgstr "Группировать записи"
-
-#: translators/htmlexporter.cpp:476
-msgid "Export individual entry files"
-msgstr ""
-"Экспорт каждой записи в отдельный файл"
-
-#: translators/htmlexporter.cpp:477
-msgid "If checked, individual files will be created for each entry."
-msgstr ""
-"Если отмечено, то каждая запись будет "
-"выводиться в отдельный файл."
-
-#: translators/gcfilmsimporter.cpp:85
-msgid "<qt>The file is not a valid GCfilms data file.</qt>"
-msgstr "<qt>Этот файл не содержит данных GCFilms.</qt>"
-
-#: translators/filelistingimporter.cpp:62
-msgid "Scanning files..."
-msgstr "Сканируются файлы..."
-
-#: translators/filelistingimporter.cpp:197
-msgid "File Listing Options"
-msgstr "Опции импортирования файлов"
-
-#: translators/filelistingimporter.cpp:199
-msgid "Recursive folder search"
-msgstr "Рекурсивный поиск по каталогам"
-
-#: translators/filelistingimporter.cpp:200
-msgid "If checked, folders are recursively searched for all files."
-msgstr ""
-"Если отмечено, будет произведен "
-"рекурсивный поиск по каталогам."
-
-#: translators/filelistingimporter.cpp:204
-msgid "Generate file previews"
-msgstr "Создавать значки файлов"
-
-#: translators/filelistingimporter.cpp:205
-msgid ""
-"If checked, previews of the file contents are generated, which can slow down "
-"the folder listing."
-msgstr ""
-"Если отмечено, то будут создаваться "
-"значки файлов (например, уменьшенная "
-"копия фотографии)."
-
 #: entryview.cpp:168
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr ""
 "Tellico не удается установить "
 "местанахождение листа стилей записей по "
 "умолчанию"
-
-#: core/tellico_config.cpp:118
-msgid ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-msgstr ""
-"a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
-"up,with"
-
-#: core/tellico_config.cpp:121
-msgid "the"
-msgstr "the"
-
-#: core/tellico_config.cpp:124
-msgid "jr.,jr,iii,iv"
-msgstr "мл., ст.,jr.,jr"
-
-#: core/tellico_config.cpp:127
-msgid "de,van,der,van der,von"
-msgstr "de,van,der,van der,von"
-
-#: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
-msgid "Data Source Properties"
-msgstr "Свойства источника данных"
-
-#: fetcherconfigdialog.cpp:77
-msgid "&Source name: "
-msgstr "Н&азвание источника"
-
-#: fetcherconfigdialog.cpp:79
-msgid ""
-"The name identifies the data source and should be unique and informative."
-msgstr "Название источника"
-
-#: fetcherconfigdialog.cpp:90 fetcherconfigdialog.cpp:94
-msgid "Source &type: "
-msgstr "&Тип источника"
-
-#: fetcherconfigdialog.cpp:97
-msgid "Tellico supports several different data sources."
-msgstr ""
-"Tellico также поддерживает другие источники "
-"данных"
-
-#: fetcherconfigdialog.cpp:111
-msgid "Updating from source should overwrite user data"
-msgstr ""
-
-#: fetcherconfigdialog.cpp:114
-#, fuzzy
-msgid "If checked, updating entries will overwrite any existing information."
-msgstr ""
-"Если отмечено, то записи будут "
-"сгруппированы по выделенному полю"
-
-#: cite/lyxpipe.cpp:47
-msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
-msgstr ""
-"<qt>Tellico не удается записать на сервер "
-"<b>%1</b>.</qt>"
-
-#: cite/openoffice.cpp:80
-msgid "Connecting to OpenOffice.org..."
-msgstr "Соединение с OpenOffice.org..."
-
-#: cite/openoffice.cpp:163 cite/openoffice.cpp:183
-msgid "OpenOffice.org Connection"
-msgstr "Соединение с OpenOffice.org"
-
-#: cite/openoffice.cpp:177
-#, fuzzy
-msgid ""
-"Tellico was unable to connect to OpenOffice.org. Please verify the "
-"connection settings below, and that OpenOffice.org Writer is currently "
-"running."
-msgstr ""
-"Tellico не удается соединиться с OpenOffice.org.\n"
-"Проверьте настройки соединения и то,\n"
-"что OpenOffice запущен в настоящий момент"
-
-#: cite/openoffice.cpp:188
-msgid "Pipe"
-msgstr "Канал"
-
-#: cite/openoffice.cpp:190
-msgid "TCP/IP"
-msgstr "TCP/IP"
 
 #: rc.cpp:2
 msgid "&New"
@@ -5041,106 +4771,376 @@ msgstr "&Коллекция"
 msgid "Collection Toolbar"
 msgstr "Панель коллекции"
 
-#: entryupdater.cpp:82
-msgid "Updating %1..."
-msgstr "Обновление %1..."
-
-#: entryupdater.cpp:84
-msgid "Updating entries..."
-msgstr "&Обновление записей..."
-
-#: entryupdater.cpp:86
-#, fuzzy
-msgid "Update Entries"
-msgstr "&Обновить записи"
-
-#: entryupdater.cpp:100
-msgid "Updating <b>%1</b>..."
-msgstr "Обновление <b>%1</b>..."
-
-#: entryupdater.cpp:210
-msgid "Select Match"
-msgstr "Выберите результат"
-
-#: entryupdater.cpp:218
+#: _translatorinfo.cpp:1
 msgid ""
-"<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
-"entry currently in the collection. Please select the correct match.</qt>"
-msgstr ""
-"<qt> Поиск дал несколько результатов. "
-"Выберите то, который необходим вам.</qt>"
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Калимуллин Артур"
 
-#: newstuff/dialog.cpp:93
-msgid "Get Hot New Stuff"
-msgstr ""
-
-#: newstuff/dialog.cpp:113
-#, fuzzy
-msgid "Version"
-msgstr "Человек"
-
-#: newstuff/dialog.cpp:115
-msgid "Downloads"
-msgstr ""
-
-#: newstuff/dialog.cpp:116
-#, fuzzy
-msgid "Release Date"
-msgstr "Год выпуска"
-
-#: newstuff/dialog.cpp:120
+#: _translatorinfo.cpp:3
 msgid ""
-"This is a list of all the items available for download. Previously installed "
-"items have a checkmark icon, while items with new version available have an "
-"update icon"
-msgstr ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "kalimullin@gmail.com"
 
-#: newstuff/dialog.cpp:136
-#, fuzzy
-msgid "The name and license of the selected item"
-msgstr "Вернуть из долга выделенные вещи"
-
-#: newstuff/dialog.cpp:139
-#, fuzzy
-msgid "The author of the selected item"
-msgstr "Отдать выделенные записи в долг"
-
-#: newstuff/dialog.cpp:141 newstuff/dialog.cpp:395
-msgid "Install"
-msgstr ""
-
-#: newstuff/dialog.cpp:160
-msgid "Download and install the selected template."
-msgstr ""
-
-#: newstuff/dialog.cpp:163
+#: tips.cpp:3
 msgid ""
-"Download and install the selected script. Some scripts may need to be "
-"configured after being installed."
+"<p>...that if a book has more than one author, you should separate\n"
+"their names by a semi-colon, so that Tellico will know to split them\n"
+"and use them separately.</p>\n"
+"<p>Any other field which allows multiple values should be entered the\n"
+"same way. with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
+"<p>...что если книга имеет больше, чем "
+"одного автора, то вам следует разделять\n"
+"точкой с запятой (;). Таким образом, Tellico "
+"будет разделять их имена.</p>\n"
+"<p>Любое другое поле также поддерживает "
+"эту функцию. Для этого вам следует\n"
+"разделять каждые значения точкой с "
+"запятой (;).\n"
+"Например: Пушкин;Гоголь.</p>\n"
 
-#: newstuff/dialog.cpp:193
-#, fuzzy
-msgid "A description of the selected item is shown here."
-msgstr "Вернуть из долга выделенные вещи"
-
-#: newstuff/dialog.cpp:223
-#, fuzzy
-msgid "Downloading information..."
-msgstr ""
-"Импорт информации об Audio CD из базы данных "
-"FreeDB"
-
-#: newstuff/dialog.cpp:395
+#: tips.cpp:11
 msgid ""
-"_: Update Stuff\n"
-"Update"
+"<p>...that you can change which fields are shown in the list view by\n"
+"right-clicking on the column header.\n"
+msgstr ""
+"<p>...что вы можете выбрать какие поля "
+"следует показывать в списке записей,\n"
+"кликнув правой кнопкой мыши на заголовке "
+"\"таблицы\".\n"
+
+#: tips.cpp:16
+msgid ""
+"<p>...that you can add, edit, or modify the fields in the collection using\n"
+"the Field Editor. The arrow buttons below the field list can be used to "
+"change the\n"
+"position of the field in the list, which affects the placement in the entry\n"
+"editor.</p>\n"
+msgstr ""
+"<p>...что вы можете добавлять, "
+"редактировать или удалять поля в "
+"коллекции,\n"
+"используя Редактор полей. Кнопки стрелок "
+"позволяют вам менять позицию полей в "
+"списке,\n"
+"которая влияет на расстановку в "
+"Редакторе записей.</p>\n"
+
+#: tips.cpp:23
+msgid ""
+"<p>...that if you want to filter by a Checkbox field, a value of\n"
+"\"true\" should be used. If you'd like to filter to\n"
+"show only the science fiction books which you've not read, for\n"
+"example, check the <em>Match all of the\n"
+"following</em> button,  set the first rule to have \"Genre\"\n"
+"\"contains\" \"Science Fiction\" (no quotes) and the second rule to\n"
+"have \"Read\" \"does not contain\" \"true\" (no quotes).</p>\n"
+msgstr ""
+"<p>...что если вы хотите отфильтровать "
+"записи по полю \"Выбор да/нет\",\n"
+"то должно использоваться значение \"да\". "
+"Например, если вы хотите посмотреть, "
+"какие детективы вы ещё не читали,\n"
+"нажмите кнопку \"Соответствует всему "
+"следующему\",\n"
+"установите первое правило на \"Жанр\"\n"
+"\"содержит\" \"Детектив\" (без кавычек) и "
+"второе правило на \"Прочитана\" \"Не "
+"содержит\" \"Да\" (без кавычек).</p>\n"
+
+#: tips.cpp:33
+msgid ""
+"<p>...that if a non-word character is used in the Quick Filter, the text is\n"
+"interpreted as a regular expression.</p>\n"
+"<p>To show only books which are by Weber or Bujold, for example, then\n"
+"type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
+msgstr ""
+"<p>...что если в быстром фильтре "
+"используется символ, не входящий в слова "
+"(напр., ^)\n"
+"текст интерпретируется как регулярное "
+"выражение.</p>\n"
+"<p>Например, чтобы посмотреть только "
+"книги, которые написали Пушкин и Гоголь,\n"
+"введите \"Пушкин|Гоголь\" (без кавычек) в "
+"поле быстрого фильтра.</p>\n"
+
+#: tips.cpp:40
+msgid ""
+"<p>...that you can edit more than one entry at a time, by holding down\n"
+"the Shift or Ctrl key and selecting multiple entries.</p>\n"
+msgstr ""
+"<p>...что за один раз вы можете "
+"отредактировать больше, чем одно поле.\n"
+"Для этого выделите несколько полей, "
+"зажимая клавиши Shift или Ctrl.</p>\n"
+
+#: tips.cpp:45
+msgid ""
+"<p>...that you can convert an existing book collection to a bibliography,\n"
+"which can then be exported to bibtex or Bibtexml format.</p>\n"
+msgstr ""
+"<p>...что вы можете конвертировать текущую "
+"коллекцию книг в библиографию,\n"
+"которая может быть экспортирована в "
+"формат Bibtex или Bibtexml.</p>\n"
+
+#: tips.cpp:50
+msgid ""
+"<p>...that you can add, edit, and delete string macros for "
+"bibliographies.</p>\n"
+msgstr ""
+"<p>...что вы можете добавлять, "
+"редактировать и удалять строковые "
+"макросы для библиографий.</p>\n"
+
+#: tips.cpp:54
+msgid ""
+"<p>...that if more than one field is formatted as a name, then an "
+"additional\n"
+"group named \"People\" is added to the collection, allowing authors and "
+"editors\n"
+"to be sorted or printed together, for example.</p>\n"
+msgstr ""
+"<p>...что если более чем одно поле "
+"форматируется как \"имя\", то в коллекцию\n"
+"добавляется дополнительная группа "
+"\"Люди\", например, для сортировки и печати "
+"вместе.</p>\n"
+
+#: tips.cpp:60
+msgid ""
+"<p>...that you can modify the appearance of the printed output by modifying\n"
+"the <tt>tellico-printing.xsl</tt> file. The file generates HTML, and the "
+"CSS\n"
+"within the stylesheet governs things like the font, the margins, etc.</p>\n"
+msgstr ""
+"<p>...что вы можете менять внешний вид, "
+"печатаемых отчетов, редактируя\n"
+"файл <tt>tellico-printing.xsl</tt>. Этот файл создает "
+"HTML и CSS\n"
+"с такими элементами как шрифт, размер и "
+"т.д. </p>\n"
+
+#: tips.cpp:66
+msgid ""
+"<p>...that you can import using any generic XSL stylesheet which\n"
+"outputs a valid Tellico XML file.</p>\n"
+msgstr ""
+"<p>...что вы можете импортировать, "
+"используя стандартный\n"
+"лист стилей XSL, на выходе получая "
+"правильный файл Tellico XML.</p>\n"
+
+#: tips.cpp:71
+msgid "<p>...that double-clicking an entry item opens the Entry Editor.</p>\n"
+msgstr ""
+"<p>...что двойной щелчок на записи "
+"открывает редактор записей.</p>\n"
+
+#: tips.cpp:75
+msgid ""
+"<p>...that you can add HTML tags to any Paragraph field for formatting, such "
+"as\n"
+"&lt;b&gt;bold&lt;/b&gt; or &lt;i&gt;italic&lt;/i&gt;.</p>\n"
+msgstr ""
+"<p>...что в любое поле типа \"Большой текст\" "
+"вы можете добавлять теги HTML, такие как \n"
+"&lt;b&gt;жирный шрифт&lt;/b&gt; или "
+"&lt;i&gt;курсивный&lt;/i&gt;.</p>\n"
+
+#: tips.cpp:80
+msgid ""
+"<p>...that in the Detailed View, you can press a letter on the\n"
+"keyboard to skip to the next entry that starts with that letter.</p>\n"
+msgstr ""
+"<p>...что в подробном виде вы можете нажать "
+"кнопку буквы на клавиатуре для\n"
+"перехода к записи, начинающейся с этой "
+"буквы.</p>\n"
+
+#: xslt.cpp:2
+msgid ""
+"_: Album XSL Template\n"
+"Album"
+msgstr "Альбом"
+
+#: xslt.cpp:3
+msgid "This template is meant for music collections only."
+msgstr ""
+"Этот шаблон предназначен только за "
+"музыкальных коллекций."
+
+#: xslt.cpp:5
+msgid "Total:"
+msgstr "&Всего:"
+
+#: xslt.cpp:7
+msgid ""
+"_: Fancy XSL Template\n"
+"Fancy"
+msgstr "Обычный"
+
+#: xslt.cpp:9
+msgid ""
+"_: Default XSL Template\n"
+"Default"
+msgstr "По умолчанию"
+
+#: xslt.cpp:11
+msgid ""
+"_: Compact XSL Template\n"
+"Compact"
+msgstr "Компактный"
+
+#: xslt.cpp:13
+msgid ""
+"_: Video XSL Template\n"
+"Video"
+msgstr "Видео"
+
+#: xslt.cpp:14 xslt.cpp:43
+msgid "This template is meant for video collections only."
+msgstr ""
+"Этот шаблон предназначен только для "
+"коллекций фильмов"
+
+#: xslt.cpp:16
+msgid ""
+"_: Group Summary XSL Template\n"
+"Group Summary"
+msgstr "Всего в группе"
+
+#: xslt.cpp:17
+msgid ": Group Summary"
+msgstr ": Всего в группе"
+
+#: xslt.cpp:18
+msgid "Total number of fields:"
+msgstr "Всего полей:"
+
+#: xslt.cpp:19
+msgid "Total number of entries:"
+msgstr "Всего записей:"
+
+#: xslt.cpp:20 xslt.cpp:32 xslt.cpp:46
+#, fuzzy
+msgid "Generated by Tellico"
+msgstr "Создан"
+
+#: xslt.cpp:21
+msgid "Distinct values: "
+msgstr "Точные значения:"
+
+#: xslt.cpp:23
+msgid ""
+"_: Image List XSL Template\n"
+"Image List"
+msgstr "Список изображений"
+
+#: xslt.cpp:25
+msgid ""
+"_: Loan View XSL Template\n"
+"Loan View"
+msgstr "Долги"
+
+#: xslt.cpp:27 xslt.cpp:29
+msgid "Loan Date"
+msgstr "Дата дачи в долг"
+
+#: xslt.cpp:28 xslt.cpp:31
+msgid "Note"
+msgstr "Заметки"
+
+#: xslt.cpp:30
+msgid "Due Date"
+msgstr "Дата окончания долга:"
+
+#: xslt.cpp:34
+msgid ""
+"_: Group View XSL Template\n"
+"Group View"
+msgstr "Группы"
+
+#: xslt.cpp:36
+msgid ""
+"_: Title Listing (Horizontal) XSL Template\n"
+"Title Listing (Horizontal)"
+msgstr "Список названий (горизонтальный)"
+
+#: xslt.cpp:38
+msgid ""
+"_: Title Listing (Vertical) XSL Template\n"
+"Title Listing (Vertical)"
+msgstr "Список названий (вертикальный)"
+
+#: xslt.cpp:40
+msgid ""
+"_: Column View XSL Template\n"
+"Column View"
+msgstr "Столбцы"
+
+#: xslt.cpp:42
+msgid ""
+"_: Tri-Column XSL Template\n"
+"Tri-Column"
+msgstr "В три столбца"
+
+#: xslt.cpp:44
+#, fuzzy
+msgid "Search"
+msgstr "&Поиск"
+
+#: z3950.cpp:4
+msgid "The British Library"
 msgstr ""
 
-#: newstuff/dialog.cpp:412
+#: z3950.cpp:6
 #, fuzzy
-msgid "Installing item..."
-msgstr "Сохранение файла...."
+msgid "Sudoc (France)"
+msgstr "Amazon (Франция)"
+
+#: z3950.cpp:8
+msgid "BIBSYS (Norway)"
+msgstr ""
+
+#: z3950.cpp:10
+msgid "Italian National Library"
+msgstr ""
+
+#: z3950.cpp:12
+msgid "Portuguese National Library"
+msgstr ""
+
+#: z3950.cpp:14
+msgid "National Library of Poland"
+msgstr ""
+
+#: z3950.cpp:16
+msgid "National Library of Canada"
+msgstr ""
+
+#: z3950.cpp:18
+msgid "Israel Union List"
+msgstr ""
+
+#: z3950.cpp:20
+msgid "National Library of Australia"
+msgstr ""
+
+#: scripts.cpp:2
+msgid "Dark Horse Comics"
+msgstr ""
+
+#: scripts.cpp:4
+msgid "Allocine.fr"
+msgstr ""
+
+#: scripts.cpp:6
+msgid "Spanish Ministry of Culture"
+msgstr ""
 
 #~ msgid "Tellico"
 #~ msgstr "Tellico"

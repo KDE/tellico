@@ -43,6 +43,7 @@ QString Tellico::decodeHTML(QString text) {
     text.replace(pos, rx.matchedLength(), QChar((rx.cap(1).toInt())));
     pos = rx.search(text, pos+1);
   }
+  text.replace(QString::fromLatin1("&nbsp;"), QChar(' '));
   return text;
 }
 

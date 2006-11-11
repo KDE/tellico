@@ -19,6 +19,7 @@
 
 #include <qobject.h>
 #include <qmap.h>
+#include <qguardedptr.h>
 
 namespace Tellico {
 
@@ -114,7 +115,7 @@ private:
   void updateTotalProgress();
   void setDone(ProgressItem* item);
 
-  typedef QMap<const QObject*, ProgressItem*> ProgressMap;
+  typedef QMap<QGuardedPtr<const QObject>, QGuardedPtr<ProgressItem> > ProgressMap;
   ProgressMap m_items;
 
   static ProgressManager* s_self;

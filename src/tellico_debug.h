@@ -28,7 +28,7 @@
 #endif
 
 #ifndef NDEBUG
-//#define TELLICO_DEBUG
+#define TELLICO_DEBUG
 #endif
 
 namespace Debug {
@@ -87,7 +87,7 @@ public:
 
 private :
   std::clock_t m_start;
-  const char* m_label;
+  QCString m_label;
 };
 
 #define myDebug() Debug::debug()

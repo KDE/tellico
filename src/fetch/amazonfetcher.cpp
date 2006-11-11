@@ -729,13 +729,12 @@ void AmazonFetcher::initXSLTHandler() {
 
 void AmazonFetcher::updateEntry(Data::EntryPtr entry_) {
 //  myDebug() << "AmazonFetcher::updateEntry()" << endl;
-  // limit to top 5 results
-  m_limit = 5;
 
   int type = entry_->collection()->type();
   if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
     QString isbn = entry_->field(QString::fromLatin1("isbn"));
     if(!isbn.isEmpty()) {
+      m_limit = 5; // no need for more
       search(Fetch::ISBN, isbn);
       return;
     }
@@ -750,7 +749,6 @@ void AmazonFetcher::updateEntry(Data::EntryPtr entry_) {
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QString::fromLatin1("title"));
   if(!t.isEmpty()) {
-    m_limit = 10; // raise limit so more possibility of match
     search(Fetch::Title, t);
     return;
   }

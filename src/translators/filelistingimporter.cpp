@@ -182,7 +182,6 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     return 0;
   }
 
-  m_coll->updateDicts(m_coll->entries());
   return m_coll;
 }
 

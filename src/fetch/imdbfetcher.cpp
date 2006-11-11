@@ -843,8 +843,12 @@ void IMDBFetcher::doCast(const QString& str_, Data::EntryPtr entry_, const KURL&
   // be in the short list
   QRegExp idRx(QString::fromLatin1("title/(tt\\d+)"));
   idRx.search(baseURL_.path());
+#ifdef IMDB_TEST
+  KURL castURL = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/imdb-title-fullcredits.html"));
+#else
   KURL castURL = baseURL_;
   castURL.setPath(QString::fromLatin1("/title/") + idRx.cap(1) + QString::fromLatin1("/fullcredits"));
+#endif
   // be quiet about failure and be sure to translate entities
   QString castPage = Tellico::decodeHTML(FileHandler::readTextFile(castURL, true));
 
@@ -854,7 +858,16 @@ void IMDBFetcher::doCast(const QString& str_, Data::EntryPtr entry_, const KURL&
   if(!castText.isEmpty()) {
     // fragile, the word "cast" appears in the title, but need to find
     // the one right above the actual cast table
+    // for TV shows, there's a link on the sidebar for "episodes case"
+    // so need to not match that one
     pos = castText.find(QString::fromLatin1("cast</"), 0, false);
+    if(pos > 9) {
+      // back up 9 places
+      if(castText.mid(pos-9, 9).startsWith(QString::fromLatin1("episodes"))) {
+        // find next cast list
+        pos = castText.find(QString::fromLatin1("cast</"), pos+6, false);
+      }
+    }
   } else { // fall back to short list
     pos = str_.find(QString::fromLatin1("cast overview"), 0, false);
     if(pos == -1) {

@@ -25,6 +25,8 @@
 
 #include <qfile.h>
 
+#define RELEASE_IMAGES
+
 using Tellico::ImageFactory;
 
 bool ImageFactory::s_needInit = true;
@@ -88,6 +90,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KURL& url_, bool qu
   }
 
   if(hasImage(img->id())) {
+//    myDebug() << "### ImageFactory::addImageImpl() - hasImage() is true!" << endl;
     const Data::Image& img2 = imageById(img->id());
     if(!img2.isNull()) {
       delete img;
@@ -139,7 +142,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
   // do not call imageById(), it causes infinite looping with Document::loadImage()
   Data::Image* img = s_imageCache.find(id_);
   if(img) {
-//    myLog() << "ImageFactory::addImageImpl(QByteArray) - already exists in cache: " << id_ << endl;
+    myLog() << "ImageFactory::addImageImpl(QByteArray) - already exists in cache: " << id_ << endl;
     return *img;
   }
 
@@ -182,11 +185,11 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
   // addImage() already inserted it in the dict
   Data::Image* img = s_imageDict.take(newID);
   if(!img) {
-    myDebug() << "ImageFactory::addCachedImageImpl() - no image in dict - very bad!" << endl;
+    kdWarning() << "ImageFactory::addCachedImageImpl() - no image in dict - very bad!" << endl;
     return s_null;
   }
   if(img->isNull()) {
-    myDebug() << "ImageFactory::addCachedImageImpl() - null image in dict, should never happen!" << endl;
+    kdWarning() << "ImageFactory::addCachedImageImpl() - null image in dict, should never happen!" << endl;
     delete img;
     return s_null;
   }
@@ -247,7 +250,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
   bool exists = ( dir_ == DataDir ? QFile::exists(path + id_) : s_imagesInTmpDir.has(id_) );
 
   if(!force_ && exists) {
-//    myDebug() << "...exists = true: " << id_ << endl;
+//    myDebug() << "...writeCachedImage() - exists = true: " << id_ << endl;
   } else {
 //    myLog() << "ImageFactory::writeCachedImage() - dir = " << (dir_ == DataDir ? "DataDir" : "TmpDir" )
 //                                                           << "; id = " << id_ << endl;
@@ -286,17 +289,21 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
 //  myLog() << "ImageFactory::imageById() - " << id_ << endl;
 
   // can't think of a better place to regularly check for images to release
+  // but don't release image that just got asked for
+  s_imagesToRelease.remove(id_);
   releaseImages();
 
  // first check the cache, used for images that are in the data file, or are only temporary
  // then the dict, used for images downloaded, but not yet saved anywhere
   Data::Image* img = s_imageCache.find(id_);
   if(img) {
+//    myLog() << "...imageById() - found in cache" << endl;
     return *img;
   }
 
   img = s_imageDict.find(id_);
   if(img) {
+//    myLog() << "...imageById() - found in dict" << endl;
     return *img;
   }
 
@@ -306,7 +313,10 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(s_imagesInTmpDir.has(id_)) {
     const Data::Image& img2 = addCachedImageImpl(id_, TempDir);
     if(!img2.isNull()) {
+//      myLog() << "...imageById() - found in tmp dir" << endl;
       return img2;
+    } else {
+      s_imagesInTmpDir.remove(id_);
     }
   }
 
@@ -318,6 +328,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
       img = s_imageDict.find(id_);
     }
     if(img) {
+//      myLog() << "...imageById() - found in doc" << endl;
       // we could go ahead and write image to disk so we don't have to keep it in memory
       // but Document::slotWriteAllImages() is probably the one doing the loading
       // so we'll just let it do its job
@@ -341,6 +352,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     if(img2.isNull()) {
       myDebug() << "ImageFactory::imageById() - tried to add from DataDir, but failed: " << id_ << endl;
     } else {
+//      myLog() << "...imageById() - found in data dir" << endl;
       return img2;
     }
   } else {
@@ -387,10 +399,6 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
   } else {
     pix = new QPixmap(img.convertToPixmap());
   }
-  // the image might be so big, it won't stay in the cache
-  // so the only time it ends up getting loaded is for the pixmap
-  // so try to release it
-  releaseImages();
 
   // pixmap size is w x h x d, divided by 8 bits
   if(!s_pixmapCache.insert(key, pix, pix->width()*pix->height()*pix->depth()/8)) {
@@ -490,12 +498,14 @@ bool ImageFactory::hasImage(const QString& id_) {
 // either in tempDir() or in dataDir(). The use for this is for calling pixmap() on an
 // image too big to stay in the cache. Then it stays in the dict forever.
 void ImageFactory::releaseImages() {
+#ifdef RELEASE_IMAGES
   if(s_imagesToRelease.isEmpty()) {
     return;
   }
 
   const QStringList images = s_imagesToRelease.toList();
   for(QStringList::ConstIterator it = images.begin(); it != images.end(); ++it) {
+    s_imagesToRelease.remove(*it);
     if(!s_imageDict.find(*it)) {
       continue;
     }
@@ -507,6 +517,8 @@ void ImageFactory::releaseImages() {
 //      myDebug() << "...exists in tempDir() - removing from dict" << endl;
       s_imageDict.remove(*it);
     }
-    s_imagesToRelease.remove(*it);
   }
+#endif
 }
+
+#undef RELEASE_IMAGES

@@ -367,16 +367,24 @@ int Entry::compareValues(EntryPtr e1, EntryPtr e2, FieldPtr f) {
       return 5;
     }
   }
+  // try removing puctuation
+  QRegExp notAlphaNum(QString::fromLatin1("[^\\s\\w]"));
+  QString s1a = s1; s1a.remove(notAlphaNum);
+  QString s2a = s2; s2a.remove(notAlphaNum);
+  if(!s1a.isEmpty() && s1a == s2a) {
+//    myDebug() << "match without punctuation" << endl;
+    return 5;
+  }
   Field::stripArticles(s1);
   Field::stripArticles(s2);
-  if(s1 == s2) {
+  if(!s1.isEmpty() && s1 == s2) {
 //    myDebug() << "match without articles" << endl;
     return 3;
   }
   QRegExp rx(QString::fromLatin1("\\s*\\(.*\\)\\s*"));
   s1.remove(rx);
   s2.remove(rx);
-  if(s1 == s2) {
+  if(!s1.isEmpty() && s1 == s2) {
 //    myDebug() << "match without parentheses" << endl;
     return 1;
   }

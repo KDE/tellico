@@ -1,3 +1,15 @@
+2006-11-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.6.
+
+2006-11-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Improve TV show matching for IMDB.
+
+2006-11-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug in ProgressItem, reported by Izaak Branderhorst.
+
 2006-11-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.5.
