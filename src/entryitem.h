@@ -97,7 +97,7 @@ private:
   // if the parent is a DetailedListView
   // this way, I don't have to call listView()->isA("Tellico::DetailedListView") every time
   // when I want to do funky comparisons
-  bool m_customSort;
+  bool m_isDetailedList : 1;
 };
 
 } // end namespace

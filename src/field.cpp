@@ -219,12 +219,12 @@ QString Field::formatTitle(const QString& title_) {
   }
 
   if(Config::autoFormat()) {
+    const QString lower = newTitle.lower();
     // TODO if the title has ",the" at the end, put it at the front
-    const QStringList articles = Config::articleList();
+    const QStringList& articles = Config::articleList();
     for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
       // assume white space is already stripped
       // the articles are already in lower-case
-      QString lower = newTitle.lower();
       if(lower.startsWith(*it + QChar(' '))) {
         QRegExp regexp(QChar('^') + QRegExp::escape(*it) + QString::fromLatin1("\\s*"), false);
         // can't just use *it since it's in lower-case
@@ -405,6 +405,25 @@ QString Field::capitalize(QString str_) {
     pos = str_.find(rx, pos+1);
   }
   return str_;
+}
+
+QString Field::sortKeyTitle(const QString& title_) {
+  const QString lower = title_.lower();
+  const QStringList& articles = Config::articleList();
+  for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
+    // assume white space is already stripped
+    // the articles are already in lower-case
+    if(lower.startsWith(*it + QChar(' '))) {
+      return title_.mid((*it).length() + 1);
+    }
+  }
+  // check apostrophes, too
+  for(QStringList::ConstIterator it = s_articlesApos.begin(); it != s_articlesApos.end(); ++it) {
+    if(lower.startsWith(*it)) {
+      return title_.mid((*it).length());
+    }
+  }
+  return title_;
 }
 
 // articles should all be in lower-case

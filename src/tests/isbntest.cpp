@@ -26,6 +26,9 @@ int main(int, char**) {
   // check sum value
   check("0-446-60098", "0-446-60098-9");
 
+  check(Tellico::ISBNValidator::isbn10("978-0-06-087298-4"), "0-06-087298-5");
+  check(Tellico::ISBNValidator::isbn13("0-06-087298-5"), "978-0-06-087298-4");
+
   // check EAN-13
   check("9780940016750", "978-0-940016-75-0");
   check("978-0940016750", "978-0-940016-75-0");

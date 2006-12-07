@@ -152,7 +152,7 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
     }
   }
 
-  m_coll->addEntry(entry);
+  m_coll->addEntries(entry);
 }
 
 void BibtexmlImporter::slotCancel() {

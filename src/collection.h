@@ -166,7 +166,7 @@ public:
    *
    * @param entry A pointer to the entry
    */
-  void addEntry(EntryPtr entry);
+  void addEntries(EntryVec entries);
   /**
    * Updates the dicts that include the entry.
    *
@@ -179,7 +179,7 @@ public:
    * @param entry The pointer to the entry
    * @return A boolean indicating if the entry was in the collection and was deleted
    */
-  bool removeEntry(EntryPtr entry);
+  bool removeEntries(EntryVec entries);
   /**
    * Adds a whole list of attributes. It's gotta be virtual since it calls
    * @ref addField, which is virtual.
@@ -326,14 +326,14 @@ public:
   static const QString s_peopleGroupName;
 
 signals:
-  void signalGroupModified(Tellico::Data::CollPtr coll, Tellico::Data::EntryGroup* group);
+  void signalGroupsModified(Tellico::Data::CollPtr coll, PtrVector<Tellico::Data::EntryGroup> groups);
   void signalRefreshField(Tellico::Data::FieldPtr field);
 
 private:
   QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
   void removeEntriesFromDicts(EntryVec entries);
   void populateDict(EntryGroupDict* dict, const QString& fieldName, EntryVec entries);
-  void populateCurrentDicts(EntryPtr entry);
+  void populateCurrentDicts(EntryVec entries);
   void cleanGroups();
   /*
    * Gets the preferred ID of the collection. Currently, it just gets incremented as

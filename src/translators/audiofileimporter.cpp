@@ -221,7 +221,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
 
     if(!exists) {
-      m_coll->addEntry(entry);
+      m_coll->addEntries(entry);
     }
     if(j%stepSize == 0) {
       ProgressManager::self()->setTotalSteps(this, files.count() + directoryFiles.count());

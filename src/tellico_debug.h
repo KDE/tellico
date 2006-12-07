@@ -24,7 +24,7 @@
 
 // some logging
 #ifndef NDEBUG
-#define TELLICO_LOG
+//#define TELLICO_LOG
 #endif
 
 #ifndef NDEBUG

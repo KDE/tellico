@@ -79,6 +79,7 @@ void DetailedListView::addCollection(Data::CollPtr coll_) {
     return;
   }
 
+  m_imageColumns.clear();
 //  myDebug() << "DetailedListView::addCollection()" << endl;
 
   KConfig* config = kapp->config();
@@ -173,10 +174,12 @@ void DetailedListView::addCollection(Data::CollPtr coll_) {
   kapp->processEvents();
   setUpdatesEnabled(false);
 
+  m_loadingCollection = true;
   Data::EntryVec entries = coll_->entries();
   for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
     addEntryInternal(entry);
   }
+  m_loadingCollection = false;
 
   setUpdatesEnabled(true);
   triggerUpdate();
@@ -297,6 +300,7 @@ void DetailedListView::removeCollection(Data::CollPtr coll_) {
 
   m_columnWidths.clear();
   m_isNumber.clear();
+  m_isTitle.clear();
   m_entryPix = QPixmap();
 
   // clear the filter, too
@@ -327,7 +331,7 @@ void DetailedListView::populateItem(DetailedEntryItem* item_) {
       Data::FieldPtr field = entry->collection()->fieldByTitle(columnText(colNum));
       if(!field) {
         kdWarning() << "DetailedListView::populateItem() - no field found for " << columnText(colNum) << endl;
-        return;
+        continue;
       }
       setPixmapAndText(item_, colNum, field);
     } else {
@@ -441,19 +445,34 @@ void DetailedListView::slotRefresh() {
   }
 }
 
+void DetailedListView::slotRefreshImages() {
+  for(QValueVector<int>::const_iterator it = m_imageColumns.begin(); it != m_imageColumns.end(); ++it) {
+    if(columnWidth(*it) > 0) {
+      populateColumn(*it);
+    }
+  }
+}
+
 void DetailedListView::setPixmapAndText(DetailedEntryItem* item_, int col_, Data::FieldPtr field_) {
-  if(!item_) {
+  if(!item_ || !field_) {
     return;
   }
 
   // if the bool is not empty, show the checkmark pixmap
   if(field_->type() == Data::Field::Bool) {
-    QString value = item_->entry()->field(field_);
+    const QString value = item_->entry()->field(field_);
     item_->setPixmap(col_, value.isEmpty() ? QPixmap() : m_checkPix);
     item_->setText(col_, QString::null);
-  } else if(field_->type() == Data::Field::Image && columnWidth(col_) > 0) {
-    item_->setPixmap(col_, ImageFactory::pixmap(item_->entry()->field(field_), m_pixWidth, m_pixHeight));
-    item_->setText(col_, QString::null);
+  } else if(field_->type() == Data::Field::Image) {
+    // if we're currently loading a collection
+    // don't load the image just yet, it'll get refreshed later
+    if(m_loadingCollection || columnWidth(col_) == 0) {
+      item_->setPixmap(col_, QPixmap());
+      item_->setText(col_, QString::null);
+    } else {
+      item_->setPixmap(col_, ImageFactory::pixmap(item_->entry()->field(field_), m_pixWidth, m_pixHeight));
+      item_->setText(col_, QString::null);
+    }
   } else if(field_->type() == Data::Field::Rating) {
     item_->setPixmap(col_, GUI::RatingWidget::pixmap(item_->entry()->field(field_)));
     item_->setText(col_, QString::null);
@@ -524,7 +543,6 @@ void DetailedListView::setFilter(FilterPtr filter_) {
   if(m_filter.data() != filter_) { // might just be updating
     m_filter = filter_;
   }
-//  clearSelection();
 
   int count = 0;
   // iterate over all items
@@ -533,6 +551,8 @@ void DetailedListView::setFilter(FilterPtr filter_) {
     item = static_cast<DetailedEntryItem*>(it.current());
     if(m_filter && !m_filter->matches(item->entry())) {
       item->setVisible(false);
+      // don't allow hidden selected items
+      setSelected(item, false);
     } else {
       item->setVisible(true);
       ++count;
@@ -546,7 +566,7 @@ void DetailedListView::addField(Data::CollPtr, Data::FieldPtr field) {
 }
 
 void DetailedListView::addField(Data::FieldPtr field_, int width_) {
-//  myDebug() << "DetailedListView::slotAddColumn() - " << field_->title() << endl;
+//  myDebug() << "DetailedListView::addField() - " << field_->title() << endl;
   int col = addColumn(field_->title());
 
   // Bools, images, and numbers should be centered
@@ -554,6 +574,9 @@ void DetailedListView::addField(Data::FieldPtr field_, int width_) {
      || field_->type() == Data::Field::Number
      || field_->type() == Data::Field::Image) {
     setColumnAlignment(col, Qt::AlignHCenter | Qt::AlignVCenter);
+    if(field_->type() == Data::Field::Image) {
+      m_imageColumns.push_back(col);
+    }
   } else {
     setColumnAlignment(col, Qt::AlignLeft | Qt::AlignVCenter);
   }
@@ -563,6 +586,7 @@ void DetailedListView::addField(Data::FieldPtr field_, int width_) {
   m_columnWidths.push_back(KMAX(width_, 0));
 
   m_isNumber.push_back(field_->type() == Data::Field::Number);
+  m_isTitle.push_back(field_->formatFlag() == Data::Field::FormatTitle);
   m_isDirty.push_back(true);
 
   int id = m_headerMenu->insertItem(field_->title());
@@ -586,10 +610,20 @@ void DetailedListView::modifyField(Tellico::Data::CollPtr, Data::FieldPtr oldFie
   // I thought this would have to be mapped to index, but not the case
   setColumnText(sec, newField_->title());
   m_isNumber[sec] = (newField_->type() == Data::Field::Number);
+  m_isTitle[sec] = (newField_->formatFlag() == Data::Field::FormatTitle);
   if(newField_->type() == Data::Field::Bool
      || newField_->type() == Data::Field::Number
      || newField_->type() == Data::Field::Image) {
     setColumnAlignment(sec, Qt::AlignHCenter | Qt::AlignVCenter);
+    if(oldField_->type() == Data::Field::Image) {
+      QValueVector<int>::iterator it = qFind(m_imageColumns.begin(), m_imageColumns.end(), sec);
+      if(it != m_imageColumns.end()) {
+        m_imageColumns.erase(it);
+      }
+    }
+    if(newField_->type() == Data::Field::Image) {
+      m_imageColumns.push_back(sec);
+    }
   } else {
     setColumnAlignment(sec, Qt::AlignLeft | Qt::AlignVCenter);
   }
@@ -616,6 +650,7 @@ void DetailedListView::removeField(Tellico::Data::CollPtr, Data::FieldPtr field_
 
   m_columnWidths.erase(&m_columnWidths[sec]);
   m_isNumber.erase(&m_isNumber[sec]);
+  m_isTitle.erase(&m_isTitle[sec]);
   m_isDirty.erase(&m_isDirty[sec]);
 
   // I thought this would have to be mapped to index, but not the case
@@ -655,6 +690,7 @@ void DetailedListView::reorderFields(const Data::FieldVec& fields_) {
       setColumnAlignment(sec, Qt::AlignLeft | Qt::AlignVCenter);
     }
     m_isNumber[sec] = (it->type() == Data::Field::Number);
+    m_isTitle[sec] = (it->formatFlag() == Data::Field::FormatTitle);
 
     if(isVisible) {
       showColumn(sec);
@@ -692,6 +728,10 @@ void DetailedListView::setSorting(int column_, bool ascending_/*=true*/) {
 // it's possible to have a zero-length vector and have this called, so check bounds
 bool DetailedListView::isNumber(int column_) const {
   return column_ < static_cast<int>(m_isNumber.size()) && m_isNumber[column_];
+}
+
+bool DetailedListView::isTitle(int column_) const {
+  return column_ < static_cast<int>(m_isTitle.size()) && m_isTitle[column_];
 }
 
 void DetailedListView::updateFirstSection() {

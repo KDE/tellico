@@ -115,7 +115,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
       e->setField(QString::fromLatin1("comments"), nodeList.item(0).toElement().text());
     }
 
-    c->addEntry(e);
+    c->addEntries(e);
   }
 #undef GETELEMENTS
 

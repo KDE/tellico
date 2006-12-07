@@ -135,8 +135,8 @@ void Controller::slotCollectionAdded(Data::CollPtr coll_) {
 
   updateActions();
 
-  connect(coll_, SIGNAL(signalGroupModified(Tellico::Data::CollPtr, Tellico::Data::EntryGroup*)),
-          m_mainWindow->m_groupView, SLOT(slotModifyGroup(Tellico::Data::CollPtr, Tellico::Data::EntryGroup*)));
+  connect(coll_, SIGNAL(signalGroupsModified(Tellico::Data::CollPtr, PtrVector<Tellico::Data::EntryGroup>)),
+          m_mainWindow->m_groupView, SLOT(slotModifyGroups(Tellico::Data::CollPtr, PtrVector<Tellico::Data::EntryGroup>)));
 
   connect(coll_, SIGNAL(signalRefreshField(Tellico::Data::FieldPtr)),
           this, SLOT(slotRefreshField(Tellico::Data::FieldPtr)));
@@ -273,7 +273,7 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Data::EntryVec& ent
     return;
   }
   m_working = true;
-//  myDebug() << "Controller::slotUpdateSelection() entryList - " << list_.count() << endl;
+//  myDebug() << "Controller::slotUpdateSelection() - " << (widget_ ? widget_->className() : "") << endl;
 
   blockAllSignals(true);
 // in the list view and group view, if entries are selected in one, clear selection in other
@@ -441,6 +441,7 @@ void Controller::slotDeleteSelectedEntries() {
     }
   }
 
+  GUI::CursorSaver cs;
   Kernel::self()->removeEntries(m_selectedEntries);
   updateActions();
 
@@ -472,6 +473,7 @@ void Controller::slotCopySelectedEntries() {
   // keep copy of selected entries
   Data::EntryVec old = m_selectedEntries;
 
+  GUI::CursorSaver cs;
   // need to create copies
   Data::EntryVec entries;
   for(Data::EntryVecIt it = m_selectedEntries.begin(); it != m_selectedEntries.end(); ++it) {
@@ -502,13 +504,13 @@ void Controller::slotUpdateFilter(FilterPtr filter_) {
 //  myDebug() << "Controller::slotUpdateFilter()" << endl;
   blockAllSignals(true);
 
-  // the view takes over ownership of the filter
-  m_mainWindow->m_detailedView->clearSelection();
-  m_selectedEntries.clear();
   updateActions();
-  m_mainWindow->m_viewStack->iconView()->clearSelection();
+//  m_selectedEntries.clear();
+//  m_mainWindow->m_detailedView->clearSelection();
+//  m_mainWindow->m_viewStack->iconView()->clearSelection();
 
-  m_mainWindow->m_detailedView->setFilter(filter_); // takes ownership
+  // the view takes over ownership of the filter
+  m_mainWindow->m_detailedView->setFilter(filter_);
 
   blockAllSignals(false);
 

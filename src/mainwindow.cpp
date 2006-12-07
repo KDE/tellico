@@ -733,6 +733,8 @@ void MainWindow::initView() {
   Controller::self()->addObserver(m_detailedView);
   QWhatsThis::add(m_detailedView, i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
                                        "for each entry.</qt>"));
+  connect(Data::Document::self(), SIGNAL(signalCollectionImagesLoaded(Tellico::Data::CollPtr)),
+          m_detailedView, SLOT(slotRefreshImages()));
 
   m_viewStack = new ViewStack(m_rightSplit, "viewstack");
   Controller::self()->addObserver(m_viewStack->iconView());
@@ -1002,6 +1004,8 @@ void MainWindow::readProperties(KConfig* cfg_) {
 }
 
 bool MainWindow::queryClose() {
+  // in case we're still loading the images, cancel that
+  Data::Document::self()->cancelImageWriting();
   return m_editDialog->queryModified() && Data::Document::self()->saveModified();
 }
 
@@ -1758,7 +1762,10 @@ void MainWindow::slotUpdateFilter() {
     }
     filter->append(rule);
   }
-  Controller::self()->slotUpdateFilter(filter);
+  // only update filter if one exists or did exist
+  if(filter || m_detailedView->filter()) {
+    Controller::self()->slotUpdateFilter(filter);
+  }
 }
 
 void MainWindow::slotShowCollectionFieldsDialog() {

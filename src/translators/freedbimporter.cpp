@@ -245,7 +245,7 @@ void FreeDBImporter::readCDROM() {
   }
   entry->setField(QString::fromLatin1("track"), trackList.join(QString::fromLatin1("; ")));
 
-  m_coll->addEntry(entry);
+  m_coll->addEntries(entry);
   readCDText(drive);
 #endif
 }
@@ -374,7 +374,7 @@ void FreeDBImporter::readCache() {
 #endif
 
     // add this entry to the music collection
-    m_coll->addEntry(entry);
+    m_coll->addEntries(entry);
 
     if(step % stepSize == 0) {
       ProgressManager::self()->setProgress(this, step);
@@ -402,7 +402,7 @@ void FreeDBImporter::readCDText(const QCString& drive_) {
   if(!entry) {
     entry = new Data::Entry(m_coll);
     entry->setField(QString::fromLatin1("medium"), i18n("Compact Disc"));
-    m_coll->addEntry(entry);
+    m_coll->addEntries(entry);
   }
 
   CDText cdtext = getCDText(drive_);

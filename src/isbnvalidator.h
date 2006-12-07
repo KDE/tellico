@@ -112,6 +112,9 @@ public:
    */
   virtual void fixup(QString& input) const;
 
+  static QString isbn10(QString isbn13);
+  static QString isbn13(QString isbn10);
+
 private:
   static struct isbn_band {
     unsigned long MaxValue;
@@ -135,8 +138,8 @@ private:
    *
    * @param input The raw string, with no hyphens
    */
-  QChar checkSum10(const QString& input) const;
-  QChar checkSum13(const QString& input) const;
+  static QChar checkSum10(const QString& input);
+  static QChar checkSum13(const QString& input);
 };
 
 } // end namespace

@@ -366,13 +366,15 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(CollPtr coll_) {
     kdWarning() << "BibtexCollection::convertBookCollection() - there must be an entry type field" << endl;
   }
 
+  EntryVec newEntries;
   for(EntryVec::ConstIterator entryIt = coll_->entries().begin(); entryIt != coll_->entries().end(); ++entryIt) {
     Data::EntryPtr entry = new Entry(*entryIt);
-    coll->addEntry(entry);
     if(!entryTypeName.isEmpty()) {
       entry->setField(entryTypeName, QString::fromLatin1("book"));
     }
+    newEntries.append(entry);
   }
+  coll->addEntries(newEntries);
 
   // now need to make sure all images are transferred
   Document::self()->loadAllImagesNow();

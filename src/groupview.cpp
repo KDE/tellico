@@ -100,43 +100,44 @@ void GroupView::removeCollection(Data::CollPtr coll_) {
   blockSignals(false);
 }
 
-void GroupView::slotModifyGroup(Data::CollPtr coll_, Data::EntryGroup* group_) {
-  if(!coll_ || !group_) {
-    kdWarning() << "GroupView::slotModifyGroup() - null coll or group pointer!" << endl;
+void GroupView::slotModifyGroups(Data::CollPtr coll_, PtrVector<Data::EntryGroup> groups_) {
+  if(!coll_ || groups_.isEmpty()) {
+    kdWarning() << "GroupView::slotModifyGroups() - null coll or group pointer!" << endl;
     return;
   }
 
-  // if the entries aren't grouped by field of the modified group,
-  // we don't care, so return
-  if(m_groupBy != group_->fieldName()) {
-    return;
-  }
-
-//  myDebug() << "GroupView::slotModifyGroup() - " << group_->fieldName() << "/" << group_->groupName() << endl;
-  EntryGroupItem* par = m_groupDict.find(group_->groupName());
-  if(par) {
-    if(group_->isEmpty()) {
-      m_groupDict.remove(par->text(0));
-      delete par;
-      return;
+  for(PtrVector<Data::EntryGroup>::Iterator group = groups_.begin(); group != groups_.end(); ++group) {
+    // if the entries aren't grouped by field of the modified group,
+    // we don't care, so return
+    if(m_groupBy != group->fieldName()) {
+      continue;
     }
-    // the group might get deleted and recreated out from under us,
-    // so do a sanity check
-    par->setGroup(group_);
-  } else {
-    if(group_->isEmpty()) {
-      myDebug() << "GroupView::slotModifyGroup() - trying to add empty group" << endl;
-      return;
+
+//    myDebug() << "GroupView::slotModifyGroups() - " << group->fieldName() << "/" << group->groupName() << endl;
+    EntryGroupItem* par = m_groupDict.find(group->groupName());
+    if(par) {
+      if(group->isEmpty()) {
+        m_groupDict.remove(par->text(0));
+        delete par;
+        continue;
+      }
+      // the group might get deleted and recreated out from under us,
+      // so do a sanity check
+      par->setGroup(group.ptr());
+    } else {
+      if(group->isEmpty()) {
+        myDebug() << "GroupView::slotModifyGroups() - trying to add empty group" << endl;
+        continue;
+      }
+      par = addGroup(group.ptr());
     }
-    par = addGroup(group_);
+
+    setUpdatesEnabled(false);
+    bool open = par->isOpen();
+    par->setOpen(false); // closing and opening the item will clear the items
+    par->setOpen(open);
+    setUpdatesEnabled(true);
   }
-
-  setUpdatesEnabled(false);
-  bool open = par->isOpen();
-  par->setOpen(false); // closing and opening the item will clear the items
-  par->setOpen(open);
-  setUpdatesEnabled(true);
-
   // don't want any selected
   clearSelection();
   sort(); // in case the count changed, or group name
@@ -144,7 +145,7 @@ void GroupView::slotModifyGroup(Data::CollPtr coll_, Data::EntryGroup* group_) {
 
 // don't 'shadow' QListView::setSelected
 void GroupView::setEntrySelected(Data::EntryPtr entry_) {
-//  myDebug() << "GroupView::slotSetSelected()" << endl;
+//  myDebug() << "GroupView::setEntrySelected()" << endl;
   // if entry_ is null pointer, set no selected
   if(!entry_) {
     // don't move this one outside the block since it calls setCurrentItem(0)
@@ -464,6 +465,11 @@ QString GroupView::groupTitle() {
     }
   }
   return title;
+}
+
+void GroupView::sort() {
+//  DEBUG_BLOCK;
+  GUI::ListView::sort();
 }
 
 #include "groupview.moc"

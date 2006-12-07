@@ -57,7 +57,10 @@ QString URLFieldWidget::text() const {
   if(m_isRelative) {
     return KURL::relativeURL(Kernel::self()->URL(), m_requester->url());
   }
-  return m_requester->url();
+  // for comparison purposes and to be consistent with the file listing importer
+  // I want the full url here, including the protocol
+  // the requester only returns the path, so create a KURL
+  return KURL(m_requester->url()).url();
 }
 
 void URLFieldWidget::setText(const QString& text_) {

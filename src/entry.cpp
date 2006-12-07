@@ -37,6 +37,29 @@ EntryGroup::~EntryGroup() {
   }
 }
 
+bool Entry::operator==(const Entry& e1) {
+// special case for file catalog, just check the url
+  if(m_coll && m_coll->type() == Collection::File &&
+     e1.m_coll && e1.m_coll->type() == Collection::File) {
+    // don't forget case where both could have empty urls
+    // but different values for other fields
+    QString u = field(QString::fromLatin1("url"));
+    if(!u.isEmpty()) {
+      // versions before 1.2.7 could have saved the url without the protocol
+      return KURL::fromPathOrURL(u) == KURL::fromPathOrURL(e1.field(QString::fromLatin1("url")));
+    }
+  }
+  if(e1.m_fields.count() != m_fields.count()) {
+    return false;
+  }
+  for(StringMap::ConstIterator it = e1.m_fields.begin(); it != e1.m_fields.end(); ++it) {
+    if(!m_fields.contains(it.key()) || m_fields[it.key()] != it.data()) {
+      return false;
+    }
+  }
+  return true;
+}
+
 Entry::Entry(CollPtr coll_) : KShared(), m_coll(coll_), m_id(-1) {
 #ifndef NDEBUG
   if(!coll_) {

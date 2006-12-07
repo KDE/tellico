@@ -24,6 +24,7 @@
 #include "../field.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
+#include "../isbnvalidator.h"
 
 #include <klocale.h>
 #include <kio/job.h>
@@ -155,7 +156,7 @@ void AmazonFetcher::doSearch() {
   u.addQueryItem(QString::fromLatin1("Operation"),      QString::fromLatin1("ItemSearch"));
   u.addQueryItem(QString::fromLatin1("ResponseGroup"),  QString::fromLatin1("Large"));
   u.addQueryItem(QString::fromLatin1("ItemPage"),       QString::number(m_page));
-  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2006-07-26"));
+  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2006-11-30"));
 
   const int type = Kernel::self()->collectionType();
   switch(type) {
@@ -231,9 +232,22 @@ void AmazonFetcher::doSearch() {
         // keep a list of isbn value we're searching for
         // but only set it when it's not set before
         if(m_isbnList.isEmpty()) {
-          m_isbnList = QStringList::split(QString::fromLatin1("; "), m_value);
+          m_isbnList = QStringList::split(QString::fromLatin1("; "), m_value.remove('-'));
         }
-        u.removeQueryItem(QString::fromLatin1("SearchIndex"));
+        // as a quick hack, amazon seems to support isbn13 if IdType==EAN
+        // but only for US at the moment
+        if(m_site == US &&
+           m_value.startsWith(QString::fromLatin1("978")) ||
+           m_value.startsWith(QString::fromLatin1("979"))) {
+          u.addQueryItem(QString::fromLatin1("IdType"), QString::fromLatin1("EAN"));
+        } else {
+          if(m_value.length() > 12 && m_value.startsWith(QString::fromLatin1("978"))) {
+            // convert to isbn10 to search with
+            m_value = ISBNValidator::isbn10(m_value);
+          }
+          // the default search is by ASIN, which prohibits SearchIndex
+          u.removeQueryItem(QString::fromLatin1("SearchIndex"));
+        }
         QString s = m_value; // not encValue!!!
         s.remove('-');
         // limit to first 10
@@ -523,7 +537,8 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
       for(QStringList::ConstIterator it = m_isbnList.begin(); it != m_isbnList.end(); ++it) {
         bool found = false;
         for(QMap<int, Data::EntryPtr>::Iterator eIt = m_entries.begin(); eIt != m_entries.end(); ++eIt) {
-          if(eIt.data().data()->field(isbn) == *it) {
+          if(*it == eIt.data().data()->field(isbn).remove('-') ||
+             *it == ISBNValidator::isbn13(eIt.data().data()->field(isbn))) {
             found = true;
             break;
           }

@@ -127,7 +127,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   }
 
   if(!empty) {
-    coll->addEntry(e);
+    coll->addEntries(e);
   }
   return coll;
 }

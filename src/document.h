@@ -171,6 +171,7 @@ public:
    * in addition to those already in the collection
    */
   void removeImagesNotInCollection(EntryVec entries, EntryVec entriesToKeep);
+  void cancelImageWriting() { m_cancelImageWriting = true; }
 
 public slots:
   /**
@@ -192,16 +193,26 @@ signals:
    * @param str The message
    */
   void signalStatusMsg(const QString& str);
+  /**
+   * Signals that all images in the loaded file have been loaded
+   * into memory or onto the disk
+   */
+  void signalCollectionImagesLoaded(Tellico::Data::CollPtr coll);
 
 private slots:
   /**
-   * Writes all images in the current collection to the cache directory
+   * Does an initial loading of all images, used for writing
+   * images to temp dir initially
    */
-  void slotWriteAllImages(int cacheDir=0/*ImageFactory::TempDir*/);
+  void slotLoadAllImages();
 
 private:
   static Document* s_self;
 
+  /**
+   * Writes all images in the current collection to the cache directory
+   */
+  void writeAllImages(int cacheDir=0/*ImageFactory::TempDir*/);
   bool pruneImages();
 
   // make all constructors private

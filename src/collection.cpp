@@ -378,31 +378,33 @@ void Collection::reorderFields(const FieldVec& list_) {
   }
 }
 
-void Collection::addEntry(EntryPtr entry_) {
-  if(!entry_) {
+void Collection::addEntries(EntryVec entries_) {
+  if(entries_.isEmpty()) {
     return;
   }
 
-  if(this != entry_->collection()) {
-    entry_->setCollection(this);
-  }
+  for(EntryVec::Iterator entry = entries_.begin(); entry != entries_.end(); ++entry) {
+    if(this != entry->collection()) {
+      entry->setCollection(this);
+    }
 
-  m_entries.append(entry_);
-//  myDebug() << "Collection::addEntry() - added entry (" << entry_->title() << ")" << endl;
+    m_entries.append(entry);
+//  myDebug() << "Collection::addEntries() - added entry (" << entry->title() << ")" << endl;
 
-  if(entry_->id() >= m_nextEntryId) {
-    m_nextEntryId = entry_->id() + 1;
-  } else if(entry_->id() == -1) {
-    entry_->setId(m_nextEntryId);
-    ++m_nextEntryId;
-  } else if(m_entryIdDict.find(entry_->id())) {
-    myDebug() << "Collection::addEntry() - the collection already has an entry with id = " << entry_->id() << endl;
-    entry_->setId(m_nextEntryId);
-    ++m_nextEntryId;
+    if(entry->id() >= m_nextEntryId) {
+      m_nextEntryId = entry->id() + 1;
+    } else if(entry->id() == -1) {
+      entry->setId(m_nextEntryId);
+      ++m_nextEntryId;
+    } else if(m_entryIdDict.find(entry->id())) {
+      myDebug() << "Collection::addEntries() - the collection already has an entry with id = " << entry->id() << endl;
+      entry->setId(m_nextEntryId);
+      ++m_nextEntryId;
+    }
+    m_entryIdDict.insert(entry->id(), entry.data());
   }
-  m_entryIdDict.insert(entry_->id(), entry_);
   if(m_trackGroups) {
-    populateCurrentDicts(entry_);
+    populateCurrentDicts(entries_);
   }
 }
 
@@ -420,9 +422,7 @@ void Collection::removeEntriesFromDicts(EntryVec entries_) {
       }
     }
   }
-  for(PtrVector<EntryGroup>::Iterator group = modifiedGroups.begin(); group != modifiedGroups.end(); ++group) {
-    emit signalGroupModified(this, group.ptr());
-  }
+  emit signalGroupsModified(this, modifiedGroups);
 }
 
 // this function gets called whenever an entry is modified. Its purpose is to keep the
@@ -434,22 +434,22 @@ void Collection::updateDicts(EntryVec entries_) {
   }
 
   removeEntriesFromDicts(entries_);
-  for(EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
-    populateCurrentDicts(entry);
-  }
+  populateCurrentDicts(entries_);
   cleanGroups();
 }
 
-bool Collection::removeEntry(EntryPtr entry_) {
-  if(!entry_) {
+bool Collection::removeEntries(EntryVec vec_) {
+  if(vec_.isEmpty()) {
     return false;
   }
 
 //  myDebug() << "Collection::deleteEntry() - deleted entry - " << entry_->title() << endl;
-  removeEntriesFromDicts(EntryVec(entry_));
-  bool success = m_entryIdDict.remove(entry_->id());
-
-  success &= m_entries.remove(entry_);
+  removeEntriesFromDicts(vec_);
+  bool success = true;
+  for(EntryVecIt entry = vec_.begin(); entry != vec_.end(); ++entry) {
+    m_entryIdDict.remove(entry->id());
+    success &= m_entries.remove(entry);
+  }
   cleanGroups();
   return success;
 }
@@ -562,6 +562,7 @@ void Collection::populateDict(EntryGroupDict* dict_, const QString& fieldName_, 
 //  myDebug() << "Collection::populateDict() - " << fieldName_ << endl;
   bool isBool = hasField(fieldName_) && fieldByName(fieldName_)->type() == Field::Bool;
 
+  PtrVector<EntryGroup> modifiedGroups;
   for(EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
     QStringList groups = entryGroupNamesByField(entry, fieldName_);
     for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
@@ -582,13 +583,14 @@ void Collection::populateDict(EntryGroupDict* dict_, const QString& fieldName_, 
         m_groupsToDelete.remove(group);
       }
       if(entry->addToGroup(group)) {
-        emit signalGroupModified(this, group);
+        modifiedGroups.push_back(group);
       }
     } // end group loop
   } // end entry loop
+  emit signalGroupsModified(this, modifiedGroups);
 }
 
-void Collection::populateCurrentDicts(EntryPtr entry_) {
+void Collection::populateCurrentDicts(EntryVec entries_) {
   if(m_entryGroupDicts.isEmpty()) {
     return;
   }
@@ -606,7 +608,7 @@ void Collection::populateCurrentDicts(EntryPtr entry_) {
     // only populate if it's not empty, since they are
     // populated on demand
     if(!dictIt.current()->isEmpty()) {
-      populateDict(dictIt.current(), dictIt.currentKey(), entry_);
+      populateDict(dictIt.current(), dictIt.currentKey(), entries_);
       allEmpty = false;
     }
   }
@@ -616,7 +618,7 @@ void Collection::populateCurrentDicts(EntryPtr entry_) {
     const QString group = Controller::self()->groupBy();
     EntryGroupDict* dict = m_entryGroupDicts[group];
     if(dict) {
-      populateDict(dict, group, entry_);
+      populateDict(dict, group, entries_);
     }
   }
 }

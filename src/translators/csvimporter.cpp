@@ -137,7 +137,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
       }
     }
     if(!empty) {
-      m_coll->addEntry(entry);
+      m_coll->addEntries(entry);
     }
 
     if(j%stepSize == 0) {

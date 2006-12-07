@@ -97,18 +97,6 @@ private slots:
    */
   void slotDefault();
   /**
-   * Enable the checkboxes for formatting if formatting is enabled.
-   *
-   * @param checked The formatting checkbox is checkeed
-   */
-  void slotToggleCapitalized(bool checked);
-  /**
-   * Enable the checkboxes for formatting if formatting is enabled.
-   *
-   * @param checked The formatting checkbox is checkeed
-   */
-  void slotToggleFormatted(bool checked);
-  /**
    * Update the help link for a page.
    *
    * @param w The page

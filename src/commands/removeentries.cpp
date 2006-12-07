@@ -31,9 +31,7 @@ void RemoveEntries::execute() {
     return;
   }
 
-  for(Data::EntryVecIt entry = m_entries.begin(); entry != m_entries.end(); ++entry) {
-    m_coll->removeEntry(entry);
-  }
+  m_coll->removeEntries(m_entries);
   Controller::self()->removedEntries(m_entries);
 }
 
@@ -42,9 +40,7 @@ void RemoveEntries::unexecute() {
     return;
   }
 
-  for(Data::EntryVecIt entry = m_entries.begin(); entry != m_entries.end(); ++entry) {
-    m_coll->addEntry(entry);
-  }
+  m_coll->addEntries(m_entries);
   Controller::self()->addedEntries(m_entries);
 }
 

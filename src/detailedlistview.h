@@ -79,6 +79,7 @@ public:
    * @return Whether column is formatted as a number or not
    */
   bool isNumber(int column) const;
+  bool isTitle(int column) const;
   /**
    * @param coll A pointer to the collection
    */
@@ -141,6 +142,10 @@ public slots:
    * Refreshes the view, repopulating all items.
    */
   void slotRefresh();
+  /**
+   * Refreshes all images only.
+   */
+  void slotRefreshImages();
 
 private:
   DetailedEntryItem* addEntryInternal(Data::EntryPtr entry);
@@ -201,7 +206,10 @@ private:
   KPopupMenu* m_headerMenu;
   QValueVector<int> m_columnWidths;
   QValueVector<bool> m_isNumber;
+  QValueVector<bool> m_isTitle;
   QValueVector<bool> m_isDirty;
+  QValueVector<int> m_imageColumns;
+  bool m_loadingCollection : 1;
   QPixmap m_entryPix;
   QPixmap m_checkPix;
 

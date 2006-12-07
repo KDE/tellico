@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/tellico/"
-                xmlns:aws="http://webservices.amazon.com/AWSECommerceService/2006-06-28"
+                xmlns:aws="http://webservices.amazon.com/AWSECommerceService/2006-11-14"
                 xmlns:exsl="http://exslt.org/common"
                 extension-element-prefixes="exsl"
                 version="1.0">

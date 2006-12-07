@@ -196,7 +196,7 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
       entry->setField(QString::fromLatin1("certification"), QString::fromLatin1("R (USA)"));
     }
 
-    m_coll->addEntry(entry);
+    m_coll->addEntries(entry);
 
     if(j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);

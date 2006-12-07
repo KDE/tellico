@@ -73,9 +73,9 @@ bool TellicoZipExporter::exec() {
   KZip zip(&buf);
   zip.open(IO_WriteOnly);
   zip.writeFile(QString::fromLatin1("tellico.xml"), QString::null, QString::null, xml.length(), xml);
-  ProgressManager::self()->setProgress(this, 10);
 
   if(m_includeImages) {
+    ProgressManager::self()->setProgress(this, 10);
     // gonna be lazy and just increment progress every 3 images
     // it might be less, might be more
     uint j = 0;
@@ -107,6 +107,8 @@ bool TellicoZipExporter::exec() {
         }
       }
     }
+  } else {
+    ProgressManager::self()->setProgress(this, 80);
   }
 
   zip.close();

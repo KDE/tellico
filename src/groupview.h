@@ -92,18 +92,20 @@ public:
 
   void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
 
+  virtual void sort();
+
 public slots:
   /**
    * Resets the list view, clearing and deleting all items.
    */
   void slotReset();
   /**
-   * Adds or removes listview items when a group is modified.
+   * Adds or removes listview items when groups are modified.
    *
    * @param coll A pointer to the collection of the gorup
-   * @param group A pointer to the modified group
+   * @param groups A vector of pointers to the modified groups
    */
-  void slotModifyGroup(Tellico::Data::CollPtr coll, Tellico::Data::EntryGroup* group);
+  void slotModifyGroups(Tellico::Data::CollPtr coll, PtrVector<Tellico::Data::EntryGroup> groups);
   /**
    * Expands all items at a certain depth. If depth is -1, the current selected item
    * is expanded. If depth is equal to either 0 or 1, then all items at that depth

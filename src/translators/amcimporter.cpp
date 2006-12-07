@@ -232,7 +232,7 @@ void AMCImporter::readEntry() {
     e->setField(QString::fromLatin1("cover"), s);
   }
 
-  m_coll->addEntry(e);
+  m_coll->addEntries(e);
 }
 
 QStringList AMCImporter::parseCast(const QString& text_) {

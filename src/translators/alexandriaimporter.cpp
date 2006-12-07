@@ -153,7 +153,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         entry->setField(m_coll->fieldByTitle(alexField), alexValue);
       }
     }
-    m_coll->addEntry(entry);
+    m_coll->addEntries(entry);
 
     if(j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);

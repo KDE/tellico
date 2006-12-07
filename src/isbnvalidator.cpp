@@ -16,12 +16,43 @@
 
 using Tellico::ISBNValidator;
 
+//static
+QString ISBNValidator::isbn10(QString isbn13) {
+  if(!isbn13.startsWith(QString::fromLatin1("978"))) {
+    myDebug() << "ISBNValidator::isbn10() - can't convert, must start with 978: " << isbn13 << endl;
+    return isbn13;
+  }
+  isbn13 = isbn13.mid(3);
+  isbn13.remove('-');
+  // remove checksum
+  isbn13.truncate(isbn13.length()-1);
+  // add new checksum
+  isbn13 += checkSum10(isbn13);
+  return isbn13;
+}
+
+QString ISBNValidator::isbn13(QString isbn10) {
+  isbn10.remove('-');
+  if(isbn10.startsWith(QString::fromLatin1("978")) ||
+     isbn10.startsWith(QString::fromLatin1("979"))) {
+    return isbn10;
+  }
+  // remove checksum
+  isbn10.truncate(isbn10.length()-1);
+  // begins with 978
+  isbn10.prepend(QString::fromLatin1("978"));
+  // add new checksum
+  isbn10 += checkSum13(isbn10);
+  return isbn10;
+}
+
 ISBNValidator::ISBNValidator(QObject* parent_, const char* name_/*=0*/)
     : QValidator(parent_, name_) {
 }
 
 QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
-  if(input_.startsWith(QString::fromLatin1("978")) || input_.startsWith(QString::fromLatin1("979"))) {
+  if(input_.startsWith(QString::fromLatin1("978")) ||
+     input_.startsWith(QString::fromLatin1("979"))) {
     return validate13(input_, pos_);
   } else {
     return validate10(input_, pos_);
@@ -281,7 +312,9 @@ void ISBNValidator::fixup13(QString& input_) const {
   after.truncate(10);
 
   // add the checksum
-  after[9] = checkSum13(input_.left(3) + after);
+  if(after.length() > 8) {
+    after[9] = checkSum13(input_.left(3) + after);
+  }
 
   ulong range = after.leftJustify(9, '0', true).toULong();
 
@@ -315,7 +348,7 @@ void ISBNValidator::fixup13(QString& input_) const {
   input_ = input_.left(3) + '-' + after;
 }
 
-QChar ISBNValidator::checkSum10(const QString& input_) const {
+QChar ISBNValidator::checkSum10(const QString& input_) {
   uint sum = 0;
   uint multiplier = 10;
 
@@ -337,7 +370,7 @@ QChar ISBNValidator::checkSum10(const QString& input_) const {
   return c;
 }
 
-QChar ISBNValidator::checkSum13(const QString& input_) const {
+QChar ISBNValidator::checkSum13(const QString& input_) {
   uint sum = 0;
 
   const uint len = QMIN(12, input_.length());

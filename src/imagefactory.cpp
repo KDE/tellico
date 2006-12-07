@@ -195,6 +195,7 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
   }
   img->setID(id_);
   s_imageInfoMap.remove(newID);
+  s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
 
   if(s_imageCache.insert(img->id(), img, img->numBytes())) {
 //    myLog() << "ImageFactory::addCachedImageImpl() - removing from dict: " << img->id() << endl;
@@ -209,7 +210,6 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
     // images to release later. Necessary to avoid a memory leak since new Image()
     // was called, we need to keep the pointer
     s_imageDict.insert(img->id(), img);
-    s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
     s_imagesToRelease.add(img->id());
   }
   return *img;
@@ -224,7 +224,7 @@ bool ImageFactory::writeImage(const QString& id_, const KURL& targetDir_, bool f
 
   const Data::Image& img = imageById(id_);
   if(img.isNull()) {
-    myDebug() << "ImageFactory::writeImage() - null image: " << id_ << endl;
+//    myDebug() << "ImageFactory::writeImage() - null image: " << id_ << endl;
     return false;
   }
 
@@ -316,6 +316,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
 //      myLog() << "...imageById() - found in tmp dir" << endl;
       return img2;
     } else {
+      myLog() << "ImageFactory::imageById() - img in tmpDir list but not actually there: " << id_ << endl;
       s_imagesInTmpDir.remove(id_);
     }
   }
@@ -329,10 +330,12 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     }
     if(img) {
 //      myLog() << "...imageById() - found in doc" << endl;
-      // we could go ahead and write image to disk so we don't have to keep it in memory
-      // but Document::slotWriteAllImages() is probably the one doing the loading
-      // so we'll just let it do its job
-//      writeCachedImage(id_, TempDir);
+      // go ahead and write image to disk so we don't have to keep it in memory
+      // calling pixmap() could be loading all the covers, and we don't want one
+      // to get pushed out of the cache yet
+      if(!s_imagesInTmpDir.has(id_)) {
+        writeCachedImage(id_, TempDir);
+      }
       return *img;
     }
   }

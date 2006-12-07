@@ -142,7 +142,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
       BibtexHandler::setFieldValue(entry, fieldName, text);
     }
 
-    m_coll->addEntry(entry);
+    m_coll->addEntries(entry);
 
     if(j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);

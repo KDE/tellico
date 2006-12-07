@@ -25,11 +25,11 @@
 using Tellico::EntryItem;
 
 EntryItem::EntryItem(DetailedListView* parent, Data::EntryPtr entry)
-    : GUI::ListViewItem(parent), m_entry(entry), m_customSort(true) {
+    : GUI::ListViewItem(parent), m_entry(entry), m_isDetailedList(true) {
 }
 
 EntryItem::EntryItem(GUI::CountedItem* parent_, Data::EntryPtr entry_)
-    : GUI::ListViewItem(parent_), m_entry(entry_), m_customSort(false) {
+    : GUI::ListViewItem(parent_), m_entry(entry_), m_isDetailedList(false) {
   setText(0, m_entry->title());
   setPixmap(0, UserIcon(entry_->collection()->typeName()));
 }
@@ -64,7 +64,7 @@ int EntryItem::compareColumn(QListViewItem* item_, int col_) const {
 
 int EntryItem::compare(QListViewItem* item_, int col_, bool asc_) const {
   // if not custom sort, do default compare
-  if(!m_customSort) {
+  if(!m_isDetailedList) {
     return ListViewItem::compare(item_, col_, asc_);
   }
 
@@ -90,9 +90,11 @@ QString EntryItem::key(int col_, bool) const {
     // but sort reverse by width
     return QChar('\t') + QString::number(1000-pixmap(col_)->width());
   }
+  // want to take into account articles (only apostrophes or not?
+  bool checkArticles = (m_isDetailedList && static_cast<DetailedListView*>(listView())->isTitle(col_))
+                        || col_ == 0; /* first column is always title unless it's a detailed list */
   // there's some sort of painting bug if the key is identical for multiple entries
-  // so for non-custom sorting, append the entry id
-  return m_customSort ? text(col_) : text(col_) + QString::number(m_entry->id());
+  return (checkArticles ? Data::Field::sortKeyTitle(text(col_)) : text(col_)) + QString::number(m_entry->id());
 }
 
 void EntryItem::doubleClicked() {

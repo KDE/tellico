@@ -36,8 +36,8 @@ ProgressItem::~ProgressItem() {
 //  myDebug() << "~ProgressItem() - " << m_label << endl;
 }
 
-void ProgressItem::setProgress(uint steps) {
-  m_progress = steps;
+void ProgressItem::setProgress(uint steps_) {
+  m_progress = steps_;
   emit signalProgress(this);
 
   if(m_progress >= m_total) {
@@ -45,8 +45,9 @@ void ProgressItem::setProgress(uint steps) {
   }
 }
 
-void ProgressItem::setTotalSteps(uint steps) {
-  m_total = steps;
+void ProgressItem::setTotalSteps(uint steps_) {
+  m_total = steps_;
+  emit signalTotalSteps(this);
 }
 
 void ProgressItem::setDone() {
@@ -77,8 +78,8 @@ void ProgressManager::setProgress(const QObject* owner_, uint steps_) {
   }
 
   m_items[owner_] ->setProgress(steps_);
-  updateTotalProgress();
-  emit signalItemProgress(m_items[owner_]);
+//  slotUpdateTotalProgress(); // called in ProgressItem::setProgress()
+//  emit signalItemProgress(m_items[owner_]);
 }
 
 void ProgressManager::setTotalSteps(const QObject* owner_, uint steps_) {
@@ -86,8 +87,8 @@ void ProgressManager::setTotalSteps(const QObject* owner_, uint steps_) {
     return;
   }
 
-  m_items[owner_] ->setTotalSteps(steps_);
-  updateTotalProgress();
+  m_items[owner_]->setTotalSteps(steps_);
+//  updateTotalProgress(); // called in ProgressItem::setTotalSteps()
 }
 
 void ProgressManager::setDone(const QObject* owner_) {
@@ -103,7 +104,7 @@ void ProgressManager::setDone(ProgressItem* item_) {
     return;
   }
   item_->setDone();
-  updateTotalProgress();
+//  updateTotalProgress();
 }
 
 void ProgressManager::slotItemDone(ProgressItem* item_) {
@@ -115,8 +116,8 @@ void ProgressManager::slotItemDone(ProgressItem* item_) {
       break;
     }
   }
-  updateTotalProgress();
-  emit signalItemDone(item_);
+  slotUpdateTotalProgress();
+//  emit signalItemDone(item_);
 }
 
 ProgressItem& ProgressManager::newProgressItemImpl(const QObject* owner_,
@@ -130,14 +131,17 @@ ProgressItem& ProgressManager::newProgressItemImpl(const QObject* owner_,
   ProgressItem* item = new ProgressItem(label_, canCancel_);
   m_items.insert(owner_, item);
 
-  connect(item, SIGNAL(signalProgress(ProgressItem*)), SIGNAL(signalItemProgress(ProgressItem*)));
+  connect(item, SIGNAL(signalTotalSteps(ProgressItem*)), SLOT(slotUpdateTotalProgress()));
+  connect(item, SIGNAL(signalProgress(ProgressItem*)),   SLOT(slotUpdateTotalProgress()));
+  connect(item, SIGNAL(signalDone(ProgressItem*)),       SLOT(slotUpdateTotalProgress()));
   connect(item, SIGNAL(signalDone(ProgressItem*)), SLOT(slotItemDone(ProgressItem*)));
 
-  emit signalItemAdded(item);
+//  connect(item, SIGNAL(signalProgress(ProgressItem*)), SIGNAL(signalItemProgress(ProgressItem*)));
+//  emit signalItemAdded(item);
   return *item;
 }
 
-void ProgressManager::updateTotalProgress() {
+void ProgressManager::slotUpdateTotalProgress() {
   uint progress = 0;
   uint total = 0;
 

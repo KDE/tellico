@@ -178,7 +178,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
 
     // every entry ends with "ER"
     if(tag == Latin1Literal("ER")) {
-      m_coll->addEntry(entry);
+      m_coll->addEntries(entry);
       entry = new Data::Entry(m_coll);
       continue;
     } else if(tag == Latin1Literal("TY") && s_typeMap->contains(value)) {

@@ -217,13 +217,11 @@ void ConfigDialog::setupGeneralPage() {
   m_cbCapitalize = new QCheckBox(i18n("Auto capitalize &titles and names"), formatGroup);
   QWhatsThis::add(m_cbCapitalize, i18n("If checked, titles and names will "
                                        "be automatically capitalized."));
-  connect(m_cbCapitalize, SIGNAL(toggled(bool)), SLOT(slotToggleCapitalized(bool)));
   connect(m_cbCapitalize, SIGNAL(clicked()), SLOT(slotModified()));
 
   m_cbFormat = new QCheckBox(i18n("Auto &format titles and names"), formatGroup);
   QWhatsThis::add(m_cbFormat, i18n("If checked, titles and names will "
                                    "be automatically formatted."));
-  connect(m_cbFormat, SIGNAL(toggled(bool)), SLOT(slotToggleFormatted(bool)));
   connect(m_cbFormat, SIGNAL(clicked()), SLOT(slotModified()));
 
   QGrid* g1 = new QGrid(2, formatGroup);
@@ -571,11 +569,9 @@ void ConfigDialog::readGeneralConfig() {
 
   bool autoCapitals = Config::autoCapitalization();
   m_cbCapitalize->setChecked(autoCapitals);
-  slotToggleCapitalized(autoCapitals);
 
   bool autoFormat = Config::autoFormat();
   m_cbFormat->setChecked(autoFormat);
-  slotToggleFormatted(autoFormat);
 
   const QRegExp comma(QString::fromLatin1("\\s*,\\s*"));
   const QString semicolon = QString::fromLatin1("; ");
@@ -731,16 +727,6 @@ void ConfigDialog::saveConfiguration() {
       }
     }
   }
-}
-
-void ConfigDialog::slotToggleCapitalized(bool checked_) {
-  m_leCapitals->setEnabled(checked_);
-}
-
-void ConfigDialog::slotToggleFormatted(bool checked_) {
-  m_leArticles->setEnabled(checked_);
-  m_leSuffixes->setEnabled(checked_);
-  m_lePrefixes->setEnabled(checked_);
 }
 
 void ConfigDialog::slotModified() {

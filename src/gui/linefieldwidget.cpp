@@ -48,8 +48,7 @@ QString LineFieldWidget::text() const {
   QString text = m_lineEdit->text();
   text.replace(s_semiColon, QString::fromLatin1("; "));
   text.replace(s_comma, QString::fromLatin1(", "));
-  text.simplifyWhiteSpace();
-  return text;
+  return text.stripWhiteSpace();
 }
 
 void LineFieldWidget::setText(const QString& text_) {

@@ -334,6 +334,10 @@ public:
    */
   static QString capitalize(QString str);
   /**
+   * Return the key to be used for sorting titles
+   */
+  static QString sortKeyTitle(const QString& title);
+  /**
    * Returns a mapping of the FieldType enum to translated titles for the types.
    */
   static FieldMap typeMap();

@@ -135,7 +135,9 @@ bool Document::openDocument(const KURL& url_) {
 //  }
   if(m_importer->hasImages()) {
     m_cancelImageWriting = false;
-    QTimer::singleShot(500, this, SLOT(slotWriteAllImages()));
+    QTimer::singleShot(500, this, SLOT(slotLoadAllImages()));
+  } else {
+    emit signalCollectionImagesLoaded(m_coll);
   }
   return true;
 }
@@ -173,22 +175,32 @@ bool Document::saveDocument(const KURL& url_) {
   if(!FileHandler::queryExists(url_)) {
     return false;
   }
+//  DEBUG_BLOCK;
+
+  // in case we're still loading images, give that a chance to cancel
+  m_cancelImageWriting = true;
+  kapp->processEvents();
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Saving file..."), false);
-  item.setTotalSteps(100);
   ProgressItem::Done done(this);
 
   // will always save as zip file, no matter if has images or not
   bool includeImages = Config::writeImagesInFile();
+  int totalSteps;
   // write all images to disk cache if needed
   // have to do this before executing exporter in case
   // the user changed the imageInFile setting from Yes to No, in which
   // case saving will over write the old file that has the images in it!
-  if(!includeImages) {
+  if(includeImages) {
+    totalSteps = 10;
+    item.setTotalSteps(10);
+    // since TellicoZipExporter uses 100 steps, then it will get 100/110 of the total progress
+  } else {
+    totalSteps = 100;
+    item.setTotalSteps(100);
     m_cancelImageWriting = false;
-    slotWriteAllImages(ImageFactory::DataDir);
+    writeAllImages(ImageFactory::DataDir);
   }
-  ProgressManager::self()->setProgress(this, 80);
   Export::Exporter* exporter;
   if(m_fileFormat == Import::TellicoImporter::XML) {
     exporter = new Export::TellicoXMLExporter();
@@ -197,12 +209,13 @@ bool Document::saveDocument(const KURL& url_) {
     exporter = new Export::TellicoZipExporter();
     static_cast<Export::TellicoZipExporter*>(exporter)->setIncludeImages(includeImages);
   }
+  item.setProgress(int(0.8*totalSteps));
   exporter->setEntries(m_coll->entries());
   exporter->setURL(url_);
   // since we already asked about overwriting the file, force the save
   exporter->setOptions(exporter->options() | Export::ExportForce | Export::ExportProgress);
   bool success = exporter->exec();
-  ProgressManager::self()->setProgress(this, 90);
+  item.setProgress(int(0.9*totalSteps));
 
   if(success) {
     Kernel::self()->resetHistory();
@@ -254,8 +267,8 @@ void Document::appendCollection(CollPtr coll_) {
   for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
     Data::EntryPtr newEntry = new Data::Entry(*entry);
     newEntry->setCollection(m_coll);
-    m_coll->addEntry(newEntry);
   }
+  m_coll->addEntries(entries);
   // TODO: merge filters and loans
   m_coll->blockSignals(false);
 }
@@ -334,11 +347,11 @@ Tellico::Data::MergePair Document::mergeCollection(CollPtr coll_) {
     if(!matches) {
       Data::EntryPtr e = new Data::Entry(*newIt);
       e->setCollection(m_coll);
-      m_coll->addEntry(e);
       // keep track of which entries got added
       pair.first.append(e);
     }
   }
+  m_coll->addEntries(pair.first);
   // TODO: merge filters and loans
   m_coll->blockSignals(false);
   return pair;
@@ -383,8 +396,8 @@ void Document::unAppendCollection(CollPtr coll_, FieldVec origFields_) {
   for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
     // probably don't need to do this, but on the safe side...
     entry->setCollection(coll_);
-    m_coll->removeEntry(entry);
   }
+  m_coll->removeEntries(entries);
 
   // since Collection::removeField() iterates over all entries to reset the value of the field
   // don't removeField() until after removeEntry() is done
@@ -412,9 +425,7 @@ void Document::unMergeCollection(CollPtr coll_, FieldVec origFields_, MergePair 
 
   // first item in pair are the entries added by the operation, remove them
   EntryVec entries = entryPair_.first;
-  for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
-    m_coll->removeEntry(entry);
-  }
+  m_coll->removeEntries(entries);
 
   // second item in pair are the entries which got modified by the original merge command
   const QString track = QString::fromLatin1("track");
@@ -506,20 +517,17 @@ void Document::checkInEntry(Data::EntryPtr entry_) {
     return;
   }
   entry_->setField(loaned, QString::null);
-  EntryVec vec;
-  vec.append(entry_);
-  m_coll->updateDicts(vec);
+  m_coll->updateDicts(EntryVec(entry_));
 }
 
 void Document::renameCollection(const QString& newTitle_) {
   m_coll->setTitle(newTitle_);
 }
 
-void Document::slotWriteAllImages(int cacheDir_) {
-  // images get 80 steps
-  const uint stepSize = 1 + QMAX(1, m_coll->entryCount()/80); // add 1 since it could round off
-  uint j = 1;
-
+// this only gets called when a zip file with images is opened
+// by loading every image, it gets pulled out of the zip file and
+// copied to disk. then the zip file can be closed and not retained in memory
+void Document::slotLoadAllImages() {
   QString id;
   StringSet images;
   Data::EntryVec entries = m_coll->entries();
@@ -530,24 +538,68 @@ void Document::slotWriteAllImages(int cacheDir_) {
       if(id.isEmpty() || images.has(id)) {
         continue;
       }
-      if(ImageFactory::writeCachedImage(id, static_cast<ImageFactory::CacheDir>(cacheDir_))) {
-        images.add(id);
-      } else {
-        myDebug() << "Document::slotWriteAllImages() - entry title: " << entry->title() << endl;
+      // this is the early loading, so just by calling imageById()
+      // the image gets sucked form the zip file and written to disk
+      //by ImageFactoryLLimageById()
+      if(ImageFactory::imageById(id).isNull()) {
+        myDebug() << "Document::slotLoadAllImages() - entry title: " << entry->title() << endl;
       }
+      images.add(id);
+    }
+    if(m_cancelImageWriting) {
+      break;
+    }
+    // stay responsive, do this in the background
+    kapp->processEvents();
+  }
+
+  if(m_cancelImageWriting) {
+    myLog() << "Document::slotLoadAllImages() - cancel image writing" << endl;
+  } else {
+    emit signalCollectionImagesLoaded(m_coll);
+  }
+
+  m_cancelImageWriting = false;
+}
+
+void Document::writeAllImages(int cacheDir_) {
+  // images get 80 steps in saveDocument()
+  const uint stepSize = 1 + QMAX(1, m_coll->entryCount()/80); // add 1 since it could round off
+  uint j = 1;
+
+  QString id;
+  StringSet images;
+  EntryVec entries = m_coll->entries();
+  FieldVec imageFields = m_coll->imageFields();
+  for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+    for(FieldVec::Iterator field = imageFields.begin(); field != imageFields.end() && !m_cancelImageWriting; ++field) {
+      id = entry->field(field);
+      if(id.isEmpty() || images.has(id)) {
+        continue;
+      }
+      if(!ImageFactory::writeCachedImage(id, static_cast<ImageFactory::CacheDir>(cacheDir_))) {
+        myDebug() << "Document::writeAllImages() - entry title: " << entry->title() << endl;
+      }
+      images.add(id);
     }
     if(j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j/stepSize);
       kapp->processEvents();
     }
     ++j;
+    if(m_cancelImageWriting) {
+      break;
+    }
+  }
+
+  if(m_cancelImageWriting) {
+    myDebug() << "Document::slotWriteAllImages() - cancel image writing" << endl;
   }
 
   m_cancelImageWriting = false;
 }
 
 bool Document::pruneImages() {
-  DEBUG_BLOCK;
   bool found = false;
   QString id;
   StringSet images;

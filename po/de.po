@@ -1,24 +1,24 @@
 # translation of de.po to german
-# translation of de.po to deutsch
-# translation of de.po to German
 # tellico - A book collection manager for KDE3
 # Copyright (C) 2003 Robby Stephenson <robby@periapsis.org>
 # This file is distributed under the same license as the tellico package.
+#
+#
 # Robby Stephenson <robby@periapsis.org>, 2003.
 # Gerrit M. Albrecht <mail@gerrit-albrecht.de>, 2003, 2004, 2005, 2006.
-#
+# Tobias Gruetzmacher <tobias@portfolio16.de>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "POT-Creation-Date: 2006-11-05 15:37-0800\n"
-"PO-Revision-Date: 2006-03-30 20:38+0200\n"
-"Last-Translator: Gerrit M. Albrecht <mail@gerrit-albrecht.de>\n"
+"PO-Revision-Date: 2006-12-06 17:41+0100\n"
+"Last-Translator: Tobias Gruetzmacher <tobias@portfolio16.de>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: cite/lyxpipe.cpp:47
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
@@ -35,7 +35,6 @@ msgid "OpenOffice.org Connection"
 msgstr "OpenOffice.org-Verbindung"
 
 #: cite/openoffice.cpp:177
-#, fuzzy
 msgid ""
 "Tellico was unable to connect to OpenOffice.org. Please verify the "
 "connection settings below, and that OpenOffice.org Writer is currently "
@@ -87,14 +86,12 @@ msgid "Move Row Down"
 msgstr "Zeile nach unten bewegen"
 
 #: gui/tablefieldwidget.cpp:294
-#, fuzzy
 msgid "Clear Table"
-msgstr "Lösche Filter"
+msgstr "Lösche Tabelle"
 
 #: gui/previewdialog.cpp:27
-#, fuzzy
 msgid "Template Preview"
-msgstr "Vorlagen"
+msgstr "Vorlagen-Vorschau"
 
 #: gui/stringmapdialog.cpp:57
 msgid "&Set"
@@ -640,11 +637,10 @@ msgstr "URL"
 msgid "Volume"
 msgstr "Band"
 
-# oder "Filtere"?
+#
 #: collections/filecatalog.cpp:56
-#, fuzzy
 msgid "Folder"
-msgstr "Filter"
+msgstr "Ordner"
 
 #: collections/filecatalog.cpp:61
 msgid "Mimetype"
@@ -944,18 +940,16 @@ msgid "My Games"
 msgstr "Meine Spiele"
 
 #: collections/gamecollection.cpp:45
-#, fuzzy
 msgid "Xbox 360"
-msgstr "Xbox"
+msgstr "Xbox 360"
 
 #: collections/gamecollection.cpp:45
 msgid "Xbox"
 msgstr "Xbox"
 
 #: collections/gamecollection.cpp:46
-#, fuzzy
 msgid "PlayStation3"
-msgstr "PlayStation"
+msgstr "PlayStation3"
 
 #: collections/gamecollection.cpp:46
 msgid "PlayStation2"
@@ -972,9 +966,8 @@ msgid ""
 msgstr "PSP"
 
 #: collections/gamecollection.cpp:47
-#, fuzzy
 msgid "Nintendo Wii"
-msgstr "Regionalbereich"
+msgstr "Nintendo Wii"
 
 #: collections/gamecollection.cpp:47
 msgid "Nintendo DS"
@@ -1210,7 +1203,7 @@ msgstr "de,van,der,van der,von"
 
 #: fetch/isbndbfetcher.cpp:50
 msgid "ISBNdb.com"
-msgstr ""
+msgstr "ISBNdb.com"
 
 #: fetch/amazonfetcher.cpp:189 fetch/animenfofetcher.cpp:74
 #: fetch/ibsfetcher.cpp:71 fetch/isbndbfetcher.cpp:75
@@ -1277,24 +1270,20 @@ msgid "Enter the port number of the server. The default is %1."
 msgstr "Geben Sie die Port-Nummer des Servers ein. Der Vorgabewert ist %1."
 
 #: fetch/srufetcher.cpp:370
-#, fuzzy
 msgid "Path: "
-msgstr "&Port: "
+msgstr "Pfad: "
 
 #: fetch/srufetcher.cpp:375
-#, fuzzy
 msgid "Enter the path to the database used by the server."
-msgstr "Geben Sie den Datenbank-Namen zur Nutzung durch den Server ein."
+msgstr "Geben Sie den Pfad zur Datenbank ein, die vom Server benutzt wird."
 
 #: fetch/srufetcher.cpp:380
-#, fuzzy
 msgid "Format: "
-msgstr "Format"
+msgstr "Format: "
 
 #: fetch/srufetcher.cpp:387
-#, fuzzy
 msgid "Enter the result format used by the server."
-msgstr "Geben Sie den Datenbank-Namen zur Nutzung durch den Server ein."
+msgstr "Geben Sie das Ergebnisformat ein, das vom Server benutzt wird."
 
 #: fetch/yahoofetcher.cpp:51
 msgid "Yahoo! Audio Search"
@@ -1428,13 +1417,12 @@ msgstr ""
 "Amazon.com-Website."
 
 #: fetch/z3950fetcher.cpp:78 fetch/z3950fetcher.cpp:756
-#, fuzzy
 msgid "z39.50 Server"
-msgstr "z39.50"
+msgstr "z39.50-Server"
 
 #: fetch/z3950fetcher.cpp:495
 msgid "Use preset &server:"
-msgstr ""
+msgstr "Benutze voreingestellten &Server:"
 
 #: fetch/z3950fetcher.cpp:526
 msgid "&Database: "
@@ -1457,19 +1445,21 @@ msgstr ""
 "wahrscheinlichste Wahl ist MARC-8, aber auch ISO-8859-1 ist gebräuchlich."
 
 #: fetch/z3950fetcher.cpp:551
-#, fuzzy
 msgid "&Format: "
-msgstr "Format"
+msgstr "&Format: "
 
 #: fetch/z3950fetcher.cpp:554
 msgid "Auto-detect"
-msgstr ""
+msgstr "Automatisch erkennen"
 
 #: fetch/z3950fetcher.cpp:562
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
+"Geben Sie das Datenformat ein, dass der z39.50-Server benutzt. Tellico wird "
+"versuchen,dieses automatisch zu erkennen, wenn <i>Automatisch erkennen</i> "
+"ausgewählt ist."
 
 #: fetch/z3950fetcher.cpp:568
 msgid "&User: "
@@ -1503,7 +1493,7 @@ msgstr ""
 
 #: fetch/z3950fetcher.cpp:671
 msgid "Illustrator"
-msgstr ""
+msgstr "Illustrator"
 
 #: fetch/execexternalfetcher.cpp:82
 msgid "External Application"
@@ -1686,21 +1676,19 @@ msgstr "Episoden"
 
 #: newstuff/dialog.cpp:93
 msgid "Get Hot New Stuff"
-msgstr ""
+msgstr "\"Neue Sachen\" abholen"
 
 #: newstuff/dialog.cpp:113
-#, fuzzy
 msgid "Version"
-msgstr "Person"
+msgstr "Version"
 
 #: newstuff/dialog.cpp:115
 msgid "Downloads"
-msgstr ""
+msgstr "Downloads"
 
 #: newstuff/dialog.cpp:116
-#, fuzzy
 msgid "Release Date"
-msgstr "Jahr der Veröffentlichung"
+msgstr "Veröffentlichungsdatum"
 
 #: newstuff/dialog.cpp:120
 msgid ""
@@ -1708,40 +1696,41 @@ msgid ""
 "items have a checkmark icon, while items with new version available have an "
 "update icon"
 msgstr ""
+"Dies ist eine Liste alle zum Download vverfügbaren Dinge. Bereits "
+"installierte Dinge haben eine Häkchen-Icon und Dinge, die in einer neuen "
+"Version vorliegen, haben ein Update-Icon."
 
 #: newstuff/dialog.cpp:136
-#, fuzzy
 msgid "The name and license of the selected item"
-msgstr "Die ausgewählten Einträge zurückgeben"
+msgstr "Der Name und die Lizenz des ausgewählten Elements"
 
 #: newstuff/dialog.cpp:139
-#, fuzzy
 msgid "The author of the selected item"
-msgstr "Die ausgewählten Einträge ausleihen"
+msgstr "Der Autor des ausgewählten Eintrags"
 
 #: newstuff/dialog.cpp:141 newstuff/dialog.cpp:395
 msgid "Install"
-msgstr ""
+msgstr "I&nstallieren"
 
 #: newstuff/dialog.cpp:160
 msgid "Download and install the selected template."
-msgstr ""
+msgstr "Ausgewählte Vorlage herunterladen und installieren."
 
 #: newstuff/dialog.cpp:163
 msgid ""
 "Download and install the selected script. Some scripts may need to be "
 "configured after being installed."
 msgstr ""
+"Das ausgewählte Script herunterladen und installieren. Einige Scripts "
+"müssen nach der Installation konfiguriert werden."
 
 #: newstuff/dialog.cpp:193
-#, fuzzy
 msgid "A description of the selected item is shown here."
-msgstr "Die ausgewählten Einträge zurückgeben"
+msgstr "Eine Beschreibung des ausgewählten Eintrags wird hier angezeigt."
 
 #: newstuff/dialog.cpp:223
-#, fuzzy
 msgid "Downloading information..."
-msgstr "Importiere Audio-CD-Informationen"
+msgstr "Informationen werden heruntergeladen..."
 
 #: controller.cpp:131 fetchdialog.cpp:214 fetchdialog.cpp:292
 #: fetchdialog.cpp:360 fetchdialog.cpp:415 newstuff/dialog.cpp:296
@@ -1753,12 +1742,11 @@ msgstr "Bereit."
 msgid ""
 "_: Update Stuff\n"
 "Update"
-msgstr ""
+msgstr "Aktualisiere"
 
 #: newstuff/dialog.cpp:412
-#, fuzzy
 msgid "Installing item..."
-msgstr "Speichere Datei..."
+msgstr "Installiere Eintrag..."
 
 #: translators/bibteximporter.cpp:58
 #, c-format
@@ -2000,14 +1988,12 @@ msgstr ""
 "<qt>Tellico konnte nicht auf das CD-Laufwerk zugreifen - <i>%1</i>.</qt>"
 
 #: translators/freedbimporter.cpp:163
-#, fuzzy
 msgid "Select CDDB Entry"
-msgstr "Lösche Eintrag"
+msgstr "Wähle CDDB-Eintrag"
 
 #: translators/freedbimporter.cpp:164
-#, fuzzy
 msgid "Select a CDDB entry:"
-msgstr "Wählen Sie das IMDB-Ergebnis aus"
+msgstr "Wählen Sie einen CDDB-Eintrag aus:"
 
 #: translators/freedbimporter.cpp:187
 msgid "<qt>No records were found to match the CD.</qt>"
@@ -2230,15 +2216,14 @@ msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Die Tabelle zeigt die ersten fünf Zeilen der CSV-Datei."
 
 #: translators/csvimporter.cpp:240
-#, fuzzy
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
 "column, selecting the field, then clicking the <i>Assign Field</i> "
 "button.</qt>"
 msgstr ""
-"<qt>Setze jede Spalte korrespondierend zu einem Feld in der Sammlung, indem "
-"eine Spalte gewählt, das Feld ausgewählt und dann die "
-"<i>Setze</i>-Schaltfläche angeklickt wird.</qt>"
+"<qt>Verbinden Sie jede Spalte mit einem Feld in der Sammlung, indem Sie eine "
+"Spalte auswählen, das Feld auswählen und dann die <i>Feld "
+"zuweisen</i>-Schaltfläche anklicken.</qt>"
 
 #: translators/csvimporter.cpp:242
 msgid "Co&lumn:"
@@ -2371,12 +2356,13 @@ msgstr "Tellico unterstützt mehrere, verschiedene Datenquellen."
 #: fetcherconfigdialog.cpp:111
 msgid "Updating from source should overwrite user data"
 msgstr ""
+"Aktualisierungen von der Datenquelle sollen Benutzerdaten überschreiben"
 
 #: fetcherconfigdialog.cpp:114
-#, fuzzy
 msgid "If checked, updating entries will overwrite any existing information."
 msgstr ""
-"Wenn markiert, werden die Einträge anhand des markierten Feldes gruppiert."
+"Wenn markiert, werden aktualisierende Einträge bestehende Informationen "
+"überschreiben."
 
 #: filterdialog.cpp:60
 msgid "Any Field"
@@ -2472,7 +2458,6 @@ msgid "Updating entries..."
 msgstr "Aktualisiere Einträge..."
 
 #: entryupdater.cpp:86
-#, fuzzy
 msgid "Update Entries"
 msgstr "Akt&ualisiere Einträge"
 
@@ -2559,9 +2544,8 @@ msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.ris|RIS-Dateien (*.ris)"
 
 #: importdialog.cpp:234
-#, fuzzy
 msgid "*.amc|AMC Data Files (*.amc)"
-msgstr "*.gcf|GCfilms-Daten-Dateien (*.gcf)"
+msgstr "*.amc|AMC-Daten-Dateien (*.amc)"
 
 #: importdialog.cpp:270
 msgid "MODS"
@@ -2573,7 +2557,7 @@ msgstr "RIS"
 
 #: importdialog.cpp:273
 msgid "AMC"
-msgstr ""
+msgstr "AMC"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -2904,14 +2888,12 @@ msgid "Import a GCfilms data file"
 msgstr "Importiere eine GCfilms-Daten-Datei"
 
 #: mainwindow.cpp:398
-#, fuzzy
 msgid "Import Ant Movie Catalog Data..."
-msgstr "Importiere Audio-CD-Daten..."
+msgstr "Importiere \"Ant Movie Catalog\"-Daten..."
 
 #: mainwindow.cpp:399
-#, fuzzy
 msgid "Import an Ant Movie Catalog data file"
-msgstr "Importiere eine andere Tellico-Datei"
+msgstr "Importiere eine \"Ant Movie Catalog\"-Datendatei"
 
 #: mainwindow.cpp:405
 msgid "Import File Listing..."
@@ -3070,9 +3052,8 @@ msgid "Edit the selected entries"
 msgstr "Bearbeite die ausgewählten Einträge"
 
 #: controller.cpp:599 mainwindow.cpp:537
-#, fuzzy
 msgid "D&uplicate Entry"
-msgstr "&Aktualisiere Eintrag"
+msgstr "D&upliziere Eintrag"
 
 #: mainwindow.cpp:540
 msgid "Copy the selected entries"
@@ -3473,9 +3454,8 @@ msgid "&Edit Entries..."
 msgstr "B&earbeite Einträge..."
 
 #: controller.cpp:604
-#, fuzzy
 msgid "D&uplicate Entries"
-msgstr "Akt&ualisiere Einträge"
+msgstr "D&upliziere Einträge"
 
 #: controller.cpp:605
 msgid "&Update Entries"
@@ -3547,9 +3527,8 @@ msgid "File to open"
 msgstr "Zu öffnende Datei"
 
 #: main.cpp:42
-#, fuzzy
 msgid "Data source scripts"
-msgstr "Datenquellen-Optionen"
+msgstr "Datenquellen-Scripte"
 
 #: main.cpp:44
 msgid "Icons"
@@ -3719,18 +3698,16 @@ msgstr ""
 "welcher die angegebenen Felder in der Zeichenkette ersetzt werden."
 
 #: collectionfieldsdialog.cpp:192
-#, fuzzy
 msgid "&Default value:"
-msgstr "Standard Kalender"
+msgstr "Stan&dardwert:"
 
 #: collectionfieldsdialog.cpp:197
 msgid "<qt>A default value can be set for new entries.</qt>"
-msgstr ""
+msgstr "<qt>Ein Standardwert für neue Einträge gesetzt werden.</qt>"
 
 #: collectionfieldsdialog.cpp:202
-#, fuzzy
 msgid "A&llowed values:"
-msgstr "Er&laubt:"
+msgstr "Er&laubte Werte:"
 
 #: collectionfieldsdialog.cpp:207
 msgid ""
@@ -4133,101 +4110,99 @@ msgid "Template Options"
 msgstr "Vorlage-Optionen"
 
 #: configdialog.cpp:361
-#, fuzzy
 msgid "Template:"
-msgstr "Vorlagen"
+msgstr "Vorlage:"
 
 #: configdialog.cpp:365
 msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
 msgstr ""
+"Wählen Sie eine Vorlage, die für den aktuellen Typ von Sammlung benutzt "
+"werden soll. Nicht alle Vorlagen benutzen die Schriftart- und "
+"Farbeinstellungen."
 
 #: configdialog.cpp:372
-#, fuzzy
 msgid "&Preview..."
-msgstr "&Neu..."
+msgstr "&Vorschau..."
 
 #: configdialog.cpp:373
 msgid "Show a preview of the template"
-msgstr ""
+msgstr "Zeige eine Vorschau der Vorlage"
 
 #: configdialog.cpp:390
-#, fuzzy
 msgid "Font Options"
-msgstr "Formatieroptionen"
+msgstr "Schriftartoptionen"
 
 #: configdialog.cpp:397
-#, fuzzy
 msgid "Font:"
-msgstr "Monat"
+msgstr "Schriftart:"
 
 #: configdialog.cpp:403
 msgid "This font is passed to the template used in the Entry View."
 msgstr ""
+"Diese Schriftart wird an die Vorlage übergeben, die in der Eintragsansicht "
+"benutzt wird."
 
 #: configdialog.cpp:407
-#, fuzzy
 msgid "Size:"
-msgstr "Größe"
+msgstr "Größe:"
 
 #: configdialog.cpp:417
-#, fuzzy
 msgid "Color Options"
-msgstr "CSV-Optionen"
+msgstr "Farboptionen"
 
 #: configdialog.cpp:424
 msgid "Background color:"
-msgstr ""
+msgstr "Hintergrundfarbe:"
 
 #: configdialog.cpp:430
 msgid "This color is passed to the template used in the Entry View."
 msgstr ""
+"Diese Farbe wird an die Vorlage übergeben, die in der Eintragsansicht "
+"benutzt wird."
 
 #: configdialog.cpp:434
 msgid "Text color:"
-msgstr ""
+msgstr "Textfarbe:"
 
 #: configdialog.cpp:443
 msgid "Highlight color:"
-msgstr ""
+msgstr "Hervorhebungsfarbe:"
 
 #: configdialog.cpp:452
 msgid "Highlighted text color:"
-msgstr ""
+msgstr "Hervorhebungstextfarbe:"
 
 #: configdialog.cpp:461
-#, fuzzy
 msgid "Manage Templates"
-msgstr "Vorlagen"
+msgstr "Vorlagen verwalten"
 
 #: configdialog.cpp:467
 msgid "Install..."
-msgstr ""
+msgstr "Installieren..."
 
 #: configdialog.cpp:470
 msgid "Click to install a new template directly."
-msgstr ""
+msgstr "Klicken Sie hier, um eine neue Vorlage direkt zu installieren."
 
 #: configdialog.cpp:473
 msgid "Download.."
-msgstr ""
+msgstr "Herunterladen..."
 
 #: configdialog.cpp:476
-#, fuzzy
 msgid "Click to download additional templates via the Internet."
 msgstr ""
-"Klicken Sie hier, um einen Text-Editor zu öffnen, um mehrere ISBN-Werte zu "
-"bearbeiten oder einzugeben."
+"Klicken Sie hier, um zusätzliche Vorlagen aus dem Internet herunterzuladen."
 
 #: configdialog.cpp:479
-#, fuzzy
 msgid "Delete..."
-msgstr "Bild auswählen..."
+msgstr "Löschen..."
 
 #: configdialog.cpp:482
 msgid "Click to select and remove installed templates."
 msgstr ""
+"Klicken Sie hier, um installierte Vorlagen auszuwählen und zu entfernen."
 
 #: configdialog.cpp:493
 msgid "Data Sources"
@@ -4250,6 +4225,8 @@ msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
 msgstr ""
+"Die Reihenfolge der Datenquellen bestimmt die Reihenfolge, die Tellico "
+"benutzt, um Einträge automatisch zu aktualisieren."
 
 #: configdialog.cpp:513
 msgid "Move &Down"
@@ -4261,46 +4238,41 @@ msgstr "&Neu..."
 
 #: configdialog.cpp:522
 msgid "Click to add a new data source."
-msgstr ""
+msgstr "Klicken Sie hier, um eine neue Datenquelle hinzuzufügen."
 
 #: configdialog.cpp:523
 msgid "&Modify..."
 msgstr "&Ändern..."
 
 #: configdialog.cpp:525
-#, fuzzy
 msgid "Click to modify the selected data source."
-msgstr "Die ausgewählten Einträge ausleihen"
+msgstr "Klicken Sie hier, um die ausgewählte Datenquelle zu ändern."
 
 #: configdialog.cpp:528
-#, fuzzy
 msgid "Click to delete the selected data source."
-msgstr "Lösche die ausgewählten Einträge"
+msgstr "Klicken Sie hier, um die ausgewählte Datenquelle zu löschen."
 
 #: configdialog.cpp:529
 msgid "Download..."
-msgstr ""
+msgstr "Herunterladen..."
 
 #: configdialog.cpp:531
-#, fuzzy
 msgid "Click to download additional data sources via the Internet."
 msgstr ""
-"Klicken Sie hier, um einen Text-Editor zu öffnen, um mehrere ISBN-Werte zu "
-"bearbeiten oder einzugeben."
+"Klicken Sie hier, um zusätzliche Datenquellen aus dem Internet "
+"herunterzuladen."
 
 #: configdialog.cpp:1004
 msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
-msgstr ""
+msgstr "*.tar.gz *.tgz|Vorlagen-Paket (*.tar.gz)"
 
 #: configdialog.cpp:1037
-#, fuzzy
 msgid "Delete Template"
-msgstr "Lösche Filter"
+msgstr "Lösche Vorlage"
 
 #: configdialog.cpp:1038
-#, fuzzy
 msgid "Select template to delete:"
-msgstr "Wählen Sie die zu durchsuchende Datenbank aus"
+msgstr "Wählen Sie die zu löschende Vorlage aus:"
 
 #: loanview.cpp:32 loanview.cpp:90 xslt.cpp:26
 msgid "Borrower"
@@ -4522,13 +4494,12 @@ msgid "Add the selected entry to the current collection"
 msgstr "Fügt den ausgewählten Eintrag zur aktuellen Sammlung hinzu"
 
 #: fetchdialog.cpp:186
-#, fuzzy
 msgid "Get More Results"
-msgstr "Wählen Sie das IMDB-Ergebnis aus"
+msgstr "Weitere Ergebnisse holen"
 
 #: fetchdialog.cpp:189
 msgid "Fetch more results from the current data source"
-msgstr ""
+msgstr "Hole mehr Ergebnisse von der aktuellen Datenquelle"
 
 #: fetchdialog.cpp:193
 msgid "Clear all search fields and results"
@@ -4602,14 +4573,12 @@ msgid "Sa&ve Entry"
 msgstr "S&peichere Eintrag"
 
 #: entryeditdialog.cpp:75
-#, fuzzy
 msgid "Go to the previous entry in the collection"
-msgstr "Wähle alle Datensätze der Sammlung aus"
+msgstr "Gehe zum vorherigen Eintrag der Sammlung"
 
 #: entryeditdialog.cpp:80
-#, fuzzy
 msgid "Go to the next entry in the collection"
-msgstr "Wähle alle Datensätze der Sammlung aus"
+msgstr "Gehe zum nächsten Eintrag der Sammlung"
 
 #: entryeditdialog.cpp:313
 msgid "Do you really want to modify these entries?"
@@ -4920,9 +4889,8 @@ msgid "Total number of entries:"
 msgstr "Gesamte Anzahl von Einträgen:"
 
 #: xslt.cpp:20 xslt.cpp:32 xslt.cpp:46
-#, fuzzy
 msgid "Generated by Tellico"
-msgstr "Erzeugt von"
+msgstr "Erzeugt von Tellico"
 
 #: xslt.cpp:21
 msgid "Distinct values: "
@@ -4984,70 +4952,53 @@ msgid ""
 msgstr "Dreispaltig"
 
 #: xslt.cpp:44
-#, fuzzy
 msgid "Search"
-msgstr "&Suchen"
+msgstr "Suchen"
 
 #: z3950.cpp:4
 msgid "The British Library"
-msgstr ""
+msgstr "Nationalbibliothek Großbritannien"
 
 #: z3950.cpp:6
-#, fuzzy
 msgid "Sudoc (France)"
-msgstr "Amazon (Frankreich)"
+msgstr "Sudoc (Frankreich)"
 
 #: z3950.cpp:8
 msgid "BIBSYS (Norway)"
-msgstr ""
+msgstr "BIBSYS (Norwegen)"
 
 #: z3950.cpp:10
 msgid "Italian National Library"
-msgstr ""
+msgstr "Italienische Nationalbibliothek"
 
 #: z3950.cpp:12
 msgid "Portuguese National Library"
-msgstr ""
+msgstr "Portugiesische Nationalbibliothek"
 
 #: z3950.cpp:14
 msgid "National Library of Poland"
-msgstr ""
+msgstr "Nationalbibliothek von Polen"
 
 #: z3950.cpp:16
 msgid "National Library of Canada"
-msgstr ""
+msgstr "Nationalbibliothek von Kanada"
 
 #: z3950.cpp:18
 msgid "Israel Union List"
-msgstr ""
+msgstr "Israel Union List"
 
 #: z3950.cpp:20
 msgid "National Library of Australia"
-msgstr ""
+msgstr "Nationalbibliothek von Australien"
 
 #: scripts.cpp:2
 msgid "Dark Horse Comics"
-msgstr ""
+msgstr "Dark·Horse·Comics"
 
 #: scripts.cpp:4
 msgid "Allocine.fr"
-msgstr ""
+msgstr "Allocine.fr"
 
 #: scripts.cpp:6
 msgid "Spanish Ministry of Culture"
-msgstr ""
-
-#~ msgid "Tellico"
-#~ msgstr "Tellico"
-
-#~ msgid "&Copy Entry"
-#~ msgstr "&Kopiere Eintrag"
-
-#~ msgid "&Copy Entries"
-#~ msgstr "&Kopiere Einträge"
-
-#~ msgid "<qt>Multiple records were found to match the CD.</qt>"
-#~ msgstr "<qt>Mehrere zur CD passende Aufzeichnungen wurden gefunden.</qt>"
-
-#~ msgid "Remo&ve"
-#~ msgstr "&Entfernen"
+msgstr "Spanisches Kultusministerium"

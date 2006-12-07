@@ -1,3 +1,24 @@
+2006-12-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Bumped the Amazon ECS version to 2006-11-30.
+	* Updated Amazon search to allow ISBN-13 values.
+	* Updated de.po, thanks to Tobias Gruetzmacher.
+	* Fixed bug with saving URLs without the protocol.
+	* Changed entry comparison for files to match only on URL value.
+	* Released Tellico 1.2.7.
+
+2006-12-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved performance for copying and deleting multiple entries.
+
+2006-11-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated sorting to take title articles into account.
+
+2006-11-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that caused image loss when loading from data file.
+
 2006-11-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.6.

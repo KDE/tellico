@@ -577,7 +577,7 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
     }
   } // end field value loop
 
-  m_coll->addEntry(entry);
+  m_coll->addEntries(entry);
 }
 
 void TellicoImporter::readImage(const QDomElement& elem_) {

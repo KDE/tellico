@@ -68,18 +68,6 @@ private:
  * @author Robby Stephenson
  */
 class Entry : public KShared {
-  // two entries are equal if all their field values are equal
-  friend bool operator==(const Entry& e1, const Entry& e2) {
-    if(e1.m_fields.count() != e2.m_fields.count()) {
-      return false;
-    }
-    for(StringMap::ConstIterator it = e1.m_fields.begin(); it != e1.m_fields.end(); ++it) {
-      if(!e2.m_fields.contains(it.key()) || e2.m_fields[it.key()] != it.data()) {
-        return false;
-      }
-    }
-    return true;
-  }
 
 public:
   /**
@@ -98,6 +86,12 @@ public:
    * The assignment operator is overloaded, since the id must be different.
    */
   Entry& operator=(const Entry& other);
+  /**
+   * two entries are equal if all their field values are equal, except for
+   * file catalogs which match on the url only
+   */
+  bool operator==(const Entry& other);
+
   ~Entry();
 
   /**

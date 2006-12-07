@@ -59,6 +59,7 @@ signals:
   void signalProgress(ProgressItem* item);
   void signalDone(ProgressItem* item);
   void signalCancelled(ProgressItem* item);
+  void signalTotalSteps(ProgressItem* item);
 
 protected:
   /* Only to be used by the ProgressManager */
@@ -95,10 +96,10 @@ public:
   bool anyCanBeCancelled() const;
 
 signals:
-  void signalItemAdded(ProgressItem* item);
-  void signalItemProgress(ProgressItem* item);
-  void signalItemDone(ProgressItem* item);
-  void signalItemCancelled(ProgressItem* item);
+//  void signalItemAdded(ProgressItem* item);
+//  void signalItemProgress(ProgressItem* item);
+//  void signalItemDone(ProgressItem* item);
+//  void signalItemCancelled(ProgressItem* item);
   void signalTotalProgress(uint progress);
 
 public slots:
@@ -106,13 +107,13 @@ public slots:
 
 private slots:
   void slotItemDone(ProgressItem* item);
+  void slotUpdateTotalProgress();
 
 private:
   ProgressManager();
   ProgressManager(const ProgressManager&); // no copies
 
   ProgressItem& newProgressItemImpl(const QObject* owner, const QString& label, bool canCancel);
-  void updateTotalProgress();
   void setDone(ProgressItem* item);
 
   typedef QMap<QGuardedPtr<const QObject>, QGuardedPtr<ProgressItem> > ProgressMap;
