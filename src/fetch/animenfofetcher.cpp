@@ -146,7 +146,7 @@ void AnimeNfoFetcher::slotComplete(KIO::Job* job_) {
 
   for(int pos = infoRx.search(s); m_started && pos > -1; pos = infoRx.search(s, pos+1)) {
     if(n == 0 && !u.isEmpty()) {
-      SearchResult* r = new SearchResult(this, t, y);
+      SearchResult* r = new SearchResult(this, t, y, QString());
       emit signalResultFound(r);
 
 #ifdef ANIMENFO_TEST
@@ -186,7 +186,7 @@ void AnimeNfoFetcher::slotComplete(KIO::Job* job_) {
   // grab last response
 #ifndef ANIMENFO_TEST
   if(!u.isEmpty()) {
-    SearchResult* r = new SearchResult(this, t, y);
+    SearchResult* r = new SearchResult(this, t, y, QString());
     emit signalResultFound(r);
     KURL url(QString::fromLatin1(ANIMENFO_BASE_URL), u);
     url.setQuery(QString::null);

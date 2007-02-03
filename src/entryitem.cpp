@@ -91,10 +91,14 @@ QString EntryItem::key(int col_, bool) const {
     return QChar('\t') + QString::number(1000-pixmap(col_)->width());
   }
   // want to take into account articles (only apostrophes or not?
+  // first column is always title unless it's a detailed list
   bool checkArticles = (m_isDetailedList && static_cast<DetailedListView*>(listView())->isTitle(col_))
-                        || col_ == 0; /* first column is always title unless it's a detailed list */
+                        || (!m_isDetailedList && col_ == 0);
   // there's some sort of painting bug if the key is identical for multiple entries
-  return (checkArticles ? Data::Field::sortKeyTitle(text(col_)) : text(col_)) + QString::number(m_entry->id());
+  // probably a null string in the group view. TODO
+  // don't add the entry id if it's a detailed view cause that messes up secondary sorting
+  QString key = (checkArticles ? Data::Field::sortKeyTitle(text(col_)) : text(col_));
+  return (m_isDetailedList ? key : key + QString::number(m_entry->id()));
 }
 
 void EntryItem::doubleClicked() {

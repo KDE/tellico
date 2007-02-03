@@ -15,6 +15,7 @@
 #define TELLICO_NEWSTUFF_NEWSCRIPT_H
 
 #include <kdeversion.h>
+#include <kurl.h>
 
 #if KDE_IS_VERSION(3,3,90)
 #include <knewstuff/knewstuffsecure.h>
@@ -37,6 +38,9 @@ public:
   NewScript(Manager* manager, QWidget* parentWidget = 0);
   virtual ~NewScript() {}
 
+  const KURL& url() const { return m_url; }
+  bool successfulInstall() const { return m_success; }
+
 private:
   virtual void installResource();
 
@@ -45,6 +49,8 @@ private:
   // KNewStuffSecure has a protected variable
   QString m_tarName;
 #endif
+  KURL m_url;
+  bool m_success : 1;
 };
 
   }

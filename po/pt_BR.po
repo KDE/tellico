@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "POT-Creation-Date: 2006-11-05 15:37-0800\n"
-"PO-Revision-Date: 2006-09-06 01:38-0300\n"
+"PO-Revision-Date: 2006-12-25 01:47-0200\n"
 "Last-Translator: Claudio Henrique Fortes Felix <claudio@helpo.com.br>\n"
 "Language-Team: Brazillian Portuguese\n"
 "MIME-Version: 1.0\n"
@@ -836,8 +836,7 @@ msgstr "Personagem"
 
 #: collections/videocollection.cpp:107
 msgid "A table for the cast members, along with the roles they play"
-msgstr ""
-"Uma tabela para o elenco do filme, com o papel representado por cada um"
+msgstr "Uma tabela para o elenco do filme, com o papel representado por cada um"
 
 #: collections/videocollection.cpp:110
 msgid "Director"
@@ -1465,10 +1464,8 @@ msgid "Collection &type:"
 msgstr "&Tipo de coleção:"
 
 #: fetch/execexternalfetcher.cpp:341
-msgid ""
-"Set the collection type of the data returned from the external application."
-msgstr ""
-"Especifique o tipo de coleção dos dados retornados do aplicativo externo."
+msgid "Set the collection type of the data returned from the external application."
+msgstr "Especifique o tipo de coleção dos dados retornados do aplicativo externo."
 
 #: fetch/execexternalfetcher.cpp:346
 msgid "&Result type: "
@@ -1476,8 +1473,7 @@ msgstr "Tipo de &Resultado:"
 
 #: fetch/execexternalfetcher.cpp:355
 msgid "Set the result type of the data returned from the external application."
-msgstr ""
-"Especifique o tipo de resultado dos dados retornados do aplicativo externo."
+msgstr "Especifique o tipo de resultado dos dados retornados do aplicativo externo."
 
 #: fetch/execexternalfetcher.cpp:360
 msgid "Application &path: "
@@ -1541,8 +1537,7 @@ msgid "Select IMDB Result"
 msgstr "Selecione o resultado IMDB"
 
 #: fetch/imdbfetcher.cpp:580
-msgid ""
-"<qt>Your search returned multiple matches. Please select one below.</qt>"
+msgid "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
 "<qt>A sua pesquisa retornou vários resultados. Por favor selecione um dos "
 "seguintes.</qt>"
@@ -1942,8 +1937,7 @@ msgstr ""
 
 #: translators/freedbimporter.cpp:84 translators/freedbimporter.cpp:137
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr ""
-"<qt>Tellico não pôde acessar o dispositivo de CD-ROM - <b>%1</b>.</qt>"
+msgstr "<qt>Tellico não pôde acessar o dispositivo de CD-ROM - <b>%1</b>.</qt>"
 
 #: translators/freedbimporter.cpp:163
 msgid "Select CDDB Entry"
@@ -1959,8 +1953,7 @@ msgstr "<qt>Nenhum registro correspondente ao CD foi encontrado.</qt>"
 
 #: translators/freedbimporter.cpp:205
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr ""
-"<qt>Tellico não pôde completar a pesquisa das informações do CD.</qt>"
+msgstr "<qt>Tellico não pôde completar a pesquisa das informações do CD.</qt>"
 
 #: translators/freedbimporter.cpp:428
 msgid "Various"
@@ -2147,8 +2140,7 @@ msgstr "A &primeira linha contém os títulos dos campos"
 
 #: translators/csvimporter.cpp:181
 msgid "If checked, the first row is used as field titles."
-msgstr ""
-"Se selecionado, a primeira linha será utilizada para o nome dos campos."
+msgstr "Se selecionado, a primeira linha será utilizada para o nome dos campos."
 
 #: translators/csvimporter.cpp:193
 msgid "&Comma"
@@ -2264,8 +2256,7 @@ msgstr "Imprimir os cabeçalhos dos campos"
 
 #: configdialog.cpp:299 translators/htmlexporter.cpp:467
 msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Se selecionado, o nome dos campos será impresso como títulos de uma tabela."
+msgstr "Se selecionado, o nome dos campos será impresso como títulos de uma tabela."
 
 #: translators/htmlexporter.cpp:471
 msgid "Group the entries"
@@ -2283,8 +2274,7 @@ msgstr "Exporta arquivos de registros isolados"
 
 #: translators/htmlexporter.cpp:477
 msgid "If checked, individual files will be created for each entry."
-msgstr ""
-"Se selecionado, serão criados arquivos individuais para cada registro."
+msgstr "Se selecionado, serão criados arquivos individuais para cada registro."
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -2295,8 +2285,7 @@ msgid "&Source name: "
 msgstr "Nome da &fonte: "
 
 #: fetcherconfigdialog.cpp:79
-msgid ""
-"The name identifies the data source and should be unique and informative."
+msgid "The name identifies the data source and should be unique and informative."
 msgstr "O nome identifica a fonte de dados, devendo ser único e informativo."
 
 #: fetcherconfigdialog.cpp:90 fetcherconfigdialog.cpp:94
@@ -3360,8 +3349,7 @@ msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico não pôde carregar a imagem - %1."
 
 #: filehandler.cpp:204
-msgid ""
-"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr ""
 "Um arquivo chamado \"%1\" já existe. Tem certeza que deseja mesmo "
 "sobrescrevê-lo?"
@@ -3586,10 +3574,8 @@ msgid "An <i>Image</i> field holds a picture. "
 msgstr "Um campo <i>Imagem</i> serve para armazenar uma foto ou figura."
 
 #: collectionfieldsdialog.cpp:144
-msgid ""
-"A <i>Date</i> field can be used for values with a day, month, and year. "
-msgstr ""
-"Um campo <i>Data</i> pode ser utilizado para valores com dia, mês e ano."
+msgid "A <i>Date</i> field can be used for values with a day, month, and year. "
+msgstr "Um campo <i>Data</i> pode ser utilizado para valores com dia, mês e ano."
 
 #: collectionfieldsdialog.cpp:145
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
@@ -3694,8 +3680,7 @@ msgid "Allow auto-capitalization only"
 msgstr "Permitir apenas a formatação automática em letras maiúsculas"
 
 #: collectionfieldsdialog.cpp:230
-msgid ""
-"This option allows the field to be capitalized, but not specially formatted."
+msgid "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 "Esta opção permite pôr o campo em maiúsculas, mas sem formatações "
 "especiais."
@@ -3757,16 +3742,14 @@ msgid "Allow grouping"
 msgstr "Permitir agrupamento"
 
 #: collectionfieldsdialog.cpp:248
-msgid ""
-"If checked, this field may be used to group the entries in the group view."
+msgid "If checked, this field may be used to group the entries in the group view."
 msgstr ""
 "Se selecionado, este campo será utilizado para reagrupar os registros na "
 "visão de grupos."
 
 #: collectionfieldsdialog.cpp:262
 msgid "Revert the selected field's properties to the default values."
-msgstr ""
-"Reverter as propriedades dos campos selecionados para seus valores padrão."
+msgstr "Reverter as propriedades dos campos selecionados para seus valores padrão."
 
 #: collectionfieldsdialog.cpp:301
 msgid "Modify Fields"
@@ -3904,8 +3887,7 @@ msgstr "&Mostrar \"Dicas do Dia\" ao iniciar"
 
 #: configdialog.cpp:209
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
-msgstr ""
-"Se selecionado, as '\"Dicas do Dia\" serão mostradas ao iniciar o programa."
+msgstr "Se selecionado, as '\"Dicas do Dia\" serão mostradas ao iniciar o programa."
 
 #: configdialog.cpp:214 configdialog.cpp:291
 msgid "Formatting Options"
@@ -3927,8 +3909,7 @@ msgstr "&Formatação automática dos títulos e nomes"
 
 #: configdialog.cpp:224 configdialog.cpp:295
 msgid "If checked, titles and names will be automatically formatted."
-msgstr ""
-"Se selecionado, os títulos e os nomes serão automaticamente formatados."
+msgstr "Se selecionado, os títulos e os nomes serão automaticamente formatados."
 
 #: configdialog.cpp:232
 msgid "No capitali&zation:"
@@ -4016,8 +3997,7 @@ msgstr "&Largura máxima da imagem:"
 msgid ""
 "The maximum width of the images in the printout. The aspect ration is "
 "preserved."
-msgstr ""
-"Largura máxima das imagens na impressão. As proporções são conservadas."
+msgstr "Largura máxima das imagens na impressão. As proporções são conservadas."
 
 #: configdialog.cpp:328
 msgid "&Maximum image height:"
@@ -4027,8 +4007,7 @@ msgstr "Altura &máxima da imagem:"
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
-msgstr ""
-"Altura máxima da imagem na impressão. As proporções são conservadas."
+msgstr "Altura máxima da imagem na impressão. As proporções são conservadas."
 
 #: configdialog.cpp:347
 msgid "Templates"
@@ -4371,8 +4350,7 @@ msgid "Edit List..."
 msgstr "Editar Lista..."
 
 #: fetchdialog.cpp:129
-msgid ""
-"Click to open a text edit box for entering or editing multiple ISBN values."
+msgid "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr "Clique para inserir ou editar os múltiplos ISBN a serem pesquisados."
 
 #: fetchdialog.cpp:135
@@ -4409,13 +4387,12 @@ msgid "Add the selected entry to the current collection"
 msgstr "Adicionar o registro selecionado à coleção atual"
 
 #: fetchdialog.cpp:186
-#, fuzzy
 msgid "Get More Results"
-msgstr "Selecione o resultado IMDB"
+msgstr "Obter mais resultados"
 
 #: fetchdialog.cpp:189
 msgid "Fetch more results from the current data source"
-msgstr ""
+msgstr "Obter mais resultados da fonte de dados atual"
 
 #: fetchdialog.cpp:193
 msgid "Clear all search fields and results"
@@ -4541,8 +4518,7 @@ msgid "Select a report template and click <em>Generate</em>."
 msgstr "Selecione um modelo de relatório e clique em <em>Gerar</em>."
 
 #: reportdialog.cpp:108
-msgid ""
-"Some reports may take several seconds to generate for large collections."
+msgid "Some reports may take several seconds to generate for large collections."
 msgstr ""
 "Alguns relatórios de grandes coleções podem levar vários segundos para "
 "serem gerados."
@@ -4561,8 +4537,7 @@ msgstr "Novo nome da coleção:"
 
 #: entryview.cpp:168
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr ""
-"Tellico não pôde encontrar a folha de estilo padrão para os registros."
+msgstr "Tellico não pôde encontrar a folha de estilo padrão para os registros."
 
 #: rc.cpp:2
 msgid "&New"
@@ -4913,3 +4888,4 @@ msgstr "Allocine.fr"
 #: scripts.cpp:6
 msgid "Spanish Ministry of Culture"
 msgstr "Ministério da Cultura da Espanha"
+

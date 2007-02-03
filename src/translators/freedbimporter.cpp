@@ -122,6 +122,38 @@ void FreeDBImporter::readCDROM() {
     << 316732;  // Disc end.
 */
   list
+    << 150      // First track start.
+    << 3296
+    << 14437
+    << 41279
+    << 51362
+    << 56253
+    << 59755
+    << 61324
+    << 66059
+    << 69073
+    << 77790
+    << 83214
+    << 89726
+    << 92078
+    << 106325
+    << 113117
+    << 116040
+    << 119877
+    << 124377
+    << 145466
+    << 157583
+    << 167208
+    << 173486
+    << 180120
+    << 185279
+    << 193270
+    << 206451
+    << 217303   // Last track start.
+    << 10       // Disc start.
+    << 224925;  // Disc end.
+/*
+  list
     << 150
     << 106965
     << 127220
@@ -129,6 +161,7 @@ void FreeDBImporter::readCDROM() {
     << 176085
     << 5
     << 234500;
+*/
 #else
   list = offsetList(drive, lengths);
 #endif
@@ -228,6 +261,10 @@ void FreeDBImporter::readCDROM() {
   if(info.year > 0) {
     entry->setField(QString::fromLatin1("year"), QString::number(info.year));
   }
+  entry->setField(QString::fromLatin1("keyword"), info.category);
+  QString extd = info.extd;
+  extd.replace('\n', QString::fromLatin1("<br/>"));
+  entry->setField(QString::fromLatin1("comments"), extd);
 
   QStringList trackList;
   KCDDB::TrackInfoList t = info.trackInfoList;
@@ -341,6 +378,10 @@ void FreeDBImporter::readCache() {
     if(info.year > 0) {
       entry->setField(QString::fromLatin1("year"), QString::number(info.year));
     }
+    entry->setField(QString::fromLatin1("keyword"), info.category);
+    QString extd = info.extd;
+    extd.replace('\n', QString::fromLatin1("<br/>"));
+    entry->setField(QString::fromLatin1("comments"), extd);
 
     // step through trackList
     QStringList trackList;

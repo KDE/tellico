@@ -85,7 +85,7 @@ public:
   void abort() { m_aborted = true; }
 
 private:
-  static QCString iconv(const QCString& text, const QString& fromCharSet, const QString& toCharSet);
+  static QCString iconvRun(const QCString& text, const QString& fromCharSet, const QString& toCharSet);
   static QString toXML(const QCString& marc, const QString& fromCharSet);
 
   bool makeConnection();

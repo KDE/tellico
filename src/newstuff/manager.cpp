@@ -122,16 +122,18 @@ bool Manager::removeTemplate(const QString& name_) {
       QDir().rmdir(path + *it);
     } else {
       success = success && QFile(path + *it).remove();
+      if(!success) {
+        myDebug() << "Manager::removeTemplate() - failed to remove " << (path+*it) << endl;
+      }
     }
   }
 
-  if(success) {
-    fileGroup.deleteEntry(name_);
-    KConfigGroup statusGroup(KGlobal::config(), "KNewStuffStatus");
-    QString entryName = statusGroup.readEntry(name_);
-    statusGroup.deleteEntry(name_);
-    statusGroup.deleteEntry(entryName);
-  }
+  // remove config entries even if unsuccessful
+  fileGroup.deleteEntry(name_);
+  KConfigGroup statusGroup(KGlobal::config(), "KNewStuffStatus");
+  QString entryName = statusGroup.readEntry(name_);
+  statusGroup.deleteEntry(name_);
+  statusGroup.deleteEntry(entryName);
 
   return success;
 }
@@ -163,11 +165,11 @@ bool Manager::installScript(const KURL& url_) {
   // it should have a directory...
   const KArchiveEntry* firstEntry = archiveDir->entry(archiveDir->entries().first());
   if(firstEntry->isFile()) {
-    copyTarget += exeInfo.baseName() + '/';
+    copyTarget += exeInfo.baseName(true) + '/';
     if(QFile::exists(copyTarget)) {
       KURL u;
       u.setPath(scriptFolder);
-      myDebug() << "Manager::installScript() - deleting " << scriptFolder << endl;
+      myLog() << "Manager::installScript() - deleting " << scriptFolder << endl;
       KIO::NetAccess::del(u, Kernel::self()->widget());
       info->isUpdate = true;
     }
@@ -182,7 +184,7 @@ bool Manager::installScript(const KURL& url_) {
   // overwrites stuff there
   archiveDir->copyTo(copyTarget);
 
-  info->specFile = scriptFolder + exeInfo.baseName() + ".spec";
+  info->specFile = scriptFolder + exeInfo.baseName(true) + ".spec";
   if(!QFile::exists(info->specFile)) {
     myDebug() << "Manager::installScript() - no spec file for script! " << info->specFile << endl;
     delete info;
@@ -191,7 +193,6 @@ bool Manager::installScript(const KURL& url_) {
   info->sourceName = exeFile;
   info->sourceExec = copyTarget + exeFile;
   m_infoList.append(info);
-  m_urlNameMap.insert(url_, exeFile);
 
   KURL dest;
   dest.setPath(info->sourceExec);
@@ -210,6 +211,7 @@ bool Manager::installScript(const KURL& url_) {
   {
     KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
     config.writeEntry(info->sourceName, archiveFiles(archiveDir));
+    m_urlNameMap.insert(url_, info->sourceName);
   }
 
 
@@ -234,16 +236,18 @@ bool Manager::removeScript(const QString& name_) {
       QDir().rmdir(path + *it);
     } else {
       success = success && QFile(path + *it).remove();
+      if(!success) {
+        myDebug() << "Manager::removeScript() - failed to remove " << (path+*it) << endl;
+      }
     }
   }
 
-  if(success) {
-    fileGroup.deleteEntry(name_);
-    KConfigGroup statusGroup(KGlobal::config(), "KNewStuffStatus");
-    QString entryName = statusGroup.readEntry(name_);
-    statusGroup.deleteEntry(name_);
-    statusGroup.deleteEntry(entryName);
-  }
+  // remove config entries even if unsuccessful
+  fileGroup.deleteEntry(name_);
+  KConfigGroup statusGroup(KGlobal::config(), "KNewStuffStatus");
+  QString entryName = statusGroup.readEntry(name_);
+  statusGroup.deleteEntry(name_);
+  statusGroup.deleteEntry(entryName);
 
   return success;
 }
@@ -261,6 +265,16 @@ Tellico::NewStuff::InstallStatus Manager::installStatus(KNS::Entry* entry_) {
   }
   if(date < entry_->releaseDate()) {
     return OldVersion;
+  }
+
+  // also check that executable files exists
+  KConfigGroup fileGroup(KGlobal::config(), "KNewStuffFiles");
+  QStringList files = fileGroup.readListEntry(entry_->name());
+  QString path = Tellico::saveLocation(QString::fromLatin1("data-sources/"));
+  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it) {
+    if(!QFile::exists(path + *it)) {
+      return NotInstalled;
+    }
   }
   return Current;
 }
@@ -340,39 +354,57 @@ void Manager::install(DataType type_, KNS::Entry* entry_) {
 void Manager::slotDownloadJobResult(KIO::Job* job_) {
   KIO::FileCopyJob* job = static_cast<KIO::FileCopyJob*>(job_);
   if(job->error()) {
+    GUI::CursorSaver cs(Qt::arrowCursor);
     delete m_tempFile;
     m_tempFile = 0;
     job->showErrorDialog(Kernel::self()->widget());
+    emit signalInstalled(0); // still need to notify dialog that install failed
     return;
   }
 
   KNS::Entry* entry = m_jobMap[job_].first;
   DataType type = m_jobMap[job_].second;
 
-  bool success;
+  bool deleteTempFile = true;
   if(type == EntryTemplate) {
-    success = installTemplate(job->destURL(), entry->name());
+    installTemplate(job->destURL(), entry->name());
   } else {
 #if KDE_IS_VERSION(3,3,90)
     // needed so the GPG signature can be checked
     NewScript* newScript = new NewScript(this, Kernel::self()->widget());
-    success = newScript->install(job->destURL().path());
-#else
-    success = false;
+    connect(newScript, SIGNAL(installFinished()), this, SLOT(slotInstallFinished()));
+    // need to delete temp file if install was not a success
+    // if it was a success, it gets deleted later
+    deleteTempFile = !newScript->install(job->destURL().path());
+    m_scriptEntryMap.insert(newScript, entry);
 #endif
+    // if failed, emit empty signal now
+    if(deleteTempFile) {
+      emit signalInstalled(0);
+    }
   }
+  if(deleteTempFile) {
+    delete m_tempFile;
+    m_tempFile = 0;
+  }
+}
 
-  if(success) {
-    const QString name = m_urlNameMap[job->destURL()];
+void Manager::slotInstallFinished() {
+  const NewScript* newScript = ::qt_cast<const NewScript*>(sender());
+  if(newScript && newScript->successfulInstall()) {
+    const QString name = m_urlNameMap[newScript->url()];
+    KNS::Entry* entry = m_scriptEntryMap[newScript];
     KConfigGroup config(KGlobal::config(), "KNewStuffStatus");
     // have to keep a config entry that maps the name of the file to the name
     // of the newstuff entry, so we can track which entries are installed
+    // name and entry-name() are probably the same for scripts, but not a problem
     config.writeEntry(name, entry->name());
     config.writeEntry(entry->name(), entry->releaseDate().toString(Qt::ISODate));
     config.sync();
     emit signalInstalled(entry);
   } else {
-    kdWarning() << "Manager::slotDownloadJobResult() - Failed to install" << endl;
+    emit signalInstalled(0);
+    kdWarning() << "Manager::slotInstallFinished() - Failed to install" << endl;
   }
   delete m_tempFile;
   m_tempFile = 0;

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi\n"
 "POT-Creation-Date: 2006-11-05 15:37-0800\n"
-"PO-Revision-Date: 2006-10-10 12:42+0200\n"
+"PO-Revision-Date: 2006-12-11 17:00+0200\n"
 "Last-Translator: Teuvo Eloranta <teuvo AT piketa dot fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -97,27 +97,25 @@ msgstr "&Aseta"
 msgid ""
 "_: Edit Label\n"
 "%1:"
-msgstr ""
-"_: Muokkaa otsikko\n"
-"%1:"
+msgstr "%1:"
 
 #: gui/kwidgetlister.cpp:58
 msgid ""
 "_: more widgets\n"
 "More"
-msgstr "Lisää säätimiä"
+msgstr "Lisää"
 
 #: gui/kwidgetlister.cpp:62
 msgid ""
 "_: fewer widgets\n"
 "Fewer"
-msgstr "Vähemmän säätimiä"
+msgstr "Vähemmän"
 
 #: gui/kwidgetlister.cpp:69
 msgid ""
 "_: clear widgets\n"
 "Clear"
-msgstr "Tyhjennä säätimet"
+msgstr "Tyhjennä"
 
 #: gui/imagewidget.cpp:52
 msgid "Select Image..."
@@ -128,9 +126,7 @@ msgstr "Valitse kuva..."
 msgid ""
 "_: Modify (Entry Title)\n"
 "Modify %1"
-msgstr ""
-"_: Muokkaa (Tietueen otsikko)\n"
-"Muokkaa %1"
+msgstr "Muokkaa %1"
 
 #: commands/collectioncommand.cpp:93
 msgid "Append Collection"
@@ -169,9 +165,7 @@ msgstr "Lisää tietueita"
 msgid ""
 "_: Add (Entry Title)\n"
 "Add %1"
-msgstr ""
-"_: Lisää (Tietueen otsikko)\n"
-"Lisää %1"
+msgstr "Lisää %1"
 
 #: commands/renamecollection.cpp:45 tellico_kernel.cpp:322
 msgid "Rename Collection"
@@ -293,9 +287,7 @@ msgstr "Kirjoittaja"
 msgid ""
 "_: Comic Book Illustrator\n"
 "Artist"
-msgstr ""
-"_: Sarjakuvalehden kuvittaja \n"
-"Taiteilija"
+msgstr "Taiteilija"
 
 #: collections/bibtexcollection.cpp:195 collections/bookcollection.cpp:127
 #: collections/cardcollection.cpp:72 collections/comicbookcollection.cpp:63
@@ -1694,9 +1686,7 @@ msgstr "Valmis."
 msgid ""
 "_: Update Stuff\n"
 "Update"
-msgstr ""
-"_: Päivitä asioita\n"
-"Päivitä"
+msgstr "Päivitä"
 
 #: newstuff/dialog.cpp:412
 msgid "Installing item..."
@@ -4818,9 +4808,7 @@ msgstr "Sarakenäkymä"
 msgid ""
 "_: Tri-Column XSL Template\n"
 "Tri-Column"
-msgstr ""
-"_: Tri-Column XSL Mallipohja\n"
-"Tri-Column"
+msgstr "Tri-Column"
 
 #: xslt.cpp:44
 msgid "Search"

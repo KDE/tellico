@@ -1,3 +1,45 @@
+2007-02-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.8.
+
+2007-01-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated CDDB import to grab extd data as comments, and category as keyword.
+
+2007-01-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated audio file importer to take disc number into account for mp3, ogg, and flac files.
+
+2007-01-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed IMDB rating to allow float values.
+	* Fixed compile error for z3950 connection, patch from Markus Brueffer.
+
+2007-01-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed cleanup for deleting scripts installed from newstuff.
+
+2007-01-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed busy cursor hanging in newstuff download dialog.
+
+2006-12-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed "ISBN Not Found" dialog to have selectable text.
+
+2006-12-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with comparing relative URLs for merging file catalogs.
+
+2006-12-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with some results in z39.50 search not showing up,
+	due to search events getting processed out of order.
+
+2006-12-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with secondary and tertiary sorting.
+
 2006-12-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Bumped the Amazon ECS version to 2006-11-30.
@@ -25,7 +67,7 @@
 
 2006-11-09  Robby Stephenson  <robby@periapsis.org>
 
-	* Improve TV show matching for IMDB.
+	* Improved TV show matching for IMDB.
 
 2006-11-05  Robby Stephenson  <robby@periapsis.org>
 

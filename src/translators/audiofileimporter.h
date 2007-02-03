@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2007 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,6 +18,10 @@ class QCheckBox;
 
 #include "importer.h"
 #include "../datavectors.h"
+
+namespace TagLib {
+  class FileRef;
+}
 
 namespace Tellico {
   namespace Import {
@@ -48,6 +52,8 @@ public slots:
 
 private:
   static QString insertValue(const QString& str, const QString& value, uint pos);
+
+  int discNumber(const TagLib::FileRef& file) const;
 
   Data::CollPtr m_coll;
   QWidget* m_widget;

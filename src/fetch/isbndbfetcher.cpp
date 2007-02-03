@@ -187,7 +187,7 @@ void ISBNdbFetcher::slotComplete(KIO::Job* job_) {
       desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
     }
 
-    SearchResult* r = new SearchResult(this, entry->title(), desc);
+    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }

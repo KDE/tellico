@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2007 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -26,6 +26,10 @@
 #if HAVE_TAGLIB
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
+#include <taglib/id3v2tag.h>
+#include <taglib/mpegfile.h>
+#include <taglib/vorbisfile.h>
+#include <taglib/flacfile.h>
 #include <taglib/audioproperties.h>
 #endif
 
@@ -136,6 +140,18 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       // can't do anything
       continue;
     }
+    int disc = discNumber(f);
+    if(disc > 1 && !m_coll->hasField(QString::fromLatin1("track%1").arg(disc))) {
+      Data::FieldPtr f2 = new Data::Field(QString::fromLatin1("track%1").arg(disc),
+                                          i18n("Tracks") + QString::fromLatin1(" (%1)").arg(disc),
+                                          Data::Field::Table);
+      f2->setFormatFlag(Data::Field::FormatTitle);
+      f2->setProperty(QString::fromLatin1("columns"), QChar('3'));
+      f2->setProperty(QString::fromLatin1("column1"), i18n("Title"));
+      f2->setProperty(QString::fromLatin1("column2"), i18n("Artist"));
+      f2->setProperty(QString::fromLatin1("column3"), i18n("Length"));
+      m_coll->addField(f2);
+    }
     bool various = false;
     bool exists = true;
     Data::EntryPtr entry = 0;
@@ -198,7 +214,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         if(len > 0) {
           t += "::" + Tellico::minutes(len);
         }
-        entry->setField(track, insertValue(entry->field(track), t, trackNum));
+        QString realTrack = disc > 1 ? track + QString::number(disc) : track;
+        entry->setField(realTrack, insertValue(entry->field(realTrack), t, trackNum));
         if(addFile) {
           entry->setField(file, insertValue(entry->field(file), *it, trackNum));
         }
@@ -331,6 +348,42 @@ QString AudioFileImporter::insertValue(const QString& str_, const QString& value
 
 void AudioFileImporter::slotCancel() {
   m_cancelled = true;
+}
+
+int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {
+  // default to 1 unless otherwise
+  int num = 1;
+#if HAVE_TAGLIB
+  QString disc;
+  if(TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(ref_.file())) {
+    if(file->ID3v2Tag() && !file->ID3v2Tag()->frameListMap()["TPOS"].isEmpty()) {
+      disc = TStringToQString(file->ID3v2Tag()->frameListMap()["TPOS"].front()->toString()).stripWhiteSpace();
+    }
+  } else if(TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(ref_.file())) {
+    if(file->tag() && !file->tag()->fieldListMap()["DISCNUMBER"].isEmpty()) {
+      disc = TStringToQString(file->tag()->fieldListMap()["DISCNUMBER"].front()).stripWhiteSpace();
+    }
+  } else if(TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(ref_.file())) {
+    if(file->xiphComment() && !file->xiphComment()->fieldListMap()["DISCNUMBER"].isEmpty()) {
+      disc = TStringToQString(file->xiphComment()->fieldListMap()["DISCNUMBER"].front()).stripWhiteSpace();
+    }
+  }
+
+  if(!disc.isEmpty()) {
+    int pos = disc.find('/');
+    int n;
+    bool ok;
+    if(pos == -1) {
+      n = disc.toInt(&ok);
+    } else {
+      n = disc.left(pos).toInt(&ok);
+    }
+    if(ok && n > 0) {
+      num = n;
+    }
+  }
+#endif
+  return num;
 }
 
 #include "audiofileimporter.moc"

@@ -267,7 +267,8 @@ void IMDBFetcher::parseSingleTitleResult() {
   // FIXME: maybe remove parentheses here?
   SearchResult* r = new SearchResult(this,
                                      pPos == -1 ? cap1 : cap1.left(pPos),
-                                     pPos == -1 ? QString::null : cap1.mid(pPos));
+                                     pPos == -1 ? QString::null : cap1.mid(pPos),
+                                     QString());
   m_matches.insert(r->uid, m_url);
   emit signalResultFound(r);
 
@@ -398,7 +399,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       break;
     }
 
-    SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
+    SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
     KURL u(m_url, cap1);
     u.setQuery(QString::null);
     m_matches.insert(r->uid, u);
@@ -479,7 +480,7 @@ void IMDBFetcher::parseSingleNameResult() {
     }
 
     // FIXME: maybe remove parentheses here?
-    SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc);
+    SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
     KURL u(m_url, s_anchorTitleRx->cap(1)); // relative URL constructor
     u.setQuery(QString::null);
     m_matches.insert(r->uid, u);
@@ -928,7 +929,7 @@ void IMDBFetcher::doRating(const QString& str_, Data::EntryPtr entry_) {
     bool ok;
     float value = rx.cap(1).toFloat(&ok);
     if(ok) {
-      entry_->setField(QString::fromLatin1("imdb-rating"), QString::number((int)value));
+      entry_->setField(QString::fromLatin1("imdb-rating"), QString::number(value));
     }
   }
 }

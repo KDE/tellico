@@ -19,6 +19,7 @@
 #include "tellico_debug.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
+#include "latin1literal.h"
 
 #include <qregexp.h>
 
@@ -46,7 +47,15 @@ bool Entry::operator==(const Entry& e1) {
     QString u = field(QString::fromLatin1("url"));
     if(!u.isEmpty()) {
       // versions before 1.2.7 could have saved the url without the protocol
-      return KURL::fromPathOrURL(u) == KURL::fromPathOrURL(e1.field(QString::fromLatin1("url")));
+      bool b = KURL::fromPathOrURL(u) == KURL::fromPathOrURL(e1.field(QString::fromLatin1("url")));
+      if(b) {
+        return true;
+      } else {
+        Data::FieldPtr f = m_coll->fieldByName(QString::fromLatin1("url"));
+        if(f && f->property(QString::fromLatin1("relative")) == Latin1Literal("true")) {
+          return KURL(Document::self()->URL(), u) == KURL::fromPathOrURL(e1.field(QString::fromLatin1("url")));
+        }
+      }
     }
   }
   if(e1.m_fields.count() != m_fields.count()) {

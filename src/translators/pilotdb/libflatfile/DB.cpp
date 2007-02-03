@@ -537,7 +537,8 @@ PalmLib::FlatFile::DB::DB(PalmLib::Database& pdb)
                             f.type = PalmLib::FlatFile::Field::LIST;
                 if (!field(j).argument().empty()) {
                     std::string data = field(j).argument();
-                    unsigned int k, pos = 0;
+                    unsigned int k;
+                    std::string::size_type pos = 0;
                     pi_uint16_t itemID = *ptrs[j]; // TR: a list value is stored on 1 byte
 
                     for (k = 0; k < itemID; k++) {
@@ -744,7 +745,8 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
         case PalmLib::FlatFile::Field::LIST:
         if (!field(i).argument().empty()) {
             std::string data = field(i).argument();
-            unsigned int pos = 0, next, j = 0;
+            std::string::size_type pos = 0, next;
+            unsigned int j = 0;
             pi_int16_t itemID = -1;
 
             while ( (next = data.find(charSeperator, pos)) != std::string::npos) {
@@ -949,7 +951,7 @@ void PalmLib::FlatFile::DB::build_fieldsdata_chunks(std::vector<DB::Chunk>& chun
             if (!field(i).argument().empty()) {
                 std::string data = field(i).argument();
                 std::vector<std::string> items;
-                unsigned int pos = 0, next;
+                std::string::size_type pos = 0, next;
                 std::vector<std::string>::iterator iter;
                 size = 2 + 2 * sizeof(pi_uint16_t);
                 while ( (next = data.find(charSeperator, pos)) != std::string::npos) {

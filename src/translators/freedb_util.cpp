@@ -270,7 +270,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
 
   dataLen = from2Byte(buffer) + 2;
   m_cmd.cmd[7] = 2048 >> 8;
-  m_cmd.cmd[8] = 2048;
+  m_cmd.cmd[8] = 2048 & 0xFF;
   m_cmd.buflen = 2048;
   ::ioctl(drive, CDROM_SEND_PACKET, &m_cmd);
   dataLen = from2Byte(buffer) + 2;

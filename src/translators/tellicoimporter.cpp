@@ -107,6 +107,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     str += QString::fromLatin1("\n");
     str += i18n("The error message from Qt is:");
     str += QString::fromLatin1("\n\t") + errorMsg;
+    myDebug() << str << endl;
     setStatusMessage(str);
     m_format = Error;
     return;
@@ -142,7 +143,10 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     if(!url().isEmpty()) {
       QString str = i18n(errorLoad).arg(url().fileName()) + QChar('\n');
       str += i18n("It is from a future version of Tellico.");
+      myDebug() << str << endl;
       setStatusMessage(str);
+    } else {
+      myDebug() << "Unable to load collection, from a future version (" << syntaxVersion << ")" << endl;
     }
     m_format = Error;
     return;
@@ -168,6 +172,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   }
   if(collelem.isNull()) {
     kdWarning() << "TellicoImporter::loadDomDocument() - No collection item found." << endl;
+    return;
   }
 
   QString title = collelem.attribute(QString::fromLatin1("title"));

@@ -310,8 +310,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
                 !url().isEmpty()) {
         // if a relative URL and url() is not empty, change the value!
         KURL old_url(Kernel::self()->URL(), fieldValue);
-        KURL new_url = KURL::relativeURL(url(), old_url);
-        fieldElem.appendChild(dom_.createTextNode(new_url.url()));
+        fieldElem.appendChild(dom_.createTextNode(KURL::relativeURL(url(), old_url)));
       } else {
         fieldElem.appendChild(dom_.createTextNode(fieldValue));
       }

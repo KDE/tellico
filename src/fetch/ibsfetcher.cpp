@@ -167,7 +167,7 @@ void IBSFetcher::slotComplete(KIO::Job* job_) {
   int pos2;
   for(int pos = anchorRx.search(s); m_started && pos > -1; pos = anchorRx.search(s, pos+anchorRx.matchedLength())) {
     if(!u.isEmpty()) {
-      SearchResult* r = new SearchResult(this, t, d);
+      SearchResult* r = new SearchResult(this, t, d, QString());
       emit signalResultFound(r);
 
 #ifdef IBS_TEST
@@ -193,7 +193,7 @@ void IBSFetcher::slotComplete(KIO::Job* job_) {
   }
 #ifndef IBS_TEST
   if(!u.isEmpty()) {
-    SearchResult* r = new SearchResult(this, t, QString());
+    SearchResult* r = new SearchResult(this, t, QString(), QString());
     emit signalResultFound(r);
     m_matches.insert(r->uid, u.replace(QString::fromLatin1("&amp;"), QChar('&')));
   }
@@ -222,7 +222,7 @@ void IBSFetcher::slotCompleteISBN(KIO::Job* job_) {
   if(entry) {
     QString desc = entry->field(QString::fromLatin1("author"))
                  + '/' + entry->field(QString::fromLatin1("publisher"));
-    SearchResult* r = new SearchResult(this, entry->title(), desc);
+    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     emit signalResultFound(r);
     m_matches.insert(r->uid, static_cast<KIO::TransferJob*>(job_)->url().url());
   }

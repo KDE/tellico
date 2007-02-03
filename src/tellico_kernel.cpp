@@ -41,6 +41,7 @@
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <kinputdialog.h>
+#include <klocale.h>
 
 using Tellico::Kernel;
 Kernel* Kernel::s_self = 0;

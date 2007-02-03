@@ -31,6 +31,8 @@ namespace KIO {
 namespace Tellico {
   namespace NewStuff {
 
+class NewScript;
+
 enum DataType {
   EntryTemplate,
   DataScript
@@ -74,6 +76,7 @@ signals:
 
 private slots:
   void slotDownloadJobResult(KIO::Job* job);
+  void slotInstallFinished();
 
 private:
   static QStringList archiveFiles(const KArchiveDirectory* dir,
@@ -85,6 +88,7 @@ private:
   typedef QPair<KNS::Entry*, DataType> EntryPair;
   QMap<KIO::Job*, EntryPair> m_jobMap;
   QMap<KURL, QString> m_urlNameMap;
+  QMap<const NewScript*, KNS::Entry*> m_scriptEntryMap;
   QPtrList<DataSourceInfo> m_infoList;
   KTempFile* m_tempFile;
 };

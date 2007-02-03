@@ -26,14 +26,15 @@ NewScript::NewScript(Manager* manager_, QWidget* parentWidget_)
 #else
     : QObject(parentWidget_)
 #endif
-    , m_manager(manager_) {
+    , m_manager(manager_), m_success(false) {
 }
 
 void NewScript::installResource() {
   // m_tarName is protected in superclass
   KURL u;
   u.setPath(m_tarName);
-  m_manager->installScript(u);
+  m_success = m_manager->installScript(u);
+  m_url = u;
 }
 
 #if KDE_IS_VERSION(3,3,90)

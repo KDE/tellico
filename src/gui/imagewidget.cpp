@@ -16,6 +16,7 @@
 #include "../image.h"
 #include "../filehandler.h"
 #include "../tellico_debug.h"
+#include "../tellico_utils.h"
 
 #include <kfiledialog.h>
 #include <klocale.h>
@@ -125,6 +126,7 @@ void ImageWidget::slotGetImage() {
     return;
   }
 
+  GUI::CursorSaver cs;
   const QString& id = ImageFactory::addImage(url);
   if(id != m_imageID) {
     setImage(id);

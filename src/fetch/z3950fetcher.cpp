@@ -316,7 +316,7 @@ void Z3950Fetcher::process() {
 
 void Z3950Fetcher::handleResult(const QString& result_) {
   if(result_.isEmpty()) {
-    myDebug() << "Z3950Fetcher::process() - empty record found, maybe the character encoding or record format is wrong?" << endl;
+    myDebug() << "Z3950Fetcher::handleResult() - empty record found, maybe the character encoding or record format is wrong?" << endl;
     return;
   }
 
@@ -375,7 +375,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     if(!msg.isEmpty()) {
       message(msg, MessageHandler::Warning);
     }
-    myDebug() << "Z3950Fetcher::process() - no collection pointer" << endl;
+    myDebug() << "Z3950Fetcher::handleResult() - no collection pointer: " << msg << endl;
     return;
   }
 
@@ -393,9 +393,6 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 
   Data::EntryVec entries = coll->entries();
   for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
-    if(m_key == Fetch::ISBN) {
-      m_isbnList.append(entry->field(QString::fromLatin1("isbn")));
-    }
     QString desc = entry->field(QString::fromLatin1("author")) + '/'
                    + entry->field(QString::fromLatin1("publisher"));
     if(!entry->field(QString::fromLatin1("cr_year")).isEmpty()) {
@@ -403,28 +400,13 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     } else if(!entry->field(QString::fromLatin1("pub_year")).isEmpty()){
       desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
     }
-    SearchResult* r = new SearchResult(this, entry->title(), desc);
+    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
 }
 
 void Z3950Fetcher::done() {
-  // tell the user if some of his isbn values were not found
-  if(m_key == Fetch::ISBN) {
-    const QStringList isbnSearchList = QStringList::split(QString::fromLatin1("; "), m_value);
-    QStringList isbnNotFound;
-    for(QStringList::ConstIterator it = isbnSearchList.begin(); it != isbnSearchList.end(); ++it) {
-      if(!m_isbnList.contains(*it)) {
-        isbnNotFound.append(*it);
-      }
-    }
-    // only show message if we were looking for more than one in the first place
-    if(isbnSearchList.count() > 1 && !isbnNotFound.isEmpty()) {
-      qHeapSort(isbnNotFound);
-      infoList(i18n("<qt>No entries were found for the following ISBN values:</qt>"), isbnNotFound);
-    }
-  }
   stop();
 }
 

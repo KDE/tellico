@@ -27,6 +27,7 @@
 #include <kzip.h>
 #include <kdebug.h>
 #include <kconfig.h>
+#include <klocale.h>
 
 #include <qdom.h>
 #include <qfile.h>

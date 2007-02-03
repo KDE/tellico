@@ -128,12 +128,14 @@ private:
 
 class SearchResult {
 public:
-  SearchResult(Fetcher::Ptr f, QString t, QString d) : uid(KApplication::random()), fetcher(f), title(t), desc(d) {}
+  SearchResult(Fetcher::Ptr f, const QString& t, const QString& d, const QString& i)
+   : uid(KApplication::random()), fetcher(f), title(t), desc(d), isbn(i) {}
   Data::EntryPtr fetchEntry();
   uint uid;
   Fetcher::Ptr fetcher;
   QString title;
   QString desc;
+  QString isbn;
 };
 
   } // end namespace

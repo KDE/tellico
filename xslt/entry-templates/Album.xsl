@@ -51,6 +51,8 @@
 
 <!-- all the categories -->
 <xsl:variable name="categories" select="/tc:tellico/tc:collection/tc:fields/tc:field[generate-id(.)=generate-id(key('fieldsByCat',@category)[1])]/@category"/>
+<!-- all the tracks -->
+<xsl:variable name="tracks" select="/tc:tellico/tc:collection/tc:fields/tc:field[starts-with(@name,'track')]"/>
 
 <xsl:template match="/">
  <xsl:apply-templates select="tc:tellico"/>
@@ -174,62 +176,54 @@
 <xsl:template match="tc:entry">
  <xsl:variable name="entry" select="."/>
  <xsl:variable name="titleCat" select="key('fieldsByName','title')/@category"/>
- <!-- there might not be a track list -->
- <xsl:variable name="trackCat">
-  <xsl:choose>
-   <xsl:when test="tc:tracks">
-    <xsl:value-of select="key('fieldsByName','track')/@category"/>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:value-of select="''"/>
-   </xsl:otherwise>
-  </xsl:choose>
- </xsl:variable>
 
  <!-- the top table has images in the left cell and main fields in the right.
       2 images can be on the left -->
  <table width="100%" class="category">
   <tr>
-   <td valign="top" rowspan="2">
-    <!-- now, show all the images in the entry, type 10 -->
-    <xsl:variable name="images" select="../tc:fields/tc:field[@type=10]"/>
-    <xsl:for-each select="$images">
-
-     <!-- images will never be multiple, so no need to check for that -->
-     <!-- find the value of the image field in the entry -->
-     <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
-     <!-- check if the value is not empty -->
-     <xsl:if test="$image">
-      <a>
-       <xsl:attribute name="href">
-        <xsl:choose>
-         <!-- Amazon license requires the image to be linked to the amazon website -->
-         <xsl:when test="$entry/tc:amazon">
-          <xsl:value-of select="$entry/tc:amazon"/>
-         </xsl:when>
-         <xsl:otherwise>
-          <xsl:value-of select="concat($imgdir, $image)"/>
-         </xsl:otherwise>
-        </xsl:choose>
-       </xsl:attribute>
-       <img alt="">
-        <xsl:attribute name="src">
-         <xsl:value-of select="concat($imgdir, $image)"/>
+   <!-- now, show all the images in the entry, type 10 -->
+   <xsl:variable name="images" select="../tc:fields/tc:field[@type=10]"/>
+   <!-- only insert cell if at least one image -->
+   <xsl:if test="$entry/*[local-name(.) = $images[1]/@name]">
+    <td valign="top" rowspan="2">
+     <xsl:for-each select="$images">
+      
+      <!-- images will never be multiple, so no need to check for that -->
+      <!-- find the value of the image field in the entry -->
+      <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
+      <!-- check if the value is not empty -->
+      <xsl:if test="$image">
+       <a>
+        <xsl:attribute name="href">
+         <xsl:choose>
+          <!-- Amazon license requires the image to be linked to the amazon website -->
+          <xsl:when test="$entry/tc:amazon">
+           <xsl:value-of select="$entry/tc:amazon"/>
+          </xsl:when>
+          <xsl:otherwise>
+           <xsl:value-of select="concat($imgdir, $image)"/>
+          </xsl:otherwise>
+         </xsl:choose>
         </xsl:attribute>
-        <!-- limit to maximum width of 150 and height of 200 -->
-        <xsl:call-template name="image-size">
-         <xsl:with-param name="limit-width" select="150"/>
-         <xsl:with-param name="limit-height" select="200"/>
-         <xsl:with-param name="image" select="key('imagesById', $image)"/>
-        </xsl:call-template>
-       </img>
-      </a>
-     </xsl:if>
-    </xsl:for-each>
-   </td>
+        <img alt="">
+         <xsl:attribute name="src">
+          <xsl:value-of select="concat($imgdir, $image)"/>
+         </xsl:attribute>
+         <!-- limit to maximum width of 150 and height of 200 -->
+         <xsl:call-template name="image-size">
+          <xsl:with-param name="limit-width" select="150"/>
+          <xsl:with-param name="limit-height" select="200"/>
+          <xsl:with-param name="image" select="key('imagesById', $image)"/>
+         </xsl:call-template>
+        </img>
+       </a>
+      </xsl:if>
+     </xsl:for-each>
+    </td>
+   </xsl:if>
 
    <!-- want all the width we can get -->
-   <td valign="top" width="100%">
+   <td valign="top">
     <!-- now a nested table with the general fields -->
     <div id="banner">
 
@@ -285,95 +279,26 @@
   </tr>
  </table>
 
- <xsl:if test="tc:tracks">
-  <table width="50%" class="category">
-
-   <xsl:variable name="cols" select="count(tc:tracks/tc:track[1]/tc:column)"/>
-
-    <tr class="category">
-     <td colspan="{$cols}">
-      <xsl:value-of select="$trackCat"/>
-     </td>
-    </tr>
-    <xsl:if test="key('fieldsByName','track')/tc:prop[@name = 'column1']">
-     <tr>
-      <th colspan="2" style="text-align:center">
-       <xsl:value-of select="key('fieldsByName','track')/tc:prop[@name = 'column1']"/>
-       <xsl:if test="not(tc:tracks/tc:track[1]/tc:column[2] = tc:artists/tc:artist[1])">
-        <xsl:text> / </xsl:text>
-        <em><xsl:value-of select="key('fieldsByName','track')/tc:prop[@name = 'column2']"/></em>
-       </xsl:if>
-      </th>
-      <th style="text-align:center">
-       <xsl:value-of select="key('fieldsByName','track')/tc:prop[@name = 'column3']"/>
-      </th>
-      <xsl:call-template name="columnTitle">
-       <xsl:with-param name="index" select="4"/>
-       <xsl:with-param name="max" select="$cols"/>
-       <xsl:with-param name="elem" select="'th'"/>
-       <xsl:with-param name="field" select="key('fieldsByName','track')"/>
-      </xsl:call-template>
-
-     </tr>
-    </xsl:if>
-
-    <xsl:for-each select="tc:tracks/tc:track">
-     <tr>
-      <th style="text-align:center">
-       <xsl:value-of select="format-number(position(), '00')"/>
-      </th>
-      <xsl:choose>
-       <!-- a three column table could have an empty third column -->
-       <xsl:when test="$cols &gt; 1">
-        <!-- if it has three columns, assume first is title,
-             second is artist and third is track length. -->
-        <td class="fieldValue">
-         <xsl:if test="string-length(tc:column[1])">
-          <xsl:value-of select="tc:column[1]"/>
-         </xsl:if>
-         <xsl:if test="string-length(tc:column[2]) and not(tc:column[2] = current()/../../tc:artists/tc:artist[1])">
-          <xsl:text> / </xsl:text>
-          <em><xsl:value-of select="tc:column[2]"/></em>
-         </xsl:if>
-        </td>
-        <td class="fieldValue" style="text-align: right; padding-right: 10px">
-         <em><xsl:value-of select="tc:column[3]"/></em>
-        </td>
-       </xsl:when>
-       <xsl:otherwise>
-        <td class="fieldValue">
-         <xsl:value-of select="."/>
-        </td>
-       </xsl:otherwise>
-      </xsl:choose>
-     </tr>
-    </xsl:for-each>
-   
-   <!-- if it has multiple columns,
-        and the final one has a ':', add the time together -->
-   <!-- it should still work if the first row itself doesn't contain a ':' -->
-   <xsl:if test="$cols &gt; 1 and
-                 count(tc:tracks/tc:track[contains(tc:column[number($cols)], ':')])">
-    <tr>
-     <th colspan="2" style="text-align: right; padding-right: 10px;">
-      <strong><i18n>Total:</i18n> </strong>
-     </th>
-     <td class="fieldValue" style="text-align: right; padding-right: 10px">
-      <em>
-       <xsl:call-template name="sumTime">
-        <xsl:with-param name="nodes" select="tc:tracks//tc:column[number($cols)]"/>
-       </xsl:call-template>
-      </em>
-     </td>
-    </tr>
-   </xsl:if>
-  </table>
- </xsl:if>
+ <!-- doo all the track fields first -->
+ <xsl:variable name="artist" select="tc:artists/tc:artist[1]"/>
+ <xsl:for-each select="$tracks">
+  <xsl:variable name="fieldName" select="current()/@name"/>
+  <xsl:call-template name="trackField">
+   <xsl:with-param name="values" select="$entry/*[local-name()=concat($fieldName,'s')]"/>
+   <xsl:with-param name="name" select="$fieldName"/>
+   <xsl:with-param name="artist" select="$artist"/>
+  </xsl:call-template>
+  <!-- special case for tracks, since they're usually long tables.
+       clear after every 2nd table -->
+  <xsl:if test="position() mod 2 = 0">
+   <br style="clear:left" />
+  </xsl:if>
+ </xsl:for-each>
 
  <!-- now for every thing else -->
  <!-- write categories other than general and images -->
  <xsl:for-each select="$categories[. != $titleCat and
-                                   ($trackCat = '' or . != $trackCat) and
+                                   not(starts-with(key('fieldsByCat',.)[1]/@name,'track')) and
                                    key('fieldsByCat',.)[1]/@type != 10]">
 
   <xsl:variable name="category" select="."/>
@@ -473,6 +398,94 @@
   </table>
  </xsl:if>
  </xsl:for-each>
+</xsl:template>
+
+<xsl:template name="trackField">
+ <xsl:param name="values"/>
+ <xsl:param name="name"/>
+ <xsl:param name="artist"/>
+ <xsl:variable name="field" select="key('fieldsByName', $name)"/>
+ <table width="50%" class="category">
+  <xsl:variable name="cols" select="count($values/*[1]/tc:column)"/>
+
+    <tr class="category">
+     <td colspan="{$cols}">
+      <xsl:value-of select="$field/@category"/>
+     </td>
+    </tr>
+    <xsl:if test="$field/tc:prop[@name = 'column1']">
+     <tr>
+      <th colspan="2" style="text-align:center">
+       <xsl:value-of select="$field/tc:prop[@name = 'column1']"/>
+       <xsl:if test="not($values/*[1]/tc:column[2] = $artist)">
+        <xsl:text> / </xsl:text>
+        <em><xsl:value-of select="$field/tc:prop[@name = 'column2']"/></em>
+       </xsl:if>
+      </th>
+      <th style="text-align:center">
+       <xsl:value-of select="$field/tc:prop[@name = 'column3']"/>
+      </th>
+      <xsl:call-template name="columnTitle">
+       <xsl:with-param name="index" select="4"/>
+       <xsl:with-param name="max" select="$cols"/>
+       <xsl:with-param name="elem" select="'th'"/>
+       <xsl:with-param name="field" select="$field"/>
+      </xsl:call-template>
+
+     </tr>
+    </xsl:if>
+
+    <xsl:for-each select="$values/*">
+     <tr>
+      <th style="text-align:center">
+       <xsl:value-of select="format-number(position(), '00')"/>
+      </th>
+      <xsl:choose>
+       <!-- a three column table could have an empty third column -->
+       <xsl:when test="$cols &gt; 1">
+        <!-- if it has three columns, assume first is title,
+             second is artist and third is track length. -->
+        <td class="fieldValue">
+         <xsl:if test="string-length(tc:column[1])">
+          <xsl:value-of select="tc:column[1]"/>
+         </xsl:if>
+         <xsl:if test="string-length(tc:column[2]) and not(tc:column[2] = $artist)">
+          <xsl:text> / </xsl:text>
+          <em><xsl:value-of select="tc:column[2]"/></em>
+         </xsl:if>
+        </td>
+        <td class="fieldValue" style="text-align: right; padding-right: 10px">
+         <em><xsl:value-of select="tc:column[3]"/></em>
+        </td>
+       </xsl:when>
+       <xsl:otherwise>
+        <td class="fieldValue">
+         <xsl:value-of select="."/>
+        </td>
+       </xsl:otherwise>
+      </xsl:choose>
+     </tr>
+    </xsl:for-each>
+   
+   <!-- if it has multiple columns,
+        and the final one has a ':', add the time together -->
+   <!-- it should still work if the first row itself doesn't contain a ':' -->
+   <xsl:if test="$cols &gt; 1 and
+                 count($values/*[contains(tc:column[number($cols)], ':')])">
+    <tr>
+     <th colspan="2" style="text-align: right; padding-right: 10px;">
+      <strong><i18n>Total:</i18n> </strong>
+     </th>
+     <td class="fieldValue" style="text-align: right; padding-right: 10px">
+      <em>
+       <xsl:call-template name="sumTime">
+        <xsl:with-param name="nodes" select="$values//tc:column[number($cols)]"/>
+       </xsl:call-template>
+      </em>
+     </td>
+    </tr>
+   </xsl:if>
+  </table>
 </xsl:template>
 
 </xsl:stylesheet>

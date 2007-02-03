@@ -27,6 +27,7 @@
 #include <kconfig.h>
 #include <klineedit.h>
 #include <kiconloader.h>
+#include <klocale.h>
 
 #include <qiconset.h>
 #include <qlayout.h>

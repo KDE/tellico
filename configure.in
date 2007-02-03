@@ -40,7 +40,7 @@ dnl Perform program name transformation
 AC_ARG_PROGRAM
 
 dnl Automake doc recommends to do this only here. (Janos)
-AM_INIT_AUTOMAKE(tellico, 1.2.7) dnl searches for some needed programs
+AM_INIT_AUTOMAKE(tellico, 1.2.8) dnl searches for some needed programs
 
 KDE_SET_PREFIX
 
@@ -562,6 +562,9 @@ AC_SUBST(OFFICE_registry)
 AC_SUBST(CPPUMAKER)
 
 fi
+CFLAGS="$CFLAGS -I\$(top_srcdir)/src/core"
+CXXFLAGS="$CXXFLAGS -I\$(top_srcdir)/src/core"
+
 KDE_CREATE_SUBDIRSLIST
 AC_CONFIG_FILES([ Makefile ])
 AC_CONFIG_FILES([ doc/Makefile ])

@@ -229,11 +229,6 @@ void AmazonFetcher::doSearch() {
         u.removeQueryItem(QString::fromLatin1("Operation"));
         u.addQueryItem(QString::fromLatin1("Operation"), QString::fromLatin1("ItemLookup"));
         // ISBN only get digits or 'X', and multiple values are connected with "; "
-        // keep a list of isbn value we're searching for
-        // but only set it when it's not set before
-        if(m_isbnList.isEmpty()) {
-          m_isbnList = QStringList::split(QString::fromLatin1("; "), m_value.remove('-'));
-        }
         // as a quick hack, amazon seems to support isbn13 if IdType==EAN
         // but only for US at the moment
         if(m_site == US &&
@@ -311,7 +306,6 @@ void AmazonFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_isbnList.clear();
   m_data.truncate(0);
   m_started = false;
   emit signalDone(this);
@@ -508,7 +502,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
       entry->setField(QString::fromLatin1("comments"), comments);
     }
 */
-    SearchResult* r = new SearchResult(this, entry->title(), desc);
+    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
@@ -530,28 +524,6 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
   } else if(m_value.contains(';') > 9) {
     search(m_key, m_value.section(';', 10));
   } else {
-    // tell the user if some of his isbn values were not found
-    if(m_key == Fetch::ISBN) {
-      const QString isbn = QString::fromLatin1("isbn");
-      QStringList isbnNotFound;
-      for(QStringList::ConstIterator it = m_isbnList.begin(); it != m_isbnList.end(); ++it) {
-        bool found = false;
-        for(QMap<int, Data::EntryPtr>::Iterator eIt = m_entries.begin(); eIt != m_entries.end(); ++eIt) {
-          if(*it == eIt.data().data()->field(isbn).remove('-') ||
-             *it == ISBNValidator::isbn13(eIt.data().data()->field(isbn))) {
-            found = true;
-            break;
-          }
-        }
-        if(!found) {
-          isbnNotFound.append(*it);
-        }
-      }
-      if(!isbnNotFound.isEmpty()) {
-        isbnNotFound.sort();
-        infoList(i18n("<qt>No entries were found for the following ISBN values:</qt>"), isbnNotFound);
-      }
-    }
     m_countOffset = m_entries.count() % AMAZON_RETURNS_PER_REQUEST;
     if(m_countOffset == 0) {
       ++m_page; // need to go to next page

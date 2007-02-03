@@ -214,7 +214,7 @@ void YahooFetcher::slotComplete(KIO::Job* job_) {
                + QChar('/')
                + entry->field(QString::fromLatin1("year"));
 
-    SearchResult* r = new SearchResult(this, entry->title(), desc);
+    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }

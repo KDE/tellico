@@ -26,6 +26,7 @@
 #include "gui/combobox.h"
 #include "gui/listview.h"
 #include "tellico_utils.h"
+#include "stringset.h"
 
 #include <klocale.h>
 #include <klineedit.h>
@@ -318,7 +319,7 @@ void FetchDialog::setStatus(const QString& text_) {
 }
 
 void FetchDialog::slotFetchDone() {
-//  kdDebug() << "FetchDialog::slotFetchDone()" << endl;
+//  myDebug() << "FetchDialog::slotFetchDone()" << endl;
   m_started = false;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
                                       SmallIconSet(QString::fromLatin1("find"))));
@@ -331,6 +332,44 @@ void FetchDialog::slotFetchDone() {
                     m_resultCount));
   }
   m_moreButton->setEnabled(Fetch::Manager::self()->hasMoreResults());
+  const Fetch::FetchKey key = static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt());
+  // no way to currently check EAN/UPC values for non-book items
+  if(Kernel::self()->collectionType() == Data::Collection::Book &&
+     (key == Fetch::ISBN || key == Fetch::UPC)) {
+    QStringList values = QStringList::split(QString::fromLatin1("; "),
+                                            m_valueLineEdit->text().simplifyWhiteSpace());
+    for(QListViewItemIterator it(m_listView); it.current(); ++it) {
+      const QString i = static_cast<SearchResultItem*>(it.current())->m_result->isbn;
+      values.remove(i) ||
+      values.remove(ISBNValidator::isbn13(i)) || // check ISBN-13, too
+      values.remove(ISBNValidator::isbn10(i)); // EAN might be able to be converted
+    }
+    if(!values.isEmpty()) {
+      // TODO dialog caption
+      KDialogBase* dlg = new KDialogBase(this, "isbn not found dialog", false, QString::null, KDialogBase::Ok);
+      QWidget* box = new QWidget(dlg);
+      QVBoxLayout* lay = new QVBoxLayout(box, KDialog::marginHint(), KDialog::spacingHint()*2);
+      QHBoxLayout* lay2 = new QHBoxLayout(lay);
+      QLabel* lab = new QLabel(box);
+      lab->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("messagebox_info"),
+                                                     KIcon::NoGroup,
+                                                     KIcon::SizeMedium));
+      lay2->addWidget(lab);
+      QString s = i18n("<qt>No entries were found for the following ISBN values:</qt>");
+      // the <qt> makes the sizePolicy() get funky, so remove them
+      // but don't mess with pot file
+      s.remove(QString::fromLatin1("<qt>")).remove(QString::fromLatin1("</qt>"));
+      lay2->addWidget(new QLabel(s, box), 10);
+      KTextEdit* edit = new KTextEdit(box, "isbn list edit");
+      lay->addWidget(edit);
+      edit->setText(values.join(QChar('\n')));
+      QWhatsThis::add(edit, s);
+      connect(dlg, SIGNAL(okClicked()), dlg, SLOT(deleteLater()));
+      dlg->setMainWidget(box);
+      dlg->setMinimumWidth(KMAX(dlg->minimumWidth(), FETCH_MIN_WIDTH*2/3));
+      dlg->show();
+    }
+  }
 }
 
 void FetchDialog::slotResultFound(Fetch::SearchResult* result_) {

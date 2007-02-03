@@ -295,7 +295,7 @@ void ExecExternalFetcher::slotProcessExited(KProcess*) {
       default:
         break;
     }
-    SearchResult* r = new SearchResult(this, entry->title(), desc);
+    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

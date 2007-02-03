@@ -166,7 +166,7 @@ void Z3950Connection::run() {
 
   QString newSyntax = m_syntax;
   if(numResults > 0) {
-    myLog() << "Z3950Connection::run() - current syntax is " << newSyntax << endl;
+    myLog() << "Z3950Connection::run() - current syntax is " << newSyntax << " (" << numResults << " results)" << endl;
     // so now we know that results exist, might have to check syntax
     int len;
     ZOOM_record rec = ZOOM_resultset_record(resultSet, 0);
@@ -273,7 +273,8 @@ void Z3950Connection::run() {
     } else {
       data = toXML(ZOOM_record_get(rec, "raw", &len), m_sourceCharSet);
     }
-    kapp->postEvent(m_fetcher, new Z3950ResultFound(data));
+    Z3950ResultFound ev(data);
+    kapp->sendEvent(m_fetcher, &ev);
   }
 
   ZOOM_resultset_destroy(resultSet);
@@ -340,16 +341,16 @@ void Z3950Connection::done(const QString& msg_, int type_) {
 
 inline
 QCString Z3950Connection::toCString(const QString& text_) {
-  return iconv(text_.utf8(), QString::fromLatin1("utf-8"), m_sourceCharSet);
+  return iconvRun(text_.utf8(), QString::fromLatin1("utf-8"), m_sourceCharSet);
 }
 
 inline
 QString Z3950Connection::toString(const QCString& text_) {
-  return QString::fromUtf8(iconv(text_, m_sourceCharSet, QString::fromLatin1("utf-8")));
+  return QString::fromUtf8(iconvRun(text_, m_sourceCharSet, QString::fromLatin1("utf-8")));
 }
 
 // static
-QCString Z3950Connection::iconv(const QCString& text_, const QString& fromCharSet_, const QString& toCharSet_) {
+QCString Z3950Connection::iconvRun(const QCString& text_, const QString& fromCharSet_, const QString& toCharSet_) {
 #if HAVE_YAZ
   if(text_.isEmpty()) {
     return text_;
@@ -365,11 +366,11 @@ QCString Z3950Connection::iconv(const QCString& text_, const QString& fromCharSe
     QString charSetLower = fromCharSet_.lower();
     charSetLower.remove('-').remove(' ');
     if(charSetLower == Latin1Literal("iso5426")) {
-      return iconv(Iso5426Converter::toUtf8(text_).utf8(), QString::fromLatin1("utf-8"), toCharSet_);
+      return iconvRun(Iso5426Converter::toUtf8(text_).utf8(), QString::fromLatin1("utf-8"), toCharSet_);
     } else if(charSetLower == Latin1Literal("iso6937")) {
-      return iconv(Iso6937Converter::toUtf8(text_).utf8(), QString::fromLatin1("utf-8"), toCharSet_);
+      return iconvRun(Iso6937Converter::toUtf8(text_).utf8(), QString::fromLatin1("utf-8"), toCharSet_);
     }
-    kdWarning() << "Z3950Fetcher::iconv() - conversion from " << fromCharSet_
+    kdWarning() << "Z3950Fetcher::iconvRun() - conversion from " << fromCharSet_
                 << " to " << toCharSet_ << " is unsupported" << endl;
     return text_;
   }
@@ -383,7 +384,7 @@ QCString Z3950Connection::iconv(const QCString& text_, const QString& fromCharSe
 
   int r = yaz_iconv(cd, const_cast<char**>(&input), &inlen, &result, &outlen);
   if(r <= 0) {
-    myDebug() << "Z3950Fetcher::iconv() - can't decode buffer" << endl;
+    myDebug() << "Z3950Fetcher::iconvRun() - can't decode buffer" << endl;
     return text_;
   }
 

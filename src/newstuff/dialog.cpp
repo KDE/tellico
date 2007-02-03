@@ -414,11 +414,13 @@ void Dialog::slotInstall() {
   m_timer->start(100);
   connect(m_manager, SIGNAL(signalInstalled(KNS::Entry*)), SLOT(slotDoneInstall(KNS::Entry*)));
   m_manager->install(m_type, entry);
+  delete m_cursorSaver;
+  m_cursorSaver = 0;
 }
 
 void Dialog::slotDoneInstall(KNS::Entry* entry_) {
   QMap<QListViewItem*, KNS::Entry*>::Iterator it;
-  for(it = m_entryMap.begin(); it != m_entryMap.end(); ++it) {
+  for(it = m_entryMap.begin(); entry_ && it != m_entryMap.end(); ++it) {
     if(it.data() == entry_) {
       InstallStatus installed = Manager::installStatus(entry_);
       static_cast<Item*>(it.key())->setStatus(installed);

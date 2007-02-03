@@ -110,7 +110,6 @@ private:
   QString m_value;
   QMap<int, Data::EntryPtr> m_entries;
   bool m_started;
-  QStringList m_isbnList;
   QString m_preset;
 
   XSLTHandler* m_MARC21XMLHandler;

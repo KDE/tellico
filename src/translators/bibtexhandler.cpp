@@ -23,6 +23,7 @@
 #include <kdebug.h>
 #include <kurl.h>
 #include <kstringhandler.h>
+#include <klocale.h>
 
 #include <qstring.h>
 #include <qstringlist.h>

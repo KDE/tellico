@@ -20,7 +20,6 @@
 #include "borrower.h"
 #include "datavectors.h"
 
-#include <klocale.h>
 #include <ksharedptr.h>
 
 #include <qstringlist.h>

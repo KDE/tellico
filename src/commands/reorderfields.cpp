@@ -16,6 +16,8 @@
 #include "../controller.h"
 #include "../tellico_debug.h"
 
+#include <klocale.h>
+
 using Tellico::Command::ReorderFields;
 
 ReorderFields::ReorderFields(Data::CollPtr coll_, const Data::FieldVec& oldFields_,

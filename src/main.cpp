@@ -36,7 +36,7 @@ namespace {
 int main(int argc, char* argv[]) {
   KAboutData aboutData("tellico", "Tellico",
                        version, description, KAboutData::License_GPL,
-                       "(c) 2001-2006, Robby Stephenson", 0,
+                       "(c) 2001-2007, Robby Stephenson", 0,
                        "http://www.periapsis.org/tellico/", "tellico-users@forge.novell.com");
   aboutData.addAuthor("Robby Stephenson", 0, "robby@periapsis.org");
   aboutData.addCredit("Mathias Monnerville", I18N_NOOP("Data source scripts"),

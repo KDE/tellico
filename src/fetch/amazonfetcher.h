@@ -121,7 +121,6 @@ private:
   int m_page;
   int m_total;
   QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
-  QStringList m_isbnList;
   QGuardedPtr<KIO::Job> m_job;
 
   FetchKey m_key;

@@ -54,6 +54,7 @@ bool TellicoZipExporter::exec() {
 
   TellicoXMLExporter exp;
   exp.setEntries(entries());
+  exp.setURL(url()); // needed in case of relative URL values
   long opt = options();
   opt |= Export::ExportUTF8; // always export to UTF-8
   opt |= Export::ExportImages; // always list the images in the xml

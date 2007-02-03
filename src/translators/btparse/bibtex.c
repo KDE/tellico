@@ -17,6 +17,7 @@
 #include "attrib.h"
 #include "lex_auxiliary.h"
 #include "error.h"
+#include "parse_auxiliary.h"
 /*#include "my_dmalloc.h"*/
 
 extern char * InputFilename;            /* for zzcr_ast call in pccts/ast.c */
@@ -44,7 +45,7 @@ bibfile(AST**_root)
 	zzBLOCK(zztasp1);
 	zzMake0;
 	{
-	AST *last; (*_root) = NULL;   
+	AST *last; (*_root) = NULL;
 	{
 		zzBLOCK(zztasp2);
 		zzMake0;
@@ -78,10 +79,10 @@ entry(AST**_root)
 	zzBLOCK(zztasp1);
 	zzMake0;
 	{
-	bt_metatype metatype;   
+	bt_metatype metatype;
 	zzmatch(AT);  zzCONSUME;
 	zzmatch(NAME); zzsubroot(_root, &_sibling, &_tail);
-	
+
 	metatype = entry_metatype();
 	zzastArg(1)->nodetype = BTAST_ENTRY;
 	zzastArg(1)->metatype = metatype;
@@ -107,7 +108,7 @@ body(AST**_root, bt_metatype metatype )
 	if ( (LA(1)==STRING) ) {
 		if (!(metatype == BTE_COMMENT )) {zzfailed_pred("   metatype == BTE_COMMENT ");}
 		zzmatch(STRING); zzsubchild(_root, &_sibling, &_tail);
-		zzastArg(1)->nodetype = BTAST_STRING;   
+		zzastArg(1)->nodetype = BTAST_STRING;
  zzCONSUME;
 
 	}
@@ -153,7 +154,7 @@ contents(AST**_root, bt_metatype metatype )
 			zzEXIT(zztasp2);
 			}
 		}
-		zzastArg(1)->nodetype = BTAST_KEY;   
+		zzastArg(1)->nodetype = BTAST_KEY;
 		zzmatch(COMMA);  zzCONSUME;
 		fields(zzSTR); zzlink(_root, &_sibling, &_tail);
 	}
@@ -222,12 +223,12 @@ field(AST**_root)
 	zzMake0;
 	{
 	zzmatch(NAME); zzsubroot(_root, &_sibling, &_tail);
-	zzastArg(1)->nodetype = BTAST_FIELD; check_field_name (zzastArg(1));   
+	zzastArg(1)->nodetype = BTAST_FIELD; check_field_name (zzastArg(1));
  zzCONSUME;
 
 	zzmatch(EQUALS);  zzCONSUME;
 	value(zzSTR); zzlink(_root, &_sibling, &_tail);
-	
+
 #if DEBUG > 1
 	printf ("field: fieldname = %p (%s)\n"
 	"       first val = %p (%s)\n",
@@ -280,21 +281,21 @@ simple_value(AST**_root)
 	{
 	if ( (LA(1)==STRING) ) {
 		zzmatch(STRING); zzsubchild(_root, &_sibling, &_tail);
-		zzastArg(1)->nodetype = BTAST_STRING;   
+		zzastArg(1)->nodetype = BTAST_STRING;
  zzCONSUME;
 
 	}
 	else {
 		if ( (LA(1)==NUMBER) ) {
 			zzmatch(NUMBER); zzsubchild(_root, &_sibling, &_tail);
-			zzastArg(1)->nodetype = BTAST_NUMBER;   
+			zzastArg(1)->nodetype = BTAST_NUMBER;
  zzCONSUME;
 
 		}
 		else {
 			if ( (LA(1)==NAME) ) {
 				zzmatch(NAME); zzsubchild(_root, &_sibling, &_tail);
-				zzastArg(1)->nodetype = BTAST_MACRO;   
+				zzastArg(1)->nodetype = BTAST_MACRO;
  zzCONSUME;
 
 			}

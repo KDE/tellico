@@ -297,7 +297,7 @@ void EntrezFetcher::summaryResults() {
         break; // done now
       }
     }
-    SearchResult* r = new SearchResult(this, title, pubdate + '/' + authors);
+    SearchResult* r = new SearchResult(this, title, pubdate + '/' + authors, QString());
     m_matches.insert(r->uid, id);
     emit signalResultFound(r);
   }
