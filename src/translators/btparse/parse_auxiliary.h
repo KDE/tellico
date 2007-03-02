@@ -24,9 +24,9 @@
 #include "stdpccts.h"                   /* for SetWordType typedef */
 
 void fix_token_names (void);
-void zzsyn (char *text, int tok, 
+void zzsyn (const char *text, int tok, 
             char *egroup, SetWordType *eset, int etok,
-            int k, char *bad_text);
+            int k, const char *bad_text);
 void  check_field_name (AST * field);
 
 #endif /* PARSE_AUXILIARY_H */

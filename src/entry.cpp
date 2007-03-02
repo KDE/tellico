@@ -21,6 +21,8 @@
 #include "tellico_debug.h"
 #include "latin1literal.h"
 
+#include <klocale.h>
+
 #include <qregexp.h>
 
 using Tellico::Data::Entry;
@@ -157,11 +159,16 @@ QString Entry::formattedField(const QString& fieldName_) const {
   if(!f) {
     return QString::null;
   }
-  if(f->type() == Field::Dependent) {
-    return dependentValue(this, f->description(), true);
-  }
 
   Field::FormatFlag flag = f->formatFlag();
+  if(f->type() == Field::Dependent) {
+    if(flag == Field::FormatNone) {
+      return dependentValue(this, f->description(), false);
+    } else {
+      // format sub fields and whole string
+      return Field::format(dependentValue(this, f->description(), true), flag);
+    }
+  }
 
   // if auto format is not set or FormatNone, then just return the value
   if(flag == Field::FormatNone) {
@@ -289,7 +296,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   if(!(f->flags() & Field::AllowMultiple)) {
     QString value = formattedField(fieldName_);
     if(value.isEmpty()) {
-      return Collection::s_emptyGroupTitle;
+      return i18n(Collection::s_emptyGroupTitle);
     } else {
       return value;
     }
@@ -297,7 +304,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
 
   QStringList groups = fields(fieldName_, true);
   if(groups.isEmpty()) {
-    return Collection::s_emptyGroupTitle;
+    return i18n(Collection::s_emptyGroupTitle);
   } else if(f->type() == Field::Table) {
       // quick hack for tables, how often will a user have "::" in their value?
       // only use first column for group
@@ -328,13 +335,13 @@ void Entry::invalidateFormattedFieldValue(const QString& name_) {
 }
 
 // format is something like "%{year} %{author}"
-QString Entry::dependentValue(ConstEntryPtr entry_, const QString& format_, bool autoCapitalize_) {
+QString Entry::dependentValue(ConstEntryPtr entry_, const QString& format_, bool formatted_) {
   if(!entry_) {
     return format_;
   }
 
   QString result, fieldName;
-  FieldPtr f;
+  FieldPtr field;
 
   int endPos;
   int curPos = 0;
@@ -345,14 +352,14 @@ QString Entry::dependentValue(ConstEntryPtr entry_, const QString& format_, bool
       if(endPos > -1) {
         result += format_.mid(curPos, pctPos-curPos);
         fieldName = format_.mid(pctPos+2, endPos-pctPos-2);
-        f = entry_->collection()->fieldByName(fieldName);
-        if(!f) {
+        field = entry_->collection()->fieldByName(fieldName);
+        if(!field) {
           // allow the user to also use field titles
-          f = entry_->collection()->fieldByTitle(fieldName);
+          field = entry_->collection()->fieldByTitle(fieldName);
         }
-        if(f) {
+        if(field) {
           // don't format, just capitalize
-          result += (autoCapitalize_ ? Field::capitalize(entry_->field(f->name())) : entry_->field(f->name()));
+          result += entry_->field(field, formatted_);
         } else {
           result += format_.mid(pctPos, endPos-pctPos+1);
         }

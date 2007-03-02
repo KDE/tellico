@@ -215,18 +215,19 @@ void ListViewItem::clear() {
 }
 
 int ListViewItem::compare(QListViewItem* item_, int col_, bool asc_) const {
-  if(m_sortWeight == -1) {
-    return KListViewItem::compare(item_, col_, asc_);
-  }
+  int res = compareWeight(item_, col_, asc_);
+  return res == 0 ? KListViewItem::compare(item_, col_, asc_) : res;
+}
+
+int ListViewItem::compareWeight(QListViewItem* item_, int col_, bool asc_) const {
+  Q_UNUSED(col_);
   // I want the sorting to be independent of sort order
   GUI::ListViewItem* i = static_cast<GUI::ListViewItem*>(item_);
-  int res;
+  int res = 0;
   if(m_sortWeight < i->sortWeight()) {
     res = -1;
   } else if(m_sortWeight > i->sortWeight()) {
     res = 1;
-  } else {
-    res = 0;
   }
   if(asc_) {
     res *= -1; // reverse, heavier weights will come first always

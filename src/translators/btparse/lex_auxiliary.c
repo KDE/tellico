@@ -45,9 +45,9 @@
 
 extern char * InputFilename;            /* from input.c */
 
-GEN_PRIVATE_ERRFUNC (lexical_warning, (char * fmt, ...),
+GEN_PRIVATE_ERRFUNC (lexical_warning, (const char * fmt, ...),
                      BTERR_LEXWARN, InputFilename, zzline, NULL, -1, fmt)
-GEN_PRIVATE_ERRFUNC (lexical_error, (char * fmt, ...),
+GEN_PRIVATE_ERRFUNC (lexical_error, (const char * fmt, ...),
                      BTERR_LEXERR, InputFilename, zzline, NULL, -1, fmt)
 
 
@@ -831,8 +831,8 @@ void check_runaway_string (void)
     * could these be made significantly more efficient by a 256-element
     * lookup table instead of calling strchr()?
     */
-   static char *alpha_chars = "abcdefghijklmnopqrstuvwxyz";
-   static char *name_chars = "abcdefghijklmnopqrstuvwxyz0123456789:+/'.-";
+   static const char *alpha_chars = "abcdefghijklmnopqrstuvwxyz";
+   static const char *name_chars = "abcdefghijklmnopqrstuvwxyz0123456789:+/'.-";
 
    /* 
     * on entry: zzlextext contains the whole string, starting with {

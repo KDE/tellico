@@ -45,7 +45,7 @@ static SetWordType bitmask[] =
 static struct 
 {
    int    token;
-   char  *new_name;
+   const char  *new_name;
 } new_tokens[] = 
 {
    { AT,         "\"@\"" },
@@ -94,8 +94,8 @@ fix_token_names (void)
    num_replace = (sizeof(new_tokens) / sizeof(*new_tokens));
    for (i = 0; i < num_replace; i++)
    {
-      char  *new = new_tokens[i].new_name;
-      char **old = zztokens + new_tokens[i].token;
+      const char  *new = new_tokens[i].new_name;
+      const char **old = zztokens + new_tokens[i].token;
 
       *old = new;
    }
@@ -134,13 +134,13 @@ append_token_set (char *msg, SetWordType *a)
 
 
 void
-zzsyn(char *        text,
+zzsyn(const char *  text,
       int           tok, 
       char *        egroup,
       SetWordType * eset,
       int           etok,
       int           k,
-      char *        bad_text)
+      const char *  bad_text)
 {
    static char    msg [MAX_ERROR];
    int            len;
@@ -235,7 +235,7 @@ check_field_name (AST * field)
 static void
 show_ast_stack_elem (int num)
 {
-   extern char *nodetype_names[];       /* nicked from bibtex_ast.c */
+   extern const char *nodetype_names[];       /* nicked from bibtex_ast.c */
    /*   bt_nodetype    nodetype;
    bt_metatype    metatype; */
    AST   *elem;

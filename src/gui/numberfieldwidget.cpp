@@ -66,8 +66,9 @@ QString NumberFieldWidget::text() const {
   }
 
   QString text = m_lineEdit->text();
-  text.replace(s_semiColon, QString::fromLatin1("; "));
-  text.replace(s_comma, QString::fromLatin1(", "));
+  if(field()->flags() & Data::Field::AllowMultiple) {
+    text.replace(s_semiColon, QString::fromLatin1("; "));
+  }
   return text.simplifyWhiteSpace();
 }
 

@@ -69,7 +69,7 @@ Tellico::EntryGroupItem* GroupView::addGroup(Data::EntryGroup* group_) {
     type = m_coll->fieldByName(group_->fieldName())->type();
   }
   EntryGroupItem* item = new EntryGroupItem(this, group_, type);
-  if(group_->groupName() == Data::Collection::s_emptyGroupTitle) {
+  if(group_->groupName() == i18n(Data::Collection::s_emptyGroupTitle)) {
     item->setPixmap(0, SmallIcon(QString::fromLatin1("folder_red")));
     item->setSortWeight(10);
   } else {
@@ -262,7 +262,7 @@ void GroupView::contextMenuRequested(QListViewItem* item_, const QPoint& point_,
 void GroupView::slotCollapsed(QListViewItem* item_) {
   // only change icon for group items
   if(static_cast<GUI::ListViewItem*>(item_)->isEntryGroupItem()) {
-    if(item_->text(0) == Data::Collection::s_emptyGroupTitle) {
+    if(item_->text(0) == i18n(Data::Collection::s_emptyGroupTitle)) {
       item_->setPixmap(0, SmallIcon(QString::fromLatin1("folder_red")));
     } else {
       item_->setPixmap(0, m_groupClosedPixmap);
@@ -279,7 +279,7 @@ void GroupView::slotExpanded(QListViewItem* item_) {
   }
 
   setUpdatesEnabled(false);
-  if(item->text(0) == Data::Collection::s_emptyGroupTitle) {
+  if(item->text(0) == i18n(Data::Collection::s_emptyGroupTitle)) {
     item->setPixmap(0, SmallIcon(QString::fromLatin1("folder_red_open")));
   } else {
     item->setPixmap(0, m_groupOpenPixmap);
@@ -406,7 +406,7 @@ void GroupView::slotFilterGroup() {
       }
     } else {
       QString s = it.current()->text(0);
-      if(s != Data::Collection::s_emptyGroupTitle) {
+      if(s != i18n(Data::Collection::s_emptyGroupTitle)) {
         filter->append(new FilterRule(m_groupBy, it.current()->text(0), FilterRule::FuncContains));
       }
     }

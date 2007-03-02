@@ -372,7 +372,7 @@ _zzmatch_wsig(int _t)
 #else
 
 int
-_zzmatch(int _t, char **zzBadText, char **zzMissText,
+_zzmatch(int _t, const char **zzBadText, const char **zzMissText,
                 int *zzMissTok, int *zzBadTok,
                 SetWordType **zzMissSet)
 {

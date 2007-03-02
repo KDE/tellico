@@ -472,7 +472,7 @@ void FreeDBImporter::readCDText(const QCString& drive_) {
   SETFIELD("track", tracks.join(QString::fromLatin1("; ")));
 
   // something special for compilations and such
-  SETFIELD("title",  Data::Collection::s_emptyGroupTitle);
+  SETFIELD("title",  i18n(Data::Collection::s_emptyGroupTitle));
   SETFIELD("artist", artist);
 #endif
 }

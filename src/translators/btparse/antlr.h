@@ -380,7 +380,7 @@ extern int _zzsetmatch_wsig(SetWordType *);
 #define zzmatch_wsig(_t,handler)			\
 	if ( !_zzmatch_wsig(_t) ) {_signal=MismatchedToken; goto handler;}
 
-extern int _zzmatch(int, char **, char **, int *, int *, SetWordType **);
+extern int _zzmatch(int, const char **, const char **, int *, int *, SetWordType **);
 extern int _zzmatch_wsig(int);
 
 #define zzmatch_wdfltsig(_t,_f)			\
@@ -396,14 +396,14 @@ extern int _zzsetmatch_wdfltsig(SetWordType *tokensWanted,
 #ifdef GENAST
 #define zzRULE		Attrib *zzaRetPtr = &(zzaStack[zzasp-1]);	\
 					SetWordType *zzMissSet=NULL; int zzMissTok=0;		\
-					int zzBadTok=0; char *zzBadText="";		\
+					int zzBadTok=0; const char *zzBadText="";		\
 					int zzErrk=1;								\
-					char *zzMissText=""; zzASTVars
+					const char *zzMissText=""; zzASTVars
 #else
 #define zzRULE		Attrib *zzaRetPtr = &(zzaStack[zzasp-1]);	\
-					int zzBadTok=0; char *zzBadText="";		\
+					int zzBadTok=0; const char *zzBadText="";		\
 					int zzErrk=1;								\
-					SetWordType *zzMissSet=NULL; int zzMissTok=0; char *zzMissText=""
+					SetWordType *zzMissSet=NULL; int zzMissTok=0; const char *zzMissText=""
 #endif
 
 #ifdef GENAST
@@ -504,7 +504,7 @@ extern int _zzsetmatch_wdfltsig(SetWordType *tokensWanted,
 
 extern Attrib zzempty_attr(void);
 extern Attrib zzconstr_attr(int, char *);
-extern void zzsyn(char *, int, char *, SetWordType *, int, int, char *);
+extern void zzsyn(const char *, int, char *, SetWordType *, int, int, const char *);
 extern int zzset_el(unsigned, SetWordType *);
 extern int zzset_deg(SetWordType *);
 extern void zzedecode(SetWordType *);
@@ -522,7 +522,7 @@ extern void zzdflthandlers(int, int *);
 /* Define a parser; user should do a "#parser myname" in their grammar file */
 /*extern struct pccts_parser zzparser;*/
 
-extern char *zztokens[];
+extern const char *zztokens[];
 #ifdef LL_K
 extern int zztokenLA[];
 extern char zztextLA[][ZZLEXBUFSIZE];

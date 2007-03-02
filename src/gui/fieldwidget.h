@@ -74,7 +74,6 @@ protected:
   virtual void updateFieldHook(Data::FieldPtr, Data::FieldPtr) {}
 
   static const QRegExp s_semiColon;
-  static const QRegExp s_comma;
 
 private:
   Data::FieldPtr m_field;

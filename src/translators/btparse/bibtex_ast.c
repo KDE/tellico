@@ -22,7 +22,7 @@
 /*#include "my_dmalloc.h"*/
 
 
-char *nodetype_names[] =
+const char *nodetype_names[] =
 {
    "bogus", "entry", "key", "field", "string", "number", "macro"
 };

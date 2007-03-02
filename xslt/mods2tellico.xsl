@@ -92,8 +92,10 @@
      with an originInfo/publisher or identifier[isbn] elements are actually books -->
 <!-- Changed in Tellico 1.1, don't be so strict about the text thing, not every library
      includes that in the mods output, so just check for publisher 
+     Changed in Tellico 1.2.9, allow anything that has typeOfResource='text'
      //mods:mods[(mods:typeOfResource='text' and -->
-   <xsl:for-each select=".//mods:mods[ mods:originInfo/mods:publisher or
+   <xsl:for-each select=".//mods:mods[ mods:typeOfResource='text' or
+                                       mods:originInfo/mods:publisher or
                                        mods:identifier[@type='isbn'] or
                                        mods:identifier[@type='lccn'] ]">
     <xsl:apply-templates select="."/>

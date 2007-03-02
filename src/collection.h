@@ -318,7 +318,7 @@ public:
   /**
    * The string used for empty values. This forces consistency.
    */
-  static const QString s_emptyGroupTitle;
+  static const char* s_emptyGroupTitle;
   /**
    * The string used for the people pseudo-group. This forces consistency.
    */

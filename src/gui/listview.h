@@ -157,6 +157,8 @@ public:
   virtual Data::EntryVec entries() const;
 
 private:
+  int compareWeight(QListViewItem* item, int col, bool ascending) const;
+
   int m_sortWeight;
 };
 

@@ -1010,7 +1010,7 @@ messages: rc.cpp
 	@ touch $(podir)/tellico.pot;
 	LIST=`find . -name \*.h -o -name \*.hh -o -name \*.H -o -name \*.hxx -o -name \*.hpp -o -name \*.cpp -o -name \*.cc -o -name \*.cxx -o -name \*.ecpp -o -name \*.C`; \
         if test -n "$$LIST"; then \
-          $(XGETTEXT) --join-existing $$LIST -o $(podir)/tellico.pot; \
+          $(XGETTEXT) --join-existing --add-comments="TRANSLATORS:" $$LIST -o $(podir)/tellico.pot; \
         fi
 
 #include ../admin/Doxyfile.am

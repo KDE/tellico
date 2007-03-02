@@ -202,10 +202,10 @@ typedef struct
     * a part in a format; since I don't allow that, I'm not [yet] worried
     * about it!)
     */
-   char *       pre_part[BT_MAX_NAMEPARTS];
+   const char *       pre_part[BT_MAX_NAMEPARTS];
    char *       post_part[BT_MAX_NAMEPARTS];
    char *       pre_token[BT_MAX_NAMEPARTS];
-   char *       post_token[BT_MAX_NAMEPARTS];
+   const char *       post_token[BT_MAX_NAMEPARTS];
    boolean      abbrev[BT_MAX_NAMEPARTS];
    bt_joinmethod join_tokens[BT_MAX_NAMEPARTS];
    bt_joinmethod join_part[BT_MAX_NAMEPARTS];
@@ -236,7 +236,7 @@ typedef struct
    bt_errclass errclass;
    char *      filename;
    int         line;
-   char *      item_desc;
+   const char *      item_desc;
    int         item;
    char *      message;
 } bt_error;

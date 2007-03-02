@@ -464,7 +464,7 @@ string_prefix (char * string, int prefix_len)
 static int
 append_text (char * string,
              int    offset,
-             char * text,
+             const char * text,
              int    start,
              int    len)
 {

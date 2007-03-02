@@ -47,7 +47,7 @@ Sym *AllMacros = NULL;                  /* `scope' so we can get back list */
 
 
 GEN_PRIVATE_ERRFUNC (macro_warning,
-                     (char * filename, int line, char * fmt, ...),
+                     (char * filename, int line, const char * fmt, ...),
                      BTERR_CONTENT, filename, line, NULL, -1, fmt)
 
 

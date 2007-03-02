@@ -182,6 +182,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
   m_descEdit->setMinimumWidth(150);
   layout->addMultiCellWidget(m_descEdit, row, row, 1, 3);
   label->setBuddy(m_descEdit);
+  /* TRANSLATORS: Do not translate %{year} and %{title}. */
   whats = i18n("The description is a useful reminder of what information is contained in the "
                "field. For <i>Dependent</i> fields, the description is a format string such as "
                "\"%{year} %{title}\" where the named fields get substituted in the string.");

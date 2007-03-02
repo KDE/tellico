@@ -409,9 +409,10 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   m_leUpdate->completionObject()->addItem(QString::fromLatin1("%{title}"));
   m_leUpdate->completionObject()->addItem(QString::fromLatin1("%{isbn}"));
   gridLayout->addWidget(m_leUpdate, row, 1);
+  /* TRANSLATORS: Do not translate %{author}. */
   w2 = i18n("<p>Enter the arguments which should be used to search for available updates to an entry.</p><p>"
-           "The format is the same as for <i>Dependent</i> fields, where field values "
-           "are contained inside braces, such as <i>%{author}</i> See the documentation for details.</p>");
+            "The format is the same as for <i>Dependent</i> fields, where field values "
+            "are contained inside braces, such as <i>%{author}</i>. See the documentation for details.</p>");
   QWhatsThis::add(m_cbUpdate, w);
   QWhatsThis::add(m_leUpdate, w2);
   if(fetcher_ && fetcher_->m_canUpdate) {

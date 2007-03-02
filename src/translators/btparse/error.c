@@ -33,7 +33,7 @@
 #define NUM_ERRCLASSES ((int) BTERR_INTERNAL + 1)
 
 
-static char *errclass_names[NUM_ERRCLASSES] =
+static const char *errclass_names[NUM_ERRCLASSES] =
 {
    NULL,                        /* BTERR_NOTIFY */
    "warning",                   /* BTERR_CONTENT */ 
@@ -45,7 +45,7 @@ static char *errclass_names[NUM_ERRCLASSES] =
    "internal error"             /* BTERR_INTERNAL */
 };
 
-static bt_erraction err_actions[NUM_ERRCLASSES] =
+static const bt_erraction err_actions[NUM_ERRCLASSES] =
 {
    BTACT_NONE,                  /* BTERR_NOTIFY */  
    BTACT_NONE,                  /* BTERR_CONTENT */ 
@@ -81,7 +81,7 @@ static char error_buf[MAX_ERROR+1];
 
 void print_error (bt_error *err)
 {
-   char *  name;
+   const char *  name;
    boolean something_printed;
 
    something_printed = FALSE;
@@ -133,9 +133,9 @@ void
 report_error (bt_errclass errclass,
               char *      filename,
               int         line,
-              char *      item_desc,
+              const char *      item_desc,
               int         item,
-              char *      fmt,
+              const char *      fmt,
               va_list     arglist)
 {
    bt_error  err;
@@ -199,7 +199,7 @@ GEN_ERRFUNC (general_error,
              (bt_errclass errclass,
               char *      filename,
               int         line,
-              char *      item_desc,
+              const char *      item_desc,
               int         item,
               char *      fmt,
               ...),
@@ -221,19 +221,19 @@ GEN_ERRFUNC (ast_error,
              errclass, ast->filename, ast->line, NULL, -1, fmt)
 
 GEN_ERRFUNC (notify,
-             (char * fmt, ...),
+             (const char * fmt, ...),
              BTERR_NOTIFY, NULL, -1, NULL, -1, fmt)
 
 GEN_ERRFUNC (usage_warning,
-             (char * fmt, ...),
+             (const char * fmt, ...),
              BTERR_USAGEWARN, NULL, -1, NULL, -1, fmt)
 
 GEN_ERRFUNC (usage_error,
-             (char * fmt, ...),
+             (const char * fmt, ...),
              BTERR_USAGEERR, NULL, -1, NULL, -1, fmt)
 
 GEN_ERRFUNC (internal_error,
-             (char * fmt, ...),
+             (const char * fmt, ...),
              BTERR_INTERNAL, NULL, -1, NULL, -1, fmt)
 
 

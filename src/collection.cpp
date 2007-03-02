@@ -27,7 +27,7 @@
 
 using Tellico::Data::Collection;
 
-const QString Collection::s_emptyGroupTitle = i18n("(Empty)");
+const char* Collection::s_emptyGroupTitle = I18N_NOOP("(Empty)");
 const QString Collection::s_peopleGroupName = QString::fromLatin1("_people");
 
 Collection::Collection(const QString& title_, const QString& entryTitle_)
@@ -569,7 +569,7 @@ void Collection::populateDict(EntryGroupDict* dict_, const QString& fieldName_, 
       // find the group for this group name
       // bool fields used the field title
       QString groupTitle = *groupIt;
-      if(isBool && groupTitle != s_emptyGroupTitle) {
+      if(isBool && groupTitle != i18n(s_emptyGroupTitle)) {
         groupTitle = fieldTitleByName(fieldName_);
       }
       EntryGroup* group = dict_->find(groupTitle);
@@ -636,7 +636,7 @@ QStringList Collection::entryGroupNamesByField(EntryPtr entry_, const QString& f
   for(FieldVec::Iterator it = m_peopleFields.begin(); it != m_peopleFields.end(); ++it) {
     values.add(entry_->groupNamesByFieldName(it->name()));
   }
-  values.remove(s_emptyGroupTitle);
+  values.remove(i18n(s_emptyGroupTitle));
   return values.toList();
 }
 

@@ -48,6 +48,7 @@ Tellico::Data::FieldVec CoinCollection::defaultFields() {
   field->setFormatFlag(Field::FormatTitle);
   list.append(field);
 
+  /* TRANSLATORS: denomination refers to the monetary value. */
   field = new Field(QString::fromLatin1("denomination"), i18n("Denomination"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);

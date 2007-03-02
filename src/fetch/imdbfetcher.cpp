@@ -716,10 +716,8 @@ void IMDBFetcher::doTitle(const QString& str_, Data::EntryPtr entry_) {
 
 void IMDBFetcher::doRunningTime(const QString& str_, Data::EntryPtr entry_) {
   // running time
-  // this minimal thing makes regexps hard
-  // "runtime:.*(\\d+)" matches to the end of the document if not minimal
-  // and only grabs one digit if minimal
-  QRegExp runtimeRx(QString::fromLatin1("runtime:[^\\d]*(\\d+)"), false);
+  QRegExp runtimeRx(QString::fromLatin1("runtime:.*(\\d+)\\s+min"), false);
+  runtimeRx.setMinimal(true);
 
   if(runtimeRx.search(str_) > -1) {
 //    myDebug() << "running-time = " << runtimeRx.cap(1) << endl;
@@ -734,7 +732,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Data::EntryPtr entry_) {
 
   // match until next b tag
 //  QRegExp akaRx(QString::fromLatin1("also known as(.*)<b(?:\\s.*)?>"));
-  QRegExp akaRx(QString::fromLatin1("also known as(.*)<b[>\\s/]"), false);
+  QRegExp akaRx(QString::fromLatin1("also known as(.*)<(b[>\\s/]|div)"), false);
   akaRx.setMinimal(true);
 
   if(akaRx.search(str_) > -1 && !akaRx.cap(1).isEmpty()) {
@@ -758,9 +756,12 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Data::EntryPtr entry_) {
       s.remove(*s_tagRx);
       s.remove(brackRx);
       s = s.stripWhiteSpace();
-      // the first value ends up being the colon after "Also know as"
+      // the first value ends up being or starting with the colon after "Also know as"
       // I'm too lazy to figure out a better regexp
-      if(!s.isEmpty() && s != Latin1Literal(":")) {
+      if(s.startsWith(QChar(':'))) {
+        s = s.mid(1);
+      }
+      if(!s.isEmpty()) {
         values += s;
       }
     }

@@ -227,10 +227,10 @@ public:
    * strings themselves shoudl be taken into account.
    *
    * @param formatString The format string
-   * @param autoCapitalize Whether the inserted values should be auto-capitalized. They're never formatted.
+   * @param formatted Whether the inserted values should be formatted.
    * @return The constructed field value
    */
-  static QString dependentValue(ConstEntryPtr e, const QString& formatString, bool autoCapitalize);
+  static QString dependentValue(ConstEntryPtr e, const QString& formatString, bool formatted);
 
 private:
   CollPtr m_coll;

@@ -53,7 +53,7 @@ typedef struct
 
 
 GEN_PRIVATE_ERRFUNC (name_warning,
-                     (name_loc * loc, char * fmt, ...),
+                     (name_loc * loc, const char * fmt, ...),
                      BTERR_CONTENT, loc->filename, loc->line,
                      "name", loc->name_num, fmt)
 

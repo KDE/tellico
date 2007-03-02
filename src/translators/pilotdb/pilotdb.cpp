@@ -50,7 +50,10 @@ QByteArray PilotDB::data() {
   pi_int16_t ent_hdr_size = isResourceDB() ? PI_RESOURCE_ENT_SIZE : PI_RECORD_ENT_SIZE;
   std::streampos offset = PI_HDR_SIZE + m_records.size() * ent_hdr_size + 2;
 
-  memcpy(buf, name().c_str(), 32);
+  for(int i=0; i<32; ++i) {
+    buf[i] = 0;
+  }
+  memcpy(buf, name().c_str(), QMIN(31, name().length()));
   set_short(buf + 32, flags());
   set_short(buf + 34, version());
   set_long(buf + 36, creation_time());

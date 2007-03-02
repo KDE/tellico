@@ -718,11 +718,12 @@ void DetailedListView::setPrevSortedColumn(int prev1_, int prev2_) {
 }
 
 void DetailedListView::setSorting(int column_, bool ascending_/*=true*/) {
+//  DEBUG_BLOCK;
   if(column_ != columnSorted()) {
     m_prev2SortColumn = m_prevSortColumn;
     m_prevSortColumn = columnSorted();
   }
-  KListView::setSorting(column_, ascending_);
+  GUI::ListView::setSorting(column_, ascending_);
 }
 
 // it's possible to have a zero-length vector and have this called, so check bounds

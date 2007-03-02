@@ -31,7 +31,7 @@ extern char * InputFilename;            /* for zzcr_ast call in pccts/ast.c */
 #include "dlgdef.h"
 #include "err.h"
 
-ANTLRChar *zztokens[27]={
+const ANTLRChar *zztokens[27]={
 	/* 00 */	"Invalid",
 	/* 01 */	"@",
 	/* 02 */	"AT",

@@ -1,3 +1,21 @@
+2007-03-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.9.
+
+2007-02-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Relaxed MODS processing to allow any result with typeOfResource="text"
+	* Fixed bug with adding space after commas in edit widget.
+	* Fixed bug with formatting of dependent fields always being capitalized.
+
+2007-02-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IMDb parsing for alternative titles and certifications.
+
+2007-02-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed sorting for rating groups with rating = 10.
+
 2007-02-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.8.

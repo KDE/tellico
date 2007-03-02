@@ -29,7 +29,7 @@ using Tellico::EntryGroupItem;
 EntryGroupItem::EntryGroupItem(GUI::ListView* parent_, Data::EntryGroup* group_, int fieldType_)
     : GUI::CountedItem(parent_), m_group(group_), m_fieldType(fieldType_) {
   setText(0, group_->groupName());
-  m_emptyGroup = group_->groupName() == Data::Collection::s_emptyGroupTitle;
+  m_emptyGroup = group_->groupName() == i18n(Data::Collection::s_emptyGroupTitle);
 }
 
 QPixmap EntryGroupItem::ratingPixmap() {
@@ -87,11 +87,12 @@ QString EntryGroupItem::key(int col_, bool) const {
     return text(col_);
   }
 
-  if(text(col_).isEmpty() && pixmap(col_) && !pixmap(col_)->isNull()) {
+  if((m_fieldType == Data::Field::Rating || text(col_).isEmpty())
+     && pixmap(col_) && !pixmap(col_)->isNull()) {
     // a little weird, sort for width, too, in case of rating widget
     // but sort reverse by width
     return QChar('\t') + QString::number(1000-pixmap(col_)->width());
-  } else if(text(col_) == Data::Collection::s_emptyGroupTitle) {
+  } else if(text(col_) == i18n(Data::Collection::s_emptyGroupTitle)) {
     return QChar('\t');
   }
 
@@ -110,7 +111,7 @@ QString EntryGroupItem::key(int col_, bool) const {
           tokens += QString::fromLatin1("\\s");
         }
         // if it's not the last item, add a pipe
-        if(!(*it) != prefixes.last()) {
+        if((*it) != prefixes.last()) {
           tokens += QChar('|');
         }
       }

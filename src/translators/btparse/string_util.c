@@ -50,7 +50,7 @@ typedef enum
 } bt_letter;
 
 
-static char * uc_version[] = 
+static const char * uc_version[] = 
 {
    NULL,                                /* L_OTHER */
    "\\O",                               /* L_OSLASH_L */
@@ -69,7 +69,7 @@ static char * uc_version[] =
    "J"                                  /* L_JNODOT_L */
 };
 
-static char * lc_version[] = 
+static const char * lc_version[] = 
 {
    NULL,                                /* L_OTHER */
    "\\o",                               /* L_OSLASH_L */
@@ -414,7 +414,7 @@ convert_special_char (char transform,
    int       cs_end;
    int       cs_len;                    /* counting the backslash */
    bt_letter letter;
-   char *    repl;
+   const char *    repl;
    int       repl_len;
 
 #ifndef ALLOW_WARNINGS

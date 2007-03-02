@@ -87,6 +87,7 @@ Tellico::Data::FieldVec StampCollection::defaultFields() {
   field->setCategory(i18n(stamp_condition));
   list.append(field);
 
+  /* TRANSLATORS: See http://en.wikipedia.org/wiki/Stamp_hinge */
   field = new Field(QString::fromLatin1("hinged"), i18n("Hinged"));
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
