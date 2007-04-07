@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2007 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,6 +22,8 @@ class QTimer;
 
 namespace Tellico {
 
+class DetailedListView;
+
 /**
  * @author Robby Stephenson
  */
@@ -37,6 +39,10 @@ public:
   virtual QColor backgroundColor(int column);
   virtual void paintCell(QPainter* p, const QColorGroup& cg,
                          int column, int width, int align);
+
+  virtual int compare(QListViewItem* item, int col, bool ascending) const;
+
+  DetailedListView* listView() const;
 
 private:
   /**

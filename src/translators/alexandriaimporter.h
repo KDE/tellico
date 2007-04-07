@@ -56,6 +56,7 @@ public slots:
   void slotCancel();
 
 private:
+  static QString& cleanLine(QString& str);
   static QString& clean(QString& str);
 
   Data::CollPtr m_coll;

@@ -3,7 +3,7 @@ if !USE_LIBBTPARSE
 
 noinst_LIBRARIES = libbtparse.a
 
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 
 libbtparse_a_METASOURCES = AUTO
 

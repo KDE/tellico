@@ -353,8 +353,6 @@ x_libraries = @x_libraries@
 xdg_appsdir = @xdg_appsdir@
 xdg_directorydir = @xdg_directorydir@
 xdg_menudir = @xdg_menudir@
-
-####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = libnewstuff.a
 #>- libnewstuff_a_METASOURCES = AUTO
 libnewstuff_a_SOURCES = manager.cpp dialog.cpp newscript.cpp providerloader.cpp
@@ -365,9 +363,7 @@ dialog.h dialog.cpp \
 newscript.h newscript.cpp \
 providerloader.h providerloader.cpp
 
-
-####### kdevelop will overwrite this part!!! (end)############
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 KDE_OPTIONS = noautodist
 #>- all: all-am
 #>+ 1

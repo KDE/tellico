@@ -38,7 +38,7 @@ namespace {
 using Tellico::Fetch::AnimeNfoFetcher;
 
 AnimeNfoFetcher::AnimeNfoFetcher(QObject* parent_, const char* name_ /*=0*/)
-    : Fetcher(parent_, name_) {
+    : Fetcher(parent_, name_), m_started(false) {
 }
 
 QString AnimeNfoFetcher::defaultName() {

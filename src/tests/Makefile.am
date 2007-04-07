@@ -1,4 +1,4 @@
-INCLUDES = -I.. $(all_includes)
+AM_CPPFLAGS = -I$(srcdir)/.. $(all_includes)
 
 KDE_OPTIONS = noautodist
 

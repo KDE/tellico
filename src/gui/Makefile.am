@@ -1,4 +1,4 @@
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 
 noinst_LIBRARIES = libgui.a
 libgui_a_SOURCES = combobox.cpp counteditem.cpp datewidget.cpp \

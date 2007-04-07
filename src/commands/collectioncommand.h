@@ -36,6 +36,7 @@ public:
   };
 
   CollectionCommand(Mode mode, Data::CollPtr currentColl, Data::CollPtr newColl);
+  ~CollectionCommand();
 
   virtual void execute();
   virtual void unexecute();
@@ -51,6 +52,11 @@ private:
   KURL m_origURL;
   Data::FieldVec m_origFields;
   Data::MergePair m_mergePair;
+  // for the Replace case, the collection that got replaced needs to be cleared
+  enum CleanupMode {
+    DoNothing, ClearOriginal, ClearNew
+  };
+  CleanupMode m_cleanup;
 };
 
   } // end namespace

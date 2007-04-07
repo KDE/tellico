@@ -280,10 +280,11 @@ void FetchDialog::slotSearchClicked() {
 }
 
 void FetchDialog::slotClearClicked() {
-  slotFetchDone();
+  slotFetchDone(false);
   m_listView->clear();
   m_entryView->clear();
   Fetch::Manager::self()->stop();
+  m_multipleISBN->setChecked(false);
   m_valueLineEdit->clear();
   m_valueLineEdit->setFocus();
   m_addButton->setEnabled(false);
@@ -318,7 +319,7 @@ void FetchDialog::setStatus(const QString& text_) {
   m_statusBar->changeItem(QChar(' ') + text_, FETCH_STATUS_ID);
 }
 
-void FetchDialog::slotFetchDone() {
+void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
 //  myDebug() << "FetchDialog::slotFetchDone()" << endl;
   m_started = false;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
@@ -327,19 +328,30 @@ void FetchDialog::slotFetchDone() {
   if(m_resultCount == 0) {
     slotStatus(i18n("The search returned no items."));
   } else {
+    /* TRANSLATORS: This is a plural form, you need to translate both lines (except "_n: ") */
     slotStatus(i18n("The search returned 1 item.",
                     "The search returned %n items.",
                     m_resultCount));
   }
   m_moreButton->setEnabled(Fetch::Manager::self()->hasMoreResults());
+
+  // if we're not checking isbn values, then, ok to return
+  if(!checkISBN) {
+    return;
+  }
+
   const Fetch::FetchKey key = static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt());
   // no way to currently check EAN/UPC values for non-book items
   if(Kernel::self()->collectionType() == Data::Collection::Book &&
      (key == Fetch::ISBN || key == Fetch::UPC)) {
     QStringList values = QStringList::split(QString::fromLatin1("; "),
-                                            m_valueLineEdit->text().simplifyWhiteSpace());
+                                            m_oldSearch.simplifyWhiteSpace());
+    for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
+      ISBNValidator::staticFixup(*it);
+    }
     for(QListViewItemIterator it(m_listView); it.current(); ++it) {
-      const QString i = static_cast<SearchResultItem*>(it.current())->m_result->isbn;
+      QString i = static_cast<SearchResultItem*>(it.current())->m_result->isbn;
+      ISBNValidator::staticFixup(i);
       values.remove(i) ||
       values.remove(ISBNValidator::isbn13(i)) || // check ISBN-13, too
       values.remove(ISBNValidator::isbn10(i)); // EAN might be able to be converted
@@ -409,7 +421,7 @@ void FetchDialog::slotAddEntry() {
 
 void FetchDialog::slotMoreClicked() {
   if(m_started) {
-    myDebug() << "FetchDialog::slotMoreClicked() - can't continue whiel running" << endl;
+    myDebug() << "FetchDialog::slotMoreClicked() - can't continue while running" << endl;
     return;
   }
 
@@ -528,7 +540,13 @@ void FetchDialog::slotSourceChanged(const QString& source_) {
 }
 
 void FetchDialog::slotMultipleISBN(bool toggle_) {
+  bool wasEnabled = m_valueLineEdit->isEnabled();
   m_valueLineEdit->setEnabled(!toggle_);
+  if(!wasEnabled && m_valueLineEdit->isEnabled()) {
+    // if we enable it, it probably had multiple isbn values
+    // the validator doesn't like that, so clear the box
+    m_valueLineEdit->clear();
+  }
   m_editISBN->setEnabled(toggle_);
 }
 

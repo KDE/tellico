@@ -1,7 +1,7 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = libtranslators.a
 
-## INCLUDES were found outside kdevelop specific part
+## AM_CPPFLAGS were found outside kdevelop specific part
 
 libtranslators_a_METASOURCES = AUTO
 
@@ -51,7 +51,7 @@ dcimporter.h             dcimporter.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 
-INCLUDES = $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS) $(all_includes)
+AM_CPPFLAGS = $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS) $(all_includes)
 
 KDE_OPTIONS = noautodist
 

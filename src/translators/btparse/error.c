@@ -88,7 +88,7 @@ void print_error (bt_error *err)
 
    if (err->filename)
    {
-      fprintf (stderr, err->filename);
+      fputs (err->filename, stderr);
       something_printed = TRUE;
    }
    if (err->line > 0)                   /* going to print a line number? */
@@ -111,7 +111,7 @@ void print_error (bt_error *err)
    {
       if (something_printed)
          fprintf (stderr, ", ");
-      fprintf (stderr, name);
+      fputs (name, stderr);
       something_printed = TRUE;
    }
 
@@ -201,7 +201,7 @@ GEN_ERRFUNC (general_error,
               int         line,
               const char *      item_desc,
               int         item,
-              char *      fmt,
+              const char *      fmt,
               ...),
              errclass, filename, line, item_desc, item, fmt)
 

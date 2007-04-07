@@ -109,6 +109,7 @@ void Controller::slotCollectionAdded(Data::CollPtr coll_) {
 
   // do this first because the group view will need it later
   m_mainWindow->readCollectionOptions(coll_);
+  m_mainWindow->slotUpdateToolbarIcons();
   m_mainWindow->updateEntrySources(); // has to be called before all the addCollection()
   // calls in the widgets since they may want menu updates
 

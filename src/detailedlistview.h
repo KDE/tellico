@@ -19,6 +19,7 @@ namespace Tellico {
 }
 
 #include "gui/listview.h"
+#include "listviewcomparison.h"
 #include "observer.h"
 #include "filter.h"
 
@@ -28,6 +29,7 @@ namespace Tellico {
 #include <qstringlist.h>
 #include <qpixmap.h>
 #include <qvaluevector.h>
+#include <qptrlist.h>
 
 namespace Tellico {
 
@@ -72,14 +74,7 @@ public:
   QString sortColumnTitle3() const;
   QStringList visibleColumns() const;
   Data::EntryVec visibleEntries();
-  /**
-   * Returns whether the given column is formatted as a number or not.
-   *
-   * @param column Column number
-   * @return Whether column is formatted as a number or not
-   */
-  bool isNumber(int column) const;
-  bool isTitle(int column) const;
+
   /**
    * @param coll A pointer to the collection
    */
@@ -133,6 +128,8 @@ public:
   void setPixmapSize(int width, int height) { m_pixWidth = width; m_pixHeight = height; }
   void resetEntryStatus();
 
+  int compare(int column, const QListViewItem* item1, QListViewItem* item2, bool asc);
+
 public slots:
   /**
    * Resets the list view, clearing and deleting all items.
@@ -149,6 +146,8 @@ public slots:
 
 private:
   DetailedEntryItem* addEntryInternal(Data::EntryPtr entry);
+  int compareColumn(int col, const QListViewItem* item1, QListViewItem* item2, bool asc);
+
   /**
    * A helper method to populate an item. The column text is initialized by pulling
    * the contents from the entry pointer of the item, so it should properly be set
@@ -205,11 +204,10 @@ private:
 
   KPopupMenu* m_headerMenu;
   QValueVector<int> m_columnWidths;
-  QValueVector<bool> m_isNumber;
-  QValueVector<bool> m_isTitle;
+  QPtrList<ListViewComparison> m_comparisons;
   QValueVector<bool> m_isDirty;
   QValueVector<int> m_imageColumns;
-  bool m_loadingCollection : 1;
+  bool m_loadingCollection;
   QPixmap m_entryPix;
   QPixmap m_checkPix;
 

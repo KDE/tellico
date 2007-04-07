@@ -1,7 +1,7 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = liblibflatfile.a
 
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 
 liblibflatfile_a_METASOURCES = AUTO
 

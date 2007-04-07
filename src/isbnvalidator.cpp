@@ -28,6 +28,7 @@ QString ISBNValidator::isbn10(QString isbn13) {
   isbn13.truncate(isbn13.length()-1);
   // add new checksum
   isbn13 += checkSum10(isbn13);
+  staticFixup(isbn13);
   return isbn13;
 }
 
@@ -43,6 +44,7 @@ QString ISBNValidator::isbn13(QString isbn10) {
   isbn10.prepend(QString::fromLatin1("978"));
   // add new checksum
   isbn10 += checkSum13(isbn10);
+  staticFixup(isbn10);
   return isbn10;
 }
 
@@ -60,6 +62,10 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
 }
 
 void ISBNValidator::fixup(QString& input_) const {
+  return staticFixup(input_);
+}
+
+void ISBNValidator::staticFixup(QString& input_) {
   if((input_.startsWith(QString::fromLatin1("978"))
        || input_.startsWith(QString::fromLatin1("979")))
      && input_.contains(QRegExp(QString::fromLatin1("\\d"))) > 10) {
@@ -182,7 +188,7 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
   }
 }
 
-void ISBNValidator::fixup10(QString& input_) const {
+void ISBNValidator::fixup10(QString& input_) {
   if(input_.isEmpty()) {
     return;
   }
@@ -276,7 +282,7 @@ void ISBNValidator::fixup10(QString& input_) const {
   }
 }
 
-void ISBNValidator::fixup13(QString& input_) const {
+void ISBNValidator::fixup13(QString& input_) {
   if(input_.isEmpty()) {
     return;
   }

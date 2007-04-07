@@ -42,6 +42,11 @@
 #include <vector>
 #include <algorithm>
 
+namespace {
+  static const int ENTRY_MERGE_GOOD_MATCH = 10; // same as in entryupdater.cpp
+  static const int ENTRY_MERGE_PERFECT_MATCH = 20;
+}
+
 using Tellico::Data::Document;
 Document* Document::s_self = 0;
 
@@ -285,66 +290,25 @@ Tellico::Data::MergePair Document::mergeCollection(CollPtr coll_) {
     m_coll->mergeField(field);
   }
 
-  // FIXME: find a faster way than one-to-one comparison
-  // music collection get a special case because of the audio file metadata might
-  // be read on a per-track basis, allow merging of entries with identical titles and artists
-  bool isMusic = (m_coll->type() == Collection::Album);
-  const QString sep = QString::fromLatin1("; ");
-  const QString sep2 = QString::fromLatin1("::");
-  const QString artist = QString::fromLatin1("artist");
-  const QString track = QString::fromLatin1("track");
-
-  bool matches = false;
   EntryVec currEntries = m_coll->entries();
-  EntryVec::Iterator currIt = currEntries.begin();
-  EntryVec entries = coll_->entries();
-  for(EntryVec::Iterator newIt = entries.begin(); newIt != entries.end(); ++newIt) {
-    matches = false;
-    for(currIt = currEntries.begin(); currIt != currEntries.end(); ++currIt) {
-      if(isMusic && !newIt->title().isEmpty() && !newIt->field(artist).isEmpty()
-          && newIt->title() == currIt->title() && newIt->field(artist) == currIt->field(artist)) {
-        matches = true;
-        // trackList 1 is collection to be merged, trackList2 is current collection
-        QStringList newTracks = Data::Field::split(newIt->field(track), true);
-        QStringList currTracks = Data::Field::split(currIt->field(track), true);
-        for(uint idx = 0; idx < newTracks.count(); ++idx) {
-          // only add track if current track id is empty or shorter
-          if(newTracks[idx].isEmpty()) {
-            continue;
-          }
-          while(currTracks.count() <= idx) {
-            currTracks += QString();
-          }
-          if(currTracks[idx].isEmpty()) {
-            currTracks[idx] = newTracks[idx];
-          } else {
-            // we could add artist or length
-            QStringList currParts = QStringList::split(sep2, currTracks[idx], true);
-            QStringList newParts = QStringList::split(sep2, newTracks[idx], true);
-            bool addedPart = false;
-            while(currParts.count() < newParts.count()) {
-              currParts += QString();
-            }
-            for(uint i = 1; i < newParts.count(); ++i) {
-              if(currParts[i].isEmpty()) {
-                currParts[i] = newParts[i];
-                addedPart = true;
-              }
-            }
-            if(addedPart) {
-              currTracks[idx] = currParts.join(sep2);
-            }
-          }
-        }
-        // the merge item is the entry pointer and the old track value
-        pair.second.append(qMakePair(EntryPtr(currIt), currIt->field(track)));
-        currIt->setField(track, currTracks.join(sep));
-      } else if(*currIt == *newIt) {
-        matches = true;
+  EntryVec newEntries = coll_->entries();
+  for(EntryVec::Iterator newIt = newEntries.begin(); newIt != newEntries.end(); ++newIt) {
+    int bestMatch = 0;
+    Data::EntryPtr matchEntry;
+    for(EntryVec::Iterator currIt = currEntries.begin(); currIt != currEntries.end(); ++currIt) {
+      int match = m_coll->sameEntry(&*currIt, &*newIt);
+      if(match >= ENTRY_MERGE_PERFECT_MATCH) {
+        matchEntry = currIt;
         break;
+      } else if(match >= ENTRY_MERGE_GOOD_MATCH && match > bestMatch) {
+        bestMatch = match;
+        matchEntry = currIt;
+        // don't break, keep looking for better one
       }
     }
-    if(!matches) {
+    if(matchEntry) {
+      m_coll->mergeEntry(matchEntry, &*newIt, false /*overwrite*/);
+    } else {
       Data::EntryPtr e = new Data::Entry(*newIt);
       e->setCollection(m_coll);
       // keep track of which entries got added
@@ -369,10 +333,9 @@ void Document::replaceCollection(CollPtr coll_) {
   setURL(url);
   m_validFile = false;
 
-  // because of the shared ptr mix, have to clear collection
-  if(m_coll) {
-    m_coll->clear();
-  }
+  // the collection gets cleared by the CollectionCommand that called this function
+  // no need to do it here
+
   m_coll = coll_;
   m_coll->setTrackGroups(true);
   m_cancelImageWriting = true;
@@ -386,10 +349,10 @@ void Document::unAppendCollection(CollPtr coll_, FieldVec origFields_) {
 
   m_coll->blockSignals(true);
 
-  QStringList origFieldNames;
+  StringSet origFieldNames;
   for(FieldVec::Iterator field = origFields_.begin(); field != origFields_.end(); ++field) {
     m_coll->modifyField(field);
-    origFieldNames << field->name();
+    origFieldNames.add(field->name());
   }
 
   EntryVec entries = coll_->entries();
@@ -403,7 +366,7 @@ void Document::unAppendCollection(CollPtr coll_, FieldVec origFields_) {
   // don't removeField() until after removeEntry() is done
   FieldVec currFields = m_coll->fields();
   for(FieldVec::Iterator field = currFields.begin(); field != currFields.end(); ++field) {
-    if(origFieldNames.findIndex(field->name()) == -1) {
+    if(!origFieldNames.has(field->name())) {
       m_coll->removeField(field);
     }
   }

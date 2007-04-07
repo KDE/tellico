@@ -57,7 +57,7 @@ static void dump (AST *root, int depth)
 void dump_ast (char *msg, AST *root)
 {
    if (msg != NULL)
-      printf (msg);
+      puts (msg);
    dump (root, 0);
    printf ("\n");
 }

@@ -453,7 +453,7 @@ dcimporter.h             dcimporter.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
-INCLUDES = $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS) $(all_includes)
+AM_CPPFLAGS = $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(TAGLIB_CFLAGS) $(KCDDB_CFLAGS) $(all_includes)
 KDE_OPTIONS = noautodist
 appdir = $(kde_datadir)/tellico
 app_DATA = bibtex-translation.xml

@@ -20,6 +20,7 @@
 #include "core/tellico_config.h"
 
 #include <kiconloader.h>
+#include <klocale.h>
 
 #include <qpixmap.h>
 #include <qpainter.h>

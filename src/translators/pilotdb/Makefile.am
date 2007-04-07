@@ -1,7 +1,7 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = libpilotdb.a
 
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 
 libpilotdb_a_METASOURCES = AUTO
 

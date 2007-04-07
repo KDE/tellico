@@ -468,7 +468,7 @@ void ConfigDialog::setupTemplatePage() {
   whats = i18n("Click to install a new template directly.");
   QWhatsThis::add(b1, whats);
 
-  KPushButton* b2 = new KPushButton(i18n("Download.."), box1);
+  KPushButton* b2 = new KPushButton(i18n("Download..."), box1);
   b2->setIconSet(SmallIconSet(QString::fromLatin1("knewstuff")));
   connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
   whats = i18n("Click to download additional templates via the Internet.");

@@ -181,7 +181,7 @@ int BookCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) co
 //    myDebug() << "BookCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title() << endl;
 //  }
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("author"), this);
+  res += 2*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("author"), this);
   res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("cr_year"), this);
   res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("pub_year"), this);
   res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("binding"), this);

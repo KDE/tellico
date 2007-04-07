@@ -354,7 +354,7 @@ xdg_menudir = @xdg_menudir@
 
 ####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = liblibflatfile.a
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 #>- liblibflatfile_a_METASOURCES = AUTO
 liblibflatfile_a_SOURCES = DB.cpp Database.cpp
 EXTRA_DIST = Database.cpp Database.h DB.cpp DB.h Field.h FType.h ListView.h ListViewColumn.h Record.h

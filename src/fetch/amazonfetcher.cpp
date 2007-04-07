@@ -84,7 +84,7 @@ AmazonFetcher::AmazonFetcher(Site site_, QObject* parent_, const char* name_)
     : Fetcher(parent_, name_), m_xsltHandler(0), m_site(site_), m_imageSize(MediumImage),
       m_access(QString::fromLatin1(AMAZON_ACCESS_KEY)),
       m_assoc(QString::fromLatin1(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
-      m_countOffset(0), m_page(1), m_total(-1), m_job(0), m_started(false) {
+      m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(0), m_started(false) {
   m_name = siteData(site_).title;
 }
 
@@ -128,11 +128,12 @@ void AmazonFetcher::readConfigHook(KConfig* config_, const QString& group_) {
 
 void AmazonFetcher::search(FetchKey key_, const QString& value_) {
   m_key = key_;
-  m_value = value_;
+  m_value = value_.stripWhiteSpace();
   m_started = true;
   m_page = 1;
   m_total = -1;
   m_countOffset = 0;
+  m_numResults = 0;
   doSearch();
 }
 
@@ -156,7 +157,7 @@ void AmazonFetcher::doSearch() {
   u.addQueryItem(QString::fromLatin1("Operation"),      QString::fromLatin1("ItemSearch"));
   u.addQueryItem(QString::fromLatin1("ResponseGroup"),  QString::fromLatin1("Large"));
   u.addQueryItem(QString::fromLatin1("ItemPage"),       QString::number(m_page));
-  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2006-11-30"));
+  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2007-02-22"));
 
   const int type = Kernel::self()->collectionType();
   switch(type) {
@@ -228,27 +229,46 @@ void AmazonFetcher::doSearch() {
       {
         u.removeQueryItem(QString::fromLatin1("Operation"));
         u.addQueryItem(QString::fromLatin1("Operation"), QString::fromLatin1("ItemLookup"));
+
+        QString s = m_value; // not encValue!!!
+        s.remove('-');
         // ISBN only get digits or 'X', and multiple values are connected with "; "
-        // as a quick hack, amazon seems to support isbn13 if IdType==EAN
-        // but only for US at the moment
-        if(m_site == US &&
-           m_value.startsWith(QString::fromLatin1("978")) ||
-           m_value.startsWith(QString::fromLatin1("979"))) {
-          u.addQueryItem(QString::fromLatin1("IdType"), QString::fromLatin1("EAN"));
-        } else {
-          if(m_value.length() > 12 && m_value.startsWith(QString::fromLatin1("978"))) {
-            // convert to isbn10 to search with
-            m_value = ISBNValidator::isbn10(m_value);
+        QStringList isbns = QStringList::split(QString::fromLatin1("; "), s);
+        // Amazon isbn13 search is still very flaky, so if possible, we're going to convert
+        // all of them to isbn10. If we run into a 979 isbn13, then we're forced to do an
+        // isbn13 search
+        bool isbn13 = false;
+        for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ) {
+          if(m_value.startsWith(QString::fromLatin1("979"))) {
+            if(m_site == JP) { // never works for JP
+              kdWarning() << "AmazonFetcher:doSearch() - ISBN-13 searching not implemented for Japan" << endl;
+              isbns.remove(it); // automatically skips to next
+              continue;
+            }
+            isbn13 = true;
+            break;
+          }
+          ++it;
+        }
+        // if we want isbn10, then convert all
+        if(!isbn13) {
+          for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ++it) {
+            if((*it).length() > 12) {
+              (*it) = ISBNValidator::isbn10(*it);
+              (*it).remove('-');
+            }
           }
           // the default search is by ASIN, which prohibits SearchIndex
           u.removeQueryItem(QString::fromLatin1("SearchIndex"));
         }
-        QString s = m_value; // not encValue!!!
-        s.remove('-');
         // limit to first 10
-        s.replace(QString::fromLatin1("; "), QString::fromLatin1(","));
-        s = s.section(',', 0, 9);
-        u.addQueryItem(QString::fromLatin1("ItemId"), s);
+        while(isbns.size() > 10) {
+          isbns.pop_back();
+        }
+        u.addQueryItem(QString::fromLatin1("ItemId"), isbns.join(QString::fromLatin1(",")));
+        if(isbn13) {
+          u.addQueryItem(QString::fromLatin1("IdType"), QString::fromLatin1("EAN"));
+        }
       }
       break;
 
@@ -420,7 +440,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
 
   int count = 0;
   for(Data::EntryVec::Iterator entry = entries.begin();
-      static_cast<int>(m_entries.count()) < m_limit && entry != entries.end();
+      m_numResults < m_limit && entry != entries.end();
       ++entry, ++count) {
     if(count < m_countOffset) {
       continue;
@@ -505,6 +525,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
     SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
+    ++m_numResults;
   }
 
   // we might have gotten aborted
@@ -648,6 +669,10 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
       entry->setField(QString::fromLatin1("description"), Tellico::decodeHTML(entry->field(QString::fromLatin1("description"))));
       break;
   }
+
+  // clean up the title
+  parseTitle(entry, type);
+
   // also sometimes table fields have rows but no values
   Data::FieldVec fields = entry->collection()->fields();
   QRegExp blank(QString::fromLatin1("[\\s:;]+")); // only white space, column separators and row separators
@@ -742,6 +767,48 @@ void AmazonFetcher::updateEntry(Data::EntryPtr entry_) {
 
   myDebug() << "AmazonFetcher::updateEntry() - insufficient info to search" << endl;
   emit signalDone(this); // always need to emit this if not continuing with the search
+}
+
+void AmazonFetcher::parseTitle(Data::EntryPtr entry, int collType) {
+  // assume that everything in brackets or parentheses is extra
+  QRegExp rx(QString::fromLatin1("[\\(\\[](.*)[\\)\\]]"));
+  rx.setMinimal(true);
+  QString title = entry->field(QString::fromLatin1("title"));
+  int pos = rx.search(title);
+  while(pos > -1) {
+    if(parseTitleToken(entry, rx.cap(1))) {
+      title.remove(pos, rx.matchedLength());
+      --pos; // search again there
+    }
+    pos = rx.search(title, pos+1);
+  }
+  entry->setField(QString::fromLatin1("title"), title.stripWhiteSpace());
+}
+
+bool AmazonFetcher::parseTitleToken(Data::EntryPtr entry, const QString& token) {
+  // if res = true, then the token gets removed from the title
+  bool res = false;
+  if(token.find(QString::fromLatin1("widescreen"), 0, false /* case-insensitive*/) > -1 ||
+     token.find(i18n("Widescreen"), 0, false) > -1) {
+    entry->setField(QString::fromLatin1("widescreen"), QString::fromLatin1("true"));
+    // res = true; leave it in the title
+  } else if(token.find(QString::fromLatin1("full screen"), 0, false) > -1) {
+    // skip, but go ahead and remove from title
+    res = true;
+  }
+  if(token.find(QString::fromLatin1("blu-ray"), 0, false) > -1) {
+    entry->setField(QString::fromLatin1("medium"), i18n("Blu-ray"));
+    res = true;
+  } else if(token.find(QString::fromLatin1("hd dvd"), 0, false) > -1) {
+    entry->setField(QString::fromLatin1("medium"), i18n("HD DVD"));
+    res = true;
+  }
+  if(token.find(QString::fromLatin1("director's cut"), 0, false) > -1 ||
+     token.find(i18n("Director's Cut"), 0, false) > -1) {
+    entry->setField(QString::fromLatin1("directors-cut"), QString::fromLatin1("true"));
+    // res = true; leave it in the title
+  }
+  return res;
 }
 
 Tellico::Fetch::ConfigWidget* AmazonFetcher::configWidget(QWidget* parent_) const {

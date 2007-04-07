@@ -17,6 +17,8 @@
 #include "../tellico_kernel.h"
 #include "../core/tellico_config.h"
 
+#include <klocale.h>
+
 #include <qfile.h>
 
 #include <sys/types.h>

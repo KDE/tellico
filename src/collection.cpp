@@ -91,7 +91,7 @@ bool Collection::addField(FieldPtr field_) {
   }
 
   if(field_->flags() & Field::AllowGrouped) {
-    // m_entryGroups autoDeletes each QDict when the Collection d'tor is called
+    // m_entryGroupsDicts autoDeletes each QDict when the Collection d'tor is called
     EntryGroupDict* dict = new EntryGroupDict();
     dict->setAutoDelete(true);
     m_entryGroupDicts.insert(field_->name(), dict);
@@ -279,6 +279,7 @@ bool Collection::modifyField(FieldPtr newField_) {
       // in order to keep list in the same order, don't remove unless new field is not groupable
       m_entryGroups.remove(fieldName);
       m_entryGroupDicts.remove(fieldName);
+      myDebug() << "Collection::modifyField() - no longer grouped: " << fieldName << endl;
       resetGroups = true;
     } else {
       // don't do this, it wipes out the old groups!
@@ -288,8 +289,10 @@ bool Collection::modifyField(FieldPtr newField_) {
     EntryGroupDict* d = new EntryGroupDict();
     d->setAutoDelete(true);
     m_entryGroupDicts.insert(fieldName, d);
-    // cache the possible groups of entries
-    m_entryGroups << fieldName;
+    if(!wasGrouped) {
+      // cache the possible groups of entries
+      m_entryGroups << fieldName;
+    }
     resetGroups = true;
   }
 
@@ -299,8 +302,6 @@ bool Collection::modifyField(FieldPtr newField_) {
   if(newField_->type() == Field::Image) {
     m_imageFields.append(newField_);
   }
-
-
 
   if(resetGroups) {
     myLog() << "Collection::modifyField() - invalidating groups" << endl;
@@ -709,12 +710,7 @@ void Collection::cleanGroups() {
     if(!dict) {
       continue;
     }
-    if(dict->count() == 1) {
-      m_entryGroupDicts.remove(it->fieldName());
-      m_entryGroups.remove(it->fieldName());
-    } else {
-      dict->remove(it->groupName());
-    }
+    dict->remove(it->groupName());
   }
   m_groupsToDelete.clear();
 }
@@ -734,6 +730,10 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
     if(overwrite_ || e1->field(field).isEmpty()) {
 //      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name()) << endl;
       e1->setField(field, e2->field(field));
+      ret1 = true;
+    } else if(field->type() == Field::Para) {
+      // for paragraph fields, concatenate the values
+      e1->setField(field, e1->field(field) + QString::fromLatin1("<br/><br/>") + e2->field(field));
       ret1 = true;
     }
   }

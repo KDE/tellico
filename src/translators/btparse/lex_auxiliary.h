@@ -53,7 +53,7 @@ void newline (void);
 void comment (void);
 void at_sign (void);
 void toplevel_junk (void);
-void name (void);
+void bibname (void);
 void lbrace (void);
 void rbrace (void);
 void lparen (void);

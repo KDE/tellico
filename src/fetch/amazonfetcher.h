@@ -106,6 +106,8 @@ private slots:
 private:
   void initXSLTHandler();
   void doSearch();
+  void parseTitle(Data::EntryPtr entry, int collType);
+  bool parseTitleToken(Data::EntryPtr entry, const QString& token);
 
   XSLTHandler* m_xsltHandler;
   Site m_site;
@@ -120,6 +122,7 @@ private:
   QByteArray m_data;
   int m_page;
   int m_total;
+  int m_numResults;
   QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
   QGuardedPtr<KIO::Job> m_job;
 

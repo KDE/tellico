@@ -365,7 +365,7 @@ x_libraries = @x_libraries@
 xdg_appsdir = @xdg_appsdir@
 xdg_directorydir = @xdg_directorydir@
 xdg_menudir = @xdg_menudir@
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 noinst_LIBRARIES = libcore.a
 #>- libcore_a_SOURCES = tellico_config.kcfgc tellico_config.cpp \
 #>- 	tellico_config_addons.cpp dcopinterface.skel \

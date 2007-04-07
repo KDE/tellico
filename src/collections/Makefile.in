@@ -364,7 +364,7 @@ xdg_menudir = @xdg_menudir@
 
 ####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = libcollections.a
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 #>- libcollections_a_METASOURCES = AUTO
 libcollections_a_SOURCES = winecollection.cpp stampcollection.cpp \
 	comicbookcollection.cpp cardcollection.cpp coincollection.cpp bibtexcollection.cpp \

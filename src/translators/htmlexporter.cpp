@@ -29,6 +29,7 @@
 #include <kglobal.h>
 #include <kio/netaccess.h>
 #include <kapplication.h>
+#include <klocale.h>
 
 #include <qdom.h>
 #include <qgroupbox.h>

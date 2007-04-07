@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/tellico/"
-                xmlns:aws="http://webservices.amazon.com/AWSECommerceService/2006-11-14"
+                xmlns:aws="http://webservices.amazon.com/AWSECommerceService/2007-02-22"
                 xmlns:exsl="http://exslt.org/common"
                 extension-element-prefixes="exsl"
                 version="1.0">
@@ -10,7 +10,7 @@
    ===================================================================
    Tellico XSLT file - used for importing Amazon Web Services data.
 
-   Copyright (C) 2004-2006 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2004-2007 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -47,6 +47,10 @@
   </xsl:otherwise>
  </xsl:choose>
 </xsl:variable>
+
+<!-- for lower-casing -->
+<xsl:variable name="lcletters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
+<xsl:variable name="ucletters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
 
 <xsl:template match="/">
  <tellico syntaxVersion="9">
@@ -322,6 +326,9 @@
      <xsl:choose>
       <xsl:when test="$medium='Video'">
        <xsl:text>VHS</xsl:text>
+      </xsl:when>
+      <xsl:when test="contains(translate($medium,$lcletters,$ucletters),'blu-ray')">
+       <xsl:text>Blu-ray</xsl:text>
       </xsl:when>
       <xsl:otherwise>
        <xsl:value-of select="$medium"/>

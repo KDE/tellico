@@ -23,12 +23,10 @@
 #define STRING 25
 
 void bibfile(AST**_root);
-void entry(AST**_root);
+void bibentry(AST**_root);
 void body(AST**_root, bt_metatype metatype );
 void contents(AST**_root, bt_metatype metatype );
 void fields(AST**_root);
-void field(AST**_root);
-void value(AST**_root);
 void simple_value(AST**_root);
 
 #endif

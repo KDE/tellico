@@ -32,6 +32,7 @@
 #include <dom/dom_element.h>
 #include <kapplication.h>
 #include <ktempfile.h>
+#include <klocale.h>
 
 #include <qfile.h>
 

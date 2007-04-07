@@ -1,4 +1,4 @@
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 
 noinst_LIBRARIES = libcommands.a
 libcommands_a_SOURCES = \

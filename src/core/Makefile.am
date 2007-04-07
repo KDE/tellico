@@ -1,4 +1,4 @@
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 
 noinst_LIBRARIES = libcore.a
 libcore_a_SOURCES = tellico_config.kcfgc tellico_config.cpp \

@@ -1,3 +1,47 @@
+2007-04-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.10.
+
+2007-04-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved accuracy and comprehensiveness of merging collections.
+	* Changed collection merge to concatenate paragraph fields.
+	* Fixed bug that hid some field groups after undoing append collection.
+
+2007-04-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Blu-ray and HD DVD to video formats.
+
+2007-03-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated ibs.it searching.
+	* Fixed searching to replace all HTML entities.
+	* Fixed character encoding for Alexandria import.
+
+2007-03-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Amazon API to 2007-02-22.
+	* Fixed error handling for ISBN-13 searches.
+	* Fixed bug that showed "ISBN Not Found" dialog in error. 
+
+2007-03-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Cleaned-up up ONIX export a bit.
+	* Fixed Alexandria export.
+	* Fixed importing covers from Alexandria.
+
+2007-03-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that caused some amazon results to be hidden when repeating a search.
+
+2007-03-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed hanging bug when stopping a z39.50 search.
+
+2007-03-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when undoing a colleciton import or replacement.
+
 2007-03-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.9.

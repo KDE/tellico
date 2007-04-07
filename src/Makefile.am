@@ -12,7 +12,7 @@ tellico_SOURCES = borrowerdialog.cpp entryitem.cpp importdialog.cpp \
 				loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
 				entryiconfactory.cpp entryupdater.cpp detailedentryitem.cpp statusbar.cpp \
 				progressmanager.cpp upcvalidator.cpp fetcherconfigdialog.cpp iso5426converter.cpp \
-				iso6937converter.cpp
+				iso6937converter.cpp listviewcomparison.cpp
 
 if !USE_LIBBTPARSE
   LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
@@ -74,7 +74,8 @@ upcvalidator.h upcvalidator.cpp \
 fetcherconfigdialog.h fetcherconfigdialog.cpp \
 iso5426converter.h iso5426converter.cpp \
 iso6937converter.h iso6937converter.cpp \
-tellico_map.h
+tellico_map.h \
+listviewcomparison.h listviewcomparison.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -99,7 +100,7 @@ tellico_map.h
 # kde_designerdir     Where Qt Designer plugins should go to (new in KDE 3).
 
 # set the include path for X, qt and KDE
-INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
+AM_CPPFLAGS = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
 
 METASOURCES = AUTO
 

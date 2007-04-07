@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2007-02-18 19:21-0800\n"
+"POT-Creation-Date: 2007-04-01 19:00-0700\n"
 "PO-Revision-Date: 2005-08-11 11:02+0200\n"
 "Last-Translator: Fred Marchee <fredmarchee@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: cite/lyxpipe.cpp:47
+#: cite/lyxpipe.cpp:49
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico naar de server pipe schrijven op <b>%1</b>.</qt>"
 
@@ -96,7 +96,7 @@ msgstr "Sjablonen"
 msgid "&Set"
 msgstr "&Instellen"
 
-#: gui/fieldwidget.cpp:102 gui/fieldwidget.cpp:196
+#: gui/fieldwidget.cpp:101 gui/fieldwidget.cpp:195
 msgid ""
 "_: Edit Label\n"
 "%1:"
@@ -131,15 +131,15 @@ msgid ""
 "Modify %1"
 msgstr "%1 opslaan"
 
-#: commands/collectioncommand.cpp:93
+#: commands/collectioncommand.cpp:109
 msgid "Append Collection"
 msgstr "Verzameling toevoegen"
 
-#: commands/collectioncommand.cpp:95
+#: commands/collectioncommand.cpp:111
 msgid "Merge Collection"
 msgstr "Verzameling samenvoegen"
 
-#: commands/collectioncommand.cpp:97
+#: commands/collectioncommand.cpp:113
 msgid "Replace Collection"
 msgstr "Verzameling vervangen"
 
@@ -237,7 +237,7 @@ msgstr "%1 inchecken"
 #: collections/gamecollection.cpp:19 collections/musiccollection.cpp:19
 #: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
 #: collections/videocollection.cpp:41 collections/winecollection.cpp:19
-#: configdialog.cpp:191 fetch/imdbfetcher.cpp:689 fetch/imdbfetcher.cpp:924
+#: configdialog.cpp:191 fetch/imdbfetcher.cpp:689 fetch/imdbfetcher.cpp:925
 #: field.cpp:39 field.cpp:71 translators/gcfilmsimporter.cpp:54
 msgid "General"
 msgstr "Algemeen"
@@ -257,7 +257,7 @@ msgstr "Categorie"
 #: collections/coincollection.cpp:20 collections/comicbookcollection.cpp:22
 #: collections/gamecollection.cpp:20 collections/musiccollection.cpp:20
 #: collections/stampcollection.cpp:21 collections/videocollection.cpp:22
-#: collections/winecollection.cpp:20 document.cpp:501
+#: collections/winecollection.cpp:20 document.cpp:500
 msgid "Personal"
 msgstr "Persoonlijk"
 
@@ -340,7 +340,7 @@ msgstr "Genre"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:845
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:912
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
 msgid "Keywords"
 msgstr "Trefwoorden"
@@ -387,7 +387,7 @@ msgstr "Geschenk"
 
 #: collections/bookcollection.cpp:154 collections/comicbookcollection.cpp:144
 #: collections/gamecollection.cpp:113 collections/musiccollection.cpp:100
-#: collections/videocollection.cpp:204 document.cpp:499
+#: collections/videocollection.cpp:204 document.cpp:498
 msgid "Loaned"
 msgstr "Geleend"
 
@@ -537,7 +537,7 @@ msgstr "Mijn boeken"
 msgid "Author"
 msgstr "Auteur"
 
-#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:121
+#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:134
 msgid "Hardback"
 msgstr "Gebonden"
 
@@ -764,6 +764,15 @@ msgstr "VCD"
 msgid "DivX"
 msgstr "DivX"
 
+#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:800
+msgid "Blu-ray"
+msgstr ""
+
+#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:803
+#, fuzzy
+msgid "HD DVD"
+msgstr "DVD"
+
 #: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
 msgid "Medium"
 msgstr "Drager"
@@ -891,7 +900,8 @@ msgstr "De speeltijd van de film (in minuten)"
 msgid "Aspect Ratio"
 msgstr "Beeldverhouding"
 
-#: collections/videocollection.cpp:168 translators/tellicoimporter.cpp:891
+#: collections/videocollection.cpp:168 fetch/amazonfetcher.cpp:792
+#: translators/tellicoimporter.cpp:891
 msgid "Widescreen"
 msgstr "Breedbeeld"
 
@@ -903,11 +913,11 @@ msgstr "Zwart wit"
 msgid "Color Mode"
 msgstr "Kleur standaard"
 
-#: collections/videocollection.cpp:179
+#: collections/videocollection.cpp:179 fetch/amazonfetcher.cpp:807
 msgid "Director's Cut"
 msgstr "Director's Cut"
 
-#: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:352
+#: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:357
 msgid "Plot Summary"
 msgstr "Samenvatting"
 
@@ -1092,7 +1102,7 @@ msgid "Organization"
 msgstr "Organisatie"
 
 #: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:434
-#: fetch/z3950fetcher.cpp:651
+#: fetch/z3950fetcher.cpp:662
 msgid "Address"
 msgstr "Adres"
 
@@ -1117,7 +1127,7 @@ msgid "Cross-Reference"
 msgstr "Verwijzingen"
 
 #: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:463
-#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:652
+#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:663
 #: translators/risimporter.cpp:246
 msgid "Abstract"
 msgstr "Samenvatting"
@@ -1191,14 +1201,14 @@ msgstr "de,van de,van,vande,vanden"
 msgid "ISBNdb.com"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:190 fetch/animenfofetcher.cpp:74
+#: fetch/amazonfetcher.cpp:191 fetch/animenfofetcher.cpp:74
 #: fetch/ibsfetcher.cpp:71 fetch/isbndbfetcher.cpp:75
 #: fetch/yahoofetcher.cpp:92
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 staat niet toe dat er voor deze verzameling wordt gezocht."
 
 #: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:443
-#: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
+#: fetch/ibsfetcher.cpp:406 fetch/isbndbfetcher.cpp:257
 #: fetch/yahoofetcher.cpp:391
 msgid "This source has no options."
 msgstr "Deze bron heeft geen opties."
@@ -1212,19 +1222,19 @@ msgstr "Entrez Database"
 msgid "Institution"
 msgstr "Staat"
 
-#: fetch/z3950connection.cpp:115
+#: fetch/z3950connection.cpp:117
 msgid "Query error!"
 msgstr "Zoek fout!"
 
-#: fetch/z3950connection.cpp:156
+#: fetch/z3950connection.cpp:158
 msgid "Connection search error %1: %2"
 msgstr "Verbindings zoekfout %1: %2"
 
-#: fetch/z3950connection.cpp:233
+#: fetch/z3950connection.cpp:235
 msgid "Record syntax error"
 msgstr "Structuur syntaxisfout"
 
-#: fetch/z3950connection.cpp:317
+#: fetch/z3950connection.cpp:332
 msgid "Connection error %1: %2"
 msgstr "Verbindingsfout %1: %2"
 
@@ -1237,22 +1247,22 @@ msgstr "Terugzetten"
 msgid "Library of Congress (US)"
 msgstr "Library of Congress Control (VS)"
 
-#: fetch/imdbfetcher.cpp:1090 fetch/srufetcher.cpp:349
-#: fetch/z3950fetcher.cpp:487
+#: fetch/imdbfetcher.cpp:1091 fetch/srufetcher.cpp:349
+#: fetch/z3950fetcher.cpp:498
 #, fuzzy
 msgid "Hos&t: "
 msgstr "&Host: "
 
-#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:493
+#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:504
 #, fuzzy
 msgid "Enter the host name of the server."
 msgstr "Geef de hostnaam van de z39.50 server."
 
-#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:498
+#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:509
 msgid "&Port: "
 msgstr "&Poort: "
 
-#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:503
+#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:514
 #, fuzzy, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Geef het poortnummer van de z39.50 server. Standaard is %1."
@@ -1281,7 +1291,7 @@ msgstr "Geef de database naam die door de z39.50 server gebruikt wordt."
 msgid "Yahoo! Audio Search"
 msgstr ""
 
-#: fetch/amazonfetcher.cpp:683 fetch/yahoofetcher.cpp:241
+#: fetch/amazonfetcher.cpp:708 fetch/yahoofetcher.cpp:241
 msgid "The cover image could not be loaded."
 msgstr "De afbeelding van de voorzijde kon niet worden geladen."
 
@@ -1318,39 +1328,39 @@ msgstr "Amazon (Canada)"
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com web services"
 
-#: fetch/amazonfetcher.cpp:521
+#: fetch/amazonfetcher.cpp:542
 msgid "Results from %1: %2/%3"
 msgstr "Resultaten van %1: %2/%3"
 
-#: fetch/amazonfetcher.cpp:758
+#: fetch/amazonfetcher.cpp:825
 msgid "Co&untry: "
 msgstr "&Land: "
 
-#: fetch/amazonfetcher.cpp:762
+#: fetch/amazonfetcher.cpp:829
 msgid "United States"
 msgstr "Verenigde Staten"
 
-#: fetch/amazonfetcher.cpp:763
+#: fetch/amazonfetcher.cpp:830
 msgid "United Kingdom"
 msgstr "Engeland"
 
-#: fetch/amazonfetcher.cpp:764
+#: fetch/amazonfetcher.cpp:831
 msgid "Germany"
 msgstr "Duitsland"
 
-#: fetch/amazonfetcher.cpp:765
+#: fetch/amazonfetcher.cpp:832
 msgid "Japan"
 msgstr "Japan"
 
-#: fetch/amazonfetcher.cpp:766
+#: fetch/amazonfetcher.cpp:833
 msgid "France"
 msgstr "Frankrijk"
 
-#: fetch/amazonfetcher.cpp:767
+#: fetch/amazonfetcher.cpp:834
 msgid "Canada"
 msgstr "Canada"
 
-#: fetch/amazonfetcher.cpp:771
+#: fetch/amazonfetcher.cpp:838
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -1358,27 +1368,27 @@ msgstr ""
 "Amazon geeft data van verschillende lokale websites. Kies welke u wilt "
 "gebruiken als data bron."
 
-#: fetch/amazonfetcher.cpp:777
+#: fetch/amazonfetcher.cpp:844
 msgid "&Image size: "
 msgstr "&Afbeelding grootte: "
 
-#: fetch/amazonfetcher.cpp:781
+#: fetch/amazonfetcher.cpp:848
 msgid "Small Image"
 msgstr "Kleine afbeelding"
 
-#: fetch/amazonfetcher.cpp:782
+#: fetch/amazonfetcher.cpp:849
 msgid "Medium Image"
 msgstr "Medium afbeelding"
 
-#: fetch/amazonfetcher.cpp:783
+#: fetch/amazonfetcher.cpp:850
 msgid "Large Image"
 msgstr "Grote afbeelding"
 
-#: fetch/amazonfetcher.cpp:784
+#: fetch/amazonfetcher.cpp:851
 msgid "No Image"
 msgstr "Geen afbeelding"
 
-#: fetch/amazonfetcher.cpp:787 fetch/imdbfetcher.cpp:1115
+#: fetch/amazonfetcher.cpp:854 fetch/imdbfetcher.cpp:1116
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1386,11 +1396,11 @@ msgstr ""
 "De afbeelding van de hoes kan ook worden gedownload. Een grote hoeveelheid "
 "grote afbeeldingen kan echter wel de snelheid van het programma beïnvloeden."
 
-#: fetch/amazonfetcher.cpp:793
+#: fetch/amazonfetcher.cpp:860
 msgid "&Associate's ID: "
 msgstr "&Associate's ID: "
 
-#: fetch/amazonfetcher.cpp:798
+#: fetch/amazonfetcher.cpp:865
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -1398,29 +1408,29 @@ msgstr ""
 "De associate's ID herkent de persoon die toegang heeft op de Amazon.com Web "
 "Services en wordt gebruikt in iedere link naar de Amazon.com website."
 
-#: fetch/z3950fetcher.cpp:78 fetch/z3950fetcher.cpp:738
+#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:749
 #, fuzzy
 msgid "z39.50 Server"
 msgstr "z39.50"
 
-#: fetch/z3950fetcher.cpp:477
+#: fetch/z3950fetcher.cpp:488
 msgid "Use preset &server:"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:508
+#: fetch/z3950fetcher.cpp:519
 msgid "&Database: "
 msgstr "&Database: "
 
-#: fetch/z3950fetcher.cpp:513
+#: fetch/z3950fetcher.cpp:524
 #, fuzzy
 msgid "Enter the database name used by the server."
 msgstr "Geef de database naam die door de z39.50 server gebruikt wordt."
 
-#: fetch/z3950fetcher.cpp:518
+#: fetch/z3950fetcher.cpp:529
 msgid "Ch&aracter set: "
 msgstr "&Teken set: "
 
-#: fetch/z3950fetcher.cpp:527
+#: fetch/z3950fetcher.cpp:538
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -1428,30 +1438,30 @@ msgstr ""
 "Geef de tekenset codering die gebruikt wordt door de z39.50 server. De meest "
 "waarschijnlijke keuze is MARC-8 hoewel ISO-8859-1 ook veel gebruikt wordt."
 
-#: fetch/z3950fetcher.cpp:533
+#: fetch/z3950fetcher.cpp:544
 #, fuzzy
 msgid "&Format: "
 msgstr "Videosysteem"
 
-#: fetch/z3950fetcher.cpp:536
+#: fetch/z3950fetcher.cpp:547
 msgid "Auto-detect"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:544
+#: fetch/z3950fetcher.cpp:555
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:550
+#: fetch/z3950fetcher.cpp:561
 msgid "&User: "
 msgstr "&Gebruiker: "
 
-#: fetch/z3950fetcher.cpp:553 fetch/z3950fetcher.cpp:565
+#: fetch/z3950fetcher.cpp:564 fetch/z3950fetcher.cpp:576
 msgid "Optional"
 msgstr "Optioneel"
 
-#: fetch/z3950fetcher.cpp:556
+#: fetch/z3950fetcher.cpp:567
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -1459,11 +1469,11 @@ msgstr ""
 "Geef de gebruikersnaam van de z39.50 database. De meeste server hebben er "
 "geen nodig."
 
-#: fetch/z3950fetcher.cpp:562
+#: fetch/z3950fetcher.cpp:573
 msgid "Pass&word: "
 msgstr "Wacht&woord: "
 
-#: fetch/z3950fetcher.cpp:569
+#: fetch/z3950fetcher.cpp:580
 #, fuzzy
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
@@ -1473,7 +1483,7 @@ msgstr ""
 "Geef het wachtwoord van de z39.50 database. De meeste server hebben er geen "
 "nodig."
 
-#: fetch/z3950fetcher.cpp:653
+#: fetch/z3950fetcher.cpp:664
 msgid "Illustrator"
 msgstr ""
 
@@ -1575,25 +1585,25 @@ msgstr ""
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Kies een zoekresultaat.</qt>"
 
-#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1154
+#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1155
 msgid "IMDB Link"
 msgstr ""
 
-#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:743
-#: fetch/imdbfetcher.cpp:1156
+#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:741
+#: fetch/imdbfetcher.cpp:1157
 msgid "Alternative Titles"
 msgstr "Alternatieve titels"
 
-#: fetch/imdbfetcher.cpp:923 fetch/imdbfetcher.cpp:1155
+#: fetch/imdbfetcher.cpp:924 fetch/imdbfetcher.cpp:1156
 #, fuzzy
 msgid "IMDB Rating"
 msgstr "ESRB classificatie"
 
-#: fetch/imdbfetcher.cpp:1034 fetch/imdbfetcher.cpp:1157
+#: fetch/imdbfetcher.cpp:1035 fetch/imdbfetcher.cpp:1158
 msgid "Certifications"
 msgstr "Leeftijdcategorie"
 
-#: fetch/imdbfetcher.cpp:1095
+#: fetch/imdbfetcher.cpp:1096
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -1601,18 +1611,18 @@ msgstr ""
 "De Internet Movie Database gebruikt verschillende servers. Kies welke u wilt "
 "gebruiken."
 
-#: fetch/imdbfetcher.cpp:1101
+#: fetch/imdbfetcher.cpp:1102
 #, fuzzy
 msgid "&Maximum cast: "
 msgstr "Maximale afbeelding breedte:"
 
-#: fetch/imdbfetcher.cpp:1106
+#: fetch/imdbfetcher.cpp:1107
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
 msgstr ""
 
-#: fetch/imdbfetcher.cpp:1111
+#: fetch/imdbfetcher.cpp:1112
 #, fuzzy
 msgid "Download cover &image"
 msgstr "Download hoesafbeelding"
@@ -1713,8 +1723,8 @@ msgstr "Geselecteerde items inchecken"
 msgid "Downloading information..."
 msgstr "Importeer audio cd informatie van de FreeDB"
 
-#: controller.cpp:131 fetchdialog.cpp:215 fetchdialog.cpp:293
-#: fetchdialog.cpp:399 fetchdialog.cpp:454 newstuff/dialog.cpp:296
+#: controller.cpp:132 fetchdialog.cpp:215 fetchdialog.cpp:294
+#: fetchdialog.cpp:411 fetchdialog.cpp:466 newstuff/dialog.cpp:296
 #: newstuff/dialog.cpp:323 newstuff/dialog.cpp:433 statusbar.cpp:82
 msgid "Ready."
 msgstr "Klaar."
@@ -1735,11 +1745,11 @@ msgstr "Bestand wordt opgeslagen..."
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Geen geldige BibTeX items gevonden in het %1 bestand"
 
-#: translators/alexandriaexporter.cpp:41
+#: translators/alexandriaexporter.cpp:43
 msgid "Alexandria"
 msgstr "Alexandria"
 
-#: translators/alexandriaexporter.cpp:63
+#: translators/alexandriaexporter.cpp:67
 msgid ""
 "<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
 "books in that library could be overwritten.</qt>"
@@ -1841,7 +1851,7 @@ msgstr "*.csv|CSV bestanden (*.csv)"
 #: configdialog.cpp:991 importdialog.cpp:245 mainwindow.cpp:1059
 #: mainwindow.cpp:1217 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
-#: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:87
+#: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:88
 #: translators/onixexporter.cpp:67 translators/pilotdbexporter.cpp:47
 #: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
 #: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:86
@@ -2046,11 +2056,11 @@ msgstr ""
 "Kies het XSLT bestand dat gebruikt moet worden om de Tellico XML data te om "
 "te zetten."
 
-#: translators/alexandriaimporter.cpp:178
+#: translators/alexandriaimporter.cpp:193
 msgid "Alexandria Options"
 msgstr "Alexandria opties"
 
-#: translators/alexandriaimporter.cpp:179
+#: translators/alexandriaimporter.cpp:194
 #, fuzzy
 msgid "&Library:"
 msgstr "Bibliotheek:"
@@ -2282,49 +2292,49 @@ msgstr "Tellico kreeg een fout bij de XSLT verwerking."
 msgid "*.xsl|XSL Files (*.xsl)"
 msgstr "*.xsl|XSL bestanden (*.xsl)"
 
-#: translators/htmlexporter.cpp:83
+#: translators/htmlexporter.cpp:84
 msgid "HTML"
 msgstr "HTML"
 
-#: reportdialog.cpp:195 translators/htmlexporter.cpp:87
+#: reportdialog.cpp:195 translators/htmlexporter.cpp:88
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.html|HTML bestanden (*.html)"
 
 #: groupview.cpp:464 mainwindow.cpp:1553 mainwindow.cpp:1593
-#: translators/htmlexporter.cpp:314
+#: translators/htmlexporter.cpp:315
 msgid "People"
 msgstr "Mensen"
 
-#: translators/htmlexporter.cpp:318
+#: translators/htmlexporter.cpp:319
 msgid "(grouped by %1)"
 msgstr "(gegroepeerd naar %1)"
 
-#: translators/htmlexporter.cpp:463
+#: translators/htmlexporter.cpp:464
 msgid "HTML Options"
 msgstr "HTML opties"
 
-#: translators/htmlexporter.cpp:466
+#: translators/htmlexporter.cpp:467
 msgid "Print field headers"
 msgstr "Veldnamen afdrukken"
 
-#: configdialog.cpp:297 translators/htmlexporter.cpp:467
+#: configdialog.cpp:297 translators/htmlexporter.cpp:468
 msgid "If checked, the field names will be printed as table headers."
 msgstr "Indien aangevinkt worden de veldnamen afgedrukt als tabel-kop."
 
-#: translators/htmlexporter.cpp:471
+#: translators/htmlexporter.cpp:472
 msgid "Group the entries"
 msgstr "Groepeer de items"
 
-#: configdialog.cpp:304 translators/htmlexporter.cpp:472
+#: configdialog.cpp:304 translators/htmlexporter.cpp:473
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr ""
 "Indien aangevinkt zullen de items gegroepeerd worden onder het gekozen veld."
 
-#: translators/htmlexporter.cpp:476
+#: translators/htmlexporter.cpp:477
 msgid "Export individual entry files"
 msgstr "Exporteer individuele item bestanden"
 
-#: translators/htmlexporter.cpp:477
+#: translators/htmlexporter.cpp:478
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
 "Indien aangevinkt worden er individuele bestanden aangemaakt voor elk item."
@@ -2793,7 +2803,8 @@ msgstr "Druk de inhoud van het document af..."
 msgid "Quit the application"
 msgstr "Sluit de toepassing"
 
-#: mainwindow.cpp:316 rc.cpp:3
+#: mainwindow.cpp:316 rc.cpp:9
+#, no-c-format
 msgid "&Import"
 msgstr "I&mporteren"
 
@@ -2911,7 +2922,8 @@ msgstr "Importeer XSL Transformatie..."
 msgid "Import using an XSL Transform"
 msgstr "Importeer een bestand met gebruik van een XSL-transformatie"
 
-#: mainwindow.cpp:425 rc.cpp:4
+#: mainwindow.cpp:425 rc.cpp:12
+#, no-c-format
 msgid "&Export"
 msgstr "&Exporteer"
 
@@ -3048,7 +3060,7 @@ msgstr "&Nieuw item..."
 msgid "Create a new entry"
 msgstr "Maak een nieuw item"
 
-#: controller.cpp:600 mainwindow.cpp:533
+#: controller.cpp:601 mainwindow.cpp:533
 msgid "&Edit Entry..."
 msgstr "&Bewerk item..."
 
@@ -3056,7 +3068,7 @@ msgstr "&Bewerk item..."
 msgid "Edit the selected entries"
 msgstr "Bewerk de geselecteerde items"
 
-#: controller.cpp:601 mainwindow.cpp:537
+#: controller.cpp:602 mainwindow.cpp:537
 #, fuzzy
 msgid "D&uplicate Entry"
 msgstr "Item &Aanhalen"
@@ -3065,7 +3077,7 @@ msgstr "Item &Aanhalen"
 msgid "Copy the selected entries"
 msgstr "Kopieer de geselecteerde items"
 
-#: controller.cpp:603 mainwindow.cpp:541
+#: controller.cpp:604 mainwindow.cpp:541
 msgid "&Delete Entry"
 msgstr "&Wis item"
 
@@ -3158,8 +3170,8 @@ msgstr "Item &Aanhalen"
 msgid "Cite the selected entries in OpenOffice.org"
 msgstr "De geselecteerde items in LyX aanhalen"
 
-#: controller.cpp:602 mainwindow.cpp:602 rc.cpp:6
-#, fuzzy
+#: controller.cpp:603 mainwindow.cpp:602 rc.cpp:18
+#, fuzzy, no-c-format
 msgid "&Update Entry"
 msgstr "Item &Aanhalen"
 
@@ -3343,7 +3355,7 @@ msgstr "Druk %1 af"
 msgid "Page %1"
 msgstr "Pagina %1"
 
-#: entryview.cpp:170 mainwindow.cpp:1701
+#: entryview.cpp:171 mainwindow.cpp:1701
 msgid "Please check your installation."
 msgstr "Controleer uw installatie."
 
@@ -3437,41 +3449,41 @@ msgstr "Overschrijven"
 msgid "Filter (Sort by Count)"
 msgstr "Filter (gesorteerd naar aantal)"
 
-#: controller.cpp:421
+#: controller.cpp:422
 msgid "Do you really want to delete this entry?"
 msgstr "Weet u zeker dat u dit item wilt verwijderen?"
 
-#: controller.cpp:423
+#: controller.cpp:424
 msgid "Delete Entry"
 msgstr "Wis item"
 
-#: controller.cpp:433
+#: controller.cpp:434
 msgid "Do you really want to delete these entries?"
 msgstr "Weet u zeker dat u deze items wilt verwijderen?"
 
-#: controller.cpp:437
+#: controller.cpp:438
 msgid "Delete Multiple Entries"
 msgstr "Meerdere items wissen"
 
-#: controller.cpp:605
+#: controller.cpp:606
 msgid "&Edit Entries..."
 msgstr "&Bewerk items..."
 
-#: controller.cpp:606
+#: controller.cpp:607
 #, fuzzy
 msgid "D&uplicate Entries"
 msgstr "Bewerk items"
 
-#: controller.cpp:607
+#: controller.cpp:608
 #, fuzzy
 msgid "&Update Entries"
 msgstr "Bewerk items"
 
-#: controller.cpp:608
+#: controller.cpp:609
 msgid "&Delete Entries"
 msgstr "&Wis items"
 
-#: controller.cpp:662
+#: controller.cpp:663
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
 "support lending an item multiple times. They will be removed from the list "
@@ -4191,8 +4203,8 @@ msgstr ""
 msgid "Click to install a new template directly."
 msgstr ""
 
-#: configdialog.cpp:471
-msgid "Download.."
+#: configdialog.cpp:471 configdialog.cpp:527
+msgid "Download..."
 msgstr ""
 
 #: configdialog.cpp:474
@@ -4259,10 +4271,6 @@ msgstr "Geselecteerde items uitchecken"
 #, fuzzy
 msgid "Click to delete the selected data source."
 msgstr "Wis de geselecteerde items"
-
-#: configdialog.cpp:527
-msgid "Download..."
-msgstr ""
 
 #: configdialog.cpp:529
 #, fuzzy
@@ -4519,53 +4527,53 @@ msgstr "Wis alle zoekvelden en resultaten"
 msgid "Cancelling the search..."
 msgstr "Zoekopdracht beëindigen..."
 
-#: fetchdialog.cpp:274 fetchdialog.cpp:420
+#: fetchdialog.cpp:274 fetchdialog.cpp:432
 msgid "Searching..."
 msgstr "Zoeken..."
 
-#: fetchdialog.cpp:328
+#: fetchdialog.cpp:329
 msgid "The search returned no items."
 msgstr "De zoekopdracht gaf geen items."
 
-#: fetchdialog.cpp:331
-#, c-format
+#: fetchdialog.cpp:333
+#, fuzzy, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
 msgstr "De zoekopdracht gaf %n items."
 
-#: fetchdialog.cpp:358
+#: fetchdialog.cpp:370
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>Geen items gevonden voor de volgende ISBN waardes:</qt>"
 
-#: fetchdialog.cpp:391 fetchdialog.cpp:443
+#: fetchdialog.cpp:403 fetchdialog.cpp:455
 msgid "Fetching %1..."
 msgstr "%1 ophalen..."
 
-#: fetchdialog.cpp:476
+#: fetchdialog.cpp:488
 msgid "No Internet sources are available for your current collection type."
 msgstr "Er zijn geen internet bronnen beschikbaar voor uw huidige verzameling."
 
-#: fetchdialog.cpp:536
+#: fetchdialog.cpp:554
 #, fuzzy
 msgid "Edit ISBN/UPC Values"
 msgstr "Bewerk ISBN waardes"
 
-#: fetchdialog.cpp:540
+#: fetchdialog.cpp:558
 #, fuzzy
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Geef de ISBN waardes, één per regel.</qt>"
 
-#: fetchdialog.cpp:546
+#: fetchdialog.cpp:564
 msgid "&Load From File..."
 msgstr "&Laad van bestand..."
 
-#: fetchdialog.cpp:547
+#: fetchdialog.cpp:565
 #, fuzzy
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Laad de ISBN lijst van een bestand.</qt>"
 
-#: fetchdialog.cpp:566
+#: fetchdialog.cpp:584
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
@@ -4659,19 +4667,22 @@ msgstr "Filter wissen?"
 msgid "New collection name:"
 msgstr "Nieuwe verzamelingsnaam:"
 
-#: entryview.cpp:168
+#: entryview.cpp:169
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico kan het standaard stylesheet niet vinden."
 
-#: rc.cpp:2
+#: rc.cpp:6
+#, no-c-format
 msgid "&New"
 msgstr "&Nieuw"
 
-#: rc.cpp:5
+#: rc.cpp:15
+#, no-c-format
 msgid "&Collection"
 msgstr "&Verzameling"
 
-#: rc.cpp:8
+#: rc.cpp:24
+#, no-c-format
 msgid "Collection Toolbar"
 msgstr "Verzameling werkbalk"
 

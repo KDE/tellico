@@ -25,6 +25,7 @@ CollectionCommand::CollectionCommand(Mode mode_, Data::CollPtr origColl_, Data::
     , m_mode(mode_)
     , m_origColl(origColl_)
     , m_newColl(newColl_)
+    , m_cleanup(DoNothing)
 {
 #ifndef NDEBUG
 // just some sanity checking
@@ -32,6 +33,19 @@ CollectionCommand::CollectionCommand(Mode mode_, Data::CollPtr origColl_, Data::
     myDebug() << "CollectionCommand() - null collection pointer" << endl;
   }
 #endif
+}
+
+CollectionCommand::~CollectionCommand() {
+  switch(m_cleanup) {
+    case ClearOriginal:
+      m_origColl->clear();
+      break;
+    case ClearNew:
+      m_newColl->clear();
+      break;
+    default:
+      break;
+  }
 }
 
 void CollectionCommand::execute() {
@@ -58,6 +72,7 @@ void CollectionCommand::execute() {
       Data::Document::self()->replaceCollection(m_newColl);
       Controller::self()->slotCollectionDeleted(m_origColl);
       Controller::self()->slotCollectionAdded(m_newColl);
+      m_cleanup = ClearOriginal;
       break;
   }
 }
@@ -83,6 +98,7 @@ void CollectionCommand::unexecute() {
       Data::Document::self()->setURL(m_origURL);
       Controller::self()->slotCollectionDeleted(m_newColl);
       Controller::self()->slotCollectionAdded(m_origColl);
+      m_cleanup = ClearNew;
       break;
   }
 }
@@ -102,7 +118,8 @@ QString CollectionCommand::name() const {
 
 void CollectionCommand::copyFields() {
   m_origFields.clear();
-  for(Data::FieldVec::ConstIterator field = m_origColl->fields().begin(); field != m_origColl->fields().end(); ++field) {
+  Data::FieldVec fieldsToCopy = m_origColl->fields();
+  for(Data::FieldVec::Iterator field = fieldsToCopy.begin(); field != fieldsToCopy.end(); ++field) {
     m_origFields.append(new Data::Field(*field));
   }
 }

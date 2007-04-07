@@ -24,6 +24,7 @@
 #include <kcombobox.h>
 #include <kglobal.h> // for KMAX
 #include <kapplication.h>
+#include <kstringhandler.h>
 
 #include <qlayout.h>
 #include <qlabel.h>
@@ -67,7 +68,13 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   ProgressItem::Done done(this);
 
+  QStringList covers;
+  covers << QString::fromLatin1(".cover")
+         << QString::fromLatin1("_medium.jpg")
+         << QString::fromLatin1("_small.jpg");
+
   QTextStream ts;
+  ts.setEncoding(QTextStream::UnicodeUTF8); // YAML is always utf8?
   uint j = 0;
   for(QStringList::ConstIterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++j) {
     QFile file(dataDir.absFilePath(*it));
@@ -88,10 +95,15 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         readNextLine = true;
       }
       // skip the line that starts with ---
-      if(line.startsWith(QString::fromLatin1("---"))) {
+      if(line.isEmpty() || line.startsWith(QString::fromLatin1("---"))) {
         continue;
       }
+      if(line.endsWith(QChar('\\'))) {
+        line.truncate(line.length()-1); // remove last character
+        line += ts.readLine();
+      }
 
+      cleanLine(line);
       QString alexField = line.section(':', 0, 0);
       QString alexValue = line.section(':', 1).stripWhiteSpace();
       clean(alexValue);
@@ -105,8 +117,9 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
       if(alexField == Latin1Literal("authors")) {
         QStringList authors;
         line = ts.readLine();
-        while(!line.isNull() && line.startsWith(QString::fromLatin1("  - "))) {
-          line.remove(0, 4);
+        QRegExp begin(QString::fromLatin1("^\\s*-\\s+"));
+        while(!line.isNull() && line.find(begin) > -1) {
+          line.remove(begin);
           authors += clean(line);
           line = ts.readLine();
         }
@@ -126,22 +139,24 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         entry->setField(year, alexValue);
 
       } else if(alexField == Latin1Literal("isbn")) {
-        KURL u;
-        u.setPath(dataDir.absFilePath(alexValue + QString::fromLatin1("_medium.jpg")));
-        QString id = ImageFactory::addImage(u, true);
-        if(!id.isEmpty()) {
-          entry->setField(cover, id);
-        } else {
-          u.setPath(dataDir.absFilePath(alexValue + QString::fromLatin1("_small.jpg")));
-          id = ImageFactory::addImage(u, true);
-          if(!id.isEmpty()) {
-            entry->setField(cover, id);
-          }
-        }
         const ISBNValidator val(0);
         val.fixup(alexValue);
         entry->setField(isbn, alexValue);
 
+        // now find cover image
+        KURL u;
+        alexValue.remove('-');
+        for(QStringList::Iterator ext = covers.begin(); ext != covers.end(); ++ext) {
+          u.setPath(dataDir.absFilePath(alexValue + *ext));
+          if(!QFile::exists(u.path())) {
+            continue;
+          }
+          QString id = ImageFactory::addImage(u, true);
+          if(!id.isEmpty()) {
+            entry->setField(cover, id);
+            break;
+          }
+        }
       } else if(alexField == Latin1Literal("notes")) {
         entry->setField(comments, alexValue);
 
@@ -193,6 +208,33 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   return m_widget;
 }
 
+QString& AlexandriaImporter::cleanLine(QString& str_) {
+  static QRegExp escRx(QString::fromLatin1("\\\\x(\\w\\w)"), false);
+  str_.remove(QString::fromLatin1("\\r"));
+  str_.replace(QString::fromLatin1("\\n"), QString::fromLatin1("\n"));
+  str_.replace(QString::fromLatin1("\\t"), QString::fromLatin1("\t"));
+
+  // YAML uses escape sequences like \xC3
+  int pos = escRx.search(str_);
+  int origPos = pos;
+  QCString bytes;
+  while(pos > -1) {
+    bool ok;
+    char c = escRx.cap(1).toInt(&ok, 16);
+    if(ok) {
+      bytes += c;
+    } else {
+      bytes = QCString();
+      break;
+    }
+    pos = escRx.search(str_, pos+1);
+  }
+  if(!bytes.isEmpty()) {
+    str_.replace(origPos, bytes.length()*4, QString::fromUtf8(bytes.data()));
+  }
+  return str_;
+}
+
 QString& AlexandriaImporter::clean(QString& str_) {
   const QRegExp quote(QString::fromLatin1("\\\\\"")); // equals \"
   if(str_.startsWith(QChar('\'')) || str_.startsWith(QChar('"'))) {
@@ -201,6 +243,8 @@ QString& AlexandriaImporter::clean(QString& str_) {
   if(str_.endsWith(QChar('\'')) || str_.endsWith(QChar('"'))) {
     str_.truncate(str_.length()-1);
   }
+  // we ignore YAML tags, this is not actually a good parser, but will do for now
+  str_.remove(QRegExp(QString::fromLatin1("^![^\\s]*\\s+")));
   return str_.replace(quote, QChar('"'));
 }
 

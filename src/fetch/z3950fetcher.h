@@ -110,6 +110,7 @@ private:
   QString m_value;
   QMap<int, Data::EntryPtr> m_entries;
   bool m_started;
+  bool m_done;
   QString m_preset;
 
   XSLTHandler* m_MARC21XMLHandler;

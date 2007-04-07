@@ -1,7 +1,4 @@
-####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = libnewstuff.a
-
-## INCLUDES were found outside kdevelop specific part
 
 libnewstuff_a_METASOURCES = AUTO
 
@@ -15,9 +12,7 @@ dialog.h dialog.cpp \
 newscript.h newscript.cpp \
 providerloader.h providerloader.cpp
 
-####### kdevelop will overwrite this part!!! (end)############
-
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 
 KDE_OPTIONS = noautodist
 

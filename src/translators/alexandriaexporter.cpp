@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2007 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,9 +19,11 @@
 #include "../image.h"
 #include "../tellico_utils.h"
 //#include "../tellico_debug.h"
+#include "../progressmanager.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <kapplication.h>
 
 #include <qdir.h>
 
@@ -43,16 +45,18 @@ QString AlexandriaExporter::formatString() const {
 
 bool AlexandriaExporter::exec() {
   Data::CollPtr coll = collection();
-  if(!coll || coll->type() != Data::Collection::Book || coll->type() != Data::Collection::Bibtex) {
+  if(!coll || (coll->type() != Data::Collection::Book && coll->type() != Data::Collection::Bibtex)) {
+    myLog() << "AlexandriaExporter::exec() - bad collection" << endl;
     return false;
   }
 
-  QString alexDirName = QString::fromLatin1(".alexandria");
+  const QString alexDirName = QString::fromLatin1(".alexandria");
 
   // create if necessary
   QDir libraryDir = QDir::home();
   if(!libraryDir.cd(alexDirName)) {
     if(!libraryDir.mkdir(alexDirName) || !libraryDir.cd(alexDirName)) {
+      myLog() << "AlexandriaExporter::exec() - can't locate directory" << endl;
       return false;
     }
   }
@@ -70,9 +74,20 @@ bool AlexandriaExporter::exec() {
     return false; // could not create and cd to the dir
   }
 
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString::null, false);
+  item.setTotalSteps(entries().count());
+  ProgressItem::Done done(this);
+  const uint stepSize = QMIN(1, entries().count()/100);
+
+  GUI::CursorSaver cs;
   bool success = true;
-  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
+  uint j = 0;
+  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt, ++j) {
     success &= writeFile(libraryDir, entryIt.data());
+    if(j%stepSize == 0) {
+      item.setProgress(j);
+      kapp->processEvents();
+    }
   }
   return success;
 }

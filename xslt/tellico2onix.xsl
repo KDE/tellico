@@ -69,20 +69,20 @@
 
 <xsl:template match="tc:entry">
  <Product>
+  <RecordReference>
+   <xsl:value-of select="@id"/>
+  </RecordReference>
+  <NotificationType>03</NotificationType>
   <RecordSourceName>
    <xsl:text>Tellico</xsl:text>
    <xsl:if test="string-length($version) &gt; 0">
     <xsl:value-of select="concat(' ', $version)"/>
    </xsl:if>
   </RecordSourceName>
-  <RecordReference>
-   <xsl:value-of select="@id"/>
-  </RecordReference>
-  <NotificationType>03</NotificationType>
-  <ProductForm>BA</ProductForm> <!-- book -->
   <ISBN>
    <xsl:value-of select="translate(tc:isbn, '-', '')"/>
   </ISBN>
+  <ProductForm>BA</ProductForm> <!-- book -->
   <DistinctiveTitle>
    <xsl:value-of select=".//tc:title[1]"/>
   </DistinctiveTitle>
@@ -94,9 +94,6 @@
     </PersonName>
    </Contributor>
   </xsl:for-each>
-  <PublisherName>
-   <xsl:value-of select=".//tc:publisher[1]"/>
-  </PublisherName>
   <xsl:if test="tc:comments">
    <OtherText>
     <TextTypeCode>12</TextTypeCode>
@@ -132,13 +129,16 @@
    </MediaFile>
   </xsl:if>
 
-  <ProductWebSite>
+  <ProductWebsite>
    <ProductWebsiteDescription>Amazon</ProductWebsiteDescription>
    <ProductWebsiteLink>
     <xsl:text>http://www.amazon.com/exec/obidos/ASIN/</xsl:text>
     <xsl:value-of select="translate(tc:isbn, '-', '')"/>
    </ProductWebsiteLink>
-  </ProductWebSite>
+  </ProductWebsite>
+  <PublisherName>
+   <xsl:value-of select=".//tc:publisher[1]"/>
+  </PublisherName>
  </Product>
 </xsl:template>
 

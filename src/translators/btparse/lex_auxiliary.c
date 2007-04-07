@@ -438,9 +438,9 @@ void toplevel_junk (void)
 }
 
 
-void name (void)
+void bibname (void)
 {
-   report_state ("name (pre)");
+   report_state ("bibname (pre)");
 
    switch (EntryState)
    {
@@ -483,7 +483,7 @@ void name (void)
          break;                         /* do nothing */
    }
 
-   report_state ("name (post)");
+   report_state ("bibname (post)");
 
 }
 

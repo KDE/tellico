@@ -30,6 +30,8 @@ extern "C" {
 
 #include <klocale.h>
 
+#include <qfile.h>
+
 namespace {
   static const size_t Z3950_DEFAULT_MAX_RECORDS = 20;
 }
@@ -259,18 +261,30 @@ void Z3950Connection::run() {
   for(size_t i = m_start; i < realLimit && !m_aborted; ++i) {
     ZOOM_record rec = ZOOM_resultset_record(resultSet, i);
     if(!rec) {
-      myDebug() << "Z3950Fetcher::process() - no record returned for index " << i << endl;
+      myDebug() << "Z3950Connection::process() - no record returned for index " << i << endl;
       continue;
+    } else {
+      myLog() << "Z3950Connection::run() - grabbing index " << i << endl;
     }
     int len;
     QString data;
     if(m_syntax == Latin1Literal("mods")) {
-      // we're going to parse the rendered data, very ugly...
       data = toString(ZOOM_record_get(rec, "xml", &len));
     } else if(m_syntax == Latin1Literal("grs-1")) { // grs-1
       // we're going to parse the rendered data, very ugly...
       data = toString(ZOOM_record_get(rec, "render", &len));
     } else {
+#if 0
+      kdWarning() << "Remove debug from z3950connection.cpp" << endl;
+      {
+        QFile f1(QString::fromLatin1("/tmp/z3950.raw"));
+        if(f1.open(IO_WriteOnly)) {
+          QDataStream t(&f1);
+          t << ZOOM_record_get(rec, "raw", &len);
+        }
+        f1.close();
+      }
+#endif
       data = toXML(ZOOM_record_get(rec, "raw", &len), m_sourceCharSet);
     }
     Z3950ResultFound ev(data);
@@ -370,7 +384,7 @@ QCString Z3950Connection::iconvRun(const QCString& text_, const QString& fromCha
     } else if(charSetLower == Latin1Literal("iso6937")) {
       return iconvRun(Iso6937Converter::toUtf8(text_).utf8(), QString::fromLatin1("utf-8"), toCharSet_);
     }
-    kdWarning() << "Z3950Fetcher::iconvRun() - conversion from " << fromCharSet_
+    kdWarning() << "Z3950Connection::iconvRun() - conversion from " << fromCharSet_
                 << " to " << toCharSet_ << " is unsupported" << endl;
     return text_;
   }
@@ -384,7 +398,7 @@ QCString Z3950Connection::iconvRun(const QCString& text_, const QString& fromCha
 
   int r = yaz_iconv(cd, const_cast<char**>(&input), &inlen, &result, &outlen);
   if(r <= 0) {
-    myDebug() << "Z3950Fetcher::iconvRun() - can't decode buffer" << endl;
+    myDebug() << "Z3950Connection::iconvRun() - can't decode buffer" << endl;
     return text_;
   }
 
@@ -404,7 +418,7 @@ QCString Z3950Connection::iconvRun(const QCString& text_, const QString& fromCha
 QString Z3950Connection::toXML(const QCString& marc_, const QString& charSet_) {
 #if HAVE_YAZ
   if(marc_.isEmpty()) {
-    myDebug() << "Z3950Fetcher::toXML() - empty string" << endl;
+    myDebug() << "Z3950Connection::toXML() - empty string" << endl;
     return QString::null;
   }
 
@@ -418,7 +432,7 @@ QString Z3950Connection::toXML(const QCString& marc_, const QString& charSet_) {
     } else if(charSetLower == Latin1Literal("iso6937")) {
       return toXML(Iso6937Converter::toUtf8(marc_).utf8(), QString::fromLatin1("utf-8"));
     }
-    kdWarning() << "Z3950Fetcher::toXML() - conversion from " << charSet_ << " is unsupported" << endl;
+    kdWarning() << "Z3950Connection::toXML() - conversion from " << charSet_ << " is unsupported" << endl;
     return QString::null;
   }
 
@@ -430,14 +444,14 @@ QString Z3950Connection::toXML(const QCString& marc_, const QString& charSet_) {
   bool ok;
   int len = marc_.left(5).toInt(&ok);
   if(ok && (len < 25 || len > 100000)) {
-    myDebug() << "Z3950Fetcher::toXML() - bad length: " << (ok ? len : -1) << endl;
+    myDebug() << "Z3950Connection::toXML() - bad length: " << (ok ? len : -1) << endl;
     return QString::null;
   }
 
   char* result;
   int r = yaz_marc_decode_buf(mt, marc_, -1, &result, &len);
   if(r <= 0) {
-    myDebug() << "Z3950Fetcher::toXML() - can't decode buffer" << endl;
+    myDebug() << "Z3950Connection::toXML() - can't decode buffer" << endl;
     return QString::null;
   }
 

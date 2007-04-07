@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2007 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,14 +11,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ENTRYITEM_H
-#define ENTRYITEM_H
+#ifndef TELLICO_ENTRYITEM_H
+#define TELLICO_ENTRYITEM_H
 
 #include "gui/listview.h"
 #include "datavectors.h"
 
 namespace Tellico {
-  class DetailedListView;
   namespace GUI {
     class CountedItem;
   }
@@ -36,12 +35,12 @@ class EntryItem : public GUI::ListViewItem {
 public:
   /**
    * This constructor is for items which are direct children of a ListView object,
-   * which is just the @ref DetailedListView. Custom sorting is used, so t
+   * which is just the @ref DetailedListView.
    *
    * @param parent A pointer to the parent
    * @param entry A pointer to the entry to which the item refers
    */
-  EntryItem(DetailedListView* parent, Data::EntryPtr entry);
+  EntryItem(GUI::ListView* parent, Data::EntryPtr entry);
   /**
    * This constructor is for items which have other KListViewItems as parents. It
    * initializes the text in the first column, as well.
@@ -54,16 +53,6 @@ public:
 
   virtual bool isEntryItem() const { return true; }
 
-  /**
-   * Compares one column to another. If the parent is a @ref DetailedListView,
-   * it calls @ref compareColumn, otherwise just does default comparison.
-   *
-   * @param item Pointer to comparison item
-   * @param col Column to compare
-   * @param ascending Whether ascending or descing comparison, ignored
-   * @return Comparison result, -1,0, or 1
-   */
-  virtual int compare(QListViewItem* item, int col, bool ascending) const;
   /**
    * Returns the key for the list item. The key is just the text, unless there is none,
    * in which case a tab character is returned if there is a non-null pixmap.
@@ -83,16 +72,6 @@ public:
   virtual Data::EntryVec entries() const;
 
 private:
-  /**
-   * Compares one column to another, calling @ref DetailedListView::isNumber() and
-   * using that to determine whether to do numerical or alphabetical comparison.
-   *
-   * @param item Pointer to comparison item
-   * @param col Column to compare
-   * @return Comparison result, -1,0, or 1
-   */
-  int compareColumn(QListViewItem* item, int col) const;
-
   Data::EntryPtr m_entry;
   // if the parent is a DetailedListView
   // this way, I don't have to call listView()->isA("Tellico::DetailedListView") every time

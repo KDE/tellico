@@ -1,7 +1,7 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 noinst_LIBRARIES = libfetch.a
 
-INCLUDES = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(YAZ_CFLAGS)
+AM_CPPFLAGS = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(YAZ_CFLAGS)
 
 libfetch_a_METASOURCES = AUTO
 

@@ -67,7 +67,7 @@ private slots:
   void slotStatus(const QString& status);
   void slotUpdateStatus();
 
-  void slotFetchDone();
+  void slotFetchDone(bool checkISBN = true);
   void slotResultFound(Tellico::Fetch::SearchResult* result);
   void slotKeyChanged(int);
   void slotSourceChanged(const QString& source);

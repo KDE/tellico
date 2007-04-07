@@ -34,6 +34,7 @@
 #include "../tellico_debug.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
+#include "../isbnvalidator.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -59,7 +60,7 @@ using Tellico::Fetch::Z3950Fetcher;
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const char* name_)
     : Fetcher(parent_, name_), m_conn(0), m_port(Z3950_DEFAULT_PORT), m_esn(Z3950_DEFAULT_ESN),
-      m_config(0), m_started(false), m_MARC21XMLHandler(0),
+      m_config(0), m_started(false), m_done(true), m_MARC21XMLHandler(0),
       m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
 }
 
@@ -135,6 +136,7 @@ void Z3950Fetcher::readConfigHook(KConfig* config_, const QString& group_) {
 void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
 #if HAVE_YAZ
   m_started = true;
+  m_done = false;
   if(m_host.isEmpty() || m_dbname.isEmpty()) {
     myDebug() << "Z3950Fetcher::search() - settings are not set!" << endl;
     stop();
@@ -164,7 +166,15 @@ void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
         m_pqn.truncate(0);
         QString s = m_value;
         s.remove('-');
-        const QStringList isbnList = QStringList::split(QString::fromLatin1("; "), s);
+        QStringList isbnList = QStringList::split(QString::fromLatin1("; "), s);
+        // also going to search for isbn10 values
+        for(QStringList::Iterator it = isbnList.begin(); it != isbnList.end(); ++it) {
+          if((*it).startsWith(QString::fromLatin1("978"))) {
+            QString isbn10 = ISBNValidator::isbn10(*it);
+            isbn10.remove('-');
+            isbnList.insert(it, isbn10);
+          }
+        }
         const int count = isbnList.count();
         if(count > 1) {
           m_pqn = QString::fromLatin1("@or ");
@@ -218,7 +228,9 @@ void Z3950Fetcher::stop() {
 //  myDebug() << "Z3950Fetcher::stop()" << endl;
   m_started = false;
   if(m_conn) {
-    m_conn->wait();
+   // give it a second to cleanup
+    m_conn->abort();
+    m_conn->wait(1000);
   }
   emit signalDone(this);
 }
@@ -407,6 +419,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 }
 
 void Z3950Fetcher::done() {
+  m_done = true;
   stop();
 }
 
@@ -420,6 +433,9 @@ void Z3950Fetcher::customEvent(QCustomEvent* event_) {
   }
 
   if(event_->type() == Z3950ResultFound::uid()) {
+    if(m_done) {
+      kdWarning() << "Z3950Fetcher::customEvent() - result returned after done signal!" << endl;
+    }
     Z3950ResultFound* e = static_cast<Z3950ResultFound*>(event_);
     handleResult(e->result());
   } else if(event_->type() == Z3950ConnectionDone::uid()) {
@@ -431,13 +447,16 @@ void Z3950Fetcher::customEvent(QCustomEvent* event_) {
     m_conn->wait();
     done();
   } else if(event_->type() == Z3950SyntaxChange::uid()) {
+    if(m_done) {
+      kdWarning() << "Z3950Fetcher::customEvent() - syntax changed after done signal!" << endl;
+    }
     Z3950SyntaxChange* e = static_cast<Z3950SyntaxChange*>(event_);
     if(m_syntax != e->syntax()) {
       m_syntax = e->syntax();
       if(m_config) {
-        KConfigGroupSaver groupSaver(m_config, m_configGroup);
-        m_config->writeEntry("Syntax", m_syntax);
-        m_config->sync();
+        KConfigGroup group(m_config, m_configGroup);
+        group.writeEntry("Syntax", m_syntax);
+        group.sync();
       }
     }
   }

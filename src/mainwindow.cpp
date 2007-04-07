@@ -1168,7 +1168,7 @@ bool MainWindow::fileSave() {
   if(isNewDocument()) {
     ret = fileSaveAs();
   } else {
-    // special check: if there are more than 100 images AND the "Write Images In File" config key
+    // special check: if there are more than 200 images AND the "Write Images In File" config key
     // is not set, then warn user that performance may suffer, and write result
     if(Config::askWriteImagesInFile()
        && Data::Document::self()->imageCount() > MAX_IMAGES_WARN_PERFORMANCE) {
@@ -1539,15 +1539,14 @@ void MainWindow::slotUpdateCollectionToolBar(Data::CollPtr coll_) {
     current = coll_->defaultGroupField();
   }
 
-  QStringList groups = coll_->entryGroups();
+  const QStringList groups = coll_->entryGroups();
   if(groups.isEmpty()) {
     m_entryGrouping->clear();
     return;
   }
 
   QMap<QString, QString> groupMap; // use a map so they get sorted
-  QStringList::ConstIterator groupIt = groups.begin();
-  for(int i = 0; groupIt != groups.end(); ++groupIt, ++i) {
+  for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
     // special case for people "pseudo-group"
     if(*groupIt == Data::Collection::s_peopleGroupName) {
       groupMap.insert(*groupIt, QString::fromLatin1("<") + i18n("People") + QString::fromLatin1(">"));

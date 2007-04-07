@@ -157,7 +157,7 @@ zzfree_ast(AST *tree)
 AST *zztmake(AST *rt, ...)
 {
 	va_list ap;
-	register AST *child, *sibling=NULL, *tail, *w;
+	register AST *child, *sibling=NULL, *tail=NULL, *w;
 	AST *root;
 
 	va_start(ap, rt);

@@ -28,6 +28,7 @@ QTabBar* TabControl::tabBar() const {
 
 void TabControl::setFocusToFirstChild() {
   QWidget* page = currentPage();
+  Q_ASSERT(page);
   QObjectList* list = page->queryList("QWidget");
   for(QObjectListIt it(*list); it.current(); ++it) {
     QWidget* w = static_cast<QWidget*>(it.current());

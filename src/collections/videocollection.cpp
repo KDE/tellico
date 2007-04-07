@@ -44,7 +44,7 @@ Tellico::Data::FieldVec VideoCollection::defaultFields() {
   list.append(field);
 
   QStringList media;
-  media << i18n("DVD") << i18n("VHS") << i18n("VCD") << i18n("DivX");
+  media << i18n("DVD") << i18n("VHS") << i18n("VCD") << i18n("DivX") << i18n("Blu-ray") << i18n("HD DVD");
   field = new Field(QString::fromLatin1("medium"), i18n("Medium"), media);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);

@@ -86,7 +86,7 @@ condition | signed | read | gift | loaned | rating | comments |
 entry-type | bibtex-key | booktitle | editors | organization | year |
 journal | month | number | howpublished | chapter | volume | crossref
 | note | medium | artists | album | label | tracks | certification |
-region | nationality | format | casts | directors | producers |
+region | nationalitys | format | casts | directors | producers |
 writers | composers | studios | subtitles | audio-tracks |
 running-time | aspect-ratios | widescreen | color | directors-cut |
 plot | player | team | brand | location | quantity | front | back |
@@ -159,6 +159,7 @@ allcertification | address | abstract)+>
 <!-- video -->
 <!ELEMENT certification (#PCDATA)>
 <!ELEMENT region (#PCDATA)>
+<!ELEMENT nationalitys (nationality+)>
 <!ELEMENT nationality (#PCDATA)>
 <!ELEMENT format (#PCDATA)>
 <!ELEMENT casts (cast+)>

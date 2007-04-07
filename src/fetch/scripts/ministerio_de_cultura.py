@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 
 # ***************************************************************************
-#    copyright            : (C) 2006 by Mathias Monnerville
+#    copyright            : (C) 2006-2007 by Mathias Monnerville
 #    email                : tellico@monnerville.com
 # ***************************************************************************
 #
@@ -14,7 +14,7 @@
 # *                                                                         *
 # ***************************************************************************
 
-# $Id: books_ministerio_de_cultura.py 242 2006-06-06 11:23:54Z mathias $
+# $Id: books_ministerio_de_cultura.py 428 2007-03-07 13:17:17Z mathias $
 
 """
 This script has to be used with tellico (http://periapsis.org/tellico) as an external data source program.
@@ -36,6 +36,20 @@ Person (checked) 	= -a %1
 ISBN (checked)  	= -i %1
 UPC (checked)		= -i %1
 Update (checked) = %{title}
+
+** Please note that this script is also part of the Tellico's distribution. 
+** You will always find the latest version in the SVN trunk of Tellico
+
+Version 0.3.1:
+Bug Fixes:
+	* The 'tr.' string does not appear among authors anymore
+	* Fixed an AttributeError exception related to a regexp matching the number of pages
+
+Version 0.3:
+Bug Fixes:
+	* URL of the search engine has changed:
+		http://www.mcu.es/bases/spa/isbn/ISBN.html is now http://www.mcu.es/comun/bases/isbn/ISBN.html
+	* All the regexps have been rewritten to match the new site's content
 
 Version 0.2:
 New features:
@@ -62,7 +76,7 @@ XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 NULLSTRING = ''
 
-VERSION = "0.2"
+VERSION = "0.3"
 
 ISBN, AUTHOR, TITLE = range(3)
 
@@ -162,7 +176,7 @@ class BasicTellicoDOM:
 		pagesNode.appendChild(self.__doc.createTextNode(d['pages']))
 
 		isbnNode = self.__doc.createElement('isbn')
-		isbnNode.appendChild(self.__doc.createTextNode(d['isbn'][0]))
+		isbnNode.appendChild(self.__doc.createTextNode(d['isbn']))
 
 		priceNode = self.__doc.createElement('pur_price')
 		priceNode.appendChild(self.__doc.createTextNode(d['pur_price']))
@@ -198,24 +212,25 @@ class BasicTellicoDOM:
 
 class MinisterioCulturaParser:
 	def __init__(self):
-		# Search form is at http://www.mcu.es/bases/spa/isbn/ISBN.html
-		self.__baseURL 	 = 'http://www.mcu.es'
-		self.__searchURL = '/cgi-bin/BRSCGI?CMD=VERLST&BASE=ISBN&CONF=AEISPA.cnf&OPDEF=AND&DOCS=1-10&SEPARADOR=&WGEN-C=&' + \
-						   'WISB-C=%s&WAUT-C=%s&WTIT-C=%s&WMAT-C=&WEDI-C=&'
-		self.__suffixURL = 'WFEP-C=&%40T353-GE=&%40T353-LE=&WSER-C=&WLUG-C=&WDIS-C=DISPONIBLE+or+AGOTADO&WLEN-C=&WCLA-C=&WSOP-C='
+		# Search form is at http://www.mcu.es/comun/bases/isbn/ISBN.html
+		self.__baseURL	 = 'http://www.mcu.es'
+		self.__searchURL = '/cgi-brs/BasesHTML/isbn/BRSCGI?CMD=VERLST&BASE=ISBN&DOCS=1-15&CONF=AEISPA.cnf&OPDEF=AND&SEPARADOR=' + \
+						   '&WDIS-C=DISPONIBLE&WGEN-C=&WISB-C=%s&WAUT-C=%s&WTIT-C=%s&WMAT-C=&WEDI-C=&'
+		self.__suffixURL = 'WFEP-C=&%40T353-GE=&%40T353-LE=&WSER-C=&WLUG-C=&WLEN-C=&WCLA-C=&WSOP-C='
 
 		# Define some regexps
-		self.__regExps = { 	'author'		: '<th scope="row">Autor:.*?<ul>(?P<author>.*?)</ul>',
-							'isbn'			: '<th scope="row">ISBN:.*?<td>(?P<isbn>.*?)</td>',
-							'title'			: '<th scope="row">T.tulo:.*?<td>(?P<title>.*?)</td>',
-							'language'		: '<th scope="row">Lengua:.*?<li>(?P<language>.*?)</li>',
-							'edition'		: '<th scope="row">Edici.n:.*?<td>(?P<edition>.*?)</td>',
-							'pur_price'		: '<th scope="row">Precio:.*?<li>(?P<pur_price>.*?)</li>',
-							'desc'			: '<th scope="row">Descripci.n:.*?<td>(?P<desc>.*?)</td>',
-							'publication'	: '<th scope="row">Publicaci.n:.*?<li>(?P<publication>.*?)</li>',
-							'collection'	: '<th scope="row">Colecci.n:.*?<li>(?P<collection>.*?)</li>',
-							'keyword'		: '<th scope="row">Materias:.*?<li>(?P<keywords>.*?)</li>',
-							'cdu'			: '<th scope="row">CDU:.*?<td>(?P<cdu>.*?)</td>',
+		self.__regExps = { 	'author'		: '<th scope="row">Autor:.*?<td>(?P<author>.*?)</td>',
+							'isbn'			: '<span class="cabTitulo">ISBN.*?<strong>(?P<isbn>.*?)</strong>',	# Matches ISBN 13
+							'title'			: '<th scope="row">T&iacute;tulo:.*?<td>(?P<title>.*?)</td>',
+							'language'		: '<th scope="row">Lengua:.*?<td>(?P<language>.*?)</td>',
+							'edition'		: '<th scope="row">Edici&oacute;n:.*?<td>.*?<span>(?P<edition>.*?)</span>',
+							'pur_price'		: '<th scope="row">Precio:.*?<td>.*?<span>(?P<pur_price>.*?)&euro;</span>',
+							'desc'			: '<th scope="row">Descripci&oacute;n:.*?<td>.*?<span>(?P<desc>.*?)</span>',
+							'publication'	: '<th scope="row">Publicaci&oacute;n:.*?<td>.*?<span>(?P<publication>.*?)</span>',
+							'keyword'		: '<th scope="row">Materias:.*?<td>.*?<span>(?P<keywords>.*?)</span>',
+							'cdu'			: '<th scope="row">CDU:.*?<td><span>(?P<cdu>.*?)</span></td>',
+							'encuadernacion': '<th scope="row">Encuadernaci&oacute;n:.*?<td>.*?<span>(?P<encuadernacion>.*?)</span>',
+							'collection'	: '<th scope="row">Colecci&oacute;n:.*?<td>.*?<span>(?P<collection>.*?)</span>'
 						}	
 
 		# Compile patterns objects
@@ -256,7 +271,7 @@ class MinisterioCulturaParser:
 		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent() 
 		that need to be parsed.
 		"""
-		matchList = re.findall("""<div class="info"><p>.*?<A target="_top" HREF="(?P<url>.*?)">""", self.__data, re.S)
+		matchList = re.findall("""<div class="isbnResDescripcion">.*?<p>.*?<A target="_top" HREF="(?P<url>.*?)">""", self.__data, re.S)
 
 		if not matchList: return None
 		return matchList
@@ -277,24 +292,19 @@ class MinisterioCulturaParser:
 
 			if matches[name]:
 				if name == 'title':
-					data['title'] = matches[name].group('title').strip()
+					d = matches[name].group('title').strip()
+					d = re.sub('<.?strong>', '', d)
+					d = re.sub('\n', '', d)
+					data['title'] = d
 
 				elif name == 'isbn':
-					d = matches[name].group('isbn').strip()
-					d = re.sub('&nbsp;', '', d)
-					d = re.sub('</?[Aa].*?>', '', d)
-					isbnList = re.findall('[\w\d-]+', d)
-				
-					# Only first element will be added to the ibsn element
-					data['isbn'] = isbnList
+					data['isbn'] = matches[name].group('isbn').strip()
 
 				elif name == 'edition':
 					data['edition'] = matches[name].group('edition').strip()
 
 				elif name == 'pur_price':
 					d = matches[name].group('pur_price')
-					d = re.sub('</?span.*?>', '', d)
-					d = re.sub('\n\x80', '', d)
 					data['pur_price'] = d.strip() + ' EUR'
 
 				elif name == 'publication':
@@ -306,20 +316,21 @@ class MinisterioCulturaParser:
 					# d[1] is an empty string
 					data['publisher'] = "%s (%s)" % (d[2], d[0])
 					data['pub_year'] = re.sub('\d{2}\/', '', d[3])
+					del data['publication']
 
 				elif name == 'desc':
 					d = matches[name].group('desc')
 					m = re.search('\d+ ', d)
-					data['pages'] = m.group(0).strip()
+					data['pages'] = '' # When not available
+					if m:
+						data['pages'] = m.group(0).strip()
 					m = re.search('; (?P<format>.*cm)', d)
 					if m:
 						data['comments'].append('Format: ' + m.group('format').strip())
 					del data['desc']
 
-				elif name == 'collection':
-					d = matches[name].group('collection').strip()
-					d = re.sub('&nbsp;', '', d)
-					data[name] = d
+				elif name == 'encuadernacion':
+					data['comments'].append(matches[name].group('encuadernacion').strip())
 
 				elif name == 'keyword':
 					d = matches[name].group('keywords')
@@ -328,6 +339,11 @@ class MinisterioCulturaParser:
 
 				elif name == 'cdu':
 					data['comments'].append('CDU: ' + matches[name].group('cdu').strip())
+				
+				elif name == 'collection':
+					d = matches[name].group('collection').strip()
+					d = re.sub('&nbsp;', ' ', d)
+					data[name] = d
 
 				elif name == 'author':
 					# We may find several authors
@@ -344,21 +360,34 @@ class MinisterioCulturaParser:
 							# Sometimes, the search engine outputs some image between a elements
 							if d.strip()[:4] != '<img':
 								data[name].append(d.strip())
+					# Removes any tr. fake author in the list
+					j = 0; max = len(data[name])
+					try:
+						while j < max:
+							data[name].remove('tr.')
+							j += 1
+					except ValueError:
+						# No more occurence
+						pass
 
 				elif name == 'language':
 					# We may find several languages
 					d =  matches[name].group('language')
-					d = re.sub('</?span.*?>', '', d)
-					d = re.sub('&nbsp;', '', d)
-					d = d.strip()
-					d = d.split('\n')
+					d = re.sub('\n', '', d)
+					d = d.split('<span>')
 					a = []
-					i = 0
-					while i < len(d):
-						if d[i][-1:] == ':':
-							a.append("%s %s" % (d[i], d[i+1]))
-						i += 1
-					data['language'] = a	
+					for lg in d:
+						if len(lg):
+							lg = re.sub('</span>', '', lg)
+							# Because HTML is not interpreted in the 'language' field of Tellico
+							lg = re.sub('&oacute;', 'o', lg)
+							a.append(lg.strip())
+					# Removes that word so that only the language name remains.
+					a[0] = re.sub('publicacion: ', '', a[0])
+					data['language'] = a
+					# Add other language related info to the 'comments' field too
+					for lg in a[1:]:
+						data['comments'].append(lg)
 
 		return data
 
@@ -398,8 +427,6 @@ class MinisterioCulturaParser:
 			for entry in links:
 				data = self.__fetchBookInfo( url = self.__baseURL + entry.replace(' ', '%20') )
 				node = self.__domTree.addEntry(data)
-				# Print entries on-the-fly
-				#self.__domTree.printEntry(node)
 		else:
 			return None
 

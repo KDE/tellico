@@ -111,6 +111,7 @@ public:
    * @param input The raw string, hyphens included
    */
   virtual void fixup(QString& input) const;
+  static void staticFixup(QString& input);
 
   static QString isbn10(QString isbn13);
   static QString isbn13(QString isbn10);
@@ -126,8 +127,8 @@ private:
   QValidator::State validate10(QString& input, int& pos) const;
   QValidator::State validate13(QString& input, int& pos) const;
 
-  void fixup10(QString& input) const;
-  void fixup13(QString& input) const;
+  static void fixup10(QString& input);
+  static void fixup13(QString& input);
 
   /**
    * This function calculates and returns the ISBN checksum. The

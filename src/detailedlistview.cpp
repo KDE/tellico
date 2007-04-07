@@ -22,6 +22,7 @@
 #include "tellico_debug.h"
 #include "tellico_kernel.h"
 #include "core/tellico_config.h"
+#include "listviewcomparison.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -69,6 +70,7 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
           this, SLOT(slotHeaderMenuActivated(int)));
 
   m_checkPix = UserIcon(QString::fromLatin1("checkmark"));
+  m_comparisons.setAutoDelete(true);
 }
 
 DetailedListView::~DetailedListView() {
@@ -299,8 +301,7 @@ void DetailedListView::removeCollection(Data::CollPtr coll_) {
   m_headerMenu->insertTitle(i18n("View Columns"));
 
   m_columnWidths.clear();
-  m_isNumber.clear();
-  m_isTitle.clear();
+  m_comparisons.clear();
   m_entryPix = QPixmap();
 
   // clear the filter, too
@@ -585,8 +586,7 @@ void DetailedListView::addField(Data::FieldPtr field_, int width_) {
   // but m_columnWidths is the cached width, so just set it to 0
   m_columnWidths.push_back(KMAX(width_, 0));
 
-  m_isNumber.push_back(field_->type() == Data::Field::Number);
-  m_isTitle.push_back(field_->formatFlag() == Data::Field::FormatTitle);
+  m_comparisons.append(ListViewComparison::create(field_));
   m_isDirty.push_back(true);
 
   int id = m_headerMenu->insertItem(field_->title());
@@ -609,8 +609,7 @@ void DetailedListView::modifyField(Tellico::Data::CollPtr, Data::FieldPtr oldFie
 
   // I thought this would have to be mapped to index, but not the case
   setColumnText(sec, newField_->title());
-  m_isNumber[sec] = (newField_->type() == Data::Field::Number);
-  m_isTitle[sec] = (newField_->formatFlag() == Data::Field::FormatTitle);
+  m_comparisons.replace(sec, ListViewComparison::create(newField_));
   if(newField_->type() == Data::Field::Bool
      || newField_->type() == Data::Field::Number
      || newField_->type() == Data::Field::Image) {
@@ -649,8 +648,7 @@ void DetailedListView::removeField(Tellico::Data::CollPtr, Data::FieldPtr field_
   m_headerMenu->removeItem(m_headerMenu->idAt(sec+1)); // add 1 since menu has title
 
   m_columnWidths.erase(&m_columnWidths[sec]);
-  m_isNumber.erase(&m_isNumber[sec]);
-  m_isTitle.erase(&m_isTitle[sec]);
+  m_comparisons.remove(sec);
   m_isDirty.erase(&m_isDirty[sec]);
 
   // I thought this would have to be mapped to index, but not the case
@@ -689,8 +687,7 @@ void DetailedListView::reorderFields(const Data::FieldVec& fields_) {
     } else {
       setColumnAlignment(sec, Qt::AlignLeft | Qt::AlignVCenter);
     }
-    m_isNumber[sec] = (it->type() == Data::Field::Number);
-    m_isTitle[sec] = (it->formatFlag() == Data::Field::FormatTitle);
+    m_comparisons.replace(sec, ListViewComparison::create(it.data()));
 
     if(isVisible) {
       showColumn(sec);
@@ -724,15 +721,6 @@ void DetailedListView::setSorting(int column_, bool ascending_/*=true*/) {
     m_prevSortColumn = columnSorted();
   }
   GUI::ListView::setSorting(column_, ascending_);
-}
-
-// it's possible to have a zero-length vector and have this called, so check bounds
-bool DetailedListView::isNumber(int column_) const {
-  return column_ < static_cast<int>(m_isNumber.size()) && m_isNumber[column_];
-}
-
-bool DetailedListView::isTitle(int column_) const {
-  return column_ < static_cast<int>(m_isTitle.size()) && m_isTitle[column_];
 }
 
 void DetailedListView::updateFirstSection() {
@@ -884,6 +872,21 @@ void DetailedListView::resetEntryStatus() {
     static_cast<DetailedEntryItem*>(it.current())->setState(DetailedEntryItem::Normal);
   }
   triggerUpdate();
+}
+
+int DetailedListView::compare(int col, const QListViewItem* item1, QListViewItem* item2, bool asc) {
+  int res = 0;
+  return (res = compareColumn(col,               item1, item2, asc)) != 0 ? res :
+         (res = compareColumn(m_prevSortColumn,  item1, item2, asc)) != 0 ? res :
+         (res = compareColumn(m_prev2SortColumn, item1, item2, asc)) != 0 ? res : 0;
+}
+
+int DetailedListView::compareColumn(int col, const QListViewItem* item1, QListViewItem* item2, bool asc) {
+  if(col < 0 || col >= static_cast<int>(m_comparisons.count())) {
+    return 0;
+  }
+  ListViewComparison* com = m_comparisons.at(col);
+  return com ? com->compare(col, item1, item2, asc) : item1->compare(item2, col, asc);
 }
 
 #include "detailedlistview.moc"

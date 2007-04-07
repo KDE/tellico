@@ -192,11 +192,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
 }
 
 QStringList Entry::fields(Data::FieldPtr field_, bool formatted_) const {
-  QString s = formatted_ ? formattedField(field_) : field(field_);
-  if(s.isEmpty()) {
-    return QStringList();
-  }
-  return QStringList::split(QString::fromLatin1("; "), s, true);
+  return fields(field_->name(), formatted_);
 }
 
 QStringList Entry::fields(const QString& field_, bool formatted_) const {
@@ -204,7 +200,7 @@ QStringList Entry::fields(const QString& field_, bool formatted_) const {
   if(s.isEmpty()) {
     return QStringList();
   }
-  return QStringList::split(QString::fromLatin1("; "), s, true);
+  return Field::split(s, true);
 }
 
 bool Entry::setField(Data::FieldPtr field_, const QString& value_) {
@@ -406,7 +402,7 @@ int Entry::compareValues(EntryPtr e1, EntryPtr e2, FieldPtr f) {
       return 5;
     }
   }
-  // try removing puctuation
+  // try removing punctuation
   QRegExp notAlphaNum(QString::fromLatin1("[^\\s\\w]"));
   QString s1a = s1; s1a.remove(notAlphaNum);
   QString s2a = s2; s2a.remove(notAlphaNum);
@@ -420,12 +416,13 @@ int Entry::compareValues(EntryPtr e1, EntryPtr e2, FieldPtr f) {
 //    myDebug() << "match without articles" << endl;
     return 3;
   }
+  // try removing everything between parentheses
   QRegExp rx(QString::fromLatin1("\\s*\\(.*\\)\\s*"));
   s1.remove(rx);
   s2.remove(rx);
   if(!s1.isEmpty() && s1 == s2) {
 //    myDebug() << "match without parentheses" << endl;
-    return 1;
+    return 2;
   }
   if(f->flags() & Field::AllowMultiple) {
     QStringList sl1 = e1->fields(f, false);

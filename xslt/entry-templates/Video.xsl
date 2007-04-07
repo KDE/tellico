@@ -229,6 +229,20 @@
      </xsl:attribute>
     </img>
    </xsl:when>
+   <xsl:when test="$datadir and tc:medium = 'Blu-ray'">
+    <img width="56" height="30" id="logo" alt="(Blu-ray)">
+     <xsl:attribute name="src">
+      <xsl:value-of select="concat($datadir,'bluray-logo.png')"/>
+     </xsl:attribute>
+    </img>
+   </xsl:when>
+   <xsl:when test="$datadir and tc:medium = 'HD DVD'">
+    <img width="119" height="30" id="logo" alt="(HD DVD)">
+     <xsl:attribute name="src">
+      <xsl:value-of select="concat($datadir,'hddvd-logo.png')"/>
+     </xsl:attribute>
+    </img>
+   </xsl:when>
   </xsl:choose>
 
   <!-- title block -->

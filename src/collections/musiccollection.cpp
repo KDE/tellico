@@ -118,7 +118,6 @@ Tellico::Data::FieldVec MusicCollection::defaultFields() {
 
 int MusicCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
   // not enough for title to be equal, must also have another field
-  // ever possible for a studio to do two movies with identical titles?
   int res = 2*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
 //  if(res == 0) {
 //    myDebug() << "MusicCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "

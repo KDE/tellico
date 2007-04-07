@@ -21,6 +21,7 @@
 #include <kglobal.h>
 #include <klibloader.h>
 #include <kstandarddirs.h>
+#include <kcharsets.h>
 
 #include <qregexp.h>
 #include <qdir.h>
@@ -34,16 +35,16 @@ namespace {
 QColor Tellico::contrastColor;
 
 QString Tellico::decodeHTML(QString text) {
-  if(text.isEmpty()) {
-    return text;
-  }
-  static QRegExp rx(QString::fromLatin1("&#(\\d+);"));
+  QRegExp rx(QString::fromLatin1("&(.+);"));
+  rx.setMinimal(true);
   int pos = rx.search(text);
   while(pos > -1) {
-    text.replace(pos, rx.matchedLength(), QChar((rx.cap(1).toInt())));
+    QChar c = KCharsets::fromEntity(rx.cap(1));
+    if(!c.isNull()) {
+      text.replace(pos, rx.matchedLength(), c);
+    }
     pos = rx.search(text, pos+1);
   }
-  text.replace(QString::fromLatin1("&nbsp;"), QChar(' '));
   return text;
 }
 

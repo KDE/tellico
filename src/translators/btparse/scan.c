@@ -154,7 +154,7 @@ static void act11()
 static void act12()
 { 
 		NLA = NAME;
-		name ();   
+		bibname ();   
 	}
 
 

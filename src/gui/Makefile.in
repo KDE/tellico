@@ -375,7 +375,7 @@ x_libraries = @x_libraries@
 xdg_appsdir = @xdg_appsdir@
 xdg_directorydir = @xdg_directorydir@
 xdg_menudir = @xdg_menudir@
-INCLUDES = $(all_includes)
+AM_CPPFLAGS = $(all_includes)
 noinst_LIBRARIES = libgui.a
 libgui_a_SOURCES = combobox.cpp counteditem.cpp datewidget.cpp \
 				tabcontrol.cpp kwidgetlister.cpp stringmapdialog.cpp listview.cpp richtextlabel.cpp \
