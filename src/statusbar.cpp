@@ -15,6 +15,7 @@
 #include "tellico_debug.h"
 #include "progressmanager.h"
 #include "tellico_debug.h"
+#include "gui/progress.h"
 
 #include <klocale.h>
 #include <kapplication.h>

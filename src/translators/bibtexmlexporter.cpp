@@ -145,10 +145,9 @@ bool BibtexmlExporter::exec() {
    for now, too.*/
       elemName = field->property(bibtex);
       // split text for author, editor, and keywords
-      if(field->flags() & Data::Field::AllowMultiple
-         && (elemName == Latin1Literal("author")
-             || elemName == Latin1Literal("editor")
-             || elemName == Latin1Literal("keywords"))) {
+      if(elemName == Latin1Literal("author") ||
+         elemName == Latin1Literal("editor") ||
+         elemName == Latin1Literal("keywords")) {
         if(elemName == Latin1Literal("author")) {
           parElemName = QString::fromLatin1("authorlist");
         } else if(elemName == Latin1Literal("editor")) {
@@ -159,7 +158,7 @@ bool BibtexmlExporter::exec() {
         }
 
         parentElem = dom.createElement(parElemName);
-        const QStringList values = entryIt->fields(value, false);
+        const QStringList values = entryIt->fields(field->name(), false);
         for(QStringList::ConstIterator it = values.begin(); it != values.end(); ++it) {
           fieldElem = dom.createElement(elemName);
           fieldElem.appendChild(dom.createTextNode(*it));

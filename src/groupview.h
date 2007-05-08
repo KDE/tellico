@@ -90,7 +90,9 @@ public:
    */
   void populateCollection();
 
-  void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
+  virtual void addField(Data::CollPtr, Data::FieldPtr);
+  virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
+  virtual void removeField(Data::CollPtr, Data::FieldPtr);
 
   virtual void sort();
 
@@ -181,6 +183,7 @@ private:
   friend class GroupIterator;
 
   virtual void setSorting(int column, bool ascending = true);
+  void resetComparisons();
   QString groupTitle();
   void updateHeader(Data::FieldPtr field=0);
 

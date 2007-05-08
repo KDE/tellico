@@ -413,6 +413,11 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
 
 //  myDebug() << "EntryEditDialog::setContents() - " << entries_.count() << " entries" << endl;
 
+  // if some entries get selected in one view, then in another, don't reset
+  if(entries_ == m_currEntries) {
+    return;
+  }
+
   // first set contents to first item
   setContents(entries_.front());
   // something weird...if list count can actually be 1 before the setContents call

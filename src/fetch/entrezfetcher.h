@@ -22,11 +22,12 @@ namespace Tellico {
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <kurl.h>
-#include <kio/job.h>
-
 #include <qcstring.h> // for QByteArray
 #include <qguardedptr.h>
+
+namespace KIO {
+  class Job;
+}
 
 namespace Tellico {
   namespace Fetch {

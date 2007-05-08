@@ -138,9 +138,7 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
   }
 
   cdrom_tochdr hdr;
-#if defined(__OpenBSD__) || defined(__NetBSD__)
-  ioc_read_toc_entry t;
-#elif defined(__APPLE__)
+#if defined(__APPLE__)
   dk_cd_read_disc_info_t discInfoParams;
   ::memset(&discInfoParams, 0, sizeof(discInfoParams));
   discInfoParams.buffer = &hdr;
@@ -160,8 +158,10 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
 
   cdrom_tocentry* TocEntry = new cdrom_tocentry[last+1];
 #if defined(__OpenBSD__)
+  ioc_read_toc_entry t;
   t.starting_track = 0;
 #elif defined(__NetBSD__)
+  ioc_read_toc_entry t;
   t.starting_track = 1;
 #endif
 #if defined(__OpenBSD__) || defined(__NetBSD__)
@@ -169,7 +169,8 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
   t.data_len = (last + 1) * sizeof(cdrom_tocentry);
   t.data = TocEntry;
 
-  ::ioctl(drive, CDIOREADTOCENTRYS, (char *) &t);
+  if (::ioctl(drive, CDIOREADTOCENTRYS, (char *) &t) < 0)
+       return list;
 
 #elif defined(__APPLE__)
   dk_cd_read_track_info_t trackInfoParams;

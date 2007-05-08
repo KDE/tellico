@@ -15,13 +15,9 @@
 #define CONFIGDIALOG_H
 
 #include "fetch/fetcher.h"
-#include "gui/combobox.h"
 
 #include <kdialogbase.h>
 #include <klistview.h>
-
-#include <qstringlist.h>
-#include <qintdict.h>
 
 class KConfig;
 class KLineEdit;
@@ -37,6 +33,9 @@ namespace Tellico {
   class SourceListViewItem;
   namespace Fetch {
     class ConfigWidget;
+  }
+  namespace GUI {
+    class ComboBox;
   }
 
 /**

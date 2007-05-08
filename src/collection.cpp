@@ -363,6 +363,16 @@ bool Collection::removeField(FieldPtr field_, bool force_/*=false*/) {
   }
 
   success &= m_fields.remove(field_);
+
+  // refresh all dependent fields, rather lazy, but there's
+  // likely to be weird effects when checking dependent fields
+  // while removing one, so refresh all of them
+  for(FieldVec::Iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
+    if(it->type() == Field::Dependent) {
+      emit signalRefreshField(it);
+    }
+  }
+
   return success;
 }
 

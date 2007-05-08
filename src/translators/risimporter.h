@@ -18,6 +18,7 @@
 #include "../datavectors.h"
 
 #include <qstring.h>
+#include <qmap.h>
 
 namespace Tellico {
   namespace Data {

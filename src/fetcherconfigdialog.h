@@ -14,15 +14,16 @@
 #ifndef TELLICO_FETCHERCONFIGDIALOG_H
 #define TELLICO_FETCHERCONFIGDIALOG_H
 
-class KLineEdit;
-class QCheckBox;
-class QWidgetStack;
-
+#include "fetch/fetch.h"
 #include "fetch/configwidget.h"
 
 #include <kdialogbase.h>
 
 #include <qintdict.h>
+
+class KLineEdit;
+class QCheckBox;
+class QWidgetStack;
 
 namespace Tellico {
   namespace GUI {

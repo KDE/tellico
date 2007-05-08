@@ -1,3 +1,30 @@
+2007-05-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.11.
+
+2007-05-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved file saving performance by caching image info on load.
+
+2007-05-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a potential crashing bug for OpenOffice.org connection.
+	* Fixed bug that lost some images when loading directly from XML.
+
+2007-04-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed sorting for Dependent fields to match on subfields.
+
+2007-04-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed BibteXML export to include author.
+	* Fixed book collection conversion to bibliography to set entry type.
+
+2007-04-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IMDb search for director and writer.
+	* Fixed CDDB lookup on OpenBSD, patch from Marc Espie.
+
 2007-04-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.10.
@@ -40,7 +67,7 @@
 
 2007-03-14  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed crashing bug when undoing a colleciton import or replacement.
+	* Fixed crashing bug when undoing a collection import or replacement.
 
 2007-03-01  Robby Stephenson  <robby@periapsis.org>
 

@@ -14,9 +14,9 @@
 #ifndef BIBTEXIMPORTER_H
 #define BIBTEXIMPORTER_H
 
+#include <config.h>
 #include "textimporter.h"
 #include "../datavectors.h"
-#include <config.h>
 
 extern "C" {
 #ifdef HAVE_LIBBTPARSE
@@ -27,6 +27,7 @@ extern "C" {
 #endif
 
 #include <qptrlist.h>
+#include <qmap.h>
 
 namespace Tellico {
   namespace Import {

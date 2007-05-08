@@ -24,11 +24,11 @@
 #include <qcstring.h> // for QByteArray
 #include <qmap.h>
 #include <qguardedptr.h>
-#include <qregexp.h>
 
 class KLineEdit;
 class KIntSpinBox;
 class QCheckBox;
+class QRegExpr;
 
 namespace Tellico {
   namespace Fetch {

@@ -15,6 +15,7 @@
 #define RATINGFIELDWIDGET_H
 
 #include "fieldwidget.h"
+#include "../datavectors.h"
 
 namespace Tellico {
   namespace GUI {

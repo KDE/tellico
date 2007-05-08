@@ -68,8 +68,8 @@ public:
 
 //  operator const T*() { return m_vector->at(m_index).data(); }
   operator KSharedPtr<const T>() { return m_vector->at(m_index); }
-  const T* operator->() { return m_vector->at(m_index).data(); }
-  const T& operator*() { return *m_vector->at(m_index); }
+  const T* operator->() const { return m_vector->at(m_index).data(); }
+  const T& operator*() const { return *m_vector->at(m_index); }
   const T* data() const { return m_vector->at(m_index).data(); }
 
   VectorConstIterator& operator++() { ++m_index; return *this; }
@@ -105,6 +105,7 @@ public:
     return *this;
   }
 
+  bool operator== (const Vector<T>& x) const { return x.m_baseVector == m_baseVector; }
   bool isEmpty() const { return m_baseVector.empty(); }
   size_t count() const { return m_baseVector.size(); }
 

@@ -21,7 +21,6 @@
 
 #include <kurl.h>
 
-#include <qptrlist.h>
 #include <qobject.h>
 #include <qguardedptr.h>
 

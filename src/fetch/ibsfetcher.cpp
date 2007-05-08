@@ -23,6 +23,7 @@
 
 #include <klocale.h>
 #include <kconfig.h>
+#include <kio/job.h>
 
 #include <qregexp.h>
 #include <qlayout.h>

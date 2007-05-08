@@ -674,8 +674,8 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   doAlsoKnownAs(str_, entry);
   doPlot(str_, entry, m_url);
   doLists(str_, entry);
-  doPerson(str_, entry, QString::fromLatin1("Directed"), QString::fromLatin1("director"));
-  doPerson(str_, entry, QString::fromLatin1("Writing"), QString::fromLatin1("writer"));
+  doPerson(str_, entry, QString::fromLatin1("Direct"), QString::fromLatin1("director"));
+  doPerson(str_, entry, QString::fromLatin1("Writ"), QString::fromLatin1("writer"));
   doRating(str_, entry);
   doCast(str_, entry, m_url);
   if(m_fetchImages) {
@@ -819,12 +819,16 @@ void IMDBFetcher::doPerson(const QString& str_, Data::EntryPtr entry_,
   int pos = str_.find(imdbHeader_);
   if(pos > -1) {
     QStringList people;
-    // loop until repeated <br> tags
+    // loop until repeated <br> tags or </div> tag
     QRegExp br2Rx(QString::fromLatin1("<br[\\s/]*>\\s*<br[\\s/]*>"), false);
     br2Rx.setMinimal(true);
+    QRegExp divRx(QString::fromLatin1("<[/]*div"), false);
+    divRx.setMinimal(true);
 
     const QString name = QString::fromLatin1("/name/");
-    const int endPos = str_.find(br2Rx, pos);
+    const int endPos1 = str_.find(br2Rx, pos);
+    const int endPos2 = str_.find(divRx, pos);
+    const int endPos = QMIN(endPos1, endPos2); // ok to be -1
     pos = s_anchorRx->search(str_, pos+1);
     while(pos > -1 && pos < endPos) {
       if(s_anchorRx->cap(1).find(name) > -1) {

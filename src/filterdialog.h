@@ -14,13 +14,6 @@
 #ifndef FILTERDIALOG_H
 #define FILTERDIALOG_H
 
-class KComboBox;
-class KLineEdit;
-class KPushButton;
-
-class QRadioButton;
-class QDialog;
-
 // kwidgetlister is copied from kdepim/libkdenetwork cvs
 #include "gui/kwidgetlister.h"
 #include "filter.h"
@@ -31,6 +24,13 @@ class QDialog;
 #include <qhbox.h>
 #include <qstring.h>
 #include <qstringlist.h>
+
+class KComboBox;
+class KLineEdit;
+class KPushButton;
+
+class QRadioButton;
+class QDialog;
 
 namespace Tellico {
   class FilterDialog;

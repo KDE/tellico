@@ -14,11 +14,10 @@
 #ifndef TELLICO_DETAILEDENTRYITEM_H
 #define TELLICO_DETAILEDENTRYITEM_H
 
+class QTime;
 class QTimer;
 
 #include "entryitem.h"
-
-#include <qdatetime.h>
 
 namespace Tellico {
 
@@ -39,10 +38,6 @@ public:
   virtual QColor backgroundColor(int column);
   virtual void paintCell(QPainter* p, const QColorGroup& cg,
                          int column, int width, int align);
-
-  virtual int compare(QListViewItem* item, int col, bool ascending) const;
-
-  DetailedListView* listView() const;
 
 private:
   /**

@@ -14,6 +14,12 @@
 #ifndef FETCHDIALOG_H
 #define FETCHDIALOG_H
 
+#include "datavectors.h"
+
+#include <kdialogbase.h>
+
+#include <qguardedptr.h>
+
 namespace Tellico {
   class EntryView;
   namespace Fetch {
@@ -34,12 +40,6 @@ class KTextEdit;
 class QProgressBar;
 class QTimer;
 class QCheckBox;
-
-#include "datavectors.h"
-
-#include <kdialogbase.h>
-
-#include <qguardedptr.h>
 
 namespace Tellico {
 

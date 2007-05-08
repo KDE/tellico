@@ -120,3 +120,10 @@ ImageInfo::ImageInfo(const Image& img_)
     , width(img_.width())
     , height(img_.height()) {
 }
+
+ImageInfo::ImageInfo(const QString& id_, const QCString& format_, int w_, int h_)
+    : id(id_)
+    , format(format_)
+    , width(w_)
+    , height(h_) {
+}

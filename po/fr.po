@@ -1,18 +1,18 @@
-# translation of fr.po to Francais
+# translation of fr.po to
 # This file is distributed under the same license as the tellico package.
 # Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
 #
 # RNB <rnb2@wanadoo.fr>, 2004.
 # Rui Nibau <rnb2@wanadoo.fr>, 2004.
-# Regis Boudin <regis@boudin.name>, 2004, 2005, 2006.
+# Regis Boudin <regis@boudin.name>, 2004, 2005, 2006, 2007.
 # Mathias Monnerville <tellico@monnerville.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "POT-Creation-Date: 2007-04-01 19:00-0700\n"
-"PO-Revision-Date: 2006-09-21 09:18+0100\n"
+"PO-Revision-Date: 2007-04-08 19:35+0100\n"
 "Last-Translator: Regis Boudin <regis@boudin.name>\n"
-"Language-Team: Francais <en@li.org>\n"
+"Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -755,12 +755,11 @@ msgstr "DivX"
 
 #: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:800
 msgid "Blu-ray"
-msgstr ""
+msgstr "Blu-ray"
 
 #: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:803
-#, fuzzy
 msgid "HD DVD"
-msgstr "DVD"
+msgstr "HD DVD"
 
 #: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
 msgid "Medium"

@@ -17,13 +17,13 @@
 class KConfig;
 
 class QWidget;
+class QString;
 
 #include "../entry.h"
 #include "../datavectors.h"
 
 #include <kurl.h>
 
-#include <qstring.h>
 #include <qobject.h>
 
 namespace Tellico {

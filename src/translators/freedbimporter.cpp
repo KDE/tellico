@@ -517,6 +517,9 @@ QWidget* FreeDBImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - FreeDB"));
   QStringList devices = config.readListEntry("CD-ROM Devices");
   if(devices.isEmpty()) {
+#if defined(__OpenBSD__)
+    devices += QString::fromLatin1("/dev/rcd0c");
+#endif
     devices += QString::fromLatin1("/dev/cdrom");
     devices += QString::fromLatin1("/dev/dvd");
   }

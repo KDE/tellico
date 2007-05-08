@@ -14,14 +14,15 @@
 #ifndef TELLICOIMAGEWIDGET_H
 #define TELLICOIMAGEWIDGET_H
 
+#include <qwidget.h>
+#include <qpixmap.h>
+#include <qpoint.h>
+
 class QLabel;
 class QResizeEvent;
 class QMouseEvent;
 class QDragEnterEvent;
 class QDropEvent;
-
-#include <qwidget.h>
-#include <qpixmap.h>
 
 namespace Tellico {
   namespace GUI {

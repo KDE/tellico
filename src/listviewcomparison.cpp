@@ -16,6 +16,7 @@
 #include "field.h"
 #include "collection.h"
 #include "document.h"
+#include "entryitem.h"
 
 #include <qlistview.h>
 #include <qpixmap.h>
@@ -34,55 +35,72 @@ Tellico::ListViewComparison* Tellico::ListViewComparison::create(Data::FieldPtr 
 }
 
 Tellico::ListViewComparison* Tellico::ListViewComparison::create(Data::ConstFieldPtr field_) {
-  if(field_->formatFlag() == Data::Field::FormatTitle) {
-    return new TitleComparison();
-  } else if(field_->type() == Data::Field::Number) {
-    return new NumberComparison();
+  if(field_->type() == Data::Field::Number) {
+    return new NumberComparison(field_);
   } else if(field_->type() == Data::Field::Image ||
             field_->type() == Data::Field::Rating ||
             field_->type() == Data::Field::Bool) {
     // bool and ratings only have an image
-    return new PixmapComparison();
-  } else if(field_->name() == Latin1Literal("lcc") &&
-            Data::Document::self()->collection() &&
-            (Data::Document::self()->collection()->type() == Data::Collection::Book ||
-             Data::Document::self()->collection()->type() == Data::Collection::Bibtex)) {
-    return new LCCComparison();
+    return new PixmapComparison(field_);
+  } else if(field_->type() == Data::Field::Dependent) {
+    return new DependentComparison(field_);
+  } else if(field_->formatFlag() == Data::Field::FormatTitle) {
+    // Dependent could be title, so put this test after
+    return new TitleComparison(field_);
+  } else if(field_->property(QString::fromLatin1("lcc")) == Latin1Literal("true") ||
+            (field_->name() == Latin1Literal("lcc") &&
+             Data::Document::self()->collection() &&
+             (Data::Document::self()->collection()->type() == Data::Collection::Book ||
+              Data::Document::self()->collection()->type() == Data::Collection::Bibtex))) {
+    // allow LCC comparison if LCC property is set, or if the name is lcc for a book or bibliography collection
+    return new LCCComparison(field_);
   }
-  return new StringComparison();
+  return new StringComparison(field_);
 }
 
-int Tellico::StringComparison::compare(int col_,
-                                       const QListViewItem* item1_,
-                                       QListViewItem* item2_,
-                                       bool asc_)
-{
-  return item1_->key(col_, asc_).localeAwareCompare(item2_->key(col_, asc_));
+Tellico::ListViewComparison::ListViewComparison(Data::ConstFieldPtr field) : m_fieldName(field->name()) {
 }
 
-int Tellico::TitleComparison::compare(int col_,
-                                      const QListViewItem* item1_,
-                                      QListViewItem* item2_,
-                                      bool asc_)
+int Tellico::ListViewComparison::compare(int col_,
+                                         const GUI::ListViewItem* item1_,
+                                         const GUI::ListViewItem* item2_,
+                                         bool asc_)
 {
-  Q_UNUSED(asc_);
-  QString title1 = Data::Field::sortKeyTitle(item1_->text(col_));
-  QString title2 = Data::Field::sortKeyTitle(item2_->text(col_));
+  return compare(key(item1_, col_, asc_), key(item2_, col_, asc_));
+}
+
+QString Tellico::ListViewComparison::key(const GUI::ListViewItem* item_, int col_, bool asc_) {
+  return item_->isEntryItem()
+         ? static_cast<const EntryItem*>(item_)->entry()->field(m_fieldName)
+         : item_->key(col_, asc_);
+}
+
+Tellico::StringComparison::StringComparison(Data::ConstFieldPtr field) : ListViewComparison(field) {
+}
+
+int Tellico::StringComparison::compare(const QString& str1_, const QString& str2_) {
+  return str1_.localeAwareCompare(str2_);
+}
+
+Tellico::TitleComparison::TitleComparison(Data::ConstFieldPtr field) : ListViewComparison(field) {
+}
+
+int Tellico::TitleComparison::compare(const QString& str1_, const QString& str2_) {
+  const QString title1 = Data::Field::sortKeyTitle(str1_);
+  const QString title2 = Data::Field::sortKeyTitle(str2_);
   return title1.localeAwareCompare(title2);
 }
 
-int Tellico::NumberComparison::compare(int col_,
-                                       const QListViewItem* item1_,
-                                       QListViewItem* item2_,
-                                       bool asc_)
-{
-  Q_UNUSED(asc_);
+Tellico::NumberComparison::NumberComparison(Data::ConstFieldPtr field) : ListViewComparison(field) {
+}
+
+int Tellico::NumberComparison::compare(const QString& str1_, const QString& str2_) {
   // by default, an empty string would get sorted before "1" because toFloat() turns it into "0"
   // I want the empty strings to be at the end
   bool ok1, ok2;
   // use section in case of multiple values
-  float num1 = item1_->text(col_).section(';', 0, 0).toFloat(&ok1);
-  float num2 = item2_->text(col_).section(';', 0, 0).toFloat(&ok2);
+  float num1 = str1_.section(';', 0, 0).toFloat(&ok1);
+  float num2 = str2_.section(';', 0, 0).toFloat(&ok2);
   if(ok1 && ok2) {
     return static_cast<int>(num1 - num2);
   } else if(ok1 && !ok2) {
@@ -96,26 +114,22 @@ int Tellico::NumberComparison::compare(int col_,
 // for details on the LCC comparison, see
 // http://www.mcgees.org/2001/08/08/sort-by-library-of-congress-call-number-in-perl/
 
-Tellico::LCCComparison::LCCComparison() : StringComparison(),
+Tellico::LCCComparison::LCCComparison(Data::ConstFieldPtr field) : StringComparison(field),
   m_regexp(QString::fromLatin1("^([A-Z]+)(\\d+(?:\\.\\d+)?)\\.?([A-Z]*)(\\d*)\\.?([A-Z]*)(\\d*)(?: (\\d\\d\\d\\d))?")) {
 }
 
-int Tellico::LCCComparison::compare(int col_,
-                                    const QListViewItem* item1_,
-                                    QListViewItem* item2_,
-                                    bool asc_)
-{
-//  myDebug() << "LCCComparison::compare() - " << item1_->text(col_) << " to " << item2_->text(col_) << endl;
-  int pos1 = m_regexp.search(item1_->text(col_));
+int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) {
+//  myDebug() << "LCCComparison::compare() - " << str1_ << " to " << str2_ << endl;
+  int pos1 = m_regexp.search(str1_);
   const QStringList cap1 = m_regexp.capturedTexts();
-  int pos2 = m_regexp.search(item2_->text(col_));
+  int pos2 = m_regexp.search(str2_);
   const QStringList cap2 = m_regexp.capturedTexts();
   if(pos1 > -1 && pos2 > -1) {
     int res = compareLCC(cap1, cap2);
 //    myLog() << "...result = " << res << endl;
     return res;
   }
-  return StringComparison::compare(col_, item1_, item2_, asc_);
+  return StringComparison::compare(str1_, str2_);
 }
 
 int Tellico::LCCComparison::compareLCC(const QStringList& cap1, const QStringList& cap2) const {
@@ -132,9 +146,12 @@ int Tellico::LCCComparison::compareLCC(const QStringList& cap1, const QStringLis
          (res = compareFloat(cap1[7], cap2[7]))                    != 0 ? res : 0;
 }
 
+Tellico::PixmapComparison::PixmapComparison(Data::ConstFieldPtr field) : ListViewComparison(field) {
+}
+
 int Tellico::PixmapComparison::compare(int col_,
-                                       const QListViewItem* item1_,
-                                       QListViewItem* item2_,
+                                       const GUI::ListViewItem* item1_,
+                                       const GUI::ListViewItem* item2_,
                                        bool asc_)
 {
   Q_UNUSED(asc_);
@@ -150,5 +167,29 @@ int Tellico::PixmapComparison::compare(int col_,
     return -1;
   }
   return 0;
+}
+
+Tellico::DependentComparison::DependentComparison(Data::ConstFieldPtr field) : StringComparison(field) {
+  Data::FieldVec fields = field->dependsOn(Data::Document::self()->collection());
+  for(Data::FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
+    m_comparisons.append(create(f));
+  }
+  m_comparisons.setAutoDelete(true);
+}
+
+int Tellico::DependentComparison::compare(int col_,
+                                          const GUI::ListViewItem* item1_,
+                                          const GUI::ListViewItem* item2_,
+                                          bool asc_)
+{
+  Q_UNUSED(col_);
+  Q_UNUSED(asc_);
+  for(QPtrListIterator<ListViewComparison> it(m_comparisons); it.current(); ++it) {
+    int res = it.current()->compare(col_, item1_, item2_, asc_);
+    if(res != 0) {
+      return res;
+    }
+  }
+  return ListViewComparison::compare(col_, item1_, item2_, asc_);
 }
 

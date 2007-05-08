@@ -14,11 +14,9 @@
 #ifndef TELLICO_COLLECTIONCOMMAND_H
 #define TELLICO_COLLECTIONCOMMAND_H
 
-#include "../collection.h"
 #include "../datavectors.h"
 
 #include <kcommand.h>
-#include <ksharedptr.h>
 #include <kurl.h>
 
 namespace Tellico {

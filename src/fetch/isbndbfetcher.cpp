@@ -24,6 +24,7 @@
 #include <kstandarddirs.h>
 #include <kconfig.h>
 
+#include <qdom.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qfile.h>

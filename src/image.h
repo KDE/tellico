@@ -15,6 +15,7 @@
 #define IMAGE_H
 
 #include <qimage.h>
+#include <qstring.h>
 
 class KPixmapIO;
 
@@ -70,6 +71,7 @@ class ImageInfo {
 public:
   ImageInfo() {}
   explicit ImageInfo(const Image& img);
+  ImageInfo(const QString& id, const QCString& format, int w, int h);
   QString id;
   QCString format;
   int width;

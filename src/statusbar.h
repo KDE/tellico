@@ -19,9 +19,10 @@
 
 #include <kstatusbar.h>
 
-#include "gui/progress.h"
-
 namespace Tellico {
+  namespace GUI {
+    class Progress;
+  }
   class MainWindow;
 
 /**

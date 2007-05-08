@@ -35,6 +35,7 @@
 #include <kcombobox.h>
 #include <kaccelmanager.h>
 
+#include <qdom.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>

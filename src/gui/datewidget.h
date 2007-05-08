@@ -14,15 +14,15 @@
 #ifndef TELLICODATEWIDGET_H
 #define TELLICODATEWIDGET_H
 
+#include <qspinbox.h>
+#include <qdatetime.h>
+
 class KComboBox;
 class KPushButton;
 class KDatePicker;
 
 class QVBox;
-
-#include <qspinbox.h>
-#include <qlineedit.h>
-#include <qdatetime.h>
+class QString;
 
 namespace Tellico {
   namespace GUI {
@@ -31,12 +31,7 @@ class SpinBox : public QSpinBox {
 Q_OBJECT
 
 public:
-  SpinBox(int min, int max, QWidget *parent) : QSpinBox(min, max, 1, parent) {
-     editor()->setAlignment(AlignRight);
-    // I want to be able to omit the day
-    // an empty string just removes the special value, so set white space
-    setSpecialValueText(QChar(' '));
-  }
+  SpinBox(int min, int max, QWidget *parent);
 };
 
 /**

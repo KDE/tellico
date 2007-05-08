@@ -25,13 +25,12 @@ namespace Tellico {
   }
 }
 
-#include "observer.h"
 #include "entry.h"
 
 #include <qobject.h>
-#include <qguardedptr.h>
 
 namespace Tellico {
+class Observer;
 
 /**
  * @author Robby Stephenson
@@ -61,6 +60,7 @@ public:
    * Plug the default entry actions into a widget
    */
   void plugEntryActions(QPopupMenu* popup);
+  void updateActions() const;
 
   GroupIterator groupIterator() const;
   /**
@@ -146,7 +146,6 @@ private:
   Controller(MainWindow* parent, const char* name);
 
   void blockAllSignals(bool block) const;
-  void updateActions() const;
   bool canCheckIn() const;
   void plugUpdateMenu(QPopupMenu* popup);
   enum EntryDirection { PrevEntry, NextEntry };

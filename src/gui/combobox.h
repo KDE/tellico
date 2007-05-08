@@ -19,6 +19,8 @@
 #include <qvariant.h>
 #include <qvaluelist.h>
 
+class QString;
+
 namespace Tellico {
   namespace GUI {
 

@@ -16,8 +16,6 @@
 
 #include "../collection.h"
 
-#include <klocale.h>
-
 namespace Tellico {
   namespace Data {
 

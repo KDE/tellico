@@ -180,6 +180,7 @@ bool OpenOffice::connectionDialog() {
                   "that OpenOffice.org Writer is currently running."));
   l->setTextFormat(Qt::RichText);
   blay->addWidget(l);
+  blay->setStretchFactor(l, 10);
 
   QVGroupBox* gbox = new QVGroupBox(i18n("OpenOffice.org Connection"), widget);
   topLayout->addWidget(gbox);

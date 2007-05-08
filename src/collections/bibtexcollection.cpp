@@ -369,6 +369,7 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(CollPtr coll_) {
   EntryVec newEntries;
   for(EntryVec::ConstIterator entryIt = coll_->entries().begin(); entryIt != coll_->entries().end(); ++entryIt) {
     Data::EntryPtr entry = new Entry(*entryIt);
+    entry->setCollection(coll.data());
     if(!entryTypeName.isEmpty()) {
       entry->setField(entryTypeName, QString::fromLatin1("book"));
     }

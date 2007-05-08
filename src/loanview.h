@@ -24,7 +24,6 @@ namespace Tellico {
   namespace Data {
     class Borrower;
   }
-  class BorrowerItem;
 
 /**
  * @author Robby Stephenson
@@ -37,7 +36,11 @@ public:
 
   virtual bool isSelectable(GUI::ListViewItem*) const;
 
-  void addCollection(Data::CollPtr coll);
+  virtual void addCollection(Data::CollPtr coll);
+
+  virtual void addField(Data::CollPtr, Data::FieldPtr);
+  virtual void modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr);
+  virtual void removeField(Data::CollPtr, Data::FieldPtr);
 
   virtual void    addBorrower(Data::BorrowerPtr);
   virtual void modifyBorrower(Data::BorrowerPtr);
@@ -58,6 +61,7 @@ private slots:
 
 private:
   virtual void setSorting(int column, bool ascending = true);
+  void resetComparisons();
 
   bool m_notSortedYet;
   QDict<BorrowerItem> m_itemDict;

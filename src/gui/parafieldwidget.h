@@ -14,9 +14,10 @@
 #ifndef PARAFIELDWIDGET_H
 #define PARAFIELDWIDGET_H
 
-class QTextEdit;
-
 #include "fieldwidget.h"
+#include "../datavectors.h"
+
+class QTextEdit;
 
 namespace Tellico {
   namespace GUI {

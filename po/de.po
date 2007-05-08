@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "POT-Creation-Date: 2007-04-01 19:00-0700\n"
-"PO-Revision-Date: 2007-02-17 12:04+0100\n"
-"Last-Translator: Tobias Gruetzmacher <tobias@portfolio16.de>\n"
+"PO-Revision-Date: 2007-05-05 15:00+0200\n"
+"Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -780,12 +780,11 @@ msgstr "DivX"
 
 #: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:800
 msgid "Blu-ray"
-msgstr ""
+msgstr "Blu-ray"
 
 #: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:803
-#, fuzzy
 msgid "HD DVD"
-msgstr "DVD"
+msgstr "HD DVD"
 
 #: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
 msgid "Medium"
@@ -4705,7 +4704,7 @@ msgid ""
 "<p>Any other field which allows multiple values should be entered the\n"
 "same way. with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
-"<p>... dass Sie, falls ein Buch mehr als einen Autoren hat, deren Namen\n"
+"<p>... dass Sie, falls ein Buch mehr als einen Autor hat, deren Namen\n"
 "mit einem Semikolon trennen sollten, so dass Tellico weiß,\n"
 "wie sie getrennt und separat benutzt werden können.</p>\n"
 "<p>Jedes andere Feld, welches mehrere Werte erlaubt, sollte\n"

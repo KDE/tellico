@@ -23,6 +23,7 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
+#include <kio/job.h>
 
 #include <qdom.h>
 #include <qlabel.h>

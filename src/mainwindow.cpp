@@ -58,6 +58,7 @@
 #include <unistd.h>
 
 #include <kapplication.h>
+#include <kcombobox.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
 #include <kmenubar.h>
@@ -1080,7 +1081,6 @@ void MainWindow::slotFileOpen(const KURL& url_) {
     if(openURL(url_)) {
       m_fileOpenRecent->addURL(url_);
       m_fileOpenRecent->setCurrentItem(-1);
-      ImageFactory::clean(false);
     }
   }
 
@@ -2279,6 +2279,7 @@ void MainWindow::updateCollectionActions() {
     default:
       break;
   }
+  Controller::self()->updateActions();
   // special case when there are no available data sources
   if(m_fetchActions.isEmpty() && m_updateAll) {
     m_updateAll->setEnabled(false);

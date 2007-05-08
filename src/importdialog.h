@@ -14,15 +14,16 @@
 #ifndef IMPORTDIALOG_H
 #define IMPORTDIALOG_H
 
-class QRadioButton;
-class QCheckBox;
-class QShowEvent;
-
 #include "translators/translators.h"
 #include "datavectors.h"
 
 #include <kdialogbase.h>
-#include <kurl.h>
+
+class KURL;
+
+class QRadioButton;
+class QCheckBox;
+class QShowEvent;
 
 namespace Tellico {
   namespace Import {

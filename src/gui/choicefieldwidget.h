@@ -14,9 +14,10 @@
 #ifndef CHOICEFIELDWIDGET_H
 #define CHOICEFIELDWIDGET_H
 
-class KComboBox;
-
 #include "fieldwidget.h"
+#include "../datavectors.h"
+
+class KComboBox;
 
 namespace Tellico {
   namespace GUI {

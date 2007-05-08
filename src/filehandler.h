@@ -14,6 +14,10 @@
 #ifndef FILEHANDLER_H
 #define FILEHANDLER_H
 
+#include <qstring.h>
+#include <qcstring.h> // needed for QByteArray
+#include <qptrlist.h>
+
 class KURL;
 class KSaveFile;
 class KFileItem;
@@ -23,10 +27,6 @@ namespace KIO {
 
 class QDomDocument;
 class QFile;
-
-#include <qstring.h>
-#include <qcstring.h> // needed for QByteArray
-#include <qptrlist.h>
 
 namespace Tellico {
   class ImageFactory;

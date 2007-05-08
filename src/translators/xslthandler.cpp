@@ -16,7 +16,10 @@
 #include "../tellico_debug.h"
 #include "../tellico_utils.h"
 
+#include <qdom.h>
 #include <qtextcodec.h>
+
+#include <kurl.h>
 
 extern "C" {
 #include <libxslt/xslt.h>

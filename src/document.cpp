@@ -430,7 +430,7 @@ bool Document::loadImage(const QString& id_) {
 }
 
 bool Document::loadAllImagesNow() const {
-//  kdDebug() << "Document::loadImage() - id = " << id_ << endl;
+//  myLog() << "Document::loadAllImagesNow()" << endl;
   if(!m_coll || !m_validFile) {
     return false;
   }
@@ -502,8 +502,8 @@ void Document::slotLoadAllImages() {
         continue;
       }
       // this is the early loading, so just by calling imageById()
-      // the image gets sucked form the zip file and written to disk
-      //by ImageFactoryLLimageById()
+      // the image gets sucked from the zip file and written to disk
+      //by ImageFactory::imageById()
       if(ImageFactory::imageById(id).isNull()) {
         myDebug() << "Document::slotLoadAllImages() - entry title: " << entry->title() << endl;
       }

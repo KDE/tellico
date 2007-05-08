@@ -24,8 +24,9 @@
 #include "collections/gamecollection.h"
 #include "collections/filecatalog.h"
 #include "field.h"
+#include "tellico_debug.h"
 
-#include <kdebug.h>
+#include <klocale.h>
 
 using Tellico::CollectionFactory;
 

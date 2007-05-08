@@ -17,9 +17,9 @@
 #include "textimporter.h"
 #include "../datavectors.h"
 
-#include <ksortablevaluelist.h>
-
 #include <qvariant.h>
+#include <qmap.h>
+#include <qpair.h>
 
 namespace Tellico {
   namespace Import {

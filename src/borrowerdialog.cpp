@@ -17,6 +17,7 @@
 
 #include <klocale.h>
 #include <klineedit.h>
+#include <kabc/addressee.h>
 #include <kabc/stdaddressbook.h>
 #include <kiconloader.h>
 

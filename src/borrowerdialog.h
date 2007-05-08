@@ -19,10 +19,13 @@ class KLineEdit;
 #include "borrower.h"
 
 #include <kdialogbase.h>
-#include <kabc/addressee.h>
 
 #include <klistview.h>
 #include <qdict.h>
+
+namespace KABC {
+  class Addressee;
+}
 
 namespace Tellico {
 

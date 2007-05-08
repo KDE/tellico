@@ -21,6 +21,7 @@
 #include "gui/richtextlabel.h"
 #include "document.h"
 
+#include <kdialogbase.h>
 #include <klocale.h>
 #include <klistview.h>
 #include <kiconloader.h>

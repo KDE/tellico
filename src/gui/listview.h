@@ -15,11 +15,15 @@
 #define TELLICO_LISTVIEW_H
 
 #include "../datavectors.h"
+#include "../listviewcomparison.h"
 
 #include <klistview.h>
 #include <kdeversion.h>
 
+#include <qdict.h>
+
 namespace Tellico {
+  class ListViewComparison;
   namespace GUI {
 
 class ListViewItem;
@@ -48,7 +52,7 @@ public:
   };
 
   ListView(QWidget* parent, const char* name = 0);
-  virtual ~ListView() {}
+  virtual ~ListView();
 
   void clearSelection();
   /**
@@ -69,6 +73,13 @@ public:
 
   int firstVisibleColumn() const;
   int lastVisibleColumn() const;
+
+  virtual void setColumnText(int column, const QString& label);
+
+  void setComparison(int column, ListViewComparison* comp);
+  void removeComparison(int column);
+  void clearComparisons();
+  virtual int compare(int col, const GUI::ListViewItem* item1, GUI::ListViewItem* item2, bool asc);
 
 #if !KDE_IS_VERSION(3,3,90)
   // taken from KDE bug 59791
@@ -104,6 +115,7 @@ private:
   SortStyle m_sortStyle;
   bool m_isClear;
   ListViewItemList m_selectedItems;
+  QDict<ListViewComparison> m_comparisons;
 #if !KDE_IS_VERSION(3,3,90)
   bool m_shadeSortColumn;
   QColor m_backColor2;
@@ -151,7 +163,7 @@ public:
   virtual void paintCell(QPainter* painter, const QColorGroup& colorGroup,
                          int column, int width, int alignment);
 
-  ListView* listView () const { return dynamic_cast<ListView*>(KListViewItem::listView()); }
+  ListView* listView () const { return static_cast<ListView*>(KListViewItem::listView()); }
 
   virtual void doubleClicked() {}
   virtual Data::EntryVec entries() const;

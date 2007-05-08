@@ -14,8 +14,8 @@
 #ifndef TELLICO_CALENDARHANDLER_H
 #define TELLICO_CALENDARHANDLER_H
 
-#include "borrower.h"
 #include <config.h>
+#include "borrower.h"
 
 #include <kdeversion.h>
 

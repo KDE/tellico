@@ -15,6 +15,9 @@
 #define IMAGEFIELDWIDGET_H
 
 #include "fieldwidget.h"
+#include "../datavectors.h"
+
+class QString;
 
 namespace Tellico {
   namespace GUI {

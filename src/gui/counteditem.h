@@ -14,11 +14,11 @@
 #ifndef COUNTEDITEM_H
 #define COUNTEDITEM_H
 
+#include "listview.h"
+
 class QPainter;
 class QColorGroup;
 class QFontMetrics;
-
-#include "listview.h"
 
 namespace Tellico {
   namespace GUI {

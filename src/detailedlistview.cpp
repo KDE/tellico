@@ -22,7 +22,6 @@
 #include "tellico_debug.h"
 #include "tellico_kernel.h"
 #include "core/tellico_config.h"
-#include "listviewcomparison.h"
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -30,6 +29,7 @@
 #include <kapplication.h>
 #include <kaction.h>
 #include <kiconloader.h>
+#include <kpopupmenu.h>
 
 #include <qptrlist.h>
 #include <qstringlist.h>
@@ -70,7 +70,6 @@ DetailedListView::DetailedListView(QWidget* parent_, const char* name_/*=0*/)
           this, SLOT(slotHeaderMenuActivated(int)));
 
   m_checkPix = UserIcon(QString::fromLatin1("checkmark"));
-  m_comparisons.setAutoDelete(true);
 }
 
 DetailedListView::~DetailedListView() {
@@ -249,7 +248,7 @@ void DetailedListView::modifyEntries(Data::EntryVec entries_) {
     item = locateItem(entry.data());
     if(!item) {
       kdWarning() << "DetailedListView::modifyEntries() - no item found for " << entry->title() << endl;
-      return;
+      continue;
     }
 
     populateItem(item);
@@ -301,7 +300,7 @@ void DetailedListView::removeCollection(Data::CollPtr coll_) {
   m_headerMenu->insertTitle(i18n("View Columns"));
 
   m_columnWidths.clear();
-  m_comparisons.clear();
+  clearComparisons();
   m_entryPix = QPixmap();
 
   // clear the filter, too
@@ -348,15 +347,6 @@ void DetailedListView::contextMenuRequested(QListViewItem* item_, const QPoint& 
   KPopupMenu menu(this);
   Controller::self()->plugEntryActions(&menu);
   menu.exec(point_);
-}
-
-void DetailedListView::slotSelectionChanged() {
-  const GUI::ListViewItemList& items = selectedItems();
-  Data::EntryVec entries;
-  for(GUI::ListViewItemListIt it(items); it.current(); ++it) {
-    entries.append(static_cast<DetailedEntryItem*>(it.current())->entry());
-  }
-  Controller::self()->slotUpdateSelection(this, entries);
 }
 
 // don't shadow QListView::setSelected
@@ -586,7 +576,6 @@ void DetailedListView::addField(Data::FieldPtr field_, int width_) {
   // but m_columnWidths is the cached width, so just set it to 0
   m_columnWidths.push_back(KMAX(width_, 0));
 
-  m_comparisons.append(ListViewComparison::create(field_));
   m_isDirty.push_back(true);
 
   int id = m_headerMenu->insertItem(field_->title());
@@ -597,6 +586,8 @@ void DetailedListView::addField(Data::FieldPtr field_, int width_) {
     m_headerMenu->setItemChecked(id, true);
     showColumn(col);
   }
+  setComparison(col, ListViewComparison::create(field_));
+  resetComparisons();
 }
 
 void DetailedListView::modifyField(Tellico::Data::CollPtr, Data::FieldPtr oldField_, Data::FieldPtr newField_) {
@@ -609,7 +600,6 @@ void DetailedListView::modifyField(Tellico::Data::CollPtr, Data::FieldPtr oldFie
 
   // I thought this would have to be mapped to index, but not the case
   setColumnText(sec, newField_->title());
-  m_comparisons.replace(sec, ListViewComparison::create(newField_));
   if(newField_->type() == Data::Field::Bool
      || newField_->type() == Data::Field::Number
      || newField_->type() == Data::Field::Image) {
@@ -627,6 +617,8 @@ void DetailedListView::modifyField(Tellico::Data::CollPtr, Data::FieldPtr oldFie
     setColumnAlignment(sec, Qt::AlignLeft | Qt::AlignVCenter);
   }
   m_headerMenu->changeItem(m_headerMenu->idAt(sec+1), newField_->title()); // add 1 since menu has title
+  setComparison(sec, ListViewComparison::create(newField_));
+  resetComparisons();
 }
 
 void DetailedListView::removeField(Tellico::Data::CollPtr, Data::FieldPtr field_) {
@@ -648,7 +640,6 @@ void DetailedListView::removeField(Tellico::Data::CollPtr, Data::FieldPtr field_
   m_headerMenu->removeItem(m_headerMenu->idAt(sec+1)); // add 1 since menu has title
 
   m_columnWidths.erase(&m_columnWidths[sec]);
-  m_comparisons.remove(sec);
   m_isDirty.erase(&m_isDirty[sec]);
 
   // I thought this would have to be mapped to index, but not the case
@@ -658,6 +649,8 @@ void DetailedListView::removeField(Tellico::Data::CollPtr, Data::FieldPtr field_
   for(int i = sec; i < columns(); ++i) {
     header()->setResizeEnabled(columnWidth(i) > 0, header()->mapToSection(i));
   }
+  removeComparison(sec);
+  resetComparisons();
   slotUpdatePixmap();
   triggerUpdate();
 }
@@ -687,7 +680,6 @@ void DetailedListView::reorderFields(const Data::FieldVec& fields_) {
     } else {
       setColumnAlignment(sec, Qt::AlignLeft | Qt::AlignVCenter);
     }
-    m_comparisons.replace(sec, ListViewComparison::create(it.data()));
 
     if(isVisible) {
       showColumn(sec);
@@ -874,19 +866,33 @@ void DetailedListView::resetEntryStatus() {
   triggerUpdate();
 }
 
-int DetailedListView::compare(int col, const QListViewItem* item1, QListViewItem* item2, bool asc) {
+int DetailedListView::compare(int col_, const GUI::ListViewItem* item1_, GUI::ListViewItem* item2_, bool asc_) {
+  DetailedEntryItem* item2 = static_cast<DetailedEntryItem*>(item2_);
   int res = 0;
-  return (res = compareColumn(col,               item1, item2, asc)) != 0 ? res :
-         (res = compareColumn(m_prevSortColumn,  item1, item2, asc)) != 0 ? res :
-         (res = compareColumn(m_prev2SortColumn, item1, item2, asc)) != 0 ? res : 0;
+  return (res = compareColumn(col_,              item1_, item2, asc_)) != 0 ? res :
+         (res = compareColumn(m_prevSortColumn,  item1_, item2, asc_)) != 0 ? res :
+         (res = compareColumn(m_prev2SortColumn, item1_, item2, asc_)) != 0 ? res : 0;
 }
 
-int DetailedListView::compareColumn(int col, const QListViewItem* item1, QListViewItem* item2, bool asc) {
-  if(col < 0 || col >= static_cast<int>(m_comparisons.count())) {
-    return 0;
+int DetailedListView::compareColumn(int col, const GUI::ListViewItem* item1, GUI::ListViewItem* item2, bool asc) {
+  return GUI::ListView::compare(col, item1, item2, asc);
+}
+
+void DetailedListView::resetComparisons() {
+  // this is only allowed when the view is not empty, so we can grab a collection ptr
+  if(childCount() == 0) {
+    return;
   }
-  ListViewComparison* com = m_comparisons.at(col);
-  return com ? com->compare(col, item1, item2, asc) : item1->compare(item2, col, asc);
+  Data::CollPtr coll = static_cast<DetailedEntryItem*>(firstChild())->entry()->collection();
+  if(!coll) {
+    return;
+  }
+  for(int i = 0; i < columns(); ++i) {
+    Data::FieldPtr f = coll->fieldByTitle(header()->label(i));
+    if(f) {
+      setComparison(i, ListViewComparison::create(f));
+    }
+  }
 }
 
 #include "detailedlistview.moc"

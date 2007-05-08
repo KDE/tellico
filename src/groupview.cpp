@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2007 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,6 +23,7 @@
 #include "field.h"
 #include "filter.h"
 #include "tellico_kernel.h"
+#include "listviewcomparison.h"
 
 #include <kpopupmenu.h>
 #include <klocale.h>
@@ -319,6 +320,11 @@ void GroupView::addCollection(Data::CollPtr coll_) {
     m_groupClosedPixmap = UserIcon(QString::fromLatin1("person"));
   }
 
+  Data::FieldPtr f = coll_->fieldByName(QString::fromLatin1("title"));
+  if(f) {
+    setComparison(0, ListViewComparison::create(f));
+  }
+
   updateHeader();
   populateCollection();
 
@@ -431,6 +437,10 @@ void GroupView::setSorting(int col_, bool asc_) {
   ListView::setSorting(col_, asc_);
 }
 
+void GroupView::addField(Data::CollPtr, Data::FieldPtr) {
+  resetComparisons();
+}
+
 void GroupView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr newField_) {
   if(newField_->name() == m_groupBy) {
     updateHeader(newField_);
@@ -441,6 +451,11 @@ void GroupView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr newFie
   if(childCount() > 0 && static_cast<EntryGroupItem*>(firstChild())->group() == 0) {
     populateCollection();
   }
+  resetComparisons();
+}
+
+void GroupView::removeField(Data::CollPtr, Data::FieldPtr) {
+  resetComparisons();
 }
 
 void GroupView::updateHeader(Data::FieldPtr field_/*=0*/) {
@@ -470,6 +485,16 @@ QString GroupView::groupTitle() {
 void GroupView::sort() {
 //  DEBUG_BLOCK;
   GUI::ListView::sort();
+}
+
+void GroupView::resetComparisons() {
+  if(!m_coll) {
+    return;
+  }
+  Data::FieldPtr f = m_coll->fieldByName(QString::fromLatin1("title"));
+  if(f) {
+    setComparison(0, ListViewComparison::create(f));
+  }
 }
 
 #include "groupview.moc"

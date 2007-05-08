@@ -19,11 +19,10 @@ class KZip;
 class KArchiveDirectory;
 
 #include "dataimporter.h"
-#include "../entry.h"
 #include "../datavectors.h"
 #include "../stringset.h"
 
-#include <qdom.h>
+class QDomElement;
 
 namespace Tellico {
   namespace Import {
@@ -75,7 +74,7 @@ private:
 
   void readField(uint syntaxVersion, const QDomElement& elem);
   void readEntry(uint syntaxVersion, const QDomElement& elem);
-  void readImage(const QDomElement& elem);
+  void readImage(const QDomElement& elem, bool loadImage);
   void readFilter(const QDomElement& elem);
   void readBorrower(const QDomElement& elem);
   void addDefaultFilters();

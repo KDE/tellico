@@ -103,11 +103,23 @@ bool OOOHandler::Interface::connect(const std::string& host_, int port_, const s
   }
 
   // retrieve the servicemanager from the context
-  Reference<lang::XMultiComponentFactory> rServiceManager = context->getServiceManager();
+  Reference<lang::XMultiComponentFactory> rServiceManager;
+  try {
+    rServiceManager = context->getServiceManager();
+  } catch(...) {
+    DEBUG("Unable to get initial service manager.");
+    return false;
+  }
 
   // instantiate a sample service with the servicemanager.
   OUString s = OUString::createFromAscii("com.sun.star.bridge.UnoUrlResolver");
-  Reference<uno::XInterface> rInstance = rServiceManager->createInstanceWithContext(s, context);
+  Reference<uno::XInterface> rInstance;
+  try {
+    rInstance = rServiceManager->createInstanceWithContext(s, context);
+  } catch(...) {
+    DEBUG("Unable to get initial instance.");
+    return false;
+  }
 
   // Query for the XUnoUrlResolver interface
   Reference<bridge::XUnoUrlResolver> rResolver(rInstance, UNO_QUERY);
@@ -116,16 +128,17 @@ bool OOOHandler::Interface::connect(const std::string& host_, int port_, const s
     return false;
   }
 
+  // "uno:socket,host=%s,port=%s;urp;StarOffice.ComponentContext"%(host,port)
+  // "uno:pipe,name=%s;urp;StarOffice.ComponentContext"%pipe
+  if(pipe_.empty()) {
+    s = OUSTR("socket,host=") + O2OU(host_) + OUSTR(",port=") + OUString::valueOf((sal_Int32)port_);
+  } else {
+    s = OUSTR("pipe,name=") + O2OU(pipe_);
+  }
+  std::cout << "Connection string: " << OU2O(s) << std::endl;
+  s = OUSTR("uno:") + s + OUSTR(";urp;StarOffice.ServiceManager");
+
   try {
-    // "uno:socket,host=%s,port=%s;urp;StarOffice.ComponentContext"%(host,port)
-    // "uno:pipe,name=%s;urp;StarOffice.ComponentContext"%pipe
-    if(pipe_.empty()) {
-      s = OUSTR("socket,host=") + O2OU(host_) + OUSTR(",port=") + OUString::valueOf((sal_Int32)port_);
-    } else {
-      s = OUSTR("pipe,name=") + O2OU(pipe_);
-    }
-    std::cout << "Connection string: " << OU2O(s) << std::endl;
-    s = OUSTR("uno:") + s + OUSTR(";urp;StarOffice.ServiceManager");
     rInstance = rResolver->resolve(s);
     if(!rInstance.is()) {
       DEBUG("StarOffice.ServiceManager is not exported from remote counterpart");
@@ -140,6 +153,9 @@ bool OOOHandler::Interface::connect(const std::string& host_, int port_, const s
     }
   } catch(Exception& e) {
     std::cout << "Error: " << OU2O(e.Message) << std::endl;
+  } catch(...) {
+    DEBUG("Unable to resolve connection.");
+    return false;
   }
   return m_gsmgr.is();
 }

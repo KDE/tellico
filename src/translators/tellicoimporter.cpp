@@ -18,6 +18,7 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../imagefactory.h"
+#include "../image.h"
 #include "../isbnvalidator.h"
 #include "../latin1literal.h"
 #include "../tellico_strings.h"
@@ -31,6 +32,7 @@
 #include <kzip.h>
 #include <kapplication.h>
 
+#include <qdom.h>
 #include <qbuffer.h>
 #include <qfile.h>
 #include <qtimer.h>
@@ -287,17 +289,15 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   }
 
   // m_loadAllImages only pertains to zip files
-  if(loadImages_) {
-    QDomNodeList imgelems;
-    for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
-      if(n.nodeName() == Latin1Literal("images")) {
-        imgelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("image"));
-        break;
-      }
+  QDomNodeList imgelems;
+  for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    if(n.nodeName() == Latin1Literal("images")) {
+      imgelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("image"));
+      break;
     }
-    for(uint j = 0; j < imgelems.count(); ++j) {
-      readImage(imgelems.item(j).toElement());
-    }
+  }
+  for(uint j = 0; j < imgelems.count(); ++j) {
+    readImage(imgelems.item(j).toElement(), loadImages_);
   }
 
   // filters and borrowers are at document root level, not collection
@@ -585,15 +585,27 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
   m_coll->addEntries(entry);
 }
 
-void TellicoImporter::readImage(const QDomElement& elem_) {
+void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
   QString format = elem_.attribute(QString::fromLatin1("format"));
-  QString id = elem_.attribute(QString::fromLatin1("id"));
+  QString id = shareString(elem_.attribute(QString::fromLatin1("id")));
 
-  QByteArray ba;
-  KCodecs::base64Decode(QCString(elem_.text().latin1()), ba);
-  if(!ba.isEmpty()) {
-    ImageFactory::addImage(ba, format, id);
-    m_hasImages = true;
+  if(loadImage_) {
+    QByteArray ba;
+    KCodecs::base64Decode(QCString(elem_.text().latin1()), ba);
+    if(!ba.isEmpty()) {
+      QString result = ImageFactory::addImage(ba, format, id);
+      if(result.isEmpty()) {
+        myDebug() << "TellicoImporter::readImage(XML) - null image for " << id << endl;
+      }
+      m_hasImages = true;
+    }
+  } else {
+    int width = elem_.attribute(QString::fromLatin1("width")).toInt();
+    int height = elem_.attribute(QString::fromLatin1("height")).toInt();
+    if(width > 0 && height > 0) {
+      Data::ImageInfo info(id, format.latin1(), width, height);
+      ImageFactory::cacheImageInfo(info);
+    }
   }
 }
 

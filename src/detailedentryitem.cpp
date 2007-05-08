@@ -21,6 +21,7 @@
 
 #include <qpainter.h>
 #include <qheader.h>
+#include <qdatetime.h>
 #include <qtimer.h>
 
 namespace {
@@ -38,10 +39,6 @@ DetailedEntryItem::~DetailedEntryItem() {
   m_time = 0;
   delete m_timer;
   m_timer = 0;
-}
-
-Tellico::DetailedListView* DetailedEntryItem::listView() const {
-  return static_cast<DetailedListView*>(GUI::ListViewItem::listView());
 }
 
 void DetailedEntryItem::setState(State state_) {
@@ -121,10 +118,6 @@ QColor DetailedEntryItem::backgroundColor(int column_) {
                      lv->colorGroup().base(),
                      80 + 20*t/ENTRY_MAX_MINUTES_MESSAGE /* percent */);
                      // no more than 20% of highlight color
-}
-
-int DetailedEntryItem::compare(QListViewItem* item_, int col_, bool asc_) const {
-  return listView()->compare(col_, this, item_, asc_);
 }
 
 void DetailedEntryItem::paintFocus(QPainter*, const QColorGroup&, const QRect&) {

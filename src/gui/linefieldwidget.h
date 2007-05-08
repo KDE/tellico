@@ -14,9 +14,10 @@
 #ifndef LINEFIELDWIDGET_H
 #define LINEFIELDWIDGET_H
 
-class KLineEdit;
-
 #include "fieldwidget.h"
+#include "../datavectors.h"
+
+class KLineEdit;
 
 namespace Tellico {
   namespace GUI {

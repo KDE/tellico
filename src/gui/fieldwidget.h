@@ -14,11 +14,14 @@
 #ifndef FIELDWIDGET_H
 #define FIELDWIDGET_H
 
-class QLabel;
-class QCheckBox;
+#include "../datavectors.h"
 
 #include <qwidget.h>
-#include "../datavectors.h"
+#include <qregexp.h>
+
+class QLabel;
+class QCheckBox;
+class QString;
 
 namespace Tellico {
   namespace Data {

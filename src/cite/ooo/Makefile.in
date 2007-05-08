@@ -728,7 +728,7 @@ uninstall-am: uninstall-info-am uninstall-kde_moduleLTLIBRARIES
 clean-local:
 	rm -rf $(UNODIR) $(INCDIR) $(CLEANFILES)
 
-ooohandler.o: $(UNOHPPFILES) $(INCDIR)
+interface.o: $(UNOHPPFILES) $(INCDIR)
 
 $(INCDIR):
 	mkdir -p $(INCDIR)
@@ -799,7 +799,7 @@ bcheck-am:
 
 
 #>+ 11
-tellico_ooo_la.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/ooohandler.cpp  $(UNOHPPFILES) $(INCDIR) $(srcdir)/interface.cpp 
+tellico_ooo_la.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/ooohandler.cpp $(srcdir)/interface.cpp  $(UNOHPPFILES) $(INCDIR) 
 	@echo 'creating tellico_ooo_la.all_cpp.cpp ...'; \
 	rm -f tellico_ooo_la.all_cpp.files tellico_ooo_la.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> tellico_ooo_la.all_cpp.final; \

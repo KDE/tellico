@@ -16,8 +16,6 @@
 
 #include "datavectors.h"
 
-#include <ksharedptr.h>
-
 #include <qstringlist.h>
 #include <qstring.h>
 #include <qregexp.h>
@@ -39,7 +37,7 @@ public:
    * The possible field types. A Line is represented by a KLineEdit,
    * a Para is a QMultiLineEdit encompassing multiple lines, a Choice is
    * limited to set values shown in a KComboBox, and a Bool is either true
-   * or not and is thus a QCheckBox. A Number type is obvious, though it used
+   * or not and is thus a QCheckBox. A Number type is an integer, though it used
    * to be a Year. A ReadOnly is a hidden value. A URL is obvious, too.
    * A Table looks like a small spreadsheet with one column, and a Table2
    * type has two columns.  An Image points to a QImage. A Dependent field
@@ -294,6 +292,11 @@ public:
    * @return The property list
    */
   const StringMap& propertyList() const { return m_properties; }
+  /**
+   * Return a vector of all the fields on which the value of this field depends.
+   * Returns an empty vector for non-Dpendent fields
+   */
+  FieldVec dependsOn(CollPtr coll) const;
 
   /*************************** STATIC **********************************/
 
@@ -362,7 +365,6 @@ public:
   static void convertOldRating(Data::FieldPtr field);
   static void stripArticles(QString& value);
   static void articlesUpdated();
-
 
 private:
   /*

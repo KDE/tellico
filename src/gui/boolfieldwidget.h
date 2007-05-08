@@ -14,9 +14,11 @@
 #ifndef BOOLFIELDWIDGET_H
 #define BOOLFIELDWIDGET_H
 
-class QCheckBox;
-
 #include "fieldwidget.h"
+#include "../datavectors.h"
+
+class QCheckBox;
+class QString;
 
 namespace Tellico {
   namespace GUI {

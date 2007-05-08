@@ -25,6 +25,8 @@ class KURLRequester;
 class KLineEdit;
 class KComboBox;
 
+class QCheckBox;
+
 namespace Tellico {
   namespace GUI {
     class ComboBox;

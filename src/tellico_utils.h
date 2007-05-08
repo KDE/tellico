@@ -14,14 +14,16 @@
 #ifndef TELLICO_UTILS_H
 #define TELLICO_UTILS_H
 
+#include <qnamespace.h>
+
 class KLibrary;
 
+class QColor;
+class QColorGroup;
 class QCursor;
+class QString;
 class QStringList;
 class QScrollView;
-
-#include <qstring.h>
-#include <qcolor.h>
 
 /**
  * This file contains utility functions.

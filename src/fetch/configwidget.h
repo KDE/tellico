@@ -14,15 +14,14 @@
 #ifndef FETCHCONFIGWIDGET_H
 #define FETCHCONFIGWIDGET_H
 
-class KConfig;
-class QCheckBox;
-
-#include "fetch.h"
-#include "../datavectors.h"
+#include "../datavectors.h" 
 
 #include <qwidget.h>
 #include <qdict.h>
 #include <qcheckbox.h>
+
+class KConfig;
+class QStringList;
 
 namespace Tellico {
   namespace Fetch {

@@ -20,7 +20,6 @@
 #include <qptrlist.h>
 #include <qlabel.h>
 #include <qpixmap.h>
-#include <qstringlist.h>
 
 namespace Tellico {
   namespace Data {

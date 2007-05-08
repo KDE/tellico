@@ -16,7 +16,7 @@
 
 #include <klineedit.h>
 
-#include <qlabel.h>
+#include <qstring.h>
 
 namespace Tellico {
   namespace GUI {

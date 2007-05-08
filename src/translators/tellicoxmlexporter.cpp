@@ -331,12 +331,13 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     myDebug() << "TellicoXMLExporter::exportImageXML() - empty image!" << endl;
     return;
   }
-//  myDebug() << "TellicoXMLExporter::exportImageXML() - id = " << id_ << endl;
+//  myLog() << "TellicoXMLExporter::exportImageXML() - id = " << id_ << endl;
 
   QDomElement imgElem = dom_.createElement(QString::fromLatin1("image"));
   if(m_includeImages) {
     const Data::Image& img = ImageFactory::imageById(id_);
     if(img.isNull()) {
+      myDebug() << "TellicoXMLExporter::exportImageXML() - null image - " << id_ << endl;
       return;
     }
     imgElem.setAttribute(QString::fromLatin1("format"), img.format());

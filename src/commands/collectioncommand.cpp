@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "collectioncommand.h"
+#include "../collection.h"
 #include "../document.h"
 #include "../controller.h"
 #include "../tellico_debug.h"

@@ -24,10 +24,22 @@ namespace Tellico {
  *
  * It has the following standard attributes:
  * @li Title
- * @li Artist
- * @li Album
+ * @li Description
+ * @li Denomination
+ * @li Country
  * @li Year
- * @li Genre
+ * @li Color
+ * @li Scott
+ * @li Grade
+ * @li Cancelled
+ * @li Hinged
+ * @li Centering
+ * @li Gummed
+ * @li Pur_date
+ * @li Pur_price
+ * @li Location
+ * @li Gift
+ * @li Image
  * @li Comments
  *
  * @author Robby Stephenson

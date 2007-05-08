@@ -34,7 +34,7 @@ public:
       add(*it);
     }
   }
-  void remove(const QString& val) { if(!val.isEmpty()) m_dict.remove(val); }
+  bool remove(const QString& val) { return !val.isEmpty() && m_dict.remove(val); }
   void clear() { m_dict.clear(); }
   bool has(const QString& val) const { return !val.isEmpty() && (m_dict.find(val) != 0); }
   bool isEmpty() const { return m_dict.isEmpty(); }

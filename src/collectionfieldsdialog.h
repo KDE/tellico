@@ -28,7 +28,6 @@ class QPainter;
 #include <kdialogbase.h>
 
 #include <qmap.h>
-#include <qlistbox.h>
 
 namespace Tellico {
   namespace Data {

@@ -16,11 +16,8 @@
 
 #include "datavectors.h"
 
-#include <ksharedptr.h>
-
 #include <qstringlist.h>
 #include <qstring.h>
-#include <qptrlist.h>
 #include <qobject.h>
 
 #include <functional>
@@ -224,7 +221,7 @@ public:
    * Construct the derived valued for an field. The format string should be
    * of the form "%{name1} %{name2}" where the names are replaced by the value
    * of that field for the entry. Whether or not formatting is done on the
-   * strings themselves shoudl be taken into account.
+   * strings themselves should be taken into account.
    *
    * @param formatString The format string
    * @param formatted Whether the inserted values should be formatted.

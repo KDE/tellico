@@ -14,7 +14,6 @@
 #ifndef IMAGEFACTORY_H
 #define IMAGEFACTORY_H
 
-#include "filehandler.h"
 #include "stringset.h"
 
 #include <kurl.h>
@@ -117,6 +116,7 @@ public:
    */
   static const Data::Image& imageById(const QString& id);
   static Data::ImageInfo imageInfo(const QString& id);
+  static void cacheImageInfo(const Data::ImageInfo& info);
   // basically returns !imageById().isNull()
   static bool validImage(const QString& id);
 

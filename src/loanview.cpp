@@ -19,6 +19,7 @@
 #include "collection.h"
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
+#include "listviewcomparison.h"
 
 #include <klocale.h>
 #include <kpopupmenu.h>
@@ -100,6 +101,22 @@ void LoanView::addCollection(Data::CollPtr coll_) {
   for(Data::BorrowerVec::Iterator it = borrowers.begin(); it != borrowers.end(); ++it) {
     addBorrower(it);
   }
+  Data::FieldPtr f = coll_->fieldByName(QString::fromLatin1("title"));
+  if(f) {
+    setComparison(0, ListViewComparison::create(f));
+  }
+}
+
+void LoanView::addField(Data::CollPtr, Data::FieldPtr) {
+  resetComparisons();
+}
+
+void LoanView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr) {
+  resetComparisons();
+}
+
+void LoanView::removeField(Data::CollPtr, Data::FieldPtr) {
+  resetComparisons();
 }
 
 void LoanView::addBorrower(Data::BorrowerPtr borrower_) {
@@ -189,6 +206,29 @@ void LoanView::slotModifyLoan() {
   }
 
   Kernel::self()->modifyLoan(static_cast<LoanItem*>(item)->loan());
+}
+
+void LoanView::resetComparisons() {
+  // this is only allowed when the view is not empty, so we can grab a collection ptr
+  if(childCount() == 0) {
+    return;
+  }
+  Data::LoanPtr loan = static_cast<LoanItem*>(firstChild())->loan();
+  if(!loan) {
+    return;
+  }
+  Data::EntryPtr entry = loan->entry();
+  if(!entry) {
+    return;
+  }
+  Data::CollPtr coll = entry->collection();
+  if(!coll) {
+    return;
+  }
+  Data::FieldPtr f = coll->fieldByName(QString::fromLatin1("title"));
+  if(f) {
+    setComparison(0, ListViewComparison::create(f));
+  }
 }
 
 #include "loanview.moc"

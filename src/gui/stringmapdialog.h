@@ -20,7 +20,8 @@ class QListViewItem;
 
 #include <kdialogbase.h>
 
-#include <qmap.h>
+template <typename T1, typename T2>
+class QMap;
 
 namespace Tellico {
 

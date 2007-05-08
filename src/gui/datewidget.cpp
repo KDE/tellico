@@ -29,7 +29,16 @@
 #include <qvbox.h>
 #include <qlayout.h>
 
+using Tellico::GUI::SpinBox;
 using Tellico::GUI::DateWidget;
+
+SpinBox::SpinBox(int min, int max, QWidget *parent) : QSpinBox(min, max, 1, parent)
+{
+  editor()->setAlignment(AlignRight);
+  // I want to be able to omit the day
+  // an empty string just removes the special value, so set white space
+  setSpecialValueText(QChar(' '));
+}
 
 DateWidget::DateWidget(QWidget* parent_, const char* name_) : QWidget(parent_, name_) {
   QHBoxLayout* l = new QHBoxLayout(this, 0, 4);

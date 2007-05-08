@@ -43,6 +43,8 @@
 #include <kaction.h>
 #include <ktoolbarbutton.h>
 
+#include <qpopupmenu.h>
+
 using Tellico::Controller;
 
 Controller* Controller::s_self = 0;
@@ -178,7 +180,6 @@ void Controller::addedEntries(Data::EntryVec entries_) {
     it->addEntries(entries_);
   }
   m_mainWindow->slotQueueFilter();
-  slotUpdateSelection(0, entries_);
   blockAllSignals(false);
 }
 
@@ -258,7 +259,7 @@ void Controller::slotClearSelection() {
   if(m_mainWindow->m_loanView) {
     m_mainWindow->m_loanView->clearSelection();
   }
-  m_mainWindow->m_editDialog->clear();
+//  m_mainWindow->m_editDialog->clear(); let this stay
 //  m_mainWindow->m_viewStack->clear(); let this stay
 
   blockAllSignals(false);
@@ -505,10 +506,13 @@ void Controller::slotUpdateFilter(FilterPtr filter_) {
 //  myDebug() << "Controller::slotUpdateFilter()" << endl;
   blockAllSignals(true);
 
+  if(filter_ && !filter_->isEmpty()) {
+    // only clear the selection if there's actually a filter rule
+    m_mainWindow->m_detailedView->clearSelection();
+    m_mainWindow->m_viewStack->iconView()->clearSelection();
+    m_selectedEntries.clear();
+  }
   updateActions();
-//  m_selectedEntries.clear();
-//  m_mainWindow->m_detailedView->clearSelection();
-//  m_mainWindow->m_viewStack->iconView()->clearSelection();
 
   // the view takes over ownership of the filter
   m_mainWindow->m_detailedView->setFilter(filter_);

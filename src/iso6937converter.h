@@ -18,8 +18,6 @@ class QCString;
 class QString;
 class QChar;
 
-#include <qglobal.h>
-
 namespace Tellico {
 
 /**
@@ -30,12 +28,12 @@ public:
   static QString toUtf8(const QCString& text);
 
 private:
-  static bool hasNext(uint pos, uint len);
-  static bool isAscii(uchar c);
-  static bool isCombining(uchar c);
+  static bool hasNext(unsigned int pos, unsigned int len);
+  static bool isAscii(unsigned char c);
+  static bool isCombining(unsigned char c);
 
-  static QChar getChar(uchar c);
-  static QChar getCombiningChar(uint c);
+  static QChar getChar(unsigned char c);
+  static QChar getCombiningChar(unsigned int c);
 };
 
 } // end namespace

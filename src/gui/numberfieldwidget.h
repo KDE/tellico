@@ -17,6 +17,7 @@
 class KLineEdit;
 
 #include "fieldwidget.h"
+#include "../datavectors.h"
 
 namespace Tellico {
   namespace GUI {

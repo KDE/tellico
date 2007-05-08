@@ -17,7 +17,7 @@
 #include "xmlimporter.h"
 #include "../datavectors.h"
 
-#include <qdom.h>
+class QDomNode;
 
 namespace Tellico {
   namespace Import {

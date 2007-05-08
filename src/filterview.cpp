@@ -18,6 +18,7 @@
 #include "document.h"
 #include "entryitem.h"
 #include "tellico_kernel.h"
+#include "listviewcomparison.h"
 
 #include <klocale.h>
 #include <kpopupmenu.h>
@@ -94,6 +95,10 @@ void FilterView::addCollection(Data::CollPtr coll_) {
   for(FilterVec::Iterator it = filters.begin(); it != filters.end(); ++it) {
     addFilter(it);
   }
+  Data::FieldPtr f = coll_->fieldByName(QString::fromLatin1("title"));
+  if(f) {
+    setComparison(0, ListViewComparison::create(f));
+  }
 }
 
 void FilterView::addEntries(Data::EntryVec entries_) {
@@ -154,6 +159,19 @@ void FilterView::removeEntries(Data::EntryVec entries_) {
     }
   }
 }
+
+void FilterView::addField(Data::CollPtr, Data::FieldPtr) {
+  resetComparisons();
+}
+
+void FilterView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr) {
+  resetComparisons();
+}
+
+void FilterView::removeField(Data::CollPtr, Data::FieldPtr) {
+  resetComparisons();
+}
+
 void FilterView::addFilter(FilterPtr filter_) {
   FilterItem* filterItem = new FilterItem(this, filter_);
 
@@ -219,6 +237,29 @@ void FilterView::slotSelectionChanged() {
   GUI::ListViewItem* item = selectedItems().getFirst();
   if(item && item->isFilterItem()) {
     Controller::self()->slotUpdateFilter(static_cast<FilterItem*>(item)->filter());
+  }
+}
+
+void FilterView::resetComparisons() {
+  // this is only allowed when the view is not empty, so we can grab a collection ptr
+  if(childCount() == 0) {
+    return;
+  }
+  QListViewItem* item = firstChild();
+  while(item && item->childCount() == 0) {
+    item = item->nextSibling();
+  }
+  if(!item) {
+    return;
+  }
+  item = item->firstChild();
+  Data::CollPtr coll = static_cast<EntryItem*>(item)->entry()->collection();
+  if(!coll) {
+    return;
+  }
+  Data::FieldPtr f = coll->fieldByName(QString::fromLatin1("title"));
+  if(f) {
+    setComparison(0, ListViewComparison::create(f));
   }
 }
 

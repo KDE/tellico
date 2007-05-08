@@ -28,6 +28,7 @@ namespace Tellico {
 #include <ksortablevaluelist.h>
 
 #include <qobject.h>
+#include <qmap.h>
 
 namespace Tellico {
   namespace Fetch {

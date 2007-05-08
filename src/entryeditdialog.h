@@ -26,7 +26,6 @@ class KPushButton;
 namespace Tellico {
   namespace GUI {
     class TabControl;
-    class FieldWidget;
   }
 
 /**

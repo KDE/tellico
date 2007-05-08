@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sv\n"
 "POT-Creation-Date: 2007-04-01 19:00-0700\n"
-"PO-Revision-Date: 2007-02-16 10:22+0100\n"
+"PO-Revision-Date: 2007-04-08 10:09+0200\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -755,12 +755,11 @@ msgstr "DivX"
 
 #: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:800
 msgid "Blu-ray"
-msgstr ""
+msgstr "Blu-ray"
 
 #: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:803
-#, fuzzy
 msgid "HD DVD"
-msgstr "DVD"
+msgstr "HD DVD"
 
 #: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
 msgid "Medium"
@@ -4408,11 +4407,13 @@ msgid "The search returned no items."
 msgstr "Sökningen lämnade inga värden."
 
 #: fetchdialog.cpp:333
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
-msgstr "Sökningen lämnade %n resultat."
+msgstr ""
+"Sökningen lämnade 1 resultat.\n"
+"Sökningen lämnade %n resultat."
 
 #: fetchdialog.cpp:370
 msgid "<qt>No entries were found for the following ISBN values:</qt>"

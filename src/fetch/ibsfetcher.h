@@ -17,9 +17,12 @@
 #include "fetcher.h"
 #include "configwidget.h"
 
-#include <kio/job.h>
-
 #include <qcstring.h> // for QByteArray
+#include <qguardedptr.h>
+
+namespace KIO {
+  class Job;
+}
 
 namespace Tellico {
   namespace Fetch {

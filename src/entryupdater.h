@@ -17,7 +17,8 @@
 #include "datavectors.h"
 #include "fetch/fetchmanager.h"
 
-#include <qptrlist.h>
+#include <qpair.h>
+#include <qvaluelist.h>
 
 namespace Tellico {
 

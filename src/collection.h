@@ -64,7 +64,7 @@ public:
     Card = 10,
     Game = 11,
     File = 12
-    // if you want to add custom collection types, use a numebr sure to be unique like 101
+    // if you want to add custom collection types, use a number sure to be unique like 101
   };
 
   /**

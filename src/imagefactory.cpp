@@ -14,6 +14,7 @@
 #include "imagefactory.h"
 #include "image.h"
 #include "document.h"
+#include "filehandler.h"
 #include "tellico_utils.h"
 #include "tellico_kernel.h"
 #include "core/tellico_config.h"
@@ -152,14 +153,17 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
     return *img;
   }
 
-//  myLog() << "ImageFactory::addImageImpl(QByteArray) - " << data_.size() << " bytes, format = " << format_ << ", id = "<< id_ << endl;
-
   img = new Data::Image(data_, format_, id_);
   if(img->isNull()) {
     myDebug() << "ImageFactory::addImageImpl(QByteArray) - NULL IMAGE!!!!!" << endl;
     delete img;
     return s_null;
   }
+
+//  myLog() << "ImageFactory::addImageImpl(QByteArray) - " << data_.size()
+//          << " bytes, format = " << format_
+//          << ", id = "<< img->id() << endl;
+
   s_imageDict.insert(img->id(), img);
   s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
   return *img;
@@ -376,6 +380,10 @@ Tellico::Data::ImageInfo ImageFactory::imageInfo(const QString& id_) {
   return Data::ImageInfo(img);
 }
 
+void ImageFactory::cacheImageInfo(const Data::ImageInfo& info) {
+  s_imageInfoMap.insert(info.id, info);
+}
+
 bool ImageFactory::validImage(const QString& id_) {
   // don't try s_imageInfoMap[id_] cause it inserts an empty image info
   return s_imageInfoMap.contains(id_) || hasImage(id_) || !imageById(id_).isNull();
@@ -470,7 +478,6 @@ void ImageFactory::createStyleImages(const StyleOptions& opt_) {
 }
 
 void ImageFactory::removeImage(const QString& id_, bool deleteImage_) {
-//  myLog() << "ImageFactory::removeImage() - " << id_ << endl;
   //be careful using this
   s_imageDict.remove(id_);
   s_imageCache.remove(id_);
@@ -512,7 +519,7 @@ void ImageFactory::releaseImages() {
     if(!s_imageDict.find(*it)) {
       continue;
     }
-//    myDebug() << "ImageFactory::releaseImage() - id = " << *it << endl;
+//    myLog() << "ImageFactory::releaseImage() - id = " << *it << endl;
     if(QFile::exists(dataDir() + *it)) {
 //      myDebug() << "...exists in dataDir() - removing from dict" << endl;
       s_imageDict.remove(*it);

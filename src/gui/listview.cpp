@@ -38,19 +38,26 @@ ListView::ListView(QWidget* parent_, const char* name_) : KListView(parent_, nam
   slotUpdateColors();
 #endif
   connect(kapp, SIGNAL(kdisplayPaletteChanged()), SLOT(slotUpdateColors()));
+  m_comparisons.setAutoDelete(true);
+}
+
+ListView::~ListView() {
 }
 
 void ListView::clearSelection() {
-  blockSignals(true);
-  if(!m_selectedItems.isEmpty()) {
-    selectAll(false);
-    m_isClear = true;
+  if(m_selectedItems.isEmpty()) {
+    // nothing to do;
+    return;
   }
-  blockSignals(false);
+  bool b = signalsBlocked();
+  blockSignals(true);
+  selectAll(false);
+  blockSignals(b);
+  emit selectionChanged();
 }
 
-void ListView::updateSelected(ListViewItem* item_, bool s_) {
-  if(s_) {
+void ListView::updateSelected(ListViewItem* item_, bool selected_) {
+  if(selected_) {
     m_selectedItems.append(item_);
   } else {
     m_selectedItems.removeRef(item_);
@@ -102,6 +109,38 @@ int ListView::lastVisibleColumn() const {
     return -1;
   }
   return header()->mapToSection(col);
+}
+
+void ListView::setColumnText(int column, const QString& label) {
+  ListViewComparison* comp = m_comparisons.take(columnText(column));
+  KListView::setColumnText(column, label);
+  if(comp) {
+    m_comparisons.insert(columnText(column), comp);
+  }
+}
+
+void ListView::setComparison(int column, ListViewComparison* comp) {
+  if(comp) {
+    m_comparisons.replace(columnText(column), comp);
+  }
+}
+
+void ListView::removeComparison(int column) {
+  m_comparisons.remove(columnText(column));
+}
+
+void ListView::clearComparisons() {
+  m_comparisons.clear();
+}
+
+int ListView::compare(int col, const GUI::ListViewItem* item1, GUI::ListViewItem* item2, bool asc) {
+  if(col >= 0 && col < static_cast<int>(m_comparisons.count())) {
+    ListViewComparison* com = m_comparisons.find(columnText(col));
+    if(com) {
+      return com->compare(col, item1, item2, asc);
+    }
+  }
+  return 0;
 }
 
 #if !KDE_IS_VERSION(3,3,90)
@@ -216,6 +255,10 @@ void ListViewItem::clear() {
 
 int ListViewItem::compare(QListViewItem* item_, int col_, bool asc_) const {
   int res = compareWeight(item_, col_, asc_);
+  if(res != 0) {
+    return res;
+  }
+  res = listView()->compare(col_, this, static_cast<GUI::ListViewItem*>(item_), asc_);
   return res == 0 ? KListViewItem::compare(item_, col_, asc_) : res;
 }
 

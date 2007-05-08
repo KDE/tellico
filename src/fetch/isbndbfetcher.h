@@ -22,7 +22,6 @@ namespace Tellico {
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <kurl.h>
 #include <kio/job.h>
 
 #include <qcstring.h> // for QByteArray

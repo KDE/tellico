@@ -372,12 +372,15 @@ void CollectionFieldsDialog::slotApply() {
   // clear new ones, too
   m_newFields.clear();
 
-  // the field type might have changed, so need to update the type combo list with possible values
-  QString currType = m_typeCombo->currentText();
-  m_typeCombo->clear();
-  m_typeCombo->insertStringList(newTypesAllowed(m_currentField->type()));
-  m_typeCombo->setCurrentItem(currType);
+  m_currentField = static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->field();
 
+  // the field type might have changed, so need to update the type combo list with possible values
+  if(m_currentField) {
+    QString currType = m_typeCombo->currentText();
+    m_typeCombo->clear();
+    m_typeCombo->insertStringList(newTypesAllowed(m_currentField->type()));
+    m_typeCombo->setCurrentItem(currType);
+  }
   enableButtonApply(false);
 }
 
@@ -402,6 +405,8 @@ void CollectionFieldsDialog::slotNew() {
   m_newFields.append(field);
 //  myDebug() << "CollectionFieldsDialog::slotNew() - adding new field " << title << endl;
 
+  m_currentField = field;
+
 //  m_fieldsBox->insertItem(title);
   FieldListBox* box = new FieldListBox(m_fieldsBox, field);
   m_fieldsBox->setSelected(box, true);
@@ -418,21 +423,23 @@ void CollectionFieldsDialog::slotDelete() {
   }
 
   if(m_newFields.contains(m_currentField)) {
-    m_fieldsBox->removeItem(m_fieldsBox->currentItem());
+    // remove field from vector before deleting item containing field
     m_newFields.remove(m_currentField);
+    m_fieldsBox->removeItem(m_fieldsBox->currentItem());
     m_fieldsBox->setSelected(m_fieldsBox->currentItem(), true);
     m_fieldsBox->ensureCurrentVisible();
-    m_currentField = 0; // KShared gets auto-deleted
+    m_currentField = static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->field(); // KShared gets auto-deleted
     return;
   }
 
+  QString name = m_currentField->name();
   bool success = Kernel::self()->removeField(m_currentField);
   if(success) {
-    m_currentField = 0;
     emit signalCollectionModified();
     m_fieldsBox->removeItem(m_fieldsBox->currentItem());
     m_fieldsBox->setSelected(m_fieldsBox->currentItem(), true);
     m_fieldsBox->ensureCurrentVisible();
+    m_currentField = static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->field();
     enableButtonOK(true);
   }
 }

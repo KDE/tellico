@@ -19,7 +19,9 @@ class KURL;
 class KTempFile;
 
 #include <qobject.h>
-#include <qstringlist.h>
+#include <qptrlist.h>
+
+class QStringList;
 
 namespace KNS {
   class Entry;

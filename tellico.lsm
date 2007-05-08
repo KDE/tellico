@@ -1,16 +1,16 @@
-Begin3
+Begin4
 Title:          Tellico
-Version:        1.2.10
-Entered-date:   
-Description:    Tellico is a collection manager for books,
-bibliographies, video, music, comic books, video games, coins, stamps,
-trading cards, and wines.
-Keywords:        
-Author:         Robby Stephenson <robby@periapsis.org> 
-Maintained-by:  Robby Stephenson <robby@periapsis.org> 
-Primary-site:   http://www.periapsis.org/tellico/       
-Home-page:      http://www.periapsis.org/tellico/
-Original-site:  
-Platforms:      Linux and other Unices
-Copying-policy: GNU Public License
+Version:        1.2.11
+Entered-date:   2007-04-08
+Description:    Tellico is a collection manager for books, bibliographies,
+                video, music, comic books, video games, coins, stamps,
+                trading cards, and wines.
+Primary-site:   http://www.periapsis.org/tellico/
+Keywords:       collection, books, bibliographies, video, music, comic books,
+                video games, coins, stamps, trading cards, wine
+Author:         robby@periapsis.org (Robby Stephenson)
+Maintained-by:  robby@periapsis.org (Robby Stephenson)
+Original-site:
+Platforms:
+Copying-policy: GPL
 End

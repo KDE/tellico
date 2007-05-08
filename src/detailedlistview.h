@@ -14,24 +14,18 @@
 #ifndef DETAILEDLISTVIEW_H
 #define DETAILEDLISTVIEW_H
 
-namespace Tellico {
-  class DetailedEntryItem;
-}
-
 #include "gui/listview.h"
-#include "listviewcomparison.h"
 #include "observer.h"
 #include "filter.h"
 
-#include <kpopupmenu.h>
-
-#include <qpoint.h>
 #include <qstringlist.h>
 #include <qpixmap.h>
 #include <qvaluevector.h>
-#include <qptrlist.h>
+
+class KPopupMenu;
 
 namespace Tellico {
+  class DetailedEntryItem;
 
 /**
  * The DetailedListView class shows detailed information about entries in the
@@ -128,7 +122,7 @@ public:
   void setPixmapSize(int width, int height) { m_pixWidth = width; m_pixHeight = height; }
   void resetEntryStatus();
 
-  int compare(int column, const QListViewItem* item1, QListViewItem* item2, bool asc);
+  virtual int compare(int col, const GUI::ListViewItem* item1, GUI::ListViewItem* item2, bool asc);
 
 public slots:
   /**
@@ -146,7 +140,7 @@ public slots:
 
 private:
   DetailedEntryItem* addEntryInternal(Data::EntryPtr entry);
-  int compareColumn(int col, const QListViewItem* item1, QListViewItem* item2, bool asc);
+  int compareColumn(int col, const GUI::ListViewItem* item1, GUI::ListViewItem* item2, bool asc);
 
   /**
    * A helper method to populate an item. The column text is initialized by pulling
@@ -170,6 +164,7 @@ private:
   void showColumn(int col);
   void hideColumn(int col);
   void updateFirstSection();
+  void resetComparisons();
 
 private slots:
   /**
@@ -180,10 +175,6 @@ private slots:
    * @param col The column number, not currently used
    */
   void contextMenuRequested(QListViewItem* item, const QPoint& point, int col);
-  /**
-   * Handles everything when an item is selected. The proper signal is emitted.
-   */
-  void slotSelectionChanged();
   void slotHeaderMenuActivated(int id);
   void slotCacheColumnWidth(int section, int oldSize, int newSize);
   /**
@@ -204,7 +195,6 @@ private:
 
   KPopupMenu* m_headerMenu;
   QValueVector<int> m_columnWidths;
-  QPtrList<ListViewComparison> m_comparisons;
   QValueVector<bool> m_isDirty;
   QValueVector<int> m_imageColumns;
   bool m_loadingCollection;

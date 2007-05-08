@@ -24,7 +24,9 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
+#include <kio/job.h>
 
+#include <qdom.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qfile.h>

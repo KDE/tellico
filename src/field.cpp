@@ -16,6 +16,7 @@
 #include "latin1literal.h"
 #include "tellico_debug.h"
 #include "core/tellico_config.h"
+#include "collection.h"
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -176,6 +177,29 @@ void Field::setDefaultValue(const QString& value_) {
 
 bool Field::isSingleCategory() const {
   return (m_type == Para || m_type == Table || m_type == Table2 || m_type == Image);
+}
+
+// format is something like "%{year} %{author}"
+Tellico::Data::FieldVec Field::dependsOn(CollPtr coll_) const {
+  FieldVec vec;
+  if(m_type != Dependent) {
+    return vec;
+  }
+
+  QRegExp rx(QString::fromLatin1("%\\{(.+)\\}"));
+  rx.setMinimal(true);
+  for(int pos = m_desc.find(rx); pos > -1; pos = m_desc.find(rx, pos+4)) {
+    QString fieldName = rx.cap(1);
+    FieldPtr field = coll_->fieldByName(fieldName);
+    if(!field) {
+      // allow the user to also use field titles
+      field = coll_->fieldByTitle(fieldName);
+    }
+    if(field) {
+      vec.append(field);
+    }
+  }
+  return vec;
 }
 
 QString Field::format(const QString& value_, FormatFlag flag_) {

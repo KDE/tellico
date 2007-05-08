@@ -14,9 +14,6 @@
 #ifndef XSLTHANDLER_H
 #define XSLTHANDLER_H
 
-#include <kurl.h>
-
-#include <qdom.h>
 #include <qmap.h>
 
 extern "C" {
@@ -25,6 +22,9 @@ extern "C" {
 // for xsltStyleSheetPtr
 #include <libxslt/xsltInternals.h>
 }
+
+class KURL;
+class QDomDocument;
 
 namespace Tellico {
 

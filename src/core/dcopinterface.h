@@ -19,7 +19,7 @@
 #include <dcopobject.h>
 #include <kurl.h>
 
-#include <qstringlist.h>
+#include <qstringlist.h> // used in generated dcopinterface_skel.cpp
 
 namespace Tellico {
 

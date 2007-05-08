@@ -21,7 +21,6 @@
 #include <qdict.h>
 
 namespace Tellico {
-  class FilterItem;
 
 /**
  * @author Robby Stephenson
@@ -40,6 +39,10 @@ public:
   virtual void modifyEntry(Data::EntryPtr entry);
   virtual void modifyEntries(Data::EntryVec entries);
   virtual void removeEntries(Data::EntryVec entries);
+
+  virtual void addField(Data::CollPtr, Data::FieldPtr);
+  virtual void modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr);
+  virtual void removeField(Data::CollPtr, Data::FieldPtr);
 
   virtual void    addFilter(FilterPtr filter);
   virtual void modifyFilter(FilterPtr) {}
@@ -69,6 +72,7 @@ private slots:
 
 private:
   virtual void setSorting(int column, bool ascending = true);
+  void resetComparisons();
 
   bool m_notSortedYet;
   QDict<FilterItem> m_itemDict;
