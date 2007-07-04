@@ -24,6 +24,7 @@
 #include <klocale.h>
 
 #include <qregexp.h>
+#include <qvaluestack.h>
 
 using Tellico::Data::Collection;
 
@@ -64,7 +65,11 @@ bool Collection::addField(FieldPtr field_) {
     removeField(fieldByName(field_->name()), true);
   }
 
-//  myDebug() << "Collection::addField() - adding " << field_->name() << endl;
+  // it's not sufficient to merely check the new field
+  if(dependentFieldHasRecursion(field_)) {
+    field_->setDescription(QString());
+  }
+
   m_fields.append(field_);
   if(field_->formatFlag() == Field::FormatName) {
     m_peopleFields.append(field_); // list of people attributes
@@ -101,6 +106,13 @@ bool Collection::addField(FieldPtr field_) {
 
   if(m_defaultGroupField.isEmpty() && field_->flags() & Field::AllowGrouped) {
     m_defaultGroupField = field_->name();
+  }
+
+  // refresh all dependent fields, in case one references this new one
+  for(FieldVec::Iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
+    if(it->type() == Field::Dependent) {
+      emit signalRefreshField(it);
+    }
   }
 
   return true;
@@ -148,6 +160,9 @@ bool Collection::mergeField(FieldPtr newField_) {
   // add new description if current is empty
   if(currField->description().isEmpty()) {
     currField->setDescription(newField_->description());
+    if(dependentFieldHasRecursion(currField)) {
+      currField->setDescription(QString());
+    }
   }
 
   // if new field has additional extended properties, add those
@@ -192,7 +207,7 @@ bool Collection::modifyField(FieldPtr newField_) {
 //  myDebug() << "Collection::modifyField() - " << newField_->name() << endl;
 
 // the field name never changes
-  const QString& fieldName = newField_->name();
+  const QString fieldName = newField_->name();
   FieldPtr oldField = fieldByName(fieldName);
   if(!oldField) {
     myDebug() << "Collection::modifyField() - no field named " << fieldName << endl;
@@ -203,8 +218,8 @@ bool Collection::modifyField(FieldPtr newField_) {
   m_fieldNameDict.replace(fieldName, newField_);
 
   // update titles
-  const QString& oldTitle = oldField->title();
-  const QString& newTitle = newField_->title();
+  const QString oldTitle = oldField->title();
+  const QString newTitle = newField_->title();
   if(oldTitle == newTitle) {
     m_fieldTitleDict.replace(newTitle, newField_);
   } else {
@@ -233,6 +248,10 @@ bool Collection::modifyField(FieldPtr newField_) {
         m_fieldCategories += it->category();
       }
     }
+  }
+
+  if(dependentFieldHasRecursion(newField_)) {
+    newField_->setDescription(QString());
   }
 
   // keep track of if the entry groups will need to be reset
@@ -527,15 +546,15 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
 }
 
 Tellico::Data::FieldPtr Collection::fieldByName(const QString& name_) const {
-  return m_fieldNameDict.isEmpty() ? 0 : m_fieldNameDict.find(name_);
+  return m_fieldNameDict.isEmpty() ? 0 : name_.isEmpty() ? 0 : m_fieldNameDict.find(name_);
 }
 
 Tellico::Data::FieldPtr Collection::fieldByTitle(const QString& title_) const {
-  return m_fieldTitleDict.isEmpty() ? 0 : m_fieldTitleDict.find(title_);
+  return m_fieldTitleDict.isEmpty() ? 0 : title_.isEmpty() ? 0 : m_fieldTitleDict.find(title_);
 }
 
 bool Collection::hasField(const QString& name_) const {
-  return !name_.isEmpty() && fieldByName(name_) != 0;
+  return fieldByName(name_) != 0;
 }
 
 bool Collection::isAllowed(const QString& key_, const QString& value_) const {
@@ -555,8 +574,11 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
   return false;
 }
 
-Tellico::Data::EntryGroupDict* const Collection::entryGroupDictByName(const QString& name_) {
+Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& name_) {
 //  myDebug() << "Collection::entryGroupDictByName() - " << name_ << endl;
+  if(name_.isEmpty()) {
+    return 0;
+  }
   EntryGroupDict* dict = m_entryGroupDicts.isEmpty() ? 0 : m_entryGroupDicts.find(name_);
   if(dict && dict->isEmpty()) {
     GUI::CursorSaver cs;
@@ -723,6 +745,36 @@ void Collection::cleanGroups() {
     dict->remove(it->groupName());
   }
   m_groupsToDelete.clear();
+}
+
+bool Collection::dependentFieldHasRecursion(FieldPtr field_) {
+  if(!field_ || field_->type() != Field::Dependent) {
+    return false;
+  }
+
+  StringSet fieldNamesFound;
+  fieldNamesFound.add(field_->name());
+  QValueStack<FieldPtr> fieldsToCheck;
+  fieldsToCheck.push(field_);
+  while(!fieldsToCheck.isEmpty()) {
+    FieldPtr f = fieldsToCheck.pop();
+    const QStringList depFields = f->dependsOn();
+    for(QStringList::ConstIterator it = depFields.begin(); it != depFields.end(); ++it) {
+      if(fieldNamesFound.has(*it)) {
+        // we have recursion
+        return true;
+      }
+      fieldNamesFound.add(*it);
+      FieldPtr f = fieldByName(*it);
+      if(!f) {
+        f = fieldByTitle(*it);
+      }
+      if(f) {
+        fieldsToCheck.push(f);
+      }
+    }
+  }
+  return false;
 }
 
 // static

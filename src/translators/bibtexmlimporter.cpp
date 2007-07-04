@@ -53,6 +53,8 @@ void BibtexmlImporter::loadDomDocument() {
 
   const uint count = entryelems.count();
   const uint stepSize = KMAX(s_stepSize, count/100);
+  const bool showProgress = options() & ImportProgress;
+
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(count);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
@@ -61,7 +63,7 @@ void BibtexmlImporter::loadDomDocument() {
   for(uint j = 0; !m_cancelled && j < entryelems.count(); ++j) {
     readEntry(entryelems.item(j));
 
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }

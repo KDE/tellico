@@ -149,6 +149,8 @@ Tellico::Data::CollPtr RISImporter::collection() {
 
   const uint length = str.length();
   const uint stepSize = KMAX(s_stepSize, length/100);
+  const bool showProgress = options() & ImportProgress;
+
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(length);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
@@ -218,7 +220,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
     }
     entry->setField(f, value);
 
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }

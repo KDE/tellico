@@ -124,21 +124,26 @@ QDate DateWidget::date() const {
 
 QString DateWidget::text() const {
   // possible for either day, month, or year to be empty
+  // but not all three
+  bool empty = true;
   // format is "year-month-day"
   QString s;
   if(m_yearSpin->value() > m_yearSpin->minValue()) {
     s += QString::number(m_yearSpin->value());
+    empty = false;
   }
   s += '-';
   // first item is empty
   if(m_monthCombo->currentItem() > 0) {
     s += QString::number(m_monthCombo->currentItem());
+    empty = false;
   }
   s += '-';
   if(m_daySpin->value() > m_daySpin->minValue()) {
     s += QString::number(m_daySpin->value());
+    empty = false;
   }
-  return s;
+  return empty ? QString() : s;
 }
 
 void DateWidget::setDate(const QDate& date_) {

@@ -160,7 +160,8 @@ void Field::setFlags(int flags_) {
 }
 
 void Field::setFormatFlag(FormatFlag flag_) {
-  if(m_type != Date) {
+  // Choice and Data fields are not allowed a format
+  if(m_type != Choice && m_type != Date) {
     m_formatFlag = flag_;
   }
 }
@@ -182,24 +183,38 @@ bool Field::isSingleCategory() const {
 // format is something like "%{year} %{author}"
 Tellico::Data::FieldVec Field::dependsOn(CollPtr coll_) const {
   FieldVec vec;
-  if(m_type != Dependent) {
+  if(m_type != Dependent || !coll_) {
     return vec;
   }
 
-  QRegExp rx(QString::fromLatin1("%\\{(.+)\\}"));
-  rx.setMinimal(true);
-  for(int pos = m_desc.find(rx); pos > -1; pos = m_desc.find(rx, pos+4)) {
-    QString fieldName = rx.cap(1);
-    FieldPtr field = coll_->fieldByName(fieldName);
+  const QStringList fieldNames = dependsOn();
+  // do NOT call recursively!
+  for(QStringList::ConstIterator it = fieldNames.begin(); it != fieldNames.end(); ++it) {
+    FieldPtr field = coll_->fieldByName(*it);
     if(!field) {
       // allow the user to also use field titles
-      field = coll_->fieldByTitle(fieldName);
+      field = coll_->fieldByTitle(*it);
     }
     if(field) {
       vec.append(field);
     }
   }
   return vec;
+}
+
+QStringList Field::dependsOn() const {
+  QStringList list;
+  if(m_type != Dependent) {
+    return list;
+  }
+
+  QRegExp rx(QString::fromLatin1("%\\{(.+)\\}"));
+  rx.setMinimal(true);
+  // do NOT call recursively!
+  for(int pos = m_desc.find(rx); pos > -1; pos = m_desc.find(rx, pos+3)) {
+    list << rx.cap(1);
+  }
+  return list;
 }
 
 QString Field::format(const QString& value_, FormatFlag flag_) {
@@ -345,25 +360,32 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
 QString Field::formatDate(const QString& date_) {
   // internally, this is "year-month-day"
   // any of the three may be empty
+  // but not all three, which might be the case when a nonsense string happens
+  bool empty = true;
   // for empty year, use current
   // for empty month or date, use 1
   QStringList s = QStringList::split('-', date_, true);
   bool ok = true;
   int y = s.count() > 0 ? s[0].toInt(&ok) : QDate::currentDate().year();
-  if(!ok) {
+  if(ok) {
+    empty = false;
+  } else {
     y = QDate::currentDate().year();
   }
   int m = s.count() > 1 ? s[1].toInt(&ok) : 1;
-  if(!ok) {
+  if(ok) {
+    empty = false;
+  } else {
     m = 1;
   }
   int d = s.count() > 2 ? s[2].toInt(&ok) : 1;
-  if(!ok) {
+  if(ok) {
+    empty = false;
+  } else {
     d = 1;
   }
-  QDate date(y, m, d);
   // rather use ISO date formatting than locale formatting for now. Primarily, it makes sorting just work.
-  return date.toString(Qt::ISODate);
+  return empty ? QString() : QDate(y, m, d).toString(Qt::ISODate);
   // use short form
 //  return KGlobal::locale()->formatDate(date, true);
 }

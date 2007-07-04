@@ -246,7 +246,7 @@ QString HTMLExporter::text() {
   exporter.setEntries(entries());
   exporter.setIncludeGroups(m_printGrouped);
 // yes, this should be in utf8, always
-  exporter.setOptions(options() | Export::ExportUTF8);
+  exporter.setOptions(options() | Export::ExportUTF8 | Export::ExportImages);
   QDomDocument output = exporter.exportXML();
 #if 0
   QFile f(QString::fromLatin1("/tmp/test.xml"));
@@ -560,18 +560,26 @@ QString HTMLExporter::handleLink(const QString& link_) {
   // one of the "quirks" of the html export is that img src urls are set to point to
   // the tmpDir() when exporting entry files from a collection, but those images
   // don't actually exist, and they get copied in writeImages() instead.
-  // so we only need to keep track of the url if it exists and is local
-  if(u.isLocalFile() || KIO::NetAccess::exists(u, false, 0)) {
+  // so we only need to keep track of the url if it exists
+  const bool exists = KIO::NetAccess::exists(u, false, 0);
+  if(exists) {
     m_files.append(u);
   }
 
   // if we're exporting entry files, we want pics/ to
   // go in pics/
+  const bool isPic = link_.startsWith(m_dataDir + QString::fromLatin1("pics/"));
   QString midDir;
-  if(link_.startsWith(m_dataDir + QString::fromLatin1("pics/"))) {
-    midDir += QString::fromLatin1("pics/");
+  if(isPic) {
+    midDir = QString::fromLatin1("pics/");
   }
-  m_links.insert(link_, fileDirName() + midDir + u.fileName());
+  // pictures are special since they might not exist when the HTML is exported, since they might get copied later
+  // on the other hand, don't change the file location if it doesn't exist
+  if(isPic || exists) {
+    m_links.insert(link_, fileDirName() + midDir + u.fileName());
+  } else {
+    m_links.insert(link_, link_);
+  }
   return m_links[link_];
 }
 

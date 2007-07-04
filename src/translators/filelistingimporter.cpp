@@ -77,7 +77,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     return 0;
   }
 
-  bool usePreview = m_filePreview->isChecked();
+  const bool usePreview = m_filePreview->isChecked();
 
   const QString title    = QString::fromLatin1("title");
   const QString url      = QString::fromLatin1("url");
@@ -97,6 +97,8 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   m_coll = new Data::FileCatalog(true);
   QString tmp;
   const uint stepSize = QMAX(1, m_files.count()/100);
+  const bool showProgress = options() & ImportProgress;
+
   item.setTotalSteps(m_files.count());
   uint j = 0;
   for(KFileItemListIterator it(m_files); !m_cancelled && it.current(); ++it, ++j) {
@@ -171,7 +173,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
     m_coll->addEntries(entry);
 
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }

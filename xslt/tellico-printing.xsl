@@ -346,9 +346,9 @@
         </xsl:attribute>
         <xsl:value-of select="tc:year"/>
         <xsl:text>-</xsl:text>
-        <xsl:value-of select="tc:month"/>
+        <xsl:value-of select="format-number(tc:month,'00')"/>
         <xsl:text>-</xsl:text>
-        <xsl:value-of select="tc:day"/>
+        <xsl:value-of select="format-number(tc:day,'00')"/>
        </xsl:when>
 
        <!-- paragraphs need to have output escaping disabled so HTML works -->

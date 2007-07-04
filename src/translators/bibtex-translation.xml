@@ -292,4 +292,7 @@
   <key char="°">
     <string>$^{\circ}$</string>
   </key>
+  <key char="%">
+    <string>\%</string>
+  </key>
 </keymap>

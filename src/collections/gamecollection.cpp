@@ -63,7 +63,7 @@ Tellico::Data::FieldVec GameCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("publisher"), i18n("Publisher"));
+  field = new Field(QString::fromLatin1("publisher"), i18n("Games - Publisher", "Publisher"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatPlain);

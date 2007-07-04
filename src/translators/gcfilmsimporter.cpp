@@ -71,6 +71,8 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
 
   const uint length = str.length();
   const uint stepSize = KMAX(s_stepSize, length/100);
+  const bool showProgress = options() & ImportProgress;
+
   item.setTotalSteps(length);
   uint j = 0;
   for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), j += line.length()) {
@@ -198,7 +200,7 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
 
     m_coll->addEntries(entry);
 
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }

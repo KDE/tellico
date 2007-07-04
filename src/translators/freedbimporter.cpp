@@ -317,7 +317,7 @@ void FreeDBImporter::readCache() {
     for(QStringList::ConstIterator it2 = list.begin(); it2 != list.end(); ++it2) {
       files.insert(*it2, dir.absFilePath(*it2), false);
     }
-    kapp->processEvents();
+//    kapp->processEvents(); // really needed ?
   }
 
   const QString title    = QString::fromLatin1("title");
@@ -336,6 +336,7 @@ void FreeDBImporter::readCache() {
   m_coll = new Data::MusicCollection(true);
 
   const uint stepSize = QMAX(1, numFiles / 100);
+  const bool showProgress = options() & ImportProgress;
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(numFiles);
@@ -417,7 +418,7 @@ void FreeDBImporter::readCache() {
     // add this entry to the music collection
     m_coll->addEntries(entry);
 
-    if(step % stepSize == 0) {
+    if(showProgress && step%stepSize == 0) {
       ProgressManager::self()->setProgress(this, step);
       kapp->processEvents();
     }

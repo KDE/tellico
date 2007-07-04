@@ -362,6 +362,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
       str = m_MARC21XMLHandler->applyStylesheet(result_);
     }
     if(str.isEmpty() || !initMODSHandler()) {
+      myDebug() << "Z3950Fetcher::handleResult() - empty string or can't init" << endl;
       stop();
       return;
     }
@@ -379,6 +380,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     }
 #endif
     Import::TellicoImporter imp(m_MODSHandler->applyStylesheet(str));
+    imp.setOptions(imp.options() & ~Import::ImportProgress); // no progress needed
     coll = imp.collection();
     msg = imp.statusMessage();
   }
@@ -392,7 +394,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
   }
 
   if(coll->entryCount() == 0) {
-//    myDebug() << "Z3950Fetcher::process() - no Tellico entry in result" << endl;
+//    myDebug() << "Z3950Fetcher::handleResult() - no Tellico entry in result" << endl;
     return;
   }
 
@@ -459,6 +461,8 @@ void Z3950Fetcher::customEvent(QCustomEvent* event_) {
         group.sync();
       }
     }
+  } else {
+    kdWarning() << "Z3950Fetcher::customEvent() - weird type: " << event_->type() << endl;
   }
 }
 
@@ -483,7 +487,6 @@ void Z3950Fetcher::updateEntry(Data::EntryPtr entry_) {
 Tellico::Fetch::ConfigWidget* Z3950Fetcher::configWidget(QWidget* parent_) const {
   return new Z3950Fetcher::ConfigWidget(parent_, this);
 }
-
 
 Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_) {

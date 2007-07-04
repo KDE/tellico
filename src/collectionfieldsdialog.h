@@ -70,6 +70,8 @@ protected slots:
   virtual void slotOk();
   virtual void slotApply();
   virtual void slotDefault();
+
+private slots:
   void slotNew();
   void slotDelete();
   void slotMoveUp();
@@ -77,19 +79,17 @@ protected slots:
   void slotTypeChanged(const QString& type);
   void slotHighlightedChanged(int index);
   void slotModified();
-  void slotUpdateTitle(const QString& title);
   bool slotShowExtendedProperties();
+  void slotSelectInitial();
 
-protected:
+private:
+  void applyChanges();
   void updateField();
+  void updateTitle(const QString& title);
   bool checkValues();
   FieldListBox* findItem(const QListBox* box, Data::FieldPtr field);
   QStringList newTypesAllowed(int type);
 
-private slots:
-  void slotSelectInitial();
-
-private:
   Data::CollPtr m_coll;
   Data::CollPtr m_defaultCollection;
   Data::FieldVec m_copiedFields;

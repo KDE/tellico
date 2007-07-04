@@ -93,6 +93,7 @@ private:
   void done(const QString& message, int type);
   QCString toCString(const QString& text);
   QString toString(const QCString& text);
+  void checkPendingEvents();
 
   class Private;
   Private* d;

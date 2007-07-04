@@ -297,6 +297,7 @@ public:
    * Returns an empty vector for non-Dpendent fields
    */
   FieldVec dependsOn(CollPtr coll) const;
+  QStringList dependsOn() const;
 
   /*************************** STATIC **********************************/
 

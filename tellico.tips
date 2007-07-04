@@ -1,10 +1,10 @@
 <tip category="Tellico">
 <html>
 <p>...that if a book has more than one author, you should separate
-their names by a semi-colon, so that Tellico will know to split them
+their names by a semi-colon, so that Tellico will know how to split them
 and use them separately.</p>
 <p>Any other field which allows multiple values should be entered the
-same way. with a semi-colon (;) separating each value.</p>
+same way, with a semi-colon (;) separating each value.</p>
 </html>
 </tip>
 <tip category="Tellico">
@@ -92,5 +92,16 @@ outputs a valid Tellico XML file.</p>
 <html>
 <p>...that in the Detailed View, you can press a letter on the
 keyboard to skip to the next entry that starts with that letter.</p>
+</html>
+</tip>
+<tip category="Tellico">
+<html>
+<p>...that you can use Dependent Fields to combine multiple separated fields
+into a single field. Just select the type Dependent and use a description
+similar to "Value: %{fielda}%{fieldb}" where %{...} gets replaced with the
+appropriate field value. This is useful to collect multiple values in a
+single field, e.g. for better grouping, and to combine fields of different
+types by respecting proper sorting at the same time. Consider for example
+a number field followed by a text subfield with entries 3b, 14a.</p>
 </html>
 </tip>

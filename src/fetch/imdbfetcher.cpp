@@ -753,6 +753,10 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Data::EntryPtr entry_) {
     QStringList values;
     for(QStringList::Iterator it = list.begin(); it != list.end(); ++it) {
       QString s = *it;
+      // sometimes, the word "more" gets linked to the releaseinfo page, check that
+      if(s.find(QString::fromLatin1("releaseinfo")) > -1) {
+        continue;
+      }
       s.remove(*s_tagRx);
       s.remove(brackRx);
       s = s.stripWhiteSpace();

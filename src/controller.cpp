@@ -221,7 +221,7 @@ void Controller::addedField(Data::CollPtr coll_, Data::FieldPtr field_) {
 }
 
 void Controller::removedField(Data::CollPtr coll_, Data::FieldPtr field_) {
-//  myDebug() << "Controller::slotFieldDeleted() - " << field_->name() << endl;
+//  myDebug() << "Controller::removedField() - " << field_->name() << endl;
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->removeField(coll_, field_);
   }
@@ -455,6 +455,7 @@ void Controller::slotDeleteSelectedEntries() {
 //    newList.append(static_cast<EntryItem*>(it.current())->entry());
 //  }
 //  slotUpdateSelection(m_mainWindow->m_detailedView, newList);
+  slotClearSelection();
 }
 
 void Controller::slotRefreshField(Data::FieldPtr field_) {

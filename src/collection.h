@@ -289,7 +289,7 @@ public:
    * @param name The name of the field by which the entries are grouped
    * @return The list of group names
    */
-  EntryGroupDict* const entryGroupDictByName(const QString& name);
+  EntryGroupDict* entryGroupDictByName(const QString& name);
   /**
    * Invalidates all group names in the collection.
    */
@@ -334,6 +334,8 @@ private:
   void populateDict(EntryGroupDict* dict, const QString& fieldName, EntryVec entries);
   void populateCurrentDicts(EntryVec entries);
   void cleanGroups();
+  bool dependentFieldHasRecursion(FieldPtr field);
+
   /*
    * Gets the preferred ID of the collection. Currently, it just gets incremented as
    * new collections are created.

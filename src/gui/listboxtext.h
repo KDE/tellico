@@ -33,6 +33,7 @@ public:
   virtual int width(const QListBox* box) const;
   virtual int height(const QListBox* box) const;
 
+  bool isColored() const { return m_colored; }
   void setColored(bool colored);
   void setText(const QString& text);
 

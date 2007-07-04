@@ -148,11 +148,11 @@ QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   QObject::connect(m_radioOther, SIGNAL(toggled(bool)),
                    m_editOther, SLOT(setEnabled(bool)));
 
-  if(m_delimiter == ',') {
+  if(m_delimiter == QChar(',')) {
     m_radioComma->setChecked(true);
-  } else if(m_delimiter == ';') {
+  } else if(m_delimiter == QChar(';')) {
     m_radioSemicolon->setChecked(true);
-  } else if(m_delimiter == '\t') {
+  } else if(m_delimiter == QChar('\t')) {
     m_radioTab->setChecked(true);
   } else if(!m_delimiter.isEmpty()) {
     m_radioOther->setChecked(true);
@@ -173,11 +173,11 @@ void CSVExporter::readOptions(KConfig* config_) {
 void CSVExporter::saveOptions(KConfig* config_) {
   m_includeTitles = m_checkIncludeTitles->isChecked();
   if(m_radioComma->isChecked()) {
-    m_delimiter = ',';
+    m_delimiter = QChar(',');
   } else if(m_radioSemicolon->isChecked()) {
-    m_delimiter = ';';
+    m_delimiter = QChar(';');
   } else if(m_radioTab->isChecked()) {
-    m_delimiter = '\t';
+    m_delimiter = QChar('\t');
   } else {
     m_delimiter = m_editOther->text();
   }

@@ -1744,22 +1744,26 @@ void MainWindow::slotUpdateFilter() {
 
   QString text = m_quickFilter->text().stripWhiteSpace();
   if(!text.isEmpty()) {
-    filter = new Filter(Filter::MatchAny);
-    // if the text contains any non-Word characters, assume it's a regexp
-    QRegExp rx(QString::fromLatin1("\\W"));
-    FilterRule* rule;
+    filter = new Filter(Filter::MatchAll);
+    // if the text contains any non-word characters, assume it's a regexp
+    // but \W in qt is letter, number, or '_', I want to be a bit less strict
+    QRegExp rx(QString::fromLatin1("[^\\w\\s-']"));
     if(text.find(rx) == -1) {
-      // an empty field string means check every field
-      rule = new FilterRule(QString::null, text, FilterRule::FuncContains);
+      // split by whitespace, and add rules for each word
+      QStringList tokens = QStringList::split(QRegExp(QString::fromLatin1("\\s")), text);
+      for(QStringList::Iterator it = tokens.begin(); it != tokens.end(); ++it) {
+        // an empty field string means check every field
+        filter->append(new FilterRule(QString::null, *it, FilterRule::FuncContains));
+      }
     } else {
       // if it isn't valid, hold off on applying the filter
       QRegExp tx(text);
       if(!tx.isValid()) {
+        myDebug() << "MainWindow::slotUpdateFilter() - invalid regexp: " << text << endl;
         return;
       }
-      rule = new FilterRule(QString::null, text, FilterRule::FuncRegExp);
+      filter->append(new FilterRule(QString::null, text, FilterRule::FuncRegExp));
     }
-    filter->append(rule);
   }
   // only update filter if one exists or did exist
   if(filter || m_detailedView->filter()) {

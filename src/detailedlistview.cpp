@@ -24,7 +24,6 @@
 #include "core/tellico_config.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kconfig.h>
 #include <kapplication.h>
 #include <kaction.h>
@@ -643,13 +642,13 @@ void DetailedListView::removeField(Tellico::Data::CollPtr, Data::FieldPtr field_
   m_isDirty.erase(&m_isDirty[sec]);
 
   // I thought this would have to be mapped to index, but not the case
+  removeComparison(sec); // must be before removeColumn();
   removeColumn(sec);
 
   // sometimes resizeEnabled gets messed up
   for(int i = sec; i < columns(); ++i) {
     header()->setResizeEnabled(columnWidth(i) > 0, header()->mapToSection(i));
   }
-  removeComparison(sec);
   resetComparisons();
   slotUpdatePixmap();
   triggerUpdate();

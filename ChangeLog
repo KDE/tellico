@@ -1,3 +1,35 @@
+2007-07-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.12.
+	* Changed z39.60 search event loop in an attemp to fix some intermittent freezes.
+
+2007-06-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Changef Quick Filter to split text on white space and do an AND search.
+	* Bumped automake requirement to version 1.8 or later for macro to work.
+	* Fixed HTML export to not rewrite file location for files referenced in the XSL file which don't exist.
+	* Fixed Column View report to sort numerically when needed.
+	* Fixed Date fields to suppress empty date values.
+	* Fixed Date comparisons to work for single digits, patch from  
+Jake Maciejewski.
+	* Fixed Fields Dialog to show warnings when clicking Ok.
+
+2007-06-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added '\%' to bibtex translation table for comment escaping.
+
+2007-05-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed potential recursion bug for dependent fields.
+
+2007-05-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that didn't write image size options when printing.
+
+2007-05-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Turkish translation, thanks to Ali Isingor.
+
 2007-05-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.11.

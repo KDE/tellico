@@ -81,6 +81,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     return 0;
   }
 
+  const bool showProgress = options() & ImportProgress;
+
   QStringList files;
   for(QStringList::ConstIterator it = dirs.begin(); !m_cancelled && it != dirs.end(); ++it) {
     if((*it).isEmpty()) {
@@ -93,7 +95,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     for(QStringList::ConstIterator it2 = list.begin(); it2 != list.end(); ++it2) {
       files += dir.absFilePath(*it2);
     }
-    kapp->processEvents();
+//    kapp->processEvents(); not needed ?
   }
 
   if(m_cancelled) {
@@ -240,7 +242,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     if(!exists) {
       m_coll->addEntries(entry);
     }
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setTotalSteps(this, files.count() + directoryFiles.count());
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
@@ -290,7 +292,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       break;
     }
 
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }

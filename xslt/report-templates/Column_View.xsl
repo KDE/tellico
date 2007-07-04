@@ -65,15 +65,38 @@
   <xsl:value-of select="concat('.//tc:', $sort-name1, '[1]')"/>
  </xsl:if>
 </xsl:variable>
+
+<xsl:variable name="sort1-type">
+ <xsl:choose>
+  <xsl:when test=".//tc:field[@name=$sort-name1]/@type = 6">number</xsl:when>
+  <xsl:otherwise>text</xsl:otherwise>
+ </xsl:choose>
+</xsl:variable>
+
 <xsl:variable name="sort2">
  <xsl:if test="string-length($sort-name2) &gt; 0">
   <xsl:value-of select="concat('.//tc:', $sort-name2, '[1]')"/>
  </xsl:if>
 </xsl:variable>
+
+<xsl:variable name="sort2-type">
+ <xsl:choose>
+  <xsl:when test=".//tc:field[@name=$sort-name2]/@type = 6">number</xsl:when>
+  <xsl:otherwise>text</xsl:otherwise>
+ </xsl:choose>
+</xsl:variable>
+
 <xsl:variable name="sort3">
  <xsl:if test="string-length($sort-name3) &gt; 0">
   <xsl:value-of select="concat('.//tc:', $sort-name3, '[1]')"/>
  </xsl:if>
+</xsl:variable>
+
+<xsl:variable name="sort3-type">
+ <xsl:choose>
+  <xsl:when test=".//tc:field[@name=$sort-name3]/@type = 6">number</xsl:when>
+  <xsl:otherwise>text</xsl:otherwise>
+ </xsl:choose>
 </xsl:variable>
 
 <xsl:template match="/">
@@ -169,9 +192,9 @@
 
   <tbody>
    <xsl:for-each select="tc:entry">
-    <xsl:sort lang="$lang" select="dyn:evaluate($sort1)"/>
-    <xsl:sort lang="$lang" select="dyn:evaluate($sort2)"/>
-    <xsl:sort lang="$lang" select="dyn:evaluate($sort3)"/>
+    <xsl:sort lang="$lang" select="dyn:evaluate($sort1)" data-type="{$sort1-type}"/>
+    <xsl:sort lang="$lang" select="dyn:evaluate($sort2)" data-type="{$sort2-type}"/>
+    <xsl:sort lang="$lang" select="dyn:evaluate($sort3)" data-type="{$sort3-type}"/>
     <tr class="r{position() mod 2}">
      <xsl:apply-templates select="."/>
     </tr>

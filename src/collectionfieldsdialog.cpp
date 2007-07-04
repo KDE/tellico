@@ -283,21 +283,25 @@ void CollectionFieldsDialog::slotSelectInitial() {
 }
 
 void CollectionFieldsDialog::slotOk() {
+  updateField();
   if(!checkValues()) {
     return;
   }
 
-  slotApply();
+  applyChanges();
   accept();
 }
 
 void CollectionFieldsDialog::slotApply() {
+  updateField();
   if(!checkValues()) {
     return;
   }
 
-  updateField();
+  applyChanges();
+}
 
+void CollectionFieldsDialog::applyChanges() {
 // start a command group, "Modify" is a generic term here since the commands could be add, modify, or delete
   Kernel::self()->beginCommandGroup(i18n("Modify Fields"));
 
@@ -376,10 +380,17 @@ void CollectionFieldsDialog::slotApply() {
 
   // the field type might have changed, so need to update the type combo list with possible values
   if(m_currentField) {
+    // set the updating flag since the values are changing and slots are firing
+    // but we don't care about UI indications of changes
+    bool wasUpdating = m_updatingValues;
+    m_updatingValues = true;
     QString currType = m_typeCombo->currentText();
     m_typeCombo->clear();
     m_typeCombo->insertStringList(newTypesAllowed(m_currentField->type()));
     m_typeCombo->setCurrentItem(currType);
+    // description might have been changed for dependent fields
+    m_descEdit->setText(m_currentField->description());
+    m_updatingValues = wasUpdating;
   }
   enableButtonApply(false);
 }
@@ -407,7 +418,6 @@ void CollectionFieldsDialog::slotNew() {
 
   m_currentField = field;
 
-//  m_fieldsBox->insertItem(title);
   FieldListBox* box = new FieldListBox(m_fieldsBox, field);
   m_fieldsBox->setSelected(box, true);
   box->setColored(true);
@@ -432,7 +442,6 @@ void CollectionFieldsDialog::slotDelete() {
     return;
   }
 
-  QString name = m_currentField->name();
   bool success = Kernel::self()->removeField(m_currentField);
   if(success) {
     emit signalCollectionModified();
@@ -446,7 +455,7 @@ void CollectionFieldsDialog::slotDelete() {
 
 void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
   Data::Field::Type type = Data::Field::Undef;
-  const Data::Field::FieldMap& fieldMap = Data::Field::typeMap();
+  const Data::Field::FieldMap fieldMap = Data::Field::typeMap();
   for(Data::Field::FieldMap::ConstIterator it = fieldMap.begin(); it != fieldMap.end(); ++it) {
     if(it.data() == type_) {
       type = it.key();
@@ -604,8 +613,8 @@ void CollectionFieldsDialog::updateField() {
     field->setName(name);
   }
 
-  QString title = m_titleEdit->text().simplifyWhiteSpace();
-  slotUpdateTitle(title);
+  const QString title = m_titleEdit->text().simplifyWhiteSpace();
+  updateTitle(title);
 
   const Data::Field::FieldMap& fieldMap = Data::Field::typeMap();
   for(Data::Field::FieldMap::ConstIterator it = fieldMap.begin(); it != fieldMap.end(); ++it) {
@@ -705,8 +714,8 @@ void CollectionFieldsDialog::slotModified() {
   static_cast<FieldListBox*>(m_fieldsBox->selectedItem())->setField(m_currentField);
 }
 
-void CollectionFieldsDialog::slotUpdateTitle(const QString& title_) {
-//  myDebug() << "CollectionFieldsDialog::slotUpdateTitle()" << endl;
+void CollectionFieldsDialog::updateTitle(const QString& title_) {
+//  myDebug() << "CollectionFieldsDialog::updateTitle()" << endl;
   if(m_currentField && m_currentField->title() != title_) {
     m_fieldsBox->blockSignals(true);
     FieldListBox* oldItem = findItem(m_fieldsBox, m_currentField);
@@ -801,7 +810,8 @@ void CollectionFieldsDialog::slotMoveUp() {
   if(item) {
     FieldListBox* prev = static_cast<FieldListBox*>(item->prev()); // could be 0
     if(prev) {
-      (void) new FieldListBox(m_fieldsBox, prev->field(), item);
+      FieldListBox* newPrev = new FieldListBox(m_fieldsBox, prev->field(), item);
+      newPrev->setColored(prev->isColored());
       delete prev;
       m_fieldsBox->ensureCurrentVisible();
       // since the current one doesn't get re-highlighted, need to highlighted doesn't get emitted
@@ -821,7 +831,8 @@ void CollectionFieldsDialog::slotMoveDown() {
   if(item) {
     QListBoxItem* next = item->next(); // could be 0
     if(next) {
-      QListBoxItem* newItem = new FieldListBox(m_fieldsBox, item->field(), next);
+      FieldListBox* newItem = new FieldListBox(m_fieldsBox, item->field(), next);
+      newItem->setColored(item->isColored());
       delete item;
       m_fieldsBox->setSelected(newItem, true);
       m_fieldsBox->ensureCurrentVisible();
@@ -877,15 +888,23 @@ bool CollectionFieldsDialog::checkValues() {
     return true;
   }
 
-  const QString& title = m_currentField->title();
-  if(m_coll->fieldByTitle(title) && m_coll->fieldNameByTitle(title) != m_currentField->name()) {
+  const QString title = m_currentField->title();
+  // find total number of boxes with this title in case multiple new ones with same title were added
+  int titleCount = 0;
+  for(uint i = 0; i < m_fieldsBox->count(); ++i) {
+    if(m_fieldsBox->item(i)->text() == title) {
+      ++titleCount;
+    }
+  }
+  if((m_coll->fieldByTitle(title) && m_coll->fieldNameByTitle(title) != m_currentField->name()) ||
+     titleCount > 1) {
     // already have a field with this title
     KMessageBox::sorry(this, i18n("A field with this title already exists. Please enter a different title."));
     m_titleEdit->selectAll();
     return false;
   }
 
-  const QString& category = m_currentField->category();
+  const QString category = m_currentField->category();
   if(category.isEmpty()) {
     KMessageBox::sorry(this, i18n("<qt>The category may not be empty. Please enter a category.</qt>"));
     m_catCombo->lineEdit()->selectAll();

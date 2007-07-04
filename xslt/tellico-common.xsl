@@ -132,9 +132,9 @@
     <xsl:when test="$f/@type=12">
      <xsl:value-of select="$child/tc:year"/>
      <xsl:text>-</xsl:text>
-     <xsl:value-of select="$child/tc:month"/>
+     <xsl:value-of select="format-number($child/tc:month,'00')"/>
      <xsl:text>-</xsl:text>
-     <xsl:value-of select="$child/tc:day"/>
+     <xsl:value-of select="format-number($child/tc:day,'00')"/>
     </xsl:when>
 
     <!-- special case for rating -->

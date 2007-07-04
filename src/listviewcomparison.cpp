@@ -20,6 +20,7 @@
 
 #include <qlistview.h>
 #include <qpixmap.h>
+#include <qdatetime.h>
 
 namespace {
   int compareFloat(const QString& s1, const QString& s2) {
@@ -44,6 +45,8 @@ Tellico::ListViewComparison* Tellico::ListViewComparison::create(Data::ConstFiel
     return new PixmapComparison(field_);
   } else if(field_->type() == Data::Field::Dependent) {
     return new DependentComparison(field_);
+  } else if(field_->type() == Data::Field::Date || field_->formatFlag() == Data::Field::FormatDate) {
+    return new ISODateComparison(field_);
   } else if(field_->formatFlag() == Data::Field::FormatTitle) {
     // Dependent could be title, so put this test after
     return new TitleComparison(field_);
@@ -193,3 +196,48 @@ int Tellico::DependentComparison::compare(int col_,
   return ListViewComparison::compare(col_, item1_, item2_, asc_);
 }
 
+Tellico::ISODateComparison::ISODateComparison(Data::ConstFieldPtr field) : ListViewComparison(field) {
+}
+
+int Tellico::ISODateComparison::compare(const QString& str1, const QString& str2) {
+  // modelled after Field::formatDate()
+  // so dates would sort as expected without padding month and day with zero
+  // and accounting for "current year - 1 - 1" default scheme
+  QStringList dlist1 = QStringList::split('-', str1, true);
+  bool ok = true;
+  int y1 = dlist1.count() > 0 ? dlist1[0].toInt(&ok) : QDate::currentDate().year();
+  if(!ok) {
+    y1 = QDate::currentDate().year();
+  }
+  int m1 = dlist1.count() > 1 ? dlist1[1].toInt(&ok) : 1;
+  if(!ok) {
+    m1 = 1;
+  }
+  int d1 = dlist1.count() > 2 ? dlist1[2].toInt(&ok) : 1;
+  if(!ok) {
+    d1 = 1;
+  }
+  QDate date1(y1, m1, d1);
+
+  QStringList dlist2 = QStringList::split('-', str2, true);
+  int y2 = dlist2.count() > 0 ? dlist2[0].toInt(&ok) : QDate::currentDate().year();
+  if(!ok) {
+    y2 = QDate::currentDate().year();
+  }
+  int m2 = dlist2.count() > 1 ? dlist2[1].toInt(&ok) : 1;
+  if(!ok) {
+    m2 = 1;
+  }
+  int d2 = dlist2.count() > 2 ? dlist2[2].toInt(&ok) : 1;
+  if(!ok) {
+    d2 = 1;
+  }
+  QDate date2(y2, m2, d2);
+
+  if(date1 < date2) {
+    return -1;
+  } else if(date1 > date2) {
+    return 1;
+  }
+  return 0;
+}

@@ -31,6 +31,7 @@ extern "C" {
 #include <klocale.h>
 
 #include <qfile.h>
+#include <qeventloop.h>
 
 namespace {
   static const size_t Z3950_DEFAULT_MAX_RECORDS = 20;
@@ -287,8 +288,8 @@ void Z3950Connection::run() {
 #endif
       data = toXML(ZOOM_record_get(rec, "raw", &len), m_sourceCharSet);
     }
-    Z3950ResultFound ev(data);
-    kapp->sendEvent(m_fetcher, &ev);
+    Z3950ResultFound* ev = new Z3950ResultFound(data);
+    QApplication::postEvent(m_fetcher, ev);
   }
 
   ZOOM_resultset_destroy(resultSet);
@@ -342,14 +343,24 @@ bool Z3950Connection::makeConnection() {
 }
 
 void Z3950Connection::done() {
+  checkPendingEvents();
   kapp->postEvent(m_fetcher, new Z3950ConnectionDone(m_hasMore));
 }
 
 void Z3950Connection::done(const QString& msg_, int type_) {
+  checkPendingEvents();
   if(m_aborted) {
     kapp->postEvent(m_fetcher, new Z3950ConnectionDone(m_hasMore));
   } else {
     kapp->postEvent(m_fetcher, new Z3950ConnectionDone(m_hasMore, msg_, type_));
+  }
+}
+
+void Z3950Connection::checkPendingEvents() {
+  // I do not want the Done event to happen while Result events are still pending
+  int maxEventsLeft = 3; // no infinite loops!
+  while(kapp->hasPendingEvents() && maxEventsLeft--) {
+    kapp->eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
   }
 }
 

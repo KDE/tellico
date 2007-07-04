@@ -62,6 +62,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   const QStringList files = dataDir.entryList();
   const uint numFiles = files.count();
   const uint stepSize = KMAX(s_stepSize, numFiles/100);
+  const bool showProgress = options() & ImportProgress;
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(numFiles);
@@ -170,7 +171,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
     }
     m_coll->addEntries(entry);
 
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }

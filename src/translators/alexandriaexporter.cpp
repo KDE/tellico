@@ -78,13 +78,14 @@ bool AlexandriaExporter::exec() {
   item.setTotalSteps(entries().count());
   ProgressItem::Done done(this);
   const uint stepSize = QMIN(1, entries().count()/100);
+  const bool showProgress = options() & ExportProgress;
 
   GUI::CursorSaver cs;
   bool success = true;
   uint j = 0;
   for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt, ++j) {
     success &= writeFile(libraryDir, entryIt.data());
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       item.setProgress(j);
       kapp->processEvents();
     }

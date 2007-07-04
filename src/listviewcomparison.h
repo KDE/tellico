@@ -99,5 +99,13 @@ private:
   QPtrList<ListViewComparison> m_comparisons;
 };
 
+class ISODateComparison : public ListViewComparison {
+public:
+  ISODateComparison(Data::ConstFieldPtr field);
+
+protected:
+  virtual int compare(const QString& str1, const QString& str2);
+};
+
 }
 #endif

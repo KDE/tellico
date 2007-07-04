@@ -267,6 +267,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   const uint count = collelem.childNodes().count();
   const uint stepSize = QMAX(s_stepSize, count/100);
+  const bool showProgress = options() & ImportProgress;
 
   item.setTotalSteps(count);
 
@@ -276,7 +277,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
       readEntry(syntaxVersion, n.toElement());
 
       // not exactly right, but close enough
-      if(j%stepSize == 0) {
+      if(showProgress && j%stepSize == 0) {
         ProgressManager::self()->setProgress(this, j);
         kapp->processEvents();
       }
@@ -792,6 +793,7 @@ void TellicoImporter::loadZipData() {
 
   const QStringList images = static_cast<const KArchiveDirectory*>(imgDirEntry)->entries();
   const uint stepSize = QMAX(s_stepSize, images.count()/100);
+
   uint j = 0;
   for(QStringList::ConstIterator it = images.begin(); !m_cancelled && it != images.end(); ++it, ++j) {
     const KArchiveEntry* file = m_imgDir->entry(*it);

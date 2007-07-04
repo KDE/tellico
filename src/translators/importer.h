@@ -26,6 +26,9 @@ class QWidget;
 
 namespace Tellico {
   namespace Import {
+    enum Options {
+      ImportProgress = 1 << 5   // show progress bar
+    };
 
 /**
  * The top-level abstract class for importing other document formats into Tellico.
@@ -40,15 +43,15 @@ class Importer : public QObject {
 Q_OBJECT
 
 public:
-  Importer() : QObject() {}
+  Importer() : QObject(), m_options(ImportProgress) {}
   /**
    * The constructor should immediately load the contents of the file to be imported.
    * Any warnings or errors should be added the the status message queue.
    *
    * @param url The URL of the file to import
    */
-  Importer(const KURL& url) : QObject(), m_url(url) {}
-  Importer(const QString& text) : QObject(), m_text(text) {}
+  Importer(const KURL& url) : QObject(), m_options(ImportProgress), m_url(url) {}
+  Importer(const QString& text) : QObject(), m_options(ImportProgress), m_text(text) {}
   /**
    */
   virtual ~Importer() {}
@@ -83,6 +86,8 @@ public:
    */
   virtual bool canImport(int) const { return true; }
   virtual void setText(const QString& text) { m_text = text; }
+  long options() const { return m_options; }
+  void setOptions(long options) { m_options = options; }
   /**
    * Returns a string useful for the ProgressManager
    */
@@ -114,6 +119,7 @@ protected:
   static const uint s_stepSize;
 
 private:
+  long m_options;
   KURL m_url;
   QString m_text;
   QString m_statusMsg;

@@ -107,6 +107,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
 
   const uint numLines = str.contains('\n');
   const uint stepSize = QMAX(s_stepSize, numLines/100);
+  const bool showProgress = options() & ImportProgress;
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(numLines);
@@ -140,7 +141,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
       m_coll->addEntries(entry);
     }
 
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }

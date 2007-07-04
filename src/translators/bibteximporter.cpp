@@ -67,6 +67,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
   QString text;
   const uint count = m_nodes.count();
   const uint stepSize = KMAX(s_stepSize, count/100);
+  const bool showProgress = options() & ImportProgress;
 
   item.setTotalSteps(count);
 
@@ -144,7 +145,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
 
     m_coll->addEntries(entry);
 
-    if(j%stepSize == 0) {
+    if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }

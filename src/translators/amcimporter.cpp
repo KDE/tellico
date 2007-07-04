@@ -86,10 +86,14 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   readString(); // webpage
   readString(); // description
 
+  const bool showProgress = options() & ImportProgress;
+
   while(!m_cancelled && !f->atEnd()) {
     readEntry();
-    ProgressManager::self()->setProgress(this, f->at());
-    kapp->processEvents();
+    if(showProgress) {
+      ProgressManager::self()->setProgress(this, f->at());
+      kapp->processEvents();
+    }
   }
 
   return m_coll;
