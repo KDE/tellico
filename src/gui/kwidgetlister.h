@@ -42,7 +42,7 @@ class QHBox;
 /** Simple widget that nonetheless does a lot of the dirty work for
     the filter edit widgets (@ref KMSearchpatternEdit and @ref
     KMFilterActionEdit). It provides a growable and shrinkable area
-    where widget may be diplayed in rows. Widgets can be added by
+    where widget may be displayed in rows. Widgets can be added by
     hitting the provided 'More' button, removed by the 'Fewer' button
     and cleared (e.g. reset, if an derived class implements that and
     removed for all but @ref mMinWidgets).

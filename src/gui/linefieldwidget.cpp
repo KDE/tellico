@@ -17,16 +17,16 @@
 #include "../fieldcompletion.h"
 #include "../latin1literal.h"
 #include "../tellico_kernel.h"
-
-#include <kdebug.h>
-#include <klineedit.h>
+#include "../gui/lineedit.h"
 
 using Tellico::GUI::LineFieldWidget;
 
 LineFieldWidget::LineFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : FieldWidget(field_, parent_, name_) {
 
-  m_lineEdit = new KLineEdit(this);
+  m_lineEdit = new GUI::LineEdit(this);
+  m_lineEdit->setAllowSpellCheck(true);
+  m_lineEdit->setEnableSpellCheck(field_->formatFlag() != Data::Field::FormatName);
   connect(m_lineEdit, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
 
   registerWidget();

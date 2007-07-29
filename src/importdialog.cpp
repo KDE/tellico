@@ -227,6 +227,7 @@ QString ImportDialog::fileFilter(Import::Format format_) {
       break;
 
     case Import::GCfilms:
+      text = i18n("*.gcs|GCstar Data Files (*.gcs)") + QChar('\n');
       text = i18n("*.gcf|GCfilms Data Files (*.gcf)") + QChar('\n');
       break;
 
@@ -269,7 +270,7 @@ Tellico::Import::FormatMap ImportDialog::formatMap() {
 //  map[Import::CSV]        = i18n("CSV");
   map[Import::MODS]       = i18n("MODS");
   map[Import::RIS]        = i18n("RIS");
-  map[Import::GCfilms]    = i18n("GCfilms");
+  map[Import::GCfilms]    = i18n("GCstar");
   map[Import::AMC]        = i18n("AMC");
   return map;
 }

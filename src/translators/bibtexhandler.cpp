@@ -199,7 +199,7 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
 
 // Now, split the text by the character '#', and examine each token to see if it is in
 // the macro list. If it is not, then add left-quote and right-quote around it. If it is, don't
-// change it. Then, in case '#' occurs in a non-macro string, replace any occurances of '}#{' with '#'
+// change it. Then, in case '#' occurs in a non-macro string, replace any occurrences of '}#{' with '#'
 
 // list of new tokens
   QStringList list;

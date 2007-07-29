@@ -517,27 +517,44 @@
 
 <xsl:template name="platform">
  <xsl:param name="value"/>
+ <xsl:variable name="lcvalue">
+  <xsl:value-of select="translate($value, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                                          'abcdefghijklmnopqrstuvwxyz')"/>
+ </xsl:variable>
  <xsl:choose>
-  <xsl:when test="contains($value, '360')">
+  <xsl:when test="contains($lcvalue, '360')">
    <xsl:text>Xbox 360</xsl:text>
   </xsl:when>
-  <xsl:when test="starts-with($value, 'X')">
+  <xsl:when test="starts-with($lcvalue, 'x')">
    <xsl:text>Xbox</xsl:text> <!-- as defined in the default field -->
   </xsl:when>
-  <xsl:when test="contains($value, 'Wii')">
+  <xsl:when test="contains($lcvalue, 'wii')">
    <xsl:text>Nintendo Wii</xsl:text> <!-- as defined in the default field -->
   </xsl:when>
-  <xsl:when test="$value = 'Sony PSP'">
+  <xsl:when test="$lcvalue = 'sony psp'">
    <xsl:text>PSP</xsl:text> <!-- as defined in the default field -->
   </xsl:when>
-  <xsl:when test="starts-with($value, 'Windows')">
+  <xsl:when test="starts-with($lcvalue, 'windows')">
    <xsl:text>Windows</xsl:text> <!-- as defined in the default field -->
   </xsl:when>
-  <xsl:when test="starts-with($value, 'Mac')">
+  <xsl:when test="starts-with($lcvalue, 'mac')">
    <xsl:text>Mac OS</xsl:text> <!-- as defined in the default field -->
   </xsl:when>
-  <xsl:when test="$value = 'Sega Dreamcast'">
+  <xsl:when test="$lcvalue = 'sega dreamcast'">
    <xsl:text>Dreamcast</xsl:text> <!-- as defined in the default field -->
+  </xsl:when>
+  <xsl:when test="starts-with($lcvalue, 'playstation')">
+   <xsl:choose>
+    <xsl:when test="contains($lcvalue, '3')">
+     <xsl:text>PlayStation3</xsl:text>
+    </xsl:when>
+    <xsl:when test="contains($lcvalue, '2')">
+     <xsl:text>PlayStation2</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:value-of select="$value"/>
+    </xsl:otherwise>
+   </xsl:choose>
   </xsl:when>
   <xsl:otherwise>
    <xsl:value-of select="$value"/>

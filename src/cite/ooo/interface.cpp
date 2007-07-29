@@ -147,7 +147,7 @@ bool OOOHandler::Interface::connect(const std::string& host_, int port_, const s
 
     m_gsmgr = Reference<lang::XMultiServiceFactory>(rInstance, UNO_QUERY);
     if(m_gsmgr.is()) {
-      DEBUG("Connected sucessfully to office");
+      DEBUG("Connected successfully to office");
     } else {
       DEBUG("XMultiServiceFactory interface is not exported");
     }

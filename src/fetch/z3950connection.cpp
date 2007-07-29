@@ -25,6 +25,7 @@
 extern "C" {
 #include <yaz/zoom.h>
 #include <yaz/marcdisp.h>
+#include <yaz/yaz-version.h>
 }
 #endif
 
@@ -453,13 +454,21 @@ QString Z3950Connection::toXML(const QCString& marc_, const QString& charSet_) {
 
   // first 5 bytes are length
   bool ok;
+#if YAZ_VERSIONL < 0x030000
   int len = marc_.left(5).toInt(&ok);
+#else
+  size_t len = marc_.left(5).toInt(&ok);
+#endif
   if(ok && (len < 25 || len > 100000)) {
     myDebug() << "Z3950Connection::toXML() - bad length: " << (ok ? len : -1) << endl;
     return QString::null;
   }
 
+#if YAZ_VERSIONL < 0x030000
   char* result;
+#else
+  const char* result;
+#endif
   int r = yaz_marc_decode_buf(mt, marc_, -1, &result, &len);
   if(r <= 0) {
     myDebug() << "Z3950Connection::toXML() - can't decode buffer" << endl;

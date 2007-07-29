@@ -44,7 +44,7 @@ QString PilotDBExporter::formatString() const {
 }
 
 QString PilotDBExporter::fileFilter() const {
-  return i18n("*.pdb|Pilot Database Files(*.pdb)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.pdb|Pilot Database Files (*.pdb)") + QChar('\n') + i18n("*|All Files");
 }
 
 bool PilotDBExporter::exec() {

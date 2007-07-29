@@ -1,3 +1,28 @@
+2007-07-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.13.
+
+2007-07-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Added spell-check for text and paragraph fields.
+
+2007-07-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added compatibility with yaz3.
+
+2007-07-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Added importer for GCstar files.
+	* Fixed bug with namespace handling in Tellico XML loading.
+
+2007-07-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Copac and National Library of Lithuania to z39.50 list.
+
+2007-07-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when adding items to a collection with loans.
+
 2007-07-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.12.
@@ -5,7 +30,7 @@
 
 2007-06-26  Robby Stephenson  <robby@periapsis.org>
 
-	* Changef Quick Filter to split text on white space and do an AND search.
+	* Changed Quick Filter to split text on white space and do an AND search.
 	* Bumped automake requirement to version 1.8 or later for macro to work.
 	* Fixed HTML export to not rewrite file location for files referenced in the XSL file which don't exist.
 	* Fixed Column View report to sort numerically when needed.

@@ -17,7 +17,7 @@
 #include "fieldwidget.h"
 #include "../datavectors.h"
 
-class QTextEdit;
+class KTextEdit;
 
 namespace Tellico {
   namespace GUI {
@@ -42,7 +42,7 @@ protected:
   virtual QWidget* widget();
 
 private:
-  QTextEdit* m_textEdit;
+  KTextEdit* m_textEdit;
 };
 
   } // end GUI namespace

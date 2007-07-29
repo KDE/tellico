@@ -140,7 +140,7 @@ public:
   MergePair mergeCollection(CollPtr coll);
   /**
    * Replace the current collection with a new one. Effectively, this is equivalent to opening
-   * a new file containg this collection.
+   * a new file containing this collection.
    *
    * @param coll A Pointer to the new collection, the document takes ownership.
    */

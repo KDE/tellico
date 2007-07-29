@@ -69,6 +69,7 @@ class FetchDialog::SearchResultItem : public Tellico::GUI::ListViewItem {
       : GUI::ListViewItem(lv, lv->lastItem()), m_result(r) {
     setText(1, r->title);
     setText(2, r->desc);
+    setPixmap(3, Fetch::Manager::self()->fetcherIcon(r->fetcher.data()));
     setText(3, r->fetcher->source());
   }
   Fetch::SearchResult* m_result;
@@ -77,6 +78,8 @@ class FetchDialog::SearchResultItem : public Tellico::GUI::ListViewItem {
 FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
     : KDialogBase(parent_, name_, false, i18n("Internet Search"), 0),
       m_timer(new QTimer(this)), m_started(false) {
+  m_collType = Kernel::self()->collectionType();
+
   QWidget* mainWidget = new QWidget(this, "FetchDialog mainWidget");
   setMainWidget(mainWidget);
   QVBoxLayout* topLayout = new QVBoxLayout(mainWidget, 0, KDialog::spacingHint());
@@ -136,7 +139,7 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   label = new QLabel(i18n("Search s&ource:"), box2);
   m_sourceCombo = new KComboBox(box2);
   label->setBuddy(m_sourceCombo);
-  Fetch::FetcherVec sources = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
+  Fetch::FetcherVec sources = Fetch::Manager::self()->fetchers(m_collType);
   for(Fetch::FetcherVec::Iterator it = sources.begin(); it != sources.end(); ++it) {
     m_sourceCombo->insertItem(Fetch::Manager::self()->fetcherIcon(it.data()), (*it).source());
   }
@@ -153,12 +156,13 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   m_listView->setShowSortIndicator(true);
   m_listView->setAllColumnsShowFocus(true);
   m_listView->setSelectionMode(QListView::Extended);
-  m_listView->addColumn(QString::null); // will show a check mark when added
+  m_listView->addColumn(QString::null, 20); // will show a check mark when added
   m_listView->setColumnAlignment(0, Qt::AlignHCenter); // align checkmark in middle
-  m_listView->setColumnWidthMode(0, QListView::Manual);
+//  m_listView->setColumnWidthMode(0, QListView::Manual);
   m_listView->addColumn(i18n("Title"));
   m_listView->addColumn(i18n("Description"));
   m_listView->addColumn(i18n("Source"));
+  m_listView->viewport()->installEventFilter(this);
 
   connect(m_listView, SIGNAL(selectionChanged()), SLOT(slotShowEntry()));
   // double clicking should add the entry
@@ -342,7 +346,7 @@ void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
 
   const Fetch::FetchKey key = static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt());
   // no way to currently check EAN/UPC values for non-book items
-  if(Kernel::self()->collectionType() == Data::Collection::Book &&
+  if(m_collType == Data::Collection::Book &&
      (key == Fetch::ISBN || key == Fetch::UPC)) {
     QStringList values = QStringList::split(QString::fromLatin1("; "),
                                             m_oldSearch.simplifyWhiteSpace());
@@ -388,6 +392,7 @@ void FetchDialog::slotResultFound(Fetch::SearchResult* result_) {
   m_results.append(result_);
   (void) new SearchResultItem(m_listView, result_);
   ++m_resultCount;
+  adjustColumnWidth();
   kapp->processEvents();
 }
 
@@ -609,6 +614,63 @@ void FetchDialog::slotUPC2ISBN() {
   if(key == Fetch::UPC) {
     m_keyCombo->setCurrentData(Fetch::ISBN);
     slotKeyChanged(m_keyCombo->currentItem());
+  }
+}
+
+bool FetchDialog::eventFilter(QObject* obj_, QEvent* ev_) {
+  if(obj_ == m_listView->viewport() && ev_->type() == QEvent::Resize) {
+    adjustColumnWidth();
+  }
+  return false;
+}
+
+void FetchDialog::adjustColumnWidth() {
+  if(!m_listView || m_listView->childCount() == 0) {
+    return;
+  }
+
+  int sum1 = 0;
+  int sum2 = 0;
+  int w3 = 0;
+  for(QListViewItemIterator it(m_listView); it.current(); ++it) {
+    sum1 += it.current()->width(m_listView->fontMetrics(), m_listView, 1);
+    sum2 += it.current()->width(m_listView->fontMetrics(), m_listView, 2);
+    w3 = QMAX(w3, it.current()->width(m_listView->fontMetrics(), m_listView, 3));
+  }
+  // try to be smart about column width
+  // column 0 is fixed, the checkmark icon, give it 20
+  const int w0 = 20;
+  // column 3 is the source, say max is 25% of viewport
+  const int vw = m_listView->visibleWidth();
+  w3 = static_cast<int>(QMIN(1.1 * w3, 0.25 * vw));
+  // scale averages of col 1 and col 2
+  const int avg1 = sum1 / m_listView->childCount();
+  const int avg2 = sum2 / m_listView->childCount();
+  const int w2 = (vw - w0 - w3) * avg2 / (avg1 + avg2);
+  const int w1 = vw - w0 - w3 - w2;
+  m_listView->setColumnWidth(1, w1);
+  m_listView->setColumnWidth(2, w2);
+  m_listView->setColumnWidth(3, w3);
+}
+
+void FetchDialog::slotResetCollection() {
+  if(m_collType == Kernel::self()->collectionType()) {
+    return;
+  }
+  m_collType = Kernel::self()->collectionType();
+  m_sourceCombo->clear();
+  Fetch::FetcherVec sources = Fetch::Manager::self()->fetchers(m_collType);
+  for(Fetch::FetcherVec::Iterator it = sources.begin(); it != sources.end(); ++it) {
+    m_sourceCombo->insertItem(Fetch::Manager::self()->fetcherIcon(it.data()), (*it).source());
+  }
+
+  m_addButton->setIconSet(UserIconSet(Kernel::self()->collectionTypeName()));
+
+  if(Fetch::Manager::self()->canFetch()) {
+    m_searchButton->setEnabled(false);
+  } else {
+    m_searchButton->setEnabled(false);
+    Kernel::self()->sorry(i18n("No Internet sources are available for your current collection type."), this);
   }
 }
 

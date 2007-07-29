@@ -169,11 +169,15 @@ The <ulink url="http://www.adeptscience.co.uk/kb/article/A626"><acronym>RIS</acr
 </para>
 </sect2>
 
-<sect2 id="importing-gcfilms">
-<title>Importing GCfilms Data</title>
+<sect2 id="importing-gcstar">
+<title>Importing GCstar Data</title>
 
 <para>
-<application><ulink url="http://home.gna.org/gcfilms/">GCfilms</ulink></application> is an alternative movie collection manager. Normally, <application>GCfilms</application> data files are found in <filename class="directory">$<envar>HOME</envar>/.local/share/gcfilms/</filename>.
+<application><ulink url="http://www.gcstar.org">GCstar</ulink></application> is an alternative  collection manager. Importing books, movies, music, coins, and wine collections is supported for version 1.1.
+</para>
+
+<para>
+&appname; can also import <application>GCfilms</application> data files. <application><ulink url="http://home.gna.org/gcfilms/">GCfilms</ulink></application> is the predecessor of <application>GCstar</application> and was an alternative movie collection manager. Normally, <application>GCfilms</application> data files are found in <filename class="directory">$<envar>HOME</envar>/.local/share/gcfilms/</filename>.
 </para>
 
 </sect2>

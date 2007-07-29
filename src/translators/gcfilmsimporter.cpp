@@ -18,9 +18,12 @@
 #include "../imagefactory.h"
 #include "../borrower.h"
 #include "../progressmanager.h"
+#include "xslthandler.h"
+#include "tellicoimporter.h"
 
 #include <kglobal.h> // for KMAX
 #include <kapplication.h>
+#include <kstandarddirs.h>
 
 #include <qtextcodec.h>
 
@@ -28,11 +31,16 @@
 
 using Tellico::Import::GCfilmsImporter;
 
-GCfilmsImporter::GCfilmsImporter(const KURL& url_) : TextImporter(url_), m_coll(0), m_cancelled(false) {
+GCfilmsImporter::GCfilmsImporter(const KURL& url_) : TextImporter(url_), m_coll(0), m_cancelled(false), m_hasURL(false) {
 }
 
 bool GCfilmsImporter::canImport(int type) const {
-  return type == Data::Collection::Video;
+  return type == Data::Collection::Video
+      || type == Data::Collection::Book
+      || type == Data::Collection::Album
+      || type == Data::Collection::Game
+      || type == Data::Collection::Wine
+      || type == Data::Collection::Coin;
 }
 
 Tellico::Data::CollPtr GCfilmsImporter::collection() {
@@ -46,16 +54,27 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
   ProgressItem::Done done(this);
 
   m_coll = new Data::VideoCollection(true);
-  bool hasURL = false;
+  m_hasURL = false;
   if(m_coll->hasField(QString::fromLatin1("url"))) {
-    hasURL = m_coll->fieldByName(QString::fromLatin1("url"))->type() == Data::Field::URL;
+    m_hasURL = m_coll->fieldByName(QString::fromLatin1("url"))->type() == Data::Field::URL;
   } else {
     Data::FieldPtr field = new Data::Field(QString::fromLatin1("url"), i18n("URL"), Data::Field::URL);
     field->setCategory(i18n("General"));
     m_coll->addField(field);
-    hasURL = true;
+    m_hasURL = true;
   }
 
+  const QString str = text();
+  QTextIStream t(&str);
+  if(t.readLine().startsWith(QString::fromLatin1("GCfilms"))) {
+    readGCfilms(str);
+  } else {
+    readGCstar(str);
+  }
+  return m_coll;
+}
+
+void GCfilmsImporter::readGCfilms(const QString& text_) {
   bool convertUTF8 = false;
   QMap<QString, Data::BorrowerPtr> borrowers;
   const QRegExp rx(QString::fromLatin1("\\s*,\\s*"));
@@ -66,14 +85,13 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
   bool gotFirstLine = false;
   uint total = 0;
 
-  QString str = text();
-  QTextIStream t(&str);
+  QTextIStream t(&text_);
 
-  const uint length = str.length();
+  const uint length = text_.length();
   const uint stepSize = KMAX(s_stepSize, length/100);
   const bool showProgress = options() & ImportProgress;
 
-  item.setTotalSteps(length);
+  ProgressManager::self()->setTotalSteps(this, length);
   uint j = 0;
   for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), j += line.length()) {
     // string was wrongly converted
@@ -84,9 +102,9 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
 
     if(!gotFirstLine) {
       if(values[0] != Latin1Literal("GCfilms")) {
-        setStatusMessage(i18n("<qt>The file is not a valid GCfilms data file.</qt>"));
+        setStatusMessage(i18n("<qt>The file is not a valid GCstar data file.</qt>"));
         m_coll = 0;
-        return 0;
+        return;
       }
       total = Tellico::toUInt(values[1], 0)+1; // number of lines really
       if(values.size() > 2 && values[2] == Latin1Literal("UTF8")) {
@@ -133,7 +151,7 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
     entry->setField(QString::fromLatin1("cast"),  splitJoin(rx, values[8]));
     // values[9] is the original title
     entry->setField(QString::fromLatin1("plot"),  values[10]);
-    if(hasURL) {
+    if(m_hasURL) {
       entry->setField(QString::fromLatin1("url"), values[11]);
     }
 
@@ -208,7 +226,7 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
 
   if(m_cancelled) {
     m_coll = 0;
-    return 0;
+    return;
   }
 
   for(QMap<QString, Data::BorrowerPtr>::Iterator it = borrowers.begin(); it != borrowers.end(); ++it) {
@@ -216,8 +234,26 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
       m_coll->addBorrower(it.data());
     }
   }
+}
 
-  return m_coll;
+void GCfilmsImporter::readGCstar(const QString& text_) {
+  QString xsltFile = locate("appdata", QString::fromLatin1("gcstar2tellico.xsl"));
+  XSLTHandler handler(xsltFile);
+  if(!handler.isValid()) {
+    setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));
+    return;
+  }
+
+  QString str = handler.applyStylesheet(text_);
+
+  if(str.isEmpty()) {
+    setStatusMessage(i18n("<qt>The file is not a valid GCstar data file.</qt>"));
+    return;
+  }
+
+  Import::TellicoImporter imp(str);
+  m_coll = imp.collection();
+  setStatusMessage(imp.statusMessage());
 }
 
 inline

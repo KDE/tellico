@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
-"POT-Creation-Date: 2007-06-22 17:58-0700\n"
+"POT-Creation-Date: 2007-07-19 23:41-0700\n"
 "PO-Revision-Date: 2005-08-11 11:02+0200\n"
 "Last-Translator: Fred Marchee <fredmarchee@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
@@ -238,18 +238,18 @@ msgstr "%1 inchecken"
 #: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
 #: collections/videocollection.cpp:41 collections/winecollection.cpp:19
 #: configdialog.cpp:192 fetch/imdbfetcher.cpp:689 fetch/imdbfetcher.cpp:933
-#: field.cpp:40 field.cpp:72 translators/gcfilmsimporter.cpp:54
+#: field.cpp:40 field.cpp:72 translators/gcfilmsimporter.cpp:62
 msgid "General"
 msgstr "Algemeen"
 
 #: collections/bibtexcollection.cpp:25 collections/bookcollection.cpp:20
 #: collections/comicbookcollection.cpp:20 translators/grs1importer.cpp:58
-#: translators/grs1importer.cpp:68 translators/risimporter.cpp:258
+#: translators/grs1importer.cpp:68 translators/risimporter.cpp:260
 msgid "Publishing"
 msgstr "Uitgever"
 
 #: collections/bookcollection.cpp:21 collections/comicbookcollection.cpp:21
-#: translators/grs1importer.cpp:63 translators/risimporter.cpp:252
+#: translators/grs1importer.cpp:63 translators/risimporter.cpp:254
 msgid "Classification"
 msgstr "Categorie"
 
@@ -276,7 +276,7 @@ msgstr "Mijn strips"
 #: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
 #: collections/winecollection.cpp:38 entryupdater.cpp:231
 #: fetch/fetchmanager.cpp:62 fetchdialog.cpp:159
-#: translators/audiofileimporter.cpp:150 translators/tellicoimporter.cpp:405
+#: translators/audiofileimporter.cpp:152 translators/tellicoimporter.cpp:426
 msgid "Title"
 msgstr "Titel"
 
@@ -341,7 +341,7 @@ msgstr "Genre"
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
 #: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:913
-#: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
+#: translators/grs1importer.cpp:62 translators/risimporter.cpp:252
 msgid "Keywords"
 msgstr "Trefwoorden"
 
@@ -465,7 +465,7 @@ msgstr "Gegomd"
 msgid "Location"
 msgstr "Locatie"
 
-#: collections/stampcollection.cpp:125 field.cpp:489
+#: collections/stampcollection.cpp:125 field.cpp:497
 msgid "Image"
 msgstr "Afbeelding"
 
@@ -537,7 +537,7 @@ msgstr "Mijn boeken"
 msgid "Author"
 msgstr "Auteur"
 
-#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:134
+#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:135
 msgid "Hardback"
 msgstr "Gebonden"
 
@@ -570,12 +570,12 @@ msgid "Copyright Year"
 msgstr "Jaar Copyright "
 
 #: collections/bibtexcollection.cpp:152 collections/bookcollection.cpp:96
-#: translators/grs1importer.cpp:57 translators/risimporter.cpp:255
+#: translators/grs1importer.cpp:57 translators/risimporter.cpp:257
 msgid "ISBN#"
 msgstr "ISBN#"
 
 #: collections/bibtexcollection.cpp:155 collections/bookcollection.cpp:98
-#: translators/grs1importer.cpp:59 translators/risimporter.cpp:259
+#: translators/grs1importer.cpp:59 translators/risimporter.cpp:261
 msgid "International Standard Book Number"
 msgstr "Internationaal Standaard Boeken Nummer"
 
@@ -604,7 +604,7 @@ msgid "Read"
 msgstr "Gelezen"
 
 #: collections/bookcollection.cpp:158 collections/musiccollection.cpp:82
-#: collections/winecollection.cpp:103 field.cpp:493 newstuff/dialog.cpp:114
+#: collections/winecollection.cpp:103 field.cpp:501 newstuff/dialog.cpp:114
 msgid "Rating"
 msgstr "Waardering"
 
@@ -619,8 +619,8 @@ msgid "Name"
 msgstr "naam"
 
 #: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:396
-#: fetch/entrezfetcher.cpp:465 field.cpp:487
-#: translators/gcfilmsimporter.cpp:53 translators/risimporter.cpp:261
+#: fetch/entrezfetcher.cpp:465 field.cpp:495
+#: translators/gcfilmsimporter.cpp:61 translators/risimporter.cpp:263
 msgid "URL"
 msgstr "URL-adres"
 
@@ -671,11 +671,11 @@ msgstr "Bewerk velden"
 msgid "Meta Info"
 msgstr ""
 
-#: collectionfieldsdialog.cpp:869 collections/filecatalog.cpp:96
+#: collectionfieldsdialog.cpp:873 collections/filecatalog.cpp:96
 msgid "Property"
 msgstr "Eigenschap"
 
-#: collectionfieldsdialog.cpp:869 collections/filecatalog.cpp:97
+#: collectionfieldsdialog.cpp:873 collections/filecatalog.cpp:97
 msgid "Value"
 msgstr "Waarde"
 
@@ -851,11 +851,11 @@ msgstr "Videosysteem"
 msgid "Cast"
 msgstr "Acteurs"
 
-#: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:409
+#: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:430
 msgid "Actor/Actress"
 msgstr ""
 
-#: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:410
+#: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:431
 #, fuzzy
 msgid "Role"
 msgstr "Deel"
@@ -901,7 +901,7 @@ msgid "Aspect Ratio"
 msgstr "Beeldverhouding"
 
 #: collections/videocollection.cpp:168 fetch/amazonfetcher.cpp:793
-#: translators/tellicoimporter.cpp:903
+#: translators/tellicoimporter.cpp:937
 msgid "Widescreen"
 msgstr "Breedbeeld"
 
@@ -1108,7 +1108,7 @@ msgid "Organization"
 msgstr "Organisatie"
 
 #: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:434
-#: fetch/z3950fetcher.cpp:670
+#: fetch/z3950fetcher.cpp:673
 msgid "Address"
 msgstr "Adres"
 
@@ -1116,7 +1116,7 @@ msgstr "Adres"
 msgid "Month"
 msgstr "Maand"
 
-#: collections/bibtexcollection.cpp:173 field.cpp:486
+#: collections/bibtexcollection.cpp:173 field.cpp:494
 msgid "Number"
 msgstr "Nummer"
 
@@ -1133,8 +1133,8 @@ msgid "Cross-Reference"
 msgstr "Verwijzingen"
 
 #: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:464
-#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:671
-#: translators/risimporter.cpp:246
+#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:674
+#: translators/risimporter.cpp:248
 msgid "Abstract"
 msgstr "Samenvatting"
 
@@ -1155,7 +1155,7 @@ msgid "Album"
 msgstr "Album"
 
 #: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:257
-#: translators/freedbimporter.cpp:374 translators/freedbimporter.cpp:445
+#: translators/freedbimporter.cpp:375 translators/freedbimporter.cpp:446
 msgid "Compact Disc"
 msgstr "Compact Disc"
 
@@ -1168,7 +1168,7 @@ msgid "Vinyl"
 msgstr "Vinyl"
 
 #: collections/musiccollection.cpp:51 collections/musiccollection.cpp:78
-#: translators/audiofileimporter.cpp:151 translators/tellicoimporter.cpp:406
+#: translators/audiofileimporter.cpp:153 translators/tellicoimporter.cpp:427
 msgid "Artist"
 msgstr "Artiest"
 
@@ -1176,12 +1176,12 @@ msgstr "Artiest"
 msgid "Label"
 msgstr "Label"
 
-#: collections/musiccollection.cpp:74 translators/audiofileimporter.cpp:146
+#: collections/musiccollection.cpp:74 translators/audiofileimporter.cpp:148
 msgid "Tracks"
 msgstr "Nummers"
 
-#: collections/musiccollection.cpp:79 translators/audiofileimporter.cpp:152
-#: translators/tellicoimporter.cpp:407
+#: collections/musiccollection.cpp:79 translators/audiofileimporter.cpp:154
+#: translators/tellicoimporter.cpp:428
 msgid "Length"
 msgstr ""
 
@@ -1228,19 +1228,19 @@ msgstr "Entrez Database"
 msgid "Institution"
 msgstr "Staat"
 
-#: fetch/z3950connection.cpp:117
+#: fetch/z3950connection.cpp:118
 msgid "Query error!"
 msgstr "Zoek fout!"
 
-#: fetch/z3950connection.cpp:158
+#: fetch/z3950connection.cpp:159
 msgid "Connection search error %1: %2"
 msgstr "Verbindings zoekfout %1: %2"
 
-#: fetch/z3950connection.cpp:235
+#: fetch/z3950connection.cpp:236
 msgid "Record syntax error"
 msgstr "Structuur syntaxisfout"
 
-#: fetch/z3950connection.cpp:331
+#: fetch/z3950connection.cpp:332
 msgid "Connection error %1: %2"
 msgstr "Verbindingsfout %1: %2"
 
@@ -1254,21 +1254,21 @@ msgid "Library of Congress (US)"
 msgstr "Library of Congress Control (VS)"
 
 #: fetch/imdbfetcher.cpp:1099 fetch/srufetcher.cpp:349
-#: fetch/z3950fetcher.cpp:506
+#: fetch/z3950fetcher.cpp:509
 #, fuzzy
 msgid "Hos&t: "
 msgstr "&Host: "
 
-#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:512
+#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:515
 #, fuzzy
 msgid "Enter the host name of the server."
 msgstr "Geef de hostnaam van de z39.50 server."
 
-#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:517
+#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:520
 msgid "&Port: "
 msgstr "&Poort: "
 
-#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:522
+#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:525
 #, fuzzy, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Geef het poortnummer van de z39.50 server. Standaard is %1."
@@ -1414,29 +1414,29 @@ msgstr ""
 "De associate's ID herkent de persoon die toegang heeft op de Amazon.com Web "
 "Services en wordt gebruikt in iedere link naar de Amazon.com website."
 
-#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:757
+#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:760
 #, fuzzy
 msgid "z39.50 Server"
 msgstr "z39.50"
 
-#: fetch/z3950fetcher.cpp:496
+#: fetch/z3950fetcher.cpp:499
 msgid "Use preset &server:"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:527
+#: fetch/z3950fetcher.cpp:530
 msgid "&Database: "
 msgstr "&Database: "
 
-#: fetch/z3950fetcher.cpp:532
+#: fetch/z3950fetcher.cpp:535
 #, fuzzy
 msgid "Enter the database name used by the server."
 msgstr "Geef de database naam die door de z39.50 server gebruikt wordt."
 
-#: fetch/z3950fetcher.cpp:537
+#: fetch/z3950fetcher.cpp:540
 msgid "Ch&aracter set: "
 msgstr "&Teken set: "
 
-#: fetch/z3950fetcher.cpp:546
+#: fetch/z3950fetcher.cpp:549
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -1444,30 +1444,30 @@ msgstr ""
 "Geef de tekenset codering die gebruikt wordt door de z39.50 server. De meest "
 "waarschijnlijke keuze is MARC-8 hoewel ISO-8859-1 ook veel gebruikt wordt."
 
-#: fetch/z3950fetcher.cpp:552
+#: fetch/z3950fetcher.cpp:555
 #, fuzzy
 msgid "&Format: "
 msgstr "Videosysteem"
 
-#: fetch/z3950fetcher.cpp:555
+#: fetch/z3950fetcher.cpp:558
 msgid "Auto-detect"
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:563
+#: fetch/z3950fetcher.cpp:566
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
 msgstr ""
 
-#: fetch/z3950fetcher.cpp:569
+#: fetch/z3950fetcher.cpp:572
 msgid "&User: "
 msgstr "&Gebruiker: "
 
-#: fetch/z3950fetcher.cpp:572 fetch/z3950fetcher.cpp:584
+#: fetch/z3950fetcher.cpp:575 fetch/z3950fetcher.cpp:587
 msgid "Optional"
 msgstr "Optioneel"
 
-#: fetch/z3950fetcher.cpp:575
+#: fetch/z3950fetcher.cpp:578
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -1475,11 +1475,11 @@ msgstr ""
 "Geef de gebruikersnaam van de z39.50 database. De meeste server hebben er "
 "geen nodig."
 
-#: fetch/z3950fetcher.cpp:581
+#: fetch/z3950fetcher.cpp:584
 msgid "Pass&word: "
 msgstr "Wacht&woord: "
 
-#: fetch/z3950fetcher.cpp:588
+#: fetch/z3950fetcher.cpp:591
 #, fuzzy
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
@@ -1489,7 +1489,7 @@ msgstr ""
 "Geef het wachtwoord van de z39.50 database. De meeste server hebben er geen "
 "nodig."
 
-#: fetch/z3950fetcher.cpp:672
+#: fetch/z3950fetcher.cpp:675
 msgid "Illustrator"
 msgstr ""
 
@@ -1498,7 +1498,7 @@ msgid "External Application"
 msgstr "Externe toepassing"
 
 #: configdialog.cpp:354 fetch/execexternalfetcher.cpp:336
-#: translators/csvimporter.cpp:171
+#: translators/csvimporter.cpp:172
 msgid "Collection &type:"
 msgstr "Verzameling &type:"
 
@@ -1787,32 +1787,32 @@ msgstr ""
 "kan optreden wanneer een oudere versie van Tellico wordt gebruikt om het "
 "nieuwe bestand te lezen."
 
-#: translators/bibtexhandler.cpp:245 translators/risimporter.cpp:263
-#: translators/risimporter.cpp:267 translators/tellicoimporter.cpp:333
+#: translators/bibtexhandler.cpp:245 translators/risimporter.cpp:265
+#: translators/risimporter.cpp:269 translators/tellicoimporter.cpp:354
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: translators/tellicoimporter.cpp:723
+#: translators/tellicoimporter.cpp:756
 msgid "The file is empty."
 msgstr "Het bestand is leeg."
 
-#: translators/tellicoimporter.cpp:741
+#: translators/tellicoimporter.cpp:774
 msgid "The file contains no collection data."
 msgstr "Het bestand bevat geen verzamel data."
 
-#: translators/tellicoimporter.cpp:885
+#: translators/tellicoimporter.cpp:919
 msgid "Unread Books"
 msgstr "Ongelezen boeken"
 
-#: translators/tellicoimporter.cpp:895
+#: translators/tellicoimporter.cpp:929
 msgid "Old Movies"
 msgstr "Oude films"
 
-#: translators/tellicoimporter.cpp:913
+#: translators/tellicoimporter.cpp:947
 msgid "80's Music"
 msgstr "80er jaren muziek"
 
-#: translators/tellicoimporter.cpp:925
+#: translators/tellicoimporter.cpp:959
 msgid "Favorites"
 msgstr "Favorieten"
 
@@ -1820,28 +1820,28 @@ msgstr "Favorieten"
 msgid "Scanning audio files..."
 msgstr "Audiobestanden doorzoeken..."
 
-#: translators/audiofileimporter.cpp:169 xslt.cpp:4
+#: translators/audiofileimporter.cpp:171 xslt.cpp:4
 msgid "(Various)"
 msgstr "(Diversen)"
 
-#: translators/audiofileimporter.cpp:317
+#: translators/audiofileimporter.cpp:319
 msgid "Audio File Options"
 msgstr "Audiobestand opties"
 
-#: translators/audiofileimporter.cpp:319
+#: translators/audiofileimporter.cpp:321
 msgid "Recursive &folder search"
 msgstr "Folders recursief doorzoeken"
 
-#: translators/audiofileimporter.cpp:320
+#: translators/audiofileimporter.cpp:322
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Indien aangevinkt worden folders recursief doorzocht naar audiobestanden."
 
-#: translators/audiofileimporter.cpp:324
+#: translators/audiofileimporter.cpp:326
 msgid "&Include file location"
 msgstr ""
 
-#: translators/audiofileimporter.cpp:325
+#: translators/audiofileimporter.cpp:327
 #, fuzzy
 msgid "If checked, the file names for each track are added to the entries."
 msgstr "Indien aangevinkt worden de veldnamen afgedrukt als tabel-kop."
@@ -1854,7 +1854,7 @@ msgstr "CSV"
 msgid "*.csv|CSV Files (*.csv)"
 msgstr "*.csv|CSV bestanden (*.csv)"
 
-#: configdialog.cpp:992 importdialog.cpp:245 mainwindow.cpp:1060
+#: configdialog.cpp:992 importdialog.cpp:246 mainwindow.cpp:1060
 #: mainwindow.cpp:1217 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
 #: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:88
@@ -1864,7 +1864,7 @@ msgstr "*.csv|CSV bestanden (*.csv)"
 msgid "*|All Files"
 msgstr "*|Alle bestanden"
 
-#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:166
+#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:167
 msgid "CSV Options"
 msgstr "CSV opties"
 
@@ -1876,11 +1876,11 @@ msgstr "Gebruik veldtitels als kolom koppen"
 msgid "If checked, a header row will be added with the field titles."
 msgstr "Indien aangevinkt wordt een koprij toegevoegd met de veldtitels."
 
-#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:185
+#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:186
 msgid "Delimiter"
 msgstr "Scheidingsteken"
 
-#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:188
+#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:189
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
@@ -1892,7 +1892,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Komma"
 
-#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:195
+#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:196
 msgid "Use a comma as the delimiter."
 msgstr "Gebruik een komma als scheidingsteken."
 
@@ -1900,7 +1900,7 @@ msgstr "Gebruik een komma als scheidingsteken."
 msgid "Semicolon"
 msgstr "Puntkomma"
 
-#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:200
+#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:201
 msgid "Use a semi-colon as the delimiter."
 msgstr "Gebruik een puntkomma als scheiding teken."
 
@@ -1908,7 +1908,7 @@ msgstr "Gebruik een puntkomma als scheiding teken."
 msgid "Tab"
 msgstr "Tab"
 
-#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:205
+#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:206
 msgid "Use a tab as the delimiter."
 msgstr "Gebruik een tab als scheidingsteken."
 
@@ -1916,11 +1916,11 @@ msgstr "Gebruik een tab als scheidingsteken."
 msgid "Other"
 msgstr "Ander"
 
-#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:210
+#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:211
 msgid "Use a custom string as the delimiter."
 msgstr "Gebruik een eigen tekenreeks als scheidingteken."
 
-#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:216
+#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:217
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "Een eigen tekenreeks, zoals een dubbele punt, kan worden gebruikt als "
@@ -1931,28 +1931,28 @@ msgstr ""
 msgid "Scanning files..."
 msgstr "Audiobestanden doorzoeken..."
 
-#: translators/filelistingimporter.cpp:196
+#: translators/filelistingimporter.cpp:198
 #, fuzzy
 msgid "File Listing Options"
 msgstr "Afdrukopties"
 
-#: translators/filelistingimporter.cpp:198
+#: translators/filelistingimporter.cpp:200
 #, fuzzy
 msgid "Recursive folder search"
 msgstr "Folders recursief doorzoeken"
 
-#: translators/filelistingimporter.cpp:199
+#: translators/filelistingimporter.cpp:201
 #, fuzzy
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Indien aangevinkt worden folders recursief doorzocht naar audiobestanden."
 
-#: translators/filelistingimporter.cpp:203
+#: translators/filelistingimporter.cpp:205
 #, fuzzy
 msgid "Generate file previews"
 msgstr "&Maak lijsten..."
 
-#: translators/filelistingimporter.cpp:204
+#: translators/filelistingimporter.cpp:206
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
@@ -2006,28 +2006,28 @@ msgstr ""
 "<qt>Tellico is er niet ingeslaagd om de CD zoekopdracht volledig uit te "
 "voeren.</qt>"
 
-#: translators/freedbimporter.cpp:469
+#: translators/freedbimporter.cpp:470
 #, fuzzy
 msgid "Various"
 msgstr "(Diversen)"
 
-#: translators/freedbimporter.cpp:488
+#: translators/freedbimporter.cpp:489
 msgid "Audio CD Options"
 msgstr "Audio CD opties"
 
-#: translators/freedbimporter.cpp:492
+#: translators/freedbimporter.cpp:493
 msgid "Read data from CD-ROM device"
 msgstr "Data lezen van de CD-ROM speler"
 
-#: translators/freedbimporter.cpp:495
+#: translators/freedbimporter.cpp:496
 msgid "Select or input the CD-ROM device location."
 msgstr "Selecteer of vul de CD-Rom speler in."
 
-#: translators/freedbimporter.cpp:501
+#: translators/freedbimporter.cpp:502
 msgid "Read all CDDB cache files only"
 msgstr "Alleen alle CDDB cache bestanden lezen"
 
-#: translators/freedbimporter.cpp:502
+#: translators/freedbimporter.cpp:503
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
@@ -2035,11 +2035,11 @@ msgstr ""
 "Lees alle data recursief uit alle CDDB cache bestanden in de standaard cache "
 "map."
 
-#: importdialog.cpp:272 translators/gcfilmsexporter.cpp:37
+#: translators/gcfilmsexporter.cpp:37
 msgid "GCfilms"
 msgstr ""
 
-#: importdialog.cpp:230 translators/gcfilmsexporter.cpp:41
+#: importdialog.cpp:231 translators/gcfilmsexporter.cpp:41
 #, fuzzy
 msgid "*.gcf|GCfilms Data Files (*.gcf)"
 msgstr "*.csv|CSV bestanden (*.csv)"
@@ -2062,16 +2062,16 @@ msgstr ""
 "Kies het XSLT bestand dat gebruikt moet worden om de Tellico XML data te om "
 "te zetten."
 
-#: translators/alexandriaimporter.cpp:193
+#: translators/alexandriaimporter.cpp:194
 msgid "Alexandria Options"
 msgstr "Alexandria opties"
 
-#: translators/alexandriaimporter.cpp:194
+#: translators/alexandriaimporter.cpp:195
 #, fuzzy
 msgid "&Library:"
 msgstr "Bibliotheek:"
 
-#: importdialog.cpp:268 translators/bibtexmlexporter.cpp:36
+#: importdialog.cpp:269 translators/bibtexmlexporter.cpp:36
 msgid "Bibtexml"
 msgstr "BibTeXML"
 
@@ -2104,17 +2104,17 @@ msgstr ""
 "Indien aangevinkt worden de afbeeldingen ingesloten in het XML bestande als "
 "base64 gecodeerde elementen."
 
-#: translators/importer.h:90
+#: translators/importer.h:95
 #, fuzzy
 msgid "Loading data..."
 msgstr "Data importeren..."
 
-#: translators/importer.h:90
+#: translators/importer.h:95
 #, fuzzy
 msgid "Loading %1..."
 msgstr "%1 ophalen..."
 
-#: importdialog.cpp:267 translators/bibtexexporter.cpp:48
+#: importdialog.cpp:268 translators/bibtexexporter.cpp:48
 msgid "Bibtex"
 msgstr "BibTeX"
 
@@ -2188,44 +2188,44 @@ msgstr "Tellico zip bestand"
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Tellico-bestanden (*.tc)"
 
-#: translators/csvimporter.cpp:174
+#: translators/csvimporter.cpp:175
 msgid "Select the type of collection being imported."
 msgstr "Selecteer het type verzameling dat moet worden geïmporteerd."
 
-#: translators/csvimporter.cpp:180
+#: translators/csvimporter.cpp:181
 #, fuzzy
 msgid "&First row contains field titles"
 msgstr "De eerste rij bevat de veldtitels"
 
-#: translators/csvimporter.cpp:181
+#: translators/csvimporter.cpp:182
 msgid "If checked, the first row is used as field titles."
 msgstr "Indien aangevinkt wordt de eerste rij als veldtitel gebruikt."
 
-#: translators/csvimporter.cpp:193
+#: translators/csvimporter.cpp:194
 #, fuzzy
 msgid "&Comma"
 msgstr "Komma"
 
-#: translators/csvimporter.cpp:199
+#: translators/csvimporter.cpp:200
 #, fuzzy
 msgid "&Semicolon"
 msgstr "Puntkomma"
 
-#: translators/csvimporter.cpp:204
+#: translators/csvimporter.cpp:205
 #, fuzzy
 msgid "Ta&b"
 msgstr "Tab"
 
-#: translators/csvimporter.cpp:209
+#: translators/csvimporter.cpp:210
 #, fuzzy
 msgid "Ot&her:"
 msgstr "Ander:"
 
-#: translators/csvimporter.cpp:233
+#: translators/csvimporter.cpp:234
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "De tabel toont de eerste vijf regels van het CSV bestand."
 
-#: translators/csvimporter.cpp:240
+#: translators/csvimporter.cpp:241
 #, fuzzy
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
@@ -2236,27 +2236,27 @@ msgstr ""
 "een kolom te selecteren, een veld te selecteren en dan op de "
 "<i>instellen</i> knop klikken.</qt>"
 
-#: translators/csvimporter.cpp:242
+#: translators/csvimporter.cpp:243
 #, fuzzy
 msgid "Co&lumn:"
 msgstr "Kolom:"
 
-#: translators/csvimporter.cpp:251
+#: translators/csvimporter.cpp:252
 #, fuzzy
 msgid "&Data field in this column:"
 msgstr "Dataveld in deze kolom:"
 
-#: translators/csvimporter.cpp:259
+#: translators/csvimporter.cpp:260
 #, fuzzy
 msgid "&Assign Field"
 msgstr "Veld toewijzen"
 
-#: collectionfieldsdialog.cpp:405 collectionfieldsdialog.cpp:408
-#: translators/csvimporter.cpp:410 translators/csvimporter.cpp:513
+#: collectionfieldsdialog.cpp:409 collectionfieldsdialog.cpp:412
+#: translators/csvimporter.cpp:411 translators/csvimporter.cpp:514
 msgid "New Field"
 msgstr "Nieuw veld"
 
-#: translators/risimporter.cpp:265
+#: translators/risimporter.cpp:267
 msgid "PDF"
 msgstr "PDF"
 
@@ -2265,8 +2265,8 @@ msgid "PilotDB"
 msgstr "PilotDB"
 
 #: translators/pilotdbexporter.cpp:47
-msgid "*.pdb|Pilot Database Files(*.pdb)"
-msgstr "*.pdb|Pilot Database bestanden(*.pdb)"
+msgid "*.pdb|Pilot Database Files (*.pdb)"
+msgstr "*.pdb|Pilot Database bestanden (*.pdb)"
 
 #: detailedlistview.cpp:67 detailedlistview.cpp:299
 #: translators/pilotdbexporter.cpp:143
@@ -2281,18 +2281,20 @@ msgstr "PilotDB opties"
 msgid "Set PDA backup flag for database"
 msgstr "Stel PDA back-up flag in voor de database"
 
-#: translators/gcfilmsimporter.cpp:85
-msgid "<qt>The file is not a valid GCfilms data file.</qt>"
-msgstr ""
+#: translators/gcfilmsimporter.cpp:105 translators/gcfilmsimporter.cpp:250
+#, fuzzy
+msgid "<qt>The file is not a valid GCstar data file.</qt>"
+msgstr "<qt>Laad de ISBN lijst van een bestand.</qt>"
+
+#: mainwindow.cpp:1699 translators/gcfilmsimporter.cpp:243
+#: translators/xsltimporter.cpp:57
+msgid "Tellico encountered an error in XSLT processing."
+msgstr "Tellico kreeg een fout bij de XSLT verwerking."
 
 #: translators/xsltimporter.cpp:45 translators/xsltimporter.cpp:51
 msgid "A valid XSLT file is needed to import the file."
 msgstr ""
 "Een geldig XSLT bestand is noodzakelijk om het bestand te kunnen importeren."
-
-#: mainwindow.cpp:1699 translators/xsltimporter.cpp:57
-msgid "Tellico encountered an error in XSLT processing."
-msgstr "Tellico kreeg een fout bij de XSLT verwerking."
 
 #: configdialog.cpp:990 translators/xsltimporter.cpp:85
 msgid "*.xsl|XSL Files (*.xsl)"
@@ -2432,31 +2434,31 @@ msgstr "Filter naam:"
 msgid "&Save Filter"
 msgstr "Filter op&slaan"
 
-#: field.cpp:482
+#: field.cpp:490
 msgid "Simple Text"
 msgstr "Eenvoudige tekst"
 
-#: field.cpp:483
+#: field.cpp:491
 msgid "Paragraph"
 msgstr "Paragraaf"
 
-#: field.cpp:484
+#: field.cpp:492
 msgid "Choice"
 msgstr "Keuze"
 
-#: field.cpp:485
+#: field.cpp:493
 msgid "Checkbox"
 msgstr "Keuzevakje"
 
-#: field.cpp:488
+#: field.cpp:496
 msgid "Table"
 msgstr "Tabel"
 
-#: field.cpp:490
+#: field.cpp:498
 msgid "Dependent"
 msgstr "Afhankelijk van"
 
-#: field.cpp:492
+#: field.cpp:500
 msgid "Date"
 msgstr "Datum"
 
@@ -2558,21 +2560,30 @@ msgstr ""
 msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.ris|RIS bestanden (*.ris)"
 
-#: importdialog.cpp:234
+#: importdialog.cpp:230
+#, fuzzy
+msgid "*.gcs|GCstar Data Files (*.gcs)"
+msgstr "*.csv|CSV bestanden (*.csv)"
+
+#: importdialog.cpp:235
 #, fuzzy
 msgid "*.amc|AMC Data Files (*.amc)"
 msgstr "*.csv|CSV bestanden (*.csv)"
 
-#: importdialog.cpp:270
+#: importdialog.cpp:271
 #, fuzzy
 msgid "MODS"
 msgstr "Mac OS"
 
-#: importdialog.cpp:271
+#: importdialog.cpp:272
 msgid "RIS"
 msgstr ""
 
 #: importdialog.cpp:273
+msgid "GCstar"
+msgstr "GCstar"
+
+#: importdialog.cpp:274
 msgid "AMC"
 msgstr ""
 
@@ -2893,12 +2904,12 @@ msgstr "Importeer audio cd informatie van de FreeDB"
 
 #: mainwindow.cpp:392
 #, fuzzy
-msgid "Import GCfilms Data..."
+msgid "Import GCstar Data..."
 msgstr "Importeer CSV data..."
 
 #: mainwindow.cpp:393
 #, fuzzy
-msgid "Import a GCfilms data file"
+msgid "Import a GCstar data file"
 msgstr "Importeer een MODS data bestand"
 
 #: mainwindow.cpp:399
@@ -3365,49 +3376,49 @@ msgstr "Pagina %1"
 msgid "Please check your installation."
 msgstr "Controleer uw installatie."
 
-#: mainwindow.cpp:1789
+#: mainwindow.cpp:1793
 msgid "Importing data..."
 msgstr "Data importeren..."
 
-#: mainwindow.cpp:1798
+#: mainwindow.cpp:1802
 msgid "Import File"
 msgstr "Bestand importeren"
 
-#: mainwindow.cpp:1804
+#: mainwindow.cpp:1808
 #, fuzzy
 msgid "Import Directory"
 msgstr "Regisseur"
 
-#: mainwindow.cpp:1892
+#: mainwindow.cpp:1895
 msgid "Exporting data..."
 msgstr "Data exporteren..."
 
-#: mainwindow.cpp:1914
+#: mainwindow.cpp:1917
 msgid "Export As"
 msgstr "Exporteer als"
 
-#: mainwindow.cpp:1943
+#: mainwindow.cpp:1946
 msgid "String Macros"
 msgstr "Tekenreeks macros"
 
-#: mainwindow.cpp:1944
+#: mainwindow.cpp:1947
 msgid "Macro"
 msgstr "Macro"
 
-#: mainwindow.cpp:1944
+#: mainwindow.cpp:1947
 msgid "String"
 msgstr "Tekenreeks"
 
-#: mainwindow.cpp:2007
+#: mainwindow.cpp:2010
 #, fuzzy
 msgid "Creating citations..."
 msgstr "Leeftijdcategorie"
 
-#: mainwindow.cpp:2157
+#: mainwindow.cpp:2160
 msgid "Filters"
 msgstr "Filters"
 
-#: mainwindow.cpp:2158
+#: mainwindow.cpp:2161
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
 "rules.</qt>"
@@ -3415,11 +3426,11 @@ msgstr ""
 "<qt>De <i>Filter weergave</i> toont de items die voldoen aan bepaalde "
 "filterregels.</qt>"
 
-#: mainwindow.cpp:2174
+#: mainwindow.cpp:2177
 msgid "Loans"
 msgstr "Uitgeleend"
 
-#: mainwindow.cpp:2175
+#: mainwindow.cpp:2178
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
@@ -3427,7 +3438,7 @@ msgstr ""
 "<qt>De <i>Uitleen weergave</i> toont een lijst van mensen die items van u "
 "hebben geleend.</qt>"
 
-#: mainwindow.cpp:2308
+#: mainwindow.cpp:2311
 #, c-format
 msgid "Update entry data from %1"
 msgstr ""
@@ -3734,7 +3745,7 @@ msgstr "&Toegestaan:"
 #, fuzzy
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
-"are placed in a combo box. The possible value have to be seperated by a "
+"are placed in a combo box. The possible values have to be separated by a "
 "semi-colon, for example: \"dog; cat; mouse\"</qt>"
 msgstr ""
 "<qt>Voor <i>Keuze</i> velden zijn dit de enige mogelijke waardes. Ze worden "
@@ -3852,11 +3863,11 @@ msgstr ""
 "Zet de veldeigenschappen van de geselecteerde velden terug naar de standaard "
 "waarden."
 
-#: collectionfieldsdialog.cpp:302
+#: collectionfieldsdialog.cpp:306
 msgid "Modify Fields"
 msgstr "Bewerk velden"
 
-#: collectionfieldsdialog.cpp:316
+#: collectionfieldsdialog.cpp:320
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
 "in the collection may cause data corruption. Do you want to keep your "
@@ -3866,15 +3877,15 @@ msgstr ""
 "voorkomen in de verzameling kan data corruptie veroorzaken. Wilt u de "
 "veranderde waardes behouden of terugkeren naar de huidige waardes?</qt>"
 
-#: collectionfieldsdialog.cpp:321
+#: collectionfieldsdialog.cpp:325
 msgid "Keep modified values"
 msgstr "Bewaar veranderde waarden"
 
-#: collectionfieldsdialog.cpp:741
+#: collectionfieldsdialog.cpp:745
 msgid "Revert Field Properties"
 msgstr "Veldeigenschappen terugzetten"
 
-#: collectionfieldsdialog.cpp:742
+#: collectionfieldsdialog.cpp:746
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
@@ -3882,23 +3893,23 @@ msgstr ""
 "<qt><p>Weet u zeker dat u de eigenschappen van het <em>%1</em> veld terug "
 "wilt zetten naar de standaard waarde?</p></qt>"
 
-#: collectionfieldsdialog.cpp:745
+#: collectionfieldsdialog.cpp:749
 msgid "Revert"
 msgstr "Terugzetten"
 
-#: collectionfieldsdialog.cpp:868
+#: collectionfieldsdialog.cpp:872
 msgid "Extended Field Properties"
 msgstr "Uitgebreide veldeigenschappen"
 
-#: collectionfieldsdialog.cpp:898
+#: collectionfieldsdialog.cpp:902
 msgid "A field with this title already exists. Please enter a different title."
 msgstr "Een veld met deze titel bestaat al. Kies een andere titel."
 
-#: collectionfieldsdialog.cpp:905
+#: collectionfieldsdialog.cpp:909
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>De categorie mag niet leeg zijn. Geef een categorie op.</qt>"
 
-#: collectionfieldsdialog.cpp:913
+#: collectionfieldsdialog.cpp:917
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
 "<em>Table</em> or <em>Image</em> field. Please enter a different "
@@ -3908,7 +3919,7 @@ msgstr ""
 "<em>Paragraaf</em>, <em>Tabel</em> of <em>Afbeelding</em> veld. Geef een "
 "andere categorie.</qt>"
 
-#: collectionfieldsdialog.cpp:921
+#: collectionfieldsdialog.cpp:925
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
@@ -3916,7 +3927,7 @@ msgstr ""
 "Een veldtitel mag gelijk zijn aan een bestaande categorie. Geef een andere "
 "titel."
 
-#: collectionfieldsdialog.cpp:933
+#: collectionfieldsdialog.cpp:937
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
 "must be less than the higher bound. Please enter different low and high "
@@ -3925,7 +3936,7 @@ msgstr ""
 "Het bereik van een waarderingsveld moet tussen de 1 en 10 zijn en de "
 "ondergrens mag niet hoger zijn dan de bovengrens. Geef andere waardes."
 
-#: collectionfieldsdialog.cpp:948
+#: collectionfieldsdialog.cpp:952
 #, fuzzy
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Tabellen kunnen maximaal vijf kolommen hebben."
@@ -5034,6 +5045,14 @@ msgstr ""
 msgid "National Library of Australia"
 msgstr ""
 
+#: z3950.cpp:22
+msgid "National Library of Lithuania"
+msgstr ""
+
+#: z3950.cpp:24
+msgid "Copac (UK and Ireland)"
+msgstr ""
+
 #: scripts.cpp:2
 msgid "Dark Horse Comics"
 msgstr ""
@@ -5045,6 +5064,10 @@ msgstr ""
 #: scripts.cpp:6
 msgid "Spanish Ministry of Culture"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Copac"
+#~ msgstr "Komma"
 
 #~ msgid "Tellico"
 #~ msgstr "Tellico"

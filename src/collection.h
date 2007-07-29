@@ -283,7 +283,7 @@ public:
    */
   const QStringList& entryGroups() const { return m_entryGroups; }
   /**
-   * Returns a pointer to a const dict of all the entries grouped by
+   * Returns a pointer to a dict of all the entries grouped by
    * a certain field
    *
    * @param name The name of the field by which the entries are grouped

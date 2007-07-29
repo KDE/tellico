@@ -48,8 +48,12 @@ public slots:
 private:
   static QString splitJoin(const QRegExp& rx, const QString& s);
 
+  void readGCfilms(const QString& text);
+  void readGCstar(const QString& text);
+
   Data::CollPtr m_coll;
   bool m_cancelled : 1;
+  bool m_hasURL : 1;
 };
 
   } // end namespace

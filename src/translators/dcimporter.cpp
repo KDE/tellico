@@ -80,7 +80,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
           s = s.simplifyWhiteSpace();
           creators << s;
         } else {
-          myDebug() << "DCImporter::collection() - wierd creator, skipping: " << s << endl;
+          myDebug() << "DCImporter::collection() - weird creator, skipping: " << s << endl;
         }
       } else {
         creators << s;

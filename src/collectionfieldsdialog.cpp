@@ -206,7 +206,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
   layout->addMultiCellWidget(m_allowEdit, row, row, 1, 3);
   label->setBuddy(m_allowEdit);
   whats = i18n("<qt>For <i>Choice</i>-type fields, these are the only values allowed. They are "
-               "placed in a combo box. The possible value have to be seperated by a semi-colon, "
+               "placed in a combo box. The possible values have to be separated by a semi-colon, "
                "for example: \"dog; cat; mouse\"</qt>");
   QWhatsThis::add(label, whats);
   QWhatsThis::add(m_allowEdit, whats);

@@ -141,6 +141,9 @@ public slots:
   void slotGoPrevEntry();
   void slotGoNextEntry();
 
+signals:
+  void collectionAdded(int collType);
+
 private:
   static Controller* s_self;
   Controller(MainWindow* parent, const char* name);

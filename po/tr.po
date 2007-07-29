@@ -1,14 +1,12 @@
-# translation of tr.po to Türkçe
+# translation of tellico.po to Türkçe
 #
-# Ali Işıngör <ali@artistanbulpr.com>, 2007.
 # Ali Isingor <isingor@gmail.com>, 2007.
-# Kunter <kunterkutlu@gmail.com>, 2007.
 # Kunter Kutlu <kunterkutlu@gmail.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: tr\n"
-"POT-Creation-Date: 2006-11-05 15:37-0800\n"
-"PO-Revision-Date: 2007-07-02 00:02+0300\n"
+"Project-Id-Version: tellico\n"
+"POT-Creation-Date: 2007-07-19 23:41-0700\n"
+"PO-Revision-Date: 2007-07-03 02:14+0300\n"
 "Last-Translator: Kunter Kutlu <kunterkutlu@gmail.com>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,32 +14,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: cite/lyxpipe.cpp:47
+#: cite/lyxpipe.cpp:49
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico, sunucu soketi <b>%1</b> iken yazamaz</qt>"
 
-#: cite/openoffice.cpp:80
+#: cite/openoffice.cpp:81
 msgid "Connecting to OpenOffice.org..."
 msgstr "OpenOffice.org'a Bağlanılıyor..."
 
-#: cite/openoffice.cpp:163 cite/openoffice.cpp:183
+#: cite/openoffice.cpp:164 cite/openoffice.cpp:185
 msgid "OpenOffice.org Connection"
 msgstr "OpenOffice.org Bağlantısı"
 
-#: cite/openoffice.cpp:177
+#: cite/openoffice.cpp:178
 msgid ""
 "Tellico was unable to connect to OpenOffice.org. Please verify the "
 "connection settings below, and that OpenOffice.org Writer is currently "
 "running."
 msgstr ""
-"Tellico OpenOffice.Org a bağlanamadı. Lütfen aşağıdaki bağlantı ayarlarını "
-"ve OpenOffice.Org Kelime İşlemcisinin çalıştığını onalayınız."
+"Tellico OpenOffice.Org a bağlanamadı. Lütfen aşağıdaki bağlantı "
+"ayarlarını ve OpenOffice.Org Kelime İşlemcisinin çalıştığını "
+"onalayınız."
 
-#: cite/openoffice.cpp:188
+#: cite/openoffice.cpp:190
 msgid "Pipe"
 msgstr "Borulama"
 
-#: cite/openoffice.cpp:190
+#: cite/openoffice.cpp:192
 msgid "TCP/IP"
 msgstr "TCP/IP"
 
@@ -90,7 +89,7 @@ msgstr "Şablon Önizleme"
 msgid "&Set"
 msgstr "&Ayarla"
 
-#: gui/fieldwidget.cpp:102 gui/fieldwidget.cpp:196
+#: gui/fieldwidget.cpp:101 gui/fieldwidget.cpp:195
 msgid ""
 "_: Edit Label\n"
 "%1:"
@@ -114,7 +113,7 @@ msgid ""
 "Clear"
 msgstr "Temizle"
 
-#: gui/imagewidget.cpp:52
+#: gui/imagewidget.cpp:53
 msgid "Select Image..."
 msgstr "Resim Seçin..."
 
@@ -125,15 +124,15 @@ msgid ""
 "Modify %1"
 msgstr "Değiştir %1"
 
-#: commands/collectioncommand.cpp:93
+#: commands/collectioncommand.cpp:110
 msgid "Append Collection"
 msgstr "İliştirme Kolleksiyonu"
 
-#: commands/collectioncommand.cpp:95
+#: commands/collectioncommand.cpp:112
 msgid "Merge Collection"
 msgstr "Birleşme Kolleksiyonu"
 
-#: commands/collectioncommand.cpp:97
+#: commands/collectioncommand.cpp:114
 msgid "Replace Collection"
 msgstr "Değiştirme Kolleksiyonu"
 
@@ -153,18 +152,18 @@ msgstr "Değiştirme %1 Alanı"
 msgid "Delete %1 Field"
 msgstr "Silme %1 Alanı"
 
-#: commands/addentries.cpp:54
+#: commands/addentries.cpp:50
 msgid "Add Entries"
 msgstr "Ekleme Girdileri"
 
-#: commands/addentries.cpp:55
+#: commands/addentries.cpp:51
 #, c-format
 msgid ""
 "_: Add (Entry Title)\n"
 "Add %1"
 msgstr "Ekle %1"
 
-#: commands/renamecollection.cpp:45 tellico_kernel.cpp:322
+#: commands/renamecollection.cpp:45 tellico_kernel.cpp:323
 msgid "Rename Collection"
 msgstr "Yeniden İsimlendirme Kolleksiyonu"
 
@@ -176,11 +175,11 @@ msgstr "Kiralamayı Değiştir"
 msgid "Add Filter"
 msgstr "Filitre Ekle"
 
-#: commands/filtercommand.cpp:100 filterdialog.cpp:282 filterview.cpp:67
+#: commands/filtercommand.cpp:100 filterdialog.cpp:282 filterview.cpp:68
 msgid "Modify Filter"
 msgstr "Filitre Değiştir"
 
-#: commands/filtercommand.cpp:102 filterview.cpp:69
+#: commands/filtercommand.cpp:102 filterview.cpp:70
 msgid "Delete Filter"
 msgstr "Filitre Sil"
 
@@ -195,18 +194,18 @@ msgid ""
 "Check-out %1"
 msgstr "Kontrol %1"
 
-#: commands/removeentries.cpp:52
+#: commands/removeentries.cpp:48
 msgid "Delete Entries"
 msgstr "Girdileri Sil"
 
-#: commands/removeentries.cpp:53
+#: commands/removeentries.cpp:49
 #, c-format
 msgid ""
 "_: Delete (Entry Title)\n"
 "Delete %1"
 msgstr "Sil %1"
 
-#: commands/reorderfields.cpp:52
+#: commands/reorderfields.cpp:54
 msgid "Reorder Fields"
 msgstr "Yeniden Düzenleme Alanları"
 
@@ -221,7 +220,7 @@ msgid ""
 "Check-in %1"
 msgstr "Kayıt Yap %1"
 
-#: collectionfactory.cpp:78 collections/bibtexcollection.cpp:24
+#: collectionfactory.cpp:79 collections/bibtexcollection.cpp:24
 #: collections/bibtexcollection.cpp:59 collections/bibtexcollection.cpp:89
 #: collections/bookcollection.cpp:19 collections/bookcollection.cpp:41
 #: collections/cardcollection.cpp:19 collections/coincollection.cpp:19
@@ -229,19 +228,19 @@ msgstr "Kayıt Yap %1"
 #: collections/gamecollection.cpp:19 collections/musiccollection.cpp:19
 #: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
 #: collections/videocollection.cpp:41 collections/winecollection.cpp:19
-#: configdialog.cpp:191 fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:910
-#: field.cpp:39 field.cpp:71 translators/gcfilmsimporter.cpp:54
+#: configdialog.cpp:192 fetch/imdbfetcher.cpp:689 fetch/imdbfetcher.cpp:933
+#: field.cpp:40 field.cpp:72 translators/gcfilmsimporter.cpp:62
 msgid "General"
 msgstr "Genel"
 
 #: collections/bibtexcollection.cpp:25 collections/bookcollection.cpp:20
 #: collections/comicbookcollection.cpp:20 translators/grs1importer.cpp:58
-#: translators/grs1importer.cpp:68 translators/risimporter.cpp:258
+#: translators/grs1importer.cpp:68 translators/risimporter.cpp:260
 msgid "Publishing"
 msgstr "Yayınlama"
 
 #: collections/bookcollection.cpp:21 collections/comicbookcollection.cpp:21
-#: translators/grs1importer.cpp:63 translators/risimporter.cpp:252
+#: translators/grs1importer.cpp:63 translators/risimporter.cpp:254
 msgid "Classification"
 msgstr "Sınıflandırma"
 
@@ -249,7 +248,7 @@ msgstr "Sınıflandırma"
 #: collections/coincollection.cpp:20 collections/comicbookcollection.cpp:22
 #: collections/gamecollection.cpp:20 collections/musiccollection.cpp:20
 #: collections/stampcollection.cpp:21 collections/videocollection.cpp:22
-#: collections/winecollection.cpp:20 document.cpp:490
+#: collections/winecollection.cpp:20 document.cpp:464
 msgid "Personal"
 msgstr "Kişisel"
 
@@ -261,14 +260,14 @@ msgstr "Çizgi Roman"
 msgid "My Comic Books"
 msgstr "Çizgi Romanlarım"
 
-#: collectionfactory.cpp:77 collections/bibtexcollection.cpp:57
+#: collectionfactory.cpp:78 collections/bibtexcollection.cpp:57
 #: collections/bookcollection.cpp:40 collections/cardcollection.cpp:38
 #: collections/coincollection.cpp:38 collections/comicbookcollection.cpp:40
 #: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
 #: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
-#: collections/winecollection.cpp:38 entryupdater.cpp:230
-#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:158
-#: translators/tellicoimporter.cpp:400
+#: collections/winecollection.cpp:38 entryupdater.cpp:231
+#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:159
+#: translators/audiofileimporter.cpp:152 translators/tellicoimporter.cpp:426
 msgid "Title"
 msgstr "Başlık"
 
@@ -300,12 +299,6 @@ msgstr "Sayı"
 msgid "Publisher"
 msgstr "Yayıncı"
 
-#: collections/gamecollection.cpp:66
-msgid ""
-"_: Games - Publisher\n"
-"Publisher"
-msgstr "Yayıncı"
-
 #: collections/bibtexcollection.cpp:134 collections/bookcollection.cpp:80
 #: collections/comicbookcollection.cpp:80
 msgid "Edition"
@@ -320,7 +313,7 @@ msgstr "Yayın Yılı"
 msgid "Pages"
 msgstr "Sayfa Sayısı"
 
-#: collections/coincollection.cpp:67 collections/comicbookcollection.cpp:95
+#: collections/coincollection.cpp:68 collections/comicbookcollection.cpp:95
 #: collections/stampcollection.cpp:56 collections/winecollection.cpp:74
 msgid "Country"
 msgstr "Ülke"
@@ -338,15 +331,15 @@ msgstr "Tür"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:860
-#: translators/grs1importer.cpp:62 translators/risimporter.cpp:250
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:913
+#: translators/grs1importer.cpp:62 translators/risimporter.cpp:252
 msgid "Keywords"
 msgstr "Anahtar Kelime"
 
 #: collections/comicbookcollection.cpp:121
 msgid ""
-"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,"
-"Fair,Poor\n"
+"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
+"Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr "Mükemmel,Mükemmele Yakın,Çok Hoş,Hoş,Çok İyi,İyi,Makul,Zayıf"
 
@@ -356,17 +349,17 @@ msgid "Condition"
 msgstr "Durum"
 
 #: collections/bookcollection.cpp:65 collections/cardcollection.cpp:83
-#: collections/coincollection.cpp:103 collections/comicbookcollection.cpp:127
+#: collections/coincollection.cpp:104 collections/comicbookcollection.cpp:127
 #: collections/gamecollection.cpp:100 collections/musiccollection.cpp:87
-#: collections/stampcollection.cpp:105 collections/videocollection.cpp:191
+#: collections/stampcollection.cpp:106 collections/videocollection.cpp:191
 #: collections/winecollection.cpp:80
 msgid "Purchase Date"
 msgstr "Satın Alma Tarihi"
 
 #: collections/bookcollection.cpp:70 collections/cardcollection.cpp:88
-#: collections/coincollection.cpp:108 collections/comicbookcollection.cpp:132
+#: collections/coincollection.cpp:109 collections/comicbookcollection.cpp:132
 #: collections/gamecollection.cpp:109 collections/musiccollection.cpp:96
-#: collections/stampcollection.cpp:110 collections/videocollection.cpp:200
+#: collections/stampcollection.cpp:111 collections/videocollection.cpp:200
 #: collections/winecollection.cpp:85
 msgid "Purchase Price"
 msgstr "Satın Alma Fiyatı"
@@ -376,16 +369,16 @@ msgid "Signed"
 msgstr "İmzalı"
 
 #: collections/bookcollection.cpp:150 collections/cardcollection.cpp:97
-#: collections/coincollection.cpp:118 collections/comicbookcollection.cpp:140
+#: collections/coincollection.cpp:119 collections/comicbookcollection.cpp:140
 #: collections/gamecollection.cpp:105 collections/musiccollection.cpp:92
-#: collections/stampcollection.cpp:120 collections/videocollection.cpp:196
+#: collections/stampcollection.cpp:121 collections/videocollection.cpp:196
 #: collections/winecollection.cpp:108
 msgid "Gift"
 msgstr "Hediye"
 
 #: collections/bookcollection.cpp:154 collections/comicbookcollection.cpp:144
 #: collections/gamecollection.cpp:113 collections/musiccollection.cpp:100
-#: collections/videocollection.cpp:204 document.cpp:488
+#: collections/videocollection.cpp:204 document.cpp:462
 msgid "Loaned"
 msgstr "Ödünç"
 
@@ -394,9 +387,9 @@ msgid "Front Cover"
 msgstr "Ön Kapak"
 
 #: collections/bookcollection.cpp:166 collections/cardcollection.cpp:116
-#: collections/coincollection.cpp:128 collections/comicbookcollection.cpp:151
+#: collections/coincollection.cpp:129 collections/comicbookcollection.cpp:151
 #: collections/gamecollection.cpp:120 collections/musiccollection.cpp:112
-#: collections/stampcollection.cpp:127 collections/videocollection.cpp:211
+#: collections/stampcollection.cpp:128 collections/videocollection.cpp:211
 #: collections/winecollection.cpp:115
 msgid "Comments"
 msgstr "Yorumlar"
@@ -410,11 +403,12 @@ msgid "My Stamps"
 msgstr "Pullarım"
 
 #: collections/filecatalog.cpp:46 collections/gamecollection.cpp:88
-#: collections/stampcollection.cpp:45 entryupdater.cpp:231 fetchdialog.cpp:159
+#: collections/stampcollection.cpp:45 entryupdater.cpp:232 fetchdialog.cpp:160
 msgid "Description"
 msgstr "Özellikler"
 
-#: collections/coincollection.cpp:51 collections/stampcollection.cpp:51
+#. TRANSLATORS: denomination refers to the monetary value.
+#: collections/coincollection.cpp:52 collections/stampcollection.cpp:51
 msgid "Denomination"
 msgstr "Adlandırma"
 
@@ -436,7 +430,7 @@ msgid ""
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr "Süper,Harika,Çok İyi,İyi,Sıradan,Zayıf"
 
-#: collections/coincollection.cpp:88 collections/stampcollection.cpp:81
+#: collections/coincollection.cpp:89 collections/stampcollection.cpp:81
 msgid "Grade"
 msgstr "Derece"
 
@@ -444,24 +438,25 @@ msgstr "Derece"
 msgid "Cancelled"
 msgstr "İptal Edildi"
 
-#: collections/stampcollection.cpp:90
+#. TRANSLATORS: See http://en.wikipedia.org/wiki/Stamp_hinge
+#: collections/stampcollection.cpp:91
 msgid "Hinged"
 msgstr "Tutturulmuş"
 
-#: collections/stampcollection.cpp:95
+#: collections/stampcollection.cpp:96
 msgid "Centering"
 msgstr "Ortalamak"
 
-#: collections/stampcollection.cpp:100
+#: collections/stampcollection.cpp:101
 msgid "Gummed"
 msgstr "Yapıştırılmış"
 
-#: collections/cardcollection.cpp:92 collections/coincollection.cpp:112
-#: collections/stampcollection.cpp:114 collections/winecollection.cpp:89
+#: collections/cardcollection.cpp:92 collections/coincollection.cpp:113
+#: collections/stampcollection.cpp:115 collections/winecollection.cpp:89
 msgid "Location"
 msgstr "Konum"
 
-#: collections/stampcollection.cpp:124 field.cpp:432
+#: collections/stampcollection.cpp:125 field.cpp:497
 msgid "Image"
 msgstr "Görüntü"
 
@@ -478,19 +473,19 @@ msgid "Type"
 msgstr "Tür"
 
 #: collections/bibtexcollection.cpp:146 collections/cardcollection.cpp:67
-#: collections/coincollection.cpp:56 collections/musiccollection.cpp:63
+#: collections/coincollection.cpp:57 collections/musiccollection.cpp:63
 msgid "Year"
 msgstr "Yılı"
 
-#: collections/coincollection.cpp:61
+#: collections/coincollection.cpp:62
 msgid "Mint Mark"
 msgstr "Darphane Damgası"
 
-#: collections/coincollection.cpp:73
+#: collections/coincollection.cpp:74
 msgid "Coin Set"
 msgstr "Madeni Para Dizisi"
 
-#: collections/coincollection.cpp:83
+#: collections/coincollection.cpp:84
 msgid ""
 "_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
 "Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
@@ -499,25 +494,25 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
-"Dayanıklı-65,Dayanıklı-60,Kullanılmamış-65,Kullanılmamış-60, Nerdeyse "
-"Tedavül Edilmemiş-55,Nerdeyse Tedavül Edilmemiş-50,Harika-40, Çok Güzel-30,"
-"Çok Güzel-20,Güzel-12,Çok İyi-8,İyi-4,Sıradan "
+"Dayanıklı-65,Dayanıklı-60,Kullanılmamış-65,Kullanılmamış-60,Nerdeys"
+"e Tedavül Edilmemiş-55,Nerdeyse Tedavül Edilmemiş-50,Harika-40,Çok "
+"Güzel-30,Çok Güzel-20,Güzel-12,Çok İyi-8,İyi-4,Sıradan "
 
-#: collections/coincollection.cpp:96
+#: collections/coincollection.cpp:97
 msgid ""
 "_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
-#: collections/coincollection.cpp:98
+#: collections/coincollection.cpp:99
 msgid "Grading Service"
 msgstr "Sınıflandırma Servisleri"
 
-#: collections/coincollection.cpp:122
+#: collections/coincollection.cpp:123
 msgid "Obverse"
 msgstr "Gözlemleme"
 
-#: collections/coincollection.cpp:125
+#: collections/coincollection.cpp:126
 msgid "Reverse"
 msgstr "Diğer Taraf"
 
@@ -533,7 +528,7 @@ msgstr "Kitaplarım"
 msgid "Author"
 msgstr "Yazar"
 
-#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:121
+#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:135
 msgid "Hardback"
 msgstr "Ciltli"
 
@@ -566,12 +561,12 @@ msgid "Copyright Year"
 msgstr "Kopyalama Hakkı Yılı"
 
 #: collections/bibtexcollection.cpp:152 collections/bookcollection.cpp:96
-#: translators/grs1importer.cpp:57 translators/risimporter.cpp:255
+#: translators/grs1importer.cpp:57 translators/risimporter.cpp:257
 msgid "ISBN#"
 msgstr "ISBN#"
 
 #: collections/bibtexcollection.cpp:155 collections/bookcollection.cpp:98
-#: translators/grs1importer.cpp:59 translators/risimporter.cpp:259
+#: translators/grs1importer.cpp:59 translators/risimporter.cpp:261
 msgid "International Standard Book Number"
 msgstr "Uluslararası Standart Kitap Numarası"
 
@@ -587,7 +582,7 @@ msgstr "Kongre Kütüphanesi Kontrol Numarası"
 msgid "Series Number"
 msgstr "Seri Numarası"
 
-#: collections/bookcollection.cpp:137 mainwindow.cpp:191
+#: collections/bookcollection.cpp:137 mainwindow.cpp:192
 msgid "New"
 msgstr "Yeni"
 
@@ -600,7 +595,7 @@ msgid "Read"
 msgstr "Okunmuş"
 
 #: collections/bookcollection.cpp:158 collections/musiccollection.cpp:82
-#: collections/winecollection.cpp:103 field.cpp:436 newstuff/dialog.cpp:114
+#: collections/winecollection.cpp:103 field.cpp:501 newstuff/dialog.cpp:114
 msgid "Rating"
 msgstr "Puan"
 
@@ -608,14 +603,14 @@ msgstr "Puan"
 msgid "My Files"
 msgstr "Dosyalarım"
 
-#: borrowerdialog.cpp:48 collections/filecatalog.cpp:37
+#: borrowerdialog.cpp:49 collections/filecatalog.cpp:37
 #: newstuff/dialog.cpp:112
 msgid "Name"
 msgstr "İsim"
 
-#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:395
-#: fetch/entrezfetcher.cpp:464 field.cpp:430
-#: translators/gcfilmsimporter.cpp:53 translators/risimporter.cpp:261
+#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:396
+#: fetch/entrezfetcher.cpp:465 field.cpp:495
+#: translators/gcfilmsimporter.cpp:61 translators/risimporter.cpp:263
 msgid "URL"
 msgstr "URL"
 
@@ -659,11 +654,11 @@ msgstr "Değiştirildi"
 msgid "Meta Info"
 msgstr "Meta Bilgisi"
 
-#: collectionfieldsdialog.cpp:854 collections/filecatalog.cpp:96
+#: collectionfieldsdialog.cpp:873 collections/filecatalog.cpp:96
 msgid "Property"
 msgstr "Özellik"
 
-#: collectionfieldsdialog.cpp:854 collections/filecatalog.cpp:97
+#: collectionfieldsdialog.cpp:873 collections/filecatalog.cpp:97
 msgid "Value"
 msgstr "Değer"
 
@@ -719,11 +714,11 @@ msgstr "İçen"
 msgid "Label Image"
 msgstr "Etiket görseli"
 
-#: collections/videocollection.cpp:20 fetch/animenfofetcher.cpp:264
+#: collections/videocollection.cpp:20 fetch/animenfofetcher.cpp:265
 msgid "Other People"
 msgstr "Diğer İnsanlar"
 
-#: collections/videocollection.cpp:21 fetch/animenfofetcher.cpp:270
+#: collections/videocollection.cpp:21 fetch/animenfofetcher.cpp:271
 msgid "Features"
 msgstr "Özellikler"
 
@@ -750,6 +745,15 @@ msgstr "VCD"
 #: collections/videocollection.cpp:47
 msgid "DivX"
 msgstr "DivX"
+
+#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:801
+msgid "Blu-ray"
+msgstr ""
+
+#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:804
+#, fuzzy
+msgid "HD DVD"
+msgstr "DVD"
 
 #: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
 msgid "Medium"
@@ -819,21 +823,21 @@ msgstr "PAL"
 
 #: collections/videocollection.cpp:95
 msgid "SECAM"
-msgstr "1. Bölge"
+msgstr "SECAM"
 
 #: collections/videocollection.cpp:96
 msgid "Format"
-msgstr "Format"
+msgstr "Biçim"
 
 #: collections/videocollection.cpp:101
 msgid "Cast"
 msgstr "Senaryo"
 
-#: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:404
+#: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:430
 msgid "Actor/Actress"
 msgstr "Aktör/Aktris"
 
-#: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:405
+#: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:431
 msgid "Role"
 msgstr "Rol"
 
@@ -871,13 +875,14 @@ msgstr "Çalışma Zamanı"
 
 #: collections/videocollection.cpp:160
 msgid "The running time of the video (in minutes)"
-msgstr "Videonun Çalışma Zamanı(Dakikalar ile)"
+msgstr "Videonun Çalışma Zamanı (Dakikalar ile)"
 
 #: collections/videocollection.cpp:163
 msgid "Aspect Ratio"
 msgstr "Görüntü Oranı"
 
-#: collections/videocollection.cpp:168 translators/tellicoimporter.cpp:886
+#: collections/videocollection.cpp:168 fetch/amazonfetcher.cpp:793
+#: translators/tellicoimporter.cpp:937
 msgid "Widescreen"
 msgstr "Geniş Ekran"
 
@@ -889,11 +894,11 @@ msgstr "Siyah-Beyaz"
 msgid "Color Mode"
 msgstr "Renk Modu"
 
-#: collections/videocollection.cpp:179
+#: collections/videocollection.cpp:179 fetch/amazonfetcher.cpp:808
 msgid "Director's Cut"
 msgstr "Yönetmenin Çıkardıkları"
 
-#: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:352
+#: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:358
 msgid "Plot Summary"
 msgstr "Tema Özeti"
 
@@ -966,7 +971,7 @@ msgstr "Game Boy Color"
 
 #: collections/gamecollection.cpp:48
 msgid "Game Boy"
-msgstr "Satırı Yukarı Taşı"
+msgstr "Game Boy"
 
 #: collections/gamecollection.cpp:49
 msgid ""
@@ -976,15 +981,21 @@ msgstr "Windows"
 
 #: collections/gamecollection.cpp:49
 msgid "Mac OS"
-msgstr "Satırı Yukarı Taşı"
+msgstr "Mac OS"
 
 #: collections/gamecollection.cpp:50
 msgid "Platform"
-msgstr "Satırı Yukarı Taşı"
+msgstr "Platform"
 
 #: collections/gamecollection.cpp:61
 msgid "Release Year"
 msgstr "Yayınlanma Yılı"
+
+#: collections/gamecollection.cpp:66
+msgid ""
+"_: Games - Publisher\n"
+"Publisher"
+msgstr "Yayıncı"
 
 #: collections/gamecollection.cpp:72
 msgid "Developer"
@@ -996,8 +1007,8 @@ msgid ""
 "Childhood, Pending\n"
 "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"
 msgstr ""
-"Sınıflandırılmamış, Sadece Yetişkinler, Erginler, Gençler, Herkes, Çocuklar, "
-"Askıda Olanlar"
+"Sınıflandırılmamış, Sadece Yetişkinler, Erginler, Gençler, Herkes, "
+"Çocuklar, Askıda Olanlar"
 
 #: collections/gamecollection.cpp:83
 msgid "ESRB Rating"
@@ -1047,7 +1058,7 @@ msgstr "Arka Görüntüsü"
 msgid "Entries"
 msgstr "Girdiler"
 
-#: collectionfactory.cpp:118 collections/bibtexcollection.cpp:31
+#: collectionfactory.cpp:119 collections/bibtexcollection.cpp:31
 msgid "Bibliography"
 msgstr "Bibliyografya"
 
@@ -1057,7 +1068,8 @@ msgstr "Girdi Tipi"
 
 #: collections/bibtexcollection.cpp:77
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
-msgstr "Bu birdi çeşitleri bibtex'e özgüdür. Bibtex dökümanlarına gözatın."
+msgstr ""
+"Bu birdi çeşitleri bibtex'e özgüdür. Bibtex dökümanlarına gözatın."
 
 #: collections/bibtexcollection.cpp:87
 msgid "Bibtex Key"
@@ -1076,7 +1088,7 @@ msgid "Organization"
 msgstr "Organizasyon"
 
 #: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:434
-#: fetch/z3950fetcher.cpp:669
+#: fetch/z3950fetcher.cpp:673
 msgid "Address"
 msgstr "Adres"
 
@@ -1084,7 +1096,7 @@ msgstr "Adres"
 msgid "Month"
 msgstr "Ay"
 
-#: collections/bibtexcollection.cpp:173 field.cpp:429
+#: collections/bibtexcollection.cpp:173 field.cpp:494
 msgid "Number"
 msgstr "Sayı"
 
@@ -1100,9 +1112,9 @@ msgstr "Bölüm"
 msgid "Cross-Reference"
 msgstr "Çapraz-Referans"
 
-#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:463
-#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:670
-#: translators/risimporter.cpp:246
+#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:464
+#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:674
+#: translators/risimporter.cpp:248
 msgid "Abstract"
 msgstr "Özet"
 
@@ -1122,8 +1134,8 @@ msgstr "Müziğim"
 msgid "Album"
 msgstr "Albüm"
 
-#: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:224
-#: translators/freedbimporter.cpp:337 translators/freedbimporter.cpp:404
+#: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:257
+#: translators/freedbimporter.cpp:375 translators/freedbimporter.cpp:446
 msgid "Compact Disc"
 msgstr "Compact Disc"
 
@@ -1136,7 +1148,7 @@ msgid "Vinyl"
 msgstr "Taş Plak"
 
 #: collections/musiccollection.cpp:51 collections/musiccollection.cpp:78
-#: translators/tellicoimporter.cpp:401
+#: translators/audiofileimporter.cpp:153 translators/tellicoimporter.cpp:427
 msgid "Artist"
 msgstr "Sanatçı"
 
@@ -1144,11 +1156,12 @@ msgstr "Sanatçı"
 msgid "Label"
 msgstr "Etiket"
 
-#: collections/musiccollection.cpp:74
+#: collections/musiccollection.cpp:74 translators/audiofileimporter.cpp:148
 msgid "Tracks"
 msgstr "Parçalar"
 
-#: collections/musiccollection.cpp:79 translators/tellicoimporter.cpp:402
+#: collections/musiccollection.cpp:79 translators/audiofileimporter.cpp:154
+#: translators/tellicoimporter.cpp:428
 msgid "Length"
 msgstr "Süre"
 
@@ -1157,8 +1170,8 @@ msgid ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 msgstr ""
-"bir,ve,gibi,de,ama,tarafından,için,den,iç,içine,yahut,nin,üst,üstüne,veya,"
-"dış,e,yukarı,ile"
+"bir,ve,gibi,de,ama,tarafından,için,den,iç,içine,yahut,nin,üst,üstüne,v"
+"eya,dış,e,yukarı,ile"
 
 #: core/tellico_config.cpp:121
 msgid "the"
@@ -1172,43 +1185,43 @@ msgstr ""
 msgid "de,van,der,van der,von"
 msgstr ""
 
-#: fetch/isbndbfetcher.cpp:50
+#: fetch/isbndbfetcher.cpp:51
 msgid "ISBNdb.com"
 msgstr "ISBNdb.com"
 
-#: fetch/amazonfetcher.cpp:189 fetch/animenfofetcher.cpp:74
-#: fetch/ibsfetcher.cpp:71 fetch/isbndbfetcher.cpp:75
-#: fetch/yahoofetcher.cpp:92
+#: fetch/amazonfetcher.cpp:192 fetch/animenfofetcher.cpp:75
+#: fetch/ibsfetcher.cpp:72 fetch/isbndbfetcher.cpp:76
+#: fetch/yahoofetcher.cpp:94
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 bu kolleksiyon tipini aramaya izin vermiyor."
 
-#: fetch/animenfofetcher.cpp:369 fetch/entrezfetcher.cpp:443
-#: fetch/ibsfetcher.cpp:401 fetch/isbndbfetcher.cpp:257
-#: fetch/yahoofetcher.cpp:391
+#: fetch/animenfofetcher.cpp:370 fetch/entrezfetcher.cpp:444
+#: fetch/ibsfetcher.cpp:407 fetch/isbndbfetcher.cpp:258
+#: fetch/yahoofetcher.cpp:393
 msgid "This source has no options."
 msgstr "Bu kaynak seçenek içermiyor."
 
-#: fetch/entrezfetcher.cpp:54
+#: fetch/entrezfetcher.cpp:55
 msgid "Entrez Database"
 msgstr "Entrez Veri Tabanı"
 
-#: fetch/entrezfetcher.cpp:462
+#: fetch/entrezfetcher.cpp:463
 msgid "Institution"
 msgstr "Kuruluş"
 
-#: fetch/z3950connection.cpp:115
+#: fetch/z3950connection.cpp:118
 msgid "Query error!"
 msgstr "Sorgulama Hatası!"
 
-#: fetch/z3950connection.cpp:156
+#: fetch/z3950connection.cpp:159
 msgid "Connection search error %1: %2"
 msgstr "Bağlantı arama hatası %1: %2"
 
-#: fetch/z3950connection.cpp:233
+#: fetch/z3950connection.cpp:236
 msgid "Record syntax error"
 msgstr "Kayıt sözdizimi hatası"
 
-#: fetch/z3950connection.cpp:316
+#: fetch/z3950connection.cpp:332
 msgid "Connection error %1: %2"
 msgstr "Bağlantı hatası %1: %2"
 
@@ -1220,27 +1233,27 @@ msgstr "SRU Sunucusu"
 msgid "Library of Congress (US)"
 msgstr "ABD Kongre Kütüphanesi"
 
-#: fetch/imdbfetcher.cpp:1076 fetch/srufetcher.cpp:349
-#: fetch/z3950fetcher.cpp:505
+#: fetch/imdbfetcher.cpp:1099 fetch/srufetcher.cpp:349
+#: fetch/z3950fetcher.cpp:509
 msgid "Hos&t: "
-msgstr "Ev&sahibi:"
+msgstr "Ev&sahibi: "
 
-#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:511
+#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:515
 msgid "Enter the host name of the server."
 msgstr "Sunucunun host adını giriniz."
 
-#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:516
+#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:520
 msgid "&Port: "
-msgstr "&Port:"
+msgstr "&Bağlantı Noktası: "
 
-#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:521
+#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:525
 #, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Sunucunun port numarasını girin. Varsayılan %1."
 
 #: fetch/srufetcher.cpp:370
 msgid "Path: "
-msgstr "Yol:"
+msgstr "Yol: "
 
 #: fetch/srufetcher.cpp:375
 msgid "Enter the path to the database used by the server."
@@ -1248,174 +1261,170 @@ msgstr "Sunucu tarafından kullanılan veritabanının yolunu girin."
 
 #: fetch/srufetcher.cpp:380
 msgid "Format: "
-msgstr "Format: "
+msgstr "Biçim: "
 
 #: fetch/srufetcher.cpp:387
 msgid "Enter the result format used by the server."
 msgstr "Sunucu tarafından kullanılan sonuç biçimini girin."
 
-#: fetch/yahoofetcher.cpp:51
+#: fetch/yahoofetcher.cpp:53
 msgid "Yahoo! Audio Search"
 msgstr "Yahoo! Audio İçinde Ara"
 
-#: fetch/amazonfetcher.cpp:696 fetch/yahoofetcher.cpp:241
+#: fetch/amazonfetcher.cpp:709 fetch/yahoofetcher.cpp:243
 msgid "The cover image could not be loaded."
 msgstr "Kapak görseli yüklenemedi."
 
-#: fetch/amazonfetcher.cpp:50
+#: fetch/amazonfetcher.cpp:52
 msgid "Amazon Link"
 msgstr "Amazon Linki"
 
-#: fetch/amazonfetcher.cpp:59
+#: fetch/amazonfetcher.cpp:61
 msgid "Amazon (US)"
 msgstr "Amazon (ABD)"
 
-#: fetch/amazonfetcher.cpp:62
+#: fetch/amazonfetcher.cpp:64
 msgid "Amazon (UK)"
 msgstr "Amazon (Britanya)"
 
-#: fetch/amazonfetcher.cpp:65
+#: fetch/amazonfetcher.cpp:67
 msgid "Amazon (Germany)"
 msgstr "Amazon (Almanya)"
 
-#: fetch/amazonfetcher.cpp:68
+#: fetch/amazonfetcher.cpp:70
 msgid "Amazon (Japan)"
 msgstr "Amazon (Japonya)"
 
-#: fetch/amazonfetcher.cpp:71
+#: fetch/amazonfetcher.cpp:73
 msgid "Amazon (France)"
 msgstr "Amazon (Fransa)"
 
-#: fetch/amazonfetcher.cpp:74
+#: fetch/amazonfetcher.cpp:76
 msgid "Amazon (Canada)"
 msgstr "Amazon (Kanada)"
 
-#: fetch/amazonfetcher.cpp:96
+#: fetch/amazonfetcher.cpp:98
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com Web Hizmetleri"
 
-#: fetch/amazonfetcher.cpp:513
+#: fetch/amazonfetcher.cpp:543
 msgid "Results from %1: %2/%3"
 msgstr "%1:%2/%3 den sonuçlar"
 
-#: fetch/amazonfetcher.cpp:537 fetch/z3950fetcher.cpp:425
-msgid "<qt>No entries were found for the following ISBN values:</qt>"
-msgstr "<qt>İzleyen ISBN değerlerinde hiç bir giriş bulunamadı:</qt>"
-
-#: fetch/amazonfetcher.cpp:773
+#: fetch/amazonfetcher.cpp:826
 msgid "Co&untry: "
-msgstr "&Ülke:"
+msgstr "&Ülke: "
 
-#: fetch/amazonfetcher.cpp:777
+#: fetch/amazonfetcher.cpp:830
 msgid "United States"
 msgstr "Amerika Birleşik Devletleri"
 
-#: fetch/amazonfetcher.cpp:778
+#: fetch/amazonfetcher.cpp:831
 msgid "United Kingdom"
 msgstr "Birleşik Krallık"
 
-#: fetch/amazonfetcher.cpp:779
+#: fetch/amazonfetcher.cpp:832
 msgid "Germany"
 msgstr "Almanya"
 
-#: fetch/amazonfetcher.cpp:780
+#: fetch/amazonfetcher.cpp:833
 msgid "Japan"
 msgstr "Japonya"
 
-#: fetch/amazonfetcher.cpp:781
+#: fetch/amazonfetcher.cpp:834
 msgid "France"
 msgstr "Fransa"
 
-#: fetch/amazonfetcher.cpp:782
+#: fetch/amazonfetcher.cpp:835
 msgid "Canada"
 msgstr "Kanada"
 
-#: fetch/amazonfetcher.cpp:786
+#: fetch/amazonfetcher.cpp:839
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
 msgstr ""
-"Amazon.com, birkaç farklı yerel siteden veri tedarik eder. Bu veri kaynağını "
-"kullanmak için istediğiniz birini seçiniz."
+"Amazon.com, birkaç farklı yerel siteden veri tedarik eder. Bu veri "
+"kaynağını kullanmak için istediğiniz birini seçiniz."
 
-#: fetch/amazonfetcher.cpp:792
+#: fetch/amazonfetcher.cpp:845
 msgid "&Image size: "
 msgstr "Res&im boyutu: "
 
-#: fetch/amazonfetcher.cpp:796
+#: fetch/amazonfetcher.cpp:849
 msgid "Small Image"
 msgstr "Küçük Resim"
 
-#: fetch/amazonfetcher.cpp:797
+#: fetch/amazonfetcher.cpp:850
 msgid "Medium Image"
 msgstr "Orta Boy Resim"
 
-#: fetch/amazonfetcher.cpp:798
+#: fetch/amazonfetcher.cpp:851
 msgid "Large Image"
 msgstr "Büyük Resim"
 
-#: fetch/amazonfetcher.cpp:799
+#: fetch/amazonfetcher.cpp:852
 msgid "No Image"
 msgstr "Resimsiz"
 
-#: fetch/amazonfetcher.cpp:802 fetch/imdbfetcher.cpp:1101
+#: fetch/amazonfetcher.cpp:855 fetch/imdbfetcher.cpp:1124
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
 msgstr ""
-"Aynı zamanda kapak resimleride indirilebilir. Fakat, kolleksiyon içerisinde "
-"bulunan birçok büyük boyutlu görüntü dosyası performansı düşürebilir."
+"Aynı zamanda kapak resimleride indirilebilir. Fakat, kolleksiyon "
+"içerisinde bulunan birçok büyük boyutlu görüntü dosyası performansı "
+"düşürebilir."
 
-#: fetch/amazonfetcher.cpp:808
+#: fetch/amazonfetcher.cpp:861
 msgid "&Associate's ID: "
-msgstr "&Birleşimin ID si:"
+msgstr "&Birleşimin ID si: "
 
-#: fetch/amazonfetcher.cpp:813
+#: fetch/amazonfetcher.cpp:866
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
 msgstr ""
-"Birleşimin ID si Amazon.com web servislerine erişenleri saptar ve bu Amazon."
-"com sitesindeki herhangi bir bağ içerisine de eklenmiştir."
+"Birleşimin ID si Amazon.com web servislerine erişenleri saptar ve bu "
+"Amazon.com sitesindeki herhangi bir bağ içerisine de eklenmiştir."
 
-#: fetch/z3950fetcher.cpp:78 fetch/z3950fetcher.cpp:756
+#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:760
 msgid "z39.50 Server"
 msgstr "z39.50 Sunucu"
 
-#: fetch/z3950fetcher.cpp:495
+#: fetch/z3950fetcher.cpp:499
 msgid "Use preset &server:"
 msgstr "Önceden hazırlanmış &sunucuyu kullan:"
 
-#: fetch/z3950fetcher.cpp:526
+#: fetch/z3950fetcher.cpp:530
 msgid "&Database: "
 msgstr "Ve&ritabanı: "
 
-#: fetch/z3950fetcher.cpp:531
+#: fetch/z3950fetcher.cpp:535
 msgid "Enter the database name used by the server."
 msgstr "Sunucu tarafından kullanılan veritabanı ismini girin."
 
-#: fetch/z3950fetcher.cpp:536
-#, fuzzy
+#: fetch/z3950fetcher.cpp:540
 msgid "Ch&aracter set: "
-msgstr "K&arakter kodlaması: "
+msgstr "Ka&rakter kodlaması: "
 
-#: fetch/z3950fetcher.cpp:545
+#: fetch/z3950fetcher.cpp:549
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
 msgstr ""
-"z39.50 sunucu tarafından kullanılan karakter dizisi kodlamasını girin. En "
-"çok kullanılan seçim ISO-8859-1 le birlikte MARC-8 dir."
+"z39.50 sunucu tarafından kullanılan karakter dizisi kodlamasını girin. "
+"En çok kullanılan seçim ISO-8859-1 le birlikte MARC-8 dir."
 
-#: fetch/z3950fetcher.cpp:551
+#: fetch/z3950fetcher.cpp:555
 msgid "&Format: "
 msgstr "&Biçim: "
 
-#: fetch/z3950fetcher.cpp:554
+#: fetch/z3950fetcher.cpp:558
 msgid "Auto-detect"
 msgstr "Otomatik-Farketme"
 
-#: fetch/z3950fetcher.cpp:562
+#: fetch/z3950fetcher.cpp:566
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
@@ -1423,37 +1432,37 @@ msgstr ""
 "z39.50 sunucunun veri düzenini girin. Eğer otomatik farketme seçili ise , "
 "Tellico en iyi ayarları otomatik olarak farketmeye çalışacaktır."
 
-#: fetch/z3950fetcher.cpp:568
+#: fetch/z3950fetcher.cpp:572
 msgid "&User: "
 msgstr "K&ullanıcı: "
 
-#: fetch/z3950fetcher.cpp:571 fetch/z3950fetcher.cpp:583
+#: fetch/z3950fetcher.cpp:575 fetch/z3950fetcher.cpp:587
 msgid "Optional"
 msgstr "Seçimlik"
 
-#: fetch/z3950fetcher.cpp:574
+#: fetch/z3950fetcher.cpp:578
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
 msgstr ""
-"z39.50 veritabanı doğrulaması için kullanıcı adını girin. Çoğu sunucu bir "
-"taneye ihtiyaç duymaz."
+"z39.50 veritabanı doğrulaması için kullanıcı adını girin. Çoğu "
+"sunucu bir taneye ihtiyaç duymaz."
 
-#: fetch/z3950fetcher.cpp:580
+#: fetch/z3950fetcher.cpp:584
 msgid "Pass&word: "
 msgstr "Pa&rola: "
 
-#: fetch/z3950fetcher.cpp:587
+#: fetch/z3950fetcher.cpp:591
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one. The password will be saved in plain text in the Tellico "
 "configuration file."
 msgstr ""
-"z39.50 veritabanı doğrulaması için parolayı girin. Çoğu sunucu bir taneye "
-"ihtiyaç duymaz. Parola Tellico konfigurasyon dosyasında metin olarak "
-"kaydedilecektir."
+"z39.50 veritabanı doğrulaması için parolayı girin. Çoğu sunucu bir "
+"taneye ihtiyaç duymaz. Parola Tellico konfigurasyon dosyasında metin "
+"olarak kaydedilecektir."
 
-#: fetch/z3950fetcher.cpp:671
+#: fetch/z3950fetcher.cpp:675
 msgid "Illustrator"
 msgstr "Çizer"
 
@@ -1461,8 +1470,8 @@ msgstr "Çizer"
 msgid "External Application"
 msgstr "Harici Uygulama"
 
-#: configdialog.cpp:355 fetch/execexternalfetcher.cpp:336
-#: translators/csvimporter.cpp:171
+#: configdialog.cpp:354 fetch/execexternalfetcher.cpp:336
+#: translators/csvimporter.cpp:172
 msgid "Collection &type:"
 msgstr "Koleksiyon &türü:"
 
@@ -1473,7 +1482,7 @@ msgstr "Dışardaki bir uygulamadan gelen verinin kolleksiyon tipini ayarla."
 
 #: fetch/execexternalfetcher.cpp:346
 msgid "&Result type: "
-msgstr "&Sonuç tipi:"
+msgstr "&Sonuç tipi: "
 
 #: fetch/execexternalfetcher.cpp:355
 msgid "Set the result type of the data returned from the external application."
@@ -1481,15 +1490,15 @@ msgstr "Dışardaki bir uygulamadan gelen verinin sonuç tipini ayarla."
 
 #: fetch/execexternalfetcher.cpp:360
 msgid "Application &path: "
-msgstr "Uygulama &adresi:"
+msgstr "Uygulama &adresi: "
 
 #: fetch/execexternalfetcher.cpp:365
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
 msgstr ""
-"Uygulamanın, geçerli bir Tellico veri dosyası çıktısı verbilmesi için "
-"adresini ayarla."
+"Uygulamanın, geçerli bir Tellico veri dosyası çıktısı verbilmesi "
+"için adresini ayarla."
 
 #: fetch/execexternalfetcher.cpp:370
 msgid "Select the search keys supported by the data source."
@@ -1500,8 +1509,8 @@ msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
 "search term."
 msgstr ""
-"İhtiyaç duyulabilecek herhangi bir görüşü ekleyiniz. <b>%1</b>, aranan ifade "
-"ile değiştirilecektir. "
+"İhtiyaç duyulabilecek herhangi bir görüşü ekleyiniz. <b>%1</b>, aranan "
+"ifade ile değiştirilecektir."
 
 #: fetch/execexternalfetcher.cpp:372
 msgid "Arguments"
@@ -1511,17 +1520,19 @@ msgstr "Görüşler"
 msgid "Update"
 msgstr "Güncelle"
 
-#: fetch/execexternalfetcher.cpp:412
+#. TRANSLATORS: Do not translate %{author}.
+#: fetch/execexternalfetcher.cpp:413
+#, fuzzy
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
 "to an entry.</p><p>The format is the same as for <i>Dependent</i> fields, "
-"where field values are contained inside braces, such as <i>%{author}</i> See "
-"the documentation for details.</p>"
+"where field values are contained inside braces, such as <i>%{author}</i>. "
+"See the documentation for details.</p>"
 msgstr ""
-"<p>Hazır güncellemeleri aramak üzere kullanılacak konuları girin.</p>Düzen, "
-"<i>Bağımlı</i> alanlarla aynıdır, bu bağımlı alanların değerleri ise <i>%"
-"{Yazar}</i> gibi bağın içerisnde yer alır. Detaylar için dökümama bakınız.</"
-"p>"
+"<p>Hazır güncellemeleri aramak üzere kullanılacak konuları girin.</p> "
+"<p>Düzen, <i>Bağımlı</i> alanlarla aynıdır, bu bağımlı alanların "
+"değerleri ise <i>%{author}</i> gibi bağın içerisnde yer alır. Detaylar "
+"için dökümama bakınız.</p>"
 
 #: fetch/configwidget.cpp:29
 msgid "Source Options"
@@ -1535,51 +1546,51 @@ msgstr "Hazır Alanlar"
 msgid "Internet Movie Database"
 msgstr "İnternet Film Veritabanı"
 
-#: fetch/imdbfetcher.cpp:577
+#: fetch/imdbfetcher.cpp:578
 msgid "Select IMDB Result"
 msgstr "IMDB Sonuçlarını Seçin"
 
-#: fetch/imdbfetcher.cpp:580
+#: fetch/imdbfetcher.cpp:581
 msgid ""
 "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
-"<qt>Aramanız iki benzer sonuç döndürdü. Lütfen aşağıdakilerden birini "
-"seçiniz.</qt>"
+"<qt>Aramanız iki benzer sonuç döndürdü. Lütfen aşağıdakilerden "
+"birini seçiniz.</qt>"
 
-#: fetch/imdbfetcher.cpp:595
+#: fetch/imdbfetcher.cpp:596
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Arama sonuçlarından birini seçin.</qt>"
 
-#: fetch/imdbfetcher.cpp:687 fetch/imdbfetcher.cpp:1140
+#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1163
 msgid "IMDB Link"
-msgstr "IMDB Linkii"
+msgstr "IMDB Linki"
 
-#: fetch/animenfofetcher.cpp:259 fetch/imdbfetcher.cpp:742
-#: fetch/imdbfetcher.cpp:1142
+#: fetch/animenfofetcher.cpp:260 fetch/imdbfetcher.cpp:741
+#: fetch/imdbfetcher.cpp:1165
 msgid "Alternative Titles"
 msgstr "Alternatif İsimler"
 
-#: fetch/imdbfetcher.cpp:909 fetch/imdbfetcher.cpp:1141
+#: fetch/imdbfetcher.cpp:932 fetch/imdbfetcher.cpp:1164
 msgid "IMDB Rating"
 msgstr "IMDB Puanı"
 
-#: fetch/imdbfetcher.cpp:1020 fetch/imdbfetcher.cpp:1143
+#: fetch/imdbfetcher.cpp:1043 fetch/imdbfetcher.cpp:1166
 msgid "Certifications"
 msgstr "Onaylamalar"
 
-#: fetch/imdbfetcher.cpp:1081
+#: fetch/imdbfetcher.cpp:1104
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
 msgstr ""
-"İnternet Film Veritabanları, birkaç farklı sunucu kullanır. İstediğiniz "
-"birini kullanmak için seçin."
+"İnternet Film Veritabanları, birkaç farklı sunucu kullanır. "
+"İstediğiniz birini kullanmak için seçin."
 
-#: fetch/imdbfetcher.cpp:1087
+#: fetch/imdbfetcher.cpp:1110
 msgid "&Maximum cast: "
-msgstr "&En fazla rol alanlar:"
+msgstr "&En fazla rol alanlar: "
 
-#: fetch/imdbfetcher.cpp:1092
+#: fetch/imdbfetcher.cpp:1115
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
@@ -1587,11 +1598,11 @@ msgstr ""
 "Rol alan üyelerin listesi, birçok insanı içerwbilir. Aramadan dönecek "
 "sonuçların en fazla ne kadar olması gerektiğini ayarlayın."
 
-#: fetch/imdbfetcher.cpp:1097
+#: fetch/imdbfetcher.cpp:1120
 msgid "Download cover &image"
 msgstr "Kapak resm&ini indir"
 
-#: fetch/ibsfetcher.cpp:45
+#: fetch/ibsfetcher.cpp:46
 msgid "Internet Bookshop (ibs.it)"
 msgstr "İnternet Kitapevi (ibs.it)"
 
@@ -1615,15 +1626,15 @@ msgstr "Anahtar kelime"
 msgid "Raw Query"
 msgstr "İşlenmemiş Sorgu"
 
-#: fetch/animenfofetcher.cpp:256
+#: fetch/animenfofetcher.cpp:257
 msgid "Original Title"
 msgstr "Orjinal Başlık"
 
-#: fetch/animenfofetcher.cpp:263
+#: fetch/animenfofetcher.cpp:264
 msgid "Distributor"
 msgstr "Dağıtıcı"
 
-#: fetch/animenfofetcher.cpp:269
+#: fetch/animenfofetcher.cpp:270
 msgid "Episodes"
 msgstr "Bölümler"
 
@@ -1633,7 +1644,7 @@ msgstr "İstekli Yeni Eleman Edin"
 
 #: newstuff/dialog.cpp:113
 msgid "Version"
-msgstr "Versiyon"
+msgstr "Sürüm"
 
 #: newstuff/dialog.cpp:115
 msgid "Downloads"
@@ -1651,11 +1662,11 @@ msgid ""
 msgstr ""
 "Bu, indirme için hazır maddelerin yer aldığı bir listedir. Önceden "
 "indirilmiş olan maddelerin başında checkbox simgesi bulunmaktadır, yeni "
-"versiyonları hazır olanlarda ise güncelle simgesi mevcuttur."
+"versiyonları hazır olanlarda ise güncelle simgesi mevcuttur"
 
 #: newstuff/dialog.cpp:136
 msgid "The name and license of the selected item"
-msgstr "Seçili maddenin , isim ve lisansı"
+msgstr "Seçili maddenin, isim ve lisansı"
 
 #: newstuff/dialog.cpp:139
 msgid "The author of the selected item"
@@ -1674,8 +1685,8 @@ msgid ""
 "Download and install the selected script. Some scripts may need to be "
 "configured after being installed."
 msgstr ""
-"Seçili scripti indir ve kur. Bazı scriptler kurulduktan sonra konfigurasyona "
-"ihtiyaç duyabilir."
+"Seçili scripti indir ve kur. Bazı scriptler kurulduktan sonra "
+"konfigurasyona ihtiyaç duyabilir."
 
 #: newstuff/dialog.cpp:193
 msgid "A description of the selected item is shown here."
@@ -1685,9 +1696,9 @@ msgstr "Seçili maddenin bir açıklaması burada gösterilmiştir."
 msgid "Downloading information..."
 msgstr "Bilgi indiriliyor..."
 
-#: controller.cpp:131 fetchdialog.cpp:214 fetchdialog.cpp:292
-#: fetchdialog.cpp:360 fetchdialog.cpp:415 newstuff/dialog.cpp:296
-#: newstuff/dialog.cpp:323 newstuff/dialog.cpp:431 statusbar.cpp:82
+#: controller.cpp:134 fetchdialog.cpp:215 fetchdialog.cpp:294
+#: fetchdialog.cpp:411 fetchdialog.cpp:466 newstuff/dialog.cpp:296
+#: newstuff/dialog.cpp:323 newstuff/dialog.cpp:433 statusbar.cpp:83
 msgid "Ready."
 msgstr "Hazır."
 
@@ -1699,106 +1710,110 @@ msgstr "Güncelle"
 
 #: newstuff/dialog.cpp:412
 msgid "Installing item..."
-msgstr "Madde kuruluyor..."
+msgstr "Öğe kuruluyor..."
 
 #: translators/bibteximporter.cpp:58
 #, c-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "Dosya - %1 içerisinde, geçerli bir bibtext girdisi bulunamadı"
 
-#: translators/alexandriaexporter.cpp:41
+#: translators/alexandriaexporter.cpp:43
 msgid "Alexandria"
 msgstr "Alexandria"
 
-#: translators/alexandriaexporter.cpp:63
+#: translators/alexandriaexporter.cpp:67
 msgid ""
 "<qt>An Alexandria library called <i>%1</i> already exists. Any existing "
 "books in that library could be overwritten.</qt>"
 msgstr ""
-"<qt><i>%1</i> olarak adlandırılan bir Alexandria Kütüphanesi zaten mevcut. "
-"Bu kütüphanede mevcut olan herhangi bir kitabın üzerine yazılabilir.</qt>"
+"<qt><i>%1</i> olarak adlandırılan bir Alexandria Kütüphanesi zaten "
+"mevcut. Bu kütüphanede mevcut olan herhangi bir kitabın üzerine "
+"yazılabilir.</qt>"
 
-#: filehandler.cpp:138 translators/tellicoimporter.cpp:106
+#: filehandler.cpp:138 translators/tellicoimporter.cpp:108
 #: translators/xmlimporter.cpp:42 translators/xmlimporter.cpp:56
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "%2 sütununda ve %1 sırasında bir XML kodlama hatası mevcut."
 
-#: filehandler.cpp:140 translators/tellicoimporter.cpp:108
+#: filehandler.cpp:140 translators/tellicoimporter.cpp:110
 #: translators/xmlimporter.cpp:44 translators/xmlimporter.cpp:58
 msgid "The error message from Qt is:"
 msgstr "Qt den gelen hata mesajı:"
 
-#: translators/tellicoimporter.cpp:144
+#: translators/tellicoimporter.cpp:147
 msgid "It is from a future version of Tellico."
 msgstr "Bu, Tellico'nun gelecek sürümündendir."
 
-#: translators/tellicoimporter.cpp:150
+#: translators/tellicoimporter.cpp:156
 msgid ""
 "Tellico is converting the file to a more recent document format. Information "
 "loss may occur if an older version of Tellico is used to read this file in "
 "the future."
 msgstr ""
-"Tellico, dosyayı daha yeni bir döküman düzenine çeviriyor. Eğer bu dosyayı "
-"okumada eski bir tellico sürümü kullanılırsa, veri kaybı meydana gelebilir."
+"Tellico, dosyayı daha yeni bir döküman düzenine çeviriyor. Eğer bu "
+"dosyayı okumada eski bir Tellico sürümü kullanılırsa, veri kaybı "
+"meydana gelebilir."
 
-#: translators/bibtexhandler.cpp:244 translators/risimporter.cpp:263
-#: translators/risimporter.cpp:267 translators/tellicoimporter.cpp:328
+#: translators/bibtexhandler.cpp:245 translators/risimporter.cpp:265
+#: translators/risimporter.cpp:269 translators/tellicoimporter.cpp:354
 msgid "Unknown"
 msgstr "Bilinmez"
 
-#: translators/tellicoimporter.cpp:706
+#: translators/tellicoimporter.cpp:756
 msgid "The file is empty."
 msgstr "Dosya boş."
 
-#: translators/tellicoimporter.cpp:724
+#: translators/tellicoimporter.cpp:774
 msgid "The file contains no collection data."
 msgstr "Dosya herhangi bir veri kolleksiyonu içermiyor."
 
-#: translators/tellicoimporter.cpp:868
+#: translators/tellicoimporter.cpp:919
 msgid "Unread Books"
 msgstr "Okunmamış Kitaplar"
 
-#: translators/tellicoimporter.cpp:878
+#: translators/tellicoimporter.cpp:929
 msgid "Old Movies"
 msgstr "Eski Filmler"
 
-#: translators/tellicoimporter.cpp:896
+#: translators/tellicoimporter.cpp:947
 msgid "80's Music"
 msgstr "80'lerin Müziği"
 
-#: translators/tellicoimporter.cpp:908
+#: translators/tellicoimporter.cpp:959
 msgid "Favorites"
 msgstr "Favoriler"
 
-#: translators/audiofileimporter.cpp:65
+#: translators/audiofileimporter.cpp:69
 msgid "Scanning audio files..."
 msgstr "Ses dosyaları taranıyor..."
 
-#: translators/audiofileimporter.cpp:153 xslt.cpp:4
+#: translators/audiofileimporter.cpp:171 xslt.cpp:4
 msgid "(Various)"
 msgstr "(Çeşitli)"
 
-#: translators/audiofileimporter.cpp:300
+#: translators/audiofileimporter.cpp:319
 msgid "Audio File Options"
 msgstr "Ses Dosyası Seçenekleri"
 
-#: translators/audiofileimporter.cpp:302
+#: translators/audiofileimporter.cpp:321
 msgid "Recursive &folder search"
 msgstr "Yinelemeli &dizin araması"
 
-#: translators/audiofileimporter.cpp:303
+#: translators/audiofileimporter.cpp:322
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
-"Eğer işaretlendiyse, dizinler, ses dosyaları için yinelemeli olarak arandı."
+"Eğer işaretlendiyse, dizinler, ses dosyaları için yinelemeli olarak "
+"arandı."
 
-#: translators/audiofileimporter.cpp:307
+#: translators/audiofileimporter.cpp:326
 msgid "&Include file location"
 msgstr "Dosya konumunu ekley&in"
 
-#: translators/audiofileimporter.cpp:308
+#: translators/audiofileimporter.cpp:327
 msgid "If checked, the file names for each track are added to the entries."
 msgstr ""
-"Eğer işaretlendiyse, Herbir parçanın dosya ismi, girdi alanlarına eklenir."
+"Eğer işaretlendiyse, Herbir parçanın dosya ismi, girdi alanlarına "
+"eklenir."
 
 #: translators/csvexporter.cpp:40
 msgid "CSV"
@@ -1808,17 +1823,17 @@ msgstr "CSV"
 msgid "*.csv|CSV Files (*.csv)"
 msgstr "*.csv|CSV Dosyaları (*.csv)"
 
-#: configdialog.cpp:1005 importdialog.cpp:245 mainwindow.cpp:1055
-#: mainwindow.cpp:1213 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
+#: configdialog.cpp:992 importdialog.cpp:246 mainwindow.cpp:1060
+#: mainwindow.cpp:1217 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
 #: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
-#: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:87
-#: translators/onixexporter.cpp:66 translators/pilotdbexporter.cpp:47
+#: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:88
+#: translators/onixexporter.cpp:67 translators/pilotdbexporter.cpp:47
 #: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
 #: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:86
 msgid "*|All Files"
 msgstr "*|Tüm Dosyalar"
 
-#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:166
+#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:167
 msgid "CSV Options"
 msgstr "CSV Seçenekleri"
 
@@ -1829,14 +1844,14 @@ msgstr "Alan isimlerini, sütun başlıkları olarak ekleyin"
 #: translators/csvexporter.cpp:114
 msgid "If checked, a header row will be added with the field titles."
 msgstr ""
-"Eğer işaretlendiyse, alan ismiyle beraber , bir başlık satırıda "
-"eklenecektir.  "
+"Eğer işaretlendiyse, alan ismiyle beraber, bir başlık satırıda "
+"eklenecektir."
 
-#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:185
+#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:186
 msgid "Delimiter"
 msgstr "Sınırlayıcı"
 
-#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:188
+#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:189
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
@@ -1848,7 +1863,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Virgül"
 
-#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:195
+#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:196
 msgid "Use a comma as the delimiter."
 msgstr "Sınırlayıcı olarak vir virgül kullan."
 
@@ -1856,7 +1871,7 @@ msgstr "Sınırlayıcı olarak vir virgül kullan."
 msgid "Semicolon"
 msgstr "Noktalı Virgül"
 
-#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:200
+#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:201
 msgid "Use a semi-colon as the delimiter."
 msgstr "Sınırlayıcı olarak bir noktalı virgül kullan."
 
@@ -1864,7 +1879,7 @@ msgstr "Sınırlayıcı olarak bir noktalı virgül kullan."
 msgid "Tab"
 msgstr "Sekme"
 
-#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:205
+#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:206
 msgid "Use a tab as the delimiter."
 msgstr "Sınırlayıcı olarak bir sekme kullan."
 
@@ -1872,123 +1887,123 @@ msgstr "Sınırlayıcı olarak bir sekme kullan."
 msgid "Other"
 msgstr "Diğer"
 
-#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:210
+#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:211
 msgid "Use a custom string as the delimiter."
 msgstr "Sınırlayıcı olarak geleneksel bir karaketer dizisi kullan."
 
-#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:216
+#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:217
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
-"İki nokta üst üste gibi geleneksel bir karakter dizisi, sınırlayıcı olarak "
-"kullanılabilir."
+"İki nokta üst üste gibi geleneksel bir karakter dizisi, sınırlayıcı "
+"olarak kullanılabilir."
 
 #: translators/filelistingimporter.cpp:62
 msgid "Scanning files..."
 msgstr "Dosyalar taranıyor..."
 
-#: translators/filelistingimporter.cpp:197
+#: translators/filelistingimporter.cpp:198
 msgid "File Listing Options"
 msgstr "Dosya Listeleme Seçenekleri"
 
-#: translators/filelistingimporter.cpp:199
+#: translators/filelistingimporter.cpp:200
 msgid "Recursive folder search"
 msgstr "Yinelemeli dizin araması"
 
-#: translators/filelistingimporter.cpp:200
+#: translators/filelistingimporter.cpp:201
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
-"Eğer işaretli ise, klsörler, bütün dosyalar için yinelemeli olarak "
+"Eğer işaretli ise, klasörler, bütün dosyalar için yinelemeli olarak "
 "aranmıştır."
 
-#: translators/filelistingimporter.cpp:204
+#: translators/filelistingimporter.cpp:205
 msgid "Generate file previews"
 msgstr "Dosya önizleme oluştur"
 
-#: translators/filelistingimporter.cpp:205
+#: translators/filelistingimporter.cpp:206
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
 msgstr ""
-"Eğer işaretli ise, dosya içeriğinin önizlemesi oluşturuldu, bu olay, dizin "
-"listelemesini yavaşlatabilir."
+"Eğer işaretli ise, dosya içeriğinin önizlemesi oluşturuldu, bu olay, "
+"dizin listelemesini yavaşlatabilir."
 
-#: translators/onixexporter.cpp:62
+#: translators/onixexporter.cpp:63
 msgid "ONIX Archive"
 msgstr "ONIX Arşivi"
 
-#: translators/onixexporter.cpp:66
+#: translators/onixexporter.cpp:67
 msgid "*.zip|Zip Files (*.zip)"
 msgstr "*.zip|Zip Dosyaları (*.zip)"
 
-#: translators/onixexporter.cpp:175
+#: translators/onixexporter.cpp:176
 msgid "ONIX Archive Options"
 msgstr "ONIX Arşivi Seçenekleri"
 
-#: translators/onixexporter.cpp:178
+#: translators/onixexporter.cpp:179
 msgid "Include images in archive"
 msgstr "Arşivdeki resimleri ekle"
 
-#: translators/onixexporter.cpp:180
+#: translators/onixexporter.cpp:181
 msgid ""
 "If checked, the images in the document will be included in the zipped ONIX "
 "archive."
 msgstr ""
-"Eğer işaretlenmişse, döküman içerisindeki resimler, ziplenmiş ONIX arşivine "
-"dahil edilecektir. "
+"Eğer işaretlenmişse, döküman içerisindeki resimler, ziplenmiş ONIX "
+"arşivine dahil edilecektir."
 
-#: translators/freedbimporter.cpp:84 translators/freedbimporter.cpp:137
+#: translators/freedbimporter.cpp:84 translators/freedbimporter.cpp:170
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr "<qt>Tellico CD-ROM aygıtına erişemedi - <i>%1</i></qt>"
+msgstr "<qt>Tellico CD-ROM aygıtına erişemedi - <i>%1</i>.</qt>"
 
-#: translators/freedbimporter.cpp:163
+#: translators/freedbimporter.cpp:196
 msgid "Select CDDB Entry"
 msgstr "CDDB Girdisi Seçin"
 
-#: translators/freedbimporter.cpp:164
+#: translators/freedbimporter.cpp:197
 msgid "Select a CDDB entry:"
 msgstr "Bir CDDB girdisi Seç:"
 
-#: translators/freedbimporter.cpp:187
+#: translators/freedbimporter.cpp:220
 msgid "<qt>No records were found to match the CD.</qt>"
 msgstr "<qt>CD ye eşleşen bir kayıt bulunamadı.</qt>"
 
-#: translators/freedbimporter.cpp:205
+#: translators/freedbimporter.cpp:238
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr "<qt>Tellico , CD aramasını bitiremedi.</qt>"
+msgstr "<qt>Tellico, CD aramasını bitiremedi.</qt>"
 
-#: translators/freedbimporter.cpp:428
+#: translators/freedbimporter.cpp:470
 msgid "Various"
 msgstr "Çeşitli"
 
-#: translators/freedbimporter.cpp:447
+#: translators/freedbimporter.cpp:489
 msgid "Audio CD Options"
 msgstr "Ses CD'si Seçenekleri"
 
-#: translators/freedbimporter.cpp:451
+#: translators/freedbimporter.cpp:493
 msgid "Read data from CD-ROM device"
 msgstr "CD-ROM aygıtından veri oku"
 
-#: translators/freedbimporter.cpp:454
+#: translators/freedbimporter.cpp:496
 msgid "Select or input the CD-ROM device location."
 msgstr "CD-ROM aygıtının konumunu seçin veya giriniz."
 
-#: translators/freedbimporter.cpp:460
+#: translators/freedbimporter.cpp:502
 msgid "Read all CDDB cache files only"
 msgstr "Sadece bütün CDDB önbellek dosyalarını oku"
 
-#: translators/freedbimporter.cpp:461
+#: translators/freedbimporter.cpp:503
 msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
 msgstr ""
-"Varsayılan önbellek dizininde bulunan CDDB önbellek dosyalarındaki bütün "
-"verileri yinelemeli olarak oku."
+"Varsayılan önbellek dizininde bulunan CDDB önbellek dosyalarındaki "
+"bütün verileri yinelemeli olarak oku."
 
-#: importdialog.cpp:272 translators/gcfilmsexporter.cpp:37
+#: translators/gcfilmsexporter.cpp:37
 msgid "GCfilms"
 msgstr "GCfilms"
 
-#: importdialog.cpp:230 translators/gcfilmsexporter.cpp:41
+#: importdialog.cpp:231 translators/gcfilmsexporter.cpp:41
 msgid "*.gcf|GCfilms Data Files (*.gcf)"
 msgstr "*.gcf|GCfilms Veri Dosyaları (*.gcf)"
 
@@ -2008,15 +2023,15 @@ msgstr "XSLT dosyası:"
 msgid "Choose the XSLT file used to transform the Tellico XML data."
 msgstr "Tellico XML verilerini dönüştüren XSLT dosyasını seçiniz."
 
-#: translators/alexandriaimporter.cpp:178
+#: translators/alexandriaimporter.cpp:194
 msgid "Alexandria Options"
 msgstr "Alexandria Seçenekleri"
 
-#: translators/alexandriaimporter.cpp:179
+#: translators/alexandriaimporter.cpp:195
 msgid "&Library:"
 msgstr "&Kütüphane:"
 
-#: importdialog.cpp:268 translators/bibtexmlexporter.cpp:36
+#: importdialog.cpp:269 translators/bibtexmlexporter.cpp:36
 msgid "Bibtexml"
 msgstr "Bibtexml"
 
@@ -2029,7 +2044,7 @@ msgid "XML"
 msgstr "XML"
 
 #: importdialog.cpp:205 importdialog.cpp:218 importdialog.cpp:222
-#: mainwindow.cpp:1053 translators/tellicoxmlexporter.cpp:60
+#: mainwindow.cpp:1058 translators/tellicoxmlexporter.cpp:60
 msgid "*.xml|XML Files (*.xml)"
 msgstr "*.xml|XMLDosyaları (*.xml)"
 
@@ -2047,17 +2062,17 @@ msgid ""
 "base64 encoded elements."
 msgstr ""
 "Eğer işaretliyse, döküman içerisindeki resimler, base64 şifrelenmiş "
-"elementleri olarak XML içine ekleneceklerdir. "
+"elementleri olarak XML içine ekleneceklerdir."
 
-#: translators/importer.h:90
+#: translators/importer.h:95
 msgid "Loading data..."
 msgstr "Dosya Yükleniyor..."
 
-#: translators/importer.h:90
+#: translators/importer.h:95
 msgid "Loading %1..."
 msgstr "Yükleniyor %1..."
 
-#: importdialog.cpp:267 translators/bibtexexporter.cpp:48
+#: importdialog.cpp:268 translators/bibtexexporter.cpp:48
 msgid "Bibtex"
 msgstr "Bibtex"
 
@@ -2079,7 +2094,7 @@ msgid ""
 "be written."
 msgstr ""
 "Eğer işaretliyse, karakter dizisi makroları genişletilecek ve hiç bir "
-"@karakter dizisi{} girdisi yazılmayacaktır. "
+"@string{} girdisi yazılmayacaktır."
 
 #: translators/bibtexexporter.cpp:209
 msgid "Use URL package"
@@ -2088,7 +2103,8 @@ msgstr "URL paketlerini kullan"
 #: translators/bibtexexporter.cpp:211
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr ""
-"Eğer işaretliyse, herhagi bir URL alanı, bir \\url ifadesi içinde saklanır."
+"Eğer işaretliyse, herhagi bir URL alanı, bir \\url ifadesi içinde "
+"saklanır."
 
 #: translators/bibtexexporter.cpp:214
 msgid "Skip entries with empty citation keys"
@@ -2118,77 +2134,78 @@ msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will  "
 "be escaped with either braces or quotation marks.</qt>"
 msgstr ""
-"<qt>Tırnka işareti stili, bibtex dosyasını dışarı aktarırken kullanılır. "
-"Bütün alan değerleri, bağ ve tırnak işaretlerinden sıyrılır.</qt>"
+"<qt>Tırnka işareti stili, bibtex dosyasını dışarı aktarırken "
+"kullanılır. Bütün alan değerleri, bağ ve tırnak işaretlerinden "
+"sıyrılır.</qt>"
 
 #: translators/tellicozipexporter.cpp:35
 msgid "Tellico Zip File"
 msgstr "Tellico Zip Dosyası"
 
-#: importdialog.cpp:204 mainwindow.cpp:1051 mainwindow.cpp:1211
+#: importdialog.cpp:204 mainwindow.cpp:1056 mainwindow.cpp:1215
 #: translators/tellicozipexporter.cpp:39
 msgid "*.tc *.bc|Tellico Files (*.tc)"
 msgstr "*.tc *.bc|Tellico Dosyaları (*.tc)"
 
-#: translators/csvimporter.cpp:174
+#: translators/csvimporter.cpp:175
 msgid "Select the type of collection being imported."
 msgstr "İçeri aktarılan kolleksiyonun tipini seçiniz."
 
-#: translators/csvimporter.cpp:180
+#: translators/csvimporter.cpp:181
 msgid "&First row contains field titles"
 msgstr "&ilk Satır, alan etiketini içerir"
 
-#: translators/csvimporter.cpp:181
+#: translators/csvimporter.cpp:182
 msgid "If checked, the first row is used as field titles."
 msgstr "Eğer işaretli ise, ilk satır alan etiketi olarak kullanılır."
 
-#: translators/csvimporter.cpp:193
+#: translators/csvimporter.cpp:194
 msgid "&Comma"
 msgstr "&virgül"
 
-#: translators/csvimporter.cpp:199
+#: translators/csvimporter.cpp:200
 msgid "&Semicolon"
 msgstr "&Noktalı virgül"
 
-#: translators/csvimporter.cpp:204
+#: translators/csvimporter.cpp:205
 msgid "Ta&b"
 msgstr "&Çıkıntı"
 
-#: translators/csvimporter.cpp:209
+#: translators/csvimporter.cpp:210
 msgid "Ot&her:"
 msgstr "&Diğer:"
 
-#: translators/csvimporter.cpp:233
+#: translators/csvimporter.cpp:234
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Tablo, CSV dosyasının ilk beş satırını gösterir."
 
-#: translators/csvimporter.cpp:240
+#: translators/csvimporter.cpp:241
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
-"column, selecting the field, then clicking the <i>Assign Field</i> button.</"
-"qt>"
+"column, selecting the field, then clicking the <i>Assign Field</i> "
+"button.</qt>"
 msgstr ""
 "<qt>Koleksiyon içindeki alana uyan her sütunu, bir sütun ve alan seçerek "
 "ayarlayın, sonra <i>Alan Atama</i> tuşuna basın.</qt>"
 
-#: translators/csvimporter.cpp:242
+#: translators/csvimporter.cpp:243
 msgid "Co&lumn:"
 msgstr "&Sütun:"
 
-#: translators/csvimporter.cpp:251
+#: translators/csvimporter.cpp:252
 msgid "&Data field in this column:"
 msgstr "Bu sütun&da veri alanı:"
 
-#: translators/csvimporter.cpp:259
+#: translators/csvimporter.cpp:260
 msgid "&Assign Field"
 msgstr "&Atama Alanı"
 
-#: collectionfieldsdialog.cpp:394 collectionfieldsdialog.cpp:397
-#: translators/csvimporter.cpp:410 translators/csvimporter.cpp:513
+#: collectionfieldsdialog.cpp:409 collectionfieldsdialog.cpp:412
+#: translators/csvimporter.cpp:411 translators/csvimporter.cpp:514
 msgid "New Field"
 msgstr "Yeni Alan"
 
-#: translators/risimporter.cpp:265
+#: translators/risimporter.cpp:267
 msgid "PDF"
 msgstr "PDF"
 
@@ -2197,10 +2214,10 @@ msgid "PilotDB"
 msgstr "PilotDB"
 
 #: translators/pilotdbexporter.cpp:47
-msgid "*.pdb|Pilot Database Files(*.pdb)"
-msgstr "*.pdb|Pilot Veritabanı Dosyaları(*.pdb)"
+msgid "*.pdb|Pilot Database Files (*.pdb)"
+msgstr "*.pdb|Pilot Veritabanı Dosyaları (*.pdb)"
 
-#: detailedlistview.cpp:67 detailedlistview.cpp:296
+#: detailedlistview.cpp:67 detailedlistview.cpp:299
 #: translators/pilotdbexporter.cpp:143
 msgid "View Columns"
 msgstr "Sütunları Göster"
@@ -2213,66 +2230,71 @@ msgstr "PilotDB Seçenekleri"
 msgid "Set PDA backup flag for database"
 msgstr "Veritabanı için PDA yedekleme etiketi oluştur"
 
-#: translators/gcfilmsimporter.cpp:85
-msgid "<qt>The file is not a valid GCfilms data file.</qt>"
-msgstr "<qt>Dosya, geçerli bir GCfilms veri dosyası değil.</qt>"
+#: translators/gcfilmsimporter.cpp:105 translators/gcfilmsimporter.cpp:250
+msgid "<qt>The file is not a valid GCstar data file.</qt>"
+msgstr "<qt>Dosya, geçerli bir GCstar veri dosyası değil.</qt>"
 
-#: translators/xsltimporter.cpp:45 translators/xsltimporter.cpp:51
-msgid "A valid XSLT file is needed to import the file."
-msgstr "Dosyayı içeri aktarmak için, geçerli bir XSLT dosyasına ihtiyaç var."
-
-#: mainwindow.cpp:1696 translators/xsltimporter.cpp:57
+#: mainwindow.cpp:1699 translators/gcfilmsimporter.cpp:243
+#: translators/xsltimporter.cpp:57
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico, XSLT çalışmasında bir hataya rastladı."
 
-#: configdialog.cpp:1003 translators/xsltimporter.cpp:85
+#: translators/xsltimporter.cpp:45 translators/xsltimporter.cpp:51
+msgid "A valid XSLT file is needed to import the file."
+msgstr ""
+"Dosyayı içeri aktarmak için, geçerli bir XSLT dosyasına ihtiyaç var."
+
+#: configdialog.cpp:990 translators/xsltimporter.cpp:85
 msgid "*.xsl|XSL Files (*.xsl)"
 msgstr "*.xsl|XSL Dosyaları (*.xsl)"
 
-#: translators/htmlexporter.cpp:83
+#: translators/htmlexporter.cpp:84
 msgid "HTML"
 msgstr "HTML"
 
-#: reportdialog.cpp:195 translators/htmlexporter.cpp:87
+#: reportdialog.cpp:195 translators/htmlexporter.cpp:88
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.html|HTML Dosyaları (*.html)"
 
-#: groupview.cpp:463 mainwindow.cpp:1549 mainwindow.cpp:1589
-#: translators/htmlexporter.cpp:314
+#: groupview.cpp:479 mainwindow.cpp:1552 mainwindow.cpp:1592
+#: translators/htmlexporter.cpp:315
 msgid "People"
 msgstr "Herkes"
 
-#: translators/htmlexporter.cpp:318
+#: translators/htmlexporter.cpp:319
 msgid "(grouped by %1)"
 msgstr "(%1 tarafından guruplandırılmıştır)"
 
-#: translators/htmlexporter.cpp:463
+#: translators/htmlexporter.cpp:464
 msgid "HTML Options"
 msgstr "HTML Seçenekleri"
 
-#: translators/htmlexporter.cpp:466
+#: translators/htmlexporter.cpp:467
 msgid "Print field headers"
 msgstr "Alan başlıklarını  yazdır"
 
-#: configdialog.cpp:299 translators/htmlexporter.cpp:467
+#: configdialog.cpp:298 translators/htmlexporter.cpp:468
 msgid "If checked, the field names will be printed as table headers."
-msgstr "Eğer seçiliyse, alan isimleri, tablo başlıkları olarak yazılacaktır."
+msgstr ""
+"Eğer seçiliyse, alan isimleri, tablo başlıkları olarak yazılacaktır."
 
-#: translators/htmlexporter.cpp:471
+#: translators/htmlexporter.cpp:472
 msgid "Group the entries"
 msgstr "Girdileri gurupla"
 
-#: configdialog.cpp:306 translators/htmlexporter.cpp:472
+#: configdialog.cpp:305 translators/htmlexporter.cpp:473
 msgid "If checked, the entries will be grouped by the selected field."
-msgstr "Eğer seçiliyse, girdiler, seçili alan tarafından guruplandırılacaktır."
+msgstr ""
+"Eğer seçiliyse, girdiler, seçili alan tarafından guruplandırılacaktır."
 
-#: translators/htmlexporter.cpp:476
+#: translators/htmlexporter.cpp:477
 msgid "Export individual entry files"
 msgstr "Bireysel girdi dosyalarını dışa aktar"
 
-#: translators/htmlexporter.cpp:477
+#: translators/htmlexporter.cpp:478
 msgid "If checked, individual files will be created for each entry."
-msgstr "Eğer işaretliyle, her bir girdi için bireysel dosyalar yaratılacaktır."
+msgstr ""
+"Eğer işaretliyle, her bir girdi için bireysel dosyalar yaratılacaktır."
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -2280,16 +2302,17 @@ msgstr "Veri Kaynağı Özellikleri"
 
 #: fetcherconfigdialog.cpp:77
 msgid "&Source name: "
-msgstr "&Kaynak adı:"
+msgstr "&Kaynak adı: "
 
 #: fetcherconfigdialog.cpp:79
 msgid ""
 "The name identifies the data source and should be unique and informative."
-msgstr "İsim, veri kaynağını belirtir ve eşsiz ve açıklayıcı olmalıdır."
+msgstr ""
+"İsim, veri kaynağını belirtir ve eşsiz ve açıklayıcı olmalıdır."
 
 #: fetcherconfigdialog.cpp:90 fetcherconfigdialog.cpp:94
 msgid "Source &type: "
-msgstr "Kaynak &tipi:"
+msgstr "Kaynak &tipi: "
 
 #: fetcherconfigdialog.cpp:97
 msgid "Tellico supports several different data sources."
@@ -2297,13 +2320,14 @@ msgstr "Tellico birçok farklı veri kaynağını destekler."
 
 #: fetcherconfigdialog.cpp:111
 msgid "Updating from source should overwrite user data"
-msgstr "Kaynaktan güncellemeler, kullanıcı verilerinin üzerine yazılacaktır"
+msgstr ""
+"Kaynaktan güncellemeler, kullanıcı verilerinin üzerine yazılacaktır"
 
 #: fetcherconfigdialog.cpp:114
 msgid "If checked, updating entries will overwrite any existing information."
 msgstr ""
 "Eğer seçiliyse, girdi güncellemeleri, var olan bilgilerin üzerine "
-"yazılacaktır. "
+"yazılacaktır."
 
 #: filterdialog.cpp:60
 msgid "Any Field"
@@ -2361,79 +2385,79 @@ msgstr "Filitre adı:"
 msgid "&Save Filter"
 msgstr "&Filitreyi Kaydet"
 
-#: field.cpp:425
+#: field.cpp:490
 msgid "Simple Text"
 msgstr "Basit Metin"
 
-#: field.cpp:426
+#: field.cpp:491
 msgid "Paragraph"
 msgstr "Parağraf"
 
-#: field.cpp:427
+#: field.cpp:492
 msgid "Choice"
 msgstr "Seçim"
 
-#: field.cpp:428
+#: field.cpp:493
 msgid "Checkbox"
 msgstr "Seçme Kutusu"
 
-#: field.cpp:431
+#: field.cpp:496
 msgid "Table"
 msgstr "Tablo"
 
-#: field.cpp:433
+#: field.cpp:498
 msgid "Dependent"
 msgstr "Bağımlı"
 
-#: field.cpp:435
+#: field.cpp:500
 msgid "Date"
 msgstr "Tarih"
 
-#: entryupdater.cpp:82
+#: entryupdater.cpp:83
 msgid "Updating %1..."
 msgstr "Güncelliyor %1..."
 
-#: entryupdater.cpp:84
+#: entryupdater.cpp:85
 msgid "Updating entries..."
 msgstr "Girdiler güncelleniyor..."
 
-#: entryupdater.cpp:86
+#: entryupdater.cpp:87
 msgid "Update Entries"
 msgstr "Girdileri Güncelle"
 
-#: entryupdater.cpp:100
+#: entryupdater.cpp:101
 msgid "Updating <b>%1</b>..."
 msgstr "Güncelleniyor <b>%1</b>..."
 
-#: entryupdater.cpp:210
+#: entryupdater.cpp:211
 msgid "Select Match"
 msgstr "Eşleştirmeyi Seç"
 
-#: entryupdater.cpp:218
+#: entryupdater.cpp:219
 msgid ""
 "<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
 "entry currently in the collection. Please select the correct match.</qt>"
 msgstr ""
-"<qt><b>%1</b>, <b>%2</b> ile eşleşebilecek birçok sonuç döndürdü, girdi şu "
-"anda koleksiyonda. Lütfen doğru bir eşleştirme seçiniz.</qt>"
+"<qt><b>%1</b>, <b>%2</b> ile eşleşebilecek birçok sonuç döndürdü, "
+"girdi şu anda koleksiyonda. Lütfen doğru bir eşleştirme seçiniz.</qt>"
 
-#: groupview.cpp:250
+#: groupview.cpp:252
 msgid "Expand All Groups"
 msgstr "Bütün Gurupları Genişlet"
 
-#: groupview.cpp:252
+#: groupview.cpp:254
 msgid "Collapse All Groups"
 msgstr "Bütün Gurupları Çökert"
 
-#: groupview.cpp:254
+#: groupview.cpp:256
 msgid "Filter by Group"
 msgstr "Guruba göre Süz"
 
-#: groupview.cpp:450
+#: groupview.cpp:466
 msgid "%1 (Sort by Count)"
-msgstr "% (Hesaba göre  Sıralama)"
+msgstr "%1 (Hesaba göre Sıralama)"
 
-#: groupview.cpp:457
+#: groupview.cpp:473
 msgid ""
 "_: Group Name Header\n"
 "Group"
@@ -2460,8 +2484,8 @@ msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
 msgstr ""
-"İçeri aktarılan dosyanın içeriğini, bu koleksiyonun üzerine ekle. Bu sadece "
-"koleksiyon tipleri uyuştuğunda mümkündür."
+"İçeri aktarılan dosyanın içeriğini, bu koleksiyonun üzerine ekle. Bu "
+"sadece koleksiyon tipleri uyuştuğunda mümkündür."
 
 #: importdialog.cpp:65
 msgid "&Merge with current collection"
@@ -2473,27 +2497,35 @@ msgid ""
 "only possible when the collection types match. Entries must match exactly in "
 "order to be merged."
 msgstr ""
-"İçeri aktarılan dosyanın içeriği ile, bu koleksiyonu birleştir. Bu sadece "
-"koleksiyon tipleri uyuştuğunda mümkündür. Birleşme olması için, girdilerin "
-"kesinlikle uyuşması gerekir."
+"İçeri aktarılan dosyanın içeriği ile, bu koleksiyonu birleştir. Bu "
+"sadece koleksiyon tipleri uyuştuğunda mümkündür. Birleşme olması "
+"için, girdilerin kesinlikle uyuşması gerekir."
 
 #: importdialog.cpp:226
 msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.ris|RIS Dosyaları (*.ris)"
 
-#: importdialog.cpp:234
+#: importdialog.cpp:230
+msgid "*.gcs|GCstar Data Files (*.gcs)"
+msgstr "*.gcs|GCstar Veri Dosyaları (*.gcs)"
+
+#: importdialog.cpp:235
 msgid "*.amc|AMC Data Files (*.amc)"
 msgstr "*.amc|AMC Veri Dosyaları (*.amc)"
 
-#: importdialog.cpp:270
+#: importdialog.cpp:271
 msgid "MODS"
 msgstr "MODS"
 
-#: importdialog.cpp:271
+#: importdialog.cpp:272
 msgid "RIS"
 msgstr "RIS"
 
 #: importdialog.cpp:273
+msgid "GCstar"
+msgstr "GCstar"
+
+#: importdialog.cpp:274
 msgid "AMC"
 msgstr "AMC"
 
@@ -2517,8 +2549,9 @@ msgid ""
 "Only collections with the same type of entries as the current one can be "
 "appended. No changes are being made to the current collection."
 msgstr ""
-"Sadece, bu koleksiyondaki gibi aynı tipteki verilerden oluşan koleksiyonlar "
-"bir biri üzerine eklenebilir. Bu koleksiyonda hiç bir değişiklik olmadı."
+"Sadece, bu koleksiyondaki gibi aynı tipteki verilerden oluşan "
+"koleksiyonlar bir biri üzerine eklenebilir. Bu koleksiyonda hiç bir "
+"değişiklik olmadı."
 
 #: tellico_strings.cpp:24
 msgid ""
@@ -2554,8 +2587,8 @@ msgid ""
 "Enter the name of the person borrowing the items from you. Clicking the "
 "button allows you to select from your address book."
 msgstr ""
-"Bu parçayı sizden kiralayan kişinin ismini giriniz. Bu tuşa tıklamanız size "
-"adres defterinizden seçmenize olanak verir."
+"Bu parçayı sizden kiralayan kişinin ismini giriniz. Bu tuşa tıklamanız "
+"size adres defterinizden seçmenize olanak verir."
 
 #: loandialog.cpp:116
 msgid "&Loan date:"
@@ -2566,8 +2599,8 @@ msgid ""
 "The check-out date is the date that you lent the items. By default, today's "
 "date is used."
 msgstr ""
-"Çıkış tarihi, sizin parçayları kiraladığınız tarihtir. Ön tanımlı olarak, "
-"gün olarak bugünün tarihi kullanılır."
+"Çıkış tarihi, sizin parçayları kiraladığınız tarihtir. Ön "
+"tanımlı olarak, gün olarak bugünün tarihi kullanılır."
 
 #: loandialog.cpp:131
 msgid "D&ue date:"
@@ -2578,8 +2611,8 @@ msgid ""
 "The due date is when the items are due to be returned. The due date is not "
 "required, unless you want to add the loan to your active calendar."
 msgstr ""
-"Teslim tarihi, parçaların geri size döndüğü tarihtir. Aktif takviminize "
-"kiralamayı eklemeyi düşünmedikçe gerekli değildir."
+"Teslim tarihi, parçaların geri size döndüğü tarihtir. Aktif "
+"takviminize kiralamayı eklemeyi düşünmedikçe gerekli değildir."
 
 #: loandialog.cpp:143
 msgid "&Note:"
@@ -2601,597 +2634,600 @@ msgid ""
 msgstr ""
 "<qt>Bu kutucuğu seçmek, KOrganizer ile görebileceğeniz aktif takviminize "
 "<em>Yapmak için</em> öğesini ekler. Bu kutucuk sadece teslim tarihi "
-"ayarlanmışsa aktif olacaktır.</qt>"
+"ayarlanmışsa aktif olacaktır."
 
-#: mainwindow.cpp:194
+#: mainwindow.cpp:195
 msgid "Create a new collection"
 msgstr "Yeni koleksiyon yarat"
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:199
 msgid "New &Book Collection"
 msgstr "Yeni Kita&p Koleksiyonu"
 
-#: mainwindow.cpp:200
+#: mainwindow.cpp:201
 msgid "Create a new book collection"
 msgstr "Yeni kitap koleksiyonu yarat"
 
-#: mainwindow.cpp:206
+#: mainwindow.cpp:207
 msgid "New B&ibliography"
 msgstr "Yen&i Bibliografya"
 
-#: mainwindow.cpp:208
+#: mainwindow.cpp:209
 msgid "Create a new bibtex bibliography"
 msgstr "Yeni bir bibtex bibliyografyası yarat"
 
-#: mainwindow.cpp:214
+#: mainwindow.cpp:215
 msgid "New &Comic Book Collection"
 msgstr "Yeni &Çizgi Roman Koleksiyonu"
 
-#: mainwindow.cpp:216
+#: mainwindow.cpp:217
 msgid "Create a new comic book collection"
 msgstr "Yeni çizgi roman koleksiyonu yarat"
 
-#: mainwindow.cpp:222
+#: mainwindow.cpp:223
 msgid "New &Video Collection"
 msgstr "Yeni &Video Koleksiyonu"
 
-#: mainwindow.cpp:224
+#: mainwindow.cpp:225
 msgid "Create a new video collection"
 msgstr "Yeni video koleksiyonu yarat"
 
-#: mainwindow.cpp:230
+#: mainwindow.cpp:231
 msgid "New &Music Collection"
 msgstr "Yeni &Müzik Koleksiyonu"
 
-#: mainwindow.cpp:232
+#: mainwindow.cpp:233
 msgid "Create a new music collection"
 msgstr "Yeni müzik koleksiyonu yarat"
 
-#: mainwindow.cpp:238
+#: mainwindow.cpp:239
 msgid "New C&oin Collection"
 msgstr "Yeni Madeni Para K&oleksiyonu"
 
-#: mainwindow.cpp:240
+#: mainwindow.cpp:241
 msgid "Create a new coin collection"
 msgstr "Yeni madeni para koleksiyonu yarat"
 
-#: mainwindow.cpp:246
+#: mainwindow.cpp:247
 msgid "New &Stamp Collection"
 msgstr "Yeni Pul Kolek&siyonu"
 
-#: mainwindow.cpp:248
+#: mainwindow.cpp:249
 msgid "Create a new stamp collection"
 msgstr "Yeni pul koleksiyonu yarat"
 
-#: mainwindow.cpp:254
+#: mainwindow.cpp:255
 msgid "New C&ard Collection"
 msgstr "Yeni K&art Kolleksiyonu"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:257
 msgid "Create a new trading card collection"
 msgstr "Yeni bir ticari kart koleksiyonu yarat"
 
-#: mainwindow.cpp:262
+#: mainwindow.cpp:263
 msgid "New &Wine Collection"
 msgstr "Yeni &Şarap Koleksiyonu"
 
-#: mainwindow.cpp:264
+#: mainwindow.cpp:265
 msgid "Create a new wine collection"
 msgstr "Yeni şarap koleksiyonu yarat"
 
-#: mainwindow.cpp:270
+#: mainwindow.cpp:271
 msgid "New &Game Collection"
 msgstr "Yeni O&yun Koleksiyonu"
 
-#: mainwindow.cpp:272
+#: mainwindow.cpp:273
 msgid "Create a new game collection"
 msgstr "Yeni oyun koleksiyonu yarat"
 
-#: mainwindow.cpp:278
+#: mainwindow.cpp:279
 msgid "New &File Catalog"
 msgstr "Yeni Dos&ya Kataloğu"
 
-#: mainwindow.cpp:280
+#: mainwindow.cpp:281
 msgid "Create a new file catalog"
 msgstr "Yeni dosya kataloğu yarat"
 
-#: mainwindow.cpp:286
+#: mainwindow.cpp:287
 msgid "New C&ustom Collection"
 msgstr "Yeni Size &Özel Koleksiyon"
 
-#: mainwindow.cpp:288
+#: mainwindow.cpp:289
 msgid "Create a new custom collection"
 msgstr "Size özel yeni bir koleksiyon oluştur"
 
-#: mainwindow.cpp:297
+#: mainwindow.cpp:298
 msgid "Open an existing document"
 msgstr "Var olan bir döküman aç"
 
-#: mainwindow.cpp:299
+#: mainwindow.cpp:300
 msgid "Open a recently used file"
 msgstr "Güncel kullanılan bir dosya aç"
 
-#: mainwindow.cpp:301
+#: mainwindow.cpp:302
 msgid "Save the document"
 msgstr "Dökümanı kaydet"
 
-#: mainwindow.cpp:303
+#: mainwindow.cpp:304
 msgid "Save the document as a different file..."
 msgstr "Dökümanı farklı bir dosya olarak kaydet..."
 
-#: mainwindow.cpp:305
+#: mainwindow.cpp:306
 msgid "Print the contents of the document..."
 msgstr "Dökümanın içeriğini yazdır..."
 
-#: mainwindow.cpp:307
+#: mainwindow.cpp:308
 msgid "Quit the application"
 msgstr "Uygulamadan çık"
 
-#: mainwindow.cpp:316 rc.cpp:3
+#: mainwindow.cpp:317 rc.cpp:9
+#, no-c-format
 msgid "&Import"
 msgstr "&İçe Aktar"
 
-#: mainwindow.cpp:318
+#: mainwindow.cpp:319
 msgid "Import collection data from other formats"
 msgstr "Diğer Formatlardan veri kolleksiyonu aktar"
 
-#: mainwindow.cpp:322
+#: mainwindow.cpp:323
 msgid "Import Tellico Data..."
 msgstr "Tellico verisi aktar..."
 
-#: mainwindow.cpp:323
+#: mainwindow.cpp:324
 msgid "Import another Tellico data file"
 msgstr "Diğer bir Tellico veri dosyasını içe aktar"
 
-#: mainwindow.cpp:329
+#: mainwindow.cpp:330
 msgid "Import CSV Data..."
 msgstr "CSV Verisini İçeri Aktar..."
 
-#: mainwindow.cpp:330
+#: mainwindow.cpp:331
 msgid "Import a CSV file"
 msgstr "Bir CSV dosyasını içeri aktar"
 
-#: mainwindow.cpp:336
+#: mainwindow.cpp:337
 msgid "Import MODS Data..."
 msgstr "MODS Verisini İçeri Aktar..."
 
-#: mainwindow.cpp:337
+#: mainwindow.cpp:338
 msgid "Import a MODS data file"
 msgstr "Bir MODS veri dosyasını içeri aktar"
 
-#: mainwindow.cpp:343
+#: mainwindow.cpp:344
 msgid "Import Alexandria Data..."
 msgstr "Alexandria Verisini İçe Aktar..."
 
-#: mainwindow.cpp:344
+#: mainwindow.cpp:345
 msgid "Import data from the Alexandria book collection manager"
 msgstr "Alexandria kitap kolleksiyon yöneticisinden veri aktar"
 
-#: mainwindow.cpp:350
+#: mainwindow.cpp:351
 msgid "Import Bibtex Data..."
 msgstr "Bibtex Verisini İçeri Aktar..."
 
-#: mainwindow.cpp:351
+#: mainwindow.cpp:352
 msgid "Import a bibtex bibliography file"
 msgstr "Bir bibtex bibliyografya dosyasını içeri aktar"
 
-#: mainwindow.cpp:357
+#: mainwindow.cpp:358
 msgid "Import Bibtexml Data..."
 msgstr "Bibtexml Verisini İçeri Aktar..."
 
-#: mainwindow.cpp:358
+#: mainwindow.cpp:359
 msgid "Import a Bibtexml bibliography file"
 msgstr "Bir Bibtexml bibliyografya dosyasını içeri aktar"
 
-#: mainwindow.cpp:364
+#: mainwindow.cpp:365
 msgid "Import RIS Data..."
 msgstr "RIS Verisi Aktar..."
 
-#: mainwindow.cpp:365
+#: mainwindow.cpp:366
 msgid "Import an RIS reference file"
 msgstr "Bir RIS referans dosyasını içeri aktar"
 
-#: mainwindow.cpp:371
+#: mainwindow.cpp:372
 msgid "Import Audio File Metadata..."
 msgstr "Ses Dosyası Meta Verilerini İçeri Aktar..."
 
-#: mainwindow.cpp:372
+#: mainwindow.cpp:373
 msgid "Import meta-data from audio files"
 msgstr "Ses dosyalarından meta-veri içeri aktar"
 
-#: mainwindow.cpp:381
+#: mainwindow.cpp:382
 msgid "Import Audio CD Data..."
 msgstr "Ses CD Verisi İçeri Aktar..."
 
-#: mainwindow.cpp:382
+#: mainwindow.cpp:383
 msgid "Import audio CD information"
 msgstr "Ses CD bilgisi içeri aktar"
 
-#: mainwindow.cpp:391
-msgid "Import GCfilms Data..."
-msgstr "GCfilms Verisi İçeri Aktar..."
-
 #: mainwindow.cpp:392
-msgid "Import a GCfilms data file"
-msgstr "Bir GCfilms veri dosyası içeri aktar"
+msgid "Import GCstar Data..."
+msgstr "GCstar Verisi İçeri Aktar..."
 
-#: mainwindow.cpp:398
+#: mainwindow.cpp:393
+msgid "Import a GCstar data file"
+msgstr "Bir GCstar veri dosyası içeri aktar"
+
+#: mainwindow.cpp:399
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Ant Film Katalog Verisini İçeri Aktar..."
 
-#: mainwindow.cpp:399
+#: mainwindow.cpp:400
 msgid "Import an Ant Movie Catalog data file"
 msgstr "Bir Ant Film Katalog Veri Dosyasını İçeri Aktar"
 
-#: mainwindow.cpp:405
+#: mainwindow.cpp:406
 msgid "Import File Listing..."
 msgstr "Dosya Listelemesini İçeri Aktar..."
 
-#: mainwindow.cpp:406
+#: mainwindow.cpp:407
 msgid "Import information about files in a folder"
 msgstr "Bir dizin içindeki dosyalar hakkındaki içeri aktarma bilgisi"
 
-#: mainwindow.cpp:412
+#: mainwindow.cpp:413
 msgid "Import XSL Transform..."
 msgstr "XSL Dönüşümünü İçeri Aktar..."
 
-#: mainwindow.cpp:413
+#: mainwindow.cpp:414
 msgid "Import using an XSL Transform"
 msgstr "Kullanılan bir XSL Dönüşümünü içeri aktar"
 
-#: mainwindow.cpp:425 rc.cpp:4
+#: mainwindow.cpp:426 rc.cpp:12
+#, no-c-format
 msgid "&Export"
 msgstr "&Dışa Aktar"
 
-#: mainwindow.cpp:427
+#: mainwindow.cpp:428
 msgid "Export the collection data to other formats"
 msgstr "Kolleksiyon verisini, farklı düzenlere aktar"
 
-#: mainwindow.cpp:431
+#: mainwindow.cpp:432
 msgid "Export to XML..."
 msgstr "XML olarak Dışarı Aktar..."
 
-#: mainwindow.cpp:432
+#: mainwindow.cpp:433
 msgid "Export to a Tellico XML file"
 msgstr "Bir Tellico XML dosyasına aktar"
 
-#: mainwindow.cpp:438
+#: mainwindow.cpp:439
 msgid "Export to Zip..."
 msgstr "Zip olarak dışa aktar..."
 
-#: mainwindow.cpp:439
+#: mainwindow.cpp:440
 msgid "Export to a Tellico Zip file"
 msgstr "Bir Tellico Zip dosyasına aktar"
 
-#: mainwindow.cpp:445
+#: mainwindow.cpp:446
 msgid "Export to HTML..."
 msgstr "HTML olarak dışa aktar..."
 
-#: mainwindow.cpp:446
+#: mainwindow.cpp:447
 msgid "Export to an HTML file"
 msgstr "Bir HTML dosyasına aktar"
 
-#: mainwindow.cpp:452
+#: mainwindow.cpp:453
 msgid "Export to CSV..."
 msgstr "CSV olarak dışa aktar..."
 
-#: mainwindow.cpp:453
+#: mainwindow.cpp:454
 msgid "Export to a comma-separated values file"
 msgstr "Bir virgülle ayrılmış değerler dosyasına aktar"
 
-#: mainwindow.cpp:459
+#: mainwindow.cpp:460
 msgid "Export to PilotDB..."
 msgstr "PilotDB olarak dışarı aktar..."
 
-#: mainwindow.cpp:460
+#: mainwindow.cpp:461
 msgid "Export to a PilotDB database"
 msgstr "Bir PilotDB veritabanına aktar"
 
-#: mainwindow.cpp:466
+#: mainwindow.cpp:467
 msgid "Export to Alexandria..."
 msgstr "Alexandria olarak dışa aktar..."
 
-#: mainwindow.cpp:467
+#: mainwindow.cpp:468
 msgid "Export to an Alexandria library"
 msgstr "Bir Alexandria kütüphanesine aktar"
 
-#: mainwindow.cpp:473
+#: mainwindow.cpp:474
 msgid "Export to Bibtex..."
 msgstr "Bibtex olarak dışa aktar..."
 
-#: mainwindow.cpp:474
+#: mainwindow.cpp:475
 msgid "Export to a bibtex file"
 msgstr "Bir bibtex dosyasına aktar"
 
-#: mainwindow.cpp:480
+#: mainwindow.cpp:481
 msgid "Export to Bibtexml..."
 msgstr "Bibtexml olarak dışa aktar..."
 
-#: mainwindow.cpp:481
+#: mainwindow.cpp:482
 msgid "Export to a Bibtexml file"
 msgstr "Bir Bibtexml dosyasına aktar"
 
-#: mainwindow.cpp:487
+#: mainwindow.cpp:488
 msgid "Export to ONIX..."
 msgstr "ONIX olarak dışa aktar..."
 
-#: mainwindow.cpp:488
+#: mainwindow.cpp:489
 msgid "Export to an ONIX file"
 msgstr "Bir ONIX dosyasına aktar"
 
-#: mainwindow.cpp:494
+#: mainwindow.cpp:495
 msgid "Export to GCfilms..."
 msgstr "Gcfilms olarak dışa aktar..."
 
-#: mainwindow.cpp:495
+#: mainwindow.cpp:496
 msgid "Export to a GCfilms data file"
 msgstr "Bir GCfilms veri dosyasına aktar"
 
-#: mainwindow.cpp:501
+#: mainwindow.cpp:502
 msgid "Export XSL Transform..."
 msgstr "XSL Dönüşümünü Dışa Aktar..."
 
-#: mainwindow.cpp:502
+#: mainwindow.cpp:503
 msgid "Export using an XSL Transform"
 msgstr "Kullanılan bir XSL Dönüşümünü Dışa aktar"
 
-#: mainwindow.cpp:511
+#: mainwindow.cpp:512
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Seçili metni kes ve onu panoya koy"
 
-#: mainwindow.cpp:513
+#: mainwindow.cpp:514
 msgid "Copy the selected text to the clipboard"
 msgstr "Seçili metni panoya kopyala"
 
-#: mainwindow.cpp:515
+#: mainwindow.cpp:516
 msgid "Paste the clipboard contents"
 msgstr "Pano içeriğini yapıştır"
 
-#: mainwindow.cpp:517
+#: mainwindow.cpp:518
 msgid "Select all the entries in the collection"
 msgstr "Kolleksiyondaki bütün girdileri seç"
 
-#: mainwindow.cpp:519
+#: mainwindow.cpp:520
 msgid "Deselect all the entries in the collection"
 msgstr "Kolleksiyondaki bütün girdileri geri bırak"
 
-#: mainwindow.cpp:521
+#: mainwindow.cpp:522
 msgid "Internet Search..."
 msgstr "İnternette Ara..."
 
-#: mainwindow.cpp:524
+#: mainwindow.cpp:525
 msgid "Search the internet..."
 msgstr "İnterneti ara..."
 
-#: mainwindow.cpp:529
+#: mainwindow.cpp:530
 msgid "&New Entry..."
 msgstr "Ye&ni Girdi..."
 
-#: mainwindow.cpp:532
+#: mainwindow.cpp:533
 msgid "Create a new entry"
 msgstr "Yeni bir girdi oluştur"
 
-#: controller.cpp:598 mainwindow.cpp:533
+#: controller.cpp:606 mainwindow.cpp:534
 msgid "&Edit Entry..."
 msgstr "Girdiyi Düz&enle..."
 
-#: mainwindow.cpp:536
+#: mainwindow.cpp:537
 msgid "Edit the selected entries"
 msgstr "Seçili girdileri düzenle"
 
-#: controller.cpp:599 mainwindow.cpp:537
+#: controller.cpp:607 mainwindow.cpp:538
 msgid "D&uplicate Entry"
 msgstr "&Girdiyi Çoğalt"
 
-#: mainwindow.cpp:540
+#: mainwindow.cpp:541
 msgid "Copy the selected entries"
 msgstr "Seçili girdileri kopyala"
 
-#: controller.cpp:601 mainwindow.cpp:541
+#: controller.cpp:609 mainwindow.cpp:542
 msgid "&Delete Entry"
 msgstr "Gir&diyi Sil"
 
-#: mainwindow.cpp:544
+#: mainwindow.cpp:545
 msgid "Delete the selected entries"
 msgstr "Seçili girdileri sil"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:547
 msgid "&Generate Reports..."
 msgstr "&Rapor Oluştur..."
 
-#: mainwindow.cpp:549
+#: mainwindow.cpp:550
 msgid "Generate collection reports"
 msgstr "Kolleksiyon raporu oluştur"
 
-#: mainwindow.cpp:550
+#: mainwindow.cpp:551
 msgid "Check-&out..."
 msgstr "K&ontrol Et..."
 
-#: mainwindow.cpp:553
+#: mainwindow.cpp:554
 msgid "Check-out the selected items"
 msgstr "Seçili öğeleri kontrol et"
 
-#: mainwindow.cpp:554
+#: mainwindow.cpp:555
 msgid "Check-&in"
 msgstr "Kayıt G&irişi Yap"
 
-#: mainwindow.cpp:557
+#: mainwindow.cpp:558
 msgid "Check-in the selected items"
 msgstr "Seçili öğelerin kayıt girişini yap"
 
-#: mainwindow.cpp:559
+#: mainwindow.cpp:560
 msgid "&Rename Collection..."
 msgstr "Kolleksiyonu Yeniden İsimlendi&r..."
 
-#: mainwindow.cpp:562
+#: mainwindow.cpp:563
 msgid "Rename the collection"
 msgstr "Kolleksiyonu yeniden isimlendir"
 
-#: mainwindow.cpp:563
+#: mainwindow.cpp:564
 msgid "Collection &Fields..."
 msgstr "Koleksiyon &Alanları..."
 
-#: mainwindow.cpp:566
+#: mainwindow.cpp:567
 msgid "Modify the collection fields"
 msgstr "Kolleksiyon alanlarını değiştir"
 
-#: mainwindow.cpp:567
+#: mainwindow.cpp:568
 msgid "Convert to &Bibliography"
 msgstr "&Bibliyografyaya Dönüştür"
 
-#: mainwindow.cpp:570
+#: mainwindow.cpp:571
 msgid "Convert a book collection to a bibliography"
 msgstr "Bir kitap kolleksiyonunu bibliyografyaya Dönüştür"
 
-#: mainwindow.cpp:571
+#: mainwindow.cpp:572
 msgid "String &Macros..."
 msgstr "Karakter Dizisi &Makroları..."
 
-#: mainwindow.cpp:574
+#: mainwindow.cpp:575
 msgid "Edit the bibtex string macros"
 msgstr "Bibtex karakter dizisi makrolarını düzenle"
 
-#: mainwindow.cpp:581
+#: mainwindow.cpp:582
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Bibtexi &Panoya Kopyala"
 
-#: mainwindow.cpp:582
+#: mainwindow.cpp:583
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Bibtex alıntılarını panoya kopyala"
 
-#: mainwindow.cpp:587
+#: mainwindow.cpp:588
 msgid "Cite Entry in &LyX"
 msgstr "&LyX deki girdiden alıntı yap"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:589
 msgid "Cite the selected entries in LyX"
 msgstr "LyX deki seçili girdilerden alıntı yap"
 
-#: mainwindow.cpp:593
+#: mainwindow.cpp:594
 msgid "Ci&te Entry in OpenOffice.org"
 msgstr "OpenOffice.org daki girdilerden alın&tı yap"
 
-#: mainwindow.cpp:594
+#: mainwindow.cpp:595
 msgid "Cite the selected entries in OpenOffice.org"
 msgstr "OpenOffice.org daki seçili girdilerden alıntı yap"
 
-#: controller.cpp:600 mainwindow.cpp:602 rc.cpp:6
+#: controller.cpp:608 mainwindow.cpp:603 rc.cpp:18
+#, no-c-format
 msgid "&Update Entry"
 msgstr "Girdiyi G&üncelle"
 
-#: mainwindow.cpp:607
+#: mainwindow.cpp:608
 msgid "All Sources"
 msgstr "Bütün Kaynaklar"
 
-#: mainwindow.cpp:608
+#: mainwindow.cpp:609
 msgid "Update entry data from all available sources"
 msgstr "Girdi verilerini bütün müsait kaynakları kullanarak güncelle"
 
-#: mainwindow.cpp:620
+#: mainwindow.cpp:621
 msgid "Show Grou&p View"
 msgstr "Guru&p Görüntüsünü Göster"
 
-#: mainwindow.cpp:623
-msgid "Enable/disable the group view"
-msgstr "Gurup görünümüne izin ver/ geri al"
-
 #: mainwindow.cpp:624
+msgid "Enable/disable the group view"
+msgstr "Gurup görünümüne izin ver/geri al"
+
+#: mainwindow.cpp:625
 msgid "Hide Grou&p View"
 msgstr "Guru&p Görünümünü Gizle"
 
-#: mainwindow.cpp:626
+#: mainwindow.cpp:627
 msgid "Show Entry &Editor"
 msgstr "Giriş Düz&enleyicisini Göster"
 
-#: mainwindow.cpp:629
+#: mainwindow.cpp:630
 msgid "Enable/disable the editor"
 msgstr "Düzenleyicisine izin ver/geri al"
 
-#: mainwindow.cpp:630
+#: mainwindow.cpp:631
 msgid "Hide Entry &Editor"
 msgstr "Giriş Düz&enleyicisini Gizle"
 
-#: mainwindow.cpp:632
+#: mainwindow.cpp:633
 msgid "Show Entry &View"
 msgstr "Giriş &Görünümünü Göster"
 
-#: mainwindow.cpp:635
+#: mainwindow.cpp:636
 msgid "Enable/disable the entry view"
 msgstr "Giriş görünümeüne izin ver/geri al"
 
-#: mainwindow.cpp:636
+#: mainwindow.cpp:637
 msgid "Hide Entry &View"
 msgstr "Giriş Görünümünü Gi&zle"
 
-#: mainwindow.cpp:638
+#: mainwindow.cpp:639
 msgid "Advanced &Filter..."
 msgstr "İleri Se&viye Süzgeç..."
 
-#: mainwindow.cpp:641 mainwindow.cpp:679
+#: mainwindow.cpp:642 mainwindow.cpp:680
 msgid "Filter the collection"
 msgstr "Kolleksiyonu filtrele"
 
-#: mainwindow.cpp:653
+#: mainwindow.cpp:654
 msgid "Change Grouping"
 msgstr "Guruplamayı Değiştir"
 
-#: mainwindow.cpp:657
+#: mainwindow.cpp:658
 msgid "&Group Selection"
 msgstr "&Gurup Seçimi"
 
-#: mainwindow.cpp:660
+#: mainwindow.cpp:661
 msgid "Change the grouping of the collection"
 msgstr "Kolleksiyon guruplandırmasını değiştir"
 
-#: filterview.cpp:32 filterview.cpp:84 mainwindow.cpp:662 mainwindow.cpp:677
+#: filterview.cpp:33 filterview.cpp:85 mainwindow.cpp:663 mainwindow.cpp:678
 msgid "Filter"
 msgstr "Filtre"
 
-#: mainwindow.cpp:665
+#: mainwindow.cpp:666
 msgid "Clear Filter"
 msgstr "Filtreyi Temizle"
 
-#: mainwindow.cpp:670
+#: mainwindow.cpp:671
 msgid "Filter here..."
 msgstr "Buradan Süz..."
 
-#: mainwindow.cpp:726
+#: mainwindow.cpp:727
 msgid "Groups"
 msgstr "Guruplar"
 
-#: mainwindow.cpp:727
+#: mainwindow.cpp:728
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
 msgstr ""
-"<qt><i>Gurup Görünümü</i>, seçili alanlara göre girdileri guruplara ayırır.</"
-"qt>"
+"<qt><i>Gurup Görünümü</i>, seçili alanlara göre girdileri guruplara "
+"ayırır.</qt>"
 
-#: mainwindow.cpp:734
+#: mainwindow.cpp:735
 msgid ""
-"<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
-"</qt>"
+"<qt>The <i>Column View</i> shows the value of multiple fields for each "
+"entry.</qt>"
 msgstr ""
-"<qt><i>Sütun Görünümü</i>, her girdinin bir çok alandaki değerini gösterir.</"
-"qt>"
+"<qt><i>Sütun Görünümü</i>, her girdinin bir çok alandaki değerini "
+"gösterir.</qt>"
 
-#: mainwindow.cpp:1016
+#: mainwindow.cpp:1021
 msgid "Creating new document..."
 msgstr "Yeni doküman yaratılıyor..."
 
-#: mainwindow.cpp:1048 mainwindow.cpp:1068 mainwindow.cpp:1087
+#: mainwindow.cpp:1053 mainwindow.cpp:1073 mainwindow.cpp:1091
 msgid "Opening file..."
 msgstr "Dosyayı açıyor..."
 
-#: mainwindow.cpp:1058
+#: mainwindow.cpp:1063
 msgid "Open File"
 msgstr "Dosya Aç"
 
-#: document.cpp:177 mainwindow.cpp:1161
+#: document.cpp:189 mainwindow.cpp:1165
 msgid "Saving file..."
 msgstr "Dosya kaydediliyor..."
 
-#: mainwindow.cpp:1171
+#: mainwindow.cpp:1175
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
 "down significantly. Do you want to save the images separately in Tellico's "
@@ -3199,135 +3235,136 @@ msgid ""
 "changed in the configuration dialog.</p></qt>"
 msgstr ""
 "<qt><p>Dosyayı bir çok resimler beraber kaydediyorsunuz, bu Telliconun "
-"önemli ölçüde yavaşlamasına sebep olur. Performansı artıtmak için, resimleri "
-"Telliconun veri dizinine ayrı ayrı kaydetmek ister misiniz?</p><p>Seçiminiz "
-"konfigurasyon diyaloğunda herzaman değiştirilebilir.</p></qt>"
+"önemli ölçüde yavaşlamasına sebep olur. Performansı artıtmak için, "
+"resimleri Telliconun veri dizinine ayrı ayrı kaydetmek ister "
+"misiniz?</p><p>Seçiminiz konfigurasyon diyaloğunda herzaman "
+"değiştirilebilir.</p></qt>"
 
-#: mainwindow.cpp:1176
+#: mainwindow.cpp:1180
 msgid "Save Images Separately"
 msgstr "Resimleri Ayrı Ayrı Kaydet"
 
-#: mainwindow.cpp:1177
+#: mainwindow.cpp:1181
 msgid "Save Images in File"
 msgstr "Resimleri Dosya İçine Kaydet"
 
-#: mainwindow.cpp:1209
+#: mainwindow.cpp:1213
 msgid "Saving file with a new filename..."
 msgstr "Dosya yeni bir isimle kaydediliyor..."
 
-#: mainwindow.cpp:1249 mainwindow.cpp:1301
+#: mainwindow.cpp:1253 mainwindow.cpp:1305
 msgid "Printing..."
 msgstr "Yazılıyor..."
 
-#: mainwindow.cpp:1258
+#: mainwindow.cpp:1262
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
 "Koleksiyon, girdilerin sınırlı alt kümelerini göstermek üzere "
-"filtrelenmiştir. Sadece görülebilir girdiler yazdırılmıştır. Devam edilsin "
-"mi?"
+"filtrelenmiştir. Sadece görülebilir girdiler yazdırılmıştır. Devam "
+"edilsin mi?"
 
-#: mainwindow.cpp:1284
+#: mainwindow.cpp:1288
 msgid "Processing document..."
 msgstr "Döküman işletiliyor..."
 
-#: mainwindow.cpp:1309
+#: mainwindow.cpp:1313
 msgid "Exiting..."
 msgstr "Çıkılıyor..."
 
-#: mainwindow.cpp:1449
+#: mainwindow.cpp:1453
 #, c-format
 msgid "Total entries: %1"
 msgstr "Toplam girdi: %1"
 
-#: mainwindow.cpp:1456
+#: mainwindow.cpp:1460
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrelendi; %2 seçildi)"
 
-#: mainwindow.cpp:1459
+#: mainwindow.cpp:1463
 msgid "(%1 filtered)"
 msgstr "(%1 filtrelendi)"
 
-#: mainwindow.cpp:1462
+#: mainwindow.cpp:1466
 msgid "(%1 selected)"
 msgstr "(%1 seçildi)"
 
-#: mainwindow.cpp:1637
+#: mainwindow.cpp:1640
 #, c-format
 msgid "Print %1"
 msgstr "Yazdır %1"
 
-#: mainwindow.cpp:1670
+#: mainwindow.cpp:1673
 #, c-format
 msgid "Page %1"
 msgstr "Sayfa %1"
 
-#: entryview.cpp:170 mainwindow.cpp:1697
+#: entryview.cpp:171 mainwindow.cpp:1700
 msgid "Please check your installation."
 msgstr "Lütfen kurulumunuzu gözden geçirin."
 
-#: mainwindow.cpp:1783
+#: mainwindow.cpp:1793
 msgid "Importing data..."
 msgstr "Veri içeri aktarılıyor..."
 
-#: mainwindow.cpp:1792
+#: mainwindow.cpp:1802
 msgid "Import File"
 msgstr "Dosya İçeri Aktar"
 
-#: mainwindow.cpp:1798
+#: mainwindow.cpp:1808
 msgid "Import Directory"
 msgstr "Dizin İçeri Aktar"
 
-#: mainwindow.cpp:1886
+#: mainwindow.cpp:1895
 msgid "Exporting data..."
 msgstr "Veri dışarı aktarılıyor..."
 
-#: mainwindow.cpp:1908
+#: mainwindow.cpp:1917
 msgid "Export As"
 msgstr "Farklı Dışarı Aktar"
 
-#: mainwindow.cpp:1937
+#: mainwindow.cpp:1946
 msgid "String Macros"
 msgstr "Karakter Dizisi Makroları"
 
-#: mainwindow.cpp:1938
+#: mainwindow.cpp:1947
 msgid "Macro"
 msgstr "Makro"
 
-#: mainwindow.cpp:1938
+#: mainwindow.cpp:1947
 msgid "String"
 msgstr "Karakter Dizisi"
 
-#: mainwindow.cpp:2001
+#: mainwindow.cpp:2010
 msgid "Creating citations..."
 msgstr "Alıntılar Oluşturuluyor..."
 
-#: mainwindow.cpp:2151
+#: mainwindow.cpp:2160
 msgid "Filters"
 msgstr "Filtreler"
 
-#: mainwindow.cpp:2152
+#: mainwindow.cpp:2161
 msgid ""
-"<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
-"</qt>"
+"<qt>The <i>Filter View</i> shows the entries which meet certain filter "
+"rules.</qt>"
 msgstr ""
-"<qt><i>Filtre Görünümü</i>, girdilerin belli filtre kurallarına uğramış "
-"haliyle gösterilmesidir.</qt>"
+"<qt><i>Filtre Görünümü</i>, girdilerin belli filtre kurallarına "
+"uğramış haliyle gösterilmesidir.</qt>"
 
-#: mainwindow.cpp:2168
+#: mainwindow.cpp:2177
 msgid "Loans"
 msgstr "Kiralamalar"
 
-#: mainwindow.cpp:2169
+#: mainwindow.cpp:2178
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
 msgstr ""
-"<qt><i>Kiralama Görünümü</i>, sizin koleksiyonunuzdan parçalar kiralayan "
-"kişilerin bir listesini gösterir.</qt>"
+"<qt><i>Kiralama Görünümü</i>, sizin koleksiyonunuzdan parçalar "
+"kiralayan kişilerin bir listesini gösterir.</qt>"
 
-#: mainwindow.cpp:2301
+#: mainwindow.cpp:2311
 #, c-format
 msgid "Update entry data from %1"
 msgstr "Veri girdisini %1 den güncelle"
@@ -3352,50 +3389,50 @@ msgstr "Dosya Üzerine Yazılsın mı?"
 msgid "Overwrite"
 msgstr "Üzerine Yaz"
 
-#: filterview.cpp:86
+#: filterview.cpp:87
 msgid "Filter (Sort by Count)"
 msgstr "Filtre (Hesaba Göre Sırala)"
 
-#: controller.cpp:421
+#: controller.cpp:423
 msgid "Do you really want to delete this entry?"
 msgstr "Gerçekten bu girdiyi silmek istiyor musunuz?"
 
-#: controller.cpp:423
+#: controller.cpp:425
 msgid "Delete Entry"
 msgstr "Girdiyi Sil"
 
-#: controller.cpp:433
+#: controller.cpp:435
 msgid "Do you really want to delete these entries?"
 msgstr "Gerçekten bu girdileri silmek istiyor musunuz?"
 
-#: controller.cpp:437
+#: controller.cpp:439
 msgid "Delete Multiple Entries"
 msgstr "Çoklu Girdileri Sil"
 
-#: controller.cpp:603
+#: controller.cpp:611
 msgid "&Edit Entries..."
 msgstr "Girdil&eri Düzenle..."
 
-#: controller.cpp:604
+#: controller.cpp:612
 msgid "D&uplicate Entries"
 msgstr "Girdileri Ço&ğalt"
 
-#: controller.cpp:605
+#: controller.cpp:613
 msgid "&Update Entries"
 msgstr "Girdileri G&üncelle"
 
-#: controller.cpp:606
+#: controller.cpp:614
 msgid "&Delete Entries"
 msgstr "Gir&dileri Sil"
 
-#: controller.cpp:660
+#: controller.cpp:668
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
 "support lending an item multiple times. They will be removed from the list "
 "of items to lend."
 msgstr ""
-"Bu parçalar zaten kiralandı, ama Tellico şu anda bir parçanın birçok kere "
-"kiralanmasını desteklemiyor. Bunlar kiralanan parçalar listesinden "
+"Bu parçalar zaten kiralandı, ama Tellico şu anda bir parçanın birçok "
+"kere kiralanmasını desteklemiyor. Bunlar kiralanan parçalar listesinden "
 "kaldırılacaktır."
 
 #: calendarhandler.cpp:166
@@ -3407,9 +3444,9 @@ msgid ""
 "At the moment, Tellico only supports local calendar resources. The active "
 "calendar is remotely located, so your loans will not be added."
 msgstr ""
-"Şu anda, Tellico sadece yerel takvim kaynaklarını destekliyor. Aktif takvim "
-"küçük bir alan için yerelleştirilmiş, bu yüzden, sizin kiralamalarınız "
-"eklenmeyecektir."
+"Şu anda, Tellico sadece yerel takvim kaynaklarını destekliyor. Aktif "
+"takvim küçük bir alan için yerelleştirilmiş, bu yüzden, sizin "
+"kiralamalarınız eklenmeyecektir."
 
 #: calendarhandler.cpp:179
 msgid "Active Calendar"
@@ -3417,9 +3454,9 @@ msgstr "Aktif Takvim"
 
 #: calendarhandler.cpp:202
 msgid "Tellico: %1 is due to return \"%2\""
-msgstr "Tellico: %1 den dolayı \"%2\" döndürdü"
+msgstr "Tellico: %1 den dolayo \"%2\" döndürdü"
 
-#: collection.cpp:30
+#: collection.cpp:31
 msgid "(Empty)"
 msgstr "(Boş)"
 
@@ -3496,16 +3533,16 @@ msgid ""
 "Move this field up in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
-"Bu alanı listede yukarı taşı. Bu liste sıralaması, giriş düzenleyicisinin "
-"düzeni için önemlidir."
+"Bu alanı listede yukarı taşı. Bu liste sıralaması, giriş "
+"düzenleyicisinin düzeni için önemlidir."
 
 #: collectionfieldsdialog.cpp:102
 msgid ""
 "Move this field down in the list. The list order is important for the layout "
 "of the entry editor."
 msgstr ""
-"Bu alanı listede aşağı taşı. Bu liste sıralaması, giriş düzenleyicisinin "
-"düzeni için önemlidir."
+"Bu alanı listede aşağı taşı. Bu liste sıralaması, giriş "
+"düzenleyicisinin düzeni için önemlidir."
 
 #: collectionfieldsdialog.cpp:112
 msgid "Field Properties"
@@ -3525,27 +3562,27 @@ msgstr "&Tip:"
 
 #: collectionfieldsdialog.cpp:135
 msgid "The type of the field determines what values may be used. "
-msgstr "Alanın tipi, hangi değerlerin kullanılabileceğini belirler."
+msgstr "Alanın tipi, hangi değerlerin kullanılabileceğini belirler. "
 
 #: collectionfieldsdialog.cpp:136
 msgid "<i>Simple Text</i> is used for most fields. "
-msgstr "Çoğu alanlarda <i>Basit Metin</i> kullanılmıştır."
+msgstr "Çoğu alanlarda <i>Basit Metin</i> kullanılmıştır. "
 
 #: collectionfieldsdialog.cpp:137
 msgid "<i>Paragraph</i> is for large text blocks. "
-msgstr "Büyük metin blokları için <i>Paragraf</i>."
+msgstr "Büyük metin blokları için <i>Paragraf</i>. "
 
 #: collectionfieldsdialog.cpp:138
 msgid "<i>Choice</i> limits the field to certain values. "
-msgstr "<i>Seçim</i> bazı kesin değerler için alanı sınırlar."
+msgstr "<i>Seçim</i> bazı kesin değerler için alanı sınırlar. "
 
 #: collectionfieldsdialog.cpp:139
 msgid "<i>Checkbox</i> is for a simple yes/no value. "
-msgstr "<i>Seçme Kutusu</i> basit evet/hayır değeri içindir."
+msgstr "<i>Seçme Kutusu</i> basit evet/hayır değeri içindir. "
 
 #: collectionfieldsdialog.cpp:140
 msgid "<i>Number</i> indicates that the field contains a numerical value. "
-msgstr "<i>Numara</i> sayısal değerleri içeren alanları bildirir."
+msgstr "<i>Numara</i> sayısal değerleri içeren alanları bildirir. "
 
 #: collectionfieldsdialog.cpp:141
 msgid ""
@@ -3553,42 +3590,43 @@ msgid ""
 "files. "
 msgstr ""
 " Alanlar için<i>URL</i>, URL leri ifade eder, bu diğer dosyalar için "
-"yararlanılan kaynakları içerir."
+"yararlanılan kaynakları içerir. "
 
 #: collectionfieldsdialog.cpp:142
 msgid "A <i>Table</i> may hold one or more columns of values. "
-msgstr "Bir <i>Tablo</i> bir veya daha fazla sütundaki değerleri tutabilir."
+msgstr "Bir <i>Tablo</i> bir veya daha fazla sütundaki değerleri tutabilir. "
 
 #: collectionfieldsdialog.cpp:143
 msgid "An <i>Image</i> field holds a picture. "
-msgstr "Bir <i>Resim Dosyası</i> alanı, resimleri tutar."
+msgstr "Bir <i>Resim Dosyası</i> alanı, resimleri tutar. "
 
 #: collectionfieldsdialog.cpp:144
 msgid ""
 "A <i>Date</i> field can be used for values with a day, month, and year. "
-msgstr "Bir <i>Tarih</i> alanı, gün, ay ve yıl değerleri için kullanılabilir."
+msgstr ""
+"Bir <i>Tarih</i> alanı, gün, ay ve yıl değerleri için kullanılabilir. "
 
 #: collectionfieldsdialog.cpp:145
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
 msgstr ""
-"Bir <i>Değerlendirme</i> alanı, yıldızlar kullanarak, değerlendirme sayısını "
-"gösterir. "
+"Bir <i>Değerlendirme</i> alanı, yıldızlar kullanarak, değerlendirme "
+"sayısını gösterir. "
 
 #: collectionfieldsdialog.cpp:146
 msgid ""
 "A <i>Dependent</i> field depends on the values of other fields, and is "
 "formatted according to the field description. "
 msgstr ""
-"Bir <i>Bağımlılık</i> alanı, diğer alanların değerlerine bağımlıdır, ve bu "
-"alan açıklamasına göre biçimlendirilir."
+"Bir <i>Bağımlılık</i> alanı, diğer alanların değerlerine "
+"bağımlıdır, ve bu alan açıklamasına göre biçimlendirilir. "
 
 #: collectionfieldsdialog.cpp:148
 msgid ""
 "A <i>Read Only</i> is for internal values, possibly useful for import and "
 "export. "
 msgstr ""
-"Bir <i>Sadece Okunabilir</i> alanı, içsel değerler içindir, içeri ve dışarı "
-"aktarmalar için kullanışlı olabilir. "
+"Bir <i>Sadece Okunabilir</i> alanı, içsel değerler içindir, içeri ve "
+"dışarı aktarmalar için kullanışlı olabilir. "
 
 #: collectionfieldsdialog.cpp:157
 msgid "Cate&gory:"
@@ -3597,133 +3635,136 @@ msgstr "Kate&gori:"
 #: collectionfieldsdialog.cpp:162
 msgid "The field category determines where the field is placed in the editor."
 msgstr ""
-"Alan Kategorisi, düzenleyici içerisindeki alanların nerede bulunacağını "
-"bildirir."
+"Alan Kategorisi, düzenleyici içerisindeki alanların nerede "
+"bulunacağını bildirir."
 
 #: collectionfieldsdialog.cpp:179
 msgid "Descr&iption:"
 msgstr "Aç&ıklama:"
 
-#: collectionfieldsdialog.cpp:185
+#. TRANSLATORS: Do not translate %{year} and %{title}.
+#: collectionfieldsdialog.cpp:186
 msgid ""
 "The description is a useful reminder of what information is contained in the "
 "field. For <i>Dependent</i> fields, the description is a format string such "
 "as \"%{year} %{title}\" where the named fields get substituted in the string."
 msgstr ""
-"Açıklama, Alan içerisindeki bilgiyi hatırlatmada kullanışlı bir özelliktir. "
-"<i>Bağımlı</i> alanlar için, isimlendirilmiş alanların, karakter dizileri "
-"ile yer değiştirdiği , \"%{year} %{title}\"  gibi karakter disizi düzenidir."
+"Açıklama, Alan içerisindeki bilgiyi hatırlatmada kullanışlı bir "
+"özelliktir. <i>Bağımlı</i> alanlar için, isimlendirilmiş alanların, "
+"karakter dizileri ile yer değiştirdiği , \"%{year} %{title}\"  gibi "
+"karakter disizi düzenidir."
 
-#: collectionfieldsdialog.cpp:192
+#: collectionfieldsdialog.cpp:193
 msgid "&Default value:"
 msgstr "Ön tanımlı &Değer:"
 
-#: collectionfieldsdialog.cpp:197
+#: collectionfieldsdialog.cpp:198
 msgid "<qt>A default value can be set for new entries.</qt>"
 msgstr "<qt>Bir ön tanımlı değer, yeni girdiler için belirlenebilir.</qt>"
 
-#: collectionfieldsdialog.cpp:202
+#: collectionfieldsdialog.cpp:203
 msgid "A&llowed values:"
 msgstr "İzin veri&len değerler:"
 
-#: collectionfieldsdialog.cpp:207
+#: collectionfieldsdialog.cpp:208
 msgid ""
 "<qt>For <i>Choice</i>-type fields, these are the only values allowed. They "
-"are placed in a combo box. The possible value have to be seperated by a semi-"
-"colon, for example: \"dog; cat; mouse\"</qt>"
+"are placed in a combo box. The possible values have to be separated by a "
+"semi-colon, for example: \"dog; cat; mouse\"</qt>"
 msgstr ""
-"<qt><i>Seçim</i>-tipi alanları için, bunlar izin verilen yegane değerlerdir. "
-"Kombo kutular içerisinde yer alırlar. Gelebilecek değerler, noktalı virgül "
-"ile ayrılmalıdır. Örneğin: \"köpek; kedi; fare\"</qt>"
+"<qt><i>Seçim</i>-tipi alanları için, bunlar izin verilen yegane "
+"değerlerdir. Kombo kutular içerisinde yer alırlar. Gelebilecek değerler, "
+"noktalı virgül ile ayrılmalıdır. Örneğin: \"köpek; kedi; fare\"</qt>"
 
-#: collectionfieldsdialog.cpp:214
+#: collectionfieldsdialog.cpp:215
 msgid "Extended &properties:"
 msgstr "Ge&nişletilmiş özellikler:"
 
-#: collectionfieldsdialog.cpp:216
+#: collectionfieldsdialog.cpp:217
 msgid "&Set..."
 msgstr "A&yarla..."
 
-#: collectionfieldsdialog.cpp:220
+#: collectionfieldsdialog.cpp:221
 msgid ""
 "Extended field properties are used to specify things such as the "
 "corresponding bibtex field."
 msgstr ""
-"Genişletilmiş alan özellikleri, bir biriyle haberli bibtex alanları gibi, "
-"birşeyleri belirtmek için kullanılır."
+"Genişletilmiş alan özellikleri, bir biriyle haberli bibtex alanları "
+"gibi, birşeyleri bilrtmek için kullanılır."
 
-#: collectionfieldsdialog.cpp:225
+#: collectionfieldsdialog.cpp:226
 msgid "Format Options"
 msgstr "Biçimlendirme Seçenekleri"
 
-#: collectionfieldsdialog.cpp:226
+#: collectionfieldsdialog.cpp:227
 msgid "No formatting"
 msgstr "Biçimlendirme yok"
 
-#: collectionfieldsdialog.cpp:227
+#: collectionfieldsdialog.cpp:228
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
 msgstr ""
-"Bu seçenek, alanın, otomatik olarak düzenlenmesini veya büyük-küçük harf "
-"düzenlemesini engeller."
+"Bu seçenek, alanın, otomatik olarak düzenlenmesini veya büyük-küçük "
+"harf düzenlemesini engeller."
 
-#: collectionfieldsdialog.cpp:229
+#: collectionfieldsdialog.cpp:230
 msgid "Allow auto-capitalization only"
 msgstr "Sadece otomatik büyük-harf denetimine izin ver"
 
-#: collectionfieldsdialog.cpp:230
+#: collectionfieldsdialog.cpp:231
 msgid ""
 "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
-"Bu seçenek, alanın büyük-küçük harf düzenlemesine izin verir, ama özel "
-"olarak düzenlenmemiştir."
+"Bu seçenek, alanın büyük-küçük harf düzenlemesine izin verir, ama "
+"özel olarak düzenlenmemiştir."
 
-#: collectionfieldsdialog.cpp:232
+#: collectionfieldsdialog.cpp:233
 msgid "Format as a title"
 msgstr "Başlık olarak düzenle"
 
-#: collectionfieldsdialog.cpp:233
+#: collectionfieldsdialog.cpp:234
 msgid ""
 "This option capitalizes and formats the field as a title, but only if those "
 "options are globally set."
 msgstr ""
-"Bu seçenek, alanı, bir başlıkmış gibi, büyük-küçük harf denetimi yapar ve "
-"biçimlendirir, ama sadece o seçenekler ayarlandıysa bu mümkündür."
+"Bu seçenek, alanı, bir başlıkmış gibi, büyük-küçük harf denetimi "
+"yapar ve biçimlendirir, ama sadece o seçenekler ayarlandıysa bu "
+"mümkündür."
 
-#: collectionfieldsdialog.cpp:235
+#: collectionfieldsdialog.cpp:236
 msgid "Format as a name"
 msgstr "İsim olarak düzenle"
 
-#: collectionfieldsdialog.cpp:236
+#: collectionfieldsdialog.cpp:237
 msgid ""
 "This option capitalizes and formats the field as a name, but only if those "
 "options are globally set."
 msgstr ""
-"Bu seçenek, alanı, bir isimmiş gibi, büyük-küçük harf denetimi yapar ve "
-"biçimlendirir, ama sadece o seçenekler ayarlandıysa bu mümkündür. "
+"Bu seçenek, alanı, bir isimmiş gibi, büyük-küçük harf denetimi yapar "
+"ve biçimlendirir, ama sadece o seçenekler ayarlandıysa bu mümkündür."
 
-#: collectionfieldsdialog.cpp:240
+#: collectionfieldsdialog.cpp:241
 msgid "Field Options"
 msgstr "Alan Seçenekleri"
 
-#: collectionfieldsdialog.cpp:241
+#: collectionfieldsdialog.cpp:242
 msgid "Enable auto-completion"
 msgstr "Otomatik tamamlamaya izin ver"
 
-#: collectionfieldsdialog.cpp:242
+#: collectionfieldsdialog.cpp:243
 msgid ""
 "If checked, KDE auto-completion will be enabled in the text edit box for "
 "this field."
 msgstr ""
-"Eğer seçiliyse, bu alan için, metin düzenleme kutucuğundaki KDE otomatik "
-"tamamlama özelliği aktif hale getirilecektir."
+"Eğer seçiliyse, bu alan için, metin düzenleme kutucuğundaki KDE "
+"otomatik tamamlama özelliği aktif hale getirilecektir."
 
-#: collectionfieldsdialog.cpp:244
+#: collectionfieldsdialog.cpp:245
 msgid "Allow multiple values"
 msgstr "Çoklu değerlere izin ver"
 
-#: collectionfieldsdialog.cpp:245
+#: collectionfieldsdialog.cpp:246
 msgid ""
 "If checked, Tellico will parse the values in the field for multiple values, "
 "separated by a semi-colon."
@@ -3731,100 +3772,104 @@ msgstr ""
 "Eğer işaretliyse, Tellico, çoklu değerlere sahip alanların değerlerini "
 "ayrıştıracaktır ve noktali virgül ile ayıracaktır."
 
-#: collectionfieldsdialog.cpp:247
+#: collectionfieldsdialog.cpp:248
 msgid "Allow grouping"
 msgstr "Guruplandırmaya izin ver"
 
-#: collectionfieldsdialog.cpp:248
+#: collectionfieldsdialog.cpp:249
 msgid ""
 "If checked, this field may be used to group the entries in the group view."
 msgstr ""
-"Eğer işaretliyse, bu alan, gurup görünümünde girdilerin guruplandırılmasında "
-"kullanılabilir."
+"Eğer işaretliyse, bu alan, gurup görünümünde girdilerin "
+"guruplandırılmasında kullanılabilir."
 
-#: collectionfieldsdialog.cpp:262
+#: collectionfieldsdialog.cpp:263
 msgid "Revert the selected field's properties to the default values."
-msgstr "Seçili alanların özelliklerini, ön tanımlı değerlere geri götür."
+msgstr ""
+"Seçili alanların özelliklerini, ön tanımlı değerlere geri götür."
 
-#: collectionfieldsdialog.cpp:301
+#: collectionfieldsdialog.cpp:306
 msgid "Modify Fields"
 msgstr "Alanları Değiştir"
 
-#: collectionfieldsdialog.cpp:315
+#: collectionfieldsdialog.cpp:320
 msgid ""
 "<qt>Removing allowed values from the <i>%1</i> field which currently exist "
 "in the collection may cause data corruption. Do you want to keep your "
 "modified values or cancel and revert to the current ones?</qt>"
 msgstr ""
-"<qt>Koleksiyon içinde bulunan <i>%1</i> alanındaki izin verilen değerlerin "
-"kaldırılması, veri bozulmasına neden olabilir. düzenlenmiş değerleri "
-"saklamak mı yoksa şu andaki işlemi iptal edip geri almak mı istersiniz?</qt>"
+"<qt>Koleksiyon içinde bulunan <i>%1</i> alanındaki izin verilen "
+"değerlerin kaldırılması, veri bozulmasına neden olabilir. düzenlenmiş "
+"değerleri saklamak mı yoksa şu andaki işlemi iptal edip geri almak mı "
+"istersiniz?</qt>"
 
-#: collectionfieldsdialog.cpp:320
+#: collectionfieldsdialog.cpp:325
 msgid "Keep modified values"
 msgstr "Düzenlenmiş değerleri sakla"
 
-#: collectionfieldsdialog.cpp:728
+#: collectionfieldsdialog.cpp:745
 msgid "Revert Field Properties"
 msgstr "Alan Özelliklerini Geri Döndür"
 
-#: collectionfieldsdialog.cpp:729
+#: collectionfieldsdialog.cpp:746
 msgid ""
 "<qt><p>Do you really want to revert the properties for the <em>%1</em> field "
 "back to their default values?</p></qt>"
 msgstr ""
-"<qt><p>Gerçekten <em>%1</em> alanının yapılandırmasını geri alıp, ön tanımlı "
-"değerlere döndürülmesini istiyor musunuz?</p></qt>"
+"<qt><p>Gerçekten <em>%1</em> alanının yapılandırmasını geri alıp, "
+"ön tanımlı değerlere döndürülmesini istiyor musunuz?</p></qt>"
 
-#: collectionfieldsdialog.cpp:732
+#: collectionfieldsdialog.cpp:749
 msgid "Revert"
 msgstr "Geri döndür"
 
-#: collectionfieldsdialog.cpp:853
+#: collectionfieldsdialog.cpp:872
 msgid "Extended Field Properties"
 msgstr "Genişletilmiş Alan Özellikleri"
 
-#: collectionfieldsdialog.cpp:875
+#: collectionfieldsdialog.cpp:902
 msgid "A field with this title already exists. Please enter a different title."
 msgstr ""
-"Bu başlıkta başka bir alan zaten mevcut. Lütfen başka bir başlık girin."
+"Bu başlıkta başka bir alan zaten mevcut. Lütfen başka bir başlık "
+"girin."
 
-#: collectionfieldsdialog.cpp:882
+#: collectionfieldsdialog.cpp:909
 msgid "<qt>The category may not be empty. Please enter a category.</qt>"
 msgstr "<qt>Kategori boş olamaz. Lütfen bir kategori giriniz.</qt>"
 
-#: collectionfieldsdialog.cpp:890
+#: collectionfieldsdialog.cpp:917
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
-"<em>Table</em> or <em>Image</em> field. Please enter a different category.</"
-"qt>"
+"<em>Table</em> or <em>Image</em> field. Please enter a different "
+"category.</qt>"
 msgstr ""
-"<qt>Bir alan <em>Paragraf</em>, <em>Tablo</em> veya <em>resim</em> de olduğu "
-"gibi aynı kategoride olmayabilir. Lütfen farklı bir kategori giriniz.</qt>"
+"<qt>Bir alan <em>Paragraf</em>, <em>Tablo</em> veya <em>resim</em> de "
+"olduğu gibi aynı kategoride olmayabilir. Lütfen farklı bir kategori "
+"giriniz.</qt>"
 
-#: collectionfieldsdialog.cpp:898
+#: collectionfieldsdialog.cpp:925
 msgid ""
 "A field's title may not be the same as an existing category. Please enter a "
 "different title."
 msgstr ""
-"Bir alan başlığı, mevcut bir kategori ile aynı olamaz. Lütfen farklı bir "
-"başlık giriniz."
+"Bir alan başlığı, mevcut bir kategori ile aynı olamaz. Lütfen farklı "
+"bir başlık giriniz."
 
-#: collectionfieldsdialog.cpp:910
+#: collectionfieldsdialog.cpp:937
 msgid ""
 "The range for a rating field must be between 1 and 10, and the lower bound "
 "must be less than the higher bound. Please enter different low and high "
 "properties."
 msgstr ""
-"Derecelendirme alanı için sınıflandırma 1 ile 10 arasında olmalıdır, alt "
-"sınır, üst sınırdan az olmalıdır. Lütfen farklı alt ve üst özellikler "
-"giriniz."
+"Derecelendirme alanı için sınıflandırma 1 ile 10 arasında olmalıdır, "
+"alt sınır, üst sınırdan az olmalıdır. Lütfen farklı alt ve üst "
+"özellikler giriniz."
 
-#: collectionfieldsdialog.cpp:925
+#: collectionfieldsdialog.cpp:952
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Tablolar, en fazla on sütun ile sınırlandırılmışlardır."
 
-#: document.cpp:148
+#: document.cpp:155
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
@@ -3832,27 +3877,27 @@ msgstr ""
 "Bu dosya değiştirildi.\n"
 "Kaydetmek ister misiniz?"
 
-#: document.cpp:150 entryeditdialog.cpp:629
+#: document.cpp:157 entryeditdialog.cpp:634
 msgid "Unsaved Changes"
 msgstr "Kaydedilmemiş Değişiklikler"
 
-#: borrowerdialog.cpp:41
+#: borrowerdialog.cpp:42
 msgid "Select Borrower"
 msgstr "Kiralayan Seç"
 
-#: configdialog.cpp:99
+#: configdialog.cpp:100
 msgid "Configure Tellico"
 msgstr "Tellicoyu Yapılandır"
 
-#: configdialog.cpp:191
+#: configdialog.cpp:192
 msgid "General Options"
 msgstr "Genel Seçenekler"
 
-#: configdialog.cpp:194
+#: configdialog.cpp:195
 msgid "&Include images in data file"
 msgstr "Veri dosyasındak&i resimleri ekle"
 
-#: configdialog.cpp:195
+#: configdialog.cpp:196
 msgid ""
 "If checked, all images will be included in the data file, rather than saved "
 "separately in the Tellico data directory. Saving a lot of images in the data "
@@ -3862,81 +3907,83 @@ msgstr ""
 "kaydedilmeyip, veri dosyasına eklenir. Bir çok resmin, tek bir veri "
 "dosyasında kaydedilmesi ise, Tellico'nun yavaşlamasına neden olur."
 
-#: configdialog.cpp:202
+#: configdialog.cpp:203
 msgid "&Reopen file at startup"
 msgstr "Dosyayı başlangıçta tek&rar aç"
 
-#: configdialog.cpp:203
+#: configdialog.cpp:204
 msgid ""
-"If checked, the file that was last open will be re-opened at program start-"
-"up."
+"If checked, the file that was last open will be re-opened at program "
+"start-up."
 msgstr ""
-"Eğer işaretliyse, son açılan dosya, program yeniden başlatıldığında tekrar "
-"açılacaktır."
+"Eğer işaretliyse, son açılan dosya, program yeniden başlatıldığında "
+"tekrar açılacaktır."
 
-#: configdialog.cpp:208
+#: configdialog.cpp:209
 msgid "&Show \"Tip of the Day\" at startup"
 msgstr "Başlangıçta \"Günün İpucu\" nu gö&ster"
 
-#: configdialog.cpp:209
+#: configdialog.cpp:210
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr ""
-"Eğer seçiliyse, \"Günün İpucu\", program başlatıldığında gösterilecektir."
+"Eğer seçiliyse, \"Günün İpucu\", program başlatıldığında "
+"gösterilecektir."
 
-#: configdialog.cpp:214 configdialog.cpp:291
+#: configdialog.cpp:215 configdialog.cpp:290
 msgid "Formatting Options"
 msgstr "Düzenleme Seçenekleri"
 
-#: configdialog.cpp:217
-msgid "Auto capitalize &titles and names"
-msgstr "Otomatik olarak başlık ve isimlerde büyük-küçük harf dene&timi yap"
-
 #: configdialog.cpp:218
+msgid "Auto capitalize &titles and names"
+msgstr ""
+"Otomatik olarak başlık ve isimlerde büyük-küçük harf dene&timi yap"
+
+#: configdialog.cpp:219
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
-"Eğer seçiliyse, otomatik olarak, başlık ve isimlerin, büyük-küçük harf "
-"denetimi yapılacaktır."
+"Eğer seçiliyse, otomatik olarak, başlık ve isimlerin, büyük-küçük "
+"harf denetimi yapılacaktır."
 
 #: configdialog.cpp:223
 msgid "Auto &format titles and names"
 msgstr "Ba&şlık ve isimleri otomatik biçimlendir"
 
-#: configdialog.cpp:224 configdialog.cpp:295
+#: configdialog.cpp:224 configdialog.cpp:294
 msgid "If checked, titles and names will be automatically formatted."
 msgstr ""
 "Eğer seçiliyse, başlık ve isimler, otomatik olarak biçimlendirilecektir."
 
-#: configdialog.cpp:232
+#: configdialog.cpp:231
 msgid "No capitali&zation:"
 msgstr "Büyük-küçük harf dü&zenlemesi yok:"
 
-#: configdialog.cpp:235
+#: configdialog.cpp:234
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
 msgstr ""
-"<qt>Büyük-küçük harf denetimine uğramaması gereken kelimelerin bir listesi. "
-"Çoklu değerler, noktalı virgül ile ayrılmalıdır.</qt>"
+"<qt>Büyük-küçük harf denetimine uğramaması gereken kelimelerin bir "
+"listesi. Çoklu değerler, noktalı virgül ile ayrılmalıdır.</qt>"
 
-#: configdialog.cpp:241
+#: configdialog.cpp:240
 msgid "Artic&les:"
 msgstr "Baş&lıklar:"
 
-#: configdialog.cpp:244
+#: configdialog.cpp:243
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
-"first word in a title. Multiple values should be separated by a semi-colon.</"
-"qt>"
+"first word in a title. Multiple values should be separated by a "
+"semi-colon.</qt>"
 msgstr ""
 "<qt>Eğer başlıktaki ilk kelimeyse, makale olarak düşünülmesi gereken "
-"kelimelerin bir listesi. Çoklu değerler, noktalı virgül ile ayrılmalıdır.</"
-"qt>"
+"kelimelerin bir listesi. Çoklu değerler, noktalı virgül ile "
+"ayrılmalıdır.</qt>"
 
-#: configdialog.cpp:251
+#: configdialog.cpp:250
 msgid "Personal suffi&xes:"
 msgstr "Ki&şisel son ekler:"
 
-#: configdialog.cpp:254
+#: configdialog.cpp:253
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
@@ -3944,179 +3991,181 @@ msgstr ""
 "<qt>Kişisel isimlerde kullanabileceğiniz  son eklerin bir listesi. Çoklu "
 "değerler, noktalı virgül ile ayrılmalıdır. </qt>"
 
-#: configdialog.cpp:260
+#: configdialog.cpp:259
 msgid "Surname &prefixes:"
 msgstr "So&y isim ön ekleri:"
 
-#: configdialog.cpp:263
+#: configdialog.cpp:262
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
 msgstr ""
-"<qt>Soy isimlerde kullanabileceğiniz ön eklerin bir listesi. Çoklu değerler, "
-"noktalı virgül ile ayrılmalıdır.</qt>"
+"<qt>Soy isimlerde kullanabileceğiniz ön eklerin bir listesi. Çoklu "
+"değerler, noktalı virgül ile ayrılmalıdır.</qt>"
 
-#: configdialog.cpp:288
+#: configdialog.cpp:287
 msgid "Printing"
 msgstr "Yazdırma"
 
-#: configdialog.cpp:288
+#: configdialog.cpp:287
 msgid "Printing Options"
 msgstr "Yazdırma Seçenekleri"
 
-#: configdialog.cpp:294
+#: configdialog.cpp:293
 msgid "&Format titles and names"
 msgstr "Başlık ve isi&mleri biçimlendir"
 
-#: configdialog.cpp:298
+#: configdialog.cpp:297
 msgid "&Print field headers"
 msgstr "Alan başl&ıklarını yazdır"
 
-#: configdialog.cpp:302
+#: configdialog.cpp:301
 msgid "Grouping Options"
 msgstr "Guruplandırma Seçenekleri"
 
-#: configdialog.cpp:305
+#: configdialog.cpp:304
 msgid "&Group the entries"
 msgstr "&Girdileri guruplandır"
 
-#: configdialog.cpp:309
+#: configdialog.cpp:308
 msgid "Image Options"
 msgstr "Resim Seçenekleri"
 
-#: configdialog.cpp:315
+#: configdialog.cpp:314
 msgid "Maximum image &width:"
 msgstr "Resim&lerin alabileceği en fazla genişlik:"
 
-#: configdialog.cpp:320
+#: configdialog.cpp:319
 msgid ""
 "The maximum width of the images in the printout. The aspect ration is "
 "preserved."
-msgstr "Resimlerin çıktıda alacağı en fazla genişlik. En-boy oranı saklandı."
+msgstr ""
+"Resimlerin çıktıda alacağı en fazla genişlik. En-boy oranı saklandı."
 
-#: configdialog.cpp:328
+#: configdialog.cpp:327
 msgid "&Maximum image height:"
 msgstr "Resi&mlerin alabileceği en fazla yükseklik:"
 
-#: configdialog.cpp:333
+#: configdialog.cpp:332
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
-msgstr "Resimlerin çıktıda alacağı en fazla yükseklik. En-boy oranı saklandı."
+msgstr ""
+"Resimlerin çıktıda alacağı en fazla yükseklik. En-boy oranı saklandı."
 
-#: configdialog.cpp:347
+#: configdialog.cpp:346
 msgid "Templates"
 msgstr "Şablonlar"
 
-#: configdialog.cpp:347
+#: configdialog.cpp:346
 msgid "Template Options"
 msgstr "Şablon Seçenekleri"
 
-#: configdialog.cpp:361
+#: configdialog.cpp:360
 msgid "Template:"
 msgstr "Şablon:"
 
-#: configdialog.cpp:365
+#: configdialog.cpp:364
 msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
 msgstr ""
-"Geçerli tipdeki koleksiyonda kullanmak üzere şablon seçiniz. Font ve renk "
-"ayarlarını bütün şablonlar kullanmayacaktır."
+"Geçerli tipdeki koleksiyonda kullanmak üzere şablon seçiniz. Font ve "
+"renk ayarlarını bütün şablonlar kullanmayacaktır."
 
-#: configdialog.cpp:372
+#: configdialog.cpp:371
 msgid "&Preview..."
 msgstr "&Önizleme..."
 
-#: configdialog.cpp:373
+#: configdialog.cpp:372
 msgid "Show a preview of the template"
 msgstr "Şablonun bir önizlemesini göster"
 
-#: configdialog.cpp:390
+#: configdialog.cpp:389
 msgid "Font Options"
 msgstr "Font Seçenekleri"
 
-#: configdialog.cpp:397
+#: configdialog.cpp:396
 msgid "Font:"
-msgstr "Font:"
+msgstr "Yazı Tipi:"
 
-#: configdialog.cpp:403
+#: configdialog.cpp:402
 msgid "This font is passed to the template used in the Entry View."
 msgstr "Bu font, Giriş Görünümü'nde kullanılan şablona geçti."
 
-#: configdialog.cpp:407
+#: configdialog.cpp:406
 msgid "Size:"
 msgstr "Büyüklük:"
 
-#: configdialog.cpp:417
+#: configdialog.cpp:416
 msgid "Color Options"
 msgstr "Renk Seçenekleri"
 
-#: configdialog.cpp:424
+#: configdialog.cpp:423
 msgid "Background color:"
 msgstr "Arkaplan rengi:"
 
-#: configdialog.cpp:430
+#: configdialog.cpp:429
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Bu renk, Giriş Görünümü'nde kullanılan şablona geçti."
 
-#: configdialog.cpp:434
+#: configdialog.cpp:433
 msgid "Text color:"
 msgstr "Metin rengi:"
 
-#: configdialog.cpp:443
+#: configdialog.cpp:442
 msgid "Highlight color:"
 msgstr "Parlaklaştırma rengi:"
 
-#: configdialog.cpp:452
+#: configdialog.cpp:451
 msgid "Highlighted text color:"
 msgstr "Parlaklaştırılmış metin rengi:"
 
-#: configdialog.cpp:461
+#: configdialog.cpp:460
 msgid "Manage Templates"
 msgstr "Şablonları Yönet"
 
-#: configdialog.cpp:467
+#: configdialog.cpp:466
 msgid "Install..."
 msgstr "Kur..."
 
-#: configdialog.cpp:470
+#: configdialog.cpp:469
 msgid "Click to install a new template directly."
 msgstr "Doğruca yeni bir şablon kurmak için tıklayın."
 
-#: configdialog.cpp:473
-msgid "Download.."
-msgstr "İndir.."
+#: configdialog.cpp:472 configdialog.cpp:528
+msgid "Download..."
+msgstr "İndir..."
 
-#: configdialog.cpp:476
+#: configdialog.cpp:475
 msgid "Click to download additional templates via the Internet."
 msgstr "İnternet üzerinden ek şablonlar indirmek için tıklayın."
 
-#: configdialog.cpp:479
+#: configdialog.cpp:478
 msgid "Delete..."
 msgstr "Sil..."
 
-#: configdialog.cpp:482
+#: configdialog.cpp:481
 msgid "Click to select and remove installed templates."
 msgstr "Kurulu şablonları seçip kaldırmak için tıklayın."
 
-#: configdialog.cpp:493
+#: configdialog.cpp:492
 msgid "Data Sources"
 msgstr "Veri Kaynakları"
 
-#: configdialog.cpp:493
+#: configdialog.cpp:492
 msgid "Data Source Options"
 msgstr "Veri Kaynağı Seçenekleri"
 
-#: configdialog.cpp:498 fetchdialog.cpp:160
+#: configdialog.cpp:497 fetchdialog.cpp:161
 msgid "Source"
 msgstr "Kaynak"
 
-#: configdialog.cpp:509
+#: configdialog.cpp:508
 msgid "Move &Up"
 msgstr "Y&ukarı Taşı"
 
-#: configdialog.cpp:511 configdialog.cpp:515
+#: configdialog.cpp:510 configdialog.cpp:514
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
@@ -4124,127 +4173,125 @@ msgstr ""
 "Veri kaynaklarının sıralması, Tellico'nun girdileri otomatik olarak "
 "güncellediği zaman kullandığı sıralamayı belirler."
 
-#: configdialog.cpp:513
+#: configdialog.cpp:512
 msgid "Move &Down"
 msgstr "Aşağı &Taşı"
 
-#: configdialog.cpp:520
+#: configdialog.cpp:519
 msgid "&New..."
 msgstr "Ye&ni..."
 
-#: configdialog.cpp:522
+#: configdialog.cpp:521
 msgid "Click to add a new data source."
 msgstr "Yeni bir veri kaynağı eklemek için tıklayın."
 
-#: configdialog.cpp:523
+#: configdialog.cpp:522
 msgid "&Modify..."
 msgstr "De&ğiştir..."
 
-#: configdialog.cpp:525
+#: configdialog.cpp:524
 msgid "Click to modify the selected data source."
 msgstr "Seçili veri kaynağını değiştirmek için tıklayın."
 
-#: configdialog.cpp:528
+#: configdialog.cpp:527
 msgid "Click to delete the selected data source."
 msgstr "Seçili veri kaynağını silmek için tıklayın."
 
-#: configdialog.cpp:529
-msgid "Download..."
-msgstr "İndir..."
-
-#: configdialog.cpp:531
+#: configdialog.cpp:530
 msgid "Click to download additional data sources via the Internet."
 msgstr "İnternet üzerinden ek veri kaynakları indirmek için tıklayın."
 
-#: configdialog.cpp:1004
+#: configdialog.cpp:991
 msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
 msgstr "*.tar.gz *.tgz|Şablon Paketleri (*.tar.gz)"
 
-#: configdialog.cpp:1037
+#: configdialog.cpp:1024
 msgid "Delete Template"
 msgstr "Şablon Sil"
 
-#: configdialog.cpp:1038
+#: configdialog.cpp:1025
 msgid "Select template to delete:"
 msgstr "Silmek için şablon seçin:"
 
-#: loanview.cpp:32 loanview.cpp:90 xslt.cpp:26
+#: loanview.cpp:33 loanview.cpp:91 xslt.cpp:26
 msgid "Borrower"
 msgstr "Kiralayan"
 
-#: loanview.cpp:73
+#: loanview.cpp:74
 msgid "Check-in"
 msgstr "Kayıt Gir"
 
-#: loanview.cpp:75
+#: loanview.cpp:76
 msgid "Modify Loan..."
 msgstr "Kira Değiştir..."
 
-#: loanview.cpp:92
+#: loanview.cpp:93
 msgid "Borrower (Sort by Count)"
 msgstr "Kiralayan (Hesaba Göre Sırala)"
 
-#: collectionfactory.cpp:76
+#: collectionfactory.cpp:77
 msgid "My Collection"
 msgstr "Koleksiyonum"
 
-#: collectionfactory.cpp:117
+#: collectionfactory.cpp:118
 msgid "Book Collection"
 msgstr "Kitap Koleksiyonu"
 
-#: collectionfactory.cpp:119
+#: collectionfactory.cpp:120
 msgid "Comic Book Collection"
 msgstr "Çizgi Roman Koleksiyonu"
 
-#: collectionfactory.cpp:120
+#: collectionfactory.cpp:121
 msgid "Video Collection"
 msgstr "Video Koleksiyonu"
 
-#: collectionfactory.cpp:121
+#: collectionfactory.cpp:122
 msgid "Music Collection"
 msgstr "Müzik Koleksiyonu"
 
-#: collectionfactory.cpp:122
+#: collectionfactory.cpp:123
 msgid "Coin Collection"
 msgstr "Madeni Para Koleksiyonu"
 
-#: collectionfactory.cpp:123
+#: collectionfactory.cpp:124
 msgid "Stamp Collection"
 msgstr "Pul Koleksiyonu"
 
-#: collectionfactory.cpp:124
+#: collectionfactory.cpp:125
 msgid "Wine Collection"
 msgstr "Şarap Koleksiyonu"
 
-#: collectionfactory.cpp:125
+#: collectionfactory.cpp:126
 msgid "Card Collection"
 msgstr "Kart Koleksiyonu"
 
-#: collectionfactory.cpp:126
+#: collectionfactory.cpp:127
 msgid "Game Collection"
 msgstr "Oyun Koleksiyonu"
 
-#: collectionfactory.cpp:127
+#: collectionfactory.cpp:128
 msgid "File Catalog"
 msgstr "Dosya Kataloğu"
 
-#: collectionfactory.cpp:128
+#: collectionfactory.cpp:129
 msgid "Custom Collection"
 msgstr "Size Özel Koleksiyon"
 
 #: viewstack.cpp:29
 msgid ""
-"<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
-"qt>"
-msgstr "<qt><i>Girdi Görünümü</i></qt>"
+"<qt>The <i>Entry View</i> shows a formatted view of the entry's "
+"contents.</qt>"
+msgstr ""
+"<qt><i>Girdi Görünümü</i> girdi içeriğinin, biçimlendirilmiş bir "
+"görünümünü gösterir.</qt>"
 
 #: viewstack.cpp:31
 msgid ""
 "<qt>The <i>Icon View</i> shows each entry in the collection or group using "
 "an icon, which may be an image in the entry.</qt>"
 msgstr ""
-"<qt><i>Simge Görünümü</i>, koleksiyondaki her girdiyi veya gurubu bir simge "
-"kullanarak gösterir, bu girdideki bir resimde olabilir.</qt>"
+"<qt><i>Simge Görünümü</i>, koleksiyondaki her girdiyi veya gurubu bir "
+"simge kullanarak gösterir, bu girdideki bir resimde olabilir.</qt>"
 
 #: exportdialog.cpp:48
 msgid "Export Options"
@@ -4263,8 +4310,8 @@ msgid ""
 "If checked, the values of the fields will be automatically formatted "
 "according to their format type."
 msgstr ""
-"Eğer seçiliyse, alanların değerleri, kendi biçim tiplerine göre otomatik "
-"olarak biçimlendirilecektir."
+"Eğer seçiliyse, alanların değerleri, kendi biçim tiplerine göre "
+"otomatik olarak biçimlendirilecektir."
 
 #: exportdialog.cpp:59
 msgid "Export selected entries only"
@@ -4294,69 +4341,70 @@ msgstr "Kullanıcı konumu (%1) de şifrele"
 msgid "Encode the exported file in the local format."
 msgstr "Dışa aktarılan dosyayı yerel düzende şifrele."
 
-#: fetchdialog.cpp:58
+#: fetchdialog.cpp:59
 msgid "&Search"
 msgstr "A&ra"
 
-#: fetchdialog.cpp:59
+#: fetchdialog.cpp:60
 msgid "&Stop"
 msgstr "D&urdur"
 
-#: fetchdialog.cpp:77
+#: fetchdialog.cpp:78
 msgid "Internet Search"
 msgstr "İnternet Araması"
 
-#: fetchdialog.cpp:83
+#: fetchdialog.cpp:84
 msgid "Search Query"
 msgstr "Arama Sırası"
 
-#: fetchdialog.cpp:89
+#: fetchdialog.cpp:90
 msgid ""
 "_: Start the search\n"
 "S&earch:"
 msgstr "A&ra:"
 
-#: fetchdialog.cpp:93
+#: fetchdialog.cpp:94
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "Bir arama değeri girin. Bir ISBN araması, tüm ISBN i içermelidir."
 
-#: fetchdialog.cpp:100
+#: fetchdialog.cpp:101
 msgid "Choose the type of search"
 msgstr "Aramanın tipini seçin"
 
-#: fetchdialog.cpp:106
+#: fetchdialog.cpp:107
 msgid "Click to start or stop the search"
 msgstr "Aramayı başlat veya durdura tıklayın"
 
-#: fetchdialog.cpp:123
+#: fetchdialog.cpp:124
 msgid "&Multiple ISBN/UPC search"
 msgstr "Çoklu ISBN/UPC ara&ması"
 
-#: fetchdialog.cpp:124
+#: fetchdialog.cpp:125
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr ""
-"Çoklu ISBN veya UPC değerlerinde arama yapmak için bu kutucuğu işaretleyin."
+"Çoklu ISBN veya UPC değerlerinde arama yapmak için bu kutucuğu "
+"işaretleyin."
 
-#: fetchdialog.cpp:127
+#: fetchdialog.cpp:128
 msgid "Edit List..."
 msgstr "Düzenleme Listesi..."
 
-#: fetchdialog.cpp:129
+#: fetchdialog.cpp:130
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr ""
-"Çoklu ISBN değerleri girmek veya düzenlemek için, metin düzenleme kutucuğu "
-"aç tuşunu tıklayın."
+"Çoklu ISBN değerleri girmek veya düzenlemek için, metin düzenleme "
+"kutucuğu aç tuşunu tıklayın."
 
-#: fetchdialog.cpp:135
+#: fetchdialog.cpp:136
 msgid "Search s&ource:"
 msgstr "Arama ka&ynağı:"
 
-#: fetchdialog.cpp:143
+#: fetchdialog.cpp:144
 msgid "Select the database to search"
 msgstr "Arama yapmak için veritabanı seçin"
 
-#: fetchdialog.cpp:165
+#: fetchdialog.cpp:166
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
@@ -4364,90 +4412,97 @@ msgstr ""
 "Sonuçlar bulunduğu gibi, bu listeye eklendi. Birini seçmeniz durumunda, "
 "tamamlanmış girdiyle eşleşecek ve aşağıda gösterilecektir."
 
-#: fetchdialog.cpp:173
+#: fetchdialog.cpp:174
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
 msgstr ""
-"Bir girdi, Aşağıdaki listeden seçip, geçerli koleksiyona eklemeden de burada "
-"gösterilebilir."
+"Bir girdi, Aşağıdaki listeden seçip, geçerli koleksiyona eklemeden de "
+"burada gösterilebilir"
 
-#: fetchdialog.cpp:180
+#: fetchdialog.cpp:181
 msgid "&Add Entry"
 msgstr "Girdi E&kle"
 
-#: fetchdialog.cpp:184
+#: fetchdialog.cpp:185
 msgid "Add the selected entry to the current collection"
 msgstr "Seçili girdiyi, şu anki koleksiyona ekle"
 
-#: fetchdialog.cpp:186
+#: fetchdialog.cpp:187
 msgid "Get More Results"
 msgstr "Daha Fazla Sonuç Getir"
 
-#: fetchdialog.cpp:189
+#: fetchdialog.cpp:190
 msgid "Fetch more results from the current data source"
 msgstr "Şu anki veri kaynağından daha fazla sonuç yakala"
 
-#: fetchdialog.cpp:193
+#: fetchdialog.cpp:194
 msgid "Clear all search fields and results"
 msgstr "Bütün arama alanlarını ve sonuçlarını temizle"
 
-#: fetchdialog.cpp:258
+#: fetchdialog.cpp:259
 msgid "Cancelling the search..."
 msgstr "Arama iptal ediliyor..."
 
-#: fetchdialog.cpp:273 fetchdialog.cpp:381
+#: fetchdialog.cpp:274 fetchdialog.cpp:432
 msgid "Searching..."
 msgstr "Aranıyor..."
 
-#: fetchdialog.cpp:327
+#: fetchdialog.cpp:329
 msgid "The search returned no items."
 msgstr "Arama herhangi bir sonuç döndürmedi."
 
-#: fetchdialog.cpp:330
+#: fetchdialog.cpp:333
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
-msgstr "Arama %n sonuç döndürdü."
+msgstr ""
+"Arama 1 sonuç döndürdü.\n"
+"Arama %n sonuç döndürdü."
 
-#: fetchdialog.cpp:352 fetchdialog.cpp:404
+#: fetchdialog.cpp:370
+msgid "<qt>No entries were found for the following ISBN values:</qt>"
+msgstr "<qt>İzleyen ISBN değerlerinde hiç bir giriş bulunamadı:</qt>"
+
+#: fetchdialog.cpp:403 fetchdialog.cpp:455
 msgid "Fetching %1..."
 msgstr "Alınıyor %1..."
 
-#: fetchdialog.cpp:437
+#: fetchdialog.cpp:488
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
-"Geçerli koleksiyon tipiniz için kullanılabilir herhangi bir internet kaynağı "
-"yok."
+"Geçerli koleksiyon tipiniz için kullanılabilir herhangi bir internet "
+"kaynağı yok."
 
-#: fetchdialog.cpp:497
+#: fetchdialog.cpp:554
 msgid "Edit ISBN/UPC Values"
 msgstr "ISBN/UPC Değerlerini Düzenle "
 
-#: fetchdialog.cpp:501
+#: fetchdialog.cpp:558
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr ""
-"<qt>ISBN veya UPC değerlerini, herbiri bir satıra olmak üzere giriniz.</qt>"
+"<qt>ISBN veya UPC değerlerini, herbiri bir satıra olmak üzere "
+"giriniz.</qt>"
 
-#: fetchdialog.cpp:507
+#: fetchdialog.cpp:564
 msgid "&Load From File..."
 msgstr "Dosyadan Yük&le..."
 
-#: fetchdialog.cpp:508
+#: fetchdialog.cpp:565
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Bir metin dosyasından liste yükle.</qt>"
 
-#: fetchdialog.cpp:527
+#: fetchdialog.cpp:584
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
 msgstr ""
-"<qt>Bir ISBN araması en fazla 100 ISBN değeri döndürür. Sadece listedeki ilk "
-"100 değer kullanılabilir.</qt>"
+"<qt>Bir ISBN araması en fazla 100 ISBN değeri döndürür. Sadece "
+"listedeki ilk 100 değer kullanılabilir.</qt>"
 
 #: entryeditdialog.cpp:50 entryeditdialog.cpp:357 entryeditdialog.cpp:381
-#: entryeditdialog.cpp:480
+#: entryeditdialog.cpp:485
 msgid "Edit Entry"
 msgstr "Girdiyi Düzenle"
 
@@ -4456,7 +4511,7 @@ msgid "&New Entry"
 msgstr "Ye&ni Girdi"
 
 #: entryeditdialog.cpp:64 entryeditdialog.cpp:115 entryeditdialog.cpp:391
-#: entryeditdialog.cpp:509
+#: entryeditdialog.cpp:514
 msgid "Sa&ve Entry"
 msgstr "G&irdiyi Kaydet"
 
@@ -4476,15 +4531,15 @@ msgstr "Bu girdileri gerçekten değiştirmek istiyor musunuz?"
 msgid "Modify Multiple Entries"
 msgstr "Çoklu Girdileri Değiştir"
 
-#: entryeditdialog.cpp:425
+#: entryeditdialog.cpp:430
 msgid "Edit Entries"
 msgstr "Girdileri Düzenle"
 
-#: entryeditdialog.cpp:457
+#: entryeditdialog.cpp:462
 msgid "Sa&ve Entries"
 msgstr "G&irdileri Kaydet"
 
-#: entryeditdialog.cpp:625
+#: entryeditdialog.cpp:630
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -4492,7 +4547,7 @@ msgstr ""
 "Bu girdi düzenlendi.\n"
 "Değişiklikleri girmek istiyor musunuz?"
 
-#: entryeditdialog.cpp:628
+#: entryeditdialog.cpp:633
 msgid "Save Entry"
 msgstr "Girdiyi Kaydet"
 
@@ -4516,33 +4571,37 @@ msgstr "Bir rapor şablonu seçin ve <em>Oluştur</em> a tıklayın."
 msgid ""
 "Some reports may take several seconds to generate for large collections."
 msgstr ""
-"Bazı raporlar, geniş koleksiyonlar oluşturulurken bir kaç saniye alabilir."
+"Bazı raporlar, geniş koleksiyonlar oluşturulurken bir kaç saniye "
+"alabilir."
 
-#: tellico_kernel.cpp:284
+#: tellico_kernel.cpp:285
 msgid "Do you really want to delete this filter?"
 msgstr "Gerçekten bu filtreyi silmek istiyor musunuz?"
 
-#: tellico_kernel.cpp:286
+#: tellico_kernel.cpp:287
 msgid "Delete Filter?"
 msgstr "Filtreyi Sileyim mi?"
 
-#: tellico_kernel.cpp:322
+#: tellico_kernel.cpp:323
 msgid "New collection name:"
 msgstr "Yeni koleksiyon adı:"
 
-#: entryview.cpp:168
+#: entryview.cpp:169
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr "Tellico, öntanımlı girdi stilini konumlandıramıyor. "
+msgstr "Tellico, öntanımlı girdi stilini konumlandıramıyor."
 
-#: rc.cpp:2
+#: rc.cpp:6
+#, no-c-format
 msgid "&New"
 msgstr "Ye&ni"
 
-#: rc.cpp:5
+#: rc.cpp:15
+#, no-c-format
 msgid "&Collection"
 msgstr "&Koleksiyon"
 
-#: rc.cpp:8
+#: rc.cpp:24
+#, no-c-format
 msgid "Collection Toolbar"
 msgstr "Koleksiyon Araç Çubuğu"
 
@@ -4567,7 +4626,8 @@ msgid ""
 "same way, with a semi-colon (;) separating each value.</p>\n"
 msgstr ""
 "<p>...Eğer bir kitabın birden fazla yazarı varsa, bunların isimlerini,\n"
-"noktalı virgül ile ayırmalısınız, böylelikle, Tellico bunları farkeder\n"
+"noktalı virgül ile ayırmalısınız, böylelikle, Tellico bunları "
+"farkeder\n"
 "ve ayrı olarak kullanacağını bilir.</p>\n"
 "<p>Çoklu değer girmeye izin veren diğer alanlarda da, her bir değeri\n"
 "noktalı virgül (;) ile ayırarak aynı yol izlenmelidir.</p>\n"
@@ -4620,7 +4680,8 @@ msgid ""
 "<p>To show only books which are by Weber or Bujold, for example, then\n"
 "type \"weber|bujold\" (no quotes) in the filter box.</p>\n"
 msgstr ""
-"<p>...Eğer Çabuk Süz de kelime olmayan karakterler kullanılırsa, metin,\n"
+"<p>...Eğer Çabuk Süz de kelime olmayan karakterler kullanılırsa, "
+"metin,\n"
 "düzenli açıklama olarak tercüme edilir.</p>\n"
 " <p>Mesela, sadece Weber veya Bujold'dan kitapları göstermek isterseniz,\n"
 "filtreleme kutusuna \"weber|bujold\" (tırnaksız) yazınız.</p>\n"
@@ -4630,8 +4691,8 @@ msgid ""
 "<p>...that you can edit more than one entry at a time, by holding down\n"
 "the Shift or Ctrl key and selecting multiple entries.</p>\n"
 msgstr ""
-"<p>...Shift veya Ctrl tuşlarına basılı tutup, birden fazla girdi seçerek, "
-"aynı anda\n"
+"<p>...Shift veya Ctrl tuşlarına basılı tutup, birden fazla girdi "
+"seçerek, aynı anda\n"
 "birden fazla girdiyi düzenleyebilirsiniz.</p>\n"
 
 #: tips.cpp:45
@@ -4645,8 +4706,8 @@ msgstr ""
 
 #: tips.cpp:50
 msgid ""
-"<p>...that you can add, edit, and delete string macros for bibliographies.</"
-"p>\n"
+"<p>...that you can add, edit, and delete string macros for "
+"bibliographies.</p>\n"
 msgstr ""
 "<p>...Bibliyografyalar için, karakter dizisi makrolarını, ekleyebilir,\n"
 " düzenleyebilir ve silebilirsiniz.</p>\n"
@@ -4661,7 +4722,8 @@ msgid ""
 msgstr ""
 "<p>...Eğer birden fazla alan, isim olarak biçimlendirildiyse, koleksiyona\n"
 "\"Herkes\" isimli yeni bir gurup eklenecektir, mesela, yazarlar\n"
-"ve düzenleyiciler, beraber sıralanabilecek veya yazdırılabileceklerdir.</p>\n"
+"ve düzenleyiciler, beraber sıralanabilecek veya "
+"yazdırılabileceklerdir.</p>\n"
 
 #: tips.cpp:60
 msgid ""
@@ -4672,7 +4734,8 @@ msgid ""
 msgstr ""
 "<p>...<tt>tellico-printing.xsl</tt> dosyasını değiştirerek, yazdırılan "
 "çıktının\n"
-"görünümünü değiştirebilirsiniz. Dosya HTML ve kenar boşluğu, font, vb gibi\n"
+"görünümünü değiştirebilirsiniz. Dosya HTML ve kenar boşluğu, font, "
+"vb gibi\n"
 "stilleri yöneten CSSi oluşturur.</p>\n"
 
 #: tips.cpp:66
@@ -4705,6 +4768,32 @@ msgid ""
 msgstr ""
 "<p>...Detaylı Görünüm içerisinde, klavyede bir harfe basarak,\n"
 "o harfle başlayan, sıradaki girdiye geçebilirsiniz.</p>\n"
+
+#: tips.cpp:85
+msgid ""
+"<p>...that you can use Dependent Fields to combine multiple separated "
+"fields\n"
+"into a single field. Just select the type Dependent and use a description\n"
+"similar to \"Value: %{fielda}%{fieldb}\" where %{...} gets replaced with "
+"the\n"
+"appropriate field value. This is useful to collect multiple values in a\n"
+"single field, e.g. for better grouping, and to combine fields of different\n"
+"types by respecting proper sorting at the same time. Consider for example\n"
+"a number field followed by a text subfield with entries 3b, 14a.</p>\n"
+msgstr ""
+"<p>...Bağımlı Alanları, çoklu ayrılmış alanları tek bir alanda "
+"birleştirmek için\n"
+"kullanabilirsiniz. Sadece Bağımlı tipini seçin ve, %{...} uygun alan "
+"değeri ile\n"
+"yer değiştirecek \"Değer: %{fielda}%{fieldb}\" benzeri bir açıklama "
+"kullanın.\n"
+"Bu tek bir alandan çoklu değerler edinmek için kullanışlı bir yoldur, "
+"mesela,\n"
+"daha iyi guruplandırma ve, aynı zamanda doğru sıralamayla farklı "
+"türlerin\n"
+"birleştirilmesi iyi bir örnektir. Düşünün mesela, 3b, 14a girdileri "
+"olan bir sayı alanı ve \n"
+"ardından metin alt alanı gibi.</p>\n"
 
 #: xslt.cpp:2
 msgid ""
@@ -4772,7 +4861,7 @@ msgstr "Tellico Tarafından Oluşturuldu"
 
 #: xslt.cpp:21
 msgid "Distinct values: "
-msgstr "Farklı değerler:"
+msgstr "Farklı değerler: "
 
 #: xslt.cpp:23
 msgid ""
@@ -4833,9 +4922,8 @@ msgid "Search"
 msgstr "Ara"
 
 #: z3950.cpp:4
-#, fuzzy
 msgid "The British Library"
-msgstr "The British Library"
+msgstr "Britanya Kütüphanesi"
 
 #: z3950.cpp:6
 msgid "Sudoc (France)"
@@ -4869,6 +4957,15 @@ msgstr "İsrail Birliği Listesi"
 msgid "National Library of Australia"
 msgstr "Avustralya Ulusal Kütüphanesi"
 
+#: z3950.cpp:22
+#, fuzzy
+msgid "National Library of Lithuania"
+msgstr "Kanada Ulusal Kütüphanesi"
+
+#: z3950.cpp:24
+msgid "Copac (UK and Ireland)"
+msgstr ""
+
 #: scripts.cpp:2
 msgid "Dark Horse Comics"
 msgstr "Dark Horse Comics"
@@ -4880,3 +4977,10 @@ msgstr "Allocine.fr"
 #: scripts.cpp:6
 msgid "Spanish Ministry of Culture"
 msgstr "İspanya Kültür Bakanlığı"
+
+#, fuzzy
+#~ msgid "Copac"
+#~ msgstr "Virgül"
+
+#~ msgid "Download.."
+#~ msgstr "İndir.."

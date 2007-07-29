@@ -43,7 +43,7 @@ namespace Tellico {
   QString uid(int length=20, bool prefix=true);
   uint toUInt(const QString& string, bool* ok);
   /**
-   * Replace all occurences  of <i18n>text</i18n> with i18n("text")
+   * Replace all occurrences  of <i18n>text</i18n> with i18n("text")
    */
   QString i18nReplace(QString text);
   /**

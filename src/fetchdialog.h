@@ -56,6 +56,12 @@ public:
   FetchDialog(QWidget* parent, const char* name = 0);
   ~FetchDialog();
 
+public slots:
+  void slotResetCollection();
+
+protected:
+  bool eventFilter(QObject* obj, QEvent* ev);
+
 private slots:
   void slotSearchClicked();
   void slotClearClicked();
@@ -81,6 +87,7 @@ private:
   void startProgress();
   void stopProgress();
   void setStatus(const QString& text);
+  void adjustColumnWidth();
 
   class SearchResultItem;
 
@@ -106,6 +113,7 @@ private:
   QStringList m_statusMessages;
   QMap<int, Data::EntryPtr> m_entries;
   QPtrList<Fetch::SearchResult> m_results;
+  int m_collType;
 };
 
 } //end namespace

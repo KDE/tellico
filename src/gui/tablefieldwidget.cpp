@@ -49,6 +49,7 @@ TableFieldWidget::TableFieldWidget(Data::FieldPtr field_, QWidget* parent_, cons
 
   m_table->verticalHeader()->setClickEnabled(true);
   m_table->verticalHeader()->installEventFilter(this);
+  connect(m_table->verticalHeader(), SIGNAL(indexChange(int, int, int)), SIGNAL(modified()));
 
   m_table->setDragEnabled(false);
   m_table->setFocusStyle(QTable::FollowStyle);

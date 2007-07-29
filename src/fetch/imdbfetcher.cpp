@@ -992,13 +992,20 @@ void IMDBFetcher::doLists(const QString& str_, Data::EntryPtr entry_) {
   const QString soundMix = QString::fromLatin1("sound-mix=");
   const QString year = QString::fromLatin1("/Years/");
 
+  // IIMdb also has links with the word "sections" in them, remove that
+  // for genres and nationalities
+
   QStringList genres, countries, langs, certs, tracks;
   for(int pos = s_anchorRx->search(str_); pos > -1; pos = s_anchorRx->search(str_, pos+1)) {
     const QString cap1 = s_anchorRx->cap(1);
     if(cap1.find(genre) > -1) {
-      genres += s_anchorRx->cap(2);
+      if(s_anchorRx->cap(2).find(QString::fromLatin1(" section"), 0, false) == -1) {
+        genres += s_anchorRx->cap(2);
+      }
     } else if(cap1.find(country) > -1) {
-      countries += s_anchorRx->cap(2);
+      if(s_anchorRx->cap(2).find(QString::fromLatin1(" section"), 0, false) == -1) {
+        countries += s_anchorRx->cap(2);
+      }
     } else if(cap1.find(lang) > -1) {
       langs += s_anchorRx->cap(2);
     } else if(cap1.find(colorInfo) > -1) {

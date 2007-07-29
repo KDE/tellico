@@ -17,10 +17,9 @@
 #include "fieldwidget.h"
 #include "../datavectors.h"
 
-class KLineEdit;
-
 namespace Tellico {
   namespace GUI {
+    class LineEdit;
 
 /**
  * @author Robby Stephenson
@@ -44,7 +43,7 @@ protected:
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
 private:
-  KLineEdit* m_lineEdit;
+  GUI::LineEdit* m_lineEdit;
 };
 
   } // end GUI namespace

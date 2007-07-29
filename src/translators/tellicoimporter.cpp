@@ -165,10 +165,12 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   // the collection item should be the first dom element child of the root
   QDomElement collelem;
-  QDomNodeList childs = root.childNodes();
-  for(uint i = 0; i < childs.length(); ++i) {
-    if(childs.item(i).isElement() && childs.item(i).localName() == Latin1Literal("collection")) {
-      collelem = childs.item(i).toElement();
+  for(QDomNode n = root.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    if(n.namespaceURI() != m_namespace) {
+      continue;
+    }
+    if(n.isElement() && n.localName() == Latin1Literal("collection")) {
+      collelem = n.toElement();
       break;
     }
   }
@@ -185,9 +187,12 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   // for fields, each true field element is a child of a fields element
   QDomNodeList fieldelems;
   for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
+    if(n.namespaceURI() != m_namespace) {
+      continue;
+    }
     // Latin1Literal is a macro, so can't say Latin1Literal(syntaxVersion > 3 ? "fields" : "attributes")
-    if((syntaxVersion > 3 && n.nodeName() == Latin1Literal("fields"))
-       || (syntaxVersion < 4 && n.nodeName() == Latin1Literal("attributes"))) {
+    if((syntaxVersion > 3 && n.localName() == Latin1Literal("fields"))
+       || (syntaxVersion < 4 && n.localName() == Latin1Literal("attributes"))) {
       QDomElement e = n.toElement();
       fieldelems = e.elementsByTagNameNS(m_namespace, (syntaxVersion > 3) ? QString::fromLatin1("field")
                                                                           : QString::fromLatin1("attribute"));
@@ -235,7 +240,10 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(m_coll.data());
     QDomNodeList macroelems;
     for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
-      if(n.nodeName() == Latin1Literal("macros")) {
+      if(n.namespaceURI() != m_namespace) {
+        continue;
+      }
+      if(n.localName() == Latin1Literal("macros")) {
         macroelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("macro"));
         break;
       }
@@ -247,7 +255,10 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     }
 
     for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
-      if(n.nodeName() == Latin1Literal("bibtex-preamble")) {
+      if(n.namespaceURI() != m_namespace) {
+        continue;
+      }
+      if(n.localName() == Latin1Literal("bibtex-preamble")) {
         c->setPreamble(n.toElement().text());
         break;
       }
@@ -273,7 +284,10 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   uint j = 0;
   for(QDomNode n = collelem.firstChild(); !n.isNull() && !m_cancelled; n = n.nextSibling(), ++j) {
-    if(n.nodeName() == entryName) {
+    if(n.namespaceURI() != m_namespace) {
+      continue;
+    }
+    if(n.localName() == entryName) {
       readEntry(syntaxVersion, n.toElement());
 
       // not exactly right, but close enough
@@ -292,7 +306,10 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   // m_loadAllImages only pertains to zip files
   QDomNodeList imgelems;
   for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
-    if(n.nodeName() == Latin1Literal("images")) {
+    if(n.namespaceURI() != m_namespace) {
+      continue;
+    }
+    if(n.localName() == Latin1Literal("images")) {
       imgelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("image"));
       break;
     }
@@ -303,12 +320,15 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   // filters and borrowers are at document root level, not collection
   for(QDomNode n = root.firstChild(); !n.isNull() && !m_cancelled; n = n.nextSibling()) {
-    if(n.nodeName() == Latin1Literal("borrowers")) {
+    if(n.namespaceURI() != m_namespace) {
+      continue;
+    }
+    if(n.localName() == Latin1Literal("borrowers")) {
       QDomNodeList borrowerElems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("borrower"));
       for(uint j = 0; j < borrowerElems.count(); ++j) {
         readBorrower(borrowerElems.item(j).toElement());
       }
-    } else if(n.nodeName() == Latin1Literal("filters")) {
+    } else if(n.localName() == Latin1Literal("filters")) {
       QDomNodeList filterElems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("filter"));
       for(uint j = 0; j < filterElems.count(); ++j) {
         readFilter(filterElems.item(j).toElement());
@@ -452,11 +472,11 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
     // in version 3 and prior, checkbox attributes had no text(), set it to "true" now
     if(syntaxVersion_ < 4 && elem.text().isEmpty()) {
       // "true" means checked
-      entry->setField(elem.tagName(), QString::fromLatin1("true"));
+      entry->setField(elem.localName(), QString::fromLatin1("true"));
       continue;
     }
 
-    QString name = elem.tagName();
+    QString name = elem.localName();
     Data::FieldPtr f = m_coll->fieldByName(name);
 
     // if the first child of the node is a text node, just set the attribute text
@@ -501,6 +521,18 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
       if(value.isEmpty()) {
         continue;
       }
+
+      if(f->type() == Data::Field::Image) {
+        // for local files only, allow paths here
+        KURL u = KURL::fromPathOrURL(value);
+        if(u.isValid() && u.isLocalFile()) {
+          QString result = ImageFactory::addImage(u, false /* quiet */);
+          if(!result.isEmpty()) {
+            value = result;
+          }
+        }
+      }
+
       // in version 8, old rating fields get changed
       if(syntaxVersion_ < 8 && f->type() == Data::Field::Rating) {
         bool ok;

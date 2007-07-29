@@ -13,16 +13,20 @@
 
 #include "parafieldwidget.h"
 #include "../field.h"
+#include "../latin1literal.h"
 
-#include <qtextedit.h>
+#include <ktextedit.h>
 
 using Tellico::GUI::ParaFieldWidget;
 
 ParaFieldWidget::ParaFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
     : FieldWidget(field_, parent_, name_) {
 
-  m_textEdit = new QTextEdit(this);
+  m_textEdit = new KTextEdit(this);
   m_textEdit->setTextFormat(Qt::PlainText);
+  if(field_->property(QString::fromLatin1("spellcheck")) != Latin1Literal("false")) {
+    m_textEdit->setCheckSpellingEnabled(true);
+  }
   connect(m_textEdit, SIGNAL(textChanged()), SIGNAL(modified()));
 
   registerWidget();

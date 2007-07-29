@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2007 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -213,11 +213,11 @@ void LoanView::resetComparisons() {
   if(childCount() == 0) {
     return;
   }
-  Data::LoanPtr loan = static_cast<LoanItem*>(firstChild())->loan();
-  if(!loan) {
+  Data::EntryVec entries = static_cast<BorrowerItem*>(firstChild())->entries();
+  if(entries.isEmpty()) {
     return;
   }
-  Data::EntryPtr entry = loan->entry();
+  Data::EntryPtr entry = entries[0];
   if(!entry) {
     return;
   }

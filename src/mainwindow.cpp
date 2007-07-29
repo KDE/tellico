@@ -389,8 +389,8 @@ void MainWindow::initActions() {
 #endif
 
   action = new KAction(actionCollection(), "file_import_gcfilms");
-  action->setText(i18n("Import GCfilms Data..."));
-  action->setToolTip(i18n("Import a GCfilms data file"));
+  action->setText(i18n("Import GCstar Data..."));
+  action->setToolTip(i18n("Import a GCstar data file"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::GCfilms);
@@ -1815,8 +1815,7 @@ void MainWindow::slotFileImport(int format_) {
   }
 
   if(checkURL) {
-    bool ok = !url.isEmpty() && url.isValid();
-    ok &= KIO::NetAccess::exists(url, true, this);
+    bool ok = !url.isEmpty() && url.isValid() && KIO::NetAccess::exists(url, true, this);
     if(!ok) {
       StatusBar::self()->clearStatus();
       return;
@@ -2016,8 +2015,8 @@ void MainWindow::slotCiteEntry(int action_) {
 void MainWindow::slotShowFetchDialog() {
   if(!m_fetchDlg) {
     m_fetchDlg = new FetchDialog(this);
-    connect(m_fetchDlg, SIGNAL(finished()),
-            SLOT(slotHideFetchDialog()));
+    connect(m_fetchDlg, SIGNAL(finished()), SLOT(slotHideFetchDialog()));
+    connect(Controller::self(), SIGNAL(collectionAdded(int)), m_fetchDlg, SLOT(slotResetCollection()));
   } else {
     KWin::activateWindow(m_fetchDlg->winId());
   }

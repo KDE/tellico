@@ -136,6 +136,8 @@ void Controller::slotCollectionAdded(Data::CollPtr coll_) {
   m_selectedEntries.clear();
   m_mainWindow->slotEntryCount();
 
+  emit collectionAdded(coll_->type());
+
   updateActions();
 
   connect(coll_, SIGNAL(signalGroupsModified(Tellico::Data::CollPtr, PtrVector<Tellico::Data::EntryGroup>)),
