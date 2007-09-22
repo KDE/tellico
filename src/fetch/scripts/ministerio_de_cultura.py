@@ -40,6 +40,10 @@ Update (checked) = %{title}
 ** Please note that this script is also part of the Tellico's distribution. 
 ** You will always find the latest version in the SVN trunk of Tellico
 
+Version 0.3.2:
+	* Now find 'notas' field related information
+	* search URL modified to fetch information of exhausted books too
+
 Version 0.3.1:
 Bug Fixes:
 	* The 'tr.' string does not appear among authors anymore
@@ -76,7 +80,7 @@ XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 NULLSTRING = ''
 
-VERSION = "0.3"
+VERSION = "0.3.2"
 
 ISBN, AUTHOR, TITLE = range(3)
 
@@ -215,7 +219,8 @@ class MinisterioCulturaParser:
 		# Search form is at http://www.mcu.es/comun/bases/isbn/ISBN.html
 		self.__baseURL	 = 'http://www.mcu.es'
 		self.__searchURL = '/cgi-brs/BasesHTML/isbn/BRSCGI?CMD=VERLST&BASE=ISBN&DOCS=1-15&CONF=AEISPA.cnf&OPDEF=AND&SEPARADOR=' + \
-						   '&WDIS-C=DISPONIBLE&WGEN-C=&WISB-C=%s&WAUT-C=%s&WTIT-C=%s&WMAT-C=&WEDI-C=&'
+						   '&WDIS-C=DISPONIBLE+or+AGOTADO&WGEN-C=&WISB-C=%s&WAUT-C=%s&WTIT-C=%s&WMAT-C=&WEDI-C=&'
+
 		self.__suffixURL = 'WFEP-C=&%40T353-GE=&%40T353-LE=&WSER-C=&WLUG-C=&WLEN-C=&WCLA-C=&WSOP-C='
 
 		# Define some regexps
@@ -228,6 +233,7 @@ class MinisterioCulturaParser:
 							'desc'			: '<th scope="row">Descripci&oacute;n:.*?<td>.*?<span>(?P<desc>.*?)</span>',
 							'publication'	: '<th scope="row">Publicaci&oacute;n:.*?<td>.*?<span>(?P<publication>.*?)</span>',
 							'keyword'		: '<th scope="row">Materias:.*?<td>.*?<span>(?P<keywords>.*?)</span>',
+							'notas'			: '<th scope="row">Notas:.*?<td>.*?<span>(?P<notas>.*?)</span>',
 							'cdu'			: '<th scope="row">CDU:.*?<td><span>(?P<cdu>.*?)</span></td>',
 							'encuadernacion': '<th scope="row">Encuadernaci&oacute;n:.*?<td>.*?<span>(?P<encuadernacion>.*?)</span>',
 							'collection'	: '<th scope="row">Colecci&oacute;n:.*?<td>.*?<span>(?P<collection>.*?)</span>'
@@ -339,6 +345,9 @@ class MinisterioCulturaParser:
 
 				elif name == 'cdu':
 					data['comments'].append('CDU: ' + matches[name].group('cdu').strip())
+				
+				elif name == 'notas':
+					data['comments'].append(matches[name].group('notas').strip())
 				
 				elif name == 'collection':
 					d = matches[name].group('collection').strip()

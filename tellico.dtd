@@ -93,7 +93,7 @@ plot | player | team | brand | location | quantity | front | back |
 mintmark | set | grade | service | obverse | reverse | issue | cover |
 description | scott | cancelled | hinged | centering | gummed |
 producer | appellation | varietal | vintage | type | drink-by |
-platform | publishers | developers | completed |url | volume |
+platform | publishers | developers | completed |url |
 mimetype | size | permissions | owner | group | created | modified |
 metainfos | icon | amazon | imdb | imdb-rating | alttitle |
 allcertification | address | abstract)+>
@@ -233,7 +233,6 @@ allcertification | address | abstract)+>
 <!-- file catalogs -->
 <!-- description is above -->
 <!ELEMENT url (#PCDATA)>
-<!ELEMENT volume (#PCDATA)>
 <!ELEMENT mimetype (#PCDATA)>
 <!ELEMENT size (#PCDATA)>
 <!ELEMENT permissions (#PCDATA)>

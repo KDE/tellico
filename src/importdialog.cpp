@@ -228,7 +228,7 @@ QString ImportDialog::fileFilter(Import::Format format_) {
 
     case Import::GCfilms:
       text = i18n("*.gcs|GCstar Data Files (*.gcs)") + QChar('\n');
-      text = i18n("*.gcf|GCfilms Data Files (*.gcf)") + QChar('\n');
+      text += i18n("*.gcf|GCfilms Data Files (*.gcf)") + QChar('\n');
       break;
 
     case Import::AMC:

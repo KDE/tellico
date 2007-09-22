@@ -32,13 +32,22 @@ extern "C" {
 #include <klocale.h>
 
 #include <qfile.h>
-#include <qeventloop.h>
 
 namespace {
   static const size_t Z3950_DEFAULT_MAX_RECORDS = 20;
 }
 
+using Tellico::Fetch::Z3950ResultFound;
 using Tellico::Fetch::Z3950Connection;
+
+Z3950ResultFound::Z3950ResultFound(const QString& s) : QCustomEvent(uid())
+    , m_result(QDeepCopy<QString>(s)) {
+  ++Z3950Connection::resultsLeft;
+}
+
+Z3950ResultFound::~Z3950ResultFound() {
+  --Z3950Connection::resultsLeft;
+}
 
 class Z3950Connection::Private {
 public:
@@ -53,6 +62,8 @@ public:
   ZOOM_connection conn;
 #endif
 };
+
+int Z3950Connection::resultsLeft = 0;
 
 // since the character set goes into a yaz api call
 // I'm paranoid about user insertions, so just grab 64
@@ -104,6 +115,7 @@ void Z3950Connection::run() {
 //  myDebug() << "Z3950Connection::run() - " << m_fetcher->source() << endl;
   m_aborted = false;
   m_hasMore = false;
+  resultsLeft = 0;
 #if HAVE_YAZ
 
   if(!makeConnection()) {
@@ -358,10 +370,9 @@ void Z3950Connection::done(const QString& msg_, int type_) {
 }
 
 void Z3950Connection::checkPendingEvents() {
-  // I do not want the Done event to happen while Result events are still pending
-  int maxEventsLeft = 3; // no infinite loops!
-  while(kapp->hasPendingEvents() && maxEventsLeft--) {
-    kapp->eventLoop()->processEvents(QEventLoop::ExcludeUserInput);
+  // if there's still some pending result events, go ahead and just wait 1 second
+  if(resultsLeft > 0) {
+    sleep(1);
   }
 }
 
@@ -413,6 +424,8 @@ QCString Z3950Connection::iconvRun(const QCString& text_, const QString& fromCha
     myDebug() << "Z3950Connection::iconvRun() - can't decode buffer" << endl;
     return text_;
   }
+  // bug in yaz, need to flush buffer to catch last character
+  yaz_iconv(cd, 0, 0, &result, &outlen);
 
   // length is pointer difference
   size_t len = result - result0;

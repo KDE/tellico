@@ -292,6 +292,22 @@ modified.</para>
 </listitem>
 </varlistentry>
 
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo><keycap>&Ctrl;</keycap><keycap>J</keycap></keycombo>
+  </shortcut>
+  <guimenu>Edit</guimenu>
+  <guimenuitem>Advanced Filter...</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>opens the &filter-dialog;</action>.</para>
+</listitem>
+</varlistentry>
+
 </variablelist>
 
 </para>
@@ -608,22 +624,6 @@ source and <action>update the selected entries</action>.</para>
 
 <listitem>
 <para>This command <action>changes the field used to group the entries</action> in the collection.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>J</keycap></keycombo>
-  </shortcut>
-  <guimenu>Settings</guimenu>
-  <guimenuitem>Advanced Filter...</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the &filter-dialog;</action>.</para>
 </listitem>
 </varlistentry>
 

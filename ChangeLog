@@ -1,3 +1,41 @@
+2007-09-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.2.14.
+
+2007-09-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Spanish Ministry of Culture script to search out of prints book and add notes field.
+	* Updated tellico2html.js file for searching in HTML export.
+	* Updated GCstar import to parse new XML format in GCstar version 1.2.
+
+2007-08-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated allocine.fr source script to version 0.4, thanks to Mathias Monnerville.
+	* Updated the Amazon.com search to allow searching for comic books.
+	* Updated the isbndb.com search to allow searching for comic books.
+	* Fixed ISBNdb search.
+
+2007-08-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed default SRU port from 7090 to 80.
+
+2007-08-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Update CSS in HTML export.
+
+2007-08-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with yaz_iconv not flushing complete string for z39.50 search.
+
+2007-08-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added MARCXML to possible SRU format.
+	* Fixed bug with MARC stylesheets to work with better with embedded records.
+
+2007-08-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated entry updating to work with all collection types.
+
 2007-07-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.13.

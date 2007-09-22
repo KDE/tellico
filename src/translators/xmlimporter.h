@@ -48,10 +48,16 @@ public:
    * @param data The Data
    */
   XMLImporter(const QByteArray& data);
+  XMLImporter(const QDomDocument& dom);
 
   virtual void setText(const QString& text);
 
-protected:
+  /**
+   * This class gets used as a utility XML loader. This should never get called,
+   * but cannot be abstract.
+   */
+  virtual Data::CollPtr collection();
+
   /**
    * Returns the contents of the imported file.
    *

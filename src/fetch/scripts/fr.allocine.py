@@ -14,7 +14,18 @@
 # *                                                                         *
 # ***************************************************************************
 
-# $Id: fr_allocine.py 360 2006-10-18 09:41:23Z mathias $
+# Version 0.4: 2007-08-27
+# * Fixed parsing errors: some fields in allocine's HTML pages have changed recently. Multiple actors and genres 
+# could not be retrieved. Fixed bad http request error due to some changes in HTML code.
+#
+# Version 0.3:
+# * Fixed parsing: some fields in allocine's HTML pages have changed. Movie's image could not be fetched anymore. Fixed.
+# 
+# Version 0.2:
+# * Fixed parsing: allocine's HTML pages have changed. Movie's image could not be fetched anymore.
+# 
+# Version 0.1:
+# * Initial release.
 
 import sys, os, re, md5, random
 import urllib, urllib2, time, base64
@@ -23,7 +34,7 @@ import xml.dom.minidom
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 
-VERSION = "0.3"
+VERSION = "0.4"
 
 def genMD5():
 	obj = md5.new()
@@ -165,9 +176,9 @@ class AlloCineParser:
 		# Define some regexps
 		self.__regExps = { 	'title' 	: '<title>(?P<title>.+?)</title>',
 							'dirs'		: 'Réalisé par <a.*?>(?P<step1>.+?)</a>.*?</h4>',
-							'actors' 	: '<h4>Avec *<a.*?>(?P<step1>.+?)</a>.*?</h4>',
+							'actors' 	: '<h4>Avec *<a.*?>(?P<step1>.+)</a> &nbsp;',
 							'nat' 		: '<h4>Film *(?P<nat>.+?)[,\.]',
-							'genres' 	: '<h4>Genre *: *<a.*?>(?P<step1>.+?)</a>.*?</h4>',
+							'genres' 	: '<h4>Genre *: *<a.*?>(?P<step1>.+?)</a></h4>',
 							'time' 		: '<h4>Durée *: *(?P<hours>[0-9])?h *(?P<mins>[0-9]{1,2})min',
 							'year' 		: 'Année de production *: *(?P<year>[0-9]{4})',
 							# Original movie title
@@ -191,6 +202,7 @@ class AlloCineParser:
 		"""
 		Fetch HTML data from url
 		"""
+
 		u = urllib2.urlopen(url)
 		self.__data = u.read()
 		u.close()
@@ -199,9 +211,9 @@ class AlloCineParser:
 		"""
 		Retrieve all links related to movie
 		"""
-		matchList = re.findall("""<a *href="%s=(?P<page>.*?\.html?)" *class="link1">(?P<title>.*?)</a>""" % self.__basePath, self.__data)
+		matchList = re.findall("""<h4><a *href="%s=(?P<page>.*?\.html?)" *class="link1">(?P<title>.*?)</a>""" % self.__basePath, self.__data)
 		if not matchList: return None
-			
+
 		return matchList
 
 	def __fetchMovieInfo(self, url):

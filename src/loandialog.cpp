@@ -111,6 +111,7 @@ void LoanDialog::init() {
   // only enable for new loans
   if(m_mode == Modify) {
     m_borrowerEdit->setEnabled(false);
+    pb->setEnabled(false);
   }
 
   l = new QLabel(i18n("&Loan date:"), mainWidget);

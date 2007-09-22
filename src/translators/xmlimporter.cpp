@@ -13,6 +13,7 @@
 
 #include "xmlimporter.h"
 #include "../filehandler.h"
+#include "../collection.h"
 
 #include <klocale.h>
 
@@ -48,6 +49,9 @@ XMLImporter::XMLImporter(const QByteArray& data_) : Import::Importer(KURL()) {
   }
 }
 
+XMLImporter::XMLImporter(const QDomDocument& dom_) : Import::Importer(KURL()), m_dom(dom_) {
+}
+
 void XMLImporter::setText(const QString& text_) {
   Importer::setText(text_);
   QString errorMsg;
@@ -59,6 +63,10 @@ void XMLImporter::setText(const QString& text_) {
     str += QString::fromLatin1("\n\t") + errorMsg;
     setStatusMessage(str);
   }
+}
+
+Tellico::Data::CollPtr XMLImporter::collection() {
+  return 0;
 }
 
 #include "xmlimporter.moc"

@@ -60,6 +60,7 @@
   </Menu>
   <Menu name="edit">
    <Action name="edit_search_internet"/>
+   <Action name="filter_dialog"/>
   </Menu>
   <Menu name="collection">
    <text>&amp;Collection</text>
@@ -93,7 +94,6 @@
    <Action append="show_merge" name="toggle_edit_widget"/>
    <Action append="show_merge" name="toggle_entry_view"/>
    <Action append="show_merge" name="change_entry_grouping"/>
-   <Action append="show_merge" name="filter_dialog"/>
   </Menu>
   <Menu name="help">
    <Action name="tipOfDay"/>

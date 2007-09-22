@@ -12,24 +12,13 @@ with input from Yves Pratter's version of UNIMARC2MODS.xsl
 
 -->
 	<xsl:template match="/">
-		<xsl:choose>
-			<xsl:when test="marc:collection">
-				<modsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-0.xsd">
-					<xsl:for-each select="marc:collection/marc:record">
-						<mods version="3.0">
-							<xsl:call-template name="marcRecord"/>
-						</mods>
-					</xsl:for-each>
-				</modsCollection>
-			</xsl:when>
-			<xsl:otherwise>
-				<mods version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-0.xsd">
-					<xsl:for-each select="marc:record">
-						<xsl:call-template name="marcRecord"/>
-					</xsl:for-each>
+		<modsCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-1.xsd">
+			<xsl:for-each select=".//marc:record">
+				<mods version="3.1">
+					<xsl:call-template name="marcRecord"/>
 				</mods>
-			</xsl:otherwise>
-		</xsl:choose>
+			</xsl:for-each>
+		</modsCollection>
 	</xsl:template>
 
 	<xsl:template name="marcRecord">

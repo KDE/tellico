@@ -418,7 +418,7 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Type type_
       break;
 #endif
     case SRU:
-      w = new SRUFetcher::ConfigWidget(parent_);
+      w = new SRUConfigWidget(parent_);
       break;
     case Entrez:
       w = new EntrezFetcher::ConfigWidget(parent_);
@@ -558,10 +558,10 @@ QPixmap Manager::fetcherIcon(Fetch::Type type_) {
 QString Manager::favIcon(const KURL& url_) {
   DCOPRef kded("kded", "favicons");
   DCOPReply reply = kded.call("iconForURL(KURL)", url_);
-  QString result = reply;
-  if(reply.isValid() && !result.isEmpty()) {
-    return result;
+  if(reply.isValid()) {
+    return reply;
   } else {
+    // go ahead and try to download it for later
     kded.call("downloadHostIcon(KURL)", url_);
   }
   return KMimeType::iconForURL(url_);

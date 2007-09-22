@@ -26,7 +26,8 @@ namespace Tellico {
 
 class Z3950ResultFound : public QCustomEvent {
 public:
-  Z3950ResultFound(const QString& s) : QCustomEvent(uid()), m_result(QDeepCopy<QString>(s)) {}
+  Z3950ResultFound(const QString& s);
+  ~Z3950ResultFound();
   const QString& result() const { return m_result; }
 
   static int uid() { return User + 11111; }
@@ -114,6 +115,9 @@ private:
   size_t m_start;
   size_t m_limit;
   bool m_hasMore;
+
+  friend class Z3950ResultFound;
+  static int resultsLeft;
 };
 
   } // end namespace

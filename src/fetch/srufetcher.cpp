@@ -12,8 +12,10 @@
  ***************************************************************************/
 
 #include "srufetcher.h"
+#include "messagehandler.h"
 #include "../field.h"
 #include "../collection.h"
+#include "../translators/tellico_xml.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../translators/dcimporter.h"
@@ -39,26 +41,31 @@
 //#define SRU_DEBUG
 
 namespace {
-  static const int SRU_DEFAULT_PORT = 7090;
+  // 7090 was the old default port, but that wa sjust because LoC used it
+  // let's use default HTTP port of 80 now
+  static const int SRU_DEFAULT_PORT = 80;
   static const int SRU_MAX_RECORDS = 25;
 }
 
 using Tellico::Fetch::SRUFetcher;
+using Tellico::Fetch::SRUConfigWidget;
 
 SRUFetcher::SRUFetcher(QObject* parent_, const char* name_)
-    : Fetcher(parent_, name_), m_job(0), m_xsltHandler(0), m_started(false) {
+    : Fetcher(parent_, name_), m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_started(false) {
 }
 
 SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, const QString& path_,
                        QObject* parent_) : Fetcher(parent_),
       m_host(host_), m_port(port_), m_path(path_),
-      m_job(0), m_xsltHandler(0), m_started(false) {
+      m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_started(false) {
   m_name = name_; // m_name is protected in super class
 }
 
 SRUFetcher::~SRUFetcher() {
-  delete m_xsltHandler;
-  m_xsltHandler = 0;
+  delete m_MARCXMLHandler;
+  m_MARCXMLHandler = 0;
+  delete m_MODSHandler;
+  m_MODSHandler = 0;
 }
 
 QString SRUFetcher::defaultName() {
@@ -210,30 +217,66 @@ void SRUFetcher::slotComplete(KIO::Job* job_) {
     return;
   }
 
-  if(m_format == Latin1Literal("mods") && !m_xsltHandler) {
-    initXSLTHandler();
-    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
-      stop();
-      return;
+  Data::CollPtr coll;
+  QString msg;
+
+  const QString result = QString::fromUtf8(m_data, m_data.size());
+
+  // first check for SRU errors
+  const QString& diag = XML::nsZingDiag;
+  Import::XMLImporter xmlImporter(result);
+  QDomDocument dom = xmlImporter.domDocument();
+
+  QDomNodeList diagList = dom.elementsByTagNameNS(diag, QString::fromLatin1("diagnostic"));
+  for(uint i = 0; i < diagList.count(); ++i) {
+    QDomElement elem = diagList.item(i).toElement();
+    QDomNodeList nodeList1 = elem.elementsByTagNameNS(diag, QString::fromLatin1("message"));
+    QDomNodeList nodeList2 = elem.elementsByTagNameNS(diag, QString::fromLatin1("details"));
+    for(uint j = 0; j < nodeList1.count(); ++j) {
+      QString d = nodeList1.item(j).toElement().text();
+      if(!d.isEmpty()) {
+        QString d2 = nodeList2.item(j).toElement().text();
+        if(!d2.isEmpty()) {
+          d += " (" + d2 + ')';
+        }
+        myDebug() << "SRUFetcher::slotComplete() - " << d << endl;
+        if(!msg.isEmpty()) msg += '\n';
+        msg += d;
+      }
     }
   }
 
-  Data::CollPtr coll;
+  QString modsResult;
   if(m_format == Latin1Literal("mods")) {
-    QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
-    Import::TellicoImporter imp(str);
+    modsResult = result;
+  } else if(m_format == Latin1Literal("marcxml") && initMARCXMLHandler()) {
+    modsResult = m_MARCXMLHandler->applyStylesheet(result);
+  }
+  if(!modsResult.isEmpty() && initMODSHandler()) {
+    Import::TellicoImporter imp(m_MODSHandler->applyStylesheet(modsResult));
     coll = imp.collection();
+    if(!msg.isEmpty()) msg += '\n';
+    msg += imp.statusMessage();
   } else if(m_format == Latin1Literal("dc")) {
-    Import::DCImporter imp(Tellico::decodeHTML(QString::fromUtf8(m_data, m_data.size())));
+    Import::DCImporter imp(dom);
     coll = imp.collection();
+    if(!msg.isEmpty()) msg += '\n';
+    msg += imp.statusMessage();
   } else {
     myDebug() << "SRUFetcher::slotComplete() - unrecognized format: " << m_format << endl;
     stop();
     return;
   }
 
+  if(coll && !msg.isEmpty()) {
+    message(msg, coll->entryCount() == 0 ? MessageHandler::Warning : MessageHandler::Status);
+  }
+
   if(!coll) {
     myDebug() << "SRUFetcher::slotComplete() - no collection pointer" << endl;
+    if(!msg.isEmpty()) {
+      message(msg, MessageHandler::Error);
+    }
     stop();
     return;
   }
@@ -311,23 +354,52 @@ void SRUFetcher::updateEntry(Data::EntryPtr entry_) {
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 
-void SRUFetcher::initXSLTHandler() {
-  QString xsltfile = locate("appdata", QString::fromLatin1("mods2tellico.xsl"));
+bool SRUFetcher::initMARCXMLHandler() {
+  if(m_MARCXMLHandler) {
+    return true;
+  }
+
+  QString xsltfile = locate("appdata", QString::fromLatin1("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
-    kdWarning() << "SRUFetcher::initXSLTHandler() - can not locate mods2tellico.xsl." << endl;
-    return;
+    kdWarning() << "SRUFetcher::initHandlers() - can not locate MARC21slim2MODS3.xsl." << endl;
+    return false;
   }
 
   KURL u;
   u.setPath(xsltfile);
 
-  m_xsltHandler = new XSLTHandler(u);
-  if(!m_xsltHandler->isValid()) {
-    kdWarning() << "SRUFetcher::initXSLTHandler() - error in mods2tellico.xsl." << endl;
-    delete m_xsltHandler;
-    m_xsltHandler = 0;
-    return;
+  m_MARCXMLHandler = new XSLTHandler(u);
+  if(!m_MARCXMLHandler->isValid()) {
+    kdWarning() << "SRUFetcher::initHandlers() - error in MARC21slim2MODS3.xsl." << endl;
+    delete m_MARCXMLHandler;
+    m_MARCXMLHandler = 0;
+    return false;
   }
+  return true;
+}
+
+bool SRUFetcher::initMODSHandler() {
+  if(m_MODSHandler) {
+    return true;
+  }
+
+  QString xsltfile = locate("appdata", QString::fromLatin1("mods2tellico.xsl"));
+  if(xsltfile.isEmpty()) {
+    kdWarning() << "SRUFetcher::initHandlers() - can not locate mods2tellico.xsl." << endl;
+    return false;
+  }
+
+  KURL u;
+  u.setPath(xsltfile);
+
+  m_MODSHandler = new XSLTHandler(u);
+  if(!m_MODSHandler->isValid()) {
+    kdWarning() << "SRUFetcher::initHandlers() - error in mods2tellico.xsl." << endl;
+    delete m_MODSHandler;
+    m_MODSHandler = 0;
+    return false;
+  }
+  return true;
 }
 
 Tellico::Fetch::Fetcher::Ptr SRUFetcher::libraryOfCongress(QObject* parent_) {
@@ -335,12 +407,20 @@ Tellico::Fetch::Fetcher::Ptr SRUFetcher::libraryOfCongress(QObject* parent_) {
                         QString::fromLatin1("voyager"), parent_);
 }
 
-Tellico::Fetch::ConfigWidget* SRUFetcher::configWidget(QWidget* parent_) const {
-  return new SRUFetcher::ConfigWidget(parent_, this);
+// static
+Tellico::StringMap SRUFetcher::customFields() {
+  StringMap map;
+  map[QString::fromLatin1("address")]  = i18n("Address");
+  map[QString::fromLatin1("abstract")] = i18n("Abstract");
+  return map;
 }
 
-SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*=0*/)
-    : Fetch::ConfigWidget(parent_) {
+Tellico::Fetch::ConfigWidget* SRUFetcher::configWidget(QWidget* parent_) const {
+  return new SRUConfigWidget(parent_, this);
+}
+
+SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*=0*/)
+    : ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget(), 4, 2);
   l->setSpacing(4);
   l->setColStretch(1, 10);
@@ -351,6 +431,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   m_hostEdit = new GUI::LineEdit(optionsWidget());
   connect(m_hostEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   connect(m_hostEdit, SIGNAL(textChanged(const QString&)), SIGNAL(signalName(const QString&)));
+  connect(m_hostEdit, SIGNAL(textChanged(const QString&)), SLOT(slotCheckHost()));
   l->addWidget(m_hostEdit, row, 1);
   QString w = i18n("Enter the host name of the server.");
   QWhatsThis::add(label, w);
@@ -359,7 +440,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
 
   label = new QLabel(i18n("&Port: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_portSpinBox = new KIntSpinBox(0, 999999, 1, 7090, 10, optionsWidget());
+  m_portSpinBox = new KIntSpinBox(0, 999999, 1, SRU_DEFAULT_PORT, 10, optionsWidget());
   connect(m_portSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSetModified()));
   l->addWidget(m_portSpinBox, row, 1);
   w = i18n("Enter the port number of the server. The default is %1.").arg(SRU_DEFAULT_PORT);
@@ -381,6 +462,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   l->addWidget(label, ++row, 0);
   m_formatCombo = new GUI::ComboBox(optionsWidget());
   m_formatCombo->insertItem(QString::fromLatin1("MODS"), QString::fromLatin1("mods"));
+  m_formatCombo->insertItem(QString::fromLatin1("MARCXML"), QString::fromLatin1("marcxml"));
   m_formatCombo->insertItem(QString::fromLatin1("Dublin Core"), QString::fromLatin1("dc"));
   connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   l->addWidget(m_formatCombo, row, 1);
@@ -402,7 +484,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   KAcceleratorManager::manage(optionsWidget());
 }
 
-void SRUFetcher::ConfigWidget::saveConfig(KConfig* config_) {
+void SRUConfigWidget::saveConfig(KConfig* config_) {
   QString s = m_hostEdit->text().stripWhiteSpace();
   if(!s.isEmpty()) {
     config_->writeEntry("Host", s);
@@ -423,17 +505,26 @@ void SRUFetcher::ConfigWidget::saveConfig(KConfig* config_) {
   slotSetModified(false);
 }
 
-QString SRUFetcher::ConfigWidget::preferredName() const {
+QString SRUConfigWidget::preferredName() const {
   QString s = m_hostEdit->text();
   return s.isEmpty() ? SRUFetcher::defaultName() : s;
 }
 
-// static
-Tellico::StringMap SRUFetcher::customFields() {
-  StringMap map;
-  map[QString::fromLatin1("address")]  = i18n("Address");
-  map[QString::fromLatin1("abstract")] = i18n("Abstract");
-  return map;
+void SRUConfigWidget::slotCheckHost() {
+  QString s = m_hostEdit->text();
+  // someone might be pasting a full URL, check that
+  if(s.find(':') > -1 || s.find('/') > -1) {
+    KURL u(s);
+    if(u.isValid()) {
+      m_hostEdit->setText(u.host());
+      if(u.port() > 0) {
+        m_portSpinBox->setValue(u.port());
+      }
+      if(!u.path().isEmpty()) {
+        m_pathEdit->setText(u.path());
+      }
+    }
+  }
 }
 
 #include "srufetcher.moc"

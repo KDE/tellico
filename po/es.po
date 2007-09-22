@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"POT-Creation-Date: 2007-07-19 23:41-0700\n"
+"POT-Creation-Date: 2007-09-10 08:16-0700\n"
 "PO-Revision-Date: 2007-07-16 08:58+0200\n"
 "Last-Translator: Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>\n"
 "Language-Team: Spanish <kde-es@kybs.de>\n"
@@ -49,40 +49,40 @@ msgstr "Tubería"
 msgid "TCP/IP"
 msgstr "TCP/IP"
 
-#: gui/tablefieldwidget.cpp:180
+#: gui/tablefieldwidget.cpp:181
 msgid "Rename Column"
 msgstr "Cambiar el nombre de la columna"
 
-#: gui/tablefieldwidget.cpp:180
+#: gui/tablefieldwidget.cpp:181
 msgid "New column name:"
 msgstr "Nuevo nombre para la columna:"
 
-#: gui/tablefieldwidget.cpp:205
+#: gui/tablefieldwidget.cpp:206
 #, c-format
 msgid "Column %1"
 msgstr "Columna %1"
 
-#: gui/tablefieldwidget.cpp:240 gui/tablefieldwidget.cpp:288
+#: gui/tablefieldwidget.cpp:241 gui/tablefieldwidget.cpp:289
 msgid "Rename Column..."
 msgstr "Cambiar el nombre de la columna..."
 
-#: gui/tablefieldwidget.cpp:273
+#: gui/tablefieldwidget.cpp:274
 msgid "Insert Row"
 msgstr "Insertar fila"
 
-#: gui/tablefieldwidget.cpp:275
+#: gui/tablefieldwidget.cpp:276
 msgid "Remove Row"
 msgstr "Eliminar fila"
 
-#: gui/tablefieldwidget.cpp:277
+#: gui/tablefieldwidget.cpp:278
 msgid "Move Row Up"
 msgstr "Subir la fila"
 
-#: gui/tablefieldwidget.cpp:282
+#: gui/tablefieldwidget.cpp:283
 msgid "Move Row Down"
 msgstr "Bajar la fila"
 
-#: gui/tablefieldwidget.cpp:294
+#: gui/tablefieldwidget.cpp:295
 msgid "Clear Table"
 msgstr "Limpiar la tabla"
 
@@ -271,7 +271,7 @@ msgstr "Mis libros de cómics"
 #: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
 #: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
 #: collections/winecollection.cpp:38 entryupdater.cpp:231
-#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:159
+#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:162
 #: translators/audiofileimporter.cpp:152 translators/tellicoimporter.cpp:426
 msgid "Title"
 msgstr "Título"
@@ -336,7 +336,7 @@ msgstr "Género"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:913
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:917
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:252
 msgid "Keywords"
 msgstr "Palabras clave"
@@ -410,7 +410,7 @@ msgid "My Stamps"
 msgstr "Mis sellos"
 
 #: collections/filecatalog.cpp:46 collections/gamecollection.cpp:88
-#: collections/stampcollection.cpp:45 entryupdater.cpp:232 fetchdialog.cpp:160
+#: collections/stampcollection.cpp:45 entryupdater.cpp:232 fetchdialog.cpp:163
 msgid "Description"
 msgstr "Descripción"
 
@@ -753,11 +753,11 @@ msgstr "VCD"
 msgid "DivX"
 msgstr "DivX"
 
-#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:801
+#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:805
 msgid "Blu-ray"
 msgstr "Blu-ray"
 
-#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:804
+#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:808
 msgid "HD DVD"
 msgstr "HD DVD"
 
@@ -888,7 +888,7 @@ msgstr "La duración del vídeo (en minutos)"
 msgid "Aspect Ratio"
 msgstr "Proporciones"
 
-#: collections/videocollection.cpp:168 fetch/amazonfetcher.cpp:793
+#: collections/videocollection.cpp:168 fetch/amazonfetcher.cpp:797
 #: translators/tellicoimporter.cpp:937
 msgid "Widescreen"
 msgstr "Pantalla ancha"
@@ -901,7 +901,7 @@ msgstr "Blanco y negro"
 msgid "Color Mode"
 msgstr "Modo de color"
 
-#: collections/videocollection.cpp:179 fetch/amazonfetcher.cpp:808
+#: collections/videocollection.cpp:179 fetch/amazonfetcher.cpp:812
 msgid "Director's Cut"
 msgstr "Versión del director"
 
@@ -989,6 +989,10 @@ msgstr "Windows"
 #: collections/gamecollection.cpp:49
 msgid "Mac OS"
 msgstr "Mac OS"
+
+#: collections/gamecollection.cpp:49
+msgid "Linux"
+msgstr ""
 
 #: collections/gamecollection.cpp:50
 msgid "Platform"
@@ -1095,7 +1099,7 @@ msgstr "Editor"
 msgid "Organization"
 msgstr "Organización"
 
-#: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:434
+#: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:413
 #: fetch/z3950fetcher.cpp:673
 msgid "Address"
 msgstr "Dirección"
@@ -1121,7 +1125,7 @@ msgid "Cross-Reference"
 msgstr "Referencia cruzada"
 
 #: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:464
-#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:674
+#: fetch/srufetcher.cpp:414 fetch/z3950fetcher.cpp:674
 #: translators/risimporter.cpp:248
 msgid "Abstract"
 msgstr "Resumen"
@@ -1194,18 +1198,22 @@ msgstr "jr.,jr,iii,iv,h,hijo"
 msgid "de,van,der,van der,von"
 msgstr "de,del,van,der,van der,von"
 
-#: fetch/isbndbfetcher.cpp:51
+#: fetch/isbndbfetcher.cpp:53
 msgid "ISBNdb.com"
 msgstr "ISBNdb.com"
 
-#: fetch/amazonfetcher.cpp:192 fetch/animenfofetcher.cpp:75
-#: fetch/ibsfetcher.cpp:72 fetch/isbndbfetcher.cpp:76
+#: fetch/amazonfetcher.cpp:193 fetch/animenfofetcher.cpp:75
+#: fetch/ibsfetcher.cpp:72 fetch/isbndbfetcher.cpp:79
 #: fetch/yahoofetcher.cpp:94
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 no permite buscar por este tipo de colección."
 
+#: fetch/amazonfetcher.cpp:545 fetch/isbndbfetcher.cpp:247
+msgid "Results from %1: %2/%3"
+msgstr "Resultados de %1:%2/%3"
+
 #: fetch/animenfofetcher.cpp:370 fetch/entrezfetcher.cpp:444
-#: fetch/ibsfetcher.cpp:407 fetch/isbndbfetcher.cpp:258
+#: fetch/ibsfetcher.cpp:407 fetch/isbndbfetcher.cpp:342
 #: fetch/yahoofetcher.cpp:393
 msgid "This source has no options."
 msgstr "Esta fuente no tiene opciones."
@@ -1218,61 +1226,61 @@ msgstr "Base de datos Entrez"
 msgid "Institution"
 msgstr "Institución"
 
-#: fetch/z3950connection.cpp:118
+#: fetch/z3950connection.cpp:119
 msgid "Query error!"
 msgstr "Error en la consulta"
 
-#: fetch/z3950connection.cpp:159
+#: fetch/z3950connection.cpp:160
 msgid "Connection search error %1: %2"
 msgstr "Error de búsqueda de conexión %1:%2"
 
-#: fetch/z3950connection.cpp:236
+#: fetch/z3950connection.cpp:237
 msgid "Record syntax error"
 msgstr "Error en sintaxis de registro"
 
-#: fetch/z3950connection.cpp:332
+#: fetch/z3950connection.cpp:333
 msgid "Connection error %1: %2"
 msgstr "Error de conexión %1:%2"
 
-#: fetch/srufetcher.cpp:65
+#: fetch/srufetcher.cpp:72
 msgid "SRU Server"
 msgstr "Servidor SRU"
 
-#: fetch/srufetcher.cpp:334 z3950.cpp:2
+#: fetch/srufetcher.cpp:406 z3950.cpp:2
 msgid "Library of Congress (US)"
 msgstr "Biblioteca del Congreso (EEUU)"
 
-#: fetch/imdbfetcher.cpp:1099 fetch/srufetcher.cpp:349
+#: fetch/imdbfetcher.cpp:1106 fetch/srufetcher.cpp:429
 #: fetch/z3950fetcher.cpp:509
 msgid "Hos&t: "
 msgstr "&Servidor: "
 
-#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:515
+#: fetch/srufetcher.cpp:436 fetch/z3950fetcher.cpp:515
 msgid "Enter the host name of the server."
 msgstr "Introduzca el nombre del servidor."
 
-#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:520
+#: fetch/srufetcher.cpp:441 fetch/z3950fetcher.cpp:520
 msgid "&Port: "
 msgstr "&Puerto: "
 
-#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:525
+#: fetch/srufetcher.cpp:446 fetch/z3950fetcher.cpp:525
 #, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Introduzca el número de puerto del servidor. El predefinido es %1."
 
-#: fetch/srufetcher.cpp:370
+#: fetch/srufetcher.cpp:451
 msgid "Path: "
 msgstr "Ruta: "
 
-#: fetch/srufetcher.cpp:375
+#: fetch/srufetcher.cpp:456
 msgid "Enter the path to the database used by the server."
 msgstr "Introduzca la ruta a la base de datos que usa el servidor."
 
-#: fetch/srufetcher.cpp:380
+#: fetch/srufetcher.cpp:461
 msgid "Format: "
 msgstr "Formato: "
 
-#: fetch/srufetcher.cpp:387
+#: fetch/srufetcher.cpp:469
 msgid "Enter the result format used by the server."
 msgstr "Introduzca el formato del resultado que usa el servidor."
 
@@ -1280,7 +1288,7 @@ msgstr "Introduzca el formato del resultado que usa el servidor."
 msgid "Yahoo! Audio Search"
 msgstr "Yahoo! Audio Search"
 
-#: fetch/amazonfetcher.cpp:709 fetch/yahoofetcher.cpp:243
+#: fetch/amazonfetcher.cpp:713 fetch/yahoofetcher.cpp:243
 msgid "The cover image could not be loaded."
 msgstr "No se ha podido descargar la imagen de la cubierta."
 
@@ -1316,39 +1324,35 @@ msgstr "Amazon (Canadá)"
 msgid "Amazon.com Web Services"
 msgstr "Servicios Web de Amazon.com"
 
-#: fetch/amazonfetcher.cpp:543
-msgid "Results from %1: %2/%3"
-msgstr "Resultados de %1:%2/%3"
-
-#: fetch/amazonfetcher.cpp:826
+#: fetch/amazonfetcher.cpp:830
 msgid "Co&untry: "
 msgstr "&País: "
 
-#: fetch/amazonfetcher.cpp:830
+#: fetch/amazonfetcher.cpp:834
 msgid "United States"
 msgstr "Estados Unidos"
 
-#: fetch/amazonfetcher.cpp:831
+#: fetch/amazonfetcher.cpp:835
 msgid "United Kingdom"
 msgstr "Reino Unido"
 
-#: fetch/amazonfetcher.cpp:832
+#: fetch/amazonfetcher.cpp:836
 msgid "Germany"
 msgstr "Alemania"
 
-#: fetch/amazonfetcher.cpp:833
+#: fetch/amazonfetcher.cpp:837
 msgid "Japan"
 msgstr "Japón"
 
-#: fetch/amazonfetcher.cpp:834
+#: fetch/amazonfetcher.cpp:838
 msgid "France"
 msgstr "Francia"
 
-#: fetch/amazonfetcher.cpp:835
+#: fetch/amazonfetcher.cpp:839
 msgid "Canada"
 msgstr "Canadá"
 
-#: fetch/amazonfetcher.cpp:839
+#: fetch/amazonfetcher.cpp:843
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -1356,27 +1360,27 @@ msgstr ""
 "Amazon.com proporciona datos desde diferentes servidores locales. Elija el "
 "que desee utilizar como fuente de datos."
 
-#: fetch/amazonfetcher.cpp:845
+#: fetch/amazonfetcher.cpp:849
 msgid "&Image size: "
 msgstr "Tamaño de &imagen: "
 
-#: fetch/amazonfetcher.cpp:849
+#: fetch/amazonfetcher.cpp:853
 msgid "Small Image"
 msgstr "Imagen pequeña"
 
-#: fetch/amazonfetcher.cpp:850
+#: fetch/amazonfetcher.cpp:854
 msgid "Medium Image"
 msgstr "Imagen mediana"
 
-#: fetch/amazonfetcher.cpp:851
+#: fetch/amazonfetcher.cpp:855
 msgid "Large Image"
 msgstr "Imagen grande"
 
-#: fetch/amazonfetcher.cpp:852
+#: fetch/amazonfetcher.cpp:856
 msgid "No Image"
 msgstr "Sin imagen"
 
-#: fetch/amazonfetcher.cpp:855 fetch/imdbfetcher.cpp:1124
+#: fetch/amazonfetcher.cpp:859 fetch/imdbfetcher.cpp:1131
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1385,11 +1389,11 @@ msgstr ""
 "demasiadas imágenes grandes en la colección, el rendimiento puede "
 "degradarse."
 
-#: fetch/amazonfetcher.cpp:861
+#: fetch/amazonfetcher.cpp:865
 msgid "&Associate's ID: "
 msgstr "ID del &asociado: "
 
-#: fetch/amazonfetcher.cpp:866
+#: fetch/amazonfetcher.cpp:870
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -1576,24 +1580,24 @@ msgstr ""
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Seleccione un resultado de la búsqueda.</qt>"
 
-#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1163
+#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1170
 msgid "IMDB Link"
 msgstr "Enlace IMDB"
 
 #: fetch/animenfofetcher.cpp:260 fetch/imdbfetcher.cpp:741
-#: fetch/imdbfetcher.cpp:1165
+#: fetch/imdbfetcher.cpp:1172
 msgid "Alternative Titles"
 msgstr "Títulos alternativos"
 
-#: fetch/imdbfetcher.cpp:932 fetch/imdbfetcher.cpp:1164
+#: fetch/imdbfetcher.cpp:932 fetch/imdbfetcher.cpp:1171
 msgid "IMDB Rating"
 msgstr "Valoración IMDB"
 
-#: fetch/imdbfetcher.cpp:1043 fetch/imdbfetcher.cpp:1166
+#: fetch/imdbfetcher.cpp:1050 fetch/imdbfetcher.cpp:1173
 msgid "Certifications"
 msgstr "Certificaciones"
 
-#: fetch/imdbfetcher.cpp:1104
+#: fetch/imdbfetcher.cpp:1111
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -1601,11 +1605,11 @@ msgstr ""
 "La Base de datos de películas de Internet usa varios servidores. Escoja el "
 "que desee utilizar."
 
-#: fetch/imdbfetcher.cpp:1110
+#: fetch/imdbfetcher.cpp:1117
 msgid "&Maximum cast: "
 msgstr "Reparto &máximo: "
 
-#: fetch/imdbfetcher.cpp:1115
+#: fetch/imdbfetcher.cpp:1122
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
@@ -1613,7 +1617,7 @@ msgstr ""
 "La lista de miembros del reparto puede incluir mucha gente. Establezca el "
 "número máximo que devolverá la búsqueda."
 
-#: fetch/imdbfetcher.cpp:1120
+#: fetch/imdbfetcher.cpp:1127
 msgid "Download cover &image"
 msgstr "Descargar la &imagen de la portada"
 
@@ -1712,8 +1716,8 @@ msgstr "Se muestra aquí una descripción del elemento seleccionado."
 msgid "Downloading information..."
 msgstr "Descargando información..."
 
-#: controller.cpp:134 fetchdialog.cpp:215 fetchdialog.cpp:294
-#: fetchdialog.cpp:411 fetchdialog.cpp:466 newstuff/dialog.cpp:296
+#: controller.cpp:134 fetchdialog.cpp:219 fetchdialog.cpp:298
+#: fetchdialog.cpp:416 fetchdialog.cpp:471 newstuff/dialog.cpp:296
 #: newstuff/dialog.cpp:323 newstuff/dialog.cpp:433 statusbar.cpp:83
 msgid "Ready."
 msgstr "Preparado."
@@ -1746,13 +1750,13 @@ msgstr ""
 "existente en esa biblioteca podría ser sobreescrito.</qt>"
 
 #: filehandler.cpp:138 translators/tellicoimporter.cpp:108
-#: translators/xmlimporter.cpp:42 translators/xmlimporter.cpp:56
+#: translators/xmlimporter.cpp:43 translators/xmlimporter.cpp:60
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr ""
 "Hay un error de análisis sintáctico de XML en la línea %1, columna %2."
 
 #: filehandler.cpp:140 translators/tellicoimporter.cpp:110
-#: translators/xmlimporter.cpp:44 translators/xmlimporter.cpp:58
+#: translators/xmlimporter.cpp:45 translators/xmlimporter.cpp:62
 msgid "The error message from Qt is:"
 msgstr "El mensaje de error de Qt es:"
 
@@ -2602,11 +2606,11 @@ msgstr ""
 "Introduzca el nombre de la persona que ha tomado prestados los elementos. "
 "Pulsando el botón podrá seleccionarlo de la libreta de direcciones."
 
-#: loandialog.cpp:116
+#: loandialog.cpp:117
 msgid "&Loan date:"
 msgstr "Fecha de &préstamo:"
 
-#: loandialog.cpp:122
+#: loandialog.cpp:123
 msgid ""
 "The check-out date is the date that you lent the items. By default, today's "
 "date is used."
@@ -2614,11 +2618,11 @@ msgstr ""
 "La fecha de préstamo es la fecha en que prestó los artículos. Por "
 "omisión, se usa la fecha de hoy."
 
-#: loandialog.cpp:131
+#: loandialog.cpp:132
 msgid "D&ue date:"
 msgstr "Fecha límite de devol&ución:"
 
-#: loandialog.cpp:138
+#: loandialog.cpp:139
 msgid ""
 "The due date is when the items are due to be returned. The due date is not "
 "required, unless you want to add the loan to your active calendar."
@@ -2627,19 +2631,19 @@ msgstr ""
 "fecha de devolución no es obligatoria, salvo que quiera añadir el "
 "préstamo a su calendario activo."
 
-#: loandialog.cpp:143
+#: loandialog.cpp:144
 msgid "&Note:"
 msgstr "&Nota:"
 
-#: loandialog.cpp:149
+#: loandialog.cpp:150
 msgid "You can add notes about the loan, as well."
 msgstr "También puede añadir notas sobre el préstamo."
 
-#: loandialog.cpp:153
+#: loandialog.cpp:154
 msgid "&Add a reminder to the active calendar"
 msgstr "&Añadir un recordatorio al calendario activo"
 
-#: loandialog.cpp:156
+#: loandialog.cpp:157
 msgid ""
 "<qt>Checking this box will add a <em>To-do</em> item to your active "
 "calendar, which can be viewed using KOrganizer. The box is only active if "
@@ -3011,175 +3015,175 @@ msgstr "Búsqueda en Internet..."
 msgid "Search the internet..."
 msgstr "Buscar en Internet..."
 
-#: mainwindow.cpp:530
+#: mainwindow.cpp:527
+msgid "Advanced &Filter..."
+msgstr "&Filtro avanzado..."
+
+#: mainwindow.cpp:530 mainwindow.cpp:680
+msgid "Filter the collection"
+msgstr "Filtrar la colección"
+
+#: mainwindow.cpp:535
 msgid "&New Entry..."
 msgstr "&Nueva entrada..."
 
-#: mainwindow.cpp:533
+#: mainwindow.cpp:538
 msgid "Create a new entry"
 msgstr "Crear una nueva entrada"
 
-#: controller.cpp:606 mainwindow.cpp:534
+#: controller.cpp:608 mainwindow.cpp:539
 msgid "&Edit Entry..."
 msgstr "&Editar la entrada..."
 
-#: mainwindow.cpp:537
+#: mainwindow.cpp:542
 msgid "Edit the selected entries"
 msgstr "Editar las entradas seleccionadas"
 
-#: controller.cpp:607 mainwindow.cpp:538
+#: controller.cpp:609 mainwindow.cpp:543
 msgid "D&uplicate Entry"
 msgstr "D&uplicar la entrada"
 
-#: mainwindow.cpp:541
+#: mainwindow.cpp:546
 msgid "Copy the selected entries"
 msgstr "Copiar las entradas seleccionadas"
 
-#: controller.cpp:609 mainwindow.cpp:542
+#: controller.cpp:611 mainwindow.cpp:547
 msgid "&Delete Entry"
 msgstr "&Borrar la entrada"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:550
 msgid "Delete the selected entries"
 msgstr "Borrar las entradas seleccionadas"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:552
 msgid "&Generate Reports..."
 msgstr "&Generar Informes..."
 
-#: mainwindow.cpp:550
+#: mainwindow.cpp:555
 msgid "Generate collection reports"
 msgstr "Generar informes de la colección"
 
-#: mainwindow.cpp:551
+#: mainwindow.cpp:556
 msgid "Check-&out..."
 msgstr "&Prestar..."
 
-#: mainwindow.cpp:554
+#: mainwindow.cpp:559
 msgid "Check-out the selected items"
 msgstr "Gestionar un préstamo de los artículos seleccionados"
 
-#: mainwindow.cpp:555
+#: mainwindow.cpp:560
 msgid "Check-&in"
 msgstr "Devoluc&ión"
 
-#: mainwindow.cpp:558
+#: mainwindow.cpp:563
 msgid "Check-in the selected items"
 msgstr "Ingresar (como devolución) los artículos seleccionados"
 
-#: mainwindow.cpp:560
+#: mainwindow.cpp:565
 msgid "&Rename Collection..."
 msgstr "Cambia&r el nombre de la colección..."
 
-#: mainwindow.cpp:563
+#: mainwindow.cpp:568
 msgid "Rename the collection"
 msgstr "Cambiar el nombre de la colección"
 
-#: mainwindow.cpp:564
+#: mainwindow.cpp:569
 msgid "Collection &Fields..."
 msgstr "&Campos de la colección..."
 
-#: mainwindow.cpp:567
+#: mainwindow.cpp:572
 msgid "Modify the collection fields"
 msgstr "Modificar los campos de la colección"
 
-#: mainwindow.cpp:568
+#: mainwindow.cpp:573
 msgid "Convert to &Bibliography"
 msgstr "Convertir a &bibliografía"
 
-#: mainwindow.cpp:571
+#: mainwindow.cpp:576
 msgid "Convert a book collection to a bibliography"
 msgstr "Convertir una colección de libros a una bibliografía"
 
-#: mainwindow.cpp:572
+#: mainwindow.cpp:577
 msgid "String &Macros..."
 msgstr "&Macros para cadenas de texto..."
 
-#: mainwindow.cpp:575
+#: mainwindow.cpp:580
 msgid "Edit the bibtex string macros"
 msgstr "Editar las macros para cadenas de texto de BibTeX"
 
-#: mainwindow.cpp:582
+#: mainwindow.cpp:587
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Copiar BibTeX al &portapapeles"
 
-#: mainwindow.cpp:583
+#: mainwindow.cpp:588
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Copiar citas de BibTeX al portapapeles"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:593
 msgid "Cite Entry in &LyX"
 msgstr "Citar la entrada en &LyX"
 
-#: mainwindow.cpp:589
+#: mainwindow.cpp:594
 msgid "Cite the selected entries in LyX"
 msgstr "Citar las entradas seleccionadas en LyX"
 
-#: mainwindow.cpp:594
+#: mainwindow.cpp:599
 msgid "Ci&te Entry in OpenOffice.org"
 msgstr "C&itar la entrada en OpenOffice.org"
 
-#: mainwindow.cpp:595
+#: mainwindow.cpp:600
 msgid "Cite the selected entries in OpenOffice.org"
 msgstr "Citar las entradas seleccionadas en OpenOffice.org"
 
-#: controller.cpp:608 mainwindow.cpp:603 rc.cpp:18
+#: controller.cpp:610 mainwindow.cpp:608 rc.cpp:18
 #, no-c-format
 msgid "&Update Entry"
 msgstr "Act&ualizar la entrada"
 
-#: mainwindow.cpp:608
+#: mainwindow.cpp:613
 msgid "All Sources"
 msgstr "Todas las fuentes"
 
-#: mainwindow.cpp:609
+#: mainwindow.cpp:614
 msgid "Update entry data from all available sources"
 msgstr ""
 "Actualizar los datos de la entrada usando todas las fuentes disponibles"
 
-#: mainwindow.cpp:621
+#: mainwindow.cpp:626
 msgid "Show Grou&p View"
 msgstr "Mostrar la vista de gru&po"
 
-#: mainwindow.cpp:624
+#: mainwindow.cpp:629
 msgid "Enable/disable the group view"
 msgstr "Habilitar/deshabilitar la vista de grupo"
 
-#: mainwindow.cpp:625
+#: mainwindow.cpp:630
 msgid "Hide Grou&p View"
 msgstr "Ocultar la vista de gru&po"
 
-#: mainwindow.cpp:627
+#: mainwindow.cpp:632
 msgid "Show Entry &Editor"
 msgstr "Mostrar el &editor de entradas"
 
-#: mainwindow.cpp:630
+#: mainwindow.cpp:635
 msgid "Enable/disable the editor"
 msgstr "Habilitar/deshabilitar el editor"
 
-#: mainwindow.cpp:631
+#: mainwindow.cpp:636
 msgid "Hide Entry &Editor"
 msgstr "Ocultar el &editor de entradas"
 
-#: mainwindow.cpp:633
+#: mainwindow.cpp:638
 msgid "Show Entry &View"
 msgstr "Mostrar la &vista de entradas"
 
-#: mainwindow.cpp:636
+#: mainwindow.cpp:641
 msgid "Enable/disable the entry view"
 msgstr "Habilitar/deshabilitar la vista de entradas"
 
-#: mainwindow.cpp:637
+#: mainwindow.cpp:642
 msgid "Hide Entry &View"
 msgstr "Ocultar la &vista de entradas"
-
-#: mainwindow.cpp:639
-msgid "Advanced &Filter..."
-msgstr "&Filtro avanzado..."
-
-#: mainwindow.cpp:642 mainwindow.cpp:680
-msgid "Filter the collection"
-msgstr "Filtrar la colección"
 
 #: mainwindow.cpp:654
 msgid "Change Grouping"
@@ -3406,39 +3410,39 @@ msgstr "Sobreescribir"
 msgid "Filter (Sort by Count)"
 msgstr "Filtro (ordenar por número)"
 
-#: controller.cpp:423
+#: controller.cpp:425
 msgid "Do you really want to delete this entry?"
 msgstr "¿Realmente desea borrar esta entrada?"
 
-#: controller.cpp:425
+#: controller.cpp:427
 msgid "Delete Entry"
 msgstr "Borrar la entrada"
 
-#: controller.cpp:435
+#: controller.cpp:437
 msgid "Do you really want to delete these entries?"
 msgstr "¿Realmente desea borrar estas entradas?"
 
-#: controller.cpp:439
+#: controller.cpp:441
 msgid "Delete Multiple Entries"
 msgstr "Borrar varias entradas"
 
-#: controller.cpp:611
+#: controller.cpp:613
 msgid "&Edit Entries..."
 msgstr "&Editar las entradas..."
 
-#: controller.cpp:612
+#: controller.cpp:614
 msgid "D&uplicate Entries"
 msgstr "D&uplicar las entradas"
 
-#: controller.cpp:613
+#: controller.cpp:615
 msgid "&Update Entries"
 msgstr "Act&ualizar las entradas"
 
-#: controller.cpp:614
+#: controller.cpp:616
 msgid "&Delete Entries"
 msgstr "&Borrar las entradas"
 
-#: controller.cpp:668
+#: controller.cpp:670
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
 "support lending an item multiple times. They will be removed from the list "
@@ -4175,7 +4179,7 @@ msgstr "Fuente de datos"
 msgid "Data Source Options"
 msgstr "Opciones de fuente de datos"
 
-#: configdialog.cpp:497 fetchdialog.cpp:161
+#: configdialog.cpp:497 fetchdialog.cpp:164
 msgid "Source"
 msgstr "Fuente"
 
@@ -4369,62 +4373,62 @@ msgstr "Bu&scar"
 msgid "&Stop"
 msgstr "&Detener"
 
-#: fetchdialog.cpp:78
+#: fetchdialog.cpp:79
 msgid "Internet Search"
 msgstr "Búsqueda en Internet"
 
-#: fetchdialog.cpp:84
+#: fetchdialog.cpp:87
 msgid "Search Query"
 msgstr "Consulta de búsqueda"
 
-#: fetchdialog.cpp:90
+#: fetchdialog.cpp:93
 msgid ""
 "_: Start the search\n"
 "S&earch:"
 msgstr "&Buscar:"
 
-#: fetchdialog.cpp:94
+#: fetchdialog.cpp:97
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr ""
 "Introducir un valor de búsqueda. Una búsqueda por ISBN debe contener el "
 "ISBN completo."
 
-#: fetchdialog.cpp:101
+#: fetchdialog.cpp:104
 msgid "Choose the type of search"
 msgstr "Escoja el tipo de búsqueda"
 
-#: fetchdialog.cpp:107
+#: fetchdialog.cpp:110
 msgid "Click to start or stop the search"
 msgstr "Pulse el botón para iniciar o detener la búsqueda"
 
-#: fetchdialog.cpp:124
+#: fetchdialog.cpp:127
 msgid "&Multiple ISBN/UPC search"
 msgstr "Búsqueda &múltiple de ISBN/UPC"
 
-#: fetchdialog.cpp:125
+#: fetchdialog.cpp:128
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr "Marque esta casilla para buscar múltiples valores de ISBN o UPC."
 
-#: fetchdialog.cpp:128
+#: fetchdialog.cpp:131
 msgid "Edit List..."
 msgstr "Editar lista..."
 
-#: fetchdialog.cpp:130
+#: fetchdialog.cpp:133
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr ""
 "Pulse el botón para abrir un cuadro de edición de texto para introducir o "
 "editar múltiples valores de ISBN."
 
-#: fetchdialog.cpp:136
+#: fetchdialog.cpp:139
 msgid "Search s&ource:"
 msgstr "&Fuente de búsqueda:"
 
-#: fetchdialog.cpp:144
+#: fetchdialog.cpp:147
 msgid "Select the database to search"
 msgstr "Seleccione la base de datos en la cual buscar"
 
-#: fetchdialog.cpp:166
+#: fetchdialog.cpp:170
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
@@ -4433,7 +4437,7 @@ msgstr ""
 "Seleccionando uno de ellos, se obtendrá la entrada completa y se la "
 "mostrará en la vista de abajo."
 
-#: fetchdialog.cpp:174
+#: fetchdialog.cpp:178
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
@@ -4441,39 +4445,39 @@ msgstr ""
 "Antes de añadir una entrada a la colección actual, puede previsualizarse "
 "aquí seleccionándola en la lista superior"
 
-#: fetchdialog.cpp:181
+#: fetchdialog.cpp:185
 msgid "&Add Entry"
 msgstr "&Añadir entrada"
 
-#: fetchdialog.cpp:185
+#: fetchdialog.cpp:189
 msgid "Add the selected entry to the current collection"
 msgstr "Añadir la entrada seleccionada a la colección actual"
 
-#: fetchdialog.cpp:187
+#: fetchdialog.cpp:191
 msgid "Get More Results"
 msgstr "Obtener más resultados"
 
-#: fetchdialog.cpp:190
+#: fetchdialog.cpp:194
 msgid "Fetch more results from the current data source"
 msgstr "Obtener más resultados de la fuente de datos actual"
 
-#: fetchdialog.cpp:194
+#: fetchdialog.cpp:198
 msgid "Clear all search fields and results"
 msgstr "Limpiar todos los campos de búsqueda y los resultados"
 
-#: fetchdialog.cpp:259
+#: fetchdialog.cpp:263
 msgid "Cancelling the search..."
 msgstr "Cancelando la búsqueda..."
 
-#: fetchdialog.cpp:274 fetchdialog.cpp:432
+#: fetchdialog.cpp:278 fetchdialog.cpp:437
 msgid "Searching..."
 msgstr "Buscando..."
 
-#: fetchdialog.cpp:329
+#: fetchdialog.cpp:333
 msgid "The search returned no items."
 msgstr "La búsqueda no devolvió ningún resultado."
 
-#: fetchdialog.cpp:333
+#: fetchdialog.cpp:337
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
@@ -4482,38 +4486,38 @@ msgstr ""
 "La búsqueda devolvió 1 resultado.\n"
 "La búsqueda devolvió %n resultados."
 
-#: fetchdialog.cpp:370
+#: fetchdialog.cpp:374
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr ""
 "<qt>No se ha encontrado ninguna entrada para los siguientes valores de "
 "ISBN:</qt>"
 
-#: fetchdialog.cpp:403 fetchdialog.cpp:455
+#: fetchdialog.cpp:408 fetchdialog.cpp:460
 msgid "Fetching %1..."
 msgstr "Obteniendo %1..."
 
-#: fetchdialog.cpp:488
+#: fetchdialog.cpp:493 fetchdialog.cpp:673
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 "No hay fuentes de Internet disponibles para su tipo de colección actual."
 
-#: fetchdialog.cpp:554
+#: fetchdialog.cpp:559
 msgid "Edit ISBN/UPC Values"
 msgstr "Editar valores ISBN/UPC"
 
-#: fetchdialog.cpp:558
+#: fetchdialog.cpp:563
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Introduzca los valores ISBN o UPC, uno por linea.</qt>"
 
-#: fetchdialog.cpp:564
+#: fetchdialog.cpp:569
 msgid "&Load From File..."
 msgstr "&Cargar desde fichero..."
 
-#: fetchdialog.cpp:565
+#: fetchdialog.cpp:570
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Cargar la lista desde un fichero de texto.</qt>"
 
-#: fetchdialog.cpp:584
+#: fetchdialog.cpp:589
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"

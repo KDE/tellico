@@ -38,6 +38,8 @@ namespace KIO {
 namespace Tellico {
   namespace Fetch {
 
+class SRUConfigWidget;
+
 /**
  * A fetcher for SRU servers.
  * Right now, only MODS is supported.
@@ -46,6 +48,8 @@ namespace Tellico {
  */
 class SRUFetcher : public Fetcher {
 Q_OBJECT
+
+friend class SRUConfigWidget;
 
 public:
   /**
@@ -74,20 +78,7 @@ public:
 
   static StringMap customFields();
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
-
-  class ConfigWidget : public Fetch::ConfigWidget {
-  public:
-    ConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = 0);
-    virtual void saveConfig(KConfig* config);
-    virtual QString preferredName() const;
-
-  private:
-    GUI::LineEdit* m_hostEdit;
-    KIntSpinBox* m_portSpinBox;
-    GUI::LineEdit* m_pathEdit;
-    GUI::ComboBox* m_formatCombo;
-  };
+  virtual ConfigWidget* configWidget(QWidget* parent) const;
 
   static QString defaultName();
 
@@ -98,7 +89,8 @@ private slots:
   void slotComplete(KIO::Job* job);
 
 private:
-  void initXSLTHandler();
+  bool initMARCXMLHandler();
+  bool initMODSHandler();
 
   QString m_host;
   uint m_port;
@@ -108,9 +100,30 @@ private:
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;
   QGuardedPtr<KIO::Job> m_job;
-  XSLTHandler* m_xsltHandler;
+  XSLTHandler* m_MARCXMLHandler;
+  XSLTHandler* m_MODSHandler;
   bool m_started;
   QStringList m_fields;
+};
+
+class SRUConfigWidget : public ConfigWidget {
+Q_OBJECT
+
+friend class SRUFetcher;
+
+public:
+  SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = 0);
+  virtual void saveConfig(KConfig* config);
+  virtual QString preferredName() const;
+
+private slots:
+  void slotCheckHost();
+
+private:
+  GUI::LineEdit* m_hostEdit;
+  KIntSpinBox* m_portSpinBox;
+  GUI::LineEdit* m_pathEdit;
+  GUI::ComboBox* m_formatCombo;
 };
 
   } // end namespace

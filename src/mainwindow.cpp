@@ -123,16 +123,6 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/, const char* name_/*=0*/) : KMainW
 
   m_fetchActions.setAutoDelete(true); // these are the fetcher actions
 
-  // a little bit of paranoia
-  // I use KRun a lot and I don't want the user to be able to
-  // accidently execute some destructive action
-  {
-    KConfigGroupSaver saver(m_config, "KDE Action Restrictions");
-    m_config->writeEntry("shell_access", false);
-    m_config->writeEntry("run_desktop_files", false);
-    m_config->sync();
-  }
-
   Controller::init(this); // the only time this is ever called!
   // has to be after controller init
   Kernel::init(this); // the only time this is ever called!
@@ -524,6 +514,11 @@ void MainWindow::initActions() {
                        actionCollection(), "edit_search_internet");
   action->setToolTip(i18n("Search the internet..."));
 
+  action = new KAction(i18n("Advanced &Filter..."), QString::fromLatin1("filter"), CTRL + Key_J,
+                       this, SLOT(slotShowFilterDialog()),
+                       actionCollection(), "filter_dialog");
+  action->setToolTip(i18n("Filter the collection"));
+
   /*************************************************
    * Collection menu
    *************************************************/
@@ -635,11 +630,6 @@ void MainWindow::initActions() {
                                         actionCollection(), "toggle_entry_view");
   m_toggleEntryView->setToolTip(i18n("Enable/disable the entry view"));
   m_toggleEntryView->setCheckedState(i18n("Hide Entry &View"));
-
-  action = new KAction(i18n("Advanced &Filter..."), QString::fromLatin1("filter"), CTRL + Key_J,
-                       this, SLOT(slotShowFilterDialog()),
-                       actionCollection(), "filter_dialog");
-  action->setToolTip(i18n("Filter the collection"));
 
   KStdAction::preferences(this, SLOT(slotShowConfigDialog()), actionCollection());
 

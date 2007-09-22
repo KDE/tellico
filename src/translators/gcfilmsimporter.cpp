@@ -31,7 +31,7 @@
 
 using Tellico::Import::GCfilmsImporter;
 
-GCfilmsImporter::GCfilmsImporter(const KURL& url_) : TextImporter(url_), m_coll(0), m_cancelled(false), m_hasURL(false) {
+GCfilmsImporter::GCfilmsImporter(const KURL& url_) : TextImporter(url_), m_coll(0), m_cancelled(false) {
 }
 
 bool GCfilmsImporter::canImport(int type) const {
@@ -53,17 +53,6 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   ProgressItem::Done done(this);
 
-  m_coll = new Data::VideoCollection(true);
-  m_hasURL = false;
-  if(m_coll->hasField(QString::fromLatin1("url"))) {
-    m_hasURL = m_coll->fieldByName(QString::fromLatin1("url"))->type() == Data::Field::URL;
-  } else {
-    Data::FieldPtr field = new Data::Field(QString::fromLatin1("url"), i18n("URL"), Data::Field::URL);
-    field->setCategory(i18n("General"));
-    m_coll->addField(field);
-    m_hasURL = true;
-  }
-
   const QString str = text();
   QTextIStream t(&str);
   if(t.readLine().startsWith(QString::fromLatin1("GCfilms"))) {
@@ -75,6 +64,17 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
 }
 
 void GCfilmsImporter::readGCfilms(const QString& text_) {
+  m_coll = new Data::VideoCollection(true);
+  bool hasURL = false;
+  if(m_coll->hasField(QString::fromLatin1("url"))) {
+    hasURL = m_coll->fieldByName(QString::fromLatin1("url"))->type() == Data::Field::URL;
+  } else {
+    Data::FieldPtr field = new Data::Field(QString::fromLatin1("url"), i18n("URL"), Data::Field::URL);
+    field->setCategory(i18n("General"));
+    m_coll->addField(field);
+    hasURL = true;
+  }
+
   bool convertUTF8 = false;
   QMap<QString, Data::BorrowerPtr> borrowers;
   const QRegExp rx(QString::fromLatin1("\\s*,\\s*"));
@@ -151,7 +151,7 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
     entry->setField(QString::fromLatin1("cast"),  splitJoin(rx, values[8]));
     // values[9] is the original title
     entry->setField(QString::fromLatin1("plot"),  values[10]);
-    if(m_hasURL) {
+    if(hasURL) {
       entry->setField(QString::fromLatin1("url"), values[11]);
     }
 

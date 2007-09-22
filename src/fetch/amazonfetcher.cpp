@@ -104,6 +104,7 @@ QString AmazonFetcher::source() const {
 
 bool AmazonFetcher::canFetch(int type) const {
   return type == Data::Collection::Book
+         || type == Data::Collection::ComicBook
          || type == Data::Collection::Bibtex
          || type == Data::Collection::Album
          || type == Data::Collection::Video
@@ -163,6 +164,7 @@ void AmazonFetcher::doSearch() {
   const int type = Kernel::self()->collectionType();
   switch(type) {
     case Data::Collection::Book:
+    case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
       u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Books"));
       break;
@@ -184,7 +186,6 @@ void AmazonFetcher::doSearch() {
 
     case Data::Collection::Coin:
     case Data::Collection::Stamp:
-    case Data::Collection::ComicBook:
     case Data::Collection::Wine:
     case Data::Collection::Base:
     case Data::Collection::Card:
@@ -468,6 +469,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
     QString desc;
     switch(coll->type()) {
       case Data::Collection::Book:
+      case Data::Collection::ComicBook:
       case Data::Collection::Bibtex:
         desc = entry->field(QString::fromLatin1("author"))
                + QChar('/') + entry->field(QString::fromLatin1("publisher"));
@@ -542,6 +544,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
     int foundCount = (m_page-1) * AMAZON_RETURNS_PER_REQUEST + coll->entryCount();
     message(i18n("Results from %1: %2/%3").arg(source()).arg(foundCount).arg(m_total), MessageHandler::Status);
     ++m_page;
+    m_countOffset = 0;
     doSearch();
   } else if(m_value.contains(';') > 9) {
     search(m_key, m_value.section(';', 10));
@@ -572,6 +575,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
   const int type = Kernel::self()->collectionType();
   switch(type) {
     case Data::Collection::Book:
+    case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
       {
         const QString keywords = QString::fromLatin1("keyword");
@@ -744,7 +748,7 @@ void AmazonFetcher::updateEntry(Data::EntryPtr entry_) {
 //  myDebug() << "AmazonFetcher::updateEntry()" << endl;
 
   int type = entry_->collection()->type();
-  if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
+  if(type == Data::Collection::Book || type == Data::Collection::ComicBook || type == Data::Collection::Bibtex) {
     QString isbn = entry_->field(QString::fromLatin1("isbn"));
     if(!isbn.isEmpty()) {
       m_limit = 5; // no need for more

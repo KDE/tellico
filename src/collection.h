@@ -202,7 +202,7 @@ public:
   void reorderFields(const FieldVec& list);
 
   // the reason this is not static is so I can call it from a collection pointer
-  virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const { return 0; }
+  virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;
 
   /**
    * Determines whether or not a certain value is allowed for an field.

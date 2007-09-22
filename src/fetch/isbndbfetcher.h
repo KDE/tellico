@@ -43,7 +43,8 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == ISBN; }
+  virtual void continueSearch();
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == ISBN; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return ISBNdb; }
@@ -70,14 +71,21 @@ private slots:
 
 private:
   void initXSLTHandler();
+  void doSearch();
 
   XSLTHandler* m_xsltHandler;
   int m_limit;
+  int m_page;
+  int m_total;
+  int m_numResults;
+  int m_countOffset;
 
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;
   QGuardedPtr<KIO::Job> m_job;
 
+  FetchKey m_key;
+  QString m_value;
   bool m_started;
 };
 

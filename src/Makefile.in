@@ -50,7 +50,8 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
-am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(rcdir)"
+am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(rcdir)" \
+	"$(DESTDIR)$(uidir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_tellico_OBJECTS = borrowerdialog.$(OBJEXT) entryitem.$(OBJEXT) \
@@ -166,7 +167,8 @@ am__vpath_adj = case $$p in \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
 rcDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(rc_DATA)
+uiDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(rc_DATA) $(ui_DATA)
 ETAGS = etags
 CTAGS = ctags
 DIST_SUBDIRS = $(SUBDIRS)
@@ -460,7 +462,7 @@ tellico_LDADD = ./core/libcore.a ./cite/libcite.a ./fetch/libfetch.a \
 	$(LIB_KABC) $(KCAL_LIBS) $(LDADD_LIBBTPARSE) $(LIB_KNEWSTUFF)
 
 SUBDIRS = core gui collections translators fetch tests commands cite newstuff
-EXTRA_DIST = tellicoui.rc \
+EXTRA_DIST = tellicoui.rc tellicorc \
 borrowerdialog.cpp          entryiconview.h\
 borrowerdialog.h            entryitem.cpp        importdialog.cpp \
 borrower.h                  entryitem.h          importdialog.h \
@@ -540,8 +542,10 @@ CLEANFILES = *~ *.loT
 
 # the library search path.
 tellico_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-rcdir = $(kde_datadir)/tellico
-rc_DATA = tellicoui.rc
+uidir = $(kde_datadir)/tellico
+ui_DATA = tellicoui.rc
+rcdir = $(kde_confdir)
+rc_DATA = tellicorc
 #>- all: all-recursive
 #>+ 1
 all: docs-am  all-recursive
@@ -728,6 +732,23 @@ uninstall-rcDATA:
 	  echo " rm -f '$(DESTDIR)$(rcdir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(rcdir)/$$f"; \
 	done
+install-uiDATA: $(ui_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(uidir)" || $(mkdir_p) "$(DESTDIR)$(uidir)"
+	@list='$(ui_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(uiDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(uidir)/$$f'"; \
+	  $(uiDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(uidir)/$$f"; \
+	done
+
+uninstall-uiDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(ui_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(uidir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(uidir)/$$f"; \
+	done
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -908,7 +929,7 @@ check: check-recursive
 all-am: Makefile $(PROGRAMS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(rcdir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(rcdir)" "$(DESTDIR)$(uidir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-recursive
@@ -960,7 +981,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-rcDATA
+install-data-am: install-rcDATA install-uiDATA
 
 install-exec-am: install-binPROGRAMS
 
@@ -988,7 +1009,8 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-info-am uninstall-rcDATA
+uninstall-am: uninstall-binPROGRAMS uninstall-info-am uninstall-rcDATA \
+	uninstall-uiDATA
 
 uninstall-info: uninstall-info-recursive
 
@@ -1000,12 +1022,14 @@ uninstall-info: uninstall-info-recursive
 	html-am info info-am install install-am install-binPROGRAMS \
 	install-data install-data-am install-exec install-exec-am \
 	install-info install-info-am install-man install-rcDATA \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am maintainer-clean maintainer-clean-generic \
-	maintainer-clean-recursive mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
-	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-info-am uninstall-rcDATA
+	install-strip install-uiDATA installcheck installcheck-am \
+	installdirs installdirs-am maintainer-clean \
+	maintainer-clean-generic maintainer-clean-recursive \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool mostlyclean-recursive pdf pdf-am ps ps-am \
+	tags tags-recursive uninstall uninstall-am \
+	uninstall-binPROGRAMS uninstall-info-am uninstall-rcDATA \
+	uninstall-uiDATA
 
 
 messages: rc.cpp

@@ -61,9 +61,28 @@
 </xsl:template>
 
 <xsl:template match="item">
- <tc:entry id="{id}">
-  <xsl:apply-templates select="*"/>
+ <!-- For GCstar 1.2, the XML schema changed to use attributes for all
+      the 'simple' value types. The workaround here is to parse all
+      the attributes and elements. For each attribute, a dummy
+      element is created with the same name as the attribute, and
+      that dummy element is then parsed. This way, I can use the same
+      stylesheet for either format without having to repeat a lot
+      of XPath expression. -->
+ <!-- simplicity, the id will either be an attribute or an element -->
+ <tc:entry id="{concat(id,@id)}">
+  <xsl:apply-templates select="@*|*"/>
  </tc:entry>
+</xsl:template>
+
+<xsl:template match="item/@*">
+ <xsl:variable name="dummies">
+  <xsl:element name="{local-name(.)}">
+   <xsl:value-of select="."/>
+  </xsl:element>
+ </xsl:variable>
+ <xsl:for-each select="exsl:node-set($dummies)/*">
+  <xsl:apply-templates select="."/>
+ </xsl:for-each>
 </xsl:template>
 
 <!-- the easy one matches identical local names -->

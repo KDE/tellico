@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tellico\n"
-"POT-Creation-Date: 2007-07-19 23:41-0700\n"
+"POT-Creation-Date: 2007-09-10 08:16-0700\n"
 "PO-Revision-Date: 2007-07-03 02:14+0300\n"
 "Last-Translator: Kunter Kutlu <kunterkutlu@gmail.com>\n"
 "Language-Team: Türkçe <tr@li.org>\n"
@@ -44,40 +44,40 @@ msgstr "Borulama"
 msgid "TCP/IP"
 msgstr "TCP/IP"
 
-#: gui/tablefieldwidget.cpp:180
+#: gui/tablefieldwidget.cpp:181
 msgid "Rename Column"
 msgstr "Sütunu Yeniden Adlandır"
 
-#: gui/tablefieldwidget.cpp:180
+#: gui/tablefieldwidget.cpp:181
 msgid "New column name:"
 msgstr "Yeni sütun adı:"
 
-#: gui/tablefieldwidget.cpp:205
+#: gui/tablefieldwidget.cpp:206
 #, c-format
 msgid "Column %1"
 msgstr "Sütun %1"
 
-#: gui/tablefieldwidget.cpp:240 gui/tablefieldwidget.cpp:288
+#: gui/tablefieldwidget.cpp:241 gui/tablefieldwidget.cpp:289
 msgid "Rename Column..."
 msgstr "Sütunu Yeniden Adlandır..."
 
-#: gui/tablefieldwidget.cpp:273
+#: gui/tablefieldwidget.cpp:274
 msgid "Insert Row"
 msgstr "Satır Ekle"
 
-#: gui/tablefieldwidget.cpp:275
+#: gui/tablefieldwidget.cpp:276
 msgid "Remove Row"
 msgstr "Satırı Kaldır"
 
-#: gui/tablefieldwidget.cpp:277
+#: gui/tablefieldwidget.cpp:278
 msgid "Move Row Up"
 msgstr "Satırı Yukarı Taşı"
 
-#: gui/tablefieldwidget.cpp:282
+#: gui/tablefieldwidget.cpp:283
 msgid "Move Row Down"
 msgstr "Satırı Aşağı Taşı"
 
-#: gui/tablefieldwidget.cpp:294
+#: gui/tablefieldwidget.cpp:295
 msgid "Clear Table"
 msgstr "Tabloyu Kaldır"
 
@@ -266,7 +266,7 @@ msgstr "Çizgi Romanlarım"
 #: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
 #: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
 #: collections/winecollection.cpp:38 entryupdater.cpp:231
-#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:159
+#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:162
 #: translators/audiofileimporter.cpp:152 translators/tellicoimporter.cpp:426
 msgid "Title"
 msgstr "Başlık"
@@ -331,7 +331,7 @@ msgstr "Tür"
 
 #: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
 #: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:913
+#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:917
 #: translators/grs1importer.cpp:62 translators/risimporter.cpp:252
 msgid "Keywords"
 msgstr "Anahtar Kelime"
@@ -403,7 +403,7 @@ msgid "My Stamps"
 msgstr "Pullarım"
 
 #: collections/filecatalog.cpp:46 collections/gamecollection.cpp:88
-#: collections/stampcollection.cpp:45 entryupdater.cpp:232 fetchdialog.cpp:160
+#: collections/stampcollection.cpp:45 entryupdater.cpp:232 fetchdialog.cpp:163
 msgid "Description"
 msgstr "Özellikler"
 
@@ -746,11 +746,11 @@ msgstr "VCD"
 msgid "DivX"
 msgstr "DivX"
 
-#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:801
+#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:805
 msgid "Blu-ray"
 msgstr ""
 
-#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:804
+#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:808
 #, fuzzy
 msgid "HD DVD"
 msgstr "DVD"
@@ -881,7 +881,7 @@ msgstr "Videonun Çalışma Zamanı (Dakikalar ile)"
 msgid "Aspect Ratio"
 msgstr "Görüntü Oranı"
 
-#: collections/videocollection.cpp:168 fetch/amazonfetcher.cpp:793
+#: collections/videocollection.cpp:168 fetch/amazonfetcher.cpp:797
 #: translators/tellicoimporter.cpp:937
 msgid "Widescreen"
 msgstr "Geniş Ekran"
@@ -894,7 +894,7 @@ msgstr "Siyah-Beyaz"
 msgid "Color Mode"
 msgstr "Renk Modu"
 
-#: collections/videocollection.cpp:179 fetch/amazonfetcher.cpp:808
+#: collections/videocollection.cpp:179 fetch/amazonfetcher.cpp:812
 msgid "Director's Cut"
 msgstr "Yönetmenin Çıkardıkları"
 
@@ -982,6 +982,10 @@ msgstr "Windows"
 #: collections/gamecollection.cpp:49
 msgid "Mac OS"
 msgstr "Mac OS"
+
+#: collections/gamecollection.cpp:49
+msgid "Linux"
+msgstr ""
 
 #: collections/gamecollection.cpp:50
 msgid "Platform"
@@ -1087,7 +1091,7 @@ msgstr "Yayımcı"
 msgid "Organization"
 msgstr "Organizasyon"
 
-#: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:434
+#: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:413
 #: fetch/z3950fetcher.cpp:673
 msgid "Address"
 msgstr "Adres"
@@ -1113,7 +1117,7 @@ msgid "Cross-Reference"
 msgstr "Çapraz-Referans"
 
 #: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:464
-#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:674
+#: fetch/srufetcher.cpp:414 fetch/z3950fetcher.cpp:674
 #: translators/risimporter.cpp:248
 msgid "Abstract"
 msgstr "Özet"
@@ -1185,18 +1189,22 @@ msgstr ""
 msgid "de,van,der,van der,von"
 msgstr ""
 
-#: fetch/isbndbfetcher.cpp:51
+#: fetch/isbndbfetcher.cpp:53
 msgid "ISBNdb.com"
 msgstr "ISBNdb.com"
 
-#: fetch/amazonfetcher.cpp:192 fetch/animenfofetcher.cpp:75
-#: fetch/ibsfetcher.cpp:72 fetch/isbndbfetcher.cpp:76
+#: fetch/amazonfetcher.cpp:193 fetch/animenfofetcher.cpp:75
+#: fetch/ibsfetcher.cpp:72 fetch/isbndbfetcher.cpp:79
 #: fetch/yahoofetcher.cpp:94
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 bu kolleksiyon tipini aramaya izin vermiyor."
 
+#: fetch/amazonfetcher.cpp:545 fetch/isbndbfetcher.cpp:247
+msgid "Results from %1: %2/%3"
+msgstr "%1:%2/%3 den sonuçlar"
+
 #: fetch/animenfofetcher.cpp:370 fetch/entrezfetcher.cpp:444
-#: fetch/ibsfetcher.cpp:407 fetch/isbndbfetcher.cpp:258
+#: fetch/ibsfetcher.cpp:407 fetch/isbndbfetcher.cpp:342
 #: fetch/yahoofetcher.cpp:393
 msgid "This source has no options."
 msgstr "Bu kaynak seçenek içermiyor."
@@ -1209,61 +1217,61 @@ msgstr "Entrez Veri Tabanı"
 msgid "Institution"
 msgstr "Kuruluş"
 
-#: fetch/z3950connection.cpp:118
+#: fetch/z3950connection.cpp:119
 msgid "Query error!"
 msgstr "Sorgulama Hatası!"
 
-#: fetch/z3950connection.cpp:159
+#: fetch/z3950connection.cpp:160
 msgid "Connection search error %1: %2"
 msgstr "Bağlantı arama hatası %1: %2"
 
-#: fetch/z3950connection.cpp:236
+#: fetch/z3950connection.cpp:237
 msgid "Record syntax error"
 msgstr "Kayıt sözdizimi hatası"
 
-#: fetch/z3950connection.cpp:332
+#: fetch/z3950connection.cpp:333
 msgid "Connection error %1: %2"
 msgstr "Bağlantı hatası %1: %2"
 
-#: fetch/srufetcher.cpp:65
+#: fetch/srufetcher.cpp:72
 msgid "SRU Server"
 msgstr "SRU Sunucusu"
 
-#: fetch/srufetcher.cpp:334 z3950.cpp:2
+#: fetch/srufetcher.cpp:406 z3950.cpp:2
 msgid "Library of Congress (US)"
 msgstr "ABD Kongre Kütüphanesi"
 
-#: fetch/imdbfetcher.cpp:1099 fetch/srufetcher.cpp:349
+#: fetch/imdbfetcher.cpp:1106 fetch/srufetcher.cpp:429
 #: fetch/z3950fetcher.cpp:509
 msgid "Hos&t: "
 msgstr "Ev&sahibi: "
 
-#: fetch/srufetcher.cpp:355 fetch/z3950fetcher.cpp:515
+#: fetch/srufetcher.cpp:436 fetch/z3950fetcher.cpp:515
 msgid "Enter the host name of the server."
 msgstr "Sunucunun host adını giriniz."
 
-#: fetch/srufetcher.cpp:360 fetch/z3950fetcher.cpp:520
+#: fetch/srufetcher.cpp:441 fetch/z3950fetcher.cpp:520
 msgid "&Port: "
 msgstr "&Bağlantı Noktası: "
 
-#: fetch/srufetcher.cpp:365 fetch/z3950fetcher.cpp:525
+#: fetch/srufetcher.cpp:446 fetch/z3950fetcher.cpp:525
 #, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Sunucunun port numarasını girin. Varsayılan %1."
 
-#: fetch/srufetcher.cpp:370
+#: fetch/srufetcher.cpp:451
 msgid "Path: "
 msgstr "Yol: "
 
-#: fetch/srufetcher.cpp:375
+#: fetch/srufetcher.cpp:456
 msgid "Enter the path to the database used by the server."
 msgstr "Sunucu tarafından kullanılan veritabanının yolunu girin."
 
-#: fetch/srufetcher.cpp:380
+#: fetch/srufetcher.cpp:461
 msgid "Format: "
 msgstr "Biçim: "
 
-#: fetch/srufetcher.cpp:387
+#: fetch/srufetcher.cpp:469
 msgid "Enter the result format used by the server."
 msgstr "Sunucu tarafından kullanılan sonuç biçimini girin."
 
@@ -1271,7 +1279,7 @@ msgstr "Sunucu tarafından kullanılan sonuç biçimini girin."
 msgid "Yahoo! Audio Search"
 msgstr "Yahoo! Audio İçinde Ara"
 
-#: fetch/amazonfetcher.cpp:709 fetch/yahoofetcher.cpp:243
+#: fetch/amazonfetcher.cpp:713 fetch/yahoofetcher.cpp:243
 msgid "The cover image could not be loaded."
 msgstr "Kapak görseli yüklenemedi."
 
@@ -1307,39 +1315,35 @@ msgstr "Amazon (Kanada)"
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com Web Hizmetleri"
 
-#: fetch/amazonfetcher.cpp:543
-msgid "Results from %1: %2/%3"
-msgstr "%1:%2/%3 den sonuçlar"
-
-#: fetch/amazonfetcher.cpp:826
+#: fetch/amazonfetcher.cpp:830
 msgid "Co&untry: "
 msgstr "&Ülke: "
 
-#: fetch/amazonfetcher.cpp:830
+#: fetch/amazonfetcher.cpp:834
 msgid "United States"
 msgstr "Amerika Birleşik Devletleri"
 
-#: fetch/amazonfetcher.cpp:831
+#: fetch/amazonfetcher.cpp:835
 msgid "United Kingdom"
 msgstr "Birleşik Krallık"
 
-#: fetch/amazonfetcher.cpp:832
+#: fetch/amazonfetcher.cpp:836
 msgid "Germany"
 msgstr "Almanya"
 
-#: fetch/amazonfetcher.cpp:833
+#: fetch/amazonfetcher.cpp:837
 msgid "Japan"
 msgstr "Japonya"
 
-#: fetch/amazonfetcher.cpp:834
+#: fetch/amazonfetcher.cpp:838
 msgid "France"
 msgstr "Fransa"
 
-#: fetch/amazonfetcher.cpp:835
+#: fetch/amazonfetcher.cpp:839
 msgid "Canada"
 msgstr "Kanada"
 
-#: fetch/amazonfetcher.cpp:839
+#: fetch/amazonfetcher.cpp:843
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -1347,27 +1351,27 @@ msgstr ""
 "Amazon.com, birkaç farklı yerel siteden veri tedarik eder. Bu veri "
 "kaynağını kullanmak için istediğiniz birini seçiniz."
 
-#: fetch/amazonfetcher.cpp:845
+#: fetch/amazonfetcher.cpp:849
 msgid "&Image size: "
 msgstr "Res&im boyutu: "
 
-#: fetch/amazonfetcher.cpp:849
+#: fetch/amazonfetcher.cpp:853
 msgid "Small Image"
 msgstr "Küçük Resim"
 
-#: fetch/amazonfetcher.cpp:850
+#: fetch/amazonfetcher.cpp:854
 msgid "Medium Image"
 msgstr "Orta Boy Resim"
 
-#: fetch/amazonfetcher.cpp:851
+#: fetch/amazonfetcher.cpp:855
 msgid "Large Image"
 msgstr "Büyük Resim"
 
-#: fetch/amazonfetcher.cpp:852
+#: fetch/amazonfetcher.cpp:856
 msgid "No Image"
 msgstr "Resimsiz"
 
-#: fetch/amazonfetcher.cpp:855 fetch/imdbfetcher.cpp:1124
+#: fetch/amazonfetcher.cpp:859 fetch/imdbfetcher.cpp:1131
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1376,11 +1380,11 @@ msgstr ""
 "içerisinde bulunan birçok büyük boyutlu görüntü dosyası performansı "
 "düşürebilir."
 
-#: fetch/amazonfetcher.cpp:861
+#: fetch/amazonfetcher.cpp:865
 msgid "&Associate's ID: "
 msgstr "&Birleşimin ID si: "
 
-#: fetch/amazonfetcher.cpp:866
+#: fetch/amazonfetcher.cpp:870
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -1561,24 +1565,24 @@ msgstr ""
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Arama sonuçlarından birini seçin.</qt>"
 
-#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1163
+#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1170
 msgid "IMDB Link"
 msgstr "IMDB Linki"
 
 #: fetch/animenfofetcher.cpp:260 fetch/imdbfetcher.cpp:741
-#: fetch/imdbfetcher.cpp:1165
+#: fetch/imdbfetcher.cpp:1172
 msgid "Alternative Titles"
 msgstr "Alternatif İsimler"
 
-#: fetch/imdbfetcher.cpp:932 fetch/imdbfetcher.cpp:1164
+#: fetch/imdbfetcher.cpp:932 fetch/imdbfetcher.cpp:1171
 msgid "IMDB Rating"
 msgstr "IMDB Puanı"
 
-#: fetch/imdbfetcher.cpp:1043 fetch/imdbfetcher.cpp:1166
+#: fetch/imdbfetcher.cpp:1050 fetch/imdbfetcher.cpp:1173
 msgid "Certifications"
 msgstr "Onaylamalar"
 
-#: fetch/imdbfetcher.cpp:1104
+#: fetch/imdbfetcher.cpp:1111
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -1586,11 +1590,11 @@ msgstr ""
 "İnternet Film Veritabanları, birkaç farklı sunucu kullanır. "
 "İstediğiniz birini kullanmak için seçin."
 
-#: fetch/imdbfetcher.cpp:1110
+#: fetch/imdbfetcher.cpp:1117
 msgid "&Maximum cast: "
 msgstr "&En fazla rol alanlar: "
 
-#: fetch/imdbfetcher.cpp:1115
+#: fetch/imdbfetcher.cpp:1122
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
@@ -1598,7 +1602,7 @@ msgstr ""
 "Rol alan üyelerin listesi, birçok insanı içerwbilir. Aramadan dönecek "
 "sonuçların en fazla ne kadar olması gerektiğini ayarlayın."
 
-#: fetch/imdbfetcher.cpp:1120
+#: fetch/imdbfetcher.cpp:1127
 msgid "Download cover &image"
 msgstr "Kapak resm&ini indir"
 
@@ -1696,8 +1700,8 @@ msgstr "Seçili maddenin bir açıklaması burada gösterilmiştir."
 msgid "Downloading information..."
 msgstr "Bilgi indiriliyor..."
 
-#: controller.cpp:134 fetchdialog.cpp:215 fetchdialog.cpp:294
-#: fetchdialog.cpp:411 fetchdialog.cpp:466 newstuff/dialog.cpp:296
+#: controller.cpp:134 fetchdialog.cpp:219 fetchdialog.cpp:298
+#: fetchdialog.cpp:416 fetchdialog.cpp:471 newstuff/dialog.cpp:296
 #: newstuff/dialog.cpp:323 newstuff/dialog.cpp:433 statusbar.cpp:83
 msgid "Ready."
 msgstr "Hazır."
@@ -1731,12 +1735,12 @@ msgstr ""
 "yazılabilir.</qt>"
 
 #: filehandler.cpp:138 translators/tellicoimporter.cpp:108
-#: translators/xmlimporter.cpp:42 translators/xmlimporter.cpp:56
+#: translators/xmlimporter.cpp:43 translators/xmlimporter.cpp:60
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "%2 sütununda ve %1 sırasında bir XML kodlama hatası mevcut."
 
 #: filehandler.cpp:140 translators/tellicoimporter.cpp:110
-#: translators/xmlimporter.cpp:44 translators/xmlimporter.cpp:58
+#: translators/xmlimporter.cpp:45 translators/xmlimporter.cpp:62
 msgid "The error message from Qt is:"
 msgstr "Qt den gelen hata mesajı:"
 
@@ -2590,11 +2594,11 @@ msgstr ""
 "Bu parçayı sizden kiralayan kişinin ismini giriniz. Bu tuşa tıklamanız "
 "size adres defterinizden seçmenize olanak verir."
 
-#: loandialog.cpp:116
+#: loandialog.cpp:117
 msgid "&Loan date:"
 msgstr "Kira&lanma zamanı:"
 
-#: loandialog.cpp:122
+#: loandialog.cpp:123
 msgid ""
 "The check-out date is the date that you lent the items. By default, today's "
 "date is used."
@@ -2602,11 +2606,11 @@ msgstr ""
 "Çıkış tarihi, sizin parçayları kiraladığınız tarihtir. Ön "
 "tanımlı olarak, gün olarak bugünün tarihi kullanılır."
 
-#: loandialog.cpp:131
+#: loandialog.cpp:132
 msgid "D&ue date:"
 msgstr "Te&slim tarihi:"
 
-#: loandialog.cpp:138
+#: loandialog.cpp:139
 msgid ""
 "The due date is when the items are due to be returned. The due date is not "
 "required, unless you want to add the loan to your active calendar."
@@ -2614,19 +2618,19 @@ msgstr ""
 "Teslim tarihi, parçaların geri size döndüğü tarihtir. Aktif "
 "takviminize kiralamayı eklemeyi düşünmedikçe gerekli değildir."
 
-#: loandialog.cpp:143
+#: loandialog.cpp:144
 msgid "&Note:"
 msgstr "&Not:"
 
-#: loandialog.cpp:149
+#: loandialog.cpp:150
 msgid "You can add notes about the loan, as well."
 msgstr "Kiralama hakkında notlarda ekleyebilirsiniz."
 
-#: loandialog.cpp:153
+#: loandialog.cpp:154
 msgid "&Add a reminder to the active calendar"
 msgstr "&Aktif takvime bir hatırlatıcı ekle"
 
-#: loandialog.cpp:156
+#: loandialog.cpp:157
 msgid ""
 "<qt>Checking this box will add a <em>To-do</em> item to your active "
 "calendar, which can be viewed using KOrganizer. The box is only active if "
@@ -2998,174 +3002,174 @@ msgstr "İnternette Ara..."
 msgid "Search the internet..."
 msgstr "İnterneti ara..."
 
-#: mainwindow.cpp:530
+#: mainwindow.cpp:527
+msgid "Advanced &Filter..."
+msgstr "İleri Se&viye Süzgeç..."
+
+#: mainwindow.cpp:530 mainwindow.cpp:680
+msgid "Filter the collection"
+msgstr "Kolleksiyonu filtrele"
+
+#: mainwindow.cpp:535
 msgid "&New Entry..."
 msgstr "Ye&ni Girdi..."
 
-#: mainwindow.cpp:533
+#: mainwindow.cpp:538
 msgid "Create a new entry"
 msgstr "Yeni bir girdi oluştur"
 
-#: controller.cpp:606 mainwindow.cpp:534
+#: controller.cpp:608 mainwindow.cpp:539
 msgid "&Edit Entry..."
 msgstr "Girdiyi Düz&enle..."
 
-#: mainwindow.cpp:537
+#: mainwindow.cpp:542
 msgid "Edit the selected entries"
 msgstr "Seçili girdileri düzenle"
 
-#: controller.cpp:607 mainwindow.cpp:538
+#: controller.cpp:609 mainwindow.cpp:543
 msgid "D&uplicate Entry"
 msgstr "&Girdiyi Çoğalt"
 
-#: mainwindow.cpp:541
+#: mainwindow.cpp:546
 msgid "Copy the selected entries"
 msgstr "Seçili girdileri kopyala"
 
-#: controller.cpp:609 mainwindow.cpp:542
+#: controller.cpp:611 mainwindow.cpp:547
 msgid "&Delete Entry"
 msgstr "Gir&diyi Sil"
 
-#: mainwindow.cpp:545
+#: mainwindow.cpp:550
 msgid "Delete the selected entries"
 msgstr "Seçili girdileri sil"
 
-#: mainwindow.cpp:547
+#: mainwindow.cpp:552
 msgid "&Generate Reports..."
 msgstr "&Rapor Oluştur..."
 
-#: mainwindow.cpp:550
+#: mainwindow.cpp:555
 msgid "Generate collection reports"
 msgstr "Kolleksiyon raporu oluştur"
 
-#: mainwindow.cpp:551
+#: mainwindow.cpp:556
 msgid "Check-&out..."
 msgstr "K&ontrol Et..."
 
-#: mainwindow.cpp:554
+#: mainwindow.cpp:559
 msgid "Check-out the selected items"
 msgstr "Seçili öğeleri kontrol et"
 
-#: mainwindow.cpp:555
+#: mainwindow.cpp:560
 msgid "Check-&in"
 msgstr "Kayıt G&irişi Yap"
 
-#: mainwindow.cpp:558
+#: mainwindow.cpp:563
 msgid "Check-in the selected items"
 msgstr "Seçili öğelerin kayıt girişini yap"
 
-#: mainwindow.cpp:560
+#: mainwindow.cpp:565
 msgid "&Rename Collection..."
 msgstr "Kolleksiyonu Yeniden İsimlendi&r..."
 
-#: mainwindow.cpp:563
+#: mainwindow.cpp:568
 msgid "Rename the collection"
 msgstr "Kolleksiyonu yeniden isimlendir"
 
-#: mainwindow.cpp:564
+#: mainwindow.cpp:569
 msgid "Collection &Fields..."
 msgstr "Koleksiyon &Alanları..."
 
-#: mainwindow.cpp:567
+#: mainwindow.cpp:572
 msgid "Modify the collection fields"
 msgstr "Kolleksiyon alanlarını değiştir"
 
-#: mainwindow.cpp:568
+#: mainwindow.cpp:573
 msgid "Convert to &Bibliography"
 msgstr "&Bibliyografyaya Dönüştür"
 
-#: mainwindow.cpp:571
+#: mainwindow.cpp:576
 msgid "Convert a book collection to a bibliography"
 msgstr "Bir kitap kolleksiyonunu bibliyografyaya Dönüştür"
 
-#: mainwindow.cpp:572
+#: mainwindow.cpp:577
 msgid "String &Macros..."
 msgstr "Karakter Dizisi &Makroları..."
 
-#: mainwindow.cpp:575
+#: mainwindow.cpp:580
 msgid "Edit the bibtex string macros"
 msgstr "Bibtex karakter dizisi makrolarını düzenle"
 
-#: mainwindow.cpp:582
+#: mainwindow.cpp:587
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Bibtexi &Panoya Kopyala"
 
-#: mainwindow.cpp:583
+#: mainwindow.cpp:588
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Bibtex alıntılarını panoya kopyala"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:593
 msgid "Cite Entry in &LyX"
 msgstr "&LyX deki girdiden alıntı yap"
 
-#: mainwindow.cpp:589
+#: mainwindow.cpp:594
 msgid "Cite the selected entries in LyX"
 msgstr "LyX deki seçili girdilerden alıntı yap"
 
-#: mainwindow.cpp:594
+#: mainwindow.cpp:599
 msgid "Ci&te Entry in OpenOffice.org"
 msgstr "OpenOffice.org daki girdilerden alın&tı yap"
 
-#: mainwindow.cpp:595
+#: mainwindow.cpp:600
 msgid "Cite the selected entries in OpenOffice.org"
 msgstr "OpenOffice.org daki seçili girdilerden alıntı yap"
 
-#: controller.cpp:608 mainwindow.cpp:603 rc.cpp:18
+#: controller.cpp:610 mainwindow.cpp:608 rc.cpp:18
 #, no-c-format
 msgid "&Update Entry"
 msgstr "Girdiyi G&üncelle"
 
-#: mainwindow.cpp:608
+#: mainwindow.cpp:613
 msgid "All Sources"
 msgstr "Bütün Kaynaklar"
 
-#: mainwindow.cpp:609
+#: mainwindow.cpp:614
 msgid "Update entry data from all available sources"
 msgstr "Girdi verilerini bütün müsait kaynakları kullanarak güncelle"
 
-#: mainwindow.cpp:621
+#: mainwindow.cpp:626
 msgid "Show Grou&p View"
 msgstr "Guru&p Görüntüsünü Göster"
 
-#: mainwindow.cpp:624
+#: mainwindow.cpp:629
 msgid "Enable/disable the group view"
 msgstr "Gurup görünümüne izin ver/geri al"
 
-#: mainwindow.cpp:625
+#: mainwindow.cpp:630
 msgid "Hide Grou&p View"
 msgstr "Guru&p Görünümünü Gizle"
 
-#: mainwindow.cpp:627
+#: mainwindow.cpp:632
 msgid "Show Entry &Editor"
 msgstr "Giriş Düz&enleyicisini Göster"
 
-#: mainwindow.cpp:630
+#: mainwindow.cpp:635
 msgid "Enable/disable the editor"
 msgstr "Düzenleyicisine izin ver/geri al"
 
-#: mainwindow.cpp:631
+#: mainwindow.cpp:636
 msgid "Hide Entry &Editor"
 msgstr "Giriş Düz&enleyicisini Gizle"
 
-#: mainwindow.cpp:633
+#: mainwindow.cpp:638
 msgid "Show Entry &View"
 msgstr "Giriş &Görünümünü Göster"
 
-#: mainwindow.cpp:636
+#: mainwindow.cpp:641
 msgid "Enable/disable the entry view"
 msgstr "Giriş görünümeüne izin ver/geri al"
 
-#: mainwindow.cpp:637
+#: mainwindow.cpp:642
 msgid "Hide Entry &View"
 msgstr "Giriş Görünümünü Gi&zle"
-
-#: mainwindow.cpp:639
-msgid "Advanced &Filter..."
-msgstr "İleri Se&viye Süzgeç..."
-
-#: mainwindow.cpp:642 mainwindow.cpp:680
-msgid "Filter the collection"
-msgstr "Kolleksiyonu filtrele"
 
 #: mainwindow.cpp:654
 msgid "Change Grouping"
@@ -3393,39 +3397,39 @@ msgstr "Üzerine Yaz"
 msgid "Filter (Sort by Count)"
 msgstr "Filtre (Hesaba Göre Sırala)"
 
-#: controller.cpp:423
+#: controller.cpp:425
 msgid "Do you really want to delete this entry?"
 msgstr "Gerçekten bu girdiyi silmek istiyor musunuz?"
 
-#: controller.cpp:425
+#: controller.cpp:427
 msgid "Delete Entry"
 msgstr "Girdiyi Sil"
 
-#: controller.cpp:435
+#: controller.cpp:437
 msgid "Do you really want to delete these entries?"
 msgstr "Gerçekten bu girdileri silmek istiyor musunuz?"
 
-#: controller.cpp:439
+#: controller.cpp:441
 msgid "Delete Multiple Entries"
 msgstr "Çoklu Girdileri Sil"
 
-#: controller.cpp:611
+#: controller.cpp:613
 msgid "&Edit Entries..."
 msgstr "Girdil&eri Düzenle..."
 
-#: controller.cpp:612
+#: controller.cpp:614
 msgid "D&uplicate Entries"
 msgstr "Girdileri Ço&ğalt"
 
-#: controller.cpp:613
+#: controller.cpp:615
 msgid "&Update Entries"
 msgstr "Girdileri G&üncelle"
 
-#: controller.cpp:614
+#: controller.cpp:616
 msgid "&Delete Entries"
 msgstr "Gir&dileri Sil"
 
-#: controller.cpp:668
+#: controller.cpp:670
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
 "support lending an item multiple times. They will be removed from the list "
@@ -4157,7 +4161,7 @@ msgstr "Veri Kaynakları"
 msgid "Data Source Options"
 msgstr "Veri Kaynağı Seçenekleri"
 
-#: configdialog.cpp:497 fetchdialog.cpp:161
+#: configdialog.cpp:497 fetchdialog.cpp:164
 msgid "Source"
 msgstr "Kaynak"
 
@@ -4349,62 +4353,62 @@ msgstr "A&ra"
 msgid "&Stop"
 msgstr "D&urdur"
 
-#: fetchdialog.cpp:78
+#: fetchdialog.cpp:79
 msgid "Internet Search"
 msgstr "İnternet Araması"
 
-#: fetchdialog.cpp:84
+#: fetchdialog.cpp:87
 msgid "Search Query"
 msgstr "Arama Sırası"
 
-#: fetchdialog.cpp:90
+#: fetchdialog.cpp:93
 msgid ""
 "_: Start the search\n"
 "S&earch:"
 msgstr "A&ra:"
 
-#: fetchdialog.cpp:94
+#: fetchdialog.cpp:97
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr "Bir arama değeri girin. Bir ISBN araması, tüm ISBN i içermelidir."
 
-#: fetchdialog.cpp:101
+#: fetchdialog.cpp:104
 msgid "Choose the type of search"
 msgstr "Aramanın tipini seçin"
 
-#: fetchdialog.cpp:107
+#: fetchdialog.cpp:110
 msgid "Click to start or stop the search"
 msgstr "Aramayı başlat veya durdura tıklayın"
 
-#: fetchdialog.cpp:124
+#: fetchdialog.cpp:127
 msgid "&Multiple ISBN/UPC search"
 msgstr "Çoklu ISBN/UPC ara&ması"
 
-#: fetchdialog.cpp:125
+#: fetchdialog.cpp:128
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr ""
 "Çoklu ISBN veya UPC değerlerinde arama yapmak için bu kutucuğu "
 "işaretleyin."
 
-#: fetchdialog.cpp:128
+#: fetchdialog.cpp:131
 msgid "Edit List..."
 msgstr "Düzenleme Listesi..."
 
-#: fetchdialog.cpp:130
+#: fetchdialog.cpp:133
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr ""
 "Çoklu ISBN değerleri girmek veya düzenlemek için, metin düzenleme "
 "kutucuğu aç tuşunu tıklayın."
 
-#: fetchdialog.cpp:136
+#: fetchdialog.cpp:139
 msgid "Search s&ource:"
 msgstr "Arama ka&ynağı:"
 
-#: fetchdialog.cpp:144
+#: fetchdialog.cpp:147
 msgid "Select the database to search"
 msgstr "Arama yapmak için veritabanı seçin"
 
-#: fetchdialog.cpp:166
+#: fetchdialog.cpp:170
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
@@ -4412,7 +4416,7 @@ msgstr ""
 "Sonuçlar bulunduğu gibi, bu listeye eklendi. Birini seçmeniz durumunda, "
 "tamamlanmış girdiyle eşleşecek ve aşağıda gösterilecektir."
 
-#: fetchdialog.cpp:174
+#: fetchdialog.cpp:178
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
@@ -4420,39 +4424,39 @@ msgstr ""
 "Bir girdi, Aşağıdaki listeden seçip, geçerli koleksiyona eklemeden de "
 "burada gösterilebilir"
 
-#: fetchdialog.cpp:181
+#: fetchdialog.cpp:185
 msgid "&Add Entry"
 msgstr "Girdi E&kle"
 
-#: fetchdialog.cpp:185
+#: fetchdialog.cpp:189
 msgid "Add the selected entry to the current collection"
 msgstr "Seçili girdiyi, şu anki koleksiyona ekle"
 
-#: fetchdialog.cpp:187
+#: fetchdialog.cpp:191
 msgid "Get More Results"
 msgstr "Daha Fazla Sonuç Getir"
 
-#: fetchdialog.cpp:190
+#: fetchdialog.cpp:194
 msgid "Fetch more results from the current data source"
 msgstr "Şu anki veri kaynağından daha fazla sonuç yakala"
 
-#: fetchdialog.cpp:194
+#: fetchdialog.cpp:198
 msgid "Clear all search fields and results"
 msgstr "Bütün arama alanlarını ve sonuçlarını temizle"
 
-#: fetchdialog.cpp:259
+#: fetchdialog.cpp:263
 msgid "Cancelling the search..."
 msgstr "Arama iptal ediliyor..."
 
-#: fetchdialog.cpp:274 fetchdialog.cpp:432
+#: fetchdialog.cpp:278 fetchdialog.cpp:437
 msgid "Searching..."
 msgstr "Aranıyor..."
 
-#: fetchdialog.cpp:329
+#: fetchdialog.cpp:333
 msgid "The search returned no items."
 msgstr "Arama herhangi bir sonuç döndürmedi."
 
-#: fetchdialog.cpp:333
+#: fetchdialog.cpp:337
 #, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
@@ -4461,39 +4465,39 @@ msgstr ""
 "Arama 1 sonuç döndürdü.\n"
 "Arama %n sonuç döndürdü."
 
-#: fetchdialog.cpp:370
+#: fetchdialog.cpp:374
 msgid "<qt>No entries were found for the following ISBN values:</qt>"
 msgstr "<qt>İzleyen ISBN değerlerinde hiç bir giriş bulunamadı:</qt>"
 
-#: fetchdialog.cpp:403 fetchdialog.cpp:455
+#: fetchdialog.cpp:408 fetchdialog.cpp:460
 msgid "Fetching %1..."
 msgstr "Alınıyor %1..."
 
-#: fetchdialog.cpp:488
+#: fetchdialog.cpp:493 fetchdialog.cpp:673
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 "Geçerli koleksiyon tipiniz için kullanılabilir herhangi bir internet "
 "kaynağı yok."
 
-#: fetchdialog.cpp:554
+#: fetchdialog.cpp:559
 msgid "Edit ISBN/UPC Values"
 msgstr "ISBN/UPC Değerlerini Düzenle "
 
-#: fetchdialog.cpp:558
+#: fetchdialog.cpp:563
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr ""
 "<qt>ISBN veya UPC değerlerini, herbiri bir satıra olmak üzere "
 "giriniz.</qt>"
 
-#: fetchdialog.cpp:564
+#: fetchdialog.cpp:569
 msgid "&Load From File..."
 msgstr "Dosyadan Yük&le..."
 
-#: fetchdialog.cpp:565
+#: fetchdialog.cpp:570
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Bir metin dosyasından liste yükle.</qt>"
 
-#: fetchdialog.cpp:584
+#: fetchdialog.cpp:589
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"

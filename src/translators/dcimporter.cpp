@@ -23,12 +23,16 @@ DCImporter::DCImporter(const KURL& url_) : XMLImporter(url_) {
 DCImporter::DCImporter(const QString& text_) : XMLImporter(text_) {
 }
 
+DCImporter::DCImporter(const QDomDocument& dom_) : XMLImporter(dom_) {
+}
+
 Tellico::Data::CollPtr DCImporter::collection() {
+  const QString& dc = XML::nsDublinCore;
+  const QString& zing = XML::nsZing;
+
   Data::CollPtr c = new Data::BookCollection(true);
 
   QDomDocument doc = domDocument();
-  QString dc = XML::nsDublinCore;
-  QString zing = XML::nsZing;
 
   QRegExp authorDateRX(QString::fromLatin1(",?(\\s+\\d{4}-?(?:\\d{4})?\\.?)(.*)$"));
   QRegExp dateRX(QString::fromLatin1("\\d{4}"));

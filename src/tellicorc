@@ -1,0 +1,3 @@
+[KDE Action Restrictions]
+shell_access=false
+run_desktop_files=false;

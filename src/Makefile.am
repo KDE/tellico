@@ -28,7 +28,7 @@ tellico_LDADD = ./core/libcore.a ./cite/libcite.a ./fetch/libfetch.a \
 
 SUBDIRS = core gui collections translators fetch tests commands cite newstuff
 
-EXTRA_DIST = tellicoui.rc \
+EXTRA_DIST = tellicoui.rc tellicorc \
 borrowerdialog.cpp          entryiconview.h\
 borrowerdialog.h            entryitem.cpp        importdialog.cpp \
 borrower.h                  entryitem.h          importdialog.h \
@@ -111,8 +111,11 @@ CLEANFILES = *~ *.loT
 # the library search path.
 tellico_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-rcdir = $(kde_datadir)/tellico
-rc_DATA = tellicoui.rc
+uidir = $(kde_datadir)/tellico
+ui_DATA = tellicoui.rc
+
+rcdir = $(kde_confdir)
+rc_DATA = tellicorc
 
 messages: rc.cpp
 	@ touch $(podir)/tellico.pot;

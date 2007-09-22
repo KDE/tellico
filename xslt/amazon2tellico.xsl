@@ -197,13 +197,21 @@
     </authors>
 
     <isbn>
-     <xsl:value-of select="aws:ISBN"/>   
+     <!-- the EAN is the isbn-13 value for books -->
+     <xsl:choose>
+      <xsl:when test="aws:ISBN">
+       <xsl:value-of select="aws:ISBN"/>
+      </xsl:when>
+      <xsl:when test="aws:EAN">
+       <xsl:value-of select="aws:EAN"/>
+      </xsl:when>
+     </xsl:choose>
     </isbn>
 
     <publisher>
      <xsl:value-of select="aws:Publisher"/>
     </publisher>
- 
+
     <binding i18n="true">
      <xsl:choose>
       <xsl:when test="aws:Binding='Hardcover'">

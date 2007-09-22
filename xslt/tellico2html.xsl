@@ -196,6 +196,9 @@
         padding-left: 4px;
         padding-right: 4px;
    }
+   thead tr {
+        cursor: pointer;
+   }
    tr.entry0 {
         background-color: #eee;
    }
@@ -484,6 +487,12 @@
    <xsl:choose>
     <!-- when there is at least one value... -->
     <xsl:when test="$numvalues &gt; 1">
+     <xsl:variable name="field" select="$fields/tc:field[@name = $column]"/>
+     <xsl:if test="$field/@type=4 or $field/@type=6">
+      <xsl:attribute name="style">
+       <xsl:text>text-align: center; padding-left: 5px</xsl:text>
+      </xsl:attribute>
+     </xsl:if>
      <xsl:call-template name="simple-field-value">
       <xsl:with-param name="entry" select="$entry"/>
       <xsl:with-param name="field" select="$column"/>

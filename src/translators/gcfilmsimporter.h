@@ -52,8 +52,7 @@ private:
   void readGCstar(const QString& text);
 
   Data::CollPtr m_coll;
-  bool m_cancelled : 1;
-  bool m_hasURL : 1;
+  bool m_cancelled;
 };
 
   } // end namespace

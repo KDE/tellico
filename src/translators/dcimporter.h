@@ -23,6 +23,7 @@ class DCImporter : public XMLImporter {
 public:
   DCImporter(const KURL& url);
   DCImporter(const QString& text);
+  DCImporter(const QDomDocument& dom);
   ~DCImporter() {}
 
   virtual Data::CollPtr collection();

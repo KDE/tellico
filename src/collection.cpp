@@ -777,13 +777,31 @@ bool Collection::dependentFieldHasRecursion(FieldPtr field_) {
   return false;
 }
 
+int Collection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+  if(!entry1_ || !entry2_) {
+    return 0;
+  }
+  // used to just return 0, but we really want a default generic implementation
+  // that specific collections can override.
+
+  // start with twice the title score
+  // and since the minimum is > 10, then need more than just a perfect title match
+  int res = 2*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+  // then add score for each field
+  FieldVec fields = entry1_->collection()->fields();
+  for(Data::FieldVecIt it = fields.begin(); it != fields.end(); ++it) {
+    res += Entry::compareValues(entry1_, entry2_, it->name(), this);
+  }
+  return res;
+}
+
 // static
 // merges values from e2 into e1
 bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
   if(!e1 || !e2) {
     return false;
   }
-  bool ret1 = false;
+  bool ret = false;
   FieldVec fields = e1->collection()->fields();
   for(FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
     if(e2->field(field).isEmpty()) {
@@ -792,54 +810,71 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
     if(overwrite_ || e1->field(field).isEmpty()) {
 //      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name()) << endl;
       e1->setField(field, e2->field(field));
-      ret1 = true;
+      ret = true;
     } else if(field->type() == Field::Para) {
       // for paragraph fields, concatenate the values
       e1->setField(field, e1->field(field) + QString::fromLatin1("<br/><br/>") + e2->field(field));
-      ret1 = true;
-    }
-  }
-  // special case for tracks in albums
-  bool ret2 = false;
-  const QString sep = QString::fromLatin1("::");
-  if(e1->collection()->type() == Collection::Album) {
-    const QString track = QString::fromLatin1("track");
-    QStringList tracks1 = e1->fields(track, false);
-    QStringList tracks2 = e2->fields(track, false);
-    while(tracks1.count() < tracks2.count()) {
-      tracks1 << QString();
-    }
-    for(uint i = 0; i < tracks2.count(); ++i) {
-      if(tracks2[i].isEmpty()) {
-        continue;
+      ret = true;
+    } else if(field->type() == Field::Table) {
+      // if field F is a table-type field (album tracks, files, etc.), merge rows (keep their position)
+      // if e1's F val in [row i, column j] empty, replace with e2's val at same position
+      // if different (non-empty) vals at same position, CONFLICT!
+      const QString sep = QString::fromLatin1("::");
+      QStringList vals1 = e1->fields(field, false);
+      QStringList vals2 = e2->fields(field, false);
+      while(vals1.count() < vals2.count()) {
+        vals1 += QString();
       }
-      if(tracks1[i].isEmpty()) {
-        tracks1[i] = tracks2[i];
-        ret2 = true;
-      } else {
-        QStringList parts1 = QStringList::split(sep, tracks1[i], true);
-        QStringList parts2 = QStringList::split(sep, tracks2[i], true);
-        bool addedPart = false;
-        while(parts1.count() < parts2.count()) {
-          parts1 += QString();
+      for(uint i = 0; i < vals2.count(); ++i) {
+        if(vals2[i].isEmpty()) {
+          continue;
         }
-        for(uint j = 1; j < parts2.count(); ++j) {
-          if(parts1[j].isEmpty()) {
-            parts1[j] = parts2[j];
-            addedPart = true;
+        if(vals1[i].isEmpty()) {
+          vals1[i] = vals2[i];
+          ret = true;
+        } else {
+          QStringList parts1 = QStringList::split(sep, vals1[i], true);
+          QStringList parts2 = QStringList::split(sep, vals2[i], true);
+          bool changedPart = false;
+          while(parts1.count() < parts2.count()) {
+            parts1 += QString();
+          }
+          for(uint j = 0; j < parts2.count(); ++j) {
+            if(parts2[j].isEmpty()) {
+              continue;
+            }
+            if(parts1[j].isEmpty()) {
+              parts1[j] = parts2[j];
+              changedPart = true;
+            }
+          }
+          if(changedPart) {
+            vals1[i] = parts1.join(sep);
+            ret = true;
           }
         }
-        if(addedPart) {
-          tracks1[i] = parts1.join(sep);
-          ret2 = true;
+      }
+      if(ret) {
+        e1->setField(field, vals1.join(QString::fromLatin1("; ")));
+      }
+    } else if(field->flags() & Data::Field::AllowMultiple) {
+      // if field F allows multiple values and not a Table (see above case),
+      // e1's F values = (e1's F values) U (e2's F values) (union)
+      // replace e1's field with union of e1's and e2's values for this field
+      QStringList items1 = e1->fields(field, false);
+      QStringList items2 = e2->fields(field, false);
+      for(QStringList::ConstIterator it = items2.begin(); it != items2.end(); ++it) {
+        if(!items1.contains(*it)) {
+          items1.append(*it);
         }
       }
-    }
-    if(ret2) {
-      e1->setField(track, tracks1.join(QString::fromLatin1("; ")));
+// not sure if I think it should be sorted or not
+//      items1.sort();
+      e1->setField(field, items1.join(QString::fromLatin1("; ")));
+      ret = true;
     }
   }
-  return ret1 || ret2;
+  return ret;
 }
 
 long Collection::getID() {
