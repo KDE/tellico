@@ -71,10 +71,16 @@ bool TellicoXMLExporter::exec() {
 }
 
 QDomDocument TellicoXMLExporter::exportXML() const {
+  // don't be hard on people with older versions. The only difference with DTD 10 was adding
+  // a board game collection, so use 9 still unless it's a board game
+  int exportVersion = (XML::syntaxVersion == 10 && collection()->type() != Data::Collection::BoardGame)
+                    ? 9
+                    : XML::syntaxVersion;
+
   QDomImplementation impl;
   QDomDocumentType doctype = impl.createDocumentType(QString::fromLatin1("tellico"),
-                                                     XML::pubTellico,
-                                                     XML::dtdTellico);
+                                                     XML::pubTellico(exportVersion),
+                                                     XML::dtdTellico(exportVersion));
   //default namespace
   const QString& ns = XML::nsTellico;
 
@@ -94,7 +100,7 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   // createDocument creates a root node, insert the processing instruction before it
   dom.insertBefore(dom.createProcessingInstruction(QString::fromLatin1("xml"), encodeStr), root);
 
-  root.setAttribute(QString::fromLatin1("syntaxVersion"), XML::syntaxVersion);
+  root.setAttribute(QString::fromLatin1("syntaxVersion"), exportVersion);
 
   exportCollectionXML(dom, root, options() & Export::ExportFormatted);
 
@@ -102,6 +108,10 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   m_images.clear();
 
   return dom;
+}
+
+QString TellicoXMLExporter::exportXMLString() const {
+  return exportXML().toString();
 }
 
 void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& parent_, bool format_) const {
@@ -344,6 +354,9 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     imgElem.setAttribute(QString::fromLatin1("id"),     img.id());
     imgElem.setAttribute(QString::fromLatin1("width"),  img.width());
     imgElem.setAttribute(QString::fromLatin1("height"), img.height());
+    if(img.linkOnly()) {
+      imgElem.setAttribute(QString::fromLatin1("link"), QString::fromLatin1("true"));
+    }
     QCString imgText = KCodecs::base64Encode(img.byteArray());
     imgElem.appendChild(dom_.createTextNode(QString::fromLatin1(imgText)));
   } else {
@@ -355,6 +368,9 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     imgElem.setAttribute(QString::fromLatin1("id"),     info.id);
     imgElem.setAttribute(QString::fromLatin1("width"),  info.width);
     imgElem.setAttribute(QString::fromLatin1("height"), info.height);
+    if(info.linkOnly) {
+      imgElem.setAttribute(QString::fromLatin1("link"), QString::fromLatin1("true"));
+    }
   }
   parent_.appendChild(imgElem);
 }
@@ -473,15 +489,15 @@ QWidget* TellicoXMLExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 void TellicoXMLExporter::readOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_includeImages = config_->readBoolEntry("Include Images", m_includeImages);
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_includeImages = group.readBoolEntry("Include Images", m_includeImages);
 }
 
 void TellicoXMLExporter::saveOptions(KConfig* config_) {
   m_includeImages = m_checkIncludeImages->isChecked();
 
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  config_->writeEntry("Include Images", m_includeImages);
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  group.writeEntry("Include Images", m_includeImages);
 }
 
 #include "tellicoxmlexporter.moc"

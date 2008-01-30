@@ -11,6 +11,9 @@
 /* Define to 1 if using `alloca.c'. */
 #undef C_ALLOCA
 
+/* Define to 1 if webcam support is enabled */
+#undef ENABLE_WEBCAM
+
 /* Define to 1 if you have `alloca', as a function or macro. */
 #undef HAVE_ALLOCA
 
@@ -35,6 +38,9 @@
 
 /* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
 #undef HAVE_DOPRNT
+
+/* Define to 1 if exempi is available */
+#undef HAVE_EXEMPI
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
@@ -65,6 +71,9 @@
 
 /* Define if your system needs _NSGetEnviron to set up the environment */
 #undef HAVE_NSGETENVIRON
+
+/* Define to 1 if poppler is available */
+#undef HAVE_POPPLER
 
 /* Define if you have res_init */
 #undef HAVE_RES_INIT

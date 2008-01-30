@@ -124,6 +124,7 @@ void Z3950Connection::run() {
   }
 
   ZOOM_query query = ZOOM_query_create();
+  myLog() << "Z3950Connection::run() - pqn = " << toCString(m_pqn) << endl;
   int errcode = ZOOM_query_prefix(query, toCString(m_pqn));
   if(errcode != 0) {
     myDebug() << "Z3950Connection::run() - query error: " << m_pqn << endl;
@@ -182,7 +183,7 @@ void Z3950Connection::run() {
 
   QString newSyntax = m_syntax;
   if(numResults > 0) {
-    myLog() << "Z3950Connection::run() - current syntax is " << newSyntax << " (" << numResults << " results)" << endl;
+    myLog() << "Z3950Connection::run() - current syntax is " << m_syntax << " (" << numResults << " results)" << endl;
     // so now we know that results exist, might have to check syntax
     int len;
     ZOOM_record rec = ZOOM_resultset_record(resultSet, 0);
@@ -273,12 +274,11 @@ void Z3950Connection::run() {
   const size_t realLimit = QMIN(numResults, m_limit);
 
   for(size_t i = m_start; i < realLimit && !m_aborted; ++i) {
+    myLog() << "Z3950Connection::run() - grabbing index " << i << endl;
     ZOOM_record rec = ZOOM_resultset_record(resultSet, i);
     if(!rec) {
-      myDebug() << "Z3950Connection::process() - no record returned for index " << i << endl;
+      myDebug() << "Z3950Connection::run() - no record returned for index " << i << endl;
       continue;
-    } else {
-      myLog() << "Z3950Connection::run() - grabbing index " << i << endl;
     }
     int len;
     QString data;
@@ -416,8 +416,8 @@ QCString Z3950Connection::iconvRun(const QCString& text_, const QString& fromCha
   size_t inlen = text_.length();
 
   size_t outlen = 2 * inlen;  // this is enough, right?
-  char result0[outlen];
-  char* result = result0;
+  QMemArray<char> result0(outlen);
+  char* result = result0.data();
 
   int r = yaz_iconv(cd, const_cast<char**>(&input), &inlen, &result, &outlen);
   if(r <= 0) {

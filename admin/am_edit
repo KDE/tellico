@@ -1560,7 +1560,7 @@ sub tag_ICON()
                'hi64' => 'hicolor/64x64',
                'hi128' => 'hicolor/128x128',
                'hisc' => 'hicolor/scalable',
- 	       'cr16' => 'crystalsvg/16x16',
+               'cr16' => 'crystalsvg/16x16',
                'cr22' => 'crystalsvg/22x22',
                'cr32' => 'crystalsvg/32x32',
                'cr48' => 'crystalsvg/48x48',
@@ -1577,7 +1577,9 @@ sub tag_ICON()
             }
             
             my $dir = $dir_hash{$prefix} . "/" . $type_hash{$type};
-            if ($newfile =~ /-[^\.]/) {
+# the mimetype icons need to be called application-x-tellico so
+# don't create new directories for mimetypes
+            if ($newfile =~ /-[^\.]/ && $type ne 'mime') {
                 my $tmp = $newfile;
                 $tmp =~ s/^([^-]+)-.*$/$1/;
                 $dir = $dir . "/" . $tmp;

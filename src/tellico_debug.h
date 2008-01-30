@@ -22,9 +22,19 @@
 // std::clock_t
 #include <ctime>
 
+# if defined __cplusplus ? __GNUC_PREREQ (2, 6) : __GNUC_PREREQ (2, 4)
+#   define MY_FUNCTION  __PRETTY_FUNCTION__
+# else
+#  if defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L
+#   define MY_FUNCTION  __func__
+#  else
+#   define MY_FUNCTION  __FILE__ ":" __LINE__
+#  endif
+# endif
+
 // some logging
 #ifndef NDEBUG
-//#define TELLICO_LOG
+#define TELLICO_LOG
 #endif
 
 #ifndef NDEBUG
@@ -87,14 +97,14 @@ public:
 
 private :
   std::clock_t m_start;
-  QCString m_label;
+  const char* m_label;
 };
+
+}
 
 #define myDebug() Debug::debug()
 #define myWarning() Debug::warning()
-
 #define myLog() Debug::log()
-#define LOG_FUNC Debug::log() << k_funcinfo << endl;
 
 /// Standard function announcer
 #define DEBUG_FUNC_INFO myDebug() << k_funcinfo << endl;
@@ -103,8 +113,29 @@ private :
 #define DEBUG_LINE_INFO myDebug() << k_funcinfo << "Line: " << __LINE__ << endl;
 
 /// Convenience macro for making a standard Debug::Block
-#define DEBUG_BLOCK Debug::Block uniquelyNamedStackAllocatedStandardBlock( __PRETTY_FUNCTION__ );
+#define DEBUG_BLOCK Debug::Block uniquelyNamedStackAllocatedStandardBlock( __func__ );
 
-}
+#ifdef TELLICO_LOG
+// see http://www.gnome.org/~federico/news-2006-03.html#timeline-tools
+#define MARK do { \
+    char str[128]; \
+    ::snprintf(str, 128, "MARK: %s: %s (%d)", className(), MY_FUNCTION, __LINE__); \
+    ::access (str, F_OK); \
+  } while(false)
+#define MARK_MSG(s) do { \
+    char str[128]; \
+    ::snprintf(str, 128, "MARK: %s: %s (%d)", className(), s, __LINE__); \
+    ::access (str, F_OK); \
+  } while(false)
+#define MARK_LINE do { \
+    char str[128]; \
+    ::snprintf(str, 128, "MARK: tellico: %s (%d)", __FILE__, __LINE__); \
+    ::access (str, F_OK); \
+  } while(false)
+#else
+#define MARK
+#define MARK_MSG(s)
+#define MARK_LINE
+#endif
 
 #endif

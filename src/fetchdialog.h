@@ -32,6 +32,10 @@ namespace Tellico {
   }
 }
 
+namespace barcodeRecognition {
+  class barcodeRecognitionThread;
+}
+
 class KComboBox;
 class KLineEdit;
 class KPushButton;
@@ -40,6 +44,7 @@ class KTextEdit;
 class QProgressBar;
 class QTimer;
 class QCheckBox;
+
 
 namespace Tellico {
 
@@ -83,11 +88,15 @@ private slots:
   void slotLoadISBNList();
   void slotUPC2ISBN();
 
+  void slotBarcodeRecognized(QString);
+  void slotBarcodeGotImage(QImage&);
 private:
   void startProgress();
   void stopProgress();
   void setStatus(const QString& text);
   void adjustColumnWidth();
+
+  void customEvent( QCustomEvent *e );
 
   class SearchResultItem;
 
@@ -105,6 +114,7 @@ private:
   QProgressBar* m_progress;
   QTimer* m_timer;
   QGuardedPtr<KTextEdit> m_isbnTextEdit;
+  QLabel *m_barcodePreview;
 
   bool m_started;
   int m_resultCount;
@@ -114,6 +124,8 @@ private:
   QMap<int, Data::EntryPtr> m_entries;
   QPtrList<Fetch::SearchResult> m_results;
   int m_collType;
+
+  barcodeRecognition::barcodeRecognitionThread *m_barcodeRecognitionThread;
 };
 
 } //end namespace

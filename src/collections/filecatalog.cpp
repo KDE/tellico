@@ -22,8 +22,7 @@ namespace {
 using Tellico::Data::FileCatalog;
 
 FileCatalog::FileCatalog(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Files")) {
-  setTitle(title_.isNull() ? i18n("My Files") : title_);
+   : Collection(title_.isEmpty() ? i18n("My Files") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }

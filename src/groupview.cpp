@@ -24,10 +24,10 @@
 #include "filter.h"
 #include "tellico_kernel.h"
 #include "listviewcomparison.h"
+#include "../tellico_debug.h"
 
 #include <kpopupmenu.h>
 #include <klocale.h>
-#include <kdebug.h>
 #include <kiconloader.h>
 #include <kaction.h>
 
@@ -146,7 +146,7 @@ void GroupView::slotModifyGroups(Data::CollPtr coll_, PtrVector<Data::EntryGroup
 
 // don't 'shadow' QListView::setSelected
 void GroupView::setEntrySelected(Data::EntryPtr entry_) {
-//  myDebug() << "GroupView::setEntrySelected()" << endl;
+//  myDebug() << "GroupView::slotSetSelected()" << endl;
   // if entry_ is null pointer, set no selected
   if(!entry_) {
     // don't move this one outside the block since it calls setCurrentItem(0)
@@ -392,7 +392,7 @@ void GroupView::populateCollection() {
 void GroupView::slotFilterGroup() {
   const GUI::ListViewItemList& items = selectedItems();
   GUI::ListViewItem* item = items.getFirst();
-  // if no children, can't get collection pointer
+  // only works for entry groups
   if(!item || !item->isEntryGroupItem()) {
     return;
   }
@@ -400,7 +400,7 @@ void GroupView::slotFilterGroup() {
   FilterPtr filter = new Filter(Filter::MatchAny);
 
   for(GUI::ListViewItemListIt it(items); it.current(); ++it) {
-    if(it.current()->childCount() == 0) { //ignore empty items
+    if(static_cast<EntryGroupItem*>(it.current())->count() == 0) { //ignore empty items
       continue;
     }
     // need to check for people group
@@ -480,11 +480,6 @@ QString GroupView::groupTitle() {
     }
   }
   return title;
-}
-
-void GroupView::sort() {
-//  DEBUG_BLOCK;
-  GUI::ListView::sort();
 }
 
 void GroupView::resetComparisons() {

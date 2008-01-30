@@ -47,14 +47,15 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   // pubmed can search title, person, and keyword
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == Raw; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == Raw || k == PubmedID; }
   virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Entrez; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(KConfig* config, const QString& group);
+  virtual void readConfigHook(const KConfigGroup& config);
+  virtual void updateEntry(Data::EntryPtr entry);
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   static StringMap customFields();
@@ -62,7 +63,7 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     ConfigWidget(QWidget* parent_, const EntrezFetcher* fetcher=0);
-    virtual void saveConfig(KConfig*);
+    virtual void saveConfig(KConfigGroup& config);
     virtual QString preferredName() const;
   };
   friend class ConfigWidget;

@@ -115,13 +115,14 @@ public:
 
   static QString isbn10(QString isbn13);
   static QString isbn13(QString isbn10);
+  static QString cleanValue(QString isbn);
 
 private:
   static struct isbn_band {
     unsigned long MaxValue;
-    unsigned First;
-    unsigned Mid;
-    unsigned Last;
+    unsigned int First;
+    unsigned int Mid;
+    unsigned int Last;
   } bands[];
 
   QValidator::State validate10(QString& input, int& pos) const;

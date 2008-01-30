@@ -14,11 +14,14 @@
 #ifndef RISIMPORTER_H
 #define RISIMPORTER_H
 
-#include "textimporter.h"
+#include "importer.h"
 #include "../datavectors.h"
 
 #include <qstring.h>
 #include <qmap.h>
+
+template<class type>
+class QDict;
 
 namespace Tellico {
   namespace Data {
@@ -29,13 +32,13 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class RISImporter : public TextImporter {
+class RISImporter : public Importer {
 Q_OBJECT
 
 public:
   /**
    */
-  RISImporter(const KURL& url);
+  RISImporter(const KURL::List& urls);
 
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
@@ -54,9 +57,10 @@ private:
   static void initTypeMap();
 
   Data::FieldPtr fieldByTag(const QString& tag);
+  void readURL(const KURL& url, int n, const QDict<Data::Field>& risFields);
 
   Data::CollPtr m_coll;
-  bool m_cancelled : 1;
+  bool m_cancelled;
 
   static QMap<QString, QString>* s_tagMap;
   static QMap<QString, QString>* s_typeMap;

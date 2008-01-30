@@ -16,8 +16,8 @@
 
 using Tellico::Import::TextImporter;
 
-TextImporter::TextImporter(const KURL& url_)
-    : Import::Importer(url_.isValid() ? FileHandler::readTextFile(url_) : QString()) {
+TextImporter::TextImporter(const KURL& url_, bool useUTF8_)
+    : Import::Importer(url_.isValid() ? FileHandler::readTextFile(url_, false, useUTF8_) : QString()) {
 }
 
 TextImporter::TextImporter(const QString& text_) : Import::Importer(text_) {

@@ -61,8 +61,8 @@ need them for translation coordination !
 Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
-<date>28/03/2006</date>
-<releaseinfo>1.1</releaseinfo>
+<date>26/01/2008</date>
+<releaseinfo>1.3</releaseinfo>
 
 <title>Le guide &appname;</title>
 
@@ -94,6 +94,8 @@ Do NOT change these in the translation. -->
 <year>2004</year>
 <year>2005</year>
 <year>2006</year>
+<year>2007</year>
+<year>2008</year>
 <holder>&robby;</holder>
 </copyright>
 
@@ -147,6 +149,7 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword>KDE</keyword>
 <keyword>tellico</keyword>
 <keyword>livre</keyword>
+<keyword>bibliographie</keyword>
 <keyword>film</keyword>
 <keyword>collection</keyword>
 <keyword>base de données</keyword>
@@ -180,9 +183,9 @@ revision history. (see installation appendix comment) -->
 &appname; est un programme pour gérer des collections. Au départ simple
 gestionnaire de collections de livres, il a été étendu pour intégrer des
 modèles de collections de bibliographies, bandes dessinées, vidéos,
-musique, monnaies, timbres, cartes, jeux vidéo, vins et fichiers.
-De plus, des collections personnalisées peuvent être créées pour tout ce
-qui peut être collectionné.
+musique, monnaies, timbres, cartes, jeux vidéo, vins, jeux de plateau et
+fichiers. De plus, des collections personnalisées peuvent être créées
+pour tout ce qui peut être collectionné.
 </para>
 
 <sect2 id="what-tellico-is">
@@ -240,9 +243,9 @@ Dans &appname;, le document est une collection. Une seule collection peut
 exister dans chaque fichier &appname;. Une collection contient un nombre non
 déterminé de <link linkend="fields">champs</link> et
 d'<link linkend="entries">entrées</link>.
-&appname; peut gérer onze types de collections génériques par défaut : livres,
+&appname; peut gérer douze types de collections génériques par défaut : livres,
 entrées bibliographiques, bandes dessinées, vidéos, musique, cartes, pièces de
-monnaie, timbres, jeux vidéos, vins et listes de fichiers.
+monnaie, timbres, jeux vidéos, vins, jeux de plateau et listes de fichiers.
 En outre, un type de collection générique vide existe pour tout autre type
 d'objet collectionnable.
 </para>
@@ -272,9 +275,11 @@ conservée en mémoire, un trop grand nombre d'entrées ralentirait l'applicatio
 <para>
 &appname; a été testé avec une collection de 10.000 entrées, et la vitesse
 était satisfaisante. Cependant, si des images nombreuses ou volumineuses sont
-incluses dans la collection, le chargement et le traitement seront ralentis de façon importante. Les performances peuvent être améliorées en faisant en sorte
-que &appname; conserve les images le répertoire de données de Tellico plutôt
-que dans le fichier de données lui-même. Plus d'informations sont disponibles
+incluses dans la collection, le chargement et le traitement seront ralentis
+de façon importante. Les performances peuvent être améliorées en faisant en sorte
+que &appname; conserve les images séparées du fichier de données lui-même ; soit
+dans le répertoire de données de l'application, soit dans un répertoire situé
+relativement au fichier lui-même. Plus d'informations sont disponibles
 dans la section concernant la
 <link linkend="configuration">configuration</link>.
 </para>

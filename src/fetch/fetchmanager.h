@@ -65,6 +65,7 @@ public:
 
   // create fetcher for updating an entry
   FetcherVec createUpdateFetchers(int collType);
+  FetcherVec createUpdateFetchers(int collType, Type type);
   Fetcher::Ptr createUpdateFetcher(int collType, const QString& source);
 
   static QString typeName(Type type);
@@ -96,7 +97,6 @@ private:
   KeyMap m_keyMap;
   typedef QMap<Fetcher::Ptr, QString> ConfigMap;
   ConfigMap m_configMap;
-  typedef QMap<QString, QString> StringMap;
   StringMap m_scriptMap;
   ManagerMessage* m_messager;
   uint m_count;

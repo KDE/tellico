@@ -25,8 +25,7 @@ namespace {
 using Tellico::Data::VideoCollection;
 
 VideoCollection::VideoCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Videos")) {
-  setTitle(title_.isNull() ? i18n("My Videos") : title_);
+   : Collection(title_.isEmpty() ? i18n("My Videos") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }

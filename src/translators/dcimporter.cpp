@@ -14,6 +14,7 @@
 #include "dcimporter.h"
 #include "../collections/bookcollection.h"
 #include "tellico_xml.h"
+#include "../tellico_debug.h"
 
 using Tellico::Import::DCImporter;
 

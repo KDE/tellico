@@ -69,6 +69,8 @@ public slots:
   void slotCancel();
 
 private:
+  static bool versionConversion(uint from, uint to);
+
   void loadXMLData(const QByteArray& data, bool loadImages);
   void loadZipData();
 

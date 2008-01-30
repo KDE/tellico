@@ -48,7 +48,7 @@ public:
    *
    * @param url The URL
    */
-  void setURL(const KURL& url) { m_url = url; }
+  void setURL(const KURL& url);
   /**
    * Checks the modified flag, which indicates if the document has changed since the
    * last save.
@@ -210,8 +210,9 @@ private:
 
   /**
    * Writes all images in the current collection to the cache directory
+   * if cacheDir = LocalDir, then url will be used and must not be empty
    */
-  void writeAllImages(int cacheDir=0/*ImageFactory::TempDir*/);
+  void writeAllImages(int cacheDir, const KURL& url=KURL());
   bool pruneImages();
 
   // make all constructors private

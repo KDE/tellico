@@ -18,8 +18,7 @@
 #include "datavectors.h"
 
 #include <kdialogbase.h>
-
-class KURL;
+#include <kurl.h>
 
 class QRadioButton;
 class QCheckBox;
@@ -38,7 +37,7 @@ class ImportDialog : public KDialogBase {
 Q_OBJECT
 
 public:
-  ImportDialog(Import::Format format, const KURL& url, QWidget* parent, const char* name);
+  ImportDialog(Import::Format format, const KURL::List& urls, QWidget* parent, const char* name);
   ~ImportDialog();
 
   Data::CollPtr collection();
@@ -50,8 +49,11 @@ public:
   static QString startDir(Import::Format format);
   static Import::FormatMap formatMap();
 
-  static Import::Importer* importer(Import::Format format, const KURL& url);
+  static Import::Importer* importer(Import::Format format, const KURL::List& urls);
   static Data::CollPtr importURL(Import::Format format, const KURL& url);
+
+protected:
+  virtual void slotOk();
 
 private slots:
   void slotUpdateAction();

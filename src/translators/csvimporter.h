@@ -42,9 +42,12 @@ class CSVImporter : public TextImporter {
 Q_OBJECT
 
 public:
+  class Parser;
+
   /**
    */
   CSVImporter(const KURL& url);
+  ~CSVImporter();
 
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
@@ -54,12 +57,14 @@ public:
    */
   virtual QWidget* widget(QWidget* parent, const char* name=0);
 
+  virtual bool validImport() const;
+
 public slots:
   void slotActionChanged(int action);
   void slotCancel();
 
 private slots:
-  void slotTypeChanged(const QString& name);
+  void slotTypeChanged();
   void slotFieldChanged(int idx);
   void slotFirstRowHeader(bool b);
   void slotDelimiter();
@@ -69,15 +74,14 @@ private slots:
   void slotSetColumnTitle();
 
 private:
-  QStringList splitLine(const QString& line);
   void fillTable();
   void updateHeader(bool force);
 
   Data::CollPtr m_coll;
   Data::CollPtr m_existingCollection; // used to grab fields from current collection in window
-  bool m_firstRowHeader : 1;
+  bool m_firstRowHeader;
   QString m_delimiter;
-  bool m_cancelled : 1;
+  bool m_cancelled;
 
   QWidget* m_widget;
   GUI::CollectionTypeCombo* m_comboColl;
@@ -92,8 +96,10 @@ private:
   KIntSpinBox* m_colSpinBox;
   KComboBox* m_comboField;
   KPushButton* m_setColumnBtn;
+  bool m_hasAssignedFields;
 
-  static const QChar s_quote;
+  friend class Parser;
+  Parser* m_parser;
 };
 
   } // end namespace

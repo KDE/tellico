@@ -25,6 +25,7 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 #include "../isbnvalidator.h"
+#include "../gui/combobox.h"
 
 #include <klocale.h>
 #include <kio/job.h>
@@ -111,21 +112,20 @@ bool AmazonFetcher::canFetch(int type) const {
          || type == Data::Collection::Game;
 }
 
-void AmazonFetcher::readConfigHook(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("AccessKey");
+void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
+  QString s = config_.readEntry("AccessKey");
   if(!s.isEmpty()) {
     m_access = s;
   }
-  s = config_->readEntry("AssocToken");
+  s = config_.readEntry("AssocToken");
   if(!s.isEmpty()) {
     m_assoc = s;
   }
-  int imageSize = config_->readNumEntry("Image Size", -1);
+  int imageSize = config_.readNumEntry("Image Size", -1);
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
   }
-  m_fields = config_->readListEntry("Custom Fields", QString::fromLatin1("keyword"));
+  m_fields = config_.readListEntry("Custom Fields", QString::fromLatin1("keyword"));
 }
 
 void AmazonFetcher::search(FetchKey key_, const QString& value_) {
@@ -159,7 +159,7 @@ void AmazonFetcher::doSearch() {
   u.addQueryItem(QString::fromLatin1("Operation"),      QString::fromLatin1("ItemSearch"));
   u.addQueryItem(QString::fromLatin1("ResponseGroup"),  QString::fromLatin1("Large"));
   u.addQueryItem(QString::fromLatin1("ItemPage"),       QString::number(m_page));
-  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2007-02-22"));
+  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2007-10-29"));
 
   const int type = Kernel::self()->collectionType();
   switch(type) {
@@ -167,6 +167,7 @@ void AmazonFetcher::doSearch() {
     case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
       u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Books"));
+      u.addQueryItem(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
       break;
 
     case Data::Collection::Album:
@@ -174,10 +175,8 @@ void AmazonFetcher::doSearch() {
       break;
 
     case Data::Collection::Video:
-      // Video is available in all locales except France right now
-      // so all they get is DVD, no VHS
-      u.addQueryItem(QString::fromLatin1("SearchIndex"),
-                     m_site == FR ? QString::fromLatin1("DVD") : QString::fromLatin1("Video"));
+      u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Video"));
+      u.addQueryItem(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
       break;
 
     case Data::Collection::Game:
@@ -358,7 +357,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
 
 #if 0
   kdWarning() << "Remove debug from amazonfetcher.cpp" << endl;
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  QFile f(QString::fromLatin1("/tmp/test%1.xml").arg(m_page));
   if(f.open(IO_WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
@@ -394,6 +393,12 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
         e = nodes.item(i).toElement().namedItem(QString::fromLatin1("Code")).toElement();
         if(!e.isNull() && e.text() == Latin1Literal("AWS.ECommerceService.NoExactMatches")) {
           // no exact match, not a real error, so skip
+          continue;
+        }
+        // for some reason, Amazon will return an error simply when a valid ISBN is not found
+        // I really want to ignore that, so check the IsValid element in the Request element
+        QDomNode isValidNode = n.parentNode().namedItem(QString::fromLatin1("IsValid"));
+        if(m_key == ISBN && isValidNode.toElement().text().lower() == Latin1Literal("true")) {
           continue;
         }
         e = nodes.item(i).toElement().namedItem(QString::fromLatin1("Message")).toElement();
@@ -450,6 +455,17 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
     if(!m_started) {
       // might get aborted
       break;
+    }
+
+    // special case book author
+    // amazon is really bad about not putting spaces after periods
+    if(coll->type() == Data::Collection::Book) {
+      QRegExp rx(QString::fromLatin1("\\.([^\\s])"));
+      QStringList values = entry->fields(QString::fromLatin1("author"), false);
+      for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
+        (*it).replace(rx, QString::fromLatin1(". \\1"));
+      }
+      entry->setField(QString::fromLatin1("author"), values.join(QString::fromLatin1("; ")));
     }
 
     // UK puts the year in the title for some reason
@@ -525,6 +541,7 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
       entry->setField(QString::fromLatin1("comments"), comments);
     }
 */
+//    myDebug() << "AmazonFetcher::slotComplete() - " << entry->title() << endl;
     SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
@@ -775,6 +792,7 @@ void AmazonFetcher::updateEntry(Data::EntryPtr entry_) {
 }
 
 void AmazonFetcher::parseTitle(Data::EntryPtr entry, int collType) {
+  Q_UNUSED(collType);
   // assume that everything in brackets or parentheses is extra
   QRegExp rx(QString::fromLatin1("[\\(\\[](.*)[\\)\\]]"));
   rx.setMinimal(true);
@@ -829,14 +847,13 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   int row = -1;
   QLabel* label = new QLabel(i18n("Co&untry: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_siteCombo = new KComboBox(optionsWidget());
-  // these countries MUST be in the same order as the enum
-  m_siteCombo->insertItem(i18n("United States"));
-  m_siteCombo->insertItem(i18n("United Kingdom"));
-  m_siteCombo->insertItem(i18n("Germany"));
-  m_siteCombo->insertItem(i18n("Japan"));
-  m_siteCombo->insertItem(i18n("France"));
-  m_siteCombo->insertItem(i18n("Canada"));
+  m_siteCombo = new GUI::ComboBox(optionsWidget());
+  m_siteCombo->insertItem(i18n("United States"), US);
+  m_siteCombo->insertItem(i18n("United Kingdom"), UK);
+  m_siteCombo->insertItem(i18n("Germany"), DE);
+  m_siteCombo->insertItem(i18n("Japan"), JP);
+  m_siteCombo->insertItem(i18n("France"), FR);
+  m_siteCombo->insertItem(i18n("Canada"), CA);
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSiteChanged()));
   l->addWidget(m_siteCombo, row, 1);
@@ -848,12 +865,11 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   label = new QLabel(i18n("&Image size: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_imageCombo = new KComboBox(optionsWidget());
-  // items must match image enum
-  m_imageCombo->insertItem(i18n("Small Image"));
-  m_imageCombo->insertItem(i18n("Medium Image"));
-  m_imageCombo->insertItem(i18n("Large Image"));
-  m_imageCombo->insertItem(i18n("No Image"));
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->insertItem(i18n("Small Image"), SmallImage);
+  m_imageCombo->insertItem(i18n("Medium Image"), MediumImage);
+  m_imageCombo->insertItem(i18n("Large Image"), LargeImage);
+  m_imageCombo->insertItem(i18n("No Image"), NoImage);
   connect(m_imageCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   l->addWidget(m_imageCombo, row, 1);
   w = i18n("The cover image may be downloaded as well. However, too many large images in the "
@@ -876,12 +892,12 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   l->setRowStretch(++row, 10);
 
   if(fetcher_) {
-    m_siteCombo->setCurrentItem(fetcher_->m_site);
+    m_siteCombo->setCurrentData(fetcher_->m_site);
     m_assocEdit->setText(fetcher_->m_assoc);
-    m_imageCombo->setCurrentItem(fetcher_->m_imageSize);
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   } else { // defaults
     m_assocEdit->setText(QString::fromLatin1(AMAZON_ASSOC_TOKEN));
-    m_imageCombo->setCurrentItem(1); // medium image
+    m_imageCombo->setCurrentData(MediumImage);
   }
 
   addFieldsWidget(AmazonFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
@@ -889,22 +905,22 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   KAcceleratorManager::manage(optionsWidget());
 }
 
-void AmazonFetcher::ConfigWidget::saveConfig(KConfig* config_) {
-  int n = m_siteCombo->currentItem();
-  config_->writeEntry("Site", n);
+void AmazonFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+  int n = m_siteCombo->currentData().toInt();
+  config_.writeEntry("Site", n);
   QString s = m_assocEdit->text().stripWhiteSpace();
   if(!s.isEmpty()) {
-    config_->writeEntry("AssocToken", s);
+    config_.writeEntry("AssocToken", s);
   }
-  n = m_imageCombo->currentItem();
-  config_->writeEntry("Image Size", n);
+  n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 
   saveFieldsConfig(config_);
   slotSetModified(false);
 }
 
 QString AmazonFetcher::ConfigWidget::preferredName() const {
-  return AmazonFetcher::siteData(m_siteCombo->currentItem()).title;
+  return AmazonFetcher::siteData(m_siteCombo->currentData().toInt()).title;
 }
 
 void AmazonFetcher::ConfigWidget::slotSiteChanged() {

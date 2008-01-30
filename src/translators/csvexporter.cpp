@@ -165,9 +165,9 @@ QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 void CSVExporter::readOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_includeTitles = config_->readBoolEntry("Include Titles", m_includeTitles);
-  m_delimiter = config_->readEntry("Delimiter", m_delimiter);
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_includeTitles = group.readBoolEntry("Include Titles", m_includeTitles);
+  m_delimiter = group.readEntry("Delimiter", m_delimiter);
 }
 
 void CSVExporter::saveOptions(KConfig* config_) {
@@ -182,9 +182,9 @@ void CSVExporter::saveOptions(KConfig* config_) {
     m_delimiter = m_editOther->text();
   }
 
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  config_->writeEntry("Include Titles", m_includeTitles);
-  config_->writeEntry("Delimiter", m_delimiter);
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  group.writeEntry("Include Titles", m_includeTitles);
+  group.writeEntry("Delimiter", m_delimiter);
 }
 
 #include "csvexporter.moc"

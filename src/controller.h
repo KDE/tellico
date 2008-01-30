@@ -127,13 +127,15 @@ public slots:
    * Updates the widgets when entries are selected.
    *
    * param widget A pointer to the widget where the entries were selected
-   * @param list The list of selected entries
+   * @param widget The widget doing the selecting, if NULL, then use previous
+   * @param entries The list of selected entries
    */
   void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryVec& entries);
   void slotUpdateCurrent(const Tellico::Data::EntryVec& entries);
   void slotCopySelectedEntries();
   void slotUpdateSelectedEntries(const QString& source);
   void slotDeleteSelectedEntries();
+  void slotMergeSelectedEntries();
   void slotUpdateFilter(Tellico::FilterPtr filter);
   void slotCheckOut();
   void slotCheckIn();
@@ -166,6 +168,7 @@ private:
    */
   Data::EntryVec m_selectedEntries;
   Data::EntryVec m_currentEntries;
+  QWidget* m_widgetWithSelection;
 };
 
 } // end namespace

@@ -15,6 +15,7 @@
  ***************************************************************************/
 
 #include "freedbimporter.h"
+#include "../tellico_debug.h"
 
 using Tellico::Import::FreeDBImporter;
 
@@ -228,7 +229,7 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
 
 inline
 ushort from2Byte(uchar* d) {
-  return (d[0] << 8 & 0xFF00 | d[1] & 0xFF);
+  return (d[0] << 8 & 0xFF00) | (d[1] & 0xFF);
 }
 
 #define SIZE 61

@@ -16,6 +16,7 @@
 #include "../translators/bibtexhandler.h"
 #include "../tellico_kernel.h"
 #include "../core/tellico_config.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 

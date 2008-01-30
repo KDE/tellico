@@ -19,6 +19,7 @@
 #include "../filehandler.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -63,13 +64,12 @@ bool EntrezFetcher::canFetch(int type) const {
   return type == Data::Collection::Bibtex;
 }
 
-void EntrezFetcher::readConfigHook(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Database", QString::fromLatin1("pubmed")); // default to pubmed
+void EntrezFetcher::readConfigHook(const KConfigGroup& config_) {
+  QString s = config_.readEntry("Database", QString::fromLatin1(ENTREZ_DEFAULT_DATABASE)); // default to pubmed
   if(!s.isEmpty()) {
     m_dbname = s;
   }
-  m_fields = config_->readListEntry("Custom Fields");
+  m_fields = config_.readListEntry("Custom Fields");
 }
 
 void EntrezFetcher::search(FetchKey key_, const QString& value_) {
@@ -78,7 +78,7 @@ void EntrezFetcher::search(FetchKey key_, const QString& value_) {
   m_total = -1;
 
 // only search if current collection is a bibliography
-  if(Kernel::self()->collectionType() != Data::Collection::Bibtex) {
+  if(!canFetch(Kernel::self()->collectionType())) {
     myDebug() << "EntrezFetcher::search() - collection type mismatch, stopping" << endl;
     stop();
     return;
@@ -110,6 +110,10 @@ void EntrezFetcher::search(FetchKey key_, const QString& value_) {
     case Keyword:
       // for Tellico Keyword searches basically mean search for any field matching
 //      u.addQueryItem(QString::fromLatin1("field"), QString::fromLatin1("word"));
+      break;
+
+    case PubmedID:
+      u.addQueryItem(QString::fromLatin1("field"), QString::fromLatin1("pmid"));
       break;
 
     case Raw:
@@ -294,7 +298,7 @@ void EntrezFetcher::summaryResults() {
         }
         authors = list.join(QString::fromLatin1("; "));
       }
-      if(!title.isNull() && !pubdate.isNull() && !authors.isNull()) {
+      if(!title.isEmpty() && !pubdate.isEmpty() && !authors.isEmpty()) {
         break; // done now
       }
     }
@@ -368,13 +372,13 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
     myDebug() << "EntrezFetcher::fetchEntry() - collection has multiple entries, taking first one" << endl;
   }
 
-  Data::EntryPtr e = coll->entries()[0];
+  Data::EntryPtr e = coll->entries().front();
 
   // try to get a link, but only if necessary
   if(m_fields.contains(QString::fromLatin1("url"))) {
     KURL link(QString::fromLatin1(ENTREZ_BASE_URL));
     link.addPath(QString::fromLatin1(ENTREZ_LINK_CGI));
-    link.addQueryItem(QString::fromLatin1("tool"),  QString::fromLatin1("Tellico"));
+    link.addQueryItem(QString::fromLatin1("tool"),   QString::fromLatin1("Tellico"));
     link.addQueryItem(QString::fromLatin1("cmd"),    QString::fromLatin1("llinks"));
     link.addQueryItem(QString::fromLatin1("db"),     m_dbname);
     link.addQueryItem(QString::fromLatin1("dbfrom"), m_dbname);
@@ -434,6 +438,24 @@ void EntrezFetcher::initXSLTHandler() {
   }
 }
 
+void EntrezFetcher::updateEntry(Data::EntryPtr entry_) {
+//  myDebug() << "EntrezFetcher::updateEntry()" << endl;
+  QString s = entry_->field(QString::fromLatin1("pmid"));
+  if(!s.isEmpty()) {
+    search(PubmedID, s);
+    return;
+  }
+
+  s = entry_->field(QString::fromLatin1("title"));
+  if(!s.isEmpty()) {
+    search(Title, s);
+    return;
+  }
+
+  myDebug() << "EntrezFetcher::updateEntry() - insufficient info to search" << endl;
+  emit signalDone(this); // always need to emit this if not continuing with the search
+}
+
 Tellico::Fetch::ConfigWidget* EntrezFetcher::configWidget(QWidget* parent_) const {
   return new EntrezFetcher::ConfigWidget(parent_, this);
 }
@@ -448,7 +470,7 @@ EntrezFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const EntrezFetcher*
   addFieldsWidget(EntrezFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 }
 
-void EntrezFetcher::ConfigWidget::saveConfig(KConfig* config_) {
+void EntrezFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   saveFieldsConfig(config_);
   slotSetModified(false);
 }

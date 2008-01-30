@@ -52,6 +52,7 @@ public:
    * @param entry The entry to show
    */
   void showEntry(Data::EntryPtr entry);
+  void showText(const QString& text);
 
   /**
    * Clear the widget and set Entry pointer to NULL
@@ -66,6 +67,9 @@ public:
   void setXSLTFile(const QString& file);
   void setXSLTOptions(const StyleOptions& options);
   void setUseGradientImages(bool b) { m_useGradientImages = b; }
+
+signals:
+  void signalAction(const KURL& url);
 
 public slots:
   /**
@@ -89,6 +93,7 @@ private:
   Data::EntryPtr m_entry;
   XSLTHandler* m_handler;
   QString m_xsltFile;
+  QString m_textToShow;
 
   // to run any clicked processes
   QGuardedPtr<KRun> m_run;

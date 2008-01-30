@@ -23,8 +23,7 @@ namespace {
 using Tellico::Data::CardCollection;
 
 CardCollection::CardCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Cards")) {
-  setTitle(title_.isNull() ? i18n("My Cards") : title_);
+   : Collection(title_.isEmpty() ? i18n("My Cards") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }

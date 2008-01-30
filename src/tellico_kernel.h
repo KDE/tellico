@@ -123,6 +123,9 @@ public:
   void renameCollection();
   const KCommandHistory* commandHistory() { return &m_commandHistory; }
 
+  int askAndMerge(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
+                  QString value1 = QString(), QString value2 = QString());
+
 private:
   static Kernel* s_self;
 

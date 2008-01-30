@@ -39,6 +39,9 @@ QString GCfilmsExporter::formatString() const {
 
 QString GCfilmsExporter::fileFilter() const {
   return i18n("*.gcf|GCfilms Data Files (*.gcf)") + QChar('\n') + i18n("*|All Files");
+#if 0
+  i18n("*.gcs|GCstar Data Files (*.gcs)")
+#endif
 }
 
 bool GCfilmsExporter::exec() {

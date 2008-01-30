@@ -22,6 +22,8 @@
 #include <qobject.h>
 #include <qstring.h>
 
+class KConfigGroup;
+
 namespace Tellico {
   namespace Fetch {
     class ConfigWidget;
@@ -47,7 +49,7 @@ public:
                                                    m_messager(0) {}
   /**
    */
-  virtual ~Fetcher() {}
+  virtual ~Fetcher();
 
   /**
    * Returns true if the fetcher might return entries from a certain collection type.
@@ -77,6 +79,8 @@ public:
   virtual void search(FetchKey key, const QString& value) = 0;
   virtual void continueSearch() {}
   virtual void updateEntry(Data::EntryPtr);
+  // mopst fetchers won't support this. it's particular useful for text fetchers
+  virtual void updateEntrySynchronous(Data::EntryPtr) {}
   /**
    * Returns true if the fetcher is currently searching.
    */
@@ -105,8 +109,7 @@ public:
   /**
    * Reads the config for the widget, given a config group.
    */
-  void readConfig(KConfig* config, const QString& group);
-  virtual void readConfigHook(KConfig* config, const QString& group) = 0;
+  void readConfig(const KConfigGroup& config, const QString& groupName);
   /**
    * Returns a widget for modifying the fetcher's config.
    */
@@ -123,7 +126,11 @@ protected:
   bool m_hasMoreResults : 1;
 
 private:
+  virtual void readConfigHook(const KConfigGroup&) = 0;
+  virtual void saveConfigHook(KConfigGroup&) {}
+
   MessageHandler* m_messager;
+  QString m_configGroup;
 };
 
 class SearchResult {

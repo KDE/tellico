@@ -47,6 +47,10 @@ int main(int argc, char* argv[]) {
                       0, "http://www.gerg.ca");
   aboutData.addCredit("Amarok", I18N_NOOP("Code examples and general inspiration"),
                       0, "http://amarok.kde.org");
+  aboutData.addCredit("Robert Gamble", I18N_NOOP("Author of libcsv library"),
+                      0, 0);
+  aboutData.addCredit("Valentin Lavrinenko", I18N_NOOP("Author of rtf2html library"),
+                      0, 0);
 
   KCmdLineArgs::init(argc, argv, &aboutData);
   KCmdLineArgs::addCmdLineOptions(options);

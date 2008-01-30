@@ -46,8 +46,9 @@ public:
 class ImageFactory {
 public:
   enum CacheDir {
-    TempDir=0, /* used as 0 in Document::slotWriteAllImages() */
-    DataDir
+    TempDir,
+    DataDir,
+    LocalDir
   };
 
   /**
@@ -71,7 +72,8 @@ public:
    * @param quiet If any error should not be reported.
    * @return The image id, empty if null
    */
-  static QString addImage(const KURL& url, bool quiet=false, const KURL& referrer = KURL());
+  static QString addImage(const KURL& url, bool quiet=false,
+                          const KURL& referrer = KURL(), bool linkOnly=false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
@@ -135,6 +137,10 @@ public:
   static void removeImage(const QString& id_, bool deleteImage);
   static StringSet imagesNotInCache();
 
+  static void setLocalDirectory(const KURL& url);
+  // local save directory
+  static QString localDir();
+
 private:
   /**
    * Add an image, reading it from a URL, which is the case when adding a new image from the
@@ -144,7 +150,8 @@ private:
    * @param quiet If any error should not be reported.
    * @return The image
    */
-  static const Data::Image& addImageImpl(const KURL& url, bool quiet=false, const KURL& referrer = KURL());
+  static const Data::Image& addImageImpl(const KURL& url, bool quiet=false,
+                                         const KURL& referrer = KURL(), bool linkOnly = false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
@@ -179,6 +186,7 @@ private:
   static StringSet s_imagesInTmpDir; // the id's of the images written to tmp directory
   static StringSet s_imagesToRelease;
   static KTempDir* s_tmpDir;
+  static QString s_localDir;
   static const Data::Image s_null;
 };
 

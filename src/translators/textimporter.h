@@ -33,7 +33,7 @@ public:
    *
    * @param url The file to be imported
    */
-  TextImporter(const KURL& url);
+  TextImporter(const KURL& url, bool useUTF8_=false);
   TextImporter(const QString& text);
 };
 

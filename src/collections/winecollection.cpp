@@ -23,8 +23,7 @@ namespace {
 using Tellico::Data::WineCollection;
 
 WineCollection::WineCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Wines")) {
-  setTitle(title_.isNull() ? i18n("My Wines") : title_);
+   : Collection(title_.isEmpty() ? i18n("My Wines") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }

@@ -56,11 +56,11 @@
 <xsl:variable name="langs-top" select="document('')/*/l:langs"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V9.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="9">
+ <tellico syntaxVersion="10">
   <!-- consider it a book collection, type = "2" -->
   <collection title="MODS Import" type="2">
    <fields>

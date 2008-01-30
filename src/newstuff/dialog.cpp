@@ -16,6 +16,7 @@
 #include "../gui/listview.h"
 #include "../latin1literal.h"
 #include "../tellico_utils.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kpushbutton.h>

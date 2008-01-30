@@ -20,6 +20,7 @@
 #include "tellico_utils.h"
 #include "tellico_debug.h"
 #include "latin1literal.h"
+#include "../isbnvalidator.h"
 
 #include <klocale.h>
 
@@ -356,6 +357,8 @@ QString Entry::dependentValue(ConstEntryPtr entry_, const QString& format_, bool
         if(field) {
           // don't format, just capitalize
           result += entry_->field(field, formatted_);
+        } else if(fieldName == Latin1Literal("id")) {
+          result += QString::number(entry_->id());
         } else {
           result += format_.mid(pctPos, endPos-pctPos+1);
         }
@@ -395,6 +398,10 @@ int Entry::compareValues(EntryPtr e1, EntryPtr e2, FieldPtr f) {
   if(s1 == s2) {
     return 5;
   }
+ // special case for isbn
+ if(f->name() == Latin1Literal("isbn") && ISBNValidator::isbn10(s1) == ISBNValidator::isbn10(s2)) {
+   return 5;
+ }
   if(f->formatFlag() == Field::FormatName) {
     s1 = e1->field(f, true).lower();
     s2 = e2->field(f, true).lower();

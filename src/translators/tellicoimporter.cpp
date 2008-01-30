@@ -39,6 +39,11 @@
 
 using Tellico::Import::TellicoImporter;
 
+bool TellicoImporter::versionConversion(uint from, uint to) {
+  // version 10 only added board games to version 9
+  return from < to && (from != 9 || to != 10);
+}
+
 TellicoImporter::TellicoImporter(const KURL& url_, bool loadAllImages_) : DataImporter(url_),
     m_coll(0), m_loadAllImages(loadAllImages_), m_format(Unknown), m_modified(false),
     m_cancelled(false), m_hasImages(false), m_buffer(0), m_zip(0), m_imgDir(0) {
@@ -152,7 +157,8 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     }
     m_format = Error;
     return;
-  } else if(syntaxVersion < XML::syntaxVersion) {
+  } else if(versionConversion(syntaxVersion, XML::syntaxVersion)) {
+    // going form version 9 to 10, there's no conversion needed
     QString str = i18n("Tellico is converting the file to a more recent document format. "
                        "Information loss may occur if an older version of Tellico is used "
                        "to read this file in the future.");
@@ -180,8 +186,6 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   }
 
   QString title = collelem.attribute(QString::fromLatin1("title"));
-  QString entryTitle = collelem.attribute((syntaxVersion > 6) ? QString::fromLatin1("entryTitle")
-                                                              : QString::fromLatin1("unitTitle"));
 
   // be careful not to have element name collision
   // for fields, each true field element is a child of a fields element
@@ -222,7 +226,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     entryName = QString::fromLatin1("entry");
     QString typeStr = collelem.attribute(QString::fromLatin1("type"));
     Data::Collection::Type type = static_cast<Data::Collection::Type>(typeStr.toInt());
-    m_coll = CollectionFactory::collection(type, addFields, entryTitle);
+    m_coll = CollectionFactory::collection(type, addFields);
   } else {
     entryName = collelem.attribute(QString::fromLatin1("unit"));
     m_coll = CollectionFactory::collection(entryName, addFields);
@@ -282,27 +286,8 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   item.setTotalSteps(count);
 
-  uint j = 0;
-  for(QDomNode n = collelem.firstChild(); !n.isNull() && !m_cancelled; n = n.nextSibling(), ++j) {
-    if(n.namespaceURI() != m_namespace) {
-      continue;
-    }
-    if(n.localName() == entryName) {
-      readEntry(syntaxVersion, n.toElement());
-
-      // not exactly right, but close enough
-      if(showProgress && j%stepSize == 0) {
-        ProgressManager::self()->setProgress(this, j);
-        kapp->processEvents();
-      }
-    }
-  } // end entry loop
-
-  if(m_cancelled) {
-    m_coll = 0;
-    return;
-  }
-
+  // have to read images before entries so we can figure out if
+  // linkOnly() is true
   // m_loadAllImages only pertains to zip files
   QDomNodeList imgelems;
   for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
@@ -316,6 +301,34 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   }
   for(uint j = 0; j < imgelems.count(); ++j) {
     readImage(imgelems.item(j).toElement(), loadImages_);
+  }
+
+  if(m_cancelled) {
+    m_coll = 0;
+    return;
+  }
+
+  uint j = 0;
+  for(QDomNode n = collelem.firstChild(); !n.isNull() && !m_cancelled; n = n.nextSibling(), ++j) {
+    if(n.namespaceURI() != m_namespace) {
+      continue;
+    }
+    if(n.localName() == entryName) {
+      readEntry(syntaxVersion, n.toElement());
+
+      // not exactly right, but close enough
+      if(showProgress && j%stepSize == 0) {
+        ProgressManager::self()->setProgress(this, j);
+        kapp->processEvents();
+      }
+    } else {
+//      myDebug() << "...skipping " << n.localName() << " (" << n.namespaceURI() << ")" << endl;
+    }
+  } // end entry loop
+
+  if(m_cancelled) {
+    m_coll = 0;
+    return;
   }
 
   // filters and borrowers are at document root level, not collection
@@ -523,13 +536,19 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
       }
 
       if(f->type() == Data::Field::Image) {
-        // for local files only, allow paths here
-        KURL u = KURL::fromPathOrURL(value);
-        if(u.isValid() && u.isLocalFile()) {
-          QString result = ImageFactory::addImage(u, false /* quiet */);
-          if(!result.isEmpty()) {
-            value = result;
+        // image info should have already been loaded
+        const Data::ImageInfo& info = ImageFactory::imageInfo(value);
+        // possible that value needs to be cleaned first in which case info is null
+        if(info.isNull() || !info.linkOnly) {
+          // for local files only, allow paths here
+          KURL u = KURL::fromPathOrURL(value);
+          if(u.isValid() && u.isLocalFile()) {
+            QString result = ImageFactory::addImage(u, false /* quiet */);
+            if(!result.isEmpty()) {
+              value = result;
+            }
           }
+          value = Data::Image::idClean(value);
         }
       }
 
@@ -620,7 +639,9 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
 
 void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
   QString format = elem_.attribute(QString::fromLatin1("format"));
-  QString id = shareString(elem_.attribute(QString::fromLatin1("id")));
+  const bool link = elem_.attribute(QString::fromLatin1("link")) == Latin1Literal("true");
+  QString id = shareString(link ? elem_.attribute(QString::fromLatin1("id"))
+                                : Data::Image::idClean(elem_.attribute(QString::fromLatin1("id"))));
 
   if(loadImage_) {
     QByteArray ba;
@@ -636,7 +657,7 @@ void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
     int width = elem_.attribute(QString::fromLatin1("width")).toInt();
     int height = elem_.attribute(QString::fromLatin1("height")).toInt();
     if(width > 0 && height > 0) {
-      Data::ImageInfo info(id, format.latin1(), width, height);
+      Data::ImageInfo info(id, format.latin1(), width, height, link);
       ImageFactory::cacheImageInfo(info);
     }
   }

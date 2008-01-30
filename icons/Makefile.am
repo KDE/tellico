@@ -2,15 +2,19 @@
 
 
 EXTRA_DIST = \
-album.png                 hi16-app-tellico.png    hi64-mime-tellico.png \
-bibtex.png                hi16-mime-tellico.png   person-open.png \
-tellico.png               hi22-app-tellico.png    person.png \
-book.png                  hi22-mime-tellico.png   stamp.png \
-card.png                  hi32-app-tellico.png    star_on.png \
-coin.png                  hi32-mime-tellico.png   star_off.png \
-comic.png                 hi48-app-tellico.png    video.png \
-hi128-app-tellico.png     hi48-mime-tellico.png   wine.png \
-hi128-mime-tellico.png    hi64-app-tellico.png    checkmark.png \
+album.png                 hi16-app-tellico.png    hi22-app-tellico.png \
+hi32-app-tellico.png      hi48-app-tellico.png    hi64-app-tellico.png \
+hi128-app-tellico.png \
+hi16-mime-application-x-tellico.png hi22-mime-application-x-tellico.png \
+hi32-mime-application-x-tellico.png hi48-mime-application-x-tellico.png \
+hi64-mime-application-x-tellico.png hi128-mime-application-x-tellico.png \
+bibtex.png                person-open.png \
+tellico.png               person.png \
+book.png                  stamp.png \
+card.png                  star_on.png \
+coin.png                  star_off.png \
+comic.png                 video.png \
+wine.png                  checkmark.png \
 tellico.svg               tellico_mime.svg        stars10.png \
 stars1.png                stars2.png              stars3.png \
 stars4.png                stars5.png              stars6.png \
@@ -18,7 +22,8 @@ stars7.png                stars8.png              stars9.png \
 README.icons              README.quesnay          game.png \
 file.png                  nocover_book.png        nocover_video.png \
 nocover_album.png         nocover_game.png        nocover_bibtex.png \
-nocover_comic.png         script.svg              script.png
+nocover_comic.png         script.svg              script.png \
+boardgame.png             nocover_boardgame.png
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -34,6 +39,7 @@ tellico.png \
 tellico.svg \
 tellico.svg \
 tellico_mime.svg \
+boardgame.png \
 book.png \
 card.png \
 coin.png \
@@ -61,6 +67,7 @@ README.icons \
 README.quesnay \
 file.png \
 nocover_album.png \
+nocover_boardgame.png \
 nocover_book.png \
 nocover_bibtex.png \
 nocover_comic.png \

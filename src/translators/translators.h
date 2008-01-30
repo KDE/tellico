@@ -30,7 +30,11 @@ namespace Tellico {
       GCfilms,
       FileListing,
       GRS1,
-      AMC
+      AMC,
+      Griffith,
+      PDF,
+      Referencer,
+      Delicious
     };
 
     enum Action {

@@ -19,9 +19,9 @@
 #include "document.h"
 #include "collection.h"
 #include "fieldcompletion.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kcombobox.h>
 #include <klineedit.h>
 #include <kpushbutton.h>

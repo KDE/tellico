@@ -14,6 +14,7 @@
 #include "imagefieldwidget.h"
 #include "imagewidget.h"
 #include "../field.h"
+#include "../latin1literal.h"
 
 using Tellico::GUI::ImageFieldWidget;
 
@@ -21,6 +22,7 @@ ImageFieldWidget::ImageFieldWidget(Data::FieldPtr field_, QWidget* parent_, cons
     : FieldWidget(field_, parent_, name_) {
 
   m_widget = new ImageWidget(this);
+  m_widget->setLinkOnlyChecked(field_->property(QString::fromLatin1("link")) == Latin1Literal("true"));
   connect(m_widget, SIGNAL(signalModified()), SIGNAL(modified()));
 
   registerWidget();

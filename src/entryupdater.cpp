@@ -30,8 +30,6 @@
 #include <qtimer.h>
 
 namespace {
-  static const int ENTRY_UPDATE_GOOD_MATCH = 10;
-  static const int ENTRY_UPDATE_PERFECT_MATCH = 20;
   static const int CHECK_COLLECTION_IMAGES_STEP_SIZE = 10;
 }
 
@@ -147,7 +145,7 @@ void EntryUpdater::slotResult(Fetch::SearchResult* result_) {
   if(e) {
     m_fetchedEntries.append(e);
     int match = m_coll->sameEntry(m_entriesToUpdate.front(), e);
-    if(match > ENTRY_UPDATE_PERFECT_MATCH) {
+    if(match > Data::Collection::ENTRY_PERFECT_MATCH) {
       result_->fetcher->stop();
     }
   }
@@ -187,7 +185,7 @@ void EntryUpdater::handleResults() {
       matches.append(*res);
     }
   }
-  if(best < ENTRY_UPDATE_GOOD_MATCH) {
+  if(best < Data::Collection::ENTRY_GOOD_MATCH) {
     if(best > 0) {
       myDebug() << "no good match (score > 10), best match = " << best << " (" << matches.count() << " matches)" << endl;
     }

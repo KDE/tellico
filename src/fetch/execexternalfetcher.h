@@ -57,7 +57,7 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return ExecExternal; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(KConfig* config, const QString& group);
+  virtual void readConfigHook(const KConfigGroup& config);
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   const QString& execPath() const { return m_path; }
@@ -67,8 +67,8 @@ public:
     ConfigWidget(QWidget* parent = 0, const ExecExternalFetcher* fetcher = 0);
     ~ConfigWidget();
 
-    void readConfig(KConfig*);
-    virtual void saveConfig(KConfig*);
+    void readConfig(KConfig* config);
+    virtual void saveConfig(KConfigGroup& config);
     virtual void removed();
     virtual QString preferredName() const;
 

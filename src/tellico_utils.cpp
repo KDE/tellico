@@ -182,8 +182,8 @@ KLibrary* Tellico::openLibrary(const QString& libName_) {
 }
 
 QColor Tellico::blendColors(const QColor& color1, const QColor& color2, int percent) {
-  const float factor2 = percent/100.0;
-  const float factor1 = 1.0 - factor2;
+  const double factor2 = percent/100.0;
+  const double factor1 = 1.0 - factor2;
 
   const int r = static_cast<int>(color1.red()   * factor1 + color2.red()   * factor2);
   const int g = static_cast<int>(color1.green() * factor1 + color2.green() * factor2);

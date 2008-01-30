@@ -1,6 +1,6 @@
 <!--
    ================================================================
-   Tellico XML DTD version 9.0
+   Tellico XML DTD version 10.0
 
    Copyright (c) 2006 Robby Stephenson
 
@@ -10,18 +10,18 @@
 
    The formal public identifer for this DTD should be:
    
-      "-//Robby Stephenson/DTD Tellico V9.0//EN"
+      "-//Robby Stephenson/DTD Tellico V10.0//EN"
 
    ================================================================
 -->
 <!ELEMENT tellico (collection+, borrowers?, filters?)>
-<!ATTLIST tellico syntaxVersion CDATA #FIXED "9">
+<!ATTLIST tellico syntaxVersion CDATA #FIXED "10">
 <!ATTLIST tellico xmlns CDATA #FIXED "http://periapsis.org/tellico/">
 
 <!ELEMENT collection (fields | bibtex-preamble | macros | entry |
 images | borrowers | filters)+>
 <!ATTLIST collection title CDATA #REQUIRED>
-<!ATTLIST collection type (1|2|3|4|5|6|7|8|9|10|11|12) #REQUIRED>
+<!ATTLIST collection type (1|2|3|4|5|6|7|8|9|10|11|12|13) #REQUIRED>
 <!ATTLIST collection entryTitle CDATA #IMPLIED>
 
 <!ELEMENT images (image+)>
@@ -96,7 +96,8 @@ producer | appellation | varietal | vintage | type | drink-by |
 platform | publishers | developers | completed |url |
 mimetype | size | permissions | owner | group | created | modified |
 metainfos | icon | amazon | imdb | imdb-rating | alttitle |
-allcertification | address | abstract)+>
+allcertification | address | abstract | designer | bggid |
+mechanism | num-players )+>
 <!ATTLIST entry id CDATA #REQUIRED>
 
 <!ELEMENT title (#PCDATA)>
@@ -243,6 +244,17 @@ allcertification | address | abstract)+>
 <!ELEMENT metainfos (metainfo+)>
 <!ELEMENT metainfo (#PCDATA)>
 <!ELEMENT icon (#PCDATA)>
+
+<!-- boardgames --?
+<!-- publisher is defined above -->
+<!-- publishers is defined above -->
+<!ELEMENT designers (designer+)>
+<!ELEMENT designer (#PCDATA)>
+<!ELEMENT mechanisms (mechanism+)>
+<!ELEMENT mechanism (#PCDATA)>
+<!ELEMENT bggid (#PCDATA)>
+<!ELEMENT num-players (num-player+)>
+<!ELEMENT num-player (#PCDATA)>
 
 <!-- special -->
 <!ELEMENT amazon (#PCDATA)>

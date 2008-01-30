@@ -5,11 +5,11 @@ AM_CPPFLAGS = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS) $(YAZ_CFLAGS)
 
 libfetch_a_METASOURCES = AUTO
 
-libfetch_a_SOURCES = fetchmanager.cpp amazonfetcher.cpp z3950fetcher.cpp \
-imdbfetcher.cpp configwidget.cpp entrezfetcher.cpp \
-execexternalfetcher.cpp messagehandler.cpp fetcher.cpp \
-z3950connection.cpp yahoofetcher.cpp animenfofetcher.cpp \
-ibsfetcher.cpp srufetcher.cpp isbndbfetcher.cpp
+libfetch_a_SOURCES = amazonfetcher.cpp animenfofetcher.cpp arxivfetcher.cpp \
+	bibsonomyfetcher.cpp citebasefetcher.cpp configwidget.cpp crossreffetcher.cpp \
+	entrezfetcher.cpp execexternalfetcher.cpp fetcher.cpp fetchmanager.cpp \
+	gcstarpluginfetcher.cpp ibsfetcher.cpp imdbfetcher.cpp isbndbfetcher.cpp messagehandler.cpp \
+	srufetcher.cpp yahoofetcher.cpp z3950connection.cpp z3950fetcher.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -32,6 +32,11 @@ animenfofetcher.h animenfofetcher.cpp \
 ibsfetcher.h ibsfetcher.cpp \
 srufetcher.h srufetcher.cpp \
 isbndbfetcher.h isbndbfetcher.cpp \
+gcstarpluginfetcher.h gcstarpluginfetcher.cpp \
+crossreffetcher.h crossreffetcher.cpp \
+arxivfetcher.h arxivfetcher.cpp \
+citebasefetcher.h citebasefetcher.cpp \
+bibsonomyfetcher.h bibsonomyfetcher.cpp \
 z3950-servers.cfg
 
 appdir = $(kde_datadir)/tellico

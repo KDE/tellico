@@ -23,7 +23,7 @@
 
 namespace Tellico {
 
-class DCOPInterface : public DCOPObject {
+class ApplicationInterface : public DCOPObject {
 K_DCOP
 k_dcop:
   bool importTellico(const QString& file, const QString& action)
@@ -37,6 +37,8 @@ k_dcop:
 
   bool exportXML(const QString& file)
     { return exportCollection(Export::TellicoXML, KURL::fromPathOrURL(file)); }
+  bool exportZip(const QString& file)
+    { return exportCollection(Export::TellicoZip, KURL::fromPathOrURL(file)); }
   bool exportBibtex(const QString& file)
     { return exportCollection(Export::Bibtex, KURL::fromPathOrURL(file)); }
   bool exportHTML(const QString& file)
@@ -46,15 +48,37 @@ k_dcop:
   bool exportPilotDB(const QString& file)
     { return exportCollection(Export::PilotDB, KURL::fromPathOrURL(file)); }
 
-  virtual QStringList bibtexKeys() const = 0;
+  QValueList<long> selectedEntries() const;
+  QValueList<long> filteredEntries() const;
+
+  virtual void openFile(const QString& file) = 0;
+  virtual void setFilter(const QString& text) = 0;
+  virtual bool showEntry(long id) = 0;
 
 protected:
-  DCOPInterface() : DCOPObject("tellico") {}
+  ApplicationInterface() : DCOPObject("tellico") {}
   virtual bool importFile(Import::Format format, const KURL& url, Import::Action action) = 0;
   virtual bool exportCollection(Export::Format format, const KURL& url) = 0;
 
 private:
   Import::Action actionType(const QString& actionName);
+};
+
+class CollectionInterface : public DCOPObject {
+K_DCOP
+k_dcop:
+  CollectionInterface() : DCOPObject("collection") {}
+
+  long addEntry();
+  bool removeEntry(long entryID);
+
+  QStringList values(const QString& fieldName) const;
+  QStringList values(long entryID, const QString& fieldName) const;
+  QStringList bibtexKeys() const;
+  QString bibtexKey(long entryID) const;
+
+  bool setFieldValue(long entryID, const QString& fieldName, const QString& value);
+  bool addFieldValue(long entryID, const QString& fieldName, const QString& value);
 };
 
 } // end namespace

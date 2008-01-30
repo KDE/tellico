@@ -43,12 +43,12 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
   // can search title, person, isbn, or keyword. No UPC or Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k!= UPC && k != Raw; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return IBS; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(KConfig* config, const QString& group);
+  virtual void readConfigHook(const KConfigGroup& config);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -57,7 +57,7 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     ConfigWidget(QWidget* parent_);
-    virtual void saveConfig(KConfig*) {}
+    virtual void saveConfig(KConfigGroup&) {}
     virtual QString preferredName() const;
   };
   friend class ConfigWidget;

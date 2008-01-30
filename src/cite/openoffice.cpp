@@ -19,6 +19,7 @@
 #include "../latin1literal.h"
 #include "../statusbar.h"
 #include "../tellico_kernel.h"
+#include "../tellico_debug.h"
 
 #include <klibloader.h>
 #include <kdialogbase.h>

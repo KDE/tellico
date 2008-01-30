@@ -49,7 +49,7 @@ public:
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return ISBNdb; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(KConfig* config, const QString& group);
+  virtual void readConfigHook(const KConfigGroup& config);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -58,7 +58,7 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher = 0);
-    virtual void saveConfig(KConfig*) {}
+    virtual void saveConfig(KConfigGroup&) {}
     virtual QString preferredName() const;
   };
   friend class ConfigWidget;

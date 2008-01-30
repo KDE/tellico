@@ -36,9 +36,6 @@ extern char * InputFilename;            /* for zzcr_ast call in pccts/ast.c */
 #include "ast.c"
 zzASTgvars
 
-static void value(AST**_root);
-static void field(AST**_root);
-
 ANTLR_INFO
 
 void
@@ -54,7 +51,7 @@ bibfile(AST**_root)
 		zzMake0;
 		{
 		while ( (LA(1)==AT) ) {
-			_ast = NULL; bibentry(&_ast);
+			_ast = NULL; entry(&_ast);
 			/* a little creative forestry... */
 			if ((*_root) == NULL)
 			(*_root) = zzastArg(1);
@@ -76,7 +73,7 @@ fail:
 }
 
 void
-bibentry(AST**_root)
+entry(AST**_root)
 {
 	zzRULE;
 	zzBLOCK(zztasp1);
@@ -218,7 +215,7 @@ fail:
 	}
 }
 
-static void
+void
 field(AST**_root)
 {
 	zzRULE;
@@ -246,7 +243,7 @@ fail:
 	}
 }
 
-static void
+void
 value(AST**_root)
 {
 	zzRULE;

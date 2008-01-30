@@ -53,11 +53,16 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   ProgressItem::Done done(this);
 
-  const QString str = text();
+  QString str = text();
   QTextIStream t(&str);
-  if(t.readLine().startsWith(QString::fromLatin1("GCfilms"))) {
+  QString line = t.readLine();
+  if(line.startsWith(QString::fromLatin1("GCfilms"))) {
     readGCfilms(str);
   } else {
+    // need to reparse the string if it's in utf-8
+    if(line.lower().find(QString::fromLatin1("utf-8")) > 0) {
+      str = QString::fromUtf8(str.local8Bit());
+    }
     readGCstar(str);
   }
   return m_coll;

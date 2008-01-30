@@ -36,7 +36,8 @@
   GET(name, Stamp) \
   GET(name, Card) \
   GET(name, Game) \
-  GET(name, File)
+  GET(name, File) \
+  GET(name, BoardGame)
 #define ALL_SET(name,value) \
   SET(name, Base, value) \
   SET(name, Book, value) \
@@ -49,7 +50,8 @@
   SET(name, Stamp, value) \
   SET(name, Card, value) \
   SET(name, Game, value) \
-  SET(name, File, value)
+  SET(name, File, value) \
+  SET(name, BoardGame, value)
 
 namespace {
   static const QRegExp commaSplit = QRegExp(QString::fromLatin1("\\s*,\\s*"));

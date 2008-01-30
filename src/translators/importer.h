@@ -50,7 +50,8 @@ public:
    *
    * @param url The URL of the file to import
    */
-  Importer(const KURL& url) : QObject(), m_options(ImportProgress), m_url(url) {}
+  Importer(const KURL& url) : QObject(), m_options(ImportProgress), m_urls(url) {}
+  Importer(const KURL::List& urls) : QObject(), m_options(ImportProgress), m_urls(urls) {}
   Importer(const QString& text) : QObject(), m_options(ImportProgress), m_text(text) {}
   /**
    */
@@ -85,6 +86,10 @@ public:
    * @return Whether the importer could return a collection of that type
    */
   virtual bool canImport(int) const { return true; }
+  /**
+   * Validate the import settings
+   */
+  virtual bool validImport() const { return true; }
   virtual void setText(const QString& text) { m_text = text; }
   long options() const { return m_options; }
   void setOptions(long options) { m_options = options; }
@@ -107,8 +112,9 @@ protected:
    *
    * @return the file URL
    */
-  const KURL& url() const { return m_url; }
-  const QString& text() const { return m_text; }
+  KURL url() const { return m_urls.isEmpty() ? KURL() : m_urls[0]; }
+  KURL::List urls() const { return m_urls; }
+  QString text() const { return m_text; }
   /**
    * Adds a message to the status queue.
    *
@@ -120,7 +126,7 @@ protected:
 
 private:
   long m_options;
-  KURL m_url;
+  KURL::List m_urls;
   QString m_text;
   QString m_statusMsg;
 };

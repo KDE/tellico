@@ -13,8 +13,10 @@
 
 #include "detailedentryitem.h"
 #include "detailedlistview.h"
+#include "collection.h"
 #include "entry.h"
 #include "tellico_utils.h"
+#include "latin1literal.h"
 
 #include <klocale.h>
 #include <kstringhandler.h>

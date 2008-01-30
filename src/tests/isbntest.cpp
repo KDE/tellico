@@ -6,6 +6,8 @@
 
 #include <kdebug.h>
 
+#include <stdlib.h>
+
 bool check(QString a, QString b) {
   static const Tellico::ISBNValidator val(0);
   val.fixup(a);
@@ -34,10 +36,10 @@ int main(int, char**) {
   check("978-0940016750", "978-0-940016-75-0");
   check("978-0-940016-75-0", "978-0-940016-75-0");
   check("978286274486", "978-2-86274-486-5");
-  check("9788086119130", "978-80-8611913-7");
-  check("9788086119137", "978-80-8611913-7");
-  check("97880-8611-9-13-0", "978-80-8611-913-7");
-  check("97880-8611-9-13-7", "978-80-8611-913-7");
+  check("9788186119130", "978-81-86-11913-6");
+  check("9788186119137", "978-81-86-11913-6");
+  check("97881-8611-9-13-0", "978-81-86-11913-6");
+  check("97881-8611-9-13-7", "978-81-86-11913-6");
 
   // don't add checksum for EAN that start with 978 or 979 and are less than 13 in length
   check("978059600",   "978-059600");
@@ -51,10 +53,16 @@ int main(int, char**) {
   // check french hyphenation
   check("2862744867", "2-86274-486-7");
 
+  // check german hyphenation
+  check("3423071516", "3-423-07151-6");
+
+  // check dutch hyphenation
+  check("9065442979", "90-6544-297-9");
+
   // check keeping middle hyphens
-  check("80-8611913-0", "80-8611913-0");
-  check("80-86119-13-0", "80-86119-13-0");
-  check("80-8611-9-13-0", "80-8611-913-0");
+  check("6-18611913-0", "6-18611913-0");
+  check("6-186119-13-0", "6-186119-13-0");
+  check("6-18611-9-13-0", "6-18611-913-0");
 
   // check garbage
   check("My name is robby", "");

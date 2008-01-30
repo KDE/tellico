@@ -20,6 +20,7 @@
 #include "../tellico_utils.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -61,9 +62,8 @@ bool YahooFetcher::canFetch(int type) const {
   return type == Data::Collection::Album;
 }
 
-void YahooFetcher::readConfigHook(KConfig* config_, const QString& group_) {
+void YahooFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
-  Q_UNUSED(group_);
 }
 
 void YahooFetcher::search(FetchKey key_, const QString& value_) {
@@ -172,12 +172,6 @@ void YahooFetcher::slotComplete(KIO::Job* job_) {
   f.close();
 #endif
 
-  QDomDocument dom;
-  if(!dom.setContent(m_data, false)) {
-    kdWarning() << "YahooFetcher::slotComplete() - server did not return valid XML." << endl;
-    return;
-  }
-
   if(!m_xsltHandler) {
     initXSLTHandler();
     if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
@@ -187,6 +181,11 @@ void YahooFetcher::slotComplete(KIO::Job* job_) {
   }
 
   if(m_total == -1) {
+    QDomDocument dom;
+    if(!dom.setContent(m_data, false)) {
+      kdWarning() << "YahooFetcher::slotComplete() - server did not return valid XML." << endl;
+      return;
+    }
     // total is top level element, with attribute totalResultsAvailable
     QDomElement e = dom.documentElement();
     if(!e.isNull()) {
@@ -199,6 +198,7 @@ void YahooFetcher::slotComplete(KIO::Job* job_) {
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
+    myDebug() << "YahooFetcher::slotComplete() - no collection pointer" << endl;
     stop();
     return;
   }
@@ -235,8 +235,7 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntry(uint uid_) {
   KURL imageURL = entry->field(QString::fromLatin1("image"));
   if(!imageURL.isEmpty()) {
     QString id = ImageFactory::addImage(imageURL, true);
-    // FIXME: need to add cover image field to bibtex collection
-    if(!id.isEmpty()) {
+    if(id.isEmpty()) {
     // rich text causes layout issues
 //      emit signalStatus(i18n("<qt>The cover image for <i>%1</i> could not be loaded.</qt>").arg(
 //                              entry->field(QString::fromLatin1("title"))));

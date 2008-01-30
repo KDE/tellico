@@ -205,10 +205,12 @@ fichiers d'entrées individuels.
 </para>
 
 <para>
-De plus, lorsque la collection ou un groupe est sélectionné dans la
-&group-view;, une vue par icônes des entrées est affichée, en utilisant le
+De plus, lorsque plusieurs entrées sont sélectionnées, une vue par icônes
+des entrées est affichée, en utilisant le
 premier champ de type <link linkend="image">Image</link> de la collection.
-Les entrées peuvent être sélectionnées dans la &detailed-view;.
+Les entrées peuvent être sélectionnées dans la &detailed-view;. Un clic
+droit sur la vue par icônes affiche un menu qui permet de changer les critères
+de tri des entrées.
 </para>
 
 </sect2>
@@ -297,8 +299,9 @@ Par défaut, les images sont enregistrées dans le fichier de données de la
 collection, conservant ainsi toutes les données au même endroit. Cependant,
 un trop grand nombre d'images ralentira &appname; et générera des fichiers de
 taille importante. Cependant, &appname; peut également enregistrer les images
-séparément, dans le répertoire
-<filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/data/</filename>.
+séparément, soit dans le répertoire
+<filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/data/</filename>,
+soit dans un répertoire au même endroit que le fichier de données Tellico.
 Dans ce cas, le chargement et l'enregistrement des fichiers de données est
 nettement plus rapide ; mais les fichiers de données ne peuvent alors plus être
 transférés ou sauvegardés sans perdre les images. Des fichiers autonomes
@@ -809,6 +812,27 @@ Vous pouvez ajouter des tags &html; aux champs de type
 <link linkend="para"><emphasis>paragraphe</emphasis></link> pour la mise en
 forme, tels que &lt;b&gt;<emphasis role="bold">bold</emphasis>&lt;/b&gt; (gras)
 ou &lt;i&gt;<emphasis>italic</emphasis>&lt;/i&gt; (italique).
+</para>
+</tip>
+
+<tip>
+<para>
+Dans la &detailed-view;, vous pouvez presser une lettre au clavier pour
+aller directement  you can press a letter on the
+keyboard to skip to the next entry that starts with that letter.
+</para>
+</tip>
+
+<tip>
+<para>
+Vous pouvez utiliser les champs dépendant pour combiner plusieurs champs dans
+un seul. Sélectionez  le type dépendant pour le champ et entrez une description
+similaire à "<userinput>Value: %{fielda}%{fieldb}</userinput>" en remplaçant le
+contenu de  %{...} par le nom de champ approprié. Ceci est utile pour regrouper
+plusieurs valeurs dans un seul champ ; par exemple pour un meilleur
+regroupement ou combiner différents champs tout en respectant les critères de
+tri. Considérez par éxemple un champ numérique suivi par un champ de text avec
+des entrées 3b et 14a.
 </para>
 </tip>
 

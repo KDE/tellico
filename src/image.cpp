@@ -19,6 +19,7 @@
 #include <kstaticdeleter.h>
 
 #include <qbuffer.h>
+#include <qregexp.h>
 
 using Tellico::Data::Image;
 using Tellico::Data::ImageInfo;
@@ -32,23 +33,23 @@ KPixmapIO* Image::io() {
   return s_pixmapIO;
 }
 
-Image::Image() : QImage(), m_id(QString::null) {
+Image::Image() : QImage(), m_id(QString::null), m_linkOnly(false) {
 }
 
 // I'm using the MD5 hash as the id. I consider it rather unlikely that two images in one
 // collection could ever have the same hash, and this lets me do a fast comparison of two images
 // simply by comparing their ids.
-Image::Image(const QString& filename_) : QImage(filename_) {
+Image::Image(const QString& filename_) : QImage(filename_), m_linkOnly(false) {
   m_format = QImage::imageFormat(filename_);
   calculateID();
 }
 
-Image::Image(const QImage& img_, const QString& format_) : QImage(img_), m_format(format_) {
+Image::Image(const QImage& img_, const QString& format_) : QImage(img_), m_format(format_), m_linkOnly(false) {
   calculateID();
 }
 
 Image::Image(const QByteArray& data_, const QString& format_, const QString& id_)
-    : QImage(data_), m_id(id_), m_format(format_) {
+    : QImage(data_), m_id(idClean(id_)), m_format(format_), m_linkOnly(false) {
   if(isNull()) {
     m_id = QString();
   }
@@ -100,6 +101,12 @@ QByteArray Image::byteArray(const QImage& img_, const QCString& outputFormat_) {
   return ba;
 }
 
+QString Image::idClean(const QString& id_) {
+  static const QRegExp rx('[' + QRegExp::escape(QString::fromLatin1("/@<>#\"&%?={}|^~[]'`\\:+")) + ']');
+  QString clean = id_;
+  return clean.remove(rx);
+}
+
 void Image::setID(const QString& id_) {
   m_id = id_;
 }
@@ -109,6 +116,7 @@ void Image::calculateID() {
   if(!isNull()) {
     KMD5 md5(byteArray());
     m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
+    m_id = idClean(m_id);
   }
 }
 
@@ -118,12 +126,14 @@ ImageInfo::ImageInfo(const Image& img_)
     : id(img_.id())
     , format(img_.format())
     , width(img_.width())
-    , height(img_.height()) {
+    , height(img_.height())
+    , linkOnly(img_.linkOnly()) {
 }
 
-ImageInfo::ImageInfo(const QString& id_, const QCString& format_, int w_, int h_)
+ImageInfo::ImageInfo(const QString& id_, const QCString& format_, int w_, int h_, bool l_)
     : id(id_)
     , format(format_)
     , width(w_)
-    , height(h_) {
+    , height(h_)
+    , linkOnly(l_) {
 }

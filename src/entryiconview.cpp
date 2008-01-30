@@ -20,12 +20,14 @@
 #include "field.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
+#include "listviewcomparison.h"
 
 #include <kpopupmenu.h>
 #include <kstringhandler.h>
 #include <kiconloader.h>
 #include <kwordwrap.h>
 #include <kimageeffect.h>
+#include <klocale.h>
 
 #include <qpainter.h>
 
@@ -42,7 +44,8 @@ using Tellico::EntryIconViewItem;
 
 EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
     : KIconView(parent_, name_), m_coll(0), m_maxAllowedIconWidth(MAX_ENTRY_ICON_SIZE),
-      m_maxIconWidth(MIN_ENTRY_ICON_SIZE), m_maxIconHeight(MIN_ENTRY_ICON_SIZE) {
+      m_maxIconWidth(MIN_ENTRY_ICON_SIZE), m_maxIconHeight(MIN_ENTRY_ICON_SIZE),
+      m_comparison(0) {
   setAutoArrange(true);
   setSorting(true);
   setItemsMovable(false);
@@ -58,6 +61,11 @@ EntryIconView::EntryIconView(QWidget* parent_, const char* name_/*=0*/)
   connect(this, SIGNAL(doubleClicked(QIconViewItem*)), SLOT(slotDoubleClicked(QIconViewItem*)));
   connect(this, SIGNAL(contextMenuRequested(QIconViewItem*, const QPoint&)),
           SLOT(slotShowContextMenu(QIconViewItem*, const QPoint&)));
+}
+
+EntryIconView::~EntryIconView() {
+  delete m_comparison;
+  m_comparison = 0;
 }
 
 EntryIconViewItem* EntryIconView::firstItem() const {
@@ -78,6 +86,10 @@ void EntryIconView::findImageField() {
 
 const QString& EntryIconView::imageField() {
   return m_imageField;
+}
+
+const QString& EntryIconView::sortField() {
+  return m_comparison ? m_comparison->fieldName() : QString::null;
 }
 
 const QPixmap& EntryIconView::defaultPixmap() {
@@ -257,13 +269,46 @@ void EntryIconView::updateSelected(EntryIconViewItem* item_, bool s_) const {
 }
 
 void EntryIconView::slotShowContextMenu(QIconViewItem* item_, const QPoint& point_) {
-  if(!item_) {
-    return;
-  }
   KPopupMenu menu(this);
-  Controller::self()->plugEntryActions(&menu);
+
+  // only insert entry items if one is selected
+  if(item_) {
+    Controller::self()->plugEntryActions(&menu);
+    menu.insertSeparator();
+  }
+
+  KPopupMenu sortMenu(&menu);
+  const QStringList titles = m_coll->fieldTitles();
+  for(QStringList::ConstIterator it = titles.begin(); it != titles.end(); ++it) {
+    sortMenu.insertItem(*it);
+  }
+  connect(&sortMenu, SIGNAL(activated(int)), SLOT(slotSortMenuActivated(int)));
+
+  menu.insertItem(i18n("&Sort By"), &sortMenu);
   menu.exec(point_);
 }
+
+void EntryIconView::slotSortMenuActivated(int id_) {
+  const KPopupMenu* menu = ::qt_cast<KPopupMenu*>(sender());
+  if(menu) {
+    QString title = menu->text(id_);
+    Data::FieldPtr f = m_coll->fieldByTitle(title);
+    if(f) {
+      delete m_comparison;
+      m_comparison = ListViewComparison::create(f);
+      sort();
+    }
+  }
+}
+
+int EntryIconView::compare(const EntryIconViewItem* item1, EntryIconViewItem* item2) {
+  if(m_comparison) {
+    return m_comparison->compare(item1, item2);
+  }
+  return 0;
+}
+
+/* *********************************************************** */
 
 EntryIconViewItem::EntryIconViewItem(EntryIconView* parent_, Data::EntryPtr entry_)
     : KIconViewItem(parent_, entry_->title()), m_entry(entry_), m_usesImage(false) {
@@ -381,6 +426,19 @@ void EntryIconViewItem::paintText(QPainter* p_, const QColorGroup &cg_) {
 
   int align = iconView()->itemTextPos() == QIconView::Bottom ? AlignHCenter : AlignAuto;
   wordWrap()->drawText(p_, textX, textY, align | KWordWrap::Truncate);
+}
+
+QString EntryIconViewItem::key() const {
+  const QString& sortField = iconView()->sortField();
+  if(sortField.isEmpty()) {
+    return KIconViewItem::key();
+  }
+  return m_entry->field(sortField);
+}
+
+int EntryIconViewItem::compare(QIconViewItem* item_) const {
+  int res = iconView()->compare(this, static_cast<EntryIconViewItem*>(item_));
+  return res == 0 ? KIconViewItem::compare(item_) : res;
 }
 
 #include "entryiconview.moc"

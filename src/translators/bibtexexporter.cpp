@@ -87,7 +87,6 @@ bool BibtexExporter::exec() {
     }
   }
 
-
   if(typeField.isEmpty() || keyField.isEmpty()) {
     kdWarning() << "BibtexExporter::exec() - the collection must have fields defining "
                    "the entry-type and the key of the entry" << endl;
@@ -236,12 +235,12 @@ QWidget* BibtexExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 void BibtexExporter::readOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_expandMacros = config_->readBoolEntry("Expand Macros", m_expandMacros);
-  m_packageURL = config_->readBoolEntry("URL Package", m_packageURL);
-  m_skipEmptyKeys = config_->readBoolEntry("Skip Empty Keys", m_skipEmptyKeys);
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_expandMacros = group.readBoolEntry("Expand Macros", m_expandMacros);
+  m_packageURL = group.readBoolEntry("URL Package", m_packageURL);
+  m_skipEmptyKeys = group.readBoolEntry("Skip Empty Keys", m_skipEmptyKeys);
 
-  if(config_->readBoolEntry("Use Braces", true)) {
+  if(group.readBoolEntry("Use Braces", true)) {
     BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
   } else {
     BibtexHandler::s_quoteStyle = BibtexHandler::QUOTES;
@@ -249,16 +248,16 @@ void BibtexExporter::readOptions(KConfig* config_) {
 }
 
 void BibtexExporter::saveOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_expandMacros = m_checkExpandMacros->isChecked();
-  config_->writeEntry("Expand Macros", m_expandMacros);
+  group.writeEntry("Expand Macros", m_expandMacros);
   m_packageURL = m_checkPackageURL->isChecked();
-  config_->writeEntry("URL Package", m_packageURL);
+  group.writeEntry("URL Package", m_packageURL);
   m_skipEmptyKeys = m_checkSkipEmpty->isChecked();
-  config_->writeEntry("Skip Empty Keys", m_skipEmptyKeys);
+  group.writeEntry("Skip Empty Keys", m_skipEmptyKeys);
 
   bool useBraces = m_cbBibtexStyle->currentText() == i18n("Braces");
-  config_->writeEntry("Use Braces", useBraces);
+  group.writeEntry("Use Braces", useBraces);
   if(useBraces) {
     BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
   } else {
@@ -287,6 +286,11 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
     if(fIt->formatFlag() == Data::Field::FormatName
        && fIt->flags() & Data::Field::AllowMultiple) {
       value.replace(Data::Field::delimiter(), QString::fromLatin1(" and "));
+    } else if(fIt->type() == Data::Field::Para) {
+      // strip HTML from bibtex export
+      QRegExp stripHTML(QString::fromLatin1("<.*>"), true);
+      stripHTML.setMinimal(true);
+      value.remove(stripHTML);
     }
 
     if(m_packageURL && fIt->type() == Data::Field::URL) {

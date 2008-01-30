@@ -16,6 +16,7 @@
 #include "clipboard.h"
 #include "openoffice.h"
 #include "../entry.h"
+#include "../tellico_debug.h"
 
 using Tellico::Cite::ActionManager;
 

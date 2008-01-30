@@ -82,14 +82,13 @@ void DetailedListView::addCollection(Data::CollPtr coll_) {
   m_imageColumns.clear();
 //  myDebug() << "DetailedListView::addCollection()" << endl;
 
-  KConfig* config = kapp->config();
-  config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
+  KConfigGroup config(kapp->config(), QString::fromLatin1("Options - %1").arg(coll_->typeName()));
 
   QString configN;
   if(coll_->type() == Data::Collection::Base) {
     KURL url = Kernel::self()->URL();
     for(uint i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KURL u = config->readEntry(QString::fromLatin1("URL_%1").arg(i));
+      KURL u = config.readEntry(QString::fromLatin1("URL_%1").arg(i));
       if(u == url) {
         configN = QString::fromLatin1("_%1").arg(i);
         break;
@@ -97,19 +96,19 @@ void DetailedListView::addCollection(Data::CollPtr coll_) {
     }
   }
 
-  QStringList colNames = config->readListEntry("ColumnNames" + configN);
+  QStringList colNames = config.readListEntry("ColumnNames" + configN);
   if(colNames.isEmpty()) {
     colNames = QString::fromLatin1("title");
   }
 
   // this block compensates for the chance that the user added a field and it wasn't
   // written to the widths. Also compensates for 0.5.x to 0.6.x column layout changes
-  QValueList<int> colWidths = config->readIntListEntry("ColumnWidths" + configN);
+  QValueList<int> colWidths = config.readIntListEntry("ColumnWidths" + configN);
   if(colWidths.empty()) {
     colWidths.insert(colWidths.begin(), colNames.count(), -1); // automatic width
   }
 
-  QValueList<int> colOrder = config->readIntListEntry("ColumnOrder" + configN);
+  QValueList<int> colOrder = config.readIntListEntry("ColumnOrder" + configN);
 
   // need to remove values for fields which don't exist in the current collection
   QStringList newCols;
@@ -163,11 +162,11 @@ void DetailedListView::addCollection(Data::CollPtr coll_) {
   }
   slotUpdatePixmap();
 
-  int sortCol = config->readNumEntry("SortColumn" + configN, 0);
-  bool sortAsc = config->readBoolEntry("SortAscending" + configN, true);
+  int sortCol = config.readNumEntry("SortColumn" + configN, 0);
+  bool sortAsc = config.readBoolEntry("SortAscending" + configN, true);
   setSorting(sortCol, sortAsc);
-  int prevSortCol = config->readNumEntry("PrevSortColumn" + configN, -1);
-  int prev2SortCol = config->readNumEntry("Prev2SortColumn" + configN, -1);
+  int prevSortCol = config.readNumEntry("PrevSortColumn" + configN, -1);
+  int prev2SortCol = config.readNumEntry("Prev2SortColumn" + configN, -1);
   setPrevSortedColumn(prevSortCol, prev2SortCol);
 
   triggerUpdate();
@@ -274,7 +273,6 @@ void DetailedListView::removeEntries(Data::EntryVec entries_) {
 
 //  myDebug() << "DetailedListView::removeEntries() - " << entry_->title() << endl;
 
-  clearSelection();
   for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
     delete locateItem(entry);
   }
@@ -366,7 +364,7 @@ void DetailedListView::setEntrySelected(Data::EntryPtr entry_) {
   ensureItemVisible(item);
 }
 
-Tellico::DetailedEntryItem* const DetailedListView::locateItem(Data::EntryPtr entry_) {
+Tellico::DetailedEntryItem* DetailedListView::locateItem(Data::EntryPtr entry_) {
   for(QListViewItemIterator it(this); it.current(); ++it) {
     DetailedEntryItem* item = static_cast<DetailedEntryItem*>(it.current());
     if(item->entry() == entry_) {
@@ -384,7 +382,7 @@ bool DetailedListView::eventFilter(QObject* obj_, QEvent* ev_) {
     m_headerMenu->popup(static_cast<QMouseEvent*>(ev_)->globalPos());
     return true;
   }
-  return KListView::eventFilter(obj_, ev_);
+  return GUI::ListView::eventFilter(obj_, ev_);
 }
 
 void DetailedListView::slotHeaderMenuActivated(int id_) {
@@ -533,6 +531,7 @@ void DetailedListView::setFilter(FilterPtr filter_) {
   if(m_filter.data() != filter_) { // might just be updating
     m_filter = filter_;
   }
+//  clearSelection();
 
   int count = 0;
   // iterate over all items
@@ -541,7 +540,6 @@ void DetailedListView::setFilter(FilterPtr filter_) {
     item = static_cast<DetailedEntryItem*>(it.current());
     if(m_filter && !m_filter->matches(item->entry())) {
       item->setVisible(false);
-      // don't allow hidden selected items
       setSelected(item, false);
     } else {
       item->setVisible(true);
@@ -749,25 +747,24 @@ void DetailedListView::slotUpdatePixmap() {
 }
 
 void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_) {
-  KConfig* config = kapp->config();
-  config->setGroup(QString::fromLatin1("Options - %1").arg(coll_->typeName()));
+  KConfigGroup config(kapp->config(), QString::fromLatin1("Options - %1").arg(coll_->typeName()));
 
   // all of this is to have custom settings on a per file basis
   QString configN;
   if(coll_->type() == Data::Collection::Base) {
     QValueList<ConfigInfo> info;
     for(uint i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KURL u = config->readEntry(QString::fromLatin1("URL_%1").arg(i));
+      KURL u = config.readEntry(QString::fromLatin1("URL_%1").arg(i));
       if(!u.isEmpty() && static_cast<int>(i) != configIndex_) {
         configN = QString::fromLatin1("_%1").arg(i);
         ConfigInfo ci;
-        ci.cols      = config->readListEntry("ColumnNames" + configN);
-        ci.widths    = config->readIntListEntry("ColumnWidths" + configN);
-        ci.order     = config->readIntListEntry("ColumnOrder" + configN);
-        ci.colSorted = config->readNumEntry("SortColumn" + configN);
-        ci.ascSort   = config->readBoolEntry("SortAscending" + configN);
-        ci.prevSort  = config->readNumEntry("PrevSortColumn" + configN);
-        ci.prev2Sort = config->readNumEntry("Prev2SortColumn" + configN);
+        ci.cols      = config.readListEntry("ColumnNames" + configN);
+        ci.widths    = config.readIntListEntry("ColumnWidths" + configN);
+        ci.order     = config.readIntListEntry("ColumnOrder" + configN);
+        ci.colSorted = config.readNumEntry("SortColumn" + configN);
+        ci.ascSort   = config.readBoolEntry("SortAscending" + configN);
+        ci.prevSort  = config.readNumEntry("PrevSortColumn" + configN);
+        ci.prev2Sort = config.readNumEntry("Prev2SortColumn" + configN);
         info.append(ci);
       }
     }
@@ -776,13 +773,13 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
     for(uint i = 0; i < limit; ++i) {
       // starts at one since the current config will be written below
       configN = QString::fromLatin1("_%1").arg(i+1);
-      config->writeEntry("ColumnNames"     + configN, info[i].cols);
-      config->writeEntry("ColumnWidths"    + configN, info[i].widths);
-      config->writeEntry("ColumnOrder"     + configN, info[i].order);
-      config->writeEntry("SortColumn"      + configN, info[i].colSorted);
-      config->writeEntry("SortAscending"   + configN, info[i].ascSort);
-      config->writeEntry("PrevSortColumn"  + configN, info[i].prevSort);
-      config->writeEntry("Prev2SortColumn" + configN, info[i].prev2Sort);
+      config.writeEntry("ColumnNames"     + configN, info[i].cols);
+      config.writeEntry("ColumnWidths"    + configN, info[i].widths);
+      config.writeEntry("ColumnOrder"     + configN, info[i].order);
+      config.writeEntry("SortColumn"      + configN, info[i].colSorted);
+      config.writeEntry("SortAscending"   + configN, info[i].ascSort);
+      config.writeEntry("PrevSortColumn"  + configN, info[i].prevSort);
+      config.writeEntry("Prev2SortColumn" + configN, info[i].prev2Sort);
     }
     configN = QString::fromLatin1("_0");
   }
@@ -797,18 +794,18 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
     order += header()->mapToIndex(i);
   }
 
-  config->writeEntry("ColumnWidths"    + configN, widths);
-  config->writeEntry("ColumnOrder"     + configN, order);
-  config->writeEntry("SortColumn"      + configN, columnSorted());
-  config->writeEntry("SortAscending"   + configN, ascendingSort());
-  config->writeEntry("PrevSortColumn"  + configN, prevSortedColumn());
-  config->writeEntry("Prev2SortColumn" + configN, prev2SortedColumn());
+  config.writeEntry("ColumnWidths"    + configN, widths);
+  config.writeEntry("ColumnOrder"     + configN, order);
+  config.writeEntry("SortColumn"      + configN, columnSorted());
+  config.writeEntry("SortAscending"   + configN, ascendingSort());
+  config.writeEntry("PrevSortColumn"  + configN, prevSortedColumn());
+  config.writeEntry("Prev2SortColumn" + configN, prev2SortedColumn());
 
   QStringList colNames;
   for(int col = 0; col < columns(); ++col) {
     colNames += coll_->fieldNameByTitle(columnText(col));
   }
-  config->writeEntry("ColumnNames" + configN, colNames);
+  config.writeEntry("ColumnNames" + configN, colNames);
 }
 
 QString DetailedListView::sortColumnTitle1() const {

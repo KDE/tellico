@@ -42,6 +42,9 @@
     <xsl:when test="/collection[1]/@type='GCgames'">
      <xsl:text>11</xsl:text>
     </xsl:when>
+    <xsl:when test="/collection[1]/@type='GCboardgames'">
+     <xsl:text>13</xsl:text>
+    </xsl:when>
    </xsl:choose>
 </xsl:variable>
 
@@ -371,4 +374,36 @@
  <tc:reverse><xsl:value-of select="."/></tc:reverse>
 </xsl:template>
 
+<xsl:template match="publishedby">
+ <tc:publishers>
+  <xsl:for-each select="str:tokenize(., ',/;')">
+   <tc:publisher>
+    <xsl:value-of select="normalize-space(.)"/>
+   </tc:publisher>
+  </xsl:for-each>
+ </tc:publishers>
+</xsl:template>
+
+<xsl:template match="designedby">
+ <tc:designers>
+  <xsl:for-each select="str:tokenize(., ',/;')">
+   <tc:designer>
+    <xsl:value-of select="normalize-space(.)"/>
+   </tc:designer>
+  </xsl:for-each>
+ </tc:designers>
+</xsl:template>
+
+<xsl:template match="players">
+ <tc:num-players>
+  <!-- need to parse ranges, like 2-6 -->
+  <xsl:for-each select="str:tokenize(., ',/;')">
+   <tc:num-player>
+    <xsl:value-of select="normalize-space(.)"/>
+   </tc:num-player>
+  </xsl:for-each>
+ </tc:num-players>
+</xsl:template>
+
+<!-- bggid parse -->
 </xsl:stylesheet>

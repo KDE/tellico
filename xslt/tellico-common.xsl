@@ -197,6 +197,28 @@
  </xsl:choose>
 </xsl:template>
 
+<xsl:template name="image-link">
+ <xsl:param name="image"/>
+ <xsl:param name="dir"/>
+ <xsl:variable name="id" select="$image/@id"/>
+ <xsl:choose>
+  <xsl:when test="$image/@link = 'true'">
+   <!-- the id _is_ the link -->
+   <xsl:value-of select="$id"/>
+  </xsl:when>
+  <xsl:when test="string-length($dir) &gt; 0">
+   <xsl:value-of select="concat($dir, $id)"/>
+  </xsl:when>
+  <!-- otherwise try $imgdir and $datadir -->
+  <xsl:when test="string-length($datadir) &gt; 0">
+   <xsl:value-of select="concat($datadir, $id)"/>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:value-of select="concat($imgdir, $id)"/>
+  </xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
+
 <xsl:template name="msqueeze">
  <xsl:param name="str"/>
  <xsl:param name="len"/>

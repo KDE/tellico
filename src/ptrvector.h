@@ -14,8 +14,7 @@
 #ifndef TELLICO_PTRVECTOR_H
 #define TELLICO_PTRVECTOR_H
 
-#include "tellico_debug.h"
-
+#include <kdebug.h>
 #include <ksharedptr.h>
 
 #include <qvaluevector.h>
@@ -129,6 +128,7 @@ public:
 
   void clear() { m_baseVector.clear(); }
   void append(Ptr t) { m_baseVector.append(t); }
+  void append(Vector<T> v);
 
   void insert(Iterator pos, Ptr t) {
     m_baseVector.insert(&m_baseVector[pos.m_index], t);
@@ -275,6 +275,14 @@ private:
 }
 
 template <class T>
+void Tellico::Vector<T>::append(Tellico::Vector<T> v) {
+  typename Tellico::Vector<T>::Iterator it;
+  for(it = v.begin(); it != v.end(); ++it) {
+    append(it.data());
+  }
+}
+
+template <class T>
 bool Tellico::PtrVector<T>::remove(T* t) {
   if(!t) {
     return false;
@@ -289,7 +297,7 @@ bool Tellico::PtrVector<T>::remove(T* t) {
   m_baseVector.erase(ptr);
   // in case the pointer is in the vector multiple times
   while(remove(t)) {
-    myDebug() << "PtrVector::remove() - pointer was duplicated in vector" << endl;
+    kdDebug() << "PtrVector::remove() - pointer was duplicated in vector" << endl;
   }
   return true;
 }

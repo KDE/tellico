@@ -37,20 +37,18 @@
 <xsl:variable name="months-top" select="document('')/*/m:months"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Bookcase V9.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="9">
+ <tellico syntaxVersion="10">
   <collection title="PubMed Import" type="5">
    <fields>
     <field name="_default"/>
     <field flags="0" title="Institution" category="Institution" format="4" type="2" name="institution" i18n="true">
      <prop name="bibtex">institution</prop>
     </field>
-    <field flags="0" title="URL" category="Miscellaneous" format="4" type="7" name="url" i18n="true">
-     <prop name="bibtex">url</prop>
-    </field>
+    <field flags="0" title="Pubmed" category="Publishing" format="4" type="1" name="pmid" description="Pubmed" i18n="true" />
    </fields>
    <xsl:apply-templates select="/PubmedArticleSet/PubmedArticle/MedlineCitation"/>
   </collection>
@@ -85,7 +83,7 @@
   </xsl:variable>
 
   <year>
-   <xsl:value-of select="$year"/>  
+   <xsl:value-of select="$year"/>
   </year>
 
   <month>
@@ -95,15 +93,15 @@
   </month>
 
   <title>
-   <xsl:value-of select="Article/ArticleTitle"/>  
+   <xsl:value-of select="Article/ArticleTitle"/>
   </title>
 
   <pages>
-   <xsl:value-of select="Article/Pagination/MedlinePgn"/>  
+   <xsl:value-of select="Article/Pagination/MedlinePgn"/>
   </pages>
 
   <abstract>
-   <xsl:value-of select="Article/Abstract/AbstractText"/>  
+   <xsl:value-of select="Article/Abstract/AbstractText"/>
   </abstract>
 
   <institution>
@@ -113,14 +111,19 @@
   <authors>
    <xsl:for-each select="Article/AuthorList/Author">
     <author>
-     <xsl:if test="ForeName">
-      <xsl:value-of select="concat(ForeName, ' ')"/>
-     </xsl:if>
-     <xsl:if test="not(ForeName)">
-      <xsl:call-template name="TransformInitials">
-       <xsl:with-param name="initials" select="Initials"/>
-      </xsl:call-template>
-     </xsl:if>
+     <xsl:choose>
+      <xsl:when test="ForeName">
+       <xsl:value-of select="concat(ForeName, ' ')"/>
+      </xsl:when>
+      <xsl:when test="FirstName">
+       <xsl:value-of select="concat(FirstName, ' ')"/>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:call-template name="TransformInitials">
+        <xsl:with-param name="initials" select="Initials"/>
+       </xsl:call-template>
+      </xsl:otherwise>
+     </xsl:choose>
      <xsl:value-of select="LastName"/>
     </author>
    </xsl:for-each>
@@ -142,6 +145,11 @@
     </keyword>
    </xsl:for-each>
   </keywords>
+
+  <pmid>
+   <xsl:value-of select="PMID"/>
+  </pmid>
+
  </entry>
 </xsl:template>
 

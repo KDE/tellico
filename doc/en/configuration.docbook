@@ -167,12 +167,13 @@ in the Data Sources Dialog. There are several available types of sources:</para>
 <listitem><para><link linkend="animenfo">AnimeNfo.com</link>,</para></listitem>
 <listitem><para><link linkend="ibs">Internet Bookshop Italia</link>,</para></listitem>
 <listitem><para><link linkend="isbndb">ISBNdb.com</link>,</para></listitem>
-<listitem><para><link linkend="allocine">Allocine.fr</link>,</para></listitem>
-<listitem><para>the <link linkend="minculture">Spanish Ministry of Culture</link>,</para></listitem>
-<listitem><para><link linkend="darkhorse">Dark Horse Comics</link>,</para></listitem>
+<listitem><para><link linkend="gcstarplugin"><application>GCstar</application> Plugins</link>,</para></listitem>
+<listitem><para><link linkend="bib-sources">arxiv.org</link>,</para></listitem>
+<listitem><para><link linkend="bib-sources">bibsonomy.org</link>,</para></listitem>
+<listitem><para><link linkend="bib-sources">citebase.org</link>,</para></listitem>
+<listitem><para><link linkend="bib-sources">crossref.org</link>,</para></listitem>
 <listitem><para><link linkend="externalexec">other external scripts or applications</link></para></listitem>
 </itemizedlist>
-
 
 <screenshot>
 <screeninfo>The Data Sources Options Dialog</screeninfo>
@@ -329,31 +330,26 @@ The <ulink url="http://audio.search.yahoo.com">Yahoo! Audio Search</ulink> may b
 </para>
 </sect2>
 
-<sect2 id="allocine">
-<title>Allocine.fr</title>
+<sect2 id="gcstarplugin">
+<title>GCstar Plugins</title>
 <para>
-<ulink url="http://www.allocine.fr">Allocine.fr</ulink> is an online French bookstore. This data source <link linkend="externalexec">runs as a script</link> and requires <ulink url="http://python.org">Python</ulink> to be installed.
+If <application><ulink url="http://www.gcstar.org">GCstar</ulink></application> is installed, &appname; is able to take advantage of the wide range of search plugins available for GCstar. Depending on the collection type, various online resources are available for usage as a data source in &appname;
 </para>
 </sect2>
 
-<sect2 id="minculture">
-<title>Spanish Ministry of Culture</title>
+<sect2 id="bib-sources">
+<title>Bibliographic Databases</title>
 <para>
-The <ulink url="http://www.mcu.es">Spanish Ministry of Culture</ulink> is an online Spanish book database. This data source <link linkend="externalexec">runs as a script</link> and requires <ulink url="http://python.org">Python</ulink> to be installed.
-</para>
-</sect2>
-
-<sect2 id="darkhorse">
-<title>Dark Horse Comics</title>
-<para>
-<ulink url="http://darkhorse.com">Dark Horse Comics</ulink> is a comic book publisher. This data source <link linkend="externalexec">runs as a script</link> and requires <ulink url="http://python.org">Python</ulink> to be installed.
-</para>
+<ulink url="http://arxiv.org">arXiv.org</ulink>, <ulink url="http://bibsonomy.org">Bibsonomy</ulink>, <ulink url="http://citebase.org">Citebase</ulink>, and <ulink url="http://crossref.org">CrossRef</ulink> are online databases for academic articles and bibliographic information. For access to the CrossRef source, you must <ulink url="http://www.crossref.org/requestaccount/">request an account</ulink> and add your account information to the data source configuration.</para>
 </sect2>
 
 <sect2 id="externalexec">
 <title>External Scripts or Applications</title>
 <para>
 As an easier way for &appname; to integrate with third-party plugins, external scripts or applications may be used as an interface for searching other information sources. &appname; will execute a command, and pass the search terms as command-line options.
+</para>
+
+<para>Some scripts are distributed with &appname; itself. <ulink url="http://www.allocine.fr">Allocine.fr</ulink> is an online French bookstore. This data source requires <ulink url="http://python.org">Python</ulink> to be installed. The <ulink url="http://www.mcu.es">Spanish Ministry of Culture</ulink> is an online Spanish book database. This data source also required requires <ulink url="http://python.org">Python</ulink> to be installed. <ulink url="http://darkhorse.com">Dark Horse Comics</ulink> is a comic book publisher. This data source also requires <ulink url="http://python.org">Python</ulink>. <ulink url="http://boardgamegeek.com">BoardGameGeek</ulink> is a website with extensive data for board games, and the script requires <ulink url="http://www.ruby-lang.org">ruby</ulink>.
 </para>
 
 <screenshot>

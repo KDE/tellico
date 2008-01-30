@@ -27,8 +27,7 @@ namespace {
 }
 
 BibtexCollection::BibtexCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Entries")) {
-  setTitle(title_.isNull() ? i18n("Bibliography") : title_);
+   : Collection(title_.isEmpty() ? i18n("Bibliography") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }
@@ -162,6 +161,12 @@ Tellico::Data::FieldVec BibtexCollection::defaultFields() {
   field->setFormatFlag(Field::FormatPlain);
   list.append(field);
 
+  field = new Field(QString::fromLatin1("doi"), i18n("DOI"));
+  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("doi"));
+  field->setCategory(i18n(bibtex_publishing));
+  field->setDescription(i18n("Digital Object Identifier"));
+  list.append(field);
+
   // could make this a string list, but since bibtex import could have funky values
   // keep it an editbox
   field = new Field(QString::fromLatin1("month"), i18n("Month"));
@@ -217,6 +222,11 @@ Tellico::Data::FieldVec BibtexCollection::defaultFields() {
   field = new Field(QString::fromLatin1("keyword"), i18n("Keywords"));
   field->setCategory(i18n(bibtex_misc));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
+  list.append(field);
+
+  field = new Field(QString::fromLatin1("url"), i18n("URL"), Field::URL);
+  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("url"));
+  field->setCategory(i18n(bibtex_misc));
   list.append(field);
 
   field = new Field(QString::fromLatin1("abstract"), i18n("Abstract"), Data::Field::Para);
@@ -281,11 +291,13 @@ Tellico::Data::FieldPtr BibtexCollection::fieldByBibtexName(const QString& bibte
   return m_bibtexFieldDict.isEmpty() ? 0 : m_bibtexFieldDict.find(bibtex_);
 }
 
-// same as BookCollection::SameEntry()
+// same as BookCollection::sameEntry()
 int BibtexCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
   // equal isbn's or lccn's are easy, give it a weight of 100
-  if(Entry::compareValues(entry1_, entry2_, QString::fromLatin1("isbn"), this) > 0 ||
-     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("lccn"), this) > 0) {
+  if(Entry::compareValues(entry1_, entry2_, QString::fromLatin1("isbn"),  this) > 0 ||
+     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("lccn"),  this) > 0 ||
+     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("doi"),   this) > 0 ||
+     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("arxiv"), this) > 0) {
     return 100; // good match
   }
   int res = 3*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);

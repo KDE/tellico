@@ -23,6 +23,7 @@
 #include "../tellico_utils.h"
 #include "../progressmanager.h"
 #include "../core/tellico_config.h"
+#include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
 #include <kconfig.h>
@@ -570,7 +571,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   // go in pics/
   const bool isPic = link_.startsWith(m_dataDir + QString::fromLatin1("pics/"));
   QString midDir;
-  if(isPic) {
+  if(m_exportEntryFiles && isPic) {
     midDir = QString::fromLatin1("pics/");
   }
   // pictures are special since they might not exist when the HTML is exported, since they might get copied later
@@ -730,6 +731,7 @@ bool HTMLExporter::writeEntryFiles() {
     }
   }
   // the images in "pics/" are special data images, copy them always
+  // since the entry files may refer to them, but we don't know that
   QStringList dataImages;
   dataImages << QString::fromLatin1("checkmark.png");
   for(uint i = 1; i <= 10; ++i) {

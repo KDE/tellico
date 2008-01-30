@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/tellico/"
-                xmlns:aws="http://webservices.amazon.com/AWSECommerceService/2007-02-22"
+                xmlns:aws="http://webservices.amazon.com/AWSECommerceService/2007-10-29"
                 xmlns:exsl="http://exslt.org/common"
                 extension-element-prefixes="exsl"
                 version="1.0">
@@ -19,8 +19,9 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V9.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
+
 
 <!-- need to figure out what type of collection -->
 <xsl:variable name="args" select="//aws:OperationRequest/aws:Arguments"/>
@@ -53,7 +54,7 @@
 <xsl:variable name="ucletters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
 
 <xsl:template match="/">
- <tellico syntaxVersion="9">
+ <tellico syntaxVersion="10">
   <collection title="Amazon Import">
    <xsl:attribute name="type">
     <xsl:choose>

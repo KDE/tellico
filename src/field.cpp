@@ -317,7 +317,7 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
     lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
 
     // if it contains a comma already and the last word is not a suffix, don't format it
-    if(!Config::autoFormat() || name.find(',') > -1 && Config::nameSuffixList().grep(lastWord).isEmpty()) {
+    if(!Config::autoFormat() || (name.find(',') > -1 && Config::nameSuffixList().grep(lastWord).isEmpty())) {
       // arbitrarily impose rule that no spaces before a comma and
       // a single space after every comma
       name.replace(comma_split, QString::fromLatin1(", "));

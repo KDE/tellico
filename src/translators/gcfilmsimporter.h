@@ -14,10 +14,10 @@
 #ifndef TELLICO_IMPORT_GCFILMSIMPORTER_H
 #define TELLICO_IMPORT_GCFILMSIMPORTER_H
 
-class QRegExp;
-
 #include "textimporter.h"
 #include "../datavectors.h"
+
+class QRegExp;
 
 namespace Tellico {
   namespace Import {

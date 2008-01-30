@@ -25,8 +25,7 @@ namespace {
 using Tellico::Data::BookCollection;
 
 BookCollection::BookCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Books")) {
-  setTitle(title_.isNull() ? i18n("My Books") : title_);
+   : Collection(title_.isEmpty() ? i18n("My Books") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }
@@ -105,6 +104,12 @@ Tellico::Data::FieldVec BookCollection::defaultFields() {
 
   field = new Field(QString::fromLatin1("pages"), i18n("Pages"), Field::Number);
   field->setCategory(i18n(book_publishing));
+  list.append(field);
+
+  field = new Field(QString::fromLatin1("translator"), i18n("Translator"));
+  field->setCategory(i18n(book_publishing));
+  field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
+  field->setFormatFlag(Field::FormatName);
   list.append(field);
 
   field = new Field(QString::fromLatin1("language"), i18n("Language"));

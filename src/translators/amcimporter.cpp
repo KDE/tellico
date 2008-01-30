@@ -21,11 +21,14 @@
 #include "../imagefactory.h"
 #include "../latin1literal.h"
 #include "../progressmanager.h"
+#include "../tellico_debug.h"
 
 #include <kapplication.h>
 
 #include <qfile.h>
 #include <qimage.h>
+
+#include <limits.h>
 
 namespace {
   static const QCString AMC_FILE_ID = " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be ";
@@ -58,8 +61,8 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   m_ds.setByteOrder(QDataStream::LittleEndian);
 
   const uint l = AMC_FILE_ID.length();
-  char buffer[l+1];
-  m_ds.readRawBytes(buffer, l);
+  QMemArray<char> buffer(l+1);
+  m_ds.readRawBytes(buffer.data(), l);
   QString version = QString::fromLocal8Bit(buffer, l);
   QRegExp versionRx(QString::fromLatin1(".+AMC_(\\d+)\\.(\\d+).+"));
   if(version.find(versionRx) == -1) {
@@ -120,11 +123,8 @@ QString AMCImporter::readString() {
   if(l == 0) {
     return QString();
   }
-  char buffer[l+1];
-  m_ds.readRawBytes(buffer, l);
-  if(!buffer) {
-    return QString();
-  }
+  QMemArray<char> buffer(l+1);
+  m_ds.readRawBytes(buffer.data(), l);
   QString s = QString::fromLocal8Bit(buffer, l);
 //  myDebug() << "string: " << s << endl;
   return s;
@@ -135,15 +135,12 @@ QString AMCImporter::readImage(const QString& format_) {
   if(l == 0) {
     return QString();
   }
-  char buffer[l+1];
-  m_ds.readRawBytes(buffer, l);
-  if(!buffer) {
-    return QString();
-  }
+  QMemArray<char> buffer(l+1);
+  m_ds.readRawBytes(buffer.data(), l);
   QByteArray bytes;
-  bytes.setRawData(buffer, l);
+  bytes.setRawData(buffer.data(), l);
   QImage img(bytes);
-  bytes.resetRawData(buffer, l);
+  bytes.resetRawData(buffer.data(), l);
   if(img.isNull()) {
     myDebug() << "AMCImporter::readImage() - null image" << endl;
     return QString();

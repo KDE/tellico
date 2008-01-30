@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 
 # ***************************************************************************
-#    copyright            : (C) 2006-2007 by Mathias Monnerville
+#    copyright            : (C) 2006-2008 by Mathias Monnerville
 #    email                : tellico@monnerville.com
 # ***************************************************************************
 #
@@ -40,6 +40,18 @@ Update (checked) = %{title}
 ** Please note that this script is also part of the Tellico's distribution. 
 ** You will always find the latest version in the SVN trunk of Tellico
 
+SVN Version:	
+	* Removes translators for Authors List
+	* Adds translators to translator field
+	* Change from "Collection" to "Series"
+	* Process "Series Number"
+	* Adds in comments "ed.lit." authors
+	* If there isn't connection to Spanish Ministry of Culture
+	  shows a nice error message (timeout: 5 seconds)
+	* Removed "translated from/to" from Comments field as already
+	  exists in "Publishing" field
+	* Removed "Collection" field as I moved to Series/Series Number
+
 Version 0.3.2:
 	* Now find 'notas' field related information
 	* search URL modified to fetch information of exhausted books too
@@ -75,6 +87,7 @@ Version 0.1:
 import sys, os, re, md5, random, string
 import urllib, urllib2, time, base64
 import xml.dom.minidom, types
+import socket
 
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
@@ -83,6 +96,9 @@ NULLSTRING = ''
 VERSION = "0.3.2"
 
 ISBN, AUTHOR, TITLE = range(3)
+
+TRANSLATOR_STR = "tr."
+EDLIT_STR = "ed. lit."
 
 class EngineError(Exception): pass
 
@@ -105,18 +121,20 @@ class BasicTellicoDOM:
 		self.__dfltField = self.__doc.createElement('field')                                                                   
 		self.__dfltField.setAttribute('name', '_default')                                                                      
 		
-		# Add a custom 'Collection' field
-		self.__customField = self.__doc.createElement('field')                                                                   
-		self.__customField.setAttribute('name', 'book_collection')                                                                          
-		self.__customField.setAttribute('title', 'Collection')                                                                   
-		self.__customField.setAttribute('flags', '7')                                                                            
-		self.__customField.setAttribute('category', 'Classification')                                                            
-		self.__customField.setAttribute('format', '0')                                                                           
-		self.__customField.setAttribute('type', '1')                                                                             
-		self.__customField.setAttribute('i18n', 'yes')                                                                           
+		# Add a custom 'Collection' field (Left by reference for
+		# the future)
+		#self.__customCollectionField = self.__doc.createElement('field')
+		#self.__customCollectionField.setAttribute('name', 'book_collection')
+		#self.__customCollectionField.setAttribute('title', 'Collection')
+		#self.__customCollectionField.setAttribute('flags', '7')
+		#self.__customCollectionField.setAttribute('category', 'Classification')
+		#self.__customCollectionField.setAttribute('format', '0')
+		#self.__customCollectionField.setAttribute('type', '1')
+		#self.__customCollectionField.setAttribute('i18n', 'yes')
 
-		self.__fields.appendChild(self.__dfltField)                                                                            
-		self.__fields.appendChild(self.__customField)                                                                            
+
+		self.__fields.appendChild(self.__dfltField)
+		#self.__fields.appendChild(self.__customCollectionField)
 		self.__collection.appendChild(self.__fields)
 
 		self.__root.appendChild(self.__collection)
@@ -131,6 +149,7 @@ class BasicTellicoDOM:
 		Add a comic entry. 
 		Returns an entry node instance
 		"""
+
 		d = movieData
 
 		# Convert all strings to UTF-8
@@ -185,11 +204,17 @@ class BasicTellicoDOM:
 		priceNode = self.__doc.createElement('pur_price')
 		priceNode.appendChild(self.__doc.createTextNode(d['pur_price']))
 
-		bookColNode = self.__doc.createElement('book_collection')
-		bookColNode.appendChild(self.__doc.createTextNode(d['collection']))
+		seriesNode = self.__doc.createElement('series')
+		seriesNode.appendChild(self.__doc.createTextNode(d['series']))
 
-		for name in (	'title', 'year', 'pub', 'langs', 'keyword', 'ed', 'writers', 
-						'comments', 'pages', 'isbn', 'price', 'bookCol' ):
+		seriesNumNode = self.__doc.createElement('series_num')
+		seriesNumNode.appendChild(self.__doc.createTextNode(d['series_num']))
+
+		translatorNode = self.__doc.createElement('translator')
+		translatorNode.appendChild(self.__doc.createTextNode(d['translator']))
+
+		for name in ( 'title', 'year', 'pub', 'langs', 'keyword', 'ed', 'writers', 
+			'comments', 'pages', 'isbn', 'price', 'series', 'seriesNum', 'translator' ):
 			entryNode.appendChild(eval(name + 'Node'))
 
 		self.__collection.appendChild(entryNode)
@@ -201,6 +226,7 @@ class BasicTellicoDOM:
 		"""
 		Prints entry's XML content to stdout
 		"""
+
 		try:
 			print nEntry.toxml()
 		except:
@@ -210,6 +236,7 @@ class BasicTellicoDOM:
 		"""
 		Outputs XML content to stdout
 		"""
+
 		print XML_HEADER; print DOCTYPE
 		print self.__root.toxml()
 
@@ -236,7 +263,7 @@ class MinisterioCulturaParser:
 							'notas'			: '<th scope="row">Notas:.*?<td>.*?<span>(?P<notas>.*?)</span>',
 							'cdu'			: '<th scope="row">CDU:.*?<td><span>(?P<cdu>.*?)</span></td>',
 							'encuadernacion': '<th scope="row">Encuadernaci&oacute;n:.*?<td>.*?<span>(?P<encuadernacion>.*?)</span>',
-							'collection'	: '<th scope="row">Colecci&oacute;n:.*?<td>.*?<span>(?P<collection>.*?)</span>'
+							'series'	: '<th scope="row">Colecci&oacute;n:.*?<td>.*?<span>(?P<series>.*?)</span>'
 						}	
 
 		# Compile patterns objects
@@ -251,9 +278,10 @@ class MinisterioCulturaParser:
 		Runs the parser: fetch book related links, then fills and prints the DOM tree
 		to stdout (in tellico format) so that tellico can use it.
 		"""
+
 		# Strip out hyphens if kind is ISBN
 		if kind == ISBN:
-			criteria = criteria.replace('-', '')
+			criteria = criteria.replace('-', NULLSTRING)
 			# Support for multiple search
 			isbnList = criteria.split(';')
 			for n in isbnList:
@@ -268,7 +296,17 @@ class MinisterioCulturaParser:
 		"""
 		Fetch HTML data from url
 		"""
-		u = urllib2.urlopen(url)
+		
+		try:
+		    u = urllib2.urlopen(url)
+		except Exception, e:
+			u.close()
+			sys.exit("""
+Network error while getting HTML content.
+Tellico cannot connect to: http://www.mcu.es/comun/bases/isbn/ISBN.htm webpage:
+'%s'""" % e)
+
+
 		self.__data = u.read()
 		u.close()
 
@@ -277,6 +315,7 @@ class MinisterioCulturaParser:
 		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent() 
 		that need to be parsed.
 		"""
+
 		matchList = re.findall("""<div class="isbnResDescripcion">.*?<p>.*?<A target="_top" HREF="(?P<url>.*?)">""", self.__data, re.S)
 
 		if not matchList: return None
@@ -286,21 +325,27 @@ class MinisterioCulturaParser:
 		"""
 		Looks for book information
 		"""
+
 		self.__getHTMLContent(url)
 
 		matches = {}
 		data = {}
+
 		data['comments'] = []
+		# Empty string if series not available
+		data['series_num'] = NULLSTRING 
+		data['translator'] = NULLSTRING
 
 		for name, po in self.__regExpsPO.iteritems():
 			data[name] = NULLSTRING
 			matches[name] = re.search(self.__regExps[name], self.__data, re.S | re.I)
 
+
 			if matches[name]:
 				if name == 'title':
 					d = matches[name].group('title').strip()
-					d = re.sub('<.?strong>', '', d)
-					d = re.sub('\n', '', d)
+					d = re.sub('<.?strong>', NULLSTRING, d)
+					d = re.sub('\n', NULLSTRING, d)
 					data['title'] = d
 
 				elif name == 'isbn':
@@ -316,18 +361,19 @@ class MinisterioCulturaParser:
 				elif name == 'publication':
 					d = matches[name].group('publication')
 					for p in ('</?[Aa].*?>', '&nbsp;', ':', ','):
-						d = re.sub(p, '', d)
+						d = re.sub(p, NULLSTRING, d)
 
 					d = d.split('\n')
 					# d[1] is an empty string
 					data['publisher'] = "%s (%s)" % (d[2], d[0])
-					data['pub_year'] = re.sub('\d{2}\/', '', d[3])
+					data['pub_year'] = re.sub('\d{2}\/', NULLSTRING, d[3])
 					del data['publication']
 
 				elif name == 'desc':
 					d = matches[name].group('desc')
 					m = re.search('\d+ ', d)
-					data['pages'] = '' # When not available
+					# When not available
+					data['pages'] = NULLSTRING
 					if m:
 						data['pages'] = m.group(0).strip()
 					m = re.search('; (?P<format>.*cm)', d)
@@ -340,7 +386,7 @@ class MinisterioCulturaParser:
 
 				elif name == 'keyword':
 					d = matches[name].group('keywords')
-					d = re.sub('</?[Aa].*?>', '', d)
+					d = re.sub('</?[Aa].*?>', NULLSTRING, d)
 					data['keyword'] = d.strip()
 
 				elif name == 'cdu':
@@ -349,10 +395,26 @@ class MinisterioCulturaParser:
 				elif name == 'notas':
 					data['comments'].append(matches[name].group('notas').strip())
 				
-				elif name == 'collection':
-					d = matches[name].group('collection').strip()
+				elif name == 'series':
+					d = matches[name].group('series').strip()
 					d = re.sub('&nbsp;', ' ', d)
 					data[name] = d
+					# data[name] can contain something like 'Byblos, 162/24'
+
+					# Maybe better to add the reg exp to get seriesNum in self.__regExps 
+					p = re.compile('[0-9]+$')
+					s = re.search(p, data[name])
+
+					if s:
+						# if series ends with a number, it seems that is a 
+						# number of the book inside the series. We save in seriesNum
+						data['series_num'] = s.group()
+
+						# it removes lasts digits (plus one because is space or /) from
+						# data['series']
+						l = len(data['series_num']) + 1
+						data[name] = data[name][0:-l]
+						data[name] = data[name].rstrip(",") # remove the , between series and series_num
 
 				elif name == 'author':
 					# We may find several authors
@@ -361,7 +423,10 @@ class MinisterioCulturaParser:
 					if not authorsList:
 						# No href links
 						authors = re.search('<li>(?P<author>.*?)</li>', matches[name].group('author'), re.S | re.I)
-						results = authors.group('author').strip().split(',')
+						try:
+							results = authors.group('author').strip().split(',')
+						except AttributeError:
+							results = []
 						results = [r.strip() for r in results]
 						data[name] = results
 					else:
@@ -369,34 +434,37 @@ class MinisterioCulturaParser:
 							# Sometimes, the search engine outputs some image between a elements
 							if d.strip()[:4] != '<img':
 								data[name].append(d.strip())
-					# Removes any tr. fake author in the list
-					j = 0; max = len(data[name])
-					try:
-						while j < max:
-							data[name].remove('tr.')
-							j += 1
-					except ValueError:
-						# No more occurence
-						pass
+					
+					# Move tr authors (translators) to translators list
+					translator = self.__getSpecialRol(data[name], TRANSLATOR_STR)
+					edlit = self.__getSpecialRol(data[name], EDLIT_STR)
+					data[name] = self.__removeSpecialsFromAuthors(data[name], translator, TRANSLATOR_STR)
+					data[name] = self.__removeSpecialsFromAuthors(data[name], edlit, EDLIT_STR)
+
+					if len(translator) > 0:
+						data['translator'] = self.__formatSpecials(translator, NULLSTRING)
+
+					if len(edlit) > 0:
+						data['comments'].append(self.__formatSpecials(edlit, "Editor Literario: "))
 
 				elif name == 'language':
 					# We may find several languages
 					d =  matches[name].group('language')
-					d = re.sub('\n', '', d)
+					d = re.sub('\n', NULLSTRING, d)
 					d = d.split('<span>')
 					a = []
 					for lg in d:
 						if len(lg):
-							lg = re.sub('</span>', '', lg)
+							lg = re.sub('</span>', NULLSTRING, lg)
 							# Because HTML is not interpreted in the 'language' field of Tellico
 							lg = re.sub('&oacute;', 'o', lg)
 							a.append(lg.strip())
 					# Removes that word so that only the language name remains.
-					a[0] = re.sub('publicacion: ', '', a[0])
+					a[0] = re.sub('publicacion: ', NULLSTRING, a[0])
 					data['language'] = a
 					# Add other language related info to the 'comments' field too
-					for lg in a[1:]:
-						data['comments'].append(lg)
+					#for lg in a[1:]:
+						#data['comments'].append(lg)
 
 		return data
 
@@ -408,23 +476,23 @@ class MinisterioCulturaParser:
 		if kind == ISBN:
 			self.__getHTMLContent("%s%s%s" % (self.__baseURL, self.__searchURL % \
 				(urllib.quote(data),		# ISBN
-				 '',						# AUTHOR
-				 ''),						# TITLE
+				 NULLSTRING,				# AUTHOR
+				 NULLSTRING),				# TITLE
 				 self.__suffixURL)
 				)
 		elif kind == AUTHOR:
 			self.__getHTMLContent("%s%s%s" % (self.__baseURL, self.__searchURL % \
-				('',						# ISBN
+				(NULLSTRING,				# ISBN
 				 urllib.quote(data),		# AUTHOR
-				 ''),						# TITLE
+				 NULLSTRING),				# TITLE
 				 self.__suffixURL)
 				)
 
 		elif kind == TITLE:
 			self.__getHTMLContent("%s%s%s" % (self.__baseURL, self.__searchURL % \
-				('',						# ISBN
-				 '',						# AUTHOR
-				  urllib.quote(data)),		# TITLE
+				(NULLSTRING,				# ISBN
+				 NULLSTRING,				# AUTHOR
+				 urllib.quote(data)),		# TITLE
 				 self.__suffixURL)
 				)
 
@@ -438,6 +506,49 @@ class MinisterioCulturaParser:
 				node = self.__domTree.addEntry(data)
 		else:
 			return None
+
+	def __getSpecialRol(self, authors, special):
+		"""
+		Receives a list like ['Stephen King','Lorenzo Cortina','tr.',
+		'Rosalía Vázquez','tr.'] and returns a list with special names
+		"""
+
+		j = 0; max = len(authors)
+		special_rol = []
+		while j < max:
+			if authors[j] == special:
+				special_rol.append(authors[j-1])
+			j += 1
+		
+		return special_rol
+
+	def __removeSpecialsFromAuthors(self, authors, specials, string):
+		"""
+		Receives a list with authors+translators and removes 'tr.' and 
+		authors from there. Example:
+		authors: ['Stephen King','Lorenzo Cortina','tr.','Rosalía Vázquez','tr.']
+		translators: ['Lorenzo Cortina','Rosalía Vázquez']
+		returns: ['Stephen King']
+
+		(We could also guess string value because is the next position
+		in authors list)
+		"""
+
+		newauthors = authors[:]
+
+		for t in specials:
+			newauthors.remove(t)
+			newauthors.remove(string)
+
+		return newauthors
+
+	def __formatSpecials(self, translators, prefix):
+		"""
+		Receives a list with translators and returns a string
+		(authors are handled different: each author in a different node)
+		"""
+
+		return prefix + string.join(translators, '; ')
 
 def halt():
 	print "HALT."
@@ -456,8 +567,10 @@ def main():
 	if len(sys.argv) < 3:
 		showUsage()
 
+	socket.setdefaulttimeout(5)
+
 	# ;-separated ISBNs string
-	isbnStringList = ''
+	isbnStringList = NULLSTRING
 
 	opts = {'-t' : TITLE, '-i' : ISBN, '-a' : AUTHOR, '-m' : isbnStringList}
 	if sys.argv[1] not in opts.keys():

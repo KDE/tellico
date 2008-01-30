@@ -175,6 +175,7 @@ a description of <userinput>%{title} %{year}</userinput>, then the value of that
 be the title, followed by the year. This field type is used primarily for the title field in
 the coin, stamp, trading card, and wine collections. Either the internal field name or the field title
 may be used in the description for formatting.
+The entry ID is also available using <userinput>%{id}</userinput>.
 </para>
 </sect2>
 
@@ -184,7 +185,7 @@ may be used in the description for formatting.
 <title>Collection Types</title>
 
 <para>
-&appname; supports eleven specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, wines, and file catalogs. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
+&appname; supports twelve specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, wines, board games, and file catalogs. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
 </para>
 
 <para>
@@ -485,6 +486,29 @@ Wine collections have 15 default fields.
 <emphasis>Gift</emphasis>,
 <emphasis>Label Image</emphasis>, and
 <emphasis>Comments</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title>Board Game Collections</title>
+<para>
+Board game collections have 15 default fields.
+<emphasis>Title</emphasis>,
+<emphasis>Genre</emphasis>,
+<emphasis>Mechanism</emphasis>,
+<emphasis>Release Year</emphasis>,
+<emphasis>Publisher</emphasis>,
+<emphasis>Designer</emphasis>,
+<emphasis>Number of Players</emphasis>,
+<emphasis>Description</emphasis>,
+<emphasis>Rating</emphasis>,
+<emphasis>Purchase Date</emphasis>,
+<emphasis>Purchase Price</emphasis>,
+<emphasis>Gift</emphasis>,
+<emphasis>Loaned</emphasis>,
+<emphasis>Cover</emphasis>, and
+<emphasis>Comments</emphasis>,
 </para>
 
 </sect2>

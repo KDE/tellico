@@ -63,7 +63,8 @@ public:
     Stamp = 9,
     Card = 10,
     Game = 11,
-    File = 12
+    File = 12,
+    BoardGame = 13
     // if you want to add custom collection types, use a number sure to be unique like 101
   };
 
@@ -74,7 +75,7 @@ public:
    * @param title The title of the collection itself
    * @param entryTitle The title of the entries, which can be translated
    */
-  Collection(const QString& title, const QString& entryTitle);
+  explicit Collection(const QString& title);
   /**
    */
   virtual ~Collection();
@@ -202,6 +203,9 @@ public:
   void reorderFields(const FieldVec& list);
 
   // the reason this is not static is so I can call it from a collection pointer
+  // it also gets virtualized for different collection types
+  // the return values should be compared against the GOOD and PERFECT
+  // static match constants in this class
   virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;
 
   /**
@@ -314,7 +318,7 @@ public:
   bool removeFilter(FilterPtr filter);
   const FilterVec& filters() const { return m_filters; }
 
-  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, bool overwrite);
+  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, bool overwrite, bool askUser=false);
   /**
    * The string used for empty values. This forces consistency.
    */
@@ -323,6 +327,11 @@ public:
    * The string used for the people pseudo-group. This forces consistency.
    */
   static const QString s_peopleGroupName;
+
+  // these are the values that should be compared against
+  // the result from sameEntry()
+  static const int ENTRY_GOOD_MATCH = 10;
+  static const int ENTRY_PERFECT_MATCH = 20;
 
 signals:
   void signalGroupsModified(Tellico::Data::CollPtr coll, PtrVector<Tellico::Data::EntryGroup> groups);
@@ -355,7 +364,6 @@ private:
   long m_nextEntryId;
   QString m_title;
   QString m_typeName;
-  QString m_entryTitle;
   QString m_iconName;
   QString m_defaultGroupField;
 

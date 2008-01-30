@@ -25,6 +25,7 @@
 #include <kimageeffect.h>
 
 #include <qfile.h>
+#include <qdir.h>
 
 #define RELEASE_IMAGES
 
@@ -44,6 +45,7 @@ QMap<QString, Tellico::Data::ImageInfo> ImageFactory::s_imageInfoMap;
 Tellico::StringSet ImageFactory::s_imagesInTmpDir;
 Tellico::StringSet ImageFactory::s_imagesToRelease;
 KTempDir* ImageFactory::s_tmpDir = 0;
+QString ImageFactory::s_localDir;
 
 void ImageFactory::init() {
   if(!s_needInit) {
@@ -69,11 +71,18 @@ QString ImageFactory::dataDir() {
   return dataDir;
 }
 
-QString ImageFactory::addImage(const KURL& url_, bool quiet_, const KURL& refer_) {
-  return addImageImpl(url_, quiet_, refer_).id();
+QString ImageFactory::localDir() {
+  if(s_localDir.isEmpty()) {
+    return dataDir();
+  }
+  return s_localDir;
 }
 
-const Tellico::Data::Image& ImageFactory::addImageImpl(const KURL& url_, bool quiet_, const KURL& refer_) {
+QString ImageFactory::addImage(const KURL& url_, bool quiet_, const KURL& refer_, bool link_) {
+  return addImageImpl(url_, quiet_, refer_, link_).id();
+}
+
+const Tellico::Data::Image& ImageFactory::addImageImpl(const KURL& url_, bool quiet_, const KURL& refer_, bool link_) {
   if(url_.isEmpty() || !url_.isValid()) {
     return s_null;
   }
@@ -88,6 +97,11 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KURL& url_, bool qu
   if(img->isNull()) {
     delete img;
     return s_null;
+  }
+
+  if(link_) {
+    img->setLinkOnly(true);
+    img->setID(url_.url());
   }
 
   if(hasImage(img->id())) {
@@ -175,7 +189,9 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
   KURL u;
   if(dir_ == DataDir) {
     u.setPath(dataDir() + id_);
-  } else { // Temp
+  } else if(dir_ == LocalDir) {
+    u.setPath(localDir() + id_);
+  } else{ // Temp
     u.setPath(tempDir() + id_);
   }
 
@@ -232,6 +248,11 @@ bool ImageFactory::writeImage(const QString& id_, const KURL& targetDir_, bool f
     return false;
   }
 
+  if(img.linkOnly()) {
+    myDebug() << "ImageFactory::writeImage() - " << id_ << ": link only, not writing!" << endl;
+    return true;
+  }
+
   KURL target = targetDir_;
   target.addPath(id_);
 
@@ -245,16 +266,22 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
 //  myLog() << "ImageFactory::writeCachedImage() - dir = " << (dir_ == DataDir ? "DataDir" : "TmpDir" )
 //                                                         << "; id = " << id_ << endl;
 
-  QString path = ( dir_ == DataDir ? dataDir() : tempDir() );
+  QString path = ( dir_ == DataDir ? dataDir() : dir_ == TempDir ? tempDir() : localDir() );
 
   // images in the temp directory are erased every session, so we can track
   // whether they've already been written with a simple string set.
   // images in the data directory are persistent, so we have to check the
   // actual file existence
-  bool exists = ( dir_ == DataDir ? QFile::exists(path + id_) : s_imagesInTmpDir.has(id_) );
+  bool exists = ( dir_ == TempDir ? s_imagesInTmpDir.has(id_) : QFile::exists(path + id_));
 
   if(!force_ && exists) {
 //    myDebug() << "...writeCachedImage() - exists = true: " << id_ << endl;
+  } else if(!force_ && !exists && dir_ == LocalDir) {
+    QDir dir(localDir());
+    if(!dir.exists()) {
+      myDebug() << "ImageFactory::writeCachedImage() - creating " << s_localDir << endl;
+      dir.mkdir(localDir());
+    }
   } else {
 //    myLog() << "ImageFactory::writeCachedImage() - dir = " << (dir_ == DataDir ? "DataDir" : "TmpDir" )
 //                                                           << "; id = " << id_ << endl;
@@ -311,6 +338,18 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     return *img;
   }
 
+  // if the image is link only, we need to load it
+  // but can't call imageInfo() since that might recurse into imageById()
+  // also, the image info cache might not have it so check if the
+  // id is a valid absolute url
+  // yeah, it's probably slow
+  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !KURL::isRelativeURL(id_)) {
+    KURL u = id_;
+    if(u.isValid()) {
+      return addImageImpl(u, false, KURL(), true);
+    }
+  }
+
   // the document does a delayed loading of the images, sometimes
   // so an image could be in the tmp dir and not be in the cache
   // or it could be too big for the cache
@@ -352,7 +391,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     // if we're loading from the application data dir, but images are being saved in the
     // data file instead, then consider the document to be modified since it needs
     // the image saved
-    if(Config::writeImagesInFile()) {
+    if(Config::imageLocation() != Config::ImagesInAppDir) {
       Data::Document::self()->slotSetModified(true);
     }
     const Data::Image& img2 = addCachedImageImpl(id_, DataDir);
@@ -362,9 +401,28 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
 //      myLog() << "...imageById() - found in data dir" << endl;
       return img2;
     }
-  } else {
-    myDebug() << "***ImageFactory::imageById() - not found: " << id_ << endl;
   }
+  // if localDir() == DataDir(), then there's nothing left to check
+  if(localDir() == dataDir()) {
+    return s_null;
+  }
+  exists = QFile::exists(localDir() + id_);
+  if(exists) {
+    // if we're loading from the application data dir, but images are being saved in the
+    // data file instead, then consider the document to be modified since it needs
+    // the image saved
+    if(Config::imageLocation() != Config::ImagesInLocalDir) {
+      Data::Document::self()->slotSetModified(true);
+    }
+    const Data::Image& img2 = addCachedImageImpl(id_, LocalDir);
+    if(img2.isNull()) {
+      myDebug() << "ImageFactory::imageById() - tried to add from LocalDir, but failed: " << id_ << endl;
+    } else {
+//      myLog() << "...imageById() - found in data dir" << endl;
+      return img2;
+    }
+  }
+  myDebug() << "***ImageFactory::imageById() - not found: " << id_ << endl;
   return s_null;
 }
 
@@ -529,6 +587,23 @@ void ImageFactory::releaseImages() {
     }
   }
 #endif
+}
+
+void ImageFactory::setLocalDirectory(const KURL& url_) {
+  if(url_.isEmpty()) {
+    return;
+  }
+  if(!url_.isLocalFile()) {
+    myWarning() << "ImageFactory::setLocalDirectory() - Tellico can only save images to local disk" << endl;
+    myWarning() << "unable to save to " << url_ << endl;
+  } else {
+    s_localDir = url_.directory(false);
+    // could have already been set once
+    if(!url_.fileName().contains(QString::fromLatin1("_files"))) {
+      s_localDir += url_.fileName().section('.', 0, 0) + QString::fromLatin1("_files/");
+    }
+    myLog() << "ImageFactory::setLocalDirectory() - local dir = " << s_localDir << endl;
+  }
 }
 
 #undef RELEASE_IMAGES

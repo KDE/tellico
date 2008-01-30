@@ -1,0 +1,5 @@
+To regenerate the message strings, type
+
+make package-messages
+
+from the top-level directory

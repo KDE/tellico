@@ -60,7 +60,7 @@ using Tellico::Fetch::Z3950Fetcher;
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const char* name_)
     : Fetcher(parent_, name_), m_conn(0), m_port(Z3950_DEFAULT_PORT), m_esn(Z3950_DEFAULT_ESN),
-      m_config(0), m_started(false), m_done(true), m_MARC21XMLHandler(0),
+      m_started(false), m_done(true), m_MARC21XMLHandler(0),
       m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
 }
 
@@ -87,25 +87,19 @@ bool Z3950Fetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
-void Z3950Fetcher::readConfigHook(KConfig* config_, const QString& group_) {
-  // keep a pointer to config so the syntax can be saved
-  m_config = config_;
-  m_configGroup = group_;
-
-  KConfigGroupSaver groupSaver(config_, group_);
-
-  QString preset = config_->readEntry("Preset");
+void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
+  QString preset = config_.readEntry("Preset");
   if(preset.isEmpty()) {
-    m_host = config_->readEntry("Host");
-    int p = config_->readNumEntry("Port", Z3950_DEFAULT_PORT);
+    m_host = config_.readEntry("Host");
+    int p = config_.readNumEntry("Port", Z3950_DEFAULT_PORT);
     if(p > 0) {
       m_port = p;
     }
-    m_dbname = config_->readEntry("Database");
-    m_sourceCharSet = config_->readEntry("Charset");
-    m_syntax = config_->readEntry("Syntax");
-    m_user = config_->readEntry("User");
-    m_password = config_->readEntry("Password");
+    m_dbname = config_.readEntry("Database");
+    m_sourceCharSet = config_.readEntry("Charset");
+    m_syntax = config_.readEntry("Syntax");
+    m_user = config_.readEntry("User");
+    m_password = config_.readEntry("Password");
   } else {
     m_preset = preset;
     QString serverFile = locate("appdata", QString::fromLatin1("z3950-servers.cfg"));
@@ -130,7 +124,12 @@ void Z3950Fetcher::readConfigHook(KConfig* config_, const QString& group_) {
     }
   }
 
-  m_fields = config_->readListEntry("Custom Fields");
+  m_fields = config_.readListEntry("Custom Fields");
+}
+
+void Z3950Fetcher::saveConfigHook(KConfigGroup& config_) {
+  config_.writeEntry("Syntax", m_syntax);
+  config_.sync();
 }
 
 void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
@@ -455,11 +454,7 @@ void Z3950Fetcher::customEvent(QCustomEvent* event_) {
     Z3950SyntaxChange* e = static_cast<Z3950SyntaxChange*>(event_);
     if(m_syntax != e->syntax()) {
       m_syntax = e->syntax();
-      if(m_config) {
-        KConfigGroup group(m_config, m_configGroup);
-        group.writeEntry("Syntax", m_syntax);
-        group.sync();
-      }
+      // it gets saved when saveConfigHook() get's called from the Fetcher() d'tor
     }
   } else {
     kdWarning() << "Z3950Fetcher::customEvent() - weird type: " << event_->type() << endl;
@@ -625,43 +620,43 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
 Z3950Fetcher::ConfigWidget::~ConfigWidget() {
 }
 
-void Z3950Fetcher::ConfigWidget::saveConfig(KConfig* config_) {
+void Z3950Fetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   if(m_usePreset->isChecked()) {
     QString presetID = m_serverCombo->currentData().toString();
-    config_->writeEntry("Preset", presetID);
+    config_.writeEntry("Preset", presetID);
     return;
   }
-  config_->deleteEntry("Preset");
+  config_.deleteEntry("Preset");
 
   QString s = m_hostEdit->text().stripWhiteSpace();
   if(!s.isEmpty()) {
-    config_->writeEntry("Host", s);
+    config_.writeEntry("Host", s);
   }
   int port = m_portSpinBox->value();
   if(port > 0) {
-    config_->writeEntry("Port", port);
+    config_.writeEntry("Port", port);
   }
   s = m_databaseEdit->text().stripWhiteSpace();
   if(!s.isEmpty()) {
-    config_->writeEntry("Database", s);
+    config_.writeEntry("Database", s);
   }
   s = m_charSetCombo->currentText();
   if(!s.isEmpty()) {
-    config_->writeEntry("Charset", s);
+    config_.writeEntry("Charset", s);
   }
   s = m_userEdit->text();
   if(!s.isEmpty()) {
-    config_->writeEntry("User", s);
+    config_.writeEntry("User", s);
   }
   s = m_passwordEdit->text();
   if(!s.isEmpty()) {
-    config_->writeEntry("Password", s);
+    config_.writeEntry("Password", s);
   }
   s = m_syntaxCombo->currentData().toString();
   if(!s.isEmpty()) {
     m_syntax = s;
   }
-  config_->writeEntry("Syntax", m_syntax);
+  config_.writeEntry("Syntax", m_syntax);
 
   saveFieldsConfig(config_);
   slotSetModified(false);

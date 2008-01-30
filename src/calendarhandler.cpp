@@ -29,6 +29,7 @@
 
 // needed for ::readlink
 #include <unistd.h>
+#include <limits.h>
 
 // most of this code came from konsolekalendar in kdepim
 

@@ -53,7 +53,6 @@ public slots:
 
 private slots:
   void slotEntries(KIO::Job* job, const KIO::UDSEntryList& list);
-  void slotPreview(const KFileItem* item, const QPixmap& pix);
 
 private:
   QString volumeName() const;

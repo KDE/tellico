@@ -50,6 +50,12 @@
 #include <qcheckbox.h>
 #include <qvbox.h>
 #include <qtimer.h>
+#include <qimage.h>
+
+#include <config.h>
+#if ENABLE_WEBCAM
+#include "barcode/barcode.h"
+#endif
 
 namespace {
   static const int FETCH_STATUS_ID = 0;
@@ -61,6 +67,7 @@ namespace {
 }
 
 using Tellico::FetchDialog;
+using barcodeRecognition::barcodeRecognitionThread;
 
 class FetchDialog::SearchResultItem : public Tellico::GUI::ListViewItem {
   friend class FetchDialog;
@@ -239,9 +246,37 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   KAcceleratorManager::manage(this);
   // initialize combos
   QTimer::singleShot(0, this, SLOT(slotInit()));
+
+#if ENABLE_WEBCAM
+  // barcode recognition
+  m_barcodeRecognitionThread = new barcodeRecognitionThread();
+  if (m_barcodeRecognitionThread->isWebcamAvailable()) {
+    m_barcodePreview = new QLabel(0);
+    m_barcodePreview->move( QApplication::desktop()->width() - 350, 30 );
+    m_barcodePreview->setAutoResize( true );
+    m_barcodePreview->show();
+  } else {
+    m_barcodePreview = 0;
+  }
+  connect( m_barcodeRecognitionThread, SIGNAL(recognized(QString)), this, SLOT(slotBarcodeRecognized(QString)) );
+  connect( m_barcodeRecognitionThread, SIGNAL(gotImage(QImage&)), this, SLOT(slotBarcodeGotImage(QImage&)) );
+  m_barcodeRecognitionThread->start();
+/*  //DEBUG
+  QImage img( "/home/sebastian/white.png", "PNG" );
+  m_barcodeRecognitionThread->recognizeBarcode( img );*/
+#endif
 }
 
 FetchDialog::~FetchDialog() {
+#if ENABLE_WEBCAM
+  m_barcodeRecognitionThread->stop();
+  if (!m_barcodeRecognitionThread->wait( 1000 ))
+    m_barcodeRecognitionThread->terminate();
+  delete m_barcodeRecognitionThread;
+  if (m_barcodePreview)
+    delete m_barcodePreview;
+#endif
+
   // we might have downloaded a lot of images we don't need to keep
   Data::EntryVec entriesToCheck;
   for(QMap<int, Data::EntryPtr>::Iterator it = m_entries.begin(); it != m_entries.end(); ++it) {
@@ -351,16 +386,19 @@ void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
     QStringList values = QStringList::split(QString::fromLatin1("; "),
                                             m_oldSearch.simplifyWhiteSpace());
     for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
-      ISBNValidator::staticFixup(*it);
+      *it = ISBNValidator::cleanValue(*it);
     }
     for(QListViewItemIterator it(m_listView); it.current(); ++it) {
-      QString i = static_cast<SearchResultItem*>(it.current())->m_result->isbn;
-      ISBNValidator::staticFixup(i);
-      values.remove(i) ||
-      values.remove(ISBNValidator::isbn13(i)) || // check ISBN-13, too
-      values.remove(ISBNValidator::isbn10(i)); // EAN might be able to be converted
+      QString i = ISBNValidator::cleanValue(static_cast<SearchResultItem*>(it.current())->m_result->isbn);
+      values.remove(i);
+      if(i.length() > 10 && i.startsWith(QString::fromLatin1("978"))) {
+        values.remove(ISBNValidator::cleanValue(ISBNValidator::isbn10(i)));
+      }
     }
     if(!values.isEmpty()) {
+      for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
+        ISBNValidator::staticFixup(*it);
+      }
       // TODO dialog caption
       KDialogBase* dlg = new KDialogBase(this, "isbn not found dialog", false, QString::null, KDialogBase::Ok);
       QWidget* box = new QWidget(dlg);
@@ -371,10 +409,7 @@ void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
                                                      KIcon::NoGroup,
                                                      KIcon::SizeMedium));
       lay2->addWidget(lab);
-      QString s = i18n("<qt>No entries were found for the following ISBN values:</qt>");
-      // the <qt> makes the sizePolicy() get funky, so remove them
-      // but don't mess with pot file
-      s.remove(QString::fromLatin1("<qt>")).remove(QString::fromLatin1("</qt>"));
+      QString s = i18n("No results were found for the following ISBN values:");
       lay2->addWidget(new QLabel(s, box), 10);
       KTextEdit* edit = new KTextEdit(box, "isbn list edit");
       lay->addWidget(edit);
@@ -388,7 +423,7 @@ void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
   }
 }
 
-void FetchDialog::slotResultFound(Fetch::SearchResult* result_) {
+void FetchDialog::slotResultFound(Tellico::Fetch::SearchResult* result_) {
   m_results.append(result_);
   (void) new SearchResultItem(m_listView, result_);
   ++m_resultCount;
@@ -667,10 +702,48 @@ void FetchDialog::slotResetCollection() {
   m_addButton->setIconSet(UserIconSet(Kernel::self()->collectionTypeName()));
 
   if(Fetch::Manager::self()->canFetch()) {
-    m_searchButton->setEnabled(false);
+    m_searchButton->setEnabled(true);
   } else {
     m_searchButton->setEnabled(false);
     Kernel::self()->sorry(i18n("No Internet sources are available for your current collection type."), this);
+  }
+}
+
+void FetchDialog::slotBarcodeRecognized( QString string )
+{
+  // attention: this slot is called in the context of another thread => do not use GUI-functions!
+  QCustomEvent *e = new QCustomEvent( QEvent::User );
+  QString *data = new QString( string );
+  e->setData( data );
+  qApp->postEvent( this, e ); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+}
+
+void FetchDialog::slotBarcodeGotImage( QImage &img )
+{
+  // attention: this slot is called in the context of another thread => do not use GUI-functions!
+  QCustomEvent *e = new QCustomEvent( QEvent::User+1 );
+  QImage *data = new QImage( img.copy() );
+  e->setData( data );
+  qApp->postEvent( this, e ); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+}
+
+void FetchDialog::customEvent( QCustomEvent *e )
+{
+  if (!e)
+    return;
+  if ((e->type() == QEvent::User) && e->data()) {
+    // slotBarcodeRecognized() queued call
+    QString temp = *(QString*)(e->data());
+    delete (QString*)(e->data());
+    qApp->beep();
+    m_valueLineEdit->setText( temp );
+    m_searchButton->animateClick();
+  }
+  if ((e->type() == QEvent::User+1) && e->data()) {
+    // slotBarcodegotImage() queued call
+    QImage temp = *(QImage*)(e->data());
+    delete (QImage*)(e->data());
+    m_barcodePreview->setPixmap( temp );
   }
 }
 

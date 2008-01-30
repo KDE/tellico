@@ -19,6 +19,7 @@
 #include "../tellico_utils.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -61,9 +62,8 @@ bool ISBNdbFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::ComicBook || type == Data::Collection::Bibtex;
 }
 
-void ISBNdbFetcher::readConfigHook(KConfig* config_, const QString& group_) {
+void ISBNdbFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
-  Q_UNUSED(group_);
 }
 
 void ISBNdbFetcher::search(FetchKey key_, const QString& value_) {

@@ -67,12 +67,12 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
   // only search title, person, isbn, or keyword. No Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k != UPC && k != Raw; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return SRU; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(KConfig* config, const QString& group);
+  virtual void readConfigHook(const KConfigGroup& config);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -113,7 +113,7 @@ friend class SRUFetcher;
 
 public:
   SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = 0);
-  virtual void saveConfig(KConfig* config);
+  virtual void saveConfig(KConfigGroup& config);
   virtual QString preferredName() const;
 
 private slots:

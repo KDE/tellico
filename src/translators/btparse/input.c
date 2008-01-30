@@ -240,7 +240,7 @@ AST * bt_parse_entry_s (char *    entry_text,
    zzast_sp = ZZAST_STACKSIZE;          /* workaround apparent pccts bug */
    start_parse (NULL, entry_text, line);
 
-   bibentry (&entry_ast);                  /* enter the parser */
+   entry (&entry_ast);                  /* enter the parser */
    ++zzasp;                             /* why is this done? */
 
    if (entry_ast == NULL)               /* can happen with very bad input */
@@ -376,7 +376,7 @@ AST * bt_parse_entry (FILE *    infile,
    }
    assert (prev_file == infile);
 
-   bibentry (&entry_ast);                  /* enter the parser */
+   entry (&entry_ast);                  /* enter the parser */
    ++zzasp;                             /* why is this done? */
 
    if (entry_ast == NULL)               /* can happen with very bad input */

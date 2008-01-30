@@ -14,16 +14,6 @@
 #ifndef AMAZONFETCHER_H
 #define AMAZONFETCHER_H
 
-namespace Tellico {
-  class XSLTHandler;
-}
-
-class KLineEdit;
-class KComboBox;
-
-class QCheckBox;
-class QLabel;
-
 #include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
@@ -33,11 +23,22 @@ class QLabel;
 #include <qcstring.h> // for QByteArray
 #include <qguardedptr.h>
 
+class KLineEdit;
+
+class QCheckBox;
+class QLabel;
+
 namespace KIO {
   class Job;
 }
 
 namespace Tellico {
+
+  class XSLTHandler;
+  namespace GUI {
+    class ComboBox;
+  }
+
   namespace Fetch {
 
 /**
@@ -49,7 +50,6 @@ class AmazonFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  // must be in order, starting at 0
   enum Site {
     Unknown = -1,
     US = 0,
@@ -75,12 +75,12 @@ public:
   virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
   // amazon can search title, person, isbn, or keyword. No Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k != Raw; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == UPC || k == Keyword; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Amazon; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(KConfig* config, const QString& group);
+  virtual void readConfigHook(const KConfigGroup& config);
 
   virtual void updateEntry(Data::EntryPtr entry);
 
@@ -141,7 +141,7 @@ Q_OBJECT
 public:
   ConfigWidget(QWidget* parent_, const AmazonFetcher* fetcher = 0);
 
-  virtual void saveConfig(KConfig* config_);
+  virtual void saveConfig(KConfigGroup& config);
   virtual QString preferredName() const;
 
 private slots:
@@ -149,8 +149,8 @@ private slots:
 
 private:
   KLineEdit* m_assocEdit;
-  KComboBox* m_siteCombo;
-  KComboBox* m_imageCombo;
+  GUI::ComboBox* m_siteCombo;
+  GUI::ComboBox* m_imageCombo;
 };
 
   } // end namespace

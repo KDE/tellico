@@ -1,6 +1,121 @@
+2008-01-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with stepping through selected entries after editing one.
+
+2008-01-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with matching ISBN values for updating entries.
+
+2008-01-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.3pre1.
+
+2008-01-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Spanish Ministry of Culture script.
+
+2008-01-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IMDB search to fix director and TV cast.
+
+2007-12-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added DCOP calls to set the view filter and to show entries.
+	* Improved filter to allow specifying field name with '='.
+
+2007-12-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added importer for Delicious Library files.
+
+2007-12-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Dependant field parsing to allow %{id} to grab entry id.
+	* Added context menu option in icon view to change sorting.
+	* Extended the DCOP interface to allow adding and removing entries, reading field values, and setting field values.
+
+2007-11-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Added capability to save a link to an image only, instead of saving it to the users image directory. Setting an image field property link=true will make that the default.
+
+2007-11-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated to allow a "required" property to be included to indicate that a on-empty value should always be present when saving.
+	* Updated to use libcsv from Robert Gamble, allowing newlines
+
+2007-11-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with creating filter from group item.
+	* Added Ukrainian translation from Serhij Dubyk Сергій Дубик.
+
+2007-11-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Added a sharedmimeinfo file.
+
+2007-11-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Bibsonomy fetcher.
+	* Added citebase.org fetcher.
+
+2007-11-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added option for importing bibtex in Unicode (UTF-8).
+	* Added importing from Referencer.
+
+2007-11-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Added arxiv.org API fetcher.
+
+2007-11-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bugs related to compilation with gcc 4.3.
+
+2007-10-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Added option for saving images in local relative directory to data file.
+
+2007-10-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Added menu command for merging entries, based on patch from Cyril Dangerville.
+
+2007-10-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Added CrossRef search for DOI.
+
+2007-10-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed list view sorting to take into account automatic formatting.
+	* Fixed date sorting to put empty dates first.
+
+2007-10-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed sorting bug for images.
+	* Fixed sorting bug for empty dates in HTML export, patch from Jake Maciejewski.
+
+2007-10-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug in bibtex importer.
+
+2007-10-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Added PDF importer, using exempi XMP library.
+	* Added drag & drop support for PDF importer.
+
+2007-10-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Added DOI and URL to default bibtex collection fields.
+
+2007-09-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for using GCstar plugins.
+	* Fixed bug with escaping the image id for file names.
+
 2007-09-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.2.14.
+
+2007-09-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added importer for Griffith database.
 
 2007-09-10  Robby Stephenson  <robby@periapsis.org>
 
@@ -103,7 +218,6 @@ Jake Maciejewski.
 
 2007-05-04  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed a potential crashing bug for OpenOffice.org connection.
 	* Fixed bug that lost some images when loading directly from XML.
 
 2007-04-13  Robby Stephenson  <robby@periapsis.org>
@@ -228,7 +342,6 @@ Jake Maciejewski.
 
 	* Bumped the Amazon ECS version to 2006-11-30.
 	* Updated Amazon search to allow ISBN-13 values.
-	* Updated de.po, thanks to Tobias Gruetzmacher.
 	* Fixed bug with saving URLs without the protocol.
 	* Changed entry comparison for files to match only on URL value.
 	* Released Tellico 1.2.7.
@@ -243,6 +356,7 @@ Jake Maciejewski.
 
 2006-11-29  Robby Stephenson  <robby@periapsis.org>
 
+	* Added ISBN hyphenation rules for German, Czech, and Dutch.
 	* Fixed bug that caused image loss when loading from data file.
 
 2006-11-10  Robby Stephenson  <robby@periapsis.org>
@@ -271,10 +385,17 @@ Jake Maciejewski.
 
 2006-10-18  Robby Stephenson  <robby@periapsis.org>
 
+	* Added warning when importing CSV without assigning any fields. 
 	* Updated allocine script (v 0.3), from Mathias Monnerville.
+
+2006-10-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Added board game collection, patch from Steve Beattie.
+	* Added script for searching boardgamegeek.com, patch from Steve Beattie.
 
 2006-10-15  Robby Stephenson  <robby@periapsis.org>
 
+	* Branched 1.2.x series.
 	* Fixed encoding bug with allocine.fr script.
 
 2006-10-14  Robby Stephenson  <robby@periapsis.org>
@@ -960,7 +1081,7 @@ Jake Maciejewski.
 
 2005-06-22  Robby Stephenson  <robby@periapsis.org>
 
-        * Added initial Catalan translation from David Maj� Mart�nez.
+        * Added initial Catalan translation from David Majà Martínez.
 
 2005-06-20  Robby Stephenson  <robby@periapsis.org>
 
@@ -1036,7 +1157,7 @@ Jake Maciejewski.
 2005-04-09  Robby Stephenson  <robby@periapsis.org>
 
         * Added a PubMed search source, thanks to an  XSL stylesheet from
-        Micha�l Zugaro.
+        Michaël Zugaro.
 
 2005-04-08  Robby Stephenson  <robby@periapsis.org>
 
@@ -1219,7 +1340,7 @@ Jake Maciejewski.
 
         * Updated Finnish translation, thanks to Tuevo Eloranta.
         * Updated Norwegian translation, thanks to Leif Mathis Gaup.
-        * Fixed *BSD compile, with patch from Markus Br�ffer.
+        * Fixed *BSD compile, with patch from Markus Brüffer.
 
 2004-12-01  Robby Stephenson  <robby@periapsis.org>
 

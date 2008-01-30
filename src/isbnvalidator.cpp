@@ -48,6 +48,11 @@ QString ISBNValidator::isbn13(QString isbn10) {
   return isbn10;
 }
 
+QString ISBNValidator::cleanValue(QString isbn) {
+  isbn.remove(QRegExp(QString::fromLatin1("[^xX0123456789]")));
+  return isbn;
+}
+
 ISBNValidator::ISBNValidator(QObject* parent_, const char* name_/*=0*/)
     : QValidator(parent_, name_) {
 }
@@ -441,7 +446,31 @@ struct ISBNValidator::isbn_band ISBNValidator::bands[] = {
   ISBNGRP_1DIGIT(2,     ISBNPUB_6DIGIT(949999),  7, 9),
   ISBNGRP_1DIGIT(2,     ISBNPUB_7DIGIT(9999999), 8, 9),
 
+  /* Group 2 : German */
+  ISBNGRP_1DIGIT(3,     ISBNPUB_2DIGIT(19),      3, 9),
+  ISBNGRP_1DIGIT(3,     ISBNPUB_3DIGIT(699),     4, 9),
+  ISBNGRP_1DIGIT(3,     ISBNPUB_4DIGIT(8499),    5, 9),
+  ISBNGRP_1DIGIT(3,     ISBNPUB_5DIGIT(89999),   6, 9),
+  ISBNGRP_1DIGIT(3,     ISBNPUB_6DIGIT(949999),  7, 9),
+  ISBNGRP_1DIGIT(3,     ISBNPUB_7DIGIT(9999999), 8, 9),
+
   ISBNGRP_1DIGIT(7,     ISBNPUB_2DIGIT(99),      0, 9),
+  /* Group 80 : Czech */
+  ISBNGRP_2DIGIT(80,    ISBNPUB_2DIGIT(19),      4, 9),
+  ISBNGRP_2DIGIT(80,    ISBNPUB_3DIGIT(699),     5, 9),
+  ISBNGRP_2DIGIT(80,    ISBNPUB_4DIGIT(8499),    6, 9),
+  ISBNGRP_2DIGIT(80,    ISBNPUB_5DIGIT(89999),   7, 9),
+  ISBNGRP_2DIGIT(80,    ISBNPUB_6DIGIT(949999),  8, 9),
+
+  /* Group 90 * Netherlands */
+  ISBNGRP_2DIGIT(90,    ISBNPUB_2DIGIT(19),      4, 9),
+  ISBNGRP_2DIGIT(90,    ISBNPUB_3DIGIT(499),     5, 9),
+  ISBNGRP_2DIGIT(90,    ISBNPUB_4DIGIT(6999),    6, 9),
+  ISBNGRP_2DIGIT(90,    ISBNPUB_5DIGIT(79999),   7, 9),
+  ISBNGRP_2DIGIT(90,    ISBNPUB_6DIGIT(849999),  8, 9),
+  ISBNGRP_2DIGIT(90,    ISBNPUB_4DIGIT(8999),    6, 9),
+  ISBNGRP_2DIGIT(90,    ISBNPUB_7DIGIT(9999999), 9, 9),
+
   ISBNGRP_2DIGIT(94,    ISBNPUB_2DIGIT(99),      0, 9),
   ISBNGRP_3DIGIT(993,   ISBNPUB_2DIGIT(99),      0, 9),
   ISBNGRP_4DIGIT(9989,  ISBNPUB_2DIGIT(99),      0, 9),

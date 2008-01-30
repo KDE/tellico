@@ -90,19 +90,18 @@ bool ExecExternalFetcher::canFetch(int type_) const {
   return m_collType == -1 ? false : m_collType == type_;
 }
 
-void ExecExternalFetcher::readConfigHook(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readPathEntry("ExecPath");
+void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
+  QString s = config_.readPathEntry("ExecPath");
   if(!s.isEmpty()) {
     m_path = s;
   }
   QValueList<int> il;
-  if(config_->hasKey("ArgumentKeys")) {
-    il = config_->readIntListEntry("ArgumentKeys");
+  if(config_.hasKey("ArgumentKeys")) {
+    il = config_.readIntListEntry("ArgumentKeys");
   } else {
     il.append(Keyword);
   }
-  QStringList sl = config_->readListEntry("Arguments");
+  QStringList sl = config_.readListEntry("Arguments");
   if(il.count() != sl.count()) {
     kdWarning() << "ExecExternalFetcher::readConfig() - unequal number of arguments and keys" << endl;
   }
@@ -110,16 +109,16 @@ void ExecExternalFetcher::readConfigHook(KConfig* config_, const QString& group_
   for(int i = 0; i < n; ++i) {
     m_args[static_cast<FetchKey>(il[i])] = sl[i];
   }
-  if(config_->hasKey("UpdateArgs")) {
+  if(config_.hasKey("UpdateArgs")) {
     m_canUpdate = true;
-    m_updateArgs = config_->readEntry("UpdateArgs");
+    m_updateArgs = config_.readEntry("UpdateArgs");
   } else {
     m_canUpdate = false;
   }
-  m_collType = config_->readNumEntry("CollectionType", -1);
-  m_formatType = config_->readNumEntry("FormatType", -1);
-  m_deleteOnRemove = config_->readBoolEntry("DeleteOnRemove", false);
-  m_newStuffName = config_->readEntry("NewStuffName");
+  m_collType = config_.readNumEntry("CollectionType", -1);
+  m_formatType = config_.readNumEntry("FormatType", -1);
+  m_deleteOnRemove = config_.readBoolEntry("DeleteOnRemove", false);
+  m_newStuffName = config_.readEntry("NewStuffName");
 }
 
 void ExecExternalFetcher::search(FetchKey key_, const QString& value_) {
@@ -198,6 +197,9 @@ void ExecExternalFetcher::slotError(KProcess*, char* buffer_, int len_) {
   GUI::CursorSaver cs(Qt::arrowCursor);
   QString msg = QString::fromLocal8Bit(buffer_, len_);
   msg.prepend(source() + QString::fromLatin1(": "));
+  if(msg.endsWith(QChar('\n'))) {
+    msg.truncate(msg.length()-1);
+  }
   myDebug() << "ExecExternalFetcher::slotError() - " << msg << endl;
   m_errors << msg;
 }
@@ -291,6 +293,14 @@ void ExecExternalFetcher::slotProcessExited(KProcess*) {
                + QChar('/')
                + entry->field(QString::fromLatin1("pub_year"));
         break;
+
+     case Data::Collection::BoardGame:
+       desc = entry->field(QString::fromLatin1("designer"))
+              + QChar('/')
+              + entry->field(QString::fromLatin1("publisher"))
+              + QChar('/')
+              + entry->field(QString::fromLatin1("year"));
+       break;
 
       default:
         break;
@@ -411,8 +421,8 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   gridLayout->addWidget(m_leUpdate, row, 1);
   /* TRANSLATORS: Do not translate %{author}. */
   w2 = i18n("<p>Enter the arguments which should be used to search for available updates to an entry.</p><p>"
-            "The format is the same as for <i>Dependent</i> fields, where field values "
-            "are contained inside braces, such as <i>%{author}</i>. See the documentation for details.</p>");
+           "The format is the same as for <i>Dependent</i> fields, where field values "
+           "are contained inside braces, such as <i>%{author}</i>. See the documentation for details.</p>");
   QWhatsThis::add(m_cbUpdate, w);
   QWhatsThis::add(m_leUpdate, w2);
   if(fetcher_ && fetcher_->m_canUpdate) {
@@ -501,10 +511,10 @@ void ExecExternalFetcher::ConfigWidget::readConfig(KConfig* config_) {
   m_newStuffName = config_->readEntry("NewStuffName");
 }
 
-void ExecExternalFetcher::ConfigWidget::saveConfig(KConfig* config_) {
+void ExecExternalFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   QString s = m_pathEdit->url();
   if(!s.isEmpty()) {
-    config_->writePathEntry("ExecPath", s);
+    config_.writePathEntry("ExecPath", s);
   }
   QValueList<int> keys;
   QStringList args;
@@ -514,20 +524,20 @@ void ExecExternalFetcher::ConfigWidget::saveConfig(KConfig* config_) {
       args << m_leDict[it.currentKey()]->text();
     }
   }
-  config_->writeEntry("ArgumentKeys", keys);
-  config_->writeEntry("Arguments", args);
+  config_.writeEntry("ArgumentKeys", keys);
+  config_.writeEntry("Arguments", args);
 
   if(m_cbUpdate->isChecked()) {
-    config_->writeEntry("UpdateArgs", m_leUpdate->text());
+    config_.writeEntry("UpdateArgs", m_leUpdate->text());
   } else {
-    config_->deleteEntry("UpdateArgs");
+    config_.deleteEntry("UpdateArgs");
   }
 
-  config_->writeEntry("CollectionType", m_collCombo->currentType());
-  config_->writeEntry("FormatType", m_formatCombo->currentData().toInt());
-  config_->writeEntry("DeleteOnRemove", m_deleteOnRemove);
+  config_.writeEntry("CollectionType", m_collCombo->currentType());
+  config_.writeEntry("FormatType", m_formatCombo->currentData().toInt());
+  config_.writeEntry("DeleteOnRemove", m_deleteOnRemove);
   if(!m_newStuffName.isEmpty()) {
-    config_->writeEntry("NewStuffName", m_newStuffName);
+    config_.writeEntry("NewStuffName", m_newStuffName);
   }
   slotSetModified(false);
 }

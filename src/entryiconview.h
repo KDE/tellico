@@ -26,6 +26,7 @@ namespace Tellico {
   namespace Data {
     class Collection;
   }
+  class ListViewComparison;
 
 /**
  * @author Robby Stephenson
@@ -37,6 +38,7 @@ friend class EntryIconViewItem;
 
 public:
   EntryIconView(QWidget* parent, const char* name = 0);
+  ~EntryIconView();
 
   EntryIconViewItem* firstItem() const;
 
@@ -53,6 +55,7 @@ public:
   virtual void removeEntries(Data::EntryVec entries);
 
   const QString& imageField();
+  const QString& sortField();
   void setMaxAllowedIconWidth(int width);
   int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
 
@@ -64,10 +67,13 @@ public:
    */
   const QPtrList<EntryIconViewItem>& selectedItems() const { return m_selectedItems; }
 
+  int compare(const EntryIconViewItem* item1, EntryIconViewItem* item2);
+
 private slots:
   void slotSelectionChanged();
   void slotDoubleClicked(QIconViewItem* item);
   void slotShowContextMenu(QIconViewItem* item, const QPoint& point);
+  void slotSortMenuActivated(int id);
 
 private:
   /**
@@ -89,6 +95,7 @@ private:
   int m_maxAllowedIconWidth;
   int m_maxIconWidth;
   int m_maxIconHeight;
+  ListViewComparison* m_comparison;
 };
 
 class EntryIconViewItem : public KIconViewItem {
@@ -102,6 +109,8 @@ public:
   Data::EntryPtr entry() const { return m_entry; }
   virtual void setSelected(bool s, bool cb);
   virtual void setSelected(bool s);
+  virtual QString key() const;
+  virtual int compare(QIconViewItem* item_) const;
 
   bool usesImage() const { return m_usesImage; }
   void updatePixmap();

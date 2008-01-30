@@ -11,7 +11,11 @@ admin/config.pl \
 admin/libtool.m4.in \
 admin/Makefile.common
 
-EXTRA_DIST = COPYING ChangeLog INSTALL README TODO tellico.lsm tellico.dtd x-tellico.desktop configure.in.in AUTHORS NEWS tellico.tips tellico.desktop tellico-rename.upd tellico.upd $(ADMIN_DIST)
+EXTRA_DIST = \
+COPYING ChangeLog INSTALL README TODO \
+tellico.lsm tellico.dtd x-tellico.desktop \
+configure.in.in AUTHORS NEWS tellico.tips \
+tellico.desktop tellico.xml $(ADMIN_DIST)
 
 ####### kdevelop will overwrite this part!!! (end)############
 # not a GNU package. You can remove this line, if 
@@ -32,6 +36,7 @@ $(top_srcdir)/acinclude.m4: $(top_srcdir)/admin/acinclude.m4.in $(top_srcdir)/ad
 	@cd $(top_srcdir) && cat admin/acinclude.m4.in admin/libtool.m4.in > acinclude.m4
 
 xdg_apps_DATA = tellico.desktop
+xdg_mime_DATA = tellico.xml
 
 mimedir = $(kde_mimedir)/application
 mime_DATA = x-tellico.desktop
@@ -39,14 +44,14 @@ mime_DATA = x-tellico.desktop
 localdir = $(kde_datadir)/tellico
 local_DATA = tellico.dtd tellico.tips
 
-updatedir = $(kde_datadir)/kconf_update
-update_DATA = tellico-rename.upd tellico.upd
-
 CLEANFILES = *~ *.loT
 
 DISTCLEANFILES = stamp-h1 stamp-h.in stamp-h2 $(distdir).tar.gz $(CLEANFILES)
 
-MAINTAINERCLEANFILES = subdirs configure configure.in aclocal.m4 acinclude.m4 configure.files Makefile.in $(DISTCLEANFILES)
+MAINTAINERCLEANFILES = \
+subdirs configure configure.in \
+aclocal.m4 acinclude.m4 configure.files \
+Makefile.in $(DISTCLEANFILES)
 
 
 package-messages:

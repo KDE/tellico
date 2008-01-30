@@ -20,11 +20,12 @@
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../progressmanager.h"
+#include "../core/netaccess.h"
+#include "../tellico_debug.h"
 
 #include <kapplication.h>
 #include <kmountpoint.h>
 #include <kio/job.h>
-#include <kio/previewjob.h>
 #include <kio/netaccess.h>
 
 #include <qcheckbox.h>
@@ -147,16 +148,8 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     }
 
     if(!m_cancelled && usePreview) {
-      m_pixmap = QPixmap();
-      KFileItemList list;
-      list.append(it.current());
-      KIO::Job* previewJob = KIO::filePreview(list, FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE);
-      connect(previewJob, SIGNAL(gotPreview(const KFileItem*, const QPixmap&)),
-              this, SLOT(slotPreview(const KFileItem*, const QPixmap&)));
-
-      if(!KIO::NetAccess::synchronousRun(previewJob, Kernel::self()->widget())) {
-        m_pixmap = QPixmap();
-      } else if(m_pixmap.isNull()) {
+      m_pixmap = NetAccess::filePreview(it.current(), FILE_PREVIEW_SIZE);
+      if(m_pixmap.isNull()) {
         m_pixmap = it.current()->pixmap(0);
       }
     } else {
@@ -228,10 +221,6 @@ void FileListingImporter::slotEntries(KIO::Job* job_, const KIO::UDSEntryList& l
       delete item;
     }
   }
-}
-
-void FileListingImporter::slotPreview(const KFileItem*, const QPixmap& pix_) {
-  m_pixmap = pix_;
 }
 
 QString FileListingImporter::volumeName() const {

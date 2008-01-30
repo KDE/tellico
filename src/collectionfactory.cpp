@@ -23,6 +23,7 @@
 #include "collections/winecollection.h"
 #include "collections/gamecollection.h"
 #include "collections/filecatalog.h"
+#include "collections/boardgamecollection.h"
 #include "field.h"
 #include "tellico_debug.h"
 
@@ -31,7 +32,7 @@
 using Tellico::CollectionFactory;
 
 // static
-Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_, const QString& entryTitle_) {
+Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_) {
   switch(type_) {
     case Data::Collection::Book:
       return new Data::BookCollection(addFields_);
@@ -66,6 +67,9 @@ Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_,
     case Data::Collection::File:
       return new Data::FileCatalog(addFields_);
 
+    case Data::Collection::BoardGame:
+      return new Data::BoardGameCollection(addFields_);
+
     case Data::Collection::Base:
       break;
 
@@ -74,7 +78,7 @@ Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_,
       // fall through
   }
 
-  Data::CollPtr c = new Data::Collection(i18n("My Collection"), entryTitle_);
+  Data::CollPtr c = new Data::Collection(i18n("My Collection"));
   Data::FieldPtr f = new Data::Field(QString::fromLatin1("title"), i18n("Title"));
   f->setCategory(i18n("General"));
   f->setFlags(Data::Field::NoDelete);
@@ -107,6 +111,8 @@ Tellico::Data::CollPtr CollectionFactory::collection(const QString& typeName_, b
     return new Data::GameCollection(addFields_);
   } else if(typeName_ == typeName(Data::Collection::File)) {
     return new Data::FileCatalog(addFields_);
+  } else if(typeName_ == typeName(Data::Collection::BoardGame)) {
+    return new Data::BoardGameCollection(addFields_);
   } else {
     kdWarning() << "CollectionFactory::collection() - collection type not implemented: " << typeName_ << endl;
     return 0;
@@ -126,6 +132,7 @@ Tellico::CollectionNameMap CollectionFactory::nameMap() {
   map[Data::Collection::Card]   = i18n("Card Collection");
   map[Data::Collection::Game]   = i18n("Game Collection");
   map[Data::Collection::File]   = i18n("File Catalog");
+  map[Data::Collection::BoardGame]   = i18n("Board Game Collection");
   map[Data::Collection::Base]   = i18n("Custom Collection");
   return map;
 }
@@ -174,6 +181,10 @@ QString CollectionFactory::typeName(int type_) {
 
     case Data::Collection::File:
       return QString::fromLatin1("file");
+      break;
+
+    case Data::Collection::BoardGame:
+      return QString::fromLatin1("boardgame");
       break;
 
     case Data::Collection::Base:

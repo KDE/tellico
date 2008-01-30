@@ -15,7 +15,7 @@
 #define BIBTEXIMPORTER_H
 
 #include <config.h>
-#include "textimporter.h"
+#include "importer.h"
 #include "../datavectors.h"
 
 extern "C" {
@@ -29,6 +29,8 @@ extern "C" {
 #include <qptrlist.h>
 #include <qmap.h>
 
+class QRadioButton;
+
 namespace Tellico {
   namespace Import {
 
@@ -38,7 +40,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class BibtexImporter : public TextImporter {
+class BibtexImporter : public Importer {
 Q_OBJECT
 
 public:
@@ -47,7 +49,8 @@ public:
    *
    * @param url The url of the bibtex file
    */
-  BibtexImporter(const KURL& url);
+  BibtexImporter(const KURL::List& urls);
+  BibtexImporter(const QString& text);
   /*
    * Some cleanup is done for the btparse library
    */
@@ -60,12 +63,14 @@ public:
    * @return A pointer to a @ref BibtexCollection, or 0 if none can be created.
    */
   virtual Data::CollPtr collection();
+  virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual bool canImport(int type) const;
 
 public slots:
   void slotCancel();
 
 private:
+  Data::CollPtr readCollection(const QString& text, int n);
   void parseText(const QString& text);
 
   typedef QPtrList<AST> ASTList;
@@ -74,6 +79,9 @@ private:
   QMap<QString, QString> m_macros;
 
   Data::CollPtr m_coll;
+  QWidget* m_widget;
+  QRadioButton* m_readUTF8;
+  QRadioButton* m_readLocale;
   bool m_cancelled : 1;
 };
 

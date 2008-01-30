@@ -1,32 +1,39 @@
 ####### kdevelop will overwrite this part!!! (begin)##########
 bin_PROGRAMS = tellico
 
-tellico_SOURCES = borrowerdialog.cpp entryitem.cpp importdialog.cpp \
-				borroweritem.cpp entryview.cpp isbnvalidator.cpp exportdialog.cpp collection.cpp \
-				fetchdialog.cpp collectionfactory.cpp fieldcompletion.cpp collectionfieldsdialog.cpp \
-				field.cpp main.cpp configdialog.cpp mainwindow.cpp controller.cpp filehandler.cpp \
-				filter.cpp filterdialog.cpp reportdialog.cpp filteritem.cpp \
-				detailedlistview.cpp document.cpp tellico_kernel.cpp entry.cpp groupview.cpp \
-				tellico_strings.cpp entryeditdialog.cpp image.cpp tellico_utils.cpp entrygroupitem.cpp \
-				imagefactory.cpp viewstack.cpp entryiconview.cpp borrower.cpp loandialog.cpp \
-				loanview.cpp calendarhandler.cpp loanitem.cpp groupiterator.cpp filterview.cpp \
-				entryiconfactory.cpp entryupdater.cpp detailedentryitem.cpp statusbar.cpp \
-				progressmanager.cpp upcvalidator.cpp fetcherconfigdialog.cpp iso5426converter.cpp \
-				iso6937converter.cpp listviewcomparison.cpp
+tellico_SOURCES = borrower.cpp borrowerdialog.cpp \
+	borroweritem.cpp calendarhandler.cpp collection.cpp collectionfactory.cpp \
+	collectionfieldsdialog.cpp configdialog.cpp controller.cpp detailedentryitem.cpp \
+	detailedlistview.cpp document.cpp entry.cpp entryeditdialog.cpp entrygroupitem.cpp \
+	entryiconfactory.cpp entryiconview.cpp entryitem.cpp entrymerger.cpp entryupdater.cpp \
+	entryview.cpp exportdialog.cpp fetchdialog.cpp fetcherconfigdialog.cpp field.cpp \
+	fieldcompletion.cpp filehandler.cpp filter.cpp filterdialog.cpp filteritem.cpp \
+	filterview.cpp groupiterator.cpp groupview.cpp image.cpp imagefactory.cpp \
+	importdialog.cpp isbnvalidator.cpp iso5426converter.cpp iso6937converter.cpp \
+	listviewcomparison.cpp loandialog.cpp loanitem.cpp loanview.cpp main.cpp mainwindow.cpp \
+	progressmanager.cpp reportdialog.cpp statusbar.cpp tellico_kernel.cpp tellico_strings.cpp \
+	tellico_utils.cpp upcvalidator.cpp viewstack.cpp xmphandler.cpp
 
 if !USE_LIBBTPARSE
   LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
 endif
 
+if ENABLE_WEBCAM
+  WEBCAMDIR = barcode
+  LDADD_LIBBARCODE = ./barcode/libbarcode.a
+endif
+SUBDIRS = core gui collections translators fetch tests commands \
+	cite newstuff rtf2html $(WEBCAMDIR)
+
 tellico_LDADD = ./core/libcore.a ./cite/libcite.a ./fetch/libfetch.a \
 	./collections/libcollections.a ./translators/libtranslators.a \
 	./newstuff/libnewstuff.a ./translators/pilotdb/libpilotdb.a \
-	./translators/pilotdb/libflatfile/liblibflatfile.a ./gui/libgui.a ./translators/pilotdb/libpalm/liblibpalm.a \
+	./translators/pilotdb/libflatfile/liblibflatfile.a ./gui/libgui.a \
+	./translators/pilotdb/libpalm/liblibpalm.a ./rtf2html/librtf2html.a \
 	./commands/libcommands.a -lexslt $(LIB_KFILE) $(LIB_KHTML) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) \
 	$(LIBSOCKET) $(LIBXSLT_LIBS) $(TAGLIB_LIBS) $(KCDDB_LIBS) $(YAZ_LIBS) $(LIB_KIO) \
-	$(LIB_KABC) $(KCAL_LIBS) $(LDADD_LIBBTPARSE) $(LIB_KNEWSTUFF)
-
-SUBDIRS = core gui collections translators fetch tests commands cite newstuff
+	$(LIB_KABC) $(KCAL_LIBS) $(LDADD_LIBBTPARSE) $(LIB_KNEWSTUFF) $(EXEMPI_LIBS) \
+	$(POPPLER_LIBS) $(LDADD_LIBBARCODE)
 
 EXTRA_DIST = tellicoui.rc tellicorc \
 borrowerdialog.cpp          entryiconview.h\
@@ -75,7 +82,9 @@ fetcherconfigdialog.h fetcherconfigdialog.cpp \
 iso5426converter.h iso5426converter.cpp \
 iso6937converter.h iso6937converter.cpp \
 tellico_map.h \
-listviewcomparison.h listviewcomparison.cpp
+listviewcomparison.h listviewcomparison.cpp \
+entrymerger.h entrymerger.cpp \
+xmphandler.h xmphandler.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -100,7 +109,10 @@ listviewcomparison.h listviewcomparison.cpp
 # kde_designerdir     Where Qt Designer plugins should go to (new in KDE 3).
 
 # set the include path for X, qt and KDE
-AM_CPPFLAGS = $(all_includes) $(LIBXML_CFLAGS) $(LIBXSLT_CFLAGS)
+AM_CPPFLAGS = $(all_includes) \
+ $(LIBXML_CFLAGS) \
+ $(LIBXSLT_CFLAGS) \
+ $(EXEMPI_CFLAGS)
 
 METASOURCES = AUTO
 

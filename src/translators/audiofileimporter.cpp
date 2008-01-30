@@ -22,6 +22,7 @@
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../progressmanager.h"
+#include "../tellico_debug.h"
 
 #if HAVE_TAGLIB
 #include <taglib/fileref.h>
@@ -34,7 +35,6 @@
 #endif
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kapplication.h>
 #include <kglobal.h> // for KMAX
 
@@ -113,12 +113,23 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
   m_coll = new Data::MusicCollection(true);
 
-  const bool addFile = m_filePath->isChecked();
-  if(addFile && !m_coll->hasField(file)) {
-    Data::FieldPtr f = new Data::Field(file, i18n("Files"), Data::Field::Table);
-    f->setProperty(QString::fromLatin1("columns"), QChar('1'));
+  const bool addFile = m_addFilePath->isChecked();
+  const bool addBitrate = m_addBitrate->isChecked();
+
+  Data::FieldPtr f;
+  if(addFile) {
+    f = m_coll->fieldByName(file);
+    if(!f) {
+      f = new Data::Field(file, i18n("Files"), Data::Field::Table);
+      m_coll->addField(f);
+    }
     f->setProperty(QString::fromLatin1("column1"), i18n("Files"));
-    m_coll->addField(f);
+    if(addBitrate) {
+      f->setProperty(QString::fromLatin1("columns"), QChar('2'));
+      f->setProperty(QString::fromLatin1("column2"), i18n("Bitrate"));
+    } else {
+      f->setProperty(QString::fromLatin1("columns"), QChar('1'));
+    }
   }
 
   QMap<QString, Data::EntryPtr> albumMap;
@@ -126,6 +137,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   QStringList directoryFiles;
   const uint stepSize = KMAX(static_cast<size_t>(1), files.count() / 100);
 
+  bool changeTrackTitle = true;
   uint j = 0;
   for(QStringList::ConstIterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++j) {
     TagLib::FileRef f(QFile::encodeName(*it));
@@ -145,7 +157,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     int disc = discNumber(f);
     if(disc > 1 && !m_coll->hasField(QString::fromLatin1("track%1").arg(disc))) {
       Data::FieldPtr f2 = new Data::Field(QString::fromLatin1("track%1").arg(disc),
-                                          i18n("Tracks") + QString::fromLatin1(" (%1)").arg(disc),
+                                          i18n("Tracks (Disc %1)").arg(disc),
                                           Data::Field::Table);
       f2->setFormatFlag(Data::Field::FormatTitle);
       f2->setProperty(QString::fromLatin1("columns"), QChar('3'));
@@ -153,6 +165,12 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       f2->setProperty(QString::fromLatin1("column2"), i18n("Artist"));
       f2->setProperty(QString::fromLatin1("column3"), i18n("Length"));
       m_coll->addField(f2);
+      if(changeTrackTitle) {
+        Data::FieldPtr newTrack = new Data::Field(*m_coll->fieldByName(track));
+        newTrack->setTitle(i18n("Tracks (Disc %1)").arg(1));
+        m_coll->modifyField(newTrack);
+        changeTrackTitle = false;
+      }
     }
     bool various = false;
     bool exists = true;
@@ -219,7 +237,11 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         QString realTrack = disc > 1 ? track + QString::number(disc) : track;
         entry->setField(realTrack, insertValue(entry->field(realTrack), t, trackNum));
         if(addFile) {
-          entry->setField(file, insertValue(entry->field(file), *it, trackNum));
+          QString fileValue = *it;
+          if(addBitrate) {
+            fileValue += "::" + QString::number(f.audioProperties()->bitrate());
+          }
+          entry->setField(file, insertValue(entry->field(file), fileValue, trackNum));
         }
       } else {
         myDebug() << *it << " contains no track number and track number cannot be determined, so the track is not imported." << endl;
@@ -303,7 +325,6 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     return 0;
   }
 
-  m_coll->updateDicts(m_coll->entries());
   return m_coll;
 #endif
 }
@@ -323,10 +344,15 @@ QWidget* AudioFileImporter::widget(QWidget* parent_, const char* name_) {
   // by default, make it checked
   m_recursive->setChecked(true);
 
-  m_filePath = new QCheckBox(i18n("&Include file location"), box);
-  QWhatsThis::add(m_filePath, i18n("If checked, the file names for each track are added to the entries."));
-  // by default, make it checked
-  m_filePath->setChecked(false);
+  m_addFilePath = new QCheckBox(i18n("Include file &location"), box);
+  QWhatsThis::add(m_addFilePath, i18n("If checked, the file names for each track are added to the entries."));
+  m_addFilePath->setChecked(false);
+  connect(m_addFilePath, SIGNAL(toggled(bool)), SLOT(slotAddFileToggled(bool)));
+
+  m_addBitrate = new QCheckBox(i18n("Include &bitrate"), box);
+  QWhatsThis::add(m_addBitrate, i18n("If checked, the bitrate for each track is added to the entries."));
+  m_addBitrate->setChecked(false);
+  m_addBitrate->setEnabled(false);
 
   l->addWidget(box);
   l->addStretch(1);
@@ -350,6 +376,13 @@ QString AudioFileImporter::insertValue(const QString& str_, const QString& value
 
 void AudioFileImporter::slotCancel() {
   m_cancelled = true;
+}
+
+void AudioFileImporter::slotAddFileToggled(bool on_) {
+  m_addBitrate->setEnabled(on_);
+  if(!on_) {
+    m_addBitrate->setChecked(false);
+  }
 }
 
 int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {

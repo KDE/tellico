@@ -20,6 +20,7 @@
 #include "../entry.h"
 #include "../collection.h"
 #include "../tellico_utils.h"
+#include "../tellico_debug.h"
 
 #if AMAZON_SUPPORT
 #include "amazonfetcher.h"
@@ -37,6 +38,11 @@
 #include "animenfofetcher.h"
 #include "ibsfetcher.h"
 #include "isbndbfetcher.h"
+#include "gcstarpluginfetcher.h"
+#include "crossreffetcher.h"
+#include "arxivfetcher.h"
+#include "citebasefetcher.h"
+#include "bibsonomyfetcher.h"
 
 #include <kglobal.h>
 #include <kconfig.h>
@@ -62,8 +68,11 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   m_keyMap.insert(Title,      i18n("Title"));
   m_keyMap.insert(Person,     i18n("Person"));
   m_keyMap.insert(ISBN,       i18n("ISBN"));
-  m_keyMap.insert(UPC,        i18n("UPC"));
+  m_keyMap.insert(UPC,        i18n("UPC/EAN"));
   m_keyMap.insert(Keyword,    i18n("Keyword"));
+  m_keyMap.insert(DOI,        i18n("DOI"));
+  m_keyMap.insert(ArxivID,    i18n("arXiv ID"));
+  m_keyMap.insert(PubmedID,   i18n("Pubmed ID"));
   m_keyMap.insert(Raw,        i18n("Raw Query"));
 //  m_keyMap.insert(FetchLast,  QString::null);
 }
@@ -79,8 +88,8 @@ void Manager::loadFetchers() {
 
   KConfig* config = KGlobal::config();
   if(config->hasGroup(QString::fromLatin1("Data Sources"))) {
-    KConfigGroupSaver saver(config, QString::fromLatin1("Data Sources"));
-    int nSources = config->readNumEntry("Sources Count", 0);
+    KConfigGroup configGroup(config, QString::fromLatin1("Data Sources"));
+    int nSources = configGroup.readNumEntry("Sources Count", 0);
     for(int i = 0; i < nSources; ++i) {
       QString group = QString::fromLatin1("Data Source %1").arg(i);
       Fetcher::Ptr f = createFetcher(config, group);
@@ -225,9 +234,9 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KConfig* config_, const QStr
     return 0;
   }
 
-  KConfigGroupSaver groupSaver(config_, group_);
+  KConfigGroup config(config_, group_);
 
-  int fetchType = config_->readNumEntry("Type", Fetch::Unknown);
+  int fetchType = config.readNumEntry("Type", Fetch::Unknown);
   if(fetchType == Fetch::Unknown) {
     myDebug() << "Manager::createFetcher() - unknown type " << fetchType << ", skipping" << endl;
     return 0;
@@ -238,7 +247,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KConfig* config_, const QStr
     case Amazon:
 #if AMAZON_SUPPORT
       {
-        int site = config_->readNumEntry("Site", AmazonFetcher::Unknown);
+        int site = config.readNumEntry("Site", AmazonFetcher::Unknown);
         if(site == AmazonFetcher::Unknown) {
           myDebug() << "Manager::createFetcher() - unknown amazon site " << site << ", skipping" << endl;
         } else {
@@ -288,12 +297,32 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KConfig* config_, const QStr
       f = new ISBNdbFetcher(this);
       break;
 
+    case GCstarPlugin:
+      f = new GCstarPluginFetcher(this);
+      break;
+
+    case CrossRef:
+      f = new CrossRefFetcher(this);
+      break;
+
+    case Arxiv:
+      f = new ArxivFetcher(this);
+      break;
+
+    case Citebase:
+      f = new CitebaseFetcher(this);
+      break;
+
+    case Bibsonomy:
+      f = new BibsonomyFetcher(this);
+      break;
+
     case Unknown:
     default:
       break;
   }
   if(f) {
-    f->readConfig(config_, group_);
+    f->readConfig(config, group_);
   }
   return f;
 }
@@ -311,6 +340,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   vec.append(new ISBNdbFetcher(this));
   vec.append(new YahooFetcher(this));
   vec.append(new AnimeNfoFetcher(this));
+  vec.append(new ArxivFetcher(this));
 // only add IBS if user includes italian
   if(KGlobal::locale()->languagesTwoAlpha().contains(QString::fromLatin1("it"))) {
     vec.append(new IBSFetcher(this));
@@ -324,19 +354,29 @@ Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_) {
   }
 
   FetcherVec vec;
-  KConfig* config = KGlobal::config();
-  if(config->hasGroup(QString::fromLatin1("Data Sources"))) {
-    KConfigGroupSaver saver(config, QString::fromLatin1("Data Sources"));
-    int nSources = config->readNumEntry("Sources Count", 0);
-    for(int i = 0; i < nSources; ++i) {
-      QString group = QString::fromLatin1("Data Source %1").arg(i);
-      Fetcher::Ptr f = createFetcher(config, group);
-      if(f && f->canFetch(collType_) && f->canUpdate()) {
-        vec.append(f);
-      }
+  KConfigGroup config(KGlobal::config(), "Data Sources");
+  int nSources = config.readNumEntry("Sources Count", 0);
+  for(int i = 0; i < nSources; ++i) {
+    QString group = QString::fromLatin1("Data Source %1").arg(i);
+    // needs the KConfig*
+    Fetcher::Ptr f = createFetcher(KGlobal::config(), group);
+    if(f && f->canFetch(collType_) && f->canUpdate()) {
+      vec.append(f);
     }
   }
   return vec;
+}
+
+Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_, Type type_) {
+  FetcherVec fetchers;
+  // creates new fetchers
+  FetcherVec allFetchers = createUpdateFetchers(collType_);
+  for(Fetch::FetcherVec::Iterator it = allFetchers.begin(); it != allFetchers.end(); ++it) {
+    if(it->type() == type_) {
+      fetchers.append(it);
+    }
+  }
+  return fetchers;
 }
 
 Tellico::Fetch::Fetcher::Ptr Manager::createUpdateFetcher(int collType_, const QString& source_) {
@@ -374,6 +414,11 @@ Tellico::Fetch::TypePairList Manager::typeList() {
   list.append(TypePair(AnimeNfoFetcher::defaultName(),     AnimeNfo));
   list.append(TypePair(IBSFetcher::defaultName(),          IBS));
   list.append(TypePair(ISBNdbFetcher::defaultName(),       ISBNdb));
+  list.append(TypePair(GCstarPluginFetcher::defaultName(), GCstarPlugin));
+  list.append(TypePair(CrossRefFetcher::defaultName(),     CrossRef));
+  list.append(TypePair(ArxivFetcher::defaultName(),        Arxiv));
+  list.append(TypePair(CitebaseFetcher::defaultName(),     Citebase));
+  list.append(TypePair(BibsonomyFetcher::defaultName(),    Bibsonomy));
 
   // now find all the scripts distributed with tellico
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QString::fromLatin1("data-sources/*.spec"),
@@ -459,6 +504,21 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Type type_
     case ISBNdb:
       w = new ISBNdbFetcher::ConfigWidget(parent_);
       break;
+    case GCstarPlugin:
+      w = new GCstarPluginFetcher::ConfigWidget(parent_);
+      break;
+    case CrossRef:
+      w = new CrossRefFetcher::ConfigWidget(parent_);
+      break;
+    case Arxiv:
+      w = new ArxivFetcher::ConfigWidget(parent_);
+      break;
+    case Citebase:
+      w = new CitebaseFetcher::ConfigWidget(parent_);
+      break;
+    case Bibsonomy:
+      w = new BibsonomyFetcher::ConfigWidget(parent_);
+      break;
     default:
       kdWarning() << "Fetch::Manager::configWidget() - no widget defined for type = " << type_ << endl;
   }
@@ -484,8 +544,14 @@ QString Manager::typeName(Fetch::Type type_) {
     case AnimeNfo: return AnimeNfoFetcher::defaultName();
     case IBS: return IBSFetcher::defaultName();
     case ISBNdb: return ISBNdbFetcher::defaultName();
+    case GCstarPlugin: return GCstarPluginFetcher::defaultName();
+    case CrossRef: return CrossRefFetcher::defaultName();
+    case Arxiv: return ArxivFetcher::defaultName();
+    case Citebase: return CitebaseFetcher::defaultName();
+    case Bibsonomy: return BibsonomyFetcher::defaultName();
     default: break;
   }
+  myWarning() << "Manager::typeName() - none found for " << type_ << endl;
   return QString::null;
 }
 
@@ -504,7 +570,7 @@ QPixmap Manager::fetcherIcon(Fetch::Fetcher::CPtr fetcher_) {
 #endif
   if(fetcher_->type() == Fetch::ExecExternal) {
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_.data());
-    QString p = f->execPath();
+    const QString p = f->execPath();
     KURL u;
     if(p.find(QString::fromLatin1("allocine")) > -1) {
       u = QString::fromLatin1("http://www.allocine.fr");
@@ -512,6 +578,8 @@ QPixmap Manager::fetcherIcon(Fetch::Fetcher::CPtr fetcher_) {
       u = QString::fromLatin1("http://www.mcu.es");
     } else if(p.find(QString::fromLatin1("dark_horse_comics")) > -1) {
       u = QString::fromLatin1("http://www.darkhorse.com");
+    } else if(p.find(QString::fromLatin1("boardgamegeek")) > -1) {
+      u = QString::fromLatin1("http://www.boardgamegeek.com");
     } else if(f->source().find(QString::fromLatin1("amarok"), 0, false /*case-sensitive*/) > -1) {
       return SmallIcon(QString::fromLatin1("amarok"));
     }
@@ -548,6 +616,16 @@ QPixmap Manager::fetcherIcon(Fetch::Type type_) {
       name = favIcon("http://internetbookshop.it"); break;
     case ISBNdb:
       name = favIcon("http://isbndb.com"); break;
+    case GCstarPlugin:
+      name = QString::fromLatin1("gcstar"); break;
+    case CrossRef:
+      name = favIcon("http://crossref.org"); break;
+    case Arxiv:
+      name = favIcon("http://arxiv.org"); break;
+    case Citebase:
+      name = favIcon("http://citebase.org"); break;
+    case Bibsonomy:
+      name = favIcon("http://bibsonomy.org"); break;
     default:
       kdWarning() << "Fetch::Manager::fetcherIcon() - no pixmap defined for type = " << type_ << endl;
   }
@@ -558,8 +636,9 @@ QPixmap Manager::fetcherIcon(Fetch::Type type_) {
 QString Manager::favIcon(const KURL& url_) {
   DCOPRef kded("kded", "favicons");
   DCOPReply reply = kded.call("iconForURL(KURL)", url_);
-  if(reply.isValid()) {
-    return reply;
+  QString iconName = reply.isValid() ? reply : QString();
+  if(!iconName.isEmpty()) {
+    return iconName;
   } else {
     // go ahead and try to download it for later
     kded.call("downloadHostIcon(KURL)", url_);

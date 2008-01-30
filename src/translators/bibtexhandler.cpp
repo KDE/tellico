@@ -18,9 +18,9 @@
 #include "../collection.h"
 #include "../filehandler.h"
 #include "../latin1literal.h"
+#include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
-#include <kdebug.h>
 #include <kurl.h>
 #include <kstringhandler.h>
 #include <klocale.h>

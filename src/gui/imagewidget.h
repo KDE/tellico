@@ -14,6 +14,7 @@
 #ifndef TELLICOIMAGEWIDGET_H
 #define TELLICOIMAGEWIDGET_H
 
+#include <kurl.h>
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qpoint.h>
@@ -23,6 +24,7 @@ class QResizeEvent;
 class QMouseEvent;
 class QDragEnterEvent;
 class QDropEvent;
+class QCheckBox;
 
 namespace Tellico {
   namespace GUI {
@@ -39,6 +41,7 @@ public:
 
   const QString& id() const { return m_imageID; }
   void setImage(const QString& id);
+  void setLinkOnlyChecked(bool l);
 
 public slots:
   void slotClear();
@@ -55,14 +58,18 @@ protected:
 
 private slots:
   void slotGetImage();
+  void slotLinkOnlyClicked();
 
 private:
   void scale();
+  void loadImage(const KURL& url);
 
   QString m_imageID;
   QPixmap m_pixmap;
   QPixmap m_scaled;
   QLabel* m_label;
+  QCheckBox* m_cbLinkOnly;
+  KURL m_originalURL;
   QPoint m_dragStart;
 };
 

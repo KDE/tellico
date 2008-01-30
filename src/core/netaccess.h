@@ -14,12 +14,14 @@
 #ifndef TELLICO_NETACCESS_H
 #define TELLICO_NETACCESS_H
 
+#include <qobject.h>
+#include <qpixmap.h>
+
 class KURL;
+class KFileItem;
 namespace KIO {
   class Job;
 }
-
-#include <qobject.h>
 
 namespace Tellico {
 
@@ -29,9 +31,16 @@ Q_OBJECT
 public:
   static bool download(const KURL& u, QString& target, QWidget* window);
   static void removeTempFile(const QString& name);
+  static QPixmap filePreview(const KURL& fileName, int size=196);
+  static QPixmap filePreview(KFileItem* item, int size=196);
+
+private slots:
+  void slotPreview(const KFileItem* item, const QPixmap& pix);
 
 private:
   static QStringList* s_tmpFiles;
+
+  QPixmap m_preview;
 };
 
 }

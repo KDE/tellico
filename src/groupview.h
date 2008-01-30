@@ -94,8 +94,6 @@ public:
   virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
   virtual void removeField(Data::CollPtr, Data::FieldPtr);
 
-  virtual void sort();
-
 public slots:
   /**
    * Resets the list view, clearing and deleting all items.

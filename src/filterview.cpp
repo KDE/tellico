@@ -19,11 +19,11 @@
 #include "entryitem.h"
 #include "tellico_kernel.h"
 #include "listviewcomparison.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kpopupmenu.h>
 #include <kiconloader.h>
-#include <kdebug.h>
 
 #include <qheader.h>
 

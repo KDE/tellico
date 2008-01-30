@@ -222,7 +222,7 @@ QString XSLTHandler::process() {
     return QString::null;
   }
 
-  const char* params[2*m_params.count() + 1];
+  QMemArray<const char*> params(2*m_params.count() + 1);
   params[0] = NULL;
   QMap<QCString, QCString>::ConstIterator it = m_params.constBegin();
   QMap<QCString, QCString>::ConstIterator end = m_params.constEnd();
@@ -233,7 +233,7 @@ QString XSLTHandler::process() {
     i += 2;
   }
   // returns NULL on error
-  m_docOut = xsltApplyStylesheet(m_stylesheet, m_docIn, params);
+  m_docOut = xsltApplyStylesheet(m_stylesheet, m_docIn, params.data());
   for(uint i = 0; i < 2*m_params.count(); ++i) {
     delete[] params[i];
   }

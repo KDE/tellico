@@ -12,7 +12,9 @@
 </para>
 
 <para>
-Searches may use five different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, <guilabel>UPC/EAN</guilabel>, or <guilabel>Keyword</guilabel>. Not all criteria are available for certain data sources. Once a search is initiated, the <guibutton>Search</guibutton> button becomes <guibutton>Stop</guibutton> which will end a search. As results are found, they are added to the list directly under the search box, where selecting an item will show the result without adding it to the collection. Clicking the <guibutton>Add Entry</guibutton> button will add all the selected items to your collection. Clicking <guibutton>Clear</guibutton> will remove all the current results and reset the search.
+Searches may use five different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, <guilabel>UPC/EAN</guilabel>, or <guilabel>Keyword</guilabel>. Not all criteria are available for certain data sources.</para>
+
+<para>Once a search is initiated, the <guibutton>Search</guibutton> button becomes <guibutton>Stop</guibutton> which will end a search. As results are found, they are added to the list directly under the search box, where selecting an item will show the result without adding it to the collection. Clicking the <guibutton>Add Entry</guibutton> button will add all the selected items to your collection. If the data source has more results than were initially requested, the <guibutton>Get More Results</guibutton> button becomes active. Clicking <guibutton>Clear</guibutton> will remove all the current results and reset the search.
 </para>
 
 <screenshot>
@@ -26,7 +28,6 @@ Searches may use five different criteria: <guilabel>Title</guilabel>, <guilabel>
 <para>
 Only entries that match the current collection type will be found. The <guilabel>Description</guilabel> column provides additional information about the entry, in order to differentiate between videos in different formats, or books in different bindings, for example. Once an entry is successfully added to the collection, a checkmark is added to the first column in the list.
 </para>
-
 
 <para>
 Multiple entries can be added at once by using the standard &kde; method for multiple selection, which usually involves holding the &Shift; or &Ctrl; key when clicking on an item.
@@ -118,7 +119,7 @@ The audio file metadata importer can recursively scan a folder to find all audio
 <title>Importing Alexandria Libraries</title>
 
 <para>
-<application><ulink url="http://alexandria.rubyforge.org">Alexandria</ulink></application> is an alternative book collection manager for the <ulink url="http://www.gnome.org">GNOME</ulink> desktop environment. The importer offers a choice of importing any of the libraries found in <filename class="directory">$<envar>HOME</envar>/.alexandria/</filename>.
+<application><ulink url="http://alexandria.rubyforge.org">Alexandria</ulink></application> is an alternate book collection manager for the <ulink url="http://www.gnome.org">GNOME</ulink> desktop environment. The importer offers a choice of importing any of the libraries found in <filename class="directory">$<envar>HOME</envar>/.alexandria/</filename>.
 </para>
 
 </sect2>
@@ -127,7 +128,7 @@ The audio file metadata importer can recursively scan a folder to find all audio
 <title>Importing Ant Movie Catalog Data</title>
 
 <para>
-<application><ulink url="http://www.antp.be/software/moviecatalog/">Ant Movie Catalog</ulink></application> is an alternative movie collection manager.
+<application><ulink url="http://www.antp.be/software/moviecatalog/">Ant Movie Catalog</ulink></application> is an alternate movie collection manager.
 </para>
 
 </sect2>
@@ -150,7 +151,35 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 <para>
 <ulink url="http://bibtexml.sf.net">Bibtexml</ulink> is an &xml; representation of bibtex data, and the data from the imported bibtexml file is treated in the same way as bibtex data would be.
 </para>
+</sect2>
 
+<sect2 id="importing-delicious-library">
+<title>Importing Delicious Library Data</title>
+
+<para>
+<application><ulink url="http://www.delicious-monster.com/">Delicious Library</ulink></application> is an alternate collection manager for the Mac OS X desktop. &appname; imports a subset of the data used by Delicious Library, and at the moment, does not import cover images.
+</para>
+</sect2>
+
+<sect2 id="importing-gcstar">
+<title>Importing GCstar Data</title>
+
+<para>
+<application><ulink url="http://www.gcstar.org">GCstar</ulink></application> is an alternate collection manager. Importing books, movies, music, coins, games, board games and wine collections is currently supported.
+</para>
+
+<para>
+&appname; can also import <application>GCfilms</application> data files. <application><ulink url="http://home.gna.org/gcfilms/">GCfilms</ulink></application> is the predecessor of <application>GCstar</application> and was an alternate movie collection manager. Normally, <application>GCfilms</application> data files are found in <filename class="directory">$<envar>HOME</envar>/.local/share/gcfilms/</filename>.
+</para>
+
+</sect2>
+
+<sect2 id="importing-griffith">
+<title>Importing Griffith Data</title>
+
+<para>
+<application><ulink url="http://griffith.berlios.de/">Griffith</ulink></application> is an alternate video collection manager. &appname; is able to import most data from a Griffith database.
+</para>
 </sect2>
 
 <sect2 id="importing-mods">
@@ -162,6 +191,13 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 
 </sect2>
 
+<sect2 id="importing-pdf">
+<title>Importing PDF Data</title>
+<para>
+If &appname; was compiled with <emphasis>exempi</emphasis> or <emphasis>poppler</emphasis> support, metadata from PDF files can be imported. Metadata may include title, author, and date information, as well as bibliographic identifiers which are then used to update other information.
+</para>
+</sect2>
+
 <sect2 id="importing-ris">
 <title>Importing RIS Data</title>
 <para>
@@ -169,17 +205,11 @@ The <ulink url="http://www.adeptscience.co.uk/kb/article/A626"><acronym>RIS</acr
 </para>
 </sect2>
 
-<sect2 id="importing-gcstar">
-<title>Importing GCstar Data</title>
-
+<sect2 id="importing-referencer">
+<title>Importing Referencer Data</title>
 <para>
-<application><ulink url="http://www.gcstar.org">GCstar</ulink></application> is an alternative  collection manager. Importing books, movies, music, coins, and wine collections is supported for version 1.1.
+<application><ulink url="http://icculus.org/referencer/">Referencer</ulink></application> is a document organizer and bibliography manager for the GNOME desktop. &appname; will import most of the data found in a Referencer database.
 </para>
-
-<para>
-&appname; can also import <application>GCfilms</application> data files. <application><ulink url="http://home.gna.org/gcfilms/">GCfilms</ulink></application> is the predecessor of <application>GCstar</application> and was an alternative movie collection manager. Normally, <application>GCfilms</application> data files are found in <filename class="directory">$<envar>HOME</envar>/.local/share/gcfilms/</filename>.
-</para>
-
 </sect2>
 
 <sect2 id="importing-file-listing">
@@ -197,6 +227,15 @@ The best way to create a <link linkend="file-catalog">File Catalog</link> is to 
 Any &xml; file may be imported into &appname; provided an XSL stylesheet is available to convert the file to &appname; format. &appname; automatically loads the stylesheet and performs the XSLT processing needed to load the file.
 </para>
 </sect2>
+
+</sect1>
+
+<sect1 id="drag-n-drop">
+<title>Drag and Drop</title>
+
+<para>Dragging data files to the main &appname; window and dropping them will import the files, just as if the <link linkend="importing">import command</link> was made from the menus. Drag and drop works for the following file formats: Tellico, Bibtex, RIS, and PDF. Importing multiple files at once is also supported.</para>
+
+<para>So, for example, if you want to catalog several <link linkend="importing-pdf">PDF files</link>, select them in the file manager and drag them to the &appname; window. &appname; will import as much metadata from the files as it can, and then fetch additional information from various configured Internet sources.</para>
 
 </sect1>
 

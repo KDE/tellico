@@ -40,12 +40,15 @@ public:
   const QCString& format() const { return m_format; };
   QByteArray byteArray() const;
   bool isNull() const;
+  bool linkOnly() const { return m_linkOnly; }
+  void setLinkOnly(bool l) { m_linkOnly = l; }
 
   QPixmap convertToPixmap() const;
   QPixmap convertToPixmap(int width, int height) const;
 
   static QCString outputFormat(const QCString& inputFormat);
   static QByteArray byteArray(const QImage& img, const QCString& outputFormat);
+  static QString idClean(const QString& id);
 
 private:
   Image();
@@ -62,6 +65,7 @@ private:
 
   QString m_id;
   QCString m_format;
+  bool m_linkOnly : 1;
 
   static KPixmapIO* s_pixmapIO;
   static KPixmapIO* io();
@@ -71,11 +75,13 @@ class ImageInfo {
 public:
   ImageInfo() {}
   explicit ImageInfo(const Image& img);
-  ImageInfo(const QString& id, const QCString& format, int w, int h);
+  ImageInfo(const QString& id, const QCString& format, int w, int h, bool link);
+  bool isNull() const { return id.isEmpty(); }
   QString id;
   QCString format;
   int width;
   int height;
+  bool linkOnly : 1;
 };
 
   } // end namespace
@@ -83,6 +89,6 @@ public:
 
 inline bool operator== (const Tellico::Data::Image& img1, const Tellico::Data::Image& img2) {
   return img1.id() == img2.id();
-};
+}
 
 #endif

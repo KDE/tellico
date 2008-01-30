@@ -43,6 +43,7 @@ public:
   virtual QString fileFilter() const;
 
   QDomDocument exportXML() const;
+  QString exportXMLString() const;
 
   void setIncludeImages(bool b) { m_includeImages = b; }
   void setIncludeGroups(bool b) { m_includeGroups = b; }

@@ -14,13 +14,13 @@
 #ifndef FETCHCONFIGWIDGET_H
 #define FETCHCONFIGWIDGET_H
 
-#include "../datavectors.h" 
+#include "../datavectors.h"
 
 #include <qwidget.h>
 #include <qdict.h>
 #include <qcheckbox.h>
 
-class KConfig;
+class KConfigGroup;
 class QStringList;
 
 namespace Tellico {
@@ -44,7 +44,7 @@ public:
    *
    * @param config_ The KConfig pointer
    */
-  virtual void saveConfig(KConfig* config) = 0;
+  virtual void saveConfig(KConfigGroup& config) = 0;
   /**
    * Called when a fetcher data source is removed. Useful for any cleanup work necessary.
    * The ExecExternalFetcher might need to remove the script, for example.
@@ -63,7 +63,7 @@ public slots:
 protected:
   QWidget* optionsWidget() { return m_optionsWidget; }
   void addFieldsWidget(const StringMap& customFields, const QStringList& fieldsToAdd);
-  void saveFieldsConfig(KConfig* config) const;
+  void saveFieldsConfig(KConfigGroup& config) const;
 
 private:
   bool m_modified;

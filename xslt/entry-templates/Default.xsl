@@ -59,9 +59,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 9 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 10 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'9'"/>
+  <xsl:with-param name="this-version" select="'10'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -213,13 +213,19 @@
               <xsl:value-of select="$entry/tc:amazon"/>
              </xsl:when>
              <xsl:otherwise>
-              <xsl:value-of select="concat($imgdir, $image)"/>
+              <xsl:call-template name="image-link">
+               <xsl:with-param name="image" select="key('imagesById', $image)"/>
+               <xsl:with-param name="dir" select="$imgdir"/>
+              </xsl:call-template>
              </xsl:otherwise>
             </xsl:choose>
            </xsl:attribute>
            <img alt="">
             <xsl:attribute name="src">
-             <xsl:value-of select="concat($imgdir, $image)"/>
+             <xsl:call-template name="image-link">
+              <xsl:with-param name="image" select="key('imagesById', $image)"/>
+              <xsl:with-param name="dir" select="$imgdir"/>
+             </xsl:call-template>
             </xsl:attribute>
             <!-- limit to maximum width of 150 of height of 200 -->
             <xsl:call-template name="image-size">

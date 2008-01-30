@@ -160,7 +160,7 @@ private:
    * @param entry A pointer to the entry
    * @return A pointer to the item
    */
-  DetailedEntryItem* const locateItem(Data::EntryPtr entry);
+  DetailedEntryItem* locateItem(Data::EntryPtr entry);
   void showColumn(int col);
   void hideColumn(int col);
   void updateFirstSection();

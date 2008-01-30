@@ -235,7 +235,10 @@ sorttable = {
 	        
 	        tb = this.sorttable_tbody;
 	        for (var j=0; j<row_array.length; j++) {
-	          tb.appendChild(row_array[j][1]);
+              var row = row_array[j][1];
+              if(j % 2) { row.className='entry0'; }
+              else { row.className='entry1'; }
+	          tb.appendChild(row);
 	        }
 	        
 	        delete row_array;
@@ -290,14 +293,18 @@ sorttable = {
     if (node.getAttribute("sorttable_customkey") != null) {
       return node.getAttribute("sorttable_customkey");
     }
-    else if (typeof node.textContent != 'undefined' && !hasInputs) {
-      return node.textContent.replace(/^\s+|\s+$/g, '');
+    var innerText = '';
+    if (typeof node.textContent != 'undefined' && !hasInputs) {
+      innerText = node.textContent.replace(/^\s+|\s+$/g, '');
     }
     else if (typeof node.innerText != 'undefined' && !hasInputs) {
-      return node.innerText.replace(/^\s+|\s+$/g, '');
+      innerText = node.innerText.replace(/^\s+|\s+$/g, '');
     }
     else if (typeof node.text != 'undefined' && !hasInputs) {
-      return node.text.replace(/^\s+|\s+$/g, '');
+      innerText = node.text.replace(/^\s+|\s+$/g, '');
+    }
+    if(innerText != '') {
+      return innerText;
     }
     else {
       switch (node.nodeType) {
@@ -310,7 +317,10 @@ sorttable = {
           break;
         case 1:
         case 11:
-          var innerText = '';
+          if(node.nodeName.toLowerCase() == 'img') {
+            var tokens = node.src.split('/');
+            innerText += tokens[tokens.length-1];
+          }
           for (var i = 0; i < node.childNodes.length; i++) {
             innerText += sorttable.getInnerText(node.childNodes[i]);
           }
@@ -358,48 +368,60 @@ sorttable = {
   },
   sort_yymmdd: function(a,b) {
     mtch = a[0].match(sorttable.YYMMDD_RE);
-    y = mtch[1]; m = mtch[2]; d = mtch[3];
-    // y2k notes: two digit years less than 50 are treated as 20XX, greater than 50 are treated as 19XX
-    if (parseInt(y) < 50) y = '20'+y; else y = '19'+y;
-    if (m.length == 1) m = '0'+m;
-    if (d.length == 1) d = '0'+d;
-    dt1 = y+m+d;
+    if (mtch) {
+      y = mtch[1]; m = mtch[2]; d = mtch[3];
+      // y2k notes: two digit years less than 50 are treated as 20XX, greater than 50 are treated as 19XX
+      if (parseInt(y) < 50) y = '20'+y; else y = '19'+y;
+      if (m.length == 1) m = '0'+m;
+      if (d.length == 1) d = '0'+d;
+      dt1 = y+m+d;
+    } else dt1 = a[0];
     mtch = b[0].match(sorttable.YYMMDD_RE);
-    y = mtch[1]; m = mtch[2]; d = mtch[3];
-    if (parseInt(y) < 50) y = '20'+y; else y = '19'+y;
-    if (m.length == 1) m = '0'+m;
-    if (d.length == 1) d = '0'+d;
-    dt2 = y+m+d;
+    if (mtch) {
+      y = mtch[1]; m = mtch[2]; d = mtch[3];
+      if (parseInt(y) < 50) y = '20'+y; else y = '19'+y;
+      if (m.length == 1) m = '0'+m;
+      if (d.length == 1) d = '0'+d;
+      dt2 = y+m+d;
+    } else dt2 = b[0];
     if (dt1==dt2) return 0;
     if (dt1<dt2) return -1;
     return 1;
   },
   sort_ddmm: function(a,b) {
     mtch = a[0].match(sorttable.DATE_RE);
-    y = mtch[3]; m = mtch[2]; d = mtch[1];
-    if (m.length == 1) m = '0'+m;
-    if (d.length == 1) d = '0'+d;
-    dt1 = y+m+d;
+    if (mtch) {
+      y = mtch[3]; m = mtch[2]; d = mtch[1];
+      if (m.length == 1) m = '0'+m;
+      if (d.length == 1) d = '0'+d;
+      dt1 = y+m+d;
+    } else dt1 = a[0];
     mtch = b[0].match(sorttable.DATE_RE);
-    y = mtch[3]; m = mtch[2]; d = mtch[1];
-    if (m.length == 1) m = '0'+m;
-    if (d.length == 1) d = '0'+d;
-    dt2 = y+m+d;
+    if (mtch) {
+      y = mtch[3]; m = mtch[2]; d = mtch[1];
+      if (m.length == 1) m = '0'+m;
+      if (d.length == 1) d = '0'+d;
+      dt2 = y+m+d;
+    } else dt2 = b[0];
     if (dt1==dt2) return 0;
     if (dt1<dt2) return -1;
     return 1;
   },
   sort_mmdd: function(a,b) {
     mtch = a[0].match(sorttable.DATE_RE);
-    y = mtch[3]; d = mtch[2]; m = mtch[1];
-    if (m.length == 1) m = '0'+m;
-    if (d.length == 1) d = '0'+d;
-    dt1 = y+m+d;
+    if (mtch) {
+      y = mtch[3]; d = mtch[2]; m = mtch[1];
+      if (m.length == 1) m = '0'+m;
+      if (d.length == 1) d = '0'+d;
+      dt1 = y+m+d;
+    } else dt1 = a[0];
     mtch = b[0].match(sorttable.DATE_RE);
-    y = mtch[3]; d = mtch[2]; m = mtch[1];
-    if (m.length == 1) m = '0'+m;
-    if (d.length == 1) d = '0'+d;
-    dt2 = y+m+d;
+    if (mtch) {
+      y = mtch[3]; d = mtch[2]; m = mtch[1];
+      if (m.length == 1) m = '0'+m;
+      if (d.length == 1) d = '0'+d;
+      dt2 = y+m+d;
+    } else dt2 = b[0];
     if (dt1==dt2) return 0;
     if (dt1<dt2) return -1;
     return 1;
@@ -537,10 +559,10 @@ function fixEvent(event) {
 	return event;
 };
 fixEvent.preventDefault = function() {
-	this.returnValue = false;
+    this.returnValue = false;
 };
 fixEvent.stopPropagation = function() {
-  this.cancelBubble = true;
+    this.cancelBubble = true;
 }
 
 // Dean's forEach: http://dean.edwards.name/base/forEach.js

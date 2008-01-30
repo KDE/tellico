@@ -28,6 +28,7 @@ class KFontCombo;
 class KColorCombo;
 
 class QCheckBox;
+class QRadioButton;
 
 namespace Tellico {
   class SourceListViewItem;
@@ -98,7 +99,7 @@ private slots:
   /**
    * Update the help link for a page.
    *
-   * @param w The page
+  QCheckBox* m_cbWriteImagesInFile; * @param w The page
    */
   void slotUpdateHelpLink(QWidget* w);
   /**
@@ -148,8 +149,11 @@ private:
   void loadTemplateList();
 
   bool m_modifying;
+  bool m_okClicked;
 
-  QCheckBox* m_cbWriteImagesInFile;
+  QRadioButton* m_rbImageInFile;
+  QRadioButton* m_rbImageInAppDir;
+  QRadioButton* m_rbImageInLocalDir;
   QCheckBox* m_cbOpenLastFile;
   QCheckBox* m_cbShowTipDay;
   QCheckBox* m_cbCapitalize;

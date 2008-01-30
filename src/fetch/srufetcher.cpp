@@ -80,23 +80,22 @@ bool SRUFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
-void SRUFetcher::readConfigHook(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  m_host = config_->readEntry("Host");
-  int p = config_->readNumEntry("Port", SRU_DEFAULT_PORT);
+void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
+  m_host = config_.readEntry("Host");
+  int p = config_.readNumEntry("Port", SRU_DEFAULT_PORT);
   if(p > 0) {
     m_port = p;
   }
-  m_path = config_->readEntry("Path");
+  m_path = config_.readEntry("Path");
   // used to be called Database
   if(m_path.isEmpty()) {
-    m_path = config_->readEntry("Database");
+    m_path = config_.readEntry("Database");
   }
   if(!m_path.startsWith(QChar('/'))) {
     m_path.prepend('/');
   }
-  m_format = config_->readEntry("Format", QString::fromLatin1("mods"));
-  m_fields = config_->readListEntry("Custom Fields");
+  m_format = config_.readEntry("Format", QString::fromLatin1("mods"));
+  m_fields = config_.readListEntry("Custom Fields");
 }
 
 void SRUFetcher::search(FetchKey key_, const QString& value_) {
@@ -484,22 +483,22 @@ SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*
   KAcceleratorManager::manage(optionsWidget());
 }
 
-void SRUConfigWidget::saveConfig(KConfig* config_) {
+void SRUConfigWidget::saveConfig(KConfigGroup& config_) {
   QString s = m_hostEdit->text().stripWhiteSpace();
   if(!s.isEmpty()) {
-    config_->writeEntry("Host", s);
+    config_.writeEntry("Host", s);
   }
   int port = m_portSpinBox->value();
   if(port > 0) {
-    config_->writeEntry("Port", port);
+    config_.writeEntry("Port", port);
   }
   s = m_pathEdit->text().stripWhiteSpace();
   if(!s.isEmpty()) {
-    config_->writeEntry("Path", s);
+    config_.writeEntry("Path", s);
   }
   s = m_formatCombo->currentData().toString();
   if(!s.isEmpty()) {
-    config_->writeEntry("Format", s);
+    config_.writeEntry("Format", s);
   }
   saveFieldsConfig(config_);
   slotSetModified(false);

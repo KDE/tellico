@@ -61,12 +61,13 @@ public:
   virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
   // can search title, person, isbn, or keyword. No UPC or Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k != FetchFirst && k != FetchLast && k!= UPC && k != Raw; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return Z3950; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(KConfig* config, const QString& group);
+  virtual void readConfigHook(const KConfigGroup& config);
+  virtual void saveConfigHook(KConfigGroup& config);
 
   virtual void updateEntry(Data::EntryPtr entry);
   const QString& host() const { return m_host; }
@@ -103,9 +104,6 @@ private:
   QString m_pqn; // prefix query notation
   QString m_esn; // element set name
 
-  QGuardedPtr<KConfig> m_config;
-  QString m_configGroup;
-
   FetchKey m_key;
   QString m_value;
   QMap<int, Data::EntryPtr> m_entries;
@@ -127,7 +125,7 @@ Q_OBJECT
 public:
   ConfigWidget(QWidget* parent, const Z3950Fetcher* fetcher = 0);
   virtual ~ConfigWidget();
-  virtual void saveConfig(KConfig* config_);
+  virtual void saveConfig(KConfigGroup& config_);
   virtual QString preferredName() const;
 
 private slots:

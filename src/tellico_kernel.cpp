@@ -368,3 +368,40 @@ QPair<Tellico::Data::FieldVec, Tellico::Data::FieldVec> Kernel::mergeFields(Data
   }
   return qMakePair(modified, created);
 }
+
+int Kernel::askAndMerge(Data::EntryPtr entry1_, Data::EntryPtr entry2_, Data::FieldPtr field_,
+                        QString value1_, QString value2_) {
+  QString title1 = entry1_->field(QString::fromLatin1("title"));
+  QString title2 = entry2_->field(QString::fromLatin1("title"));
+  if(title1 == title2) {
+    title1 = i18n("Entry 1");
+    title2 = i18n("Entry 2");
+  }
+  if(value1_.isEmpty()) {
+    value1_ = entry1_->field(field_);
+  }
+  if(value2_.isEmpty()) {
+    value2_ = entry2_->field(field_);
+  }
+  QString text = QString::fromLatin1("<qt>")
+                + i18n("Conflicting values for %1 were found while merging entries.").arg(field_->title())
+                + QString::fromLatin1("<br/><center><table><tr>"
+                                      "<th>%1</th>"
+                                      "<th>%2</th></tr>").arg(title1, title2)
+                + QString::fromLatin1("<tr><td><em>%1</em></td>").arg(value1_)
+                + QString::fromLatin1("<td><em>%1</em></td></tr></table></center>").arg(value2_)
+                + i18n("Please choose which value to keep.")
+                + QString::fromLatin1("</qt>");
+
+  int ret = KMessageBox::warningYesNoCancel(Kernel::self()->widget(),
+                                            text,
+                                            i18n("Merge Entries"),
+                                            i18n("Select value from %1").arg(title1),
+                                            i18n("Select value from %1").arg(title2));
+  switch(ret) {
+    case KMessageBox::Cancel: return 0;
+    case KMessageBox::Yes: return -1; // keep original value
+    case KMessageBox::No: return 1; // use newer value
+  }
+  return 0;
+}

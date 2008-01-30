@@ -69,7 +69,7 @@ ExportDialog::ExportDialog(Export::Format format_, Data::CollPtr coll_, QWidget*
   QString localStr = i18n("Encode in user locale (%1)").arg(
                      QString::fromLatin1(QTextCodec::codecForLocale()->name()));
   m_encodeLocale = new QRadioButton(localStr, bg);
-  QWhatsThis::add(m_encodeLocale, i18n("Encode the exported file in the local format."));
+  QWhatsThis::add(m_encodeLocale, i18n("Encode the exported file in the local encoding."));
 
   QWidget* w = m_exporter->widget(widget, "exporter_widget");
   if(w) {
@@ -101,13 +101,12 @@ QString ExportDialog::fileFilter() {
 }
 
 void ExportDialog::readOptions() {
-  KConfig* config = KGlobal::config();
-  config->setGroup("ExportOptions");
-  bool format = config->readBoolEntry("FormatFields", false);
+  KConfigGroup config(KGlobal::config(), "ExportOptions");
+  bool format = config.readBoolEntry("FormatFields", false);
   m_formatFields->setChecked(format);
-  bool selected = config->readBoolEntry("ExportSelectedOnly", false);
+  bool selected = config.readBoolEntry("ExportSelectedOnly", false);
   m_exportSelected->setChecked(selected);
-  bool encode = config->readBoolEntry("EncodeUTF8", true);
+  bool encode = config.readBoolEntry("EncodeUTF8", true);
   if(encode) {
     m_encodeUTF8->setChecked(true);
   } else {
@@ -117,12 +116,13 @@ void ExportDialog::readOptions() {
 
 void ExportDialog::slotSaveOptions() {
   KConfig* config = KGlobal::config();
+  // each exporter sets its own group
   m_exporter->saveOptions(config);
 
-  config->setGroup("ExportOptions");
-  config->writeEntry("FormatFields", m_formatFields->isChecked());
-  config->writeEntry("ExportSelectedOnly", m_exportSelected->isChecked());
-  config->writeEntry("EncodeUTF8", m_encodeUTF8->isChecked());
+  KConfigGroup configGroup(config, "ExportOptions");
+  configGroup.writeEntry("FormatFields", m_formatFields->isChecked());
+  configGroup.writeEntry("ExportSelectedOnly", m_exportSelected->isChecked());
+  configGroup.writeEntry("EncodeUTF8", m_encodeUTF8->isChecked());
 }
 
 // static
@@ -244,13 +244,12 @@ bool ExportDialog::exportCollection(Export::Format format_, const KURL& url_) {
   exp->setURL(url_);
   exp->setEntries(Data::Document::self()->collection()->entries());
 
-  KConfig* config = KGlobal::config();
-  config->setGroup("ExportOptions");
+  KConfigGroup config(KGlobal::config(), "ExportOptions");
   long options = 0;
-  if(config->readBoolEntry("FormatFields", false)) {
+  if(config.readBoolEntry("FormatFields", false)) {
     options |= Export::ExportFormatted;
   }
-  if(config->readBoolEntry("EncodeUTF8", true)) {
+  if(config.readBoolEntry("EncodeUTF8", true)) {
     options |= Export::ExportUTF8;
   }
   exp->setOptions(options | Export::ExportForce);

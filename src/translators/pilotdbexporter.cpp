@@ -58,8 +58,8 @@ bool PilotDBExporter::exec() {
   QTextCodec* codec = 0;
   {
     // Latin1 is default
-    KConfigGroupSaver group(KGlobal::config(), QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-    codec = KGlobal::charsets()->codecForName(KGlobal::config()->readEntry("Charset"));
+    KConfigGroup group(KGlobal::config(), QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+    codec = KGlobal::charsets()->codecForName(group.readEntry("Charset"));
   }
   if(!codec) {
     kdWarning() << "PilotDBExporter::exec() - no QTextCodec!" << endl;
@@ -219,14 +219,14 @@ QWidget* PilotDBExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 void PilotDBExporter::readOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_backup = config_->readBoolEntry("Backup", m_backup);
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_backup = group.readBoolEntry("Backup", m_backup);
 }
 
 void PilotDBExporter::saveOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_backup = m_checkBackup->isChecked();
-  config_->writeEntry("Backup", m_backup);
+  group.writeEntry("Backup", m_backup);
 }
 
 #include "pilotdbexporter.moc"

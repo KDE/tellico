@@ -288,7 +288,7 @@ zzs_stat(void)
         
         if ( q != NULL && low==0 ) low = p-table;
         len = 0;
-        if ( q != NULL ) printf("[%ld]", p-table);
+        if ( q != NULL ) printf("[%d]", p-table);
         while ( q != NULL )
         {
             len++;

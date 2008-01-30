@@ -71,8 +71,13 @@
     <entry key="Show Entry View" type="Bool">
         <default>true</default>
     </entry>
-    <entry key="Write Images In File" type="Bool">
-        <default>true</default>
+    <entry key="Image Location" type="Enum">
+      <choices>
+        <choice name="ImagesInFile"/>
+        <choice name="ImagesInAppDir"/>
+        <choice name="ImagesInLocalDir"/>
+      </choices>
+      <default>ImagesInFile</default>
     </entry>
     <entry key="Ask Write Images In File" type="Bool">
         <default>true</default>
@@ -412,6 +417,32 @@
         <default code="true">KGlobalSettings::highlightColor()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorFile">
+        <label>Template highlighted text color</label>
+        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+    </entry>
+</group>
+
+<group name="Options - boardgame">
+    <entry key="Entry Template" type="String" name="templateBoardGame">
+        <default>Fancy</default>
+    </entry>
+    <entry key="Template Font" type="Font" name="fontBoardGame">
+        <label>Template font</label>
+        <default code="true">KGlobalSettings::generalFont()</default>
+    </entry>
+    <entry key="Template Base Color" type="Color" name="baseColorBoardGame">
+        <label>Template background color</label>
+        <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry key="Template Text Color" type="Color" name="textColorBoardGame">
+        <label>Template text color</label>
+        <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorBoardGame">
+        <label>Template highlight color</label>
+        <default code="true">KGlobalSettings::highlightColor()</default>
+    </entry>
+    <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBoardGame">
         <label>Template highlighted text color</label>
         <default code="true">KGlobalSettings::highlightedTextColor()</default>
     </entry>

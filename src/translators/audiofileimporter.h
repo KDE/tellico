@@ -49,6 +49,7 @@ public:
 
 public slots:
   void slotCancel();
+  void slotAddFileToggled(bool on);
 
 private:
   static QString insertValue(const QString& str, const QString& value, uint pos);
@@ -58,7 +59,8 @@ private:
   Data::CollPtr m_coll;
   QWidget* m_widget;
   QCheckBox* m_recursive;
-  QCheckBox* m_filePath;
+  QCheckBox* m_addFilePath;
+  QCheckBox* m_addBitrate;
   bool m_cancelled : 1;
 };
 

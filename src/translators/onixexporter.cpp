@@ -19,13 +19,13 @@
 #include "../tellico_utils.h"
 #include "../imagefactory.h"
 #include "../image.h"
+#include "../tellico_debug.h"
 
 #include <config.h>
 
 #include <kstandarddirs.h>
 #include <kapplication.h>
 #include <kzip.h>
-#include <kdebug.h>
 #include <kconfig.h>
 #include <klocale.h>
 
@@ -185,15 +185,15 @@ QWidget* ONIXExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
 }
 
 void ONIXExporter::readOptions(KConfig* config_) {
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_includeImages = config_->readBoolEntry("Include Images", m_includeImages);
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_includeImages = group.readBoolEntry("Include Images", m_includeImages);
 }
 
 void ONIXExporter::saveOptions(KConfig* config_) {
   m_includeImages = m_checkIncludeImages->isChecked();
 
-  KConfigGroupSaver group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  config_->writeEntry("Include Images", m_includeImages);
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  group.writeEntry("Include Images", m_includeImages);
 }
 
 #include "onixexporter.moc"

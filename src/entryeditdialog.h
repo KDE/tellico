@@ -112,6 +112,10 @@ public slots:
    */
   void slotSetModified(bool modified=true);
 
+private slots:
+  void slotGoPrevEntry();
+  void slotGoNextEntry();
+
 private:
   /**
    * Sets the contents of the input controls to match the contents of a entry.
@@ -138,6 +142,7 @@ private:
   bool m_modified;
   bool m_isOrphan;
   bool m_isWorking;
+  bool m_needReset;
 };
 
 } // end namespace

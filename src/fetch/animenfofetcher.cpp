@@ -20,6 +20,7 @@
 #include "../filehandler.h"
 #include "../latin1literal.h"
 #include "../imagefactory.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -54,9 +55,8 @@ bool AnimeNfoFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-void AnimeNfoFetcher::readConfigHook(KConfig* config_, const QString& group_) {
+void AnimeNfoFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
-  Q_UNUSED(group_);
 }
 
 void AnimeNfoFetcher::search(FetchKey key_, const QString& value_) {

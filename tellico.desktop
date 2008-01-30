@@ -1,11 +1,11 @@
 # KDE Config File
 [Desktop Entry]
+Version=1.0
 Encoding=UTF-8
 Type=Application
-Exec=tellico -caption "%c" %i %m
-Icon=tellico.png
-MiniIcon=tellico.png
-DocPath=tellico/index.html
+Exec=tellico -caption "%c" %i %u
+Icon=tellico
+X-KDE-DocPath=tellico/index.html
 Comment=A collection manager
 Comment[ru]=Менеджер коллекций
 Comment[cs]=Správce sbírek
@@ -14,7 +14,7 @@ Comment[fr]=Un gestionnaire de collection
 Comment[tr]=Bir koleksiyon yöneticisi
 Comment[sv]=Program för hantering av samlingar
 Comment[pt]=Um gestor de colecção
-Terminal=0
+Terminal=false
 Name=Tellico
 GenericName=Collection Manager
 GenericName[cs]=Správce sbírek
@@ -24,5 +24,5 @@ GenericName[fr]=Gestionnaire de collection
 GenericName[tr]=Koleksiyon yöneticisi
 GenericName[sv]=Samlingsorganisatör
 GenericName[pt]=Gestor de Colecção
-MimeType=application/x-tellico
+MimeType=application/x-tellico;
 Categories=KDE;Office;Database;

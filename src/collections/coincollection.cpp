@@ -23,8 +23,7 @@ namespace {
 using Tellico::Data::CoinCollection;
 
 CoinCollection::CoinCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Coins")) {
-  setTitle(title_.isNull() ? i18n("My Coins") : title_);
+   : Collection(title_.isEmpty() ? i18n("My Coins") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }

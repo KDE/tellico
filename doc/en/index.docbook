@@ -61,8 +61,8 @@ need them for translation coordination !
 Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
-<date>08/28/2006</date>
-<releaseinfo>1.2</releaseinfo>
+<date>02/01/2008</date>
+<releaseinfo>1.3</releaseinfo>
 
 <title>The &appname; Handbook</title>
 
@@ -84,6 +84,8 @@ Do NOT change these in the translation. -->
 <year>2004</year>
 <year>2005</year>
 <year>2006</year>
+<year>2007</year>
+<year>2008</year>
 <holder>&robby;</holder>
 </copyright>
 
@@ -137,6 +139,7 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword>KDE</keyword>
 <keyword>tellico</keyword>
 <keyword>book</keyword>
+<keyword>bibliography</keyword>
 <keyword>movie</keyword>
 <keyword>collection</keyword>
 <keyword>database</keyword>
@@ -170,8 +173,8 @@ revision history. (see installation appendix comment) -->
 &appname; is a program for managing collections. It began as a simple
 book collection manager, and has expanded to include default
 collection templates for bibliographies, comic books, videos, music,
-coins, stamps, trading cards, video games, wines, and file listings. In addition, custom
-collections can be built for any other type of collectibles.
+coins, stamps, trading cards, video games, wines, board games, and file listings.
+In addition, custom collections can be built for any other type of collectibles.
 </para>
 
 <sect2 id="what-tellico-is">
@@ -224,10 +227,10 @@ in the <link linkend="gnu-fdl">license declaration</link>.
 <para>
 In &appname;, a collection is the document. Only one collection exists in each &appname;
 file. A collection contains any number of <link linkend="fields">fields</link> and
-<link linkend="entries">entries</link>. &appname; supports 11 specific collection types by
+<link linkend="entries">entries</link>. &appname; supports 12 specific collection types by
 default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps,
-video games, wines, and file listings. In addition, an empty generic collection template is available
-for any other type of collectibles or lists.
+video games, wines, board games, and file listings. In addition, an empty generic collection
+template is available for any other type of collectibles or lists.
 </para>
 </sect2>
 
@@ -253,9 +256,10 @@ the whole collection is always resident in memory, too many entries could slow d
 <para>
 &appname; has been tested with a collection of 10,000 entries, and the speed was satisfactory.
 However, if many large images are included in the collection, the loading and processing time
-does slow down greatly. Performance can be improved by having &appname; store images in the
-application data folder rather than inside the data file itself. More information can be found
-in the <link linkend="configuration">configuration section</link>.
+does slow down greatly. Performance can be improved by having &appname; store images separate from
+the data file itself, either in the application-specific directory or a directory relative to
+the data file. More information can be found in the
+<link linkend="configuration">configuration section</link>.
 </para>
 
 </sect2>
@@ -293,13 +297,13 @@ file included in the KDE distribution. -->
 &appname;
 </para>
 <para>
-Program copyright 2001-2006 &robby; <email>&email;</email>
+Program copyright 2001-2008 &robby; <email>&email;</email>
 </para>
 
 &underGPL;        	 <!-- GPL License -->
 
 <para>
-Documentation copyright 2001-2006 &robby; <email>&email;</email>
+Documentation copyright 2001-2008 &robby; <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
@@ -341,7 +345,7 @@ information here.
 -->
 
 <para>
-In order to successfully use &appname;, you need &kde; 3.2.x.
+In order to successfully use &appname;, you need &kde; 3.3.1.
 &appname; uses about 5 megabytes of memory to run, but this may vary
 depending on your platform, configuration, and most of all, your collection size.
 </para>

@@ -19,16 +19,16 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V9.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="9">
+ <tellico syntaxVersion="10">
   <collection title="Yahoo! Import" type="4"> <!-- 4 is music -->
    <fields>
     <field name="_default"/>
     <!-- the importer will actually download the image and ignore this field -->
-    <field flags="0" title="Yahoo ALbum" category="General" format="4" type="7" name="yahoo"/>
+    <field flags="0" title="Yahoo Album" category="General" format="4" type="7" name="yahoo"/>
     <field flags="0" title="Image" category="Images" format="4" type="7" name="image"/>
    </fields>
    <xsl:for-each select="yh:ResultSet/yh:Result">
@@ -65,7 +65,7 @@
     <xsl:with-param name="value" select="yh:ReleaseDate"/>
    </xsl:call-template>
   </year>
-  
+
   <labels>
    <xsl:for-each select="yh:Publisher">
     <label>
@@ -74,7 +74,7 @@
    </xsl:for-each>
   </labels>
  </entry>
- 
+
 </xsl:template>
 
 <xsl:template name="year">

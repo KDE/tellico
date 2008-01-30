@@ -28,6 +28,7 @@
 #include "gui/combobox.h"
 #include "gui/previewdialog.h"
 #include "newstuff/dialog.h"
+#include "../tellico_debug.h"
 
 #include <klineedit.h>
 #include <klocale.h>
@@ -59,6 +60,8 @@
 #include <qvbox.h>
 #include <qhbox.h>
 #include <qfileinfo.h>
+#include <qradiobutton.h>
+#include <qvbuttongroup.h>
 
 namespace {
   static const int CONFIG_MIN_WIDTH = 640;
@@ -99,7 +102,8 @@ void SourceListViewItem::setFetcher(Fetch::Fetcher::Ptr fetcher) {
 ConfigDialog::ConfigDialog(QWidget* parent_, const char* name_/*=0*/)
     : KDialogBase(IconList, i18n("Configure Tellico"), Help|Ok|Apply|Cancel|Default,
                   Ok, parent_, name_, true, false)
-    , m_modifying(false) {
+    , m_modifying(false)
+    , m_okClicked(false) {
   setupGeneralPage();
   setupPrintingPage();
   setupTemplatePage();
@@ -163,8 +167,10 @@ void ConfigDialog::slotUpdateHelpLink(QWidget* w_) {
 }
 
 void ConfigDialog::slotOk() {
+  m_okClicked = true;
   slotApply();
   accept();
+  m_okClicked = false;
 }
 
 void ConfigDialog::slotApply() {
@@ -192,14 +198,6 @@ void ConfigDialog::setupGeneralPage() {
   QFrame* frame = addPage(i18n("General"), i18n("General Options"), pix);
   QVBoxLayout* l = new QVBoxLayout(frame, KDialog::marginHint(), KDialog::spacingHint());
 
-  m_cbWriteImagesInFile = new QCheckBox(i18n("&Include images in data file"), frame);
-  QWhatsThis::add(m_cbWriteImagesInFile, i18n("If checked, all images will be included in the data file, "
-                                              "rather than saved separately in the Tellico data directory. "
-                                              "Saving a lot of images in the data file cause Tellico to "
-                                              "run more slowly."));
-  l->addWidget(m_cbWriteImagesInFile);
-  connect(m_cbWriteImagesInFile, SIGNAL(clicked()), SLOT(slotModified()));
-
   m_cbOpenLastFile = new QCheckBox(i18n("&Reopen file at startup"), frame);
   QWhatsThis::add(m_cbOpenLastFile, i18n("If checked, the file that was last open "
                                          "will be re-opened at program start-up."));
@@ -211,6 +209,17 @@ void ConfigDialog::setupGeneralPage() {
                                        "shown at program start-up."));
   l->addWidget(m_cbShowTipDay);
   connect(m_cbShowTipDay, SIGNAL(clicked()), SLOT(slotModified()));
+
+  QButtonGroup* imageGroup = new QVButtonGroup(i18n("Image Storage Options"), frame);
+  m_rbImageInFile = new QRadioButton(i18n("Store images in data file"), imageGroup);
+  m_rbImageInAppDir = new QRadioButton(i18n("Store images in common application directory"), imageGroup);
+  m_rbImageInLocalDir = new QRadioButton(i18n("Store images in directory relative to data file"), imageGroup);
+  QWhatsThis::add(imageGroup, i18n("Images may be saved in the data file itself, which can "
+                                   "cause Tellico to run slowly, stored in the Tellico "
+                                   "application directory, or stored in a directory in the "
+                                   "same location as the data file."));
+  l->addWidget(imageGroup);
+  connect(imageGroup, SIGNAL(clicked(int)), SLOT(slotModified()));
 
   QVGroupBox* formatGroup = new QVGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);
@@ -565,8 +574,12 @@ void ConfigDialog::readConfiguration() {
 
 void ConfigDialog::readGeneralConfig() {
   m_cbShowTipDay->setChecked(Config::showTipOfDay());
-  m_cbWriteImagesInFile->setChecked(Config::writeImagesInFile());
   m_cbOpenLastFile->setChecked(Config::reopenLastFile());
+  switch(Config::imageLocation()) {
+    case Config::ImagesInFile: m_rbImageInFile->setChecked(true); break;
+    case Config::ImagesInAppDir: m_rbImageInAppDir->setChecked(true); break;
+    case Config::ImagesInLocalDir: m_rbImageInLocalDir->setChecked(true); break;
+  }
 
   bool autoCapitals = Config::autoCapitalization();
   m_cbCapitalize->setChecked(autoCapitals);
@@ -623,6 +636,7 @@ void ConfigDialog::readFetchConfig() {
       // there's weird layout bug if it's not hidden
       cw->hide();
     }
+    kapp->processEvents();
   }
 
   if(m_sourceListView->childCount() == 0) {
@@ -637,7 +651,15 @@ void ConfigDialog::readFetchConfig() {
 void ConfigDialog::saveConfiguration() {
   Config::setShowTipOfDay(m_cbShowTipDay->isChecked());
 
-  Config::setWriteImagesInFile(m_cbWriteImagesInFile->isChecked());
+  int imageLocation;
+  if(m_rbImageInFile->isChecked()) {
+    imageLocation = Config::ImagesInFile;
+  } else if(m_rbImageInAppDir->isChecked()) {
+    imageLocation = Config::ImagesInAppDir;
+  } else {
+    imageLocation = Config::ImagesInLocalDir;
+  }
+  Config::setImageLocation(imageLocation);
   Config::setReopenLastFile(m_cbOpenLastFile->isChecked());
 
   Config::setAutoCapitalization(m_cbCapitalize->isChecked());
@@ -674,7 +696,7 @@ void ConfigDialog::saveConfiguration() {
   }
   m_removedConfigWidgets.clear();
 
-  KConfig* config = KGlobal::config();
+  KConfig* masterConfig = KGlobal::config();
 
   bool reloadFetchers = false;
   int count = 0; // start group numbering at 0
@@ -687,43 +709,46 @@ void ConfigDialog::saveConfiguration() {
     m_newStuffConfigWidgets.removeRef(cw);
     QString group = QString::fromLatin1("Data Source %1").arg(count);
     // in case we later change the order, clear the group now
-    config->deleteGroup(group);
-    KConfigGroupSaver saver(config, group);
-    config->writeEntry("Name", item->text(0));
-    config->writeEntry("Type", item->fetchType());
-    config->writeEntry("UpdateOverwrite", item->updateOverwrite());
-    cw->saveConfig(config);
+    masterConfig->deleteGroup(group);
+    KConfigGroup configGroup(masterConfig, group);
+    configGroup.writeEntry("Name", item->text(0));
+    configGroup.writeEntry("Type", item->fetchType());
+    configGroup.writeEntry("UpdateOverwrite", item->updateOverwrite());
+    cw->saveConfig(configGroup);
     item->setNewSource(false);
     // in case the ordering changed
     item->setConfigGroup(group);
     reloadFetchers = true;
   }
   // now update total number of sources
-  config->setGroup("Data Sources");
-  config->writeEntry("Sources Count", count);
+  KConfigGroup sourceGroup(masterConfig, "Data Sources");
+  sourceGroup.writeEntry("Sources Count", count);
   // and purge old config groups
   QString group = QString::fromLatin1("Data Source %1").arg(count);
-  while(config->hasGroup(group)) {
-    config->deleteGroup(group);
+  while(masterConfig->hasGroup(group)) {
+    masterConfig->deleteGroup(group);
     ++count;
     group = QString::fromLatin1("Data Source %1").arg(count);
   }
 
-  config->sync();
+  masterConfig->sync();
   Config::writeConfig();
 
   QString s = m_sourceListView->selectedItem() ? m_sourceListView->selectedItem()->text(0) : QString();
   if(reloadFetchers) {
     Fetch::Manager::self()->loadFetchers();
     Controller::self()->updatedFetchers();
-    // reload fetcher items
-    readFetchConfig();
-    if(!s.isEmpty()) {
-      for(QListViewItemIterator it(m_sourceListView); it.current(); ++it) {
-        if(it.current()->text(0) == s) {
-          m_sourceListView->setSelected(it.current(), true);
-          m_sourceListView->ensureItemVisible(it.current());
-          break;
+    // reload fetcher items if OK was not clicked
+    // meaning apply was clicked
+    if(!m_okClicked) {
+      readFetchConfig();
+      if(!s.isEmpty()) {
+        for(QListViewItemIterator it(m_sourceListView); it.current(); ++it) {
+          if(it.current()->text(0) == s) {
+            m_sourceListView->setSelected(it.current(), true);
+            m_sourceListView->ensureItemVisible(it.current());
+            break;
+          }
         }
       }
     }

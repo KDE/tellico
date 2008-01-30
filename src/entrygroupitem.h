@@ -32,11 +32,6 @@ public:
   EntryGroupItem(GUI::ListView* parent, Data::EntryGroup* group, int fieldType);
 
   virtual bool isEntryGroupItem() const { return true; }
-  /**
-   * Returns the id reference number of the ParentItem.
-   *
-   * @return The id number
-   */
   Data::EntryGroup* group() const { return m_group; }
   void setGroup(Data::EntryGroup* group) { m_group = group; }
 

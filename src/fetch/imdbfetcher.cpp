@@ -21,6 +21,7 @@
 #include "../imagefactory.h"
 #include "../tellico_utils.h"
 #include "../gui/listboxtext.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kdialogbase.h>
@@ -96,15 +97,14 @@ bool IMDBFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-void IMDBFetcher::readConfigHook(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  QString h = config_->readEntry("Host");
+void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {
+  QString h = config_.readEntry("Host");
   if(!h.isEmpty()) {
     m_host = h;
   }
-  m_numCast = config_->readNumEntry("Max Cast", 10);
-  m_fetchImages = config_->readBoolEntry("Fetch Images", true);
-  m_fields = config_->readListEntry("Custom Fields");
+  m_numCast = config_.readNumEntry("Max Cast", 10);
+  m_fetchImages = config_.readBoolEntry("Fetch Images", true);
+  m_fields = config_.readListEntry("Custom Fields");
 }
 
 // multiple values not supported
@@ -674,8 +674,8 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   doAlsoKnownAs(str_, entry);
   doPlot(str_, entry, m_url);
   doLists(str_, entry);
-  doPerson(str_, entry, QString::fromLatin1("Direct"), QString::fromLatin1("director"));
-  doPerson(str_, entry, QString::fromLatin1("Writ"), QString::fromLatin1("writer"));
+  doPerson(str_, entry, QString::fromLatin1("Director"), QString::fromLatin1("director"));
+  doPerson(str_, entry, QString::fromLatin1("Writer"), QString::fromLatin1("writer"));
   doRating(str_, entry);
   doCast(str_, entry, m_url);
   if(m_fetchImages) {
@@ -701,7 +701,12 @@ void IMDBFetcher::doTitle(const QString& str_, Data::EntryPtr entry_) {
     const QString cap1 = s_titleRx->cap(1);
     // titles always have parentheses
     int pPos = cap1.find('(');
-    entry_->setField(QString::fromLatin1("title"), cap1.left(pPos).stripWhiteSpace());
+    QString title = cap1.left(pPos).stripWhiteSpace();
+    // remove first and last quotes is there
+    if(title.startsWith(QChar('"')) && title.endsWith(QChar('"'))) {
+      title = title.mid(1, title.length()-2);
+    }
+    entry_->setField(QString::fromLatin1("title"), title);
     // remove parenthesis
     uint pPos2 = pPos+1;
     while(pPos2 < cap1.length() && cap1[pPos2].isDigit()) {
@@ -820,16 +825,15 @@ void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL&
 
 void IMDBFetcher::doPerson(const QString& str_, Data::EntryPtr entry_,
                            const QString& imdbHeader_, const QString& fieldName_) {
-  int pos = str_.find(imdbHeader_);
-  if(pos > -1) {
-    QStringList people;
-    // loop until repeated <br> tags or </div> tag
-    QRegExp br2Rx(QString::fromLatin1("<br[\\s/]*>\\s*<br[\\s/]*>"), false);
-    br2Rx.setMinimal(true);
-    QRegExp divRx(QString::fromLatin1("<[/]*div"), false);
-    divRx.setMinimal(true);
+  QRegExp br2Rx(QString::fromLatin1("<br[\\s/]*>\\s*<br[\\s/]*>"), false);
+  br2Rx.setMinimal(true);
+  QRegExp divRx(QString::fromLatin1("<[/]*div"), false);
+  divRx.setMinimal(true);
+  QString name = QString::fromLatin1("/name/");
 
-    const QString name = QString::fromLatin1("/name/");
+  QStringList people;
+  for(int pos = str_.find(imdbHeader_); pos > 0; pos = str_.find(imdbHeader_, pos)) {
+    // loop until repeated <br> tags or </div> tag
     const int endPos1 = str_.find(br2Rx, pos);
     const int endPos2 = str_.find(divRx, pos);
     const int endPos = QMIN(endPos1, endPos2); // ok to be -1
@@ -840,9 +844,9 @@ void IMDBFetcher::doPerson(const QString& str_, Data::EntryPtr entry_,
       }
       pos = s_anchorRx->search(str_, pos+1);
     }
-    if(!people.isEmpty()) {
-      entry_->setField(fieldName_, people.join(sep));
-    }
+  }
+  if(!people.isEmpty()) {
+    entry_->setField(fieldName_, people.join(sep));
   }
 }
 
@@ -862,30 +866,41 @@ void IMDBFetcher::doCast(const QString& str_, Data::EntryPtr entry_, const KURL&
   // be quiet about failure and be sure to translate entities
   QString castPage = Tellico::decodeHTML(FileHandler::readTextFile(castURL, true));
 
-  int pos;
+  int pos = -1;
   // the text to search, depends on which page is being read
   QString castText = castPage;
-  if(!castText.isEmpty()) {
-    // fragile, the word "cast" appears in the title, but need to find
-    // the one right above the actual cast table
-    // for TV shows, there's a link on the sidebar for "episodes case"
-    // so need to not match that one
-    pos = castText.find(QString::fromLatin1("cast</"), 0, false);
-    if(pos > 9) {
-      // back up 9 places
-      if(castText.mid(pos-9, 9).startsWith(QString::fromLatin1("episodes"))) {
-        // find next cast list
-        pos = castText.find(QString::fromLatin1("cast</"), pos+6, false);
+  if(castText.isEmpty()) {
+    // fall back to short list
+    castText = str_;
+    pos = castText.find(QString::fromLatin1("cast overview"), 0, false);
+    if(pos == -1) {
+      pos = castText.find(QString::fromLatin1("credited cast"), 0, false);
+    }
+  } else {
+    // first look for anchor
+    QRegExp castAnchorRx(QString::fromLatin1("<a\\s+name\\s*=\\s*\"cast\""), false);
+    pos = castText.find(castAnchorRx);
+    if(pos < 0) {
+      QRegExp tableClassRx(QString::fromLatin1("<table\\s+class\\s*=\\s*\"cast\""), false);
+      pos = castText.find(tableClassRx);
+      if(pos < 0) {
+        // fragile, the word "cast" appears in the title, but need to find
+        // the one right above the actual cast table
+        // for TV shows, there's a link on the sidebar for "episodes case"
+        // so need to not match that one
+        pos = castText.find(QString::fromLatin1("cast</"), 0, false);
+        if(pos > 9) {
+          // back up 9 places
+          if(castText.mid(pos-9, 9).startsWith(QString::fromLatin1("episodes"))) {
+            // find next cast list
+            pos = castText.find(QString::fromLatin1("cast</"), pos+6, false);
+          }
+        }
       }
     }
-  } else { // fall back to short list
-    pos = str_.find(QString::fromLatin1("cast overview"), 0, false);
-    if(pos == -1) {
-      pos = str_.find(QString::fromLatin1("credited cast"), 0, false);
-    }
-    castText = str_;
   }
   if(pos == -1) { // no cast list found
+    myDebug() << "IMDBFetcher::doCast() - no cast list found" << endl;
     return;
   }
 
@@ -1148,13 +1163,13 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   }
 }
 
-void IMDBFetcher::ConfigWidget::saveConfig(KConfig* config_) {
+void IMDBFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   QString host = m_hostEdit->text().stripWhiteSpace();
   if(!host.isEmpty()) {
-    config_->writeEntry("Host", host);
+    config_.writeEntry("Host", host);
   }
-  config_->writeEntry("Max Cast", m_numCast->value());
-  config_->writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
+  config_.writeEntry("Max Cast", m_numCast->value());
+  config_.writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
 
   saveFieldsConfig(config_);
   slotSetModified(false);

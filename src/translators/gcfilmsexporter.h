@@ -36,8 +36,6 @@ public:
 
   // no options
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
-  virtual void readOptions(KConfig*) {}
-  virtual void saveOptions(KConfig*) {}
 
 private:
   void push(QTextOStream& ts, QCString fieldName, Data::EntryVec::ConstIterator entry, bool format);

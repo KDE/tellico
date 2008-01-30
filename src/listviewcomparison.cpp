@@ -19,6 +19,7 @@
 #include "entryitem.h"
 
 #include <qlistview.h>
+#include <qiconview.h>
 #include <qpixmap.h>
 #include <qdatetime.h>
 
@@ -69,13 +70,13 @@ int Tellico::ListViewComparison::compare(int col_,
                                          const GUI::ListViewItem* item2_,
                                          bool asc_)
 {
-  return compare(key(item1_, col_, asc_), key(item2_, col_, asc_));
+  return compare(item1_->key(col_, asc_), item2_->key(col_, asc_));
 }
 
-QString Tellico::ListViewComparison::key(const GUI::ListViewItem* item_, int col_, bool asc_) {
-  return item_->isEntryItem()
-         ? static_cast<const EntryItem*>(item_)->entry()->field(m_fieldName)
-         : item_->key(col_, asc_);
+int Tellico::ListViewComparison::compare(const QIconViewItem* item1_,
+                                         const QIconViewItem* item2_)
+{
+  return compare(item1_->key(), item2_->key());
 }
 
 Tellico::StringComparison::StringComparison(Data::ConstFieldPtr field) : ListViewComparison(field) {
@@ -172,6 +173,23 @@ int Tellico::PixmapComparison::compare(int col_,
   return 0;
 }
 
+int Tellico::PixmapComparison::compare(const QIconViewItem* item1_,
+                                      const QIconViewItem* item2_)
+{
+  const QPixmap* pix1 = item1_->pixmap();
+  const QPixmap* pix2 = item2_->pixmap();
+  if(pix1 && !pix1->isNull()) {
+    if(pix2 && !pix2->isNull()) {
+      // large images come first
+      return pix1->width() - pix2->width();
+    }
+    return 1;
+  } else if(pix2 && !pix2->isNull()) {
+    return -1;
+  }
+  return 0;
+}
+
 Tellico::DependentComparison::DependentComparison(Data::ConstFieldPtr field) : StringComparison(field) {
   Data::FieldVec fields = field->dependsOn(Data::Document::self()->collection());
   for(Data::FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
@@ -196,10 +214,28 @@ int Tellico::DependentComparison::compare(int col_,
   return ListViewComparison::compare(col_, item1_, item2_, asc_);
 }
 
+int Tellico::DependentComparison::compare(const QIconViewItem* item1_,
+                                          const QIconViewItem* item2_)
+{
+  for(QPtrListIterator<ListViewComparison> it(m_comparisons); it.current(); ++it) {
+    int res = it.current()->compare(item1_, item2_);
+    if(res != 0) {
+      return res;
+    }
+  }
+  return ListViewComparison::compare(item1_, item2_);
+}
+
 Tellico::ISODateComparison::ISODateComparison(Data::ConstFieldPtr field) : ListViewComparison(field) {
 }
 
 int Tellico::ISODateComparison::compare(const QString& str1, const QString& str2) {
+  if(str1.isEmpty()) {
+    return str2.isEmpty() ? 0 : -1;
+  }
+  if(str2.isEmpty()) { // str1 is not
+    return 1;
+  }
   // modelled after Field::formatDate()
   // so dates would sort as expected without padding month and day with zero
   // and accounting for "current year - 1 - 1" default scheme

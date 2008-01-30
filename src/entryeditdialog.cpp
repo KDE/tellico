@@ -20,6 +20,7 @@
 #include "tellico_utils.h"
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
+#include "latin1literal.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -53,7 +54,8 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_, const char* name_)
       m_tabs(new GUI::TabControl(this)),
       m_modified(false),
       m_isOrphan(false),
-      m_isWorking(false) {
+      m_isWorking(false),
+      m_needReset(false) {
   setMainWidget(m_tabs);
 
   m_prevBtn = User3;
@@ -67,8 +69,8 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_, const char* name_)
 
   connect(this, SIGNAL(applyClicked()), SLOT(slotHandleSave()));
   connect(this, SIGNAL(user1Clicked()), SLOT(slotHandleNew()));
-  connect(this, SIGNAL(user2Clicked()), Controller::self(), SLOT(slotGoNextEntry()));
-  connect(this, SIGNAL(user3Clicked()), Controller::self(), SLOT(slotGoPrevEntry()));
+  connect(this, SIGNAL(user2Clicked()), SLOT(slotGoNextEntry()));
+  connect(this, SIGNAL(user3Clicked()), SLOT(slotGoPrevEntry()));
 
   KGuiItem prev;
   prev.setIconName(QString::fromLatin1(QApplication::reverseLayout() ? "forward" : "back"));
@@ -324,6 +326,7 @@ void EntryEditDialog::slotHandleSave() {
 
   Data::EntryVec oldEntries;
   Data::FieldVec fields = m_currColl->fields();
+  Data::FieldVec fieldsRequiringValues;
   // boolean to keep track if any field gets changed
   bool modified = false;
   for(Data::EntryVecIt entry = m_currEntries.begin(); entry != m_currEntries.end(); ++entry) {
@@ -341,7 +344,29 @@ void EntryEditDialog::slotHandleSave() {
           modified = true;
         }
         entry->setField(fIt, temp);
+        if(temp.isEmpty()) {
+          QString prop = fIt->property(QString::fromLatin1("required")).lower();
+          if(prop == Latin1Literal("1") || prop == Latin1Literal("true")) {
+            fieldsRequiringValues.append(fIt.data());
+          }
+        }
       }
+    }
+  }
+
+  if(!fieldsRequiringValues.isEmpty()) {
+    GUI::CursorSaver cs2(Qt::arrowCursor);
+    QString str = i18n("A value is required for the following fields. Do you want to continue?");
+    QStringList titles;
+    for(Data::FieldVecIt it = fieldsRequiringValues.begin(); it != fieldsRequiringValues.end(); ++it) {
+      titles << it->title();
+    }
+    QString dontAsk = QString::fromLatin1("SaveWithoutRequired");
+    int ret = KMessageBox::questionYesNoList(this, str, titles, i18n("Modify Entries"),
+                                             KStdGuiItem::yes(), KStdGuiItem::no(), dontAsk);
+    if(ret != KMessageBox::Yes) {
+      m_isWorking = false;
+      return;
     }
   }
 
@@ -365,10 +390,10 @@ void EntryEditDialog::slotHandleSave() {
 }
 
 void EntryEditDialog::clear() {
-//  myDebug() << "EntryEditDialog::clear()" << endl;
   if(m_isWorking) {
     return;
   }
+//  myDebug() << "EntryEditDialog::clear()" << endl;
 
   m_isWorking = true;
   // clear the widgets
@@ -414,9 +439,10 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
 //  myDebug() << "EntryEditDialog::setContents() - " << entries_.count() << " entries" << endl;
 
   // if some entries get selected in one view, then in another, don't reset
-  if(entries_ == m_currEntries) {
+  if(!m_needReset && entries_ == m_currEntries) {
     return;
   }
+  m_needReset = false;
 
   // first set contents to first item
   setContents(entries_.front());
@@ -478,6 +504,7 @@ void EntryEditDialog::setContents(Data::EntryPtr entry_) {
   blockSignals(true);
   clear();
   blockSignals(false);
+
   m_isWorking = true;
   m_currEntries.append(entry_);
 
@@ -502,8 +529,7 @@ void EntryEditDialog::setContents(Data::EntryPtr entry_) {
       continue;
     }
 
-    QString value = entry_->field(field);
-    widget->setText(value);
+    widget->setText(entry_->field(field));
     widget->setEnabled(true);
     widget->editMultiple(false);
   } // end field loop
@@ -713,8 +739,19 @@ void EntryEditDialog::modifyEntries(Data::EntryVec entries_) {
     }
   }
   if(updateContents) {
+    m_needReset = true;
     setContents(m_currEntries);
   }
+}
+
+void EntryEditDialog::slotGoPrevEntry() {
+  queryModified();
+  Controller::self()->slotGoPrevEntry();
+}
+
+void EntryEditDialog::slotGoNextEntry() {
+  queryModified();
+  Controller::self()->slotGoNextEntry();
 }
 
 #include "entryeditdialog.moc"

@@ -6,3 +6,4 @@ Singleton=true
 Mutators=true
 MemberVariables=private
 CustomAdditions=true
+GlobalEnums=true

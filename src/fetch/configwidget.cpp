@@ -53,14 +53,14 @@ void ConfigWidget::addFieldsWidget(const StringMap& customFields_, const QString
   return;
 }
 
-void ConfigWidget::saveFieldsConfig(KConfig* config_) const {
+void ConfigWidget::saveFieldsConfig(KConfigGroup& config_) const {
   QStringList fields;
   for(QDictIterator<QCheckBox> it(m_fields); it.current(); ++it) {
     if(it.current()->isChecked()) {
       fields << it.currentKey();
     }
   }
-  config_->writeEntry(QString::fromLatin1("Custom Fields"), fields);
+  config_.writeEntry(QString::fromLatin1("Custom Fields"), fields);
 }
 
 #include "configwidget.moc"

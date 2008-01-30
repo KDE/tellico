@@ -24,8 +24,7 @@ namespace {
 using Tellico::Data::StampCollection;
 
 StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Stamps")) {
-  setTitle(title_.isNull() ? i18n("My Stamps") : title_);
+   : Collection(title_.isEmpty() ? i18n("My Stamps") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }

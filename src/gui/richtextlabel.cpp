@@ -21,11 +21,11 @@ using Tellico::GUI::RichTextLabel;
 
 RichTextLabel::RichTextLabel(QWidget* parent) : QTextEdit(parent) {
   init();
-};
+}
 
 RichTextLabel::RichTextLabel(const QString& text, QWidget* parent) : QTextEdit(text, QString::null, parent) {
   init();
-};
+}
 
 QSize RichTextLabel::sizeHint() const {
   return minimumSizeHint();

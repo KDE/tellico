@@ -22,10 +22,12 @@
 #include <klocale.h>
 #include <kbuttonbox.h>
 #include <kurldrag.h>
+#include <kmessagebox.h>
 
 #include <qwmatrix.h>
 #include <qlayout.h>
 #include <qlabel.h>
+#include <qcheckbox.h>
 #include <qdragobject.h>
 #include <qapplication.h> // needed for drag distance
 
@@ -48,14 +50,21 @@ ImageWidget::ImageWidget(QWidget* parent_, const char* name_) : QWidget(parent_,
   l->addWidget(m_label, 1);
   l->addSpacing(IMAGE_WIDGET_BUTTON_MARGIN);
 
+  QVBoxLayout* boxLayout = new QVBoxLayout(l);
+  boxLayout->addStretch(1);
+
   KButtonBox* box = new KButtonBox(this, Vertical);
-  box->addStretch(1);
   box->addButton(i18n("Select Image..."), this, SLOT(slotGetImage()));
   box->addButton(i18n("Clear"), this, SLOT(slotClear()));
-  box->addStretch(1);
   box->layout();
+  boxLayout->addWidget(box);
 
-  l->addWidget(box);
+  boxLayout->addSpacing(8);
+  m_cbLinkOnly = new QCheckBox(i18n("Save link only"), this);
+  connect(m_cbLinkOnly, SIGNAL(clicked()), SLOT(slotLinkOnlyClicked()));
+  boxLayout->addWidget(m_cbLinkOnly);
+
+  boxLayout->addStretch(1);
   slotClear();
 
   // accept image drops
@@ -69,10 +78,19 @@ void ImageWidget::setImage(const QString& id_) {
   }
   m_imageID = id_;
   m_pixmap = ImageFactory::pixmap(id_, MAX_UNSCALED_WIDTH, MAX_UNSCALED_HEIGHT);
+  const bool link = ImageFactory::imageInfo(id_).linkOnly;
+  m_cbLinkOnly->setChecked(link);
+  m_cbLinkOnly->setEnabled(link);
+  // if we're using a link, then the original URL _is_ the id
+  m_originalURL = link ? id_ : KURL();
   m_scaled = QPixmap();
   scale();
 
   update();
+}
+
+void ImageWidget::setLinkOnlyChecked(bool link_) {
+  m_cbLinkOnly->setChecked(link_);
 }
 
 void ImageWidget::slotClear() {
@@ -80,8 +98,11 @@ void ImageWidget::slotClear() {
   m_imageID = QString();
   m_pixmap = QPixmap();
   m_scaled = m_pixmap;
+  m_originalURL = KURL();
 
   m_label->setPixmap(m_scaled);
+  m_cbLinkOnly->setChecked(false);
+  m_cbLinkOnly->setEnabled(true);
   update();
   emit signalModified();
 }
@@ -95,15 +116,15 @@ void ImageWidget::scale() {
   if(ww < pw || wh < ph) {
     int newWidth, newHeight;
     if(pw*wh < ph*ww) {
-      newWidth = static_cast<int>(static_cast<float>(pw)*wh/static_cast<float>(ph));
+      newWidth = static_cast<int>(static_cast<double>(pw)*wh/static_cast<double>(ph));
       newHeight = wh;
     } else {
       newWidth = ww;
-      newHeight = static_cast<int>(static_cast<float>(ph)*ww/static_cast<float>(pw));
+      newHeight = static_cast<int>(static_cast<double>(ph)*ww/static_cast<double>(pw));
     }
 
     QWMatrix wm;
-    wm.scale(static_cast<float>(newWidth)/pw, static_cast<float>(newHeight)/ph);
+    wm.scale(static_cast<double>(newWidth)/pw, static_cast<double>(newHeight)/ph);
     m_scaled = m_pixmap.xForm(wm);
   } else {
     m_scaled = m_pixmap;
@@ -125,13 +146,32 @@ void ImageWidget::slotGetImage() {
   if(url.isEmpty() || !url.isValid()) {
     return;
   }
+  loadImage(url);
+}
 
-  GUI::CursorSaver cs;
-  const QString& id = ImageFactory::addImage(url);
-  if(id != m_imageID) {
-    setImage(id);
-    emit signalModified();
+void ImageWidget::slotLinkOnlyClicked() {
+  if(m_imageID.isEmpty()) {
+    // nothing to do, it has an empty image;
+    return;
   }
+
+  bool link = m_cbLinkOnly->isChecked();
+  // if the user is trying to link and can't before there's no information about the url
+  // the let him know that
+  if(link && m_originalURL.isEmpty()) {
+    KMessageBox::sorry(this, i18n("Saving a link is only possible for newly added images."));
+    m_cbLinkOnly->setChecked(false);
+    return;
+  }
+  // need to reset image id to be the original url
+  // if we're linking only, then we want the image id to be the same as the url
+  // so it needs to be added to the cache all over again
+  // probably could do this without downloading the image all over again,
+  // but I'm not going to do that right now
+  const QString& id = ImageFactory::addImage(m_originalURL, false, KURL(), link);
+  // same image, so no need to call setImage
+  m_imageID = id;
+  emit signalModified();
 }
 
 void ImageWidget::mousePressEvent(QMouseEvent* event_) {
@@ -171,6 +211,7 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
   KURL::List urls;
   QString text;
 
+  GUI::CursorSaver cs(Qt::busyCursor);
   if(QImageDrag::decode(event_, image)) {
     // Qt reads PNG data by default
     const QString& id = ImageFactory::addImage(image, QString::fromLatin1("PNG"));
@@ -188,24 +229,29 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
       return;
     }
 //    kdDebug() << "ImageWidget::dropEvent() - " << url.prettyURL() << endl;
-
-    const QString& id = ImageFactory::addImage(url);
-    if(!id.isEmpty() && id != m_imageID) {
-      setImage(id);
-      emit signalModified();
-    }
+    loadImage(url);
   } else if(QTextDrag::decode(event_, text)) {
     KURL url(text);
     if(url.isEmpty() || !url.isValid()) {
       return;
     }
-
-    const QString& id = ImageFactory::addImage(url);
-    if(!id.isEmpty() && id != m_imageID) {
-      setImage(id);
-      emit signalModified();
-    }
+    loadImage(url);
   }
+}
+
+void ImageWidget::loadImage(const KURL& url_) {
+  const bool link = m_cbLinkOnly->isChecked();
+
+  GUI::CursorSaver cs;
+  // if we're linking only, then we want the image id to be the same as the url
+  const QString& id = ImageFactory::addImage(url_, false, KURL(), link);
+  if(id != m_imageID) {
+    setImage(id);
+    emit signalModified();
+  }
+  // at the end, cause setImage() resets it
+  m_originalURL = url_;
+  m_cbLinkOnly->setEnabled(true);
 }
 
 #include "imagewidget.moc"

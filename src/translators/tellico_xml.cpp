@@ -44,16 +44,24 @@ const QString Tellico::XML::dtdBibtexml = QString::fromLatin1("bibtexml.dtd");
  *
  * VERSION 9 changed music collections to always have three columns by default, with title/artist/length and
  * added file catalog collection.
+ *
+ * VERSION 10 added the game board collection.
  */
-const uint Tellico::XML::syntaxVersion = 9;
+const uint Tellico::XML::syntaxVersion = 10;
 const QString Tellico::XML::nsTellico = QString::fromLatin1("http://periapsis.org/tellico/");
-const QString Tellico::XML::pubTellico = QString::fromLatin1("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(Tellico::XML::syntaxVersion);
-const QString Tellico::XML::dtdTellico = QString::fromLatin1("http://periapsis.org/tellico/dtd/v%1/tellico.dtd").arg(Tellico::XML::syntaxVersion);
 
 const QString Tellico::XML::nsBookcase = QString::fromLatin1("http://periapsis.org/bookcase/");
 const QString Tellico::XML::nsDublinCore = QString::fromLatin1("http://purl.org/dc/elements/1.1/");
 const QString Tellico::XML::nsZing = QString::fromLatin1("http://www.loc.gov/zing/srw/");
 const QString Tellico::XML::nsZingDiag = QString::fromLatin1("http://www.loc.gov/zing/srw/diagnostic/");
+
+QString Tellico::XML::pubTellico(int version) {
+ return QString::fromLatin1("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(version);
+}
+
+QString Tellico::XML::dtdTellico(int version) {
+  return QString::fromLatin1("http://periapsis.org/tellico/dtd/v%1/tellico.dtd").arg(version);
+}
 
 bool Tellico::XML::validXMLElementName(const QString& name_) {
   return xmlValidateNameValue((xmlChar *)name_.utf8().data());

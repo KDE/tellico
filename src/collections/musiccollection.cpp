@@ -23,8 +23,7 @@ namespace {
 using Tellico::Data::MusicCollection;
 
 MusicCollection::MusicCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_, i18n("Albums")) {
-  setTitle(title_.isNull() ? i18n("My Music") : title_);
+   : Collection(title_.isEmpty() ? i18n("My Music") : title_) {
   if(addFields_) {
     addFields(defaultFields());
   }

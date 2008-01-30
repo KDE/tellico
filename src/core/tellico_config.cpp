@@ -96,9 +96,25 @@ Config::Config(  )
   KConfigSkeleton::ItemBool  *itemShowEntryView;
   itemShowEntryView = new KConfigSkeleton::ItemBool( currentGroup(), QString::fromLatin1( "Show Entry View" ), mShowEntryView, true );
   addItem( itemShowEntryView, QString::fromLatin1( "ShowEntryView" ) );
-  KConfigSkeleton::ItemBool  *itemWriteImagesInFile;
-  itemWriteImagesInFile = new KConfigSkeleton::ItemBool( currentGroup(), QString::fromLatin1( "Write Images In File" ), mWriteImagesInFile, true );
-  addItem( itemWriteImagesInFile, QString::fromLatin1( "WriteImagesInFile" ) );
+  QValueList<KConfigSkeleton::ItemEnum::Choice> valuesImageLocation;
+  {
+    KConfigSkeleton::ItemEnum::Choice choice;
+    choice.name = QString::fromLatin1( "ImagesInFile" );
+    valuesImageLocation.append( choice );
+  }
+  {
+    KConfigSkeleton::ItemEnum::Choice choice;
+    choice.name = QString::fromLatin1( "ImagesInAppDir" );
+    valuesImageLocation.append( choice );
+  }
+  {
+    KConfigSkeleton::ItemEnum::Choice choice;
+    choice.name = QString::fromLatin1( "ImagesInLocalDir" );
+    valuesImageLocation.append( choice );
+  }
+  KConfigSkeleton::ItemEnum  *itemImageLocation;
+  itemImageLocation = new KConfigSkeleton::ItemEnum( currentGroup(), QString::fromLatin1( "Image Location" ), mImageLocation, valuesImageLocation, ImagesInFile );
+  addItem( itemImageLocation, QString::fromLatin1( "ImageLocation" ) );
   KConfigSkeleton::ItemBool  *itemAskWriteImagesInFile;
   itemAskWriteImagesInFile = new KConfigSkeleton::ItemBool( currentGroup(), QString::fromLatin1( "Ask Write Images In File" ), mAskWriteImagesInFile, true );
   addItem( itemAskWriteImagesInFile, QString::fromLatin1( "AskWriteImagesInFile" ) );
@@ -387,6 +403,27 @@ Config::Config(  )
   KConfigSkeleton::ItemColor  *itemHighlightedTextColorFile;
   itemHighlightedTextColorFile = new KConfigSkeleton::ItemColor( currentGroup(), QString::fromLatin1( "Template Highlighted Text Color" ), mHighlightedTextColorFile, KGlobalSettings::highlightedTextColor() );
   addItem( itemHighlightedTextColorFile, QString::fromLatin1( "highlightedTextColorFile" ) );
+
+  setCurrentGroup( QString::fromLatin1( "Options - boardgame" ) );
+
+  KConfigSkeleton::ItemString  *itemTemplateBoardGame;
+  itemTemplateBoardGame = new KConfigSkeleton::ItemString( currentGroup(), QString::fromLatin1( "Entry Template" ), mTemplateBoardGame, QString::fromLatin1( "Fancy" ) );
+  addItem( itemTemplateBoardGame, QString::fromLatin1( "templateBoardGame" ) );
+  KConfigSkeleton::ItemFont  *itemFontBoardGame;
+  itemFontBoardGame = new KConfigSkeleton::ItemFont( currentGroup(), QString::fromLatin1( "Template Font" ), mFontBoardGame, KGlobalSettings::generalFont() );
+  addItem( itemFontBoardGame, QString::fromLatin1( "fontBoardGame" ) );
+  KConfigSkeleton::ItemColor  *itemBaseColorBoardGame;
+  itemBaseColorBoardGame = new KConfigSkeleton::ItemColor( currentGroup(), QString::fromLatin1( "Template Base Color" ), mBaseColorBoardGame, KGlobalSettings::baseColor() );
+  addItem( itemBaseColorBoardGame, QString::fromLatin1( "baseColorBoardGame" ) );
+  KConfigSkeleton::ItemColor  *itemTextColorBoardGame;
+  itemTextColorBoardGame = new KConfigSkeleton::ItemColor( currentGroup(), QString::fromLatin1( "Template Text Color" ), mTextColorBoardGame, KGlobalSettings::textColor() );
+  addItem( itemTextColorBoardGame, QString::fromLatin1( "textColorBoardGame" ) );
+  KConfigSkeleton::ItemColor  *itemHighlightedBaseColorBoardGame;
+  itemHighlightedBaseColorBoardGame = new KConfigSkeleton::ItemColor( currentGroup(), QString::fromLatin1( "Template Highlight Color" ), mHighlightedBaseColorBoardGame, KGlobalSettings::highlightColor() );
+  addItem( itemHighlightedBaseColorBoardGame, QString::fromLatin1( "highlightedBaseColorBoardGame" ) );
+  KConfigSkeleton::ItemColor  *itemHighlightedTextColorBoardGame;
+  itemHighlightedTextColorBoardGame = new KConfigSkeleton::ItemColor( currentGroup(), QString::fromLatin1( "Template Highlighted Text Color" ), mHighlightedTextColorBoardGame, KGlobalSettings::highlightedTextColor() );
+  addItem( itemHighlightedTextColorBoardGame, QString::fromLatin1( "highlightedTextColorBoardGame" ) );
 
   setCurrentGroup( QString::fromLatin1( "Options - entry" ) );
 

@@ -18,6 +18,7 @@
 #include "../field.h"
 #include "../latin1literal.h"
 #include "../progressmanager.h"
+#include "../filehandler.h"
 #include "../tellico_debug.h"
 
 #include <kglobal.h> // for KMAX
@@ -106,7 +107,7 @@ void RISImporter::initTypeMap() {
   }
 }
 
-RISImporter::RISImporter(const KURL& url_) : Tellico::Import::TextImporter(url_), m_coll(0), m_cancelled(false) {
+RISImporter::RISImporter(const KURL::List& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
   initTagMap();
   initTypeMap();
 }
@@ -144,24 +145,44 @@ Tellico::Data::CollPtr RISImporter::collection() {
     risFields.insert(ris, f);
   }
 
-  QString str = text();
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
+  item.setTotalSteps(urls().count() * 100);
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  ProgressItem::Done done(this);
+
+  int count = 0;
+  KURL::List urls = this->urls();
+  for(KURL::List::ConstIterator it = urls.begin(); it != urls.end() && !m_cancelled; ++it, ++count) {
+    readURL(*it, count, risFields);
+  }
+
+  if(m_cancelled) {
+    m_coll = 0;
+  }
+  return m_coll;
+}
+
+void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& risFields_) {
+  QString str = FileHandler::readTextFile(url_);
+  if(str.isEmpty()) {
+    return;
+  }
+
   QTextIStream t(&str);
 
   const uint length = str.length();
   const uint stepSize = KMAX(s_stepSize, length/100);
   const bool showProgress = options() & ImportProgress;
 
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(length);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
+  bool needToAddFinal = false;
 
   uint j = 0;
   Data::EntryPtr entry = new Data::Entry(m_coll);
   // technically, the spec requires a space immediately after the hyphen
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
-  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s\\s-(.*)$"));
+  // also be gracious and allow only any amount of space before hyphen
+  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s+-(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
@@ -171,7 +192,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
     if(tag.isEmpty()) {
       continue;
     }
-//    kdDebug() << tag << ": " << value << endl;
+//    myDebug() << tag << ": " << value << endl;
     // if the next line is not empty and does not match start regexp, append to value
     while(!nextLine.isEmpty() && nextLine.find(rx) == -1) {
       value += nextLine.stripWhiteSpace();
@@ -182,6 +203,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
     if(tag == Latin1Literal("ER")) {
       m_coll->addEntries(entry);
       entry = new Data::Entry(m_coll);
+      needToAddFinal = false;
       continue;
     } else if(tag == Latin1Literal("TY") && s_typeMap->contains(value)) {
       // for entry-type, switch it to normalized type name
@@ -193,7 +215,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
     // the lookup scheme is:
     // 1. any field has an RIS property that matches the tag name
     // 2. default field mapping tag -> field name
-    Data::FieldPtr f = risFields.find(tag);
+    Data::FieldPtr f = risFields_.find(tag);
     if(!f) {
       // special case for BT
       // primary title for books, secondary for everything else
@@ -210,6 +232,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
     if(!f) {
       continue;
     }
+    needToAddFinal = true;
 
     // harmless for non-choice fields
     // for entry-type, want it in lower case
@@ -221,15 +244,13 @@ Tellico::Data::CollPtr RISImporter::collection() {
     entry->setField(f, value);
 
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setProgress(this, j);
+      ProgressManager::self()->setProgress(this, n*100 + 100*j/length);
       kapp->processEvents();
     }
   }
-
-  if(m_cancelled) {
-    m_coll = 0;
+  if(needToAddFinal) {
+    m_coll->addEntries(entry);
   }
-  return m_coll;
 }
 
 Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {

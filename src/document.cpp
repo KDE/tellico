@@ -42,17 +42,13 @@
 #include <vector>
 #include <algorithm>
 
-namespace {
-  static const int ENTRY_MERGE_GOOD_MATCH = 10; // same as in entryupdater.cpp
-  static const int ENTRY_MERGE_PERFECT_MATCH = 20;
-}
-
 using Tellico::Data::Document;
 Document* Document::s_self = 0;
 
 Document::Document() : QObject(), m_coll(0), m_isModified(false),
     m_loadAllImages(false), m_validFile(false), m_importer(0), m_cancelImageWriting(false),
-    m_fileFormat(Import::TellicoImporter::Unknown), m_allImagesOnDisk(!Config::writeImagesInFile()) {
+    m_fileFormat(Import::TellicoImporter::Unknown) {
+  m_allImagesOnDisk = Config::imageLocation() != Config::ImagesInFile;
   newDocument(Collection::Book);
 }
 
@@ -63,6 +59,13 @@ Document::~Document() {
 
 Tellico::Data::CollPtr Document::collection() const {
   return m_coll;
+}
+
+void Document::setURL(const KURL& url_) {
+  m_url = url_;
+  if(m_url.fileName() != i18n("Untitled")) {
+    ImageFactory::setLocalDirectory(m_url);
+  }
 }
 
 void Document::slotSetModified(bool m_/*=true*/) {
@@ -190,7 +193,8 @@ bool Document::saveDocument(const KURL& url_) {
   ProgressItem::Done done(this);
 
   // will always save as zip file, no matter if has images or not
-  bool includeImages = Config::writeImagesInFile();
+  int imageLocation = Config::imageLocation();
+  bool includeImages = imageLocation == Config::ImagesInFile;
   int totalSteps;
   // write all images to disk cache if needed
   // have to do this before executing exporter in case
@@ -204,7 +208,7 @@ bool Document::saveDocument(const KURL& url_) {
     totalSteps = 100;
     item.setTotalSteps(100);
     m_cancelImageWriting = false;
-    writeAllImages(ImageFactory::DataDir);
+    writeAllImages(imageLocation == Config::ImagesInAppDir ? ImageFactory::DataDir : ImageFactory::LocalDir, url_);
   }
   Export::Exporter* exporter;
   if(m_fileFormat == Import::TellicoImporter::XML) {
@@ -297,10 +301,10 @@ Tellico::Data::MergePair Document::mergeCollection(CollPtr coll_) {
     Data::EntryPtr matchEntry;
     for(EntryVec::Iterator currIt = currEntries.begin(); currIt != currEntries.end(); ++currIt) {
       int match = m_coll->sameEntry(&*currIt, &*newIt);
-      if(match >= ENTRY_MERGE_PERFECT_MATCH) {
+      if(match >= Collection::ENTRY_PERFECT_MATCH) {
         matchEntry = currIt;
         break;
-      } else if(match >= ENTRY_MERGE_GOOD_MATCH && match > bestMatch) {
+      } else if(match >= Collection::ENTRY_GOOD_MATCH && match > bestMatch) {
         bestMatch = match;
         matchEntry = currIt;
         // don't break, keep looking for better one
@@ -525,10 +529,13 @@ void Document::slotLoadAllImages() {
   m_cancelImageWriting = false;
 }
 
-void Document::writeAllImages(int cacheDir_) {
+void Document::writeAllImages(int cacheDir_, const KURL& localDir_) {
   // images get 80 steps in saveDocument()
   const uint stepSize = 1 + QMAX(1, m_coll->entryCount()/80); // add 1 since it could round off
   uint j = 1;
+
+  QString oldLocalDir = ImageFactory::localDir();
+  ImageFactory::setLocalDirectory(localDir_);
 
   QString id;
   StringSet images;
@@ -560,6 +567,7 @@ void Document::writeAllImages(int cacheDir_) {
   }
 
   m_cancelImageWriting = false;
+  ImageFactory::setLocalDirectory(oldLocalDir);
 }
 
 bool Document::pruneImages() {

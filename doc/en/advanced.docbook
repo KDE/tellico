@@ -29,12 +29,16 @@ Arguments:
 <title>&DCOP; Interface</title>
 
 <para>
-&appname; has a minimal &DCOP; interface, which can be used for scripting or interacting with a running application from the command-line. As with all &DCOP; calls, you need to specify the application you want to interface with, and the particular interface. The &DCOP; calls described in this document are all implemented in
-&appname;'s <constant>tellico</constant> interface, while the name of the application is <constant>tellico-pid</constant>, where <emphasis>pid</emphasis> is the process id of the running application.
+&appname; has a minimal &DCOP; interface, which can be used for scripting or interacting with a running application from the command-line. As with all &DCOP; calls, you need to specify the application you want to interface with, and the particular interface. The name of the &DCOP; application is <constant>tellico-&lt;pid&gt;</constant>, where <emphasis>&lt;pid&gt;</emphasis> is the process id of the running application.
 </para>
 
 <sect2 id="dcop-commands">
 <title>DCOP Commands</title>
+
+<para>Two &DCOP; objects are available in the tellico interface: <constant>tellico</constant> and <constant>collection</constant>.</para>
+
+<sect3 id="dcop-tellico">
+<title>The <constant>tellico</constant> Object</title>
 
 <para>The full list of &DCOP; commands in the <constant>tellico</constant> object is shown below:</para>
 
@@ -44,11 +48,16 @@ bool importBibtex(QString file, QString action)
 bool importMODS(QString file, QString action)
 bool importRIS(QString file, QString action)
 bool exportXML(QString file)
+bool exportZip(QString file)
 bool exportBibtex(QString file)
 bool exportHTML(QString file)
 bool exportCSV(QString file)
 bool exportPilotDB(QString file)
-QStringList bibtexKeys()
+QValueList&lt;long int&gt; selectedEntries()
+QValueList&lt;long int&gt; filteredEntries()
+void openFile(QString file)
+void setFilter(QString text)
+bool showEntry(long int id)
 </programlisting>
 
 <para>
@@ -56,12 +65,50 @@ For the four import commands, the first argument is the file to import, and the 
 </para>
 
 <para>
-The current open collection in &appname; may be exported to a file, in either Tellico XML format, Bibtex, HTML, or comma-separated values (CSV) format.
+The current open collection in &appname; may be exported to a file, in either Tellico XML format, Tellico ZIP format, Bibtex, HTML, comma-separated values (CSV), or the PilotDB format.
+</para>
+
+<para>A list of the entry IDs currently selected or being filtered is able to facilitate showing or updating entries in the view.</para>
+
+<para> A new data file may be opened by using the <command>openFile()</command> command. The full path must be specified.</para>
+
+<para>A new filter may be set using the <command>setFilter()</command> command, which is the equivalent of typing in the filter box in the main window.</para>
+
+<para>Given an entry ID, <command>showEntry()</command> will select that entry and show the entry details in the main window.</para>
+</sect3>
+
+<sect3 id="dcop-collection">
+<title>The <constant>collection</constant> Object</title>
+
+<para>The full list of &DCOP; commands in the <constant>collection</constant> object is shown below:</para>
+
+<programlisting>
+long int addEntry()
+bool removeEntry(long int entryID)
+QStringList values(QString fieldName)
+QStringList values(long int entryID,QString fieldName)
+QStringList bibtexKeys()
+QString bibtexKey(long int entryID)
+bool setFieldValue(long int entryID,QString fieldName,QString value)
+bool addFieldValue(long int entryID,QString fieldName,QString value)
+</programlisting>
+
+<para>
+A new empty entry may be created in the current collection using the <command>addEntry()</command> command. The return value is the entry ID, which can then be used to set the field values in the entry. An entry can be deleted from the collection by calling <command>removeEntry()</command>.
 </para>
 
 <para>
-Finally, if the current collection is a bibliography, calling <command>bibtexKeys()</command> will return the Bibtex citation key for all selected entries.
+Calling <command>values()</command> using just a field name will return all the values for that field for the currently selected entries. If no entries are selected, the return list is empty. If an entry ID is included in the command, the field values for that specific entry are returned.
 </para>
+
+<para>
+If the current collection is a bibliography, calling <command>bibtexKeys()</command> will return the Bibtex citation key for all selected entries. The bibtexKey for a specific entry may be found by using the <command>bibtekKey()</command> command.
+</para>
+
+<para>
+Entries can be edited directly with the &DCOP; interface. Given an entry ID, <command>setFieldValue()</command> will set the field value directly. To add a value, without affecting the existing values, use <command>addFieldValue()</command>. The new value gets appended to the end of the existing list.
+</para>
+</sect3>
 
 </sect2>
 
@@ -86,8 +133,15 @@ Here are some examples for scripting &appname; using the &DCOP; interface. Since
 
 <screen width="40">
 <emphasis>Echo the citation key of the current selection</emphasis>
-<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) tellico bibtexKeys</userinput>
+<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) collection bibtexKeys</userinput>
 <computeroutput>stephenson2004</computeroutput>
+</screen>
+
+<screen width="40">
+<emphasis>Add a new entry and set the title</emphasis>
+<prompt>%</prompt> <userinput>myid=`dcop $(dcop | grep tellico) collection addEntry`</userinput>
+<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) collection setFieldValue $myid title "My New Book"</userinput>
+<computeroutput>true</computeroutput>
 </screen>
 
 </sect2>

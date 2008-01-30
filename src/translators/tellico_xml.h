@@ -24,8 +24,9 @@ namespace Tellico {
 
     extern const uint syntaxVersion;
     extern const QString nsTellico;
-    extern const QString pubTellico;
-    extern const QString dtdTellico;
+
+    QString pubTellico(int version = syntaxVersion);
+    QString dtdTellico(int version = syntaxVersion);
 
     extern const QString nsBookcase;
     extern const QString nsDublinCore;

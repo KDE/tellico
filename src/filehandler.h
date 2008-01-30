@@ -79,9 +79,10 @@ public:
    *
    * @param url The URL of the file
    * @param quiet whether the importer should report errors or not
+   * @param useUTF8 Whether the file should be read as UTF8 or use user locale
    * @return A string containing the contents of a file
    */
-  static QString readTextFile(const KURL& url, bool quiet=false);
+  static QString readTextFile(const KURL& url, bool quiet=false, bool useUTF8=false);
   /**
    * Read contents of an XML file into a QDomDocument.
    *

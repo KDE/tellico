@@ -17,22 +17,38 @@
 #include "../entry.h"
 #include "../latin1literal.h"
 #include "../progressmanager.h"
+#include "../filehandler.h"
 #include "../tellico_debug.h"
 
-#include <kglobal.h> // for KMAX
 #include <kapplication.h>
+#include <kconfig.h>
 
 #include <qptrlist.h>
 #include <qregexp.h>
+#include <qlayout.h>
+#include <qvbuttongroup.h>
+#include <qradiobutton.h>
+#include <qwhatsthis.h>
+#include <qtextcodec.h>
 
 using Tellico::Import::BibtexImporter;
 
-BibtexImporter::BibtexImporter(const KURL& url_) : Tellico::Import::TextImporter(url_), m_coll(0), m_cancelled(false) {
+BibtexImporter::BibtexImporter(const KURL::List& urls_) : Importer(urls_)
+    , m_coll(0), m_widget(0), m_readUTF8(0), m_readLocale(0), m_cancelled(false) {
+  bt_initialize();
+}
+
+BibtexImporter::BibtexImporter(const QString& text_) : Importer(text_)
+    , m_coll(0), m_widget(0), m_readUTF8(0), m_readLocale(0), m_cancelled(false) {
   bt_initialize();
 }
 
 BibtexImporter::~BibtexImporter() {
   bt_cleanup();
+  if(m_readUTF8) {
+    KConfigGroup config(kapp->config(), "Import Options");
+    config.writeEntry("Bibtex UTF8", m_readUTF8->isChecked());
+  }
 }
 
 bool BibtexImporter::canImport(int type) const {
@@ -45,31 +61,71 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
   }
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(100);
+  item.setTotalSteps(urls().count() * 100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   ProgressItem::Done done(this);
 
-  parseText(text()); // populates m_nodes
+  bool useUTF8 = m_widget && m_readUTF8->isChecked();
+
+  m_coll = new Data::BibtexCollection(true);
+
+  int count = 0;
+  KURL::List urls = this->urls();
+  // might be importing text only
+  if(urls.isEmpty()) {
+    QString text = this->text();
+    Data::CollPtr coll = readCollection(text, count);
+    if(!coll || coll->entryCount() == 0) {
+      setStatusMessage(i18n("No valid bibtex entries were found"));
+    } else {
+      m_coll->addEntries(coll->entries());
+    }
+  } else for(KURL::List::ConstIterator it = urls.begin(); it != urls.end(); ++it, ++count) {
+    if(m_cancelled) {
+      return 0;
+    }
+    if(!(*it).isValid()) {
+      continue;
+    }
+    QString text = FileHandler::readTextFile(*it, false, useUTF8);
+    if(text.isEmpty()) {
+      continue;
+    }
+    Data::CollPtr coll = readCollection(text, count);
+    if(!coll || coll->entryCount() == 0) {
+      setStatusMessage(i18n("No valid bibtex entries were found in file - %1").arg(url().fileName()));
+      continue;
+    }
+    m_coll->addEntries(coll->entries());
+  }
+
+  if(m_cancelled) {
+    return 0;
+  }
+
+  return m_coll;
+}
+
+Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n) {
+  if(text.isEmpty()) {
+    return 0;
+  }
+  Data::CollPtr ptr = new Data::BibtexCollection(true);
+  Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(ptr.data());
+
+  parseText(text); // populates m_nodes
   if(m_cancelled) {
     return 0;
   }
 
   if(m_nodes.isEmpty()) {
-    setStatusMessage(i18n("No valid bibtex entries were found in file - %1").arg(url().fileName()));
     return 0;
-  } else {
-//    kdDebug() << "BibtexImporter::collection() - found " << m_nodes.count() << " entries" << endl;
   }
 
-  m_coll = new Data::BibtexCollection(true);
-  Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(m_coll.data());
-
-  QString text;
+  QString str;
   const uint count = m_nodes.count();
-  const uint stepSize = KMAX(s_stepSize, count/100);
+  const uint stepSize = QMAX(s_stepSize, count/100);
   const bool showProgress = options() & ImportProgress;
-
-  item.setTotalSteps(count);
 
   uint j = 0;
   for(ASTListIterator it(m_nodes); !m_cancelled && it.current(); ++it, ++j) {
@@ -96,23 +152,23 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
     }
 
     // now we're parsing a regular entry
-    Data::EntryPtr entry = new Data::Entry(m_coll);
+    Data::EntryPtr entry = new Data::Entry(ptr);
 
-    text = QString::fromUtf8(bt_entry_type(it.current()));
-//    kdDebug() << "entry type: " << text << endl;
+    str = QString::fromUtf8(bt_entry_type(it.current()));
+//    kdDebug() << "entry type: " << str << endl;
     // text is automatically put into lower-case by btparse
-    BibtexHandler::setFieldValue(entry, QString::fromLatin1("entry-type"), text);
+    BibtexHandler::setFieldValue(entry, QString::fromLatin1("entry-type"), str);
 
-    text = QString::fromUtf8(bt_entry_key(it.current()));
-//    kdDebug() << "entry key: " << text << endl;
-    BibtexHandler::setFieldValue(entry, QString::fromLatin1("key"), text);
+    str = QString::fromUtf8(bt_entry_key(it.current()));
+//    kdDebug() << "entry key: " << str << endl;
+    BibtexHandler::setFieldValue(entry, QString::fromLatin1("key"), str);
 
     char* name;
     AST* field = 0;
     while((field = bt_next_field(it.current(), field, &name))) {
 //      kdDebug() << "\tfound: " << name << endl;
-//      text = QString::fromLatin1(bt_get_text(field));
-      text.truncate(0);
+//      str = QString::fromLatin1(bt_get_text(field));
+      str.truncate(0);
       AST* value = 0;
       bt_nodetype type;
       char* svalue;
@@ -121,11 +177,11 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
         switch(type) {
           case BTAST_STRING:
           case BTAST_NUMBER:
-            text += BibtexHandler::importText(svalue).simplifyWhiteSpace();
+            str += BibtexHandler::importText(svalue).simplifyWhiteSpace();
             end_macro = false;
             break;
           case BTAST_MACRO:
-            text += QString::fromUtf8(svalue) + QString::fromLatin1("#");
+            str += QString::fromUtf8(svalue) + QString::fromLatin1("#");
             end_macro = true;
             break;
           default:
@@ -134,25 +190,25 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
       }
       if(end_macro) {
         // remove last character '#'
-        text.truncate(text.length() - 1);
+        str.truncate(str.length() - 1);
       }
       QString fieldName = QString::fromUtf8(name);
       if(fieldName == Latin1Literal("author") || fieldName == Latin1Literal("editor")) {
-        text.replace(QRegExp(QString::fromLatin1("\\sand\\s")), QString::fromLatin1("; "));
+        str.replace(QRegExp(QString::fromLatin1("\\sand\\s")), QString::fromLatin1("; "));
       }
-      BibtexHandler::setFieldValue(entry, fieldName, text);
+      BibtexHandler::setFieldValue(entry, fieldName, str);
     }
 
-    m_coll->addEntries(entry);
+    ptr->addEntries(entry);
 
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setProgress(this, j);
+      ProgressManager::self()->setProgress(this, n*100 + 100*j/count);
       kapp->processEvents();
     }
   }
 
   if(m_cancelled) {
-    m_coll = 0;
+    ptr = 0;
   }
 
   // clean-up
@@ -160,13 +216,12 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
     bt_free_ast(it.current());
   }
 
-  return m_coll;
+  return ptr;
 }
 
 void BibtexImporter::parseText(const QString& text) {
-  if(!m_nodes.isEmpty()) {
-    kdWarning() << "BibtexImporter::parseText() - already parsed the text!" << endl;
-  }
+  m_nodes.clear();
+  m_macros.clear();
 
   ushort bt_options = 0; // ushort is defined in btparse.h
   boolean ok; // boolean is defined in btparse.h as an int
@@ -181,6 +236,7 @@ void BibtexImporter::parseText(const QString& text) {
   QRegExp macroName(QString::fromLatin1("@string\\s*\\{\\s*(.*)="), false /*case sensitive*/);
   macroName.setMinimal(true);
 
+  bool needsCleanup = false;
   int brace = 0;
   int startpos = 0;
   int pos = text.find(rx, 0);
@@ -203,17 +259,51 @@ void BibtexImporter::parseText(const QString& text) {
           m_macros.insert(QString::fromUtf8(macro), macroName.cap(1).stripWhiteSpace());
         }
         m_nodes.append(node);
+        needsCleanup = true;
       }
       startpos = pos+1;
     }
     pos = text.find(rx, pos+1);
   }
-  // clean up some structures
-  bt_parse_entry_s(0, 0, 1, 0, 0);
+  if(needsCleanup) {
+    // clean up some structures
+    bt_parse_entry_s(0, 0, 1, 0, 0);
+  }
 }
 
 void BibtexImporter::slotCancel() {
   m_cancelled = true;
 }
+
+QWidget* BibtexImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
+  if(m_widget) {
+    return m_widget;
+  }
+
+  m_widget = new QWidget(parent_, name_);
+  QVBoxLayout* l = new QVBoxLayout(m_widget);
+
+  QButtonGroup* box = new QVButtonGroup(i18n("Bibtex Options"), m_widget);
+  m_readUTF8 = new QRadioButton(i18n("Use Unicode (UTF-8) encoding"), box);
+  QWhatsThis::add(m_readUTF8, i18n("Read the imported file in Unicode (UTF-8)."));
+  QString localStr = i18n("Use user locale (%1) encoding").arg(
+                     QString::fromLatin1(QTextCodec::codecForLocale()->name()));
+  m_readLocale = new QRadioButton(localStr, box);
+  m_readLocale->setChecked(true);
+  QWhatsThis::add(m_readLocale, i18n("Read the imported file in the local encoding."));
+
+  KConfigGroup config(kapp->config(), "Import Options");
+  bool useUTF8 = config.readBoolEntry("Bibtex UTF8", false);
+  if(useUTF8) {
+    m_readUTF8->setChecked(true);
+  } else {
+    m_readLocale->setChecked(true);
+  }
+
+  l->addWidget(box);
+  l->addStretch(1);
+  return m_widget;
+}
+
 
 #include "bibteximporter.moc"

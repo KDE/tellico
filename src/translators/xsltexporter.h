@@ -33,8 +33,6 @@ public:
   virtual QString fileFilter() const;
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual void readOptions(KConfig*) {}
-  virtual void saveOptions(KConfig*) {}
 
 private:
   QWidget* m_widget;

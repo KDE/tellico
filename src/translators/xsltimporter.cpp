@@ -19,16 +19,35 @@
 
 #include <klocale.h>
 #include <kurlrequester.h>
-#include <kdebug.h>
 
 #include <qhbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qgroupbox.h>
 
+#include <memory>
+
 using Tellico::Import::XSLTImporter;
 
-XSLTImporter::XSLTImporter(const KURL& url_) : Tellico::Import::TextImporter(url_),
+namespace {
+
+static bool isUTF8(const KURL& url_) {
+  // read first line to check encoding
+  std::auto_ptr<Tellico::FileHandler::FileRef> ref(Tellico::FileHandler::fileRef(url_));
+  if(!ref->isValid()) {
+    return false;
+  }
+
+  ref->open();
+  QTextStream stream(ref->file());
+  QString line = stream.readLine().lower();
+  return line.find(QString::fromLatin1("utf-8")) > 0;
+}
+
+}
+
+// always use utf8 for xslt
+XSLTImporter::XSLTImporter(const KURL& url_) : Tellico::Import::TextImporter(url_, isUTF8(url_)),
     m_coll(0),
     m_widget(0),
     m_URLRequester(0) {

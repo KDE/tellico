@@ -24,6 +24,8 @@
 #include "core/tellico_config.h"
 #include "newstuff/manager.h"
 #include "document.h"
+#include "latin1literal.h"
+#include "../core/drophandler.h"
 
 #include <kstandarddirs.h>
 #include <krun.h>
@@ -46,6 +48,10 @@ EntryView::EntryView(QWidget* parent_, const char* name_) : KHTMLPart(parent_, n
   setPluginsEnabled(false);
   clear(); // needed for initial layout
 
+  view()->setAcceptDrops(true);
+  DropHandler* drophandler = new DropHandler(this);
+  view()->installEventFilter(drophandler);
+
   connect(browserExtension(), SIGNAL(openURLRequest(const KURL&, const KParts::URLArgs&)),
           SLOT(slotOpenURL(const KURL&)));
   connect(kapp, SIGNAL(kdisplayPaletteChanged()), SLOT(slotResetColors()));
@@ -66,6 +72,9 @@ void EntryView::clear() {
 
   // just clear the view
   begin();
+  if(!m_textToShow.isEmpty()) {
+    write(m_textToShow);
+  }
   end();
   view()->layout(); // I need this because some of the margins and widths may get messed up
 }
@@ -76,6 +85,7 @@ void EntryView::showEntry(Data::EntryPtr entry_) {
     return;
   }
 
+  m_textToShow = QString();
 #if 0
   kdWarning() << "EntryView::showEntry() - turn me off!" << endl;
   m_entry = 0;
@@ -149,6 +159,13 @@ void EntryView::showEntry(Data::EntryPtr entry_) {
   end();
   // not need anymore?
   view()->layout(); // I need this because some of the margins and widths may get messed up
+}
+
+void EntryView::showText(const QString& text_) {
+  m_textToShow = text_;
+  begin();
+  write(text_);
+  end();
 }
 
 void EntryView::setXSLTFile(const QString& file_) {
@@ -251,6 +268,12 @@ void EntryView::slotRefresh() {
 // the current node under the mouse vould be the text node inside
 // the anchor node, so iterate up the parents
 void EntryView::slotOpenURL(const KURL& url_) {
+  if(url_.protocol() == Latin1Literal("tc")) {
+    // handle this internally
+    emit signalAction(url_);
+    return;
+  }
+
   KURL u = url_;
   for(DOM::Node node = nodeUnderMouse(); !node.isNull(); node = node.parentNode()) {
     if(node.nodeType() == DOM::Node::ELEMENT_NODE && static_cast<DOM::Element>(node).tagName() == "a") {

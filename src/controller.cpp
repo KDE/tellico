@@ -37,6 +37,7 @@
 #include "groupiterator.h"
 #include "tellico_utils.h"
 #include "entryupdater.h"
+#include "entrymerger.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -50,7 +51,7 @@ using Tellico::Controller;
 Controller* Controller::s_self = 0;
 
 Controller::Controller(MainWindow* parent_, const char* name_)
-    : QObject(parent_, name_), m_mainWindow(parent_), m_working (false) {
+    : QObject(parent_, name_), m_mainWindow(parent_), m_working (false), m_widgetWithSelection(0) {
 }
 
 void Controller::addObserver(Observer* obs) {
@@ -205,10 +206,15 @@ void Controller::removedEntries(Data::EntryVec entries_) {
   blockAllSignals(true);
   for(ObserverVec::Iterator it = m_observers.begin(); it != m_observers.end(); ++it) {
     it->removeEntries(entries_);
-    m_mainWindow->m_viewStack->entryView()->clear();
-    m_selectedEntries.clear();
-    m_currentEntries.clear();
   }
+  for(Data::EntryVecIt it = entries_.begin(); it != entries_.end(); ++it) {
+    m_selectedEntries.remove(it);
+    m_currentEntries.remove(it);
+  }
+  if(m_currentEntries.isEmpty()) {
+    m_mainWindow->m_viewStack->entryView()->clear();
+  }
+  m_mainWindow->slotEntryCount();
   m_mainWindow->slotQueueFilter();
   blockAllSignals(false);
 }
@@ -277,27 +283,31 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Data::EntryVec& ent
     return;
   }
   m_working = true;
-//  myDebug() << "Controller::slotUpdateSelection() - " << (widget_ ? widget_->className() : "") << endl;
+
+  if(widget_) {
+    m_widgetWithSelection = widget_;
+  }
+//  myDebug() << "Controller::slotUpdateSelection() entryList - " << entries_.count() << endl;
 
   blockAllSignals(true);
 // in the list view and group view, if entries are selected in one, clear selection in other
-  if(widget_ != m_mainWindow->m_detailedView) {
+  if(m_widgetWithSelection != m_mainWindow->m_detailedView) {
     m_mainWindow->m_detailedView->clearSelection();
   }
-  if(widget_ != m_mainWindow->m_groupView) {
+  if(m_widgetWithSelection != m_mainWindow->m_groupView) {
     m_mainWindow->m_groupView->clearSelection();
   }
-  if(m_mainWindow->m_filterView && widget_ != m_mainWindow->m_filterView) {
+  if(m_mainWindow->m_filterView && m_widgetWithSelection != m_mainWindow->m_filterView) {
     m_mainWindow->m_filterView->clearSelection();
   }
-  if(m_mainWindow->m_loanView && widget_ != m_mainWindow->m_loanView) {
+  if(m_mainWindow->m_loanView && m_widgetWithSelection != m_mainWindow->m_loanView) {
     m_mainWindow->m_loanView->clearSelection();
   }
-  if(widget_ != m_mainWindow->m_editDialog) {
+  if(m_widgetWithSelection != m_mainWindow->m_editDialog) {
     m_mainWindow->m_editDialog->setContents(entries_);
   }
   // only show first one
-  if(widget_ && widget_ != m_mainWindow->m_viewStack->iconView()) {
+  if(m_widgetWithSelection && m_widgetWithSelection != m_mainWindow->m_viewStack->iconView()) {
     if(entries_.count() > 1) {
       m_mainWindow->m_viewStack->showEntries(entries_);
     } else if(entries_.count() > 0) {
@@ -326,20 +336,12 @@ void Controller::goEntrySibling(EntryDirection dir_) {
     return;
   }
   // find the widget that has an entry selected
-  GUI::ListView* view = m_mainWindow->m_detailedView;
+  GUI::ListView* view = ::qt_cast<GUI::ListView*>(m_widgetWithSelection);
+  if(!view) {
+    return;
+  }
+
   GUI::ListViewItemList items = view->selectedItems();
-  if(items.isEmpty()) {
-    view = m_mainWindow->m_groupView;
-    items = view->selectedItems();
-  }
-  if(items.isEmpty() && m_mainWindow->m_filterView) {
-    view = m_mainWindow->m_filterView;
-    items = view->selectedItems();
-  }
-  if(items.isEmpty() && m_mainWindow->m_loanView) {
-    view = m_mainWindow->m_loanView;
-    items = view->selectedItems();
-  }
   if(items.count() != 1) {
     return;
   }
@@ -359,6 +361,11 @@ void Controller::goEntrySibling(EntryDirection dir_) {
                                                        ? view->lastItem()
                                                        : view->firstChild());
       looped = true;
+    }
+    while(!nextItem->isVisible()) {
+      nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
+                                                       ? nextItem->itemAbove()
+                                                       : nextItem->itemBelow());
     }
     while(nextItem && !nextItem->isEntryItem()) {
       nextItem->setOpen(true); // have to be open to find the next one
@@ -460,6 +467,15 @@ void Controller::slotDeleteSelectedEntries() {
   slotClearSelection();
 }
 
+void Controller::slotMergeSelectedEntries() {
+  // merge requires at least 2 entries
+  if(m_selectedEntries.count() < 2) {
+    return;
+  }
+
+  new EntryMerger(m_selectedEntries, this);
+}
+
 void Controller::slotRefreshField(Data::FieldPtr field_) {
 //  myDebug() << "Controller::slotRefreshField()" << endl;
   // group view only needs to refresh if it's the title
@@ -509,16 +525,16 @@ void Controller::slotUpdateFilter(FilterPtr filter_) {
 //  myDebug() << "Controller::slotUpdateFilter()" << endl;
   blockAllSignals(true);
 
+  // the view takes over ownership of the filter
   if(filter_ && !filter_->isEmpty()) {
-    // only clear the selection if there's actually a filter rule
-    m_mainWindow->m_detailedView->clearSelection();
+    // clear the icon view selection only
+    // the detailed view takes care of itself
     m_mainWindow->m_viewStack->iconView()->clearSelection();
     m_selectedEntries.clear();
   }
   updateActions();
 
-  // the view takes over ownership of the filter
-  m_mainWindow->m_detailedView->setFilter(filter_);
+  m_mainWindow->m_detailedView->setFilter(filter_); // takes ownership
 
   blockAllSignals(false);
 
@@ -548,6 +564,7 @@ void Controller::plugEntryActions(QPopupMenu* popup_) {
   m_mainWindow->m_editEntry->plug(popup_);
   m_mainWindow->m_copyEntry->plug(popup_);
   m_mainWindow->m_deleteEntry->plug(popup_);
+  m_mainWindow->m_mergeEntry->plug(popup_);
   m_mainWindow->m_updateEntryMenu->plug(popup_);
   // there's a bug in KActionMenu with KXMLGUIFactory::plugActionList
   // pluging the menu action isn't enough to have the popup get populated
@@ -609,11 +626,13 @@ void Controller::updateActions() const {
     m_mainWindow->m_copyEntry->setText(i18n("D&uplicate Entry"));
     m_mainWindow->m_updateEntryMenu->setText(i18n("&Update Entry"));
     m_mainWindow->m_deleteEntry->setText(i18n("&Delete Entry"));
+    m_mainWindow->m_mergeEntry->setEnabled(false);
   } else {
     m_mainWindow->m_editEntry->setText(i18n("&Edit Entries..."));
     m_mainWindow->m_copyEntry->setText(i18n("D&uplicate Entries"));
     m_mainWindow->m_updateEntryMenu->setText(i18n("&Update Entries"));
     m_mainWindow->m_deleteEntry->setText(i18n("&Delete Entries"));
+    m_mainWindow->m_mergeEntry->setEnabled(true);
   }
 }
 

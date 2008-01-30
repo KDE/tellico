@@ -73,8 +73,8 @@ public:
   virtual void reset() {}
 
   virtual QWidget* widget(QWidget* parent, const char* name=0) = 0;
-  virtual void readOptions(KConfig* config) = 0;
-  virtual void saveOptions(KConfig* config) = 0;
+  virtual void readOptions(KConfig*) {}
+  virtual void saveOptions(KConfig*) {}
 
 private:
   long m_options;

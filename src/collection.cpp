@@ -20,6 +20,7 @@
 #include "controller.h"
 #include "collectionfactory.h"
 #include "stringset.h"
+#include "tellico_kernel.h"
 
 #include <klocale.h>
 
@@ -31,8 +32,8 @@ using Tellico::Data::Collection;
 const char* Collection::s_emptyGroupTitle = I18N_NOOP("(Empty)");
 const QString Collection::s_peopleGroupName = QString::fromLatin1("_people");
 
-Collection::Collection(const QString& title_, const QString& entryTitle_)
-    : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryTitle(entryTitle_), m_entryIdDict(997)
+Collection::Collection(const QString& title_)
+    : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryIdDict(997)
     , m_trackGroups(false) {
   m_entryGroupDicts.setAutoDelete(true);
 
@@ -342,6 +343,9 @@ bool Collection::removeField(const QString& name_, bool force_) {
 // force allows me to force the deleting of the title field if I need to
 bool Collection::removeField(FieldPtr field_, bool force_/*=false*/) {
   if(!field_ || !m_fields.contains(field_)) {
+    if(field_) {
+      myDebug() << "Collection::removeField - false: " << field_->name() << endl;
+    }
     return false;
   }
 //  myDebug() << "Collection::removeField() - name = " << field_->name() << endl;
@@ -414,8 +418,10 @@ void Collection::addEntries(EntryVec entries_) {
   }
 
   for(EntryVec::Iterator entry = entries_.begin(); entry != entries_.end(); ++entry) {
+    bool foster = false;
     if(this != entry->collection()) {
       entry->setCollection(this);
+      foster = true;
     }
 
     m_entries.append(entry);
@@ -427,7 +433,9 @@ void Collection::addEntries(EntryVec entries_) {
       entry->setId(m_nextEntryId);
       ++m_nextEntryId;
     } else if(m_entryIdDict.find(entry->id())) {
-      myDebug() << "Collection::addEntries() - the collection already has an entry with id = " << entry->id() << endl;
+      if(!foster) {
+        myDebug() << "Collection::addEntries() - the collection already has an entry with id = " << entry->id() << endl;
+      }
       entry->setId(m_nextEntryId);
       ++m_nextEntryId;
     }
@@ -797,11 +805,11 @@ int Collection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const 
 
 // static
 // merges values from e2 into e1
-bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
+bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askUser_) {
   if(!e1 || !e2) {
     return false;
   }
-  bool ret = false;
+  bool ret = true;
   FieldVec fields = e1->collection()->fields();
   for(FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
     if(e2->field(field).isEmpty()) {
@@ -811,8 +819,10 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
 //      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name()) << endl;
       e1->setField(field, e2->field(field));
       ret = true;
+    } else if(e1->field(field) == e2->field(field)) {
+      continue;
     } else if(field->type() == Field::Para) {
-      // for paragraph fields, concatenate the values
+      // for paragraph fields, concatenate the values, if they're not equal
       e1->setField(field, e1->field(field) + QString::fromLatin1("<br/><br/>") + e2->field(field));
       ret = true;
     } else if(field->type() == Field::Table) {
@@ -846,6 +856,15 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
             if(parts1[j].isEmpty()) {
               parts1[j] = parts2[j];
               changedPart = true;
+            } else if(askUser_ && parts1[j] != parts2[j]) {
+              int ret = Kernel::self()->askAndMerge(e1, e2, field, parts1[j], parts2[j]);
+              if(ret == 0) {
+                return false; // we got cancelled
+              }
+              if(ret == 1) {
+                parts1[j] = parts2[j];
+                changedPart = true;
+              }
             }
           }
           if(changedPart) {
@@ -864,7 +883,8 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
       QStringList items1 = e1->fields(field, false);
       QStringList items2 = e2->fields(field, false);
       for(QStringList::ConstIterator it = items2.begin(); it != items2.end(); ++it) {
-        if(!items1.contains(*it)) {
+        // possible to have one value formatted and the other one not...
+        if(!items1.contains(*it) && !items1.contains(Field::format(*it, field->formatFlag()))) {
           items1.append(*it);
         }
       }
@@ -872,6 +892,14 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_) {
 //      items1.sort();
       e1->setField(field, items1.join(QString::fromLatin1("; ")));
       ret = true;
+    } else if(askUser_ && e1->field(field) != e2->field(field)) {
+      int ret = Kernel::self()->askAndMerge(e1, e2, field);
+      if(ret == 0) {
+        return false; // we got cancelled
+      }
+      if(ret == 1) {
+        e1->setField(field, e2->field(field));
+      }
     }
   }
   return ret;

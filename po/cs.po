@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
-"POT-Creation-Date: 2007-09-10 08:16-0700\n"
+"POT-Creation-Date: 2008-01-26 10:52-0800\n"
 "PO-Revision-Date: 2006-11-04 17:40+0100\n"
 "Last-Translator: Robert Kratky <kratky@rob.cz>\n"
 "Language-Team: čeština <cs@li.org>\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: cite/lyxpipe.cpp:49
+#: cite/lyxpipe.cpp:50
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
 msgstr "<qt>Tellico se nedaří zapisovat do roury serveru na <b>%1</b>.</qt>"
 
-#: cite/openoffice.cpp:81
+#: cite/openoffice.cpp:82
 msgid "Connecting to OpenOffice.org..."
 msgstr "Připojuji k OpenOffice.org..."
 
-#: cite/openoffice.cpp:164 cite/openoffice.cpp:185
+#: cite/openoffice.cpp:165 cite/openoffice.cpp:186
 msgid "OpenOffice.org Connection"
 msgstr "Spojení OpenOffice.org"
 
-#: cite/openoffice.cpp:178
+#: cite/openoffice.cpp:179
 msgid ""
 "Tellico was unable to connect to OpenOffice.org. Please verify the "
 "connection settings below, and that OpenOffice.org Writer is currently "
@@ -38,11 +38,11 @@ msgstr ""
 "nastavení spojení níže a ujistěte se, že je OpenOffice.org Writer "
 "spuštěn."
 
-#: cite/openoffice.cpp:190
+#: cite/openoffice.cpp:191
 msgid "Pipe"
 msgstr "Roura"
 
-#: cite/openoffice.cpp:192
+#: cite/openoffice.cpp:193
 msgid "TCP/IP"
 msgstr "TCP/IP"
 
@@ -115,9 +115,17 @@ msgid ""
 "Clear"
 msgstr "Žádné"
 
-#: gui/imagewidget.cpp:53
+#: gui/imagewidget.cpp:57
 msgid "Select Image..."
 msgstr "Vybrat obrázek..."
+
+#: gui/imagewidget.cpp:63
+msgid "Save link only"
+msgstr ""
+
+#: gui/imagewidget.cpp:162
+msgid "Saving a link is only possible for newly added images."
+msgstr ""
 
 #: commands/modifyentries.cpp:73 commands/updateentries.cpp:50
 #, c-format
@@ -138,7 +146,7 @@ msgstr "Sloučit sbírky"
 msgid "Replace Collection"
 msgstr "Nahradit sbírku"
 
-#: commands/modifyentries.cpp:72
+#: commands/modifyentries.cpp:72 entryeditdialog.cpp:365
 msgid "Modify Entries"
 msgstr "Upravit záznamy"
 
@@ -222,123 +230,224 @@ msgid ""
 "Check-in %1"
 msgstr "Vrátit %1"
 
-#: collectionfactory.cpp:79 collections/bibtexcollection.cpp:24
-#: collections/bibtexcollection.cpp:59 collections/bibtexcollection.cpp:89
-#: collections/bookcollection.cpp:19 collections/bookcollection.cpp:41
-#: collections/cardcollection.cpp:19 collections/coincollection.cpp:19
-#: collections/comicbookcollection.cpp:19 collections/filecatalog.cpp:19
-#: collections/gamecollection.cpp:19 collections/musiccollection.cpp:19
-#: collections/stampcollection.cpp:19 collections/videocollection.cpp:19
-#: collections/videocollection.cpp:41 collections/winecollection.cpp:19
-#: configdialog.cpp:192 fetch/imdbfetcher.cpp:689 fetch/imdbfetcher.cpp:933
-#: field.cpp:40 field.cpp:72 translators/gcfilmsimporter.cpp:62
+#: collectionfactory.cpp:83 collections/bibtexcollection.cpp:24
+#: collections/bibtexcollection.cpp:58 collections/bibtexcollection.cpp:88
+#: collections/boardgamecollection.cpp:19 collections/bookcollection.cpp:19
+#: collections/bookcollection.cpp:40 collections/cardcollection.cpp:19
+#: collections/coincollection.cpp:19 collections/comicbookcollection.cpp:19
+#: collections/filecatalog.cpp:19 collections/gamecollection.cpp:19
+#: collections/musiccollection.cpp:19 collections/stampcollection.cpp:19
+#: collections/videocollection.cpp:19 collections/videocollection.cpp:40
+#: collections/winecollection.cpp:19 configdialog.cpp:198
+#: fetch/imdbfetcher.cpp:689 fetch/imdbfetcher.cpp:948 field.cpp:40
+#: field.cpp:72 translators/gcfilmsimporter.cpp:78
 msgid "General"
 msgstr "Obecné"
 
+#: collections/bookcollection.cpp:143 collections/comicbookcollection.cpp:122
+#: collections/stampcollection.cpp:20
+msgid "Condition"
+msgstr "Stav"
+
+#: collections/boardgamecollection.cpp:20 collections/bookcollection.cpp:22
+#: collections/cardcollection.cpp:20 collections/coincollection.cpp:20
+#: collections/comicbookcollection.cpp:22 collections/gamecollection.cpp:20
+#: collections/musiccollection.cpp:20 collections/stampcollection.cpp:21
+#: collections/videocollection.cpp:22 collections/winecollection.cpp:20
+#: document.cpp:468
+msgid "Personal"
+msgstr "Osobní"
+
+#: collections/stampcollection.cpp:27
+msgid "My Stamps"
+msgstr "Moje známky"
+
+#: collectionfactory.cpp:82 collections/bibtexcollection.cpp:56
+#: collections/boardgamecollection.cpp:37 collections/bookcollection.cpp:39
+#: collections/cardcollection.cpp:37 collections/coincollection.cpp:37
+#: collections/comicbookcollection.cpp:39 collections/gamecollection.cpp:37
+#: collections/musiccollection.cpp:76 collections/stampcollection.cpp:38
+#: collections/videocollection.cpp:39 collections/winecollection.cpp:37
+#: entryupdater.cpp:229 fetch/fetchmanager.cpp:68 fetchdialog.cpp:169
+#: translators/audiofileimporter.cpp:164 translators/tellicoimporter.cpp:439
+msgid "Title"
+msgstr "Název"
+
+#: collections/boardgamecollection.cpp:77 collections/filecatalog.cpp:45
+#: collections/gamecollection.cpp:87 collections/stampcollection.cpp:44
+#: entryupdater.cpp:230 fetchdialog.cpp:170
+msgid "Description"
+msgstr "Popis"
+
+#. TRANSLATORS: denomination refers to the monetary value.
+#: collections/coincollection.cpp:51 collections/stampcollection.cpp:50
+msgid "Denomination"
+msgstr "Hodnota"
+
+#: collections/coincollection.cpp:67 collections/comicbookcollection.cpp:94
+#: collections/stampcollection.cpp:55 collections/winecollection.cpp:73
+msgid "Country"
+msgstr "Země"
+
+#: collections/stampcollection.cpp:61
+msgid "Issue Year"
+msgstr "Rok vydání"
+
+#: collections/stampcollection.cpp:66 collections/videocollection.cpp:172
+msgid "Color"
+msgstr "Barevné"
+
+#: collections/stampcollection.cpp:71
+msgid "Scott#"
+msgstr "Scott č. "
+
+#: collections/stampcollection.cpp:78
+msgid ""
+"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
+"Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
+msgstr ""
+"Vynikající,Výjimečně kvalitní,Velmi "
+"kvalitní,Kvalitní,Průměrná,Mizerná"
+
+#: collections/coincollection.cpp:88 collections/stampcollection.cpp:80
+msgid "Grade"
+msgstr "Stupeň"
+
+#: collections/stampcollection.cpp:85
+msgid "Cancelled"
+msgstr "Zrušeno"
+
+#. TRANSLATORS: See http://en.wikipedia.org/wiki/Stamp_hinge
+#: collections/stampcollection.cpp:90
+msgid "Hinged"
+msgstr "Rozevírací"
+
+#: collections/stampcollection.cpp:95
+msgid "Centering"
+msgstr "Centrovaná"
+
+#: collections/stampcollection.cpp:100
+msgid "Gummed"
+msgstr "Pogumovaná"
+
+#: collections/boardgamecollection.cpp:85 collections/bookcollection.cpp:64
+#: collections/cardcollection.cpp:82 collections/coincollection.cpp:103
+#: collections/comicbookcollection.cpp:126 collections/gamecollection.cpp:99
+#: collections/musiccollection.cpp:86 collections/stampcollection.cpp:105
+#: collections/videocollection.cpp:190 collections/winecollection.cpp:79
+msgid "Purchase Date"
+msgstr "Datum koupě"
+
+#: collections/boardgamecollection.cpp:94 collections/bookcollection.cpp:69
+#: collections/cardcollection.cpp:87 collections/coincollection.cpp:108
+#: collections/comicbookcollection.cpp:131 collections/gamecollection.cpp:108
+#: collections/musiccollection.cpp:95 collections/stampcollection.cpp:110
+#: collections/videocollection.cpp:199 collections/winecollection.cpp:84
+msgid "Purchase Price"
+msgstr "Kupní cena"
+
+#: collections/cardcollection.cpp:91 collections/coincollection.cpp:112
+#: collections/stampcollection.cpp:114 collections/winecollection.cpp:88
+msgid "Location"
+msgstr "Místo"
+
+#: collections/boardgamecollection.cpp:90 collections/bookcollection.cpp:155
+#: collections/cardcollection.cpp:96 collections/coincollection.cpp:118
+#: collections/comicbookcollection.cpp:139 collections/gamecollection.cpp:104
+#: collections/musiccollection.cpp:91 collections/stampcollection.cpp:120
+#: collections/videocollection.cpp:195 collections/winecollection.cpp:107
+msgid "Gift"
+msgstr "Dárek"
+
+#: collections/stampcollection.cpp:124 field.cpp:497
+msgid "Image"
+msgstr "Obrázek"
+
+#: collections/boardgamecollection.cpp:105 collections/bookcollection.cpp:171
+#: collections/cardcollection.cpp:115 collections/coincollection.cpp:128
+#: collections/comicbookcollection.cpp:150 collections/gamecollection.cpp:119
+#: collections/musiccollection.cpp:111 collections/stampcollection.cpp:127
+#: collections/videocollection.cpp:210 collections/winecollection.cpp:114
+msgid "Comments"
+msgstr "Komentáře"
+
 #: collections/bibtexcollection.cpp:25 collections/bookcollection.cpp:20
 #: collections/comicbookcollection.cpp:20 translators/grs1importer.cpp:58
-#: translators/grs1importer.cpp:68 translators/risimporter.cpp:260
+#: translators/grs1importer.cpp:68 translators/pdfimporter.cpp:174
+#: translators/risimporter.cpp:281
 msgid "Publishing"
 msgstr "Publikování"
 
 #: collections/bookcollection.cpp:21 collections/comicbookcollection.cpp:21
-#: translators/grs1importer.cpp:63 translators/risimporter.cpp:254
+#: translators/grs1importer.cpp:63 translators/risimporter.cpp:275
 msgid "Classification"
 msgstr "Klasifikace"
 
-#: collections/bookcollection.cpp:22 collections/cardcollection.cpp:20
-#: collections/coincollection.cpp:20 collections/comicbookcollection.cpp:22
-#: collections/gamecollection.cpp:20 collections/musiccollection.cpp:20
-#: collections/stampcollection.cpp:21 collections/videocollection.cpp:22
-#: collections/winecollection.cpp:20 document.cpp:464
-msgid "Personal"
-msgstr "Osobní"
-
 #: collections/comicbookcollection.cpp:28
-msgid "Comics"
-msgstr "Komiks"
-
-#: collections/comicbookcollection.cpp:29
 msgid "My Comic Books"
 msgstr "Moje komiksy"
 
-#: collectionfactory.cpp:78 collections/bibtexcollection.cpp:57
-#: collections/bookcollection.cpp:40 collections/cardcollection.cpp:38
-#: collections/coincollection.cpp:38 collections/comicbookcollection.cpp:40
-#: collections/gamecollection.cpp:38 collections/musiccollection.cpp:77
-#: collections/stampcollection.cpp:39 collections/videocollection.cpp:40
-#: collections/winecollection.cpp:38 entryupdater.cpp:231
-#: fetch/fetchmanager.cpp:62 fetchdialog.cpp:162
-#: translators/audiofileimporter.cpp:152 translators/tellicoimporter.cpp:426
-msgid "Title"
-msgstr "Název"
-
-#: collections/bookcollection.cpp:46 collections/comicbookcollection.cpp:46
+#: collections/bookcollection.cpp:45 collections/comicbookcollection.cpp:45
 msgid "Subtitle"
 msgstr "Podtitul"
 
-#: collections/comicbookcollection.cpp:51 collections/videocollection.cpp:122
+#: collections/comicbookcollection.cpp:50 collections/videocollection.cpp:121
 msgid "Writer"
 msgstr "Napsal"
 
-#: collections/comicbookcollection.cpp:57
+#: collections/comicbookcollection.cpp:56
 msgid ""
 "_: Comic Book Illustrator\n"
 "Artist"
 msgstr "Ilustrátor"
 
-#: collections/bibtexcollection.cpp:195 collections/bookcollection.cpp:127
-#: collections/cardcollection.cpp:72 collections/comicbookcollection.cpp:63
+#: collections/bibtexcollection.cpp:200 collections/bookcollection.cpp:132
+#: collections/cardcollection.cpp:71 collections/comicbookcollection.cpp:62
 msgid "Series"
 msgstr "Série"
 
-#: collections/comicbookcollection.cpp:69
+#: collections/comicbookcollection.cpp:68
 msgid "Issue"
 msgstr "Číslo"
 
-#: collections/bibtexcollection.cpp:121 collections/bookcollection.cpp:74
-#: collections/comicbookcollection.cpp:74
+#: collections/bibtexcollection.cpp:120 collections/boardgamecollection.cpp:60
+#: collections/bookcollection.cpp:73 collections/comicbookcollection.cpp:73
 msgid "Publisher"
 msgstr "Vydavatel"
 
-#: collections/bibtexcollection.cpp:134 collections/bookcollection.cpp:80
-#: collections/comicbookcollection.cpp:80
+#: collections/bibtexcollection.cpp:133 collections/bookcollection.cpp:79
+#: collections/comicbookcollection.cpp:79
 msgid "Edition"
 msgstr "Vydání"
 
-#: collections/bookcollection.cpp:91 collections/comicbookcollection.cpp:86
+#: collections/bookcollection.cpp:90 collections/comicbookcollection.cpp:85
 msgid "Publication Year"
 msgstr "Rok vydání"
 
-#: collections/bibtexcollection.cpp:141 collections/bookcollection.cpp:106
-#: collections/comicbookcollection.cpp:91
+#: collections/bibtexcollection.cpp:140 collections/bookcollection.cpp:105
+#: collections/comicbookcollection.cpp:90
 msgid "Pages"
 msgstr "Stran"
 
-#: collections/coincollection.cpp:68 collections/comicbookcollection.cpp:95
-#: collections/stampcollection.cpp:56 collections/winecollection.cpp:74
-msgid "Country"
-msgstr "Země"
-
-#: collections/bookcollection.cpp:110 collections/comicbookcollection.cpp:101
+#: collections/bookcollection.cpp:115 collections/comicbookcollection.cpp:100
 #: translators/grs1importer.cpp:67
 msgid "Language"
 msgstr "Jazyk"
 
-#: collections/bookcollection.cpp:115 collections/comicbookcollection.cpp:107
-#: collections/gamecollection.cpp:55 collections/musiccollection.cpp:68
-#: collections/videocollection.cpp:68
+#: collections/boardgamecollection.cpp:43 collections/bookcollection.cpp:120
+#: collections/comicbookcollection.cpp:106 collections/gamecollection.cpp:54
+#: collections/musiccollection.cpp:67 collections/videocollection.cpp:67
 msgid "Genre"
 msgstr "Žánr"
 
-#: collections/bibtexcollection.cpp:217 collections/bookcollection.cpp:122
-#: collections/cardcollection.cpp:101 collections/comicbookcollection.cpp:113
-#: collections/musiccollection.cpp:104 fetch/amazonfetcher.cpp:917
-#: translators/grs1importer.cpp:62 translators/risimporter.cpp:252
+#: collections/bibtexcollection.cpp:222 collections/bookcollection.cpp:127
+#: collections/cardcollection.cpp:100 collections/comicbookcollection.cpp:112
+#: collections/musiccollection.cpp:103 fetch/amazonfetcher.cpp:933
+#: translators/grs1importer.cpp:62 translators/risimporter.cpp:273
 msgid "Keywords"
 msgstr "Klíčová slova"
 
-#: collections/comicbookcollection.cpp:121
+#: collections/comicbookcollection.cpp:120
 msgid ""
 "_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
 "Good,Good,Fair,Poor\n"
@@ -347,151 +456,45 @@ msgstr ""
 "Zbrusu nový,Téměř nový,Velmi kvalitní,Kvalitní,Velmi "
 "dobrý,Dobrý,Ucházející,Mizerný"
 
-#: collections/bookcollection.cpp:138 collections/comicbookcollection.cpp:123
-#: collections/stampcollection.cpp:20
-msgid "Condition"
-msgstr "Stav"
-
-#: collections/bookcollection.cpp:65 collections/cardcollection.cpp:83
-#: collections/coincollection.cpp:104 collections/comicbookcollection.cpp:127
-#: collections/gamecollection.cpp:100 collections/musiccollection.cpp:87
-#: collections/stampcollection.cpp:106 collections/videocollection.cpp:191
-#: collections/winecollection.cpp:80
-msgid "Purchase Date"
-msgstr "Datum koupě"
-
-#: collections/bookcollection.cpp:70 collections/cardcollection.cpp:88
-#: collections/coincollection.cpp:109 collections/comicbookcollection.cpp:132
-#: collections/gamecollection.cpp:109 collections/musiccollection.cpp:96
-#: collections/stampcollection.cpp:111 collections/videocollection.cpp:200
-#: collections/winecollection.cpp:85
-msgid "Purchase Price"
-msgstr "Kupní cena"
-
-#: collections/bookcollection.cpp:142 collections/comicbookcollection.cpp:136
+#: collections/bookcollection.cpp:147 collections/comicbookcollection.cpp:135
 msgid "Signed"
 msgstr "Podepsaná"
 
-#: collections/bookcollection.cpp:150 collections/cardcollection.cpp:97
-#: collections/coincollection.cpp:119 collections/comicbookcollection.cpp:140
-#: collections/gamecollection.cpp:105 collections/musiccollection.cpp:92
-#: collections/stampcollection.cpp:121 collections/videocollection.cpp:196
-#: collections/winecollection.cpp:108
-msgid "Gift"
-msgstr "Dárek"
-
-#: collections/bookcollection.cpp:154 collections/comicbookcollection.cpp:144
-#: collections/gamecollection.cpp:113 collections/musiccollection.cpp:100
-#: collections/videocollection.cpp:204 document.cpp:462
+#: collections/boardgamecollection.cpp:98 collections/bookcollection.cpp:159
+#: collections/comicbookcollection.cpp:143 collections/gamecollection.cpp:112
+#: collections/musiccollection.cpp:99 collections/videocollection.cpp:203
+#: document.cpp:466
 msgid "Loaned"
 msgstr "Půjčená"
 
-#: collections/bookcollection.cpp:163 collections/comicbookcollection.cpp:148
+#: collections/bookcollection.cpp:168 collections/comicbookcollection.cpp:147
+#: fetch/arxivfetcher.cpp:216 fetch/crossreffetcher.cpp:206
+#: translators/pdfimporter.cpp:204 translators/referencerimporter.cpp:48
 msgid "Front Cover"
 msgstr "Přední obálka"
 
-#: collections/bookcollection.cpp:166 collections/cardcollection.cpp:116
-#: collections/coincollection.cpp:129 collections/comicbookcollection.cpp:151
-#: collections/gamecollection.cpp:120 collections/musiccollection.cpp:112
-#: collections/stampcollection.cpp:128 collections/videocollection.cpp:211
-#: collections/winecollection.cpp:115
-msgid "Comments"
-msgstr "Komentáře"
-
-#: collections/stampcollection.cpp:27
-msgid "Stamps"
-msgstr "Známky"
-
-#: collections/stampcollection.cpp:28
-msgid "My Stamps"
-msgstr "Moje známky"
-
-#: collections/filecatalog.cpp:46 collections/gamecollection.cpp:88
-#: collections/stampcollection.cpp:45 entryupdater.cpp:232 fetchdialog.cpp:163
-msgid "Description"
-msgstr "Popis"
-
-#. TRANSLATORS: denomination refers to the monetary value.
-#: collections/coincollection.cpp:52 collections/stampcollection.cpp:51
-msgid "Denomination"
-msgstr "Hodnota"
-
-#: collections/stampcollection.cpp:62
-msgid "Issue Year"
-msgstr "Rok vydání"
-
-#: collections/stampcollection.cpp:67 collections/videocollection.cpp:173
-msgid "Color"
-msgstr "Barevné"
-
-#: collections/stampcollection.cpp:72
-msgid "Scott#"
-msgstr "Scott č. "
-
-#: collections/stampcollection.cpp:79
-msgid ""
-"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
-"Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
-msgstr ""
-"Vynikající,Výjimečně kvalitní,Velmi "
-"kvalitní,Kvalitní,Průměrná,Mizerná"
-
-#: collections/coincollection.cpp:89 collections/stampcollection.cpp:81
-msgid "Grade"
-msgstr "Stupeň"
-
-#: collections/stampcollection.cpp:86
-msgid "Cancelled"
-msgstr "Zrušeno"
-
-#. TRANSLATORS: See http://en.wikipedia.org/wiki/Stamp_hinge
-#: collections/stampcollection.cpp:91
-msgid "Hinged"
-msgstr "Rozevírací"
-
-#: collections/stampcollection.cpp:96
-msgid "Centering"
-msgstr "Centrovaná"
-
-#: collections/stampcollection.cpp:101
-msgid "Gummed"
-msgstr "Pogumovaná"
-
-#: collections/cardcollection.cpp:92 collections/coincollection.cpp:113
-#: collections/stampcollection.cpp:115 collections/winecollection.cpp:89
-msgid "Location"
-msgstr "Místo"
-
-#: collections/stampcollection.cpp:125 field.cpp:497
-msgid "Image"
-msgstr "Obrázek"
-
 #: collections/coincollection.cpp:26
-msgid "Coins"
-msgstr "Mince"
-
-#: collections/coincollection.cpp:27
 msgid "My Coins"
 msgstr "Moje mince"
 
-#: collections/coincollection.cpp:45 collections/winecollection.cpp:69
+#: collections/coincollection.cpp:44 collections/winecollection.cpp:68
 msgid "Type"
 msgstr "Druh"
 
-#: collections/bibtexcollection.cpp:146 collections/cardcollection.cpp:67
-#: collections/coincollection.cpp:57 collections/musiccollection.cpp:63
+#: collections/bibtexcollection.cpp:145 collections/cardcollection.cpp:66
+#: collections/coincollection.cpp:56 collections/musiccollection.cpp:62
 msgid "Year"
 msgstr "Rok"
 
-#: collections/coincollection.cpp:62
+#: collections/coincollection.cpp:61
 msgid "Mint Mark"
 msgstr "Značka mincovny"
 
-#: collections/coincollection.cpp:74
+#: collections/coincollection.cpp:73
 msgid "Coin Set"
 msgstr "Sada mincí"
 
-#: collections/coincollection.cpp:84
+#: collections/coincollection.cpp:83
 msgid ""
 "_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
 "Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
@@ -505,219 +508,216 @@ msgstr ""
 "kvalitní-30,Velmi kvalitní-20,Dobrý-12,Velmi "
 "dobrý-8,Dobrý-4,Ucházející"
 
-#: collections/coincollection.cpp:97
+#: collections/coincollection.cpp:96
 msgid ""
 "_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgstr "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
-#: collections/coincollection.cpp:99
+#: collections/coincollection.cpp:98
 msgid "Grading Service"
 msgstr "Hodnotící služba"
 
-#: collections/coincollection.cpp:123
+#: collections/coincollection.cpp:122
 msgid "Obverse"
 msgstr "Líc"
 
-#: collections/coincollection.cpp:126
+#: collections/coincollection.cpp:125
 msgid "Reverse"
 msgstr "Rub"
 
 #: collections/bookcollection.cpp:28
-msgid "Books"
-msgstr "Knihy"
-
-#: collections/bookcollection.cpp:29
 msgid "My Books"
 msgstr "Moje knihy"
 
-#: collections/bibtexcollection.cpp:80 collections/bookcollection.cpp:51
+#: collections/bibtexcollection.cpp:79 collections/bookcollection.cpp:50
 msgid "Author"
 msgstr "Autor"
 
-#: collections/bookcollection.cpp:58 translators/alexandriaimporter.cpp:135
+#: collections/bookcollection.cpp:57 translators/alexandriaimporter.cpp:135
 msgid "Hardback"
 msgstr "Pevná vazba"
 
-#: collections/bookcollection.cpp:58
+#: collections/bookcollection.cpp:57
 msgid "Paperback"
 msgstr "Paperback"
 
-#: collections/bookcollection.cpp:58
+#: collections/bookcollection.cpp:57
 msgid "Trade Paperback"
 msgstr "Velký paperback"
 
-#: collections/bookcollection.cpp:59
+#: collections/bookcollection.cpp:58
 msgid "E-Book"
 msgstr "E-Book"
 
-#: collections/bookcollection.cpp:59
+#: collections/bookcollection.cpp:58
 msgid "Magazine"
 msgstr "Časopis"
 
-#: collections/bibtexcollection.cpp:158 collections/bookcollection.cpp:59
+#: collections/bibtexcollection.cpp:157 collections/bookcollection.cpp:58
 msgid "Journal"
 msgstr "Žurnál"
 
-#: collections/bookcollection.cpp:60
+#: collections/bookcollection.cpp:59
 msgid "Binding"
 msgstr "Vazba"
 
-#: collections/bookcollection.cpp:86
+#: collections/bookcollection.cpp:85
 msgid "Copyright Year"
 msgstr "Rok copyrightu"
 
-#: collections/bibtexcollection.cpp:152 collections/bookcollection.cpp:96
-#: translators/grs1importer.cpp:57 translators/risimporter.cpp:257
+#: collections/bibtexcollection.cpp:151 collections/bookcollection.cpp:95
+#: translators/grs1importer.cpp:57 translators/risimporter.cpp:278
 msgid "ISBN#"
 msgstr "č. ISBN"
 
-#: collections/bibtexcollection.cpp:155 collections/bookcollection.cpp:98
-#: translators/grs1importer.cpp:59 translators/risimporter.cpp:261
+#: collections/bibtexcollection.cpp:154 collections/bookcollection.cpp:97
+#: translators/grs1importer.cpp:59 translators/risimporter.cpp:282
 msgid "International Standard Book Number"
 msgstr "Mezinárodní standardní knižní číslo"
 
-#: collections/bookcollection.cpp:101
+#: collections/bookcollection.cpp:100
 msgid "LCCN#"
 msgstr "č. LCCN"
 
-#: collections/bookcollection.cpp:103
+#: collections/bookcollection.cpp:102
 msgid "Library of Congress Control Number"
 msgstr "Kontrolní číslo Knihovny kongresu"
 
-#: collections/bookcollection.cpp:132
+#: collections/bookcollection.cpp:109
+msgid "Translator"
+msgstr ""
+
+#: collections/bookcollection.cpp:137
 msgid "Series Number"
 msgstr "Číslo série"
 
-#: collections/bookcollection.cpp:137 mainwindow.cpp:192
+#: collections/bookcollection.cpp:142 mainwindow.cpp:185
 msgid "New"
 msgstr "Nová"
 
-#: collections/bookcollection.cpp:137
+#: collections/bookcollection.cpp:142
 msgid "Used"
 msgstr "Použitá"
 
-#: collections/bookcollection.cpp:146
+#: collections/bookcollection.cpp:151
 msgid "Read"
 msgstr "Přečtená"
 
-#: collections/bookcollection.cpp:158 collections/musiccollection.cpp:82
-#: collections/winecollection.cpp:103 field.cpp:501 newstuff/dialog.cpp:114
+#: collections/boardgamecollection.cpp:80 collections/bookcollection.cpp:163
+#: collections/musiccollection.cpp:81 collections/winecollection.cpp:102
+#: field.cpp:501 newstuff/dialog.cpp:115
 msgid "Rating"
 msgstr "Hodnocení"
 
-#: collections/filecatalog.cpp:26
+#: collections/filecatalog.cpp:25
 msgid "My Files"
 msgstr "Mé soubory"
 
-#: borrowerdialog.cpp:49 collections/filecatalog.cpp:37
-#: newstuff/dialog.cpp:112
+#: borrowerdialog.cpp:49 collections/filecatalog.cpp:36
+#: newstuff/dialog.cpp:113
 msgid "Name"
 msgstr "Název"
 
-#: collections/filecatalog.cpp:42 fetch/entrezfetcher.cpp:396
-#: fetch/entrezfetcher.cpp:465 field.cpp:495
-#: translators/gcfilmsimporter.cpp:61 translators/risimporter.cpp:263
+#: collections/bibtexcollection.cpp:227 collections/filecatalog.cpp:41
+#: fetch/entrezfetcher.cpp:400 fetch/entrezfetcher.cpp:487 field.cpp:495
+#: translators/gcfilmsimporter.cpp:77 translators/risimporter.cpp:284
 msgid "URL"
 msgstr "URL"
 
-#: collections/bibtexcollection.cpp:202 collections/filecatalog.cpp:51
+#: collections/bibtexcollection.cpp:207 collections/filecatalog.cpp:50
 msgid "Volume"
 msgstr "Svazek"
 
-#: collections/filecatalog.cpp:56
+#: collections/filecatalog.cpp:55
 msgid "Folder"
 msgstr "Složka"
 
-#: collections/filecatalog.cpp:61
+#: collections/filecatalog.cpp:60
 msgid "Mimetype"
 msgstr "Mimetyp"
 
-#: collections/filecatalog.cpp:66
+#: collections/filecatalog.cpp:65
 msgid "Size"
 msgstr "Velikost"
 
-#: collections/filecatalog.cpp:70
+#: collections/filecatalog.cpp:69
 msgid "Permissions"
 msgstr "Práva"
 
-#: collections/filecatalog.cpp:75
+#: collections/filecatalog.cpp:74
 msgid "Owner"
 msgstr "Vlastník"
 
-#: collections/filecatalog.cpp:80
+#: collections/filecatalog.cpp:79
 msgid "Group"
 msgstr "Skupina"
 
-#: collections/filecatalog.cpp:86
+#: collections/filecatalog.cpp:85
 msgid "Created"
 msgstr "Vytvořen"
 
-#: collections/filecatalog.cpp:90
+#: collections/filecatalog.cpp:89
 msgid "Modified"
 msgstr "Upraven"
 
-#: collections/filecatalog.cpp:94
+#: collections/filecatalog.cpp:93
 msgid "Meta Info"
 msgstr "Meta info"
 
-#: collectionfieldsdialog.cpp:873 collections/filecatalog.cpp:96
+#: collectionfieldsdialog.cpp:873 collections/filecatalog.cpp:95
 msgid "Property"
 msgstr "Vlastnost"
 
-#: collectionfieldsdialog.cpp:873 collections/filecatalog.cpp:97
+#: collectionfieldsdialog.cpp:873 collections/filecatalog.cpp:96
 msgid "Value"
 msgstr "Hodnota"
 
-#: collections/filecatalog.cpp:100
+#: collections/filecatalog.cpp:99
 msgid "Icon"
 msgstr "Ikona"
 
 #: collections/winecollection.cpp:26
-msgid "Wines"
-msgstr "Vína"
-
-#: collections/winecollection.cpp:27
 msgid "My Wines"
 msgstr "Moje vína"
 
-#: collections/videocollection.cpp:116 collections/winecollection.cpp:44
+#: collections/videocollection.cpp:115 collections/winecollection.cpp:43
 msgid "Producer"
 msgstr "Výrobce"
 
-#: collections/winecollection.cpp:50
+#: collections/winecollection.cpp:49
 msgid "Appellation"
 msgstr "Název"
 
-#: collections/winecollection.cpp:56
+#: collections/winecollection.cpp:55
 msgid "Varietal"
 msgstr "Odrůda"
 
-#: collections/winecollection.cpp:62
+#: collections/winecollection.cpp:61
 msgid "Vintage"
 msgstr "Ročník"
 
-#: collections/winecollection.cpp:68
+#: collections/winecollection.cpp:67
 msgid "Red Wine"
 msgstr "Červené víno"
 
-#: collections/winecollection.cpp:68
+#: collections/winecollection.cpp:67
 msgid "White Wine"
 msgstr "Bílé víno"
 
-#: collections/winecollection.cpp:68
+#: collections/winecollection.cpp:67
 msgid "Sparkling Wine"
 msgstr "Šumivé víno"
 
-#: collections/cardcollection.cpp:106 collections/winecollection.cpp:94
+#: collections/cardcollection.cpp:105 collections/winecollection.cpp:93
 msgid "Quantity"
 msgstr "Množství"
 
-#: collections/winecollection.cpp:98
+#: collections/winecollection.cpp:97
 msgid "Drink By"
 msgstr "Vypít do"
 
-#: collections/winecollection.cpp:112
+#: collections/winecollection.cpp:111
 msgid "Label Image"
 msgstr "Obrázek etikety"
 
@@ -730,289 +730,281 @@ msgid "Features"
 msgstr "Vlastnosti"
 
 #: collections/videocollection.cpp:28
-msgid "Videos"
-msgstr "Videa"
-
-#: collections/videocollection.cpp:29
 msgid "My Videos"
 msgstr "Moje videa"
 
-#: collections/musiccollection.cpp:45 collections/videocollection.cpp:47
+#: collections/musiccollection.cpp:44 collections/videocollection.cpp:46
 msgid "DVD"
 msgstr "DVD"
 
-#: collections/videocollection.cpp:47
+#: collections/videocollection.cpp:46
 msgid "VHS"
 msgstr "VHS"
 
-#: collections/videocollection.cpp:47
+#: collections/videocollection.cpp:46
 msgid "VCD"
 msgstr "VCD"
 
-#: collections/videocollection.cpp:47
+#: collections/videocollection.cpp:46
 msgid "DivX"
 msgstr "DivX"
 
-#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:805
+#: collections/videocollection.cpp:46 fetch/amazonfetcher.cpp:823
 msgid "Blu-ray"
 msgstr ""
 
-#: collections/videocollection.cpp:47 fetch/amazonfetcher.cpp:808
+#: collections/videocollection.cpp:46 fetch/amazonfetcher.cpp:826
 #, fuzzy
 msgid "HD DVD"
 msgstr "DVD"
 
-#: collections/musiccollection.cpp:46 collections/videocollection.cpp:48
+#: collections/musiccollection.cpp:45 collections/videocollection.cpp:47
 msgid "Medium"
 msgstr "Médium"
 
-#: collections/videocollection.cpp:53
+#: collections/videocollection.cpp:52
 msgid "Production Year"
 msgstr "Rok výroby"
 
-#: collections/videocollection.cpp:61
+#: collections/videocollection.cpp:60
 msgid ""
 "_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgstr "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 
-#: collections/videocollection.cpp:63
+#: collections/videocollection.cpp:62
 msgid "Certification"
 msgstr "Certifikace"
 
-#: collections/videocollection.cpp:75
+#: collections/videocollection.cpp:74
 msgid "Region 1"
 msgstr "Region 1"
 
-#: collections/videocollection.cpp:76
+#: collections/videocollection.cpp:75
 msgid "Region 2"
 msgstr "Region 2"
 
-#: collections/videocollection.cpp:77
+#: collections/videocollection.cpp:76
 msgid "Region 3"
 msgstr "Region 3"
 
-#: collections/videocollection.cpp:78
+#: collections/videocollection.cpp:77
 msgid "Region 4"
 msgstr "Region 4"
 
-#: collections/videocollection.cpp:79
+#: collections/videocollection.cpp:78
 msgid "Region 5"
 msgstr "Region 5"
 
-#: collections/videocollection.cpp:80
+#: collections/videocollection.cpp:79
 msgid "Region 6"
 msgstr "Region 6"
 
-#: collections/videocollection.cpp:81
+#: collections/videocollection.cpp:80
 msgid "Region 7"
 msgstr "Region 7"
 
-#: collections/videocollection.cpp:82
+#: collections/videocollection.cpp:81
 msgid "Region 8"
 msgstr "Region 8"
 
-#: collections/videocollection.cpp:83
+#: collections/videocollection.cpp:82
 msgid "Region"
 msgstr "Region"
 
-#: collections/videocollection.cpp:88
+#: collections/videocollection.cpp:87
 msgid "Nationality"
 msgstr "Země"
 
-#: collections/videocollection.cpp:95
+#: collections/videocollection.cpp:94
 msgid "NTSC"
 msgstr "NTSC"
 
-#: collections/videocollection.cpp:95
+#: collections/videocollection.cpp:94
 msgid "PAL"
 msgstr "PAL"
 
-#: collections/videocollection.cpp:95
+#: collections/videocollection.cpp:94
 msgid "SECAM"
 msgstr "SECAM"
 
-#: collections/videocollection.cpp:96
+#: collections/videocollection.cpp:95
 msgid "Format"
 msgstr "Formát"
 
-#: collections/videocollection.cpp:101
+#: collections/videocollection.cpp:100
 msgid "Cast"
 msgstr "Obsazení"
 
-#: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:430
+#: collections/videocollection.cpp:102 translators/tellicoimporter.cpp:443
 msgid "Actor/Actress"
 msgstr "Herec/herečka"
 
-#: collections/videocollection.cpp:104 translators/tellicoimporter.cpp:431
+#: collections/videocollection.cpp:103 translators/tellicoimporter.cpp:444
 msgid "Role"
 msgstr "Role"
 
-#: collections/videocollection.cpp:107
+#: collections/videocollection.cpp:106
 msgid "A table for the cast members, along with the roles they play"
 msgstr "Tabulka pro herecké obsazení spolu s jejich rolemi"
 
-#: collections/videocollection.cpp:110
+#: collections/videocollection.cpp:109
 msgid "Director"
 msgstr "Režisér"
 
-#: collections/videocollection.cpp:128
+#: collections/videocollection.cpp:127
 msgid "Composer"
 msgstr "Skladatel"
 
-#: collections/videocollection.cpp:134
+#: collections/videocollection.cpp:133
 msgid "Studio"
 msgstr "Studio"
 
-#: collections/videocollection.cpp:140
+#: collections/videocollection.cpp:139
 msgid "Language Tracks"
 msgstr "Jazykové stopy"
 
-#: collections/videocollection.cpp:146
+#: collections/videocollection.cpp:145
 msgid "Subtitle Languages"
 msgstr "Jazyky titulků"
 
-#: collections/videocollection.cpp:152
+#: collections/videocollection.cpp:151
 msgid "Audio Tracks"
 msgstr "Audio stopy"
 
-#: collections/videocollection.cpp:158
+#: collections/videocollection.cpp:157
 msgid "Running Time"
 msgstr "Celkový čas"
 
-#: collections/videocollection.cpp:160
+#: collections/videocollection.cpp:159
 msgid "The running time of the video (in minutes)"
 msgstr "Celkový čas videa (v minutách)"
 
-#: collections/videocollection.cpp:163
+#: collections/videocollection.cpp:162
 msgid "Aspect Ratio"
 msgstr "Poměr stran"
 
-#: collections/videocollection.cpp:168 fetch/amazonfetcher.cpp:797
-#: translators/tellicoimporter.cpp:937
+#: collections/videocollection.cpp:167 fetch/amazonfetcher.cpp:815
+#: translators/tellicoimporter.cpp:958
 msgid "Widescreen"
 msgstr "Širokoúhlé"
 
-#: collections/videocollection.cpp:173
+#: collections/videocollection.cpp:172
 msgid "Black & White"
 msgstr "Černobílé"
 
-#: collections/videocollection.cpp:174
+#: collections/videocollection.cpp:173
 msgid "Color Mode"
 msgstr "Barevný režim"
 
-#: collections/videocollection.cpp:179 fetch/amazonfetcher.cpp:812
+#: collections/videocollection.cpp:178 fetch/amazonfetcher.cpp:830
 msgid "Director's Cut"
 msgstr "Režisérský sestřih"
 
-#: collections/videocollection.cpp:183 fetch/ibsfetcher.cpp:358
+#: collections/videocollection.cpp:182 fetch/ibsfetcher.cpp:358
 msgid "Plot Summary"
 msgstr "Shrnutí děje"
 
-#: collections/gamecollection.cpp:91 collections/videocollection.cpp:186
+#: collections/gamecollection.cpp:90 collections/videocollection.cpp:185
 msgid "Personal Rating"
 msgstr "Osobní hodnocení"
 
-#: collections/gamecollection.cpp:117 collections/musiccollection.cpp:109
-#: collections/videocollection.cpp:208
+#: collections/boardgamecollection.cpp:102 collections/gamecollection.cpp:116
+#: collections/musiccollection.cpp:108 collections/videocollection.cpp:207
 msgid "Cover"
 msgstr "Přebal"
 
 #: collections/gamecollection.cpp:26
-msgid "Games"
-msgstr "Hry"
-
-#: collections/gamecollection.cpp:27
 msgid "My Games"
 msgstr "Moje hry"
 
-#: collections/gamecollection.cpp:45
+#: collections/gamecollection.cpp:44
 msgid "Xbox 360"
 msgstr "Xbox 360"
 
-#: collections/gamecollection.cpp:45
+#: collections/gamecollection.cpp:44
 msgid "Xbox"
 msgstr "Xbox"
 
-#: collections/gamecollection.cpp:46
+#: collections/gamecollection.cpp:45
 msgid "PlayStation3"
 msgstr "PlayStation3"
 
-#: collections/gamecollection.cpp:46
+#: collections/gamecollection.cpp:45
 msgid "PlayStation2"
 msgstr "PlayStation2"
 
-#: collections/gamecollection.cpp:46
+#: collections/gamecollection.cpp:45
 msgid "PlayStation"
 msgstr "PlayStation"
 
-#: collections/gamecollection.cpp:46
+#: collections/gamecollection.cpp:45
 msgid ""
 "_: PlayStation Portable\n"
 "PSP"
 msgstr "PSP"
 
-#: collections/gamecollection.cpp:47
+#: collections/gamecollection.cpp:46
 msgid "Nintendo Wii"
 msgstr "Nintendo Wii"
 
-#: collections/gamecollection.cpp:47
+#: collections/gamecollection.cpp:46
 msgid "Nintendo DS"
 msgstr "Nintendo DS"
 
-#: collections/gamecollection.cpp:47
+#: collections/gamecollection.cpp:46
 msgid "GameCube"
 msgstr "GameCube"
 
-#: collections/gamecollection.cpp:47
+#: collections/gamecollection.cpp:46
 msgid "Dreamcast"
 msgstr "Dreamcast"
 
-#: collections/gamecollection.cpp:48
+#: collections/gamecollection.cpp:47
 msgid "Game Boy Advance"
 msgstr "Game Boy Advance"
 
-#: collections/gamecollection.cpp:48
+#: collections/gamecollection.cpp:47
 msgid "Game Boy Color"
 msgstr "Game Boy Color"
 
-#: collections/gamecollection.cpp:48
+#: collections/gamecollection.cpp:47
 msgid "Game Boy"
 msgstr "Game Boy"
 
-#: collections/gamecollection.cpp:49
+#: collections/gamecollection.cpp:48
 msgid ""
 "_: Windows Platform\n"
 "Windows"
 msgstr "Windows"
 
-#: collections/gamecollection.cpp:49
+#: collections/gamecollection.cpp:48
 msgid "Mac OS"
 msgstr "Mac OS"
 
-#: collections/gamecollection.cpp:49
+#: collections/gamecollection.cpp:48
 msgid "Linux"
 msgstr ""
 
-#: collections/gamecollection.cpp:50
+#: collections/gamecollection.cpp:49
 msgid "Platform"
 msgstr "Platforma"
 
-#: collections/gamecollection.cpp:61
+#: collections/boardgamecollection.cpp:55 collections/gamecollection.cpp:60
 msgid "Release Year"
 msgstr "Rok vydání"
 
-#: collections/gamecollection.cpp:66
+#: collections/gamecollection.cpp:65
 msgid ""
 "_: Games - Publisher\n"
 "Publisher"
 msgstr "Vydavatel"
 
-#: collections/gamecollection.cpp:72
+#: collections/gamecollection.cpp:71
 msgid "Developer"
 msgstr "Vývojář"
 
-#: collections/gamecollection.cpp:81
+#: collections/gamecollection.cpp:80
 msgid ""
 "_: Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone, Early "
 "Childhood, Pending\n"
@@ -1021,162 +1013,175 @@ msgstr ""
 "Bez hodnocení, Jen pro dospělé, Pro vyspělé, Teen, Všichni, Pro děti, "
 "Nerozhodnuto"
 
-#: collections/gamecollection.cpp:83
+#: collections/gamecollection.cpp:82
 msgid "ESRB Rating"
 msgstr "Hodnocení ESRB"
 
-#: collections/gamecollection.cpp:96
+#: collections/gamecollection.cpp:95
 msgid "Completed"
 msgstr "Dohráno"
 
 #: collections/cardcollection.cpp:26
-msgid "Cards"
-msgstr "Karty"
-
-#: collections/cardcollection.cpp:27
 msgid "My Cards"
 msgstr "Moje karty"
 
-#: collections/cardcollection.cpp:44
+#: collections/cardcollection.cpp:43
 msgid "Player"
 msgstr "Hráč"
 
-#: collections/cardcollection.cpp:50
+#: collections/cardcollection.cpp:49
 msgid "Team"
 msgstr "Tým"
 
-#: collections/cardcollection.cpp:56
+#: collections/cardcollection.cpp:55
 msgid "Brand"
 msgstr "Značka"
 
-#: collections/cardcollection.cpp:63
+#: collections/cardcollection.cpp:62
 msgid "Card Number"
 msgstr "Číslo karty"
 
-#: collections/cardcollection.cpp:78
+#: collections/cardcollection.cpp:77
 msgid "Card Type"
 msgstr "Druh karty"
 
-#: collections/cardcollection.cpp:110
+#: collections/cardcollection.cpp:109
 msgid "Front Image"
 msgstr "Přední obrázek"
 
-#: collections/cardcollection.cpp:113
+#: collections/cardcollection.cpp:112
 msgid "Back Image"
 msgstr "Zadní obrázek"
 
-#: collections/bibtexcollection.cpp:30
-msgid "Entries"
-msgstr "Záznamy"
+#: collections/boardgamecollection.cpp:26
+#, fuzzy
+msgid "My Board Games"
+msgstr "Moje hry"
 
-#: collectionfactory.cpp:119 collections/bibtexcollection.cpp:31
+#: collections/boardgamecollection.cpp:49
+msgid "Mechanism"
+msgstr ""
+
+#: collections/boardgamecollection.cpp:66
+msgid "Designer"
+msgstr ""
+
+#: collections/boardgamecollection.cpp:72
+msgid "Number of Players"
+msgstr ""
+
+#: collectionfactory.cpp:125 collections/bibtexcollection.cpp:30
 msgid "Bibliography"
 msgstr "Bibliografie"
 
-#: collections/bibtexcollection.cpp:73
+#: collections/bibtexcollection.cpp:72
 msgid "Entry Type"
 msgstr "Druh záznamu"
 
-#: collections/bibtexcollection.cpp:77
+#: collections/bibtexcollection.cpp:76
 msgid "These entry types are specific to bibtex. See the bibtex documentation."
 msgstr ""
 "Tyto druhy záznamu jsou specifické pro Bibtex. Viz dokumentaci k Bibtex."
 
-#: collections/bibtexcollection.cpp:87
+#: collections/bibtexcollection.cpp:86
 msgid "Bibtex Key"
 msgstr "Bibtex klíč"
 
-#: collections/bibtexcollection.cpp:93
+#: collections/bibtexcollection.cpp:92
 msgid "Book Title"
 msgstr "Název knihy"
 
-#: collections/bibtexcollection.cpp:99
+#: collections/bibtexcollection.cpp:98
 msgid "Editor"
 msgstr "Redaktor"
 
-#: collections/bibtexcollection.cpp:106
+#: collections/bibtexcollection.cpp:105
 msgid "Organization"
 msgstr "Organizace"
 
-#: collections/bibtexcollection.cpp:128 fetch/srufetcher.cpp:413
-#: fetch/z3950fetcher.cpp:673
+#: collections/bibtexcollection.cpp:127 fetch/srufetcher.cpp:412
+#: fetch/z3950fetcher.cpp:668
 msgid "Address"
 msgstr "Adresa"
 
+#: collections/bibtexcollection.cpp:164 fetch/fetchmanager.cpp:73
+msgid "DOI"
+msgstr ""
+
 #: collections/bibtexcollection.cpp:167
+msgid "Digital Object Identifier"
+msgstr ""
+
+#: collections/bibtexcollection.cpp:172
 msgid "Month"
 msgstr "Měsíc"
 
-#: collections/bibtexcollection.cpp:173 field.cpp:494
+#: collections/bibtexcollection.cpp:178 field.cpp:494
 msgid "Number"
 msgstr "Číslo"
 
-#: collections/bibtexcollection.cpp:178
+#: collections/bibtexcollection.cpp:183
 msgid "How Published"
 msgstr "Jak vydáno"
 
-#: collections/bibtexcollection.cpp:190
+#: collections/bibtexcollection.cpp:195
 msgid "Chapter"
 msgstr "Kapitola"
 
-#: collections/bibtexcollection.cpp:207
+#: collections/bibtexcollection.cpp:212
 msgid "Cross-Reference"
 msgstr "Křížový odkaz"
 
-#: collections/bibtexcollection.cpp:222 fetch/entrezfetcher.cpp:464
-#: fetch/srufetcher.cpp:414 fetch/z3950fetcher.cpp:674
-#: translators/risimporter.cpp:248
+#: collections/bibtexcollection.cpp:232 fetch/entrezfetcher.cpp:486
+#: fetch/srufetcher.cpp:413 fetch/z3950fetcher.cpp:669
+#: translators/risimporter.cpp:269
 msgid "Abstract"
 msgstr "Výtažek"
 
-#: collections/bibtexcollection.cpp:226
+#: collections/bibtexcollection.cpp:236
 msgid "Notes"
 msgstr "Poznámky"
 
 #: collections/musiccollection.cpp:26
-msgid "Albums"
-msgstr "Alba"
-
-#: collections/musiccollection.cpp:27
 msgid "My Music"
 msgstr "Moje hudba"
 
-#: collections/musiccollection.cpp:38
+#: collections/musiccollection.cpp:37
 msgid "Album"
 msgstr "Album"
 
-#: collections/musiccollection.cpp:45 translators/freedbimporter.cpp:257
+#: collections/musiccollection.cpp:44 translators/freedbimporter.cpp:257
 #: translators/freedbimporter.cpp:375 translators/freedbimporter.cpp:446
 msgid "Compact Disc"
 msgstr "Kompaktní disk"
 
-#: collections/musiccollection.cpp:45
+#: collections/musiccollection.cpp:44
 msgid "Cassette"
 msgstr "Kazeta"
 
-#: collections/musiccollection.cpp:45
+#: collections/musiccollection.cpp:44
 msgid "Vinyl"
 msgstr "Vinyl"
 
-#: collections/musiccollection.cpp:51 collections/musiccollection.cpp:78
-#: translators/audiofileimporter.cpp:153 translators/tellicoimporter.cpp:427
+#: collections/musiccollection.cpp:50 collections/musiccollection.cpp:77
+#: translators/audiofileimporter.cpp:165 translators/tellicoimporter.cpp:440
 msgid "Artist"
 msgstr "Umělec"
 
-#: collections/musiccollection.cpp:57
+#: collections/musiccollection.cpp:56
 msgid "Label"
 msgstr "Nahrávací společnost"
 
-#: collections/musiccollection.cpp:74 translators/audiofileimporter.cpp:148
+#: collections/musiccollection.cpp:73
 msgid "Tracks"
 msgstr "Stopy"
 
-#: collections/musiccollection.cpp:79 translators/audiofileimporter.cpp:154
-#: translators/tellicoimporter.cpp:428
+#: collections/musiccollection.cpp:78 translators/audiofileimporter.cpp:166
+#: translators/tellicoimporter.cpp:441
 msgid "Length"
 msgstr "Délka"
 
-#: core/tellico_config.cpp:118
+#: core/tellico_config.cpp:134
 msgid ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
@@ -1184,59 +1189,62 @@ msgstr ""
 "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,"
 "up,with"
 
-#: core/tellico_config.cpp:121
+#: core/tellico_config.cpp:137
 msgid "the"
 msgstr "the"
 
-#: core/tellico_config.cpp:124
+#: core/tellico_config.cpp:140
 msgid "jr.,jr,iii,iv"
 msgstr "ml., iii, iv"
 
-#: core/tellico_config.cpp:127
+#: core/tellico_config.cpp:143
 msgid "de,van,der,van der,von"
 msgstr "de,van,der,van der,von"
 
-#: fetch/isbndbfetcher.cpp:53
+#: fetch/isbndbfetcher.cpp:54
 msgid "ISBNdb.com"
 msgstr "ISBNdb.com"
 
-#: fetch/amazonfetcher.cpp:193 fetch/animenfofetcher.cpp:75
-#: fetch/ibsfetcher.cpp:72 fetch/isbndbfetcher.cpp:79
-#: fetch/yahoofetcher.cpp:94
+#: fetch/amazonfetcher.cpp:192 fetch/animenfofetcher.cpp:75
+#: fetch/arxivfetcher.cpp:83 fetch/bibsonomyfetcher.cpp:66
+#: fetch/citebasefetcher.cpp:67 fetch/crossreffetcher.cpp:89
+#: fetch/discogsfetcher.cpp:102 fetch/ibsfetcher.cpp:72
+#: fetch/isbndbfetcher.cpp:79 fetch/yahoofetcher.cpp:94
 msgid "%1 does not allow searching for this collection type."
 msgstr "%1 neumožňuje vyhledávání u tohoto typu sbírky."
 
-#: fetch/amazonfetcher.cpp:545 fetch/isbndbfetcher.cpp:247
+#: fetch/amazonfetcher.cpp:562 fetch/isbndbfetcher.cpp:247
 msgid "Results from %1: %2/%3"
 msgstr "Výsledky z %1: %2/%3"
 
-#: fetch/animenfofetcher.cpp:370 fetch/entrezfetcher.cpp:444
-#: fetch/ibsfetcher.cpp:407 fetch/isbndbfetcher.cpp:342
-#: fetch/yahoofetcher.cpp:393
+#: fetch/animenfofetcher.cpp:370 fetch/arxivfetcher.cpp:355
+#: fetch/bibsonomyfetcher.cpp:198 fetch/citebasefetcher.cpp:237
+#: fetch/entrezfetcher.cpp:466 fetch/ibsfetcher.cpp:407
+#: fetch/isbndbfetcher.cpp:342 fetch/yahoofetcher.cpp:392
 msgid "This source has no options."
 msgstr "Tento zdroj nemá žádné volby."
 
-#: fetch/entrezfetcher.cpp:55
+#: fetch/entrezfetcher.cpp:56
 msgid "Entrez Database"
 msgstr "Databáze záznamů"
 
-#: fetch/entrezfetcher.cpp:463
+#: fetch/entrezfetcher.cpp:485
 msgid "Institution"
 msgstr "Instituce"
 
-#: fetch/z3950connection.cpp:119
+#: fetch/z3950connection.cpp:132
 msgid "Query error!"
 msgstr "Chyba hledání!"
 
-#: fetch/z3950connection.cpp:160
+#: fetch/z3950connection.cpp:173
 msgid "Connection search error %1: %2"
 msgstr "Chyba spojení při hledání %1: %2"
 
-#: fetch/z3950connection.cpp:237
+#: fetch/z3950connection.cpp:250
 msgid "Record syntax error"
 msgstr "Chyba syntaxe záznamu"
 
-#: fetch/z3950connection.cpp:333
+#: fetch/z3950connection.cpp:345
 msgid "Connection error %1: %2"
 msgstr "Chyba spojení %1: %2"
 
@@ -1244,113 +1252,114 @@ msgstr "Chyba spojení %1: %2"
 msgid "SRU Server"
 msgstr "SRU server"
 
-#: fetch/srufetcher.cpp:406 z3950.cpp:2
+#: fetch/srufetcher.cpp:405 z3950.cpp:2
 msgid "Library of Congress (US)"
 msgstr "Knihovna kongresu (US)"
 
-#: fetch/imdbfetcher.cpp:1106 fetch/srufetcher.cpp:429
-#: fetch/z3950fetcher.cpp:509
+#: fetch/imdbfetcher.cpp:1121 fetch/srufetcher.cpp:428
+#: fetch/z3950fetcher.cpp:504
 msgid "Hos&t: "
 msgstr "Hos&titel:"
 
-#: fetch/srufetcher.cpp:436 fetch/z3950fetcher.cpp:515
+#: fetch/srufetcher.cpp:435 fetch/z3950fetcher.cpp:510
 msgid "Enter the host name of the server."
 msgstr "Zadejte host name serveru."
 
-#: fetch/srufetcher.cpp:441 fetch/z3950fetcher.cpp:520
+#: fetch/srufetcher.cpp:440 fetch/z3950fetcher.cpp:515
 msgid "&Port: "
 msgstr "&Port: "
 
-#: fetch/srufetcher.cpp:446 fetch/z3950fetcher.cpp:525
+#: fetch/srufetcher.cpp:445 fetch/z3950fetcher.cpp:520
 #, c-format
 msgid "Enter the port number of the server. The default is %1."
 msgstr "Zadejte číslo portu. Výchozí je %1."
 
-#: fetch/srufetcher.cpp:451
+#: fetch/srufetcher.cpp:450
 msgid "Path: "
 msgstr "Cesta: "
 
-#: fetch/srufetcher.cpp:456
+#: fetch/srufetcher.cpp:455
 msgid "Enter the path to the database used by the server."
 msgstr "Zadejte cestu k databázi používané serverem."
 
-#: fetch/srufetcher.cpp:461
+#: fetch/srufetcher.cpp:460
 msgid "Format: "
 msgstr "Formát: "
 
-#: fetch/srufetcher.cpp:469
+#: fetch/srufetcher.cpp:468
 msgid "Enter the result format used by the server."
 msgstr "Zadejte výsledkový formát používaný serverem."
 
-#: fetch/yahoofetcher.cpp:53
+#: fetch/yahoofetcher.cpp:54
 msgid "Yahoo! Audio Search"
 msgstr "Yahoo! Audio vyhledávání"
 
-#: fetch/amazonfetcher.cpp:713 fetch/yahoofetcher.cpp:243
+#: fetch/amazonfetcher.cpp:730 fetch/discogsfetcher.cpp:539
+#: fetch/yahoofetcher.cpp:242
 msgid "The cover image could not be loaded."
 msgstr "Nepodařilo načíst obrázek obálky."
 
-#: fetch/amazonfetcher.cpp:52
+#: fetch/amazonfetcher.cpp:53
 msgid "Amazon Link"
 msgstr "Amazon odkaz"
 
-#: fetch/amazonfetcher.cpp:61
+#: fetch/amazonfetcher.cpp:62
 msgid "Amazon (US)"
 msgstr "Amazon (US)"
 
-#: fetch/amazonfetcher.cpp:64
+#: fetch/amazonfetcher.cpp:65
 msgid "Amazon (UK)"
 msgstr "Amazon (UK)"
 
-#: fetch/amazonfetcher.cpp:67
+#: fetch/amazonfetcher.cpp:68
 msgid "Amazon (Germany)"
 msgstr "Amazon (Německo)"
 
-#: fetch/amazonfetcher.cpp:70
+#: fetch/amazonfetcher.cpp:71
 msgid "Amazon (Japan)"
 msgstr "Amazon (Japonsko)"
 
-#: fetch/amazonfetcher.cpp:73
+#: fetch/amazonfetcher.cpp:74
 msgid "Amazon (France)"
 msgstr "Amazon (Francie)"
 
-#: fetch/amazonfetcher.cpp:76
+#: fetch/amazonfetcher.cpp:77
 msgid "Amazon (Canada)"
 msgstr "Amazon (Kanada)"
 
-#: fetch/amazonfetcher.cpp:98
+#: fetch/amazonfetcher.cpp:99
 msgid "Amazon.com Web Services"
 msgstr "Amazon.com webové služby"
 
-#: fetch/amazonfetcher.cpp:830
+#: fetch/amazonfetcher.cpp:848
 msgid "Co&untry: "
 msgstr "Ze&mě: "
 
-#: fetch/amazonfetcher.cpp:834
+#: fetch/amazonfetcher.cpp:851
 msgid "United States"
 msgstr "Spojené státy"
 
-#: fetch/amazonfetcher.cpp:835
+#: fetch/amazonfetcher.cpp:852
 msgid "United Kingdom"
 msgstr "Spojené království"
 
-#: fetch/amazonfetcher.cpp:836
+#: fetch/amazonfetcher.cpp:853
 msgid "Germany"
 msgstr "Německo"
 
-#: fetch/amazonfetcher.cpp:837
+#: fetch/amazonfetcher.cpp:854
 msgid "Japan"
 msgstr "Japonsko"
 
-#: fetch/amazonfetcher.cpp:838
+#: fetch/amazonfetcher.cpp:855
 msgid "France"
 msgstr "Francie"
 
-#: fetch/amazonfetcher.cpp:839
+#: fetch/amazonfetcher.cpp:856
 msgid "Canada"
 msgstr "Kanada"
 
-#: fetch/amazonfetcher.cpp:843
+#: fetch/amazonfetcher.cpp:860
 msgid ""
 "Amazon.com provides data from several different localized sites. Choose the "
 "one you wish to use for this data source."
@@ -1358,27 +1367,28 @@ msgstr ""
 "Amazon.com poskytuje data z několika lokalizovaných stránek. Vyberte tu, "
 "kterou chcete použít pro tento datový zdroj."
 
-#: fetch/amazonfetcher.cpp:849
+#: fetch/amazonfetcher.cpp:866
 msgid "&Image size: "
 msgstr "&Velikost obrázku: "
 
-#: fetch/amazonfetcher.cpp:853
+#: fetch/amazonfetcher.cpp:869
 msgid "Small Image"
 msgstr "Malý obrázek"
 
-#: fetch/amazonfetcher.cpp:854
+#: fetch/amazonfetcher.cpp:870
 msgid "Medium Image"
 msgstr "Střední obrázek"
 
-#: fetch/amazonfetcher.cpp:855
+#: fetch/amazonfetcher.cpp:871
 msgid "Large Image"
 msgstr "Velký obrázek"
 
-#: fetch/amazonfetcher.cpp:856
+#: fetch/amazonfetcher.cpp:872
 msgid "No Image"
 msgstr "Žádný obrázek"
 
-#: fetch/amazonfetcher.cpp:859 fetch/imdbfetcher.cpp:1131
+#: fetch/amazonfetcher.cpp:875 fetch/discogsfetcher.cpp:683
+#: fetch/imdbfetcher.cpp:1146
 msgid ""
 "The cover image may be downloaded as well. However, too many large images in "
 "the collection may degrade performance."
@@ -1386,11 +1396,11 @@ msgstr ""
 "Lze stáhnout i obrázek obálky. Hodně velkých souborů ve sbírce se "
 "však může projevit na rychlosti."
 
-#: fetch/amazonfetcher.cpp:865
+#: fetch/amazonfetcher.cpp:881
 msgid "&Associate's ID: "
 msgstr "&ID společníka: "
 
-#: fetch/amazonfetcher.cpp:870
+#: fetch/amazonfetcher.cpp:886
 msgid ""
 "The associate's id identifies the person accessing the Amazon.com Web "
 "Services, and is included in any links to the Amazon.com site."
@@ -1398,27 +1408,27 @@ msgstr ""
 "ID společníka identifikuje osobu, která přistupuje k Amazon.com webovým "
 "službám, a je obsaženo v každém odkazu na stránky Amazon.com."
 
-#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:760
+#: fetch/z3950fetcher.cpp:79 fetch/z3950fetcher.cpp:755
 msgid "z39.50 Server"
 msgstr "z39.50 server"
 
-#: fetch/z3950fetcher.cpp:499
+#: fetch/z3950fetcher.cpp:494
 msgid "Use preset &server:"
 msgstr "Použít přednastavený &server:"
 
-#: fetch/z3950fetcher.cpp:530
+#: fetch/z3950fetcher.cpp:525
 msgid "&Database: "
 msgstr "&Databáze: "
 
-#: fetch/z3950fetcher.cpp:535
+#: fetch/z3950fetcher.cpp:530
 msgid "Enter the database name used by the server."
 msgstr "Zadejte název databáze používané serverem."
 
-#: fetch/z3950fetcher.cpp:540
+#: fetch/z3950fetcher.cpp:535
 msgid "Ch&aracter set: "
 msgstr "&Kódování znaků: "
 
-#: fetch/z3950fetcher.cpp:549
+#: fetch/z3950fetcher.cpp:544
 msgid ""
 "Enter the character set encoding used by the z39.50 server. The most likely "
 "choice is MARC-8, although ISO-8859-1 is common as well."
@@ -1426,15 +1436,15 @@ msgstr ""
 "Zadejte kódování znaků, které používá server z39.50. "
 "Nejpravděpodobnější je MARC-8, i když ISO-8859-2 je také časté."
 
-#: fetch/z3950fetcher.cpp:555
+#: fetch/z3950fetcher.cpp:550
 msgid "&Format: "
 msgstr "&Formát: "
 
-#: fetch/z3950fetcher.cpp:558
+#: fetch/z3950fetcher.cpp:553
 msgid "Auto-detect"
 msgstr "Autodetekce"
 
-#: fetch/z3950fetcher.cpp:566
+#: fetch/z3950fetcher.cpp:561
 msgid ""
 "Enter the data format used by the z39.50 server. Tellico will attempt to "
 "automatically detect the best setting if <i>auto-detect</i> is selected."
@@ -1443,15 +1453,15 @@ msgstr ""
 "<i>autodetekce</i>, pokusí se Tellico automaticky rozpoznat nejlepší "
 "nastavení."
 
-#: fetch/z3950fetcher.cpp:572
+#: fetch/z3950fetcher.cpp:567
 msgid "&User: "
 msgstr "&Uživatel: "
 
-#: fetch/z3950fetcher.cpp:575 fetch/z3950fetcher.cpp:587
+#: fetch/z3950fetcher.cpp:570 fetch/z3950fetcher.cpp:582
 msgid "Optional"
 msgstr "Nepovinné"
 
-#: fetch/z3950fetcher.cpp:578
+#: fetch/z3950fetcher.cpp:573
 msgid ""
 "Enter the authentication user name used by the z39.50 database. Most servers "
 "do not need one."
@@ -1459,11 +1469,11 @@ msgstr ""
 "Zadejte autentizační uživatelské jméno používané databází z39.50. "
 "Většina serverů žádné nepotřebuje."
 
-#: fetch/z3950fetcher.cpp:584
+#: fetch/z3950fetcher.cpp:579
 msgid "Pass&word: "
 msgstr "Hes&lo: "
 
-#: fetch/z3950fetcher.cpp:591
+#: fetch/z3950fetcher.cpp:586
 msgid ""
 "Enter the authentication password used by the z39.50 database. Most servers "
 "do not need one. The password will be saved in plain text in the Tellico "
@@ -1473,7 +1483,7 @@ msgstr ""
 "serverů žádné nepotřebuje. Heslo bude v konfiguračním souboru Tellico "
 "uloženo jako prostý text."
 
-#: fetch/z3950fetcher.cpp:675
+#: fetch/z3950fetcher.cpp:670
 msgid "Illustrator"
 msgstr "Ilustrátor"
 
@@ -1481,31 +1491,31 @@ msgstr "Ilustrátor"
 msgid "External Application"
 msgstr "Externí program"
 
-#: configdialog.cpp:354 fetch/execexternalfetcher.cpp:336
-#: translators/csvimporter.cpp:172
+#: configdialog.cpp:363 fetch/execexternalfetcher.cpp:346
+#: fetch/gcstarpluginfetcher.cpp:398 translators/csvimporter.cpp:226
 msgid "Collection &type:"
 msgstr "&Druh sbírky:"
 
-#: fetch/execexternalfetcher.cpp:341
+#: fetch/execexternalfetcher.cpp:351
 msgid ""
 "Set the collection type of the data returned from the external application."
 msgstr ""
 "Nastavte, jaký druh sbírky obsahují data vracená externím programem."
 
-#: fetch/execexternalfetcher.cpp:346
+#: fetch/execexternalfetcher.cpp:356
 msgid "&Result type: "
 msgstr "&Druh výsledku: "
 
-#: fetch/execexternalfetcher.cpp:355
+#: fetch/execexternalfetcher.cpp:365
 msgid "Set the result type of the data returned from the external application."
 msgstr ""
 "Nastavte, jaký druh výsledku obsahují data vracená externím programem."
 
-#: fetch/execexternalfetcher.cpp:360
+#: fetch/execexternalfetcher.cpp:370
 msgid "Application &path: "
 msgstr "Cesta k &programu: "
 
-#: fetch/execexternalfetcher.cpp:365
+#: fetch/execexternalfetcher.cpp:375
 msgid ""
 "Set the path of the application to run that should output a valid Tellico "
 "data file."
@@ -1513,11 +1523,11 @@ msgstr ""
 "Nastavte cestu k programu, který by měl vracet platný datový soubor "
 "Tellico."
 
-#: fetch/execexternalfetcher.cpp:370
+#: fetch/execexternalfetcher.cpp:380
 msgid "Select the search keys supported by the data source."
 msgstr "Vyberte vyhledávací klíče podporované zdrojem dat."
 
-#: fetch/execexternalfetcher.cpp:371
+#: fetch/execexternalfetcher.cpp:381
 msgid ""
 "Add any arguments that may be needed. <b>%1</b> will be replaced by the "
 "search term."
@@ -1525,16 +1535,16 @@ msgstr ""
 "Přidejte všechny potřebné parametry. <b>%1</b> bude nahrazeno "
 "vyhledávaným termínem."
 
-#: fetch/execexternalfetcher.cpp:372
+#: fetch/execexternalfetcher.cpp:382
 msgid "Arguments"
 msgstr "Parametry"
 
-#: fetch/execexternalfetcher.cpp:405 newstuff/dialog.cpp:151
+#: fetch/execexternalfetcher.cpp:415 newstuff/dialog.cpp:152
 msgid "Update"
 msgstr "Aktualizovat"
 
 #. TRANSLATORS: Do not translate %{author}.
-#: fetch/execexternalfetcher.cpp:413
+#: fetch/execexternalfetcher.cpp:423
 msgid ""
 "<p>Enter the arguments which should be used to search for available updates "
 "to an entry.</p><p>The format is the same as for <i>Dependent</i> fields, "
@@ -1554,7 +1564,7 @@ msgstr "Možnosti zdroje"
 msgid "Available Fields"
 msgstr "Dostupná pole"
 
-#: fetch/imdbfetcher.cpp:88
+#: fetch/imdbfetcher.cpp:89
 msgid "Internet Movie Database"
 msgstr "Internetová databáze filmů"
 
@@ -1573,24 +1583,24 @@ msgstr ""
 msgid "<qt>Select a search result.</qt>"
 msgstr "<qt>Vyberte výsledek vyhledávání.</qt>"
 
-#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1170
+#: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1185
 msgid "IMDB Link"
 msgstr "IMDB odkaz"
 
-#: fetch/animenfofetcher.cpp:260 fetch/imdbfetcher.cpp:741
-#: fetch/imdbfetcher.cpp:1172
+#: fetch/animenfofetcher.cpp:260 fetch/imdbfetcher.cpp:746
+#: fetch/imdbfetcher.cpp:1187
 msgid "Alternative Titles"
 msgstr "Alternativní názvy"
 
-#: fetch/imdbfetcher.cpp:932 fetch/imdbfetcher.cpp:1171
+#: fetch/imdbfetcher.cpp:947 fetch/imdbfetcher.cpp:1186
 msgid "IMDB Rating"
 msgstr "IMDB hodnocení"
 
-#: fetch/imdbfetcher.cpp:1050 fetch/imdbfetcher.cpp:1173
+#: fetch/imdbfetcher.cpp:1065 fetch/imdbfetcher.cpp:1188
 msgid "Certifications"
 msgstr "Certifikace"
 
-#: fetch/imdbfetcher.cpp:1111
+#: fetch/imdbfetcher.cpp:1126
 msgid ""
 "The Internet Movie Database uses several different servers. Choose the one "
 "you wish to use."
@@ -1598,11 +1608,11 @@ msgstr ""
 "Internetová databáze filmů používá více serverů. Vyberte ten, který "
 "chcete používat."
 
-#: fetch/imdbfetcher.cpp:1117
+#: fetch/imdbfetcher.cpp:1132
 msgid "&Maximum cast: "
 msgstr "&Herecké obsazení: "
 
-#: fetch/imdbfetcher.cpp:1122
+#: fetch/imdbfetcher.cpp:1137
 msgid ""
 "The list of cast members may include many people. Set the maximum number "
 "returned from the search."
@@ -1610,31 +1620,40 @@ msgstr ""
 "Seznam členů obsazení může obsahovat mnoho lidí. Nastavte maximální "
 "počet, který má vyhledávání vrátit."
 
-#: fetch/imdbfetcher.cpp:1127
+#: fetch/discogsfetcher.cpp:679 fetch/imdbfetcher.cpp:1142
 msgid "Download cover &image"
 msgstr "Stáhnout obrázek &obálky"
 
-#: fetch/ibsfetcher.cpp:46
+#: fetch/ibsfetcher.cpp:47
 msgid "Internet Bookshop (ibs.it)"
 msgstr "Internet Bookshop (ibs.it)"
 
-#: fetch/fetchmanager.cpp:63
+#: fetch/fetchmanager.cpp:69
 msgid "Person"
 msgstr "Osoba"
 
-#: fetch/fetchmanager.cpp:64
+#: fetch/fetchmanager.cpp:70
 msgid "ISBN"
 msgstr "ISBN"
 
-#: fetch/fetchmanager.cpp:65
-msgid "UPC"
+#: fetch/fetchmanager.cpp:71
+#, fuzzy
+msgid "UPC/EAN"
 msgstr "UPC"
 
-#: fetch/fetchmanager.cpp:66
+#: fetch/fetchmanager.cpp:72
 msgid "Keyword"
 msgstr "Klíčové slovo"
 
-#: fetch/fetchmanager.cpp:67
+#: fetch/fetchmanager.cpp:74 translators/pdfimporter.cpp:173
+msgid "arXiv ID"
+msgstr ""
+
+#: fetch/fetchmanager.cpp:75
+msgid "Pubmed ID"
+msgstr ""
+
+#: fetch/fetchmanager.cpp:76
 msgid "Raw Query"
 msgstr "Hrubé hledání"
 
@@ -1650,23 +1669,102 @@ msgstr "Distributor"
 msgid "Episodes"
 msgstr "Epizody"
 
-#: newstuff/dialog.cpp:93
+#: fetch/arxivfetcher.cpp:53
+msgid "arXiv.org"
+msgstr ""
+
+#: fetch/crossreffetcher.cpp:83
+msgid "%1 requires a username and password."
+msgstr ""
+
+#: fetch/crossreffetcher.cpp:332
+msgid ""
+"CrossRef requires an account for access. Please read the terms and "
+"conditions and <a href='http://www.crossref.org/requestaccount/'>request an "
+"account</a>. Enter your OpenURL account information below."
+msgstr ""
+
+#: fetch/crossreffetcher.cpp:343
+#, fuzzy
+msgid "&Username: "
+msgstr "&Uživatel: "
+
+#: fetch/crossreffetcher.cpp:348
+#, fuzzy
+msgid ""
+"A username and password is required to access the CrossRef service. The "
+"password is stored as plain text in the Tellico configuration file."
+msgstr ""
+"Zadejte autentizační heslo používané databází z39.50. Většina "
+"serverů žádné nepotřebuje. Heslo bude v konfiguračním souboru Tellico "
+"uloženo jako prostý text."
+
+#: fetch/crossreffetcher.cpp:354
+#, fuzzy
+msgid "&Password: "
+msgstr "Hes&lo: "
+
+#: fetch/gcstarpluginfetcher.cpp:190
+#, fuzzy
+msgid "GCstar Plugin"
+msgstr "GCstar"
+
+#: fetch/gcstarpluginfetcher.cpp:404
+#, fuzzy
+msgid "Set the collection type of the data returned from the plugin."
+msgstr ""
+"Nastavte, jaký druh sbírky obsahují data vracená externím programem."
+
+#: fetch/gcstarpluginfetcher.cpp:409
+msgid "&Plugin: "
+msgstr ""
+
+#: fetch/gcstarpluginfetcher.cpp:415
+#, fuzzy
+msgid "Select the GCstar plugin used for the data source."
+msgstr "Vyberte vyhledávací klíče podporované zdrojem dat."
+
+#: fetch/gcstarpluginfetcher.cpp:420
+#, fuzzy
+msgid "Author: "
+msgstr "Autor"
+
+#: fetch/discogsfetcher.cpp:58
+#, fuzzy
+msgid "Discogs Audio Search"
+msgstr "Yahoo! Audio vyhledávání"
+
+#: fetch/discogsfetcher.cpp:668
+msgid "API &key: "
+msgstr ""
+
+#: fetch/discogsfetcher.cpp:674
+msgid ""
+"With your discogs.com account you receive an API key for the usage of their "
+"XML-based interface (See http://www.discogs.com/help/api)."
+msgstr ""
+
+#: fetch/discogsfetcher.cpp:718
+msgid "Discogs Link"
+msgstr ""
+
+#: newstuff/dialog.cpp:94
 msgid "Get Hot New Stuff"
 msgstr "Get Hot New Stuff"
 
-#: newstuff/dialog.cpp:113
+#: newstuff/dialog.cpp:114
 msgid "Version"
 msgstr "Verze"
 
-#: newstuff/dialog.cpp:115
+#: newstuff/dialog.cpp:116
 msgid "Downloads"
 msgstr "Stahování"
 
-#: newstuff/dialog.cpp:116
+#: newstuff/dialog.cpp:117
 msgid "Release Date"
 msgstr "Datum vydání"
 
-#: newstuff/dialog.cpp:120
+#: newstuff/dialog.cpp:121
 msgid ""
 "This is a list of all the items available for download. Previously installed "
 "items have a checkmark icon, while items with new version available have an "
@@ -1676,23 +1774,23 @@ msgstr ""
 "nainstalované položky mají ikonku zaškrtnutí, zatímco nové mají "
 "ikonku aktualizace."
 
-#: newstuff/dialog.cpp:136
+#: newstuff/dialog.cpp:137
 msgid "The name and license of the selected item"
 msgstr "Název a licence zvolené položky"
 
-#: newstuff/dialog.cpp:139
+#: newstuff/dialog.cpp:140
 msgid "The author of the selected item"
 msgstr "Autor zvolené položky"
 
-#: newstuff/dialog.cpp:141 newstuff/dialog.cpp:395
+#: newstuff/dialog.cpp:142 newstuff/dialog.cpp:396
 msgid "Install"
 msgstr "Instalace"
 
-#: newstuff/dialog.cpp:160
+#: newstuff/dialog.cpp:161
 msgid "Download and install the selected template."
 msgstr "Stáhnout a nainstalovat zvolenou šablonu"
 
-#: newstuff/dialog.cpp:163
+#: newstuff/dialog.cpp:164
 msgid ""
 "Download and install the selected script. Some scripts may need to be "
 "configured after being installed."
@@ -1700,34 +1798,82 @@ msgstr ""
 "Stáhnout a nainstalovat zvolený skript. Některé skripty je nutné po "
 "instalaci nakonfigurovat."
 
-#: newstuff/dialog.cpp:193
+#: newstuff/dialog.cpp:194
 msgid "A description of the selected item is shown here."
 msgstr "Popis zvolené položky."
 
-#: newstuff/dialog.cpp:223
+#: newstuff/dialog.cpp:224
 msgid "Downloading information..."
 msgstr "Stahuji informace..."
 
-#: controller.cpp:134 fetchdialog.cpp:219 fetchdialog.cpp:298
-#: fetchdialog.cpp:416 fetchdialog.cpp:471 newstuff/dialog.cpp:296
-#: newstuff/dialog.cpp:323 newstuff/dialog.cpp:433 statusbar.cpp:83
+#: controller.cpp:135 fetchdialog.cpp:226 fetchdialog.cpp:333
+#: fetchdialog.cpp:451 fetchdialog.cpp:506 newstuff/dialog.cpp:297
+#: newstuff/dialog.cpp:324 newstuff/dialog.cpp:434 statusbar.cpp:83
 msgid "Ready."
 msgstr "Připraven."
 
-#: newstuff/dialog.cpp:395
+#: newstuff/dialog.cpp:396
 msgid ""
 "_: Update Stuff\n"
 "Update"
 msgstr "Aktualizace"
 
-#: newstuff/dialog.cpp:412
+#: newstuff/dialog.cpp:413
 msgid "Installing item..."
 msgstr "Instaluji položku..."
 
-#: translators/bibteximporter.cpp:58
+#: translators/bibteximporter.cpp:79
+#, fuzzy
+msgid "No valid bibtex entries were found"
+msgstr "V souboru %1 nebyly nalezeny žádné platné Bibtex záznamy"
+
+#: translators/bibteximporter.cpp:96
 #, c-format
 msgid "No valid bibtex entries were found in file - %1"
 msgstr "V souboru %1 nebyly nalezeny žádné platné Bibtex záznamy"
+
+#: translators/bibtexexporter.cpp:200 translators/bibteximporter.cpp:286
+msgid "Bibtex Options"
+msgstr "Možnosti Bibtex"
+
+#: translators/bibteximporter.cpp:287
+#, fuzzy
+msgid "Use Unicode (UTF-8) encoding"
+msgstr "Kódovat v Unicode (UTF-8)"
+
+#: translators/bibteximporter.cpp:288
+#, fuzzy
+msgid "Read the imported file in Unicode (UTF-8)."
+msgstr "Kódovat exportovaný soubor v Unicode (UTF-8)."
+
+#: translators/bibteximporter.cpp:289
+#, fuzzy
+msgid "Use user locale (%1) encoding"
+msgstr "Kódovat podle uživatelského nastavení (%1)"
+
+#: translators/bibteximporter.cpp:293
+#, fuzzy
+msgid "Read the imported file in the local encoding."
+msgstr "Kódovat exportovaný soubor v místním formátu."
+
+#: translators/tellicozipexporter.cpp:35
+msgid "Tellico Zip File"
+msgstr "Tellico zip soubor"
+
+#: importdialog.cpp:245 mainwindow.cpp:1101 mainwindow.cpp:1267
+#: translators/tellicozipexporter.cpp:39
+msgid "*.tc *.bc|Tellico Files (*.tc)"
+msgstr "*.tc *.tc|soubory Tellico (*.tc)"
+
+#: configdialog.cpp:1017 importdialog.cpp:297 mainwindow.cpp:1105
+#: mainwindow.cpp:1269 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
+#: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
+#: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:89
+#: translators/onixexporter.cpp:67 translators/pilotdbexporter.cpp:47
+#: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
+#: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:105
+msgid "*|All Files"
+msgstr "*|Všechny soubory"
 
 #: translators/alexandriaexporter.cpp:43
 msgid "Alexandria"
@@ -1741,21 +1887,21 @@ msgstr ""
 "<qt>Knihovna formátu Alexandria s názvem <i>%1</i> už existuje. Všechny "
 "knihy v této knihovně mohou být přepsány.</qt>"
 
-#: filehandler.cpp:138 translators/tellicoimporter.cpp:108
+#: filehandler.cpp:141 translators/tellicoimporter.cpp:113
 #: translators/xmlimporter.cpp:43 translators/xmlimporter.cpp:60
 msgid "There is an XML parsing error in line %1, column %2."
 msgstr "Při načítání XML byla na řádce %1, sloupci %2 chyba."
 
-#: filehandler.cpp:140 translators/tellicoimporter.cpp:110
+#: filehandler.cpp:143 translators/tellicoimporter.cpp:115
 #: translators/xmlimporter.cpp:45 translators/xmlimporter.cpp:62
 msgid "The error message from Qt is:"
 msgstr "Chybová zpráva z Qt je:"
 
-#: translators/tellicoimporter.cpp:147
+#: translators/tellicoimporter.cpp:152
 msgid "It is from a future version of Tellico."
 msgstr "Je to z budoucí verze Tellico."
 
-#: translators/tellicoimporter.cpp:156
+#: translators/tellicoimporter.cpp:162
 msgid ""
 "Tellico is converting the file to a more recent document format. Information "
 "loss may occur if an older version of Tellico is used to read this file in "
@@ -1765,32 +1911,32 @@ msgstr ""
 "by by byla ke čtení tohoto souboru v budoucnu použita starší verze "
 "Tellico, mohlo by dojít ke ztrátě dat."
 
-#: translators/bibtexhandler.cpp:245 translators/risimporter.cpp:265
-#: translators/risimporter.cpp:269 translators/tellicoimporter.cpp:354
+#: translators/bibtexhandler.cpp:245 translators/risimporter.cpp:286
+#: translators/risimporter.cpp:290 translators/tellicoimporter.cpp:367
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: translators/tellicoimporter.cpp:756
+#: translators/tellicoimporter.cpp:777
 msgid "The file is empty."
 msgstr "Soubor je prázdný."
 
-#: translators/tellicoimporter.cpp:774
+#: translators/tellicoimporter.cpp:795
 msgid "The file contains no collection data."
 msgstr "Soubor neobsahuje žádná data sbírky."
 
-#: translators/tellicoimporter.cpp:919
+#: translators/tellicoimporter.cpp:940
 msgid "Unread Books"
 msgstr "Nepřečtené knihy"
 
-#: translators/tellicoimporter.cpp:929
+#: translators/tellicoimporter.cpp:950
 msgid "Old Movies"
 msgstr "Staré filmy"
 
-#: translators/tellicoimporter.cpp:947
+#: translators/tellicoimporter.cpp:968
 msgid "80's Music"
 msgstr "Hudba 80. let"
 
-#: translators/tellicoimporter.cpp:959
+#: translators/tellicoimporter.cpp:980
 msgid "Favorites"
 msgstr "Oblíbené"
 
@@ -1798,30 +1944,50 @@ msgstr "Oblíbené"
 msgid "Scanning audio files..."
 msgstr "Procházím audio soubory..."
 
-#: translators/audiofileimporter.cpp:171 xslt.cpp:4
+#: translators/audiofileimporter.cpp:129
+#, fuzzy
+msgid "Bitrate"
+msgstr "Bibtex"
+
+#: translators/audiofileimporter.cpp:160 translators/audiofileimporter.cpp:170
+msgid "Tracks (Disc %1)"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:189 xslt.cpp:4
 msgid "(Various)"
 msgstr "(Různé)"
 
-#: translators/audiofileimporter.cpp:319
+#: translators/audiofileimporter.cpp:340
 msgid "Audio File Options"
 msgstr "Možnosti audio souboru"
 
-#: translators/audiofileimporter.cpp:321
+#: translators/audiofileimporter.cpp:342
 msgid "Recursive &folder search"
 msgstr "Rekurzívní hledání v &adresářích"
 
-#: translators/audiofileimporter.cpp:322
+#: translators/audiofileimporter.cpp:343
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Je-li zaškrtnuto, v adresářích budou rekurzívně vyhledávány audio "
 "soubory."
 
-#: translators/audiofileimporter.cpp:326
-msgid "&Include file location"
+#: translators/audiofileimporter.cpp:347
+msgid "Include file &location"
 msgstr "&Začlenit umístění souboru"
 
-#: translators/audiofileimporter.cpp:327
+#: translators/audiofileimporter.cpp:348
 msgid "If checked, the file names for each track are added to the entries."
+msgstr ""
+"Je-li zaškrtnuto, budou názvy souborů každé stopy přidány do "
+"záznamů."
+
+#: translators/audiofileimporter.cpp:352
+msgid "Include &bitrate"
+msgstr ""
+
+#: translators/audiofileimporter.cpp:353
+#, fuzzy
+msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
 "Je-li zaškrtnuto, budou názvy souborů každé stopy přidány do "
 "záznamů."
@@ -1830,21 +1996,11 @@ msgstr ""
 msgid "CSV"
 msgstr "CSV"
 
-#: importdialog.cpp:213 translators/csvexporter.cpp:44
+#: importdialog.cpp:254 translators/csvexporter.cpp:44
 msgid "*.csv|CSV Files (*.csv)"
 msgstr "*.csv|CSV soubory (*.csv)"
 
-#: configdialog.cpp:992 importdialog.cpp:246 mainwindow.cpp:1060
-#: mainwindow.cpp:1217 reportdialog.cpp:195 translators/bibtexexporter.cpp:52
-#: translators/bibtexmlexporter.cpp:40 translators/csvexporter.cpp:44
-#: translators/gcfilmsexporter.cpp:41 translators/htmlexporter.cpp:88
-#: translators/onixexporter.cpp:67 translators/pilotdbexporter.cpp:47
-#: translators/tellicoxmlexporter.cpp:60 translators/tellicozipexporter.cpp:39
-#: translators/xsltexporter.cpp:41 translators/xsltimporter.cpp:86
-msgid "*|All Files"
-msgstr "*|Všechny soubory"
-
-#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:167
+#: translators/csvexporter.cpp:109 translators/csvimporter.cpp:221
 msgid "CSV Options"
 msgstr "Možnosti CSV"
 
@@ -1856,11 +2012,11 @@ msgstr "Začlenit názvy polí coby hlavičky sloupců"
 msgid "If checked, a header row will be added with the field titles."
 msgstr "Je-li zaškrtnuto, bude přidána řada hlaviček s názvy polí."
 
-#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:186
+#: translators/csvexporter.cpp:117 translators/csvimporter.cpp:240
 msgid "Delimiter"
 msgstr "Oddělovač"
 
-#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:189
+#: translators/csvexporter.cpp:120 translators/csvimporter.cpp:243
 msgid ""
 "In addition to a comma, other characters may be used as a delimiter, "
 "separating each value in the file."
@@ -1872,7 +2028,7 @@ msgstr ""
 msgid "Comma"
 msgstr "Čárka"
 
-#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:196
+#: translators/csvexporter.cpp:126 translators/csvimporter.cpp:250
 msgid "Use a comma as the delimiter."
 msgstr "Použít čárku jako oddělovač."
 
@@ -1880,7 +2036,7 @@ msgstr "Použít čárku jako oddělovač."
 msgid "Semicolon"
 msgstr "Středník"
 
-#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:201
+#: translators/csvexporter.cpp:131 translators/csvimporter.cpp:255
 msgid "Use a semi-colon as the delimiter."
 msgstr "Použít střední jako oddělovač."
 
@@ -1888,7 +2044,7 @@ msgstr "Použít střední jako oddělovač."
 msgid "Tab"
 msgstr "Tabulátor"
 
-#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:206
+#: translators/csvexporter.cpp:136 translators/csvimporter.cpp:260
 msgid "Use a tab as the delimiter."
 msgstr "Použít tabulátor jako oddělovač."
 
@@ -1896,38 +2052,38 @@ msgstr "Použít tabulátor jako oddělovač."
 msgid "Other"
 msgstr "Jiné"
 
-#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:211
+#: translators/csvexporter.cpp:141 translators/csvimporter.cpp:265
 msgid "Use a custom string as the delimiter."
 msgstr "Použít vlastní řetězec jako oddělovač."
 
-#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:217
+#: translators/csvexporter.cpp:146 translators/csvimporter.cpp:272
 msgid "A custom string, such as a colon, may be used as a delimiter."
 msgstr ""
 "Jako oddělovač může být použit vlastní řetězec, třeba dvojtečka."
 
-#: translators/filelistingimporter.cpp:62
+#: translators/filelistingimporter.cpp:63
 msgid "Scanning files..."
 msgstr "Procházím soubory..."
 
-#: translators/filelistingimporter.cpp:198
+#: translators/filelistingimporter.cpp:191
 msgid "File Listing Options"
 msgstr "Možnosti výpisu souborů"
 
-#: translators/filelistingimporter.cpp:200
+#: translators/filelistingimporter.cpp:193
 msgid "Recursive folder search"
 msgstr "Rekurzívní hledání v adresářích"
 
-#: translators/filelistingimporter.cpp:201
+#: translators/filelistingimporter.cpp:194
 msgid "If checked, folders are recursively searched for all files."
 msgstr ""
 "Je-li zaškrtnuto, budou v adresářích rekurzívně vyhledávány všechny "
 "soubory."
 
-#: translators/filelistingimporter.cpp:205
+#: translators/filelistingimporter.cpp:198
 msgid "Generate file previews"
 msgstr "Generovat náhledy souborů"
 
-#: translators/filelistingimporter.cpp:206
+#: translators/filelistingimporter.cpp:199
 msgid ""
 "If checked, previews of the file contents are generated, which can slow down "
 "the folder listing."
@@ -2013,19 +2169,23 @@ msgstr ""
 msgid "GCfilms"
 msgstr "GCfilms"
 
-#: importdialog.cpp:231 translators/gcfilmsexporter.cpp:41
+#: importdialog.cpp:273 translators/gcfilmsexporter.cpp:41
 msgid "*.gcf|GCfilms Data Files (*.gcf)"
 msgstr "*.gcf|Datové soubory GCfilms (*.gcf)"
+
+#: importdialog.cpp:272 translators/gcfilmsexporter.cpp:43
+msgid "*.gcs|GCstar Data Files (*.gcs)"
+msgstr "*.gcs|Datové soubory GCstar (*.gcs)"
 
 #: translators/xsltexporter.cpp:37
 msgid "XSLT"
 msgstr "XSLT"
 
-#: translators/xsltexporter.cpp:69 translators/xsltimporter.cpp:79
+#: translators/xsltexporter.cpp:69 translators/xsltimporter.cpp:98
 msgid "XSLT Options"
 msgstr "Možnosti XSLT"
 
-#: translators/xsltexporter.cpp:74 translators/xsltimporter.cpp:82
+#: translators/xsltexporter.cpp:74 translators/xsltimporter.cpp:101
 msgid "XSLT file:"
 msgstr "XSLT soubor:"
 
@@ -2041,7 +2201,7 @@ msgstr "Možnosti Alexandria"
 msgid "&Library:"
 msgstr "&Knihovna:"
 
-#: importdialog.cpp:269 translators/bibtexmlexporter.cpp:36
+#: translators/bibtexmlexporter.cpp:36
 msgid "Bibtexml"
 msgstr "Bibtexml"
 
@@ -2053,20 +2213,20 @@ msgstr "*.xml|Bibtexml soubory (*.xml)"
 msgid "XML"
 msgstr "XML"
 
-#: importdialog.cpp:205 importdialog.cpp:218 importdialog.cpp:222
-#: mainwindow.cpp:1058 translators/tellicoxmlexporter.cpp:60
+#: importdialog.cpp:246 importdialog.cpp:259 importdialog.cpp:264
+#: mainwindow.cpp:1103 translators/tellicoxmlexporter.cpp:60
 msgid "*.xml|XML Files (*.xml)"
 msgstr "*.xml|XML soubory (*.xml)"
 
-#: translators/tellicoxmlexporter.cpp:464
+#: translators/tellicoxmlexporter.cpp:480
 msgid "Tellico XML Options"
 msgstr "Možnosti Tellico XML"
 
-#: translators/tellicoxmlexporter.cpp:467
+#: translators/tellicoxmlexporter.cpp:483
 msgid "Include images in XML document"
 msgstr "Začlenit do XML dokumentu obrázky"
 
-#: translators/tellicoxmlexporter.cpp:469
+#: translators/tellicoxmlexporter.cpp:485
 msgid ""
 "If checked, the images in the document will be included in the XML stream as "
 "base64 encoded elements."
@@ -2074,31 +2234,27 @@ msgstr ""
 "Je-li zaškrtnuto, budou obrázky dokumentu začleněny do XML proudu jako "
 "base64 kódované elementy."
 
-#: translators/importer.h:95
+#: translators/importer.h:100
 msgid "Loading data..."
 msgstr "Načítám data..."
 
-#: translators/importer.h:95
+#: translators/importer.h:100
 msgid "Loading %1..."
 msgstr "Načítám %1..."
 
-#: importdialog.cpp:268 translators/bibtexexporter.cpp:48
+#: translators/bibtexexporter.cpp:48
 msgid "Bibtex"
 msgstr "Bibtex"
 
-#: importdialog.cpp:209 translators/bibtexexporter.cpp:52
+#: importdialog.cpp:250 translators/bibtexexporter.cpp:52
 msgid "*.bib|Bibtex Files (*.bib)"
 msgstr "*.bib|Bibtex soubory (*.bib)"
 
-#: translators/bibtexexporter.cpp:201
-msgid "Bibtex Options"
-msgstr "Možnosti Bibtex"
-
-#: translators/bibtexexporter.cpp:204
+#: translators/bibtexexporter.cpp:203
 msgid "Expand string macros"
 msgstr "Expandovat řetězcová makra"
 
-#: translators/bibtexexporter.cpp:206
+#: translators/bibtexexporter.cpp:205
 msgid ""
 "If checked, the string macros will be expanded and no @string{} entries will "
 "be written."
@@ -2106,38 +2262,38 @@ msgstr ""
 "Je-li zaškrtnuto, řetězcová makra budou expandována a nebudou zapsány "
 "žádné záznamy @řetězec{}."
 
-#: translators/bibtexexporter.cpp:209
+#: translators/bibtexexporter.cpp:208
 msgid "Use URL package"
 msgstr "Použít zabalení URL"
 
-#: translators/bibtexexporter.cpp:211
+#: translators/bibtexexporter.cpp:210
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
 msgstr "Je-li zaškrtnuto, budou URL pole zabalena do deklarace \\url."
 
-#: translators/bibtexexporter.cpp:214
+#: translators/bibtexexporter.cpp:213
 msgid "Skip entries with empty citation keys"
 msgstr "Přeskočit záznamy s prázdnými citačními klíči"
 
-#: translators/bibtexexporter.cpp:216
+#: translators/bibtexexporter.cpp:215
 msgid "If checked, any entries without a bibtex citation key will be skipped."
 msgstr ""
 "Je-li zaškrtnuto, budou přeskočeny všechny záznamy bez Bibtex "
 "citačního klíče."
 
-#: translators/bibtexexporter.cpp:220
+#: translators/bibtexexporter.cpp:219
 msgid "Bibtex quotation style:"
 msgstr "Způsob Bibtex citace:"
 
-#: translators/bibtexexporter.cpp:222 translators/bibtexexporter.cpp:229
-#: translators/bibtexexporter.cpp:260
+#: translators/bibtexexporter.cpp:221 translators/bibtexexporter.cpp:228
+#: translators/bibtexexporter.cpp:259
 msgid "Braces"
 msgstr "Závorky"
 
-#: translators/bibtexexporter.cpp:223 translators/bibtexexporter.cpp:231
+#: translators/bibtexexporter.cpp:222 translators/bibtexexporter.cpp:230
 msgid "Quotes"
 msgstr "Uvozovky"
 
-#: translators/bibtexexporter.cpp:224
+#: translators/bibtexexporter.cpp:223
 msgid ""
 "<qt>The quotation style used when exporting bibtex. All field values will  "
 "be escaped with either braces or quotation marks.</qt>"
@@ -2145,48 +2301,39 @@ msgstr ""
 "<qt>Způsob citace při exportu Bibtex. Všechny hodnoty polí budou "
 "vloženy buď do složených závorek nebo do uvozovek.</qt>"
 
-#: translators/tellicozipexporter.cpp:35
-msgid "Tellico Zip File"
-msgstr "Tellico zip soubor"
-
-#: importdialog.cpp:204 mainwindow.cpp:1056 mainwindow.cpp:1215
-#: translators/tellicozipexporter.cpp:39
-msgid "*.tc *.bc|Tellico Files (*.tc)"
-msgstr "*.tc *.tc|soubory Tellico (*.tc)"
-
-#: translators/csvimporter.cpp:175
+#: translators/csvimporter.cpp:229
 msgid "Select the type of collection being imported."
 msgstr "Vyberte importovaný druh sbírky."
 
-#: translators/csvimporter.cpp:181
+#: translators/csvimporter.cpp:235
 msgid "&First row contains field titles"
 msgstr "&První řada obsahuje názvy polí"
 
-#: translators/csvimporter.cpp:182
+#: translators/csvimporter.cpp:236
 msgid "If checked, the first row is used as field titles."
 msgstr "Je-li zaškrtnuto, bude první řada použita jako názvy polí."
 
-#: translators/csvimporter.cpp:194
+#: translators/csvimporter.cpp:248
 msgid "&Comma"
 msgstr "Čár&ka"
 
-#: translators/csvimporter.cpp:200
+#: translators/csvimporter.cpp:254
 msgid "&Semicolon"
 msgstr "&Středník"
 
-#: translators/csvimporter.cpp:205
+#: translators/csvimporter.cpp:259
 msgid "Ta&b"
 msgstr "Ta&bulátor"
 
-#: translators/csvimporter.cpp:210
+#: translators/csvimporter.cpp:264
 msgid "Ot&her:"
 msgstr "&Jiný:"
 
-#: translators/csvimporter.cpp:234
+#: translators/csvimporter.cpp:289
 msgid "The table shows up to the first five lines of the CSV file."
 msgstr "Tabulka se zobrazuje až po prvních pět řádků souboru CSV."
 
-#: translators/csvimporter.cpp:241
+#: translators/csvimporter.cpp:296
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
 "column, selecting the field, then clicking the <i>Assign Field</i> "
@@ -2195,24 +2342,30 @@ msgstr ""
 "<qt> Nastavte každý sloupec tak, aby odpovídal poli ve sbírce. Vyberte "
 "sloupec, označte pole a klepněte na tlačítko <i>Přiřadit pole</i>.</qt>"
 
-#: translators/csvimporter.cpp:243
+#: translators/csvimporter.cpp:298
 msgid "Co&lumn:"
 msgstr "S&loupec:"
 
-#: translators/csvimporter.cpp:252
+#: translators/csvimporter.cpp:307
 msgid "&Data field in this column:"
 msgstr "&Datové pole v tomto sloupci:"
 
-#: translators/csvimporter.cpp:260
+#: translators/csvimporter.cpp:315
 msgid "&Assign Field"
 msgstr "Přiř&adit pole"
 
+#: translators/csvimporter.cpp:347
+msgid ""
+"At least one column must be assigned to a field. Only assigned columns will "
+"be imported."
+msgstr ""
+
 #: collectionfieldsdialog.cpp:409 collectionfieldsdialog.cpp:412
-#: translators/csvimporter.cpp:411 translators/csvimporter.cpp:514
+#: translators/csvimporter.cpp:396 translators/csvimporter.cpp:510
 msgid "New Field"
 msgstr "Nové pole"
 
-#: translators/risimporter.cpp:267
+#: translators/risimporter.cpp:288
 msgid "PDF"
 msgstr "PDF"
 
@@ -2224,7 +2377,7 @@ msgstr "PilotDB"
 msgid "*.pdb|Pilot Database Files (*.pdb)"
 msgstr "*.pdb|soubory databáze Pilot (*.pdb)"
 
-#: detailedlistview.cpp:67 detailedlistview.cpp:299
+#: detailedlistview.cpp:67 detailedlistview.cpp:297
 #: translators/pilotdbexporter.cpp:143
 msgid "View Columns"
 msgstr "Zobrazit sloupce"
@@ -2237,69 +2390,81 @@ msgstr "Možnosti PilotDB"
 msgid "Set PDA backup flag for database"
 msgstr "Nastavit pro databázi značku zálohování na PDA"
 
-#: translators/gcfilmsimporter.cpp:105 translators/gcfilmsimporter.cpp:250
+#: translators/gcfilmsimporter.cpp:110 translators/gcfilmsimporter.cpp:255
 msgid "<qt>The file is not a valid GCstar data file.</qt>"
 msgstr "<qt>Soubor není platným datovým souborem GCstar.</qt>"
 
-#: mainwindow.cpp:1699 translators/gcfilmsimporter.cpp:243
-#: translators/xsltimporter.cpp:57
+#: mainwindow.cpp:1738 translators/gcfilmsimporter.cpp:248
+#: translators/xsltimporter.cpp:76
 msgid "Tellico encountered an error in XSLT processing."
 msgstr "Tellico narazil na chybu při zpracovávání XSLT."
 
-#: translators/xsltimporter.cpp:45 translators/xsltimporter.cpp:51
+#: translators/xsltimporter.cpp:64 translators/xsltimporter.cpp:70
 msgid "A valid XSLT file is needed to import the file."
 msgstr "K importu tohoto souboru je potřeba platný XSLT soubor."
 
-#: configdialog.cpp:990 translators/xsltimporter.cpp:85
+#: configdialog.cpp:1015 translators/xsltimporter.cpp:104
 msgid "*.xsl|XSL Files (*.xsl)"
 msgstr "*.xsl|XSL soubory (*.xsl)"
 
-#: translators/htmlexporter.cpp:84
+#: translators/htmlexporter.cpp:85
 msgid "HTML"
 msgstr "HTML"
 
-#: reportdialog.cpp:195 translators/htmlexporter.cpp:88
+#: reportdialog.cpp:195 translators/htmlexporter.cpp:89
 msgid "*.html|HTML Files (*.html)"
 msgstr "*.html|HTML soubory (*.html)"
 
-#: groupview.cpp:479 mainwindow.cpp:1552 mainwindow.cpp:1592
-#: translators/htmlexporter.cpp:315
+#: groupview.cpp:479 mainwindow.cpp:1591 mainwindow.cpp:1631
+#: translators/htmlexporter.cpp:316
 msgid "People"
 msgstr "Lidé"
 
-#: translators/htmlexporter.cpp:319
+#: translators/htmlexporter.cpp:320
 msgid "(grouped by %1)"
 msgstr "(seskupeno podle %1)"
 
-#: translators/htmlexporter.cpp:464
+#: translators/htmlexporter.cpp:465
 msgid "HTML Options"
 msgstr "Možnosti HTML"
 
-#: translators/htmlexporter.cpp:467
+#: translators/htmlexporter.cpp:468
 msgid "Print field headers"
 msgstr "Tisk hlaviček polí"
 
-#: configdialog.cpp:298 translators/htmlexporter.cpp:468
+#: configdialog.cpp:307 translators/htmlexporter.cpp:469
 msgid "If checked, the field names will be printed as table headers."
 msgstr ""
 "Je-li zaškrtnuto, budou názvy polí vytištěny jako hlavičky tabulky."
 
-#: translators/htmlexporter.cpp:472
+#: translators/htmlexporter.cpp:473
 msgid "Group the entries"
 msgstr "Seskupit záznamy"
 
-#: configdialog.cpp:305 translators/htmlexporter.cpp:473
+#: configdialog.cpp:314 translators/htmlexporter.cpp:474
 msgid "If checked, the entries will be grouped by the selected field."
 msgstr "Je-li zaškrtnuto, budou záznamy seskupeny podle zvoleného pole."
 
-#: translators/htmlexporter.cpp:477
+#: translators/htmlexporter.cpp:478
 msgid "Export individual entry files"
 msgstr "Exportovat samostatné soubory záznamů"
 
-#: translators/htmlexporter.cpp:478
+#: translators/htmlexporter.cpp:479
 msgid "If checked, individual files will be created for each entry."
 msgstr ""
 "Je-li zaškrtnuto, budou pro každý záznam vytvořeny samostatné soubory."
+
+#: translators/pdfimporter.cpp:92 translators/pdfimporter.cpp:100
+#, fuzzy
+msgid "Tellico was unable to read any metadata from the PDF file."
+msgstr "Tellico nemůže načíst obrázek ze souboru %1."
+
+#: translators/pdfimporter.cpp:231
+msgid ""
+"Tellico is able to download information about entries with a DOI from "
+"CrossRef.org. However, you must create an CrossRef account and add a new "
+"data source with your account information."
+msgstr ""
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -2416,27 +2581,27 @@ msgstr "Závislé"
 msgid "Date"
 msgstr "Datum"
 
-#: entryupdater.cpp:83
+#: entryupdater.cpp:81
 msgid "Updating %1..."
 msgstr "Aktualizuji %1..."
 
-#: entryupdater.cpp:85
+#: entryupdater.cpp:83
 msgid "Updating entries..."
 msgstr "Aktualizuji záznamy..."
 
-#: entryupdater.cpp:87
+#: entryupdater.cpp:85
 msgid "Update Entries"
 msgstr "Aktualizovat záznamy"
 
-#: entryupdater.cpp:101
+#: entryupdater.cpp:99
 msgid "Updating <b>%1</b>..."
 msgstr "Aktualizuji <b>%1</b>..."
 
-#: entryupdater.cpp:211
+#: entryupdater.cpp:209
 msgid "Select Match"
 msgstr "Vyberte správný výsledek"
 
-#: entryupdater.cpp:219
+#: entryupdater.cpp:217
 msgid ""
 "<qt><b>%1</b> returned multiple results which could match <b>%2</b>, the "
 "entry currently in the collection. Please select the correct match.</qt>"
@@ -2467,23 +2632,23 @@ msgid ""
 "Group"
 msgstr "Skupina"
 
-#: importdialog.cpp:50 importdialog.cpp:56
+#: importdialog.cpp:54 importdialog.cpp:60
 msgid "Import Options"
 msgstr "Možnosti importu"
 
-#: importdialog.cpp:58
+#: importdialog.cpp:62
 msgid "&Replace current collection"
 msgstr "&Nahradit stávající sbírku"
 
-#: importdialog.cpp:59
+#: importdialog.cpp:63
 msgid "Replace the current collection with the contents of the imported file."
 msgstr "Nahradit stávající sbírku obsahem importovaného souboru."
 
-#: importdialog.cpp:61
+#: importdialog.cpp:65
 msgid "A&ppend to current collection"
 msgstr "Př&ipojit ke stávající sbírce"
 
-#: importdialog.cpp:62
+#: importdialog.cpp:66
 msgid ""
 "Append the contents of the imported file to the current collection. This is "
 "only possible when the collection types match."
@@ -2491,11 +2656,11 @@ msgstr ""
 "Připojit obsah importovaného souboru ke stávající sbírce. Toto je "
 "možné, pouze pokud se shodují druhy sbírek."
 
-#: importdialog.cpp:65
+#: importdialog.cpp:69
 msgid "&Merge with current collection"
 msgstr "&Sloučit se stávající sbírkou"
 
-#: importdialog.cpp:66
+#: importdialog.cpp:70
 msgid ""
 "Merge the contents of the imported file to the current collection. This is "
 "only possible when the collection types match. Entries must match exactly in "
@@ -2505,33 +2670,28 @@ msgstr ""
 "možné, pouze pokud se shodují druhy sbírek. Aby byly záznamy sloučeny, "
 "musí být v přesně stejném pořadí."
 
-#: importdialog.cpp:226
+#: importdialog.cpp:95 mainwindow.cpp:318 rc.cpp:9
+#, no-c-format
+msgid "&Import"
+msgstr "&Importovat"
+
+#: importdialog.cpp:268
 msgid "*.ris|RIS Files (*.ris)"
 msgstr "*.ris|RIS soubory (*.ris)"
 
-#: importdialog.cpp:230
-msgid "*.gcs|GCstar Data Files (*.gcs)"
-msgstr "*.gcs|Datové soubory GCstar (*.gcs)"
-
-#: importdialog.cpp:235
+#: importdialog.cpp:277
 msgid "*.amc|AMC Data Files (*.amc)"
 msgstr "*.amc|AMC datové soubory (*.amc)"
 
-#: importdialog.cpp:271
-msgid "MODS"
-msgstr "MODS"
+#: importdialog.cpp:281
+#, fuzzy
+msgid "*.pdf|PDF Files (*.pdf)"
+msgstr "*.pdb|soubory databáze Pilot (*.pdb)"
 
-#: importdialog.cpp:272
-msgid "RIS"
-msgstr "RIS"
-
-#: importdialog.cpp:273
-msgid "GCstar"
-msgstr "GCstar"
-
-#: importdialog.cpp:274
-msgid "AMC"
-msgstr "AMC"
+#: importdialog.cpp:285
+#, fuzzy
+msgid "*.reflib|Referencer Files (*.reflib)"
+msgstr "*.ris|RIS soubory (*.ris)"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -2568,6 +2728,11 @@ msgstr ""
 #, c-format
 msgid "Tellico is unable to load an image from the file - %1."
 msgstr "Tellico nemůže načíst obrázek ze souboru %1."
+
+#: entryiconview.cpp:287
+#, fuzzy
+msgid "&Sort By"
+msgstr "&Port: "
 
 #: loandialog.cpp:40
 msgid "Loan Dialog"
@@ -2640,566 +2805,631 @@ msgstr ""
 "kalendáře <em>úkol</em>, který můžete spravovat pomocí programu "
 "KOrganizer. Přepínač je aktivní, pouze pokud nastavíte datum vrácení."
 
-#: mainwindow.cpp:195
+#: mainwindow.cpp:188
 msgid "Create a new collection"
 msgstr "Vytvořit novou sbírku"
 
-#: mainwindow.cpp:199
+#: mainwindow.cpp:192
 msgid "New &Book Collection"
 msgstr "Nová sbírka &knih"
 
-#: mainwindow.cpp:201
+#: mainwindow.cpp:194
 msgid "Create a new book collection"
 msgstr "Vytvořit novou sbírku knih"
 
-#: mainwindow.cpp:207
+#: mainwindow.cpp:200
 msgid "New B&ibliography"
 msgstr "Nová &bibliografie"
 
-#: mainwindow.cpp:209
+#: mainwindow.cpp:202
 msgid "Create a new bibtex bibliography"
 msgstr "Vytvořit novou bibtex bibliografii"
 
-#: mainwindow.cpp:215
+#: mainwindow.cpp:208
 msgid "New &Comic Book Collection"
 msgstr "Nová sbírka ko&miksů"
 
-#: mainwindow.cpp:217
+#: mainwindow.cpp:210
 msgid "Create a new comic book collection"
 msgstr "Vytvořit novou sbírku komiksů"
 
-#: mainwindow.cpp:223
+#: mainwindow.cpp:216
 msgid "New &Video Collection"
 msgstr "Nová &video sbírka"
 
-#: mainwindow.cpp:225
+#: mainwindow.cpp:218
 msgid "Create a new video collection"
 msgstr "Vytvořit novou video sbírku"
 
-#: mainwindow.cpp:231
+#: mainwindow.cpp:224
 msgid "New &Music Collection"
 msgstr "Nová sbírka &hudby"
 
-#: mainwindow.cpp:233
+#: mainwindow.cpp:226
 msgid "Create a new music collection"
 msgstr "Vytvořit novou sbírku hudby"
 
-#: mainwindow.cpp:239
+#: mainwindow.cpp:232
 msgid "New C&oin Collection"
 msgstr "Nová sbírka min&cí"
 
-#: mainwindow.cpp:241
+#: mainwindow.cpp:234
 msgid "Create a new coin collection"
 msgstr "Vytvořit novou sbírku mincí"
 
-#: mainwindow.cpp:247
+#: mainwindow.cpp:240
 msgid "New &Stamp Collection"
 msgstr "Nová sbírka &známek"
 
-#: mainwindow.cpp:249
+#: mainwindow.cpp:242
 msgid "Create a new stamp collection"
 msgstr "Vytvořit novou sbírku známek"
 
-#: mainwindow.cpp:255
+#: mainwindow.cpp:248
 msgid "New C&ard Collection"
 msgstr "Nová sbírka &karet"
 
-#: mainwindow.cpp:257
+#: mainwindow.cpp:250
 msgid "Create a new trading card collection"
 msgstr "Vytvořit novou sbírku výměnných karet"
 
-#: mainwindow.cpp:263
+#: mainwindow.cpp:256
 msgid "New &Wine Collection"
 msgstr "Nová sbírka &vín"
 
-#: mainwindow.cpp:265
+#: mainwindow.cpp:258
 msgid "Create a new wine collection"
 msgstr "Vytvořit novou sbírku vín"
 
-#: mainwindow.cpp:271
+#: mainwindow.cpp:264
 msgid "New &Game Collection"
 msgstr "Nová sbírka &her"
 
-#: mainwindow.cpp:273
+#: mainwindow.cpp:266
 msgid "Create a new game collection"
 msgstr "Vytvořit novou sbírku her"
 
-#: mainwindow.cpp:279
+#: mainwindow.cpp:272
+#, fuzzy
+msgid "New Boa&rd Game Collection"
+msgstr "Nová sbírka &her"
+
+#: mainwindow.cpp:274
+#, fuzzy
+msgid "Create a new board game collection"
+msgstr "Vytvořit novou sbírku her"
+
+#: mainwindow.cpp:280
 msgid "New &File Catalog"
 msgstr "Nový katalog &souborů"
 
-#: mainwindow.cpp:281
+#: mainwindow.cpp:282
 msgid "Create a new file catalog"
 msgstr "Vytvořit nový katalog souborů"
 
-#: mainwindow.cpp:287
+#: mainwindow.cpp:288
 msgid "New C&ustom Collection"
 msgstr "Nová &vlastní sbírka"
 
-#: mainwindow.cpp:289
+#: mainwindow.cpp:290
 msgid "Create a new custom collection"
 msgstr "Vytvořit novou vlastní sbírku"
 
-#: mainwindow.cpp:298
+#: mainwindow.cpp:299
 msgid "Open an existing document"
 msgstr "Otevřít existující dokument"
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:301
 msgid "Open a recently used file"
 msgstr "Otevřít nedávno používaný soubor"
 
-#: mainwindow.cpp:302
+#: mainwindow.cpp:303
 msgid "Save the document"
 msgstr "Uložit dokument"
 
-#: mainwindow.cpp:304
+#: mainwindow.cpp:305
 msgid "Save the document as a different file..."
 msgstr "Uložit dokument jako jiný soubor..."
 
-#: mainwindow.cpp:306
+#: mainwindow.cpp:307
 msgid "Print the contents of the document..."
 msgstr "Tisk obsahu dokumentu..."
 
-#: mainwindow.cpp:308
+#: mainwindow.cpp:309
 msgid "Quit the application"
 msgstr "Ukončit program"
 
-#: mainwindow.cpp:317 rc.cpp:9
-#, no-c-format
-msgid "&Import"
-msgstr "&Importovat"
-
-#: mainwindow.cpp:319
+#: mainwindow.cpp:320
 msgid "Import collection data from other formats"
 msgstr "Importovat data sbírky z jiných formátů"
 
-#: mainwindow.cpp:323
+#: mainwindow.cpp:324
 msgid "Import Tellico Data..."
 msgstr "Importovat data Tellico..."
 
-#: mainwindow.cpp:324
+#: mainwindow.cpp:325
 msgid "Import another Tellico data file"
 msgstr "Importovat další datový soubor Tellico"
 
-#: mainwindow.cpp:330
+#: mainwindow.cpp:331
 msgid "Import CSV Data..."
 msgstr "Importovat CSV data..."
 
-#: mainwindow.cpp:331
+#: mainwindow.cpp:332
 msgid "Import a CSV file"
 msgstr "Importovat CSV soubor"
 
-#: mainwindow.cpp:337
+#: mainwindow.cpp:338
 msgid "Import MODS Data..."
 msgstr "Importovat MODS data..."
 
-#: mainwindow.cpp:338
+#: mainwindow.cpp:339
 msgid "Import a MODS data file"
 msgstr "Importovat MODS soubor"
 
-#: mainwindow.cpp:344
+#: mainwindow.cpp:345
 msgid "Import Alexandria Data..."
 msgstr "Importovat Alexandria data..."
 
-#: mainwindow.cpp:345
+#: mainwindow.cpp:346
 msgid "Import data from the Alexandria book collection manager"
 msgstr "Importovat data ze správce sbírek knih Alexandria"
 
-#: mainwindow.cpp:351
+#: mainwindow.cpp:352
+#, fuzzy
+msgid "Import Delicious Library Data..."
+msgstr "Importovat data Tellico..."
+
+#: mainwindow.cpp:353
+#, fuzzy
+msgid "Import data from Delicious Library"
+msgstr "Importovat metadata z audio souborů"
+
+#: mainwindow.cpp:359
+#, fuzzy
+msgid "Import Referencer Data..."
+msgstr "Importovat RIS data..."
+
+#: mainwindow.cpp:360
+#, fuzzy
+msgid "Import data from Referencer"
+msgstr "Importovat referenční RIS soubor"
+
+#: mainwindow.cpp:366
 msgid "Import Bibtex Data..."
 msgstr "Importovat Bibtex data..."
 
-#: mainwindow.cpp:352
+#: mainwindow.cpp:367
 msgid "Import a bibtex bibliography file"
 msgstr "Importovat soubor s bibliografií Bibtex"
 
-#: mainwindow.cpp:358
+#: mainwindow.cpp:373
 msgid "Import Bibtexml Data..."
 msgstr "Importovat Bibtexml data..."
 
-#: mainwindow.cpp:359
+#: mainwindow.cpp:374
 msgid "Import a Bibtexml bibliography file"
 msgstr "Importovat soubor s bibliografií Bibtexml"
 
-#: mainwindow.cpp:365
+#: mainwindow.cpp:380
 msgid "Import RIS Data..."
 msgstr "Importovat RIS data..."
 
-#: mainwindow.cpp:366
+#: mainwindow.cpp:381
 msgid "Import an RIS reference file"
 msgstr "Importovat referenční RIS soubor"
 
-#: mainwindow.cpp:372
+#: mainwindow.cpp:387
+#, fuzzy
+msgid "Import PDF File..."
+msgstr "Importovat soubor"
+
+#: mainwindow.cpp:388
+#, fuzzy
+msgid "Import a PDF file"
+msgstr "Importovat CSV soubor"
+
+#: mainwindow.cpp:394
 msgid "Import Audio File Metadata..."
 msgstr "Importovat metadata audio souboru..."
 
-#: mainwindow.cpp:373
+#: mainwindow.cpp:395
 msgid "Import meta-data from audio files"
 msgstr "Importovat metadata z audio souborů"
 
-#: mainwindow.cpp:382
+#: mainwindow.cpp:404
 msgid "Import Audio CD Data..."
 msgstr "Importovat Audio CD data"
 
-#: mainwindow.cpp:383
+#: mainwindow.cpp:405
 msgid "Import audio CD information"
 msgstr "Importovat informace z audio CD"
 
-#: mainwindow.cpp:392
+#: mainwindow.cpp:414
 msgid "Import GCstar Data..."
 msgstr "Importovat GCstar data"
 
-#: mainwindow.cpp:393
+#: mainwindow.cpp:415
 msgid "Import a GCstar data file"
 msgstr "Importovat datový soubor GCstar"
 
-#: mainwindow.cpp:399
+#: mainwindow.cpp:421
+#, fuzzy
+msgid "Import Griffith Data..."
+msgstr "Importovat GCstar data"
+
+#: mainwindow.cpp:422
+#, fuzzy
+msgid "Import a Griffith database"
+msgstr "Exportovat do databáze PilotDB"
+
+#: mainwindow.cpp:428
 msgid "Import Ant Movie Catalog Data..."
 msgstr "Importovat data z programu Ant Movie Catalog"
 
-#: mainwindow.cpp:400
+#: mainwindow.cpp:429
 msgid "Import an Ant Movie Catalog data file"
 msgstr "Importovat datový soubor z Ant Movie Catalog"
 
-#: mainwindow.cpp:406
+#: mainwindow.cpp:435
 msgid "Import File Listing..."
 msgstr "Importovat výpis souborů..."
 
-#: mainwindow.cpp:407
+#: mainwindow.cpp:436
 msgid "Import information about files in a folder"
 msgstr "Importovat informace o souborech v adresáři"
 
-#: mainwindow.cpp:413
+#: mainwindow.cpp:442
 msgid "Import XSL Transform..."
 msgstr "Importovat XSL Transform..."
 
-#: mainwindow.cpp:414
+#: mainwindow.cpp:443
 msgid "Import using an XSL Transform"
 msgstr "Importovat s pomocí XSL Transform"
 
-#: mainwindow.cpp:426 rc.cpp:12
+#: mainwindow.cpp:455 rc.cpp:12
 #, no-c-format
 msgid "&Export"
 msgstr "&Exportovat"
 
-#: mainwindow.cpp:428
+#: mainwindow.cpp:457
 msgid "Export the collection data to other formats"
 msgstr "Exportovat data sbírky do jiných formátů"
 
-#: mainwindow.cpp:432
+#: mainwindow.cpp:461
 msgid "Export to XML..."
 msgstr "Exportovat do XML..."
 
-#: mainwindow.cpp:433
+#: mainwindow.cpp:462
 msgid "Export to a Tellico XML file"
 msgstr "Exportovat do Tellico XML souboru"
 
-#: mainwindow.cpp:439
+#: mainwindow.cpp:468
 msgid "Export to Zip..."
 msgstr "Exportovat do Zip..."
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:469
 msgid "Export to a Tellico Zip file"
 msgstr "Exportovat do Tellico Zip souboru"
 
-#: mainwindow.cpp:446
+#: mainwindow.cpp:475
 msgid "Export to HTML..."
 msgstr "Exportovat do HTML..."
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:476
 msgid "Export to an HTML file"
 msgstr "Exportovat do HTML souboru"
 
-#: mainwindow.cpp:453
+#: mainwindow.cpp:482
 msgid "Export to CSV..."
 msgstr "Exportovat do CSV..."
 
-#: mainwindow.cpp:454
+#: mainwindow.cpp:483
 msgid "Export to a comma-separated values file"
 msgstr "Exportovat do souboru s hodnotami oddělenými čárkou"
 
-#: mainwindow.cpp:460
+#: mainwindow.cpp:489
 msgid "Export to PilotDB..."
 msgstr "Exportovat do PilotDB..."
 
-#: mainwindow.cpp:461
+#: mainwindow.cpp:490
 msgid "Export to a PilotDB database"
 msgstr "Exportovat do databáze PilotDB"
 
-#: mainwindow.cpp:467
+#: mainwindow.cpp:496
 msgid "Export to Alexandria..."
 msgstr "Exportovat do Alexandria..."
 
-#: mainwindow.cpp:468
+#: mainwindow.cpp:497
 msgid "Export to an Alexandria library"
 msgstr "Exportovat do knihovny Alexandria"
 
-#: mainwindow.cpp:474
+#: mainwindow.cpp:503
 msgid "Export to Bibtex..."
 msgstr "Exportovat do Bibtex..."
 
-#: mainwindow.cpp:475
+#: mainwindow.cpp:504
 msgid "Export to a bibtex file"
 msgstr "Exportovat souboru Bibtex"
 
-#: mainwindow.cpp:481
+#: mainwindow.cpp:510
 msgid "Export to Bibtexml..."
 msgstr "Exportovat do Bibtexml..."
 
-#: mainwindow.cpp:482
+#: mainwindow.cpp:511
 msgid "Export to a Bibtexml file"
 msgstr "Exportovat do souboru Bibtexml"
 
-#: mainwindow.cpp:488
+#: mainwindow.cpp:517
 msgid "Export to ONIX..."
 msgstr "Exportovat do ONIX..."
 
-#: mainwindow.cpp:489
+#: mainwindow.cpp:518
 msgid "Export to an ONIX file"
 msgstr "Exportovat do ONIX souboru"
 
-#: mainwindow.cpp:495
+#: mainwindow.cpp:524
 msgid "Export to GCfilms..."
 msgstr "Exportovat do GCfilms..."
 
-#: mainwindow.cpp:496
+#: mainwindow.cpp:525
 msgid "Export to a GCfilms data file"
 msgstr "Exportovat datového souboru GCfilms"
 
-#: mainwindow.cpp:502
+#: mainwindow.cpp:531
+#, fuzzy
+msgid "Export to GCstar..."
+msgstr "Exportovat do GCfilms..."
+
+#: mainwindow.cpp:532
+#, fuzzy
+msgid "Export to a GCstar data file"
+msgstr "Exportovat datového souboru GCfilms"
+
+#: mainwindow.cpp:536
 msgid "Export XSL Transform..."
 msgstr "Exportovat XSL Transform..."
 
-#: mainwindow.cpp:503
+#: mainwindow.cpp:537
 msgid "Export using an XSL Transform"
 msgstr "Exportovat s pomocí XSL Transform"
 
-#: mainwindow.cpp:512
+#: mainwindow.cpp:546
 msgid "Cut the selected text and puts it in the clipboard"
 msgstr "Vyjmout označený text a vložit jej do schránky"
 
-#: mainwindow.cpp:514
+#: mainwindow.cpp:548
 msgid "Copy the selected text to the clipboard"
 msgstr "Kopírovat označený text do schránky"
 
-#: mainwindow.cpp:516
+#: mainwindow.cpp:550
 msgid "Paste the clipboard contents"
 msgstr "Vložit obsah schránky"
 
-#: mainwindow.cpp:518
+#: mainwindow.cpp:552
 msgid "Select all the entries in the collection"
 msgstr "Vybrat všechny záznamy ve sbírce"
 
-#: mainwindow.cpp:520
+#: mainwindow.cpp:554
 msgid "Deselect all the entries in the collection"
 msgstr "Zrušit výběr všech záznamů ve sbírce"
 
-#: mainwindow.cpp:522
+#: mainwindow.cpp:556
 msgid "Internet Search..."
 msgstr "Hledání na internetu..."
 
-#: mainwindow.cpp:525
+#: mainwindow.cpp:559
 msgid "Search the internet..."
 msgstr "Hledat na internetu..."
 
-#: mainwindow.cpp:527
+#: mainwindow.cpp:561
 msgid "Advanced &Filter..."
 msgstr "Pokročilý &filtr..."
 
-#: mainwindow.cpp:530 mainwindow.cpp:680
+#: mainwindow.cpp:564 mainwindow.cpp:719
 msgid "Filter the collection"
 msgstr "Filtrovat sbírku"
 
-#: mainwindow.cpp:535
+#: mainwindow.cpp:569
 msgid "&New Entry..."
 msgstr "&Nový záznam..."
 
-#: mainwindow.cpp:538
+#: mainwindow.cpp:572
 msgid "Create a new entry"
 msgstr "Vytvořit nový záznam"
 
-#: controller.cpp:608 mainwindow.cpp:539
+#: controller.cpp:620 mainwindow.cpp:573
 msgid "&Edit Entry..."
 msgstr "&Upravit záznam..."
 
-#: mainwindow.cpp:542
+#: mainwindow.cpp:576
 msgid "Edit the selected entries"
 msgstr "Upravit označené záznamy"
 
-#: controller.cpp:609 mainwindow.cpp:543
+#: controller.cpp:621 mainwindow.cpp:577
 msgid "D&uplicate Entry"
 msgstr "&Klonovat záznam"
 
-#: mainwindow.cpp:546
+#: mainwindow.cpp:580
 msgid "Copy the selected entries"
 msgstr "Kopírovat označené záznamy"
 
-#: controller.cpp:611 mainwindow.cpp:547
+#: controller.cpp:623 mainwindow.cpp:581
 msgid "&Delete Entry"
 msgstr "&Smazat záznam"
 
-#: mainwindow.cpp:550
+#: mainwindow.cpp:584
 msgid "Delete the selected entries"
 msgstr "Smazat označené záznamy"
 
-#: mainwindow.cpp:552
+#: mainwindow.cpp:585
+#, fuzzy
+msgid "&Merge Entries"
+msgstr "&Smazat záznamy"
+
+#: mainwindow.cpp:588
+#, fuzzy
+msgid "Merge the selected entries"
+msgstr "Smazat označené záznamy"
+
+#: mainwindow.cpp:591
 msgid "&Generate Reports..."
 msgstr "&Generovat zprávy..."
 
-#: mainwindow.cpp:555
+#: mainwindow.cpp:594
 msgid "Generate collection reports"
 msgstr "Generovat zprávy o sbírce"
 
-#: mainwindow.cpp:556
+#: mainwindow.cpp:595
 msgid "Check-&out..."
 msgstr "&Zapůjčit..."
 
-#: mainwindow.cpp:559
+#: mainwindow.cpp:598
 msgid "Check-out the selected items"
 msgstr "Zapůjčit označené položky"
 
-#: mainwindow.cpp:560
+#: mainwindow.cpp:599
 msgid "Check-&in"
 msgstr "&Vrátit"
 
-#: mainwindow.cpp:563
+#: mainwindow.cpp:602
 msgid "Check-in the selected items"
 msgstr "Vrátit označené položky"
 
-#: mainwindow.cpp:565
+#: mainwindow.cpp:604
 msgid "&Rename Collection..."
 msgstr "&Přejmenovat sbírku..."
 
-#: mainwindow.cpp:568
+#: mainwindow.cpp:607
 msgid "Rename the collection"
 msgstr "Přejmenovat sbírku"
 
-#: mainwindow.cpp:569
+#: mainwindow.cpp:608
 msgid "Collection &Fields..."
 msgstr "P&ole sbírky..."
 
-#: mainwindow.cpp:572
+#: mainwindow.cpp:611
 msgid "Modify the collection fields"
 msgstr "Změnit pole sbírky"
 
-#: mainwindow.cpp:573
+#: mainwindow.cpp:612
 msgid "Convert to &Bibliography"
 msgstr "Převést na &bibliografii"
 
-#: mainwindow.cpp:576
+#: mainwindow.cpp:615
 msgid "Convert a book collection to a bibliography"
 msgstr "Převést sbírku knih na bibliografii"
 
-#: mainwindow.cpp:577
+#: mainwindow.cpp:616
 msgid "String &Macros..."
 msgstr "Řetězová &makra..."
 
-#: mainwindow.cpp:580
+#: mainwindow.cpp:619
 msgid "Edit the bibtex string macros"
 msgstr "Upravit řetězová makra Bibtex"
 
-#: mainwindow.cpp:587
+#: mainwindow.cpp:626
 msgid "Copy Bibtex to Cli&pboard"
 msgstr "Kopírovat Bibtex do schránky"
 
-#: mainwindow.cpp:588
+#: mainwindow.cpp:627
 msgid "Copy bibtex citations to the clipboard"
 msgstr "Kopírovat citace Bibtex do schránky"
 
-#: mainwindow.cpp:593
+#: mainwindow.cpp:632
 msgid "Cite Entry in &LyX"
 msgstr "Citovat záznam v &LyX"
 
-#: mainwindow.cpp:594
+#: mainwindow.cpp:633
 msgid "Cite the selected entries in LyX"
 msgstr "Citovat označené záznamy v LyX"
 
-#: mainwindow.cpp:599
+#: mainwindow.cpp:638
 msgid "Ci&te Entry in OpenOffice.org"
 msgstr "Citovat záznam v &OpenOffice.org"
 
-#: mainwindow.cpp:600
+#: mainwindow.cpp:639
 msgid "Cite the selected entries in OpenOffice.org"
 msgstr "Citovat označené záznamy v OpenOffice.org"
 
-#: controller.cpp:610 mainwindow.cpp:608 rc.cpp:18
+#: controller.cpp:622 mainwindow.cpp:647 rc.cpp:18
 #, no-c-format
 msgid "&Update Entry"
 msgstr "&Aktualizovat záznam"
 
-#: mainwindow.cpp:613
+#: mainwindow.cpp:652
 msgid "All Sources"
 msgstr "Všechny zdroje"
 
-#: mainwindow.cpp:614
+#: mainwindow.cpp:653
 msgid "Update entry data from all available sources"
 msgstr "Aktualizovat data záznamu ze všech dostupných zdrojů"
 
-#: mainwindow.cpp:626
+#: mainwindow.cpp:665
 msgid "Show Grou&p View"
 msgstr "Zobrazit sku&pinový pohled"
 
-#: mainwindow.cpp:629
+#: mainwindow.cpp:668
 msgid "Enable/disable the group view"
 msgstr "Povolit/zakázat skupinový pohled"
 
-#: mainwindow.cpp:630
+#: mainwindow.cpp:669
 msgid "Hide Grou&p View"
 msgstr "Skrýt sku&pinový pohled"
 
-#: mainwindow.cpp:632
+#: mainwindow.cpp:671
 msgid "Show Entry &Editor"
 msgstr "Zobrazit &editor záznamů"
 
-#: mainwindow.cpp:635
+#: mainwindow.cpp:674
 msgid "Enable/disable the editor"
 msgstr "Povolit/zakázat editor"
 
-#: mainwindow.cpp:636
+#: mainwindow.cpp:675
 msgid "Hide Entry &Editor"
 msgstr "Skrýt &editor záznamů"
 
-#: mainwindow.cpp:638
+#: mainwindow.cpp:677
 msgid "Show Entry &View"
 msgstr "Zobrazit pohled na &záznam"
 
-#: mainwindow.cpp:641
+#: mainwindow.cpp:680
 msgid "Enable/disable the entry view"
 msgstr "Povolit/zakázat pohled na záznam"
 
-#: mainwindow.cpp:642
+#: mainwindow.cpp:681
 msgid "Hide Entry &View"
 msgstr "Skrýt pohled na &záznam"
 
-#: mainwindow.cpp:654
+#: mainwindow.cpp:693
 msgid "Change Grouping"
 msgstr "Změnit seskupení"
 
-#: mainwindow.cpp:658
+#: mainwindow.cpp:697
 msgid "&Group Selection"
 msgstr "&Výběr skupin"
 
-#: mainwindow.cpp:661
+#: mainwindow.cpp:700
 msgid "Change the grouping of the collection"
 msgstr "Změnit seskupení sbírky"
 
-#: filterview.cpp:33 filterview.cpp:85 mainwindow.cpp:663 mainwindow.cpp:678
+#: filterview.cpp:33 filterview.cpp:85 mainwindow.cpp:702 mainwindow.cpp:717
 msgid "Filter"
 msgstr "Filtr"
 
-#: mainwindow.cpp:666
+#: mainwindow.cpp:705
 msgid "Clear Filter"
 msgstr "Vyčistit filtr"
 
-#: mainwindow.cpp:671
+#: mainwindow.cpp:710
 msgid "Filter here..."
 msgstr "Filtrovat zde..."
 
-#: mainwindow.cpp:727
+#: mainwindow.cpp:768
 msgid "Groups"
 msgstr "Skupiny"
 
-#: mainwindow.cpp:728
+#: mainwindow.cpp:769
 msgid ""
 "<qt>The <i>Group View</i> sorts the entries into groupings based on a "
 "selected field.</qt>"
@@ -3207,7 +3437,7 @@ msgstr ""
 "<qt><i>Skupinový pohled</i> záznamy seřadí do skupin podle zvoleného "
 "pole.</qt>"
 
-#: mainwindow.cpp:735
+#: mainwindow.cpp:776
 msgid ""
 "<qt>The <i>Column View</i> shows the value of multiple fields for each "
 "entry.</qt>"
@@ -3215,23 +3445,37 @@ msgstr ""
 "<qt><i>Sloupcový pohled</i> zobrazí u každého záznamu hodnoty více "
 "polí.</qt>"
 
-#: mainwindow.cpp:1021
+#: mainwindow.cpp:831
+#, fuzzy
+msgid "Welcome to the Tellico Collection Manager"
+msgstr "Tellico - správce sbírek pro KDE"
+
+#: mainwindow.cpp:833
+msgid ""
+"<h3>Tellico is a tool for managing collections of books, videos, music, and "
+"whatever else you want to catalog.</h3><h3>New entries can be added to your "
+"collection by <a href=\"tc:///coll_new_entry\">entering data manually</a> or "
+"by <a href=\"tc:///edit_search_internet\">downloading data</a> from various "
+"Internet sources.</h3>"
+msgstr ""
+
+#: mainwindow.cpp:1066
 msgid "Creating new document..."
 msgstr "Vytvářím nový dokument..."
 
-#: mainwindow.cpp:1053 mainwindow.cpp:1073 mainwindow.cpp:1091
+#: mainwindow.cpp:1098 mainwindow.cpp:1117 mainwindow.cpp:1135
 msgid "Opening file..."
 msgstr "Otevírám soubor..."
 
-#: mainwindow.cpp:1063
+#: mainwindow.cpp:1108
 msgid "Open File"
 msgstr "Otevřít soubor"
 
-#: document.cpp:189 mainwindow.cpp:1165
+#: document.cpp:192 mainwindow.cpp:1215
 msgid "Saving file..."
 msgstr "Ukládám soubor..."
 
-#: mainwindow.cpp:1175
+#: mainwindow.cpp:1226
 msgid ""
 "<qt><p>You are saving a file with many images, which causes Tellico to slow "
 "down significantly. Do you want to save the images separately in Tellico's "
@@ -3243,23 +3487,23 @@ msgstr ""
 "datovém adresáři Tellico, aby se zlepšila rychlost?</p><p>Toto "
 "nastavení lze kdykoliv později změnit v konfiguračním okně.</p></qt>"
 
-#: mainwindow.cpp:1180
+#: mainwindow.cpp:1231
 msgid "Save Images Separately"
 msgstr "Uložit obrázky samostatně"
 
-#: mainwindow.cpp:1181
+#: mainwindow.cpp:1232
 msgid "Save Images in File"
 msgstr "Uložit obrázky do souboru"
 
-#: mainwindow.cpp:1213
+#: mainwindow.cpp:1265
 msgid "Saving file with a new filename..."
 msgstr "Ukládám soubor s novým názvem..."
 
-#: mainwindow.cpp:1253 mainwindow.cpp:1305
+#: mainwindow.cpp:1303 mainwindow.cpp:1353
 msgid "Printing..."
 msgstr "Probíhá tisk..."
 
-#: mainwindow.cpp:1262
+#: mainwindow.cpp:1312
 msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
@@ -3267,86 +3511,86 @@ msgstr ""
 "Sbírka má nastaven filtr tak, aby byla zobrazena jen určitá část "
 "záznamů. Vytištěny budou pouze viditelné záznamy. Pokračovat?"
 
-#: mainwindow.cpp:1288
+#: mainwindow.cpp:1337
 msgid "Processing document..."
 msgstr "Zpracovávám dokument..."
 
-#: mainwindow.cpp:1313
+#: mainwindow.cpp:1360
 msgid "Exiting..."
 msgstr "Ukončuji..."
 
-#: mainwindow.cpp:1453
+#: mainwindow.cpp:1498
 #, c-format
 msgid "Total entries: %1"
 msgstr "Celkem záznamů: %1"
 
-#: mainwindow.cpp:1460
+#: mainwindow.cpp:1505
 msgid "(%1 filtered; %2 selected)"
 msgstr "(%1 filtrováno, %2 označeno)"
 
-#: mainwindow.cpp:1463
+#: mainwindow.cpp:1508
 msgid "(%1 filtered)"
 msgstr "(%1 filtrováno)"
 
-#: mainwindow.cpp:1466
+#: mainwindow.cpp:1511
 msgid "(%1 selected)"
 msgstr "(%1 označeno)"
 
-#: mainwindow.cpp:1640
+#: mainwindow.cpp:1679
 #, c-format
 msgid "Print %1"
 msgstr "Vytisknout %1"
 
-#: mainwindow.cpp:1673
+#: mainwindow.cpp:1712
 #, c-format
 msgid "Page %1"
 msgstr "Strana %1"
 
-#: entryview.cpp:171 mainwindow.cpp:1700
+#: entryview.cpp:188 mainwindow.cpp:1739
 msgid "Please check your installation."
 msgstr "Zkontrolujte instalaci programu."
 
-#: mainwindow.cpp:1793
+#: mainwindow.cpp:1849
 msgid "Importing data..."
 msgstr "Importuji data..."
 
-#: mainwindow.cpp:1802
+#: mainwindow.cpp:1858
 msgid "Import File"
 msgstr "Importovat soubor"
 
-#: mainwindow.cpp:1808
+#: mainwindow.cpp:1864
 msgid "Import Directory"
 msgstr "Importovat adresář"
 
-#: mainwindow.cpp:1895
+#: mainwindow.cpp:1885
 msgid "Exporting data..."
 msgstr "Exportuji data..."
 
-#: mainwindow.cpp:1917
+#: mainwindow.cpp:1907
 msgid "Export As"
 msgstr "Exportovat jako"
 
-#: mainwindow.cpp:1946
+#: mainwindow.cpp:1935
 msgid "String Macros"
 msgstr "Řetězcová makra"
 
-#: mainwindow.cpp:1947
+#: mainwindow.cpp:1936
 msgid "Macro"
 msgstr "Makro"
 
-#: mainwindow.cpp:1947
+#: mainwindow.cpp:1936
 msgid "String"
 msgstr "Řetězec"
 
-#: mainwindow.cpp:2010
+#: mainwindow.cpp:1999
 msgid "Creating citations..."
 msgstr "Vytvářím citace..."
 
-#: mainwindow.cpp:2160
+#: mainwindow.cpp:2104
 msgid "Filters"
 msgstr "Filtry"
 
-#: mainwindow.cpp:2161
+#: mainwindow.cpp:2105
 msgid ""
 "<qt>The <i>Filter View</i> shows the entries which meet certain filter "
 "rules.</qt>"
@@ -3354,11 +3598,11 @@ msgstr ""
 "<qt><i>Filtrový pohled</i> ukazuje záznamy, které splňují pravidla "
 "filtru.</qt>"
 
-#: mainwindow.cpp:2177
+#: mainwindow.cpp:2121
 msgid "Loans"
 msgstr "Půjčky"
 
-#: mainwindow.cpp:2178
+#: mainwindow.cpp:2122
 msgid ""
 "<qt>The <i>Loan View</i> shows a list of all the people who have borrowed "
 "items from your collection.</qt>"
@@ -3366,26 +3610,32 @@ msgstr ""
 "<qt><i>Půjčkový pohled</i> ukazuje seznam všech osob, které si ze "
 "sbírky půjčili položky.</qt>"
 
-#: mainwindow.cpp:2311
+#: mainwindow.cpp:2255
 #, c-format
 msgid "Update entry data from %1"
 msgstr "Aktualizovat data záznamu z %1"
 
-#: filehandler.cpp:190
+#: mainwindow.cpp:2274
+msgid ""
+"Tellico can only import one file of this type at a time. Only %1 will be "
+"imported."
+msgstr ""
+
+#: filehandler.cpp:193
 #, c-format
 msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico nemůže načíst obrázek %1."
 
-#: filehandler.cpp:204
+#: filehandler.cpp:207
 msgid ""
 "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Soubor s názvem \"%1\" již existuje. Opravdu jej chcete přepsat?"
 
-#: filehandler.cpp:207
+#: filehandler.cpp:210
 msgid "Overwrite File?"
 msgstr "Přepsat soubor?"
 
-#: filehandler.cpp:208
+#: filehandler.cpp:211
 msgid "Overwrite"
 msgstr "Přepsat"
 
@@ -3393,39 +3643,39 @@ msgstr "Přepsat"
 msgid "Filter (Sort by Count)"
 msgstr "Filtr (seřadit podle počtu)"
 
-#: controller.cpp:425
+#: controller.cpp:427
 msgid "Do you really want to delete this entry?"
 msgstr "Opravdu chcete smazat tento záznam?"
 
-#: controller.cpp:427
+#: controller.cpp:429
 msgid "Delete Entry"
 msgstr "Smazat záznam"
 
-#: controller.cpp:437
+#: controller.cpp:439
 msgid "Do you really want to delete these entries?"
 msgstr "Opravdu chcete smazat tyto záznamy?"
 
-#: controller.cpp:441
+#: controller.cpp:443
 msgid "Delete Multiple Entries"
 msgstr "Smazat více záznamů"
 
-#: controller.cpp:613
+#: controller.cpp:626
 msgid "&Edit Entries..."
 msgstr "&Upravit záznamy..."
 
-#: controller.cpp:614
+#: controller.cpp:627
 msgid "D&uplicate Entries"
 msgstr "&Klonovat záznamy"
 
-#: controller.cpp:615
+#: controller.cpp:628
 msgid "&Update Entries"
 msgstr "&Upravit záznamy"
 
-#: controller.cpp:616
+#: controller.cpp:629
 msgid "&Delete Entries"
 msgstr "&Smazat záznamy"
 
-#: controller.cpp:670
+#: controller.cpp:684
 msgid ""
 "The following items are already loaned, but Tellico does not currently "
 "support lending an item multiple times. They will be removed from the list "
@@ -3435,11 +3685,11 @@ msgstr ""
 "době nepodporuje půjčování jedné položky vícekrát. Položky budou "
 "odstraněny ze seznamu položek k zapůjčení."
 
-#: calendarhandler.cpp:166
+#: calendarhandler.cpp:167
 msgid "Default Calendar"
 msgstr "Výchozí kalendář"
 
-#: calendarhandler.cpp:174
+#: calendarhandler.cpp:175
 msgid ""
 "At the moment, Tellico only supports local calendar resources. The active "
 "calendar is remotely located, so your loans will not be added."
@@ -3447,15 +3697,15 @@ msgstr ""
 "V současné době podporuje Tellico pouze lokální kalendáře. Aktivní "
 "kalendář je vzdálená, a proto nebudou zápůjčky zařazeny."
 
-#: calendarhandler.cpp:179
+#: calendarhandler.cpp:180
 msgid "Active Calendar"
 msgstr "Aktivní kalendář"
 
-#: calendarhandler.cpp:202
+#: calendarhandler.cpp:203
 msgid "Tellico: %1 is due to return \"%2\""
 msgstr "Tellico: %1 by měl vrátit \"%2\""
 
-#: collection.cpp:31
+#: collection.cpp:32
 msgid "(Empty)"
 msgstr "(Prázdné)"
 
@@ -3498,6 +3748,16 @@ msgstr "Autor knihovny btparse"
 #: main.cpp:48
 msgid "Code examples and general inspiration"
 msgstr "Příklady kódu a všeobecná inspirace"
+
+#: main.cpp:50
+#, fuzzy
+msgid "Author of libcsv library"
+msgstr "Autor knihovny btparse"
+
+#: main.cpp:52
+#, fuzzy
+msgid "Author of rtf2html library"
+msgstr "Autor knihovny btparse"
 
 #: collectionfieldsdialog.cpp:56
 msgid "Collection Fields"
@@ -3862,7 +4122,7 @@ msgstr ""
 msgid "Tables are limited to a maximum of ten columns."
 msgstr "Tabulky jsou omezeny na maximálně deset sloupců."
 
-#: document.cpp:155
+#: document.cpp:158
 msgid ""
 "The current file has been modified.\n"
 "Do you want to save it?"
@@ -3870,7 +4130,7 @@ msgstr ""
 "Aktuální soubor byl změněn.\n"
 "Chcete ho uložit?"
 
-#: document.cpp:157 entryeditdialog.cpp:634
+#: document.cpp:160 entryeditdialog.cpp:660
 msgid "Unsaved Changes"
 msgstr "Neuložené změny"
 
@@ -3878,34 +4138,19 @@ msgstr "Neuložené změny"
 msgid "Select Borrower"
 msgstr "Vyberte vypůjčitele"
 
-#: configdialog.cpp:100
+#: configdialog.cpp:103
 msgid "Configure Tellico"
 msgstr "Nastavit Tellico"
 
-#: configdialog.cpp:192
+#: configdialog.cpp:198
 msgid "General Options"
 msgstr "Obecné volby"
 
-#: configdialog.cpp:195
-msgid "&Include images in data file"
-msgstr "&Začlenit obrázky do datového souboru"
-
-#: configdialog.cpp:196
-msgid ""
-"If checked, all images will be included in the data file, rather than saved "
-"separately in the Tellico data directory. Saving a lot of images in the data "
-"file cause Tellico to run more slowly."
-msgstr ""
-"Je-li zaškrtnuto, budou všechny obrázky vkládány do datového souboru, "
-"místo aby byly ukládány samostatně v datovém adresáři Tellico. "
-"Vložení velkého počtu obrázků do datového souboru může způsobit "
-"zpomalení programu."
-
-#: configdialog.cpp:203
+#: configdialog.cpp:201
 msgid "&Reopen file at startup"
 msgstr "&Znovu otevřít soubor při spuštění"
 
-#: configdialog.cpp:204
+#: configdialog.cpp:202
 msgid ""
 "If checked, the file that was last open will be re-opened at program "
 "start-up."
@@ -3913,42 +4158,67 @@ msgstr ""
 "Je-li zaškrtnuto, naposledy otevřený soubor bude otevřen při dalším "
 "spuštěním."
 
-#: configdialog.cpp:209
+#: configdialog.cpp:207
 msgid "&Show \"Tip of the Day\" at startup"
 msgstr "Při &spuštění zobrazit \"Tip dne\""
 
-#: configdialog.cpp:210
+#: configdialog.cpp:208
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
 msgstr ""
 "Je-li zaškrtnuto, bude při spuštění programu zobrazen \"Tip dne\"."
 
-#: configdialog.cpp:215 configdialog.cpp:290
+#: configdialog.cpp:213
+#, fuzzy
+msgid "Image Storage Options"
+msgstr "Možnosti obrázku"
+
+#: configdialog.cpp:214
+#, fuzzy
+msgid "Store images in data file"
+msgstr "&Začlenit obrázky do datového souboru"
+
+#: configdialog.cpp:215
+msgid "Store images in common application directory"
+msgstr ""
+
+#: configdialog.cpp:216
+msgid "Store images in directory relative to data file"
+msgstr ""
+
+#: configdialog.cpp:217
+msgid ""
+"Images may be saved in the data file itself, which can cause Tellico to run "
+"slowly, stored in the Tellico application directory, or stored in a "
+"directory in the same location as the data file."
+msgstr ""
+
+#: configdialog.cpp:224 configdialog.cpp:299
 msgid "Formatting Options"
 msgstr "Možnosti formátování"
 
-#: configdialog.cpp:218
+#: configdialog.cpp:227
 msgid "Auto capitalize &titles and names"
 msgstr "Názvy a jména automaticky s &velkými písmeny"
 
-#: configdialog.cpp:219
+#: configdialog.cpp:228
 msgid "If checked, titles and names will be automatically capitalized."
 msgstr ""
 "Je-li zaškrtnuto, názvy a jména budou mít automaticky změněna první "
 "písmena na velká."
 
-#: configdialog.cpp:223
+#: configdialog.cpp:232
 msgid "Auto &format titles and names"
 msgstr "Automaticky &formátovat názvy a jména"
 
-#: configdialog.cpp:224 configdialog.cpp:294
+#: configdialog.cpp:233 configdialog.cpp:303
 msgid "If checked, titles and names will be automatically formatted."
 msgstr "Je-li zaškrtnuto, názvy a jména budou automaticky formátována."
 
-#: configdialog.cpp:231
+#: configdialog.cpp:240
 msgid "No capitali&zation:"
 msgstr "Nepřevádět na velká &písmena:"
 
-#: configdialog.cpp:234
+#: configdialog.cpp:243
 msgid ""
 "<qt>A list of words which should not be capitalized. Multiple values should "
 "be separated by a semi-colon.</qt>"
@@ -3956,11 +4226,11 @@ msgstr ""
 "<qt>Seznam slov, která nemají být převedena na velká písmena. "
 "Oddělovat středníkem.</qt>"
 
-#: configdialog.cpp:240
+#: configdialog.cpp:249
 msgid "Artic&les:"
 msgstr "Č&leny:"
 
-#: configdialog.cpp:243
+#: configdialog.cpp:252
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
 "first word in a title. Multiple values should be separated by a "
@@ -3969,11 +4239,11 @@ msgstr ""
 "<qt>Seznam slov, která mají být považována za členy, jsou-li prvním "
 "slovem v názvu. Oddělovat středníkem.</qt>"
 
-#: configdialog.cpp:250
+#: configdialog.cpp:259
 msgid "Personal suffi&xes:"
 msgstr "Osobní přípon&y:"
 
-#: configdialog.cpp:253
+#: configdialog.cpp:262
 msgid ""
 "<qt>A list of suffixes which might be used in personal names. Multiple "
 "values should be separated by a semi-colon.</qt>"
@@ -3981,11 +4251,11 @@ msgstr ""
 "<qt>Seznam přípon, která mohou být použita ve jménech osob. Oddělovat "
 "středníkem.</qt>"
 
-#: configdialog.cpp:259
+#: configdialog.cpp:268
 msgid "Surname &prefixes:"
 msgstr "Přípony &příjmení:"
 
-#: configdialog.cpp:262
+#: configdialog.cpp:271
 msgid ""
 "<qt>A list of prefixes which might be used in surnames. Multiple values "
 "should be separated by a semi-colon.</qt>"
@@ -3993,68 +4263,68 @@ msgstr ""
 "<qt>Seznam předpon, které mohou být použit v příjmeních. Oddělovat "
 "středníkem.</qt>"
 
-#: configdialog.cpp:287
+#: configdialog.cpp:296
 msgid "Printing"
 msgstr "Tisk"
 
-#: configdialog.cpp:287
+#: configdialog.cpp:296
 msgid "Printing Options"
 msgstr "Možnosti tisku"
 
-#: configdialog.cpp:293
+#: configdialog.cpp:302
 msgid "&Format titles and names"
 msgstr "&Formátovat názvy a jména"
 
-#: configdialog.cpp:297
+#: configdialog.cpp:306
 msgid "&Print field headers"
 msgstr "&Tisk hlaviček polí"
 
-#: configdialog.cpp:301
+#: configdialog.cpp:310
 msgid "Grouping Options"
 msgstr "Možnosti seskupování"
 
-#: configdialog.cpp:304
+#: configdialog.cpp:313
 msgid "&Group the entries"
 msgstr "&Seskupit záznamy"
 
-#: configdialog.cpp:308
+#: configdialog.cpp:317
 msgid "Image Options"
 msgstr "Možnosti obrázku"
 
-#: configdialog.cpp:314
+#: configdialog.cpp:323
 msgid "Maximum image &width:"
 msgstr "Maximální &šířka obrázků:"
 
-#: configdialog.cpp:319
+#: configdialog.cpp:328
 msgid ""
 "The maximum width of the images in the printout. The aspect ration is "
 "preserved."
 msgstr ""
 "Maximální šířka tištěných obrázků. Poměr stran je zachován."
 
-#: configdialog.cpp:327
+#: configdialog.cpp:336
 msgid "&Maximum image height:"
 msgstr "Maximální &výška obrázků:"
 
-#: configdialog.cpp:332
+#: configdialog.cpp:341
 msgid ""
 "The maximum height of the images in the printout. The aspect ration is "
 "preserved."
 msgstr "Maximální výška tištěných obrázků. Poměr stran je zachován."
 
-#: configdialog.cpp:346
+#: configdialog.cpp:355
 msgid "Templates"
 msgstr "Šablony"
 
-#: configdialog.cpp:346
+#: configdialog.cpp:355
 msgid "Template Options"
 msgstr "Možnosti šablon"
 
-#: configdialog.cpp:360
+#: configdialog.cpp:369
 msgid "Template:"
 msgstr "Šablona:"
 
-#: configdialog.cpp:364
+#: configdialog.cpp:373
 msgid ""
 "Select the template to use for the current type of collections. Not all "
 "templates will use the font and color settings."
@@ -4062,100 +4332,100 @@ msgstr ""
 "Zvolte šablonu pro aktuální druh sbírky. Ne všechny šablony využijí "
 "nastavení písma a barev."
 
-#: configdialog.cpp:371
+#: configdialog.cpp:380
 msgid "&Preview..."
 msgstr "&Náhled..."
 
-#: configdialog.cpp:372
+#: configdialog.cpp:381
 msgid "Show a preview of the template"
 msgstr "Zobrazit náhled šablony"
 
-#: configdialog.cpp:389
+#: configdialog.cpp:398
 msgid "Font Options"
 msgstr "Nastavení písma"
 
-#: configdialog.cpp:396
+#: configdialog.cpp:405
 msgid "Font:"
 msgstr "Písmo:"
 
-#: configdialog.cpp:402
+#: configdialog.cpp:411
 msgid "This font is passed to the template used in the Entry View."
 msgstr ""
 "Toto písmo se předává šabloně použité při zobrazení záznamu."
 
-#: configdialog.cpp:406
+#: configdialog.cpp:415
 msgid "Size:"
 msgstr "Velikost:"
 
-#: configdialog.cpp:416
+#: configdialog.cpp:425
 msgid "Color Options"
 msgstr "Nastavení barev"
 
-#: configdialog.cpp:423
+#: configdialog.cpp:432
 msgid "Background color:"
 msgstr "Barva pozadí:"
 
-#: configdialog.cpp:429
+#: configdialog.cpp:438
 msgid "This color is passed to the template used in the Entry View."
 msgstr "Tato barva se předává šabloně použité při zobrazení záznamu."
 
-#: configdialog.cpp:433
+#: configdialog.cpp:442
 msgid "Text color:"
 msgstr "Barva textu:"
 
-#: configdialog.cpp:442
+#: configdialog.cpp:451
 msgid "Highlight color:"
 msgstr "Barva zvýraznění:"
 
-#: configdialog.cpp:451
+#: configdialog.cpp:460
 msgid "Highlighted text color:"
 msgstr "Barva zvýrazněného textu:"
 
-#: configdialog.cpp:460
+#: configdialog.cpp:469
 msgid "Manage Templates"
 msgstr "Správa šablon"
 
-#: configdialog.cpp:466
+#: configdialog.cpp:475
 msgid "Install..."
 msgstr "Instalace..."
 
-#: configdialog.cpp:469
+#: configdialog.cpp:478
 msgid "Click to install a new template directly."
 msgstr "Kliknutím nainstalujete novou šablonu."
 
-#: configdialog.cpp:472 configdialog.cpp:528
+#: configdialog.cpp:481 configdialog.cpp:537
 msgid "Download..."
 msgstr "Stažení..."
 
-#: configdialog.cpp:475
+#: configdialog.cpp:484
 msgid "Click to download additional templates via the Internet."
 msgstr "Kliknutím stáhnete z internetu další šablony."
 
-#: configdialog.cpp:478
+#: configdialog.cpp:487
 msgid "Delete..."
 msgstr "Vymazat..."
 
-#: configdialog.cpp:481
+#: configdialog.cpp:490
 msgid "Click to select and remove installed templates."
 msgstr "Kliknutím vyberete a odstraníte nainstalované šablony."
 
-#: configdialog.cpp:492
+#: configdialog.cpp:501
 msgid "Data Sources"
 msgstr "Datové zdroje"
 
-#: configdialog.cpp:492
+#: configdialog.cpp:501
 msgid "Data Source Options"
 msgstr "Možnosti datových zdrojů"
 
-#: configdialog.cpp:497 fetchdialog.cpp:164
+#: configdialog.cpp:506 fetchdialog.cpp:171
 msgid "Source"
 msgstr "Zdroj"
 
-#: configdialog.cpp:508
+#: configdialog.cpp:517
 msgid "Move &Up"
 msgstr "Posunout &nahoru"
 
-#: configdialog.cpp:510 configdialog.cpp:514
+#: configdialog.cpp:519 configdialog.cpp:523
 msgid ""
 "The order of the data sources sets the order that Tellico uses when entries "
 "are automatically updated."
@@ -4163,43 +4433,43 @@ msgstr ""
 "Pořadí datových zdrojů určuje pořadí, kterého se Tellico drží při "
 "automatické aktualizaci záznamů."
 
-#: configdialog.cpp:512
+#: configdialog.cpp:521
 msgid "Move &Down"
 msgstr "Posunout &dolu"
 
-#: configdialog.cpp:519
+#: configdialog.cpp:528
 msgid "&New..."
 msgstr "&Nový..."
 
-#: configdialog.cpp:521
+#: configdialog.cpp:530
 msgid "Click to add a new data source."
 msgstr "Kliknutím přidáte nový datový zdroj."
 
-#: configdialog.cpp:522
+#: configdialog.cpp:531
 msgid "&Modify..."
 msgstr "&Upravit..."
 
-#: configdialog.cpp:524
+#: configdialog.cpp:533
 msgid "Click to modify the selected data source."
 msgstr "Kliknutím upravíte vybraný datový zdroj."
 
-#: configdialog.cpp:527
+#: configdialog.cpp:536
 msgid "Click to delete the selected data source."
 msgstr "Kliknutím vymažete vybraný datový zdroj."
 
-#: configdialog.cpp:530
+#: configdialog.cpp:539
 msgid "Click to download additional data sources via the Internet."
 msgstr "Kliknutím stáhnete z internetu další datové zdroje."
 
-#: configdialog.cpp:991
+#: configdialog.cpp:1016
 msgid "*.tar.gz *.tgz|Template Packages (*.tar.gz)"
 msgstr "*.tar.gz *.tgz|balíček se šablonami (*.tar.gz)"
 
-#: configdialog.cpp:1024
+#: configdialog.cpp:1049
 msgid "Delete Template"
 msgstr "Smazat šablonu"
 
-#: configdialog.cpp:1025
+#: configdialog.cpp:1050
 msgid "Select template to delete:"
 msgstr "Vyberte šablonu k vymazání:"
 
@@ -4219,51 +4489,56 @@ msgstr "Upravit půjčku..."
 msgid "Borrower (Sort by Count)"
 msgstr "Vypůjčitel (seřadit podle počtu)"
 
-#: collectionfactory.cpp:77
+#: collectionfactory.cpp:81
 msgid "My Collection"
 msgstr "Moje sbírka"
 
-#: collectionfactory.cpp:118
+#: collectionfactory.cpp:124
 msgid "Book Collection"
 msgstr "Sbírka knih"
 
-#: collectionfactory.cpp:120
+#: collectionfactory.cpp:126
 msgid "Comic Book Collection"
 msgstr "Sbírka komiksů"
 
-#: collectionfactory.cpp:121
+#: collectionfactory.cpp:127
 msgid "Video Collection"
 msgstr "Video sbírka"
 
-#: collectionfactory.cpp:122
+#: collectionfactory.cpp:128
 msgid "Music Collection"
 msgstr "Sbírka hudby"
 
-#: collectionfactory.cpp:123
+#: collectionfactory.cpp:129
 msgid "Coin Collection"
 msgstr "Sbírka mincí"
 
-#: collectionfactory.cpp:124
+#: collectionfactory.cpp:130
 msgid "Stamp Collection"
 msgstr "Sbírka známek"
 
-#: collectionfactory.cpp:125
+#: collectionfactory.cpp:131
 msgid "Wine Collection"
 msgstr "Sbírka vín"
 
-#: collectionfactory.cpp:126
+#: collectionfactory.cpp:132
 msgid "Card Collection"
 msgstr "Sbírka karet"
 
-#: collectionfactory.cpp:127
+#: collectionfactory.cpp:133
 msgid "Game Collection"
 msgstr "Sbírka her"
 
-#: collectionfactory.cpp:128
+#: collectionfactory.cpp:134
 msgid "File Catalog"
 msgstr "Katalog souborů"
 
-#: collectionfactory.cpp:129
+#: collectionfactory.cpp:135
+#, fuzzy
+msgid "Board Game Collection"
+msgstr "Sbírka her"
+
+#: collectionfactory.cpp:136
 msgid "Custom Collection"
 msgstr "Vlastní sbírka"
 
@@ -4329,71 +4604,72 @@ msgid "Encode in user locale (%1)"
 msgstr "Kódovat podle uživatelského nastavení (%1)"
 
 #: exportdialog.cpp:72
-msgid "Encode the exported file in the local format."
+#, fuzzy
+msgid "Encode the exported file in the local encoding."
 msgstr "Kódovat exportovaný soubor v místním formátu."
 
-#: fetchdialog.cpp:59
+#: fetchdialog.cpp:65
 msgid "&Search"
 msgstr "&Hledat"
 
-#: fetchdialog.cpp:60
+#: fetchdialog.cpp:66
 msgid "&Stop"
 msgstr "&Stop"
 
-#: fetchdialog.cpp:79
+#: fetchdialog.cpp:86
 msgid "Internet Search"
 msgstr "Internetové hledání"
 
-#: fetchdialog.cpp:87
+#: fetchdialog.cpp:94
 msgid "Search Query"
 msgstr "Dotaz pro vyhledávání"
 
-#: fetchdialog.cpp:93
+#: fetchdialog.cpp:100
 msgid ""
 "_: Start the search\n"
 "S&earch:"
 msgstr "Vyhl&edávání:"
 
-#: fetchdialog.cpp:97
+#: fetchdialog.cpp:104
 msgid "Enter a search value. An ISBN search must include the full ISBN."
 msgstr ""
 "Zadejte hodnotu k vyhledání. Hledání ISBN musí obsahovat celé ISBN."
 
-#: fetchdialog.cpp:104
+#: fetchdialog.cpp:111
 msgid "Choose the type of search"
 msgstr "Vyberte druh vyhledávání"
 
-#: fetchdialog.cpp:110
+#: fetchdialog.cpp:117
 msgid "Click to start or stop the search"
 msgstr "Kliknutím spustíte nebo zastavíte vyhledávání"
 
-#: fetchdialog.cpp:127
+#: fetchdialog.cpp:134
 msgid "&Multiple ISBN/UPC search"
 msgstr "&Vícenásobné hledání ISBN/UPC"
 
-#: fetchdialog.cpp:128
+#: fetchdialog.cpp:135
 msgid "Check this box to search for multiple ISBN or UPC values."
 msgstr ""
 "Zaškrtněte přepínač, chcete-li vyhledávat více ISBN nebo UPC hodnot."
 
-#: fetchdialog.cpp:131
+#: fetchdialog.cpp:138
 msgid "Edit List..."
 msgstr "Upravit seznam..."
 
-#: fetchdialog.cpp:133
+#: fetchdialog.cpp:140
 msgid ""
 "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr "Kliknutím otevřete okno pro zadání nebo úpravu více ISBN hodnot."
 
-#: fetchdialog.cpp:139
+#: fetchdialog.cpp:146
 msgid "Search s&ource:"
 msgstr "Hledat &v:"
 
-#: fetchdialog.cpp:147
+#: fetchdialog.cpp:154
 msgid "Select the database to search"
 msgstr "Vyberte databázi, která bude prohledávána"
 
-#: fetchdialog.cpp:170
+#: fetchdialog.cpp:177
 msgid ""
 "As results are found, they are added to this list. Selecting one will fetch "
 "the complete entry and show it in the view below."
@@ -4402,7 +4678,7 @@ msgstr ""
 "Vyberete-li nějaký, bude stažen kompletní záznam a zobrazen v pohledu "
 "níže."
 
-#: fetchdialog.cpp:178
+#: fetchdialog.cpp:185
 msgid ""
 "An entry may be shown here before adding it to the current collection by "
 "selecting it in the list above"
@@ -4410,76 +4686,77 @@ msgstr ""
 "Vybráním ze seznamu výše můžete na tomto místě zobrazit záznam "
 "před přidáním do aktuální sbírky."
 
-#: fetchdialog.cpp:185
+#: fetchdialog.cpp:192
 msgid "&Add Entry"
 msgstr "Přid&at záznam"
 
-#: fetchdialog.cpp:189
+#: fetchdialog.cpp:196
 msgid "Add the selected entry to the current collection"
 msgstr "Přidat označený záznam do aktuální sbírky"
 
-#: fetchdialog.cpp:191
+#: fetchdialog.cpp:198
 msgid "Get More Results"
 msgstr "Další výsledky"
 
-#: fetchdialog.cpp:194
+#: fetchdialog.cpp:201
 msgid "Fetch more results from the current data source"
 msgstr "Stáhnout další výsledky z aktuálního datového zdroje"
 
-#: fetchdialog.cpp:198
+#: fetchdialog.cpp:205
 msgid "Clear all search fields and results"
 msgstr "Vyprázdnit všechna vyhledávací pole a výsledky"
 
-#: fetchdialog.cpp:263
+#: fetchdialog.cpp:298
 msgid "Cancelling the search..."
 msgstr "Ruším vyhledávání..."
 
-#: fetchdialog.cpp:278 fetchdialog.cpp:437
+#: fetchdialog.cpp:313 fetchdialog.cpp:472
 msgid "Searching..."
 msgstr "Hledám..."
 
-#: fetchdialog.cpp:333
+#: fetchdialog.cpp:368
 msgid "The search returned no items."
 msgstr "Vyhledávání nevrátilo žádné výsledky."
 
-#: fetchdialog.cpp:337
+#: fetchdialog.cpp:372
 #, fuzzy, c-format
 msgid ""
 "_n: The search returned 1 item.\n"
 "The search returned %n items."
 msgstr "Výsledků vyhledávání: %n."
 
-#: fetchdialog.cpp:374
-msgid "<qt>No entries were found for the following ISBN values:</qt>"
+#: fetchdialog.cpp:412
+#, fuzzy
+msgid "No results were found for the following ISBN values:"
 msgstr ""
 "<qt>Pro následující kódy ISBN nebyly nalezeny žádné záznamy:</qt>"
 
-#: fetchdialog.cpp:408 fetchdialog.cpp:460
+#: fetchdialog.cpp:443 fetchdialog.cpp:495
 msgid "Fetching %1..."
 msgstr "Stahuji %1..."
 
-#: fetchdialog.cpp:493 fetchdialog.cpp:673
+#: fetchdialog.cpp:528 fetchdialog.cpp:708
 msgid "No Internet sources are available for your current collection type."
 msgstr ""
 "Pro druh aktuální sbírky nejsou k dispozici žádné internetové zdroje."
 
-#: fetchdialog.cpp:559
+#: fetchdialog.cpp:594
 msgid "Edit ISBN/UPC Values"
 msgstr "Upravit hodnoty ISBN/UPC"
 
-#: fetchdialog.cpp:563
+#: fetchdialog.cpp:598
 msgid "<qt>Enter the ISBN or UPC values, one per line.</qt>"
 msgstr "<qt>Zadejte hodnoty ISBN nebo UPC, jednu na řádek.</qt>"
 
-#: fetchdialog.cpp:569
+#: fetchdialog.cpp:604
 msgid "&Load From File..."
 msgstr "&Načíst ze souboru..."
 
-#: fetchdialog.cpp:570
+#: fetchdialog.cpp:605
 msgid "<qt>Load the list from a text file.</qt>"
 msgstr "<qt>Načíst seznam z textového souboru.</qt>"
 
-#: fetchdialog.cpp:589
+#: fetchdialog.cpp:624
 msgid ""
 "<qt>An ISBN search can contain a maximum of 100 ISBN values. Only the first "
 "100 values in your list will be used.</qt>"
@@ -4487,45 +4764,49 @@ msgstr ""
 "<qt>Vyhledávání ISBN může obsahovat maximálně 100 ISBN hodnot. Bude "
 "použito pouze prvních 100 hodnot vašeho seznamu.</qt>"
 
-#: entryeditdialog.cpp:50 entryeditdialog.cpp:357 entryeditdialog.cpp:381
-#: entryeditdialog.cpp:485
+#: entryeditdialog.cpp:51 entryeditdialog.cpp:382 entryeditdialog.cpp:406
+#: entryeditdialog.cpp:512
 msgid "Edit Entry"
 msgstr "Upravit záznam"
 
-#: entryeditdialog.cpp:51
+#: entryeditdialog.cpp:52
 msgid "&New Entry"
 msgstr "&Nový záznam"
 
-#: entryeditdialog.cpp:64 entryeditdialog.cpp:115 entryeditdialog.cpp:391
-#: entryeditdialog.cpp:514
+#: entryeditdialog.cpp:66 entryeditdialog.cpp:117 entryeditdialog.cpp:416
+#: entryeditdialog.cpp:540
 msgid "Sa&ve Entry"
 msgstr "&Uložit záznam"
 
-#: entryeditdialog.cpp:75
+#: entryeditdialog.cpp:77
 msgid "Go to the previous entry in the collection"
 msgstr "Jít na předchozí záznam ve sbírce"
 
-#: entryeditdialog.cpp:80
+#: entryeditdialog.cpp:82
 msgid "Go to the next entry in the collection"
 msgstr "Jít na následující záznam ve sbírce"
 
-#: entryeditdialog.cpp:313
+#: entryeditdialog.cpp:315
 msgid "Do you really want to modify these entries?"
 msgstr "Opravdu chcete upravit tyto záznamy?"
 
-#: entryeditdialog.cpp:315
+#: entryeditdialog.cpp:317
 msgid "Modify Multiple Entries"
 msgstr "Upravit více záznamů?"
 
-#: entryeditdialog.cpp:430
+#: entryeditdialog.cpp:359
+msgid "A value is required for the following fields. Do you want to continue?"
+msgstr ""
+
+#: entryeditdialog.cpp:456
 msgid "Edit Entries"
 msgstr "Upravit záznamy"
 
-#: entryeditdialog.cpp:462
+#: entryeditdialog.cpp:488
 msgid "Sa&ve Entries"
 msgstr "&Uložit záznamy"
 
-#: entryeditdialog.cpp:630
+#: entryeditdialog.cpp:656
 msgid ""
 "The current entry has been modified.\n"
 "Do you want to enter the changes?"
@@ -4533,7 +4814,7 @@ msgstr ""
 "Aktuální záznam byl změněn.\n"
 "Chcete zadat změny?"
 
-#: entryeditdialog.cpp:633
+#: entryeditdialog.cpp:659
 msgid "Save Entry"
 msgstr "Uložit záznam"
 
@@ -4572,7 +4853,35 @@ msgstr "Smazat filtr?"
 msgid "New collection name:"
 msgstr "Nový název sbírky:"
 
-#: entryview.cpp:169
+#: tellico_kernel.cpp:377
+#, fuzzy
+msgid "Entry 1"
+msgstr "Druh záznamu"
+
+#: tellico_kernel.cpp:378
+#, fuzzy
+msgid "Entry 2"
+msgstr "Druh záznamu"
+
+#: tellico_kernel.cpp:387
+msgid "Conflicting values for %1 were found while merging entries."
+msgstr ""
+
+#: tellico_kernel.cpp:393
+msgid "Please choose which value to keep."
+msgstr ""
+
+#: entrymerger.cpp:33 tellico_kernel.cpp:398
+#, fuzzy
+msgid "Merge Entries"
+msgstr "Smazat záznamy"
+
+#: tellico_kernel.cpp:399 tellico_kernel.cpp:400
+#, c-format
+msgid "Select value from %1"
+msgstr ""
+
+#: entryview.cpp:186
 msgid "Tellico is unable to locate the default entry stylesheet."
 msgstr "Tellico nemůže najít výchozí styl pro záznamy."
 
@@ -4602,6 +4911,16 @@ msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
 msgstr "kratky@rob.cz"
+
+#: entrymerger.cpp:35
+#, fuzzy
+msgid "Merging entries..."
+msgstr "Aktualizuji záznamy..."
+
+#: entrymerger.cpp:49
+#, fuzzy
+msgid "Total merged/scanned entries: %1/%2"
+msgstr "Celkem záznamů: %1"
 
 #: tips.cpp:3
 msgid ""
@@ -4941,16 +5260,84 @@ msgid "Copac (UK and Ireland)"
 msgstr ""
 
 #: scripts.cpp:2
+msgid "BoardGameGeek"
+msgstr ""
+
+#: scripts.cpp:4
 msgid "Dark Horse Comics"
 msgstr "Dark Horse Comics"
 
-#: scripts.cpp:4
+#: scripts.cpp:6
 msgid "Allocine.fr"
 msgstr "Allocine.fr"
 
-#: scripts.cpp:6
+#: scripts.cpp:8
 msgid "Spanish Ministry of Culture"
 msgstr "Španělské ministerstvo kultury"
+
+#, fuzzy
+#~ msgid "CrossRef"
+#~ msgstr "Křížový odkaz"
+
+#~ msgid "MODS"
+#~ msgstr "MODS"
+
+#~ msgid "RIS"
+#~ msgstr "RIS"
+
+#~ msgid "GCstar"
+#~ msgstr "GCstar"
+
+#~ msgid "AMC"
+#~ msgstr "AMC"
+
+#, fuzzy
+#~ msgid "Griffith"
+#~ msgstr "Dárek"
+
+#, fuzzy
+#~ msgid "Referencer"
+#~ msgstr "Křížový odkaz"
+
+#~ msgid "Comics"
+#~ msgstr "Komiks"
+
+#~ msgid "Stamps"
+#~ msgstr "Známky"
+
+#~ msgid "Coins"
+#~ msgstr "Mince"
+
+#~ msgid "Books"
+#~ msgstr "Knihy"
+
+#~ msgid "Wines"
+#~ msgstr "Vína"
+
+#~ msgid "Videos"
+#~ msgstr "Videa"
+
+#~ msgid "Games"
+#~ msgstr "Hry"
+
+#~ msgid "Cards"
+#~ msgstr "Karty"
+
+#~ msgid "Entries"
+#~ msgstr "Záznamy"
+
+#~ msgid "Albums"
+#~ msgstr "Alba"
+
+#~ msgid ""
+#~ "If checked, all images will be included in the data file, rather than saved "
+#~ "separately in the Tellico data directory. Saving a lot of images in the data "
+#~ "file cause Tellico to run more slowly."
+#~ msgstr ""
+#~ "Je-li zaškrtnuto, budou všechny obrázky vkládány do datového souboru, "
+#~ "místo aby byly ukládány samostatně v datovém adresáři Tellico. "
+#~ "Vložení velkého počtu obrázků do datového souboru může způsobit "
+#~ "zpomalení programu."
 
 #, fuzzy
 #~ msgid "Copac"

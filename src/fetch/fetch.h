@@ -28,6 +28,9 @@ enum FetchKey {
   ISBN,
   UPC,
   Keyword,
+  DOI,
+  ArxivID,
+  PubmedID,
   Raw,
   FetchLast
 };
@@ -44,7 +47,12 @@ enum Type {
   Yahoo,
   AnimeNfo,
   IBS,
-  ISBNdb
+  ISBNdb,
+  GCstarPlugin,
+  CrossRef,
+  Citebase,
+  Arxiv,
+  Bibsonomy
 };
 
   }

@@ -23,6 +23,10 @@
 #include "../latin1literal.h"
 #include "../stringset.h"
 
+extern "C" {
+#include "libcsv.h"
+}
+
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <knuminput.h>
@@ -30,6 +34,7 @@
 #include <kapplication.h>
 #include <kiconloader.h>
 #include <kconfig.h>
+#include <kmessagebox.h>
 
 #include <qgroupbox.h>
 #include <qlayout.h>
@@ -45,7 +50,50 @@
 
 using Tellico::Import::CSVImporter;
 
-const QChar CSVImporter::s_quote('"');
+static void writeToken(char* buffer, size_t len, void* data);
+static void writeRow(char buffer, void* data);
+
+class CSVImporter::Parser {
+public:
+  Parser(const QString& str) : stream(new QTextIStream(&str)) { csv_init(&parser, 0); }
+  ~Parser() { csv_free(parser); delete stream; stream = 0; }
+
+  void setDelimiter(const QString& s) { Q_ASSERT(s.length() == 1); csv_set_delim(parser, s[0].latin1()); }
+  void reset(const QString& str) { delete stream; stream = new QTextIStream(&str); };
+  bool hasNext() { return !stream->atEnd(); }
+  void skipLine() { stream->readLine(); }
+
+  void addToken(const QString& t) { tokens += t; }
+  void setRowDone(bool b) { done = b; }
+
+  QStringList nextTokens() {
+    tokens.clear();
+    done = false;
+    while(hasNext() && !done) {
+      QCString line = stream->readLine().utf8() + '\n'; // need the eol char
+      csv_parse(parser, line, line.length(), &writeToken, &writeRow, this);
+    }
+    csv_fini(parser, &writeToken, &writeRow, this);
+    return tokens;
+  }
+
+private:
+  struct csv_parser* parser;
+  QTextIStream* stream;
+  QStringList tokens;
+  bool done;
+};
+
+static void writeToken(char* buffer, size_t len, void* data) {
+  CSVImporter::Parser* p = static_cast<CSVImporter::Parser*>(data);
+  p->addToken(QString::fromUtf8(buffer, len));
+}
+
+static void writeRow(char c, void* data) {
+  Q_UNUSED(c);
+  CSVImporter::Parser* p = static_cast<CSVImporter::Parser*>(data);
+  p->setRowDone(true);
+}
 
 CSVImporter::CSVImporter(const KURL& url_) : Tellico::Import::TextImporter(url_),
     m_coll(0),
@@ -54,7 +102,15 @@ CSVImporter::CSVImporter(const KURL& url_) : Tellico::Import::TextImporter(url_)
     m_delimiter(QString::fromLatin1(",")),
     m_cancelled(false),
     m_widget(0),
-    m_table(0) {
+    m_table(0),
+    m_hasAssignedFields(false),
+    m_parser(new Parser(text())) {
+  m_parser->setDelimiter(m_delimiter);
+}
+
+CSVImporter::~CSVImporter() {
+  delete m_parser;
+  m_parser = 0;
 }
 
 Tellico::Data::CollPtr CSVImporter::collection() {
@@ -66,9 +122,6 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   if(!m_coll) {
     m_coll = CollectionFactory::collection(m_comboColl->currentType(), true);
   }
-
-  QString str = text();
-  QTextIStream t(&str);
 
   const QStringList existingNames = m_coll->fieldNames();
 
@@ -92,20 +145,19 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     }
   }
 
-  // we don't want to add fields from the default collection
-  // that are not in the imported data
-  for(QStringList::ConstIterator it = existingNames.begin(); it != existingNames.end(); ++it) {
-    if(names.findIndex(*it) == -1) {
-      m_coll->removeField(*it);
-    }
+  if(names.isEmpty()) {
+    myDebug() << "CSVImporter::collection() - no fields assigned" << endl;
+    return 0;
   }
+
+  m_parser->reset(text());
 
   // if the first row are headers, skip it
   if(m_firstRowHeader) {
-    t.readLine();
+    m_parser->skipLine();
   }
 
-  const uint numLines = str.contains('\n');
+  const uint numLines = text().contains('\n');
   const uint stepSize = QMAX(s_stepSize, numLines/100);
   const bool showProgress = options() & ImportProgress;
 
@@ -115,12 +167,13 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   ProgressItem::Done done(this);
 
   uint j = 0;
-  for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), ++j) {
+  while(!m_cancelled && m_parser->hasNext()) {
     bool empty = true;
     Data::EntryPtr entry = new Data::Entry(m_coll);
-    QStringList values = splitLine(line);
+    QStringList values = m_parser->nextTokens();
     for(uint i = 0; i < names.size(); ++i) {
-      QString value = values[cols[i]].simplifyWhiteSpace();
+//      QString value = values[cols[i]].simplifyWhiteSpace();
+      QString value = values[cols[i]].stripWhiteSpace();
       bool success = entry->setField(names[i], value);
       // we might need to add a new allowed value
       // assume that if the user is importing the value, it should be allowed
@@ -145,6 +198,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }
+    ++j;
   }
 
   {
@@ -173,7 +227,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   m_comboColl = new GUI::CollectionTypeCombo(box);
   lab->setBuddy(m_comboColl);
   QWhatsThis::add(m_comboColl, i18n("Select the type of collection being imported."));
-  connect(m_comboColl, SIGNAL(activated(const QString&)), SLOT(slotTypeChanged(const QString&)));
+  connect(m_comboColl, SIGNAL(activated(int)), SLOT(slotTypeChanged()));
   // need a spacer
   QWidget* w = new QWidget(box);
   box->setStretchFactor(w, 1);
@@ -214,6 +268,7 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   m_editOther = new KLineEdit(m_delimiterGroup);
   m_editOther->setEnabled(false);
   m_editOther->setFixedWidth(m_widget->fontMetrics().width('X') * 4);
+  m_editOther->setMaxLength(1);
   QWhatsThis::add(m_editOther, i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_delimiterGroupLayout->addWidget(m_editOther, 2, 2);
   connect(m_radioOther, SIGNAL(toggled(bool)),
@@ -286,88 +341,13 @@ QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
   return m_widget;
 }
 
-// nominally, everything should be separated by the delimiter
-// or quotes could surround the cell value if either the delimiter or quotes are contained
-// actual quotes may or may not be doubled
-QStringList CSVImporter::splitLine(const QString& line_) {
-  // double quote
-  QString dq = QString(s_quote) + s_quote;
-  // delimiter length
-  uint dn = m_delimiter.length();
-  // list of eventual field values
-  QStringList values;
-  if(dn == 0) {
-    return values;
+bool CSVImporter::validImport() const {
+  // at least one column has to be defined
+  if(!m_hasAssignedFields) {
+    KMessageBox::sorry(m_widget, i18n("At least one column must be assigned to a field. "
+                                      "Only assigned columns will be imported."));
   }
-
-  // temporary string to hold splits, and cumulative string for quoted fields
-  QString tmp, str;
-  // are we inside a quoted field or not
-  bool inquote = false;
-  // old position
-  int oldpos = -1;
-  for(int newpos = line_.find(m_delimiter); newpos != -1; newpos = line_.find(m_delimiter, oldpos+dn)) {
-    // grab temporary field value
-    tmp = line_.mid(oldpos+dn, newpos-oldpos-dn);
-
-    // if not inside a quote, and the string starts with a quote but doesn't end with one
-    if(!inquote && tmp.startsWith(s_quote) && !tmp.endsWith(s_quote)) {
-      // skip first quote character and add delimiter
-      str += tmp.mid(1) + m_delimiter;
-      // now we're inside
-      inquote = true;
-      oldpos = newpos;
-      continue;
-    }
-
-    // if inside a quoted field, and the new string doesn't end with a quote
-    if(inquote && !tmp.endsWith(s_quote)) {
-      //we're still in the field, so add the delimiter
-      str += tmp + m_delimiter;
-      oldpos = newpos;
-      continue;
-    }
-
-    // finally, now we're in a quote, but the new string ends the quote
-    if(inquote) {
-      // remove final quote character
-      tmp.truncate(tmp.length()-1);
-      // no longer in quoted field
-      inquote = false;
-    }
-
-    str += tmp;
-    // special case for fields that start and end with quote
-    if(str.startsWith(s_quote) && str.endsWith(s_quote)) {
-      str = str.mid(1, tmp.length()-2);
-    }
-
-    // append the temporary field value to the cumulative
-    // replace any double-quotes with single ones
-    str.replace(dq, s_quote);
-    // add the accumulated string to the list
-    values << str;
-    // clear the string now, since we've added it
-    str.truncate(0);
-    oldpos = newpos;
-  }
-
-  // get last word, too
-  tmp = line_.mid(oldpos + dn);
-  if(tmp.endsWith(s_quote)) {
-    if(inquote) {
-      tmp.truncate(tmp.length()-1);
-      str += tmp;
-    } else if(tmp.startsWith(s_quote)) {
-      str = tmp.mid(1, tmp.length()-2);
-    }
-  } else {
-    str += tmp;
-  }
-
-  str.replace(dq, s_quote);
-  values << str;
-  return values;
+  return m_hasAssignedFields;
 }
 
 void CSVImporter::fillTable() {
@@ -375,14 +355,13 @@ void CSVImporter::fillTable() {
     return;
   }
 
-  QString str = text();
-  QTextStream t(&str, IO_ReadOnly);
+  m_parser->reset(text());
+  // not skipping first row since the updateHeader() call depends on it
 
   int maxCols = 0;
-  QString line;
-  for(int row = 0; row < m_table->numRows(); ++row) {
-    line = t.readLine();
-    const QStringList values = splitLine(line);
+  int row = 0;
+  for( ; m_parser->hasNext() && row < m_table->numRows(); ++row) {
+    QStringList values = m_parser->nextTokens();
     if(static_cast<int>(values.count()) > m_table->numCols()) {
       m_table->setNumCols(values.count());
       m_colSpinBox->setMaxValue(values.count());
@@ -397,10 +376,16 @@ void CSVImporter::fillTable() {
       maxCols = col;
     }
   }
+  for( ; row < m_table->numRows(); ++row) {
+    for(int col = 0; col < m_table->numCols(); ++col) {
+      m_table->clearCell(row, col);
+    }
+  }
+
   m_table->setNumCols(maxCols);
 }
 
-void CSVImporter::slotTypeChanged(const QString&) {
+void CSVImporter::slotTypeChanged() {
   // iterate over the collection names until it matches the text of the combo box
   Data::Collection::Type type = static_cast<Data::Collection::Type>(m_comboColl->currentType());
   m_coll = CollectionFactory::collection(type, true);
@@ -418,6 +403,7 @@ void CSVImporter::slotTypeChanged(const QString&) {
 void CSVImporter::slotFirstRowHeader(bool b_) {
   m_firstRowHeader = b_;
   updateHeader(false);
+  fillTable();
 }
 
 void CSVImporter::slotDelimiter() {
@@ -432,6 +418,7 @@ void CSVImporter::slotDelimiter() {
     m_delimiter = m_editOther->text();
   }
   if(!m_delimiter.isEmpty()) {
+    m_parser->setDelimiter(m_delimiter);
     fillTable();
     updateHeader(false);
   }
@@ -456,8 +443,9 @@ void CSVImporter::slotSelectColumn(int pos_) {
 
 void CSVImporter::slotSetColumnTitle() {
   int col = m_colSpinBox->value()-1;
-  QString title = m_comboField->currentText();
+  const QString title = m_comboField->currentText();
   m_table->horizontalHeader()->setLabel(col, title);
+  m_hasAssignedFields = true;
   // make sure none of the other columns have this title
   bool found = false;
   for(int i = 0; i < col; ++i) {
@@ -489,9 +477,17 @@ void CSVImporter::updateHeader(bool force_) {
 
   Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
   for(int col = 0; col < m_table->numCols(); ++col) {
-    const QString s = m_table->text(0, col);
-    if(m_firstRowHeader && !s.isEmpty() && c && c->fieldByTitle(s) != 0) {
-      m_table->horizontalHeader()->setLabel(col, s);
+    QString s = m_table->text(0, col);
+    Data::FieldPtr f;
+    if(c) {
+      c->fieldByTitle(s);
+      if(!f) {
+        f = c->fieldByName(s);
+      }
+    }
+    if(m_firstRowHeader && !s.isEmpty() && c && f) {
+      m_table->horizontalHeader()->setLabel(col, f->title());
+      m_hasAssignedFields = true;
     } else {
       m_table->horizontalHeader()->setLabel(col, QString::number(col+1));
     }
@@ -546,7 +542,7 @@ void CSVImporter::slotActionChanged(int action_) {
      }
      break;
   }
-  slotTypeChanged(m_comboColl->currentText());
+  slotTypeChanged();
 }
 
 void CSVImporter::slotCancel() {

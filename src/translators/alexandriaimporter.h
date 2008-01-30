@@ -25,7 +25,7 @@ namespace Tellico {
   namespace Import {
 
 /**
- * An importer for importing collections used by ALexandria, the Gnome book collection manager.
+ * An importer for importing collections used by Alexandria, the Gnome book collection manager.
  *
  * The libraries are assumed to be in $HOME/.alexandria. The file format is YAML, but instead
  * using a real YAML reader, the file is parsed line-by-line, so it's very crude. When Alexandria

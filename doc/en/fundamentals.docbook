@@ -127,7 +127,7 @@ The default templates also make &URL; fields active, which will open up with the
 </para>
 
 <para>
-In addition, when a group item is selected in the &group-view;, an icon view of the entries is shown, using the first <link linkend="image">Image</link> field in the collection. Entries may be selected as in the &detailed-view;.
+In addition, when multiple entries are selected, an icon view is shown, using the first <link linkend="image">Image</link> field in the collection. Entries may be selected as in the &detailed-view;. Right-clicking in the icon view will show a menu that changes the sorting criteria for the entries.
 </para>
 
 </sect2>
@@ -184,7 +184,7 @@ The edit widget also supports drag-and-drop. Dragging an image file from a file-
 
 <warning>
 <para>
-By default, the images are stored in the collection data file, keeping everything contained in one location. However, too many images will cause &appname; to slow down significantly as well result in a very large data file. Alternatively, &appname; can save the images separately, in the <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/data/</filename> directory. Loading and saving data files is much faster if images are stored separately, but the data files are no longer portable or archivable.
+By default, the images are stored in the collection data file, keeping everything contained in one location. However, too many images will cause &appname; to slow down significantly as well result in a very large data file. Alternatively, &appname; can save the images separately, either in the <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/data/</filename> directory or in a directory in the same location as the data file. Loading and saving data files is much faster if images are stored separately, but the data files are no longer portable or archivable.
 Self-contained data files can always be created by using the <menuchoice><guimenu>File</guimenu><guimenu>Export</guimenu><guimenuitem>Export to Zip...</guimenuitem></menuchoice> menu item.
 </para>
 </warning>
@@ -570,6 +570,23 @@ within the stylesheet governs things like the font, the margins, etc.
 <tip>
 <para>You can add &html; tags to any <link linkend="para"><emphasis>Paragraph</emphasis></link> field for formatting, such as
 &lt;b&gt;<emphasis role="bold">bold</emphasis>&lt;/b&gt; or &lt;i&gt;<emphasis>italic</emphasis>&lt;/i&gt;.
+</para>
+</tip>
+
+<tip>
+<para>In the &detailed-view;, you can press a letter on the
+keyboard to skip to the next entry that starts with that letter.
+</para>
+</tip>
+
+<tip>
+<para>You can use Dependent Fields to combine multiple separated fields
+into a single field. Just select the type Dependent and use a description
+similar to "<userinput>Value: %{fielda}%{fieldb}</userinput>" where %{...} gets replaced with the
+appropriate field value. This is useful to collect multiple values in a
+single field, e.g. for better grouping, and to combine fields of different
+types by respecting proper sorting at the same time. Consider for example
+a number field followed by a text subfield with entries 3b, 14a.
 </para>
 </tip>
 

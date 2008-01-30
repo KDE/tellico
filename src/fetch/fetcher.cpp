@@ -15,20 +15,27 @@
 #include "messagehandler.h"
 #include "../entry.h"
 
+#include <kglobal.h>
 #include <kconfig.h>
 
 using Tellico::Fetch::Fetcher;
 using Tellico::Fetch::SearchResult;
 
-void Fetcher::readConfig(KConfig* config_, const QString& group_) {
-  KConfigGroupSaver groupSaver(config_, group_);
-  QString s = config_->readEntry("Name");
+Fetcher::~Fetcher() {
+  KConfigGroup config(KGlobal::config(), m_configGroup);
+  saveConfigHook(config);
+}
+
+void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_) {
+  m_configGroup = groupName_;
+
+  QString s = config_.readEntry("Name");
   if(!s.isEmpty()) {
     m_name = s;
   }
-  m_updateOverwrite = config_->readBoolEntry("UpdateOverwrite", false);
+  m_updateOverwrite = config_.readBoolEntry("UpdateOverwrite", false);
   // be sure to read config for subclass
-  readConfigHook(config_, group_);
+  readConfigHook(config_);
 }
 
 void Fetcher::message(const QString& message_, int type_) const {

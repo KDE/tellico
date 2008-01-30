@@ -112,7 +112,7 @@ FileHandler::FileRef* FileHandler::fileRef(const KURL& url_, bool quiet_) {
   return new FileRef(url_, quiet_);
 }
 
-QString FileHandler::readTextFile(const KURL& url_, bool quiet_/*=false*/) {
+QString FileHandler::readTextFile(const KURL& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QString::null;
@@ -120,6 +120,9 @@ QString FileHandler::readTextFile(const KURL& url_, bool quiet_/*=false*/) {
 
   f.open(quiet_);
   QTextStream stream(f.file());
+  if(useUTF8_) {
+    stream.setEncoding(QTextStream::UnicodeUTF8);
+  }
   return stream.read();
 }
 

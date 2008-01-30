@@ -29,8 +29,7 @@ typedef QMap<int, QString> CollectionNameMap;
  */
 class CollectionFactory {
 public:
-  static Data::CollPtr collection(int type, bool addFields,
-                                  const QString& entryTitle=QString::null);
+  static Data::CollPtr collection(int type, bool addFields);
   static Data::CollPtr collection(const QString& typeName, bool addFields);
   static CollectionNameMap nameMap();
   static QString typeName(int type);

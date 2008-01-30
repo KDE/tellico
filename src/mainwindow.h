@@ -14,6 +14,14 @@
 #ifndef TELLICO_MAINWINDOW_H
 #define TELLICO_MAINWINDOW_H
 
+#include <config.h>
+
+#include "core/dcopinterface.h"
+#include "translators/translators.h"
+#include "datavectors.h"
+
+#include <kmainwindow.h>
+
 class KToolBar;
 class KURL;
 class KAction;
@@ -26,14 +34,6 @@ class KDialogBase;
 class QCloseEvent;
 class QSplitter;
 class QListViewItem;
-
-#include <config.h>
-
-#include "core/dcopinterface.h"
-#include "translators/translators.h"
-#include "datavectors.h"
-
-#include <kmainwindow.h>
 
 namespace Tellico {
 // forward declarations
@@ -56,6 +56,7 @@ namespace Tellico {
   class FetchDialog;
   class ReportDialog;
   class StatusBar;
+  class DropHandler;
 
 /**
  * The base class for Tellico application windows. It sets up the main
@@ -69,10 +70,11 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class MainWindow : public KMainWindow, public DCOPInterface {
+class MainWindow : public KMainWindow, public ApplicationInterface {
 Q_OBJECT
 
 friend class Controller;
+friend class DropHandler;
 
 public:
   /**
@@ -114,10 +116,11 @@ public:
    */
   virtual bool exportCollection(Export::Format format, const KURL& url);
   /**
-   * DCOP call to return bibtex keys. Returnd empty list if the current
-   * collection is not a bibliography.
+   * Used by DCOP
    */
-  virtual QStringList bibtexKeys() const;
+  virtual void openFile(const QString& file);
+  virtual void setFilter(const QString& text);
+  virtual bool showEntry(long id);
 
 public slots:
   /**
@@ -287,6 +290,10 @@ public slots:
    * Hides the string macro editor dialog for the application.
    */
   void slotHideStringMacroDialog();
+  /**
+   * Handle a url that indicates some actino should be taken
+   */
+  void slotURLAction(const KURL& url);
 
 private:
   /**
@@ -466,14 +473,18 @@ private slots:
   void slotRenameCollection();
 
 private:
-  KConfig* m_config;
+  void importFile(Import::Format format, const KURL::List& kurls);
+  bool importCollection(Data::CollPtr coll, Import::Action action);
 
+  // the reason that I have to keep pointers to all these
+  // is because they get plugged into menus later in Controller
   KRecentFilesAction* m_fileOpenRecent;
   KAction* m_fileSave;
   KAction* m_newEntry;
   KAction* m_editEntry;
   KAction* m_copyEntry;
   KAction* m_deleteEntry;
+  KAction* m_mergeEntry;
   KActionMenu* m_updateEntryMenu;
   KAction* m_updateAll;
   KAction* m_checkInEntry;
@@ -508,6 +519,7 @@ private:
   ReportDialog* m_reportDlg;
 
   QPtrList<KAction> m_fetchActions;
+  CollectionInterface m_collInterface;
 
   // keep track of the number of queued filter updates
   uint m_queuedFilters;

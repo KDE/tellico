@@ -195,8 +195,8 @@ void ReportDialog::slotSaveAs() {
   QString filter = i18n("*.html|HTML Files (*.html)") + QChar('\n') + i18n("*|All Files");
   KURL u = KFileDialog::getSaveURL(QString::null, filter, this);
   if(!u.isEmpty() && u.isValid()) {
-    KConfigGroupSaver saver(KGlobal::config(), "ExportOptions");
-    bool encode = saver.config()->readBoolEntry("EncodeUTF8", true);
+    KConfigGroup config(KGlobal::config(), "ExportOptions");
+    bool encode = config.readBoolEntry("EncodeUTF8", true);
     int oldOpt = m_exporter->options();
 
     // turn utf8 off

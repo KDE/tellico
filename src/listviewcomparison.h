@@ -19,6 +19,7 @@
 #include <qregexp.h>
 
 class QStringList;
+class QIconViewItem;
 
 namespace Tellico {
   namespace GUI {
@@ -30,7 +31,10 @@ public:
   ListViewComparison(Data::ConstFieldPtr field);
   virtual ~ListViewComparison() {}
 
+  const QString& fieldName() const { return m_fieldName; }
+
   virtual int compare(int col, const GUI::ListViewItem* item1, const GUI::ListViewItem* item2, bool asc);
+  virtual int compare(const QIconViewItem* item1, const QIconViewItem* item2);
 
   static ListViewComparison* create(Data::FieldPtr field);
   static ListViewComparison* create(Data::ConstFieldPtr field);
@@ -39,7 +43,6 @@ protected:
   virtual int compare(const QString& str1, const QString& str2) = 0;
 
 private:
-  QString key(const GUI::ListViewItem* item, int column, bool ascending);
   QString m_fieldName;
 };
 
@@ -84,6 +87,7 @@ public:
   PixmapComparison(Data::ConstFieldPtr field);
 
   virtual int compare(int col, const GUI::ListViewItem* item1, const GUI::ListViewItem* item2, bool asc);
+  virtual int compare(const QIconViewItem* item1, const QIconViewItem* item2);
 
 protected:
   virtual int compare(const QString&, const QString&) { return 0; }
@@ -94,6 +98,7 @@ public:
   DependentComparison(Data::ConstFieldPtr field);
 
   virtual int compare(int col, const GUI::ListViewItem* item1, const GUI::ListViewItem* item2, bool asc);
+  virtual int compare(const QIconViewItem* item1, const QIconViewItem* item2);
 
 private:
   QPtrList<ListViewComparison> m_comparisons;

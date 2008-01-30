@@ -210,7 +210,7 @@ de champ peut être utilisé dans la description pour la mise en forme.
 <para>
 &appname; gère onwe types de collections par défaut : livres, entrées
 bibliographiques, bandes dessinées, vidéos, musique, jeux vidéo, cartes,
-monnaie, timbres, vins et catalogues de fichiers. De plus, un modèle de
+monnaie, timbres, vins; jeux de plateau et catalogues de fichiers. De plus, un modèle de
 collection générique est disponible pour tout autre type d'objet à
 collectionner. Les collections sont uniquement présentes pour inclure un jeu de
 champs, vous pouvez en ajouter, modifier et effacer pour l'adapter à vos
@@ -549,6 +549,29 @@ Les collections de vins ont 15 champs par défaut.
 <emphasis>Note</emphasis>,
 <emphasis>Offert</emphasis>,
 <emphasis>Étiquette</emphasis>, et
+<emphasis>Commentaires</emphasis>.
+</para>
+
+</sect2>
+
+<sect2 id="board-game-collection">
+<title>Collections de jeux plateau</title>
+<para>
+Les collections de jeux de plateau ont 15 champs par défaut.
+<emphasis>Titre</emphasis>,
+<emphasis>Genre</emphasis>,
+<emphasis>Mécanisme</emphasis>,
+<emphasis>Année de parution</emphasis>,
+<emphasis>Éditeur</emphasis>,
+<emphasis>Créateur</emphasis>,
+<emphasis>Nombre de joueurs</emphasis>,
+<emphasis>Description</emphasis>,
+<emphasis>Note personnelle</emphasis>,
+<emphasis>Date d'achat</emphasis>,
+<emphasis>Prix d'achat</emphasis>,
+<emphasis>Offert</emphasis>,
+<emphasis>Prêté</emphasis>,
+<emphasis>Couverture</emphasis>, et
 <emphasis>Commentaires</emphasis>.
 </para>
 

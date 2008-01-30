@@ -425,6 +425,7 @@ AC_DEFUN([KDE_SET_PATHS],
 	kde_widgetdir=\"$kde_widgetdir\" \
 	xdg_appsdir=\"$xdg_appsdir\" \
 	xdg_menudir=\"$xdg_menudir\" \
+	xdg_mimedir=\"$xdg_mimedir\" \
 	xdg_directorydir=\"$xdg_directorydir\" \
 	kde_result=$1"
 ])
@@ -500,6 +501,9 @@ if test "$1" = "default"; then
   if test -z "$xdg_menudir"; then
     xdg_menudir='\${sysconfdir}/xdg/menus'
   fi
+  if test -z "$xdg_mimedir"; then
+    xdg_mimedir='\${datadir}/mime/packages'
+  fi
   if test -z "$xdg_directorydir"; then
     xdg_directorydir='\${datadir}/desktop-directories'
   fi
@@ -528,8 +532,8 @@ AC_DEFUN([KDE_CHECK_PATHS_FOR_COMPLETENESS],
    test -z "$kde_wallpaperdir" || test -z "$kde_templatesdir" ||
    test -z "$kde_bindir" || test -z "$kde_servicesdir" ||
    test -z "$kde_servicetypesdir" || test -z "$kde_moduledir" ||
-   test -z "$kde_styledir" || test -z "kde_widgetdir" ||
-   test -z "$xdg_appsdir" || test -z "$xdg_menudir" || test -z "$xdg_directorydir" ||
+   test -z "$kde_styledir" || test -z "$kde_widgetdir" ||
+   test -z "$xdg_appsdir" || test -z "$xdg_menudir" || test -z "$xdg_mimedir" || test -z "$xdg_directorydir" ||
    test "x$kde_have_all_paths" != "xyes"; then
      kde_have_all_paths=no
   fi
@@ -670,7 +674,7 @@ if test "$kde_have_all_paths" = "no" && test "$kde_cached_paths" = "yes"; then
   kde_have_all_paths=
   kde_styledir=
   kde_widgetdir=
-  xdg_appsdir = xdg_menudir= xdg_directorydir= 
+  xdg_appsdir = xdg_menudir= xdg_mimedir= xdg_directorydir= 
   KDE_SET_DEFAULT_PATHS($1)
   eval "$kde_cv_all_paths"
   KDE_CHECK_PATHS_FOR_COMPLETENESS
@@ -710,6 +714,7 @@ AC_SUBST(kde_bindir)
 dnl X Desktop Group standards
 AC_SUBST(xdg_appsdir)
 AC_SUBST(xdg_menudir)
+AC_SUBST(xdg_mimedir)
 AC_SUBST(xdg_directorydir)
 dnl for KDE 2
 AC_SUBST(kde_templatesdir)
@@ -1999,6 +2004,7 @@ int main() {
     printf("kde_widgetdir=\\"/tmp/dummy\\"\n");
     printf("xdg_appsdir=\\"/tmp/dummy\\"\n");
     printf("xdg_menudir=\\"/tmp/dummy\\"\n");
+    printf("xdg_mimedir=\\"/tmp/dummy\\"\n");
     printf("xdg_directorydir=\\"/tmp/dummy\\"\n");
     printf("kde_kcfgdir=\\"/tmp/dummy\\"\n");
     return 0;
