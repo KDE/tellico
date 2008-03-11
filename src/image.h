@@ -79,9 +79,14 @@ public:
   bool isNull() const { return id.isEmpty(); }
   QString id;
   QCString format;
-  int width;
-  int height;
   bool linkOnly : 1;
+
+  int width(bool loadIfNecessary=true) const;
+  int height(bool loadIfNecessary=true) const;
+
+private:
+  mutable int m_width;
+  mutable int m_height;
 };
 
   } // end namespace

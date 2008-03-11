@@ -229,7 +229,7 @@ void FilterRuleWidgetLister::setFilter(Filter::Ptr filter_) {
   }
 
   // set the right number of widgets
-  setNumberOfShownWidgetsTo(KMAX(count, mMinWidgets));
+  setNumberOfShownWidgetsTo(QMAX(count, mMinWidgets));
 
   // load the actions into the widgets
   QPtrListIterator<QWidget> wIt(mWidgetList);
@@ -325,7 +325,7 @@ void FilterDialog::init() {
   enableButtonOK(false); // disable at start
   actionButton(Help)->setDefault(false); // Help automatically becomes default when OK is disabled
   actionButton(Cancel)->setDefault(true); // Help automatically becomes default when OK is disabled
-  setMinimumWidth(KMAX(minimumWidth(), FILTER_MIN_WIDTH));
+  setMinimumWidth(QMAX(minimumWidth(), FILTER_MIN_WIDTH));
   setHelp(QString::fromLatin1("filter-dialog"));
 }
 

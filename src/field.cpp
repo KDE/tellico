@@ -360,7 +360,7 @@ QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
 QString Field::formatDate(const QString& date_) {
   // internally, this is "year-month-day"
   // any of the three may be empty
-  // but not all three, which might be the case when a nonsense string happens
+  // if they're not digits, return the original string
   bool empty = true;
   // for empty year, use current
   // for empty month or date, use 1
@@ -385,7 +385,7 @@ QString Field::formatDate(const QString& date_) {
     d = 1;
   }
   // rather use ISO date formatting than locale formatting for now. Primarily, it makes sorting just work.
-  return empty ? QString() : QDate(y, m, d).toString(Qt::ISODate);
+  return empty ? date_ : QDate(y, m, d).toString(Qt::ISODate);
   // use short form
 //  return KGlobal::locale()->formatDate(date, true);
 }
@@ -560,10 +560,10 @@ void Field::convertOldRating(Data::FieldPtr field_) {
     if(!ok) {
       return; // no need to convert
     }
-    min = KMIN(min, n);
-    max = KMAX(max, n);
+    min = QMIN(min, n);
+    max = QMAX(max, n);
   }
-  max = KMIN(max, 10);
+  max = QMIN(max, 10);
   if(min >= max) {
     min = 1;
     max = 5;

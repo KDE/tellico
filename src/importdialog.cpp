@@ -138,7 +138,6 @@ Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const 
       break;
 
     case Import::Bibtex:
-      CHECK_SIZE;
       importer = new Import::BibtexImporter(urls_);
       break;
 
@@ -332,6 +331,12 @@ Tellico::Import::FormatMap ImportDialog::formatMap() {
   map[Import::Referencer] = QString::fromLatin1("Referencer");
   map[Import::Delicious ] = QString::fromLatin1("Delicious Library");
   return map;
+}
+
+bool ImportDialog::formatImportsText(Import::Format format_) {
+  return format_ != Import::AMC &&
+         format_ != Import::Griffith &&
+         format_ != Import::PDF;
 }
 
 QString ImportDialog::startDir(Import::Format format_) {

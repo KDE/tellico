@@ -69,8 +69,8 @@ public:
   Fetcher::Ptr createUpdateFetcher(int collType, const QString& source);
 
   static QString typeName(Type type);
-  static QPixmap fetcherIcon(Fetch::Type type);
-  static QPixmap fetcherIcon(Fetch::Fetcher::CPtr ptr);
+  static QPixmap fetcherIcon(Fetch::Type type, int iconGroup=3 /*Small*/, int size=0 /* default */);
+  static QPixmap fetcherIcon(Fetch::Fetcher::CPtr ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
 
 signals:
   void signalStatus(const QString& status);

@@ -22,13 +22,13 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
-#if AMAZON_SUPPORT
+#ifdef AMAZON_SUPPORT
 #include "amazonfetcher.h"
 #endif
-#if IMDB_SUPPORT
+#ifdef IMDB_SUPPORT
 #include "imdbfetcher.h"
 #endif
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
 #include "z3950fetcher.h"
 #endif
 #include "srufetcher.h"
@@ -43,6 +43,8 @@
 #include "arxivfetcher.h"
 #include "citebasefetcher.h"
 #include "bibsonomyfetcher.h"
+#include "googlescholarfetcher.h"
+#include "discogsfetcher.h"
 
 #include <kglobal.h>
 #include <kconfig.h>
@@ -56,6 +58,9 @@
 
 #include <qfileinfo.h>
 #include <qdir.h>
+
+#define LOAD_ICON(name, group, size) \
+  KGlobal::iconLoader()->loadIcon(name, static_cast<KIcon::Group>(group), size_)
 
 using Tellico::Fetch::Manager;
 Manager* Manager::s_self = 0;
@@ -73,6 +78,8 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   m_keyMap.insert(DOI,        i18n("DOI"));
   m_keyMap.insert(ArxivID,    i18n("arXiv ID"));
   m_keyMap.insert(PubmedID,   i18n("Pubmed ID"));
+  // to keep from having a new i18n string, just remove octothorpe
+  m_keyMap.insert(LCCN,       i18n("LCCN#").remove('#'));
   m_keyMap.insert(Raw,        i18n("Raw Query"));
 //  m_keyMap.insert(FetchLast,  QString::null);
 }
@@ -245,7 +252,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KConfig* config_, const QStr
   Fetcher::Ptr f = 0;
   switch(fetchType) {
     case Amazon:
-#if AMAZON_SUPPORT
+#ifdef AMAZON_SUPPORT
       {
         int site = config.readNumEntry("Site", AmazonFetcher::Unknown);
         if(site == AmazonFetcher::Unknown) {
@@ -258,13 +265,13 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KConfig* config_, const QStr
       break;
 
     case IMDB:
-#if IMDB_SUPPORT
+#ifdef IMDB_SUPPORT
       f = new IMDBFetcher(this);
 #endif
       break;
 
     case Z3950:
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
       f = new Z3950Fetcher(this);
 #endif
       break;
@@ -317,6 +324,14 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KConfig* config_, const QStr
       f = new BibsonomyFetcher(this);
       break;
 
+    case GoogleScholar:
+      f = new GoogleScholarFetcher(this);
+      break;
+
+    case Discogs:
+      f = new DiscogsFetcher(this);
+      break;
+
     case Unknown:
     default:
       break;
@@ -330,10 +345,10 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KConfig* config_, const QStr
 // static
 Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FetcherVec vec;
-#if AMAZON_SUPPORT
+#ifdef AMAZON_SUPPORT
   vec.append(new AmazonFetcher(AmazonFetcher::US, this));
 #endif
-#if IMDB_SUPPORT
+#ifdef IMDB_SUPPORT
   vec.append(new IMDBFetcher(this));
 #endif
   vec.append(SRUFetcher::libraryOfCongress(this));
@@ -341,6 +356,8 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   vec.append(new YahooFetcher(this));
   vec.append(new AnimeNfoFetcher(this));
   vec.append(new ArxivFetcher(this));
+  vec.append(new GoogleScholarFetcher(this));
+  vec.append(new DiscogsFetcher(this));
 // only add IBS if user includes italian
   if(KGlobal::locale()->languagesTwoAlpha().contains(QString::fromLatin1("it"))) {
     vec.append(new IBSFetcher(this));
@@ -398,13 +415,13 @@ void Manager::updateStatus(const QString& message_) {
 
 Tellico::Fetch::TypePairList Manager::typeList() {
   Fetch::TypePairList list;
-#if AMAZON_SUPPORT
+#ifdef AMAZON_SUPPORT
   list.append(TypePair(AmazonFetcher::defaultName(), Amazon));
 #endif
-#if IMDB_SUPPORT
+#ifdef IMDB_SUPPORT
   list.append(TypePair(IMDBFetcher::defaultName(),         IMDB));
 #endif
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
   list.append(TypePair(Z3950Fetcher::defaultName(),        Z3950));
 #endif
   list.append(TypePair(SRUFetcher::defaultName(),          SRU));
@@ -419,6 +436,8 @@ Tellico::Fetch::TypePairList Manager::typeList() {
   list.append(TypePair(ArxivFetcher::defaultName(),        Arxiv));
   list.append(TypePair(CitebaseFetcher::defaultName(),     Citebase));
   list.append(TypePair(BibsonomyFetcher::defaultName(),    Bibsonomy));
+  list.append(TypePair(GoogleScholarFetcher::defaultName(),GoogleScholar));
+  list.append(TypePair(DiscogsFetcher::defaultName(),      Discogs));
 
   // now find all the scripts distributed with tellico
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QString::fromLatin1("data-sources/*.spec"),
@@ -447,17 +466,17 @@ Tellico::Fetch::TypePairList Manager::typeList() {
 Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Type type_, const QString& name_) {
   ConfigWidget* w = 0;
   switch(type_) {
-#if AMAZON_SUPPORT
+#ifdef AMAZON_SUPPORT
     case Amazon:
       w = new AmazonFetcher::ConfigWidget(parent_);
       break;
 #endif
-#if IMDB_SUPPORT
+#ifdef IMDB_SUPPORT
     case IMDB:
       w = new IMDBFetcher::ConfigWidget(parent_);
       break;
 #endif
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
     case Z3950:
       w = new Z3950Fetcher::ConfigWidget(parent_);
       break;
@@ -519,7 +538,13 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Type type_
     case Bibsonomy:
       w = new BibsonomyFetcher::ConfigWidget(parent_);
       break;
-    default:
+    case GoogleScholar:
+      w = new GoogleScholarFetcher::ConfigWidget(parent_);
+      break;
+    case Discogs:
+      w = new DiscogsFetcher::ConfigWidget(parent_);
+      break;
+    case Unknown:
       kdWarning() << "Fetch::Manager::configWidget() - no widget defined for type = " << type_ << endl;
   }
   return w;
@@ -528,13 +553,13 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Type type_
 // static
 QString Manager::typeName(Fetch::Type type_) {
   switch(type_) {
-#if AMAZON_SUPPORT
+#ifdef AMAZON_SUPPORT
     case Amazon: return AmazonFetcher::defaultName();
 #endif
-#if IMDB_SUPPORT
+#ifdef IMDB_SUPPORT
     case IMDB: return IMDBFetcher::defaultName();
 #endif
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
     case Z3950: return Z3950Fetcher::defaultName();
 #endif
     case SRU: return SRUFetcher::defaultName();
@@ -549,14 +574,16 @@ QString Manager::typeName(Fetch::Type type_) {
     case Arxiv: return ArxivFetcher::defaultName();
     case Citebase: return CitebaseFetcher::defaultName();
     case Bibsonomy: return BibsonomyFetcher::defaultName();
-    default: break;
+    case GoogleScholar: return GoogleScholarFetcher::defaultName();
+    case Discogs: return DiscogsFetcher::defaultName();
+    case Unknown: break;
   }
   myWarning() << "Manager::typeName() - none found for " << type_ << endl;
   return QString::null;
 }
 
-QPixmap Manager::fetcherIcon(Fetch::Fetcher::CPtr fetcher_) {
-#if HAVE_YAZ
+QPixmap Manager::fetcherIcon(Fetch::Fetcher::CPtr fetcher_, int group_, int size_) {
+#ifdef HAVE_YAZ
   if(fetcher_->type() == Fetch::Z3950) {
     const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
     KURL u;
@@ -564,7 +591,7 @@ QPixmap Manager::fetcherIcon(Fetch::Fetcher::CPtr fetcher_) {
     u.setHost(f->host());
     QString icon = favIcon(u);
     if(u.isValid() && !icon.isEmpty()) {
-      return SmallIcon(icon);
+      return LOAD_ICON(icon, group_, size_);
     }
   } else
 #endif
@@ -581,19 +608,19 @@ QPixmap Manager::fetcherIcon(Fetch::Fetcher::CPtr fetcher_) {
     } else if(p.find(QString::fromLatin1("boardgamegeek")) > -1) {
       u = QString::fromLatin1("http://www.boardgamegeek.com");
     } else if(f->source().find(QString::fromLatin1("amarok"), 0, false /*case-sensitive*/) > -1) {
-      return SmallIcon(QString::fromLatin1("amarok"));
+      return LOAD_ICON(QString::fromLatin1("amarok"), group_, size_);
     }
     if(!u.isEmpty() && u.isValid()) {
       QString icon = favIcon(u);
       if(!icon.isEmpty()) {
-        return SmallIcon(icon);
+        return LOAD_ICON(icon, group_, size_);
       }
     }
   }
-  return fetcherIcon(fetcher_->type());
+  return fetcherIcon(fetcher_->type(), group_);
 }
 
-QPixmap Manager::fetcherIcon(Fetch::Type type_) {
+QPixmap Manager::fetcherIcon(Fetch::Type type_, int group_, int size_) {
   QString name;
   switch(type_) {
     case Amazon:
@@ -626,11 +653,15 @@ QPixmap Manager::fetcherIcon(Fetch::Type type_) {
       name = favIcon("http://citebase.org"); break;
     case Bibsonomy:
       name = favIcon("http://bibsonomy.org"); break;
-    default:
+    case GoogleScholar:
+      name = favIcon("http://scholar.google.com"); break;
+    case Discogs:
+      name = favIcon("http://www.discogs.com"); break;
+    case Unknown:
       kdWarning() << "Fetch::Manager::fetcherIcon() - no pixmap defined for type = " << type_ << endl;
   }
 
-  return name.isEmpty() ? QPixmap() : SmallIcon(name);
+  return name.isEmpty() ? QPixmap() : LOAD_ICON(name, group_, size_);
 }
 
 QString Manager::favIcon(const KURL& url_) {

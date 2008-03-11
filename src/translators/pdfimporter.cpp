@@ -112,7 +112,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       newColl->addEntries(entry);
     }
 
-#if HAVE_POPPLER
+#ifdef HAVE_POPPLER
 
     // now load from poppler
     Poppler::Document* doc = Poppler::Document::load(ref->fileName());

@@ -28,6 +28,7 @@
 #include <kapplication.h>
 #include <kfileitem.h>
 #include <kio/chmodjob.h>
+#include <kfilterdev.h>
 
 #include <qdom.h>
 #include <qfile.h>
@@ -52,7 +53,7 @@ private:
 
 QPtrList<FileHandler::ItemDeleter> FileHandler::s_deleterList;
 
-FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : m_file(0), m_isValid(false) {
+FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_, bool allowCompressed_) : m_device(0), m_isValid(false) {
   if(url_.isEmpty()) {
     return;
   }
@@ -69,24 +70,32 @@ FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_) : m_file(0), m_isVa
     return;
   }
 
-  m_file = new QFile(m_filename);
-  if(m_file->exists()) {
+/*
+  QFile* file = new QFile(m_filename);
+  if(file->exists()) {
     m_isValid = true;
+    m_device = file;
   } else {
-    delete m_file;
-    m_file = 0;
+    delete file;
   }
+*/
+  if(allowCompressed_) {
+    m_device = KFilterDev::deviceForFile(m_filename);
+  } else {
+    m_device = new QFile(m_filename);
+  }
+  m_isValid = true;
 }
 
 FileHandler::FileRef::~FileRef() {
   if(!m_filename.isEmpty()) {
     Tellico::NetAccess::removeTempFile(m_filename);
   }
-  if(m_file) {
-    m_file->close();
+  if(m_device) {
+    m_device->close();
   }
-  delete m_file;
-  m_file = 0;
+  delete m_device;
+  m_device = 0;
   m_isValid = false;
 }
 
@@ -94,14 +103,14 @@ bool FileHandler::FileRef::open(bool quiet_) {
   if(!isValid()) {
     return false;
   }
-  if(!m_file || !m_file->open(IO_ReadOnly)) {
+  if(!m_device || !m_device->open(IO_ReadOnly)) {
     if(!quiet_) {
       KURL u;
       u.setPath(fileName());
       Kernel::self()->sorry(i18n(errorLoad).arg(u.fileName()));
     }
-    delete m_file;
-    m_file = 0;
+    delete m_device;
+    m_device = 0;
     m_isValid = false;
     return false;
   }
@@ -112,18 +121,20 @@ FileHandler::FileRef* FileHandler::fileRef(const KURL& url_, bool quiet_) {
   return new FileRef(url_, quiet_);
 }
 
-QString FileHandler::readTextFile(const KURL& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/) {
-  FileRef f(url_, quiet_);
+QString FileHandler::readTextFile(const KURL& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/, bool compress_/*=false*/) {
+  FileRef f(url_, quiet_, compress_);
   if(!f.isValid()) {
     return QString::null;
   }
 
-  f.open(quiet_);
-  QTextStream stream(f.file());
-  if(useUTF8_) {
-    stream.setEncoding(QTextStream::UnicodeUTF8);
+  if(f.open(quiet_)) {
+    QTextStream stream(f.file());
+    if(useUTF8_) {
+      stream.setEncoding(QTextStream::UnicodeUTF8);
+    }
+    return stream.read();
   }
-  return stream.read();
+  return QString();
 }
 
 QDomDocument FileHandler::readXMLFile(const KURL& url_, bool processNamespace_, bool quiet_) {
@@ -135,7 +146,9 @@ QDomDocument FileHandler::readXMLFile(const KURL& url_, bool processNamespace_, 
   QDomDocument doc;
   QString errorMsg;
   int errorLine, errorColumn;
-  f.open(quiet_);
+  if(!f.open(quiet_)) {
+    return QDomDocument();
+  }
   if(!doc.setContent(f.file(), processNamespace_, &errorMsg, &errorLine, &errorColumn)) {
     if(!quiet_) {
       QString details = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);

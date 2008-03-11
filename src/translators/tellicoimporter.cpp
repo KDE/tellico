@@ -74,7 +74,7 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
     if(!fileRef().open()) {
       return 0;
     }
-    QFile* f = fileRef().file();
+    QIODevice* f = fileRef().file();
     for(uint i = 0; i < 5; ++i) {
       s += static_cast<char>(f->getch());
     }
@@ -643,6 +643,7 @@ void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
   QString id = shareString(link ? elem_.attribute(QString::fromLatin1("id"))
                                 : Data::Image::idClean(elem_.attribute(QString::fromLatin1("id"))));
 
+  bool readInfo = true;
   if(loadImage_) {
     QByteArray ba;
     KCodecs::base64Decode(QCString(elem_.text().latin1()), ba);
@@ -652,14 +653,15 @@ void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
         myDebug() << "TellicoImporter::readImage(XML) - null image for " << id << endl;
       }
       m_hasImages = true;
+      readInfo = false;
     }
-  } else {
+  }
+  if(readInfo) {
+    // a width or height of 0 is ok here
     int width = elem_.attribute(QString::fromLatin1("width")).toInt();
     int height = elem_.attribute(QString::fromLatin1("height")).toInt();
-    if(width > 0 && height > 0) {
-      Data::ImageInfo info(id, format.latin1(), width, height, link);
-      ImageFactory::cacheImageInfo(info);
-    }
+    Data::ImageInfo info(id, format.latin1(), width, height, link);
+    ImageFactory::cacheImageInfo(info);
   }
 }
 

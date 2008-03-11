@@ -493,10 +493,27 @@
        <xsl:text>text-align: center; padding-left: 5px</xsl:text>
       </xsl:attribute>
      </xsl:if>
-     <xsl:call-template name="simple-field-value">
-      <xsl:with-param name="entry" select="$entry"/>
-      <xsl:with-param name="field" select="$column"/>
-     </xsl:call-template>
+     <xsl:choose>
+      <xsl:when test="$link-entries and $field/@name = 'title'">
+       <a>
+        <xsl:attribute name="href">
+         <xsl:call-template name="filename">
+          <xsl:with-param name="entry" select="$entry"/>
+         </xsl:call-template>
+        </xsl:attribute>
+        <xsl:call-template name="simple-field-value">
+         <xsl:with-param name="entry" select="$entry"/>
+         <xsl:with-param name="field" select="$column"/>
+        </xsl:call-template>
+       </a>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:call-template name="simple-field-value">
+        <xsl:with-param name="entry" select="$entry"/>
+        <xsl:with-param name="field" select="$column"/>
+       </xsl:call-template>
+      </xsl:otherwise>
+     </xsl:choose>
     </xsl:when>
 
     <xsl:when test="$numvalues = 1">

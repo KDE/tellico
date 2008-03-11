@@ -43,7 +43,7 @@ QPixmap EntryGroupItem::ratingPixmap() {
     return QPixmap();
   }
 
-  QPixmap newPix(m_pix.width() + 4 + stars.width(), KMAX(m_pix.height(), stars.height()));
+  QPixmap newPix(m_pix.width() + 4 + stars.width(), QMAX(m_pix.height(), stars.height()));
   newPix.fill(isSelected() ? listView()->colorGroup().highlight() : backgroundColor(0));
   QPainter p(&newPix);
   if(!m_pix.isNull()) {

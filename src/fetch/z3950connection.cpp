@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
 extern "C" {
 #include <yaz/zoom.h>
 #include <yaz/marcdisp.h>
@@ -52,7 +52,7 @@ Z3950ResultFound::~Z3950ResultFound() {
 class Z3950Connection::Private {
 public:
   Private() {}
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
   ~Private() {
     ZOOM_options_destroy(conn_opt);
     ZOOM_connection_destroy(conn);
@@ -116,7 +116,7 @@ void Z3950Connection::run() {
   m_aborted = false;
   m_hasMore = false;
   resultsLeft = 0;
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
 
   if(!makeConnection()) {
     done();
@@ -323,7 +323,7 @@ bool Z3950Connection::makeConnection() {
   }
 //  myDebug() << "Z3950Connection::makeConnection() - " << m_fetcher->source() << endl;
 // I don't know what to do except assume database, user, and password are in locale encoding
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
   d->conn_opt = ZOOM_options_create();
   ZOOM_options_set(d->conn_opt, "implementationName", "Tellico");
   ZOOM_options_set(d->conn_opt, "databaseName",       toCString(m_dbname));
@@ -388,7 +388,7 @@ QString Z3950Connection::toString(const QCString& text_) {
 
 // static
 QCString Z3950Connection::iconvRun(const QCString& text_, const QString& fromCharSet_, const QString& toCharSet_) {
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
   if(text_.isEmpty()) {
     return text_;
   }
@@ -441,7 +441,7 @@ QCString Z3950Connection::iconvRun(const QCString& text_, const QString& fromCha
 }
 
 QString Z3950Connection::toXML(const QCString& marc_, const QString& charSet_) {
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
   if(marc_.isEmpty()) {
     myDebug() << "Z3950Connection::toXML() - empty string" << endl;
     return QString::null;

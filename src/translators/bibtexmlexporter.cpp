@@ -106,7 +106,7 @@ bool BibtexmlExporter::exec() {
       key = BibtexHandler::bibtexKey(entryIt.data());
     }
     QString newKey = key;
-    uint c = 'a';
+    char c = 'a';
     while(usedKeys.has(newKey)) {
       // duplicate found!
       newKey = key + c;

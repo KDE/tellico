@@ -111,8 +111,8 @@ ReportDialog::ReportDialog(QWidget* parent_, const char* name_/*=0*/)
   m_HTMLPart->write(text);
   m_HTMLPart->end();
 
-  setMinimumWidth(KMAX(minimumWidth(), REPORT_MIN_WIDTH));
-  setMinimumHeight(KMAX(minimumHeight(), REPORT_MIN_HEIGHT));
+  setMinimumWidth(QMAX(minimumWidth(), REPORT_MIN_WIDTH));
+  setMinimumHeight(QMAX(minimumHeight(), REPORT_MIN_HEIGHT));
   resize(configDialogSize(QString::fromLatin1("Report Dialog Options")));
 }
 

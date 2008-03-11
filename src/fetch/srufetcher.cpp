@@ -141,19 +141,18 @@ void SRUFetcher::search(FetchKey key_, const QString& value_) {
       break;
 
     case ISBN:
-      {
-        // lccn searches here, don't do any isbn validation, just trust the user
-        str.remove('-');
-        // limit to first isbn
-        str = str.section(';', 0, 0);
-        QString s;
-        if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
-          s = QString::fromLatin1("bath.isbn=") + str + QString::fromLatin1(" or bath.lccn=") + str;
-        } else {
-          s = QString::fromLatin1("bath.isbn=") + str + QString::fromLatin1(" or bath.issn=") + str;
-        }
-        u.addQueryItem(QString::fromLatin1("query"), s);
-      }
+      // no validation here
+      str.remove('-');
+      // limit to first isbn
+      str = str.section(';', 0, 0);
+      u.addQueryItem(QString::fromLatin1("query"), QString::fromLatin1("bath.isbn=") + str);
+      break;
+
+    case LCCN:
+      // limit to first lccn
+      str.remove('-');
+      str = str.section(';', 0, 0);
+      u.addQueryItem(QString::fromLatin1("query"), QString::fromLatin1("bath.lccn=") + str);
       break;
 
     case Keyword:
@@ -335,20 +334,24 @@ Tellico::Data::EntryPtr SRUFetcher::fetchEntry(uint uid_) {
 void SRUFetcher::updateEntry(Data::EntryPtr entry_) {
 //  myDebug() << "SRUFetcher::updateEntry() - " << source() << ": " << entry_->title() << endl;
   QString isbn = entry_->field(QString::fromLatin1("isbn"));
-  if(isbn.isEmpty()) {
-    isbn = entry_->field(QString::fromLatin1("lccn"));
-  }
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);
     return;
-  } else {
-    // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-    QString t = entry_->field(QString::fromLatin1("title"));
-    if(!t.isEmpty()) {
-      search(Fetch::Title, t);
-      return;
-    }
   }
+
+  QString lccn = entry_->field(QString::fromLatin1("lccn"));
+  if(!lccn.isEmpty()) {
+    search(Fetch::LCCN, lccn);
+    return;
+  }
+
+  // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
+  QString t = entry_->field(QString::fromLatin1("title"));
+  if(!t.isEmpty()) {
+    search(Fetch::Title, t);
+    return;
+  }
+
   myDebug() << "SRUFetcher::updateEntry() - insufficient info to search" << endl;
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
@@ -479,6 +482,7 @@ SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*
     m_hostEdit->setText(fetcher_->m_host);
     m_portSpinBox->setValue(fetcher_->m_port);
     m_pathEdit->setText(fetcher_->m_path);
+    m_formatCombo->setCurrentData(fetcher_->m_format);
   }
   KAcceleratorManager::manage(optionsWidget());
 }

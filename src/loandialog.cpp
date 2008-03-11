@@ -177,7 +177,7 @@ void LoanDialog::slotBorrowerNameChanged(const QString& str_) {
 }
 
 void LoanDialog::slotDueDateChanged() {
-#if HAVE_KCAL
+#ifdef HAVE_KCAL
   m_addEvent->setEnabled(m_dueDate->date().isValid());
 #endif
 }

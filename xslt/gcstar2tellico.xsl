@@ -118,14 +118,14 @@
     </xsl:for-each>
    </xsl:element>
   </xsl:when>
-  
+
   <xsl:otherwise>
    <xsl:element name="{concat('tc:',$tag)}">
     <xsl:attribute name="i18n">true</xsl:attribute>
     <xsl:value-of select="."/>
    </xsl:element>
   </xsl:otherwise>
-  
+
  </xsl:choose>
 </xsl:template>
 
@@ -175,7 +175,11 @@
 </xsl:template>
 
 <xsl:template match="director">
- <tc:directors><tc:director><xsl:value-of select="."/></tc:director></tc:directors>
+ <tc:directors>
+  <tc:director>
+   <xsl:value-of select="."/>
+  </tc:director>
+ </tc:directors>
 </xsl:template>
 
 <xsl:template match="audio">
@@ -272,9 +276,9 @@
 <xsl:template match="comments">
  <tc:comments>
   <xsl:if test="$coll = 2">
-   <br/>
+   &lt;br/&gt;
    <xsl:value-of select="../description"/>
-   <br/>
+   &lt;br/&gt;
   </xsl:if>
   <xsl:value-of select="."/>
  </tc:comments>
@@ -331,27 +335,14 @@
  </tc:publishers>
 </xsl:template>
 
-<xsl:template name="year">
- <xsl:param name="value"/>
- <!-- want to find a 4-digit number to treat as the year --> 
- <xsl:variable name="nondigits" select="translate($value,'0123456789','')"/>
-  <xsl:choose>
-
-   <xsl:when test="string-length($nondigits) = 0">
-    <xsl:if test="string-length($value) = 4">
-     <xsl:value-of select="."/>
-    </xsl:if>
-   </xsl:when>
-
-   <xsl:otherwise>
-    <xsl:for-each select="str:tokenize($value,$nondigits)">
-     <xsl:if test="string-length() = 4">
-      <xsl:value-of select="."/>
-     </xsl:if>
-    </xsl:for-each>
-   </xsl:otherwise>
-
-  </xsl:choose>
+<xsl:template match="tags">
+ <tc:keywords>
+  <xsl:for-each select="line">
+   <tc:keyword>
+    <xsl:value-of select="col[1]"/>
+   </tc:keyword>
+  </xsl:for-each>
+ </tc:keywords>
 </xsl:template>
 
 <xsl:template match="currency">
@@ -405,5 +396,27 @@
  </tc:num-players>
 </xsl:template>
 
-<!-- bggid parse -->
+<xsl:template name="year">
+ <xsl:param name="value"/>
+ <!-- want to find a 4-digit number to treat as the year --> 
+ <xsl:variable name="nondigits" select="translate($value,'0123456789','')"/>
+  <xsl:choose>
+
+   <xsl:when test="string-length($nondigits) = 0">
+    <xsl:if test="string-length($value) = 4">
+     <xsl:value-of select="."/>
+    </xsl:if>
+   </xsl:when>
+
+   <xsl:otherwise>
+    <xsl:for-each select="str:tokenize($value,$nondigits)">
+     <xsl:if test="string-length() = 4">
+      <xsl:value-of select="."/>
+     </xsl:if>
+    </xsl:for-each>
+   </xsl:otherwise>
+
+  </xsl:choose>
+</xsl:template>
+
 </xsl:stylesheet>

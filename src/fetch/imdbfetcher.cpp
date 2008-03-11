@@ -507,11 +507,11 @@ void IMDBFetcher::parseMultipleNameResults() {
   }
 
   // find beginning of partial matches
-  int end = output.find(QString::fromLatin1("Other Results"), KMAX(pos, 0), false);
+  int end = output.find(QString::fromLatin1("Other Results"), QMAX(pos, 0), false);
   if(end == -1) {
-    end = output.find(QString::fromLatin1("Partial Matches"), KMAX(pos, 0), false);
+    end = output.find(QString::fromLatin1("Partial Matches"), QMAX(pos, 0), false);
     if(end == -1) {
-      end = output.find(QString::fromLatin1("Approx Matches"), KMAX(pos, 0), false);
+      end = output.find(QString::fromLatin1("Approx Matches"), QMAX(pos, 0), false);
       if(end == -1) {
         end = output.length();
       }
@@ -831,7 +831,7 @@ void IMDBFetcher::doPerson(const QString& str_, Data::EntryPtr entry_,
   divRx.setMinimal(true);
   QString name = QString::fromLatin1("/name/");
 
-  QStringList people;
+  StringSet people;
   for(int pos = str_.find(imdbHeader_); pos > 0; pos = str_.find(imdbHeader_, pos)) {
     // loop until repeated <br> tags or </div> tag
     const int endPos1 = str_.find(br2Rx, pos);
@@ -840,13 +840,13 @@ void IMDBFetcher::doPerson(const QString& str_, Data::EntryPtr entry_,
     pos = s_anchorRx->search(str_, pos+1);
     while(pos > -1 && pos < endPos) {
       if(s_anchorRx->cap(1).find(name) > -1) {
-        people += s_anchorRx->cap(2);
+        people.add(s_anchorRx->cap(2));
       }
       pos = s_anchorRx->search(str_, pos+1);
     }
   }
   if(!people.isEmpty()) {
-    entry_->setField(fieldName_, people.join(sep));
+    entry_->setField(fieldName_, people.toList().join(sep));
   }
 }
 

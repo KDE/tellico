@@ -22,7 +22,6 @@
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
 
-#include <kglobal.h> // for KMAX
 #include <kapplication.h>
 
 using Tellico::Import::BibtexmlImporter;
@@ -52,7 +51,7 @@ void BibtexmlImporter::loadDomDocument() {
 //  kdDebug() << "BibtexmlImporter::loadDomDocument - found " << entryelems.count() << " entries" << endl;
 
   const uint count = entryelems.count();
-  const uint stepSize = KMAX(s_stepSize, count/100);
+  const uint stepSize = QMAX(s_stepSize, count/100);
   const bool showProgress = options() & ImportProgress;
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);

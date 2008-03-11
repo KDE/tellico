@@ -211,10 +211,10 @@ void YahooFetcher::slotComplete(KIO::Job* job_) {
       break;
     }
     QString desc = entry->field(QString::fromLatin1("artist"))
-               + QChar('/')
-               + entry->field(QString::fromLatin1("label"))
-               + QChar('/')
-               + entry->field(QString::fromLatin1("year"));
+                 + QChar('/')
+                 + entry->field(QString::fromLatin1("label"))
+                 + QChar('/')
+                 + entry->field(QString::fromLatin1("year"));
 
     SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));

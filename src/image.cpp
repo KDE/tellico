@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "image.h"
+#include "imagefactory.h"
 #include "tellico_debug.h"
 
 #include <kmdcodec.h>
@@ -125,15 +126,37 @@ void Image::calculateID() {
 ImageInfo::ImageInfo(const Image& img_)
     : id(img_.id())
     , format(img_.format())
-    , width(img_.width())
-    , height(img_.height())
-    , linkOnly(img_.linkOnly()) {
+    , linkOnly(img_.linkOnly())
+    , m_width(img_.width())
+    , m_height(img_.height()) {
 }
 
 ImageInfo::ImageInfo(const QString& id_, const QCString& format_, int w_, int h_, bool l_)
     : id(id_)
     , format(format_)
-    , width(w_)
-    , height(h_)
-    , linkOnly(l_) {
+    , linkOnly(l_)
+    , m_width(w_)
+    , m_height(h_) {
+}
+
+int ImageInfo::width(bool loadIfNecessary) const {
+  if(m_width < 1 && loadIfNecessary) {
+    const Image& img = ImageFactory::imageById(id);
+    if(!img.isNull()) {
+      m_width = img.width();
+      m_height = img.height();
+    }
+  }
+  return m_width;
+}
+
+int ImageInfo::height(bool loadIfNecessary) const {
+  if(m_height < 1 && loadIfNecessary) {
+    const Image& img = ImageFactory::imageById(id);
+    if(!img.isNull()) {
+      m_width = img.width();
+      m_height = img.height();
+    }
+  }
+  return m_height;
 }

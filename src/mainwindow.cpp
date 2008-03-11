@@ -85,6 +85,10 @@
 #include <qwhatsthis.h>
 #include <qvbox.h>
 
+// the null string and bool are dummy arguments
+#define MIME_ICON(s) \
+  KMimeType::mimeType(QString::fromLatin1(s))->icon(QString::null, false)
+
 namespace {
   static const int MAIN_WINDOW_MIN_WIDTH = 600;
   //static const int PRINTED_PAGE_OVERLAP = 0;
@@ -183,7 +187,7 @@ void MainWindow::initActions() {
 
   KActionMenu* fileNewMenu = new KActionMenu(actionCollection(), "file_new_collection");
   fileNewMenu->setText(i18n("New"));
-  fileNewMenu->setIconSet(BarIconSet(QString::fromLatin1("filenew"))); // doesn't work
+//  fileNewMenu->setIconSet(BarIconSet(QString::fromLatin1("filenew"))); // doesn't work
   fileNewMenu->setIconSet(BarIcon(QString::fromLatin1("filenew")));
   fileNewMenu->setToolTip(i18n("Create a new collection"));
   fileNewMenu->setDelayed(false);
@@ -323,6 +327,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_tellico");
   action->setText(i18n("Import Tellico Data..."));
   action->setToolTip(i18n("Import another Tellico data file"));
+  action->setIcon(QString::fromLatin1("tellico"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::TellicoXML);
@@ -330,6 +335,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_csv");
   action->setText(i18n("Import CSV Data..."));
   action->setToolTip(i18n("Import a CSV file"));
+  action->setIcon(MIME_ICON("text/x-csv"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::CSV);
@@ -337,6 +343,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_mods");
   action->setText(i18n("Import MODS Data..."));
   action->setToolTip(i18n("Import a MODS data file"));
+  action->setIcon(MIME_ICON("text/xml"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::MODS);
@@ -344,6 +351,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_alexandria");
   action->setText(i18n("Import Alexandria Data..."));
   action->setToolTip(i18n("Import data from the Alexandria book collection manager"));
+  action->setIcon(QString::fromLatin1("alexandria"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Alexandria);
@@ -351,6 +359,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_delicious");
   action->setText(i18n("Import Delicious Library Data..."));
   action->setToolTip(i18n("Import data from Delicious Library"));
+  action->setIcon(MIME_ICON("text/xml"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Delicious);
@@ -358,6 +367,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_referencer");
   action->setText(i18n("Import Referencer Data..."));
   action->setToolTip(i18n("Import data from Referencer"));
+  action->setIcon(QString::fromLatin1("referencer"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Referencer);
@@ -365,6 +375,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_bibtex");
   action->setText(i18n("Import Bibtex Data..."));
   action->setToolTip(i18n("Import a bibtex bibliography file"));
+  action->setIcon(MIME_ICON("text/x-bibtex"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Bibtex);
@@ -372,6 +383,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_bibtexml");
   action->setText(i18n("Import Bibtexml Data..."));
   action->setToolTip(i18n("Import a Bibtexml bibliography file"));
+  action->setIcon(MIME_ICON("text/xml"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Bibtexml);
@@ -379,6 +391,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_ris");
   action->setText(i18n("Import RIS Data..."));
   action->setToolTip(i18n("Import an RIS reference file"));
+  action->setIcon(MIME_ICON("application/x-research-info-systems"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::RIS);
@@ -386,6 +399,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_pdf");
   action->setText(i18n("Import PDF File..."));
   action->setToolTip(i18n("Import a PDF file"));
+  action->setIcon(MIME_ICON("application/pdf"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::PDF);
@@ -393,26 +407,29 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_audiofile");
   action->setText(i18n("Import Audio File Metadata..."));
   action->setToolTip(i18n("Import meta-data from audio files"));
+  action->setIcon(MIME_ICON("audio/x-mp3"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::AudioFile);
-#if !HAVE_TAGLIB
+#ifndef HAVE_TAGLIB
   action->setEnabled(false);
 #endif
 
   action = new KAction(actionCollection(), "file_import_freedb");
   action->setText(i18n("Import Audio CD Data..."));
   action->setToolTip(i18n("Import audio CD information"));
+  action->setIcon(MIME_ICON("media/audiocd"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::FreeDB);
-#if !HAVE_KCDDB
+#ifndef HAVE_KCDDB
   action->setEnabled(false);
 #endif
 
   action = new KAction(actionCollection(), "file_import_gcfilms");
   action->setText(i18n("Import GCstar Data..."));
   action->setToolTip(i18n("Import a GCstar data file"));
+  action->setIcon(QString::fromLatin1("gcstar"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::GCfilms);
@@ -420,6 +437,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_griffith");
   action->setText(i18n("Import Griffith Data..."));
   action->setToolTip(i18n("Import a Griffith database"));
+  action->setIcon(QString::fromLatin1("griffith"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::Griffith);
@@ -427,6 +445,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_amc");
   action->setText(i18n("Import Ant Movie Catalog Data..."));
   action->setToolTip(i18n("Import an Ant Movie Catalog data file"));
+  action->setIcon(MIME_ICON("application/x-crossover-amc"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::AMC);
@@ -434,6 +453,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_filelisting");
   action->setText(i18n("Import File Listing..."));
   action->setToolTip(i18n("Import information about files in a folder"));
+  action->setIcon(MIME_ICON("inode/directory"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::FileListing);
@@ -441,6 +461,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_xslt");
   action->setText(i18n("Import XSL Transform..."));
   action->setToolTip(i18n("Import using an XSL Transform"));
+  action->setIcon(MIME_ICON("text/x-xslt"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::XSLT);
@@ -460,6 +481,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_xml");
   action->setText(i18n("Export to XML..."));
   action->setToolTip(i18n("Export to a Tellico XML file"));
+  action->setIcon(QString::fromLatin1("tellico"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::TellicoXML);
@@ -467,6 +489,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_zip");
   action->setText(i18n("Export to Zip..."));
   action->setToolTip(i18n("Export to a Tellico Zip file"));
+  action->setIcon(QString::fromLatin1("tellico"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::TellicoZip);
@@ -474,6 +497,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_html");
   action->setText(i18n("Export to HTML..."));
   action->setToolTip(i18n("Export to an HTML file"));
+  action->setIcon(MIME_ICON("text/html"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::HTML);
@@ -481,6 +505,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_csv");
   action->setText(i18n("Export to CSV..."));
   action->setToolTip(i18n("Export to a comma-separated values file"));
+  action->setIcon(MIME_ICON("text/x-csv"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::CSV);
@@ -488,6 +513,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_pilotdb");
   action->setText(i18n("Export to PilotDB..."));
   action->setToolTip(i18n("Export to a PilotDB database"));
+  action->setIcon(MIME_ICON("application/vnd.palm"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::PilotDB);
@@ -495,6 +521,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_alexandria");
   action->setText(i18n("Export to Alexandria..."));
   action->setToolTip(i18n("Export to an Alexandria library"));
+  action->setIcon(QString::fromLatin1("alexandria"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::Alexandria);
@@ -502,6 +529,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_bibtex");
   action->setText(i18n("Export to Bibtex..."));
   action->setToolTip(i18n("Export to a bibtex file"));
+  action->setIcon(MIME_ICON("text/x-bibtex"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::Bibtex);
@@ -509,6 +537,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_bibtexml");
   action->setText(i18n("Export to Bibtexml..."));
   action->setToolTip(i18n("Export to a Bibtexml file"));
+  action->setIcon(MIME_ICON("text/xml"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::Bibtexml);
@@ -516,6 +545,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_onix");
   action->setText(i18n("Export to ONIX..."));
   action->setToolTip(i18n("Export to an ONIX file"));
+  action->setIcon(MIME_ICON("text/xml"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::ONIX);
@@ -523,6 +553,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_gcfilms");
   action->setText(i18n("Export to GCfilms..."));
   action->setToolTip(i18n("Export to a GCfilms data file"));
+  action->setIcon(QString::fromLatin1("gcstar"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::GCfilms);
@@ -535,6 +566,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_xslt");
   action->setText(i18n("Export XSL Transform..."));
   action->setToolTip(i18n("Export using an XSL Transform"));
+  action->setIcon(MIME_ICON("text/x-xslt"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::XSLT);
@@ -582,7 +614,7 @@ void MainWindow::initActions() {
                               Controller::self(), SLOT(slotDeleteSelectedEntries()),
                               actionCollection(), "coll_delete_entry");
   m_deleteEntry->setToolTip(i18n("Delete the selected entries"));
-  m_mergeEntry = new KAction(i18n("&Merge Entries"), QString::fromLatin1("editmerge"), CTRL + Key_G,
+  m_mergeEntry = new KAction(i18n("&Merge Entries"), QString::fromLatin1("editcopy"), CTRL + Key_G,
                               Controller::self(), SLOT(slotMergeSelectedEntries()),
                               actionCollection(), "coll_merge_entry");
   m_mergeEntry->setToolTip(i18n("Merge the selected entries"));
@@ -613,7 +645,8 @@ void MainWindow::initActions() {
                        this, SLOT(slotConvertToBibliography()),
                        actionCollection(), "coll_convert_bibliography");
   action->setToolTip(i18n("Convert a book collection to a bibliography"));
-  action = new KAction(i18n("String &Macros..."), 0,
+  action->setIconSet(UserIconSet(QString::fromLatin1("bibtex")));
+  action = new KAction(i18n("String &Macros..."), QString::fromLatin1("view_text"), 0,
                        this, SLOT(slotShowStringMacroDialog()),
                        actionCollection(), "coll_string_macros");
   action->setToolTip(i18n("Edit the bibtex string macros"));
@@ -625,18 +658,21 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "cite_clipboard");
   action->setText(i18n("Copy Bibtex to Cli&pboard"));
   action->setToolTip(i18n("Copy bibtex citations to the clipboard"));
+  action->setIcon(QString::fromLatin1("editpaste"));
   connect(action, SIGNAL(activated()), citeMapper, SLOT(map()));
   citeMapper->setMapping(action, Cite::CiteClipboard);
 
   action = new KAction(actionCollection(), "cite_lyxpipe");
   action->setText(i18n("Cite Entry in &LyX"));
   action->setToolTip(i18n("Cite the selected entries in LyX"));
+  action->setIcon(QString::fromLatin1("lyx"));
   connect(action, SIGNAL(activated()), citeMapper, SLOT(map()));
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
 
   action = new KAction(actionCollection(), "cite_openoffice");
   action->setText(i18n("Ci&te Entry in OpenOffice.org"));
   action->setToolTip(i18n("Cite the selected entries in OpenOffice.org"));
+  action->setIcon(QString::fromLatin1("ooo-writer"));
   connect(action, SIGNAL(activated()), citeMapper, SLOT(map()));
   citeMapper->setMapping(action, Cite::CiteOpenOffice);
 

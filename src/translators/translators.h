@@ -17,7 +17,7 @@
 namespace Tellico {
   namespace Import {
     enum Format {
-      TellicoXML,
+      TellicoXML = 0,
       Bibtex,
       Bibtexml,
       CSV,
@@ -52,7 +52,7 @@ namespace Tellico {
 
   namespace Export {
     enum Format {
-      TellicoXML,
+      TellicoXML = 0,
       TellicoZip,
       Bibtex,
       Bibtexml,

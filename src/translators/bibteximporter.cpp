@@ -70,9 +70,8 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
   m_coll = new Data::BibtexCollection(true);
 
   int count = 0;
-  KURL::List urls = this->urls();
   // might be importing text only
-  if(urls.isEmpty()) {
+  if(!text().isEmpty()) {
     QString text = this->text();
     Data::CollPtr coll = readCollection(text, count);
     if(!coll || coll->entryCount() == 0) {
@@ -80,7 +79,10 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
     } else {
       m_coll->addEntries(coll->entries());
     }
-  } else for(KURL::List::ConstIterator it = urls.begin(); it != urls.end(); ++it, ++count) {
+  }
+
+  KURL::List urls = this->urls();
+  for(KURL::List::ConstIterator it = urls.begin(); it != urls.end(); ++it, ++count) {
     if(m_cancelled) {
       return 0;
     }
@@ -108,6 +110,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
 
 Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n) {
   if(text.isEmpty()) {
+    myDebug() << "BibtexImporter::readCollection() - no text" << endl;
     return 0;
   }
   Data::CollPtr ptr = new Data::BibtexCollection(true);
@@ -181,7 +184,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
             end_macro = false;
             break;
           case BTAST_MACRO:
-            str += QString::fromUtf8(svalue) + QString::fromLatin1("#");
+            str += QString::fromUtf8(svalue) + '#';
             end_macro = true;
             break;
           default:

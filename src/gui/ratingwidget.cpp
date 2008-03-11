@@ -17,7 +17,6 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
-#include <kglobal.h> // needed for KMAX
 #include <kiconloader.h>
 
 #include <qintdict.h>
@@ -57,8 +56,8 @@ RatingWidget::RatingWidget(Data::FieldPtr field_, QWidget* parent_, const char* 
   setSpacing(0);
 
   // find maximum width and height
-  int w = KMAX(RATING_WIDGET_MAX_STAR_SIZE, KMAX(m_pixOn.width(), m_pixOff.width()));
-  int h = KMAX(RATING_WIDGET_MAX_STAR_SIZE, KMAX(m_pixOn.height(), m_pixOff.height()));
+  int w = QMAX(RATING_WIDGET_MAX_STAR_SIZE, QMAX(m_pixOn.width(), m_pixOff.width()));
+  int h = QMAX(RATING_WIDGET_MAX_STAR_SIZE, QMAX(m_pixOn.height(), m_pixOff.height()));
   for(int i = 0; i < RATING_WIDGET_MAX_ICONS; ++i) {
     QLabel* l = new QLabel(this);
     l->setFixedSize(w, h);
@@ -74,7 +73,7 @@ RatingWidget::RatingWidget(Data::FieldPtr field_, QWidget* parent_, const char* 
 
 void RatingWidget::init() {
   updateBounds();
-  m_total = KMIN(m_max, static_cast<int>(m_widgets.count()));
+  m_total = QMIN(m_max, static_cast<int>(m_widgets.count()));
   uint i = 0;
   for( ; static_cast<int>(i) < m_total; ++i) {
     m_widgets.at(i)->setPixmap(m_pixOff);

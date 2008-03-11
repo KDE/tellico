@@ -21,7 +21,6 @@
 #include "../filehandler.h"
 #include "../tellico_debug.h"
 
-#include <kglobal.h> // for KMAX
 #include <kapplication.h>
 
 #include <qdict.h>
@@ -171,7 +170,7 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
   QTextIStream t(&str);
 
   const uint length = str.length();
-  const uint stepSize = KMAX(s_stepSize, length/100);
+  const uint stepSize = QMAX(s_stepSize, length/100);
   const bool showProgress = options() & ImportProgress;
 
   bool needToAddFinal = false;

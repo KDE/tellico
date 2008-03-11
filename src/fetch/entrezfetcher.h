@@ -47,7 +47,7 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   // pubmed can search title, person, and keyword
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == Raw || k == PubmedID; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == Raw || k == PubmedID || k == DOI; }
   virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
   virtual void stop();

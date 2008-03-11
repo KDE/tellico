@@ -116,6 +116,7 @@ void EntrezFetcher::search(FetchKey key_, const QString& value_) {
       u.addQueryItem(QString::fromLatin1("field"), QString::fromLatin1("pmid"));
       break;
 
+    case DOI:
     case Raw:
       u.setQuery(u.query() + '&' + value_);
       break;
@@ -443,6 +444,12 @@ void EntrezFetcher::updateEntry(Data::EntryPtr entry_) {
   QString s = entry_->field(QString::fromLatin1("pmid"));
   if(!s.isEmpty()) {
     search(PubmedID, s);
+    return;
+  }
+
+  s = entry_->field(QString::fromLatin1("doi"));
+  if(!s.isEmpty()) {
+    search(DOI, s);
     return;
   }
 

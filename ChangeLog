@@ -1,5 +1,53 @@
+2008-03-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.3.1.
+	* Added Discogs.com fetcher.
+
+2008-03-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Google Scholar search.
+
+2008-03-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that prevented using bibtex format for external scripts.
+
+2008-03-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed "ISBN not found" dialog to only appear if multiple ISBN values are being searched.
+
+2008-03-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with SRU format not getting remembered in config dialog.
+	* Fixed bug with entries with multiple titles not getting linked in the HTML export.
+
+2008-02-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Added LCCN lookup to z39.50 source.
+	* Added LCCN lookup to SRU source.
+	* Updated CrossRef fetcher to use new unixref format with more data.
+
+2008-02-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Added DOI search to Entrez/Pubmed interface.
+	* Fixed bug with some free-form date fields not getting formatted correctly, resulting in a blank string in column view and reports.
+
+2008-02-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved loader to delay loading linked images as long as possible.
+
+2008-02-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Bibtex import for keywords field.
+
+2008-02-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Delicious Library importer to look for cover images.
+	* Updated BoardGameGeek script to grab cover image, patch from  
+Sven Werlen.
+
 2008-01-29  Robby Stephenson  <robby@periapsis.org>
 
+	* Released Tellico 1.3.
 	* Fixed bug with stepping through selected entries after editing one.
 
 2008-01-20  Robby Stephenson  <robby@periapsis.org>

@@ -220,6 +220,7 @@ Tellico::Data::FieldVec BibtexCollection::defaultFields() {
 //  list.append(field);
 
   field = new Field(QString::fromLatin1("keyword"), i18n("Keywords"));
+  field->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("keywords"));
   field->setCategory(i18n(bibtex_misc));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);

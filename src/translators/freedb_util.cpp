@@ -237,7 +237,7 @@ ushort from2Byte(uchar* d) {
 // licensed under GPL
 FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
   CDText cdtext;
-#if USE_CDTEXT
+#ifdef USE_CDTEXT
 // only works for linux ATM
 #if defined(__linux__)
   int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);

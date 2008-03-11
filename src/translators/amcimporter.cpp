@@ -55,7 +55,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
     return 0;
   }
 
-  QFile* f = fileRef().file();
+  QIODevice* f = fileRef().file();
   m_ds.setDevice(f);
   // AMC is always little-endian? can't confirm
   m_ds.setByteOrder(QDataStream::LittleEndian);

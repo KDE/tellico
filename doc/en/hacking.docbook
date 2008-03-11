@@ -158,6 +158,7 @@ The type of collection is given in the type attribute of the collection element.
 <row><entry>Trading Card Collection</entry><entry>10</entry></row>
 <row><entry>Video Game Collection</entry><entry>11</entry></row>
 <row><entry>File Catalog</entry><entry>12</entry></row>
+<row><entry>Board Game Collection</entry><entry>13</entry></row>
 </tbody>
 </tgroup>
 </table>

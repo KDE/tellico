@@ -223,7 +223,12 @@
  <!-- first, show the title -->
  <xsl:if test=".//tc:title">
   <h1>
-   <xsl:value-of select=".//tc:title[1]"/>
+   <xsl:for-each select=".//tc:title">
+    <xsl:value-of select="."/>
+    <xsl:if test="position() &lt; last()">
+     <br/>
+    </xsl:if>
+   </xsl:for-each>
   </h1>
  </xsl:if>
 

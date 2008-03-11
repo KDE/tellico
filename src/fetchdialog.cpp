@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -53,7 +53,7 @@
 #include <qimage.h>
 
 #include <config.h>
-#if ENABLE_WEBCAM
+#ifdef ENABLE_WEBCAM
 #include "barcode/barcode.h"
 #endif
 
@@ -123,8 +123,8 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   int maxHeight = m_searchButton->sizeHint().height();
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
                                       SmallIconSet(QString::fromLatin1("find"))));
-  maxWidth = KMAX(maxWidth, m_searchButton->sizeHint().width());
-  maxHeight = KMAX(maxHeight, m_searchButton->sizeHint().height());
+  maxWidth = QMAX(maxWidth, m_searchButton->sizeHint().width());
+  maxHeight = QMAX(maxHeight, m_searchButton->sizeHint().height());
   m_searchButton->setMinimumWidth(maxWidth);
   m_searchButton->setMinimumHeight(maxHeight);
 
@@ -247,7 +247,7 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
   // initialize combos
   QTimer::singleShot(0, this, SLOT(slotInit()));
 
-#if ENABLE_WEBCAM
+#ifdef ENABLE_WEBCAM
   // barcode recognition
   m_barcodeRecognitionThread = new barcodeRecognitionThread();
   if (m_barcodeRecognitionThread->isWebcamAvailable()) {
@@ -268,7 +268,7 @@ FetchDialog::FetchDialog(QWidget* parent_, const char* name_)
 }
 
 FetchDialog::~FetchDialog() {
-#if ENABLE_WEBCAM
+#ifdef ENABLE_WEBCAM
   m_barcodeRecognitionThread->stop();
   if (!m_barcodeRecognitionThread->wait( 1000 ))
     m_barcodeRecognitionThread->terminate();
@@ -294,6 +294,7 @@ FetchDialog::~FetchDialog() {
 }
 
 void FetchDialog::slotSearchClicked() {
+  m_valueLineEdit->selectAll();
   if(m_started) {
     setStatus(i18n("Cancelling the search..."));
     Fetch::Manager::self()->stop();
@@ -381,7 +382,8 @@ void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
 
   const Fetch::FetchKey key = static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt());
   // no way to currently check EAN/UPC values for non-book items
-  if(m_collType == Data::Collection::Book &&
+  if(m_collType & (Data::Collection::Book | Data::Collection::Bibtex) &&
+     m_multipleISBN->isChecked() &&
      (key == Fetch::ISBN || key == Fetch::UPC)) {
     QStringList values = QStringList::split(QString::fromLatin1("; "),
                                             m_oldSearch.simplifyWhiteSpace());
@@ -417,7 +419,7 @@ void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
       QWhatsThis::add(edit, s);
       connect(dlg, SIGNAL(okClicked()), dlg, SLOT(deleteLater()));
       dlg->setMainWidget(box);
-      dlg->setMinimumWidth(KMAX(dlg->minimumWidth(), FETCH_MIN_WIDTH*2/3));
+      dlg->setMinimumWidth(QMAX(dlg->minimumWidth(), FETCH_MIN_WIDTH*2/3));
       dlg->show();
     }
   }
@@ -605,7 +607,7 @@ void FetchDialog::slotEditMultipleISBN() {
   QWhatsThis::add(fromFileBtn, i18n("<qt>Load the list from a text file.</qt>"));
   connect(fromFileBtn, SIGNAL(clicked()), SLOT(slotLoadISBNList()));
   dlg.setMainWidget(box);
-  dlg.setMinimumWidth(KMAX(dlg.minimumWidth(), FETCH_MIN_WIDTH*2/3));
+  dlg.setMinimumWidth(QMAX(dlg.minimumWidth(), FETCH_MIN_WIDTH*2/3));
 
   if(dlg.exec() == QDialog::Accepted) {
     m_isbnList = QStringList::split('\n', m_isbnTextEdit->text());

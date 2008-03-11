@@ -36,6 +36,8 @@
 
 // #define CROSSREF_TEST
 
+#define CROSSREF_USE_UNIXREF
+
 namespace {
   static const char* CROSSREF_BASE_URL = "http://www.crossref.org/openurl/?url_ver=Z39.88-2004&noredirect=true";
 }
@@ -220,9 +222,13 @@ Tellico::Data::EntryPtr CrossRefFetcher::fetchEntry(uint uid_) {
 }
 
 void CrossRefFetcher::initXSLTHandler() {
+#ifdef CROSSREF_USE_UNIXREF
+  QString xsltfile = locate("appdata", QString::fromLatin1("unixref2tellico.xsl"));
+#else
   QString xsltfile = locate("appdata", QString::fromLatin1("crossref2tellico.xsl"));
+#endif
   if(xsltfile.isEmpty()) {
-    kdWarning() << "CrossRefFetcher::initXSLTHandler() - can not locate crossref2tellico.xsl." << endl;
+    kdWarning() << "CrossRefFetcher::initXSLTHandler() - can not locate xslt file." << endl;
     return;
   }
 
@@ -241,6 +247,9 @@ void CrossRefFetcher::initXSLTHandler() {
 
 KURL CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
   KURL u(QString::fromLatin1(CROSSREF_BASE_URL));
+#ifdef CROSSREF_USE_UNIXREF
+  u.addQueryItem(QString::fromLatin1("format"), QString::fromLatin1("unixref"));
+#endif
   u.addQueryItem(QString::fromLatin1("req_dat"), QString::fromLatin1("ourl_%1:%2").arg(m_user, m_password));
 
   switch(key_) {

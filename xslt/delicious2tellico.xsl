@@ -27,6 +27,7 @@
    <tc:fields>
     <tc:field name="_default"/>
     <tc:field flags="0" title="Amazon Link" category="General" format="4" type="7" name="amazon" i18n="true"/>
+    <tc:field flags="0" title="UUID" category="General" format="0" type="1" name="uuid"/>
    </tc:fields>
    <xsl:for-each select="library/items/book">
     <xsl:apply-templates select="."/>
@@ -37,6 +38,10 @@
 
 <xsl:template match="book">
  <tc:entry>
+  <tc:uuid>
+   <xsl:value-of select="@uuid"/>
+  </tc:uuid>
+
   <tc:amazon>
    <xsl:if test="@asin">
     <xsl:value-of select="concat('http://www.amazon.com/dp/',@asin,'/?tag=tellico-20')"/>

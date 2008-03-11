@@ -157,7 +157,7 @@ If the bibtex importer encounters fields in the file which are not in the defaul
 <title>Importing Delicious Library Data</title>
 
 <para>
-<application><ulink url="http://www.delicious-monster.com/">Delicious Library</ulink></application> is an alternate collection manager for the Mac OS X desktop. &appname; imports a subset of the data used by Delicious Library, and at the moment, does not import cover images.
+<application><ulink url="http://www.delicious-monster.com/">Delicious Library</ulink></application> is an alternate collection manager for the Mac OS X desktop. &appname; imports a subset of the data used by Delicious Library.
 </para>
 </sect2>
 

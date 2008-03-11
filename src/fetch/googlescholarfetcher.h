@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,19 +11,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef YAHOOFETCHER_H
-#define YAHOOFETCHER_H
-
-namespace Tellico {
-  class XSLTHandler;
-}
+#ifndef GOOGLESCHOLARFETCHER_H
+#define GOOGLESCHOLARFETCHER_H
 
 #include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <qcstring.h> // for QByteArray
 #include <qguardedptr.h>
+#include <qregexp.h>
 
 namespace KIO {
   class Job;
@@ -33,18 +29,20 @@ namespace Tellico {
   namespace Fetch {
 
 /**
+ * A fetcher for Google Scholar
+ *
  * @author Robby Stephenson
  */
-class YahooFetcher : public Fetcher {
+class GoogleScholarFetcher : public Fetcher {
 Q_OBJECT
 
 public:
   /**
    */
-  YahooFetcher(QObject* parent, const char* name = 0);
+  GoogleScholarFetcher(QObject* parent, const char* name = 0);
   /**
    */
-  virtual ~YahooFetcher();
+  virtual ~GoogleScholarFetcher();
 
   /**
    */
@@ -52,10 +50,11 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
+  // amazon can search title or person
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
-  virtual Type type() const { return Yahoo; }
+  virtual Type type() const { return GoogleScholar; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
@@ -68,7 +67,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent_, const YahooFetcher* fetcher = 0);
+    ConfigWidget(QWidget* parent_, const GoogleScholarFetcher* fetcher = 0);
     virtual void saveConfig(KConfigGroup&) {}
     virtual QString preferredName() const;
   };
@@ -81,23 +80,22 @@ private slots:
   void slotComplete(KIO::Job* job);
 
 private:
-  void initXSLTHandler();
   void doSearch();
-  void getTracks(Data::EntryPtr entry);
-  QString insertValue(const QString& str, const QString& value, uint pos);
 
-  XSLTHandler* m_xsltHandler;
   int m_limit;
   int m_start;
   int m_total;
 
   QByteArray m_data;
-  QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
+  QMap<int, Data::EntryPtr> m_entries;
   QGuardedPtr<KIO::Job> m_job;
 
   FetchKey m_key;
   QString m_value;
   bool m_started;
+
+  QRegExp m_bibtexRx;
+  bool m_cookieIsSet;
 };
 
   } // end namespace

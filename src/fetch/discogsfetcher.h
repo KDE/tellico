@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef YAHOOFETCHER_H
-#define YAHOOFETCHER_H
+#ifndef DISCOGSFETCHER_H
+#define DISCOGSFETCHER_H
 
 namespace Tellico {
   class XSLTHandler;
@@ -21,7 +21,9 @@ namespace Tellico {
 #include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
+#include <klineedit.h>
 
+#include <qdom.h>
 #include <qcstring.h> // for QByteArray
 #include <qguardedptr.h>
 
@@ -33,18 +35,20 @@ namespace Tellico {
   namespace Fetch {
 
 /**
+ * A fetcher for discogs.com
+ *
  * @author Robby Stephenson
  */
-class YahooFetcher : public Fetcher {
+class DiscogsFetcher : public Fetcher {
 Q_OBJECT
 
 public:
   /**
    */
-  YahooFetcher(QObject* parent, const char* name = 0);
+  DiscogsFetcher(QObject* parent, const char* name = 0);
   /**
    */
-  virtual ~YahooFetcher();
+  virtual ~DiscogsFetcher();
 
   /**
    */
@@ -52,10 +56,11 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
+  // amazon can search title or person
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
-  virtual Type type() const { return Yahoo; }
+  virtual Type type() const { return Discogs; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
@@ -66,11 +71,16 @@ public:
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
+  static StringMap customFields();
+
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent_, const YahooFetcher* fetcher = 0);
-    virtual void saveConfig(KConfigGroup&) {}
+    ConfigWidget(QWidget* parent_, const DiscogsFetcher* fetcher = 0);
+    virtual void saveConfig(KConfigGroup&);
     virtual QString preferredName() const;
+  private:
+    KLineEdit *m_apiKeyEdit;
+    QCheckBox* m_fetchImageCheck;
   };
   friend class ConfigWidget;
 
@@ -83,8 +93,6 @@ private slots:
 private:
   void initXSLTHandler();
   void doSearch();
-  void getTracks(Data::EntryPtr entry);
-  QString insertValue(const QString& str, const QString& value, uint pos);
 
   XSLTHandler* m_xsltHandler;
   int m_limit;
@@ -92,12 +100,16 @@ private:
   int m_total;
 
   QByteArray m_data;
-  QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
+  QMap<int, Data::EntryPtr> m_entries;
   QGuardedPtr<KIO::Job> m_job;
 
   FetchKey m_key;
   QString m_value;
   bool m_started;
+
+  bool m_fetchImages;
+  QString m_apiKey;
+  QStringList m_fields;
 };
 
   } // end namespace

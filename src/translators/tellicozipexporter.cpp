@@ -91,6 +91,11 @@ bool TellicoZipExporter::exec() {
         if(id.isEmpty() || imageSet.has(id)) {
           continue;
         }
+        const Data::ImageInfo& info = ImageFactory::imageInfo(id);
+        if(info.linkOnly) {
+          myLog() << "TellicoZipExporter::exec() - not copying linked image: " << id << endl;
+          continue;
+        }
         const Data::Image& img = ImageFactory::imageById(id);
         // if no image, continue
         if(img.isNull()) {

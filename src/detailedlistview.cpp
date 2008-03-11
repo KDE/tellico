@@ -477,9 +477,9 @@ void DetailedListView::showColumn(int col_) {
   if(w == 0) {
     setColumnWidthMode(col_, QListView::Maximum);
     for(QListViewItemIterator it(this); it.current(); ++it) {
-      w = KMAX(it.current()->width(fontMetrics(), this, col_), w);
+      w = QMAX(it.current()->width(fontMetrics(), this, col_), w);
     }
-    w = KMAX(w, MIN_COL_WIDTH);
+    w = QMAX(w, MIN_COL_WIDTH);
   } else {
     setColumnWidthMode(col_, QListView::Manual);
   }
@@ -571,7 +571,7 @@ void DetailedListView::addField(Data::FieldPtr field_, int width_) {
 
   // width might be -1, which means set the width to maximum
   // but m_columnWidths is the cached width, so just set it to 0
-  m_columnWidths.push_back(KMAX(width_, 0));
+  m_columnWidths.push_back(QMAX(width_, 0));
 
   m_isDirty.push_back(true);
 

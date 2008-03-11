@@ -105,7 +105,7 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
   if(il.count() != sl.count()) {
     kdWarning() << "ExecExternalFetcher::readConfig() - unequal number of arguments and keys" << endl;
   }
-  int n = KMIN(il.count(), sl.count());
+  int n = QMIN(il.count(), sl.count());
   for(int i = 0; i < n; ++i) {
     m_args[static_cast<FetchKey>(il[i])] = sl[i];
   }
@@ -225,7 +225,7 @@ void ExecExternalFetcher::slotProcessExited(KProcess*) {
   }
 
   Import::Format format = static_cast<Import::Format>(m_formatType > -1 ? m_formatType : Import::TellicoXML);
-  Import::Importer* imp = ImportDialog::importer(format, KURL());
+  Import::Importer* imp = ImportDialog::importer(format, KURL::List());
   if(!imp) {
     stop();
     return;
@@ -358,7 +358,9 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   m_formatCombo = new GUI::ComboBox(optionsWidget());
   Import::FormatMap formatMap = ImportDialog::formatMap();
   for(Import::FormatMap::Iterator it = formatMap.begin(); it != formatMap.end(); ++it) {
-    m_formatCombo->insertItem(it.data(), it.key());
+    if(ImportDialog::formatImportsText(it.key())) {
+      m_formatCombo->insertItem(it.data(), it.key());
+    }
   }
   connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   l->addWidget(m_formatCombo, row, 1);

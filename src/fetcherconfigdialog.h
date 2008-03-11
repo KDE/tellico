@@ -57,6 +57,7 @@ private:
   bool m_newSource : 1;
   bool m_useDefaultName : 1;
   Fetch::ConfigWidget* m_configWidget;
+  QLabel* m_iconLabel;
   KLineEdit* m_nameEdit;
   GUI::ComboBox* m_typeCombo;
   QCheckBox* m_cbOverwrite;

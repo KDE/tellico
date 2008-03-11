@@ -1,4 +1,4 @@
-# translation of svny.po to Svenska
+# translation of sv.po to Svenska
 # translation of sv.po to
 # translation of tellico-sv.po to
 # This file is distributed under the same license as the tellico package.
@@ -8,9 +8,9 @@
 # Peter Landgren <peter.talken@telia.com>, 2005, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: svny\n"
+"Project-Id-Version: sv\n"
 "POT-Creation-Date: 2008-01-26 10:52-0800\n"
-"PO-Revision-Date: 2008-01-14 11:07+0100\n"
+"PO-Revision-Date: 2008-01-30 08:26+0100\n"
 "Last-Translator: Peter Landgren <peter.talken@telia.com>\n"
 "Language-Team: Svenska <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1933,9 +1933,8 @@ msgid "Scanning audio files..."
 msgstr "Avsöker ljudfiler..."
 
 #: translators/audiofileimporter.cpp:129
-#, fuzzy
 msgid "Bitrate"
-msgstr "Bibtex"
+msgstr "Bithastighet"
 
 #: translators/audiofileimporter.cpp:160 translators/audiofileimporter.cpp:170
 msgid "Tracks (Disc %1)"
@@ -1967,12 +1966,11 @@ msgstr "Om ikryssad, läggs filnamnen, för varje spår, till posten."
 
 #: translators/audiofileimporter.cpp:352
 msgid "Include &bitrate"
-msgstr ""
+msgstr "Inkludera &bithastighet"
 
 #: translators/audiofileimporter.cpp:353
-#, fuzzy
 msgid "If checked, the bitrate for each track is added to the entries."
-msgstr "Om ikryssad, läggs filnamnen, för varje spår, till posten."
+msgstr "Om ikryssad, läggs bithastigheten, för varje spår, till posten."
 
 #: translators/csvexporter.cpp:40
 msgid "CSV"
@@ -5236,30 +5234,3 @@ msgstr "Allocine.fr"
 #: scripts.cpp:8
 msgid "Spanish Ministry of Culture"
 msgstr "Spanska Kulturministeriet"
-
-#~ msgid "CrossRef"
-#~ msgstr "CrossRef"
-
-#~ msgid "Citebase"
-#~ msgstr "Citebase"
-
-#~ msgid "Bibsonomy"
-#~ msgstr "Bibsonomy"
-
-#~ msgid "MODS"
-#~ msgstr "MODS"
-
-#~ msgid "RIS"
-#~ msgstr "RIS"
-
-#~ msgid "GCstar"
-#~ msgstr "GCstar"
-
-#~ msgid "AMC"
-#~ msgstr "AMC"
-
-#~ msgid "Griffith"
-#~ msgstr "Griffith"
-
-#~ msgid "Referencer"
-#~ msgstr "Referencer"

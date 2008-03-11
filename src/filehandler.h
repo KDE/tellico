@@ -26,7 +26,7 @@ namespace KIO {
 }
 
 class QDomDocument;
-class QFile;
+class QIODevice;
 
 namespace Tellico {
   class ImageFactory;
@@ -51,15 +51,15 @@ public:
   class FileRef {
   public:
     bool open(bool quiet=false);
-    QFile* file() const { return m_file; }
+    QIODevice* file() const { return m_device; }
     const QString& fileName() const { return m_filename; }
     bool isValid() const { return m_isValid; }
     ~FileRef();
 
   private:
     friend class FileHandler;
-    FileRef(const KURL& url, bool quiet=false);
-    QFile* m_file;
+    FileRef(const KURL& url, bool quiet=false, bool allowCompressed=false);
+    QIODevice* m_device;
     QString m_filename;
     bool m_isValid;
   };
@@ -80,9 +80,10 @@ public:
    * @param url The URL of the file
    * @param quiet whether the importer should report errors or not
    * @param useUTF8 Whether the file should be read as UTF8 or use user locale
+   * @param allowCompressed Whether to check if the file is compressed or not
    * @return A string containing the contents of a file
    */
-  static QString readTextFile(const KURL& url, bool quiet=false, bool useUTF8=false);
+  static QString readTextFile(const KURL& url, bool quiet=false, bool useUTF8=false, bool allowCompressed=false);
   /**
    * Read contents of an XML file into a QDomDocument.
    *

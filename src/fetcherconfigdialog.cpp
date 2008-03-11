@@ -64,9 +64,13 @@ void FetcherConfigDialog::init(Fetch::Type type_) {
   QBoxLayout* topLayout = new QHBoxLayout(widget, KDialog::spacingHint());
 
   QBoxLayout* vlay1 = new QVBoxLayout(topLayout, KDialog::spacingHint());
-  QLabel* icon = new QLabel(widget);
-  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Panel, 64));
-  vlay1->addWidget(icon);
+  m_iconLabel = new QLabel(widget);
+  if(type_ == Fetch::Unknown) {
+    m_iconLabel->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Panel, 64));
+  } else {
+    m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type_, KIcon::Panel, 64));
+  }
+  vlay1->addWidget(m_iconLabel);
   vlay1->addStretch(1);
 
   QBoxLayout* vlay2 = new QVBoxLayout(topLayout, KDialog::spacingHint());
@@ -187,6 +191,7 @@ void FetcherConfigDialog::slotNewSourceSelected(int idx_) {
     kdWarning() << "FetcherConfigDialog::slotNewSourceSelected() - unknown source type" << endl;
     return;
   }
+  m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type, KIcon::Panel, 64));
   cw = Fetch::Manager::self()->configWidget(m_stack, type, m_typeCombo->currentText());
   if(!cw) {
     // bad bad bad!

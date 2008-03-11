@@ -207,13 +207,13 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
 
       m_widgetDict.insert(QString::number(m_currColl->id()) + field->name(), widget);
 
-      maxWidth[count%NCOLS] = KMAX(maxWidth[count%NCOLS], widget->labelWidth());
+      maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
       if(widget->expands()) {
         expands[count%NCOLS] = true;
       }
       widget->updateGeometry();
       if(!field->isSingleCategory()) {
-        maxHeight = KMAX(maxHeight, widget->minimumSizeHint().height());
+        maxHeight = QMAX(maxHeight, widget->minimumSizeHint().height());
       }
       ++count;
     }
@@ -580,7 +580,7 @@ void EntryEditDialog::removeField(Data::CollPtr, Data::FieldPtr field_) {
           layout->remove(widget);
           layout->addWidget(widget, count/NCOLS, count%NCOLS);
 
-          maxWidth[count%NCOLS] = KMAX(maxWidth[count%NCOLS], widget->labelWidth());
+          maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
           if(widget->expands()) {
             expands[count%NCOLS] = true;
           }
@@ -708,7 +708,7 @@ void EntryEditDialog::modifyField(Data::CollPtr coll_, Data::FieldPtr oldField_,
       QObjectList* childList = widget->parentWidget()->queryList("Tellico::GUI::FieldWidget", 0, false, false);
       QObjectListIt it(*childList);
       for(it.toFirst(); it.current(); ++it) {
-        maxWidth = KMAX(maxWidth, static_cast<GUI::FieldWidget*>(it.current())->labelWidth());
+        maxWidth = QMAX(maxWidth, static_cast<GUI::FieldWidget*>(it.current())->labelWidth());
       }
       for(it.toFirst(); it.current(); ++it) {
         static_cast<GUI::FieldWidget*>(it.current())->setLabelWidth(maxWidth);

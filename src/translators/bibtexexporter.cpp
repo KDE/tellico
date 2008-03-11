@@ -156,7 +156,7 @@ bool BibtexExporter::exec() {
     }
 
     newKey = key;
-    uint c = 'a';
+    char c = 'a';
     while(usedKeys.has(newKey)) {
       // duplicate found!
       newKey = key + c;
@@ -174,7 +174,7 @@ bool BibtexExporter::exec() {
 
     key = entryIt->field(keyField);
     newKey = key;
-    uint c = 'a';
+    char c = 'a';
     while(usedKeys.has(newKey)) {
       // duplicate found!
       newKey = key + c;
@@ -269,6 +269,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
                                     const QString& type_, const QString& key_) {
   const QStringList macros = static_cast<const Data::BibtexCollection*>(Data::Document::self()->collection().data())->macroList().keys();
   const QString bibtex = QString::fromLatin1("bibtex");
+  const QString bibtexSep = QString::fromLatin1("bibtex-separator");
 
   text_ += '@' + type_ + '{' + key_;
 
@@ -286,6 +287,11 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
     if(fIt->formatFlag() == Data::Field::FormatName
        && fIt->flags() & Data::Field::AllowMultiple) {
       value.replace(Data::Field::delimiter(), QString::fromLatin1(" and "));
+    } else if(fIt->flags() & Data::Field::AllowMultiple) {
+      QString bibsep = fIt->property(bibtexSep);
+      if(!bibsep.isEmpty()) {
+        value.replace(Data::Field::delimiter(), bibsep);
+      }
     } else if(fIt->type() == Data::Field::Para) {
       // strip HTML from bibtex export
       QRegExp stripHTML(QString::fromLatin1("<.*>"), true);

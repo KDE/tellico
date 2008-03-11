@@ -87,13 +87,13 @@ DateWidget::DateWidget(QWidget* parent_, const char* name_) : QWidget(parent_, n
 
 void DateWidget::slotDateChanged() {
   int day = m_daySpin->value();
-  day = KMIN(KMAX(day, m_daySpin->minValue()), m_daySpin->maxValue());
+  day = QMIN(QMAX(day, m_daySpin->minValue()), m_daySpin->maxValue());
 
   int m = m_monthCombo->currentItem();
-  m = KMIN(KMAX(m, 0), m_monthCombo->count()-1);
+  m = QMIN(QMAX(m, 0), m_monthCombo->count()-1);
 
   int y = m_yearSpin->value();
-  y = KMIN(KMAX(y, m_yearSpin->minValue()), m_yearSpin->maxValue());
+  y = QMIN(QMAX(y, m_yearSpin->minValue()), m_yearSpin->maxValue());
 
   // if all are valid, set this date
   if(day > m_daySpin->minValue() && m > 0 && y > m_yearSpin->minValue()) {
@@ -174,7 +174,7 @@ void DateWidget::setDate(const QString& date_) {
     y = m_yearSpin->minValue();
     ok = true;
   }
-  y = KMIN(KMAX(y, m_yearSpin->minValue()), m_yearSpin->maxValue());
+  y = QMIN(QMAX(y, m_yearSpin->minValue()), m_yearSpin->maxValue());
   m_yearSpin->setValue(y);
 
   int m = s.count() > 1 ? s[1].toInt(&ok) : 0;
@@ -182,7 +182,7 @@ void DateWidget::setDate(const QString& date_) {
     m = 0;
     ok = true;
   }
-  m = KMIN(KMAX(m, 0), m_monthCombo->count()-1);
+  m = QMIN(QMAX(m, 0), m_monthCombo->count()-1);
   m_monthCombo->setCurrentItem(m);
 
   // need to update number of days in month
@@ -196,7 +196,7 @@ void DateWidget::setDate(const QString& date_) {
   if(!ok) {
     day = m_daySpin->minValue();
   }
-  day = KMIN(KMAX(day, m_daySpin->minValue()), m_daySpin->maxValue());
+  day = QMIN(QMAX(day, m_daySpin->minValue()), m_daySpin->maxValue());
   m_daySpin->setValue(day);
 
   m_daySpin->blockSignals(false);

@@ -50,13 +50,19 @@
     </field>
     <field flags="0" title="Pubmed" category="Publishing" format="4" type="1" name="pmid" description="Pubmed" i18n="true" />
    </fields>
-   <xsl:apply-templates select="/PubmedArticleSet/PubmedArticle/MedlineCitation"/>
+   <xsl:apply-templates select="/PubmedArticleSet/PubmedArticle"/>
   </collection>
  </tellico>
 </xsl:template>
 
-<xsl:template match="MedlineCitation">
+<xsl:template match="PubmedArticle">
  <entry>
+  <xsl:apply-templates select="MedlineCitation"/>
+  <xsl:apply-templates select="PubmedData"/>
+ </entry>
+</xsl:template>
+
+<xsl:template match="MedlineCitation">
   <entry-type>
    <xsl:text>article</xsl:text>
   </entry-type>
@@ -150,7 +156,12 @@
    <xsl:value-of select="PMID"/>
   </pmid>
 
- </entry>
+</xsl:template>
+
+<xsl:template match="PubmedData">
+ <doi>
+  <xsl:value-of select="ArticleIdList/ArticleId[@IdType='doi']"/>
+ </doi>
 </xsl:template>
 
 <xsl:template name="TransformInitials">

@@ -21,7 +21,6 @@
 #include "xslthandler.h"
 #include "tellicoimporter.h"
 
-#include <kglobal.h> // for KMAX
 #include <kapplication.h>
 #include <kstandarddirs.h>
 
@@ -93,7 +92,7 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
   QTextIStream t(&text_);
 
   const uint length = text_.length();
-  const uint stepSize = KMAX(s_stepSize, length/100);
+  const uint stepSize = QMAX(s_stepSize, length/100);
   const bool showProgress = options() & ImportProgress;
 
   ProgressManager::self()->setTotalSteps(this, length);

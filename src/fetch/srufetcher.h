@@ -67,7 +67,7 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual void search(FetchKey key, const QString& value);
   // only search title, person, isbn, or keyword. No Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword || k == LCCN; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return SRU; }

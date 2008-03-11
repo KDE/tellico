@@ -23,7 +23,7 @@
 
 #include <config.h>
 
-#if HAVE_KCDDB
+#ifdef HAVE_KCDDB
 #ifdef QT_NO_CAST_ASCII
 #define HAD_QT_NO_CAST_ASCII
 #undef QT_NO_CAST_ASCII
@@ -78,7 +78,7 @@ Tellico::Data::CollPtr FreeDBImporter::collection() {
 }
 
 void FreeDBImporter::readCDROM() {
-#if HAVE_KCDDB
+#ifdef HAVE_KCDDB
   QString drivePath = m_driveCombo->currentText();
   if(drivePath.isEmpty()) {
     setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>").arg(drivePath));
@@ -288,7 +288,7 @@ void FreeDBImporter::readCDROM() {
 }
 
 void FreeDBImporter::readCache() {
-#if HAVE_KCDDB
+#ifdef HAVE_KCDDB
   {
     // remember the import options
     KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - FreeDB"));
@@ -432,7 +432,7 @@ void FreeDBImporter::readCache() {
   }
 
 void FreeDBImporter::readCDText(const QCString& drive_) {
-#if USE_CDTEXT
+#ifdef USE_CDTEXT
   Data::EntryPtr entry;
   if(m_coll) {
     if(m_coll->entryCount() > 0) {

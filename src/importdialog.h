@@ -48,6 +48,7 @@ public:
   static Import::Target importTarget(Import::Format format);
   static QString startDir(Import::Format format);
   static Import::FormatMap formatMap();
+  static bool formatImportsText(Import::Format format);
 
   static Import::Importer* importer(Import::Format format, const KURL::List& urls);
   static Data::CollPtr importURL(Import::Format format, const KURL& url);

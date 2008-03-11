@@ -222,7 +222,10 @@ bool Document::saveDocument(const KURL& url_) {
   exporter->setEntries(m_coll->entries());
   exporter->setURL(url_);
   // since we already asked about overwriting the file, force the save
-  exporter->setOptions(exporter->options() | Export::ExportForce | Export::ExportProgress);
+  long opt = exporter->options() | Export::ExportForce | Export::ExportProgress;
+  // only write the image sizes if they're known already
+  opt &= ~Export::ExportImageSize;
+  exporter->setOptions(opt);
   bool success = exporter->exec();
   item.setProgress(int(0.9*totalSteps));
 
@@ -537,6 +540,8 @@ void Document::writeAllImages(int cacheDir_, const KURL& localDir_) {
   QString oldLocalDir = ImageFactory::localDir();
   ImageFactory::setLocalDirectory(localDir_);
 
+  ImageFactory::CacheDir cacheDir = static_cast<ImageFactory::CacheDir>(cacheDir_);
+
   QString id;
   StringSet images;
   EntryVec entries = m_coll->entries();
@@ -547,10 +552,13 @@ void Document::writeAllImages(int cacheDir_, const KURL& localDir_) {
       if(id.isEmpty() || images.has(id)) {
         continue;
       }
-      if(!ImageFactory::writeCachedImage(id, static_cast<ImageFactory::CacheDir>(cacheDir_))) {
-        myDebug() << "Document::writeAllImages() - entry title: " << entry->title() << endl;
-      }
       images.add(id);
+      if(ImageFactory::imageInfo(id).linkOnly) {
+        continue;
+      }
+      if(!ImageFactory::writeCachedImage(id, cacheDir)) {
+        myDebug() << "Document::writeAllImages() - did not write image for entry title: " << entry->title() << endl;
+      }
     }
     if(j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j/stepSize);
@@ -563,7 +571,7 @@ void Document::writeAllImages(int cacheDir_, const KURL& localDir_) {
   }
 
   if(m_cancelImageWriting) {
-    myDebug() << "Document::slotWriteAllImages() - cancel image writing" << endl;
+    myDebug() << "Document::writeAllImages() - cancel image writing" << endl;
   }
 
   m_cancelImageWriting = false;

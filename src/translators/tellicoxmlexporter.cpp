@@ -44,12 +44,12 @@ using Tellico::Export::TellicoXMLExporter;
 
 TellicoXMLExporter::TellicoXMLExporter() : Exporter(),
       m_includeImages(false), m_includeGroups(false), m_widget(0) {
-  setOptions(options() | Export::ExportImages); // not included by default
+  setOptions(options() | Export::ExportImages | Export::ExportImageSize); // not included by default
 }
 
 TellicoXMLExporter::TellicoXMLExporter(Data::CollPtr coll) : Exporter(coll),
       m_includeImages(false), m_includeGroups(false), m_widget(0) {
-  setOptions(options() | Export::ExportImages); // not included by default
+  setOptions(options() | Export::ExportImages | Export::ExportImageSize); // not included by default
 }
 
 QString TellicoXMLExporter::formatString() const {
@@ -361,13 +361,15 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     imgElem.appendChild(dom_.createTextNode(QString::fromLatin1(imgText)));
   } else {
     const Data::ImageInfo& info = ImageFactory::imageInfo(id_);
-    if(info.id.isEmpty()) {
+    if(info.isNull()) {
       return;
     }
     imgElem.setAttribute(QString::fromLatin1("format"), info.format);
     imgElem.setAttribute(QString::fromLatin1("id"),     info.id);
-    imgElem.setAttribute(QString::fromLatin1("width"),  info.width);
-    imgElem.setAttribute(QString::fromLatin1("height"), info.height);
+    // only load the images to read the size if necessary
+    const bool loadImageIfNecessary = options() & Export::ExportImageSize;
+    imgElem.setAttribute(QString::fromLatin1("width"),  info.width(loadImageIfNecessary));
+    imgElem.setAttribute(QString::fromLatin1("height"), info.height(loadImageIfNecessary));
     if(info.linkOnly) {
       imgElem.setAttribute(QString::fromLatin1("link"), QString::fromLatin1("true"));
     }

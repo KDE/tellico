@@ -36,7 +36,8 @@ namespace Tellico {
       ExportComplete    = 1 << 4,   // export complete document, including loans, etc.
       ExportProgress    = 1 << 5,   // show progress bar
       ExportClean       = 1 << 6,   // specifically for bibliographies, remove latex commands
-      ExportVerifyImages= 1 << 7    // don't put in an image link that's not in the cache
+      ExportVerifyImages= 1 << 7,   // don't put in an image link that's not in the cache
+      ExportImageSize   = 1 << 8    // include image size in the generated XML
     };
 
 /**

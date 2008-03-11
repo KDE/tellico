@@ -133,7 +133,7 @@ void Z3950Fetcher::saveConfigHook(KConfigGroup& config_) {
 }
 
 void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
   m_started = true;
   m_done = false;
   if(m_host.isEmpty() || m_dbname.isEmpty()) {
@@ -186,6 +186,24 @@ void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
         }
       }
       break;
+    case LCCN:
+      {
+        m_pqn.truncate(0);
+        QString s = m_value;
+        s.remove('-');
+        QStringList lccnList = QStringList::split(QString::fromLatin1("; "), s);
+        const int count = lccnList.count();
+        if(count > 1) {
+          m_pqn = QString::fromLatin1("@or ");
+        }
+        for(int i = 0; i < count; ++i) {
+          m_pqn += QString::fromLatin1(" @attr 1=9 ") + lccnList[i];
+          if(i < count-2) {
+            m_pqn += QString::fromLatin1(" @or");
+          }
+        }
+      }
+      break;
     case Keyword:
       m_pqn = QString::fromLatin1("@attr 1=1016 ") + svalue;
       break;
@@ -214,7 +232,7 @@ void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
 }
 
 void Z3950Fetcher::continueSearch() {
-#if HAVE_YAZ
+#ifdef HAVE_YAZ
   m_started = true;
   process();
 #endif
@@ -467,14 +485,21 @@ void Z3950Fetcher::updateEntry(Data::EntryPtr entry_) {
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);
     return;
-  } else {
-    // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-    QString t = entry_->field(QString::fromLatin1("title"));
-    if(!t.isEmpty()) {
-      search(Fetch::Title, t);
-      return;
-    }
   }
+
+  QString lccn = entry_->field(QString::fromLatin1("lccn"));
+  if(!lccn.isEmpty()) {
+    search(Fetch::LCCN, lccn);
+    return;
+  }
+
+  // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
+  QString t = entry_->field(QString::fromLatin1("title"));
+  if(!t.isEmpty()) {
+    search(Fetch::Title, t);
+    return;
+  }
+
   myDebug() << "Z3950Fetcher::updateEntry() - insufficient info to search" << endl;
   emit signalDone(this); // always need to emit this if not continuing with the search
 }

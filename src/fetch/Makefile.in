@@ -59,9 +59,10 @@ am_libfetch_a_OBJECTS = amazonfetcher.$(OBJEXT) \
 	imdbfetcher.$(OBJEXT) isbndbfetcher.$(OBJEXT) \
 	messagehandler.$(OBJEXT) srufetcher.$(OBJEXT) \
 	yahoofetcher.$(OBJEXT) z3950connection.$(OBJEXT) \
-	z3950fetcher.$(OBJEXT)
+	z3950fetcher.$(OBJEXT) googlescholarfetcher.$(OBJEXT) \
+	discogsfetcher.$(OBJEXT)
 #>- libfetch_a_OBJECTS = $(am_libfetch_a_OBJECTS)
-#>+ 14
+#>+ 15
 libfetch_a_final_OBJECTS = libfetch_a.all_cpp.o 
 libfetch_a_nofinal_OBJECTS = amazonfetcher.$(OBJEXT) \
 	animenfofetcher.$(OBJEXT) arxivfetcher.$(OBJEXT) \
@@ -73,7 +74,8 @@ libfetch_a_nofinal_OBJECTS = amazonfetcher.$(OBJEXT) \
 	imdbfetcher.$(OBJEXT) isbndbfetcher.$(OBJEXT) \
 	messagehandler.$(OBJEXT) srufetcher.$(OBJEXT) \
 	yahoofetcher.$(OBJEXT) z3950connection.$(OBJEXT) \
-	z3950fetcher.$(OBJEXT)
+	z3950fetcher.$(OBJEXT) googlescholarfetcher.$(OBJEXT) \
+	discogsfetcher.$(OBJEXT)
 @KDE_USE_FINAL_FALSE@libfetch_a_OBJECTS = $(libfetch_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libfetch_a_OBJECTS = $(libfetch_a_final_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(top_builddir)@am__isrc@
@@ -408,7 +410,8 @@ libfetch_a_SOURCES = amazonfetcher.cpp animenfofetcher.cpp arxivfetcher.cpp \
 	bibsonomyfetcher.cpp citebasefetcher.cpp configwidget.cpp crossreffetcher.cpp \
 	entrezfetcher.cpp execexternalfetcher.cpp fetcher.cpp fetchmanager.cpp \
 	gcstarpluginfetcher.cpp ibsfetcher.cpp imdbfetcher.cpp isbndbfetcher.cpp messagehandler.cpp \
-	srufetcher.cpp yahoofetcher.cpp z3950connection.cpp z3950fetcher.cpp
+	srufetcher.cpp yahoofetcher.cpp z3950connection.cpp z3950fetcher.cpp \
+	googlescholarfetcher.cpp discogsfetcher.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
@@ -433,6 +436,8 @@ crossreffetcher.h crossreffetcher.cpp \
 arxivfetcher.h arxivfetcher.cpp \
 citebasefetcher.h citebasefetcher.cpp \
 bibsonomyfetcher.h bibsonomyfetcher.cpp \
+googlescholarfetcher.h googlescholarfetcher.cpp \
+discogsfetcher.h discogsfetcher.cpp \
 z3950-servers.cfg
 
 appdir = $(kde_datadir)/tellico
@@ -506,11 +511,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/citebasefetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/configwidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/crossreffetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/discogsfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/entrezfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/execexternalfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fetchmanager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcstarpluginfetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/googlescholarfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ibsfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imdbfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/isbndbfetcher.Po@am__quote@
@@ -901,6 +908,13 @@ imdbfetcher.moc: $(srcdir)/imdbfetcher.h
 mocs: imdbfetcher.moc
 
 #>+ 3
+googlescholarfetcher.moc: $(srcdir)/googlescholarfetcher.h
+	$(MOC) $(srcdir)/googlescholarfetcher.h -o googlescholarfetcher.moc
+
+#>+ 2
+mocs: googlescholarfetcher.moc
+
+#>+ 3
 execexternalfetcher.moc: $(srcdir)/execexternalfetcher.h
 	$(MOC) $(srcdir)/execexternalfetcher.h -o execexternalfetcher.moc
 
@@ -971,6 +985,13 @@ srufetcher.moc: $(srcdir)/srufetcher.h
 mocs: srufetcher.moc
 
 #>+ 3
+discogsfetcher.moc: $(srcdir)/discogsfetcher.h
+	$(MOC) $(srcdir)/discogsfetcher.h -o discogsfetcher.moc
+
+#>+ 2
+mocs: discogsfetcher.moc
+
+#>+ 3
 bibsonomyfetcher.moc: $(srcdir)/bibsonomyfetcher.h
 	$(MOC) $(srcdir)/bibsonomyfetcher.h -o bibsonomyfetcher.moc
 
@@ -986,7 +1007,7 @@ mocs: fetchmanager.moc
 
 #>+ 3
 clean-metasources:
-	-rm -f  citebasefetcher.moc isbndbfetcher.moc arxivfetcher.moc crossreffetcher.moc animenfofetcher.moc imdbfetcher.moc execexternalfetcher.moc z3950fetcher.moc entrezfetcher.moc amazonfetcher.moc ibsfetcher.moc configwidget.moc yahoofetcher.moc gcstarpluginfetcher.moc fetcher.moc srufetcher.moc bibsonomyfetcher.moc fetchmanager.moc
+	-rm -f  citebasefetcher.moc isbndbfetcher.moc arxivfetcher.moc crossreffetcher.moc animenfofetcher.moc imdbfetcher.moc googlescholarfetcher.moc execexternalfetcher.moc z3950fetcher.moc entrezfetcher.moc amazonfetcher.moc ibsfetcher.moc configwidget.moc yahoofetcher.moc gcstarpluginfetcher.moc fetcher.moc srufetcher.moc discogsfetcher.moc bibsonomyfetcher.moc fetchmanager.moc
 
 #>+ 2
 docs-am:
@@ -1030,11 +1051,11 @@ bcheck-am:
 
 
 #>+ 11
-libfetch_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/arxivfetcher.cpp $(srcdir)/yahoofetcher.cpp $(srcdir)/messagehandler.cpp $(srcdir)/isbndbfetcher.cpp $(srcdir)/fetchmanager.cpp $(srcdir)/citebasefetcher.cpp $(srcdir)/animenfofetcher.cpp $(srcdir)/bibsonomyfetcher.cpp $(srcdir)/ibsfetcher.cpp $(srcdir)/z3950connection.cpp $(srcdir)/fetcher.cpp $(srcdir)/configwidget.cpp $(srcdir)/gcstarpluginfetcher.cpp $(srcdir)/imdbfetcher.cpp $(srcdir)/entrezfetcher.cpp $(srcdir)/z3950fetcher.cpp $(srcdir)/amazonfetcher.cpp $(srcdir)/srufetcher.cpp $(srcdir)/crossreffetcher.cpp $(srcdir)/execexternalfetcher.cpp  isbndbfetcher.moc citebasefetcher.moc crossreffetcher.moc arxivfetcher.moc animenfofetcher.moc imdbfetcher.moc execexternalfetcher.moc z3950fetcher.moc entrezfetcher.moc amazonfetcher.moc ibsfetcher.moc configwidget.moc yahoofetcher.moc gcstarpluginfetcher.moc fetcher.moc srufetcher.moc fetchmanager.moc bibsonomyfetcher.moc
+libfetch_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/arxivfetcher.cpp $(srcdir)/yahoofetcher.cpp $(srcdir)/messagehandler.cpp $(srcdir)/isbndbfetcher.cpp $(srcdir)/fetchmanager.cpp $(srcdir)/citebasefetcher.cpp $(srcdir)/animenfofetcher.cpp $(srcdir)/bibsonomyfetcher.cpp $(srcdir)/ibsfetcher.cpp $(srcdir)/z3950connection.cpp $(srcdir)/fetcher.cpp $(srcdir)/configwidget.cpp $(srcdir)/gcstarpluginfetcher.cpp $(srcdir)/discogsfetcher.cpp $(srcdir)/googlescholarfetcher.cpp $(srcdir)/imdbfetcher.cpp $(srcdir)/entrezfetcher.cpp $(srcdir)/z3950fetcher.cpp $(srcdir)/amazonfetcher.cpp $(srcdir)/srufetcher.cpp $(srcdir)/crossreffetcher.cpp $(srcdir)/execexternalfetcher.cpp  isbndbfetcher.moc citebasefetcher.moc crossreffetcher.moc arxivfetcher.moc animenfofetcher.moc imdbfetcher.moc execexternalfetcher.moc googlescholarfetcher.moc z3950fetcher.moc entrezfetcher.moc amazonfetcher.moc ibsfetcher.moc configwidget.moc yahoofetcher.moc gcstarpluginfetcher.moc fetcher.moc srufetcher.moc discogsfetcher.moc fetchmanager.moc bibsonomyfetcher.moc
 	@echo 'creating libfetch_a.all_cpp.cpp ...'; \
 	rm -f libfetch_a.all_cpp.files libfetch_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libfetch_a.all_cpp.final; \
-	for file in arxivfetcher.cpp yahoofetcher.cpp messagehandler.cpp isbndbfetcher.cpp fetchmanager.cpp citebasefetcher.cpp animenfofetcher.cpp bibsonomyfetcher.cpp ibsfetcher.cpp z3950connection.cpp fetcher.cpp configwidget.cpp gcstarpluginfetcher.cpp imdbfetcher.cpp entrezfetcher.cpp z3950fetcher.cpp amazonfetcher.cpp srufetcher.cpp crossreffetcher.cpp execexternalfetcher.cpp; do \
+	for file in arxivfetcher.cpp yahoofetcher.cpp messagehandler.cpp isbndbfetcher.cpp fetchmanager.cpp citebasefetcher.cpp animenfofetcher.cpp bibsonomyfetcher.cpp ibsfetcher.cpp z3950connection.cpp fetcher.cpp configwidget.cpp gcstarpluginfetcher.cpp discogsfetcher.cpp googlescholarfetcher.cpp imdbfetcher.cpp entrezfetcher.cpp z3950fetcher.cpp amazonfetcher.cpp srufetcher.cpp crossreffetcher.cpp execexternalfetcher.cpp; do \
 	  echo "#include \"$$file\"" >> libfetch_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libfetch_a.all_cpp.final; \
 	done; \
@@ -1065,7 +1086,7 @@ no-final-install:
 kde-rpo-clean:
 	-rm -f *.rpo
 
-#>+ 39
+#>+ 43
 entrezfetcher.o: entrezfetcher.moc 
 fetchmanager.o: fetchmanager.moc 
 isbndbfetcher.lo: isbndbfetcher.moc 
@@ -1086,15 +1107,18 @@ fetcher.lo: fetcher.moc
 amazonfetcher.o: amazonfetcher.moc 
 entrezfetcher.lo: entrezfetcher.moc 
 citebasefetcher.o: citebasefetcher.moc 
+googlescholarfetcher.o: googlescholarfetcher.moc 
 crossreffetcher.lo: crossreffetcher.moc 
 animenfofetcher.lo: animenfofetcher.moc 
 yahoofetcher.lo: yahoofetcher.moc 
 gcstarpluginfetcher.o: gcstarpluginfetcher.moc 
+googlescholarfetcher.lo: googlescholarfetcher.moc 
 bibsonomyfetcher.o: bibsonomyfetcher.moc 
+discogsfetcher.o: discogsfetcher.moc 
 nmcheck: 
 fetchmanager.lo: fetchmanager.moc 
-isbndbfetcher.o: isbndbfetcher.moc 
 srufetcher.lo: srufetcher.moc 
+isbndbfetcher.o: isbndbfetcher.moc 
 execexternalfetcher.lo: execexternalfetcher.moc 
 arxivfetcher.lo: arxivfetcher.moc 
 ibsfetcher.lo: ibsfetcher.moc 
@@ -1104,3 +1128,4 @@ configwidget.o: configwidget.moc
 z3950fetcher.lo: z3950fetcher.moc 
 imdbfetcher.lo: imdbfetcher.moc 
 amazonfetcher.lo: amazonfetcher.moc 
+discogsfetcher.lo: discogsfetcher.moc 

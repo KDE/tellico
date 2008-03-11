@@ -21,7 +21,7 @@
 
 // libkcal is not binary compatible between versions
 // for now, just support KDE 3.4 and higher
-#if HAVE_KCAL && KDE_IS_VERSION(3,3,90)
+#if defined(HAVE_KCAL) && KDE_IS_VERSION(3,3,90)
 #define USE_KCAL
 #endif
 

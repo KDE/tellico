@@ -24,7 +24,7 @@
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
 
-#if HAVE_TAGLIB
+#ifdef HAVE_TAGLIB
 #include <taglib/fileref.h>
 #include <taglib/tag.h>
 #include <taglib/id3v2tag.h>
@@ -36,7 +36,6 @@
 
 #include <klocale.h>
 #include <kapplication.h>
-#include <kglobal.h> // for KMAX
 
 #include <qlabel.h>
 #include <qlayout.h>
@@ -58,7 +57,7 @@ bool AudioFileImporter::canImport(int type) const {
 }
 
 Tellico::Data::CollPtr AudioFileImporter::collection() {
-#if !HAVE_TAGLIB
+#ifndef HAVE_TAGLIB
   return 0;
 #else
 
@@ -135,7 +134,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   QMap<QString, Data::EntryPtr> albumMap;
 
   QStringList directoryFiles;
-  const uint stepSize = KMAX(static_cast<size_t>(1), files.count() / 100);
+  const uint stepSize = QMAX(static_cast<size_t>(1), files.count() / 100);
 
   bool changeTrackTitle = true;
   uint j = 0;
@@ -388,7 +387,7 @@ void AudioFileImporter::slotAddFileToggled(bool on_) {
 int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {
   // default to 1 unless otherwise
   int num = 1;
-#if HAVE_TAGLIB
+#ifdef HAVE_TAGLIB
   QString disc;
   if(TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(ref_.file())) {
     if(file->ID3v2Tag() && !file->ID3v2Tag()->frameListMap()["TPOS"].isEmpty()) {

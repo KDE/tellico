@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "POT-Creation-Date: 2008-01-26 10:52-0800\n"
-"PO-Revision-Date: 2008-01-18 00:14+0000\n"
+"PO-Revision-Date: 2008-01-30 23:57+0000\n"
 "Last-Translator: Regis Boudin <regis@boudin.name>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1936,9 +1936,8 @@ msgid "Scanning audio files..."
 msgstr "Analyse des fichiers audio..."
 
 #: translators/audiofileimporter.cpp:129
-#, fuzzy
 msgid "Bitrate"
-msgstr "BibTeX"
+msgstr "Bitrate"
 
 #: translators/audiofileimporter.cpp:160 translators/audiofileimporter.cpp:170
 msgid "Tracks (Disc %1)"
@@ -1973,13 +1972,11 @@ msgstr ""
 
 #: translators/audiofileimporter.cpp:352
 msgid "Include &bitrate"
-msgstr ""
+msgstr "Inclure le &bitrate"
 
 #: translators/audiofileimporter.cpp:353
-#, fuzzy
 msgid "If checked, the bitrate for each track is added to the entries."
-msgstr ""
-"Si cochée, le nom de fichier de chaque plage sera ajouté aux entrées."
+msgstr "Si cochée, le bitrate de chaque plage sera ajouté aux entrées."
 
 #: translators/csvexporter.cpp:40
 msgid "CSV"
@@ -5284,30 +5281,3 @@ msgstr "Allociné.fr"
 #: scripts.cpp:8
 msgid "Spanish Ministry of Culture"
 msgstr "Ministère Espagnol de la culture"
-
-#~ msgid "CrossRef"
-#~ msgstr "CrossRef"
-
-#~ msgid "Citebase"
-#~ msgstr "Citebase"
-
-#~ msgid "Bibsonomy"
-#~ msgstr "Bibsonomy"
-
-#~ msgid "MODS"
-#~ msgstr "MODS"
-
-#~ msgid "RIS"
-#~ msgstr "RIS"
-
-#~ msgid "GCstar"
-#~ msgstr "GCstar"
-
-#~ msgid "AMC"
-#~ msgstr "AMC"
-
-#~ msgid "Griffith"
-#~ msgstr "Griffith"
-
-#~ msgid "Referencer"
-#~ msgstr "Référencer"

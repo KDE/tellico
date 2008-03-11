@@ -16,6 +16,7 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../collection.h"
+#include "../document.h"
 #include "../filehandler.h"
 #include "../latin1literal.h"
 #include "../tellico_debug.h"
@@ -227,8 +228,19 @@ bool BibtexHandler::setFieldValue(Data::EntryPtr entry_, const QString& bibtexFi
   Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(entry_->collection().data());
   Data::FieldPtr field = c->fieldByBibtexName(bibtexField_);
   if(!field) {
-    // arbitrarily say if the value has more than 100 chars, then it's a paragraph
-    if(value_.length() < 100) {
+    // it was the case that the default bibliography did not have a bibtex property for keywords
+    // so a "keywords" field would get created in the imported collection
+    // but the existing collection had a field "keyword" so the values would not get imported
+    // here, check to see if the current collection has a field with the same bibtex name and
+    // use it instead of creating a new one
+    Data::BibtexCollection* existingColl = Data::Document::self()->collection()->type() == Data::Collection::Bibtex
+                                         ? static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data())
+                                         : 0;
+    Data::FieldPtr existingField = existingColl ? existingColl->fieldByBibtexName(bibtexField_) : 0;
+    if(existingField) {
+      field = new Data::Field(*existingField);
+    } else if(value_.length() < 100) {
+      // arbitrarily say if the value has more than 100 chars, then it's a paragraph
       QString vlower = value_.lower();
       // special case, try to detect URLs
       // In qt 3.1, QString::startsWith() is always case-sensitive
@@ -249,7 +261,12 @@ bool BibtexHandler::setFieldValue(Data::EntryPtr entry_, const QString& bibtexFi
     field->setProperty(QString::fromLatin1("bibtex"), bibtexField_);
     c->addField(field);
   }
-  return field ? entry_->setField(field, value_) : false;
+  // special case keywords, replace commas with semi-colons so they get separated
+  QString value = value_;
+  if(field->property(QString::fromLatin1("bibtex")).startsWith(QString::fromLatin1("keyword"))) {
+    value.replace(',', ';');
+  }
+  return entry_->setField(field, value);
 }
 
 QString& BibtexHandler::cleanText(QString& text_) {

@@ -113,7 +113,9 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KURL& url_, bool qu
     }
   }
 
-  s_imageDict.insert(img->id(), img);
+  if(!link_) {
+    s_imageDict.insert(img->id(), img);
+  }
   s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
   return *img;
 }
@@ -249,7 +251,7 @@ bool ImageFactory::writeImage(const QString& id_, const KURL& targetDir_, bool f
   }
 
   if(img.linkOnly()) {
-    myDebug() << "ImageFactory::writeImage() - " << id_ << ": link only, not writing!" << endl;
+//    myLog() << "ImageFactory::writeImage() - " << id_ << ": link only, not writing!" << endl;
     return true;
   }
 

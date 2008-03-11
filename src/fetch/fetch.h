@@ -31,6 +31,7 @@ enum FetchKey {
   DOI,
   ArxivID,
   PubmedID,
+  LCCN,
   Raw,
   FetchLast
 };
@@ -52,7 +53,9 @@ enum Type {
   CrossRef,
   Citebase,
   Arxiv,
-  Bibsonomy
+  Bibsonomy,
+  GoogleScholar,
+  Discogs
 };
 
   }
