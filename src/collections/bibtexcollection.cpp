@@ -298,6 +298,7 @@ int BibtexCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) 
   if(Entry::compareValues(entry1_, entry2_, QString::fromLatin1("isbn"),  this) > 0 ||
      Entry::compareValues(entry1_, entry2_, QString::fromLatin1("lccn"),  this) > 0 ||
      Entry::compareValues(entry1_, entry2_, QString::fromLatin1("doi"),   this) > 0 ||
+     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("pmid"),  this) > 0 ||
      Entry::compareValues(entry1_, entry2_, QString::fromLatin1("arxiv"), this) > 0) {
     return 100; // good match
   }

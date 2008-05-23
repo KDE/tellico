@@ -550,7 +550,7 @@ void FetchDialog::slotInit() {
 
 void FetchDialog::slotKeyChanged(int idx_) {
   int key = m_keyCombo->data(idx_).toInt();
-  if(key == Fetch::ISBN || key == Fetch::UPC) {
+  if(key == Fetch::ISBN || key == Fetch::UPC || key == Fetch::LCCN) {
     m_multipleISBN->setEnabled(true);
     if(key == Fetch::ISBN) {
       m_valueLineEdit->setValidator(new ISBNValidator(this));
@@ -586,8 +586,9 @@ void FetchDialog::slotMultipleISBN(bool toggle_) {
   m_valueLineEdit->setEnabled(!toggle_);
   if(!wasEnabled && m_valueLineEdit->isEnabled()) {
     // if we enable it, it probably had multiple isbn values
-    // the validator doesn't like that, so clear the box
-    m_valueLineEdit->clear();
+    // the validator doesn't like that, so only keep the first value
+    QString val = m_valueLineEdit->text().section(';', 0, 0);
+    m_valueLineEdit->setText(val);
   }
   m_editISBN->setEnabled(toggle_);
 }

@@ -346,7 +346,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
   while(m_started && start > -1) {
     // split title at parenthesis
     const QString cap1 = s_anchorTitleRx->cap(1); // the anchor url
-    const QString cap2 = s_anchorTitleRx->cap(2); // the anchor text
+    const QString cap2 = s_anchorTitleRx->cap(2).stripWhiteSpace(); // the anchor text
     start += s_anchorTitleRx->matchedLength();
     int pPos = cap2.find('('); // if it has parentheses, use that for description
     QString desc;
@@ -435,7 +435,7 @@ void IMDBFetcher::parseSingleNameResult() {
     bool isEpisode = false;
     len = s_anchorTitleRx->cap(0).length();
     // split title at parenthesis
-    const QString cap2 = s_anchorTitleRx->cap(2);
+    const QString cap2 = s_anchorTitleRx->cap(2).stripWhiteSpace();
     int pPos = cap2.find('(');
     if(pPos > -1) {
       desc = cap2.mid(pPos);
@@ -527,7 +527,7 @@ void IMDBFetcher::parseMultipleNameResults() {
     pos = s_anchorNameRx->search(output, pos+13);
     while(pos > -1 && pos < end && m_matches.size() < m_limit) {
       KURL u(m_url, s_anchorNameRx->cap(1));
-      s = s_anchorNameRx->cap(2) + ' ';
+      s = s_anchorNameRx->cap(2).stripWhiteSpace() + ' ';
       // if more than one exact, add parentheses
       if(nameMap.contains(s) && nameMap[s] > 0) {
         // fix the first one that didn't have a number
@@ -551,7 +551,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   pos = s_anchorNameRx->search(output, end);
   while(pos > -1 && m_matches.size() < m_limit) {
     KURL u(m_url, s_anchorNameRx->cap(1)); // relative URL
-    s = s_anchorNameRx->cap(2);
+    s = s_anchorNameRx->cap(2).stripWhiteSpace();
     if(nameMap.contains(s) && nameMap[s] > 0) {
     // fix the first one that didn't have a number
       if(nameMap[s] == 1) {
@@ -671,6 +671,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
 
   doTitle(str_, entry);
   doRunningTime(str_, entry);
+  doAspectRatio(str_, entry);
   doAlsoKnownAs(str_, entry);
   doPlot(str_, entry, m_url);
   doLists(str_, entry);
@@ -727,6 +728,16 @@ void IMDBFetcher::doRunningTime(const QString& str_, Data::EntryPtr entry_) {
   if(runtimeRx.search(str_) > -1) {
 //    myDebug() << "running-time = " << runtimeRx.cap(1) << endl;
     entry_->setField(QString::fromLatin1("running-time"), runtimeRx.cap(1));
+  }
+}
+
+void IMDBFetcher::doAspectRatio(const QString& str_, Data::EntryPtr entry_) {
+  QRegExp rx(QString::fromLatin1("aspect ratio:.*([\\d\\.]+\\s*:\\s*[\\d\\.]+)"), false);
+  rx.setMinimal(true);
+
+  if(rx.search(str_) > -1) {
+//    myDebug() << "aspect ratio = " << rx.cap(1) << endl;
+    entry_->setField(QString::fromLatin1("aspect-ratio"), rx.cap(1).stripWhiteSpace());
   }
 }
 
@@ -840,7 +851,7 @@ void IMDBFetcher::doPerson(const QString& str_, Data::EntryPtr entry_,
     pos = s_anchorRx->search(str_, pos+1);
     while(pos > -1 && pos < endPos) {
       if(s_anchorRx->cap(1).find(name) > -1) {
-        people.add(s_anchorRx->cap(2));
+        people.add(s_anchorRx->cap(2).stripWhiteSpace());
       }
       pos = s_anchorRx->search(str_, pos+1);
     }
@@ -918,9 +929,10 @@ void IMDBFetcher::doCast(const QString& str_, Data::EntryPtr entry_, const KURL&
       // there's a column with ellipses then the character
       const int pos2 = tdRx.search(castText, pos);
       if(pos2 > -1 && tdRx.search(castText, pos2+1) > -1) {
-        cast += s_anchorRx->cap(2) + QString::fromLatin1("::") + tdRx.cap(1).simplifyWhiteSpace().remove(*s_tagRx);
+        cast += s_anchorRx->cap(2).stripWhiteSpace()
+              + QString::fromLatin1("::") + tdRx.cap(1).simplifyWhiteSpace().remove(*s_tagRx);
       } else {
-        cast += s_anchorRx->cap(2);
+        cast += s_anchorRx->cap(2).stripWhiteSpace();
       }
     }
     pos = s_anchorRx->search(castText, pos+1);
@@ -1006,34 +1018,37 @@ void IMDBFetcher::doLists(const QString& str_, Data::EntryPtr entry_) {
   const QString cert = QString::fromLatin1("certificates=");
   const QString soundMix = QString::fromLatin1("sound-mix=");
   const QString year = QString::fromLatin1("/Years/");
+  const QString company = QString::fromLatin1("/company/");
 
   // IIMdb also has links with the word "sections" in them, remove that
   // for genres and nationalities
 
-  QStringList genres, countries, langs, certs, tracks;
+  QStringList genres, countries, langs, certs, tracks, studios;
   for(int pos = s_anchorRx->search(str_); pos > -1; pos = s_anchorRx->search(str_, pos+1)) {
     const QString cap1 = s_anchorRx->cap(1);
     if(cap1.find(genre) > -1) {
       if(s_anchorRx->cap(2).find(QString::fromLatin1(" section"), 0, false) == -1) {
-        genres += s_anchorRx->cap(2);
+        genres += s_anchorRx->cap(2).stripWhiteSpace();
       }
     } else if(cap1.find(country) > -1) {
       if(s_anchorRx->cap(2).find(QString::fromLatin1(" section"), 0, false) == -1) {
-        countries += s_anchorRx->cap(2);
+        countries += s_anchorRx->cap(2).stripWhiteSpace();
       }
     } else if(cap1.find(lang) > -1) {
-      langs += s_anchorRx->cap(2);
+      langs += s_anchorRx->cap(2).stripWhiteSpace();
     } else if(cap1.find(colorInfo) > -1) {
       // change "black and white" to "black & white"
       entry_->setField(QString::fromLatin1("color"),
-                       s_anchorRx->cap(2).replace(QString::fromLatin1("and"), QChar('&')));
+                       s_anchorRx->cap(2).replace(QString::fromLatin1("and"), QChar('&')).stripWhiteSpace());
     } else if(cap1.find(cert) > -1) {
-      certs += s_anchorRx->cap(2);
+      certs += s_anchorRx->cap(2).stripWhiteSpace();
     } else if(cap1.find(soundMix) > -1) {
-      tracks += s_anchorRx->cap(2);
+      tracks += s_anchorRx->cap(2).stripWhiteSpace();
+    } else if(cap1.find(company) > -1) {
+      studios += s_anchorRx->cap(2).stripWhiteSpace();
       // if year field wasn't set before, do it now
     } else if(entry_->field(QString::fromLatin1("year")).isEmpty() && cap1.find(year) > -1) {
-      entry_->setField(QString::fromLatin1("year"), s_anchorRx->cap(2));
+      entry_->setField(QString::fromLatin1("year"), s_anchorRx->cap(2).stripWhiteSpace());
     }
   }
 
@@ -1041,6 +1056,7 @@ void IMDBFetcher::doLists(const QString& str_, Data::EntryPtr entry_) {
   entry_->setField(QString::fromLatin1("nationality"), countries.join(sep));
   entry_->setField(QString::fromLatin1("language"), langs.join(sep));
   entry_->setField(QString::fromLatin1("audio-track"), tracks.join(sep));
+  entry_->setField(QString::fromLatin1("studio"), studios.join(sep));
   if(!certs.isEmpty()) {
     // first try to set default certification
     const QStringList& certsAllowed = entry_->collection()->fieldByName(QString::fromLatin1("certification"))->allowed();

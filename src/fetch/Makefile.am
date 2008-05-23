@@ -7,10 +7,10 @@ libfetch_a_METASOURCES = AUTO
 
 libfetch_a_SOURCES = amazonfetcher.cpp animenfofetcher.cpp arxivfetcher.cpp \
 	bibsonomyfetcher.cpp citebasefetcher.cpp configwidget.cpp crossreffetcher.cpp \
-	entrezfetcher.cpp execexternalfetcher.cpp fetcher.cpp fetchmanager.cpp \
-	gcstarpluginfetcher.cpp ibsfetcher.cpp imdbfetcher.cpp isbndbfetcher.cpp messagehandler.cpp \
-	srufetcher.cpp yahoofetcher.cpp z3950connection.cpp z3950fetcher.cpp \
-	googlescholarfetcher.cpp discogsfetcher.cpp
+	discogsfetcher.cpp entrezfetcher.cpp execexternalfetcher.cpp fetcher.cpp fetchmanager.cpp \
+	gcstarpluginfetcher.cpp googlescholarfetcher.cpp ibsfetcher.cpp imdbfetcher.cpp \
+	isbndbfetcher.cpp messagehandler.cpp srufetcher.cpp yahoofetcher.cpp z3950connection.cpp \
+	z3950fetcher.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 

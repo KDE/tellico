@@ -145,7 +145,7 @@
   </journal>
 
   <keywords>
-   <xsl:for-each select="MeshHeadingList/MeshHeading/QualifierName[@MajorTopicYN='Y']">
+   <xsl:for-each select="MeshHeadingList/MeshHeading/QualifierName[@MajorTopicYN='Y'] | MeshHeadingList/MeshHeading/DescriptorName">
     <keyword>
      <xsl:value-of select="."/>
     </keyword>

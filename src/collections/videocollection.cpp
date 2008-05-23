@@ -204,11 +204,15 @@ Tellico::Data::FieldVec VideoCollection::defaultFields() {
   field->setCategory(i18n(video_personal));
   list.append(field);
 
+  field = new Field(QString::fromLatin1("keyword"), i18n("Keywords"));
+  field->setCategory(i18n(video_personal));
+  field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
+  list.append(field);
+
   field = new Field(QString::fromLatin1("cover"), i18n("Cover"), Field::Image);
   list.append(field);
 
   field = new Field(QString::fromLatin1("comments"), i18n("Comments"), Field::Para);
-  field->setCategory(i18n(video_personal));
   list.append(field);
 
   return list;

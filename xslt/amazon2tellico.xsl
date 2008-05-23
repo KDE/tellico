@@ -186,6 +186,14 @@
    <xsl:value-of select="aws:Title"/>
   </title>
 
+  <languages>
+   <xsl:for-each select="aws:Languages/aws:Language[not(aws:Name=preceding-sibling::aws:Language/aws:Name)]">
+    <language>
+     <xsl:value-of select="aws:Name"/>
+    </language>
+   </xsl:for-each>
+  </languages>
+
   <xsl:choose>
    <!-- book collection stuff -->
    <xsl:when test="$mode='Books'">
@@ -212,6 +220,14 @@
     <publisher>
      <xsl:value-of select="aws:Publisher"/>
     </publisher>
+
+    <editors>
+     <xsl:for-each select="aws:Creator[@Role='Editor']">
+      <editor>
+       <xsl:value-of select="."/>
+      </editor>
+     </xsl:for-each>
+    </editors>
 
     <binding i18n="true">
      <xsl:choose>
@@ -371,7 +387,7 @@
     </xsl:if>
 
     <languages>
-     <xsl:for-each select="aws:Languages/aws:Language">
+     <xsl:for-each select="aws:Languages/aws:Language[not(aws:Name=preceding-sibling::aws:Language/aws:Name)]">
       <language>
        <xsl:value-of select="aws:Name"/>
       </language>

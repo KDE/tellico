@@ -1,3 +1,48 @@
+2008-05-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.3.2.
+	* Include Canadian LCC values, patch from Peter Stevenson.
+
+2008-05-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated entry creation to always add default values. Fixes Debian bug 481639.
+
+2008-04-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved IMDb search results.
+
+2008-04-15  Robby Stephenson  <robby@periapsis.org>
+
+	* When adding a book to a bibliography, set the type to 'book'.
+
+2008-04-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated LCCN search to validate format.
+	* Updated entry match to compare validated LCCN.
+	* Updated z39.50 search to allow multiple LCCN values.
+
+2008-04-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed loader to eliminate possible duplicates for fields allowing multiple values (like keywords).
+	* Updated PubMed search to add all keywords.
+	* Fixed PubMed search to use utf8 encoding.
+
+2008-04-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed XML loader to strip whitespace from non-paragraph values.
+
+2008-04-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added languages and editors to Amazon book import.
+
+2008-03-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated mods2tellico.xsl to try to capture more of mods info converted from refbase.
+
+2008-03-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated mods2tellico.xsl to try to capture more of bibtex info converted from wikindx.
+
 2008-03-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.3.1.

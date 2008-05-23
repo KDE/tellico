@@ -25,6 +25,7 @@
 #include "../gui/combobox.h"
 #include "../latin1literal.h"
 #include "../tellico_utils.h"
+#include "../lccnvalidator.h"
 
 #include <klocale.h>
 #include <kio/job.h>
@@ -149,10 +150,17 @@ void SRUFetcher::search(FetchKey key_, const QString& value_) {
       break;
 
     case LCCN:
-      // limit to first lccn
-      str.remove('-');
-      str = str.section(';', 0, 0);
-      u.addQueryItem(QString::fromLatin1("query"), QString::fromLatin1("bath.lccn=") + str);
+      {
+        // limit to first lccn
+        str.remove('-');
+        str = str.section(';', 0, 0);
+        // also try formalized lccn
+        QString lccn = LCCNValidator::formalize(str);
+        u.addQueryItem(QString::fromLatin1("query"),
+                       QString::fromLatin1("bath.lccn=") + str +
+                       QString::fromLatin1(" or bath.lccn=") + lccn
+                       );
+      }
       break;
 
     case Keyword:
@@ -173,7 +181,7 @@ void SRUFetcher::search(FetchKey key_, const QString& value_) {
       break;
   }
 #endif
-  myDebug() << u.prettyURL() << endl;
+//  myDebug() << u.prettyURL() << endl;
 
   m_job = KIO::get(u, false, false);
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),

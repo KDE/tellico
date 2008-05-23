@@ -34,6 +34,18 @@ void AddEntries::execute() {
   }
 
   m_coll->addEntries(m_entries);
+  // now check for default values
+  Data::FieldVec fields = m_coll->fields();
+  for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+    const QString defaultValue = field->defaultValue();
+    if(!defaultValue.isEmpty()) {
+      for(Data::EntryVec::Iterator entry = m_entries.begin(); entry != m_entries.end(); ++entry) {
+        if(entry->field(field).isEmpty()) {
+          entry->setField(field->name(), defaultValue);
+        }
+      }
+    }
+  }
   Controller::self()->addedEntries(m_entries);
 }
 

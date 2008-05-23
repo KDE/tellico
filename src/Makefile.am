@@ -12,7 +12,7 @@ tellico_SOURCES = borrower.cpp borrowerdialog.cpp \
 	importdialog.cpp isbnvalidator.cpp iso5426converter.cpp iso6937converter.cpp \
 	listviewcomparison.cpp loandialog.cpp loanitem.cpp loanview.cpp main.cpp mainwindow.cpp \
 	progressmanager.cpp reportdialog.cpp statusbar.cpp tellico_kernel.cpp tellico_strings.cpp \
-	tellico_utils.cpp upcvalidator.cpp viewstack.cpp xmphandler.cpp
+	tellico_utils.cpp upcvalidator.cpp viewstack.cpp xmphandler.cpp lccnvalidator.cpp
 
 if !USE_LIBBTPARSE
   LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
@@ -84,7 +84,8 @@ iso6937converter.h iso6937converter.cpp \
 tellico_map.h \
 listviewcomparison.h listviewcomparison.cpp \
 entrymerger.h entrymerger.cpp \
-xmphandler.h xmphandler.cpp
+xmphandler.h xmphandler.cpp \
+lccnvalidator.h lccnvalidator.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:

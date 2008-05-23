@@ -19,6 +19,7 @@
 #include "../latin1literal.h"
 #include "../progressmanager.h"
 #include "../filehandler.h"
+#include "../isbnvalidator.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>
@@ -53,13 +54,16 @@ void RISImporter::initTagMap() {
     s_tagMap->insert(QString::fromLatin1("JF"), QString::fromLatin1("journal"));
     s_tagMap->insert(QString::fromLatin1("JO"), QString::fromLatin1("journal"));
     s_tagMap->insert(QString::fromLatin1("JA"), QString::fromLatin1("journal"));
-    s_tagMap->insert(QString::fromLatin1("VL"), QString::fromLatin1("number"));
+    s_tagMap->insert(QString::fromLatin1("VL"), QString::fromLatin1("volume"));
     s_tagMap->insert(QString::fromLatin1("IS"), QString::fromLatin1("number"));
     s_tagMap->insert(QString::fromLatin1("PB"), QString::fromLatin1("publisher"));
     s_tagMap->insert(QString::fromLatin1("SN"), QString::fromLatin1("isbn"));
     s_tagMap->insert(QString::fromLatin1("AD"), QString::fromLatin1("address"));
+    s_tagMap->insert(QString::fromLatin1("CY"), QString::fromLatin1("address"));
     s_tagMap->insert(QString::fromLatin1("UR"), QString::fromLatin1("url"));
     s_tagMap->insert(QString::fromLatin1("L1"), QString::fromLatin1("pdf"));
+    s_tagMap->insert(QString::fromLatin1("T3"), QString::fromLatin1("series"));
+    s_tagMap->insert(QString::fromLatin1("EP"), QString::fromLatin1("pages"));
   }
 }
 
@@ -74,9 +78,9 @@ void RISImporter::initTypeMap() {
     s_typeMap->insert(QString::fromLatin1("BILL"),   QString::fromLatin1("Bill/Resolution"));
     s_typeMap->insert(QString::fromLatin1("BOOK"),   QString::fromLatin1("book")); // bibtex
     s_typeMap->insert(QString::fromLatin1("CASE"),   QString::fromLatin1("Case"));
-    s_typeMap->insert(QString::fromLatin1("CHAP"),   QString::fromLatin1("Book chapter")); // == "inbook" ?
+    s_typeMap->insert(QString::fromLatin1("CHAP"),   QString::fromLatin1("inbook")); // == "inbook" ?
     s_typeMap->insert(QString::fromLatin1("COMP"),   QString::fromLatin1("Computer program"));
-    s_typeMap->insert(QString::fromLatin1("CONF"),   QString::fromLatin1("proceedings")); // == "conference" ?
+    s_typeMap->insert(QString::fromLatin1("CONF"),   QString::fromLatin1("inproceedings")); // == "conference" ?
     s_typeMap->insert(QString::fromLatin1("CTLG"),   QString::fromLatin1("Catalog"));
     s_typeMap->insert(QString::fromLatin1("DATA"),   QString::fromLatin1("Data file"));
     s_typeMap->insert(QString::fromLatin1("ELEC"),   QString::fromLatin1("Electronic Citation"));
@@ -85,7 +89,7 @@ void RISImporter::initTypeMap() {
     s_typeMap->insert(QString::fromLatin1("ICOMM"),  QString::fromLatin1("Internet Communication"));
     s_typeMap->insert(QString::fromLatin1("INPR"),   QString::fromLatin1("In Press"));
     s_typeMap->insert(QString::fromLatin1("JFULL"),  QString::fromLatin1("Journal (full)")); // = "periodical" ?
-    s_typeMap->insert(QString::fromLatin1("JOUR"),   QString::fromLatin1("Journal"));
+    s_typeMap->insert(QString::fromLatin1("JOUR"),   QString::fromLatin1("article")); // "Journal"
     s_typeMap->insert(QString::fromLatin1("MAP"),    QString::fromLatin1("Map"));
     s_typeMap->insert(QString::fromLatin1("MGZN"),   QString::fromLatin1("article")); // bibtex
     s_typeMap->insert(QString::fromLatin1("MPCT"),   QString::fromLatin1("Motion picture"));
@@ -167,6 +171,8 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
     return;
   }
 
+  ISBNValidator isbnval(this);
+
   QTextIStream t(&str);
 
   const uint length = str.length();
@@ -174,6 +180,8 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
   const bool showProgress = options() & ImportProgress;
 
   bool needToAddFinal = false;
+
+  QString sp, ep;
 
   uint j = 0;
   Data::EntryPtr entry = new Data::Entry(m_coll);
@@ -207,6 +215,32 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
     } else if(tag == Latin1Literal("TY") && s_typeMap->contains(value)) {
       // for entry-type, switch it to normalized type name
       value = (*s_typeMap)[value];
+    } else if(tag == Latin1Literal("SN")) {
+      // test for valid isbn, sometimes the issn gets stuck here
+      int pos = 0;
+      if(isbnval.validate(value, pos) != ISBNValidator::Acceptable) {
+        continue;
+      }
+    } else if(tag == Latin1Literal("SP")) {
+      sp = value;
+      if(!ep.isEmpty()) {
+        value = sp + '-' + ep;
+        tag = QString::fromLatin1("EP");
+        sp = QString();
+        ep = QString();
+      } else {
+        // nothing else to do
+        continue;
+      }
+    } else if(tag == Latin1Literal("EP")) {
+      ep = value;
+      if(!sp.isEmpty()) {
+        value = sp + '-' + ep;
+        sp = QString();
+        ep = QString();
+      } else {
+        continue;
+      }
     } else if(tag == Latin1Literal("YR") || tag == Latin1Literal("PY")) {  // for now, just grab the year
       value = value.section('/', 0, 0);
     }
@@ -247,6 +281,7 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
       kapp->processEvents();
     }
   }
+
   if(needToAddFinal) {
     m_coll->addEntries(entry);
   }
@@ -263,30 +298,11 @@ Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
     }
   }
 
-  // add some non-default fields if not already there
-  if(tag_== Latin1Literal("AB") || tag_== Latin1Literal("N2")) {
-    f = new Data::Field(QString::fromLatin1("abstract"), i18n("Abstract"), Data::Field::Para);
-    f->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("abstract"));
-    f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("AB"));
-  } else if(tag_== Latin1Literal("KW")) {
-    f = new Data::Field(QString::fromLatin1("keyword"), i18n("Keywords"));
-    f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("KW"));
-    f->setCategory(i18n("Classification"));
-    f->setFlags(Data::Field::AllowCompletion | Data::Field::AllowMultiple | Data::Field::AllowGrouped);
-  } else if(tag_== Latin1Literal("SN")) {
-    f = new Data::Field(QString::fromLatin1("isbn"), i18n("ISBN#"));
-    f->setProperty(QString::fromLatin1("bibtex"), QString::fromLatin1("isbn"));
-    f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("SN"));
-    f->setCategory(i18n("Publishing"));
-    f->setDescription(i18n("International Standard Book Number"));
-  } else if(tag_== Latin1Literal("UR")) {
-    f = new Data::Field(QString::fromLatin1("url"), i18n("URL"), Data::Field::URL);
-    f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("UR"));
-    f->setCategory(i18n("Unknown"));
-  } else if(tag_== Latin1Literal("L1")) {
+  // add non-default fields if not already there
+  if(tag_== Latin1Literal("L1")) {
     f = new Data::Field(QString::fromLatin1("pdf"), i18n("PDF"), Data::Field::URL);
     f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("L1"));
-    f->setCategory(i18n("Unknown"));
+    f->setCategory(i18n("Miscellaneous"));
   }
   m_coll->addField(f);
   return f;

@@ -10,7 +10,7 @@
    ===================================================================
    Tellico XSLT file - used for importing GCstar data.
 
-   Copyright (C) 2007 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2007-2008 Robby Stephenson - robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/
@@ -23,41 +23,63 @@
             doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
 
 <xsl:variable name="coll">
-    <xsl:choose>
-     <xsl:when test="/collection[1]/@type='GCbooks'">
-     <xsl:text>2</xsl:text>
-    </xsl:when>
-    <xsl:when test="/collection[1]/@type='GCfilms'">
-     <xsl:text>3</xsl:text>
-    </xsl:when>
-    <xsl:when test="/collection[1]/@type='GCmusics'">
-     <xsl:text>4</xsl:text>
-    </xsl:when>
-    <xsl:when test="/collection[1]/@type='GCwines'">
-     <xsl:text>7</xsl:text>
-    </xsl:when>
-    <xsl:when test="/collection[1]/@type='GCcoins'">
-     <xsl:text>8</xsl:text>
-    </xsl:when>
-    <xsl:when test="/collection[1]/@type='GCgames'">
-     <xsl:text>11</xsl:text>
-    </xsl:when>
-    <xsl:when test="/collection[1]/@type='GCboardgames'">
-     <xsl:text>13</xsl:text>
-    </xsl:when>
-   </xsl:choose>
+ <xsl:choose>
+  <xsl:when test="/collection[1]/@type='GCbooks'">
+   <xsl:text>2</xsl:text>
+  </xsl:when>
+  <xsl:when test="/collection[1]/@type='GCfilms'">
+   <xsl:text>3</xsl:text>
+  </xsl:when>
+  <xsl:when test="/collection[1]/@type='GCmusics'">
+   <xsl:text>4</xsl:text>
+  </xsl:when>
+  <xsl:when test="/collection[1]/@type='GCwines'">
+   <xsl:text>7</xsl:text>
+  </xsl:when>
+  <xsl:when test="/collection[1]/@type='GCcoins'">
+   <xsl:text>8</xsl:text>
+  </xsl:when>
+  <xsl:when test="/collection[1]/@type='GCgames'">
+   <xsl:text>11</xsl:text>
+  </xsl:when>
+  <xsl:when test="/collection[1]/@type='GCboardgames'">
+   <xsl:text>13</xsl:text>
+  </xsl:when>
+ </xsl:choose>
 </xsl:variable>
 
 <xsl:template match="/">
- <tellico syntaxVersion="9">
+ <tc:tellico syntaxVersion="9">
   <xsl:apply-templates select="collection"/>
- </tellico>
+ </tc:tellico>
 </xsl:template>
 
 <xsl:template match="collection">
  <tc:collection title="GCstar Import" type="{$coll}">
   <tc:fields>
    <tc:field name="_default"/>
+   <tc:field flags="0" title="Favorite" category="Personal" format="4" type="4" name="favorite" i18n="true"/>
+   <xsl:if test="item/@web or item/@webPage">
+    <tc:field flags="0" title="URL" category="General" format="4" type="7" name="url" i18n="true"/>
+   </xsl:if>
+   <xsl:if test="item/@location">
+     <tc:field flags="6" title="Location" category="Personal" format="4" type="1" name="location" i18n="true"/>
+   </xsl:if>
+   <xsl:if test="item/@composer">
+    <tc:field flags="7" title="Composer" category="General" format="2" type="1" name="composer" i18n="true"/>
+   </xsl:if>
+   <xsl:if test="item/@producer">
+    <tc:field flags="7" title="Producer" category="General" format="2" type="1" name="producer" i18n="true"/>
+   </xsl:if>
+   <xsl:if test="@type='GCmusics' and item/@format">
+    <tc:field flags="7" title="Format" category="General" format="0" type="1" name="format" i18n="true"/>
+   </xsl:if>
+   <xsl:choose>
+    <xsl:when test="@type='GCfilms'">
+     <tc:field flags="8" title="Original Title" category="General" format="1" type="1" name="origtitle" i18n="true"/>
+     <tc:field flags="0" title="Seen" category="Personal" format="4" type="4" name="seen" i18n="true"/>
+    </xsl:when>
+   </xsl:choose>
   </tc:fields>
   <xsl:apply-templates select="item"/>
  </tc:collection>
@@ -95,7 +117,11 @@
  </xsl:element>
 </xsl:template>
 
-<xsl:template match="author|authors|language|genre|artist">
+<xsl:template match="original">
+ <tc:origtitle><xsl:value-of select="."/></tc:origtitle>
+</xsl:template>
+
+<xsl:template match="author|authors|language|genre|artist|composer|producer">
  <xsl:variable name="tag">
   <xsl:choose>
    <xsl:when test="local-name() = 'authors'">
@@ -130,21 +156,26 @@
 </xsl:template>
 
 <xsl:template match="format">
- <xsl:if test="$coll = 2">
-  <tc:binding i18n="true">
-   <xsl:choose>
-    <xsl:when test="contains(., 'Paperback')">
-     <xsl:text>Paperback</xsl:text>
-    </xsl:when>
-    <xsl:otherwise>
-     <xsl:value-of select="."/>
-    </xsl:otherwise>
-   </xsl:choose>   
-  </tc:binding>
- </xsl:if>
- <xsl:if test="$coll != 2">
-  <tc:medium i18n="true"><xsl:value-of select="."/></tc:medium>
- </xsl:if>
+ <xsl:choose>
+  <xsl:when test="$coll = 2">
+   <tc:binding i18n="true">
+    <xsl:choose>
+     <xsl:when test="contains(., 'Paperback')">
+      <xsl:text>Paperback</xsl:text>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:value-of select="."/>
+     </xsl:otherwise>
+    </xsl:choose>
+   </tc:binding>
+  </xsl:when>
+  <xsl:when test="$coll = 3">
+   <tc:medium i18n="true"><xsl:value-of select="."/></tc:medium>
+  </xsl:when>
+  <xsl:when test="$coll = 4">
+   <tc:format i18n="true"><xsl:value-of select="."/></tc:format>
+  </xsl:when>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="country">
@@ -164,10 +195,13 @@
 
 <xsl:template match="actors">
  <tc:casts>
-  <xsl:for-each select="str:tokenize(., ',/;')">
+  <xsl:for-each select="line">
    <tc:cast>
     <tc:column>
-     <xsl:value-of select="normalize-space(.)"/>
+     <xsl:value-of select="col[1]"/>
+    </tc:column>
+    <tc:column>
+     <xsl:value-of select="col[2]"/>
     </tc:column>
    </tc:cast>
   </xsl:for-each>
@@ -182,6 +216,14 @@
  </tc:directors>
 </xsl:template>
 
+<xsl:template match="translator">
+ <tc:translators>
+  <tc:translator>
+   <xsl:value-of select="."/>
+  </tc:translator>
+ </tc:translators>
+</xsl:template>
+
 <xsl:template match="audio">
  <tc:languages>
   <xsl:for-each select="line">
@@ -190,6 +232,13 @@
    </tc:language>
   </xsl:for-each>
  </tc:languages>
+ <tc:audio-tracks>
+  <xsl:for-each select="line">
+   <tc:audio-track>
+    <xsl:value-of select="col[2]"/>
+   </tc:audio-track>
+  </xsl:for-each>
+ </tc:audio-tracks>
 </xsl:template>
 
 <xsl:template match="synopsis">
@@ -202,6 +251,10 @@
 
 <xsl:template match="image|boxpic">
  <tc:cover><xsl:value-of select="."/></tc:cover>
+</xsl:template>
+
+<xsl:template match="web|webPage">
+ <tc:url><xsl:value-of select="."/></tc:url>
 </xsl:template>
 
 <xsl:template match="rating">
@@ -257,6 +310,18 @@
  </xsl:if>
 </xsl:template>
 
+<xsl:template match="seen">
+ <xsl:if test=". &gt; 0">
+  <tc:seen>true</tc:seen>
+ </xsl:if>
+</xsl:template>
+
+<xsl:template match="favourite">
+ <xsl:if test=". &gt; 0">
+  <tc:favorite>true</tc:favorite>
+ </xsl:if>
+</xsl:template>
+
 <xsl:template match="publication">
  <tc:pub_year>
   <xsl:call-template name="year">
@@ -265,8 +330,14 @@
  </tc:pub_year>
 </xsl:template>
 
-<xsl:template match="aquisition|added">
+<xsl:template match="aquisition">
  <tc:pur_date><xsl:value-of select="."/></tc:pur_date>
+</xsl:template>
+
+<xsl:template match="added">
+ <xsl:if test="not(../acquisition)">
+  <tc:pur_date><xsl:value-of select="."/></tc:pur_date>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="serie">
@@ -343,6 +414,16 @@
    </tc:keyword>
   </xsl:for-each>
  </tc:keywords>
+</xsl:template>
+
+<xsl:template match="subt">
+ <tc:subtitles>
+  <xsl:for-each select="line">
+   <tc:subtitle>
+    <xsl:value-of select="col[1]"/>
+   </tc:subtitle>
+  </xsl:for-each>
+ </tc:subtitles>
 </xsl:template>
 
 <xsl:template match="currency">

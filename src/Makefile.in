@@ -74,9 +74,10 @@ am_tellico_OBJECTS = borrower.$(OBJEXT) borrowerdialog.$(OBJEXT) \
 	reportdialog.$(OBJEXT) statusbar.$(OBJEXT) \
 	tellico_kernel.$(OBJEXT) tellico_strings.$(OBJEXT) \
 	tellico_utils.$(OBJEXT) upcvalidator.$(OBJEXT) \
-	viewstack.$(OBJEXT) xmphandler.$(OBJEXT)
+	viewstack.$(OBJEXT) xmphandler.$(OBJEXT) \
+	lccnvalidator.$(OBJEXT)
 #>- tellico_OBJECTS = $(am_tellico_OBJECTS)
-#>+ 28
+#>+ 29
 tellico_final_OBJECTS = tellico.all_cpp.o 
 tellico_nofinal_OBJECTS = borrower.$(OBJEXT) borrowerdialog.$(OBJEXT) \
 	borroweritem.$(OBJEXT) calendarhandler.$(OBJEXT) \
@@ -102,7 +103,8 @@ tellico_nofinal_OBJECTS = borrower.$(OBJEXT) borrowerdialog.$(OBJEXT) \
 	reportdialog.$(OBJEXT) statusbar.$(OBJEXT) \
 	tellico_kernel.$(OBJEXT) tellico_strings.$(OBJEXT) \
 	tellico_utils.$(OBJEXT) upcvalidator.$(OBJEXT) \
-	viewstack.$(OBJEXT) xmphandler.$(OBJEXT)
+	viewstack.$(OBJEXT) xmphandler.$(OBJEXT) \
+	lccnvalidator.$(OBJEXT)
 @KDE_USE_FINAL_FALSE@tellico_OBJECTS = $(tellico_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@tellico_OBJECTS = $(tellico_final_OBJECTS)
 am__DEPENDENCIES_1 =
@@ -464,7 +466,7 @@ tellico_SOURCES = borrower.cpp borrowerdialog.cpp \
 	importdialog.cpp isbnvalidator.cpp iso5426converter.cpp iso6937converter.cpp \
 	listviewcomparison.cpp loandialog.cpp loanitem.cpp loanview.cpp main.cpp mainwindow.cpp \
 	progressmanager.cpp reportdialog.cpp statusbar.cpp tellico_kernel.cpp tellico_strings.cpp \
-	tellico_utils.cpp upcvalidator.cpp viewstack.cpp xmphandler.cpp
+	tellico_utils.cpp upcvalidator.cpp viewstack.cpp xmphandler.cpp lccnvalidator.cpp
 
 @USE_LIBBTPARSE_FALSE@LDADD_LIBBTPARSE = ./translators/btparse/libbtparse.a
 @ENABLE_WEBCAM_TRUE@WEBCAMDIR = barcode
@@ -531,7 +533,8 @@ iso6937converter.h iso6937converter.cpp \
 tellico_map.h \
 listviewcomparison.h listviewcomparison.cpp \
 entrymerger.h entrymerger.cpp \
-xmphandler.h xmphandler.cpp
+xmphandler.h xmphandler.cpp \
+lccnvalidator.h lccnvalidator.cpp
 
 
 ####### kdevelop will overwrite this part!!! (end)############
@@ -697,6 +700,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/isbnvalidator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iso5426converter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/iso6937converter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lccnvalidator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/listviewcomparison.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/loandialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/loanitem.Po@am__quote@
@@ -1326,11 +1330,11 @@ bcheck-am:
 
 
 #>+ 11
-tellico.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/tellico_utils.cpp $(srcdir)/image.cpp $(srcdir)/tellico_strings.cpp $(srcdir)/loandialog.cpp $(srcdir)/detailedlistview.cpp $(srcdir)/fieldcompletion.cpp $(srcdir)/progressmanager.cpp $(srcdir)/importdialog.cpp $(srcdir)/reportdialog.cpp $(srcdir)/fetcherconfigdialog.cpp $(srcdir)/borrower.cpp $(srcdir)/groupiterator.cpp $(srcdir)/entryeditdialog.cpp $(srcdir)/iso5426converter.cpp $(srcdir)/xmphandler.cpp $(srcdir)/viewstack.cpp $(srcdir)/listviewcomparison.cpp $(srcdir)/borrowerdialog.cpp $(srcdir)/collectionfactory.cpp $(srcdir)/entryiconview.cpp $(srcdir)/entrymerger.cpp $(srcdir)/groupview.cpp $(srcdir)/fetchdialog.cpp $(srcdir)/filterview.cpp $(srcdir)/loanitem.cpp $(srcdir)/loanview.cpp $(srcdir)/entry.cpp $(srcdir)/filteritem.cpp $(srcdir)/configdialog.cpp $(srcdir)/document.cpp $(srcdir)/entryiconfactory.cpp $(srcdir)/filter.cpp $(srcdir)/collectionfieldsdialog.cpp $(srcdir)/iso6937converter.cpp $(srcdir)/mainwindow.cpp $(srcdir)/exportdialog.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/entryview.cpp $(srcdir)/main.cpp $(srcdir)/field.cpp $(srcdir)/borroweritem.cpp $(srcdir)/filehandler.cpp $(srcdir)/statusbar.cpp $(srcdir)/detailedentryitem.cpp $(srcdir)/filterdialog.cpp $(srcdir)/entryupdater.cpp $(srcdir)/upcvalidator.cpp $(srcdir)/collection.cpp $(srcdir)/tellico_kernel.cpp $(srcdir)/calendarhandler.cpp $(srcdir)/controller.cpp $(srcdir)/imagefactory.cpp $(srcdir)/entrygroupitem.cpp $(srcdir)/entryitem.cpp  entry.moc configdialog.moc entryiconview.moc document.moc exportdialog.moc collection.moc filterview.moc fieldcompletion.moc entrymerger.moc controller.moc groupview.moc loandialog.moc borrowerdialog.moc detailedlistview.moc upcvalidator.moc progressmanager.moc reportdialog.moc importdialog.moc fetchdialog.moc collectionfieldsdialog.moc loanview.moc entryeditdialog.moc mainwindow.moc entryview.moc viewstack.moc statusbar.moc filterdialog.moc fetcherconfigdialog.moc entryupdater.moc
+tellico.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/tellico_utils.cpp $(srcdir)/image.cpp $(srcdir)/tellico_strings.cpp $(srcdir)/loandialog.cpp $(srcdir)/detailedlistview.cpp $(srcdir)/fieldcompletion.cpp $(srcdir)/progressmanager.cpp $(srcdir)/importdialog.cpp $(srcdir)/reportdialog.cpp $(srcdir)/fetcherconfigdialog.cpp $(srcdir)/borrower.cpp $(srcdir)/groupiterator.cpp $(srcdir)/entryeditdialog.cpp $(srcdir)/iso5426converter.cpp $(srcdir)/xmphandler.cpp $(srcdir)/viewstack.cpp $(srcdir)/listviewcomparison.cpp $(srcdir)/borrowerdialog.cpp $(srcdir)/collectionfactory.cpp $(srcdir)/entryiconview.cpp $(srcdir)/lccnvalidator.cpp $(srcdir)/entrymerger.cpp $(srcdir)/groupview.cpp $(srcdir)/fetchdialog.cpp $(srcdir)/filterview.cpp $(srcdir)/loanitem.cpp $(srcdir)/loanview.cpp $(srcdir)/entry.cpp $(srcdir)/filteritem.cpp $(srcdir)/configdialog.cpp $(srcdir)/document.cpp $(srcdir)/entryiconfactory.cpp $(srcdir)/filter.cpp $(srcdir)/collectionfieldsdialog.cpp $(srcdir)/iso6937converter.cpp $(srcdir)/mainwindow.cpp $(srcdir)/exportdialog.cpp $(srcdir)/isbnvalidator.cpp $(srcdir)/entryview.cpp $(srcdir)/main.cpp $(srcdir)/field.cpp $(srcdir)/borroweritem.cpp $(srcdir)/filehandler.cpp $(srcdir)/statusbar.cpp $(srcdir)/detailedentryitem.cpp $(srcdir)/filterdialog.cpp $(srcdir)/entryupdater.cpp $(srcdir)/upcvalidator.cpp $(srcdir)/collection.cpp $(srcdir)/tellico_kernel.cpp $(srcdir)/calendarhandler.cpp $(srcdir)/controller.cpp $(srcdir)/imagefactory.cpp $(srcdir)/entrygroupitem.cpp $(srcdir)/entryitem.cpp  entry.moc configdialog.moc entryiconview.moc document.moc exportdialog.moc collection.moc filterview.moc fieldcompletion.moc entrymerger.moc controller.moc groupview.moc loandialog.moc borrowerdialog.moc detailedlistview.moc upcvalidator.moc progressmanager.moc reportdialog.moc importdialog.moc fetchdialog.moc collectionfieldsdialog.moc loanview.moc entryeditdialog.moc mainwindow.moc entryview.moc viewstack.moc statusbar.moc filterdialog.moc fetcherconfigdialog.moc entryupdater.moc
 	@echo 'creating tellico.all_cpp.cpp ...'; \
 	rm -f tellico.all_cpp.files tellico.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> tellico.all_cpp.final; \
-	for file in tellico_utils.cpp image.cpp tellico_strings.cpp loandialog.cpp detailedlistview.cpp fieldcompletion.cpp progressmanager.cpp importdialog.cpp reportdialog.cpp fetcherconfigdialog.cpp borrower.cpp groupiterator.cpp entryeditdialog.cpp iso5426converter.cpp xmphandler.cpp viewstack.cpp listviewcomparison.cpp borrowerdialog.cpp collectionfactory.cpp entryiconview.cpp entrymerger.cpp groupview.cpp fetchdialog.cpp filterview.cpp loanitem.cpp loanview.cpp entry.cpp filteritem.cpp configdialog.cpp document.cpp entryiconfactory.cpp filter.cpp collectionfieldsdialog.cpp iso6937converter.cpp mainwindow.cpp exportdialog.cpp isbnvalidator.cpp entryview.cpp main.cpp field.cpp borroweritem.cpp filehandler.cpp statusbar.cpp detailedentryitem.cpp filterdialog.cpp entryupdater.cpp upcvalidator.cpp collection.cpp tellico_kernel.cpp calendarhandler.cpp controller.cpp imagefactory.cpp entrygroupitem.cpp entryitem.cpp; do \
+	for file in tellico_utils.cpp image.cpp tellico_strings.cpp loandialog.cpp detailedlistview.cpp fieldcompletion.cpp progressmanager.cpp importdialog.cpp reportdialog.cpp fetcherconfigdialog.cpp borrower.cpp groupiterator.cpp entryeditdialog.cpp iso5426converter.cpp xmphandler.cpp viewstack.cpp listviewcomparison.cpp borrowerdialog.cpp collectionfactory.cpp entryiconview.cpp lccnvalidator.cpp entrymerger.cpp groupview.cpp fetchdialog.cpp filterview.cpp loanitem.cpp loanview.cpp entry.cpp filteritem.cpp configdialog.cpp document.cpp entryiconfactory.cpp filter.cpp collectionfieldsdialog.cpp iso6937converter.cpp mainwindow.cpp exportdialog.cpp isbnvalidator.cpp entryview.cpp main.cpp field.cpp borroweritem.cpp filehandler.cpp statusbar.cpp detailedentryitem.cpp filterdialog.cpp entryupdater.cpp upcvalidator.cpp collection.cpp tellico_kernel.cpp calendarhandler.cpp controller.cpp imagefactory.cpp entrygroupitem.cpp entryitem.cpp; do \
 	  echo "#include \"$$file\"" >> tellico.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> tellico.all_cpp.final; \
 	done; \

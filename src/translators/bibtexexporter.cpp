@@ -19,6 +19,7 @@
 #include "../latin1literal.h"
 #include "../filehandler.h"
 #include "../stringset.h"
+#include "../tellico_debug.h"
 
 #include <config.h>
 
@@ -297,6 +298,11 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
       QRegExp stripHTML(QString::fromLatin1("<.*>"), true);
       stripHTML.setMinimal(true);
       value.remove(stripHTML);
+    } else if(fIt->property(bibtex) == Latin1Literal("pages")) {
+      QRegExp rx(QString::fromLatin1("(\\d)-(\\d)"));
+      for(int pos = rx.search(value); pos > -1; pos = rx.search(value, pos+2)) {
+        value.replace(pos, 3, rx.cap(1)+"--"+rx.cap(2));
+      }
     }
 
     if(m_packageURL && fIt->type() == Data::Field::URL) {

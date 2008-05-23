@@ -53,6 +53,12 @@ Tellico::Data::FieldVec BookCollection::defaultFields() {
   field->setFormatFlag(Field::FormatName);
   list.append(field);
 
+  field = new Field(QString::fromLatin1("editor"), i18n("Editor"));
+  field->setCategory(i18n(book_general));
+  field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
+  field->setFormatFlag(Field::FormatName);
+  list.append(field);
+
   QStringList binding;
   binding << i18n("Hardback") << i18n("Paperback") << i18n("Trade Paperback")
           << i18n("E-Book") << i18n("Magazine") << i18n("Journal");

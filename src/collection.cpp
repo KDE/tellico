@@ -807,6 +807,7 @@ int Collection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const 
 // merges values from e2 into e1
 bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askUser_) {
   if(!e1 || !e2) {
+    myDebug() << "Collection::mergeEntry() - bad entry pointer" << endl;
     return false;
   }
   bool ret = true;
@@ -815,6 +816,7 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askU
     if(e2->field(field).isEmpty()) {
       continue;
     }
+//    myLog() << "Collection::mergeEntry() - reading field: " << field->name() << endl;
     if(overwrite_ || e1->field(field).isEmpty()) {
 //      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name()) << endl;
       e1->setField(field, e2->field(field));

@@ -462,7 +462,7 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
 }
 
 void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryElem_) {
-  int id = entryElem_.attribute(QString::fromLatin1("id")).toInt();
+  const int id = entryElem_.attribute(QString::fromLatin1("id")).toInt();
   Data::EntryPtr entry;
   if(id > 0) {
     entry = new Data::Entry(m_coll, id);
@@ -530,7 +530,17 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
         continue;
       }
 
+      // this may be a performance hit to be stripping white space all the time
+      // unfortunately, text() will include a carriage-return in cases like
+      // <value>
+      // text
+      // </value
+      // so we arbitrarily decide that only paragraphs get to have CRs?
       QString value = elem.text();
+      if(f->type() != Data::Field::Para) {
+        value = value.stripWhiteSpace();
+      }
+
       if(value.isEmpty()) {
         continue;
       }
@@ -581,16 +591,17 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
       name.truncate(name.length() - 1);
       f = m_coll->fieldByName(name);
 
-      bool oldTracks = (oldMusic && name == Latin1Literal("track"));
-
       // if it's a derived value, no field value is added
       if(!f || f->type() == Data::Field::Dependent) {
         continue;
       }
 
-      QString value;
+      const bool oldTracks = (oldMusic && name == Latin1Literal("track"));
+
+      QStringList values;
       // concatenate values
       for(QDomNode childNode = node.firstChild(); !childNode.isNull(); childNode = childNode.nextSibling()) {
+        QString value;
         // don't worry about i18n here, Tables are never translated
         QDomNodeList cols = childNode.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("column"));
         if(cols.count() > 0) {
@@ -604,7 +615,7 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
                 value += QString::fromLatin1("::");
               }
             }
-            value += cols.item(i).toElement().text();
+            value += cols.item(i).toElement().text().stripWhiteSpace();
             if(i < cols.count()-1) {
               value += QString::fromLatin1("::");
             } else if(oldTracks && cols.count() == 1) {
@@ -612,10 +623,11 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
               value += entry->field(QString::fromLatin1("artist"));
             }
           }
+          values += value;
         } else {
           // really loose here, we don't even check that the element name
           // is what we think it is
-          QString s = childNode.toElement().text();
+          QString s = childNode.toElement().text().stripWhiteSpace();
           if(isI18n && !s.isEmpty()) {
             value += i18n(s.utf8());
           } else {
@@ -625,12 +637,12 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
             value += QString::fromLatin1("::");
             value += entry->field(QString::fromLatin1("artist"));
           }
+          if(values.findIndex(value) == -1) {
+            values += value;
+          }
         }
-        value += QString::fromLatin1("; ");
       }
-      // remove the last semi-colon and space
-      value.truncate(value.length() - 2);
-      entry->setField(name, value);
+      entry->setField(name, values.join(QString::fromLatin1("; ")));
     }
   } // end field value loop
 

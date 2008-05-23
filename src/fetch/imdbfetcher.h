@@ -93,6 +93,7 @@ private:
 
   void doTitle(const QString& s, Data::EntryPtr e);
   void doRunningTime(const QString& s, Data::EntryPtr e);
+  void doAspectRatio(const QString& s, Data::EntryPtr e);
   void doAlsoKnownAs(const QString& s, Data::EntryPtr e);
   void doPlot(const QString& s, Data::EntryPtr e, const KURL& baseURL_);
   void doPerson(const QString& s, Data::EntryPtr e,

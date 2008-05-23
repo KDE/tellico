@@ -304,7 +304,7 @@ void CrossRefFetcher::updateEntrySynchronous(Data::EntryPtr entry) {
   }
 
   KURL u = searchURL(DOI, doi);
-  QString xml = FileHandler::readTextFile(u, true);
+  QString xml = FileHandler::readTextFile(u, true, true);
   if(xml.isEmpty()) {
     return;
   }

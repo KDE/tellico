@@ -1095,6 +1095,20 @@ Added Log Comment
 				</xsl:choose>
 			</subject>
 		</xsl:for-each>
+                <xsl:for-each select="marc:datafield[@tag=055]">
+                        <xsl:for-each select="marc:subfield[@code='b']">
+                                <classification authority="lcc">
+                                        <xsl:value-of select="preceding-sibling::marc:subfield[@code='a'][1]"/>
+                                        <xsl:text> </xsl:text>
+                                        <xsl:value-of select="text()"/>
+                                </classification>
+                        </xsl:for-each>
+                        <xsl:for-each select="marc:subfield[@code='a'][not(following-sibling::marc:subfield[@code='b'])]">
+                                <classification authority="lcc">
+                                        <xsl:value-of select="text()"/>
+                                </classification>
+                        </xsl:for-each>
+                </xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=050]">
 			<xsl:for-each select="marc:subfield[@code='b']">
 				<classification authority="lcc">

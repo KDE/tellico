@@ -320,7 +320,7 @@ void ArxivFetcher::updateEntrySynchronous(Data::EntryPtr entry) {
   }
 
   KURL u = searchURL(ArxivID, arxiv);
-  QString xml = FileHandler::readTextFile(u, true);
+  QString xml = FileHandler::readTextFile(u, true, true);
   if(xml.isEmpty()) {
     return;
   }

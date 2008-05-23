@@ -8,7 +8,7 @@ EXTRA_DIST = tellico-by-author.xsl tellico-by-title.xsl \
              bluray-logo.png hddvd-logo.png gcstar2tellico.xsl \
              xmp2tellico.xsl crossref2tellico.xsl arxiv2tellico.xsl \
              referencer2tellico.xsl delicious2tellico.xsl welcome.html \
-             unixref2tellico.xsl discogs2tellico.xsl
+             unixref2tellico.xsl discogs2tellico.xsl tellico2gcstar.xsl
 
 xsldir = $(kde_datadir)/tellico
 xsl_DATA = tellico-printing.xsl tellico-by-author.xsl tellico-by-title.xsl \
@@ -20,7 +20,7 @@ xsl_DATA = tellico-printing.xsl tellico-by-author.xsl tellico-by-title.xsl \
         isbndb2tellico.xsl bluray-logo.png hddvd-logo.png gcstar2tellico.xsl \
         xmp2tellico.xsl crossref2tellico.xsl arxiv2tellico.xsl \
         referencer2tellico.xsl delicious2tellico.xsl welcome.html \
-        unixref2tellico.xsl discogs2tellico.xsl
+        unixref2tellico.xsl discogs2tellico.xsl tellico2gcstar.xsl
 
 SUBDIRS = entry-templates report-templates
 

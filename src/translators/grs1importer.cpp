@@ -59,11 +59,6 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   f->setDescription(i18n("International Standard Book Number"));
   coll->addField(f);
 
-  f = new Data::Field(QString::fromLatin1("keyword"), i18n("Keywords"));
-  f->setCategory(i18n("Classification"));
-  f->setFlags(Data::Field::AllowCompletion | Data::Field::AllowMultiple | Data::Field::AllowGrouped);
-  coll->addField(f);
-
   f = new Data::Field(QString::fromLatin1("language"), i18n("Language"));
   f->setCategory(i18n("Publishing"));
   f->setFlags(Data::Field::AllowCompletion | Data::Field::AllowGrouped | Data::Field::AllowMultiple);

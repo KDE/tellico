@@ -224,7 +224,8 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   }
 
   if(hasDOI) {
-    Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::CrossRef);
+    myDebug() << "looking for DOI" << endl;
+    Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::DOI);
     if(vec.isEmpty()) {
       GUI::CursorSaver cs(Qt::arrowCursor);
       KMessageBox::information(Kernel::self()->widget(),
@@ -234,10 +235,11 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                               QString::null,
                               QString::fromLatin1("CrossRefSourceNeeded"));
     } else {
-      Fetch::Fetcher::Ptr fetcher = vec.front();
       Data::EntryVec entries = coll->entries();
-      for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
-        fetcher->updateEntrySynchronous(entry);
+      for(Fetch::FetcherVec::Iterator fetcher = vec.begin(); fetcher != vec.end(); ++fetcher) {
+        for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+          fetcher->updateEntrySynchronous(entry);
+        }
       }
     }
   }
@@ -247,11 +249,9 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   }
 
   if(hasArxiv) {
-    Fetch::FetcherVec vec;
-    vec.append(Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::Arxiv));
-    vec.append(Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::Citebase));
+    Data::EntryVec entries = coll->entries();
+    Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::ArxivID);
     for(Fetch::FetcherVec::Iterator fetcher = vec.begin(); fetcher != vec.end(); ++fetcher) {
-      Data::EntryVec entries = coll->entries();
       for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
         fetcher->updateEntrySynchronous(entry);
       }

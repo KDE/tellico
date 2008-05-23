@@ -343,8 +343,8 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   u.addQueryItem(QString::fromLatin1("db"),         m_dbname);
   u.addQueryItem(QString::fromLatin1("id"),         QString::number(id));
 #endif
-  // now it's sychronous
-  QString xmlOutput = FileHandler::readTextFile(u);
+  // now it's sychronous, and we know that it's utf8
+  QString xmlOutput = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
   if(xmlOutput.isEmpty()) {
     kdWarning() << "EntrezFetcher::fetchEntry() - unable to download " << u << endl;
     return 0;

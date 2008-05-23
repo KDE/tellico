@@ -65,7 +65,7 @@ public:
 
   // create fetcher for updating an entry
   FetcherVec createUpdateFetchers(int collType);
-  FetcherVec createUpdateFetchers(int collType, Type type);
+  FetcherVec createUpdateFetchers(int collType, FetchKey key);
   Fetcher::Ptr createUpdateFetcher(int collType, const QString& source);
 
   static QString typeName(Type type);

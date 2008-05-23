@@ -35,6 +35,7 @@
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
 #include "../isbnvalidator.h"
+#include "../lccnvalidator.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -192,15 +193,13 @@ void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
         QString s = m_value;
         s.remove('-');
         QStringList lccnList = QStringList::split(QString::fromLatin1("; "), s);
-        const int count = lccnList.count();
-        if(count > 1) {
-          m_pqn = QString::fromLatin1("@or ");
-        }
-        for(int i = 0; i < count; ++i) {
-          m_pqn += QString::fromLatin1(" @attr 1=9 ") + lccnList[i];
-          if(i < count-2) {
+        while(!lccnList.isEmpty()) {
+          m_pqn += QString::fromLatin1(" @or @attr 1=9 ") + lccnList.front();
+          if(lccnList.count() > 1) {
             m_pqn += QString::fromLatin1(" @or");
           }
+          m_pqn += QString::fromLatin1(" @attr 1=9 ") + LCCNValidator::formalize(lccnList.front());
+          lccnList.pop_front();
         }
       }
       break;

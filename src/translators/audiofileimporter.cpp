@@ -150,7 +150,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     TagLib::Tag* tag = f.tag();
     QString album = TStringToQString(tag->album()).stripWhiteSpace();
     if(album.isEmpty()) {
-      // can't do anything
+      // can't do anything since tellico entries are by album
+      kdWarning() << "Skipping: no album listed for " << *it << endl;
       continue;
     }
     int disc = discNumber(f);

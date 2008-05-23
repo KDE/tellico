@@ -384,12 +384,12 @@ Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_) {
   return vec;
 }
 
-Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_, Type type_) {
+Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_, FetchKey key_) {
   FetcherVec fetchers;
   // creates new fetchers
   FetcherVec allFetchers = createUpdateFetchers(collType_);
   for(Fetch::FetcherVec::Iterator it = allFetchers.begin(); it != allFetchers.end(); ++it) {
-    if(it->type() == type_) {
+    if(it->canSearch(key_)) {
       fetchers.append(it);
     }
   }

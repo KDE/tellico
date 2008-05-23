@@ -1,17 +1,18 @@
-# translation of pt.po to Portuguese
+# translation of pt.po to portuguese
 # This file is distributed under the same license as the tellico package.
 # Copyright (C) 2007 Robby Stephenson <robby@periapsis.org>.
 #
 # Lígia Moreira <ligia.moreira@netvisao.pt>, 2005, 2006.
 # Carlos Gonçalves <carlos@pinguix.com>, 2006, 2007.
 # Carlos Goncalves <carlos@pinguix.com>, 2007.
+# Ligia Moreira <ligia.moreira@netvisao.pt>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "POT-Creation-Date: 2008-01-26 10:52-0800\n"
-"PO-Revision-Date: 2007-07-20 10:19+0100\n"
-"Last-Translator: Carlos Goncalves <carlos@pinguix.com>\n"
-"Language-Team: Portuguese\n"
+"PO-Revision-Date: 2008-03-15 08:27+0000\n"
+"Last-Translator: Ligia Moreira <ligia.moreira@netvisao.pt>\n"
+"Language-Team: portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -124,11 +125,11 @@ msgstr "Seleccionar a imagem..."
 
 #: gui/imagewidget.cpp:63
 msgid "Save link only"
-msgstr ""
+msgstr "Guardar só a ligação"
 
 #: gui/imagewidget.cpp:162
 msgid "Saving a link is only possible for newly added images."
-msgstr ""
+msgstr "Só é possível guardar uma ligação para imagens recentemente adicionadas."
 
 #: commands/modifyentries.cpp:73 commands/updateentries.cpp:50
 #, c-format
@@ -584,11 +585,11 @@ msgstr "Número de Controlo da Livraria do Congresso"
 
 #: collections/bookcollection.cpp:109
 msgid "Translator"
-msgstr ""
+msgstr "Tradutor"
 
 #: collections/bookcollection.cpp:137
 msgid "Series Number"
-msgstr "Nº da Série"
+msgstr "Nº de Série"
 
 #: collections/bookcollection.cpp:142 mainwindow.cpp:185
 msgid "New"
@@ -843,8 +844,7 @@ msgstr "Personagem (Papel)"
 
 #: collections/videocollection.cpp:106
 msgid "A table for the cast members, along with the roles they play"
-msgstr ""
-"Um folheto para o elenco do filme, com o papel representado por cada um"
+msgstr "Um folheto para o elenco do filme, com o papel representado por cada um"
 
 #: collections/videocollection.cpp:109
 msgid "Director"
@@ -982,7 +982,7 @@ msgstr "Mac OS"
 
 #: collections/gamecollection.cpp:48
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: collections/gamecollection.cpp:49
 msgid "Platform"
@@ -990,7 +990,7 @@ msgstr "Plataforma"
 
 #: collections/boardgamecollection.cpp:55 collections/gamecollection.cpp:60
 msgid "Release Year"
-msgstr "Ano de lançamento"
+msgstr "Ano de Lançamento"
 
 #: collections/gamecollection.cpp:65
 msgid ""
@@ -1052,21 +1052,20 @@ msgid "Back Image"
 msgstr "Imagem de contra-capa"
 
 #: collections/boardgamecollection.cpp:26
-#, fuzzy
 msgid "My Board Games"
-msgstr "Os meus Jogos"
+msgstr "Os meus Jogos de Tabuleiro"
 
 #: collections/boardgamecollection.cpp:49
 msgid "Mechanism"
-msgstr ""
+msgstr "Mecanismo"
 
 #: collections/boardgamecollection.cpp:66
 msgid "Designer"
-msgstr ""
+msgstr "Designer"
 
 #: collections/boardgamecollection.cpp:72
 msgid "Number of Players"
-msgstr ""
+msgstr "Número de Jogadores"
 
 #: collectionfactory.cpp:125 collections/bibtexcollection.cpp:30
 msgid "Bibliography"
@@ -1103,11 +1102,11 @@ msgstr "Endereço"
 
 #: collections/bibtexcollection.cpp:164 fetch/fetchmanager.cpp:73
 msgid "DOI"
-msgstr ""
+msgstr "IOD"
 
 #: collections/bibtexcollection.cpp:167
 msgid "Digital Object Identifier"
-msgstr ""
+msgstr "Identificador de Ojecto Digital"
 
 #: collections/bibtexcollection.cpp:172
 msgid "Month"
@@ -1271,7 +1270,7 @@ msgstr "Insira o número de porta do servidor. A porta padrão é %1."
 
 #: fetch/srufetcher.cpp:450
 msgid "Path: "
-msgstr "Localização: "
+msgstr "Caminho: "
 
 #: fetch/srufetcher.cpp:455
 msgid "Enter the path to the database used by the server."
@@ -1287,7 +1286,7 @@ msgstr "Insira o formato do resultado utilizado pelo servidor."
 
 #: fetch/yahoofetcher.cpp:54
 msgid "Yahoo! Audio Search"
-msgstr "Yahoo! Motor de pesquisa audio"
+msgstr "Motor de pesquisa áudio Yahoo!"
 
 #: fetch/amazonfetcher.cpp:730 fetch/discogsfetcher.cpp:539
 #: fetch/yahoofetcher.cpp:242
@@ -1296,7 +1295,7 @@ msgstr "A capa não pôde ser carregada."
 
 #: fetch/amazonfetcher.cpp:53
 msgid "Amazon Link"
-msgstr "Link Amazon"
+msgstr "Ligação Amazon"
 
 #: fetch/amazonfetcher.cpp:62
 msgid "Amazon (US)"
@@ -1480,7 +1479,7 @@ msgstr ""
 
 #: fetch/z3950fetcher.cpp:670
 msgid "Illustrator"
-msgstr "Illustrator"
+msgstr "Ilustrador"
 
 #: fetch/execexternalfetcher.cpp:82
 msgid "External Application"
@@ -1492,8 +1491,7 @@ msgid "Collection &type:"
 msgstr "&Tipo de Colecção:"
 
 #: fetch/execexternalfetcher.cpp:351
-msgid ""
-"Set the collection type of the data returned from the external application."
+msgid "Set the collection type of the data returned from the external application."
 msgstr ""
 "Especifique o tipo de colecção dos dados devolvidos pela aplicação "
 "externa."
@@ -1504,9 +1502,7 @@ msgstr "Tipo de &resultado: "
 
 #: fetch/execexternalfetcher.cpp:365
 msgid "Set the result type of the data returned from the external application."
-msgstr ""
-"Especifique o tipo de resultado dos dados devolvidos pela aplicação "
-"externa."
+msgstr "Especifique o tipo de resultado dos dados devolvidos pela aplicação externa."
 
 #: fetch/execexternalfetcher.cpp:370
 msgid "Application &path: "
@@ -1548,7 +1544,7 @@ msgid ""
 "where field values are contained inside braces, such as <i>%{author}</i>. "
 "See the documentation for details.</p>"
 msgstr ""
-"<p>Forneça os argumentos que devem ser usados para procurar actualizações "
+"<p>Insira os argumentos que devem ser usados para procurar actualizações "
 "disponíveis para uma entrada.</p><p>O formato é o mesmo dos campos "
 "<i>Dependentes</i>, onde os valores dos campos estão contidos entre "
 "chavetas, como <i>%{author}</i>. Veja a documentação para mais "
@@ -1571,8 +1567,7 @@ msgid "Select IMDB Result"
 msgstr "Seleccione o resultado IMDB"
 
 #: fetch/imdbfetcher.cpp:581
-msgid ""
-"<qt>Your search returned multiple matches. Please select one below.</qt>"
+msgid "<qt>Your search returned multiple matches. Please select one below.</qt>"
 msgstr ""
 "<qt>A sua pesquisa obteve vários resultados. Queira seleccionar um dos "
 "seguintes:</qt>"
@@ -1583,7 +1578,7 @@ msgstr "<qt>Seleccione um resultado da pesquisa.</qt>"
 
 #: fetch/imdbfetcher.cpp:688 fetch/imdbfetcher.cpp:1185
 msgid "IMDB Link"
-msgstr "Link IMDB"
+msgstr "Ligação IMDB"
 
 #: fetch/animenfofetcher.cpp:260 fetch/imdbfetcher.cpp:746
 #: fetch/imdbfetcher.cpp:1187
@@ -1635,9 +1630,8 @@ msgid "ISBN"
 msgstr "ISBN"
 
 #: fetch/fetchmanager.cpp:71
-#, fuzzy
 msgid "UPC/EAN"
-msgstr "UPC"
+msgstr "UPC/EAN"
 
 #: fetch/fetchmanager.cpp:72
 msgid "Keyword"
@@ -1645,11 +1639,11 @@ msgstr "Palavra-chave"
 
 #: fetch/fetchmanager.cpp:74 translators/pdfimporter.cpp:173
 msgid "arXiv ID"
-msgstr ""
+msgstr "ID de arXiv"
 
 #: fetch/fetchmanager.cpp:75
 msgid "Pubmed ID"
-msgstr ""
+msgstr "ID de Pubmed"
 
 #: fetch/fetchmanager.cpp:76
 msgid "Raw Query"
@@ -1669,83 +1663,70 @@ msgstr "Episódios"
 
 #: fetch/arxivfetcher.cpp:53
 msgid "arXiv.org"
-msgstr ""
+msgstr "arXiv.org"
 
 #: fetch/crossreffetcher.cpp:83
 msgid "%1 requires a username and password."
-msgstr ""
+msgstr "%1 requer um nome de utilizador e uma palavra-passe."
 
 #: fetch/crossreffetcher.cpp:332
 msgid ""
 "CrossRef requires an account for access. Please read the terms and "
 "conditions and <a href='http://www.crossref.org/requestaccount/'>request an "
 "account</a>. Enter your OpenURL account information below."
-msgstr ""
+msgstr "CrossRef requer uma conta de acesso. Por favor, leia os temos e condições e <a href='http://www.crossref.org/requestaccount/'>peça uma conta</a>. Insira abaixo a informação da sua conta OpenURL."
 
 #: fetch/crossreffetcher.cpp:343
-#, fuzzy
 msgid "&Username: "
-msgstr "&Utilizador: "
+msgstr "&Nome de Utilizador: "
 
 #: fetch/crossreffetcher.cpp:348
-#, fuzzy
 msgid ""
 "A username and password is required to access the CrossRef service. The "
 "password is stored as plain text in the Tellico configuration file."
-msgstr ""
-"Insira a palavra-passe utilizada para a base de dados z39.50. A maior parte "
-"dos servidores não precisa dela. A palavra-passe será guardada em formato "
-"texto no ficheiro de configuração do Tellico."
+msgstr "Insira a palavra-passe utilizada para aceder ao serviço CrossRef. A palavra-passe está gurdada como texto simples no ficheiro de configuração de Tellico."
 
 #: fetch/crossreffetcher.cpp:354
-#, fuzzy
 msgid "&Password: "
-msgstr "&Palavra-passe: "
+msgstr "Palavra-passe: "
 
 #: fetch/gcstarpluginfetcher.cpp:190
-#, fuzzy
 msgid "GCstar Plugin"
-msgstr "GCstar"
+msgstr "Plugin GCstar"
 
 #: fetch/gcstarpluginfetcher.cpp:404
-#, fuzzy
 msgid "Set the collection type of the data returned from the plugin."
-msgstr ""
-"Especifique o tipo de colecção dos dados devolvidos pela aplicação "
-"externa."
+msgstr "Especifique o tipo de colecção dos dados devolvidos pela aplicação externa."
 
 #: fetch/gcstarpluginfetcher.cpp:409
 msgid "&Plugin: "
-msgstr ""
+msgstr "&Plugin: "
 
 #: fetch/gcstarpluginfetcher.cpp:415
-#, fuzzy
 msgid "Select the GCstar plugin used for the data source."
-msgstr "Seleccionar as teclas de pesquisa suportadas pela fonte de dados."
+msgstr "Seleccionar o plugin GCstar usado pela fonte de dados."
 
 #: fetch/gcstarpluginfetcher.cpp:420
-#, fuzzy
 msgid "Author: "
-msgstr "Autor"
+msgstr "Autor:"
 
 #: fetch/discogsfetcher.cpp:58
-#, fuzzy
 msgid "Discogs Audio Search"
-msgstr "Yahoo! Motor de pesquisa audio"
+msgstr "Motor de pesquisa áudio Discogs"
 
 #: fetch/discogsfetcher.cpp:668
 msgid "API &key: "
-msgstr ""
+msgstr "API &Chave:"
 
 #: fetch/discogsfetcher.cpp:674
 msgid ""
 "With your discogs.com account you receive an API key for the usage of their "
 "XML-based interface (See http://www.discogs.com/help/api)."
-msgstr ""
+msgstr "Com a sua conta discogs.com, recebe uma chave API para utilização da interface de base de dados XML (Ver http://www.discogs.com/help/api)."
 
 #: fetch/discogsfetcher.cpp:718
 msgid "Discogs Link"
-msgstr ""
+msgstr "Ligação Discogs"
 
 #: newstuff/dialog.cpp:94
 msgid "Get Hot New Stuff"
@@ -1761,7 +1742,7 @@ msgstr "Recepções"
 
 #: newstuff/dialog.cpp:117
 msgid "Release Date"
-msgstr "Data de lançamento"
+msgstr "Data de Lançamento"
 
 #: newstuff/dialog.cpp:121
 msgid ""
@@ -1799,7 +1780,7 @@ msgstr ""
 
 #: newstuff/dialog.cpp:194
 msgid "A description of the selected item is shown here."
-msgstr "A descrição do item selecionado é mostrado aqui."
+msgstr "A descrição do item selecionado é mostrada aqui."
 
 #: newstuff/dialog.cpp:224
 msgid "Downloading information..."
@@ -1822,9 +1803,8 @@ msgid "Installing item..."
 msgstr "A instalar o item..."
 
 #: translators/bibteximporter.cpp:79
-#, fuzzy
 msgid "No valid bibtex entries were found"
-msgstr "Nenhuma entrada BibTeX válida foi encontrada no ficheiro - %1"
+msgstr "Não foi encontrada nenhuma entrada BibTeX válida"
 
 #: translators/bibteximporter.cpp:96
 #, c-format
@@ -1836,24 +1816,20 @@ msgid "Bibtex Options"
 msgstr "Opções BibTeX"
 
 #: translators/bibteximporter.cpp:287
-#, fuzzy
 msgid "Use Unicode (UTF-8) encoding"
-msgstr "Codificar em Unicode (UTF-8)"
+msgstr "Usar codificação Unicode (UTF-8)"
 
 #: translators/bibteximporter.cpp:288
-#, fuzzy
 msgid "Read the imported file in Unicode (UTF-8)."
-msgstr "Codificar o ficheiro exportado em Unicode (UTF-8)."
+msgstr "Ler o ficheiro mportado em Unicode (UTF-8)."
 
 #: translators/bibteximporter.cpp:289
-#, fuzzy
 msgid "Use user locale (%1) encoding"
-msgstr "Codificar na localização do utilizador (%1)"
+msgstr "Usar codificação da localização do utilizador (%1)"
 
 #: translators/bibteximporter.cpp:293
-#, fuzzy
 msgid "Read the imported file in the local encoding."
-msgstr "Codificar o ficheiro exportado em formato local."
+msgstr "Ler o ficheiro importado em formato local."
 
 #: translators/tellicozipexporter.cpp:35
 msgid "Tellico Zip File"
@@ -1941,16 +1917,15 @@ msgstr "Favoritos"
 
 #: translators/audiofileimporter.cpp:69
 msgid "Scanning audio files..."
-msgstr "A analisar os ficheiros audio..."
+msgstr "A analisar os ficheiros áudio..."
 
 #: translators/audiofileimporter.cpp:129
-#, fuzzy
 msgid "Bitrate"
-msgstr "BibTeX"
+msgstr "Bitrate"
 
 #: translators/audiofileimporter.cpp:160 translators/audiofileimporter.cpp:170
 msgid "Tracks (Disc %1)"
-msgstr ""
+msgstr "Pistas (Disc %1)"
 
 #: translators/audiofileimporter.cpp:189 xslt.cpp:4
 msgid "(Various)"
@@ -1958,7 +1933,7 @@ msgstr "(Vários)"
 
 #: translators/audiofileimporter.cpp:340
 msgid "Audio File Options"
-msgstr "Opções de Ficheiro audio"
+msgstr "Opções de Ficheiro áudio"
 
 #: translators/audiofileimporter.cpp:342
 msgid "Recursive &folder search"
@@ -1968,7 +1943,7 @@ msgstr "Pesquisa recursiva de &pastas"
 msgid "If checked, folders are recursively searched for audio files."
 msgstr ""
 "Se seleccionado, as pastas são varridas recursivamente para procurar os "
-"ficheiros audio."
+"ficheiros áudio."
 
 #: translators/audiofileimporter.cpp:347
 msgid "Include file &location"
@@ -1982,13 +1957,12 @@ msgstr ""
 
 #: translators/audiofileimporter.cpp:352
 msgid "Include &bitrate"
-msgstr ""
+msgstr "Include &bitrate"
 
 #: translators/audiofileimporter.cpp:353
-#, fuzzy
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
-"Se seleccionado, os nomes dos ficheiros de cada faixa serão adicionados às "
+"Se seleccionado, o bitrate para cada pista será adicionado às "
 "entradas."
 
 #: translators/csvexporter.cpp:40
@@ -2059,8 +2033,7 @@ msgstr "Utilizar um outro caracter como separador."
 
 #: translators/csvexporter.cpp:146 translators/csvimporter.cpp:272
 msgid "A custom string, such as a colon, may be used as a delimiter."
-msgstr ""
-"Um caracter qualquer, como os dois pontos, pode ser utilizado como separador."
+msgstr "Um caracter qualquer, como os dois pontos, pode ser utilizado como separador."
 
 #: translators/filelistingimporter.cpp:63
 msgid "Scanning files..."
@@ -2118,8 +2091,7 @@ msgstr ""
 
 #: translators/freedbimporter.cpp:84 translators/freedbimporter.cpp:170
 msgid "<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>"
-msgstr ""
-"<qt>Tellico não pôde aceder ao periférico de tipo CD-ROM - <b>%1</b>.</qt>"
+msgstr "<qt>Tellico não pôde aceder ao periférico de tipo CD-ROM - <b>%1</b>.</qt>"
 
 #: translators/freedbimporter.cpp:196
 msgid "Select CDDB Entry"
@@ -2135,8 +2107,7 @@ msgstr "<qt>Não foi encontrada nenhuma entrada correspondente ao CD.</qt>"
 
 #: translators/freedbimporter.cpp:238
 msgid "<qt>Tellico was unable to complete the CD lookup.</qt>"
-msgstr ""
-"<qt>Tellico não pôde completar a pesquisa das informações do CD.</qt>"
+msgstr "<qt>Tellico não pôde completar a pesquisa das informações do CD.</qt>"
 
 #: translators/freedbimporter.cpp:470
 msgid "Various"
@@ -2144,7 +2115,7 @@ msgstr "Vários"
 
 #: translators/freedbimporter.cpp:489
 msgid "Audio CD Options"
-msgstr "Opções de CD Audio"
+msgstr "Opções de CD Áudio"
 
 #: translators/freedbimporter.cpp:493
 msgid "Read data from CD-ROM device"
@@ -2152,7 +2123,7 @@ msgstr "Ler dados do periférico CD-ROM"
 
 #: translators/freedbimporter.cpp:496
 msgid "Select or input the CD-ROM device location."
-msgstr "Seleccionar o periférico contendo o CD audio."
+msgstr "Seleccionar o periférico contendo o CD áudio."
 
 #: translators/freedbimporter.cpp:502
 msgid "Read all CDDB cache files only"
@@ -2163,7 +2134,7 @@ msgid ""
 "Read data recursively from all the CDDB cache files contained in the default "
 "cache folders."
 msgstr ""
-"er recursivamente os dados de todos os ficheiros de cache CDDB contidos nas "
+"Ler recursivamente os dados de todos os ficheiros de cache CDDB contidos nas "
 "pastas de cache padrão."
 
 #: translators/gcfilmsexporter.cpp:37
@@ -2204,7 +2175,7 @@ msgstr "&Biblioteca:"
 
 #: translators/bibtexmlexporter.cpp:36
 msgid "Bibtexml"
-msgstr "BibTeXML"
+msgstr "Bibtexml"
 
 #: translators/bibtexmlexporter.cpp:40
 msgid "*.xml|Bibtexml Files (*.xml)"
@@ -2269,8 +2240,7 @@ msgstr "Utilizar o pacote URL"
 
 #: translators/bibtexexporter.cpp:210
 msgid "If checked, any URL fields will be wrapped in a \\url declaration."
-msgstr ""
-"Se seleccionado, qualquer campo URL será transformado em declaração \\url."
+msgstr "Se seleccionado, qualquer campo URL será transformado em declaração \\url."
 
 #: translators/bibtexexporter.cpp:213
 msgid "Skip entries with empty citation keys"
@@ -2313,8 +2283,7 @@ msgstr "A &primeira linha contém os títulos dos campos"
 
 #: translators/csvimporter.cpp:236
 msgid "If checked, the first row is used as field titles."
-msgstr ""
-"Se seleccionado, a primeira linha será utilizada para o nome dos campos."
+msgstr "Se seleccionado, a primeira linha será utilizada para o nome dos campos."
 
 #: translators/csvimporter.cpp:248
 msgid "&Comma"
@@ -2361,7 +2330,7 @@ msgstr "&Associar Campo"
 msgid ""
 "At least one column must be assigned to a field. Only assigned columns will "
 "be imported."
-msgstr ""
+msgstr "Tem que haver pelo menos uma coluna associada a um campo. Só serão importadas colunas associadas."
 
 #: collectionfieldsdialog.cpp:409 collectionfieldsdialog.cpp:412
 #: translators/csvimporter.cpp:396 translators/csvimporter.cpp:510
@@ -2437,8 +2406,7 @@ msgstr "Imprimir os cabeçalhos dos campos"
 
 #: configdialog.cpp:307 translators/htmlexporter.cpp:469
 msgid "If checked, the field names will be printed as table headers."
-msgstr ""
-"Se seleccionado, o nome dos campos será imprimido como títulos de tabela."
+msgstr "Se seleccionado, o nome dos campos será imprimido como títulos de tabela."
 
 #: translators/htmlexporter.cpp:473
 msgid "Group the entries"
@@ -2459,16 +2427,15 @@ msgid "If checked, individual files will be created for each entry."
 msgstr "Se seleccionado, ficheiros isolados serão criados para cada entrada."
 
 #: translators/pdfimporter.cpp:92 translators/pdfimporter.cpp:100
-#, fuzzy
 msgid "Tellico was unable to read any metadata from the PDF file."
-msgstr "Tellico não consegue carregar uma imagem do ficheiro - %1."
+msgstr "Tellico não consegue ler nenhum metadado do ficheiro PDF."
 
 #: translators/pdfimporter.cpp:231
 msgid ""
 "Tellico is able to download information about entries with a DOI from "
 "CrossRef.org. However, you must create an CrossRef account and add a new "
 "data source with your account information."
-msgstr ""
+msgstr "Tellico pode descarregar informação do CrossRef.org sobre registos com IOD. Contudo, tem que criar uma conta CrossRef e adicionar uma nova fonte de dados juntamente com a informação da sua conta."
 
 #: fetcherconfigdialog.cpp:39 fetcherconfigdialog.cpp:49
 msgid "Data Source Properties"
@@ -2479,8 +2446,7 @@ msgid "&Source name: "
 msgstr "Nome da &fonte: "
 
 #: fetcherconfigdialog.cpp:79
-msgid ""
-"The name identifies the data source and should be unique and informative."
+msgid "The name identifies the data source and should be unique and informative."
 msgstr "O nome identifica a fonte de dados e deverá ser único e informativo."
 
 #: fetcherconfigdialog.cpp:90 fetcherconfigdialog.cpp:94
@@ -2493,7 +2459,7 @@ msgstr "Tellico suporta várias fontes de dados diferentes."
 
 #: fetcherconfigdialog.cpp:111
 msgid "Updating from source should overwrite user data"
-msgstr "Actualizar pela fonte pode substituir dados do utilizador"
+msgstr "Actualizar da fonte pode substituir dados do utilizador"
 
 #: fetcherconfigdialog.cpp:114
 msgid "If checked, updating entries will overwrite any existing information."
@@ -2688,14 +2654,12 @@ msgid "*.amc|AMC Data Files (*.amc)"
 msgstr "*.amc|Ficheiros de dados AMCAMC (*.amc)"
 
 #: importdialog.cpp:281
-#, fuzzy
 msgid "*.pdf|PDF Files (*.pdf)"
-msgstr "*.pdb|Ficheiros Pilot Database (*.pdb)"
+msgstr "*.pdb|Ficheiros PDF (*.pdf)"
 
 #: importdialog.cpp:285
-#, fuzzy
 msgid "*.reflib|Referencer Files (*.reflib)"
-msgstr "*.ris|Ficheiros RIS (*.ris)"
+msgstr "*.reflib|Ficheiros Referencer (*.reflib)"
 
 #: tellico_strings.cpp:18
 #, c-format
@@ -2734,9 +2698,8 @@ msgid "Tellico is unable to load an image from the file - %1."
 msgstr "Tellico não consegue carregar uma imagem do ficheiro - %1."
 
 #: entryiconview.cpp:287
-#, fuzzy
 msgid "&Sort By"
-msgstr "&Porta: "
+msgstr "&Ordenado por: "
 
 #: loandialog.cpp:40
 msgid "Loan Dialog"
@@ -2764,7 +2727,7 @@ msgstr ""
 
 #: loandialog.cpp:117
 msgid "&Loan date:"
-msgstr "&Data do empréstimo:"
+msgstr "&Data de Empréstimo:"
 
 #: loandialog.cpp:123
 msgid ""
@@ -2844,7 +2807,7 @@ msgstr "Nova Colecção de &Vídeos"
 
 #: mainwindow.cpp:218
 msgid "Create a new video collection"
-msgstr "Criar uma nova colecção vídeos"
+msgstr "Criar uma nova colecção de vídeos"
 
 #: mainwindow.cpp:224
 msgid "New &Music Collection"
@@ -2895,14 +2858,12 @@ msgid "Create a new game collection"
 msgstr "Criar uma nova colecção de jogos"
 
 #: mainwindow.cpp:272
-#, fuzzy
 msgid "New Boa&rd Game Collection"
-msgstr "Nova Colecção de &Jogos"
+msgstr "Nova Colecção de &Jogos de Tabuleiro"
 
 #: mainwindow.cpp:274
-#, fuzzy
 msgid "Create a new board game collection"
-msgstr "Criar uma nova colecção de jogos"
+msgstr "Criar uma nova colecção de jogos de tabuleiro"
 
 #: mainwindow.cpp:280
 msgid "New &File Catalog"
@@ -2981,24 +2942,20 @@ msgid "Import data from the Alexandria book collection manager"
 msgstr "Importar um ficheiro do gestor de colecção de livros Alexandria"
 
 #: mainwindow.cpp:352
-#, fuzzy
 msgid "Import Delicious Library Data..."
-msgstr "Importar Dados do Tellico..."
+msgstr "Importar Dados da Biblioteca Delicious..."
 
 #: mainwindow.cpp:353
-#, fuzzy
 msgid "Import data from Delicious Library"
-msgstr "Importar meta-dados de um ficheiro audio"
+msgstr "Importar dados da Biblioteca Delicious"
 
 #: mainwindow.cpp:359
-#, fuzzy
 msgid "Import Referencer Data..."
-msgstr "Importar dados RIS..."
+msgstr "Importar dados Referencer..."
 
 #: mainwindow.cpp:360
-#, fuzzy
 msgid "Import data from Referencer"
-msgstr "Importar um ficheiro de referência RIS"
+msgstr "Importar dados do Referencer"
 
 #: mainwindow.cpp:366
 msgid "Import Bibtex Data..."
@@ -3025,30 +2982,28 @@ msgid "Import an RIS reference file"
 msgstr "Importar um ficheiro de referência RIS"
 
 #: mainwindow.cpp:387
-#, fuzzy
 msgid "Import PDF File..."
-msgstr "Importar Ficheiro"
+msgstr "Importar Ficheiro PDF"
 
 #: mainwindow.cpp:388
-#, fuzzy
 msgid "Import a PDF file"
-msgstr "Importar um ficheiro CSV"
+msgstr "Importar um ficheiro PDF"
 
 #: mainwindow.cpp:394
 msgid "Import Audio File Metadata..."
-msgstr "Importar meta-dados de um ficheiro áudio..."
+msgstr "Importar ficheiro de metadados áudio "
 
 #: mainwindow.cpp:395
 msgid "Import meta-data from audio files"
-msgstr "Importar meta-dados de um ficheiro audio"
+msgstr "Importar metadados de um ficheiro áudio"
 
 #: mainwindow.cpp:404
 msgid "Import Audio CD Data..."
-msgstr "Importar dados de um CD audio..."
+msgstr "Importar dados de um CD áudio..."
 
 #: mainwindow.cpp:405
 msgid "Import audio CD information"
-msgstr "Importar informações de um CD audio"
+msgstr "Importar informações de um CD áudio"
 
 #: mainwindow.cpp:414
 msgid "Import GCstar Data..."
@@ -3059,14 +3014,12 @@ msgid "Import a GCstar data file"
 msgstr "Importar um ficheiro de dados GCstar"
 
 #: mainwindow.cpp:421
-#, fuzzy
 msgid "Import Griffith Data..."
-msgstr "Importar dados GCstar..."
+msgstr "Importar dados Griffith..."
 
 #: mainwindow.cpp:422
-#, fuzzy
 msgid "Import a Griffith database"
-msgstr "Exportar para uma base de dados PilotDB"
+msgstr "Importar uma base de dados Griffith"
 
 #: mainwindow.cpp:428
 msgid "Import Ant Movie Catalog Data..."
@@ -3182,14 +3135,12 @@ msgid "Export to a GCfilms data file"
 msgstr "Exportar para um ficheiro de dados GCfilms"
 
 #: mainwindow.cpp:531
-#, fuzzy
 msgid "Export to GCstar..."
-msgstr "Exportar para GCfilms..."
+msgstr "Exportar para GCstar..."
 
 #: mainwindow.cpp:532
-#, fuzzy
 msgid "Export to a GCstar data file"
-msgstr "Exportar para um ficheiro de dados GCfilms"
+msgstr "Exportar para um ficheiro de dados GCstar"
 
 #: mainwindow.cpp:536
 msgid "Export XSL Transform..."
@@ -3268,14 +3219,12 @@ msgid "Delete the selected entries"
 msgstr "Apagar as entradas seleccionadas"
 
 #: mainwindow.cpp:585
-#, fuzzy
 msgid "&Merge Entries"
-msgstr "&Apagar Entradas"
+msgstr "&combinar Entradas"
 
 #: mainwindow.cpp:588
-#, fuzzy
 msgid "Merge the selected entries"
-msgstr "Apagar as entradas seleccionadas"
+msgstr "Combinar as entradas seleccionadas"
 
 #: mainwindow.cpp:591
 msgid "&Generate Reports..."
@@ -3451,9 +3400,8 @@ msgstr ""
 "entrada</qt>"
 
 #: mainwindow.cpp:831
-#, fuzzy
 msgid "Welcome to the Tellico Collection Manager"
-msgstr "Tellico - um gestor de colecção para KDE"
+msgstr "Bem-vindo ao gestor de colecção Tellico"
 
 #: mainwindow.cpp:833
 msgid ""
@@ -3462,7 +3410,7 @@ msgid ""
 "collection by <a href=\"tc:///coll_new_entry\">entering data manually</a> or "
 "by <a href=\"tc:///edit_search_internet\">downloading data</a> from various "
 "Internet sources.</h3>"
-msgstr ""
+msgstr "<h3>Tellico é uma ferramenta para gestão de colecções de livros, música e o que mais quiser catalogar.</h3><h3>Novos registos podem ser adicionados à sua colecção ao <a href=\"tc:///coll_new_entry\">adicionar dados manualmente</a> ou ao <a href=\"tc:///edit_search_internet\">descarregar dados </a> de várias fontes da Internet.</h3>"
 
 #: mainwindow.cpp:1066
 msgid "Creating new document..."
@@ -3513,7 +3461,7 @@ msgid ""
 "The collection is currently being filtered to show a limited subset of the "
 "entries. Only the visible entries will be printed. Continue?"
 msgstr ""
-"A colecção é actualmente filtrada para não mostrar senão uma parte das "
+"A colecção é actualmente filtrada para mostrar só uma parte das "
 "entradas. Só as entradas visíveis serão imprimidas. Continuar?"
 
 #: mainwindow.cpp:1337
@@ -3550,7 +3498,7 @@ msgstr ""
 #: mainwindow.cpp:1679
 #, c-format
 msgid "Print %1"
-msgstr "Impressão %1"
+msgstr "Imprimir %1"
 
 #: mainwindow.cpp:1712
 #, c-format
@@ -3630,7 +3578,7 @@ msgstr "Actualizar os dados do registo %1"
 msgid ""
 "Tellico can only import one file of this type at a time. Only %1 will be "
 "imported."
-msgstr ""
+msgstr "Tellico só pode importar um ficheiro deste tipo de cada vez. Só %1 será importado."
 
 #: filehandler.cpp:193
 #, c-format
@@ -3638,8 +3586,7 @@ msgid "Tellico is unable to load the image - %1."
 msgstr "Tellico não pode carregar a imagem - %1."
 
 #: filehandler.cpp:207
-msgid ""
-"A file named \"%1\" already exists. Are you sure you want to overwrite it?"
+msgid "A file named \"%1\" already exists. Are you sure you want to overwrite it?"
 msgstr "Um ficheiro chamado \"%1\" já existe. Quer mesmo substituí-lo?"
 
 #: filehandler.cpp:210
@@ -3762,14 +3709,12 @@ msgid "Code examples and general inspiration"
 msgstr "Exemplos de código e inspiração geral"
 
 #: main.cpp:50
-#, fuzzy
 msgid "Author of libcsv library"
-msgstr "Autor da livraria btparse"
+msgstr "Autor da livraria libcsv"
 
 #: main.cpp:52
-#, fuzzy
 msgid "Author of rtf2html library"
-msgstr "Autor da livraria btparse"
+msgstr "Autor da livraria rtf2html"
 
 #: collectionfieldsdialog.cpp:56
 msgid "Collection Fields"
@@ -3872,10 +3817,8 @@ msgid "An <i>Image</i> field holds a picture. "
 msgstr "Um campo <i>Imagem</i> contém uma imagem, foto ou figura. "
 
 #: collectionfieldsdialog.cpp:144
-msgid ""
-"A <i>Date</i> field can be used for values with a day, month, and year. "
-msgstr ""
-"Um campo <i>Data</i> pode ser utilizado para valores com dia, mês e ano. "
+msgid "A <i>Date</i> field can be used for values with a day, month, and year. "
+msgstr "Um campo <i>Data</i> pode ser utilizado para valores com dia, mês e ano. "
 
 #: collectionfieldsdialog.cpp:145
 msgid "A <i>Rating</i> field uses stars to show a rating number. "
@@ -3972,16 +3915,14 @@ msgstr "Sem formatação"
 msgid ""
 "This option prevents the field from ever being automatically formatted or "
 "capitalized."
-msgstr ""
-"Esta opção impede de ser automaticamente formatado ou posto em maiúscula."
+msgstr "Esta opção impede de ser automaticamente formatado ou posto em maiúscula."
 
 #: collectionfieldsdialog.cpp:230
 msgid "Allow auto-capitalization only"
 msgstr "Autorizar só a formatação automática em maiúsculas"
 
 #: collectionfieldsdialog.cpp:231
-msgid ""
-"This option allows the field to be capitalized, but not specially formatted."
+msgid "This option allows the field to be capitalized, but not specially formatted."
 msgstr ""
 "Esta opção permite pôr o campo em maiúsculas, sem outra formatação "
 "especial."
@@ -4043,8 +3984,7 @@ msgid "Allow grouping"
 msgstr "Autorizar Agrupamento"
 
 #: collectionfieldsdialog.cpp:249
-msgid ""
-"If checked, this field may be used to group the entries in the group view."
+msgid "If checked, this field may be used to group the entries in the group view."
 msgstr ""
 "Se seleccionado, este campo será utilizado para agrupar as entradas na "
 "visão por grupo."
@@ -4075,7 +4015,7 @@ msgstr "Manter os valores modificados"
 
 #: collectionfieldsdialog.cpp:745
 msgid "Revert Field Properties"
-msgstr "Reverter Popriedades do Campo"
+msgstr "Reverter Propriedades do Campo"
 
 #: collectionfieldsdialog.cpp:746
 msgid ""
@@ -4177,33 +4117,30 @@ msgstr "&Mostrar as \"Dicas do dia\" ao iniciar o programa"
 
 #: configdialog.cpp:208
 msgid "If checked, the \"Tip of the Day\" will be shown at program start-up."
-msgstr ""
-"Se seleccionado, l'\"Dicas do dia\" será mostrada ao iniciar o programa."
+msgstr "Se seleccionado, l'\"Dicas do dia\" será mostrada ao iniciar o programa."
 
 #: configdialog.cpp:213
-#, fuzzy
 msgid "Image Storage Options"
-msgstr "Opções das imagens"
+msgstr "Opções de armazenamento das imagens"
 
 #: configdialog.cpp:214
-#, fuzzy
 msgid "Store images in data file"
-msgstr "&Incluir imagens no ficheiro de dados"
+msgstr "&Armazenar imagens no ficheiro de dados"
 
 #: configdialog.cpp:215
 msgid "Store images in common application directory"
-msgstr ""
+msgstr "Armazenar imagens num directório aplicativo comum"
 
 #: configdialog.cpp:216
 msgid "Store images in directory relative to data file"
-msgstr ""
+msgstr "Armazenar imagens num directório relacionado com os dados do ficheiro"
 
 #: configdialog.cpp:217
 msgid ""
 "Images may be saved in the data file itself, which can cause Tellico to run "
 "slowly, stored in the Tellico application directory, or stored in a "
 "directory in the same location as the data file."
-msgstr ""
+msgstr "As imagens podem ser guardadas ou no próprio ficheiro de dados, o que poderá causar alguma lentidão de processamento no Tellico, ou no directório aplicativo do Tellico, ou num directório com a mesma localização do ficheiro de dados."
 
 #: configdialog.cpp:224 configdialog.cpp:299
 msgid "Formatting Options"
@@ -4225,8 +4162,7 @@ msgstr "&Formatação automática dos títulos e dos nomes"
 
 #: configdialog.cpp:233 configdialog.cpp:303
 msgid "If checked, titles and names will be automatically formatted."
-msgstr ""
-"Se seleccionado, os títulos e os nomes serão automaticamente formatados."
+msgstr "Se seleccionado, os títulos e os nomes serão automaticamente formatados."
 
 #: configdialog.cpp:240
 msgid "No capitali&zation:"
@@ -4360,7 +4296,7 @@ msgstr "Mostrar a antevisão do modelo"
 
 #: configdialog.cpp:398
 msgid "Font Options"
-msgstr "Opções de fonte"
+msgstr "Opções de Fonte"
 
 #: configdialog.cpp:405
 msgid "Font:"
@@ -4551,9 +4487,8 @@ msgid "File Catalog"
 msgstr "Catálogo de Ficheiros"
 
 #: collectionfactory.cpp:135
-#, fuzzy
 msgid "Board Game Collection"
-msgstr "Colecção de Jogos"
+msgstr "Colecção de Jogos de Tabuleiro"
 
 #: collectionfactory.cpp:136
 msgid "Custom Collection"
@@ -4620,9 +4555,8 @@ msgid "Encode in user locale (%1)"
 msgstr "Codificar na localização do utilizador (%1)"
 
 #: exportdialog.cpp:72
-#, fuzzy
 msgid "Encode the exported file in the local encoding."
-msgstr "Codificar o ficheiro exportado em formato local."
+msgstr "Codificar em formato local o ficheiro exportado."
 
 #: fetchdialog.cpp:65
 msgid "&Search"
@@ -4673,8 +4607,7 @@ msgid "Edit List..."
 msgstr "Editar Lista..."
 
 #: fetchdialog.cpp:140
-msgid ""
-"Click to open a text edit box for entering or editing multiple ISBN values."
+msgid "Click to open a text edit box for entering or editing multiple ISBN values."
 msgstr "Clique para inserir ou editar os valores ISBN a pesquisar."
 
 #: fetchdialog.cpp:146
@@ -4744,9 +4677,8 @@ msgstr ""
 "A pesquisa encontrou %n entradas."
 
 #: fetchdialog.cpp:412
-#, fuzzy
 msgid "No results were found for the following ISBN values:"
-msgstr "<qt>Nenhuma entrada encontrada para os ISBN seguintes:</qt>"
+msgstr "<qt>Não foi encontrado qualquer resultado para os ISBN seguintes:</qt>"
 
 #: fetchdialog.cpp:443 fetchdialog.cpp:495
 msgid "Fetching %1..."
@@ -4800,7 +4732,7 @@ msgstr "Ir para a entrada anterior na colecção"
 
 #: entryeditdialog.cpp:82
 msgid "Go to the next entry in the collection"
-msgstr "Ir para a pŕoxima entrada na colecção"
+msgstr "Ir para a próxima entrada na colecção"
 
 #: entryeditdialog.cpp:315
 msgid "Do you really want to modify these entries?"
@@ -4812,7 +4744,7 @@ msgstr "Modificar várias entradas"
 
 #: entryeditdialog.cpp:359
 msgid "A value is required for the following fields. Do you want to continue?"
-msgstr ""
+msgstr "É necessário um valor para os campos seguintes. Deseja continuar?"
 
 #: entryeditdialog.cpp:456
 msgid "Edit Entries"
@@ -4851,8 +4783,7 @@ msgid "Select a report template and click <em>Generate</em>."
 msgstr "Seleccione um modelo de relatório e clique em <em>Gerar</em>."
 
 #: reportdialog.cpp:108
-msgid ""
-"Some reports may take several seconds to generate for large collections."
+msgid "Some reports may take several seconds to generate for large collections."
 msgstr ""
 "Para grandes colecções, alguns relatórios podem levar vários segundos a "
 "serem criados."
@@ -4870,37 +4801,33 @@ msgid "New collection name:"
 msgstr "Novo nome da colecção:"
 
 #: tellico_kernel.cpp:377
-#, fuzzy
 msgid "Entry 1"
-msgstr "Tipo de Entrada"
+msgstr "Entrada 1"
 
 #: tellico_kernel.cpp:378
-#, fuzzy
 msgid "Entry 2"
-msgstr "Tipo de Entrada"
+msgstr "Entrada 2"
 
 #: tellico_kernel.cpp:387
 msgid "Conflicting values for %1 were found while merging entries."
-msgstr ""
+msgstr "Foram encontrados valores em conflito para %1 durante a combinação de registos."
 
 #: tellico_kernel.cpp:393
 msgid "Please choose which value to keep."
-msgstr ""
+msgstr "Por favor, escolha o valor a manter."
 
 #: entrymerger.cpp:33 tellico_kernel.cpp:398
-#, fuzzy
 msgid "Merge Entries"
-msgstr "Apagar Entradas"
+msgstr "Combinar Entradas"
 
 #: tellico_kernel.cpp:399 tellico_kernel.cpp:400
 #, c-format
 msgid "Select value from %1"
-msgstr ""
+msgstr "Seleccionar valor de %1"
 
 #: entryview.cpp:186
 msgid "Tellico is unable to locate the default entry stylesheet."
-msgstr ""
-"Tellico não consegue encontrar a folha de estilo padrão para as entradas."
+msgstr "Tellico não consegue encontrar a folha de estilo padrão para as entradas."
 
 #: rc.cpp:6
 #, no-c-format
@@ -4921,7 +4848,7 @@ msgstr "Barra de ferramentas de Colecção"
 msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
-msgstr "Lígia Moreira,Carlos Gonçalves"
+msgstr "Lígia Moreira"
 
 #: _translatorinfo.cpp:3
 msgid ""
@@ -4930,14 +4857,12 @@ msgid ""
 msgstr "ligia.moreira@netvisao.pt,carlos@pinguix.com"
 
 #: entrymerger.cpp:35
-#, fuzzy
 msgid "Merging entries..."
-msgstr "A actualizar entradas..."
+msgstr "A combinar entradas..."
 
 #: entrymerger.cpp:49
-#, fuzzy
 msgid "Total merged/scanned entries: %1/%2"
-msgstr "Total de registos: %1"
+msgstr "Total de registos combinados/visualizados: %1/%2"
 
 #: tips.cpp:3
 msgid ""
@@ -5242,7 +5167,7 @@ msgstr "Procurar"
 
 #: z3950.cpp:4
 msgid "The British Library"
-msgstr "A Biblioteca Britânica"
+msgstr "Biblioteca Britânica"
 
 #: z3950.cpp:6
 msgid "Sudoc (France)"
@@ -5278,7 +5203,7 @@ msgstr "Biblioteca Nacional da Austrália"
 
 #: z3950.cpp:22
 msgid "National Library of Lithuania"
-msgstr "Biblioteca Nacional do Lituania"
+msgstr "Biblioteca Nacional do Lituânia"
 
 #: z3950.cpp:24
 msgid "Copac (UK and Ireland)"
@@ -5286,7 +5211,7 @@ msgstr "Copac (Reino Unido e Irlanda)"
 
 #: scripts.cpp:2
 msgid "BoardGameGeek"
-msgstr ""
+msgstr "Jogos de Tabuleiro"
 
 #: scripts.cpp:4
 msgid "Dark Horse Comics"
@@ -5300,69 +5225,3 @@ msgstr "Allocine.fr"
 msgid "Spanish Ministry of Culture"
 msgstr "Ministério Espanhol da Cultura"
 
-#, fuzzy
-#~ msgid "CrossRef"
-#~ msgstr "Descritores"
-
-#~ msgid "MODS"
-#~ msgstr "MODS"
-
-#~ msgid "RIS"
-#~ msgstr "RIS"
-
-#~ msgid "GCstar"
-#~ msgstr "GCstar"
-
-#~ msgid "AMC"
-#~ msgstr "AMC"
-
-#, fuzzy
-#~ msgid "Griffith"
-#~ msgstr "Oferta"
-
-#, fuzzy
-#~ msgid "Referencer"
-#~ msgstr "Descritores"
-
-#~ msgid "Comics"
-#~ msgstr "Banda Desenhada"
-
-#~ msgid "Stamps"
-#~ msgstr "Selos"
-
-#~ msgid "Coins"
-#~ msgstr "Moedas"
-
-#~ msgid "Books"
-#~ msgstr "Livros"
-
-#~ msgid "Wines"
-#~ msgstr "Vinhos"
-
-#~ msgid "Videos"
-#~ msgstr "Vídeos"
-
-#~ msgid "Games"
-#~ msgstr "Jogos"
-
-#~ msgid "Cards"
-#~ msgstr "Cartas"
-
-#~ msgid "Entries"
-#~ msgstr "Entradas"
-
-#~ msgid "Albums"
-#~ msgstr "Álbuns"
-
-#~ msgid ""
-#~ "If checked, all images will be included in the data file, rather than saved "
-#~ "separately in the Tellico data directory. Saving a lot of images in the data "
-#~ "file cause Tellico to run more slowly."
-#~ msgstr ""
-#~ "Se assinalado, todas as imagens serão incluídas no ficheiro de dados, em "
-#~ "vez de guardadas separadamente no directório de dados do Tellico. Guardar "
-#~ "muitas imagens no ficheiro de dados pode levar o Tellico a ficar mais lento."
-
-#, fuzzy
-#~ msgid "Copac"
-#~ msgstr "Vírgula"

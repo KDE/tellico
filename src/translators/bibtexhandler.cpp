@@ -265,6 +265,11 @@ bool BibtexHandler::setFieldValue(Data::EntryPtr entry_, const QString& bibtexFi
   QString value = value_;
   if(field->property(QString::fromLatin1("bibtex")).startsWith(QString::fromLatin1("keyword"))) {
     value.replace(',', ';');
+    // special case refbase bibtex export, with multiple keywords fields
+    QString oValue = entry_->field(field);
+    if(!oValue.isEmpty()) {
+      value = oValue + "; " + value;
+    }
   }
   return entry_->setField(field, value);
 }

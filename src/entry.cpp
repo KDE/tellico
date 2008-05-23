@@ -21,6 +21,7 @@
 #include "tellico_debug.h"
 #include "latin1literal.h"
 #include "../isbnvalidator.h"
+#include "../lccnvalidator.h"
 
 #include <klocale.h>
 
@@ -120,8 +121,17 @@ void Entry::setCollection(CollPtr coll_) {
     myDebug() << "Entry::setCollection() - already belongs to collection!" << endl;
     return;
   }
+  // special case adding a book to a bibtex collection
+  // it would be better to do this in a real OOO way, but this should work
+  const bool addEntryType = m_coll->type() == Collection::Book &&
+                            coll_->type() == Collection::Bibtex &&
+                            !m_coll->hasField(QString::fromLatin1("entry-type"));
   m_coll = coll_;
   m_id = -1;
+  // set this after changing the m_coll pointer since setField() checks field validity
+  if(addEntryType) {
+    setField(QString::fromLatin1("entry-type"), QString::fromLatin1("book"));
+  }
 }
 
 QString Entry::title() const {
@@ -398,10 +408,13 @@ int Entry::compareValues(EntryPtr e1, EntryPtr e2, FieldPtr f) {
   if(s1 == s2) {
     return 5;
   }
- // special case for isbn
- if(f->name() == Latin1Literal("isbn") && ISBNValidator::isbn10(s1) == ISBNValidator::isbn10(s2)) {
-   return 5;
- }
+  // special case for isbn
+  if(f->name() == Latin1Literal("isbn") && ISBNValidator::isbn10(s1) == ISBNValidator::isbn10(s2)) {
+    return 5;
+  }
+  if(f->name() == Latin1Literal("lccn") && LCCNValidator::formalize(s1) == LCCNValidator::formalize(s2)) {
+    return 5;
+  }
   if(f->formatFlag() == Field::FormatName) {
     s1 = e1->field(f, true).lower();
     s2 = e2->field(f, true).lower();

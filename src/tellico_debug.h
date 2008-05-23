@@ -22,7 +22,22 @@
 // std::clock_t
 #include <ctime>
 
-# if defined __cplusplus ? __GNUC_PREREQ (2, 6) : __GNUC_PREREQ (2, 4)
+// linux has __GNUC_PREREQ, NetBSD has __GNUC_PREQ__
+#if defined(__GNUC_PREREQ) && !defined(__GNUC_PREREQ__)
+#define __GNUC_PREREQ__ __GNUC_PREREQ
+#endif
+
+#if !defined(__GNUC_PREREQ__)
+#if defined __GNUC__
+#define __GNUC_PREREQ__(x, y) \
+        ((__GNUC__ == (x) && __GNUC_MINOR__ >= (y)) || \
+         (__GNUC__ > (x)))
+#else
+#define __GNUC_PREREQ__(x, y)   0
+#endif
+#endif
+
+# if defined __cplusplus ? __GNUC_PREREQ__ (2, 6) : __GNUC_PREREQ__ (2, 4)
 #   define MY_FUNCTION  __PRETTY_FUNCTION__
 # else
 #  if defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L
