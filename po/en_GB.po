@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2008-01-26 10:52-0800\n"
-"PO-Revision-Date: 2008-03-27 06:27+0000\n"
+"PO-Revision-Date: 2008-05-24 08:15-0700\n"
 "Last-Translator: Abigail Brady <morwen@evilmagic.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,6 @@ msgid ""
 "_: Edit Label\n"
 "%1:"
 msgstr ""
-"_: Edit Label\n"
 "%1:"
 
 #: gui/kwidgetlister.cpp:58
@@ -100,7 +99,6 @@ msgid ""
 "_: more widgets\n"
 "More"
 msgstr ""
-"_: more widgets\n"
 "More"
 
 #: gui/kwidgetlister.cpp:62
@@ -108,7 +106,6 @@ msgid ""
 "_: fewer widgets\n"
 "Fewer"
 msgstr ""
-"_: fewer widgets\n"
 "Fewer"
 
 #: gui/kwidgetlister.cpp:69
@@ -116,7 +113,6 @@ msgid ""
 "_: clear widgets\n"
 "Clear"
 msgstr ""
-"_: clear widgets\n"
 "Clear"
 
 #: gui/imagewidget.cpp:57
@@ -137,7 +133,6 @@ msgid ""
 "_: Modify (Entry Title)\n"
 "Modify %1"
 msgstr ""
-"_: Modify (Entry Title)\n"
 "Modify %1"
 
 #: commands/collectioncommand.cpp:110
@@ -178,7 +173,6 @@ msgid ""
 "_: Add (Entry Title)\n"
 "Add %1"
 msgstr ""
-"_: Add (Entry Title)\n"
 "Add %1"
 
 #: commands/renamecollection.cpp:45 tellico_kernel.cpp:323
@@ -211,7 +205,6 @@ msgid ""
 "_: Check-out (Entry Title)\n"
 "Check-out %1"
 msgstr ""
-"_: Check-out (Entry Title)\n"
 "Check-out %1"
 
 #: commands/removeentries.cpp:48
@@ -224,7 +217,6 @@ msgid ""
 "_: Delete (Entry Title)\n"
 "Delete %1"
 msgstr ""
-"_: Delete (Entry Title)\n"
 "Delete %1"
 
 #: commands/reorderfields.cpp:54
@@ -241,7 +233,6 @@ msgid ""
 "_: Check-in (Entry Title)\n"
 "Check-in %1"
 msgstr ""
-"_: Check-in (Entry Title)\n"
 "Check-in %1"
 
 #: collectionfactory.cpp:83 collections/bibtexcollection.cpp:24
@@ -320,7 +311,6 @@ msgid ""
 "_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 msgstr ""
-"_: Stamp grade levels - Superb,Extremely Fine,Very Fine,Fine,Average,Poor\n"
 "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"
 
 #: collections/coincollection.cpp:88 collections/stampcollection.cpp:80
@@ -414,7 +404,6 @@ msgid ""
 "_: Comic Book Illustrator\n"
 "Artist"
 msgstr ""
-"_: Comic Book Illustrator\n"
 "Artist"
 
 #: collections/bibtexcollection.cpp:200 collections/bookcollection.cpp:132
@@ -469,8 +458,6 @@ msgid ""
 "Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
-"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
-"Good,Good,Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 
 #: collections/bookcollection.cpp:147 collections/comicbookcollection.cpp:135
@@ -520,9 +507,6 @@ msgid ""
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
 msgstr ""
-"_: Coin grade levels - Proof-65,Proof-60,Mint State-65,Mint State-60,Almost "
-"Uncirculated-55,Almost Uncirculated-50,Extremely Fine-40,Very Fine-30,Very "
-"Fine-20,Fine-12,Very Good-8,Good-4,Fair\n"
 "Proof-65,Proof-60,Mint State-65,Mint State-60,Almost Uncirculated-55,Almost "
 "Uncirculated-50,Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,Very "
 "Good-8,Good-4,Fair"
@@ -532,7 +516,6 @@ msgid ""
 "_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
 msgstr ""
-"_: Coin grading services - PCGS,NGC,ANACS,ICG,ASA,PCI\n"
 "PCGS,NGC,ANACS,ICG,ASA,PCI"
 
 #: collections/coincollection.cpp:98
@@ -791,7 +774,6 @@ msgid ""
 "_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 msgstr ""
-"_: Movie ratings - G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)\n"
 "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"
 
 #: collections/videocollection.cpp:62
@@ -965,7 +947,6 @@ msgid ""
 "_: PlayStation Portable\n"
 "PSP"
 msgstr ""
-"_: PlayStation Portable\n"
 "PSP"
 
 #: collections/gamecollection.cpp:46
@@ -1001,7 +982,6 @@ msgid ""
 "_: Windows Platform\n"
 "Windows"
 msgstr ""
-"_: Windows Platform\n"
 "Windows"
 
 #: collections/gamecollection.cpp:48
@@ -1025,7 +1005,6 @@ msgid ""
 "_: Games - Publisher\n"
 "Publisher"
 msgstr ""
-"_: Games - Publisher\n"
 "Publisher"
 
 #: collections/gamecollection.cpp:71
@@ -1038,8 +1017,6 @@ msgid ""
 "Childhood, Pending\n"
 "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"
 msgstr ""
-"_: Video game ratings - Unrated, Adults Only, Mature, Teen, Everyone, Early "
-"Childhood, Pending\n"
 "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"
 
 #: collections/gamecollection.cpp:82
@@ -1835,7 +1812,6 @@ msgid ""
 "_: Update Stuff\n"
 "Update"
 msgstr ""
-"_: Update Stuff\n"
 "Update"
 
 #: newstuff/dialog.cpp:413
@@ -2632,7 +2608,6 @@ msgid ""
 "_: Group Name Header\n"
 "Group"
 msgstr ""
-"_: Group Name Header\n"
 "Group"
 
 #: importdialog.cpp:54 importdialog.cpp:60
@@ -3762,7 +3737,6 @@ msgid ""
 "_: New Field\n"
 "&New"
 msgstr ""
-"_: New Field\n"
 "&New"
 
 #: collectionfieldsdialog.cpp:86
@@ -3774,7 +3748,6 @@ msgid ""
 "_: Delete Field\n"
 "&Delete"
 msgstr ""
-"_: Delete Field\n"
 "&Delete"
 
 #: collectionfieldsdialog.cpp:89
@@ -4615,7 +4588,6 @@ msgid ""
 "_: Start the search\n"
 "S&earch:"
 msgstr ""
-"_: Start the search\n"
 "S&earch:"
 
 #: fetchdialog.cpp:104
@@ -4886,7 +4858,6 @@ msgid ""
 "_: NAME OF TRANSLATORS\n"
 "Your names"
 msgstr ""
-"_: NAME OF TRANSLATORS\n"
 "Your names"
 
 #: _translatorinfo.cpp:3
@@ -4894,7 +4865,6 @@ msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
 msgstr ""
-"_: EMAIL OF TRANSLATORS\n"
 "Your emails"
 
 #: entrymerger.cpp:35
@@ -5078,7 +5048,6 @@ msgid ""
 "_: Album XSL Template\n"
 "Album"
 msgstr ""
-"_: Album XSL Template\n"
 "Album"
 
 #: xslt.cpp:3
@@ -5094,7 +5063,6 @@ msgid ""
 "_: Fancy XSL Template\n"
 "Fancy"
 msgstr ""
-"_: Fancy XSL Template\n"
 "Fancy"
 
 #: xslt.cpp:9
@@ -5102,7 +5070,6 @@ msgid ""
 "_: Default XSL Template\n"
 "Default"
 msgstr ""
-"_: Default XSL Template\n"
 "Default"
 
 #: xslt.cpp:11
@@ -5110,7 +5077,6 @@ msgid ""
 "_: Compact XSL Template\n"
 "Compact"
 msgstr ""
-"_: Compact XSL Template\n"
 "Compact"
 
 #: xslt.cpp:13
@@ -5118,7 +5084,6 @@ msgid ""
 "_: Video XSL Template\n"
 "Video"
 msgstr ""
-"_: Video XSL Template\n"
 "Video"
 
 #: xslt.cpp:14 xslt.cpp:43
@@ -5130,7 +5095,6 @@ msgid ""
 "_: Group Summary XSL Template\n"
 "Group Summary"
 msgstr ""
-"_: Group Summary XSL Template\n"
 "Group Summary"
 
 #: xslt.cpp:17
@@ -5158,7 +5122,6 @@ msgid ""
 "_: Image List XSL Template\n"
 "Image List"
 msgstr ""
-"_: Image List XSL Template\n"
 "Image List"
 
 #: xslt.cpp:25
@@ -5166,7 +5129,6 @@ msgid ""
 "_: Loan View XSL Template\n"
 "Loan View"
 msgstr ""
-"_: Loan View XSL Template\n"
 "Loan View"
 
 #: xslt.cpp:27 xslt.cpp:29
@@ -5186,7 +5148,6 @@ msgid ""
 "_: Group View XSL Template\n"
 "Group View"
 msgstr ""
-"_: Group View XSL Template\n"
 "Group View"
 
 #: xslt.cpp:36
@@ -5194,7 +5155,6 @@ msgid ""
 "_: Title Listing (Horizontal) XSL Template\n"
 "Title Listing (Horizontal)"
 msgstr ""
-"_: Title Listing (Horizontal) XSL Template\n"
 "Title Listing (Horizontal)"
 
 #: xslt.cpp:38
@@ -5202,7 +5162,6 @@ msgid ""
 "_: Title Listing (Vertical) XSL Template\n"
 "Title Listing (Vertical)"
 msgstr ""
-"_: Title Listing (Vertical) XSL Template\n"
 "Title Listing (Vertical)"
 
 #: xslt.cpp:40
@@ -5210,7 +5169,6 @@ msgid ""
 "_: Column View XSL Template\n"
 "Column View"
 msgstr ""
-"_: Column View XSL Template\n"
 "Column View"
 
 #: xslt.cpp:42
@@ -5218,7 +5176,6 @@ msgid ""
 "_: Tri-Column XSL Template\n"
 "Tri-Column"
 msgstr ""
-"_: Tri-Column XSL Template\n"
 "Tri-Column"
 
 #: xslt.cpp:44
