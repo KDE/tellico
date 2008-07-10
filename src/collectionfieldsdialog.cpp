@@ -254,7 +254,6 @@ CollectionFieldsDialog::CollectionFieldsDialog(Data::CollPtr coll_, QWidget* par
 
   // need to stretch at bottom
   vbox->setStretchFactor(new QWidget(vbox), 1);
-  KAcceleratorManager::manage(vbox);
 
   // keep a default collection
   m_defaultCollection = CollectionFactory::collection(m_coll->type(), true);
@@ -279,6 +278,9 @@ CollectionFieldsDialog::~CollectionFieldsDialog() {
 }
 
 void CollectionFieldsDialog::slotSelectInitial() {
+  // the accel management is here so that it doesn't cause conflicts with the
+  // ones explicitly set in the constructor
+  KAcceleratorManager::manage(mainWidget());
   m_fieldsBox->setSelected(0, true);
 }
 

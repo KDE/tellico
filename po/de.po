@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "POT-Creation-Date: 2008-01-26 10:52-0800\n"
-"PO-Revision-Date: 2008-01-25 10:34+0100\n"
+"PO-Revision-Date: 2008-05-24 22:47+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: german <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1094,7 +1094,7 @@ msgstr "Mechanismus"
 
 #: collections/boardgamecollection.cpp:66
 msgid "Designer"
-msgstr ""
+msgstr "Designer"
 
 #: collections/boardgamecollection.cpp:72
 msgid "Number of Players"
@@ -1792,7 +1792,7 @@ msgstr ""
 
 #: fetch/discogsfetcher.cpp:718
 msgid "Discogs Link"
-msgstr ""
+msgstr "Discogs-Link"
 
 #: newstuff/dialog.cpp:94
 msgid "Get Hot New Stuff"
@@ -1986,9 +1986,8 @@ msgid "Scanning audio files..."
 msgstr "Taste Audio-Dateien ab ..."
 
 #: translators/audiofileimporter.cpp:129
-#, fuzzy
 msgid "Bitrate"
-msgstr "Bibtex"
+msgstr "Bitrate"
 
 #: translators/audiofileimporter.cpp:160 translators/audiofileimporter.cpp:170
 msgid "Tracks (Disc %1)"
@@ -2023,14 +2022,12 @@ msgstr ""
 
 #: translators/audiofileimporter.cpp:352
 msgid "Include &bitrate"
-msgstr ""
+msgstr "&Bitrate inkludieren"
 
 #: translators/audiofileimporter.cpp:353
-#, fuzzy
 msgid "If checked, the bitrate for each track is added to the entries."
 msgstr ""
-"Wenn markiert, werden die Datei-Namen für jede Spur zu den Einträgen "
-"hinzugefügt."
+"Wenn markiert, wird die Bitrate für jede Spur zu den Einträgen hinzugefügt."
 
 #: translators/csvexporter.cpp:40
 msgid "CSV"
@@ -5369,7 +5366,7 @@ msgstr "Copac (Großbritannien und Irland)"
 
 #: scripts.cpp:2
 msgid "BoardGameGeek"
-msgstr ""
+msgstr "BoardGameGeek"
 
 #: scripts.cpp:4
 msgid "Dark Horse Comics"

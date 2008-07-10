@@ -42,6 +42,10 @@
  </tellico>
 </xsl:template>
 
+<!-- ignore unresolved queries -->
+<xsl:template match="cr:query[@status='unresolved']">
+</xsl:template>
+
 <xsl:template match="cr:query">
  <entry>
   

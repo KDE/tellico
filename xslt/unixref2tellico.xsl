@@ -46,9 +46,12 @@
 </xsl:template>
 
 <xsl:template match="cr:crossref">
- <entry>
-  <xsl:apply-templates/>
- </entry>
+ <!-- if there's an error, or none found, a crossref element still shows up, with an error element -->
+ <xsl:if test="not(cr:error)">
+  <entry>
+   <xsl:apply-templates/>
+  </entry>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="cr:book">

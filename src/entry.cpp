@@ -415,6 +415,16 @@ int Entry::compareValues(EntryPtr e1, EntryPtr e2, FieldPtr f) {
   if(f->name() == Latin1Literal("lccn") && LCCNValidator::formalize(s1) == LCCNValidator::formalize(s2)) {
     return 5;
   }
+  if(f->name() == Latin1Literal("arxiv")) {
+    // normalize and unVersion arxiv ID
+    s1.remove(QRegExp(QString::fromLatin1("^arxiv:"), false));
+    s1.remove(QRegExp(QString::fromLatin1("v\\d+$")));
+    s2.remove(QRegExp(QString::fromLatin1("^arxiv:"), false));
+    s2.remove(QRegExp(QString::fromLatin1("v\\d+$")));
+    if(s1 == s2) {
+      return 5;
+    }
+  }
   if(f->formatFlag() == Field::FormatName) {
     s1 = e1->field(f, true).lower();
     s2 = e2->field(f, true).lower();

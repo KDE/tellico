@@ -102,4 +102,21 @@ Tellico::Data::FieldVec FileCatalog::defaultFields() {
   return list;
 }
 
+int FileCatalog::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+  // equal urls are always equal, even if modification time or something is different
+  if(Entry::compareValues(entry1_, entry2_, QString::fromLatin1("url"), this) > 0) {
+    return 100; // good match
+  }
+  // if volume or created time is different, it can't be same entry
+  if(Entry::compareValues(entry1_, entry2_, QString::fromLatin1("volume"), this) == 0 ||
+     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("created"), this) == 0 ||
+     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("size"), this) == 0) {
+    return 0;
+  }
+  int res = Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("description"), this);
+  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("mimetype"), this);
+  return res;
+}
+
 #include "filecatalog.moc"

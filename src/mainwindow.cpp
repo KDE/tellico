@@ -1847,6 +1847,10 @@ void MainWindow::setFilter(const QString& text_) {
       // if it isn't valid, hold off on applying the filter
       QRegExp tx(text);
       if(!tx.isValid()) {
+        text = QRegExp::escape(text);
+        tx.setPattern(text);
+      }
+      if(!tx.isValid()) {
         myDebug() << "MainWindow::slotUpdateFilter() - invalid regexp: " << text << endl;
         return;
       }

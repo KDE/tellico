@@ -2,4 +2,22 @@ To regenerate the message strings, type
 
 make package-messages
 
-from the top-level directory
+from the top-level directory.
+
+Please note that you need a special for KDE patched version of xgettext. You
+can obtain it from http://packages.ubuntu.com/de/edgy/gettext-kde. Don't forget
+to make this binary available as xgettext (instead of kde-xgettext) by e.g.
+creating a link in your search path.
+
+If you don't do this, code such as i18n("Comic Book Illustrator", "Artist")
+would correspond to two separate strings "Comic Book Illustrator" and
+"Artist" instead of a combined entry from which only the second one has to be
+translated:
+
+msgid ""
+"_: Comic Book Illustrator\n"
+"Artist"
+msgstr "Künstler"
+
+You also need the tool extractrc. In Debian it is available in the package
+kdesdk-scripts.

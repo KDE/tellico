@@ -22,7 +22,7 @@
 // std::clock_t
 #include <ctime>
 
-// linux has __GNUC_PREREQ, NetBSD has __GNUC_PREQ__
+// linux has __GNUC_PREREQ, NetBSD has __GNUC_PREREQ__
 #if defined(__GNUC_PREREQ) && !defined(__GNUC_PREREQ__)
 #define __GNUC_PREREQ__ __GNUC_PREREQ
 #endif

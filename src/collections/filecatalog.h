@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -29,6 +29,7 @@ public:
   FileCatalog(bool addFields, const QString& title = QString::null);
 
   virtual Type type() const { return File; }
+  virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
   static FieldVec defaultFields();
 };

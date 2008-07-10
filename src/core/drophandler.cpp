@@ -18,6 +18,8 @@
 
 #include <kurldrag.h>
 #include <kmimetype.h>
+#include <kio/netaccess.h>
+#include <kio/job.h>
 
 using Tellico::DropHandler;
 
@@ -62,7 +64,16 @@ bool DropHandler::handleURL(const KURL::List& urls_) {
   bool hasUnknown = false;
   KURL::List tc, pdf, bib, ris;
   for(KURL::List::ConstIterator it = urls_.begin(); it != urls_.end(); ++it) {
-    KMimeType::Ptr ptr = KMimeType::findByURL(*it);
+    KMimeType::Ptr ptr;
+    // findByURL doesn't work for http, so actually query
+    // the url itself
+    if((*it).protocol() != QString::fromLatin1("http")) {
+      ptr = KMimeType::findByURL(*it);
+    } else {
+      KIO::MimetypeJob* job = KIO::mimetype(*it, false /*progress*/);
+      KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
+      ptr = KMimeType::mimeType(job->mimetype());
+    }
     if(ptr->is(QString::fromLatin1("application/x-tellico"))) {
       tc << *it;
     } else if(ptr->is(QString::fromLatin1("application/pdf"))) {

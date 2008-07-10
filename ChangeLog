@@ -1,3 +1,24 @@
+2008-07-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed EntryView to honor copy() command properly, for clipboard.
+	* Released Tellico 1.3.3.
+
+2008-06-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Porbase URL in z39.50 server list.
+
+2008-06-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated drag-and-drop to allow HTTP urls.
+
+2008-06-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed Arxiv fetcher to remove ID version number for results.
+
+2008-06-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with merging file catalogs, to properly match on URL.
+
 2008-05-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.3.2.1.

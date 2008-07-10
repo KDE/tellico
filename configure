@@ -2662,7 +2662,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=tellico
- VERSION=1.3.2.1
+ VERSION=1.3.3
 
 
 cat >>confdefs.h <<_ACEOF
@@ -36514,11 +36514,10 @@ pkg_failed=no
 { echo "$as_me:$LINENO: checking for EXEMPI" >&5
 echo $ECHO_N "checking for EXEMPI... $ECHO_C" >&6; }
 
-if test -n "$PKG_CONFIG"; then
-    if test -n "$EXEMPI_CFLAGS"; then
-        pkg_cv_EXEMPI_CFLAGS="$EXEMPI_CFLAGS"
-    else
-        if test -n "$PKG_CONFIG" && \
+if test -n "$EXEMPI_CFLAGS"; then
+    pkg_cv_EXEMPI_CFLAGS="$EXEMPI_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
     { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"exempi-2.0 >= 1.99.0\"") >&5
   ($PKG_CONFIG --exists --print-errors "exempi-2.0 >= 1.99.0") 2>&5
   ac_status=$?
@@ -36528,15 +36527,13 @@ if test -n "$PKG_CONFIG"; then
 else
   pkg_failed=yes
 fi
-    fi
-else
-	pkg_failed=untried
+ else
+    pkg_failed=untried
 fi
-if test -n "$PKG_CONFIG"; then
-    if test -n "$EXEMPI_LIBS"; then
-        pkg_cv_EXEMPI_LIBS="$EXEMPI_LIBS"
-    else
-        if test -n "$PKG_CONFIG" && \
+if test -n "$EXEMPI_LIBS"; then
+    pkg_cv_EXEMPI_LIBS="$EXEMPI_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
     { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"exempi-2.0 >= 1.99.0\"") >&5
   ($PKG_CONFIG --exists --print-errors "exempi-2.0 >= 1.99.0") 2>&5
   ac_status=$?
@@ -36546,9 +36543,8 @@ if test -n "$PKG_CONFIG"; then
 else
   pkg_failed=yes
 fi
-    fi
-else
-	pkg_failed=untried
+ else
+    pkg_failed=untried
 fi
 
 
@@ -36561,9 +36557,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        EXEMPI_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "exempi-2.0 >= 1.99.0"`
+	        EXEMPI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "exempi-2.0 >= 1.99.0" 2>&1`
         else
-	        EXEMPI_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "exempi-2.0 >= 1.99.0"`
+	        EXEMPI_PKG_ERRORS=`$PKG_CONFIG --print-errors "exempi-2.0 >= 1.99.0" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$EXEMPI_PKG_ERRORS" >&5
@@ -36618,11 +36614,10 @@ pkg_failed=no
 { echo "$as_me:$LINENO: checking for POPPLER" >&5
 echo $ECHO_N "checking for POPPLER... $ECHO_C" >&6; }
 
-if test -n "$PKG_CONFIG"; then
-    if test -n "$POPPLER_CFLAGS"; then
-        pkg_cv_POPPLER_CFLAGS="$POPPLER_CFLAGS"
-    else
-        if test -n "$PKG_CONFIG" && \
+if test -n "$POPPLER_CFLAGS"; then
+    pkg_cv_POPPLER_CFLAGS="$POPPLER_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
     { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"poppler-qt >= 0.5\"") >&5
   ($PKG_CONFIG --exists --print-errors "poppler-qt >= 0.5") 2>&5
   ac_status=$?
@@ -36632,15 +36627,13 @@ if test -n "$PKG_CONFIG"; then
 else
   pkg_failed=yes
 fi
-    fi
-else
-	pkg_failed=untried
+ else
+    pkg_failed=untried
 fi
-if test -n "$PKG_CONFIG"; then
-    if test -n "$POPPLER_LIBS"; then
-        pkg_cv_POPPLER_LIBS="$POPPLER_LIBS"
-    else
-        if test -n "$PKG_CONFIG" && \
+if test -n "$POPPLER_LIBS"; then
+    pkg_cv_POPPLER_LIBS="$POPPLER_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
     { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"poppler-qt >= 0.5\"") >&5
   ($PKG_CONFIG --exists --print-errors "poppler-qt >= 0.5") 2>&5
   ac_status=$?
@@ -36650,9 +36643,8 @@ if test -n "$PKG_CONFIG"; then
 else
   pkg_failed=yes
 fi
-    fi
-else
-	pkg_failed=untried
+ else
+    pkg_failed=untried
 fi
 
 
@@ -36665,9 +36657,9 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        POPPLER_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "poppler-qt >= 0.5"`
+	        POPPLER_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "poppler-qt >= 0.5" 2>&1`
         else
-	        POPPLER_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "poppler-qt >= 0.5"`
+	        POPPLER_PKG_ERRORS=`$PKG_CONFIG --print-errors "poppler-qt >= 0.5" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$POPPLER_PKG_ERRORS" >&5
@@ -38296,21 +38288,22 @@ echo "$as_me: $ac_file is unchanged" >&6;}
   fi
   rm -f "$tmp/out12"
 # Compute $ac_file's index in $config_headers.
+_am_arg=$ac_file
 _am_stamp_count=1
 for _am_header in $config_headers :; do
   case $_am_header in
-    $ac_file | $ac_file:* )
+    $_am_arg | $_am_arg:* )
       break ;;
     * )
       _am_stamp_count=`expr $_am_stamp_count + 1` ;;
   esac
 done
-echo "timestamp for $ac_file" >`$as_dirname -- $ac_file ||
-$as_expr X$ac_file : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
-	 X$ac_file : 'X\(//\)[^/]' \| \
-	 X$ac_file : 'X\(//\)$' \| \
-	 X$ac_file : 'X\(/\)' \| . 2>/dev/null ||
-echo X$ac_file |
+echo "timestamp for $_am_arg" >`$as_dirname -- "$_am_arg" ||
+$as_expr X"$_am_arg" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$_am_arg" : 'X\(//\)[^/]' \| \
+	 X"$_am_arg" : 'X\(//\)$' \| \
+	 X"$_am_arg" : 'X\(/\)' \| . 2>/dev/null ||
+echo X"$_am_arg" |
     sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{
 	    s//\1/
 	    q
@@ -38347,7 +38340,7 @@ echo "$as_me: executing $ac_file commands" >&6;}
   # each Makefile.in and add a new line on top of each file to say so.
   # Grep'ing the whole file is not good either: AIX grep has a line
   # limit of 2048, but all sed's we know have understand at least 4000.
-  if sed 10q "$mf" | grep '^#.*generated by automake' > /dev/null 2>&1; then
+  if sed -n 's,^#.*generated by automake.*,X,p' "$mf" | grep X >/dev/null 2>&1; then
     dirpart=`$as_dirname -- "$mf" ||
 $as_expr X"$mf" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
 	 X"$mf" : 'X\(//\)[^/]' \| \

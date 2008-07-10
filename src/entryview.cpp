@@ -26,6 +26,7 @@
 #include "document.h"
 #include "latin1literal.h"
 #include "../core/drophandler.h"
+#include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
 #include <krun.h>
@@ -37,10 +38,22 @@
 #include <klocale.h>
 
 #include <qfile.h>
+#include <qclipboard.h>
 
 using Tellico::EntryView;
+using Tellico::EntryViewWidget;
 
-EntryView::EntryView(QWidget* parent_, const char* name_) : KHTMLPart(parent_, name_),
+EntryViewWidget::EntryViewWidget(KHTMLPart* part, QWidget* parent)
+    : KHTMLView(part, parent) {}
+
+// for the life of me, I could not figure out how to call the actual
+// KHTMLPartBrowserExtension::copy() slot, so this will have to do
+void EntryViewWidget::copy() {
+  QString text = part()->selectedText();
+  QApplication::clipboard()->setText(text, QClipboard::Clipboard);
+}
+
+EntryView::EntryView(QWidget* parent_, const char* name_) : KHTMLPart(new EntryViewWidget(this, parent_), parent_, name_),
     m_entry(0), m_handler(0), m_run(0), m_tempFile(0), m_useGradientImages(true), m_checkCommonFile(true) {
   setJScriptEnabled(false);
   setJavaEnabled(false);

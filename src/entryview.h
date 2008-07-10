@@ -20,6 +20,7 @@ class KTempFile;
 #include "datavectors.h"
 
 #include <khtml_part.h>
+#include <khtmlview.h>
 
 #include <qguardedptr.h>
 
@@ -100,6 +101,16 @@ private:
   KTempFile* m_tempFile;
   bool m_useGradientImages : 1;
   bool m_checkCommonFile : 1;
+};
+
+// stupid naming on my part, I need to subclass the view to
+// add a slot. EntryView is really a part though
+class EntryViewWidget : public KHTMLView {
+Q_OBJECT
+public:
+  EntryViewWidget(KHTMLPart* part, QWidget* parent);
+public slots:
+  void copy();
 };
 
 } //end namespace

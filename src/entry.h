@@ -83,11 +83,6 @@ public:
    * The assignment operator is overloaded, since the id must be different.
    */
   Entry& operator=(const Entry& other);
-  /**
-   * two entries are equal if all their field values are equal, except for
-   * file catalogs which match on the url only
-   */
-  bool operator==(const Entry& other);
 
   ~Entry();
 
@@ -230,6 +225,12 @@ public:
   static QString dependentValue(ConstEntryPtr e, const QString& formatString, bool formatted);
 
 private:
+  /**
+   * two entries are equal if all their field values are equal, except for
+   * file catalogs which match on the url only
+   */
+  bool operator==(const Entry& other);
+
   CollPtr m_coll;
   long m_id;
   StringMap m_fields;
