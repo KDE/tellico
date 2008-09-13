@@ -164,7 +164,7 @@ void CitebaseFetcher::slotComplete(KIO::Job* job_) {
 
 Tellico::Data::EntryPtr CitebaseFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
-  QRegExp versionRx(QRegExp(QString::fromLatin1("v\\d+$")));
+  QRegExp versionRx(QString::fromLatin1("v\\d+$"));
   // if the original search was not for a versioned ID, remove it
   if(m_key != ArxivID || !m_value.contains(versionRx)) {
     QString arxiv = entry->field(QString::fromLatin1("arxiv"));

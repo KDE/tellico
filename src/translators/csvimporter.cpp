@@ -50,15 +50,26 @@ extern "C" {
 
 using Tellico::Import::CSVImporter;
 
+typedef int(*SpaceFunc)(char);
+
 static void writeToken(char* buffer, size_t len, void* data);
 static void writeRow(char buffer, void* data);
+static int isSpace(char c);
+static int isSpaceOrTab(char c);
+static int isTab(char c);
 
 class CSVImporter::Parser {
 public:
   Parser(const QString& str) : stream(new QTextIStream(&str)) { csv_init(&parser, 0); }
   ~Parser() { csv_free(parser); delete stream; stream = 0; }
 
-  void setDelimiter(const QString& s) { Q_ASSERT(s.length() == 1); csv_set_delim(parser, s[0].latin1()); }
+  void setDelimiter(const QString& s) {
+    Q_ASSERT(s.length() == 1);
+    csv_set_delim(parser, s[0].latin1());
+    if(s[0] == '\t')     csv_set_space_func(parser, isSpace);
+    else if(s[0] == ' ') csv_set_space_func(parser, isTab);
+    else                 csv_set_space_func(parser, isSpaceOrTab);
+  }
   void reset(const QString& str) { delete stream; stream = new QTextIStream(&str); };
   bool hasNext() { return !stream->atEnd(); }
   void skipLine() { stream->readLine(); }
@@ -93,6 +104,21 @@ static void writeRow(char c, void* data) {
   Q_UNUSED(c);
   CSVImporter::Parser* p = static_cast<CSVImporter::Parser*>(data);
   p->setRowDone(true);
+}
+
+static int isSpace(char c) {
+  if (c == CSV_SPACE) return 1;
+  return 0;
+}
+
+static int isSpaceOrTab(char c) {
+  if (c == CSV_SPACE || c == CSV_TAB) return 1;
+  return 0;
+}
+
+static int isTab(char c) {
+  if (c == CSV_TAB) return 1;
+  return 0;
 }
 
 CSVImporter::CSVImporter(const KURL& url_) : Tellico::Import::TextImporter(url_),

@@ -117,6 +117,7 @@
         margin: 0px 0px 0px 0px;
         padding: 0px 10px 0px 4px;
         float: left;
+        min-height: 1em;
    }
    span.bar {
         width: 590px;
@@ -178,7 +179,7 @@
  <xsl:for-each select="tc:fields/tc:field[boolean(floor(@flags div 2) mod 2)]">
   <xsl:call-template name="output-group">
    <xsl:with-param name="coll" select="$coll"/>
-   <xsl:with-param name="fieldname" select="@name"/>
+   <xsl:with-param name="field" select="."/>
   </xsl:call-template>  
  </xsl:for-each>
 
@@ -189,35 +190,49 @@
 
 <xsl:template name="output-group">
  <xsl:param name="coll"/>
- <xsl:param name="fieldname"/>
+ <xsl:param name="field"/>
 
- <xsl:variable name="str">
-  <xsl:choose>
-   <xsl:when test="boolean(floor(key('fieldsByName', $fieldname)/@flags mod 2))">
-    <xsl:choose>
-     <xsl:when test="key('fieldsByName', $fieldname)/@type=8">
-      <xsl:value-of select="concat('$coll/tc:entry/tc:',$fieldname,'s/tc:',$fieldname,'/tc:column[1]')"/>
-     </xsl:when>
-     <xsl:otherwise>
-      <xsl:value-of select="concat('$coll/tc:entry/tc:',$fieldname,'s/tc:',$fieldname)"/>
-     </xsl:otherwise>
-    </xsl:choose>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:value-of select="concat('$coll/tc:entry/tc:',$fieldname)"/>
-   </xsl:otherwise> 
-  </xsl:choose>
+ <xsl:variable name="fieldname" select="$field/@name"/>
+ <xsl:variable name="value-expr">
+  <xsl:for-each select="$coll/tc:entry">
+   <xsl:choose>
+    <!-- tables -->
+    <xsl:when test="$field/@type=8">
+     <xsl:for-each select="./*/*[local-name() = $fieldname]">
+      <value>
+       <xsl:value-of select="tc:column[1]"/>
+      </value>
+     </xsl:for-each>
+    </xsl:when>
+    <!-- multiple values...could also use "./*/*[local-name() = $fieldname]" -->
+    <xsl:when test="boolean(floor(key('fieldsByName', $fieldname)/@flags mod 2))">
+     <xsl:for-each select="./*/*[local-name() = $fieldname]">
+      <value>
+       <xsl:value-of select="."/>
+      </value>
+     </xsl:for-each>
+    </xsl:when>
+    <xsl:otherwise>
+     <value>
+      <xsl:call-template name="simple-field-value">
+       <xsl:with-param name="entry" select="."/>
+       <xsl:with-param name="field" select="$fieldname"/>
+     </xsl:call-template>
+     </value>
+    </xsl:otherwise>
+   </xsl:choose>
+  </xsl:for-each>
  </xsl:variable>
- <xsl:variable name="values" select="dyn:evaluate($str)"/>
 
+ <xsl:variable name="values" select="exsl:node-set($value-expr)/value"/>
  <xsl:variable name="listing">
-  <xsl:for-each select="$values[not(. = preceding::*)]">
+  <xsl:for-each select="$values[not(. = preceding-sibling::*)]">
    <!-- speed sorting by ignoring groups with a count of 1 -->
    <xsl:variable name="c" select="count($values[. = current()])"/>
    <xsl:if test="$c &gt; 1">
     <group>
      <xsl:attribute name="name">
-      <xsl:call-template name="text-value"/>
+      <xsl:value-of select="."/>
      </xsl:attribute>
      <xsl:attribute name="count">
       <xsl:value-of select="$c"/>
@@ -229,11 +244,11 @@
 
  <xsl:variable name="groups" select="exsl:node-set($listing)/group"/>
  <xsl:variable name="total" select="count($groups)"/>
- 
+
  <xsl:variable name="max">
   <xsl:call-template name="max-count">
    <xsl:with-param name="nodes" select="$groups"/>
-  </xsl:call-template>   
+  </xsl:call-template>
  </xsl:variable>
 
  <xsl:if test="$total &gt; 2">
@@ -301,17 +316,6 @@
      </xsl:choose>
     </xsl:with-param>
    </xsl:call-template>
-  </xsl:otherwise>
- </xsl:choose>
-</xsl:template>
-
-<xsl:template name="text-value">
- <xsl:choose>
-  <xsl:when test="text()">
-   <xsl:value-of select="text()"/>
-  </xsl:when>
-  <xsl:otherwise>
-   <xsl:value-of select="..//tc:column[1]"/>
   </xsl:otherwise>
  </xsl:choose>
 </xsl:template>

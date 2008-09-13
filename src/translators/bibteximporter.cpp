@@ -308,5 +308,47 @@ QWidget* BibtexImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   return m_widget;
 }
 
+bool BibtexImporter::maybeBibtex(const KURL& url_) {
+  QString text = FileHandler::readTextFile(url_, true /*quiet*/);
+  if(text.isEmpty()) {
+    return false;
+  }
+
+  bt_initialize();
+  QRegExp rx(QString::fromLatin1("[{}]"));
+
+  ushort bt_options = 0; // ushort is defined in btparse.h
+  boolean ok; // boolean is defined in btparse.h as an int
+  bool foundOne = false;
+  int brace = 0;
+  int startpos = 0;
+  int pos = text.find(rx, 0);
+  while(pos > 0) {
+    if(text[pos] == '{') {
+      ++brace;
+    } else if(text[pos] == '}' && brace > 0) {
+      --brace;
+    }
+    if(brace == 0) {
+      QString entry = text.mid(startpos, pos-startpos+1).stripWhiteSpace();
+      // All the downstream text processing on the AST node will assume utf-8
+      AST* node = bt_parse_entry_s(const_cast<char*>(entry.utf8().data()),
+                                   const_cast<char*>(url_.fileName().local8Bit().data()),
+                                   0, bt_options, &ok);
+      if(ok && node) {
+        foundOne = true;
+        break;
+      }
+      startpos = pos+1;
+    }
+    pos = text.find(rx, pos+1);
+  }
+  if(foundOne) {
+    // clean up some structures
+    bt_parse_entry_s(0, 0, 1, 0, 0);
+  }
+  bt_cleanup();
+  return foundOne;
+}
 
 #include "bibteximporter.moc"

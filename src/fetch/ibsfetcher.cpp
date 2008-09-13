@@ -156,7 +156,8 @@ void IBSFetcher::slotComplete(KIO::Job* job_) {
 
   QString s = Tellico::decodeHTML(QString(m_data));
   // really specific regexp
-  QString pat = QString::fromLatin1("http://www.internetbookshop.it/code/");
+  //QString pat = QString::fromLatin1("http://www.internetbookshop.it/code/");
+  QString pat = QString::fromLatin1("http://www.ibs.it/code/");
   QRegExp anchorRx(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*[\"'](") +
                    QRegExp::escape(pat) +
                    QString::fromLatin1("[^\"]*)\"[^>]*><b>([^<]+)<"), false);

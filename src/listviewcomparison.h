@@ -112,5 +112,16 @@ protected:
   virtual int compare(const QString& str1, const QString& str2);
 };
 
+class ChoiceComparison : public ListViewComparison {
+public:
+  ChoiceComparison(Data::ConstFieldPtr field);
+
+protected:
+  virtual int compare(const QString& str1, const QString& str2);
+
+private:
+  QStringList m_values;
+};
+
 }
 #endif

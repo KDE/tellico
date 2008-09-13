@@ -122,6 +122,8 @@ public:
   virtual void setFilter(const QString& text);
   virtual bool showEntry(long id);
 
+  bool eventFilter(QObject* watched, QEvent* event);
+
 public slots:
   /**
    * Initializes some stuff after the object is created.

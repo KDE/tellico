@@ -141,7 +141,10 @@
    <xsl:if test="$id">
     <img class="float">
      <xsl:attribute name="src">
-      <xsl:value-of select="concat($imgdir, $id)"/>
+      <xsl:call-template name="image-link">
+       <xsl:with-param name="image" select="key('imagesById', $id)"/>
+       <xsl:with-param name="dir" select="$imgdir"/>
+      </xsl:call-template>
      </xsl:attribute>
      <xsl:call-template name="image-size">
       <xsl:with-param name="limit-width" select="$image-width"/>
@@ -150,7 +153,7 @@
      </xsl:call-template>
     </img>
    </xsl:if>
-  
+
    <table>
     <thead>
      <tr>
@@ -163,8 +166,9 @@
     <tbody>
      <!-- don't repeat title -->
      <xsl:for-each select="$columns[. != 'title']">
-      <!-- no other images allowed -->
-      <xsl:if test="$entry/../tc:fields/tc:field[@name = current()]/@type != 10">
+      <!-- no other images or paragraphs allowed -->
+      <xsl:variable name="ftype" select="$entry/../tc:fields/tc:field[@name = current()]/@type"/>
+      <xsl:if test="$ftype != 10 and $ftype != 2">
        <xsl:call-template name="field-output">
         <xsl:with-param name="entry" select="$entry"/>
         <!-- can't use a key, the context is not the document -->

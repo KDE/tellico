@@ -109,7 +109,8 @@ bool AmazonFetcher::canFetch(int type) const {
          || type == Data::Collection::Bibtex
          || type == Data::Collection::Album
          || type == Data::Collection::Video
-         || type == Data::Collection::Game;
+         || type == Data::Collection::Game
+         || type == Data::Collection::BoardGame;
 }
 
 void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -183,12 +184,16 @@ void AmazonFetcher::doSearch() {
       u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("VideoGames"));
       break;
 
+    case Data::Collection::BoardGame:
+      u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Toys"));
+      u.addQueryItem(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
+      break;
+
     case Data::Collection::Coin:
     case Data::Collection::Stamp:
     case Data::Collection::Wine:
     case Data::Collection::Base:
     case Data::Collection::Card:
-    default:
       message(i18n("%1 does not allow searching for this collection type.").arg(source()), MessageHandler::Warning);
       stop();
       return;
@@ -516,6 +521,12 @@ void AmazonFetcher::slotComplete(KIO::Job* job_) {
 
       case Data::Collection::Game:
         desc = entry->field(QString::fromLatin1("platform"))
+               + QChar('/')
+               + entry->field(QString::fromLatin1("year"));
+        break;
+
+      case Data::Collection::BoardGame:
+        desc = entry->field(QString::fromLatin1("publisher"))
                + QChar('/')
                + entry->field(QString::fromLatin1("year"));
         break;

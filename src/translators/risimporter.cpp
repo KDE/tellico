@@ -188,7 +188,7 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
   // technically, the spec requires a space immediately after the hyphen
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
-  // also be gracious and allow only any amount of space before hyphen
+  // also be gracious and allow any amount of space before hyphen
   QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s+-(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
@@ -310,6 +310,27 @@ Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
 
 void RISImporter::slotCancel() {
   m_cancelled = true;
+}
+
+bool RISImporter::maybeRIS(const KURL& url_) {
+  QString text = FileHandler::readTextFile(url_, true /*quiet*/);
+  if(text.isEmpty()) {
+    return false;
+  }
+
+  // bare bones check, strip white space at beginning
+  // and then first text line must be valid RIS
+  QTextIStream t(&text);
+
+  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s+-(.*)$"));
+  QString currLine;
+  for(currLine = t.readLine(); !currLine.isNull(); currLine = t.readLine()) {
+    if(currLine.stripWhiteSpace().isEmpty()) {
+      continue;
+    }
+    break;
+  }
+  return rx.exactMatch(currLine);
 }
 
 #include "risimporter.moc"

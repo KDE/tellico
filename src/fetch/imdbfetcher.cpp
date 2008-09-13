@@ -799,7 +799,7 @@ void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL&
 
   QString thisPlot;
   // match until next opening tag
-  QRegExp plotRx(QString::fromLatin1("plot (?:outline|summary):(.*)<[^/].*</"), false);
+  QRegExp plotRx(QString::fromLatin1("plot\\s*(?:outline|summary)?:(.*)<[^/].*</"), false);
   plotRx.setMinimal(true);
   QRegExp plotURLRx(QString::fromLatin1("<a\\s+.*href\\s*=\\s*\".*/title/.*/plotsummary\""), false);
   plotURLRx.setMinimal(true);
@@ -828,6 +828,8 @@ void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL&
       if(plotRx.search(plotPage) > -1) {
         QString userPlot = plotRx.cap(1);
         userPlot.remove(*s_tagRx); // remove HTML tags
+        // remove last little "written by", if there
+        userPlot.remove(QRegExp(QString::fromLatin1("\\s*written by.*$"), false));
         entry_->setField(QString::fromLatin1("plot"), Tellico::decodeHTML(userPlot));
       }
     }

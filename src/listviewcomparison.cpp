@@ -48,6 +48,8 @@ Tellico::ListViewComparison* Tellico::ListViewComparison::create(Data::ConstFiel
     return new DependentComparison(field_);
   } else if(field_->type() == Data::Field::Date || field_->formatFlag() == Data::Field::FormatDate) {
     return new ISODateComparison(field_);
+  } else if(field_->type() == Data::Field::Choice) {
+    return new ChoiceComparison(field_);
   } else if(field_->formatFlag() == Data::Field::FormatTitle) {
     // Dependent could be title, so put this test after
     return new TitleComparison(field_);
@@ -276,4 +278,12 @@ int Tellico::ISODateComparison::compare(const QString& str1, const QString& str2
     return 1;
   }
   return 0;
+}
+
+Tellico::ChoiceComparison::ChoiceComparison(Data::ConstFieldPtr field) : ListViewComparison(field) {
+  m_values = field->allowed();
+}
+
+int Tellico::ChoiceComparison::compare(const QString& str1, const QString& str2) {
+  return m_values.findIndex(str1) - m_values.findIndex(str2);
 }

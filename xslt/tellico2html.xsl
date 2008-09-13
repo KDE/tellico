@@ -115,10 +115,7 @@
  </xsl:if>
 </xsl:variable>
 
-<!-- keys ends up useless since we're using exsl:node-set
-<xsl:key name="fieldsByName" match="tc:field" use="@name"/>
 <xsl:key name="imagesById" match="tc:image" use="@id"/>
--->
 <xsl:key name="entriesById" match="tc:entry" use="@id"/>
 
 <!-- filename conversion is weird, need a variable for easy replacement -->
@@ -557,7 +554,10 @@
         </xsl:attribute>
         <img>
          <xsl:attribute name="src">
-          <xsl:value-of select="concat($imgdir, .)"/>
+          <xsl:call-template name="image-link">
+           <xsl:with-param name="image" select="key('imagesById', .)"/>
+           <xsl:with-param name="dir" select="$imgdir"/>
+          </xsl:call-template>
          </xsl:attribute>
          <xsl:attribute name="alt">
           <xsl:value-of select="concat('[', $entry//tc:title[1], ']')"/>

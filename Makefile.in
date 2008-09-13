@@ -41,8 +41,7 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(top_srcdir)/configure AUTHORS COPYING ChangeLog INSTALL NEWS \
 	TODO admin/config.guess admin/config.sub admin/depcomp \
-	admin/install-sh admin/ltcf-c.sh admin/ltcf-cxx.sh \
-	admin/ltconfig admin/ltmain.sh admin/missing \
+	admin/install-sh admin/ltmain.sh admin/missing \
 	admin/mkinstalldirs admin/ylwrap install-sh
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \

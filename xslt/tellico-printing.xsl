@@ -329,7 +329,10 @@
         </xsl:attribute>
         <img>
          <xsl:attribute name="src">
-          <xsl:value-of select="concat($imgdir, .)"/>
+          <xsl:call-template name="image-link">
+           <xsl:with-param name="image" select="key('imagesById', .)"/>
+           <xsl:with-param name="dir" select="$imgdir"/>
+          </xsl:call-template>
          </xsl:attribute>
          <xsl:call-template name="image-size">
           <xsl:with-param name="limit-width" select="$image-width"/>

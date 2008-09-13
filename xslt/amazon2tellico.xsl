@@ -53,6 +53,9 @@
 <xsl:variable name="lcletters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
 <xsl:variable name="ucletters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
 
+<!-- disable default behavior -->
+<xsl:template match="text()|@*"></xsl:template>
+
 <xsl:template match="/">
  <tellico syntaxVersion="10">
   <collection title="Amazon Import">
@@ -71,6 +74,9 @@
      <xsl:when test="$mode='VideoGames'">
       <xsl:text>11</xsl:text>
      </xsl:when>
+     <xsl:when test="$mode='Toys'">
+      <xsl:text>13</xsl:text>
+     </xsl:when>
     </xsl:choose>
    </xsl:attribute>
    <fields>
@@ -81,9 +87,19 @@
     <field flags="0" title="Medium Image" category="Images"  format="4" type="7" name="medium-image"/>
     <field flags="0" title="Large Image" category="Images" format="4" type="7" name="large-image"/>
    </fields>
-   <xsl:for-each select="//aws:Items/aws:Item">
-    <xsl:apply-templates select="."/>
-   </xsl:for-each>
+   <!-- results for board games need to be filtered -->
+   <xsl:if test="$mode != 'Toys'">
+    <xsl:for-each select="//aws:Items/aws:Item">
+     <xsl:apply-templates select="."/>
+    </xsl:for-each>
+   </xsl:if>
+   <xsl:if test="$mode = 'Toys'">
+    <!-- only grab items in the board games category -->
+    <xsl:for-each select="//aws:Items/aws:Item[.//aws:BrowseNode/aws:Name='Board Games' or
+                                               .//aws:BrowseNode/aws:BrowseNodeId='166225011']">
+     <xsl:apply-templates select="."/>
+    </xsl:for-each>
+   </xsl:if>
   </collection>
  </tellico>
 </xsl:template>
@@ -496,6 +512,27 @@
      </xsl:choose>
     </certification>
    </xsl:when>
+
+   <xsl:when test="$mode='Toys'">
+    <publishers>
+     <publisher>
+      <xsl:value-of select="(aws:Label|aws:Brand|aws:Publisher|aws:Manufacturer)[1]"/>
+     </publisher>
+    </publishers>
+
+    <description>
+     <xsl:value-of select="../aws:EditorialReviews/aws:EditorialReview[1]/aws:Content"/>
+     <xsl:for-each select="aws:Feature">
+      <xsl:value-of select="."/>
+      <!-- if the last character is not punctuation, add a period -->
+      <xsl:if test="not(contains('.!?,/', substring(., string-length(.))))">
+       <xsl:text>.</xsl:text>
+      </xsl:if>
+       <xsl:text> </xsl:text>
+     </xsl:for-each>
+    </description>
+   </xsl:when>
+
   </xsl:choose>
 </xsl:template>
 

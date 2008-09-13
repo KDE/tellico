@@ -749,6 +749,7 @@ void MainWindow::initActions() {
   // want to update every time the filter text changes
   connect(m_quickFilter, SIGNAL(textChanged(const QString&)),
           this, SLOT(slotQueueFilter()));
+  m_quickFilter->installEventFilter(this); // intercept keyEvents
 
   KWidgetAction* wAction = new KWidgetAction(m_quickFilter, i18n("Filter"), 0, 0, 0,
                                              actionCollection(), "quick_filter");
@@ -906,12 +907,12 @@ void MainWindow::saveOptions() {
   Config::setGroupViewSortAscending(m_groupView->ascendingSort());
 
   if(m_loanView) {
-    Config::setLoanViewSortAscending(m_loanView->sortStyle()); // ok to use SortColumn key, save semantics
+    Config::setLoanViewSortColumn(m_loanView->sortStyle()); // ok to use SortColumn key, save semantics
     Config::setLoanViewSortAscending(m_loanView->ascendingSort());
   }
 
   if(m_filterView) {
-    Config::setFilterViewSortAscending(m_filterView->sortStyle()); // ok to use SortColumn key, save semantics
+    Config::setFilterViewSortColumn(m_filterView->sortStyle()); // ok to use SortColumn key, save semantics
     Config::setFilterViewSortAscending(m_filterView->ascendingSort());
   }
 
@@ -2390,6 +2391,17 @@ void MainWindow::slotURLAction(const KURL& url_) {
   } else {
     myWarning() << "MainWindow::slotURLAction() - unknown action: " << actionName << endl;
   }
+}
+
+bool MainWindow::eventFilter(QObject* obj_, QEvent* ev_) {
+  if(ev_->type() == QEvent::KeyPress && obj_ == m_quickFilter) {
+    switch(static_cast<QKeyEvent*>(ev_)->key()) {
+      case Qt::Key_Escape:
+        m_quickFilter->clear();
+        return true;
+    }
+  }
+  return false;
 }
 
 #include "mainwindow.moc"

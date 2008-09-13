@@ -65,6 +65,9 @@
   <xsl:when test="tc:tellico/tc:collection/@type=4">
    <xsl:text>GCmusics</xsl:text>
   </xsl:when>
+  <xsl:when test="tc:tellico/tc:collection/@type=8">
+   <xsl:text>GCcoins</xsl:text>
+  </xsl:when>
  </xsl:choose>
 </xsl:variable>
 <!-- grab all the applicable attributes once -->
@@ -80,7 +83,7 @@
  <xsl:apply-templates select="tc:collection"/>
 </xsl:template>
 
-<xsl:template match="tc:collection[@type&lt;2 or @type&gt;5]">
+<xsl:template match="tc:collection[@type&lt;2 or @type&gt;5 and not(@type=8)]">
  <xsl:message terminate="yes">
   <xsl:text>GCstar export is not supported for this collection type.</xsl:text>
  </xsl:message>
@@ -145,6 +148,13 @@
       <xsl:text>18</xsl:text>
      </xsl:when>
     </xsl:choose>
+   </xsl:attribute>
+  </xsl:if>
+  <!-- for coin grade, GCstar uses numbers only -->
+  <xsl:if test="tc:grade">
+   <xsl:attribute name="condition">
+    <!-- remove everything but numbers -->
+    <xsl:value-of select="translate(tc:grade,translate(tc:grade,'0123456789', ''),'')"/>
    </xsl:attribute>
   </xsl:if>
 

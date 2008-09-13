@@ -79,6 +79,11 @@
      <tc:field flags="8" title="Original Title" category="General" format="1" type="1" name="origtitle" i18n="true"/>
      <tc:field flags="0" title="Seen" category="Personal" format="4" type="4" name="seen" i18n="true"/>
     </xsl:when>
+    <xsl:when test="@type='GCcoins'">
+     <!-- gcstar includes way more coin grades than tellico -->
+     <tc:field flags="2" title="Grade" category="General" format="4" type="3" name="grade"
+               allowed="Proof-65;Proof-60;Mint State-70;Mint State-69;Mint State-68;Mint State-67;Mint State-66;Mint State-65;Mint State-64;Mint State-63;Mint State-62;Mint State-61;Mint State-60;Almost Uncirculated-58;Almost Uncirculated-55;Almost Uncirculated-53;Almost Uncirculated-50;Extremely Fine-45;Extremely Fine-40;Very Fine-35;Very Fine-30;Very Fine-25;Very Fine-20;Fine-15;Fine-12;Very Good-10;Very Good-8;Good-6;Good-4;Fair"/>
+    </xsl:when>
    </xsl:choose>
   </tc:fields>
   <xsl:apply-templates select="item"/>
@@ -475,6 +480,48 @@
    </tc:num-player>
   </xsl:for-each>
  </tc:num-players>
+</xsl:template>
+
+<!-- coins -->
+<xsl:template match="condition">
+<!-- by default, Tellico includes 
+        "Proof-65,Proof-60,Mint State-65,Mint State-60,"
+        "Almost Uncirculated-55,Almost Uncirculated-50,"
+        "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
+        "Very Good-8,Good-4,Fair" -->
+<!-- GCStar doesn't appear to include proof grades -->
+ <tc:grade>
+  <xsl:choose>
+   <xsl:when test=".='70'">Mint State-70</xsl:when>
+   <xsl:when test=".='69'">Mint State-69</xsl:when>
+   <xsl:when test=".='68'">Mint State-68</xsl:when>
+   <xsl:when test=".='67'">Mint State-67</xsl:when>
+   <xsl:when test=".='66'">Mint State-66</xsl:when>
+   <xsl:when test=".='65'">Mint State-65</xsl:when>
+   <xsl:when test=".='64'">Mint State-64</xsl:when>
+   <xsl:when test=".='63'">Mint State-63</xsl:when>
+   <xsl:when test=".='62'">Mint State-62</xsl:when>
+   <xsl:when test=".='61'">Mint State-61</xsl:when>
+   <xsl:when test=".='60'">Mint State-60</xsl:when>
+   <xsl:when test=".='58'">Almost Uncirculated-58</xsl:when>
+   <xsl:when test=".='55'">Almost Uncirculated-55</xsl:when>
+   <xsl:when test=".='53'">Almost Uncirculated-53</xsl:when>
+   <xsl:when test=".='50'">Almost Uncirculated-50</xsl:when>
+   <xsl:when test=".='45'">Extremely Fine-45</xsl:when>
+   <xsl:when test=".='40'">Extremely Fine-40</xsl:when>
+   <xsl:when test=".='35'">Very Fine-35</xsl:when>
+   <xsl:when test=".='30'">Very Fine-30</xsl:when>
+   <xsl:when test=".='25'">Very Fine-25</xsl:when>
+   <xsl:when test=".='20'">Very Fine-20</xsl:when>
+   <xsl:when test=".='15'">Fine-15</xsl:when>
+   <xsl:when test=".='12'">Fine-12</xsl:when>
+   <xsl:when test=".='10'">Very Good-10</xsl:when>
+   <xsl:when test=".='8'">Very Good-8</xsl:when>
+   <xsl:when test=".='6'">Good-6</xsl:when>
+   <xsl:when test=".='4'">Good-4</xsl:when>
+   <xsl:when test=".&lt;4">Fair</xsl:when>
+  </xsl:choose>
+ </tc:grade>
 </xsl:template>
 
 <xsl:template name="year">

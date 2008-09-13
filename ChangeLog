@@ -1,3 +1,32 @@
+2008-09-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.3.4.
+
+2008-09-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed error with consecutive tabs in CSV import.
+
+2008-08-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with image links in reports not being linked correctly.
+
+2008-08-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added minimal searching for board games from Amazon.
+
+2008-08-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed Choice fields to sort by position in list.
+
+2008-07-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Added ESC key for clearing quick filter.
+	* Improved drag/drop to match on file extension after checking mimetype.
+
+2008-07-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IMDb plot regexp.
+
 2008-07-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed EntryView to honor copy() command properly, for clipboard.

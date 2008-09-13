@@ -66,6 +66,8 @@ public:
   virtual QWidget* widget(QWidget* parent, const char* name=0);
   virtual bool canImport(int type) const;
 
+  static bool maybeBibtex(const KURL& url);
+
 public slots:
   void slotCancel();
 

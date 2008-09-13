@@ -171,7 +171,7 @@ const QString& Field::defaultValue() const {
 }
 
 void Field::setDefaultValue(const QString& value_) {
-  if(m_type != Choice || m_allowed.findIndex(value_) > -1) {
+  if(value_.isEmpty() || m_type != Choice || m_allowed.findIndex(value_) > -1) {
     setProperty(QString::fromLatin1("default"), value_);
   }
 }

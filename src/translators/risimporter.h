@@ -49,6 +49,8 @@ public:
   virtual QWidget* widget(QWidget*, const char*) { return 0; }
   virtual bool canImport(int type) const;
 
+  static bool maybeRIS(const KURL& url);
+
 public slots:
   void slotCancel();
 

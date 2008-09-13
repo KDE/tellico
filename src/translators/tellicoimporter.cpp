@@ -374,7 +374,7 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
 
   Data::FieldPtr field;
   if(type == Data::Field::Choice) {
-    QStringList allowed = QStringList::split(QString::fromLatin1(";"),
+    QStringList allowed = QStringList::split(QRegExp(QString::fromLatin1("\\s*;\\s*")),
                                              elem_.attribute(QString::fromLatin1("allowed")));
     if(isI18n) {
       for(QStringList::Iterator it = allowed.begin(); it != allowed.end(); ++it) {

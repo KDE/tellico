@@ -15,6 +15,8 @@
 #include "../mainwindow.h"
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
+#include "../translators/bibteximporter.h"
+#include "../translators/risimporter.h"
 
 #include <kurldrag.h>
 #include <kmimetype.h>
@@ -64,27 +66,37 @@ bool DropHandler::handleURL(const KURL::List& urls_) {
   bool hasUnknown = false;
   KURL::List tc, pdf, bib, ris;
   for(KURL::List::ConstIterator it = urls_.begin(); it != urls_.end(); ++it) {
+    const KURL& url = *it;
     KMimeType::Ptr ptr;
     // findByURL doesn't work for http, so actually query
     // the url itself
-    if((*it).protocol() != QString::fromLatin1("http")) {
-      ptr = KMimeType::findByURL(*it);
+    if(url.protocol() != QString::fromLatin1("http")) {
+      ptr = KMimeType::findByURL(url);
     } else {
-      KIO::MimetypeJob* job = KIO::mimetype(*it, false /*progress*/);
+      KIO::MimetypeJob* job = KIO::mimetype(url, false /*progress*/);
       KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
       ptr = KMimeType::mimeType(job->mimetype());
     }
     if(ptr->is(QString::fromLatin1("application/x-tellico"))) {
-      tc << *it;
+      tc << url;
     } else if(ptr->is(QString::fromLatin1("application/pdf"))) {
-      pdf << *it;
+      pdf << url;
     } else if(ptr->is(QString::fromLatin1("text/x-bibtex")) ||
-              ptr->is(QString::fromLatin1("application/x-bibtex"))) {
-      bib << *it;
+              ptr->is(QString::fromLatin1("application/x-bibtex")) ||
+              ptr->is(QString::fromLatin1("application/bibtex"))) {
+      bib << url;
     } else if(ptr->is(QString::fromLatin1("application/x-research-info-systems"))) {
-      ris << *it;
+      ris << url;
+    } else if(url.fileName().endsWith(QString::fromLatin1(".bib"))) {
+      bib << url;
+    } else if(url.fileName().endsWith(QString::fromLatin1(".ris"))) {
+      ris << url;
+    } else if(ptr->is(QString::fromLatin1("text/plain")) && Import::BibtexImporter::maybeBibtex(url)) {
+      bib << url;
+    } else if(ptr->is(QString::fromLatin1("text/plain")) && Import::RISImporter::maybeRIS(url)) {
+      ris << url;
     } else {
-      myDebug() << "DropHandler::handleURL() - unrecognized type: " << ptr->name() << " (" << *it << ")" << endl;
+      myDebug() << "DropHandler::handleURL() - unrecognized type: " << ptr->name() << " (" << url << ")" << endl;
       hasUnknown = true;
     }
   }

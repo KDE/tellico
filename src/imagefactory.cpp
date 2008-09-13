@@ -348,7 +348,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !KURL::isRelativeURL(id_)) {
     KURL u = id_;
     if(u.isValid()) {
-      return addImageImpl(u, false, KURL(), true);
+      return addImageImpl(u, true, KURL(), true);
     }
   }
 
