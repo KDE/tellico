@@ -316,7 +316,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
 
 const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(id_.isEmpty()) {
-    myDebug() << "ImageFactory::imageById() - empty id" << endl;
+//    myDebug() << "ImageFactory::imageById() - empty id" << endl;
     return s_null;
   }
 //  myLog() << "ImageFactory::imageById() - " << id_ << endl;
@@ -385,43 +385,53 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     }
   }
 
-  // don't check Config::writeImagesInFile(), someday we might have problems
-  // and the image will exist in the data dir, but the app thinks everything should
-  // be in the zip file instead
-  bool exists = QFile::exists(dataDir() + id_);
-  if(exists) {
-    // if we're loading from the application data dir, but images are being saved in the
-    // data file instead, then consider the document to be modified since it needs
-    // the image saved
-    if(Config::imageLocation() != Config::ImagesInAppDir) {
+  if(Config::imageLocation() == Config::ImagesInLocalDir) {
+    bool exists = QFile::exists(localDir() + id_);
+    if(exists) {
+      const Data::Image& img2 = addCachedImageImpl(id_, LocalDir);
+      if(img2.isNull()) {
+        myDebug() << "ImageFactory::imageById() - tried to add from LocalDir, but failed: " << id_ << endl;
+      } else {
+//        myLog() << "...imageById() - found in local dir" << endl;
+        return img2;
+      }
+    }
+    // not an else statement, it might be null
+    if(QFile::exists(dataDir() + id_)) {
+      // the img is in the other location
+      // consider the document to be modified since it needs the image saved
       Data::Document::self()->slotSetModified(true);
+      const Data::Image& img2 = addCachedImageImpl(id_, DataDir);
+      if(img2.isNull()) {
+        myDebug() << "ImageFactory::imageById() - tried to add from DataDir, but failed: " << id_ << endl;
+      } else {
+//        myLog() << "...imageById() - found in data dir" << endl;
+        return img2;
+      }
     }
-    const Data::Image& img2 = addCachedImageImpl(id_, DataDir);
-    if(img2.isNull()) {
-      myDebug() << "ImageFactory::imageById() - tried to add from DataDir, but failed: " << id_ << endl;
-    } else {
-//      myLog() << "...imageById() - found in data dir" << endl;
-      return img2;
+  } else if(Config::imageLocation() == Config::ImagesInAppDir) {
+    bool exists = QFile::exists(dataDir() + id_);
+    if(exists) {
+      const Data::Image& img2 = addCachedImageImpl(id_, DataDir);
+      if(img2.isNull()) {
+        myDebug() << "ImageFactory::imageById() - tried to add from DataDir, but failed: " << id_ << endl;
+      } else {
+//        myLog() << "...imageById() - found in data dir" << endl;
+        return img2;
+      }
     }
-  }
-  // if localDir() == DataDir(), then there's nothing left to check
-  if(localDir() == dataDir()) {
-    return s_null;
-  }
-  exists = QFile::exists(localDir() + id_);
-  if(exists) {
-    // if we're loading from the application data dir, but images are being saved in the
-    // data file instead, then consider the document to be modified since it needs
-    // the image saved
-    if(Config::imageLocation() != Config::ImagesInLocalDir) {
+    // not an else statement, it might be null
+    if(QFile::exists(localDir() + id_)) {
+      // the img is in the other location
+      // consider the document to be modified since it needs the image saved
       Data::Document::self()->slotSetModified(true);
-    }
-    const Data::Image& img2 = addCachedImageImpl(id_, LocalDir);
-    if(img2.isNull()) {
-      myDebug() << "ImageFactory::imageById() - tried to add from LocalDir, but failed: " << id_ << endl;
-    } else {
-//      myLog() << "...imageById() - found in data dir" << endl;
-      return img2;
+      const Data::Image& img2 = addCachedImageImpl(id_, LocalDir);
+      if(img2.isNull()) {
+        myDebug() << "ImageFactory::imageById() - tried to add from LocalDir, but failed: " << id_ << endl;
+      } else {
+//        myLog() << "...imageById() - found in local dir" << endl;
+        return img2;
+      }
     }
   }
   myDebug() << "***ImageFactory::imageById() - not found: " << id_ << endl;

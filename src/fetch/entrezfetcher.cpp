@@ -34,7 +34,7 @@
 //#define ENTREZ_TEST
 
 namespace {
-  static const int ENTREZ_MAX_RETURNS_TOTAL = 25;
+  static const size_t ENTREZ_MAX_RETURNS_TOTAL = 25;
   static const char* ENTREZ_BASE_URL = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
   static const char* ENTREZ_SEARCH_CGI = "esearch.fcgi";
   static const char* ENTREZ_SUMMARY_CGI = "esummary.fcgi";

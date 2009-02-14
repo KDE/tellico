@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "isbnvalidator.h"
+#include "upcvalidator.h"
 #include "tellico_debug.h"
 
 using Tellico::ISBNValidator;
@@ -58,6 +59,13 @@ ISBNValidator::ISBNValidator(QObject* parent_, const char* name_/*=0*/)
 }
 
 QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
+  // check if it's a cuecat first
+  State catState = CueCat::decode(input_);
+  if(catState != Invalid) {
+    pos_ = input_.length();
+    return catState;
+  }
+
   if(input_.startsWith(QString::fromLatin1("978")) ||
      input_.startsWith(QString::fromLatin1("979"))) {
     return validate13(input_, pos_);

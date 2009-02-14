@@ -15,6 +15,7 @@
 #include "mainwindow.h" // needed for calling fileSave()
 #include "collectionfactory.h"
 #include "translators/tellicoimporter.h"
+#include "translators/tellicosaximporter.h"
 #include "translators/tellicozipexporter.h"
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
@@ -109,7 +110,12 @@ bool Document::openDocument(const KURL& url_) {
   }
 
   delete m_importer;
+#ifdef SAX_SUPPORT
+  myLog() << "Document::openDocument() - using SAX loader" << endl;
+  m_importer = new Import::TellicoSaxImporter(url_, m_loadAllImages);
+#else
   m_importer = new Import::TellicoImporter(url_, m_loadAllImages);
+#endif
 
   CollPtr coll = m_importer->collection();
   // delayed image loading only works for zip files
@@ -146,6 +152,8 @@ bool Document::openDocument(const KURL& url_) {
     QTimer::singleShot(500, this, SLOT(slotLoadAllImages()));
   } else {
     emit signalCollectionImagesLoaded(m_coll);
+    m_importer->deleteLater();
+    m_importer = 0;
   }
   return true;
 }

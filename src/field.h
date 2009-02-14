@@ -385,6 +385,7 @@ private:
   FormatFlag m_formatFlag;
   StringMap m_properties;
 
+  static QStringList s_articles;
   // need to remember articles with apostrophes for capitalization
   static QStringList s_articlesApos;
   static QRegExp s_delimiter;

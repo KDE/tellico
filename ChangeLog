@@ -1,3 +1,29 @@
+2009-02-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.3.5.
+
+2009-02-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Reverted change from 2007 that merged entries by combining all values in multiple-value fields.
+
+2009-02-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed the CueCat decoder to work for ISBN searches, as well as UPC.
+
+2009-01-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Deliciour Library 1 importer to handle movies and games.
+	* Fixed Ubuntu bug#317822, don't mark collection modified when image is found in local data directory.
+	* Fixed query bug with z39.50 ISBN search.
+
+2008-12-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated it.po, thanks to Valerio Ricci.
+
+2008-10-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Added date, time, and username as available params for the XSLT export.
+
 2008-09-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 1.3.4.

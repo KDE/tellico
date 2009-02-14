@@ -65,7 +65,7 @@ QString LCCNValidator::formalize(const QString& value_) {
 
   // now check for non digits in the serial
   pos = 0;
-  for( ; pos < serial.length() && serial.at(pos).isNumber(); ++pos) { ; }
+  for( ; pos < static_cast<int>(serial.length()) && serial.at(pos).isNumber(); ++pos) { ; }
   QString suffix = serial.mid(pos);
   serial = serial.left(pos);
   // serial must be left-padded with zeros to 6 characters

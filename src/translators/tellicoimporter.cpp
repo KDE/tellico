@@ -39,11 +39,6 @@
 
 using Tellico::Import::TellicoImporter;
 
-bool TellicoImporter::versionConversion(uint from, uint to) {
-  // version 10 only added board games to version 9
-  return from < to && (from != 9 || to != 10);
-}
-
 TellicoImporter::TellicoImporter(const KURL& url_, bool loadAllImages_) : DataImporter(url_),
     m_coll(0), m_loadAllImages(loadAllImages_), m_format(Unknown), m_modified(false),
     m_cancelled(false), m_hasImages(false), m_buffer(0), m_zip(0), m_imgDir(0) {
@@ -157,7 +152,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     }
     m_format = Error;
     return;
-  } else if(versionConversion(syntaxVersion, XML::syntaxVersion)) {
+  } else if(XML::versionConversion(syntaxVersion, XML::syntaxVersion)) {
     // going form version 9 to 10, there's no conversion needed
     QString str = i18n("Tellico is converting the file to a more recent document format. "
                        "Information loss may occur if an older version of Tellico is used "
@@ -652,8 +647,9 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
 void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
   QString format = elem_.attribute(QString::fromLatin1("format"));
   const bool link = elem_.attribute(QString::fromLatin1("link")) == Latin1Literal("true");
-  QString id = shareString(link ? elem_.attribute(QString::fromLatin1("id"))
-                                : Data::Image::idClean(elem_.attribute(QString::fromLatin1("id"))));
+  // idClean() already calls shareString()
+  QString id = link ? shareString(elem_.attribute(QString::fromLatin1("id")))
+                    : Data::Image::idClean(elem_.attribute(QString::fromLatin1("id")));
 
   bool readInfo = true;
   if(loadImage_) {

@@ -82,9 +82,9 @@ private slots:
 private:
   void doSearch();
 
-  int m_limit;
-  int m_start;
-  int m_total;
+  size_t m_limit;
+  size_t m_start;
+  size_t m_total;
 
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;

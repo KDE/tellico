@@ -335,7 +335,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_import_csv");
   action->setText(i18n("Import CSV Data..."));
   action->setToolTip(i18n("Import a CSV file"));
-  action->setIcon(MIME_ICON("text/x-csv"));
+  action->setIcon(MIME_ICON("text/csv"));
   importMenu->insert(action);
   connect(action, SIGNAL(activated()), importMapper, SLOT(map()));
   importMapper->setMapping(action, Import::CSV);
@@ -505,7 +505,7 @@ void MainWindow::initActions() {
   action = new KAction(actionCollection(), "file_export_csv");
   action->setText(i18n("Export to CSV..."));
   action->setToolTip(i18n("Export to a comma-separated values file"));
-  action->setIcon(MIME_ICON("text/x-csv"));
+  action->setIcon(MIME_ICON("text/csv"));
   exportMenu->insert(action);
   connect(action, SIGNAL(activated()), exportMapper, SLOT(map()));
   exportMapper->setMapping(action, Export::CSV);
@@ -991,7 +991,7 @@ void MainWindow::saveCollectionOptions(Data::CollPtr coll_) {
         configIndex = i;
       }
     }
-    uint limit = QMIN(urls.count(), Config::maxCustomURLSettings());
+    size_t limit = QMIN(urls.count(), Config::maxCustomURLSettings());
     for(uint i = 0; i < limit; ++i) {
       config.writeEntry(QString::fromLatin1("URL_%1").arg(i), urls[i].url());
       config.writeEntry(QString::fromLatin1("Group By_%1").arg(i), groupBys[i]);
@@ -1531,11 +1531,11 @@ void MainWindow::slotEntryCount() {
     return;
   }
 
-  int count = coll->entryCount();
+  size_t count = coll->entryCount();
   QString text = i18n("Total entries: %1").arg(count);
 
-  int selectCount = Controller::self()->selectedEntries().count();
-  int filterCount = m_detailedView->visibleItems();
+  size_t selectCount = Controller::self()->selectedEntries().count();
+  size_t filterCount = m_detailedView->visibleItems();
   // if more than one book is selected, add the number of selected books
   if(filterCount < count && selectCount > 1) {
     text += QChar(' ');

@@ -36,10 +36,13 @@ signals:
   void signalISBN();
 
 private:
-  State decodeCat(QString& str) const;
-
   bool m_checkISBN : 1;
   mutable bool m_isbn : 1;
+};
+
+class CueCat {
+public:
+  static QValidator::State decode(QString& str);
 };
 
 } // end namespace

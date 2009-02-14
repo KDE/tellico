@@ -35,7 +35,9 @@ DeliciousImporter::DeliciousImporter(const KURL& url_) : XSLTImporter(url_) {
 }
 
 bool DeliciousImporter::canImport(int type) const {
-  return type == Data::Collection::Book;
+  return type == Data::Collection::Book ||
+         type == Data::Collection::Video ||
+         type == Data::Collection::Game;
 }
 
 Tellico::Data::CollPtr DeliciousImporter::collection() {
@@ -51,7 +53,18 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
                               << QString::fromLatin1("Medium Covers/")
                               << QString::fromLatin1("Small Covers/")
                               << QString::fromLatin1("Plain Covers/");
-  const QString commField = QString::fromLatin1("comments");
+  QString commField;
+  switch(coll->type()) {
+    case Data::Collection::Book:
+      commField = QString::fromLatin1("comments"); break;
+    case Data::Collection::Video:
+      commField = QString::fromLatin1("plot"); break;
+    case Data::Collection::Game:
+      commField = QString::fromLatin1("description"); break;
+    default:
+      myWarning() << "bad collection type:" << coll->type() << endl;
+  }
+
   const QString uuidField = QString::fromLatin1("uuid");
   const QString coverField = QString::fromLatin1("cover");
   const bool isLocal = url().isLocalFile();

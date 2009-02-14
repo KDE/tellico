@@ -127,8 +127,8 @@ sorttable = {
     
     if (!document.createElement || !document.getElementsByTagName) return;
     
-    sorttable.DATE_RE = /^(\d\d)[\/\.-](\d\d?)[\/\.-]((\d\d)?\d\d)$/;
-    sorttable.YYMMDD_RE = /^((\d\d)?\d\d)[\/\.-](\d\d?)[\/\.-](\d\d)$/;
+    sorttable.DATE_RE = /^(\d\d?)[\/\.-](\d\d?)[\/\.-](\d{4}|\d\d)$/;
+    sorttable.YYMMDD_RE = /^(\d{4}|\d\d)[\/\.-](\d\d?)[\/\.-](\d\d?)$/;
     
     forEach(document.getElementsByTagName('table'), function(table) {
       if (table.className.search(/\bsortable\b/) != -1) {
@@ -371,7 +371,8 @@ sorttable = {
     if (mtch) {
       y = mtch[1]; m = mtch[2]; d = mtch[3];
       // y2k notes: two digit years less than 50 are treated as 20XX, greater than 50 are treated as 19XX
-      if (parseInt(y) < 50) y = '20'+y; else y = '19'+y;
+      if (y.length == 2)
+        if (parseInt(y) < 50) y = '20'+y; else y = '19'+y;
       if (m.length == 1) m = '0'+m;
       if (d.length == 1) d = '0'+d;
       dt1 = y+m+d;
@@ -379,7 +380,8 @@ sorttable = {
     mtch = b[0].match(sorttable.YYMMDD_RE);
     if (mtch) {
       y = mtch[1]; m = mtch[2]; d = mtch[3];
-      if (parseInt(y) < 50) y = '20'+y; else y = '19'+y;
+      if (y.length == 2)
+        if (parseInt(y) < 50) y = '20'+y; else y = '19'+y;
       if (m.length == 1) m = '0'+m;
       if (d.length == 1) d = '0'+d;
       dt2 = y+m+d;

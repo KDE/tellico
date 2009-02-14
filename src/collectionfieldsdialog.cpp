@@ -407,7 +407,7 @@ void CollectionFieldsDialog::slotNew() {
   }
 
   QString name = QString::fromLatin1("custom") + QString::number(m_newFields.count()+1);
-  int count = m_newFields.count() + 1;
+  size_t count = m_newFields.count() + 1;
   QString title = i18n("New Field") + QString::fromLatin1(" %1").arg(count);
   while(m_fieldsBox->findItem(title)) {
     ++count;

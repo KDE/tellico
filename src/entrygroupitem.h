@@ -51,7 +51,7 @@ public:
    */
   virtual QString key(int col, bool) const;
 
-  virtual int count() const;
+  virtual size_t count() const;
   virtual Data::EntryVec entries() const;
 
 private:

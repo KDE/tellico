@@ -31,6 +31,7 @@
 #include <kio/netaccess.h>
 #include <kapplication.h>
 #include <klocale.h>
+#include <kuser.h>
 
 #include <qdom.h>
 #include <qgroupbox.h>
@@ -192,6 +193,9 @@ bool HTMLExporter::loadXSLTFile() {
     m_handler = 0;
     return false;
   }
+  m_handler->addStringParam("date", QDate::currentDate().toString(Qt::ISODate).latin1());
+  m_handler->addStringParam("time", QTime::currentTime().toString(Qt::ISODate).latin1());
+  m_handler->addStringParam("user", KUser(KUser::UseRealUserID).loginName().latin1());
 
   if(m_exportEntryFiles) {
     // export entries to same place as all the other date files

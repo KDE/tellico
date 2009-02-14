@@ -34,9 +34,13 @@ public:
 
   virtual QWidget* widget(QWidget* parent, const char* name=0);
 
+  virtual void readOptions(KConfig* cfg);
+  virtual void saveOptions(KConfig* cfg);
+
 private:
   QWidget* m_widget;
   KURLRequester* m_URLRequester;
+  QString m_xsltFile;
 };
 
   } // end namespace

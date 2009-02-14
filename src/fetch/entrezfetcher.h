@@ -91,8 +91,8 @@ private:
   XSLTHandler* m_xsltHandler;
   QString m_dbname;
 
-  int m_start;
-  int m_total;
+  size_t m_start;
+  size_t m_total;
 
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry

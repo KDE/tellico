@@ -878,6 +878,9 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askU
       if(ret) {
         e1->setField(field, vals1.join(QString::fromLatin1("; ")));
       }
+// remove the merging due to use comments
+// maybe in the future have a more intelligent way
+#if 0
     } else if(field->flags() & Data::Field::AllowMultiple) {
       // if field F allows multiple values and not a Table (see above case),
       // e1's F values = (e1's F values) U (e2's F values) (union)
@@ -894,6 +897,7 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askU
 //      items1.sort();
       e1->setField(field, items1.join(QString::fromLatin1("; ")));
       ret = true;
+#endif
     } else if(askUser_ && e1->field(field) != e2->field(field)) {
       int ret = Kernel::self()->askAndMerge(e1, e2, field);
       if(ret == 0) {

@@ -29,7 +29,7 @@ public:
   virtual bool isBorrowerItem() const { return true; }
   Data::BorrowerPtr borrower() { return m_borrower; }
 
-  virtual int count() const;
+  virtual size_t count() const;
   virtual Data::EntryVec entries() const;
 
 private:

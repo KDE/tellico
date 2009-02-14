@@ -25,7 +25,7 @@ BorrowerItem::BorrowerItem(GUI::ListView* parent_, Data::BorrowerPtr borrower_)
   setPixmap(0, SmallIcon(QString::fromLatin1("kaddressbook")));
 }
 
-int BorrowerItem::count() const {
+size_t BorrowerItem::count() const {
   return m_borrower ? m_borrower->count() : GUI::CountedItem::count();
 }
 

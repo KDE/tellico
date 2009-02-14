@@ -12,9 +12,9 @@ libtranslators_a_SOURCES = alexandriaexporter.cpp alexandriaimporter.cpp \
 	filelistingimporter.cpp freedb_util.cpp freedbimporter.cpp gcfilmsexporter.cpp \
 	gcfilmsimporter.cpp griffithimporter.cpp grs1importer.cpp htmlexporter.cpp libcsv.c \
 	onixexporter.cpp pdfimporter.cpp pilotdbexporter.cpp referencerimporter.cpp \
-	risimporter.cpp tellico_xml.cpp tellicoimporter.cpp tellicoxmlexporter.cpp \
-	tellicozipexporter.cpp textimporter.cpp xmlimporter.cpp xsltexporter.cpp xslthandler.cpp \
-	xsltimporter.cpp
+	risimporter.cpp tellico_xml.cpp tellicoimporter.cpp tellicosaximporter.cpp \
+	tellicoxmlexporter.cpp tellicoxmlhandler.cpp tellicozipexporter.cpp textimporter.cpp \
+	xmlimporter.cpp xmlstatehandler.cpp xsltexporter.cpp xslthandler.cpp xsltimporter.cpp
 
 if !USE_LIBBTPARSE
   SUBDIR_LIBBTPARSE = btparse
@@ -51,7 +51,10 @@ dcimporter.h             dcimporter.cpp           griffithimporter.h \
 griffithimporter.cpp     griffith2tellico.py      pdfimporter.h \
 pdfimporter.cpp          referencerimporter.h     referencerimporter.cpp \
 libcsv.h                 libcsv.c \
-deliciousimporter.h      deliciousimporter.cpp
+deliciousimporter.h      deliciousimporter.cpp \
+tellicosaximporter.h     tellicosaximporter.cpp \
+tellicoxmlhandler.h      tellicoxmlhandler.cpp \
+xmlstatehandler.h        xmlstatehandler.cpp
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -68,3 +71,4 @@ KDE_OPTIONS = noautodist
 appdir = $(kde_datadir)/tellico
 app_DATA = bibtex-translation.xml
 app_SCRIPTS = griffith2tellico.py
+

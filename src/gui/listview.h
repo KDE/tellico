@@ -138,7 +138,7 @@ public:
   ListViewItem(ListViewItem* parent, const QString& text) : KListViewItem(parent, text), m_sortWeight(-1) {}
   virtual ~ListViewItem();
 
-  virtual int realChildCount() const { return childCount(); }
+  virtual size_t realChildCount() const { return childCount(); }
   virtual void clear();
 
   virtual bool isEntryGroupItem() const { return false; }

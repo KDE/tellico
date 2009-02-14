@@ -17,6 +17,8 @@ drophandler.h drophandler.cpp \
 tellico-rename.upd tellico.upd \
 tellico-1-3-update.pl
 
+dcopinterface_DCOPIDLNG = ALL
+
 kde_kcfg_DATA = tellico_config.kcfg
 
 updatedir = $(kde_datadir)/kconf_update

@@ -365,7 +365,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
     }
   }
   if(cdtext.trackTitles.size() != cdtext.trackArtists.size()) {
-    int size = QMAX(cdtext.trackTitles.size(), cdtext.trackArtists.size());
+    size_t size = QMAX(cdtext.trackTitles.size(), cdtext.trackArtists.size());
     cdtext.trackTitles.resize(size);
     cdtext.trackArtists.resize(size);
   }

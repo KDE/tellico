@@ -66,6 +66,9 @@
 /* Define if you have libz */
 #undef HAVE_LIBZ
 
+/* Define to 1 if you have the <linux/videodev.h> header file. */
+#undef HAVE_LINUX_VIDEODEV_H
+
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
@@ -173,6 +176,9 @@
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
+
+/* Define to 1 if the XML loader should use SAX */
+#undef SAX_SUPPORT
 
 /* The size of `char', as computed by sizeof. */
 #undef SIZEOF_CHAR

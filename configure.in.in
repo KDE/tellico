@@ -1,6 +1,6 @@
 #MIN_CONFIG(3.3)
 
-AM_INIT_AUTOMAKE(tellico,1.3.4)
+AM_INIT_AUTOMAKE(tellico,1.3.5)
 
 dnl AM_KDE_MIN_VERSION(MIN-VERSION-MAJOR, MIN-VERSION-MINOR, MIN-VERSION-MICRO)
 dnl (taken from KMyMoney2)
@@ -426,7 +426,8 @@ AC_ARG_WITH([ooo-dir],
 	    AC_HELP_STRING([--with-ooo-dir=DIR],
 			   [where the OpenOffice.org program files are installed]),
 	    [ac_ooo_libdir="${withval}/program"
-	     ac_ooo_datadir="${withval}/program"])
+	     ac_ooo_datadir="${withval}/program"
+             ac_ooo_basisdir="${withval}/basis3.0"])
 AC_ARG_WITH([ooo-libdir],
 	    AC_HELP_STRING([--with-ooo-libdir=DIR],
 			   [where the OpenOffice.org program libraries are installed (<ooo-dir>/program)]),
@@ -476,6 +477,13 @@ dnl OpenOffice.org types.rdb
 AC_CHECK_FILE([$ac_ooo_datadir/types.rdb],
 	      [OFFICE_registry="$ac_ooo_datadir"/types.rdb],
 	      AC_MSG_ERROR([[types.rdb not found, try '--with-ooo-dir=OpenOffice.org_installation_path']]))
+
+AC_FIND_FILE([offapi.rdb],
+             [$ac_ooo_basisdir/program $ac_ooo_libdir $ac_ooo_datadir],
+             offapi_dir)
+if test "$offapi_dir" != "NO"; then
+  OFFICE_registry="$OFFICE_registry $offapi_dir/offapi.rdb"
+fi
 
 dnl Substitute the values
 AC_SUBST(OFFICE_SDK_includes)
@@ -544,9 +552,29 @@ AC_ARG_ENABLE(webcam,
     [enable_webcam=no]
 )
 
+if test x$enable_webcam = xyes; then
+    KDE_CHECK_HEADERS([linux/videodev.h],
+		     [],
+		     [enable_webcam="no"])
+fi
+
 AM_CONDITIONAL(ENABLE_WEBCAM, test $enable_webcam = yes)
 if test x$enable_webcam = xyes; then
     AC_DEFINE(ENABLE_WEBCAM, 1, [Define to 1 if webcam support is enabled])
 fi
 
 dnl ---------- END WEBCAM CHECK ----------
+
+dnl ---------- SAX CHECK ----------
+
+AC_ARG_ENABLE(sax,
+    AC_HELP_STRING([--enable-sax], [enable SAX document loading (experimental), default=disable]),
+    [enable_sax=$enableval],
+    [enable_sax=no]
+)
+
+if test x$enable_sax = xyes; then
+    AC_DEFINE(SAX_SUPPORT, 1, [Define to 1 if the XML loader should use SAX])
+fi
+
+dnl ---------- END SAX CHECK ----------

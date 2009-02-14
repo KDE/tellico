@@ -362,6 +362,7 @@ target_alias = @target_alias@
 target_cpu = @target_cpu@
 target_os = @target_os@
 target_vendor = @target_vendor@
+top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 x_includes = @x_includes@
@@ -389,6 +390,7 @@ drophandler.h drophandler.cpp \
 tellico-rename.upd tellico.upd \
 tellico-1-3-update.pl
 
+dcopinterface_DCOPIDLNG = ALL
 kde_kcfg_DATA = tellico_config.kcfg
 updatedir = $(kde_datadir)/kconf_update
 update_DATA = tellico-rename.upd tellico.upd
@@ -738,7 +740,7 @@ uninstall-am: uninstall-kde_kcfgDATA uninstall-updateDATA \
 
 #>+ 5
 dcopinterface.kidl: $(srcdir)/dcopinterface.h $(DCOP_DEPENDENCIES)
-	$(DCOPIDL) $(srcdir)/dcopinterface.h > dcopinterface.kidl || ( rm -f dcopinterface.kidl ; false )
+	KDECONFIG="$(KDECONFIG)" $(DCOPIDLNG) $(srcdir)/dcopinterface.h > dcopinterface.kidl || ( rm -f dcopinterface.kidl ; false )
 dcopinterface_skel.cpp: dcopinterface.kidl
 	$(DCOPIDL2CPP) --c++-suffix cpp --no-signals --no-stub dcopinterface.kidl
 

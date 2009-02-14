@@ -18,6 +18,8 @@
 
 #include <klocale.h>
 #include <kurlrequester.h>
+#include <kuser.h>
+#include <kconfig.h>
 
 #include <qlabel.h>
 #include <qgroupbox.h>
@@ -49,6 +51,9 @@ bool XSLTExporter::exec() {
   }
   //  XSLTHandler handler(FileHandler::readXMLFile(url));
   XSLTHandler handler(u);
+  handler.addStringParam("date", QDate::currentDate().toString(Qt::ISODate).latin1());
+  handler.addStringParam("time", QTime::currentTime().toString(Qt::ISODate).latin1());
+  handler.addStringParam("user", KUser(KUser::UseRealUserID).loginName().latin1());
 
   TellicoXMLExporter exporter;
   exporter.setEntries(entries());
@@ -75,6 +80,25 @@ QWidget* XSLTExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
   m_URLRequester = new KURLRequester(box);
   QWhatsThis::add(m_URLRequester, i18n("Choose the XSLT file used to transform the Tellico XML data."));
 
+  QString filter = i18n("*.xsl|XSL Files (*.xsl)") + QChar('\n');
+  filter += i18n("*|All Files");
+  m_URLRequester->setFilter(filter);
+  m_URLRequester->setMode(static_cast<KFile::Mode>(KFile::File | KFile::ExistingOnly));
+  if(!m_xsltFile.isEmpty()) {
+    m_URLRequester->setURL(m_xsltFile);
+  }
+
   l->addStretch(1);
   return m_widget;
+}
+
+void XSLTExporter::readOptions(KConfig* config_) {
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_xsltFile = group.readEntry("Last File", QString());
+}
+
+void XSLTExporter::saveOptions(KConfig* config_) {
+  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  m_xsltFile = m_URLRequester->url();
+  group.writeEntry("Last File", m_xsltFile);
 }

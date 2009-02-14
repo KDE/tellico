@@ -131,7 +131,7 @@ QString EntryGroupItem::key(int col_, bool) const {
   return m_key;
 }
 
-int EntryGroupItem::count() const {
+size_t EntryGroupItem::count() const {
   return m_group ? m_group->count() : GUI::CountedItem::count();
 }
 

@@ -25,11 +25,11 @@ static const char* const ApplicationInterface_ftable[16][3] = {
     { "bool", "exportHTML(QString)", "exportHTML(QString file)" },
     { "bool", "exportCSV(QString)", "exportCSV(QString file)" },
     { "bool", "exportPilotDB(QString)", "exportPilotDB(QString file)" },
-    { "QValueList<long int>", "selectedEntries()", "selectedEntries()" },
-    { "QValueList<long int>", "filteredEntries()", "filteredEntries()" },
+    { "QValueList<long>", "selectedEntries()", "selectedEntries()" },
+    { "QValueList<long>", "filteredEntries()", "filteredEntries()" },
     { "void", "openFile(QString)", "openFile(QString file)" },
     { "void", "setFilter(QString)", "setFilter(QString text)" },
-    { "bool", "showEntry(long int)", "showEntry(long int id)" },
+    { "bool", "showEntry(long)", "showEntry(long id)" },
     { 0, 0, 0 }
 };
 static const int ApplicationInterface_ftable_hiddens[15] = {
@@ -162,12 +162,12 @@ bool ApplicationInterface::process(const QCString &fun, const QByteArray &data, 
 	QDataStream _replyStream( replyData, IO_WriteOnly );
 	_replyStream << exportPilotDB(arg0 );
     } break;
-    case 10: { // QValueList<long int> selectedEntries()
+    case 10: { // QValueList<long> selectedEntries()
 	replyType = ApplicationInterface_ftable[10][0]; 
 	QDataStream _replyStream( replyData, IO_WriteOnly );
 	_replyStream << selectedEntries( );
     } break;
-    case 11: { // QValueList<long int> filteredEntries()
+    case 11: { // QValueList<long> filteredEntries()
 	replyType = ApplicationInterface_ftable[11][0]; 
 	QDataStream _replyStream( replyData, IO_WriteOnly );
 	_replyStream << filteredEntries( );
@@ -188,8 +188,8 @@ bool ApplicationInterface::process(const QCString &fun, const QByteArray &data, 
 	replyType = ApplicationInterface_ftable[13][0]; 
 	setFilter(arg0 );
     } break;
-    case 14: { // bool showEntry(long int)
-	long int arg0;
+    case 14: { // bool showEntry(long)
+	long arg0;
 	QDataStream arg( data, IO_ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
@@ -233,14 +233,14 @@ namespace Tellico {
 
 static const int CollectionInterface_fhash = 11;
 static const char* const CollectionInterface_ftable[9][3] = {
-    { "long int", "addEntry()", "addEntry()" },
-    { "bool", "removeEntry(long int)", "removeEntry(long int entryID)" },
+    { "long", "addEntry()", "addEntry()" },
+    { "bool", "removeEntry(long)", "removeEntry(long entryID)" },
     { "QStringList", "values(QString)", "values(QString fieldName)" },
-    { "QStringList", "values(long int,QString)", "values(long int entryID,QString fieldName)" },
+    { "QStringList", "values(long,QString)", "values(long entryID,QString fieldName)" },
     { "QStringList", "bibtexKeys()", "bibtexKeys()" },
-    { "QString", "bibtexKey(long int)", "bibtexKey(long int entryID)" },
-    { "bool", "setFieldValue(long int,QString,QString)", "setFieldValue(long int entryID,QString fieldName,QString value)" },
-    { "bool", "addFieldValue(long int,QString,QString)", "addFieldValue(long int entryID,QString fieldName,QString value)" },
+    { "QString", "bibtexKey(long)", "bibtexKey(long entryID)" },
+    { "bool", "setFieldValue(long,QString,QString)", "setFieldValue(long entryID,QString fieldName,QString value)" },
+    { "bool", "addFieldValue(long,QString,QString)", "addFieldValue(long entryID,QString fieldName,QString value)" },
     { 0, 0, 0 }
 };
 static const int CollectionInterface_ftable_hiddens[8] = {
@@ -264,13 +264,13 @@ bool CollectionInterface::process(const QCString &fun, const QByteArray &data, Q
     }
     int* fp = fdict->find( fun );
     switch ( fp?*fp:-1) {
-    case 0: { // long int addEntry()
+    case 0: { // long addEntry()
 	replyType = CollectionInterface_ftable[0][0]; 
 	QDataStream _replyStream( replyData, IO_WriteOnly );
 	_replyStream << addEntry( );
     } break;
-    case 1: { // bool removeEntry(long int)
-	long int arg0;
+    case 1: { // bool removeEntry(long)
+	long arg0;
 	QDataStream arg( data, IO_ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
@@ -287,8 +287,8 @@ bool CollectionInterface::process(const QCString &fun, const QByteArray &data, Q
 	QDataStream _replyStream( replyData, IO_WriteOnly );
 	_replyStream << values(arg0 );
     } break;
-    case 3: { // QStringList values(long int,QString)
-	long int arg0;
+    case 3: { // QStringList values(long,QString)
+	long arg0;
 	QString arg1;
 	QDataStream arg( data, IO_ReadOnly );
 	if (arg.atEnd()) return false;
@@ -304,8 +304,8 @@ bool CollectionInterface::process(const QCString &fun, const QByteArray &data, Q
 	QDataStream _replyStream( replyData, IO_WriteOnly );
 	_replyStream << bibtexKeys( );
     } break;
-    case 5: { // QString bibtexKey(long int)
-	long int arg0;
+    case 5: { // QString bibtexKey(long)
+	long arg0;
 	QDataStream arg( data, IO_ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
@@ -313,8 +313,8 @@ bool CollectionInterface::process(const QCString &fun, const QByteArray &data, Q
 	QDataStream _replyStream( replyData, IO_WriteOnly );
 	_replyStream << bibtexKey(arg0 );
     } break;
-    case 6: { // bool setFieldValue(long int,QString,QString)
-	long int arg0;
+    case 6: { // bool setFieldValue(long,QString,QString)
+	long arg0;
 	QString arg1;
 	QString arg2;
 	QDataStream arg( data, IO_ReadOnly );
@@ -328,8 +328,8 @@ bool CollectionInterface::process(const QCString &fun, const QByteArray &data, Q
 	QDataStream _replyStream( replyData, IO_WriteOnly );
 	_replyStream << setFieldValue(arg0, arg1, arg2 );
     } break;
-    case 7: { // bool addFieldValue(long int,QString,QString)
-	long int arg0;
+    case 7: { // bool addFieldValue(long,QString,QString)
+	long arg0;
 	QString arg1;
 	QString arg2;
 	QDataStream arg( data, IO_ReadOnly );

@@ -13,6 +13,7 @@
 
 #include "upcvalidator.h"
 #include "isbnvalidator.h"
+#include "tellico_debug.h"
 
 #include <kmdcodec.h>
 
@@ -24,7 +25,7 @@ UPCValidator::UPCValidator(QObject* parent_, const char* name_/*=0*/)
 
 QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {
   // check if it's a cuecat first
-  State catState = decodeCat(input_);
+  State catState = CueCat::decode(input_);
   if(catState == Acceptable) {
     pos_ = input_.length();
     return catState;
@@ -91,18 +92,18 @@ void UPCValidator::fixup(QString& input_) const {
   }
 }
 
-QValidator::State UPCValidator::decodeCat(QString& input_) const {
+QValidator::State Tellico::CueCat::decode(QString& input_) {
   if(input_.length() < 3) {
-    return Intermediate;
+    return QValidator::Intermediate;
   }
  if(!input_.startsWith(QString::fromLatin1(".C3"))) { // all cuecat codes start with .C3
-    return Invalid;
+    return QValidator::Invalid;
   }
   const int periods = input_.contains('.');
   if(periods < 4) {
-    return Intermediate; // not enough yet
+    return QValidator::Intermediate; // not enough yet
   } else if(periods > 4) {
-    return Invalid;
+    return QValidator::Invalid;
   }
 
   // ok, let's have a go, take the third token
@@ -127,7 +128,7 @@ QValidator::State UPCValidator::decodeCat(QString& input_) const {
   }
 
   input_ = code;
-  return Acceptable;
+  return QValidator::Acceptable;
 }
 
 #include "upcvalidator.moc"

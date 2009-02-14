@@ -78,7 +78,7 @@ public:
   const QString& name() const { return m_name; }
   const LoanVec& loans() const { return m_loans; }
   bool isEmpty() const { return m_loans.isEmpty(); }
-  int count() const { return m_loans.count(); }
+  size_t count() const { return m_loans.count(); }
 
   Data::LoanPtr loan(Data::ConstEntryPtr entry);
   void addLoan(Data::LoanPtr loan);

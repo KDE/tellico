@@ -63,6 +63,12 @@ QString Tellico::XML::dtdTellico(int version) {
   return QString::fromLatin1("http://periapsis.org/tellico/dtd/v%1/tellico.dtd").arg(version);
 }
 
+// returns true if the file has to be converted
+// version 9 to 10 requires no conversion since it only added board games
+bool Tellico::XML::versionConversion(uint from, uint to) {
+  return from < to && (from != 9 || to != 10);
+}
+
 bool Tellico::XML::validXMLElementName(const QString& name_) {
   return xmlValidateNameValue((xmlChar *)name_.utf8().data());
 }

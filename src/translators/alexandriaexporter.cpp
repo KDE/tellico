@@ -77,7 +77,7 @@ bool AlexandriaExporter::exec() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString::null, false);
   item.setTotalSteps(entries().count());
   ProgressItem::Done done(this);
-  const uint stepSize = QMIN(1, entries().count()/100);
+  const uint stepSize = QMAX(1, entries().count()/100);
   const bool showProgress = options() & ExportProgress;
 
   GUI::CursorSaver cs;

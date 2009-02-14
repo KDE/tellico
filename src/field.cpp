@@ -32,6 +32,7 @@ namespace {
 using Tellico::Data::Field;
 
 //these get overwritten, but are here since they're static
+QStringList Field::s_articles;
 QStringList Field::s_articlesApos;
 QRegExp Field::s_delimiter = QRegExp(QString::fromLatin1("\\s*;\\s*"));
 
@@ -260,8 +261,7 @@ QString Field::formatTitle(const QString& title_) {
   if(Config::autoFormat()) {
     const QString lower = newTitle.lower();
     // TODO if the title has ",the" at the end, put it at the front
-    const QStringList& articles = Config::articleList();
-    for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
+    for(QStringList::ConstIterator it = s_articles.constBegin(); it != s_articles.constEnd(); ++it) {
       // assume white space is already stripped
       // the articles are already in lower-case
       if(lower.startsWith(*it + QChar(' '))) {
@@ -415,7 +415,7 @@ QString Field::capitalize(QString str_) {
 
   QString word = str_.mid(0, pos);
   // now check to see if words starts with apostrophe list
-  for(QStringList::ConstIterator it = s_articlesApos.begin(); it != s_articlesApos.end(); ++it) {
+  for(QStringList::ConstIterator it = s_articlesApos.constBegin(); it != s_articlesApos.constEnd(); ++it) {
     if(word.lower().startsWith(*it)) {
       uint l = (*it).length();
       str_.replace(l, 1, str_.at(l).upper());
@@ -432,7 +432,7 @@ QString Field::capitalize(QString str_) {
     word = str_.mid(pos+1, nextPos-pos-1);
     bool aposMatch = false;
     // now check to see if words starts with apostrophe list
-    for(QStringList::ConstIterator it = s_articlesApos.begin(); it != s_articlesApos.end(); ++it) {
+    for(QStringList::ConstIterator it = s_articlesApos.constBegin(); it != s_articlesApos.constEnd(); ++it) {
       if(word.lower().startsWith(*it)) {
         uint l = (*it).length();
         str_.replace(pos+l+1, 1, str_.at(pos+l+1).upper());
@@ -455,8 +455,7 @@ QString Field::capitalize(QString str_) {
 
 QString Field::sortKeyTitle(const QString& title_) {
   const QString lower = title_.lower();
-  const QStringList& articles = Config::articleList();
-  for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
+  for(QStringList::ConstIterator it = s_articles.constBegin(); it != s_articles.constEnd(); ++it) {
     // assume white space is already stripped
     // the articles are already in lower-case
     if(lower.startsWith(*it + QChar(' '))) {
@@ -464,7 +463,7 @@ QString Field::sortKeyTitle(const QString& title_) {
     }
   }
   // check apostrophes, too
-  for(QStringList::ConstIterator it = s_articlesApos.begin(); it != s_articlesApos.end(); ++it) {
+  for(QStringList::ConstIterator it = s_articlesApos.constBegin(); it != s_articlesApos.constEnd(); ++it) {
     if(lower.startsWith(*it)) {
       return title_.mid((*it).length());
     }
@@ -474,9 +473,9 @@ QString Field::sortKeyTitle(const QString& title_) {
 
 // articles should all be in lower-case
 void Field::articlesUpdated() {
-  const QStringList articles = Config::articleList();
+  s_articles = Config::articleList();
   s_articlesApos.clear();
-  for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
+  for(QStringList::ConstIterator it = s_articles.constBegin(); it != s_articles.constEnd(); ++it) {
     if((*it).endsWith(QChar('\''))) {
       s_articlesApos += (*it);
     }
@@ -581,11 +580,10 @@ long Field::getID() {
 }
 
 void Field::stripArticles(QString& value) {
-  const QStringList articles = Config::articleList();
-  if(articles.isEmpty()) {
+  if(s_articles.isEmpty()) {
     return;
   }
-  for(QStringList::ConstIterator it = articles.begin(); it != articles.end(); ++it) {
+  for(QStringList::ConstIterator it = s_articles.constBegin(); it != s_articles.constEnd(); ++it) {
     QRegExp rx(QString::fromLatin1("\\b") + *it + QString::fromLatin1("\\b"));
     value.remove(rx);
   }

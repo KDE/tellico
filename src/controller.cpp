@@ -434,6 +434,7 @@ void Controller::slotDeleteSelectedEntries() {
     int ret = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str, i18n("Delete Entry"),
                                                  KGuiItem(i18n("&Delete"), QString::fromLatin1("editdelete")), dontAsk);
     if(ret != KMessageBox::Continue) {
+      m_working = false;
       return;
     }
   } else {
@@ -448,6 +449,7 @@ void Controller::slotDeleteSelectedEntries() {
                                                      i18n("Delete Multiple Entries"),
                                                      KGuiItem(i18n("&Delete"), QString::fromLatin1("editdelete")), dontAsk);
     if(ret != KMessageBox::Continue) {
+      m_working = false;
       return;
     }
   }

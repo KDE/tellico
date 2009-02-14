@@ -27,6 +27,7 @@
 namespace Tellico {
   namespace Import {
     class TellicoImporter;
+    class TellicoSaxImporter;
   }
   namespace Data {
 
@@ -226,7 +227,11 @@ private:
   bool m_loadAllImages : 1;
   KURL m_url;
   bool m_validFile : 1;
+#ifdef SAX_SUPPORT
+  QGuardedPtr<Import::TellicoSaxImporter> m_importer;
+#else
   QGuardedPtr<Import::TellicoImporter> m_importer;
+#endif
   bool m_cancelImageWriting : 1;
   int m_fileFormat;
   bool m_allImagesOnDisk : 1;

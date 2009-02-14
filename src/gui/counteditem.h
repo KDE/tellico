@@ -39,8 +39,8 @@ public:
                          int column, int width, int align);
   virtual int width(const QFontMetrics& fm, const QListView* lv, int c) const;
 
-  virtual int count() const { return childCount(); }
-  virtual int realChildCount() const { return count(); }
+  virtual size_t count() const { return childCount(); }
+  virtual size_t realChildCount() const { return count(); }
 };
 
   } // end namespace

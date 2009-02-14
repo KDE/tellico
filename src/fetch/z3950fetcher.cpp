@@ -175,13 +175,13 @@ void Z3950Fetcher::search(FetchKey key_, const QString& value_) {
             isbnList.insert(it, isbn10);
           }
         }
-        const int count = isbnList.count();
+        const size_t count = isbnList.count();
         if(count > 1) {
           m_pqn = QString::fromLatin1("@or ");
         }
-        for(int i = 0; i < count; ++i) {
+        for(size_t i = 0; i < count; ++i) {
           m_pqn += QString::fromLatin1(" @attr 1=7 ") + isbnList[i];
-          if(i < count-2) {
+          if(count > 1 && i < count-2) {
             m_pqn += QString::fromLatin1(" @or");
           }
         }

@@ -14,6 +14,7 @@
 #include "image.h"
 #include "imagefactory.h"
 #include "tellico_debug.h"
+#include "tellico_utils.h"
 
 #include <kmdcodec.h>
 #include <kpixmapio.h>
@@ -105,7 +106,7 @@ QByteArray Image::byteArray(const QImage& img_, const QCString& outputFormat_) {
 QString Image::idClean(const QString& id_) {
   static const QRegExp rx('[' + QRegExp::escape(QString::fromLatin1("/@<>#\"&%?={}|^~[]'`\\:+")) + ']');
   QString clean = id_;
-  return clean.remove(rx);
+  return shareString(clean.remove(rx));
 }
 
 void Image::setID(const QString& id_) {

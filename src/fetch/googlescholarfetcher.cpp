@@ -28,7 +28,7 @@
 #include <qlayout.h>
 
 namespace {
-  static const int GOOGLE_MAX_RETURNS_TOTAL = 20;
+  static const size_t GOOGLE_MAX_RETURNS_TOTAL = 20;
   static const char* SCHOLAR_BASE_URL = "http://scholar.google.com/scholar";
 }
 
@@ -157,7 +157,7 @@ void GoogleScholarFetcher::slotComplete(KIO::Job* job_) {
 
   QString text = QString::fromUtf8(m_data, m_data.size());
   QString bibtex;
-  int count = 0;
+  size_t count = 0;
   for(int pos = text.find(m_bibtexRx); count < m_limit && pos > -1; pos = text.find(m_bibtexRx, pos+m_bibtexRx.matchedLength()), ++count) {
     KURL bibtexUrl(QString::fromLatin1(SCHOLAR_BASE_URL), m_bibtexRx.cap(1));
 //    myDebug() << bibtexUrl << endl;

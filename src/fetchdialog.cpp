@@ -591,6 +591,10 @@ void FetchDialog::slotMultipleISBN(bool toggle_) {
     m_valueLineEdit->setText(val);
   }
   m_editISBN->setEnabled(toggle_);
+  if(toggle_) {
+    // if we're editing multiple values, it makes sense to popup the dialog now
+    slotEditMultipleISBN();
+  }
 }
 
 void FetchDialog::slotEditMultipleISBN() {

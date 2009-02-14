@@ -252,8 +252,13 @@ bool Entry::setField(const QString& name_, const QString& value_) {
   }
 
   // the string store is probable only useful for fields with auto-completion or choice/number/bool
+  bool shareType = f->type() == Field::Choice ||
+                   f->type() == Field::Bool ||
+                   f->type() == Field::Image ||
+                   f->type() == Field::Rating ||
+                   f->type() == Field::Number;
   if(!(f->flags() & Field::AllowMultiple) &&
-     ((f->type() == Field::Choice || f->type() == Field::Bool || f->type() == Field::Number) ||
+     (shareType ||
       (f->type() == Field::Line && (f->flags() & Field::AllowCompletion)))) {
     m_fields.insert(Tellico::shareString(name_), Tellico::shareString(value_));
   } else {
