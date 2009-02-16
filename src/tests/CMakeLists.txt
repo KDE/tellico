@@ -16,6 +16,10 @@ TARGET_LINK_LIBRARIES(cuecattest ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QT
 KDE4_ADD_UNIT_TEST(lccntest NOGUI lccntest.cpp ../lccnvalidator.cpp)
 TARGET_LINK_LIBRARIES(lccntest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
+# fix this someday
+#KDE4_ADD_UNIT_TEST(lcctest NOGUI lcctest.cpp ../lcccomparison.cpp)
+#TARGET_LINK_LIBRARIES(lcctest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
+
 KDE4_ADD_UNIT_TEST(csvtest NOGUI csvtest.cpp ../translators/csvparser.cpp ../translators/libcsv.c)
 TARGET_LINK_LIBRARIES(csvtest ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
