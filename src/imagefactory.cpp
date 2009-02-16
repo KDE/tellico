@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,10 +22,11 @@
 
 #include <ktempdir.h>
 #include <kapplication.h>
-#include <kimageeffect.h>
+#include <kcolorutils.h>
+#include <qimageblitz/qimageblitz.h>
 
-#include <qfile.h>
-#include <qdir.h>
+#include <QFile>
+#include <QDir>
 
 #define RELEASE_IMAGES
 
@@ -34,14 +35,14 @@ using Tellico::ImageFactory;
 bool ImageFactory::s_needInit = true;
 const Tellico::Data::Image ImageFactory::s_null;
 
-QDict<Tellico::Data::Image> ImageFactory::s_imageDict;
+QHash<QString, Tellico::Data::Image*> ImageFactory::s_imageDict;
 // since most images get turned into pixmaps quickly, use 10 megs
 // for images and 10 megs for pixmaps
-QCache<Tellico::Data::Image> ImageFactory::s_imageCache(10 * 1024 * 1024);
-QCache<QPixmap> ImageFactory::s_pixmapCache(10 * 1024 * 1024);
+QCache<QString, Tellico::Data::Image> ImageFactory::s_imageCache(10 * 1024 * 1024);
+QCache<QString, QPixmap> ImageFactory::s_pixmapCache(10 * 1024 * 1024);
 // this image info map is just for big images that don't fit
 // in the cache, so that don't have to be continually reloaded to get info
-QMap<QString, Tellico::Data::ImageInfo> ImageFactory::s_imageInfoMap;
+QHash<QString, Tellico::Data::ImageInfo> ImageFactory::s_imageInfoMap;
 Tellico::StringSet ImageFactory::s_imagesInTmpDir;
 Tellico::StringSet ImageFactory::s_imagesToRelease;
 KTempDir* ImageFactory::s_tmpDir = 0;
@@ -51,17 +52,13 @@ void ImageFactory::init() {
   if(!s_needInit) {
     return;
   }
-  s_imageDict.setAutoDelete(true);
-  s_imageCache.setAutoDelete(true);
   s_imageCache.setMaxCost(Config::imageCacheSize());
-  s_pixmapCache.setAutoDelete(true);
   s_needInit = false;
 }
 
 QString ImageFactory::tempDir() {
   if(!s_tmpDir) {
-    s_tmpDir = new KTempDir();
-    s_tmpDir->setAutoDelete(true);
+    s_tmpDir = new KTempDir(); // default is to auto-delete, aka autoRemove()
   }
   return s_tmpDir->name();
 }
@@ -78,20 +75,20 @@ QString ImageFactory::localDir() {
   return s_localDir;
 }
 
-QString ImageFactory::addImage(const KURL& url_, bool quiet_, const KURL& refer_, bool link_) {
+QString ImageFactory::addImage(const KUrl& url_, bool quiet_, const KUrl& refer_, bool link_) {
   return addImageImpl(url_, quiet_, refer_, link_).id();
 }
 
-const Tellico::Data::Image& ImageFactory::addImageImpl(const KURL& url_, bool quiet_, const KURL& refer_, bool link_) {
+const Tellico::Data::Image& ImageFactory::addImageImpl(const KUrl& url_, bool quiet_, const KUrl& refer_, bool link_) {
   if(url_.isEmpty() || !url_.isValid()) {
     return s_null;
   }
-//  myLog() << "ImageFactory::addImageImpl(KURL) - " << url_.prettyURL() << endl;
+//  myLog() << "ImageFactory::addImageImpl(KUrl) - " << url_.prettyUrl();
   Data::Image* img = refer_.isEmpty()
                      ? FileHandler::readImageFile(url_, quiet_)
                      : FileHandler::readImageFile(url_, quiet_, refer_);
   if(!img) {
-    myLog() << "ImageFactory::addImageImpl() - image not found: " << url_.prettyURL() << endl;
+    myLog() << "ImageFactory::addImageImpl() - image not found: " << url_.prettyUrl();
     return s_null;
   }
   if(img->isNull()) {
@@ -105,7 +102,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KURL& url_, bool qu
   }
 
   if(hasImage(img->id())) {
-//    myDebug() << "### ImageFactory::addImageImpl() - hasImage() is true!" << endl;
+//    myDebug() << "### ImageFactory::addImageImpl() - hasImage() is true!";
     const Data::Image& img2 = imageById(img->id());
     if(!img2.isNull()) {
       delete img;
@@ -125,7 +122,7 @@ QString ImageFactory::addImage(const QImage& image_, const QString& format_) {
 }
 
 QString ImageFactory::addImage(const QPixmap& pix_, const QString& format_) {
-  return addImageImpl(pix_.convertToImage(), format_).id();
+  return addImageImpl(pix_.toImage(), format_).id();
 }
 
 const Tellico::Data::Image& ImageFactory::addImageImpl(const QImage& image_, const QString& format_) {
@@ -157,28 +154,28 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
   }
 
   // do not call imageById(), it causes infinite looping with Document::loadImage()
-  Data::Image* img = s_imageCache.find(id_);
+  Data::Image* img = s_imageCache.object(id_);
   if(img) {
-    myLog() << "ImageFactory::addImageImpl(QByteArray) - already exists in cache: " << id_ << endl;
+    myLog() << "ImageFactory::addImageImpl(QByteArray) - already exists in cache: " << id_;
     return *img;
   }
 
-  img = s_imageDict.find(id_);
+  img = s_imageDict.value(id_);
   if(img) {
-    myLog() << "ImageFactory::addImageImpl(QByteArray) - already exists in dict: " << id_ << endl;
+    myLog() << "ImageFactory::addImageImpl(QByteArray) - already exists in dict: " << id_;
     return *img;
   }
 
   img = new Data::Image(data_, format_, id_);
   if(img->isNull()) {
-    myDebug() << "ImageFactory::addImageImpl(QByteArray) - NULL IMAGE!!!!!" << endl;
+    myDebug() << "NULL IMAGE!!!!!";
     delete img;
     return s_null;
   }
 
 //  myLog() << "ImageFactory::addImageImpl(QByteArray) - " << data_.size()
 //          << " bytes, format = " << format_
-//          << ", id = "<< img->id() << endl;
+//          << ", id = "<< img->id();
 
   s_imageDict.insert(img->id(), img);
   s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
@@ -186,9 +183,8 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
 }
 
 const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_, CacheDir dir_) {
-//  myLog() << "ImageFactory::addCachedImageImpl() - dir = " << (dir_ == DataDir ? "DataDir" : "TmpDir" )
-//                                                           << "; id = " << id_ << endl;
-  KURL u;
+//  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
+  KUrl u;
   if(dir_ == DataDir) {
     u.setPath(dataDir() + id_);
   } else if(dir_ == LocalDir) {
@@ -199,7 +195,7 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
 
   QString newID = addImage(u, true);
   if(newID.isEmpty()) {
-    myLog() << "ImageFactory::addCachedImageImpl() - null image loaded" << endl;
+    myLog() << "ImageFactory::addCachedImageImpl() - null image loaded";
     return s_null;
   }
 
@@ -207,11 +203,11 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
   // addImage() already inserted it in the dict
   Data::Image* img = s_imageDict.take(newID);
   if(!img) {
-    kdWarning() << "ImageFactory::addCachedImageImpl() - no image in dict - very bad!" << endl;
+    kWarning() << "ImageFactory::addCachedImageImpl() - no image in dict - very bad!";
     return s_null;
   }
   if(img->isNull()) {
-    kdWarning() << "ImageFactory::addCachedImageImpl() - null image in dict, should never happen!" << endl;
+    kWarning() << "ImageFactory::addCachedImageImpl() - null image in dict, should never happen!";
     delete img;
     return s_null;
   }
@@ -220,13 +216,13 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
   s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
 
   if(s_imageCache.insert(img->id(), img, img->numBytes())) {
-//    myLog() << "ImageFactory::addCachedImageImpl() - removing from dict: " << img->id() << endl;
+//    myLog() << "ImageFactory::addCachedImageImpl() - removing from dict: " << img->id();
   } else {
     // can't hold it in the cache
-    kdWarning() << "Tellico's image cache is unable to hold the image, it might be too big!" << endl;
-    kdWarning() << "Image name is " << img->id() << endl;
-    kdWarning() << "Image size is " << img->numBytes() << endl;
-    kdWarning() << "Max cache size is " << s_imageCache.maxCost() << endl;
+    kWarning() << "Tellico's image cache is unable to hold the image, it might be too big!";
+    kWarning() << "Image name is " << img->id();
+    kWarning() << "Image size is " << img->numBytes();
+    kWarning() << "Max cache size is " << s_imageCache.maxCost();
 
     // add it back to the dict, but add the image to the list of
     // images to release later. Necessary to avoid a memory leak since new Image()
@@ -237,25 +233,25 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
   return *img;
 }
 
-bool ImageFactory::writeImage(const QString& id_, const KURL& targetDir_, bool force_) {
-//  myLog() << "ImageFactory::writeImage() - target = " << targetDir_.url() << id_ << endl;
+bool ImageFactory::writeImage(const QString& id_, const KUrl& targetDir_, bool force_) {
+//  myLog() << "ImageFactory::writeImage() - target = " << targetDir_.url() << id_;
   if(targetDir_.isEmpty()) {
-    myDebug() << "ImageFactory::writeImage() - empty target dir!" << endl;
+    myDebug() << "empty target dir!";
     return false;
   }
 
   const Data::Image& img = imageById(id_);
   if(img.isNull()) {
-//    myDebug() << "ImageFactory::writeImage() - null image: " << id_ << endl;
+//    myDebug() << "null image:" << id_;
     return false;
   }
 
   if(img.linkOnly()) {
-//    myLog() << "ImageFactory::writeImage() - " << id_ << ": link only, not writing!" << endl;
+//    myLog() << id_ << ": link only, not writing!";
     return true;
   }
 
-  KURL target = targetDir_;
+  KUrl target = targetDir_;
   target.addPath(id_);
 
   return FileHandler::writeDataURL(target, img.byteArray(), force_);
@@ -265,8 +261,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
   if(id_.isEmpty()) {
     return false;
   }
-//  myLog() << "ImageFactory::writeCachedImage() - dir = " << (dir_ == DataDir ? "DataDir" : "TmpDir" )
-//                                                         << "; id = " << id_ << endl;
+//  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
 
   QString path = ( dir_ == DataDir ? dataDir() : dir_ == TempDir ? tempDir() : localDir() );
 
@@ -277,16 +272,15 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
   bool exists = ( dir_ == TempDir ? s_imagesInTmpDir.has(id_) : QFile::exists(path + id_));
 
   if(!force_ && exists) {
-//    myDebug() << "...writeCachedImage() - exists = true: " << id_ << endl;
+//    myDebug() << "exists = true:" << id_;
   } else if(!force_ && !exists && dir_ == LocalDir) {
     QDir dir(localDir());
     if(!dir.exists()) {
-      myDebug() << "ImageFactory::writeCachedImage() - creating " << s_localDir << endl;
+      myDebug() << "creating" << s_localDir;
       dir.mkdir(localDir());
     }
   } else {
-//    myLog() << "ImageFactory::writeCachedImage() - dir = " << (dir_ == DataDir ? "DataDir" : "TmpDir" )
-//                                                           << "; id = " << id_ << endl;
+//    myLog() << "dir = " << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
   }
   // only write if it doesn't exist
   bool success = (!force_ && exists) || writeImage(id_, path, true /* force */);
@@ -302,9 +296,9 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
     if(img && s_imageCache.insert(img->id(), img, img->numBytes())) {
       s_imageInfoMap.remove(id_);
     } else if(img) {
-//      myLog() << "ImageFactory::writeCachedImage() - failed writing image to cache: " << id_ << endl;
-//      myLog() << "ImageFactory::writeCachedImage() - removed from dict, deleting: " << img->id() << endl;
-//      myLog() << "ImageFactory::writeCachedImage() - current dict size: " << s_imageDict.count() << endl;
+//      myLog() << "failed writing image to cache:" << id_;
+//      myLog() << "removed from dict, deleting:" << img->id();
+//      myLog() << "current dict size:" << s_imageDict.count();
       // can't insert it in the cache, so put it back in the dict
       // No, it's written to disk now, so we're safe
 //      s_imageDict.insert(img->id(), img);
@@ -316,10 +310,9 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
 
 const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(id_.isEmpty()) {
-//    myDebug() << "ImageFactory::imageById() - empty id" << endl;
     return s_null;
   }
-//  myLog() << "ImageFactory::imageById() - " << id_ << endl;
+//  myLog() << id_;
 
   // can't think of a better place to regularly check for images to release
   // but don't release image that just got asked for
@@ -328,15 +321,15 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
 
  // first check the cache, used for images that are in the data file, or are only temporary
  // then the dict, used for images downloaded, but not yet saved anywhere
-  Data::Image* img = s_imageCache.find(id_);
+  Data::Image* img = s_imageCache.object(id_);
   if(img) {
-//    myLog() << "...imageById() - found in cache" << endl;
+//    myLog() << "found in cache";
     return *img;
   }
 
-  img = s_imageDict.find(id_);
+  img = s_imageDict.value(id_);
   if(img) {
-//    myLog() << "...imageById() - found in dict" << endl;
+//    myLog() << "found in dict";
     return *img;
   }
 
@@ -345,10 +338,10 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // also, the image info cache might not have it so check if the
   // id is a valid absolute url
   // yeah, it's probably slow
-  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !KURL::isRelativeURL(id_)) {
-    KURL u = id_;
+  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !KUrl::isRelativeUrl(id_)) {
+    KUrl u = id_;
     if(u.isValid()) {
-      return addImageImpl(u, true, KURL(), true);
+      return addImageImpl(u, true, KUrl(), true);
     }
   }
 
@@ -358,10 +351,10 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(s_imagesInTmpDir.has(id_)) {
     const Data::Image& img2 = addCachedImageImpl(id_, TempDir);
     if(!img2.isNull()) {
-//      myLog() << "...imageById() - found in tmp dir" << endl;
+//      myLog() << "found in tmp dir";
       return img2;
     } else {
-      myLog() << "ImageFactory::imageById() - img in tmpDir list but not actually there: " << id_ << endl;
+      myLog() << "img in tmpDir list but not actually there:" << id_;
       s_imagesInTmpDir.remove(id_);
     }
   }
@@ -369,12 +362,12 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // try to do a delayed loading of the image
   if(Data::Document::self()->loadImage(id_)) {
     // loadImage() could insert in either the cache or the dict!
-    img = s_imageCache.find(id_);
+    img = s_imageCache.object(id_);
     if(!img) {
-      img = s_imageDict.find(id_);
+      img = s_imageDict.value(id_);
     }
     if(img) {
-//      myLog() << "...imageById() - found in doc" << endl;
+//      myLog() << "found in doc";
       // go ahead and write image to disk so we don't have to keep it in memory
       // calling pixmap() could be loading all the covers, and we don't want one
       // to get pushed out of the cache yet
@@ -390,7 +383,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     if(exists) {
       const Data::Image& img2 = addCachedImageImpl(id_, LocalDir);
       if(img2.isNull()) {
-        myDebug() << "ImageFactory::imageById() - tried to add from LocalDir, but failed: " << id_ << endl;
+        myDebug() << "tried to add from LocalDir, but failed:" << id_;
       } else {
 //        myLog() << "...imageById() - found in local dir" << endl;
         return img2;
@@ -403,7 +396,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
       Data::Document::self()->slotSetModified(true);
       const Data::Image& img2 = addCachedImageImpl(id_, DataDir);
       if(img2.isNull()) {
-        myDebug() << "ImageFactory::imageById() - tried to add from DataDir, but failed: " << id_ << endl;
+        myDebug() << "tried to add from DataDir, but failed:" << id_;
       } else {
 //        myLog() << "...imageById() - found in data dir" << endl;
         return img2;
@@ -414,7 +407,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     if(exists) {
       const Data::Image& img2 = addCachedImageImpl(id_, DataDir);
       if(img2.isNull()) {
-        myDebug() << "ImageFactory::imageById() - tried to add from DataDir, but failed: " << id_ << endl;
+        myDebug() << "tried to add from DataDir, but failed:" << id_;
       } else {
 //        myLog() << "...imageById() - found in data dir" << endl;
         return img2;
@@ -427,14 +420,14 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
       Data::Document::self()->slotSetModified(true);
       const Data::Image& img2 = addCachedImageImpl(id_, LocalDir);
       if(img2.isNull()) {
-        myDebug() << "ImageFactory::imageById() - tried to add from LocalDir, but failed: " << id_ << endl;
+        myDebug() << "tried to add from LocalDir, but failed:" << id_;
       } else {
 //        myLog() << "...imageById() - found in local dir" << endl;
         return img2;
       }
     }
   }
-  myDebug() << "***ImageFactory::imageById() - not found: " << id_ << endl;
+  myDebug() << "***not found:" << id_;
   return s_null;
 }
 
@@ -450,7 +443,7 @@ Tellico::Data::ImageInfo ImageFactory::imageInfo(const QString& id_) {
   return Data::ImageInfo(img);
 }
 
-void ImageFactory::cacheImageInfo(const Data::ImageInfo& info) {
+void ImageFactory::cacheImageInfo(const Tellico::Data::ImageInfo& info) {
   s_imageInfoMap.insert(info.id, info);
 }
 
@@ -465,7 +458,7 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
   }
 
   const QString key = id_ + '|' + QString::number(width_) + '|' + QString::number(height_);
-  QPixmap* pix = s_pixmapCache.find(key);
+  QPixmap* pix = s_pixmapCache.object(key);
   if(pix) {
     return *pix;
   }
@@ -483,9 +476,9 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
 
   // pixmap size is w x h x d, divided by 8 bits
   if(!s_pixmapCache.insert(key, pix, pix->width()*pix->height()*pix->depth()/8)) {
-    kdWarning() << "ImageFactory::pixmap() - can't save in cache: " << id_ << endl;
-    kdWarning() << "### Current pixmap size is " << (pix->width()*pix->height()*pix->depth()/8) << endl;
-    kdWarning() << "### Max pixmap cache size is " << s_pixmapCache.maxCost() << endl;
+    kWarning() << "ImageFactory::pixmap() - can't save in cache: " << id_;
+    kWarning() << "### Current pixmap size is " << (pix->width()*pix->height()*pix->depth()/8);
+    kWarning() << "### Max pixmap cache size is " << s_pixmapCache.maxCost();
     QPixmap pix2(*pix);
     delete pix;
     return pix2;
@@ -494,8 +487,9 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
 }
 
 void ImageFactory::clean(bool deleteTempDirectory_) {
-  // the dict and caches all auto-delete
+  // the caches all auto-delete
   s_imagesToRelease.clear();
+  qDeleteAll(s_imageDict);
   s_imageDict.clear();
   s_imageInfoMap.clear();
   s_imageCache.clear();
@@ -507,7 +501,7 @@ void ImageFactory::clean(bool deleteTempDirectory_) {
   }
 }
 
-void ImageFactory::createStyleImages(const StyleOptions& opt_) {
+void ImageFactory::createStyleImages(const Tellico::StyleOptions& opt_) {
   const int collType = Kernel::self()->collectionType();
 
   const QColor& baseColor = opt_.baseColor.isValid()
@@ -517,17 +511,17 @@ void ImageFactory::createStyleImages(const StyleOptions& opt_) {
                           ? opt_.highlightedBaseColor
                           : Config::templateHighlightedBaseColor(collType);
 
-  const QColor& bgc1 = Tellico::blendColors(baseColor, highColor, 30);
-  const QColor& bgc2 = Tellico::blendColors(baseColor, highColor, 50);
+  const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
+  const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
 
   const QString bgname = QString::fromLatin1("gradient_bg.png");
-  QImage bgImage = KImageEffect::gradient(QSize(400, 1), bgc1, baseColor,
-                                          KImageEffect::PipeCrossGradient);
-  bgImage = KImageEffect::rotate(bgImage, KImageEffect::Rotate90);
+  QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
+                                   Blitz::PipeCrossGradient);
+  bgImage = bgImage.transformed(QTransform().rotate(90));
 
   const QString hdrname = QString::fromLatin1("gradient_header.png");
-  QImage hdrImage = KImageEffect::unbalancedGradient(QSize(1, 10), highColor, bgc2,
-                                                     KImageEffect::VerticalGradient, 100, -100);
+  QImage hdrImage = Blitz::unbalancedGradient(QSize(1, 10), highColor, bgc2,
+                                              Blitz::VerticalGradient, 100, -100);
 
   if(opt_.imgDir.isEmpty()) {
     // write the style images both to the tmp dir and the data dir
@@ -548,8 +542,8 @@ void ImageFactory::createStyleImages(const StyleOptions& opt_) {
 }
 
 void ImageFactory::removeImage(const QString& id_, bool deleteImage_) {
-  //be careful using this
-  s_imageDict.remove(id_);
+  // be careful using this
+  delete s_imageDict.take(id_);
   s_imageCache.remove(id_);
   s_imagesInTmpDir.remove(id_);
 
@@ -562,16 +556,17 @@ void ImageFactory::removeImage(const QString& id_, bool deleteImage_) {
 
 Tellico::StringSet ImageFactory::imagesNotInCache() {
   StringSet set;
-  for(QDictIterator<Tellico::Data::Image> it(s_imageDict); it.current(); ++it) {
-    if(s_imageCache.find(it.currentKey()) == 0) {
-      set.add(it.currentKey());
+  QHash<QString, Tellico::Data::Image*>::const_iterator end = s_imageDict.constEnd();
+  for(QHash<QString, Tellico::Data::Image*>::const_iterator it = s_imageDict.constBegin(); it != end; ++it) {
+    if(!s_imageCache.contains(it.key())) {
+      set.add(it.key());
     }
   }
   return set;
 }
 
 bool ImageFactory::hasImage(const QString& id_) {
-  return s_imageCache.find(id_, false) || s_imageDict.find(id_);
+  return s_imageCache.contains(id_) || s_imageDict.contains(id_);
 }
 
 // the purpose here is to remove images from the dict if they're is on the disk somewhere,
@@ -586,35 +581,35 @@ void ImageFactory::releaseImages() {
   const QStringList images = s_imagesToRelease.toList();
   for(QStringList::ConstIterator it = images.begin(); it != images.end(); ++it) {
     s_imagesToRelease.remove(*it);
-    if(!s_imageDict.find(*it)) {
+    if(!s_imageDict.value(*it)) {
       continue;
     }
-//    myLog() << "ImageFactory::releaseImage() - id = " << *it << endl;
+//    myLog() << "id = " << *it;
     if(QFile::exists(dataDir() + *it)) {
-//      myDebug() << "...exists in dataDir() - removing from dict" << endl;
-      s_imageDict.remove(*it);
+//      myDebug() << "...exists in dataDir() - removing from dict";
+      delete s_imageDict.take(*it);
     } else if(QFile::exists(tempDir() + *it)) {
-//      myDebug() << "...exists in tempDir() - removing from dict" << endl;
-      s_imageDict.remove(*it);
+//      myDebug() << "...exists in tempDir() - removing from dict";
+      delete s_imageDict.take(*it);
     }
   }
 #endif
 }
 
-void ImageFactory::setLocalDirectory(const KURL& url_) {
+void ImageFactory::setLocalDirectory(const KUrl& url_) {
   if(url_.isEmpty()) {
     return;
   }
   if(!url_.isLocalFile()) {
-    myWarning() << "ImageFactory::setLocalDirectory() - Tellico can only save images to local disk" << endl;
-    myWarning() << "unable to save to " << url_ << endl;
+    myWarning() << "Tellico can only save images to local disk";
+    myWarning() << "unable to save to " << url_;
   } else {
-    s_localDir = url_.directory(false);
+    s_localDir = url_.directory(KUrl::AppendTrailingSlash);
     // could have already been set once
     if(!url_.fileName().contains(QString::fromLatin1("_files"))) {
-      s_localDir += url_.fileName().section('.', 0, 0) + QString::fromLatin1("_files/");
+      s_localDir += url_.fileName().section('.', 0, 0) + QLatin1String("_files/");
     }
-    myLog() << "ImageFactory::setLocalDirectory() - local dir = " << s_localDir << endl;
+    myLog() << "local dir = " << s_localDir;
   }
 }
 

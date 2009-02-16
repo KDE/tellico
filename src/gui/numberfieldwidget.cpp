@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,13 +17,13 @@
 
 #include <klineedit.h>
 
-#include <qlayout.h>
-#include <qvalidator.h>
+#include <QValidator>
+#include <QBoxLayout>
 
 using Tellico::GUI::NumberFieldWidget;
 
-NumberFieldWidget::NumberFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_), m_lineEdit(0), m_spinBox(0) {
+NumberFieldWidget::NumberFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_), m_lineEdit(0), m_spinBox(0) {
 
   if(field_->flags() & Data::Field::AllowMultiple) {
     initLineEdit();
@@ -37,7 +37,6 @@ NumberFieldWidget::NumberFieldWidget(Data::FieldPtr field_, QWidget* parent_, co
 void NumberFieldWidget::initLineEdit() {
   m_lineEdit = new KLineEdit(this);
   connect(m_lineEdit, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
-  // connect(kl, SIGNAL(returnPressed(const QString&)), this, SLOT(slotHandleReturn()));
 
   // regexp is any number of digits followed optionally by any number of
   // groups of a semi-colon followed optionally by a space, followed by digits
@@ -50,8 +49,8 @@ void NumberFieldWidget::initSpinBox() {
   m_spinBox = new GUI::SpinBox(-1, INT_MAX, this);
   connect(m_spinBox, SIGNAL(valueChanged(int)), SIGNAL(modified()));
   // QSpinBox doesn't emit valueChanged if you edit the value with
-  // the lineEdit until you change the keyboard focus
-  connect(m_spinBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
+  // the lineEdit until you change the keyboard focus. Fixed in QT4 ???
+//  connect(m_spinBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
   // I want to allow no value, so set space as special text. Empty text is ignored
   m_spinBox->setSpecialValueText(QChar(' '));
 }
@@ -59,7 +58,7 @@ void NumberFieldWidget::initSpinBox() {
 QString NumberFieldWidget::text() const {
   if(isSpinBox()) {
     // minValue = special empty text
-    if(m_spinBox->value() > m_spinBox->minValue()) {
+    if(m_spinBox->value() > m_spinBox->minimum()) {
       return QString::number(m_spinBox->value());
     }
     return QString();
@@ -69,7 +68,7 @@ QString NumberFieldWidget::text() const {
   if(field()->flags() & Data::Field::AllowMultiple) {
     text.replace(s_semiColon, QString::fromLatin1("; "));
   }
-  return text.simplifyWhiteSpace();
+  return text.simplified();
 }
 
 void NumberFieldWidget::setText(const QString& text_) {
@@ -81,7 +80,7 @@ void NumberFieldWidget::setText(const QString& text_) {
     if(ok) {
       // did just allow positive
       if(n < 0) {
-        m_spinBox->setMinValue(INT_MIN+1);
+        m_spinBox->setMinimum(INT_MIN+1);
       }
       m_spinBox->blockSignals(true);
       m_spinBox->setValue(n);
@@ -99,16 +98,16 @@ void NumberFieldWidget::setText(const QString& text_) {
 void NumberFieldWidget::clear() {
   if(isSpinBox()) {
     // show empty special value text
-    m_spinBox->setValue(m_spinBox->minValue());
+    m_spinBox->setValue(m_spinBox->minimum());
   } else {
     m_lineEdit->clear();
   }
   editMultiple(false);
 }
 
-void NumberFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_) {
+void NumberFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
   bool wasLineEdit = !isSpinBox();
-  bool nowLineEdit = newField_->flags() & Data::Field::AllowMultiple;
+  bool nowLineEdit = newField_->flags() & Tellico::Data::Field::AllowMultiple;
 
   if(wasLineEdit == nowLineEdit) {
     return;
@@ -116,12 +115,12 @@ void NumberFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_
 
   QString value = text();
   if(wasLineEdit && !nowLineEdit) {
-    layout()->remove(m_lineEdit);
+    layout()->removeWidget(m_lineEdit);
     delete m_lineEdit;
     m_lineEdit = 0;
     initSpinBox();
   } else if(!wasLineEdit && nowLineEdit) {
-    layout()->remove(m_spinBox);
+    layout()->removeWidget(m_spinBox);
     delete m_spinBox;
     m_spinBox = 0;
     initLineEdit();

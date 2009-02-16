@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,8 @@
 #include "../entry.h"
 
 #include <kglobal.h>
-#include <kconfig.h>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 using Tellico::Fetch::Fetcher;
 using Tellico::Fetch::SearchResult;
@@ -33,7 +34,7 @@ void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_)
   if(!s.isEmpty()) {
     m_name = s;
   }
-  m_updateOverwrite = config_.readBoolEntry("UpdateOverwrite", false);
+  m_updateOverwrite = config_.readEntry("UpdateOverwrite", false);
   // be sure to read config for subclass
   readConfigHook(config_);
 }
@@ -50,7 +51,7 @@ void Fetcher::infoList(const QString& message_, const QStringList& list_) const 
   }
 }
 
-void Fetcher::updateEntry(Data::EntryPtr) {
+void Fetcher::updateEntry(Tellico::Data::EntryPtr) {
   emit signalDone(this);
 }
 

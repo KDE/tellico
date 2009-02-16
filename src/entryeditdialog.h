@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,34 +11,34 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ENTRYEDITDIALOG_H
-#define ENTRYEDITDIALOG_H
-
-class KPushButton;
+#ifndef TELLICO_ENTRYEDITDIALOG_H
+#define TELLICO_ENTRYEDITDIALOG_H
 
 #include "observer.h"
 #include "gui/fieldwidget.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
-#include <qdict.h>
+#include <QHash>
+
+class KPushButton;
 
 namespace Tellico {
   namespace GUI {
-    class TabControl;
+    class TabWidget;
   }
 
 /**
  * @author Robby Stephenson
  */
-class EntryEditDialog : public KDialogBase, public Observer {
+class EntryEditDialog : public KDialog, public Observer {
 Q_OBJECT
 
 // needed for completion object support
 friend class GUI::FieldWidget;
 
 public:
-  EntryEditDialog(QWidget* parent, const char* name);
+  EntryEditDialog(QWidget* parent);
 
   /**
    * Checks to see if any data needs to be saved. Returns @p true if it's ok to continue with
@@ -59,15 +59,15 @@ public:
    * @param list A list of the entries. The data in the first one will be inserted in the controls, and
    * the widgets will be enabled or not, depending on whether the rest of the entries match the first one.
    */
-  void setContents(Data::EntryVec entries);
+  void setContents(Data::EntryList entries);
   /**
    * Clears all of the input controls in the widget. The pointer to the
    * current entry is nullified, but not the pointer to the current collection.
    */
   void clear();
 
-  virtual void    addEntries(Data::EntryVec entries);
-  virtual void modifyEntries(Data::EntryVec entries);
+  virtual void    addEntries(Data::EntryList entries);
+  virtual void modifyEntries(Data::EntryList entries);
 
   virtual void    addField(Data::CollPtr coll, Data::FieldPtr) { setLayout(coll); }
   /**
@@ -133,9 +133,9 @@ private:
   void updateCompletions(Data::EntryPtr entry);
 
   Data::CollPtr m_currColl;
-  Data::EntryVec m_currEntries;
-  GUI::TabControl* m_tabs;
-  QDict<GUI::FieldWidget> m_widgetDict;
+  Data::EntryList m_currEntries;
+  GUI::TabWidget* m_tabs;
+  QHash<QString, GUI::FieldWidget*> m_widgetDict;
 
   ButtonCode m_saveBtn, m_newBtn, m_nextBtn, m_prevBtn;
 

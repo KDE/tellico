@@ -7,6 +7,8 @@
 
 <kcfgfile name="tellicorc"/>
 <include>klocale.h</include>
+<include>kglobalsettings.h</include>
+<include>kcolorscheme.h</include>
 
 <group name="TipOfDay">
     <entry key="RunOnStart" type="Bool" name="showTipOfDay">
@@ -110,7 +112,7 @@
     <entry key="Image Cache Size" type="Int">
         <default code="true">(10 * 1024 * 1024)</default>
     </entry>
-    <entry key="Max Custom URL Settings" type="UInt">
+    <entry key="Max Custom URL Settings" type="Int">
         <default>9</default>
     </entry>
 </group>
@@ -143,19 +145,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorBook">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorBook">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorBook">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBook">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -169,19 +171,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorVideo">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorVideo">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorVideo">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorVideo">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -195,19 +197,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorAlbum">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorAlbum">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorAlbum">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorAlbum">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -224,19 +226,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorBibtex">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorBibtex">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorBibtex">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBibtex">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -250,19 +252,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorComicBook">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorComicBook">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorComicBook">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorComicBook">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -276,19 +278,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorWine">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorWine">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorWine">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorWine">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -302,19 +304,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorCoin">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorCoin">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorCoin">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorCoin">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -328,19 +330,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorStamp">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorStamp">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorStamp">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorStamp">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -354,19 +356,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorCard">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorCard">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorCard">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorCard">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -380,19 +382,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorGame">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorGame">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorGame">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorGame">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -406,19 +408,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorFile">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorFile">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorFile">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorFile">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -432,19 +434,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorBoardGame">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorBoardGame">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorBoardGame">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBoardGame">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 
@@ -458,19 +460,19 @@
     </entry>
     <entry key="Template Base Color" type="Color" name="baseColorBase">
         <label>Template background color</label>
-        <default code="true">KGlobalSettings::baseColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).background().color()</default>
     </entry>
     <entry key="Template Text Color" type="Color" name="textColorBase">
         <label>Template text color</label>
-        <default code="true">KGlobalSettings::textColor()</default>
+        <default code="true">KColorScheme(QPalette::Active).foreground().color()</default>
     </entry>
     <entry key="Template Highlight Color" type="Color" name="highlightedBaseColorBase">
         <label>Template highlight color</label>
-        <default code="true">KGlobalSettings::highlightColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).background().color()</default>
     </entry>
     <entry key="Template Highlighted Text Color" type="Color" name="highlightedTextColorBase">
         <label>Template highlighted text color</label>
-        <default code="true">KGlobalSettings::highlightedTextColor()</default>
+        <default code="true">KColorScheme(QPalette::Active, KColorScheme::Selection).foreground().color()</default>
     </entry>
 </group>
 

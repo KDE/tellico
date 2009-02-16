@@ -31,8 +31,8 @@ StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("denomination"));
 }
 
-Tellico::Data::FieldVec StampCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList StampCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
@@ -72,11 +72,10 @@ Tellico::Data::FieldVec StampCollection::defaultFields() {
   field->setCategory(i18n(stamp_general));
   list.append(field);
 
-  QStringList grade = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                         i18n("Stamp grade levels - "
-                                              "Superb,Extremely Fine,Very Fine,Fine,Average,Poor",
-                                              "Superb,Extremely Fine,Very Fine,Fine,Average,Poor"),
-                                         false);
+  QStringList grade = i18nc("Stamp grade levels - "
+                            "Superb,Extremely Fine,Very Fine,Fine,Average,Poor",
+                            "Superb,Extremely Fine,Very Fine,Fine,Average,Poor")
+                      .split(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::SkipEmptyParts);
   field = new Field(QString::fromLatin1("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowGrouped);

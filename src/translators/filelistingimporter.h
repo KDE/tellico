@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,7 +20,8 @@
 #include <kio/global.h>
 #include <kfileitem.h>
 
-#include <qguardedptr.h>
+#include <QPointer>
+#include <QPixmap>
 
 class QCheckBox;
 namespace KIO {
@@ -37,7 +38,7 @@ class FileListingImporter : public Importer {
 Q_OBJECT
 
 public:
-  FileListingImporter(const KURL& url);
+  FileListingImporter(const KUrl& url);
 
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
@@ -45,7 +46,7 @@ public:
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget*, const char*);
+  virtual QWidget* widget(QWidget*);
   virtual bool canImport(int type) const;
 
 public slots:
@@ -61,7 +62,7 @@ private:
   QWidget* m_widget;
   QCheckBox* m_recursive;
   QCheckBox* m_filePreview;
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::Job> m_job;
   KFileItemList m_files;
   QPixmap m_pixmap;
   bool m_cancelled : 1;

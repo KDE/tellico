@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# little script to insert Tellico's xslt template names into i18n
+#
+# 2004 by Robby Stephenson <robby@periapsis.org>
+
+import sys
+import os
+import re
+
+i18n = re.compile(r'<i18n>(.*?)</i18n>', re.DOTALL)
+ws   = re.compile('\s+')
+title = re.compile(r'<title>(.*?)</title>', re.DOTALL)
+
+def extract_i18n_z3950(filename):
+    f = open(filename, 'r')
+    text = f.read()
+    for m in title.finditer(text):
+        sys.stdout.write("i18n(\"")
+        sys.stdout.write(ws.sub(' ', m.group(1)))
+        sys.stdout.write("\");\n")
+
+def extract_i18n(filename):
+    f = open(filename, 'r')
+    text = f.read()
+    for m in i18n.finditer(text):
+        sys.stdout.write("i18n(\"")
+        sys.stdout.write(ws.sub(' ', m.group(1)))
+        sys.stdout.write("\");\n")
+
+def get_xsl_files(dir):
+    files = []
+    nodes = [f for f in os.listdir(dir)]
+    for n in nodes:
+        if n[-4:] == ".xsl":
+            files.append(os.path.join(dir,n))
+
+    return files
+
+def print_output(dir):
+    files = get_xsl_files(dir) 
+    for f in files:
+        name = os.path.basename(f)[:-4].replace('_', ' ')
+        sys.stdout.write("\ni18n(\"")
+        sys.stdout.write(name + " XSL Template\", \"" + name)
+        sys.stdout.write("\");\n")
+        extract_i18n(f)
+
+
+if __name__ == "__main__":
+    print_output("xslt/entry-templates")
+    print_output("xslt/report-templates")
+    # I don't want "tellico2html" translated, so just grab i18n strings
+    extract_i18n("xslt/tellico2html.xsl")

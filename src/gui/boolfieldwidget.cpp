@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,16 +13,13 @@
 
 #include "boolfieldwidget.h"
 #include "../field.h"
-#include "../latin1literal.h"
 
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <QCheckBox>
 
 using Tellico::GUI::BoolFieldWidget;
 
-BoolFieldWidget::BoolFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_) {
+BoolFieldWidget::BoolFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_) {
 
   m_checkBox = new QCheckBox(this);
   connect(m_checkBox, SIGNAL(clicked()), SIGNAL(modified()));

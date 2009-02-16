@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -35,51 +35,51 @@ using Tellico::CollectionFactory;
 Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_) {
   switch(type_) {
     case Data::Collection::Book:
-      return new Data::BookCollection(addFields_);
+      return Data::CollPtr(new Data::BookCollection(addFields_));
 
     case Data::Collection::Video:
-      return new Data::VideoCollection(addFields_);
+      return Data::CollPtr(new Data::VideoCollection(addFields_));
 
     case Data::Collection::Album:
-      return new Data::MusicCollection(addFields_);
+      return Data::CollPtr(new Data::MusicCollection(addFields_));
 
     case Data::Collection::Bibtex:
-      return new Data::BibtexCollection(addFields_);
+      return Data::CollPtr(new Data::BibtexCollection(addFields_));
 
     case Data::Collection::Coin:
-      return new Data::CoinCollection(addFields_);
+      return Data::CollPtr(new Data::CoinCollection(addFields_));
 
     case Data::Collection::Card:
-      return new Data::CardCollection(addFields_);
+      return Data::CollPtr(new Data::CardCollection(addFields_));
 
     case Data::Collection::Stamp:
-      return new Data::StampCollection(addFields_);
+      return Data::CollPtr(new Data::StampCollection(addFields_));
 
     case Data::Collection::Wine:
-      return new Data::WineCollection(addFields_);
+      return Data::CollPtr(new Data::WineCollection(addFields_));
 
     case Data::Collection::ComicBook:
-      return new Data::ComicBookCollection(addFields_);
+      return Data::CollPtr(new Data::ComicBookCollection(addFields_));
 
     case Data::Collection::Game:
-      return new Data::GameCollection(addFields_);
+      return Data::CollPtr(new Data::GameCollection(addFields_));
 
     case Data::Collection::File:
-      return new Data::FileCatalog(addFields_);
+      return Data::CollPtr(new Data::FileCatalog(addFields_));
 
     case Data::Collection::BoardGame:
-      return new Data::BoardGameCollection(addFields_);
+      return Data::CollPtr(new Data::BoardGameCollection(addFields_));
 
     case Data::Collection::Base:
       break;
 
     default:
-      kdWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_ << endl;
+      kWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_;
       // fall through
   }
 
-  Data::CollPtr c = new Data::Collection(i18n("My Collection"));
-  Data::FieldPtr f = new Data::Field(QString::fromLatin1("title"), i18n("Title"));
+  Data::CollPtr c(new Data::Collection(i18n("My Collection")));
+  Data::FieldPtr f(new Data::Field(QString::fromLatin1("title"), i18n("Title")));
   f->setCategory(i18n("General"));
   f->setFlags(Data::Field::NoDelete);
   f->setFormatFlag(Data::Field::FormatTitle);
@@ -90,50 +90,50 @@ Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_)
 // static
 Tellico::Data::CollPtr CollectionFactory::collection(const QString& typeName_, bool addFields_) {
   if(typeName_ == typeName(Data::Collection::Book)) {
-    return new Data::BookCollection(addFields_);
+    return Data::CollPtr(new Data::BookCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::Album)) {
-    return new Data::MusicCollection(addFields_);
+    return Data::CollPtr(new Data::MusicCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::Video)) {
-    return new Data::VideoCollection(addFields_);
+    return Data::CollPtr(new Data::VideoCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::Bibtex)) {
-    return new Data::BibtexCollection(addFields_);
+    return Data::CollPtr(new Data::BibtexCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::Bibtex)) {
-    return new Data::ComicBookCollection(addFields_);
+    return Data::CollPtr(new Data::ComicBookCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::ComicBook)) {
-    return new Data::CardCollection(addFields_);
+    return Data::CollPtr(new Data::CardCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::Coin)) {
-    return new Data::CoinCollection(addFields_);
+    return Data::CollPtr(new Data::CoinCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::Stamp)) {
-    return new Data::StampCollection(addFields_);
+    return Data::CollPtr(new Data::StampCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::Wine)) {
-    return new Data::WineCollection(addFields_);
+    return Data::CollPtr(new Data::WineCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::Game)) {
-    return new Data::GameCollection(addFields_);
+    return Data::CollPtr(new Data::GameCollection(addFields_));
   } else if(typeName_ == typeName(Data::Collection::File)) {
-    return new Data::FileCatalog(addFields_);
+    return Data::CollPtr(new Data::FileCatalog(addFields_));
   } else if(typeName_ == typeName(Data::Collection::BoardGame)) {
-    return new Data::BoardGameCollection(addFields_);
+    return Data::CollPtr(new Data::BoardGameCollection(addFields_));
   } else {
-    kdWarning() << "CollectionFactory::collection() - collection type not implemented: " << typeName_ << endl;
-    return 0;
+    kWarning() << "CollectionFactory::collection() - collection type not implemented: " << typeName_;
+    return Data::CollPtr();
   }
 }
 
 Tellico::CollectionNameMap CollectionFactory::nameMap() {
   CollectionNameMap map;
-  map[Data::Collection::Book]   = i18n("Book Collection");
-  map[Data::Collection::Bibtex] = i18n("Bibliography");
-  map[Data::Collection::ComicBook] = i18n("Comic Book Collection");
-  map[Data::Collection::Video]  = i18n("Video Collection");
-  map[Data::Collection::Album]  = i18n("Music Collection");
-  map[Data::Collection::Coin]   = i18n("Coin Collection");
-  map[Data::Collection::Stamp]  = i18n("Stamp Collection");
-  map[Data::Collection::Wine]   = i18n("Wine Collection");
-  map[Data::Collection::Card]   = i18n("Card Collection");
-  map[Data::Collection::Game]   = i18n("Game Collection");
-  map[Data::Collection::File]   = i18n("File Catalog");
+  map[Data::Collection::Book]        = i18n("Book Collection");
+  map[Data::Collection::Bibtex]      = i18n("Bibliography");
+  map[Data::Collection::ComicBook]   = i18n("Comic Book Collection");
+  map[Data::Collection::Video]       = i18n("Video Collection");
+  map[Data::Collection::Album]       = i18n("Music Collection");
+  map[Data::Collection::Coin]        = i18n("Coin Collection");
+  map[Data::Collection::Stamp]       = i18n("Stamp Collection");
+  map[Data::Collection::Wine]        = i18n("Wine Collection");
+  map[Data::Collection::Card]        = i18n("Card Collection");
+  map[Data::Collection::Game]        = i18n("Game Collection");
+  map[Data::Collection::File]        = i18n("File Catalog");
   map[Data::Collection::BoardGame]   = i18n("Board Game Collection");
-  map[Data::Collection::Base]   = i18n("Custom Collection");
+  map[Data::Collection::Base]        = i18n("Custom Collection");
   return map;
 }
 
@@ -192,7 +192,7 @@ QString CollectionFactory::typeName(int type_) {
       break;
 
     default:
-      kdWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_ << endl;
+      kWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_;
       return QString::fromLatin1("entry");
       break;
   }
@@ -200,8 +200,7 @@ QString CollectionFactory::typeName(int type_) {
 
 bool CollectionFactory::isDefaultField(int type_, const QString& name_) {
   Data::CollPtr coll = collection(type_, true);
-  Data::FieldVec fields = coll->fields();
-  for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+  foreach(Data::FieldPtr field, coll->fields()) {
     if(field->name() == name_) {
       return true;
     }

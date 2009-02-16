@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "../datavectors.h"
 
-#include <kcommand.h>
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -24,18 +24,17 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class AddEntries : public KCommand  {
+class AddEntries : public QUndoCommand  {
 
 public:
-  AddEntries(Data::CollPtr coll, const Data::EntryVec& entries);
+  AddEntries(Data::CollPtr coll, const Data::EntryList& entries);
 
-  virtual void execute();
-  virtual void unexecute();
-  virtual QString name() const;
+  virtual void redo();
+  virtual void undo();
 
 private:
   Data::CollPtr m_coll;
-  Data::EntryVec m_entries;
+  Data::EntryList m_entries;
 };
 
   } // end namespace

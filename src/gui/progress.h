@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,7 @@
 #ifndef TELLICO_GUI_PROGRESS_H
 #define TELLICO_GUI_PROGRESS_H
 
-#include <kprogress.h>
+#include <QProgressBar>
 
 namespace Tellico {
   namespace GUI {
@@ -22,7 +22,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class Progress : public KProgress {
+class Progress : public QProgressBar {
 Q_OBJECT
 
 public:

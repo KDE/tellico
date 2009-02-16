@@ -27,7 +27,7 @@ public:
   Clipboard();
 
   virtual CiteAction type() const { return CiteClipboard; }
-  virtual bool cite(Data::EntryVec entries);
+  virtual bool cite(Data::EntryList entries);
 };
 
   }

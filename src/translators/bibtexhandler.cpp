@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,7 +18,6 @@
 #include "../collection.h"
 #include "../document.h"
 #include "../filehandler.h"
-#include "../latin1literal.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
@@ -26,24 +25,21 @@
 #include <kstringhandler.h>
 #include <klocale.h>
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qregexp.h>
-#include <qdom.h>
+#include <QDomDocument>
 
 // don't add braces around capital letters by default
 #define TELLICO_BIBTEX_BRACES 0
 
 using Tellico::BibtexHandler;
 
-BibtexHandler::StringListMap* BibtexHandler::s_utf8LatexMap = 0;
+BibtexHandler::StringListHash* BibtexHandler::s_utf8LatexMap = 0;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
-const QRegExp BibtexHandler::s_badKeyChars(QString::fromLatin1("[^0-9a-zA-Z-]"));
+const QRegExp BibtexHandler::s_badKeyChars(QLatin1String("[^0-9a-zA-Z-]"));
 
-QStringList BibtexHandler::bibtexKeys(const Data::EntryVec& entries_) {
+QStringList BibtexHandler::bibtexKeys(const Tellico::Data::EntryList& entries_) {
   QStringList keys;
-  for(Data::EntryVec::ConstIterator it = entries_.begin(); it != entries_.end(); ++it) {
-    QString s = bibtexKey(it.data());
+  foreach(Data::EntryPtr entry, entries_) {
+    QString s = bibtexKey(entry);
     if(!s.isEmpty()) {
       keys << s;
     }
@@ -51,13 +47,13 @@ QStringList BibtexHandler::bibtexKeys(const Data::EntryVec& entries_) {
   return keys;
 }
 
-QString BibtexHandler::bibtexKey(Data::ConstEntryPtr entry_) {
+QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
   if(!entry_ || !entry_->collection() || entry_->collection()->type() != Data::Collection::Bibtex) {
     return QString::null;
   }
 
   const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(entry_->collection().data());
-  Data::FieldPtr f = c->fieldByBibtexName(QString::fromLatin1("key"));
+  Data::FieldPtr f = c->fieldByBibtexName(QLatin1String("key"));
   if(f) {
     QString key = entry_->field(f->name());
     if(!key.isEmpty()) {
@@ -66,7 +62,7 @@ QString BibtexHandler::bibtexKey(Data::ConstEntryPtr entry_) {
   }
 
   QString author;
-  Data::FieldPtr authorField = c->fieldByBibtexName(QString::fromLatin1("author"));
+  Data::FieldPtr authorField = c->fieldByBibtexName(QLatin1String("author"));
   if(authorField) {
     if(authorField->flags() & Data::Field::AllowMultiple) {
       // grab first author only;
@@ -77,21 +73,21 @@ QString BibtexHandler::bibtexKey(Data::ConstEntryPtr entry_) {
     }
   }
 
-  Data::FieldPtr titleField = c->fieldByBibtexName(QString::fromLatin1("title"));
+  Data::FieldPtr titleField = c->fieldByBibtexName(QLatin1String("title"));
   QString title;
   if(titleField) {
     title = entry_->field(titleField->name());
   }
 
-  Data::FieldPtr yearField = c->fieldByBibtexName(QString::fromLatin1("year"));
+  Data::FieldPtr yearField = c->fieldByBibtexName(QLatin1String("year"));
   QString year;
   if(yearField) {
     year = entry_->field(yearField->name());
   }
   if(year.isEmpty()) {
-    year = entry_->field(QString::fromLatin1("pub_year"));
+    year = entry_->field(QLatin1String("pub_year"));
     if(year.isEmpty()) {
-      year = entry_->field(QString::fromLatin1("cr_year"));
+      year = entry_->field(QLatin1String("cr_year"));
     }
   }
   year = year.section(';', 0, 0);
@@ -103,16 +99,16 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
   QString key;
   // if no comma, take the last word
   if(!author_.isEmpty()) {
-    if(author_.find(',') == -1) {
-      key += author_.section(' ', -1).lower() + '-';
+    if(author_.indexOf(',') == -1) {
+      key += author_.section(' ', -1).toLower() + '-';
     } else {
       // if there is a comma, take the string up to the first comma
-      key += author_.section(',', 0, 0).lower() + '-';
+      key += author_.section(',', 0, 0).toLower() + '-';
     }
   }
-  QStringList words = QStringList::split(' ', title_);
-  for(QStringList::ConstIterator it = words.begin(); it != words.end(); ++it) {
-    key += (*it).left(1).lower();
+  QStringList words = title_.split(' ', QString::SkipEmptyParts);
+  foreach(const QString& word, words) {
+    key += word.left(1).toLower();
   }
   key += year_;
   // bibtex key may only contain [0-9a-zA-Z-]
@@ -120,28 +116,28 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
 }
 
 void BibtexHandler::loadTranslationMaps() {
-  QString mapfile = locate("appdata", QString::fromLatin1("bibtex-translation.xml"));
+  QString mapfile = KStandardDirs::locate("appdata", QLatin1String("bibtex-translation.xml"));
   if(mapfile.isEmpty()) {
     return;
   }
 
-  s_utf8LatexMap = new StringListMap();
+  s_utf8LatexMap = new StringListHash();
 
-  KURL u;
+  KUrl u;
   u.setPath(mapfile);
   // no namespace processing
   QDomDocument dom = FileHandler::readXMLFile(u, false);
 
-  QDomNodeList keyList = dom.elementsByTagName(QString::fromLatin1("key"));
+  QDomNodeList keyList = dom.elementsByTagName(QLatin1String("key"));
 
-  for(unsigned i = 0; i < keyList.count(); ++i) {
-    QDomNodeList strList = keyList.item(i).toElement().elementsByTagName(QString::fromLatin1("string"));
+  for(int i = 0; i < keyList.count(); ++i) {
+    QDomNodeList strList = keyList.item(i).toElement().elementsByTagName(QLatin1String("string"));
     // the strList might have more than one node since there are multiple ways
     // to represent a character in LaTex.
-    QString s = keyList.item(i).toElement().attribute(QString::fromLatin1("char"));
-    for(unsigned j = 0; j < strList.count(); ++j) {
+    QString s = keyList.item(i).toElement().attribute(QLatin1String("char"));
+    for(int j = 0; j < strList.count(); ++j) {
       (*s_utf8LatexMap)[s].append(strList.item(j).toElement().text());
-//      kdDebug() << "BibtexHandler::loadTranslationMaps - "
+//      kDebug() << "BibtexHandler::loadTranslationMaps - "
 //       << s << " = " << strList.item(j).toElement().text() << endl;
     }
   }
@@ -153,9 +149,9 @@ QString BibtexHandler::importText(char* text_) {
   }
 
   QString str = QString::fromUtf8(text_);
-  for(StringListMap::Iterator it = s_utf8LatexMap->begin(); it != s_utf8LatexMap->end(); ++it) {
-    for(QStringList::Iterator sit = it.data().begin(); sit != it.data().end(); ++sit) {
-      str.replace(*sit, it.key());
+  for(StringListHash::const_iterator it = s_utf8LatexMap->constBegin(); it != s_utf8LatexMap->constEnd(); ++it) {
+    foreach(const QString& word, it.value()) {
+      str.replace(word, it.key());
     }
   }
 
@@ -164,9 +160,9 @@ QString BibtexHandler::importText(char* text_) {
   // we need to lower-case any capitalized text after the first letter that is
   // NOT contained in braces
 
-  QRegExp rx(QString::fromLatin1("\\{([A-Z]+)\\}"));
+  QRegExp rx(QLatin1String("\\{([A-Z]+)\\}"));
   rx.setMinimal(true);
-  str.replace(rx, QString::fromLatin1("\\1"));
+  str.replace(rx, QLatin1String("\\1"));
 
   return str;
 }
@@ -190,8 +186,8 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
 
   QString text = text_;
 
-  for(StringListMap::Iterator it = s_utf8LatexMap->begin(); it != s_utf8LatexMap->end(); ++it) {
-    text.replace(it.key(), it.data()[0]);
+  for(StringListHash::const_iterator it = s_utf8LatexMap->constBegin(); it != s_utf8LatexMap->constEnd(); ++it) {
+    text.replace(it.key(), it.value()[0]);
   }
 
   if(macros_.isEmpty()) {
@@ -206,14 +202,14 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
   QStringList list;
 
 // first, split the text
-  QStringList tokens = QStringList::split('#', text, true);
-  for(QStringList::Iterator it = tokens.begin(); it != tokens.end(); ++it) {
+  const QStringList tokens = text.split('#', QString::KeepEmptyParts);
+  foreach(const QString& token, tokens) {
     // check to see if token is a macro
-    if(macros_.findIndex((*it).stripWhiteSpace()) == -1) {
+    if(macros_.indexOf(token.trimmed()) == -1) {
       // the token is NOT a macro, add braces around whole words and also around capitals
-      list << lquote + addBraces(*it) + rquote;
+      list << lquote + addBraces(token) + rquote;
     } else {
-      list << *it;
+      list << token;
     }
   }
 
@@ -224,7 +220,7 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
   return text;
 }
 
-bool BibtexHandler::setFieldValue(Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_) {
+bool BibtexHandler::setFieldValue(Tellico::Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_) {
   Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(entry_->collection().data());
   Data::FieldPtr field = c->fieldByBibtexName(bibtexField_);
   if(!field) {
@@ -233,22 +229,26 @@ bool BibtexHandler::setFieldValue(Data::EntryPtr entry_, const QString& bibtexFi
     // but the existing collection had a field "keyword" so the values would not get imported
     // here, check to see if the current collection has a field with the same bibtex name and
     // use it instead of creating a new one
-    Data::BibtexCollection* existingColl = Data::Document::self()->collection()->type() == Data::Collection::Bibtex
-                                         ? static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data())
-                                         : 0;
-    Data::FieldPtr existingField = existingColl ? existingColl->fieldByBibtexName(bibtexField_) : 0;
+    Data::BibtexCollection* existingColl = 0;
+    if(Data::Document::self()->collection()->type() == Data::Collection::Bibtex) {
+       existingColl = static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data());
+    }
+    Data::FieldPtr existingField;
+    if(existingColl) {
+       existingField = existingColl->fieldByBibtexName(bibtexField_);
+    }
     if(existingField) {
       field = new Data::Field(*existingField);
     } else if(value_.length() < 100) {
       // arbitrarily say if the value has more than 100 chars, then it's a paragraph
-      QString vlower = value_.lower();
+      QString vlower = value_.toLower();
       // special case, try to detect URLs
       // In qt 3.1, QString::startsWith() is always case-sensitive
-      if(bibtexField_ == Latin1Literal("url")
-         || vlower.startsWith(QString::fromLatin1("http")) // may also be https
-         || vlower.startsWith(QString::fromLatin1("ftp:/"))
-         || vlower.startsWith(QString::fromLatin1("file:/"))
-         || vlower.startsWith(QString::fromLatin1("/"))) { // assume this indicates a local path
+      if(bibtexField_ == QLatin1String("url")
+         || vlower.startsWith(QLatin1String("http")) // may also be https
+         || vlower.startsWith(QLatin1String("ftp:/"))
+         || vlower.startsWith(QLatin1String("file:/"))
+         || vlower.startsWith(QLatin1String("/"))) { // assume this indicates a local path
         myDebug() << "BibtexHandler::setFieldValue() - creating a URL field for " << bibtexField_ << endl;
         field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::URL);
       } else {
@@ -258,12 +258,12 @@ bool BibtexHandler::setFieldValue(Data::EntryPtr entry_, const QString& bibtexFi
     } else {
       field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::Para);
     }
-    field->setProperty(QString::fromLatin1("bibtex"), bibtexField_);
+    field->setProperty(QLatin1String("bibtex"), bibtexField_);
     c->addField(field);
   }
   // special case keywords, replace commas with semi-colons so they get separated
   QString value = value_;
-  if(field->property(QString::fromLatin1("bibtex")).startsWith(QString::fromLatin1("keyword"))) {
+  if(field->property(QLatin1String("bibtex")).startsWith(QLatin1String("keyword"))) {
     value.replace(',', ';');
     // special case refbase bibtex export, with multiple keywords fields
     QString oValue = entry_->field(field);
@@ -276,17 +276,18 @@ bool BibtexHandler::setFieldValue(Data::EntryPtr entry_, const QString& bibtexFi
 
 QString& BibtexHandler::cleanText(QString& text_) {
   // FIXME: need to improve this for removing all Latex entities
-//  QRegExp rx(QString::fromLatin1("(?=[^\\\\])\\\\.+\\{"));
-  QRegExp rx(QString::fromLatin1("\\\\.+\\{"));
+//  QRegExp rx(QLatin1String("(?=[^\\\\])\\\\.+\\{"));
+  QRegExp rx(QLatin1String("\\\\.+\\{"));
   rx.setMinimal(true);
   text_.replace(rx, QString::null);
-  text_.replace(QRegExp(QString::fromLatin1("[{}]")), QString::null);
+  text_.replace(QRegExp(QLatin1String("[{}]")), QString::null);
   text_.replace('~', ' ');
   return text_;
 }
 
 // add braces around capital letters
-QString& BibtexHandler::addBraces(QString& text) {
+QString BibtexHandler::addBraces(const QString& text_) {
+  QString text = text_;
 #if !TELLICO_BIBTEX_BRACES
   return text;
 #else

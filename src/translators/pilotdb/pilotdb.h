@@ -23,7 +23,7 @@
 #include "libpalm/Database.h"
 #include "libflatfile/Field.h"
 
-#include <qcstring.h>
+#include <QByteArray>
 
 namespace Tellico {
   namespace Export {

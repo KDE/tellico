@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,10 +11,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOCONTROLLER_H
-#define TELLICOCONTROLLER_H
+#ifndef TELLICO_CONTROLLER_H
+#define TELLICO_CONTROLLER_H
 
-class QPopupMenu;
+#include "entry.h"
+
+#include <QObject>
+#include <QList>
+
+class KMenu;
 
 namespace Tellico {
   class MainWindow;
@@ -23,14 +28,7 @@ namespace Tellico {
   namespace Data {
     class Collection;
   }
-}
-
-#include "entry.h"
-
-#include <qobject.h>
-
-namespace Tellico {
-class Observer;
+  class Observer;
 
 /**
  * @author Robby Stephenson
@@ -43,23 +41,23 @@ public:
   /**
    * Initializes the singleton. Should just be called once, from Tellico::MainWindow
    */
-  static void init(MainWindow* parent, const char* name=0) {
-    if(!s_self) s_self = new Controller(parent, name);
+  static void init(MainWindow* parent) {
+    if(!s_self) s_self = new Controller(parent);
   }
 
-  const Data::EntryVec& selectedEntries() const { return m_selectedEntries; }
-  Data::EntryVec visibleEntries();
+  const Data::EntryList& selectedEntries() const { return m_selectedEntries; }
+  Data::EntryList visibleEntries();
 
   void editEntry(Data::EntryPtr) const;
   void hideTabs() const;
   /**
    * Plug the default collection actions into a widget
    */
-  void plugCollectionActions(QPopupMenu* popup);
+  void plugCollectionActions(KMenu* popup);
   /**
    * Plug the default entry actions into a widget
    */
-  void plugEntryActions(QPopupMenu* popup);
+  void plugEntryActions(KMenu* popup);
   void updateActions() const;
 
   GroupIterator groupIterator() const;
@@ -91,9 +89,9 @@ public:
   void modifiedField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
   void removedField(Data::CollPtr coll, Data::FieldPtr field);
 
-  void addedEntries(Data::EntryVec entries);
-  void modifiedEntries(Data::EntryVec entries);
-  void removedEntries(Data::EntryVec entries);
+  void addedEntries(Data::EntryList entries);
+  void modifiedEntries(Data::EntryList entries);
+  void removedEntries(Data::EntryList entries);
 
   void addedBorrower(Data::BorrowerPtr borrower);
   void modifiedBorrower(Data::BorrowerPtr borrower);
@@ -130,8 +128,8 @@ public slots:
    * @param widget The widget doing the selecting, if NULL, then use previous
    * @param entries The list of selected entries
    */
-  void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryVec& entries);
-  void slotUpdateCurrent(const Tellico::Data::EntryVec& entries);
+  void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryList& entries);
+  void slotUpdateCurrent(const Tellico::Data::EntryList& entries);
   void slotCopySelectedEntries();
   void slotUpdateSelectedEntries(const QString& source);
   void slotDeleteSelectedEntries();
@@ -139,7 +137,7 @@ public slots:
   void slotUpdateFilter(Tellico::FilterPtr filter);
   void slotCheckOut();
   void slotCheckIn();
-  void slotCheckIn(const Data::EntryVec& entries);
+  void slotCheckIn(const Data::EntryList& entries);
   void slotGoPrevEntry();
   void slotGoNextEntry();
 
@@ -148,11 +146,11 @@ signals:
 
 private:
   static Controller* s_self;
-  Controller(MainWindow* parent, const char* name);
+  Controller(MainWindow* parent);
 
   void blockAllSignals(bool block) const;
   bool canCheckIn() const;
-  void plugUpdateMenu(QPopupMenu* popup);
+  void plugUpdateMenu(KMenu* popup);
   enum EntryDirection { PrevEntry, NextEntry };
   void goEntrySibling(EntryDirection dir);
 
@@ -160,14 +158,14 @@ private:
 
   bool m_working;
 
-  typedef PtrVector<Tellico::Observer> ObserverVec;
-  ObserverVec m_observers;
+  typedef QList<Tellico::Observer*> ObserverList;
+  ObserverList m_observers;
 
   /**
    * Keep track of the selected entries so that a top-level delete has something for reference
    */
-  Data::EntryVec m_selectedEntries;
-  Data::EntryVec m_currentEntries;
+  Data::EntryList m_selectedEntries;
+  Data::EntryList m_currentEntries;
   QWidget* m_widgetWithSelection;
 };
 

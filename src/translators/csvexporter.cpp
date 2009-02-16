@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,13 +20,13 @@
 #include <kdebug.h>
 #include <klineedit.h>
 #include <kconfig.h>
+#include <KConfigGroup>
 
-#include <qgroupbox.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
-#include <qwhatsthis.h>
+#include <QGroupBox>
+#include <QCheckBox>
+#include <QRadioButton>
+#include <QGridLayout>
+#include <QVBoxLayout>
 
 using Tellico::Export::CSVExporter;
 
@@ -46,13 +46,13 @@ QString CSVExporter::fileFilter() const {
 
 QString& CSVExporter::escapeText(QString& text_) {
   bool quotes = false;
-  if(text_.find('"') != -1) {
+  if(text_.indexOf('"') != -1) {
     quotes = true;
     // quotation marks will be escaped by using a double pair
     text_.replace('"', QString::fromLatin1("\"\""));
   }
   // if the text contains quotes or the delimiter, it needs to be surrounded by quotes
-  if(quotes || text_.find(m_delimiter) != -1) {
+  if(quotes || text_.indexOf(m_delimiter)!= -1) {
     text_.prepend('"');
     text_.append('"');
   }
@@ -66,84 +66,81 @@ bool CSVExporter::exec() {
 
   QString text;
 
-  Data::FieldVec fields = collection()->fields();
-  Data::FieldVec::Iterator fIt;
+  Data::FieldList fields = collection()->fields();
 
   if(m_includeTitles) {
-    for(fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+    foreach(Data::FieldPtr fIt, fields) {
       QString title = fIt->title();
-      text += escapeText(title);
-      if(!fIt.nextEnd()) {
-        text += m_delimiter;
-      }
+      text += escapeText(title) + m_delimiter;
     }
+    // remove last delimiter
+    text.truncate(text.length() - m_delimiter.length());
     text += '\n';
   }
 
   bool format = options() & Export::ExportFormatted;
 
   QString tmp;
-  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
-    for(fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+  Data::EntryList entries = this->entries();
+  foreach(Data::EntryPtr entryIt, entries) {
+    foreach(Data::FieldPtr fIt, fields) {
       tmp = entryIt->field(fIt->name(), format);
-      text += escapeText(tmp);
-      if(!fIt.nextEnd()) {
-        text += m_delimiter;
-      }
+      text += escapeText(tmp) + m_delimiter;
     }
-    fIt = fields.begin();
+    // remove last delimiter
+    text.truncate(text.length() - m_delimiter.length());
     text += '\n';
   }
 
   return FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);
 }
 
-QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
+QWidget* CSVExporter::widget(QWidget* parent_) {
   if(m_widget && m_widget->parent() == parent_) {
     return m_widget;
   }
 
-  m_widget = new QWidget(parent_, name_);
+  m_widget = new QWidget(parent_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("CSV Options"), m_widget);
-  l->addWidget(box);
+  QGroupBox* gbox = new QGroupBox(i18n("CSV Options"), m_widget);
+  QVBoxLayout* vlay = new QVBoxLayout(gbox);
 
-  m_checkIncludeTitles = new QCheckBox(i18n("Include field titles as column headers"), box);
+  m_checkIncludeTitles = new QCheckBox(i18n("Include field titles as column headers"), gbox);
   m_checkIncludeTitles->setChecked(m_includeTitles);
-  QWhatsThis::add(m_checkIncludeTitles, i18n("If checked, a header row will be added with the "
-                                             "field titles."));
+  m_checkIncludeTitles->setWhatsThis(i18n("If checked, a header row will be added with the "
+                                          "field titles."));
 
-  QButtonGroup* delimiterGroup = new QButtonGroup(0, Qt::Vertical, i18n("Delimiter"), box);
-  QGridLayout* m_delimiterGroupLayout = new QGridLayout(delimiterGroup->layout());
+  QGroupBox* delimiterGroup = new QGroupBox(i18n("Delimiter"), gbox);
+  QGridLayout* m_delimiterGroupLayout = new QGridLayout(delimiterGroup);
   m_delimiterGroupLayout->setAlignment(Qt::AlignTop);
-  QWhatsThis::add(delimiterGroup, i18n("In addition to a comma, other characters may be used as "
-                                       "a delimiter, separating each value in the file."));
+  delimiterGroup->setWhatsThis(i18n("In addition to a comma, other characters may be used as "
+                                    "a delimiter, separating each value in the file."));
 
   m_radioComma = new QRadioButton(delimiterGroup);
   m_radioComma->setText(i18n("Comma"));
   m_radioComma->setChecked(true);
-  QWhatsThis::add(m_radioComma, i18n("Use a comma as the delimiter."));
+  m_radioComma->setWhatsThis(i18n("Use a comma as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioComma, 0, 0);
 
   m_radioSemicolon = new QRadioButton( delimiterGroup);
   m_radioSemicolon->setText(i18n("Semicolon"));
-  QWhatsThis::add(m_radioSemicolon, i18n("Use a semi-colon as the delimiter."));
+  m_radioSemicolon->setWhatsThis(i18n("Use a semi-colon as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioSemicolon, 0, 1);
 
   m_radioTab = new QRadioButton(delimiterGroup);
   m_radioTab->setText(i18n("Tab"));
-  QWhatsThis::add(m_radioTab, i18n("Use a tab as the delimiter."));
+  m_radioTab->setWhatsThis(i18n("Use a tab as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioTab, 1, 0);
 
   m_radioOther = new QRadioButton(delimiterGroup);
   m_radioOther->setText(i18n("Other"));
-  QWhatsThis::add(m_radioOther, i18n("Use a custom string as the delimiter."));
+  m_radioOther->setWhatsThis(i18n("Use a custom string as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioOther, 1, 1);
 
   m_editOther = new KLineEdit(delimiterGroup);
   m_editOther->setEnabled(m_radioOther->isChecked());
-  QWhatsThis::add(m_editOther, i18n("A custom string, such as a colon, may be used as a delimiter."));
+  m_editOther->setWhatsThis(i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_delimiterGroupLayout->addWidget(m_editOther, 1, 2);
   QObject::connect(m_radioOther, SIGNAL(toggled(bool)),
                    m_editOther, SLOT(setEnabled(bool)));
@@ -160,17 +157,21 @@ QWidget* CSVExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
     m_editOther->setText(m_delimiter);
   }
 
+  vlay->addWidget(m_checkIncludeTitles);
+  vlay->addWidget(delimiterGroup);
+
+  l->addWidget(gbox);
   l->addStretch(1);
   return m_widget;
 }
 
-void CSVExporter::readOptions(KConfig* config_) {
+void CSVExporter::readOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_includeTitles = group.readBoolEntry("Include Titles", m_includeTitles);
+  m_includeTitles = group.readEntry("Include Titles", m_includeTitles);
   m_delimiter = group.readEntry("Delimiter", m_delimiter);
 }
 
-void CSVExporter::saveOptions(KConfig* config_) {
+void CSVExporter::saveOptions(KSharedConfigPtr config_) {
   m_includeTitles = m_checkIncludeTitles->isChecked();
   if(m_radioComma->isChecked()) {
     m_delimiter = QChar(',');

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,7 +17,6 @@
 #include "../collections/bibtexcollection.h"
 #include "../field.h"
 #include "../entry.h"
-#include "../latin1literal.h"
 #include "../tellico_strings.h"
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
@@ -39,19 +38,19 @@ Tellico::Data::CollPtr BibtexmlImporter::collection() {
 
 void BibtexmlImporter::loadDomDocument() {
   QDomElement root = domDocument().documentElement();
-  if(root.isNull() || root.localName() != Latin1Literal("file")) {
-    setStatusMessage(i18n(errorLoad).arg(url().fileName()));
+  if(root.isNull() || root.localName() != QLatin1String("file")) {
+    setStatusMessage(i18n(errorLoad, url().fileName()));
     return;
   }
 
   const QString& ns = XML::nsBibtexml;
   m_coll = new Data::BibtexCollection(true);
 
-  QDomNodeList entryelems = root.elementsByTagNameNS(ns, QString::fromLatin1("entry"));
-//  kdDebug() << "BibtexmlImporter::loadDomDocument - found " << entryelems.count() << " entries" << endl;
+  QDomNodeList entryelems = root.elementsByTagNameNS(ns, QLatin1String("entry"));
+//  kDebug() << "BibtexmlImporter::loadDomDocument - found " << entryelems.count() << " entries";
 
   const uint count = entryelems.count();
-  const uint stepSize = QMAX(s_stepSize, count/100);
+  const uint stepSize = qMax(s_stepSize, count/100);
   const bool showProgress = options() & ImportProgress;
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
@@ -59,7 +58,7 @@ void BibtexmlImporter::loadDomDocument() {
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   ProgressItem::Done done(this);
 
-  for(uint j = 0; !m_cancelled && j < entryelems.count(); ++j) {
+  for(int j = 0; !m_cancelled && j < entryelems.count(); ++j) {
     readEntry(entryelems.item(j));
 
     if(showProgress && j%stepSize == 0) {
@@ -72,7 +71,7 @@ void BibtexmlImporter::loadDomDocument() {
 void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
   QDomNode node = const_cast<QDomNode&>(entryNode_);
 
-  Data::EntryPtr entry = new Data::Entry(m_coll);
+  Data::EntryPtr entry(new Data::Entry(m_coll));
 
 /* The Bibtexml format looks like
   <entry id="...">
@@ -83,9 +82,9 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
     <publisher>...</publisher> */
 
   QString type = node.firstChild().toElement().tagName();
-  entry->setField(QString::fromLatin1("entry-type"), type);
-  QString id = node.toElement().attribute(QString::fromLatin1("id"));
-  entry->setField(QString::fromLatin1("bibtex-key"), id);
+  entry->setField(QLatin1String("entry-type"), type);
+  QString id = node.toElement().attribute(QLatin1String("id"));
+  entry->setField(QLatin1String("bibtex-key"), id);
 
   QString name, value;
   // field values are first child of first child of entry node
@@ -99,36 +98,36 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
     } else {
       // is either titlelist, authorlist, editorlist, or keywords
       QString parName = n.toElement().tagName();
-      if(parName == Latin1Literal("titlelist")) {
+      if(parName == QLatin1String("titlelist")) {
         for(QDomNode n2 = node.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
           name = n2.toElement().tagName();
           value = n2.toElement().text();
           if(!name.isEmpty() && !value.isEmpty()) {
-            BibtexHandler::setFieldValue(entry, name, value.simplifyWhiteSpace());
+            BibtexHandler::setFieldValue(entry, name, value.simplified());
           }
         }
-        name.truncate(0);
-        value.truncate(0);
+        name.clear();
+        value.clear();
       } else {
         name = n.firstChild().toElement().tagName();
-        if(name == Latin1Literal("keyword")) {
-          name = QString::fromLatin1("keywords");
+        if(name == QLatin1String("keyword")) {
+          name = QLatin1String("keywords");
         }
-        value.truncate(0);
+        value.clear();
         for(QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
           // n2 could have first, middle, lastname elements...
-          if(name == Latin1Literal("person")) {
+          if(name == QLatin1String("person")) {
             QStringList names;
-            names << QString::fromLatin1("initials") << QString::fromLatin1("first")
-                  << QString::fromLatin1("middle") << QString::fromLatin1("prelast")
-                  << QString::fromLatin1("last") << QString::fromLatin1("lineage");
-            for(QStringList::ConstIterator it = names.begin(); it != names.end(); ++it) {
-              QDomNodeList list = n2.toElement().elementsByTagName(*it);
+            names << QLatin1String("initials") << QLatin1String("first")
+                  << QLatin1String("middle") << QLatin1String("prelast")
+                  << QLatin1String("last") << QLatin1String("lineage");
+            foreach(const QString& name, names) {
+              QDomNodeList list = n2.toElement().elementsByTagName(name);
               if(list.count() > 1) {
                 value += list.item(0).toElement().text();
               }
-              if(*it != names.last()) {
-                value += QString::fromLatin1(" ");
+              if(name != names.last()) {
+                value += QLatin1String(" ");
               }
             }
           }
@@ -139,17 +138,17 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
               value += n3.toText().data();
             }
             if(n3 != n2.lastChild()) {
-              value += QString::fromLatin1(" ");
+              value += QLatin1String(" ");
             }
           }
           if(n2 != n.lastChild()) {
-            value += QString::fromLatin1("; ");
+            value += QLatin1String("; ");
           }
         }
       }
     }
     if(!name.isEmpty() && !value.isEmpty()) {
-      BibtexHandler::setFieldValue(entry, name, value.simplifyWhiteSpace());
+      BibtexHandler::setFieldValue(entry, name, value.simplified());
     }
   }
 

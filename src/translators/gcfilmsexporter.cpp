@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,14 +15,16 @@
 #include "../collection.h"
 #include "../document.h"
 #include "../filehandler.h"
-#include "../latin1literal.h"
 #include "../tellico_utils.h"
 #include "../stringset.h"
 #include "../tellico_kernel.h"
 #include "../imagefactory.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kio/netaccess.h>
+
+#include <QTextStream>
 
 namespace {
   char GCFILMS_DELIMITER = '|';
@@ -51,7 +53,7 @@ bool GCfilmsExporter::exec() {
   }
 
   QString text;
-  QTextOStream ts(&text);
+  QTextStream ts(&text);
 
   ts << "GCfilms|" << coll->entryCount() << "|";
   if(options() & Export::ExportUTF8) {
@@ -80,21 +82,21 @@ bool GCfilmsExporter::exec() {
   }
 
   // only going to export images if it's a local path
-  KURL imageDir;
+  KUrl imageDir;
   if(url().isLocalFile()) {
     imageDir = url();
     imageDir.cd(QString::fromLatin1(".."));
     imageDir.addPath(url().fileName().section('.', 0, 0) + QString::fromLatin1("_images/"));
-    if(!KIO::NetAccess::exists(imageDir, false, 0)) {
+    if(!KIO::NetAccess::exists(imageDir, KIO::NetAccess::DestinationSide, 0)) {
       bool success = KIO::NetAccess::mkdir(imageDir, Kernel::self()->widget());
       if(!success) {
-        imageDir = KURL(); // means don't write images
+        imageDir = KUrl(); // means don't write images
       }
     }
   }
 
-  QStringList images;
-  for(Data::EntryVec::ConstIterator entry = entries().begin(); entry != entries().end(); ++entry) {
+  StringSet images;
+  foreach(Data::EntryPtr entry, entries()) {
     ts << entry->id() << d;
     push(ts, "title", entry, format);
     push(ts, "year", entry, format);
@@ -105,7 +107,7 @@ bool GCfilmsExporter::exec() {
     // do image
     QString tmp = entry->field(QString::fromLatin1("cover"));
     if(!tmp.isEmpty() && !imageDir.isEmpty()) {
-      images << tmp;
+      images.add(tmp);
       ts << imageDir.path() << tmp;
     }
     ts << d;
@@ -114,7 +116,7 @@ bool GCfilmsExporter::exec() {
     const QStringList cast = entry->fields(QString::fromLatin1("cast"), false);
     for(QStringList::ConstIterator it = cast.begin(); it != cast.end(); ++it) {
       ts << (*it).section(QString::fromLatin1("::"), 0, 0);
-      if(it != cast.fromLast()) {
+      if(it != --cast.end()) {
         ts << ", ";
       }
     }
@@ -159,11 +161,10 @@ bool GCfilmsExporter::exec() {
     } else {
       // find loan
       bool found = false;
-      const Data::BorrowerVec& borrowers = Data::Document::self()->collection()->borrowers();
-      for(Data::BorrowerVec::ConstIterator b = borrowers.begin(); b != borrowers.end() && !found; ++b) {
-        const Data::LoanVec& loans = b->loans();
-        for(Data::LoanVec::ConstIterator loan = loans.begin(); loan != loans.end(); ++loan) {
-          if(entry.data() == loan->entry()) {
+      Data::BorrowerList borrowers = Data::Document::self()->collection()->borrowers();
+      foreach(Data::BorrowerPtr b, borrowers) {
+        foreach(Data::LoanPtr loan, b->loans()) {
+          if(entry == loan->entry()) {
             ts << b->name() << d;
             ts << loan->loanDate().day() << '/'
                << loan->loanDate().month() << '/'
@@ -181,15 +182,15 @@ bool GCfilmsExporter::exec() {
     // for certification, only thing we can do is assume default american ratings
     tmp = entry->field(QString::fromLatin1("certification"),  format);
     int age = 0;
-    if(tmp == Latin1Literal("U (USA)")) {
+    if(tmp == QLatin1String("U (USA)")) {
       age = 1;
-    } else if(tmp == Latin1Literal("G (USA)")) {
+    } else if(tmp == QLatin1String("G (USA)")) {
       age = 2;
-    } else if(tmp == Latin1Literal("PG (USA)")) {
+    } else if(tmp == QLatin1String("PG (USA)")) {
       age = 5;
-    } else if(tmp == Latin1Literal("PG-13 (USA)")) {
+    } else if(tmp == QLatin1String("PG-13 (USA)")) {
       age = 13;
-    } else if(tmp == Latin1Literal("R (USA)")) {
+    } else if(tmp == QLatin1String("R (USA)")) {
       age = 17;
     }
     if(age > 0) {
@@ -201,23 +202,17 @@ bool GCfilmsExporter::exec() {
     ts << endl;
   }
 
-  StringSet imageSet;
-  for(QStringList::ConstIterator it = images.begin(); it != images.end(); ++it) {
-    if(imageSet.has(*it)) {
-      continue;
-    }
-    if(ImageFactory::writeImage(*it, imageDir)) {
-      imageSet.add(*it);
-    } else {
-      kdWarning() << "GCfilmsExporter::exec() - unable to write image file: "
-                  << imageDir << *it << endl;
+   foreach(const QString& image, images) {
+    if(!ImageFactory::writeImage(image, imageDir)) {
+      myWarning() << "unable to write image file:"
+                  << imageDir << image << endl;
     }
   }
 
   return FileHandler::writeTextURL(url(), text, options() & Export::ExportUTF8, options() & Export::ExportForce);
 }
 
-void GCfilmsExporter::push(QTextOStream& ts_, QCString fieldName_, Data::EntryVec::ConstIterator entry_, bool format_) {
+void GCfilmsExporter::push(QTextStream& ts_, const QByteArray& fieldName_, Tellico::Data::EntryPtr entry_, bool format_) {
   Data::FieldPtr f = collection()->fieldByName(QString::fromLatin1(fieldName_));
   // don't format multiple names cause commas will cause problems
   if(f->formatFlag() == Data::Field::FormatName && (f->flags() & Data::Field::AllowMultiple)) {

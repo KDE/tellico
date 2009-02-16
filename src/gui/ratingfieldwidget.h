@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef RATINGFIELDWIDGET_H
-#define RATINGFIELDWIDGET_H
+#ifndef TELLICO_RATINGFIELDWIDGET_H
+#define TELLICO_RATINGFIELDWIDGET_H
 
 #include "fieldwidget.h"
 #include "../datavectors.h"
@@ -28,7 +28,7 @@ class RatingFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  RatingFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  RatingFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~RatingFieldWidget() {}
 
   virtual QString text() const;

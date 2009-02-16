@@ -121,7 +121,6 @@
   <Action name="coll_reports"/>
   <Action name="change_entry_grouping"/>
   <Separator lineSeparator="true"/>
-  <Action name="quick_filter_clear"/>
   <Action name="quick_filter"/>
   <Action name="filter_dialog"/>
  </ToolBar>

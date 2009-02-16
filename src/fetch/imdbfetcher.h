@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,22 +11,25 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef IMDBFETCHER_H
-#define IMDBFETCHER_H
+#ifndef TELLICO_IMDBFETCHER_H
+#define TELLICO_IMDBFETCHER_H
 
 #include "fetcher.h"
 #include "configwidget.h"
-#include "../datavectors.h"
 
 #include <kurl.h>
-#include <kio/job.h>
 
-#include <qcstring.h> // for QByteArray
-#include <qmap.h>
-#include <qguardedptr.h>
+#include <QMap>
+#include <QPointer>
 
 class KLineEdit;
 class KIntSpinBox;
+class KJob;
+namespace KIO {
+  class Job;
+  class StoredTransferJob;
+}
+
 class QCheckBox;
 class QRegExpr;
 
@@ -40,7 +43,7 @@ class IMDBFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  IMDBFetcher(QObject* parent, const char* name=0);
+  IMDBFetcher(QObject* parent);
   /**
    */
   virtual ~IMDBFetcher();
@@ -79,9 +82,8 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
-  void slotRedirection(KIO::Job* job, const KURL& toURL);
+  void slotComplete(KJob* job);
+  void slotRedirection(KIO::Job* job, const KUrl& toURL);
 
 private:
   static void initRegExps();
@@ -95,13 +97,13 @@ private:
   void doRunningTime(const QString& s, Data::EntryPtr e);
   void doAspectRatio(const QString& s, Data::EntryPtr e);
   void doAlsoKnownAs(const QString& s, Data::EntryPtr e);
-  void doPlot(const QString& s, Data::EntryPtr e, const KURL& baseURL_);
+  void doPlot(const QString& s, Data::EntryPtr e, const KUrl& baseURL_);
   void doPerson(const QString& s, Data::EntryPtr e,
                 const QString& imdbHeader, const QString& fieldName);
-  void doCast(const QString& s, Data::EntryPtr e, const KURL& baseURL_);
+  void doCast(const QString& s, Data::EntryPtr e, const KUrl& baseURL_);
   void doLists(const QString& s, Data::EntryPtr e);
   void doRating(const QString& s, Data::EntryPtr e);
-  void doCover(const QString& s, Data::EntryPtr e, const KURL& baseURL);
+  void doCover(const QString& s, Data::EntryPtr e, const KUrl& baseURL);
 
   void parseSingleTitleResult();
   void parseSingleNameResult();
@@ -112,8 +114,8 @@ private:
 
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;
-  QMap<int, KURL> m_matches;
-  QGuardedPtr<KIO::Job> m_job;
+  QMap<int, KUrl> m_matches;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;
   QString m_value;
@@ -122,9 +124,9 @@ private:
 
   QString m_host;
   int m_numCast;
-  KURL m_url;
+  KUrl m_url;
   bool m_redirected;
-  uint m_limit;
+  int m_limit;
   QStringList m_fields;
 
   QString m_popularTitles;

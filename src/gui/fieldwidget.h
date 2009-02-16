@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,13 +11,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FIELDWIDGET_H
-#define FIELDWIDGET_H
+#ifndef TELLICO_FIELDWIDGET_H
+#define TELLICO_FIELDWIDGET_H
 
 #include "../datavectors.h"
 
-#include <qwidget.h>
-#include <qregexp.h>
+#include <QWidget>
+#include <QRegExp>
 
 class QLabel;
 class QCheckBox;
@@ -39,7 +39,7 @@ class FieldWidget : public QWidget {
 Q_OBJECT
 
 public:
-  FieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  FieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~FieldWidget() {}
 
   Data::FieldPtr field() const { return m_field; }
@@ -58,7 +58,7 @@ public:
   virtual void addCompletionObjectItem(const QString&) {}
 
   // factory function
-  static FieldWidget* create(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  static FieldWidget* create(Data::FieldPtr field, QWidget* parent);
 
 public slots:
   virtual void insertDefault();

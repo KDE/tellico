@@ -40,7 +40,7 @@ public:
 
   virtual Type type() const { return ComicBook; }
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
 };
 
   } // end namespace

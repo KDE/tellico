@@ -1,0 +1,9 @@
+[KNewStuff2]
+#ProvidersUrl=http://periapsis.org/tellico/newstuff/tellicoscripts-providers.php
+ProvidersUrl=http://download.kde.org/khotnewstuff/tellicoscripts-providers.xml
+ChecksumPolicy=ifpossible
+SignaturePolicy=ifpossible
+TargetDir=tellico/tmp
+Uncompress=never
+InstallationCommand=dbus-send --type=method_call --dest=org.tellico_project /newstuff org.tellico_project.newstuff.installScript string:%f
+UninstallCommand=dbus-send --type=method_call --dest=org.tellico_project /newstuff org.tellico_project.newstuff.removeScript string:%f

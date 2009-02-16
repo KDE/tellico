@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,18 +11,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef LOANDIALOG_H
-#define LOANDIALOG_H
-
-class KLineEdit;
-class KTextEdit;
-class KCommand;
-class QCheckBox;
+#ifndef TELLICO_LOANDIALOG_H
+#define TELLICO_LOANDIALOG_H
 
 #include "datavectors.h"
 #include "borrower.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
+
+class KLineEdit;
+class KTextEdit;
+
+class QUndoCommand;
+class QCheckBox;
 
 namespace Tellico {
   namespace GUI {
@@ -32,7 +33,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class LoanDialog : public KDialogBase {
+class LoanDialog : public KDialog {
 Q_OBJECT
 
 public:
@@ -42,11 +43,11 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  LoanDialog(const Data::EntryVec& entries, QWidget* parent, const char* name=0);
-  LoanDialog(Data::LoanPtr loan, QWidget* parent, const char* name=0);
+  LoanDialog(const Data::EntryList& entries, QWidget* parent);
+  LoanDialog(Data::LoanPtr loan, QWidget* parent);
   virtual ~LoanDialog();
 
-  KCommand* createCommand();
+  QUndoCommand* createCommand();
 
 private slots:
   void slotBorrowerNameChanged(const QString& str);
@@ -56,8 +57,8 @@ private slots:
 
 private:
   void init();
-  KCommand* addLoansCommand();
-  KCommand* modifyLoansCommand();
+  QUndoCommand* addLoansCommand();
+  QUndoCommand* modifyLoansCommand();
 
   enum Mode {
     Add,
@@ -66,7 +67,7 @@ private:
 
   const Mode m_mode;
   Data::BorrowerPtr m_borrower;
-  Data::EntryVec m_entries;
+  Data::EntryList m_entries;
   Data::LoanPtr m_loan;
 
   KLineEdit* m_borrowerEdit;

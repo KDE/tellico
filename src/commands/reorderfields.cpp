@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,9 +20,9 @@
 
 using Tellico::Command::ReorderFields;
 
-ReorderFields::ReorderFields(Data::CollPtr coll_, const Data::FieldVec& oldFields_,
-                             const Data::FieldVec& newFields_)
-    : KCommand()
+ReorderFields::ReorderFields(Tellico::Data::CollPtr coll_, const Tellico::Data::FieldList& oldFields_,
+                             const Tellico::Data::FieldList& newFields_)
+    : QUndoCommand(i18n("Reorder Fields"))
     , m_coll(coll_)
     , m_oldFields(oldFields_)
     , m_newFields(newFields_)
@@ -34,7 +34,7 @@ ReorderFields::ReorderFields(Data::CollPtr coll_, const Data::FieldVec& oldField
   }
 }
 
-void ReorderFields::execute() {
+void ReorderFields::redo() {
   if(!m_coll) {
     return;
   }
@@ -42,14 +42,10 @@ void ReorderFields::execute() {
   Controller::self()->reorderedFields(m_coll);
 }
 
-void ReorderFields::unexecute() {
+void ReorderFields::undo() {
   if(!m_coll) {
     return;
   }
   m_coll->reorderFields(m_oldFields);
   Controller::self()->reorderedFields(m_coll);
-}
-
-QString ReorderFields::name() const {
-  return i18n("Reorder Fields");
 }

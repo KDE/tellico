@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,13 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef DATA_VECTORS_H
-#define DATA_VECTORS_H
+#ifndef TELLICO_DATA_VECTORS_H
+#define TELLICO_DATA_VECTORS_H
 
-#include "ptrvector.h"
-
-#include <qmap.h>
-#include <qpair.h>
+#include <QList>
+#include <QVector>
+#include <QMap>
+#include <QPair>
+#include <QMetaType>
 
 #include <ksharedptr.h>
 
@@ -26,37 +27,31 @@ namespace Tellico {
 
   class Filter;
   typedef KSharedPtr<Filter> FilterPtr;
-  typedef Vector<Filter> FilterVec;
+  typedef QList<FilterPtr> FilterList;
 
   namespace Data {
     class Collection;
     typedef KSharedPtr<Collection> CollPtr;
-    typedef KSharedPtr<const Collection> ConstCollPtr;
-    typedef Vector<Collection> CollVec;
+    typedef QList<CollPtr> CollList;
 
     class Field;
     typedef KSharedPtr<Field> FieldPtr;
-    typedef KSharedPtr<const Field> ConstFieldPtr;
-    typedef Vector<Field> FieldVec;
-    typedef FieldVec::Iterator FieldVecIt;
-//    typedef Vector<ConstFieldPtr> ConstFieldVec;
+    typedef QList<FieldPtr> FieldList;
 
     class Entry;
     typedef KSharedPtr<Entry> EntryPtr;
-    typedef KSharedPtr<const Entry> ConstEntryPtr;
-    typedef Vector<Entry> EntryVec;
-    typedef EntryVec::Iterator EntryVecIt;
-    typedef Vector<const Entry> ConstEntryVec;
+    typedef QList<EntryPtr> EntryList;
+
     // complicated, I know
     // first item is a vector of all entries that got added in the merge process
     // second item is a pair of entries that had their track field modified
     // since a music collection is the only one that would actually merge entries
-    typedef QValueVector< QPair<EntryPtr, QString> > PairVector;
-    typedef QPair<Data::EntryVec, PairVector> MergePair;
+    typedef QVector< QPair<EntryPtr, QString> > PairVector;
+    typedef QPair<Data::EntryList, PairVector> MergePair;
 
     class Borrower;
     typedef KSharedPtr<Borrower> BorrowerPtr;
-    typedef Vector<Borrower> BorrowerVec;
+    typedef QList<BorrowerPtr> BorrowerList;
   }
 }
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,9 +14,9 @@
 #ifndef TELLICO_EXPORT_GCFILMSEXPORTER_H
 #define TELLICO_EXPORT_GCFILMSEXPORTER_H
 
-class QTextOStream;
-
 #include "exporter.h"
+
+class QTextStream;
 
 namespace Tellico {
   namespace Export {
@@ -35,10 +35,10 @@ public:
   virtual QString fileFilter() const;
 
   // no options
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return 0; }
 
 private:
-  void push(QTextOStream& ts, QCString fieldName, Data::EntryVec::ConstIterator entry, bool format);
+  void push(QTextStream& ts, const QByteArray& fieldName, Data::EntryPtr entry, bool format);
 };
 
   } // end namespace

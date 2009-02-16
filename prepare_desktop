@@ -1,0 +1,13 @@
+#! /usr/bin/perl
+# script to extract the text from the default z39.50 servers file
+
+while(<>)
+{
+    chomp;
+
+	# name starts with "Name="
+	if(/^Name\s*=\s*(.+)\s*$/)
+	{
+		print "\ni18n(\"$1\");\n";
+	}	
+}

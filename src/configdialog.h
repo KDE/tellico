@@ -1,5 +1,5 @@
 /****************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,27 +11,27 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef CONFIGDIALOG_H
-#define CONFIGDIALOG_H
+#ifndef TELLICO_CONFIGDIALOG_H
+#define TELLICO_CONFIGDIALOG_H
 
 #include "fetch/fetcher.h"
 
-#include <kdialogbase.h>
-#include <klistview.h>
+#include <kpagedialog.h>
+#include <klistwidget.h>
 
 class KConfig;
 class KLineEdit;
 class KIntSpinBox;
 class KPushButton;
 class KIntNumInput;
-class KFontCombo;
 class KColorCombo;
 
+class QFontComboBox;
 class QCheckBox;
 class QRadioButton;
 
 namespace Tellico {
-  class SourceListViewItem;
+  class SourceListItem;
   namespace Fetch {
     class ConfigWidget;
   }
@@ -45,7 +45,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class ConfigDialog : public KDialogBase {
+class ConfigDialog : public KPageDialog {
 Q_OBJECT
 
 public:
@@ -53,9 +53,8 @@ public:
    * The constructor sets up the Tabbed dialog pages.
    *
    * @param parent A pointer to the parent widget
-   * @param name The widget name
    */
-  ConfigDialog(QWidget* parent, const char* name=0);
+  ConfigDialog(QWidget* parent);
   virtual ~ConfigDialog();
 
   /**
@@ -99,9 +98,9 @@ private slots:
   /**
    * Update the help link for a page.
    *
-  QCheckBox* m_cbWriteImagesInFile; * @param w The page
+   * @param w The page
    */
-  void slotUpdateHelpLink(QWidget* w);
+  void slotUpdateHelpLink(KPageWidgetItem* w);
   /**
    * Create a new Internet source
    */
@@ -114,7 +113,7 @@ private slots:
    * Remove a Internet source
    */
   void slotRemoveSourceClicked();
-  void slotSelectedSourceChanged(QListViewItem* item);
+  void slotSelectedSourceChanged(QListWidgetItem* item);
   void slotMoveUpSourceClicked();
   void slotMoveDownSourceClicked();
   void slotNewStuffClicked();
@@ -145,7 +144,7 @@ private:
    */
   void readFetchConfig();
 
-  SourceListViewItem* findItem(const QString& path) const;
+  SourceListItem* findItem(const QString& path) const;
   void loadTemplateList();
 
   bool m_modifying;
@@ -171,17 +170,17 @@ private:
 
   GUI::ComboBox* m_templateCombo;
   KPushButton* m_previewButton;
-  KFontCombo* m_fontCombo;
+  QFontComboBox* m_fontCombo;
   KIntNumInput* m_fontSizeInput;
   KColorCombo* m_baseColorCombo;
   KColorCombo* m_textColorCombo;
   KColorCombo* m_highBaseColorCombo;
   KColorCombo* m_highTextColorCombo;
 
-  KListView* m_sourceListView;
-  QMap<SourceListViewItem*, Fetch::ConfigWidget*> m_configWidgets;
-  QPtrList<Fetch::ConfigWidget> m_newStuffConfigWidgets;
-  QPtrList<Fetch::ConfigWidget> m_removedConfigWidgets;
+  KListWidget* m_sourceListWidget;
+  QMap<SourceListItem*, Fetch::ConfigWidget*> m_configWidgets;
+  QList<Fetch::ConfigWidget*> m_newStuffConfigWidgets;
+  QList<Fetch::ConfigWidget*> m_removedConfigWidgets;
   KPushButton* m_modifySourceBtn;
   KPushButton* m_moveUpSourceBtn;
   KPushButton* m_moveDownSourceBtn;
@@ -194,16 +193,15 @@ public:
   GeneralFetcherInfo(Fetch::Type t, const QString& n, bool o) : type(t), name(n), updateOverwrite(o) {}
   Fetch::Type type;
   QString name;
-  bool updateOverwrite : 1;
+  bool updateOverwrite;
 };
 
-class SourceListViewItem : public KListViewItem {
+class SourceListItem : public QListWidgetItem {
 public:
-  SourceListViewItem(KListView* parent, const GeneralFetcherInfo& info,
-                     const QString& groupName = QString::null);
-
-  SourceListViewItem(KListView* parent, QListViewItem* after,
-                     const GeneralFetcherInfo& info, const QString& groupName = QString::null);
+  SourceListItem(const GeneralFetcherInfo& info,
+                 const QString& groupName = QString::null);
+  SourceListItem(KListWidget* parent, const GeneralFetcherInfo& info,
+                 const QString& groupName = QString::null);
 
   void setConfigGroup(const QString& s) { m_configGroup = s; }
   const QString& configGroup() const { return m_configGroup; }
@@ -218,7 +216,7 @@ public:
 private:
   GeneralFetcherInfo m_info;
   QString m_configGroup;
-  bool m_newSource : 1;
+  bool m_newSource;
   Fetch::Fetcher::Ptr m_fetcher;
 };
 

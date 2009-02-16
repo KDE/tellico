@@ -24,13 +24,15 @@
 
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kconfig.h>
 #include <kio/job.h>
+#include <kio/jobuidelegate.h>
+#include <KConfigGroup>
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qfile.h>
-#include <qwhatsthis.h>
+#include <QLabel>
+#include <QFile>
+#include <QTextStream>
+#include <QGridLayout>
+#include <QDomDocument>
 
 //#define DISCOGS_TEST
 
@@ -42,8 +44,8 @@ namespace {
 
 using Tellico::Fetch::DiscogsFetcher;
 
-DiscogsFetcher::DiscogsFetcher(QObject* parent_, const char* name_)
-    : Fetcher(parent_, name_), m_xsltHandler(0),
+DiscogsFetcher::DiscogsFetcher(QObject* parent_)
+    : Fetcher(parent_), m_xsltHandler(0),
       m_limit(DISCOGS_MAX_RETURNS_TOTAL), m_job(0), m_started(false),
       m_apiKey(QString::fromLatin1(DISCOGS_API_KEY)) {
 }
@@ -70,11 +72,11 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
-  m_fetchImages = config_.readBoolEntry("Fetch Images", true);
-  m_fields = config_.readListEntry("Custom Fields");
+  m_fetchImages = config_.readEntry("Fetch Images", true);
+  m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
-void DiscogsFetcher::search(FetchKey key_, const QString& value_) {
+void DiscogsFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_key = key_;
   m_value = value_;
   m_started = true;
@@ -89,12 +91,12 @@ void DiscogsFetcher::continueSearch() {
 }
 
 void DiscogsFetcher::doSearch() {
-  KURL u(QString::fromLatin1(DISCOGS_API_URL));
+  KUrl u(QString::fromLatin1(DISCOGS_API_URL));
   u.addQueryItem(QString::fromLatin1("f"), QString::fromLatin1("xml"));
   u.addQueryItem(QString::fromLatin1("api_key"), m_apiKey);
 
   if(!canFetch(Kernel::self()->collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.").arg(source()), MessageHandler::Warning);
+    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
   }
@@ -117,21 +119,20 @@ void DiscogsFetcher::doSearch() {
       break;
 
     default:
-      kdWarning() << "DiscogsFetcher::search() - key not recognized: " << m_key << endl;
+      kWarning() << "DiscogsFetcher::search() - key not recognized: " << m_key;
       stop();
       return;
   }
 
 #ifdef DISCOGS_TEST
-  u = KURL(QString::fromLatin1("/home/robby/discogs-results.xml"));
+  u = KUrl(QString::fromLatin1("/home/robby/discogs-results.xml"));
 #endif
 //  myDebug() << "DiscogsFetcher::search() - url: " << u.url() << endl;
 
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
 }
 
 void DiscogsFetcher::stop() {
@@ -142,37 +143,32 @@ void DiscogsFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_data.truncate(0);
   m_started = false;
   emit signalDone(this);
 }
 
-void DiscogsFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void DiscogsFetcher::slotComplete(KIO::Job* job_) {
+void DiscogsFetcher::slotComplete(KJob* ) {
 //  myDebug() << "DiscogsFetcher::slotComplete()" << endl;
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "DiscogsFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
 #if 0
-  kdWarning() << "Remove debug from discogsfetcher.cpp" << endl;
+  kWarning() << "Remove debug from discogsfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test.xml"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
-    t << QCString(m_data, m_data.size()+1);
+    t << data;
   }
   f.close();
 #endif
@@ -187,8 +183,8 @@ void DiscogsFetcher::slotComplete(KIO::Job* job_) {
 
   if(m_total == -1) {
     QDomDocument dom;
-    if(!dom.setContent(m_data, false)) {
-      kdWarning() << "DiscogsFetcher::slotComplete() - server did not return valid XML." << endl;
+    if(!dom.setContent(data, false)) {
+      kWarning() << "DiscogsFetcher::slotComplete() - server did not return valid XML.";
       return;
     }
     // total is /resp/searchresults/@numResults
@@ -202,7 +198,7 @@ void DiscogsFetcher::slotComplete(KIO::Job* job_) {
   }
 
   // assume discogs is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
@@ -212,8 +208,11 @@ void DiscogsFetcher::slotComplete(KIO::Job* job_) {
   }
 
   int count = 0;
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVec::Iterator entry = entries.begin(); count < m_limit && entry != entries.end(); ++entry, ++count) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
+    if(count >= m_limit) {
+      break;
+    }
     if(!m_started) {
       // might get aborted
       break;
@@ -222,9 +221,10 @@ void DiscogsFetcher::slotComplete(KIO::Job* job_) {
                  + QChar('/')
                  + entry->field(QString::fromLatin1("label"));
 
-    SearchResult* r = new SearchResult(this, entry->title(), desc, QString());
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, QString());
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
+    ++count;
   }
   m_start = m_entries.count() + 1;
   // not sure how tospecify start in the REST url
@@ -236,8 +236,8 @@ void DiscogsFetcher::slotComplete(KIO::Job* job_) {
 Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
-    kdWarning() << "DiscogsFetcher::fetchEntry() - no entry in dict" << endl;
-    return 0;
+    kWarning() << "DiscogsFetcher::fetchEntry() - no entry in dict";
+    return Data::EntryPtr();
   }
   // one way we tell if this entry has been fully initialized is to
   // check for a cover image
@@ -253,9 +253,9 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
   }
 
 #ifdef DISCOGS_TEST
-  KURL u(QString::fromLatin1("/home/robby/discogs-release.xml"));
+  KUrl u(QString::fromLatin1("/home/robby/discogs-release.xml"));
 #else
-  KURL u(QString::fromLatin1(DISCOGS_API_URL));
+  KUrl u(QString::fromLatin1(DISCOGS_API_URL));
   u.setPath(QString::fromLatin1("/release/%1").arg(release));
   u.addQueryItem(QString::fromLatin1("f"), QString::fromLatin1("xml"));
   u.addQueryItem(QString::fromLatin1("api_key"), m_apiKey);
@@ -265,9 +265,9 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
   // quiet, utf8, allowCompressed
   QString output = FileHandler::readTextFile(u, true, true, true);
 #if 0
-  kdWarning() << "Remove output debug from discogsfetcher.cpp" << endl;
+  kWarning() << "Remove output debug from discogsfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test.xml"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
     t << output;
@@ -279,7 +279,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
   Data::CollPtr coll = imp.collection();
 //  getTracks(entry);
   if(!coll) {
-    kdWarning() << "DiscogsFetcher::fetchEntry() - no collection pointer" << endl;
+    kWarning() << "DiscogsFetcher::fetchEntry() - no collection pointer";
     return entry;
   }
 
@@ -298,31 +298,31 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
   coll->removeField(QString::fromLatin1("discogs-id"));
 
   entry = coll->entries().front();
-  m_entries.replace(uid_, entry);
+  m_entries.insert(uid_, entry); // replaces old value
   return entry;
 }
 
 void DiscogsFetcher::initXSLTHandler() {
-  QString xsltfile = locate("appdata", QString::fromLatin1("discogs2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("discogs2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kdWarning() << "DiscogsFetcher::initXSLTHandler() - can not locate discogs2tellico.xsl." << endl;
+    kWarning() << "DiscogsFetcher::initXSLTHandler() - can not locate discogs2tellico.xsl.";
     return;
   }
 
-  KURL u;
+  KUrl u;
   u.setPath(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kdWarning() << "DiscogsFetcher::initXSLTHandler() - error in discogs2tellico.xsl." << endl;
+    kWarning() << "DiscogsFetcher::initXSLTHandler() - error in discogs2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
   }
 }
 
-void DiscogsFetcher::updateEntry(Data::EntryPtr entry_) {
+void DiscogsFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myDebug() << "DiscogsFetcher::updateEntry()" << endl;
 
   QString value;
@@ -348,9 +348,9 @@ Tellico::Fetch::ConfigWidget* DiscogsFetcher::configWidget(QWidget* parent_) con
 
 DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QGridLayout* l = new QGridLayout(optionsWidget(), 2, 2);
+  QGridLayout* l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
-  l->setColStretch(1, 10);
+  l->setColumnStretch(1, 10);
 
   int row = -1;
   QLabel* label = new QLabel(i18n("API &key: "), optionsWidget());
@@ -361,17 +361,17 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   l->addWidget(m_apiKeyEdit, row, 1);
   QString w = i18n("With your discogs.com account you receive an API key for the usage of their XML-based interface "
                    "(See http://www.discogs.com/help/api).");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_apiKeyEdit, w);
+  label->setWhatsThis(w);
+  m_apiKeyEdit->setWhatsThis(w);
   label->setBuddy(m_apiKeyEdit);
 
   m_fetchImageCheck = new QCheckBox(i18n("Download cover &image"), optionsWidget());
   connect(m_fetchImageCheck, SIGNAL(clicked()), SLOT(slotSetModified()));
   ++row;
-  l->addMultiCellWidget(m_fetchImageCheck, row, row, 0, 1);
+  l->addWidget(m_fetchImageCheck, row, 0, 1, 2);
   w = i18n("The cover image may be downloaded as well. However, too many large images in the "
            "collection may degrade performance.");
-  QWhatsThis::add(m_fetchImageCheck, w);
+  m_fetchImageCheck->setWhatsThis(w);
 
   l->setRowStretch(++row, 10);
 
@@ -388,7 +388,7 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
 }
 
 void DiscogsFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
-  QString apiKey = m_apiKeyEdit->text().stripWhiteSpace();
+  QString apiKey = m_apiKeyEdit->text().trimmed();
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }

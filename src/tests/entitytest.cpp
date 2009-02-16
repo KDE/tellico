@@ -1,19 +1,26 @@
-#ifdef QT_NO_CAST_ASCII
-#undef QT_NO_CAST_ASCII
-#endif
+/***************************************************************************
+    copyright            : (C) 2009 by Robby Stephenson
+    email                : robby@periapsis.org
+ ***************************************************************************/
 
-#include "tellico_utils.h"
-#include <kdebug.h>
-#include <assert.h>
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of version 2 of the GNU General Public License as  *
+ *   published by the Free Software Foundation;                            *
+ *                                                                         *
+ ***************************************************************************/
 
-int main(int, char**) {
-  kdDebug() << "\n*****************************************************" << endl;
+#include "qtest_kde.h"
+#include "entitytest.h"
+#include "entitytest.moc"
+#include "../tellico_utils.h"
 
-  assert(Tellico::decodeHTML("robby") == "robby");
-  assert(Tellico::decodeHTML("&fake;") == "&fake;");
-  assert(Tellico::decodeHTML("&#48;") == "0");
-  assert(Tellico::decodeHTML("robby&#48;robby") == "robby0robby");
+QTEST_KDEMAIN_CORE( EntityTest )
 
-  kdDebug() << "\ndecodeHTML Test OK !" << endl;
-  kdDebug() << "\n*****************************************************" << endl;
+void EntityTest::testEntities() {
+  QCOMPARE(Tellico::decodeHTML("robby"), QLatin1String("robby"));
+  QCOMPARE(Tellico::decodeHTML("&fake;"), QLatin1String("&fake;"));
+  QCOMPARE(Tellico::decodeHTML("&#48;"), QLatin1String("0"));
+  QCOMPARE(Tellico::decodeHTML("robby&#48;robby"), QLatin1String("robby0robby"));
 }

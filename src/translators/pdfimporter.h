@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,7 +23,7 @@ class PDFImporter : public Importer {
 Q_OBJECT
 
 public:
-  PDFImporter(const KURL::List& urls);
+  PDFImporter(const KUrl::List& urls);
 
   virtual bool canImport(int type) const;
 

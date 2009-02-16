@@ -14,7 +14,7 @@
 #ifndef TELLICO_LCCNVALIDATOR_H
 #define TELLICO_LCCNVALIDATOR_H
 
-#include <qvalidator.h>
+#include <QValidator>
 
 namespace Tellico {
 
@@ -29,6 +29,7 @@ namespace Tellico {
  * - gm 71-2450
  */
 class LCCNValidator : public QRegExpValidator {
+Q_OBJECT
 
 public:
   LCCNValidator(QObject* parent);

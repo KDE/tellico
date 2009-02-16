@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,30 +16,32 @@
 
 #include <config.h>
 
-#include "core/dcopinterface.h"
 #include "translators/translators.h"
 #include "datavectors.h"
 
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
+#include <kurl.h>
+
+#include <QList>
 
 class KToolBar;
-class KURL;
+class KUrl;
 class KAction;
 class KSelectAction;
 class KToggleAction;
 class KRecentFilesAction;
 class KActionMenu;
 class KDialogBase;
+class KTabWidget;
 
 class QCloseEvent;
 class QSplitter;
-class QListViewItem;
+class QSignalMapper;
 
 namespace Tellico {
 // forward declarations
   namespace GUI {
     class LineEdit;
-    class TabControl;
   }
   class Controller;
   class ViewStack;
@@ -70,7 +72,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class MainWindow : public KMainWindow, public ApplicationInterface {
+class MainWindow : public KXmlGuiWindow {
 Q_OBJECT
 
 friend class Controller;
@@ -80,7 +82,8 @@ public:
   /**
    * The main window constructor, calls all init functions to create the application.
    */
-  MainWindow(QWidget* parent=0, const char* name=0);
+  MainWindow(QWidget* parent=0);
+  ~MainWindow();
 
   /**
    * Opens the initial file.
@@ -110,11 +113,11 @@ public:
    * @param format The file format
    * @param url The url
    */
-  virtual bool importFile(Import::Format format, const KURL& url, Import::Action action);
+  virtual bool importFile(Import::Format format, const KUrl& url, Import::Action action);
   /**
    * Used by DCOP to export to a file.
    */
-  virtual bool exportCollection(Export::Format format, const KURL& url);
+  virtual bool exportCollection(Export::Format format, const KUrl& url);
   /**
    * Used by DCOP
    */
@@ -144,13 +147,13 @@ public slots:
    *
    * @param url The url to open
    */
-  void slotFileOpen(const KURL& url);
+  void slotFileOpen(const KUrl& url);
   /**
    * Opens a file from the recent files menu
    *
    * @param url The url sent by the RecentFilesAction
    */
-  void slotFileOpenRecent(const KURL& url);
+  void slotFileOpenRecent(const KUrl& url);
   /**
    * Saves the document
    */
@@ -295,7 +298,7 @@ public slots:
   /**
    * Handle a url that indicates some actino should be taken
    */
-  void slotURLAction(const KURL& url);
+  void slotURLAction(const KUrl& url);
 
 private:
   /**
@@ -340,7 +343,7 @@ private:
    *
    * @param cfg The config class with the properties to restore
    */
-  void saveProperties(KConfig* cfg);
+  void saveProperties(KConfigGroup& cfg);
   /**
    * Reads the session config file and restores the application's state including
    * the last opened files and documents by reading the temporary files saved by
@@ -349,7 +352,7 @@ private:
    *
    * @param cfg The config class with the properties to restore
    */
-  void readProperties(KConfig* cfg);
+  void readProperties(const KConfigGroup& cfg);
   /**
    * Called before the window is closed, either by the user or indirectely by the
    * session manager.
@@ -371,7 +374,7 @@ private:
    *
    * @param url The url to open
    */
-  bool openURL(const KURL& url);
+  bool openURL(const KUrl& url);
   /*
    * Helper method to handle the printing duties.
    *
@@ -472,10 +475,11 @@ private slots:
    */
   void slotFilterLabelActivated();
   void slotClearFilter();
+  void slotClearFilterNow();
   void slotRenameCollection();
 
 private:
-  void importFile(Import::Format format, const KURL::List& kurls);
+  void importFile(Import::Format format, const KUrl::List& kurls);
   bool importCollection(Data::CollPtr coll, Import::Action action);
 
   // the reason that I have to keep pointers to all these
@@ -507,11 +511,12 @@ private:
 
   DetailedListView* m_detailedView;
   EntryEditDialog* m_editDialog;
-  GUI::TabControl* m_viewTabs;
+  KTabWidget* m_viewTabs;
   GroupView* m_groupView;
   FilterView* m_filterView;
   LoanView* m_loanView;
   ViewStack* m_viewStack;
+  QSignalMapper* m_updateMapper;
 
   ConfigDialog* m_configDlg;
   FilterDialog* m_filterDlg;
@@ -520,16 +525,17 @@ private:
   FetchDialog* m_fetchDlg;
   ReportDialog* m_reportDlg;
 
-  QPtrList<KAction> m_fetchActions;
-  CollectionInterface m_collInterface;
+  QList<QAction*> m_fetchActions;
 
   // keep track of the number of queued filter updates
   uint m_queuedFilters;
 
   // keep track whether everything gets initialized
-  bool m_initialized : 1;
+  bool m_initialized;
   // need to keep track of whether the current collection has never been saved
-  bool m_newDocument : 1;
+  bool m_newDocument;
+  // Don't queue filter if true
+  bool m_dontQueueFilter;
 };
 
 } // end namespace

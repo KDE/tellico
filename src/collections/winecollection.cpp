@@ -30,8 +30,8 @@ WineCollection::WineCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("type"));
 }
 
-Tellico::Data::FieldVec WineCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList WineCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);

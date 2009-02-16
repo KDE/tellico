@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef DATEFIELDWIDGET_H
-#define DATEFIELDWIDGET_H
+#ifndef TELLICO_DATEFIELDWIDGET_H
+#define TELLICO_DATEFIELDWIDGET_H
 
 #include "fieldwidget.h"
 #include "../datavectors.h"
@@ -30,7 +30,7 @@ class DateFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  DateFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  DateFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~DateFieldWidget() {}
 
   virtual QString text() const;

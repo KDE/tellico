@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,16 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FILEHANDLER_H
-#define FILEHANDLER_H
+#ifndef TELLICO_FILEHANDLER_H
+#define TELLICO_FILEHANDLER_H
 
-#include <qstring.h>
-#include <qcstring.h> // needed for QByteArray
-#include <qptrlist.h>
+#include <QString>
+#include <QByteArray>
 
-class KURL;
+class KUrl;
 class KSaveFile;
-class KFileItem;
 namespace KIO {
   class Job;
 }
@@ -58,7 +56,7 @@ public:
 
   private:
     friend class FileHandler;
-    FileRef(const KURL& url, bool quiet=false, bool allowCompressed=false);
+    FileRef(const KUrl& url, bool quiet=false, bool allowCompressed=false);
     QIODevice* m_device;
     QString m_filename;
     bool m_isValid;
@@ -73,7 +71,7 @@ public:
    * @param quiet Whether error messages should be shown
    * @return The fileref
    */
-  static FileRef* fileRef(const KURL& url, bool quiet=false);
+  static FileRef* fileRef(const KUrl& url, bool quiet=false);
   /**
    * Read contents of a file into a string.
    *
@@ -83,7 +81,7 @@ public:
    * @param allowCompressed Whether to check if the file is compressed or not
    * @return A string containing the contents of a file
    */
-  static QString readTextFile(const KURL& url, bool quiet=false, bool useUTF8=false, bool allowCompressed=false);
+  static QString readTextFile(const KUrl& url, bool quiet=false, bool useUTF8=false, bool allowCompressed=false);
   /**
    * Read contents of an XML file into a QDomDocument.
    *
@@ -92,7 +90,7 @@ public:
    * @param quiet Whether error messages should be shown
    * @return A QDomDocument containing the contents of a file
    */
-  static QDomDocument readXMLFile(const KURL& url, bool processNamespace, bool quiet=false);
+  static QDomDocument readXMLFile(const KUrl& url, bool processNamespace, bool quiet=false);
   /**
    * Read contents of a data file into a QByteArray.
    *
@@ -100,7 +98,7 @@ public:
    * @param quiet Whether error messages should be shown
    * @return A QByteArray of the file's contents
    */
-  static QByteArray readDataFile(const KURL& url, bool quiet=false);
+  static QByteArray readDataFile(const KUrl& url, bool quiet=false);
   /**
    * Writes the contents of a string to a url. If the file already exists, a "~" is appended
    * and the existing file is moved. If the file is remote, a temporary file is written and
@@ -112,7 +110,7 @@ public:
    * @param force Whether to force the write
    * @return A boolean indicating success
    */
-  static bool writeTextURL(const KURL& url, const QString& text, bool encodeUTF8, bool force=false, bool quiet=false);
+  static bool writeTextURL(const KUrl& url, const QString& text, bool encodeUTF8, bool force=false, bool quiet=false);
   /**
    * Writes data to a url. If the file already exists, a "~" is appended
    * and the existing file is moved. If the file is remote, a temporary file is written and
@@ -123,21 +121,16 @@ public:
    * @param force Whether to force the write
    * @return A boolean indicating success
    */
-  static bool writeDataURL(const KURL& url, const QByteArray& data, bool force=false, bool quiet=false);
+  static bool writeDataURL(const KUrl& url, const QByteArray& data, bool force=false, bool quiet=false);
   /**
    * Checks to see if a URL exists already, and if so, queries the user.
    *
    * @param url The target URL
    * @return True if it is ok to continue, false otherwise.
    */
-  static bool queryExists(const KURL& url);
-  static void clean();
+  static bool queryExists(const KUrl& url);
 
 private:
-  class ItemDeleter;
-  friend class ItemDeleter;
-  static QPtrList<ItemDeleter> s_deleterList;
-
   /**
    * Read contents of a file into an image. It's private since everything should use the
    * ImageFactory methods.
@@ -146,8 +139,8 @@ private:
    * @param quiet If errors should be quiet
    * @return The image
    */
-  static Data::Image* readImageFile(const KURL& url, bool quiet=false);
-  static Data::Image* readImageFile(const KURL& url, bool quiet, const KURL& referrer);
+  static Data::Image* readImageFile(const KUrl& url, bool quiet=false);
+  static Data::Image* readImageFile(const KUrl& url, bool quiet, const KUrl& referrer);
   /**
    * Writes the contents of a string to a file.
    *

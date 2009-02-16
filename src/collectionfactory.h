@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,12 +11,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLLECTIONFACTORY_H
-#define COLLECTIONFACTORY_H
+#ifndef TELLICO_COLLECTIONFACTORY_H
+#define TELLICO_COLLECTIONFACTORY_H
 
 #include "datavectors.h"
 
-#include <qmap.h>
+#include <QMap>
 
 namespace Tellico {
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2006 by Robby Stephenson
+    copyright            : (C) 2002-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,20 +16,22 @@
 #include "entryiconview.h"
 #include "tellico_debug.h"
 #include "imagefactory.h"
+#include "entry.h"
 
 #include <khtmlview.h>
 #include <klocale.h>
 
-#include <qwhatsthis.h>
-
 using Tellico::ViewStack;
 
-ViewStack::ViewStack(QWidget* parent_, const char* name_/*=0*/) : QWidgetStack(parent_, name_),
+ViewStack::ViewStack(QWidget* parent_) : QStackedWidget(parent_),
                      m_entryView(new EntryView(this)), m_iconView(new EntryIconView(this)) {
-  QWhatsThis::add(m_entryView->view(), i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's "
-                                            "contents.</qt>"));
-  QWhatsThis::add(m_iconView, i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
-                                   "an icon, which may be an image in the entry.</qt>"));
+  addWidget(m_entryView->view());
+  addWidget(m_iconView);
+
+  m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's "
+                                         "contents.</qt>"));
+  m_iconView->setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
+                                "an icon, which may be an image in the entry.</qt>"));
 }
 
 void ViewStack::clear() {
@@ -42,14 +44,14 @@ void ViewStack::refresh() {
   m_iconView->refresh();
 }
 
-void ViewStack::showEntry(Data::EntryPtr entry_) {
+void ViewStack::showEntry(Tellico::Data::EntryPtr entry_) {
   m_entryView->showEntry(entry_);
-  raiseWidget(m_entryView->view());
+  setCurrentWidget(m_entryView->view());
 }
 
-void ViewStack::showEntries(const Data::EntryVec& entries_) {
+void ViewStack::showEntries(const Tellico::Data::EntryList& entries_) {
   m_iconView->showEntries(entries_);
-  raiseWidget(m_iconView);
+  setCurrentWidget(m_iconView);
 }
 
 #include "viewstack.moc"

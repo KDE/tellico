@@ -16,11 +16,11 @@
 #ifndef BARCODE_H
 #define BARCODE_H
 
-#include <qthread.h>
-#include <qimage.h>
-#include <qvaluevector.h>
-#include <qobject.h>
-#include <qmutex.h>
+#include <QThread>
+#include <QImage>
+#include <Q3ValueVector>
+#include <QObject>
+#include <QMutex>
 #include <math.h>
 
 #include "barcode_v4l.h"
@@ -66,15 +66,15 @@ namespace barcodeRecognition {
   class Barcode_EAN13 {
   public:
     Barcode_EAN13();
-    Barcode_EAN13( QValueVector<int> code );
+    Barcode_EAN13( Q3ValueVector<int> code );
     bool isNull() const { return m_null; }
     bool isValid() const;
-    QValueVector<int> getNumbers() const;
-    void setCode( QValueVector<int> code );
+    Q3ValueVector<int> getNumbers() const;
+    void setCode( Q3ValueVector<int> code );
     QString toString() const;
     bool operator!= ( const Barcode_EAN13 &code );
   protected:
-    QValueVector<int> m_numbers;
+    Q3ValueVector<int> m_numbers;
     bool m_null;
   };
 
@@ -91,16 +91,16 @@ namespace barcodeRecognition {
   class Decoder_EAN13 {
   public:
     enum { BOTH_TABLES = 0, EVEN_TABLE = 1, ODD_TABLE = 2 };
-    static Barcode_EAN13 recognize( QValueVector< QValueVector<int> > fields );
-    static QValueVector<int> decode( QValueVector< QValueVector<int> > fields, int start_i, int end_i );
-    static MatchMakerResult recognizeNumber( QValueVector< QValueVector<int> > fields, int code_table_to_use );
+    static Barcode_EAN13 recognize( Q3ValueVector< Q3ValueVector<int> > fields );
+    static Q3ValueVector<int> decode( Q3ValueVector< Q3ValueVector<int> > fields, int start_i, int end_i );
+    static MatchMakerResult recognizeNumber( Q3ValueVector< Q3ValueVector<int> > fields, int code_table_to_use );
     static MatchMakerResult recognizeSystemCode( bool parity_pattern[6] );
   };
 
   /** \brief this thread handles barcode recognition using webcams
    *  @author Sebastian Held <sebastian.held@gmx.de>
    */
-  class barcodeRecognitionThread : public QObject, public QThread {
+  class barcodeRecognitionThread : public QThread {
     Q_OBJECT
   public:
     barcodeRecognitionThread();
@@ -120,14 +120,14 @@ namespace barcodeRecognition {
 
     Barcode_EAN13 recognize( QImage img );
     Barcode_EAN13 recognizeCode( QImage img, int x1, int x2, int y );
-    void addNumberToPossibleNumbers( QValueVector<int> number, int possible_numbers[10][13][2], bool correct_code );
+    void addNumberToPossibleNumbers( Q3ValueVector<int> number, int possible_numbers[10][13][2], bool correct_code );
     void sortDigits( int possible_numbers[10][13][2] );
     Barcode_EAN13 extractBarcode( int possible_numbers[10][13][2] );
-    QValueVector<int> transformPathToBW( QValueVector<QRgb> line);
-    QValueVector< QValueVector<int> > extractFieldInformation( QValueVector<int> string );
+    Q3ValueVector<int> transformPathToBW( Q3ValueVector<QRgb> line);
+    Q3ValueVector< Q3ValueVector<int> > extractFieldInformation( Q3ValueVector<int> string );
     Barcode_EAN13 detectValidBarcode ( int possible_numbers[10][13][2], int max_amount_of_considered_codes );
     bool isValid( int numbers[13] );
-    bool isValid( QValueVector<int> numbers );
+    bool isValid( Q3ValueVector<int> numbers );
     void printArray( int array[10][13][2], int level );
   };
 }

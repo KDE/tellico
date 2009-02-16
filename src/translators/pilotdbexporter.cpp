@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,16 +20,15 @@
 
 #include <klocale.h>
 #include <kdebug.h>
-#include <kconfig.h>
+#include <KConfigGroup>
 #include <kglobal.h>
 #include <kcharsets.h>
 
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qcheckbox.h>
-#include <qwhatsthis.h>
-#include <qtextcodec.h>
-#include <qdatetime.h>
+#include <QGroupBox>
+#include <QCheckBox>
+#include <QTextCodec>
+#include <QDateTime>
+#include <QVBoxLayout>
 
 using Tellico::Export::PilotDBExporter;
 
@@ -62,11 +61,11 @@ bool PilotDBExporter::exec() {
     codec = KGlobal::charsets()->codecForName(group.readEntry("Charset"));
   }
   if(!codec) {
-    kdWarning() << "PilotDBExporter::exec() - no QTextCodec!" << endl;
+    kWarning() << "PilotDBExporter::exec() - no QTextCodec!";
     return false;
 #ifndef NDEBUG
   } else {
-    kdDebug() << "PilotDBExporter::exec() - encoding with " << codec->name() << endl;
+    kDebug() << "PilotDBExporter::exec() - encoding with " << codec->name();
 #endif
   }
 
@@ -82,9 +81,8 @@ bool PilotDBExporter::exec() {
   // all fields are added
   // except that only one field of type NOTE
   bool hasNote = false;
-  Data::FieldVec outputFields; // not all fields will be output
-  Data::FieldVec fields = coll->fields();
-  for(Data::FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+  Data::FieldList outputFields; // not all fields will be output
+  foreach(Data::FieldPtr fIt, coll->fields()) {
     switch(fIt->type()) {
       case Data::Field::Choice:
         // the charSeparator is actually defined in DB.h
@@ -110,10 +108,10 @@ bool PilotDBExporter::exec() {
 
       case Data::Field::Para:
         if(hasNote) { // only one is allowed, according to palm-db-tools documentation
-          kdDebug() << "PilotDBExporter::data() - adding note as string" << endl;
+          kDebug() << "PilotDBExporter::data() - adding note as string";
           db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
-          kdDebug() << "PilotDBExporter::data() - adding note" << endl;
+          kDebug() << "PilotDBExporter::data() - adding note";
           db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::NOTE);
           hasNote = true;
         }
@@ -127,7 +125,7 @@ bool PilotDBExporter::exec() {
 
       case Data::Field::Image:
         // don't include images
-        kdDebug() << "PilotDBExporter::data() - skipping " << fIt->title() << " image field" << endl;
+        kDebug() << "PilotDBExporter::data() - skipping " << fIt->title() << " image field";
         break;
 
       default:
@@ -141,31 +139,31 @@ bool PilotDBExporter::exec() {
   if(m_columns.count() > 0) {
     PalmLib::FlatFile::ListView lv;
     lv.name = codec->fromUnicode(i18n("View Columns")).data();
-    for(QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
+    foreach(const QString& column, m_columns) {
       PalmLib::FlatFile::ListViewColumn col;
-      col.field = coll->fieldTitles().findIndex(*it);
+      col.field = coll->fieldTitles().indexOf(column);
       lv.push_back(col);
     }
     db.appendListView(lv);
   }
   db.doneWithSchema();
 
-  Data::FieldVec::ConstIterator fIt, end = outputFields.constEnd();
+  Data::FieldList::ConstIterator fIt, end = outputFields.constEnd();
   bool format = options() & Export::ExportFormatted;
 
-  QRegExp br(QString::fromLatin1("<br/?>"), false /*case-sensitive*/);
+  QRegExp br(QString::fromLatin1("<br/?>"));
   QRegExp tags(QString::fromLatin1("<.*>"));
   tags.setMinimal(true);
 
   QString value;
-  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
+  foreach(Data::EntryPtr entryIt, entries()) {
     PalmLib::FlatFile::Record record;
     unsigned i = 0;
-    for(fIt = outputFields.constBegin(); fIt != end; ++fIt, ++i) {
+    foreach(Data::FieldPtr fIt, outputFields) {
       value = entryIt->field(fIt->name(), format);
 
       if(fIt->type() == Data::Field::Date) {
-        QStringList s = QStringList::split('-', value, true);
+        QStringList s = value.split('-', QString::KeepEmptyParts);
         bool ok = true;
         int y = s.count() > 0 ? s[0].toInt(&ok) : QDate::currentDate().year();
         if(!ok) {
@@ -188,6 +186,7 @@ bool PilotDBExporter::exec() {
       // the number of fields in the record must match the number of fields in the database
       record.appendField(PilotDB::string2field(db.field_type(i),
                          value.isEmpty() ? std::string() : codec->fromUnicode(value).data()));
+      ++i;
     }
     // Add the record to the database.
     db.appendRecord(record);
@@ -199,31 +198,34 @@ bool PilotDBExporter::exec() {
   return FileHandler::writeDataURL(url(), pdb.data(), options() & Export::ExportForce);
 }
 
-QWidget* PilotDBExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
-  if(m_widget && m_widget->parent() == parent_) {
+QWidget* PilotDBExporter::widget(QWidget* parent_) {
+  if(m_widget) {
     return m_widget;
   }
 
-  m_widget = new QWidget(parent_, name_);
+  m_widget = new QWidget(parent_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("PilotDB Options"), m_widget);
-  l->addWidget(box);
+  QGroupBox* gbox = new QGroupBox(i18n("PilotDB Options"), m_widget);
+  QVBoxLayout* vlay = new QVBoxLayout(gbox);
 
-  m_checkBackup = new QCheckBox(i18n("Set PDA backup flag for database"), box);
+  m_checkBackup = new QCheckBox(i18n("Set PDA backup flag for database"), gbox);
   m_checkBackup->setChecked(m_backup);
-  QWhatsThis::add(m_checkBackup, i18n("Set PDA backup flag for database"));
+  m_checkBackup->setWhatsThis(i18n("Set PDA backup flag for database"));
 
+  vlay->addWidget(m_checkBackup);
+
+  l->addWidget(gbox);
   l->addStretch(1);
   return m_widget;
 }
 
-void PilotDBExporter::readOptions(KConfig* config_) {
+void PilotDBExporter::readOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_backup = group.readBoolEntry("Backup", m_backup);
+  m_backup = group.readEntry("Backup", m_backup);
 }
 
-void PilotDBExporter::saveOptions(KConfig* config_) {
+void PilotDBExporter::saveOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_backup = m_checkBackup->isChecked();
   group.writeEntry("Backup", m_backup);

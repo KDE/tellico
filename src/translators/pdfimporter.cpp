@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -28,10 +28,14 @@
 
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
+#include <kapplication.h>
+
+#include <QString>
+#include <QPixmap>
 
 #include <config.h>
 #ifdef HAVE_POPPLER
-#include <poppler-qt.h>
+#include <qt4/poppler-qt4.h>
 #endif
 
 namespace {
@@ -40,7 +44,7 @@ namespace {
 
 using Tellico::Import::PDFImporter;
 
-PDFImporter::PDFImporter(const KURL::List& urls_) : Importer(urls_), m_cancelled(false) {
+PDFImporter::PDFImporter(const KUrl::List& urls_) : Importer(urls_), m_cancelled(false) {
 }
 
 bool PDFImporter::canImport(int type_) const {
@@ -48,10 +52,10 @@ bool PDFImporter::canImport(int type_) const {
 }
 
 Tellico::Data::CollPtr PDFImporter::collection() {
-  QString xsltfile = ::locate("appdata", QString::fromLatin1("xmp2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("xmp2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kdWarning() << "DropHandler::handleURL() - can not locate xmp2tellico.xsl" << endl;
-    return 0;
+    kWarning() << "DropHandler::handleURL() - can not locate xmp2tellico.xsl";
+    return Data::CollPtr();
   }
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
@@ -60,13 +64,13 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   ProgressItem::Done done(this);
   const bool showProgress = options() & ImportProgress;
 
-  KURL u;
+  KUrl u;
   u.setPath(xsltfile);
 
   XSLTHandler xsltHandler(u);
   if(!xsltHandler.isValid()) {
-    kdWarning() << "DropHandler::handleURL() - invalid xslt in xmp2tellico.xsl" << endl;
-    return 0;
+    kWarning() << "DropHandler::handleURL() - invalid xslt in xmp2tellico.xsl";
+    return Data::CollPtr();
   }
 
   bool hasDOI = false;
@@ -76,8 +80,8 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 
   Data::CollPtr coll;
   XMPHandler xmpHandler;
-  KURL::List list = urls();
-  for(KURL::List::Iterator it = list.begin(); it != list.end() && !m_cancelled; ++it, ++j) {
+  KUrl::List list = urls();
+  for(KUrl::List::Iterator it = list.begin(); it != list.end() && !m_cancelled; ++it, ++j) {
     FileHandler::FileRef* ref = FileHandler::fileRef(*it);
     if(!ref) {
       continue;
@@ -96,7 +100,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       Import::TellicoImporter importer(xsltHandler.applyStylesheet(xmp));
       newColl = importer.collection();
       if(!newColl || newColl->entryCount() == 0) {
-        kdWarning() << "DropHandler::handleURL() - no collection found" << endl;
+        kWarning() << "DropHandler::handleURL() - no collection found";
         setStatusMessage(i18n("Tellico was unable to read any metadata from the PDF file."));
       } else {
         entry = newColl->entries().front();
@@ -119,7 +123,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     if(doc && !doc->isLocked()) {
       // now the question is, do we overwrite XMP data with Poppler data?
       // for now, let's say yes conditionally
-      QString s = doc->getInfo(QString::fromLatin1("Title")).simplifyWhiteSpace();
+      QString s = doc->info(QString::fromLatin1("Title")).simplified();
       if(!s.isEmpty()) {
         entry->setField(QString::fromLatin1("title"), s);
       }
@@ -127,20 +131,20 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       // we're not going to overwrite it
       if(entry->field(QString::fromLatin1("author")).isEmpty()) {
         QRegExp rx(QString::fromLatin1("\\s*(and|,|;)\\s*"));
-        QStringList authors = QStringList::split(rx, doc->getInfo(QString::fromLatin1("Author")).simplifyWhiteSpace());
+        QStringList authors = doc->info(QString::fromLatin1("Author")).simplified().split(rx);
         entry->setField(QString::fromLatin1("author"), authors.join(QString::fromLatin1("; ")));
       }
-      s = doc->getInfo(QString::fromLatin1("Keywords")).simplifyWhiteSpace();
+      s = doc->info(QString::fromLatin1("Keywords")).simplified();
       if(!s.isEmpty()) {
         // keywords are also separated by semi-colons in poppler
         entry->setField(QString::fromLatin1("keyword"), s);
       }
 
       // now parse the first page text and try to guess
-      Poppler::Page* page = doc->getPage(0);
+      Poppler::Page* page = doc->page(0);
       if(page) {
         // a null rectangle means get all text on page
-        QString text = page->getText(Poppler::Rectangle());
+        QString text = page->text(QRectF());
         // borrowed from Referencer
         QRegExp rx(QString::fromLatin1("(?:"
                                        "(?:[Dd][Oo][Ii]:? *)"
@@ -154,7 +158,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                                        "\\/"
                                        "[^\\s]+"
                                        ")"));
-        if(rx.search(text) > -1) {
+        if(rx.indexIn(text) > -1) {
           QString doi = rx.cap(1);
           myDebug() << "PDFImporter::collection() - in PDF file, found DOI: " << doi << endl;
           entry->setField(QString::fromLatin1("doi"), doi);
@@ -166,11 +170,11 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                                          "[\\/\\.]"
                                          "[^\\s]+"
                                          ")"));
-        if(rx.search(text) > -1) {
+        if(rx.indexIn(text) > -1) {
           QString arxiv = rx.cap(1);
           myDebug() << "PDFImporter::collection() - in PDF file, found arxiv: " << arxiv << endl;
-          if(entry->collection()->fieldByName(QString::fromLatin1("arxiv")) == 0) {
-            Data::FieldPtr field = new Data::Field(QString::fromLatin1("arxiv"), i18n("arXiv ID"));
+          if(!entry->collection()->hasField(QString::fromLatin1("arxiv"))) {
+            Data::FieldPtr field(new Data::Field(QString::fromLatin1("arxiv"), i18n("arXiv ID")));
             field->setCategory(i18n("Publishing"));
             entry->collection()->addField(field);
           }
@@ -220,14 +224,14 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   }
 
   if(m_cancelled) {
-    return 0;
+    return Data::CollPtr();
   }
 
   if(hasDOI) {
     myDebug() << "looking for DOI" << endl;
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::DOI);
     if(vec.isEmpty()) {
-      GUI::CursorSaver cs(Qt::arrowCursor);
+      GUI::CursorSaver cs(Qt::ArrowCursor);
       KMessageBox::information(Kernel::self()->widget(),
                               i18n("Tellico is able to download information about entries with a DOI from "
                                    "CrossRef.org. However, you must create an CrossRef account and add a new "
@@ -235,9 +239,8 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                               QString::null,
                               QString::fromLatin1("CrossRefSourceNeeded"));
     } else {
-      Data::EntryVec entries = coll->entries();
-      for(Fetch::FetcherVec::Iterator fetcher = vec.begin(); fetcher != vec.end(); ++fetcher) {
-        for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+      foreach(Fetch::Fetcher::Ptr fetcher, vec) {
+        foreach(Data::EntryPtr entry, coll->entries()) {
           fetcher->updateEntrySynchronous(entry);
         }
       }
@@ -245,31 +248,29 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   }
 
   if(m_cancelled) {
-    return 0;
+    return Data::CollPtr();
   }
 
   if(hasArxiv) {
-    Data::EntryVec entries = coll->entries();
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::ArxivID);
-    for(Fetch::FetcherVec::Iterator fetcher = vec.begin(); fetcher != vec.end(); ++fetcher) {
-      for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+    foreach(Fetch::Fetcher::Ptr fetcher, vec) {
+      foreach(Data::EntryPtr entry, coll->entries()) {
         fetcher->updateEntrySynchronous(entry);
       }
     }
   }
 
 // finally
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+  foreach(Data::EntryPtr entry, coll->entries()) {
     if(entry->title().isEmpty()) {
       // use file name
-      KURL u = entry->field(QString::fromLatin1("url"));
+      KUrl u = entry->field(QString::fromLatin1("url"));
       entry->setField(QString::fromLatin1("title"), u.fileName());
     }
   }
 
   if(m_cancelled) {
-    return 0;
+    return Data::CollPtr();
   }
   return coll;
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,11 +22,12 @@
 #include <kpushbutton.h>
 #include <kiconloader.h>
 
-#include <qobjectlist.h>
-#include <qpainter.h>
-#include <qstyle.h>
-#include <qtimer.h>
-#include <qtooltip.h>
+#include <QObject>
+#include <QPainter>
+#include <QStyle>
+#include <QTimer>
+#include <QToolTip>
+#include <QLabel>
 
 using Tellico::StatusBar;
 StatusBar* StatusBar::s_self = 0;
@@ -35,21 +36,24 @@ StatusBar::StatusBar(QWidget* parent_) : KStatusBar(parent_) {
   s_self = this;
 
   // don't care about text and id
-  m_mainLabel = new KStatusBarLabel(QString(), 0, this);
-  m_mainLabel->setIndent(4);
+  m_mainLabel = new QLabel(this);
   m_mainLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-  addWidget(m_mainLabel, 3 /*stretch*/, true /*permanent*/);
+  m_mainLabel->setIndent(4);
+  insertPermanentWidget(0, m_mainLabel, 3 /*stretch*/);
 
-  m_countLabel = new KStatusBarLabel(QString(), 1, this);
+  m_countLabel = new QLabel(this);
   m_countLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
   m_countLabel->setIndent(4);
-  addWidget(m_countLabel, 0, true);
+  insertPermanentWidget(1, m_countLabel, 0);
 
   m_progress = new GUI::Progress(100, this);
-  addWidget(m_progress, 1, true);
-  m_cancelButton = new KPushButton(SmallIcon(QString::fromLatin1("cancel")), QString::null, this);
-  QToolTip::add(m_cancelButton, i18n("Cancel"));
-  addWidget(m_cancelButton, 0, true);
+  addPermanentWidget(m_progress, 1);
+
+  m_cancelButton = new KPushButton(KStandardGuiItem::cancel(), this);
+  m_cancelButton->setText(QString());
+  m_cancelButton->setToolTip(i18n("Cancel"));
+  addPermanentWidget(m_cancelButton, 0);
+
   m_progress->hide();
   m_cancelButton->hide();
 
@@ -58,13 +62,13 @@ StatusBar::StatusBar(QWidget* parent_) : KStatusBar(parent_) {
   connect(m_cancelButton, SIGNAL(clicked()), pm, SLOT(slotCancelAll()));
 }
 
-void StatusBar::polish() {
-  KStatusBar::polish();
+void StatusBar::ensurePolished() const {
+  KStatusBar::ensurePolished();
 
   int h = 0;
-  QObjectList* list = queryList("QWidget", 0, false, false);
-  for(QObject* o = list->first(); o; o = list->next()) {
-    int _h = static_cast<QWidget*>(o)->minimumSizeHint().height();
+  QList<QWidget*> list = findChildren<QWidget*>();
+  foreach(QWidget* o, list) {
+    int _h = o->minimumSizeHint().height();
     if(_h > h) {
       h = _h;
     }
@@ -72,11 +76,9 @@ void StatusBar::polish() {
 
   h -= 4; // hint from amarok, it's too big usually
 
-  for(QObject* o = list->first(); o; o = list->next()) {
+  foreach(QObject* o, list) {
     static_cast<QWidget*>(o)->setFixedHeight(h);
   }
-
-  delete list;
 }
 
 void StatusBar::clearStatus() {
@@ -93,7 +95,7 @@ void StatusBar::setCount(const QString& count_) {
 }
 
 void StatusBar::slotProgress(uint progress_) {
-  m_progress->setProgress(progress_);
+  m_progress->setValue(progress_);
   if(m_progress->isDone()) {
     m_progress->hide();
     m_cancelButton->hide();

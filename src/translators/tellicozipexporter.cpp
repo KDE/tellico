@@ -27,7 +27,7 @@
 #include <kapplication.h>
 
 #include <qdom.h>
-#include <qbuffer.h>
+#include <QBuffer>
 
 using Tellico::Export::TellicoZipExporter;
 
@@ -61,33 +61,36 @@ bool TellicoZipExporter::exec() {
   opt &= ~Export::ExportProgress; // don't show progress for xml export
   exp.setOptions(opt);
   exp.setIncludeImages(false); // do not include the images themselves in XML
-  QCString xml = exp.exportXML().toCString(); // encoded in utf-8
+  QByteArray xml = exp.exportXML().toByteArray(); // encoded in utf-8
   ProgressManager::self()->setProgress(this, 5);
 
   QByteArray data;
-  QBuffer buf(data);
+  QBuffer buf(&data);
 
   if(m_cancelled) {
     return true; // intentionally cancelled
   }
 
   KZip zip(&buf);
-  zip.open(IO_WriteOnly);
-  zip.writeFile(QString::fromLatin1("tellico.xml"), QString::null, QString::null, xml.length(), xml);
+  zip.open(QIODevice::WriteOnly);
+  zip.writeFile(QString::fromLatin1("tellico.xml"), QString::null, QString::null, xml, xml.size());
 
   if(m_includeImages) {
     ProgressManager::self()->setProgress(this, 10);
     // gonna be lazy and just increment progress every 3 images
     // it might be less, might be more
-    uint j = 0;
+    int j = 0;
     const QString imagesDir = QString::fromLatin1("images/");
     StringSet imageSet;
-    Data::FieldVec imageFields = coll->imageFields();
+    Data::FieldList imageFields = coll->imageFields();
     // already took 10%, only 90% left
-    const uint stepSize = QMAX(1, (coll->entryCount() * imageFields.count()) / 90);
-    for(Data::EntryVec::ConstIterator it = entries().begin(); it != entries().end() && !m_cancelled; ++it) {
-      for(Data::FieldVec::Iterator fIt = imageFields.begin(); fIt != imageFields.end(); ++fIt, ++j) {
-        const QString id = it->field(fIt);
+    const int stepSize = qMax(1, (coll->entryCount() * imageFields.count()) / 90);
+    foreach(Data::EntryPtr entry, entries()) {
+      if(m_cancelled) {
+        break;
+      }
+      foreach(Data::FieldPtr imageField, imageFields) {
+        const QString id = entry->field(imageField);
         if(id.isEmpty() || imageSet.has(id)) {
           continue;
         }
@@ -99,18 +102,19 @@ bool TellicoZipExporter::exec() {
         const Data::Image& img = ImageFactory::imageById(id);
         // if no image, continue
         if(img.isNull()) {
-          kdWarning() << "TellicoZipExporter::exec() - no image found for " << fIt->title() << " field" << endl;
-          kdWarning() << "...for the entry titled " << it->title() << endl;
+          kWarning() << "TellicoZipExporter::exec() - no image found for " << imageField->title() << " field";
+          kWarning() << "...for the entry titled " << entry->title();
           continue;
         }
         QByteArray ba = img.byteArray();
 //        myDebug() << "TellicoZipExporter::data() - adding image id = " << it->field(fIt) << endl;
-        zip.writeFile(imagesDir + id, QString::null, QString::null, ba.size(), ba);
+        zip.writeFile(imagesDir + id, QString::null, QString::null, ba, ba.size());
         imageSet.add(id);
         if(j%stepSize == 0) {
-          ProgressManager::self()->setProgress(this, QMIN(10+j/stepSize, 99));
+          ProgressManager::self()->setProgress(this, qMin(10+j/stepSize, 99));
           kapp->processEvents();
         }
+        ++j;
       }
     }
   } else {

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,14 +25,16 @@
 
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kconfig.h>
 #include <klineedit.h>
-#include <kactivelabel.h>
+#include <kio/job.h>
+#include <kio/jobuidelegate.h>
+#include <KConfigGroup>
 
-#include <qlabel.h>
-#include <qwhatsthis.h>
-#include <qlayout.h>
-#include <qfile.h>
+#include <QLabel>
+#include <QFile>
+#include <QTextStream>
+#include <QGridLayout>
+#include <QPixmap>
 
 // #define CROSSREF_TEST
 
@@ -76,38 +78,35 @@ void CrossRefFetcher::readConfigHook(const KConfigGroup& config_) {
   }
 }
 
-void CrossRefFetcher::search(FetchKey key_, const QString& value_) {
+void CrossRefFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_key = key_;
-  m_value = value_.stripWhiteSpace();
+  m_value = value_.trimmed();
   m_started = true;
 
   if(m_user.isEmpty() || m_password.isEmpty()) {
-    message(i18n("%1 requires a username and password.").arg(source()), MessageHandler::Warning);
+    message(i18n("%1 requires a username and password.", source()), MessageHandler::Warning);
     stop();
     return;
   }
 
   if(!canFetch(Kernel::self()->collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.").arg(source()), MessageHandler::Warning);
+    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
   }
 
-  m_data.truncate(0);
-
 //  myDebug() << "CrossRefFetcher::search() - value = " << value_ << endl;
 
-  KURL u = searchURL(m_key, m_value);
+  KUrl u = searchURL(m_key, m_value);
   if(u.isEmpty()) {
     stop();
     return;
   }
 
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
 }
 
 void CrossRefFetcher::stop() {
@@ -119,40 +118,35 @@ void CrossRefFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_data.truncate(0);
   m_started = false;
   emit signalDone(this);
 }
 
-void CrossRefFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void CrossRefFetcher::slotComplete(KIO::Job* job_) {
+void CrossRefFetcher::slotComplete(KJob*) {
 //  myDebug() << "CrossRefFetcher::slotComplete()" << endl;
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
 
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "CrossRefFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
 #if 0
-  kdWarning() << "Remove debug from crossreffetcher.cpp" << endl;
+  kWarning() << "Remove debug from crossreffetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test.xml"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
-    t << QCString(m_data, m_data.size()+1);
+    t << data;
   }
   f.close();
 #endif
@@ -166,7 +160,7 @@ void CrossRefFetcher::slotComplete(KIO::Job* job_) {
   }
 
   // assume result is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
 
@@ -176,8 +170,8 @@ void CrossRefFetcher::slotComplete(KIO::Job* job_) {
     return;
   }
 
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
     if(!m_started) {
       // might get aborted
       break;
@@ -188,7 +182,7 @@ void CrossRefFetcher::slotComplete(KIO::Job* job_) {
       desc += QChar('/') + entry->field(QString::fromLatin1("year"));
     }
 
-    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
@@ -223,30 +217,30 @@ Tellico::Data::EntryPtr CrossRefFetcher::fetchEntry(uint uid_) {
 
 void CrossRefFetcher::initXSLTHandler() {
 #ifdef CROSSREF_USE_UNIXREF
-  QString xsltfile = locate("appdata", QString::fromLatin1("unixref2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("unixref2tellico.xsl"));
 #else
-  QString xsltfile = locate("appdata", QString::fromLatin1("crossref2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("crossref2tellico.xsl"));
 #endif
   if(xsltfile.isEmpty()) {
-    kdWarning() << "CrossRefFetcher::initXSLTHandler() - can not locate xslt file." << endl;
+    kWarning() << "CrossRefFetcher::initXSLTHandler() - can not locate xslt file.";
     return;
   }
 
-  KURL u;
+  KUrl u;
   u.setPath(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kdWarning() << "CrossRefFetcher::initXSLTHandler() - error in crossref2tellico.xsl." << endl;
+    kWarning() << "CrossRefFetcher::initXSLTHandler() - error in crossref2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
   }
 }
 
-KURL CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
-  KURL u(QString::fromLatin1(CROSSREF_BASE_URL));
+KUrl CrossRefFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
+  KUrl u(QString::fromLatin1(CROSSREF_BASE_URL));
 #ifdef CROSSREF_USE_UNIXREF
   u.addQueryItem(QString::fromLatin1("format"), QString::fromLatin1("unixref"));
 #endif
@@ -258,18 +252,18 @@ KURL CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
       break;
 
     default:
-      kdWarning() << "CrossRefFetcher::search() - key not recognized: " << m_key << endl;
-      return KURL();
+      kWarning() << "CrossRefFetcher::search() - key not recognized: " << m_key;
+      return KUrl();
   }
 
 #ifdef CROSSREF_TEST
-  u = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/crossref.xml"));
+  u = KUrl(QString::fromLatin1("/home/robby/crossref.xml"));
 #endif
   myDebug() << "CrossRefFetcher::search() - url: " << u.url() << endl;
   return u;
 }
 
-void CrossRefFetcher::updateEntry(Data::EntryPtr entry_) {
+void CrossRefFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   QString doi = entry_->field(QString::fromLatin1("doi"));
   if(!doi.isEmpty()) {
     search(Fetch::DOI, doi);
@@ -290,7 +284,7 @@ void CrossRefFetcher::updateEntry(Data::EntryPtr entry_) {
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 
-void CrossRefFetcher::updateEntrySynchronous(Data::EntryPtr entry) {
+void CrossRefFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   if(!entry) {
     return;
   }
@@ -303,7 +297,7 @@ void CrossRefFetcher::updateEntrySynchronous(Data::EntryPtr entry) {
     return;
   }
 
-  KURL u = searchURL(DOI, doi);
+  KUrl u = searchURL(DOI, doi);
   QString xml = FileHandler::readTextFile(u, true, true);
   if(xml.isEmpty()) {
     return;
@@ -332,20 +326,22 @@ Tellico::Fetch::ConfigWidget* CrossRefFetcher::configWidget(QWidget* parent_) co
 
 CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QGridLayout* l = new QGridLayout(optionsWidget(), 4, 2);
+  QGridLayout* l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
-  l->setColStretch(1, 10);
+  l->setColumnStretch(1, 10);
 
   int row = 0;
 
-  KActiveLabel* al = new KActiveLabel(i18n("CrossRef requires an account for access. "
-                                           "Please read the terms and conditions and "
-                                           "<a href='http://www.crossref.org/requestaccount/'>"
-                                           "request an account</a>. Enter your OpenURL "
-                                           "account information below."),
+  QLabel* al = new QLabel(i18n("CrossRef requires an account for access. "
+                               "Please read the terms and conditions and "
+                               "<a href='http://www.crossref.org/requestaccount/'>"
+                               "request an account</a>. Enter your OpenURL "
+                               "account information below."),
                                       optionsWidget());
+  al->setOpenExternalLinks(true);
+  al->setWordWrap(true);
   ++row;
-  l->addMultiCellWidget(al, row, row, 0, 1);
+  l->addWidget(al, row, 0, 1, 2);
   // richtext gets weird with size
   al->setMinimumWidth(al->sizeHint().width());
 
@@ -356,8 +352,8 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   l->addWidget(m_userEdit, row, 1);
   QString w = i18n("A username and password is required to access the CrossRef service. The password is "
                    "stored as plain text in the Tellico configuration file.");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_userEdit, w);
+  label->setWhatsThis(w);
+  m_userEdit->setWhatsThis(w);
   label->setBuddy(m_userEdit);
 
   label = new QLabel(i18n("&Password: "), optionsWidget());
@@ -365,8 +361,8 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   m_passEdit = new KLineEdit(optionsWidget());
   connect(m_passEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_passEdit, row, 1);
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_passEdit, w);
+  label->setWhatsThis(w);
+  m_passEdit->setWhatsThis(w);
   label->setBuddy(m_passEdit);
 
   if(fetcher_) {

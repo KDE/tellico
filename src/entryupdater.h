@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,8 +17,7 @@
 #include "datavectors.h"
 #include "fetch/fetchmanager.h"
 
-#include <qpair.h>
-#include <qvaluelist.h>
+#include <QPair>
 
 namespace Tellico {
 
@@ -28,8 +27,8 @@ namespace Tellico {
 class EntryUpdater : public QObject {
 Q_OBJECT
 public:
-  EntryUpdater(Data::CollPtr coll, Data::EntryVec entries, QObject* parent);
-  EntryUpdater(const QString& fetcher, Data::CollPtr coll, Data::EntryVec entries, QObject* parent);
+  EntryUpdater(Data::CollPtr coll, Data::EntryList entries, QObject* parent);
+  EntryUpdater(const QString& fetcher, Data::CollPtr coll, Data::EntryList entries, QObject* parent);
   ~EntryUpdater();
 
 public slots:
@@ -43,22 +42,22 @@ private slots:
 
 private:
   typedef QPair<Fetch::SearchResult*, bool> UpdateResult;
-  typedef QValueList<UpdateResult> ResultList;
+  typedef QList<UpdateResult> ResultList;
 
   void init();
   void handleResults();
-  UpdateResult askUser(ResultList results);
+  UpdateResult askUser(const ResultList& results);
   void mergeCurrent(Data::EntryPtr entry, bool overwrite);
 
   Data::CollPtr m_coll;
-  Data::EntryVec m_entriesToUpdate;
-  Data::EntryVec m_fetchedEntries;
-  Data::EntryVec m_matchedEntries;
+  Data::EntryList m_entriesToUpdate;
+  Data::EntryList m_fetchedEntries;
+  Data::EntryList m_matchedEntries;
   Fetch::FetcherVec m_fetchers;
   int m_fetchIndex;
   int m_origEntryCount;
   ResultList m_results;
-  bool m_cancelled : 1;
+  bool m_cancelled;
 };
 
 } // end namespace

@@ -47,7 +47,7 @@ public:
   virtual Type type() const { return Album; }
   virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
 };
 
   } // end namespace

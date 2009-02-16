@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,10 +14,9 @@
 #include "pilotdb.h"
 #include "strop.h"
 #include "libflatfile/Record.h"
+#include "../../tellico_debug.h"
 
-#include <kdebug.h>
-
-#include <qbuffer.h>
+#include <QBuffer>
 
 using namespace PalmLib;
 using Tellico::Export::PilotDB;
@@ -44,7 +43,7 @@ PilotDB::~PilotDB() {
 
 QByteArray PilotDB::data() {
   QBuffer b;
-  b.open(IO_WriteOnly);
+  b.open(QIODevice::WriteOnly);
 
   pi_char_t buf[PI_HDR_SIZE];
   pi_int16_t ent_hdr_size = isResourceDB() ? PI_RESOURCE_ENT_SIZE : PI_RECORD_ENT_SIZE;
@@ -53,7 +52,7 @@ QByteArray PilotDB::data() {
   for(int i=0; i<32; ++i) {
     buf[i] = 0;
   }
-  memcpy(buf, name().c_str(), QMIN(31, name().length()));
+  memcpy(buf, name().c_str(), qMin((size_t)31, name().length()));
   set_short(buf + 32, flags());
   set_short(buf + 34, version());
   set_long(buf + 36, creation_time());
@@ -79,7 +78,7 @@ QByteArray PilotDB::data() {
   set_short(buf + 76, m_records.size());
 
   // Write the PDB/PRC header to the string.
-  b.writeBlock(reinterpret_cast<char *>(buf), sizeof(buf));
+  b.write(reinterpret_cast<char *>(buf), sizeof(buf));
 
   for(record_list_t::iterator i = m_records.begin(); i != m_records.end(); ++i) {
     Block* entry = *i;
@@ -95,24 +94,24 @@ QByteArray PilotDB::data() {
       buf[4] = record->attrs();
       set_treble(buf + 5, record->unique_id());
     }
-    b.writeBlock(reinterpret_cast<char *>(buf), ent_hdr_size);
+    b.write(reinterpret_cast<char *>(buf), ent_hdr_size);
     offset += entry->raw_size();
   }
 
-  b.writeBlock("\0", 1);
-  b.writeBlock("\0", 1);
+  b.write("\0", 1);
+  b.write("\0", 1);
 
   if(m_app_info.raw_size() > 0) {
-    b.writeBlock((char *) m_app_info.raw_data(), m_app_info.raw_size());
+    b.write((char *) m_app_info.raw_data(), m_app_info.raw_size());
   }
 
   if(m_sort_info.raw_size() > 0) {
-    b.writeBlock((char *) m_sort_info.raw_data(), m_sort_info.raw_size());
+    b.write((char *) m_sort_info.raw_data(), m_sort_info.raw_size());
   }
 
   for(record_list_t::iterator q = m_records.begin(); q != m_records.end(); ++q) {
     Block* entry = *q;
-    b.writeBlock((char *) entry->raw_data(), entry->raw_size());
+    b.write((char *) entry->raw_data(), entry->raw_size());
   }
 
   b.close();
@@ -123,14 +122,14 @@ QByteArray PilotDB::data() {
 // the returned RawRecord object.
 Record PilotDB::getRecord(unsigned index) const
 {
-    if (index >= m_records.size()) kdDebug() << "invalid index" << endl;
+    if (index >= m_records.size()) myDebug() << "invalid index" << endl;
     return *(reinterpret_cast<Record *> (m_records[index]));
 }
 
 // Set the record identified by the given index to the given record.
 void PilotDB::setRecord(unsigned index, const Record& rec)
 {
-//    if (index >= m_records.size()) kdDebug() << "invalid index");
+//    if (index >= m_records.size()) myDebug() << "invalid index");
     *(reinterpret_cast<Record *> (m_records[index])) = rec;
 }
 
@@ -172,7 +171,7 @@ Resource PilotDB::getResourceByType(pi_uint32_t type, pi_uint32_t id) const
             return *resource;
     }
 
-  kdWarning() << "PilotDB::getResourceByType() - not found!" << endl;
+  myWarning() << "PilotDB::getResourceByType() - not found!" << endl;
   return Resource();
 }
 
@@ -181,14 +180,14 @@ Resource PilotDB::getResourceByType(pi_uint32_t type, pi_uint32_t id) const
 // object.
 Resource PilotDB::getResourceByIndex(unsigned index) const
 {
-    if (index >= m_records.size()) kdDebug() << "invalid index" << endl;
+    if (index >= m_records.size()) myDebug() << "invalid index" << endl;
     return *(reinterpret_cast<Resource *> (m_records[index]));
 }
 
 // Set the resouce at given index to passed RawResource object.
 void PilotDB::setResource(unsigned index, const Resource& resource)
 {
-    if (index >= m_records.size()) kdDebug() << "invalid index" << endl;
+    if (index >= m_records.size()) myDebug() << "invalid index" << endl;
     *(reinterpret_cast<Resource *> (m_records[index])) = resource;
 }
 
@@ -252,7 +251,7 @@ FlatFile::Field PilotDB::string2field(FlatFile::Field::FieldType type, const std
 #else
         if(!StrOps::strptime(fldstr.c_str(), "%Y/%m/%d", &time)) {
 #endif
-          kdDebug() << "invalid date in field" << endl;
+          myDebug() << "invalid date in field" << endl;
         }
         field.v_date.month = time.tm_mon + 1;
         field.v_date.day = time.tm_mday;
@@ -269,7 +268,7 @@ FlatFile::Field PilotDB::string2field(FlatFile::Field::FieldType type, const std
       break;
 
     default:
-      kdWarning() << "PilotDB::string2field() - unsupported field type" <<  endl;
+      myWarning() << "PilotDB::string2field() - unsupported field type" <<  endl;
       break;
   }
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-20068 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "tellico_debug.h"
 
-#include <qregexp.h>
+#include <QRegExp>
 
 using Tellico::Filter;
 using Tellico::FilterRule;
@@ -28,7 +28,7 @@ FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Funct
  : m_fieldName(fieldName_), m_function(func_), m_pattern(pattern_) {
 }
 
-bool FilterRule::matches(Data::EntryPtr entry_) const {
+bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
   switch (m_function) {
     case FuncEquals:
       return equals(entry_);
@@ -43,61 +43,60 @@ bool FilterRule::matches(Data::EntryPtr entry_) const {
     case FuncNotRegExp:
       return !matchesRegExp(entry_);
     default:
-      kdWarning() << "FilterRule::matches() - invalid function!" << endl;
+      myWarning() << "FilterRule::matches() - invalid function!" << endl;
       break;
   }
   return true;
 }
 
-bool FilterRule::equals(Data::EntryPtr entry_) const {
+bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
     QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
-    for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
-      if(QString::compare((*it).lower(), m_pattern.lower()) == 0) {
+    foreach(const QString& value, list) {
+      if(m_pattern.compare(value, Qt::CaseInsensitive) == 0) {
         return true;
       }
     }
   } else {
-    return QString::compare(entry_->field(m_fieldName).lower(), m_pattern.lower()) == 0
-           || QString::compare(entry_->formattedField(m_fieldName).lower(), m_pattern.lower()) == 0;
+    return m_pattern.compare(entry_->field(m_fieldName), Qt::CaseInsensitive) == 0
+           || m_pattern.compare(entry_->formattedField(m_fieldName), Qt::CaseInsensitive) == 0;
   }
 
   return false;
 }
 
-bool FilterRule::contains(Data::EntryPtr entry_) const {
+bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
     QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
     // match is true if any strings match
-    for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
-      if((*it).find(m_pattern, 0, false) >= 0) {
+    foreach(const QString& value, list) {
+      if(value.indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0) {
         return true;
       }
     }
   } else {
-    return entry_->field(m_fieldName).find(m_pattern, 0, false) >= 0
-           || entry_->formattedField(m_fieldName).find(m_pattern, 0, false) >= 0;
+    return entry_->field(m_fieldName).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0
+           || entry_->formattedField(m_fieldName).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0;
   }
 
   return false;
 }
 
-bool FilterRule::matchesRegExp(Data::EntryPtr entry_) const {
-  QRegExp rx(m_pattern, false);
+bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
+  QRegExp rx(m_pattern, Qt::CaseInsensitive);
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
     QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
-    for(QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
-      if((*it).find(rx) >= 0) {
+    foreach(const QString& value, list) {
+      if(value.indexOf(rx) >= 0) {
         return true;
-        break;
       }
     }
   } else {
-    return entry_->field(m_fieldName).find(rx) >= 0
-           || entry_->formattedField(m_fieldName).find(rx) >= 0;
+    return entry_->field(m_fieldName).indexOf(rx) >= 0
+           || entry_->formattedField(m_fieldName).indexOf(rx) >= 0;
   }
 
   return false;
@@ -106,21 +105,27 @@ bool FilterRule::matchesRegExp(Data::EntryPtr entry_) const {
 
 /*******************************************************/
 
-Filter::Filter(const Filter& other_) : QPtrList<FilterRule>(), KShared(), m_op(other_.op()), m_name(other_.name()) {
-  for(QPtrListIterator<FilterRule> it(other_); it.current(); ++it) {
-    append(new FilterRule(*it.current()));
+Filter::Filter(const Filter& other_) : QList<FilterRule*>(), KShared()
+    , m_op(other_.op())
+    , m_name(other_.name()) {
+  foreach(const FilterRule* rule, static_cast<const QList<FilterRule*>&>(other_)) {
+    append(new FilterRule(*rule));
   }
-  setAutoDelete(true);
 }
 
-bool Filter::matches(Data::EntryPtr entry_) const {
+Filter::~Filter() {
+  qDeleteAll(*this);
+  clear();
+}
+
+bool Filter::matches(Tellico::Data::EntryPtr entry_) const {
   if(isEmpty()) {
     return true;
   }
 
   bool match = false;
-  for(QPtrListIterator<FilterRule> it(*this); it.current(); ++it) {
-    if(it.current()->matches(entry_)) {
+  foreach(const FilterRule* rule, *this) {
+    if(rule->matches(entry_)) {
       if(m_op == Filter::MatchAny) {
         return true;
       } else {

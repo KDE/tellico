@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -29,7 +29,7 @@ class ChoiceFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  ChoiceFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  ChoiceFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~ChoiceFieldWidget() {}
 
   virtual QString text() const;

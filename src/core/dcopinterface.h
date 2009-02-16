@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,69 +16,78 @@
 
 #include "../translators/translators.h"
 
-#include <dcopobject.h>
 #include <kurl.h>
 
-#include <qstringlist.h> // used in generated dcopinterface_skel.cpp
+#include <QStringList>
 
 namespace Tellico {
 
-class ApplicationInterface : public DCOPObject {
-K_DCOP
-k_dcop:
-  bool importTellico(const QString& file, const QString& action)
-    { return importFile(Import::TellicoXML, KURL::fromPathOrURL(file), actionType(action)); }
-  bool importBibtex(const QString& file, const QString& action)
-    { return importFile(Import::Bibtex, KURL::fromPathOrURL(file), actionType(action)); }
-  bool importMODS(const QString& file, const QString& action)
-    { return importFile(Import::MODS, KURL::fromPathOrURL(file), actionType(action)); }
-  bool importRIS(const QString& file, const QString& action)
-    { return importFile(Import::RIS, KURL::fromPathOrURL(file), actionType(action)); }
+class MainWindow;
 
-  bool exportXML(const QString& file)
-    { return exportCollection(Export::TellicoXML, KURL::fromPathOrURL(file)); }
-  bool exportZip(const QString& file)
-    { return exportCollection(Export::TellicoZip, KURL::fromPathOrURL(file)); }
-  bool exportBibtex(const QString& file)
-    { return exportCollection(Export::Bibtex, KURL::fromPathOrURL(file)); }
-  bool exportHTML(const QString& file)
-    { return exportCollection(Export::HTML, KURL::fromPathOrURL(file)); }
-  bool exportCSV(const QString& file)
-    { return exportCollection(Export::CSV, KURL::fromPathOrURL(file)); }
-  bool exportPilotDB(const QString& file)
-    { return exportCollection(Export::PilotDB, KURL::fromPathOrURL(file)); }
+class ApplicationInterface : public QObject {
+Q_OBJECT
+Q_CLASSINFO("D-Bus Interface", "org.tellico-project.application")
 
-  QValueList<long> selectedEntries() const;
-  QValueList<long> filteredEntries() const;
+public:
+  ApplicationInterface(MainWindow* parent);
 
-  virtual void openFile(const QString& file) = 0;
-  virtual void setFilter(const QString& text) = 0;
-  virtual bool showEntry(long id) = 0;
+public slots:
+  Q_SCRIPTABLE bool importTellico(const QString& file, const QString& action)
+    { return importFile(Import::TellicoXML, KUrl::fromPath(file), actionType(action)); }
+  Q_SCRIPTABLE bool importBibtex(const QString& file, const QString& action)
+    { return importFile(Import::Bibtex, KUrl::fromPath(file), actionType(action)); }
+  Q_SCRIPTABLE bool importMODS(const QString& file, const QString& action)
+    { return importFile(Import::MODS, KUrl::fromPath(file), actionType(action)); }
+  Q_SCRIPTABLE bool importRIS(const QString& file, const QString& action)
+    { return importFile(Import::RIS, KUrl::fromPath(file), actionType(action)); }
 
-protected:
-  ApplicationInterface() : DCOPObject("tellico") {}
-  virtual bool importFile(Import::Format format, const KURL& url, Import::Action action) = 0;
-  virtual bool exportCollection(Export::Format format, const KURL& url) = 0;
+  Q_SCRIPTABLE bool exportXML(const QString& file)
+    { return exportCollection(Export::TellicoXML, KUrl::fromPath(file)); }
+  Q_SCRIPTABLE bool exportZip(const QString& file)
+    { return exportCollection(Export::TellicoZip, KUrl::fromPath(file)); }
+  Q_SCRIPTABLE bool exportBibtex(const QString& file)
+    { return exportCollection(Export::Bibtex, KUrl::fromPath(file)); }
+  Q_SCRIPTABLE bool exportHTML(const QString& file)
+    { return exportCollection(Export::HTML, KUrl::fromPath(file)); }
+  Q_SCRIPTABLE bool exportCSV(const QString& file)
+    { return exportCollection(Export::CSV, KUrl::fromPath(file)); }
+  Q_SCRIPTABLE bool exportPilotDB(const QString& file)
+    { return exportCollection(Export::PilotDB, KUrl::fromPath(file)); }
+
+  Q_SCRIPTABLE QList<long> selectedEntries() const;
+  Q_SCRIPTABLE QList<long> filteredEntries() const;
+
+  Q_SCRIPTABLE virtual void openFile(const QString& file);
+  Q_SCRIPTABLE virtual void setFilter(const QString& text);
+  Q_SCRIPTABLE virtual bool showEntry(long id);
 
 private:
+  virtual bool importFile(Import::Format format, const KUrl& url, Import::Action action);
+  virtual bool exportCollection(Export::Format format, const KUrl& url);
+
   Import::Action actionType(const QString& actionName);
+
+  MainWindow* m_mainWindow;
 };
 
-class CollectionInterface : public DCOPObject {
-K_DCOP
-k_dcop:
-  CollectionInterface() : DCOPObject("collection") {}
+class CollectionInterface : public QObject {
+Q_OBJECT
+Q_CLASSINFO("D-Bus Interface", "org.tellico-project.collection")
 
-  long addEntry();
-  bool removeEntry(long entryID);
+public:
+  CollectionInterface(QObject* parent);
 
-  QStringList values(const QString& fieldName) const;
-  QStringList values(long entryID, const QString& fieldName) const;
-  QStringList bibtexKeys() const;
-  QString bibtexKey(long entryID) const;
+public slots:
+  Q_SCRIPTABLE long addEntry();
+  Q_SCRIPTABLE bool removeEntry(long entryID);
 
-  bool setFieldValue(long entryID, const QString& fieldName, const QString& value);
-  bool addFieldValue(long entryID, const QString& fieldName, const QString& value);
+  Q_SCRIPTABLE QStringList values(const QString& fieldName) const;
+  Q_SCRIPTABLE QStringList values(long entryID, const QString& fieldName) const;
+  Q_SCRIPTABLE QStringList bibtexKeys() const;
+  Q_SCRIPTABLE QString bibtexKey(long entryID) const;
+
+  Q_SCRIPTABLE bool setFieldValue(long entryID, const QString& fieldName, const QString& value);
+  Q_SCRIPTABLE bool addFieldValue(long entryID, const QString& fieldName, const QString& value);
 };
 
 } // end namespace

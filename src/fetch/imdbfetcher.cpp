@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,28 +17,28 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../filehandler.h"
-#include "../latin1literal.h"
 #include "../imagefactory.h"
 #include "../tellico_utils.h"
-#include "../gui/listboxtext.h"
+#include "../gui/listwidgetitem.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kdialogbase.h>
-#include <kconfig.h>
+#include <kdialog.h>
+#include <KConfigGroup>
 #include <klineedit.h>
 #include <knuminput.h>
+#include <KVBox>
+#include <kio/job.h>
+#include <kio/jobuidelegate.h>
+#include <KListWidget>
 
-#include <qregexp.h>
-#include <qfile.h>
-#include <qmap.h>
-#include <qvbox.h>
-#include <qlabel.h>
-#include <qlistbox.h>
-#include <qwhatsthis.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qvgroupbox.h>
+#include <QRegExp>
+#include <QFile>
+#include <QMap>
+#include <QLabel>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QGridLayout>
 
 //#define IMDB_TEST
 
@@ -61,20 +61,20 @@ void IMDBFetcher::initRegExps() {
   s_tagRx = new QRegExp(QString::fromLatin1("<.*>"));
   s_tagRx->setMinimal(true);
 
-  s_anchorRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*)\"[^<]*>([^<]*)</a>"), false);
+  s_anchorRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
   s_anchorRx->setMinimal(true);
 
-  s_anchorTitleRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/title/[^\"]*)\"[^<]*>([^<]*)</a>"), false);
+  s_anchorTitleRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/title/[^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
   s_anchorTitleRx->setMinimal(true);
 
-  s_anchorNameRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/name/[^\"]*)\"[^<]*>([^<]*)</a>"), false);
+  s_anchorNameRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/name/[^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
   s_anchorNameRx->setMinimal(true);
 
-  s_titleRx = new QRegExp(QString::fromLatin1("<title>(.*)</title>"), false);
+  s_titleRx = new QRegExp(QString::fromLatin1("<title>(.*)</title>"), Qt::CaseInsensitive);
   s_titleRx->setMinimal(true);
 }
 
-IMDBFetcher::IMDBFetcher(QObject* parent_, const char* name_) : Fetcher(parent_, name_),
+IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
     m_job(0), m_started(false), m_fetchImages(true), m_host(QString::fromLatin1(IMDB_SERVER)),
     m_limit(IMDB_MAX_RESULTS), m_countOffset(0) {
   if(!s_tagRx) {
@@ -102,18 +102,18 @@ void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!h.isEmpty()) {
     m_host = h;
   }
-  m_numCast = config_.readNumEntry("Max Cast", 10);
-  m_fetchImages = config_.readBoolEntry("Fetch Images", true);
-  m_fields = config_.readListEntry("Custom Fields");
+  m_numCast = config_.readEntry("Max Cast", 10);
+  m_fetchImages = config_.readEntry("Fetch Images", true);
+  m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
 // multiple values not supported
-void IMDBFetcher::search(FetchKey key_, const QString& value_) {
+void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_key = key_;
   m_value = value_;
   m_started = true;
   m_redirected = false;
-  m_data.truncate(0);
+
   m_matches.clear();
   m_popularTitles.truncate(0);
   m_exactTitles.truncate(0);
@@ -130,14 +130,14 @@ void IMDBFetcher::search(FetchKey key_, const QString& value_) {
 
 #ifdef IMDB_TEST
   if(m_key == Title) {
-    m_url = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/imdb-title.html"));
+    m_url = KUrl(QString::fromLatin1("/home/robby/imdb-title.html"));
     m_redirected = false;
   } else {
-    m_url = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/imdb-name.html"));
+    m_url = KUrl(QString::fromLatin1("/home/robby/imdb-name.html"));
     m_redirected = true;
   }
 #else
-  m_url = KURL();
+  m_url = KUrl();
   m_url.setProtocol(QString::fromLatin1("http"));
   m_url.setHost(m_host.isEmpty() ? QString::fromLatin1(IMDB_SERVER) : m_host);
   m_url.setPath(QString::fromLatin1("/find"));
@@ -152,25 +152,24 @@ void IMDBFetcher::search(FetchKey key_, const QString& value_) {
       break;
 
     default:
-      kdWarning() << "IMDBFetcher::search() - FetchKey not supported" << endl;
+      kWarning() << "IMDBFetcher::search() - FetchKey not supported";
       stop();
       return;
   }
 
   // as far as I can tell, the url encoding should always be iso-8859-1
-  // not utf-8
-  m_url.addQueryItem(QString::fromLatin1("q"), value_, 4 /* iso-8859-1 */);
+  // not utf-8. KDE4 not supporter?
+  m_url.addQueryItem(QString::fromLatin1("q"), value_);
 
 //  myDebug() << "IMDBFetcher::search() url = " << m_url << endl;
 #endif
 
-  m_job = KIO::get(m_url, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
-  connect(m_job, SIGNAL(redirection(KIO::Job *, const KURL&)),
-          SLOT(slotRedirection(KIO::Job*, const KURL&)));
+  m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
+  connect(m_job, SIGNAL(redirection(KIO::Job*, const KUrl&)),
+          SLOT(slotRedirection(KIO::Job*, const KUrl&)));
 }
 
 void IMDBFetcher::continueSearch() {
@@ -217,30 +216,26 @@ void IMDBFetcher::stop() {
   emit signalDone(this);
 }
 
-void IMDBFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void IMDBFetcher::slotRedirection(KIO::Job*, const KURL& toURL_) {
+void IMDBFetcher::slotRedirection(KIO::Job*, const KUrl& toURL_) {
   m_url = toURL_;
   m_redirected = true;
 }
 
-void IMDBFetcher::slotComplete(KIO::Job* job_) {
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
-
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+void IMDBFetcher::slotComplete(KJob*) {
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
+  QByteArray m_data = m_job->data();
   if(m_data.isEmpty()) {
     stop();
     return;
   }
+
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
 
   // a single result was found if we got redirected
   if(m_key == Title) {
@@ -260,12 +255,12 @@ void IMDBFetcher::slotComplete(KIO::Job* job_) {
 
 void IMDBFetcher::parseSingleTitleResult() {
 //  myDebug() << "IMDBFetcher::parseSingleTitleResult()" << endl;
-  s_titleRx->search(Tellico::decodeHTML(QString(m_data)));
+  s_titleRx->indexIn(Tellico::decodeHTML(QString(m_data)));
   // split title at parenthesis
   const QString cap1 = s_titleRx->cap(1);
-  int pPos = cap1.find('(');
+  int pPos = cap1.indexOf('(');
   // FIXME: maybe remove parentheses here?
-  SearchResult* r = new SearchResult(this,
+  SearchResult* r = new SearchResult(Fetcher::Ptr(this),
                                      pPos == -1 ? cap1 : cap1.left(pPos),
                                      pPos == -1 ? QString::null : cap1.mid(pPos),
                                      QString());
@@ -282,9 +277,9 @@ void IMDBFetcher::parseMultipleTitleResults() {
 
   // IMDb can return three title lists, popular, exact, and partial
   // the popular titles are in the first table, after the "Popular Results" text
-  int pos_popular = output.find(QString::fromLatin1("Popular Titles"),  0,                    false);
-  int pos_exact   = output.find(QString::fromLatin1("Exact Matches"),   QMAX(pos_popular, 0), false);
-  int pos_partial = output.find(QString::fromLatin1("Partial Matches"), QMAX(pos_exact, 0),   false);
+  int pos_popular = output.indexOf(QString::fromLatin1("Popular Titles"),  0,                    Qt::CaseInsensitive);
+  int pos_exact   = output.indexOf(QString::fromLatin1("Exact Matches"),   qMax(pos_popular, 0), Qt::CaseInsensitive);
+  int pos_partial = output.indexOf(QString::fromLatin1("Partial Matches"), qMax(pos_exact, 0),   Qt::CaseInsensitive);
   int end_popular = pos_exact; // keep track of where to end
   if(end_popular == -1) {
     end_popular = pos_partial == -1 ? output.length() : pos_partial;
@@ -336,57 +331,57 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
   }
 //  myDebug() << "IMDBFetcher::parseTitleBlock() - " << m_currentTitleBlock << endl;
 
-  QRegExp akaRx(QString::fromLatin1("aka (.*)(</li>|<br)"), false);
+  QRegExp akaRx(QString::fromLatin1("aka (.*)(</li>|<br)"), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
 
   m_hasMoreResults = false;
 
   int count = 0;
-  int start = s_anchorTitleRx->search(str_);
+  int start = s_anchorTitleRx->indexIn(str_);
   while(m_started && start > -1) {
     // split title at parenthesis
     const QString cap1 = s_anchorTitleRx->cap(1); // the anchor url
-    const QString cap2 = s_anchorTitleRx->cap(2).stripWhiteSpace(); // the anchor text
+    const QString cap2 = s_anchorTitleRx->cap(2).trimmed(); // the anchor text
     start += s_anchorTitleRx->matchedLength();
-    int pPos = cap2.find('('); // if it has parentheses, use that for description
+    int pPos = cap2.indexOf('('); // if it has parentheses, use that for description
     QString desc;
     if(pPos > -1) {
-      int pPos2 = cap2.find(')', pPos+1);
+      int pPos2 = cap2.indexOf(')', pPos+1);
       if(pPos2 > -1) {
         desc = cap2.mid(pPos+1, pPos2-pPos-1);
       }
     } else {
       // parenthesis might be outside anchor tag
-      int end = s_anchorTitleRx->search(str_, start);
+      int end = s_anchorTitleRx->indexIn(str_, start);
       if(end == -1) {
         end = str_.length();
       }
       QString text = str_.mid(start, end-start);
-      pPos = text.find('(');
+      pPos = text.indexOf('(');
       if(pPos > -1) {
-        int pNewLine = text.find(QString::fromLatin1("<br"));
+        int pNewLine = text.indexOf(QString::fromLatin1("<br"));
         if(pNewLine == -1 || pPos < pNewLine) {
-          int pPos2 = text.find(')', pPos);
+          int pPos2 = text.indexOf(')', pPos);
           desc = text.mid(pPos+1, pPos2-pPos-1);
         }
         pPos = -1;
       }
     }
     // multiple matches might have 'aka' info
-    int end = s_anchorTitleRx->search(str_, start+1);
+    int end = s_anchorTitleRx->indexIn(str_, start+1);
     if(end == -1) {
       end = str_.length();
     }
-    int akaPos = akaRx.search(str_, start+1);
+    int akaPos = akaRx.indexIn(str_, start+1);
     if(akaPos > -1 && akaPos < end) {
       // limit to 50 chars
-      desc += QChar(' ') + akaRx.cap(1).stripWhiteSpace().remove(*s_tagRx);
+      desc += QChar(' ') + akaRx.cap(1).trimmed().remove(*s_tagRx);
       if(desc.length() > 50) {
         desc = desc.left(50) + QString::fromLatin1("...");
       }
     }
 
-    start = s_anchorTitleRx->search(str_, start);
+    start = s_anchorTitleRx->indexIn(str_, start);
 
     if(count < m_countOffset) {
       ++count;
@@ -399,8 +394,8 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       break;
     }
 
-    SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
-    KURL u(m_url, cap1);
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
+    KUrl u(m_url, cap1);
     u.setQuery(QString::null);
     m_matches.insert(r->uid, u);
     emit signalResultFound(r);
@@ -419,41 +414,41 @@ void IMDBFetcher::parseSingleNameResult() {
 
   QString output = Tellico::decodeHTML(QString(m_data));
 
-  int pos = s_anchorTitleRx->search(output);
+  int pos = s_anchorTitleRx->indexIn(output);
   if(pos == -1) {
     stop();
     return;
   }
 
-  QRegExp tvRegExp(QString::fromLatin1("TV\\sEpisode"), false);
+  QRegExp tvRegExp(QString::fromLatin1("TV\\sEpisode"), Qt::CaseInsensitive);
 
   int len = 0;
   int count = 0;
   QString desc;
-  for( ; m_started && pos > -1; pos = s_anchorTitleRx->search(output, pos+len)) {
+  for( ; m_started && pos > -1; pos = s_anchorTitleRx->indexIn(output, pos+len)) {
     desc.truncate(0);
     bool isEpisode = false;
     len = s_anchorTitleRx->cap(0).length();
     // split title at parenthesis
-    const QString cap2 = s_anchorTitleRx->cap(2).stripWhiteSpace();
-    int pPos = cap2.find('(');
+    const QString cap2 = s_anchorTitleRx->cap(2).trimmed();
+    int pPos = cap2.indexOf('(');
     if(pPos > -1) {
       desc = cap2.mid(pPos);
     } else {
       // look until the next <a
-      int aPos = output.find(QString::fromLatin1("<a"), pos+len, false);
+      int aPos = output.indexOf(QString::fromLatin1("<a"), pos+len, Qt::CaseInsensitive);
       if(aPos == -1) {
         aPos = output.length();
       }
       QString tmp = output.mid(pos+len, aPos-pos-len);
-      if(tmp.find(tvRegExp) > -1) {
+      if(tmp.indexOf(tvRegExp) > -1) {
         isEpisode = true;
       }
-      pPos = tmp.find('(');
+      pPos = tmp.indexOf('(');
       if(pPos > -1) {
-        int pNewLine = tmp.find(QString::fromLatin1("<br"));
+        int pNewLine = tmp.indexOf(QString::fromLatin1("<br"));
         if(pNewLine == -1 || pPos < pNewLine) {
-          int pEnd = tmp.find(')', pPos+1);
+          int pEnd = tmp.indexOf(')', pPos+1);
           desc = tmp.mid(pPos+1, pEnd-pPos-1).remove(*s_tagRx);
         }
         // but need to indicate it wasn't found initially
@@ -480,11 +475,11 @@ void IMDBFetcher::parseSingleNameResult() {
     }
 
     // FIXME: maybe remove parentheses here?
-    SearchResult* r = new SearchResult(this, pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
-    KURL u(m_url, s_anchorTitleRx->cap(1)); // relative URL constructor
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
+    KUrl u(m_url, s_anchorTitleRx->cap(1)); // relative URL constructor
     u.setQuery(QString::null);
     m_matches.insert(r->uid, u);
-//    myDebug() << u.prettyURL() << endl;
+//    myDebug() << u.prettyUrl() << endl;
 //    myDebug() << cap2 << endl;
     emit signalResultFound(r);
   }
@@ -501,38 +496,38 @@ void IMDBFetcher::parseMultipleNameResults() {
 
   // the exact results are in the first table after the "exact results" text
   QString output = Tellico::decodeHTML(QString(m_data));
-  int pos = output.find(QString::fromLatin1("Popular Results"), 0, false);
+  int pos = output.indexOf(QString::fromLatin1("Popular Results"), 0, Qt::CaseInsensitive);
   if(pos == -1) {
-    pos = output.find(QString::fromLatin1("Exact Matches"), 0, false);
+    pos = output.indexOf(QString::fromLatin1("Exact Matches"), 0, Qt::CaseInsensitive);
   }
 
   // find beginning of partial matches
-  int end = output.find(QString::fromLatin1("Other Results"), QMAX(pos, 0), false);
+  int end = output.indexOf(QString::fromLatin1("Other Results"), qMax(pos, 0), Qt::CaseInsensitive);
   if(end == -1) {
-    end = output.find(QString::fromLatin1("Partial Matches"), QMAX(pos, 0), false);
+    end = output.indexOf(QString::fromLatin1("Partial Matches"), qMax(pos, 0), Qt::CaseInsensitive);
     if(end == -1) {
-      end = output.find(QString::fromLatin1("Approx Matches"), QMAX(pos, 0), false);
+      end = output.indexOf(QString::fromLatin1("Approx Matches"), qMax(pos, 0), Qt::CaseInsensitive);
       if(end == -1) {
         end = output.length();
       }
     }
   }
 
-  QMap<QString, KURL> map;
-  QMap<QString, int> nameMap;
+  QHash<QString, KUrl> map;
+  QHash<QString, int> nameMap;
 
   QString s;
   // if found exact matches
   if(pos > -1) {
-    pos = s_anchorNameRx->search(output, pos+13);
+    pos = s_anchorNameRx->indexIn(output, pos+13);
     while(pos > -1 && pos < end && m_matches.size() < m_limit) {
-      KURL u(m_url, s_anchorNameRx->cap(1));
-      s = s_anchorNameRx->cap(2).stripWhiteSpace() + ' ';
+      KUrl u(m_url, s_anchorNameRx->cap(1));
+      s = s_anchorNameRx->cap(2).trimmed() + ' ';
       // if more than one exact, add parentheses
       if(nameMap.contains(s) && nameMap[s] > 0) {
         // fix the first one that didn't have a number
         if(nameMap[s] == 1) {
-          KURL u2 = map[s];
+          KUrl u2 = map[s];
           map.remove(s);
           map.insert(s + "(1) ", u2);
         }
@@ -543,19 +538,19 @@ void IMDBFetcher::parseMultipleNameResults() {
         nameMap.insert(s, 1);
       }
       map.insert(s, u);
-      pos = s_anchorNameRx->search(output, pos+s_anchorNameRx->cap(0).length());
+      pos = s_anchorNameRx->indexIn(output, pos+s_anchorNameRx->cap(0).length());
     }
   }
 
   // go ahead and search for partial matches
-  pos = s_anchorNameRx->search(output, end);
+  pos = s_anchorNameRx->indexIn(output, end);
   while(pos > -1 && m_matches.size() < m_limit) {
-    KURL u(m_url, s_anchorNameRx->cap(1)); // relative URL
-    s = s_anchorNameRx->cap(2).stripWhiteSpace();
+    KUrl u(m_url, s_anchorNameRx->cap(1)); // relative URL
+    s = s_anchorNameRx->cap(2).trimmed();
     if(nameMap.contains(s) && nameMap[s] > 0) {
     // fix the first one that didn't have a number
       if(nameMap[s] == 1) {
-        KURL u2 = map[s];
+        KUrl u2 = map[s];
         map.remove(s);
         map.insert(s + " (1)", u2);
       }
@@ -566,7 +561,7 @@ void IMDBFetcher::parseMultipleNameResults() {
       nameMap.insert(s, 1);
     }
     map.insert(s, u);
-    pos = s_anchorNameRx->search(output, pos+s_anchorNameRx->cap(0).length());
+    pos = s_anchorNameRx->indexIn(output, pos+s_anchorNameRx->cap(0).length());
   }
 
   if(map.count() == 0) {
@@ -574,47 +569,59 @@ void IMDBFetcher::parseMultipleNameResults() {
     return;
   }
 
-  KDialogBase* dlg = new KDialogBase(Kernel::self()->widget(), "imdb dialog",
-                                     true, i18n("Select IMDB Result"), KDialogBase::Ok|KDialogBase::Cancel);
-  QVBox* box = new QVBox(dlg);
+  KDialog dlg(Kernel::self()->widget());
+  dlg.setCaption(i18n("Select IMDB Result"));
+  dlg.setModal(false);
+  dlg.setButtons(KDialog::Ok|KDialog::Cancel);
+
+  KVBox* box = new KVBox(&dlg);
   box->setSpacing(10);
   (void) new QLabel(i18n("<qt>Your search returned multiple matches. Please select one below.</qt>"), box);
 
-  QListBox* listBox = new QListBox(box);
-  listBox->setMinimumWidth(400);
-  listBox->setColumnMode(QListBox::FitToWidth);
+  KListWidget* listWidget = new KListWidget(box);
+  listWidget->setMinimumWidth(400);
+  listWidget->setWrapping(true);
   const QStringList values = map.keys();
-  for(QStringList::ConstIterator it = values.begin(); it != values.end(); ++it) {
-    if((*it).endsWith(QChar(' '))) {
-      GUI::ListBoxText* box = new GUI::ListBoxText(listBox, *it, 0);
+  foreach(const QString& value, values) {
+    if(value.endsWith(QChar(' '))) {
+      GUI::ListWidgetItem* box = new GUI::ListWidgetItem(value, listWidget);
       box->setColored(true);
+      listWidget->insertItem(0, box);
     } else {
-      (void) new GUI::ListBoxText(listBox, *it);
+      GUI::ListWidgetItem* box = new GUI::ListWidgetItem(value, listWidget);
+      listWidget->addItem(box);
     }
   }
-  listBox->setSelected(0, true);
-  QWhatsThis::add(listBox, i18n("<qt>Select a search result.</qt>"));
+  listWidget->item(0)->setSelected(true);
+  listWidget->setWhatsThis(i18n("<qt>Select a search result.</qt>"));
 
-  dlg->setMainWidget(box);
-  if(dlg->exec() != QDialog::Accepted || listBox->currentText().isEmpty()) {
-    dlg->delayedDestruct();
+  dlg.setMainWidget(box);
+  if(dlg.exec() != QDialog::Accepted) {
     stop();
     return;
   }
 
-  m_url = map[listBox->currentText()];
-  dlg->delayedDestruct();
+  QListWidgetItem* cItem = listWidget->currentItem();
+  QString cText;
+  if(cItem) {
+    cText = cItem->text();
+  }
+  if(cText.isEmpty()) {
+    stop();
+    return;
+  }
+
+  m_url = map[cText];
 
   // redirected is true since that's how I tell if an exact match has been found
   m_redirected = true;
   m_data.truncate(0);
-  m_job = KIO::get(m_url, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
-  connect(m_job, SIGNAL(redirection(KIO::Job *, const KURL&)),
-          SLOT(slotRedirection(KIO::Job*, const KURL&)));
+  m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
+  connect(m_job, SIGNAL(redirection(KIO::Job *, const KUrl&)),
+          SLOT(slotRedirection(KIO::Job*, const KUrl&)));
 
   // do not stop() here
 }
@@ -626,13 +633,13 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
     return entry;
   }
 
-  KURL url = m_matches[uid_];
+  KUrl url = m_matches[uid_];
   if(url.isEmpty()) {
     myDebug() << "IMDBFetcher::fetchEntry() - no url found" << endl;
-    return 0;
+    return Data::EntryPtr();
   }
 
-  KURL origURL = m_url; // keep to switch back
+  KUrl origURL = m_url; // keep to switch back
   QString results;
   // if the url matches the current one, no need to redownload it
   if(url == m_url) {
@@ -641,7 +648,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
   } else {
     // now it's sychronous
 #ifdef IMDB_TEST
-    KURL u = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/imdb-title-result.html"));
+    KUrl u(QString::fromLatin1("/home/robby/imdb-title-result.html"));
     results = Tellico::decodeHTML(FileHandler::readTextFile(u));
 #else
     // be quiet about failure
@@ -652,22 +659,22 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
   if(results.isEmpty()) {
     myDebug() << "IMDBFetcher::fetchEntry() - no text results" << endl;
     m_url = origURL;
-    return 0;
+    return Data::EntryPtr();
   }
 
   entry = parseEntry(results);
   m_url = origURL;
   if(!entry) {
     myDebug() << "IMDBFetcher::fetchEntry() - error in processing entry" << endl;
-    return 0;
+    return Data::EntryPtr();
   }
   m_entries.insert(uid_, entry); // keep for later
   return entry;
 }
 
 Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
-  Data::CollPtr coll = new Data::VideoCollection(true);
-  Data::EntryPtr entry = new Data::Entry(coll);
+  Data::CollPtr coll(new Data::VideoCollection(true));
+  Data::EntryPtr entry(new Data::Entry(coll));
 
   doTitle(str_, entry);
   doRunningTime(str_, entry);
@@ -685,8 +692,8 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   }
 
   const QString imdb = QString::fromLatin1("imdb");
-  if(!coll->hasField(imdb) && m_fields.findIndex(imdb) > -1) {
-    Data::FieldPtr field = new Data::Field(imdb, i18n("IMDB Link"), Data::Field::URL);
+  if(!coll->hasField(imdb) && m_fields.indexOf(imdb) > -1) {
+    Data::FieldPtr field(new Data::Field(imdb, i18n("IMDB Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
@@ -697,19 +704,19 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   return entry;
 }
 
-void IMDBFetcher::doTitle(const QString& str_, Data::EntryPtr entry_) {
-  if(s_titleRx->search(str_) > -1) {
+void IMDBFetcher::doTitle(const QString& str_, Tellico::Data::EntryPtr entry_) {
+  if(s_titleRx->indexIn(str_) > -1) {
     const QString cap1 = s_titleRx->cap(1);
     // titles always have parentheses
-    int pPos = cap1.find('(');
-    QString title = cap1.left(pPos).stripWhiteSpace();
+    int pPos = cap1.indexOf('(');
+    QString title = cap1.left(pPos).trimmed();
     // remove first and last quotes is there
     if(title.startsWith(QChar('"')) && title.endsWith(QChar('"'))) {
       title = title.mid(1, title.length()-2);
     }
     entry_->setField(QString::fromLatin1("title"), title);
     // remove parenthesis
-    uint pPos2 = pPos+1;
+    int pPos2 = pPos+1;
     while(pPos2 < cap1.length() && cap1[pPos2].isDigit()) {
       ++pPos2;
     }
@@ -720,38 +727,38 @@ void IMDBFetcher::doTitle(const QString& str_, Data::EntryPtr entry_) {
   }
 }
 
-void IMDBFetcher::doRunningTime(const QString& str_, Data::EntryPtr entry_) {
+void IMDBFetcher::doRunningTime(const QString& str_, Tellico::Data::EntryPtr entry_) {
   // running time
-  QRegExp runtimeRx(QString::fromLatin1("runtime:.*(\\d+)\\s+min"), false);
+  QRegExp runtimeRx(QString::fromLatin1("runtime:.*(\\d+)\\s+min"), Qt::CaseInsensitive);
   runtimeRx.setMinimal(true);
 
-  if(runtimeRx.search(str_) > -1) {
+  if(runtimeRx.indexIn(str_) > -1) {
 //    myDebug() << "running-time = " << runtimeRx.cap(1) << endl;
     entry_->setField(QString::fromLatin1("running-time"), runtimeRx.cap(1));
   }
 }
 
-void IMDBFetcher::doAspectRatio(const QString& str_, Data::EntryPtr entry_) {
-  QRegExp rx(QString::fromLatin1("aspect ratio:.*([\\d\\.]+\\s*:\\s*[\\d\\.]+)"), false);
+void IMDBFetcher::doAspectRatio(const QString& str_, Tellico::Data::EntryPtr entry_) {
+  QRegExp rx(QString::fromLatin1("aspect ratio:.*([\\d\\.]+\\s*:\\s*[\\d\\.]+)"), Qt::CaseInsensitive);
   rx.setMinimal(true);
 
-  if(rx.search(str_) > -1) {
+  if(rx.indexIn(str_) > -1) {
 //    myDebug() << "aspect ratio = " << rx.cap(1) << endl;
-    entry_->setField(QString::fromLatin1("aspect-ratio"), rx.cap(1).stripWhiteSpace());
+    entry_->setField(QString::fromLatin1("aspect-ratio"), rx.cap(1).trimmed());
   }
 }
 
-void IMDBFetcher::doAlsoKnownAs(const QString& str_, Data::EntryPtr entry_) {
-  if(m_fields.findIndex(QString::fromLatin1("alttitle")) == -1) {
+void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr entry_) {
+  if(m_fields.indexOf(QString::fromLatin1("alttitle")) == -1) {
     return;
   }
 
   // match until next b tag
 //  QRegExp akaRx(QString::fromLatin1("also known as(.*)<b(?:\\s.*)?>"));
-  QRegExp akaRx(QString::fromLatin1("also known as(.*)<(b[>\\s/]|div)"), false);
+  QRegExp akaRx(QString::fromLatin1("also known as(.*)<(b[>\\s/]|div)"), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
 
-  if(akaRx.search(str_) > -1 && !akaRx.cap(1).isEmpty()) {
+  if(akaRx.indexIn(str_) > -1 && !akaRx.cap(1).isEmpty()) {
     Data::FieldPtr f = entry_->collection()->fieldByName(QString::fromLatin1("alttitle"));
     if(!f) {
       f = new Data::Field(QString::fromLatin1("alttitle"), i18n("Alternative Titles"), Data::Field::Table);
@@ -760,9 +767,9 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Data::EntryPtr entry_) {
     }
 
     // split by <br>, remembering it could become valid xhtml!
-    QRegExp brRx(QString::fromLatin1("<br[\\s/]*>"), false);
+    QRegExp brRx(QString::fromLatin1("<br[\\s/]*>"), Qt::CaseInsensitive);
     brRx.setMinimal(true);
-    QStringList list = QStringList::split(brRx, akaRx.cap(1));
+    QStringList list = akaRx.cap(1).split(brRx);
     // lang could be included with [fr]
 //    const QRegExp parRx(QString::fromLatin1("\\(.+\\)"));
     const QRegExp brackRx(QString::fromLatin1("\\[\\w+\\]"));
@@ -770,12 +777,12 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Data::EntryPtr entry_) {
     for(QStringList::Iterator it = list.begin(); it != list.end(); ++it) {
       QString s = *it;
       // sometimes, the word "more" gets linked to the releaseinfo page, check that
-      if(s.find(QString::fromLatin1("releaseinfo")) > -1) {
+      if(s.indexOf(QString::fromLatin1("releaseinfo")) > -1) {
         continue;
       }
       s.remove(*s_tagRx);
       s.remove(brackRx);
-      s = s.stripWhiteSpace();
+      s = s.trimmed();
       // the first value ends up being or starting with the colon after "Also know as"
       // I'm too lazy to figure out a better regexp
       if(s.startsWith(QChar(':'))) {
@@ -791,7 +798,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Data::EntryPtr entry_) {
   }
 }
 
-void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL& baseURL_) {
+void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, const KUrl& baseURL_) {
   // plot summaries provided by users are on a separate page
   // should those be preferred?
 
@@ -799,25 +806,25 @@ void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL&
 
   QString thisPlot;
   // match until next opening tag
-  QRegExp plotRx(QString::fromLatin1("plot\\s*(?:outline|summary)?:(.*)<[^/].*</"), false);
+  QRegExp plotRx(QString::fromLatin1("plot\\s*(?:outline|summary)?:(.*)<[^/].*</"), Qt::CaseInsensitive);
   plotRx.setMinimal(true);
-  QRegExp plotURLRx(QString::fromLatin1("<a\\s+.*href\\s*=\\s*\".*/title/.*/plotsummary\""), false);
+  QRegExp plotURLRx(QString::fromLatin1("<a\\s+.*href\\s*=\\s*\".*/title/.*/plotsummary\""), Qt::CaseInsensitive);
   plotURLRx.setMinimal(true);
-  if(plotRx.search(str_) > -1) {
+  if(plotRx.indexIn(str_) > -1) {
     thisPlot = plotRx.cap(1);
     thisPlot.remove(*s_tagRx); // remove HTML tags
     entry_->setField(QString::fromLatin1("plot"), thisPlot);
     // if thisPlot ends with (more) or contains
     // a url that ends with plotsummary, then we'll grab it, otherwise not
-    if(plotRx.cap(0).endsWith(QString::fromLatin1("(more)</")) || plotURLRx.search(plotRx.cap(0)) > -1) {
+    if(plotRx.cap(0).endsWith(QString::fromLatin1("(more)</")) || plotURLRx.indexIn(plotRx.cap(0)) > -1) {
       useUserSummary = true;
     }
   }
 
   if(useUserSummary) {
     QRegExp idRx(QString::fromLatin1("title/(tt\\d+)"));
-    idRx.search(baseURL_.path());
-    KURL plotURL = baseURL_;
+    idRx.indexIn(baseURL_.path());
+    KUrl plotURL = baseURL_;
     plotURL.setPath(QString::fromLatin1("/title/") + idRx.cap(1) + QString::fromLatin1("/plotsummary"));
     // be quiet about failure
     QString plotPage = FileHandler::readTextFile(plotURL, true);
@@ -825,37 +832,37 @@ void IMDBFetcher::doPlot(const QString& str_, Data::EntryPtr entry_, const KURL&
     if(!plotPage.isEmpty()) {
       QRegExp plotRx(QString::fromLatin1("<p\\s+class\\s*=\\s*\"plotpar\">(.*)</p"));
       plotRx.setMinimal(true);
-      if(plotRx.search(plotPage) > -1) {
+      if(plotRx.indexIn(plotPage) > -1) {
         QString userPlot = plotRx.cap(1);
         userPlot.remove(*s_tagRx); // remove HTML tags
         // remove last little "written by", if there
-        userPlot.remove(QRegExp(QString::fromLatin1("\\s*written by.*$"), false));
+        userPlot.remove(QRegExp(QString::fromLatin1("\\s*written by.*$"), Qt::CaseInsensitive));
         entry_->setField(QString::fromLatin1("plot"), Tellico::decodeHTML(userPlot));
       }
     }
   }
 }
 
-void IMDBFetcher::doPerson(const QString& str_, Data::EntryPtr entry_,
+void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
                            const QString& imdbHeader_, const QString& fieldName_) {
-  QRegExp br2Rx(QString::fromLatin1("<br[\\s/]*>\\s*<br[\\s/]*>"), false);
+  QRegExp br2Rx(QString::fromLatin1("<br[\\s/]*>\\s*<br[\\s/]*>"), Qt::CaseInsensitive);
   br2Rx.setMinimal(true);
-  QRegExp divRx(QString::fromLatin1("<[/]*div"), false);
+  QRegExp divRx(QString::fromLatin1("<[/]*div"), Qt::CaseInsensitive);
   divRx.setMinimal(true);
   QString name = QString::fromLatin1("/name/");
 
   StringSet people;
-  for(int pos = str_.find(imdbHeader_); pos > 0; pos = str_.find(imdbHeader_, pos)) {
+  for(int pos = str_.indexOf(imdbHeader_); pos > 0; pos = str_.indexOf(imdbHeader_, pos)) {
     // loop until repeated <br> tags or </div> tag
-    const int endPos1 = str_.find(br2Rx, pos);
-    const int endPos2 = str_.find(divRx, pos);
-    const int endPos = QMIN(endPos1, endPos2); // ok to be -1
-    pos = s_anchorRx->search(str_, pos+1);
+    const int endPos1 = str_.indexOf(br2Rx, pos);
+    const int endPos2 = str_.indexOf(divRx, pos);
+    const int endPos = qMin(endPos1, endPos2); // ok to be -1
+    pos = s_anchorRx->indexIn(str_, pos+1);
     while(pos > -1 && pos < endPos) {
-      if(s_anchorRx->cap(1).find(name) > -1) {
-        people.add(s_anchorRx->cap(2).stripWhiteSpace());
+      if(s_anchorRx->cap(1).indexOf(name) > -1) {
+        people.add(s_anchorRx->cap(2).trimmed());
       }
-      pos = s_anchorRx->search(str_, pos+1);
+      pos = s_anchorRx->indexIn(str_, pos+1);
     }
   }
   if(!people.isEmpty()) {
@@ -863,17 +870,17 @@ void IMDBFetcher::doPerson(const QString& str_, Data::EntryPtr entry_,
   }
 }
 
-void IMDBFetcher::doCast(const QString& str_, Data::EntryPtr entry_, const KURL& baseURL_) {
+void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, const KUrl& baseURL_) {
   // the extended cast list is on a separate page
   // that's usually a lot of people
   // but since it can be in billing order, the main actors might not
   // be in the short list
   QRegExp idRx(QString::fromLatin1("title/(tt\\d+)"));
-  idRx.search(baseURL_.path());
+  idRx.indexIn(baseURL_.path());
 #ifdef IMDB_TEST
-  KURL castURL = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/imdb-title-fullcredits.html"));
+  KUrl castURL(QString::fromLatin1("/home/robby/imdb-title-fullcredits.html"));
 #else
-  KURL castURL = baseURL_;
+  KUrl castURL = baseURL_;
   castURL.setPath(QString::fromLatin1("/title/") + idRx.cap(1) + QString::fromLatin1("/fullcredits"));
 #endif
   // be quiet about failure and be sure to translate entities
@@ -885,28 +892,28 @@ void IMDBFetcher::doCast(const QString& str_, Data::EntryPtr entry_, const KURL&
   if(castText.isEmpty()) {
     // fall back to short list
     castText = str_;
-    pos = castText.find(QString::fromLatin1("cast overview"), 0, false);
+    pos = castText.indexOf(QString::fromLatin1("cast overview"), 0, Qt::CaseInsensitive);
     if(pos == -1) {
-      pos = castText.find(QString::fromLatin1("credited cast"), 0, false);
+      pos = castText.indexOf(QString::fromLatin1("credited cast"), 0, Qt::CaseInsensitive);
     }
   } else {
     // first look for anchor
-    QRegExp castAnchorRx(QString::fromLatin1("<a\\s+name\\s*=\\s*\"cast\""), false);
-    pos = castText.find(castAnchorRx);
+    QRegExp castAnchorRx(QString::fromLatin1("<a\\s+name\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
+    pos = castText.indexOf(castAnchorRx);
     if(pos < 0) {
-      QRegExp tableClassRx(QString::fromLatin1("<table\\s+class\\s*=\\s*\"cast\""), false);
-      pos = castText.find(tableClassRx);
+      QRegExp tableClassRx(QString::fromLatin1("<table\\s+class\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
+      pos = castText.indexOf(tableClassRx);
       if(pos < 0) {
         // fragile, the word "cast" appears in the title, but need to find
         // the one right above the actual cast table
         // for TV shows, there's a link on the sidebar for "episodes case"
         // so need to not match that one
-        pos = castText.find(QString::fromLatin1("cast</"), 0, false);
+        pos = castText.indexOf(QString::fromLatin1("cast</"), 0, Qt::CaseInsensitive);
         if(pos > 9) {
           // back up 9 places
           if(castText.mid(pos-9, 9).startsWith(QString::fromLatin1("episodes"))) {
             // find next cast list
-            pos = castText.find(QString::fromLatin1("cast</"), pos+6, false);
+            pos = castText.indexOf(QString::fromLatin1("cast</"), pos+6, Qt::CaseInsensitive);
           }
         }
       }
@@ -918,26 +925,26 @@ void IMDBFetcher::doCast(const QString& str_, Data::EntryPtr entry_, const KURL&
   }
 
   const QString name = QString::fromLatin1("/name/");
-  QRegExp tdRx(QString::fromLatin1("<td[^>]*>(.*)</td>"), false);
+  QRegExp tdRx(QString::fromLatin1("<td[^>]*>(.*)</td>"), Qt::CaseInsensitive);
   tdRx.setMinimal(true);
 
   QStringList cast;
   // loop until closing table tag
-  const int endPos = castText.find(QString::fromLatin1("</table"), pos, false);
-  pos = s_anchorRx->search(castText, pos+1);
+  const int endPos = castText.indexOf(QString::fromLatin1("</table"), pos, Qt::CaseInsensitive);
+  pos = s_anchorRx->indexIn(castText, pos+1);
   while(pos > -1 && pos < endPos && static_cast<int>(cast.count()) < m_numCast) {
-    if(s_anchorRx->cap(1).find(name) > -1) {
+    if(s_anchorRx->cap(1).indexOf(name) > -1) {
       // now search for <td> item with character name
       // there's a column with ellipses then the character
-      const int pos2 = tdRx.search(castText, pos);
-      if(pos2 > -1 && tdRx.search(castText, pos2+1) > -1) {
-        cast += s_anchorRx->cap(2).stripWhiteSpace()
-              + QString::fromLatin1("::") + tdRx.cap(1).simplifyWhiteSpace().remove(*s_tagRx);
+      const int pos2 = tdRx.indexIn(castText, pos);
+      if(pos2 > -1 && tdRx.indexIn(castText, pos2+1) > -1) {
+        cast += s_anchorRx->cap(2).trimmed()
+              + QString::fromLatin1("::") + tdRx.cap(1).simplified().remove(*s_tagRx);
       } else {
-        cast += s_anchorRx->cap(2).stripWhiteSpace();
+        cast += s_anchorRx->cap(2).trimmed();
       }
     }
-    pos = s_anchorRx->search(castText, pos+1);
+    pos = s_anchorRx->indexIn(castText, pos+1);
   }
 
   if(!cast.isEmpty()) {
@@ -945,17 +952,17 @@ void IMDBFetcher::doCast(const QString& str_, Data::EntryPtr entry_, const KURL&
   }
 }
 
-void IMDBFetcher::doRating(const QString& str_, Data::EntryPtr entry_) {
-  if(m_fields.findIndex(QString::fromLatin1("imdb-rating")) == -1) {
+void IMDBFetcher::doRating(const QString& str_, Tellico::Data::EntryPtr entry_) {
+  if(m_fields.indexOf(QString::fromLatin1("imdb-rating")) == -1) {
     return;
   }
 
   // don't add a colon, since there's a <br> at the end
   // some of the imdb images use /10.gif in their path, so check for space or bracket
-  QRegExp rx(QString::fromLatin1("[>\\s](\\d+.?\\d*)/10[<//s]"), false);
+  QRegExp rx(QString::fromLatin1("[>\\s](\\d+.?\\d*)/10[<//s]"), Qt::CaseInsensitive);
   rx.setMinimal(true);
 
-  if(rx.search(str_) > -1 && !rx.cap(1).isEmpty()) {
+  if(rx.indexIn(str_) > -1 && !rx.cap(1).isEmpty()) {
     Data::FieldPtr f = entry_->collection()->fieldByName(QString::fromLatin1("imdb-rating"));
     if(!f) {
       f = new Data::Field(QString::fromLatin1("imdb-rating"), i18n("IMDB Rating"), Data::Field::Rating);
@@ -972,47 +979,47 @@ void IMDBFetcher::doRating(const QString& str_, Data::EntryPtr entry_) {
   }
 }
 
-void IMDBFetcher::doCover(const QString& str_, Data::EntryPtr entry_, const KURL& baseURL_) {
+void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, const KUrl& baseURL_) {
   // cover is the img with the "cover" alt text
-  QRegExp imgRx(QString::fromLatin1("<img\\s+[^>]*src\\s*=\\s*\"([^\"]*)\"[^>]*>"), false);
+  QRegExp imgRx(QString::fromLatin1("<img\\s+[^>]*src\\s*=\\s*\"([^\"]*)\"[^>]*>"), Qt::CaseInsensitive);
   imgRx.setMinimal(true);
 
-  QRegExp posterRx(QString::fromLatin1("<a\\s+[^>]*name\\s*=\\s*\"poster\"[^>]*>(.*)</a>"), false);
+  QRegExp posterRx(QString::fromLatin1("<a\\s+[^>]*name\\s*=\\s*\"poster\"[^>]*>(.*)</a>"), Qt::CaseInsensitive);
   posterRx.setMinimal(true);
 
   const QString cover = QString::fromLatin1("cover");
 
-  int pos = posterRx.search(str_);
+  int pos = posterRx.indexIn(str_);
   while(pos > -1) {
-    if(imgRx.search(posterRx.cap(1)) > -1) {
-      KURL u(baseURL_, imgRx.cap(1));
+    if(imgRx.indexIn(posterRx.cap(1)) > -1) {
+      KUrl u(baseURL_, imgRx.cap(1));
       QString id = ImageFactory::addImage(u, true);
       if(!id.isEmpty()) {
         entry_->setField(cover, id);
       }
       return;
     }
-    pos = posterRx.search(str_, pos+1);
+    pos = posterRx.indexIn(str_, pos+1);
   }
 
   // didn't find the cover, IMDb also used to put "cover" inside the url
-  pos = imgRx.search(str_);
+  pos = imgRx.indexIn(str_);
   while(pos > -1) {
-    if(imgRx.cap(0).find(cover, 0, false) > -1) {
-      KURL u(baseURL_, imgRx.cap(1));
+    if(imgRx.cap(0).indexOf(cover, 0, Qt::CaseInsensitive) > -1) {
+      KUrl u(baseURL_, imgRx.cap(1));
       QString id = ImageFactory::addImage(u, true);
       if(!id.isEmpty()) {
         entry_->setField(cover, id);
       }
       return;
     }
-    pos = imgRx.search(str_, pos+1);
+    pos = imgRx.indexIn(str_, pos+1);
   }
 }
 
 // end up reparsing whole string, but it's not really that slow
 // loook at every anchor tag in the string
-void IMDBFetcher::doLists(const QString& str_, Data::EntryPtr entry_) {
+void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
   const QString genre = QString::fromLatin1("/Genres/");
   const QString country = QString::fromLatin1("/Countries/");
   const QString lang = QString::fromLatin1("/Languages/");
@@ -1026,31 +1033,31 @@ void IMDBFetcher::doLists(const QString& str_, Data::EntryPtr entry_) {
   // for genres and nationalities
 
   QStringList genres, countries, langs, certs, tracks, studios;
-  for(int pos = s_anchorRx->search(str_); pos > -1; pos = s_anchorRx->search(str_, pos+1)) {
+  for(int pos = s_anchorRx->indexIn(str_); pos > -1; pos = s_anchorRx->indexIn(str_, pos+1)) {
     const QString cap1 = s_anchorRx->cap(1);
-    if(cap1.find(genre) > -1) {
-      if(s_anchorRx->cap(2).find(QString::fromLatin1(" section"), 0, false) == -1) {
-        genres += s_anchorRx->cap(2).stripWhiteSpace();
+    if(cap1.indexOf(genre) > -1) {
+      if(s_anchorRx->cap(2).indexOf(QString::fromLatin1(" section"), 0, Qt::CaseInsensitive) == -1) {
+        genres += s_anchorRx->cap(2).trimmed();
       }
-    } else if(cap1.find(country) > -1) {
-      if(s_anchorRx->cap(2).find(QString::fromLatin1(" section"), 0, false) == -1) {
-        countries += s_anchorRx->cap(2).stripWhiteSpace();
+    } else if(cap1.indexOf(country) > -1) {
+      if(s_anchorRx->cap(2).indexOf(QString::fromLatin1(" section"), 0, Qt::CaseInsensitive) == -1) {
+        countries += s_anchorRx->cap(2).trimmed();
       }
-    } else if(cap1.find(lang) > -1) {
-      langs += s_anchorRx->cap(2).stripWhiteSpace();
-    } else if(cap1.find(colorInfo) > -1) {
+    } else if(cap1.indexOf(lang) > -1) {
+      langs += s_anchorRx->cap(2).trimmed();
+    } else if(cap1.indexOf(colorInfo) > -1) {
       // change "black and white" to "black & white"
       entry_->setField(QString::fromLatin1("color"),
-                       s_anchorRx->cap(2).replace(QString::fromLatin1("and"), QChar('&')).stripWhiteSpace());
-    } else if(cap1.find(cert) > -1) {
-      certs += s_anchorRx->cap(2).stripWhiteSpace();
-    } else if(cap1.find(soundMix) > -1) {
-      tracks += s_anchorRx->cap(2).stripWhiteSpace();
-    } else if(cap1.find(company) > -1) {
-      studios += s_anchorRx->cap(2).stripWhiteSpace();
+                       s_anchorRx->cap(2).replace(QString::fromLatin1("and"), QChar('&')).trimmed());
+    } else if(cap1.indexOf(cert) > -1) {
+      certs += s_anchorRx->cap(2).trimmed();
+    } else if(cap1.indexOf(soundMix) > -1) {
+      tracks += s_anchorRx->cap(2).trimmed();
+    } else if(cap1.indexOf(company) > -1) {
+      studios += s_anchorRx->cap(2).trimmed();
       // if year field wasn't set before, do it now
-    } else if(entry_->field(QString::fromLatin1("year")).isEmpty() && cap1.find(year) > -1) {
-      entry_->setField(QString::fromLatin1("year"), s_anchorRx->cap(2).stripWhiteSpace());
+    } else if(entry_->field(QString::fromLatin1("year")).isEmpty() && cap1.indexOf(year) > -1) {
+      entry_->setField(QString::fromLatin1("year"), s_anchorRx->cap(2).trimmed());
     }
   }
 
@@ -1062,22 +1069,22 @@ void IMDBFetcher::doLists(const QString& str_, Data::EntryPtr entry_) {
   if(!certs.isEmpty()) {
     // first try to set default certification
     const QStringList& certsAllowed = entry_->collection()->fieldByName(QString::fromLatin1("certification"))->allowed();
-    for(QStringList::ConstIterator it = certs.begin(); it != certs.end(); ++it) {
-      QString country = (*it).section(':', 0, 0);
-      QString cert = (*it).section(':', 1, 1);
-      if(cert == Latin1Literal("Unrated")) {
-        cert = QChar('U');
+    foreach(const QString& cert, certs) {
+      QString country = cert.section(':', 0, 0);
+      QString lcert = cert.section(':', 1, 1);
+      if(lcert == QLatin1String("Unrated")) {
+        lcert = QChar('U');
       }
-      cert += QString::fromLatin1(" (") + country + ')';
-      if(certsAllowed.findIndex(cert) > -1) {
-        entry_->setField(QString::fromLatin1("certification"), cert);
+      lcert += QString::fromLatin1(" (") + country + ')';
+      if(certsAllowed.indexOf(cert) > -1) {
+        entry_->setField(QString::fromLatin1("certification"), lcert);
         break;
       }
     }
 
     // now add new field for all certifications
     const QString allc = QString::fromLatin1("allcertification");
-    if(m_fields.findIndex(allc) > -1) {
+    if(m_fields.indexOf(allc) > -1) {
       Data::FieldPtr f = entry_->collection()->fieldByName(allc);
       if(!f) {
         f = new Data::Field(allc, i18n("Certifications"), Data::Field::Table);
@@ -1089,12 +1096,12 @@ void IMDBFetcher::doLists(const QString& str_, Data::EntryPtr entry_) {
   }
 }
 
-void IMDBFetcher::updateEntry(Data::EntryPtr entry_) {
+void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myLog() << "IMDBFetcher::updateEntry() - " << entry_->title() << endl;
   // only take first 5
   m_limit = 5;
   QString t = entry_->field(QString::fromLatin1("title"));
-  KURL link = entry_->field(QString::fromLatin1("imdb"));
+  KUrl link = entry_->field(QString::fromLatin1("imdb"));
   if(!link.isEmpty() && link.isValid()) {
     // check if we want a different host
     if(link.host() != m_host) {
@@ -1108,13 +1115,12 @@ void IMDBFetcher::updateEntry(Data::EntryPtr entry_) {
     m_matches.clear();
     m_url = link;
     m_redirected = true; // m_redirected is used as a flag later to tell if we get a single result
-    m_job = KIO::get(m_url, false, false);
-    connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-            SLOT(slotData(KIO::Job*, const QByteArray&)));
-    connect(m_job, SIGNAL(result(KIO::Job*)),
-            SLOT(slotComplete(KIO::Job*)));
-    connect(m_job, SIGNAL(redirection(KIO::Job *, const KURL&)),
-            SLOT(slotRedirection(KIO::Job*, const KURL&)));
+    m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
+    m_job->ui()->setWindow(Kernel::self()->widget());
+    connect(m_job, SIGNAL(result(KJob*)),
+            SLOT(slotComplete(KJob*)));
+    connect(m_job, SIGNAL(redirection(KIO::Job*, const KUrl&)),
+            SLOT(slotRedirection(KIO::Job*, const KUrl&)));
     return;
   }
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
@@ -1131,9 +1137,9 @@ Tellico::Fetch::ConfigWidget* IMDBFetcher::configWidget(QWidget* parent_) const 
 
 IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_) {
-  QGridLayout* l = new QGridLayout(optionsWidget(), 4, 2);
+  QGridLayout* l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
-  l->setColStretch(1, 10);
+  l->setColumnStretch(1, 10);
 
   int row = -1;
   QLabel* label = new QLabel(i18n("Hos&t: "), optionsWidget());
@@ -1143,27 +1149,27 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   l->addWidget(m_hostEdit, row, 1);
   QString w = i18n("The Internet Movie Database uses several different servers. Choose the one "
                    "you wish to use.");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_hostEdit, w);
+  label->setWhatsThis(w);
+  m_hostEdit->setWhatsThis(w);
   label->setBuddy(m_hostEdit);
 
   label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_numCast = new KIntSpinBox(0, 99, 1, 10, 10, optionsWidget());
+  m_numCast = new KIntSpinBox(0, 99, 1, 10, optionsWidget());
   connect(m_numCast, SIGNAL(valueChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_numCast, row, 1);
   w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_numCast, w);
+  label->setWhatsThis(w);
+  m_numCast->setWhatsThis(w);
   label->setBuddy(m_numCast);
 
   m_fetchImageCheck = new QCheckBox(i18n("Download cover &image"), optionsWidget());
   connect(m_fetchImageCheck, SIGNAL(clicked()), SLOT(slotSetModified()));
   ++row;
-  l->addMultiCellWidget(m_fetchImageCheck, row, row, 0, 1);
+  l->addWidget(m_fetchImageCheck, row, 0, 1, 2);
   w = i18n("The cover image may be downloaded as well. However, too many large images in the "
            "collection may degrade performance.");
-  QWhatsThis::add(m_fetchImageCheck, w);
+  m_fetchImageCheck->setWhatsThis(w);
 
   l->setRowStretch(++row, 10);
 
@@ -1182,7 +1188,7 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
 }
 
 void IMDBFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
-  QString host = m_hostEdit->text().stripWhiteSpace();
+  QString host = m_hostEdit->text().trimmed();
   if(!host.isEmpty()) {
     config_.writeEntry("Host", host);
   }

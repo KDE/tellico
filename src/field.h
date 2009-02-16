@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,9 +16,8 @@
 
 #include "datavectors.h"
 
-#include <qstringlist.h>
-#include <qstring.h>
-#include <qregexp.h>
+#include <QStringList>
+#include <QRegExp>
 
 namespace Tellico {
   namespace Data {
@@ -253,7 +252,7 @@ public:
    *
    * @return The field default value
    */
-  const QString& defaultValue() const;
+  QString defaultValue() const;
   /**
    * Sets the default value of the field.
    *
@@ -285,7 +284,7 @@ public:
    * @param key The property key
    * @returnThe property value
    */
-  const QString& property(const QString& key) const { return m_properties[key]; }
+  QString property(const QString& key) const { return m_properties[key]; }
   /**
    * Return the list of properties.
    *
@@ -296,51 +295,11 @@ public:
    * Return a vector of all the fields on which the value of this field depends.
    * Returns an empty vector for non-Dpendent fields
    */
-  FieldVec dependsOn(CollPtr coll) const;
+  FieldList dependsOn(CollPtr coll) const;
   QStringList dependsOn() const;
 
   /*************************** STATIC **********************************/
-
-  /**
-   * A wrapper method around all the format functions. The flags
-   * determine which is called on the string.
-   */
-   static QString format(const QString& value, FormatFlag flag);
-  /**
-   * A convenience function to format a string as a title.
-   * At the moment, this means that some articles such as "the" are placed
-   * at the end of the title. If autoCapitalize() is true, the title is capitalized.
-   *
-   * @param title The string to be formatted
-   */
-  static QString formatTitle(const QString& title);
-  /**
-   * A convenience function to format a string as a personal name.
-   * At the moment, this means that the name is split at the last white space,
-   * and the last name is moved in front. If multiple=true, then the string
-   * is split using a semi-colon (";"), and each string is formatted and then
-   * joined back together. If autoCapitalize() is true, the names are capitalized.
-   *
-   * @param name The string to be formatted
-   * @param multiple A boolean indicating if the string can contain multiple values
-   */
-  static QString formatName(const QString& name, bool multiple=true);
-  /**
-   * A convenience function to format a string as a date.
-   *
-   * @param date The string to be formatted
-   */
-  static QString formatDate(const QString& date);
-  /**
-   * Helper method to fix capitalization.
-   *
-   * @param str String to fix
-   */
-  static QString capitalize(QString str);
-  /**
-   * Return the key to be used for sorting titles
-   */
-  static QString sortKeyTitle(const QString& title);
+  static QString format(const QString& value, FormatFlag flag);
   /**
    * Returns a mapping of the FieldType enum to translated titles for the types.
    */
@@ -356,16 +315,8 @@ public:
    */
   static QStringList split(const QString& string, bool allowEmpty);
   /**
-   * Returns the delimiter used to split field values
-   *
-   * @return The delimeter regexp
-   */
-  static const QRegExp& delimiter() { return s_delimiter; }
-  /**
    * reset if the field is a rating field used for syntax version 7 and earlier */
   static void convertOldRating(Data::FieldPtr field);
-  static void stripArticles(QString& value);
-  static void articlesUpdated();
 
 private:
   /*
@@ -373,6 +324,7 @@ private:
    * new collections are created.
    */
   static long getID();
+  static QRegExp s_delimiter;
 
   long m_id;
   QString m_name;
@@ -384,13 +336,11 @@ private:
   int m_flags;
   FormatFlag m_formatFlag;
   StringMap m_properties;
-
-  static QStringList s_articles;
-  // need to remember articles with apostrophes for capitalization
-  static QStringList s_articlesApos;
-  static QRegExp s_delimiter;
 };
 
   } // end namespace
 } // end namespace
+
+Q_DECLARE_METATYPE(Tellico::Data::FieldPtr)
+
 #endif

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,17 +17,20 @@
 #include "../imagefactory.h"
 
 #include <kstandarddirs.h>
+#include <kdebug.h>
+
+#include <QPixmap>
 
 using Tellico::Import::ReferencerImporter;
 
-ReferencerImporter::ReferencerImporter(const KURL& url_) : XSLTImporter(url_) {
-  QString xsltFile = locate("appdata", QString::fromLatin1("referencer2tellico.xsl"));
+ReferencerImporter::ReferencerImporter(const KUrl& url_) : XSLTImporter(url_) {
+  QString xsltFile = KStandardDirs::locate("appdata", QString::fromLatin1("referencer2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
-    KURL u;
+    KUrl u;
     u.setPath(xsltFile);
     XSLTImporter::setXSLTURL(u);
   } else {
-    kdWarning() << "ReferencerImporter() - unable to find referencer2tellico.xml!" << endl;
+    kWarning() << "ReferencerImporter() - unable to find referencer2tellico.xml!";
   }
 }
 
@@ -38,7 +41,7 @@ bool ReferencerImporter::canImport(int type) const {
 Tellico::Data::CollPtr ReferencerImporter::collection() {
   Data::CollPtr coll = XSLTImporter::collection();
   if(!coll) {
-    return 0;
+    return Data::CollPtr();
   }
 
   Data::FieldPtr field = coll->fieldByName(QString::fromLatin1("cover"));
@@ -49,8 +52,7 @@ Tellico::Data::CollPtr ReferencerImporter::collection() {
     coll->addField(field);
   }
 
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+  foreach(Data::EntryPtr entry, coll->entries()) {
     QString url = entry->field(QString::fromLatin1("url"));
     if(url.isEmpty()) {
       continue;

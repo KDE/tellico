@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,8 +18,10 @@
 
 #include <kurl.h>
 
-#include <qcolor.h>
-#include <qcache.h>
+#include <QColor>
+#include <QHash>
+#include <QCache>
+#include <QPixmap>
 
 class KTempDir;
 
@@ -72,8 +74,8 @@ public:
    * @param quiet If any error should not be reported.
    * @return The image id, empty if null
    */
-  static QString addImage(const KURL& url, bool quiet=false,
-                          const KURL& referrer = KURL(), bool linkOnly=false);
+  static QString addImage(const KUrl& url, bool quiet=false,
+                          const KUrl& referrer = KUrl(), bool linkOnly=false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
@@ -106,7 +108,7 @@ public:
    * @param force Force the image to be written, even if it already has been
    * @return Whether the save was successful
    */
-  static bool writeImage(const QString& id, const KURL& targetDir, bool force=false);
+  static bool writeImage(const QString& id, const KUrl& targetDir, bool force=false);
   static bool writeCachedImage(const QString& id, CacheDir dir, bool force = false);
 
   /**
@@ -137,7 +139,7 @@ public:
   static void removeImage(const QString& id_, bool deleteImage);
   static StringSet imagesNotInCache();
 
-  static void setLocalDirectory(const KURL& url);
+  static void setLocalDirectory(const KUrl& url);
   // local save directory
   static QString localDir();
 
@@ -150,8 +152,8 @@ private:
    * @param quiet If any error should not be reported.
    * @return The image
    */
-  static const Data::Image& addImageImpl(const KURL& url, bool quiet=false,
-                                         const KURL& referrer = KURL(), bool linkOnly = false);
+  static const Data::Image& addImageImpl(const KUrl& url, bool quiet=false,
+                                         const KUrl& referrer = KUrl(), bool linkOnly = false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
@@ -179,10 +181,10 @@ private:
   static void releaseImages();
 
   static bool s_needInit;
-  static QDict<Data::Image> s_imageDict;
-  static QCache<Data::Image> s_imageCache;
-  static QCache<QPixmap> s_pixmapCache;
-  static QMap<QString, Data::ImageInfo> s_imageInfoMap;
+  static QHash<QString, Data::Image*> s_imageDict;
+  static QCache<QString, Data::Image> s_imageCache;
+  static QCache<QString, QPixmap> s_pixmapCache;
+  static QHash<QString, Data::ImageInfo> s_imageInfoMap;
   static StringSet s_imagesInTmpDir; // the id's of the images written to tmp directory
   static StringSet s_imagesToRelease;
   static KTempDir* s_tmpDir;

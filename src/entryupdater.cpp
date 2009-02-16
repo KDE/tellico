@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,13 +21,16 @@
 #include "gui/richtextlabel.h"
 #include "document.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <klocale.h>
-#include <klistview.h>
 #include <kiconloader.h>
+#include <kapplication.h>
+#include <KVBox>
 
-#include <qvbox.h>
-#include <qtimer.h>
+#include <QTimer>
+#include <QLabel>
+#include <QTreeWidget>
+#include <QHeaderView>
 
 namespace {
   static const int CHECK_COLLECTION_IMAGES_STEP_SIZE = 10;
@@ -37,20 +40,20 @@ using Tellico::EntryUpdater;
 
 // for each entry, we loop over all available fetchers
 // then we loop over all entries
-EntryUpdater::EntryUpdater(Data::CollPtr coll_, Data::EntryVec entries_, QObject* parent_)
+EntryUpdater::EntryUpdater(Tellico::Data::CollPtr coll_, Tellico::Data::EntryList entries_, QObject* parent_)
     : QObject(parent_), m_coll(coll_), m_entriesToUpdate(entries_), m_cancelled(false) {
   // for now, we're assuming all entries are same collection type
   m_fetchers = Fetch::Manager::self()->createUpdateFetchers(m_coll->type());
-  for(Fetch::FetcherVec::Iterator it = m_fetchers.begin(); it != m_fetchers.end(); ++it) {
-    connect(it.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
+  foreach(Fetch::Fetcher::Ptr fetcher, m_fetchers) {
+    connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
             SLOT(slotResult(Tellico::Fetch::SearchResult*)));
-    connect(it.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
+    connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
             SLOT(slotDone()));
   }
   init();
 }
 
-EntryUpdater::EntryUpdater(const QString& source_, Data::CollPtr coll_, Data::EntryVec entries_, QObject* parent_)
+EntryUpdater::EntryUpdater(const QString& source_, Tellico::Data::CollPtr coll_, Tellico::Data::EntryList entries_, QObject* parent_)
     : QObject(parent_)
     , m_coll(coll_)
     , m_entriesToUpdate(entries_)
@@ -59,18 +62,19 @@ EntryUpdater::EntryUpdater(const QString& source_, Data::CollPtr coll_, Data::En
   Fetch::Fetcher::Ptr f = Fetch::Manager::self()->createUpdateFetcher(m_coll->type(), source_);
   if(f) {
     m_fetchers.append(f);
-    connect(f, SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
+    connect(f.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
             SLOT(slotResult(Tellico::Fetch::SearchResult*)));
-    connect(f, SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
+    connect(f.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
             SLOT(slotDone()));
   }
   init();
 }
 
 EntryUpdater::~EntryUpdater() {
-  for(ResultList::Iterator res = m_results.begin(); res != m_results.end(); ++res) {
-    delete (*res).first;
+  foreach(const UpdateResult& res, m_results) {
+    delete res.first;
   }
+  m_results.clear();
 }
 
 void EntryUpdater::init() {
@@ -78,7 +82,7 @@ void EntryUpdater::init() {
   m_origEntryCount = m_entriesToUpdate.count();
   QString label;
   if(m_entriesToUpdate.count() == 1) {
-    label = i18n("Updating %1...").arg(m_entriesToUpdate.front()->title());
+    label = i18n("Updating %1...", m_entriesToUpdate.front()->title());
   } else {
     label = i18n("Updating entries...");
   }
@@ -96,7 +100,7 @@ void EntryUpdater::init() {
 }
 
 void EntryUpdater::slotStartNext() {
-  StatusBar::self()->setStatus(i18n("Updating <b>%1</b>...").arg(m_entriesToUpdate.front()->title()));
+  StatusBar::self()->setStatus(i18n("Updating <b>%1</b>...", m_entriesToUpdate.front()->title()));
   ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entriesToUpdate.count()) + m_fetchIndex);
 
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
@@ -118,11 +122,11 @@ void EntryUpdater::slotDone() {
   m_results.clear();
   ++m_fetchIndex;
 //  myDebug() << "EntryUpdater::slotDone() " << m_fetchIndex << endl;
-  if(m_fetchIndex == static_cast<int>(m_fetchers.count())) {
+  if(m_fetchIndex == m_fetchers.count()) {
     m_fetchIndex = 0;
     // we've gone through the loop for the first entry in the vector
     // pop it and move on
-    m_entriesToUpdate.remove(m_entriesToUpdate.begin());
+    m_entriesToUpdate.removeAll(m_entriesToUpdate[0]);
     // if there are no more entries, and this is the last fetcher, time to delete
     if(m_entriesToUpdate.isEmpty()) {
       QTimer::singleShot(500, this, SLOT(slotCleanup()));
@@ -134,7 +138,7 @@ void EntryUpdater::slotDone() {
   QTimer::singleShot(500, this, SLOT(slotStartNext()));
 }
 
-void EntryUpdater::slotResult(Fetch::SearchResult* result_) {
+void EntryUpdater::slotResult(Tellico::Fetch::SearchResult* result_) {
   if(!result_ || m_cancelled) {
     return;
   }
@@ -167,8 +171,8 @@ void EntryUpdater::handleResults() {
   Data::EntryPtr entry = m_entriesToUpdate.front();
   int best = 0;
   ResultList matches;
-  for(ResultList::Iterator res = m_results.begin(); res != m_results.end(); ++res) {
-    Data::EntryPtr e = (*res).first->fetchEntry();
+  foreach(const UpdateResult& res, m_results) {
+    Data::EntryPtr e = res.first->fetchEntry();
     if(!e) {
       continue;
     }
@@ -180,9 +184,9 @@ void EntryUpdater::handleResults() {
     if(match > best) {
       best = match;
       matches.clear();
-      matches.append(*res);
+      matches.append(res);
     } else if(match == best && best > 0) {
-      matches.append(*res);
+      matches.append(res);
     }
   }
   if(best < Data::Collection::ENTRY_GOOD_MATCH) {
@@ -204,47 +208,49 @@ void EntryUpdater::handleResults() {
   }
 }
 
-Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(ResultList results) {
-  KDialogBase dlg(Kernel::self()->widget(), "entry updater dialog",
-                  true, i18n("Select Match"), KDialogBase::Ok|KDialogBase::Cancel);
-  QVBox* box = new QVBox(&dlg);
-  box->setSpacing(10);
+Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& results) {
+  KDialog dlg(Kernel::self()->widget());
+  dlg.setModal(true);
+  dlg.setCaption(i18n("Select Match"));
+  dlg.setButtons(KDialog::Ok|KDialog::Cancel);
 
-  QHBox* hbox = new QHBox(box);
+  KVBox* box = new KVBox(&dlg);
+  box->setSpacing(10);
+  dlg.setMainWidget(box);
+
+  KHBox* hbox = new KHBox(box);
   hbox->setSpacing(10);
   QLabel* icon = new QLabel(hbox);
-  icon->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Panel, 64));
+  icon->setPixmap(KIconLoader::global()->loadIcon(QString::fromLatin1("network-wired"), KIconLoader::Panel, 64));
   QString s = i18n("<qt><b>%1</b> returned multiple results which could match <b>%2</b>, "
-                   "the entry currently in the collection. Please select the correct match.</qt>")
-              .arg(m_fetchers[m_fetchIndex]->source())
-              .arg(m_entriesToUpdate.front()->field(QString::fromLatin1("title")));
+                   "the entry currently in the collection. Please select the correct match.</qt>",
+                   m_fetchers[m_fetchIndex]->source(),
+                   m_entriesToUpdate.front()->field(QString::fromLatin1("title")));
   GUI::RichTextLabel* l = new GUI::RichTextLabel(s, hbox);
   hbox->setStretchFactor(l, 100);
 
-  KListView* view = new KListView(box);
-  view->setShowSortIndicator(true);
+  QTreeWidget* view = new QTreeWidget(box);
+  view->header()->setSortIndicatorShown(true);
   view->setAllColumnsShowFocus(true);
-  view->setResizeMode(QListView::AllColumns);
   view->setMinimumWidth(640);
-  view->addColumn(i18n("Title"));
-  view->addColumn(i18n("Description"));
-  QMap<KListViewItem*, UpdateResult> map;
-  for(ResultList::Iterator res = results.begin(); res != results.end(); ++res) {
-    map.insert(new KListViewItem(view, (*res).first->fetchEntry()->title(), (*res).first->desc), *res);
+  view->setHeaderLabels(QStringList() << i18n("Title") << i18n("Description"));
+  QHash<QTreeWidgetItem*, UpdateResult> map;
+  foreach(const UpdateResult& res, results) {
+    QTreeWidgetItem* item = new QTreeWidgetItem(view, QStringList() << res.first->fetchEntry()->title() << res.first->desc);
+    map.insert(item, res);
   }
 
-  dlg.setMainWidget(box);
   if(dlg.exec() != QDialog::Accepted) {
     return UpdateResult(0, false);
   }
-  KListViewItem* item = static_cast<KListViewItem*>(view->selectedItem());
+  QTreeWidgetItem* item = view->currentItem();
   if(!item) {
     return UpdateResult(0, false);
   }
   return map[item];
 }
 
-void EntryUpdater::mergeCurrent(Data::EntryPtr entry_, bool overWrite_) {
+void EntryUpdater::mergeCurrent(Tellico::Data::EntryPtr entry_, bool overWrite_) {
   Data::EntryPtr currEntry = m_entriesToUpdate.front();
   if(entry_) {
     m_matchedEntries.append(entry_);
@@ -254,9 +260,9 @@ void EntryUpdater::mergeCurrent(Data::EntryPtr entry_, bool overWrite_) {
       // updated since they'll reference them later and the command isn't
       // executed until the command history group is finished
       // so remove pointers to matched entries
-      Data::EntryVec nonUpdatedEntries = m_fetchedEntries;
-      for(Data::EntryVecIt match = m_matchedEntries.begin(); match != m_matchedEntries.end(); ++match) {
-        nonUpdatedEntries.remove(match);
+      Data::EntryList nonUpdatedEntries = m_fetchedEntries;
+      foreach(Data::EntryPtr match, m_matchedEntries) {
+        nonUpdatedEntries.removeAll(match);
       }
       Data::Document::self()->removeImagesNotInCollection(nonUpdatedEntries, m_matchedEntries);
     }

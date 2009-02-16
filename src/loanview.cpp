@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2007 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "loanview.h"
-#include "loanitem.h"
 #include "controller.h"
 #include "borrower.h"
 #include "entry.h"
@@ -20,34 +19,39 @@
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
 #include "listviewcomparison.h"
+#include "models/borrowermodel.h"
+#include "models/entrysortmodel.h"
+#include "models/models.h"
+#include "gui/countdelegate.h"
 
 #include <klocale.h>
-#include <kpopupmenu.h>
-#include <kiconloader.h>
+#include <kmenu.h>
+#include <kicon.h>
 
-#include <qheader.h>
+#include <QHeaderView>
+#include <QContextMenuEvent>
 
 using Tellico::LoanView;
 
-LoanView::LoanView(QWidget* parent_, const char* name_) : GUI::ListView(parent_, name_), m_notSortedYet(true) {
-  addColumn(i18n("Borrower"));
-  header()->setStretchEnabled(true, 0);
-  setResizeMode(QListView::NoColumn);
-  setRootIsDecorated(true);
-  setShowSortIndicator(true);
-  setTreeStepSize(15);
-  setFullWidth(true);
+LoanView::LoanView(QWidget* parent_) : GUI::TreeView(parent_), m_notSortedYet(true) {
+  header()->setResizeMode(QHeaderView::Stretch);
+  setHeaderHidden(false);
+  setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-  connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),
-          SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
+  connect(this, SIGNAL(doubleClicked(const QModelIndex&)),
+          SLOT(slotDoubleClicked(const QModelIndex&)));
 
-  connect(this, SIGNAL(expanded(QListViewItem*)),
-          SLOT(slotExpanded(QListViewItem*)));
+  connect(header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
+          SLOT(slotSortingChanged(int,Qt::SortOrder)));
 
-  connect(this, SIGNAL(collapsed(QListViewItem*)),
-          SLOT(slotCollapsed(QListViewItem*)));
+  BorrowerModel* borrowerModel = new BorrowerModel(this);
+  EntrySortModel* sortModel = new EntrySortModel(this);
+  sortModel->setSourceModel(borrowerModel);
+  setModel(sortModel);
+  setItemDelegate(new GUI::CountDelegate(this));
 }
 
+/*
 bool LoanView::isSelectable(GUI::ListViewItem* item_) const {
   if(!GUI::ListView::isSelectable(item_)) {
     return false;
@@ -61,138 +65,123 @@ bool LoanView::isSelectable(GUI::ListViewItem* item_) const {
 
   return true;
 }
+*/
+Tellico::BorrowerModel* LoanView::sourceModel() const {
+  return static_cast<BorrowerModel*>(sortModel()->sourceModel());
+}
 
-void LoanView::contextMenuRequested(QListViewItem* item_, const QPoint& point_, int) {
-  if(!item_) {
+void LoanView::addCollection(Tellico::Data::CollPtr coll_) {
+  m_coll = coll_;
+  sourceModel()->clear();
+  sourceModel()->addBorrowers(m_coll->borrowers());
+}
+
+void LoanView::slotReset() {
+  sourceModel()->clear();
+}
+
+void LoanView::addBorrower(Tellico::Data::BorrowerPtr borrower_) {
+  Q_ASSERT(borrower_);
+  sourceModel()->addBorrower(borrower_);
+}
+
+void LoanView::modifyBorrower(Tellico::Data::BorrowerPtr borrower_) {
+  Q_ASSERT(borrower_);
+  sourceModel()->modifyBorrower(borrower_);
+}
+
+void LoanView::contextMenuEvent(QContextMenuEvent* event_) {
+  QModelIndex index = indexAt(event_->pos());
+  if(!index.isValid()) {
     return;
   }
 
-  GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(item_);
-  if(item->isLoanItem()) {
-    KPopupMenu menu(this);
-    menu.insertItem(SmallIconSet(QString::fromLatin1("2downarrow")),
-                    i18n("Check-in"), this, SLOT(slotCheckIn()));
-    menu.insertItem(SmallIconSet(QString::fromLatin1("2downarrow")),
-                    i18n("Modify Loan..."), this, SLOT(slotModifyLoan()));
-    menu.exec(point_);
+  // no parent means it's a top-level item
+  if(index.parent().isValid()) {
+    KMenu menu(this);
+    menu.addAction(KIcon(QString::fromLatin1("arrow-down-double")),
+                   i18n("Check-in"), this, SLOT(slotCheckIn()));
+    menu.addAction(KIcon(QString::fromLatin1("arrow-down-double")),
+                   i18n("Modify Loan..."), this, SLOT(slotModifyLoan()));
+    menu.exec(event_->globalPos());
+  }
+}
+
+void LoanView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
+//  DEBUG_BLOCK;
+  QAbstractItemView::selectionChanged(selected_, deselected_);
+  // ignore the selected and deselected variables
+  // we want to grab all the currently selected ones
+  QSet<Data::EntryPtr> entries;
+  foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
+    QModelIndex realIndex = sortModel()->mapToSource(index);
+    Data::EntryPtr entry = sourceModel()->entry(realIndex);
+    if(entry) {
+      entries += entry;
+    } else {
+      QModelIndex child = realIndex.child(0, 0);
+      for( ; child.isValid(); child = child.sibling(child.row()+1, 0)) {
+        entry = sourceModel()->entry(child);
+        if(entry) {
+          entries += entry;
+        }
+      }
+    }
+  }
+  Controller::self()->slotUpdateSelection(this, entries.toList());
+}
+
+void LoanView::slotDoubleClicked(const QModelIndex& index_) {
+  QModelIndex realIndex = sortModel()->mapToSource(index_);
+  Data::LoanPtr loan = sourceModel()->loan(realIndex);
+  if(loan) {
+    Kernel::self()->modifyLoan(loan);
   }
 }
 
 // this gets called when header() is clicked, so cycle through
-void LoanView::setSorting(int col_, bool asc_) {
-  if(asc_ && !m_notSortedYet) {
-    if(sortStyle() == ListView::SortByText) {
-      setSortStyle(ListView::SortByCount);
+void LoanView::slotSortingChanged(int col_, Qt::SortOrder order_) {
+  Q_UNUSED(col_);
+  if(order_ == Qt::AscendingOrder && !m_notSortedYet) { // cycle through after ascending
+    if(sortModel()->sortRole() == RowCountRole) {
+      sortModel()->setSortRole(Qt::DisplayRole);
     } else {
-      setSortStyle(ListView::SortByText);
+      sortModel()->setSortRole(RowCountRole);
     }
   }
-  if(sortStyle() == ListView::SortByText) {
-    setColumnText(0, i18n("Borrower"));
-  } else {
-    setColumnText(0, i18n("Borrower (Sort by Count)"));
-  }
+
+  updateHeader();
   m_notSortedYet = false;
-  ListView::setSorting(col_, asc_);
 }
 
-void LoanView::addCollection(Data::CollPtr coll_) {
-  Data::BorrowerVec borrowers = coll_->borrowers();
-  for(Data::BorrowerVec::Iterator it = borrowers.begin(); it != borrowers.end(); ++it) {
-    addBorrower(it);
+/*
+BorrowerItem* item = static_cast<BorrowerItem*>(item_);
+  Data::LoanList loans = item->borrower()->loans();
+  foreach(Data::LoanPtr loan, loans) {
+    new LoanItem(item, loan);
   }
-  Data::FieldPtr f = coll_->fieldByName(QString::fromLatin1("title"));
-  if(f) {
-    setComparison(0, ListViewComparison::create(f));
-  }
-}
-
-void LoanView::addField(Data::CollPtr, Data::FieldPtr) {
-  resetComparisons();
-}
-
-void LoanView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr) {
-  resetComparisons();
-}
-
-void LoanView::removeField(Data::CollPtr, Data::FieldPtr) {
-  resetComparisons();
-}
-
-void LoanView::addBorrower(Data::BorrowerPtr borrower_) {
-  if(!borrower_ || borrower_->isEmpty()) {
-    return;
-  }
-
-  BorrowerItem* borrowerItem = new BorrowerItem(this, borrower_);
-  borrowerItem->setExpandable(!borrower_->loans().isEmpty());
-  m_itemDict.insert(borrower_->name(), borrowerItem);
-}
-
-void LoanView::modifyBorrower(Data::BorrowerPtr borrower_) {
-  if(!borrower_) {
-    return;
-  }
-
-  BorrowerItem* borrowerItem = m_itemDict[borrower_->name()];
-  if(!borrowerItem) {
-    myDebug() << "LoanView::modifyBorrower() - borrower was never added" << endl;
-    return;
-  }
-
-  if(borrower_->isEmpty()) {
-    m_itemDict.remove(borrower_->name());
-    delete borrowerItem;
-    return;
-  }
-
-  bool open = borrowerItem->isOpen();
-  borrowerItem->setOpen(false);
-  borrowerItem->setOpen(open);
-}
-
-void LoanView::slotCollapsed(QListViewItem* item_) {
-  // only change icon for group items
-  if(static_cast<GUI::ListViewItem*>(item_)->isBorrowerItem()) {
-    static_cast<GUI::ListViewItem*>(item_)->clear();
-  }
-}
-
-void LoanView::slotExpanded(QListViewItem* item_) {
-  // only change icon for group items
-  if(!static_cast<GUI::ListViewItem*>(item_)->isBorrowerItem()) {
-    kdWarning() << "GroupView::slotExpanded() - non entry group item - " << item_->text(0) << endl;
-    return;
-  }
-
-  setUpdatesEnabled(false);
-
-  BorrowerItem* item = static_cast<BorrowerItem*>(item_);
-  Data::LoanVec loans = item->borrower()->loans();
-  for(Data::LoanVec::Iterator it = loans.begin(); it != loans.end(); ++it) {
-    new LoanItem(item, it);
-  }
-
-  setUpdatesEnabled(true);
-  triggerUpdate();
-}
+*/
 
 void LoanView::slotCheckIn() {
-  GUI::ListViewItem* item = selectedItems().getFirst();
-  if(!item || !item->isLoanItem()) {
+  QModelIndexList indexes = selectionModel()->selectedIndexes();
+  if(indexes.isEmpty()) {
     return;
   }
 
-  Data::EntryVec entries;
-  // need a copy since we may be deleting
-  GUI::ListViewItemList list = selectedItems();
-  for(GUI::ListViewItemListIt it(list); it.current(); ++it) {
-    Data::EntryPtr entry = static_cast<LoanItem*>(it.current())->entry();
-    if(!entry) {
-      myDebug() << "LoanView::slotCheckIn() - no entry!" << endl;
+  Data::EntryList entries;
+  foreach(const QModelIndex& index, indexes) {
+    // the indexes pointing to a borrower have no parent, skip them
+    if(!index.parent().isValid()) {
       continue;
     }
-    entries.append(entry);
+    if(model()->hasChildren(index)) { //ignore items with children
+      continue;
+    }
+    QModelIndex sourceIndex = sortModel()->mapToSource(index);
+    Data::EntryPtr entry = sourceModel()->entry(sourceIndex);
+    if(entry) {
+      entries += entry;
+    }
   }
 
   Controller::self()->slotCheckIn(entries);
@@ -200,34 +189,25 @@ void LoanView::slotCheckIn() {
 }
 
 void LoanView::slotModifyLoan() {
-  GUI::ListViewItem* item = selectedItems().getFirst();
-  if(!item || !item->isLoanItem()) {
+  QModelIndexList indexes = selectionModel()->selectedIndexes();
+  if(indexes.isEmpty()) {
     return;
   }
 
-  Kernel::self()->modifyLoan(static_cast<LoanItem*>(item)->loan());
+  foreach(const QModelIndex& index, indexes) {
+    QModelIndex sourceIndex = sortModel()->mapToSource(index);
+    Data::LoanPtr loan = sourceModel()->loan(sourceIndex);
+    if(loan) {
+      Kernel::self()->modifyLoan(loan);
+    }
+  }
 }
 
-void LoanView::resetComparisons() {
-  // this is only allowed when the view is not empty, so we can grab a collection ptr
-  if(childCount() == 0) {
-    return;
-  }
-  Data::EntryVec entries = static_cast<BorrowerItem*>(firstChild())->entries();
-  if(entries.isEmpty()) {
-    return;
-  }
-  Data::EntryPtr entry = entries[0];
-  if(!entry) {
-    return;
-  }
-  Data::CollPtr coll = entry->collection();
-  if(!coll) {
-    return;
-  }
-  Data::FieldPtr f = coll->fieldByName(QString::fromLatin1("title"));
-  if(f) {
-    setComparison(0, ListViewComparison::create(f));
+void LoanView::updateHeader() {
+  if(sortModel()->sortRole() == Qt::DisplayRole) {
+    model()->setHeaderData(0, Qt::Horizontal, i18n("Borrower"));
+  } else {
+    model()->setHeaderData(0, Qt::Horizontal, i18n("Borrower (Sort by Count)"));
   }
 }
 

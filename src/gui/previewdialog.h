@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,7 @@
 #ifndef TELLICO_GUI_PREVIEWDIALOG_H
 #define TELLICO_GUI_PREVIEWDIALOG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 #include "../datavectors.h"
 
@@ -26,7 +26,7 @@ namespace Tellico {
 
   namespace GUI {
 
-class PreviewDialog : public KDialogBase {
+class PreviewDialog : public KDialog {
 Q_OBJECT
 
 public:

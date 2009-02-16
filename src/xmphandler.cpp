@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,8 +15,8 @@
 #include "tellico_debug.h"
 #include <config.h>
 
-#include <qfile.h>
-#include <qtextstream.h>
+#include <QFile>
+#include <QTextStream>
 #ifdef HAVE_EXEMPI
 #include <exempi/xmp.h>
 #endif
@@ -71,9 +71,9 @@ QString XMPHandler::extractXMP(const QString& file) {
     xmp_string_free(buffer);
 //    myDebug() << result << endl;
 #if 0
-    kdWarning() << "XMPHandler::parse() - turn me off!" << endl;
+    kWarning() << "XMPHandler::parse() - turn me off!";
     QFile f1(QString::fromLatin1("/tmp/xmp.xml"));
-    if(f1.open(IO_WriteOnly)) {
+    if(f1.open(QIODevice::WriteOnly)) {
       QTextStream t(&f1);
       t << result;
     }

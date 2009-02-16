@@ -41,7 +41,7 @@ public:
 
   virtual Type type() const { return Card; }
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
 };
 
   } // end namespace

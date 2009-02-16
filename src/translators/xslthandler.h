@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,10 +11,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef XSLTHANDLER_H
-#define XSLTHANDLER_H
+#ifndef TELLICO_XSLTHANDLER_H
+#define TELLICO_XSLTHANDLER_H
 
-#include <qmap.h>
+#include <QByteArray>
+#include <QHash>
 
 extern "C" {
 // for xmlDocPtr
@@ -23,7 +24,7 @@ extern "C" {
 #include <libxslt/xsltInternals.h>
 }
 
-class KURL;
+class KUrl;
 class QDomDocument;
 
 namespace Tellico {
@@ -52,16 +53,16 @@ public:
   /**
    * @param xsltFile The XSLT file
    */
-  XSLTHandler(const QCString& xsltFile);
+  XSLTHandler(const QByteArray& xsltFile);
   /**
    * @param xsltURL The XSLT URL
    */
-  XSLTHandler(const KURL& xsltURL);
+  XSLTHandler(const KUrl& xsltURL);
   /**
    * @param xsltDoc The XSLT DOM document
    * @param xsltFile The XSLT file, should be a url?
    */
-  XSLTHandler(const QDomDocument& xsltDoc, const QCString& xsltFile, bool translate=false);
+  XSLTHandler(const QDomDocument& xsltDoc, const QByteArray& xsltFile, bool translate=false);
   /**
    */
   ~XSLTHandler();
@@ -73,17 +74,17 @@ public:
    * @param dom The XSLT DOM document
    * @param xsltFile The XSLT file, should be a url?
    */
-  void setXSLTDoc(const QDomDocument& dom, const QCString& xsltFile, bool translate=false);
+  void setXSLTDoc(const QDomDocument& dom, const QByteArray& xsltFile, bool translate=false);
   /**
    * Adds a param
    */
-  void addParam(const QCString& name, const QCString& value);
+  void addParam(const QByteArray& name, const QByteArray& value);
   /**
    * Adds a string param
    */
-  void addStringParam(const QCString& name, const QCString& value);
-  void removeParam(const QCString& name);
-  const QCString& param(const QCString& name);
+  void addStringParam(const QByteArray& name, const QByteArray& value);
+  void removeParam(const QByteArray& name);
+  const QByteArray& param(const QByteArray& name);
   /**
    * Processes text through the XSLT transformation.
    *
@@ -103,7 +104,7 @@ private:
   xmlDocPtr m_docIn;
   xmlDocPtr m_docOut;
 
-  QMap<QCString, QCString> m_params;
+  QHash<QByteArray, QByteArray> m_params;
 
   static int s_initCount;
 };

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,13 +15,17 @@
 #include "../field.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kpopupmenu.h>
-#include <kiconloader.h>
+#include <kmenu.h>
+#include <kicon.h>
 #include <kinputdialog.h>
 
-#include <qtable.h>
+#include <QTableWidget>
+#include <QMouseEvent>
+#include <QEvent>
+#include <QHeaderView>
 
 namespace {
   static const int MIN_TABLE_ROWS = 5;
@@ -30,57 +34,55 @@ namespace {
 
 using Tellico::GUI::TableFieldWidget;
 
-TableFieldWidget::TableFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_), m_field(field_), m_row(-1), m_col(-1) {
+TableFieldWidget::TableFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_), m_field(field_), m_row(-1), m_col(-1) {
 
   bool ok;
   m_columns = Tellico::toUInt(field_->property(QString::fromLatin1("columns")), &ok);
   if(!ok) {
     m_columns = 1;
   } else {
-    m_columns = QMIN(m_columns, MAX_TABLE_COLS); // max of 5 columns
+    m_columns = qMin(m_columns, MAX_TABLE_COLS);
   }
 
-  m_table = new QTable(MIN_TABLE_ROWS, m_columns, this);
+  m_table = new QTableWidget(MIN_TABLE_ROWS, m_columns, this);
   labelColumns(m_field);
-  // allow renaming of column titles
-  m_table->horizontalHeader()->setClickEnabled(true);
-  m_table->horizontalHeader()->installEventFilter(this);
-
-  m_table->verticalHeader()->setClickEnabled(true);
-  m_table->verticalHeader()->installEventFilter(this);
-  connect(m_table->verticalHeader(), SIGNAL(indexChange(int, int, int)), SIGNAL(modified()));
 
   m_table->setDragEnabled(false);
-  m_table->setFocusStyle(QTable::FollowStyle);
-  m_table->setRowMovingEnabled(true); // rows can be moved
-  m_table->setColumnMovingEnabled(false); // columns remain fixed
 
-  m_table->setColumnStretchable(m_columns-1, true);
-  m_table->adjustColumn(m_columns-1);
-  m_table->setSelectionMode(QTable::NoSelection);
-  m_table->setHScrollBarMode(QScrollView::AlwaysOff);
+  m_table->horizontalHeader()->setResizeMode(m_columns-1, QHeaderView::Interactive);
+  m_table->resizeColumnToContents(m_columns-1);
+  m_table->setSelectionMode(QAbstractItemView::NoSelection);
+  m_table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  connect(m_table, SIGNAL(valueChanged(int, int)), SIGNAL(modified()));
-  connect(m_table, SIGNAL(currentChanged(int, int)), SLOT(slotCheckRows(int, int)));
-  connect(m_table, SIGNAL(valueChanged(int, int)), SLOT(slotResizeColumn(int, int)));
-  connect(m_table, SIGNAL(contextMenuRequested(int, int, const QPoint&)), SLOT(contextMenu(int, int, const QPoint&)));
+  // capture all the context menu events
+  m_table->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_table->verticalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
+  m_table->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
+
+  connect(m_table, SIGNAL(itemChanged(QTableWidgetItem*)), SIGNAL(modified()));
+  connect(m_table, SIGNAL(itemChanged(QTableWidgetItem*)), SLOT(slotResizeColumn(QTableWidgetItem*)));
+  connect(m_table, SIGNAL(currentCellChanged(int, int, int, int)), SLOT(slotCheckRows(int, int)));
+  connect(m_table, SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(tableContextMenu(const QPoint&)));
+  connect(m_table->horizontalHeader(), SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(horizontalHeaderContextMenu(const QPoint&)));
+  connect(m_table->verticalHeader(), SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(verticalHeaderContextMenu(const QPoint&)));
 
   registerWidget();
 }
 
 QString TableFieldWidget::text() const {
   QString text, str, rstack, cstack, rowStr;
-  for(int row = 0; row < m_table->numRows(); ++row) {
-    rowStr.truncate(0);
-    cstack.truncate(0);
-    for(int col = 0; col < m_table->numCols(); ++col) {
-      str = m_table->text(row, col).simplifyWhiteSpace();
+  for(int row = 0; row < m_table->rowCount(); ++row) {
+    rowStr.clear();
+    cstack.clear();
+    for(int col = 0; col < m_table->columnCount(); ++col) {
+      QTableWidgetItem* item = m_table->item(row, col);
+      str = item ? item->text().simplified() : QString();
       if(str.isEmpty()) {
         cstack += QString::fromLatin1("::");
       } else {
         rowStr += cstack + str + QString::fromLatin1("::");
-        cstack.truncate(0);
+        cstack.clear();
       }
     }
     if(rowStr.isEmpty()) {
@@ -88,7 +90,7 @@ QString TableFieldWidget::text() const {
     } else {
       rowStr.truncate(rowStr.length()-2); // remove last semi-colon and space
       text += rstack + rowStr + QString::fromLatin1("; ");
-      rstack.truncate(0);
+      rstack.clear();
     }
   }
   if(!text.isEmpty()) {
@@ -97,15 +99,8 @@ QString TableFieldWidget::text() const {
 
   // now reduce number of rows if necessary
   bool loop = true;
-  for(int row = m_table->numRows()-1; loop && row > MIN_TABLE_ROWS; --row) {
-    bool empty = true;
-    for(int col = 0; col < m_table->numCols(); ++col) {
-      if(!m_table->text(row, col).isEmpty()) {
-        empty = false;
-        break;
-      }
-    }
-    if(empty) {
+  for(int row = m_table->rowCount()-1; loop && row > MIN_TABLE_ROWS; --row) {
+    if(emptyRow(row)) {
       m_table->removeRow(row);
     } else {
       loop = false;
@@ -116,42 +111,30 @@ QString TableFieldWidget::text() const {
 
 void TableFieldWidget::setText(const QString& text_) {
   QStringList list = Data::Field::split(text_, true);
-  // add additional rows if needed
-  if(static_cast<int>(list.count()) > m_table->numRows()) {
-    m_table->insertRows(m_table->numRows(), list.count()-m_table->numRows());
+  if(list.count() != m_table->rowCount()) {
+    m_table->setRowCount(qMax(list.count(), MIN_TABLE_ROWS));
   }
-  int row;
-  for(row = 0; row < static_cast<int>(list.count()); ++row) {
-    for(int col = 0; col < m_table->numCols(); ++col) {
-      m_table->setText(row, col, list[row].section(QString::fromLatin1("::"), col, col));
+  for(int row = 0; row < list.count(); ++row) {
+    for(int col = 0; col < m_table->columnCount(); ++col) {
+      QString value = list[row].section(QString::fromLatin1("::"), col, col);
+      QTableWidgetItem* item = new QTableWidgetItem(value);
+      m_table->setItem(row, col, item);
     }
-    m_table->showRow(row);
-  }
-  // remove any un-needed rows
-  int minRow = QMAX(row, MIN_TABLE_ROWS);
-  for(row = m_table->numRows()-1; row >= minRow; --row) {
-    m_table->removeRow(row);
   }
   // adjust all columns
-  for(int col = 0; col < m_table->numCols()-1; ++col) {
-    m_table->adjustColumn(col);
+  for(int col = 0; col < m_table->columnCount(); ++col) {
+    m_table->resizeColumnToContents(col);
   }
 }
 
 void TableFieldWidget::clear() {
   bool wasEmpty = true;
-  for(int row = 0; row < m_table->numRows(); ++row) {
+  for(int row = 0; row < m_table->rowCount(); ++row) {
     if(!emptyRow(row)) {
       wasEmpty = false;
     }
-    for(int col = 0; col < m_table->numCols(); ++col) {
-      m_table->setText(row, col, QString::null);
-    }
-    if(row >= MIN_TABLE_ROWS) {
-      m_table->removeRow(row);
-      --row;
-    }
   }
+  m_table->setRowCount(MIN_TABLE_ROWS);
   editMultiple(false);
   if(!wasEmpty) {
     emit modified();
@@ -163,25 +146,25 @@ QWidget* TableFieldWidget::widget() {
 }
 
 void TableFieldWidget::slotCheckRows(int row_, int) {
-  if(row_ == m_table->numRows()-1 && !emptyRow(row_)) { // if is last row and row above is not empty
-    m_table->insertRows(m_table->numRows());
+  if(row_ == m_table->rowCount()-1 && !emptyRow(row_)) { // if is last row and row above is not empty
+    m_table->insertRow(m_table->rowCount());
   }
 }
 
-void TableFieldWidget::slotResizeColumn(int, int col_) {
-  m_table->adjustColumn(col_);
+void TableFieldWidget::slotResizeColumn(QTableWidgetItem* item_) {
+  m_table->resizeColumnToContents(item_->column());
 }
 
 void TableFieldWidget::slotRenameColumn() {
   if(m_col < 0 || m_col >= m_columns) {
     return;
   }
-  QString name = m_table->horizontalHeader()->label(m_col);
+  QString name = m_table->horizontalHeaderItem(m_col)->text();
   bool ok;
   QString newName = KInputDialog::getText(i18n("Rename Column"), i18n("New column name:"),
                                           name, &ok, this);
   if(ok && !newName.isEmpty()) {
-    Data::FieldPtr newField = new Data::Field(*m_field);
+    Data::FieldPtr newField(new Data::Field(*m_field));
     newField->setProperty(QString::fromLatin1("column%1").arg(m_col+1), newName);
     if(Kernel::self()->modifyField(newField)) {
       m_field = newField;
@@ -191,115 +174,109 @@ void TableFieldWidget::slotRenameColumn() {
 }
 
 bool TableFieldWidget::emptyRow(int row_) const {
-  for(int col = 0; col < m_table->numCols(); ++col) {
-    if(!m_table->text(row_, col).isEmpty()) {
+  for(int col = 0; col < m_table->columnCount(); ++col) {
+    QTableWidgetItem* item = m_table->item(row_, col);
+    if(item && !item->text().isEmpty()) {
       return false;
     }
   }
   return true;
 }
 
-void TableFieldWidget::labelColumns(Data::FieldPtr field_) {
-  for(int i = 0; i < m_columns; ++i) {
-    QString s = field_->property(QString::fromLatin1("column%1").arg(i+1));
+void TableFieldWidget::labelColumns(Tellico::Data::FieldPtr field_) {
+  QStringList labels;
+  for(int col = 0; col < m_columns; ++col) {
+    QString s = field_->property(QString::fromLatin1("column%1").arg(col+1));
     if(s.isEmpty()) {
-      s = i18n("Column %1").arg(i+1);
+      s = i18n("Column %1", col+1);
     }
-    m_table->horizontalHeader()->setLabel(i, s);
+    labels += s;
+//    m_table->horizontalHeaderItem(col)->setText(s);
   }
+  m_table->setHorizontalHeaderLabels(labels);
 }
 
-void TableFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_) {
+void TableFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
   bool ok;
   m_columns = Tellico::toUInt(newField_->property(QString::fromLatin1("columns")), &ok);
   if(!ok) {
     m_columns = 1;
   } else {
-    m_columns = QMIN(m_columns, MAX_TABLE_COLS); // max of 5 columns
+    m_columns = qMin(m_columns, MAX_TABLE_COLS); // max of 5 columns
   }
-  if(m_columns != m_table->numCols()) {
-    m_table->setNumCols(m_columns);
+  if(m_columns != m_table->columnCount()) {
+    m_table->setColumnCount(m_columns);
   }
-  m_table->horizontalHeader()->adjustHeaderSize();
   labelColumns(newField_);
 }
 
-bool TableFieldWidget::eventFilter(QObject* obj_, QEvent* ev_) {
-  if(ev_->type() == QEvent::MouseButtonPress
-      && static_cast<QMouseEvent*>(ev_)->button() == Qt::RightButton) {
-    if(obj_ == m_table->horizontalHeader()) {
-      QMouseEvent* ev = static_cast<QMouseEvent*>(ev_);
-      // might be scrolled
-      int pos = ev->x() + m_table->horizontalHeader()->offset();
-      int col = m_table->horizontalHeader()->sectionAt(pos);
-      if(col >= m_columns) {
-        return false;
-      }
-      m_row = -1;
-      m_col = col;
-      KPopupMenu menu(this);
-      menu.insertItem(SmallIconSet(QString::fromLatin1("edit")), i18n("Rename Column..."),
-                      this, SLOT(slotRenameColumn()));
-      menu.exec(ev->globalPos());
-      return true;
-    } else if(obj_ == m_table->verticalHeader()) {
-      QMouseEvent* ev = static_cast<QMouseEvent*>(ev_);
-      // might be scrolled
-      int pos = ev->y() + m_table->verticalHeader()->offset();
-      int row = m_table->verticalHeader()->sectionAt(pos);
-      if(row < 0 || row > m_table->numRows()-1) {
-        return false;
-      }
-      m_row = row;
-      m_col = -1;
-      // show regular right-click menu
-      contextMenu(m_row, m_col, ev->globalPos());
-      return true;
-    }
-  }
-  return FieldWidget::eventFilter(obj_, ev_);
-}
-
-void TableFieldWidget::contextMenu(int row_, int col_, const QPoint& p_) {
-  // might get called with col == -1 for clicking on vertical header
-  // but a negative row means clicking outside bounds of table
-  if(row_ < 0) {
+void TableFieldWidget::tableContextMenu(const QPoint& point_) {
+  if(point_.isNull()) {
     return;
   }
-  m_row = row_;
-  m_col = col_;
+  m_row = m_table->rowAt(point_.y());
+  m_col = m_table->columnAt(point_.x());
+  makeRowContextMenu(m_table->mapToGlobal(point_));
+}
 
-  int id;
-  KPopupMenu menu(this);
-  menu.insertItem(SmallIconSet(QString::fromLatin1("insrow")), i18n("Insert Row"),
-                  this, SLOT(slotInsertRow()));
-  menu.insertItem(SmallIconSet(QString::fromLatin1("remrow")), i18n("Remove Row"),
-                  this, SLOT(slotRemoveRow()));
-  id = menu.insertItem(SmallIconSet(QString::fromLatin1("1uparrow")), i18n("Move Row Up"),
-                       this, SLOT(slotMoveRowUp()));
-  if(m_row == 0) {
-    menu.setItemEnabled(id, false);
+void TableFieldWidget::horizontalHeaderContextMenu(const QPoint& point_) {
+  int col = m_table->horizontalHeader()->logicalIndexAt(point_.x());
+  if(col < 0 || col >= m_columns) {
+    return;
   }
-  id = menu.insertItem(SmallIconSet(QString::fromLatin1("1downarrow")), i18n("Move Row Down"),
+  m_row = -1;
+  m_col = col;
+
+  KMenu menu(this);
+  menu.addAction(KIcon(QString::fromLatin1("edit")), i18n("Rename Column..."),
+                 this, SLOT(slotRenameColumn()));
+  menu.addAction(KIcon(QString::fromLatin1("locationbar_erase")), i18n("Clear Table"),
+                 this, SLOT(clear()));
+  menu.exec(m_table->horizontalHeader()->mapToGlobal(point_));
+}
+
+void TableFieldWidget::verticalHeaderContextMenu(const QPoint& point_) {
+  int row = m_table->verticalHeader()->logicalIndexAt(point_.y());
+  if(row < 0 || row >= m_table->rowCount()) {
+    return;
+  }
+  m_row = row;
+  m_col = -1;
+  makeRowContextMenu(m_table->verticalHeader()->mapToGlobal(point_));
+ }
+
+void TableFieldWidget::makeRowContextMenu(const QPoint& point_) {
+  KMenu menu(this);
+  menu.addAction(KIcon(QString::fromLatin1("insrow")), i18n("Insert Row"),
+                 this, SLOT(slotInsertRow()));
+  menu.addAction(KIcon(QString::fromLatin1("remrow")), i18n("Remove Row"),
+                 this, SLOT(slotRemoveRow()));
+  QAction* act = menu.addAction(KIcon(QString::fromLatin1("arrow-up")), i18n("Move Row Up"),
+                                this, SLOT(slotMoveRowUp()));
+  if(m_row < 1) {
+    act->setEnabled(false);
+  }
+  act = menu.addAction(KIcon(QString::fromLatin1("arrow-down")), i18n("Move Row Down"),
                        this, SLOT(slotMoveRowDown()));
-  if(m_row == m_table->numRows()-1) {
-    menu.setItemEnabled(id, false);
+  if(m_row < 0 || m_row > m_table->rowCount()-1) {
+    act->setEnabled(false);
   }
-  menu.insertSeparator();
-  id = menu.insertItem(SmallIconSet(QString::fromLatin1("edit")), i18n("Rename Column..."),
+  menu.addSeparator();
+  act = menu.addAction(KIcon(QString::fromLatin1("edit")), i18n("Rename Column..."),
                        this, SLOT(slotRenameColumn()));
   if(m_col < 0 || m_col > m_columns-1) {
-    menu.setItemEnabled(id, false);
+    act->setEnabled(false);
   }
-  menu.insertSeparator();
-  menu.insertItem(SmallIconSet(QString::fromLatin1("locationbar_erase")), i18n("Clear Table"),
-                  this, SLOT(clear()));
-  menu.exec(p_);
+  menu.addSeparator();
+  menu.addAction(KIcon(QString::fromLatin1("locationbar_erase")), i18n("Clear Table"),
+                 this, SLOT(clear()));
+
+  menu.exec(point_);
 }
 
 void TableFieldWidget::slotInsertRow() {
   if(m_row > -1) {
-    m_table->insertRows(m_row);
+    m_table->insertRow(m_row);
     emit modified();
   }
 }
@@ -312,19 +289,33 @@ void TableFieldWidget::slotRemoveRow() {
 }
 
 void TableFieldWidget::slotMoveRowUp() {
-  if(m_row > 0) {
-    m_table->swapRows(m_row, m_row-1, true);
-    m_table->updateContents();
-    emit modified();
+  if(m_row < 1 || m_row > m_table->rowCount()-1) {
+    return;
   }
+  for(int col = 0; col < m_table->columnCount(); ++col) {
+    QTableWidgetItem* item1 = m_table->takeItem(m_row-1, col);
+    QTableWidgetItem* item2 = m_table->takeItem(m_row  , col);
+    if(item1 && item2) {
+      m_table->setItem(m_row  , col, item1);
+      m_table->setItem(m_row-1, col, item2);
+    }
+  }
+  emit modified();
 }
 
 void TableFieldWidget::slotMoveRowDown() {
-  if(m_row < m_table->numRows()-1) {
-    m_table->swapRows(m_row, m_row+1, true);
-    m_table->updateContents();
-    emit modified();
+  if(m_row < 0 || m_row > m_table->rowCount()-2) {
+    return;
   }
+  for(int col = 0; col < m_table->columnCount(); ++col) {
+    QTableWidgetItem* item1 = m_table->takeItem(m_row  , col);
+    QTableWidgetItem* item2 = m_table->takeItem(m_row+1, col);
+    if(item1 && item2) {
+      m_table->setItem(m_row+1, col, item1);
+      m_table->setItem(m_row  , col, item2);
+    }
+  }
+  emit modified();
 }
 
 #include "tablefieldwidget.moc"

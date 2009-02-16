@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,51 +13,60 @@
 
 #include "configwidget.h"
 
-#include <kconfig.h>
 #include <klocale.h>
-#include <kaccelmanager.h>
+#include <kacceleratormanager.h>
+#include <KConfigGroup>
 
-#include <qvgroupbox.h>
-#include <qlayout.h>
+#include <QGroupBox>
+#include <QHBoxLayout>
 
 using Tellico::Fetch::ConfigWidget;
 
 ConfigWidget::ConfigWidget(QWidget* parent_) : QWidget(parent_), m_modified(false), m_accepted(false) {
   QHBoxLayout* boxLayout = new QHBoxLayout(this);
   boxLayout->setSpacing(10);
+  boxLayout->setMargin(0);
 
-  QGroupBox* vbox = new QVGroupBox(i18n("Source Options"), this);
-  boxLayout->addWidget(vbox, 10 /*stretch*/);
+  QGroupBox* gvbox = new QGroupBox(i18n("Source Options"), this);
+  boxLayout->addWidget(gvbox, 10 /*stretch*/);
 
-  m_optionsWidget = new QWidget(vbox);
+  QVBoxLayout* vbox = new QVBoxLayout();
+  m_optionsWidget = new QWidget(gvbox);
+  vbox->addWidget(m_optionsWidget);
+  vbox->addStretch(1);
+  gvbox->setLayout(vbox);
 }
 
-void ConfigWidget::addFieldsWidget(const StringMap& customFields_, const QStringList& fieldsToAdd_) {
+void ConfigWidget::addFieldsWidget(const Tellico::StringMap& customFields_, const QStringList& fieldsToAdd_) {
   if(customFields_.isEmpty()) {
     return;
   }
 
-  QVGroupBox* box = new QVGroupBox(i18n("Available Fields"), this);
-  static_cast<QBoxLayout*>(layout())->addWidget(box);
+  QGroupBox* gbox = new QGroupBox(i18n("Available Fields"), this);
+  static_cast<QBoxLayout*>(layout())->addWidget(gbox);
+
+  QVBoxLayout* vbox = new QVBoxLayout();
   for(StringMap::ConstIterator it = customFields_.begin(); it != customFields_.end(); ++it) {
-    QCheckBox* cb = new QCheckBox(it.data(), box);
+    QCheckBox* cb = new QCheckBox(it.value(), gbox);
     m_fields.insert(it.key(), cb);
     if(fieldsToAdd_.contains(it.key())) {
       cb->setChecked(true);
     }
     connect(cb, SIGNAL(clicked()), SLOT(slotSetModified()));
+    vbox->addWidget(cb);
   }
+  vbox->addStretch(1);
+  gbox->setLayout(vbox);
 
   KAcceleratorManager::manage(this);
-
-  return;
 }
 
 void ConfigWidget::saveFieldsConfig(KConfigGroup& config_) const {
   QStringList fields;
-  for(QDictIterator<QCheckBox> it(m_fields); it.current(); ++it) {
-    if(it.current()->isChecked()) {
-      fields << it.currentKey();
+  QHash<QString, QCheckBox*>::const_iterator it = m_fields.constBegin();
+  for( ; it != m_fields.constEnd(); ++it) {
+    if(it.value()->isChecked()) {
+      fields << it.key();
     }
   }
   config_.writeEntry(QString::fromLatin1("Custom Fields"), fields);

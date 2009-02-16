@@ -13,7 +13,6 @@
 
 #include "xmlstatehandler.h"
 #include "tellico_xml.h"
-#include "../latin1literal.h"
 #include "../collection.h"
 #include "../collectionfactory.h"
 #include "../collections/bibtexcollection.h"
@@ -24,20 +23,20 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kmdcodec.h>
+#include <kcodecs.h>
 
 namespace {
 
 inline
 QString attValue(const QXmlAttributes& atts, const char* name, const QString& defaultValue=QString()) {
-  int idx = atts.index(QString::fromLatin1(name));
+  int idx = atts.index(QLatin1String(name));
   return idx < 0 ? defaultValue : atts.value(idx);
 }
 
 inline
 QString attValue(const QXmlAttributes& atts, const char* name, const char* defaultValue) {
   Q_ASSERT(defaultValue);
-  return attValue(atts, name, QString::fromLatin1(defaultValue));
+  return attValue(atts, name, QLatin1String(defaultValue));
 }
 
 }
@@ -76,18 +75,18 @@ StateHandler* StateHandler::nextHandler(const QString& ns_, const QString& local
 }
 
 StateHandler* RootHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("tellico") || localName_ == Latin1Literal("bookcase")) {
+  if(localName_ == QLatin1String("tellico") || localName_ == QLatin1String("bookcase")) {
     return new DocumentHandler(d);
   }
   return new RootHandler(d);
 }
 
 StateHandler* DocumentHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("collection")) {
+  if(localName_ == QLatin1String("collection")) {
     return new CollectionHandler(d);
-  } else if(localName_ == Latin1Literal("filters")) {
+  } else if(localName_ == QLatin1String("filters")) {
     return new FiltersHandler(d);
-  } else if(localName_ == Latin1Literal("borrowers")) {
+  } else if(localName_ == QLatin1String("borrowers")) {
     return new BorrowersHandler(d);
   }
   return 0;
@@ -114,8 +113,8 @@ bool DocumentHandler::start(const QString&, const QString& localName_, const QSt
                        "to read this file in the future.");
     myDebug() << str <<  endl;
   }
-  if((d->syntaxVersion > 6 && localName_ != Latin1Literal("tellico")) ||
-     (d->syntaxVersion < 7 && localName_ != Latin1Literal("bookcase"))) {
+  if((d->syntaxVersion > 6 && localName_ != QLatin1String("tellico")) ||
+     (d->syntaxVersion < 7 && localName_ != QLatin1String("bookcase"))) {
     // no error message
     myWarning() << "RootHandler::start() - bad root element name" << endl;
     return false;
@@ -129,16 +128,16 @@ bool DocumentHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* CollectionHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if((d->syntaxVersion > 3 && localName_ == Latin1Literal("fields")) ||
-     (d->syntaxVersion < 4 && localName_ == Latin1Literal("attributes"))) {
+  if((d->syntaxVersion > 3 && localName_ == QLatin1String("fields")) ||
+     (d->syntaxVersion < 4 && localName_ == QLatin1String("attributes"))) {
     return new FieldsHandler(d);
-  } else if(localName_ == Latin1Literal("bibtex-preamble")) {
+  } else if(localName_ == QLatin1String("bibtex-preamble")) {
     return new BibtexPreambleHandler(d);
-  } else if(localName_ == Latin1Literal("macros")) {
+  } else if(localName_ == QLatin1String("macros")) {
     return new BibtexMacrosHandler(d);
   } else if(localName_ == d->entryName) {
     return new EntryHandler(d);
-  } else if(localName_ == Latin1Literal("images")) {
+  } else if(localName_ == QLatin1String("images")) {
     return new ImagesHandler(d);
   }
   return 0;
@@ -159,16 +158,16 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   // and on reading the xml file, Tellico would load the image file, too
   // here, we need to scan all the image values in all the entries and check
   // maybe this is too costly, especially since the capability wasn't advertised?
-  Data::FieldVec fields = d->coll->imageFields();
-  for(Data::EntryVecIt entry = d->entries.begin(); entry != d->entries.end(); ++entry) {
-    for(Data::FieldVecIt field = fields.begin(); field != fields.end(); ++field) {
+  Data::FieldList fields = d->coll->imageFields();
+  foreach(Data::EntryPtr entry, d->entries) {
+    foreach(Data::FieldPtr field, fields) {
       QString value = entry->field(field, false);
       // image info should have already been loaded
       const Data::ImageInfo& info = ImageFactory::imageInfo(value);
       // possible that value needs to be cleaned first in which case info is null
       if(info.isNull() || !info.linkOnly) {
         // for local files only, allow paths here
-        KURL u = KURL::fromPathOrURL(value);
+        KUrl u(value);
         if(u.isValid() && u.isLocalFile()) {
           QString result = ImageFactory::addImage(u, false /* quiet */);
           if(!result.isEmpty()) {
@@ -184,8 +183,8 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* FieldsHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if((d->syntaxVersion > 3 && localName_ == Latin1Literal("field")) ||
-     (d->syntaxVersion < 4 && localName_ == Latin1Literal("attribute"))) {
+  if((d->syntaxVersion > 3 && localName_ == QLatin1String("field")) ||
+     (d->syntaxVersion < 4 && localName_ == QLatin1String("attribute"))) {
     return new FieldHandler(d);
   }
   return 0;
@@ -225,7 +224,7 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* FieldHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("prop")) {
+  if(localName_ == QLatin1String("prop")) {
     return new FieldPropertyHandler(d);
   }
   return 0;
@@ -233,17 +232,17 @@ StateHandler* FieldHandler::nextHandlerImpl(const QString&, const QString& local
 
 bool FieldHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
   // special case: if the i18n attribute equals true, then translate the title, description, and category
-  const bool isI18n = attValue(atts_, "i18n") == Latin1Literal("true");
+  const bool isI18n = attValue(atts_, "i18n") == QLatin1String("true");
 
   QString name  = attValue(atts_, "name", "unknown");
-  if(name == Latin1Literal("_default")) {
+  if(name == QLatin1String("_default")) {
     d->defaultFields = true;
     return true;
   }
 
   QString title  = attValue(atts_, "title", i18n("Unknown"));
   if(isI18n) {
-    title = i18n(title.utf8());
+    title = i18n(title.toUtf8());
   }
 
   QString typeStr = attValue(atts_, "type", QString::number(Data::Field::Line));
@@ -251,11 +250,10 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
 
   Data::FieldPtr field;
   if(type == Data::Field::Choice) {
-    QStringList allowed = QStringList::split(QRegExp(QString::fromLatin1("\\s*;\\s*")),
-                                             attValue(atts_, "allowed"));
+    QStringList allowed =  attValue(atts_, "allowed").split(QRegExp(QLatin1String("\\s*;\\s*")));
     if(isI18n) {
       for(QStringList::Iterator word = allowed.begin(); word != allowed.end(); ++word) {
-        (*word) = i18n((*word).utf8());
+        (*word) = i18n((*word).toUtf8());
       }
     }
     field = new Data::Field(name, title, allowed);
@@ -267,27 +265,27 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   if(idx > -1) {
     // at one point, the categories had keyboard accels
     QString cat = atts_.value(idx);
-    if(d->syntaxVersion < 9 && cat.find('&') > -1) {
+    if(d->syntaxVersion < 9 && cat.indexOf('&') > -1) {
       cat.remove('&');
     }
     if(isI18n) {
-      cat = i18n(cat.utf8());
+      cat = i18n(cat.toUtf8());
     }
     field->setCategory(cat);
   }
 
-  idx = atts_.index(QString::fromLatin1("flags"));
+  idx = atts_.index(QLatin1String("flags"));
   if(idx > -1) {
     int flags = atts_.value(idx).toInt();
     // I also changed the enum values for syntax 3, but the only custom field
     // would have been bibtex-id
-    if(d->syntaxVersion < 3 && name == Latin1Literal("bibtex-id")) {
+    if(d->syntaxVersion < 3 && name == QLatin1String("bibtex-id")) {
       flags = 0;
     }
 
     // in syntax version 4, added a flag to disallow deleting attributes
     // if it's a version before that and is the title, then add the flag
-    if(d->syntaxVersion < 4 && name == Latin1Literal("title")) {
+    if(d->syntaxVersion < 4 && name == QLatin1String("title")) {
       flags |= Data::Field::NoDelete;
     }
     field->setFlags(flags);
@@ -301,7 +299,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   if(idx > -1) {
     QString desc = atts_.value(idx);
     if(isI18n) {
-      desc = i18n(desc.utf8());
+      desc = i18n(desc.toUtf8());
     }
     field->setDescription(desc);
   }
@@ -338,12 +336,12 @@ bool FieldPropertyHandler::start(const QString&, const QString&, const QString&,
 
   // all track fields in music collections prior to version 9 get converted to three columns
   if(d->syntaxVersion < 9) {
-    if(d->collType == Data::Collection::Album && field->name() == Latin1Literal("track")) {
+    if(d->collType == Data::Collection::Album && field->name() == QLatin1String("track")) {
       field->setProperty(QString::fromLatin1("columns"), QChar('3'));
       field->setProperty(QString::fromLatin1("column1"), i18n("Title"));
       field->setProperty(QString::fromLatin1("column2"), i18n("Artist"));
       field->setProperty(QString::fromLatin1("column3"), i18n("Length"));
-    } else if(d->collType == Data::Collection::Video && field->name() == Latin1Literal("cast")) {
+    } else if(d->collType == Data::Collection::Video && field->name() == QLatin1String("cast")) {
       field->setProperty(QString::fromLatin1("column1"), i18n("Actor/Actress"));
       field->setProperty(QString::fromLatin1("column2"), i18n("Role"));
     }
@@ -374,7 +372,7 @@ bool BibtexPreambleHandler::end(const QString&, const QString&, const QString&) 
 }
 
 StateHandler* BibtexMacrosHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("macro")) {
+  if(localName_ == QLatin1String("macro")) {
     return new BibtexMacroHandler(d);
   }
   return 0;
@@ -447,11 +445,11 @@ bool FieldValueContainerHandler::end(const QString&, const QString&, const QStri
 }
 
 StateHandler* FieldValueHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("year") ||
-     localName_ == Latin1Literal("month") ||
-     localName_ == Latin1Literal("day")) {
+  if(localName_ == QLatin1String("year") ||
+     localName_ == QLatin1String("month") ||
+     localName_ == QLatin1String("day")) {
     return new DateValueHandler(d);
-  } else if(localName_ == Latin1Literal("column")) {
+  } else if(localName_ == QLatin1String("column")) {
     return new TableColumnHandler(d);
   }
   return 0;
@@ -459,8 +457,8 @@ StateHandler* FieldValueHandler::nextHandlerImpl(const QString&, const QString& 
 
 bool FieldValueHandler::start(const QString&, const QString&, const QString& localName_, const QXmlAttributes& atts_) {
   d->currentField = d->coll->fieldByName(localName_);
-  m_i18n = attValue(atts_, "i18n") == Latin1Literal("true");
-  m_validateISBN = attValue(atts_, "validate") != Latin1Literal("no");
+  m_i18n = attValue(atts_, "i18n") == QLatin1String("true");
+  m_validateISBN = attValue(atts_, "validate") != QLatin1String("no");
   return true;
 }
 
@@ -480,7 +478,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   QString fieldName = localName_;
   QString fieldValue = d->text;
 
-  if(d->syntaxVersion < 2 && fieldName == Latin1Literal("keywords")) {
+  if(d->syntaxVersion < 2 && fieldName == QLatin1String("keywords")) {
     // in version 2, "keywords" changed to "keyword"
     fieldName = QString::fromLatin1("keyword");
   } else if(d->syntaxVersion < 4 && f->type() == Data::Field::Bool) {
@@ -504,17 +502,17 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     d->textBuffer = QString();
   }
   // this is not an else branch, the data may be in the textBuffer
-  if(d->syntaxVersion < 9 && d->coll->type() == Data::Collection::Album && fieldName == Latin1Literal("track")) {
+  if(d->syntaxVersion < 9 && d->coll->type() == Data::Collection::Album && fieldName == QLatin1String("track")) {
     // yes, this assumes the artist has already been set
     fieldValue += QString::fromLatin1("::");
     fieldValue += entry->field(QString::fromLatin1("artist"));
   }
   // special case: if the i18n attribute equals true, then translate the title, description, and category
   if(m_i18n) {
-    fieldValue = i18n(fieldValue.utf8());
+    fieldValue = i18n(fieldValue.toUtf8());
   }
   // special case for isbn fields, go ahead and validate
-  if(m_validateISBN && fieldName == Latin1Literal("isbn")) {
+  if(m_validateISBN && fieldName == QLatin1String("isbn")) {
     ISBNValidator val(0);
     val.fixup(fieldValue);
   }
@@ -539,13 +537,13 @@ bool DateValueHandler::end(const QString&, const QString& localName_, const QStr
   if(d->textBuffer.isEmpty()) {
     d->textBuffer = QString::fromLatin1("--");
   }
-  QStringList tokens = QStringList::split('-', d->textBuffer, true /* allow empty */);
+  QStringList tokens = d->textBuffer.split('-', QString::KeepEmptyParts);
   Q_ASSERT(tokens.size() == 3);
-  if(localName_ == Latin1Literal("year")) {
+  if(localName_ == QLatin1String("year")) {
     tokens[0] = d->text;
-  } else if(localName_ == Latin1Literal("month")) {
+  } else if(localName_ == QLatin1String("month")) {
     tokens[1] = d->text;
-  } else if(localName_ == Latin1Literal("day")) {
+  } else if(localName_ == QLatin1String("day")) {
     tokens[2] = d->text;
   }
   d->textBuffer = tokens.join(QChar('-'));
@@ -560,7 +558,7 @@ bool TableColumnHandler::end(const QString&, const QString&, const QString&) {
   // for old collections, if the second column holds the track length, bump it to next column
   if(d->syntaxVersion < 9 &&
      d->coll->type() == Data::Collection::Album &&
-     d->currentField->name() == Latin1Literal("track") &&
+     d->currentField->name() == QLatin1String("track") &&
      !d->textBuffer.isEmpty() &&
      d->textBuffer.contains(QString::fromLatin1("::")) == 0) {
     QRegExp rx(QString::fromLatin1("\\d+:\\d\\d"));
@@ -578,7 +576,7 @@ bool TableColumnHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* ImagesHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("image")) {
+  if(localName_ == QLatin1String("image")) {
     return new ImageHandler(d);
   }
   return 0;
@@ -596,7 +594,7 @@ bool ImagesHandler::end(const QString&, const QString&, const QString&) {
 
 bool ImageHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
   m_format = attValue(atts_, "format");
-  m_link = attValue(atts_, "link") == Latin1Literal("true");
+  m_link = attValue(atts_, "link") == QLatin1String("true");
   // idClean() already calls shareString()
   m_imageId = m_link ? shareString(attValue(atts_, "id"))
                      : Data::Image::idClean(attValue(atts_, "id"));
@@ -609,7 +607,7 @@ bool ImageHandler::end(const QString&, const QString&, const QString&) {
   bool readInfo = true;
   if(d->loadImages) {
     QByteArray ba;
-    KCodecs::base64Decode(QCString(d->text.latin1()), ba);
+    KCodecs::base64Decode(QByteArray(d->text.toLatin1()), ba);
     if(!ba.isEmpty()) {
       QString result = ImageFactory::addImage(ba, m_format, m_imageId);
       if(result.isEmpty()) {
@@ -621,14 +619,14 @@ bool ImageHandler::end(const QString&, const QString&, const QString&) {
   }
   if(readInfo) {
     // a width or height of 0 is ok here
-    Data::ImageInfo info(m_imageId, m_format.latin1(), m_width, m_height, m_link);
+    Data::ImageInfo info(m_imageId, m_format.toLatin1(), m_width, m_height, m_link);
     ImageFactory::cacheImageInfo(info);
   }
   return true;
 }
 
 StateHandler* FiltersHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("filter")) {
+  if(localName_ == QLatin1String("filter")) {
     return new FilterHandler(d);
   }
   return 0;
@@ -643,7 +641,7 @@ bool FiltersHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* FilterHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("rule")) {
+  if(localName_ == QLatin1String("rule")) {
     return new FilterRuleHandler(d);
   }
   return 0;
@@ -653,7 +651,7 @@ bool FilterHandler::start(const QString&, const QString&, const QString&, const 
   d->filter = new Filter(Filter::MatchAny);
   d->filter->setName(attValue(atts_, "name"));
 
-  if(attValue(atts_, "match") == Latin1Literal("all")) {
+  if(attValue(atts_, "match") == QLatin1String("all")) {
     d->filter->setMatch(Filter::MatchAll);
   }
   return true;
@@ -676,19 +674,19 @@ bool FilterRuleHandler::start(const QString&, const QString&, const QString&, co
     myWarning() << "FilterRuleHandler::start() - empty rule!" << endl;
     return true;
   }
-  QString function = attValue(atts_, "function").lower();
+  QString function = attValue(atts_, "function").toLower();
   FilterRule::Function func;
-  if(function == Latin1Literal("contains")) {
+  if(function == QLatin1String("contains")) {
     func = FilterRule::FuncContains;
-  } else if(function == Latin1Literal("notcontains")) {
+  } else if(function == QLatin1String("notcontains")) {
     func = FilterRule::FuncNotContains;
-  } else if(function == Latin1Literal("equals")) {
+  } else if(function == QLatin1String("equals")) {
     func = FilterRule::FuncEquals;
-  } else if(function == Latin1Literal("notequals")) {
+  } else if(function == QLatin1String("notequals")) {
     func = FilterRule::FuncNotEquals;
-  } else if(function == Latin1Literal("regexp")) {
+  } else if(function == QLatin1String("regexp")) {
     func = FilterRule::FuncRegExp;
-  } else if(function == Latin1Literal("notregexp")) {
+  } else if(function == QLatin1String("notregexp")) {
     func = FilterRule::FuncNotRegExp;
   } else {
     myWarning() << "FilterRuleHandler::start() - invalid rule function: " << function << endl;
@@ -703,7 +701,7 @@ bool FilterRuleHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* BorrowersHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("borrower")) {
+  if(localName_ == QLatin1String("borrower")) {
     return new BorrowerHandler(d);
   }
   return 0;
@@ -718,7 +716,7 @@ bool BorrowersHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* BorrowerHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(localName_ == Latin1Literal("loan")) {
+  if(localName_ == QLatin1String("loan")) {
     return new LoanHandler(d);
   }
   return 0;
@@ -745,7 +743,7 @@ bool LoanHandler::start(const QString&, const QString&, const QString&, const QX
   m_uid = attValue(atts_, "uid");
   m_loanDate = attValue(atts_, "loanDate");
   m_dueDate = attValue(atts_, "dueDate");
-  m_inCalendar = attValue(atts_, "calendar") == Latin1Literal("true");
+  m_inCalendar = attValue(atts_, "calendar") == QLatin1String("true");
   return true;
 }
 
@@ -763,7 +761,7 @@ bool LoanHandler::end(const QString&, const QString&, const QString&) {
     dueDate = QDate::fromString(m_dueDate, Qt::ISODate);
   }
 
-  Data::LoanPtr loan = new Data::Loan(entry, loanDate, dueDate, d->text);
+  Data::LoanPtr loan(new Data::Loan(entry, loanDate, dueDate, d->text));
   loan->setUID(m_uid);
   loan->setInCalendar(m_inCalendar);
   d->borrower->addLoan(loan);

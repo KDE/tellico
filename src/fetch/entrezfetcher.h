@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,22 +14,20 @@
 #ifndef TELLICO_ENTREZFETCHER_H
 #define TELLICO_ENTREZFETCHER_H
 
-namespace Tellico {
-  class XSLTHandler;
-}
-
 #include "fetcher.h"
 #include "configwidget.h"
-#include "../datavectors.h"
 
-#include <qcstring.h> // for QByteArray
-#include <qguardedptr.h>
+#include <QPointer>
 
+class KJob;
 namespace KIO {
-  class Job;
+  class StoredTransferJob;
 }
 
 namespace Tellico {
+
+  class XSLTHandler;
+
   namespace Fetch {
 
 /**
@@ -39,7 +37,7 @@ class EntrezFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  EntrezFetcher(QObject* parent, const char* name=0);
+  EntrezFetcher(QObject* parent);
   /**
    */
   virtual ~EntrezFetcher();
@@ -71,8 +69,7 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   void initXSLTHandler();
@@ -91,13 +88,12 @@ private:
   XSLTHandler* m_xsltHandler;
   QString m_dbname;
 
-  size_t m_start;
-  size_t m_total;
+  int m_start;
+  int m_total;
 
-  QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry
   QMap<int, int> m_matches; // search result id to pubmed id
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   QString m_queryKey;
   QString m_webEnv;

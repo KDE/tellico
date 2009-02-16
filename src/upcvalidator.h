@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,10 +11,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef UPCVALIDATOR_H
-#define UPCVALIDATOR_H
+#ifndef TELLICO_UPCVALIDATOR_H
+#define TELLICO_UPCVALIDATOR_H
 
-#include <qvalidator.h>
+#include <QValidator>
 
 namespace Tellico {
 
@@ -25,7 +25,7 @@ class UPCValidator : public QValidator {
 Q_OBJECT
 
 public:
-  UPCValidator(QObject* parent, const char* name=0);
+  UPCValidator(QObject* parent);
 
   virtual QValidator::State validate(QString& input, int& pos) const;
   virtual void fixup(QString& input) const;

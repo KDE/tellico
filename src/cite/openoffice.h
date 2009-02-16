@@ -30,7 +30,7 @@ public:
   virtual CiteAction type() const { return CiteOpenOffice; }
 
   virtual bool connect();
-  virtual bool cite(Data::EntryVec entries);
+  virtual bool cite(Data::EntryList entries);
   virtual State state() const;
 
   static bool hasLibrary();

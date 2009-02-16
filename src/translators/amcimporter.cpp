@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,24 +19,24 @@
 #include "amcimporter.h"
 #include "../collections/videocollection.h"
 #include "../imagefactory.h"
-#include "../latin1literal.h"
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>
 
-#include <qfile.h>
-#include <qimage.h>
+#include <QFile>
+#include <QImage>
+#include <QByteArray>
 
 #include <limits.h>
 
 namespace {
-  static const QCString AMC_FILE_ID = " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be ";
+  static const QByteArray AMC_FILE_ID = " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be ";
 }
 
 using Tellico::Import::AMCImporter;
 
-AMCImporter::AMCImporter(const KURL& url_) : DataImporter(url_), m_coll(0), m_cancelled(false) {
+AMCImporter::AMCImporter(const KUrl& url_) : DataImporter(url_), m_cancelled(false) {
 }
 
 AMCImporter::~AMCImporter() {
@@ -52,7 +52,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   }
 
   if(!fileRef().open()) {
-    return 0;
+    return Data::CollPtr();
   }
 
   QIODevice* f = fileRef().file();
@@ -61,13 +61,13 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   m_ds.setByteOrder(QDataStream::LittleEndian);
 
   const uint l = AMC_FILE_ID.length();
-  QMemArray<char> buffer(l+1);
-  m_ds.readRawBytes(buffer.data(), l);
-  QString version = QString::fromLocal8Bit(buffer, l);
+  QVector<char> buffer(l+1);
+  m_ds.readRawData(buffer.data(), l);
+  QString version = QString::fromLocal8Bit(buffer.data(), l);
   QRegExp versionRx(QString::fromLatin1(".+AMC_(\\d+)\\.(\\d+).+"));
-  if(version.find(versionRx) == -1) {
+  if(version.indexOf(versionRx) == -1) {
     myDebug() << "AMCImporter::collection() - no file id match" << endl;
-    return 0;
+    return Data::CollPtr();
   }
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
@@ -75,7 +75,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   ProgressItem::Done done(this);
 
-  m_coll = new Data::VideoCollection(true);
+  m_coll = Data::CollPtr(new Data::VideoCollection(true));
 
   m_majVersion = versionRx.cap(1).toInt();
   m_minVersion = versionRx.cap(2).toInt();
@@ -94,7 +94,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   while(!m_cancelled && !f->atEnd()) {
     readEntry();
     if(showProgress) {
-      ProgressManager::self()->setProgress(this, f->at());
+      ProgressManager::self()->setProgress(this, f->pos());
       kapp->processEvents();
     }
   }
@@ -103,13 +103,13 @@ Tellico::Data::CollPtr AMCImporter::collection() {
 }
 
 bool AMCImporter::readBool() {
-  Q_UINT8 b;
+  quint8 b;
   m_ds >> b;
   return b;
 }
 
-Q_UINT32 AMCImporter::readInt() {
-  Q_UINT32 i;
+quint32 AMCImporter::readInt() {
+  quint32 i;
   m_ds >> i;
   if(i >= UINT_MAX) {
     i = 0;
@@ -123,9 +123,9 @@ QString AMCImporter::readString() {
   if(l == 0) {
     return QString();
   }
-  QMemArray<char> buffer(l+1);
-  m_ds.readRawBytes(buffer.data(), l);
-  QString s = QString::fromLocal8Bit(buffer, l);
+  QVector<char> buffer(l+1);
+  m_ds.readRawData(buffer.data(), l);
+  QString s = QString::fromLocal8Bit(buffer.data(), l);
 //  myDebug() << "string: " << s << endl;
   return s;
 }
@@ -135,27 +135,27 @@ QString AMCImporter::readImage(const QString& format_) {
   if(l == 0) {
     return QString();
   }
-  QMemArray<char> buffer(l+1);
-  m_ds.readRawBytes(buffer.data(), l);
+  QVector<char> buffer(l+1);
+  m_ds.readRawData(buffer.data(), l);
   QByteArray bytes;
-  bytes.setRawData(buffer.data(), l);
-  QImage img(bytes);
-  bytes.resetRawData(buffer.data(), l);
+  bytes.reserve(l);
+  qCopy(buffer.data(), buffer.data() + l, bytes.begin());
+  QImage img = QImage::fromData(bytes);
   if(img.isNull()) {
     myDebug() << "AMCImporter::readImage() - null image" << endl;
     return QString();
   }
   QString format = QString::fromLatin1("PNG");
-  if(format_ == Latin1Literal(".jpg")) {
+  if(format_ == QLatin1String(".jpg")) {
     format = QString::fromLatin1("JPEG");
-  } else if(format_ == Latin1Literal(".gif")) {
+  } else if(format_ == QLatin1String(".gif")) {
     format = QString::fromLatin1("GIF");
   }
   return ImageFactory::addImage(img, format);
 }
 
 void AMCImporter::readEntry() {
-  Data::EntryPtr e = new Data::Entry(m_coll);
+  Data::EntryPtr e(new Data::Entry(m_coll));
 
   int id = readInt();
   if(id > 0) {
@@ -198,9 +198,9 @@ void AMCImporter::readEntry() {
   s = readString();
   QRegExp roleRx(QString::fromLatin1("(.+) \\(([^(]+)\\)"));
   roleRx.setMinimal(true);
-  if(s.find(roleRx) > -1) {
-    QString role = roleRx.cap(2).lower();
-    if(role == Latin1Literal("story") || role == Latin1Literal("written by")) {
+  if(s.indexOf(roleRx) > -1) {
+    QString role = roleRx.cap(2).toLower();
+    if(role == QLatin1String("story") || role == QLatin1String("written by")) {
       e->setField(QString::fromLatin1("writer"), roleRx.cap(1));
     } else {
       e->setField(QString::fromLatin1("producer"), s);
@@ -218,7 +218,7 @@ void AMCImporter::readEntry() {
   e->setField(QString::fromLatin1("comments"), readString());
   s = readString(); // video format
   QRegExp regionRx(QString::fromLatin1("Region \\d"));
-  if(s.find(regionRx) > -1) {
+  if(s.indexOf(regionRx) > -1) {
     e->setField(QString::fromLatin1("region"), regionRx.cap(0));
   }
   e->setField(QString::fromLatin1("audio-track"), readString()); // audio format
@@ -242,10 +242,10 @@ QStringList AMCImporter::parseCast(const QString& text_) {
   QRegExp castRx(QString::fromLatin1("[,()]"));
   QString person, role;
   int oldPos = 0;
-  for(int pos = text_.find(castRx); pos > -1; pos = text_.find(castRx, pos+1)) {
+  for(int pos = text_.indexOf(castRx); pos > -1; pos = text_.indexOf(castRx, pos+1)) {
     if(text_.at(pos) == ',' && nPar%2 == 0) {
       // we're done with this one
-      person += text_.mid(oldPos, pos-oldPos).stripWhiteSpace();
+      person += text_.mid(oldPos, pos-oldPos).trimmed();
       QString all = person;
       if(!role.isEmpty()) {
         if(role.startsWith(QString::fromLatin1("as "))) {
@@ -259,14 +259,14 @@ QStringList AMCImporter::parseCast(const QString& text_) {
       oldPos = pos+1; // add one to go past comma
     } else if(text_.at(pos) == '(') {
       if(nPar == 0) {
-        person = text_.mid(oldPos, pos-oldPos).stripWhiteSpace();
+        person = text_.mid(oldPos, pos-oldPos).trimmed();
         oldPos = pos+1; // add one to go past parenthesis
       }
       ++nPar;
     } else if(text_.at(pos) == ')') {
       --nPar;
       if(nPar == 0) {
-        role = text_.mid(oldPos, pos-oldPos).stripWhiteSpace();
+        role = text_.mid(oldPos, pos-oldPos).trimmed();
         oldPos = pos+1; // add one to go past parenthesis
       }
     }
@@ -274,7 +274,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
   // grab the last one
   if(nPar%2 == 0) {
     int pos = text_.length();
-    person += text_.mid(oldPos, pos-oldPos).stripWhiteSpace();
+    person += text_.mid(oldPos, pos-oldPos).trimmed();
     QString all = person;
     if(!role.isEmpty()) {
       if(role.startsWith(QString::fromLatin1("as "))) {

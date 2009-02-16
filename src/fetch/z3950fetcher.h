@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,24 +24,21 @@
 #ifndef TELLICO_Z3950FETCHER_H
 #define TELLICO_Z3950FETCHER_H
 
+#include "fetcher.h"
+#include "configwidget.h"
+
+#include <QPointer>
+#include <QEvent>
+
+class KIntSpinBox;
+class KComboBox;
+
 namespace Tellico {
   class XSLTHandler;
   namespace GUI {
     class LineEdit;
     class ComboBox;
   }
-}
-
-class KIntSpinBox;
-class KComboBox;
-
-#include "fetcher.h"
-#include "configwidget.h"
-#include "../datavectors.h"
-
-#include <qguardedptr.h>
-
-namespace Tellico {
   namespace Fetch {
     class Z3950Connection;
 
@@ -52,7 +49,7 @@ class Z3950Fetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  Z3950Fetcher(QObject* parent, const char* name = 0);
+  Z3950Fetcher(QObject* parent);
 
   virtual ~Z3950Fetcher();
 
@@ -82,7 +79,7 @@ public:
   static QString defaultName();
 
 protected:
-  virtual void customEvent(QCustomEvent* event);
+  virtual void customEvent(QEvent* event);
 
 private:
   bool initMARC21Handler();

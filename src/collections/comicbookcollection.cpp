@@ -32,8 +32,8 @@ ComicBookCollection::ComicBookCollection(bool addFields_, const QString& title_ 
   setDefaultGroupField(QString::fromLatin1("series"));
 }
 
-Tellico::Data::FieldVec ComicBookCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList ComicBookCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
@@ -53,7 +53,7 @@ Tellico::Data::FieldVec ComicBookCollection::defaultFields() {
   field->setFormatFlag(Field::FormatName);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("artist"), i18n("Comic Book Illustrator", "Artist"));
+  field = new Field(QString::fromLatin1("artist"), i18nc("Comic Book Illustrator", "Artist"));
   field->setCategory(i18n(comic_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatName);
@@ -114,11 +114,10 @@ Tellico::Data::FieldVec ComicBookCollection::defaultFields() {
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  QStringList cond = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                        i18n("Comic book grade levels - "
-                                             "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor",
-                                             "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"),
-                                        false);
+  QStringList cond = i18nc("Comic book grade levels - "
+                           "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor",
+                           "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor")
+                     .split(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::SkipEmptyParts);
   field = new Field(QString::fromLatin1("condition"), i18n("Condition"), cond);
   field->setCategory(i18n(comic_classification));
   list.append(field);

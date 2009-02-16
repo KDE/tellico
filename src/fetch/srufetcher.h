@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,28 +14,24 @@
 #ifndef TELLICO_SRUFETCHER_H
 #define TELLICO_SRUFETCHER_H
 
+#include "fetcher.h"
+#include "configwidget.h"
+
+#include <QPointer>
+
+class KIntSpinBox;
+class KComboBox;
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
+
 namespace Tellico {
   class XSLTHandler;
   namespace GUI {
     class LineEdit;
     class ComboBox;
   }
-}
-
-class KIntSpinBox;
-class KComboBox;
-namespace KIO {
-  class Job;
-}
-
-#include "fetcher.h"
-#include "configwidget.h"
-#include "../datavectors.h"
-
-#include <qcstring.h> // for QByteArray
-#include <qguardedptr.h>
-
-namespace Tellico {
   namespace Fetch {
 
 class SRUConfigWidget;
@@ -54,7 +50,7 @@ friend class SRUConfigWidget;
 public:
   /**
    */
-  SRUFetcher(QObject* parent, const char* name = 0);
+  SRUFetcher(QObject* parent);
   SRUFetcher(const QString& name, const QString& host, uint port, const QString& dbname,
              QObject* parent);
   /**
@@ -85,8 +81,7 @@ public:
   static Fetcher::Ptr libraryOfCongress(QObject* parent);
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   bool initMARCXMLHandler();
@@ -97,9 +92,8 @@ private:
   QString m_path;
   QString m_format;
 
-  QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::StoredTransferJob> m_job;
   XSLTHandler* m_MARCXMLHandler;
   XSLTHandler* m_MODSHandler;
   bool m_started;

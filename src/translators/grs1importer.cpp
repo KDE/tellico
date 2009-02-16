@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,8 +15,9 @@
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../latin1literal.h"
 #include "../tellico_debug.h"
+
+#include <QTextStream>
 
 using Tellico::Import::GRS1Importer;
 GRS1Importer::TagMap* GRS1Importer::s_tagMap = 0;
@@ -52,9 +53,9 @@ bool GRS1Importer::canImport(int type) const {
 }
 
 Tellico::Data::CollPtr GRS1Importer::collection() {
-  Data::CollPtr coll = new Data::BibtexCollection(true);
+  Data::CollPtr coll(new Data::BibtexCollection(true));
 
-  Data::FieldPtr f = new Data::Field(QString::fromLatin1("isbn"), i18n("ISBN#"));
+  Data::FieldPtr f(new Data::Field(QString::fromLatin1("isbn"), i18n("ISBN#")));
   f->setCategory(i18n("Publishing"));
   f->setDescription(i18n("International Standard Book Number"));
   coll->addField(f);
@@ -64,7 +65,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   f->setFlags(Data::Field::AllowCompletion | Data::Field::AllowGrouped | Data::Field::AllowMultiple);
   coll->addField(f);
 
-  Data::EntryPtr e = new Data::Entry(coll);
+  Data::EntryPtr e(new Data::Entry(coll));
   bool empty = true;
 
   // in format "(tag, tag) value"
@@ -78,9 +79,9 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   QVariant v;
   QString tmp, field, val, str = text();
   if(str.isEmpty()) {
-    return 0;
+    return Data::CollPtr();
   }
-  QTextStream t(&str, IO_ReadOnly);
+  QTextStream t(&str, QIODevice::ReadOnly);
   for(QString line = t.readLine(); !line.isNull(); line = t.readLine()) {
 //    myDebug() << line << endl;
     if(!rx.exactMatch(line)) {
@@ -89,7 +90,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     n = rx.cap(1).toInt();
     v = rx.cap(2).toInt(&ok);
     if(!ok) {
-      v = rx.cap(2).lower();
+      v = rx.cap(2).toLower();
     }
     field = (*s_tagMap)[TagPair(n, v)];
     if(field.isEmpty()) {
@@ -97,18 +98,17 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     }
 //    myDebug() << "field is " << field << endl;
     // assume if multiple values, it's allowed
-    val = rx.cap(3).stripWhiteSpace();
+    val = rx.cap(3).trimmed();
     if(val.isEmpty()) {
       continue;
     }
     empty = false;
-    if(field == Latin1Literal("title")) {
-      val = val.section('/', 0, 0).stripWhiteSpace(); // only take portion of title before slash
-    } else if(field == Latin1Literal("author")) {
+    if(field == QLatin1String("title")) {
+      val = val.section('/', 0, 0).trimmed(); // only take portion of title before slash
+    } else if(field == QLatin1String("author")) {
       val.replace(dateRx, QString::null);
-    } else if(field == Latin1Literal("publisher")) {
-      int pos = val.find(pubRx);
-      if(pos > -1) {
+    } else if(field == QLatin1String("publisher")) {
+      if(val.indexOf(pubRx) > -1) {
         e->setField(QString::fromLatin1("address"), pubRx.cap(1));
         val = pubRx.cap(2);
       }

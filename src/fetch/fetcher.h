@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,16 +11,16 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FETCHER_H
-#define FETCHER_H
+#ifndef TELLICO_FETCHER_H
+#define TELLICO_FETCHER_H
 
 #include "fetch.h"
 #include "../datavectors.h"
 
-#include <kapplication.h> // for KApplication::random()
+#include <krandom.h>
 
-#include <qobject.h>
-#include <qstring.h>
+#include <QObject>
+#include <QString>
 
 class KConfigGroup;
 
@@ -44,9 +44,9 @@ public:
 
   /**
    */
-  Fetcher(QObject* parent, const char* name = 0) : QObject(parent, name), KShared(),
-                                                   m_updateOverwrite(false), m_hasMoreResults(false),
-                                                   m_messager(0) {}
+  Fetcher(QObject* parent) : QObject(parent), KShared(),
+                             m_updateOverwrite(false), m_hasMoreResults(false),
+                             m_messager(0) {}
   /**
    */
   virtual ~Fetcher();
@@ -118,7 +118,7 @@ public:
 signals:
 //  void signalStatus(const QString& status);
   void signalResultFound(Tellico::Fetch::SearchResult* result);
-  void signalDone(Tellico::Fetch::Fetcher::Ptr);
+  void signalDone(Tellico::Fetch::Fetcher* fetcher);
 
 protected:
   QString m_name;
@@ -136,7 +136,7 @@ private:
 class SearchResult {
 public:
   SearchResult(Fetcher::Ptr f, const QString& t, const QString& d, const QString& i)
-   : uid(KApplication::random()), fetcher(f), title(t), desc(d), isbn(i) {}
+   : uid(KRandom::random()), fetcher(f), title(t), desc(d), isbn(i) {}
   Data::EntryPtr fetchEntry();
   uint uid;
   Fetcher::Ptr fetcher;

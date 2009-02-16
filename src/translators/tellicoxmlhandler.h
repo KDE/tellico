@@ -16,7 +16,7 @@
 
 #include "xmlstatehandler.h"
 
-#include <qptrstack.h>
+#include <Q3PtrStack>
 
 namespace Tellico {
   namespace Import {
@@ -32,7 +32,7 @@ public:
                           const QString& qName);
   virtual bool characters(const QString& ch);
 
-  virtual QString errorString();
+  virtual QString errorString() const;
 
   Data::CollPtr collection() const;
   bool hasImages() const;
@@ -40,7 +40,7 @@ public:
   void setLoadImages(bool loadImages);
 
 private:
-  QPtrStack<SAX::StateHandler> m_handlers;
+  Q3PtrStack<SAX::StateHandler> m_handlers;
   SAX::StateData* m_data;
 };
 

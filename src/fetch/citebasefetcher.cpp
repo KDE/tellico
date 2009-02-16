@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,9 +23,12 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
+#include <kio/job.h>
+#include <kio/jobuidelegate.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
+#include <QLabel>
+#include <QTextStream>
+#include <QVBoxLayout>
 
 // #define CITEBASE_TEST
 
@@ -58,32 +61,29 @@ bool CitebaseFetcher::canFetch(int type) const {
 void CitebaseFetcher::readConfigHook(const KConfigGroup&) {
 }
 
-void CitebaseFetcher::search(FetchKey key_, const QString& value_) {
+void CitebaseFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_key = key_;
-  m_value = value_.stripWhiteSpace();
+  m_value = value_.trimmed();
   m_started = true;
 
   if(!canFetch(Kernel::self()->collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.").arg(source()), MessageHandler::Warning);
+    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
   }
 
-  m_data.truncate(0);
-
 //  myDebug() << "CitebaseFetcher::search() - value = " << value_ << endl;
 
-  KURL u = searchURL(m_key, m_value);
+  KUrl u = searchURL(m_key, m_value);
   if(u.isEmpty()) {
     stop();
     return;
   }
 
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
 }
 
 void CitebaseFetcher::stop() {
@@ -95,45 +95,40 @@ void CitebaseFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_data.truncate(0);
   m_started = false;
   emit signalDone(this);
 }
 
-void CitebaseFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void CitebaseFetcher::slotComplete(KIO::Job* job_) {
+void CitebaseFetcher::slotComplete(KJob*) {
 //  myDebug() << "CitebaseFetcher::slotComplete()" << endl;
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
 
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "CitebaseFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
 #if 0
-  kdWarning() << "Remove debug from citebasefetcher.cpp" << endl;
+  kWarning() << "Remove debug from citebasefetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test.bib"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
-    t << QCString(m_data, m_data.size()+1);
+    t << data;
   }
   f.close();
 #endif
 
-  Import::BibtexImporter imp(QString::fromUtf8(m_data, m_data.size()));
+  Import::BibtexImporter imp(QString::fromUtf8(data, data.size()));
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {
@@ -142,8 +137,8 @@ void CitebaseFetcher::slotComplete(KIO::Job* job_) {
     return;
   }
 
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
     if(!m_started) {
       // might get aborted
       break;
@@ -154,7 +149,7 @@ void CitebaseFetcher::slotComplete(KIO::Job* job_) {
       desc += QChar('/') + entry->field(QString::fromLatin1("year"));
     }
 
-    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
@@ -174,33 +169,33 @@ Tellico::Data::EntryPtr CitebaseFetcher::fetchEntry(uint uid_) {
   return entry;
 }
 
-KURL CitebaseFetcher::searchURL(FetchKey key_, const QString& value_) const {
-  KURL u(QString::fromLatin1(CITEBASE_BASE_URL));
+KUrl CitebaseFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
+  KUrl u(QString::fromLatin1(CITEBASE_BASE_URL));
 
   switch(key_) {
     case ArxivID:
       {
       // remove prefix and/or version number
       QString value = value_;
-      value.remove(QRegExp(QString::fromLatin1("^arxiv:"), false));
+      value.remove(QRegExp(QString::fromLatin1("^arxiv:"), Qt::CaseInsensitive));
       value.remove(QRegExp(QString::fromLatin1("v\\d+$")));
       u.addQueryItem(QString::fromLatin1("rft_id"), QString::fromLatin1("oai:arXiv.org:%1").arg(value));
       }
       break;
 
     default:
-      kdWarning() << "CitebaseFetcher::search() - key not recognized: " << m_key << endl;
-      return KURL();
+      kWarning() << "CitebaseFetcher::search() - key not recognized: " << m_key;
+      return KUrl();
   }
 
 #ifdef CITEBASE_TEST
-  u = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/citebase.bib"));
+  u = KUrl(QString::fromLatin1("/home/robby/citebase.bib"));
 #endif
   myDebug() << "CitebaseFetcher::search() - url: " << u.url() << endl;
   return u;
 }
 
-void CitebaseFetcher::updateEntry(Data::EntryPtr entry_) {
+void CitebaseFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   QString arxiv = entry_->field(QString::fromLatin1("arxiv"));
   if(!arxiv.isEmpty()) {
     search(Fetch::ArxivID, arxiv);
@@ -211,7 +206,7 @@ void CitebaseFetcher::updateEntry(Data::EntryPtr entry_) {
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 
-void CitebaseFetcher::updateEntrySynchronous(Data::EntryPtr entry) {
+void CitebaseFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   if(!entry) {
     return;
   }
@@ -220,7 +215,7 @@ void CitebaseFetcher::updateEntrySynchronous(Data::EntryPtr entry) {
     return;
   }
 
-  KURL u = searchURL(ArxivID, arxiv);
+  KUrl u = searchURL(ArxivID, arxiv);
   QString bibtex = FileHandler::readTextFile(u, true);
   if(bibtex.isEmpty()) {
     return;

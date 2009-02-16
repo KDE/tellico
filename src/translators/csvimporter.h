@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef CSVIMPORTER_H
-#define CSVIMPORTER_H
+#ifndef TELLICO_CSVIMPORTER_H
+#define TELLICO_CSVIMPORTER_H
+
+#include "textimporter.h"
+#include "../datavectors.h"
 
 class CSVImporterWidget;
 
@@ -21,18 +24,16 @@ class KComboBox;
 class KIntSpinBox;
 class KPushButton;
 
-class QButtonGroup;
+class QGroupBox;
 class QCheckBox;
 class QRadioButton;
-class QTable;
-
-#include "textimporter.h"
-#include "../datavectors.h"
+class QTableWidget;
 
 namespace Tellico {
   namespace GUI {
     class CollectionTypeCombo;
   }
+  class CSVParser;
   namespace Import {
 
 /**
@@ -42,11 +43,9 @@ class CSVImporter : public TextImporter {
 Q_OBJECT
 
 public:
-  class Parser;
-
   /**
    */
-  CSVImporter(const KURL& url);
+  CSVImporter(const KUrl& url);
   ~CSVImporter();
 
   /**
@@ -55,7 +54,7 @@ public:
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
+  virtual QWidget* widget(QWidget* parent);
 
   virtual bool validImport() const;
 
@@ -86,20 +85,19 @@ private:
   QWidget* m_widget;
   GUI::CollectionTypeCombo* m_comboColl;
   QCheckBox* m_checkFirstRowHeader;
-  QButtonGroup* m_delimiterGroup;
+  QGroupBox* m_delimiterGroup;
   QRadioButton* m_radioComma;
   QRadioButton* m_radioSemicolon;
   QRadioButton* m_radioTab;
   QRadioButton* m_radioOther;
   KLineEdit* m_editOther;
-  QTable* m_table;
+  QTableWidget* m_table;
   KIntSpinBox* m_colSpinBox;
   KComboBox* m_comboField;
   KPushButton* m_setColumnBtn;
   bool m_hasAssignedFields;
 
-  friend class Parser;
-  Parser* m_parser;
+  CSVParser* m_parser;
 };
 
   } // end namespace

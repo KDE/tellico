@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BIBTEXEXPORTER_H
-#define BIBTEXEXPORTER_H
+#ifndef TELLICO_BIBTEXEXPORTER_H
+#define TELLICO_BIBTEXEXPORTER_H
 
 class QCheckBox;
 class KComboBox;
@@ -39,12 +39,12 @@ public:
   virtual QString formatString() const;
   virtual QString fileFilter() const;
 
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual void readOptions(KConfig*);
-  virtual void saveOptions(KConfig*);
+  virtual QWidget* widget(QWidget* parent);
+  virtual void readOptions(KSharedConfigPtr);
+  virtual void saveOptions(KSharedConfigPtr);
 
 private:
-  void writeEntryText(QString& text, const Data::FieldVec& field, const Data::Entry& entry,
+  void writeEntryText(QString& text, const Data::FieldList& field, const Data::Entry& entry,
                       const QString& type, const QString& key);
 
   bool m_expandMacros;

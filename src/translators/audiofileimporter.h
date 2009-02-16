@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2007 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef AUDIOFILEIMPORTER_H
-#define AUDIOFILEIMPORTER_H
+#ifndef TELLICO_AUDIOFILEIMPORTER_H
+#define TELLICO_AUDIOFILEIMPORTER_H
 
 class QCheckBox;
 
@@ -37,14 +37,14 @@ Q_OBJECT
 public:
   /**
    */
-  AudioFileImporter(const KURL& url);
+  AudioFileImporter(const KUrl& url);
 
   /**
    */
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
+  virtual QWidget* widget(QWidget* parent);
   virtual bool canImport(int type) const;
 
 public slots:
@@ -52,7 +52,7 @@ public slots:
   void slotAddFileToggled(bool on);
 
 private:
-  static QString insertValue(const QString& str, const QString& value, uint pos);
+  static QString insertValue(const QString& str, const QString& value, int pos);
 
   int discNumber(const TagLib::FileRef& file) const;
 
@@ -61,7 +61,7 @@ private:
   QCheckBox* m_recursive;
   QCheckBox* m_addFilePath;
   QCheckBox* m_addBitrate;
-  bool m_cancelled : 1;
+  bool m_cancelled;
 };
 
   } // end namespace

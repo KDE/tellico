@@ -21,8 +21,8 @@
 
 using Tellico::Command::CollectionCommand;
 
-CollectionCommand::CollectionCommand(Mode mode_, Data::CollPtr origColl_, Data::CollPtr newColl_)
-    : KCommand()
+CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl_, Tellico::Data::CollPtr newColl_)
+    : QUndoCommand()
     , m_mode(mode_)
     , m_origColl(origColl_)
     , m_newColl(newColl_)
@@ -30,10 +30,18 @@ CollectionCommand::CollectionCommand(Mode mode_, Data::CollPtr origColl_, Data::
 {
 #ifndef NDEBUG
 // just some sanity checking
-  if(m_origColl == 0 || m_newColl == 0) {
+  if(!m_origColl || !m_newColl) {
     myDebug() << "CollectionCommand() - null collection pointer" << endl;
   }
 #endif
+  switch(m_mode) {
+    case Append:
+      setText(i18n("Append Collection"));
+    case Merge:
+      setText(i18n("Merge Collection"));
+    case Replace:
+      setText(i18n("Replace Collection"));
+  }
 }
 
 CollectionCommand::~CollectionCommand() {
@@ -49,7 +57,7 @@ CollectionCommand::~CollectionCommand() {
   }
 }
 
-void CollectionCommand::execute() {
+void CollectionCommand::redo() {
   if(!m_origColl || !m_newColl) {
     return;
   }
@@ -78,7 +86,7 @@ void CollectionCommand::execute() {
   }
 }
 
-void CollectionCommand::unexecute() {
+void CollectionCommand::undo() {
   if(!m_origColl || !m_newColl) {
     return;
   }
@@ -104,23 +112,9 @@ void CollectionCommand::unexecute() {
   }
 }
 
-QString CollectionCommand::name() const {
-  switch(m_mode) {
-    case Append:
-      return i18n("Append Collection");
-    case Merge:
-      return i18n("Merge Collection");
-    case Replace:
-      return i18n("Replace Collection");
-  }
-  // hush warnings
-  return QString::null;
-}
-
 void CollectionCommand::copyFields() {
   m_origFields.clear();
-  Data::FieldVec fieldsToCopy = m_origColl->fields();
-  for(Data::FieldVec::Iterator field = fieldsToCopy.begin(); field != fieldsToCopy.end(); ++field) {
-    m_origFields.append(new Data::Field(*field));
+  foreach(Data::FieldPtr field, m_origColl->fields()) {
+    m_origFields.append(Data::FieldPtr(new Data::Field(*field)));
   }
 }

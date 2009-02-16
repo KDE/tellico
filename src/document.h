@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-20068 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,8 +21,8 @@
 
 #include <kurl.h>
 
-#include <qobject.h>
-#include <qguardedptr.h>
+#include <QObject>
+#include <QPointer>
 
 namespace Tellico {
   namespace Import {
@@ -49,7 +49,7 @@ public:
    *
    * @param url The URL
    */
-  void setURL(const KURL& url);
+  void setURL(const KUrl& url);
   /**
    * Checks the modified flag, which indicates if the document has changed since the
    * last save.
@@ -66,7 +66,7 @@ public:
    *
    * @return The url
    */
-  const KURL& URL() const { return m_url; }
+  const KUrl& URL() const { return m_url; }
   /**
    * Initializes a new document. The signalNewDoc() signal is emitted. The return
    * value is currently always true, but should indicate whether or not a new document
@@ -84,7 +84,7 @@ public:
    * @param url The location to open
    * @return A boolean indicating success
    */
-  bool openDocument(const KURL& url);
+  bool openDocument(const KUrl& url);
   /**
    * Checks to see if the document has been modified before deleting the contents.
    * If it has, then a message box asks the user if the document should be saved,
@@ -99,7 +99,7 @@ public:
    * @param url The location to save the file
    * @return A boolean indicating success
    */
-  bool saveDocument(const KURL& url);
+  bool saveDocument(const KUrl& url);
   /**
    * Closes the document, deleting the contents. The return value is presently always true.
    *
@@ -146,8 +146,8 @@ public:
    * @param coll A Pointer to the new collection, the document takes ownership.
    */
   void replaceCollection(CollPtr coll);
-  void unAppendCollection(CollPtr coll, FieldVec origFields);
-  void unMergeCollection(CollPtr coll, FieldVec origFields_, MergePair entryPair);
+  void unAppendCollection(CollPtr coll, FieldList origFields);
+  void unMergeCollection(CollPtr coll, FieldList origFields_, MergePair entryPair);
   /**
    * Attempts to load an image from the document file
    */
@@ -155,11 +155,11 @@ public:
   bool loadAllImagesNow() const;
   bool allImagesOnDisk() const { return m_allImagesOnDisk; }
   int imageCount() const;
-  EntryVec filteredEntries(Filter::Ptr filter) const;
+  EntryList filteredEntries(FilterPtr filter) const;
   /**
    * Sort entries according to current detailed view
    */
-  EntryVec sortEntries(EntryVec entries) const;
+  EntryList sortEntries(EntryList entries) const;
 
   void renameCollection(const QString& newTitle);
 
@@ -170,7 +170,7 @@ public:
    * The second entry vector contains entries with images which should not be removed
    * in addition to those already in the collection
    */
-  void removeImagesNotInCollection(EntryVec entries, EntryVec entriesToKeep);
+  void removeImagesNotInCollection(EntryList entries, EntryList entriesToKeep);
   void cancelImageWriting() { m_cancelImageWriting = true; }
 
 public slots:
@@ -180,7 +180,7 @@ public slots:
    * @param m A boolean indicating the current modified status
    */
   void slotSetModified(bool m=true);
-  void slotDocumentRestored();
+  void slotSetClean(bool clean);
 
 signals:
   /**
@@ -213,7 +213,7 @@ private:
    * Writes all images in the current collection to the cache directory
    * if cacheDir = LocalDir, then url will be used and must not be empty
    */
-  void writeAllImages(int cacheDir, const KURL& url=KURL());
+  void writeAllImages(int cacheDir, const KUrl& url=KUrl());
   bool pruneImages();
 
   // make all constructors private
@@ -225,12 +225,12 @@ private:
   CollPtr m_coll;
   bool m_isModified : 1;
   bool m_loadAllImages : 1;
-  KURL m_url;
+  KUrl m_url;
   bool m_validFile : 1;
-#ifdef SAX_SUPPORT
-  QGuardedPtr<Import::TellicoSaxImporter> m_importer;
+#ifdef ENABLE_SAX
+  QPointer<Import::TellicoSaxImporter> m_importer;
 #else
-  QGuardedPtr<Import::TellicoImporter> m_importer;
+  QPointer<Import::TellicoImporter> m_importer;
 #endif
   bool m_cancelImageWriting : 1;
   int m_fileFormat;

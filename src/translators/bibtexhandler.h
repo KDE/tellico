@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,16 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BIBTEXHANDLER_H
-#define BIBTEXHANDLER_H
-
-class QString;
-class QStringList;
-class QRegExp;
+#ifndef TELLICO_BIBTEXHANDLER_H
+#define TELLICO_BIBTEXHANDLER_H
 
 #include "../datavectors.h"
 
-#include <qmap.h>
+#include <QStringList>
+#include <QHash>
+#include <QRegExp>
 
 namespace Tellico {
 
@@ -30,8 +28,8 @@ namespace Tellico {
 class BibtexHandler {
 public:
   enum QuoteStyle { BRACES=0, QUOTES=1 };
-  static QStringList bibtexKeys(const Data::EntryVec& entries);
-  static QString bibtexKey(Data::ConstEntryPtr entry);
+  static QStringList bibtexKeys(const Data::EntryList& entries);
+  static QString bibtexKey(Data::EntryPtr entry);
   static QString importText(char* text);
   static QString exportText(const QString& text, const QStringList& macros);
   static bool setFieldValue(Data::EntryPtr entry, const QString& bibtexField, const QString& value);
@@ -46,13 +44,13 @@ public:
   static QuoteStyle s_quoteStyle;
 
 private:
-  typedef QMap<QString, QStringList> StringListMap;
+  typedef QHash<QString, QStringList> StringListHash;
 
   static QString bibtexKey(const QString& author, const QString& title, const QString& year);
   static void loadTranslationMaps();
-  static QString& addBraces(QString& string);
+  static QString addBraces(const QString& string);
 
-  static StringListMap* s_utf8LatexMap;
+  static StringListHash* s_utf8LatexMap;
   static const QRegExp s_badKeyChars;
 };
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "../datavectors.h"
 
-#include <kcommand.h>
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -24,21 +24,21 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class ModifyEntries : public KCommand {
+class ModifyEntries : public QUndoCommand {
 
 public:
-  ModifyEntries(Data::CollPtr coll, const Data::EntryVec& oldEntries, const Data::EntryVec& newEntries);
+  ModifyEntries(Data::CollPtr coll, const Data::EntryList& oldEntries, const Data::EntryList& newEntries);
+  ModifyEntries(QUndoCommand* parent, Data::CollPtr coll, const Data::EntryList& oldEntries, const Data::EntryList& newEntries);
 
-  virtual void execute();
-  virtual void unexecute();
-  virtual QString name() const;
+  virtual void redo();
+  virtual void undo();
 
 private:
   void swapValues();
 
   Data::CollPtr m_coll;
-  Data::EntryVec m_oldEntries;
-  Data::EntryVec m_entries;
+  Data::EntryList m_oldEntries;
+  Data::EntryList m_entries;
   bool m_needToSwap : 1;
 };
 

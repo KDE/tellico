@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,25 +21,28 @@
 
 using Tellico::Command::AddEntries;
 
-AddEntries::AddEntries(Data::CollPtr coll_, const Data::EntryVec& entries_)
-    : KCommand()
+AddEntries::AddEntries(Tellico::Data::CollPtr coll_, const Tellico::Data::EntryList& entries_)
+    : QUndoCommand()
     , m_coll(coll_)
     , m_entries(entries_)
 {
+  if(!m_entries.isEmpty()) {
+    setText(m_entries.count() > 1 ? i18n("Add Entries")
+                                : i18nc("Add (Entry Title)", "Add %1", m_entries[0]->title()));
+  }
 }
 
-void AddEntries::execute() {
+void AddEntries::redo() {
   if(!m_coll || m_entries.isEmpty()) {
     return;
   }
 
   m_coll->addEntries(m_entries);
   // now check for default values
-  Data::FieldVec fields = m_coll->fields();
-  for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+  foreach(Data::FieldPtr field, m_coll->fields()) {
     const QString defaultValue = field->defaultValue();
     if(!defaultValue.isEmpty()) {
-      for(Data::EntryVec::Iterator entry = m_entries.begin(); entry != m_entries.end(); ++entry) {
+      foreach(Data::EntryPtr entry, m_entries) {
         if(entry->field(field).isEmpty()) {
           entry->setField(field->name(), defaultValue);
         }
@@ -49,16 +52,11 @@ void AddEntries::execute() {
   Controller::self()->addedEntries(m_entries);
 }
 
-void AddEntries::unexecute() {
+void AddEntries::undo() {
   if(!m_coll || m_entries.isEmpty()) {
     return;
   }
 
   m_coll->removeEntries(m_entries);
   Controller::self()->removedEntries(m_entries);
-}
-
-QString AddEntries::name() const {
-  return m_entries.count() > 1 ? i18n("Add Entries")
-                               : i18n("Add (Entry Title)", "Add %1").arg(m_entries.begin()->title());
 }

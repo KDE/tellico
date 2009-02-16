@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,15 +14,14 @@
 #include "imagefieldwidget.h"
 #include "imagewidget.h"
 #include "../field.h"
-#include "../latin1literal.h"
 
 using Tellico::GUI::ImageFieldWidget;
 
-ImageFieldWidget::ImageFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_) {
+ImageFieldWidget::ImageFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_) {
 
   m_widget = new ImageWidget(this);
-  m_widget->setLinkOnlyChecked(field_->property(QString::fromLatin1("link")) == Latin1Literal("true"));
+  m_widget->setLinkOnlyChecked(field_->property(QString::fromLatin1("link")) == QLatin1String("true"));
   connect(m_widget, SIGNAL(signalModified()), SIGNAL(modified()));
 
   registerWidget();

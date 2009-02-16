@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2006 by Robby Stephenson
+    copyright            : (C) 2002-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,7 +19,7 @@ using Tellico::ISBNValidator;
 
 //static
 QString ISBNValidator::isbn10(QString isbn13) {
-  if(!isbn13.startsWith(QString::fromLatin1("978"))) {
+  if(!isbn13.startsWith(QLatin1String("978"))) {
     myDebug() << "ISBNValidator::isbn10() - can't convert, must start with 978: " << isbn13 << endl;
     return isbn13;
   }
@@ -35,14 +35,14 @@ QString ISBNValidator::isbn10(QString isbn13) {
 
 QString ISBNValidator::isbn13(QString isbn10) {
   isbn10.remove('-');
-  if(isbn10.startsWith(QString::fromLatin1("978")) ||
-     isbn10.startsWith(QString::fromLatin1("979"))) {
+  if(isbn10.startsWith(QLatin1String("978")) ||
+     isbn10.startsWith(QLatin1String("979"))) {
     return isbn10;
   }
   // remove checksum
   isbn10.truncate(isbn10.length()-1);
   // begins with 978
-  isbn10.prepend(QString::fromLatin1("978"));
+  isbn10.prepend(QLatin1String("978"));
   // add new checksum
   isbn10 += checkSum13(isbn10);
   staticFixup(isbn10);
@@ -50,12 +50,12 @@ QString ISBNValidator::isbn13(QString isbn10) {
 }
 
 QString ISBNValidator::cleanValue(QString isbn) {
-  isbn.remove(QRegExp(QString::fromLatin1("[^xX0123456789]")));
+  isbn.remove(QRegExp(QLatin1String("[^xX0123456789]")));
   return isbn;
 }
 
-ISBNValidator::ISBNValidator(QObject* parent_, const char* name_/*=0*/)
-    : QValidator(parent_, name_) {
+ISBNValidator::ISBNValidator(QObject* parent_)
+    : QValidator(parent_) {
 }
 
 QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
@@ -66,8 +66,8 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
     return catState;
   }
 
-  if(input_.startsWith(QString::fromLatin1("978")) ||
-     input_.startsWith(QString::fromLatin1("979"))) {
+  if(input_.startsWith(QLatin1String("978")) ||
+     input_.startsWith(QLatin1String("979"))) {
     return validate13(input_, pos_);
   } else {
     return validate10(input_, pos_);
@@ -79,9 +79,9 @@ void ISBNValidator::fixup(QString& input_) const {
 }
 
 void ISBNValidator::staticFixup(QString& input_) {
-  if((input_.startsWith(QString::fromLatin1("978"))
-       || input_.startsWith(QString::fromLatin1("979")))
-     && input_.contains(QRegExp(QString::fromLatin1("\\d"))) > 10) {
+  if((input_.startsWith(QLatin1String("978"))
+       || input_.startsWith(QLatin1String("979")))
+     && input_.count(QRegExp(QLatin1String("\\d"))) > 10) {
     return fixup13(input_);
   }
   return fixup10(input_);
@@ -92,8 +92,8 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
   // A perfect ISBN has 9 digits plus either an 'X' or another digit
   // A perfect ISBN may have 2 or 3 hyphens
   // The final digit or 'X' is the correct check sum
-  static const QRegExp isbn(QString::fromLatin1("(\\d-?){9,11}-[\\dX]"));
-  uint len = input_.length();
+  static const QRegExp isbn(QLatin1String("(\\d-?){9,11}-[\\dX]"));
+  int len = input_.length();
 /*
   // Don't do this since the hyphens may be in the wrong place, can't put that in a regexp
   if(isbn.exactMatch(input_) // put the exactMatch() first since I use matchedLength() later
@@ -103,9 +103,9 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
   }
 */
   // two easy invalid cases are too many hyphens and the 'X' not in the last position
-  if(input_.contains('-') > 3
-     || input_.contains('X', false) > 1
-     || (input_.find('X', 0, false) != -1 && input_[len-1].upper() != 'X')) {
+  if(input_.count('-') > 3
+     || input_.count('X', Qt::CaseInsensitive) > 1
+     || (input_.indexOf('X', 0, Qt::CaseInsensitive) != -1 && input_[len-1].toUpper() != 'X')) {
     return QValidator::Invalid;
   }
 
@@ -114,15 +114,15 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
 
   // fix the case where the user attempts to delete a character from a non-checksum
   // position; the solution is to delete the checksum, but only if it's X
-  if(!atEnd && input_[len-1].upper() == 'X') {
+  if(!atEnd && input_[len-1].toUpper() == 'X') {
     input_.truncate(len-1);
     --len;
   }
 
   // fix the case where the user attempts to delete the checksum; the
   // solution is to delete the last digit as well
-  static const QRegExp digit(QString::fromLatin1("\\d"));
-  if(atEnd && input_.contains(digit) == 9 && input_[len-1] == '-') {
+  static const QRegExp digit(QLatin1String("\\d"));
+  if(atEnd && input_.count(digit) == 9 && input_[len-1] == '-') {
     input_.truncate(len-2);
     pos_ -= 2;
     len -= 2;
@@ -147,18 +147,18 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
   // A perfect ISBN13 has 13 digits
   // A perfect ISBN13 may have 3 or 4 hyphens
   // The final digit is the correct check sum
-  static const QRegExp isbn(QString::fromLatin1("(\\d-?){13,17}"));
-  uint len = input_.length();
+  static const QRegExp isbn(QLatin1String("(\\d-?){13,17}"));
+  int len = input_.length();
 
-  const uint countX = input_.contains('X', false);
+  const uint countX = input_.count('X', Qt::CaseInsensitive);
   // two easy invalid cases are too many hyphens or 'X'
-  if(input_.contains('-') > 4 || countX > 1) {
+  if(input_.count('-') > 4 || countX > 1) {
     return QValidator::Invalid;
   }
 
   // now, it's not certain that we're getting a EAN-13,
   // it could be a ISBN-10 from Nigeria or Indonesia
-  if(countX > 0 && (input_[len-1].upper() != 'X' || len > 13)) {
+  if(countX > 0 && (input_[len-1].toUpper() != 'X' || len > 13)) {
     return QValidator::Invalid;
   }
 
@@ -167,15 +167,15 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
 
   // fix the case where the user attempts to delete a character from a non-checksum
   // position; the solution is to delete the checksum, but only if it's X
-  if(!atEnd && input_[len-1].upper() == 'X') {
+  if(!atEnd && input_[len-1].toUpper() == 'X') {
     input_.truncate(len-1);
     --len;
   }
 
   // fix the case where the user attempts to delete the checksum; the
   // solution is to delete the last digit as well
-  static const QRegExp digit(QString::fromLatin1("\\d"));
-  const uint countN = input_.contains(digit);
+  static const QRegExp digit(QLatin1String("\\d"));
+  const uint countN = input_.count(digit);
   if(atEnd && (countN == 12 || countN == 9) && input_[len-1] == '-') {
     input_.truncate(len-2);
     pos_ -= 2;
@@ -207,10 +207,10 @@ void ISBNValidator::fixup10(QString& input_) {
   }
 
   //replace "x" with "X"
-  input_.replace('x', QString::fromLatin1("X"));
+  input_.replace('x', 'X');
 
   // remove invalid chars
-  static const QRegExp badChars(QString::fromLatin1("[^\\d-X]"));
+  static const QRegExp badChars(QLatin1String("[^\\d-X]"));
   input_.remove(badChars);
 
   // special case for EAN values that start with 978 or 979. That's the case
@@ -222,8 +222,8 @@ void ISBNValidator::fixup10(QString& input_) {
   // I consider the likelihood that someone wants to input an EAN to be higher than someone
   // using a Nigerian ISBN and not noticing that the checksum gets added automatically.
   if(input_.length() > 12
-     && (input_.startsWith(QString::fromLatin1("978"))
-         || input_.startsWith(QString::fromLatin1("979")))) {
+     && (input_.startsWith(QLatin1String("978"))
+         || input_.startsWith(QLatin1String("979")))) {
      // Strip the first 4 characters (the invalid publisher)
      input_ = input_.right(input_.length() - 3);
   }
@@ -234,11 +234,11 @@ void ISBNValidator::fixup10(QString& input_) {
   // the user inserts one, then be sure to put it back
 
   // Find the first hyphen. If there is none,
-  // input_.find('-') returns -1 and hyphen2_position = 0
-  int hyphen2_position = input_.find('-') + 1;
+  // input_.indexOf('-') returns -1 and hyphen2_position = 0
+  int hyphen2_position = input_.indexOf('-') + 1;
 
   // Find the second one. If none, hyphen2_position = -2
-  hyphen2_position = input_.find('-', hyphen2_position) - 1;
+  hyphen2_position = input_.indexOf('-', hyphen2_position) - 1;
 
   // The second hyphen can not be in the last characters
   if(hyphen2_position >= 9) {
@@ -248,7 +248,7 @@ void ISBNValidator::fixup10(QString& input_) {
   // Remove all existing hyphens. We will insert ours.
   input_.remove('-');
   // the only place that 'X' can be is last spot
-  for(int xpos = input_.find('X'); xpos > -1; xpos = input_.find('X', xpos+1)) {
+  for(int xpos = input_.indexOf('X'); xpos > -1; xpos = input_.indexOf('X', xpos+1)) {
     if(xpos < 9) { // remove if not 10th char
       input_.remove(xpos, 1);
       --xpos;
@@ -259,15 +259,15 @@ void ISBNValidator::fixup10(QString& input_) {
   // If we can find it, add the checksum
   // but only if not started with 978 or 979
   if(input_.length() > 8
-     && !input_.startsWith(QString::fromLatin1("978"))
-     && !input_.startsWith(QString::fromLatin1("979"))) {
+     && !input_.startsWith(QLatin1String("978"))
+     && !input_.startsWith(QLatin1String("979"))) {
     input_[9] = checkSum10(input_);
   }
 
-  ulong range = input_.leftJustify(9, '0', true).toULong();
+  ulong range = input_.leftJustified(9, '0', true).toULong();
 
   // now find which band the range falls in
-  uint band = 0;
+  int band = 0;
   while(range >= bands[band].MaxValue) {
     ++band;
   }
@@ -289,7 +289,7 @@ void ISBNValidator::fixup10(QString& input_) {
   }
 
   // add a "-" before the checkdigit and another one if the middle "-" exists
-  uint trueLast = bands[band].Last + 1 + (hyphen2_position > 0 ? 1 : 0);
+  int trueLast = bands[band].Last + 1 + (hyphen2_position > 0 ? 1 : 0);
   if(input_.length() > trueLast) {
     input_.insert(trueLast, '-');
   }
@@ -301,7 +301,7 @@ void ISBNValidator::fixup13(QString& input_) {
   }
 
   // remove invalid chars
-  static const QRegExp badChars(QString::fromLatin1("[^\\d-]"));
+  static const QRegExp badChars(QLatin1String("[^\\d-]"));
   input_.remove(badChars);
 
   // hyphen placement for some languages publishers is well-defined
@@ -315,11 +315,11 @@ void ISBNValidator::fixup13(QString& input_) {
   }
 
   // Find the first hyphen. If there is none,
-  // input_.find('-') returns -1 and hyphen2_position = 0
-  int hyphen2_position = after.find('-') + 1;
+  // input_.indexOf('-') returns -1 and hyphen2_position = 0
+  int hyphen2_position = after.indexOf('-') + 1;
 
   // Find the second one. If none, hyphen2_position = -2
-  hyphen2_position = after.find('-', hyphen2_position) - 1;
+  hyphen2_position = after.indexOf('-', hyphen2_position) - 1;
 
   // The second hyphen can not be in the last characters
   if(hyphen2_position >= 9) {
@@ -335,10 +335,10 @@ void ISBNValidator::fixup13(QString& input_) {
     after[9] = checkSum13(input_.left(3) + after);
   }
 
-  ulong range = after.leftJustify(9, '0', true).toULong();
+  ulong range = after.leftJustified(9, '0', true).toULong();
 
   // now find which band the range falls in
-  uint band = 0;
+  int band = 0;
   while(range >= bands[band].MaxValue) {
     ++band;
   }
@@ -360,7 +360,7 @@ void ISBNValidator::fixup13(QString& input_) {
   }
 
   // add a "-" before the checkdigit and another one if the middle "-" exists
-  uint trueLast = bands[band].Last + 1 + (hyphen2_position > 0 ? 1 : 0);
+  int trueLast = bands[band].Last + 1 + (hyphen2_position > 0 ? 1 : 0);
   if(after.length() > trueLast) {
     after.insert(trueLast, '-');
   }
@@ -372,7 +372,7 @@ QChar ISBNValidator::checkSum10(const QString& input_) {
   uint multiplier = 10;
 
   // hyphens are already gone, only use first nine digits
-  for(uint i = 0; i < input_.length() && multiplier > 1; ++i) {
+  for(int i = 0; i < input_.length() && multiplier > 1; ++i) {
     sum += input_[i].digitValue() * multiplier--;
   }
   sum %= 11;
@@ -392,9 +392,9 @@ QChar ISBNValidator::checkSum10(const QString& input_) {
 QChar ISBNValidator::checkSum13(const QString& input_) {
   uint sum = 0;
 
-  const uint len = QMIN(12, input_.length());
+  const int len = qMin(12, input_.length());
   // hyphens are already gone, only use first twelve digits
-  for(uint i = 0; i < len; ++i) {
+  for(int i = 0; i < len; ++i) {
     sum += input_[i].digitValue() * (1 + 2*(i%2));
     // multiplier goes 1, 3, 1, 3, etc...
   }
@@ -484,3 +484,5 @@ struct ISBNValidator::isbn_band ISBNValidator::bands[] = {
   ISBNGRP_4DIGIT(9989,  ISBNPUB_2DIGIT(99),      0, 9),
   ISBNGRP_5DIGIT(99999, ISBNPUB_2DIGIT(99),      0, 9)
 };
+
+#include "isbnvalidator.moc"

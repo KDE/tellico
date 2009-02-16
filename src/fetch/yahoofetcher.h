@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,22 +14,18 @@
 #ifndef YAHOOFETCHER_H
 #define YAHOOFETCHER_H
 
-namespace Tellico {
-  class XSLTHandler;
-}
-
 #include "fetcher.h"
 #include "configwidget.h"
-#include "../datavectors.h"
 
-#include <qcstring.h> // for QByteArray
-#include <qguardedptr.h>
+#include <QPointer>
 
+class KJob;
 namespace KIO {
-  class Job;
+  class StoredTransferJob;
 }
 
 namespace Tellico {
+  class XSLTHandler;
   namespace Fetch {
 
 /**
@@ -41,7 +37,7 @@ Q_OBJECT
 public:
   /**
    */
-  YahooFetcher(QObject* parent, const char* name = 0);
+  YahooFetcher(QObject* parent);
   /**
    */
   virtual ~YahooFetcher();
@@ -77,23 +73,21 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   void initXSLTHandler();
   void doSearch();
   void getTracks(Data::EntryPtr entry);
-  QString insertValue(const QString& str, const QString& value, uint pos);
+  QString insertValue(const QString& str, const QString& value, int pos);
 
   XSLTHandler* m_xsltHandler;
   int m_limit;
   int m_start;
   int m_total;
 
-  QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;
   QString m_value;

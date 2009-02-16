@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "entryeditdialog.h"
-#include "gui/tabcontrol.h"
+#include "gui/tabwidget.h"
 #include "collection.h"
 #include "controller.h"
 #include "field.h"
@@ -20,25 +20,19 @@
 #include "tellico_utils.h"
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
-#include "latin1literal.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kaccelmanager.h>
-#include <kiconloader.h>
-#include <kdeversion.h>
+#include <kacceleratormanager.h>
 #include <kpushbutton.h>
-#include <kaccel.h>
+#include <kaction.h>
+#include <KVBox>
 
-#include <qlayout.h>
-#include <qstringlist.h>
-#include <qpushbutton.h>
-#include <qvaluevector.h>
-#include <qvbox.h>
-#include <qobjectlist.h>
-#include <qtabbar.h>
-#include <qstyle.h>
-#include <qapplication.h>
+#include <QStringList>
+#include <QObject>
+#include <QStyle>
+#include <QApplication>
+#include <QGridLayout>
 
 namespace {
   // must be an even number
@@ -47,53 +41,60 @@ namespace {
 
 using Tellico::EntryEditDialog;
 
-EntryEditDialog::EntryEditDialog(QWidget* parent_, const char* name_)
-    : KDialogBase(parent_, name_, false, i18n("Edit Entry"), Help|User1|User2|User3|Apply|Close, User1, false,
-                  KGuiItem(i18n("&New Entry"))),
-      m_currColl(0),
-      m_tabs(new GUI::TabControl(this)),
+EntryEditDialog::EntryEditDialog(QWidget* parent_)
+    : KDialog(parent_),
+      m_tabs(new GUI::TabWidget(this)),
       m_modified(false),
       m_isOrphan(false),
       m_isWorking(false),
       m_needReset(false) {
+  setCaption(i18n("Edit Entry"));
+  setButtons(Help|User1|User2|User3|Apply|Close);
+  setDefaultButton(User1);
+  setButtonGuiItem(User1, KGuiItem(i18n("&New Entry")));
+
   setMainWidget(m_tabs);
 
   m_prevBtn = User3;
   m_nextBtn = User2;
   m_newBtn  = User1;
   m_saveBtn = Apply;
-  KGuiItem save = KStdGuiItem::save();
+  KGuiItem save = KStandardGuiItem::save();
   save.setText(i18n("Sa&ve Entry"));
   setButtonGuiItem(m_saveBtn, save);
   enableButton(m_saveBtn, false);
 
+  connect(this, SIGNAL(closeClicked()), SLOT(slotClose()));
   connect(this, SIGNAL(applyClicked()), SLOT(slotHandleSave()));
   connect(this, SIGNAL(user1Clicked()), SLOT(slotHandleNew()));
   connect(this, SIGNAL(user2Clicked()), SLOT(slotGoNextEntry()));
   connect(this, SIGNAL(user3Clicked()), SLOT(slotGoPrevEntry()));
 
   KGuiItem prev;
-  prev.setIconName(QString::fromLatin1(QApplication::reverseLayout() ? "forward" : "back"));
+  prev.setIconName(QString::fromLatin1(QApplication::isLeftToRight() ? "go-previous" : "go-next"));
   prev.setToolTip(i18n("Go to the previous entry in the collection"));
   prev.setWhatsThis(prev.toolTip());
 
   KGuiItem next;
-  next.setIconName(QString::fromLatin1(QApplication::reverseLayout() ? "back" : "forward"));
+  next.setIconName(QString::fromLatin1(QApplication::isLeftToRight() ? "go-next" : "go-previous"));
   next.setToolTip(i18n("Go to the next entry in the collection"));
   next.setWhatsThis(next.toolTip());
 
   setButtonGuiItem(m_nextBtn, next);
   setButtonGuiItem(m_prevBtn, prev);
 
-  KAccel* accel = new KAccel(this);
-  accel->insert(QString::fromLatin1("Go Prev"), QString(), prev.toolTip(), Qt::Key_PageUp,
-                Controller::self(), SLOT(slotGoPrevEntry()));
-  accel->insert(QString::fromLatin1("Go Next"), QString(), next.toolTip(), Qt::Key_PageDown,
-                Controller::self(), SLOT(slotGoNextEntry()));
+  // these are just fror the key shortcuts
+  KAction* newAct = new KAction(QString::fromLatin1("Go Prev"), this);
+  newAct->setShortcut(Qt::Key_PageUp);
+  connect(newAct, SIGNAL(triggered()), Controller::self(), SLOT(slotGoPrevEntry()));
+  newAct = new KAction(QString::fromLatin1("Go Next"), this);
+  newAct->setShortcut(Qt::Key_PageDown);
+  connect(newAct, SIGNAL(triggered()), Controller::self(), SLOT(slotGoNextEntry()));
 
   setHelp(QString::fromLatin1("entry-editor"));
 
-  resize(configDialogSize(QString::fromLatin1("Edit Dialog Options")));
+  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Edit Dialog Options"));
+  restoreDialogSize(config);
 }
 
 void EntryEditDialog::slotClose() {
@@ -104,6 +105,8 @@ void EntryEditDialog::slotClose() {
 //    blockSignals(true);
 //    slotHandleNew();
 //    blockSignals(false);
+    KConfigGroup config(KGlobal::config(), QString::fromLatin1("Edit Dialog Options"));
+    saveDialogSize(config);
   }
 }
 
@@ -120,17 +123,21 @@ void EntryEditDialog::slotReset() {
 
   m_modified = false;
 
-  m_tabs->clear(); // GUI::FieldWidgets get deleted here
+  while(m_tabs->count() > 0) {
+    QWidget* widget = m_tabs->widget(0);
+    m_tabs->removeTab(0);
+    delete widget;
+  }
   m_widgetDict.clear();
 }
 
-void EntryEditDialog::setLayout(Data::CollPtr coll_) {
+void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
   if(!coll_ || m_isWorking) {
     return;
   }
 //  myDebug() << "EntryEditDialog::setLayout()" << endl;
 
-  actionButton(m_newBtn)->setIconSet(UserIconSet(coll_->typeName()));
+  button(m_newBtn)->setIcon(KIcon(coll_->typeName()));
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {
@@ -142,13 +149,13 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
   m_currColl = coll_;
 
   int maxHeight = 0;
-  QPtrList<QWidget> gridList;
+  QList<QWidget*> gridList;
   bool noChoices = true;
 
   bool focusedFirst = false;
   QStringList catList = m_currColl->fieldCategories();
-  for(QStringList::ConstIterator catIt = catList.begin(); catIt != catList.end(); ++catIt) {
-    Data::FieldVec fields = m_currColl->fieldsByCategory(*catIt);
+  for(QStringList::ConstIterator catIt = catList.constBegin(); catIt != catList.constEnd(); ++catIt) {
+    Data::FieldList fields = m_currColl->fieldsByCategory(*catIt);
     if(fields.isEmpty()) { // sanity check
       continue;
     }
@@ -156,18 +163,14 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
     // if this layout model is changed, be sure to check slotUpdateField()
     QWidget* page = new QWidget(m_tabs);
     // (parent, margin, spacing)
-    QVBoxLayout* boxLayout = new QVBoxLayout(page, 0, 0);
+    QBoxLayout* boxLayout = new QVBoxLayout(page);
 
     QWidget* grid = new QWidget(page);
     gridList.append(grid);
     // (parent, nrows, ncols, margin, spacing)
     // spacing gets a bit weird, if there are absolutely no Choice fields,
     // then spacing should be 5, which is set later
-    QGridLayout* layout = new QGridLayout(grid, 0, NCOLS, 8, 2);
-    // keramik styles make big widget, cut down the spacing a bit
-    if(QCString(style().name()).lower().find("keramik", 0, false) > -1) {
-      layout->setSpacing(0);
-    }
+    QGridLayout* layout = new QGridLayout(grid);
 
     boxLayout->addWidget(grid, 0);
     // those with multiple, get a stretch
@@ -176,12 +179,11 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
     }
 
     // keep track of which should expand
-    QValueVector<bool> expands(NCOLS, false);
-    QValueVector<int> maxWidth(NCOLS, 0);
+    QVector<bool> expands(NCOLS, false);
+    QVector<int> maxWidth(NCOLS, 0);
 
-    Data::FieldVec::Iterator it = fields.begin(); // needed later
-    for(int count = 0; it != fields.end(); ++it) {
-      Data::FieldPtr field = it;
+    int count = 0;
+    foreach(Data::FieldPtr field, fields) {
       // ReadOnly and Dependent fields don't get widgets
       if(field->type() == Data::Field::ReadOnly || field->type() == Data::Field::Dependent) {
         continue;
@@ -195,7 +197,7 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
         continue;
       }
       connect(widget, SIGNAL(modified()), SLOT(slotSetModified()));
-      if(!focusedFirst && widget->isFocusEnabled()) {
+      if(!focusedFirst && widget->focusPolicy() != Qt::NoFocus) {
         widget->setFocus();
         focusedFirst = true;
       }
@@ -207,21 +209,21 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
 
       m_widgetDict.insert(QString::number(m_currColl->id()) + field->name(), widget);
 
-      maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
+      maxWidth[count%NCOLS] = qMax(maxWidth[count%NCOLS], widget->labelWidth());
       if(widget->expands()) {
         expands[count%NCOLS] = true;
       }
       widget->updateGeometry();
       if(!field->isSingleCategory()) {
-        maxHeight = QMAX(maxHeight, widget->minimumSizeHint().height());
+        maxHeight = qMax(maxHeight, widget->minimumSizeHint().height());
       }
       ++count;
     }
 
     // now, the labels in a column should all be the same width
-    it = fields.begin();
-    for(int count = 0; it != fields.end(); ++it) {
-      GUI::FieldWidget* widget = m_widgetDict.find(QString::number(m_currColl->id()) + it->name());
+    count = 0;
+    foreach(Data::FieldPtr field, fields) {
+      GUI::FieldWidget* widget = m_widgetDict.value(QString::number(m_currColl->id()) + field->name());
       if(widget) {
         widget->setLabelWidth(maxWidth[count%NCOLS]);
         ++count;
@@ -231,7 +233,7 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
     // update stretch factors for columns with a line edit
     for(int col = 0; col < NCOLS; ++col) {
       if(expands[col]) {
-        layout->setColStretch(col, 1);
+        layout->setColumnStretch(col, 1);
       }
     }
 
@@ -239,19 +241,22 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
   }
 
   // Now, go through and set all the field widgets to the same height
-  for(QPtrListIterator<QWidget> it(gridList); it.current(); ++it) {
-    QGridLayout* l = static_cast<QGridLayout*>(it.current()->layout());
+  foreach(QWidget* grid, gridList) {
+    QGridLayout* l = static_cast<QGridLayout*>(grid->layout());
     if(noChoices) {
       l->setSpacing(5);
     }
-    for(int row = 0; row < l->numRows() && it.current()->children()->count() > 1; ++row) {
-      l->addRowSpacing(row, maxHeight);
+    for(int row = 0; row < l->rowCount() && grid->children().count() > 1; ++row) {
+      l->setRowMinimumHeight(row, maxHeight);
     }
     // I don't want anything to be hidden, Keramik has a bug if I don't do this
-    it.current()->setMinimumHeight(it.current()->sizeHint().height());
+    grid->setMinimumHeight(grid->sizeHint().height());
     // the parent of the grid is the page that got added to the tabs
-    it.current()->parentWidget()->layout()->invalidate();
-    it.current()->parentWidget()->setMinimumHeight(it.current()->parentWidget()->sizeHint().height());
+    grid->parentWidget()->layout()->invalidate();
+    grid->parentWidget()->setMinimumHeight(grid->parentWidget()->sizeHint().height());
+
+    // also, no accels for the field widgets
+    KAcceleratorManager::setNoAccel(grid);
   }
 
   setUpdatesEnabled(true);
@@ -262,11 +267,7 @@ void EntryEditDialog::setLayout(Data::CollPtr coll_) {
   m_tabs->setMinimumHeight(m_tabs->minimumSizeHint().height());
   m_tabs->setMinimumWidth(m_tabs->sizeHint().width());
 
-  // update keyboard accels
-  // only want to manage tabBar()
-  KAcceleratorManager::manage(m_tabs->tabBar());
-
-  m_tabs->setCurrentPage(0);
+  m_tabs->setCurrentIndex(0);
 
   m_isWorking = false;
   slotHandleNew();
@@ -278,7 +279,7 @@ void EntryEditDialog::slotHandleNew() {
     return;
   }
 
-  m_tabs->setCurrentPage(0);
+  m_tabs->setCurrentIndex(1);
   m_tabs->setFocusToFirstChild();
   clear();
   m_isWorking = true; // clear() will get called again
@@ -288,7 +289,7 @@ void EntryEditDialog::slotHandleNew() {
   enableButton(m_prevBtn, false);
   enableButton(m_nextBtn, false);
 
-  Data::EntryPtr entry = new Data::Entry(m_currColl);
+  Data::EntryPtr entry(new Data::Entry(m_currColl));
   m_currEntries.append(entry);
   m_isOrphan = true;
 }
@@ -302,20 +303,20 @@ void EntryEditDialog::slotHandleSave() {
 
   if(m_currEntries.isEmpty()) {
     myDebug() << "EntryEditDialog::slotHandleSave() - creating new entry" << endl;
-    m_currEntries.append(new Data::Entry(m_currColl));
+    m_currEntries.append(Data::EntryPtr(new Data::Entry(m_currColl)));
     m_isOrphan = true;
   }
 
   // add a message box if multiple items are selected
   if(m_currEntries.count() > 1) {
     QStringList names;
-    for(Data::EntryVec::ConstIterator entry = m_currEntries.constBegin(); entry != m_currEntries.constEnd(); ++entry) {
+    foreach(Data::EntryPtr entry, m_currEntries) {
       names += entry->title();
     }
     QString str(i18n("Do you really want to modify these entries?"));
     QString dontAsk = QString::fromLatin1("SaveMultipleBooks"); // don't change 'books', invisible anyway
     int ret = KMessageBox::questionYesNoList(this, str, names, i18n("Modify Multiple Entries"),
-                                             KStdGuiItem::yes(), KStdGuiItem::no(), dontAsk);
+                                             KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk);
     if(ret != KMessageBox::Yes) {
       m_isWorking = false;
       return;
@@ -324,19 +325,19 @@ void EntryEditDialog::slotHandleSave() {
 
   GUI::CursorSaver cs;
 
-  Data::EntryVec oldEntries;
-  Data::FieldVec fields = m_currColl->fields();
-  Data::FieldVec fieldsRequiringValues;
+  Data::EntryList oldEntries;
+  Data::FieldList fields = m_currColl->fields();
+  Data::FieldList fieldsRequiringValues;
   // boolean to keep track if any field gets changed
   bool modified = false;
-  for(Data::EntryVecIt entry = m_currEntries.begin(); entry != m_currEntries.end(); ++entry) {
+  foreach(Data::EntryPtr entry, m_currEntries) {
     // if the entry is owned, then we're modifying an existing entry, keep a copy of the old one
     if(entry->isOwned()) {
-      oldEntries.append(new Data::Entry(*entry));
+      oldEntries.append(Data::EntryPtr(new Data::Entry(*entry)));
     }
-    for(Data::FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+    foreach(Data::FieldPtr fIt, fields) {
       QString key = QString::number(m_currColl->id()) + fIt->name();
-      GUI::FieldWidget* widget = m_widgetDict.find(key);
+      GUI::FieldWidget* widget = m_widgetDict.value(key);
       if(widget && widget->isEnabled()) {
         QString temp = widget->text();
         // ok to set field empty string, just not all of them
@@ -345,9 +346,9 @@ void EntryEditDialog::slotHandleSave() {
         }
         entry->setField(fIt, temp);
         if(temp.isEmpty()) {
-          QString prop = fIt->property(QString::fromLatin1("required")).lower();
-          if(prop == Latin1Literal("1") || prop == Latin1Literal("true")) {
-            fieldsRequiringValues.append(fIt.data());
+          QString prop = fIt->property(QString::fromLatin1("required")).toLower();
+          if(prop == QLatin1String("1") || prop == QLatin1String("true")) {
+            fieldsRequiringValues.append(fIt);
           }
         }
       }
@@ -355,15 +356,15 @@ void EntryEditDialog::slotHandleSave() {
   }
 
   if(!fieldsRequiringValues.isEmpty()) {
-    GUI::CursorSaver cs2(Qt::arrowCursor);
+    GUI::CursorSaver cs2(Qt::ArrowCursor);
     QString str = i18n("A value is required for the following fields. Do you want to continue?");
     QStringList titles;
-    for(Data::FieldVecIt it = fieldsRequiringValues.begin(); it != fieldsRequiringValues.end(); ++it) {
+    foreach(Data::FieldPtr it, fieldsRequiringValues) {
       titles << it->title();
     }
     QString dontAsk = QString::fromLatin1("SaveWithoutRequired");
     int ret = KMessageBox::questionYesNoList(this, str, titles, i18n("Modify Entries"),
-                                             KStdGuiItem::yes(), KStdGuiItem::no(), dontAsk);
+                                             KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk);
     if(ret != KMessageBox::Yes) {
       m_isWorking = false;
       return;
@@ -397,17 +398,17 @@ void EntryEditDialog::clear() {
 
   m_isWorking = true;
   // clear the widgets
-  for(QDictIterator<GUI::FieldWidget> it(m_widgetDict); it.current(); ++it) {
-    it.current()->setEnabled(true);
-    it.current()->clear();
-    it.current()->insertDefault();
+  foreach(GUI::FieldWidget* widget, m_widgetDict) {
+    widget->setEnabled(true);
+    widget->clear();
+    widget->insertDefault();
   }
 
   setCaption(i18n("Edit Entry"));
 
   if(m_isOrphan) {
     if(m_currEntries.count() > 1) {
-      kdWarning() << "EntryEditDialog::clear() - is an orphan, but more than one" << endl;
+      kWarning() << "EntryEditDialog::clear() - is an orphan, but more than one";
     }
     m_isOrphan = false;
   }
@@ -420,7 +421,7 @@ void EntryEditDialog::clear() {
   m_isWorking = false;
 }
 
-void EntryEditDialog::setContents(Data::EntryVec entries_) {
+void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
   // this slot might get called if we try to save multiple items, so just return
   if(m_isWorking) {
     return;
@@ -459,20 +460,17 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
   m_isWorking = true;
   blockSignals(true);
 
-  Data::EntryVec::ConstIterator entry;
-  Data::FieldVec fields = m_currColl->fields();
-  for(Data::FieldVec::Iterator fIt = fields.begin(); fIt != fields.end(); ++fIt) {
+  foreach(Data::FieldPtr fIt, m_currColl->fields()) {
     QString key = QString::number(m_currColl->id()) + fIt->name();
-    GUI::FieldWidget* widget = m_widgetDict.find(key);
+    GUI::FieldWidget* widget = m_widgetDict.value(key);
     if(!widget) { // probably read-only
       continue;
     }
     widget->editMultiple(true);
 
     QString value = entries_[0]->field(fIt);
-    entry = entries_.constBegin();
-    for(++entry; entry != entries_.constEnd(); ++entry) { // skip checking the first one
-      if(entry->field(fIt) != value) {
+    for(int i = 1; i < entries_.count(); ++i) {  // skip checking the first one
+      if(entries_[i]->field(fIt) != value) {
         widget->setEnabled(false);
         break;
       }
@@ -488,7 +486,7 @@ void EntryEditDialog::setContents(Data::EntryVec entries_) {
   setButtonText(m_saveBtn, i18n("Sa&ve Entries"));
 }
 
-void EntryEditDialog::setContents(Data::EntryPtr entry_) {
+void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
   bool ok = queryModified();
   if(!ok || m_isWorking) {
     return;
@@ -517,14 +515,11 @@ void EntryEditDialog::setContents(Data::EntryPtr entry_) {
     m_currColl = entry_->collection();
   }
 
-//  m_tabs->showTab(0);
-
   slotSetModified(false);
 
-  Data::FieldVec fields = m_currColl->fields();
-  for(Data::FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+  foreach(Data::FieldPtr field, m_currColl->fields()) {
     QString key = QString::number(m_currColl->id()) + field->name();
-    GUI::FieldWidget* widget = m_widgetDict.find(key);
+    GUI::FieldWidget* widget = m_widgetDict.value(key);
     if(!widget) { // is probably read-only
       continue;
     }
@@ -545,42 +540,43 @@ void EntryEditDialog::setContents(Data::EntryPtr entry_) {
   m_isWorking = false;
 }
 
-void EntryEditDialog::removeField(Data::CollPtr, Data::FieldPtr field_) {
+void EntryEditDialog::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr field_) {
   if(!field_) {
     return;
   }
 
 //  myDebug() << "EntryEditDialog::removeField - name = " << field_->name() << endl;
   QString key = QString::number(m_currColl->id()) + field_->name();
-  GUI::FieldWidget* widget = m_widgetDict.find(key);
+  GUI::FieldWidget* widget = m_widgetDict.value(key);
   if(widget) {
     m_widgetDict.remove(key);
     // if this is the last field in the category, need to remove the tab page
     // this function is called after the field has been removed from the collection,
     // so the category should be gone from the category list
-    if(m_currColl->fieldCategories().findIndex(field_->category()) == -1) {
+    if(m_currColl->fieldCategories().indexOf(field_->category()) == -1) {
 //      myDebug() << "last field in the category" << endl;
       // fragile, widget's parent is the grid, whose parent is the tab page
       QWidget* w = widget->parentWidget()->parentWidget();
-      m_tabs->removePage(w);
+      m_tabs->removeTab(m_tabs->indexOf(w));
       delete w; // automatically deletes child widget
     } else {
       // much of this replicates code in setLayout()
       QGridLayout* layout = static_cast<QGridLayout*>(widget->parentWidget()->layout());
       delete widget; // automatically removes from layout
 
-      QValueVector<bool> expands(NCOLS, false);
-      QValueVector<int> maxWidth(NCOLS, 0);
+      QVector<bool> expands(NCOLS, false);
+      QVector<int> maxWidth(NCOLS, 0);
 
-      Data::FieldVec vec = m_currColl->fieldsByCategory(field_->category());
-      Data::FieldVec::Iterator it = vec.begin();
-      for(int count = 0; it != vec.end(); ++it) {
-        GUI::FieldWidget* widget = m_widgetDict.find(QString::number(m_currColl->id()) + it->name());
+      Data::FieldList vec = m_currColl->fieldsByCategory(field_->category());
+      Data::FieldList::Iterator it = vec.begin();
+      int count = 0;
+      foreach(Data::FieldPtr field, vec) {
+        GUI::FieldWidget* widget = m_widgetDict.value(QString::number(m_currColl->id()) + field->name());
         if(widget) {
-          layout->remove(widget);
+          layout->removeWidget(widget);
           layout->addWidget(widget, count/NCOLS, count%NCOLS);
 
-          maxWidth[count%NCOLS] = QMAX(maxWidth[count%NCOLS], widget->labelWidth());
+          maxWidth[count%NCOLS] = qMax(maxWidth[count%NCOLS], widget->labelWidth());
           if(widget->expands()) {
             expands[count%NCOLS] = true;
           }
@@ -590,9 +586,9 @@ void EntryEditDialog::removeField(Data::CollPtr, Data::FieldPtr field_) {
       }
 
       // now, the labels in a column should all be the same width
-      it = vec.begin();
-      for(int count = 0; it != vec.end(); ++it) {
-        GUI::FieldWidget* widget = m_widgetDict.find(QString::number(m_currColl->id()) + it->name());
+      count = 0;
+      foreach(Data::FieldPtr field, vec) {
+        GUI::FieldWidget* widget = m_widgetDict.value(QString::number(m_currColl->id()) + field->name());
         if(widget) {
           widget->setLabelWidth(maxWidth[count%NCOLS]);
           ++count;
@@ -602,14 +598,14 @@ void EntryEditDialog::removeField(Data::CollPtr, Data::FieldPtr field_) {
       // update stretch factors for columns with a line edit
       for(int col = 0; col < NCOLS; ++col) {
         if(expands[col]) {
-          layout->setColStretch(col, 1);
+          layout->setColumnStretch(col, 1);
         }
       }
     }
   }
 }
 
-void EntryEditDialog::updateCompletions(Data::EntryPtr entry_) {
+void EntryEditDialog::updateCompletions(Tellico::Data::EntryPtr entry_) {
 #ifndef NDEBUG
   if(m_currColl != entry_->collection()) {
     myDebug() << "EntryEditDialog::updateCompletions - inconsistent collection pointers!" << endl;
@@ -617,21 +613,20 @@ void EntryEditDialog::updateCompletions(Data::EntryPtr entry_) {
   }
 #endif
 
-  Data::FieldVec fields = m_currColl->fields();
-  for(Data::FieldVec::Iterator it = fields.begin(); it != fields.end(); ++it) {
+  foreach(Data::FieldPtr it, m_currColl->fields()) {
     if(it->type() != Data::Field::Line
        || !(it->flags() & Data::Field::AllowCompletion)) {
       continue;
     }
 
     QString key = QString::number(m_currColl->id()) + it->name();
-    GUI::FieldWidget* widget = m_widgetDict.find(key);
+    GUI::FieldWidget* widget = m_widgetDict.value(key);
     if(!widget) {
       continue;
     }
     if(it->flags() & Data::Field::AllowMultiple) {
       QStringList items = entry_->fields(it, false);
-      for(QStringList::ConstIterator it = items.begin(); it != items.end(); ++it) {
+      for(QStringList::ConstIterator it = items.constBegin(); it != items.constEnd(); ++it) {
         widget->addCompletionObjectItem(*it);
       }
     } else {
@@ -649,16 +644,16 @@ bool EntryEditDialog::queryModified() {
 //  myDebug() << "EntryEditDialog::queryModified() - modified is " << (m_modified?"true":"false") << endl;
   bool ok = true;
   // assume that if the dialog is hidden, we shouldn't ask the user to modify changes
-  if(!isShown()) {
+  if(!isVisible()) {
     m_modified = false;
   }
   if(m_modified) {
     QString str(i18n("The current entry has been modified.\n"
                       "Do you want to enter the changes?"));
-    KGuiItem item = KStdGuiItem::save();
+    KGuiItem item = KStandardGuiItem::save();
     item.setText(i18n("Save Entry"));
     int want_save = KMessageBox::warningYesNoCancel(this, str, i18n("Unsaved Changes"),
-                                                    item, KStdGuiItem::discard());
+                                                    item, KStandardGuiItem::discard());
     switch(want_save) {
       case KMessageBox::Yes:
         slotHandleSave();
@@ -679,7 +674,7 @@ bool EntryEditDialog::queryModified() {
 }
 
 // modified fields will always have the same name
-void EntryEditDialog::modifyField(Data::CollPtr coll_, Data::FieldPtr oldField_, Data::FieldPtr newField_) {
+void EntryEditDialog::modifyField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
 //  myDebug() << "EntryEditDialog::slotUpdateField() - " << newField_->name() << endl;
 
   if(coll_ != m_currColl) {
@@ -699,40 +694,41 @@ void EntryEditDialog::modifyField(Data::CollPtr coll_, Data::FieldPtr oldField_,
   }
 
   QString key = QString::number(coll_->id()) + oldField_->name();
-  GUI::FieldWidget* widget = m_widgetDict[key];
+  GUI::FieldWidget* widget = m_widgetDict.value(key);
   if(widget) {
     widget->updateField(oldField_, newField_);
     // need to update label widths
     if(newField_->title() != oldField_->title()) {
       int maxWidth = 0;
-      QObjectList* childList = widget->parentWidget()->queryList("Tellico::GUI::FieldWidget", 0, false, false);
-      QObjectListIt it(*childList);
-      for(it.toFirst(); it.current(); ++it) {
-        maxWidth = QMAX(maxWidth, static_cast<GUI::FieldWidget*>(it.current())->labelWidth());
+      QList<GUI::FieldWidget*> childList = widget->parentWidget()->findChildren<GUI::FieldWidget*>();
+      foreach(GUI::FieldWidget* obj, childList) {
+        maxWidth = qMax(maxWidth, obj->labelWidth());
       }
-      for(it.toFirst(); it.current(); ++it) {
-        static_cast<GUI::FieldWidget*>(it.current())->setLabelWidth(maxWidth);
+      foreach(GUI::FieldWidget* obj, childList) {
+        obj->setLabelWidth(maxWidth);
       }
-      delete childList;
     }
     // this is very fragile!
     // field widgets's parent is the grid, whose parent is the tab page
     // this is for singleCategory fields
     if(newField_->category() != oldField_->category()) {
-      m_tabs->setTabLabel(widget->parentWidget()->parentWidget(), newField_->category());
+      int idx = m_tabs->indexOf(widget->parentWidget()->parentWidget());
+      if(idx > -1) {
+        m_tabs->setTabText(idx, newField_->category());
+      }
     }
   }
 }
 
-void EntryEditDialog::addEntries(Data::EntryVec entries_) {
-  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+void EntryEditDialog::addEntries(Tellico::Data::EntryList entries_) {
+  foreach(Data::EntryPtr entry, entries_) {
     updateCompletions(entry);
   }
 }
 
-void EntryEditDialog::modifyEntries(Data::EntryVec entries_) {
+void EntryEditDialog::modifyEntries(Tellico::Data::EntryList entries_) {
   bool updateContents = false;
-  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+  foreach(Data::EntryPtr entry, entries_) {
     updateCompletions(entry);
     if(!updateContents && m_currEntries.contains(entry)) {
       updateContents = true;

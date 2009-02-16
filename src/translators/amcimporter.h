@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,7 +25,7 @@ namespace Tellico {
 class AMCImporter : public DataImporter {
 Q_OBJECT
 public:
-  AMCImporter(const KURL& url);
+  AMCImporter(const KUrl& url);
   virtual ~AMCImporter();
 
   virtual Data::CollPtr collection();
@@ -36,7 +36,7 @@ public slots:
 
 private:
   bool readBool();
-  Q_UINT32 readInt();
+  quint32 readInt();
   QString readString();
   QString readImage(const QString& format);
   void readEntry();

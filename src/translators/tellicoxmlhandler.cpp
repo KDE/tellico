@@ -37,7 +37,7 @@ bool TellicoXMLHandler::startElement(const QString& nsURI_, const QString& local
 
 bool TellicoXMLHandler::endElement(const QString& nsURI_, const QString& localName_,
                                    const QString& qName_) {
-  m_data->text = m_data->text.stripWhiteSpace();
+  m_data->text = m_data->text.trimmed();
 /*
   if(!m_data->text.isEmpty()) {
     myDebug() << " text: " << m_text << endl;
@@ -57,7 +57,7 @@ bool TellicoXMLHandler::characters(const QString& ch_) {
   return true;
 }
 
-QString TellicoXMLHandler::errorString() {
+QString TellicoXMLHandler::errorString() const {
   return m_data->error;
 }
 

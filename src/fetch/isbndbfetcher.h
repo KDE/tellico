@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,20 +14,18 @@
 #ifndef TELLICO_FETCH_ISBNDBFETCHER_H
 #define TELLICO_FETCH_ISBNDBFETCHER_H
 
-namespace Tellico {
-  class XSLTHandler;
-}
-
 #include "fetcher.h"
 #include "configwidget.h"
-#include "../datavectors.h"
 
-#include <kio/job.h>
+#include <QPointer>
 
-#include <qcstring.h> // for QByteArray
-#include <qguardedptr.h>
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
+  class XSLTHandler;
   namespace Fetch {
 
 /**
@@ -37,7 +35,7 @@ class ISBNdbFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  ISBNdbFetcher(QObject* parent = 0, const char* name = 0);
+  ISBNdbFetcher(QObject* parent = 0);
   ~ISBNdbFetcher();
 
   virtual QString source() const;
@@ -66,8 +64,7 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   void initXSLTHandler();
@@ -80,9 +77,8 @@ private:
   int m_numResults;
   int m_countOffset;
 
-  QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;
   QString m_value;

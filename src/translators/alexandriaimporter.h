@@ -19,7 +19,7 @@ class KComboBox;
 #include "importer.h"
 #include "../datavectors.h"
 
-#include <qdir.h>
+#include <QDir>
 
 namespace Tellico {
   namespace Import {
@@ -39,7 +39,7 @@ Q_OBJECT
 public:
   /**
    */
-  AlexandriaImporter() : Importer(), m_coll(0), m_widget(0), m_cancelled(false) {}
+  AlexandriaImporter() : Importer(), m_widget(0), m_cancelled(false) {}
   /**
    */
   virtual ~AlexandriaImporter() {}
@@ -49,7 +49,7 @@ public:
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
+  virtual QWidget* widget(QWidget* parent);
   virtual bool canImport(int type) const;
 
 public slots:

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,7 @@
 #ifndef TELLICO_DEBUG_H
 #define TELLICO_DEBUG_H
 
-// most of this is borrowed from amarok/src/debug.h
+// some of this was borrowed from amarok/src/debug.h
 // which is copyright Max Howell <max.howell@methylblue.com>
 // amarok is licensed under the GPL
 
@@ -24,17 +24,17 @@
 
 // linux has __GNUC_PREREQ, NetBSD has __GNUC_PREREQ__
 #if defined(__GNUC_PREREQ) && !defined(__GNUC_PREREQ__)
-#define __GNUC_PREREQ__ __GNUC_PREREQ
+#  define __GNUC_PREREQ__ __GNUC_PREREQ
 #endif
 
 #if !defined(__GNUC_PREREQ__)
-#if defined __GNUC__
-#define __GNUC_PREREQ__(x, y) \
-        ((__GNUC__ == (x) && __GNUC_MINOR__ >= (y)) || \
-         (__GNUC__ > (x)))
-#else
-#define __GNUC_PREREQ__(x, y)   0
-#endif
+#  if defined __GNUC__
+#    define __GNUC_PREREQ__(x, y) \
+            ((__GNUC__ == (x) && __GNUC_MINOR__ >= (y)) || \
+             (__GNUC__ > (x)))
+#  else
+#    define __GNUC_PREREQ__(x, y)   0
+#  endif
 #endif
 
 # if defined __cplusplus ? __GNUC_PREREQ__ (2, 6) : __GNUC_PREREQ__ (2, 4)
@@ -48,66 +48,37 @@
 # endif
 
 // some logging
-#ifndef NDEBUG
+#if !defined(KDE_NO_DEBUG_OUTPUT)
 #define TELLICO_LOG
 #endif
 
-#ifndef NDEBUG
-#define TELLICO_DEBUG
+#ifndef DEBUG_PREFIX
+  #define FUNC_PREFIX ""
+#else
+  #define FUNC_PREFIX "[" DEBUG_PREFIX "] "
+#endif
+
+#define myDebug()   kDebug()
+#define myWarning() kWarning()
+#ifdef TELLICO_LOG
+#define myLog()     kDebug()
+#else
+#define myLog()     kDebugDevNull()
 #endif
 
 namespace Debug {
-  typedef kndbgstream NoDebugStream;
-#ifndef TELLICO_DEBUG
-  typedef kndbgstream DebugStream;
-  static inline DebugStream log()     { return DebugStream(); }
-  static inline DebugStream debug()   { return DebugStream(); }
-  static inline DebugStream warning() { return DebugStream(); }
-  static inline DebugStream error()   { return DebugStream(); }
-  static inline DebugStream fatal()   { return DebugStream(); }
-
-#else
-  #ifndef DEBUG_PREFIX
-    #define FUNC_PREFIX ""
-  #else
-    #define FUNC_PREFIX "[" DEBUG_PREFIX "] "
-  #endif
-
-//from kdebug.h
-/*
-  enum DebugLevels {
-    KDEBUG_INFO  = 0,
-    KDEBUG_WARN  = 1,
-    KDEBUG_ERROR = 2,
-    KDEBUG_FATAL = 3
-  };
-*/
-
-  typedef kdbgstream DebugStream;
-#ifdef TELLICO_LOG
-  static inline DebugStream log()   { return kdDebug(); }
-#else
-  static inline kndbgstream log()   { return NoDebugStream(); }
-#endif
-  static inline DebugStream debug()   { return kdDebug()   << FUNC_PREFIX; }
-  static inline DebugStream warning() { return kdWarning() << FUNC_PREFIX << "[WARNING!] "; }
-  static inline DebugStream error()   { return kdError()   << FUNC_PREFIX << "[ERROR!] "; }
-  static inline DebugStream fatal()   { return kdFatal()   << FUNC_PREFIX; }
-
-  #undef FUNC_PREFIX
-#endif
 
 class Block {
 
 public:
   Block(const char* label) : m_start(std::clock()), m_label(label) {
-    Debug::debug() << "BEGIN: " << label << endl;
+    KDebug(QtDebugMsg)() << "BEGIN:" << label;
   }
 
   ~Block() {
     std::clock_t finish = std::clock();
     const double duration = (double) (finish - m_start) / CLOCKS_PER_SEC;
-    Debug::debug() << "  END: " << m_label << " - duration = " << duration << endl;
+    KDebug(QtDebugMsg)() << " END:" << m_label << "- duration =" << duration;
   }
 
 private :
@@ -117,29 +88,29 @@ private :
 
 }
 
-#define myDebug() Debug::debug()
-#define myWarning() Debug::warning()
-#define myLog() Debug::log()
-
 /// Standard function announcer
-#define DEBUG_FUNC_INFO myDebug() << k_funcinfo << endl;
+#define DEBUG_FUNC myDebug() << k_funcinfo;
 
 /// Announce a line
-#define DEBUG_LINE_INFO myDebug() << k_funcinfo << "Line: " << __LINE__ << endl;
+#define DEBUG_LINE myDebug() << k_lineinfo;
 
 /// Convenience macro for making a standard Debug::Block
-#define DEBUG_BLOCK Debug::Block uniquelyNamedStackAllocatedStandardBlock( __func__ );
+#ifndef WIN32
+#define DEBUG_BLOCK Debug::Block uniquelyNamedStackAllocatedStandardBlock( MY_FUNCTION );
+#else
+#define DEBUG_BLOCK
+#endif
 
-#ifdef TELLICO_LOG
+#if defined(TELLICO_LOG) && !defined(WIN32)
 // see http://www.gnome.org/~federico/news-2006-03.html#timeline-tools
 #define MARK do { \
     char str[128]; \
-    ::snprintf(str, 128, "MARK: %s: %s (%d)", className(), MY_FUNCTION, __LINE__); \
+    ::snprintf(str, 128, "MARK: %s: %s (%d)", metaObject()->className(), MY_FUNCTION, __LINE__); \
     ::access (str, F_OK); \
   } while(false)
 #define MARK_MSG(s) do { \
     char str[128]; \
-    ::snprintf(str, 128, "MARK: %s: %s (%d)", className(), s, __LINE__); \
+    ::snprintf(str, 128, "MARK: %s: %s (%d)", metaObject()->className(), s, __LINE__); \
     ::access (str, F_OK); \
   } while(false)
 #define MARK_LINE do { \

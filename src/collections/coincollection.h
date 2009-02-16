@@ -41,7 +41,7 @@ public:
 
   virtual Type type() const { return Coin; }
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
 };
 
   } // end namespace

@@ -31,7 +31,7 @@ public:
   virtual Type type() const { return File; }
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
 };
 
   } // end namespace

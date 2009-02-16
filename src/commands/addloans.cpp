@@ -23,16 +23,22 @@
 
 using Tellico::Command::AddLoans;
 
-AddLoans::AddLoans(Data::BorrowerPtr borrower_, Data::LoanVec loans_, bool addToCalendar_)
-    : KCommand()
+AddLoans::AddLoans(Tellico::Data::BorrowerPtr borrower_, Tellico::Data::LoanList loans_, bool addToCalendar_)
+    : QUndoCommand()
     , m_borrower(borrower_)
     , m_loans(loans_)
     , m_addedLoanField(false)
     , m_addToCalendar(addToCalendar_)
 {
+  if(m_loans.isEmpty()) {
+    myWarning() << "AddLoans() - no loans!" << endl;
+  } else {
+    setText(m_loans.count() > 1 ? i18n("Check-out Items")
+                                : i18nc("Check-out (Entry Title)", "Check-out %1", m_loans[0]->entry()->title()));
+  }
 }
 
-void AddLoans::execute() {
+void AddLoans::redo() {
   if(!m_borrower || m_loans.isEmpty()) {
     return;
   }
@@ -41,19 +47,19 @@ void AddLoans::execute() {
   bool wasEmpty = m_borrower->isEmpty();
 
   // if there's no loaned field, we'll add one
-  bool loanExisted = m_loans.begin()->entry()->collection()->hasField(QString::fromLatin1("loaned"));
+  bool loanExisted = m_loans[0]->entry()->collection()->hasField(QString::fromLatin1("loaned"));
   m_addedLoanField = false; // assume we didn't add the field yet
 
   // add the loans to the borrower
-  for(Data::LoanVec::Iterator loan = m_loans.begin(); loan != m_loans.end(); ++loan) {
+  foreach(Data::LoanPtr loan, m_loans) {
     m_borrower->addLoan(loan);
     Data::Document::self()->checkOutEntry(loan->entry());
-    Data::EntryVec vec;
+    Data::EntryList vec;
     vec.append(loan->entry());
     Controller::self()->modifiedEntries(vec);
   }
   if(!loanExisted) {
-    Data::CollPtr c = m_loans.begin()->entry()->collection();
+    Data::CollPtr c = m_loans[0]->entry()->collection();
     Data::FieldPtr f = c->fieldByName(QString::fromLatin1("loaned"));
     if(f) {
       // notify everything that a new field was added
@@ -65,30 +71,30 @@ void AddLoans::execute() {
     CalendarHandler::addLoans(m_loans);
   }
   if(wasEmpty) {
-    m_loans.begin()->entry()->collection()->addBorrower(m_borrower);
+    m_loans[0]->entry()->collection()->addBorrower(m_borrower);
     Controller::self()->addedBorrower(m_borrower);
   } else {
     // don't have to do anything to the document, it just holds a pointer
-    myDebug() << "AddLoansCommand::execute() - modifying an existing borrower! " << endl;
+    myDebug() << "AddLoansCommand::redo() - modifying an existing borrower! " << endl;
     Controller::self()->modifiedBorrower(m_borrower);
   }
 }
 
-void AddLoans::unexecute() {
+void AddLoans::undo() {
   if(!m_borrower) {
     return;
   }
 
   // remove the loans from the borrower
-  for(Data::LoanVec::Iterator loan = m_loans.begin(); loan != m_loans.end(); ++loan) {
+  foreach(Data::LoanPtr loan, m_loans) {
     m_borrower->removeLoan(loan);
     Data::Document::self()->checkInEntry(loan->entry());
-    Data::EntryVec vec;
+    Data::EntryList vec;
     vec.append(loan->entry());
     Controller::self()->modifiedEntries(vec);
   }
   if(m_addedLoanField) {
-    Data::CollPtr c = m_loans.begin()->entry()->collection();
+    Data::CollPtr c = m_loans[0]->entry()->collection();
     Data::FieldPtr f = c->fieldByName(QString::fromLatin1("loaned"));
     if(f) {
       c->removeField(f);
@@ -102,9 +108,4 @@ void AddLoans::unexecute() {
   // it won't get saved in the document file
   // here, just notify everybody that it changed
   Controller::self()->modifiedBorrower(m_borrower);
-}
-
-QString AddLoans::name() const {
-  return m_loans.count() > 1 ? i18n("Check-out Items")
-                             : i18n("Check-out (Entry Title)", "Check-out %1").arg(m_loans.begin()->entry()->title());
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "../datavectors.h"
 
-#include <kcommand.h>
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -24,7 +24,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class FieldCommand : public KCommand  {
+class FieldCommand : public QUndoCommand  {
 
 public:
   enum Mode {
@@ -33,13 +33,15 @@ public:
     FieldRemove
   };
 
-  FieldCommand(Mode mode, Data::CollPtr coll, Data::FieldPtr activeField, Data::FieldPtr oldField=0);
+  FieldCommand(Mode mode, Data::CollPtr coll, Data::FieldPtr activeField, Data::FieldPtr oldField=Data::FieldPtr());
+  FieldCommand(QUndoCommand* parent, Mode mode, Data::CollPtr coll, Data::FieldPtr activeField, Data::FieldPtr oldField=Data::FieldPtr());
 
-  virtual void execute();
-  virtual void unexecute();
-  virtual QString name() const;
+  virtual void redo();
+  virtual void undo();
 
 private:
+  void init();
+
   Mode m_mode;
   Data::CollPtr m_coll;
   Data::FieldPtr m_activeField;

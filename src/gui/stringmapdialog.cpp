@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,64 +13,65 @@
 
 #include "stringmapdialog.h"
 
-#include <klistview.h>
 #include <klocale.h>
 #include <klineedit.h>
-#include <kbuttonbox.h>
 #include <kiconloader.h>
+#include <kdialogbuttonbox.h>
+#include <KHBox>
 
-#include <qlayout.h>
-#include <qheader.h>
-#include <qhbox.h>
-#include <qwhatsthis.h>
-#include <qpushbutton.h>
+#include <QTreeWidget>
+#include <QHeaderView>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 using Tellico::StringMapDialog;
 
-StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* parent_, const char* name_/*=0*/, bool modal_/*=false*/)
-    : KDialogBase(parent_, name_, modal_, QString::null, Ok|Cancel) {
+StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* parent_, bool modal_/*=false*/)
+    : KDialog(parent_) {
+  setModal(modal_);
+  setButtons(Ok|Cancel);
+
   QWidget* page = new QWidget(this);
-  QVBoxLayout* l = new QVBoxLayout(page, 0, KDialog::spacingHint());
+  QBoxLayout* l = new QVBoxLayout(page);
 
-  m_listView = new KListView(page);
-  m_listView->setAllColumnsShowFocus(true);
-  m_listView->setShowSortIndicator(true);
-  m_listView->addColumn(QString::null);
-  m_listView->addColumn(QString::null);
-  m_listView->header()->hide(); // hide header since neither column has a label initially
-  m_listView->setColumnWidthMode(0, QListView::Maximum);
-  m_listView->setColumnWidthMode(1, QListView::Maximum);
-  m_listView->setResizeMode(QListView::AllColumns);
-  connect(m_listView, SIGNAL(currentChanged(QListViewItem*)), SLOT(slotUpdate(QListViewItem*)));
-  connect(m_listView, SIGNAL(clicked(QListViewItem*)), SLOT(slotUpdate(QListViewItem*)));
-  l->addWidget(m_listView);
+  m_treeWidget = new QTreeWidget(page);
+  m_treeWidget->setAllColumnsShowFocus(true);
+  m_treeWidget->header()->setSortIndicatorShown(true);
+  m_treeWidget->setHeaderHidden(true); // hide header since neither column has a label initially
+  connect(m_treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(slotUpdate(QTreeWidgetItem*)));
+  connect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*, int)), SLOT(slotUpdate(QTreeWidgetItem*)));
+  l->addWidget(m_treeWidget);
 
-  QHBox* box = new QHBox(page);
+  KHBox* box = new KHBox(page);
   box->setMargin(4);
   box->setSpacing(KDialog::spacingHint());
+  l->addWidget(box);
 
   m_edit1 = new KLineEdit(box);
   m_edit1->setFocus();
   m_edit2 = new KLineEdit(box);
-  KButtonBox* bb = new KButtonBox(box);
-  bb->addStretch();
-  QPushButton* btn = bb->addButton(i18n("&Set"), this, SLOT(slotAdd()));
-  btn->setIconSet(BarIcon(QString::fromLatin1("filenew"), KIcon::SizeSmall));
-  btn = bb->addButton(i18n("&Delete"), this, SLOT(slotDelete()));
-  btn->setIconSet(BarIcon(QString::fromLatin1("editdelete"), KIcon::SizeSmall));
+
+  KDialogButtonBox* bb = new KDialogButtonBox(box);
+  bb->addButton(KGuiItem(i18n("&Set") ,KIcon(QString::fromLatin1("document-new"))),
+                QDialogButtonBox::ActionRole,
+                this, SLOT(slotAdd()));
+  bb->addButton(KGuiItem(i18n("&Delete"), KIcon(QString::fromLatin1("edit-delete"))),
+                QDialogButtonBox::ActionRole,
+                this, SLOT(slotDelete()));
 
   l->addWidget(box);
   l->addStretch(1);
   setMainWidget(page);
 
   for(QMap<QString, QString>::ConstIterator it = map_.begin(); it != map_.end(); ++it) {
-    if(!it.data().isEmpty()) {
-      (void) new KListViewItem(m_listView, it.key(), it.data());
+    if(!it.value().isEmpty()) {
+      new QTreeWidgetItem(m_treeWidget, QStringList() << it.key() << it.value());
     }
   }
+  m_treeWidget->resizeColumnToContents(0);
 
   setMinimumWidth(400);
-  enableButtonSeparator(true);
+  showButtonSeparator(true);
 }
 
 void StringMapDialog::slotAdd() {
@@ -79,29 +80,26 @@ void StringMapDialog::slotAdd() {
   if(s1.isEmpty() && s2.isEmpty()) {
     return;
   }
-  QListViewItem* item = m_listView->currentItem();
-  if(item && s1 == item->text(0)) { // only update values if same key
-    item->setText(1, s2);
+  QTreeWidgetItem* item = m_treeWidget->currentItem();
+  if(item && s1 == item->data(0, Qt::DisplayRole).toString()) { // only update values if same key
+    item->setData(1, Qt::DisplayRole, s2);
   } else {
-    item = new KListViewItem(m_listView, s1, s2);
+    item = new QTreeWidgetItem(m_treeWidget, QStringList() << s1 << s2);
   }
-  m_listView->ensureItemVisible(item);
-  m_listView->setSelected(item, true);
-  m_listView->setCurrentItem(item);
+  m_treeWidget->resizeColumnToContents(0);
+  m_treeWidget->scrollToItem(item);
+  m_treeWidget->setCurrentItem(item);
 }
 
 void StringMapDialog::slotDelete() {
-  delete m_listView->currentItem();
-  m_edit1->clear();
-  m_edit2->clear();
-  m_listView->setSelected(m_listView->currentItem(), true);
+  delete m_treeWidget->currentItem();
+  slotUpdate(m_treeWidget->currentItem());
 }
 
-void StringMapDialog::slotUpdate(QListViewItem* item_) {
+void StringMapDialog::slotUpdate(QTreeWidgetItem* item_) {
   if(item_) {
-    m_edit1->setText(item_->text(0));
-    m_edit2->setText(item_->text(1));
-    m_listView->header()->adjustHeaderSize();
+    m_edit1->setText(item_->data(0, Qt::DisplayRole).toString());
+    m_edit2->setText(item_->data(1, Qt::DisplayRole).toString());
   } else {
     m_edit1->clear();
     m_edit2->clear();
@@ -109,15 +107,17 @@ void StringMapDialog::slotUpdate(QListViewItem* item_) {
 }
 
 void StringMapDialog::setLabels(const QString& label1_, const QString& label2_) {
-  m_listView->header()->setLabel(0, label1_);
-  m_listView->header()->setLabel(1, label2_);
-  m_listView->header()->show();
+  m_treeWidget->headerItem()->setData(0, Qt::DisplayRole, label1_);
+  m_treeWidget->headerItem()->setData(1, Qt::DisplayRole, label2_);
+  m_treeWidget->setHeaderHidden(false);
 }
 
 QMap<QString, QString> StringMapDialog::stringMap() {
   QMap<QString, QString> map;
-  for(QListViewItem* item = m_listView->firstChild(); item; item = item->nextSibling()) {
-    map.insert(item->text(0), item->text(1));
+  for(int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
+    QTreeWidgetItem* item = m_treeWidget->topLevelItem(i);
+    map.insert(item->data(0, Qt::DisplayRole).toString(),
+               item->data(1, Qt::DisplayRole).toString());
   }
   return map;
 }

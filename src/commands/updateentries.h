@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,8 +14,9 @@
 #ifndef TELLICO_UPDATEENTRIES_H
 #define TELLICO_UPDATEENTRIES_H
 
-#include "group.h"
 #include "../datavectors.h"
+
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -23,12 +24,12 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class UpdateEntries : public Group {
+class UpdateEntries : public QUndoCommand {
 
 public:
   UpdateEntries(Data::CollPtr coll, Data::EntryPtr oldEntry, Data::EntryPtr newEntry, bool overWrite);
 
-  virtual void execute();
+  virtual void redo();
 
 private:
   Data::CollPtr m_coll;

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ONIXEXPORTER_H
-#define ONIXEXPORTER_H
+#ifndef TELLICO_ONIXEXPORTER_H
+#define TELLICO_ONIXEXPORTER_H
 
 class QCheckBox;
 
@@ -40,9 +40,9 @@ public:
   virtual QString formatString() const;
   virtual QString fileFilter() const;
 
-  virtual QWidget* widget(QWidget*, const char* name=0);
-  virtual void readOptions(KConfig*);
-  virtual void saveOptions(KConfig*);
+  virtual QWidget* widget(QWidget*);
+  virtual void readOptions(KSharedConfigPtr);
+  virtual void saveOptions(KSharedConfigPtr);
 
   QString text();
 

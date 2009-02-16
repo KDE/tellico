@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef LINEFIELDWIDGET_H
-#define LINEFIELDWIDGET_H
+#ifndef TELLICO_LINEFIELDWIDGET_H
+#define TELLICO_LINEFIELDWIDGET_H
 
 #include "fieldwidget.h"
 #include "../datavectors.h"
@@ -28,7 +28,7 @@ class LineFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  LineFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  LineFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~LineFieldWidget() {}
 
   virtual QString text() const;

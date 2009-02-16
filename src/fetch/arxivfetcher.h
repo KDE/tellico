@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,12 +16,14 @@
 
 #include "fetcher.h"
 #include "configwidget.h"
-#include "../datavectors.h"
 
-#include <kio/job.h>
+#include <QPointer>
 
-#include <qcstring.h> // for QByteArray
-#include <qguardedptr.h>
+class KUrl;
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
 
@@ -67,21 +69,19 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   void initXSLTHandler();
-  KURL searchURL(FetchKey key, const QString& value) const;
+  KUrl searchURL(FetchKey key, const QString& value) const;
   void doSearch();
 
   XSLTHandler* m_xsltHandler;
   int m_start;
   int m_total;
 
-  QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;
   QString m_value;

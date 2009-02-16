@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -29,19 +29,19 @@ Q_OBJECT
 public:
   /**
    */
-  ReferencerImporter(const KURL& url);
+  ReferencerImporter(const KUrl& url);
 
   /**
    */
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return 0; }
   virtual bool canImport(int type) const;
 
 private:
   // private so it can't be changed accidently
-  void setXSLTURL(const KURL& url);
+  void setXSLTURL(const KUrl& url);
 };
 
   } // end namespace

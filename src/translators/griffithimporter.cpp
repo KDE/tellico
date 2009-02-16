@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,8 +20,8 @@
 #include <kstandarddirs.h>
 #include <kprocess.h>
 
-#include <qdir.h>
-#include <qfile.h>
+#include <QDir>
+#include <QFile>
 
 using Tellico::Import::GriffithImporter;
 
@@ -34,52 +34,51 @@ GriffithImporter::~GriffithImporter() {
 }
 
 Tellico::Data::CollPtr GriffithImporter::collection() {
-  QString filename = QDir::homeDirPath() + QString::fromLatin1("/.griffith/griffith.db");
+  QString filename = QDir::homePath() + QString::fromLatin1("/.griffith/griffith.db");
   if(!QFile::exists(filename)) {
     myWarning() << "GriffithImporter::collection() - database not found: " << filename << endl;
-    return 0;
+    return Data::CollPtr();
   }
 
   QString python = KStandardDirs::findExe(QString::fromLatin1("python"));
   if(python.isEmpty()) {
     myWarning() << "GriffithImporter::collection() - python not found!" << endl;
-    return 0;
+    return Data::CollPtr();
   }
 
   QString griffith = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("griffith2tellico.py"));
   if(griffith.isEmpty()) {
     myWarning() << "GriffithImporter::collection() - griffith2tellico.py not found!" << endl;
-    return 0;
+    return Data::CollPtr();
   }
 
   m_process = new KProcess();
-  connect(m_process, SIGNAL(receivedStdout(KProcess*, char*, int)), SLOT(slotData(KProcess*, char*, int)));
-  connect(m_process, SIGNAL(receivedStderr(KProcess*, char*, int)), SLOT(slotError(KProcess*, char*, int)));
-  connect(m_process, SIGNAL(processExited(KProcess*)), SLOT(slotProcessExited(KProcess*)));
-  *m_process << python << griffith;
-  if(!m_process->start(KProcess::Block, KProcess::AllOutput)) {
+  connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
+  connect(m_process, SIGNAL(readyReadStandardError()), SLOT(slotError()));
+  connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
+  m_process->setProgram(python, QStringList(griffith));
+  if(!m_process->execute()) {
     myDebug() << "ExecExternalFetcher::startSearch() - process failed to start" << endl;
-    return 0;
+    return Data::CollPtr();
   }
 
   return m_coll;
 }
 
-void GriffithImporter::slotData(KProcess*, char* buffer_, int len_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(buffer_, len_);
+void GriffithImporter::slotData() {
+  m_data.append(m_process->readAllStandardOutput());
 }
 
-void GriffithImporter::slotError(KProcess*, char* buffer_, int len_) {
-  QString msg = QString::fromLocal8Bit(buffer_, len_);
+void GriffithImporter::slotError() {
+  QString msg = m_process->readAllStandardError();
   myDebug() << "GriffithImporter::slotError() - " << msg << endl;
   setStatusMessage(msg);
 }
 
 
-void GriffithImporter::slotProcessExited(KProcess*) {
+void GriffithImporter::slotProcessExited() {
 //  myDebug() << "GriffithImporter::slotProcessExited()" << endl;
-  if(!m_process->normalExit() || m_process->exitStatus()) {
+  if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
     myDebug() << "GriffithImporter::slotProcessExited() - process did not exit successfully" << endl;
     return;
   }

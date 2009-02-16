@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -37,40 +37,46 @@
 
 #include <klocale.h>
 #include <kstandarddirs.h>
+#include <kstandardguiitem.h>
 
-#include <qlayout.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
-#include <qcheckbox.h>
-#include <qwhatsthis.h>
-#include <qtimer.h>
+#include <QGroupBox>
+#include <QButtonGroup>
+#include <QRadioButton>
+#include <QCheckBox>
+#include <QTimer>
+#include <QVBoxLayout>
 
 // really according to taste or computer speed
 const unsigned Tellico::Import::Importer::s_stepSize = 20;
 
 using Tellico::ImportDialog;
 
-ImportDialog::ImportDialog(Import::Format format_, const KURL::List& urls_, QWidget* parent_, const char* name_)
-    : KDialogBase(parent_, name_, true /*modal*/, i18n("Import Options"), Ok|Cancel),
-      m_coll(0),
+ImportDialog::ImportDialog(Tellico::Import::Format format_, const KUrl::List& urls_, QWidget* parent_)
+    : KDialog(parent_),
       m_importer(importer(format_, urls_)) {
-  QWidget* widget = new QWidget(this);
-  QVBoxLayout* topLayout = new QVBoxLayout(widget, 0, spacingHint());
+  setModal(true);
+  setCaption(i18n("Import Options"));
+  setButtons(Ok|Cancel);
 
-  QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, i18n("Import Options"), widget);
-  topLayout->addWidget(bg, 0);
-  m_radioReplace = new QRadioButton(i18n("&Replace current collection"), bg);
-  QWhatsThis::add(m_radioReplace, i18n("Replace the current collection with the contents "
-                                       "of the imported file."));
-  m_radioAppend = new QRadioButton(i18n("A&ppend to current collection"), bg);
-  QWhatsThis::add(m_radioAppend, i18n("Append the contents of the imported file to the "
-                                      "current collection. This is only possible when the "
-                                      "collection types match."));
-  m_radioMerge = new QRadioButton(i18n("&Merge with current collection"), bg);
-  QWhatsThis::add(m_radioMerge, i18n("Merge the contents of the imported file to the "
-                                     "current collection. This is only possible when the "
-                                     "collection types match. Entries must match exactly "
-                                     "in order to be merged."));
+  QWidget* widget = new QWidget(this);
+  QVBoxLayout* topLayout = new QVBoxLayout(widget);
+
+  QGroupBox* groupBox = new QGroupBox(i18n("Import Options"), widget);
+  QVBoxLayout* vlay = new QVBoxLayout(groupBox);
+  topLayout->addWidget(groupBox, 0);
+
+  m_radioReplace = new QRadioButton(i18n("&Replace current collection"), groupBox);
+  m_radioReplace->setWhatsThis(i18n("Replace the current collection with the contents "
+                                     "of the imported file."));
+  m_radioAppend = new QRadioButton(i18n("A&ppend to current collection"), groupBox);
+  m_radioAppend->setWhatsThis(i18n("Append the contents of the imported file to the "
+                                   "current collection. This is only possible when the "
+                                   "collection types match."));
+  m_radioMerge = new QRadioButton(i18n("&Merge with current collection"), groupBox);
+  m_radioMerge->setWhatsThis(i18n("Merge the contents of the imported file to the "
+                                  "current collection. This is only possible when the "
+                                  "collection types match. Entries must match exactly "
+                                  "in order to be merged."));
   if(m_importer->canImport(Kernel::self()->collectionType())) {
     // append by default?
     m_radioAppend->setChecked(true);
@@ -80,24 +86,36 @@ ImportDialog::ImportDialog(Import::Format format_, const KURL::List& urls_, QWid
     m_radioMerge->setEnabled(false);
   }
 
-  QWidget* w = m_importer->widget(widget, "importer_widget");
+  vlay->addWidget(m_radioReplace);
+  vlay->addWidget(m_radioAppend);
+  vlay->addWidget(m_radioMerge);
+
+  m_buttonGroup = new QButtonGroup(widget);
+  m_buttonGroup->addButton(m_radioReplace, Import::Replace);
+  m_buttonGroup->addButton(m_radioAppend, Import::Append);
+  m_buttonGroup->addButton(m_radioMerge, Import::Merge);
+
+  QWidget* w = m_importer->widget(widget);
 //  m_importer->readOptions(KGlobal::config());
   if(w) {
+    w->layout()->setMargin(0);
     topLayout->addWidget(w, 0);
   }
 
-  connect(bg, SIGNAL(clicked(int)), m_importer, SLOT(slotActionChanged(int)));
+  connect(m_buttonGroup, SIGNAL(buttonClicked(int)), m_importer, SLOT(slotActionChanged(int)));
 
   topLayout->addStretch();
   setMainWidget(widget);
 
-  KGuiItem ok = KStdGuiItem::ok();
+  KGuiItem ok = KStandardGuiItem::ok();
   ok.setText(i18n("&Import"));
-  setButtonOK(ok);
+  setButtonGuiItem(Ok, ok);
 
   // want to grab default button action, too
   // since the importer might do something with widgets, don't just call it, do it after layout is done
   QTimer::singleShot(0, this, SLOT(slotUpdateAction()));
+
+  connect(this, SIGNAL(okClicked()), SLOT(slotOk()));
 }
 
 ImportDialog::~ImportDialog() {
@@ -127,9 +145,9 @@ Tellico::Import::Action ImportDialog::action() const {
 }
 
 // static
-Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const KURL::List& urls_) {
-#define CHECK_SIZE if(urls_.size() > 1) kdWarning() << "ImportDialog::importer() - only importing first URL" << endl
-  KURL firstURL = urls_.isEmpty() ? KURL() : urls_[0];
+Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format_, const KUrl::List& urls_) {
+#define CHECK_SIZE if(urls_.size() > 1) kWarning() << "ImportDialog::importer() - only importing first URL" << endl
+  KUrl firstURL = urls_.isEmpty() ? KUrl() : urls_[0];
   Import::Importer* importer = 0;
   switch(format_) {
     case Import::TellicoXML:
@@ -160,13 +178,13 @@ Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const 
       CHECK_SIZE;
       importer = new Import::XSLTImporter(firstURL);
       {
-        QString xsltFile = locate("appdata", QString::fromLatin1("mods2tellico.xsl"));
+        QString xsltFile = KStandardDirs::locate("appdata", QString::fromLatin1("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
-          KURL u;
+          KUrl u;
           u.setPath(xsltFile);
           static_cast<Import::XSLTImporter*>(importer)->setXSLTURL(u);
         } else {
-          kdWarning() << "ImportDialog::importer - unable to find mods2tellico.xml!" << endl;
+          kWarning() << "ImportDialog::importer - unable to find mods2tellico.xml!";
         }
       }
       break;
@@ -229,7 +247,7 @@ Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const 
   }
 #ifndef NDEBUG
   if(!importer) {
-    kdWarning() << "ImportDialog::importer() - importer not created!" << endl;
+    kWarning() << "ImportDialog::importer() - importer not created!";
   }
 #endif
   return importer;
@@ -237,7 +255,7 @@ Tellico::Import::Importer* ImportDialog::importer(Import::Format format_, const 
 }
 
 // static
-QString ImportDialog::fileFilter(Import::Format format_) {
+QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
   QString text;
   switch(format_) {
     case Import::TellicoXML:
@@ -299,7 +317,7 @@ QString ImportDialog::fileFilter(Import::Format format_) {
 // audio files are imported by directory
 // alexandria is a defined location, as is freedb
 // all others are files
-Tellico::Import::Target ImportDialog::importTarget(Import::Format format_) {
+Tellico::Import::Target ImportDialog::importTarget(Tellico::Import::Format format_) {
   switch(format_) {
     case Import::AudioFile:
     case Import::FileListing:
@@ -333,18 +351,18 @@ Tellico::Import::FormatMap ImportDialog::formatMap() {
   return map;
 }
 
-bool ImportDialog::formatImportsText(Import::Format format_) {
+bool ImportDialog::formatImportsText(Tellico::Import::Format format_) {
   return format_ != Import::AMC &&
          format_ != Import::Griffith &&
          format_ != Import::PDF;
 }
 
-QString ImportDialog::startDir(Import::Format format_) {
+QString ImportDialog::startDir(Tellico::Import::Format format_) {
   if(format_ == Import::GCfilms) {
     QDir dir = QDir::home();
     // able to cd if exists and readable
     if(dir.cd(QString::fromLatin1(".local/share/gcfilms/"))) {
-      return dir.absPath();
+      return dir.absolutePath();
     }
   }
   return QString::fromLatin1(":import");
@@ -353,22 +371,18 @@ QString ImportDialog::startDir(Import::Format format_) {
 void ImportDialog::slotOk() {
   // some importers, like the CSV importer, can validate their settings
   if(!m_importer || m_importer->validImport()) {
-    KDialogBase::slotOk();
+    accept();
   } else {
     myLog() << "ImportDialog::slotOk() - not a valid import" << endl;
   }
 }
 
 void ImportDialog::slotUpdateAction() {
-  // distasteful hack
-  // selectedId() is new in QT 3.2
-//  m_importer->slotActionChanged(dynamic_cast<QButtonGroup*>(m_radioAppend->parentWidget())->selectedId());
-  QButtonGroup* bg = static_cast<QButtonGroup*>(m_radioAppend->parentWidget());
-  m_importer->slotActionChanged(bg->id(bg->selected()));
+  m_importer->slotActionChanged(m_buttonGroup->checkedId());
 }
 
 // static
-Tellico::Data::CollPtr ImportDialog::importURL(Import::Format format_, const KURL& url_) {
+Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const KUrl& url_) {
   Import::Importer* imp = importer(format_, url_);
   Data::CollPtr c = imp->collection();
   if(!c && !imp->statusMessage().isEmpty()) {

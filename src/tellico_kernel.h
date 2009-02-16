@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,20 +17,17 @@
 #include "datavectors.h"
 #include "borrower.h"
 
-#include <kcommand.h>
-
-class KURL;
+class KUrl;
+class KUndoStack;
 
 class QWidget;
 class QString;
 class QStringList;
+class QUndoCommand;
 
 namespace Tellico {
   class MainWindow;
   class Filter;
-  namespace Command {
-    class Group;
-  }
   namespace Data {
     class Collection;
   }
@@ -59,7 +56,7 @@ public:
    *
    * @return The URL
    */
-  const KURL& URL() const;
+  const KUrl& URL() const;
   /**
    * Returns a list of the field titles, wraps the call to the collection itself.
    *
@@ -95,20 +92,20 @@ public:
   bool modifyField(Data::FieldPtr field);
   bool removeField(Data::FieldPtr field);
 
-  void addEntries(Data::EntryVec entries, bool checkFields);
-  void modifyEntries(Data::EntryVec oldEntries, Data::EntryVec newEntries);
+  void addEntries(Data::EntryList entries, bool checkFields);
+  void modifyEntries(Data::EntryList oldEntries, Data::EntryList newEntries);
   void updateEntry(Data::EntryPtr oldEntry, Data::EntryPtr newEntry, bool overWrite);
-  void removeEntries(Data::EntryVec entries);
+  void removeEntries(Data::EntryList entries);
 
-  bool addLoans(Data::EntryVec entries);
+  bool addLoans(Data::EntryList entries);
   bool modifyLoan(Data::LoanPtr loan);
-  bool removeLoans(Data::LoanVec loans);
+  bool removeLoans(Data::LoanList loans);
 
   void addFilter(FilterPtr filter);
   bool modifyFilter(FilterPtr filter);
   bool removeFilter(FilterPtr filter);
 
-  void reorderFields(const Data::FieldVec& fields);
+  void reorderFields(const Data::FieldList& fields);
 
   void appendCollection(Data::CollPtr coll);
   void mergeCollection(Data::CollPtr coll);
@@ -116,12 +113,12 @@ public:
 
   // adds new fields into collection if any values in entries are not empty
   // first object is modified fields, second is new fields
-  QPair<Data::FieldVec, Data::FieldVec> mergeFields(Data::CollPtr coll,
-                                                    Data::FieldVec fields,
-                                                    Data::EntryVec entries);
+  QPair<Data::FieldList, Data::FieldList> mergeFields(Data::CollPtr coll,
+                                                      Data::FieldList fields,
+                                                      Data::EntryList entries);
 
   void renameCollection();
-  const KCommandHistory* commandHistory() { return &m_commandHistory; }
+  KUndoStack* commandHistory() { return m_commandHistory; }
 
   int askAndMerge(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
                   QString value1 = QString(), QString value2 = QString());
@@ -134,11 +131,10 @@ private:
   Kernel(const Kernel&);
   Kernel& operator=(const Kernel&);
 
-  void doCommand(KCommand* command);
+  void doCommand(QUndoCommand* command);
 
   QWidget* m_widget;
-  KCommandHistory m_commandHistory;
-  Command::Group* m_commandGroup;
+  KUndoStack* m_commandHistory;
 };
 
 } // end namespace

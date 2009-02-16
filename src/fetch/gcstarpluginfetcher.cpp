@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,19 +22,19 @@
 #include "../filehandler.h"
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
-#include "../latin1literal.h"
 #include "../tellico_utils.h"
 
-#include <kconfig.h>
-#include <kprocess.h>
-#include <kprocio.h>
+#include <KConfigGroup>
+#include <KProcess>
 #include <kstandarddirs.h>
-#include <kaccelmanager.h>
+#include <kacceleratormanager.h>
+#include <kshell.h>
+#include <KProcess>
 
-#include <qdir.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qwhatsthis.h>
+#include <QDir>
+#include <QLabel>
+#include <QShowEvent>
+#include <QGridLayout>
 
 using Tellico::Fetch::GCstarPluginFetcher;
 
@@ -48,16 +48,16 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
     QString gcstar = KStandardDirs::findExe(QString::fromLatin1("gcstar"));
 
     if(pluginParse == NotYet) {
-      KProcIO proc;
-      proc << gcstar << QString::fromLatin1("--version");
+      KProcess proc;
+      QStringList args;
+      args << QString::fromLatin1("--version");
       // wait 5 seconds at most, just a sanity thing, never want to block completely
-      if(proc.start(KProcess::Block) && proc.wait(5)) {
-        QString output;
-        proc.readln(output);
+      if(proc.execute(gcstar, args, 5000) > -1) {
+        QString output = proc.readAllStandardOutput();
         if(!output.isEmpty()) {
           // always going to be x.y[.z] ?
           QRegExp versionRx(QString::fromLatin1("(\\d+)\\.(\\d+)(?:\\.(\\d+))?"));
-          if(versionRx.search(output) > -1) {
+          if(versionRx.indexIn(output) > -1) {
             int x = versionRx.cap(1).toInt();
             int y = versionRx.cap(2).toInt();
             int z = versionRx.cap(3).toInt(); // ok to be empty
@@ -92,21 +92,22 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
     return;
   }
 
-  KProcIO proc;
-  proc << gcstar_
-        << QString::fromLatin1("-x")
-        << QString::fromLatin1("--list-plugins")
-        << QString::fromLatin1("--collection") << gcstarCollection;
+  QStringList args;
+  args << QString::fromLatin1("-x")
+       << QString::fromLatin1("--list-plugins")
+       << QString::fromLatin1("--collection")
+       << gcstarCollection;
 
-  if(!proc.start(KProcess::Block)) {
+  KProcess proc;
+  if(proc.execute(gcstar_, args) < 0) {
     myWarning() << "GCstarPluginFetcher::readPluginsNew() - can't start" << endl;
     return;
   }
 
   bool hasName = false;
   PluginInfo info;
-  QString line;
-  for(int length = 0; length > -1; length = proc.readln(line)) {
+  QTextStream stream(&proc);
+  for(QString line = stream.readLine(); !stream.atEnd(); line = stream.readLine()) {
     if(line.isEmpty()) {
       if(hasName) {
         plugins << info;
@@ -115,7 +116,7 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
       info.clear();
     } else {
       // authors have \t at beginning
-      line = line.stripWhiteSpace();
+      line = line.trimmed();
       if(!hasName) {
         info.insert(QString::fromLatin1("name"), line);
         hasName = true;
@@ -145,15 +146,13 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
   }
 
   QStringList files = dir.entryList();
-  for(QStringList::ConstIterator file = files.begin(); file != files.end(); ++file) {
-    KURL u;
-    u.setPath(dir.filePath(*file));
+  foreach(const QString& file, files) {
+    KUrl u;
+    u.setPath(dir.filePath(file));
     PluginInfo info;
     QString text = FileHandler::readTextFile(u);
-    for(int pos = rx.search(text);
-        pos > -1;
-        pos = rx.search(text, pos+rx.matchedLength())) {
-      info.insert(rx.cap(1).lower(), rx.cap(2));
+    for(int pos = rx.indexIn(text); pos > -1; pos = rx.indexIn(text, pos+rx.matchedLength())) {
+      info.insert(rx.cap(1).toLower(), rx.cap(2));
     }
     // only add if it has a name
     if(info.contains(QString::fromLatin1("name"))) {
@@ -178,7 +177,7 @@ QString GCstarPluginFetcher::gcstarType(int collType_) {
   return QString();
 }
 
-GCstarPluginFetcher::GCstarPluginFetcher(QObject* parent_, const char* name_/*=0*/) : Fetcher(parent_, name_),
+GCstarPluginFetcher::GCstarPluginFetcher(QObject* parent_) : Fetcher(parent_),
     m_started(false), m_collType(-1), m_process(0) {
 }
 
@@ -199,11 +198,11 @@ bool GCstarPluginFetcher::canFetch(int type_) const {
 }
 
 void GCstarPluginFetcher::readConfigHook(const KConfigGroup& config_) {
-  m_collType = config_.readNumEntry("CollectionType", -1);
+  m_collType = config_.readEntry("CollectionType", -1);
   m_plugin = config_.readEntry("Plugin");
 }
 
-void GCstarPluginFetcher::search(FetchKey key_, const QString& value_) {
+void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_started = true;
   m_data.truncate(0);
 
@@ -228,19 +227,20 @@ void GCstarPluginFetcher::search(FetchKey key_, const QString& value_) {
     return;
   }
 
-  m_process = new KProcess();
-  connect(m_process, SIGNAL(receivedStdout(KProcess*, char*, int)), SLOT(slotData(KProcess*, char*, int)));
-  connect(m_process, SIGNAL(receivedStderr(KProcess*, char*, int)), SLOT(slotError(KProcess*, char*, int)));
-  connect(m_process, SIGNAL(processExited(KProcess*)), SLOT(slotProcessExited(KProcess*)));
+  m_process = new KProcess(this);
+  connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
+  connect(m_process, SIGNAL(readyReadStandardError()), SLOT(slotError()));
+  connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
+  m_process->setOutputChannelMode(KProcess::SeparateChannels);
   QStringList args;
-  args << gcstar << QString::fromLatin1("-x")
+  args << QString::fromLatin1("-x")
        << QString::fromLatin1("--collection") << gcstarCollection
        << QString::fromLatin1("--export")     << QString::fromLatin1("Tellico")
        << QString::fromLatin1("--website")    << m_plugin
-       << QString::fromLatin1("--download")   << KProcess::quote(value_);
+       << QString::fromLatin1("--download")   << KShell::quoteArg(value_);
   myLog() << "GCstarPluginFetcher::search() - " << args.join(QChar(' ')) << endl;
-  *m_process << args;
-  if(!m_process->start(KProcess::NotifyOnExit, KProcess::AllOutput)) {
+  m_process->setProgram(gcstar, args);
+  if(!m_process->execute()) {
     myDebug() << "GCstarPluginFetcher::startSearch() - process failed to start" << endl;
     stop();
   }
@@ -261,21 +261,20 @@ void GCstarPluginFetcher::stop() {
   emit signalDone(this);
 }
 
-void GCstarPluginFetcher::slotData(KProcess*, char* buffer_, int len_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(buffer_, len_);
+void GCstarPluginFetcher::slotData() {
+  m_data.append(m_process->readAllStandardOutput());
 }
 
-void GCstarPluginFetcher::slotError(KProcess*, char* buffer_, int len_) {
-  QString msg = QString::fromLocal8Bit(buffer_, len_);
+void GCstarPluginFetcher::slotError() {
+  QString msg = m_process->readAllStandardError();
   msg.prepend(source() + QString::fromLatin1(": "));
   myDebug() << "GCstarPluginFetcher::slotError() - " << msg << endl;
   m_errors << msg;
 }
 
-void GCstarPluginFetcher::slotProcessExited(KProcess*) {
+void GCstarPluginFetcher::slotProcessExited() {
 //  myDebug() << "GCstarPluginFetcher::slotProcessExited()" << endl;
-  if(!m_process->normalExit() || m_process->exitStatus()) {
+  if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
     myDebug() << "GCstarPluginFetcher::slotProcessExited() - "<< source() << ": process did not exit successfully" << endl;
     if(!m_errors.isEmpty()) {
       message(m_errors.join(QChar('\n')), MessageHandler::Error);
@@ -305,8 +304,8 @@ void GCstarPluginFetcher::slotProcessExited(KProcess*) {
     return;
   }
 
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
     QString desc;
     switch(coll->type()) {
       case Data::Collection::Book:
@@ -360,7 +359,7 @@ void GCstarPluginFetcher::slotProcessExited(KProcess*) {
       default:
         break;
     }
-    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
@@ -371,7 +370,7 @@ Tellico::Data::EntryPtr GCstarPluginFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-void GCstarPluginFetcher::updateEntry(Data::EntryPtr entry_) {
+void GCstarPluginFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   // ry searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QString::fromLatin1("title"));
   if(!t.isEmpty()) {
@@ -389,9 +388,9 @@ Tellico::Fetch::ConfigWidget* GCstarPluginFetcher::configWidget(QWidget* parent_
 
 GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPluginFetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_), m_needPluginList(true) {
-  QGridLayout* l = new QGridLayout(optionsWidget(), 3, 4);
+  QGridLayout* l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
-  l->setColStretch(1, 10);
+  l->setColumnStretch(1, 10);
 
   int row = -1;
 
@@ -400,10 +399,10 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
   m_collCombo = new GUI::CollectionTypeCombo(optionsWidget());
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotTypeChanged()));
-  l->addMultiCellWidget(m_collCombo, row, row, 1, 3);
+  l->addWidget(m_collCombo, row, 1, 1, 3);
   QString w = i18n("Set the collection type of the data returned from the plugin.");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_collCombo, w);
+  label->setWhatsThis(w);
+  m_collCombo->setWhatsThis(w);
   label->setBuddy(m_collCombo);
 
   label = new QLabel(i18n("&Plugin: "), optionsWidget());
@@ -411,10 +410,10 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
   m_pluginCombo = new GUI::ComboBox(optionsWidget());
   connect(m_pluginCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_pluginCombo, SIGNAL(activated(int)), SLOT(slotPluginChanged()));
-  l->addMultiCellWidget(m_pluginCombo, row, row, 1, 3);
+  l->addWidget(m_pluginCombo, row, 1, 1, 3);
   w = i18n("Select the GCstar plugin used for the data source.");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_pluginCombo, w);
+  label->setWhatsThis(w);
+  m_pluginCombo->setWhatsThis(w);
   label->setBuddy(m_pluginCombo);
 
   label = new QLabel(i18n("Author: "), optionsWidget());
@@ -457,9 +456,9 @@ void GCstarPluginFetcher::ConfigWidget::slotTypeChanged() {
   m_pluginCombo->clear();
   QStringList pluginNames;
   GCstarPluginFetcher::PluginList list = GCstarPluginFetcher::plugins(collType);
-  for(GCstarPluginFetcher::PluginList::ConstIterator it = list.begin(); it != list.end(); ++it) {
-    pluginNames << (*it)[QString::fromLatin1("name")].toString();
-    m_pluginCombo->insertItem(pluginNames.last(), *it);
+  foreach(const GCstarPluginFetcher::PluginInfo& info, list) {
+    pluginNames << info.value(QString::fromLatin1("name")).toString();
+    m_pluginCombo->addItem(pluginNames.last(), info);
   }
   slotPluginChanged();
   emit signalName(preferredName());
@@ -477,7 +476,7 @@ void GCstarPluginFetcher::ConfigWidget::showEvent(QShowEvent*) {
     m_needPluginList = false;
     slotTypeChanged(); // update plugin combo box
     if(!m_originalPluginName.isEmpty()) {
-      m_pluginCombo->setCurrentText(m_originalPluginName);
+      m_pluginCombo->setEditText(m_originalPluginName);
       slotPluginChanged();
     }
   }

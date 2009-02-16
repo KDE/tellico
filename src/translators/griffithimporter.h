@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,11 +11,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef GRIFFITHIMPORTER_H
-#define GRIFFITHIMPORTER_H
+#ifndef TELLICO_GRIFFITHIMPORTER_H
+#define TELLICO_GRIFFITHIMPORTER_H
 
 #include "importer.h"
-#include "../datavectors.h"
 
 class KProcess;
 
@@ -23,10 +22,10 @@ namespace Tellico {
   namespace Import {
 
 /**
- * An importer for importing collections used by Griffith, a movie colleciton manager.
+ * An importer for importing collections used by Griffith, a movie collection manager.
  *
  * The database is assumed to be $HOME/.griffith/griffith.db. The file format is sqlite3,
- * and a python script, depending on pysqlite, i sused to import the database
+ * and a python script, depending on pysqlite, is used to import the database
  *
  * @author Robby Stephenson
  */
@@ -36,7 +35,7 @@ Q_OBJECT
 public:
   /**
    */
-  GriffithImporter() : Importer(), m_coll(0), m_process(0) {}
+  GriffithImporter() : Importer(), m_process(0) {}
   /**
    */
   virtual ~GriffithImporter();
@@ -47,9 +46,9 @@ public:
   virtual bool canImport(int type) const;
 
 private slots:
-  void slotData(KProcess* proc, char* buffer, int len);
-  void slotError(KProcess* proc, char* buffer, int len);
-  void slotProcessExited(KProcess* proc);
+  void slotData();
+  void slotError();
+  void slotProcessExited();
 
 private:
   Data::CollPtr m_coll;

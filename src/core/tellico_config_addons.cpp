@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -59,27 +59,21 @@ namespace {
 
 using Tellico::Config;
 
-void Config::deleteAndReset() {
-  delete mSelf;
-  mSelf = 0;
-}
-
 QStringList Config::noCapitalizationList() {
-  return QStringList::split(commaSplit, Config::noCapitalizationString());
+  return Config::noCapitalizationString().split(commaSplit);
 }
 
 QStringList Config::articleList() {
-  return QStringList::split(commaSplit, Config::articlesString());
+  return Config::articlesString().split(commaSplit);
 }
 
 QStringList Config::nameSuffixList() {
-  return QStringList::split(commaSplit, Config::nameSuffixesString());
+  return Config::nameSuffixesString().split(commaSplit);
 }
 
 QStringList Config::surnamePrefixList() {
-  return QStringList::split(commaSplit, Config::surnamePrefixesString());
+  return Config::surnamePrefixesString().split(commaSplit);
 }
-
 
 QString Config::templateName(int type_) {
   switch(type_) {

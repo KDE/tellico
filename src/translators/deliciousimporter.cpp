@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,18 +19,18 @@
 
 #include <kstandarddirs.h>
 
-#include <qfile.h>
+#include <QFile>
 
 using Tellico::Import::DeliciousImporter;
 
-DeliciousImporter::DeliciousImporter(const KURL& url_) : XSLTImporter(url_) {
-  QString xsltFile = locate("appdata", QString::fromLatin1("delicious2tellico.xsl"));
+DeliciousImporter::DeliciousImporter(const KUrl& url_) : XSLTImporter(url_) {
+  QString xsltFile = KStandardDirs::locate("appdata", QString::fromLatin1("delicious2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
-    KURL u;
+    KUrl u;
     u.setPath(xsltFile);
     XSLTImporter::setXSLTURL(u);
   } else {
-    kdWarning() << "DeliciousImporter() - unable to find delicious2tellico.xml!" << endl;
+    kWarning() << "DeliciousImporter() - unable to find delicious2tellico.xml!";
   }
 }
 
@@ -43,10 +43,10 @@ bool DeliciousImporter::canImport(int type) const {
 Tellico::Data::CollPtr DeliciousImporter::collection() {
   Data::CollPtr coll = XSLTImporter::collection();
   if(!coll) {
-    return 0;
+    return Data::CollPtr();
   }
 
-  KURL libraryDir = url();
+  KUrl libraryDir = url();
   libraryDir.setPath(url().directory() + "Images/");
   const QStringList imageDirs = QStringList()
                               << QString::fromLatin1("Large Covers/")
@@ -69,8 +69,8 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
   const QString coverField = QString::fromLatin1("cover");
   const bool isLocal = url().isLocalFile();
 
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
     QString comments = entry->field(commField);
     if(!comments.isEmpty()) {
       RTF2HTML rtf2html(comments);
@@ -80,8 +80,8 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
     //try to add images
     QString uuid = entry->field(uuidField);
     if(!uuid.isEmpty() && isLocal) {
-      for(QStringList::ConstIterator it = imageDirs.begin(); it != imageDirs.end(); ++it) {
-        QString imgPath = libraryDir.path() + *it + uuid;
+      foreach(const QString& imageDir, imageDirs) {
+        QString imgPath = libraryDir.path() + imageDir + uuid;
         if(!QFile::exists(imgPath)) {
           continue;
         }

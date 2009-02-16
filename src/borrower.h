@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,10 +15,12 @@
 #define TELLICO_BORROWER_H
 
 #include "datavectors.h"
+#include "entry.h"
 
 #include <ksharedptr.h>
 
-#include <qdatetime.h>
+#include <QDate>
+#include <QString>
 
 namespace Tellico {
   namespace Data {
@@ -52,8 +54,8 @@ private:
   Loan& operator=(const Loan&);
 
   QString m_uid;
-  Data::BorrowerPtr m_borrower;
-  Data::EntryPtr m_entry;
+  BorrowerPtr m_borrower;
+  EntryPtr m_entry;
   QDate m_loanDate;
   QDate m_dueDate;
   QString m_note;
@@ -61,8 +63,7 @@ private:
 };
 
 typedef KSharedPtr<Loan> LoanPtr;
-typedef Vector<Loan> LoanVec;
-typedef LoanVec::Iterator LoanVecIt;
+typedef QList<LoanPtr> LoanList;
 
 /**
  * @author Robby Stephenson
@@ -76,18 +77,18 @@ public:
 
   const QString& uid() const { return m_uid; }
   const QString& name() const { return m_name; }
-  const LoanVec& loans() const { return m_loans; }
+  const LoanList& loans() const { return m_loans; }
   bool isEmpty() const { return m_loans.isEmpty(); }
-  size_t count() const { return m_loans.count(); }
+  int count() const { return m_loans.count(); }
 
-  Data::LoanPtr loan(Data::ConstEntryPtr entry);
+  Data::LoanPtr loan(Data::EntryPtr entry);
   void addLoan(Data::LoanPtr loan);
   bool removeLoan(Data::LoanPtr loan);
 
 private:
   QString m_name;
   QString m_uid; // uid used by KABC
-  LoanVec m_loans;
+  LoanList m_loans;
 };
 
   } // end namespace

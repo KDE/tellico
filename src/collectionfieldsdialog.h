@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,45 +11,33 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLLECTIONFIELDSDIALOG_H
-#define COLLECTIONFIELDSDIALOG_H
+#ifndef TELLICO_COLLECTIONFIELDSDIALOG_H
+#define TELLICO_COLLECTIONFIELDSDIALOG_H
+
+#include "datavectors.h"
+
+#include <kdialog.h>
 
 class KComboBox;
 class KLineEdit;
 class KPushButton;
+class KListWidget;
 
 class QRadioButton;
 class QCheckBox;
 class QPainter;
-
-#include "datavectors.h"
-#include "gui/listboxtext.h"
-
-#include <kdialogbase.h>
-
-#include <qmap.h>
 
 namespace Tellico {
   namespace Data {
     class Collection;
   }
 
-class FieldListBox : public GUI::ListBoxText {
-public:
-  FieldListBox(QListBox* listbox, Data::FieldPtr field);
-  FieldListBox(QListBox* listbox, Data::FieldPtr field, QListBoxItem* after);
-
-  Data::FieldPtr field() const { return m_field; }
-  void setField(Data::FieldPtr field) { m_field = field; }
-
-private:
-  Data::FieldPtr m_field;
-};
+class FieldListItem;
 
 /**
  * @author Robby Stephenson
  */
-class CollectionFieldsDialog : public KDialogBase {
+class CollectionFieldsDialog : public KDialog {
 Q_OBJECT
 
 public:
@@ -58,9 +46,8 @@ public:
    *
    * @param coll A pointer to the collection parent of all the attributes
    * @param parent A pointer to the parent widget
-   * @param name The widget name
    */
-  CollectionFieldsDialog(Data::CollPtr coll, QWidget* parent, const char* name=0);
+  CollectionFieldsDialog(Data::CollPtr coll, QWidget* parent);
   ~CollectionFieldsDialog();
 
 signals:
@@ -87,20 +74,20 @@ private:
   void updateField();
   void updateTitle(const QString& title);
   bool checkValues();
-  FieldListBox* findItem(const QListBox* box, Data::FieldPtr field);
+  FieldListItem* findItem(Data::FieldPtr field);
   QStringList newTypesAllowed(int type);
 
   Data::CollPtr m_coll;
   Data::CollPtr m_defaultCollection;
-  Data::FieldVec m_copiedFields;
-  Data::FieldVec m_newFields;
+  Data::FieldList m_copiedFields;
+  Data::FieldList m_newFields;
   Data::FieldPtr m_currentField;
   bool m_modified;
   bool m_updatingValues;
   bool m_reordered;
   int m_oldIndex;
 
-  QListBox* m_fieldsBox;
+  KListWidget* m_fieldsWidget;
   KPushButton* m_btnNew;
   KPushButton* m_btnDelete;
   KPushButton* m_btnUp;

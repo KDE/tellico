@@ -19,7 +19,7 @@
 #undef QT_NO_CAST_ASCII
 #endif
 
-#include <qxml.h>
+#include <QXmlAttributes>
 
 #ifdef HAD_QT_NO_CAST_ASCII
 #define QT_NO_CAST_ASCII
@@ -43,9 +43,9 @@ public:
   int collType;
   QString entryName;
   Data::CollPtr coll;
-  Data::FieldVec fields;
+  Data::FieldList fields;
   Data::FieldPtr currentField;
-  Data::EntryVec entries;
+  Data::EntryList entries;
   FilterPtr filter;
   Data::BorrowerPtr borrower;
   bool defaultFields;

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,10 +11,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef REPORTDIALOG_H
-#define REPORTDIALOG_H
+#ifndef TELLICO_REPORTDIALOG_H
+#define TELLICO_REPORTDIALOG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class KHTMLPart;
 
@@ -29,7 +29,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class ReportDialog : public KDialogBase {
+class ReportDialog : public KDialog {
 Q_OBJECT
 
 public:
@@ -37,9 +37,8 @@ public:
    * The constructor sets up the dialog.
    *
    * @param parent A pointer to the parent widget
-   * @param name The widget name
    */
-  ReportDialog(QWidget* parent, const char* name=0);
+  ReportDialog(QWidget* parent);
   virtual ~ReportDialog();
 
 public slots:

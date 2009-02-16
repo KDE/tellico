@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,33 +15,42 @@
 #include "controller.h"
 #include "entry.h"
 #include "collection.h"
-#include "document.h"
-#include "entryitem.h"
 #include "tellico_kernel.h"
-#include "listviewcomparison.h"
 #include "../tellico_debug.h"
+#include "models/filtermodel.h"
+#include "models/entrysortmodel.h"
+#include "models/models.h"
+#include "gui/countdelegate.h"
 
 #include <klocale.h>
-#include <kpopupmenu.h>
-#include <kiconloader.h>
+#include <kmenu.h>
+#include <kicon.h>
 
-#include <qheader.h>
+#include <QHeaderView>
+#include <QContextMenuEvent>
 
 using Tellico::FilterView;
 
-FilterView::FilterView(QWidget* parent_, const char* name_) : GUI::ListView(parent_, name_), m_notSortedYet(true) {
-  addColumn(i18n("Filter"));
-  header()->setStretchEnabled(true, 0);
-  setResizeMode(QListView::NoColumn);
-  setRootIsDecorated(true);
-  setShowSortIndicator(true);
-  setTreeStepSize(15);
-  setFullWidth(true);
+FilterView::FilterView(QWidget* parent_)
+    : GUI::TreeView(parent_), m_notSortedYet(true) {
+  header()->setResizeMode(QHeaderView::Stretch);
+  setHeaderHidden(false);
+  setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-  connect(this, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)),
-          SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
+  connect(this, SIGNAL(doubleClicked(const QModelIndex&)),
+          SLOT(slotDoubleClicked(const QModelIndex&)));
+
+  connect(header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
+          SLOT(slotSortingChanged(int,Qt::SortOrder)));
+
+  FilterModel* filterModel = new FilterModel(this);
+  EntrySortModel* sortModel = new EntrySortModel(this);
+  sortModel->setSourceModel(filterModel);
+  setModel(sortModel);
+  setItemDelegate(new GUI::CountDelegate(this));
 }
 
+/*
 bool FilterView::isSelectable(GUI::ListViewItem* item_) const {
   if(!GUI::ListView::isSelectable(item_)) {
     return false;
@@ -55,211 +64,154 @@ bool FilterView::isSelectable(GUI::ListViewItem* item_) const {
 
   return true;
 }
+*/
+Tellico::FilterModel* FilterView::sourceModel() const {
+  return static_cast<FilterModel*>(sortModel()->sourceModel());
+}
 
-void FilterView::contextMenuRequested(QListViewItem* item_, const QPoint& point_, int) {
-  if(!item_) {
+void FilterView::addCollection(Tellico::Data::CollPtr coll_) {
+  m_coll = coll_;
+  sourceModel()->clear();
+  sourceModel()->addFilters(m_coll->filters());
+}
+
+void FilterView::addEntries(Tellico::Data::EntryList entries_) {
+  invalidate(entries_);
+}
+
+void FilterView::modifyEntries(Tellico::Data::EntryList entries_) {
+  invalidate(entries_);
+}
+
+void FilterView::removeEntries(Tellico::Data::EntryList entries_) {
+  invalidate(entries_);
+}
+
+void FilterView::slotReset() {
+  sourceModel()->clear();
+}
+
+void FilterView::addFilter(Tellico::FilterPtr filter_) {
+  Q_ASSERT(filter_);
+  sourceModel()->addFilter(filter_);
+}
+
+void FilterView::slotModifyFilter() {
+  QModelIndex index = currentIndex();
+  // parent means a top-level item
+  if(!index.isValid() || index.parent().isValid()) {
     return;
   }
 
-  GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(item_);
-  if(item->isFilterItem()) {
-    KPopupMenu menu(this);
-    menu.insertItem(SmallIconSet(QString::fromLatin1("filter")),
+  QModelIndex realIndex = sortModel()->mapToSource(index);
+  Kernel::self()->modifyFilter(sourceModel()->filter(realIndex));
+}
+
+void FilterView::slotDeleteFilter() {
+  QModelIndex index = currentIndex();
+  // parent means a top-level item
+  if(!index.isValid() || index.parent().isValid()) {
+    return;
+  }
+
+  QModelIndex realIndex = sortModel()->mapToSource(index);
+  Kernel::self()->removeFilter(sourceModel()->filter(realIndex));
+}
+
+void FilterView::removeFilter(Tellico::FilterPtr filter_) {
+  Q_ASSERT(filter_);
+  sourceModel()->removeFilter(filter_);
+}
+
+void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
+  QModelIndex index = indexAt(event_->pos());
+  if(!index.isValid()) {
+    return;
+  }
+
+  KMenu menu(this);
+  // no parent means it's a top-level item
+  if(!index.parent().isValid()) {
+    menu.addAction(KIcon(QString::fromLatin1("view-filter")),
                     i18n("Modify Filter"), this, SLOT(slotModifyFilter()));
-    menu.insertItem(SmallIconSet(QString::fromLatin1("editdelete")),
+    menu.addAction(KIcon(QString::fromLatin1("edit-delete")),
                     i18n("Delete Filter"), this, SLOT(slotDeleteFilter()));
-    menu.exec(point_);
+    menu.exec(event_->globalPos());
+  } else {
+    Controller::self()->plugEntryActions(&menu);
+  }
+  menu.exec(event_->globalPos());
+}
+
+void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
+//  DEBUG_BLOCK;
+  QAbstractItemView::selectionChanged(selected_, deselected_);
+  // ignore the selected and deselected variables
+  // we want to grab all the currently selected ones
+  QSet<Data::EntryPtr> entries;
+  foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
+    QModelIndex realIndex = sortModel()->mapToSource(index);
+    Data::EntryPtr entry = sourceModel()->entry(realIndex);
+    if(entry) {
+      entries += entry;
+    } else {
+      QModelIndex child = realIndex.child(0, 0);
+      for( ; child.isValid(); child = child.sibling(child.row()+1, 0)) {
+        entry = sourceModel()->entry(child);
+        if(entry) {
+          entries += entry;
+        }
+      }
+    }
+  }
+  Controller::self()->slotUpdateSelection(this, entries.toList());
+}
+
+void FilterView::slotDoubleClicked(const QModelIndex& index_) {
+  QModelIndex realIndex = sortModel()->mapToSource(index_);
+  Data::EntryPtr entry = sourceModel()->entry(realIndex);
+  if(entry) {
+    Controller::self()->editEntry(entry);
   }
 }
 
 // this gets called when header() is clicked, so cycle through
-void FilterView::setSorting(int col_, bool asc_) {
-  if(asc_ && !m_notSortedYet) {
-    if(sortStyle() == ListView::SortByText) {
-      setSortStyle(ListView::SortByCount);
+void FilterView::slotSortingChanged(int col_, Qt::SortOrder order_) {
+  Q_UNUSED(col_);
+  if(order_ == Qt::AscendingOrder && !m_notSortedYet) { // cycle through after ascending
+    if(sortModel()->sortRole() == RowCountRole) {
+      sortModel()->setSortRole(Qt::DisplayRole);
     } else {
-      setSortStyle(ListView::SortByText);
+      sortModel()->setSortRole(RowCountRole);
     }
   }
-  if(sortStyle() == ListView::SortByText) {
-    setColumnText(0, i18n("Filter"));
-  } else {
-    setColumnText(0, i18n("Filter (Sort by Count)"));
-  }
+
+  updateHeader();
   m_notSortedYet = false;
-  ListView::setSorting(col_, asc_);
 }
 
-void FilterView::addCollection(Data::CollPtr coll_) {
-  FilterVec filters = coll_->filters();
-  for(FilterVec::Iterator it = filters.begin(); it != filters.end(); ++it) {
-    addFilter(it);
-  }
-  Data::FieldPtr f = coll_->fieldByName(QString::fromLatin1("title"));
-  if(f) {
-    setComparison(0, ListViewComparison::create(f));
-  }
-}
-
-void FilterView::addEntries(Data::EntryVec entries_) {
-  for(QListViewItem* item = firstChild(); item; item = item->nextSibling()) {
-    Filter::Ptr filter = static_cast<FilterItem*>(item)->filter();
-    for(Data::EntryVecIt it = entries_.begin(); it != entries_.end(); ++it) {
-      if(filter && filter->matches(it.data())) {
-        new EntryItem(static_cast<FilterItem*>(item), it);
-      }
-    }
-  }
-}
-
-void FilterView::modifyEntries(Data::EntryVec entries_) {
-  for(Data::EntryVecIt it = entries_.begin(); it != entries_.end(); ++it) {
-    modifyEntry(it);
-  }
-}
-
-void FilterView::modifyEntry(Data::EntryPtr entry_) {
-  for(QListViewItem* item = firstChild(); item; item = item->nextSibling()) {
-    bool hasEntry = false;
-    QListViewItem* entryItem = 0;
-    // iterate over all children and find item with matching entry pointers
-    for(QListViewItem* i = item->firstChild(); i; i = i->nextSibling()) {
-      if(static_cast<EntryItem*>(i)->entry() == entry_) {
-        i->setText(0, entry_->title());
-        // only one item per filter will match
-        hasEntry = true;
-        entryItem = i;
-        break;
-      }
-    }
-    // now, if the entry was there but no longer matches, delete it
-    // if the entry was not there but does match, add it
-    Filter::Ptr filter = static_cast<FilterItem*>(item)->filter();
-    if(hasEntry && !filter->matches(static_cast<EntryItem*>(entryItem)->entry())) {
-      delete entryItem;
-    } else if(!hasEntry && filter->matches(entry_)) {
-      new EntryItem(static_cast<FilterItem*>(item), entry_);
-    }
-  }
-}
-
-void FilterView::removeEntries(Data::EntryVec entries_) {
-  // the group modified signal gets handles separately, this is just for filters
-  for(QListViewItem* item = firstChild(); item; item = item->nextSibling()) {
-    // iterate over all children and delete items with matching entry pointers
-    QListViewItem* c1 = item->firstChild();
-    while(c1) {
-      if(entries_.contains(static_cast<EntryItem*>(c1)->entry())) {
-        QListViewItem* c2 = c1;
-        c1 = c1->nextSibling();
-        delete c2;
-      } else {
-        c1 = c1->nextSibling();
-      }
-    }
-  }
-}
-
-void FilterView::addField(Data::CollPtr, Data::FieldPtr) {
-  resetComparisons();
-}
-
-void FilterView::modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr) {
-  resetComparisons();
-}
-
-void FilterView::removeField(Data::CollPtr, Data::FieldPtr) {
-  resetComparisons();
-}
-
-void FilterView::addFilter(FilterPtr filter_) {
-  FilterItem* filterItem = new FilterItem(this, filter_);
-
-  Data::EntryVec entries = Data::Document::self()->filteredEntries(filter_);
-  for(Data::EntryVecIt it = entries.begin(); it != entries.end(); ++it) {
-    new EntryItem(filterItem, it); // text gets set in constructor
-  }
-}
-
-void FilterView::slotModifyFilter() {
-  GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(currentItem());
-  if(!item || !item->isFilterItem()) {
-    return;
-  }
-
-  Kernel::self()->modifyFilter(static_cast<FilterItem*>(item)->filter());
-}
-
-void FilterView::slotDeleteFilter() {
-  GUI::ListViewItem* item = static_cast<GUI::ListViewItem*>(currentItem());
-  if(!item || !item->isFilterItem()) {
-    return;
-  }
-
-  Kernel::self()->removeFilter(static_cast<FilterItem*>(item)->filter());
-}
-
-void FilterView::removeFilter(FilterPtr filter_) {
-  // paranoia
-  if(!filter_) {
-    return;
-  }
-
-  // find the item for this filter
-  // cheating a bit, it's probably the current one
-  GUI::ListViewItem* found = 0;
-  GUI::ListViewItem* cur = static_cast<GUI::ListViewItem*>(currentItem());
-  if(cur && cur->isFilterItem() && static_cast<FilterItem*>(cur)->filter() == filter_) {
-    // found it!
-    found = cur;
+void FilterView::updateHeader() {
+  if(sortModel()->sortRole() == Qt::DisplayRole) {
+    model()->setHeaderData(0, Qt::Horizontal, i18n("Filter"));
   } else {
-    // iterate over all filter items
-    for(QListViewItem* item = firstChild(); item; item = item->nextSibling()) {
-      if(static_cast<FilterItem*>(item)->filter() == filter_) {
-        found = static_cast<FilterItem*>(item);
+    model()->setHeaderData(0, Qt::Horizontal, i18n("Filter (Sort by Count)"));
+  }
+}
+
+void FilterView::invalidate(Tellico::Data::EntryList entries_) {
+  const int rows = model()->rowCount();
+  for(int row = 0; row < rows; ++row) {
+    QModelIndex index = sourceModel()->index(row, 0);
+    FilterPtr filter = sourceModel()->filter(index);
+    if(!filter) {
+      continue;
+    }
+    foreach(Data::EntryPtr entry, entries_) {
+      if(filter->matches(entry)) {
+        sourceModel()->invalidate(index);
         break;
       }
     }
-  }
-
-  // not found
-  if(!found) {
-    myDebug() << "GroupView::modifyFilter() - not found" << endl;
-    return;
-  }
-
-  delete found;
-}
-
-void FilterView::slotSelectionChanged() {
-  GUI::ListView::slotSelectionChanged();
-
-  GUI::ListViewItem* item = selectedItems().getFirst();
-  if(item && item->isFilterItem()) {
-    Controller::self()->slotUpdateFilter(static_cast<FilterItem*>(item)->filter());
-  }
-}
-
-void FilterView::resetComparisons() {
-  // this is only allowed when the view is not empty, so we can grab a collection ptr
-  if(childCount() == 0) {
-    return;
-  }
-  QListViewItem* item = firstChild();
-  while(item && item->childCount() == 0) {
-    item = item->nextSibling();
-  }
-  if(!item) {
-    return;
-  }
-  item = item->firstChild();
-  Data::CollPtr coll = static_cast<EntryItem*>(item)->entry()->collection();
-  if(!coll) {
-    return;
-  }
-  Data::FieldPtr f = coll->fieldByName(QString::fromLatin1("title"));
-  if(f) {
-    setComparison(0, ListViewComparison::create(f));
   }
 }
 

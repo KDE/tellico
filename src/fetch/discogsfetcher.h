@@ -11,27 +11,26 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef DISCOGSFETCHER_H
-#define DISCOGSFETCHER_H
-
-namespace Tellico {
-  class XSLTHandler;
-}
+#ifndef TELLICO_DISCOGSFETCHER_H
+#define TELLICO_DISCOGSFETCHER_H
 
 #include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
+
 #include <klineedit.h>
 
-#include <qdom.h>
-#include <qcstring.h> // for QByteArray
-#include <qguardedptr.h>
+#include <QPointer>
 
+class KJob;
 namespace KIO {
-  class Job;
+  class StoredTransferJob;
 }
 
 namespace Tellico {
+
+  class XSLTHandler;
+
   namespace Fetch {
 
 /**
@@ -45,7 +44,7 @@ Q_OBJECT
 public:
   /**
    */
-  DiscogsFetcher(QObject* parent, const char* name = 0);
+  DiscogsFetcher(QObject* parent);
   /**
    */
   virtual ~DiscogsFetcher();
@@ -87,8 +86,7 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   void initXSLTHandler();
@@ -99,9 +97,8 @@ private:
   int m_start;
   int m_total;
 
-  QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;
   QString m_value;

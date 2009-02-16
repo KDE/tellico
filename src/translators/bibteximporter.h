@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BIBTEXIMPORTER_H
-#define BIBTEXIMPORTER_H
+#ifndef TELLICO_BIBTEXIMPORTER_H
+#define TELLICO_BIBTEXIMPORTER_H
 
 #include <config.h>
 #include "importer.h"
@@ -26,8 +26,8 @@ extern "C" {
 }
 #endif
 
-#include <qptrlist.h>
-#include <qmap.h>
+#include <QList>
+#include <QHash>
 
 class QRadioButton;
 
@@ -49,7 +49,7 @@ public:
    *
    * @param url The url of the bibtex file
    */
-  BibtexImporter(const KURL::List& urls);
+  BibtexImporter(const KUrl::List& urls);
   BibtexImporter(const QString& text);
   /*
    * Some cleanup is done for the btparse library
@@ -63,10 +63,10 @@ public:
    * @return A pointer to a @ref BibtexCollection, or 0 if none can be created.
    */
   virtual Data::CollPtr collection();
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
+  virtual QWidget* widget(QWidget* parent);
   virtual bool canImport(int type) const;
 
-  static bool maybeBibtex(const KURL& url);
+  static bool maybeBibtex(const KUrl& url);
 
 public slots:
   void slotCancel();
@@ -75,10 +75,8 @@ private:
   Data::CollPtr readCollection(const QString& text, int n);
   void parseText(const QString& text);
 
-  typedef QPtrList<AST> ASTList;
-  typedef QPtrListIterator<AST> ASTListIterator;
-  ASTList m_nodes;
-  QMap<QString, QString> m_macros;
+  QList<AST*> m_nodes;
+  QHash<QString, QString> m_macros;
 
   Data::CollPtr m_coll;
   QWidget* m_widget;

@@ -33,8 +33,10 @@
 //#include <linux/videodev2.h>
 #include <linux/videodev.h>
 
-#include <qstring.h>
-#include <qimage.h>
+#include <QString>
+#include <QImage>
+//Added by qt3to4:
+#include <Q3PtrList>
 
 namespace barcodeRecognition {
 
@@ -101,6 +103,8 @@ public:
 class ng_vid_driver
 {
 public:
+  virtual ~ng_vid_driver() {}
+
   static ng_vid_driver *createDriver( QString device );
   static int xioctl( int fd, int cmd, void *arg );
 
@@ -122,7 +126,7 @@ public:
 
 protected:
   QString m_name;
-  static QPtrList<video_converter> m_converter;
+  static Q3PtrList<video_converter> m_converter;
 };
 
 

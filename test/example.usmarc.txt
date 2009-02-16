@@ -1,0 +1,22 @@
+001 708964
+005 19980710092633.8
+008 970604s1997    inuab    b    001 0 eng  
+035    $9 (DLC)   97023698
+906    $a 7 $b cbc $c orignew $d 1 $e ocip $f 19 $g y-gencatlg
+955    $a pc16 to ja00 06-04-97; jd25 06-05-97; jd99 06-05-97; jd11 06-06-97;aa05 06-10-97; CIP ver. pv08 11-05-97
+010    $a    97023698 
+020    $a 0253333490 (alk. paper)
+040    $a DLC $c DLC $d DLC
+050 00 $a QE862.D5 $b C697 1997
+082 00 $a 567.9 $2 21
+245 04 $a The complete dinosaur / $c edited by James O. Farlow and M.K. Brett-Surman ; art editor, Robert F. Walters.
+260    $a Bloomington : $b Indiana University Press, $c c1997.
+300    $a xi, 752 p. : $b ill. (some col.), maps ; $c 26 cm.
+504    $a Includes bibliographical references and index.
+650  0 $a Dinosaurs.
+700 1  $a Farlow, James Orville.
+700 2  $a Brett-Surman, M. K., $d 1950-
+920    $a **LC HAS REQ'D # OF SHELF COPIES**
+991    $b c-GenColl $h QE862.D5 $i C697 1997 $t Copy 1 $w BOOKS
+991    $b r-SciRR $h QE862.D5 $i C697 1997 $t Copy 1 $w GenBib bi 98-003434
+

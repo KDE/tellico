@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef PARAFIELDWIDGET_H
-#define PARAFIELDWIDGET_H
+#ifndef TELLICO_PARAFIELDWIDGET_H
+#define TELLICO_PARAFIELDWIDGET_H
 
 #include "fieldwidget.h"
 #include "../datavectors.h"
@@ -29,7 +29,7 @@ class ParaFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  ParaFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  ParaFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~ParaFieldWidget() {}
 
   virtual QString text() const;

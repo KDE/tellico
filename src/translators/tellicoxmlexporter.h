@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOXMLEXPORTER_H
-#define TELLICOXMLEXPORTER_H
+#ifndef TELLICO_XMLEXPORTER_H
+#define TELLICO_XMLEXPORTER_H
 
 namespace Tellico {
   class Filter;
@@ -48,9 +48,9 @@ public:
   void setIncludeImages(bool b) { m_includeImages = b; }
   void setIncludeGroups(bool b) { m_includeGroups = b; }
 
-  virtual QWidget* widget(QWidget*, const char*);
-  virtual void readOptions(KConfig* cfg);
-  virtual void saveOptions(KConfig* cfg);
+  virtual QWidget* widget(QWidget*);
+  virtual void readOptions(KSharedConfigPtr cfg);
+  virtual void saveOptions(KSharedConfigPtr cfg);
 
   /**
    * An integer indicating format version.

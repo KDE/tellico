@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,13 +16,15 @@
 
 #include "datavectors.h"
 
-#include <qstringlist.h>
-#include <qstring.h>
-#include <qobject.h>
+#include <QObject>
+#include <QStringList>
 
 #include <functional>
 
 namespace Tellico {
+
+  enum SaveState { NormalState, NewState, ModifiedState };
+
   namespace Data {
     class Collection;
 
@@ -34,11 +36,11 @@ namespace Tellico {
  * David Weber. The @ref groupName() would be "Weber, David" and the
  * @ref fieldName() would be "author".
  *
- * It's a QObject because EntryGroupItem holds a QGuardedPtr
+ * It's a QObject because EntryGroupItem holds a QPointer
  *
  * @author Robby Stephenson
  */
-class EntryGroup : public QObject, public EntryVec {
+class EntryGroup : public QObject, public EntryList {
 Q_OBJECT
 
 public:
@@ -173,7 +175,7 @@ public:
    *
    * @return The list of groups
    */
-  const PtrVector<EntryGroup>& groups() const { return m_groups; }
+  const QList<EntryGroup*>& groups() const { return m_groups; }
   /**
    * Returns a list containing the names of the groups for
    * a certain field to which the entry belongs
@@ -187,7 +189,7 @@ public:
    *
    * @return The list of field values
    */
-  QStringList fieldValues() const { return m_fields.values(); }
+  QStringList fieldValues() const { return m_fieldValues.values(); }
   /**
    * Returns a list of all the formatted field values contained in the entry.
    *
@@ -209,9 +211,6 @@ public:
    */
   void invalidateFormattedFieldValue(const QString& name=QString::null);
 
-  static int compareValues(EntryPtr entry1, EntryPtr entry2, FieldPtr field);
-  static int compareValues(EntryPtr entry1, EntryPtr entry2, const QString& field, ConstCollPtr coll);
-
   /**
    * Construct the derived valued for an field. The format string should be
    * of the form "%{name1} %{name2}" where the names are replaced by the value
@@ -222,7 +221,7 @@ public:
    * @param formatted Whether the inserted values should be formatted.
    * @return The constructed field value
    */
-  static QString dependentValue(ConstEntryPtr e, const QString& formatString, bool formatted);
+  static QString dependentValue(const Entry* e, const QString& formatString, bool formatted);
 
 private:
   /**
@@ -233,9 +232,9 @@ private:
 
   CollPtr m_coll;
   long m_id;
-  StringMap m_fields;
+  StringMap m_fieldValues;
   mutable StringMap m_formattedFields;
-  PtrVector<EntryGroup> m_groups;
+  QList<EntryGroup*> m_groups;
 };
 
 class EntryCmp : public std::binary_function<EntryPtr, EntryPtr, bool> {
@@ -253,5 +252,7 @@ private:
 
   } // end namespace
 } // end namespace
+
+Q_DECLARE_METATYPE(Tellico::Data::EntryPtr)
 
 #endif

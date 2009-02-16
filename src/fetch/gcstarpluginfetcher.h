@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,9 +16,11 @@
 
 #include "fetcher.h"
 #include "configwidget.h"
-#include "../datavectors.h"
 
-#include <qintdict.h>
+#include <QMap>
+#include <QShowEvent>
+#include <QLabel>
+#include <QList>
 
 class QLabel;
 class KProcess;
@@ -38,7 +40,7 @@ Q_OBJECT
 
 public:
 
-  GCstarPluginFetcher(QObject* parent, const char* name=0);
+  GCstarPluginFetcher(QObject* parent);
   /**
    */
   virtual ~GCstarPluginFetcher();
@@ -62,14 +64,14 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KProcess* proc, char* buffer, int len);
-  void slotError(KProcess* proc, char* buffer, int len);
-  void slotProcessExited(KProcess* proc);
+  void slotData();
+  void slotError();
+  void slotProcessExited();
 
 private:
   // map Author, Name, Lang, etc...
   typedef QMap<QString, QVariant> PluginInfo;
-  typedef QValueList<PluginInfo> PluginList;
+  typedef QList<PluginInfo> PluginList;
   // map collection type to all available plugins
   typedef QMap<int, PluginList> PluginMap;
   static PluginMap pluginMap;

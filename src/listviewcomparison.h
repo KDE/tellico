@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,39 +16,45 @@
 
 #include "datavectors.h"
 
-#include <qregexp.h>
-
-class QStringList;
-class QIconViewItem;
+#include <QRegExp>
+#include <QList>
+#include <QStringList>
 
 namespace Tellico {
-  namespace GUI {
-    class ListViewItem;
-  }
 
 class ListViewComparison {
 public:
-  ListViewComparison(Data::ConstFieldPtr field);
+  ListViewComparison(Data::FieldPtr field);
   virtual ~ListViewComparison() {}
 
-  const QString& fieldName() const { return m_fieldName; }
+  Data::FieldPtr field() const { return m_field; }
 
-  virtual int compare(int col, const GUI::ListViewItem* item1, const GUI::ListViewItem* item2, bool asc);
-  virtual int compare(const QIconViewItem* item1, const QIconViewItem* item2);
+  virtual int compare(Data::EntryPtr entry1, Data::EntryPtr entry2);
 
   static ListViewComparison* create(Data::FieldPtr field);
-  static ListViewComparison* create(Data::ConstFieldPtr field);
 
 protected:
   virtual int compare(const QString& str1, const QString& str2) = 0;
 
 private:
-  QString m_fieldName;
+  Data::FieldPtr m_field;
+};
+
+class BoolComparison : public ListViewComparison {
+public:
+  BoolComparison(Data::FieldPtr field);
+
+  using ListViewComparison::compare;
+
+protected:
+  virtual int compare(const QString& str1, const QString& str2);
 };
 
 class StringComparison : public ListViewComparison {
 public:
-  StringComparison(Data::ConstFieldPtr field);
+  StringComparison(Data::FieldPtr field);
+
+  using ListViewComparison::compare;
 
 protected:
   virtual int compare(const QString& str1, const QString& str2);
@@ -56,7 +62,9 @@ protected:
 
 class TitleComparison : public ListViewComparison {
 public:
-  TitleComparison(Data::ConstFieldPtr field);
+  TitleComparison(Data::FieldPtr field);
+
+  using ListViewComparison::compare;
 
 protected:
   virtual int compare(const QString& str1, const QString& str2);
@@ -64,7 +72,9 @@ protected:
 
 class NumberComparison : public ListViewComparison {
 public:
-  NumberComparison(Data::ConstFieldPtr field);
+  NumberComparison(Data::FieldPtr field);
+
+  using ListViewComparison::compare;
 
 protected:
   virtual int compare(const QString& str1, const QString& str2);
@@ -72,7 +82,9 @@ protected:
 
 class LCCComparison : public StringComparison {
 public:
-  LCCComparison(Data::ConstFieldPtr field);
+  LCCComparison(Data::FieldPtr field);
+
+  using ListViewComparison::compare;
 
 protected:
   virtual int compare(const QString& str1, const QString& str2);
@@ -82,31 +94,46 @@ private:
   QRegExp m_regexp;
 };
 
-class PixmapComparison : public ListViewComparison {
+class ImageComparison : public ListViewComparison {
 public:
-  PixmapComparison(Data::ConstFieldPtr field);
+  ImageComparison(Data::FieldPtr field);
 
-  virtual int compare(int col, const GUI::ListViewItem* item1, const GUI::ListViewItem* item2, bool asc);
-  virtual int compare(const QIconViewItem* item1, const QIconViewItem* item2);
+  virtual int compare(Data::EntryPtr entry1, Data::EntryPtr entry2);
+
+  using ListViewComparison::compare;
 
 protected:
   virtual int compare(const QString&, const QString&) { return 0; }
 };
 
+class RatingComparison : public ListViewComparison {
+public:
+  RatingComparison(Data::FieldPtr field);
+
+  using ListViewComparison::compare;
+
+protected:
+  virtual int compare(const QString&, const QString&);
+};
+
 class DependentComparison : public StringComparison {
 public:
-  DependentComparison(Data::ConstFieldPtr field);
+  DependentComparison(Data::FieldPtr field);
+  ~DependentComparison();
 
-  virtual int compare(int col, const GUI::ListViewItem* item1, const GUI::ListViewItem* item2, bool asc);
-  virtual int compare(const QIconViewItem* item1, const QIconViewItem* item2);
+  virtual int compare(Data::EntryPtr entry1, Data::EntryPtr entry2);
+
+  using ListViewComparison::compare;
 
 private:
-  QPtrList<ListViewComparison> m_comparisons;
+  QList<ListViewComparison*> m_comparisons;
 };
 
 class ISODateComparison : public ListViewComparison {
 public:
-  ISODateComparison(Data::ConstFieldPtr field);
+  ISODateComparison(Data::FieldPtr field);
+
+  using ListViewComparison::compare;
 
 protected:
   virtual int compare(const QString& str1, const QString& str2);
@@ -114,7 +141,9 @@ protected:
 
 class ChoiceComparison : public ListViewComparison {
 public:
-  ChoiceComparison(Data::ConstFieldPtr field);
+  ChoiceComparison(Data::FieldPtr field);
+
+  using ListViewComparison::compare;
 
 protected:
   virtual int compare(const QString& str1, const QString& str2);

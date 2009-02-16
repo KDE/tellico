@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2006 by Robby Stephenson
+    copyright            : (C) 2002-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,122 +11,58 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOENTRYICONVIEW_H
-#define TELLICOENTRYICONVIEW_H
+#ifndef TELLICO_ENTRYICONVIEW_H
+#define TELLICO_ENTRYICONVIEW_H
 
 #include "observer.h"
-#include "entry.h"
 
-#include <kiconview.h>
+#include <QListView>
 
-#include <qintdict.h>
+class KIcon;
 
 namespace Tellico {
-  class EntryIconViewItem;
-  namespace Data {
-    class Collection;
-  }
-  class ListViewComparison;
+
+class AbstractEntryModel;
+class EntrySortModel;
 
 /**
  * @author Robby Stephenson
  */
-class EntryIconView : public KIconView, public Observer {
+class EntryIconView : public QListView, public Observer {
 Q_OBJECT
 
-friend class EntryIconViewItem;
-
 public:
-  EntryIconView(QWidget* parent, const char* name = 0);
+  EntryIconView(QWidget* parent);
   ~EntryIconView();
 
-  EntryIconViewItem* firstItem() const;
+  EntrySortModel* sortModel() const;
+  AbstractEntryModel* sourceModel() const;
 
-  virtual void clear();
+  void clear();
   void refresh();
-  void showEntries(const Data::EntryVec& entries);
+  void showEntries(const Data::EntryList& entries);
   /**
    * Adds a new list item showing the details for a entry.
    *
    * @param entry A pointer to the entry
    */
-  virtual void    addEntries(Data::EntryVec entries);
-  virtual void modifyEntries(Data::EntryVec entries);
-  virtual void removeEntries(Data::EntryVec entries);
+  virtual void    addEntries(Data::EntryList entries);
+  virtual void modifyEntries(Data::EntryList entries);
+  virtual void removeEntries(Data::EntryList entries);
 
-  const QString& imageField();
-  const QString& sortField();
   void setMaxAllowedIconWidth(int width);
   int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
 
-  const QPixmap& defaultPixmap();
-  /**
-   * Returns a list of the currently selected items;
-   *
-   * @return The list of selected items
-   */
-  const QPtrList<EntryIconViewItem>& selectedItems() const { return m_selectedItems; }
-
-  int compare(const EntryIconViewItem* item1, EntryIconViewItem* item2);
+protected:
+  void contextMenuEvent(QContextMenuEvent* event);
 
 private slots:
-  void slotSelectionChanged();
-  void slotDoubleClicked(QIconViewItem* item);
-  void slotShowContextMenu(QIconViewItem* item, const QPoint& point);
-  void slotSortMenuActivated(int id);
+  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
+  void slotDoubleClicked(const QModelIndex& index);
+  void slotSortMenuActivated(QAction* action);
 
 private:
-  /**
-   * Updates the pointer list.
-   *
-   * @param item The item being selected or deselected
-   * @param s Selected or not
-   */
-  void updateSelected(EntryIconViewItem* item, bool s) const;
-  mutable QPtrList<EntryIconViewItem> m_selectedItems;
-
-  void findImageField();
-  void fillView();
-
-  Data::CollPtr m_coll;
-  Data::EntryVec m_entries;
-  QString m_imageField;
-  QIntDict<QPixmap> m_defaultPixmaps;
   int m_maxAllowedIconWidth;
-  int m_maxIconWidth;
-  int m_maxIconHeight;
-  ListViewComparison* m_comparison;
-};
-
-class EntryIconViewItem : public KIconViewItem {
-public:
-  EntryIconViewItem(EntryIconView* parent, Data::EntryPtr entry);
-  ~EntryIconViewItem();
-
-  EntryIconView* iconView() const { return static_cast<EntryIconView*>(KIconViewItem::iconView()); }
-  EntryIconViewItem* nextItem() const { return static_cast<EntryIconViewItem*>(KIconViewItem::nextItem()); }
-
-  Data::EntryPtr entry() const { return m_entry; }
-  virtual void setSelected(bool s, bool cb);
-  virtual void setSelected(bool s);
-  virtual QString key() const;
-  virtual int compare(QIconViewItem* item_) const;
-
-  bool usesImage() const { return m_usesImage; }
-  void updatePixmap();
-
-  void update();
-
-protected:
-  virtual void calcRect(const QString& text = QString::null);
-  virtual void paintItem(QPainter* p, const QColorGroup& cg);
-  virtual void paintFocus(QPainter* p, const QColorGroup& cg);
-  void paintPixmap(QPainter* p, const QColorGroup& cg);
-  void paintText(QPainter* p, const QColorGroup& cg);
-
-private:
-  Data::EntryPtr m_entry;
-  bool m_usesImage : 1;
 };
 
 } // end namespace

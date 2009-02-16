@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,6 +18,9 @@
 #define TELLICO_STATUSBAR_H
 
 #include <kstatusbar.h>
+
+class QLabel;
+class KPushButton;
 
 namespace Tellico {
   namespace GUI {
@@ -38,8 +41,7 @@ public:
 
   static StatusBar* self() { return s_self; }
 
-protected:
-  virtual void polish();
+  virtual void ensurePolished() const;
 
 private slots:
   void slotProgress(uint progress);
@@ -52,10 +54,10 @@ private:
 
   StatusBar(QWidget* parent);
 
-  KStatusBarLabel* m_mainLabel;
-  KStatusBarLabel* m_countLabel;
+  QLabel* m_mainLabel;
+  QLabel* m_countLabel;
   GUI::Progress* m_progress;
-  QWidget* m_cancelButton;
+  KPushButton* m_cancelButton;
 };
 
 }

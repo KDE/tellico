@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,37 +13,34 @@
 
 #include "tellico_utils.h"
 #include "tellico_kernel.h"
-#include "latin1literal.h"
 #include "tellico_debug.h"
 
 #include <kapplication.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include <klibloader.h>
+#include <klibrary.h>
 #include <kstandarddirs.h>
 #include <kcharsets.h>
+#include <krandom.h>
 
-#include <qregexp.h>
-#include <qdir.h>
-#include <qcursor.h>
-#include <qscrollview.h>
+#include <QRegExp>
+#include <QDir>
+#include <QCursor>
 
 namespace {
   static const int STRING_STORE_SIZE = 997; // too big, too small?
 }
 
-QColor Tellico::contrastColor;
-
 QString Tellico::decodeHTML(QString text) {
   QRegExp rx(QString::fromLatin1("&(.+);"));
   rx.setMinimal(true);
-  int pos = rx.search(text);
+  int pos = rx.indexIn(text);
   while(pos > -1) {
     QChar c = KCharsets::fromEntity(rx.cap(1));
     if(!c.isNull()) {
       text.replace(pos, rx.matchedLength(), c);
     }
-    pos = rx.search(text, pos+1);
+    pos = rx.indexIn(text, pos+1);
   }
   return text;
 }
@@ -53,7 +50,7 @@ QString Tellico::uid(int l, bool prefix) {
   if(prefix) {
     uid = QString::fromLatin1("Tellico");
   }
-  uid.append(kapp->randomString(QMAX(l - uid.length(), 0)));
+  uid.append(KRandom::randomString(qMax(l - uid.length(), 0)));
   return uid;
 }
 
@@ -65,8 +62,8 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
     return 0;
   }
 
-  uint idx = 0;
-  while(s[idx].isDigit()) {
+  int idx = 0;
+  while(idx < s.length() && s[idx].isDigit()) {
     ++idx;
   }
   if(idx == 0) {
@@ -80,13 +77,66 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
 
 QString Tellico::i18nReplace(QString text) {
   // Because QDomDocument sticks in random newlines, go ahead and grab them too
-  static QRegExp rx(QString::fromLatin1("(?:\\n+ *)*<i18n>([^<]*)</i18n>(?: *\\n+)*"));
-  int pos = rx.search(text);
+  static QRegExp rx(QLatin1String("(?:\\n+ *)*<i18n>([^<]*)</i18n>(?: *\\n+)*"));
+  int pos = rx.indexIn(text);
   while(pos > -1) {
-    text.replace(pos, rx.matchedLength(), i18n(rx.cap(1).utf8()));
-    pos = rx.search(text, pos+rx.matchedLength());
+    text.replace(pos, rx.matchedLength(), i18n(rx.cap(1).toUtf8()));
+    pos = rx.indexIn(text, pos+rx.matchedLength());
   }
   return text;
+}
+
+QString Tellico::removeAcceleratorMarker(const QString& label_) {
+#if KDE_IS_VERSION(4,2,0)
+  return KGlobal::locale()->removeAcceleratorMarker(label_);
+#else
+  QString label = label_;
+
+  int p = 0;
+  while (true) {
+      p = label.indexOf('&', p);
+      if (p < 0 || p + 1 == label.length()) {
+          break;
+      }
+
+      if (label[p + 1].isLetterOrNumber()) {
+          // Valid accelerator.
+          label = label.left(p) + label.mid(p + 1);
+
+          // May have been an accelerator in style of
+          // "(<marker><alnum>)" at the start or end of text.
+          if (   p > 0 && p + 1 < label.length()
+              && label[p - 1] == '(' && label[p + 1] == ')')
+          {
+              // Check if at start or end, ignoring non-alphanumerics.
+              int len = label.length();
+              int p1 = p - 2;
+              while (p1 >= 0 && !label[p1].isLetterOrNumber()) {
+                  --p1;
+              }
+              ++p1;
+              int p2 = p + 2;
+              while (p2 < len && !label[p2].isLetterOrNumber()) {
+                  ++p2;
+              }
+              --p2;
+
+              if (p1 == 0) {
+                  label = label.left(p - 1) + label.mid(p2 + 1);
+              } else if (p2 + 1 == len) {
+                  label = label.left(p1) + label.mid(p + 2);
+              }
+          }
+      } else if (label[p + 1] == '&') {
+          // Escaped accelerator marker.
+          label = label.left(p) + label.mid(p + 1);
+      }
+
+      ++p;
+  }
+
+  return label;
+#endif
 }
 
 QStringList Tellico::findAllSubDirs(const QString& dir_) {
@@ -102,10 +152,10 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
   // find immediate sub directories
   const QStringList subdirs = dir.entryList();
   for(QStringList::ConstIterator subdir = subdirs.begin(); subdir != subdirs.end(); ++subdir) {
-    if((*subdir).isEmpty() || *subdir == Latin1Literal(".") || *subdir == Latin1Literal("..")) {
+    if((*subdir).isEmpty() || *subdir == QLatin1String(".") || *subdir == QLatin1String("..")) {
       continue;
     }
-    QString absSubdir = dir.absFilePath(*subdir);
+    QString absSubdir = dir.absoluteFilePath(*subdir);
     allSubdirs += findAllSubDirs(absSubdir);
     allSubdirs += absSubdir;
   }
@@ -117,7 +167,7 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
 int Tellico::stringHash(const QString& str) {
   uint h = 0;
   uint g = 0;
-  for(uint i = 0; i < str.length(); ++i) {
+  for(int i = 0; i < str.length(); ++i) {
     h = (h << 4) + str.unicode()[i].cell();
     if((g = h & 0xf0000000)) {
       h ^= g >> 24;
@@ -139,63 +189,21 @@ QString Tellico::shareString(const QString& str) {
   return stringStore[hash];
 }
 
-void Tellico::updateContrastColor(const QColorGroup& cg_) {
-  // if the value difference between background and highlight is more than ???
-  // use highlight, else go lighter or darker
-  int h1, s1, v1, h2, s2, v2;
-  cg_.background().getHsv(&h1, &s1, &v1);
-
-  QColor hl = cg_.highlight();
-  hl.getHsv(&h2, &s2, &v2);
-  h2 += 120;
-  s2 = 255;
-  hl.setHsv(h2, s2, v2);
-
-  if(KABS(v2-v1) < 48) {
-    if(v1 < 128) {
-      contrastColor = hl.light();
-    } else {
-      contrastColor = hl.dark();
-    }
-  } else {
-    contrastColor = hl;
-  }
-}
-
 KLibrary* Tellico::openLibrary(const QString& libName_) {
-  QString path = KLibLoader::findLibrary(QFile::encodeName(libName_));
-  if(path.isEmpty()) {
-    kdWarning() << "Tellico::openLibrary() - Could not find library '" << libName_ << "'" << endl;
-    kdWarning() << "ERROR: " << KLibLoader::self()->lastErrorMessage() << endl;
-    return 0;
-  }
-
-  KLibrary* library = KLibLoader::self()->library(QFile::encodeName(path));
-  if(!library) {
-    kdWarning() << "Tellico::openLibrary() - Could not load library '" << libName_ << "'" << endl;
-    kdWarning() << " PATH: " << path << endl;
-    kdWarning() << "ERROR: " << KLibLoader::self()->lastErrorMessage() << endl;
+  KLibrary* library = new KLibrary(QFile::encodeName(libName_));
+  if(!library->load()) {
+    myWarning() << "Could not load library'" << libName_ << "'";
+    myWarning() << "ERROR:" << library->errorString();
     return 0;
   }
 
   return library;
 }
 
-QColor Tellico::blendColors(const QColor& color1, const QColor& color2, int percent) {
-  const double factor2 = percent/100.0;
-  const double factor1 = 1.0 - factor2;
-
-  const int r = static_cast<int>(color1.red()   * factor1 + color2.red()   * factor2);
-  const int g = static_cast<int>(color1.green() * factor1 + color2.green() * factor2);
-  const int b = static_cast<int>(color1.blue()  * factor1 + color2.blue()  * factor2);
-
-  return QColor(r, g, b);
-}
-
 QString Tellico::minutes(int seconds) {
   int min = seconds / 60;
   seconds = seconds % 60;
-  return QString::number(min) + ':' + QString::number(seconds).rightJustify(2, '0');
+  return QString::number(min) + ':' + QString::number(seconds).rightJustified(2, '0');
 }
 
 QString Tellico::saveLocation(const QString& dir_) {

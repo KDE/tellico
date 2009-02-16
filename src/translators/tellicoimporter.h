@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,14 +14,14 @@
 #ifndef TELLICO_IMPORTER_H
 #define TELLICO_IMPORTER_H
 
-class QBuffer;
-class KZip;
-class KArchiveDirectory;
-
 #include "dataimporter.h"
 #include "../datavectors.h"
 #include "../stringset.h"
 
+class KZip;
+class KArchiveDirectory;
+
+class QBuffer;
 class QDomElement;
 
 namespace Tellico {
@@ -41,7 +41,7 @@ public:
   /**
    * @param url The tellico data file.
    */
-  TellicoImporter(const KURL& url, bool loadAllImages=true);
+  TellicoImporter(const KUrl& url, bool loadAllImages=true);
   /**
    * Constructor used to convert arbitrary text to a @ref Collection
    *
@@ -63,7 +63,7 @@ public:
   bool hasImages() const { return m_hasImages; }
   bool loadImage(const QString& id_);
 
-  static bool loadAllImages(const KURL& url);
+  static bool loadAllImages(const KUrl& url);
 
 public slots:
   void slotCancel();

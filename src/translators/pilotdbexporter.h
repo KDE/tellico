@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,14 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef PILOTDBEXPORTER_H
-#define PILOTDBEXPORTER_H
+#ifndef TELLICO_PILOTDBEXPORTER_H
+#define TELLICO_PILOTDBEXPORTER_H
 
 class QCheckBox;
 
 #include "exporter.h"
 
-#include <qstringlist.h>
+#include <QStringList>
 
 namespace Tellico {
   namespace Export {
@@ -36,9 +36,9 @@ public:
   virtual QString formatString() const;
   virtual QString fileFilter() const;
 
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual void readOptions(KConfig* cfg);
-  virtual void saveOptions(KConfig* cfg);
+  virtual QWidget* widget(QWidget* parent);
+  virtual void readOptions(KSharedConfigPtr cfg);
+  virtual void saveOptions(KSharedConfigPtr cfg);
 
   void setColumns(const QStringList& columns) { m_columns = columns; }
 

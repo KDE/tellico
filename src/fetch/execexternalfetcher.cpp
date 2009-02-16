@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,20 +23,19 @@
 #include "../gui/lineedit.h"
 #include "../gui/collectiontypecombo.h"
 #include "../tellico_utils.h"
-#include "../newstuff/manager.h"
+//#include "../newstuff/manager.h"
 
 #include <klocale.h>
-#include <kconfig.h>
 #include <kprocess.h>
 #include <kurlrequester.h>
-#include <kaccelmanager.h>
+#include <kacceleratormanager.h>
+#include <kshell.h>
+#include <KConfigGroup>
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qwhatsthis.h>
-#include <qregexp.h>
-#include <qvgroupbox.h>
-#include <qfile.h> // needed for QFile::remove
+#include <QLabel>
+#include <QRegExp>
+#include <QGroupBox>
+#include <QGridLayout>
 
 using Tellico::Fetch::ExecExternalFetcher;
 
@@ -50,16 +49,16 @@ QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
 
   QStringList args;
   int pos = 0;
-  for(int nextPos = quotes.search(str_); nextPos > -1; pos = nextPos+1, nextPos = quotes.search(str_, pos)) {
+  for(int nextPos = quotes.indexIn(str_); nextPos > -1; pos = nextPos+1, nextPos = quotes.indexIn(str_, pos)) {
     // a non-quotes arguments runs from pos to nextPos
-    args += QStringList::split(spaces, str_.mid(pos, nextPos-pos));
+    args += str_.mid(pos, nextPos-pos).split(spaces, QString::SkipEmptyParts);
     // move nextpos marker to end of match
     pos = quotes.pos(2); // skip quotation mark
     nextPos += quotes.matchedLength();
     args += str_.mid(pos, nextPos-pos-1);
   }
   // catch the end stuff
-  args += QStringList::split(spaces, str_.mid(pos));
+  args += str_.mid(pos).split(spaces, QString::SkipEmptyParts);
 
 #if 0
   for(QStringList::ConstIterator it = args.begin(); it != args.end(); ++it) {
@@ -70,7 +69,7 @@ QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
   return args;
 }
 
-ExecExternalFetcher::ExecExternalFetcher(QObject* parent_, const char* name_/*=0*/) : Fetcher(parent_, name_),
+ExecExternalFetcher::ExecExternalFetcher(QObject* parent_) : Fetcher(parent_),
     m_started(false), m_collType(-1), m_formatType(-1), m_canUpdate(false), m_process(0), m_deleteOnRemove(false) {
 }
 
@@ -91,21 +90,21 @@ bool ExecExternalFetcher::canFetch(int type_) const {
 }
 
 void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString s = config_.readPathEntry("ExecPath");
+  QString s = config_.readPathEntry("ExecPath", QString());
   if(!s.isEmpty()) {
     m_path = s;
   }
-  QValueList<int> il;
+  QList<int> il;
   if(config_.hasKey("ArgumentKeys")) {
-    il = config_.readIntListEntry("ArgumentKeys");
+    il = config_.readEntry("ArgumentKeys", il);
   } else {
     il.append(Keyword);
   }
-  QStringList sl = config_.readListEntry("Arguments");
+  QStringList sl = config_.readEntry("Arguments", QStringList());
   if(il.count() != sl.count()) {
-    kdWarning() << "ExecExternalFetcher::readConfig() - unequal number of arguments and keys" << endl;
+    kWarning() << "ExecExternalFetcher::readConfig() - unequal number of arguments and keys";
   }
-  int n = QMIN(il.count(), sl.count());
+  int n = qMin(il.count(), sl.count());
   for(int i = 0; i < n; ++i) {
     m_args[static_cast<FetchKey>(il[i])] = sl[i];
   }
@@ -115,13 +114,13 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
   } else {
     m_canUpdate = false;
   }
-  m_collType = config_.readNumEntry("CollectionType", -1);
-  m_formatType = config_.readNumEntry("FormatType", -1);
-  m_deleteOnRemove = config_.readBoolEntry("DeleteOnRemove", false);
+  m_collType = config_.readEntry("CollectionType", -1);
+  m_formatType = config_.readEntry("FormatType", -1);
+  m_deleteOnRemove = config_.readEntry("DeleteOnRemove", false);
   m_newStuffName = config_.readEntry("NewStuffName");
 }
 
-void ExecExternalFetcher::search(FetchKey key_, const QString& value_) {
+void ExecExternalFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_started = true;
 
   if(!m_args.contains(key_)) {
@@ -129,7 +128,7 @@ void ExecExternalFetcher::search(FetchKey key_, const QString& value_) {
     return;
   }
 
-  // should KProcess::quote() be used?
+  // should KShell::quoteArg() be used?
   // %1 gets replaced by the search value, but since the arguments are going to be split
   // the search value needs to be enclosed in quotation marks
   // but first check to make sure the user didn't do that already
@@ -163,11 +162,12 @@ void ExecExternalFetcher::startSearch(const QStringList& args_) {
 #endif
 
   m_process = new KProcess();
-  connect(m_process, SIGNAL(receivedStdout(KProcess*, char*, int)), SLOT(slotData(KProcess*, char*, int)));
-  connect(m_process, SIGNAL(receivedStderr(KProcess*, char*, int)), SLOT(slotError(KProcess*, char*, int)));
-  connect(m_process, SIGNAL(processExited(KProcess*)), SLOT(slotProcessExited(KProcess*)));
-  *m_process << m_path << args_;
-  if(!m_process->start(KProcess::NotifyOnExit, KProcess::AllOutput)) {
+  connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
+  connect(m_process, SIGNAL(readyReadStandardError()), SLOT(slotError()));
+  connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
+  m_process->setOutputChannelMode(KProcess::SeparateChannels);
+  m_process->setProgram(m_path, args_);
+  if(m_process->execute() < 0) {
     myDebug() << "ExecExternalFetcher::startSearch() - process failed to start" << endl;
     stop();
   }
@@ -182,20 +182,19 @@ void ExecExternalFetcher::stop() {
     delete m_process;
     m_process = 0;
   }
-  m_data.truncate(0);
+  m_data.clear();
   m_started = false;
   m_errors.clear();
   emit signalDone(this);
 }
 
-void ExecExternalFetcher::slotData(KProcess*, char* buffer_, int len_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(buffer_, len_);
+void ExecExternalFetcher::slotData() {
+  m_data.append(m_process->readAllStandardOutput());
 }
 
-void ExecExternalFetcher::slotError(KProcess*, char* buffer_, int len_) {
-  GUI::CursorSaver cs(Qt::arrowCursor);
-  QString msg = QString::fromLocal8Bit(buffer_, len_);
+void ExecExternalFetcher::slotError() {
+  GUI::CursorSaver cs(Qt::ArrowCursor);
+  QString msg = m_process->readAllStandardError();
   msg.prepend(source() + QString::fromLatin1(": "));
   if(msg.endsWith(QChar('\n'))) {
     msg.truncate(msg.length()-1);
@@ -204,9 +203,9 @@ void ExecExternalFetcher::slotError(KProcess*, char* buffer_, int len_) {
   m_errors << msg;
 }
 
-void ExecExternalFetcher::slotProcessExited(KProcess*) {
+void ExecExternalFetcher::slotProcessExited() {
 //  myDebug() << "ExecExternalFetcher::slotProcessExited()" << endl;
-  if(!m_process->normalExit() || m_process->exitStatus()) {
+  if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
     myDebug() << "ExecExternalFetcher::slotProcessExited() - "<< source() << ": process did not exit successfully" << endl;
     if(!m_errors.isEmpty()) {
       message(m_errors.join(QChar('\n')), MessageHandler::Error);
@@ -225,7 +224,7 @@ void ExecExternalFetcher::slotProcessExited(KProcess*) {
   }
 
   Import::Format format = static_cast<Import::Format>(m_formatType > -1 ? m_formatType : Import::TellicoXML);
-  Import::Importer* imp = ImportDialog::importer(format, KURL::List());
+  Import::Importer* imp = ImportDialog::importer(format, KUrl::List());
   if(!imp) {
     stop();
     return;
@@ -250,8 +249,8 @@ void ExecExternalFetcher::slotProcessExited(KProcess*) {
     return;
   }
 
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
     QString desc;
     switch(coll->type()) {
       case Data::Collection::Book:
@@ -305,7 +304,7 @@ void ExecExternalFetcher::slotProcessExited(KProcess*) {
       default:
         break;
     }
-    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
@@ -316,17 +315,16 @@ Tellico::Data::EntryPtr ExecExternalFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-void ExecExternalFetcher::updateEntry(Data::EntryPtr entry_) {
+void ExecExternalFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   if(!m_canUpdate) {
     emit signalDone(this); // must do this
   }
 
   m_started = true;
 
-  Data::ConstEntryPtr e(entry_.data());
   QStringList args = parseArguments(m_updateArgs);
   for(QStringList::Iterator it = args.begin(); it != args.end(); ++it) {
-    *it = Data::Entry::dependentValue(e, *it, false);
+    *it = Data::Entry::dependentValue(entry_.data(), *it, false);
   }
   startSearch(args);
 }
@@ -337,9 +335,9 @@ Tellico::Fetch::ConfigWidget* ExecExternalFetcher::configWidget(QWidget* parent_
 
 ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExternalFetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_), m_deleteOnRemove(false) {
-  QGridLayout* l = new QGridLayout(optionsWidget(), 5, 2);
+  QGridLayout* l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
-  l->setColStretch(1, 10);
+  l->setColumnStretch(1, 10);
 
   int row = -1;
 
@@ -349,8 +347,8 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   l->addWidget(m_collCombo, row, 1);
   QString w = i18n("Set the collection type of the data returned from the external application.");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_collCombo, w);
+  label->setWhatsThis(w);
+  m_collCombo->setWhatsThis(w);
   label->setBuddy(m_collCombo);
 
   label = new QLabel(i18n("&Result type: "), optionsWidget());
@@ -359,33 +357,32 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   Import::FormatMap formatMap = ImportDialog::formatMap();
   for(Import::FormatMap::Iterator it = formatMap.begin(); it != formatMap.end(); ++it) {
     if(ImportDialog::formatImportsText(it.key())) {
-      m_formatCombo->insertItem(it.data(), it.key());
+      m_formatCombo->addItem(it.value(), it.key());
     }
   }
   connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   l->addWidget(m_formatCombo, row, 1);
   w = i18n("Set the result type of the data returned from the external application.");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_formatCombo, w);
+  label->setWhatsThis(w);
+  m_formatCombo->setWhatsThis(w);
   label->setBuddy(m_formatCombo);
 
   label = new QLabel(i18n("Application &path: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_pathEdit = new KURLRequester(optionsWidget());
+  m_pathEdit = new KUrlRequester(optionsWidget());
   connect(m_pathEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_pathEdit, row, 1);
   w = i18n("Set the path of the application to run that should output a valid Tellico data file.");
-  QWhatsThis::add(label, w);
-  QWhatsThis::add(m_pathEdit, w);
+  label->setWhatsThis(w);
+  m_pathEdit->setWhatsThis(w);
   label->setBuddy(m_pathEdit);
 
   w = i18n("Select the search keys supported by the data source.");
   QString w2 = i18n("Add any arguments that may be needed. <b>%1</b> will be replaced by the search term.");
-  QVGroupBox* box = new QVGroupBox(i18n("Arguments"), optionsWidget());
+  QGroupBox* gbox = new QGroupBox(i18n("Arguments"), optionsWidget());
   ++row;
-  l->addMultiCellWidget(box, row, row, 0, 1);
-  QWidget* grid = new QWidget(box);
-  QGridLayout* gridLayout = new QGridLayout(grid);
+  l->addWidget(gbox, row, 0, 1, 2);
+  QGridLayout* gridLayout = new QGridLayout(gbox);
   gridLayout->setSpacing(2);
   row = -1;
   const Fetch::KeyMap keyMap = Fetch::Manager::self()->keyMap();
@@ -394,11 +391,11 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     if(key == Raw) {
       continue;
     }
-    QCheckBox* cb = new QCheckBox(it.data(), grid);
+    QCheckBox* cb = new QCheckBox(it.value(), gbox);
     gridLayout->addWidget(cb, ++row, 0);
     m_cbDict.insert(key, cb);
-    GUI::LineEdit* le = new GUI::LineEdit(grid);
-    le->setHint(QString::fromLatin1("%1")); // for example
+    GUI::LineEdit* le = new GUI::LineEdit(gbox);
+    le->setClickMessage(QString::fromLatin1("%1")); // for example
     le->completionObject()->addItem(QString::fromLatin1("%1"));
     gridLayout->addWidget(le, row, 1);
     m_leDict.insert(key, le);
@@ -411,13 +408,13 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
       le->setEnabled(false);
     }
     connect(cb, SIGNAL(toggled(bool)), le, SLOT(setEnabled(bool)));
-    QWhatsThis::add(cb, w);
-    QWhatsThis::add(le, w2);
+    cb->setWhatsThis(w);
+    le->setWhatsThis(w2);
   }
-  m_cbUpdate = new QCheckBox(i18n("Update"), grid);
+  m_cbUpdate = new QCheckBox(i18n("Update"), gbox);
   gridLayout->addWidget(m_cbUpdate, ++row, 0);
-  m_leUpdate = new GUI::LineEdit(grid);
-  m_leUpdate->setHint(QString::fromLatin1("%{title}")); // for example
+  m_leUpdate = new GUI::LineEdit(gbox);
+  m_leUpdate->setClickMessage(QString::fromLatin1("%{title}")); // for example
   m_leUpdate->completionObject()->addItem(QString::fromLatin1("%{title}"));
   m_leUpdate->completionObject()->addItem(QString::fromLatin1("%{isbn}"));
   gridLayout->addWidget(m_leUpdate, row, 1);
@@ -425,8 +422,8 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   w2 = i18n("<p>Enter the arguments which should be used to search for available updates to an entry.</p><p>"
            "The format is the same as for <i>Dependent</i> fields, where field values "
            "are contained inside braces, such as <i>%{author}</i>. See the documentation for details.</p>");
-  QWhatsThis::add(m_cbUpdate, w);
-  QWhatsThis::add(m_leUpdate, w2);
+  m_cbUpdate->setWhatsThis(w);
+  m_leUpdate->setWhatsThis(w2);
   if(fetcher_ && fetcher_->m_canUpdate) {
     m_cbUpdate->setChecked(true);
     m_leUpdate->setEnabled(true);
@@ -440,7 +437,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   l->setRowStretch(++row, 1);
 
   if(fetcher_) {
-    m_pathEdit->setURL(fetcher_->m_path);
+    m_pathEdit->setUrl(fetcher_->m_path);
     m_newStuffName = fetcher_->m_newStuffName;
   }
   if(fetcher_ && fetcher_->m_collType > -1) {
@@ -460,19 +457,19 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
 ExecExternalFetcher::ConfigWidget::~ConfigWidget() {
 }
 
-void ExecExternalFetcher::ConfigWidget::readConfig(KConfig* config_) {
-  m_pathEdit->setURL(config_->readPathEntry("ExecPath"));
-  QValueList<int> argKeys = config_->readIntListEntry("ArgumentKeys");
-  QStringList argValues = config_->readListEntry("Arguments");
+void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) {
+  m_pathEdit->setUrl(KUrl(config_.readPathEntry("ExecPath", QString())));
+  QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
+  QStringList argValues = config_.readEntry("Arguments", QStringList());
   if(argKeys.count() != argValues.count()) {
-    kdWarning() << "ExecExternalFetcher::ConfigWidget::readConfig() - unequal number of arguments and keys" << endl;
+    kWarning() << "ExecExternalFetcher::ConfigWidget::readConfig() - unequal number of arguments and keys";
   }
-  int n = QMIN(argKeys.count(), argValues.count());
+  int n = qMin(argKeys.count(), argValues.count());
   QMap<FetchKey, QString> args;
   for(int i = 0; i < n; ++i) {
     args[static_cast<FetchKey>(argKeys[i])] = argValues[i];
   }
-  for(QValueList<int>::Iterator it = argKeys.begin(); it != argKeys.end(); ++it) {
+  for(QList<int>::Iterator it = argKeys.begin(); it != argKeys.end(); ++it) {
     if(*it == Raw) {
       continue;
     }
@@ -492,38 +489,39 @@ void ExecExternalFetcher::ConfigWidget::readConfig(KConfig* config_) {
     }
   }
 
-  if(config_->hasKey("UpdateArgs")) {
+  if(config_.hasKey("UpdateArgs")) {
     m_cbUpdate->setChecked(true);
     m_leUpdate->setEnabled(true);
-    m_leUpdate->setText(config_->readEntry("UpdateArgs"));
+    m_leUpdate->setText(config_.readEntry("UpdateArgs"));
   } else {
     m_cbUpdate->setChecked(false);
     m_leUpdate->setEnabled(false);
     m_leUpdate->clear();
   }
 
-  int collType = config_->readNumEntry("CollectionType");
+  int collType = config_.readEntry("CollectionType", -1);
   m_collCombo->setCurrentType(collType);
 
   Import::FormatMap formatMap = ImportDialog::formatMap();
-  int formatType = config_->readNumEntry("FormatType");
+  int formatType = config_.readEntry("FormatType", -1);
   m_formatCombo->setCurrentItem(formatMap[static_cast<Import::Format>(formatType)]);
-  m_deleteOnRemove = config_->readBoolEntry("DeleteOnRemove", false);
-  m_name = config_->readEntry("Name");
-  m_newStuffName = config_->readEntry("NewStuffName");
+  m_deleteOnRemove = config_.readEntry("DeleteOnRemove", false);
+  m_name = config_.readEntry("Name");
+  m_newStuffName = config_.readEntry("NewStuffName");
 }
 
 void ExecExternalFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
-  QString s = m_pathEdit->url();
-  if(!s.isEmpty()) {
-    config_.writePathEntry("ExecPath", s);
+        KUrl u = m_pathEdit->url();
+  if(!u.isEmpty()) {
+    config_.writePathEntry("ExecPath", u.path());
   }
-  QValueList<int> keys;
+  QList<int> keys;
   QStringList args;
-  for(QIntDictIterator<QCheckBox> it(m_cbDict); it.current(); ++it) {
-    if(it.current()->isChecked()) {
-      keys << it.currentKey();
-      args << m_leDict[it.currentKey()]->text();
+  QHash<int, QCheckBox*>::const_iterator it = m_cbDict.constBegin();
+  for( ; it != m_cbDict.constEnd(); ++it) {
+    if(it.value()->isChecked()) {
+      keys << it.key();
+      args << m_leDict[it.key()]->text();
     }
   }
   config_.writeEntry("ArgumentKeys", keys);
@@ -548,10 +546,12 @@ void ExecExternalFetcher::ConfigWidget::removed() {
   if(!m_deleteOnRemove) {
     return;
   }
-  if(!m_newStuffName.isEmpty()) {
+#if 0
+if(!m_newStuffName.isEmpty()) {
     NewStuff::Manager man(this);
     man.removeScript(m_newStuffName);
   }
+#endif
 }
 
 QString ExecExternalFetcher::ConfigWidget::preferredName() const {

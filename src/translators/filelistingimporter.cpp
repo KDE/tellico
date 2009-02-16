@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +15,6 @@
 #include "../collections/filecatalog.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../latin1literal.h"
 #include "../imagefactory.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
@@ -27,15 +26,13 @@
 #include <kmountpoint.h>
 #include <kio/job.h>
 #include <kio/netaccess.h>
+#include <kde_file.h>
 
-#include <qcheckbox.h>
-#include <qvgroupbox.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-
-#include <stdio.h>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QFile>
+#include <QFileInfo>
+#include <QVBoxLayout>
 
 namespace {
   static const int FILE_PREVIEW_SIZE = 128;
@@ -46,9 +43,8 @@ namespace {
 
 using Tellico::Import::FileListingImporter;
 
-FileListingImporter::FileListingImporter(const KURL& url_) : Importer(url_), m_coll(0), m_widget(0),
+FileListingImporter::FileListingImporter(const KUrl& url_) : Importer(url_), m_coll(0), m_widget(0),
     m_job(0), m_cancelled(false) {
-  m_files.setAutoDelete(true);
 }
 
 bool FileListingImporter::canImport(int type) const {
@@ -69,13 +65,13 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   QString volume = volumeName();
 
   m_job = m_recursive->isChecked()
-          ? KIO::listRecursive(url(), true, false)
-          : KIO::listDir(url(), true, false);
+          ? KIO::listRecursive(url(), KIO::DefaultFlags, false)
+          : KIO::listDir(url(), KIO::DefaultFlags, false);
   connect(m_job, SIGNAL(entries(KIO::Job*, const KIO::UDSEntryList&)),
           SLOT(slotEntries(KIO::Job*, const KIO::UDSEntryList&)));
 
   if(!KIO::NetAccess::synchronousRun(m_job, Kernel::self()->widget()) || m_cancelled) {
-    return 0;
+    return Data::CollPtr();
   }
 
   const bool usePreview = m_filePreview->isChecked();
@@ -97,50 +93,50 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
   m_coll = new Data::FileCatalog(true);
   QString tmp;
-  const uint stepSize = QMAX(1, m_files.count()/100);
+  const uint stepSize = qMax(1, m_files.count()/100);
   const bool showProgress = options() & ImportProgress;
 
   item.setTotalSteps(m_files.count());
   uint j = 0;
-  for(KFileItemListIterator it(m_files); !m_cancelled && it.current(); ++it, ++j) {
-    Data::EntryPtr entry = new Data::Entry(m_coll);
+  foreach(const KFileItem& item, m_files) {
+    if(m_cancelled) {
+      break;
+    }
 
-    const KURL u = it.current()->url();
+    Data::EntryPtr entry(new Data::Entry(m_coll));
+
+    const KUrl u = item.url();
     entry->setField(title,  u.fileName());
     entry->setField(url,    u.url());
-    entry->setField(desc,   it.current()->mimeComment());
+    entry->setField(desc,   item.mimeComment());
     entry->setField(vol,    volume);
-    tmp = KURL::relativePath(this->url().path(), u.directory());
+    tmp = KUrl::relativePath(this->url().path(), u.directory());
     // remove "./" from the string
     entry->setField(folder, tmp.right(tmp.length()-2));
-    entry->setField(type,   it.current()->mimetype());
-    entry->setField(size,   KIO::convertSize(it.current()->size()));
-    entry->setField(perm,   it.current()->permissionsString());
-    entry->setField(owner,  it.current()->user());
-    entry->setField(group,  it.current()->group());
+    entry->setField(type,   item.mimetype());
+    entry->setField(size,   KIO::convertSize(item.size()));
+    entry->setField(perm,   item.permissionsString());
+    entry->setField(owner,  item.user());
+    entry->setField(group,  item.group());
 
-    time_t t = it.current()->time(KIO::UDS_CREATION_TIME);
-    if(t > 0) {
-      QDateTime dt;
-      dt.setTime_t(t);
-      entry->setField(created, dt.toString(Qt::ISODate));
+    KDateTime dt = item.time(KFileItem::CreationTime);
+    if(!dt.isNull()) {
+      entry->setField(created, dt.toString(KDateTime::ISODate));
     }
-    t = it.current()->time(KIO::UDS_MODIFICATION_TIME);
-    if(t > 0) {
-      QDateTime dt;
-      dt.setTime_t(t);
-      entry->setField(modified, dt.toString(Qt::ISODate));
+    dt = item.time(KFileItem::ModificationTime);
+    if(!dt.isNull()) {
+      entry->setField(modified, dt.toString(KDateTime::ISODate));
     }
-    const KFileMetaInfo& meta = it.current()->metaInfo();
-    if(meta.isValid() && !meta.isEmpty()) {
+    const KFileMetaInfo& meta = item.metaInfo();
+    if(meta.isValid()) {
       const QStringList keys = meta.supportedKeys();
       QStringList strings;
-      for(QStringList::ConstIterator it2 = keys.begin(); it2 != keys.end(); ++it2) {
-        KFileMetaInfoItem item = meta.item(*it2);
+      foreach(const QString& key, keys) {
+        KFileMetaInfoItem item = meta.item(key);
         if(item.isValid()) {
-          QString s = item.string();
+          QString s = item.value().toString();
           if(!s.isEmpty()) {
-            strings << item.key() + "::" + s;
+            strings << item.name() + "::" + s;
           }
         }
       }
@@ -148,12 +144,12 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     }
 
     if(!m_cancelled && usePreview) {
-      m_pixmap = NetAccess::filePreview(it.current(), FILE_PREVIEW_SIZE);
+      m_pixmap = NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
       if(m_pixmap.isNull()) {
-        m_pixmap = it.current()->pixmap(0);
+        m_pixmap = item.pixmap(0);
       }
     } else {
-      m_pixmap = it.current()->pixmap(0);
+      m_pixmap = item.pixmap(0);
     }
 
     if(!m_pixmap.isNull()) {
@@ -170,38 +166,43 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
       ProgressManager::self()->setProgress(this, j);
       kapp->processEvents();
     }
+    ++j;
   }
 
   if(m_cancelled) {
-    m_coll = 0;
-    return 0;
+    m_coll = Data::CollPtr();
+    return m_coll;
   }
 
   return m_coll;
 }
 
-QWidget* FileListingImporter::widget(QWidget* parent_, const char* name_) {
+QWidget* FileListingImporter::widget(QWidget* parent_) {
   if(m_widget) {
     return m_widget;
   }
 
-  m_widget = new QWidget(parent_, name_);
+  m_widget = new QWidget(parent_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QVGroupBox* box = new QVGroupBox(i18n("File Listing Options"), m_widget);
+  QGroupBox* gbox = new QGroupBox(i18n("File Listing Options"), m_widget);
+  QVBoxLayout* vlay = new QVBoxLayout(gbox);
 
-  m_recursive = new QCheckBox(i18n("Recursive folder search"), box);
-  QWhatsThis::add(m_recursive, i18n("If checked, folders are recursively searched for all files."));
+  m_recursive = new QCheckBox(i18n("Recursive folder search"), gbox);
+  m_recursive->setWhatsThis(i18n("If checked, folders are recursively searched for all files."));
   // by default, make it checked
   m_recursive->setChecked(true);
 
-  m_filePreview = new QCheckBox(i18n("Generate file previews"), box);
-  QWhatsThis::add(m_filePreview, i18n("If checked, previews of the file contents are generated, which can slow down "
+  m_filePreview = new QCheckBox(i18n("Generate file previews"), gbox);
+  m_filePreview->setWhatsThis(i18n("If checked, previews of the file contents are generated, which can slow down "
                                       "the folder listing."));
   // by default, make it no previews
   m_filePreview->setChecked(false);
 
-  l->addWidget(box);
+  vlay->addWidget(m_recursive);
+  vlay->addWidget(m_filePreview);
+
+  l->addWidget(gbox);
   l->addStretch(1);
   return m_widget;
 }
@@ -214,11 +215,9 @@ void FileListingImporter::slotEntries(KIO::Job* job_, const KIO::UDSEntryList& l
   }
 
   for(KIO::UDSEntryList::ConstIterator it = list_.begin(); it != list_.end(); ++it) {
-    KFileItem* item = new KFileItem(*it, url(), false, true);
-    if(item->isFile()) {
+    KFileItem item(*it, url(), false, true);
+    if(item.isFile()) {
       m_files.append(item);
-    } else {
-      delete item;
     }
   }
 }
@@ -232,8 +231,8 @@ QString FileListingImporter::volumeName() const {
     // which could be the mount point of the device
     // I know it works for iso9660 (cdrom) and udf (dvd)
     if(url().path() == (*it)->mountPoint()
-       && ((*it)->mountType() == Latin1Literal("iso9660")
-           || (*it)->mountType() == Latin1Literal("udf"))) {
+       && ((*it)->mountType() == QLatin1String("iso9660")
+           || (*it)->mountType() == QLatin1String("udf"))) {
       volume = (*it)->mountPoint();
       if(!(*it)->realDeviceName().isEmpty()) {
         QString devName = (*it)->realDeviceName();
@@ -242,13 +241,13 @@ QString FileListingImporter::volumeName() const {
         }
         // QFile can't do a sequential seek, and I don't want to do a 32808x loop on getch()
         FILE* dev = 0;
-        if((dev = fopen(devName.latin1(), "rb")) != 0) {
+        if((dev = fopen(devName.toLatin1(), "rb")) != 0) {
           // returns 0 on success
-          if(fseek(dev, VOLUME_NAME_POS, SEEK_SET) == 0) {
+          if(KDE_fseek(dev, VOLUME_NAME_POS, SEEK_SET) == 0) {
             char buf[VOLUME_NAME_SIZE];
             int ret = fread(buf, 1, VOLUME_NAME_SIZE, dev);
             if(ret == VOLUME_NAME_SIZE) {
-              volume = QString::fromLatin1(buf, VOLUME_NAME_SIZE).stripWhiteSpace();
+              volume = QString::fromLatin1(buf, VOLUME_NAME_SIZE).trimmed();
             }
           } else {
             myDebug() << "FileListingImporter::volumeName() - can't seek " << devName << endl;

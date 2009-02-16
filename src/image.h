@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,13 +11,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef TELLICO_IMAGE_H
+#define TELLICO_IMAGE_H
 
-#include <qimage.h>
-#include <qstring.h>
-
-class KPixmapIO;
+#include <QImage>
+#include <QString>
+#include <QByteArray>
+#include <QPixmap>
 
 namespace Tellico {
   class ImageFactory;
@@ -37,7 +37,7 @@ public:
   ~Image();
 
   const QString& id() const { return m_id; };
-  const QCString& format() const { return m_format; };
+  const QByteArray& format() const { return m_format; };
   QByteArray byteArray() const;
   bool isNull() const;
   bool linkOnly() const { return m_linkOnly; }
@@ -46,8 +46,8 @@ public:
   QPixmap convertToPixmap() const;
   QPixmap convertToPixmap(int width, int height) const;
 
-  static QCString outputFormat(const QCString& inputFormat);
-  static QByteArray byteArray(const QImage& img, const QCString& outputFormat);
+  static QByteArray outputFormat(const QByteArray& inputFormat);
+  static QByteArray byteArray(const QImage& img, const QByteArray& outputFormat);
   static QString idClean(const QString& id);
 
 private:
@@ -64,21 +64,18 @@ private:
   void calculateID();
 
   QString m_id;
-  QCString m_format;
+  QByteArray m_format;
   bool m_linkOnly : 1;
-
-  static KPixmapIO* s_pixmapIO;
-  static KPixmapIO* io();
 };
 
 class ImageInfo {
 public:
   ImageInfo() {}
   explicit ImageInfo(const Image& img);
-  ImageInfo(const QString& id, const QCString& format, int w, int h, bool link);
+  ImageInfo(const QString& id, const QByteArray& format, int w, int h, bool link);
   bool isNull() const { return id.isEmpty(); }
   QString id;
-  QCString format;
+  QByteArray format;
   bool linkOnly : 1;
 
   int width(bool loadIfNecessary=true) const;

@@ -12,8 +12,8 @@
  ***************************************************************************/
 
 #include "field.h"
+#include "fieldformat.h"
 #include "tellico_utils.h"
-#include "latin1literal.h"
 #include "tellico_debug.h"
 #include "core/tellico_config.h"
 #include "collection.h"
@@ -21,20 +21,9 @@
 #include <klocale.h>
 #include <kglobal.h>
 
-#include <qstringlist.h>
-#include <qregexp.h>
-#include <qdatetime.h>
-
-namespace {
-  static const QRegExp comma_split = QRegExp(QString::fromLatin1("\\s*,\\s*"));
-}
+#include <QDateTime>
 
 using Tellico::Data::Field;
-
-//these get overwritten, but are here since they're static
-QStringList Field::s_articles;
-QStringList Field::s_articlesApos;
-QRegExp Field::s_delimiter = QRegExp(QString::fromLatin1("\\s*;\\s*"));
 
 // this constructor is for anything but Choice type
 Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
@@ -43,8 +32,8 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
 
 #ifndef NDEBUG
   if(m_type == Choice) {
-    kdWarning() << "Field() - A different constructor should be called for multiple choice attributes." << endl;
-    kdWarning() << "Constructing a Field with name = " << name_ << endl;
+    myWarning() << "Field() - A different constructor should be called for multiple choice attributes." << endl;
+    myWarning() << "Constructing a Field with name = " << name_ << endl;
   }
 #endif
   // a paragraph's category is always its title, along with tables
@@ -55,15 +44,15 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
     m_flags = AllowMultiple;
     if(m_type == Table2) {
       m_type = Table;
-      setProperty(QString::fromLatin1("columns"), QChar('2'));
+      setProperty(QLatin1String("columns"), QChar('2'));
     } else {
-      setProperty(QString::fromLatin1("columns"), QChar('1'));
+      setProperty(QLatin1String("columns"), QChar('1'));
     }
   } else if(m_type == Date) {  // hidden from user
     m_formatFlag = FormatDate;
   } else if(m_type == Rating) {
-    setProperty(QString::fromLatin1("minimum"), QChar('1'));
-    setProperty(QString::fromLatin1("maximum"), QChar('5'));
+    setProperty(QLatin1String("minimum"), QChar('1'));
+    setProperty(QLatin1String("maximum"), QChar('5'));
   }
   m_id = getID();
 }
@@ -84,7 +73,7 @@ Field::Field(const Field& field_)
     m_allowed = field_.allowed();
   } else if(m_type == Table2) {
     m_type = Table;
-    setProperty(QString::fromLatin1("columns"), QChar('2'));
+    setProperty(QLatin1String("columns"), QChar('2'));
   }
   m_id = getID();
 }
@@ -92,7 +81,7 @@ Field::Field(const Field& field_)
 Field& Field::operator=(const Field& field_) {
   if(this == &field_) return *this;
 
-  static_cast<KShared&>(*this) = static_cast<const KShared&>(field_);
+//  static_cast<KShared&>(*this) = static_cast<const KShared&>(field_);
   m_name = field_.name();
   m_title = field_.title();
   m_category = field_.category();
@@ -102,7 +91,7 @@ Field& Field::operator=(const Field& field_) {
     m_allowed = field_.allowed();
   } else if(m_type == Table2) {
     m_type = Table;
-    setProperty(QString::fromLatin1("columns"), QChar('2'));
+    setProperty(QLatin1String("columns"), QChar('2'));
   }
   m_flags = field_.flags();
   m_formatFlag = field_.formatFlag();
@@ -130,10 +119,10 @@ void Field::setType(Field::Type type_) {
     m_flags |= AllowMultiple;
     if(m_type == Table2) {
       m_type = Table;
-      setProperty(QString::fromLatin1("columns"), QChar('2'));
+      setProperty(QLatin1String("columns"), QChar('2'));
     }
-    if(property(QString::fromLatin1("columns")).isEmpty()) {
-      setProperty(QString::fromLatin1("columns"), QChar('1'));
+    if(property(QLatin1String("columns")).isEmpty()) {
+      setProperty(QLatin1String("columns"), QChar('1'));
     }
   }
   if(isSingleCategory()) {
@@ -167,13 +156,13 @@ void Field::setFormatFlag(FormatFlag flag_) {
   }
 }
 
-const QString& Field::defaultValue() const {
-  return property(QString::fromLatin1("default"));
+QString Field::defaultValue() const {
+  return property(QLatin1String("default"));
 }
 
 void Field::setDefaultValue(const QString& value_) {
-  if(value_.isEmpty() || m_type != Choice || m_allowed.findIndex(value_) > -1) {
-    setProperty(QString::fromLatin1("default"), value_);
+  if(value_.isEmpty() || m_type != Choice || m_allowed.indexOf(value_) > -1) {
+    setProperty(QLatin1String("default"), value_);
   }
 }
 
@@ -182,8 +171,8 @@ bool Field::isSingleCategory() const {
 }
 
 // format is something like "%{year} %{author}"
-Tellico::Data::FieldVec Field::dependsOn(CollPtr coll_) const {
-  FieldVec vec;
+Tellico::Data::FieldList Field::dependsOn(Tellico::Data::CollPtr coll_) const {
+  FieldList vec;
   if(m_type != Dependent || !coll_) {
     return vec;
   }
@@ -209,10 +198,10 @@ QStringList Field::dependsOn() const {
     return list;
   }
 
-  QRegExp rx(QString::fromLatin1("%\\{(.+)\\}"));
+  QRegExp rx(QLatin1String("%\\{(.+)\\}"));
   rx.setMinimal(true);
   // do NOT call recursively!
-  for(int pos = m_desc.find(rx); pos > -1; pos = m_desc.find(rx, pos+3)) {
+  for(int pos = m_desc.indexOf(rx); pos > -1; pos = m_desc.indexOf(rx, pos+3)) {
     list << rx.cap(1);
   }
   return list;
@@ -226,260 +215,22 @@ QString Field::format(const QString& value_, FormatFlag flag_) {
   QString text;
   switch(flag_) {
     case FormatTitle:
-      text = formatTitle(value_);
+      text = FieldFormat::title(value_);
       break;
     case FormatName:
-      text = formatName(value_);
+      text = FieldFormat::name(value_);
       break;
     case FormatDate:
-      text = formatDate(value_);
+      text = FieldFormat::date(value_);
       break;
     case FormatPlain:
-      text = Config::autoCapitalization() ? capitalize(value_) : value_;
+      text = Config::autoCapitalization() ? FieldFormat::capitalize(value_) : value_;
       break;
     default:
       text = value_;
       break;
   }
   return text;
-}
-
-QString Field::formatTitle(const QString& title_) {
-  QString newTitle = title_;
-  // special case for multi-column tables, assume user never has '::' in a value
-  const QString colonColon = QString::fromLatin1("::");
-  QString tail;
-  if(newTitle.find(colonColon) > -1) {
-    tail = colonColon + newTitle.section(colonColon, 1);
-    newTitle = newTitle.section(colonColon, 0, 0);
-  }
-
-  if(Config::autoCapitalization()) {
-    newTitle = capitalize(newTitle);
-  }
-
-  if(Config::autoFormat()) {
-    const QString lower = newTitle.lower();
-    // TODO if the title has ",the" at the end, put it at the front
-    for(QStringList::ConstIterator it = s_articles.constBegin(); it != s_articles.constEnd(); ++it) {
-      // assume white space is already stripped
-      // the articles are already in lower-case
-      if(lower.startsWith(*it + QChar(' '))) {
-        QRegExp regexp(QChar('^') + QRegExp::escape(*it) + QString::fromLatin1("\\s*"), false);
-        // can't just use *it since it's in lower-case
-        QString article = newTitle.left((*it).length());
-        newTitle = newTitle.replace(regexp, QString::null)
-                           .append(QString::fromLatin1(", "))
-                           .append(article);
-        break;
-      }
-    }
-  }
-
-  // also, arbitrarily impose rule that a space must follow every comma
-  newTitle.replace(comma_split, QString::fromLatin1(", "));
-  return newTitle + tail;
-}
-
-QString Field::formatName(const QString& name_, bool multiple_/*=true*/) {
-  static const QRegExp spaceComma(QString::fromLatin1("[\\s,]"));
-  static const QString colonColon = QString::fromLatin1("::");
-  // the ending look-ahead is so that a space is not added at the end
-  static const QRegExp periodSpace(QString::fromLatin1("\\.\\s*(?=.)"));
-
-  QStringList entries;
-  if(multiple_) {
-    // split by semi-colon, optionally preceded or followed by white spacee
-    entries = QStringList::split(s_delimiter, name_, false);
-  } else {
-    entries << name_;
-  }
-
-  QRegExp lastWord;
-  lastWord.setCaseSensitive(false);
-
-  QStringList names;
-  for(QStringList::ConstIterator it = entries.begin(); it != entries.end(); ++it) {
-    QString name = *it;
-    // special case for 2-column tables, assume user never has '::' in a value
-    QString tail;
-    if(name.find(colonColon) > -1) {
-      tail = colonColon + name.section(colonColon, 1);
-      name = name.section(colonColon, 0, 0);
-    }
-    name.replace(periodSpace, QString::fromLatin1(". "));
-    if(Config::autoCapitalization()) {
-      name = capitalize(name);
-    }
-
-    // split the name by white space and commas
-    QStringList words = QStringList::split(spaceComma, name, false);
-    lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
-
-    // if it contains a comma already and the last word is not a suffix, don't format it
-    if(!Config::autoFormat() || (name.find(',') > -1 && Config::nameSuffixList().grep(lastWord).isEmpty())) {
-      // arbitrarily impose rule that no spaces before a comma and
-      // a single space after every comma
-      name.replace(comma_split, QString::fromLatin1(", "));
-      names << name + tail;
-      continue;
-    }
-    // otherwise split it by white space, move the last word to the front
-    // but only if there is more than one word
-    if(words.count() > 1) {
-      // if the last word is a suffix, it has to be kept with last name
-      if(Config::nameSuffixList().grep(lastWord).count() > 0) {
-        words.prepend(words.last().append(QChar(',')));
-        words.remove(words.fromLast());
-      }
-
-      // now move the word
-      // adding comma here when there had been a suffix is because it was originally split with space or comma
-      words.prepend(words.last().append(QChar(',')));
-      words.remove(words.fromLast());
-
-      // update last word regexp
-      lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
-
-      // this is probably just something for me, limited to english
-      while(Config::surnamePrefixList().grep(lastWord).count() > 0) {
-        words.prepend(words.last());
-        words.remove(words.fromLast());
-        lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
-      }
-
-      names << words.join(QChar(' ')) + tail;
-    } else {
-      names << name + tail;
-    }
-  }
-
-  return names.join(QString::fromLatin1("; "));
-}
-
-QString Field::formatDate(const QString& date_) {
-  // internally, this is "year-month-day"
-  // any of the three may be empty
-  // if they're not digits, return the original string
-  bool empty = true;
-  // for empty year, use current
-  // for empty month or date, use 1
-  QStringList s = QStringList::split('-', date_, true);
-  bool ok = true;
-  int y = s.count() > 0 ? s[0].toInt(&ok) : QDate::currentDate().year();
-  if(ok) {
-    empty = false;
-  } else {
-    y = QDate::currentDate().year();
-  }
-  int m = s.count() > 1 ? s[1].toInt(&ok) : 1;
-  if(ok) {
-    empty = false;
-  } else {
-    m = 1;
-  }
-  int d = s.count() > 2 ? s[2].toInt(&ok) : 1;
-  if(ok) {
-    empty = false;
-  } else {
-    d = 1;
-  }
-  // rather use ISO date formatting than locale formatting for now. Primarily, it makes sorting just work.
-  return empty ? date_ : QDate(y, m, d).toString(Qt::ISODate);
-  // use short form
-//  return KGlobal::locale()->formatDate(date, true);
-}
-
-QString Field::capitalize(QString str_) {
-  // regexp to split words
-  static const QRegExp rx(QString::fromLatin1("[-\\s,.;]"));
-
-  if(str_.isEmpty()) {
-    return str_;
-  }
-  // first letter is always capitalized
-  str_.replace(0, 1, str_.at(0).upper());
-
-  // special case for french words like l'espace
-
-  int pos = str_.find(rx, 1);
-  int nextPos;
-
-  QRegExp wordRx;
-  wordRx.setCaseSensitive(false);
-
-  QStringList notCap = Config::noCapitalizationList();
-  // don't capitalize the surname prefixes
-  // does this hold true everywhere other than english?
-  notCap += Config::surnamePrefixList();
-
-  QString word = str_.mid(0, pos);
-  // now check to see if words starts with apostrophe list
-  for(QStringList::ConstIterator it = s_articlesApos.constBegin(); it != s_articlesApos.constEnd(); ++it) {
-    if(word.lower().startsWith(*it)) {
-      uint l = (*it).length();
-      str_.replace(l, 1, str_.at(l).upper());
-      break;
-    }
-  }
-
-  while(pos > -1) {
-    // also need to compare against list of non-capitalized words
-    nextPos = str_.find(rx, pos+1);
-    if(nextPos == -1) {
-      nextPos = str_.length();
-    }
-    word = str_.mid(pos+1, nextPos-pos-1);
-    bool aposMatch = false;
-    // now check to see if words starts with apostrophe list
-    for(QStringList::ConstIterator it = s_articlesApos.constBegin(); it != s_articlesApos.constEnd(); ++it) {
-      if(word.lower().startsWith(*it)) {
-        uint l = (*it).length();
-        str_.replace(pos+l+1, 1, str_.at(pos+l+1).upper());
-        aposMatch = true;
-        break;
-      }
-    }
-
-    if(!aposMatch) {
-      wordRx.setPattern(QChar('^') + QRegExp::escape(word) + QChar('$'));
-      if(notCap.grep(wordRx).isEmpty() && nextPos-pos > 1) {
-        str_.replace(pos+1, 1, str_.at(pos+1).upper());
-      }
-    }
-
-    pos = str_.find(rx, pos+1);
-  }
-  return str_;
-}
-
-QString Field::sortKeyTitle(const QString& title_) {
-  const QString lower = title_.lower();
-  for(QStringList::ConstIterator it = s_articles.constBegin(); it != s_articles.constEnd(); ++it) {
-    // assume white space is already stripped
-    // the articles are already in lower-case
-    if(lower.startsWith(*it + QChar(' '))) {
-      return title_.mid((*it).length() + 1);
-    }
-  }
-  // check apostrophes, too
-  for(QStringList::ConstIterator it = s_articlesApos.constBegin(); it != s_articlesApos.constEnd(); ++it) {
-    if(lower.startsWith(*it)) {
-      return title_.mid((*it).length());
-    }
-  }
-  return title_;
-}
-
-// articles should all be in lower-case
-void Field::articlesUpdated() {
-  s_articles = Config::articleList();
-  s_articlesApos.clear();
-  for(QStringList::ConstIterator it = s_articles.constBegin(); it != s_articles.constEnd(); ++it) {
-    if((*it).endsWith(QChar('\''))) {
-      s_articlesApos += (*it);
-    }
-  }
 }
 
 // if these are changed, then CollectionFieldsDialog should be checked since it
@@ -520,14 +271,16 @@ QStringList Field::typeTitles() {
 }
 
 QStringList Field::split(const QString& string_, bool allowEmpty_) {
-  return string_.isEmpty() ? QStringList() : QStringList::split(s_delimiter, string_, allowEmpty_);
+  return string_.isEmpty() ? QStringList()
+                           : string_.split(FieldFormat::delimiter(), allowEmpty_ ? QString::KeepEmptyParts
+                                                                                 : QString::SkipEmptyParts);
 }
 
 void Field::addAllowed(const QString& value_) {
   if(m_type != Choice) {
     return;
   }
-  if(m_allowed.findIndex(value_) == -1) {
+  if(m_allowed.indexOf(value_) == -1) {
     m_allowed += value_;
   }
 }
@@ -536,17 +289,17 @@ void Field::setProperty(const QString& key_, const QString& value_) {
   m_properties.insert(key_, value_);
 }
 
-void Field::setPropertyList(const StringMap& props_) {
+void Field::setPropertyList(const Tellico::StringMap& props_) {
   m_properties = props_;
 }
 
-void Field::convertOldRating(Data::FieldPtr field_) {
+void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
   if(field_->type() != Data::Field::Choice) {
     return; // nothing to do
   }
 
-  if(field_->name() != Latin1Literal("rating")
-     && field_->property(QString::fromLatin1("rating")) != Latin1Literal("true")) {
+  if(field_->name() != QLatin1String("rating")
+     && field_->property(QLatin1String("rating")) != QLatin1String("true")) {
     return; // nothing to do
   }
 
@@ -559,17 +312,17 @@ void Field::convertOldRating(Data::FieldPtr field_) {
     if(!ok) {
       return; // no need to convert
     }
-    min = QMIN(min, n);
-    max = QMAX(max, n);
+    min = qMin(min, n);
+    max = qMax(max, n);
   }
-  max = QMIN(max, 10);
+  max = qMin(max, 10);
   if(min >= max) {
     min = 1;
     max = 5;
   }
-  field_->setProperty(QString::fromLatin1("minimum"), QString::number(min));
-  field_->setProperty(QString::fromLatin1("maximum"), QString::number(max));
-  field_->setProperty(QString::fromLatin1("rating"), QString::null);
+  field_->setProperty(QLatin1String("minimum"), QString::number(min));
+  field_->setProperty(QLatin1String("maximum"), QString::number(max));
+  field_->setProperty(QLatin1String("rating"), QString::null);
   field_->setType(Rating);
 }
 
@@ -577,16 +330,4 @@ void Field::convertOldRating(Data::FieldPtr field_) {
 long Field::getID() {
   static long id = 0;
   return ++id;
-}
-
-void Field::stripArticles(QString& value) {
-  if(s_articles.isEmpty()) {
-    return;
-  }
-  for(QStringList::ConstIterator it = s_articles.constBegin(); it != s_articles.constEnd(); ++it) {
-    QRegExp rx(QString::fromLatin1("\\b") + *it + QString::fromLatin1("\\b"));
-    value.remove(rx);
-  }
-  value = value.stripWhiteSpace();
-  value.remove(QRegExp(QString::fromLatin1(",$")));
 }

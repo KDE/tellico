@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,13 +11,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef NUMBERFIELDWIDGET_H
-#define NUMBERFIELDWIDGET_H
-
-class KLineEdit;
+#ifndef TELLICO_GUI_NUMBERFIELDWIDGET_H
+#define TELLICO_GUI_NUMBERFIELDWIDGET_H
 
 #include "fieldwidget.h"
 #include "../datavectors.h"
+
+class KLineEdit;
 
 namespace Tellico {
   namespace GUI {
@@ -30,7 +30,7 @@ class NumberFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  NumberFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  NumberFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~NumberFieldWidget() {}
 
   virtual QString text() const;

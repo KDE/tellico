@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,18 +16,19 @@
 
 using Tellico::GUI::Progress;
 
-Progress::Progress(QWidget* parent_) : KProgress(parent_) {
+Progress::Progress(QWidget* parent_) : QProgressBar(parent_) {
 }
 
-Progress::Progress(int totalSteps_, QWidget* parent_) : KProgress(totalSteps_, parent_) {
+Progress::Progress(int totalSteps_, QWidget* parent_) : QProgressBar(parent_) {
+  setRange(0, totalSteps_);
 }
 
 bool Progress::isDone() const {
-  return progress() == totalSteps();
+  return value() == maximum();
 }
 
 void Progress::setDone() {
-  setProgress(totalSteps());
+  setValue(maximum());
 }
 
 #include "progress.moc"

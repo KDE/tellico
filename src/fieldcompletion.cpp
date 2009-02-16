@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "fieldcompletion.h"
-#include "field.h"
+#include "fieldformat.h"
 
 using Tellico::FieldCompletion;
 
@@ -29,8 +29,8 @@ QString FieldCompletion::makeCompletion(const QString& string_) {
     return KCompletion::makeCompletion(string_);
   }
 
-  static QRegExp rx = Data::Field::delimiter();
-  int pos = rx.searchRev(string_);
+  static QRegExp rx = FieldFormat::delimiter();
+  int pos = rx.lastIndexIn(string_);
   if(pos == -1) {
     m_beginText.truncate(0);
     return KCompletion::makeCompletion(string_);

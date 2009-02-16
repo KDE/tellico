@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2006 by Robby Stephenson
+    copyright            : (C) 2002-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "datavectors.h"
 
-#include <qwidgetstack.h>
+#include <QStackedWidget>
 
 namespace Tellico {
   class EntryView;
@@ -25,19 +25,19 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class ViewStack : public QWidgetStack {
+class ViewStack : public QStackedWidget {
 Q_OBJECT
 
 public:
-  ViewStack(QWidget* parent, const char* name = 0);
+  ViewStack(QWidget* parent);
 
-  EntryView* entryView() const { return m_entryView; }
-  EntryIconView* iconView() const { return m_iconView; }
+  EntryView* entryView() { return m_entryView; }
+  EntryIconView* iconView() { return m_iconView; }
 
   void clear();
   void refresh();
   void showEntry(Data::EntryPtr entry);
-  void showEntries(const Data::EntryVec& entries);
+  void showEntries(const Data::EntryList& entries);
 
 private:
   EntryView* m_entryView;

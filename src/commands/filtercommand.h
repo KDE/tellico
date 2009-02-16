@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "../datavectors.h"
 
-#include <kcommand.h>
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -24,7 +24,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class FilterCommand : public KCommand  {
+class FilterCommand : public QUndoCommand  {
 
 public:
   enum Mode {
@@ -33,11 +33,10 @@ public:
     FilterRemove
   };
 
-  FilterCommand(Mode mode, FilterPtr activeFilter, FilterPtr oldFilter=0);
+  FilterCommand(Mode mode, FilterPtr activeFilter, FilterPtr oldFilter=FilterPtr());
 
-  virtual void execute();
-  virtual void unexecute();
-  virtual QString name() const;
+  virtual void redo();
+  virtual void undo();
 
 private:
   Mode m_mode;

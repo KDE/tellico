@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bookcase SYSTEM "bookcase.dtd">
+<bookcase xmlns="http://periapsis.org/bookcase/" syntaxVersion="2" >
+ <collection unitTitle="Books" title="My Books" unit="book" >
+  <book>
+   <title>my title1</title>
+   <subtitle>my subtitle</subtitle>
+   <authors>
+    <author>my author</author>
+   </authors>
+   <binding>Paperback</binding>
+   <pur_date>my date</pur_date>
+   <pur_price>my price</pur_price>
+   <publisher>my publisher</publisher>
+   <edition>my edition</edition>
+   <cr_years>
+    <cr_year>1900</cr_year>
+   </cr_years>
+   <pub_year>2000</pub_year>
+   <isbn>3-24876276-4</isbn>
+   <lccn>2348975629</lccn>
+   <pages>3746</pages>
+   <languages>
+    <language>Klingon</language>
+   </languages>
+   <genres>
+    <genre>Science Fiction</genre>
+   </genres>
+   <keywords>
+    <keyword>lots of keywords</keyword>
+    <keyword>another</keyword>
+   </keywords>
+   <series>my series</series>
+   <series_num>2</series_num>
+   <condition>Used</condition>
+   <signed/>
+   <read/>
+   <gift/>
+   <loaned/>
+   <rating>3 - Neutral</rating>
+   <comments>a very long comment about the book and something that struck me while I was reading it</comments>
+  </book>
+  <book>
+   <title>my title2</title>
+   <authors>
+    <author>my author</author>
+   </authors>
+   <binding>Hardback</binding>
+   <publisher>my publisher</publisher>
+   <genres>
+    <genre>science fiction</genre>
+   </genres>
+   <keywords>
+    <keyword>another</keyword>
+   </keywords>
+   <series>my series</series>
+   <series_num>1</series_num>
+   <condition>New</condition>
+  </book>
+ </collection>
+</bookcase>

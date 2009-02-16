@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,27 +22,31 @@
 
 using Tellico::Command::RemoveLoans;
 
-RemoveLoans::RemoveLoans(Data::LoanVec loans_)
-    : KCommand()
+RemoveLoans::RemoveLoans(Tellico::Data::LoanList loans_)
+    : QUndoCommand()
     , m_loans(loans_)
 {
+  if(!m_loans.isEmpty()) {
+    setText(m_loans.count() > 1 ? i18n("Check-in Entries")
+                                : i18nc("Check-in (Entry Title)", "Check-in %1", m_loans[0]->entry()->title()));
+  }
 }
 
-void RemoveLoans::execute() {
+void RemoveLoans::redo() {
   if(m_loans.isEmpty()) {
     return;
   }
 
   // not all of the loans might be in the calendar
-  Data::LoanVec calLoans;
+  Data::LoanList calLoans;
   // remove the loans from the borrowers
-  for(Data::LoanVec::Iterator loan = m_loans.begin(); loan != m_loans.end(); ++loan) {
+  foreach(Data::LoanPtr loan, m_loans) {
     if(loan->inCalendar()) {
       calLoans.append(loan);
     }
     loan->borrower()->removeLoan(loan);
     Data::Document::self()->checkInEntry(loan->entry());
-    Data::EntryVec vec;
+    Data::EntryList vec;
     vec.append(loan->entry());
     Controller::self()->modifiedEntries(vec);
     Controller::self()->modifiedBorrower(loan->borrower());
@@ -52,20 +56,20 @@ void RemoveLoans::execute() {
   }
 }
 
-void RemoveLoans::unexecute() {
+void RemoveLoans::undo() {
   if(m_loans.isEmpty()) {
     return;
   }
 
   // not all of the loans might be in the calendar
-  Data::LoanVec calLoans;
-  for(Data::LoanVec::Iterator loan = m_loans.begin(); loan != m_loans.end(); ++loan) {
+  Data::LoanList calLoans;
+  foreach(Data::LoanPtr loan, m_loans) {
     if(loan->inCalendar()) {
       calLoans.append(loan);
     }
     loan->borrower()->addLoan(loan);
     Data::Document::self()->checkOutEntry(loan->entry());
-    Data::EntryVec vec;
+    Data::EntryList vec;
     vec.append(loan->entry());
     Controller::self()->modifiedEntries(vec);
     Controller::self()->modifiedBorrower(loan->borrower());
@@ -75,7 +79,3 @@ void RemoveLoans::unexecute() {
   }
 }
 
-QString RemoveLoans::name() const {
-  return m_loans.count() > 1 ? i18n("Check-in Entries")
-                             : i18n("Check-in (Entry Title)", "Check-in %1").arg(m_loans.begin()->entry()->title());
-}

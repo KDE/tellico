@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,7 +20,7 @@
 
 using Tellico::Cite::ActionManager;
 
-ActionManager::ActionManager* ActionManager::self() {
+Tellico::Cite::ActionManager* ActionManager::self() {
   static ActionManager self;
   return &self;
 }
@@ -32,7 +32,7 @@ ActionManager::~ActionManager() {
   delete m_action;
 }
 
-bool ActionManager::connect(CiteAction action_) {
+bool ActionManager::connect(Tellico::Cite::CiteAction action_) {
   if(m_action && m_action->type() == action_) {
     return m_action->connect();
   } else if(m_action) {
@@ -56,7 +56,7 @@ bool ActionManager::connect(CiteAction action_) {
   return m_action ? m_action->connect() : false;
 }
 
-bool ActionManager::cite(CiteAction action_, Data::EntryVec entries_) {
+bool ActionManager::cite(Tellico::Cite::CiteAction action_, Tellico::Data::EntryList entries_) {
   if(entries_.isEmpty()) {
     myDebug() << "ActionManager::cite() - no entries to cite" << endl;
     return false;
@@ -77,7 +77,7 @@ bool ActionManager::cite(CiteAction action_, Data::EntryVec entries_) {
   return m_action->cite(entries_);
 }
 
-bool ActionManager::isEnabled(CiteAction action_) {
+bool ActionManager::isEnabled(Tellico::Cite::CiteAction action_) {
   if(action_ == CiteOpenOffice) {
     return OpenOffice::hasLibrary();
   }

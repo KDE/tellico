@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,7 +13,6 @@
 
 #include "urlfieldwidget.h"
 #include "../field.h"
-#include "../latin1literal.h"
 #include "../tellico_kernel.h"
 
 #include <klineedit.h>
@@ -22,29 +21,29 @@
 
 using Tellico::GUI::URLFieldWidget;
 
-// subclass of KURLCompletion is needed so the KURLLabel
+// subclass of KUrlCompletion is needed so the KUrlLabel
 // can open relative links. I don't want to have to have to update
 // the base directory of the completion every time a new document is opened
 QString URLFieldWidget::URLCompletion::makeCompletion(const QString& text_) {
-  // KURLCompletion::makeCompletion() uses an internal variable instead
-  // of calling KURLCompletion::dir() so need to set the base dir before completing
+  // KUrlCompletion::makeCompletion() uses an internal variable instead
+  // of calling KUrlCompletion::dir() so need to set the base dir before completing
   setDir(Kernel::self()->URL().directory());
-  return KURLCompletion::makeCompletion(text_);
+  return KUrlCompletion::makeCompletion(text_);
 }
 
-URLFieldWidget::URLFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_), m_run(0) {
+URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_), m_run(0) {
 
-  m_requester = new KURLRequester(this);
+  m_requester = new KUrlRequester(this);
   m_requester->lineEdit()->setCompletionObject(new URLCompletion());
   m_requester->lineEdit()->setAutoDeleteCompletionObject(true);
   connect(m_requester, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
-  connect(m_requester, SIGNAL(textChanged(const QString&)), label(), SLOT(setURL(const QString&)));
-  connect(label(), SIGNAL(leftClickedURL(const QString&)), SLOT(slotOpenURL(const QString&)));
+  connect(m_requester, SIGNAL(textChanged(const QString&)), label(), SLOT(setUrl(const QString&)));
+  connect(label(), SIGNAL(leftClickedUrl(const QString&)), SLOT(slotOpenURL(const QString&)));
   registerWidget();
 
   // special case, remember if it's a relative url
-  m_isRelative = field_->property(QString::fromLatin1("relative")) == Latin1Literal("true");
+  m_isRelative = field_->property(QString::fromLatin1("relative")) == QLatin1String("true");
 }
 
 URLFieldWidget::~URLFieldWidget() {
@@ -55,21 +54,21 @@ URLFieldWidget::~URLFieldWidget() {
 
 QString URLFieldWidget::text() const {
   if(m_isRelative) {
-    return KURL::relativeURL(Kernel::self()->URL(), m_requester->url());
+    return KUrl::relativeUrl(Kernel::self()->URL(), m_requester->url());
   }
   // for comparison purposes and to be consistent with the file listing importer
   // I want the full url here, including the protocol
-  // the requester only returns the path, so create a KURL
-  return KURL(m_requester->url()).url();
+  // the requester only returns the path, so create a KUrl
+  return KUrl(m_requester->url()).url();
 }
 
 void URLFieldWidget::setText(const QString& text_) {
   blockSignals(true);
 
   m_requester->blockSignals(true);
-  m_requester->setURL(text_);
+  m_requester->setUrl(text_);
   m_requester->blockSignals(false);
-  static_cast<KURLLabel*>(label())->setURL(text_);
+  static_cast<KUrlLabel*>(label())->setUrl(text_);
 
   blockSignals(false);
 }
@@ -79,8 +78,8 @@ void URLFieldWidget::clear() {
   editMultiple(false);
 }
 
-void URLFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_) {
-  m_isRelative = newField_->property(QString::fromLatin1("relative")) == Latin1Literal("true");
+void URLFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
+  m_isRelative = newField_->property(QString::fromLatin1("relative")) == QLatin1String("true");
 }
 
 void URLFieldWidget::slotOpenURL(const QString& url_) {
@@ -88,7 +87,7 @@ void URLFieldWidget::slotOpenURL(const QString& url_) {
     return;
   }
   // just in case, interpret string relative to document url
-  m_run = new KRun(KURL(Kernel::self()->URL(), url_));
+  m_run = new KRun(KUrl(Kernel::self()->URL(), url_), this);
 }
 
 QWidget* URLFieldWidget::widget() {

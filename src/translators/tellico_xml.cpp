@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,7 +17,7 @@
 #include <libxml/parser.h> // has to be before valid.h
 #include <libxml/valid.h>
 
-#include <qregexp.h>
+#include <QRegExp>
 
 const QString Tellico::XML::nsXSL = QString::fromLatin1("http://www.w3.org/1999/XSL/Transform");
 const QString Tellico::XML::nsBibtexml = QString::fromLatin1("http://bibtexml.sf.net/");
@@ -70,7 +70,7 @@ bool Tellico::XML::versionConversion(uint from, uint to) {
 }
 
 bool Tellico::XML::validXMLElementName(const QString& name_) {
-  return xmlValidateNameValue((xmlChar *)name_.utf8().data());
+  return xmlValidateNameValue((xmlChar *)name_.toUtf8().data());
 }
 
 QString Tellico::XML::elementName(const QString& name_) {
@@ -83,7 +83,7 @@ QString Tellico::XML::elementName(const QString& name_) {
   }
 
   // next check first characters IS_DIGIT is defined in libxml/vali.d
-  for(uint i = 0; i < name.length() && (!IS_LETTER(name[i].unicode()) || name[i] == '_'); ++i) {
+  for(int i = 0; i < name.length() && (!IS_LETTER(name[i].unicode()) || name[i] == '_'); ++i) {
     name = name.mid(1);
   }
   if(name.isEmpty() || XML::validXMLElementName(name)) {
@@ -91,7 +91,7 @@ QString Tellico::XML::elementName(const QString& name_) {
   }
 
   // now brute-force it, one character at a time
-  uint i = 0;
+  int i = 0;
   while(i < name.length()) {
     if(!XML::validXMLElementName(name.left(i+1))) {
       name.remove(i, 1); // remember it's zero-indexed

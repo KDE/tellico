@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,18 +13,17 @@
 
 #include "parafieldwidget.h"
 #include "../field.h"
-#include "../latin1literal.h"
 
 #include <ktextedit.h>
 
 using Tellico::GUI::ParaFieldWidget;
 
-ParaFieldWidget::ParaFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_) {
+ParaFieldWidget::ParaFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_) {
 
   m_textEdit = new KTextEdit(this);
-  m_textEdit->setTextFormat(Qt::PlainText);
-  if(field_->property(QString::fromLatin1("spellcheck")) != Latin1Literal("false")) {
+  m_textEdit->setAcceptRichText(false);
+  if(field_->property(QString::fromLatin1("spellcheck")) != QLatin1String("false")) {
     m_textEdit->setCheckSpellingEnabled(true);
   }
   connect(m_textEdit, SIGNAL(textChanged()), SIGNAL(modified()));
@@ -33,7 +32,7 @@ ParaFieldWidget::ParaFieldWidget(Data::FieldPtr field_, QWidget* parent_, const 
 }
 
 QString ParaFieldWidget::text() const {
-  QString text = m_textEdit->text();
+  QString text = m_textEdit->toPlainText();
   text.replace('\n', QString::fromLatin1("<br/>"));
   return text;
 }
@@ -42,7 +41,7 @@ void ParaFieldWidget::setText(const QString& text_) {
   blockSignals(true);
   m_textEdit->blockSignals(true);
 
-  QRegExp rx(QString::fromLatin1("<br/?>"), false /*case-sensitive*/);
+  QRegExp rx(QString::fromLatin1("<br/?>"), Qt::CaseInsensitive);
   QString s = text_;
   s.replace(rx, QChar('\n'));
   m_textEdit->setText(s);

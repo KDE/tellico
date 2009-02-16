@@ -37,16 +37,16 @@ namespace Tellico {
  */
 class CalendarHandler {
 public:
-  static void addLoans(Data::LoanVec loans);
-  static void modifyLoans(Data::LoanVec loans);
-  static void removeLoans(Data::LoanVec loans);
+  static void addLoans(Data::LoanList loans);
+  static void modifyLoans(Data::LoanList loans);
+  static void removeLoans(Data::LoanList loans);
 
 private:
   static QString timezone();
 
 #ifdef USE_KCAL
   // helper function
-  static void addLoans(Data::LoanVec loans, KCal::CalendarResources* resources);
+  static void addLoans(Data::LoanList loans, KCal::CalendarResources* resources);
   static bool checkCalendar(KCal::CalendarResources* resources);
   static void populateTodo(KCal::Todo* todo, Data::LoanPtr loan);
 #endif

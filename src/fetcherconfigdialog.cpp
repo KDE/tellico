@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,20 +14,22 @@
 #include "fetcherconfigdialog.h"
 #include "fetch/fetchmanager.h"
 #include "gui/combobox.h"
+#include "tellico_utils.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kiconloader.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qhgroupbox.h>
-#include <qwidgetstack.h>
-#include <qwhatsthis.h>
-#include <qhbox.h>
-#include <qvgroupbox.h>
-#include <qcheckbox.h>
+#include <QLabel>
+#include <QLayout>
+#include <QStackedWidget>
+#include <QGroupBox>
+#include <QCheckBox>
+#include <QHBoxLayout>
+#include <QGridLayout>
+#include <QVBoxLayout>
 
 namespace {
   static const int FETCHER_CONFIG_MIN_WIDTH = 600;
@@ -36,18 +38,16 @@ namespace {
 using Tellico::FetcherConfigDialog;
 
 FetcherConfigDialog::FetcherConfigDialog(QWidget* parent_)
-    : KDialogBase(parent_, "fetcher dialog", true, i18n("Data Source Properties"),
-               KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Help)
+    : KDialog(parent_)
     , m_newSource(true)
     , m_useDefaultName(true)
     , m_configWidget(0) {
   init(Fetch::Unknown);
 }
 
-FetcherConfigDialog::FetcherConfigDialog(const QString& sourceName_, Fetch::Type type_, bool updateOverwrite_,
-                                         Fetch::ConfigWidget* configWidget_, QWidget* parent_)
-    : KDialogBase(parent_, "fetcher dialog", true, i18n("Data Source Properties"),
-               KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Help)
+FetcherConfigDialog::FetcherConfigDialog(const QString& sourceName_, Tellico::Fetch::Type type_, bool updateOverwrite_,
+                                         Tellico::Fetch::ConfigWidget* configWidget_, QWidget* parent_)
+    : KDialog(parent_)
     , m_newSource(false)
     , m_useDefaultName(false)
     , m_configWidget(configWidget_) {
@@ -56,37 +56,45 @@ FetcherConfigDialog::FetcherConfigDialog(const QString& sourceName_, Fetch::Type
   m_cbOverwrite->setChecked(updateOverwrite_);
 }
 
-void FetcherConfigDialog::init(Fetch::Type type_) {
+void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
+  setModal(true);
+  setCaption(i18n("Data Source Properties"));
+  setButtons(Ok|Cancel|Help);
+
   setMinimumWidth(FETCHER_CONFIG_MIN_WIDTH);
   setHelp(QString::fromLatin1("data-sources-options"));
 
   QWidget* widget = new QWidget(this);
-  QBoxLayout* topLayout = new QHBoxLayout(widget, KDialog::spacingHint());
+  QBoxLayout* topLayout = new QHBoxLayout(widget);
+  widget->setLayout(topLayout);
 
-  QBoxLayout* vlay1 = new QVBoxLayout(topLayout, KDialog::spacingHint());
+  QBoxLayout* vlay1 = new QVBoxLayout();
+  topLayout->addLayout(vlay1);
   m_iconLabel = new QLabel(widget);
   if(type_ == Fetch::Unknown) {
-    m_iconLabel->setPixmap(KGlobal::iconLoader()->loadIcon(QString::fromLatin1("network"), KIcon::Panel, 64));
+    m_iconLabel->setPixmap(KIconLoader::global()->loadIcon(QString::fromLatin1("network-wired"), KIconLoader::Panel, 64));
   } else {
-    m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type_, KIcon::Panel, 64));
+    m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type_, KIconLoader::Panel, 64));
   }
   vlay1->addWidget(m_iconLabel);
   vlay1->addStretch(1);
 
-  QBoxLayout* vlay2 = new QVBoxLayout(topLayout, KDialog::spacingHint());
+  QBoxLayout* vlay2 = new QVBoxLayout();
+  topLayout->addLayout(vlay2);
 
-  QGridLayout* gl = new QGridLayout(vlay2, 2, 2, KDialog::spacingHint());
+  QGridLayout* gl = new QGridLayout();
+  vlay2->addLayout(gl);
   int row = -1;
 
   QLabel* label = new QLabel(i18n("&Source name: "), widget);
   gl->addWidget(label, ++row, 0);
   QString w = i18n("The name identifies the data source and should be unique and informative.");
-  QWhatsThis::add(label, w);
+  label->setWhatsThis(w);
 
   m_nameEdit = new KLineEdit(widget);
   gl->addWidget(m_nameEdit, row, 1);
   m_nameEdit->setFocus();
-  QWhatsThis::add(m_nameEdit, w);
+  m_nameEdit->setWhatsThis(w);
   label->setBuddy(m_nameEdit);
   connect(m_nameEdit, SIGNAL(textChanged(const QString&)), SLOT(slotNameChanged(const QString&)));
 
@@ -95,31 +103,31 @@ void FetcherConfigDialog::init(Fetch::Type type_) {
   } else {
     // since the label doesn't have a buddy, we don't want an accel,
     // but also want to reuse string we already have
-    label = new QLabel(i18n("Source &type: ").remove('&'), widget);
+      label = new QLabel(removeAcceleratorMarker(i18n("Source &type: ")), widget);
   }
   gl->addWidget(label, ++row, 0);
   w = i18n("Tellico supports several different data sources.");
-  QWhatsThis::add(label, w);
+  label->setWhatsThis(w);
 
   if(m_newSource) {
     m_typeCombo = new GUI::ComboBox(widget);
     gl->addWidget(m_typeCombo, row, 1);
-    QWhatsThis::add(m_typeCombo, w);
+    m_typeCombo->setWhatsThis(w);
     label->setBuddy(m_typeCombo);
   } else {
     m_typeCombo = 0;
     QLabel* lab = new QLabel(Fetch::Manager::typeName(type_), widget);
     gl->addWidget(lab, row, 1);
-    QWhatsThis::add(lab, w);
+    lab->setWhatsThis(w);
   }
   m_cbOverwrite = new QCheckBox(i18n("Updating from source should overwrite user data"), widget);
   ++row;
-  gl->addMultiCellWidget(m_cbOverwrite, row, row, 0, 1);
+  gl->addWidget(m_cbOverwrite, row, 0, 1, 2);
   w = i18n("If checked, updating entries will overwrite any existing information.");
-  QWhatsThis::add(m_cbOverwrite, w);
+  m_cbOverwrite->setWhatsThis(w);
 
   if(m_newSource) {
-    m_stack = new QWidgetStack(widget);
+    m_stack = new QStackedWidget(widget);
     vlay2->addWidget(m_stack);
     connect(m_typeCombo, SIGNAL(activated(int)), SLOT(slotNewSourceSelected(int)));
 
@@ -127,19 +135,19 @@ void FetcherConfigDialog::init(Fetch::Type type_) {
     const Fetch::TypePairList typeList = Fetch::Manager::self()->typeList();
     for(Fetch::TypePairList::ConstIterator it = typeList.begin(); it != typeList.end(); ++it) {
       const Fetch::TypePair& type = *it;
-      m_typeCombo->insertItem(type.index(), type.value());
+      m_typeCombo->addItem(type.key(), type.value());
       if(type.value() == Fetch::Z3950) {
         z3950_idx = m_typeCombo->count()-1;
       }
     }
     // make sure first widget gets initialized
     // I'd like it to be the z39.50 widget
-    m_typeCombo->setCurrentItem(z3950_idx);
+    m_typeCombo->setCurrentIndex(z3950_idx);
     slotNewSourceSelected(z3950_idx);
   } else {
     m_stack = 0;
     // just add config widget and reparent
-    m_configWidget->reparent(widget, QPoint());
+    m_configWidget->setParent(widget);
     vlay2->addWidget(m_configWidget);
     connect(m_configWidget, SIGNAL(signalName(const QString&)), SLOT(slotPossibleNewName(const QString&)));
   }
@@ -157,15 +165,15 @@ bool FetcherConfigDialog::updateOverwrite() const {
 
 Tellico::Fetch::ConfigWidget* FetcherConfigDialog::configWidget() const {
   if(m_newSource) {
-    return dynamic_cast<Fetch::ConfigWidget*>(m_stack->visibleWidget());
+    return dynamic_cast<Fetch::ConfigWidget*>(m_stack->currentWidget());
   }
-  kdWarning() << "FetcherConfigDialog::configWidget() called for modifying existing fetcher!" << endl;
+  myWarning() << "called for modifying existing fetcher!";
   return m_configWidget;
 }
 
 Tellico::Fetch::Type FetcherConfigDialog::sourceType() const {
   if(!m_newSource || m_typeCombo->count() == 0) {
-    kdWarning() << "FetcherConfigDialog::sourceType() called for modifying existing fetcher!" << endl;
+    myWarning() << "called for modifying existing fetcher!";
     return Fetch::Unknown;
   }
   return static_cast<Fetch::Type>(m_typeCombo->currentData().toInt());
@@ -181,21 +189,21 @@ void FetcherConfigDialog::slotNewSourceSelected(int idx_) {
 
   Fetch::ConfigWidget* cw = m_configWidgets[idx_];
   if(cw) {
-    m_stack->raiseWidget(cw);
+    m_stack->setCurrentWidget(cw);
     slotPossibleNewName(cw->preferredName());
     return;
   }
 
   Fetch::Type type = sourceType();
   if(type == Fetch::Unknown) {
-    kdWarning() << "FetcherConfigDialog::slotNewSourceSelected() - unknown source type" << endl;
+    myWarning() << "unknown source type";
     return;
   }
-  m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type, KIcon::Panel, 64));
+  m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type, KIconLoader::Panel, 64));
   cw = Fetch::Manager::self()->configWidget(m_stack, type, m_typeCombo->currentText());
   if(!cw) {
     // bad bad bad!
-    kdWarning() << "FetcherConfigDialog::slotNewSourceSelected() - no config widget found for type " << type << endl;
+    myWarning() << "no config widget found for type" << type;
     m_typeCombo->setCurrentItem(0);
     slotNewSourceSelected(0);
     return;
@@ -203,7 +211,7 @@ void FetcherConfigDialog::slotNewSourceSelected(int idx_) {
   connect(cw, SIGNAL(signalName(const QString&)), SLOT(slotPossibleNewName(const QString&)));
   m_configWidgets.insert(idx_, cw);
   m_stack->addWidget(cw);
-  m_stack->raiseWidget(cw);
+  m_stack->setCurrentWidget(cw);
   slotPossibleNewName(cw->preferredName());
 }
 
@@ -215,7 +223,7 @@ void FetcherConfigDialog::slotPossibleNewName(const QString& name_) {
   if(name_.isEmpty()) {
     return;
   }
-  Fetch::ConfigWidget* cw = m_stack ? static_cast<Fetch::ConfigWidget*>(m_stack->visibleWidget()) : m_configWidget;
+  Fetch::ConfigWidget* cw = m_stack ? static_cast<Fetch::ConfigWidget*>(m_stack->currentWidget()) : m_configWidget;
   if(m_useDefaultName || (cw && m_nameEdit->text() == cw->preferredName())) {
     m_nameEdit->setText(name_);
     m_useDefaultName = true; // it gets reset in slotNameChanged()

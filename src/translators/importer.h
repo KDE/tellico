@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,15 +14,15 @@
 #ifndef IMPORTER_H
 #define IMPORTER_H
 
-class QWidget;
-
 #include "../datavectors.h"
 
 #include <klocale.h>
 #include <kurl.h>
 
-#include <qobject.h>
-#include <qstring.h>
+#include <QObject>
+#include <QString>
+
+class QWidget;
 
 namespace Tellico {
   namespace Import {
@@ -50,8 +50,8 @@ public:
    *
    * @param url The URL of the file to import
    */
-  Importer(const KURL& url) : QObject(), m_options(ImportProgress), m_urls(url) {}
-  Importer(const KURL::List& urls) : QObject(), m_options(ImportProgress), m_urls(urls) {}
+  Importer(const KUrl& url) : QObject(), m_options(ImportProgress), m_urls(url) {}
+  Importer(const KUrl::List& urls) : QObject(), m_options(ImportProgress), m_urls(urls) {}
   Importer(const QString& text) : QObject(), m_options(ImportProgress), m_text(text) {}
   /**
    */
@@ -78,7 +78,7 @@ public:
    *
    * @return A pointer to the setting widget
    */
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return 0; }
   /**
    * Checks to see if the importer can return a collection of this type
    *
@@ -112,8 +112,8 @@ protected:
    *
    * @return the file URL
    */
-  KURL url() const { return m_urls.isEmpty() ? KURL() : m_urls[0]; }
-  KURL::List urls() const { return m_urls; }
+  KUrl url() const { return m_urls.isEmpty() ? KUrl() : m_urls[0]; }
+  KUrl::List urls() const { return m_urls; }
   QString text() const { return m_text; }
   /**
    * Adds a message to the status queue.
@@ -126,7 +126,7 @@ protected:
 
 private:
   long m_options;
-  KURL::List m_urls;
+  KUrl::List m_urls;
   QString m_text;
   QString m_statusMsg;
 };

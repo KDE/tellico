@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,15 +11,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef STRINGMAPDIALOG_H
-#define STRINGMAPDIALOG_H
+#ifndef TELLICO_STRINGMAPDIALOG_H
+#define TELLICO_STRINGMAPDIALOG_H
+
+#include <kdialog.h>
 
 class KLineEdit;
-class KListView;
-class QListViewItem;
 
-#include <kdialogbase.h>
-
+class QTreeWidget;
+class QTreeWidgetItem;
 template <typename T1, typename T2>
 class QMap;
 
@@ -28,7 +28,7 @@ namespace Tellico {
 /**
  * @short A simple dialog for editing a map between two strings.
  *
- * A \ref KListView is used with the map keys in the first column and
+ * A \ref QTreeWidget is used with the map keys in the first column and
  * the map values in the second. Two edit boxes are below the list view.
  * When an item is selected, the key-value is pair is placed in the edit
  * boxes. Add and Delete buttons are used to add a new pair, or to remove
@@ -36,11 +36,11 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class StringMapDialog : public KDialogBase {
+class StringMapDialog : public KDialog {
 Q_OBJECT
 
 public:
-  StringMapDialog(const QMap<QString, QString>& stringMap, QWidget* parent, const char* name=0, bool modal=false);
+  StringMapDialog(const QMap<QString, QString>& stringMap, QWidget* parent, bool modal=false);
 
   /**
    * Sets the titles for the key and value columns.
@@ -59,10 +59,10 @@ public:
 private slots:
   void slotAdd();
   void slotDelete();
-  void slotUpdate(QListViewItem* item);
+  void slotUpdate(QTreeWidgetItem* item);
 
 protected:
-  KListView* m_listView;
+  QTreeWidget* m_treeWidget;
   KLineEdit* m_edit1;
   KLineEdit* m_edit2;
 };

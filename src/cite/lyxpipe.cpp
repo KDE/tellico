@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,7 +20,8 @@
 
 #include <klocale.h>
 
-#include <qfile.h>
+#include <QFile>
+#include <QTextStream>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -32,7 +33,7 @@ using Tellico::Cite::Lyxpipe;
 Lyxpipe::Lyxpipe() : Action() {
 }
 
-bool Lyxpipe::cite(Data::EntryVec entries_) {
+bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
   if(entries_.isEmpty()) {
     return false;
   }
@@ -44,10 +45,10 @@ bool Lyxpipe::cite(Data::EntryVec entries_) {
   }
 
   QString lyxpipe = Config::lyxpipe();
-  lyxpipe += QString::fromLatin1(".in");
+  lyxpipe += QLatin1String(".in");
 //  myDebug() << "Lyxpipe::cite() - " << lyxpipe << endl;
 
-  QString errorStr = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>").arg(lyxpipe);
+  QString errorStr = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>", lyxpipe);
 
   QFile file(lyxpipe);
   if(!file.exists()) {
@@ -56,7 +57,7 @@ bool Lyxpipe::cite(Data::EntryVec entries_) {
   }
 
   int pipeFd = ::open(QFile::encodeName(lyxpipe), O_WRONLY);
-  if(!file.open(IO_WriteOnly, pipeFd)) {
+  if(!file.open(pipeFd, QIODevice::WriteOnly)) {
     Kernel::self()->sorry(errorStr);
     ::close(pipeFd);
     return false;
@@ -64,28 +65,30 @@ bool Lyxpipe::cite(Data::EntryVec entries_) {
 
   QString output;
   QTextStream ts(&file);
-  for(Data::EntryVecIt it = entries_.begin(); it != entries_.end(); ++it) {
-    QString s = BibtexHandler::bibtexKey(it.data());
+  foreach(Data::EntryPtr entry, entries_) {
+    QString s = BibtexHandler::bibtexKey(entry);
     if(s.isEmpty()) {
       continue;
     }
     output += s;
-    if(!it.nextEnd() && !output.isEmpty()) {
+    if(!output.isEmpty()) {
       // pybliographer uses comma-space, and pyblink expects the space there
-      output += QString::fromLatin1(", ");
+      output += QLatin1String(", ");
     }
   }
   if(output.isEmpty()) {
     myDebug() << "Lyxpipe::cite() - no available bibtex keys!" << endl;
     return false;
+  } else {
+    output.truncate(output.length()-2); // remove last comma and space
   }
 
 //  ts << "LYXSRV:tellico:hello\n";
   ts << "LYXCMD:tellico:citation-insert:";
-  ts << output.local8Bit();
+  ts << output.toLocal8Bit();
   ts << "\n";
 //  ts << "LYXSRV:tellico:bye\n";
-  file.flush();
+  ts.flush();
   file.close();
   ::close(pipeFd);
   return true;

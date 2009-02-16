@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,14 +16,14 @@
 
 #include "fetcher.h"
 #include "configwidget.h"
-#include "../datavectors.h"
 
-#include <qintdict.h>
+#include <QHash>
 
 class KProcess;
-class KURLRequester;
+class KUrlRequester;
 class KLineEdit;
 class KComboBox;
+class KConfig;
 
 class QCheckBox;
 
@@ -42,7 +42,7 @@ class ExecExternalFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  ExecExternalFetcher(QObject* parent, const char* name=0);
+  ExecExternalFetcher(QObject* parent);
   /**
    */
   virtual ~ExecExternalFetcher();
@@ -67,7 +67,7 @@ public:
     ConfigWidget(QWidget* parent = 0, const ExecExternalFetcher* fetcher = 0);
     ~ConfigWidget();
 
-    void readConfig(KConfig* config);
+    void readConfig(const KConfigGroup& config);
     virtual void saveConfig(KConfigGroup& config);
     virtual void removed();
     virtual QString preferredName() const;
@@ -75,11 +75,11 @@ public:
   private:
     bool m_deleteOnRemove : 1;
     QString m_name, m_newStuffName;
-    KURLRequester* m_pathEdit;
+    KUrlRequester* m_pathEdit;
     GUI::CollectionTypeCombo* m_collCombo;
     GUI::ComboBox* m_formatCombo;
-    QIntDict<QCheckBox> m_cbDict;
-    QIntDict<GUI::LineEdit> m_leDict;
+    QHash<int, QCheckBox*> m_cbDict;
+    QHash<int, GUI::LineEdit*> m_leDict;
     QCheckBox* m_cbUpdate;
     GUI::LineEdit* m_leUpdate;
   };
@@ -88,9 +88,9 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KProcess* proc, char* buffer, int len);
-  void slotError(KProcess* proc, char* buffer, int len);
-  void slotProcessExited(KProcess* proc);
+  void slotData();
+  void slotError();
+  void slotProcessExited();
 
 private:
   static QStringList parseArguments(const QString& str);

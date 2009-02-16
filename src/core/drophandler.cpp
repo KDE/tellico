@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,10 +18,13 @@
 #include "../translators/bibteximporter.h"
 #include "../translators/risimporter.h"
 
-#include <kurldrag.h>
 #include <kmimetype.h>
 #include <kio/netaccess.h>
 #include <kio/job.h>
+
+#include <QEvent>
+#include <QDragEnterEvent>
+#include <QDropEvent>
 
 using Tellico::DropHandler;
 
@@ -44,34 +47,31 @@ bool DropHandler::eventFilter(QObject* obj_, QEvent* ev_) {
 }
 
 bool DropHandler::dragEnter(QDragEnterEvent* event_) {
-  bool accept = KURLDrag::canDecode(event_) || QTextDrag::canDecode(event_);
+  bool accept = KUrl::List::canDecode(event_->mimeData()) || event_->mimeData()->hasText();
   if(accept) {
-    event_->accept(accept);
+    event_->acceptProposedAction();
   }
   return accept;
 }
 
 bool DropHandler::drop(QDropEvent* event_) {
-  KURL::List urls;
-  QString text;
+  KUrl::List urls = KUrl::List::fromMimeData(event_->mimeData());
 
-  if(KURLDrag::decode(event_, urls)) {
-  } else if(QTextDrag::decode(event_, text) && !text.isEmpty()) {
-    urls << KURL(text);
+  if(urls.isEmpty() && event_->mimeData()->hasText()) {
+    urls << KUrl(event_->mimeData()->text());
   }
   return !urls.isEmpty() && handleURL(urls);
 }
 
-bool DropHandler::handleURL(const KURL::List& urls_) {
+bool DropHandler::handleURL(const KUrl::List& urls_) {
   bool hasUnknown = false;
-  KURL::List tc, pdf, bib, ris;
-  for(KURL::List::ConstIterator it = urls_.begin(); it != urls_.end(); ++it) {
-    const KURL& url = *it;
+  KUrl::List tc, pdf, bib, ris;
+  foreach(const KUrl& url, urls_) {
     KMimeType::Ptr ptr;
     // findByURL doesn't work for http, so actually query
     // the url itself
     if(url.protocol() != QString::fromLatin1("http")) {
-      ptr = KMimeType::findByURL(url);
+      ptr = KMimeType::findByUrl(url);
     } else {
       KIO::MimetypeJob* job = KIO::mimetype(url, false /*progress*/);
       KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
@@ -100,7 +100,7 @@ bool DropHandler::handleURL(const KURL::List& urls_) {
       hasUnknown = true;
     }
   }
-  MainWindow* mainWindow = ::qt_cast<MainWindow*>(Kernel::self()->widget());
+  MainWindow* mainWindow = ::qobject_cast<MainWindow*>(Kernel::self()->widget());
   if(!mainWindow) {
     myDebug() << "DropHandler::handleURL() - no main window!" << endl;
     return !hasUnknown;

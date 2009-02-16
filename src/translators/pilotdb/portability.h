@@ -24,13 +24,7 @@
  * Pull in the correct configuration header.
  */
 
-#ifndef WIN32
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
-#else
-#include "win32/win32-config.h"
-#endif
 
 #ifdef _MSC_VER
 /* Borrowed from GLib: Make MSVC more pedantic, this is a recommended

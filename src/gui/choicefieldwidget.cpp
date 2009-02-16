@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,19 +16,16 @@
 
 #include <kcombobox.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
-
 using Tellico::GUI::ChoiceFieldWidget;
 
-ChoiceFieldWidget::ChoiceFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_), m_comboBox(0) {
+ChoiceFieldWidget::ChoiceFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_), m_comboBox(0) {
 
   m_comboBox = new KComboBox(this);
   connect(m_comboBox, SIGNAL(activated(int)), SIGNAL(modified()));
   // always have empty choice
-  m_comboBox->insertItem(QString::null);
-  m_comboBox->insertStringList(field_->allowed());
+  m_comboBox->addItem(QString());
+  m_comboBox->addItems(field_->allowed());
   m_comboBox->setMinimumWidth(5*fontMetrics().maxWidth());
 
   registerWidget();
@@ -42,6 +39,12 @@ void ChoiceFieldWidget::setText(const QString& text_) {
   blockSignals(true);
 
   m_comboBox->blockSignals(true);
+  int idx = m_comboBox->findText(text_);
+  if(idx < 0) {
+    m_comboBox->addItem(text_);
+  } else {
+    m_comboBox->setCurrentIndex(idx);
+  }
   m_comboBox->setCurrentItem(text_);
   m_comboBox->blockSignals(false);
 
@@ -53,13 +56,13 @@ void ChoiceFieldWidget::clear() {
   editMultiple(false);
 }
 
-void ChoiceFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_) {
-  QString value = text();
+void ChoiceFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
+  int idx = m_comboBox->currentIndex();
   m_comboBox->clear();
   // always have empty choice
-  m_comboBox->insertItem(QString::null);
-  m_comboBox->insertStringList(newField_->allowed());
-  m_comboBox->setCurrentText(value);
+  m_comboBox->addItem(QString());
+  m_comboBox->addItems(newField_->allowed());
+  m_comboBox->setCurrentIndex(idx);
 }
 
 QWidget* ChoiceFieldWidget::widget() {

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOZIPEXPORTER_H
-#define TELLICOZIPEXPORTER_H
+#ifndef TELLICO_ZIPEXPORTER_H
+#define TELLICO_ZIPEXPORTER_H
 
 #include "exporter.h"
 
@@ -33,7 +33,7 @@ public:
   virtual QString fileFilter() const;
 
   // no options
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return 0; }
 
   void setIncludeImages(bool b) { m_includeImages = b; }
 

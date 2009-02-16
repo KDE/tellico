@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,11 +11,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef CSVEXPORTER_H
-#define CSVEXPORTER_H
+#ifndef TELLICO_CSVEXPORTER_H
+#define TELLICO_CSVEXPORTER_H
 
 class KLineEdit;
-class KConfig;
 
 class QWidget;
 class QCheckBox;
@@ -39,9 +38,9 @@ public:
   virtual QString formatString() const;
   virtual QString fileFilter() const;
 
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual void readOptions(KConfig* config);
-  virtual void saveOptions(KConfig* config);
+  virtual QWidget* widget(QWidget* parent);
+  virtual void readOptions(KSharedConfigPtr config);
+  virtual void saveOptions(KSharedConfigPtr config);
 
 private:
   QString& escapeText(QString& text);

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,25 +19,22 @@
 #include "tellico_debug.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
-#include "latin1literal.h"
-#include "../isbnvalidator.h"
-#include "../lccnvalidator.h"
 
 #include <klocale.h>
 
-#include <qregexp.h>
+#include <QRegExp>
 
 using Tellico::Data::Entry;
 using Tellico::Data::EntryGroup;
 
 EntryGroup::EntryGroup(const QString& group, const QString& field)
-   : QObject(), EntryVec(), m_group(Tellico::shareString(group)), m_field(Tellico::shareString(field)) {
+   : QObject(), EntryList(), m_group(Tellico::shareString(group)), m_field(Tellico::shareString(field)) {
 }
 
 EntryGroup::~EntryGroup() {
   // need a copy since we remove ourselves
-  EntryVec vec = *this;
-  for(Data::EntryVecIt entry = vec.begin(); entry != vec.end(); ++entry) {
+  EntryList vec = *this;
+  foreach(EntryPtr entry, vec) {
     entry->removeFromGroup(this);
   }
 }
@@ -51,40 +48,32 @@ bool Entry::operator==(const Entry& e1) {
     QString u = field(QString::fromLatin1("url"));
     if(!u.isEmpty()) {
       // versions before 1.2.7 could have saved the url without the protocol
-      bool b = KURL::fromPathOrURL(u) == KURL::fromPathOrURL(e1.field(QString::fromLatin1("url")));
+      bool b = KUrl(u) == KUrl(e1.field(QString::fromLatin1("url")));
       if(b) {
         return true;
       } else {
         Data::FieldPtr f = m_coll->fieldByName(QString::fromLatin1("url"));
-        if(f && f->property(QString::fromLatin1("relative")) == Latin1Literal("true")) {
-          return KURL(Document::self()->URL(), u) == KURL::fromPathOrURL(e1.field(QString::fromLatin1("url")));
+        if(f && f->property(QString::fromLatin1("relative")) == QLatin1String("true")) {
+          return KUrl(Document::self()->URL(), u) == KUrl(e1.field(QString::fromLatin1("url")));
         }
       }
     }
   }
-  if(e1.m_fields.count() != m_fields.count()) {
-    return false;
-  }
-  for(StringMap::ConstIterator it = e1.m_fields.begin(); it != e1.m_fields.end(); ++it) {
-    if(!m_fields.contains(it.key()) || m_fields[it.key()] != it.data()) {
-      return false;
-    }
-  }
-  return true;
+  return m_fieldValues == e1.m_fieldValues;
 }
 
-Entry::Entry(CollPtr coll_) : KShared(), m_coll(coll_), m_id(-1) {
+Entry::Entry(Tellico::Data::CollPtr coll_) : KShared(), m_coll(coll_), m_id(-1) {
 #ifndef NDEBUG
   if(!coll_) {
-    kdWarning() << "Entry() - null collection pointer!" << endl;
+    kWarning() << "Entry() - null collection pointer!";
   }
 #endif
 }
 
-Entry::Entry(CollPtr coll_, int id_) : KShared(), m_coll(coll_), m_id(id_) {
+Entry::Entry(Tellico::Data::CollPtr coll_, int id_) : KShared(), m_coll(coll_), m_id(id_) {
 #ifndef NDEBUG
   if(!coll_) {
-    kdWarning() << "Entry() - null collection pointer!" << endl;
+    kWarning() << "Entry() - null collection pointer!";
   }
 #endif
 }
@@ -93,7 +82,7 @@ Entry::Entry(const Entry& entry_) :
     KShared(entry_),
     m_coll(entry_.m_coll),
     m_id(-1),
-    m_fields(entry_.m_fields),
+    m_fieldValues(entry_.m_fieldValues),
     m_formattedFields(entry_.m_formattedFields) {
 }
 
@@ -101,10 +90,10 @@ Entry& Entry::operator=(const Entry& other_) {
   if(this == &other_) return *this;
 
 //  myDebug() << "Entry::operator=()" << endl;
-  static_cast<KShared&>(*this) = static_cast<const KShared&>(other_);
+//  static_cast<KShared&>(*this) = static_cast<const KShared&>(other_);
   m_coll = other_.m_coll;
   m_id = other_.m_id;
-  m_fields = other_.m_fields;
+  m_fieldValues = other_.m_fieldValues;
   m_formattedFields = other_.m_formattedFields;
   return *this;
 }
@@ -116,7 +105,7 @@ Tellico::Data::CollPtr Entry::collection() const {
   return m_coll;
 }
 
-void Entry::setCollection(CollPtr coll_) {
+void Entry::setCollection(Tellico::Data::CollPtr coll_) {
   if(coll_ == m_coll) {
     myDebug() << "Entry::setCollection() - already belongs to collection!" << endl;
     return;
@@ -138,7 +127,7 @@ QString Entry::title() const {
   return formattedField(QString::fromLatin1("title"));
 }
 
-QString Entry::field(Data::FieldPtr field_, bool formatted_/*=false*/) const {
+QString Entry::field(Tellico::Data::FieldPtr field_, bool formatted_/*=false*/) const {
   return field(field_->name(), formatted_);
 }
 
@@ -155,13 +144,13 @@ QString Entry::field(const QString& fieldName_, bool formatted_/*=false*/) const
     return dependentValue(this, f->description(), false);
   }
 
-  if(!m_fields.isEmpty() && m_fields.contains(fieldName_)) {
-    return m_fields[fieldName_];
+  if(!m_fieldValues.isEmpty() && m_fieldValues.contains(fieldName_)) {
+    return m_fieldValues[fieldName_];
   }
   return QString::null;
 }
 
-QString Entry::formattedField(Data::FieldPtr field_) const {
+QString Entry::formattedField(Tellico::Data::FieldPtr field_) const {
   return formattedField(field_->name());
 }
 
@@ -202,7 +191,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
   return m_formattedFields[fieldName_];
 }
 
-QStringList Entry::fields(Data::FieldPtr field_, bool formatted_) const {
+QStringList Entry::fields(Tellico::Data::FieldPtr field_, bool formatted_) const {
   return fields(field_->name(), formatted_);
 }
 
@@ -214,19 +203,19 @@ QStringList Entry::fields(const QString& field_, bool formatted_) const {
   return Field::split(s, true);
 }
 
-bool Entry::setField(Data::FieldPtr field_, const QString& value_) {
+bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_) {
   return setField(field_->name(), value_);
 }
 
 bool Entry::setField(const QString& name_, const QString& value_) {
   if(name_.isEmpty()) {
-    kdWarning() << "Entry::setField() - empty field name for value: " << value_ << endl;
+    kWarning() << "Entry::setField() - empty field name for value: " << value_;
     return false;
   }
   // an empty value means remove the field
   if(value_.isEmpty()) {
-    if(!m_fields.isEmpty() && m_fields.contains(name_)) {
-      m_fields.remove(name_);
+    if(!m_fieldValues.isEmpty() && m_fieldValues.contains(name_)) {
+      m_fieldValues.remove(name_);
     }
     invalidateFormattedFieldValue(name_);
     return true;
@@ -260,9 +249,9 @@ bool Entry::setField(const QString& name_, const QString& value_) {
   if(!(f->flags() & Field::AllowMultiple) &&
      (shareType ||
       (f->type() == Field::Line && (f->flags() & Field::AllowCompletion)))) {
-    m_fields.insert(Tellico::shareString(name_), Tellico::shareString(value_));
+    m_fieldValues.insert(Tellico::shareString(name_), Tellico::shareString(value_));
   } else {
-    m_fields.insert(Tellico::shareString(name_), value_);
+    m_fieldValues.insert(Tellico::shareString(name_), value_);
   }
   invalidateFormattedFieldValue(name_);
   return true;
@@ -274,15 +263,15 @@ bool Entry::addToGroup(EntryGroup* group_) {
   }
 
   m_groups.push_back(group_);
-  group_->append(this);
+  group_->append(EntryPtr(this));
 //  m_coll->groupModified(group_);
   return true;
 }
 
 bool Entry::removeFromGroup(EntryGroup* group_) {
   // if the removal isn't successful, just return
-  bool success = m_groups.remove(group_);
-  success = success && group_->remove(this);
+  bool success = m_groups.removeAll(group_);
+  success = success && group_->removeAll(EntryPtr(this));
 //  myDebug() << "Entry::removeFromGroup() - removing from group - "
 //              << group_->fieldName() << "::" << group_->groupName() << endl;
   if(success) {
@@ -308,33 +297,32 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   if(!(f->flags() & Field::AllowMultiple)) {
     QString value = formattedField(fieldName_);
     if(value.isEmpty()) {
-      return i18n(Collection::s_emptyGroupTitle);
+      return QStringList(i18n(Collection::s_emptyGroupTitle));
     } else {
-      return value;
+      return QStringList(value);
     }
   }
 
   QStringList groups = fields(fieldName_, true);
   if(groups.isEmpty()) {
-    return i18n(Collection::s_emptyGroupTitle);
+    return QStringList(i18n(Collection::s_emptyGroupTitle));
   } else if(f->type() == Field::Table) {
-      // quick hack for tables, how often will a user have "::" in their value?
-      // only use first column for group
-    QStringList::Iterator it = groups.begin();
-    while(it != groups.end()) {
-      (*it) = (*it).section(QString::fromLatin1("::"),  0,  0);
-      if((*it).isEmpty()) {
-        it = groups.remove(it); // points to next in list
-      } else {
-        ++it;
+    // quick hack for tables, how often will a user have "::" in their value?
+    // only use first column for group
+    QStringList newGroupNames;
+    foreach(const QString& group, groups) {
+      QString newGroupName = group.section(QString::fromLatin1("::"),  0,  0);
+      if(!newGroupName.isEmpty()) {
+        newGroupNames.append(newGroupName);
       }
     }
+    groups = newGroupNames;
   }
   return groups;
 }
 
 bool Entry::isOwned() {
-  return (m_coll && m_id > -1 && m_coll->entryCount() > 0 && m_coll->entries().contains(this));
+  return (m_coll && m_id > -1 && m_coll->entryCount() > 0 && m_coll->entries().contains(EntryPtr(this)));
 }
 
 // a null string means invalidate all
@@ -347,7 +335,7 @@ void Entry::invalidateFormattedFieldValue(const QString& name_) {
 }
 
 // format is something like "%{year} %{author}"
-QString Entry::dependentValue(ConstEntryPtr entry_, const QString& format_, bool formatted_) {
+QString Entry::dependentValue(const Entry* entry_, const QString& format_, bool formatted_) {
   if(!entry_) {
     return format_;
   }
@@ -357,10 +345,10 @@ QString Entry::dependentValue(ConstEntryPtr entry_, const QString& format_, bool
 
   int endPos;
   int curPos = 0;
-  int pctPos = format_.find('%', curPos);
+  int pctPos = format_.indexOf('%', curPos);
   while(pctPos != -1 && pctPos+1 < static_cast<int>(format_.length())) {
     if(format_[pctPos+1] == '{') {
-      endPos = format_.find('}', pctPos+2);
+      endPos = format_.indexOf('}', pctPos+2);
       if(endPos > -1) {
         result += format_.mid(curPos, pctPos-curPos);
         fieldName = format_.mid(pctPos+2, endPos-pctPos-2);
@@ -372,7 +360,7 @@ QString Entry::dependentValue(ConstEntryPtr entry_, const QString& format_, bool
         if(field) {
           // don't format, just capitalize
           result += entry_->field(field, formatted_);
-        } else if(fieldName == Latin1Literal("id")) {
+        } else if(fieldName == QLatin1String("id")) {
           result += QString::number(entry_->id());
         } else {
           result += format_.mid(pctPos, endPos-pctPos+1);
@@ -385,97 +373,13 @@ QString Entry::dependentValue(ConstEntryPtr entry_, const QString& format_, bool
       result += format_.mid(curPos, pctPos-curPos+1);
       curPos = pctPos+1;
     }
-    pctPos = format_.find('%', curPos);
+    pctPos = format_.indexOf('%', curPos);
   }
   result += format_.mid(curPos, format_.length()-curPos);
 //  myDebug() << "Entry::dependentValue() - " << format_ << " = " << result << endl;
   // sometimes field value might empty, resulting in multiple consecutive white spaces
   // so let's simplify that...
-  return result.simplifyWhiteSpace();
-}
-
-int Entry::compareValues(EntryPtr e1, EntryPtr e2, const QString& f, ConstCollPtr c) {
-  return compareValues(e1, e2, c->fieldByName(f));
-}
-
-int Entry::compareValues(EntryPtr e1, EntryPtr e2, FieldPtr f) {
-  if(!e1 || !e2 || !f) {
-    return 0;
-  }
-  QString s1 = e1->field(f).lower();
-  QString s2 = e2->field(f).lower();
-  if(s1.isEmpty() || s2.isEmpty()) {
-    return 0;
-  }
-  // complicated string matching, here are the cases I want to match
-  // "bend it like beckham" == "bend it like beckham (widescreen edition)"
-  // "the return of the king" == "return of the king"
-  if(s1 == s2) {
-    return 5;
-  }
-  // special case for isbn
-  if(f->name() == Latin1Literal("isbn") && ISBNValidator::isbn10(s1) == ISBNValidator::isbn10(s2)) {
-    return 5;
-  }
-  if(f->name() == Latin1Literal("lccn") && LCCNValidator::formalize(s1) == LCCNValidator::formalize(s2)) {
-    return 5;
-  }
-  if(f->name() == Latin1Literal("arxiv")) {
-    // normalize and unVersion arxiv ID
-    s1.remove(QRegExp(QString::fromLatin1("^arxiv:"), false));
-    s1.remove(QRegExp(QString::fromLatin1("v\\d+$")));
-    s2.remove(QRegExp(QString::fromLatin1("^arxiv:"), false));
-    s2.remove(QRegExp(QString::fromLatin1("v\\d+$")));
-    if(s1 == s2) {
-      return 5;
-    }
-  }
-  if(f->formatFlag() == Field::FormatName) {
-    s1 = e1->field(f, true).lower();
-    s2 = e2->field(f, true).lower();
-    if(s1 == s2) {
-      return 5;
-    }
-  }
-  // try removing punctuation
-  QRegExp notAlphaNum(QString::fromLatin1("[^\\s\\w]"));
-  QString s1a = s1; s1a.remove(notAlphaNum);
-  QString s2a = s2; s2a.remove(notAlphaNum);
-  if(!s1a.isEmpty() && s1a == s2a) {
-//    myDebug() << "match without punctuation" << endl;
-    return 5;
-  }
-  Field::stripArticles(s1);
-  Field::stripArticles(s2);
-  if(!s1.isEmpty() && s1 == s2) {
-//    myDebug() << "match without articles" << endl;
-    return 3;
-  }
-  // try removing everything between parentheses
-  QRegExp rx(QString::fromLatin1("\\s*\\(.*\\)\\s*"));
-  s1.remove(rx);
-  s2.remove(rx);
-  if(!s1.isEmpty() && s1 == s2) {
-//    myDebug() << "match without parentheses" << endl;
-    return 2;
-  }
-  if(f->flags() & Field::AllowMultiple) {
-    QStringList sl1 = e1->fields(f, false);
-    QStringList sl2 = e2->fields(f, false);
-    int matches = 0;
-    for(QStringList::ConstIterator it = sl1.begin(); it != sl1.end(); ++it) {
-      matches += sl2.contains(*it);
-    }
-    if(matches == 0 && f->formatFlag() == Field::FormatName) {
-      sl1 = e1->fields(f, true);
-      sl2 = e2->fields(f, true);
-      for(QStringList::ConstIterator it = sl1.begin(); it != sl1.end(); ++it) {
-        matches += sl2.contains(*it);
-      }
-    }
-    return matches;
-  }
-  return 0;
+  return result.simplified();
 }
 
 #include "entry.moc"

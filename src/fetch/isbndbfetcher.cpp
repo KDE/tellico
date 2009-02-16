@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,12 +23,15 @@
 
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kconfig.h>
+#include <kio/job.h>
+#include <kio/jobuidelegate.h>
+#include <KConfigGroup>
 
-#include <qdom.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qfile.h>
+#include <QDomDocument>
+#include <QLabel>
+#include <QFile>
+#include <QTextStream>
+#include <QVBoxLayout>
 
 namespace {
   static const int ISBNDB_RETURNS_PER_REQUEST = 10;
@@ -39,8 +42,8 @@ namespace {
 
 using Tellico::Fetch::ISBNdbFetcher;
 
-ISBNdbFetcher::ISBNdbFetcher(QObject* parent_, const char* name_)
-    : Fetcher(parent_, name_), m_xsltHandler(0),
+ISBNdbFetcher::ISBNdbFetcher(QObject* parent_)
+    : Fetcher(parent_), m_xsltHandler(0),
       m_limit(ISBNDB_MAX_RETURNS_TOTAL), m_page(1), m_total(-1), m_countOffset(0),
       m_job(0), m_started(false) {
 }
@@ -66,9 +69,9 @@ void ISBNdbFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
 
-void ISBNdbFetcher::search(FetchKey key_, const QString& value_) {
+void ISBNdbFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_key = key_;
-  m_value = value_.stripWhiteSpace();
+  m_value = value_.trimmed();
   m_started = true;
   m_page = 1;
   m_total = -1;
@@ -76,7 +79,7 @@ void ISBNdbFetcher::search(FetchKey key_, const QString& value_) {
   m_countOffset = 0;
 
   if(!canFetch(Kernel::self()->collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.").arg(source()), MessageHandler::Warning);
+    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
   }
@@ -90,11 +93,9 @@ void ISBNdbFetcher::continueSearch() {
 }
 
 void ISBNdbFetcher::doSearch() {
-  m_data.truncate(0);
-
 //  myDebug() << "ISBNdbFetcher::search() - value = " << value_ << endl;
 
-  KURL u(QString::fromLatin1(ISBNDB_BASE_URL));
+  KUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
   u.addQueryItem(QString::fromLatin1("access_key"), QString::fromLatin1(ISBNDB_APP_ID));
   u.addQueryItem(QString::fromLatin1("results"), QString::fromLatin1("details,authors,subjects,texts"));
   u.addQueryItem(QString::fromLatin1("page_number"), QString::number(m_page));
@@ -127,17 +128,16 @@ void ISBNdbFetcher::doSearch() {
       break;
 
     default:
-      kdWarning() << "ISBNdbFetcher::search() - key not recognized: " << m_key << endl;
+      kWarning() << "ISBNdbFetcher::search() - key not recognized: " << m_key;
       stop();
       return;
   }
 //  myDebug() << "ISBNdbFetcher::search() - url: " << u.url() << endl;
 
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
 }
 
 void ISBNdbFetcher::stop() {
@@ -149,47 +149,43 @@ void ISBNdbFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_data.truncate(0);
+
   m_started = false;
   emit signalDone(this);
 }
 
-void ISBNdbFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void ISBNdbFetcher::slotComplete(KIO::Job* job_) {
+void ISBNdbFetcher::slotComplete(KJob*) {
 //  myDebug() << "ISBNdbFetcher::slotComplete()" << endl;
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
 
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "ISBNdbFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
 #if 0
-  kdWarning() << "Remove debug from isbndbfetcher.cpp" << endl;
+  kWarning() << "Remove debug from isbndbfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test.xml"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
-    t << QCString(m_data, m_data.size()+1);
+    t << data;
   }
   f.close();
 #endif
 
   QDomDocument dom;
-  if(!dom.setContent(m_data, false)) {
-    kdWarning() << "ISBNdbFetcher::slotComplete() - server did not return valid XML." << endl;
+  if(!dom.setContent(data, false)) {
+    kWarning() << "ISBNdbFetcher::slotComplete() - server did not return valid XML.";
     return;
   }
 
@@ -210,13 +206,16 @@ void ISBNdbFetcher::slotComplete(KIO::Job* job_) {
   }
 
   // assume result is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(m_data, m_data.size()));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
 
   int count = 0;
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVec::Iterator entry = entries.begin(); m_numResults < m_limit && entry != entries.end(); ++entry, ++count) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
+    if(m_numResults >= m_limit) {
+      break;
+    }
     if(count < m_countOffset) {
       continue;
     }
@@ -232,19 +231,20 @@ void ISBNdbFetcher::slotComplete(KIO::Job* job_) {
       desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
     }
 
-    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++m_numResults;
+    ++count;
   }
 
   // are there any additional results to get?
   m_hasMoreResults = m_page * ISBNDB_RETURNS_PER_REQUEST < m_total;
 
-  const int currentTotal = QMIN(m_total, m_limit);
+  const int currentTotal = qMin(m_total, m_limit);
   if(m_page * ISBNDB_RETURNS_PER_REQUEST < currentTotal) {
     int foundCount = (m_page-1) * ISBNDB_RETURNS_PER_REQUEST + coll->entryCount();
-    message(i18n("Results from %1: %2/%3").arg(source()).arg(foundCount).arg(m_total), MessageHandler::Status);
+    message(i18n("Results from %1: %2/%3", source(), foundCount, m_total), MessageHandler::Status);
     ++m_page;
     m_countOffset = 0;
     doSearch();
@@ -260,14 +260,14 @@ void ISBNdbFetcher::slotComplete(KIO::Job* job_) {
 Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
-    kdWarning() << "ISBNdbFetcher::fetchEntry() - no entry in dict" << endl;
-    return 0;
+    kWarning() << "ISBNdbFetcher::fetchEntry() - no entry in dict";
+    return Data::EntryPtr();
   }
 
   // if the publisher id is set, then we need to grab the real publisher name
   const QString id = entry->field(QString::fromLatin1("pub_id"));
   if(!id.isEmpty()) {
-    KURL u(QString::fromLatin1(ISBNDB_BASE_URL));
+    KUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
     u.setFileName(QString::fromLatin1("publishers.xml"));
     u.addQueryItem(QString::fromLatin1("access_key"), QString::fromLatin1(ISBNDB_APP_ID));
     u.addQueryItem(QString::fromLatin1("index1"), QString::fromLatin1("publisher_id"));
@@ -290,26 +290,26 @@ Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntry(uint uid_) {
 }
 
 void ISBNdbFetcher::initXSLTHandler() {
-  QString xsltfile = locate("appdata", QString::fromLatin1("isbndb2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("isbndb2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kdWarning() << "ISBNdbFetcher::initXSLTHandler() - can not locate isbndb2tellico.xsl." << endl;
+    kWarning() << "ISBNdbFetcher::initXSLTHandler() - can not locate isbndb2tellico.xsl.";
     return;
   }
 
-  KURL u;
+  KUrl u;
   u.setPath(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kdWarning() << "ISBNdbFetcher::initXSLTHandler() - error in isbndb2tellico.xsl." << endl;
+    kWarning() << "ISBNdbFetcher::initXSLTHandler() - error in isbndb2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
   }
 }
 
-void ISBNdbFetcher::updateEntry(Data::EntryPtr entry_) {
+void ISBNdbFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myDebug() << "ISBNdbFetcher::updateEntry()" << endl;
   // limit to top 5 results
   m_limit = 5;
@@ -336,7 +336,7 @@ Tellico::Fetch::ConfigWidget* ISBNdbFetcher::configWidget(QWidget* parent_) cons
   return new ISBNdbFetcher::ConfigWidget(parent_, this);
 }
 
-ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*/*=0*/)
+ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher* /*=0*/)
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));

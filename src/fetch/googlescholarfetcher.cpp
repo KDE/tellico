@@ -21,21 +21,23 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kconfig.h>
+#include <KConfigGroup>
 #include <kio/job.h>
+#include <kio/jobuidelegate.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
+#include <QLabel>
+#include <QVBoxLayout>
 
 namespace {
-  static const size_t GOOGLE_MAX_RETURNS_TOTAL = 20;
+  static const int GOOGLE_MAX_RETURNS_TOTAL = 20;
   static const char* SCHOLAR_BASE_URL = "http://scholar.google.com/scholar";
+  static const char* SCHOLAR_SET_BIBTEX_URL = "http://scholar.google.com/scholar_setprefs?num=100&scis=yes&scisf=4&submit=Save+Preferences";
 }
 
 using Tellico::Fetch::GoogleScholarFetcher;
 
-GoogleScholarFetcher::GoogleScholarFetcher(QObject* parent_, const char* name_)
-    : Fetcher(parent_, name_),
+GoogleScholarFetcher::GoogleScholarFetcher(QObject* parent_)
+    : Fetcher(parent_),
       m_limit(GOOGLE_MAX_RETURNS_TOTAL), m_start(0), m_job(0), m_started(false),
       m_cookieIsSet(false) {
   m_bibtexRx = QRegExp(QString::fromLatin1("<a\\s.*href\\s*=\\s*\"([^>]*scholar\\.bib[^>]*)\""));
@@ -62,10 +64,10 @@ void GoogleScholarFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
 
-void GoogleScholarFetcher::search(FetchKey key_, const QString& value_) {
+void GoogleScholarFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   if(!m_cookieIsSet) {
     // have to set preferences to have bibtex output
-    FileHandler::readTextFile(QString::fromLatin1("http://scholar.google.com/scholar_setprefs?num=100&scis=yes&scisf=4&submit=Save+Preferences"), true);
+    FileHandler::readTextFile(QString::fromLatin1(SCHOLAR_SET_BIBTEX_URL), true);
     m_cookieIsSet = true;
   }
   m_key = key_;
@@ -85,12 +87,12 @@ void GoogleScholarFetcher::doSearch() {
 //  myDebug() << "GoogleScholarFetcher::search() - value = " << value_ << endl;
 
   if(!canFetch(Kernel::self()->collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.").arg(source()), MessageHandler::Warning);
+    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
   }
 
-  KURL u(QString::fromLatin1(SCHOLAR_BASE_URL));
+  KUrl u(QString::fromLatin1(SCHOLAR_BASE_URL));
   u.addQueryItem(QString::fromLatin1("start"), QString::number(m_start));
 
   switch(m_key) {
@@ -107,17 +109,16 @@ void GoogleScholarFetcher::doSearch() {
       break;
 
     default:
-      kdWarning() << "GoogleScholarFetcher::search() - key not recognized: " << m_key << endl;
+      kWarning() << "GoogleScholarFetcher::search() - key not recognized: " << m_key;
       stop();
       return;
   }
 //  myDebug() << "GoogleScholarFetcher::search() - url: " << u.url() << endl;
 
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
 }
 
 void GoogleScholarFetcher::stop() {
@@ -128,38 +129,34 @@ void GoogleScholarFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_data.truncate(0);
   m_started = false;
   emit signalDone(this);
 }
 
-void GoogleScholarFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void GoogleScholarFetcher::slotComplete(KIO::Job* job_) {
+void GoogleScholarFetcher::slotComplete(KJob*) {
 //  myDebug() << "GoogleScholarFetcher::slotComplete()" << endl;
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
 
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "GoogleScholarFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
-  QString text = QString::fromUtf8(m_data, m_data.size());
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
+
+  QString text = QString::fromUtf8(data, data.size());
   QString bibtex;
-  size_t count = 0;
-  for(int pos = text.find(m_bibtexRx); count < m_limit && pos > -1; pos = text.find(m_bibtexRx, pos+m_bibtexRx.matchedLength()), ++count) {
-    KURL bibtexUrl(QString::fromLatin1(SCHOLAR_BASE_URL), m_bibtexRx.cap(1));
+  int count = 0;
+  for(int pos = text.indexOf(m_bibtexRx); count < m_limit && pos > -1; pos = text.indexOf(m_bibtexRx, pos+m_bibtexRx.matchedLength()), ++count) {
+    KUrl bibtexUrl(QString::fromLatin1(SCHOLAR_BASE_URL), m_bibtexRx.cap(1));
 //    myDebug() << bibtexUrl << endl;
     bibtex += FileHandler::readTextFile(bibtexUrl, true);
   }
@@ -173,8 +170,11 @@ void GoogleScholarFetcher::slotComplete(KIO::Job* job_) {
   }
 
   count = 0;
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVec::Iterator entry = entries.begin(); count < m_limit && entry != entries.end(); ++entry, ++count) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
+    if(count >= m_limit) {
+      break;
+    }
     if(!m_started) {
       // might get aborted
       break;
@@ -185,9 +185,10 @@ void GoogleScholarFetcher::slotComplete(KIO::Job* job_) {
       desc += QChar('/') + entry->field(QString::fromLatin1("year"));
     }
 
-    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
+    ++count;
   }
   m_start = m_entries.count();
 //  m_hasMoreResults = m_start <= m_total;
@@ -200,7 +201,7 @@ Tellico::Data::EntryPtr GoogleScholarFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-void GoogleScholarFetcher::updateEntry(Data::EntryPtr entry_) {
+void GoogleScholarFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myDebug() << "GoogleScholarFetcher::updateEntry()" << endl;
   // limit to top 5 results
   m_limit = 5;
@@ -219,7 +220,7 @@ Tellico::Fetch::ConfigWidget* GoogleScholarFetcher::configWidget(QWidget* parent
   return new GoogleScholarFetcher::ConfigWidget(parent_, this);
 }
 
-GoogleScholarFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleScholarFetcher*/*=0*/)
+GoogleScholarFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleScholarFetcher* /*=0*/)
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));

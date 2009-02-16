@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -26,17 +26,17 @@
 #include <kstandarddirs.h>
 #include <kapplication.h>
 #include <kzip.h>
-#include <kconfig.h>
+#include <KConfigGroup>
 #include <klocale.h>
 
-#include <qdom.h>
-#include <qfile.h>
-#include <qdatetime.h>
-#include <qbuffer.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qcheckbox.h>
-#include <qgroupbox.h>
+#include <QDomDocument>
+#include <QFile>
+#include <QDateTime>
+#include <QBuffer>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QTextStream>
+#include <QVBoxLayout>
 
 using Tellico::Export::ONIXExporter;
 
@@ -47,7 +47,7 @@ ONIXExporter::ONIXExporter() : Tellico::Export::Exporter(),
     m_widget(0) {
 }
 
-ONIXExporter::ONIXExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
+ONIXExporter::ONIXExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(0),
     m_xsltFile(QString::fromLatin1("tellico2onix.xsl")),
     m_includeImages(true),
@@ -73,26 +73,26 @@ bool ONIXExporter::exec() {
     return false;
   }
 
-  QCString xml = text().utf8(); // encoded in utf-8
+  QByteArray xml = text().toUtf8(); // encoded in utf-8
 
   QByteArray data;
-  QBuffer buf(data);
+  QBuffer buf(&data);
 
   KZip zip(&buf);
-  zip.open(IO_WriteOnly);
-  zip.writeFile(QString::fromLatin1("onix.xml"), QString::null, QString::null, xml.length(), xml);
+  zip.open(QIODevice::WriteOnly);
+  zip.writeFile(QString::fromLatin1("onix.xml"), QString::null, QString::null, xml, xml.size());
 
   // use a dict for fast random access to keep track of which images were written to the file
   if(m_includeImages) { // for now, we're ignoring (options() & Export::ExportImages)
     const QString cover = QString::fromLatin1("cover");
     StringSet imageSet;
-    for(Data::EntryVec::ConstIterator it = entries().begin(); it != entries().end(); ++it) {
-      const Data::Image& img = ImageFactory::imageById(it->field(cover));
+    foreach(Data::EntryPtr entry, entries()) {
+      const Data::Image& img = ImageFactory::imageById(entry->field(cover));
       if(!img.isNull() && !imageSet.has(img.id())
          && (img.format() == "JPEG" || img.format() == "JPG" || img.format() == "GIF")) { /// onix only understands jpeg and gif
         QByteArray ba = img.byteArray();
-        zip.writeFile(QString::fromLatin1("images/") + it->field(cover),
-                      QString::null, QString::null, ba.size(), ba);
+        zip.writeFile(QString::fromLatin1("images/") + entry->field(cover),
+                      QString::null, QString::null, ba, ba.size());
         imageSet.add(img.id());
       }
     }
@@ -104,7 +104,7 @@ bool ONIXExporter::exec() {
 }
 
 QString ONIXExporter::text() {
-  QString xsltfile = locate("appdata", m_xsltFile);
+  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
   if(xsltfile.isNull()) {
     myDebug() << "ONIXExporter::text() - no xslt file for " << m_xsltFile << endl;
     return QString::null;
@@ -120,7 +120,7 @@ QString ONIXExporter::text() {
   // all params should be passed to XSLTHandler in utf8
   // input string to XSLTHandler should be in utf-8, EVEN IF DOM STRING SAYS OTHERWISE
 
-  KURL u;
+  KUrl u;
   u.setPath(xsltfile);
   // do NOT do namespace processing, it messes up the XSL declaration since
   // QDom thinks there are no elements in the Tellico namespace and as a result
@@ -141,11 +141,11 @@ QString ONIXExporter::text() {
   m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile));
 
   QDateTime now = QDateTime::currentDateTime();
-  m_handler->addStringParam("sentDate", now.toString(QString::fromLatin1("yyyyMMddhhmm")).utf8());
+  m_handler->addStringParam("sentDate", now.toString(QString::fromLatin1("yyyyMMddhhmm")).toUtf8());
 
   m_handler->addStringParam("version", VERSION);
 
-  GUI::CursorSaver cs(Qt::waitCursor);
+  GUI::CursorSaver cs(Qt::WaitCursor);
 
   // now grab the XML
   TellicoXMLExporter exporter(coll);
@@ -156,7 +156,7 @@ QString ONIXExporter::text() {
   QDomDocument output = exporter.exportXML();
 #if 0
   QFile f(QString::fromLatin1("/tmp/test.xml"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t << output.toString();
   }
@@ -165,31 +165,35 @@ QString ONIXExporter::text() {
   return m_handler->applyStylesheet(output.toString());
 }
 
-QWidget* ONIXExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
-  if(m_widget && m_widget->parent() == parent_) {
+QWidget* ONIXExporter::widget(QWidget* parent_) {
+  if(m_widget) {
     return m_widget;
   }
 
-  m_widget = new QWidget(parent_, name_);
+  m_widget = new QWidget(parent_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("ONIX Archive Options"), m_widget);
-  l->addWidget(box);
+  QGroupBox* gbox = new QGroupBox(i18n("ONIX Archive Options"), m_widget);
+  QVBoxLayout* vlay = new QVBoxLayout(gbox);
 
-  m_checkIncludeImages = new QCheckBox(i18n("Include images in archive"), box);
+  m_checkIncludeImages = new QCheckBox(i18n("Include images in archive"), gbox);
   m_checkIncludeImages->setChecked(m_includeImages);
-  QWhatsThis::add(m_checkIncludeImages, i18n("If checked, the images in the document will be included "
-                                             "in the zipped ONIX archive."));
+  m_checkIncludeImages->setWhatsThis(i18n("If checked, the images in the document will be included "
+                                          "in the zipped ONIX archive."));
 
+  vlay->addWidget(m_checkIncludeImages);
+
+  l->addWidget(gbox);
+  l->addStretch(1);
   return m_widget;
 }
 
-void ONIXExporter::readOptions(KConfig* config_) {
+void ONIXExporter::readOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_includeImages = group.readBoolEntry("Include Images", m_includeImages);
+  m_includeImages = group.readEntry("Include Images", m_includeImages);
 }
 
-void ONIXExporter::saveOptions(KConfig* config_) {
+void ONIXExporter::saveOptions(KSharedConfigPtr config_) {
   m_includeImages = m_checkIncludeImages->isChecked();
 
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));

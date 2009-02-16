@@ -22,7 +22,6 @@
 #include "../imagefactory.h"
 #include "../image.h"
 #include "../isbnvalidator.h"
-#include "../latin1literal.h"
 #include "../tellico_strings.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
@@ -30,23 +29,23 @@
 #include "../progressmanager.h"
 
 #include <klocale.h>
-#include <kmdcodec.h>
+#include <kcodecs.h>
 #include <kzip.h>
 #include <kapplication.h>
 
-#include <qbuffer.h>
-#include <qfile.h>
-#include <qtimer.h>
+#include <QBuffer>
+#include <QFile>
+#include <QTimer>
 
 using Tellico::Import::TellicoSaxImporter;
 
-TellicoSaxImporter::TellicoSaxImporter(const KURL& url_, bool loadAllImages_) : DataImporter(url_),
-    m_coll(0), m_loadAllImages(loadAllImages_), m_format(Unknown), m_modified(false),
+TellicoSaxImporter::TellicoSaxImporter(const KUrl& url_, bool loadAllImages_) : DataImporter(url_),
+    m_loadAllImages(loadAllImages_), m_format(Unknown), m_modified(false),
     m_cancelled(false), m_hasImages(false), m_buffer(0), m_zip(0), m_imgDir(0) {
 }
 
 TellicoSaxImporter::TellicoSaxImporter(const QString& text_) : DataImporter(text_),
-    m_coll(0), m_loadAllImages(true), m_format(Unknown), m_modified(false),
+    m_loadAllImages(true), m_format(Unknown), m_modified(false),
     m_cancelled(false), m_hasImages(false), m_buffer(0), m_zip(0), m_imgDir(0) {
 }
 
@@ -65,23 +64,25 @@ Tellico::Data::CollPtr TellicoSaxImporter::collection() {
     return m_coll;
   }
 
-  QCString s; // read first 5 characters
+  QByteArray s; // read first 5 characters
   if(source() == URL) {
     if(!fileRef().open()) {
-      return 0;
+      return Data::CollPtr();
     }
     QIODevice* f = fileRef().file();
-    for(uint i = 0; i < 5; ++i) {
-      s += static_cast<char>(f->getch());
+    for(int i = 0; i < 5; ++i) {
+      char c;
+      s += f->getChar(&c);
     }
     f->reset();
   } else {
     if(data().size() < 5) {
       m_format = Error;
-      return 0;
+      return Data::CollPtr();
     }
-    s = QCString(data(), 6);
+    s = QByteArray(data(), 6);
   }
+
 
   // need to decide if the data is xml text, or a zip file
   // if the first 5 characters are <?xml then treat it like text
@@ -112,16 +113,14 @@ void TellicoSaxImporter::loadXMLData(const QByteArray& data_, bool loadImages_) 
   QXmlInputSource source;
   bool success = reader.parse(&source, true);
 
-  const uint blockSize = data_.size()/100 + 1;
-  uint pos = 0;
-  QByteArray block;
+  const int blockSize = data_.size()/100 + 1;
+  int pos = 0;
 
   while(success && !m_cancelled && pos < data_.size()) {
-    uint size = QMIN(blockSize, data_.size() - pos);
-    block.setRawData(data_.data() + pos, size);
+    uint size = qMin(blockSize, data_.size() - pos);
+    QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
     source.setData(block);
     success = reader.parseContinue();
-    block.resetRawData(data_.data() + pos, size);
     pos += blockSize;
     if(showProgress) {
       ProgressManager::self()->setProgress(this, pos);
@@ -154,11 +153,12 @@ void TellicoSaxImporter::loadZipData() {
     m_buffer = 0;
     m_zip = new KZip(fileRef().fileName());
   } else {
-    m_buffer = new QBuffer(data());
+    QByteArray allData = data();
+    m_buffer = new QBuffer(&allData);
     m_zip = new KZip(m_buffer);
   }
-  if(!m_zip->open(IO_ReadOnly)) {
-    setStatusMessage(i18n(errorLoad).arg(url().fileName()));
+  if(!m_zip->open(QIODevice::ReadOnly)) {
+    setStatusMessage(i18n(errorLoad, url().fileName()));
     m_format = Error;
     delete m_zip;
     m_zip = 0;
@@ -169,7 +169,7 @@ void TellicoSaxImporter::loadZipData() {
 
   const KArchiveDirectory* dir = m_zip->directory();
   if(!dir) {
-    QString str = i18n(errorLoad).arg(url().fileName()) + QChar('\n');
+    QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
     str += i18n("The file is empty.");
     setStatusMessage(str);
     m_format = Error;
@@ -187,7 +187,7 @@ void TellicoSaxImporter::loadZipData() {
     entry = dir->entry(QString::fromLatin1("bookcase.xml"));
   }
   if(!entry || !entry->isFile()) {
-    QString str = i18n(errorLoad).arg(url().fileName()) + QChar('\n');
+    QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
     str += i18n("The file contains no collection data.");
     setStatusMessage(str);
     m_format = Error;
@@ -241,14 +241,14 @@ void TellicoSaxImporter::loadZipData() {
   }
 
   const QStringList images = static_cast<const KArchiveDirectory*>(imgDirEntry)->entries();
-  const uint stepSize = QMAX(s_stepSize, images.count()/100);
+  const uint stepSize = qMax(s_stepSize, static_cast<uint>(images.count())/100);
 
   uint j = 0;
   for(QStringList::ConstIterator it = images.begin(); !m_cancelled && it != images.end(); ++it, ++j) {
     const KArchiveEntry* file = m_imgDir->entry(*it);
     if(file && file->isFile()) {
       ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                             (*it).section('.', -1).upper(), (*it));
+                             (*it).section('.', -1).toUpper(), (*it));
       m_images.remove(*it);
     }
     if(j%stepSize == 0) {
@@ -276,7 +276,7 @@ bool TellicoSaxImporter::loadImage(const QString& id_) {
     return false;
   }
   QString newID = ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                                         id_.section('.', -1).upper(), id_);
+                                         id_.section('.', -1).toUpper(), id_);
   m_images.remove(id_);
   if(m_images.isEmpty()) {
     // give it some time

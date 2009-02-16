@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,13 +23,13 @@ CollectionTypeCombo::CollectionTypeCombo(QWidget* parent_) : ComboBox(parent_) {
 
 void CollectionTypeCombo::reset() {
   clear();
-  // I want to sort the collection names
+  // I want to sort the collection names, so use a map
   const CollectionNameMap nameMap = CollectionFactory::nameMap();
   QMap<QString, int> rNameMap;
   for(CollectionNameMap::ConstIterator it = nameMap.begin(); it != nameMap.end(); ++it) {
-    rNameMap.insert(it.data(), it.key());
+    rNameMap.insert(it.value(), it.key());
   }
-  const QValueList<int> collTypes = rNameMap.values();
+  const QList<int> collTypes = rNameMap.values();
   const QStringList collNames = rNameMap.keys();
   int custom = -1;
   const int total = collTypes.count();
@@ -44,7 +44,7 @@ void CollectionTypeCombo::reset() {
       custom = i;
       continue;
     }
-    insertItem(collNames[i], collTypes[i]);
+    addItem(collNames[i], collTypes[i]);
   }
 }
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,14 +14,11 @@
 #ifndef TELLICO_GROUPITERATOR_H
 #define TELLICO_GROUPITERATOR_H
 
-class QListView;
+class QAbstractItemModel;
 
 namespace Tellico {
   namespace Data {
     class EntryGroup;
-  }
-  namespace GUI {
-    class ListViewItem;
   }
 
 /**
@@ -29,13 +26,14 @@ namespace Tellico {
  */
 class GroupIterator{
 public:
-  GroupIterator(const QListView* view);
+  GroupIterator(QAbstractItemModel* model);
 
   GroupIterator& operator++();
   Data::EntryGroup* group();
 
 private:
-  GUI::ListViewItem* m_item;
+  QAbstractItemModel* m_model;
+  int m_row;
 };
 
 }

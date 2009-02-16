@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,26 +16,26 @@
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../tellico_utils.h"
-#include "../latin1literal.h"
 #include "../statusbar.h"
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
 #include <klibloader.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <knuminput.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <klocale.h>
+#include <kglobal.h>
 
-#include <qiconset.h>
-#include <qlayout.h>
-#include <qradiobutton.h>
-#include <qbuttongroup.h>
-#include <qfile.h>
-#include <qvgroupbox.h>
+#include <QFile>
+#include <QLabel>
+#include <QGridLayout>
+#include <QBoxLayout>
+#include <QGroupBox>
+#include <QRadioButton>
 
 using Tellico::Cite::OpenOffice;
 
@@ -43,9 +43,9 @@ class OpenOffice::Private {
   friend class OpenOffice;
 
   Private() : handler(0), port(-1) {
-    KLibrary* library = Tellico::openLibrary(QString::fromLatin1("tellico_ooo"));
+    KLibrary* library = Tellico::openLibrary(QLatin1String("tellico_ooo"));
     if(library) {
-      void* func = library->symbol("handler");
+      void* func = library->resolveSymbol("handler");
       if(func) {
         handler = ((Handler* (*)())func)();
       }
@@ -82,12 +82,12 @@ bool OpenOffice::connect() {
   StatusBar::self()->setStatus(i18n("Connecting to OpenOffice.org..."));
 
   if(d->port == -1) {
-    KConfigGroup config(kapp->config(), "OpenOffice.org");
-    d->host = config.readEntry("Host", QString::fromLatin1("localhost"));
-    d->port = config.readNumEntry("Port", 2083);
-    d->pipe = config.readPathEntry("Pipe");
+    KConfigGroup config(KGlobal::config(), "OpenOffice.org");
+    d->host = config.readEntry("Host", "localhost");
+    d->port = config.readEntry("Port", 2083);
+    d->pipe = config.readPathEntry("Pipe", QString());
     // the ooohandler will depend on pipe.isEmpty() to indicate the port should be used
-    d->handler->setHost(d->host);
+    d->handler->setHost(d->host.toUtf8());
     d->handler->setPort(d->port);
     if(!d->pipe.isEmpty()) {
       d->handler->setPipe(QFile::encodeName(d->pipe));
@@ -120,7 +120,7 @@ bool OpenOffice::connect() {
   return success;
 }
 
-bool OpenOffice::cite(Data::EntryVec entries_) {
+bool OpenOffice::cite(Tellico::Data::EntryList entries_) {
   if(!connect()) {
     myDebug() << "OpenOffice::cite() - can't connect to OpenOffice" << endl;
     return false;
@@ -136,22 +136,24 @@ bool OpenOffice::cite(Data::EntryVec entries_) {
     return false;
   }
 
-  const QString bibtex = QString::fromLatin1("bibtex");
-  Data::FieldVec vec = coll->fields();
-  for(Data::EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+  const QString bibtex = QLatin1String("bibtex");
+  Data::FieldList vec = coll->fields();
+//  for(Data::EntryListIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+  foreach(Data::EntryPtr entry, entries_) {
     Cite::Map values;
-    for(Data::FieldVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
-      QString bibtexField = it->property(bibtex);
+//    for(Data::FieldList::Iterator it = vec.begin(); it != vec.end(); ++it) {
+    foreach(Data::FieldPtr field, vec) {
+      QString bibtexField = field->property(bibtex);
       if(!bibtexField.isEmpty()) {
-        QString s = entry->field(it->name());
+        QString s = entry->field(field->name());
         if(!s.isEmpty()) {
-          values[bibtexField] = s.utf8(); // always utf8
+          values[bibtexField.toStdString()] = s.toStdString();
         }
-      } else if(it->name() == Latin1Literal("isbn")) {
+      } else if(field->name() == QLatin1String("isbn")) {
         // OOO includes ISBN
-        QString s = entry->field(it->name());
+        QString s = entry->field(field->name());
         if(!s.isEmpty()) {
-          values[it->name()] = s.utf8();
+          values[field->name().toStdString()] = s.toStdString();
         }
       }
     }
@@ -161,19 +163,22 @@ bool OpenOffice::cite(Data::EntryVec entries_) {
 }
 
 bool OpenOffice::connectionDialog() {
-  KDialogBase dlg(Kernel::self()->widget(), "ooo connection dialog",
-                  true, i18n("OpenOffice.org Connection"),
-                  KDialogBase::Ok|KDialogBase::Cancel|KDialogBase::Help);
-
-  dlg.setHelp(QString::fromLatin1("openoffice-org"));
+  KDialog dlg(Kernel::self()->widget());
+  dlg.setCaption(i18n("OpenOffice.org Connection"));
+  dlg.setModal(true);
+  dlg.setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help);
+  dlg.showButtonSeparator( false );
+  dlg.setHelp(QLatin1String("openoffice-org"));
 
   QWidget* widget = new QWidget(&dlg);
-  QBoxLayout* topLayout = new QVBoxLayout(widget, KDialog::spacingHint());
+  QBoxLayout* topLayout = new QVBoxLayout(widget);
+  topLayout->setSpacing(KDialog::spacingHint());
   dlg.setMainWidget(widget);
   // is there a better way to do a multi-line label than to insert newlines in the text?
-  QBoxLayout* blay = new QHBoxLayout(topLayout);
+  QBoxLayout* blay = new QHBoxLayout(widget);
+  topLayout->addLayout(blay);
   QLabel* l = new QLabel(widget);
-  l->setPixmap(DesktopIcon(QString::fromLatin1("ooo_writer"), 64));
+  l->setPixmap(DesktopIcon(QLatin1String("ooo_writer"), 64));
   blay->addWidget(l);
   l = new QLabel(widget);
   l->setText(i18n("Tellico was unable to connect to OpenOffice.org. "
@@ -183,31 +188,27 @@ bool OpenOffice::connectionDialog() {
   blay->addWidget(l);
   blay->setStretchFactor(l, 10);
 
-  QVGroupBox* gbox = new QVGroupBox(i18n("OpenOffice.org Connection"), widget);
+  QGroupBox* gbox = new QGroupBox(i18n("OpenOffice.org Connection"), widget);
   topLayout->addWidget(gbox);
 
-  QWidget* w2 = new QWidget(gbox);
-  QGridLayout* gl = new QGridLayout(w2, 2, 3, 0 /*margin*/, KDialog::spacingHint());
-  QRadioButton* radioPipe = new QRadioButton(i18n("Pipe"), w2);
+  QGridLayout* gl = new QGridLayout(gbox);
+  gl->setSpacing(KDialog::spacingHint());
+  QRadioButton* radioPipe = new QRadioButton(i18n("Pipe"), gbox);
   gl->addWidget(radioPipe, 0, 0);
-  QRadioButton* radioTCP = new QRadioButton(i18n("TCP/IP"), w2);
+  QRadioButton* radioTCP = new QRadioButton(i18n("TCP/IP"), gbox);
   gl->addWidget(radioTCP, 1, 0);
-  QButtonGroup* btnGroup = new QButtonGroup();
-  btnGroup->setRadioButtonExclusive(true);
-  btnGroup->insert(radioPipe, 0);
-  btnGroup->insert(radioTCP, 1);
 
-  KLineEdit* pipeEdit = new KLineEdit(w2);
+  KLineEdit* pipeEdit = new KLineEdit(gbox);
   pipeEdit->setText(d->pipe);
-  gl->addMultiCellWidget(pipeEdit, 0, 0, 1, 2);
+  gl->addWidget(pipeEdit, 0, 0, 1, 2);
   pipeEdit->connect(radioPipe, SIGNAL(toggled(bool)), SLOT(setEnabled(bool)));
 
-  KLineEdit* hostEdit = new KLineEdit(w2);
+  KLineEdit* hostEdit = new KLineEdit(gbox);
   hostEdit->setText(d->host);
   gl->addWidget(hostEdit, 1, 1);
   hostEdit->connect(radioTCP, SIGNAL(toggled(bool)), SLOT(setEnabled(bool)));
-  KIntSpinBox* portSpin = new KIntSpinBox(w2);
-  portSpin->setMaxValue(99999);
+  KIntSpinBox* portSpin = new KIntSpinBox(gbox);
+  portSpin->setMaximum(99999);
   portSpin->setValue(d->port);
   gl->addWidget(portSpin, 1, 2);
   portSpin->connect(radioTCP, SIGNAL(toggled(bool)), SLOT(setEnabled(bool)));
@@ -235,7 +236,7 @@ bool OpenOffice::connectionDialog() {
   if(radioTCP->isChecked()) {
     h = hostEdit->text();
     if(h.isEmpty()) {
-      h = QString::fromLatin1("localhost");
+      h = QLatin1String("localhost");
     }
     p = portSpin->value();
   } else {
@@ -246,14 +247,14 @@ bool OpenOffice::connectionDialog() {
   d->pipe = s;
 
   if(!d->host.isEmpty()) {
-    d->handler->setHost(d->host);
+    d->handler->setHost(d->host.toUtf8());
   }
   d->handler->setPort(d->port);
   if(!d->pipe.isEmpty()) {
     d->handler->setPipe(QFile::encodeName(d->pipe));
   }
 
-  KConfigGroup config(kapp->config(), "OpenOffice.org");
+  KConfigGroup config(KGlobal::config(), "OpenOffice.org");
   config.writeEntry("Host", d->host);
   config.writeEntry("Port", d->port);
   config.writePathEntry("Pipe", d->pipe);

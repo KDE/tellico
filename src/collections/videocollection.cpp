@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "videocollection.h"
+#include "../entrycomparison.h"
 
 #include <klocale.h>
 
@@ -32,8 +33,8 @@ VideoCollection::VideoCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("genre"));
 }
 
-Tellico::Data::FieldVec VideoCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList VideoCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
@@ -54,11 +55,10 @@ Tellico::Data::FieldVec VideoCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  QStringList cert = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                        i18n("Movie ratings - "
-                                             "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
-                                             "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)"),
-                                        false);
+  QStringList cert = i18nc("Movie ratings - "
+                           "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
+                           "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)")
+                     .split(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::SkipEmptyParts);
   field = new Field(QString::fromLatin1("certification"), i18n("Certification"), cert);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);
@@ -218,18 +218,18 @@ Tellico::Data::FieldVec VideoCollection::defaultFields() {
   return list;
 }
 
-int VideoCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+int VideoCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   // not enough for title to be equal, must also have another field
   // ever possible for a studio to do two movies with identical titles?
-  int res = 3*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+  int res = 3*EntryComparison::score(entry1_, entry2_, QString::fromLatin1("title"), this);
 //  if(res == 0) {
 //    myDebug() << "VideoCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title() << endl;
 //  }
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("year"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("director"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("studio"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("medium"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("year"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("director"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("studio"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("medium"), this);
   return res;
 }
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,7 @@
 #ifndef TELLICO_XML_H
 #define TELLICO_XML_H
 
-#include <qstring.h>
+#include <QString>
 
 namespace Tellico {
   namespace XML {

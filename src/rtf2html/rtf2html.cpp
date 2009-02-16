@@ -33,7 +33,7 @@ RTF2HTML::RTF2HTML(const QString& text) : m_text(text) {
 }
 
 QString RTF2HTML::toHTML() const {
-   std::string str_in = m_text;
+   std::string str_in = m_text.toStdString();
 
    std::string::iterator buf_in=str_in.begin(), buf_in_end=str_in.end();
    colorvect colortbl;
@@ -526,6 +526,6 @@ QString RTF2HTML::toHTML() const {
    delete tblCurTable;
    delete tcdCurCellDef;
 
-   return html;
+   return QString::fromStdString(html);
 }
 

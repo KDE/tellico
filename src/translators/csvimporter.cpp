@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "csvimporter.h"
+#include "csvparser.h"
 #include "translators.h" // needed for ImportAction
 #include "../collectionfieldsdialog.h"
 #include "../document.h"
@@ -20,12 +21,7 @@
 #include "../tellico_debug.h"
 #include "../collectionfactory.h"
 #include "../gui/collectiontypecombo.h"
-#include "../latin1literal.h"
 #include "../stringset.h"
-
-extern "C" {
-#include "libcsv.h"
-}
 
 #include <klineedit.h>
 #include <kcombobox.h>
@@ -36,93 +32,22 @@ extern "C" {
 #include <kconfig.h>
 #include <kmessagebox.h>
 
-#include <qgroupbox.h>
-#include <qlayout.h>
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
-#include <qwhatsthis.h>
-#include <qtable.h>
-#include <qvaluevector.h>
-#include <qregexp.h>
+#include <QGroupBox>
+#include <QLabel>
+#include <QCheckBox>
+#include <QRadioButton>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QRegExp>
+#include <QGridLayout>
+#include <QByteArray>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QButtonGroup>
 
 using Tellico::Import::CSVImporter;
 
-typedef int(*SpaceFunc)(char);
-
-static void writeToken(char* buffer, size_t len, void* data);
-static void writeRow(char buffer, void* data);
-static int isSpace(char c);
-static int isSpaceOrTab(char c);
-static int isTab(char c);
-
-class CSVImporter::Parser {
-public:
-  Parser(const QString& str) : stream(new QTextIStream(&str)) { csv_init(&parser, 0); }
-  ~Parser() { csv_free(parser); delete stream; stream = 0; }
-
-  void setDelimiter(const QString& s) {
-    Q_ASSERT(s.length() == 1);
-    csv_set_delim(parser, s[0].latin1());
-    if(s[0] == '\t')     csv_set_space_func(parser, isSpace);
-    else if(s[0] == ' ') csv_set_space_func(parser, isTab);
-    else                 csv_set_space_func(parser, isSpaceOrTab);
-  }
-  void reset(const QString& str) { delete stream; stream = new QTextIStream(&str); };
-  bool hasNext() { return !stream->atEnd(); }
-  void skipLine() { stream->readLine(); }
-
-  void addToken(const QString& t) { tokens += t; }
-  void setRowDone(bool b) { done = b; }
-
-  QStringList nextTokens() {
-    tokens.clear();
-    done = false;
-    while(hasNext() && !done) {
-      QCString line = stream->readLine().utf8() + '\n'; // need the eol char
-      csv_parse(parser, line, line.length(), &writeToken, &writeRow, this);
-    }
-    csv_fini(parser, &writeToken, &writeRow, this);
-    return tokens;
-  }
-
-private:
-  struct csv_parser* parser;
-  QTextIStream* stream;
-  QStringList tokens;
-  bool done;
-};
-
-static void writeToken(char* buffer, size_t len, void* data) {
-  CSVImporter::Parser* p = static_cast<CSVImporter::Parser*>(data);
-  p->addToken(QString::fromUtf8(buffer, len));
-}
-
-static void writeRow(char c, void* data) {
-  Q_UNUSED(c);
-  CSVImporter::Parser* p = static_cast<CSVImporter::Parser*>(data);
-  p->setRowDone(true);
-}
-
-static int isSpace(char c) {
-  if (c == CSV_SPACE) return 1;
-  return 0;
-}
-
-static int isSpaceOrTab(char c) {
-  if (c == CSV_SPACE || c == CSV_TAB) return 1;
-  return 0;
-}
-
-static int isTab(char c) {
-  if (c == CSV_TAB) return 1;
-  return 0;
-}
-
-CSVImporter::CSVImporter(const KURL& url_) : Tellico::Import::TextImporter(url_),
-    m_coll(0),
+CSVImporter::CSVImporter(const KUrl& url_) : Tellico::Import::TextImporter(url_),
     m_existingCollection(0),
     m_firstRowHeader(false),
     m_delimiter(QString::fromLatin1(",")),
@@ -130,7 +55,7 @@ CSVImporter::CSVImporter(const KURL& url_) : Tellico::Import::TextImporter(url_)
     m_widget(0),
     m_table(0),
     m_hasAssignedFields(false),
-    m_parser(new Parser(text())) {
+    m_parser(new CSVParser(text())) {
   m_parser->setDelimiter(m_delimiter);
 }
 
@@ -151,10 +76,10 @@ Tellico::Data::CollPtr CSVImporter::collection() {
 
   const QStringList existingNames = m_coll->fieldNames();
 
-  QValueVector<int> cols;
+  QList<int> cols;
   QStringList names;
-  for(int col = 0; col < m_table->numCols(); ++col) {
-    QString t = m_table->horizontalHeader()->label(col);
+  for(int col = 0; col < m_table->columnCount(); ++col) {
+    QString t = m_table->horizontalHeaderItem(col)->text();
     if(m_existingCollection && m_existingCollection->fieldByTitle(t)) {
       // the collection might have the right field, but a different title, say for translations
       Data::FieldPtr f = m_existingCollection->fieldByTitle(t);
@@ -162,18 +87,18 @@ Tellico::Data::CollPtr CSVImporter::collection() {
         // might have different values settings
         m_coll->removeField(f->name(), true /* force */);
       }
-      m_coll->addField(new Data::Field(*f));
-      cols.push_back(col);
+      m_coll->addField(Data::FieldPtr(new Data::Field(*f)));
+      cols << col;
       names << f->name();
     } else if(m_coll->fieldByTitle(t)) {
-      cols.push_back(col);
+      cols << col;
       names << m_coll->fieldNameByTitle(t);
     }
   }
 
   if(names.isEmpty()) {
     myDebug() << "CSVImporter::collection() - no fields assigned" << endl;
-    return 0;
+    return Data::CollPtr();
   }
 
   m_parser->reset(text());
@@ -183,8 +108,8 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     m_parser->skipLine();
   }
 
-  const uint numLines = text().contains('\n');
-  const uint stepSize = QMAX(s_stepSize, numLines/100);
+  const uint numLines = text().count('\n');
+  const uint stepSize = qMax(s_stepSize, numLines/100);
   const bool showProgress = options() & ImportProgress;
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
@@ -195,11 +120,11 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   uint j = 0;
   while(!m_cancelled && m_parser->hasNext()) {
     bool empty = true;
-    Data::EntryPtr entry = new Data::Entry(m_coll);
+    Data::EntryPtr entry(new Data::Entry(m_coll));
     QStringList values = m_parser->nextTokens();
-    for(uint i = 0; i < names.size(); ++i) {
-//      QString value = values[cols[i]].simplifyWhiteSpace();
-      QString value = values[cols[i]].stripWhiteSpace();
+    for(int i = 0; i < names.size(); ++i) {
+//      QString value = values[cols[i]].simplified();
+      QString value = values[cols[i]].trimmed();
       bool success = entry->setField(names[i], value);
       // we might need to add a new allowed value
       // assume that if the user is importing the value, it should be allowed
@@ -236,127 +161,142 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   return m_coll;
 }
 
-QWidget* CSVImporter::widget(QWidget* parent_, const char* name_) {
+QWidget* CSVImporter::widget(QWidget* parent_) {
   if(m_widget && m_widget->parent() == parent_) {
     return m_widget;
   }
 
-  m_widget = new QWidget(parent_, name_);
+  m_widget = new QWidget(parent_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* group = new QGroupBox(1, Qt::Horizontal, i18n("CSV Options"), m_widget);
-  l->addWidget(group);
+  QGroupBox* groupBox = new QGroupBox(i18n("CSV Options"), m_widget);
+  QVBoxLayout* vlay = new QVBoxLayout(groupBox);
 
-  QHBox* box = new QHBox(group);
-  box->setSpacing(5);
-  QLabel* lab = new QLabel(i18n("Collection &type:"), box);
-  m_comboColl = new GUI::CollectionTypeCombo(box);
+  QHBoxLayout* hlay = new QHBoxLayout(groupBox);
+  vlay->addLayout(hlay);
+  QLabel* lab = new QLabel(i18n("Collection &type:"), groupBox);
+  hlay->addWidget(lab);
+  m_comboColl = new GUI::CollectionTypeCombo(groupBox);
+  hlay->addWidget(m_comboColl);
   lab->setBuddy(m_comboColl);
-  QWhatsThis::add(m_comboColl, i18n("Select the type of collection being imported."));
+  m_comboColl->setWhatsThis(i18n("Select the type of collection being imported."));
   connect(m_comboColl, SIGNAL(activated(int)), SLOT(slotTypeChanged()));
-  // need a spacer
-  QWidget* w = new QWidget(box);
-  box->setStretchFactor(w, 1);
 
-  m_checkFirstRowHeader = new QCheckBox(i18n("&First row contains field titles"), group);
-  QWhatsThis::add(m_checkFirstRowHeader, i18n("If checked, the first row is used as field titles."));
+  m_checkFirstRowHeader = new QCheckBox(i18n("&First row contains field titles"), groupBox);
+  m_checkFirstRowHeader->setWhatsThis(i18n("If checked, the first row is used as field titles."));
   connect(m_checkFirstRowHeader, SIGNAL(toggled(bool)), SLOT(slotFirstRowHeader(bool)));
+  hlay->addWidget(m_checkFirstRowHeader);
 
-  QHBox* hbox2 = new QHBox(group);
-  m_delimiterGroup = new QButtonGroup(0, Qt::Vertical, i18n("Delimiter"), hbox2);
-  QGridLayout* m_delimiterGroupLayout = new QGridLayout(m_delimiterGroup->layout(), 3, 3);
+  hlay->addStretch(1);
+
+  QHBoxLayout* hlay2 = new QHBoxLayout(groupBox);
+  vlay->addLayout(hlay2);
+
+  m_delimiterGroup = new QGroupBox(i18n("Delimiter"), groupBox);
+  hlay2->addWidget(m_delimiterGroup);
+  QGridLayout* m_delimiterGroupLayout = new QGridLayout(m_delimiterGroup);
   m_delimiterGroupLayout->setAlignment(Qt::AlignTop);
-  QWhatsThis::add(m_delimiterGroup, i18n("In addition to a comma, other characters may be used as "
-                                         "a delimiter, separating each value in the file."));
-  connect(m_delimiterGroup, SIGNAL(clicked(int)), SLOT(slotDelimiter()));
+  m_delimiterGroup->setWhatsThis(i18n("In addition to a comma, other characters may be used as "
+                                      "a delimiter, separating each value in the file."));
 
   m_radioComma = new QRadioButton(m_delimiterGroup);
   m_radioComma->setText(i18n("&Comma"));
   m_radioComma->setChecked(true);
-  QWhatsThis::add(m_radioComma, i18n("Use a comma as the delimiter."));
+  m_radioComma->setWhatsThis(i18n("Use a comma as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioComma, 1, 0);
 
   m_radioSemicolon = new QRadioButton( m_delimiterGroup);
   m_radioSemicolon->setText(i18n("&Semicolon"));
-  QWhatsThis::add(m_radioSemicolon, i18n("Use a semi-colon as the delimiter."));
+  m_radioSemicolon->setWhatsThis(i18n("Use a semi-colon as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioSemicolon, 1, 1);
 
   m_radioTab = new QRadioButton(m_delimiterGroup);
   m_radioTab->setText(i18n("Ta&b"));
-  QWhatsThis::add(m_radioTab, i18n("Use a tab as the delimiter."));
+  m_radioTab->setWhatsThis(i18n("Use a tab as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioTab, 2, 0);
 
   m_radioOther = new QRadioButton(m_delimiterGroup);
   m_radioOther->setText(i18n("Ot&her:"));
-  QWhatsThis::add(m_radioOther, i18n("Use a custom string as the delimiter."));
+  m_radioOther->setWhatsThis(i18n("Use a custom string as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioOther, 2, 1);
 
   m_editOther = new KLineEdit(m_delimiterGroup);
   m_editOther->setEnabled(false);
   m_editOther->setFixedWidth(m_widget->fontMetrics().width('X') * 4);
   m_editOther->setMaxLength(1);
-  QWhatsThis::add(m_editOther, i18n("A custom string, such as a colon, may be used as a delimiter."));
+  m_editOther->setWhatsThis(i18n("A custom string, such as a colon, may be used as a delimiter."));
+  m_editOther->setEnabled(false);
   m_delimiterGroupLayout->addWidget(m_editOther, 2, 2);
   connect(m_radioOther, SIGNAL(toggled(bool)),
           m_editOther, SLOT(setEnabled(bool)));
   connect(m_editOther, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
 
-  w = new QWidget(hbox2);
-  hbox2->setStretchFactor(w, 1);
+  QButtonGroup* buttonGroup = new QButtonGroup(m_delimiterGroup);
+  buttonGroup->addButton(m_radioComma);
+  buttonGroup->addButton(m_radioSemicolon);
+  buttonGroup->addButton(m_radioTab);
+  buttonGroup->addButton(m_radioOther);
+  connect(buttonGroup, SIGNAL(buttonClicked(int)), SLOT(slotDelimiter()));
 
-  m_table = new QTable(5, 0, group);
-  m_table->setSelectionMode(QTable::Single);
-  m_table->setFocusStyle(QTable::FollowStyle);
-  m_table->setLeftMargin(0);
+  hlay2->addStretch(1);
+
+  m_table = new QTableWidget(5, 0, groupBox);
+  vlay->addWidget(m_table);
+  m_table->setSelectionMode(QAbstractItemView::SingleSelection);
   m_table->verticalHeader()->hide();
-  m_table->horizontalHeader()->setClickEnabled(true);
-  m_table->setReadOnly(true);
+  m_table->horizontalHeader()->setClickable(true);
   m_table->setMinimumHeight(m_widget->fontMetrics().lineSpacing() * 8);
-  QWhatsThis::add(m_table, i18n("The table shows up to the first five lines of the CSV file."));
-  connect(m_table, SIGNAL(currentChanged(int, int)), SLOT(slotCurrentChanged(int, int)));
-  connect(m_table->horizontalHeader(), SIGNAL(clicked(int)), SLOT(slotHeaderClicked(int)));
+  m_table->setWhatsThis(i18n("The table shows up to the first five lines of the CSV file."));
+  connect(m_table, SIGNAL(currentCellChanged(int, int, int, int)), SLOT(slotCurrentChanged(int, int)));
+  connect(m_table->horizontalHeader(), SIGNAL(sectionClicked(int)), SLOT(slotHeaderClicked(int)));
 
-  QWidget* hbox = new QWidget(group);
-  QHBoxLayout* hlay = new QHBoxLayout(hbox, 5);
-  hlay->addStretch(10);
-  QWhatsThis::add(hbox, i18n("<qt>Set each column to correspond to a field in the collection by choosing "
-                             "a column, selecting the field, then clicking the <i>Assign Field</i> button.</qt>"));
-  lab = new QLabel(i18n("Co&lumn:"), hbox);
-  hlay->addWidget(lab);
-  m_colSpinBox = new KIntSpinBox(hbox);
-  hlay->addWidget(m_colSpinBox);
-  m_colSpinBox->setMinValue(1);
+  QHBoxLayout* hlay3 = new QHBoxLayout(groupBox);
+  vlay->addLayout(hlay3);
+  hlay3->addStretch(1);
+  QString what = i18n("<qt>Set each column to correspond to a field in the collection by choosing "
+                      "a column, selecting the field, then clicking the <i>Assign Field</i> button.</qt>");
+  lab = new QLabel(i18n("Co&lumn:"), groupBox);
+  hlay3->addWidget(lab);
+  lab->setWhatsThis(what);
+  m_colSpinBox = new KIntSpinBox(groupBox);
+  hlay3->addWidget(m_colSpinBox);
+  m_colSpinBox->setWhatsThis(what);
+  m_colSpinBox->setMinimum(1);
   connect(m_colSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSelectColumn(int)));
   lab->setBuddy(m_colSpinBox);
-  hlay->addSpacing(10);
+  hlay3->addSpacing(10);
 
-  lab = new QLabel(i18n("&Data field in this column:"), hbox);
-  hlay->addWidget(lab);
-  m_comboField = new KComboBox(hbox);
-  hlay->addWidget(m_comboField);
+  lab = new QLabel(i18n("&Data field in this column:"), groupBox);
+  hlay3->addWidget(lab);
+  lab->setWhatsThis(what);
+  m_comboField = new KComboBox(groupBox);
+  hlay3->addWidget(m_comboField);
+  m_comboField->setWhatsThis(what);
   connect(m_comboField, SIGNAL(activated(int)), SLOT(slotFieldChanged(int)));
   lab->setBuddy(m_comboField);
-  hlay->addSpacing(10);
+  hlay3->addSpacing(10);
 
-  m_setColumnBtn = new KPushButton(i18n("&Assign Field"), hbox);
-  hlay->addWidget(m_setColumnBtn);
-  m_setColumnBtn->setIconSet(SmallIconSet(QString::fromLatin1("apply")));
+  m_setColumnBtn = new KPushButton(i18n("&Assign Field"), groupBox);
+  hlay3->addWidget(m_setColumnBtn);
+  m_setColumnBtn->setWhatsThis(what);
+  m_setColumnBtn->setIcon(KIcon(QString::fromLatin1("dialog-ok-apply")));
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
-  hlay->addStretch(10);
+  hlay3->addStretch(10);
 
+  l->addWidget(groupBox);
   l->addStretch(1);
 
   KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - CSV"));
   m_delimiter = config.readEntry("Delimiter", m_delimiter);
-  m_firstRowHeader = config.readBoolEntry("First Row Titles", m_firstRowHeader);
+  m_firstRowHeader = config.readEntry("First Row Titles", m_firstRowHeader);
 
   m_checkFirstRowHeader->setChecked(m_firstRowHeader);
-  if(m_delimiter == Latin1Literal(",")) {
+  if(m_delimiter == QLatin1String(",")) {
     m_radioComma->setChecked(true);
     slotDelimiter(); // since the comma box was already checked, the slot won't fire
-  } else if(m_delimiter == Latin1Literal(";")) {
+  } else if(m_delimiter == QLatin1String(";")) {
     m_radioSemicolon->setChecked(true);
-  } else if(m_delimiter == Latin1Literal("\t")) {
+  } else if(m_delimiter == QLatin1String("\t")) {
     m_radioTab->setChecked(true);
   } else if(!m_delimiter.isEmpty()) {
     m_radioOther->setChecked(true);
@@ -386,29 +326,29 @@ void CSVImporter::fillTable() {
 
   int maxCols = 0;
   int row = 0;
-  for( ; m_parser->hasNext() && row < m_table->numRows(); ++row) {
+  for( ; m_parser->hasNext() && row < m_table->rowCount(); ++row) {
     QStringList values = m_parser->nextTokens();
-    if(static_cast<int>(values.count()) > m_table->numCols()) {
-      m_table->setNumCols(values.count());
-      m_colSpinBox->setMaxValue(values.count());
+    if(static_cast<int>(values.count()) > m_table->columnCount()) {
+      m_table->setColumnCount(values.count());
+      m_colSpinBox->setMaximum(values.count());
     }
     int col = 0;
-    for(QStringList::ConstIterator it = values.begin(); it != values.end(); ++it) {
-      m_table->setText(row, col, *it);
-      m_table->adjustColumn(col);
+    foreach(const QString& value, values) {
+      m_table->setItem(row, col, new QTableWidgetItem(value));
+      m_table->resizeColumnToContents(col);
       ++col;
     }
     if(col > maxCols) {
       maxCols = col;
     }
   }
-  for( ; row < m_table->numRows(); ++row) {
-    for(int col = 0; col < m_table->numCols(); ++col) {
-      m_table->clearCell(row, col);
+  for( ; row < m_table->rowCount(); ++row) {
+    for(int col = 0; col < m_table->columnCount(); ++col) {
+      delete m_table->takeItem(row, col);
     }
   }
 
-  m_table->setNumCols(maxCols);
+  m_table->setColumnCount(maxCols);
 }
 
 void CSVImporter::slotTypeChanged() {
@@ -418,8 +358,8 @@ void CSVImporter::slotTypeChanged() {
 
   updateHeader(true);
   m_comboField->clear();
-  m_comboField->insertStringList(m_existingCollection ? m_existingCollection->fieldTitles() : m_coll->fieldTitles());
-  m_comboField->insertItem('<' + i18n("New Field") + '>');
+  m_comboField->addItems(m_existingCollection ? m_existingCollection->fieldTitles() : m_coll->fieldTitles());
+  m_comboField->addItem('<' + i18n("New Field") + '>');
 
   // hack to force a resize
   m_comboField->setFont(m_comboField->font());
@@ -463,20 +403,20 @@ void CSVImporter::slotHeaderClicked(int col_) {
 void CSVImporter::slotSelectColumn(int pos_) {
   // pos is really the number of the position of the column
   int col = pos_ - 1;
-  m_table->ensureCellVisible(0, col);
-  m_comboField->setCurrentItem(m_table->horizontalHeader()->label(col));
+  m_table->scrollToItem(m_table->item(0, col));
+  m_comboField->setCurrentItem(m_table->horizontalHeaderItem(col)->text());
 }
 
 void CSVImporter::slotSetColumnTitle() {
   int col = m_colSpinBox->value()-1;
   const QString title = m_comboField->currentText();
-  m_table->horizontalHeader()->setLabel(col, title);
+  m_table->horizontalHeaderItem(col)->setText(title);
   m_hasAssignedFields = true;
   // make sure none of the other columns have this title
   bool found = false;
   for(int i = 0; i < col; ++i) {
-    if(m_table->horizontalHeader()->label(i) == title) {
-      m_table->horizontalHeader()->setLabel(i, QString::number(i+1));
+    if(m_table->horizontalHeaderItem(i)->text() == title) {
+      m_table->horizontalHeaderItem(i)->setText(QString::number(i+1));
       found = true;
       break;
     }
@@ -485,9 +425,9 @@ void CSVImporter::slotSetColumnTitle() {
   if(found) {
     return;
   }
-  for(int i = col+1; i < m_table->numCols(); ++i) {
-    if(m_table->horizontalHeader()->label(i) == title) {
-      m_table->horizontalHeader()->setLabel(i, QString::number(i+1));
+  for(int i = col+1; i < m_table->columnCount(); ++i) {
+    if(m_table->horizontalHeaderItem(i)->text() == title) {
+      m_table->horizontalHeaderItem(i)->setText(QString::number(i+1));
       break;
     }
   }
@@ -502,8 +442,8 @@ void CSVImporter::updateHeader(bool force_) {
   }
 
   Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
-  for(int col = 0; col < m_table->numCols(); ++col) {
-    QString s = m_table->text(0, col);
+  for(int col = 0; col < m_table->columnCount(); ++col) {
+    QString s = m_table->item(0, col)->text();
     Data::FieldPtr f;
     if(c) {
       c->fieldByTitle(s);
@@ -512,10 +452,10 @@ void CSVImporter::updateHeader(bool force_) {
       }
     }
     if(m_firstRowHeader && !s.isEmpty() && c && f) {
-      m_table->horizontalHeader()->setLabel(col, f->title());
+      m_table->horizontalHeaderItem(col)->setText(f->title());
       m_hasAssignedFields = true;
     } else {
-      m_table->horizontalHeader()->setLabel(col, QString::number(col+1));
+      m_table->horizontalHeaderItem(col)->setText(QString::number(col+1));
     }
   }
 }
@@ -527,13 +467,13 @@ void CSVImporter::slotFieldChanged(int idx_) {
   }
 
   Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
-  uint count = c->fieldTitles().count();
+  int count = c->fieldTitles().count();
   CollectionFieldsDialog dlg(c, m_widget);
 //  dlg.setModal(true);
   if(dlg.exec() == QDialog::Accepted) {
     m_comboField->clear();
-    m_comboField->insertStringList(c->fieldTitles());
-    m_comboField->insertItem('<' + i18n("New Field") + '>');
+    m_comboField->addItems(c->fieldTitles());
+    m_comboField->addItem('<' + i18n("New Field") + '>');
     if(count != c->fieldTitles().count()) {
       fillTable();
     }
@@ -563,7 +503,7 @@ void CSVImporter::slotActionChanged(int action_) {
      {
         m_comboColl->clear();
         QString name = CollectionFactory::nameMap()[currColl->type()];
-        m_comboColl->insertItem(name, currColl->type());
+        m_comboColl->addItem(name, currColl->type());
         m_existingCollection = currColl;
      }
      break;

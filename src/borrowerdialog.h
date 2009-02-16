@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,18 +11,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BORROWERDIALOG_H
-#define BORROWERDIALOG_H
-
-class KLineEdit;
+#ifndef TELLICO_BORROWERDIALOG_H
+#define TELLICO_BORROWERDIALOG_H
 
 #include "borrower.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
-#include <klistview.h>
-#include <qdict.h>
+#include <QHash>
+#include <QTreeWidget>
 
+class KLineEdit;
 namespace KABC {
   class Addressee;
 }
@@ -32,7 +31,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class BorrowerDialog : public KDialogBase {
+class BorrowerDialog : public KDialog {
 Q_OBJECT
 
 public:
@@ -40,7 +39,7 @@ public:
 
 private slots:
   void selectItem(const QString& name);
-  void updateEdit(QListViewItem* item);
+  void updateEdit(QTreeWidgetItem* item);
   void slotLoadAddressBook();
 
 private:
@@ -48,20 +47,19 @@ private:
    * The constructor sets up the dialog.
    *
    * @param parent A pointer to the parent widget
-   * @param name The widget name
    */
-  BorrowerDialog(QWidget* parent, const char* name=0);
+  BorrowerDialog(QWidget* parent);
   Data::BorrowerPtr borrower();
 
   QString m_uid;
-  KListView* m_listView;
+  QTreeWidget* m_treeWidget;
   KLineEdit* m_lineEdit;
-  QDict<KListViewItem> m_itemDict;
+  QHash<QString, QTreeWidgetItem*> m_itemHash;
 
-class Item : public KListViewItem {
+class Item : public QTreeWidgetItem {
 public:
-  Item(KListView* parent, const KABC::Addressee& addressee);
-  Item(KListView* parent, const Data::Borrower& borrower);
+  Item(QTreeWidget* parent, const KABC::Addressee& addressee);
+  Item(QTreeWidget* parent, const Data::Borrower& borrower);
   const QString& uid() const { return m_uid; }
 
 private:

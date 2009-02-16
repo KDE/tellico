@@ -1,17 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2008-01-26 10:52-0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-15 12:17-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: ENCODING\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: cite/lyxpipe.cpp:50
 msgid "<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>"
@@ -441,8 +444,8 @@ msgstr ""
 
 #: collections/comicbookcollection.cpp:120
 msgid ""
-"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very "
-"Good,Good,Fair,Poor\n"
+"_: Comic book grade levels - Mint,Near Mint,Very Fine,Fine,Very Good,Good,"
+"Fair,Poor\n"
 "Mint,Near Mint,Very Fine,Fine,Very Good,Good,Fair,Poor"
 msgstr ""
 
@@ -2226,8 +2229,8 @@ msgstr ""
 #: translators/csvimporter.cpp:296
 msgid ""
 "<qt>Set each column to correspond to a field in the collection by choosing a "
-"column, selecting the field, then clicking the <i>Assign Field</i> "
-"button.</qt>"
+"column, selecting the field, then clicking the <i>Assign Field</i> button.</"
+"qt>"
 msgstr ""
 
 #: translators/csvimporter.cpp:298
@@ -3281,8 +3284,8 @@ msgstr ""
 
 #: mainwindow.cpp:776
 msgid ""
-"<qt>The <i>Column View</i> shows the value of multiple fields for each "
-"entry.</qt>"
+"<qt>The <i>Column View</i> shows the value of multiple fields for each entry."
+"</qt>"
 msgstr ""
 
 #: mainwindow.cpp:831
@@ -3425,8 +3428,8 @@ msgstr ""
 
 #: mainwindow.cpp:2105
 msgid ""
-"<qt>The <i>Filter View</i> shows the entries which meet certain filter "
-"rules.</qt>"
+"<qt>The <i>Filter View</i> shows the entries which meet certain filter rules."
+"</qt>"
 msgstr ""
 
 #: mainwindow.cpp:2121
@@ -3873,8 +3876,8 @@ msgstr ""
 #: collectionfieldsdialog.cpp:917
 msgid ""
 "<qt>A field may not be in the same category as a <em>Paragraph</em>, "
-"<em>Table</em> or <em>Image</em> field. Please enter a different "
-"category.</qt>"
+"<em>Table</em> or <em>Image</em> field. Please enter a different category.</"
+"qt>"
 msgstr ""
 
 #: collectionfieldsdialog.cpp:925
@@ -3922,8 +3925,8 @@ msgstr ""
 
 #: configdialog.cpp:202
 msgid ""
-"If checked, the file that was last open will be re-opened at program "
-"start-up."
+"If checked, the file that was last open will be re-opened at program start-"
+"up."
 msgstr ""
 
 #: configdialog.cpp:207
@@ -3994,8 +3997,8 @@ msgstr ""
 #: configdialog.cpp:252
 msgid ""
 "<qt>A list of words which should be considered as articles if they are the "
-"first word in a title. Multiple values should be separated by a "
-"semi-colon.</qt>"
+"first word in a title. Multiple values should be separated by a semi-colon.</"
+"qt>"
 msgstr ""
 
 #: configdialog.cpp:259
@@ -4292,8 +4295,8 @@ msgstr ""
 
 #: viewstack.cpp:29
 msgid ""
-"<qt>The <i>Entry View</i> shows a formatted view of the entry's "
-"contents.</qt>"
+"<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</"
+"qt>"
 msgstr ""
 
 #: viewstack.cpp:31
@@ -4698,8 +4701,8 @@ msgstr ""
 
 #: tips.cpp:50
 msgid ""
-"<p>...that you can add, edit, and delete string macros for "
-"bibliographies.</p>\n"
+"<p>...that you can add, edit, and delete string macros for bibliographies.</"
+"p>\n"
 msgstr ""
 
 #: tips.cpp:54

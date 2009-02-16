@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,17 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef RISIMPORTER_H
-#define RISIMPORTER_H
+#ifndef TELLICO_RISIMPORTER_H
+#define TELLICO_RISIMPORTER_H
 
 #include "importer.h"
 #include "../datavectors.h"
 
-#include <qstring.h>
-#include <qmap.h>
-
-template<class type>
-class QDict;
+#include <QString>
+#include <QHash>
 
 namespace Tellico {
   namespace Data {
@@ -38,7 +35,7 @@ Q_OBJECT
 public:
   /**
    */
-  RISImporter(const KURL::List& urls);
+  RISImporter(const KUrl::List& urls);
 
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
@@ -46,10 +43,10 @@ public:
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return 0; }
   virtual bool canImport(int type) const;
 
-  static bool maybeRIS(const KURL& url);
+  static bool maybeRIS(const KUrl& url);
 
 public slots:
   void slotCancel();
@@ -59,13 +56,13 @@ private:
   static void initTypeMap();
 
   Data::FieldPtr fieldByTag(const QString& tag);
-  void readURL(const KURL& url, int n, const QDict<Data::Field>& risFields);
+  void readURL(const KUrl& url, int n, const QHash<QString, Data::FieldPtr>& risFields);
 
   Data::CollPtr m_coll;
   bool m_cancelled;
 
-  static QMap<QString, QString>* s_tagMap;
-  static QMap<QString, QString>* s_typeMap;
+  static QHash<QString, QString>* s_tagMap;
+  static QHash<QString, QString>* s_typeMap;
 };
 
   } // end namespace

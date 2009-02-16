@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,6 @@
 #include "../document.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../latin1literal.h"
 #include "../progressmanager.h"
 #include "../filehandler.h"
 #include "../isbnvalidator.h"
@@ -24,18 +23,17 @@
 
 #include <kapplication.h>
 
-#include <qdict.h>
-#include <qregexp.h>
-#include <qmap.h>
+#include <QRegExp>
+#include <QTextStream>
 
 using Tellico::Import::RISImporter;
-QMap<QString, QString>* RISImporter::s_tagMap = 0;
-QMap<QString, QString>* RISImporter::s_typeMap = 0;
+QHash<QString, QString>* RISImporter::s_tagMap = 0;
+QHash<QString, QString>* RISImporter::s_typeMap = 0;
 
 // static
 void RISImporter::initTagMap() {
   if(!s_tagMap) {
-    s_tagMap =  new QMap<QString, QString>();
+    s_tagMap = new QHash<QString, QString>();
     // BT is special and is handled separately
     s_tagMap->insert(QString::fromLatin1("TY"), QString::fromLatin1("entry-type"));
     s_tagMap->insert(QString::fromLatin1("ID"), QString::fromLatin1("bibtex-key"));
@@ -70,7 +68,7 @@ void RISImporter::initTagMap() {
 // static
 void RISImporter::initTypeMap() {
   if(!s_typeMap) {
-    s_typeMap = new QMap<QString, QString>();
+    s_typeMap = new QHash<QString, QString>();
     // leave capitalized, except for bibtex types
     s_typeMap->insert(QString::fromLatin1("ABST"),   QString::fromLatin1("Abstract"));
     s_typeMap->insert(QString::fromLatin1("ADVS"),   QString::fromLatin1("Audiovisual material"));
@@ -110,7 +108,7 @@ void RISImporter::initTypeMap() {
   }
 }
 
-RISImporter::RISImporter(const KURL::List& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
+RISImporter::RISImporter(const KUrl::List& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
   initTagMap();
   initTypeMap();
 }
@@ -126,22 +124,21 @@ Tellico::Data::CollPtr RISImporter::collection() {
 
   m_coll = new Data::BibtexCollection(true);
 
-  QDict<Data::Field> risFields;
+  QHash<QString, Data::FieldPtr> risFields;
 
   // need to know if any extended properties in current collection point to RIS
   // if so, add to collection
   Data::CollPtr currColl = Data::Document::self()->collection();
-  Data::FieldVec vec = currColl->fields();
-  for(Data::FieldVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
+  foreach(Data::FieldPtr field, currColl->fields()) {
     // continue if property is empty
-    QString ris = it->property(QString::fromLatin1("ris"));
+    QString ris = field->property(QString::fromLatin1("ris"));
     if(ris.isEmpty()) {
       continue;
     }
     // if current collection has one with the same name, set the property
-    Data::FieldPtr f = m_coll->fieldByName(it->name());
+    Data::FieldPtr f = m_coll->fieldByName(field->name());
     if(!f) {
-      f = new Data::Field(*it);
+      f = new Data::Field(*field);
       m_coll->addField(f);
     }
     f->setProperty(QString::fromLatin1("ris"), ris);
@@ -154,18 +151,18 @@ Tellico::Data::CollPtr RISImporter::collection() {
   ProgressItem::Done done(this);
 
   int count = 0;
-  KURL::List urls = this->urls();
-  for(KURL::List::ConstIterator it = urls.begin(); it != urls.end() && !m_cancelled; ++it, ++count) {
+  KUrl::List urls = this->urls();
+  for(KUrl::List::ConstIterator it = urls.constBegin(); it != urls.constEnd() && !m_cancelled; ++it, ++count) {
     readURL(*it, count, risFields);
   }
 
   if(m_cancelled) {
-    m_coll = 0;
+    m_coll = Data::CollPtr();
   }
   return m_coll;
 }
 
-void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& risFields_) {
+void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico::Data::FieldPtr>& risFields_) {
   QString str = FileHandler::readTextFile(url_);
   if(str.isEmpty()) {
     return;
@@ -173,10 +170,10 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
 
   ISBNValidator isbnval(this);
 
-  QTextIStream t(&str);
+  QTextStream t(&str);
 
   const uint length = str.length();
-  const uint stepSize = QMAX(s_stepSize, length/100);
+  const uint stepSize = qMax(s_stepSize, length/100);
   const bool showProgress = options() & ImportProgress;
 
   bool needToAddFinal = false;
@@ -184,44 +181,44 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
   QString sp, ep;
 
   uint j = 0;
-  Data::EntryPtr entry = new Data::Entry(m_coll);
+  Data::EntryPtr entry(new Data::Entry(m_coll));
   // technically, the spec requires a space immediately after the hyphen
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
   // also be gracious and allow any amount of space before hyphen
   QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s+-(.*)$"));
   QString currLine, nextLine;
-  for(currLine = t.readLine(); !m_cancelled && !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
+  for(currLine = t.readLine(); !m_cancelled && !t.atEnd(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
-    rx.search(currLine);
+    rx.indexIn(currLine);
     QString tag = rx.cap(1);
-    QString value = rx.cap(2).stripWhiteSpace();
+    QString value = rx.cap(2).trimmed();
     if(tag.isEmpty()) {
       continue;
     }
 //    myDebug() << tag << ": " << value << endl;
     // if the next line is not empty and does not match start regexp, append to value
-    while(!nextLine.isEmpty() && nextLine.find(rx) == -1) {
-      value += nextLine.stripWhiteSpace();
+    while(!nextLine.isEmpty() && nextLine.indexOf(rx) == -1) {
+      value += nextLine.trimmed();
       nextLine = t.readLine();
     }
 
     // every entry ends with "ER"
-    if(tag == Latin1Literal("ER")) {
+    if(tag == QLatin1String("ER")) {
       m_coll->addEntries(entry);
       entry = new Data::Entry(m_coll);
       needToAddFinal = false;
       continue;
-    } else if(tag == Latin1Literal("TY") && s_typeMap->contains(value)) {
+    } else if(tag == QLatin1String("TY") && s_typeMap->contains(value)) {
       // for entry-type, switch it to normalized type name
       value = (*s_typeMap)[value];
-    } else if(tag == Latin1Literal("SN")) {
+    } else if(tag == QLatin1String("SN")) {
       // test for valid isbn, sometimes the issn gets stuck here
       int pos = 0;
       if(isbnval.validate(value, pos) != ISBNValidator::Acceptable) {
         continue;
       }
-    } else if(tag == Latin1Literal("SP")) {
+    } else if(tag == QLatin1String("SP")) {
       sp = value;
       if(!ep.isEmpty()) {
         value = sp + '-' + ep;
@@ -232,7 +229,7 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
         // nothing else to do
         continue;
       }
-    } else if(tag == Latin1Literal("EP")) {
+    } else if(tag == QLatin1String("EP")) {
       ep = value;
       if(!sp.isEmpty()) {
         value = sp + '-' + ep;
@@ -241,19 +238,19 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
       } else {
         continue;
       }
-    } else if(tag == Latin1Literal("YR") || tag == Latin1Literal("PY")) {  // for now, just grab the year
+    } else if(tag == QLatin1String("YR") || tag == QLatin1String("PY")) {  // for now, just grab the year
       value = value.section('/', 0, 0);
     }
 
     // the lookup scheme is:
     // 1. any field has an RIS property that matches the tag name
     // 2. default field mapping tag -> field name
-    Data::FieldPtr f = risFields_.find(tag);
+    Data::FieldPtr f = risFields_[tag];
     if(!f) {
       // special case for BT
       // primary title for books, secondary for everything else
-      if(tag == Latin1Literal("BT")) {
-        if(entry->field(QString::fromLatin1("entry-type")) == Latin1Literal("book")) {
+      if(tag == QLatin1String("BT")) {
+        if(entry->field(QString::fromLatin1("entry-type")) == QLatin1String("book")) {
           f = m_coll->fieldByName(QString::fromLatin1("title"));
         } else {
           f = m_coll->fieldByName(QString::fromLatin1("booktitle"));
@@ -288,7 +285,7 @@ void RISImporter::readURL(const KURL& url_, int n, const QDict<Data::Field>& ris
 }
 
 Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
-  Data::FieldPtr f = 0;
+  Data::FieldPtr f;
   const QString& fieldTag = (*s_tagMap)[tag_];
   if(!fieldTag.isEmpty()) {
     f = m_coll->fieldByName(fieldTag);
@@ -299,7 +296,7 @@ Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
   }
 
   // add non-default fields if not already there
-  if(tag_== Latin1Literal("L1")) {
+  if(tag_== QLatin1String("L1")) {
     f = new Data::Field(QString::fromLatin1("pdf"), i18n("PDF"), Data::Field::URL);
     f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("L1"));
     f->setCategory(i18n("Miscellaneous"));
@@ -312,7 +309,7 @@ void RISImporter::slotCancel() {
   m_cancelled = true;
 }
 
-bool RISImporter::maybeRIS(const KURL& url_) {
+bool RISImporter::maybeRIS(const KUrl& url_) {
   QString text = FileHandler::readTextFile(url_, true /*quiet*/);
   if(text.isEmpty()) {
     return false;
@@ -320,12 +317,12 @@ bool RISImporter::maybeRIS(const KURL& url_) {
 
   // bare bones check, strip white space at beginning
   // and then first text line must be valid RIS
-  QTextIStream t(&text);
+  QTextStream t(&text);
 
   QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s+-(.*)$"));
   QString currLine;
-  for(currLine = t.readLine(); !currLine.isNull(); currLine = t.readLine()) {
-    if(currLine.stripWhiteSpace().isEmpty()) {
+  for(currLine = t.readLine(); !t.atEnd(); currLine = t.readLine()) {
+    if(currLine.trimmed().isEmpty()) {
       continue;
     }
     break;

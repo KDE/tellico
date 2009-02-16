@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,15 +21,15 @@
 
 using Tellico::Command::ModifyLoans;
 
-ModifyLoans::ModifyLoans(Data::LoanPtr oldLoan_, Data::LoanPtr newLoan_, bool addToCalendar_)
-    : KCommand()
+ModifyLoans::ModifyLoans(Tellico::Data::LoanPtr oldLoan_, Tellico::Data::LoanPtr newLoan_, bool addToCalendar_)
+    : QUndoCommand(i18n("Modify Loan"))
     , m_oldLoan(oldLoan_)
     , m_newLoan(newLoan_)
     , m_addToCalendar(addToCalendar_)
 {
 }
 
-void ModifyLoans::execute() {
+void ModifyLoans::redo() {
   if(!m_oldLoan || !m_newLoan) {
     return;
   }
@@ -40,17 +40,17 @@ void ModifyLoans::execute() {
   Controller::self()->modifiedBorrower(b);
 
   if(m_addToCalendar && !m_oldLoan->inCalendar()) {
-    Data::LoanVec loans;
+    Data::LoanList loans;
     loans.append(m_newLoan);
     CalendarHandler::addLoans(loans);
   } else if(!m_addToCalendar && m_oldLoan->inCalendar()) {
-    Data::LoanVec loans;
+    Data::LoanList loans;
     loans.append(m_newLoan); // CalendarHandler checks via uid
     CalendarHandler::removeLoans(loans);
   }
 }
 
-void ModifyLoans::unexecute() {
+void ModifyLoans::undo() {
   if(!m_oldLoan || !m_newLoan) {
     return;
   }
@@ -61,16 +61,12 @@ void ModifyLoans::unexecute() {
   Controller::self()->modifiedBorrower(b);
 
   if(m_addToCalendar && !m_oldLoan->inCalendar()) {
-    Data::LoanVec loans;
+    Data::LoanList loans;
     loans.append(m_newLoan);
     CalendarHandler::removeLoans(loans);
   } else if(!m_addToCalendar && m_oldLoan->inCalendar()) {
-    Data::LoanVec loans;
+    Data::LoanList loans;
     loans.append(m_oldLoan);
     CalendarHandler::addLoans(loans);
   }
-}
-
-QString ModifyLoans::name() const {
-  return i18n("Modify Loan");
 }

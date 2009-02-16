@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,16 +14,13 @@
 #ifndef TELLICO_UTILS_H
 #define TELLICO_UTILS_H
 
-#include <qnamespace.h>
+#include <Qt>
+#include <QCursor>
 
 class KLibrary;
 
-class QColor;
-class QColorGroup;
-class QCursor;
 class QString;
 class QStringList;
-class QScrollView;
 
 /**
  * This file contains utility functions.
@@ -46,6 +43,9 @@ namespace Tellico {
    * Replace all occurrences  of <i18n>text</i18n> with i18n("text")
    */
   QString i18nReplace(QString text);
+  // copy the KDE 4.2 function to remove accelerators
+  QString removeAcceleratorMarker(const QString& label);
+
   /**
    * Returns a list of the subdirectories in @param dir
    * Symbolic links are ignored
@@ -56,9 +56,6 @@ namespace Tellico {
   */
   QString shareString(const QString& str);
 
-  extern QColor contrastColor;
-  void updateContrastColor(const QColorGroup& cg);
-  QColor blendColors(const QColor& color1, const QColor& color2, int percent);
   QString minutes(int seconds);
   QString saveLocation(const QString& dir);
 
@@ -67,7 +64,7 @@ namespace Tellico {
 namespace GUI {
   class CursorSaver {
   public:
-    CursorSaver(const QCursor& cursor = Qt::waitCursor);
+    CursorSaver(const QCursor& cursor = QCursor(Qt::WaitCursor));
     ~CursorSaver();
     void restore();
   private:

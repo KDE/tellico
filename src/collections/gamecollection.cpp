@@ -30,8 +30,8 @@ GameCollection::GameCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("platform"));
 }
 
-Tellico::Data::FieldVec GameCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList GameCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
@@ -42,10 +42,10 @@ Tellico::Data::FieldVec GameCollection::defaultFields() {
 
   QStringList platform;
   platform << i18n("Xbox 360") << i18n("Xbox")
-           << i18n("PlayStation3") << i18n("PlayStation2") << i18n("PlayStation") << i18n("PlayStation Portable", "PSP")
+           << i18n("PlayStation3") << i18n("PlayStation2") << i18n("PlayStation") << i18nc("PlayStation Portable", "PSP")
            << i18n("Nintendo Wii") << i18n("Nintendo DS") << i18n("GameCube") << i18n("Dreamcast")
            << i18n("Game Boy Advance") << i18n("Game Boy Color") << i18n("Game Boy")
-           << i18n("Windows Platform", "Windows") << i18n("Mac OS") << i18n("Linux");
+           << i18nc("Windows Platform", "Windows") << i18n("Mac OS") << i18n("Linux");
   field = new Field(QString::fromLatin1("platform"), i18n("Platform"), platform);
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);
@@ -62,7 +62,7 @@ Tellico::Data::FieldVec GameCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("publisher"), i18n("Games - Publisher", "Publisher"));
+  field = new Field(QString::fromLatin1("publisher"), i18nc("Games - Publisher", "Publisher"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatPlain);
@@ -74,11 +74,10 @@ Tellico::Data::FieldVec GameCollection::defaultFields() {
   field->setFormatFlag(Field::FormatPlain);
   list.append(field);
 
-  QStringList cert = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                        i18n("Video game ratings - "
-                                             "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending",
-                                             "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending"),
-                                        false);
+  QStringList cert = i18nc("Video game ratings - "
+                           "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending",
+                           "Unrated, Adults Only, Mature, Teen, Everyone, Early Childhood, Pending")
+                     .split(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::SkipEmptyParts);
   field = new Field(QString::fromLatin1("certification"), i18n("ESRB Rating"), cert);
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);

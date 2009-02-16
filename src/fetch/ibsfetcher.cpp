@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,18 +18,19 @@
 #include "../collections/bookcollection.h"
 #include "../entry.h"
 #include "../filehandler.h"
-#include "../latin1literal.h"
 #include "../imagefactory.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kconfig.h>
 #include <kio/job.h>
+#include <kio/jobuidelegate.h>
 
-#include <qregexp.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qfile.h>
+#include <QRegExp>
+#include <QLabel>
+#include <QFile>
+#include <QTextStream>
+#include <QVBoxLayout>
 
 //#define IBS_TEST
 
@@ -39,8 +40,8 @@ namespace {
 
 using Tellico::Fetch::IBSFetcher;
 
-IBSFetcher::IBSFetcher(QObject* parent_, const char* name_ /*=0*/)
-    : Fetcher(parent_, name_), m_started(false) {
+IBSFetcher::IBSFetcher(QObject* parent_)
+    : Fetcher(parent_), m_started(false) {
 }
 
 QString IBSFetcher::defaultName() {
@@ -59,17 +60,17 @@ void IBSFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
 
-void IBSFetcher::search(FetchKey key_, const QString& value_) {
+void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_started = true;
   m_matches.clear();
 
 #ifdef IBS_TEST
-  KURL u = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/ibs.html"));
+  KUrl u = KUrl(QString::fromLatin1("/home/robby/ibs.html"));
 #else
-  KURL u(QString::fromLatin1(IBS_BASE_URL));
+  KUrl u(QString::fromLatin1(IBS_BASE_URL));
 
   if(!canFetch(Kernel::self()->collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.").arg(source()), MessageHandler::Warning);
+    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
   }
@@ -102,20 +103,19 @@ void IBSFetcher::search(FetchKey key_, const QString& value_) {
       break;
 
     default:
-      kdWarning() << "IBSFetcher::search() - key not recognized: " << key_ << endl;
+      kWarning() << "IBSFetcher::search() - key not recognized: " << key_;
       stop();
       return;
   }
 #endif
 //  myDebug() << "IBSFetcher::search() - url: " << u.url() << endl;
 
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
   if(key_ == ISBN) {
-    connect(m_job, SIGNAL(result(KIO::Job*)), SLOT(slotCompleteISBN(KIO::Job*)));
+    connect(m_job, SIGNAL(result(KJob*)), SLOT(slotCompleteISBN(KJob*)));
   } else {
-    connect(m_job, SIGNAL(result(KIO::Job*)), SLOT(slotComplete(KIO::Job*)));
+    connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
   }
 }
 
@@ -128,75 +128,70 @@ void IBSFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_data.truncate(0);
   m_started = false;
   emit signalDone(this);
 }
 
-void IBSFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void IBSFetcher::slotComplete(KIO::Job* job_) {
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
-
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+void IBSFetcher::slotComplete(KJob*) {
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "IBSFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
-  QString s = Tellico::decodeHTML(QString(m_data));
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
+
+  QString s = Tellico::decodeHTML(QString(data));
   // really specific regexp
   //QString pat = QString::fromLatin1("http://www.internetbookshop.it/code/");
   QString pat = QString::fromLatin1("http://www.ibs.it/code/");
   QRegExp anchorRx(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*[\"'](") +
                    QRegExp::escape(pat) +
-                   QString::fromLatin1("[^\"]*)\"[^>]*><b>([^<]+)<"), false);
+                   QString::fromLatin1("[^\"]*)\"[^>]*><b>([^<]+)<"), Qt::CaseInsensitive);
   anchorRx.setMinimal(true);
   QRegExp tagRx(QString::fromLatin1("<.*>"));
   tagRx.setMinimal(true);
 
   QString u, t, d;
   int pos2;
-  for(int pos = anchorRx.search(s); m_started && pos > -1; pos = anchorRx.search(s, pos+anchorRx.matchedLength())) {
+  for(int pos = anchorRx.indexIn(s); m_started && pos > -1; pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
     if(!u.isEmpty()) {
-      SearchResult* r = new SearchResult(this, t, d, QString());
+      SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, d, QString());
       emit signalResultFound(r);
 
 #ifdef IBS_TEST
-      KURL url = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/ibs2.html"));
+      KUrl url = KUrl(QString::fromLatin1("/home/robby/ibs2.html"));
 #else
       // the url probable contains &amp; so be careful
-      KURL url = u.replace(QString::fromLatin1("&amp;"), QChar('&'));
+      KUrl url = u.replace(QString::fromLatin1("&amp;"), QChar('&'));
 #endif
       m_matches.insert(r->uid, url);
 
-      u.truncate(0);
-      t.truncate(0);
-      d.truncate(0);
+      u.clear();
+      t.clear();
+      d.clear();
     }
     u = anchorRx.cap(1);
     t = anchorRx.cap(2);
-    pos2 = s.find(QString::fromLatin1("<br>"), pos, false);
+    pos2 = s.indexOf(QString::fromLatin1("<br>"), pos, Qt::CaseInsensitive);
     if(pos2 > -1) {
-      int pos3 = s.find(QString::fromLatin1("<br>"), pos2+1, false);
+      int pos3 = s.indexOf(QString::fromLatin1("<br>"), pos2+1, Qt::CaseInsensitive);
       if(pos3 > -1) {
-        d = s.mid(pos2, pos3-pos2).remove(tagRx).simplifyWhiteSpace();
+        d = s.mid(pos2, pos3-pos2).remove(tagRx).simplified();
       }
     }
   }
 #ifndef IBS_TEST
   if(!u.isEmpty()) {
-    SearchResult* r = new SearchResult(this, t, d, QString());
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, d, QString());
     emit signalResultFound(r);
     m_matches.insert(r->uid, u.replace(QString::fromLatin1("&amp;"), QChar('&')));
   }
@@ -205,24 +200,25 @@ void IBSFetcher::slotComplete(KIO::Job* job_) {
   stop();
 }
 
-void IBSFetcher::slotCompleteISBN(KIO::Job* job_) {
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
-
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+void IBSFetcher::slotCompleteISBN(KJob* job_) {
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "IBSFetcher::slotCompleteISBN() - no data" << endl;
     stop();
     return;
   }
 
-  QString str = Tellico::decodeHTML(QString(m_data));
-  if(str.find(QString::fromLatin1("Libro non presente"), 0, false /* cas-sensitive */) > -1) {
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
+
+  QString str = Tellico::decodeHTML(QString(data));
+  if(str.indexOf(QString::fromLatin1("Libro non presente"), 0, Qt::CaseInsensitive) > -1) {
     stop();
     return;
   }
@@ -230,7 +226,7 @@ void IBSFetcher::slotCompleteISBN(KIO::Job* job_) {
   if(entry) {
     QString desc = entry->field(QString::fromLatin1("author"))
                  + '/' + entry->field(QString::fromLatin1("publisher"));
-    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     emit signalResultFound(r);
     m_matches.insert(r->uid, static_cast<KIO::TransferJob*>(job_)->url().url());
   }
@@ -245,23 +241,23 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntry(uint uid_) {
     return entry;
   }
 
-  KURL url = m_matches[uid_];
+  KUrl url = m_matches[uid_];
   if(url.isEmpty()) {
-    kdWarning() << "IBSFetcher::fetchEntry() - no url in map" << endl;
-    return 0;
+    kWarning() << "IBSFetcher::fetchEntry() - no url in map";
+    return Data::EntryPtr();
   }
 
   QString results = Tellico::decodeHTML(FileHandler::readTextFile(url, true));
   if(results.isEmpty()) {
     myDebug() << "IBSFetcher::fetchEntry() - no text results" << endl;
-    return 0;
+    return Data::EntryPtr();
   }
 
 //  myDebug() << url.url() << endl;
 #if 0
-  kdWarning() << "Remove debug from ibsfetcher.cpp" << endl;
+  kWarning() << "Remove debug from ibsfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test.html"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
     t << results;
@@ -272,7 +268,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntry(uint uid_) {
   entry = parseEntry(results);
   if(!entry) {
     myDebug() << "IBSFetcher::fetchEntry() - error in processing entry" << endl;
-    return 0;
+    return Data::EntryPtr();
   }
   m_entries.insert(uid_, entry); // keep for later
   return entry;
@@ -283,17 +279,17 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
  // class might be anime_info_top
   QString pat = QString::fromLatin1("%1(?:<[^>]+>)+([^<>\\s][^<>]+)");
 
-  QRegExp isbnRx(QString::fromLatin1("isbn=([\\dxX]{13})"), false);
+  QRegExp isbnRx(QString::fromLatin1("isbn=([\\dxX]{13})"), Qt::CaseInsensitive);
   QString isbn;
-  int pos = isbnRx.search(str_);
+  int pos = isbnRx.indexIn(str_);
   if(pos > -1) {
     isbn = isbnRx.cap(1);
   }
 
-  Data::CollPtr coll = new Data::BookCollection(true);
+  Data::CollPtr coll(new Data::BookCollection(true));
 
  // map captions in HTML to field names
-  QMap<QString, QString> fieldMap;
+  QHash<QString, QString> fieldMap;
   fieldMap.insert(QString::fromLatin1("Titolo"), QString::fromLatin1("title"));
   fieldMap.insert(QString::fromLatin1("Autore"), QString::fromLatin1("author"));
   fieldMap.insert(QString::fromLatin1("Anno"), QString::fromLatin1("pub_year"));
@@ -303,22 +299,22 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   fieldMap.insert(QString::fromLatin1("Dati"), QString::fromLatin1("edition"));
 
   QRegExp pagesRx(QString::fromLatin1("(\\d+) p\\.(\\s*,\\s*)?"));
-  Data::EntryPtr entry = new Data::Entry(coll);
+  Data::EntryPtr entry(new Data::Entry(coll));
 
-  for(QMap<QString, QString>::Iterator it = fieldMap.begin(); it != fieldMap.end(); ++it) {
+  for(QHash<QString, QString>::Iterator it = fieldMap.begin(); it != fieldMap.end(); ++it) {
     QRegExp infoRx(pat.arg(it.key()));
-    pos = infoRx.search(str_);
+    pos = infoRx.indexIn(str_);
     if(pos > -1) {
-      if(it.data() == Latin1Literal("edition")) {
-        int pos2 = pagesRx.search(infoRx.cap(1));
+      if(it.value() == QLatin1String("edition")) {
+        int pos2 = pagesRx.indexIn(infoRx.cap(1));
         if(pos2 > -1) {
           entry->setField(QString::fromLatin1("pages"), pagesRx.cap(1));
-          entry->setField(it.data(), infoRx.cap(1).remove(pagesRx));
+          entry->setField(it.value(), infoRx.cap(1).remove(pagesRx));
         } else {
-          entry->setField(it.data(), infoRx.cap(1));
+          entry->setField(it.value(), infoRx.cap(1));
         }
       } else {
-        entry->setField(it.data(), infoRx.cap(1));
+        entry->setField(it.value(), infoRx.cap(1));
       }
     }
   }
@@ -336,7 +332,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
 #else
     QRegExp imgRx(QString::fromLatin1("<img\\s+[^>]*\\s*src\\s*=\\s*\"(http://[^/]*\\.ibs\\.it/[^\"]+e=%1)").arg(isbn));
     imgRx.setMinimal(true);
-    pos = imgRx.search(str_);
+    pos = imgRx.indexIn(str_);
     if(pos > -1) {
       myLog() << "IBSFetcher() - cover = " << imgRx.cap(1) << endl;
       QString id = ImageFactory::addImage(imgRx.cap(1), true, QString::fromLatin1("http://internetbookshop.it"));
@@ -348,27 +344,27 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   }
 
   // now look for description
-  QRegExp descRx(QString::fromLatin1("Descrizione(?:<[^>]+>)+([^<>\\s].+)</span>"), false);
+  QRegExp descRx(QString::fromLatin1("Descrizione(?:<[^>]+>)+([^<>\\s].+)</span>"), Qt::CaseInsensitive);
   descRx.setMinimal(true);
-  pos = descRx.search(str_);
+  pos = descRx.indexIn(str_);
   if(pos == -1) {
     descRx.setPattern(QString::fromLatin1("In sintesi(?:<[^>]+>)+([^<>\\s].+)</span>"));
-    pos = descRx.search(str_);
+    pos = descRx.indexIn(str_);
   }
   if(pos > -1) {
-    Data::FieldPtr f = new Data::Field(QString::fromLatin1("plot"), i18n("Plot Summary"), Data::Field::Para);
+    Data::FieldPtr f(new Data::Field(QString::fromLatin1("plot"), i18n("Plot Summary"), Data::Field::Para));
     coll->addField(f);
-    entry->setField(f, descRx.cap(1).simplifyWhiteSpace());
+    entry->setField(f, descRx.cap(1).simplified());
   }
 
   // IBS switches the surname and family name of the author
   QStringList names = entry->fields(QString::fromLatin1("author"), false);
   if(!names.isEmpty() && !names[0].isEmpty()) {
     for(QStringList::Iterator it = names.begin(); it != names.end(); ++it) {
-      if((*it).find(',') > -1) {
+      if((*it).indexOf(',') > -1) {
         continue; // skip if it has a comma
       }
-      QStringList words = QStringList::split(' ', *it);
+      QStringList words = (*it).split(' ');
       if(words.isEmpty()) {
         continue;
       }
@@ -382,7 +378,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   return entry;
 }
 
-void IBSFetcher::updateEntry(Data::EntryPtr entry_) {
+void IBSFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   QString isbn = entry_->field(QString::fromLatin1("isbn"));
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);

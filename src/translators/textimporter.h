@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TEXTIMPORTER_H
-#define TEXTIMPORTER_H
+#ifndef TELLICO_TEXTIMPORTER_H
+#define TELLICO_TEXTIMPORTER_H
 
 #include "importer.h"
 
@@ -33,7 +33,7 @@ public:
    *
    * @param url The file to be imported
    */
-  TextImporter(const KURL& url, bool useUTF8_=false);
+  TextImporter(const KUrl& url, bool useUTF8_=false);
   TextImporter(const QString& text);
 };
 

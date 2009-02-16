@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,8 +16,9 @@
 
 #include "../datavectors.h"
 
-#include <kcommand.h>
 #include <kurl.h>
+
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -25,7 +26,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class CollectionCommand : public KCommand {
+class CollectionCommand : public QUndoCommand {
 public:
   enum Mode {
     Append,
@@ -36,9 +37,8 @@ public:
   CollectionCommand(Mode mode, Data::CollPtr currentColl, Data::CollPtr newColl);
   ~CollectionCommand();
 
-  virtual void execute();
-  virtual void unexecute();
-  virtual QString name() const;
+  virtual void redo();
+  virtual void undo();
 
 private:
   void copyFields();
@@ -47,8 +47,8 @@ private:
   Data::CollPtr m_origColl;
   Data::CollPtr m_newColl;
 
-  KURL m_origURL;
-  Data::FieldVec m_origFields;
+  KUrl m_origURL;
+  Data::FieldList m_origFields;
   Data::MergePair m_mergePair;
   // for the Replace case, the collection that got replaced needs to be cleared
   enum CleanupMode {

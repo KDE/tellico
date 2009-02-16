@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bookcase SYSTEM "bookcase.dtd">
+<bookcase xmlns="http://periapsis.org/bookcase/" syntaxVersion="3" >
+ <collection unitTitle="Books" title="My Books" unit="book" >
+  <attributes>
+   <attribute flags="0" title="Title" category="&amp;General" format="1" type="1" name="title" />
+   <attribute flags="0" title="Subtitle" category="&amp;General" format="1" type="1" name="subtitle" />
+   <attribute flags="7" title="Author" category="&amp;General" format="2" type="1" name="author" />
+   <attribute flags="2" title="Binding" category="&amp;General" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" format="0" type="3" name="binding" />
+   <attribute flags="0" title="Purchase Date" category="&amp;General" format="3" type="1" name="pur_date" />
+   <attribute flags="0" title="Purchase Price" category="&amp;General" format="0" type="1" name="pur_price" />
+   <attribute flags="6" title="Publisher" category="&amp;Publishing" format="0" type="1" name="publisher" />
+   <attribute flags="4" title="Edition" category="&amp;Publishing" format="0" type="1" name="edition" />
+   <attribute flags="3" title="Copyright Year" category="&amp;Publishing" format="0" type="6" name="cr_year" />
+   <attribute flags="2" title="Publication Year" category="&amp;Publishing" format="0" type="6" name="pub_year" />
+   <attribute flags="0" title="ISBN#" category="&amp;Publishing" format="0" type="1" name="isbn" description="International Standard Book Number" />
+   <attribute flags="0" title="LCCN#" category="&amp;Publishing" format="0" type="1" name="lccn" description="Library of Congress Control Number" />
+   <attribute flags="0" title="Pages" category="&amp;Publishing" format="0" type="1" name="pages" />
+   <attribute flags="7" title="Language" category="&amp;Publishing" format="0" type="1" name="language" />
+   <attribute flags="7" title="Genre" category="&amp;Classification" format="0" type="1" name="genre" />
+   <attribute flags="7" title="Keywords" category="&amp;Classification" format="0" type="1" name="keyword" />
+   <attribute flags="6" title="Series" category="&amp;Classification" format="0" type="1" name="series" />
+   <attribute flags="0" title="Series Number" category="&amp;Classification" format="0" type="1" name="series_num" />
+   <attribute flags="0" title="Condition" category="&amp;Classification" allowed="New;Used" format="0" type="3" name="condition" />
+   <attribute flags="0" title="Signed" category="Pe&amp;rsonal" format="0" type="4" name="signed" />
+   <attribute flags="0" title="Read" category="Pe&amp;rsonal" format="0" type="4" name="read" />
+   <attribute flags="0" title="Gift" category="Pe&amp;rsonal" format="0" type="4" name="gift" />
+   <attribute flags="0" title="Loaned" category="Pe&amp;rsonal" format="0" type="4" name="loaned" />
+   <attribute flags="2" title="Rating" category="Pe&amp;rsonal" allowed="5 - Best;4 - Good;3 - Neutral;2 - Bad;1 - Worst" format="0" type="3" name="rating" />
+   <attribute flags="0" title="Comments" category="Pe&amp;rsonal" format="0" type="1" name="comments" />
+  </attributes>
+  <book>
+   <title>my title1</title>
+   <subtitle>my subtitle</subtitle>
+   <authors>
+    <author>my author</author>
+   </authors>
+   <binding>Paperback</binding>
+   <pur_date>my date</pur_date>
+   <pur_price>my price</pur_price>
+   <publisher>my publisher</publisher>
+   <edition>my edition</edition>
+   <cr_years>
+    <cr_year>1900</cr_year>
+   </cr_years>
+   <pub_year>2000</pub_year>
+   <isbn>3-24876276-4</isbn>
+   <lccn>2348975629</lccn>
+   <pages>3746</pages>
+   <languages>
+    <language>Klingon</language>
+   </languages>
+   <genres>
+    <genre>Science Fiction</genre>
+   </genres>
+   <keywords>
+    <keyword>lots of keywords</keyword>
+    <keyword>another</keyword>
+   </keywords>
+   <series>my series</series>
+   <series_num>2</series_num>
+   <condition>Used</condition>
+   <signed/>
+   <read/>
+   <gift/>
+   <loaned/>
+   <rating>3 - Neutral</rating>
+   <comments>a very long comment about the book and something that struck me while I was reading it</comments>
+  </book>
+  <book>
+   <title>my title2</title>
+   <authors>
+    <author>my author</author>
+   </authors>
+   <binding>Hardback</binding>
+   <publisher>my publisher</publisher>
+   <genres>
+    <genre>science fiction</genre>
+   </genres>
+   <keywords>
+    <keyword>another</keyword>
+   </keywords>
+   <series>my series</series>
+   <series_num>1</series_num>
+   <condition>New</condition>
+  </book>
+ </collection>
+</bookcase>

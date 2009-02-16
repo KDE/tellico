@@ -1,0 +1,75 @@
+Source: tellico
+Section: kde
+Priority: optional
+Maintainer: Regis Boudin <regis@debian.org>
+Build-Depends: debhelper (>= 5.0.51~), pkg-kde-tools, kdelibs5-dev, libxml2-dev, libxslt1-dev, libtag1-dev, libyaz3-dev, kdemultimedia-dev, kdepimlibs5-dev, libpoppler-qt4-dev, libexempi-dev
+Standards-Version: 3.8.0
+Homepage: http://periapsis.org/tellico/
+Vcs-Svn: https://forgesvn1.novell.com/svn/tellico/branches/tellico-1.3.x/debian
+
+Package: tellico
+Replaces: tellico-data (<= 1.2.14-1)
+Architecture: any
+Depends: tellico-data (= ${source:Version}), tellico-scripts, ${shlibs:Depends}
+Recommends: khelpcenter4
+Description: collection manager for books, videos, music
+ Tellico is a collection manager for KDE. It includes default collections for
+ books, bibliographies, comic books, videos, music, coins, stamps, trading
+ cards, and wines, and also allows custom collections; with unlimited
+ user-defined fields allowed. Automatically formatted names, sorting by any
+ property, filters, automatic ISBN validation and full customization for
+ printing or display through XSLT files are some of the features present. It
+ can import CSV, RIS, BibTeX, and BibTeXML files; and export CSV, HTML, BibTeX,
+ BibTeXML, and PilotDB. Tellico can also import data from Amazon, IMDb, CDDB,
+ or any US-MARC compliant z39.50 server.
+ .
+ The files are stored in XML format, avoiding the need for database server.
+ It also makes it easy for other softwares to use the Tellico data.
+
+Package: tellico-data
+Architecture: all
+Conflicts: tellico (<< 1.1.6-1)
+Replaces: tellico (<< 1.1.6-1)
+Depends: kdelibs-data
+Recommends: tellico
+Suggests: python
+Description: collection manager for books, videos, music [data]
+ Tellico is a collection manager for KDE. It includes default collections for
+ books, bibliographies, comic books, videos, music, coins, stamps, trading
+ cards, and wines, and also allows custom collections; with unlimited
+ user-defined fields allowed. Automatically formatted names, sorting by any
+ property, filters, automatic ISBN validation and full customization for
+ printing or display through XSLT files are some of the features present. It
+ can import CSV, RIS, BibTeX, and BibTeXML files; and export CSV, HTML, BibTeX,
+ BibTeXML, and PilotDB. Tellico can also import data from Amazon, IMDb, CDDB,
+ or any US-MARC compliant z39.50 server.
+ .
+ The files are stored in XML format, avoiding the need for database server.
+ It also makes it easy for other softwares to use the Tellico data.
+ .
+ This package contains the architecture independent files, such data files and
+ documentation.
+
+Package: tellico-scripts
+Architecture: all
+Conflicts: tellico-data (<= 1.3.1-2)
+Replaces: tellico-data (<= 1.3.1-2)
+Recommends: tellico
+Suggests: python, ruby
+Description: collection manager for books, videos, music [scripts]
+ Tellico is a collection manager for KDE. It includes default collections for
+ books, bibliographies, comic books, videos, music, coins, stamps, trading
+ cards, and wines, and also allows custom collections; with unlimited
+ user-defined fields allowed. Automatically formatted names, sorting by any
+ property, filters, automatic ISBN validation and full customization for
+ printing or display through XSLT files are some of the features present. It
+ can import CSV, RIS, BibTeX, and BibTeXML files; and export CSV, HTML, BibTeX,
+ BibTeXML, and PilotDB. Tellico can also import data from Amazon, IMDb, CDDB,
+ or any US-MARC compliant z39.50 server.
+ .
+ The files are stored in XML format, avoiding the need for database server.
+ It also makes it easy for other softwares to use the Tellico data.
+ .
+ This package contains the scripts to import data from external sources, such
+ as websites. As the format of the data may change, these scripts are provided
+ as a separate package which can be updated through debian-volatile.

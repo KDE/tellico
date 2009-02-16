@@ -75,12 +75,12 @@ PalmLib::FlatFile::Database::appendField(PalmLib::FlatFile::FType field)
 {
     if (! supportsFieldType(field.type())) {
 //        throw PalmLib::error("unsupported field type");
-          kdDebug() << "unsupported field type" << endl;
+          kDebug() << "unsupported field type";
           return;
     }
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
 //        throw PalmLib::error("maximum number of fields reached");
-          kdDebug() << "maximum number of fields reached" << endl;
+          kDebug() << "maximum number of fields reached";
           return;
     }
     m_fields.push_back(field);
@@ -91,12 +91,12 @@ PalmLib::FlatFile::Database::appendField(const std::string& name,
                                          Field::FieldType type, std::string data)
 {
     if (! supportsFieldType(type)) {
-      kdDebug() << "PalmLib::FlatFile::Database::appendField() - unsupported field type" << endl;
+      kDebug() << "PalmLib::FlatFile::Database::appendField() - unsupported field type";
         return;
     }
 //        throw PalmLib::error("unsupported field type");
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
-      kdDebug() << "PalmLib::FlatFile::Database::appendField() - maximum number of fields reached" << endl;
+      kDebug() << "PalmLib::FlatFile::Database::appendField() - maximum number of fields reached";
         return;
       }
 //        throw PalmLib::error("maximum number of fields reached");
@@ -111,12 +111,12 @@ PalmLib::FlatFile::Database::insertField(int i, PalmLib::FlatFile::FType field)
 {
     if (! supportsFieldType(field.type())) {
 //        throw PalmLib::error("unsupported field type");
-        kdDebug() << "unsupported field type" << endl;
+        kDebug() << "unsupported field type";
         return;
     }
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
 //        throw PalmLib::error("maximum number of fields reached");
-        kdDebug() << "maximum number of fields reached" << endl;
+        kDebug() << "maximum number of fields reached";
         return;
       }
 /*    m_fields.push_back(std::make_pair(name, type));*/
@@ -130,12 +130,12 @@ PalmLib::FlatFile::Database::insertField(int i, const std::string& name,
 {
     if (! supportsFieldType(type)) {
 //        throw PalmLib::error("unsupported field type");
-        kdDebug() << "unsupported field type" << endl;
+        kDebug() << "unsupported field type";
         return;
     }
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
 //        throw PalmLib::error("maximum number of fields reached");
-        kdDebug() << "maximum number of fields reached" << endl;
+        kDebug() << "maximum number of fields reached";
         return;
       }
 /*    m_fields.push_back(std::make_pair(name, type));*/
@@ -159,7 +159,7 @@ PalmLib::FlatFile::Record
 PalmLib::FlatFile::Database::getRecord(unsigned index) const
 {
     if (index >= getNumRecords()) {
-      kdDebug() << "invalid index" << endl;
+      kDebug() << "invalid index";
      //throw std::out_of_range("invalid index");
     }
     return m_records[index];
@@ -170,7 +170,7 @@ PalmLib::FlatFile::Database::appendRecord(PalmLib::FlatFile::Record rec)
 {
     if (rec.fields().size() != getNumOfFields()) {
 //        throw PalmLib::error("the number of fields mismatch");
-        kdDebug() << "the number of fields mismatch" << endl;
+        kDebug() << "the number of fields mismatch";
         return;
     }
     for (unsigned int i = 0; i < getNumOfFields(); i++) {
@@ -180,7 +180,7 @@ PalmLib::FlatFile::Database::appendRecord(PalmLib::FlatFile::Record rec)
         const Field field = rec.fields()[i];
 #endif
         if (field.type != field_type(i)) {
-          kdDebug() << "field " << i << " type " << field_type(i) << " mismatch: " << field.type << endl;
+          kDebug() << "field " << i << " type " << field_type(i) << " mismatch: " << field.type;
           return;
 //            throw PalmLib::error(buffer.str());
         }

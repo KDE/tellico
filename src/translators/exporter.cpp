@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,10 +17,10 @@
 
 using Tellico::Export::Exporter;
 
-Exporter::Exporter() : QObject(), m_options(Export::ExportUTF8 | Export::ExportComplete), m_coll(0) {
+Exporter::Exporter() : QObject(), m_options(Export::ExportUTF8 | Export::ExportComplete) {
 }
 
-Exporter::Exporter(Data::CollPtr coll) : QObject(), m_options(Export::ExportUTF8), m_coll(coll) {
+Exporter::Exporter(Tellico::Data::CollPtr coll) : QObject(), m_options(Export::ExportUTF8), m_coll(coll) {
 }
 
 Exporter::~Exporter() {

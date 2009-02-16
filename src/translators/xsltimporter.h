@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,10 +11,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef XSLTIMPORTER_H
-#define XSLTIMPORTER_H
+#ifndef TELLICO_XSLTIMPORTER_H
+#define TELLICO_XSLTIMPORTER_H
 
-class KURLRequester;
+class KUrlRequester;
 
 #include "textimporter.h"
 #include "../datavectors.h"
@@ -33,22 +33,22 @@ Q_OBJECT
 public:
   /**
    */
-  XSLTImporter(const KURL& url);
+  XSLTImporter(const KUrl& url);
 
   /**
    */
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
-  void setXSLTURL(const KURL& url) { m_xsltURL = url; }
+  virtual QWidget* widget(QWidget* parent);
+  void setXSLTURL(const KUrl& url) { m_xsltURL = url; }
 
 private:
   Data::CollPtr m_coll;
 
   QWidget* m_widget;
-  KURLRequester* m_URLRequester;
-  KURL m_xsltURL;
+  KUrlRequester* m_URLRequester;
+  KUrl m_xsltURL;
 };
 
   } // end namespace

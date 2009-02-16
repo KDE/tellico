@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,24 +16,15 @@
 #include "tellico_debug.h"
 #include "tellico_utils.h"
 
-#include <kmdcodec.h>
-#include <kpixmapio.h>
-#include <kstaticdeleter.h>
+#include <kcodecs.h>
 
-#include <qbuffer.h>
-#include <qregexp.h>
+#include <QBuffer>
+#include <QRegExp>
+#include <QImageReader>
+#include <QImageWriter>
 
 using Tellico::Data::Image;
 using Tellico::Data::ImageInfo;
-
-KPixmapIO* Image::s_pixmapIO = 0;
-static KStaticDeleter<KPixmapIO> staticKPixmapIODeleter;
-KPixmapIO* Image::io() {
-  if(!s_pixmapIO) {
-    staticKPixmapIODeleter.setObject(s_pixmapIO, new KPixmapIO());
-  }
-  return s_pixmapIO;
-}
 
 Image::Image() : QImage(), m_id(QString::null), m_linkOnly(false) {
 }
@@ -42,16 +33,16 @@ Image::Image() : QImage(), m_id(QString::null), m_linkOnly(false) {
 // collection could ever have the same hash, and this lets me do a fast comparison of two images
 // simply by comparing their ids.
 Image::Image(const QString& filename_) : QImage(filename_), m_linkOnly(false) {
-  m_format = QImage::imageFormat(filename_);
+  m_format = QImageReader::imageFormat(filename_);
   calculateID();
 }
 
-Image::Image(const QImage& img_, const QString& format_) : QImage(img_), m_format(format_), m_linkOnly(false) {
+Image::Image(const QImage& img_, const QString& format_) : QImage(img_), m_format(format_.toLatin1()), m_linkOnly(false) {
   calculateID();
 }
 
 Image::Image(const QByteArray& data_, const QString& format_, const QString& id_)
-    : QImage(data_), m_id(idClean(id_)), m_format(format_), m_linkOnly(false) {
+    : QImage(QImage::fromData(data_)), m_id(idClean(id_)), m_format(format_.toLatin1()), m_linkOnly(false) {
   if(isNull()) {
     m_id = QString();
   }
@@ -70,35 +61,32 @@ bool Image::isNull() const {
 }
 
 QPixmap Image::convertToPixmap() const {
-  return io()->convertToPixmap(*this);
+  return QPixmap::fromImage(*this);
 }
 
 QPixmap Image::convertToPixmap(int w_, int h_) const {
   if(w_ < width() || h_ < height()) {
-    return io()->convertToPixmap(this->smoothScale(w_, h_, ScaleMin));
+    return QPixmap::fromImage(this->scaled(w_, h_, Qt::KeepAspectRatio));
   } else {
-    return io()->convertToPixmap(*this);
+    return QPixmap::fromImage(*this);
   }
 }
 
-QCString Image::outputFormat(const QCString& inputFormat) {
-  QStrList list = QImage::outputFormats();
-  for(QStrListIterator it(list); it.current(); ++it) {
-    if(inputFormat == it.current()) {
-      return inputFormat;
-    }
+QByteArray Image::outputFormat(const QByteArray& inputFormat) {
+  QList<QByteArray> list = QImageWriter::supportedImageFormats();
+  if(list.contains(inputFormat)) {
+    return inputFormat;
   }
 //  myDebug() << "Image::outputFormat() - writing " << inputFormat << " as PNG" << endl;
   return "PNG";
 }
 
-QByteArray Image::byteArray(const QImage& img_, const QCString& outputFormat_) {
+QByteArray Image::byteArray(const QImage& img_, const QByteArray& outputFormat_) {
   QByteArray ba;
-  QBuffer buf(ba);
-  buf.open(IO_WriteOnly);
-  QImageIO iio(&buf, outputFormat_);
-  iio.setImage(img_);
-  iio.write();
+  QBuffer buf(&ba);
+  buf.open(QIODevice::WriteOnly);
+  QImageWriter writer(&buf, outputFormat_);
+  writer.write(img_);
   buf.close();
   return ba;
 }
@@ -117,7 +105,7 @@ void Image::calculateID() {
   // the id will eventually be used as a filename
   if(!isNull()) {
     KMD5 md5(byteArray());
-    m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).lower();
+    m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).toLower();
     m_id = idClean(m_id);
   }
 }
@@ -132,7 +120,7 @@ ImageInfo::ImageInfo(const Image& img_)
     , m_height(img_.height()) {
 }
 
-ImageInfo::ImageInfo(const QString& id_, const QCString& format_, int w_, int h_, bool l_)
+ImageInfo::ImageInfo(const QString& id_, const QByteArray& format_, int w_, int h_, bool l_)
     : id(id_)
     , format(format_)
     , linkOnly(l_)

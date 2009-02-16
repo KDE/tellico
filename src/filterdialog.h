@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,11 +19,11 @@
 #include "filter.h"
 #include "datavectors.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
+#include <KHBox>
 
-#include <qhbox.h>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <QString>
+#include <QStringList>
 
 class KComboBox;
 class KLineEdit;
@@ -45,7 +45,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class FilterRuleWidget : public QHBox {
+class FilterRuleWidget : public KHBox {
 Q_OBJECT
 
 public:
@@ -53,7 +53,7 @@ public:
    * Constructor. You give a @ref FilterRule as parameter, which will
    * be used to initialize the widget.
    */
-  FilterRuleWidget(FilterRule* rule, QWidget* parent, const char* name=0);
+  FilterRuleWidget(FilterRule* rule, QWidget* parent);
 
   /**
    * Set the rule. The rule is accepted regardless of the return
@@ -100,10 +100,10 @@ class FilterRuleWidgetLister : public KWidgetLister {
 Q_OBJECT
 
 public:
-  FilterRuleWidgetLister(QWidget* parent, const char* name=0);
+  FilterRuleWidgetLister(QWidget* parent);
 
-  const QPtrList<QWidget>& widgetList() const;
-  void setFilter(Filter::Ptr filter);
+  QList<QWidget*> widgetList() const;
+  void setFilter(FilterPtr filter);
 
 public slots:
   void reset();
@@ -120,7 +120,7 @@ protected:
 /**
  * @author Robby Stephenson
  */
-class FilterDialog : public KDialogBase {
+class FilterDialog : public KDialog {
 Q_OBJECT
 
 public:
@@ -133,9 +133,8 @@ public:
    * The constructor sets up the dialog.
    *
    * @param parent A pointer to the parent widget
-   * @param name The widget name
    */
-  FilterDialog(Mode mode, QWidget* parent, const char* name=0);
+  FilterDialog(Mode mode, QWidget* parent);
 
   FilterPtr currentFilter();
   void setFilter(FilterPtr filter);

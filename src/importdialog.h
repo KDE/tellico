@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,18 +11,21 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef IMPORTDIALOG_H
-#define IMPORTDIALOG_H
+#ifndef TELLICO_IMPORTDIALOG_H
+#define TELLICO_IMPORTDIALOG_H
 
 #include "translators/translators.h"
 #include "datavectors.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <kurl.h>
+
+#include <QShowEvent>
 
 class QRadioButton;
 class QCheckBox;
 class QShowEvent;
+class QButtonGroup;
 
 namespace Tellico {
   namespace Import {
@@ -33,11 +36,11 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class ImportDialog : public KDialogBase {
+class ImportDialog : public KDialog {
 Q_OBJECT
 
 public:
-  ImportDialog(Import::Format format, const KURL::List& urls, QWidget* parent, const char* name);
+  ImportDialog(Import::Format format, const KUrl::List& urls, QWidget* parent);
   ~ImportDialog();
 
   Data::CollPtr collection();
@@ -50,13 +53,11 @@ public:
   static Import::FormatMap formatMap();
   static bool formatImportsText(Import::Format format);
 
-  static Import::Importer* importer(Import::Format format, const KURL::List& urls);
-  static Data::CollPtr importURL(Import::Format format, const KURL& url);
-
-protected:
-  virtual void slotOk();
+  static Import::Importer* importer(Import::Format format, const KUrl::List& urls);
+  static Data::CollPtr importURL(Import::Format format, const KUrl& url);
 
 private slots:
+  virtual void slotOk();
   void slotUpdateAction();
 
 private:
@@ -65,6 +66,7 @@ private:
   QRadioButton* m_radioAppend;
   QRadioButton* m_radioReplace;
   QRadioButton* m_radioMerge;
+  QButtonGroup* m_buttonGroup;
 };
 
 } // end namespace

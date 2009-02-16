@@ -17,6 +17,8 @@
 #include "freedbimporter.h"
 #include "../tellico_debug.h"
 
+#include <QList>
+
 using Tellico::Import::FreeDBImporter;
 
 extern "C" {
@@ -112,7 +114,6 @@ extern "C" {
 #define        cdte_track_address trackStartAddress
 
 #else
-# warning "Your OS isn't supported yet for CDDB lookup."
 #endif  /* os selection */
 
 }
@@ -129,8 +130,8 @@ namespace {
   };
 }
 
-QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<uint>& trackLengths_) {
-  QValueList<uint> list;
+QList<uint> FreeDBImporter::offsetList(const QByteArray& drive_, QList<uint>& trackLengths_) {
+  QList<uint> list;
 
   int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
   CloseDrive closer(drive);
@@ -138,6 +139,7 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
     return list;
   }
 
+#ifndef WIN32
   cdrom_tochdr hdr;
 #if defined(__APPLE__)
   dk_cd_read_disc_info_t discInfoParams;
@@ -224,6 +226,7 @@ QValueList<uint> FreeDBImporter::offsetList(const QCString& drive_, QValueList<u
   }
 
   delete[] TocEntry;
+#endif
   return list;
 }
 
@@ -235,9 +238,9 @@ ushort from2Byte(uchar* d) {
 #define SIZE 61
 // mostly taken from kover and k3b
 // licensed under GPL
-FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
+FreeDBImporter::CDText FreeDBImporter::getCDText(const QByteArray& drive_) {
   CDText cdtext;
-#ifdef USE_CDTEXT
+#ifdef ENABLE_CDTEXT
 // only works for linux ATM
 #if defined(__linux__)
   int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
@@ -252,7 +255,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
   int dataLen;
 
   int format = 5;
-  uint track = 0;
+  int track = 0;
   uchar buffer[2048];
 
   m_cmd.cmd[0] = 0x43;
@@ -349,7 +352,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
               cdtext.trackTitles.resize(track);
             }
             cdtext.trackTitles[track-1] = QString::fromUtf8(data);
-          } else if(code == (char)0xFFFFFF81) {
+          } else if(code == char(0xFFFFFF81)) {
             if(cdtext.trackArtists.size() < track) {
               cdtext.trackArtists.resize(track);
             }
@@ -365,11 +368,13 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QCString& drive_) {
     }
   }
   if(cdtext.trackTitles.size() != cdtext.trackArtists.size()) {
-    size_t size = QMAX(cdtext.trackTitles.size(), cdtext.trackArtists.size());
+    int size = qMax(cdtext.trackTitles.size(), cdtext.trackArtists.size());
     cdtext.trackTitles.resize(size);
     cdtext.trackArtists.resize(size);
   }
 #endif
+#else
+  Q_UNUSED(drive_);
 #endif
   return cdtext;
 }

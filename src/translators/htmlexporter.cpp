@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,7 +18,6 @@
 #include "../collection.h"
 #include "../filehandler.h"
 #include "../imagefactory.h"
-#include "../latin1literal.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
 #include "../progressmanager.h"
@@ -26,21 +25,21 @@
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
-#include <kconfig.h>
+#include <KConfigGroup>
 #include <kglobal.h>
+#include <kio/job.h>
 #include <kio/netaccess.h>
 #include <kapplication.h>
 #include <klocale.h>
 #include <kuser.h>
 
-#include <qdom.h>
-#include <qgroupbox.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qwhatsthis.h>
-#include <qfile.h>
-#include <qhbox.h>
-#include <qlabel.h>
+#include <QDomDocument>
+#include <QGroupBox>
+#include <QCheckBox>
+#include <QFile>
+#include <QLabel>
+#include <QTextStream>
+#include <QVBoxLayout>
 
 extern "C" {
 #include <libxml/HTMLparser.h>
@@ -63,7 +62,7 @@ HTMLExporter::HTMLExporter() : Tellico::Export::Exporter(),
     m_xsltFile(QString::fromLatin1("tellico2html.xsl")) {
 }
 
-HTMLExporter::HTMLExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
+HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(0),
     m_printHeaders(true),
     m_printGrouped(false),
@@ -101,7 +100,7 @@ void HTMLExporter::reset() {
 
 bool HTMLExporter::exec() {
   if(url().isEmpty() || !url().isValid()) {
-    kdWarning() << "HTMLExporter::exec() - trying to export to invalid URL" << endl;
+    kWarning() << "HTMLExporter::exec() - trying to export to invalid URL";
     return false;
   }
 
@@ -126,7 +125,7 @@ bool HTMLExporter::exec() {
   // ok if not ExportProgress, no worries
   ProgressItem::Done done(this);
 
-  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(text().utf8().data()), NULL);
+  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(text().toUtf8().data()), NULL);
   xmlNodePtr root = xmlDocGetRootElement(htmlDoc);
   if(root == 0) {
     myDebug() << "HTMLExporter::exec() - no root" << endl;
@@ -159,13 +158,13 @@ bool HTMLExporter::exec() {
 }
 
 bool HTMLExporter::loadXSLTFile() {
-  QString xsltfile = locate("appdata", m_xsltFile);
+  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
   if(xsltfile.isNull()) {
     myDebug() << "HTMLExporter::loadXSLTFile() - no xslt file for " << m_xsltFile << endl;
     return false;
   }
 
-  KURL u;
+  KUrl u;
   u.setPath(xsltfile);
   // do NOT do namespace processing, it messes up the XSL declaration since
   // QDom thinks there are no elements in the Tellico namespace and as a result
@@ -193,9 +192,9 @@ bool HTMLExporter::loadXSLTFile() {
     m_handler = 0;
     return false;
   }
-  m_handler->addStringParam("date", QDate::currentDate().toString(Qt::ISODate).latin1());
-  m_handler->addStringParam("time", QTime::currentTime().toString(Qt::ISODate).latin1());
-  m_handler->addStringParam("user", KUser(KUser::UseRealUserID).loginName().latin1());
+  m_handler->addStringParam("date", QDate::currentDate().toString(Qt::ISODate).toLatin1());
+  m_handler->addStringParam("time", QTime::currentTime().toString(Qt::ISODate).toLatin1());
+  m_handler->addStringParam("user", KUser(KUser::UseRealUserID).loginName().toLatin1());
 
   if(m_exportEntryFiles) {
     // export entries to same place as all the other date files
@@ -206,7 +205,7 @@ bool HTMLExporter::loadXSLTFile() {
 
   if(!m_collectionURL.isEmpty()) {
     QString s = QString::fromLatin1("../") + m_collectionURL.fileName();
-    m_handler->addStringParam("collection-file", s.utf8());
+    m_handler->addStringParam("collection-file", s.toUtf8());
   }
 
   // look for a file that gets installed to know the installation directory
@@ -228,7 +227,7 @@ bool HTMLExporter::loadXSLTFile() {
 
 QString HTMLExporter::text() {
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
-    kdWarning() << "HTMLExporter::text() - error loading xslt file: " << m_xsltFile << endl;
+    kWarning() << "HTMLExporter::text() - error loading xslt file: " << m_xsltFile;
     return QString::null;
   }
 
@@ -255,7 +254,7 @@ QString HTMLExporter::text() {
   QDomDocument output = exporter.exportXML();
 #if 0
   QFile f(QString::fromLatin1("/tmp/test.xml"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t << output.toString();
   }
@@ -265,7 +264,7 @@ QString HTMLExporter::text() {
   QString text = m_handler->applyStylesheet(output.toString());
 #if 0
   QFile f2(QString::fromLatin1("/tmp/test.html"));
-  if(f2.open(IO_WriteOnly)) {
+  if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
     t << text;
 //    t << "\n\n-------------------------------------------------------\n\n";
@@ -278,12 +277,12 @@ QString HTMLExporter::text() {
   return text;
 }
 
-void HTMLExporter::setFormattingOptions(Data::CollPtr coll) {
+void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   QString file = Kernel::self()->URL().fileName();
   if(file != i18n("Untitled")) {
     m_handler->addStringParam("filename", QFile::encodeName(file));
   }
-  m_handler->addStringParam("cdate", KGlobal::locale()->formatDate(QDate::currentDate()).utf8());
+  m_handler->addStringParam("cdate", KGlobal::locale()->formatDate(QDate::currentDate()).toUtf8());
   m_handler->addParam("show-headers", m_printHeaders ? "true()" : "false()");
   m_handler->addParam("group-entries", m_printGrouped ? "true()" : "false()");
 
@@ -296,16 +295,16 @@ void HTMLExporter::setFormattingOptions(Data::CollPtr coll) {
   }
 
   // the third sort column may be same as first
-  if(!m_sort3.isEmpty() && sortTitles.findIndex(m_sort3) == -1) {
+  if(!m_sort3.isEmpty() && sortTitles.indexOf(m_sort3) == -1) {
     sortTitles << m_sort3;
   }
 
   if(sortTitles.count() > 0) {
-    m_handler->addStringParam("sort-name1", coll->fieldNameByTitle(sortTitles[0]).utf8());
+    m_handler->addStringParam("sort-name1", coll->fieldNameByTitle(sortTitles[0]).toUtf8());
     if(sortTitles.count() > 1) {
-      m_handler->addStringParam("sort-name2", coll->fieldNameByTitle(sortTitles[1]).utf8());
+      m_handler->addStringParam("sort-name2", coll->fieldNameByTitle(sortTitles[1]).toUtf8());
       if(sortTitles.count() > 2) {
-        m_handler->addStringParam("sort-name3", coll->fieldNameByTitle(sortTitles[2]).utf8());
+        m_handler->addStringParam("sort-name3", coll->fieldNameByTitle(sortTitles[2]).toUtf8());
       }
     }
   }
@@ -321,10 +320,10 @@ void HTMLExporter::setFormattingOptions(Data::CollPtr coll) {
     } else {
       s = coll->fieldTitleByName(m_groupBy[0]);
     }
-    sortString = i18n("(grouped by %1)").arg(s);
+    sortString = i18n("(grouped by %1)", s);
 
     QString groupFields;
-    for(QStringList::ConstIterator it = m_groupBy.begin(); it != m_groupBy.end(); ++it) {
+    for(QStringList::ConstIterator it = m_groupBy.constBegin(); it != m_groupBy.constEnd(); ++it) {
       Data::FieldPtr f = coll->fieldByName(*it);
       if(!f) {
         continue;
@@ -350,44 +349,44 @@ void HTMLExporter::setFormattingOptions(Data::CollPtr coll) {
       }
     }
 //    myDebug() << groupFields << endl;
-    m_handler->addStringParam("group-fields", groupFields.utf8());
-    m_handler->addStringParam("sort-title", sortString.utf8());
+    m_handler->addStringParam("group-fields", groupFields.toUtf8());
+    m_handler->addStringParam("sort-title", sortString.toUtf8());
   }
 
   QString pageTitle = coll->title();
   pageTitle += QChar(' ') + sortString;
-  m_handler->addStringParam("page-title", pageTitle.utf8());
+  m_handler->addStringParam("page-title", pageTitle.toUtf8());
 
   QStringList showFields;
-  for(QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
-    showFields << coll->fieldNameByTitle(*it);
+  foreach(const QString& column, m_columns) {
+    showFields << coll->fieldNameByTitle(column);
   }
-  m_handler->addStringParam("column-names", showFields.join(QChar(' ')).utf8());
+  m_handler->addStringParam("column-names", showFields.join(QChar(' ')).toUtf8());
 
   if(m_imageWidth > 0 && m_imageHeight > 0) {
-    m_handler->addParam("image-width", QCString().setNum(m_imageWidth));
-    m_handler->addParam("image-height", QCString().setNum(m_imageHeight));
+    m_handler->addParam("image-width", QByteArray().setNum(m_imageWidth));
+    m_handler->addParam("image-height", QByteArray().setNum(m_imageHeight));
   }
 
   // add system colors to stylesheet
   const int type = coll->type();
-  m_handler->addStringParam("font",     Config::templateFont(type).family().latin1());
-  m_handler->addStringParam("fontsize", QCString().setNum(Config::templateFont(type).pointSize()));
-  m_handler->addStringParam("bgcolor",  Config::templateBaseColor(type).name().latin1());
-  m_handler->addStringParam("fgcolor",  Config::templateTextColor(type).name().latin1());
-  m_handler->addStringParam("color1",   Config::templateHighlightedTextColor(type).name().latin1());
-  m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().latin1());
+  m_handler->addStringParam("font",     Config::templateFont(type).family().toLatin1());
+  m_handler->addStringParam("fontsize", QByteArray().setNum(Config::templateFont(type).pointSize()));
+  m_handler->addStringParam("bgcolor",  Config::templateBaseColor(type).name().toLatin1());
+  m_handler->addStringParam("fgcolor",  Config::templateTextColor(type).name().toLatin1());
+  m_handler->addStringParam("color1",   Config::templateHighlightedTextColor(type).name().toLatin1());
+  m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().toLatin1());
 
   // add locale code to stylesheet (for sorting)
-  m_handler->addStringParam("lang",  KGlobal::locale()->languagesTwoAlpha().first().utf8());
+  m_handler->addStringParam("lang",  KGlobal::locale()->allLanguagesList().first().toUtf8());
 }
 
-void HTMLExporter::writeImages(Data::CollPtr coll_) {
+void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   // keep track of which image fields to write, this is for field names
   StringSet imageFields;
-  for(QStringList::ConstIterator it = m_columns.begin(); it != m_columns.end(); ++it) {
-    if(coll_->fieldByTitle(*it)->type() == Data::Field::Image) {
-      imageFields.add(*it);
+  foreach(const QString& column, m_columns) {
+    if(coll_->fieldByTitle(column)->type() == Data::Field::Image) {
+      imageFields.add(column);
     }
   }
 
@@ -397,15 +396,15 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
   // and so we need to write all of them too.
   if(m_exportEntryFiles || url().isEmpty()) {
     // add all image fields to string list
-    Data::FieldVec fields = coll_->imageFields();
-    for(Data::FieldVec::Iterator fieldIt = fields.begin(); fieldIt != fields.end(); ++fieldIt) {
-      imageFields.add(fieldIt->name());
+    Data::FieldList fields = coll_->imageFields();
+    foreach(Data::FieldPtr field, fields) {
+      imageFields.add(field->name());
     }
   }
 
   // all of them are going to get written to tmp file
   bool useTemp = url().isEmpty();
-  KURL imgDir;
+  KUrl imgDir;
   QString imgDirRelative;
   // really some convoluted logic here
   // basically, four cases. 1) we're writing to a tmp file, for printing probably
@@ -424,7 +423,7 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
     createDir();
   } else {
     imgDir = fileDir();
-    imgDirRelative = KURL::relativeURL(url(), imgDir);
+    imgDirRelative = KUrl::relativeUrl(url(), imgDir);
     createDir();
   }
   m_handler->addStringParam("imgdir", QFile::encodeName(imgDirRelative));
@@ -432,10 +431,10 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
   int count = 0;
   const int processCount = 100; // process after every 100 events
 
-  QStringList fieldsList = imageFields.toList();
+  const QStringList fieldsList = imageFields.toList();
   StringSet imageSet; // track which images are written
   for(QStringList::ConstIterator fieldName = fieldsList.begin(); fieldName != fieldsList.end(); ++fieldName) {
-    for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
+    foreach(Data::EntryPtr entryIt, entries()) {
       QString id = entryIt->field(*fieldName);
       // if no id or is already writen, continue
       if(id.isEmpty() || imageSet.has(id)) {
@@ -446,7 +445,7 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
       bool success = useTemp ? ImageFactory::writeCachedImage(id, ImageFactory::TempDir)
                              : ImageFactory::writeImage(id, imgDir, true);
       if(!success) {
-        kdWarning() << "HTMLExporter::writeImages() - unable to write image file: "
+        kWarning() << "HTMLExporter::writeImages() - unable to write image file: "
                     << imgDir.path() << id << endl;
       }
 
@@ -458,48 +457,53 @@ void HTMLExporter::writeImages(Data::CollPtr coll_) {
   }
 }
 
-QWidget* HTMLExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
-  if(m_widget && m_widget->parent() == parent_) {
+QWidget* HTMLExporter::widget(QWidget* parent_) {
+  if(m_widget) {
     return m_widget;
   }
 
-  m_widget = new QWidget(parent_, name_);
+  m_widget = new QWidget(parent_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("HTML Options"), m_widget);
-  l->addWidget(box);
+  QGroupBox* gbox = new QGroupBox(i18n("HTML Options"), m_widget);
+  QVBoxLayout* vlay = new QVBoxLayout(gbox);
 
-  m_checkPrintHeaders = new QCheckBox(i18n("Print field headers"), box);
-  QWhatsThis::add(m_checkPrintHeaders, i18n("If checked, the field names will be "
-                                            "printed as table headers."));
+  m_checkPrintHeaders = new QCheckBox(i18n("Print field headers"), gbox);
+  m_checkPrintHeaders->setWhatsThis(i18n("If checked, the field names will be "
+                                         "printed as table headers."));
   m_checkPrintHeaders->setChecked(m_printHeaders);
 
-  m_checkPrintGrouped = new QCheckBox(i18n("Group the entries"), box);
-  QWhatsThis::add(m_checkPrintGrouped, i18n("If checked, the entries will be grouped by "
-                                            "the selected field."));
+  m_checkPrintGrouped = new QCheckBox(i18n("Group the entries"), gbox);
+  m_checkPrintGrouped->setWhatsThis(i18n("If checked, the entries will be grouped by "
+                                         "the selected field."));
   m_checkPrintGrouped->setChecked(m_printGrouped);
 
-  m_checkExportEntryFiles = new QCheckBox(i18n("Export individual entry files"), box);
-  QWhatsThis::add(m_checkExportEntryFiles, i18n("If checked, individual files will be created for each entry."));
+  m_checkExportEntryFiles = new QCheckBox(i18n("Export individual entry files"), gbox);
+  m_checkExportEntryFiles->setWhatsThis(i18n("If checked, individual files will be created for each entry."));
   m_checkExportEntryFiles->setChecked(m_exportEntryFiles);
 
+  vlay->addWidget(m_checkPrintHeaders);
+  vlay->addWidget(m_checkPrintGrouped);
+  vlay->addWidget(m_checkExportEntryFiles);
+
+  l->addWidget(gbox);
   l->addStretch(1);
   return m_widget;
 }
 
-void HTMLExporter::readOptions(KConfig* config_) {
+void HTMLExporter::readOptions(KSharedConfigPtr config_) {
   KConfigGroup exportConfig(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_printHeaders = exportConfig.readBoolEntry("Print Field Headers", m_printHeaders);
-  m_printGrouped = exportConfig.readBoolEntry("Print Grouped", m_printGrouped);
-  m_exportEntryFiles = exportConfig.readBoolEntry("Export Entry Files", m_exportEntryFiles);
+  m_printHeaders = exportConfig.readEntry("Print Field Headers", m_printHeaders);
+  m_printGrouped = exportConfig.readEntry("Print Grouped", m_printGrouped);
+  m_exportEntryFiles = exportConfig.readEntry("Export Entry Files", m_exportEntryFiles);
 
   // read current entry export template
   m_entryXSLTFile = Config::templateName(collection()->type());
-  m_entryXSLTFile = locate("appdata", QString::fromLatin1("entry-templates/")
-                                      + m_entryXSLTFile + QString::fromLatin1(".xsl"));
+  m_entryXSLTFile = KStandardDirs::locate("appdata", QString::fromLatin1("entry-templates/")
+                                          + m_entryXSLTFile + QString::fromLatin1(".xsl"));
 }
 
-void HTMLExporter::saveOptions(KConfig* config_) {
+void HTMLExporter::saveOptions(KSharedConfigPtr config_) {
   KConfigGroup cfg(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_printHeaders = m_checkPrintHeaders->isChecked();
   cfg.writeEntry("Print Field Headers", m_printHeaders);
@@ -519,11 +523,11 @@ void HTMLExporter::setXSLTFile(const QString& filename_) {
   reset();
 }
 
-KURL HTMLExporter::fileDir() const {
+KUrl HTMLExporter::fileDir() const {
   if(url().isEmpty()) {
-    return KURL();
+    return KUrl();
   }
-  KURL fileDir = url();
+  KUrl fileDir = url();
   // cd to directory of target URL
   fileDir.cd(QString::fromLatin1(".."));
   fileDir.addPath(fileDirName());
@@ -539,7 +543,7 @@ QString HTMLExporter::fileDirName() const {
 
 // how ugly is this?
 const xmlChar* HTMLExporter::handleLink(const xmlChar* link_) {
-  return reinterpret_cast<xmlChar*>(qstrdup(handleLink(QString::fromUtf8(reinterpret_cast<const char*>(link_))).utf8()));
+  return reinterpret_cast<xmlChar*>(qstrdup(handleLink(QString::fromUtf8(reinterpret_cast<const char*>(link_))).toUtf8()));
 }
 
 QString HTMLExporter::handleLink(const QString& link_) {
@@ -547,26 +551,26 @@ QString HTMLExporter::handleLink(const QString& link_) {
     return m_links[link_];
   }
   // assume that if the link_ is not relative, then we don't need to copy it
-  if(!KURL::isRelativeURL(link_)) {
+  if(!KUrl::isRelativeUrl(link_)) {
     return link_;
   }
 
   if(m_xsltFilePath.isEmpty()) {
-    m_xsltFilePath = locate("appdata", m_xsltFile);
+    m_xsltFilePath = KStandardDirs::locate("appdata", m_xsltFile);
     if(m_xsltFilePath.isNull()) {
-      kdWarning() << "HTMLExporter::handleLink() - no xslt file for " << m_xsltFile << endl;
+      kWarning() << "HTMLExporter::handleLink() - no xslt file for " << m_xsltFile;
     }
   }
 
-  KURL u;
+  KUrl u;
   u.setPath(m_xsltFilePath);
-  u = KURL(u, link_);
+  u = KUrl(u, link_);
 
   // one of the "quirks" of the html export is that img src urls are set to point to
   // the tmpDir() when exporting entry files from a collection, but those images
   // don't actually exist, and they get copied in writeImages() instead.
   // so we only need to keep track of the url if it exists
-  const bool exists = KIO::NetAccess::exists(u, false, 0);
+  const bool exists = KIO::NetAccess::exists(u, KIO::NetAccess::DestinationSide, 0);
   if(exists) {
     m_files.append(u);
   }
@@ -589,7 +593,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
 }
 
 const xmlChar* HTMLExporter::analyzeInternalCSS(const xmlChar* str_) {
-  return reinterpret_cast<xmlChar*>(qstrdup(analyzeInternalCSS(QString::fromUtf8(reinterpret_cast<const char*>(str_))).utf8()));
+  return reinterpret_cast<xmlChar*>(qstrdup(analyzeInternalCSS(QString::fromUtf8(reinterpret_cast<const char*>(str_))).toUtf8()));
 }
 
 QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
@@ -597,14 +601,14 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
   int start = 0;
   int end = 0;
   const QString url = QString::fromLatin1("url(");
-  for(int pos = str.find(url); pos >= 0; pos = str.find(url, pos+1)) {
+  for(int pos = str.indexOf(url); pos >= 0; pos = str.indexOf(url, pos+1)) {
     pos += 4; // url(
     if(str[pos] ==  '"' || str[pos] == '\'') {
       ++pos;
     }
 
     start = pos;
-    pos = str.find(')', start);
+    pos = str.indexOf(')', start);
     end = pos;
     if(str[pos-1] == '"' || str[pos-1] == '\'') {
       --end;
@@ -619,12 +623,12 @@ void HTMLExporter::createDir() {
   if(!m_checkCreateDir) {
     return;
   }
-  KURL dir = fileDir();
+  KUrl dir = fileDir();
   if(dir.isEmpty()) {
     myDebug() << "HTMLExporter::createDir() - called on empty URL!" << endl;
     return;
   }
-  if(KIO::NetAccess::exists(dir, false, 0)) {
+  if(KIO::NetAccess::exists(dir, KIO::NetAccess::DestinationSide, 0)) {
     m_checkCreateDir = false;
   } else {
     m_checkCreateDir = !KIO::NetAccess::mkdir(dir, m_widget);
@@ -635,14 +639,14 @@ bool HTMLExporter::copyFiles() {
   if(m_files.isEmpty()) {
     return true;
   }
-  const uint start = 20;
-  const uint maxProgress = m_exportEntryFiles ? 40 : 80;
-  const uint stepSize = QMAX(1, m_files.count()/maxProgress);
-  uint j = 0;
+  const int start = 20;
+  const int maxProgress = m_exportEntryFiles ? 40 : 80;
+  const int stepSize = qMax(1, m_files.count()/maxProgress);
+  int j = 0;
 
   createDir();
-  KURL target;
-  for(KURL::List::ConstIterator it = m_files.begin(); it != m_files.end() && !m_cancelled; ++it, ++j) {
+  KUrl target;
+  for(KUrl::List::ConstIterator it = m_files.constBegin(); it != m_files.constEnd() && !m_cancelled; ++it, ++j) {
     if(m_copiedFiles.has((*it).url())) {
       continue;
     }
@@ -651,16 +655,17 @@ bool HTMLExporter::copyFiles() {
       target = fileDir();
     }
     target.setFileName((*it).fileName());
-    bool success = KIO::NetAccess::file_copy(*it, target, -1, true /* overwrite */, false /* resume */, m_widget);
+    KIO::FileCopyJob* job = KIO::file_copy(*it, target, -1, KIO::Overwrite);
+    bool success = KIO::NetAccess::synchronousRun(job, m_widget);
     if(success) {
       m_copiedFiles.add((*it).url());
     } else {
-      kdWarning() << "HTMLExporter::copyFiles() - can't copy " << target << endl;
-      kdWarning() << KIO::NetAccess::lastErrorString() << endl;
+      kWarning() << "HTMLExporter::copyFiles() - can't copy " << target;
+      kWarning() << KIO::NetAccess::lastErrorString();
     }
     if(j%stepSize == 0) {
       if(options() & ExportProgress) {
-        ProgressManager::self()->setProgress(this, QMIN(start+j/stepSize, 99));
+        ProgressManager::self()->setProgress(this, qMin(start+j/stepSize, 99));
       }
       kapp->processEvents();
     }
@@ -670,13 +675,13 @@ bool HTMLExporter::copyFiles() {
 
 bool HTMLExporter::writeEntryFiles() {
   if(m_entryXSLTFile.isEmpty()) {
-    kdWarning() << "HTMLExporter::writeEntryFiles() - no entry XSLT file" << endl;
+    kWarning() << "HTMLExporter::writeEntryFiles() - no entry XSLT file";
     return false;
   }
 
-  const uint start = 60;
-  const uint stepSize = QMAX(1, entries().count()/40);
-  uint j = 0;
+  const int start = 60;
+  const int stepSize = qMax(1, entries().count()/40);
+  int j = 0;
 
   // now worry about actually exporting entry files
   // I can't reliable encode a string as a URI, so I'm punting, and I'll just replace everything but
@@ -685,9 +690,9 @@ bool HTMLExporter::writeEntryFiles() {
   const QRegExp badChars(QString::fromLatin1("[^-a-zA-Z0-9]"));
   bool formatted = options() & Export::ExportFormatted;
 
-  KURL outputFile = fileDir();
+  KUrl outputFile = fileDir();
 
-  GUI::CursorSaver cs(Qt::waitCursor);
+  GUI::CursorSaver cs(Qt::WaitCursor);
 
   HTMLExporter exporter(collection());
   long opt = options() | Export::ExportForce;
@@ -700,8 +705,8 @@ bool HTMLExporter::writeEntryFiles() {
   const QString title = QString::fromLatin1("title");
   const QString html = QString::fromLatin1(".html");
   bool multipleTitles = collection()->fieldByName(title)->flags() & Data::Field::AllowMultiple;
-  Data::EntryVec entries = this->entries(); // not const since the pointer has to be copied
-  for(Data::EntryVecIt entryIt = entries.begin(); entryIt != entries.end() && !m_cancelled; ++entryIt, ++j) {
+  Data::EntryList entries = this->entries(); // not const since the pointer has to be copied
+  foreach(Data::EntryPtr entryIt, entries) {
     QString file = entryIt->field(title, formatted);
 
     // but only use the first title if it has multiple
@@ -712,7 +717,7 @@ bool HTMLExporter::writeEntryFiles() {
     file += QChar('-') + QString::number(entryIt->id()) + html;
     outputFile.setFileName(file);
 
-    exporter.setEntries(Data::EntryVec(entryIt));
+    exporter.setEntries(Data::EntryList() << entryIt);
     exporter.setURL(outputFile);
     exporter.exec();
 
@@ -729,7 +734,7 @@ bool HTMLExporter::writeEntryFiles() {
 
     if(j%stepSize == 0) {
       if(options() & ExportProgress) {
-        ProgressManager::self()->setProgress(this, QMIN(start+j/stepSize, 99));
+        ProgressManager::self()->setProgress(this, qMin(start+j/stepSize, 99));
       }
       kapp->processEvents();
     }
@@ -741,15 +746,15 @@ bool HTMLExporter::writeEntryFiles() {
   for(uint i = 1; i <= 10; ++i) {
     dataImages << QString::fromLatin1("stars%1.png").arg(i);
   }
-  KURL dataDir;
+  KUrl dataDir;
   dataDir.setPath(KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png")) + "pics/");
-  KURL target = fileDir();
+  KUrl target = fileDir();
   target.addPath(QString::fromLatin1("pics/"));
   KIO::NetAccess::mkdir(target, m_widget);
-  for(QStringList::ConstIterator it = dataImages.begin(); it != dataImages.end(); ++it) {
-    dataDir.setFileName(*it);
-    target.setFileName(*it);
-    KIO::NetAccess::copy(dataDir, target, m_widget);
+  foreach(const QString& dataImage, dataImages) {
+    dataDir.setFileName(dataImage);
+    target.setFileName(dataImage);
+    KIO::NetAccess::file_copy(dataDir, target, m_widget);
   }
 
   return true;
@@ -768,12 +773,12 @@ void HTMLExporter::parseDOM(xmlNode* node_) {
   bool parseChildren = true;
 
   if(node_->type == XML_ELEMENT_NODE) {
-    const QCString nodeName = QCString(reinterpret_cast<const char*>(node_->name)).upper();
+    const QByteArray nodeName = QByteArray(reinterpret_cast<const char*>(node_->name)).toUpper();
     xmlElement* elem = reinterpret_cast<xmlElement*>(node_);
     // to speed up things, check now for nodename
     if(nodeName == "IMG" || nodeName == "SCRIPT" || nodeName == "LINK") {
       for(xmlAttribute* attr = elem->attributes; attr; attr = reinterpret_cast<xmlAttribute*>(attr->next)) {
-        QCString attrName = QCString(reinterpret_cast<const char*>(attr->name)).upper();
+        QByteArray attrName = QByteArray(reinterpret_cast<const char*>(attr->name)).toUpper();
 
         if( (attrName == "SRC" && (nodeName == "IMG" || nodeName == "SCRIPT")) ||
             (attrName == "HREF" && nodeName == "LINK")) {

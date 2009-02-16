@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE bibtex:file SYSTEM "bibtexml.dtd" >
+<bibtex:file xmlns:bibtex="http://bibtexml.sf.net/">
+
+<bibtex:entry id="esbensen">
+<bibtex:book>
+<bibtex:author>Kim Esbensen; Tonje Midtgaard; Suzanne Schönkopf</bibtex:author>
+<bibtex:title>Multivariate Analysis in Practice</bibtex:title>
+<bibtex:publisher>Camo AS</bibtex:publisher>
+<bibtex:year>1994</bibtex:year>
+<bibtex:address>Trondheim</bibtex:address>
+<bibtex:isbn>82-993330-0-8</bibtex:isbn>
+</bibtex:book>
+</bibtex:entry>
+
+<bibtex:entry id="martens.nes">
+<bibtex:book>
+<bibtex:author>Harald Martens; Tormod Næs</bibtex:author>
+<bibtex:title>Multivariate Calibration</bibtex:title>
+<bibtex:publisher>John Wiley &amp; Sons Ltd.</bibtex:publisher>
+<bibtex:year>1989</bibtex:year>
+<bibtex:address>Chichester</bibtex:address>
+<bibtex:isbn>0-471-93047-4</bibtex:isbn>
+</bibtex:book>
+</bibtex:entry>
+
+<bibtex:entry id="ljung-95">
+<bibtex:techreport>
+<bibtex:author>Lennart Ljung</bibtex:author>
+<bibtex:title>System Identification</bibtex:title>
+<bibtex:institution>Linköping University</bibtex:institution>
+<bibtex:year>1995</bibtex:year>
+<bibtex:number>LiTH-ISY-R1763</bibtex:number>
+<bibtex:url>ftp://ftp.control.isy.liu.se/pub/Reports/1995/1763.ps.Z</bibtex:url>
+</bibtex:techreport>
+</bibtex:entry>
+
+<bibtex:entry id="david-dsr">
+<bibtex:techreport>
+<bibtex:author>David Di Ruscio</bibtex:author>
+<bibtex:title>Subspace System Identification, Theory and Applications</bibtex:title>
+<bibtex:institution>Telemark Institute of Technology</bibtex:institution>
+<bibtex:year>1997</bibtex:year>
+</bibtex:techreport>
+</bibtex:entry>
+
+<bibtex:entry id="box.hunter.hunter">
+<bibtex:book>
+<bibtex:author>George E.P. Box; William Gordon Hunter; J. Stuart Hunter</bibtex:author>
+<bibtex:title>Statistics for Experimenters</bibtex:title>
+<bibtex:publisher>John Wiley &amp; Sons Ltd.</bibtex:publisher>
+<bibtex:year>1978</bibtex:year>
+<bibtex:address>New York</bibtex:address>
+<bibtex:isbn>0-471-09315-7</bibtex:isbn>
+</bibtex:book>
+</bibtex:entry>
+
+<bibtex:entry id="kroonenberg">
+<bibtex:book>
+<bibtex:author>Pieter M. Kroonenberg</bibtex:author>
+<bibtex:title>Three-mode principal component analysis</bibtex:title>
+<bibtex:publisher>DSWO Press</bibtex:publisher>
+<bibtex:year>1983</bibtex:year>
+<bibtex:address>Leiden</bibtex:address>
+<bibtex:isbn>90-6695-002-1</bibtex:isbn>
+</bibtex:book>
+</bibtex:entry>
+
+<bibtex:entry id="bro-parafac">
+<bibtex:manual>
+<bibtex:author>Rasmus Bro; Claus Andersson</bibtex:author>
+<bibtex:title>Matlab routines for PARAFAC/Tucker/N-PLS</bibtex:title>
+<bibtex:organization>Royal Vet. and Agricultural University (KVL)</bibtex:organization>
+<bibtex:address>Copenhagen, Denmark</bibtex:address>
+<bibtex:year>1996</bibtex:year>
+<bibtex:url>http://www.models.kvl.dk/source/</bibtex:url>
+</bibtex:manual>
+</bibtex:entry>
+
+<bibtex:entry id="stone.brooks">
+<bibtex:article>
+<bibtex:author>M. Stone; R.J. Brooks</bibtex:author>
+<bibtex:title>Continuum regression:
+cross-validated sequentally constructed prediction embracing
+ordinary least squares, partial least squares and principal
+component regression (with discussion)</bibtex:title>
+<bibtex:journal>J. R. Statistics Soc. B. Met.</bibtex:journal>
+<bibtex:year>1990</bibtex:year>
+<bibtex:volume>52</bibtex:volume>
+<bibtex:pages>237-269</bibtex:pages>
+</bibtex:article>
+</bibtex:entry>
+
+</bibtex:file>

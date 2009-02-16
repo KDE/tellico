@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -31,9 +31,9 @@ public:
   virtual void modifyBorrower(Data::BorrowerPtr) {}
   // no removeBorrower()
 
-  virtual void    addEntries(Data::EntryVec) {}
-  virtual void modifyEntries(Data::EntryVec) {}
-  virtual void removeEntries(Data::EntryVec) {}
+  virtual void    addEntries(Data::EntryList) {}
+  virtual void modifyEntries(Data::EntryList) {}
+  virtual void removeEntries(Data::EntryList) {}
 
   virtual void    addField(Data::CollPtr, Data::FieldPtr) {}
   // coll, oldfield, newfield

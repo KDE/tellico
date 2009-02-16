@@ -28,13 +28,15 @@
 
 #include "barcode_v4l.h"
 #include "../tellico_debug.h"
+//Added by qt3to4:
+#include <Q3PtrList>
 
 using barcodeRecognition::ng_vid_driver;
 using barcodeRecognition::ng_vid_driver_v4l;
 using barcodeRecognition::barcode_v4l;
 using barcodeRecognition::video_converter;
 
-QPtrList<barcodeRecognition::video_converter> barcodeRecognition::ng_vid_driver::m_converter;
+Q3PtrList<barcodeRecognition::video_converter> barcodeRecognition::ng_vid_driver::m_converter;
 const char *barcodeRecognition::device_cap[] = { "capture", "tuner", "teletext", "overlay", "chromakey", "clipping", "frameram", "scales", "monochrome", 0 };
 const unsigned int barcodeRecognition::ng_vfmt_to_depth[] = {
     0,               /* unused   */
@@ -172,7 +174,8 @@ QImage barcode_v4l::grab_one2()
 
   QByteArray *buf;
   if (m_conv) {
-    buf = new QByteArray( 3*m_fmt.width*m_fmt.height );
+    buf = new QByteArray();
+    buf->resize( 3*m_fmt.width*m_fmt.height );
     m_conv->frame( buf, cap, m_fmt_drv );
   } else {
     buf = new QByteArray(*cap);
@@ -180,7 +183,8 @@ QImage barcode_v4l::grab_one2()
   delete cap;
 
   int depth = 32;
-  QByteArray *buf2 = new QByteArray( depth/8 *m_fmt.width*m_fmt.height );
+  QByteArray *buf2 = new QByteArray();
+  buf2->resize( depth/8 *m_fmt.width*m_fmt.height );
   for (uint i=0; i<m_fmt.width*m_fmt.height; i++) {
     (*buf2)[i*4+0] = buf->at(i*3+2);
     (*buf2)[i*4+1] = buf->at(i*3+1);
@@ -188,7 +192,8 @@ QImage barcode_v4l::grab_one2()
     (*buf2)[i*4+3] = 0;
   }
   delete buf;
-  QImage *temp = new QImage( (uchar*)buf2->data(), m_fmt.width, m_fmt.height, depth, 0, 0, QImage::LittleEndian );
+//  QImage *temp = new QImage( (uchar*)buf2->data(), m_fmt.width, m_fmt.height, depth, 0, 0, QImage::LittleEndian );
+  QImage *temp = new QImage( (uchar*)buf2->data(), m_fmt.width, m_fmt.height, QImage::Format_RGB32 );
   QImage temp2 = temp->copy();
   delete temp;
   delete buf2;
@@ -339,8 +344,8 @@ ng_vid_driver_v4l::ng_vid_driver_v4l()
 bool ng_vid_driver_v4l::open2( QString device )
 {
   /* open device */
-  if ((m_fd = ::open( device.latin1(), O_RDWR )) == -1) {
-    qDebug( "v4l: open %s: %s\n", device.latin1(), strerror(errno) );
+  if ((m_fd = ::open( device.toLatin1(), O_RDWR )) == -1) {
+    qDebug() << "v4l: open" << device.toLatin1() << ":" << strerror(errno);
     return false;
   }
   if (ioctl( m_fd, VIDIOCGCAP, &m_capability ) == -1) {
@@ -349,7 +354,7 @@ bool ng_vid_driver_v4l::open2( QString device )
   }
 
 #ifdef Barcode_DEBUG
-  qDebug( "v4l: open: %s (%s)\n", device.latin1(), m_capability.name );
+  qDebug( "v4l: open: %s (%s)\n", device.toLatin1(), m_capability.name );
 #endif
 
   fcntl( m_fd, F_SETFD, FD_CLOEXEC ); // close on exit
@@ -461,7 +466,8 @@ QByteArray* ng_vid_driver_v4l::read_getframe2()
     int size;
 
     size = m_fmt.bytesperline * m_fmt.height;
-    buf = new QByteArray( size );
+    buf = new QByteArray();
+    buf->resize( size );
     if (size != read( m_fd, buf->data(), size )) {
       delete( buf );
       return 0;

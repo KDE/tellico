@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,38 +14,39 @@
 #ifndef TELLICO_FETCH_Z3950CONNECTION_H
 #define TELLICO_FETCH_Z3950CONNECTION_H
 
-#include <qthread.h>
-#include <qevent.h>
-#include <qdeepcopy.h>
-
 #include <ksharedptr.h>
+
+#include <QThread>
+#include <QEvent>
+
+#include <QEvent>
 
 namespace Tellico {
   namespace Fetch {
     class Z3950Fetcher;
 
-class Z3950ResultFound : public QCustomEvent {
+class Z3950ResultFound : public QEvent {
 public:
   Z3950ResultFound(const QString& s);
   ~Z3950ResultFound();
   const QString& result() const { return m_result; }
 
-  static int uid() { return User + 11111; }
+  static QEvent::Type uid() { return static_cast<QEvent::Type>(QEvent::User + 11111); }
 
 private:
   QString m_result;
 };
 
-class Z3950ConnectionDone : public QCustomEvent {
+class Z3950ConnectionDone : public QEvent {
 public:
-  Z3950ConnectionDone(bool more) : QCustomEvent(uid()), m_type(-1), m_hasMore(more) {}
-  Z3950ConnectionDone(bool more, const QString& s, int t) : QCustomEvent(uid()), m_msg(QDeepCopy<QString>(s)), m_type(t), m_hasMore(more) {}
+  Z3950ConnectionDone(bool more) : QEvent(uid()), m_type(-1), m_hasMore(more) {}
+  Z3950ConnectionDone(bool more, const QString& s, int t) : QEvent(uid()), m_msg(s), m_type(t), m_hasMore(more) {}
 
   const QString& message() const { return m_msg; }
   int messageType() const { return m_type; }
   bool hasMoreResults() const { return m_hasMore; }
 
-  static int uid() { return User + 22222; }
+  static QEvent::Type uid() { return static_cast<QEvent::Type>(QEvent::User + 22222); }
 
 private:
   QString m_msg;
@@ -53,12 +54,12 @@ private:
   bool m_hasMore;
 };
 
-class Z3950SyntaxChange : public QCustomEvent {
+class Z3950SyntaxChange : public QEvent {
 public:
-  Z3950SyntaxChange(const QString& s) : QCustomEvent(uid()), m_syntax(QDeepCopy<QString>(s)) {}
+  Z3950SyntaxChange(const QString& s) : QEvent(uid()), m_syntax(s) {}
   const QString& syntax() const { return m_syntax; }
 
-  static int uid() { return User + 33333; }
+  static QEvent::Type uid() { return static_cast<QEvent::Type>(QEvent::User + 33333); }
 
 private:
   QString m_syntax;
@@ -86,14 +87,14 @@ public:
   void abort() { m_aborted = true; }
 
 private:
-  static QCString iconvRun(const QCString& text, const QString& fromCharSet, const QString& toCharSet);
-  static QString toXML(const QCString& marc, const QString& fromCharSet);
+  static QByteArray iconvRun(const QByteArray& text, const QString& fromCharSet, const QString& toCharSet);
+  static QString toXML(const QByteArray& marc, const QString& fromCharSet);
 
   bool makeConnection();
   void done();
   void done(const QString& message, int type);
-  QCString toCString(const QString& text);
-  QString toString(const QCString& text);
+  QByteArray toCString(const QString& text);
+  QString toString(const QByteArray& text);
   void checkPendingEvents();
 
   class Private;

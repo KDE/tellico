@@ -24,11 +24,12 @@
 #include "iso5426converter.h"
 #include "tellico_debug.h"
 
-#include <qstring.h>
+#include <QString>
+#include <QByteArray>
 
 using Tellico::Iso5426Converter;
 
-QString Iso5426Converter::toUtf8(const QCString& text_) {
+QString Iso5426Converter::toUtf8(const QByteArray& text_) {
   const uint len = text_.length();
   QString result;
   result.reserve(len);

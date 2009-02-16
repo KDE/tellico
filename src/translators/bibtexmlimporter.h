@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BIBTEXMLIMPORTER_H
-#define BIBTEXMLIMPORTER_H
+#ifndef TELLICO_BIBTEXMLIMPORTER_H
+#define TELLICO_BIBTEXMLIMPORTER_H
 
 #include "xmlimporter.h"
 #include "../datavectors.h"
@@ -31,7 +31,7 @@ Q_OBJECT
 public:
   /**
    */
-  BibtexmlImporter(const KURL& url) : Import::XMLImporter(url), m_coll(0), m_cancelled(false) {}
+  BibtexmlImporter(const KUrl& url) : Import::XMLImporter(url), m_cancelled(false) {}
 
   /**
    */

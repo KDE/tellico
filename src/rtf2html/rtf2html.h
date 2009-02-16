@@ -11,7 +11,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qstring.h>
+#include <QString>
 
 namespace Tellico {
 

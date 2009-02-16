@@ -35,7 +35,7 @@
 
 using Tellico::CalendarHandler;
 
-void CalendarHandler::addLoans(Data::LoanVec loans_) {
+void CalendarHandler::addLoans(Tellico::Data::LoanList loans_) {
 #ifdef USE_KCAL
   addLoans(loans_, 0);
 #else
@@ -44,7 +44,7 @@ void CalendarHandler::addLoans(Data::LoanVec loans_) {
 }
 
 #ifdef USE_KCAL
-void CalendarHandler::addLoans(Data::LoanVec loans_, KCal::CalendarResources* resources_) {
+void CalendarHandler::addLoans(Data::LoanList loans_, KCal::CalendarResources* resources_) {
   if(loans_.isEmpty()) {
     return;
   }
@@ -61,7 +61,7 @@ void CalendarHandler::addLoans(Data::LoanVec loans_, KCal::CalendarResources* re
     }
   }
 
-  for(Data::LoanVec::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
+  for(Data::LoanList::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
     // only add loans with a due date
     if(loan->dueDate().isNull()) {
       continue;
@@ -82,7 +82,7 @@ void CalendarHandler::addLoans(Data::LoanVec loans_, KCal::CalendarResources* re
 }
 #endif
 
-void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
+void CalendarHandler::modifyLoans(Tellico::Data::LoanList loans_) {
 #ifndef USE_KCAL
   Q_UNUSED(loans_);
   return;
@@ -98,11 +98,11 @@ void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
   }
   calendarResources.load();
 
-  for(Data::LoanVec::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
+  for(Data::LoanList::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
     KCal::Todo* todo = calendarResources.todo(loan->uid());
     if(!todo) {
 //      myDebug() << "couldn't find existing todo, adding a new todo" << endl;
-      Data::LoanVec newLoans;
+      Data::LoanList newLoans;
       newLoans.append(loan);
       addLoans(newLoans, &calendarResources); // add loan
       continue;
@@ -123,7 +123,7 @@ void CalendarHandler::modifyLoans(Data::LoanVec loans_) {
 #endif
 }
 
-void CalendarHandler::removeLoans(Data::LoanVec loans_) {
+void CalendarHandler::removeLoans(Tellico::Data::LoanList loans_) {
 #ifndef USE_KCAL
   Q_UNUSED(loans_);
   return;
@@ -139,7 +139,7 @@ void CalendarHandler::removeLoans(Data::LoanVec loans_) {
   }
   calendarResources.load();
 
-  for(Data::LoanVec::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
+  for(Data::LoanList::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
     KCal::Todo* todo = calendarResources.todo(loan->uid());
     if(todo) {
       // maybe this is too much, we could just set the todo as done
@@ -155,19 +155,19 @@ void CalendarHandler::removeLoans(Data::LoanVec loans_) {
 bool CalendarHandler::checkCalendar(KCal::CalendarResources* resources) {
   KCal::CalendarResourceManager* manager = resources->resourceManager();
   if(manager->isEmpty()) {
-    kdWarning() << "Tellico::CalendarHandler::checkCalendar() - adding default calendar" << endl;
+    kWarning() << "Tellico::CalendarHandler::checkCalendar() - adding default calendar";
     KConfig config(QString::fromLatin1("korganizerrc"));
     config.setGroup("General");
-    QString fileName = config.readPathEntry("Active Calendar");
+    QString fileName = config.readPathEntry("Active Calendar", QString());
 
     QString resourceName;
     KCal::ResourceCalendar* defaultResource = 0;
     if(fileName.isEmpty()) {
-      fileName = locateLocal("appdata", QString::fromLatin1("std.ics"));
+      fileName = KStandardDirs::locateLocal("appdata", QString::fromLatin1("std.ics"));
       resourceName = i18n("Default Calendar");
       defaultResource = new KCal::ResourceLocal(fileName);
     } else {
-      KURL url = KURL::fromPathOrURL(fileName);
+      KUrl url = KUrl::fromPathOrUrl(fileName);
       if(url.isLocalFile()) {
         defaultResource = new KCal::ResourceLocal(url.path());
       } else {
@@ -200,7 +200,7 @@ void CalendarHandler::populateTodo(KCal::Todo* todo_, Data::LoanPtr loan_) {
   todo_->setDtDue(loan_->dueDate());
   todo_->setHasDueDate(true);
   QString person = loan_->borrower()->name();
-  QString summary = i18n("Tellico: %1 is due to return \"%2\"").arg(person).arg(loan_->entry()->title());
+  QString summary = i18n("Tellico: %1 is due to return \"%2\"", person, loan_->entry()->title());
   todo_->setSummary(summary);
   QString note = loan_->note();
   if(note.isEmpty()) {

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,53 +14,42 @@
 #ifndef TELLICO_FILTERVIEW_H
 #define TELLICO_FILTERVIEW_H
 
-#include "gui/listview.h"
+#include "gui/treeview.h"
 #include "observer.h"
-#include "filteritem.h"
-
-#include <qdict.h>
 
 namespace Tellico {
+  class FilterModel;
+  class EntrySortModel;
 
 /**
  * @author Robby Stephenson
  */
-class FilterView : public GUI::ListView, public Observer {
+class FilterView : public GUI::TreeView, public Observer {
 Q_OBJECT
 
 public:
-  FilterView(QWidget* parent, const char* name=0);
+  FilterView(QWidget* parent);
 
-  virtual bool isSelectable(GUI::ListViewItem*) const;
+//  virtual bool isSelectable(GUI::ListViewItem*) const;
+  FilterModel* sourceModel() const;
 
   void addCollection(Data::CollPtr coll);
 
-  virtual void    addEntries(Data::EntryVec entries);
-  virtual void modifyEntry(Data::EntryPtr entry);
-  virtual void modifyEntries(Data::EntryVec entries);
-  virtual void removeEntries(Data::EntryVec entries);
-
-  virtual void addField(Data::CollPtr, Data::FieldPtr);
-  virtual void modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr);
-  virtual void removeField(Data::CollPtr, Data::FieldPtr);
+  virtual void    addEntries(Data::EntryList entries);
+  virtual void modifyEntries(Data::EntryList entries);
+  virtual void removeEntries(Data::EntryList entries);
 
   virtual void    addFilter(FilterPtr filter);
   virtual void modifyFilter(FilterPtr) {}
   virtual void removeFilter(FilterPtr filter);
 
-protected slots:
-  virtual void slotSelectionChanged();
+public slots:
+  /**
+   * Resets the list view, clearing and deleting all items.
+   */
+  void slotReset();
 
 private slots:
-  /**
-   * Handles the appearance of the popup menu.
-   *
-   * @param item A pointer to the item underneath the mouse
-   * @param point The location point
-   * @param col The column number, not currently used
-   */
-  void contextMenuRequested(QListViewItem* item, const QPoint& point, int col);
-
   /**
    * Modify a saved filter
    */
@@ -69,13 +58,17 @@ private slots:
    * Delete a saved filter
    */
   void slotDeleteFilter();
+  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
+  void slotDoubleClicked(const QModelIndex& index);
+  void slotSortingChanged(int column, Qt::SortOrder order);
 
 private:
-  virtual void setSorting(int column, bool ascending = true);
-  void resetComparisons();
+  void contextMenuEvent(QContextMenuEvent* event);
+  void updateHeader();
+  void invalidate(Data::EntryList entries);
 
   bool m_notSortedYet;
-  QDict<FilterItem> m_itemDict;
+  Data::CollPtr m_coll;
 };
 
 } // end namespace

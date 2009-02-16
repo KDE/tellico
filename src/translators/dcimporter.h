@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,7 +21,7 @@ namespace Tellico {
 
 class DCImporter : public XMLImporter {
 public:
-  DCImporter(const KURL& url);
+  DCImporter(const KUrl& url);
   DCImporter(const QString& text);
   DCImporter(const QDomDocument& dom);
   ~DCImporter() {}

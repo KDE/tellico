@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "../borrower.h"
 
-#include <kcommand.h>
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -24,17 +24,16 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class RemoveLoans : public KCommand  {
+class RemoveLoans : public QUndoCommand  {
 
 public:
-  RemoveLoans(Data::LoanVec loans);
+  RemoveLoans(Data::LoanList loans);
 
-  virtual void execute();
-  virtual void unexecute();
-  virtual QString name() const;
+  virtual void redo();
+  virtual void undo();
 
 private:
-  Data::LoanVec m_loans;
+  Data::LoanList m_loans;
 };
 
   } // end namespace

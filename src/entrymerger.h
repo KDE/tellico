@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "datavectors.h"
 
-#include <qobject.h>
+#include <QObject>
 
 namespace Tellico {
 
@@ -26,7 +26,7 @@ namespace Tellico {
 class EntryMerger : public QObject {
 Q_OBJECT
 public:
-  EntryMerger(Data::EntryVec entries, QObject* parent);
+  EntryMerger(Data::EntryList entries, QObject* parent);
 
 public slots:
   void slotCancel();
@@ -40,9 +40,9 @@ private:
   bool cleanMerge(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
   bool askUser(Data::EntryPtr entry1, Data::EntryPtr entry2);
 
-  Data::EntryVec m_entriesToCheck;
-  Data::EntryVec m_entriesToRemove;
-  Data::EntryVec m_entriesLeft;
+  Data::EntryList m_entriesToCheck;
+  Data::EntryList m_entriesToRemove;
+  Data::EntryList m_entriesLeft;
   int m_origCount;
   bool m_cancelled;
 };

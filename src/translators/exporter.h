@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,17 +14,18 @@
 #ifndef TELLICO_EXPORTER_H
 #define TELLICO_EXPORTER_H
 
-class KConfig;
-
-class QWidget;
-class QString;
-
 #include "../entry.h"
 #include "../datavectors.h"
 
 #include <kurl.h>
+#include <ksharedconfig.h>
 
-#include <qobject.h>
+#include <QObject>
+
+class KConfig;
+
+class QWidget;
+class QString;
 
 namespace Tellico {
   namespace Export {
@@ -53,14 +54,14 @@ public:
 
   Data::CollPtr collection() const;
 
-  void setURL(const KURL& url_) { m_url = url_; }
-  void setEntries(const Data::EntryVec& entries) { m_entries = entries; }
+  void setURL(const KUrl& url_) { m_url = url_; }
+  void setEntries(const Data::EntryList& entries) { m_entries = entries; }
   void setOptions(long options) { m_options = options; reset(); }
 
   virtual QString formatString() const = 0;
   virtual QString fileFilter() const = 0;
-  const KURL& url() const { return m_url; }
-  const Data::EntryVec& entries() const { return m_entries; }
+  const KUrl& url() const { return m_url; }
+  const Data::EntryList& entries() const { return m_entries; }
   long options() const { return m_options; }
 
   /**
@@ -73,15 +74,15 @@ public:
    */
   virtual void reset() {}
 
-  virtual QWidget* widget(QWidget* parent, const char* name=0) = 0;
-  virtual void readOptions(KConfig*) {}
-  virtual void saveOptions(KConfig*) {}
+  virtual QWidget* widget(QWidget* parent) = 0;
+  virtual void readOptions(KSharedConfigPtr) {}
+  virtual void saveOptions(KSharedConfigPtr) {}
 
 private:
   long m_options;
   Data::CollPtr m_coll;
-  Data::EntryVec m_entries;
-  KURL m_url;
+  Data::EntryList m_entries;
+  KUrl m_url;
 };
 
   } // end namespace

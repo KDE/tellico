@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,8 +14,6 @@
 // this file gets included by tellico_config.h
 
 public:
-  static void deleteAndReset();
-
   static QStringList noCapitalizationList();
   static QStringList articleList();
   static QStringList nameSuffixList();

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,7 +14,7 @@
 #ifndef TELLICO_GUI_RICHTEXTLABEL_H
 #define TELLICO_GUI_RICHTEXTLABEL_H
 
-#include <qtextedit.h>
+#include <QTextEdit>
 
 namespace Tellico {
   namespace GUI {

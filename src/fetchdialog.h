@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,14 +11,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FETCHDIALOG_H
-#define FETCHDIALOG_H
+#ifndef TELLICO_FETCHDIALOG_H
+#define TELLICO_FETCHDIALOG_H
 
 #include "datavectors.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
-#include <qguardedptr.h>
+#include <QPointer>
+#include <QEvent>
+#include <QCustomEvent>
+#include <QList>
+#include <QHash>
 
 namespace Tellico {
   class EntryView;
@@ -41,31 +45,30 @@ class KLineEdit;
 class KPushButton;
 class KStatusBar;
 class KTextEdit;
+
+class QLabel;
 class QProgressBar;
 class QTimer;
 class QCheckBox;
-
+class QTreeWidget;
 
 namespace Tellico {
 
 /**
  * @author Robby Stephenson
  */
-class FetchDialog : public KDialogBase {
+class FetchDialog : public KDialog {
 Q_OBJECT
 
 public:
   /**
    * Constructor
    */
-  FetchDialog(QWidget* parent, const char* name = 0);
+  FetchDialog(QWidget* parent);
   ~FetchDialog();
 
 public slots:
   void slotResetCollection();
-
-protected:
-  bool eventFilter(QObject* obj, QEvent* ev);
 
 private slots:
   void slotSearchClicked();
@@ -88,15 +91,14 @@ private slots:
   void slotLoadISBNList();
   void slotUPC2ISBN();
 
-  void slotBarcodeRecognized(QString);
-  void slotBarcodeGotImage(QImage&);
+  void slotBarcodeRecognized(const QString&);
+  void slotBarcodeGotImage(const QImage&);
 private:
   void startProgress();
   void stopProgress();
   void setStatus(const QString& text);
-  void adjustColumnWidth();
 
-  void customEvent( QCustomEvent *e );
+  void customEvent(QEvent* event);
 
   class SearchResultItem;
 
@@ -106,26 +108,27 @@ private:
   KPushButton* m_searchButton;
   QCheckBox* m_multipleISBN;
   KPushButton* m_editISBN;
-  GUI::ListView* m_listView;
+  QTreeWidget* m_treeWidget;
   EntryView* m_entryView;
   KPushButton* m_addButton;
   KPushButton* m_moreButton;
   KStatusBar* m_statusBar;
+  QLabel* m_statusLabel;
   QProgressBar* m_progress;
   QTimer* m_timer;
-  QGuardedPtr<KTextEdit> m_isbnTextEdit;
-  QLabel *m_barcodePreview;
+  QPointer<KTextEdit> m_isbnTextEdit;
+  QLabel* m_barcodePreview;
 
   bool m_started;
   int m_resultCount;
   QString m_oldSearch;
   QStringList m_isbnList;
   QStringList m_statusMessages;
-  QMap<int, Data::EntryPtr> m_entries;
-  QPtrList<Fetch::SearchResult> m_results;
+  QHash<int, Data::EntryPtr> m_entries;
+  QList<Fetch::SearchResult*> m_results;
   int m_collType;
 
-  barcodeRecognition::barcodeRecognitionThread *m_barcodeRecognitionThread;
+  barcodeRecognition::barcodeRecognitionThread* m_barcodeRecognitionThread;
 };
 
 } //end namespace

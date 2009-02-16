@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,8 +17,8 @@
 
 using Tellico::GUI::DateFieldWidget;
 
-DateFieldWidget::DateFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_) {
+DateFieldWidget::DateFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_) {
 
   m_widget = new DateWidget(this);
   connect(m_widget, SIGNAL(signalModified()), SIGNAL(modified()));

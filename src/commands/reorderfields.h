@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 #include "../datavectors.h"
 
-#include <kcommand.h>
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -24,19 +24,18 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class ReorderFields : public KCommand {
+class ReorderFields : public QUndoCommand {
 
 public:
-  ReorderFields(Data::CollPtr coll, const Data::FieldVec& oldFields, const Data::FieldVec& newFields);
+  ReorderFields(Data::CollPtr coll, const Data::FieldList& oldFields, const Data::FieldList& newFields);
 
-  virtual void execute();
-  virtual void unexecute();
-  virtual QString name() const;
+  virtual void redo();
+  virtual void undo();
 
 private:
   Data::CollPtr m_coll;
-  Data::FieldVec m_oldFields;
-  Data::FieldVec m_newFields;
+  Data::FieldList m_oldFields;
+  Data::FieldList m_newFields;
 };
 
   } // end namespace

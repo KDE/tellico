@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "musiccollection.h"
+#include "../entrycomparison.h"
 
 #include <klocale.h>
 
@@ -30,8 +31,8 @@ MusicCollection::MusicCollection(bool addFields_, const QString& title_ /*=null*
   setDefaultGroupField(QString::fromLatin1("artist"));
 }
 
-Tellico::Data::FieldVec MusicCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList MusicCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Album"));
@@ -115,17 +116,17 @@ Tellico::Data::FieldVec MusicCollection::defaultFields() {
   return list;
 }
 
-int MusicCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+int MusicCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   // not enough for title to be equal, must also have another field
-  int res = 2*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+  int res = 2*EntryComparison::score(entry1_, entry2_, QString::fromLatin1("title"), this);
 //  if(res == 0) {
 //    myDebug() << "MusicCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title() << endl;
 //  }
-  res += 2*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("artist"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("year"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("label"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("medium"), this);
+  res += 2*EntryComparison::score(entry1_, entry2_, QString::fromLatin1("artist"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("year"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("label"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("medium"), this);
   return res;
 }
 

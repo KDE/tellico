@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,17 +11,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef URLFIELDWIDGET_H
-#define URLFIELDWIDGET_H
-
-class KURLRequester;
+#ifndef TELLICO_URLFIELDWIDGET_H
+#define TELLICO_URLFIELDWIDGET_H
 
 #include "fieldwidget.h"
 
 #include <krun.h>
 #include <kurlcompletion.h>
 
-#include <qguardedptr.h>
+#include <QPointer>
+
+class KUrlRequester;
 
 namespace Tellico {
   namespace GUI {
@@ -33,7 +33,7 @@ class URLFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  URLFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  URLFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~URLFieldWidget();
 
   virtual QString text() const;
@@ -50,15 +50,15 @@ protected slots:
   void slotOpenURL(const QString& url);
 
 private:
-  class URLCompletion : public KURLCompletion {
+  class URLCompletion : public KUrlCompletion {
   public:
-    URLCompletion() : KURLCompletion() {}
+    URLCompletion() : KUrlCompletion() {}
     virtual QString makeCompletion(const QString& text);
   };
 
-  KURLRequester* m_requester;
+  KUrlRequester* m_requester;
   bool m_isRelative : 1;
-  QGuardedPtr<KRun> m_run;
+  QPointer<KRun> m_run;
 };
 
   } // end GUI namespace

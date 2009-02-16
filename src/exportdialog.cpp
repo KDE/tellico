@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -35,44 +35,65 @@
 #include <kglobal.h>
 #include <kconfig.h>
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qbuttongroup.h>
-#include <qradiobutton.h>
-#include <qwhatsthis.h>
-#include <qtextcodec.h>
+#include <QLayout>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QButtonGroup>
+#include <QRadioButton>
+#include <QTextCodec>
+#include <QVBoxLayout>
 
 using Tellico::ExportDialog;
 
-ExportDialog::ExportDialog(Export::Format format_, Data::CollPtr coll_, QWidget* parent_, const char* name_)
-    : KDialogBase(parent_, name_, true /*modal*/, i18n("Export Options"), Ok|Cancel),
+ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollPtr coll_, QWidget* parent_)
+    : KDialog(parent_),
       m_format(format_), m_coll(coll_), m_exporter(exporter(format_)) {
-  QWidget* widget = new QWidget(this);
-  QVBoxLayout* topLayout = new QVBoxLayout(widget, 0, spacingHint());
+  setModal(true);
+  setCaption(i18n("Export Options"));
+  setButtons(Ok|Cancel);
 
-  QGroupBox* group1 = new QGroupBox(1, Qt::Horizontal, i18n("Formatting"), widget);
+  QWidget* widget = new QWidget(this);
+  QVBoxLayout* topLayout = new QVBoxLayout(widget);
+
+  QGroupBox* group1 = new QGroupBox(i18n("Formatting"), widget);
   topLayout->addWidget(group1, 0);
+  QVBoxLayout* vlay = new QVBoxLayout(group1);
+
   m_formatFields = new QCheckBox(i18n("Format all fields"), group1);
   m_formatFields->setChecked(false);
-  QWhatsThis::add(m_formatFields, i18n("If checked, the values of the fields will be "
-                                       "automatically formatted according to their format type."));
+  m_formatFields->setWhatsThis(i18n("If checked, the values of the fields will be "
+                                    "automatically formatted according to their format type."));
+  vlay->addWidget(m_formatFields);
+
   m_exportSelected = new QCheckBox(i18n("Export selected entries only"), group1);
   m_exportSelected->setChecked(false);
-  QWhatsThis::add(m_exportSelected, i18n("If checked, only the currently selected entries will "
-                                         "be exported."));
+  m_exportSelected->setWhatsThis(i18n("If checked, only the currently selected entries will "
+                                      "be exported."));
+  vlay->addWidget(m_exportSelected);
 
-  QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, i18n("Encoding"), widget);
-  topLayout->addWidget(bg, 0);
-  m_encodeUTF8 = new QRadioButton(i18n("Encode in Unicode (UTF-8)"), bg);
+  QGroupBox* group2 = new QGroupBox(i18n("Encoding"), widget);
+  topLayout->addWidget(group2, 0);
+
+  QVBoxLayout* vlay2 = new QVBoxLayout(group2);
+
+  m_encodeUTF8 = new QRadioButton(i18n("Encode in Unicode (UTF-8)"), group2);
   m_encodeUTF8->setChecked(true);
-  QWhatsThis::add(m_encodeUTF8, i18n("Encode the exported file in Unicode (UTF-8)."));
-  QString localStr = i18n("Encode in user locale (%1)").arg(
-                     QString::fromLatin1(QTextCodec::codecForLocale()->name()));
-  m_encodeLocale = new QRadioButton(localStr, bg);
-  QWhatsThis::add(m_encodeLocale, i18n("Encode the exported file in the local encoding."));
+  m_encodeUTF8->setWhatsThis(i18n("Encode the exported file in Unicode (UTF-8)."));
+  vlay2->addWidget(m_encodeUTF8);
 
-  QWidget* w = m_exporter->widget(widget, "exporter_widget");
+  QString localStr = i18n("Encode in user locale (%1)",
+                          QString::fromLatin1(QTextCodec::codecForLocale()->name()));
+  m_encodeLocale = new QRadioButton(localStr, group2);
+  m_encodeLocale->setWhatsThis(i18n("Encode the exported file in the local encoding."));
+  vlay2->addWidget(m_encodeLocale);
+
+  QButtonGroup* bg = new QButtonGroup(widget);
+  bg->addButton(m_encodeUTF8);
+  bg->addButton(m_encodeLocale);
+
+  QWidget* w = m_exporter->widget(widget);
   if(w) {
+    w->layout()->setMargin(0);
     topLayout->addWidget(w, 0);
   }
 
@@ -86,7 +107,8 @@ ExportDialog::ExportDialog(Export::Format format_, Data::CollPtr coll_, QWidget*
     m_encodeLocale->setChecked(true);
 //    m_encodeLocale->setEnabled(false);
   } else if(format_ == Export::Alexandria || format_ == Export::PilotDB) {
-    bg->setEnabled(false);
+    // no encoding options enabled
+    group2->setEnabled(false);
   }
   connect(this, SIGNAL(okClicked()), SLOT(slotSaveOptions()));
 }
@@ -102,11 +124,11 @@ QString ExportDialog::fileFilter() {
 
 void ExportDialog::readOptions() {
   KConfigGroup config(KGlobal::config(), "ExportOptions");
-  bool format = config.readBoolEntry("FormatFields", false);
+  bool format = config.readEntry("FormatFields", false);
   m_formatFields->setChecked(format);
-  bool selected = config.readBoolEntry("ExportSelectedOnly", false);
+  bool selected = config.readEntry("ExportSelectedOnly", false);
   m_exportSelected->setChecked(selected);
-  bool encode = config.readBoolEntry("EncodeUTF8", true);
+  bool encode = config.readEntry("EncodeUTF8", true);
   if(encode) {
     m_encodeUTF8->setChecked(true);
   } else {
@@ -115,7 +137,7 @@ void ExportDialog::readOptions() {
 }
 
 void ExportDialog::slotSaveOptions() {
-  KConfig* config = KGlobal::config();
+  KSharedConfigPtr config = KGlobal::config();
   // each exporter sets its own group
   m_exporter->saveOptions(config);
 
@@ -126,7 +148,7 @@ void ExportDialog::slotSaveOptions() {
 }
 
 // static
-Tellico::Export::Exporter* ExportDialog::exporter(Export::Format format_) {
+Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format_) {
   Export::Exporter* exporter = 0;
 
   switch(format_) {
@@ -185,7 +207,7 @@ Tellico::Export::Exporter* ExportDialog::exporter(Export::Format format_) {
       break;
 
     default:
-      kdDebug() << "ExportDialog::exporter() - not implemented!" << endl;
+      kDebug() << "ExportDialog::exporter() - not implemented!";
       break;
   }
   if(exporter) {
@@ -194,7 +216,7 @@ Tellico::Export::Exporter* ExportDialog::exporter(Export::Format format_) {
   return exporter;
 }
 
-bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
+bool ExportDialog::exportURL(const KUrl& url_/*=KUrl()*/) const {
   if(!m_exporter) {
     return false;
   }
@@ -228,7 +250,7 @@ bool ExportDialog::exportURL(const KURL& url_/*=KURL()*/) const {
 // static
 // alexandria is exported to known directory
 // all others are files
-Tellico::Export::Target ExportDialog::exportTarget(Export::Format format_) {
+Tellico::Export::Target ExportDialog::exportTarget(Tellico::Export::Format format_) {
   switch(format_) {
     case Export::Alexandria:
       return Export::None;
@@ -238,7 +260,7 @@ Tellico::Export::Target ExportDialog::exportTarget(Export::Format format_) {
 }
 
 // static
-bool ExportDialog::exportCollection(Export::Format format_, const KURL& url_) {
+bool ExportDialog::exportCollection(Tellico::Export::Format format_, const KUrl& url_) {
   Export::Exporter* exp = exporter(format_);
 
   exp->setURL(url_);
@@ -246,10 +268,10 @@ bool ExportDialog::exportCollection(Export::Format format_, const KURL& url_) {
 
   KConfigGroup config(KGlobal::config(), "ExportOptions");
   long options = 0;
-  if(config.readBoolEntry("FormatFields", false)) {
+  if(config.readEntry("FormatFields", false)) {
     options |= Export::ExportFormatted;
   }
-  if(config.readBoolEntry("EncodeUTF8", true)) {
+  if(config.readEntry("EncodeUTF8", true)) {
     options |= Export::ExportUTF8;
   }
   exp->setOptions(options | Export::ExportForce);

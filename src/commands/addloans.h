@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,7 +17,7 @@
 #include "../borrower.h"
 #include "../datavectors.h"
 
-#include <kcommand.h>
+#include <QUndoCommand>
 
 namespace Tellico {
   namespace Command {
@@ -25,18 +25,17 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class AddLoans : public KCommand  {
+class AddLoans : public QUndoCommand  {
 
 public:
-  AddLoans(Data::BorrowerPtr borrower, Data::LoanVec loans, bool addToCalendar);
+  AddLoans(Data::BorrowerPtr borrower, Data::LoanList loans, bool addToCalendar);
 
-  virtual void execute();
-  virtual void unexecute();
-  virtual QString name() const;
+  virtual void redo();
+  virtual void undo();
 
 private:
   Data::BorrowerPtr m_borrower;
-  Data::LoanVec m_loans;
+  Data::LoanList m_loans;
   bool m_addedLoanField : 1;
   bool m_addToCalendar : 1;
 };

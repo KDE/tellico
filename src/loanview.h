@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2007 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,57 +14,51 @@
 #ifndef TELLICO_LOANVIEW_H
 #define TELLICO_LOANVIEW_H
 
-#include "gui/listview.h"
+#include "gui/treeview.h"
 #include "observer.h"
-#include "borroweritem.h"
 
-#include <qdict.h>
+#include <QTreeView>
 
 namespace Tellico {
-  namespace Data {
-    class Borrower;
-  }
+  class BorrowerModel;
+  class EntrySortModel;
 
 /**
  * @author Robby Stephenson
  */
-class LoanView : public GUI::ListView, public Observer {
+class LoanView : public GUI::TreeView, public Observer {
 Q_OBJECT
 
 public:
-  LoanView(QWidget* parent, const char* name=0);
+  LoanView(QWidget* parent);
 
-  virtual bool isSelectable(GUI::ListViewItem*) const;
+//  virtual bool isSelectable(GUI::ListViewItem*) const;
+  BorrowerModel* sourceModel() const;
 
   virtual void addCollection(Data::CollPtr coll);
-
-  virtual void addField(Data::CollPtr, Data::FieldPtr);
-  virtual void modifyField(Data::CollPtr, Data::FieldPtr, Data::FieldPtr);
-  virtual void removeField(Data::CollPtr, Data::FieldPtr);
 
   virtual void    addBorrower(Data::BorrowerPtr);
   virtual void modifyBorrower(Data::BorrowerPtr);
 
-private slots:
+public slots:
   /**
-   * Handles the appearance of the popup menu.
-   *
-   * @param item A pointer to the item underneath the mouse
-   * @param point The location point
-   * @param col The column number, not currently used
+   * Resets the list view, clearing and deleting all items.
    */
-  void contextMenuRequested(QListViewItem* item, const QPoint& point, int col);
-  void slotExpanded(QListViewItem* item);
-  void slotCollapsed(QListViewItem* item);
+  void slotReset();
+
+private slots:
   void slotCheckIn();
   void slotModifyLoan();
+  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
+  void slotDoubleClicked(const QModelIndex& index);
+  void slotSortingChanged(int column, Qt::SortOrder order);
 
 private:
-  virtual void setSorting(int column, bool ascending = true);
-  void resetComparisons();
+  void contextMenuEvent(QContextMenuEvent* event);
+  void updateHeader();
 
   bool m_notSortedYet;
-  QDict<BorrowerItem> m_itemDict;
+  Data::CollPtr m_coll;
 };
 
 } // end namespace

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,10 +11,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef XSLTEXPORTER_H
-#define XSLTEXPORTER_H
+#ifndef TELLICO_XSLTEXPORTER_H
+#define TELLICO_XSLTEXPORTER_H
 
-class KURLRequester;
+class KUrlRequester;
 
 #include "exporter.h"
 
@@ -32,15 +32,15 @@ public:
   virtual QString formatString() const;
   virtual QString fileFilter() const;
 
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
+  virtual QWidget* widget(QWidget* parent);
 
-  virtual void readOptions(KConfig* cfg);
-  virtual void saveOptions(KConfig* cfg);
+  virtual void readOptions(KSharedConfigPtr config);
+  virtual void saveOptions(KSharedConfigPtr config);
 
 private:
   QWidget* m_widget;
-  KURLRequester* m_URLRequester;
-  QString m_xsltFile;
+  KUrlRequester* m_URLRequester;
+  KUrl m_xsltFile;
 };
 
   } // end namespace

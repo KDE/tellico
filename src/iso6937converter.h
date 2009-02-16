@@ -14,7 +14,7 @@
 #ifndef TELLICO_ISO6937CONVERTER_H
 #define TELLICO_ISO6937CONVERTER_H
 
-class QCString;
+class QByteArray;
 class QString;
 class QChar;
 
@@ -25,7 +25,7 @@ namespace Tellico {
  */
 class Iso6937Converter {
 public:
-  static QString toUtf8(const QCString& text);
+  static QString toUtf8(const QByteArray& text);
 
 private:
   static bool hasNext(unsigned int pos, unsigned int len);

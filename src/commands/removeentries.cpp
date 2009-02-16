@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,14 +19,18 @@
 
 using Tellico::Command::RemoveEntries;
 
-RemoveEntries::RemoveEntries(Data::CollPtr coll_, const Data::EntryVec& entries_)
-    : KCommand()
+RemoveEntries::RemoveEntries(Tellico::Data::CollPtr coll_, const Tellico::Data::EntryList& entries_)
+    : QUndoCommand()
     , m_coll(coll_)
     , m_entries(entries_)
 {
+  if(!m_entries.isEmpty()) {
+    setText(m_entries.count() > 1 ? i18n("Delete Entries")
+                                  : i18nc("Delete (Entry Title)", "Delete %1", m_entries[0]->title()));
+  }
 }
 
-void RemoveEntries::execute() {
+void RemoveEntries::redo() {
   if(!m_coll || m_entries.isEmpty()) {
     return;
   }
@@ -35,16 +39,11 @@ void RemoveEntries::execute() {
   Controller::self()->removedEntries(m_entries);
 }
 
-void RemoveEntries::unexecute() {
+void RemoveEntries::undo() {
   if(!m_coll || m_entries.isEmpty()) {
     return;
   }
 
   m_coll->addEntries(m_entries);
   Controller::self()->addedEntries(m_entries);
-}
-
-QString RemoveEntries::name() const {
-  return m_entries.count() > 1 ? i18n("Delete Entries")
-                               : i18n("Delete (Entry Title)", "Delete %1").arg(m_entries.begin()->title());
 }

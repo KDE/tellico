@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,7 +16,7 @@
 
 using Tellico::Import::TextImporter;
 
-TextImporter::TextImporter(const KURL& url_, bool useUTF8_)
+TextImporter::TextImporter(const KUrl& url_, bool useUTF8_)
     : Import::Importer(url_) {
   if(url_.isValid()) {
     setText(FileHandler::readTextFile(url_, false, useUTF8_));

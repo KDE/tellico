@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,62 +15,50 @@
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
-#include <kdeversion.h>
 #include <kio/job.h>
 #include <kio/netaccess.h>
-#include <kio/scheduler.h>
 #include <kio/previewjob.h>
-#include <ktempfile.h>
+#include <kio/jobuidelegate.h>
+#include <ktemporaryfile.h>
 
-#include <qapplication.h>
-#include <qfile.h>
-
-#include <unistd.h> // for unlink()
+static QStringList* tmpfiles = 0;
 
 using Tellico::NetAccess;
 
-QStringList* NetAccess::s_tmpFiles = 0;
-
-bool NetAccess::download(const KURL& url_, QString& target_, QWidget* window_) {
+bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, bool quiet_) {
   if(url_.isLocalFile()) {
     return KIO::NetAccess::download(url_, target_, window_);
   }
-
-//  if(!KIO::NetAccess::exists(url_, true, window_)) {
-//    myDebug() << "NetAccess::download() - does not exist: " << url_ << endl;
-//    return false;
-//  }
-
+  // copied from KIO::NetAccess::download() apidox except for quiet part
   if(target_.isEmpty()) {
-    KTempFile tmpFile;
-    target_ = tmpFile.name();
-    if(!s_tmpFiles) {
-      s_tmpFiles = new QStringList;
+    KTemporaryFile tmpFile;
+    tmpFile.setAutoRemove(false);
+    tmpFile.open();
+    target_ = tmpFile.fileName();
+    if(!tmpfiles) {
+      tmpfiles = new QStringList();
     }
-    s_tmpFiles->append(target_);
+    tmpfiles->append(target_);
   }
 
-  KURL dest;
+  KUrl dest;
   dest.setPath(target_);
-
-  KIO::Job* job = KIO::file_copy(url_, dest, -1, true /*overwrite*/, false /*resume*/, false /*showProgress*/);
-  return KIO::NetAccess::synchronousRun(job, window_);
+  KIO::JobFlags flags = KIO::Overwrite;
+  if(quiet_) {
+    flags |= KIO::HideProgressInfo;
+  }
+  KIO::Job* getJob = KIO::file_copy(url_, dest, -1, flags);
+  if(KIO::NetAccess::synchronousRun(getJob, window_)) {
+    return true;
+  }
+  getJob->ui()->showErrorMessage();
+  return false;
 }
 
-void NetAccess::removeTempFile(const QString& name_) {
-  if(!s_tmpFiles) {
-    return;
-  }
-  if(s_tmpFiles->contains(name_)) {
-    ::unlink(QFile::encodeName(name_));
-    s_tmpFiles->remove(name_);
-  }
-}
-
-QPixmap NetAccess::filePreview(const KURL& url, int size) {
+QPixmap NetAccess::filePreview(const KUrl& url, int size) {
   NetAccess netaccess;
 
-  KURL::List list;
+  KUrl::List list;
   list.append(url);
   KIO::Job* previewJob = KIO::filePreview(list, size, size);
   connect(previewJob, SIGNAL(gotPreview(const KFileItem*, const QPixmap&)),
@@ -80,7 +68,7 @@ QPixmap NetAccess::filePreview(const KURL& url, int size) {
   return netaccess.m_preview;
 }
 
-QPixmap NetAccess::filePreview(KFileItem* item, int size) {
+QPixmap NetAccess::filePreview(const KFileItem& item, int size) {
   NetAccess netaccess;
 
   KFileItemList list;
@@ -95,6 +83,18 @@ QPixmap NetAccess::filePreview(KFileItem* item, int size) {
 
 void NetAccess::slotPreview(const KFileItem*, const QPixmap& pix_) {
   m_preview = pix_;
+}
+
+void NetAccess::removeTempFile(const QString& name) {
+  if(!tmpfiles) {
+    return;
+  }
+  if(tmpfiles->contains(name)) {
+    ::unlink(QFile::encodeName(name));
+    tmpfiles->removeAll(name);
+  } else {
+    KIO::NetAccess::removeTempFile(name);
+  }
 }
 
 #include "netaccess.moc"

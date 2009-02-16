@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,44 +20,40 @@
 #include <klocale.h>
 
 namespace {
-  static const char* description = I18N_NOOP("Tellico - a collection manager for KDE");
+  static const char* description = "Tellico - a collection manager for KDE";
   static const char* version = VERSION;
-
-  static KCmdLineOptions options[] = {
-    { "nofile", I18N_NOOP("Do not reopen the last open file"), 0 },
-    { "bibtex", I18N_NOOP("Import <filename> as a bibtex file"), 0 },
-    { "mods", I18N_NOOP("Import <filename> as a MODS file"), 0 },
-    { "ris", I18N_NOOP("Import <filename> as a RIS file"), 0 },
-    { "+[filename]", I18N_NOOP("File to open"), 0 },
-    KCmdLineLastOption
-  };
 }
 
 int main(int argc, char* argv[]) {
-  KAboutData aboutData("tellico", "Tellico",
-                       version, description, KAboutData::License_GPL,
-                       "(c) 2001-2007, Robby Stephenson", 0,
+  KAboutData aboutData("tellico", 0, ki18n("Tellico"),
+                       version, ki18n(description), KAboutData::License_GPL,
+                       ki18n("(c) 2001-%1, Robby Stephenson").subs(2008), KLocalizedString(),
                        "http://www.periapsis.org/tellico/", "tellico-users@forge.novell.com");
-  aboutData.addAuthor("Robby Stephenson", 0, "robby@periapsis.org");
-  aboutData.addCredit("Mathias Monnerville", I18N_NOOP("Data source scripts"),
-                      0, 0);
-  aboutData.addCredit("Virginie Quesnay", I18N_NOOP("Icons"),
-                      0, 0);
-  aboutData.addCredit("Greg Ward", I18N_NOOP("Author of btparse library"),
-                      0, "http://www.gerg.ca");
-  aboutData.addCredit("Amarok", I18N_NOOP("Code examples and general inspiration"),
-                      0, "http://amarok.kde.org");
-  aboutData.addCredit("Robert Gamble", I18N_NOOP("Author of libcsv library"),
-                      0, 0);
-  aboutData.addCredit("Valentin Lavrinenko", I18N_NOOP("Author of rtf2html library"),
-                      0, 0);
+  aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
+  aboutData.addAuthor(ki18n("Mathias Monnerville"), ki18n("Data source scripts"));
+  aboutData.addAuthor(ki18n("Regis Boudin"), KLocalizedString());
+  aboutData.addAuthor(ki18n("Petri Damstén"), KLocalizedString(), "damu@iki.fi");
+
+  aboutData.addCredit(ki18n("Virginie Quesnay"), ki18n("Icons"));
+  aboutData.addCredit(ki18n("Amarok"), ki18n("Code examples and general inspiration"),
+                      QByteArray(), "http://amarok.kde.org");
+  aboutData.addCredit(ki18n("Greg Ward"), ki18n("Author of btparse library"));
+  aboutData.addCredit(ki18n("Robert Gamble"), ki18n("Author of libcsv library"));
+  aboutData.addCredit(ki18n("Valentin Lavrinenko"), ki18n("Author of rtf2html library"));
+
+  KCmdLineOptions options;
+  options.add("nofile", ki18n("Do not reopen the last open file"));
+  options.add("bibtex", ki18n("Import <filename> as a bibtex file"));
+  options.add("mods", ki18n("Import <filename> as a MODS file"));
+  options.add("ris", ki18n("Import <filename> as a RIS file"));
+  options.add("+[filename]", ki18n("File to open"));
 
   KCmdLineArgs::init(argc, argv, &aboutData);
   KCmdLineArgs::addCmdLineOptions(options);
 
   KApplication app;
 
-  if(app.isRestored()) {
+  if(app.isSessionRestored()) {
     RESTORE(Tellico::MainWindow);
   } else {
     Tellico::MainWindow* tellico = new Tellico::MainWindow();

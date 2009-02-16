@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,8 +21,8 @@
 
 using Tellico::Command::FilterCommand;
 
-FilterCommand::FilterCommand(Mode mode_, FilterPtr activeFilter_, FilterPtr oldFilter_/*=0*/)
-    : KCommand()
+FilterCommand::FilterCommand(Mode mode_, Tellico::FilterPtr activeFilter_, Tellico::FilterPtr oldFilter_/*=0*/)
+    : QUndoCommand()
     , m_mode(mode_)
     , m_activeFilter(activeFilter_)
     , m_oldFilter(oldFilter_)
@@ -32,17 +32,25 @@ FilterCommand::FilterCommand(Mode mode_, FilterPtr activeFilter_, FilterPtr oldF
   }
 #ifndef NDEBUG
 // just some sanity checking
-  if(m_mode == FilterAdd && m_oldFilter != 0) {
+  if(m_mode == FilterAdd && m_oldFilter) {
     myDebug() << "FilterCommand() - adding field, but pointers are wrong" << endl;
-  } else if(m_mode == FilterModify && m_oldFilter == 0) {
+  } else if(m_mode == FilterModify && !m_oldFilter) {
     myDebug() << "FilterCommand() - modifying field, but pointers are wrong" << endl;
-  } else if(m_mode == FilterRemove && m_oldFilter != 0) {
+  } else if(m_mode == FilterRemove && m_oldFilter) {
     myDebug() << "FilterCommand() - removing field, but pointers are wrong" << endl;
   }
 #endif
+  switch(m_mode) {
+    case FilterAdd:
+      setText(i18n("Add Filter"));
+    case FilterModify:
+      setText(i18n("Modify Filter"));
+    case FilterRemove:
+      setText(i18n("Delete Filter"));
+  }
 }
 
-void FilterCommand::execute() {
+void FilterCommand::redo() {
   if(!m_activeFilter) {
     return;
   }
@@ -67,7 +75,7 @@ void FilterCommand::execute() {
   }
 }
 
-void FilterCommand::unexecute() {
+void FilterCommand::undo() {
   if(!m_activeFilter) {
     return;
   }
@@ -90,17 +98,4 @@ void FilterCommand::unexecute() {
       Controller::self()->addedFilter(m_activeFilter);
       break;
   }
-}
-
-QString FilterCommand::name() const {
-  switch(m_mode) {
-    case FilterAdd:
-      return i18n("Add Filter");
-    case FilterModify:
-      return i18n("Modify Filter");
-    case FilterRemove:
-      return i18n("Delete Filter");
-  }
-  // hush warnings
-  return QString::null;
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,14 +20,38 @@
 
 using Tellico::Command::FieldCommand;
 
-FieldCommand::FieldCommand(Mode mode_, Data::CollPtr coll_,
-                           Data::FieldPtr activeField_, Data::FieldPtr oldField_/*=0*/)
-    : KCommand()
+FieldCommand::FieldCommand(Mode mode_, Tellico::Data::CollPtr coll_,
+                           Tellico::Data::FieldPtr activeField_, Tellico::Data::FieldPtr oldField_/*=0*/)
+    : QUndoCommand()
     , m_mode(mode_)
     , m_coll(coll_)
     , m_activeField(activeField_)
     , m_oldField(oldField_)
 {
+  init();
+}
+
+FieldCommand::FieldCommand(QUndoCommand* parent, Mode mode_, Tellico::Data::CollPtr coll_,
+                           Tellico::Data::FieldPtr activeField_, Tellico::Data::FieldPtr oldField_/*=0*/)
+    : QUndoCommand(parent)
+    , m_mode(mode_)
+    , m_coll(coll_)
+    , m_activeField(activeField_)
+    , m_oldField(oldField_)
+{
+  init();
+}
+
+void FieldCommand::init() {
+  switch(m_mode) {
+    case FieldAdd:
+      setText(i18n("Add %1 Field", m_activeField->title()));
+    case FieldModify:
+      setText(i18n("Modify %1 Field", m_activeField->title()));
+    case FieldRemove:
+      setText(i18n("Delete %1 Field", m_activeField->title()));
+  }
+
   if(!m_coll) {
     myDebug() << "FieldCommand() - null collection pointer" << endl;
   } else if(!m_activeField) {
@@ -35,17 +59,17 @@ FieldCommand::FieldCommand(Mode mode_, Data::CollPtr coll_,
   }
 #ifndef NDEBUG
 // just some sanity checking
-  if(m_mode == FieldAdd && m_oldField != 0) {
+  if(m_mode == FieldAdd && m_oldField) {
     myDebug() << "FieldCommand() - adding field, but pointers are wrong" << endl;
-  } else if(m_mode == FieldModify && m_oldField == 0) {
+  } else if(m_mode == FieldModify && !m_oldField) {
     myDebug() << "FieldCommand() - modifying field, but pointers are wrong" << endl;
-  } else if(m_mode == FieldRemove && m_oldField != 0) {
+  } else if(m_mode == FieldRemove && m_oldField) {
     myDebug() << "FieldCommand() - removing field, but pointers are wrong" << endl;
   }
 #endif
 }
 
-void FieldCommand::execute() {
+void FieldCommand::redo() {
   if(!m_coll || !m_activeField) {
     return;
   }
@@ -71,7 +95,7 @@ void FieldCommand::execute() {
   }
 }
 
-void FieldCommand::unexecute() {
+void FieldCommand::undo() {
   if(!m_coll || !m_activeField) {
     return;
   }
@@ -96,17 +120,4 @@ void FieldCommand::unexecute() {
       Controller::self()->addedField(m_coll, m_activeField);
       break;
   }
-}
-
-QString FieldCommand::name() const {
-  switch(m_mode) {
-    case FieldAdd:
-      return i18n("Add %1 Field").arg(m_activeField->title());
-    case FieldModify:
-      return i18n("Modify %1 Field").arg(m_activeField->title());
-    case FieldRemove:
-      return i18n("Delete %1 Field").arg(m_activeField->title());
-  }
-  // hush warnings
-  return QString::null;
 }

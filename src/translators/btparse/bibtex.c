@@ -33,7 +33,7 @@ extern char * InputFilename;            /* for zzcr_ast call in pccts/ast.c */
 #ifndef PURIFY
 #define PURIFY(r,s)
 #endif
-#include "ast.c"
+
 zzASTgvars
 
 ANTLR_INFO

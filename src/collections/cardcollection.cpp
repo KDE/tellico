@@ -30,8 +30,8 @@ CardCollection::CardCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("series"));
 }
 
-Tellico::Data::FieldVec CardCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList CardCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);

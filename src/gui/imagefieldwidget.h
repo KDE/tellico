@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef IMAGEFIELDWIDGET_H
-#define IMAGEFIELDWIDGET_H
+#ifndef TELLICO_IMAGEFIELDWIDGET_H
+#define TELLICO_IMAGEFIELDWIDGET_H
 
 #include "fieldwidget.h"
 #include "../datavectors.h"
@@ -30,7 +30,7 @@ class ImageFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  ImageFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  ImageFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~ImageFieldWidget() {}
 
   virtual QString text() const;

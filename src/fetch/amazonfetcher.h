@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,16 +20,17 @@
 
 #include <kurl.h>
 
-#include <qcstring.h> // for QByteArray
-#include <qguardedptr.h>
+#include <QPointer>
+#include <QLabel>
 
 class KLineEdit;
 
 class QCheckBox;
 class QLabel;
 
+class KJob;
 namespace KIO {
-  class Job;
+  class StoredTransferJob;
 }
 
 namespace Tellico {
@@ -67,7 +68,7 @@ public:
     NoImage=3
   };
 
-  AmazonFetcher(Site site, QObject* parent, const char* name = 0);
+  AmazonFetcher(Site site, QObject* parent);
   virtual ~AmazonFetcher();
 
   virtual QString source() const;
@@ -86,7 +87,7 @@ public:
 
   struct SiteData {
     QString title;
-    KURL url;
+    KUrl url;
   };
   static const SiteData& siteData(int site);
 
@@ -103,8 +104,7 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   void initXSLTHandler();
@@ -117,18 +117,16 @@ private:
   ImageSize m_imageSize;
 
   QString m_access;
-  QString m_amazonKey;
   QString m_assoc;
   bool m_addLinkField;
   int m_limit;
   int m_countOffset;
 
-  QByteArray m_data;
   int m_page;
   int m_total;
   int m_numResults;
   QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;
   QString m_value;
@@ -150,8 +148,6 @@ private slots:
 
 private:
   KLineEdit* m_assocEdit;
-  KLineEdit* m_accessEdit;
-  KLineEdit* m_secretKeyEdit;
   GUI::ComboBox* m_siteCombo;
   GUI::ComboBox* m_imageCombo;
 };

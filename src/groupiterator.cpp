@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,23 +12,25 @@
  ***************************************************************************/
 
 #include "groupiterator.h"
-#include "entrygroupitem.h"
+#include "models/models.h"
+
+#include <QAbstractItemModel>
 
 using Tellico::GroupIterator;
 
-GroupIterator::GroupIterator(const QListView* view_) {
-  // groups are the first children in the group view
-  m_item = static_cast<GUI::ListViewItem*>(view_->firstChild());
+GroupIterator::GroupIterator(QAbstractItemModel* model_) : m_model(model_), m_row(0) {
 }
 
 GroupIterator& GroupIterator::operator++() {
-  m_item = static_cast<GUI::ListViewItem*>(m_item->nextSibling());
+  ++m_row;
   return *this;
 }
 
 Tellico::Data::EntryGroup* GroupIterator::group() {
-  if(!m_item || !m_item->isEntryGroupItem()) {
+  if(m_row >= m_model->rowCount()) {
     return 0;
   }
-  return static_cast<EntryGroupItem*>(m_item)->group();
+
+  QVariant v = m_model->data(m_model->index(m_row, 0), GroupPtrRole);
+  return reinterpret_cast<Data::EntryGroup*>(v.value<void*>());
 }

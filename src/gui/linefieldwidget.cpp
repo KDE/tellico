@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,31 +15,30 @@
 #include "../field.h"
 #include "../isbnvalidator.h"
 #include "../fieldcompletion.h"
-#include "../latin1literal.h"
 #include "../tellico_kernel.h"
 #include "../gui/lineedit.h"
 
 using Tellico::GUI::LineFieldWidget;
 
-LineFieldWidget::LineFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_) {
+LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_) {
 
   m_lineEdit = new GUI::LineEdit(this);
   m_lineEdit->setAllowSpellCheck(true);
-  m_lineEdit->setEnableSpellCheck(field_->formatFlag() != Data::Field::FormatName);
+  m_lineEdit->setEnableSpellCheck(field_->formatFlag() != Tellico::Data::Field::FormatName);
   connect(m_lineEdit, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
 
   registerWidget();
 
   if(field_->flags() & Data::Field::AllowCompletion) {
-    FieldCompletion* completion = new FieldCompletion(field_->flags() & Data::Field::AllowMultiple);
+    FieldCompletion* completion = new FieldCompletion(field_->flags() & Tellico::Data::Field::AllowMultiple);
     completion->setItems(Kernel::self()->valuesByFieldName(field_->name()));
     completion->setIgnoreCase(true);
     m_lineEdit->setCompletionObject(completion);
     m_lineEdit->setAutoDeleteCompletionObject(true);
   }
 
-  if(field_->name() == Latin1Literal("isbn")) {
+  if(field_->name() == QLatin1String("isbn")) {
     m_lineEdit->setValidator(new ISBNValidator(this));
   }
 }
@@ -49,7 +48,7 @@ QString LineFieldWidget::text() const {
   if(field()->flags() & Data::Field::AllowMultiple) {
     text.replace(s_semiColon, QString::fromLatin1("; "));
   }
-  return text.stripWhiteSpace();
+  return text.trimmed();
 }
 
 void LineFieldWidget::setText(const QString& text_) {
@@ -69,9 +68,9 @@ void LineFieldWidget::addCompletionObjectItem(const QString& text_) {
   m_lineEdit->completionObject()->addItem(text_);
 }
 
-void LineFieldWidget::updateFieldHook(Data::FieldPtr oldField_, Data::FieldPtr newField_) {
-  bool wasComplete = (oldField_->flags() & Data::Field::AllowCompletion);
-  bool isComplete = (newField_->flags() & Data::Field::AllowCompletion);
+void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
+  bool wasComplete = (oldField_->flags() & Tellico::Data::Field::AllowCompletion);
+  bool isComplete = (newField_->flags() & Tellico::Data::Field::AllowCompletion);
   if(!wasComplete && isComplete) {
     FieldCompletion* completion = new FieldCompletion(isComplete);
     completion->setItems(Kernel::self()->valuesByFieldName(newField_->name()));

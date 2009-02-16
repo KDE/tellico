@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,14 +14,14 @@
 #ifndef TELLICODATEWIDGET_H
 #define TELLICODATEWIDGET_H
 
-#include <qspinbox.h>
-#include <qdatetime.h>
+#include <QSpinBox>
+#include <QDateTime>
 
 class KComboBox;
 class KPushButton;
 class KDatePicker;
+class KVBox;
 
-class QVBox;
 class QString;
 
 namespace Tellico {
@@ -41,8 +41,8 @@ class DateWidget : public QWidget {
 Q_OBJECT
 
 public:
-  DateWidget(QWidget* parent, const char* name = 0);
-  ~DateWidget() {}
+  DateWidget(QWidget* parent);
+  ~DateWidget();
 
   QDate date() const;
   QString text() const;
@@ -53,11 +53,14 @@ public:
 signals:
   void signalModified();
 
+protected:
+  bool eventFilter(QObject *watched, QEvent *event);
+
 private slots:
   void slotDateChanged();
   void slotShowPicker();
-  void slotDateSelected(QDate newDate);
-  void slotDateEntered(QDate newDate);
+  void slotDateSelected(const QDate& newDate);
+  void slotDateEntered(const QDate& newDate);
 
 private:
   SpinBox* m_daySpin;
@@ -65,7 +68,7 @@ private:
   SpinBox* m_yearSpin;
   KPushButton* m_dateButton;
 
-  QVBox* m_frame;
+  KVBox* m_frame;
   KDatePicker* m_picker;
 };
 

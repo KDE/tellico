@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,9 +23,11 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
+#include <kio/job.h>
+#include <kio/jobuidelegate.h>
 
-#include <qlabel.h>
-#include <qlayout.h>
+#include <QLabel>
+#include <QVBoxLayout>
 
 namespace {
   // always bibtex
@@ -57,32 +59,29 @@ bool BibsonomyFetcher::canFetch(int type) const {
 void BibsonomyFetcher::readConfigHook(const KConfigGroup&) {
 }
 
-void BibsonomyFetcher::search(FetchKey key_, const QString& value_) {
+void BibsonomyFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_key = key_;
-  m_value = value_.stripWhiteSpace();
+  m_value = value_.trimmed();
   m_started = true;
 
   if(!canFetch(Kernel::self()->collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.").arg(source()), MessageHandler::Warning);
+    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
   }
 
-  m_data.truncate(0);
-
 //  myDebug() << "BibsonomyFetcher::search() - value = " << value_ << endl;
 
-  KURL u = searchURL(m_key, m_value);
+  KUrl u = searchURL(m_key, m_value);
   if(u.isEmpty()) {
     stop();
     return;
   }
 
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
 }
 
 void BibsonomyFetcher::stop() {
@@ -94,34 +93,30 @@ void BibsonomyFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_data.truncate(0);
   m_started = false;
   emit signalDone(this);
 }
 
-void BibsonomyFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void BibsonomyFetcher::slotComplete(KIO::Job* job_) {
+void BibsonomyFetcher::slotComplete(KJob*) {
 //  myDebug() << "BibsonomyFetcher::slotComplete()" << endl;
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
 
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "BibsonomyFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
-  Import::BibtexImporter imp(QString::fromUtf8(m_data, m_data.size()));
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
+
+  Import::BibtexImporter imp(QString::fromUtf8(data, data.size()));
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {
@@ -130,8 +125,8 @@ void BibsonomyFetcher::slotComplete(KIO::Job* job_) {
     return;
   }
 
-  Data::EntryVec entries = coll->entries();
-  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+  Data::EntryList entries = coll->entries();
+  foreach(Data::EntryPtr entry, entries) {
     if(!m_started) {
       // might get aborted
       break;
@@ -142,7 +137,7 @@ void BibsonomyFetcher::slotComplete(KIO::Job* job_) {
       desc += QChar('/') + entry->field(QString::fromLatin1("year"));
     }
 
-    SearchResult* r = new SearchResult(this, entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
@@ -154,8 +149,8 @@ Tellico::Data::EntryPtr BibsonomyFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-KURL BibsonomyFetcher::searchURL(FetchKey key_, const QString& value_) const {
-  KURL u(QString::fromLatin1(BIBSONOMY_BASE_URL));
+KUrl BibsonomyFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
+  KUrl u(QString::fromLatin1(BIBSONOMY_BASE_URL));
   u.setPath(QString::fromLatin1("/bib/"));
 
   switch(key_) {
@@ -168,8 +163,8 @@ KURL BibsonomyFetcher::searchURL(FetchKey key_, const QString& value_) const {
       break;
 
     default:
-      kdWarning() << "BibsonomyFetcher::search() - key not recognized: " << m_key << endl;
-      return KURL();
+      kWarning() << "BibsonomyFetcher::search() - key not recognized: " << m_key;
+      return KUrl();
   }
 
   u.addQueryItem(QString::fromLatin1("items"), QString::number(BIBSONOMY_MAX_RESULTS));
@@ -177,7 +172,7 @@ KURL BibsonomyFetcher::searchURL(FetchKey key_, const QString& value_) const {
   return u;
 }
 
-void BibsonomyFetcher::updateEntry(Data::EntryPtr entry_) {
+void BibsonomyFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   QString title = entry_->field(QString::fromLatin1("title"));
   if(!title.isEmpty()) {
     search(Fetch::Keyword, title);

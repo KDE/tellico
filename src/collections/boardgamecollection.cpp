@@ -30,8 +30,8 @@ BoardGameCollection::BoardGameCollection(bool addFields_, const QString& title_ 
   setDefaultGroupField(QString::fromLatin1("genre"));
 }
 
-Tellico::Data::FieldVec BoardGameCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList BoardGameCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));

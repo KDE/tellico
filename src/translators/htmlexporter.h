@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,17 +11,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef HTMLEXPORTER_H
-#define HTMLEXPORTER_H
-
-class QCheckBox;
+#ifndef TELLICO_HTMLEXPORTER_H
+#define TELLICO_HTMLEXPORTER_H
 
 #include "exporter.h"
 #include "../stringset.h"
 
-#include <qstringlist.h>
+#include <QStringList>
+#include <QHash>
 
 #include <libxml/xmlstring.h>
+
+class QCheckBox;
 
 extern "C" {
   struct _xmlNode;
@@ -51,11 +52,11 @@ public:
   virtual QString formatString() const;
   virtual QString fileFilter() const;
 
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
-  virtual void readOptions(KConfig*);
-  virtual void saveOptions(KConfig*);
+  virtual QWidget* widget(QWidget* parent);
+  virtual void readOptions(KSharedConfigPtr);
+  virtual void saveOptions(KSharedConfigPtr);
 
-  void setCollectionURL(const KURL& url) { m_collectionURL = url; m_links.clear(); }
+  void setCollectionURL(const KUrl& url) { m_collectionURL = url; m_links.clear(); }
   void setXSLTFile(const QString& filename);
   void setPrintHeaders(bool printHeaders) { m_printHeaders = printHeaders; }
   void setPrintGrouped(bool printGrouped) { m_printGrouped = printGrouped; }
@@ -75,7 +76,7 @@ private:
   void setFormattingOptions(Data::CollPtr coll);
   void writeImages(Data::CollPtr coll);
   bool writeEntryFiles();
-  KURL fileDir() const;
+  KUrl fileDir() const;
   QString fileDirName() const;
 
   void parseDOM(_xmlNode* node);
@@ -103,7 +104,7 @@ private:
   QCheckBox* m_checkExportEntryFiles;
   QCheckBox* m_checkExportImages;
 
-  KURL m_collectionURL;
+  KUrl m_collectionURL;
   QString m_xsltFile;
   QString m_xsltFilePath;
   QString m_dataDir;
@@ -114,8 +115,8 @@ private:
   QStringList m_columns;
   QString m_entryXSLTFile;
 
-  KURL::List m_files;
-  QMap<QString, QString> m_links;
+  KUrl::List m_files;
+  QHash<QString, QString> m_links;
   StringSet m_copiedFiles;
 };
 

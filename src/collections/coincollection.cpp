@@ -30,8 +30,8 @@ CoinCollection::CoinCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("denomination"));
 }
 
-Tellico::Data::FieldVec CoinCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList CoinCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
@@ -74,27 +74,25 @@ Tellico::Data::FieldVec CoinCollection::defaultFields() {
   field->setCategory(i18n(coin_general));
   list.append(field);
 
-  QStringList grade = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                         i18n("Coin grade levels - "
-                                              "Proof-65,Proof-60,Mint State-65,Mint State-60,"
-                                              "Almost Uncirculated-55,Almost Uncirculated-50,"
-                                              "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
-                                              "Very Good-8,Good-4,Fair",
-                                              "Proof-65,Proof-60,Mint State-65,Mint State-60,"
-                                              "Almost Uncirculated-55,Almost Uncirculated-50,"
-                                              "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
-                                              "Very Good-8,Good-4,Fair"),
-                                         false);
+  QStringList grade = i18nc("Coin grade levels - "
+                            "Proof-65,Proof-60,Mint State-65,Mint State-60,"
+                            "Almost Uncirculated-55,Almost Uncirculated-50,"
+                            "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
+                            "Very Good-8,Good-4,Fair",
+                            "Proof-65,Proof-60,Mint State-65,Mint State-60,"
+                            "Almost Uncirculated-55,Almost Uncirculated-50,"
+                            "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
+                            "Very Good-8,Good-4,Fair")
+                      .split(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::SkipEmptyParts);
   field = new Field(QString::fromLatin1("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  QStringList service = QStringList::split(QRegExp(QString::fromLatin1("\\s*,\\s*")),
-                                           i18n("Coin grading services - "
-                                                "PCGS,NGC,ANACS,ICG,ASA,PCI",
-                                                "PCGS,NGC,ANACS,ICG,ASA,PCI"),
-                                           false);
+  QStringList service = i18nc("Coin grading services - "
+                              "PCGS,NGC,ANACS,ICG,ASA,PCI",
+                              "PCGS,NGC,ANACS,ICG,ASA,PCI")
+                        .split(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::SkipEmptyParts);
   field = new Field(QString::fromLatin1("service"), i18n("Grading Service"), service);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);

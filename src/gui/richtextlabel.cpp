@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,17 +13,13 @@
 
 #include "richtextlabel.h"
 
-#include <kdebug.h>
-
-#include <qlayout.h>
-
 using Tellico::GUI::RichTextLabel;
 
 RichTextLabel::RichTextLabel(QWidget* parent) : QTextEdit(parent) {
   init();
 }
 
-RichTextLabel::RichTextLabel(const QString& text, QWidget* parent) : QTextEdit(text, QString::null, parent) {
+RichTextLabel::RichTextLabel(const QString& text, QWidget* parent) : QTextEdit(text, parent) {
   init();
 }
 
@@ -33,12 +29,11 @@ QSize RichTextLabel::sizeHint() const {
 
 void RichTextLabel::init() {
   setReadOnly(true);
-  setTextFormat(Qt::RichText);
 
   setFrameShape(QFrame::NoFrame);
   viewport()->setMouseTracking(false);
 
-  setPaper(colorGroup().background());
+  setBackgroundRole(QPalette::Window);
 
   setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding));
   viewport()->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding));

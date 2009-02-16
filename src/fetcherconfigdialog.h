@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,13 +17,14 @@
 #include "fetch/fetch.h"
 #include "fetch/configwidget.h"
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
-#include <qintdict.h>
+#include <QHash>
+#include <QLabel>
 
 class KLineEdit;
 class QCheckBox;
-class QWidgetStack;
+class QStackedWidget;
 
 namespace Tellico {
   namespace GUI {
@@ -33,13 +34,14 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class FetcherConfigDialog : public KDialogBase {
+class FetcherConfigDialog : public KDialog {
 Q_OBJECT
 
 public:
   FetcherConfigDialog(QWidget* parent);
   FetcherConfigDialog(const QString& sourceName, Fetch::Type type, bool updateOverwrite,
                       Fetch::ConfigWidget* configWidget, QWidget* parent);
+  virtual ~FetcherConfigDialog() {}
 
   QString sourceName() const;
   Fetch::Type sourceType() const;
@@ -61,8 +63,8 @@ private:
   KLineEdit* m_nameEdit;
   GUI::ComboBox* m_typeCombo;
   QCheckBox* m_cbOverwrite;
-  QWidgetStack* m_stack;
-  QIntDict<Fetch::ConfigWidget> m_configWidgets;
+  QStackedWidget* m_stack;
+  QHash<int, Fetch::ConfigWidget*> m_configWidgets;
 };
 
 } // end namespace

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ALEXANDRIAEXPORTER_H
-#define ALEXANDRIAEXPORTER_H
+#ifndef TELLICO_ALEXANDRIAEXPORTER_H
+#define TELLICO_ALEXANDRIAEXPORTER_H
 
 class QDir;
 
@@ -38,12 +38,12 @@ public:
   virtual QString fileFilter() const { return QString::null; } // no need for this
 
   // no config options
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return 0; }
 
 private:
   static QString& escapeText(QString& str);
 
-  bool writeFile(const QDir& dir, Data::ConstEntryPtr entry);
+  bool writeFile(const QDir& dir, Data::EntryPtr entry);
 };
 
   } // end namespace

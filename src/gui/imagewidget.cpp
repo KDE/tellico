@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -20,16 +20,19 @@
 
 #include <kfiledialog.h>
 #include <klocale.h>
-#include <kbuttonbox.h>
-#include <kurldrag.h>
 #include <kmessagebox.h>
+#include <KPushButton>
 
-#include <qwmatrix.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qdragobject.h>
-#include <qapplication.h> // needed for drag distance
+#include <QMatrix>
+#include <QLabel>
+#include <QCheckBox>
+#include <QApplication> // needed for drag distance
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QDropEvent>
+#include <QResizeEvent>
+#include <QMouseEvent>
+#include <QDragEnterEvent>
 
 namespace {
   static const uint IMAGE_WIDGET_BUTTON_MARGIN = 8;
@@ -40,7 +43,7 @@ namespace {
 
 using Tellico::GUI::ImageWidget;
 
-ImageWidget::ImageWidget(QWidget* parent_, const char* name_) : QWidget(parent_, name_) {
+ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_) {
   QHBoxLayout* l = new QHBoxLayout(this);
   l->setMargin(IMAGE_WIDGET_BUTTON_MARGIN);
   m_label = new QLabel(this);
@@ -50,16 +53,21 @@ ImageWidget::ImageWidget(QWidget* parent_, const char* name_) : QWidget(parent_,
   l->addWidget(m_label, 1);
   l->addSpacing(IMAGE_WIDGET_BUTTON_MARGIN);
 
-  QVBoxLayout* boxLayout = new QVBoxLayout(l);
+  QVBoxLayout* boxLayout = new QVBoxLayout();
+  l->addLayout(boxLayout);
+
   boxLayout->addStretch(1);
 
-  KButtonBox* box = new KButtonBox(this, Vertical);
-  box->addButton(i18n("Select Image..."), this, SLOT(slotGetImage()));
-  box->addButton(i18n("Clear"), this, SLOT(slotClear()));
-  box->layout();
-  boxLayout->addWidget(box);
+  KPushButton* button1 = new KPushButton(i18n("Select Image..."), this);
+  connect(button1, SIGNAL(clicked()), this, SLOT(slotGetImage()));
+  boxLayout->addWidget(button1);
+
+  KPushButton* button2 = new KPushButton(i18n("Clear"), this);
+  connect(button2, SIGNAL(clicked()), this, SLOT(slotClear()));
+  boxLayout->addWidget(button2);
 
   boxLayout->addSpacing(8);
+
   m_cbLinkOnly = new QCheckBox(i18n("Save link only"), this);
   connect(m_cbLinkOnly, SIGNAL(clicked()), SLOT(slotLinkOnlyClicked()));
   boxLayout->addWidget(m_cbLinkOnly);
@@ -82,7 +90,7 @@ void ImageWidget::setImage(const QString& id_) {
   m_cbLinkOnly->setChecked(link);
   m_cbLinkOnly->setEnabled(link);
   // if we're using a link, then the original URL _is_ the id
-  m_originalURL = link ? id_ : KURL();
+  m_originalURL = link ? KUrl(id_) : KUrl();
   m_scaled = QPixmap();
   scale();
 
@@ -98,7 +106,7 @@ void ImageWidget::slotClear() {
   m_imageID = QString();
   m_pixmap = QPixmap();
   m_scaled = m_pixmap;
-  m_originalURL = KURL();
+  m_originalURL = KUrl();
 
   m_label->setPixmap(m_scaled);
   m_cbLinkOnly->setChecked(false);
@@ -123,9 +131,9 @@ void ImageWidget::scale() {
       newHeight = static_cast<int>(static_cast<double>(ph)*ww/static_cast<double>(pw));
     }
 
-    QWMatrix wm;
+    QMatrix wm;
     wm.scale(static_cast<double>(newWidth)/pw, static_cast<double>(newHeight)/ph);
-    m_scaled = m_pixmap.xForm(wm);
+    m_scaled = m_pixmap.transformed(wm, Qt::SmoothTransformation);
   } else {
     m_scaled = m_pixmap;
   }
@@ -142,7 +150,7 @@ void ImageWidget::resizeEvent(QResizeEvent *) {
 }
 
 void ImageWidget::slotGetImage() {
-  KURL url = KFileDialog::getImageOpenURL(QString::null, this);
+  KUrl url = KFileDialog::getImageOpenUrl(KUrl(), this);
   if(url.isEmpty() || !url.isValid()) {
     return;
   }
@@ -168,7 +176,7 @@ void ImageWidget::slotLinkOnlyClicked() {
   // so it needs to be added to the cache all over again
   // probably could do this without downloading the image all over again,
   // but I'm not going to do that right now
-  const QString& id = ImageFactory::addImage(m_originalURL, false, KURL(), link);
+  const QString& id = ImageFactory::addImage(m_originalURL, false, KUrl(), link);
   // same image, so no need to call setImage
   m_imageID = id;
   emit signalModified();
@@ -190,61 +198,55 @@ void ImageWidget::mousePressEvent(QMouseEvent* event_) {
 void ImageWidget::mouseMoveEvent(QMouseEvent* event_) {
   int delay = QApplication::startDragDistance();
   // Only interested in LMB
-  if(event_->state() & Qt::LeftButton) {
-    // only allow drag is the image is non-null, and the drag start point isn't null and the user dragged far enough
+  if(event_->buttons() & Qt::LeftButton) {
+    // only allow drag if the image is non-null, and the drag start point isn't null and the user dragged far enough
     if(!m_imageID.isEmpty() && !m_dragStart.isNull() && (m_dragStart - event_->pos()).manhattanLength() > delay) {
       const Data::Image& img = ImageFactory::imageById(m_imageID);
       if(!img.isNull()) {
-        QImageDrag* drag = new QImageDrag(img, this);
-        drag->dragCopy();
+         QDrag* drag = new QDrag(this);
+         QMimeData* mimeData = new QMimeData();
+         mimeData->setImageData(img);
+         drag->setMimeData(mimeData);
+         drag->setPixmap(QPixmap::fromImage(img));
+         drag->exec(Qt::CopyAction);
+         event_->accept();
       }
     }
   }
 }
 
 void ImageWidget::dragEnterEvent(QDragEnterEvent* event_) {
-  event_->accept(KURLDrag::canDecode(event_) || QImageDrag::canDecode(event_) || QTextDrag::canDecode(event_));
+  if(event_->mimeData()->hasImage() || event_->mimeData()->hasText()) {
+    event_->acceptProposedAction();
+  }
 }
 
 void ImageWidget::dropEvent(QDropEvent* event_) {
-  QImage image;
-  KURL::List urls;
-  QString text;
-
-  GUI::CursorSaver cs(Qt::busyCursor);
-  if(QImageDrag::decode(event_, image)) {
+  GUI::CursorSaver cs;
+  if(event_->mimeData()->hasImage()) {
+    QVariant imageData = event_->mimeData()->imageData();
     // Qt reads PNG data by default
-    const QString& id = ImageFactory::addImage(image, QString::fromLatin1("PNG"));
+    const QString& id = ImageFactory::addImage(qvariant_cast<QPixmap>(imageData), QString::fromLatin1("PNG"));
     if(!id.isEmpty() && id != m_imageID) {
       setImage(id);
       emit signalModified();
     }
-  } else if(KURLDrag::decode(event_, urls)) {
-    if(urls.isEmpty()) {
-      return;
+    event_->acceptProposedAction();
+  } else if(event_->mimeData()->hasText()) {
+    KUrl url(event_->mimeData()->text());
+    if(!url.isEmpty() && url.isValid()) {
+      loadImage(url);
+      event_->acceptProposedAction();
     }
-    // only care about the first one
-    const KURL& url = urls[0];
-    if(url.isEmpty() || !url.isValid()) {
-      return;
-    }
-//    kdDebug() << "ImageWidget::dropEvent() - " << url.prettyURL() << endl;
-    loadImage(url);
-  } else if(QTextDrag::decode(event_, text)) {
-    KURL url(text);
-    if(url.isEmpty() || !url.isValid()) {
-      return;
-    }
-    loadImage(url);
   }
 }
 
-void ImageWidget::loadImage(const KURL& url_) {
+void ImageWidget::loadImage(const KUrl& url_) {
   const bool link = m_cbLinkOnly->isChecked();
 
   GUI::CursorSaver cs;
   // if we're linking only, then we want the image id to be the same as the url
-  const QString& id = ImageFactory::addImage(url_, false, KURL(), link);
+  const QString& id = ImageFactory::addImage(url_, false, KUrl(), link);
   if(id != m_imageID) {
     setImage(id);
     emit signalModified();

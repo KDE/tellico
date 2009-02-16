@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,13 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOIMAGEWIDGET_H
-#define TELLICOIMAGEWIDGET_H
+#ifndef TELLICO_IMAGEWIDGET_H
+#define TELLICO_IMAGEWIDGET_H
 
 #include <kurl.h>
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qpoint.h>
+
+#include <QWidget>
+#include <QPixmap>
+#include <QPoint>
 
 class QLabel;
 class QResizeEvent;
@@ -25,6 +26,7 @@ class QMouseEvent;
 class QDragEnterEvent;
 class QDropEvent;
 class QCheckBox;
+class QLabel;
 
 namespace Tellico {
   namespace GUI {
@@ -36,7 +38,7 @@ class ImageWidget : public QWidget {
 Q_OBJECT
 
 public:
-  ImageWidget(QWidget* parent, const char* name = 0);
+  ImageWidget(QWidget* parent);
   virtual ~ImageWidget() {}
 
   const QString& id() const { return m_imageID; }
@@ -62,14 +64,14 @@ private slots:
 
 private:
   void scale();
-  void loadImage(const KURL& url);
+  void loadImage(const KUrl& url);
 
   QString m_imageID;
   QPixmap m_pixmap;
   QPixmap m_scaled;
   QLabel* m_label;
   QCheckBox* m_cbLinkOnly;
-  KURL m_originalURL;
+  KUrl m_originalURL;
   QPoint m_dragStart;
 };
 

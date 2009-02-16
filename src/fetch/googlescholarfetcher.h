@@ -11,18 +11,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef GOOGLESCHOLARFETCHER_H
-#define GOOGLESCHOLARFETCHER_H
+#ifndef TELLICO_GOOGLESCHOLARFETCHER_H
+#define TELLICO_GOOGLESCHOLARFETCHER_H
 
 #include "fetcher.h"
 #include "configwidget.h"
-#include "../datavectors.h"
 
-#include <qguardedptr.h>
-#include <qregexp.h>
+#include <QPointer>
+#include <QRegExp>
 
+class KJob;
 namespace KIO {
-  class Job;
+  class StoredTransferJob;
 }
 
 namespace Tellico {
@@ -39,7 +39,7 @@ Q_OBJECT
 public:
   /**
    */
-  GoogleScholarFetcher(QObject* parent, const char* name = 0);
+  GoogleScholarFetcher(QObject* parent);
   /**
    */
   virtual ~GoogleScholarFetcher();
@@ -76,19 +76,17 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   void doSearch();
 
-  size_t m_limit;
-  size_t m_start;
-  size_t m_total;
+  int m_limit;
+  int m_start;
+  int m_total;
 
-  QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries;
-  QGuardedPtr<KIO::Job> m_job;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;
   QString m_value;

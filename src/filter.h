@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,8 +18,8 @@
 
 #include <ksharedptr.h>
 
-#include <qptrlist.h>
-#include <qstring.h>
+#include <QList>
+#include <QString>
 
 namespace Tellico {
   namespace Data {
@@ -98,17 +98,17 @@ private:
  *
  * @author Robby Stephenson
  */
-class Filter : public QPtrList<FilterRule>, public KShared {
+class Filter : public QList<FilterRule*>, public KShared {
 
 public:
   enum FilterOp {
     MatchAny,
     MatchAll
   };
-  typedef KSharedPtr<Filter> Ptr;
 
-  Filter(FilterOp op) : QPtrList<FilterRule>(), m_op(op) { setAutoDelete(true); }
+  Filter(FilterOp op) : QList<FilterRule*>(), m_op(op) {}
   Filter(const Filter& other);
+  ~Filter();
 
   void setMatch(FilterOp op) { m_op = op; }
   FilterOp op() const { return m_op; }
@@ -117,7 +117,7 @@ public:
   void setName(const QString& name) { m_name = name; }
   const QString& name() const { return m_name; }
 
-  uint count() const { return QPtrList<FilterRule>::count(); } // disambiguate
+  int count() const { return QList<FilterRule*>::count(); } // disambiguate
 
 private:
   Filter& operator=(const Filter& other);

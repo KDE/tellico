@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,25 +16,23 @@
 #include "bibtexhandler.h"
 #include "../document.h"
 #include "../collections/bibtexcollection.h"
-#include "../latin1literal.h"
 #include "../filehandler.h"
 #include "../stringset.h"
+#include "../fieldformat.h"
 #include "../tellico_debug.h"
 
 #include <config.h>
 
 #include <klocale.h>
-#include <kdebug.h>
-#include <kconfig.h>
+#include <KConfigGroup>
 #include <kcombobox.h>
 
-#include <qregexp.h>
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qwhatsthis.h>
-#include <qlabel.h>
-#include <qhbox.h>
+#include <QRegExp>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 
 using Tellico::Export::BibtexExporter;
 
@@ -71,15 +69,15 @@ bool BibtexExporter::exec() {
 
   const QString bibtex = QString::fromLatin1("bibtex");
 // keep a list of all the 'ordinary' fields to iterate through later
-  Data::FieldVec fields;
-  Data::FieldVec vec = coll->fields();
-  for(Data::FieldVec::Iterator it = vec.begin(); it != vec.end(); ++it) {
+  Data::FieldList fields;
+  Data::FieldList vec = coll->fields();
+  foreach(Data::FieldPtr it, vec) {
     QString bibtexField = it->property(bibtex);
-    if(bibtexField == Latin1Literal("entry-type")) {
+    if(bibtexField == QLatin1String("entry-type")) {
       typeField = it->name();
-    } else if(bibtexField == Latin1Literal("key")) {
+    } else if(bibtexField == QLatin1String("key")) {
       keyField = it->name();
-    } else if(bibtexField == Latin1Literal("crossref")) {
+    } else if(bibtexField == QLatin1String("crossref")) {
       fields.append(it); // still output crossref field
       crossRefField = it->name();
       hasCrossRefs = true;
@@ -89,12 +87,12 @@ bool BibtexExporter::exec() {
   }
 
   if(typeField.isEmpty() || keyField.isEmpty()) {
-    kdWarning() << "BibtexExporter::exec() - the collection must have fields defining "
+    kWarning() << "BibtexExporter::exec() - the collection must have fields defining "
                    "the entry-type and the key of the entry" << endl;
     return false;
   }
   if(fields.isEmpty()) {
-    kdWarning() << "BibtexExporter::exec() - no bibtex field mapping exists in the collection." << endl;
+    kWarning() << "BibtexExporter::exec() - no bibtex field mapping exists in the collection.";
     return false;
   }
 
@@ -110,12 +108,12 @@ bool BibtexExporter::exec() {
   if(!m_expandMacros) {
     QMap<QString, QString>::ConstIterator macroIt;
     for(macroIt = coll->macroList().constBegin(); macroIt != coll->macroList().constEnd(); ++macroIt) {
-      if(!macroIt.data().isEmpty()) {
-        text += QString::fromLatin1("@string{")
+      if(!macroIt.value().isEmpty()) {
+        text += QLatin1String("@string{")
                 + macroIt.key()
-                + QString::fromLatin1("=")
-                + BibtexHandler::exportText(macroIt.data(), macros)
-                + QString::fromLatin1("}\n\n");
+                + QLatin1String("=")
+                + BibtexHandler::exportText(macroIt.value(), macros)
+                + QLatin1String("}\n\n");
       }
     }
   }
@@ -124,19 +122,19 @@ bool BibtexExporter::exec() {
   // whole collection first
   StringSet crossRefKeys;
   if(hasCrossRefs) {
-    for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
+    foreach(Data::EntryPtr entryIt, entries()) {
       crossRefKeys.add(entryIt->field(crossRefField));
     }
   }
 
 
   StringSet usedKeys;
-  Data::ConstEntryVec crossRefs;
+  Data::EntryList crossRefs;
   QString type, key, newKey, value;
-  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt) {
+  foreach(Data::EntryPtr entryIt, entries()) {
     type = entryIt->field(typeField);
     if(type.isEmpty()) {
-      kdWarning() << "BibtexExporter::text() - the entry for '" << entryIt->title()
+      kWarning() << "BibtexExporter::text() - the entry for '" << entryIt->title()
                   << "' has no entry-type, skipping it!" << endl;
       continue;
     }
@@ -146,12 +144,12 @@ bool BibtexExporter::exec() {
       if(m_skipEmptyKeys) {
         continue;
       }
-      key = BibtexHandler::bibtexKey(entryIt.data());
+      key = BibtexHandler::bibtexKey(entryIt);
     } else {
       // check crossrefs, only counts for non-empty keys
       // if this entry is crossref'd, add it to the list, and skip it
       if(hasCrossRefs && crossRefKeys.has(key)) {
-        crossRefs.append(entryIt.data());
+        crossRefs.append(entryIt);
         continue;
       }
     }
@@ -170,7 +168,7 @@ bool BibtexExporter::exec() {
   }
 
   // now write out crossrefs
-  for(Data::ConstEntryVec::Iterator entryIt = crossRefs.begin(); entryIt != crossRefs.end(); ++entryIt) {
+  foreach(Data::EntryPtr entryIt, crossRefs) {
     // no need to check type
 
     key = entryIt->field(keyField);
@@ -190,65 +188,75 @@ bool BibtexExporter::exec() {
   return FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);
 }
 
-QWidget* BibtexExporter::widget(QWidget* parent_, const char* name_/*=0*/) {
+QWidget* BibtexExporter::widget(QWidget* parent_) {
   if(m_widget && m_widget->parent() == parent_) {
     return m_widget;
   }
 
-  m_widget = new QWidget(parent_, name_);
+  m_widget = new QWidget(parent_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* box = new QGroupBox(1, Qt::Horizontal, i18n("Bibtex Options"), m_widget);
-  l->addWidget(box);
+  QGroupBox* gbox = new QGroupBox(i18n("Bibtex Options"), m_widget);
+  QVBoxLayout* vlay = new QVBoxLayout(gbox);
 
-  m_checkExpandMacros = new QCheckBox(i18n("Expand string macros"), box);
+  m_checkExpandMacros = new QCheckBox(i18n("Expand string macros"), gbox);
   m_checkExpandMacros->setChecked(m_expandMacros);
-  QWhatsThis::add(m_checkExpandMacros, i18n("If checked, the string macros will be expanded and no "
-                                            "@string{} entries will be written."));
+  m_checkExpandMacros->setWhatsThis(i18n("If checked, the string macros will be expanded and no "
+                                         "@string{} entries will be written."));
 
-  m_checkPackageURL = new QCheckBox(i18n("Use URL package"), box);
+  m_checkPackageURL = new QCheckBox(i18n("Use URL package"), gbox);
   m_checkPackageURL->setChecked(m_packageURL);
-  QWhatsThis::add(m_checkPackageURL, i18n("If checked, any URL fields will be wrapped in a "
-                                          "\\url declaration."));
+  m_checkPackageURL->setWhatsThis(i18n("If checked, any URL fields will be wrapped in a "
+                                       "\\url declaration."));
 
-  m_checkSkipEmpty = new QCheckBox(i18n("Skip entries with empty citation keys"), box);
+  m_checkSkipEmpty = new QCheckBox(i18n("Skip entries with empty citation keys"), gbox);
   m_checkSkipEmpty->setChecked(m_skipEmptyKeys);
-  QWhatsThis::add(m_checkSkipEmpty, i18n("If checked, any entries without a bibtex citation key "
-                                         "will be skipped."));
+  m_checkSkipEmpty->setWhatsThis(i18n("If checked, any entries without a bibtex citation key "
+                                      "will be skipped."));
 
-  QHBox* hbox = new QHBox(box);
-  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:") + ' ', hbox); // add a space for astheticss
-  m_cbBibtexStyle = new KComboBox(hbox);
-  m_cbBibtexStyle->insertItem(i18n("Braces"));
-  m_cbBibtexStyle->insertItem(i18n("Quotes"));
+  QHBoxLayout* hlay = new QHBoxLayout(gbox);
+  vlay->addLayout(hlay);
+
+  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:") + ' ', gbox); // add a space for asthetics
+  m_cbBibtexStyle = new KComboBox(gbox);
+  m_cbBibtexStyle->addItem(i18n("Braces"));
+  m_cbBibtexStyle->addItem(i18n("Quotes"));
   QString whats = i18n("<qt>The quotation style used when exporting bibtex. All field values will "
                        " be escaped with either braces or quotation marks.</qt>");
-  QWhatsThis::add(l1, whats);
-  QWhatsThis::add(m_cbBibtexStyle, whats);
+  l1->setWhatsThis(whats);
+  m_cbBibtexStyle->setWhatsThis(whats);
   if(BibtexHandler::s_quoteStyle == BibtexHandler::BRACES) {
     m_cbBibtexStyle->setCurrentItem(i18n("Braces"));
   } else {
     m_cbBibtexStyle->setCurrentItem(i18n("Quotes"));
   }
 
+  hlay->addWidget(l1);
+  hlay->addWidget(m_cbBibtexStyle);
+
+  vlay->addWidget(m_checkExpandMacros);
+  vlay->addWidget(m_checkPackageURL);
+  vlay->addWidget(m_checkSkipEmpty);
+
+  l->addWidget(gbox);
   l->addStretch(1);
   return m_widget;
 }
 
-void BibtexExporter::readOptions(KConfig* config_) {
+void BibtexExporter::readOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
-  m_expandMacros = group.readBoolEntry("Expand Macros", m_expandMacros);
-  m_packageURL = group.readBoolEntry("URL Package", m_packageURL);
-  m_skipEmptyKeys = group.readBoolEntry("Skip Empty Keys", m_skipEmptyKeys);
+  m_expandMacros = group.readEntry("Expand Macros", m_expandMacros);
+  m_packageURL = group.readEntry("URL Package", m_packageURL);
+  m_skipEmptyKeys = group.readEntry("Skip Empty Keys", m_skipEmptyKeys);
 
-  if(group.readBoolEntry("Use Braces", true)) {
+  if(group.readEntry("Use Braces", true)) {
     BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
   } else {
     BibtexHandler::s_quoteStyle = BibtexHandler::QUOTES;
   }
 }
 
-void BibtexExporter::saveOptions(KConfig* config_) {
+void BibtexExporter::saveOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_expandMacros = m_checkExpandMacros->isChecked();
   group.writeEntry("Expand Macros", m_expandMacros);
@@ -266,7 +274,7 @@ void BibtexExporter::saveOptions(KConfig* config_) {
   }
 }
 
-void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields_, const Data::Entry& entry_,
+void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldList& fields_, const Tellico::Data::Entry& entry_,
                                     const QString& type_, const QString& key_) {
   const QStringList macros = static_cast<const Data::BibtexCollection*>(Data::Document::self()->collection().data())->macroList().keys();
   const QString bibtex = QString::fromLatin1("bibtex");
@@ -275,9 +283,8 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
   text_ += '@' + type_ + '{' + key_;
 
   QString value;
-  Data::FieldVec::ConstIterator fIt, end = fields_.constEnd();
   bool format = options() & Export::ExportFormatted;
-  for(fIt = fields_.constBegin(); fIt != end; ++fIt) {
+  foreach(Data::FieldPtr fIt, fields_) {
     value = entry_.field(fIt->name(), format);
     if(value.isEmpty()) {
       continue;
@@ -287,20 +294,20 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
     // insert "and" in between them (e.g. author and editor)
     if(fIt->formatFlag() == Data::Field::FormatName
        && fIt->flags() & Data::Field::AllowMultiple) {
-      value.replace(Data::Field::delimiter(), QString::fromLatin1(" and "));
+      value.replace(FieldFormat::delimiter(), QString::fromLatin1(" and "));
     } else if(fIt->flags() & Data::Field::AllowMultiple) {
       QString bibsep = fIt->property(bibtexSep);
       if(!bibsep.isEmpty()) {
-        value.replace(Data::Field::delimiter(), bibsep);
+        value.replace(FieldFormat::delimiter(), bibsep);
       }
     } else if(fIt->type() == Data::Field::Para) {
       // strip HTML from bibtex export
-      QRegExp stripHTML(QString::fromLatin1("<.*>"), true);
+      QRegExp stripHTML(QLatin1String("<.*>"));
       stripHTML.setMinimal(true);
       value.remove(stripHTML);
-    } else if(fIt->property(bibtex) == Latin1Literal("pages")) {
+    } else if(fIt->property(bibtex) == QLatin1String("pages")) {
       QRegExp rx(QString::fromLatin1("(\\d)-(\\d)"));
-      for(int pos = rx.search(value); pos > -1; pos = rx.search(value, pos+2)) {
+      for(int pos = rx.indexIn(value); pos > -1; pos = rx.indexIn(value, pos+2)) {
         value.replace(pos, 3, rx.cap(1)+"--"+rx.cap(2));
       }
     }
@@ -315,12 +322,12 @@ void BibtexExporter::writeEntryText(QString& text_, const Data::FieldVec& fields
       // if m_expandMacros is true, then macros is empty, so this is ok even then
       value = BibtexHandler::exportText(value, macros);
     }
-    text_ += QString::fromLatin1(",\n  ")
+    text_ += QLatin1String(",\n  ")
            + fIt->property(bibtex)
-           + QString::fromLatin1(" = ")
+           + QLatin1String(" = ")
            + value;
   }
-  text_ += QString::fromLatin1("\n}\n\n");
+  text_ += QLatin1String("\n}\n\n");
 }
 
 #include "bibtexexporter.moc"

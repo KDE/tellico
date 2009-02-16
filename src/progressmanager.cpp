@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,11 +14,17 @@
 #include "progressmanager.h"
 #include "tellico_debug.h"
 
-#include <qtimer.h>
+#include <QTimer>
 
 using Tellico::ProgressItem;
 using Tellico::ProgressManager;
 ProgressManager* ProgressManager::s_self = 0;
+
+template<typename T>
+inline
+uint qHash(const QPointer<T>& pointer_) {
+  return qHash(pointer_.data());
+}
 
 ProgressItem::Done::~Done() {
   ProgressManager::self()->setDone(m_object);
@@ -72,7 +78,7 @@ void ProgressItem::cancel() {
 ProgressManager::ProgressManager() : QObject() {
 }
 
-void ProgressManager::setProgress(const QObject* owner_, uint steps_) {
+void ProgressManager::setProgress(QObject* owner_, uint steps_) {
   if(!m_items.contains(owner_)) {
     return;
   }
@@ -82,7 +88,7 @@ void ProgressManager::setProgress(const QObject* owner_, uint steps_) {
 //  emit signalItemProgress(m_items[owner_]);
 }
 
-void ProgressManager::setTotalSteps(const QObject* owner_, uint steps_) {
+void ProgressManager::setTotalSteps(QObject* owner_, uint steps_) {
   if(!m_items.contains(owner_)) {
     return;
   }
@@ -91,7 +97,7 @@ void ProgressManager::setTotalSteps(const QObject* owner_, uint steps_) {
 //  updateTotalProgress(); // called in ProgressItem::setTotalSteps()
 }
 
-void ProgressManager::setDone(const QObject* owner_) {
+void ProgressManager::setDone(QObject* owner_) {
   if(!m_items.contains(owner_)) {
     return;
   }
@@ -111,7 +117,7 @@ void ProgressManager::slotItemDone(ProgressItem* item_) {
 // cancel ends up removing it from the map, so make a copy
   ProgressMap map = m_items;
   for(ProgressMap::Iterator it = map.begin(); it != map.end(); ++it) {
-    if(static_cast<ProgressItem*>(it.data()) == item_) {
+    if(static_cast<ProgressItem*>(it.value()) == item_) {
       m_items.remove(it.key());
       break;
     }
@@ -120,7 +126,7 @@ void ProgressManager::slotItemDone(ProgressItem* item_) {
 //  emit signalItemDone(item_);
 }
 
-ProgressItem& ProgressManager::newProgressItemImpl(const QObject* owner_,
+ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
                                                    const QString& label_,
                                                    bool canCancel_) {
 //  myDebug() << "ProgressManager::newProgressItem() - " << owner_->className() << ":" << label_ << endl;
@@ -145,8 +151,8 @@ void ProgressManager::slotUpdateTotalProgress() {
   uint progress = 0;
   uint total = 0;
 
-  for(ProgressMap::ConstIterator it = m_items.begin(); it != m_items.end(); ++it) {
-    if(it.data()) {
+  for(ProgressMap::ConstIterator it = m_items.constBegin(); it != m_items.constEnd(); ++it) {
+    if(it.value()) {
       progress += (*it)->progress();
       total += (*it)->totalSteps();
     }
@@ -163,17 +169,17 @@ void ProgressManager::slotUpdateTotalProgress() {
 void ProgressManager::slotCancelAll() {
 // cancel ends up removing it from the map, so make a copy
   ProgressMap map = m_items;
-  for(ProgressMap::ConstIterator it = map.begin(), end = map.end(); it != end; ++it) {
-    if(it.data()) {
-      it.data()->cancel();
-      setDone(it.data());
+  for(ProgressMap::ConstIterator it = map.constBegin(), end = map.constEnd(); it != end; ++it) {
+    if(it.value()) {
+      it.value()->cancel();
+      setDone(it.value());
     }
   }
 }
 
 bool ProgressManager::anyCanBeCancelled() const {
-  for(ProgressMap::ConstIterator it = m_items.begin(), end = m_items.end(); it != end; ++it) {
-    if(it.data() && it.data()->canCancel()) {
+  for(ProgressMap::ConstIterator it = m_items.constBegin(), end = m_items.constEnd(); it != end; ++it) {
+    if(it.value() && it.value()->canCancel()) {
       return true;
     }
   }

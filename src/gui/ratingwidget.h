@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,15 +11,16 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef RATINGWIDGET_H
-#define RATINGWIDGET_H
+#ifndef TELLICO_RATINGWIDGET_H
+#define TELLICO_RATINGWIDGET_H
 
 #include "../datavectors.h"
 
-#include <qhbox.h>
-#include <qptrlist.h>
-#include <qlabel.h>
-#include <qpixmap.h>
+#include <KHBox>
+
+#include <QList>
+#include <QLabel>
+#include <QPixmap>
 
 namespace Tellico {
   namespace Data {
@@ -30,13 +31,13 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class RatingWidget : public QHBox {
+class RatingWidget : public KHBox {
 Q_OBJECT
 
-typedef QPtrList<QLabel> LabelList;
+typedef QList<QLabel*> LabelList;
 
 public:
-  RatingWidget(Data::FieldPtr field, QWidget* parent, const char* name = 0);
+  RatingWidget(Data::FieldPtr field, QWidget* parent);
 
   void clear();
   QString text() const;
@@ -58,7 +59,7 @@ private:
   void init();
   void updateBounds();
 
-  Data::ConstFieldPtr m_field;
+  Data::FieldPtr m_field;
   LabelList m_widgets;
 
   int m_currIndex;

@@ -1,0 +1,18 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+          "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+    <interface name="org.tellico_project.newstuff">
+        <method name="installTemplate">
+            <arg name="file" type="s" direction="in"/>
+        </method>
+        <method name="removeTemplate">
+            <arg name="file" type="s" direction="in"/>
+        </method>
+        <method name="installScript">
+            <arg name="file" type="s" direction="in"/>
+        </method>
+        <method name="removeScript">
+            <arg name="file" type="s" direction="in"/>
+        </method>
+    </interface>
+</node>

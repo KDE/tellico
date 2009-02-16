@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,42 +12,70 @@
  ***************************************************************************/
 
 #include "dcopinterface.h"
-#include "../latin1literal.h"
 #include "../controller.h"
 #include "../tellico_kernel.h"
 #include "../document.h"
 #include "../collection.h"
 #include "../translators/bibtexhandler.h"
+#include "../mainwindow.h"
+
+#include <QDBusConnection>
 
 using Tellico::ApplicationInterface;
 using Tellico::CollectionInterface;
 
+ApplicationInterface::ApplicationInterface(Tellico::MainWindow* parent_) : QObject(parent_), m_mainWindow(parent_) {
+  QDBusConnection::sessionBus().registerObject("/tellico", this, QDBusConnection::ExportScriptableSlots);
+}
+
 Tellico::Import::Action ApplicationInterface::actionType(const QString& actionName) {
-  QString name = actionName.lower();
-  if(name == Latin1Literal("append")) {
+  QString name = actionName.toLower();
+  if(name == QLatin1String("append")) {
     return Import::Append;
-  } else if(name == Latin1Literal("merge")) {
+  } else if(name == QLatin1String("merge")) {
     return Import::Merge;
   }
   return Import::Replace;
 }
 
-QValueList<long> ApplicationInterface::selectedEntries() const {
-  QValueList<long> ids;
-  Data::EntryVec entries = Controller::self()->selectedEntries();
-  for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+QList<long> ApplicationInterface::selectedEntries() const {
+  QList<long> ids;
+  foreach(Data::EntryPtr entry, Controller::self()->selectedEntries()) {
     ids << entry->id();
   }
   return ids;
 }
 
-QValueList<long> ApplicationInterface::filteredEntries() const {
-  QValueList<long> ids;
-  Data::EntryVec entries = Controller::self()->visibleEntries();
-  for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+QList<long> ApplicationInterface::filteredEntries() const {
+  QList<long> ids;
+  foreach(Data::EntryPtr entry, Controller::self()->visibleEntries()) {
     ids << entry->id();
   }
   return ids;
+}
+
+void ApplicationInterface::openFile(const QString& file) {
+  return m_mainWindow->openFile(file);
+}
+
+void ApplicationInterface::setFilter(const QString& text) {
+  return m_mainWindow->setFilter(text);
+}
+
+bool ApplicationInterface::showEntry(long id)  {
+  return m_mainWindow->showEntry(id);
+}
+
+bool ApplicationInterface::importFile(Tellico::Import::Format format, const KUrl& url, Tellico::Import::Action action) {
+  return m_mainWindow->importFile(format, url, action);
+}
+
+bool ApplicationInterface::exportCollection(Tellico::Export::Format format, const KUrl& url) {
+  return m_mainWindow->exportCollection(format, url);
+}
+
+CollectionInterface::CollectionInterface(QObject* parent_) : QObject(parent_) {
+  QDBusConnection::sessionBus().registerObject("/collection", this, QDBusConnection::ExportScriptableSlots);
 }
 
 long CollectionInterface::addEntry() {
@@ -55,8 +83,8 @@ long CollectionInterface::addEntry() {
   if(!coll) {
     return -1;
   }
-  Data::EntryPtr entry = new Data::Entry(coll);
-  Kernel::self()->addEntries(entry, false);
+  Data::EntryPtr entry(new Data::Entry(coll));
+  Kernel::self()->addEntries(Data::EntryList() << entry, false);
   return entry->id();
 }
 
@@ -69,8 +97,8 @@ bool CollectionInterface::removeEntry(long id_) {
   if(!entry) {
     return false;
   }
-  Kernel::self()->removeEntries(entry);
-  return coll->entryById(id_) == 0;
+  Kernel::self()->removeEntries(Data::EntryList() << entry);
+  return !coll->entryById(id_);
 }
 
 QStringList CollectionInterface::values(const QString& fieldName_) const {
@@ -86,8 +114,8 @@ QStringList CollectionInterface::values(const QString& fieldName_) const {
   if(!field) {
     return results;
   }
-  Data::EntryVec entries = Controller::self()->selectedEntries();
-  for(Data::EntryVecIt entry = entries.begin(); entry != entries.end(); ++entry) {
+  Data::EntryList entries = Controller::self()->selectedEntries();
+  foreach(Data::EntryPtr entry, entries) {
     results += entry->fields(field, false);
   }
   return results;
@@ -130,7 +158,7 @@ QString CollectionInterface::bibtexKey(long id_) const {
   if(!entry) {
     return QString();
   }
-  return BibtexHandler::bibtexKeys(entry).first();
+  return BibtexHandler::bibtexKeys(Data::EntryList() << entry).first();
 }
 
 bool CollectionInterface::setFieldValue(long id_, const QString& fieldName_, const QString& value_) {
@@ -142,11 +170,11 @@ bool CollectionInterface::setFieldValue(long id_, const QString& fieldName_, con
   if(!entry) {
     return false;
   }
-  Data::EntryPtr oldEntry = new Data::Entry(*entry);
+  Data::EntryPtr oldEntry(new Data::Entry(*entry));
   if(!entry->setField(fieldName_, value_)) {
     return false;
   }
-  Kernel::self()->modifyEntries(oldEntry, entry);
+  Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry);
   return true;
 }
 
@@ -159,13 +187,13 @@ bool CollectionInterface::addFieldValue(long id_, const QString& fieldName_, con
   if(!entry) {
     return false;
   }
-  Data::EntryPtr oldEntry = new Data::Entry(*entry);
+  Data::EntryPtr oldEntry(new Data::Entry(*entry));
   QStringList values = entry->fields(fieldName_, false);
   QStringList newValues = values;
   newValues << value_;
   if(!entry->setField(fieldName_, newValues.join(QString::fromLatin1("; ")))) {
     return false;
   }
-  Kernel::self()->modifyEntries(oldEntry, entry);
+  Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry);
   return true;
 }

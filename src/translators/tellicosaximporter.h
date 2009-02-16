@@ -37,7 +37,7 @@ public:
   /**
    * @param url The tellico data file.
    */
-  TellicoSaxImporter(const KURL& url, bool loadAllImages=true);
+  TellicoSaxImporter(const KUrl& url, bool loadAllImages=true);
   /**
    * Constructor used to convert arbitrary text to a @ref Collection
    *
@@ -59,7 +59,7 @@ public:
   bool hasImages() const;
   bool loadImage(const QString& id_);
 
-  static bool loadAllImages(const KURL& url);
+  static bool loadAllImages(const KUrl& url);
 
 public slots:
   void slotCancel();

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-20068 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,18 +11,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ENTRYVIEW_H
-#define ENTRYVIEW_H
-
-class KRun;
-class KTempFile;
+#ifndef TELLICO_ENTRYVIEW_H
+#define TELLICO_ENTRYVIEW_H
 
 #include "datavectors.h"
 
 #include <khtml_part.h>
 #include <khtmlview.h>
 
-#include <qguardedptr.h>
+#include <QPointer>
+
+class KRun;
+class KTemporaryFile;
 
 namespace Tellico {
   class XSLTHandler;
@@ -40,9 +40,8 @@ public:
    * The EntryView shows a HTML representation of the data in the entry.
    *
    * @param parent QWidget parent
-   * @param name QObject name
    */
-  EntryView(QWidget* parent, const char* name=0);
+  EntryView(QWidget* parent);
   /**
    */
   virtual ~EntryView();
@@ -70,7 +69,7 @@ public:
   void setUseGradientImages(bool b) { m_useGradientImages = b; }
 
 signals:
-  void signalAction(const KURL& url);
+  void signalAction(const KUrl& url);
 
 public slots:
   /**
@@ -84,7 +83,7 @@ private slots:
    *
    * @param url The URL to open
    */
-  void slotOpenURL(const KURL& url);
+  void slotOpenURL(const KUrl& url);
   void slotReloadEntry();
   void slotResetColors();
 
@@ -97,8 +96,8 @@ private:
   QString m_textToShow;
 
   // to run any clicked processes
-  QGuardedPtr<KRun> m_run;
-  KTempFile* m_tempFile;
+  QPointer<KRun> m_run;
+  KTemporaryFile* m_tempFile;
   bool m_useGradientImages : 1;
   bool m_checkCommonFile : 1;
 };

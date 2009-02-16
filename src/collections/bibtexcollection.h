@@ -16,6 +16,8 @@
 
 #include "../collection.h"
 
+#include <QHash>
+
 namespace Tellico {
   namespace Data {
 
@@ -56,11 +58,11 @@ public:
 
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
   static CollPtr convertBookCollection(CollPtr coll);
 
 private:
-  QDict<Field> m_bibtexFieldDict;
+  QHash<QString, Data::Field*> m_bibtexFieldDict;
   QString m_preamble;
   StringMap m_macros;
 };

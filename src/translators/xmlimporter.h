@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef XMLIMPORTER_H
-#define XMLIMPORTER_H
+#ifndef TELLICO_XMLIMPORTER_H
+#define TELLICO_XMLIMPORTER_H
 
 #include "importer.h"
 
@@ -35,7 +35,7 @@ public:
    *
    * @param url The file to be imported
    */
-  XMLImporter(const KURL& url);
+  XMLImporter(const KUrl& url);
   /**
    * Imports xml text.
    *

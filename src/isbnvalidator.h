@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2002-2006 by Robby Stephenson
+    copyright            : (C) 2002-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,10 +11,10 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ISBNVALIDATOR_H
-#define ISBNVALIDATOR_H
+#ifndef TELLICO_ISBNVALIDATOR_H
+#define TELLICO_ISBNVALIDATOR_H
 
-#include <qvalidator.h>
+#include <QValidator>
 
 namespace Tellico {
 
@@ -26,8 +26,10 @@ namespace Tellico {
  * @see http://doc.trolltech.com/qq/qq01-seriously-weird-qregexp.html
  */
 class ISBNValidator : public QValidator {
+Q_OBJECT
+
 public:
-  ISBNValidator(QObject* parent, const char* name=0);
+  ISBNValidator(QObject* parent);
 
   /**
    * Certain conditions are checked. Character, length and position
@@ -120,9 +122,9 @@ public:
 private:
   static struct isbn_band {
     unsigned long MaxValue;
-    unsigned int First;
-    unsigned int Mid;
-    unsigned int Last;
+    int First;
+    int Mid;
+    int Last;
   } bands[];
 
   QValidator::State validate10(QString& input, int& pos) const;

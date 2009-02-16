@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2007 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,7 +25,8 @@
 #include <kmessagebox.h>
 #include <kapplication.h>
 
-#include <qdir.h>
+#include <QDir>
+#include <QTextStream>
 
 namespace {
   static const int ALEXANDRIA_MAX_SIZE_SMALL = 60;
@@ -65,8 +66,8 @@ bool AlexandriaExporter::exec() {
   if(libraryDir.cd(coll->title())) {
     int ret = KMessageBox::warningContinueCancel(Kernel::self()->widget(),
                                                  i18n("<qt>An Alexandria library called <i>%1</i> already exists. "
-                                                      "Any existing books in that library could be overwritten.</qt>")
-                                                      .arg(coll->title()));
+                                                      "Any existing books in that library could be overwritten.</qt>",
+                                                      coll->title()));
     if(ret == KMessageBox::Cancel) {
       return false;
     }
@@ -77,14 +78,14 @@ bool AlexandriaExporter::exec() {
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString::null, false);
   item.setTotalSteps(entries().count());
   ProgressItem::Done done(this);
-  const uint stepSize = QMAX(1, entries().count()/100);
+  const uint stepSize = qMax(1, entries().count()/100);
   const bool showProgress = options() & ExportProgress;
 
   GUI::CursorSaver cs;
   bool success = true;
   uint j = 0;
-  for(Data::EntryVec::ConstIterator entryIt = entries().begin(); entryIt != entries().end(); ++entryIt, ++j) {
-    success &= writeFile(libraryDir, entryIt.data());
+  foreach(const Data::EntryPtr& entry, entries()) {
+    success &= writeFile(libraryDir, entry);
     if(showProgress && j%stepSize == 0) {
       item.setProgress(j);
       kapp->processEvents();
@@ -95,7 +96,7 @@ bool AlexandriaExporter::exec() {
 
 // this isn't true YAML export, of course
 // everything is put between quotes except for the rating, just to be sure it's interpreted as a string
-bool AlexandriaExporter::writeFile(const QDir& dir_, Data::ConstEntryPtr entry_) {
+bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr entry_) {
   // the filename is the isbn without dashes, followed by .yaml
   QString isbn = entry_->field(QString::fromLatin1("isbn"));
   if(isbn.isEmpty()) {
@@ -103,8 +104,8 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Data::ConstEntryPtr entry_)
   }
   isbn.remove('-'); // remove dashes
 
-  QFile file(dir_.absPath() + QDir::separator() + isbn + QString::fromLatin1(".yaml"));
-  if(!file.open(IO_WriteOnly)) {
+  QFile file(dir_.absolutePath() + QDir::separator() + isbn + QLatin1String(".yaml"));
+  if(!file.open(QIODevice::WriteOnly)) {
     return false;
   }
 
@@ -113,7 +114,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Data::ConstEntryPtr entry_)
 
   QTextStream ts(&file);
   // alexandria uses utf-8 all the time
-  ts.setEncoding(QTextStream::UnicodeUTF8);
+  ts.setCodec("UTF-8");
   ts << "--- !ruby/object:Alexandria::Book\n";
   ts << "authors:\n";
   QStringList authors = entry_->fields(QString::fromLatin1("author"), format);
@@ -164,14 +165,15 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Data::ConstEntryPtr entry_)
 
   QImage img1(ImageFactory::imageById(cover));
   QImage img2;
-  QString filename = dir_.absPath() + QDir::separator() + isbn;
+  QString filename = dir_.absolutePath() + QDir::separator() + isbn;
   if(img1.height() > ALEXANDRIA_MAX_SIZE_SMALL) {
     if(img1.height() > ALEXANDRIA_MAX_SIZE_MEDIUM) { // limit maximum size
-      img1 = img1.scale(ALEXANDRIA_MAX_SIZE_MEDIUM, ALEXANDRIA_MAX_SIZE_MEDIUM, QImage::ScaleMin);
+      img1 = img1.scaled(ALEXANDRIA_MAX_SIZE_MEDIUM, ALEXANDRIA_MAX_SIZE_MEDIUM, Qt::KeepAspectRatio);
     }
-    img2 = img1.scale(ALEXANDRIA_MAX_SIZE_SMALL, ALEXANDRIA_MAX_SIZE_SMALL, QImage::ScaleMin);
+    img2 = img1.scaled(ALEXANDRIA_MAX_SIZE_SMALL, ALEXANDRIA_MAX_SIZE_SMALL, Qt::KeepAspectRatio);
   } else {
-    img2 = img1.smoothScale(ALEXANDRIA_MAX_SIZE_MEDIUM, ALEXANDRIA_MAX_SIZE_MEDIUM, QImage::ScaleMin); // scale up
+    img2 = img1.scaled(ALEXANDRIA_MAX_SIZE_MEDIUM, ALEXANDRIA_MAX_SIZE_MEDIUM,
+                       Qt::KeepAspectRatio, Qt::SmoothTransformation); // scale up
   }
   if(!img1.save(filename + QString::fromLatin1("_medium.jpg"), "JPEG")
      || !img2.save(filename + QString::fromLatin1("_small.jpg"), "JPEG")) {

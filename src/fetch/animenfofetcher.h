@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,11 +17,12 @@
 #include "fetcher.h"
 #include "configwidget.h"
 
-#include <qcstring.h> // for QByteArray
-#include <qguardedptr.h>
+#include <QPointer>
 
+class KUrl;
+class KJob;
 namespace KIO {
-  class Job;
+  class StoredTransferJob;
 }
 
 namespace Tellico {
@@ -36,7 +37,7 @@ class AnimeNfoFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  AnimeNfoFetcher(QObject* parent, const char* name = 0);
+  AnimeNfoFetcher(QObject* parent);
   virtual ~AnimeNfoFetcher() {}
 
   virtual QString source() const;
@@ -65,8 +66,7 @@ public:
   static QString defaultName();
 
 private slots:
-  void slotData(KIO::Job* job, const QByteArray& data);
-  void slotComplete(KIO::Job* job);
+  void slotComplete(KJob* job);
 
 private:
   Data::EntryPtr parseEntry(const QString& str);
@@ -74,8 +74,8 @@ private:
   QByteArray m_data;
   int m_total;
   QMap<int, Data::EntryPtr> m_entries;
-  QMap<int, KURL> m_matches;
-  QGuardedPtr<KIO::Job> m_job;
+  QMap<int, KUrl> m_matches;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
 //  QStringList m_fields;

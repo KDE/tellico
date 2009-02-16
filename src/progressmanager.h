@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,9 +17,9 @@
 #ifndef TELLICO_PROGRESSMANAGER_H
 #define TELLICO_PROGRESSMANAGER_H
 
-#include <qobject.h>
-#include <qmap.h>
-#include <qguardedptr.h>
+#include <QObject>
+#include <QHash>
+#include <QPointer>
 
 namespace Tellico {
 
@@ -36,10 +36,10 @@ friend class ProgressManager;
 public:
   class Done {
   public:
-    Done(const QObject* obj) : m_object(obj) {}
+    Done(QObject* obj) : m_object(obj) {}
     ~Done();
   private:
-    const QObject* m_object;
+    QObject* m_object;
   };
 
   bool canCancel() const { return m_canCancel; }
@@ -85,13 +85,13 @@ public:
 
   static ProgressManager* self() { if(!s_self) s_self = new ProgressManager(); return s_self; }
 
-  ProgressItem& newProgressItem(const QObject* owner, const QString& label, bool canCancel = false) {
+  ProgressItem& newProgressItem(QObject* owner, const QString& label, bool canCancel = false) {
     return newProgressItemImpl(owner, label, canCancel);
   }
 
-  void setProgress(const QObject* owner, uint steps);
-  void setTotalSteps(const QObject* owner, uint steps);
-  void setDone(const QObject* owner);
+  void setProgress(QObject* owner, uint steps);
+  void setTotalSteps(QObject* owner, uint steps);
+  void setDone(QObject* owner);
 
   bool anyCanBeCancelled() const;
 
@@ -113,10 +113,10 @@ private:
   ProgressManager();
   ProgressManager(const ProgressManager&); // no copies
 
-  ProgressItem& newProgressItemImpl(const QObject* owner, const QString& label, bool canCancel);
+  ProgressItem& newProgressItemImpl(QObject* owner, const QString& label, bool canCancel);
   void setDone(ProgressItem* item);
 
-  typedef QMap<QGuardedPtr<const QObject>, QGuardedPtr<ProgressItem> > ProgressMap;
+  typedef QHash<QPointer<QObject>, QPointer<ProgressItem> > ProgressMap;
   ProgressMap m_items;
 
   static ProgressManager* s_self;

@@ -46,7 +46,7 @@ public:
 
   virtual Type type() const { return Wine; }
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
 };
 
   } // end namespace

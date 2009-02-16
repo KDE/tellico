@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "manager.h"
-#include "newscript.h"
+#include "newstuffadaptor.h"
 #include "../filehandler.h"
 #include "../tellico_debug.h"
 #include "../tellico_utils.h"
@@ -22,38 +22,51 @@
 #include <kurl.h>
 #include <ktar.h>
 #include <kglobal.h>
-#include <kio/netaccess.h>
 #include <kconfig.h>
-#include <ktempfile.h>
-#include <kio/job.h>
+#include <ktemporaryfile.h>
 #include <kfileitem.h>
 #include <kdeversion.h>
-#include <knewstuff/entry.h>
 #include <kstandarddirs.h>
+#include <KConfigGroup>
+#include <KSharedConfig>
+#include <KDesktopFile>
+#include <KIO/Job>
+#include <KIO/DeleteJob>
+#include <KIO/NetAccess>
 
-#include <qfileinfo.h>
-#include <qdir.h>
-#include <qptrstack.h>
-#include <qvaluestack.h>
-#include <qwidget.h>
+#include <QFileInfo>
+#include <QDir>
+#include <QWidget>
 
 #include <sys/types.h>
 #include <sys/stat.h>
 
-using Tellico::NewStuff::Manager;
+namespace Tellico {
+  namespace NewStuff {
 
-Manager::Manager(QObject* parent_) : QObject(parent_), m_tempFile(0) {
-  m_infoList.setAutoDelete(true);
+class ManagerSingleton {
+public:
+    Tellico::NewStuff::Manager self;
+};
+
+K_GLOBAL_STATIC(ManagerSingleton, s_instance)
+
+Manager::Manager(QObject* parent_) : QObject(parent_) {
+  QDBusConnection::sessionBus().registerService("org.tellico_project");
+  new NewstuffAdaptor(this);
+  QDBusConnection::sessionBus().registerObject("/newstuff", this);
 }
 
 Manager::~Manager() {
-  delete m_tempFile;
-  m_tempFile = 0;
+  QDBusConnection::sessionBus().unregisterService("org.tellico_project");
 }
 
-bool Manager::installTemplate(const KURL& url_, const QString& entryName_) {
-  FileHandler::FileRef* ref = FileHandler::fileRef(url_);
+Manager* Manager::self()
+{
+    return &s_instance->self;
+}
 
+bool Manager::installTemplate(const QString& file) {
   QString xslFile;
   QStringList allFiles;
 
@@ -61,8 +74,8 @@ bool Manager::installTemplate(const KURL& url_, const QString& entryName_) {
 
   // is there a better way to figure out if the url points to a XSL file or a tar archive
   // than just trying to open it?
-  KTar archive(ref->fileName());
-  if(archive.open(IO_ReadOnly)) {
+  KTar archive(file);
+  if(archive.open(QIODevice::ReadOnly)) {
     const KArchiveDirectory* archiveDir = archive.directory();
     archiveDir->copyTo(Tellico::saveLocation(QString::fromLatin1("entry-templates/")));
 
@@ -70,213 +83,240 @@ bool Manager::installTemplate(const KURL& url_, const QString& entryName_) {
     // remember files installed for template
     xslFile = findXSL(archiveDir);
   } else { // assume it's an xsl file
-    QString name = entryName_;
-    if(name.isEmpty()) {
-      name = url_.fileName();
-    }
+    QString name = QFileInfo(file).fileName();
     if(!name.endsWith(QString::fromLatin1(".xsl"))) {
       name += QString::fromLatin1(".xsl");
     }
-    KURL dest;
-    dest.setPath(Tellico::saveLocation(QString::fromLatin1("entry-templates/")) + name);
-    success = true;
-    if(QFile::exists(dest.path())) {
-      myDebug() << "Manager::installTemplate() - " << dest.path() << " exists!" << endl;
-      success = false;
-    } else if(KIO::NetAccess::file_copy(url_, dest)) {
-      xslFile = dest.fileName();
-      allFiles += xslFile;
+    name.remove(QRegExp("^\\d+-")); // Remove possible kde-files.org id
+    name = Tellico::saveLocation(QString::fromLatin1("entry-templates/")) + name;
+    // Should overwrite since we might be upgrading
+    if (QFile::exists(name)) {
+        QFile::remove(name);
+    }
+    if(KIO::NetAccess::file_copy(KUrl(file), KUrl(name))) {
+      xslFile = QFileInfo(name).fileName();
+      allFiles << xslFile;
     }
   }
 
   if(xslFile.isEmpty()) {
     success = false;
   } else {
-    // remove ".xsl"
-    xslFile.truncate(xslFile.length()-4);
     KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
-    config.writeEntry(xslFile, allFiles);
-    m_urlNameMap.insert(url_, xslFile);
+    config.writeEntry(file, allFiles);
+    config.writeEntry(xslFile, file);
   }
-
   checkCommonFile();
-
-  delete ref;
   return success;
 }
 
-bool Manager::removeTemplate(const QString& name_) {
+QMap<QString, QString> Manager::userTemplates()
+{
+  QDir dir(Tellico::saveLocation(QString::fromLatin1("entry-templates/")));
+  dir.setNameFilters(QStringList() << QString::fromLatin1("*.xsl"));
+  dir.setFilter(QDir::Files | QDir::Writable);
+  QStringList files = dir.entryList();
+  QMap<QString, QString> nameFileMap;
+  foreach(QString file, files) {
+    QString name = file;
+    name.truncate(file.length()-4); // remove ".xsl"
+    name.replace('_', ' ');
+    nameFileMap.insert(name, file);
+  }
+  return nameFileMap;
+}
+
+bool Manager::removeTemplateByName(const QString& name)
+{
+  QString xslFile = userTemplates()[name];
+  if (!xslFile.isEmpty()) {
+    KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
+    QString file = config.readEntry(xslFile, QString());
+    if (!file.isEmpty()) {
+      return removeTemplate(file, true);
+    }
+    // At least remove xsl file
+    QFile::remove(Tellico::saveLocation(QString::fromLatin1("entry-templates/")) + xslFile);
+    return true;
+  }
+  return false;
+}
+
+bool Manager::removeTemplate(const QString& file, bool manual) {
   KConfigGroup fileGroup(KGlobal::config(), "KNewStuffFiles");
-  QStringList files = fileGroup.readListEntry(name_);
-  // at least, delete xsl file
+  QStringList files = fileGroup.readEntry(file, QStringList());
+
   if(files.isEmpty()) {
-    kdWarning() << "Manager::deleteTemplate()  no file list found for " << name_ << endl;
-    files += name_;
+     kWarning() << "No file list found for:" << file;
+     return false;
   }
 
   bool success = true;
   QString path = Tellico::saveLocation(QString::fromLatin1("entry-templates/"));
-  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it) {
-    if((*it).endsWith(QChar('/'))) {
+  foreach(const QString& file, files) {
+    if(file.endsWith(QChar('/'))) {
       // ok to not delete all directories
-      QDir().rmdir(path + *it);
+      QDir().rmdir(path + file);
     } else {
-      success = success && QFile(path + *it).remove();
+      success = success && QFile::remove(path + file);
       if(!success) {
-        myDebug() << "Manager::removeTemplate() - failed to remove " << (path+*it) << endl;
+        myDebug() << "Manager::removeTemplate() - failed to remove " << (path+file) << endl;
       }
     }
   }
 
   // remove config entries even if unsuccessful
-  fileGroup.deleteEntry(name_);
-  KConfigGroup statusGroup(KGlobal::config(), "KNewStuffStatus");
-  QString entryName = statusGroup.readEntry(name_);
-  statusGroup.deleteEntry(name_);
-  statusGroup.deleteEntry(entryName);
+  fileGroup.deleteEntry(file);
+  QString key = fileGroup.entryMap().key(file);
+  fileGroup.deleteEntry(key);
 
+  if (manual) {
+    removeNewStuffFile(file);
+  }
   return success;
 }
 
-bool Manager::installScript(const KURL& url_) {
-  FileHandler::FileRef* ref = FileHandler::fileRef(url_);
+void Manager::removeNewStuffFile(const QString& file) {
+    // remove newstuff meta file if that exists
+    KStandardDirs dirs;
+    QString newStuffDir = dirs.saveLocation("data", "knewstuff2-entries.registry/");
+    QStringList metaFiles = QDir(newStuffDir).entryList(QStringList() << "*.meta", QDir::Files);
+    QByteArray start = QString(" <ghnsinstall payloadfile=\"%1\"").arg(file).toUtf8();
+    foreach (const QString& meta, metaFiles) {
+      QFile f(newStuffDir + meta);
+      if (f.open(QIODevice::ReadOnly)) {
+        QByteArray firstLine = f.readLine();
+        if (firstLine.startsWith(start)) {
+          f.remove();
+          // It was newstuff file so remove payload also
+          QFile::remove(file);
+          break;
+        }
+        f.close();
+      }
+    }
+}
 
-  KTar archive(ref->fileName());
-  if(!archive.open(IO_ReadOnly)) {
-    myDebug() << "Manager::installScript() - can't open tar file" << endl;
-    return false;
-  }
-
-  const KArchiveDirectory* archiveDir = archive.directory();
-
-  QString exeFile = findEXE(archiveDir);
-  if(exeFile.isEmpty()) {
-    myDebug() << "Manager::installScript() - no exe file found" << endl;
-    return false;
-  }
-
-  QFileInfo exeInfo(exeFile);
-  DataSourceInfo* info = new DataSourceInfo();
-
+bool Manager::installScript(const QString& file) {
+  KTar archive(file);
   QString copyTarget = Tellico::saveLocation(QString::fromLatin1("data-sources/"));
   QString scriptFolder;
+  QString exeFile;
+  QString sourceName;
 
-  // package could have a top-level directory or not
-  // it should have a directory...
-  const KArchiveEntry* firstEntry = archiveDir->entry(archiveDir->entries().first());
-  if(firstEntry->isFile()) {
-    copyTarget += exeInfo.baseName(true) + '/';
-    if(QFile::exists(copyTarget)) {
-      KURL u;
-      u.setPath(scriptFolder);
-      myLog() << "Manager::installScript() - deleting " << scriptFolder << endl;
-      KIO::NetAccess::del(u, Kernel::self()->widget());
-      info->isUpdate = true;
+  if(archive.open(QIODevice::ReadOnly)) {
+    const KArchiveDirectory* archiveDir = archive.directory();
+    exeFile = findEXE(archiveDir);
+    if(exeFile.isEmpty()) {
+        myDebug() << "No exe file found" << endl;
+        return false;
     }
-    scriptFolder = copyTarget;
-  } else {
-    scriptFolder = copyTarget + firstEntry->name() + '/';
-    if(QFile::exists(copyTarget + exeFile)) {
-      info->isUpdate = true;
+    sourceName = QFileInfo(exeFile).baseName();
+    if (sourceName.isEmpty()) {
+        myDebug() << "Invalid packet name" << endl;
+        return false;
+    }
+    // package could have a top-level directory or not
+    // it should have a directory...
+    foreach (const QString& entry, archiveDir->entries()) {
+        if (entry.indexOf(QDir::separator()) < 0) {
+            // archive does have multiple root items -> extract own dir
+            copyTarget += sourceName;
+            scriptFolder = copyTarget + QDir::separator();
+            break;
+        }
+    }
+    if (scriptFolder.isEmpty()) { // one root item
+        scriptFolder = copyTarget + exeFile.left(exeFile.indexOf(QDir::separator())) +
+                    QDir::separator();
+    }
+    // overwrites stuff there
+    archiveDir->copyTo(copyTarget);
+  } else { // assume it's an script file
+    exeFile = QFileInfo(file).fileName();
+
+    exeFile.remove(QRegExp("^\\d+-")); // Remove possible kde-files.org id
+    sourceName = QFileInfo(exeFile).completeBaseName();
+    if (sourceName.isEmpty()) {
+        myDebug() << "Invalid packet name" << endl;
+        return false;
+    }
+    copyTarget += sourceName;
+    scriptFolder = copyTarget + QDir::separator();
+    QDir().mkpath(scriptFolder);
+    if(KIO::NetAccess::file_copy(KUrl(file), KUrl(scriptFolder + exeFile)) == false) {
+        myDebug() << "Copy failed." << endl;
+        return false;
     }
   }
 
-  // overwrites stuff there
-  archiveDir->copyTo(copyTarget);
-
-  info->specFile = scriptFolder + exeInfo.baseName(true) + ".spec";
-  if(!QFile::exists(info->specFile)) {
-    myDebug() << "Manager::installScript() - no spec file for script! " << info->specFile << endl;
-    delete info;
-    return false;
-  }
-  info->sourceName = exeFile;
-  info->sourceExec = copyTarget + exeFile;
-  m_infoList.append(info);
-
-  KURL dest;
-  dest.setPath(info->sourceExec);
+  QString specFile = scriptFolder + QFileInfo(exeFile).completeBaseName() + ".spec";
+  QString sourceExec = scriptFolder + exeFile;
+  KUrl dest(sourceExec);
   KFileItem item(KFileItem::Unknown, KFileItem::Unknown, dest, true);
   ::chmod(QFile::encodeName(dest.path()), item.permissions() | S_IXUSR);
 
-  {
-    KConfig spec(info->specFile, false, false);
-    // update name
-    info->sourceName = spec.readEntry("Name", info->sourceName);
-    spec.writePathEntry("ExecPath", info->sourceExec);
-    spec.writeEntry("NewStuffName", info->sourceName);
-    spec.writeEntry("DeleteOnRemove", true);
-  }
+  KDesktopFile df(specFile);
+  KConfigGroup cg = df.desktopGroup();
+  // update name
+  sourceName = cg.readEntry("Name", sourceName);
+  cg.writeEntry("ExecPath", sourceExec);
+  cg.writeEntry("NewStuffName", sourceName);
+  cg.writeEntry("DeleteOnRemove", true);
 
-  {
-    KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
-    config.writeEntry(info->sourceName, archiveFiles(archiveDir));
-    m_urlNameMap.insert(url_, info->sourceName);
-  }
-
-
-//  myDebug() << "Manager::installScript() - exeFile = " << exeFile << endl;
-//  myDebug() << "Manager::installScript() - sourceExec = " << info->sourceExec << endl;
-//  myDebug() << "Manager::installScript() - sourceName = " << info->sourceName << endl;
-//  myDebug() << "Manager::installScript() - specFile = " << info->specFile << endl;
-
-  delete ref;
+  KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
+  config.writeEntry(sourceName, file);
+  config.writeEntry(file, scriptFolder);
+  //  myDebug() << "Manager::installScript() - exeFile = " << exeFile << endl;
+  //  myDebug() << "Manager::installScript() - sourceExec = " << info->sourceExec << endl;
+  //  myDebug() << "Manager::installScript() - sourceName = " << info->sourceName << endl;
+  //  myDebug() << "Manager::installScript() - specFile = " << info->specFile << endl;
+  KConfigGroup configGroup(KGlobal::config(), QString::fromLatin1("Data Sources"));
+  int nSources = configGroup.readEntry("Sources Count", 0);
+  config.writeEntry(file + QString::fromLatin1("_nbr"), nSources);
+  configGroup.writeEntry("Sources Count", nSources + 1);
+  KConfigGroup sourceGroup(KGlobal::config(), QString::fromLatin1("Data Source %1").arg(nSources));
+  sourceGroup.writeEntry("Name", sourceName);
+  sourceGroup.writeEntry("ExecPath", sourceExec);
+  sourceGroup.writeEntry("DeleteOnRemove", true);
+  sourceGroup.writeEntry("Type", 5);
+  KGlobal::config()->sync();
   return true;
 }
 
-bool Manager::removeScript(const QString& name_) {
-  KConfigGroup fileGroup(KGlobal::config(), "KNewStuffFiles");
-  QStringList files = fileGroup.readListEntry(name_);
-
-  bool success = true;
-  QString path = Tellico::saveLocation(QString::fromLatin1("data-sources/"));
-  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it) {
-    if((*it).endsWith(QChar('/'))) {
-      // ok to not delete all directories
-      QDir().rmdir(path + *it);
-    } else {
-      success = success && QFile(path + *it).remove();
-      if(!success) {
-        myDebug() << "Manager::removeScript() - failed to remove " << (path+*it) << endl;
-      }
-    }
+bool Manager::removeScriptByName(const QString& name) {
+  KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
+  QString file = config.readEntry(name, QString());
+  if (!file.isEmpty()) {
+    return removeScript(file, true);
   }
-
-  // remove config entries even if unsuccessful
-  fileGroup.deleteEntry(name_);
-  KConfigGroup statusGroup(KGlobal::config(), "KNewStuffStatus");
-  QString entryName = statusGroup.readEntry(name_);
-  statusGroup.deleteEntry(name_);
-  statusGroup.deleteEntry(entryName);
-
-  return success;
+  return false;
 }
 
-Tellico::NewStuff::InstallStatus Manager::installStatus(KNS::Entry* entry_) {
-  KConfigGroup config(KGlobal::config(), "KNewStuffStatus");
-  QString datestring = config.readEntry(entry_->name());
-  if(datestring.isEmpty()) {
-    return NotInstalled;
-  }
-
-  QDate date = QDate::fromString(datestring, Qt::ISODate);
-  if(!date.isValid()) {
-    return NotInstalled;
-  }
-  if(date < entry_->releaseDate()) {
-    return OldVersion;
-  }
-
-  // also check that executable files exists
+bool Manager::removeScript(const QString& file, bool manual) {
+  bool success = true;
   KConfigGroup fileGroup(KGlobal::config(), "KNewStuffFiles");
-  QStringList files = fileGroup.readListEntry(entry_->name());
-  QString path = Tellico::saveLocation(QString::fromLatin1("data-sources/"));
-  for(QStringList::ConstIterator it = files.begin(); it != files.end(); ++it) {
-    if(!QFile::exists(path + *it)) {
-      return NotInstalled;
-    }
+  QString scriptFolder = fileGroup.readEntry(file, QString());
+  int source = fileGroup.readEntry(file + QString::fromLatin1("_nbr"), -1);
+
+  if (!scriptFolder.isEmpty()) {
+    KIO::del(KUrl(scriptFolder));
   }
-  return Current;
+  if (source != -1) {
+    KConfigGroup configGroup(KGlobal::config(), QString::fromLatin1("Data Sources"));
+    int nSources = configGroup.readEntry("Sources Count", 0);
+    configGroup.writeEntry("Sources Count", nSources - 1);
+    KConfigGroup sourceGroup(KGlobal::config(), QString::fromLatin1("Data Source %1").arg(source));
+    sourceGroup.deleteGroup();
+  }
+  // remove config entries even if unsuccessful
+  fileGroup.deleteEntry(file);
+  QString key = fileGroup.entryMap().key(file);
+  fileGroup.deleteEntry(key);
+  if (manual) {
+    removeNewStuffFile(file);
+  }
+  return success;
 }
 
 QStringList Manager::archiveFiles(const KArchiveDirectory* dir_, const QString& path_) {
@@ -311,8 +351,8 @@ QString Manager::findXSL(const KArchiveDirectory* dir_) {
 }
 
 QString Manager::findEXE(const KArchiveDirectory* dir_) {
-  QPtrStack<KArchiveDirectory> dirStack;
-  QValueStack<QString> dirNameStack;
+  QStack<const KArchiveDirectory*> dirStack;
+  QStack<QString> dirNameStack;
 
   dirStack.push(dir_);
   dirNameStack.push(QString());
@@ -337,79 +377,6 @@ QString Manager::findEXE(const KArchiveDirectory* dir_) {
   return QString();
 }
 
-void Manager::install(DataType type_, KNS::Entry* entry_) {
-  if(m_tempFile) {
-    delete m_tempFile;
-  }
-  m_tempFile = new KTempFile();
-  m_tempFile->setAutoDelete(true);
-
-  KURL destination;
-  destination.setPath(m_tempFile->name());
-  KIO::FileCopyJob* job = KIO::file_copy(entry_->payload(), destination, -1, true);
-  connect(job, SIGNAL(result(KIO::Job*)), SLOT(slotDownloadJobResult(KIO::Job*)));
-  m_jobMap.insert(job, EntryPair(entry_, type_));
-}
-
-void Manager::slotDownloadJobResult(KIO::Job* job_) {
-  KIO::FileCopyJob* job = static_cast<KIO::FileCopyJob*>(job_);
-  if(job->error()) {
-    GUI::CursorSaver cs(Qt::arrowCursor);
-    delete m_tempFile;
-    m_tempFile = 0;
-    job->showErrorDialog(Kernel::self()->widget());
-    emit signalInstalled(0); // still need to notify dialog that install failed
-    return;
-  }
-
-  KNS::Entry* entry = m_jobMap[job_].first;
-  DataType type = m_jobMap[job_].second;
-
-  bool deleteTempFile = true;
-  if(type == EntryTemplate) {
-    installTemplate(job->destURL(), entry->name());
-  } else {
-#if KDE_IS_VERSION(3,3,90)
-    // needed so the GPG signature can be checked
-    NewScript* newScript = new NewScript(this, Kernel::self()->widget());
-    connect(newScript, SIGNAL(installFinished()), this, SLOT(slotInstallFinished()));
-    // need to delete temp file if install was not a success
-    // if it was a success, it gets deleted later
-    deleteTempFile = !newScript->install(job->destURL().path());
-    m_scriptEntryMap.insert(newScript, entry);
-#endif
-    // if failed, emit empty signal now
-    if(deleteTempFile) {
-      emit signalInstalled(0);
-    }
-  }
-  if(deleteTempFile) {
-    delete m_tempFile;
-    m_tempFile = 0;
-  }
-}
-
-void Manager::slotInstallFinished() {
-  const NewScript* newScript = ::qt_cast<const NewScript*>(sender());
-  if(newScript && newScript->successfulInstall()) {
-    const QString name = m_urlNameMap[newScript->url()];
-    KNS::Entry* entry = m_scriptEntryMap[newScript];
-    KConfigGroup config(KGlobal::config(), "KNewStuffStatus");
-    // have to keep a config entry that maps the name of the file to the name
-    // of the newstuff entry, so we can track which entries are installed
-    // name and entry-name() are probably the same for scripts, but not a problem
-    config.writeEntry(name, entry->name());
-    config.writeEntry(entry->name(), entry->releaseDate().toString(Qt::ISODate));
-    config.sync();
-    emit signalInstalled(entry);
-  } else {
-    emit signalInstalled(0);
-    kdWarning() << "Manager::slotInstallFinished() - Failed to install" << endl;
-  }
-  delete m_tempFile;
-  m_tempFile = 0;
-}
-
 bool Manager::checkCommonFile() {
   // look for a file that gets installed to know the installation directory
   // need to check timestamps
@@ -422,7 +389,7 @@ bool Manager::checkCommonFile() {
     QString installCommonFile = installDir + '/' + QString::fromLatin1("tellico-common.xsl");
 #ifndef NDEBUG
     if(userCommonFile == installCommonFile) {
-      kdWarning() << "Manager::checkCommonFile() - install location is same as user location" << endl;
+      kWarning() << "Manager::checkCommonFile() - install location is same as user location";
     }
 #endif
     QFileInfo installInfo(installCommonFile);
@@ -437,10 +404,13 @@ bool Manager::checkCommonFile() {
       return true;
     }
   }
-  KURL src, dest;
+  KUrl src, dest;
   src.setPath(KGlobal::dirs()->findResource("appdata", QString::fromLatin1("tellico-common.xsl")));
   dest.setPath(userCommonFile);
   return KIO::NetAccess::file_copy(src, dest);
+}
+
+}
 }
 
 #include "manager.moc"

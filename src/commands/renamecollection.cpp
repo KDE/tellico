@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -19,14 +19,14 @@
 
 using Tellico::Command::RenameCollection;
 
-RenameCollection::RenameCollection(Data::CollPtr coll_, const QString& newTitle_)
-    : KCommand()
+RenameCollection::RenameCollection(Tellico::Data::CollPtr coll_, const QString& newTitle_)
+    : QUndoCommand(i18n("Rename Collection"))
     , m_coll(coll_)
     , m_newTitle(newTitle_)
 {
 }
 
-void RenameCollection::execute() {
+void RenameCollection::redo() {
   if(!m_coll) {
     return;
   }
@@ -34,13 +34,9 @@ void RenameCollection::execute() {
   Data::Document::self()->renameCollection(m_newTitle);
 }
 
-void RenameCollection::unexecute() {
+void RenameCollection::undo() {
   if(!m_coll) {
     return;
   }
   Data::Document::self()->renameCollection(m_oldTitle);
-}
-
-QString RenameCollection::name() const {
-  return i18n("Rename Collection");
 }

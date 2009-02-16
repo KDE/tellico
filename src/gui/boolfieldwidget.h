@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BOOLFIELDWIDGET_H
-#define BOOLFIELDWIDGET_H
+#ifndef TELLICO_BOOLFIELDWIDGET_H
+#define TELLICO_BOOLFIELDWIDGET_H
 
 #include "fieldwidget.h"
 #include "../datavectors.h"
@@ -30,7 +30,7 @@ class BoolFieldWidget : public FieldWidget {
 Q_OBJECT
 
 public:
-  BoolFieldWidget(Data::FieldPtr field, QWidget* parent, const char* name=0);
+  BoolFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~BoolFieldWidget() {}
 
   virtual QString text() const;

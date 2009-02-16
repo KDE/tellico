@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,85 +14,43 @@
 #ifndef TELLICO_NEWSTUFF_MANAGER_H
 #define TELLICO_NEWSTUFF_MANAGER_H
 
+#include <QObject>
+#include <QMap>
+
 class KArchiveDirectory;
-class KURL;
-class KTempFile;
-
-#include <qobject.h>
-#include <qptrlist.h>
-
+class KUrl;
+class KTemporaryFile;
 class QStringList;
-
-namespace KNS {
-  class Entry;
-}
-namespace KIO {
-  class Job;
-}
 
 namespace Tellico {
   namespace NewStuff {
-
-class NewScript;
-
-enum DataType {
-  EntryTemplate,
-  DataScript
-};
-
-enum InstallStatus {
-  NotInstalled,
-  OldVersion,
-  Current
-};
-
-struct DataSourceInfo {
-  DataSourceInfo() : isUpdate(false) {}
-  QString specFile; // full path of .spec file
-  QString sourceName;
-  QString sourceExec; // full executable path of script
-  bool isUpdate : 1; // whether the info is for an updated source
-};
 
 class Manager : public QObject {
 Q_OBJECT
 
 public:
-  Manager(QObject* parent);
-  ~Manager();
+  static Manager* self();
+  QMap<QString, QString> userTemplates();
+  bool installTemplate(const QString& file);
+  bool removeTemplateByName(const QString& name);
+  bool removeTemplate(const QString& file, bool manual = false);
 
-  void install(DataType type, KNS::Entry* entry);
-  QPtrList<DataSourceInfo> dataSourceInfo() const { return m_infoList; }
-
-  bool installTemplate(const KURL& url, const QString& entryName = QString::null);
-  bool removeTemplate(const QString& name);
-
-  bool installScript(const KURL& url);
-  bool removeScript(const QString& name);
-
-  static InstallStatus installStatus(KNS::Entry* entry);
-  static bool checkCommonFile();
-
-signals:
-  void signalInstalled(KNS::Entry* entry);
-
-private slots:
-  void slotDownloadJobResult(KIO::Job* job);
-  void slotInstallFinished();
+  bool installScript(const QString& file);
+  bool removeScriptByName(const QString& name);
+  bool removeScript(const QString& file, bool manual = false);
 
 private:
+  friend class ManagerSingleton;
+
+  explicit Manager(QObject* parent = 0);
+  ~Manager();
+
   static QStringList archiveFiles(const KArchiveDirectory* dir,
                                   const QString& path = QString::null);
-
+  static bool checkCommonFile();
+  static void removeNewStuffFile(const QString& file);
   static QString findXSL(const KArchiveDirectory* dir);
   static QString findEXE(const KArchiveDirectory* dir);
-
-  typedef QPair<KNS::Entry*, DataType> EntryPair;
-  QMap<KIO::Job*, EntryPair> m_jobMap;
-  QMap<KURL, QString> m_urlNameMap;
-  QMap<const NewScript*, KNS::Entry*> m_scriptEntryMap;
-  QPtrList<DataSourceInfo> m_infoList;
-  KTempFile* m_tempFile;
 };
 
   }

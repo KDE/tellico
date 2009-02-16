@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2006 by Robby Stephenson
+    copyright            : (C) 2004-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,13 +11,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FREEDBIMPORTER_H
-#define FREEDBIMPORTER_H
+#ifndef TELLICO_FREEDBIMPORTER_H
+#define TELLICO_FREEDBIMPORTER_H
 
 #include "importer.h"
 #include "../datavectors.h"
 
-#include <qvaluevector.h>
+#include <QByteArray>
+#include <QList>
+#include <QVector>
 
 class QButtonGroup;
 class QRadioButton;
@@ -44,7 +46,7 @@ public:
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget* parent, const char* name=0);
+  virtual QWidget* widget(QWidget* parent);
   virtual bool canImport(int type) const;
 
 public slots:
@@ -54,7 +56,7 @@ private slots:
   void slotClicked(int id);
 
 private:
-  typedef QValueVector<QString> StringVector;
+  typedef QVector<QString> StringVector;
   struct CDText {
     friend class FreeDBImporter;
     QString title;
@@ -64,12 +66,12 @@ private:
     StringVector trackArtists;
   };
 
-  static QValueList<uint> offsetList(const QCString& drive, QValueList<uint>& trackLengths);
-  static CDText getCDText(const QCString& drive);
+  static QList<uint> offsetList(const QByteArray& drive, QList<uint>& trackLengths);
+  static CDText getCDText(const QByteArray& drive);
 
   void readCDROM();
   void readCache();
-  void readCDText(const QCString& drive);
+  void readCDText(const QByteArray& drive);
 
   Data::CollPtr m_coll;
   QWidget* m_widget;

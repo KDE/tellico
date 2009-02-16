@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,7 +23,6 @@
 #include "controller.h"
 #include "borrower.h"
 #include "tellico_kernel.h"
-#include "latin1literal.h"
 #include "tellico_debug.h"
 #include "imagefactory.h"
 #include "image.h"
@@ -36,8 +35,8 @@
 #include <kglobal.h>
 #include <kapplication.h>
 
-#include <qregexp.h>
-#include <qtimer.h>
+#include <QRegExp>
+#include <QTimer>
 
 // use a vector so we can use a sort functor
 #include <vector>
@@ -62,24 +61,29 @@ Tellico::Data::CollPtr Document::collection() const {
   return m_coll;
 }
 
-void Document::setURL(const KURL& url_) {
+void Document::setURL(const KUrl& url_) {
   m_url = url_;
   if(m_url.fileName() != i18n("Untitled")) {
     ImageFactory::setLocalDirectory(m_url);
   }
 }
 
-void Document::slotSetModified(bool m_/*=true*/) {
-  m_isModified = m_;
-  emit signalModified(m_isModified);
+void Document::slotSetModified(bool modified_/*=true*/) {
+  if(modified_ != m_isModified) {
+    m_isModified = modified_;
+    emit signalModified(m_isModified);
+  }
 }
 
-void Document::slotDocumentRestored() {
-  slotSetModified(false);
+/**
+ * Since QUndoStack emits cleanChanged(), the behavior is opposite
+ * the document modified flag
+ */
+void Document::slotSetClean(bool clean_) {
+   slotSetModified(!clean_);
 }
 
 bool Document::newDocument(int type_) {
-//  kdDebug() << "Document::newDocument()" << endl;
   delete m_importer;
   m_importer = 0;
   deleteContents();
@@ -91,7 +95,7 @@ bool Document::newDocument(int type_) {
   Controller::self()->slotCollectionAdded(m_coll);
 
   slotSetModified(false);
-  KURL url;
+  KUrl url;
   url.setFileName(i18n("Untitled"));
   setURL(url);
   m_validFile = false;
@@ -100,9 +104,7 @@ bool Document::newDocument(int type_) {
   return true;
 }
 
-bool Document::openDocument(const KURL& url_) {
-  myLog() << "Document::openDocument() - " << url_.prettyURL() << endl;
-
+bool Document::openDocument(const KUrl& url_) {
   m_loadAllImages = false;
   // delayed image loading only works for local files
   if(!url_.isLocalFile()) {
@@ -110,7 +112,7 @@ bool Document::openDocument(const KURL& url_) {
   }
 
   delete m_importer;
-#ifdef SAX_SUPPORT
+#ifdef ENABLE_SAX
   myLog() << "Document::openDocument() - using SAX loader" << endl;
   m_importer = new Import::TellicoSaxImporter(url_, m_loadAllImages);
 #else
@@ -128,7 +130,7 @@ bool Document::openDocument(const KURL& url_) {
   }
 
   if(!coll) {
-//    myDebug() << "Document::openDocument() - returning false" << endl;
+//    myDebug() << "returning false";
     Kernel::self()->sorry(m_importer->statusMessage());
     m_validFile = false;
     return false;
@@ -166,7 +168,7 @@ bool Document::saveModified() {
     QString str = i18n("The current file has been modified.\n"
                        "Do you want to save it?");
     int want_save = KMessageBox::warningYesNoCancel(Kernel::self()->widget(), str, i18n("Unsaved Changes"),
-                                                    KStdGuiItem::save(), KStdGuiItem::discard());
+                                                    KStandardGuiItem::save(), KStandardGuiItem::discard());
     switch(want_save) {
       case KMessageBox::Yes:
         completed = app->fileSave();
@@ -187,11 +189,11 @@ bool Document::saveModified() {
   return completed;
 }
 
-bool Document::saveDocument(const KURL& url_) {
+bool Document::saveDocument(const KUrl& url_) {
   if(!FileHandler::queryExists(url_)) {
     return false;
   }
-//  DEBUG_BLOCK;
+  DEBUG_BLOCK;
 
   // in case we're still loading images, give that a chance to cancel
   m_cancelImageWriting = true;
@@ -243,7 +245,7 @@ bool Document::saveDocument(const KURL& url_) {
     // if successful, doc is no longer modified
     slotSetModified(false);
   } else {
-    myDebug() << "Document::saveDocument() - not successful saving to " << url_.prettyURL() << endl;
+    myDebug() << "not successful saving to " << url_;
   }
   delete exporter;
   return success;
@@ -272,20 +274,20 @@ void Document::deleteContents() {
   m_cancelImageWriting = true;
 }
 
-void Document::appendCollection(CollPtr coll_) {
+void Document::appendCollection(Tellico::Data::CollPtr coll_) {
   if(!coll_) {
     return;
   }
 
   m_coll->blockSignals(true);
-  Data::FieldVec fields = coll_->fields();
-  for(FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+  Data::FieldList fields = coll_->fields();
+  foreach(FieldPtr field, fields) {
     m_coll->mergeField(field);
   }
 
-  EntryVec entries = coll_->entries();
-  for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
-    Data::EntryPtr newEntry = new Data::Entry(*entry);
+  EntryList entries = coll_->entries();
+  foreach(EntryPtr entry, entries) {
+    Data::EntryPtr newEntry(new Data::Entry(*entry));
     newEntry->setCollection(m_coll);
   }
   m_coll->addEntries(entries);
@@ -293,38 +295,38 @@ void Document::appendCollection(CollPtr coll_) {
   m_coll->blockSignals(false);
 }
 
-Tellico::Data::MergePair Document::mergeCollection(CollPtr coll_) {
+Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_) {
   MergePair pair;
   if(!coll_) {
     return pair;
   }
 
   m_coll->blockSignals(true);
-  Data::FieldVec fields = coll_->fields();
-  for(FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+  Data::FieldList fields = coll_->fields();
+  foreach(FieldPtr field, fields) {
     m_coll->mergeField(field);
   }
 
-  EntryVec currEntries = m_coll->entries();
-  EntryVec newEntries = coll_->entries();
-  for(EntryVec::Iterator newIt = newEntries.begin(); newIt != newEntries.end(); ++newIt) {
+  EntryList currEntries = m_coll->entries();
+  EntryList newEntries = coll_->entries();
+  foreach(EntryPtr newEntry, newEntries) {
     int bestMatch = 0;
     Data::EntryPtr matchEntry;
-    for(EntryVec::Iterator currIt = currEntries.begin(); currIt != currEntries.end(); ++currIt) {
-      int match = m_coll->sameEntry(&*currIt, &*newIt);
+    foreach(EntryPtr currEntry, currEntries) {
+      int match = m_coll->sameEntry(currEntry, newEntry);
       if(match >= Collection::ENTRY_PERFECT_MATCH) {
-        matchEntry = currIt;
+        matchEntry = currEntry;
         break;
       } else if(match >= Collection::ENTRY_GOOD_MATCH && match > bestMatch) {
         bestMatch = match;
-        matchEntry = currIt;
+        matchEntry = currEntry;
         // don't break, keep looking for better one
       }
     }
     if(matchEntry) {
-      m_coll->mergeEntry(matchEntry, &*newIt, false /*overwrite*/);
+      m_coll->mergeEntry(matchEntry, newEntry, false /*overwrite*/);
     } else {
-      Data::EntryPtr e = new Data::Entry(*newIt);
+      Data::EntryPtr e(new Data::Entry(*newEntry));
       e->setCollection(m_coll);
       // keep track of which entries got added
       pair.first.append(e);
@@ -336,14 +338,14 @@ Tellico::Data::MergePair Document::mergeCollection(CollPtr coll_) {
   return pair;
 }
 
-void Document::replaceCollection(CollPtr coll_) {
+void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
   if(!coll_) {
     return;
   }
 
-//  kdDebug() << "Document::replaceCollection()" << endl;
+  DEBUG_BLOCK;
 
-  KURL url;
+  KUrl url;
   url.setFileName(i18n("Untitled"));
   setURL(url);
   m_validFile = false;
@@ -357,7 +359,7 @@ void Document::replaceCollection(CollPtr coll_) {
   // CollectionCommand takes care of calling Controller signals
 }
 
-void Document::unAppendCollection(CollPtr coll_, FieldVec origFields_) {
+void Document::unAppendCollection(Tellico::Data::CollPtr coll_, Tellico::Data::FieldList origFields_) {
   if(!coll_) {
     return;
   }
@@ -365,13 +367,13 @@ void Document::unAppendCollection(CollPtr coll_, FieldVec origFields_) {
   m_coll->blockSignals(true);
 
   StringSet origFieldNames;
-  for(FieldVec::Iterator field = origFields_.begin(); field != origFields_.end(); ++field) {
+  foreach(FieldPtr field, origFields_) {
     m_coll->modifyField(field);
     origFieldNames.add(field->name());
   }
 
-  EntryVec entries = coll_->entries();
-  for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
+  EntryList entries = coll_->entries();
+  foreach(EntryPtr entry, entries) {
     // probably don't need to do this, but on the safe side...
     entry->setCollection(coll_);
   }
@@ -379,8 +381,8 @@ void Document::unAppendCollection(CollPtr coll_, FieldVec origFields_) {
 
   // since Collection::removeField() iterates over all entries to reset the value of the field
   // don't removeField() until after removeEntry() is done
-  FieldVec currFields = m_coll->fields();
-  for(FieldVec::Iterator field = currFields.begin(); field != currFields.end(); ++field) {
+  FieldList currFields = m_coll->fields();
+  foreach(FieldPtr field, currFields) {
     if(!origFieldNames.has(field->name())) {
       m_coll->removeField(field);
     }
@@ -388,7 +390,7 @@ void Document::unAppendCollection(CollPtr coll_, FieldVec origFields_) {
   m_coll->blockSignals(false);
 }
 
-void Document::unMergeCollection(CollPtr coll_, FieldVec origFields_, MergePair entryPair_) {
+void Document::unMergeCollection(Tellico::Data::CollPtr coll_, Tellico::Data::FieldList origFields_, Tellico::Data::MergePair entryPair_) {
   if(!coll_) {
     return;
   }
@@ -396,13 +398,13 @@ void Document::unMergeCollection(CollPtr coll_, FieldVec origFields_, MergePair 
   m_coll->blockSignals(true);
 
   QStringList origFieldNames;
-  for(FieldVec::Iterator field = origFields_.begin(); field != origFields_.end(); ++field) {
+  foreach(FieldPtr field, origFields_) {
     m_coll->modifyField(field);
     origFieldNames << field->name();
   }
 
   // first item in pair are the entries added by the operation, remove them
-  EntryVec entries = entryPair_.first;
+  EntryList entries = entryPair_.first;
   m_coll->removeEntries(entries);
 
   // second item in pair are the entries which got modified by the original merge command
@@ -417,9 +419,9 @@ void Document::unMergeCollection(CollPtr coll_, FieldVec origFields_, MergePair 
 
   // since Collection::removeField() iterates over all entries to reset the value of the field
   // don't removeField() until after removeEntry() is done
-  FieldVec currFields = m_coll->fields();
-  for(FieldVec::Iterator field = currFields.begin(); field != currFields.end(); ++field) {
-    if(origFieldNames.findIndex(field->name()) == -1) {
+  FieldList currFields = m_coll->fields();
+  foreach(FieldPtr field, currFields) {
+    if(origFieldNames.indexOf(field->name()) == -1) {
       m_coll->removeField(field);
     }
   }
@@ -432,7 +434,7 @@ bool Document::isEmpty() const {
 }
 
 bool Document::loadImage(const QString& id_) {
-//  myLog() << "Document::loadImage() - id = " << id_ << endl;
+//  myLog() << id =" << id_;
   if(!m_coll) {
     return false;
   }
@@ -445,47 +447,47 @@ bool Document::loadImage(const QString& id_) {
 }
 
 bool Document::loadAllImagesNow() const {
-//  myLog() << "Document::loadAllImagesNow()" << endl;
+//  DEBUG_LINE;
   if(!m_coll || !m_validFile) {
     return false;
   }
   if(m_loadAllImages) {
-    myDebug() << "Document::loadAllImagesNow() - all valid images should already be loaded!" << endl;
+    myDebug() << "all valid images should already be loaded!";
     return false;
   }
   return Import::TellicoImporter::loadAllImages(m_url);
 }
 
-Tellico::Data::EntryVec Document::filteredEntries(Filter::Ptr filter_) const {
-  Data::EntryVec matches;
-  Data::EntryVec entries = m_coll->entries();
-  for(EntryVec::Iterator it = entries.begin(); it != entries.end(); ++it) {
-    if(filter_->matches(it.data())) {
-      matches.append(it);
+Tellico::Data::EntryList Document::filteredEntries(Tellico::FilterPtr filter_) const {
+  Data::EntryList matches;
+  Data::EntryList entries = m_coll->entries();
+  foreach(EntryPtr entry, entries) {
+    if(filter_->matches(entry)) {
+      matches.append(entry);
     }
   }
   return matches;
 }
 
-void Document::checkOutEntry(Data::EntryPtr entry_) {
+void Document::checkOutEntry(Tellico::Data::EntryPtr entry_) {
   if(!entry_) {
     return;
   }
 
   const QString loaned = QString::fromLatin1("loaned");
   if(!m_coll->hasField(loaned)) {
-    FieldPtr f = new Field(loaned, i18n("Loaned"), Field::Bool);
+    FieldPtr f(new Field(loaned, i18n("Loaned"), Field::Bool));
     f->setFlags(Field::AllowGrouped);
     f->setCategory(i18n("Personal"));
     m_coll->addField(f);
   }
   entry_->setField(loaned, QString::fromLatin1("true"));
-  EntryVec vec;
+  EntryList vec;
   vec.append(entry_);
   m_coll->updateDicts(vec);
 }
 
-void Document::checkInEntry(Data::EntryPtr entry_) {
+void Document::checkInEntry(Tellico::Data::EntryPtr entry_) {
   if(!entry_) {
     return;
   }
@@ -495,7 +497,7 @@ void Document::checkInEntry(Data::EntryPtr entry_) {
     return;
   }
   entry_->setField(loaned, QString::null);
-  m_coll->updateDicts(EntryVec(entry_));
+  m_coll->updateDicts(EntryList() << entry_);
 }
 
 void Document::renameCollection(const QString& newTitle_) {
@@ -508,10 +510,10 @@ void Document::renameCollection(const QString& newTitle_) {
 void Document::slotLoadAllImages() {
   QString id;
   StringSet images;
-  Data::EntryVec entries = m_coll->entries();
-  Data::FieldVec imageFields = m_coll->imageFields();
-  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
-    for(Data::FieldVec::Iterator field = imageFields.begin(); field != imageFields.end() && !m_cancelImageWriting; ++field) {
+  Data::EntryList entries = m_coll->entries();
+  Data::FieldList imageFields = m_coll->imageFields();
+  foreach(EntryPtr entry, entries) {
+    foreach(FieldPtr field, imageFields) {
       id = entry->field(field);
       if(id.isEmpty() || images.has(id)) {
         continue;
@@ -520,9 +522,12 @@ void Document::slotLoadAllImages() {
       // the image gets sucked from the zip file and written to disk
       //by ImageFactory::imageById()
       if(ImageFactory::imageById(id).isNull()) {
-        myDebug() << "Document::slotLoadAllImages() - entry title: " << entry->title() << endl;
+        myDebug() << "entry title:" << entry->title();
       }
       images.add(id);
+      if(m_cancelImageWriting) {
+        break;
+      }
     }
     if(m_cancelImageWriting) {
       break;
@@ -532,7 +537,7 @@ void Document::slotLoadAllImages() {
   }
 
   if(m_cancelImageWriting) {
-    myLog() << "Document::slotLoadAllImages() - cancel image writing" << endl;
+    myLog() << "cancel image writing";
   } else {
     emit signalCollectionImagesLoaded(m_coll);
   }
@@ -540,9 +545,9 @@ void Document::slotLoadAllImages() {
   m_cancelImageWriting = false;
 }
 
-void Document::writeAllImages(int cacheDir_, const KURL& localDir_) {
+void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
   // images get 80 steps in saveDocument()
-  const uint stepSize = 1 + QMAX(1, m_coll->entryCount()/80); // add 1 since it could round off
+  const uint stepSize = 1 + qMax(1, m_coll->entryCount()/80); // add 1 since it could round off
   uint j = 1;
 
   QString oldLocalDir = ImageFactory::localDir();
@@ -552,10 +557,10 @@ void Document::writeAllImages(int cacheDir_, const KURL& localDir_) {
 
   QString id;
   StringSet images;
-  EntryVec entries = m_coll->entries();
-  FieldVec imageFields = m_coll->imageFields();
-  for(EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
-    for(FieldVec::Iterator field = imageFields.begin(); field != imageFields.end() && !m_cancelImageWriting; ++field) {
+  EntryList entries = m_coll->entries();
+  FieldList imageFields = m_coll->imageFields();
+  foreach(EntryPtr entry, entries) {
+    foreach(FieldPtr field, imageFields) {
       id = entry->field(field);
       if(id.isEmpty() || images.has(id)) {
         continue;
@@ -565,7 +570,10 @@ void Document::writeAllImages(int cacheDir_, const KURL& localDir_) {
         continue;
       }
       if(!ImageFactory::writeCachedImage(id, cacheDir)) {
-        myDebug() << "Document::writeAllImages() - did not write image for entry title: " << entry->title() << endl;
+        myDebug() << "did not write image for entry title:" << entry->title();
+      }
+      if(m_cancelImageWriting) {
+        break;
       }
     }
     if(j%stepSize == 0) {
@@ -579,7 +587,7 @@ void Document::writeAllImages(int cacheDir_, const KURL& localDir_) {
   }
 
   if(m_cancelImageWriting) {
-    myDebug() << "Document::writeAllImages() - cancel image writing" << endl;
+    myDebug() << "cancel image writing";
   }
 
   m_cancelImageWriting = false;
@@ -590,10 +598,10 @@ bool Document::pruneImages() {
   bool found = false;
   QString id;
   StringSet images;
-  Data::EntryVec entries = m_coll->entries();
-  Data::FieldVec imageFields = m_coll->imageFields();
-  for(Data::EntryVec::Iterator entry = entries.begin(); entry != entries.end(); ++entry) {
-    for(Data::FieldVec::Iterator field = imageFields.begin(); field != imageFields.end(); ++field) {
+  Data::EntryList entries = m_coll->entries();
+  Data::FieldList imageFields = m_coll->imageFields();
+  foreach(EntryPtr entry, entries) {
+    foreach(FieldPtr field, imageFields) {
       id = entry->field(field);
       if(id.isEmpty() || images.has(id)) {
         continue;
@@ -602,7 +610,7 @@ bool Document::pruneImages() {
       if(img.isNull()) {
         entry->setField(field, QString::null);
         found = true;
-        myDebug() << "Document::pruneImages() - removing null image for " << entry->title() << ": " << id << endl;
+        myDebug() << "removing null image for" << entry->title() << ":" << id;
       } else {
         images.add(id);
       }
@@ -616,20 +624,20 @@ int Document::imageCount() const {
     return 0;
   }
   StringSet images;
-  FieldVec fields = m_coll->imageFields();
-  EntryVec entries = m_coll->entries();
-  for(FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
-    for(EntryVecIt e = entries.begin(); e != entries.end(); ++e) {
-      images.add(e->field(f->name()));
+  FieldList fields = m_coll->imageFields();
+  EntryList entries = m_coll->entries();
+  foreach(FieldPtr field, fields) {
+    foreach(EntryPtr entry, entries) {
+      images.add(entry->field(field->name()));
     }
   }
   return images.count();
 }
 
-Tellico::Data::EntryVec Document::sortEntries(EntryVec entries_) const {
+Tellico::Data::EntryList Document::sortEntries(Tellico::Data::EntryList entries_) const {
   std::vector<EntryPtr> vec;
-  for(EntryVecIt e = entries_.begin(); e != entries_.end(); ++e) {
-    vec.push_back(e);
+  foreach(EntryPtr entry, entries_) {
+    vec.push_back(entry);
   }
 
   QStringList titles = Controller::self()->sortTitles();
@@ -642,24 +650,24 @@ Tellico::Data::EntryVec Document::sortEntries(EntryVec entries_) const {
     std::sort(vec.begin(), vec.end(), EntryCmp(field));
   }
 
-  Data::EntryVec sorted;
+  Data::EntryList sorted;
   for(std::vector<EntryPtr>::iterator it = vec.begin(); it != vec.end(); ++it) {
     sorted.append(*it);
   }
   return sorted;
 }
 
-void Document::removeImagesNotInCollection(EntryVec entries_, EntryVec entriesToKeep_) {
+void Document::removeImagesNotInCollection(Tellico::Data::EntryList entries_, Tellico::Data::EntryList entriesToKeep_) {
   // first get list of all images in collection
   StringSet images;
-  FieldVec fields = m_coll->imageFields();
-  EntryVec allEntries = m_coll->entries();
-  for(FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
-    for(EntryVecIt e = allEntries.begin(); e != allEntries.end(); ++e) {
-      images.add(e->field(f->name()));
+  FieldList fields = m_coll->imageFields();
+  EntryList allEntries = m_coll->entries();
+  foreach(FieldPtr field, fields) {
+    foreach(EntryPtr entry, allEntries) {
+      images.add(entry->field(field->name()));
     }
-    for(EntryVecIt e = entriesToKeep_.begin(); e != entriesToKeep_.end(); ++e) {
-      images.add(e->field(f->name()));
+    foreach(EntryPtr entry, entriesToKeep_) {
+      images.add(entry->field(field->name()));
     }
   }
 
@@ -669,9 +677,9 @@ void Document::removeImagesNotInCollection(EntryVec entries_, EntryVec entriesTo
   // if entries_ is not empty, that means we want to limit the images removed
   // to those that are referenced in those entries
   StringSet imagesToRemove;
-  for(FieldVecIt f = fields.begin(); f != fields.end(); ++f) {
-    for(EntryVecIt e = entries_.begin(); e != entries_.end(); ++e) {
-      QString id = e->field(f->name());
+  foreach(FieldPtr field, fields) {
+    foreach(EntryPtr entry, entries_) {
+      QString id = entry->field(field->name());
       if(!id.isEmpty() && imagesToCheck.has(id) && !images.has(id)) {
         imagesToRemove.add(id);
       }

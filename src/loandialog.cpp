@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -10,6 +10,11 @@
  *   published by the Free Software Foundation;                            *
  *                                                                         *
  ***************************************************************************/
+
+#ifdef QT_STRICT_ITERATORS
+#define WAS_STRICT
+#undef QT_STRICT_ITERATORS
+#endif
 
 #include "loandialog.h"
 #include "borrowerdialog.h"
@@ -28,24 +33,35 @@
 #include <kiconloader.h>
 #include <kabc/stdaddressbook.h>
 
-#include <qlayout.h>
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qwhatsthis.h>
+#include <KHBox>
+#include <QLabel>
+#include <QCheckBox>
+#include <QGridLayout>
+
+#ifdef WAS_STRICT
+#define QT_STRICT_ITERATORS
+#undef WAS_STRICT
+#endif
 
 using Tellico::LoanDialog;
 
-LoanDialog::LoanDialog(const Data::EntryVec& entries_, QWidget* parent_, const char* name_/*=0*/)
-    : KDialogBase(parent_, name_, true, i18n("Loan Dialog"), Ok|Cancel),
+LoanDialog::LoanDialog(const Tellico::Data::EntryList& entries_, QWidget* parent_)
+    : KDialog(parent_),
       m_mode(Add), m_borrower(0), m_entries(entries_), m_loan(0) {
+  setModal(true);
+  setCaption(i18n("Loan Dialog"));
+  setButtons(Ok|Cancel);
   init();
 }
 
-LoanDialog::LoanDialog(Data::LoanPtr loan_, QWidget* parent_, const char* name_/*=0*/)
-    : KDialogBase(parent_, name_, true, i18n("Modify Loan"), Ok|Cancel),
+LoanDialog::LoanDialog(Tellico::Data::LoanPtr loan_, QWidget* parent_)
+    : KDialog(parent_),
       m_mode(Modify), m_borrower(loan_->borrower()), m_loan(loan_) {
   m_entries.append(m_loan->entry());
+
+  setModal(true);
+  setCaption(i18n("Modify Loan"));
+  setButtons(Ok|Cancel);
 
   init();
 
@@ -58,26 +74,26 @@ LoanDialog::LoanDialog(Data::LoanPtr loan_, QWidget* parent_, const char* name_/
       m_addEvent->setChecked(true);
     }
   }
-  m_note->setText(m_loan->note());
+  m_note->setPlainText(m_loan->note());
 }
 
 void LoanDialog::init() {
-  QWidget* mainWidget = new QWidget(this, "LoanDialog mainWidget");
+  QWidget* mainWidget = new QWidget(this);
   setMainWidget(mainWidget);
-  QGridLayout* topLayout = new QGridLayout(mainWidget, 7, 2, 0, KDialog::spacingHint());
+  QGridLayout* topLayout = new QGridLayout(mainWidget);
 
-  QHBox* hbox = new QHBox(mainWidget);
+  KHBox* hbox = new KHBox(mainWidget);
   hbox->setSpacing(KDialog::spacingHint());
   QLabel* pixLabel = new QLabel(hbox);
   pixLabel->setPixmap(DesktopIcon(QString::fromLatin1("tellico"), 64));
-  pixLabel->setAlignment(Qt::AlignAuto | Qt::AlignTop);
+  pixLabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);
   hbox->setStretchFactor(pixLabel, 0);
 
   QString entryString = QString::fromLatin1("<qt><p>");
   if(m_mode == Add) {
     entryString += i18n("The following items are being checked out:");
     entryString += QString::fromLatin1("</p><ol>");
-    for(Data::EntryVec::ConstIterator entry = m_entries.constBegin(); entry != m_entries.constEnd(); ++entry) {
+    foreach(Data::EntryPtr entry, m_entries) {
       entryString += QString::fromLatin1("<li>") + entry->title() + QString::fromLatin1("</li>");
     }
   } else {
@@ -89,11 +105,11 @@ void LoanDialog::init() {
   GUI::RichTextLabel* entryLabel = new GUI::RichTextLabel(entryString, hbox);
   hbox->setStretchFactor(entryLabel, 1);
 
-  topLayout->addMultiCellWidget(hbox, 0, 0, 0, 1);
+  topLayout->addWidget(hbox, 0, 0, 1, 2);
 
   QLabel* l = new QLabel(i18n("&Lend to:"), mainWidget);
   topLayout->addWidget(l, 1, 0);
-  hbox = new QHBox(mainWidget);
+  hbox = new KHBox(mainWidget);
   hbox->setSpacing(KDialog::spacingHint());
   topLayout->addWidget(hbox, 1, 1);
   m_borrowerEdit = new KLineEdit(hbox);
@@ -101,13 +117,13 @@ void LoanDialog::init() {
   m_borrowerEdit->completionObject()->setIgnoreCase(true);
   connect(m_borrowerEdit, SIGNAL(textChanged(const QString&)),
           SLOT(slotBorrowerNameChanged(const QString&)));
-  actionButton(Ok)->setEnabled(false); // disable until a name is entered
-  KPushButton* pb = new KPushButton(SmallIconSet(QString::fromLatin1("kaddressbook")), QString::null, hbox);
+  button(Ok)->setEnabled(false); // disable until a name is entered
+  KPushButton* pb = new KPushButton(KIcon(QString::fromLatin1("kaddressbook")), QString(), hbox);
   connect(pb, SIGNAL(clicked()), SLOT(slotGetBorrower()));
   QString whats = i18n("Enter the name of the person borrowing the items from you. "
                        "Clicking the button allows you to select from your address book.");
-  QWhatsThis::add(l, whats);
-  QWhatsThis::add(hbox, whats);
+  l->setWhatsThis(whats);
+  hbox->setWhatsThis(whats);
   // only enable for new loans
   if(m_mode == Modify) {
     m_borrowerEdit->setEnabled(false);
@@ -122,8 +138,8 @@ void LoanDialog::init() {
   topLayout->addWidget(m_loanDate, 2, 1);
   whats = i18n("The check-out date is the date that you lent the items. By default, "
                "today's date is used.");
-  QWhatsThis::add(l, whats);
-  QWhatsThis::add(m_loanDate, whats);
+  l->setWhatsThis(whats);
+  m_loanDate->setWhatsThis(whats);
   // only enable for new loans
   if(m_mode == Modify) {
     m_loanDate->setEnabled(false);
@@ -138,27 +154,28 @@ void LoanDialog::init() {
   connect(m_dueDate, SIGNAL(signalModified()), SLOT(slotDueDateChanged()));
   whats = i18n("The due date is when the items are due to be returned. The due date "
                "is not required, unless you want to add the loan to your active calendar.");
-  QWhatsThis::add(l, whats);
-  QWhatsThis::add(m_dueDate, whats);
+  l->setWhatsThis(whats);
+  m_dueDate->setWhatsThis(whats);
 
   l = new QLabel(i18n("&Note:"), mainWidget);
   topLayout->addWidget(l, 4, 0);
   m_note = new KTextEdit(mainWidget);
   l->setBuddy(m_note);
-  topLayout->addMultiCellWidget(m_note, 5, 5, 0, 1);
+  topLayout->addWidget(m_note, 5, 0, 1, 2);
   topLayout->setRowStretch(5, 1);
   whats = i18n("You can add notes about the loan, as well.");
-  QWhatsThis::add(l, whats);
-  QWhatsThis::add(m_note, whats);
+  l->setWhatsThis(whats);
+  m_note->setWhatsThis(whats);
 
   m_addEvent = new QCheckBox(i18n("&Add a reminder to the active calendar"), mainWidget);
-  topLayout->addMultiCellWidget(m_addEvent, 6, 6, 0, 1);
+  topLayout->addWidget(m_addEvent, 6, 0, 1, 2);
   m_addEvent->setEnabled(false); // gets enabled when valid due date is entered
-  QWhatsThis::add(m_addEvent, i18n("<qt>Checking this box will add a <em>To-do</em> item "
+  m_addEvent->setWhatsThis(i18n("<qt>Checking this box will add a <em>To-do</em> item "
                                    "to your active calendar, which can be viewed using KOrganizer. "
                                    "The box is only active if you set a due date."));
 
-  resize(configDialogSize(QString::fromLatin1("Loan Dialog Options")));
+  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Loan Dialog Options"));
+  restoreDialogSize(config);
 
   KABC::AddressBook* abook = KABC::StdAddressBook::self(true);
   connect(abook, SIGNAL(addressBookChanged(AddressBook*)),
@@ -169,11 +186,12 @@ void LoanDialog::init() {
 }
 
 LoanDialog::~LoanDialog() {
-  saveDialogSize(QString::fromLatin1("Loan Dialog Options"));
+  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Loan Dialog Options"));
+  saveDialogSize(config);
 }
 
 void LoanDialog::slotBorrowerNameChanged(const QString& str_) {
-  actionButton(Ok)->setEnabled(!str_.isEmpty());
+  button(Ok)->setEnabled(!str_.isEmpty());
 }
 
 void LoanDialog::slotDueDateChanged() {
@@ -201,16 +219,15 @@ void LoanDialog::slotLoadAddressBook() {
 
   // add current borrowers, too
   QStringList items = m_borrowerEdit->completionObject()->items();
-  Data::BorrowerVec borrowers = m_entries.begin()->collection()->borrowers();
-  for(Data::BorrowerVec::ConstIterator it = borrowers.constBegin(), end = borrowers.constEnd();
-      it != end; ++it) {
-    if(items.findIndex(it->name()) == -1) {
-      m_borrowerEdit->completionObject()->addItem(it->name());
+  Data::BorrowerList borrowers = m_entries.at(0)->collection()->borrowers();
+  foreach(Data::BorrowerPtr borrower, borrowers) {
+    if(!items.contains(borrower->name())) {
+      m_borrowerEdit->completionObject()->addItem(borrower->name());
     }
   }
 }
 
-KCommand* LoanDialog::createCommand() {
+QUndoCommand* LoanDialog::createCommand() {
   // first, check to see if the borrower is empty
   QString name = m_borrowerEdit->text();
   if(name.isEmpty()) {
@@ -225,7 +242,7 @@ KCommand* LoanDialog::createCommand() {
   }
 }
 
-KCommand* LoanDialog::addLoansCommand() {
+QUndoCommand* LoanDialog::addLoansCommand() {
   if(m_entries.isEmpty()) {
     return 0;
   }
@@ -234,8 +251,8 @@ KCommand* LoanDialog::addLoansCommand() {
 
   // see if there's a borrower with this name already
   m_borrower = 0;
-  Data::BorrowerVec borrowers = m_entries.begin()->collection()->borrowers();
-  for(Data::BorrowerVec::Iterator it = borrowers.begin(); it != borrowers.end(); ++it) {
+  Data::BorrowerList borrowers = m_entries.at(0)->collection()->borrowers();
+  foreach(Data::BorrowerPtr it, borrowers) {
     if(it->name() == name) {
       m_borrower = it;
       break;
@@ -246,22 +263,22 @@ KCommand* LoanDialog::addLoansCommand() {
     m_borrower = new Data::Borrower(name, m_uid);
   }
 
-  Data::LoanVec loans;
-  for(Data::EntryVecIt entry = m_entries.begin(); entry != m_entries.end(); ++entry) {
-    loans.append(new Data::Loan(entry, m_loanDate->date(), m_dueDate->date(), m_note->text()));
+  Data::LoanList loans;
+  foreach(Data::EntryPtr entry, m_entries) {
+    loans.append(Data::LoanPtr(new Data::Loan(entry, m_loanDate->date(), m_dueDate->date(), m_note->toPlainText())));
   }
 
   return new Command::AddLoans(m_borrower, loans, m_addEvent->isChecked());
 }
 
-KCommand* LoanDialog::modifyLoansCommand() {
+QUndoCommand* LoanDialog::modifyLoansCommand() {
   if(!m_loan) {
     return 0;
   }
 
-  Data::LoanPtr newLoan = new Data::Loan(*m_loan);
+  Data::LoanPtr newLoan(new Data::Loan(*m_loan));
   newLoan->setDueDate(m_dueDate->date());
-  newLoan->setNote(m_note->text());
+  newLoan->setNote(m_note->toPlainText());
   return new Command::ModifyLoans(m_loan, newLoan, m_addEvent->isChecked());
 }
 

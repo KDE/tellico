@@ -1,0 +1,60 @@
+This package was debianized by Regis Boudin <regis@boudin.name> on
+Mon, 12 May 2003 22:50:38 +0100.
+
+It was downloaded from http://www.periapsis.org/tellico
+
+Upstream Author: Robby Stephenson <robby@periapsis.org>
+
+Copyright: 2001-2006 by Robby Stephenson
+
+   This package is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; version 2 dated June, 1991.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this package; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+   02111-1301, USA.
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+----------------------------------------------------------------------------
+
+In addition, as a special exception, the author gives permission to
+link the code of this program with the OpenSSL library released by
+the OpenSSL Project (or with modified versions of OpenSSL that use
+the same license as OpenSSL), and distribute linked combinations
+including the two.  You must obey the GNU General Public License in
+all respects for all of the code used other than OpenSSL.  If you
+modify this software, you may extend this exception to your version of,
+but you are not obligated to do so.  If you do not wish to do so,
+delete this exception statement from your version.
+
+----------------------------------------------------------------------------
+
+The src/translators/btparse directory contains a minimal version of the
+btparse library, copyright 1999 by Greg Ward, which can be found at
+http://www.gerg.ca/software/btOOL/
+Version 0.33 of the btparse library was imported into the Bookcase 
+source code tree in October 2003. The following changes have been
+made:
+
+- All non-source code files were removed.
+- The c++ reserved word 'class' was changed to 'errclass'.
+- The files bt_config.h and my_dmalloc.h were removed, along with all
+  references to them. Some of the definitions in bt_config.h were
+  moved to btparse.h.
+- Some included files were changed in ast.c.
+
+The btparse source code was originally licensed under the terms of
+the GNU Lesser General Public License (LGPL). Persuant to clause 3 of
+the LGPL, this static version of btparse is being redistributed within
+a software application under the terms of the GNU General Public
+License (GPL).
+

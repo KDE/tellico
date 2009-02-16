@@ -24,7 +24,7 @@
 #include <sstream>
 
 #include "strop.h"
-#include <kdebug.h>
+#include "../../tellico_debug.h"
 
 extern std::ostream* err;
 
@@ -135,7 +135,7 @@ PalmLib::FlatFile::Field::FieldType StrOps::string2type(std::string typestr)
     else if (typestr == "calculated")
         return PalmLib::FlatFile::Field::CALCULATED;
     else
-        kdDebug() << "unknown field type" << endl;
+        myDebug() << "unknown field type" << endl;
     return PalmLib::FlatFile::Field::STRING;
 }
 
@@ -205,7 +205,7 @@ StrOps::string_list_t StrOps::csv_to_array(const std::string& str, char delim, b
         result.push_back(elem);
     break;
     case STATE_QUOTES:
-        kdDebug() << "unterminated quotes" << endl;
+        myDebug() << "unterminated quotes" << endl;
     break;
     }
 
@@ -305,9 +305,9 @@ StrOps::str_to_array(const std::string& str, const std::string& delim,
 
                 // Extract and check the first hexadecimal character.
                 if ((p + 1) == str.end())
-                    kdDebug() << "truncated escape" << endl;
+                    myDebug() << "truncated escape" << endl;
                 if (! isxdigit(*(p + 1)))
-                    kdDebug() << "invalid hex character" << endl;
+                    myDebug() << "invalid hex character" << endl;
                 buf[0] = *++p;
 
                 // Extract and check the second (if any) hex character.
@@ -340,16 +340,16 @@ StrOps::str_to_array(const std::string& str, const std::string& delim,
     break;
 
     case STATE_QUOTE_DOUBLE:
-        kdDebug() << "unterminated double quotes" << endl;
+        myDebug() << "unterminated double quotes" << endl;
     break;
 
     case STATE_QUOTE_SINGLE:
-        kdDebug() << "unterminated single quotes" << endl;
+        myDebug() << "unterminated single quotes" << endl;
     break;
 
     case STATE_BACKSLASH:
     case STATE_BACKSLASH_DOUBLEQUOTE:
-        kdDebug() << "an escape character must follow a backslash" << endl;
+        myDebug() << "an escape character must follow a backslash" << endl;
     break;
 
     default:
@@ -550,7 +550,7 @@ StrOps::quote_string(std::string str, bool extended_mode)
             } else if (*c == '\n' || *c == '\r') {
                 error << "use extended csv mode for newlines\n";
                 *err << error.str();
-               kdDebug() << error.str().c_str() << endl;
+               myDebug() << error.str().c_str() << endl;
             } else {
                 result += *c;
             }

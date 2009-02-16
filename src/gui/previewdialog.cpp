@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,10 +23,13 @@
 using Tellico::GUI::PreviewDialog;
 
 PreviewDialog::PreviewDialog(QWidget* parent_)
-        : KDialogBase(parent_, "template preview dialog", false /* modal */,
-                      i18n("Template Preview"), KDialogBase::Ok)
+        : KDialog(parent_)
         , m_tempDir(new KTempDir()) {
-  m_tempDir->setAutoDelete(true);
+  setModal(false);
+  setCaption(i18n("Template Preview"));
+  setButtons(Ok);
+
+  m_tempDir->setAutoRemove(true);
   connect(this, SIGNAL(finished()), SLOT(delayedDestruct()));
 
   m_view = new EntryView(this);
@@ -43,13 +46,13 @@ void PreviewDialog::setXSLTFile(const QString& file_) {
   m_view->setXSLTFile(file_);
 }
 
-void PreviewDialog::setXSLTOptions(StyleOptions options_) {
+void PreviewDialog::setXSLTOptions(Tellico::StyleOptions options_) {
   options_.imgDir = m_tempDir->name(); // images always get written to temp dir
   ImageFactory::createStyleImages(options_);
   m_view->setXSLTOptions(options_);
 }
 
-void PreviewDialog::showEntry(Data::EntryPtr entry_) {
+void PreviewDialog::showEntry(Tellico::Data::EntryPtr entry_) {
   m_view->showEntry(entry_);
 }
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,32 +11,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FETCHMANAGER_H
-#define FETCHMANAGER_H
-
-namespace Tellico {
-  namespace Fetch {
-    class SearchResult;
-    class ConfigWidget;
-    class ManagerMessage;
-  }
-}
+#ifndef TELLICO_FETCHMANAGER_H
+#define TELLICO_FETCHMANAGER_H
 
 #include "fetcher.h"
-#include "../ptrvector.h"
 
-#include <ksortablevaluelist.h>
+#include <ksortablelist.h>
+#include <KConfigGroup>
 
-#include <qobject.h>
-#include <qmap.h>
+#include <QObject>
+#include <QMap>
+#include <QList>
+#include <QPixmap>
+
+class KUrl;
 
 namespace Tellico {
   namespace Fetch {
 
+class SearchResult;
+class ConfigWidget;
+class ManagerMessage;
+
 typedef KSortableItem<Type, QString> TypePair; // fetcher info, type and name of type
-typedef KSortableValueList<Type, QString> TypePairList;
+typedef KSortableList<Type, QString> TypePairList;
 typedef QMap<FetchKey, QString> KeyMap; // map key type to name of key
-typedef Vector<Fetcher> FetcherVec;
+typedef QList<Fetcher::Ptr> FetcherVec;
 
 /**
  * A manager for handling all the different classes of Fetcher.
@@ -70,7 +70,7 @@ public:
 
   static QString typeName(Type type);
   static QPixmap fetcherIcon(Fetch::Type type, int iconGroup=3 /*Small*/, int size=0 /* default */);
-  static QPixmap fetcherIcon(Fetch::Fetcher::CPtr ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
+  static QPixmap fetcherIcon(Fetch::Fetcher::Ptr ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
 
 signals:
   void signalStatus(const QString& status);
@@ -78,19 +78,20 @@ signals:
   void signalDone();
 
 private slots:
-  void slotFetcherDone(Tellico::Fetch::Fetcher::Ptr);
+  void slotFetcherDone(Tellico::Fetch::Fetcher* fetcher);
 
 private:
   friend class ManagerMessage;
   static Manager* s_self;
 
   Manager();
-  Fetcher::Ptr createFetcher(KConfig* config, const QString& configGroup);
+  Fetcher::Ptr createFetcher(KSharedPtr<KSharedConfig> config, const QString& configGroup);
   FetcherVec defaultFetchers();
   void updateStatus(const QString& message);
 
-  static QString favIcon(const KURL& url);
-  static bool bundledScriptHasExecPath(const QString& specFile, KConfig* config);
+  static QString favIcon(const char* url_);
+  static QString favIcon(const KUrl& url_);
+  static bool bundledScriptHasExecPath(const QString& specFile, KConfigGroup& config);
 
   FetcherVec m_fetchers;
   int m_currentFetcherIndex;

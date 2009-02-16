@@ -250,31 +250,6 @@ extern "C" {
 
 /* Function prototypes */
 
-/*
- * First, we might need a prototype for strdup() (because the zzcr_ast
- * macro uses it, and that macro is used in pccts/ast.c -- which I don't
- * want to modify if I can help it, because it's someone else's code).
- * This is to accomodate AIX, where including <string.h> apparently doesn't
- * declare strdup() (reported by Reiner Schlotte
- * <schlotte@geo.palmod.uni-bremen.de>), and compiling bibtex.c (which
- * includes pccts/ast.c) crashes because of this (yes, yes, I know it
- * should just be a warning -- I don't know what's going on there!).
- *
- * Unfortunately, this duplicates code in bt_config.h -- I can't include
- * bt_config.h here, because this header must be freestanding; I don't want
- * to include bt_config.h in pccts/ast.c, because I don't want to touch the
- * PCCTS code if I can help it; but I don't want every source file that
- * uses strdup() to have to include btparse.h.  Hence the duplication.
- * Yuck.
- */
-#ifndef HAVE_STRDUP_DECL
-# define HAVE_STRDUP_DECL 0
-#endif
-#if !HAVE_STRDUP_DECL
-extern char *strdup (const char *s);
-#endif
-
-
 /* init.c */
 void  bt_initialize (void);
 void  bt_free_ast (AST *ast);

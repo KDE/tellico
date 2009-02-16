@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -16,8 +16,8 @@
 
 #include <kcombobox.h>
 
-#include <qvariant.h>
-#include <qvaluelist.h>
+#include <QVariant>
+#include <QList>
 
 class QString;
 
@@ -30,20 +30,16 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class ComboBox : public KComboBox {
+Q_OBJECT
+
 public:
   ComboBox(QWidget* parent_);
 
-  void clear();
-  const QVariant& currentData() const;
-  const QVariant& data(uint index) const;
-  void insertItem(const QString& string, const QVariant& datum, int index = -1);
-  void insertItems(const QStringList& strings, const QValueList<QVariant>& data, int index = -1);
+  QVariant currentData(int role = Qt::UserRole) const;
+  void addItems(const QStringList& strings, const QList<QVariant>& data);
 
   // set current item to match data
-  void setCurrentData(const QVariant& data);
-
-private:
-  QValueList<QVariant> m_data;
+  bool setCurrentData(const QVariant& data, int role = Qt::UserRole);
 };
 
   } // end namespace

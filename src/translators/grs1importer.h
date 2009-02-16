@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,11 +15,10 @@
 #define TELLICO_IMPORT_GRS1IMPORTER_H
 
 #include "textimporter.h"
-#include "../datavectors.h"
 
-#include <qvariant.h>
-#include <qmap.h>
-#include <qpair.h>
+#include <QVariant>
+#include <QMap>
+#include <QPair>
 
 namespace Tellico {
   namespace Import {
@@ -40,7 +39,7 @@ public:
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget*, const char*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return 0; }
   virtual bool canImport(int type) const;
 
 private:

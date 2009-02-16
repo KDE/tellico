@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +15,6 @@
 #include "../collections/bookcollection.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../latin1literal.h"
 #include "../isbnvalidator.h"
 #include "../imagefactory.h"
 #include "../progressmanager.h"
@@ -25,9 +24,11 @@
 #include <kapplication.h>
 #include <kstringhandler.h>
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qgroupbox.h>
+#include <QLabel>
+#include <QGroupBox>
+#include <QTextStream>
+#include <QByteArray>
+#include <QHBoxLayout>
 
 using Tellico::Import::AlexandriaImporter;
 
@@ -37,10 +38,10 @@ bool AlexandriaImporter::canImport(int type) const {
 
 Tellico::Data::CollPtr AlexandriaImporter::collection() {
   if(!m_widget || m_library->count() == 0) {
-    return 0;
+    return Data::CollPtr();
   }
 
-  m_coll = new Data::BookCollection(true);
+  m_coll = Data::CollPtr(new Data::BookCollection(true));
 
   QDir dataDir = m_libraryDir;
   dataDir.cd(m_library->currentText());
@@ -57,10 +58,10 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   const QString comments = QString::fromLatin1("comments");
 
   // start with yaml files
-  dataDir.setNameFilter(QString::fromLatin1("*.yaml"));
+  dataDir.setNameFilters(QStringList() << QString::fromLatin1("*.yaml"));
   const QStringList files = dataDir.entryList();
   const uint numFiles = files.count();
-  const uint stepSize = QMAX(s_stepSize, numFiles/100);
+  const uint stepSize = qMax(s_stepSize, numFiles/100);
   const bool showProgress = options() & ImportProgress;
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
@@ -74,19 +75,19 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
          << QString::fromLatin1("_small.jpg");
 
   QTextStream ts;
-  ts.setEncoding(QTextStream::UnicodeUTF8); // YAML is always utf8?
+  ts.setCodec("UTF-8"); // YAML is always utf8?
   uint j = 0;
   for(QStringList::ConstIterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++j) {
-    QFile file(dataDir.absFilePath(*it));
-    if(!file.open(IO_ReadOnly)) {
+    QFile file(dataDir.absoluteFilePath(*it));
+    if(!file.open(QIODevice::ReadOnly)) {
       continue;
     }
 
-    Data::EntryPtr entry = new Data::Entry(m_coll);
+    Data::EntryPtr entry(new Data::Entry(m_coll));
 
     bool readNextLine = true;
-    ts.unsetDevice();
     ts.setDevice(&file);
+    ts.setCodec("UTF-8"); // YAML is always utf8?
     QString line;
     while(!ts.atEnd()) {
       if(readNextLine) {
@@ -105,20 +106,20 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
 
       cleanLine(line);
       QString alexField = line.section(':', 0, 0);
-      QString alexValue = line.section(':', 1).stripWhiteSpace();
+      QString alexValue = line.section(':', 1).trimmed();
       clean(alexValue);
 
       // Alexandria uses "n/a for empty values, and it is translated
       // only thing we can do is check for english value and continue
-      if(alexValue == Latin1Literal("n/a")) {
+      if(alexValue == QLatin1String("n/a")) {
         continue;
       }
 
-      if(alexField == Latin1Literal("authors")) {
+      if(alexField == QLatin1String("authors")) {
         QStringList authors;
         line = ts.readLine();
         QRegExp begin(QString::fromLatin1("^\\s*-\\s+"));
-        while(!line.isNull() && line.find(begin) > -1) {
+        while(!line.isNull() && line.indexOf(begin) > -1) {
           line.remove(begin);
           authors += clean(line);
           line = ts.readLine();
@@ -128,26 +129,26 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         readNextLine = false;
 
         // Alexandria calls the edition the binding
-      } else if(alexField == Latin1Literal("edition")) {
+      } else if(alexField == QLatin1String("edition")) {
         // special case if it's "Hardcover"
-        if(alexValue.lower() == Latin1Literal("hardcover")) {
+        if(alexValue.toLower() == QLatin1String("hardcover")) {
           alexValue = i18n("Hardback");
         }
         entry->setField(binding, alexValue);
 
-      } else if(alexField == Latin1Literal("publishing_year")) {
+      } else if(alexField == QLatin1String("publishing_year")) {
         entry->setField(year, alexValue);
 
-      } else if(alexField == Latin1Literal("isbn")) {
+      } else if(alexField == QLatin1String("isbn")) {
         const ISBNValidator val(0);
         val.fixup(alexValue);
         entry->setField(isbn, alexValue);
 
         // now find cover image
-        KURL u;
+        KUrl u;
         alexValue.remove('-');
         for(QStringList::Iterator ext = covers.begin(); ext != covers.end(); ++ext) {
-          u.setPath(dataDir.absFilePath(alexValue + *ext));
+          u.setPath(dataDir.absoluteFilePath(alexValue + *ext));
           if(!QFile::exists(u.path())) {
             continue;
           }
@@ -157,7 +158,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
             break;
           }
         }
-      } else if(alexField == Latin1Literal("notes")) {
+      } else if(alexField == QLatin1String("notes")) {
         entry->setField(comments, alexValue);
 
       // now try by name then title
@@ -179,55 +180,57 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   return m_coll;
 }
 
-QWidget* AlexandriaImporter::widget(QWidget* parent_, const char* name_/*=0*/) {
+QWidget* AlexandriaImporter::widget(QWidget* parent_) {
   if(m_widget) {
     return m_widget;
   }
 
   m_libraryDir = QDir::home();
-  m_libraryDir.setFilter(QDir::Dirs | QDir::Readable | QDir::NoSymLinks);
+  m_libraryDir.setFilter(QDir::Dirs | QDir::Readable | QDir::NoSymLinks | QDir::NoDotAndDotDot);
 
-  m_widget = new QWidget(parent_, name_);
+  m_widget = new QWidget(parent_);
   QVBoxLayout* l = new QVBoxLayout(m_widget);
 
-  QGroupBox* box = new QGroupBox(2, Qt::Horizontal, i18n("Alexandria Options"), m_widget);
-  QLabel* label = new QLabel(i18n("&Library:"), box);
-  m_library = new KComboBox(box);
+  QGroupBox* gbox = new QGroupBox(i18n("Alexandria Options"), m_widget);
+  QHBoxLayout* hlay = new QHBoxLayout(gbox);
+
+  QLabel* label = new QLabel(i18n("&Library:"), gbox);
+  m_library = new KComboBox(gbox);
   label->setBuddy(m_library);
+
+  hlay->addWidget(label);
+  hlay->addWidget(m_library);
 
   // .alexandria might not exist
   if(m_libraryDir.cd(QString::fromLatin1(".alexandria"))) {
-    QStringList dirs = m_libraryDir.entryList();
-    dirs.remove(QString::fromLatin1(".")); // why can't I tell QDir not to include these? QDir::Hidden doesn't work
-    dirs.remove(QString::fromLatin1(".."));
-    m_library->insertStringList(dirs);
+    m_library->addItems(m_libraryDir.entryList());
   }
 
-  l->addWidget(box);
+  l->addWidget(gbox);
   l->addStretch(1);
   return m_widget;
 }
 
 QString& AlexandriaImporter::cleanLine(QString& str_) {
-  static QRegExp escRx(QString::fromLatin1("\\\\x(\\w\\w)"), false);
+  static QRegExp escRx(QString::fromLatin1("\\\\x(\\w\\w)"), Qt::CaseInsensitive);
   str_.remove(QString::fromLatin1("\\r"));
   str_.replace(QString::fromLatin1("\\n"), QString::fromLatin1("\n"));
   str_.replace(QString::fromLatin1("\\t"), QString::fromLatin1("\t"));
 
   // YAML uses escape sequences like \xC3
-  int pos = escRx.search(str_);
+  int pos = escRx.indexIn(str_);
   int origPos = pos;
-  QCString bytes;
+  QByteArray bytes;
   while(pos > -1) {
     bool ok;
     char c = escRx.cap(1).toInt(&ok, 16);
     if(ok) {
       bytes += c;
     } else {
-      bytes = QCString();
+      bytes.clear();
       break;
     }
-    pos = escRx.search(str_, pos+1);
+    pos = escRx.indexIn(str_, pos+1);
   }
   if(!bytes.isEmpty()) {
     str_.replace(origPos, bytes.length()*4, QString::fromUtf8(bytes.data()));

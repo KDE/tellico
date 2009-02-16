@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "bookcollection.h"
+#include "../entrycomparison.h"
 
 #include <klocale.h>
 
@@ -32,8 +33,8 @@ BookCollection::BookCollection(bool addFields_, const QString& title_ /*=null*/)
   setDefaultGroupField(QString::fromLatin1("author"));
 }
 
-Tellico::Data::FieldVec BookCollection::defaultFields() {
-  FieldVec list;
+Tellico::Data::FieldList BookCollection::defaultFields() {
+  FieldList list;
   FieldPtr field;
 
   field = new Field(QString::fromLatin1("title"), i18n("Title"));
@@ -181,21 +182,21 @@ Tellico::Data::FieldVec BookCollection::defaultFields() {
   return list;
 }
 
-int BookCollection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   // equal isbn's or lccn's are easy, give it a weight of 100
-  if(Entry::compareValues(entry1_, entry2_, QString::fromLatin1("isbn"), this) > 0 ||
-     Entry::compareValues(entry1_, entry2_, QString::fromLatin1("lccn"), this) > 0) {
+  if(EntryComparison::score(entry1_, entry2_, QString::fromLatin1("isbn"), this) > 0 ||
+     EntryComparison::score(entry1_, entry2_, QString::fromLatin1("lccn"), this) > 0) {
     return 100; // good match
   }
-  int res = 3*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+  int res = 3*EntryComparison::score(entry1_, entry2_, QString::fromLatin1("title"), this);
 //  if(res == 0) {
 //    myDebug() << "BookCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title() << endl;
 //  }
-  res += 2*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("author"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("cr_year"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("pub_year"), this);
-  res += Entry::compareValues(entry1_, entry2_, QString::fromLatin1("binding"), this);
+  res += 2*EntryComparison::score(entry1_, entry2_, QString::fromLatin1("author"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("cr_year"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("pub_year"), this);
+  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("binding"), this);
   return res;
 }
 

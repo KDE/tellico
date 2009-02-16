@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,7 +13,6 @@
 
 #include "entrezfetcher.h"
 #include "../tellico_kernel.h"
-#include "../latin1literal.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../filehandler.h"
@@ -22,19 +21,21 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kio/job.h>
+#include <kio/jobuidelegate.h>
+#include <KConfigGroup>
 
-#include <qdom.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qfile.h>
+#include <QDomDocument>
+#include <QLabel>
+#include <QFile>
+#include <QTextStream>
+#include <QVBoxLayout>
 
 //#define ENTREZ_TEST
 
 namespace {
-  static const size_t ENTREZ_MAX_RETURNS_TOTAL = 25;
+  static const int ENTREZ_MAX_RETURNS_TOTAL = 25;
   static const char* ENTREZ_BASE_URL = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
   static const char* ENTREZ_SEARCH_CGI = "esearch.fcgi";
   static const char* ENTREZ_SUMMARY_CGI = "esummary.fcgi";
@@ -45,7 +46,7 @@ namespace {
 
 using Tellico::Fetch::EntrezFetcher;
 
-EntrezFetcher::EntrezFetcher(QObject* parent_, const char* name_) : Fetcher(parent_, name_), m_xsltHandler(0),
+EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler(0),
     m_step(Begin), m_started(false) {
 }
 
@@ -69,10 +70,10 @@ void EntrezFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!s.isEmpty()) {
     m_dbname = s;
   }
-  m_fields = config_.readListEntry("Custom Fields");
+  m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
-void EntrezFetcher::search(FetchKey key_, const QString& value_) {
+void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_started = true;
   m_start = 1;
   m_total = -1;
@@ -88,9 +89,9 @@ void EntrezFetcher::search(FetchKey key_, const QString& value_) {
   }
 
 #ifdef ENTREZ_TEST
-  KURL u = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/esearch.xml"));
+  KUrl u = KUrl(QString::fromLatin1("/home/robby/esearch.xml"));
 #else
-  KURL u(QString::fromLatin1(ENTREZ_BASE_URL));
+  KUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
   u.addPath(QString::fromLatin1(ENTREZ_SEARCH_CGI));
   u.addQueryItem(QString::fromLatin1("tool"),       QString::fromLatin1("Tellico"));
   u.addQueryItem(QString::fromLatin1("retmode"),    QString::fromLatin1("xml"));
@@ -122,7 +123,7 @@ void EntrezFetcher::search(FetchKey key_, const QString& value_) {
       break;
 
     default:
-      kdWarning() << "EntrezFetcher::search() - FetchKey not supported" << endl;
+      kWarning() << "EntrezFetcher::search() - FetchKey not supported";
       stop();
       return;
   }
@@ -130,11 +131,10 @@ void EntrezFetcher::search(FetchKey key_, const QString& value_) {
 
   m_step = Search;
 //  myLog() << "EntrezFetcher::doSearch() - url: " << u.url() << endl;
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
 }
 
 void EntrezFetcher::continueSearch() {
@@ -150,40 +150,34 @@ void EntrezFetcher::stop() {
     m_job->kill();
     m_job = 0;
   }
-  m_data.truncate(0);
   m_started = false;
   m_step = Begin;
   emit signalDone(this);
 }
 
-void EntrezFetcher::slotData(KIO::Job*, const QByteArray& data_) {
-  QDataStream stream(m_data, IO_WriteOnly | IO_Append);
-  stream.writeRawBytes(data_.data(), data_.size());
-}
-
-void EntrezFetcher::slotComplete(KIO::Job* job_) {
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
-
-  if(job_->error()) {
-    job_->showErrorDialog(Kernel::self()->widget());
+void EntrezFetcher::slotComplete(KJob* ) {
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
     stop();
     return;
   }
 
-  if(m_data.isEmpty()) {
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
     myDebug() << "EntrezFetcher::slotComplete() - no data" << endl;
     stop();
     return;
   }
 
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
 #if 0
-  kdWarning() << "Remove debug from entrezfetcher.cpp: " << __LINE__ << endl;
+  kWarning() << "Remove debug from entrezfetcher.cpp: " << __LINE__;
   QFile f(QString::fromLatin1("/tmp/test.xml"));
-  if(f.open(IO_WriteOnly)) {
+  if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
-    t << QCString(m_data, m_data.size()+1);
+    t << data;
   }
   f.close();
 #endif
@@ -206,8 +200,8 @@ void EntrezFetcher::slotComplete(KIO::Job* job_) {
 
 void EntrezFetcher::searchResults() {
   QDomDocument dom;
-  if(!dom.setContent(m_data, false)) {
-    kdWarning() << "EntrezFetcher::searchResults() - server did not return valid XML." << endl;
+  if(!dom.setContent(m_job->data(), false)) {
+    kWarning() << "EntrezFetcher::searchResults() - server did not return valid XML.";
     stop();
     return;
   }
@@ -218,13 +212,13 @@ void EntrezFetcher::searchResults() {
     if(e.isNull()) {
       continue;
     }
-    if(e.tagName() == Latin1Literal("Count")) {
+    if(e.tagName() == QLatin1String("Count")) {
       m_total = e.text().toInt();
       ++count;
-    } else if(e.tagName() == Latin1Literal("QueryKey")) {
+    } else if(e.tagName() == QLatin1String("QueryKey")) {
       m_queryKey = e.text();
       ++count;
-    } else if(e.tagName() == Latin1Literal("WebEnv")) {
+    } else if(e.tagName() == QLatin1String("WebEnv")) {
       m_webEnv = e.text();
       ++count;
     }
@@ -233,20 +227,19 @@ void EntrezFetcher::searchResults() {
     }
   }
 
-  m_data.truncate(0);
   doSummary();
 }
 
 void EntrezFetcher::doSummary() {
 #ifdef ENTREZ_TEST
-  KURL u = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/esummary.xml"));
+  KUrl u = KUrl(QString::fromLatin1("/home/robby/esummary.xml"));
 #else
-  KURL u(QString::fromLatin1(ENTREZ_BASE_URL));
+  KUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
   u.addPath(QString::fromLatin1(ENTREZ_SUMMARY_CGI));
   u.addQueryItem(QString::fromLatin1("tool"),       QString::fromLatin1("Tellico"));
   u.addQueryItem(QString::fromLatin1("retmode"),    QString::fromLatin1("xml"));
   u.addQueryItem(QString::fromLatin1("retstart"),   QString::number(m_start));
-  u.addQueryItem(QString::fromLatin1("retmax"),     QString::number(QMIN(m_total-m_start-1, ENTREZ_MAX_RETURNS_TOTAL)));
+  u.addQueryItem(QString::fromLatin1("retmax"),     QString::number(qMin(m_total-m_start-1, ENTREZ_MAX_RETURNS_TOTAL)));
   u.addQueryItem(QString::fromLatin1("usehistory"), QString::fromLatin1("y"));
   u.addQueryItem(QString::fromLatin1("db"),         m_dbname);
   u.addQueryItem(QString::fromLatin1("query_key"),  m_queryKey);
@@ -255,17 +248,16 @@ void EntrezFetcher::doSummary() {
 
   m_step = Summary;
 //  myLog() << "EntrezFetcher::searchResults() - url: " << u.url() << endl;
-  m_job = KIO::get(u, false, false);
-  connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
-          SLOT(slotData(KIO::Job*, const QByteArray&)));
-  connect(m_job, SIGNAL(result(KIO::Job*)),
-          SLOT(slotComplete(KIO::Job*)));
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(Kernel::self()->widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
 }
 
 void EntrezFetcher::summaryResults() {
   QDomDocument dom;
-  if(!dom.setContent(m_data, false)) {
-    kdWarning() << "EntrezFetcher::summaryResults() - server did not return valid XML." << endl;
+  if(!dom.setContent(m_job->data(), false)) {
+    kWarning() << "EntrezFetcher::summaryResults() - server did not return valid XML.";
     stop();
     return;
   }
@@ -273,7 +265,7 @@ void EntrezFetcher::summaryResults() {
   // all children are DocSum
   for(QDomNode n = dom.documentElement().firstChild(); !n.isNull(); n = n.nextSibling()) {
     QDomElement e = n.toElement();
-    if(e.isNull() || e.tagName() != Latin1Literal("DocSum")) {
+    if(e.isNull() || e.tagName() != QLatin1String("DocSum")) {
       continue;
     }
     QDomNodeList nodes = e.elementsByTagName(QString::fromLatin1("Id"));
@@ -284,16 +276,16 @@ void EntrezFetcher::summaryResults() {
     int id = nodes.item(0).toElement().text().toInt();
     QString title, pubdate, authors;
     nodes = e.elementsByTagName(QString::fromLatin1("Item"));
-    for(uint j = 0; j < nodes.count(); ++j) {
-      if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == Latin1Literal("Title")) {
+    for(int j = 0; j < nodes.count(); ++j) {
+      if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == QLatin1String("Title")) {
         title = nodes.item(j).toElement().text();
-      } else if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == Latin1Literal("PubDate")) {
+      } else if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == QLatin1String("PubDate")) {
         pubdate = nodes.item(j).toElement().text();
-      } else if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == Latin1Literal("AuthorList")) {
+      } else if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == QLatin1String("AuthorList")) {
         QStringList list;
         for(QDomNode aNode = nodes.item(j).firstChild(); !aNode.isNull(); aNode = aNode.nextSibling()) {
           // lazy, assume all children Items are authors
-          if(aNode.nodeName() == Latin1Literal("Item")) {
+          if(aNode.nodeName() == QLatin1String("Item")) {
             list << aNode.toElement().text();
           }
         }
@@ -303,7 +295,7 @@ void EntrezFetcher::summaryResults() {
         break; // done now
       }
     }
-    SearchResult* r = new SearchResult(this, title, pubdate + '/' + authors, QString());
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), title, pubdate + '/' + authors, QString());
     m_matches.insert(r->uid, id);
     emit signalResultFound(r);
   }
@@ -320,22 +312,22 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   }
 
   if(!m_matches.contains(uid_)) {
-    return 0;
+    return Data::EntryPtr();
   }
 
   if(!m_xsltHandler) {
     initXSLTHandler();
     if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
       stop();
-      return 0;
+      return Data::EntryPtr();
     }
   }
 
   int id = m_matches[uid_];
 #ifdef ENTREZ_TEST
-  KURL u = KURL::fromPathOrURL(QString::fromLatin1("/home/robby/pubmed.xml"));
+  KUrl u = KUrl(QString::fromLatin1("/home/robby/pubmed.xml"));
 #else
-  KURL u(QString::fromLatin1(ENTREZ_BASE_URL));
+  KUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
   u.addPath(QString::fromLatin1(ENTREZ_FETCH_CGI));
   u.addQueryItem(QString::fromLatin1("tool"),       QString::fromLatin1("Tellico"));
   u.addQueryItem(QString::fromLatin1("retmode"),    QString::fromLatin1("xml"));
@@ -346,13 +338,13 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   // now it's sychronous, and we know that it's utf8
   QString xmlOutput = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
   if(xmlOutput.isEmpty()) {
-    kdWarning() << "EntrezFetcher::fetchEntry() - unable to download " << u << endl;
-    return 0;
+    kWarning() << "EntrezFetcher::fetchEntry() - unable to download " << u;
+    return Data::EntryPtr();
   }
 #if 0
-  kdWarning() << "EntrezFetcher::fetchEntry() - turn me off!" << endl;
+  kWarning() << "EntrezFetcher::fetchEntry() - turn me off!";
   QFile f1(QString::fromLatin1("/tmp/test-entry.xml"));
-  if(f1.open(IO_WriteOnly)) {
+  if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
     t.setEncoding(QTextStream::UnicodeUTF8);
     t << xmlOutput;
@@ -363,12 +355,12 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
-    kdWarning() << "EntrezFetcher::fetchEntry() - invalid collection" << endl;
-    return 0;
+    kWarning() << "EntrezFetcher::fetchEntry() - invalid collection";
+    return Data::EntryPtr();
   }
   if(coll->entryCount() == 0) {
     myDebug() << "EntrezFetcher::fetchEntry() - no entries in collection" << endl;
-    return 0;
+    return Data::EntryPtr();
   } else if(coll->entryCount() > 1) {
     myDebug() << "EntrezFetcher::fetchEntry() - collection has multiple entries, taking first one" << endl;
   }
@@ -377,7 +369,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
 
   // try to get a link, but only if necessary
   if(m_fields.contains(QString::fromLatin1("url"))) {
-    KURL link(QString::fromLatin1(ENTREZ_BASE_URL));
+    KUrl link(QString::fromLatin1(ENTREZ_BASE_URL));
     link.addPath(QString::fromLatin1(ENTREZ_LINK_CGI));
     link.addQueryItem(QString::fromLatin1("tool"),   QString::fromLatin1("Tellico"));
     link.addQueryItem(QString::fromLatin1("cmd"),    QString::fromLatin1("llinks"));
@@ -398,7 +390,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
 //      myDebug() << u << endl;
       if(!u.isEmpty()) {
         if(!coll->hasField(QString::fromLatin1("url"))) {
-          Data::FieldPtr field = new Data::Field(QString::fromLatin1("url"), i18n("URL"), Data::Field::URL);
+          Data::FieldPtr field(new Data::Field(QString::fromLatin1("url"), i18n("URL"), Data::Field::URL));
           field->setCategory(i18n("Miscellaneous"));
           coll->addField(field);
         }
@@ -419,27 +411,27 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
 }
 
 void EntrezFetcher::initXSLTHandler() {
-  QString xsltfile = locate("appdata", QString::fromLatin1("pubmed2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("pubmed2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kdWarning() << "EntrezFetcher::initXSLTHandler() - can not locate pubmed2tellico.xsl." << endl;
+    kWarning() << "EntrezFetcher::initXSLTHandler() - can not locate pubmed2tellico.xsl.";
     return;
   }
 
-  KURL u;
+  KUrl u;
   u.setPath(xsltfile);
 
   if(!m_xsltHandler) {
     m_xsltHandler = new XSLTHandler(u);
   }
   if(!m_xsltHandler->isValid()) {
-    kdWarning() << "EntrezFetcher::initXSLTHandler() - error in pubmed2tellico.xsl." << endl;
+    kWarning() << "EntrezFetcher::initXSLTHandler() - error in pubmed2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
   }
 }
 
-void EntrezFetcher::updateEntry(Data::EntryPtr entry_) {
+void EntrezFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myDebug() << "EntrezFetcher::updateEntry()" << endl;
   QString s = entry_->field(QString::fromLatin1("pmid"));
   if(!s.isEmpty()) {

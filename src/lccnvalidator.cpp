@@ -40,12 +40,12 @@ QString LCCNValidator::formalize(const QString& value_) {
     alpha += value_.at(pos);
   }
   QString afterAlpha = value_.mid(alpha.length());
-  alpha = alpha.stripWhiteSpace(); // possible to have a space at the end
+  alpha = alpha.trimmed(); // possible to have a space at the end
 
   QString year;
   QString serial;
   // have to be able to differentiate 2 and 4-digit years, first check for hyphen position
-  int pos = afterAlpha.find('-');
+  int pos = afterAlpha.indexOf('-');
   if(pos > -1) {
     year = afterAlpha.section('-', 0, 0);
     serial = afterAlpha.section('-', 1);
@@ -65,10 +65,12 @@ QString LCCNValidator::formalize(const QString& value_) {
 
   // now check for non digits in the serial
   pos = 0;
-  for( ; pos < static_cast<int>(serial.length()) && serial.at(pos).isNumber(); ++pos) { ; }
+  for( ; pos < serial.length() && serial.at(pos).isNumber(); ++pos) { ; }
   QString suffix = serial.mid(pos);
   serial = serial.left(pos);
   // serial must be left-padded with zeros to 6 characters
-  serial = serial.rightJustify(6, '0');
+  serial = serial.rightJustified(6, '0');
   return alpha + year + serial + suffix;
 }
+
+#include "lccnvalidator.moc"

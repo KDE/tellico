@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2007 by Robby Stephenson
+    copyright            : (C) 2007-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,8 +14,12 @@
 #ifndef TELLICO_DROPHANDLER_H
 #define TELLICO_DROPHANDLER_H
 
-#include <qobject.h>
-#include <kurl.h>
+#include <KUrl>
+
+#include <QObject>
+#include <QEvent>
+#include <QDropEvent>
+#include <QDragEnterEvent>
 
 namespace Tellico {
 
@@ -32,7 +36,7 @@ protected:
 private:
   bool dragEnter(QDragEnterEvent* event);
   bool drop(QDropEvent* event);
-  bool handleURL(const KURL::List& urls);
+  bool handleURL(const KUrl::List& urls);
 };
 
 }

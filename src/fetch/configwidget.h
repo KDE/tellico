@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,14 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FETCHCONFIGWIDGET_H
-#define FETCHCONFIGWIDGET_H
+#ifndef TELLICO_FETCHCONFIGWIDGET_H
+#define TELLICO_FETCHCONFIGWIDGET_H
 
 #include "../datavectors.h"
 
-#include <qwidget.h>
-#include <qdict.h>
-#include <qcheckbox.h>
+#include <QWidget>
+#include <QCheckBox>
+#include <QHash>
 
 class KConfigGroup;
 class QStringList;
@@ -69,7 +69,7 @@ private:
   bool m_modified;
   bool m_accepted;
   QWidget* m_optionsWidget;
-  QDict<QCheckBox> m_fields;
+  QHash<QString, QCheckBox*> m_fields;
 };
 
   }

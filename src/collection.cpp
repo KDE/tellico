@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,17 +15,17 @@
 #include "field.h"
 #include "entry.h"
 #include "tellico_debug.h"
-#include "latin1literal.h"
 #include "tellico_utils.h"
 #include "controller.h"
 #include "collectionfactory.h"
 #include "stringset.h"
+#include "entrycomparison.h"
 #include "tellico_kernel.h"
 
 #include <klocale.h>
 
-#include <qregexp.h>
-#include <qvaluestack.h>
+#include <QRegExp>
+#include <QStack>
 
 using Tellico::Data::Collection;
 
@@ -33,29 +33,33 @@ const char* Collection::s_emptyGroupTitle = I18N_NOOP("(Empty)");
 const QString Collection::s_peopleGroupName = QString::fromLatin1("_people");
 
 Collection::Collection(const QString& title_)
-    : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryIdDict(997)
+    : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryIdDict()
     , m_trackGroups(false) {
-  m_entryGroupDicts.setAutoDelete(true);
-
   m_id = getID();
 }
 
 Collection::~Collection() {
+  // maybe we should just call clear() ?
+  foreach(EntryGroupDict* dict, m_entryGroupDicts) {
+    qDeleteAll(*dict);
+  }
+  qDeleteAll(m_entryGroupDicts);
+  m_entryGroupDicts.clear();
 }
 
 QString Collection::typeName() const {
   return CollectionFactory::typeName(type());
 }
 
-bool Collection::addFields(FieldVec list_) {
+bool Collection::addFields(Tellico::Data::FieldList list_) {
   bool success = true;
-  for(FieldVec::Iterator it = list_.begin(); it != list_.end(); ++it) {
-    success &= addField(it);
+  foreach(FieldPtr field, list_) {
+    success &= addField(field);
   }
   return success;
 }
 
-bool Collection::addField(FieldPtr field_) {
+bool Collection::addField(Tellico::Data::FieldPtr field_) {
   if(!field_) {
     return false;
   }
@@ -76,30 +80,28 @@ bool Collection::addField(FieldPtr field_) {
     m_peopleFields.append(field_); // list of people attributes
     if(m_peopleFields.count() > 1) {
       // the second time that a person field is added, add a "pseudo-group" for people
-      if(m_entryGroupDicts.find(s_peopleGroupName) == 0) {
+      if(!m_entryGroupDicts.contains(s_peopleGroupName)) {
         EntryGroupDict* d = new EntryGroupDict();
-        d->setAutoDelete(true);
         m_entryGroupDicts.insert(s_peopleGroupName, d);
         m_entryGroups.prepend(s_peopleGroupName);
       }
     }
   }
-  m_fieldNameDict.insert(field_->name(), field_);
-  m_fieldTitleDict.insert(field_->title(), field_);
+  m_fieldNameDict.insert(field_->name(), field_.data());
+  m_fieldTitleDict.insert(field_->title(), field_.data());
   m_fieldNames << field_->name();
   m_fieldTitles << field_->title();
   if(field_->type() == Field::Image) {
     m_imageFields.append(field_);
   }
 
-  if(!field_->category().isEmpty() && m_fieldCategories.findIndex(field_->category()) == -1) {
+  if(!field_->category().isEmpty() && m_fieldCategories.indexOf(field_->category()) == -1) {
     m_fieldCategories << field_->category();
   }
 
   if(field_->flags() & Field::AllowGrouped) {
     // m_entryGroupsDicts autoDeletes each QDict when the Collection d'tor is called
     EntryGroupDict* dict = new EntryGroupDict();
-    dict->setAutoDelete(true);
     m_entryGroupDicts.insert(field_->name(), dict);
     // cache the possible groups of entries
     m_entryGroups << field_->name();
@@ -110,7 +112,7 @@ bool Collection::addField(FieldPtr field_) {
   }
 
   // refresh all dependent fields, in case one references this new one
-  for(FieldVec::Iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
+  foreach(FieldPtr it, m_fields) {
     if(it->type() == Field::Dependent) {
       emit signalRefreshField(it);
     }
@@ -119,7 +121,7 @@ bool Collection::addField(FieldPtr field_) {
   return true;
 }
 
-bool Collection::mergeField(FieldPtr newField_) {
+bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
@@ -127,9 +129,9 @@ bool Collection::mergeField(FieldPtr newField_) {
   FieldPtr currField = fieldByName(newField_->name());
   if(!currField) {
     // does not exist in current collection, add it
-    Data::FieldPtr f = new Field(*newField_);
+    Data::FieldPtr f(new Field(*newField_));
     bool success = addField(f);
-    Controller::self()->addedField(this, f);
+    Controller::self()->addedField(CollPtr(this), f);
     return success;
   }
 
@@ -149,7 +151,7 @@ bool Collection::mergeField(FieldPtr newField_) {
     QStringList allowed = currField->allowed();
     const QStringList& newAllowed = newField_->allowed();
     for(QStringList::ConstIterator it = newAllowed.begin(); it != newAllowed.end(); ++it) {
-      if(allowed.findIndex(*it) == -1) {
+      if(!allowed.contains(*it)) {
         allowed.append(*it);
       }
     }
@@ -167,26 +169,26 @@ bool Collection::mergeField(FieldPtr newField_) {
   }
 
   // if new field has additional extended properties, add those
-  for(StringMap::ConstIterator it = newField_->propertyList().begin(); it != newField_->propertyList().end(); ++it) {
+  for(StringMap::const_iterator it = newField_->propertyList().begin(); it != newField_->propertyList().end(); ++it) {
     const QString propName = it.key();
     const QString currValue = currField->property(propName);
     if(currValue.isEmpty()) {
-      currField->setProperty(propName, it.data());
-    } else if (it.data() != currValue) {
-      if(currField->type() == Field::URL && propName == Latin1Literal("relative")) {
-        kdWarning() << "Collection::mergeField() - relative URL property does not match for " << currField->name() << endl;
-      } else if((currField->type() == Field::Table && propName == Latin1Literal("columns"))
-             || (currField->type() == Field::Rating && propName == Latin1Literal("maximum"))) {
+      currField->setProperty(propName, it.value());
+    } else if (it.value() != currValue) {
+      if(currField->type() == Field::URL && propName == QLatin1String("relative")) {
+        kWarning() << "Collection::mergeField() - relative URL property does not match for " << currField->name();
+      } else if((currField->type() == Field::Table && propName == QLatin1String("columns"))
+             || (currField->type() == Field::Rating && propName == QLatin1String("maximum"))) {
         bool ok;
         uint currNum = Tellico::toUInt(currValue, &ok);
-        uint newNum = Tellico::toUInt(it.data(), &ok);
+        uint newNum = Tellico::toUInt(it.value(), &ok);
         if(newNum > currNum) { // bigger values
           currField->setProperty(propName, QString::number(newNum));
         }
-      } else if(currField->type() == Field::Rating && propName == Latin1Literal("minimum")) {
+      } else if(currField->type() == Field::Rating && propName == QLatin1String("minimum")) {
         bool ok;
         uint currNum = Tellico::toUInt(currValue, &ok);
-        uint newNum = Tellico::toUInt(it.data(), &ok);
+        uint newNum = Tellico::toUInt(it.value(), &ok);
         if(newNum < currNum) { // smaller values
           currField->setProperty(propName, QString::number(newNum));
         }
@@ -201,7 +203,7 @@ bool Collection::mergeField(FieldPtr newField_) {
 
 // be really careful with these field pointers, try not to call too many other functions
 // which may depend on the field list
-bool Collection::modifyField(FieldPtr newField_) {
+bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
@@ -216,25 +218,24 @@ bool Collection::modifyField(FieldPtr newField_) {
   }
 
   // update name dict
-  m_fieldNameDict.replace(fieldName, newField_);
+  m_fieldNameDict.insert(fieldName, newField_.data());
 
   // update titles
   const QString oldTitle = oldField->title();
   const QString newTitle = newField_->title();
   if(oldTitle == newTitle) {
-    m_fieldTitleDict.replace(newTitle, newField_);
+    m_fieldTitleDict.insert(newTitle, newField_.data());
   } else {
     m_fieldTitleDict.remove(oldTitle);
-    m_fieldTitles.remove(oldTitle);
-    m_fieldTitleDict.insert(newTitle, newField_);
+    m_fieldTitles.removeAll(oldTitle);
+    m_fieldTitleDict.insert(newTitle, newField_.data());
     m_fieldTitles.append(newTitle);
   }
 
   // now replace the field pointer in the list
-  FieldVec::Iterator it = m_fields.find(oldField);
-  if(it != m_fields.end()) {
-    m_fields.insert(it, newField_);
-    m_fields.remove(oldField);
+  int pos = m_fields.indexOf(oldField);
+  if(pos > -1) {
+    m_fields.replace(pos, newField_);
   } else {
     myDebug() << "Collection::modifyField() - no index found!" << endl;
     return false;
@@ -243,7 +244,7 @@ bool Collection::modifyField(FieldPtr newField_) {
   // update category list.
   if(oldField->category() != newField_->category()) {
     m_fieldCategories.clear();
-    for(FieldVec::Iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
+    foreach(FieldPtr it, m_fields) {
       // add category if it's not in the list yet
       if(!it->category().isEmpty() && !m_fieldCategories.contains(it->category())) {
         m_fieldCategories += it->category();
@@ -261,7 +262,7 @@ bool Collection::modifyField(FieldPtr newField_) {
   // if format is different, go ahead and invalidate all formatted entry values
   if(oldField->formatFlag() != newField_->formatFlag()) {
     // invalidate cached format strings of all entry attributes of this name
-    for(EntryVecIt it = m_entries.begin(); it != m_entries.end(); ++it) {
+    foreach(EntryPtr it, m_entries) {
       it->invalidateFormattedFieldValue(fieldName);
     }
     resetGroups = true;
@@ -272,16 +273,15 @@ bool Collection::modifyField(FieldPtr newField_) {
   bool wasPeople = oldField->formatFlag() == Field::FormatName;
   bool isPeople = newField_->formatFlag() == Field::FormatName;
   if(wasPeople) {
-    m_peopleFields.remove(oldField);
+    m_peopleFields.removeAll(oldField);
     if(!isPeople) {
       resetGroups = true;
     }
   }
   if(isPeople) {
     // if there's more than one people field and no people dict exists yet, add it
-    if(m_peopleFields.count() > 1 && m_entryGroupDicts.find(s_peopleGroupName) == 0) {
+    if(m_peopleFields.count() > 1 && !m_entryGroupDicts.contains(s_peopleGroupName)) {
       EntryGroupDict* d = new EntryGroupDict();
-      d->setAutoDelete(true);
       m_entryGroupDicts.insert(s_peopleGroupName, d);
       // put it at the top of the list
       m_entryGroups.prepend(s_peopleGroupName);
@@ -297,8 +297,8 @@ bool Collection::modifyField(FieldPtr newField_) {
   if(wasGrouped) {
     if(!isGrouped) {
       // in order to keep list in the same order, don't remove unless new field is not groupable
-      m_entryGroups.remove(fieldName);
-      m_entryGroupDicts.remove(fieldName);
+      m_entryGroups.removeAll(fieldName);
+      delete m_entryGroupDicts.take(fieldName); // no auto-delete here
       myDebug() << "Collection::modifyField() - no longer grouped: " << fieldName << endl;
       resetGroups = true;
     } else {
@@ -307,7 +307,6 @@ bool Collection::modifyField(FieldPtr newField_) {
     }
   } else if(isGrouped) {
     EntryGroupDict* d = new EntryGroupDict();
-    d->setAutoDelete(true);
     m_entryGroupDicts.insert(fieldName, d);
     if(!wasGrouped) {
       // cache the possible groups of entries
@@ -317,7 +316,7 @@ bool Collection::modifyField(FieldPtr newField_) {
   }
 
   if(oldField->type() == Field::Image) {
-    m_imageFields.remove(oldField);
+    m_imageFields.removeAll(oldField);
   }
   if(newField_->type() == Field::Image) {
     m_imageFields.append(newField_);
@@ -341,7 +340,7 @@ bool Collection::removeField(const QString& name_, bool force_) {
 }
 
 // force allows me to force the deleting of the title field if I need to
-bool Collection::removeField(FieldPtr field_, bool force_/*=false*/) {
+bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false*/) {
   if(!field_ || !m_fields.contains(field_)) {
     if(field_) {
       myDebug() << "Collection::removeField - false: " << field_->name() << endl;
@@ -357,70 +356,71 @@ bool Collection::removeField(FieldPtr field_, bool force_/*=false*/) {
 
   bool success = true;
   if(field_->formatFlag() == Field::FormatName) {
-    success &= m_peopleFields.remove(field_);
+    m_peopleFields.removeAll(field_);
   }
 
   if(field_->type() == Field::Image) {
-    success &= m_imageFields.remove(field_);
+    m_imageFields.removeAll(field_);
   }
-  success &= m_fieldNameDict.remove(field_->name());
-  success &= m_fieldTitleDict.remove(field_->title());
-  success &= m_fieldNames.remove(field_->name());
-  success &= m_fieldTitles.remove(field_->title());
+  m_fieldNameDict.remove(field_->name());
+  m_fieldTitleDict.remove(field_->title());
+  m_fieldNames.removeAll(field_->name());
+  m_fieldTitles.removeAll(field_->title());
 
   if(fieldsByCategory(field_->category()).count() == 1) {
-    success &= m_fieldCategories.remove(field_->category());
+    m_fieldCategories.removeAll(field_->category());
   }
 
-  for(EntryVecIt it = m_entries.begin(); it != m_entries.end(); ++it) {
+  foreach(EntryPtr entry, m_entries) {
     // setting the fields to an empty string removes the value from the entry's list
-    it->setField(field_, QString::null);
+    entry->setField(field_, QString::null);
   }
 
   if(field_->flags() & Field::AllowGrouped) {
-    success &= m_entryGroupDicts.remove(field_->name());
-    success &= m_entryGroups.remove(field_->name());
+    EntryGroupDict* dict = m_entryGroupDicts.take(field_->name());
+    qDeleteAll(*dict);
+    m_entryGroups.removeAll(field_->name());
     if(field_->name() == m_defaultGroupField) {
       setDefaultGroupField(m_entryGroups[0]);
     }
   }
 
-  success &= m_fields.remove(field_);
+  m_fields.removeAll(field_);
 
   // refresh all dependent fields, rather lazy, but there's
   // likely to be weird effects when checking dependent fields
   // while removing one, so refresh all of them
-  for(FieldVec::Iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
-    if(it->type() == Field::Dependent) {
-      emit signalRefreshField(it);
+  foreach(FieldPtr field, m_fields) {
+    if(field->type() == Field::Dependent) {
+      emit signalRefreshField(field);
     }
   }
 
   return success;
 }
 
-void Collection::reorderFields(const FieldVec& list_) {
+void Collection::reorderFields(const Tellico::Data::FieldList& list_) {
 // assume the lists have the same pointers!
   m_fields = list_;
 
   // also reset category list, since the order may have changed
   m_fieldCategories.clear();
-  for(FieldVec::Iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
-    if(!it->category().isEmpty() && !m_fieldCategories.contains(it->category())) {
-      m_fieldCategories << it->category();
+  foreach(FieldPtr field, m_fields) {
+    if(!field->category().isEmpty() && !m_fieldCategories.contains(field->category())) {
+      m_fieldCategories << field->category();
     }
   }
 }
 
-void Collection::addEntries(EntryVec entries_) {
+void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
   if(entries_.isEmpty()) {
     return;
   }
 
-  for(EntryVec::Iterator entry = entries_.begin(); entry != entries_.end(); ++entry) {
+  foreach(EntryPtr entry, entries_) {
     bool foster = false;
-    if(this != entry->collection()) {
-      entry->setCollection(this);
+    if(CollPtr(this) != entry->collection()) {
+      entry->setCollection(CollPtr(this));
       foster = true;
     }
 
@@ -432,7 +432,7 @@ void Collection::addEntries(EntryVec entries_) {
     } else if(entry->id() == -1) {
       entry->setId(m_nextEntryId);
       ++m_nextEntryId;
-    } else if(m_entryIdDict.find(entry->id())) {
+    } else if(m_entryIdDict[entry->id()]) {
       if(!foster) {
         myDebug() << "Collection::addEntries() - the collection already has an entry with id = " << entry->id() << endl;
       }
@@ -446,27 +446,27 @@ void Collection::addEntries(EntryVec entries_) {
   }
 }
 
-void Collection::removeEntriesFromDicts(EntryVec entries_) {
-  PtrVector<EntryGroup> modifiedGroups;
-  for(EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_) {
+  QList<EntryGroup*> modifiedGroups;
+  foreach(EntryPtr entry, entries_) {
     // need a copy of the vector since it gets changed
-    PtrVector<EntryGroup> groups = entry->groups();
-    for(PtrVector<EntryGroup>::Iterator group = groups.begin(); group != groups.end(); ++group) {
-      if(entry->removeFromGroup(group.ptr()) && !modifiedGroups.contains(group.ptr())) {
-        modifiedGroups.push_back(group.ptr());
+    QList<EntryGroup*> groups = entry->groups();
+    foreach(EntryGroup* group, groups) {
+      if(entry->removeFromGroup(group) && !modifiedGroups.contains(group)) {
+        modifiedGroups.append(group);
       }
-      if(group->isEmpty() && !m_groupsToDelete.contains(group.ptr())) {
-        m_groupsToDelete.push_back(group.ptr());
+      if(group->isEmpty() && !m_groupsToDelete.contains(group)) {
+        m_groupsToDelete.push_back(group);
       }
     }
   }
-  emit signalGroupsModified(this, modifiedGroups);
+  emit signalGroupsModified(CollPtr(this), modifiedGroups);
 }
 
 // this function gets called whenever an entry is modified. Its purpose is to keep the
 // groupDicts current. It first removes the entry from every group to which it belongs,
 // then it repopulates the dicts with the entry's fields
-void Collection::updateDicts(EntryVec entries_) {
+void Collection::updateDicts(const Tellico::Data::EntryList& entries_) {
   if(entries_.isEmpty()) {
     return;
   }
@@ -476,7 +476,7 @@ void Collection::updateDicts(EntryVec entries_) {
   cleanGroups();
 }
 
-bool Collection::removeEntries(EntryVec vec_) {
+bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
   if(vec_.isEmpty()) {
     return false;
   }
@@ -484,35 +484,35 @@ bool Collection::removeEntries(EntryVec vec_) {
 //  myDebug() << "Collection::deleteEntry() - deleted entry - " << entry_->title() << endl;
   removeEntriesFromDicts(vec_);
   bool success = true;
-  for(EntryVecIt entry = vec_.begin(); entry != vec_.end(); ++entry) {
+  foreach(EntryPtr entry, vec_) {
     m_entryIdDict.remove(entry->id());
-    success &= m_entries.remove(entry);
+    m_entries.removeAll(entry);
   }
   cleanGroups();
   return success;
 }
 
-Tellico::Data::FieldVec Collection::fieldsByCategory(const QString& cat_) {
+Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) {
 #ifndef NDEBUG
-  if(m_fieldCategories.findIndex(cat_) == -1) {
+  if(m_fieldCategories.indexOf(cat_) == -1) {
     myDebug() << "Collection::fieldsByCategory() - '" << cat_ << "' is not in category list" << endl;
   }
 #endif
   if(cat_.isEmpty()) {
     myDebug() << "Collection::fieldsByCategory() - empty category!" << endl;
-    return FieldVec();
+    return FieldList();
   }
 
-  FieldVec list;
-  for(FieldVec::Iterator it = m_fields.begin(); it != m_fields.end(); ++it) {
-    if(it->category() == cat_) {
-      list.append(it);
+  FieldList list;
+  foreach(FieldPtr field, m_fields) {
+    if(field->category() == cat_) {
+      list.append(field);
     }
   }
   return list;
 }
 
-const QString& Collection::fieldNameByTitle(const QString& title_) const {
+QString Collection::fieldNameByTitle(const QString& title_) const {
   if(title_.isEmpty()) {
     return QString::null;
   }
@@ -523,13 +523,13 @@ const QString& Collection::fieldNameByTitle(const QString& title_) const {
   return f->name();
 }
 
-const QString& Collection::fieldTitleByName(const QString& name_) const {
+QString Collection::fieldTitleByName(const QString& name_) const {
   if(name_.isEmpty()) {
     return QString::null;
   }
   FieldPtr f = fieldByName(name_);
   if(!f) {
-    kdWarning() << "Collection::fieldTitleByName() - no field named " << name_ << endl;
+    kWarning() << "Collection::fieldTitleByName() - no field named " << name_;
     return QString::null;
   }
   return f->title();
@@ -542,11 +542,11 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
   bool multiple = (fieldByName(name_)->flags() & Field::AllowMultiple);
 
   StringSet values;
-  for(EntryVec::ConstIterator it = m_entries.begin(); it != m_entries.end(); ++it) {
+  foreach(EntryPtr entry, m_entries) {
     if(multiple) {
-      values.add(it->fields(name_, false));
+      values.add(entry->fields(name_, false));
     } else {
-      values.add(it->field(name_));
+      values.add(entry->field(name_));
     }
   } // end entry loop
 
@@ -554,15 +554,15 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
 }
 
 Tellico::Data::FieldPtr Collection::fieldByName(const QString& name_) const {
-  return m_fieldNameDict.isEmpty() ? 0 : name_.isEmpty() ? 0 : m_fieldNameDict.find(name_);
+  return FieldPtr(m_fieldNameDict[name_]);
 }
 
 Tellico::Data::FieldPtr Collection::fieldByTitle(const QString& title_) const {
-  return m_fieldTitleDict.isEmpty() ? 0 : title_.isEmpty() ? 0 : m_fieldTitleDict.find(title_);
+  return FieldPtr(m_fieldTitleDict[title_]);
 }
 
 bool Collection::hasField(const QString& name_) const {
-  return fieldByName(name_) != 0;
+  return fieldByName(name_);
 }
 
 bool Collection::isAllowed(const QString& key_, const QString& value_) const {
@@ -575,7 +575,7 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
   FieldPtr field = fieldByName(key_);
 
   // if the type is not multiple choice or if value_ is allowed, return true
-  if(field && (field->type() != Field::Choice || field->allowed().findIndex(value_) > -1)) {
+  if(field && (field->type() != Field::Choice || field->allowed().indexOf(value_) > -1)) {
     return true;
   }
 
@@ -584,10 +584,10 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
 
 Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& name_) {
 //  myDebug() << "Collection::entryGroupDictByName() - " << name_ << endl;
-  if(name_.isEmpty()) {
+  if(name_.isEmpty() || !m_entryGroupDicts.contains(name_)) {
     return 0;
   }
-  EntryGroupDict* dict = m_entryGroupDicts.isEmpty() ? 0 : m_entryGroupDicts.find(name_);
+  EntryGroupDict* dict = m_entryGroupDicts[name_];
   if(dict && dict->isEmpty()) {
     GUI::CursorSaver cs;
     const bool b = signalsBlocked();
@@ -599,21 +599,20 @@ Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& n
   return dict;
 }
 
-void Collection::populateDict(EntryGroupDict* dict_, const QString& fieldName_, EntryVec entries_) {
+void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QString& fieldName_, const Tellico::Data::EntryList& entries_) {
 //  myDebug() << "Collection::populateDict() - " << fieldName_ << endl;
   bool isBool = hasField(fieldName_) && fieldByName(fieldName_)->type() == Field::Bool;
 
-  PtrVector<EntryGroup> modifiedGroups;
-  for(EntryVecIt entry = entries_.begin(); entry != entries_.end(); ++entry) {
+  QList<EntryGroup*> modifiedGroups;
+  foreach(EntryPtr entry, entries_) {
     QStringList groups = entryGroupNamesByField(entry, fieldName_);
-    for(QStringList::ConstIterator groupIt = groups.begin(); groupIt != groups.end(); ++groupIt) {
+    foreach(QString groupTitle, groups) {
       // find the group for this group name
       // bool fields used the field title
-      QString groupTitle = *groupIt;
       if(isBool && groupTitle != i18n(s_emptyGroupTitle)) {
         groupTitle = fieldTitleByName(fieldName_);
       }
-      EntryGroup* group = dict_->find(groupTitle);
+      EntryGroup* group = (*dict_)[groupTitle];
       // if the group doesn't exist, create it
       if(!group) {
         group = new EntryGroup(groupTitle, fieldName_);
@@ -621,17 +620,17 @@ void Collection::populateDict(EntryGroupDict* dict_, const QString& fieldName_, 
       } else if(group->isEmpty()) {
         // if it's empty, then it was added to the vector of groups to delete
         // remove it from that vector now that we're adding to it
-        m_groupsToDelete.remove(group);
+        m_groupsToDelete.removeAll(group);
       }
       if(entry->addToGroup(group)) {
         modifiedGroups.push_back(group);
       }
     } // end group loop
   } // end entry loop
-  emit signalGroupsModified(this, modifiedGroups);
+  emit signalGroupsModified(CollPtr(this), modifiedGroups);
 }
 
-void Collection::populateCurrentDicts(EntryVec entries_) {
+void Collection::populateCurrentDicts(const Tellico::Data::EntryList& entries_) {
   if(m_entryGroupDicts.isEmpty()) {
     return;
   }
@@ -644,12 +643,12 @@ void Collection::populateCurrentDicts(EntryVec entries_) {
   // for each dict, get the value of that field for the entry
   // if multiple values are allowed, split the value and then insert the
   // entry pointer into the dict for each value
-  QDictIterator<EntryGroupDict> dictIt(m_entryGroupDicts);
-  for( ; dictIt.current(); ++dictIt) {
+  QHash<QString, EntryGroupDict*>::const_iterator dictIt = m_entryGroupDicts.constBegin();
+  for( ; dictIt != m_entryGroupDicts.constEnd(); ++dictIt) {
     // only populate if it's not empty, since they are
     // populated on demand
-    if(!dictIt.current()->isEmpty()) {
-      populateDict(dictIt.current(), dictIt.currentKey(), entries_);
+    if(!dictIt.value()->isEmpty()) {
+      populateDict(dictIt.value(), dictIt.key(), entries_);
       allEmpty = false;
     }
   }
@@ -668,46 +667,47 @@ void Collection::populateCurrentDicts(EntryVec entries_) {
 // for a given field. Normally, this would just be splitting the entry's value
 // for the field, but if the field name is the people pseudo-group, then it gets
 // a bit more complicated
-QStringList Collection::entryGroupNamesByField(EntryPtr entry_, const QString& fieldName_) {
+QStringList Collection::entryGroupNamesByField(Tellico::Data::EntryPtr entry_, const QString& fieldName_) {
   if(fieldName_ != s_peopleGroupName) {
     return entry_->groupNamesByFieldName(fieldName_);
   }
 
   StringSet values;
-  for(FieldVec::Iterator it = m_peopleFields.begin(); it != m_peopleFields.end(); ++it) {
-    values.add(entry_->groupNamesByFieldName(it->name()));
+  foreach(FieldPtr field, m_peopleFields) {
+    values.add(entry_->groupNamesByFieldName(field->name()));
   }
   values.remove(i18n(s_emptyGroupTitle));
   return values.toList();
 }
 
 void Collection::invalidateGroups() {
-  QDictIterator<EntryGroupDict> dictIt(m_entryGroupDicts);
-  for( ; dictIt.current(); ++dictIt) {
-    dictIt.current()->clear();
+  foreach(EntryGroupDict* dict, m_entryGroupDicts) {
+    qDeleteAll(*dict);
+    dict->clear();
+    // don't delete the dict, just clear it
   }
 
   // populateDicts() will make signals that the group view is connected to, block those
   blockSignals(true);
-  for(EntryVecIt it = m_entries.begin(); it != m_entries.end(); ++it) {
-    it->invalidateFormattedFieldValue();
-    it->clearGroups();
+  foreach(EntryPtr entry, m_entries) {
+    entry->invalidateFormattedFieldValue();
+    entry->clearGroups();
   }
   blockSignals(false);
 }
 
 Tellico::Data::EntryPtr Collection::entryById(long id_) {
-  return m_entryIdDict[id_];
+  return EntryPtr(m_entryIdDict[id_]);
 }
 
-void Collection::addBorrower(Data::BorrowerPtr borrower_) {
+void Collection::addBorrower(Tellico::Data::BorrowerPtr borrower_) {
   if(!borrower_) {
     return;
   }
   m_borrowers.append(borrower_);
 }
 
-void Collection::addFilter(FilterPtr filter_) {
+void Collection::addFilter(Tellico::FilterPtr filter_) {
   if(!filter_) {
     return;
   }
@@ -715,13 +715,13 @@ void Collection::addFilter(FilterPtr filter_) {
   m_filters.append(filter_);
 }
 
-bool Collection::removeFilter(FilterPtr filter_) {
+bool Collection::removeFilter(Tellico::FilterPtr filter_) {
   if(!filter_) {
     return false;
   }
 
   // TODO: test for success
-  m_filters.remove(filter_);
+  m_filters.removeAll(filter_);
   return true;
 }
 
@@ -738,6 +738,10 @@ void Collection::clear() {
 
   m_entries.clear();
   m_entryIdDict.clear();
+  foreach(EntryGroupDict* dict, m_entryGroupDicts) {
+    qDeleteAll(*dict);
+  }
+  qDeleteAll(m_entryGroupDicts);
   m_entryGroupDicts.clear();
   m_groupsToDelete.clear();
   m_filters.clear();
@@ -745,24 +749,25 @@ void Collection::clear() {
 }
 
 void Collection::cleanGroups() {
-  for(PtrVector<EntryGroup>::Iterator it = m_groupsToDelete.begin(); it != m_groupsToDelete.end(); ++it) {
-    EntryGroupDict* dict = entryGroupDictByName(it->fieldName());
+  foreach(EntryGroup* group, m_groupsToDelete) {
+    EntryGroupDict* dict = entryGroupDictByName(group->fieldName());
     if(!dict) {
       continue;
     }
-    dict->remove(it->groupName());
+    EntryGroup* groupToDelete = dict->take(group->groupName());
+    delete groupToDelete;
   }
   m_groupsToDelete.clear();
 }
 
-bool Collection::dependentFieldHasRecursion(FieldPtr field_) {
+bool Collection::dependentFieldHasRecursion(Tellico::Data::FieldPtr field_) {
   if(!field_ || field_->type() != Field::Dependent) {
     return false;
   }
 
   StringSet fieldNamesFound;
   fieldNamesFound.add(field_->name());
-  QValueStack<FieldPtr> fieldsToCheck;
+  QStack<FieldPtr> fieldsToCheck;
   fieldsToCheck.push(field_);
   while(!fieldsToCheck.isEmpty()) {
     FieldPtr f = fieldsToCheck.pop();
@@ -785,7 +790,7 @@ bool Collection::dependentFieldHasRecursion(FieldPtr field_) {
   return false;
 }
 
-int Collection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const {
+int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   if(!entry1_ || !entry2_) {
     return 0;
   }
@@ -794,25 +799,25 @@ int Collection::sameEntry(Data::EntryPtr entry1_, Data::EntryPtr entry2_) const 
 
   // start with twice the title score
   // and since the minimum is > 10, then need more than just a perfect title match
-  int res = 2*Entry::compareValues(entry1_, entry2_, QString::fromLatin1("title"), this);
+  int res = 2*EntryComparison::score(entry1_, entry2_, QString::fromLatin1("title"), this);
   // then add score for each field
-  FieldVec fields = entry1_->collection()->fields();
-  for(Data::FieldVecIt it = fields.begin(); it != fields.end(); ++it) {
-    res += Entry::compareValues(entry1_, entry2_, it->name(), this);
+  FieldList fields = entry1_->collection()->fields();
+  foreach(FieldPtr field, fields) {
+    res += EntryComparison::score(entry1_, entry2_, field->name(), this);
   }
   return res;
 }
 
 // static
 // merges values from e2 into e1
-bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askUser_) {
+bool Collection::mergeEntry(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2, bool overwrite_, bool askUser_) {
   if(!e1 || !e2) {
     myDebug() << "Collection::mergeEntry() - bad entry pointer" << endl;
     return false;
   }
   bool ret = true;
-  FieldVec fields = e1->collection()->fields();
-  for(FieldVec::Iterator field = fields.begin(); field != fields.end(); ++field) {
+  FieldList fields = e1->collection()->fields();
+  foreach(FieldPtr field, fields) {
     if(e2->field(field).isEmpty()) {
       continue;
     }
@@ -837,7 +842,7 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askU
       while(vals1.count() < vals2.count()) {
         vals1 += QString();
       }
-      for(uint i = 0; i < vals2.count(); ++i) {
+      for(int i = 0; i < vals2.count(); ++i) {
         if(vals2[i].isEmpty()) {
           continue;
         }
@@ -845,13 +850,13 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askU
           vals1[i] = vals2[i];
           ret = true;
         } else {
-          QStringList parts1 = QStringList::split(sep, vals1[i], true);
-          QStringList parts2 = QStringList::split(sep, vals2[i], true);
+          QStringList parts1 = vals1[i].split(sep);
+          QStringList parts2 = vals2[i].split(sep);
           bool changedPart = false;
           while(parts1.count() < parts2.count()) {
             parts1 += QString();
           }
-          for(uint j = 0; j < parts2.count(); ++j) {
+          for(int j = 0; j < parts2.count(); ++j) {
             if(parts2[j].isEmpty()) {
               continue;
             }
@@ -887,10 +892,10 @@ bool Collection::mergeEntry(EntryPtr e1, EntryPtr e2, bool overwrite_, bool askU
       // replace e1's field with union of e1's and e2's values for this field
       QStringList items1 = e1->fields(field, false);
       QStringList items2 = e2->fields(field, false);
-      for(QStringList::ConstIterator it = items2.begin(); it != items2.end(); ++it) {
+      foreach(const QString& item2, items2) {
         // possible to have one value formatted and the other one not...
-        if(!items1.contains(*it) && !items1.contains(Field::format(*it, field->formatFlag()))) {
-          items1.append(*it);
+        if(!items1.contains(item2) && !items1.contains(Field::format(item2, field->formatFlag()))) {
+          items1.append(item2);
         }
       }
 // not sure if I think it should be sorted or not

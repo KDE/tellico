@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -17,8 +17,8 @@
 
 using Tellico::GUI::RatingFieldWidget;
 
-RatingFieldWidget::RatingFieldWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : FieldWidget(field_, parent_, name_) {
+RatingFieldWidget::RatingFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : FieldWidget(field_, parent_) {
   m_rating = new RatingWidget(field_, this);
   connect(m_rating, SIGNAL(modified()), SIGNAL(modified()));
 
@@ -48,7 +48,7 @@ void RatingFieldWidget::clear() {
   editMultiple(false);
 }
 
-void RatingFieldWidget::updateFieldHook(Data::FieldPtr, Data::FieldPtr newField_) {
+void RatingFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
   m_rating->updateField(newField_);
 }
 

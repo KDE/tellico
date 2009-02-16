@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2006 by Robby Stephenson
+    copyright            : (C) 2001-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,22 +11,22 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef GROUPVIEW_H
-#define GROUPVIEW_H
+#ifndef TELLICO_GROUPVIEW_H
+#define TELLICO_GROUPVIEW_H
 
-#include "gui/listview.h"
+#include "gui/treeview.h"
 #include "observer.h"
 
-#include <qdict.h>
-#include <qpixmap.h>
+#include <QPixmap>
 
 namespace Tellico {
   namespace Data {
     class EntryGroup;
   }
   class Filter;
-  class EntryGroupItem;
   class GroupIterator;
+  class EntryGroupModel;
+  class EntrySortModel;
 
 /**
  * The GroupView shows the entries grouped, as well as the saved filters.
@@ -39,7 +39,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class GroupView : public GUI::ListView, public Observer {
+class GroupView : public GUI::TreeView, public Observer {
 Q_OBJECT
 
 public:
@@ -49,7 +49,9 @@ public:
    * @param parent A pointer to the parent widget
    * @param name The widget name
    */
-  GroupView(QWidget* parent, const char* name=0);
+  GroupView(QWidget* parent);
+
+  EntryGroupModel* sourceModel() const;
 
   /**
    * Returns the name of the field by which the entries are grouped
@@ -78,21 +80,19 @@ public:
    */
   void removeCollection(Data::CollPtr coll);
   /**
-   * Selects the first item which refers to a certain entry.
-   *
-   * @param entry A pointer to the entry
-   */
-  void setEntrySelected(Data::EntryPtr entry);
-  /**
    * Refresh all the items for the collection.
    *
    * @return The item for the collection
    */
   void populateCollection();
+  /**
+   * Selects the first item which refers to a certain entry.
+   *
+   * @param entry A pointer to the entry
+   */
+  void setEntrySelected(Data::EntryPtr entry);
 
-  virtual void addField(Data::CollPtr, Data::FieldPtr);
   virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
-  virtual void removeField(Data::CollPtr, Data::FieldPtr);
 
 public slots:
   /**
@@ -105,69 +105,39 @@ public slots:
    * @param coll A pointer to the collection of the gorup
    * @param groups A vector of pointers to the modified groups
    */
-  void slotModifyGroups(Tellico::Data::CollPtr coll, PtrVector<Tellico::Data::EntryGroup> groups);
-  /**
-   * Expands all items at a certain depth. If depth is -1, the current selected item
-   * is expanded. If depth is equal to either 0 or 1, then all items at that depth
-   * are expanded.
-   *
-   * @param depth The depth value
-   */
-  void slotExpandAll(int depth=-1);
-  /**
-   * Collapses all items at a certain depth. If depth is -1, the current selected item
-   * is collapsed. If depth is equal to either 0 or 1, then all items at that depth
-   * are collapsed.
-   *
-   * @param depth The depth value
-   */
-  void slotCollapseAll(int depth=-1);
+  void slotModifyGroups(Tellico::Data::CollPtr coll, QList<Tellico::Data::EntryGroup*> groups);
 
 private:
+  void contextMenuEvent(QContextMenuEvent* event);
   /**
    * Inserts a listviewitem for a given group
    *
    * @param group The group to be added
    * @return A pointer to the created @ ref ParentItem
    */
-  EntryGroupItem* addGroup(Data::EntryGroup* group);
-  /**
-   * Traverse all siblings at a certain depth, setting them open or closed. If depth is -1,
-   * then the depth of the @ref currentItem() is used.
-   *
-   * @param depth Desired depth
-   * @param open Whether the item should be open or not
-   */
-  void setSiblingsOpen(int depth, bool open);
+  void addGroup(Data::EntryGroup* group);
+
+  QString groupTitle();
+  void updateHeader(Data::FieldPtr field=Data::FieldPtr());
 
 private slots:
   /**
-   * Handles the appearance of the popup menu, determining which of the three (collection,
-   * group, or entry) menus to display.
-   *
-   * @param item A pointer to the item underneath the mouse
-   * @param point The location point
-   * @param col The column number, not currently used
-   */
-  void contextMenuRequested(QListViewItem* item, const QPoint& point, int col);
-  /**
    * Handles changing the icon when an item is expanded, depended on whether it refers
    * to a collection, a group, or an entry.
-   *
-   * @param item A pointer to the expanded list item
    */
-  void slotExpanded(QListViewItem* item);
+  void slotExpanded(const QModelIndex& index);
   /**
    * Handles changing the icon when an item is collapsed, depended on whether it refers
    * to a collection, a group, or an entry.
-   *
-   * @param item A pointer to the collapse list item
    */
-  void slotCollapsed(QListViewItem* item);
+  void slotCollapsed(const QModelIndex& index);
   /**
    * Filter by group
    */
   void slotFilterGroup();
+  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
+  void slotDoubleClicked(const QModelIndex& index);
+  void slotSortingChanged(int column, Qt::SortOrder order);
 
 signals:
   /**
@@ -180,18 +150,12 @@ signals:
 private:
   friend class GroupIterator;
 
-  virtual void setSorting(int column, bool ascending = true);
-  void resetComparisons();
-  QString groupTitle();
-  void updateHeader(Data::FieldPtr field=0);
-
   bool m_notSortedYet;
   Data::CollPtr m_coll;
-  QDict<EntryGroupItem> m_groupDict;
   QString m_groupBy;
 
-  QPixmap m_groupOpenPixmap;
-  QPixmap m_groupClosedPixmap;
+  QString m_groupOpenIconName;
+  QString m_groupClosedIconName;
 };
 
 } // end namespace

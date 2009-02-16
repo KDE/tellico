@@ -36,7 +36,7 @@ public:
 
   virtual Type type() const { return BoardGame; }
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
 };
 
   } // end namespace

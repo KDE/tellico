@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,14 +13,16 @@
 
 #include "ratingwidget.h"
 #include "../field.h"
-#include "../latin1literal.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <kiconloader.h>
 
-#include <qintdict.h>
-#include <qlayout.h>
+#include <QHash>
+#include <QPixmap>
+#include <QBoxLayout>
+#include <QLabel>
+#include <QMouseEvent>
 
 namespace {
   static const int RATING_WIDGET_MAX_ICONS = 10; // same as in Field::ratingValues()
@@ -30,7 +32,7 @@ namespace {
 using Tellico::GUI::RatingWidget;
 
 const QPixmap& RatingWidget::pixmap(const QString& value_) {
-  static QIntDict<QPixmap> pixmaps;
+  static QHash<int, QPixmap*> pixmaps;
   if(pixmaps.isEmpty()) {
     pixmaps.insert(-1, new QPixmap());
   }
@@ -49,15 +51,15 @@ const QPixmap& RatingWidget::pixmap(const QString& value_) {
   return *pix;
 }
 
-RatingWidget::RatingWidget(Data::FieldPtr field_, QWidget* parent_, const char* name_/*=0*/)
-    : QHBox(parent_, name_), m_field(field_), m_currIndex(-1) {
+RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
+    : KHBox(parent_), m_field(field_), m_currIndex(-1) {
   m_pixOn = UserIcon(QString::fromLatin1("star_on"));
   m_pixOff = UserIcon(QString::fromLatin1("star_off"));
   setSpacing(0);
 
   // find maximum width and height
-  int w = QMAX(RATING_WIDGET_MAX_STAR_SIZE, QMAX(m_pixOn.width(), m_pixOff.width()));
-  int h = QMAX(RATING_WIDGET_MAX_STAR_SIZE, QMAX(m_pixOn.height(), m_pixOff.height()));
+  int w = qMax(RATING_WIDGET_MAX_STAR_SIZE, qMax(m_pixOn.width(), m_pixOff.width()));
+  int h = qMax(RATING_WIDGET_MAX_STAR_SIZE, qMax(m_pixOn.height(), m_pixOff.height()));
   for(int i = 0; i < RATING_WIDGET_MAX_ICONS; ++i) {
     QLabel* l = new QLabel(this);
     l->setFixedSize(w, h);
@@ -73,9 +75,9 @@ RatingWidget::RatingWidget(Data::FieldPtr field_, QWidget* parent_, const char* 
 
 void RatingWidget::init() {
   updateBounds();
-  m_total = QMIN(m_max, static_cast<int>(m_widgets.count()));
-  uint i = 0;
-  for( ; static_cast<int>(i) < m_total; ++i) {
+  m_total = qMin(m_max, static_cast<int>(m_widgets.count()));
+  int i = 0;
+  for( ; i < m_total; ++i) {
     m_widgets.at(i)->setPixmap(m_pixOff);
   }
   for( ; i < m_widgets.count(); ++i) {
@@ -106,7 +108,7 @@ void RatingWidget::update() {
     m_widgets.at(i)->setPixmap(m_pixOff);
   }
 
-  QHBox::update();
+  KHBox::update();
 }
 
 void RatingWidget::mousePressEvent(QMouseEvent* event_) {
@@ -118,7 +120,7 @@ void RatingWidget::mousePressEvent(QMouseEvent* event_) {
   int idx;
   QWidget* child = childAt(event_->pos());
   if(child) {
-    idx = m_widgets.findRef(static_cast<QLabel*>(child));
+    idx = m_widgets.indexOf(static_cast<QLabel*>(child));
     // if the widget is clicked beyond the maximum value, clear it
     // remember total and min are values, but index is zero-based!
     if(idx > m_total-1) {
@@ -162,7 +164,7 @@ void RatingWidget::setText(const QString& text_) {
   update();
 }
 
-void RatingWidget::updateField(Data::FieldPtr field_) {
+void RatingWidget::updateField(Tellico::Data::FieldPtr field_) {
   m_field = field_;
   init();
 }

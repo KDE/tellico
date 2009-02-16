@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,62 +23,37 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <ksavefile.h>
 #include <kapplication.h>
 #include <kfileitem.h>
 #include <kio/chmodjob.h>
 #include <kfilterdev.h>
 
-#include <qdom.h>
-#include <qfile.h>
+#include <QDomDocument>
+#include <QFile>
+#include <QTextStream>
+#include <QList>
 
 using Tellico::FileHandler;
 
-class FileHandler::ItemDeleter : public QObject {
-public:
-  ItemDeleter(KIO::Job* job, KFileItem* item) : QObject(), m_job(job), m_item(item) {
-    FileHandler::s_deleterList.append(this);
-    connect(job, SIGNAL(result(KIO::Job*)), SLOT(deleteLater()));
-  }
-  ~ItemDeleter() {
-    FileHandler::s_deleterList.removeRef(this);
-    if(m_job) m_job->kill();
-    delete m_item; m_item = 0;
-  }
-private:
-  QGuardedPtr<KIO::Job> m_job;
-  KFileItem* m_item;
-};
-
-QPtrList<FileHandler::ItemDeleter> FileHandler::s_deleterList;
-
-FileHandler::FileRef::FileRef(const KURL& url_, bool quiet_, bool allowCompressed_) : m_device(0), m_isValid(false) {
+FileHandler::FileRef::FileRef(const KUrl& url_, bool quiet_, bool allowCompressed_) : m_device(0), m_isValid(false) {
   if(url_.isEmpty()) {
     return;
   }
 
-  if(!Tellico::NetAccess::download(url_, m_filename, Kernel::self()->widget())) {
-    myDebug() << "FileRef::FileRef() - can't download " << url_ << endl;
+  if(!Tellico::NetAccess::download(url_, m_filename, Kernel::self()->widget(), quiet_)) {
+    myDebug() << "can't download" << url_;
     QString s = KIO::NetAccess::lastErrorString();
     if(!s.isEmpty()) {
-      myDebug() << s << endl;
+      myDebug() << s;
     }
     if(!quiet_) {
-      Kernel::self()->sorry(i18n(errorLoad).arg(url_.fileName()));
+      Kernel::self()->sorry(i18n(errorLoad, url_.fileName()));
     }
     return;
   }
 
-/*
-  QFile* file = new QFile(m_filename);
-  if(file->exists()) {
-    m_isValid = true;
-    m_device = file;
-  } else {
-    delete file;
-  }
-*/
   if(allowCompressed_) {
     m_device = KFilterDev::deviceForFile(m_filename);
   } else {
@@ -103,11 +78,11 @@ bool FileHandler::FileRef::open(bool quiet_) {
   if(!isValid()) {
     return false;
   }
-  if(!m_device || !m_device->open(IO_ReadOnly)) {
+  if(!m_device || !m_device->open(QIODevice::ReadOnly)) {
     if(!quiet_) {
-      KURL u;
+      KUrl u;
       u.setPath(fileName());
-      Kernel::self()->sorry(i18n(errorLoad).arg(u.fileName()));
+      Kernel::self()->sorry(i18n(errorLoad, u.fileName()));
     }
     delete m_device;
     m_device = 0;
@@ -117,11 +92,11 @@ bool FileHandler::FileRef::open(bool quiet_) {
   return true;
 }
 
-FileHandler::FileRef* FileHandler::fileRef(const KURL& url_, bool quiet_) {
+FileHandler::FileRef* FileHandler::fileRef(const KUrl& url_, bool quiet_) {
   return new FileRef(url_, quiet_);
 }
 
-QString FileHandler::readTextFile(const KURL& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/, bool compress_/*=false*/) {
+QString FileHandler::readTextFile(const KUrl& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/, bool compress_/*=false*/) {
   FileRef f(url_, quiet_, compress_);
   if(!f.isValid()) {
     return QString::null;
@@ -130,14 +105,14 @@ QString FileHandler::readTextFile(const KURL& url_, bool quiet_/*=false*/, bool 
   if(f.open(quiet_)) {
     QTextStream stream(f.file());
     if(useUTF8_) {
-      stream.setEncoding(QTextStream::UnicodeUTF8);
+      stream.setCodec("UTF-8");
     }
-    return stream.read();
+    return stream.readAll();
   }
   return QString();
 }
 
-QDomDocument FileHandler::readXMLFile(const KURL& url_, bool processNamespace_, bool quiet_) {
+QDomDocument FileHandler::readXMLFile(const KUrl& url_, bool processNamespace_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QDomDocument();
@@ -151,19 +126,19 @@ QDomDocument FileHandler::readXMLFile(const KURL& url_, bool processNamespace_, 
   }
   if(!doc.setContent(f.file(), processNamespace_, &errorMsg, &errorLine, &errorColumn)) {
     if(!quiet_) {
-      QString details = i18n("There is an XML parsing error in line %1, column %2.").arg(errorLine).arg(errorColumn);
+      QString details = i18n("There is an XML parsing error in line %1, column %2.", errorLine, errorColumn);
       details += QString::fromLatin1("\n");
       details += i18n("The error message from Qt is:");
       details += QString::fromLatin1("\n\t") + errorMsg;
-      GUI::CursorSaver cs(Qt::arrowCursor);
-      KMessageBox::detailedSorry(Kernel::self()->widget(), i18n(errorLoad).arg(url_.fileName()), details);
+      GUI::CursorSaver cs(Qt::ArrowCursor);
+      KMessageBox::detailedSorry(Kernel::self()->widget(), i18n(errorLoad, url_.fileName()), details);
     }
     return QDomDocument();
   }
   return doc;
 }
 
-QByteArray FileHandler::readDataFile(const KURL& url_, bool quiet_) {
+QByteArray FileHandler::readDataFile(const KUrl& url_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QByteArray();
@@ -173,29 +148,30 @@ QByteArray FileHandler::readDataFile(const KURL& url_, bool quiet_) {
   return f.file()->readAll();
 }
 
-Tellico::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_, const KURL& referrer_) {
+Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_, const KUrl& referrer_) {
   if(url_.isLocalFile()) {
     return readImageFile(url_, quiet_);
   }
 
-  KTempFile tmpFile;
-  KURL tmpURL;
-  tmpURL.setPath(tmpFile.name());
-  tmpFile.setAutoDelete(true);
+  KTemporaryFile tempFile;
+  tempFile.open();
+  KUrl tempURL;
+  tempURL.setPath(tempFile.fileName());
+  tempFile.setAutoRemove(true);
 
-  KIO::Job* job = KIO::file_copy(url_, tmpURL, -1, true /* overwrite */);
+  KIO::Job* job = KIO::file_copy(url_, tempURL, -1, KIO::Overwrite);
   job->addMetaData(QString::fromLatin1("referrer"), referrer_.url());
 
   if(!KIO::NetAccess::synchronousRun(job, Kernel::self()->widget())) {
     if(!quiet_) {
-      Kernel::self()->sorry(i18n(errorLoad).arg(url_.fileName()));
+      Kernel::self()->sorry(i18n(errorLoad, url_.fileName()));
     }
     return 0;
   }
-  return readImageFile(tmpURL, quiet_);
+  return readImageFile(tempURL, quiet_);
 }
 
-Tellico::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_) {
+Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return 0;
@@ -203,33 +179,33 @@ Tellico::Data::Image* FileHandler::readImageFile(const KURL& url_, bool quiet_) 
 
   Data::Image* img = new Data::Image(f.fileName());
   if(img->isNull() && !quiet_) {
-    QString str = i18n("Tellico is unable to load the image - %1.").arg(url_.fileName());
+    QString str = i18n("Tellico is unable to load the image - %1.", url_.fileName());
     Kernel::self()->sorry(str);
   }
   return img;
 }
 
-bool FileHandler::queryExists(const KURL& url_) {
-  if(url_.isEmpty() || !KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
+bool FileHandler::queryExists(const KUrl& url_) {
+  if(url_.isEmpty() || !KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, Kernel::self()->widget())) {
     return true;
   }
 
   // we always overwrite the current URL without asking
   if(url_ != Kernel::self()->URL()) {
-    GUI::CursorSaver cs(Qt::arrowCursor);
+    GUI::CursorSaver cs(Qt::ArrowCursor);
     QString str = i18n("A file named \"%1\" already exists. "
-                       "Are you sure you want to overwrite it?").arg(url_.fileName());
+                       "Are you sure you want to overwrite it?", url_.fileName());
     int want_continue = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str,
                                                            i18n("Overwrite File?"),
-                                                           i18n("Overwrite"));
+                                                           KGuiItem(i18n("Overwrite")));
 
     if(want_continue == KMessageBox::Cancel) {
       return false;
     }
   }
 
-  KURL backup(url_);
-  backup.setPath(backup.path() + QString::fromLatin1("~"));
+  KUrl backup(url_);
+  backup.setPath(backup.path() + '~');
 
   bool success = true;
   if(url_.isLocalFile()) {
@@ -238,36 +214,43 @@ bool FileHandler::queryExists(const KURL& url_) {
     KFileItemList list;
     int perm = -1;
     QString grp;
-    if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
+    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, Kernel::self()->widget())) {
       KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url_, true);
       perm = item.permissions();
       grp = item.group();
 
-      KFileItem* backupItem = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, backup, true);
+      KFileItem backupItem(KFileItem::Unknown, KFileItem::Unknown, backup, true);
       list.append(backupItem);
     }
 
+    // KDE bug 178640, for versions prior to KDE 4.2RC1, backup file was not deleted first
+    // this might fail if a different backup scheme is being used
+    if(KDE::version() < KDE_MAKE_VERSION(4, 1, 90)) {
+      QFile::remove(url_.path() + '~');
+    }
     success = KSaveFile::backupFile(url_.path());
+    if(KDE::version() < KDE_MAKE_VERSION(4, 1, 90)) {
+      success = true; // ignore error for old version because of bug
+    }
     if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::Job* job = KIO::chmod(list, perm, 0, QString(), grp, true, false);
-      new ItemDeleter(job, list.first());
+      KIO::chmod(list, perm, 0, QString(), grp, true, false);
     }
   } else {
     KIO::NetAccess::del(backup, Kernel::self()->widget()); // might fail if backup doesn't exist, that's ok
-    success = KIO::NetAccess::file_copy(url_, backup, -1 /* permissions */, true /* overwrite */,
-                                        false /* resume */, Kernel::self()->widget());
+    KIO::FileCopyJob* job = KIO::file_copy(url_, backup, -1, KIO::Overwrite);
+    success = KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
   }
   if(!success) {
-    Kernel::self()->sorry(i18n(errorWrite).arg(url_.fileName() + '~'));
+    Kernel::self()->sorry(i18n(errorWrite, url_.fileName() + '~'));
   }
   return success;
 }
 
-bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool encodeUTF8_, bool force_, bool quiet_) {
+bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool encodeUTF8_, bool force_, bool quiet_) {
   if((!force_ && !queryExists(url_)) || text_.isNull()) {
     if(text_.isNull()) {
-      myDebug() << "FileHandler::writeTextURL() - null string for " << url_ << endl;
+      myDebug() << "null string for" << url_;
     }
     return false;
   }
@@ -278,77 +261,74 @@ bool FileHandler::writeTextURL(const KURL& url_, const QString& text_, bool enco
     KFileItemList list;
     int perm = -1;
     QString grp;
-    if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
-      KFileItem* item = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, url_, true);
+    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, Kernel::self()->widget())) {
+      KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url_, true);
       list.append(item);
-      perm = item->permissions();
-      grp = item->group();
+      perm = item.permissions();
+      grp = item.group();
     }
 
     KSaveFile f(url_.path());
-    if(f.status() != 0) {
+    f.open();
+    if(f.error() != QFile::NoError) {
       if(!quiet_) {
-        Kernel::self()->sorry(i18n(errorWrite).arg(url_.fileName()));
+        Kernel::self()->sorry(i18n(errorWrite, url_.fileName()));
       }
       return false;
     }
     bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
     if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::Job* job = KIO::chmod(list, perm, 0, QString(), grp, true, false);
-      new ItemDeleter(job, list.first());
+      KIO::chmod(list, perm, 0, QString(), grp, true, false);
     }
     return success;
   }
 
   // save to remote file
-  KTempFile tempfile;
-  KSaveFile f(tempfile.name());
-  if(f.status() != 0) {
-    tempfile.unlink();
+  KTemporaryFile tempfile;
+  tempfile.open();
+  KSaveFile f(tempfile.fileName());
+  f.open();
+  if(f.error() != QFile::NoError) {
+    tempfile.remove();
     if(!quiet_) {
-      Kernel::self()->sorry(i18n(errorWrite).arg(url_.fileName()));
+      Kernel::self()->sorry(i18n(errorWrite, url_.fileName()));
     }
     return false;
   }
 
   bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
   if(success) {
-    bool uploaded = KIO::NetAccess::upload(tempfile.name(), url_, Kernel::self()->widget());
+    bool uploaded = KIO::NetAccess::upload(tempfile.fileName(), url_, Kernel::self()->widget());
     if(!uploaded) {
-      tempfile.unlink();
+      tempfile.remove();
       if(!quiet_) {
-        Kernel::self()->sorry(i18n(errorUpload).arg(url_.fileName()));
+        Kernel::self()->sorry(i18n(errorUpload, url_.fileName()));
       }
       success = false;
     }
   }
-  tempfile.unlink();
+  tempfile.remove();
 
   return success;
 }
 
 bool FileHandler::writeTextFile(KSaveFile& f_, const QString& text_, bool encodeUTF8_) {
-  QTextStream* t = f_.textStream();
+  QTextStream t(&f_);
   if(encodeUTF8_) {
-    t->setEncoding(QTextStream::UnicodeUTF8);
-  } else {
-    t->setEncoding(QTextStream::Locale);
+    t.setCodec("UTF-8");
   }
-//    kdDebug() << "-----------------------------" << endl
-//              << text_ << endl
-//              << "-----------------------------" << endl;
-  (*t) << text_;
-  bool success = f_.close();
+  t << text_;
+  bool success = f_.finalize();
 #ifndef NDEBUG
   if(!success) {
-    myDebug() << "FileHandler::writeTextFile() - status = " << f_.status();
+    myDebug() << "error = " << f_.error();
   }
 #endif
   return success;
 }
 
-bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool force_, bool quiet_) {
+bool FileHandler::writeDataURL(const KUrl& url_, const QByteArray& data_, bool force_, bool quiet_) {
   if(!force_ && !queryExists(url_)) {
     return false;
   }
@@ -359,60 +339,55 @@ bool FileHandler::writeDataURL(const KURL& url_, const QByteArray& data_, bool f
     KFileItemList list;
     int perm = -1;
     QString grp;
-    if(KIO::NetAccess::exists(url_, false, Kernel::self()->widget())) {
-      KFileItem* item = new KFileItem(KFileItem::Unknown, KFileItem::Unknown, url_, true);
+    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, Kernel::self()->widget())) {
+      KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url_, true);
       list.append(item);
-      perm = item->permissions();
-      grp = item->group();
+      perm = item.permissions();
+      grp = item.group();
     }
 
     KSaveFile f(url_.path());
-    if(f.status() != 0) {
+    f.open();
+    if(f.error() != QFile::NoError) {
       if(!quiet_) {
-        Kernel::self()->sorry(i18n(errorWrite).arg(url_.fileName()));
+        Kernel::self()->sorry(i18n(errorWrite, url_.fileName()));
       }
       return false;
     }
     bool success = FileHandler::writeDataFile(f, data_);
     if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::Job* job = KIO::chmod(list, perm, 0, QString(), grp, true, false);
-      new ItemDeleter(job, list.first());
+      KIO::chmod(list, perm, 0, QString(), grp, true, false);
     }
     return success;
   }
 
   // save to remote file
-  KTempFile tempfile;
-  KSaveFile f(tempfile.name());
-  if(f.status() != 0) {
+  KTemporaryFile tempfile;
+  tempfile.open();
+  KSaveFile f(tempfile.fileName());
+  f.open();
+  if(f.error() != QFile::NoError) {
     if(!quiet_) {
-      Kernel::self()->sorry(i18n(errorWrite).arg(url_.fileName()));
+      Kernel::self()->sorry(i18n(errorWrite, url_.fileName()));
     }
     return false;
   }
 
   bool success = FileHandler::writeDataFile(f, data_);
   if(success) {
-    success = KIO::NetAccess::upload(tempfile.name(), url_, Kernel::self()->widget());
+    success = KIO::NetAccess::upload(tempfile.fileName(), url_, Kernel::self()->widget());
     if(!success && !quiet_) {
-      Kernel::self()->sorry(i18n(errorUpload).arg(url_.fileName()));
+      Kernel::self()->sorry(i18n(errorUpload, url_.fileName()));
     }
   }
-  tempfile.unlink();
+  tempfile.remove();
 
   return success;
 }
 
 bool FileHandler::writeDataFile(KSaveFile& f_, const QByteArray& data_) {
-//  myDebug() << "FileHandler::writeDataFile()" << endl;
-  QDataStream* s = f_.dataStream();
-  s->writeRawBytes(data_.data(), data_.size());
-  return f_.close();
-}
-
-void FileHandler::clean() {
-  s_deleterList.setAutoDelete(true);
-  s_deleterList.clear();
-  s_deleterList.setAutoDelete(false);
+  QDataStream s(&f_);
+  s.writeRawData(data_.data(), data_.size());
+  return f_.finalize();
 }

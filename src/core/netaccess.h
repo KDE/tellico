@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -14,10 +14,10 @@
 #ifndef TELLICO_NETACCESS_H
 #define TELLICO_NETACCESS_H
 
-#include <qobject.h>
-#include <qpixmap.h>
+#include <QObject>
+#include <QPixmap>
 
-class KURL;
+class KUrl;
 class KFileItem;
 namespace KIO {
   class Job;
@@ -29,17 +29,15 @@ class NetAccess : public QObject {
 Q_OBJECT
 
 public:
-  static bool download(const KURL& u, QString& target, QWidget* window);
+  static bool download(const KUrl& u, QString& target, QWidget* window, bool quiet=false);
+  static QPixmap filePreview(const KUrl& fileName, int size=196);
+  static QPixmap filePreview(const KFileItem& item, int size=196);
   static void removeTempFile(const QString& name);
-  static QPixmap filePreview(const KURL& fileName, int size=196);
-  static QPixmap filePreview(KFileItem* item, int size=196);
 
 private slots:
   void slotPreview(const KFileItem* item, const QPixmap& pix);
 
 private:
-  static QStringList* s_tmpFiles;
-
   QPixmap m_preview;
 };
 

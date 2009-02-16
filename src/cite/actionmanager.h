@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -36,7 +36,7 @@ public:
 
   virtual CiteAction type() const = 0;
   virtual bool connect() { return true; }
-  virtual bool cite(Data::EntryVec entries) = 0;
+  virtual bool cite(Data::EntryList entries) = 0;
   virtual State state() const { return Success; }
 };
 
@@ -48,7 +48,7 @@ public:
   static ActionManager* self();
   ~ActionManager();
 
-  bool cite(CiteAction action, Data::EntryVec entries);
+  bool cite(CiteAction action, Data::EntryList entries);
   static bool isEnabled(CiteAction action);
 
 private:

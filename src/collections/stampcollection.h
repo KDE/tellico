@@ -58,7 +58,7 @@ public:
 
   virtual Type type() const { return Stamp; }
 
-  static FieldVec defaultFields();
+  static FieldList defaultFields();
 };
 
   } // end namespace

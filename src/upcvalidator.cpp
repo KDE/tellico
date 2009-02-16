@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2006 by Robby Stephenson
+    copyright            : (C) 2005-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,12 +15,12 @@
 #include "isbnvalidator.h"
 #include "tellico_debug.h"
 
-#include <kmdcodec.h>
+#include <kcodecs.h>
 
 using Tellico::UPCValidator;
 
-UPCValidator::UPCValidator(QObject* parent_, const char* name_/*=0*/)
-    : QValidator(parent_, name_), m_checkISBN(false) {
+UPCValidator::UPCValidator(QObject* parent_)
+    : QValidator(parent_), m_checkISBN(false) {
 }
 
 QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {
@@ -47,7 +47,7 @@ QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {
   }
 
   // once it gets converted to an ISBN, remember that, and use it for later
-  if(input_.startsWith(QString::fromLatin1("978")) || input_.startsWith(QString::fromLatin1("979"))) {
+  if(input_.startsWith(QLatin1String("978")) || input_.startsWith(QLatin1String("979"))) {
     ISBNValidator val(0);
     QValidator::State s = val.validate(input_, pos_);
     if(s == QValidator::Acceptable) {
@@ -66,9 +66,9 @@ void UPCValidator::fixup(QString& input_) const {
   if(input_.isEmpty()) {
     return;
   }
-  input_ = input_.stripWhiteSpace();
+  input_ = input_.trimmed();
 
-  int pos = input_.find(' ');
+  int pos = input_.indexOf(' ');
   if(pos > -1) {
     input_ = input_.left(pos);
   }
@@ -78,7 +78,7 @@ void UPCValidator::fixup(QString& input_) const {
   }
 
   const uint len = input_.length();
-  if(len > 12 && (input_.startsWith(QString::fromLatin1("978")) || input_.startsWith(QString::fromLatin1("979")))) {
+  if(len > 12 && (input_.startsWith(QLatin1String("978")) || input_.startsWith(QLatin1String("979")))) {
     QString s = input_;
     ISBNValidator val(0);
     int p = 0;
@@ -96,10 +96,10 @@ QValidator::State Tellico::CueCat::decode(QString& input_) {
   if(input_.length() < 3) {
     return QValidator::Intermediate;
   }
- if(!input_.startsWith(QString::fromLatin1(".C3"))) { // all cuecat codes start with .C3
+ if(!input_.startsWith(QLatin1String(".C3"))) { // all cuecat codes start with .C3
     return QValidator::Invalid;
   }
-  const int periods = input_.contains('.');
+  const int periods = input_.count('.');
   if(periods < 4) {
     return QValidator::Intermediate; // not enough yet
   } else if(periods > 4) {
@@ -107,23 +107,23 @@ QValidator::State Tellico::CueCat::decode(QString& input_) {
   }
 
   // ok, let's have a go, take the third token
-  QString code = QStringList::split('.', input_)[2];
+  QString code = input_.section('.', 2, 2, QString::SectionSkipEmpty);
   while(code.length() % 4 > 0) {
     code += '=';
   }
 
-  for(uint i = 0; i < code.length(); ++i) {
+  for(int i = 0; i < code.length(); ++i) {
     if(code[i] >= 'A' && code[i] <= 'Z') {
-      code.replace(i, 1, code[i].lower());
+      code.replace(i, 1, code[i].toLower());
     } else if(code[i] >= 'a' && code[i] <= 'z') {
-      code.replace(i, 1, code[i].upper());
+      code.replace(i, 1, code[i].toUpper());
     }
   }
 
-  code = QString::fromLatin1(KCodecs::base64Decode(code.latin1()));
+  code = KCodecs::base64Decode(code.toAscii());
 
-  for(uint i = 0; i < code.length(); ++i) {
-    char c = code[i].latin1() ^ 'C';
+  for(int i = 0; i < code.length(); ++i) {
+    char c = code[i].toAscii() ^ 'C';
     code.replace(i, 1, c);
   }
 

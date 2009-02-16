@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006 by Robby Stephenson
+    copyright            : (C) 2006-2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -18,7 +18,7 @@
 
 using Tellico::Import::DCImporter;
 
-DCImporter::DCImporter(const KURL& url_) : XMLImporter(url_) {
+DCImporter::DCImporter(const KUrl& url_) : XMLImporter(url_) {
 }
 
 DCImporter::DCImporter(const QString& text_) : XMLImporter(text_) {
@@ -31,7 +31,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
   const QString& dc = XML::nsDublinCore;
   const QString& zing = XML::nsZing;
 
-  Data::CollPtr c = new Data::BookCollection(true);
+  Data::CollPtr c(new Data::BookCollection(true));
 
   QDomDocument doc = domDocument();
 
@@ -47,8 +47,8 @@ Tellico::Data::CollPtr DCImporter::collection() {
                          ? elem.elementsByTagName(QString::fromLatin1(s)) \
                          : elem.elementsByTagNameNS(dc, QString::fromLatin1(s))
 
-  for(uint i = 0; i < recordList.count(); ++i) {
-    Data::EntryPtr e = new Data::Entry(c);
+  for(int i = 0; i < recordList.count(); ++i) {
+    Data::EntryPtr e(new Data::Entry(c));
 
     QDomElement elem = recordList.item(i).toElement();
 
@@ -71,18 +71,18 @@ Tellico::Data::CollPtr DCImporter::collection() {
     }
     QString s = nodeList.item(0).toElement().text();
     s.replace('\n', ' ');
-    s = s.simplifyWhiteSpace();
+    s = s.simplified();
     e->setField(QString::fromLatin1("title"), s);
 
     nodeList = GETELEMENTS("creator");
     QStringList creators;
-    for(uint j = 0; j < nodeList.count(); ++j) {
+    for(int j = 0; j < nodeList.count(); ++j) {
       QString s = nodeList.item(j).toElement().text();
-      if(authorDateRX.search(s) > -1) {
+      if(authorDateRX.indexIn(s) > -1) {
       // check if anything after date like [publisher]
-        if(authorDateRX.cap(2).stripWhiteSpace().isEmpty()) {
+        if(authorDateRX.cap(2).trimmed().isEmpty()) {
           s.remove(authorDateRX);
-          s = s.simplifyWhiteSpace();
+          s = s.simplified();
           creators << s;
         } else {
           myDebug() << "DCImporter::collection() - weird creator, skipping: " << s << endl;
@@ -95,14 +95,14 @@ Tellico::Data::CollPtr DCImporter::collection() {
 
     nodeList = GETELEMENTS("publisher");
     QStringList publishers;
-    for(uint j = 0; j < nodeList.count(); ++j) {
+    for(int j = 0; j < nodeList.count(); ++j) {
       publishers << nodeList.item(j).toElement().text();
     }
     e->setField(QString::fromLatin1("publisher"), publishers.join(QString::fromLatin1("; ")));
 
     nodeList = GETELEMENTS("subject");
     QStringList keywords;
-    for(uint j = 0; j < nodeList.count(); ++j) {
+    for(int j = 0; j < nodeList.count(); ++j) {
       keywords << nodeList.item(j).toElement().text();
     }
     e->setField(QString::fromLatin1("keyword"), keywords.join(QString::fromLatin1("; ")));
@@ -110,7 +110,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
     nodeList = GETELEMENTS("date");
     if(nodeList.count() > 0) {
       QString s = nodeList.item(0).toElement().text();
-      if(dateRX.search(s) > -1) {
+      if(dateRX.indexIn(s) > -1) {
         e->setField(QString::fromLatin1("pub_year"), dateRX.cap());
       }
     }
