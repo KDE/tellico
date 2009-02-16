@@ -35,17 +35,17 @@ Tellico::Data::CollPtr DCImporter::collection() {
 
   QDomDocument doc = domDocument();
 
-  QRegExp authorDateRX(QString::fromLatin1(",?(\\s+\\d{4}-?(?:\\d{4})?\\.?)(.*)$"));
-  QRegExp dateRX(QString::fromLatin1("\\d{4}"));
+  QRegExp authorDateRX(QLatin1String(",?(\\s+\\d{4}-?(?:\\d{4})?\\.?)(.*)$"));
+  QRegExp dateRX(QLatin1String("\\d{4}"));
 
-  QDomNodeList recordList = doc.elementsByTagNameNS(zing, QString::fromLatin1("recordData"));
+  QDomNodeList recordList = doc.elementsByTagNameNS(zing, QLatin1String("recordData"));
   myDebug() << "DCImporter::collection() - number of records: " << recordList.count() << endl;
 
   enum { UnknownNS, UseNS, NoNS } useNS = UnknownNS;
 
 #define GETELEMENTS(s) (useNS == NoNS) \
-                         ? elem.elementsByTagName(QString::fromLatin1(s)) \
-                         : elem.elementsByTagNameNS(dc, QString::fromLatin1(s))
+                         ? elem.elementsByTagName(QLatin1String(s)) \
+                         : elem.elementsByTagNameNS(dc, QLatin1String(s))
 
   for(int i = 0; i < recordList.count(); ++i) {
     Data::EntryPtr e(new Data::Entry(c));
@@ -55,7 +55,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
     QDomNodeList nodeList = GETELEMENTS("title");
     if(nodeList.count() == 0) { // no title, skip
       if(useNS == UnknownNS) {
-        nodeList = elem.elementsByTagName(QString::fromLatin1("title"));
+        nodeList = elem.elementsByTagName(QLatin1String("title"));
         if(nodeList.count() > 0) {
           useNS = NoNS;
         } else {
@@ -72,7 +72,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
     QString s = nodeList.item(0).toElement().text();
     s.replace('\n', ' ');
     s = s.simplified();
-    e->setField(QString::fromLatin1("title"), s);
+    e->setField(QLatin1String("title"), s);
 
     nodeList = GETELEMENTS("creator");
     QStringList creators;
@@ -91,33 +91,33 @@ Tellico::Data::CollPtr DCImporter::collection() {
         creators << s;
       }
     }
-    e->setField(QString::fromLatin1("author"), creators.join(QString::fromLatin1("; ")));
+    e->setField(QLatin1String("author"), creators.join(QLatin1String("; ")));
 
     nodeList = GETELEMENTS("publisher");
     QStringList publishers;
     for(int j = 0; j < nodeList.count(); ++j) {
       publishers << nodeList.item(j).toElement().text();
     }
-    e->setField(QString::fromLatin1("publisher"), publishers.join(QString::fromLatin1("; ")));
+    e->setField(QLatin1String("publisher"), publishers.join(QLatin1String("; ")));
 
     nodeList = GETELEMENTS("subject");
     QStringList keywords;
     for(int j = 0; j < nodeList.count(); ++j) {
       keywords << nodeList.item(j).toElement().text();
     }
-    e->setField(QString::fromLatin1("keyword"), keywords.join(QString::fromLatin1("; ")));
+    e->setField(QLatin1String("keyword"), keywords.join(QLatin1String("; ")));
 
     nodeList = GETELEMENTS("date");
     if(nodeList.count() > 0) {
       QString s = nodeList.item(0).toElement().text();
       if(dateRX.indexIn(s) > -1) {
-        e->setField(QString::fromLatin1("pub_year"), dateRX.cap());
+        e->setField(QLatin1String("pub_year"), dateRX.cap());
       }
     }
 
     nodeList = GETELEMENTS("description");
     if(nodeList.count() > 0) { // no title, skip
-      e->setField(QString::fromLatin1("comments"), nodeList.item(0).toElement().text());
+      e->setField(QLatin1String("comments"), nodeList.item(0).toElement().text());
     }
 
     c->addEntries(e);

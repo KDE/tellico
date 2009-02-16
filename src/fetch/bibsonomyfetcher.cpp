@@ -45,7 +45,7 @@ BibsonomyFetcher::~BibsonomyFetcher() {
 }
 
 QString BibsonomyFetcher::defaultName() {
-  return QString::fromLatin1("Bibsonomy");
+  return QLatin1String("Bibsonomy");
 }
 
 QString BibsonomyFetcher::source() const {
@@ -131,13 +131,13 @@ void BibsonomyFetcher::slotComplete(KJob*) {
       // might get aborted
       break;
     }
-    QString desc = entry->field(QString::fromLatin1("author"))
-                 + QChar('/') + entry->field(QString::fromLatin1("publisher"));
-    if(!entry->field(QString::fromLatin1("year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QString::fromLatin1("year"));
+    QString desc = entry->field(QLatin1String("author"))
+                 + QChar('/') + entry->field(QLatin1String("publisher"));
+    if(!entry->field(QLatin1String("year")).isEmpty()) {
+      desc += QChar('/') + entry->field(QLatin1String("year"));
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
@@ -150,8 +150,8 @@ Tellico::Data::EntryPtr BibsonomyFetcher::fetchEntry(uint uid_) {
 }
 
 KUrl BibsonomyFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
-  KUrl u(QString::fromLatin1(BIBSONOMY_BASE_URL));
-  u.setPath(QString::fromLatin1("/bib/"));
+  KUrl u(BIBSONOMY_BASE_URL);
+  u.setPath(QLatin1String("/bib/"));
 
   switch(key_) {
     case Person:
@@ -167,13 +167,13 @@ KUrl BibsonomyFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& v
       return KUrl();
   }
 
-  u.addQueryItem(QString::fromLatin1("items"), QString::number(BIBSONOMY_MAX_RESULTS));
+  u.addQueryItem(QLatin1String("items"), QString::number(BIBSONOMY_MAX_RESULTS));
   myDebug() << "BibsonomyFetcher::search() - url: " << u.url() << endl;
   return u;
 }
 
 void BibsonomyFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-  QString title = entry_->field(QString::fromLatin1("title"));
+  QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
     search(Fetch::Keyword, title);
     return;

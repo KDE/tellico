@@ -426,9 +426,9 @@ void Controller::slotDeleteSelectedEntries() {
   // confirm delete
   if(m_selectedEntries.count() == 1) {
     QString str = i18n("Do you really want to delete this entry?");
-    QString dontAsk = QString::fromLatin1("DeleteEntry");
+    QString dontAsk = QLatin1String("DeleteEntry");
     int ret = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str, i18n("Delete Entry"),
-                                                 KGuiItem(i18n("&Delete"), QString::fromLatin1("edit-delete")),
+                                                 KGuiItem(i18n("&Delete"), QLatin1String("edit-delete")),
                                                  KStandardGuiItem::cancel(), dontAsk);
     if(ret != KMessageBox::Continue) {
       m_working = false;
@@ -441,10 +441,10 @@ void Controller::slotDeleteSelectedEntries() {
     }
     QString str = i18n("Do you really want to delete these entries?");
     // historically called DeleteMultipleBooks, don't change
-    QString dontAsk = QString::fromLatin1("DeleteMultipleBooks");
+    QString dontAsk = QLatin1String("DeleteMultipleBooks");
     int ret = KMessageBox::warningContinueCancelList(Kernel::self()->widget(), str, names,
                                                      i18n("Delete Multiple Entries"),
-                                                     KGuiItem(i18n("&Delete"), QString::fromLatin1("edit-delete")),
+                                                     KGuiItem(i18n("&Delete"), QLatin1String("edit-delete")),
                                                      KStandardGuiItem::cancel(), dontAsk);
     if(ret != KMessageBox::Continue) {
       m_working = false;
@@ -604,7 +604,7 @@ void Controller::plugUpdateMenu(KMenu* popup_) {
 
 void Controller::updateActions() const {
   bool emptySelection = m_selectedEntries.isEmpty();
-  m_mainWindow->stateChanged(QString::fromLatin1("empty_selection"),
+  m_mainWindow->stateChanged(QLatin1String("empty_selection"),
                              emptySelection ? KXMLGUIClient::StateNoReverse : KXMLGUIClient::StateReverse);
   foreach(QAction* action, m_mainWindow->m_fetchActions) {
     action->setEnabled(!emptySelection);
@@ -742,7 +742,7 @@ void Controller::hideTabs() const {
 
 bool Controller::canCheckIn() const {
   foreach(Data::EntryPtr entry, m_selectedEntries) {
-    if(entry->field(QString::fromLatin1("loaned")) == QLatin1String("true")) {
+    if(entry->field(QLatin1String("loaned")) == QLatin1String("true")) {
       return true;
     }
   }

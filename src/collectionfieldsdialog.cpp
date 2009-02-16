@@ -95,10 +95,10 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   hb1->setSpacing(KDialog::spacingHint());
   fieldsLayout->addWidget(hb1);
   m_btnNew = new KPushButton(i18nc("New Field", "&New"), hb1);
-  m_btnNew->setIcon(KIcon(QString::fromLatin1("document-new")));
+  m_btnNew->setIcon(KIcon(QLatin1String("document-new")));
   m_btnNew->setWhatsThis(i18n("Add a new field to the collection"));
   m_btnDelete = new KPushButton(i18nc("Delete Field", "&Delete"), hb1);
-  m_btnDelete->setIcon(KIcon(QString::fromLatin1("edit-delete")));
+  m_btnDelete->setIcon(KIcon(QLatin1String("edit-delete")));
   m_btnDelete->setWhatsThis(i18n("Remove a field from the collection"));
 
   connect(m_btnNew, SIGNAL(clicked()), SLOT(slotNew()) );
@@ -108,11 +108,11 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   hb2->setSpacing(KDialog::spacingHint());
   fieldsLayout->addWidget(hb2);
   m_btnUp = new KPushButton(hb2);
-  m_btnUp->setIcon(KIcon(QString::fromLatin1("go-up")));
+  m_btnUp->setIcon(KIcon(QLatin1String("go-up")));
   m_btnUp->setWhatsThis(i18n("Move this field up in the list. The list order is important "
                              "for the layout of the entry editor."));
   m_btnDown = new KPushButton(hb2);
-  m_btnDown->setIcon(KIcon(QString::fromLatin1("go-down")));
+  m_btnDown->setIcon(KIcon(QLatin1String("go-down")));
   m_btnDown->setWhatsThis(i18n("Move this field down in the list. The list order is important "
                                "for the layout of the entry editor."));
 
@@ -147,7 +147,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_typeCombo = new KComboBox(grid);
   layout->addWidget(m_typeCombo, row, 3);
   label->setBuddy(m_typeCombo);
-  whats = QString::fromLatin1("<qt>");
+  whats = QLatin1String("<qt>");
   whats += i18n("The type of the field determines what values may be used. ");
   whats += i18n("<i>Simple Text</i> is used for most fields. ");
   whats += i18n("<i>Paragraph</i> is for large text blocks. ");
@@ -162,7 +162,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   whats += i18n("A <i>Dependent</i> field depends on the values of other "
                 "fields, and is formatted according to the field description. ");
   whats += i18n("A <i>Read Only</i> is for internal values, possibly useful for import and export. ");
-  whats += QString::fromLatin1("</qt>");
+  whats += QLatin1String("</qt>");
   label->setWhatsThis(whats);
   m_typeCombo->setWhatsThis(whats);
   // the typeTitles match the fieldMap().values() but in a better order
@@ -231,7 +231,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   label = new QLabel(i18n("Extended &properties:"), grid);
   layout->addWidget(label, ++row, 0);
   m_btnExtended = new KPushButton(i18n("&Set..."), grid);
-  m_btnExtended->setIcon(KIcon(QString::fromLatin1("bookmarks")));
+  m_btnExtended->setIcon(KIcon(QLatin1String("bookmarks")));
   layout->addWidget(m_btnExtended, row, 1);
   label->setBuddy(m_btnExtended);
   whats = i18n("Extended field properties are used to specify things such as the corresponding bibtex field.");
@@ -297,7 +297,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   enableButtonOk(false);
   enableButtonApply(false);
 
-  setHelp(QString::fromLatin1("fields-dialog"));
+  setHelp(QLatin1String("fields-dialog"));
 
   // initially the m_typeCombo is populated with all types, but as soon as something is
   // selected in the fields box, the combo box is cleared and filled with the allowable
@@ -363,8 +363,8 @@ void CollectionFieldsDialog::applyChanges() {
             field->setAllowed(oldValues);
           } else { // rating field
             Data::FieldPtr oldField = m_coll->fieldByName(field->name());
-            field->setProperty(QString::fromLatin1("minimum"), oldField->property(QString::fromLatin1("minimum")));
-            field->setProperty(QString::fromLatin1("maximum"), oldField->property(QString::fromLatin1("maximum")));
+            field->setProperty(QLatin1String("minimum"), oldField->property(QLatin1String("minimum")));
+            field->setProperty(QLatin1String("maximum"), oldField->property(QLatin1String("maximum")));
           }
         }
         break;
@@ -440,7 +440,7 @@ void CollectionFieldsDialog::slotNew() {
     return;
   }
 
-  QString name = QString::fromLatin1("custom") + QString::number(m_newFields.count()+1);
+  QString name = QLatin1String("custom") + QString::number(m_newFields.count()+1);
   int count = m_newFields.count() + 1;
   QString title = i18n("New Field %1", count);
   while(!m_fieldsWidget->findItems(title, Qt::MatchExactly).isEmpty()) {
@@ -575,7 +575,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
   slotTypeChanged(fieldMap[field->type()]); // just setting the text doesn't emit the activated signal
 
   if(field->type() == Data::Field::Choice) {
-    m_allowEdit->setText(field->allowed().join(QString::fromLatin1("; ")));
+    m_allowEdit->setText(field->allowed().join(QLatin1String("; ")));
   } else {
     m_allowEdit->clear();
   }
@@ -637,10 +637,10 @@ void CollectionFieldsDialog::updateField() {
     // name needs to be a valid XML element name
     QString name = XML::elementName(m_titleEdit->text().toLower());
     if(name.isEmpty()) { // might end up with empty string
-      name = QString::fromLatin1("custom") + QString::number(m_newFields.count()+1);
+      name = QLatin1String("custom") + QString::number(m_newFields.count()+1);
     }
     while(m_coll->hasField(name)) { // ensure name uniqueness
-      name += QString::fromLatin1("-new");
+      name += QLatin1String("-new");
     }
     field->setName(name);
   }
@@ -657,18 +657,18 @@ void CollectionFieldsDialog::updateField() {
   }
 
   if(field->type() == Data::Field::Choice) {
-    const QRegExp rx(QString::fromLatin1("\\s*;\\s*"));
+    const QRegExp rx(QLatin1String("\\s*;\\s*"));
     field->setAllowed(m_allowEdit->text().split(rx));
-    field->setProperty(QString::fromLatin1("minimum"), QString::null);
-    field->setProperty(QString::fromLatin1("maximum"), QString::null);
+    field->setProperty(QLatin1String("minimum"), QString::null);
+    field->setProperty(QLatin1String("maximum"), QString::null);
   } else if(field->type() == Data::Field::Rating) {
-    QString v = field->property(QString::fromLatin1("minimum"));
+    QString v = field->property(QLatin1String("minimum"));
     if(v.isEmpty()) {
-      field->setProperty(QString::fromLatin1("minimum"), QString::number(1));
+      field->setProperty(QLatin1String("minimum"), QString::number(1));
     }
-    v = field->property(QString::fromLatin1("maximum"));
+    v = field->property(QLatin1String("maximum"));
     if(v.isEmpty()) {
-      field->setProperty(QString::fromLatin1("maximum"), QString::number(5));
+      field->setProperty(QLatin1String("maximum"), QString::number(5));
     }
   }
 
@@ -776,7 +776,7 @@ void CollectionFieldsDialog::slotDefault() {
   QString caption = i18n("Revert Field Properties");
   QString text = i18n("<qt><p>Do you really want to revert the properties for the <em>%1</em> "
                       "field back to their default values?</p></qt>", m_currentField->title());
-  QString dontAsk = QString::fromLatin1("RevertFieldProperties");
+  QString dontAsk = QLatin1String("RevertFieldProperties");
   int ret = KMessageBox::warningContinueCancel(this, text, caption, KGuiItem(i18n("Revert")), KStandardGuiItem::cancel(), dontAsk);
   if(ret != KMessageBox::Continue) {
     return;
@@ -792,7 +792,7 @@ void CollectionFieldsDialog::slotDefault() {
   slotTypeChanged(fieldMap[defaultField->type()]); // just setting the text doesn't emit the activated signal
 
   if(defaultField->type() == Data::Field::Choice) {
-    m_allowEdit->setText(defaultField->allowed().join(QString::fromLatin1("; ")));
+    m_allowEdit->setText(defaultField->allowed().join(QLatin1String("; ")));
   } else {
     m_allowEdit->clear();
   }
@@ -889,7 +889,7 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
   // separate edit box
   QString dv = m_currentField->defaultValue();
   StringMap props = m_currentField->propertyList();
-  props.remove(QString::fromLatin1("default"));
+  props.remove(QLatin1String("default"));
 
   StringMapDialog dlg(props, this, true);
   dlg.setCaption(i18n("Extended Field Properties"));
@@ -897,7 +897,7 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
   if(dlg.exec() == QDialog::Accepted) {
     props = dlg.stringMap();
     if(!dv.isEmpty()) {
-      props.insert(QString::fromLatin1("default"), dv);
+      props.insert(QLatin1String("default"), dv);
     }
     m_currentField->setPropertyList(props);
     slotModified();
@@ -949,26 +949,26 @@ bool CollectionFieldsDialog::checkValues() {
   // check for rating values outside bounds
   if(m_currentField->type() == Data::Field::Rating) {
     bool ok; // ok to ignore this here
-    int low = Tellico::toUInt(m_currentField->property(QString::fromLatin1("minimum")), &ok);
-    int high = Tellico::toUInt(m_currentField->property(QString::fromLatin1("maximum")), &ok);
+    int low = Tellico::toUInt(m_currentField->property(QLatin1String("minimum")), &ok);
+    int high = Tellico::toUInt(m_currentField->property(QLatin1String("maximum")), &ok);
     while(low < 1 || low > 9 || high < 1 || high > 10 || low >= high) {
       KMessageBox::sorry(this, i18n("The range for a rating field must be between 1 and 10, "
                                     "and the lower bound must be less than the higher bound. "
                                     "Please enter different low and high properties."));
       if(slotShowExtendedProperties()) {
-        low = Tellico::toUInt(m_currentField->property(QString::fromLatin1("minimum")), &ok);
-        high = Tellico::toUInt(m_currentField->property(QString::fromLatin1("maximum")), &ok);
+        low = Tellico::toUInt(m_currentField->property(QLatin1String("minimum")), &ok);
+        high = Tellico::toUInt(m_currentField->property(QLatin1String("maximum")), &ok);
       } else {
         return false;
       }
     }
   } else if(m_currentField->type() == Data::Field::Table) {
     bool ok; // ok to ignore this here
-    int ncols = Tellico::toUInt(m_currentField->property(QString::fromLatin1("columns")), &ok);
+    int ncols = Tellico::toUInt(m_currentField->property(QLatin1String("columns")), &ok);
     // also enforced in GUI::TableFieldWidget
     if(ncols > 10) {
       KMessageBox::sorry(this, i18n("Tables are limited to a maximum of ten columns."));
-      m_currentField->setProperty(QString::fromLatin1("columns"), QString::fromLatin1("10"));
+      m_currentField->setProperty(QLatin1String("columns"), QLatin1String("10"));
     }
   }
 

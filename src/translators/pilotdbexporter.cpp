@@ -151,8 +151,8 @@ bool PilotDBExporter::exec() {
   Data::FieldList::ConstIterator fIt, end = outputFields.constEnd();
   bool format = options() & Export::ExportFormatted;
 
-  QRegExp br(QString::fromLatin1("<br/?>"));
-  QRegExp tags(QString::fromLatin1("<.*>"));
+  QRegExp br(QLatin1String("<br/?>"));
+  QRegExp tags(QLatin1String("<.*>"));
   tags.setMinimal(true);
 
   QString value;
@@ -178,7 +178,7 @@ bool PilotDBExporter::exec() {
           d = 1;
         }
         QDate date(y, m, d);
-        value = date.toString(QString::fromLatin1("yyyy/MM/dd"));
+        value = date.toString(QLatin1String("yyyy/MM/dd"));
       } else if(fIt->type() == Data::Field::Para) {
         value.replace(br, QChar('\n'));
         value.replace(tags, QString::null);

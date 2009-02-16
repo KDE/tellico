@@ -68,7 +68,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   hlay->addWidget(l);
 
 // KStandardDirs::findAllResources(const char *type, const QString &filter, bool recursive, bool uniq)
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QString::fromLatin1("report-templates/*.xsl"),
+  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("report-templates/*.xsl"),
                                                         KStandardDirs::NoDuplicates);
   KSortableList<QString, QString> templates;
   foreach(const QString& file, files) {
@@ -76,7 +76,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
     QString lfile = fi.fileName();
     QString name = lfile.section('.', 0, -2);
     name.replace('_', ' ');
-    QString title = i18nc((name + QString::fromLatin1(" XSL Template")).toUtf8(), name.toUtf8());
+    QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8(), name.toUtf8());
     templates.insert(title, lfile);
   }
   templates.sort();
@@ -87,7 +87,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   hlay->addWidget(m_templateCombo);
   l->setBuddy(m_templateCombo);
 
-  KPushButton* pb1 = new KPushButton(KGuiItem(i18n("&Generate"), QString::fromLatin1("application-x-executable")), mainWidget);
+  KPushButton* pb1 = new KPushButton(KGuiItem(i18n("&Generate"), QLatin1String("application-x-executable")), mainWidget);
   hlay->addWidget(pb1);
   connect(pb1, SIGNAL(clicked()), SLOT(slotGenerate()));
 
@@ -114,7 +114,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
                                      "background:white;color:%1;}</style><body><p>").arg(color.name())
                + i18n("Select a report template and click <em>Generate</em>.") + ' '
                + i18n("Some reports may take several seconds to generate for large collections.")
-               + QString::fromLatin1("</p></body></html>");
+               + QLatin1String("</p></body></html>");
   m_HTMLPart->begin();
   m_HTMLPart->write(text);
   m_HTMLPart->end();
@@ -122,7 +122,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), REPORT_MIN_WIDTH));
   setMinimumHeight(qMax(minimumHeight(), REPORT_MIN_HEIGHT));
 
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Report Dialog Options"));
+  KConfigGroup config(KGlobal::config(), QLatin1String("Report Dialog Options"));
   restoreDialogSize(config);
 }
 
@@ -130,14 +130,14 @@ ReportDialog::~ReportDialog() {
   delete m_exporter;
   m_exporter = 0;
 
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Report Dialog Options"));
+  KConfigGroup config(KGlobal::config(), QLatin1String("Report Dialog Options"));
   saveDialogSize(config);
 }
 
 void ReportDialog::slotGenerate() {
   GUI::CursorSaver cs(Qt::WaitCursor);
 
-  QString fileName = QString::fromLatin1("report-templates/") + m_templateCombo->currentData().toString();
+  QString fileName = QLatin1String("report-templates/") + m_templateCombo->currentData().toString();
   QString xsltFile = KStandardDirs::locate("appdata", fileName);
   if(xsltFile.isEmpty()) {
     kWarning() << "ReportDialog::setXSLTFile() - can't locate " << m_templateCombo->currentData().toString();
@@ -185,7 +185,7 @@ void ReportDialog::slotRefresh() {
   m_HTMLPart->begin(u);
   m_HTMLPart->write(m_exporter->text());
 #if 0
-  QFile f(QString::fromLatin1("/tmp/test.html"));
+  QFile f(QLatin1String("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t << m_exporter->text();

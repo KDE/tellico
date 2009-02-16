@@ -76,7 +76,7 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   connect(m_yearSpin, SIGNAL(valueChanged(int)), SLOT(slotDateChanged()));
 
   m_dateButton = new KPushButton(this);
-  m_dateButton->setIcon(KIcon(QString::fromLatin1("view-pim-calendar")));
+  m_dateButton->setIcon(KIcon(QLatin1String("view-pim-calendar")));
   connect(m_dateButton, SIGNAL(clicked()), SLOT(slotShowPicker()));
   l->addWidget(m_dateButton, 0);
 

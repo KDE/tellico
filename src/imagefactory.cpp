@@ -64,7 +64,7 @@ QString ImageFactory::tempDir() {
 }
 
 QString ImageFactory::dataDir() {
-  static const QString dataDir = Tellico::saveLocation(QString::fromLatin1("data/"));
+  static const QString dataDir = Tellico::saveLocation(QLatin1String("data/"));
   return dataDir;
 }
 
@@ -514,12 +514,12 @@ void ImageFactory::createStyleImages(const Tellico::StyleOptions& opt_) {
   const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
   const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
 
-  const QString bgname = QString::fromLatin1("gradient_bg.png");
+  const QString bgname = QLatin1String("gradient_bg.png");
   QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
                                    Blitz::PipeCrossGradient);
   bgImage = bgImage.transformed(QTransform().rotate(90));
 
-  const QString hdrname = QString::fromLatin1("gradient_header.png");
+  const QString hdrname = QLatin1String("gradient_header.png");
   QImage hdrImage = Blitz::unbalancedGradient(QSize(1, 10), highColor, bgc2,
                                               Blitz::VerticalGradient, 100, -100);
 
@@ -527,12 +527,12 @@ void ImageFactory::createStyleImages(const Tellico::StyleOptions& opt_) {
     // write the style images both to the tmp dir and the data dir
     // doesn't really hurt and lets the user switch back and forth
     ImageFactory::removeImage(bgname, true /*delete */);
-    ImageFactory::addImageImpl(Data::Image::byteArray(bgImage, "PNG"), QString::fromLatin1("PNG"), bgname);
+    ImageFactory::addImageImpl(Data::Image::byteArray(bgImage, "PNG"), QLatin1String("PNG"), bgname);
     ImageFactory::writeCachedImage(bgname, DataDir, true /*force*/);
     ImageFactory::writeCachedImage(bgname, TempDir, true /*force*/);
 
     ImageFactory::removeImage(hdrname, true /*delete */);
-    ImageFactory::addImageImpl(Data::Image::byteArray(hdrImage, "PNG"), QString::fromLatin1("PNG"), hdrname);
+    ImageFactory::addImageImpl(Data::Image::byteArray(hdrImage, "PNG"), QLatin1String("PNG"), hdrname);
     ImageFactory::writeCachedImage(hdrname, DataDir, true /*force*/);
     ImageFactory::writeCachedImage(hdrname, TempDir, true /*force*/);
   } else {
@@ -606,7 +606,7 @@ void ImageFactory::setLocalDirectory(const KUrl& url_) {
   } else {
     s_localDir = url_.directory(KUrl::AppendTrailingSlash);
     // could have already been set once
-    if(!url_.fileName().contains(QString::fromLatin1("_files"))) {
+    if(!url_.fileName().contains(QLatin1String("_files"))) {
       s_localDir += url_.fileName().section('.', 0, 0) + QLatin1String("_files/");
     }
     myLog() << "local dir = " << s_localDir;

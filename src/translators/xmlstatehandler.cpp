@@ -94,9 +94,9 @@ StateHandler* DocumentHandler::nextHandlerImpl(const QString&, const QString& lo
 
 bool DocumentHandler::start(const QString&, const QString& localName_, const QString&, const QXmlAttributes& atts_) {
   // the syntax version field name changed from "version" to "syntaxVersion" in version 3
-  int idx = atts_.index(QString::fromLatin1("syntaxVersion"));
+  int idx = atts_.index(QLatin1String("syntaxVersion"));
   if(idx < 0) {
-    idx = atts_.index(QString::fromLatin1("version"));
+    idx = atts_.index(QLatin1String("version"));
   }
   if(idx < 0) {
     myWarning() << "RootHandler::start() - no syntax version" << endl;
@@ -201,7 +201,7 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
   // in syntax 4, the element name was changed to "entry", always, rather than depending on
   // on the entryName of the collection.
   if(d->syntaxVersion > 3) {
-    d->entryName = QString::fromLatin1("entry");
+    d->entryName = QLatin1String("entry");
     Data::Collection::Type type = static_cast<Data::Collection::Type>(d->collType);
     d->coll = CollectionFactory::collection(type, addFields);
   } else {
@@ -216,7 +216,7 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex
   if(d->syntaxVersion < 4 && d->collType == Data::Collection::Book
-     && d->coll->hasField(QString::fromLatin1("bibtex-id"))) {
+     && d->coll->hasField(QLatin1String("bibtex-id"))) {
     d->coll = Data::BibtexCollection::convertBookCollection(d->coll);
   }
 
@@ -261,7 +261,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
     field = new Data::Field(name, title, type);
   }
 
-  int idx = atts_.index(QString::fromLatin1("category"));
+  int idx = atts_.index(QLatin1String("category"));
   if(idx > -1) {
     // at one point, the categories had keyboard accels
     QString cat = atts_.value(idx);
@@ -295,7 +295,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   Data::Field::FormatFlag format = static_cast<Data::Field::FormatFlag>(formatStr.toInt());
   field->setFormatFlag(format);
 
-  idx = atts_.index(QString::fromLatin1("description"));
+  idx = atts_.index(QLatin1String("description"));
   if(idx > -1) {
     QString desc = atts_.value(idx);
     if(isI18n) {
@@ -304,14 +304,14 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
     field->setDescription(desc);
   }
 
-  if(d->syntaxVersion < 5 && atts_.index(QString::fromLatin1("bibtex-field")) > -1) {
-    field->setProperty(QString::fromLatin1("bibtex"), attValue(atts_, "bibtex-field"));
+  if(d->syntaxVersion < 5 && atts_.index(QLatin1String("bibtex-field")) > -1) {
+    field->setProperty(QLatin1String("bibtex"), attValue(atts_, "bibtex-field"));
   }
 
   // Table2 is deprecated
   if(type == Data::Field::Table2) {
     field->setType(Data::Field::Table);
-    field->setProperty(QString::fromLatin1("columns"), QChar('2'));
+    field->setProperty(QLatin1String("columns"), QChar('2'));
   }
 
   // for syntax 8, rating fields got their own type
@@ -337,13 +337,13 @@ bool FieldPropertyHandler::start(const QString&, const QString&, const QString&,
   // all track fields in music collections prior to version 9 get converted to three columns
   if(d->syntaxVersion < 9) {
     if(d->collType == Data::Collection::Album && field->name() == QLatin1String("track")) {
-      field->setProperty(QString::fromLatin1("columns"), QChar('3'));
-      field->setProperty(QString::fromLatin1("column1"), i18n("Title"));
-      field->setProperty(QString::fromLatin1("column2"), i18n("Artist"));
-      field->setProperty(QString::fromLatin1("column3"), i18n("Length"));
+      field->setProperty(QLatin1String("columns"), QChar('3'));
+      field->setProperty(QLatin1String("column1"), i18n("Title"));
+      field->setProperty(QLatin1String("column2"), i18n("Artist"));
+      field->setProperty(QLatin1String("column3"), i18n("Length"));
     } else if(d->collType == Data::Collection::Video && field->name() == QLatin1String("cast")) {
-      field->setProperty(QString::fromLatin1("column1"), i18n("Actor/Actress"));
-      field->setProperty(QString::fromLatin1("column2"), i18n("Role"));
+      field->setProperty(QLatin1String("column1"), i18n("Actor/Actress"));
+      field->setProperty(QLatin1String("column2"), i18n("Role"));
     }
   }
 
@@ -411,7 +411,7 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
   if(!d->coll || d->coll->fields().isEmpty()) {
     myWarning() << "EntryHandler::start() - entries must come after fields are defined" << endl;
     // TODO: i18n
-    d->error = QString::fromLatin1("File format error: entries must come after fields are defined");
+    d->error = QLatin1String("File format error: entries must come after fields are defined");
     return false;
   }
   int id = attValue(atts_, "id").toInt();
@@ -480,10 +480,10 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
 
   if(d->syntaxVersion < 2 && fieldName == QLatin1String("keywords")) {
     // in version 2, "keywords" changed to "keyword"
-    fieldName = QString::fromLatin1("keyword");
+    fieldName = QLatin1String("keyword");
   } else if(d->syntaxVersion < 4 && f->type() == Data::Field::Bool) {
     // in version 3 and prior, checkbox attributes had no text(), set it to "true"
-    fieldValue = QString::fromLatin1("true");
+    fieldValue = QLatin1String("true");
   } else if(d->syntaxVersion < 8 && f->type() == Data::Field::Rating) {
     // in version 8, old rating fields get changed
     bool ok;
@@ -504,8 +504,8 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   // this is not an else branch, the data may be in the textBuffer
   if(d->syntaxVersion < 9 && d->coll->type() == Data::Collection::Album && fieldName == QLatin1String("track")) {
     // yes, this assumes the artist has already been set
-    fieldValue += QString::fromLatin1("::");
-    fieldValue += entry->field(QString::fromLatin1("artist"));
+    fieldValue += QLatin1String("::");
+    fieldValue += entry->field(QLatin1String("artist"));
   }
   // special case: if the i18n attribute equals true, then translate the title, description, and category
   if(m_i18n) {
@@ -522,7 +522,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   // for fields with multiple values, we need to add on the new value
   QString oldValue = entry->field(fieldName);
   if(!oldValue.isEmpty()) {
-    fieldValue = oldValue + QString::fromLatin1("; ") + fieldValue;
+    fieldValue = oldValue + QLatin1String("; ") + fieldValue;
   }
   entry->setField(fieldName, fieldValue);
   return true;
@@ -535,7 +535,7 @@ bool DateValueHandler::start(const QString&, const QString&, const QString&, con
 bool DateValueHandler::end(const QString&, const QString& localName_, const QString&) {
   // the data value is y-m-d even if there are no date values
   if(d->textBuffer.isEmpty()) {
-    d->textBuffer = QString::fromLatin1("--");
+    d->textBuffer = QLatin1String("--");
   }
   QStringList tokens = d->textBuffer.split('-', QString::KeepEmptyParts);
   Q_ASSERT(tokens.size() == 3);
@@ -560,16 +560,16 @@ bool TableColumnHandler::end(const QString&, const QString&, const QString&) {
      d->coll->type() == Data::Collection::Album &&
      d->currentField->name() == QLatin1String("track") &&
      !d->textBuffer.isEmpty() &&
-     d->textBuffer.contains(QString::fromLatin1("::")) == 0) {
-    QRegExp rx(QString::fromLatin1("\\d+:\\d\\d"));
+     d->textBuffer.contains(QLatin1String("::")) == 0) {
+    QRegExp rx(QLatin1String("\\d+:\\d\\d"));
     if(rx.exactMatch(d->text)) {
-      d->text += QString::fromLatin1("::");
-      d->text += d->entries.back()->field(QString::fromLatin1("artist"));
+      d->text += QLatin1String("::");
+      d->text += d->entries.back()->field(QLatin1String("artist"));
     }
   }
 
   if(!d->textBuffer.isEmpty()) {
-    d->textBuffer += QString::fromLatin1("::");
+    d->textBuffer += QLatin1String("::");
   }
   d->textBuffer += d->text;
   return true;

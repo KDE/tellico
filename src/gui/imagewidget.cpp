@@ -226,7 +226,7 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
   if(event_->mimeData()->hasImage()) {
     QVariant imageData = event_->mimeData()->imageData();
     // Qt reads PNG data by default
-    const QString& id = ImageFactory::addImage(qvariant_cast<QPixmap>(imageData), QString::fromLatin1("PNG"));
+    const QString& id = ImageFactory::addImage(qvariant_cast<QPixmap>(imageData), QLatin1String("PNG"));
     if(!id.isEmpty() && id != m_imageID) {
       setImage(id);
       emit signalModified();

@@ -43,7 +43,7 @@ static int writeToQString(void* context, const char* buffer, int len) {
 
 static void closeQString(void* context) {
   QString* t = static_cast<QString*>(context);
-  *t += QString::fromLatin1("\n");
+  *t += QLatin1String("\n");
 }
 
 using Tellico::XSLTHandler;
@@ -155,8 +155,8 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFil
   for(int j = 0; j < childs.count(); ++j) {
     if(childs.item(j).isProcessingInstruction()) {
       QDomProcessingInstruction pi = childs.item(j).toProcessingInstruction();
-      if(pi.data().toLower().contains(QString::fromLatin1("encoding"))) {
-        if(!pi.data().toLower().contains(QString::fromLatin1("utf-8"))) {
+      if(pi.data().toLower().contains(QLatin1String("encoding"))) {
+        if(!pi.data().toLower().contains(QLatin1String("utf-8"))) {
           utf8 = false;
 //        } else {
 //          myDebug() << "XSLTHandler::setXSLTDoc() - PI = " << pi.data() << endl;
@@ -262,8 +262,8 @@ QDomDocument& XSLTHandler::setLocaleEncoding(QDomDocument& dom_) {
   for(int j = 0; j < childs.count(); ++j) {
     if(childs.item(j).isElement() && childs.item(j).nodeName() == QLatin1String("xsl:output")) {
       QDomElement e = childs.item(j).toElement();
-      const QString encoding = QString::fromLatin1(QTextCodec::codecForLocale()->name());
-      e.setAttribute(QString::fromLatin1("encoding"), encoding);
+      const QString encoding = QLatin1String(QTextCodec::codecForLocale()->name());
+      e.setAttribute(QLatin1String("encoding"), encoding);
       break;
     }
   }

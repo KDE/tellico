@@ -19,9 +19,9 @@
 
 #include <QRegExp>
 
-const QString Tellico::XML::nsXSL = QString::fromLatin1("http://www.w3.org/1999/XSL/Transform");
-const QString Tellico::XML::nsBibtexml = QString::fromLatin1("http://bibtexml.sf.net/");
-const QString Tellico::XML::dtdBibtexml = QString::fromLatin1("bibtexml.dtd");
+const QString Tellico::XML::nsXSL = QLatin1String("http://www.w3.org/1999/XSL/Transform");
+const QString Tellico::XML::nsBibtexml = QLatin1String("http://bibtexml.sf.net/");
+const QString Tellico::XML::dtdBibtexml = QLatin1String("bibtexml.dtd");
 
 /*
  * VERSION 2 added namespaces, changed to multiple elements,
@@ -48,12 +48,12 @@ const QString Tellico::XML::dtdBibtexml = QString::fromLatin1("bibtexml.dtd");
  * VERSION 10 added the game board collection.
  */
 const uint Tellico::XML::syntaxVersion = 10;
-const QString Tellico::XML::nsTellico = QString::fromLatin1("http://periapsis.org/tellico/");
+const QString Tellico::XML::nsTellico = QLatin1String("http://periapsis.org/tellico/");
 
-const QString Tellico::XML::nsBookcase = QString::fromLatin1("http://periapsis.org/bookcase/");
-const QString Tellico::XML::nsDublinCore = QString::fromLatin1("http://purl.org/dc/elements/1.1/");
-const QString Tellico::XML::nsZing = QString::fromLatin1("http://www.loc.gov/zing/srw/");
-const QString Tellico::XML::nsZingDiag = QString::fromLatin1("http://www.loc.gov/zing/srw/diagnostic/");
+const QString Tellico::XML::nsBookcase = QLatin1String("http://periapsis.org/bookcase/");
+const QString Tellico::XML::nsDublinCore = QLatin1String("http://purl.org/dc/elements/1.1/");
+const QString Tellico::XML::nsZing = QLatin1String("http://www.loc.gov/zing/srw/");
+const QString Tellico::XML::nsZingDiag = QLatin1String("http://www.loc.gov/zing/srw/diagnostic/");
 
 QString Tellico::XML::pubTellico(int version) {
  return QString::fromLatin1("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(version);
@@ -76,7 +76,7 @@ bool Tellico::XML::validXMLElementName(const QString& name_) {
 QString Tellico::XML::elementName(const QString& name_) {
   QString name = name_;
   // change white space to dashes
-  name.replace(QRegExp(QString::fromLatin1("\\s+")), QString::fromLatin1("-"));
+  name.replace(QRegExp(QLatin1String("\\s+")), QLatin1String("-"));
   // first cut, if it passes, we're done
   if(XML::validXMLElementName(name)) {
     return name;

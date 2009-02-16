@@ -72,7 +72,7 @@ QString XMPHandler::extractXMP(const QString& file) {
 //    myDebug() << result << endl;
 #if 0
     kWarning() << "XMPHandler::parse() - turn me off!";
-    QFile f1(QString::fromLatin1("/tmp/xmp.xml"));
+    QFile f1(QLatin1String("/tmp/xmp.xml"));
     if(f1.open(QIODevice::WriteOnly)) {
       QTextStream t(&f1);
       t << result;

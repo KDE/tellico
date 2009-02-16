@@ -55,11 +55,11 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
   QString str = text();
   QTextStream t(&str);
   QString line = t.readLine();
-  if(line.startsWith(QString::fromLatin1("GCfilms"))) {
+  if(line.startsWith(QLatin1String("GCfilms"))) {
     readGCfilms(str);
   } else {
     // need to reparse the string if it's in utf-8
-    if(line.toLower().indexOf(QString::fromLatin1("utf-8")) > 0) {
+    if(line.toLower().indexOf(QLatin1String("utf-8")) > 0) {
       str = QString::fromUtf8(str.toLocal8Bit());
     }
     readGCstar(str);
@@ -70,10 +70,10 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
 void GCfilmsImporter::readGCfilms(const QString& text_) {
   m_coll = new Data::VideoCollection(true);
   bool hasURL = false;
-  if(m_coll->hasField(QString::fromLatin1("url"))) {
-    hasURL = m_coll->fieldByName(QString::fromLatin1("url"))->type() == Data::Field::URL;
+  if(m_coll->hasField(QLatin1String("url"))) {
+    hasURL = m_coll->fieldByName(QLatin1String("url"))->type() == Data::Field::URL;
   } else {
-    Data::FieldPtr field(new Data::Field(QString::fromLatin1("url"), i18n("URL"), Data::Field::URL));
+    Data::FieldPtr field(new Data::Field(QLatin1String("url"), i18n("URL"), Data::Field::URL));
     field->setCategory(i18n("General"));
     m_coll->addField(field);
     hasURL = true;
@@ -81,10 +81,10 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
 
   bool convertUTF8 = false;
   QMap<QString, Data::BorrowerPtr> borrowers;
-  const QRegExp rx(QString::fromLatin1("\\s*,\\s*"));
-  QRegExp year(QString::fromLatin1("\\d{4}"));
-  QRegExp runTimeHr(QString::fromLatin1("(\\d+)\\s?hr?"));
-  QRegExp runTimeMin(QString::fromLatin1("(\\d+)\\s?mi?n?"));
+  const QRegExp rx(QLatin1String("\\s*,\\s*"));
+  QRegExp year(QLatin1String("\\d{4}"));
+  QRegExp runTimeHr(QLatin1String("(\\d+)\\s?hr?"));
+  QRegExp runTimeMin(QLatin1String("(\\d+)\\s?mi?n?"));
 
   bool gotFirstLine = false;
   uint total = 0;
@@ -130,9 +130,9 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
 
     Data::EntryPtr entry(new Data::Entry(m_coll));
     entry->setId(Tellico::toUInt(values[0], &ok));
-    entry->setField(QString::fromLatin1("title"), values[1]);
+    entry->setField(QLatin1String("title"), values[1]);
     if(year.indexIn(values[2]) > -1) {
-      entry->setField(QString::fromLatin1("year"), year.cap());
+      entry->setField(QLatin1String("year"), year.cap());
     }
 
     uint time = 0;
@@ -143,35 +143,35 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
       time += Tellico::toUInt(runTimeMin.cap(1), &ok);
     }
     if(time > 0) {
-      entry->setField(QString::fromLatin1("running-time"),  QString::number(time));
+      entry->setField(QLatin1String("running-time"),  QString::number(time));
     }
 
-    entry->setField(QString::fromLatin1("director"),      splitJoin(rx, values[4]));
-    entry->setField(QString::fromLatin1("nationality"),   splitJoin(rx, values[5]));
-    entry->setField(QString::fromLatin1("genre"),         splitJoin(rx, values[6]));
+    entry->setField(QLatin1String("director"),      splitJoin(rx, values[4]));
+    entry->setField(QLatin1String("nationality"),   splitJoin(rx, values[5]));
+    entry->setField(QLatin1String("genre"),         splitJoin(rx, values[6]));
     KUrl u = KUrl(values[7]);
     if(!u.isEmpty()) {
       QString id = ImageFactory::addImage(u, true /* quiet */);
       if(!id.isEmpty()) {
-        entry->setField(QString::fromLatin1("cover"), id);
+        entry->setField(QLatin1String("cover"), id);
       }
     }
-    entry->setField(QString::fromLatin1("cast"),  splitJoin(rx, values[8]));
+    entry->setField(QLatin1String("cast"),  splitJoin(rx, values[8]));
     // values[9] is the original title
-    entry->setField(QString::fromLatin1("plot"),  values[10]);
+    entry->setField(QLatin1String("plot"),  values[10]);
     if(hasURL) {
-      entry->setField(QString::fromLatin1("url"), values[11]);
+      entry->setField(QLatin1String("url"), values[11]);
     }
 
     CHECKLIMITS(12);
 
     // values[12] is whether the film has been viewed or not
-    entry->setField(QString::fromLatin1("medium"), values[13]);
+    entry->setField(QLatin1String("medium"), values[13]);
     // values[14] is number of DVDS?
     // values[15] is place?
     // gcfilms's ratings go 0-10, just divide by two
-    entry->setField(QString::fromLatin1("rating"), QString::number(int(Tellico::toUInt(values[16], &ok)/2)));
-    entry->setField(QString::fromLatin1("comments"), values[17]);
+    entry->setField(QLatin1String("rating"), QString::number(int(Tellico::toUInt(values[16], &ok)/2)));
+    entry->setField(QLatin1String("comments"), values[17]);
 
     CHECKLIMITS(18);
 
@@ -181,10 +181,10 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
       langs << value.section(';', 0, 0);
       tracks << value.section(';', 1, 1);
     }
-    entry->setField(QString::fromLatin1("language"),    langs.join(QString::fromLatin1("; ")));
-    entry->setField(QString::fromLatin1("audio-track"), tracks.join(QString::fromLatin1("; ")));
+    entry->setField(QLatin1String("language"),    langs.join(QLatin1String("; ")));
+    entry->setField(QLatin1String("audio-track"), tracks.join(QLatin1String("; ")));
 
-    entry->setField(QString::fromLatin1("subtitle"), splitJoin(rx, values[19]));
+    entry->setField(QLatin1String("subtitle"), splitJoin(rx, values[19]));
 
     CHECKLIMITS(20);
 
@@ -203,7 +203,7 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
         int m = Tellico::toUInt(tmp.section('/', 1, 1), &ok);
         int y = Tellico::toUInt(tmp.section('/', 2, 2), &ok);
         b->addLoan(Data::LoanPtr(new Data::Loan(entry, QDate(y, m, d), QDate(), QString())));
-        entry->setField(QString::fromLatin1("loaned"), QString::fromLatin1("true"));
+        entry->setField(QLatin1String("loaned"), QLatin1String("true"));
       }
     }
     // values[22] is history ?
@@ -213,15 +213,15 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
 
     int age = Tellico::toUInt(values[23], &ok);
     if(age < 2) {
-      entry->setField(QString::fromLatin1("certification"), QString::fromLatin1("U (USA)"));
+      entry->setField(QLatin1String("certification"), QLatin1String("U (USA)"));
     } else if(age < 3) {
-      entry->setField(QString::fromLatin1("certification"), QString::fromLatin1("G (USA)"));
+      entry->setField(QLatin1String("certification"), QLatin1String("G (USA)"));
     } else if(age < 6) {
-      entry->setField(QString::fromLatin1("certification"), QString::fromLatin1("PG (USA)"));
+      entry->setField(QLatin1String("certification"), QLatin1String("PG (USA)"));
     } else if(age < 14) {
-      entry->setField(QString::fromLatin1("certification"), QString::fromLatin1("PG-13 (USA)"));
+      entry->setField(QLatin1String("certification"), QLatin1String("PG-13 (USA)"));
     } else {
-      entry->setField(QString::fromLatin1("certification"), QString::fromLatin1("R (USA)"));
+      entry->setField(QLatin1String("certification"), QLatin1String("R (USA)"));
     }
 
     m_coll->addEntries(entry);
@@ -245,7 +245,7 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
 }
 
 void GCfilmsImporter::readGCstar(const QString& text_) {
-  QString xsltFile = KStandardDirs::locate("appdata", QString::fromLatin1("gcstar2tellico.xsl"));
+  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("gcstar2tellico.xsl"));
   XSLTHandler handler(xsltFile);
   if(!handler.isValid()) {
     setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));
@@ -266,7 +266,7 @@ void GCfilmsImporter::readGCstar(const QString& text_) {
 
 inline
 QString GCfilmsImporter::splitJoin(const QRegExp& rx, const QString& s) {
-  return s.split(rx, QString::SkipEmptyParts).join(QString::fromLatin1("; "));
+  return s.split(rx, QString::SkipEmptyParts).join(QLatin1String("; "));
 }
 
 void GCfilmsImporter::slotCancel() {

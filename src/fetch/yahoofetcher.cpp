@@ -85,12 +85,12 @@ void YahooFetcher::continueSearch() {
 void YahooFetcher::doSearch() {
 //  myDebug() << "YahooFetcher::search() - value = " << value_ << endl;
 
-  KUrl u(QString::fromLatin1(YAHOO_BASE_URL));
-  u.addQueryItem(QString::fromLatin1("appid"),   QString::fromLatin1(YAHOO_APP_ID));
-  u.addQueryItem(QString::fromLatin1("type"),    QString::fromLatin1("all"));
-  u.addQueryItem(QString::fromLatin1("output"),  QString::fromLatin1("xml"));
-  u.addQueryItem(QString::fromLatin1("start"),   QString::number(m_start));
-  u.addQueryItem(QString::fromLatin1("results"), QString::number(YAHOO_MAX_RETURNS_TOTAL));
+  KUrl u(YAHOO_BASE_URL);
+  u.addQueryItem(QLatin1String("appid"),   QLatin1String(YAHOO_APP_ID));
+  u.addQueryItem(QLatin1String("type"),    QLatin1String("all"));
+  u.addQueryItem(QLatin1String("output"),  QLatin1String("xml"));
+  u.addQueryItem(QLatin1String("start"),   QString::number(m_start));
+  u.addQueryItem(QLatin1String("results"), QString::number(YAHOO_MAX_RETURNS_TOTAL));
 
   if(!canFetch(Kernel::self()->collectionType())) {
     message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
@@ -100,17 +100,17 @@ void YahooFetcher::doSearch() {
 
   switch(m_key) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("album"), m_value);
+      u.addQueryItem(QLatin1String("album"), m_value);
       break;
 
     case Person:
-      u.addQueryItem(QString::fromLatin1("artist"), m_value);
+      u.addQueryItem(QLatin1String("artist"), m_value);
       break;
 
     // raw is used for the entry updates
     case Raw:
-//      u.removeQueryItem(QString::fromLatin1("type"));
-//      u.addQueryItem(QString::fromLatin1("type"), QString::fromLatin1("phrase"));
+//      u.removeQueryItem(QLatin1String("type"));
+//      u.addQueryItem(QLatin1String("type"), QLatin1String("phrase"));
       u.setQuery(u.query() + '&' + m_value);
       break;
 
@@ -160,7 +160,7 @@ void YahooFetcher::slotComplete(KJob*) {
   m_job = 0;
 #if 0
   kWarning() << "Remove debug from yahoofetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
@@ -186,7 +186,7 @@ void YahooFetcher::slotComplete(KJob*) {
     // total is top level element, with attribute totalResultsAvailable
     QDomElement e = dom.documentElement();
     if(!e.isNull()) {
-      m_total = e.attribute(QString::fromLatin1("totalResultsAvailable")).toInt();
+      m_total = e.attribute(QLatin1String("totalResultsAvailable")).toInt();
     }
   }
 
@@ -210,13 +210,13 @@ void YahooFetcher::slotComplete(KJob*) {
       // might get aborted
       break;
     }
-    QString desc = entry->field(QString::fromLatin1("artist"))
+    QString desc = entry->field(QLatin1String("artist"))
                  + QChar('/')
-                 + entry->field(QString::fromLatin1("label"))
+                 + entry->field(QLatin1String("label"))
                  + QChar('/')
-                 + entry->field(QString::fromLatin1("year"));
+                 + entry->field(QLatin1String("year"));
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++count;
@@ -233,30 +233,30 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntry(uint uid_) {
     return Data::EntryPtr();
   }
 
-  KUrl imageURL = entry->field(QString::fromLatin1("image"));
+  KUrl imageURL = entry->field(QLatin1String("image"));
   if(!imageURL.isEmpty()) {
     QString id = ImageFactory::addImage(imageURL, true);
     if(id.isEmpty()) {
     // rich text causes layout issues
 //      emit signalStatus(i18n("<qt>The cover image for <i>%1</i> could not be loaded.</qt>",
-//                              entry->field(QString::fromLatin1("title"))));
+//                              entry->field(QLatin1String("title"))));
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     } else {
-      entry->setField(QString::fromLatin1("cover"), id);
+      entry->setField(QLatin1String("cover"), id);
     }
   }
 
   getTracks(entry);
 
   // don't want to show image urls in the fetch dialog
-  entry->setField(QString::fromLatin1("image"),  QString::null);
+  entry->setField(QLatin1String("image"),  QString::null);
   // no need for album id now ?
-  entry->setField(QString::fromLatin1("yahoo"),  QString::null);
+  entry->setField(QLatin1String("yahoo"),  QString::null);
   return entry;
 }
 
 void YahooFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("yahoo2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("yahoo2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "YahooFetcher::initXSLTHandler() - can not locate yahoo2tellico.xsl.";
     return;
@@ -277,20 +277,20 @@ void YahooFetcher::initXSLTHandler() {
 
 void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
   // get album id
-  if(!entry_ || entry_->field(QString::fromLatin1("yahoo")).isEmpty()) {
+  if(!entry_ || entry_->field(QLatin1String("yahoo")).isEmpty()) {
     return;
   }
 
-  const QString albumid = entry_->field(QString::fromLatin1("yahoo"));
+  const QString albumid = entry_->field(QLatin1String("yahoo"));
 
-  KUrl u(QString::fromLatin1(YAHOO_BASE_URL));
-  u.setFileName(QString::fromLatin1("songSearch"));
-  u.addQueryItem(QString::fromLatin1("appid"),   QString::fromLatin1(YAHOO_APP_ID));
-  u.addQueryItem(QString::fromLatin1("type"),    QString::fromLatin1("all"));
-  u.addQueryItem(QString::fromLatin1("output"),  QString::fromLatin1("xml"));
+  KUrl u(YAHOO_BASE_URL);
+  u.setFileName(QLatin1String("songSearch"));
+  u.addQueryItem(QLatin1String("appid"),   QLatin1String(YAHOO_APP_ID));
+  u.addQueryItem(QLatin1String("type"),    QLatin1String("all"));
+  u.addQueryItem(QLatin1String("output"),  QLatin1String("xml"));
   // go ahesad and ask for all results, since there might well be more than 10 songs on the CD
-  u.addQueryItem(QString::fromLatin1("results"), QString::number(50));
-  u.addQueryItem(QString::fromLatin1("albumid"), albumid);
+  u.addQueryItem(QLatin1String("results"), QString::number(50));
+  u.addQueryItem(QLatin1String("albumid"), albumid);
 
 //  myDebug() << "YahooFetcher::getTracks() - url: " << u.url() << endl;
   QDomDocument dom = FileHandler::readXMLFile(u, false /*no namespace*/, true /*quiet*/);
@@ -301,7 +301,7 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
 
 #if 0
   kWarning() << "Remove debug from yahoofetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
@@ -310,7 +310,7 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
   f.close();
 #endif
 
-  const QString track = QString::fromLatin1("track");
+  const QString track = QLatin1String("track");
 
   QDomNodeList nodes = dom.documentElement().childNodes();
   for(int i = 0; i < nodes.count(); ++i) {
@@ -318,16 +318,16 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
     if(e.isNull()) {
       continue;
     }
-    QString t = e.namedItem(QString::fromLatin1("Title")).toElement().text();
-    QString n = e.namedItem(QString::fromLatin1("Track")).toElement().text();
+    QString t = e.namedItem(QLatin1String("Title")).toElement().text();
+    QString n = e.namedItem(QLatin1String("Track")).toElement().text();
     bool ok;
     int trackNum = Tellico::toUInt(n, &ok);
     // trackNum might be 0
     if(t.isEmpty() || !ok || trackNum < 1) {
       continue;
     }
-    QString a = e.namedItem(QString::fromLatin1("Artist")).toElement().text();
-    QString l = e.namedItem(QString::fromLatin1("Length")).toElement().text();
+    QString a = e.namedItem(QLatin1String("Artist")).toElement().text();
+    QString l = e.namedItem(QLatin1String("Length")).toElement().text();
 
     int len = Tellico::toUInt(l, &ok);
     QString value = t + "::" + a;
@@ -347,14 +347,14 @@ QString YahooFetcher::insertValue(const QString& str_, const QString& value_, in
   bool write = true;
   if(!list[pos_-1].isNull()) {
     // for some reason, some songs are repeated from yahoo, with 0 length, don't overwrite that
-    if(value_.count(QString::fromLatin1("::")) < 2) { // means no length value
+    if(value_.count(QLatin1String("::")) < 2) { // means no length value
       write = false;
     }
   }
   if(!value_.isEmpty() && write) {
     list[pos_-1] = value_;
   }
-  return list.join(QString::fromLatin1("; "));
+  return list.join(QLatin1String("; "));
 }
 
 void YahooFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
@@ -363,16 +363,16 @@ void YahooFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   m_limit = 5;
 
   QString value;
-  QString title = entry_->field(QString::fromLatin1("title"));
+  QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
-    value += QString::fromLatin1("album=") + title;
+    value += QLatin1String("album=") + title;
   }
-  QString artist = entry_->field(QString::fromLatin1("artist"));
+  QString artist = entry_->field(QLatin1String("artist"));
   if(!artist.isEmpty()) {
     if(!value.isEmpty()) {
       value += '&';
     }
-    value += QString::fromLatin1("artist=") + artist;
+    value += QLatin1String("artist=") + artist;
   }
   if(!value.isEmpty()) {
     search(Fetch::Raw, value);

@@ -82,7 +82,7 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
   vlay2->addWidget(m_encodeUTF8);
 
   QString localStr = i18n("Encode in user locale (%1)",
-                          QString::fromLatin1(QTextCodec::codecForLocale()->name()));
+                          QLatin1String(QTextCodec::codecForLocale()->name()));
   m_encodeLocale = new QRadioButton(localStr, group2);
   m_encodeLocale->setWhatsThis(i18n("Encode the exported file in the local encoding."));
   vlay2->addWidget(m_encodeLocale);

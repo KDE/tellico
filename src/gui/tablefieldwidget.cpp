@@ -38,7 +38,7 @@ TableFieldWidget::TableFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pare
     : FieldWidget(field_, parent_), m_field(field_), m_row(-1), m_col(-1) {
 
   bool ok;
-  m_columns = Tellico::toUInt(field_->property(QString::fromLatin1("columns")), &ok);
+  m_columns = Tellico::toUInt(field_->property(QLatin1String("columns")), &ok);
   if(!ok) {
     m_columns = 1;
   } else {
@@ -79,17 +79,17 @@ QString TableFieldWidget::text() const {
       QTableWidgetItem* item = m_table->item(row, col);
       str = item ? item->text().simplified() : QString();
       if(str.isEmpty()) {
-        cstack += QString::fromLatin1("::");
+        cstack += QLatin1String("::");
       } else {
-        rowStr += cstack + str + QString::fromLatin1("::");
+        rowStr += cstack + str + QLatin1String("::");
         cstack.clear();
       }
     }
     if(rowStr.isEmpty()) {
-      rstack += QString::fromLatin1("; ");
+      rstack += QLatin1String("; ");
     } else {
       rowStr.truncate(rowStr.length()-2); // remove last semi-colon and space
-      text += rstack + rowStr + QString::fromLatin1("; ");
+      text += rstack + rowStr + QLatin1String("; ");
       rstack.clear();
     }
   }
@@ -116,7 +116,7 @@ void TableFieldWidget::setText(const QString& text_) {
   }
   for(int row = 0; row < list.count(); ++row) {
     for(int col = 0; col < m_table->columnCount(); ++col) {
-      QString value = list[row].section(QString::fromLatin1("::"), col, col);
+      QString value = list[row].section(QLatin1String("::"), col, col);
       QTableWidgetItem* item = new QTableWidgetItem(value);
       m_table->setItem(row, col, item);
     }
@@ -198,7 +198,7 @@ void TableFieldWidget::labelColumns(Tellico::Data::FieldPtr field_) {
 
 void TableFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
   bool ok;
-  m_columns = Tellico::toUInt(newField_->property(QString::fromLatin1("columns")), &ok);
+  m_columns = Tellico::toUInt(newField_->property(QLatin1String("columns")), &ok);
   if(!ok) {
     m_columns = 1;
   } else {
@@ -228,9 +228,9 @@ void TableFieldWidget::horizontalHeaderContextMenu(const QPoint& point_) {
   m_col = col;
 
   KMenu menu(this);
-  menu.addAction(KIcon(QString::fromLatin1("edit")), i18n("Rename Column..."),
+  menu.addAction(KIcon(QLatin1String("edit")), i18n("Rename Column..."),
                  this, SLOT(slotRenameColumn()));
-  menu.addAction(KIcon(QString::fromLatin1("locationbar_erase")), i18n("Clear Table"),
+  menu.addAction(KIcon(QLatin1String("locationbar_erase")), i18n("Clear Table"),
                  this, SLOT(clear()));
   menu.exec(m_table->horizontalHeader()->mapToGlobal(point_));
 }
@@ -247,28 +247,28 @@ void TableFieldWidget::verticalHeaderContextMenu(const QPoint& point_) {
 
 void TableFieldWidget::makeRowContextMenu(const QPoint& point_) {
   KMenu menu(this);
-  menu.addAction(KIcon(QString::fromLatin1("insrow")), i18n("Insert Row"),
+  menu.addAction(KIcon(QLatin1String("insrow")), i18n("Insert Row"),
                  this, SLOT(slotInsertRow()));
-  menu.addAction(KIcon(QString::fromLatin1("remrow")), i18n("Remove Row"),
+  menu.addAction(KIcon(QLatin1String("remrow")), i18n("Remove Row"),
                  this, SLOT(slotRemoveRow()));
-  QAction* act = menu.addAction(KIcon(QString::fromLatin1("arrow-up")), i18n("Move Row Up"),
+  QAction* act = menu.addAction(KIcon(QLatin1String("arrow-up")), i18n("Move Row Up"),
                                 this, SLOT(slotMoveRowUp()));
   if(m_row < 1) {
     act->setEnabled(false);
   }
-  act = menu.addAction(KIcon(QString::fromLatin1("arrow-down")), i18n("Move Row Down"),
+  act = menu.addAction(KIcon(QLatin1String("arrow-down")), i18n("Move Row Down"),
                        this, SLOT(slotMoveRowDown()));
   if(m_row < 0 || m_row > m_table->rowCount()-1) {
     act->setEnabled(false);
   }
   menu.addSeparator();
-  act = menu.addAction(KIcon(QString::fromLatin1("edit")), i18n("Rename Column..."),
+  act = menu.addAction(KIcon(QLatin1String("edit")), i18n("Rename Column..."),
                        this, SLOT(slotRenameColumn()));
   if(m_col < 0 || m_col > m_columns-1) {
     act->setEnabled(false);
   }
   menu.addSeparator();
-  menu.addAction(KIcon(QString::fromLatin1("locationbar_erase")), i18n("Clear Table"),
+  menu.addAction(KIcon(QLatin1String("locationbar_erase")), i18n("Clear Table"),
                  this, SLOT(clear()));
 
   menu.exec(point_);

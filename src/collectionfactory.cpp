@@ -79,7 +79,7 @@ Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_)
   }
 
   Data::CollPtr c(new Data::Collection(i18n("My Collection")));
-  Data::FieldPtr f(new Data::Field(QString::fromLatin1("title"), i18n("Title")));
+  Data::FieldPtr f(new Data::Field(QLatin1String("title"), i18n("Title")));
   f->setCategory(i18n("General"));
   f->setFlags(Data::Field::NoDelete);
   f->setFormatFlag(Data::Field::FormatTitle);
@@ -140,60 +140,60 @@ Tellico::CollectionNameMap CollectionFactory::nameMap() {
 QString CollectionFactory::typeName(int type_) {
   switch(type_) {
     case Data::Collection::Book:
-      return QString::fromLatin1("book");
+      return QLatin1String("book");
       break;
 
     case Data::Collection::Video:
-      return QString::fromLatin1("video");
+      return QLatin1String("video");
       break;
 
     case Data::Collection::Album:
-      return QString::fromLatin1("album");
+      return QLatin1String("album");
       break;
 
     case Data::Collection::Bibtex:
-      return QString::fromLatin1("bibtex");
+      return QLatin1String("bibtex");
       break;
 
     case Data::Collection::ComicBook:
-      return QString::fromLatin1("comic");
+      return QLatin1String("comic");
       break;
 
     case Data::Collection::Wine:
-      return QString::fromLatin1("wine");
+      return QLatin1String("wine");
       break;
 
     case Data::Collection::Coin:
-      return QString::fromLatin1("coin");
+      return QLatin1String("coin");
       break;
 
     case Data::Collection::Stamp:
-      return QString::fromLatin1("stamp");
+      return QLatin1String("stamp");
       break;
 
     case Data::Collection::Card:
-      return QString::fromLatin1("card");
+      return QLatin1String("card");
       break;
 
     case Data::Collection::Game:
-      return QString::fromLatin1("game");
+      return QLatin1String("game");
       break;
 
     case Data::Collection::File:
-      return QString::fromLatin1("file");
+      return QLatin1String("file");
       break;
 
     case Data::Collection::BoardGame:
-      return QString::fromLatin1("boardgame");
+      return QLatin1String("boardgame");
       break;
 
     case Data::Collection::Base:
-      return QString::fromLatin1("entry");
+      return QLatin1String("entry");
       break;
 
     default:
       kWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_;
-      return QString::fromLatin1("entry");
+      return QLatin1String("entry");
       break;
   }
 }

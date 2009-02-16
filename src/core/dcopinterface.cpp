@@ -191,7 +191,7 @@ bool CollectionInterface::addFieldValue(long id_, const QString& fieldName_, con
   QStringList values = entry->fields(fieldName_, false);
   QStringList newValues = values;
   newValues << value_;
-  if(!entry->setField(fieldName_, newValues.join(QString::fromLatin1("; ")))) {
+  if(!entry->setField(fieldName_, newValues.join(QLatin1String("; ")))) {
     return false;
   }
   Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry);

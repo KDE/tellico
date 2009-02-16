@@ -66,7 +66,7 @@ bool EntrezFetcher::canFetch(int type) const {
 }
 
 void EntrezFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString s = config_.readEntry("Database", QString::fromLatin1(ENTREZ_DEFAULT_DATABASE)); // default to pubmed
+  QString s = config_.readEntry("Database", ENTREZ_DEFAULT_DATABASE); // default to pubmed
   if(!s.isEmpty()) {
     m_dbname = s;
   }
@@ -85,36 +85,36 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
     return;
   }
   if(m_dbname.isEmpty()) {
-    m_dbname = QString::fromLatin1(ENTREZ_DEFAULT_DATABASE);
+    m_dbname = QLatin1String(ENTREZ_DEFAULT_DATABASE);
   }
 
 #ifdef ENTREZ_TEST
-  KUrl u = KUrl(QString::fromLatin1("/home/robby/esearch.xml"));
+  KUrl u = KUrl("/home/robby/esearch.xml");
 #else
-  KUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
-  u.addPath(QString::fromLatin1(ENTREZ_SEARCH_CGI));
-  u.addQueryItem(QString::fromLatin1("tool"),       QString::fromLatin1("Tellico"));
-  u.addQueryItem(QString::fromLatin1("retmode"),    QString::fromLatin1("xml"));
-  u.addQueryItem(QString::fromLatin1("usehistory"), QString::fromLatin1("y"));
-  u.addQueryItem(QString::fromLatin1("retmax"),     QString::fromLatin1("1")); // we're just getting the count
-  u.addQueryItem(QString::fromLatin1("db"),         m_dbname);
-  u.addQueryItem(QString::fromLatin1("term"),       value_);
+  KUrl u(ENTREZ_BASE_URL);
+  u.addPath(QLatin1String(ENTREZ_SEARCH_CGI));
+  u.addQueryItem(QLatin1String("tool"),       QLatin1String("Tellico"));
+  u.addQueryItem(QLatin1String("retmode"),    QLatin1String("xml"));
+  u.addQueryItem(QLatin1String("usehistory"), QLatin1String("y"));
+  u.addQueryItem(QLatin1String("retmax"),     QLatin1String("1")); // we're just getting the count
+  u.addQueryItem(QLatin1String("db"),         m_dbname);
+  u.addQueryItem(QLatin1String("term"),       value_);
   switch(key_) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("field"), QString::fromLatin1("titl"));
+      u.addQueryItem(QLatin1String("field"), QLatin1String("titl"));
       break;
 
     case Person:
-      u.addQueryItem(QString::fromLatin1("field"), QString::fromLatin1("auth"));
+      u.addQueryItem(QLatin1String("field"), QLatin1String("auth"));
       break;
 
     case Keyword:
       // for Tellico Keyword searches basically mean search for any field matching
-//      u.addQueryItem(QString::fromLatin1("field"), QString::fromLatin1("word"));
+//      u.addQueryItem(QLatin1String("field"), QLatin1String("word"));
       break;
 
     case PubmedID:
-      u.addQueryItem(QString::fromLatin1("field"), QString::fromLatin1("pmid"));
+      u.addQueryItem(QLatin1String("field"), QLatin1String("pmid"));
       break;
 
     case DOI:
@@ -173,7 +173,7 @@ void EntrezFetcher::slotComplete(KJob* ) {
   m_job = 0;
 #if 0
   kWarning() << "Remove debug from entrezfetcher.cpp: " << __LINE__;
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
@@ -232,18 +232,18 @@ void EntrezFetcher::searchResults() {
 
 void EntrezFetcher::doSummary() {
 #ifdef ENTREZ_TEST
-  KUrl u = KUrl(QString::fromLatin1("/home/robby/esummary.xml"));
+  KUrl u = KUrl(QLatin1String("/home/robby/esummary.xml"));
 #else
-  KUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
-  u.addPath(QString::fromLatin1(ENTREZ_SUMMARY_CGI));
-  u.addQueryItem(QString::fromLatin1("tool"),       QString::fromLatin1("Tellico"));
-  u.addQueryItem(QString::fromLatin1("retmode"),    QString::fromLatin1("xml"));
-  u.addQueryItem(QString::fromLatin1("retstart"),   QString::number(m_start));
-  u.addQueryItem(QString::fromLatin1("retmax"),     QString::number(qMin(m_total-m_start-1, ENTREZ_MAX_RETURNS_TOTAL)));
-  u.addQueryItem(QString::fromLatin1("usehistory"), QString::fromLatin1("y"));
-  u.addQueryItem(QString::fromLatin1("db"),         m_dbname);
-  u.addQueryItem(QString::fromLatin1("query_key"),  m_queryKey);
-  u.addQueryItem(QString::fromLatin1("WebEnv"),     m_webEnv);
+  KUrl u(ENTREZ_BASE_URL);
+  u.addPath(QLatin1String(ENTREZ_SUMMARY_CGI));
+  u.addQueryItem(QLatin1String("tool"),       QLatin1String("Tellico"));
+  u.addQueryItem(QLatin1String("retmode"),    QLatin1String("xml"));
+  u.addQueryItem(QLatin1String("retstart"),   QString::number(m_start));
+  u.addQueryItem(QLatin1String("retmax"),     QString::number(qMin(m_total-m_start-1, ENTREZ_MAX_RETURNS_TOTAL)));
+  u.addQueryItem(QLatin1String("usehistory"), QLatin1String("y"));
+  u.addQueryItem(QLatin1String("db"),         m_dbname);
+  u.addQueryItem(QLatin1String("query_key"),  m_queryKey);
+  u.addQueryItem(QLatin1String("WebEnv"),     m_webEnv);
 #endif
 
   m_step = Summary;
@@ -268,20 +268,20 @@ void EntrezFetcher::summaryResults() {
     if(e.isNull() || e.tagName() != QLatin1String("DocSum")) {
       continue;
     }
-    QDomNodeList nodes = e.elementsByTagName(QString::fromLatin1("Id"));
+    QDomNodeList nodes = e.elementsByTagName(QLatin1String("Id"));
     if(nodes.count() == 0) {
       myDebug() << "EntrezFetcher::summaryResults() - no Id elements" << endl;
       continue;
     }
     int id = nodes.item(0).toElement().text().toInt();
     QString title, pubdate, authors;
-    nodes = e.elementsByTagName(QString::fromLatin1("Item"));
+    nodes = e.elementsByTagName(QLatin1String("Item"));
     for(int j = 0; j < nodes.count(); ++j) {
-      if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == QLatin1String("Title")) {
+      if(nodes.item(j).toElement().attribute(QLatin1String("Name")) == QLatin1String("Title")) {
         title = nodes.item(j).toElement().text();
-      } else if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == QLatin1String("PubDate")) {
+      } else if(nodes.item(j).toElement().attribute(QLatin1String("Name")) == QLatin1String("PubDate")) {
         pubdate = nodes.item(j).toElement().text();
-      } else if(nodes.item(j).toElement().attribute(QString::fromLatin1("Name")) == QLatin1String("AuthorList")) {
+      } else if(nodes.item(j).toElement().attribute(QLatin1String("Name")) == QLatin1String("AuthorList")) {
         QStringList list;
         for(QDomNode aNode = nodes.item(j).firstChild(); !aNode.isNull(); aNode = aNode.nextSibling()) {
           // lazy, assume all children Items are authors
@@ -289,7 +289,7 @@ void EntrezFetcher::summaryResults() {
             list << aNode.toElement().text();
           }
         }
-        authors = list.join(QString::fromLatin1("; "));
+        authors = list.join(QLatin1String("; "));
       }
       if(!title.isEmpty() && !pubdate.isEmpty() && !authors.isEmpty()) {
         break; // done now
@@ -325,15 +325,15 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
 
   int id = m_matches[uid_];
 #ifdef ENTREZ_TEST
-  KUrl u = KUrl(QString::fromLatin1("/home/robby/pubmed.xml"));
+  KUrl u = KUrl(QLatin1String("/home/robby/pubmed.xml"));
 #else
-  KUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
-  u.addPath(QString::fromLatin1(ENTREZ_FETCH_CGI));
-  u.addQueryItem(QString::fromLatin1("tool"),       QString::fromLatin1("Tellico"));
-  u.addQueryItem(QString::fromLatin1("retmode"),    QString::fromLatin1("xml"));
-  u.addQueryItem(QString::fromLatin1("rettype"),    QString::fromLatin1("abstract"));
-  u.addQueryItem(QString::fromLatin1("db"),         m_dbname);
-  u.addQueryItem(QString::fromLatin1("id"),         QString::number(id));
+  KUrl u(ENTREZ_BASE_URL);
+  u.addPath(QLatin1String(ENTREZ_FETCH_CGI));
+  u.addQueryItem(QLatin1String("tool"),       QLatin1String("Tellico"));
+  u.addQueryItem(QLatin1String("retmode"),    QLatin1String("xml"));
+  u.addQueryItem(QLatin1String("rettype"),    QLatin1String("abstract"));
+  u.addQueryItem(QLatin1String("db"),         m_dbname);
+  u.addQueryItem(QLatin1String("id"),         QString::number(id));
 #endif
   // now it's sychronous, and we know that it's utf8
   QString xmlOutput = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
@@ -343,7 +343,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   }
 #if 0
   kWarning() << "EntrezFetcher::fetchEntry() - turn me off!";
-  QFile f1(QString::fromLatin1("/tmp/test-entry.xml"));
+  QFile f1(QLatin1String("/tmp/test-entry.xml"));
   if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
     t.setEncoding(QTextStream::UnicodeUTF8);
@@ -368,33 +368,33 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr e = coll->entries().front();
 
   // try to get a link, but only if necessary
-  if(m_fields.contains(QString::fromLatin1("url"))) {
-    KUrl link(QString::fromLatin1(ENTREZ_BASE_URL));
-    link.addPath(QString::fromLatin1(ENTREZ_LINK_CGI));
-    link.addQueryItem(QString::fromLatin1("tool"),   QString::fromLatin1("Tellico"));
-    link.addQueryItem(QString::fromLatin1("cmd"),    QString::fromLatin1("llinks"));
-    link.addQueryItem(QString::fromLatin1("db"),     m_dbname);
-    link.addQueryItem(QString::fromLatin1("dbfrom"), m_dbname);
-    link.addQueryItem(QString::fromLatin1("id"),     QString::number(id));
+  if(m_fields.contains(QLatin1String("url"))) {
+    KUrl link(ENTREZ_BASE_URL);
+    link.addPath(QLatin1String(ENTREZ_LINK_CGI));
+    link.addQueryItem(QLatin1String("tool"),   QLatin1String("Tellico"));
+    link.addQueryItem(QLatin1String("cmd"),    QLatin1String("llinks"));
+    link.addQueryItem(QLatin1String("db"),     m_dbname);
+    link.addQueryItem(QLatin1String("dbfrom"), m_dbname);
+    link.addQueryItem(QLatin1String("id"),     QString::number(id));
 
     QDomDocument linkDom = FileHandler::readXMLFile(link, false /* namespace */, true /* quiet */);
     // need eLinkResult/LinkSet/IdUrlList/IdUrlSet/ObjUrl/Url
-    QDomNode linkNode = linkDom.namedItem(QString::fromLatin1("eLinkResult"))
-                               .namedItem(QString::fromLatin1("LinkSet"))
-                               .namedItem(QString::fromLatin1("IdUrlList"))
-                               .namedItem(QString::fromLatin1("IdUrlSet"))
-                               .namedItem(QString::fromLatin1("ObjUrl"))
-                               .namedItem(QString::fromLatin1("Url"));
+    QDomNode linkNode = linkDom.namedItem(QLatin1String("eLinkResult"))
+                               .namedItem(QLatin1String("LinkSet"))
+                               .namedItem(QLatin1String("IdUrlList"))
+                               .namedItem(QLatin1String("IdUrlSet"))
+                               .namedItem(QLatin1String("ObjUrl"))
+                               .namedItem(QLatin1String("Url"));
     if(!linkNode.isNull()) {
       QString u = linkNode.toElement().text();
 //      myDebug() << u << endl;
       if(!u.isEmpty()) {
-        if(!coll->hasField(QString::fromLatin1("url"))) {
-          Data::FieldPtr field(new Data::Field(QString::fromLatin1("url"), i18n("URL"), Data::Field::URL));
+        if(!coll->hasField(QLatin1String("url"))) {
+          Data::FieldPtr field(new Data::Field(QLatin1String("url"), i18n("URL"), Data::Field::URL));
           field->setCategory(i18n("Miscellaneous"));
           coll->addField(field);
         }
-        e->setField(QString::fromLatin1("url"), u);
+        e->setField(QLatin1String("url"), u);
       }
     }
   }
@@ -411,7 +411,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
 }
 
 void EntrezFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("pubmed2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("pubmed2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "EntrezFetcher::initXSLTHandler() - can not locate pubmed2tellico.xsl.";
     return;
@@ -433,19 +433,19 @@ void EntrezFetcher::initXSLTHandler() {
 
 void EntrezFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myDebug() << "EntrezFetcher::updateEntry()" << endl;
-  QString s = entry_->field(QString::fromLatin1("pmid"));
+  QString s = entry_->field(QLatin1String("pmid"));
   if(!s.isEmpty()) {
     search(PubmedID, s);
     return;
   }
 
-  s = entry_->field(QString::fromLatin1("doi"));
+  s = entry_->field(QLatin1String("doi"));
   if(!s.isEmpty()) {
     search(DOI, s);
     return;
   }
 
-  s = entry_->field(QString::fromLatin1("title"));
+  s = entry_->field(QLatin1String("title"));
   if(!s.isEmpty()) {
     search(Title, s);
     return;
@@ -481,9 +481,9 @@ QString EntrezFetcher::ConfigWidget::preferredName() const {
 //static
 Tellico::StringMap EntrezFetcher::customFields() {
   StringMap map;
-  map[QString::fromLatin1("institution")] = i18n("Institution");
-  map[QString::fromLatin1("abstract")]    = i18n("Abstract");
-  map[QString::fromLatin1("url")]         = i18n("URL");
+  map[QLatin1String("institution")] = i18n("Institution");
+  map[QLatin1String("abstract")]    = i18n("Abstract");
+  map[QLatin1String("url")]         = i18n("URL");
   return map;
 }
 

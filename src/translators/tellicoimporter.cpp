@@ -106,9 +106,9 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   if(!dom.setContent(data_, true, &errorMsg, &errorLine, &errorColumn)) {
     QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
     str += i18n("There is an XML parsing error in line %1, column %2.", errorLine, errorColumn);
-    str += QString::fromLatin1("\n");
+    str += QLatin1String("\n");
     str += i18n("The error message from Qt is:");
-    str += QString::fromLatin1("\n\t") + errorMsg;
+    str += QLatin1String("\n\t") + errorMsg;
     myDebug() << str << endl;
     setStatusMessage(str);
     m_format = Error;
@@ -119,10 +119,10 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   // the syntax version field name changed from "version" to "syntaxVersion" in version 3
   uint syntaxVersion;
-  if(root.hasAttribute(QString::fromLatin1("syntaxVersion"))) {
-    syntaxVersion = root.attribute(QString::fromLatin1("syntaxVersion")).toInt();
-  } else if (root.hasAttribute(QString::fromLatin1("version"))) {
-    syntaxVersion = root.attribute(QString::fromLatin1("version")).toInt();
+  if(root.hasAttribute(QLatin1String("syntaxVersion"))) {
+    syntaxVersion = root.attribute(QLatin1String("syntaxVersion")).toInt();
+  } else if (root.hasAttribute(QLatin1String("version"))) {
+    syntaxVersion = root.attribute(QLatin1String("version")).toInt();
   } else {
     if(!url().isEmpty()) {
       setStatusMessage(i18n(errorLoad, url().fileName()));
@@ -180,7 +180,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     return;
   }
 
-  QString title = collelem.attribute(QString::fromLatin1("title"));
+  QString title = collelem.attribute(QLatin1String("title"));
 
   // be careful not to have element name collision
   // for fields, each true field element is a child of a fields element
@@ -193,8 +193,8 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     if((syntaxVersion > 3 && n.localName() == QLatin1String("fields"))
        || (syntaxVersion < 4 && n.localName() == QLatin1String("attributes"))) {
       QDomElement e = n.toElement();
-      fieldelems = e.elementsByTagNameNS(m_namespace, (syntaxVersion > 3) ? QString::fromLatin1("field")
-                                                                          : QString::fromLatin1("attribute"));
+      fieldelems = e.elementsByTagNameNS(m_namespace, (syntaxVersion > 3) ? QLatin1String("field")
+                                                                          : QLatin1String("attribute"));
       break;
     }
   }
@@ -204,7 +204,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   // if there are no attributes or if the first one has the special name of _default
   bool addFields = (fieldelems.count() == 0);
   if(!addFields) {
-    QString name = fieldelems.item(0).toElement().attribute(QString::fromLatin1("name"));
+    QString name = fieldelems.item(0).toElement().attribute(QLatin1String("name"));
     addFields = (name == QLatin1String("_default"));
     // removeChild only works for immediate children
     // remove _default field
@@ -218,12 +218,12 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   // on the entryName of the collection. A type field was added to the collection element
   // to specify what type of collection it is.
   if(syntaxVersion > 3) {
-    entryName = QString::fromLatin1("entry");
-    QString typeStr = collelem.attribute(QString::fromLatin1("type"));
+    entryName = QLatin1String("entry");
+    QString typeStr = collelem.attribute(QLatin1String("type"));
     Data::Collection::Type type = static_cast<Data::Collection::Type>(typeStr.toInt());
     m_coll = CollectionFactory::collection(type, addFields);
   } else {
-    entryName = collelem.attribute(QString::fromLatin1("unit"));
+    entryName = collelem.attribute(QLatin1String("unit"));
     m_coll = CollectionFactory::collection(entryName, addFields);
   }
 
@@ -243,14 +243,14 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
         continue;
       }
       if(n.localName() == QLatin1String("macros")) {
-        macroelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("macro"));
+        macroelems = n.toElement().elementsByTagNameNS(m_namespace, QLatin1String("macro"));
         break;
       }
     }
 //    myDebug() << "TellicoImporter::loadXMLData() - found " << macroelems.count() << " macros" << endl;
     for(int j = 0; c && j < macroelems.count(); ++j) {
       QDomElement elem = macroelems.item(j).toElement();
-      c->addMacro(elem.attribute(QString::fromLatin1("name")), elem.text());
+      c->addMacro(elem.attribute(QLatin1String("name")), elem.text());
     }
 
     for(QDomNode n = collelem.firstChild(); !n.isNull(); n = n.nextSibling()) {
@@ -271,7 +271,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex
   if(syntaxVersion < 4 && m_coll->type() == Data::Collection::Book
-     && m_coll->hasField(QString::fromLatin1("bibtex-id"))) {
+     && m_coll->hasField(QLatin1String("bibtex-id"))) {
     m_coll = Data::BibtexCollection::convertBookCollection(m_coll);
   }
 
@@ -290,7 +290,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
       continue;
     }
     if(n.localName() == QLatin1String("images")) {
-      imgelems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("image"));
+      imgelems = n.toElement().elementsByTagNameNS(m_namespace, QLatin1String("image"));
       break;
     }
   }
@@ -332,12 +332,12 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
       continue;
     }
     if(n.localName() == QLatin1String("borrowers")) {
-      QDomNodeList borrowerElems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("borrower"));
+      QDomNodeList borrowerElems = n.toElement().elementsByTagNameNS(m_namespace, QLatin1String("borrower"));
       for(int j = 0; j < borrowerElems.count(); ++j) {
         readBorrower(borrowerElems.item(j).toElement());
       }
     } else if(n.localName() == QLatin1String("filters")) {
-      QDomNodeList filterElems = n.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("filter"));
+      QDomNodeList filterElems = n.toElement().elementsByTagNameNS(m_namespace, QLatin1String("filter"));
       for(int j = 0; j < filterElems.count(); ++j) {
         readFilter(filterElems.item(j).toElement());
       }
@@ -356,20 +356,20 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
 void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
   // special case: if the i18n attribute equals true, then translate the title, description, and category
-  bool isI18n = elem_.attribute(QString::fromLatin1("i18n")) == QLatin1String("true");
+  bool isI18n = elem_.attribute(QLatin1String("i18n")) == QLatin1String("true");
 
-  QString name  = elem_.attribute(QString::fromLatin1("name"), QString::fromLatin1("unknown"));
-  QString title = elem_.attribute(QString::fromLatin1("title"), i18n("Unknown"));
+  QString name  = elem_.attribute(QLatin1String("name"), QLatin1String("unknown"));
+  QString title = elem_.attribute(QLatin1String("title"), i18n("Unknown"));
   if(isI18n) {
     title = i18n(title.toUtf8());
   }
 
-  QString typeStr = elem_.attribute(QString::fromLatin1("type"), QString::number(Data::Field::Line));
+  QString typeStr = elem_.attribute(QLatin1String("type"), QString::number(Data::Field::Line));
   Data::Field::Type type = static_cast<Data::Field::Type>(typeStr.toInt());
 
   Data::FieldPtr field;
   if(type == Data::Field::Choice) {
-    QStringList allowed = elem_.attribute(QString::fromLatin1("allowed")).split(QRegExp(QString::fromLatin1("\\s*;\\s*")));
+    QStringList allowed = elem_.attribute(QLatin1String("allowed")).split(QRegExp(QLatin1String("\\s*;\\s*")));
     if(isI18n) {
       for(QStringList::Iterator it = allowed.begin(); it != allowed.end(); ++it) {
         (*it) = i18n((*it).toUtf8());
@@ -380,9 +380,9 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
     field = new Data::Field(name, title, type);
   }
 
-  if(elem_.hasAttribute(QString::fromLatin1("category"))) {
+  if(elem_.hasAttribute(QLatin1String("category"))) {
     // at one point, the categories had keyboard accels
-    QString cat = elem_.attribute(QString::fromLatin1("category"));
+    QString cat = elem_.attribute(QLatin1String("category"));
     if(syntaxVersion_ < 9 && cat.indexOf('&') > -1) {
       cat.remove('&');
     }
@@ -392,8 +392,8 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
     field->setCategory(cat);
   }
 
-  if(elem_.hasAttribute(QString::fromLatin1("flags"))) {
-    int flags = elem_.attribute(QString::fromLatin1("flags")).toInt();
+  if(elem_.hasAttribute(QLatin1String("flags"))) {
+    int flags = elem_.attribute(QLatin1String("flags")).toInt();
     // I also changed the enum values for syntax 3, but the only custom field
     // would have been bibtex-id
     if(syntaxVersion_ < 3 && field->name() == QLatin1String("bibtex-id")) {
@@ -408,12 +408,12 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
     field->setFlags(flags);
   }
 
-  QString formatStr = elem_.attribute(QString::fromLatin1("format"), QString::number(Data::Field::FormatNone));
+  QString formatStr = elem_.attribute(QLatin1String("format"), QString::number(Data::Field::FormatNone));
   Data::Field::FormatFlag format = static_cast<Data::Field::FormatFlag>(formatStr.toInt());
   field->setFormatFlag(format);
 
-  if(elem_.hasAttribute(QString::fromLatin1("description"))) {
-    QString desc = elem_.attribute(QString::fromLatin1("description"));
+  if(elem_.hasAttribute(QLatin1String("description"))) {
+    QString desc = elem_.attribute(QLatin1String("description"));
     if(isI18n) {
       desc = i18n(desc.toUtf8());
     }
@@ -421,31 +421,31 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
   }
 
   if(syntaxVersion_ >= 5) {
-    QDomNodeList props = elem_.elementsByTagNameNS(m_namespace, QString::fromLatin1("prop"));
+    QDomNodeList props = elem_.elementsByTagNameNS(m_namespace, QLatin1String("prop"));
     for(int i = 0; i < props.count(); ++i) {
       QDomElement e = props.item(i).toElement();
-      field->setProperty(e.attribute(QString::fromLatin1("name")), e.text());
+      field->setProperty(e.attribute(QLatin1String("name")), e.text());
     }
     // all track fields in music collections prior to version 9 get converted to three columns
     if(syntaxVersion_ < 9) {
       if(m_coll->type() == Data::Collection::Album && field->name() == QLatin1String("track")) {
-        field->setProperty(QString::fromLatin1("columns"), QChar('3'));
-        field->setProperty(QString::fromLatin1("column1"), i18n("Title"));
-        field->setProperty(QString::fromLatin1("column2"), i18n("Artist"));
-        field->setProperty(QString::fromLatin1("column3"), i18n("Length"));
+        field->setProperty(QLatin1String("columns"), QChar('3'));
+        field->setProperty(QLatin1String("column1"), i18n("Title"));
+        field->setProperty(QLatin1String("column2"), i18n("Artist"));
+        field->setProperty(QLatin1String("column3"), i18n("Length"));
       } else if(m_coll->type() == Data::Collection::Video && field->name() == QLatin1String("cast")) {
-        field->setProperty(QString::fromLatin1("column1"), i18n("Actor/Actress"));
-        field->setProperty(QString::fromLatin1("column2"), i18n("Role"));
+        field->setProperty(QLatin1String("column1"), i18n("Actor/Actress"));
+        field->setProperty(QLatin1String("column2"), i18n("Role"));
       }
     }
-  } else if(elem_.hasAttribute(QString::fromLatin1("bibtex-field"))) {
-    field->setProperty(QString::fromLatin1("bibtex"), elem_.attribute(QString::fromLatin1("bibtex-field")));
+  } else if(elem_.hasAttribute(QLatin1String("bibtex-field"))) {
+    field->setProperty(QLatin1String("bibtex"), elem_.attribute(QLatin1String("bibtex-field")));
   }
 
   // Table2 is deprecated
   if(field->type() == Data::Field::Table2) {
     field->setType(Data::Field::Table);
-    field->setProperty(QString::fromLatin1("columns"), QChar('2'));
+    field->setProperty(QLatin1String("columns"), QChar('2'));
   }
   // for syntax 8, rating fields got their own type
   if(syntaxVersion_ < 8) {
@@ -456,7 +456,7 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
 }
 
 void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryElem_) {
-  const int id = entryElem_.attribute(QString::fromLatin1("id")).toInt();
+  const int id = entryElem_.attribute(QLatin1String("id")).toInt();
   Data::EntryPtr entry;
   if(id > 0) {
     entry = new Data::Entry(m_coll, id);
@@ -473,13 +473,13 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
       continue;
     }
 
-    bool isI18n = elem.attribute(QString::fromLatin1("i18n")) == QLatin1String("true");
+    bool isI18n = elem.attribute(QLatin1String("i18n")) == QLatin1String("true");
 
     // Entry::setField checks to see if an field of 'name' is allowed
     // in version 3 and prior, checkbox attributes had no text(), set it to "true" now
     if(syntaxVersion_ < 4 && elem.text().isEmpty()) {
       // "true" means checked
-      entry->setField(elem.localName(), QString::fromLatin1("true"));
+      entry->setField(elem.localName(), QLatin1String("true"));
       continue;
     }
 
@@ -501,17 +501,17 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
       if(f->type() == Data::Field::Date) {
         if(elem.hasChildNodes()) {
           QString value;
-          QDomNode yNode = elem.elementsByTagNameNS(m_namespace, QString::fromLatin1("year")).item(0);
+          QDomNode yNode = elem.elementsByTagNameNS(m_namespace, QLatin1String("year")).item(0);
           if(!yNode.isNull()) {
             value += yNode.toElement().text();
           }
           value += '-';
-          QDomNode mNode = elem.elementsByTagNameNS(m_namespace, QString::fromLatin1("month")).item(0);
+          QDomNode mNode = elem.elementsByTagNameNS(m_namespace, QLatin1String("month")).item(0);
           if(!mNode.isNull()) {
             value += mNode.toElement().text();
           }
           value += '-';
-          QDomNode dNode = elem.elementsByTagNameNS(m_namespace, QString::fromLatin1("day")).item(0);
+          QDomNode dNode = elem.elementsByTagNameNS(m_namespace, QLatin1String("day")).item(0);
           if(!dNode.isNull()) {
             value += dNode.toElement().text();
           }
@@ -565,7 +565,7 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
         }
       } else if(syntaxVersion_ < 2 && name == QLatin1String("keywords")) {
         // in version 2, "keywords" changed to "keyword"
-        name = QString::fromLatin1("keyword");
+        name = QLatin1String("keyword");
       }
       // special case: if the i18n attribute equals true, then translate the title, description, and category
       if(isI18n) {
@@ -574,7 +574,7 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
         // special case for isbn fields, go ahead and validate
         if(name == QLatin1String("isbn")) {
           const ISBNValidator val(0);
-          if(elem.attribute(QString::fromLatin1("validate")) != QLatin1String("no")) {
+          if(elem.attribute(QLatin1String("validate")) != QLatin1String("no")) {
             val.fixup(value);
           }
         }
@@ -597,24 +597,24 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
       for(QDomNode childNode = node.firstChild(); !childNode.isNull(); childNode = childNode.nextSibling()) {
         QString value;
         // don't worry about i18n here, Tables are never translated
-        QDomNodeList cols = childNode.toElement().elementsByTagNameNS(m_namespace, QString::fromLatin1("column"));
+        QDomNodeList cols = childNode.toElement().elementsByTagNameNS(m_namespace, QLatin1String("column"));
         if(cols.count() > 0) {
           for(int i = 0; i < cols.count(); ++i) {
             // special case for old tracks
             if(oldTracks && i == 1) {
               // if the second column holds the track length, bump it to next column
-              QRegExp rx(QString::fromLatin1("\\d+:\\d\\d"));
+              QRegExp rx(QLatin1String("\\d+:\\d\\d"));
               if(rx.exactMatch(cols.item(i).toElement().text())) {
-                value += entry->field(QString::fromLatin1("artist"));
-                value += QString::fromLatin1("::");
+                value += entry->field(QLatin1String("artist"));
+                value += QLatin1String("::");
               }
             }
             value += cols.item(i).toElement().text().trimmed();
             if(i < cols.count()-1) {
-              value += QString::fromLatin1("::");
+              value += QLatin1String("::");
             } else if(oldTracks && cols.count() == 1) {
-              value += QString::fromLatin1("::");
-              value += entry->field(QString::fromLatin1("artist"));
+              value += QLatin1String("::");
+              value += entry->field(QLatin1String("artist"));
             }
           }
           values += value;
@@ -628,15 +628,15 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
             value += s;
           }
           if(oldTracks) {
-            value += QString::fromLatin1("::");
-            value += entry->field(QString::fromLatin1("artist"));
+            value += QLatin1String("::");
+            value += entry->field(QLatin1String("artist"));
           }
           if(values.indexOf(value) == -1) {
             values += value;
           }
         }
       }
-      entry->setField(name, values.join(QString::fromLatin1("; ")));
+      entry->setField(name, values.join(QLatin1String("; ")));
     }
   } // end field value loop
 
@@ -644,11 +644,11 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
 }
 
 void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
-  QString format = elem_.attribute(QString::fromLatin1("format"));
-  const bool link = elem_.attribute(QString::fromLatin1("link")) == QLatin1String("true");
+  QString format = elem_.attribute(QLatin1String("format"));
+  const bool link = elem_.attribute(QLatin1String("link")) == QLatin1String("true");
   // idClean() already calls shareString()
-  QString id = link ? shareString(elem_.attribute(QString::fromLatin1("id")))
-                    : Data::Image::idClean(elem_.attribute(QString::fromLatin1("id")));
+  QString id = link ? shareString(elem_.attribute(QLatin1String("id")))
+                    : Data::Image::idClean(elem_.attribute(QLatin1String("id")));
 
   bool readInfo = true;
   if(loadImage_) {
@@ -665,8 +665,8 @@ void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
   }
   if(readInfo) {
     // a width or height of 0 is ok here
-    int width = elem_.attribute(QString::fromLatin1("width")).toInt();
-    int height = elem_.attribute(QString::fromLatin1("height")).toInt();
+    int width = elem_.attribute(QLatin1String("width")).toInt();
+    int height = elem_.attribute(QLatin1String("height")).toInt();
     Data::ImageInfo info(id, format.toLatin1(), width, height, link);
     ImageFactory::cacheImageInfo(info);
   }
@@ -674,29 +674,29 @@ void TellicoImporter::readImage(const QDomElement& elem_, bool loadImage_) {
 
 void TellicoImporter::readFilter(const QDomElement& elem_) {
   FilterPtr f(new Filter(Filter::MatchAny));
-  f->setName(elem_.attribute(QString::fromLatin1("name")));
+  f->setName(elem_.attribute(QLatin1String("name")));
 
-  QString match = elem_.attribute(QString::fromLatin1("match"));
+  QString match = elem_.attribute(QLatin1String("match"));
   if(match == QLatin1String("all")) {
     f->setMatch(Filter::MatchAll);
   }
 
-  QDomNodeList rules = elem_.elementsByTagNameNS(m_namespace, QString::fromLatin1("rule"));
+  QDomNodeList rules = elem_.elementsByTagNameNS(m_namespace, QLatin1String("rule"));
   for(int i = 0; i < rules.count(); ++i) {
     QDomElement e = rules.item(i).toElement();
     if(e.isNull()) {
       continue;
     }
 
-    QString field = e.attribute(QString::fromLatin1("field"));
+    QString field = e.attribute(QLatin1String("field"));
     // empty field means match any of them
-    QString pattern = e.attribute(QString::fromLatin1("pattern"));
+    QString pattern = e.attribute(QLatin1String("pattern"));
     // empty pattern is bad
     if(pattern.isEmpty()) {
       kWarning() << "TellicoImporter::readFilter() - empty rule!";
       continue;
     }
-    QString function = e.attribute(QString::fromLatin1("function")).toLower();
+    QString function = e.attribute(QLatin1String("function")).toLower();
     FilterRule::Function func;
     if(function == QLatin1String("contains")) {
       func = FilterRule::FuncContains;
@@ -723,36 +723,36 @@ void TellicoImporter::readFilter(const QDomElement& elem_) {
 }
 
 void TellicoImporter::readBorrower(const QDomElement& elem_) {
-  QString name = elem_.attribute(QString::fromLatin1("name"));
-  QString uid = elem_.attribute(QString::fromLatin1("uid"));
+  QString name = elem_.attribute(QLatin1String("name"));
+  QString uid = elem_.attribute(QLatin1String("uid"));
   Data::BorrowerPtr b(new Data::Borrower(name, uid));
 
-  QDomNodeList loans = elem_.elementsByTagNameNS(m_namespace, QString::fromLatin1("loan"));
+  QDomNodeList loans = elem_.elementsByTagNameNS(m_namespace, QLatin1String("loan"));
   for(int i = 0; i < loans.count(); ++i) {
     QDomElement e = loans.item(i).toElement();
     if(e.isNull()) {
       continue;
     }
-    long id = e.attribute(QString::fromLatin1("entryRef")).toLong();
+    long id = e.attribute(QLatin1String("entryRef")).toLong();
     Data::EntryPtr entry = m_coll->entryById(id);
     if(!entry) {
       myDebug() << "TellicoImporter::readBorrower() - no entry with id = " << id << endl;
       continue;
     }
-    QString uid = e.attribute(QString::fromLatin1("uid"));
+    QString uid = e.attribute(QLatin1String("uid"));
     QDate loanDate, dueDate;
-    QString s = e.attribute(QString::fromLatin1("loanDate"));
+    QString s = e.attribute(QLatin1String("loanDate"));
     if(!s.isEmpty()) {
       loanDate = QDate::fromString(s, Qt::ISODate);
     }
-    s = e.attribute(QString::fromLatin1("dueDate"));
+    s = e.attribute(QLatin1String("dueDate"));
     if(!s.isEmpty()) {
       dueDate = QDate::fromString(s, Qt::ISODate);
     }
     Data::LoanPtr loan(new Data::Loan(entry, loanDate, dueDate, e.text()));
     loan->setUID(uid);
     b->addLoan(loan);
-    s = e.attribute(QString::fromLatin1("calendar"));
+    s = e.attribute(QLatin1String("calendar"));
     loan->setInCalendar(s == QLatin1String("true"));
   }
   if(!b->isEmpty()) {
@@ -796,9 +796,9 @@ void TellicoImporter::loadZipData() {
   }
 
   // main file was changed from bookcase.xml to tellico.xml as of version 0.13
-  const KArchiveEntry* entry = dir->entry(QString::fromLatin1("tellico.xml"));
+  const KArchiveEntry* entry = dir->entry(QLatin1String("tellico.xml"));
   if(!entry) {
-    entry = dir->entry(QString::fromLatin1("bookcase.xml"));
+    entry = dir->entry(QLatin1String("bookcase.xml"));
   }
   if(!entry || !entry->isFile()) {
     QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
@@ -834,7 +834,7 @@ void TellicoImporter::loadZipData() {
     return;
   }
 
-  const KArchiveEntry* imgDirEntry = dir->entry(QString::fromLatin1("images"));
+  const KArchiveEntry* imgDirEntry = dir->entry(QLatin1String("images"));
   if(!imgDirEntry || !imgDirEntry->isDirectory()) {
     m_zip->close();
     delete m_zip;
@@ -925,7 +925,7 @@ bool TellicoImporter::loadAllImages(const KUrl& url_) {
     return false;
   }
 
-  const KArchiveEntry* imgDirEntry = dir->entry(QString::fromLatin1("images"));
+  const KArchiveEntry* imgDirEntry = dir->entry(QLatin1String("images"));
   if(!imgDirEntry || !imgDirEntry->isDirectory()) {
     zip.close();
     return false;
@@ -945,38 +945,38 @@ bool TellicoImporter::loadAllImages(const KUrl& url_) {
 void TellicoImporter::addDefaultFilters() {
   switch(m_coll->type()) {
     case Data::Collection::Book:
-      if(m_coll->hasField(QString::fromLatin1("read"))) {
+      if(m_coll->hasField(QLatin1String("read"))) {
         FilterPtr f(new Filter(Filter::MatchAny));
         f->setName(i18n("Unread Books"));
-        f->append(new FilterRule(QString::fromLatin1("read"), QString::fromLatin1("true"), FilterRule::FuncNotContains));
+        f->append(new FilterRule(QLatin1String("read"), QLatin1String("true"), FilterRule::FuncNotContains));
         m_coll->addFilter(f);
         m_modified = true;
       }
       break;
 
     case Data::Collection::Video:
-      if(m_coll->hasField(QString::fromLatin1("year"))) {
+      if(m_coll->hasField(QLatin1String("year"))) {
         FilterPtr f(new Filter(Filter::MatchAny));
         f->setName(i18n("Old Movies"));
         // old movies from before 1960
-        f->append(new FilterRule(QString::fromLatin1("year"), QString::fromLatin1("19[012345]\\d"), FilterRule::FuncRegExp));
+        f->append(new FilterRule(QLatin1String("year"), QLatin1String("19[012345]\\d"), FilterRule::FuncRegExp));
         m_coll->addFilter(f);
         m_modified = true;
       }
-      if(m_coll->hasField(QString::fromLatin1("widescreen"))) {
+      if(m_coll->hasField(QLatin1String("widescreen"))) {
         FilterPtr f(new Filter(Filter::MatchAny));
         f->setName(i18n("Widescreen"));
-        f->append(new FilterRule(QString::fromLatin1("widescreen"), QString::fromLatin1("true"), FilterRule::FuncContains));
+        f->append(new FilterRule(QLatin1String("widescreen"), QLatin1String("true"), FilterRule::FuncContains));
         m_coll->addFilter(f);
         m_modified = true;
       }
       break;
 
     case Data::Collection::Album:
-      if(m_coll->hasField(QString::fromLatin1("year"))) {
+      if(m_coll->hasField(QLatin1String("year"))) {
         FilterPtr f(new Filter(Filter::MatchAny));
         f->setName(i18n("80's Music"));
-        f->append(new FilterRule(QString::fromLatin1("year"), QString::fromLatin1("198\\d"),FilterRule::FuncRegExp));
+        f->append(new FilterRule(QLatin1String("year"), QLatin1String("198\\d"),FilterRule::FuncRegExp));
         m_coll->addFilter(f);
         m_modified = true;
       }
@@ -985,22 +985,22 @@ void TellicoImporter::addDefaultFilters() {
     default:
       break;
   }
-  if(m_coll->hasField(QString::fromLatin1("rating"))) {
+  if(m_coll->hasField(QLatin1String("rating"))) {
     FilterPtr filter(new Filter(Filter::MatchAny));
     filter->setName(i18n("Favorites"));
     // check all the numbers, and use top 20% or so
-    Data::FieldPtr field = m_coll->fieldByName(QString::fromLatin1("rating"));
+    Data::FieldPtr field = m_coll->fieldByName(QLatin1String("rating"));
     bool ok;
-    uint min = Tellico::toUInt(field->property(QString::fromLatin1("minimum")), &ok);
+    uint min = Tellico::toUInt(field->property(QLatin1String("minimum")), &ok);
     if(!ok) {
       min = 1;
     }
-    uint max = Tellico::toUInt(field->property(QString::fromLatin1("maximum")), &ok);
+    uint max = Tellico::toUInt(field->property(QLatin1String("maximum")), &ok);
     if(!ok) {
       min = 5;
     }
     for(uint i = qMax(min, static_cast<uint>(0.8*(max-min+1))); i <= max; ++i) {
-      filter->append(new FilterRule(QString::fromLatin1("rating"), QString::number(i), FilterRule::FuncContains));
+      filter->append(new FilterRule(QLatin1String("rating"), QString::number(i), FilterRule::FuncContains));
     }
     if(!filter->isEmpty()) {
       m_coll->addFilter(filter);

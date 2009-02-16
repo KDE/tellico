@@ -43,7 +43,7 @@ namespace {
 
 using Tellico::GUI::FieldWidget;
 
-const QRegExp FieldWidget::s_semiColon = QRegExp(QString::fromLatin1("\\s*;\\s*"));
+const QRegExp FieldWidget::s_semiColon = QRegExp(QLatin1String("\\s*;\\s*"));
 
 FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent_) {
   switch (field_->type()) {

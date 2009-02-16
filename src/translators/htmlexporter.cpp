@@ -59,7 +59,7 @@ HTMLExporter::HTMLExporter() : Tellico::Export::Exporter(),
     m_imageWidth(0),
     m_imageHeight(0),
     m_widget(0),
-    m_xsltFile(QString::fromLatin1("tellico2html.xsl")) {
+    m_xsltFile(QLatin1String("tellico2html.xsl")) {
 }
 
 HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
@@ -73,7 +73,7 @@ HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Expo
     m_imageWidth(0),
     m_imageHeight(0),
     m_widget(0),
-    m_xsltFile(QString::fromLatin1("tellico2html.xsl")) {
+    m_xsltFile(QLatin1String("tellico2html.xsl")) {
 }
 
 HTMLExporter::~HTMLExporter() {
@@ -204,7 +204,7 @@ bool HTMLExporter::loadXSLTFile() {
   }
 
   if(!m_collectionURL.isEmpty()) {
-    QString s = QString::fromLatin1("../") + m_collectionURL.fileName();
+    QString s = QLatin1String("../") + m_collectionURL.fileName();
     m_handler->addStringParam("collection-file", s.toUtf8());
   }
 
@@ -212,7 +212,7 @@ bool HTMLExporter::loadXSLTFile() {
   // if parseDOM, that means we want the locations to be the actual location
   // otherwise, we assume it'll be relative
   if(m_parseDOM && m_dataDir.isEmpty()) {
-    m_dataDir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png"));
+    m_dataDir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png"));
   } else if(!m_parseDOM) {
     m_dataDir.truncate(0);
   }
@@ -253,7 +253,7 @@ QString HTMLExporter::text() {
   exporter.setOptions(options() | Export::ExportUTF8 | Export::ExportImages);
   QDomDocument output = exporter.exportXML();
 #if 0
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t << output.toString();
@@ -263,7 +263,7 @@ QString HTMLExporter::text() {
 
   QString text = m_handler->applyStylesheet(output.toString());
 #if 0
-  QFile f2(QString::fromLatin1("/tmp/test.html"));
+  QFile f2(QLatin1String("/tmp/test.html"));
   if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
     t << text;
@@ -329,20 +329,20 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
         continue;
       }
       if(f->flags() & Data::Field::AllowMultiple) {
-        groupFields += QString::fromLatin1("tc:") + *it + QString::fromLatin1("s/tc:") + *it;
+        groupFields += QLatin1String("tc:") + *it + QLatin1String("s/tc:") + *it;
       } else {
-        groupFields += QString::fromLatin1("tc:") + *it;
+        groupFields += QLatin1String("tc:") + *it;
       }
       int ncols = 0;
       if(f->type() == Data::Field::Table) {
         bool ok;
-        ncols = Tellico::toUInt(f->property(QString::fromLatin1("columns")), &ok);
+        ncols = Tellico::toUInt(f->property(QLatin1String("columns")), &ok);
         if(!ok) {
           ncols = 1;
         }
       }
       if(ncols > 1) {
-        groupFields += QString::fromLatin1("/tc:column[1]");
+        groupFields += QLatin1String("/tc:column[1]");
       }
       if(*it != m_groupBy.last()) {
         groupFields += '|';
@@ -499,8 +499,8 @@ void HTMLExporter::readOptions(KSharedConfigPtr config_) {
 
   // read current entry export template
   m_entryXSLTFile = Config::templateName(collection()->type());
-  m_entryXSLTFile = KStandardDirs::locate("appdata", QString::fromLatin1("entry-templates/")
-                                          + m_entryXSLTFile + QString::fromLatin1(".xsl"));
+  m_entryXSLTFile = KStandardDirs::locate("appdata", QLatin1String("entry-templates/")
+                                          + m_entryXSLTFile + QLatin1String(".xsl"));
 }
 
 void HTMLExporter::saveOptions(KSharedConfigPtr config_) {
@@ -529,16 +529,16 @@ KUrl HTMLExporter::fileDir() const {
   }
   KUrl fileDir = url();
   // cd to directory of target URL
-  fileDir.cd(QString::fromLatin1(".."));
+  fileDir.cd(QLatin1String(".."));
   fileDir.addPath(fileDirName());
   return fileDir;
 }
 
 QString HTMLExporter::fileDirName() const {
   if(!m_collectionURL.isEmpty()) {
-    return QString::fromLatin1("/");
+    return QLatin1String("/");
   }
-  return url().fileName().section('.', 0, 0) + QString::fromLatin1("_files/");
+  return url().fileName().section('.', 0, 0) + QLatin1String("_files/");
 }
 
 // how ugly is this?
@@ -577,10 +577,10 @@ QString HTMLExporter::handleLink(const QString& link_) {
 
   // if we're exporting entry files, we want pics/ to
   // go in pics/
-  const bool isPic = link_.startsWith(m_dataDir + QString::fromLatin1("pics/"));
+  const bool isPic = link_.startsWith(m_dataDir + QLatin1String("pics/"));
   QString midDir;
   if(m_exportEntryFiles && isPic) {
-    midDir = QString::fromLatin1("pics/");
+    midDir = QLatin1String("pics/");
   }
   // pictures are special since they might not exist when the HTML is exported, since they might get copied later
   // on the other hand, don't change the file location if it doesn't exist
@@ -600,7 +600,7 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
   QString str = str_;
   int start = 0;
   int end = 0;
-  const QString url = QString::fromLatin1("url(");
+  const QString url = QLatin1String("url(");
   for(int pos = str.indexOf(url); pos >= 0; pos = str.indexOf(url, pos+1)) {
     pos += 4; // url(
     if(str[pos] ==  '"' || str[pos] == '\'') {
@@ -687,7 +687,7 @@ bool HTMLExporter::writeEntryFiles() {
   // I can't reliable encode a string as a URI, so I'm punting, and I'll just replace everything but
   // a-zA-Z0-9 with an underscore. This MUST match the filename template in tellico2html.xsl
   // the id is used so uniqueness is guaranteed
-  const QRegExp badChars(QString::fromLatin1("[^-a-zA-Z0-9]"));
+  const QRegExp badChars(QLatin1String("[^-a-zA-Z0-9]"));
   bool formatted = options() & Export::ExportFormatted;
 
   KUrl outputFile = fileDir();
@@ -702,8 +702,8 @@ bool HTMLExporter::writeEntryFiles() {
   exporter.setCollectionURL(url());
   bool parseDOM = true;
 
-  const QString title = QString::fromLatin1("title");
-  const QString html = QString::fromLatin1(".html");
+  const QString title = QLatin1String("title");
+  const QString html = QLatin1String(".html");
   bool multipleTitles = collection()->fieldByName(title)->flags() & Data::Field::AllowMultiple;
   Data::EntryList entries = this->entries(); // not const since the pointer has to be copied
   foreach(Data::EntryPtr entryIt, entries) {
@@ -742,14 +742,14 @@ bool HTMLExporter::writeEntryFiles() {
   // the images in "pics/" are special data images, copy them always
   // since the entry files may refer to them, but we don't know that
   QStringList dataImages;
-  dataImages << QString::fromLatin1("checkmark.png");
+  dataImages << QLatin1String("checkmark.png");
   for(uint i = 1; i <= 10; ++i) {
     dataImages << QString::fromLatin1("stars%1.png").arg(i);
   }
   KUrl dataDir;
-  dataDir.setPath(KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png")) + "pics/");
+  dataDir.setPath(KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png")) + "pics/");
   KUrl target = fileDir();
-  target.addPath(QString::fromLatin1("pics/"));
+  target.addPath(QLatin1String("pics/"));
   KIO::NetAccess::mkdir(target, m_widget);
   foreach(const QString& dataImage, dataImages) {
     dataDir.setFileName(dataImage);

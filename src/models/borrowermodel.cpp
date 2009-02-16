@@ -107,7 +107,7 @@ QVariant BorrowerModel::data(const QModelIndex& index_, int role_) const {
       return borrower(index_)->name();
     case Qt::DecorationRole:
       return parent.isValid() ? KIcon(entry(index_)->collection()->typeName())
-                              : KIcon(QString::fromLatin1("kaddressbook"));
+                              : KIcon(QLatin1String("kaddressbook"));
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:

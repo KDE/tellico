@@ -127,9 +127,9 @@ QDomDocument FileHandler::readXMLFile(const KUrl& url_, bool processNamespace_, 
   if(!doc.setContent(f.file(), processNamespace_, &errorMsg, &errorLine, &errorColumn)) {
     if(!quiet_) {
       QString details = i18n("There is an XML parsing error in line %1, column %2.", errorLine, errorColumn);
-      details += QString::fromLatin1("\n");
+      details += QLatin1String("\n");
       details += i18n("The error message from Qt is:");
-      details += QString::fromLatin1("\n\t") + errorMsg;
+      details += QLatin1String("\n\t") + errorMsg;
       GUI::CursorSaver cs(Qt::ArrowCursor);
       KMessageBox::detailedSorry(Kernel::self()->widget(), i18n(errorLoad, url_.fileName()), details);
     }
@@ -160,7 +160,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_, 
   tempFile.setAutoRemove(true);
 
   KIO::Job* job = KIO::file_copy(url_, tempURL, -1, KIO::Overwrite);
-  job->addMetaData(QString::fromLatin1("referrer"), referrer_.url());
+  job->addMetaData(QLatin1String("referrer"), referrer_.url());
 
   if(!KIO::NetAccess::synchronousRun(job, Kernel::self()->widget())) {
     if(!quiet_) {

@@ -71,12 +71,12 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   connect(this, SIGNAL(user3Clicked()), SLOT(slotGoPrevEntry()));
 
   KGuiItem prev;
-  prev.setIconName(QString::fromLatin1(QApplication::isLeftToRight() ? "go-previous" : "go-next"));
+  prev.setIconName(QLatin1String(QApplication::isLeftToRight() ? "go-previous" : "go-next"));
   prev.setToolTip(i18n("Go to the previous entry in the collection"));
   prev.setWhatsThis(prev.toolTip());
 
   KGuiItem next;
-  next.setIconName(QString::fromLatin1(QApplication::isLeftToRight() ? "go-next" : "go-previous"));
+  next.setIconName(QLatin1String(QApplication::isLeftToRight() ? "go-next" : "go-previous"));
   next.setToolTip(i18n("Go to the next entry in the collection"));
   next.setWhatsThis(next.toolTip());
 
@@ -84,16 +84,16 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   setButtonGuiItem(m_prevBtn, prev);
 
   // these are just fror the key shortcuts
-  KAction* newAct = new KAction(QString::fromLatin1("Go Prev"), this);
+  KAction* newAct = new KAction(QLatin1String("Go Prev"), this);
   newAct->setShortcut(Qt::Key_PageUp);
   connect(newAct, SIGNAL(triggered()), Controller::self(), SLOT(slotGoPrevEntry()));
-  newAct = new KAction(QString::fromLatin1("Go Next"), this);
+  newAct = new KAction(QLatin1String("Go Next"), this);
   newAct->setShortcut(Qt::Key_PageDown);
   connect(newAct, SIGNAL(triggered()), Controller::self(), SLOT(slotGoNextEntry()));
 
-  setHelp(QString::fromLatin1("entry-editor"));
+  setHelp(QLatin1String("entry-editor"));
 
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Edit Dialog Options"));
+  KConfigGroup config(KGlobal::config(), QLatin1String("Edit Dialog Options"));
   restoreDialogSize(config);
 }
 
@@ -105,7 +105,7 @@ void EntryEditDialog::slotClose() {
 //    blockSignals(true);
 //    slotHandleNew();
 //    blockSignals(false);
-    KConfigGroup config(KGlobal::config(), QString::fromLatin1("Edit Dialog Options"));
+    KConfigGroup config(KGlobal::config(), QLatin1String("Edit Dialog Options"));
     saveDialogSize(config);
   }
 }
@@ -314,7 +314,7 @@ void EntryEditDialog::slotHandleSave() {
       names += entry->title();
     }
     QString str(i18n("Do you really want to modify these entries?"));
-    QString dontAsk = QString::fromLatin1("SaveMultipleBooks"); // don't change 'books', invisible anyway
+    QString dontAsk = QLatin1String("SaveMultipleBooks"); // don't change 'books', invisible anyway
     int ret = KMessageBox::questionYesNoList(this, str, names, i18n("Modify Multiple Entries"),
                                              KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk);
     if(ret != KMessageBox::Yes) {
@@ -346,7 +346,7 @@ void EntryEditDialog::slotHandleSave() {
         }
         entry->setField(fIt, temp);
         if(temp.isEmpty()) {
-          QString prop = fIt->property(QString::fromLatin1("required")).toLower();
+          QString prop = fIt->property(QLatin1String("required")).toLower();
           if(prop == QLatin1String("1") || prop == QLatin1String("true")) {
             fieldsRequiringValues.append(fIt);
           }
@@ -362,7 +362,7 @@ void EntryEditDialog::slotHandleSave() {
     foreach(Data::FieldPtr it, fieldsRequiringValues) {
       titles << it->title();
     }
-    QString dontAsk = QString::fromLatin1("SaveWithoutRequired");
+    QString dontAsk = QLatin1String("SaveWithoutRequired");
     int ret = KMessageBox::questionYesNoList(this, str, titles, i18n("Modify Entries"),
                                              KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk);
     if(ret != KMessageBox::Yes) {
@@ -380,7 +380,7 @@ void EntryEditDialog::slotHandleSave() {
       Kernel::self()->modifyEntries(oldEntries, m_currEntries);
     }
     if(!m_currEntries.isEmpty() && !m_currEntries[0]->title().isEmpty()) {
-      setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + m_currEntries[0]->title());
+      setCaption(i18n("Edit Entry") + QLatin1String(" - ") + m_currEntries[0]->title());
     }
   }
 
@@ -507,7 +507,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
   m_currEntries.append(entry_);
 
   if(!entry_->title().isEmpty()) {
-    setCaption(i18n("Edit Entry") + QString::fromLatin1(" - ") + entry_->title());
+    setCaption(i18n("Edit Entry") + QLatin1String(" - ") + entry_->title());
   }
 
   if(m_currColl != entry_->collection()) {

@@ -54,7 +54,7 @@
   SET(name, BoardGame, value)
 
 namespace {
-  static const QRegExp commaSplit = QRegExp(QString::fromLatin1("\\s*,\\s*"));
+  static const QRegExp commaSplit = QRegExp(QLatin1String("\\s*,\\s*"));
 }
 
 using Tellico::Config;

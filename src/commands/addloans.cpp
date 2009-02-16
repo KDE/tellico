@@ -47,7 +47,7 @@ void AddLoans::redo() {
   bool wasEmpty = m_borrower->isEmpty();
 
   // if there's no loaned field, we'll add one
-  bool loanExisted = m_loans[0]->entry()->collection()->hasField(QString::fromLatin1("loaned"));
+  bool loanExisted = m_loans[0]->entry()->collection()->hasField(QLatin1String("loaned"));
   m_addedLoanField = false; // assume we didn't add the field yet
 
   // add the loans to the borrower
@@ -60,7 +60,7 @@ void AddLoans::redo() {
   }
   if(!loanExisted) {
     Data::CollPtr c = m_loans[0]->entry()->collection();
-    Data::FieldPtr f = c->fieldByName(QString::fromLatin1("loaned"));
+    Data::FieldPtr f = c->fieldByName(QLatin1String("loaned"));
     if(f) {
       // notify everything that a new field was added
       Controller::self()->addedField(c, f);
@@ -95,7 +95,7 @@ void AddLoans::undo() {
   }
   if(m_addedLoanField) {
     Data::CollPtr c = m_loans[0]->entry()->collection();
-    Data::FieldPtr f = c->fieldByName(QString::fromLatin1("loaned"));
+    Data::FieldPtr f = c->fieldByName(QLatin1String("loaned"));
     if(f) {
       c->removeField(f);
       Controller::self()->removedField(c, f);

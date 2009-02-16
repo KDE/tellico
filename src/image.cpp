@@ -92,7 +92,7 @@ QByteArray Image::byteArray(const QImage& img_, const QByteArray& outputFormat_)
 }
 
 QString Image::idClean(const QString& id_) {
-  static const QRegExp rx('[' + QRegExp::escape(QString::fromLatin1("/@<>#\"&%?={}|^~[]'`\\:+")) + ']');
+  static const QRegExp rx('[' + QRegExp::escape(QLatin1String("/@<>#\"&%?={}|^~[]'`\\:+")) + ']');
   QString clean = id_;
   return shareString(clean.remove(rx));
 }
@@ -105,7 +105,7 @@ void Image::calculateID() {
   // the id will eventually be used as a filename
   if(!isNull()) {
     KMD5 md5(byteArray());
-    m_id = QString::fromLatin1(md5.hexDigest()) + QString::fromLatin1(".") + QString::fromLatin1(m_format).toLower();
+    m_id = QLatin1String(md5.hexDigest()) + QLatin1String(".") + QByteArray(m_format).toLower();
     m_id = idClean(m_id);
   }
 }

@@ -45,7 +45,7 @@
 namespace {
   static const char* IMDB_SERVER = "akas.imdb.com";
   static const uint IMDB_MAX_RESULTS = 20;
-  static const QString sep = QString::fromLatin1("; ");
+  static const QString sep = QLatin1String("; ");
 }
 
 using Tellico::Fetch::IMDBFetcher;
@@ -58,24 +58,24 @@ QRegExp* IMDBFetcher::s_titleRx = 0;
 
 // static
 void IMDBFetcher::initRegExps() {
-  s_tagRx = new QRegExp(QString::fromLatin1("<.*>"));
+  s_tagRx = new QRegExp(QLatin1String("<.*>"));
   s_tagRx->setMinimal(true);
 
-  s_anchorRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
+  s_anchorRx = new QRegExp(QLatin1String("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
   s_anchorRx->setMinimal(true);
 
-  s_anchorTitleRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/title/[^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
+  s_anchorTitleRx = new QRegExp(QLatin1String("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/title/[^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
   s_anchorTitleRx->setMinimal(true);
 
-  s_anchorNameRx = new QRegExp(QString::fromLatin1("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/name/[^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
+  s_anchorNameRx = new QRegExp(QLatin1String("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/name/[^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
   s_anchorNameRx->setMinimal(true);
 
-  s_titleRx = new QRegExp(QString::fromLatin1("<title>(.*)</title>"), Qt::CaseInsensitive);
+  s_titleRx = new QRegExp(QLatin1String("<title>(.*)</title>"), Qt::CaseInsensitive);
   s_titleRx->setMinimal(true);
 }
 
 IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
-    m_job(0), m_started(false), m_fetchImages(true), m_host(QString::fromLatin1(IMDB_SERVER)),
+    m_job(0), m_started(false), m_fetchImages(true), m_host(QLatin1String(IMDB_SERVER)),
     m_limit(IMDB_MAX_RESULTS), m_countOffset(0) {
   if(!s_tagRx) {
     initRegExps();
@@ -130,25 +130,25 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
 #ifdef IMDB_TEST
   if(m_key == Title) {
-    m_url = KUrl(QString::fromLatin1("/home/robby/imdb-title.html"));
+    m_url = KUrl(QLatin1String("/home/robby/imdb-title.html"));
     m_redirected = false;
   } else {
-    m_url = KUrl(QString::fromLatin1("/home/robby/imdb-name.html"));
+    m_url = KUrl(QLatin1String("/home/robby/imdb-name.html"));
     m_redirected = true;
   }
 #else
   m_url = KUrl();
-  m_url.setProtocol(QString::fromLatin1("http"));
-  m_url.setHost(m_host.isEmpty() ? QString::fromLatin1(IMDB_SERVER) : m_host);
-  m_url.setPath(QString::fromLatin1("/find"));
+  m_url.setProtocol(QLatin1String("http"));
+  m_url.setHost(m_host.isEmpty() ? QLatin1String(IMDB_SERVER) : m_host);
+  m_url.setPath(QLatin1String("/find"));
 
   switch(key_) {
     case Title:
-      m_url.addQueryItem(QString::fromLatin1("s"), QString::fromLatin1("tt"));
+      m_url.addQueryItem(QLatin1String("s"), QLatin1String("tt"));
       break;
 
     case Person:
-      m_url.addQueryItem(QString::fromLatin1("s"), QString::fromLatin1("nm"));
+      m_url.addQueryItem(QLatin1String("s"), QLatin1String("nm"));
       break;
 
     default:
@@ -159,7 +159,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
   // as far as I can tell, the url encoding should always be iso-8859-1
   // not utf-8. KDE4 not supporter?
-  m_url.addQueryItem(QString::fromLatin1("q"), value_);
+  m_url.addQueryItem(QLatin1String("q"), value_);
 
 //  myDebug() << "IMDBFetcher::search() url = " << m_url << endl;
 #endif
@@ -277,9 +277,9 @@ void IMDBFetcher::parseMultipleTitleResults() {
 
   // IMDb can return three title lists, popular, exact, and partial
   // the popular titles are in the first table, after the "Popular Results" text
-  int pos_popular = output.indexOf(QString::fromLatin1("Popular Titles"),  0,                    Qt::CaseInsensitive);
-  int pos_exact   = output.indexOf(QString::fromLatin1("Exact Matches"),   qMax(pos_popular, 0), Qt::CaseInsensitive);
-  int pos_partial = output.indexOf(QString::fromLatin1("Partial Matches"), qMax(pos_exact, 0),   Qt::CaseInsensitive);
+  int pos_popular = output.indexOf(QLatin1String("Popular Titles"),  0,                    Qt::CaseInsensitive);
+  int pos_exact   = output.indexOf(QLatin1String("Exact Matches"),   qMax(pos_popular, 0), Qt::CaseInsensitive);
+  int pos_partial = output.indexOf(QLatin1String("Partial Matches"), qMax(pos_exact, 0),   Qt::CaseInsensitive);
   int end_popular = pos_exact; // keep track of where to end
   if(end_popular == -1) {
     end_popular = pos_partial == -1 ? output.length() : pos_partial;
@@ -331,7 +331,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
   }
 //  myDebug() << "IMDBFetcher::parseTitleBlock() - " << m_currentTitleBlock << endl;
 
-  QRegExp akaRx(QString::fromLatin1("aka (.*)(</li>|<br)"), Qt::CaseInsensitive);
+  QRegExp akaRx(QLatin1String("aka (.*)(</li>|<br)"), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
 
   m_hasMoreResults = false;
@@ -359,7 +359,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       QString text = str_.mid(start, end-start);
       pPos = text.indexOf('(');
       if(pPos > -1) {
-        int pNewLine = text.indexOf(QString::fromLatin1("<br"));
+        int pNewLine = text.indexOf(QLatin1String("<br"));
         if(pNewLine == -1 || pPos < pNewLine) {
           int pPos2 = text.indexOf(')', pPos);
           desc = text.mid(pPos+1, pPos2-pPos-1);
@@ -377,7 +377,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       // limit to 50 chars
       desc += QChar(' ') + akaRx.cap(1).trimmed().remove(*s_tagRx);
       if(desc.length() > 50) {
-        desc = desc.left(50) + QString::fromLatin1("...");
+        desc = desc.left(50) + QLatin1String("...");
       }
     }
 
@@ -420,7 +420,7 @@ void IMDBFetcher::parseSingleNameResult() {
     return;
   }
 
-  QRegExp tvRegExp(QString::fromLatin1("TV\\sEpisode"), Qt::CaseInsensitive);
+  QRegExp tvRegExp(QLatin1String("TV\\sEpisode"), Qt::CaseInsensitive);
 
   int len = 0;
   int count = 0;
@@ -436,7 +436,7 @@ void IMDBFetcher::parseSingleNameResult() {
       desc = cap2.mid(pPos);
     } else {
       // look until the next <a
-      int aPos = output.indexOf(QString::fromLatin1("<a"), pos+len, Qt::CaseInsensitive);
+      int aPos = output.indexOf(QLatin1String("<a"), pos+len, Qt::CaseInsensitive);
       if(aPos == -1) {
         aPos = output.length();
       }
@@ -446,7 +446,7 @@ void IMDBFetcher::parseSingleNameResult() {
       }
       pPos = tmp.indexOf('(');
       if(pPos > -1) {
-        int pNewLine = tmp.indexOf(QString::fromLatin1("<br"));
+        int pNewLine = tmp.indexOf(QLatin1String("<br"));
         if(pNewLine == -1 || pPos < pNewLine) {
           int pEnd = tmp.indexOf(')', pPos+1);
           desc = tmp.mid(pPos+1, pEnd-pPos-1).remove(*s_tagRx);
@@ -496,17 +496,17 @@ void IMDBFetcher::parseMultipleNameResults() {
 
   // the exact results are in the first table after the "exact results" text
   QString output = Tellico::decodeHTML(QString(m_data));
-  int pos = output.indexOf(QString::fromLatin1("Popular Results"), 0, Qt::CaseInsensitive);
+  int pos = output.indexOf(QLatin1String("Popular Results"), 0, Qt::CaseInsensitive);
   if(pos == -1) {
-    pos = output.indexOf(QString::fromLatin1("Exact Matches"), 0, Qt::CaseInsensitive);
+    pos = output.indexOf(QLatin1String("Exact Matches"), 0, Qt::CaseInsensitive);
   }
 
   // find beginning of partial matches
-  int end = output.indexOf(QString::fromLatin1("Other Results"), qMax(pos, 0), Qt::CaseInsensitive);
+  int end = output.indexOf(QLatin1String("Other Results"), qMax(pos, 0), Qt::CaseInsensitive);
   if(end == -1) {
-    end = output.indexOf(QString::fromLatin1("Partial Matches"), qMax(pos, 0), Qt::CaseInsensitive);
+    end = output.indexOf(QLatin1String("Partial Matches"), qMax(pos, 0), Qt::CaseInsensitive);
     if(end == -1) {
-      end = output.indexOf(QString::fromLatin1("Approx Matches"), qMax(pos, 0), Qt::CaseInsensitive);
+      end = output.indexOf(QLatin1String("Approx Matches"), qMax(pos, 0), Qt::CaseInsensitive);
       if(end == -1) {
         end = output.length();
       }
@@ -648,7 +648,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
   } else {
     // now it's sychronous
 #ifdef IMDB_TEST
-    KUrl u(QString::fromLatin1("/home/robby/imdb-title-result.html"));
+    KUrl u(QLatin1String("/home/robby/imdb-title-result.html"));
     results = Tellico::decodeHTML(FileHandler::readTextFile(u));
 #else
     // be quiet about failure
@@ -682,8 +682,8 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   doAlsoKnownAs(str_, entry);
   doPlot(str_, entry, m_url);
   doLists(str_, entry);
-  doPerson(str_, entry, QString::fromLatin1("Director"), QString::fromLatin1("director"));
-  doPerson(str_, entry, QString::fromLatin1("Writer"), QString::fromLatin1("writer"));
+  doPerson(str_, entry, QLatin1String("Director"), QLatin1String("director"));
+  doPerson(str_, entry, QLatin1String("Writer"), QLatin1String("writer"));
   doRating(str_, entry);
   doCast(str_, entry, m_url);
   if(m_fetchImages) {
@@ -691,7 +691,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
     doCover(str_, entry, m_url);
   }
 
-  const QString imdb = QString::fromLatin1("imdb");
+  const QString imdb = QLatin1String("imdb");
   if(!coll->hasField(imdb) && m_fields.indexOf(imdb) > -1) {
     Data::FieldPtr field(new Data::Field(imdb, i18n("IMDB Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
@@ -714,7 +714,7 @@ void IMDBFetcher::doTitle(const QString& str_, Tellico::Data::EntryPtr entry_) {
     if(title.startsWith(QChar('"')) && title.endsWith(QChar('"'))) {
       title = title.mid(1, title.length()-2);
     }
-    entry_->setField(QString::fromLatin1("title"), title);
+    entry_->setField(QLatin1String("title"), title);
     // remove parenthesis
     int pPos2 = pPos+1;
     while(pPos2 < cap1.length() && cap1[pPos2].isDigit()) {
@@ -722,62 +722,62 @@ void IMDBFetcher::doTitle(const QString& str_, Tellico::Data::EntryPtr entry_) {
     }
     QString year = cap1.mid(pPos+1, pPos2-pPos-1);
     if(!year.isEmpty()) {
-      entry_->setField(QString::fromLatin1("year"), year);
+      entry_->setField(QLatin1String("year"), year);
     }
   }
 }
 
 void IMDBFetcher::doRunningTime(const QString& str_, Tellico::Data::EntryPtr entry_) {
   // running time
-  QRegExp runtimeRx(QString::fromLatin1("runtime:.*(\\d+)\\s+min"), Qt::CaseInsensitive);
+  QRegExp runtimeRx(QLatin1String("runtime:.*(\\d+)\\s+min"), Qt::CaseInsensitive);
   runtimeRx.setMinimal(true);
 
   if(runtimeRx.indexIn(str_) > -1) {
 //    myDebug() << "running-time = " << runtimeRx.cap(1) << endl;
-    entry_->setField(QString::fromLatin1("running-time"), runtimeRx.cap(1));
+    entry_->setField(QLatin1String("running-time"), runtimeRx.cap(1));
   }
 }
 
 void IMDBFetcher::doAspectRatio(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  QRegExp rx(QString::fromLatin1("aspect ratio:.*([\\d\\.]+\\s*:\\s*[\\d\\.]+)"), Qt::CaseInsensitive);
+  QRegExp rx(QLatin1String("aspect ratio:.*([\\d\\.]+\\s*:\\s*[\\d\\.]+)"), Qt::CaseInsensitive);
   rx.setMinimal(true);
 
   if(rx.indexIn(str_) > -1) {
 //    myDebug() << "aspect ratio = " << rx.cap(1) << endl;
-    entry_->setField(QString::fromLatin1("aspect-ratio"), rx.cap(1).trimmed());
+    entry_->setField(QLatin1String("aspect-ratio"), rx.cap(1).trimmed());
   }
 }
 
 void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  if(m_fields.indexOf(QString::fromLatin1("alttitle")) == -1) {
+  if(m_fields.indexOf(QLatin1String("alttitle")) == -1) {
     return;
   }
 
   // match until next b tag
-//  QRegExp akaRx(QString::fromLatin1("also known as(.*)<b(?:\\s.*)?>"));
-  QRegExp akaRx(QString::fromLatin1("also known as(.*)<(b[>\\s/]|div)"), Qt::CaseInsensitive);
+//  QRegExp akaRx(QLatin1String("also known as(.*)<b(?:\\s.*)?>"));
+  QRegExp akaRx(QLatin1String("also known as(.*)<(b[>\\s/]|div)"), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
 
   if(akaRx.indexIn(str_) > -1 && !akaRx.cap(1).isEmpty()) {
-    Data::FieldPtr f = entry_->collection()->fieldByName(QString::fromLatin1("alttitle"));
+    Data::FieldPtr f = entry_->collection()->fieldByName(QLatin1String("alttitle"));
     if(!f) {
-      f = new Data::Field(QString::fromLatin1("alttitle"), i18n("Alternative Titles"), Data::Field::Table);
+      f = new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table);
       f->setFormatFlag(Data::Field::FormatTitle);
       entry_->collection()->addField(f);
     }
 
     // split by <br>, remembering it could become valid xhtml!
-    QRegExp brRx(QString::fromLatin1("<br[\\s/]*>"), Qt::CaseInsensitive);
+    QRegExp brRx(QLatin1String("<br[\\s/]*>"), Qt::CaseInsensitive);
     brRx.setMinimal(true);
     QStringList list = akaRx.cap(1).split(brRx);
     // lang could be included with [fr]
-//    const QRegExp parRx(QString::fromLatin1("\\(.+\\)"));
-    const QRegExp brackRx(QString::fromLatin1("\\[\\w+\\]"));
+//    const QRegExp parRx(QLatin1String("\\(.+\\)"));
+    const QRegExp brackRx(QLatin1String("\\[\\w+\\]"));
     QStringList values;
     for(QStringList::Iterator it = list.begin(); it != list.end(); ++it) {
       QString s = *it;
       // sometimes, the word "more" gets linked to the releaseinfo page, check that
-      if(s.indexOf(QString::fromLatin1("releaseinfo")) > -1) {
+      if(s.indexOf(QLatin1String("releaseinfo")) > -1) {
         continue;
       }
       s.remove(*s_tagRx);
@@ -793,7 +793,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
       }
     }
     if(!values.isEmpty()) {
-      entry_->setField(QString::fromLatin1("alttitle"), values.join(sep));
+      entry_->setField(QLatin1String("alttitle"), values.join(sep));
     }
   }
 }
@@ -806,38 +806,38 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
 
   QString thisPlot;
   // match until next opening tag
-  QRegExp plotRx(QString::fromLatin1("plot\\s*(?:outline|summary)?:(.*)<[^/].*</"), Qt::CaseInsensitive);
+  QRegExp plotRx(QLatin1String("plot\\s*(?:outline|summary)?:(.*)<[^/].*</"), Qt::CaseInsensitive);
   plotRx.setMinimal(true);
-  QRegExp plotURLRx(QString::fromLatin1("<a\\s+.*href\\s*=\\s*\".*/title/.*/plotsummary\""), Qt::CaseInsensitive);
+  QRegExp plotURLRx(QLatin1String("<a\\s+.*href\\s*=\\s*\".*/title/.*/plotsummary\""), Qt::CaseInsensitive);
   plotURLRx.setMinimal(true);
   if(plotRx.indexIn(str_) > -1) {
     thisPlot = plotRx.cap(1);
     thisPlot.remove(*s_tagRx); // remove HTML tags
-    entry_->setField(QString::fromLatin1("plot"), thisPlot);
+    entry_->setField(QLatin1String("plot"), thisPlot);
     // if thisPlot ends with (more) or contains
     // a url that ends with plotsummary, then we'll grab it, otherwise not
-    if(plotRx.cap(0).endsWith(QString::fromLatin1("(more)</")) || plotURLRx.indexIn(plotRx.cap(0)) > -1) {
+    if(plotRx.cap(0).endsWith(QLatin1String("(more)</")) || plotURLRx.indexIn(plotRx.cap(0)) > -1) {
       useUserSummary = true;
     }
   }
 
   if(useUserSummary) {
-    QRegExp idRx(QString::fromLatin1("title/(tt\\d+)"));
+    QRegExp idRx(QLatin1String("title/(tt\\d+)"));
     idRx.indexIn(baseURL_.path());
     KUrl plotURL = baseURL_;
-    plotURL.setPath(QString::fromLatin1("/title/") + idRx.cap(1) + QString::fromLatin1("/plotsummary"));
+    plotURL.setPath(QLatin1String("/title/") + idRx.cap(1) + QLatin1String("/plotsummary"));
     // be quiet about failure
     QString plotPage = FileHandler::readTextFile(plotURL, true);
 
     if(!plotPage.isEmpty()) {
-      QRegExp plotRx(QString::fromLatin1("<p\\s+class\\s*=\\s*\"plotpar\">(.*)</p"));
+      QRegExp plotRx(QLatin1String("<p\\s+class\\s*=\\s*\"plotpar\">(.*)</p"));
       plotRx.setMinimal(true);
       if(plotRx.indexIn(plotPage) > -1) {
         QString userPlot = plotRx.cap(1);
         userPlot.remove(*s_tagRx); // remove HTML tags
         // remove last little "written by", if there
-        userPlot.remove(QRegExp(QString::fromLatin1("\\s*written by.*$"), Qt::CaseInsensitive));
-        entry_->setField(QString::fromLatin1("plot"), Tellico::decodeHTML(userPlot));
+        userPlot.remove(QRegExp(QLatin1String("\\s*written by.*$"), Qt::CaseInsensitive));
+        entry_->setField(QLatin1String("plot"), Tellico::decodeHTML(userPlot));
       }
     }
   }
@@ -845,11 +845,11 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
 
 void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
                            const QString& imdbHeader_, const QString& fieldName_) {
-  QRegExp br2Rx(QString::fromLatin1("<br[\\s/]*>\\s*<br[\\s/]*>"), Qt::CaseInsensitive);
+  QRegExp br2Rx(QLatin1String("<br[\\s/]*>\\s*<br[\\s/]*>"), Qt::CaseInsensitive);
   br2Rx.setMinimal(true);
-  QRegExp divRx(QString::fromLatin1("<[/]*div"), Qt::CaseInsensitive);
+  QRegExp divRx(QLatin1String("<[/]*div"), Qt::CaseInsensitive);
   divRx.setMinimal(true);
-  QString name = QString::fromLatin1("/name/");
+  QString name = QLatin1String("/name/");
 
   StringSet people;
   for(int pos = str_.indexOf(imdbHeader_); pos > 0; pos = str_.indexOf(imdbHeader_, pos)) {
@@ -875,13 +875,13 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   // that's usually a lot of people
   // but since it can be in billing order, the main actors might not
   // be in the short list
-  QRegExp idRx(QString::fromLatin1("title/(tt\\d+)"));
+  QRegExp idRx(QLatin1String("title/(tt\\d+)"));
   idRx.indexIn(baseURL_.path());
 #ifdef IMDB_TEST
-  KUrl castURL(QString::fromLatin1("/home/robby/imdb-title-fullcredits.html"));
+  KUrl castURL(QLatin1String("/home/robby/imdb-title-fullcredits.html"));
 #else
   KUrl castURL = baseURL_;
-  castURL.setPath(QString::fromLatin1("/title/") + idRx.cap(1) + QString::fromLatin1("/fullcredits"));
+  castURL.setPath(QLatin1String("/title/") + idRx.cap(1) + QLatin1String("/fullcredits"));
 #endif
   // be quiet about failure and be sure to translate entities
   QString castPage = Tellico::decodeHTML(FileHandler::readTextFile(castURL, true));
@@ -892,28 +892,28 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   if(castText.isEmpty()) {
     // fall back to short list
     castText = str_;
-    pos = castText.indexOf(QString::fromLatin1("cast overview"), 0, Qt::CaseInsensitive);
+    pos = castText.indexOf(QLatin1String("cast overview"), 0, Qt::CaseInsensitive);
     if(pos == -1) {
-      pos = castText.indexOf(QString::fromLatin1("credited cast"), 0, Qt::CaseInsensitive);
+      pos = castText.indexOf(QLatin1String("credited cast"), 0, Qt::CaseInsensitive);
     }
   } else {
     // first look for anchor
-    QRegExp castAnchorRx(QString::fromLatin1("<a\\s+name\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
+    QRegExp castAnchorRx(QLatin1String("<a\\s+name\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
     pos = castText.indexOf(castAnchorRx);
     if(pos < 0) {
-      QRegExp tableClassRx(QString::fromLatin1("<table\\s+class\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
+      QRegExp tableClassRx(QLatin1String("<table\\s+class\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
       pos = castText.indexOf(tableClassRx);
       if(pos < 0) {
         // fragile, the word "cast" appears in the title, but need to find
         // the one right above the actual cast table
         // for TV shows, there's a link on the sidebar for "episodes case"
         // so need to not match that one
-        pos = castText.indexOf(QString::fromLatin1("cast</"), 0, Qt::CaseInsensitive);
+        pos = castText.indexOf(QLatin1String("cast</"), 0, Qt::CaseInsensitive);
         if(pos > 9) {
           // back up 9 places
-          if(castText.mid(pos-9, 9).startsWith(QString::fromLatin1("episodes"))) {
+          if(castText.mid(pos-9, 9).startsWith(QLatin1String("episodes"))) {
             // find next cast list
-            pos = castText.indexOf(QString::fromLatin1("cast</"), pos+6, Qt::CaseInsensitive);
+            pos = castText.indexOf(QLatin1String("cast</"), pos+6, Qt::CaseInsensitive);
           }
         }
       }
@@ -924,13 +924,13 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
     return;
   }
 
-  const QString name = QString::fromLatin1("/name/");
-  QRegExp tdRx(QString::fromLatin1("<td[^>]*>(.*)</td>"), Qt::CaseInsensitive);
+  const QString name = QLatin1String("/name/");
+  QRegExp tdRx(QLatin1String("<td[^>]*>(.*)</td>"), Qt::CaseInsensitive);
   tdRx.setMinimal(true);
 
   QStringList cast;
   // loop until closing table tag
-  const int endPos = castText.indexOf(QString::fromLatin1("</table"), pos, Qt::CaseInsensitive);
+  const int endPos = castText.indexOf(QLatin1String("</table"), pos, Qt::CaseInsensitive);
   pos = s_anchorRx->indexIn(castText, pos+1);
   while(pos > -1 && pos < endPos && static_cast<int>(cast.count()) < m_numCast) {
     if(s_anchorRx->cap(1).indexOf(name) > -1) {
@@ -939,7 +939,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
       const int pos2 = tdRx.indexIn(castText, pos);
       if(pos2 > -1 && tdRx.indexIn(castText, pos2+1) > -1) {
         cast += s_anchorRx->cap(2).trimmed()
-              + QString::fromLatin1("::") + tdRx.cap(1).simplified().remove(*s_tagRx);
+              + QLatin1String("::") + tdRx.cap(1).simplified().remove(*s_tagRx);
       } else {
         cast += s_anchorRx->cap(2).trimmed();
       }
@@ -948,46 +948,46 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   }
 
   if(!cast.isEmpty()) {
-    entry_->setField(QString::fromLatin1("cast"), cast.join(sep));
+    entry_->setField(QLatin1String("cast"), cast.join(sep));
   }
 }
 
 void IMDBFetcher::doRating(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  if(m_fields.indexOf(QString::fromLatin1("imdb-rating")) == -1) {
+  if(m_fields.indexOf(QLatin1String("imdb-rating")) == -1) {
     return;
   }
 
   // don't add a colon, since there's a <br> at the end
   // some of the imdb images use /10.gif in their path, so check for space or bracket
-  QRegExp rx(QString::fromLatin1("[>\\s](\\d+.?\\d*)/10[<//s]"), Qt::CaseInsensitive);
+  QRegExp rx(QLatin1String("[>\\s](\\d+.?\\d*)/10[<//s]"), Qt::CaseInsensitive);
   rx.setMinimal(true);
 
   if(rx.indexIn(str_) > -1 && !rx.cap(1).isEmpty()) {
-    Data::FieldPtr f = entry_->collection()->fieldByName(QString::fromLatin1("imdb-rating"));
+    Data::FieldPtr f = entry_->collection()->fieldByName(QLatin1String("imdb-rating"));
     if(!f) {
-      f = new Data::Field(QString::fromLatin1("imdb-rating"), i18n("IMDB Rating"), Data::Field::Rating);
+      f = new Data::Field(QLatin1String("imdb-rating"), i18n("IMDB Rating"), Data::Field::Rating);
       f->setCategory(i18n("General"));
-      f->setProperty(QString::fromLatin1("maximum"), QString::fromLatin1("10"));
+      f->setProperty(QLatin1String("maximum"), QLatin1String("10"));
       entry_->collection()->addField(f);
     }
 
     bool ok;
     float value = rx.cap(1).toFloat(&ok);
     if(ok) {
-      entry_->setField(QString::fromLatin1("imdb-rating"), QString::number(value));
+      entry_->setField(QLatin1String("imdb-rating"), QString::number(value));
     }
   }
 }
 
 void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, const KUrl& baseURL_) {
   // cover is the img with the "cover" alt text
-  QRegExp imgRx(QString::fromLatin1("<img\\s+[^>]*src\\s*=\\s*\"([^\"]*)\"[^>]*>"), Qt::CaseInsensitive);
+  QRegExp imgRx(QLatin1String("<img\\s+[^>]*src\\s*=\\s*\"([^\"]*)\"[^>]*>"), Qt::CaseInsensitive);
   imgRx.setMinimal(true);
 
-  QRegExp posterRx(QString::fromLatin1("<a\\s+[^>]*name\\s*=\\s*\"poster\"[^>]*>(.*)</a>"), Qt::CaseInsensitive);
+  QRegExp posterRx(QLatin1String("<a\\s+[^>]*name\\s*=\\s*\"poster\"[^>]*>(.*)</a>"), Qt::CaseInsensitive);
   posterRx.setMinimal(true);
 
-  const QString cover = QString::fromLatin1("cover");
+  const QString cover = QLatin1String("cover");
 
   int pos = posterRx.indexIn(str_);
   while(pos > -1) {
@@ -1020,14 +1020,14 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
 // end up reparsing whole string, but it's not really that slow
 // loook at every anchor tag in the string
 void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  const QString genre = QString::fromLatin1("/Genres/");
-  const QString country = QString::fromLatin1("/Countries/");
-  const QString lang = QString::fromLatin1("/Languages/");
-  const QString colorInfo = QString::fromLatin1("color-info");
-  const QString cert = QString::fromLatin1("certificates=");
-  const QString soundMix = QString::fromLatin1("sound-mix=");
-  const QString year = QString::fromLatin1("/Years/");
-  const QString company = QString::fromLatin1("/company/");
+  const QString genre = QLatin1String("/Genres/");
+  const QString country = QLatin1String("/Countries/");
+  const QString lang = QLatin1String("/Languages/");
+  const QString colorInfo = QLatin1String("color-info");
+  const QString cert = QLatin1String("certificates=");
+  const QString soundMix = QLatin1String("sound-mix=");
+  const QString year = QLatin1String("/Years/");
+  const QString company = QLatin1String("/company/");
 
   // IIMdb also has links with the word "sections" in them, remove that
   // for genres and nationalities
@@ -1036,19 +1036,19 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
   for(int pos = s_anchorRx->indexIn(str_); pos > -1; pos = s_anchorRx->indexIn(str_, pos+1)) {
     const QString cap1 = s_anchorRx->cap(1);
     if(cap1.indexOf(genre) > -1) {
-      if(s_anchorRx->cap(2).indexOf(QString::fromLatin1(" section"), 0, Qt::CaseInsensitive) == -1) {
+      if(s_anchorRx->cap(2).indexOf(QLatin1String(" section"), 0, Qt::CaseInsensitive) == -1) {
         genres += s_anchorRx->cap(2).trimmed();
       }
     } else if(cap1.indexOf(country) > -1) {
-      if(s_anchorRx->cap(2).indexOf(QString::fromLatin1(" section"), 0, Qt::CaseInsensitive) == -1) {
+      if(s_anchorRx->cap(2).indexOf(QLatin1String(" section"), 0, Qt::CaseInsensitive) == -1) {
         countries += s_anchorRx->cap(2).trimmed();
       }
     } else if(cap1.indexOf(lang) > -1) {
       langs += s_anchorRx->cap(2).trimmed();
     } else if(cap1.indexOf(colorInfo) > -1) {
       // change "black and white" to "black & white"
-      entry_->setField(QString::fromLatin1("color"),
-                       s_anchorRx->cap(2).replace(QString::fromLatin1("and"), QChar('&')).trimmed());
+      entry_->setField(QLatin1String("color"),
+                       s_anchorRx->cap(2).replace(QLatin1String("and"), QChar('&')).trimmed());
     } else if(cap1.indexOf(cert) > -1) {
       certs += s_anchorRx->cap(2).trimmed();
     } else if(cap1.indexOf(soundMix) > -1) {
@@ -1056,34 +1056,34 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
     } else if(cap1.indexOf(company) > -1) {
       studios += s_anchorRx->cap(2).trimmed();
       // if year field wasn't set before, do it now
-    } else if(entry_->field(QString::fromLatin1("year")).isEmpty() && cap1.indexOf(year) > -1) {
-      entry_->setField(QString::fromLatin1("year"), s_anchorRx->cap(2).trimmed());
+    } else if(entry_->field(QLatin1String("year")).isEmpty() && cap1.indexOf(year) > -1) {
+      entry_->setField(QLatin1String("year"), s_anchorRx->cap(2).trimmed());
     }
   }
 
-  entry_->setField(QString::fromLatin1("genre"), genres.join(sep));
-  entry_->setField(QString::fromLatin1("nationality"), countries.join(sep));
-  entry_->setField(QString::fromLatin1("language"), langs.join(sep));
-  entry_->setField(QString::fromLatin1("audio-track"), tracks.join(sep));
-  entry_->setField(QString::fromLatin1("studio"), studios.join(sep));
+  entry_->setField(QLatin1String("genre"), genres.join(sep));
+  entry_->setField(QLatin1String("nationality"), countries.join(sep));
+  entry_->setField(QLatin1String("language"), langs.join(sep));
+  entry_->setField(QLatin1String("audio-track"), tracks.join(sep));
+  entry_->setField(QLatin1String("studio"), studios.join(sep));
   if(!certs.isEmpty()) {
     // first try to set default certification
-    const QStringList& certsAllowed = entry_->collection()->fieldByName(QString::fromLatin1("certification"))->allowed();
+    const QStringList& certsAllowed = entry_->collection()->fieldByName(QLatin1String("certification"))->allowed();
     foreach(const QString& cert, certs) {
       QString country = cert.section(':', 0, 0);
       QString lcert = cert.section(':', 1, 1);
       if(lcert == QLatin1String("Unrated")) {
         lcert = QChar('U');
       }
-      lcert += QString::fromLatin1(" (") + country + ')';
+      lcert += QLatin1String(" (") + country + ')';
       if(certsAllowed.indexOf(cert) > -1) {
-        entry_->setField(QString::fromLatin1("certification"), lcert);
+        entry_->setField(QLatin1String("certification"), lcert);
         break;
       }
     }
 
     // now add new field for all certifications
-    const QString allc = QString::fromLatin1("allcertification");
+    const QString allc = QLatin1String("allcertification");
     if(m_fields.indexOf(allc) > -1) {
       Data::FieldPtr f = entry_->collection()->fieldByName(allc);
       if(!f) {
@@ -1091,7 +1091,7 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
         f->setFlags(Data::Field::AllowGrouped);
         entry_->collection()->addField(f);
       }
-      entry_->setField(QString::fromLatin1("allcertification"), certs.join(sep));
+      entry_->setField(QLatin1String("allcertification"), certs.join(sep));
     }
   }
 }
@@ -1100,8 +1100,8 @@ void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myLog() << "IMDBFetcher::updateEntry() - " << entry_->title() << endl;
   // only take first 5
   m_limit = 5;
-  QString t = entry_->field(QString::fromLatin1("title"));
-  KUrl link = entry_->field(QString::fromLatin1("imdb"));
+  QString t = entry_->field(QLatin1String("title"));
+  KUrl link = entry_->field(QLatin1String("imdb"));
   if(!link.isEmpty() && link.isValid()) {
     // check if we want a different host
     if(link.host() != m_host) {
@@ -1181,7 +1181,7 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
     m_numCast->setValue(fetcher_->m_numCast);
     m_fetchImageCheck->setChecked(fetcher_->m_fetchImages);
   } else { //defaults
-    m_hostEdit->setText(QString::fromLatin1(IMDB_SERVER));
+    m_hostEdit->setText(QLatin1String(IMDB_SERVER));
     m_numCast->setValue(10);
     m_fetchImageCheck->setChecked(true);
   }
@@ -1206,10 +1206,10 @@ QString IMDBFetcher::ConfigWidget::preferredName() const {
 //static
 Tellico::StringMap IMDBFetcher::customFields() {
   StringMap map;
-  map[QString::fromLatin1("imdb")]             = i18n("IMDB Link");
-  map[QString::fromLatin1("imdb-rating")]      = i18n("IMDB Rating");
-  map[QString::fromLatin1("alttitle")]         = i18n("Alternative Titles");
-  map[QString::fromLatin1("allcertification")] = i18n("Certifications");
+  map[QLatin1String("imdb")]             = i18n("IMDB Link");
+  map[QLatin1String("imdb-rating")]      = i18n("IMDB Rating");
+  map[QLatin1String("alttitle")]         = i18n("Alternative Titles");
+  map[QLatin1String("allcertification")] = i18n("Certifications");
   return map;
 }
 

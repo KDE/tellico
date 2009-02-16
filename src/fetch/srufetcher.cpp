@@ -94,7 +94,7 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!m_path.startsWith(QChar('/'))) {
     m_path.prepend('/');
   }
-  m_format = config_.readEntry("Format", QString::fromLatin1("mods"));
+  m_format = config_.readEntry("Format", "mods");
   m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
@@ -108,35 +108,35 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_started = true;
 
 #ifdef SRU_DEBUG
-  KUrl u(QString::fromLatin1("/home/robby/sru.xml"));
+  KUrl u(QLatin1String("/home/robby/sru.xml"));
 #else
   KUrl u;
-  u.setProtocol(QString::fromLatin1("http"));
+  u.setProtocol(QLatin1String("http"));
   u.setHost(m_host);
   u.setPort(m_port);
   u.setPath(m_path);
 
-  u.addQueryItem(QString::fromLatin1("operation"), QString::fromLatin1("searchRetrieve"));
-  u.addQueryItem(QString::fromLatin1("version"), QString::fromLatin1("1.1"));
-  u.addQueryItem(QString::fromLatin1("maximumRecords"), QString::number(SRU_MAX_RECORDS));
-  u.addQueryItem(QString::fromLatin1("recordSchema"), m_format);
+  u.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
+  u.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));
+  u.addQueryItem(QLatin1String("maximumRecords"), QString::number(SRU_MAX_RECORDS));
+  u.addQueryItem(QLatin1String("recordSchema"), m_format);
 
   const int type = Kernel::self()->collectionType();
   QString str = QChar('"') + value_ + QChar('"');
   switch(key_) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("query"), QString::fromLatin1("dc.title=") + str);
+      u.addQueryItem(QLatin1String("query"), QLatin1String("dc.title=") + str);
       break;
 
     case Person:
       {
         QString s;
         if(type == Data::Collection::Book || type == Data::Collection::Bibtex) {
-          s = QString::fromLatin1("author=") + str + QString::fromLatin1(" or dc.author=") + str;
+          s = QLatin1String("author=") + str + QLatin1String(" or dc.author=") + str;
         } else {
-          s = QString::fromLatin1("dc.creator=") + str + QString::fromLatin1(" or dc.editor=") + str;
+          s = QLatin1String("dc.creator=") + str + QLatin1String(" or dc.editor=") + str;
         }
-        u.addQueryItem(QString::fromLatin1("query"), s);
+        u.addQueryItem(QLatin1String("query"), s);
       }
       break;
 
@@ -145,7 +145,7 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
       str.remove('-');
       // limit to first isbn
       str = str.section(';', 0, 0);
-      u.addQueryItem(QString::fromLatin1("query"), QString::fromLatin1("bath.isbn=") + str);
+      u.addQueryItem(QLatin1String("query"), QLatin1String("bath.isbn=") + str);
       break;
 
     case LCCN:
@@ -155,15 +155,15 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
         str = str.section(';', 0, 0);
         // also try formalized lccn
         QString lccn = LCCNValidator::formalize(str);
-        u.addQueryItem(QString::fromLatin1("query"),
-                       QString::fromLatin1("bath.lccn=") + str +
-                       QString::fromLatin1(" or bath.lccn=") + lccn
+        u.addQueryItem(QLatin1String("query"),
+                       QLatin1String("bath.lccn=") + str +
+                       QLatin1String(" or bath.lccn=") + lccn
                        );
       }
       break;
 
     case Keyword:
-      u.addQueryItem(QString::fromLatin1("query"), str);
+      u.addQueryItem(QLatin1String("query"), str);
       break;
 
     case Raw:
@@ -227,11 +227,11 @@ void SRUFetcher::slotComplete(KJob*) {
   Import::XMLImporter xmlImporter(result);
   QDomDocument dom = xmlImporter.domDocument();
 
-  QDomNodeList diagList = dom.elementsByTagNameNS(diag, QString::fromLatin1("diagnostic"));
+  QDomNodeList diagList = dom.elementsByTagNameNS(diag, QLatin1String("diagnostic"));
   for(int i = 0; i < diagList.count(); ++i) {
     QDomElement elem = diagList.item(i).toElement();
-    QDomNodeList nodeList1 = elem.elementsByTagNameNS(diag, QString::fromLatin1("message"));
-    QDomNodeList nodeList2 = elem.elementsByTagNameNS(diag, QString::fromLatin1("details"));
+    QDomNodeList nodeList1 = elem.elementsByTagNameNS(diag, QLatin1String("message"));
+    QDomNodeList nodeList2 = elem.elementsByTagNameNS(diag, QLatin1String("details"));
     for(int j = 0; j < nodeList1.count(); ++j) {
       QString d = nodeList1.item(j).toElement().text();
       if(!d.isEmpty()) {
@@ -293,36 +293,36 @@ void SRUFetcher::slotComplete(KJob*) {
     QString desc;
     switch(coll->type()) {
       case Data::Collection::Book:
-        desc = entry->field(QString::fromLatin1("author"))
+        desc = entry->field(QLatin1String("author"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("publisher"));
-        if(!entry->field(QString::fromLatin1("cr_year")).isEmpty()) {
-          desc += QChar('/') + entry->field(QString::fromLatin1("cr_year"));
-        } else if(!entry->field(QString::fromLatin1("pub_year")).isEmpty()){
-          desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
+               + entry->field(QLatin1String("publisher"));
+        if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
+          desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+        } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
+          desc += QChar('/') + entry->field(QLatin1String("pub_year"));
         }
         break;
 
       case Data::Collection::Video:
-        desc = entry->field(QString::fromLatin1("studio"))
+        desc = entry->field(QLatin1String("studio"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("director"))
+               + entry->field(QLatin1String("director"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("year"));
+               + entry->field(QLatin1String("year"));
         break;
 
       case Data::Collection::Album:
-        desc = entry->field(QString::fromLatin1("artist"))
+        desc = entry->field(QLatin1String("artist"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("label"))
+               + entry->field(QLatin1String("label"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("year"));
+               + entry->field(QLatin1String("year"));
         break;
 
       default:
         break;
     }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
@@ -335,20 +335,20 @@ Tellico::Data::EntryPtr SRUFetcher::fetchEntry(uint uid_) {
 
 void SRUFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myDebug() << "SRUFetcher::updateEntry() - " << source() << ": " << entry_->title() << endl;
-  QString isbn = entry_->field(QString::fromLatin1("isbn"));
+  QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);
     return;
   }
 
-  QString lccn = entry_->field(QString::fromLatin1("lccn"));
+  QString lccn = entry_->field(QLatin1String("lccn"));
   if(!lccn.isEmpty()) {
     search(Fetch::LCCN, lccn);
     return;
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QString::fromLatin1("title"));
+  QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
     search(Fetch::Title, t);
     return;
@@ -363,7 +363,7 @@ bool SRUFetcher::initMARCXMLHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("MARC21slim2MODS3.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "SRUFetcher::initHandlers() - can not locate MARC21slim2MODS3.xsl.";
     return false;
@@ -387,7 +387,7 @@ bool SRUFetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("mods2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "SRUFetcher::initHandlers() - can not locate mods2tellico.xsl.";
     return false;
@@ -407,15 +407,15 @@ bool SRUFetcher::initMODSHandler() {
 }
 
 Tellico::Fetch::Fetcher::Ptr SRUFetcher::libraryOfCongress(QObject* parent_) {
-  return Fetcher::Ptr(new SRUFetcher(i18n("Library of Congress (US)"), QString::fromLatin1("z3950.loc.gov"), 7090,
-                                     QString::fromLatin1("voyager"), parent_));
+  return Fetcher::Ptr(new SRUFetcher(i18n("Library of Congress (US)"), QLatin1String("z3950.loc.gov"), 7090,
+                                     QLatin1String("voyager"), parent_));
 }
 
 // static
 Tellico::StringMap SRUFetcher::customFields() {
   StringMap map;
-  map[QString::fromLatin1("address")]  = i18n("Address");
-  map[QString::fromLatin1("abstract")] = i18n("Abstract");
+  map[QLatin1String("address")]  = i18n("Address");
+  map[QLatin1String("abstract")] = i18n("Abstract");
   return map;
 }
 
@@ -465,9 +465,9 @@ SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*
   label = new QLabel(i18n("Format: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_formatCombo = new GUI::ComboBox(optionsWidget());
-  m_formatCombo->addItem(QString::fromLatin1("MODS"), QString::fromLatin1("mods"));
-  m_formatCombo->addItem(QString::fromLatin1("MARCXML"), QString::fromLatin1("marcxml"));
-  m_formatCombo->addItem(QString::fromLatin1("Dublin Core"), QString::fromLatin1("dc"));
+  m_formatCombo->addItem(QLatin1String("MODS"), QLatin1String("mods"));
+  m_formatCombo->addItem(QLatin1String("MARCXML"), QLatin1String("marcxml"));
+  m_formatCombo->addItem(QLatin1String("Dublin Core"), QLatin1String("dc"));
   connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   l->addWidget(m_formatCombo, row, 1);
   w = i18n("Enter the result format used by the server.");

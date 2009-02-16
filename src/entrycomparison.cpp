@@ -49,10 +49,10 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
   }
   if(f->name() == QLatin1String("arxiv")) {
     // normalize and unVersion arxiv ID
-    s1.remove(QRegExp(QString::fromLatin1("^arxiv:")));
-    s1.remove(QRegExp(QString::fromLatin1("v\\d+$")));
-    s2.remove(QRegExp(QString::fromLatin1("^arxiv:")));
-    s2.remove(QRegExp(QString::fromLatin1("v\\d+$")));
+    s1.remove(QRegExp(QLatin1String("^arxiv:")));
+    s1.remove(QRegExp(QLatin1String("v\\d+$")));
+    s2.remove(QRegExp(QLatin1String("^arxiv:")));
+    s2.remove(QRegExp(QLatin1String("v\\d+$")));
     if(s1 == s2) {
       return 5;
     }
@@ -65,7 +65,7 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     }
   }
   // try removing punctuation
-  QRegExp notAlphaNum(QString::fromLatin1("[^\\s\\w]"));
+  QRegExp notAlphaNum(QLatin1String("[^\\s\\w]"));
   QString s1a = s1; s1a.remove(notAlphaNum);
   QString s2a = s2; s2a.remove(notAlphaNum);
   if(!s1a.isEmpty() && s1a == s2a) {
@@ -79,7 +79,7 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     return 3;
   }
   // try removing everything between parentheses
-  QRegExp rx(QString::fromLatin1("\\s*\\(.*\\)\\s*"));
+  QRegExp rx(QLatin1String("\\s*\\(.*\\)\\s*"));
   s1.remove(rx);
   s2.remove(rx);
   if(!s1.isEmpty() && s1 == s2) {

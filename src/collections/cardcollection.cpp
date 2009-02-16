@@ -27,92 +27,92 @@ CardCollection::CardCollection(bool addFields_, const QString& title_ /*=null*/)
   if(addFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QString::fromLatin1("series"));
+  setDefaultGroupField(QLatin1String("series"));
 }
 
 Tellico::Data::FieldList CardCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
+  field = new Field(QLatin1String("title"), i18n("Title"), Field::Dependent);
   field->setCategory(i18n(card_general));
-  field->setDescription(QString::fromLatin1("%{year} %{brand} %{player}"));
+  field->setDescription(QLatin1String("%{year} %{brand} %{player}"));
   field->setFlags(Field::NoDelete);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("player"), i18n("Player"));
+  field = new Field(QLatin1String("player"), i18n("Player"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatName);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("team"), i18n("Team"));
+  field = new Field(QLatin1String("team"), i18n("Team"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatTitle);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("brand"), i18n("Brand"));
+  field = new Field(QLatin1String("brand"), i18n("Brand"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatPlain);
   list.append(field);
 
   // might not be totally numeric!
-  field = new Field(QString::fromLatin1("number"), i18n("Card Number"));
+  field = new Field(QLatin1String("number"), i18n("Card Number"));
   field->setCategory(i18n(card_general));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("year"), i18n("Year"), Field::Number);
+  field = new Field(QLatin1String("year"), i18n("Year"), Field::Number);
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("series"), i18n("Series"));
+  field = new Field(QLatin1String("series"), i18n("Series"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatTitle);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("type"), i18n("Card Type"));
+  field = new Field(QLatin1String("type"), i18n("Card Type"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("pur_date"), i18n("Purchase Date"));
+  field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(card_personal));
   field->setFormatFlag(Field::FormatDate);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("pur_price"), i18n("Purchase Price"));
+  field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
   field->setCategory(i18n(card_personal));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("location"), i18n("Location"));
+  field = new Field(QLatin1String("location"), i18n("Location"));
   field->setCategory(i18n(card_personal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("gift"), i18n("Gift"), Field::Bool);
+  field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);
   field->setCategory(i18n(card_personal));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("keyword"), i18n("Keywords"));
+  field = new Field(QLatin1String("keyword"), i18n("Keywords"));
   field->setCategory(i18n(card_personal));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("quantity"), i18n("Quantity"), Field::Number);
+  field = new Field(QLatin1String("quantity"), i18n("Quantity"), Field::Number);
   field->setCategory(i18n(card_personal));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("front"), i18n("Front Image"), Field::Image);
+  field = new Field(QLatin1String("front"), i18n("Front Image"), Field::Image);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("back"), i18n("Back Image"), Field::Image);
+  field = new Field(QLatin1String("back"), i18n("Back Image"), Field::Image);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("comments"), i18n("Comments"), Field::Para);
+  field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
   list.append(field);
 
   return list;

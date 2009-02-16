@@ -70,30 +70,30 @@ bool DropHandler::handleURL(const KUrl::List& urls_) {
     KMimeType::Ptr ptr;
     // findByURL doesn't work for http, so actually query
     // the url itself
-    if(url.protocol() != QString::fromLatin1("http")) {
+    if(url.protocol() != QLatin1String("http")) {
       ptr = KMimeType::findByUrl(url);
     } else {
       KIO::MimetypeJob* job = KIO::mimetype(url, false /*progress*/);
       KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
       ptr = KMimeType::mimeType(job->mimetype());
     }
-    if(ptr->is(QString::fromLatin1("application/x-tellico"))) {
+    if(ptr->is(QLatin1String("application/x-tellico"))) {
       tc << url;
-    } else if(ptr->is(QString::fromLatin1("application/pdf"))) {
+    } else if(ptr->is(QLatin1String("application/pdf"))) {
       pdf << url;
-    } else if(ptr->is(QString::fromLatin1("text/x-bibtex")) ||
-              ptr->is(QString::fromLatin1("application/x-bibtex")) ||
-              ptr->is(QString::fromLatin1("application/bibtex"))) {
+    } else if(ptr->is(QLatin1String("text/x-bibtex")) ||
+              ptr->is(QLatin1String("application/x-bibtex")) ||
+              ptr->is(QLatin1String("application/bibtex"))) {
       bib << url;
-    } else if(ptr->is(QString::fromLatin1("application/x-research-info-systems"))) {
+    } else if(ptr->is(QLatin1String("application/x-research-info-systems"))) {
       ris << url;
-    } else if(url.fileName().endsWith(QString::fromLatin1(".bib"))) {
+    } else if(url.fileName().endsWith(QLatin1String(".bib"))) {
       bib << url;
-    } else if(url.fileName().endsWith(QString::fromLatin1(".ris"))) {
+    } else if(url.fileName().endsWith(QLatin1String(".ris"))) {
       ris << url;
-    } else if(ptr->is(QString::fromLatin1("text/plain")) && Import::BibtexImporter::maybeBibtex(url)) {
+    } else if(ptr->is(QLatin1String("text/plain")) && Import::BibtexImporter::maybeBibtex(url)) {
       bib << url;
-    } else if(ptr->is(QString::fromLatin1("text/plain")) && Import::RISImporter::maybeRIS(url)) {
+    } else if(ptr->is(QLatin1String("text/plain")) && Import::RISImporter::maybeRIS(url)) {
       ris << url;
     } else {
       myDebug() << "DropHandler::handleURL() - unrecognized type: " << ptr->name() << " (" << url << ")" << endl;

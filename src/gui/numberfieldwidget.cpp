@@ -40,7 +40,7 @@ void NumberFieldWidget::initLineEdit() {
 
   // regexp is any number of digits followed optionally by any number of
   // groups of a semi-colon followed optionally by a space, followed by digits
-  QRegExp rx(QString::fromLatin1("-?\\d*(; ?-?\\d*)*"));
+  QRegExp rx(QLatin1String("-?\\d*(; ?-?\\d*)*"));
   m_lineEdit->setValidator(new QRegExpValidator(rx, this));
 }
 
@@ -66,7 +66,7 @@ QString NumberFieldWidget::text() const {
 
   QString text = m_lineEdit->text();
   if(field()->flags() & Data::Field::AllowMultiple) {
-    text.replace(s_semiColon, QString::fromLatin1("; "));
+    text.replace(s_semiColon, QLatin1String("; "));
   }
   return text.simplified();
 }

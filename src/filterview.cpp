@@ -132,9 +132,9 @@ void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
   KMenu menu(this);
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
-    menu.addAction(KIcon(QString::fromLatin1("view-filter")),
+    menu.addAction(KIcon(QLatin1String("view-filter")),
                     i18n("Modify Filter"), this, SLOT(slotModifyFilter()));
-    menu.addAction(KIcon(QString::fromLatin1("edit-delete")),
+    menu.addAction(KIcon(QLatin1String("edit-delete")),
                     i18n("Delete Filter"), this, SLOT(slotDeleteFilter()));
     menu.exec(event_->globalPos());
   } else {

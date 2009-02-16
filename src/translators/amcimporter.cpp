@@ -64,7 +64,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   QVector<char> buffer(l+1);
   m_ds.readRawData(buffer.data(), l);
   QString version = QString::fromLocal8Bit(buffer.data(), l);
-  QRegExp versionRx(QString::fromLatin1(".+AMC_(\\d+)\\.(\\d+).+"));
+  QRegExp versionRx(QLatin1String(".+AMC_(\\d+)\\.(\\d+).+"));
   if(version.indexOf(versionRx) == -1) {
     myDebug() << "AMCImporter::collection() - no file id match" << endl;
     return Data::CollPtr();
@@ -145,11 +145,11 @@ QString AMCImporter::readImage(const QString& format_) {
     myDebug() << "AMCImporter::readImage() - null image" << endl;
     return QString();
   }
-  QString format = QString::fromLatin1("PNG");
+  QString format = QLatin1String("PNG");
   if(format_ == QLatin1String(".jpg")) {
-    format = QString::fromLatin1("JPEG");
+    format = QLatin1String("JPEG");
   } else if(format_ == QLatin1String(".gif")) {
-    format = QString::fromLatin1("GIF");
+    format = QLatin1String("GIF");
   }
   return ImageFactory::addImage(img, format);
 }
@@ -167,14 +167,14 @@ void AMCImporter::readEntry() {
   if(m_majVersion >= 3 && m_minVersion >= 5) {
     rating /= 10;
   }
-  e->setField(QString::fromLatin1("rating"), QString::number(rating));
+  e->setField(QLatin1String("rating"), QString::number(rating));
   int year = readInt();
   if(year > 0) {
-    e->setField(QString::fromLatin1("year"), QString::number(year));
+    e->setField(QLatin1String("year"), QString::number(year));
   }
   int time = readInt();
   if(time > 0) {
-    e->setField(QString::fromLatin1("running-time"), QString::number(time));
+    e->setField(QLatin1String("running-time"), QString::number(time));
   }
 
   readInt(); // video bitrate
@@ -182,55 +182,55 @@ void AMCImporter::readEntry() {
   readInt(); // number of files
   readBool(); // checked
   readString(); // media label
-  e->setField(QString::fromLatin1("medium"), readString());
+  e->setField(QLatin1String("medium"), readString());
   readString(); // source
   readString(); // borrower
   QString s = readString(); // title
   if(!s.isEmpty()) {
-    e->setField(QString::fromLatin1("title"), s);
+    e->setField(QLatin1String("title"), s);
   }
   QString s2 = readString(); // translated title
   if(s.isEmpty()) {
-    e->setField(QString::fromLatin1("title"), s2);
+    e->setField(QLatin1String("title"), s2);
   }
 
-  e->setField(QString::fromLatin1("director"), readString());
+  e->setField(QLatin1String("director"), readString());
   s = readString();
-  QRegExp roleRx(QString::fromLatin1("(.+) \\(([^(]+)\\)"));
+  QRegExp roleRx(QLatin1String("(.+) \\(([^(]+)\\)"));
   roleRx.setMinimal(true);
   if(s.indexOf(roleRx) > -1) {
     QString role = roleRx.cap(2).toLower();
     if(role == QLatin1String("story") || role == QLatin1String("written by")) {
-      e->setField(QString::fromLatin1("writer"), roleRx.cap(1));
+      e->setField(QLatin1String("writer"), roleRx.cap(1));
     } else {
-      e->setField(QString::fromLatin1("producer"), s);
+      e->setField(QLatin1String("producer"), s);
     }
   } else {
-    e->setField(QString::fromLatin1("producer"), s);
+    e->setField(QLatin1String("producer"), s);
   }
-  e->setField(QString::fromLatin1("nationality"), readString());
-  e->setField(QString::fromLatin1("genre"), readString().replace(QString::fromLatin1(", "), QString::fromLatin1("; ")));
+  e->setField(QLatin1String("nationality"), readString());
+  e->setField(QLatin1String("genre"), readString().replace(QLatin1String(", "), QLatin1String("; ")));
 
-  e->setField(QString::fromLatin1("cast"), parseCast(readString()).join(QString::fromLatin1("; ")));
+  e->setField(QLatin1String("cast"), parseCast(readString()).join(QLatin1String("; ")));
 
   readString(); // url
-  e->setField(QString::fromLatin1("plot"), readString());
-  e->setField(QString::fromLatin1("comments"), readString());
+  e->setField(QLatin1String("plot"), readString());
+  e->setField(QLatin1String("comments"), readString());
   s = readString(); // video format
-  QRegExp regionRx(QString::fromLatin1("Region \\d"));
+  QRegExp regionRx(QLatin1String("Region \\d"));
   if(s.indexOf(regionRx) > -1) {
-    e->setField(QString::fromLatin1("region"), regionRx.cap(0));
+    e->setField(QLatin1String("region"), regionRx.cap(0));
   }
-  e->setField(QString::fromLatin1("audio-track"), readString()); // audio format
+  e->setField(QLatin1String("audio-track"), readString()); // audio format
   readString(); // resolution
   readString(); // frame rate
-  e->setField(QString::fromLatin1("language"), readString()); // audio language
-  e->setField(QString::fromLatin1("subtitle"), readString()); // subtitle
+  e->setField(QLatin1String("language"), readString()); // audio language
+  e->setField(QLatin1String("subtitle"), readString()); // subtitle
   readString(); // file size
   s = readString(); // picture extension
   s = readImage(s); // picture
   if(!s.isEmpty()) {
-    e->setField(QString::fromLatin1("cover"), s);
+    e->setField(QLatin1String("cover"), s);
   }
 
   m_coll->addEntries(e);
@@ -239,7 +239,7 @@ void AMCImporter::readEntry() {
 QStringList AMCImporter::parseCast(const QString& text_) {
   QStringList cast;
   int nPar = 0;
-  QRegExp castRx(QString::fromLatin1("[,()]"));
+  QRegExp castRx(QLatin1String("[,()]"));
   QString person, role;
   int oldPos = 0;
   for(int pos = text_.indexOf(castRx); pos > -1; pos = text_.indexOf(castRx, pos+1)) {
@@ -248,7 +248,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
       person += text_.mid(oldPos, pos-oldPos).trimmed();
       QString all = person;
       if(!role.isEmpty()) {
-        if(role.startsWith(QString::fromLatin1("as "))) {
+        if(role.startsWith(QLatin1String("as "))) {
           role = role.mid(3);
         }
         all += "::" + role;
@@ -277,7 +277,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
     person += text_.mid(oldPos, pos-oldPos).trimmed();
     QString all = person;
     if(!role.isEmpty()) {
-      if(role.startsWith(QString::fromLatin1("as "))) {
+      if(role.startsWith(QLatin1String("as "))) {
         role = role.mid(3);
       }
       all += "::" + role;

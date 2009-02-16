@@ -41,10 +41,10 @@ using Tellico::Fetch::ExecExternalFetcher;
 
 QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
   // matching escaped quotes is too hard... :(
-//  QRegExp quotes(QString::fromLatin1("[^\\\\](['\"])(.*[^\\\\])\\1"));
-  QRegExp quotes(QString::fromLatin1("(['\"])(.*)\\1"));
+//  QRegExp quotes(QLatin1String("[^\\\\](['\"])(.*[^\\\\])\\1"));
+  QRegExp quotes(QLatin1String("(['\"])(.*)\\1"));
   quotes.setMinimal(true);
-  QRegExp spaces(QString::fromLatin1("\\s+"));
+  QRegExp spaces(QLatin1String("\\s+"));
   spaces.setMinimal(true);
 
   QStringList args;
@@ -138,13 +138,13 @@ void ExecExternalFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
     value.remove('-'); // remove hyphens from isbn values
     // shouldn't hurt and might keep from confusing stupid search sources
   }
-  QRegExp rx1(QString::fromLatin1("['\"].*\\1"));
+  QRegExp rx1(QLatin1String("['\"].*\\1"));
   if(!rx1.exactMatch(value)) {
     value.prepend('"').append('"');
   }
   QString args = m_args[key_];
-  QRegExp rx2(QString::fromLatin1("['\"]%1\\1"));
-  args.replace(rx2, QString::fromLatin1("%1"));
+  QRegExp rx2(QLatin1String("['\"]%1\\1"));
+  args.replace(rx2, QLatin1String("%1"));
   startSearch(parseArguments(args.arg(value))); // replace %1 with search value
 }
 
@@ -195,7 +195,7 @@ void ExecExternalFetcher::slotData() {
 void ExecExternalFetcher::slotError() {
   GUI::CursorSaver cs(Qt::ArrowCursor);
   QString msg = m_process->readAllStandardError();
-  msg.prepend(source() + QString::fromLatin1(": "));
+  msg.prepend(source() + QLatin1String(": "));
   if(msg.endsWith(QChar('\n'))) {
     msg.truncate(msg.length()-1);
   }
@@ -255,56 +255,56 @@ void ExecExternalFetcher::slotProcessExited() {
     switch(coll->type()) {
       case Data::Collection::Book:
       case Data::Collection::Bibtex:
-        desc = entry->field(QString::fromLatin1("author"))
+        desc = entry->field(QLatin1String("author"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("publisher"));
-        if(!entry->field(QString::fromLatin1("cr_year")).isEmpty()) {
-          desc += QChar('/') + entry->field(QString::fromLatin1("cr_year"));
-        } else if(!entry->field(QString::fromLatin1("pub_year")).isEmpty()){
-          desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
+               + entry->field(QLatin1String("publisher"));
+        if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
+          desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+        } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
+          desc += QChar('/') + entry->field(QLatin1String("pub_year"));
         }
         break;
 
       case Data::Collection::Video:
-        desc = entry->field(QString::fromLatin1("studio"))
+        desc = entry->field(QLatin1String("studio"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("director"))
+               + entry->field(QLatin1String("director"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("year"))
+               + entry->field(QLatin1String("year"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("medium"));
+               + entry->field(QLatin1String("medium"));
         break;
 
       case Data::Collection::Album:
-        desc = entry->field(QString::fromLatin1("artist"))
+        desc = entry->field(QLatin1String("artist"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("label"))
+               + entry->field(QLatin1String("label"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("year"));
+               + entry->field(QLatin1String("year"));
         break;
 
       case Data::Collection::Game:
-        desc = entry->field(QString::fromLatin1("platform"));
+        desc = entry->field(QLatin1String("platform"));
         break;
 
       case Data::Collection::ComicBook:
-        desc = entry->field(QString::fromLatin1("publisher"))
+        desc = entry->field(QLatin1String("publisher"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("pub_year"));
+               + entry->field(QLatin1String("pub_year"));
         break;
 
      case Data::Collection::BoardGame:
-       desc = entry->field(QString::fromLatin1("designer"))
+       desc = entry->field(QLatin1String("designer"))
               + QChar('/')
-              + entry->field(QString::fromLatin1("publisher"))
+              + entry->field(QLatin1String("publisher"))
               + QChar('/')
-              + entry->field(QString::fromLatin1("year"));
+              + entry->field(QLatin1String("year"));
        break;
 
       default:
         break;
     }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
@@ -395,8 +395,8 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     gridLayout->addWidget(cb, ++row, 0);
     m_cbDict.insert(key, cb);
     GUI::LineEdit* le = new GUI::LineEdit(gbox);
-    le->setClickMessage(QString::fromLatin1("%1")); // for example
-    le->completionObject()->addItem(QString::fromLatin1("%1"));
+    le->setClickMessage(QLatin1String("%1")); // for example
+    le->completionObject()->addItem(QLatin1String("%1"));
     gridLayout->addWidget(le, row, 1);
     m_leDict.insert(key, le);
     if(fetcher_ && fetcher_->m_args.contains(key)) {
@@ -414,9 +414,9 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   m_cbUpdate = new QCheckBox(i18n("Update"), gbox);
   gridLayout->addWidget(m_cbUpdate, ++row, 0);
   m_leUpdate = new GUI::LineEdit(gbox);
-  m_leUpdate->setClickMessage(QString::fromLatin1("%{title}")); // for example
-  m_leUpdate->completionObject()->addItem(QString::fromLatin1("%{title}"));
-  m_leUpdate->completionObject()->addItem(QString::fromLatin1("%{isbn}"));
+  m_leUpdate->setClickMessage(QLatin1String("%{title}")); // for example
+  m_leUpdate->completionObject()->addItem(QLatin1String("%{title}"));
+  m_leUpdate->completionObject()->addItem(QLatin1String("%{isbn}"));
   gridLayout->addWidget(m_leUpdate, row, 1);
   /* TRANSLATORS: Do not translate %{author}. */
   w2 = i18n("<p>Enter the arguments which should be used to search for available updates to an entry.</p><p>"

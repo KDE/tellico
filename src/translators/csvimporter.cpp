@@ -50,7 +50,7 @@ using Tellico::Import::CSVImporter;
 CSVImporter::CSVImporter(const KUrl& url_) : Tellico::Import::TextImporter(url_),
     m_existingCollection(0),
     m_firstRowHeader(false),
-    m_delimiter(QString::fromLatin1(",")),
+    m_delimiter(QLatin1String(",")),
     m_cancelled(false),
     m_widget(0),
     m_table(0),
@@ -153,7 +153,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   }
 
   {
-    KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - CSV"));
+    KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - CSV"));
     config.writeEntry("Delimiter", m_delimiter);
     config.writeEntry("First Row Titles", m_firstRowHeader);
   }
@@ -279,14 +279,14 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_setColumnBtn = new KPushButton(i18n("&Assign Field"), groupBox);
   hlay3->addWidget(m_setColumnBtn);
   m_setColumnBtn->setWhatsThis(what);
-  m_setColumnBtn->setIcon(KIcon(QString::fromLatin1("dialog-ok-apply")));
+  m_setColumnBtn->setIcon(KIcon(QLatin1String("dialog-ok-apply")));
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
   hlay3->addStretch(10);
 
   l->addWidget(groupBox);
   l->addStretch(1);
 
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("ImportOptions - CSV"));
+  KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - CSV"));
   m_delimiter = config.readEntry("Delimiter", m_delimiter);
   m_firstRowHeader = config.readEntry("First Row Titles", m_firstRowHeader);
 

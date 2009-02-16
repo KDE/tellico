@@ -28,102 +28,102 @@ StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*
   if(addFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QString::fromLatin1("denomination"));
+  setDefaultGroupField(QLatin1String("denomination"));
 }
 
 Tellico::Data::FieldList StampCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = new Field(QString::fromLatin1("title"), i18n("Title"), Field::Dependent);
+  field = new Field(QLatin1String("title"), i18n("Title"), Field::Dependent);
   field->setCategory(i18n(stamp_general));
-  field->setDescription(QString::fromLatin1("%{year} %{description} %{denomination}"));
+  field->setDescription(QLatin1String("%{year} %{description} %{denomination}"));
   field->setFlags(Field::NoDelete);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("description"), i18n("Description"));
+  field = new Field(QLatin1String("description"), i18n("Description"));
   field->setCategory(i18n(stamp_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatTitle);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("denomination"), i18n("Denomination"));
+  field = new Field(QLatin1String("denomination"), i18n("Denomination"));
   field->setCategory(i18n(stamp_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("country"), i18n("Country"));
+  field = new Field(QLatin1String("country"), i18n("Country"));
   field->setCategory(i18n(stamp_general));
   field->setFormatFlag(Field::FormatPlain);
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("year"), i18n("Issue Year"), Field::Number);
+  field = new Field(QLatin1String("year"), i18n("Issue Year"), Field::Number);
   field->setCategory(i18n(stamp_general));
   field->setFlags(Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("color"), i18n("Color"));
+  field = new Field(QLatin1String("color"), i18n("Color"));
   field->setCategory(i18n(stamp_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("scott"), i18n("Scott#"));
+  field = new Field(QLatin1String("scott"), i18n("Scott#"));
   field->setCategory(i18n(stamp_general));
   list.append(field);
 
   QStringList grade = i18nc("Stamp grade levels - "
                             "Superb,Extremely Fine,Very Fine,Fine,Average,Poor",
                             "Superb,Extremely Fine,Very Fine,Fine,Average,Poor")
-                      .split(QRegExp(QString::fromLatin1("\\s*,\\s*")), QString::SkipEmptyParts);
-  field = new Field(QString::fromLatin1("grade"), i18n("Grade"), grade);
+                      .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
+  field = new Field(QLatin1String("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("cancelled"), i18n("Cancelled"), Field::Bool);
+  field = new Field(QLatin1String("cancelled"), i18n("Cancelled"), Field::Bool);
   field->setCategory(i18n(stamp_condition));
   list.append(field);
 
   /* TRANSLATORS: See http://en.wikipedia.org/wiki/Stamp_hinge */
-  field = new Field(QString::fromLatin1("hinged"), i18n("Hinged"));
+  field = new Field(QLatin1String("hinged"), i18n("Hinged"));
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("centering"), i18n("Centering"));
+  field = new Field(QLatin1String("centering"), i18n("Centering"));
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("gummed"), i18n("Gummed"));
+  field = new Field(QLatin1String("gummed"), i18n("Gummed"));
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("pur_date"), i18n("Purchase Date"));
+  field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(stamp_personal));
   field->setFormatFlag(Field::FormatDate);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("pur_price"), i18n("Purchase Price"));
+  field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
   field->setCategory(i18n(stamp_personal));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("location"), i18n("Location"));
+  field = new Field(QLatin1String("location"), i18n("Location"));
   field->setCategory(i18n(stamp_personal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatPlain);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("gift"), i18n("Gift"), Field::Bool);
+  field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);
   field->setCategory(i18n(stamp_personal));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("image"), i18n("Image"), Field::Image);
+  field = new Field(QLatin1String("image"), i18n("Image"), Field::Image);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("comments"), i18n("Comments"), Field::Para);
+  field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
   list.append(field);
 
   return list;

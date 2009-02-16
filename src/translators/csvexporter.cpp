@@ -49,7 +49,7 @@ QString& CSVExporter::escapeText(QString& text_) {
   if(text_.indexOf('"') != -1) {
     quotes = true;
     // quotation marks will be escaped by using a double pair
-    text_.replace('"', QString::fromLatin1("\"\""));
+    text_.replace('"', QLatin1String("\"\""));
   }
   // if the text contains quotes or the delimiter, it needs to be surrounded by quotes
   if(quotes || text_.indexOf(m_delimiter)!= -1) {

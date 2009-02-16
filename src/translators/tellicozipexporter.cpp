@@ -73,14 +73,14 @@ bool TellicoZipExporter::exec() {
 
   KZip zip(&buf);
   zip.open(QIODevice::WriteOnly);
-  zip.writeFile(QString::fromLatin1("tellico.xml"), QString::null, QString::null, xml, xml.size());
+  zip.writeFile(QLatin1String("tellico.xml"), QString::null, QString::null, xml, xml.size());
 
   if(m_includeImages) {
     ProgressManager::self()->setProgress(this, 10);
     // gonna be lazy and just increment progress every 3 images
     // it might be less, might be more
     int j = 0;
-    const QString imagesDir = QString::fromLatin1("images/");
+    const QString imagesDir = QLatin1String("images/");
     StringSet imageSet;
     Data::FieldList imageFields = coll->imageFields();
     // already took 10%, only 90% left

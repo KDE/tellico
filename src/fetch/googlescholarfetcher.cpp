@@ -40,7 +40,7 @@ GoogleScholarFetcher::GoogleScholarFetcher(QObject* parent_)
     : Fetcher(parent_),
       m_limit(GOOGLE_MAX_RETURNS_TOTAL), m_start(0), m_job(0), m_started(false),
       m_cookieIsSet(false) {
-  m_bibtexRx = QRegExp(QString::fromLatin1("<a\\s.*href\\s*=\\s*\"([^>]*scholar\\.bib[^>]*)\""));
+  m_bibtexRx = QRegExp(QLatin1String("<a\\s.*href\\s*=\\s*\"([^>]*scholar\\.bib[^>]*)\""));
   m_bibtexRx.setMinimal(true);
 }
 
@@ -49,7 +49,7 @@ GoogleScholarFetcher::~GoogleScholarFetcher() {
 
 QString GoogleScholarFetcher::defaultName() {
   // no i18n
-  return QString::fromLatin1("Google Scholar");
+  return QLatin1String("Google Scholar");
 }
 
 QString GoogleScholarFetcher::source() const {
@@ -67,7 +67,7 @@ void GoogleScholarFetcher::readConfigHook(const KConfigGroup& config_) {
 void GoogleScholarFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   if(!m_cookieIsSet) {
     // have to set preferences to have bibtex output
-    FileHandler::readTextFile(QString::fromLatin1(SCHOLAR_SET_BIBTEX_URL), true);
+    FileHandler::readTextFile(KUrl(SCHOLAR_SET_BIBTEX_URL), true);
     m_cookieIsSet = true;
   }
   m_key = key_;
@@ -92,20 +92,20 @@ void GoogleScholarFetcher::doSearch() {
     return;
   }
 
-  KUrl u(QString::fromLatin1(SCHOLAR_BASE_URL));
-  u.addQueryItem(QString::fromLatin1("start"), QString::number(m_start));
+  KUrl u(SCHOLAR_BASE_URL);
+  u.addQueryItem(QLatin1String("start"), QString::number(m_start));
 
   switch(m_key) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("q"), QString::fromLatin1("allintitle:%1").arg(m_value));
+      u.addQueryItem(QLatin1String("q"), QString::fromLatin1("allintitle:%1").arg(m_value));
       break;
 
     case Keyword:
-      u.addQueryItem(QString::fromLatin1("q"), m_value);
+      u.addQueryItem(QLatin1String("q"), m_value);
       break;
 
     case Person:
-      u.addQueryItem(QString::fromLatin1("q"), QString::fromLatin1("author:%1").arg(m_value));
+      u.addQueryItem(QLatin1String("q"), QString::fromLatin1("author:%1").arg(m_value));
       break;
 
     default:
@@ -156,7 +156,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   QString bibtex;
   int count = 0;
   for(int pos = text.indexOf(m_bibtexRx); count < m_limit && pos > -1; pos = text.indexOf(m_bibtexRx, pos+m_bibtexRx.matchedLength()), ++count) {
-    KUrl bibtexUrl(QString::fromLatin1(SCHOLAR_BASE_URL), m_bibtexRx.cap(1));
+    KUrl bibtexUrl(KUrl(SCHOLAR_BASE_URL), m_bibtexRx.cap(1));
 //    myDebug() << bibtexUrl << endl;
     bibtex += FileHandler::readTextFile(bibtexUrl, true);
   }
@@ -179,13 +179,13 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
       // might get aborted
       break;
     }
-    QString desc = entry->field(QString::fromLatin1("author"))
-                 + QChar('/') + entry->field(QString::fromLatin1("publisher"));
-    if(!entry->field(QString::fromLatin1("year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QString::fromLatin1("year"));
+    QString desc = entry->field(QLatin1String("author"))
+                 + QChar('/') + entry->field(QLatin1String("publisher"));
+    if(!entry->field(QLatin1String("year")).isEmpty()) {
+      desc += QChar('/') + entry->field(QLatin1String("year"));
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++count;
@@ -206,7 +206,7 @@ void GoogleScholarFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   // limit to top 5 results
   m_limit = 5;
 
-  QString title = entry_->field(QString::fromLatin1("title"));
+  QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
     search(Title, title);
     return;

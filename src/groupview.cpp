@@ -55,8 +55,8 @@ GroupView::GroupView(QWidget* parent_)
   connect(header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
           SLOT(slotSortingChanged(int,Qt::SortOrder)));
 
-  m_groupOpenIconName = QString::fromLatin1("folder-open");
-  m_groupClosedIconName = QString::fromLatin1("folder");
+  m_groupOpenIconName = QLatin1String("folder-open");
+  m_groupClosedIconName = QLatin1String("folder");
   EntryGroupModel* groupModel = new EntryGroupModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
   sortModel->setSourceModel(groupModel);
@@ -84,8 +84,8 @@ void GroupView::addCollection(Tellico::Data::CollPtr coll_) {
   // when the coll gets set for the first time, the pixmaps need to be updated
   if((m_coll->hasField(m_groupBy) && m_coll->fieldByName(m_groupBy)->formatFlag() == Data::Field::FormatName)
      || m_groupBy == Data::Collection::s_peopleGroupName) {
-    m_groupOpenIconName = QString::fromLatin1("person-open");
-    m_groupClosedIconName = QString::fromLatin1("person");
+    m_groupOpenIconName = QLatin1String("person-open");
+    m_groupClosedIconName = QLatin1String("person");
   }
 
   updateHeader();
@@ -136,7 +136,7 @@ void GroupView::populateCollection() {
   foreach(Data::EntryGroup* group, *dict) {
     if(group->groupName() == i18n(Data::Collection::s_emptyGroupTitle)) {
       QModelIndex emptyGroupIndex = sourceModel()->indexFromGroup(group);
-      sourceModel()->setData(emptyGroupIndex, QString::fromLatin1("folder-red"), Qt::DecorationRole);
+      sourceModel()->setData(emptyGroupIndex, QLatin1String("folder-red"), Qt::DecorationRole);
       break;
     }
   }
@@ -249,11 +249,11 @@ void GroupView::contextMenuEvent(QContextMenuEvent* event_) {
   KMenu menu(this);
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
-    menu.addAction(KIcon(QString::fromLatin1("arrow-down-double")),
+    menu.addAction(KIcon(QLatin1String("arrow-down-double")),
                    i18n("Expand All Groups"), this, SLOT(expandAll()));
-    menu.addAction(KIcon(QString::fromLatin1("arrow-up-double")),
+    menu.addAction(KIcon(QLatin1String("arrow-up-double")),
                    i18n("Collapse All Groups"), this, SLOT(collapseAll()));
-    menu.addAction(KIcon(QString::fromLatin1("view-filter")),
+    menu.addAction(KIcon(QLatin1String("view-filter")),
                    i18n("Filter by Group"), this, SLOT(slotFilterGroup()));
   } else {
     Controller::self()->plugEntryActions(&menu);
@@ -263,7 +263,7 @@ void GroupView::contextMenuEvent(QContextMenuEvent* event_) {
 
 void GroupView::slotCollapsed(const QModelIndex& index_) {
   if(model()->data(index_).toString() == i18n(Tellico::Data::Collection::s_emptyGroupTitle)) {
-    model()->setData(index_, QString::fromLatin1("folder-red"), Qt::DecorationRole);
+    model()->setData(index_, QLatin1String("folder-red"), Qt::DecorationRole);
   } else {
     model()->setData(index_, m_groupClosedIconName, Qt::DecorationRole);
   }
@@ -271,7 +271,7 @@ void GroupView::slotCollapsed(const QModelIndex& index_) {
 
 void GroupView::slotExpanded(const QModelIndex& index_) {
   if(model()->data(index_).toString() == i18n(Tellico::Data::Collection::s_emptyGroupTitle)) {
-    model()->setData(index_, QString::fromLatin1("folder-red"), Qt::DecorationRole);
+    model()->setData(index_, QLatin1String("folder-red"), Qt::DecorationRole);
   } else {
     model()->setData(index_, m_groupOpenIconName, Qt::DecorationRole);
   }
@@ -289,11 +289,11 @@ void GroupView::setGroupField(const QString& groupField_) {
   }
   if((m_coll->hasField(groupField_) && m_coll->fieldByName(groupField_)->formatFlag() == Tellico::Data::Field::FormatName)
      || groupField_ == Tellico::Data::Collection::s_peopleGroupName) {
-    m_groupOpenIconName = QString::fromLatin1("person-open");
-    m_groupClosedIconName = QString::fromLatin1("person");
+    m_groupOpenIconName = QLatin1String("person-open");
+    m_groupClosedIconName = QLatin1String("person");
   } else {
-    m_groupOpenIconName = QString::fromLatin1("folder-open");
-    m_groupClosedIconName = QString::fromLatin1("folder");
+    m_groupOpenIconName = QLatin1String("folder-open");
+    m_groupClosedIconName = QLatin1String("folder");
   }
   updateHeader();
   populateCollection();
@@ -412,7 +412,7 @@ void GroupView::addGroup(Tellico::Data::EntryGroup* group_) {
   }
   QModelIndex index = sourceModel()->addGroup(group_);
   if(group_->groupName() == i18n(Data::Collection::s_emptyGroupTitle)) {
-    sourceModel()->setData(index, QString::fromLatin1("folder-red"), Qt::DecorationRole);
+    sourceModel()->setData(index, QLatin1String("folder-red"), Qt::DecorationRole);
   } else {
     sourceModel()->setData(index, m_groupClosedIconName, Qt::DecorationRole);
   }

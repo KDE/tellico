@@ -34,19 +34,19 @@ GriffithImporter::~GriffithImporter() {
 }
 
 Tellico::Data::CollPtr GriffithImporter::collection() {
-  QString filename = QDir::homePath() + QString::fromLatin1("/.griffith/griffith.db");
+  QString filename = QDir::homePath() + QLatin1String("/.griffith/griffith.db");
   if(!QFile::exists(filename)) {
     myWarning() << "GriffithImporter::collection() - database not found: " << filename << endl;
     return Data::CollPtr();
   }
 
-  QString python = KStandardDirs::findExe(QString::fromLatin1("python"));
+  QString python = KStandardDirs::findExe(QLatin1String("python"));
   if(python.isEmpty()) {
     myWarning() << "GriffithImporter::collection() - python not found!" << endl;
     return Data::CollPtr();
   }
 
-  QString griffith = KGlobal::dirs()->findResource("appdata", QString::fromLatin1("griffith2tellico.py"));
+  QString griffith = KGlobal::dirs()->findResource("appdata", QLatin1String("griffith2tellico.py"));
   if(griffith.isEmpty()) {
     myWarning() << "GriffithImporter::collection() - griffith2tellico.py not found!" << endl;
     return Data::CollPtr();

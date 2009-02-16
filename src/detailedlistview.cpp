@@ -337,7 +337,7 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
       config.writeEntry("Prev2SortColumn" + configN, info[i].prev2Sort);
       config.writeEntry("ColumnState"     + configN, info[i].state);
     }
-    configN = QString::fromLatin1("_0");
+    configN = QLatin1String("_0");
   }
 
   /*

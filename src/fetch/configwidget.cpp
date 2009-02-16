@@ -69,7 +69,7 @@ void ConfigWidget::saveFieldsConfig(KConfigGroup& config_) const {
       fields << it.key();
     }
   }
-  config_.writeEntry(QString::fromLatin1("Custom Fields"), fields);
+  config_.writeEntry(QLatin1String("Custom Fields"), fields);
 }
 
 #include "configwidget.moc"

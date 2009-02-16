@@ -160,17 +160,17 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
     str = QString::fromUtf8(bt_entry_type(node));
 //    kDebug() << "entry type: " << str;
     // text is automatically put into lower-case by btparse
-    BibtexHandler::setFieldValue(entry, QString::fromLatin1("entry-type"), str);
+    BibtexHandler::setFieldValue(entry, QLatin1String("entry-type"), str);
 
     str = QString::fromUtf8(bt_entry_key(node));
 //    kDebug() << "entry key: " << str;
-    BibtexHandler::setFieldValue(entry, QString::fromLatin1("key"), str);
+    BibtexHandler::setFieldValue(entry, QLatin1String("key"), str);
 
     char* name;
     AST* field = 0;
     while((field = bt_next_field(node, field, &name))) {
 //      kDebug() << "\tfound: " << name;
-//      str = QString::fromLatin1(bt_get_text(field));
+//      str = QLatin1String(bt_get_text(field));
       str.truncate(0);
       AST* value = 0;
       bt_nodetype type;
@@ -197,7 +197,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
       }
       QString fieldName = QString::fromUtf8(name);
       if(fieldName == QLatin1String("author") || fieldName == QLatin1String("editor")) {
-        str.replace(QRegExp(QString::fromLatin1("\\sand\\s")), QString::fromLatin1("; "));
+        str.replace(QRegExp(QLatin1String("\\sand\\s")), QLatin1String("; "));
       }
       BibtexHandler::setFieldValue(entry, fieldName, str);
     }
@@ -235,8 +235,8 @@ void BibtexImporter::parseText(const QString& text) {
 //  bt_set_stringopts(BTE_PREAMBLE, BTO_CONVERT | BTO_EXPAND);
 
   QString entry;
-  QRegExp rx(QString::fromLatin1("[{}]"));
-  QRegExp macroName(QString::fromLatin1("@string\\s*\\{\\s*(.*)="), Qt::CaseInsensitive);
+  QRegExp rx(QLatin1String("[{}]"));
+  QRegExp macroName(QLatin1String("@string\\s*\\{\\s*(.*)="), Qt::CaseInsensitive);
   macroName.setMinimal(true);
 
   bool needsCleanup = false;
@@ -324,7 +324,7 @@ bool BibtexImporter::maybeBibtex(const KUrl& url_) {
   }
 
   bt_initialize();
-  QRegExp rx(QString::fromLatin1("[{}]"));
+  QRegExp rx(QLatin1String("[{}]"));
 
   ushort bt_options = 0; // ushort is defined in btparse.h
   boolean ok; // boolean is defined in btparse.h as an int

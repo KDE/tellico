@@ -42,14 +42,14 @@ using Tellico::Export::ONIXExporter;
 
 ONIXExporter::ONIXExporter() : Tellico::Export::Exporter(),
     m_handler(0),
-    m_xsltFile(QString::fromLatin1("tellico2onix.xsl")),
+    m_xsltFile(QLatin1String("tellico2onix.xsl")),
     m_includeImages(true),
     m_widget(0) {
 }
 
 ONIXExporter::ONIXExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(0),
-    m_xsltFile(QString::fromLatin1("tellico2onix.xsl")),
+    m_xsltFile(QLatin1String("tellico2onix.xsl")),
     m_includeImages(true),
     m_widget(0) {
 }
@@ -80,18 +80,18 @@ bool ONIXExporter::exec() {
 
   KZip zip(&buf);
   zip.open(QIODevice::WriteOnly);
-  zip.writeFile(QString::fromLatin1("onix.xml"), QString::null, QString::null, xml, xml.size());
+  zip.writeFile(QLatin1String("onix.xml"), QString::null, QString::null, xml, xml.size());
 
   // use a dict for fast random access to keep track of which images were written to the file
   if(m_includeImages) { // for now, we're ignoring (options() & Export::ExportImages)
-    const QString cover = QString::fromLatin1("cover");
+    const QString cover = QLatin1String("cover");
     StringSet imageSet;
     foreach(Data::EntryPtr entry, entries()) {
       const Data::Image& img = ImageFactory::imageById(entry->field(cover));
       if(!img.isNull() && !imageSet.has(img.id())
          && (img.format() == "JPEG" || img.format() == "JPG" || img.format() == "GIF")) { /// onix only understands jpeg and gif
         QByteArray ba = img.byteArray();
-        zip.writeFile(QString::fromLatin1("images/") + entry->field(cover),
+        zip.writeFile(QLatin1String("images/") + entry->field(cover),
                       QString::null, QString::null, ba, ba.size());
         imageSet.add(img.id());
       }
@@ -141,7 +141,7 @@ QString ONIXExporter::text() {
   m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile));
 
   QDateTime now = QDateTime::currentDateTime();
-  m_handler->addStringParam("sentDate", now.toString(QString::fromLatin1("yyyyMMddhhmm")).toUtf8());
+  m_handler->addStringParam("sentDate", now.toString(QLatin1String("yyyyMMddhhmm")).toUtf8());
 
   m_handler->addStringParam("version", VERSION);
 
@@ -155,7 +155,7 @@ QString ONIXExporter::text() {
   exporter.setOptions(options() | Export::ExportUTF8);
   QDomDocument output = exporter.exportXML();
 #if 0
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t << output.toString();

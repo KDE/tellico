@@ -45,16 +45,16 @@ bool Entry::operator==(const Entry& e1) {
      e1.m_coll && e1.m_coll->type() == Collection::File) {
     // don't forget case where both could have empty urls
     // but different values for other fields
-    QString u = field(QString::fromLatin1("url"));
+    QString u = field(QLatin1String("url"));
     if(!u.isEmpty()) {
       // versions before 1.2.7 could have saved the url without the protocol
-      bool b = KUrl(u) == KUrl(e1.field(QString::fromLatin1("url")));
+      bool b = KUrl(u) == KUrl(e1.field(QLatin1String("url")));
       if(b) {
         return true;
       } else {
-        Data::FieldPtr f = m_coll->fieldByName(QString::fromLatin1("url"));
-        if(f && f->property(QString::fromLatin1("relative")) == QLatin1String("true")) {
-          return KUrl(Document::self()->URL(), u) == KUrl(e1.field(QString::fromLatin1("url")));
+        Data::FieldPtr f = m_coll->fieldByName(QLatin1String("url"));
+        if(f && f->property(QLatin1String("relative")) == QLatin1String("true")) {
+          return KUrl(Document::self()->URL(), u) == KUrl(e1.field(QLatin1String("url")));
         }
       }
     }
@@ -114,17 +114,17 @@ void Entry::setCollection(Tellico::Data::CollPtr coll_) {
   // it would be better to do this in a real OOO way, but this should work
   const bool addEntryType = m_coll->type() == Collection::Book &&
                             coll_->type() == Collection::Bibtex &&
-                            !m_coll->hasField(QString::fromLatin1("entry-type"));
+                            !m_coll->hasField(QLatin1String("entry-type"));
   m_coll = coll_;
   m_id = -1;
   // set this after changing the m_coll pointer since setField() checks field validity
   if(addEntryType) {
-    setField(QString::fromLatin1("entry-type"), QString::fromLatin1("book"));
+    setField(QLatin1String("entry-type"), QLatin1String("book"));
   }
 }
 
 QString Entry::title() const {
-  return formattedField(QString::fromLatin1("title"));
+  return formattedField(QLatin1String("title"));
 }
 
 QString Entry::field(Tellico::Data::FieldPtr field_, bool formatted_/*=false*/) const {
@@ -311,7 +311,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
     // only use first column for group
     QStringList newGroupNames;
     foreach(const QString& group, groups) {
-      QString newGroupName = group.section(QString::fromLatin1("::"),  0,  0);
+      QString newGroupName = group.section(QLatin1String("::"),  0,  0);
       if(!newGroupName.isEmpty()) {
         newGroupNames.append(newGroupName);
       }

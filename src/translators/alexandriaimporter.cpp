@@ -47,18 +47,18 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   dataDir.cd(m_library->currentText());
   dataDir.setFilter(QDir::Files | QDir::Readable | QDir::NoSymLinks);
 
-  const QString title = QString::fromLatin1("title");
-  const QString author = QString::fromLatin1("author");
-  const QString year = QString::fromLatin1("pub_year");
-  const QString binding = QString::fromLatin1("binding");
-  const QString isbn = QString::fromLatin1("isbn");
-  const QString pub = QString::fromLatin1("publisher");
-  const QString rating = QString::fromLatin1("rating");
-  const QString cover = QString::fromLatin1("cover");
-  const QString comments = QString::fromLatin1("comments");
+  const QString title = QLatin1String("title");
+  const QString author = QLatin1String("author");
+  const QString year = QLatin1String("pub_year");
+  const QString binding = QLatin1String("binding");
+  const QString isbn = QLatin1String("isbn");
+  const QString pub = QLatin1String("publisher");
+  const QString rating = QLatin1String("rating");
+  const QString cover = QLatin1String("cover");
+  const QString comments = QLatin1String("comments");
 
   // start with yaml files
-  dataDir.setNameFilters(QStringList() << QString::fromLatin1("*.yaml"));
+  dataDir.setNameFilters(QStringList() << QLatin1String("*.yaml"));
   const QStringList files = dataDir.entryList();
   const uint numFiles = files.count();
   const uint stepSize = qMax(s_stepSize, numFiles/100);
@@ -70,9 +70,9 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   ProgressItem::Done done(this);
 
   QStringList covers;
-  covers << QString::fromLatin1(".cover")
-         << QString::fromLatin1("_medium.jpg")
-         << QString::fromLatin1("_small.jpg");
+  covers << QLatin1String(".cover")
+         << QLatin1String("_medium.jpg")
+         << QLatin1String("_small.jpg");
 
   QTextStream ts;
   ts.setCodec("UTF-8"); // YAML is always utf8?
@@ -96,7 +96,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         readNextLine = true;
       }
       // skip the line that starts with ---
-      if(line.isEmpty() || line.startsWith(QString::fromLatin1("---"))) {
+      if(line.isEmpty() || line.startsWith(QLatin1String("---"))) {
         continue;
       }
       if(line.endsWith(QChar('\\'))) {
@@ -118,13 +118,13 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
       if(alexField == QLatin1String("authors")) {
         QStringList authors;
         line = ts.readLine();
-        QRegExp begin(QString::fromLatin1("^\\s*-\\s+"));
+        QRegExp begin(QLatin1String("^\\s*-\\s+"));
         while(!line.isNull() && line.indexOf(begin) > -1) {
           line.remove(begin);
           authors += clean(line);
           line = ts.readLine();
         }
-        entry->setField(author, authors.join(QString::fromLatin1("; ")));
+        entry->setField(author, authors.join(QLatin1String("; ")));
         // the next line has already been read
         readNextLine = false;
 
@@ -202,7 +202,7 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_) {
   hlay->addWidget(m_library);
 
   // .alexandria might not exist
-  if(m_libraryDir.cd(QString::fromLatin1(".alexandria"))) {
+  if(m_libraryDir.cd(QLatin1String(".alexandria"))) {
     m_library->addItems(m_libraryDir.entryList());
   }
 
@@ -212,10 +212,10 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_) {
 }
 
 QString& AlexandriaImporter::cleanLine(QString& str_) {
-  static QRegExp escRx(QString::fromLatin1("\\\\x(\\w\\w)"), Qt::CaseInsensitive);
-  str_.remove(QString::fromLatin1("\\r"));
-  str_.replace(QString::fromLatin1("\\n"), QString::fromLatin1("\n"));
-  str_.replace(QString::fromLatin1("\\t"), QString::fromLatin1("\t"));
+  static QRegExp escRx(QLatin1String("\\\\x(\\w\\w)"), Qt::CaseInsensitive);
+  str_.remove(QLatin1String("\\r"));
+  str_.replace(QLatin1String("\\n"), QLatin1String("\n"));
+  str_.replace(QLatin1String("\\t"), QLatin1String("\t"));
 
   // YAML uses escape sequences like \xC3
   int pos = escRx.indexIn(str_);
@@ -239,7 +239,7 @@ QString& AlexandriaImporter::cleanLine(QString& str_) {
 }
 
 QString& AlexandriaImporter::clean(QString& str_) {
-  const QRegExp quote(QString::fromLatin1("\\\\\"")); // equals \"
+  const QRegExp quote(QLatin1String("\\\\\"")); // equals \"
   if(str_.startsWith(QChar('\'')) || str_.startsWith(QChar('"'))) {
     str_.remove(0, 1);
   }
@@ -247,7 +247,7 @@ QString& AlexandriaImporter::clean(QString& str_) {
     str_.truncate(str_.length()-1);
   }
   // we ignore YAML tags, this is not actually a good parser, but will do for now
-  str_.remove(QRegExp(QString::fromLatin1("^![^\\s]*\\s+")));
+  str_.remove(QRegExp(QLatin1String("^![^\\s]*\\s+")));
   return str_.replace(quote, QChar('"'));
 }
 

@@ -36,7 +36,7 @@ namespace {
 using Tellico::Export::AlexandriaExporter;
 
 QString& AlexandriaExporter::escapeText(QString& str_) {
-  str_.replace('"', QString::fromLatin1("\\\""));
+  str_.replace('"', QLatin1String("\\\""));
   return str_;
 }
 
@@ -51,7 +51,7 @@ bool AlexandriaExporter::exec() {
     return false;
   }
 
-  const QString alexDirName = QString::fromLatin1(".alexandria");
+  const QString alexDirName = QLatin1String(".alexandria");
 
   // create if necessary
   QDir libraryDir = QDir::home();
@@ -98,7 +98,7 @@ bool AlexandriaExporter::exec() {
 // everything is put between quotes except for the rating, just to be sure it's interpreted as a string
 bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr entry_) {
   // the filename is the isbn without dashes, followed by .yaml
-  QString isbn = entry_->field(QString::fromLatin1("isbn"));
+  QString isbn = entry_->field(QLatin1String("isbn"));
   if(isbn.isEmpty()) {
     return false; // can't write it since Alexandria uses isbn as name of file
   }
@@ -117,7 +117,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
   ts.setCodec("UTF-8");
   ts << "--- !ruby/object:Alexandria::Book\n";
   ts << "authors:\n";
-  QStringList authors = entry_->fields(QString::fromLatin1("author"), format);
+  QStringList authors = entry_->fields(QLatin1String("author"), format);
   for(QStringList::Iterator it = authors.begin(); it != authors.end(); ++it) {
     ts << "  - " << escapeText(*it) << "\n";
   }
@@ -126,30 +126,30 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
     ts << "  - n/a\n";
   }
 
-  QString tmp = entry_->field(QString::fromLatin1("title"), format);
+  QString tmp = entry_->field(QLatin1String("title"), format);
   ts << "title: \"" << escapeText(tmp) << "\"\n";
 
   // Alexandria refers to the binding as the edition
-  tmp = entry_->field(QString::fromLatin1("binding"), format);
+  tmp = entry_->field(QLatin1String("binding"), format);
   ts << "edition: \"" << escapeText(tmp) << "\"\n";
 
   // sometimes Alexandria interprets the isbn as a number instead of a string
   // I have no idea how to debug ruby, so err on safe side and add quotes
   ts << "isbn: \"" << isbn << "\"\n";
 
-  tmp = entry_->field(QString::fromLatin1("comments"), format);
+  tmp = entry_->field(QLatin1String("comments"), format);
   ts << "notes: \"" << escapeText(tmp) << "\"\n";
 
-  tmp = entry_->field(QString::fromLatin1("publisher"), format);
+  tmp = entry_->field(QLatin1String("publisher"), format);
   // publisher uses n/a when empty
-  ts << "publisher: \"" << (tmp.isEmpty() ? QString::fromLatin1("n/a") : escapeText(tmp)) << "\"\n";
+  ts << "publisher: \"" << (tmp.isEmpty() ? QLatin1String("n/a") : escapeText(tmp)) << "\"\n";
 
-  tmp = entry_->field(QString::fromLatin1("pub_year"), format);
+  tmp = entry_->field(QLatin1String("pub_year"), format);
   if(!tmp.isEmpty()) {
     ts << "publishing_year: \"" << escapeText(tmp) << "\"\n";
   }
 
-  tmp = entry_->field(QString::fromLatin1("rating"));
+  tmp = entry_->field(QLatin1String("rating"));
   bool ok;
   int rating = Tellico::toUInt(tmp, &ok);
   if(ok) {
@@ -158,7 +158,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
 
   file.close();
 
-  QString cover = entry_->field(QString::fromLatin1("cover"));
+  QString cover = entry_->field(QLatin1String("cover"));
   if(cover.isEmpty() || !(options() & Export::ExportImages)) {
     return true; // all done
   }
@@ -175,8 +175,8 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
     img2 = img1.scaled(ALEXANDRIA_MAX_SIZE_MEDIUM, ALEXANDRIA_MAX_SIZE_MEDIUM,
                        Qt::KeepAspectRatio, Qt::SmoothTransformation); // scale up
   }
-  if(!img1.save(filename + QString::fromLatin1("_medium.jpg"), "JPEG")
-     || !img2.save(filename + QString::fromLatin1("_small.jpg"), "JPEG")) {
+  if(!img1.save(filename + QLatin1String("_medium.jpg"), "JPEG")
+     || !img2.save(filename + QLatin1String("_small.jpg"), "JPEG")) {
     return false;
   }
   return true;

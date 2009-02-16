@@ -156,14 +156,14 @@ bool CalendarHandler::checkCalendar(KCal::CalendarResources* resources) {
   KCal::CalendarResourceManager* manager = resources->resourceManager();
   if(manager->isEmpty()) {
     kWarning() << "Tellico::CalendarHandler::checkCalendar() - adding default calendar";
-    KConfig config(QString::fromLatin1("korganizerrc"));
+    KConfig config(QLatin1String("korganizerrc"));
     config.setGroup("General");
     QString fileName = config.readPathEntry("Active Calendar", QString());
 
     QString resourceName;
     KCal::ResourceCalendar* defaultResource = 0;
     if(fileName.isEmpty()) {
-      fileName = KStandardDirs::locateLocal("appdata", QString::fromLatin1("std.ics"));
+      fileName = KStandardDirs::locateLocal("appdata", QLatin1String("std.ics"));
       resourceName = i18n("Default Calendar");
       defaultResource = new KCal::ResourceLocal(fileName);
     } else {
@@ -228,7 +228,7 @@ void CalendarHandler::populateTodo(KCal::Todo* todo_, Data::LoanPtr loan_) {
 QString CalendarHandler::timezone() {
   QString zone;
 
-  KConfig korgcfg(locate(QString::fromLatin1("config"), QString::fromLatin1("korganizerrc")));
+  KConfig korgcfg(locate(QLatin1String("config"), QLatin1String("korganizerrc")));
   korgcfg.setGroup("Time & Date");
   QString tz(korgcfg.readEntry("TimeZoneId"));
   if(!tz.isEmpty()) {
@@ -239,7 +239,7 @@ QString CalendarHandler::timezone() {
     int len = ::readlink("/etc/localtime", zonefilebuf, PATH_MAX);
     if(len > 0 && len < PATH_MAX) {
       zone = QString::fromLocal8Bit(zonefilebuf, len);
-      zone = zone.mid(zone.find(QString::fromLatin1("zoneinfo/")) + 9);
+      zone = zone.mid(zone.find(QLatin1String("zoneinfo/")) + 9);
     } else {
       tzset();
       zone = tzname[0];

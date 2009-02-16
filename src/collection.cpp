@@ -30,7 +30,7 @@
 using Tellico::Data::Collection;
 
 const char* Collection::s_emptyGroupTitle = I18N_NOOP("(Empty)");
-const QString Collection::s_peopleGroupName = QString::fromLatin1("_people");
+const QString Collection::s_peopleGroupName = QLatin1String("_people");
 
 Collection::Collection(const QString& title_)
     : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryIdDict()
@@ -137,7 +137,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
 
   if(newField_->type() == Field::Table2) {
     newField_->setType(Data::Field::Table);
-    newField_->setProperty(QString::fromLatin1("columns"), QChar('2'));
+    newField_->setProperty(QLatin1String("columns"), QChar('2'));
   }
 
   // the original field type is kept
@@ -799,7 +799,7 @@ int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryP
 
   // start with twice the title score
   // and since the minimum is > 10, then need more than just a perfect title match
-  int res = 2*EntryComparison::score(entry1_, entry2_, QString::fromLatin1("title"), this);
+  int res = 2*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
   // then add score for each field
   FieldList fields = entry1_->collection()->fields();
   foreach(FieldPtr field, fields) {
@@ -830,13 +830,13 @@ bool Collection::mergeEntry(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr 
       continue;
     } else if(field->type() == Field::Para) {
       // for paragraph fields, concatenate the values, if they're not equal
-      e1->setField(field, e1->field(field) + QString::fromLatin1("<br/><br/>") + e2->field(field));
+      e1->setField(field, e1->field(field) + QLatin1String("<br/><br/>") + e2->field(field));
       ret = true;
     } else if(field->type() == Field::Table) {
       // if field F is a table-type field (album tracks, files, etc.), merge rows (keep their position)
       // if e1's F val in [row i, column j] empty, replace with e2's val at same position
       // if different (non-empty) vals at same position, CONFLICT!
-      const QString sep = QString::fromLatin1("::");
+      const QString sep = QLatin1String("::");
       QStringList vals1 = e1->fields(field, false);
       QStringList vals2 = e2->fields(field, false);
       while(vals1.count() < vals2.count()) {
@@ -881,7 +881,7 @@ bool Collection::mergeEntry(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr 
         }
       }
       if(ret) {
-        e1->setField(field, vals1.join(QString::fromLatin1("; ")));
+        e1->setField(field, vals1.join(QLatin1String("; ")));
       }
 // remove the merging due to use comments
 // maybe in the future have a more intelligent way
@@ -900,7 +900,7 @@ bool Collection::mergeEntry(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr 
       }
 // not sure if I think it should be sorted or not
 //      items1.sort();
-      e1->setField(field, items1.join(QString::fromLatin1("; ")));
+      e1->setField(field, items1.join(QLatin1String("; ")));
       ret = true;
 #endif
     } else if(askUser_ && e1->field(field) != e2->field(field)) {

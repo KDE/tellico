@@ -95,35 +95,35 @@ void ISBNdbFetcher::continueSearch() {
 void ISBNdbFetcher::doSearch() {
 //  myDebug() << "ISBNdbFetcher::search() - value = " << value_ << endl;
 
-  KUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
-  u.addQueryItem(QString::fromLatin1("access_key"), QString::fromLatin1(ISBNDB_APP_ID));
-  u.addQueryItem(QString::fromLatin1("results"), QString::fromLatin1("details,authors,subjects,texts"));
-  u.addQueryItem(QString::fromLatin1("page_number"), QString::number(m_page));
+  KUrl u(ISBNDB_BASE_URL);
+  u.addQueryItem(QLatin1String("access_key"), QLatin1String(ISBNDB_APP_ID));
+  u.addQueryItem(QLatin1String("results"), QLatin1String("details,authors,subjects,texts"));
+  u.addQueryItem(QLatin1String("page_number"), QString::number(m_page));
 
   switch(m_key) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("index1"), QString::fromLatin1("title"));
-      u.addQueryItem(QString::fromLatin1("value1"), m_value);
+      u.addQueryItem(QLatin1String("index1"), QLatin1String("title"));
+      u.addQueryItem(QLatin1String("value1"), m_value);
       break;
 
     case Person:
       // yes, this also queries titles, too, it's a limitation of the isbndb api service
-      u.addQueryItem(QString::fromLatin1("index1"), QString::fromLatin1("combined"));
-      u.addQueryItem(QString::fromLatin1("value1"), m_value);
+      u.addQueryItem(QLatin1String("index1"), QLatin1String("combined"));
+      u.addQueryItem(QLatin1String("value1"), m_value);
       break;
 
     case Keyword:
-      u.addQueryItem(QString::fromLatin1("index1"), QString::fromLatin1("full"));
-      u.addQueryItem(QString::fromLatin1("value1"), m_value);
+      u.addQueryItem(QLatin1String("index1"), QLatin1String("full"));
+      u.addQueryItem(QLatin1String("value1"), m_value);
       break;
 
     case ISBN:
-      u.addQueryItem(QString::fromLatin1("index1"), QString::fromLatin1("isbn"));
+      u.addQueryItem(QLatin1String("index1"), QLatin1String("isbn"));
       {
         // only grab first value
         QString v = m_value.section(QChar(';'), 0);
         v.remove('-');
-        u.addQueryItem(QString::fromLatin1("value1"), v);
+        u.addQueryItem(QLatin1String("value1"), v);
       }
       break;
 
@@ -174,7 +174,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   m_job = 0;
 #if 0
   kWarning() << "Remove debug from isbndbfetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
@@ -190,10 +190,10 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   }
 
   if(m_total == -1) {
-    QDomNode n = dom.documentElement().namedItem(QString::fromLatin1("BookList"));
+    QDomNode n = dom.documentElement().namedItem(QLatin1String("BookList"));
     QDomElement e = n.toElement();
     if(!e.isNull()) {
-      m_total = e.attribute(QString::fromLatin1("total_results"), QString::number(-1)).toInt();
+      m_total = e.attribute(QLatin1String("total_results"), QString::number(-1)).toInt();
     }
   }
 
@@ -223,15 +223,15 @@ void ISBNdbFetcher::slotComplete(KJob*) {
       // might get aborted
       break;
     }
-    QString desc = entry->field(QString::fromLatin1("author"))
-                 + QChar('/') + entry->field(QString::fromLatin1("publisher"));
-    if(!entry->field(QString::fromLatin1("cr_year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QString::fromLatin1("cr_year"));
-    } else if(!entry->field(QString::fromLatin1("pub_year")).isEmpty()){
-      desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
+    QString desc = entry->field(QLatin1String("author"))
+                 + QChar('/') + entry->field(QLatin1String("publisher"));
+    if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
+      desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+    } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
+      desc += QChar('/') + entry->field(QLatin1String("pub_year"));
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++m_numResults;
@@ -265,32 +265,32 @@ Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntry(uint uid_) {
   }
 
   // if the publisher id is set, then we need to grab the real publisher name
-  const QString id = entry->field(QString::fromLatin1("pub_id"));
+  const QString id = entry->field(QLatin1String("pub_id"));
   if(!id.isEmpty()) {
-    KUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
-    u.setFileName(QString::fromLatin1("publishers.xml"));
-    u.addQueryItem(QString::fromLatin1("access_key"), QString::fromLatin1(ISBNDB_APP_ID));
-    u.addQueryItem(QString::fromLatin1("index1"), QString::fromLatin1("publisher_id"));
-    u.addQueryItem(QString::fromLatin1("value1"), id);
+    KUrl u(ISBNDB_BASE_URL);
+    u.setFileName(QLatin1String("publishers.xml"));
+    u.addQueryItem(QLatin1String("access_key"), QLatin1String(ISBNDB_APP_ID));
+    u.addQueryItem(QLatin1String("index1"), QLatin1String("publisher_id"));
+    u.addQueryItem(QLatin1String("value1"), id);
 
     QDomDocument dom = FileHandler::readXMLFile(u, true);
     if(!dom.isNull()) {
-      QString pub = dom.documentElement().namedItem(QString::fromLatin1("PublisherList"))
-                                         .namedItem(QString::fromLatin1("PublisherData"))
-                                         .namedItem(QString::fromLatin1("Name"))
+      QString pub = dom.documentElement().namedItem(QLatin1String("PublisherList"))
+                                         .namedItem(QLatin1String("PublisherData"))
+                                         .namedItem(QLatin1String("Name"))
                                          .toElement().text();
       if(!pub.isEmpty()) {
-        entry->setField(QString::fromLatin1("publisher"), pub);
+        entry->setField(QLatin1String("publisher"), pub);
       }
     }
-    entry->setField(QString::fromLatin1("pub_id"), QString());
+    entry->setField(QLatin1String("pub_id"), QString());
   }
 
   return entry;
 }
 
 void ISBNdbFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("isbndb2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("isbndb2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "ISBNdbFetcher::initXSLTHandler() - can not locate isbndb2tellico.xsl.";
     return;
@@ -314,14 +314,14 @@ void ISBNdbFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   // limit to top 5 results
   m_limit = 5;
 
-  QString isbn = entry_->field(QString::fromLatin1("isbn"));
+  QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);
     return;
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QString::fromLatin1("title"));
+  QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
     m_limit = 10; // raise limit so more possibility of match
     search(Fetch::Title, t);

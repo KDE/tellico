@@ -221,11 +221,11 @@ Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& resu
   KHBox* hbox = new KHBox(box);
   hbox->setSpacing(10);
   QLabel* icon = new QLabel(hbox);
-  icon->setPixmap(KIconLoader::global()->loadIcon(QString::fromLatin1("network-wired"), KIconLoader::Panel, 64));
+  icon->setPixmap(KIconLoader::global()->loadIcon(QLatin1String("network-wired"), KIconLoader::Panel, 64));
   QString s = i18n("<qt><b>%1</b> returned multiple results which could match <b>%2</b>, "
                    "the entry currently in the collection. Please select the correct match.</qt>",
                    m_fetchers[m_fetchIndex]->source(),
-                   m_entriesToUpdate.front()->field(QString::fromLatin1("title")));
+                   m_entriesToUpdate.front()->field(QLatin1String("title")));
   GUI::RichTextLabel* l = new GUI::RichTextLabel(s, hbox);
   hbox->setStretchFactor(l, 100);
 

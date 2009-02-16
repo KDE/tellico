@@ -24,7 +24,7 @@
 using Tellico::Import::ReferencerImporter;
 
 ReferencerImporter::ReferencerImporter(const KUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = KStandardDirs::locate("appdata", QString::fromLatin1("referencer2tellico.xsl"));
+  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("referencer2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     KUrl u;
     u.setPath(xsltFile);
@@ -44,16 +44,16 @@ Tellico::Data::CollPtr ReferencerImporter::collection() {
     return Data::CollPtr();
   }
 
-  Data::FieldPtr field = coll->fieldByName(QString::fromLatin1("cover"));
+  Data::FieldPtr field = coll->fieldByName(QLatin1String("cover"));
   if(!field && !coll->imageFields().isEmpty()) {
     field = coll->imageFields().front();
   } else if(!field) {
-    field = new Data::Field(QString::fromLatin1("cover"), i18n("Front Cover"), Data::Field::Image);
+    field = new Data::Field(QLatin1String("cover"), i18n("Front Cover"), Data::Field::Image);
     coll->addField(field);
   }
 
   foreach(Data::EntryPtr entry, coll->entries()) {
-    QString url = entry->field(QString::fromLatin1("url"));
+    QString url = entry->field(QLatin1String("url"));
     if(url.isEmpty()) {
       continue;
     }
@@ -61,7 +61,7 @@ Tellico::Data::CollPtr ReferencerImporter::collection() {
     if(pix.isNull()) {
       continue;
     }
-    QString id = ImageFactory::addImage(pix, QString::fromLatin1("PNG"));
+    QString id = ImageFactory::addImage(pix, QLatin1String("PNG"));
     if(id.isEmpty()) {
       continue;
     }

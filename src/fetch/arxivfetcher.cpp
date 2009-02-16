@@ -136,7 +136,7 @@ void ArxivFetcher::slotComplete(KJob*) {
   m_job = 0;
 #if 0
   kWarning() << "Remove debug from arxivfetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
@@ -160,8 +160,8 @@ void ArxivFetcher::slotComplete(KJob*) {
       return;
     }
     // total is top level element, with attribute totalResultsAvailable
-    QDomNodeList list = dom.elementsByTagNameNS(QString::fromLatin1("http://a9.com/-/spec/opensearch/1.1/"),
-                                                QString::fromLatin1("totalResults"));
+    QDomNodeList list = dom.elementsByTagNameNS(QLatin1String("http://a9.com/-/spec/opensearch/1.1/"),
+                                                QLatin1String("totalResults"));
     if(list.count() > 0) {
       m_total = list.item(0).toElement().text().toInt();
     }
@@ -184,13 +184,13 @@ void ArxivFetcher::slotComplete(KJob*) {
       // might get aborted
       break;
     }
-    QString desc = entry->field(QString::fromLatin1("author"))
-                 + QChar('/') + entry->field(QString::fromLatin1("publisher"));
-    if(!entry->field(QString::fromLatin1("year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QString::fromLatin1("year"));
+    QString desc = entry->field(QLatin1String("author"))
+                 + QChar('/') + entry->field(QLatin1String("publisher"));
+    if(!entry->field(QLatin1String("year")).isEmpty()) {
+      desc += QChar('/') + entry->field(QLatin1String("year"));
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
@@ -203,37 +203,37 @@ void ArxivFetcher::slotComplete(KJob*) {
 Tellico::Data::EntryPtr ArxivFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   // if URL but no cover image, fetch it
-  if(!entry->field(QString::fromLatin1("url")).isEmpty()) {
+  if(!entry->field(QLatin1String("url")).isEmpty()) {
     Data::CollPtr coll = entry->collection();
-    Data::FieldPtr field = coll->fieldByName(QString::fromLatin1("cover"));
+    Data::FieldPtr field = coll->fieldByName(QLatin1String("cover"));
     if(!field && !coll->imageFields().isEmpty()) {
       field = coll->imageFields().front();
     } else if(!field) {
-      field = new Data::Field(QString::fromLatin1("cover"), i18n("Front Cover"), Data::Field::Image);
+      field = new Data::Field(QLatin1String("cover"), i18n("Front Cover"), Data::Field::Image);
       coll->addField(field);
     }
     if(entry->field(field).isEmpty()) {
-      QPixmap pix = NetAccess::filePreview(entry->field(QString::fromLatin1("url")));
+      QPixmap pix = NetAccess::filePreview(entry->field(QLatin1String("url")));
       if(!pix.isNull()) {
-        QString id = ImageFactory::addImage(pix, QString::fromLatin1("PNG"));
+        QString id = ImageFactory::addImage(pix, QLatin1String("PNG"));
         if(!id.isEmpty()) {
           entry->setField(field, id);
         }
       }
     }
   }
-  QRegExp versionRx(QString::fromLatin1("v\\d+$"));
+  QRegExp versionRx(QLatin1String("v\\d+$"));
   // if the original search was not for a versioned ID, remove it
   if(m_key != ArxivID || !m_value.contains(versionRx)) {
-    QString arxiv = entry->field(QString::fromLatin1("arxiv"));
+    QString arxiv = entry->field(QLatin1String("arxiv"));
     arxiv.remove(versionRx);
-    entry->setField(QString::fromLatin1("arxiv"), arxiv);
+    entry->setField(QLatin1String("arxiv"), arxiv);
   }
   return entry;
 }
 
 void ArxivFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("arxiv2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("arxiv2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "ArxivFetcher::initXSLTHandler() - can not locate arxiv2tellico.xsl.";
     return;
@@ -253,33 +253,33 @@ void ArxivFetcher::initXSLTHandler() {
 }
 
 KUrl ArxivFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
-  KUrl u(QString::fromLatin1(ARXIV_BASE_URL));
-  u.addQueryItem(QString::fromLatin1("start"), QString::number(m_start));
-  u.addQueryItem(QString::fromLatin1("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
+  KUrl u(ARXIV_BASE_URL);
+  u.addQueryItem(QLatin1String("start"), QString::number(m_start));
+  u.addQueryItem(QLatin1String("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
 
   // quotes should be used if spaces are present, just use all the time
   QString quotedValue = '"' + value_ + '"';
   switch(key_) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("search_query"), QString::fromLatin1("ti:%1").arg(quotedValue));
+      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("ti:%1").arg(quotedValue));
       break;
 
     case Person:
-      u.addQueryItem(QString::fromLatin1("search_query"), QString::fromLatin1("au:%1").arg(quotedValue));
+      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("au:%1").arg(quotedValue));
       break;
 
     case Keyword:
       // keyword gets to use all the words without being quoted
-      u.addQueryItem(QString::fromLatin1("search_query"), QString::fromLatin1("all:%1").arg(value_));
+      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("all:%1").arg(value_));
       break;
 
     case ArxivID:
       {
       // remove prefix and/or version number
       QString value = value_;
-      value.remove(QRegExp(QString::fromLatin1("^arxiv:"), Qt::CaseInsensitive));
-      value.remove(QRegExp(QString::fromLatin1("v\\d+$")));
-      u.addQueryItem(QString::fromLatin1("search_query"), QString::fromLatin1("id:%1").arg(value));
+      value.remove(QRegExp(QLatin1String("^arxiv:"), Qt::CaseInsensitive));
+      value.remove(QRegExp(QLatin1String("v\\d+$")));
+      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("id:%1").arg(value));
       }
       break;
 
@@ -289,21 +289,21 @@ KUrl ArxivFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value
   }
 
 #ifdef ARXIV_TEST
-  u = KUrl::fromPathOrUrl(QString::fromLatin1("/home/robby/arxiv.xml"));
+  u = KUrl::fromPathOrUrl("/home/robby/arxiv.xml");
 #endif
   myDebug() << "ArxivFetcher::search() - url: " << u.url() << endl;
   return u;
 }
 
 void ArxivFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-  QString id = entry_->field(QString::fromLatin1("arxiv"));
+  QString id = entry_->field(QLatin1String("arxiv"));
   if(!id.isEmpty()) {
     search(Fetch::ArxivID, id);
     return;
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QString::fromLatin1("title"));
+  QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
     search(Fetch::Title, t);
     return;
@@ -317,7 +317,7 @@ void ArxivFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   if(!entry) {
     return;
   }
-  QString arxiv = entry->field(QString::fromLatin1("arxiv"));
+  QString arxiv = entry->field(QLatin1String("arxiv"));
   if(arxiv.isEmpty()) {
     return;
   }
@@ -343,8 +343,8 @@ void ArxivFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
     myLog() << "ArxivFetcher::updateEntrySynchronous() - found Arxiv result, merging" << endl;
     Data::Collection::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
     // the arxiv id might have a version#
-    entry->setField(QString::fromLatin1("arxiv"),
-                    coll->entries().front()->field(QString::fromLatin1("arxiv")));
+    entry->setField(QLatin1String("arxiv"),
+                    coll->entries().front()->field(QLatin1String("arxiv")));
   }
 }
 

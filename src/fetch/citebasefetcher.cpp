@@ -47,7 +47,7 @@ CitebaseFetcher::~CitebaseFetcher() {
 }
 
 QString CitebaseFetcher::defaultName() {
-  return QString::fromLatin1("Citebase");
+  return QLatin1String("Citebase");
 }
 
 QString CitebaseFetcher::source() const {
@@ -119,7 +119,7 @@ void CitebaseFetcher::slotComplete(KJob*) {
   m_job = 0;
 #if 0
   kWarning() << "Remove debug from citebasefetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test.bib"));
+  QFile f(QLatin1String("/tmp/test.bib"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setEncoding(QTextStream::UnicodeUTF8);
@@ -143,13 +143,13 @@ void CitebaseFetcher::slotComplete(KJob*) {
       // might get aborted
       break;
     }
-    QString desc = entry->field(QString::fromLatin1("author"))
-                 + QChar('/') + entry->field(QString::fromLatin1("publisher"));
-    if(!entry->field(QString::fromLatin1("year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QString::fromLatin1("year"));
+    QString desc = entry->field(QLatin1String("author"))
+                 + QChar('/') + entry->field(QLatin1String("publisher"));
+    if(!entry->field(QLatin1String("year")).isEmpty()) {
+      desc += QChar('/') + entry->field(QLatin1String("year"));
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
@@ -159,27 +159,27 @@ void CitebaseFetcher::slotComplete(KJob*) {
 
 Tellico::Data::EntryPtr CitebaseFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
-  QRegExp versionRx(QString::fromLatin1("v\\d+$"));
+  QRegExp versionRx(QLatin1String("v\\d+$"));
   // if the original search was not for a versioned ID, remove it
   if(m_key != ArxivID || !m_value.contains(versionRx)) {
-    QString arxiv = entry->field(QString::fromLatin1("arxiv"));
+    QString arxiv = entry->field(QLatin1String("arxiv"));
     arxiv.remove(versionRx);
-    entry->setField(QString::fromLatin1("arxiv"), arxiv);
+    entry->setField(QLatin1String("arxiv"), arxiv);
   }
   return entry;
 }
 
 KUrl CitebaseFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
-  KUrl u(QString::fromLatin1(CITEBASE_BASE_URL));
+  KUrl u(CITEBASE_BASE_URL);
 
   switch(key_) {
     case ArxivID:
       {
       // remove prefix and/or version number
       QString value = value_;
-      value.remove(QRegExp(QString::fromLatin1("^arxiv:"), Qt::CaseInsensitive));
-      value.remove(QRegExp(QString::fromLatin1("v\\d+$")));
-      u.addQueryItem(QString::fromLatin1("rft_id"), QString::fromLatin1("oai:arXiv.org:%1").arg(value));
+      value.remove(QRegExp(QLatin1String("^arxiv:"), Qt::CaseInsensitive));
+      value.remove(QRegExp(QLatin1String("v\\d+$")));
+      u.addQueryItem(QLatin1String("rft_id"), QString::fromLatin1("oai:arXiv.org:%1").arg(value));
       }
       break;
 
@@ -189,14 +189,14 @@ KUrl CitebaseFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& va
   }
 
 #ifdef CITEBASE_TEST
-  u = KUrl(QString::fromLatin1("/home/robby/citebase.bib"));
+  u = KUrl("/home/robby/citebase.bib");
 #endif
   myDebug() << "CitebaseFetcher::search() - url: " << u.url() << endl;
   return u;
 }
 
 void CitebaseFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-  QString arxiv = entry_->field(QString::fromLatin1("arxiv"));
+  QString arxiv = entry_->field(QLatin1String("arxiv"));
   if(!arxiv.isEmpty()) {
     search(Fetch::ArxivID, arxiv);
     return;
@@ -210,7 +210,7 @@ void CitebaseFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   if(!entry) {
     return;
   }
-  QString arxiv = entry->field(QString::fromLatin1("arxiv"));
+  QString arxiv = entry->field(QLatin1String("arxiv"));
   if(arxiv.isEmpty()) {
     return;
   }

@@ -45,18 +45,18 @@ GCstarPluginFetcher::PluginParse GCstarPluginFetcher::pluginParse = NotYet;
 GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
   if(!pluginMap.contains(collType_)) {
     GUI::CursorSaver cs;
-    QString gcstar = KStandardDirs::findExe(QString::fromLatin1("gcstar"));
+    QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
 
     if(pluginParse == NotYet) {
       KProcess proc;
       QStringList args;
-      args << QString::fromLatin1("--version");
+      args << QLatin1String("--version");
       // wait 5 seconds at most, just a sanity thing, never want to block completely
       if(proc.execute(gcstar, args, 5000) > -1) {
         QString output = proc.readAllStandardOutput();
         if(!output.isEmpty()) {
           // always going to be x.y[.z] ?
-          QRegExp versionRx(QString::fromLatin1("(\\d+)\\.(\\d+)(?:\\.(\\d+))?"));
+          QRegExp versionRx(QLatin1String("(\\d+)\\.(\\d+)(?:\\.(\\d+))?"));
           if(versionRx.indexIn(output) > -1) {
             int x = versionRx.cap(1).toInt();
             int y = versionRx.cap(2).toInt();
@@ -93,9 +93,9 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
   }
 
   QStringList args;
-  args << QString::fromLatin1("-x")
-       << QString::fromLatin1("--list-plugins")
-       << QString::fromLatin1("--collection")
+  args << QLatin1String("-x")
+       << QLatin1String("--list-plugins")
+       << QLatin1String("--collection")
        << gcstarCollection;
 
   KProcess proc;
@@ -118,10 +118,10 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
       // authors have \t at beginning
       line = line.trimmed();
       if(!hasName) {
-        info.insert(QString::fromLatin1("name"), line);
+        info.insert(QLatin1String("name"), line);
         hasName = true;
       } else {
-        info.insert(QString::fromLatin1("author"), line);
+        info.insert(QLatin1String("author"), line);
       }
 //      myDebug() << line << endl;
     }
@@ -131,10 +131,10 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
 }
 
 void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) {
-  QDir dir(gcstar_, QString::fromLatin1("GC*.pm"));
-  dir.cd(QString::fromLatin1("../../lib/gcstar/GCPlugins/"));
+  QDir dir(gcstar_, QLatin1String("GC*.pm"));
+  dir.cd(QLatin1String("../../lib/gcstar/GCPlugins/"));
 
-  QRegExp rx(QString::fromLatin1("get(Name|Author|Lang)\\s*\\{\\s*return\\s+['\"](.+)['\"]"));
+  QRegExp rx(QLatin1String("get(Name|Author|Lang)\\s*\\{\\s*return\\s+['\"](.+)['\"]"));
   rx.setMinimal(true);
 
   PluginList plugins;
@@ -155,7 +155,7 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
       info.insert(rx.cap(1).toLower(), rx.cap(2));
     }
     // only add if it has a name
-    if(info.contains(QString::fromLatin1("name"))) {
+    if(info.contains(QLatin1String("name"))) {
       plugins << info;
     }
   }
@@ -165,13 +165,13 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
 
 QString GCstarPluginFetcher::gcstarType(int collType_) {
   switch(collType_) {
-    case Data::Collection::Book:      return QString::fromLatin1("GCbooks");
-    case Data::Collection::Video:     return QString::fromLatin1("GCfilms");
-    case Data::Collection::Game:      return QString::fromLatin1("GCgames");
-    case Data::Collection::Album:     return QString::fromLatin1("GCmusics");
-    case Data::Collection::Coin:      return QString::fromLatin1("GCcoins");
-    case Data::Collection::Wine:      return QString::fromLatin1("GCwines");
-    case Data::Collection::BoardGame: return QString::fromLatin1("GCboardgames");
+    case Data::Collection::Book:      return QLatin1String("GCbooks");
+    case Data::Collection::Video:     return QLatin1String("GCfilms");
+    case Data::Collection::Game:      return QLatin1String("GCgames");
+    case Data::Collection::Album:     return QLatin1String("GCmusics");
+    case Data::Collection::Coin:      return QLatin1String("GCcoins");
+    case Data::Collection::Wine:      return QLatin1String("GCwines");
+    case Data::Collection::BoardGame: return QLatin1String("GCboardgames");
     default: break;
   }
   return QString();
@@ -212,7 +212,7 @@ void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
     return;
   }
 
-  QString gcstar = KStandardDirs::findExe(QString::fromLatin1("gcstar"));
+  QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
   if(gcstar.isEmpty()) {
     myWarning() << "GCstarPluginFetcher::search() - gcstar not found!" << endl;
     stop();
@@ -233,11 +233,11 @@ void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
   connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
   m_process->setOutputChannelMode(KProcess::SeparateChannels);
   QStringList args;
-  args << QString::fromLatin1("-x")
-       << QString::fromLatin1("--collection") << gcstarCollection
-       << QString::fromLatin1("--export")     << QString::fromLatin1("Tellico")
-       << QString::fromLatin1("--website")    << m_plugin
-       << QString::fromLatin1("--download")   << KShell::quoteArg(value_);
+  args << QLatin1String("-x")
+       << QLatin1String("--collection") << gcstarCollection
+       << QLatin1String("--export")     << QLatin1String("Tellico")
+       << QLatin1String("--website")    << m_plugin
+       << QLatin1String("--download")   << KShell::quoteArg(value_);
   myLog() << "GCstarPluginFetcher::search() - " << args.join(QChar(' ')) << endl;
   m_process->setProgram(gcstar, args);
   if(!m_process->execute()) {
@@ -267,7 +267,7 @@ void GCstarPluginFetcher::slotData() {
 
 void GCstarPluginFetcher::slotError() {
   QString msg = m_process->readAllStandardError();
-  msg.prepend(source() + QString::fromLatin1(": "));
+  msg.prepend(source() + QLatin1String(": "));
   myDebug() << "GCstarPluginFetcher::slotError() - " << msg << endl;
   m_errors << msg;
 }
@@ -310,56 +310,56 @@ void GCstarPluginFetcher::slotProcessExited() {
     switch(coll->type()) {
       case Data::Collection::Book:
       case Data::Collection::Bibtex:
-        desc = entry->field(QString::fromLatin1("author"))
+        desc = entry->field(QLatin1String("author"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("publisher"));
-        if(!entry->field(QString::fromLatin1("cr_year")).isEmpty()) {
-          desc += QChar('/') + entry->field(QString::fromLatin1("cr_year"));
-        } else if(!entry->field(QString::fromLatin1("pub_year")).isEmpty()){
-          desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
+               + entry->field(QLatin1String("publisher"));
+        if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
+          desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+        } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
+          desc += QChar('/') + entry->field(QLatin1String("pub_year"));
         }
         break;
 
       case Data::Collection::Video:
-        desc = entry->field(QString::fromLatin1("studio"))
+        desc = entry->field(QLatin1String("studio"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("director"))
+               + entry->field(QLatin1String("director"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("year"))
+               + entry->field(QLatin1String("year"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("medium"));
+               + entry->field(QLatin1String("medium"));
         break;
 
       case Data::Collection::Album:
-        desc = entry->field(QString::fromLatin1("artist"))
+        desc = entry->field(QLatin1String("artist"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("label"))
+               + entry->field(QLatin1String("label"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("year"));
+               + entry->field(QLatin1String("year"));
         break;
 
       case Data::Collection::Game:
-        desc = entry->field(QString::fromLatin1("platform"));
+        desc = entry->field(QLatin1String("platform"));
         break;
 
       case Data::Collection::ComicBook:
-        desc = entry->field(QString::fromLatin1("publisher"))
+        desc = entry->field(QLatin1String("publisher"))
                + QChar('/')
-               + entry->field(QString::fromLatin1("pub_year"));
+               + entry->field(QLatin1String("pub_year"));
         break;
 
      case Data::Collection::BoardGame:
-       desc = entry->field(QString::fromLatin1("designer"))
+       desc = entry->field(QLatin1String("designer"))
               + QChar('/')
-              + entry->field(QString::fromLatin1("publisher"))
+              + entry->field(QLatin1String("publisher"))
               + QChar('/')
-              + entry->field(QString::fromLatin1("year"));
+              + entry->field(QLatin1String("year"));
        break;
 
       default:
         break;
     }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
@@ -372,7 +372,7 @@ Tellico::Data::EntryPtr GCstarPluginFetcher::fetchEntry(uint uid_) {
 
 void GCstarPluginFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   // ry searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QString::fromLatin1("title"));
+  QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
     search(Fetch::Title, t);
     return;
@@ -448,7 +448,7 @@ void GCstarPluginFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
 }
 
 QString GCstarPluginFetcher::ConfigWidget::preferredName() const {
-  return QString::fromLatin1("GCstar - ") + m_pluginCombo->currentText();
+  return QLatin1String("GCstar - ") + m_pluginCombo->currentText();
 }
 
 void GCstarPluginFetcher::ConfigWidget::slotTypeChanged() {
@@ -457,7 +457,7 @@ void GCstarPluginFetcher::ConfigWidget::slotTypeChanged() {
   QStringList pluginNames;
   GCstarPluginFetcher::PluginList list = GCstarPluginFetcher::plugins(collType);
   foreach(const GCstarPluginFetcher::PluginInfo& info, list) {
-    pluginNames << info.value(QString::fromLatin1("name")).toString();
+    pluginNames << info.value(QLatin1String("name")).toString();
     m_pluginCombo->addItem(pluginNames.last(), info);
   }
   slotPluginChanged();
@@ -466,8 +466,8 @@ void GCstarPluginFetcher::ConfigWidget::slotTypeChanged() {
 
 void GCstarPluginFetcher::ConfigWidget::slotPluginChanged() {
   PluginInfo info = m_pluginCombo->currentData().toMap();
-  m_authorLabel->setText(info[QString::fromLatin1("author")].toString());
-//  m_langLabel->setText(info[QString::fromLatin1("lang")].toString());
+  m_authorLabel->setText(info[QLatin1String("author")].toString());
+//  m_langLabel->setText(info[QLatin1String("lang")].toString());
   emit signalName(preferredName());
 }
 

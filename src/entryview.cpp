@@ -135,7 +135,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 //  myDebug() << dom.toString() << endl;
 #if 0
   kWarning() << "EntryView::showEntry() - turn me off!";
-  QFile f1(QString::fromLatin1("/tmp/test.xml"));
+  QFile f1(QLatin1String("/tmp/test.xml"));
   if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
     t << dom.toString();
@@ -160,7 +160,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
 #if 0
   kWarning() << "EntryView::showEntry() - turn me off!";
-  QFile f2(QString::fromLatin1("/tmp/test.html"));
+  QFile f2(QLatin1String("/tmp/test.html"));
   if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
     t << html;
@@ -188,19 +188,19 @@ void EntryView::setXSLTFile(const QString& file_) {
   if(file_.at(0) == '/') {
     m_xsltFile = file_;
   } else {
-    const QString templateDir = QString::fromLatin1("entry-templates/");
+    const QString templateDir = QLatin1String("entry-templates/");
     m_xsltFile = KStandardDirs::locate("appdata", templateDir + file_);
     if(m_xsltFile.isEmpty()) {
       if(!file_.isEmpty()) {
         myWarning() << "EntryView::setXSLTFile() - can't locate " << file_;
       }
-      m_xsltFile = KStandardDirs::locate("appdata", templateDir + QString::fromLatin1("Fancy.xsl"));
+      m_xsltFile = KStandardDirs::locate("appdata", templateDir + QLatin1String("Fancy.xsl"));
       if(m_xsltFile.isEmpty()) {
-        QString str = QString::fromLatin1("<qt>");
+        QString str = QLatin1String("<qt>");
         str += i18n("Tellico is unable to locate the default entry stylesheet.");
         str += QChar(' ');
         str += i18n("Please check your installation.");
-        str += QString::fromLatin1("</qt>");
+        str += QLatin1String("</qt>");
         KMessageBox::error(view(), str);
         clear();
         return;
@@ -258,7 +258,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   }
 
   // look for a file that gets installed to know the installation directory
-  QString appdir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png"));
+  QString appdir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png"));
   m_handler->addStringParam("datadir", QFile::encodeName(appdir));
 
   // if we don't have to reload the images, then just show the entry and we're done
@@ -357,8 +357,8 @@ void EntryView::resetColors() {
   // the gradient files are changed on disk. Setting the URLArgs for write() calls doesn't seem to
   // work. So force a reload with a temp file, then catch the completed signal and repaint
   QString s = QString::fromLatin1("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
-                             .arg(dir + QString::fromLatin1("gradient_bg.png"))
-                             .arg(dir + QString::fromLatin1("gradient_header.png"));
+                             .arg(dir + QLatin1String("gradient_bg.png"))
+                             .arg(dir + QLatin1String("gradient_header.png"));
 
   delete m_tempFile;
   m_tempFile = new KTemporaryFile();

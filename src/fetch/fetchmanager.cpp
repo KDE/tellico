@@ -95,8 +95,8 @@ void Manager::loadFetchers() {
   m_configMap.clear();
 
   KSharedConfigPtr config = KGlobal::config();
-  if(config->hasGroup(QString::fromLatin1("Data Sources"))) {
-    KConfigGroup configGroup(config, QString::fromLatin1("Data Sources"));
+  if(config->hasGroup(QLatin1String("Data Sources"))) {
+    KConfigGroup configGroup(config, QLatin1String("Data Sources"));
     int nSources = configGroup.readEntry("Sources Count", 0);
     for(int i = 0; i < nSources; ++i) {
       QString group = QString::fromLatin1("Data Source %1").arg(i);
@@ -361,7 +361,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   vec.append(Fetcher::Ptr(new GoogleScholarFetcher(this)));
   vec.append(Fetcher::Ptr(new DiscogsFetcher(this)));
 // only add IBS if user includes italian
-  if(KGlobal::locale()->languageList().contains(QString::fromLatin1("it"))) {
+  if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
     vec.append(Fetcher::Ptr(new IBSFetcher(this)));
   }
   return vec;
@@ -442,7 +442,7 @@ Tellico::Fetch::TypePairList Manager::typeList() {
   list.append(TypePair(DiscogsFetcher::defaultName(),      Discogs));
 
   // now find all the scripts distributed with tellico
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QString::fromLatin1("data-sources/*.spec"),
+  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("data-sources/*.spec"),
                                                         KStandardDirs::NoDuplicates);
   for(QStringList::Iterator it = files.begin(); it != files.end(); ++it) {
     KConfig spec(*it, KConfig::SimpleConfig);
@@ -593,7 +593,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
   if(fetcher_->type() == Fetch::Z3950) {
     Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
     KUrl u;
-    u.setProtocol(QString::fromLatin1("http"));
+    u.setProtocol(QLatin1String("http"));
     u.setHost(f->host());
     QString icon = favIcon(u);
     if(u.isValid() && !icon.isEmpty()) {
@@ -605,16 +605,16 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_.data());
     const QString p = f->execPath();
     KUrl u;
-    if(p.indexOf(QString::fromLatin1("allocine")) > -1) {
-      u = QString::fromLatin1("http://www.allocine.fr");
-    } else if(p.indexOf(QString::fromLatin1("ministerio_de_cultura")) > -1) {
-      u = QString::fromLatin1("http://www.mcu.es");
-    } else if(p.indexOf(QString::fromLatin1("dark_horse_comics")) > -1) {
-      u = QString::fromLatin1("http://www.darkhorse.com");
-    } else if(p.indexOf(QString::fromLatin1("boardgamegeek")) > -1) {
-      u = QString::fromLatin1("http://www.boardgamegeek.com");
-    } else if(f->source().indexOf(QString::fromLatin1("amarok"), 0, Qt::CaseInsensitive) > -1) {
-      return LOAD_ICON(QString::fromLatin1("amarok"), group_, size_);
+    if(p.indexOf(QLatin1String("allocine")) > -1) {
+      u = QLatin1String("http://www.allocine.fr");
+    } else if(p.indexOf(QLatin1String("ministerio_de_cultura")) > -1) {
+      u = QLatin1String("http://www.mcu.es");
+    } else if(p.indexOf(QLatin1String("dark_horse_comics")) > -1) {
+      u = QLatin1String("http://www.darkhorse.com");
+    } else if(p.indexOf(QLatin1String("boardgamegeek")) > -1) {
+      u = QLatin1String("http://www.boardgamegeek.com");
+    } else if(f->source().indexOf(QLatin1String("amarok"), 0, Qt::CaseInsensitive) > -1) {
+      return LOAD_ICON(QLatin1String("amarok"), group_, size_);
     }
     if(!u.isEmpty() && u.isValid()) {
       QString icon = favIcon(u);
@@ -634,13 +634,13 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
     case IMDB:
       name = favIcon("http://imdb.com"); break;
     case Z3950:
-      name = QString::fromLatin1("network-wired"); break; // rather arbitrary
+      name = QLatin1String("network-wired"); break; // rather arbitrary
     case SRU:
-      name = QString::fromLatin1("network-workgroup"); break; // just to be different than z3950
+      name = QLatin1String("network-workgroup"); break; // just to be different than z3950
     case Entrez:
       name = favIcon("http://www.ncbi.nlm.nih.gov"); break;
     case ExecExternal:
-      name = QString::fromLatin1("application-x-executable"); break;
+      name = QLatin1String("application-x-executable"); break;
     case Yahoo:
       name = favIcon("http://yahoo.com"); break;
     case AnimeNfo:
@@ -650,7 +650,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
     case ISBNdb:
       name = favIcon("http://isbndb.com"); break;
     case GCstarPlugin:
-      name = QString::fromLatin1("gcstar"); break;
+      name = QLatin1String("gcstar"); break;
     case CrossRef:
       name = favIcon("http://crossref.org"); break;
     case Arxiv:

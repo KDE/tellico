@@ -51,7 +51,7 @@ Tellico::ListViewComparison* Tellico::ListViewComparison::create(Data::FieldPtr 
   } else if(field_->formatFlag() == Data::Field::FormatTitle) {
     // Dependent could be title, so put this test after
     return new TitleComparison(field_);
-  } else if(field_->property(QString::fromLatin1("lcc")) == QLatin1String("true") ||
+  } else if(field_->property(QLatin1String("lcc")) == QLatin1String("true") ||
             (field_->name() == QLatin1String("lcc") &&
              Data::Document::self()->collection() &&
              (Data::Document::self()->collection()->type() == Data::Collection::Book ||
@@ -116,7 +116,7 @@ int Tellico::NumberComparison::compare(const QString& str1_, const QString& str2
 // http://www.mcgees.org/2001/08/08/sort-by-library-of-congress-call-number-in-perl/
 
 Tellico::LCCComparison::LCCComparison(Data::FieldPtr field) : StringComparison(field),
-  m_regexp(QString::fromLatin1("^([A-Z]+)(\\d+(?:\\.\\d+)?)\\.?([A-Z]*)(\\d*)\\.?([A-Z]*)(\\d*)(?: (\\d\\d\\d\\d))?")) {
+  m_regexp(QLatin1String("^([A-Z]+)(\\d+(?:\\.\\d+)?)\\.?([A-Z]*)(\\d*)\\.?([A-Z]*)(\\d*)(?: (\\d\\d\\d\\d))?")) {
 }
 
 int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) {
@@ -139,11 +139,11 @@ int Tellico::LCCComparison::compareLCC(const QStringList& cap1, const QStringLis
   return (res = cap1[1].compare(cap2[1]))                          != 0 ? res :
          (res = compareFloat(cap1[2], cap2[2]))                    != 0 ? res :
          (res = cap1[3].compare(cap2[3]))                          != 0 ? res :
-         (res = compareFloat(QString::fromLatin1("0.") + cap1[4],
-                             QString::fromLatin1("0.") + cap2[4])) != 0 ? res :
+         (res = compareFloat(QLatin1String("0.") + cap1[4],
+                             QLatin1String("0.") + cap2[4])) != 0 ? res :
          (res = cap1[5].compare(cap2[5]))                          != 0 ? res :
-         (res = compareFloat(QString::fromLatin1("0.") + cap1[6],
-                             QString::fromLatin1("0.") + cap2[6])) != 0 ? res :
+         (res = compareFloat(QLatin1String("0.") + cap1[6],
+                             QLatin1String("0.") + cap2[6])) != 0 ? res :
          (res = compareFloat(cap1[7], cap2[7]))                    != 0 ? res : 0;
 }
 

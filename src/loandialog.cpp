@@ -85,23 +85,23 @@ void LoanDialog::init() {
   KHBox* hbox = new KHBox(mainWidget);
   hbox->setSpacing(KDialog::spacingHint());
   QLabel* pixLabel = new QLabel(hbox);
-  pixLabel->setPixmap(DesktopIcon(QString::fromLatin1("tellico"), 64));
+  pixLabel->setPixmap(DesktopIcon(QLatin1String("tellico"), 64));
   pixLabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);
   hbox->setStretchFactor(pixLabel, 0);
 
-  QString entryString = QString::fromLatin1("<qt><p>");
+  QString entryString = QLatin1String("<qt><p>");
   if(m_mode == Add) {
     entryString += i18n("The following items are being checked out:");
-    entryString += QString::fromLatin1("</p><ol>");
+    entryString += QLatin1String("</p><ol>");
     foreach(Data::EntryPtr entry, m_entries) {
-      entryString += QString::fromLatin1("<li>") + entry->title() + QString::fromLatin1("</li>");
+      entryString += QLatin1String("<li>") + entry->title() + QLatin1String("</li>");
     }
   } else {
     entryString += i18n("The following item is on-loan:");
-    entryString += QString::fromLatin1("</p><ol>");
-    entryString += QString::fromLatin1("<li>") + m_loan->entry()->title() + QString::fromLatin1("</li>");
+    entryString += QLatin1String("</p><ol>");
+    entryString += QLatin1String("<li>") + m_loan->entry()->title() + QLatin1String("</li>");
   }
-  entryString += QString::fromLatin1("</ol></qt>");
+  entryString += QLatin1String("</ol></qt>");
   GUI::RichTextLabel* entryLabel = new GUI::RichTextLabel(entryString, hbox);
   hbox->setStretchFactor(entryLabel, 1);
 
@@ -118,7 +118,7 @@ void LoanDialog::init() {
   connect(m_borrowerEdit, SIGNAL(textChanged(const QString&)),
           SLOT(slotBorrowerNameChanged(const QString&)));
   button(Ok)->setEnabled(false); // disable until a name is entered
-  KPushButton* pb = new KPushButton(KIcon(QString::fromLatin1("kaddressbook")), QString(), hbox);
+  KPushButton* pb = new KPushButton(KIcon(QLatin1String("kaddressbook")), QString(), hbox);
   connect(pb, SIGNAL(clicked()), SLOT(slotGetBorrower()));
   QString whats = i18n("Enter the name of the person borrowing the items from you. "
                        "Clicking the button allows you to select from your address book.");
@@ -174,7 +174,7 @@ void LoanDialog::init() {
                                    "to your active calendar, which can be viewed using KOrganizer. "
                                    "The box is only active if you set a due date."));
 
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Loan Dialog Options"));
+  KConfigGroup config(KGlobal::config(), QLatin1String("Loan Dialog Options"));
   restoreDialogSize(config);
 
   KABC::AddressBook* abook = KABC::StdAddressBook::self(true);
@@ -186,7 +186,7 @@ void LoanDialog::init() {
 }
 
 LoanDialog::~LoanDialog() {
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Loan Dialog Options"));
+  KConfigGroup config(KGlobal::config(), QLatin1String("Loan Dialog Options"));
   saveDialogSize(config);
 }
 

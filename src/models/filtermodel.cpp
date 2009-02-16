@@ -110,7 +110,7 @@ QVariant FilterModel::data(const QModelIndex& index_, int role_) const {
       return filter(index_)->name();
     case Qt::DecorationRole:
       return parent.isValid() ? KIcon(entry(index_)->collection()->typeName())
-                              : KIcon(QString::fromLatin1("view-filter"));
+                              : KIcon(QLatin1String("view-filter"));
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:

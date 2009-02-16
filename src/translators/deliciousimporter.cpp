@@ -24,7 +24,7 @@
 using Tellico::Import::DeliciousImporter;
 
 DeliciousImporter::DeliciousImporter(const KUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = KStandardDirs::locate("appdata", QString::fromLatin1("delicious2tellico.xsl"));
+  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("delicious2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     KUrl u;
     u.setPath(xsltFile);
@@ -49,24 +49,24 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
   KUrl libraryDir = url();
   libraryDir.setPath(url().directory() + "Images/");
   const QStringList imageDirs = QStringList()
-                              << QString::fromLatin1("Large Covers/")
-                              << QString::fromLatin1("Medium Covers/")
-                              << QString::fromLatin1("Small Covers/")
-                              << QString::fromLatin1("Plain Covers/");
+                              << QLatin1String("Large Covers/")
+                              << QLatin1String("Medium Covers/")
+                              << QLatin1String("Small Covers/")
+                              << QLatin1String("Plain Covers/");
   QString commField;
   switch(coll->type()) {
     case Data::Collection::Book:
-      commField = QString::fromLatin1("comments"); break;
+      commField = QLatin1String("comments"); break;
     case Data::Collection::Video:
-      commField = QString::fromLatin1("plot"); break;
+      commField = QLatin1String("plot"); break;
     case Data::Collection::Game:
-      commField = QString::fromLatin1("description"); break;
+      commField = QLatin1String("description"); break;
     default:
       myWarning() << "bad collection type:" << coll->type() << endl;
   }
 
-  const QString uuidField = QString::fromLatin1("uuid");
-  const QString coverField = QString::fromLatin1("cover");
+  const QString uuidField = QLatin1String("uuid");
+  const QString coverField = QLatin1String("cover");
   const bool isLocal = url().isLocalFile();
 
   Data::EntryList entries = coll->entries();

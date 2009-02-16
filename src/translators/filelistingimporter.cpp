@@ -76,20 +76,20 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
   const bool usePreview = m_filePreview->isChecked();
 
-  const QString title    = QString::fromLatin1("title");
-  const QString url      = QString::fromLatin1("url");
-  const QString desc     = QString::fromLatin1("description");
-  const QString vol      = QString::fromLatin1("volume");
-  const QString folder   = QString::fromLatin1("folder");
-  const QString type     = QString::fromLatin1("mimetype");
-  const QString size     = QString::fromLatin1("size");
-  const QString perm     = QString::fromLatin1("permissions");
-  const QString owner    = QString::fromLatin1("owner");
-  const QString group    = QString::fromLatin1("group");
-  const QString created  = QString::fromLatin1("created");
-  const QString modified = QString::fromLatin1("modified");
-  const QString metainfo = QString::fromLatin1("metainfo");
-  const QString icon     = QString::fromLatin1("icon");
+  const QString title    = QLatin1String("title");
+  const QString url      = QLatin1String("url");
+  const QString desc     = QLatin1String("description");
+  const QString vol      = QLatin1String("volume");
+  const QString folder   = QLatin1String("folder");
+  const QString type     = QLatin1String("mimetype");
+  const QString size     = QLatin1String("size");
+  const QString perm     = QLatin1String("permissions");
+  const QString owner    = QLatin1String("owner");
+  const QString group    = QLatin1String("group");
+  const QString created  = QLatin1String("created");
+  const QString modified = QLatin1String("modified");
+  const QString metainfo = QLatin1String("metainfo");
+  const QString icon     = QLatin1String("icon");
 
   m_coll = new Data::FileCatalog(true);
   QString tmp;
@@ -140,7 +140,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
           }
         }
       }
-      entry->setField(metainfo, strings.join(QString::fromLatin1("; ")));
+      entry->setField(metainfo, strings.join(QLatin1String("; ")));
     }
 
     if(!m_cancelled && usePreview) {
@@ -154,7 +154,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
     if(!m_pixmap.isNull()) {
       // is png best option?
-      QString id = ImageFactory::addImage(m_pixmap, QString::fromLatin1("PNG"));
+      QString id = ImageFactory::addImage(m_pixmap, QLatin1String("PNG"));
       if(!id.isEmpty()) {
         entry->setField(icon, id);
       }

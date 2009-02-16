@@ -17,7 +17,7 @@
 using Tellico::LCCNValidator;
 
 LCCNValidator::LCCNValidator(QObject* parent_) : QRegExpValidator(parent_) {
-  QRegExp rx(QString::fromLatin1("[a-z ]{0,3}"
+  QRegExp rx(QLatin1String("[a-z ]{0,3}"
                                   "("
                                   "\\d{2}-?\\d{1,6}"
                                   "|"
@@ -54,7 +54,7 @@ QString LCCNValidator::formalize(const QString& value_) {
     // or from any year after 2100. Reasonable, right?
     // so if the string starts with '20' we take the first 4 digits as the year
     // otherwise the first 2
-    if(afterAlpha.startsWith(QString::fromLatin1("20"))) {
+    if(afterAlpha.startsWith(QLatin1String("20"))) {
       year = afterAlpha.left(4);
       serial = afterAlpha.mid(4);
     } else {

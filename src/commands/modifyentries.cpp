@@ -66,7 +66,7 @@ void ModifyEntries::redo() {
   }
   // loans expose a field named "loaned", and the user might modify that without
   // checking in the loan, so verify that. Heavy-handed, yes...
-  const QString loaned = QString::fromLatin1("loaned");
+  const QString loaned = QLatin1String("loaned");
   bool hasLoanField = m_coll->hasField(loaned);
   if(hasLoanField) {
     foreach(Data::EntryPtr entry, m_entries) {

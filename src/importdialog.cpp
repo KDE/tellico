@@ -178,7 +178,7 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::XSLTImporter(firstURL);
       {
-        QString xsltFile = KStandardDirs::locate("appdata", QString::fromLatin1("mods2tellico.xsl"));
+        QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
           KUrl u;
           u.setPath(xsltFile);
@@ -336,18 +336,18 @@ Tellico::Import::FormatMap ImportDialog::formatMap() {
   // I decided they were likely to be the same in any language
   // transliteration is unlikely
   Import::FormatMap map;
-  map[Import::TellicoXML] = QString::fromLatin1("Tellico");
-  map[Import::Bibtex]     = QString::fromLatin1("Bibtex");
-  map[Import::Bibtexml]   = QString::fromLatin1("Bibtexml");
-//  map[Import::CSV]        = QString::fromLatin1("CSV");
-  map[Import::MODS]       = QString::fromLatin1("MODS");
-  map[Import::RIS]        = QString::fromLatin1("RIS");
-  map[Import::GCfilms]    = QString::fromLatin1("GCstar");
-  map[Import::AMC]        = QString::fromLatin1("AMC");
-  map[Import::Griffith]   = QString::fromLatin1("Griffith");
-  map[Import::PDF]        = QString::fromLatin1("PDF");
-  map[Import::Referencer] = QString::fromLatin1("Referencer");
-  map[Import::Delicious ] = QString::fromLatin1("Delicious Library");
+  map[Import::TellicoXML] = QLatin1String("Tellico");
+  map[Import::Bibtex]     = QLatin1String("Bibtex");
+  map[Import::Bibtexml]   = QLatin1String("Bibtexml");
+//  map[Import::CSV]        = QLatin1String("CSV");
+  map[Import::MODS]       = QLatin1String("MODS");
+  map[Import::RIS]        = QLatin1String("RIS");
+  map[Import::GCfilms]    = QLatin1String("GCstar");
+  map[Import::AMC]        = QLatin1String("AMC");
+  map[Import::Griffith]   = QLatin1String("Griffith");
+  map[Import::PDF]        = QLatin1String("PDF");
+  map[Import::Referencer] = QLatin1String("Referencer");
+  map[Import::Delicious ] = QLatin1String("Delicious Library");
   return map;
 }
 
@@ -361,11 +361,11 @@ QString ImportDialog::startDir(Tellico::Import::Format format_) {
   if(format_ == Import::GCfilms) {
     QDir dir = QDir::home();
     // able to cd if exists and readable
-    if(dir.cd(QString::fromLatin1(".local/share/gcfilms/"))) {
+    if(dir.cd(QLatin1String(".local/share/gcfilms/"))) {
       return dir.absolutePath();
     }
   }
-  return QString::fromLatin1(":import");
+  return QLatin1String(":import");
 }
 
 void ImportDialog::slotOk() {

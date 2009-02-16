@@ -77,18 +77,18 @@ bool Manager::installTemplate(const QString& file) {
   KTar archive(file);
   if(archive.open(QIODevice::ReadOnly)) {
     const KArchiveDirectory* archiveDir = archive.directory();
-    archiveDir->copyTo(Tellico::saveLocation(QString::fromLatin1("entry-templates/")));
+    archiveDir->copyTo(Tellico::saveLocation(QLatin1String("entry-templates/")));
 
     allFiles = archiveFiles(archiveDir);
     // remember files installed for template
     xslFile = findXSL(archiveDir);
   } else { // assume it's an xsl file
     QString name = QFileInfo(file).fileName();
-    if(!name.endsWith(QString::fromLatin1(".xsl"))) {
-      name += QString::fromLatin1(".xsl");
+    if(!name.endsWith(QLatin1String(".xsl"))) {
+      name += QLatin1String(".xsl");
     }
     name.remove(QRegExp("^\\d+-")); // Remove possible kde-files.org id
-    name = Tellico::saveLocation(QString::fromLatin1("entry-templates/")) + name;
+    name = Tellico::saveLocation(QLatin1String("entry-templates/")) + name;
     // Should overwrite since we might be upgrading
     if (QFile::exists(name)) {
         QFile::remove(name);
@@ -112,8 +112,8 @@ bool Manager::installTemplate(const QString& file) {
 
 QMap<QString, QString> Manager::userTemplates()
 {
-  QDir dir(Tellico::saveLocation(QString::fromLatin1("entry-templates/")));
-  dir.setNameFilters(QStringList() << QString::fromLatin1("*.xsl"));
+  QDir dir(Tellico::saveLocation(QLatin1String("entry-templates/")));
+  dir.setNameFilters(QStringList() << QLatin1String("*.xsl"));
   dir.setFilter(QDir::Files | QDir::Writable);
   QStringList files = dir.entryList();
   QMap<QString, QString> nameFileMap;
@@ -136,7 +136,7 @@ bool Manager::removeTemplateByName(const QString& name)
       return removeTemplate(file, true);
     }
     // At least remove xsl file
-    QFile::remove(Tellico::saveLocation(QString::fromLatin1("entry-templates/")) + xslFile);
+    QFile::remove(Tellico::saveLocation(QLatin1String("entry-templates/")) + xslFile);
     return true;
   }
   return false;
@@ -152,7 +152,7 @@ bool Manager::removeTemplate(const QString& file, bool manual) {
   }
 
   bool success = true;
-  QString path = Tellico::saveLocation(QString::fromLatin1("entry-templates/"));
+  QString path = Tellico::saveLocation(QLatin1String("entry-templates/"));
   foreach(const QString& file, files) {
     if(file.endsWith(QChar('/'))) {
       // ok to not delete all directories
@@ -199,7 +199,7 @@ void Manager::removeNewStuffFile(const QString& file) {
 
 bool Manager::installScript(const QString& file) {
   KTar archive(file);
-  QString copyTarget = Tellico::saveLocation(QString::fromLatin1("data-sources/"));
+  QString copyTarget = Tellico::saveLocation(QLatin1String("data-sources/"));
   QString scriptFolder;
   QString exeFile;
   QString sourceName;
@@ -271,9 +271,9 @@ bool Manager::installScript(const QString& file) {
   //  myDebug() << "Manager::installScript() - sourceExec = " << info->sourceExec << endl;
   //  myDebug() << "Manager::installScript() - sourceName = " << info->sourceName << endl;
   //  myDebug() << "Manager::installScript() - specFile = " << info->specFile << endl;
-  KConfigGroup configGroup(KGlobal::config(), QString::fromLatin1("Data Sources"));
+  KConfigGroup configGroup(KGlobal::config(), QLatin1String("Data Sources"));
   int nSources = configGroup.readEntry("Sources Count", 0);
-  config.writeEntry(file + QString::fromLatin1("_nbr"), nSources);
+  config.writeEntry(file + QLatin1String("_nbr"), nSources);
   configGroup.writeEntry("Sources Count", nSources + 1);
   KConfigGroup sourceGroup(KGlobal::config(), QString::fromLatin1("Data Source %1").arg(nSources));
   sourceGroup.writeEntry("Name", sourceName);
@@ -297,13 +297,13 @@ bool Manager::removeScript(const QString& file, bool manual) {
   bool success = true;
   KConfigGroup fileGroup(KGlobal::config(), "KNewStuffFiles");
   QString scriptFolder = fileGroup.readEntry(file, QString());
-  int source = fileGroup.readEntry(file + QString::fromLatin1("_nbr"), -1);
+  int source = fileGroup.readEntry(file + QLatin1String("_nbr"), -1);
 
   if (!scriptFolder.isEmpty()) {
     KIO::del(KUrl(scriptFolder));
   }
   if (source != -1) {
-    KConfigGroup configGroup(KGlobal::config(), QString::fromLatin1("Data Sources"));
+    KConfigGroup configGroup(KGlobal::config(), QLatin1String("Data Sources"));
     int nSources = configGroup.readEntry("Sources Count", 0);
     configGroup.writeEntry("Sources Count", nSources - 1);
     KConfigGroup sourceGroup(KGlobal::config(), QString::fromLatin1("Data Source %1").arg(source));
@@ -343,7 +343,7 @@ QString Manager::findXSL(const KArchiveDirectory* dir_) {
   const QStringList entries = dir_->entries();
   for(QStringList::ConstIterator it = entries.begin(); it != entries.end(); ++it) {
     const QString& entry = *it;
-    if(entry.endsWith(QString::fromLatin1(".xsl"))) {
+    if(entry.endsWith(QLatin1String(".xsl"))) {
       return entry;
     }
   }
@@ -381,12 +381,12 @@ bool Manager::checkCommonFile() {
   // look for a file that gets installed to know the installation directory
   // need to check timestamps
   QString userDataDir = Tellico::saveLocation(QString::null);
-  QString userCommonFile = userDataDir + '/' + QString::fromLatin1("tellico-common.xsl");
+  QString userCommonFile = userDataDir + '/' + QLatin1String("tellico-common.xsl");
   if(QFile::exists(userCommonFile)) {
     // check timestamps
     // pics/tellico.png is not likely to be in a user directory
-    QString installDir = KGlobal::dirs()->findResourceDir("appdata", QString::fromLatin1("pics/tellico.png"));
-    QString installCommonFile = installDir + '/' + QString::fromLatin1("tellico-common.xsl");
+    QString installDir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png"));
+    QString installCommonFile = installDir + '/' + QLatin1String("tellico-common.xsl");
 #ifndef NDEBUG
     if(userCommonFile == installCommonFile) {
       kWarning() << "Manager::checkCommonFile() - install location is same as user location";
@@ -405,7 +405,7 @@ bool Manager::checkCommonFile() {
     }
   }
   KUrl src, dest;
-  src.setPath(KGlobal::dirs()->findResource("appdata", QString::fromLatin1("tellico-common.xsl")));
+  src.setPath(KGlobal::dirs()->findResource("appdata", QLatin1String("tellico-common.xsl")));
   dest.setPath(userCommonFile);
   return KIO::NetAccess::file_copy(src, dest);
 }

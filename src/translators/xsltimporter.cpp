@@ -41,7 +41,7 @@ static bool isUTF8(const KUrl& url_) {
   ref->open();
   QTextStream stream(ref->file());
   QString line = stream.readLine().toLower();
-  return line.indexOf(QString::fromLatin1("utf-8")) > 0;
+  return line.indexOf(QLatin1String("utf-8")) > 0;
 }
 
 }

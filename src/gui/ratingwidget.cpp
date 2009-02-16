@@ -53,8 +53,8 @@ const QPixmap& RatingWidget::pixmap(const QString& value_) {
 
 RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : KHBox(parent_), m_field(field_), m_currIndex(-1) {
-  m_pixOn = UserIcon(QString::fromLatin1("star_on"));
-  m_pixOff = UserIcon(QString::fromLatin1("star_off"));
+  m_pixOn = UserIcon(QLatin1String("star_on"));
+  m_pixOff = UserIcon(QLatin1String("star_off"));
   setSpacing(0);
 
   // find maximum width and height
@@ -88,8 +88,8 @@ void RatingWidget::init() {
 
 void RatingWidget::updateBounds() {
   bool ok; // not used;
-  m_min = Tellico::toUInt(m_field->property(QString::fromLatin1("minimum")), &ok);
-  m_max = Tellico::toUInt(m_field->property(QString::fromLatin1("maximum")), &ok);
+  m_min = Tellico::toUInt(m_field->property(QLatin1String("minimum")), &ok);
+  m_max = Tellico::toUInt(m_field->property(QLatin1String("maximum")), &ok);
   if(m_max > RATING_WIDGET_MAX_ICONS) {
     myDebug() << "RatingWidget::updateBounds() - max is too high: " << m_max << endl;
     m_max = RATING_WIDGET_MAX_ICONS;

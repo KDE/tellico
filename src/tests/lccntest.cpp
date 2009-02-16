@@ -22,9 +22,9 @@
 QTEST_KDEMAIN_CORE( LccnTest )
 
 void LccnTest::testValidation() {
-  QString lccn1 = QString::fromLatin1("89-456");
-  QString lccn2 = QString::fromLatin1("2001-1114");
-  QString lccn3 = QString::fromLatin1("gm 71-2450");
+  QString lccn1 = QLatin1String("89-456");
+  QString lccn2 = QLatin1String("2001-1114");
+  QString lccn3 = QLatin1String("gm 71-2450");
 
   Tellico::LCCNValidator val(0);
   int pos = 0;
@@ -35,7 +35,7 @@ void LccnTest::testValidation() {
 }
 
 void LccnTest::testFormalization() {
-  QCOMPARE(Tellico::LCCNValidator::formalize(QString::fromLatin1("89-456")), QString::fromLatin1("89000456"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QString::fromLatin1("2001-1114")), QString::fromLatin1("2001001114"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QString::fromLatin1("gm 71-2450")), QString::fromLatin1("gm71002450"));
+  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("89-456")), QLatin1String("89000456"));
+  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("2001-1114")), QLatin1String("2001001114"));
+  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("gm 71-2450")), QLatin1String("gm71002450"));
 }

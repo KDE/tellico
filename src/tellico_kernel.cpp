@@ -267,7 +267,7 @@ bool Kernel::removeFilter(Tellico::FilterPtr filter_) {
   }
 
   QString str = i18n("Do you really want to delete this filter?");
-  QString dontAsk = QString::fromLatin1("DeleteFilter");
+  QString dontAsk = QLatin1String("DeleteFilter");
   int ret = KMessageBox::questionYesNo(m_widget, str, i18n("Delete Filter?"),
                                        KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk);
   if(ret != KMessageBox::Yes) {
@@ -350,8 +350,8 @@ QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> Kernel::mergeFields(Te
 
 int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_, Tellico::Data::FieldPtr field_,
                         QString value1_, QString value2_) {
-  QString title1 = entry1_->field(QString::fromLatin1("title"));
-  QString title2 = entry2_->field(QString::fromLatin1("title"));
+  QString title1 = entry1_->field(QLatin1String("title"));
+  QString title2 = entry2_->field(QLatin1String("title"));
   if(title1 == title2) {
     title1 = i18n("Entry 1");
     title2 = i18n("Entry 2");
@@ -362,7 +362,7 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
   if(value2_.isEmpty()) {
     value2_ = entry2_->field(field_);
   }
-  QString text = QString::fromLatin1("<qt>")
+  QString text = QLatin1String("<qt>")
                 + i18n("Conflicting values for %1 were found while merging entries.", field_->title())
                 + QString::fromLatin1("<br/><center><table><tr>"
                                       "<th>%1</th>"
@@ -370,7 +370,7 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
                 + QString::fromLatin1("<tr><td><em>%1</em></td>").arg(value1_)
                 + QString::fromLatin1("<td><em>%1</em></td></tr></table></center>").arg(value2_)
                 + i18n("Please choose which value to keep.")
-                + QString::fromLatin1("</qt>");
+                + QLatin1String("</qt>");
 
   int ret = KMessageBox::warningYesNoCancel(Kernel::self()->widget(),
                                             text,

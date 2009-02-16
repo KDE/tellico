@@ -46,7 +46,7 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
 QString LineFieldWidget::text() const {
   QString text = m_lineEdit->text();
   if(field()->flags() & Data::Field::AllowMultiple) {
-    text.replace(s_semiColon, QString::fromLatin1("; "));
+    text.replace(s_semiColon, QLatin1String("; "));
   }
   return text.trimmed();
 }

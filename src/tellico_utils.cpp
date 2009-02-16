@@ -32,7 +32,7 @@ namespace {
 }
 
 QString Tellico::decodeHTML(QString text) {
-  QRegExp rx(QString::fromLatin1("&(.+);"));
+  QRegExp rx(QLatin1String("&(.+);"));
   rx.setMinimal(true);
   int pos = rx.indexIn(text);
   while(pos > -1) {
@@ -48,7 +48,7 @@ QString Tellico::decodeHTML(QString text) {
 QString Tellico::uid(int l, bool prefix) {
   QString uid;
   if(prefix) {
-    uid = QString::fromLatin1("Tellico");
+    uid = QLatin1String("Tellico");
   }
   uid.append(KRandom::randomString(qMax(l - uid.length(), 0)));
   return uid;

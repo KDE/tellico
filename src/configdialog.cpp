@@ -140,7 +140,7 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   enableButtonOk(false);
   enableButtonApply(false);
 
-  setHelp(QString::fromLatin1("general-options"));
+  setHelp(QLatin1String("general-options"));
   connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotUpdateHelpLink(KPageWidgetItem*)));
 }
 
@@ -154,13 +154,13 @@ void ConfigDialog::slotUpdateHelpLink(KPageWidgetItem* item_) {
   QString name = item_->name();
   // thes ename must be kept in sync with the page names
   if(name == i18n("General")) {
-    setHelp(QString::fromLatin1("general-options"));
+    setHelp(QLatin1String("general-options"));
   } else if(name == i18n("Printing")) {
-    setHelp(QString::fromLatin1("printing-options"));
+    setHelp(QLatin1String("printing-options"));
   } else if(name == i18n("Templates")) {
-    setHelp(QString::fromLatin1("template-options"));
+    setHelp(QLatin1String("template-options"));
   } else if(name == i18n("Data Sources")) {
-    setHelp(QString::fromLatin1("internet-sources-options"));
+    setHelp(QLatin1String("internet-sources-options"));
   }
 }
 
@@ -192,7 +192,7 @@ void ConfigDialog::slotDefault() {
 }
 
 void ConfigDialog::setupGeneralPage() {
-  QPixmap pix = DesktopIcon(QString::fromLatin1("tellico"), KIconLoader::SizeMedium);
+  QPixmap pix = DesktopIcon(QLatin1String("tellico"), KIconLoader::SizeMedium);
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("General"));
   page->setHeader(i18n("General Options"));
@@ -306,7 +306,7 @@ void ConfigDialog::setupGeneralPage() {
 }
 
 void ConfigDialog::setupPrintingPage() {
-  QPixmap pix = DesktopIcon(QString::fromLatin1("printer"), KIconLoader::SizeMedium);
+  QPixmap pix = DesktopIcon(QLatin1String("printer"), KIconLoader::SizeMedium);
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Printing"));
   page->setHeader(i18n("Printing Options"));
@@ -350,7 +350,7 @@ void ConfigDialog::setupPrintingPage() {
   gridLayout->addWidget(lab, 0, 0);
   m_imageWidthBox = new KIntSpinBox(0, 999, 1, 50, imageOptions);
   gridLayout->addWidget(m_imageWidthBox, 0, 1);
-  m_imageWidthBox->setSuffix(QString::fromLatin1(" px"));
+  m_imageWidthBox->setSuffix(QLatin1String(" px"));
   lab->setBuddy(m_imageWidthBox);
   QString whats = i18n("The maximum width of the images in the printout. The aspect ration is preserved.");
   lab->setWhatsThis(whats);
@@ -364,7 +364,7 @@ void ConfigDialog::setupPrintingPage() {
   gridLayout->addWidget(lab, 1, 0);
   m_imageHeightBox = new KIntSpinBox(0, 999, 1, 50, imageOptions);
   gridLayout->addWidget(m_imageHeightBox, 1, 1);
-  m_imageHeightBox->setSuffix(QString::fromLatin1(" px"));
+  m_imageHeightBox->setSuffix(QLatin1String(" px"));
   lab->setBuddy(m_imageHeightBox);
   whats = i18n("The maximum height of the images in the printout. The aspect ration is preserved.");
   lab->setWhatsThis(whats);
@@ -380,7 +380,7 @@ void ConfigDialog::setupPrintingPage() {
 
 void ConfigDialog::setupTemplatePage() {
   // odd icon, I know, matches KMail, though...
-  QPixmap pix = DesktopIcon(QString::fromLatin1("preferences-desktop-theme"), KIconLoader::SizeMedium);
+  QPixmap pix = DesktopIcon(QLatin1String("preferences-desktop-theme"), KIconLoader::SizeMedium);
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Templates"));
   page->setHeader(i18n("Template Options"));
@@ -414,7 +414,7 @@ void ConfigDialog::setupTemplatePage() {
 
   KPushButton* btn = new KPushButton(i18n("&Preview..."), frame);
   btn->setWhatsThis(i18n("Show a preview of the template"));
-  btn->setIcon(KIcon(QString::fromLatin1("zoom-original")));
+  btn->setIcon(KIcon(QLatin1String("zoom-original")));
   gridLayout->addWidget(btn, row, 2);
   connect(btn, SIGNAL(clicked()), SLOT(slotShowTemplatePreview()));
 
@@ -450,7 +450,7 @@ void ConfigDialog::setupTemplatePage() {
   fontLayout->addWidget(new QLabel(i18n("Size:"), fontGroup), ++row, 0);
   m_fontSizeInput = new KIntNumInput(fontGroup);
   m_fontSizeInput->setRange(5, 30); // 30 is same max as konq config
-  m_fontSizeInput->setSuffix(QString::fromLatin1("pt"));
+  m_fontSizeInput->setSuffix(QLatin1String("pt"));
   fontLayout->addWidget(m_fontSizeInput, row, 1);
   connect(m_fontSizeInput, SIGNAL(valueChanged(int)), SLOT(slotModified()));
   lab->setBuddy(m_fontSizeInput);
@@ -511,19 +511,19 @@ void ConfigDialog::setupTemplatePage() {
   box1->setSpacing(spacingHint());
 
   KPushButton* b1 = new KPushButton(i18n("Install..."), box1);
-  b1->setIcon(KIcon(QString::fromLatin1("list-add")));
+  b1->setIcon(KIcon(QLatin1String("list-add")));
   connect(b1, SIGNAL(clicked()), SLOT(slotInstallTemplate()));
   whats = i18n("Click to install a new template directly.");
   b1->setWhatsThis(whats);
 
   KPushButton* b2 = new KPushButton(i18n("Download..."), box1);
-  b2->setIcon(KIcon(QString::fromLatin1("get-hot-new-stuff")));
+  b2->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
   connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
   whats = i18n("Click to download additional templates via the Internet.");
   b2->setWhatsThis(whats);
 
   KPushButton* b3 = new KPushButton(i18n("Delete..."), box1);
-  b3->setIcon(KIcon(QString::fromLatin1("list-remove")));
+  b3->setIcon(KIcon(QLatin1String("list-remove")));
   connect(b3, SIGNAL(clicked()), SLOT(slotDeleteTemplate()));
   whats = i18n("Click to select and remove installed templates.");
   b3->setWhatsThis(whats);
@@ -535,7 +535,7 @@ void ConfigDialog::setupTemplatePage() {
 }
 
 void ConfigDialog::setupFetchPage() {
-  QPixmap pix = DesktopIcon(QString::fromLatin1("network-wired"), KIconLoader::SizeMedium);
+  QPixmap pix = DesktopIcon(QLatin1String("network-wired"), KIconLoader::SizeMedium);
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Data Sources"));
   page->setHeader(i18n("Data Sources Options"));
@@ -556,11 +556,11 @@ void ConfigDialog::setupFetchPage() {
   KHBox* hb = new KHBox(frame);
   leftLayout->addWidget(hb);
   m_moveUpSourceBtn = new KPushButton(i18n("Move &Up"), hb);
-  m_moveUpSourceBtn->setIcon(KIcon(QString::fromLatin1("go-up")));
+  m_moveUpSourceBtn->setIcon(KIcon(QLatin1String("go-up")));
   m_moveUpSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                        "that Tellico uses when entries are automatically updated."));
   m_moveDownSourceBtn = new KPushButton(i18n("Move &Down"), hb);
-  m_moveDownSourceBtn->setIcon(KIcon(QString::fromLatin1("go-down")));
+  m_moveDownSourceBtn->setIcon(KIcon(QLatin1String("go-down")));
   m_moveDownSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                          "that Tellico uses when entries are automatically updated."));
 
@@ -568,16 +568,16 @@ void ConfigDialog::setupFetchPage() {
   QVBoxLayout* vlay = new QVBoxLayout();
   l->addLayout(vlay);
   KPushButton* newSourceBtn = new KPushButton(i18n("&New..."), frame);
-  newSourceBtn->setIcon(KIcon(QString::fromLatin1("document-new")));
+  newSourceBtn->setIcon(KIcon(QLatin1String("document-new")));
   newSourceBtn->setWhatsThis(i18n("Click to add a new data source."));
   m_modifySourceBtn = new KPushButton(i18n("&Modify..."), frame);
-  m_modifySourceBtn->setIcon(KIcon(QString::fromLatin1("network-wired")));
+  m_modifySourceBtn->setIcon(KIcon(QLatin1String("network-wired")));
   m_modifySourceBtn->setWhatsThis(i18n("Click to modify the selected data source."));
   m_removeSourceBtn = new KPushButton(i18n("&Delete"), frame);
-  m_removeSourceBtn->setIcon(KIcon(QString::fromLatin1("list-remove")));
+  m_removeSourceBtn->setIcon(KIcon(QLatin1String("list-remove")));
   m_removeSourceBtn->setWhatsThis(i18n("Click to delete the selected data source."));
   m_newStuffBtn = new KPushButton(i18n("Download..."), frame);
-  m_newStuffBtn->setIcon(KIcon(QString::fromLatin1("get-hot-new-stuff")));
+  m_newStuffBtn->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
   m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources via the Internet."));
 
   vlay->addWidget(newSourceBtn);
@@ -624,8 +624,8 @@ void ConfigDialog::readGeneralConfig() {
   bool autoFormat = Config::autoFormat();
   m_cbFormat->setChecked(autoFormat);
 
-  const QRegExp comma(QString::fromLatin1("\\s*,\\s*"));
-  const QString semicolon = QString::fromLatin1("; ");
+  const QRegExp comma(QLatin1String("\\s*,\\s*"));
+  const QString semicolon = QLatin1String("; ");
 
   m_leCapitals->setText(Config::noCapitalizationString().replace(comma, semicolon));
   m_leArticles->setText(Config::articlesString().replace(comma, semicolon));
@@ -646,7 +646,7 @@ void ConfigDialog::readTemplateConfig() {
   const int collType = Kernel::self()->collectionType();
   QString file = Config::templateName(collType);
   file.replace('_', ' ');
-  QString fileContext = file + QString::fromLatin1(" XSL Template");
+  QString fileContext = file + QLatin1String(" XSL Template");
   m_templateCombo->setCurrentItem(i18nc(fileContext.toUtf8(), file.toUtf8()));
 
   m_fontCombo->setCurrentFont(QFont(Config::templateFont(collType).family()));
@@ -702,7 +702,7 @@ void ConfigDialog::saveConfiguration() {
   Config::setAutoCapitalization(m_cbCapitalize->isChecked());
   Config::setAutoFormat(m_cbFormat->isChecked());
 
-  const QRegExp semicolon(QString::fromLatin1("\\s*;\\s*"));
+  const QRegExp semicolon(QLatin1String("\\s*;\\s*"));
   const QChar comma = ',';
 
   Config::setNoCapitalizationString(m_leCapitals->text().replace(semicolon, comma));
@@ -955,7 +955,7 @@ void ConfigDialog::slotShowTemplatePreview() {
   GUI::PreviewDialog* dlg = new GUI::PreviewDialog(this);
 
   const QString templateName = m_templateCombo->currentData().toString();
-  dlg->setXSLTFile(templateName + QString::fromLatin1(".xsl"));
+  dlg->setXSLTFile(templateName + QLatin1String(".xsl"));
 
   StyleOptions options;
   options.fontFamily = m_fontCombo->currentFont().family();
@@ -976,11 +976,11 @@ void ConfigDialog::slotShowTemplatePreview() {
     } else if(f->type() == Data::Field::Choice) {
       e->setField(f->name(), f->allowed().front());
     } else if(f->type() == Data::Field::Number) {
-      e->setField(f->name(), QString::fromLatin1("1"));
+      e->setField(f->name(), QLatin1String("1"));
     } else if(f->type() == Data::Field::Bool) {
-      e->setField(f->name(), QString::fromLatin1("true"));
+      e->setField(f->name(), QLatin1String("true"));
     } else if(f->type() == Data::Field::Rating) {
-      e->setField(f->name(), QString::fromLatin1("5"));
+      e->setField(f->name(), QLatin1String("5"));
     } else {
       e->setField(f->name(), f->title());
     }
@@ -993,7 +993,7 @@ void ConfigDialog::slotShowTemplatePreview() {
 }
 
 void ConfigDialog::loadTemplateList() {
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QString::fromLatin1("entry-templates/*.xsl"),
+  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("entry-templates/*.xsl"),
                                                         KStandardDirs::NoDuplicates);
   KSortableList<QString, QString> templates;
   foreach(const QString& file, files) {
@@ -1001,7 +1001,7 @@ void ConfigDialog::loadTemplateList() {
     QString lfile = fi.fileName().section('.', 0, -2);
     QString name = lfile;
     name.replace('_', ' ');
-    QString title = i18nc((name + QString::fromLatin1(" XSL Template")).toUtf8(), name.toUtf8());
+    QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8(), name.toUtf8());
     templates.insert(title, lfile);
   }
   templates.sort();

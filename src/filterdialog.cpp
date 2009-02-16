@@ -87,7 +87,7 @@ void FilterRuleWidget::initWidget() {
   m_ruleValue = new KLineEdit(this);
   connect(m_ruleValue, SIGNAL(textChanged(const QString&)), SIGNAL(signalModified()));
 
-  if(!KServiceTypeTrader::self()->query(QString::fromLatin1("KRegExpEditor/KRegExpEditor")).isEmpty()) {
+  if(!KServiceTypeTrader::self()->query(QLatin1String("KRegExpEditor/KRegExpEditor")).isEmpty()) {
     m_editRegExp = new KPushButton(i18n("Edit..."), this);
     connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp()));
     connect(m_ruleFunc, SIGNAL(activated(int)), this, SLOT(slotRuleFunctionChanged(int)));
@@ -110,7 +110,7 @@ void FilterRuleWidget::initWidget() {
 
 void FilterRuleWidget::slotEditRegExp() {
   if(!m_editRegExpDialog) {
-    m_editRegExpDialog = KServiceTypeTrader::createInstanceFromQuery<QDialog>(QString::fromLatin1("KRegExpEditor/KRegExpEditor"),
+    m_editRegExpDialog = KServiceTypeTrader::createInstanceFromQuery<QDialog>(QLatin1String("KRegExpEditor/KRegExpEditor"),
                                                                               QString(), this);
   }
 
@@ -333,7 +333,7 @@ void FilterDialog::init() {
 
   // only when creating a new filter can it be saved
   if(m_mode == CreateFilter) {
-    m_saveFilter = new KPushButton(KIcon(QString::fromLatin1("view-filter")), i18n("&Save Filter"), page);
+    m_saveFilter = new KPushButton(KIcon(QLatin1String("view-filter")), i18n("&Save Filter"), page);
     blay->addWidget(m_saveFilter);
     m_saveFilter->setEnabled(false);
     connect(m_saveFilter, SIGNAL(clicked()), SLOT(slotSaveFilter()));
@@ -343,7 +343,7 @@ void FilterDialog::init() {
   button(Help)->setDefault(false); // Help automatically becomes default when OK is disabled
   button(Cancel)->setDefault(true); // Help automatically becomes default when OK is disabled
   setMinimumWidth(qMax(minimumWidth(), FILTER_MIN_WIDTH));
-  setHelp(QString::fromLatin1("filter-dialog"));
+  setHelp(QLatin1String("filter-dialog"));
   connect(this, SIGNAL(okClicked()), SLOT(slotOk()));
   connect(this, SIGNAL(applyClicked()), SLOT(slotApply()));
 }

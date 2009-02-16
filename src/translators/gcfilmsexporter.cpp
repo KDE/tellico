@@ -63,19 +63,19 @@ bool GCfilmsExporter::exec() {
   char d = GCFILMS_DELIMITER;
   bool format = options() & Export::ExportFormatted;
   // when importing GCfilms, a url field is added
-  bool hasURL = coll->hasField(QString::fromLatin1("url"))
-                && coll->fieldByName(QString::fromLatin1("url"))->type() == Data::Field::URL;
+  bool hasURL = coll->hasField(QLatin1String("url"))
+                && coll->fieldByName(QLatin1String("url"))->type() == Data::Field::URL;
 
   uint minRating = 1;
   uint maxRating = 5;
-  Data::FieldPtr f = coll->fieldByName(QString::fromLatin1("rating"));
+  Data::FieldPtr f = coll->fieldByName(QLatin1String("rating"));
   if(f) {
     bool ok;
-    uint n = Tellico::toUInt(f->property(QString::fromLatin1("minimum")), &ok);
+    uint n = Tellico::toUInt(f->property(QLatin1String("minimum")), &ok);
     if(ok) {
       minRating = n;
     }
-    n = Tellico::toUInt(f->property(QString::fromLatin1("maximum")), &ok);
+    n = Tellico::toUInt(f->property(QLatin1String("maximum")), &ok);
     if(ok) {
       maxRating = n;
     }
@@ -85,8 +85,8 @@ bool GCfilmsExporter::exec() {
   KUrl imageDir;
   if(url().isLocalFile()) {
     imageDir = url();
-    imageDir.cd(QString::fromLatin1(".."));
-    imageDir.addPath(url().fileName().section('.', 0, 0) + QString::fromLatin1("_images/"));
+    imageDir.cd(QLatin1String(".."));
+    imageDir.addPath(url().fileName().section('.', 0, 0) + QLatin1String("_images/"));
     if(!KIO::NetAccess::exists(imageDir, KIO::NetAccess::DestinationSide, 0)) {
       bool success = KIO::NetAccess::mkdir(imageDir, Kernel::self()->widget());
       if(!success) {
@@ -105,7 +105,7 @@ bool GCfilmsExporter::exec() {
     push(ts, "nationality", entry, format);
     push(ts, "genre", entry, format);
     // do image
-    QString tmp = entry->field(QString::fromLatin1("cover"));
+    QString tmp = entry->field(QLatin1String("cover"));
     if(!tmp.isEmpty() && !imageDir.isEmpty()) {
       images.add(tmp);
       ts << imageDir.path() << tmp;
@@ -113,9 +113,9 @@ bool GCfilmsExporter::exec() {
     ts << d;
 
     // do not format cast since the commas could get mixed up
-    const QStringList cast = entry->fields(QString::fromLatin1("cast"), false);
+    const QStringList cast = entry->fields(QLatin1String("cast"), false);
     for(QStringList::ConstIterator it = cast.begin(); it != cast.end(); ++it) {
-      ts << (*it).section(QString::fromLatin1("::"), 0, 0);
+      ts << (*it).section(QLatin1String("::"), 0, 0);
       if(it != --cast.end()) {
         ts << ", ";
       }
@@ -144,7 +144,7 @@ bool GCfilmsExporter::exec() {
 
     // gcfilms's ratings go 0-10, just multiply by two
     bool ok;
-    int rat = Tellico::toUInt(entry->field(QString::fromLatin1("rating"), format), &ok);
+    int rat = Tellico::toUInt(entry->field(QLatin1String("rating"), format), &ok);
     if(ok) {
       ts << rat * 10/(maxRating-minRating);
     }
@@ -156,7 +156,7 @@ bool GCfilmsExporter::exec() {
     push(ts, "subtitle", entry, format);
 
     // values[20] is borrower name, values[21] is loan date
-    if(entry->field(QString::fromLatin1("loaned")).isEmpty()) {
+    if(entry->field(QLatin1String("loaned")).isEmpty()) {
       ts << d << d;
     } else {
       // find loan
@@ -180,7 +180,7 @@ bool GCfilmsExporter::exec() {
     ts << d;
 
     // for certification, only thing we can do is assume default american ratings
-    tmp = entry->field(QString::fromLatin1("certification"),  format);
+    tmp = entry->field(QLatin1String("certification"),  format);
     int age = 0;
     if(tmp == QLatin1String("U (USA)")) {
       age = 1;
@@ -213,14 +213,14 @@ bool GCfilmsExporter::exec() {
 }
 
 void GCfilmsExporter::push(QTextStream& ts_, const QByteArray& fieldName_, Tellico::Data::EntryPtr entry_, bool format_) {
-  Data::FieldPtr f = collection()->fieldByName(QString::fromLatin1(fieldName_));
+  Data::FieldPtr f = collection()->fieldByName(QLatin1String(fieldName_));
   // don't format multiple names cause commas will cause problems
   if(f->formatFlag() == Data::Field::FormatName && (f->flags() & Data::Field::AllowMultiple)) {
     format_ = false;
   }
-  QString s = entry_->field(QString::fromLatin1(fieldName_), format_);
+  QString s = entry_->field(QLatin1String(fieldName_), format_);
   if(f->flags() & Data::Field::AllowMultiple) {
-    ts_ << s.replace(QString::fromLatin1("; "), QChar(','));
+    ts_ << s.replace(QLatin1String("; "), QChar(','));
   } else {
     ts_ << s;
   }

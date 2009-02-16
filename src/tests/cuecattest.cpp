@@ -19,15 +19,15 @@
 QTEST_KDEMAIN_CORE( CueCatTest )
 
 void CueCatTest::testDecode() {
-  QString bad = QString::fromLatin1("My name is robby");
+  QString bad = QLatin1String("My name is robby");
   QCOMPARE(Tellico::CueCat::decode(bad), QValidator::Invalid);
-  QCOMPARE(bad, QString::fromLatin1("My name is robby"));
+  QCOMPARE(bad, QLatin1String("My name is robby"));
 
-  QString almost = QString::fromLatin1(".C3nZC3nZC3nYCxP2Dxb1CNnY");
+  QString almost = QLatin1String(".C3nZC3nZC3nYCxP2Dxb1CNnY");
   QCOMPARE(Tellico::CueCat::decode(almost), QValidator::Intermediate);
-  QCOMPARE(almost, QString::fromLatin1(".C3nZC3nZC3nYCxP2Dxb1CNnY"));
+  QCOMPARE(almost, QLatin1String(".C3nZC3nZC3nYCxP2Dxb1CNnY"));
 
-  QString valid = QString::fromLatin1(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.");
+  QString valid = QLatin1String(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.");
   QCOMPARE(Tellico::CueCat::decode(valid), QValidator::Acceptable);
-  QCOMPARE(valid, QString::fromLatin1("9780201889543"));
+  QCOMPARE(valid, QLatin1String("9780201889543"));
 }

@@ -35,33 +35,33 @@ void RISImporter::initTagMap() {
   if(!s_tagMap) {
     s_tagMap = new QHash<QString, QString>();
     // BT is special and is handled separately
-    s_tagMap->insert(QString::fromLatin1("TY"), QString::fromLatin1("entry-type"));
-    s_tagMap->insert(QString::fromLatin1("ID"), QString::fromLatin1("bibtex-key"));
-    s_tagMap->insert(QString::fromLatin1("T1"), QString::fromLatin1("title"));
-    s_tagMap->insert(QString::fromLatin1("TI"), QString::fromLatin1("title"));
-    s_tagMap->insert(QString::fromLatin1("T2"), QString::fromLatin1("booktitle"));
-    s_tagMap->insert(QString::fromLatin1("A1"), QString::fromLatin1("author"));
-    s_tagMap->insert(QString::fromLatin1("AU"), QString::fromLatin1("author"));
-    s_tagMap->insert(QString::fromLatin1("ED"), QString::fromLatin1("editor"));
-    s_tagMap->insert(QString::fromLatin1("YR"), QString::fromLatin1("year"));
-    s_tagMap->insert(QString::fromLatin1("PY"), QString::fromLatin1("year"));
-    s_tagMap->insert(QString::fromLatin1("N1"), QString::fromLatin1("note"));
-    s_tagMap->insert(QString::fromLatin1("AB"), QString::fromLatin1("abstract")); // should be note?
-    s_tagMap->insert(QString::fromLatin1("N2"), QString::fromLatin1("abstract"));
-    s_tagMap->insert(QString::fromLatin1("KW"), QString::fromLatin1("keyword"));
-    s_tagMap->insert(QString::fromLatin1("JF"), QString::fromLatin1("journal"));
-    s_tagMap->insert(QString::fromLatin1("JO"), QString::fromLatin1("journal"));
-    s_tagMap->insert(QString::fromLatin1("JA"), QString::fromLatin1("journal"));
-    s_tagMap->insert(QString::fromLatin1("VL"), QString::fromLatin1("volume"));
-    s_tagMap->insert(QString::fromLatin1("IS"), QString::fromLatin1("number"));
-    s_tagMap->insert(QString::fromLatin1("PB"), QString::fromLatin1("publisher"));
-    s_tagMap->insert(QString::fromLatin1("SN"), QString::fromLatin1("isbn"));
-    s_tagMap->insert(QString::fromLatin1("AD"), QString::fromLatin1("address"));
-    s_tagMap->insert(QString::fromLatin1("CY"), QString::fromLatin1("address"));
-    s_tagMap->insert(QString::fromLatin1("UR"), QString::fromLatin1("url"));
-    s_tagMap->insert(QString::fromLatin1("L1"), QString::fromLatin1("pdf"));
-    s_tagMap->insert(QString::fromLatin1("T3"), QString::fromLatin1("series"));
-    s_tagMap->insert(QString::fromLatin1("EP"), QString::fromLatin1("pages"));
+    s_tagMap->insert(QLatin1String("TY"), QLatin1String("entry-type"));
+    s_tagMap->insert(QLatin1String("ID"), QLatin1String("bibtex-key"));
+    s_tagMap->insert(QLatin1String("T1"), QLatin1String("title"));
+    s_tagMap->insert(QLatin1String("TI"), QLatin1String("title"));
+    s_tagMap->insert(QLatin1String("T2"), QLatin1String("booktitle"));
+    s_tagMap->insert(QLatin1String("A1"), QLatin1String("author"));
+    s_tagMap->insert(QLatin1String("AU"), QLatin1String("author"));
+    s_tagMap->insert(QLatin1String("ED"), QLatin1String("editor"));
+    s_tagMap->insert(QLatin1String("YR"), QLatin1String("year"));
+    s_tagMap->insert(QLatin1String("PY"), QLatin1String("year"));
+    s_tagMap->insert(QLatin1String("N1"), QLatin1String("note"));
+    s_tagMap->insert(QLatin1String("AB"), QLatin1String("abstract")); // should be note?
+    s_tagMap->insert(QLatin1String("N2"), QLatin1String("abstract"));
+    s_tagMap->insert(QLatin1String("KW"), QLatin1String("keyword"));
+    s_tagMap->insert(QLatin1String("JF"), QLatin1String("journal"));
+    s_tagMap->insert(QLatin1String("JO"), QLatin1String("journal"));
+    s_tagMap->insert(QLatin1String("JA"), QLatin1String("journal"));
+    s_tagMap->insert(QLatin1String("VL"), QLatin1String("volume"));
+    s_tagMap->insert(QLatin1String("IS"), QLatin1String("number"));
+    s_tagMap->insert(QLatin1String("PB"), QLatin1String("publisher"));
+    s_tagMap->insert(QLatin1String("SN"), QLatin1String("isbn"));
+    s_tagMap->insert(QLatin1String("AD"), QLatin1String("address"));
+    s_tagMap->insert(QLatin1String("CY"), QLatin1String("address"));
+    s_tagMap->insert(QLatin1String("UR"), QLatin1String("url"));
+    s_tagMap->insert(QLatin1String("L1"), QLatin1String("pdf"));
+    s_tagMap->insert(QLatin1String("T3"), QLatin1String("series"));
+    s_tagMap->insert(QLatin1String("EP"), QLatin1String("pages"));
   }
 }
 
@@ -70,41 +70,41 @@ void RISImporter::initTypeMap() {
   if(!s_typeMap) {
     s_typeMap = new QHash<QString, QString>();
     // leave capitalized, except for bibtex types
-    s_typeMap->insert(QString::fromLatin1("ABST"),   QString::fromLatin1("Abstract"));
-    s_typeMap->insert(QString::fromLatin1("ADVS"),   QString::fromLatin1("Audiovisual material"));
-    s_typeMap->insert(QString::fromLatin1("ART"),    QString::fromLatin1("Art Work"));
-    s_typeMap->insert(QString::fromLatin1("BILL"),   QString::fromLatin1("Bill/Resolution"));
-    s_typeMap->insert(QString::fromLatin1("BOOK"),   QString::fromLatin1("book")); // bibtex
-    s_typeMap->insert(QString::fromLatin1("CASE"),   QString::fromLatin1("Case"));
-    s_typeMap->insert(QString::fromLatin1("CHAP"),   QString::fromLatin1("inbook")); // == "inbook" ?
-    s_typeMap->insert(QString::fromLatin1("COMP"),   QString::fromLatin1("Computer program"));
-    s_typeMap->insert(QString::fromLatin1("CONF"),   QString::fromLatin1("inproceedings")); // == "conference" ?
-    s_typeMap->insert(QString::fromLatin1("CTLG"),   QString::fromLatin1("Catalog"));
-    s_typeMap->insert(QString::fromLatin1("DATA"),   QString::fromLatin1("Data file"));
-    s_typeMap->insert(QString::fromLatin1("ELEC"),   QString::fromLatin1("Electronic Citation"));
-    s_typeMap->insert(QString::fromLatin1("GEN"),    QString::fromLatin1("Generic"));
-    s_typeMap->insert(QString::fromLatin1("HEAR"),   QString::fromLatin1("Hearing"));
-    s_typeMap->insert(QString::fromLatin1("ICOMM"),  QString::fromLatin1("Internet Communication"));
-    s_typeMap->insert(QString::fromLatin1("INPR"),   QString::fromLatin1("In Press"));
-    s_typeMap->insert(QString::fromLatin1("JFULL"),  QString::fromLatin1("Journal (full)")); // = "periodical" ?
-    s_typeMap->insert(QString::fromLatin1("JOUR"),   QString::fromLatin1("article")); // "Journal"
-    s_typeMap->insert(QString::fromLatin1("MAP"),    QString::fromLatin1("Map"));
-    s_typeMap->insert(QString::fromLatin1("MGZN"),   QString::fromLatin1("article")); // bibtex
-    s_typeMap->insert(QString::fromLatin1("MPCT"),   QString::fromLatin1("Motion picture"));
-    s_typeMap->insert(QString::fromLatin1("MUSIC"),  QString::fromLatin1("Music score"));
-    s_typeMap->insert(QString::fromLatin1("NEWS"),   QString::fromLatin1("Newspaper"));
-    s_typeMap->insert(QString::fromLatin1("PAMP"),   QString::fromLatin1("Pamphlet")); // = "booklet" ?
-    s_typeMap->insert(QString::fromLatin1("PAT"),    QString::fromLatin1("Patent"));
-    s_typeMap->insert(QString::fromLatin1("PCOMM"),  QString::fromLatin1("Personal communication"));
-    s_typeMap->insert(QString::fromLatin1("RPRT"),   QString::fromLatin1("Report")); // = "techreport" ?
-    s_typeMap->insert(QString::fromLatin1("SER"),    QString::fromLatin1("Serial (BookMonograph)"));
-    s_typeMap->insert(QString::fromLatin1("SLIDE"),  QString::fromLatin1("Slide"));
-    s_typeMap->insert(QString::fromLatin1("SOUND"),  QString::fromLatin1("Sound recording"));
-    s_typeMap->insert(QString::fromLatin1("STAT"),   QString::fromLatin1("Statute"));
-    s_typeMap->insert(QString::fromLatin1("THES"),   QString::fromLatin1("phdthesis")); // "mastersthesis" ?
-    s_typeMap->insert(QString::fromLatin1("UNBILL"), QString::fromLatin1("Unenacted bill/resolution"));
-    s_typeMap->insert(QString::fromLatin1("UNPB"),   QString::fromLatin1("unpublished")); // bibtex
-    s_typeMap->insert(QString::fromLatin1("VIDEO"),  QString::fromLatin1("Video recording"));
+    s_typeMap->insert(QLatin1String("ABST"),   QLatin1String("Abstract"));
+    s_typeMap->insert(QLatin1String("ADVS"),   QLatin1String("Audiovisual material"));
+    s_typeMap->insert(QLatin1String("ART"),    QLatin1String("Art Work"));
+    s_typeMap->insert(QLatin1String("BILL"),   QLatin1String("Bill/Resolution"));
+    s_typeMap->insert(QLatin1String("BOOK"),   QLatin1String("book")); // bibtex
+    s_typeMap->insert(QLatin1String("CASE"),   QLatin1String("Case"));
+    s_typeMap->insert(QLatin1String("CHAP"),   QLatin1String("inbook")); // == "inbook" ?
+    s_typeMap->insert(QLatin1String("COMP"),   QLatin1String("Computer program"));
+    s_typeMap->insert(QLatin1String("CONF"),   QLatin1String("inproceedings")); // == "conference" ?
+    s_typeMap->insert(QLatin1String("CTLG"),   QLatin1String("Catalog"));
+    s_typeMap->insert(QLatin1String("DATA"),   QLatin1String("Data file"));
+    s_typeMap->insert(QLatin1String("ELEC"),   QLatin1String("Electronic Citation"));
+    s_typeMap->insert(QLatin1String("GEN"),    QLatin1String("Generic"));
+    s_typeMap->insert(QLatin1String("HEAR"),   QLatin1String("Hearing"));
+    s_typeMap->insert(QLatin1String("ICOMM"),  QLatin1String("Internet Communication"));
+    s_typeMap->insert(QLatin1String("INPR"),   QLatin1String("In Press"));
+    s_typeMap->insert(QLatin1String("JFULL"),  QLatin1String("Journal (full)")); // = "periodical" ?
+    s_typeMap->insert(QLatin1String("JOUR"),   QLatin1String("article")); // "Journal"
+    s_typeMap->insert(QLatin1String("MAP"),    QLatin1String("Map"));
+    s_typeMap->insert(QLatin1String("MGZN"),   QLatin1String("article")); // bibtex
+    s_typeMap->insert(QLatin1String("MPCT"),   QLatin1String("Motion picture"));
+    s_typeMap->insert(QLatin1String("MUSIC"),  QLatin1String("Music score"));
+    s_typeMap->insert(QLatin1String("NEWS"),   QLatin1String("Newspaper"));
+    s_typeMap->insert(QLatin1String("PAMP"),   QLatin1String("Pamphlet")); // = "booklet" ?
+    s_typeMap->insert(QLatin1String("PAT"),    QLatin1String("Patent"));
+    s_typeMap->insert(QLatin1String("PCOMM"),  QLatin1String("Personal communication"));
+    s_typeMap->insert(QLatin1String("RPRT"),   QLatin1String("Report")); // = "techreport" ?
+    s_typeMap->insert(QLatin1String("SER"),    QLatin1String("Serial (BookMonograph)"));
+    s_typeMap->insert(QLatin1String("SLIDE"),  QLatin1String("Slide"));
+    s_typeMap->insert(QLatin1String("SOUND"),  QLatin1String("Sound recording"));
+    s_typeMap->insert(QLatin1String("STAT"),   QLatin1String("Statute"));
+    s_typeMap->insert(QLatin1String("THES"),   QLatin1String("phdthesis")); // "mastersthesis" ?
+    s_typeMap->insert(QLatin1String("UNBILL"), QLatin1String("Unenacted bill/resolution"));
+    s_typeMap->insert(QLatin1String("UNPB"),   QLatin1String("unpublished")); // bibtex
+    s_typeMap->insert(QLatin1String("VIDEO"),  QLatin1String("Video recording"));
   }
 }
 
@@ -131,7 +131,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
   Data::CollPtr currColl = Data::Document::self()->collection();
   foreach(Data::FieldPtr field, currColl->fields()) {
     // continue if property is empty
-    QString ris = field->property(QString::fromLatin1("ris"));
+    QString ris = field->property(QLatin1String("ris"));
     if(ris.isEmpty()) {
       continue;
     }
@@ -141,7 +141,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
       f = new Data::Field(*field);
       m_coll->addField(f);
     }
-    f->setProperty(QString::fromLatin1("ris"), ris);
+    f->setProperty(QLatin1String("ris"), ris);
     risFields.insert(ris, f);
   }
 
@@ -186,7 +186,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
   // also be gracious and allow any amount of space before hyphen
-  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s+-(.*)$"));
+  QRegExp rx(QLatin1String("^(\\w\\w)\\s+-(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !t.atEnd(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
@@ -222,7 +222,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
       sp = value;
       if(!ep.isEmpty()) {
         value = sp + '-' + ep;
-        tag = QString::fromLatin1("EP");
+        tag = QLatin1String("EP");
         sp = QString();
         ep = QString();
       } else {
@@ -250,10 +250,10 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
       // special case for BT
       // primary title for books, secondary for everything else
       if(tag == QLatin1String("BT")) {
-        if(entry->field(QString::fromLatin1("entry-type")) == QLatin1String("book")) {
-          f = m_coll->fieldByName(QString::fromLatin1("title"));
+        if(entry->field(QLatin1String("entry-type")) == QLatin1String("book")) {
+          f = m_coll->fieldByName(QLatin1String("title"));
         } else {
-          f = m_coll->fieldByName(QString::fromLatin1("booktitle"));
+          f = m_coll->fieldByName(QLatin1String("booktitle"));
         }
       } else {
         f = fieldByTag(tag);
@@ -269,7 +269,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     f->addAllowed(value);
     // if the field can have multiple values, append current values to new value
     if((f->flags() & Data::Field::AllowMultiple) && !entry->field(f->name()).isEmpty()) {
-      value.prepend(entry->field(f->name()) + QString::fromLatin1("; "));
+      value.prepend(entry->field(f->name()) + QLatin1String("; "));
     }
     entry->setField(f, value);
 
@@ -290,15 +290,15 @@ Tellico::Data::FieldPtr RISImporter::fieldByTag(const QString& tag_) {
   if(!fieldTag.isEmpty()) {
     f = m_coll->fieldByName(fieldTag);
     if(f) {
-      f->setProperty(QString::fromLatin1("ris"), tag_);
+      f->setProperty(QLatin1String("ris"), tag_);
       return f;
     }
   }
 
   // add non-default fields if not already there
   if(tag_== QLatin1String("L1")) {
-    f = new Data::Field(QString::fromLatin1("pdf"), i18n("PDF"), Data::Field::URL);
-    f->setProperty(QString::fromLatin1("ris"), QString::fromLatin1("L1"));
+    f = new Data::Field(QLatin1String("pdf"), i18n("PDF"), Data::Field::URL);
+    f->setProperty(QLatin1String("ris"), QLatin1String("L1"));
     f->setCategory(i18n("Miscellaneous"));
   }
   m_coll->addField(f);
@@ -319,7 +319,7 @@ bool RISImporter::maybeRIS(const KUrl& url_) {
   // and then first text line must be valid RIS
   QTextStream t(&text);
 
-  QRegExp rx(QString::fromLatin1("^(\\w\\w)\\s+-(.*)$"));
+  QRegExp rx(QLatin1String("^(\\w\\w)\\s+-(.*)$"));
   QString currLine;
   for(currLine = t.readLine(); !t.atEnd(); currLine = t.readLine()) {
     if(currLine.trimmed().isEmpty()) {

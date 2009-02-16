@@ -27,77 +27,77 @@ FileCatalog::FileCatalog(bool addFields_, const QString& title_ /*=null*/)
   if(addFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QString::fromLatin1("volume"));
+  setDefaultGroupField(QLatin1String("volume"));
 }
 
 Tellico::Data::FieldList FileCatalog::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = new Field(QString::fromLatin1("title"), i18n("Name"));
+  field = new Field(QLatin1String("title"), i18n("Name"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::NoDelete);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("url"), i18n("URL"), Field::URL);
+  field = new Field(QLatin1String("url"), i18n("URL"), Field::URL);
   field->setCategory(i18n(file_general));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("description"), i18n("Description"));
-  field->setCategory(i18n(file_general));
-  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  list.append(field);
-
-  field = new Field(QString::fromLatin1("volume"), i18n("Volume"));
+  field = new Field(QLatin1String("description"), i18n("Description"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("folder"), i18n("Folder"));
+  field = new Field(QLatin1String("volume"), i18n("Volume"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("mimetype"), i18n("Mimetype"));
+  field = new Field(QLatin1String("folder"), i18n("Folder"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("size"), i18n("Size"));
-  field->setCategory(i18n(file_general));
-  list.append(field);
-
-  field = new Field(QString::fromLatin1("permissions"), i18n("Permissions"));
+  field = new Field(QLatin1String("mimetype"), i18n("Mimetype"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("owner"), i18n("Owner"));
+  field = new Field(QLatin1String("size"), i18n("Size"));
+  field->setCategory(i18n(file_general));
+  list.append(field);
+
+  field = new Field(QLatin1String("permissions"), i18n("Permissions"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QString::fromLatin1("group"), i18n("Group"));
+  field = new Field(QLatin1String("owner"), i18n("Owner"));
+  field->setCategory(i18n(file_general));
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
+  list.append(field);
+
+  field = new Field(QLatin1String("group"), i18n("Group"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   // these dates are string fields, not dates, since the time is included
-  field = new Field(QString::fromLatin1("created"), i18n("Created"));
+  field = new Field(QLatin1String("created"), i18n("Created"));
   field->setCategory(i18n(file_general));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("modified"), i18n("Modified"));
+  field = new Field(QLatin1String("modified"), i18n("Modified"));
   field->setCategory(i18n(file_general));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("metainfo"), i18n("Meta Info"), Field::Table);
-  field->setProperty(QString::fromLatin1("columns"), QChar('2'));
-  field->setProperty(QString::fromLatin1("column1"), i18n("Property"));
-  field->setProperty(QString::fromLatin1("column2"), i18n("Value"));
+  field = new Field(QLatin1String("metainfo"), i18n("Meta Info"), Field::Table);
+  field->setProperty(QLatin1String("columns"), QChar('2'));
+  field->setProperty(QLatin1String("column1"), i18n("Property"));
+  field->setProperty(QLatin1String("column2"), i18n("Value"));
   list.append(field);
 
-  field = new Field(QString::fromLatin1("icon"), i18n("Icon"), Field::Image);
+  field = new Field(QLatin1String("icon"), i18n("Icon"), Field::Image);
   list.append(field);
 
   return list;
@@ -105,18 +105,18 @@ Tellico::Data::FieldList FileCatalog::defaultFields() {
 
 int FileCatalog::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   // equal urls are always equal, even if modification time or something is different
-  if(EntryComparison::score(entry1_, entry2_, QString::fromLatin1("url"), this) > 0) {
+  if(EntryComparison::score(entry1_, entry2_, QLatin1String("url"), this) > 0) {
     return 100; // good match
   }
   // if volume or created time is different, it can't be same entry
-  if(EntryComparison::score(entry1_, entry2_, QString::fromLatin1("volume"), this) == 0 ||
-     EntryComparison::score(entry1_, entry2_, QString::fromLatin1("created"), this) == 0 ||
-     EntryComparison::score(entry1_, entry2_, QString::fromLatin1("size"), this) == 0) {
+  if(EntryComparison::score(entry1_, entry2_, QLatin1String("volume"), this) == 0 ||
+     EntryComparison::score(entry1_, entry2_, QLatin1String("created"), this) == 0 ||
+     EntryComparison::score(entry1_, entry2_, QLatin1String("size"), this) == 0) {
     return 0;
   }
-  int res = EntryComparison::score(entry1_, entry2_, QString::fromLatin1("title"), this);
-  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("description"), this);
-  res += EntryComparison::score(entry1_, entry2_, QString::fromLatin1("mimetype"), this);
+  int res = EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
+  res += EntryComparison::score(entry1_, entry2_, QLatin1String("description"), this);
+  res += EntryComparison::score(entry1_, entry2_, QLatin1String("mimetype"), this);
   return res;
 }
 

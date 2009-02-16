@@ -53,7 +53,7 @@
 
 namespace {
   static const int Z3950_DEFAULT_PORT = 210;
-  static const QString Z3950_DEFAULT_ESN = QString::fromLatin1("F");
+  static const QString Z3950_DEFAULT_ESN = QLatin1String("F");
 }
 
 using Tellico::Fetch::Z3950Fetcher;
@@ -102,7 +102,7 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
     m_password = config_.readEntry("Password");
   } else {
     m_preset = preset;
-    QString serverFile = KStandardDirs::locate("appdata", QString::fromLatin1("z3950-servers.cfg"));
+    QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
     if(!serverFile.isEmpty()) {
       KConfig serverConfig(serverFile, KConfig::SimpleConfig);
       const QStringList servers = serverConfig.groupList();
@@ -146,29 +146,29 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
   m_started = true;
 
   QString svalue = m_value;
-  QRegExp rx1(QString::fromLatin1("['\"].*\\1"));
+  QRegExp rx1(QLatin1String("['\"].*\\1"));
   if(!rx1.exactMatch(svalue)) {
     svalue.prepend('"').append('"');
   }
 
   switch(key_) {
     case Title:
-      m_pqn = QString::fromLatin1("@attr 1=4 ") + svalue;
+      m_pqn = QLatin1String("@attr 1=4 ") + svalue;
       break;
     case Person:
-//      m_pqn = QString::fromLatin1("@or ");
-//      m_pqn += QString::fromLatin1("@attr 1=1 \"") + m_value + '"';
-      m_pqn = QString::fromLatin1(" @attr 1=1003 ") + svalue;
+//      m_pqn = QLatin1String("@or ");
+//      m_pqn += QLatin1String("@attr 1=1 \"") + m_value + '"';
+      m_pqn = QLatin1String(" @attr 1=1003 ") + svalue;
       break;
     case ISBN:
       {
         m_pqn.truncate(0);
         QString s = m_value;
         s.remove('-');
-        QStringList isbnList = s.split(QString::fromLatin1("; "));
+        QStringList isbnList = s.split(QLatin1String("; "));
         // also going to search for isbn10 values
         for(QStringList::Iterator it = isbnList.begin(); it != isbnList.end(); ++it) {
-          if((*it).startsWith(QString::fromLatin1("978"))) {
+          if((*it).startsWith(QLatin1String("978"))) {
             QString isbn10 = ISBNValidator::isbn10(*it);
             isbn10.remove('-');
             isbnList.insert(it, isbn10);
@@ -176,12 +176,12 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
         }
         const int count = isbnList.count();
         if(count > 1) {
-          m_pqn = QString::fromLatin1("@or ");
+          m_pqn = QLatin1String("@or ");
         }
         for(int i = 0; i < count; ++i) {
-          m_pqn += QString::fromLatin1(" @attr 1=7 ") + isbnList[i];
+          m_pqn += QLatin1String(" @attr 1=7 ") + isbnList[i];
           if(count > 1 && i < count-2) {
-            m_pqn += QString::fromLatin1(" @or");
+            m_pqn += QLatin1String(" @or");
           }
         }
       }
@@ -191,19 +191,19 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
         m_pqn.truncate(0);
         QString s = m_value;
         s.remove('-');
-        QStringList lccnList = s.split(QString::fromLatin1("; "));
+        QStringList lccnList = s.split(QLatin1String("; "));
         while(!lccnList.isEmpty()) {
-          m_pqn += QString::fromLatin1(" @or @attr 1=9 ") + lccnList.front();
+          m_pqn += QLatin1String(" @or @attr 1=9 ") + lccnList.front();
           if(lccnList.count() > 1) {
-            m_pqn += QString::fromLatin1(" @or");
+            m_pqn += QLatin1String(" @or");
           }
-          m_pqn += QString::fromLatin1(" @attr 1=9 ") + LCCNValidator::formalize(lccnList.front());
+          m_pqn += QLatin1String(" @attr 1=9 ") + LCCNValidator::formalize(lccnList.front());
           lccnList.pop_front();
         }
       }
       break;
     case Keyword:
-      m_pqn = QString::fromLatin1("@attr 1=1016 ") + svalue;
+      m_pqn = QLatin1String("@attr 1=1016 ") + svalue;
       break;
     case Raw:
       m_pqn = m_value;
@@ -213,7 +213,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       stop();
       return;
   }
-//  m_pqn = QString::fromLatin1("@attr 1=7 0253333490");
+//  m_pqn = QLatin1String("@attr 1=7 0253333490");
   myLog() << "Z3950Fetcher::search() - PQN query = " << m_pqn << endl;
 
   if(m_conn) {
@@ -255,7 +255,7 @@ bool Z3950Fetcher::initMARC21Handler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("MARC21slim2MODS3.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "Z3950Fetcher::initHandlers() - can not locate MARC21slim2MODS3.xsl.";
     return false;
@@ -279,7 +279,7 @@ bool Z3950Fetcher::initUNIMARCHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("UNIMARC2MODS3.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("UNIMARC2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "Z3950Fetcher::initHandlers() - can not locate UNIMARC2MODS3.xsl.";
     return false;
@@ -303,7 +303,7 @@ bool Z3950Fetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QString::fromLatin1("mods2tellico.xsl"));
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     kWarning() << "Z3950Fetcher::initHandlers() - can not locate mods2tellico.xsl.";
     return false;
@@ -350,7 +350,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 #if 0
   kWarning() << "Remove debug from z3950fetcher.cpp";
   {
-    QFile f1(QString::fromLatin1("/tmp/marc.xml"));
+    QFile f1(QLatin1String("/tmp/marc.xml"));
     if(f1.open(QIODevice::WriteOnly)) {
 //      if(f1.open(QIODevice::WriteOnly | QIODevice::Append)) {
       QTextStream t(&f1);
@@ -384,7 +384,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 #if 0
     kWarning() << "Remove debug from z3950fetcher.cpp";
     {
-      QFile f2(QString::fromLatin1("/tmp/mods.xml"));
+      QFile f2(QLatin1String("/tmp/mods.xml"));
 //      if(f2.open(QIODevice::WriteOnly)) {
       if(f2.open(QIODevice::WriteOnly | QIODevice::Append)) {
         QTextStream t(&f2);
@@ -422,14 +422,14 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    QString desc = entry->field(QString::fromLatin1("author")) + '/'
-                   + entry->field(QString::fromLatin1("publisher"));
-    if(!entry->field(QString::fromLatin1("cr_year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QString::fromLatin1("cr_year"));
-    } else if(!entry->field(QString::fromLatin1("pub_year")).isEmpty()){
-      desc += QChar('/') + entry->field(QString::fromLatin1("pub_year"));
+    QString desc = entry->field(QLatin1String("author")) + '/'
+                   + entry->field(QLatin1String("publisher"));
+    if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
+      desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+    } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
+      desc += QChar('/') + entry->field(QLatin1String("pub_year"));
     }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QString::fromLatin1("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
@@ -479,20 +479,20 @@ void Z3950Fetcher::customEvent(QEvent* event_) {
 
 void Z3950Fetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
 //  myDebug() << "Z3950Fetcher::updateEntry() - " << source() << ": " << entry_->title() << endl;
-  QString isbn = entry_->field(QString::fromLatin1("isbn"));
+  QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);
     return;
   }
 
-  QString lccn = entry_->field(QString::fromLatin1("lccn"));
+  QString lccn = entry_->field(QLatin1String("lccn"));
   if(!lccn.isEmpty()) {
     search(Fetch::LCCN, lccn);
     return;
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QString::fromLatin1("title"));
+  QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
     search(Fetch::Title, t);
     return;
@@ -559,9 +559,9 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   l->addWidget(label, ++row, 0);
   m_charSetCombo = new KComboBox(true, optionsWidget());
   m_charSetCombo->addItem(QString::null);
-  m_charSetCombo->addItem(QString::fromLatin1("marc8"));
-  m_charSetCombo->addItem(QString::fromLatin1("iso-8859-1"));
-  m_charSetCombo->addItem(QString::fromLatin1("utf-8"));
+  m_charSetCombo->addItem(QLatin1String("marc8"));
+  m_charSetCombo->addItem(QLatin1String("iso-8859-1"));
+  m_charSetCombo->addItem(QLatin1String("utf-8"));
   connect(m_charSetCombo, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_charSetCombo, row, 1);
   w = i18n("Enter the character set encoding used by the z39.50 server. The most likely choice "
@@ -574,11 +574,11 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   l->addWidget(label, ++row, 0);
   m_syntaxCombo = new GUI::ComboBox(optionsWidget());
   m_syntaxCombo->addItem(i18n("Auto-detect"), QString());
-  m_syntaxCombo->addItem(QString::fromLatin1("MODS"), QString::fromLatin1("mods"));
-  m_syntaxCombo->addItem(QString::fromLatin1("MARC21"), QString::fromLatin1("marc21"));
-  m_syntaxCombo->addItem(QString::fromLatin1("UNIMARC"), QString::fromLatin1("unimarc"));
-  m_syntaxCombo->addItem(QString::fromLatin1("USMARC"), QString::fromLatin1("usmarc"));
-  m_syntaxCombo->addItem(QString::fromLatin1("GRS-1"), QString::fromLatin1("grs-1"));
+  m_syntaxCombo->addItem(QLatin1String("MODS"), QLatin1String("mods"));
+  m_syntaxCombo->addItem(QLatin1String("MARC21"), QLatin1String("marc21"));
+  m_syntaxCombo->addItem(QLatin1String("UNIMARC"), QLatin1String("unimarc"));
+  m_syntaxCombo->addItem(QLatin1String("USMARC"), QLatin1String("usmarc"));
+  m_syntaxCombo->addItem(QLatin1String("GRS-1"), QLatin1String("grs-1"));
   connect(m_syntaxCombo, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_syntaxCombo, row, 1);
   w = i18n("Enter the data format used by the z39.50 server. Tellico will attempt to "
@@ -688,9 +688,9 @@ void Z3950Fetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
 // static
 Tellico::StringMap Z3950Fetcher::customFields() {
   StringMap map;
-  map[QString::fromLatin1("address")]  = i18n("Address");
-  map[QString::fromLatin1("abstract")] = i18n("Abstract");
-  map[QString::fromLatin1("illustrator")] = i18n("Illustrator");
+  map[QLatin1String("address")]  = i18n("Address");
+  map[QLatin1String("abstract")] = i18n("Abstract");
+  map[QLatin1String("illustrator")] = i18n("Illustrator");
   return map;
 }
 
@@ -726,7 +726,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     KGlobal::locale()->splitLocale(lang, lang2A, dummy, dummy, dummy);
   }
 
-  QString serverFile = KStandardDirs::locate("appdata", QString::fromLatin1("z3950-servers.cfg"));
+  QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
   if(serverFile.isEmpty()) {
     kWarning() << "Z3950Fetcher::loadPresets() - no z3950 servers file found";
     return;
