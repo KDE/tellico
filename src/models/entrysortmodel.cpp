@@ -56,11 +56,14 @@ bool EntrySortModel::filterAcceptsRow(int row_, const QModelIndex& parent_) cons
 }
 
 bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
-  // doesn't matter if sortRole() is EntryPtrRole or not
+  if(sortRole() != EntryPtrRole) {
+    return AbstractSortModel::lessThan(left_, right_);
+  }
+
   QModelIndex left = left_;
   QModelIndex right = right_;
 
-  for (int i = 0; i < 3; ++i) {
+  for(int i = 0; i < 3; ++i) {
     ListViewComparison* comp = getComparison(left);
     Data::EntryPtr leftEntry = sourceModel()->data(left, EntryPtrRole).value<Data::EntryPtr>();
     Data::EntryPtr rightEntry = sourceModel()->data(right, EntryPtrRole).value<Data::EntryPtr>();

@@ -775,18 +775,19 @@ void MainWindow::saveOptions() {
   }
 
   // historical reasons
-  const int sortColumn = m_groupView->sortRole() == Qt::DisplayRole ? 0 : 1;
+  // sorting by count was faked by sorting by phantom second column
+  const int sortColumn = m_groupView->sortRole() == RowCountRole ? 1 : 0;
   Config::setGroupViewSortColumn(sortColumn); // ok to use SortColumn key, save semantics
   Config::setGroupViewSortAscending(m_groupView->sortOrder() == Qt::AscendingOrder);
 
   if(m_loanView) {
-    const int sortColumn = m_loanView->sortRole() == Qt::DisplayRole ? 0 : 1;
+    const int sortColumn = m_loanView->sortRole() == RowCountRole ? 1 : 0;
     Config::setLoanViewSortAscending(sortColumn); // ok to use SortColumn key, save semantics
     Config::setLoanViewSortAscending(m_loanView->sortOrder() == Qt::AscendingOrder);
   }
 
   if(m_filterView) {
-    const int sortColumn = m_filterView->sortRole() == Qt::DisplayRole ? 0 : 1;
+    const int sortColumn = m_filterView->sortRole() == RowCountRole ? 1 : 0;
     Config::setFilterViewSortAscending(sortColumn); // ok to use SortColumn key, save semantics
     Config::setFilterViewSortAscending(m_filterView->sortOrder() == Qt::AscendingOrder);
   }

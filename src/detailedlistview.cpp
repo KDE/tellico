@@ -83,6 +83,7 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_) {
 
   EntryModel* entryModel = new EntryModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
+  sortModel->setSortRole(EntryPtrRole);
   sortModel->setSourceModel(entryModel);
   setModel(sortModel);
   setItemDelegate(new DetailedEntryItemDelegate(this));
