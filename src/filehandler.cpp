@@ -234,7 +234,7 @@ bool FileHandler::queryExists(const KUrl& url_) {
     }
     if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      KIO::chmod(list, perm, 0, QString(), grp, true, KIO::HideProgressInfo);
     }
   } else {
     KIO::NetAccess::del(backup, Kernel::self()->widget()); // might fail if backup doesn't exist, that's ok
@@ -279,7 +279,7 @@ bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool enco
     bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
     if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      KIO::chmod(list, perm, 0, QString(), grp, true, KIO::HideProgressInfo);
     }
     return success;
   }
@@ -357,7 +357,7 @@ bool FileHandler::writeDataURL(const KUrl& url_, const QByteArray& data_, bool f
     bool success = FileHandler::writeDataFile(f, data_);
     if(!list.isEmpty()) {
       // have to leave the user alone
-      KIO::chmod(list, perm, 0, QString(), grp, true, false);
+      KIO::chmod(list, perm, 0, QString(), grp, true, KIO::HideProgressInfo);
     }
     return success;
   }
