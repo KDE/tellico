@@ -57,9 +57,9 @@ INCLUDE( CheckSymbolExists )
 CHECK_SYMBOL_EXISTS(strlwr "string.h" HAVE_STRLWR)
 CHECK_SYMBOL_EXISTS(strupr "string.h" HAVE_STRUPR)
 
-IF( NOT WIN32 )
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra -Wundef" )
-ENDIF( NOT WIN32 )
+IF( CMAKE_SYSTEM_NAME MATCHES Linux )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wundef -Wcast-align -Wchar-subscripts -Wall -Wpointer-arith -Wformat-security -Wconversion -Wextra -fno-exceptions -fno-check-new -fno-common")
+ENDIF( CMAKE_SYSTEM_NAME MATCHES Linux )
 
 ADD_DEFINITIONS( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} )
 #ADD_DEFINITIONS( -DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS )
