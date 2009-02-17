@@ -1,5 +1,5 @@
-set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} )
+SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
+
 # formattest includes fieldformat that include core/tellico_config.h
 # which is generated in the build directory
 INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR}/src )
@@ -20,8 +20,8 @@ TARGET_LINK_LIBRARIES(lccntest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QT
 #KDE4_ADD_UNIT_TEST(lcctest NOGUI lcctest.cpp ../lcccomparison.cpp)
 #TARGET_LINK_LIBRARIES(lcctest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
-KDE4_ADD_UNIT_TEST(csvtest NOGUI csvtest.cpp ../translators/csvparser.cpp ../translators/libcsv.c)
-TARGET_LINK_LIBRARIES(csvtest ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+KDE4_ADD_UNIT_TEST(csvtest NOGUI csvtest.cpp ../translators/csvparser.cpp)
+TARGET_LINK_LIBRARIES(csvtest ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} csv)
 
 KDE4_ADD_UNIT_TEST(formattest NOGUI formattest.cpp ../fieldformat.cpp)
 TARGET_LINK_LIBRARIES(formattest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} core)

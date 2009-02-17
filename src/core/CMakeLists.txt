@@ -1,6 +1,3 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} )
-
-
 ########### next target ###############
 
 SET(core_STAT_SRCS
@@ -10,13 +7,7 @@ SET(core_STAT_SRCS
    tellico_config_addons.cpp
    )
 
-#SET( core_DCOP_SKEL_SRCS
-#   dcopinterface.h
-#   )
-
-#KDE4_ADD_DCOP_SKELS(core_STAT_SRCS ${core_DCOP_SKEL_SRCS})
-
-SET( core_KCFG_SRCS
+SET(core_KCFG_SRCS
    tellico_config.kcfgc
    )
 

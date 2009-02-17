@@ -17,7 +17,7 @@
 #include <QStringList>
 
 extern "C" {
-#include "libcsv.h"
+#include "libcsv/libcsv.h"
 }
 
 typedef int(*SpaceFunc)(char);

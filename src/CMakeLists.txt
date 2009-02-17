@@ -1,4 +1,3 @@
-
 ADD_SUBDIRECTORY( core )
 ADD_SUBDIRECTORY( gui )
 ADD_SUBDIRECTORY( collections )
@@ -7,15 +6,13 @@ ADD_SUBDIRECTORY( fetch )
 ADD_SUBDIRECTORY( commands )
 ADD_SUBDIRECTORY( cite )
 ADD_SUBDIRECTORY( newstuff )
-ADD_SUBDIRECTORY( rtf2html )
 ADD_SUBDIRECTORY( models )
+ADD_SUBDIRECTORY( 3rdparty )
 ADD_SUBDIRECTORY( tests )
 
 IF( ENABLE_WEBCAM )
   ADD_SUBDIRECTORY( barcode )
 ENDIF( ENABLE_WEBCAM )
-
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 ########### next target ###############
 
@@ -80,14 +77,14 @@ TARGET_LINK_LIBRARIES(tellico
     fetch
     collections
     translators
-    pilotdb
-    libflatfile
     gui
-    libpalm
-    rtf2html
     commands
-    btparse
     models
+    newstuff
+    pilotdb
+    rtf2html
+    btparse
+    csv
     )
 
 IF( ENABLE_WEBCAM )
@@ -101,6 +98,7 @@ TARGET_LINK_LIBRARIES(tellico
     ${KDE4_KIO_LIBS}
     ${KDE4_KHTML_LIBS}
     ${KDE4_KABC_LIBS}
+    ${KDE4_KNEWSTUFF2_LIBS}
     ${QIMAGEBLITZ_LIBRARIES}
     ${TAGLIB_LIBRARIES}
     ${LIBXML2_LIBRARIES}
@@ -120,8 +118,6 @@ TARGET_LINK_LIBRARIES(tellico ${KCDDB_LIBRARY})
 ENDIF( KDEMULTIMEDIA_FOUND)
 
 #TARGET_LINK_LIBRARIES(tellico ${QT_QT3SUPPORT_LIBRARY} )
-
-TARGET_LINK_LIBRARIES( tellico ${KDE4_KNEWSTUFF2_LIBS} newstuff )
 
 INSTALL( TARGETS tellico ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

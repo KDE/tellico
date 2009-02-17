@@ -1,8 +1,3 @@
-ADD_SUBDIRECTORY( pilotdb )
-ADD_SUBDIRECTORY( btparse )
-
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
-LINK_DIRECTORIES( ${CMAKE_BINARY_DIR} )
 
 ########### next target ###############
 
@@ -32,7 +27,6 @@ SET(translators_STAT_SRCS
    grs1importer.cpp
    htmlexporter.cpp
    importer.cpp
-   libcsv.c
    onixexporter.cpp
    pdfimporter.cpp
    pilotdbexporter.cpp

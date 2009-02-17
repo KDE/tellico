@@ -13,9 +13,10 @@
 
 #include "deliciousimporter.h"
 #include "../collection.h"
-#include "../rtf2html/rtf2html.h"
 #include "../imagefactory.h"
 #include "../tellico_debug.h"
+
+#include "rtf2html/rtf2html.h"
 
 #include <kstandarddirs.h>
 

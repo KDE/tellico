@@ -1,5 +1,9 @@
 PROJECT(tellico)
 
+#http://www.cmake.org/Wiki/CMake_Useful_Variables
+# automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR
+# to the include directories in every processed CMakeLists.txt
+SET( CMAKE_INCLUDE_CURRENT_DIR TRUE )
 ############# Options #################
 
 OPTION( ENABLE_AMAZON "Enable Amazon.com searching" TRUE )
@@ -73,6 +77,7 @@ INCLUDE_DIRECTORIES( ${LIBXML2_INCLUDE_DIR} ${LIBXSLT_INCLUDE_DIR} )
 
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} )
 INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/src/core )
+INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/src/3rdparty )
 
 SET( TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico )
 

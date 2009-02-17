@@ -1,6 +1,3 @@
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} )
-
-
 ########### next target ###############
 
 SET(models_STAT_SRCS
