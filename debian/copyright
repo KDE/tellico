@@ -38,7 +38,7 @@ delete this exception statement from your version.
 
 ----------------------------------------------------------------------------
 
-The src/translators/btparse directory contains a minimal version of the
+The src/3rdparty/btparse directory contains a minimal version of the
 btparse library, copyright 1999 by Greg Ward, which can be found at
 http://www.gerg.ca/software/btOOL/
 Version 0.33 of the btparse library was imported into the Bookcase 
