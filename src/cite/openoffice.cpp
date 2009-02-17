@@ -45,7 +45,7 @@ class OpenOffice::Private {
   Private() : handler(0), port(-1) {
     KLibrary* library = Tellico::openLibrary(QLatin1String("tellico_ooo"));
     if(library) {
-      void* func = library->resolveSymbol("handler");
+       KLibrary::void_function_ptr func = library->resolveFunction("handler");
       if(func) {
         handler = ((Handler* (*)())func)();
       }

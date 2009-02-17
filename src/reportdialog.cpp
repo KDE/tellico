@@ -208,7 +208,7 @@ void ReportDialog::slotSaveAs() {
   if(!u.isEmpty() && u.isValid()) {
     KConfigGroup config(KGlobal::config(), "ExportOptions");
     bool encode = config.readEntry("EncodeUTF8", true);
-    int oldOpt = m_exporter->options();
+    long oldOpt = m_exporter->options();
 
     // turn utf8 off
     long options = oldOpt & ~Export::ExportUTF8;
