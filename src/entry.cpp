@@ -16,7 +16,6 @@
 #include "field.h"
 #include "translators/bibtexhandler.h" // needed for BibtexHandler::cleanText()
 #include "document.h"
-#include "tellico_debug.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
 

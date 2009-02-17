@@ -11,9 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-//  before tellicosaxmporter.h because of QT_NO_CAST_ASCII issues
-#include "tellicoxmlhandler.h"
 #include "tellicosaximporter.h"
+#include "tellicoxmlhandler.h"
 #include "tellico_xml.h"
 #include "../collectionfactory.h"
 #include "../collections/bibtexcollection.h"

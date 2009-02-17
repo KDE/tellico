@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "statusbar.h"
-#include "tellico_debug.h"
 #include "progressmanager.h"
 #include "tellico_debug.h"
 #include "gui/progress.h"

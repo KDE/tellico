@@ -19,8 +19,6 @@
 #include <QThread>
 #include <QEvent>
 
-#include <QEvent>
-
 namespace Tellico {
   namespace Fetch {
     class Z3950Fetcher;

@@ -29,7 +29,6 @@
 #include <kstandarddirs.h>
 #include <kacceleratormanager.h>
 #include <kshell.h>
-#include <KProcess>
 
 #include <QDir>
 #include <QLabel>

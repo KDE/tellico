@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GUI_LISTBOXTEXT_H
-#define TELLICO_GUI_LISTBOXTEXT_H
+#ifndef TELLICO_GUI_LISTWIDGETITEM_H
+#define TELLICO_GUI_LISTWIDGETITEM_H
 
 #include <QListWidgetItem>
 

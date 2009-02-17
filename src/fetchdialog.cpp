@@ -46,7 +46,6 @@
 #include <QSplitter>
 #include <QTimer>
 #include <QCheckBox>
-#include <QTimer>
 #include <QImage>
 #include <QLabel>
 #include <QVBoxLayout>
