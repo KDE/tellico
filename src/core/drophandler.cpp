@@ -73,7 +73,7 @@ bool DropHandler::handleURL(const KUrl::List& urls_) {
     if(url.protocol() != QLatin1String("http")) {
       ptr = KMimeType::findByUrl(url);
     } else {
-      KIO::MimetypeJob* job = KIO::mimetype(url, false /*progress*/);
+      KIO::MimetypeJob* job = KIO::mimetype(url, KIO::HideProgressInfo);
       KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
       ptr = KMimeType::mimeType(job->mimetype());
     }
