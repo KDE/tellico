@@ -65,7 +65,7 @@ void CSVParser::setDelimiter(const QString& s) {
 void CSVParser::reset(QString str) {
   delete d->stream;
   d->stream = new QTextStream(&str);
-};
+}
 
 bool CSVParser::hasNext() const {
   return !d->stream->atEnd();
