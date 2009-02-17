@@ -47,7 +47,7 @@ bool TellicoZipExporter::exec() {
   }
 
   // TODO: maybe need label?
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString::null, true);
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), true);
   item.setTotalSteps(100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   ProgressItem::Done done(this);
@@ -73,7 +73,7 @@ bool TellicoZipExporter::exec() {
 
   KZip zip(&buf);
   zip.open(QIODevice::WriteOnly);
-  zip.writeFile(QLatin1String("tellico.xml"), QString::null, QString::null, xml, xml.size());
+  zip.writeFile(QLatin1String("tellico.xml"), QString(), QString(), xml, xml.size());
 
   if(m_includeImages) {
     ProgressManager::self()->setProgress(this, 10);
@@ -108,7 +108,7 @@ bool TellicoZipExporter::exec() {
         }
         QByteArray ba = img.byteArray();
 //        myDebug() << "TellicoZipExporter::data() - adding image id = " << it->field(fIt) << endl;
-        zip.writeFile(imagesDir + id, QString::null, QString::null, ba, ba.size());
+        zip.writeFile(imagesDir + id, QString(), QString(), ba, ba.size());
         imageSet.add(id);
         if(j%stepSize == 0) {
           ProgressManager::self()->setProgress(this, qMin(10+j/stepSize, 99));

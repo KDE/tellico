@@ -496,7 +496,7 @@ void Document::checkInEntry(Tellico::Data::EntryPtr entry_) {
   if(!m_coll->hasField(loaned)) {
     return;
   }
-  entry_->setField(loaned, QString::null);
+  entry_->setField(loaned, QString());
   m_coll->updateDicts(EntryList() << entry_);
 }
 
@@ -608,7 +608,7 @@ bool Document::pruneImages() {
       }
       const Data::Image& img = ImageFactory::imageById(id);
       if(img.isNull()) {
-        entry->setField(field, QString::null);
+        entry->setField(field, QString());
         found = true;
         myDebug() << "removing null image for" << entry->title() << ":" << id;
       } else {

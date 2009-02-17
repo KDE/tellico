@@ -204,7 +204,7 @@ void GCstarPluginFetcher::readConfigHook(const KConfigGroup& config_) {
 
 void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_started = true;
-  m_data.truncate(0);
+  m_data.clear();
 
   if(key_ != Fetch::Title) {
     myDebug() << "GCstarPluginFetcher::search() - only Title searches are supported" << endl;
@@ -255,7 +255,7 @@ void GCstarPluginFetcher::stop() {
     delete m_process;
     m_process = 0;
   }
-  m_data.truncate(0);
+  m_data.clear();
   m_started = false;
   m_errors.clear();
   emit signalDone(this);

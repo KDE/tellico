@@ -286,7 +286,11 @@ void Field::addAllowed(const QString& value_) {
 }
 
 void Field::setProperty(const QString& key_, const QString& value_) {
-  m_properties.insert(key_, value_);
+  if(value_.isEmpty()) {
+    m_properties.insert(key_, value_);
+  } else {
+    m_properties.remove(key_);
+  }
 }
 
 void Field::setPropertyList(const Tellico::StringMap& props_) {
@@ -322,7 +326,7 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
   }
   field_->setProperty(QLatin1String("minimum"), QString::number(min));
   field_->setProperty(QLatin1String("maximum"), QString::number(max));
-  field_->setProperty(QLatin1String("rating"), QString::null);
+  field_->setProperty(QLatin1String("rating"), QString());
   field_->setType(Rating);
 }
 

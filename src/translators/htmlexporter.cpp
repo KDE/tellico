@@ -118,7 +118,7 @@ bool HTMLExporter::exec() {
   m_cancelled = false;
   // TODO: maybe need label?
   if(options() & ExportProgress) {
-    ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString::null, true);
+    ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), true);
     item.setTotalSteps(100);
     connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   }
@@ -159,7 +159,7 @@ bool HTMLExporter::exec() {
 
 bool HTMLExporter::loadXSLTFile() {
   QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
-  if(xsltfile.isNull()) {
+  if(xsltfile.isEmpty()) {
     myDebug() << "HTMLExporter::loadXSLTFile() - no xslt file for " << m_xsltFile << endl;
     return false;
   }
@@ -214,7 +214,7 @@ bool HTMLExporter::loadXSLTFile() {
   if(m_parseDOM && m_dataDir.isEmpty()) {
     m_dataDir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png"));
   } else if(!m_parseDOM) {
-    m_dataDir.truncate(0);
+    m_dataDir.clear();
   }
   if(!m_dataDir.isEmpty()) {
     m_handler->addStringParam("datadir", QFile::encodeName(m_dataDir));
@@ -228,13 +228,13 @@ bool HTMLExporter::loadXSLTFile() {
 QString HTMLExporter::text() {
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
     kWarning() << "HTMLExporter::text() - error loading xslt file: " << m_xsltFile;
-    return QString::null;
+    return QString();
   }
 
   Data::CollPtr coll = collection();
   if(!coll) {
     myDebug() << "HTMLExporter::text() - no collection pointer!" << endl;
-    return QString::null;
+    return QString();
   }
 
   if(m_groupBy.isEmpty()) {
@@ -519,7 +519,7 @@ void HTMLExporter::setXSLTFile(const QString& filename_) {
   }
 
   m_xsltFile = filename_;
-  m_xsltFilePath = QString::null;
+  m_xsltFilePath.clear();
   reset();
 }
 
@@ -557,7 +557,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
 
   if(m_xsltFilePath.isEmpty()) {
     m_xsltFilePath = KStandardDirs::locate("appdata", m_xsltFile);
-    if(m_xsltFilePath.isNull()) {
+    if(m_xsltFilePath.isEmpty()) {
       kWarning() << "HTMLExporter::handleLink() - no xslt file for " << m_xsltFile;
     }
   }

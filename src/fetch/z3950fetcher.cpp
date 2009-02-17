@@ -162,7 +162,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       break;
     case ISBN:
       {
-        m_pqn.truncate(0);
+        m_pqn.clear();
         QString s = m_value;
         s.remove('-');
         QStringList isbnList = s.split(QLatin1String("; "));
@@ -188,7 +188,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       break;
     case LCCN:
       {
-        m_pqn.truncate(0);
+        m_pqn.clear();
         QString s = m_value;
         s.remove('-');
         QStringList lccnList = s.split(QLatin1String("; "));
@@ -558,7 +558,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   label = new QLabel(i18n("Ch&aracter set: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_charSetCombo = new KComboBox(true, optionsWidget());
-  m_charSetCombo->addItem(QString::null);
+  m_charSetCombo->addItem(QString());
   m_charSetCombo->addItem(QLatin1String("marc8"));
   m_charSetCombo->addItem(QLatin1String("iso-8859-1"));
   m_charSetCombo->addItem(QLatin1String("utf-8"));
@@ -618,7 +618,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   // now add additional fields widget
   addFieldsWidget(Z3950Fetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
-  loadPresets(fetcher_ ? fetcher_->m_preset : QString::null);
+  loadPresets(fetcher_ ? fetcher_->m_preset : QString());
   if(fetcher_) {
     m_hostEdit->setText(fetcher_->m_host);
     m_portSpinBox->setValue(fetcher_->m_port);

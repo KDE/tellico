@@ -145,7 +145,7 @@ void RatingWidget::clear() {
 
 QString RatingWidget::text() const {
   // index is index of the list, which is zero-based. Add 1!
-  return m_currIndex == -1 ? QString::null : QString::number(m_currIndex+1);
+  return m_currIndex == -1 ? QString() : QString::number(m_currIndex+1);
 }
 
 void RatingWidget::setText(const QString& text_) {

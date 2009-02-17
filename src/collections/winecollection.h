@@ -42,7 +42,7 @@ public:
    * @param addFields A boolean indicating whether the default attributes should be added
    * @param title The title of the collection
    */
-  WineCollection(bool addFields, const QString& title = QString::null);
+  WineCollection(bool addFields, const QString& title = QString());
 
   virtual Type type() const { return Wine; }
 

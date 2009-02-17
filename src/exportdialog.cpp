@@ -119,7 +119,7 @@ ExportDialog::~ExportDialog() {
 }
 
 QString ExportDialog::fileFilter() {
-  return m_exporter ? m_exporter->fileFilter() : QString::null;
+  return m_exporter ? m_exporter->fileFilter() : QString();
 }
 
 void ExportDialog::readOptions() {

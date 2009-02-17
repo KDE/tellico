@@ -51,7 +51,7 @@ public:
 
   ~Manager();
 
-  KeyMap keyMap(const QString& source = QString::null) const;
+  KeyMap keyMap(const QString& source = QString()) const;
   void startSearch(const QString& source, FetchKey key, const QString& value);
   void continueSearch();
   void stop();

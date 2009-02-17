@@ -171,7 +171,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
     while((field = bt_next_field(node, field, &name))) {
 //      kDebug() << "\tfound: " << name;
 //      str = QLatin1String(bt_get_text(field));
-      str.truncate(0);
+      str.clear();
       AST* value = 0;
       bt_nodetype type;
       char* svalue;

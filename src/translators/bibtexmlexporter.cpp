@@ -68,7 +68,7 @@ bool BibtexmlExporter::exec() {
 
   QDomImplementation impl;
   QDomDocumentType doctype = impl.createDocumentType(QLatin1String("file"),
-                                                     QString::null,
+                                                     QString(),
                                                      XML::dtdBibtexml);
   //default namespace
   const QString& ns = XML::nsBibtexml;

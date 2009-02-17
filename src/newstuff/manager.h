@@ -46,7 +46,7 @@ private:
   ~Manager();
 
   static QStringList archiveFiles(const KArchiveDirectory* dir,
-                                  const QString& path = QString::null);
+                                  const QString& path = QString());
   static bool checkCommonFile();
   static void removeNewStuffFile(const QString& file);
   static QString findXSL(const KArchiveDirectory* dir);

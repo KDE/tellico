@@ -95,8 +95,7 @@ public:
    */
   QString title() const;
   /**
-   * Returns the value of the field with a given key name. If the key doesn't
-   * exist, the method returns @ref QString::null.
+   * Returns the value of the field with a given key name.
    *
    * @param fieldName The field name
    * @param formatted Whether to format the field or not.
@@ -105,10 +104,7 @@ public:
   QString field(const QString& fieldName, bool formatted=false) const;
   QString field(Data::FieldPtr field, bool formatted=false) const;
   /**
-   * Returns the formatted value of the field with a given key name. If the
-   * key doesn't exist, the method returns @ref QString::null. The value is cached,
-   * so the first time the value is requested, @ref Field::format is called.
-   * The second time, that lookup isn't necessary.
+   * Returns the formatted value of the field with a given key name.
    *
    * @param fieldName The field name
    * @return The formatted value of the field
@@ -207,9 +203,9 @@ public:
    * Removes the formatted value of the field from the map. This should be used when
    * the field's format flag has changed.
    *
-   * @param name The name of the field that changed. QString::null means invalidate all fields.
+   * @param name The name of the field that changed. an empty string means invalidate all fields.
    */
-  void invalidateFormattedFieldValue(const QString& name=QString::null);
+  void invalidateFormattedFieldValue(const QString& name=QString());
 
   /**
    * Construct the derived valued for an field. The format string should be

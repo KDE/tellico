@@ -223,8 +223,8 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
       if(!ep.isEmpty()) {
         value = sp + '-' + ep;
         tag = QLatin1String("EP");
-        sp = QString();
-        ep = QString();
+        sp.clear();
+        ep.clear();
       } else {
         // nothing else to do
         continue;
@@ -233,8 +233,8 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
       ep = value;
       if(!sp.isEmpty()) {
         value = sp + '-' + ep;
-        sp = QString();
-        ep = QString();
+        sp.clear();
+        ep.clear();
       } else {
         continue;
       }

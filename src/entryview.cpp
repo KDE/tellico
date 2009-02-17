@@ -99,7 +99,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  m_textToShow = QString();
+  m_textToShow.clear();
 #if 0
   kWarning() << "EntryView::showEntry() - turn me off!";
   m_entry = 0;

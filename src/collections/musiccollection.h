@@ -42,7 +42,7 @@ public:
    * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  MusicCollection(bool addFields, const QString& title = QString::null);
+  MusicCollection(bool addFields, const QString& title = QString());
 
   virtual Type type() const { return Album; }
   virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;

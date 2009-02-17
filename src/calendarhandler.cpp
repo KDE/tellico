@@ -212,7 +212,7 @@ void CalendarHandler::populateTodo(KCal::Todo* todo_, Data::LoanPtr loan_) {
   todo_->clearAttendees();
   // not adding email of borrower for now, but request RSVP?
   KCal::Attendee* attendee = new KCal::Attendee(loan_->borrower()->name(),
-                                                QString::null, false /*rsvp*/,
+                                                QString(), false /*rsvp*/,
                                                 KCal::Attendee::NeedsAction,
                                                 KCal::Attendee::ReqParticipant,
                                                 loan_->borrower()->uid());

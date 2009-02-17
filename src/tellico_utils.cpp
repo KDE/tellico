@@ -145,7 +145,7 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
   }
 
   // TODO: build in symlink checking, for now, prohibit
-  QDir dir(dir_, QString::null, QDir::Name | QDir::IgnoreCase, QDir::Dirs | QDir::Readable | QDir::NoSymLinks);
+  QDir dir(dir_, QString(), QDir::Name | QDir::IgnoreCase, QDir::Dirs | QDir::Readable | QDir::NoSymLinks);
 
   QStringList allSubdirs; // the whole list
 

@@ -1219,7 +1219,7 @@ void MainWindow::slotFilePrint() {
   if(m_detailedView->filter()) {
     QString str = i18n("The collection is currently being filtered to show a limited subset of "
                        "the entries. Only the visible entries will be printed. Continue?");
-    int ret = KMessageBox::warningContinueCancel(this, str, QString::null, KStandardGuiItem::print(),
+    int ret = KMessageBox::warningContinueCancel(this, str, QString(), KStandardGuiItem::print(),
                                                  KStandardGuiItem::cancel(), QLatin1String("WarnPrintVisible"));
     if(ret == KMessageBox::Cancel) {
       StatusBar::self()->clearStatus();

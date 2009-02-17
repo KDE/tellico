@@ -254,8 +254,8 @@ QStringList AMCImporter::parseCast(const QString& text_) {
         all += "::" + role;
       }
       cast << all;
-      person.truncate(0);
-      role.truncate(0);
+      person.clear();
+      role.clear();
       oldPos = pos+1; // add one to go past comma
     } else if(text_.at(pos) == '(') {
       if(nPar == 0) {

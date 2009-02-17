@@ -39,7 +39,7 @@ public:
    * @param addFields A boolean indicating whether the default attributes should be added
    * @param title The title of the collection
    */
-  BibtexCollection(bool addFields, const QString& title = QString::null);
+  BibtexCollection(bool addFields, const QString& title = QString());
   /**
    */
   virtual ~BibtexCollection() {}

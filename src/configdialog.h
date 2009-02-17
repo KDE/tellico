@@ -199,9 +199,9 @@ public:
 class SourceListItem : public QListWidgetItem {
 public:
   SourceListItem(const GeneralFetcherInfo& info,
-                 const QString& groupName = QString::null);
+                 const QString& groupName = QString());
   SourceListItem(KListWidget* parent, const GeneralFetcherInfo& info,
-                 const QString& groupName = QString::null);
+                 const QString& groupName = QString());
 
   void setConfigGroup(const QString& s) { m_configGroup = s; }
   const QString& configGroup() const { return m_configGroup; }

@@ -70,7 +70,7 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
                      m_count(0), m_loadDefaults(false) {
   loadFetchers();
 
-//  m_keyMap.insert(FetchFirst, QString::null);
+//  m_keyMap.insert(FetchFirst, QString());
   m_keyMap.insert(Title,      i18n("Title"));
   m_keyMap.insert(Person,     i18n("Person"));
   m_keyMap.insert(ISBN,       i18n("ISBN"));
@@ -82,7 +82,7 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   // to keep from having a new i18n string, just remove octothorpe
   m_keyMap.insert(LCCN,       i18n("LCCN#").remove('#'));
   m_keyMap.insert(Raw,        i18n("Raw Query"));
-//  m_keyMap.insert(FetchLast,  QString::null);
+//  m_keyMap.insert(FetchLast,  QString());
 }
 
 Manager::~Manager() {
@@ -219,7 +219,7 @@ void Manager::stop() {
 }
 
 void Manager::slotFetcherDone(Tellico::Fetch::Fetcher* fetcher_) {
-//  myDebug() << "Manager::slotFetcherDone() - " << (fetcher_ ? fetcher_->source() : QString::null)
+//  myDebug() << "Manager::slotFetcherDone() - " << (fetcher_ ? fetcher_->source() : QString())
 //            << " :" << m_count << endl;
   fetcher_->disconnect(); // disconnect all signals
   --m_count;
@@ -585,7 +585,7 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
     case Unknown: break;
   }
   myWarning() << "Manager::typeName() - none found for " << type_ << endl;
-  return QString::null;
+  return QString();
 }
 
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, int size_) {

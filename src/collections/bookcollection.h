@@ -61,7 +61,7 @@ public:
    * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  BookCollection(bool addFields, const QString& title = QString::null);
+  BookCollection(bool addFields, const QString& title = QString());
 
   virtual Type type() const { return Book; }
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;

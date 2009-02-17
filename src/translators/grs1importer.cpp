@@ -82,7 +82,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     return Data::CollPtr();
   }
   QTextStream t(&str, QIODevice::ReadOnly);
-  for(QString line = t.readLine(); !line.isNull(); line = t.readLine()) {
+  for(QString line = t.readLine(); !t.atEnd(); line = t.readLine()) {
 //    myDebug() << line << endl;
     if(!rx.exactMatch(line)) {
       continue;
@@ -106,7 +106,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     if(field == QLatin1String("title")) {
       val = val.section('/', 0, 0).trimmed(); // only take portion of title before slash
     } else if(field == QLatin1String("author")) {
-      val.replace(dateRx, QString::null);
+      val.remove(dateRx);
     } else if(field == QLatin1String("publisher")) {
       if(val.indexOf(pubRx) > -1) {
         e->setField(QLatin1String("address"), pubRx.cap(1));

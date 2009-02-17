@@ -249,9 +249,9 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntry(uint uid_) {
   getTracks(entry);
 
   // don't want to show image urls in the fetch dialog
-  entry->setField(QLatin1String("image"),  QString::null);
+  entry->setField(QLatin1String("image"),  QString());
   // no need for album id now ?
-  entry->setField(QLatin1String("yahoo"),  QString::null);
+  entry->setField(QLatin1String("yahoo"),  QString());
   return entry;
 }
 
@@ -342,7 +342,7 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
 QString YahooFetcher::insertValue(const QString& str_, const QString& value_, int pos_) {
   QStringList list = Data::Field::split(str_, true);
   for(int i = list.count(); i < pos_; ++i) {
-    list += QString::null;
+    list += QString();
   }
   bool write = true;
   if(!list[pos_-1].isNull()) {

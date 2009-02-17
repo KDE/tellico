@@ -131,7 +131,7 @@ Tellico::Data::CollPtr ImportDialog::collection() {
 }
 
 QString ImportDialog::statusMessage() const {
-  return m_importer ? m_importer->statusMessage() : QString::null;
+  return m_importer ? m_importer->statusMessage() : QString();
 }
 
 Tellico::Import::Action ImportDialog::action() const {

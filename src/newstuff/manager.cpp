@@ -380,7 +380,7 @@ QString Manager::findEXE(const KArchiveDirectory* dir_) {
 bool Manager::checkCommonFile() {
   // look for a file that gets installed to know the installation directory
   // need to check timestamps
-  QString userDataDir = Tellico::saveLocation(QString::null);
+  QString userDataDir = Tellico::saveLocation(QString());
   QString userCommonFile = userDataDir + '/' + QLatin1String("tellico-common.xsl");
   if(QFile::exists(userCommonFile)) {
     // check timestamps

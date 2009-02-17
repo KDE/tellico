@@ -181,7 +181,7 @@ bool PilotDBExporter::exec() {
         value = date.toString(QLatin1String("yyyy/MM/dd"));
       } else if(fIt->type() == Data::Field::Para) {
         value.replace(br, QChar('\n'));
-        value.replace(tags, QString::null);
+        value.remove(tags);
       }
       // the number of fields in the record must match the number of fields in the database
       record.appendField(PilotDB::string2field(db.field_type(i),

@@ -48,7 +48,7 @@ static void closeQString(void* context) {
 
 using Tellico::XSLTHandler;
 
-XSLTHandler::XMLOutputBuffer::XMLOutputBuffer() : m_res(QString::null) {
+XSLTHandler::XMLOutputBuffer::XMLOutputBuffer() {
   m_buf = xmlOutputBufferCreateIO((xmlOutputWriteCallback)writeToQString,
                                   (xmlOutputCloseCallback)closeQString,
                                   &m_res, 0);
@@ -212,7 +212,7 @@ const QByteArray& XSLTHandler::param(const QByteArray& name_) {
 QString XSLTHandler::applyStylesheet(const QString& text_) {
   if(!m_stylesheet) {
     myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
-    return QString::null;
+    return QString();
   }
 
   m_docIn = xmlReadDoc(reinterpret_cast<xmlChar*>(text_.toUtf8().data()), NULL, NULL, xml_options);
@@ -223,7 +223,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
 QString XSLTHandler::process() {
   if(!m_docIn) {
     myDebug() << "XSLTHandler::process() - error parsing input string!" << endl;
-    return QString::null;
+    return QString();
   }
 
   QVector<const char*> params(2*m_params.count() + 1);
@@ -243,7 +243,7 @@ QString XSLTHandler::process() {
   }
   if(!m_docOut) {
     myDebug() << "XSLTHandler::applyStylesheet() - error applying stylesheet!" << endl;
-    return QString::null;
+    return QString();
   }
 
   XMLOutputBuffer output;

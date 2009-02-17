@@ -35,7 +35,7 @@ public:
 
   virtual bool exec();
   virtual QString formatString() const;
-  virtual QString fileFilter() const { return QString::null; } // no need for this
+  virtual QString fileFilter() const { return QString(); } // no need for this
 
   // no config options
   virtual QWidget* widget(QWidget*) { return 0; }

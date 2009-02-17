@@ -115,9 +115,9 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_redirected = false;
 
   m_matches.clear();
-  m_popularTitles.truncate(0);
-  m_exactTitles.truncate(0);
-  m_partialTitles.truncate(0);
+  m_popularTitles.clear();
+  m_exactTitles.clear();
+  m_partialTitles.clear();
   m_currentTitleBlock = Unknown;
   m_countOffset = 0;
 
@@ -262,7 +262,7 @@ void IMDBFetcher::parseSingleTitleResult() {
   // FIXME: maybe remove parentheses here?
   SearchResult* r = new SearchResult(Fetcher::Ptr(this),
                                      pPos == -1 ? cap1 : cap1.left(pPos),
-                                     pPos == -1 ? QString::null : cap1.mid(pPos),
+                                     pPos == -1 ? QString() : cap1.mid(pPos),
                                      QString());
   m_matches.insert(r->uid, m_url);
   emit signalResultFound(r);
@@ -396,7 +396,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
 
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
     KUrl u(m_url, cap1);
-    u.setQuery(QString::null);
+    u.setQuery(QString());
     m_matches.insert(r->uid, u);
     emit signalResultFound(r);
     ++count;
@@ -426,7 +426,7 @@ void IMDBFetcher::parseSingleNameResult() {
   int count = 0;
   QString desc;
   for( ; m_started && pos > -1; pos = s_anchorTitleRx->indexIn(output, pos+len)) {
-    desc.truncate(0);
+    desc.clear();
     bool isEpisode = false;
     len = s_anchorTitleRx->cap(0).length();
     // split title at parenthesis
@@ -477,7 +477,7 @@ void IMDBFetcher::parseSingleNameResult() {
     // FIXME: maybe remove parentheses here?
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
     KUrl u(m_url, s_anchorTitleRx->cap(1)); // relative URL constructor
-    u.setQuery(QString::null);
+    u.setQuery(QString());
     m_matches.insert(r->uid, u);
 //    myDebug() << u.prettyUrl() << endl;
 //    myDebug() << cap2 << endl;
@@ -615,7 +615,7 @@ void IMDBFetcher::parseMultipleNameResults() {
 
   // redirected is true since that's how I tell if an exact match has been found
   m_redirected = true;
-  m_data.truncate(0);
+  m_data.clear();
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(Kernel::self()->widget());
   connect(m_job, SIGNAL(result(KJob*)),
@@ -698,7 +698,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
     coll->addField(field);
   }
   if(coll->hasField(imdb) && coll->fieldByName(imdb)->type() == Data::Field::URL) {
-    m_url.setQuery(QString::null);
+    m_url.setQuery(QString());
     entry->setField(imdb, m_url.url());
   }
   return entry;
@@ -1111,7 +1111,7 @@ void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     m_key = Fetch::Title;
     m_value = t;
     m_started = true;
-    m_data.truncate(0);
+    m_data.clear();
     m_matches.clear();
     m_url = link;
     m_redirected = true; // m_redirected is used as a flag later to tell if we get a single result

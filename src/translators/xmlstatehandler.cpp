@@ -499,7 +499,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     }
 #endif
     fieldValue = d->textBuffer;
-    d->textBuffer = QString();
+    d->textBuffer.clear();
   }
   // this is not an else branch, the data may be in the textBuffer
   if(d->syntaxVersion < 9 && d->coll->type() == Data::Collection::Album && fieldName == QLatin1String("track")) {

@@ -373,7 +373,7 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
 
   foreach(EntryPtr entry, m_entries) {
     // setting the fields to an empty string removes the value from the entry's list
-    entry->setField(field_, QString::null);
+    entry->setField(field_, QString());
   }
 
   if(field_->flags() & Field::AllowGrouped) {
@@ -514,23 +514,23 @@ Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) {
 
 QString Collection::fieldNameByTitle(const QString& title_) const {
   if(title_.isEmpty()) {
-    return QString::null;
+    return QString();
   }
   FieldPtr f = fieldByTitle(title_);
   if(!f) { // might happen in MainWindow::saveCollectionOptions
-    return QString::null;
+    return QString();
   }
   return f->name();
 }
 
 QString Collection::fieldTitleByName(const QString& name_) const {
   if(name_.isEmpty()) {
-    return QString::null;
+    return QString();
   }
   FieldPtr f = fieldByName(name_);
   if(!f) {
     kWarning() << "Collection::fieldTitleByName() - no field named " << name_;
-    return QString::null;
+    return QString();
   }
   return f->title();
 }

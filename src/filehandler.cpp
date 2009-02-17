@@ -99,7 +99,7 @@ FileHandler::FileRef* FileHandler::fileRef(const KUrl& url_, bool quiet_) {
 QString FileHandler::readTextFile(const KUrl& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/, bool compress_/*=false*/) {
   FileRef f(url_, quiet_, compress_);
   if(!f.isValid()) {
-    return QString::null;
+    return QString();
   }
 
   if(f.open(quiet_)) {

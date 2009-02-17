@@ -75,7 +75,7 @@ bool AlexandriaExporter::exec() {
     return false; // could not create and cd to the dir
   }
 
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString::null, false);
+  ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), false);
   item.setTotalSteps(entries().count());
   ProgressItem::Done done(this);
   const uint stepSize = qMax(1, entries().count()/100);

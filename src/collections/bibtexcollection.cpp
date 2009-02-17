@@ -34,18 +34,18 @@ BibtexCollection::BibtexCollection(bool addFields_, const QString& title_ /*=nul
   setDefaultGroupField(QLatin1String("author"));
 
   // Bibtex has some default macros for the months
-  addMacro(QLatin1String("jan"), QString::null);
-  addMacro(QLatin1String("feb"), QString::null);
-  addMacro(QLatin1String("mar"), QString::null);
-  addMacro(QLatin1String("apr"), QString::null);
-  addMacro(QLatin1String("may"), QString::null);
-  addMacro(QLatin1String("jun"), QString::null);
-  addMacro(QLatin1String("jul"), QString::null);
-  addMacro(QLatin1String("aug"), QString::null);
-  addMacro(QLatin1String("sep"), QString::null);
-  addMacro(QLatin1String("oct"), QString::null);
-  addMacro(QLatin1String("nov"), QString::null);
-  addMacro(QLatin1String("dec"), QString::null);
+  addMacro(QLatin1String("jan"), QString());
+  addMacro(QLatin1String("feb"), QString());
+  addMacro(QLatin1String("mar"), QString());
+  addMacro(QLatin1String("apr"), QString());
+  addMacro(QLatin1String("may"), QString());
+  addMacro(QLatin1String("jun"), QString());
+  addMacro(QLatin1String("jul"), QString());
+  addMacro(QLatin1String("aug"), QString());
+  addMacro(QLatin1String("sep"), QString());
+  addMacro(QLatin1String("oct"), QString());
+  addMacro(QLatin1String("nov"), QString());
+  addMacro(QLatin1String("dec"), QString());
 }
 
 Tellico::Data::FieldList BibtexCollection::defaultFields() {

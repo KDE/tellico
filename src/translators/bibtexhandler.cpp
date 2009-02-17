@@ -49,7 +49,7 @@ QStringList BibtexHandler::bibtexKeys(const Tellico::Data::EntryList& entries_) 
 
 QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
   if(!entry_ || !entry_->collection() || entry_->collection()->type() != Data::Collection::Bibtex) {
-    return QString::null;
+    return QString();
   }
 
   const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(entry_->collection().data());
@@ -112,7 +112,7 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
   }
   key += year_;
   // bibtex key may only contain [0-9a-zA-Z-]
-  return key.replace(s_badKeyChars, QString::null);
+  return key.remove(s_badKeyChars);
 }
 
 void BibtexHandler::loadTranslationMaps() {
@@ -279,8 +279,8 @@ QString& BibtexHandler::cleanText(QString& text_) {
 //  QRegExp rx(QLatin1String("(?=[^\\\\])\\\\.+\\{"));
   QRegExp rx(QLatin1String("\\\\.+\\{"));
   rx.setMinimal(true);
-  text_.replace(rx, QString::null);
-  text_.replace(QRegExp(QLatin1String("[{}]")), QString::null);
+  text_.remove(rx);
+  text_.remove(QRegExp(QLatin1String("[{}]")));
   text_.replace('~', ' ');
   return text_;
 }

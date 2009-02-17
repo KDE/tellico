@@ -41,13 +41,13 @@ public:
   /**
    * @param url The tellico data file.
    */
-  TellicoImporter(const KUrl& url, bool loadAllImages=true);
+  explicit TellicoImporter(const KUrl& url, bool loadAllImages=true);
   /**
    * Constructor used to convert arbitrary text to a @ref Collection
    *
    * @param text The text
    */
-  TellicoImporter(const QString& text);
+  explicit TellicoImporter(const QString& text);
   virtual ~TellicoImporter();
 
   /**

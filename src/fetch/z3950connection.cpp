@@ -199,7 +199,7 @@ void Z3950Connection::run() {
       } else if(newSyntax == QLatin1String("grs-1")) {
         // if it's defaulting to grs-1, go ahead and change it to try to get a marc
         // record since grs-1 is a last resort for us
-        newSyntax.truncate(0);
+        newSyntax.clear();
       }
     }
     // right now, we just understand mods, unimarc, marc21/usmarc, and grs-1
@@ -445,7 +445,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
 #ifdef HAVE_YAZ
   if(marc_.isEmpty()) {
     myDebug() << "Z3950Connection::toXML() - empty string" << endl;
-    return QString::null;
+    return QString();
   }
 
   yaz_iconv_t cd = yaz_iconv_open("utf-8", charSet_.toLatin1());
@@ -459,7 +459,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
       return toXML(Iso6937Converter::toUtf8(marc_).toUtf8(), QLatin1String("utf-8"));
     }
     kWarning() << "Z3950Connection::toXML() - conversion from " << charSet_ << " is unsupported";
-    return QString::null;
+    return QString();
   }
 
   yaz_marc_t mt = yaz_marc_create();
@@ -475,7 +475,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
 #endif
   if(ok && (len < 25 || len > 100000)) {
     myDebug() << "Z3950Connection::toXML() - bad length: " << (ok ? len : -1) << endl;
-    return QString::null;
+    return QString();
   }
 
 #if YAZ_VERSIONL < 0x030000
@@ -486,7 +486,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
   int r = yaz_marc_decode_buf(mt, marc_, -1, &result, &len);
   if(r <= 0) {
     myDebug() << "Z3950Connection::toXML() - can't decode buffer" << endl;
-    return QString::null;
+    return QString();
   }
 
   QString output = QLatin1String("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -499,6 +499,6 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
 
   return output;
 #else // no yaz
-  return QString::null;
+  return QString();
 #endif
 }

@@ -26,7 +26,7 @@
 using Tellico::Data::Image;
 using Tellico::Data::ImageInfo;
 
-Image::Image() : QImage(), m_id(QString::null), m_linkOnly(false) {
+Image::Image() : QImage(), m_linkOnly(false) {
 }
 
 // I'm using the MD5 hash as the id. I consider it rather unlikely that two images in one
@@ -44,7 +44,7 @@ Image::Image(const QImage& img_, const QString& format_) : QImage(img_), m_forma
 Image::Image(const QByteArray& data_, const QString& format_, const QString& id_)
     : QImage(QImage::fromData(data_)), m_id(idClean(id_)), m_format(format_.toLatin1()), m_linkOnly(false) {
   if(isNull()) {
-    m_id = QString();
+    m_id.clear();
   }
 }
 

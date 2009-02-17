@@ -32,7 +32,7 @@ public:
    * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  BoardGameCollection(bool addFields, const QString& title = QString::null);
+  BoardGameCollection(bool addFields, const QString& title = QString());
 
   virtual Type type() const { return BoardGame; }
 

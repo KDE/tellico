@@ -103,10 +103,10 @@ void ImageWidget::setLinkOnlyChecked(bool link_) {
 
 void ImageWidget::slotClear() {
 //  m_image = Data::Image();
-  m_imageID = QString();
+  m_imageID.clear();
   m_pixmap = QPixmap();
   m_scaled = m_pixmap;
-  m_originalURL = KUrl();
+  m_originalURL.clear();
 
   m_label->setPixmap(m_scaled);
   m_cbLinkOnly->setChecked(false);

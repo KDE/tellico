@@ -99,8 +99,8 @@ FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   Data::Field::Type type = field_->type();
   QString s = i18nc("Edit Label", "%1:", field_->title());
   if(type == Data::Field::URL) {
-    // set URL to null for now
-    m_label = new KUrlLabel(QString::null, s, this);
+    // set URL to empty for now
+    m_label = new KUrlLabel(QString(), s, this);
   } else {
     m_label = new QLabel(s, this);
   }

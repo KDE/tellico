@@ -37,13 +37,13 @@ public:
   /**
    * @param url The tellico data file.
    */
-  TellicoSaxImporter(const KUrl& url, bool loadAllImages=true);
+  explicit TellicoSaxImporter(const KUrl& url, bool loadAllImages=true);
   /**
    * Constructor used to convert arbitrary text to a @ref Collection
    *
    * @param text The text
    */
-  TellicoSaxImporter(const QString& text);
+  explicit TellicoSaxImporter(const QString& text);
   virtual ~TellicoSaxImporter();
 
   /**

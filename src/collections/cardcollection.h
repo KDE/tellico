@@ -37,7 +37,7 @@ public:
    * @param addFields A boolean indicating whether the default attributes should be added
    * @param title The title of the collection
    */
-  CardCollection(bool addFields, const QString& title = QString::null);
+  CardCollection(bool addFields, const QString& title = QString());
 
   virtual Type type() const { return Card; }
 

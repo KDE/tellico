@@ -57,7 +57,7 @@ QString FieldFormat::title(const QString& title_) {
         QRegExp regexp(QChar('^') + QRegExp::escape(article) + QLatin1String("\\s*"), Qt::CaseInsensitive);
         // can't just use article since it's in lower-case
         QString titleArticle = newTitle.left(article.length());
-        newTitle = newTitle.replace(regexp, QString::null)
+        newTitle = newTitle.remove(regexp)
                            .append(QLatin1String(", "))
                            .append(titleArticle);
         break;

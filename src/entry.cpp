@@ -138,7 +138,7 @@ QString Entry::field(const QString& fieldName_, bool formatted_/*=false*/) const
 
   FieldPtr f = m_coll->fieldByName(fieldName_);
   if(!f) {
-    return QString::null;
+    return QString();
   }
   if(f->type() == Field::Dependent) {
     return dependentValue(this, f->description(), false);
@@ -147,7 +147,7 @@ QString Entry::field(const QString& fieldName_, bool formatted_/*=false*/) const
   if(!m_fieldValues.isEmpty() && m_fieldValues.contains(fieldName_)) {
     return m_fieldValues[fieldName_];
   }
-  return QString::null;
+  return QString();
 }
 
 QString Entry::formattedField(Tellico::Data::FieldPtr field_) const {
@@ -157,7 +157,7 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_) const {
 QString Entry::formattedField(const QString& fieldName_) const {
   FieldPtr f = m_coll->fieldByName(fieldName_);
   if(!f) {
-    return QString::null;
+    return QString();
   }
 
   Field::FormatFlag flag = f->formatFlag();
@@ -325,9 +325,9 @@ bool Entry::isOwned() {
   return (m_coll && m_id > -1 && m_coll->entryCount() > 0 && m_coll->entries().contains(EntryPtr(this)));
 }
 
-// a null string means invalidate all
+// an empty string means invalidate all
 void Entry::invalidateFormattedFieldValue(const QString& name_) {
-  if(name_.isNull()) {
+  if(name_.isEmpty()) {
     m_formattedFields.clear();
   } else if(!m_formattedFields.isEmpty() && m_formattedFields.contains(name_)) {
     m_formattedFields.remove(name_);

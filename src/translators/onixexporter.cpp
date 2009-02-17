@@ -80,7 +80,7 @@ bool ONIXExporter::exec() {
 
   KZip zip(&buf);
   zip.open(QIODevice::WriteOnly);
-  zip.writeFile(QLatin1String("onix.xml"), QString::null, QString::null, xml, xml.size());
+  zip.writeFile(QLatin1String("onix.xml"), QString(), QString(), xml, xml.size());
 
   // use a dict for fast random access to keep track of which images were written to the file
   if(m_includeImages) { // for now, we're ignoring (options() & Export::ExportImages)
@@ -92,7 +92,7 @@ bool ONIXExporter::exec() {
          && (img.format() == "JPEG" || img.format() == "JPG" || img.format() == "GIF")) { /// onix only understands jpeg and gif
         QByteArray ba = img.byteArray();
         zip.writeFile(QLatin1String("images/") + entry->field(cover),
-                      QString::null, QString::null, ba, ba.size());
+                      QString(), QString(), ba, ba.size());
         imageSet.add(img.id());
       }
     }
@@ -107,13 +107,14 @@ QString ONIXExporter::text() {
   QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
   if(xsltfile.isNull()) {
     myDebug() << "ONIXExporter::text() - no xslt file for " << m_xsltFile << endl;
-    return QString::null;
+    return QString();
   }
 
   Data::CollPtr coll = collection();
   if(!coll) {
     myDebug() << "ONIXExporter::text() - no collection pointer!" << endl;
-    return QString::null;
+    return QString();
+    ;
   }
 
   // notes about utf-8 encoding:
@@ -128,7 +129,7 @@ QString ONIXExporter::text() {
   QDomDocument dom = FileHandler::readXMLFile(u, false);
   if(dom.isNull()) {
     myDebug() << "ONIXExporter::text() - error loading xslt file: " << xsltfile << endl;
-    return QString::null;
+    return QString();
   }
 
   // the stylesheet prints utf-8 by default, if using locale encoding, need

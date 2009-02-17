@@ -21,8 +21,8 @@ FieldCompletion::FieldCompletion(bool multiple_) : KCompletion(), m_multiple(mul
 
 QString FieldCompletion::makeCompletion(const QString& string_) {
   if(completionMode() == KGlobalSettings::CompletionNone) {
-    m_beginText.truncate(0);
-    return QString::null;
+    m_beginText.clear();
+    return QString();
   }
 
   if(!m_multiple) {
@@ -32,7 +32,7 @@ QString FieldCompletion::makeCompletion(const QString& string_) {
   static QRegExp rx = FieldFormat::delimiter();
   int pos = rx.lastIndexIn(string_);
   if(pos == -1) {
-    m_beginText.truncate(0);
+    m_beginText.clear();
     return KCompletion::makeCompletion(string_);
   }
 
@@ -43,7 +43,7 @@ QString FieldCompletion::makeCompletion(const QString& string_) {
 }
 
 void FieldCompletion::clear() {
-  m_beginText.truncate(0);
+  m_beginText.clear();
   KCompletion::clear();
 }
 
@@ -68,6 +68,5 @@ void FieldCompletion::postProcessMatches(KCompletionMatches* matches_) const {
     }
   }
 }
-
 
 #include "fieldcompletion.moc"

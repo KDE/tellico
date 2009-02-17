@@ -236,7 +236,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                               i18n("Tellico is able to download information about entries with a DOI from "
                                    "CrossRef.org. However, you must create an CrossRef account and add a new "
                                    "data source with your account information."),
-                              QString::null,
+                              QString(),
                               QLatin1String("CrossRefSourceNeeded"));
     } else {
       foreach(Fetch::Fetcher::Ptr fetcher, vec) {
