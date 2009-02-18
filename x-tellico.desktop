@@ -1,6 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=Tellico Data File
+Comment[ga]=Comhad Sonraí Tellico
+Comment[pt]=Ficheiro de Dados do Tellico
+Comment[pt_BR]=Ficheiro de Dados do Tellico
+Comment[sv]=Tellico-datafil
+Comment[uk]=Файл даних Tellico
 DefaultApp=tellico
 Icon=application-x-tellico
 MimeType=application/x-tellico
