@@ -108,7 +108,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     } else if(field == QLatin1String("author")) {
       val.remove(dateRx);
     } else if(field == QLatin1String("publisher")) {
-      if(val.indexOf(pubRx) > -1) {
+      if(pubRx.indexIn(val) > -1) {
         e->setField(QLatin1String("address"), pubRx.cap(1));
         val = pubRx.cap(2);
       }

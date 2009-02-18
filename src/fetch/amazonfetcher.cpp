@@ -472,7 +472,7 @@ void AmazonFetcher::slotComplete(KJob*) {
     if(m_site == UK && coll->type() == Data::Collection::Video) {
       QRegExp rx(QLatin1String("\\[(\\d{4})\\]"));
       QString t = entry->title();
-      if(t.indexOf(rx) > -1) {
+      if(rx.indexIn(t) > -1) {
         QString y = rx.cap(1);
         t.remove(rx).simplified();
         entry->setField(QLatin1String("title"), t);

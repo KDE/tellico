@@ -90,13 +90,13 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
   if(m_fieldName.isEmpty()) {
     QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
     foreach(const QString& value, list) {
-      if(value.indexOf(rx) >= 0) {
+      if(rx.indexIn(value) >= 0) {
         return true;
       }
     }
   } else {
-    return entry_->field(m_fieldName).indexOf(rx) >= 0
-           || entry_->formattedField(m_fieldName).indexOf(rx) >= 0;
+    return rx.indexIn(entry_->field(m_fieldName)) >= 0
+           || rx.indexIn(entry_->formattedField(m_fieldName)) >= 0;
   }
 
   return false;

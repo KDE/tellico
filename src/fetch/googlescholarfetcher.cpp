@@ -155,7 +155,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   QString text = QString::fromUtf8(data, data.size());
   QString bibtex;
   int count = 0;
-  for(int pos = text.indexOf(m_bibtexRx); count < m_limit && pos > -1; pos = text.indexOf(m_bibtexRx, pos+m_bibtexRx.matchedLength()), ++count) {
+  for(int pos = m_bibtexRx.indexIn(text); count < m_limit && pos > -1; pos = m_bibtexRx.indexIn(text, pos+m_bibtexRx.matchedLength()), ++count) {
     KUrl bibtexUrl(KUrl(SCHOLAR_BASE_URL), m_bibtexRx.cap(1));
 //    myDebug() << bibtexUrl << endl;
     bibtex += FileHandler::readTextFile(bibtexUrl, true);

@@ -65,7 +65,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   m_ds.readRawData(buffer.data(), l);
   QString version = QString::fromLocal8Bit(buffer.data(), l);
   QRegExp versionRx(QLatin1String(".+AMC_(\\d+)\\.(\\d+).+"));
-  if(version.indexOf(versionRx) == -1) {
+  if(versionRx.indexIn(version) == -1) {
     myDebug() << "AMCImporter::collection() - no file id match" << endl;
     return Data::CollPtr();
   }
@@ -198,7 +198,7 @@ void AMCImporter::readEntry() {
   s = readString();
   QRegExp roleRx(QLatin1String("(.+) \\(([^(]+)\\)"));
   roleRx.setMinimal(true);
-  if(s.indexOf(roleRx) > -1) {
+  if(roleRx.indexIn(s) > -1) {
     QString role = roleRx.cap(2).toLower();
     if(role == QLatin1String("story") || role == QLatin1String("written by")) {
       e->setField(QLatin1String("writer"), roleRx.cap(1));
@@ -218,7 +218,7 @@ void AMCImporter::readEntry() {
   e->setField(QLatin1String("comments"), readString());
   s = readString(); // video format
   QRegExp regionRx(QLatin1String("Region \\d"));
-  if(s.indexOf(regionRx) > -1) {
+  if(regionRx.indexIn(s) > -1) {
     e->setField(QLatin1String("region"), regionRx.cap(0));
   }
   e->setField(QLatin1String("audio-track"), readString()); // audio format
@@ -242,7 +242,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
   QRegExp castRx(QLatin1String("[,()]"));
   QString person, role;
   int oldPos = 0;
-  for(int pos = text_.indexOf(castRx); pos > -1; pos = text_.indexOf(castRx, pos+1)) {
+  for(int pos = castRx.indexIn(text_); pos > -1; pos = castRx.indexIn(text_, pos+1)) {
     if(text_.at(pos) == ',' && nPar%2 == 0) {
       // we're done with this one
       person += text_.mid(oldPos, pos-oldPos).trimmed();

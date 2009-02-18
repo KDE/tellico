@@ -1662,7 +1662,7 @@ void MainWindow::setFilter(const QString& text_) {
     // if the text contains any non-word characters, assume it's a regexp
     // but \W in qt is letter, number, or '_', I want to be a bit less strict
     QRegExp rx(QLatin1String("[^\\w\\s-']"));
-    if(text.indexOf(rx) == -1) {
+    if(rx.indexIn(text) == -1) {
     // split by whitespace, and add rules for each word
         const QStringList tokens = text.split(QRegExp(QLatin1String("\\s")));
         foreach(const QString& token, tokens) {

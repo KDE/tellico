@@ -242,7 +242,7 @@ void BibtexImporter::parseText(const QString& text) {
   bool needsCleanup = false;
   int brace = 0;
   int startpos = 0;
-  int pos = text.indexOf(rx, 0);
+  int pos = rx.indexIn(text, 0);
   while(pos > 0 && !m_cancelled) {
     if(text[pos] == '{') {
       ++brace;
@@ -266,7 +266,7 @@ void BibtexImporter::parseText(const QString& text) {
       }
       startpos = pos+1;
     }
-    pos = text.indexOf(rx, pos+1);
+    pos = rx.indexIn(text, pos+1);
   }
   if(needsCleanup) {
     // clean up some structures
@@ -331,7 +331,7 @@ bool BibtexImporter::maybeBibtex(const KUrl& url_) {
   bool foundOne = false;
   int brace = 0;
   int startpos = 0;
-  int pos = text.indexOf(rx, 0);
+  int pos = rx.indexIn(text, 0);
   while(pos > 0) {
     if(text[pos] == '{') {
       ++brace;
@@ -350,7 +350,7 @@ bool BibtexImporter::maybeBibtex(const KUrl& url_) {
       }
       startpos = pos+1;
     }
-    pos = text.indexOf(rx, pos+1);
+    pos = rx.indexIn(text, pos+1);
   }
   if(foundOne) {
     // clean up some structures

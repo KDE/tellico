@@ -198,7 +198,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     }
 //    myDebug() << tag << ": " << value << endl;
     // if the next line is not empty and does not match start regexp, append to value
-    while(!nextLine.isEmpty() && nextLine.indexOf(rx) == -1) {
+    while(!nextLine.isEmpty() && rx.indexIn(nextLine) == -1) {
       value += nextLine.trimmed();
       nextLine = t.readLine();
     }

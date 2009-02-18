@@ -190,7 +190,7 @@ QString FieldFormat::capitalize(QString str_) {
 
   // special case for french words like l'espace
 
-  int pos = str_.indexOf(rx, 1);
+  int pos = rx.indexIn(str_, 1);
   int nextPos;
 
   QRegExp wordRx;
@@ -213,7 +213,7 @@ QString FieldFormat::capitalize(QString str_) {
 
   while(pos > -1) {
     // also need to compare against list of non-capitalized words
-    nextPos = str_.indexOf(rx, pos+1);
+    nextPos = rx.indexIn(str_, pos+1);
     if(nextPos == -1) {
       nextPos = str_.length();
     }
@@ -236,7 +236,7 @@ QString FieldFormat::capitalize(QString str_) {
       }
     }
 
-    pos = str_.indexOf(rx, pos+1);
+    pos = rx.indexIn(str_, pos+1);
   }
   return str_;
 }

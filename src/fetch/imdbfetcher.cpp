@@ -441,7 +441,7 @@ void IMDBFetcher::parseSingleNameResult() {
         aPos = output.length();
       }
       QString tmp = output.mid(pos+len, aPos-pos-len);
-      if(tmp.indexOf(tvRegExp) > -1) {
+      if(tvRegExp.indexIn(tmp) > -1) {
         isEpisode = true;
       }
       pPos = tmp.indexOf('(');
@@ -854,8 +854,8 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
   StringSet people;
   for(int pos = str_.indexOf(imdbHeader_); pos > 0; pos = str_.indexOf(imdbHeader_, pos)) {
     // loop until repeated <br> tags or </div> tag
-    const int endPos1 = str_.indexOf(br2Rx, pos);
-    const int endPos2 = str_.indexOf(divRx, pos);
+    const int endPos1 = br2Rx.indexIn(str_, pos);
+    const int endPos2 = divRx.indexIn(str_, pos);
     const int endPos = qMin(endPos1, endPos2); // ok to be -1
     pos = s_anchorRx->indexIn(str_, pos+1);
     while(pos > -1 && pos < endPos) {
@@ -899,10 +899,10 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   } else {
     // first look for anchor
     QRegExp castAnchorRx(QLatin1String("<a\\s+name\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
-    pos = castText.indexOf(castAnchorRx);
+    pos = castAnchorRx.indexIn(castText);
     if(pos < 0) {
       QRegExp tableClassRx(QLatin1String("<table\\s+class\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
-      pos = castText.indexOf(tableClassRx);
+      pos = tableClassRx.indexIn(castText);
       if(pos < 0) {
         // fragile, the word "cast" appears in the title, but need to find
         // the one right above the actual cast table
