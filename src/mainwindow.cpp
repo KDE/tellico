@@ -48,7 +48,7 @@
 #include "cite/actionmanager.h"
 #include "core/tellico_config.h"
 #include "core/drophandler.h"
-#include "core/dcopinterface.h"
+#include "core/dbusinterface.h"
 #include "models/models.h"
 #include "newstuff/manager.h"
 
@@ -1682,7 +1682,7 @@ void MainWindow::setFilter(const QString& text_) {
         }
         filter->append(new FilterRule(fieldName, text, FilterRule::FuncRegExp));
     }
-    // also want to update the line edit in case the filter was set by DCOP
+    // also want to update the line edit in case the filter was set by DBUS
     if(m_quickFilter->text() != text_) {
         m_quickFilter->setText(text_);
     }

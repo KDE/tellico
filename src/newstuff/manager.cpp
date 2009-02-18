@@ -52,13 +52,13 @@ public:
 K_GLOBAL_STATIC(ManagerSingleton, s_instance)
 
 Manager::Manager(QObject* parent_) : QObject(parent_) {
-  QDBusConnection::sessionBus().registerService("org.tellico_project");
+  QDBusConnection::sessionBus().registerService("org.kde.tellico");
   new NewstuffAdaptor(this);
   QDBusConnection::sessionBus().registerObject("/newstuff", this);
 }
 
 Manager::~Manager() {
-  QDBusConnection::sessionBus().unregisterService("org.tellico_project");
+  QDBusConnection::sessionBus().unregisterService("org.kde.tellico");
 }
 
 Manager* Manager::self()

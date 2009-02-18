@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2008 by Robby Stephenson
+    copyright            : (C) 2004-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_DCOPINTERFACE_H
-#define TELLICO_DCOPINTERFACE_H
+#ifndef TELLICO_DBUSINTERFACE_H
+#define TELLICO_DBUSINTERFACE_H
 
 #include "../translators/translators.h"
 
@@ -26,7 +26,7 @@ class MainWindow;
 
 class ApplicationInterface : public QObject {
 Q_OBJECT
-Q_CLASSINFO("D-Bus Interface", "org.tellico-project.application")
+Q_CLASSINFO("D-Bus Interface", "org.kde.tellico")
 
 public:
   ApplicationInterface(MainWindow* parent);
@@ -72,7 +72,7 @@ private:
 
 class CollectionInterface : public QObject {
 Q_OBJECT
-Q_CLASSINFO("D-Bus Interface", "org.tellico-project.collection")
+Q_CLASSINFO("D-Bus Interface", "org.kde.tellico")
 
 public:
   CollectionInterface(QObject* parent);

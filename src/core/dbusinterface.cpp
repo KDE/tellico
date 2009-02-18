@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2008 by Robby Stephenson
+    copyright            : (C) 2004-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,7 +11,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "dcopinterface.h"
+#include "dbusinterface.h"
 #include "../controller.h"
 #include "../tellico_kernel.h"
 #include "../document.h"

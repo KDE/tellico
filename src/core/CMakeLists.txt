@@ -1,7 +1,7 @@
 ########### next target ###############
 
 SET(core_STAT_SRCS
-   dcopinterface.cpp
+   dbusinterface.cpp
    drophandler.cpp
    netaccess.cpp
    tellico_config_addons.cpp
