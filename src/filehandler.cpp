@@ -149,7 +149,7 @@ QByteArray FileHandler::readDataFile(const KUrl& url_, bool quiet_) {
 }
 
 Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_, const KUrl& referrer_) {
-  if(url_.isLocalFile()) {
+  if(referrer_.isEmpty() || url_.isLocalFile()) {
     return readImageFile(url_, quiet_);
   }
 

@@ -86,7 +86,6 @@
 #include <QSignalMapper>
 #include <QTimer>
 #include <QMetaObject> // needed for copy, cut, paste slots
-#include <QDBusConnection>
 
 namespace {
   static const int MAIN_WINDOW_MIN_WIDTH = 600;
