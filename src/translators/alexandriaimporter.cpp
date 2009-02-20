@@ -223,7 +223,7 @@ QString& AlexandriaImporter::cleanLine(QString& str_) {
   QByteArray bytes;
   while(pos > -1) {
     bool ok;
-    char c = escRx.cap(1).toInt(&ok, 16);
+    char c = static_cast<char>(escRx.cap(1).toInt(&ok, 16));
     if(ok) {
       bytes += c;
     } else {
