@@ -74,7 +74,8 @@ QPixmap Image::convertToPixmap(int w_, int h_) const {
 
 QByteArray Image::outputFormat(const QByteArray& inputFormat) {
   QList<QByteArray> list = QImageWriter::supportedImageFormats();
-  if(list.contains(inputFormat.toUpper())) {
+  if(list.contains(inputFormat.toUpper()) || list.contains(inputFormat.toLower())) {
+//if(list.contains(inputFormat, Qt::CaseInsensitive)) - UNFORTUNATELY THIS WONT WORK WITH QByteArray
     return inputFormat;
   }
   myDebug() << "writing" << inputFormat << "as PNG";
