@@ -28,6 +28,7 @@ class QIODevice;
 
 namespace Tellico {
   class ImageFactory;
+  class ImageDirectory;
   namespace Data {
     class Image;
   }
@@ -40,6 +41,7 @@ namespace Tellico {
 class FileHandler {
 
 friend class ImageFactory;
+friend class ImageDirectory;
 
 public:
   /**

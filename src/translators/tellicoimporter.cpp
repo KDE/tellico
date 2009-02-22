@@ -19,6 +19,7 @@
 #include "../field.h"
 #include "../imagefactory.h"
 #include "../image.h"
+#include "../imageinfo.h"
 #include "../isbnvalidator.h"
 #include "../tellico_strings.h"
 #include "../tellico_kernel.h"

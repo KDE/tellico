@@ -26,6 +26,7 @@
 #include "tellico_debug.h"
 #include "imagefactory.h"
 #include "image.h"
+#include "imageinfo.h"
 #include "stringset.h"
 #include "progressmanager.h"
 #include "core/tellico_config.h"

@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2008 by Robby Stephenson
+    copyright            : (C) 2003-20089 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,6 @@
  ***************************************************************************/
 
 #include "image.h"
-#include "imagefactory.h"
 #include "tellico_debug.h"
 #include "tellico_utils.h"
 
@@ -24,7 +23,8 @@
 #include <QImageWriter>
 
 using Tellico::Data::Image;
-using Tellico::Data::ImageInfo;
+
+const Image Image::null;
 
 Image::Image() : QImage(), m_linkOnly(false) {
 }
@@ -94,7 +94,7 @@ QByteArray Image::byteArray(const QImage& img_, const QByteArray& outputFormat_)
 QString Image::idClean(const QString& id_) {
   static const QRegExp rx('[' + QRegExp::escape(QLatin1String("/@<>#\"&%?={}|^~[]'`\\:+")) + ']');
   QString clean = id_;
-  return shareString(clean.remove(rx));
+  return Tellico::shareString(clean.remove(rx));
 }
 
 void Image::setID(const QString& id_) {
@@ -108,44 +108,4 @@ void Image::calculateID() {
     m_id = QLatin1String(md5.hexDigest()) + QLatin1String(".") + QByteArray(m_format).toLower();
     m_id = idClean(m_id);
   }
-}
-
-/******************************************************/
-
-ImageInfo::ImageInfo(const Image& img_)
-    : id(img_.id())
-    , format(img_.format())
-    , linkOnly(img_.linkOnly())
-    , m_width(img_.width())
-    , m_height(img_.height()) {
-}
-
-ImageInfo::ImageInfo(const QString& id_, const QByteArray& format_, int w_, int h_, bool l_)
-    : id(id_)
-    , format(format_)
-    , linkOnly(l_)
-    , m_width(w_)
-    , m_height(h_) {
-}
-
-int ImageInfo::width(bool loadIfNecessary) const {
-  if(m_width < 1 && loadIfNecessary) {
-    const Image& img = ImageFactory::imageById(id);
-    if(!img.isNull()) {
-      m_width = img.width();
-      m_height = img.height();
-    }
-  }
-  return m_width;
-}
-
-int ImageInfo::height(bool loadIfNecessary) const {
-  if(m_height < 1 && loadIfNecessary) {
-    const Image& img = ImageFactory::imageById(id);
-    if(!img.isNull()) {
-      m_width = img.width();
-      m_height = img.height();
-    }
-  }
-  return m_height;
 }

@@ -47,7 +47,9 @@ SET(tellico_SRCS
    groupiterator.cpp
    groupview.cpp
    image.cpp
+   imagedirectory.cpp
    imagefactory.cpp
+   imageinfo.cpp
    importdialog.cpp
    isbnvalidator.cpp
    iso5426converter.cpp

@@ -15,6 +15,7 @@
 #include "../collections/bibtexcollection.h"
 #include "../imagefactory.h"
 #include "../image.h"
+#include "../imageinfo.h"
 #include "../controller.h" // needed for getting groupView pointer
 #include "../filehandler.h"
 #include "../groupiterator.h"

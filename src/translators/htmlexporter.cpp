@@ -17,6 +17,7 @@
 #include "../document.h"
 #include "../collection.h"
 #include "../filehandler.h"
+#include "../image.h"
 #include "../imagefactory.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
@@ -431,19 +432,25 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   int count = 0;
   const int processCount = 100; // process after every 100 events
 
-  const QStringList fieldsList = imageFields.toList();
   StringSet imageSet; // track which images are written
-  for(QStringList::ConstIterator fieldName = fieldsList.begin(); fieldName != fieldsList.end(); ++fieldName) {
+  foreach(const QString& imageField, imageFields) {
     foreach(Data::EntryPtr entryIt, entries()) {
-      QString id = entryIt->field(*fieldName);
+      QString id = entryIt->field(imageField);
       // if no id or is already writen, continue
       if(id.isEmpty() || imageSet.has(id)) {
         continue;
       }
       imageSet.add(id);
       // try writing
-      bool success = useTemp ? ImageFactory::writeCachedImage(id, ImageFactory::TempDir)
-                             : ImageFactory::writeImage(id, imgDir, true);
+      bool success = false;
+      if(useTemp) {
+        success = ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
+      } else {
+        const Data::Image& img = ImageFactory::imageById(id);
+        KUrl target = imgDir;
+        target.addPath(id);
+        success = !img.isNull() && FileHandler::writeDataURL(target, img.byteArray(), false);
+      }
       if(!success) {
         kWarning() << "HTMLExporter::writeImages() - unable to write image file: "
                     << imgDir.path() << id << endl;

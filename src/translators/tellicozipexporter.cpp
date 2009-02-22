@@ -16,6 +16,7 @@
 #include "../collection.h"
 #include "../imagefactory.h"
 #include "../image.h"
+#include "../imageinfo.h"
 #include "../filehandler.h"
 #include "../stringset.h"
 #include "../tellico_debug.h"

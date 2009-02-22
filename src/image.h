@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2008 by Robby Stephenson
+    copyright            : (C) 2003-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -21,6 +21,7 @@
 
 namespace Tellico {
   class ImageFactory;
+  class ImageDirectory;
   class FileHandler;
 
   namespace Data {
@@ -31,6 +32,7 @@ namespace Tellico {
 class Image : public QImage {
 
 friend class Tellico::ImageFactory;
+friend class Tellico::ImageDirectory;
 friend class Tellico::FileHandler;
 
 public:
@@ -50,6 +52,7 @@ public:
   static QByteArray byteArray(const QImage& img, const QByteArray& outputFormat);
   static QString idClean(const QString& id);
 
+  static const Image null;
 private:
   Image();
   explicit Image(const QString& filename);
@@ -66,24 +69,6 @@ private:
   QString m_id;
   QByteArray m_format;
   bool m_linkOnly : 1;
-};
-
-class ImageInfo {
-public:
-  ImageInfo() {}
-  explicit ImageInfo(const Image& img);
-  ImageInfo(const QString& id, const QByteArray& format, int w, int h, bool link);
-  bool isNull() const { return id.isEmpty(); }
-  QString id;
-  QByteArray format;
-  bool linkOnly : 1;
-
-  int width(bool loadIfNecessary=true) const;
-  int height(bool loadIfNecessary=true) const;
-
-private:
-  mutable int m_width;
-  mutable int m_height;
 };
 
   } // end namespace

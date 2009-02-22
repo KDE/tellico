@@ -17,6 +17,7 @@
 #include "../collectionfactory.h"
 #include "../collections/bibtexcollection.h"
 #include "../image.h"
+#include "../imageinfo.h"
 #include "../imagefactory.h"
 #include "../isbnvalidator.h"
 #include "../tellico_utils.h"

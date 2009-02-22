@@ -11,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef IMAGEFACTORY_H
-#define IMAGEFACTORY_H
+#ifndef TELLICO_IMAGEFACTORY_H
+#define TELLICO_IMAGEFACTORY_H
 
 #include "stringset.h"
 
@@ -65,6 +65,7 @@ public:
    */
   static QString tempDir();
   static QString dataDir();
+  static QString localDir();
 
   /**
    * Add an image, reading it from a URL, which is the case when adding a new image from the
@@ -99,16 +100,6 @@ public:
    */
   static QString addImage(const QByteArray& data, const QString& format, const QString& id);
 
-  /**
-   * Writes an image to a file. ImageFactory keeps track of which images were already written
-   * if the location is the same as the tempdir.
-   *
-   * @param id The ID of the image to be written
-   * @param targetDir The directory to write the image to, if empty, the tempdir is used.
-   * @param force Force the image to be written, even if it already has been
-   * @return Whether the save was successful
-   */
-  static bool writeImage(const QString& id, const KUrl& targetDir, bool force=false);
   static bool writeCachedImage(const QString& id, CacheDir dir, bool force = false);
 
   /**
@@ -140,8 +131,6 @@ public:
   static StringSet imagesNotInCache();
 
   static void setLocalDirectory(const KUrl& url);
-  // local save directory
-  static QString localDir();
 
 private:
   /**
@@ -152,8 +141,8 @@ private:
    * @param quiet If any error should not be reported.
    * @return The image
    */
-  static const Data::Image& addImageImpl(const KUrl& url, bool quiet=false,
-                                         const KUrl& referrer = KUrl(), bool linkOnly = false);
+  const Data::Image& addImageImpl(const KUrl& url, bool quiet=false,
+                                  const KUrl& referrer = KUrl(), bool linkOnly = false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
@@ -163,7 +152,7 @@ private:
    * @param format The image format, probably "PNG"
    * @return The image
    */
-  static const Data::Image& addImageImpl(const QImage& image, const QString& format);
+  const Data::Image& addImageImpl(const QImage& image, const QString& format);
   /**
    * Add an image, reading it from data, which is the case when reading from the data file. The
    * @p id isn't strictly needed, since it can be reconstructed from the image data and format, but
@@ -174,22 +163,23 @@ private:
    * @param id The internal id of the image
    * @return The image
    */
-  static const Data::Image& addImageImpl(const QByteArray& data, const QString& format, const QString& id);
+  const Data::Image& addImageImpl(const QByteArray& data, const QString& format, const QString& id);
 
-  static const Data::Image& addCachedImageImpl(const QString& id, CacheDir dir);
-  static bool hasImage(const QString& id);
-  static void releaseImages();
+  const Data::Image& addCachedImageImpl(const QString& id, CacheDir dir);
 
-  static bool s_needInit;
-  static QHash<QString, Data::Image*> s_imageDict;
-  static QCache<QString, Data::Image> s_imageCache;
-  static QCache<QString, QPixmap> s_pixmapCache;
+  static ImageFactory* factory;
+
   static QHash<QString, Data::ImageInfo> s_imageInfoMap;
-  static StringSet s_imagesInTmpDir; // the id's of the images written to tmp directory
   static StringSet s_imagesToRelease;
-  static KTempDir* s_tmpDir;
-  static QString s_localDir;
-  static const Data::Image s_null;
+
+  ImageFactory();
+  ~ImageFactory();
+
+  bool hasImage(const QString& id) const;
+  void releaseImages();
+
+  class Private;
+  Private* const d;
 };
 
 } // end namespace

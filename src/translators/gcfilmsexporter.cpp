@@ -18,6 +18,7 @@
 #include "../tellico_utils.h"
 #include "../stringset.h"
 #include "../tellico_kernel.h"
+#include "../image.h"
 #include "../imagefactory.h"
 #include "../tellico_debug.h"
 
@@ -202,10 +203,15 @@ bool GCfilmsExporter::exec() {
     ts << endl;
   }
 
-   foreach(const QString& image, images) {
-    if(!ImageFactory::writeImage(image, imageDir)) {
-      myWarning() << "unable to write image file:"
-                  << imageDir << image << endl;
+  if(!imageDir.isEmpty()) {
+    foreach(const QString& image, images) {
+      const Data::Image& img = ImageFactory::imageById(image);
+      KUrl target = imageDir;
+      target.addPath(image);
+      if(img.isNull() || !FileHandler::writeDataURL(target, img.byteArray(), false)) {
+        myWarning() << "unable to write image file:"
+                    << imageDir << image << endl;
+      }
     }
   }
 
