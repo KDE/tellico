@@ -218,7 +218,7 @@ void ConfigDialog::setupGeneralPage() {
   m_rbImageInFile = new QRadioButton(i18n("Store images in data file"), imageGroupBox);
   m_rbImageInAppDir = new QRadioButton(i18n("Store images in common application directory"), imageGroupBox);
   m_rbImageInLocalDir = new QRadioButton(i18n("Store images in directory relative to data file"), imageGroupBox);
-  imageGroupBox->setWhatsThis(i18n("Images may be saved in the data file itself->setWhatsThis(which can "
+  imageGroupBox->setWhatsThis(i18n("Images may be saved in the data file itself, which can "
                                    "cause Tellico to run slowly, stored in the Tellico "
                                    "application directory, or stored in a directory in the "
                                    "same location as the data file."));

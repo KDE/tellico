@@ -246,7 +246,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_formatNone->setWhatsThis(i18n("This option prevents the field from ever being "
                                   "automatically formatted or capitalized."));
   m_formatPlain = new QRadioButton(i18n("Allow auto-capitalization only"), formatGroup);
-  m_formatPlain->setWhatsThis(i18n("This option allows the field to be capitalized->setWhatsThis(but "
+  m_formatPlain->setWhatsThis(i18n("This option allows the field to be capitalized, but "
                                    "not specially formatted."));
   m_formatTitle = new QRadioButton(i18n("Format as a title"), formatGroup);
   m_formatTitle->setWhatsThis(i18n("This option capitalizes and formats the field as a "
@@ -267,13 +267,13 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   QGroupBox* optionsGroup = new QGroupBox(i18n("Field Options"), vbox);
   QBoxLayout* optionsLayout = new QVBoxLayout(optionsGroup);
   m_complete = new QCheckBox(i18n("Enable auto-completion"), optionsGroup);
-  m_complete->setWhatsThis(i18n("If checked->setWhatsThis(KDE auto-completion will be enabled in the "
+  m_complete->setWhatsThis(i18n("If checked, KDE auto-completion will be enabled in the "
                                 "text edit box for this field."));
   m_multiple = new QCheckBox(i18n("Allow multiple values"), optionsGroup);
-  m_multiple->setWhatsThis(i18n("If checked->setWhatsThis(Tellico will parse the values in the field "
+  m_multiple->setWhatsThis(i18n("If checked, Tellico will parse the values in the field "
                                 "for multiple values, separated by a semi-colon."));
   m_grouped = new QCheckBox(i18n("Allow grouping"), optionsGroup);
-  m_grouped->setWhatsThis(i18n("If checked->setWhatsThis(this field may be used to group the entries in "
+  m_grouped->setWhatsThis(i18n("If checked, this field may be used to group the entries in "
                                "the group view."));
   optionsLayout->addWidget(m_complete);
   optionsLayout->addWidget(m_multiple);

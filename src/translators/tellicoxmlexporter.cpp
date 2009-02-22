@@ -477,7 +477,7 @@ QWidget* TellicoXMLExporter::widget(QWidget* parent_) {
 
   m_checkIncludeImages = new QCheckBox(i18n("Include images in XML document"), gbox);
   m_checkIncludeImages->setChecked(m_includeImages);
-  m_checkIncludeImages->setWhatsThis(i18n("If checked->setWhatsThis(the images in the document will be included "
+  m_checkIncludeImages->setWhatsThis(i18n("If checked, the images in the document will be included "
                                           "in the XML stream as base64 encoded elements."));
 
   vlay->addWidget(m_checkIncludeImages);
