@@ -62,10 +62,11 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
     return 0;
   }
   if(img->isNull()) {
+    myLog() << "image found but null:" << imgUrl;
     delete img;
     return 0;
   }
-  // the image id gets calculated from the image has
+  // the image id gets calculated from the image
   // but we want to reset it to the id that was asked for
   img->setID(id_);
   return img;

@@ -35,6 +35,15 @@ Image::Image() : QImage(), m_linkOnly(false) {
 // simply by comparing their ids.
 Image::Image(const QString& filename_) : QImage(filename_), m_linkOnly(false) {
   m_format = QImageReader::imageFormat(filename_);
+  if(isNull()) {
+    // Tellico had an earlier bug where images were written in PNG format with a GIF extension
+    // and for some reason, qt doesn't recognize the file then, so fall back and try to load as PNG
+    load(filename_, "PNG");
+    if(!isNull()) {
+      myWarning() << filename_ << "loaded as PNG image";
+      m_format = "PNG";
+    }
+  }
   calculateID();
 }
 
