@@ -69,6 +69,8 @@ private:
   QString m_id;
   QByteArray m_format;
   bool m_linkOnly : 1;
+
+  static QStringList s_outputFormats;
 };
 
   } // end namespace

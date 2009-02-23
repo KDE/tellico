@@ -25,6 +25,7 @@
 using Tellico::Data::Image;
 
 const Image Image::null;
+QStringList Image::s_outputFormats;
 
 Image::Image() : QImage(), m_linkOnly(false) {
 }
@@ -73,12 +74,16 @@ QPixmap Image::convertToPixmap(int w_, int h_) const {
 }
 
 QByteArray Image::outputFormat(const QByteArray& inputFormat) {
-  QList<QByteArray> list = QImageWriter::supportedImageFormats();
-  if(list.contains(inputFormat.toUpper()) || list.contains(inputFormat.toLower())) {
-//if(list.contains(inputFormat, Qt::CaseInsensitive)) - UNFORTUNATELY THIS WONT WORK WITH QByteArray
+  if(s_outputFormats.isEmpty()) {
+    QList<QByteArray> list = QImageWriter::supportedImageFormats();
+    foreach(const QByteArray& format, list) {
+      s_outputFormats.append(format.toUpper());
+    }
+  }
+  if(s_outputFormats.contains(inputFormat.toUpper())) {
     return inputFormat;
   }
-  myDebug() << "writing" << inputFormat << "as PNG";
+  myWarning() << "writing" << inputFormat << "as PNG";
   return "PNG";
 }
 
