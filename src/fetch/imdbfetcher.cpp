@@ -123,7 +123,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
 // only search if current collection is a video collection
   if(Kernel::self()->collectionType() != Data::Collection::Video) {
-    myDebug() << "IMDBFetcher::search() - collection type mismatch, stopping" << endl;
+    myDebug() << "collection type mismatch, stopping";
     stop();
     return;
   }
@@ -158,10 +158,10 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   }
 
   // as far as I can tell, the url encoding should always be iso-8859-1
-  // not utf-8. KDE4 not supporter?
+  // not utf-8. KDE4 not supported?
   m_url.addQueryItem(QLatin1String("q"), value_);
 
-//  myDebug() << "IMDBFetcher::search() url = " << m_url << endl;
+//  myDebug() << "url =" << m_url;
 #endif
 
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
@@ -204,7 +204,7 @@ void IMDBFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myLog() << "IMDBFetcher::stop()" << endl;
+//  myLog() << "";
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -254,7 +254,7 @@ void IMDBFetcher::slotComplete(KJob*) {
 }
 
 void IMDBFetcher::parseSingleTitleResult() {
-//  myDebug() << "IMDBFetcher::parseSingleTitleResult()" << endl;
+//  myDebug() << "";
   s_titleRx->indexIn(Tellico::decodeHTML(QString(m_data)));
   // split title at parenthesis
   const QString cap1 = s_titleRx->cap(1);
@@ -272,7 +272,7 @@ void IMDBFetcher::parseSingleTitleResult() {
 }
 
 void IMDBFetcher::parseMultipleTitleResults() {
-//  myDebug() << "IMDBFetcher::parseMultipleTitleResults()" << endl;
+//  myDebug() << "";
   QString output = Tellico::decodeHTML(QString(m_data));
 
   // IMDb can return three title lists, popular, exact, and partial
@@ -315,11 +315,9 @@ void IMDBFetcher::parseMultipleTitleResults() {
     m_currentTitleBlock = m_countOffset == 0 ? Unknown : Partial;
   }
 
-#ifndef NDEBUG
   if(m_matches.size() == 0) {
-    myDebug() << "IMDBFetcher::parseMultipleTitleResults() - no matches found." << endl;
+    myDebug() << "no matches found.";
   }
-#endif
 
   stop();
 }
@@ -329,9 +327,9 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     m_countOffset = 0;
     return;
   }
-//  myDebug() << "IMDBFetcher::parseTitleBlock() - " << m_currentTitleBlock << endl;
+  myDebug() << m_currentTitleBlock;
 
-  QRegExp akaRx(QLatin1String("aka (.*)(</li>|<br)"), Qt::CaseInsensitive);
+  QRegExp akaRx(QLatin1String("aka (.*)(</li>|</td>|<br)"), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
 
   m_hasMoreResults = false;
@@ -408,7 +406,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
 }
 
 void IMDBFetcher::parseSingleNameResult() {
-//  myDebug() << "IMDBFetcher::parseSingleNameResult()" << endl;
+//  myDebug() << "";
 
   m_currentTitleBlock = SinglePerson;
 
@@ -479,8 +477,8 @@ void IMDBFetcher::parseSingleNameResult() {
     KUrl u(m_url, s_anchorTitleRx->cap(1)); // relative URL constructor
     u.setQuery(QString());
     m_matches.insert(r->uid, u);
-//    myDebug() << u.prettyUrl() << endl;
-//    myDebug() << cap2 << endl;
+//    myDebug() << u;
+//    myDebug() << cap2;
     emit signalResultFound(r);
   }
   if(pos == -1) {
@@ -492,7 +490,7 @@ void IMDBFetcher::parseSingleNameResult() {
 }
 
 void IMDBFetcher::parseMultipleNameResults() {
-//  myDebug() << "IMDBFetcher::parseMultipleNameResults()" << endl;
+//  myDebug() << "";
 
   // the exact results are in the first table after the "exact results" text
   QString output = Tellico::decodeHTML(QString(m_data));
@@ -635,7 +633,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
 
   KUrl url = m_matches[uid_];
   if(url.isEmpty()) {
-    myDebug() << "IMDBFetcher::fetchEntry() - no url found" << endl;
+    myDebug() << "no url found";
     return Data::EntryPtr();
   }
 
@@ -643,7 +641,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
   QString results;
   // if the url matches the current one, no need to redownload it
   if(url == m_url) {
-//    myDebug() << "IMDBFetcher::fetchEntry() - matches previous URL, no downloading needed." << endl;
+//    myDebug() << "matches previous URL, no downloading needed.";
     results = Tellico::decodeHTML(QString(m_data));
   } else {
     // now it's sychronous
@@ -657,7 +655,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
 #endif
   }
   if(results.isEmpty()) {
-    myDebug() << "IMDBFetcher::fetchEntry() - no text results" << endl;
+    myDebug() << "no text results";
     m_url = origURL;
     return Data::EntryPtr();
   }
@@ -665,7 +663,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
   entry = parseEntry(results);
   m_url = origURL;
   if(!entry) {
-    myDebug() << "IMDBFetcher::fetchEntry() - error in processing entry" << endl;
+    myDebug() << "error in processing entry";
     return Data::EntryPtr();
   }
   m_entries.insert(uid_, entry); // keep for later
@@ -733,7 +731,6 @@ void IMDBFetcher::doRunningTime(const QString& str_, Tellico::Data::EntryPtr ent
   runtimeRx.setMinimal(true);
 
   if(runtimeRx.indexIn(str_) > -1) {
-//    myDebug() << "running-time = " << runtimeRx.cap(1) << endl;
     entry_->setField(QLatin1String("running-time"), runtimeRx.cap(1));
   }
 }
@@ -743,7 +740,6 @@ void IMDBFetcher::doAspectRatio(const QString& str_, Tellico::Data::EntryPtr ent
   rx.setMinimal(true);
 
   if(rx.indexIn(str_) > -1) {
-//    myDebug() << "aspect ratio = " << rx.cap(1) << endl;
     entry_->setField(QLatin1String("aspect-ratio"), rx.cap(1).trimmed());
   }
 }
@@ -920,7 +916,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
     }
   }
   if(pos == -1) { // no cast list found
-    myDebug() << "IMDBFetcher::doCast() - no cast list found" << endl;
+    myDebug() << "no cast list found";
     return;
   }
 
@@ -1097,7 +1093,7 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
 }
 
 void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myLog() << "IMDBFetcher::updateEntry() - " << entry_->title() << endl;
+//  myLog() << entry_->title();
   // only take first 5
   m_limit = 5;
   QString t = entry_->field(QLatin1String("title"));
@@ -1105,7 +1101,7 @@ void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   if(!link.isEmpty() && link.isValid()) {
     // check if we want a different host
     if(link.host() != m_host) {
-//      myLog() << "IMDBFetcher::updateEntry() - switching hosts to " << m_host << endl;
+//      myLog() << "switching hosts to " << m_host;
       link.setHost(m_host);
     }
     m_key = Fetch::Title;
