@@ -58,6 +58,7 @@ namespace Tellico {
 
   QString minutes(int seconds);
   QString saveLocation(const QString& dir);
+  QString fromHtmlData(const QByteArray& data);
 
   KLibrary* openLibrary(const QString& libName);
 

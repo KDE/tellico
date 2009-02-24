@@ -26,6 +26,7 @@
 #include <QRegExp>
 #include <QDir>
 #include <QCursor>
+#include <QTextCodec>
 
 namespace {
   static const int STRING_STORE_SIZE = 997; // too big, too small?
@@ -190,7 +191,7 @@ QString Tellico::shareString(const QString& str) {
 }
 
 KLibrary* Tellico::openLibrary(const QString& libName_) {
-  KLibrary* library = new KLibrary(QFile::encodeName(libName_));
+  KLibrary* library = new KLibrary(libName_);
   if(!library->load()) {
     myWarning() << "Could not load library'" << libName_ << "'";
     myWarning() << "ERROR:" << library->errorString();
@@ -203,11 +204,16 @@ KLibrary* Tellico::openLibrary(const QString& libName_) {
 QString Tellico::minutes(int seconds) {
   int min = seconds / 60;
   seconds = seconds % 60;
-  return QString::number(min) + ':' + QString::number(seconds).rightJustified(2, '0');
+  return QString::number(min) + QLatin1Char(':') + QString::number(seconds).rightJustified(2, QLatin1Char('0'));
 }
 
 QString Tellico::saveLocation(const QString& dir_) {
   return KGlobal::dirs()->saveLocation("appdata", dir_, true);
+}
+
+QString Tellico::fromHtmlData(const QByteArray& data_) {
+  QTextCodec* codec = QTextCodec::codecForHtml(data_);
+  return codec->toUnicode(data_);
 }
 
 Tellico::GUI::CursorSaver::CursorSaver(const QCursor& cursor_) : m_restored(false) {
