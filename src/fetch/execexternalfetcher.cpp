@@ -135,12 +135,12 @@ void ExecExternalFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
   // AND the "%1" wasn't used in the settings
   QString value = value_;
   if(key_ == ISBN) {
-    value.remove('-'); // remove hyphens from isbn values
+    value.remove(QLatin1Char('-')); // remove hyphens from isbn values
     // shouldn't hurt and might keep from confusing stupid search sources
   }
   QRegExp rx1(QLatin1String("['\"].*\\1"));
   if(!rx1.exactMatch(value)) {
-    value.prepend('"').append('"');
+    value = QLatin1Char('"') + value + QLatin1Char('"');
   }
   QString args = m_args[key_];
   QRegExp rx2(QLatin1String("['\"]%1\\1"));
@@ -194,9 +194,9 @@ void ExecExternalFetcher::slotData() {
 
 void ExecExternalFetcher::slotError() {
   GUI::CursorSaver cs(Qt::ArrowCursor);
-  QString msg = m_process->readAllStandardError();
+  QString msg = QString::fromLocal8Bit(m_process->readAllStandardError());
   msg.prepend(source() + QLatin1String(": "));
-  if(msg.endsWith(QChar('\n'))) {
+  if(msg.endsWith(QChar::fromLatin1('\n'))) {
     msg.truncate(msg.length()-1);
   }
   myDebug() << "ExecExternalFetcher::slotError() - " << msg << endl;
@@ -208,13 +208,13 @@ void ExecExternalFetcher::slotProcessExited() {
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
     myDebug() << "ExecExternalFetcher::slotProcessExited() - "<< source() << ": process did not exit successfully" << endl;
     if(!m_errors.isEmpty()) {
-      message(m_errors.join(QChar('\n')), MessageHandler::Error);
+      message(m_errors.join(QChar::fromLatin1('\n')), MessageHandler::Error);
     }
     stop();
     return;
   }
   if(!m_errors.isEmpty()) {
-    message(m_errors.join(QChar('\n')), MessageHandler::Warning);
+    message(m_errors.join(QChar::fromLatin1('\n')), MessageHandler::Warning);
   }
 
   if(m_data.isEmpty()) {
@@ -256,30 +256,30 @@ void ExecExternalFetcher::slotProcessExited() {
       case Data::Collection::Book:
       case Data::Collection::Bibtex:
         desc = entry->field(QLatin1String("author"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("publisher"));
         if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-          desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+          desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
         } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-          desc += QChar('/') + entry->field(QLatin1String("pub_year"));
+          desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
         }
         break;
 
       case Data::Collection::Video:
         desc = entry->field(QLatin1String("studio"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("director"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("medium"));
         break;
 
       case Data::Collection::Album:
         desc = entry->field(QLatin1String("artist"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("label"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"));
         break;
 
@@ -289,15 +289,15 @@ void ExecExternalFetcher::slotProcessExited() {
 
       case Data::Collection::ComicBook:
         desc = entry->field(QLatin1String("publisher"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("pub_year"));
         break;
 
      case Data::Collection::BoardGame:
        desc = entry->field(QLatin1String("designer"))
-              + QChar('/')
+              + QLatin1Char('/')
               + entry->field(QLatin1String("publisher"))
-              + QChar('/')
+              + QLatin1Char('/')
               + entry->field(QLatin1String("year"));
        break;
 

@@ -185,9 +185,9 @@ void ArxivFetcher::slotComplete(KJob*) {
       break;
     }
     QString desc = entry->field(QLatin1String("author"))
-                 + QChar('/') + entry->field(QLatin1String("publisher"));
+                 + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
     if(!entry->field(QLatin1String("year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QLatin1String("year"));
+      desc += QLatin1Char('/') + entry->field(QLatin1String("year"));
     }
 
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
@@ -258,7 +258,7 @@ KUrl ArxivFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value
   u.addQueryItem(QLatin1String("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
 
   // quotes should be used if spaces are present, just use all the time
-  QString quotedValue = '"' + value_ + '"';
+  QString quotedValue = QLatin1Char('"') + value_ + QLatin1Char('"');
   switch(key_) {
     case Title:
       u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("ti:%1").arg(quotedValue));

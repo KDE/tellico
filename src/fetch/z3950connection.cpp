@@ -131,7 +131,7 @@ void Z3950Connection::run() {
     myDebug() << "Z3950Connection::run() - query error: " << m_pqn << endl;
     ZOOM_query_destroy(query);
     QString s = i18n("Query error!");
-    s += ' ' + m_pqn;
+    s += QLatin1Char(' ') + m_pqn;
     done(s, MessageHandler::Error);
     return;
   }

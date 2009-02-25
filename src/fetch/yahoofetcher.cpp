@@ -111,7 +111,7 @@ void YahooFetcher::doSearch() {
     case Raw:
 //      u.removeQueryItem(QLatin1String("type"));
 //      u.addQueryItem(QLatin1String("type"), QLatin1String("phrase"));
-      u.setQuery(u.query() + '&' + m_value);
+      u.setQuery(u.query() + QLatin1Char('&') + m_value);
       break;
 
     default:
@@ -211,9 +211,9 @@ void YahooFetcher::slotComplete(KJob*) {
       break;
     }
     QString desc = entry->field(QLatin1String("artist"))
-                 + QChar('/')
+                 + QLatin1Char('/')
                  + entry->field(QLatin1String("label"))
-                 + QChar('/')
+                 + QLatin1Char('/')
                  + entry->field(QLatin1String("year"));
 
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
@@ -370,7 +370,7 @@ void YahooFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   QString artist = entry_->field(QLatin1String("artist"));
   if(!artist.isEmpty()) {
     if(!value.isEmpty()) {
-      value += '&';
+      value += QLatin1Char('&');
     }
     value += QLatin1String("artist=") + artist;
   }

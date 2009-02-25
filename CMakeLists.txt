@@ -58,7 +58,7 @@ CHECK_SYMBOL_EXISTS(strlwr "string.h" HAVE_STRLWR)
 CHECK_SYMBOL_EXISTS(strupr "string.h" HAVE_STRUPR)
 
 IF( CMAKE_SYSTEM_NAME MATCHES Linux )
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -pedantic -Wextra -fno-check-new" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new" )
 ENDIF( CMAKE_SYSTEM_NAME MATCHES Linux )
 
 ADD_DEFINITIONS( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} )

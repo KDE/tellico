@@ -119,7 +119,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "AnimeNfoFetcher::slotComplete() - no data" << endl;
     stop();
@@ -129,7 +129,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  QString s = Tellico::decodeHTML(QString(data));
+  QString s = Tellico::decodeHTML(data);
 
   QRegExp infoRx(QLatin1String("<td\\s+[^>]*class\\s*=\\s*[\"']anime_info[\"'][^>]*>(.*)</td>"), Qt::CaseInsensitive);
   infoRx.setMinimal(true);

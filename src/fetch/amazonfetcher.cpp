@@ -236,9 +236,9 @@ void AmazonFetcher::doSearch() {
         u.addQueryItem(QLatin1String("Operation"), QLatin1String("ItemLookup"));
 
         QString s = m_value; // not encValue!!!
-        s.remove('-');
+        s.remove(QLatin1Char('-'));
         // ISBN only get digits or 'X', and multiple values are connected with "; "
-        QStringList isbns = s.split("; ");
+        QStringList isbns = s.split(QLatin1String("; "));
         // Amazon isbn13 search is still very flaky, so if possible, we're going to convert
         // all of them to isbn10. If we run into a 979 isbn13, then we're forced to do an
         // isbn13 search
@@ -246,7 +246,7 @@ void AmazonFetcher::doSearch() {
         for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ) {
           if(m_value.startsWith(QLatin1String("979"))) {
             if(m_site == JP) { // never works for JP
-              kWarning() << "AmazonFetcher:doSearch() - ISBN-13 searching not implemented for Japan";
+              myWarning() << "AmazonFetcher:doSearch() - ISBN-13 searching not implemented for Japan";
               isbns.erase(it); // automatically skips to next
               continue;
             }
@@ -257,10 +257,10 @@ void AmazonFetcher::doSearch() {
         }
         // if we want isbn10, then convert all
         if(!isbn13) {
-          for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ++it) {
+          for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ) {
             if((*it).length() > 12) {
               (*it) = ISBNValidator::isbn10(*it);
-              (*it).remove('-');
+              (*it).remove(QLatin1Char('-'));
             }
           }
           // the default search is by ASIN, which prohibits SearchIndex
@@ -288,10 +288,10 @@ void AmazonFetcher::doSearch() {
           u.addQueryItem(QLatin1String("IdType"), QLatin1String("EAN"));
         }
         QString s = m_value; // not encValue!!!
-        s.remove('-');
+        s.remove(QLatin1Char('-'));
         // limit to first 10
         s.replace(QLatin1String("; "), QLatin1String(","));
-        s = s.section(',', 0, 9);
+        s = s.section(QLatin1Char(','), 0, 9);
         u.addQueryItem(QLatin1String("ItemId"), s);
       }
       break;
@@ -302,8 +302,8 @@ void AmazonFetcher::doSearch() {
 
     case Raw:
       {
-        QString key = value.section('=', 0, 0).trimmed();
-        QString str = value.section('=', 1).trimmed();
+        QString key = value.section(QLatin1Char('='), 0, 0).trimmed();
+        QString str = value.section(QLatin1Char('='), 1).trimmed();
         u.addQueryItem(key, str);
       }
       break;
@@ -488,41 +488,41 @@ void AmazonFetcher::slotComplete(KJob*) {
       case Data::Collection::ComicBook:
       case Data::Collection::Bibtex:
         desc = entry->field(QLatin1String("author"))
-               + QChar('/') + entry->field(QLatin1String("publisher"));
+               + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
         if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-          desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+          desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
         } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-          desc += QChar('/') + entry->field(QLatin1String("pub_year"));
+          desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
         }
         break;
 
       case Data::Collection::Video:
         desc = entry->field(QLatin1String("studio"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("director"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("medium"));
         break;
 
       case Data::Collection::Album:
         desc = entry->field(QLatin1String("artist"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("label"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"));
         break;
 
       case Data::Collection::Game:
         desc = entry->field(QLatin1String("platform"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"));
         break;
 
       case Data::Collection::BoardGame:
         desc = entry->field(QLatin1String("publisher"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"));
         break;
 
@@ -569,8 +569,8 @@ void AmazonFetcher::slotComplete(KJob*) {
     ++m_page;
     m_countOffset = 0;
     doSearch();
-  } else if(m_value.count(';') > 9) {
-    search(m_key, m_value.section(';', 10));
+  } else if(m_value.count(QLatin1Char(';')) > 9) {
+    search(m_key, m_value.section(QLatin1Char(';'), 10));
   } else {
     m_countOffset = m_entries.count() % AMAZON_RETURNS_PER_REQUEST;
     if(m_countOffset == 0) {
@@ -606,13 +606,13 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
         StringSet words;
         for(QStringList::Iterator it = oldWords.begin(); it != oldWords.end(); ++it) {
           // the amazon2tellico stylesheet separates keywords with '/'
-          QStringList nodes = (*it).split('/');
+          QStringList nodes = (*it).split(QLatin1Char('/'));
           for(QStringList::Iterator it2 = nodes.begin(); it2 != nodes.end(); ++it2) {
             if(*it2 == QLatin1String("General") ||
                *it2 == QLatin1String("Subjects") ||
                *it2 == QLatin1String("Par prix") || // french stuff
                *it2 == QLatin1String("Divers") || // french stuff
-               (*it2).startsWith(QChar('(')) ||
+               (*it2).startsWith(QLatin1Char('(')) ||
                (*it2).startsWith(QLatin1String("Authors"))) {
               continue;
             }
@@ -637,7 +637,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
           }
 
           // the amazon2tellico stylesheet separates words with '/'
-          QStringList nodes = (*it).split('/');
+          QStringList nodes = (*it).split(QLatin1Char('/'));
           for(QStringList::Iterator it2 = nodes.begin(); it2 != nodes.end(); ++it2) {
             if(*it2 != QLatin1String("Genres")) {
               continue;
@@ -671,7 +671,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
           }
 
           // the amazon2tellico stylesheet separates words with '/'
-          QStringList nodes = (*it).split('/');
+          QStringList nodes = (*it).split(QLatin1Char('/'));
           bool isStyle = false;
           for(QStringList::Iterator it2 = nodes.begin(); it2 != nodes.end(); ++it2) {
             if(!isStyle) {

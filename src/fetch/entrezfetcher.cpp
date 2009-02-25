@@ -119,7 +119,7 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
 
     case DOI:
     case Raw:
-      u.setQuery(u.query() + '&' + value_);
+      u.setQuery(u.query() + QLatin1Char('&') + value_);
       break;
 
     default:
@@ -295,7 +295,7 @@ void EntrezFetcher::summaryResults() {
         break; // done now
       }
     }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), title, pubdate + '/' + authors, QString());
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), title, pubdate + QLatin1Char('/') + authors, QString());
     m_matches.insert(r->uid, id);
     emit signalResultFound(r);
   }

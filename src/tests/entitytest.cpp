@@ -19,8 +19,8 @@
 QTEST_KDEMAIN_CORE( EntityTest )
 
 void EntityTest::testEntities() {
-  QCOMPARE(Tellico::decodeHTML("robby"), QLatin1String("robby"));
-  QCOMPARE(Tellico::decodeHTML("&fake;"), QLatin1String("&fake;"));
-  QCOMPARE(Tellico::decodeHTML("&#48;"), QLatin1String("0"));
-  QCOMPARE(Tellico::decodeHTML("robby&#48;robby"), QLatin1String("robby0robby"));
+  QCOMPARE(Tellico::decodeHTML(QByteArray("robby")), QLatin1String("robby"));
+  QCOMPARE(Tellico::decodeHTML(QByteArray("&fake;")), QLatin1String("&fake;"));
+  QCOMPARE(Tellico::decodeHTML(QByteArray("&#48;")), QLatin1String("0"));
+  QCOMPARE(Tellico::decodeHTML(QByteArray("robby&#48;robby")), QLatin1String("robby0robby"));
 }

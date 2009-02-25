@@ -120,7 +120,7 @@ protected:
    *
    * @param msg A string containing a warning or error.
    */
-  void setStatusMessage(const QString& msg) { if(!msg.isEmpty()) m_statusMsg += msg + QChar(' '); }
+  void setStatusMessage(const QString& msg) { if(!msg.isEmpty()) m_statusMsg += msg + QLatin1Char(' '); }
 
   static const uint s_stepSize;
 

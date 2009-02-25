@@ -144,9 +144,9 @@ void CitebaseFetcher::slotComplete(KJob*) {
       break;
     }
     QString desc = entry->field(QLatin1String("author"))
-                 + QChar('/') + entry->field(QLatin1String("publisher"));
+                 + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
     if(!entry->field(QLatin1String("year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QLatin1String("year"));
+      desc += QLatin1Char('/') + entry->field(QLatin1String("year"));
     }
 
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));

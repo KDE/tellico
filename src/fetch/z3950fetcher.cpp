@@ -157,7 +157,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       break;
     case Person:
 //      m_pqn = QLatin1String("@or ");
-//      m_pqn += QLatin1String("@attr 1=1 \"") + m_value + '"';
+//      m_pqn += QLatin1String("@attr 1=1 \"") + m_value + QLatin1Char('"');
       m_pqn = QLatin1String(" @attr 1=1003 ") + svalue;
       break;
     case ISBN:
@@ -425,9 +425,9 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     QString desc = entry->field(QLatin1String("author")) + '/'
                    + entry->field(QLatin1String("publisher"));
     if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+      desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
     } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-      desc += QChar('/') + entry->field(QLatin1String("pub_year"));
+      desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
     }
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     m_entries.insert(r->uid, entry);

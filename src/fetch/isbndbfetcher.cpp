@@ -121,7 +121,7 @@ void ISBNdbFetcher::doSearch() {
       u.addQueryItem(QLatin1String("index1"), QLatin1String("isbn"));
       {
         // only grab first value
-        QString v = m_value.section(QChar(';'), 0);
+        QString v = m_value.section(QLatin1Char(';'), 0);
         v.remove('-');
         u.addQueryItem(QLatin1String("value1"), v);
       }
@@ -224,11 +224,11 @@ void ISBNdbFetcher::slotComplete(KJob*) {
       break;
     }
     QString desc = entry->field(QLatin1String("author"))
-                 + QChar('/') + entry->field(QLatin1String("publisher"));
+                 + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
     if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-      desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+      desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
     } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-      desc += QChar('/') + entry->field(QLatin1String("pub_year"));
+      desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
     }
 
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));

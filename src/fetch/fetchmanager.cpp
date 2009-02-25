@@ -80,7 +80,7 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   m_keyMap.insert(ArxivID,    i18n("arXiv ID"));
   m_keyMap.insert(PubmedID,   i18n("Pubmed ID"));
   // to keep from having a new i18n string, just remove octothorpe
-  m_keyMap.insert(LCCN,       i18n("LCCN#").remove('#'));
+  m_keyMap.insert(LCCN,       i18n("LCCN#").remove(QLatin1Char('#')));
   m_keyMap.insert(Raw,        i18n("Raw Query"));
 //  m_keyMap.insert(FetchLast,  QString());
 }
@@ -675,14 +675,15 @@ QString Manager::favIcon(const char* url_) {
 }
 
 QString Manager::favIcon(const KUrl& url_) {
-  QDBusInterface kded("org.kde.kded", "/modules/favicons",
-                      "org.kde.FaviconsModule");
-  QDBusReply<QString> iconName = kded.call("iconForURL", url_.url());
+  QDBusInterface kded(QLatin1String("org.kde.kded"),
+                      QLatin1String("/modules/favicons"),
+                      QLatin1String("org.kde.FaviconsModule"));
+  QDBusReply<QString> iconName = kded.call(QLatin1String("iconForURL"), url_.url());
   if(iconName.isValid() && !iconName.value().isEmpty()) {
     return iconName;
   } else {
     // go ahead and try to download it for later
-    kded.call("downloadHostIcon", url_.url());
+    kded.call(QLatin1String("downloadHostIcon"), url_.url());
   }
   return KMimeType::iconNameForUrl(url_);
 }

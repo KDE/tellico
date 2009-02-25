@@ -149,7 +149,7 @@ void IBSFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  QString s = Tellico::decodeHTML(QString(data));
+  QString s = Tellico::decodeHTML(data);
   // really specific regexp
   //QString pat = QLatin1String("http://www.internetbookshop.it/code/");
   QString pat = QLatin1String("http://www.ibs.it/code/");
@@ -217,7 +217,7 @@ void IBSFetcher::slotCompleteISBN(KJob* job_) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  QString str = Tellico::decodeHTML(QString(data));
+  QString str = Tellico::decodeHTML(data);
   if(str.indexOf(QLatin1String("Libro non presente"), 0, Qt::CaseInsensitive) > -1) {
     stop();
     return;
@@ -225,7 +225,7 @@ void IBSFetcher::slotCompleteISBN(KJob* job_) {
   Data::EntryPtr entry = parseEntry(str);
   if(entry) {
     QString desc = entry->field(QLatin1String("author"))
-                 + '/' + entry->field(QLatin1String("publisher"));
+                 + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     emit signalResultFound(r);
     m_matches.insert(r->uid, static_cast<KIO::TransferJob*>(job_)->url().url());

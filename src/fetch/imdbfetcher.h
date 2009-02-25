@@ -112,7 +112,7 @@ private:
   void parseMultipleNameResults();
   Data::EntryPtr parseEntry(const QString& str);
 
-  QByteArray m_data;
+  QString m_text;
   QMap<int, Data::EntryPtr> m_entries;
   QMap<int, KUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;

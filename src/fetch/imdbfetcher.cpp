@@ -161,7 +161,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   // not utf-8. KDE4 not supported?
   m_url.addQueryItem(QLatin1String("q"), value_);
 
-//  myDebug() << "url =" << m_url;
+  myDebug() << "url =" << m_url;
 #endif
 
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
@@ -228,8 +228,8 @@ void IMDBFetcher::slotComplete(KJob*) {
     return;
   }
 
-  QByteArray m_data = m_job->data();
-  if(m_data.isEmpty()) {
+  m_text = Tellico::fromHtmlData(m_job->data());
+  if(m_text.isEmpty()) {
     stop();
     return;
   }
@@ -255,10 +255,10 @@ void IMDBFetcher::slotComplete(KJob*) {
 
 void IMDBFetcher::parseSingleTitleResult() {
 //  myDebug() << "";
-  s_titleRx->indexIn(Tellico::decodeHTML(QString(m_data)));
+  s_titleRx->indexIn(Tellico::decodeHTML(m_text));
   // split title at parenthesis
   const QString cap1 = s_titleRx->cap(1);
-  int pPos = cap1.indexOf('(');
+  int pPos = cap1.indexOf(QLatin1Char('('));
   // FIXME: maybe remove parentheses here?
   SearchResult* r = new SearchResult(Fetcher::Ptr(this),
                                      pPos == -1 ? cap1 : cap1.left(pPos),
@@ -272,11 +272,12 @@ void IMDBFetcher::parseSingleTitleResult() {
 }
 
 void IMDBFetcher::parseMultipleTitleResults() {
-//  myDebug() << "";
-  QString output = Tellico::decodeHTML(QString(m_data));
+  DEBUG_LINE;
+  QString output = Tellico::decodeHTML(m_text);
+  myDebug() << "output length" << output.length();
 
   // IMDb can return three title lists, popular, exact, and partial
-  // the popular titles are in the first table, after the "Popular Results" text
+  // the popular titles are in the first table
   int pos_popular = output.indexOf(QLatin1String("Popular Titles"),  0,                    Qt::CaseInsensitive);
   int pos_exact   = output.indexOf(QLatin1String("Exact Matches"),   qMax(pos_popular, 0), Qt::CaseInsensitive);
   int pos_partial = output.indexOf(QLatin1String("Partial Matches"), qMax(pos_exact, 0),   Qt::CaseInsensitive);
@@ -289,6 +290,7 @@ void IMDBFetcher::parseMultipleTitleResults() {
     end_exact = output.length();
   }
 
+  myDebug() << "pos_popular" << pos_popular;
   // if found popular matches
   if(pos_popular > -1) {
     m_popularTitles = output.mid(pos_popular, end_popular-pos_popular);
@@ -327,7 +329,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     m_countOffset = 0;
     return;
   }
-  myDebug() << m_currentTitleBlock;
+  myDebug() << str_;
 
   QRegExp akaRx(QLatin1String("aka (.*)(</li>|</td>|<br)"), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
@@ -341,10 +343,10 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     const QString cap1 = s_anchorTitleRx->cap(1); // the anchor url
     const QString cap2 = s_anchorTitleRx->cap(2).trimmed(); // the anchor text
     start += s_anchorTitleRx->matchedLength();
-    int pPos = cap2.indexOf('('); // if it has parentheses, use that for description
+    int pPos = cap2.indexOf(QLatin1Char('(')); // if it has parentheses, use that for description
     QString desc;
     if(pPos > -1) {
-      int pPos2 = cap2.indexOf(')', pPos+1);
+      int pPos2 = cap2.indexOf(QLatin1Char(')'), pPos+1);
       if(pPos2 > -1) {
         desc = cap2.mid(pPos+1, pPos2-pPos-1);
       }
@@ -355,11 +357,11 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
         end = str_.length();
       }
       QString text = str_.mid(start, end-start);
-      pPos = text.indexOf('(');
+      pPos = text.indexOf(QLatin1Char('('));
       if(pPos > -1) {
         int pNewLine = text.indexOf(QLatin1String("<br"));
         if(pNewLine == -1 || pPos < pNewLine) {
-          int pPos2 = text.indexOf(')', pPos);
+          int pPos2 = text.indexOf(QLatin1Char(')'), pPos);
           desc = text.mid(pPos+1, pPos2-pPos-1);
         }
         pPos = -1;
@@ -373,7 +375,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     int akaPos = akaRx.indexIn(str_, start+1);
     if(akaPos > -1 && akaPos < end) {
       // limit to 50 chars
-      desc += QChar(' ') + akaRx.cap(1).trimmed().remove(*s_tagRx);
+      desc += QLatin1Char(' ') + akaRx.cap(1).trimmed().remove(*s_tagRx);
       if(desc.length() > 50) {
         desc = desc.left(50) + QLatin1String("...");
       }
@@ -410,7 +412,7 @@ void IMDBFetcher::parseSingleNameResult() {
 
   m_currentTitleBlock = SinglePerson;
 
-  QString output = Tellico::decodeHTML(QString(m_data));
+  QString output = Tellico::decodeHTML(m_text);
 
   int pos = s_anchorTitleRx->indexIn(output);
   if(pos == -1) {
@@ -429,7 +431,7 @@ void IMDBFetcher::parseSingleNameResult() {
     len = s_anchorTitleRx->cap(0).length();
     // split title at parenthesis
     const QString cap2 = s_anchorTitleRx->cap(2).trimmed();
-    int pPos = cap2.indexOf('(');
+    int pPos = cap2.indexOf(QLatin1Char('('));
     if(pPos > -1) {
       desc = cap2.mid(pPos);
     } else {
@@ -442,19 +444,17 @@ void IMDBFetcher::parseSingleNameResult() {
       if(tvRegExp.indexIn(tmp) > -1) {
         isEpisode = true;
       }
-      pPos = tmp.indexOf('(');
+      pPos = tmp.indexOf(QLatin1Char('('));
       if(pPos > -1) {
         int pNewLine = tmp.indexOf(QLatin1String("<br"));
         if(pNewLine == -1 || pPos < pNewLine) {
-          int pEnd = tmp.indexOf(')', pPos+1);
+          int pEnd = tmp.indexOf(QLatin1Char(')'), pPos+1);
           desc = tmp.mid(pPos+1, pEnd-pPos-1).remove(*s_tagRx);
         }
         // but need to indicate it wasn't found initially
         pPos = -1;
       }
     }
-
-    ;
 
     if(count < m_countOffset) {
       ++count;
@@ -493,7 +493,7 @@ void IMDBFetcher::parseMultipleNameResults() {
 //  myDebug() << "";
 
   // the exact results are in the first table after the "exact results" text
-  QString output = Tellico::decodeHTML(QString(m_data));
+  QString output = Tellico::decodeHTML(m_text);
   int pos = output.indexOf(QLatin1String("Popular Results"), 0, Qt::CaseInsensitive);
   if(pos == -1) {
     pos = output.indexOf(QLatin1String("Exact Matches"), 0, Qt::CaseInsensitive);
@@ -520,14 +520,14 @@ void IMDBFetcher::parseMultipleNameResults() {
     pos = s_anchorNameRx->indexIn(output, pos+13);
     while(pos > -1 && pos < end && m_matches.size() < m_limit) {
       KUrl u(m_url, s_anchorNameRx->cap(1));
-      s = s_anchorNameRx->cap(2).trimmed() + ' ';
+      s = s_anchorNameRx->cap(2).trimmed() + QLatin1Char(' ');
       // if more than one exact, add parentheses
       if(nameMap.contains(s) && nameMap[s] > 0) {
         // fix the first one that didn't have a number
         if(nameMap[s] == 1) {
           KUrl u2 = map[s];
           map.remove(s);
-          map.insert(s + "(1) ", u2);
+          map.insert(s + QLatin1String("(1) "), u2);
         }
         nameMap.insert(s, nameMap[s] + 1);
         // check for duplicate names
@@ -550,7 +550,7 @@ void IMDBFetcher::parseMultipleNameResults() {
       if(nameMap[s] == 1) {
         KUrl u2 = map[s];
         map.remove(s);
-        map.insert(s + " (1)", u2);
+        map.insert(s + QLatin1String(" (1)"), u2);
       }
       nameMap.insert(s, nameMap[s] + 1);
       // check for duplicate names
@@ -581,7 +581,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   listWidget->setWrapping(true);
   const QStringList values = map.keys();
   foreach(const QString& value, values) {
-    if(value.endsWith(QChar(' '))) {
+    if(value.endsWith(QLatin1Char(' '))) {
       GUI::ListWidgetItem* box = new GUI::ListWidgetItem(value, listWidget);
       box->setColored(true);
       listWidget->insertItem(0, box);
@@ -613,7 +613,7 @@ void IMDBFetcher::parseMultipleNameResults() {
 
   // redirected is true since that's how I tell if an exact match has been found
   m_redirected = true;
-  m_data.clear();
+  m_text.clear();
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(Kernel::self()->widget());
   connect(m_job, SIGNAL(result(KJob*)),
@@ -642,7 +642,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
   // if the url matches the current one, no need to redownload it
   if(url == m_url) {
 //    myDebug() << "matches previous URL, no downloading needed.";
-    results = Tellico::decodeHTML(QString(m_data));
+    results = Tellico::decodeHTML(m_text);
   } else {
     // now it's sychronous
 #ifdef IMDB_TEST
@@ -706,10 +706,10 @@ void IMDBFetcher::doTitle(const QString& str_, Tellico::Data::EntryPtr entry_) {
   if(s_titleRx->indexIn(str_) > -1) {
     const QString cap1 = s_titleRx->cap(1);
     // titles always have parentheses
-    int pPos = cap1.indexOf('(');
+    int pPos = cap1.indexOf(QLatin1Char('('));
     QString title = cap1.left(pPos).trimmed();
     // remove first and last quotes is there
-    if(title.startsWith(QChar('"')) && title.endsWith(QChar('"'))) {
+    if(title.startsWith(QLatin1Char('"')) && title.endsWith(QLatin1Char('"'))) {
       title = title.mid(1, title.length()-2);
     }
     entry_->setField(QLatin1String("title"), title);
@@ -781,7 +781,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
       s = s.trimmed();
       // the first value ends up being or starting with the colon after "Also know as"
       // I'm too lazy to figure out a better regexp
-      if(s.startsWith(QChar(':'))) {
+      if(s.startsWith(QLatin1Char(':'))) {
         s = s.mid(1);
       }
       if(!s.isEmpty()) {
@@ -1044,7 +1044,7 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
     } else if(cap1.indexOf(colorInfo) > -1) {
       // change "black and white" to "black & white"
       entry_->setField(QLatin1String("color"),
-                       s_anchorRx->cap(2).replace(QLatin1String("and"), QChar('&')).trimmed());
+                       s_anchorRx->cap(2).replace(QLatin1String("and"), QLatin1String("&")).trimmed());
     } else if(cap1.indexOf(cert) > -1) {
       certs += s_anchorRx->cap(2).trimmed();
     } else if(cap1.indexOf(soundMix) > -1) {
@@ -1066,12 +1066,12 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
     // first try to set default certification
     const QStringList& certsAllowed = entry_->collection()->fieldByName(QLatin1String("certification"))->allowed();
     foreach(const QString& cert, certs) {
-      QString country = cert.section(':', 0, 0);
-      QString lcert = cert.section(':', 1, 1);
+      QString country = cert.section(QLatin1Char(':'), 0, 0);
+      QString lcert = cert.section(QLatin1Char(':'), 1, 1);
       if(lcert == QLatin1String("Unrated")) {
-        lcert = QChar('U');
+        lcert = QLatin1Char('U');
       }
-      lcert += QLatin1String(" (") + country + ')';
+      lcert += QLatin1String(" (") + country + QLatin1Char(')');
       if(certsAllowed.indexOf(cert) > -1) {
         entry_->setField(QLatin1String("certification"), lcert);
         break;
@@ -1107,7 +1107,7 @@ void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     m_key = Fetch::Title;
     m_value = t;
     m_started = true;
-    m_data.clear();
+    m_text.clear();
     m_matches.clear();
     m_url = link;
     m_redirected = true; // m_redirected is used as a flag later to tell if we get a single result

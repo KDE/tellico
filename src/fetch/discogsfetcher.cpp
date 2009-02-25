@@ -218,7 +218,7 @@ void DiscogsFetcher::slotComplete(KJob* ) {
       break;
     }
     QString desc = entry->field(QLatin1String("artist"))
-                 + QChar('/')
+                 + QLatin1Char('/')
                  + entry->field(QLatin1String("label"));
 
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, QString());

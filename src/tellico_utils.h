@@ -31,6 +31,7 @@ namespace Tellico {
   /**
    * Decode HTML entities. Only numeric entities are handled currently.
    */
+  QString decodeHTML(const QByteArray& data);
   QString decodeHTML(QString text);
   /**
    * Return a random, and almost certainly unique UID.

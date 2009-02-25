@@ -91,7 +91,7 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
   if(m_path.isEmpty()) {
     m_path = config_.readEntry("Database");
   }
-  if(!m_path.startsWith(QChar('/'))) {
+  if(!m_path.startsWith(QLatin1Char('/'))) {
     m_path.prepend('/');
   }
   m_format = config_.readEntry("Format", "mods");
@@ -122,7 +122,7 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   u.addQueryItem(QLatin1String("recordSchema"), m_format);
 
   const int type = Kernel::self()->collectionType();
-  QString str = QChar('"') + value_ + QChar('"');
+  QString str = QLatin1Char('"') + value_ + QLatin1Char('"');
   switch(key_) {
     case Title:
       u.addQueryItem(QLatin1String("query"), QLatin1String("dc.title=") + str);
@@ -237,7 +237,7 @@ void SRUFetcher::slotComplete(KJob*) {
       if(!d.isEmpty()) {
         QString d2 = nodeList2.item(j).toElement().text();
         if(!d2.isEmpty()) {
-          d += " (" + d2 + ')';
+          d += " (" + d2 + QLatin1Char(')');
         }
         myDebug() << "SRUFetcher::slotComplete() - " << d << endl;
         if(!msg.isEmpty()) msg += '\n';
@@ -294,28 +294,28 @@ void SRUFetcher::slotComplete(KJob*) {
     switch(coll->type()) {
       case Data::Collection::Book:
         desc = entry->field(QLatin1String("author"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("publisher"));
         if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-          desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+          desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
         } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-          desc += QChar('/') + entry->field(QLatin1String("pub_year"));
+          desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
         }
         break;
 
       case Data::Collection::Video:
         desc = entry->field(QLatin1String("studio"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("director"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"));
         break;
 
       case Data::Collection::Album:
         desc = entry->field(QLatin1String("artist"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("label"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"));
         break;
 

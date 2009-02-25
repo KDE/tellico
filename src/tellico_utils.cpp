@@ -32,6 +32,10 @@ namespace {
   static const int STRING_STORE_SIZE = 997; // too big, too small?
 }
 
+QString Tellico::decodeHTML(const QByteArray& data_) {
+  return decodeHTML(fromHtmlData(data_));
+}
+
 QString Tellico::decodeHTML(QString text) {
   QRegExp rx(QLatin1String("&(.+);"));
   rx.setMinimal(true);

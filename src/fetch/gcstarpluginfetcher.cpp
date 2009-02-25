@@ -310,30 +310,30 @@ void GCstarPluginFetcher::slotProcessExited() {
       case Data::Collection::Book:
       case Data::Collection::Bibtex:
         desc = entry->field(QLatin1String("author"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("publisher"));
         if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-          desc += QChar('/') + entry->field(QLatin1String("cr_year"));
+          desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
         } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-          desc += QChar('/') + entry->field(QLatin1String("pub_year"));
+          desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
         }
         break;
 
       case Data::Collection::Video:
         desc = entry->field(QLatin1String("studio"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("director"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("medium"));
         break;
 
       case Data::Collection::Album:
         desc = entry->field(QLatin1String("artist"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("label"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("year"));
         break;
 
@@ -343,15 +343,15 @@ void GCstarPluginFetcher::slotProcessExited() {
 
       case Data::Collection::ComicBook:
         desc = entry->field(QLatin1String("publisher"))
-               + QChar('/')
+               + QLatin1Char('/')
                + entry->field(QLatin1String("pub_year"));
         break;
 
      case Data::Collection::BoardGame:
        desc = entry->field(QLatin1String("designer"))
-              + QChar('/')
+              + QLatin1Char('/')
               + entry->field(QLatin1String("publisher"))
-              + QChar('/')
+              + QLatin1Char('/')
               + entry->field(QLatin1String("year"));
        break;
 
