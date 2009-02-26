@@ -1,221 +1,154 @@
-PROJECT(tellico)
+project(Tellico)
 
-#http://www.cmake.org/Wiki/CMake_Useful_Variables
+cmake_minimum_required(VERSION 2.6.2)
+
+# http://www.cmake.org/Wiki/CMake_Useful_Variables
 # automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR
 # to the include directories in every processed CMakeLists.txt
-SET( CMAKE_INCLUDE_CURRENT_DIR TRUE )
+set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+
 ############# Options #################
 
-OPTION( ENABLE_AMAZON "Enable Amazon.com searching" TRUE )
-OPTION( ENABLE_IMDB "Enable IMDb searching" TRUE )
-OPTION( ENABLE_CDTEXT "Enable cdtext" TRUE )
-OPTION( ENABLE_WEBCAM "Enable support for webcams" FALSE )
-OPTION( ENABLE_SAX "Enable SAX loading" TRUE )
+option(ENABLE_AMAZON "Enable Amazon.com searching" TRUE)
+option(ENABLE_IMDB "Enable IMDb searching" TRUE)
+option(ENABLE_CDTEXT "Enable cdtext" TRUE)
+option(ENABLE_WEBCAM "Enable support for webcams" FALSE)
+option(ENABLE_SAX "Enable SAX loading" TRUE)
 
-OPTION( ENABLE_POPPLER "Enable poppler support" TRUE )
-OPTION( ENABLE_EXEMPI "Enable exempi support" TRUE )
+option(ENABLE_POPPLER "Enable poppler support" TRUE)
+option(ENABLE_EXEMPI "Enable exempi support" TRUE)
 
-OPTION( ENABLE_LIBKCAL "Enable libkcal support" FALSE )
-OPTION( ENABLE_LIBKCDDB "Enable libkcddb support" TRUE )
+option(ENABLE_LIBKCAL "Enable libkcal support" FALSE)
+option(ENABLE_LIBKCDDB "Enable libkcddb support" TRUE)
 
-FIND_PACKAGE(PkgConfig REQUIRED)
-FIND_PACKAGE(Gettext REQUIRED)
+include(CheckTypeSize)
+check_type_size("unsigned char" SIZEOF_UNSIGNED_CHAR)
+check_type_size("unsigned short" SIZEOF_UNSIGNED_SHORT)
+check_type_size("unsigned long" SIZEOF_UNSIGNED_LONG)
+check_type_size("unsigned int" SIZEOF_UNSIGNED_INT)
+check_type_size("short" SIZEOF_SHORT)
+check_type_size("long" SIZEOF_LONG)
+check_type_size("int" SIZEOF_INT)
 
-FIND_PACKAGE(KDE4 REQUIRED)
-FIND_PACKAGE(QImageBlitz REQUIRED)
-FIND_PACKAGE(KdepimLibs REQUIRED)
+include(CheckSymbolExists)
+check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
+check_symbol_exists(strupr "string.h" HAVE_STRUPR)
 
-FIND_PACKAGE(KdeMultimedia)
+find_package(KDE4 4.2.0 REQUIRED)
+include(KDE4Defaults)
+include(MacroLibrary)
+include(MacroBoolTo01)
+include(MacroLogFeature)
 
-FIND_PACKAGE(LibXml2 REQUIRED)
-FIND_PACKAGE(LibXslt REQUIRED)
+macro_log_feature(KDE4_FOUND "kdelibs" "????" "http://www.kde.org" TRUE "4.2.0" "")
 
-INCLUDE(KDE4Defaults)
-INCLUDE(MacroLibrary)
-INCLUDE(CheckTypeSize)
+find_package(Gettext REQUIRED)
+macro_log_feature(GETTEXT_FOUND "gettext" "????" "http://www.gnu.org/software/gettext/" TRUE "" "")
 
-PKG_CHECK_MODULES(TAGLIB taglib)
-PKG_CHECK_MODULES(YAZ yaz yaz>=2.0)
+find_package(QImageBlitz REQUIRED)
+macro_log_feature(QIMAGEBLITZ_FOUND "libqimageblitz" "????" "http://www.kde.org" TRUE "" "")
 
-IF ( ENABLE_POPPLER )
-FIND_PACKAGE(PopplerQt4)
-ENDIF ( ENABLE_POPPLER )
+find_package(KdepimLibs REQUIRED)
+macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "????" "http://www.kde.org" TRUE "4.2.0" "")
 
-IF ( ENABLE_EXEMPI )
-PKG_CHECK_MODULES(EXEMPI exempi-2.0>=1.99.0)
-ENDIF ( ENABLE_EXEMPI )
+find_package(LibXml2 REQUIRED)
+macro_log_feature(LIBXML2_FOUND "libxml2" "????" "http://www.xmlsoft.org" TRUE "" "")
 
-CHECK_TYPE_SIZE("unsigned char" SIZEOF_UNSIGNED_CHAR)
-CHECK_TYPE_SIZE("unsigned short" SIZEOF_UNSIGNED_SHORT)
-CHECK_TYPE_SIZE("unsigned long" SIZEOF_UNSIGNED_LONG)
-CHECK_TYPE_SIZE("unsigned int" SIZEOF_UNSIGNED_INT)
-CHECK_TYPE_SIZE("short" SIZEOF_SHORT)
-CHECK_TYPE_SIZE("long" SIZEOF_LONG)
-CHECK_TYPE_SIZE("int" SIZEOF_INT)
+find_package(LibXslt REQUIRED)
+macro_log_feature(LIBXSLT_FOUND "libxslt" "????" "http://www.xmlsoft.org" TRUE "" "")
 
-INCLUDE( CheckSymbolExists )
-CHECK_SYMBOL_EXISTS(strlwr "string.h" HAVE_STRLWR)
-CHECK_SYMBOL_EXISTS(strupr "string.h" HAVE_STRUPR)
+find_package(Kcddb)
+macro_log_feature(KCDDB_FOUND "kcddb" "????" "http://multimedia.kde.org" FALSE "4.2.0" "")
 
-IF( CMAKE_SYSTEM_NAME MATCHES Linux )
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new" )
-ENDIF( CMAKE_SYSTEM_NAME MATCHES Linux )
+find_package(Taglib)
+macro_log_feature(TAGLIB_FOUND "taglib" "????" "http://www.freshmeat.net/projects/taglib" FALSE "" "")
 
-ADD_DEFINITIONS( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS} )
-#ADD_DEFINITIONS( -DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS )
-ADD_DEFINITIONS( -DQT_STRICT_ITERATORS -DQT_STL )
-REMOVE_DEFINITIONS( -DQT_NO_STL )
+find_package(Yaz 2.0)
+macro_log_feature(YAZ_FOUND "libyaz" "????" "http://www.indexdata.dk/yaz/" FALSE "2.0" "")
 
-ADD_DEFINITIONS( ${TAGLIB_CFLAGS} )
-ADD_DEFINITIONS( ${EXEMPI_CFLAGS} )
-ADD_DEFINITIONS( ${YAZ_CFLAGS} )
+if(ENABLE_POPPLER)
+find_package(PopplerQt4)
+macro_log_feature(POPPLER_QT4_FOUND "libpoppler" "????" "http://poppler.freedesktop.org/" FALSE "" "")
+endif(ENABLE_POPPLER)
 
-LINK_DIRECTORIES( ${KDE4_LIB_DIR} )
+if(ENABLE_EXEMPI)
+find_package(Exempi 2.0)
+macro_log_feature(LIBEXEMPI_FOUND "libexempi" "????" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
+endif(ENABLE_EXEMPI)
 
-INCLUDE_DIRECTORIES( ${KDE4_INCLUDES} ${QT_INCLUDES} )
-INCLUDE_DIRECTORIES( ${LIBXML2_INCLUDE_DIR} ${LIBXSLT_INCLUDE_DIR} )
+if(CMAKE_SYSTEM_NAME MATCHES Linux)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new")
+endif(CMAKE_SYSTEM_NAME MATCHES Linux)
 
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} )
-INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/src/core )
-INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/src/3rdparty )
+add_definitions(${QT_DEFINITIONS}
+                ${KDE4_DEFINITIONS}
+                ${POPPLER_QT4_DEFINITIONS}
+                ${LIBEXEMPI_DEFINITIONS}
+                ${TAGLIB_CFLAGS}
+                ${YAZ_CFLAGS})
+add_definitions(-DQT_STRICT_ITERATORS -DQT_STL)
+remove_definitions(-DQT_NO_STL)
 
-SET( TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico )
+include_directories(${KDE4_INCLUDES}
+                    ${QT_INCLUDES}
+                    ${LIBXML2_INCLUDE_DIR}
+                    ${LIBXSLT_INCLUDE_DIR}
+                    ${LIBEXEMPI_INCLUDE_DIR}
+                    ${POPPLER_QT4_INCLUDE_DIR}
+                    ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_SOURCE_DIR}/src/core
+                    ${CMAKE_SOURCE_DIR}/src/3rdparty)
+                    
+set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)
 
-ADD_SUBDIRECTORY( src )
-ADD_SUBDIRECTORY( po )
-ADD_SUBDIRECTORY( doc )
-ADD_SUBDIRECTORY( icons )
-ADD_SUBDIRECTORY( xslt )
+add_subdirectory(src)
+add_subdirectory(po)
+add_subdirectory(doc)
+add_subdirectory(icons)
+add_subdirectory(xslt)
 
-IF( NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin" )
-MESSAGE("WARNING: CDDB Lookup is not supported on your platform")
-ENDIF( NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin" )
+if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin")
+message("WARNING: CDDB Lookup is not supported on your platform")
+endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin")
 
 ########## Wrap tests results around the tests done within the source
-IF( TAGLIB_FOUND )
-SET( HAVE_TAGLIB TRUE )
-ENDIF( TAGLIB_FOUND )
 
-IF( POPPLER_QT4_FOUND )
-SET( HAVE_POPPLER TRUE )
-ADD_DEFINITIONS( ${POPPLER_QT4_DEFINITIONS} )
-INCLUDE_DIRECTORIES( ${POPPLER_QT4_INCLUDE_DIR} )
-ENDIF( POPPLER_QT4_FOUND )
+macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
+macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
+macro_bool_to_01(LIBEXEMPI_FOUND HAVE_EXEMPI)
+macro_bool_to_01(HAVE_KCAL ENABLE_LIBKCAL)
+macro_bool_to_01(YAZ_FOUND HAVE_YAZ)
+if(ENABLE_LIBKCAL)
+macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
+endif(ENABLE_LIBKCAL)
+if(ENABLE_LIBKCDDB)
+macro_bool_to_01(KCDDB_FOUND HAVE_KCDDB)
+endif(ENABLE_LIBKCDDB)
 
-IF( EXEMPI_FOUND )
-SET( HAVE_EXEMPI TRUE )
-ENDIF( EXEMPI_FOUND )
-
-IF( KDEPIMLIBS_FOUND )
-IF( ENABLE_LIBKCAL )
-SET( HAVE_KCAL TRUE )
-ENDIF( ENABLE_LIBKCAL )
-ENDIF( KDEPIMLIBS_FOUND )
-
-IF( KDEMULTIMEDIA_FOUND )
-IF( ENABLE_LIBKCDDB )
-SET( HAVE_KCDDB TRUE )
-ENDIF( ENABLE_LIBKCDDB )
-ENDIF( KDEMULTIMEDIA_FOUND )
-
-IF( YAZ_FOUND )
-SET( HAVE_YAZ TRUE )
-ENDIF( YAZ_FOUND )
-
-########### CPack stuff ###############
-SET(CPACK_PACKAGE_VERSION "1.9")
-SET(CPACK_SOURCE_PACKAGE_FILE_NAME "tellico-${CPACK_PACKAGE_VERSION}")
-
-SET(CPACK_GENERATOR "TGZ")
-SET(CPACK_SOURCE_GENERATOR "TGZ")
-
-SET(CPACK_SOURCE_IGNORE_FILES "/builds/;svn.motd;Makefile;/debian/;/\\\\.svn/;\\\\.swp$;\\\\.#;/#")
-
-INCLUDE(CPack)
-########################################
-
-CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 ########### install files ###############
 
-INSTALL(FILES tellico.dtd tellico.tips DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
-INSTALL(FILES tellico.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
-INSTALL(FILES tellico.xml DESTINATION  ${XDG_MIME_INSTALL_DIR} )
-INSTALL(FILES x-tellico.desktop DESTINATION ${MIME_INSTALL_DIR}/application )
+install(FILES tellico.dtd tellico.tips DESTINATION ${DATA_INSTALL_DIR}/tellico)
+install(FILES tellico.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES tellico.xml DESTINATION  ${XDG_MIME_INSTALL_DIR})
+install(FILES x-tellico.desktop DESTINATION ${MIME_INSTALL_DIR}/application)
 
+macro_display_feature_log()
 
+########### CPack stuff ###############
 
-#original Makefile.am contents follow:
+set(CPACK_PACKAGE_VERSION "1.9")
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "tellico-${CPACK_PACKAGE_VERSION}")
 
-#package-messages:
-#	$(MAKE) -f admin/Makefile.common package-messages
-#	$(MAKE) -C po merge
-#
-#messages:
-#	@ rm -f tips.cpp xslt.cpp z3950.cpp scripts.cpp
-#	@ touch $(podir)/tellico.pot;
-#	./preparetips tellico.tips > tips.cpp; \
-#	$(XGETTEXT)  --join-existing tips.cpp -o $(podir)/tellico.pot; \
-#	./prepare_i18n_xslt > xslt.cpp; \
-#	$(XGETTEXT)  --join-existing xslt.cpp -o $(podir)/tellico.pot; \
-#	./prepare_desktop src/fetch/z3950-servers.cfg > z3950.cpp; \
-#	$(XGETTEXT)  --join-existing z3950.cpp -o $(podir)/tellico.pot; \
-#	./prepare_desktop src/fetch/scripts/*.spec > scripts.cpp; \
-#	$(XGETTEXT)  --join-existing scripts.cpp -o $(podir)/tellico.pot;
-#	@ rm -f tips.cpp xslt.cpp z3950.cpp scripts.cpp
-#
-#
-#dist-hook:
-## am_edit needs to modify the Makefile.in files, so they must be writeable
-#	-find $(distdir) -exec chmod a+w {} \;
-#	cd $(distdir) && perl admin/am_edit -padmin
-#	cd $(distdir) && $(MAKE) -f admin/Makefile.common subdirs
-## don't include dist file inside the dist file
-##	cd $(srcdir) && rm -f $(distdir).tar.gz
-## remove any executable
-#	rm -rf $(distdir)/src/tellico
-#
-#PUBLIC_ID=-//Robby Stephenson/DTD Tellico V9.0//EN
-#SYSTEM_ID=http://www.periapsis.org/tellico/dtd/v9/tellico.dtd
-#
-#install-data-local:
-#	@if test x"@XML_CATALOG_FILE@" != x; then \
-#          echo @XMLCATALOG@ --noout --add "delegatePublic" \
-#               "$(PUBLIC_ID)" \
-#               "file://$(localdir)/tellico.dtd" "@XML_CATALOG_FILE@" ; \
-#          @XMLCATALOG@ --noout --add "delegatePublic" \
-#               "$(PUBLIC_ID)" \
-#               "file://$(localdir)/tellico.dtd" "@XML_CATALOG_FILE@" ; \
-#          echo @XMLCATALOG@ --noout --add "delegateSystem" \
-#               "$(SYSTEM_ID)" \
-#               "file://$(localdir)/tellico.dtd" "@XML_CATALOG_FILE@" ; \
-#          @XMLCATALOG@ --noout --add "delegateSystem" \
-#               "$(SYSTEM_ID)" \
-#               "file://$(localdir)/tellico.dtd" "@XML_CATALOG_FILE@" ; \
-#          echo @XMLCATALOG@ --noout --add "delegateURI" \
-#               "$(SYSTEM_ID)" \
-#               "file://$(localdir)/tellico.dtd" "@XML_CATALOG_FILE@" ; \
-#          @XMLCATALOG@ --noout --add "delegateURI" \
-#               "$(SYSTEM_ID)" \
-#               "file://$(localdir)/tellico.dtd" "@XML_CATALOG_FILE@" ; \
-#	fi
-#
-#uninstall-local:
-#	@if test x"@XML_CATALOG_FILE@" != x; then \
-#          echo @XMLCATALOG@ --noout --del \
-#               "$(PUBLIC_ID)" "@XML_CATALOG_FILE@" ; \
-#          @XMLCATALOG@ --noout --del \
-#               "$(PUBLIC_ID)" "@XML_CATALOG_FILE@" ; \
-#          echo @XMLCATALOG@ --noout --del \
-#               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
-#          @XMLCATALOG@ --noout --del \
-#               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
-#          echo @XMLCATALOG@ --noout --del \
-#               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
-#          @XMLCATALOG@ --noout --del \
-#               "$(SYSTEM_ID)" "@XML_CATALOG_FILE@" ; \
-#	fi
-#
-## probably a better way to do this
-#uninstall-hook:
-#	-if [ -d $(localdir) ]; then rmdir $(localdir); fi
+set(CPACK_GENERATOR "TGZ")
+set(CPACK_SOURCE_GENERATOR "TGZ")
+
+set(CPACK_SOURCE_IGNORE_FILES "/builds/;svn.motd;Makefile;/debian/;/\\\\.svn/;\\\\.swp$;\\\\.#;/#")
+
+include(CPack)
+
+########################################
