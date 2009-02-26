@@ -243,7 +243,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
   QString person, role;
   int oldPos = 0;
   for(int pos = castRx.indexIn(text_); pos > -1; pos = castRx.indexIn(text_, pos+1)) {
-    if(text_.at(pos) == ',' && nPar%2 == 0) {
+    if(text_.at(pos) == QLatin1Char(',') && nPar%2 == 0) {
       // we're done with this one
       person += text_.mid(oldPos, pos-oldPos).trimmed();
       QString all = person;
@@ -251,19 +251,19 @@ QStringList AMCImporter::parseCast(const QString& text_) {
         if(role.startsWith(QLatin1String("as "))) {
           role = role.mid(3);
         }
-        all += "::" + role;
+        all += QLatin1String("::") + role;
       }
       cast << all;
       person.clear();
       role.clear();
       oldPos = pos+1; // add one to go past comma
-    } else if(text_.at(pos) == '(') {
+    } else if(text_.at(pos) == QLatin1Char('(')) {
       if(nPar == 0) {
         person = text_.mid(oldPos, pos-oldPos).trimmed();
         oldPos = pos+1; // add one to go past parenthesis
       }
       ++nPar;
-    } else if(text_.at(pos) == ')') {
+    } else if(text_.at(pos) == QLatin1Char(')')) {
       --nPar;
       if(nPar == 0) {
         role = text_.mid(oldPos, pos-oldPos).trimmed();
@@ -280,7 +280,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
       if(role.startsWith(QLatin1String("as "))) {
         role = role.mid(3);
       }
-      all += "::" + role;
+      all += QLatin1String("::") + role;
     }
     cast << all;
   }

@@ -48,12 +48,12 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
   }
 
   KUrl libraryDir = url();
-  libraryDir.setPath(url().directory() + "Images/");
+  libraryDir.setPath(url().directory() + QLatin1String("Images/"));
   const QStringList imageDirs = QStringList()
-                              << QLatin1String("Large Covers/")
-                              << QLatin1String("Medium Covers/")
-                              << QLatin1String("Small Covers/")
-                              << QLatin1String("Plain Covers/");
+                             << QLatin1String("Large Covers/")
+                             << QLatin1String("Medium Covers/")
+                             << QLatin1String("Small Covers/")
+                             << QLatin1String("Plain Covers/");
   QString commField;
   switch(coll->type()) {
     case Data::Collection::Book:
@@ -63,7 +63,7 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
     case Data::Collection::Game:
       commField = QLatin1String("description"); break;
     default:
-      myWarning() << "bad collection type:" << coll->type() << endl;
+      myWarning() << "bad collection type:" << coll->type();
   }
 
   const QString uuidField = QLatin1String("uuid");

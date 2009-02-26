@@ -48,7 +48,7 @@ QString BibtexExporter::formatString() const {
 }
 
 QString BibtexExporter::fileFilter() const {
-  return i18n("*.bib|Bibtex Files (*.bib)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.bib|Bibtex Files (*.bib)") + QLatin1Char('\n') + i18n("*|All Files");
 }
 
 bool BibtexExporter::exec() {
@@ -127,7 +127,6 @@ bool BibtexExporter::exec() {
     }
   }
 
-
   StringSet usedKeys;
   Data::EntryList crossRefs;
   QString type, key, newKey, value;
@@ -158,7 +157,7 @@ bool BibtexExporter::exec() {
     char c = 'a';
     while(usedKeys.has(newKey)) {
       // duplicate found!
-      newKey = key + c;
+      newKey = key + QLatin1Char(c);
       ++c;
     }
     key = newKey;
@@ -176,7 +175,7 @@ bool BibtexExporter::exec() {
     char c = 'a';
     while(usedKeys.has(newKey)) {
       // duplicate found!
-      newKey = key + c;
+      newKey = key + QLatin1Char(c);
       ++c;
     }
     key = newKey;
@@ -217,7 +216,7 @@ QWidget* BibtexExporter::widget(QWidget* parent_) {
   QHBoxLayout* hlay = new QHBoxLayout(gbox);
   vlay->addLayout(hlay);
 
-  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:") + ' ', gbox); // add a space for asthetics
+  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:") + QLatin1Char(' '), gbox); // add a space for asthetics
   m_cbBibtexStyle = new KComboBox(gbox);
   m_cbBibtexStyle->addItem(i18n("Braces"));
   m_cbBibtexStyle->addItem(i18n("Quotes"));
@@ -280,7 +279,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   const QString bibtex = QLatin1String("bibtex");
   const QString bibtexSep = QLatin1String("bibtex-separator");
 
-  text_ += '@' + type_ + '{' + key_;
+  text_ += QLatin1Char('@') + type_ + QLatin1Char('{') + key_;
 
   QString value;
   bool format = options() & Export::ExportFormatted;
@@ -308,15 +307,15 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
     } else if(fIt->property(bibtex) == QLatin1String("pages")) {
       QRegExp rx(QLatin1String("(\\d)-(\\d)"));
       for(int pos = rx.indexIn(value); pos > -1; pos = rx.indexIn(value, pos+2)) {
-        value.replace(pos, 3, rx.cap(1)+"--"+rx.cap(2));
+        value.replace(pos, 3, rx.cap(1) + QLatin1String("--") + rx.cap(2));
       }
     }
 
     if(m_packageURL && fIt->type() == Data::Field::URL) {
       bool b = BibtexHandler::s_quoteStyle == BibtexHandler::BRACES;
-      value = (b ? QChar('{') : QChar('"'))
-            + QLatin1String("\\url{") + BibtexHandler::exportText(value, macros) + QChar('}')
-            + (b ? QChar('}') : QChar('"'));
+      value = (b ? QLatin1Char('{') : QLatin1Char('"'))
+            + QLatin1String("\\url{") + BibtexHandler::exportText(value, macros) + QLatin1Char('}')
+            + (b ? QLatin1Char('}') : QLatin1Char('"'));
     } else if(fIt->type() != Data::Field::Number) {
       // numbers aren't escaped, nor will they have macros
       // if m_expandMacros is true, then macros is empty, so this is ok even then

@@ -33,7 +33,7 @@ ParaFieldWidget::ParaFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
 
 QString ParaFieldWidget::text() const {
   QString text = m_textEdit->toPlainText();
-  text.replace('\n', QLatin1String("<br/>"));
+  text.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
   return text;
 }
 
@@ -43,7 +43,7 @@ void ParaFieldWidget::setText(const QString& text_) {
 
   QRegExp rx(QLatin1String("<br/?>"), Qt::CaseInsensitive);
   QString s = text_;
-  s.replace(rx, QChar('\n'));
+  s.replace(rx, QLatin1String("\n"));
   m_textEdit->setText(s);
 
   m_textEdit->blockSignals(false);

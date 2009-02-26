@@ -105,7 +105,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   QString errorMsg;
   int errorLine, errorColumn;
   if(!dom.setContent(data_, true, &errorMsg, &errorLine, &errorColumn)) {
-    QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
+    QString str = i18n(errorLoad, url().fileName()) + QLatin1Char('\n');
     str += i18n("There is an XML parsing error in line %1, column %2.", errorLine, errorColumn);
     str += QLatin1String("\n");
     str += i18n("The error message from Qt is:");
@@ -144,7 +144,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   if(syntaxVersion > XML::syntaxVersion) {
     if(!url().isEmpty()) {
-      QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
+      QString str = i18n(errorLoad, url().fileName()) + QLatin1Char('\n');
       str += i18n("It is from a future version of Tellico.");
       myDebug() << str << endl;
       setStatusMessage(str);
@@ -384,8 +384,8 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
   if(elem_.hasAttribute(QLatin1String("category"))) {
     // at one point, the categories had keyboard accels
     QString cat = elem_.attribute(QLatin1String("category"));
-    if(syntaxVersion_ < 9 && cat.indexOf('&') > -1) {
-      cat.remove('&');
+    if(syntaxVersion_ < 9 && cat.indexOf(QLatin1Char('&')) > -1) {
+      cat.remove(QLatin1Char('&'));
     }
     if(isI18n) {
       cat = i18n(cat.toUtf8());
@@ -430,7 +430,7 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
     // all track fields in music collections prior to version 9 get converted to three columns
     if(syntaxVersion_ < 9) {
       if(m_coll->type() == Data::Collection::Album && field->name() == QLatin1String("track")) {
-        field->setProperty(QLatin1String("columns"), QChar('3'));
+        field->setProperty(QLatin1String("columns"), QLatin1String("3"));
         field->setProperty(QLatin1String("column1"), i18n("Title"));
         field->setProperty(QLatin1String("column2"), i18n("Artist"));
         field->setProperty(QLatin1String("column3"), i18n("Length"));
@@ -446,7 +446,7 @@ void TellicoImporter::readField(uint syntaxVersion_, const QDomElement& elem_) {
   // Table2 is deprecated
   if(field->type() == Data::Field::Table2) {
     field->setType(Data::Field::Table);
-    field->setProperty(QLatin1String("columns"), QChar('2'));
+    field->setProperty(QLatin1String("columns"), QLatin1String("2"));
   }
   // for syntax 8, rating fields got their own type
   if(syntaxVersion_ < 8) {
@@ -506,12 +506,12 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
           if(!yNode.isNull()) {
             value += yNode.toElement().text();
           }
-          value += '-';
+          value += QLatin1Char('-');
           QDomNode mNode = elem.elementsByTagNameNS(m_namespace, QLatin1String("month")).item(0);
           if(!mNode.isNull()) {
             value += mNode.toElement().text();
           }
-          value += '-';
+          value += QLatin1Char('-');
           QDomNode dNode = elem.elementsByTagNameNS(m_namespace, QLatin1String("day")).item(0);
           if(!dNode.isNull()) {
             value += dNode.toElement().text();
@@ -582,7 +582,7 @@ void TellicoImporter::readEntry(uint syntaxVersion_, const QDomElement& entryEle
         entry->setField(name, value);
       }
     } else { // if no field by the tag name, then it has children, iterate through them
-      // the field name has the final 's', so remove it
+      // the field name has the final QLatin1Char('s'), so remove it
       name.truncate(name.length() - 1);
       f = m_coll->fieldByName(name);
 
@@ -784,7 +784,7 @@ void TellicoImporter::loadZipData() {
 
   const KArchiveDirectory* dir = m_zip->directory();
   if(!dir) {
-    QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
+    QString str = i18n(errorLoad, url().fileName()) + QLatin1Char('\n');
     str += i18n("The file is empty.");
     setStatusMessage(str);
     m_format = Error;
@@ -802,7 +802,7 @@ void TellicoImporter::loadZipData() {
     entry = dir->entry(QLatin1String("bookcase.xml"));
   }
   if(!entry || !entry->isFile()) {
-    QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
+    QString str = i18n(errorLoad, url().fileName()) + QLatin1Char('\n');
     str += i18n("The file contains no collection data.");
     setStatusMessage(str);
     m_format = Error;
@@ -863,7 +863,7 @@ void TellicoImporter::loadZipData() {
     const KArchiveEntry* file = m_imgDir->entry(*it);
     if(file && file->isFile()) {
       ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                             (*it).section('.', -1).toUpper(), (*it));
+                             (*it).section(QLatin1Char('.'), -1).toUpper(), (*it));
       m_images.remove(*it);
     }
     if(j%stepSize == 0) {
@@ -887,7 +887,7 @@ bool TellicoImporter::loadImage(const QString& id_) {
     return false;
   }
   QString newID = ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                                         id_.section('.', -1).toUpper(), id_);
+                                         id_.section(QLatin1Char('.'), -1).toUpper(), id_);
   m_images.remove(id_);
   if(m_images.isEmpty()) {
     // give it some time
@@ -936,7 +936,7 @@ bool TellicoImporter::loadAllImages(const KUrl& url_) {
     const KArchiveEntry* file = static_cast<const KArchiveDirectory*>(imgDirEntry)->entry(*it);
     if(file && file->isFile()) {
       ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                             (*it).section('.', -1).toUpper(), (*it));
+                             (*it).section(QLatin1Char('.'), -1).toUpper(), (*it));
     }
   }
   zip.close();

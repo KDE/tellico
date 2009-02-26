@@ -89,9 +89,9 @@ void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
     case ISBN:
       {
         QString s = value_;
-        s.remove('-');
+        s.remove(QLatin1Char('-'));
         // limit to first isbn
-        s = s.section(';', 0, 0);
+        s = s.section(QLatin1Char(';'), 0, 0);
         u.setFileName(QLatin1String("serdsp.asp"));
         u.addQueryItem(QLatin1String("isbn"), s);
       }
@@ -171,7 +171,7 @@ void IBSFetcher::slotComplete(KJob*) {
       KUrl url = KUrl(QLatin1String("/home/robby/ibs2.html"));
 #else
       // the url probable contains &amp; so be careful
-      KUrl url = u.replace(QLatin1String("&amp;"), QChar('&'));
+      KUrl url = u.replace(QLatin1String("&amp;"), QLatin1String("&"));
 #endif
       m_matches.insert(r->uid, url);
 
@@ -193,7 +193,7 @@ void IBSFetcher::slotComplete(KJob*) {
   if(!u.isEmpty()) {
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, d, QString());
     emit signalResultFound(r);
-    m_matches.insert(r->uid, u.replace(QLatin1String("&amp;"), QChar('&')));
+    m_matches.insert(r->uid, u.replace(QLatin1String("&amp;"), QLatin1String("&")));
   }
 #endif
 
@@ -361,17 +361,17 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   QStringList names = entry->fields(QLatin1String("author"), false);
   if(!names.isEmpty() && !names[0].isEmpty()) {
     for(QStringList::Iterator it = names.begin(); it != names.end(); ++it) {
-      if((*it).indexOf(',') > -1) {
+      if((*it).indexOf(QLatin1Char(',')) > -1) {
         continue; // skip if it has a comma
       }
-      QStringList words = (*it).split(' ');
+      QStringList words = (*it).split(QLatin1Char(' '));
       if(words.isEmpty()) {
         continue;
       }
       // put first word in back
       words.append(words[0]);
       words.pop_front();
-      *it = words.join(QChar(' '));
+      *it = words.join(QLatin1String(" "));
     }
     entry->setField(QLatin1String("author"), names.join(QLatin1String("; ")));
   }

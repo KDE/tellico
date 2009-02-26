@@ -55,7 +55,7 @@ QString TellicoXMLExporter::formatString() const {
 }
 
 QString TellicoXMLExporter::fileFilter() const {
-  return i18n("*.xml|XML Files (*.xml)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n') + i18n("*|All Files");
 }
 
 bool TellicoXMLExporter::exec() {
@@ -93,7 +93,7 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   } else {
     encodeStr += QLatin1String(QTextCodec::codecForLocale()->name());
   }
-  encodeStr += QChar('"');
+  encodeStr += QLatin1Char('"');
 
   // createDocument creates a root node, insert the processing instruction before it
   dom.insertBefore(dom.createProcessingInstruction(QLatin1String("xml"), encodeStr), root);
@@ -257,8 +257,8 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     // if multiple versions are allowed, split them into separate elements
     if(fIt->flags() & Data::Field::AllowMultiple) {
       // parent element if field contains multiple values, child of entryElem
-      // who cares about grammar, just add an 's' to the name
-      QDomElement parElem = dom_.createElement(fieldName + 's');
+      // who cares about grammar, just add an QLatin1Char('s') to the name
+      QDomElement parElem = dom_.createElement(fieldName + QLatin1Char('s'));
       entryElem.appendChild(parElem);
 
       // the space after the semi-colon is enforced when the field is set for the entry
@@ -293,7 +293,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       // Date fields get special treatment
       if(fIt->type() == Data::Field::Date) {
         fieldElem.setAttribute(QLatin1String("calendar"), KGlobal::locale()->calendar()->calendarType());
-        QStringList s = fieldValue.split('-', QString::KeepEmptyParts);
+        QStringList s = fieldValue.split(QLatin1Char('-'), QString::KeepEmptyParts);
         if(s.count() > 0 && !s[0].isEmpty()) {
           QDomElement e = dom_.createElement(QLatin1String("year"));
           fieldElem.appendChild(e);
@@ -344,7 +344,7 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
       myDebug() << "TellicoXMLExporter::exportImageXML() - null image - " << id_ << endl;
       return;
     }
-    imgElem.setAttribute(QLatin1String("format"), QString(img.format()));
+    imgElem.setAttribute(QLatin1String("format"), QLatin1String(img.format()));
     imgElem.setAttribute(QLatin1String("id"),     QString(img.id()));
     imgElem.setAttribute(QLatin1String("width"),  img.width());
     imgElem.setAttribute(QLatin1String("height"), img.height());
@@ -358,7 +358,7 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     if(info.isNull()) {
       return;
     }
-    imgElem.setAttribute(QLatin1String("format"), QString(info.format));
+    imgElem.setAttribute(QLatin1String("format"), QLatin1String(info.format));
     imgElem.setAttribute(QLatin1String("id"),     QString(info.id));
     // only load the images to read the size if necessary
     const bool loadImageIfNecessary = options() & Export::ExportImageSize;

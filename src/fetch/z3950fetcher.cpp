@@ -148,7 +148,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
   QString svalue = m_value;
   QRegExp rx1(QLatin1String("['\"].*\\1"));
   if(!rx1.exactMatch(svalue)) {
-    svalue.prepend('"').append('"');
+    svalue = QLatin1Char('"') + svalue + QLatin1Char('"');
   }
 
   switch(key_) {
@@ -164,13 +164,13 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       {
         m_pqn.clear();
         QString s = m_value;
-        s.remove('-');
+        s.remove(QLatin1Char('-'));
         QStringList isbnList = s.split(QLatin1String("; "));
         // also going to search for isbn10 values
         for(QStringList::Iterator it = isbnList.begin(); it != isbnList.end(); ++it) {
           if((*it).startsWith(QLatin1String("978"))) {
             QString isbn10 = ISBNValidator::isbn10(*it);
-            isbn10.remove('-');
+            isbn10.remove(QLatin1Char('-'));
             isbnList.insert(it, isbn10);
           }
         }
@@ -190,7 +190,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       {
         m_pqn.clear();
         QString s = m_value;
-        s.remove('-');
+        s.remove(QLatin1Char('-'));
         QStringList lccnList = s.split(QLatin1String("; "));
         while(!lccnList.isEmpty()) {
           m_pqn += QLatin1String(" @or @attr 1=9 ") + lccnList.front();
@@ -422,7 +422,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    QString desc = entry->field(QLatin1String("author")) + '/'
+    QString desc = entry->field(QLatin1String("author")) + QLatin1Char('/')
                    + entry->field(QLatin1String("publisher"));
     if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
       desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));

@@ -67,7 +67,7 @@ QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
     if(authorField->flags() & Data::Field::AllowMultiple) {
       // grab first author only;
       QString tmp = entry_->field(authorField->name());
-      author = tmp.section(';', 0, 0);
+      author = tmp.section(QLatin1Char(';'), 0, 0);
     } else {
       author = entry_->field(authorField->name());
     }
@@ -90,7 +90,7 @@ QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
       year = entry_->field(QLatin1String("cr_year"));
     }
   }
-  year = year.section(';', 0, 0);
+  year = year.section(QLatin1Char(';'), 0, 0);
 
   return bibtexKey(author, title, year);
 }
@@ -99,14 +99,14 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
   QString key;
   // if no comma, take the last word
   if(!author_.isEmpty()) {
-    if(author_.indexOf(',') == -1) {
-      key += author_.section(' ', -1).toLower() + '-';
+    if(author_.indexOf(QLatin1Char(',')) == -1) {
+      key += author_.section(QLatin1Char(' '), -1).toLower() + QLatin1Char('-');
     } else {
       // if there is a comma, take the string up to the first comma
-      key += author_.section(',', 0, 0).toLower() + '-';
+      key += author_.section(QLatin1Char(','), 0, 0).toLower() + QLatin1Char('-');
     }
   }
-  QStringList words = title_.split(' ', QString::SkipEmptyParts);
+  QStringList words = title_.split(QLatin1Char(' '), QString::SkipEmptyParts);
   foreach(const QString& word, words) {
     key += word.left(1).toLower();
   }
@@ -175,12 +175,12 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
   QChar lquote, rquote;
   switch(s_quoteStyle) {
     case BRACES:
-      lquote = '{';
-      rquote = '}';
+      lquote = QLatin1Char('{');
+      rquote = QLatin1Char('}');
       break;
     case QUOTES:
-      lquote =  '"';
-      rquote =  '"';
+      lquote =  QLatin1Char('"');
+      rquote =  QLatin1Char('"');
       break;
   }
 
@@ -194,15 +194,15 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
     return lquote + addBraces(text) + rquote;
   }
 
-// Now, split the text by the character '#', and examine each token to see if it is in
+// Now, split the text by the character QLatin1Char('#'), and examine each token to see if it is in
 // the macro list. If it is not, then add left-quote and right-quote around it. If it is, don't
-// change it. Then, in case '#' occurs in a non-macro string, replace any occurrences of '}#{' with '#'
+// change it. Then, in case QLatin1Char('#') occurs in a non-macro string, replace any occurrences of '}#{' with '#'
 
 // list of new tokens
   QStringList list;
 
 // first, split the text
-  const QStringList tokens = text.split('#', QString::KeepEmptyParts);
+  const QStringList tokens = text.split(QLatin1Char('#'), QString::KeepEmptyParts);
   foreach(const QString& token, tokens) {
     // check to see if token is a macro
     if(macros_.indexOf(token.trimmed()) == -1) {
@@ -213,7 +213,7 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
     }
   }
 
-  const QChar octo = '#';
+  const QChar octo = QLatin1Char('#');
   text = list.join(octo);
   text.replace(QString(rquote)+octo+lquote, octo);
 
@@ -264,11 +264,11 @@ bool BibtexHandler::setFieldValue(Tellico::Data::EntryPtr entry_, const QString&
   // special case keywords, replace commas with semi-colons so they get separated
   QString value = value_;
   if(field->property(QLatin1String("bibtex")).startsWith(QLatin1String("keyword"))) {
-    value.replace(',', ';');
+    value.replace(QLatin1Char(','), QLatin1Char(';'));
     // special case refbase bibtex export, with multiple keywords fields
     QString oValue = entry_->field(field);
     if(!oValue.isEmpty()) {
-      value = oValue + "; " + value;
+      value = oValue + QLatin1String("; ") + value;
     }
   }
   return entry_->setField(field, value);
@@ -281,7 +281,7 @@ QString& BibtexHandler::cleanText(QString& text_) {
   rx.setMinimal(true);
   text_.remove(rx);
   text_.remove(QRegExp(QLatin1String("[{}]")));
-  text_.replace('~', ' ');
+  text_.replace(QLatin1Char('~'), QLatin1Char(' '));
   return text_;
 }
 

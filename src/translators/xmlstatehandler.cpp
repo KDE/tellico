@@ -266,8 +266,8 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   if(idx > -1) {
     // at one point, the categories had keyboard accels
     QString cat = atts_.value(idx);
-    if(d->syntaxVersion < 9 && cat.indexOf('&') > -1) {
-      cat.remove('&');
+    if(d->syntaxVersion < 9 && cat.indexOf(QLatin1Char('&')) > -1) {
+      cat.remove(QLatin1Char('&'));
     }
     if(isI18n) {
       cat = i18n(cat.toUtf8());
@@ -312,7 +312,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   // Table2 is deprecated
   if(type == Data::Field::Table2) {
     field->setType(Data::Field::Table);
-    field->setProperty(QLatin1String("columns"), QChar('2'));
+    field->setProperty(QLatin1String("columns"), QLatin1String("2"));
   }
 
   // for syntax 8, rating fields got their own type
@@ -338,7 +338,7 @@ bool FieldPropertyHandler::start(const QString&, const QString&, const QString&,
   // all track fields in music collections prior to version 9 get converted to three columns
   if(d->syntaxVersion < 9) {
     if(d->collType == Data::Collection::Album && field->name() == QLatin1String("track")) {
-      field->setProperty(QLatin1String("columns"), QChar('3'));
+      field->setProperty(QLatin1String("columns"), QLatin1String("3"));
       field->setProperty(QLatin1String("column1"), i18n("Title"));
       field->setProperty(QLatin1String("column2"), i18n("Artist"));
       field->setProperty(QLatin1String("column3"), i18n("Length"));
@@ -538,7 +538,7 @@ bool DateValueHandler::end(const QString&, const QString& localName_, const QStr
   if(d->textBuffer.isEmpty()) {
     d->textBuffer = QLatin1String("--");
   }
-  QStringList tokens = d->textBuffer.split('-', QString::KeepEmptyParts);
+  QStringList tokens = d->textBuffer.split(QLatin1Char('-'), QString::KeepEmptyParts);
   Q_ASSERT(tokens.size() == 3);
   if(localName_ == QLatin1String("year")) {
     tokens[0] = d->text;
@@ -547,7 +547,7 @@ bool DateValueHandler::end(const QString&, const QString& localName_, const QStr
   } else if(localName_ == QLatin1String("day")) {
     tokens[2] = d->text;
   }
-  d->textBuffer = tokens.join(QChar('-'));
+  d->textBuffer = tokens.join(QLatin1String("-"));
   return true;
 }
 

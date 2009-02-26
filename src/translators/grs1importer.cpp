@@ -104,7 +104,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     }
     empty = false;
     if(field == QLatin1String("title")) {
-      val = val.section('/', 0, 0).trimmed(); // only take portion of title before slash
+      val = val.section(QLatin1Char('/'), 0, 0).trimmed(); // only take portion of title before slash
     } else if(field == QLatin1String("author")) {
       val.remove(dateRx);
     } else if(field == QLatin1String("publisher")) {

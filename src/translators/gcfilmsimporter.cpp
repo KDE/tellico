@@ -103,7 +103,7 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
     if(convertUTF8) {
       line = QString::fromUtf8(line.toLocal8Bit());
     }
-    QStringList values = line.split('|');
+    QStringList values = line.split(QLatin1Char('|'));
     if(values.empty()) {
       continue;
     }
@@ -175,11 +175,11 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
 
     CHECKLIMITS(18);
 
-    QStringList s = values[18].split(',');
+    QStringList s = values[18].split(QLatin1Char(','));
     QStringList tracks, langs;
     foreach(const QString& value, s) {
-      langs << value.section(';', 0, 0);
-      tracks << value.section(';', 1, 1);
+      langs << value.section(QLatin1Char(';'), 0, 0);
+      tracks << value.section(QLatin1Char(';'), 1, 1);
     }
     entry->setField(QLatin1String("language"),    langs.join(QLatin1String("; ")));
     entry->setField(QLatin1String("audio-track"), tracks.join(QLatin1String("; ")));
@@ -199,9 +199,9 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
       // values[21] is loan date
       if(!values[21].isEmpty()) {
         tmp = values[21]; // assume date is dd/mm/yyyy
-        int d = Tellico::toUInt(tmp.section('/', 0, 0), &ok);
-        int m = Tellico::toUInt(tmp.section('/', 1, 1), &ok);
-        int y = Tellico::toUInt(tmp.section('/', 2, 2), &ok);
+        int d = Tellico::toUInt(tmp.section(QLatin1Char('/'), 0, 0), &ok);
+        int m = Tellico::toUInt(tmp.section(QLatin1Char('/'), 1, 1), &ok);
+        int y = Tellico::toUInt(tmp.section(QLatin1Char('/'), 2, 2), &ok);
         b->addLoan(Data::LoanPtr(new Data::Loan(entry, QDate(y, m, d), QDate(), QString())));
         entry->setField(QLatin1String("loaned"), QLatin1String("true"));
       }

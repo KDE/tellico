@@ -42,7 +42,7 @@ SpinBox::SpinBox(int min, int max, QWidget *parent) : QSpinBox(parent)
   setAlignment(Qt::AlignRight);
   // I want to be able to omit the day
   // an empty string just removes the special value, so set white space
-  setSpecialValueText(QChar(' '));
+  setSpecialValueText(QLatin1String(" "));
 }
 
 DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
@@ -145,13 +145,13 @@ QString DateWidget::text() const {
     s += QString::number(m_yearSpin->value());
     empty = false;
   }
-  s += '-';
+  s += QLatin1Char('-');
   // first item is empty
   if(m_monthCombo->currentIndex() > 0) {
     s += QString::number(m_monthCombo->currentIndex());
     empty = false;
   }
-  s += '-';
+  s += QLatin1Char('-');
   if(m_daySpin->value() > m_daySpin->minimum()) {
     s += QString::number(m_daySpin->value());
     empty = false;
@@ -180,7 +180,7 @@ void DateWidget::setDate(const QString& date_) {
   m_monthCombo->blockSignals(true);
   m_yearSpin->blockSignals(true);
 
-  QStringList s = date_.split('-');
+  QStringList s = date_.split(QLatin1Char('-'));
   bool ok = true;
   int y = s.count() > 0 ? s[0].toInt(&ok) : m_yearSpin->minimum();
   if(!ok) {
@@ -232,7 +232,7 @@ void DateWidget::clear() {
   m_picker->blockSignals(true);
 
   m_daySpin->setValue(m_daySpin->minimum());
-  m_monthCombo->setCurrentItem(0);
+  m_monthCombo->setCurrentIndex(0);
   m_yearSpin->setValue(m_yearSpin->minimum());
   m_picker->setDate(QDate::currentDate());
 

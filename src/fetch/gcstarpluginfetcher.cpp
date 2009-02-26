@@ -52,7 +52,7 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
       args << QLatin1String("--version");
       // wait 5 seconds at most, just a sanity thing, never want to block completely
       if(proc.execute(gcstar, args, 5000) > -1) {
-        QString output = proc.readAllStandardOutput();
+        QString output = QString::fromLocal8Bit(proc.readAllStandardOutput());
         if(!output.isEmpty()) {
           // always going to be x.y[.z] ?
           QRegExp versionRx(QLatin1String("(\\d+)\\.(\\d+)(?:\\.(\\d+))?"));
@@ -237,7 +237,7 @@ void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
        << QLatin1String("--export")     << QLatin1String("Tellico")
        << QLatin1String("--website")    << m_plugin
        << QLatin1String("--download")   << KShell::quoteArg(value_);
-  myLog() << "GCstarPluginFetcher::search() - " << args.join(QChar(' ')) << endl;
+  myLog() << "GCstarPluginFetcher::search() - " << args.join(QLatin1String(" ")) << endl;
   m_process->setProgram(gcstar, args);
   if(!m_process->execute()) {
     myDebug() << "GCstarPluginFetcher::startSearch() - process failed to start" << endl;
@@ -265,7 +265,7 @@ void GCstarPluginFetcher::slotData() {
 }
 
 void GCstarPluginFetcher::slotError() {
-  QString msg = m_process->readAllStandardError();
+  QString msg = QString::fromLocal8Bit(m_process->readAllStandardError());
   msg.prepend(source() + QLatin1String(": "));
   myDebug() << "GCstarPluginFetcher::slotError() - " << msg << endl;
   m_errors << msg;
@@ -276,13 +276,13 @@ void GCstarPluginFetcher::slotProcessExited() {
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
     myDebug() << "GCstarPluginFetcher::slotProcessExited() - "<< source() << ": process did not exit successfully" << endl;
     if(!m_errors.isEmpty()) {
-      message(m_errors.join(QChar('\n')), MessageHandler::Error);
+      message(m_errors.join(QLatin1String("\n")), MessageHandler::Error);
     }
     stop();
     return;
   }
   if(!m_errors.isEmpty()) {
-    message(m_errors.join(QChar('\n')), MessageHandler::Warning);
+    message(m_errors.join(QLatin1String("\n")), MessageHandler::Warning);
   }
 
   if(m_data.isEmpty()) {

@@ -43,7 +43,7 @@ QString PilotDBExporter::formatString() const {
 }
 
 QString PilotDBExporter::fileFilter() const {
-  return i18n("*.pdb|Pilot Database Files (*.pdb)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.pdb|Pilot Database Files (*.pdb)") + QLatin1Char('\n') + i18n("*|All Files");
 }
 
 bool PilotDBExporter::exec() {
@@ -87,7 +87,7 @@ bool PilotDBExporter::exec() {
       case Data::Field::Choice:
         // the charSeparator is actually defined in DB.h
         db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::LIST,
-                       codec->fromUnicode(fIt->allowed().join(QChar('/'))).data());
+                       codec->fromUnicode(fIt->allowed().join(QLatin1String("/"))).data());
         outputFields.append(fIt);
         break;
 
@@ -163,7 +163,7 @@ bool PilotDBExporter::exec() {
       value = entryIt->field(fIt->name(), format);
 
       if(fIt->type() == Data::Field::Date) {
-        QStringList s = value.split('-', QString::KeepEmptyParts);
+        QStringList s = value.split(QLatin1Char('-'), QString::KeepEmptyParts);
         bool ok = true;
         int y = s.count() > 0 ? s[0].toInt(&ok) : QDate::currentDate().year();
         if(!ok) {
@@ -180,7 +180,7 @@ bool PilotDBExporter::exec() {
         QDate date(y, m, d);
         value = date.toString(QLatin1String("yyyy/MM/dd"));
       } else if(fIt->type() == Data::Field::Para) {
-        value.replace(br, QChar('\n'));
+        value.replace(br, QLatin1String("\n"));
         value.remove(tags);
       }
       // the number of fields in the record must match the number of fields in the database

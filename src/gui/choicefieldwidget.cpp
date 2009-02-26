@@ -52,7 +52,7 @@ void ChoiceFieldWidget::setText(const QString& text_) {
 }
 
 void ChoiceFieldWidget::clear() {
-  m_comboBox->setCurrentItem(0); // first item is empty
+  m_comboBox->setCurrentIndex(0); // first item is empty
   editMultiple(false);
 }
 

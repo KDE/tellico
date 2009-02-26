@@ -32,7 +32,7 @@ using Tellico::Export::CSVExporter;
 
 CSVExporter::CSVExporter() : Tellico::Export::Exporter(),
     m_includeTitles(true),
-    m_delimiter(QChar(',')),
+    m_delimiter(QLatin1String(",")),
     m_widget(0) {
 }
 
@@ -41,20 +41,20 @@ QString CSVExporter::formatString() const {
 }
 
 QString CSVExporter::fileFilter() const {
-  return i18n("*.csv|CSV Files (*.csv)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.csv|CSV Files (*.csv)") + QLatin1Char('\n') + i18n("*|All Files");
 }
 
 QString& CSVExporter::escapeText(QString& text_) {
   bool quotes = false;
-  if(text_.indexOf('"') != -1) {
+  if(text_.indexOf(QLatin1Char('"')) != -1) {
     quotes = true;
     // quotation marks will be escaped by using a double pair
-    text_.replace('"', QLatin1String("\"\""));
+    text_.replace(QLatin1Char('"'), QLatin1String("\"\""));
   }
   // if the text contains quotes or the delimiter, it needs to be surrounded by quotes
   if(quotes || text_.indexOf(m_delimiter)!= -1) {
-    text_.prepend('"');
-    text_.append('"');
+    text_.prepend(QLatin1Char('"'));
+    text_.append(QLatin1Char('"'));
   }
   return text_;
 }
@@ -75,7 +75,7 @@ bool CSVExporter::exec() {
     }
     // remove last delimiter
     text.truncate(text.length() - m_delimiter.length());
-    text += '\n';
+    text += QLatin1Char('\n');
   }
 
   bool format = options() & Export::ExportFormatted;
@@ -89,7 +89,7 @@ bool CSVExporter::exec() {
     }
     // remove last delimiter
     text.truncate(text.length() - m_delimiter.length());
-    text += '\n';
+    text += QLatin1Char('\n');
   }
 
   return FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);
@@ -145,11 +145,11 @@ QWidget* CSVExporter::widget(QWidget* parent_) {
   QObject::connect(m_radioOther, SIGNAL(toggled(bool)),
                    m_editOther, SLOT(setEnabled(bool)));
 
-  if(m_delimiter == QChar(',')) {
+  if(m_delimiter == QLatin1String(",")) {
     m_radioComma->setChecked(true);
-  } else if(m_delimiter == QChar(';')) {
+  } else if(m_delimiter == QLatin1String(";")) {
     m_radioSemicolon->setChecked(true);
-  } else if(m_delimiter == QChar('\t')) {
+  } else if(m_delimiter == QLatin1String("\t")) {
     m_radioTab->setChecked(true);
   } else if(!m_delimiter.isEmpty()) {
     m_radioOther->setChecked(true);
@@ -174,11 +174,11 @@ void CSVExporter::readOptions(KSharedConfigPtr config_) {
 void CSVExporter::saveOptions(KSharedConfigPtr config_) {
   m_includeTitles = m_checkIncludeTitles->isChecked();
   if(m_radioComma->isChecked()) {
-    m_delimiter = QChar(',');
+    m_delimiter = QLatin1Char(',');
   } else if(m_radioSemicolon->isChecked()) {
-    m_delimiter = QChar(';');
+    m_delimiter = QLatin1Char(';');
   } else if(m_radioTab->isChecked()) {
-    m_delimiter = QChar('\t');
+    m_delimiter = QLatin1Char('\t');
   } else {
     m_delimiter = m_editOther->text();
   }

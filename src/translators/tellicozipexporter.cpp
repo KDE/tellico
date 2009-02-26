@@ -37,7 +37,7 @@ QString TellicoZipExporter::formatString() const {
 }
 
 QString TellicoZipExporter::fileFilter() const {
-  return i18n("*.tc *.bc|Tellico Files (*.tc)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.tc *.bc|Tellico Files (*.tc)") + QLatin1Char('\n') + i18n("*|All Files");
 }
 
 bool TellicoZipExporter::exec() {

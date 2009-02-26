@@ -44,10 +44,9 @@
 
 #include <assert.h>
 
-KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, const char *name )
+KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, const char * )
   : QWidget( parent )
 {
-  setObjectName( name );
 
   mMinWidgets = qMax( minWidgets, 1 );
   mMaxWidgets = qMax( maxWidgets, mMinWidgets + 1 );
@@ -62,11 +61,11 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   mLayout->addWidget( mButtonBox );
 
   mBtnMore = new KPushButton( KGuiItem( i18nc( "more widgets", "More" ),
-                                        "button_more" ), mButtonBox );
+                                        QLatin1String("button_more") ), mButtonBox );
   mButtonBox->setStretchFactor( mBtnMore, 0 );
 
   mBtnFewer = new KPushButton( KGuiItem( i18nc( "fewer widgets", "Fewer" ),
-                                         "button_fewer" ), mButtonBox );
+                                         QLatin1String("button_fewer") ), mButtonBox );
   mButtonBox->setStretchFactor( mBtnFewer, 0 );
 
   QWidget *spacer = new QWidget( mButtonBox );
@@ -74,7 +73,7 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
 
   mBtnClear = new KPushButton( KStandardGuiItem::clear(), mButtonBox );
   // FIXME a useful whats this. KStandardGuiItem::clear() returns a text with an edit box
-  mBtnClear->setWhatsThis( "" );
+  mBtnClear->setWhatsThis( QString() );
   mButtonBox->setStretchFactor( mBtnClear, 0 );
 
   //---------- connect everything

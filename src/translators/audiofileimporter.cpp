@@ -123,10 +123,10 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
     f->setProperty(QLatin1String("column1"), i18n("Files"));
     if(addBitrate) {
-      f->setProperty(QLatin1String("columns"), QChar('2'));
+      f->setProperty(QLatin1String("columns"), QLatin1String("2"));
       f->setProperty(QLatin1String("column2"), i18n("Bitrate"));
     } else {
-      f->setProperty(QLatin1String("columns"), QChar('1'));
+      f->setProperty(QLatin1String("columns"), QLatin1String("1"));
     }
   }
 
@@ -159,7 +159,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
                                         i18n("Tracks (Disc %1)", disc),
                                         Data::Field::Table));
       f2->setFormatFlag(Data::Field::FormatTitle);
-      f2->setProperty(QLatin1String("columns"), QChar('3'));
+      f2->setProperty(QLatin1String("columns"), QLatin1String("3"));
       f2->setProperty(QLatin1String("column1"), i18n("Title"));
       f2->setProperty(QLatin1String("column2"), i18n("Artist"));
       f2->setProperty(QLatin1String("column3"), i18n("Length"));
@@ -228,17 +228,17 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       }
       if(trackNum > 0) {
         QString t = TStringToQString(tag->title()).trimmed();
-        t += "::" + a;
+        t += QLatin1String("::") + a;
         const int len = f.audioProperties()->length();
         if(len > 0) {
-          t += "::" + Tellico::minutes(len);
+          t += QLatin1String("::") + Tellico::minutes(len);
         }
         QString realTrack = disc > 1 ? track + QString::number(disc) : track;
         entry->setField(realTrack, insertValue(entry->field(realTrack), t, trackNum));
         if(addFile) {
           QString fileValue = *it;
           if(addBitrate) {
-            fileValue += "::" + QString::number(f.audioProperties()->bitrate());
+            fileValue += QLatin1String("::") + QString::number(f.audioProperties()->bitrate());
           }
           entry->setField(file, insertValue(entry->field(file), fileValue, trackNum));
         }
@@ -407,7 +407,7 @@ int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {
   }
 
   if(!disc.isEmpty()) {
-    int pos = disc.indexOf('/');
+    int pos = disc.indexOf(QLatin1Char('/'));
     int n;
     bool ok;
     if(pos == -1) {

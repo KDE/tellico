@@ -221,7 +221,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     } else if(tag == QLatin1String("SP")) {
       sp = value;
       if(!ep.isEmpty()) {
-        value = sp + '-' + ep;
+        value = sp + QLatin1Char('-') + ep;
         tag = QLatin1String("EP");
         sp.clear();
         ep.clear();
@@ -232,14 +232,14 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     } else if(tag == QLatin1String("EP")) {
       ep = value;
       if(!sp.isEmpty()) {
-        value = sp + '-' + ep;
+        value = sp + QLatin1Char('-') + ep;
         sp.clear();
         ep.clear();
       } else {
         continue;
       }
     } else if(tag == QLatin1String("YR") || tag == QLatin1String("PY")) {  // for now, just grab the year
-      value = value.section('/', 0, 0);
+      value = value.section(QLatin1Char('/'), 0, 0);
     }
 
     // the lookup scheme is:

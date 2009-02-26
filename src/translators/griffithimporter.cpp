@@ -70,7 +70,7 @@ void GriffithImporter::slotData() {
 }
 
 void GriffithImporter::slotError() {
-  QString msg = m_process->readAllStandardError();
+  QString msg = QString::fromLocal8Bit(m_process->readAllStandardError());
   myDebug() << "GriffithImporter::slotError() - " << msg << endl;
   setStatusMessage(msg);
 }

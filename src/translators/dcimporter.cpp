@@ -70,7 +70,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
       useNS = UseNS;
     }
     QString s = nodeList.item(0).toElement().text();
-    s.replace('\n', ' ');
+    s.replace(QLatin1Char('\n'), QLatin1Char(' '));
     s = s.simplified();
     e->setField(QLatin1String("title"), s);
 

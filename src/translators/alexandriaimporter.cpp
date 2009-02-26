@@ -99,14 +99,14 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
       if(line.isEmpty() || line.startsWith(QLatin1String("---"))) {
         continue;
       }
-      if(line.endsWith(QChar('\\'))) {
+      if(line.endsWith(QLatin1Char('\\'))) {
         line.truncate(line.length()-1); // remove last character
         line += ts.readLine();
       }
 
       cleanLine(line);
-      QString alexField = line.section(':', 0, 0);
-      QString alexValue = line.section(':', 1).trimmed();
+      QString alexField = line.section(QLatin1Char(':'), 0, 0);
+      QString alexValue = line.section(QLatin1Char(':'), 1).trimmed();
       clean(alexValue);
 
       // Alexandria uses "n/a for empty values, and it is translated
@@ -146,7 +146,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
 
         // now find cover image
         KUrl u;
-        alexValue.remove('-');
+        alexValue.remove(QLatin1Char('-'));
         for(QStringList::Iterator ext = covers.begin(); ext != covers.end(); ++ext) {
           u.setPath(dataDir.absoluteFilePath(alexValue + *ext));
           if(!QFile::exists(u.path())) {
@@ -240,15 +240,15 @@ QString& AlexandriaImporter::cleanLine(QString& str_) {
 
 QString& AlexandriaImporter::clean(QString& str_) {
   const QRegExp quote(QLatin1String("\\\\\"")); // equals \"
-  if(str_.startsWith(QChar('\'')) || str_.startsWith(QChar('"'))) {
+  if(str_.startsWith(QLatin1Char('\'')) || str_.startsWith(QLatin1Char('"'))) {
     str_.remove(0, 1);
   }
-  if(str_.endsWith(QChar('\'')) || str_.endsWith(QChar('"'))) {
+  if(str_.endsWith(QLatin1Char('\'')) || str_.endsWith(QLatin1Char('"'))) {
     str_.truncate(str_.length()-1);
   }
   // we ignore YAML tags, this is not actually a good parser, but will do for now
   str_.remove(QRegExp(QLatin1String("^![^\\s]*\\s+")));
-  return str_.replace(quote, QChar('"'));
+  return str_.replace(quote, QLatin1String("\""));
 }
 
 void AlexandriaImporter::slotCancel() {

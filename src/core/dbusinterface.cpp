@@ -25,7 +25,7 @@ using Tellico::ApplicationInterface;
 using Tellico::CollectionInterface;
 
 ApplicationInterface::ApplicationInterface(Tellico::MainWindow* parent_) : QObject(parent_), m_mainWindow(parent_) {
-  QDBusConnection::sessionBus().registerObject("/tellico", this, QDBusConnection::ExportScriptableSlots);
+  QDBusConnection::sessionBus().registerObject(QLatin1String("/tellico"), this, QDBusConnection::ExportScriptableSlots);
 }
 
 Tellico::Import::Action ApplicationInterface::actionType(const QString& actionName) {
@@ -75,7 +75,7 @@ bool ApplicationInterface::exportCollection(Tellico::Export::Format format, cons
 }
 
 CollectionInterface::CollectionInterface(QObject* parent_) : QObject(parent_) {
-  QDBusConnection::sessionBus().registerObject("/collection", this, QDBusConnection::ExportScriptableSlots);
+  QDBusConnection::sessionBus().registerObject(QLatin1String("/collection"), this, QDBusConnection::ExportScriptableSlots);
 }
 
 long CollectionInterface::addEntry() {

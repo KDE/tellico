@@ -131,7 +131,7 @@ void TellicoSaxImporter::loadXMLData(const QByteArray& data_, bool loadImages_) 
     m_format = Error;
     QString error;
     if(!url().isEmpty()) {
-      error = i18n(errorLoad).arg(url().fileName()) + QChar('\n');
+      error = i18n(errorLoad).arg(url().fileName()) + QLatin1Char('\n');
     }
     error += handler.errorString();
     myDebug() << error << endl;
@@ -168,7 +168,7 @@ void TellicoSaxImporter::loadZipData() {
 
   const KArchiveDirectory* dir = m_zip->directory();
   if(!dir) {
-    QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
+    QString str = i18n(errorLoad, url().fileName()) + QLatin1Char('\n');
     str += i18n("The file is empty.");
     setStatusMessage(str);
     m_format = Error;
@@ -186,7 +186,7 @@ void TellicoSaxImporter::loadZipData() {
     entry = dir->entry(QLatin1String("bookcase.xml"));
   }
   if(!entry || !entry->isFile()) {
-    QString str = i18n(errorLoad, url().fileName()) + QChar('\n');
+    QString str = i18n(errorLoad, url().fileName()) + QLatin1Char('\n');
     str += i18n("The file contains no collection data.");
     setStatusMessage(str);
     m_format = Error;
@@ -247,7 +247,7 @@ void TellicoSaxImporter::loadZipData() {
     const KArchiveEntry* file = m_imgDir->entry(*it);
     if(file && file->isFile()) {
       ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                             (*it).section('.', -1).toUpper(), (*it));
+                             (*it).section(QLatin1Char('.'), -1).toUpper(), (*it));
       m_images.remove(*it);
     }
     if(j%stepSize == 0) {
@@ -275,7 +275,7 @@ bool TellicoSaxImporter::loadImage(const QString& id_) {
     return false;
   }
   QString newID = ImageFactory::addImage(static_cast<const KArchiveFile*>(file)->data(),
-                                         id_.section('.', -1).toUpper(), id_);
+                                         id_.section(QLatin1Char('.'), -1).toUpper(), id_);
   m_images.remove(id_);
   if(m_images.isEmpty()) {
     // give it some time

@@ -262,14 +262,14 @@ void FreeDBImporter::readCDROM() {
   }
   entry->setField(QLatin1String("keyword"), info.get(KCDDB::Category).toString());
   QString extd = info.get(QLatin1String("EXTD")).toString();
-  extd.replace('\n', QLatin1String("<br/>"));
+  extd.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
   entry->setField(QLatin1String("comments"), extd);
 
   QStringList trackList;
   for(int i = 0; i < info.numberOfTracks(); ++i) {
-    QString s = info.track(i).get(KCDDB::Title).toString() + "::" + info.get(KCDDB::Artist).toString();
+    QString s = info.track(i).get(KCDDB::Title).toString() + QLatin1String("::") + info.get(KCDDB::Artist).toString();
     if(i < lengths.count()) {
-      s += "::" + Tellico::minutes(lengths[i]);
+      s += QLatin1String("::") + Tellico::minutes(lengths[i]);
     }
     trackList << s;
     // TODO: KDE4 will probably have track length too
@@ -375,7 +375,7 @@ void FreeDBImporter::readCache() {
     }
     entry->setField(QLatin1String("keyword"), info.get(KCDDB::Category).toString());
     QString extd = info.get(QLatin1String("EXTD")).toString();
-    extd.replace('\n', QLatin1String("<br/>"));
+    extd.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
     entry->setField(QLatin1String("comments"), extd);
 
     // step through trackList
@@ -451,7 +451,7 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
   SETFIELD("comments", cdtext.message);
   QStringList tracks;
   for(int i = 0; i < cdtext.trackTitles.size(); ++i) {
-    tracks << cdtext.trackTitles[i] + "::" + cdtext.trackArtists[i];
+    tracks << cdtext.trackTitles[i] + QLatin1String("::") + cdtext.trackArtists[i];
     if(artist.isEmpty()) {
       artist = cdtext.trackArtists[i];
     }

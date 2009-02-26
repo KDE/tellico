@@ -28,7 +28,7 @@
 #include <QTextStream>
 
 namespace {
-  char GCFILMS_DELIMITER = '|';
+  const char GCFILMS_DELIMITER = '|';
 }
 
 using Tellico::Export::GCfilmsExporter;
@@ -41,7 +41,7 @@ QString GCfilmsExporter::formatString() const {
 }
 
 QString GCfilmsExporter::fileFilter() const {
-  return i18n("*.gcf|GCfilms Data Files (*.gcf)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.gcf|GCfilms Data Files (*.gcf)") + QLatin1Char('\n') + i18n("*|All Files");
 #if 0
   i18n("*.gcs|GCstar Data Files (*.gcs)")
 #endif
@@ -87,7 +87,7 @@ bool GCfilmsExporter::exec() {
   if(url().isLocalFile()) {
     imageDir = url();
     imageDir.cd(QLatin1String(".."));
-    imageDir.addPath(url().fileName().section('.', 0, 0) + QLatin1String("_images/"));
+    imageDir.addPath(url().fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_images/"));
     if(!KIO::NetAccess::exists(imageDir, KIO::NetAccess::DestinationSide, 0)) {
       bool success = KIO::NetAccess::mkdir(imageDir, Kernel::self()->widget());
       if(!success) {
@@ -226,7 +226,7 @@ void GCfilmsExporter::push(QTextStream& ts_, const QByteArray& fieldName_, Telli
   }
   QString s = entry_->field(QLatin1String(fieldName_), format_);
   if(f->flags() & Data::Field::AllowMultiple) {
-    ts_ << s.replace(QLatin1String("; "), QChar(','));
+    ts_ << s.replace(QLatin1String("; "), QLatin1String(","));
   } else {
     ts_ << s;
   }

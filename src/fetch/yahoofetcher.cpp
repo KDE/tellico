@@ -330,9 +330,9 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
     QString l = e.namedItem(QLatin1String("Length")).toElement().text();
 
     int len = Tellico::toUInt(l, &ok);
-    QString value = t + "::" + a;
+    QString value = t + QLatin1String("::") + a;
     if(ok && len > 0) {
-      value += + "::" + Tellico::minutes(len);
+      value += QLatin1String("::") + Tellico::minutes(len);
     }
     entry_->setField(track, insertValue(entry_->field(track), value, trackNum));
   }

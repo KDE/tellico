@@ -35,7 +35,7 @@ QString BibtexmlExporter::formatString() const {
 }
 
 QString BibtexmlExporter::fileFilter() const {
-  return i18n("*.xml|Bibtexml Files (*.xml)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.xml|Bibtexml Files (*.xml)") + QLatin1Char('\n') + i18n("*|All Files");
 }
 
 bool BibtexmlExporter::exec() {
@@ -84,7 +84,7 @@ bool BibtexmlExporter::exec() {
   } else {
     encodeStr += QLatin1String(QTextCodec::codecForLocale()->name());
   }
-  encodeStr += '"';
+  encodeStr += QLatin1Char('"');
 
   // createDocument creates a root node, insert the processing instruction before it
   dom.insertBefore(dom.createProcessingInstruction(QLatin1String("xml"), encodeStr), root);
@@ -106,7 +106,7 @@ bool BibtexmlExporter::exec() {
     char c = 'a';
     while(usedKeys.has(newKey)) {
       // duplicate found!
-      newKey = key + c;
+      newKey = key + QLatin1Char(c);
       ++c;
     }
     key = newKey;

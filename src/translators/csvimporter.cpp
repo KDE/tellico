@@ -108,7 +108,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     m_parser->skipLine();
   }
 
-  const uint numLines = text().count('\n');
+  const uint numLines = text().count(QLatin1Char('\n'));
   const uint stepSize = qMax(s_stepSize, numLines/100);
   const bool showProgress = options() & ImportProgress;
 
@@ -222,7 +222,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
 
   m_editOther = new KLineEdit(m_delimiterGroup);
   m_editOther->setEnabled(false);
-  m_editOther->setFixedWidth(m_widget->fontMetrics().width('X') * 4);
+  m_editOther->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editOther->setMaxLength(1);
   m_editOther->setWhatsThis(i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_editOther->setEnabled(false);
@@ -359,7 +359,7 @@ void CSVImporter::slotTypeChanged() {
   updateHeader(true);
   m_comboField->clear();
   m_comboField->addItems(m_existingCollection ? m_existingCollection->fieldTitles() : m_coll->fieldTitles());
-  m_comboField->addItem('<' + i18n("New Field") + '>');
+  m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
 
   // hack to force a resize
   m_comboField->setFont(m_comboField->font());
@@ -374,11 +374,11 @@ void CSVImporter::slotFirstRowHeader(bool b_) {
 
 void CSVImporter::slotDelimiter() {
   if(m_radioComma->isChecked()) {
-    m_delimiter = ',';
+    m_delimiter = QLatin1String(",");
   } else if(m_radioSemicolon->isChecked()) {
-    m_delimiter = ';';
+    m_delimiter = QLatin1String(";");
   } else if(m_radioTab->isChecked()) {
-    m_delimiter = '\t';
+    m_delimiter = QLatin1String("\t");
   } else {
     m_editOther->setFocus();
     m_delimiter = m_editOther->text();
@@ -473,11 +473,11 @@ void CSVImporter::slotFieldChanged(int idx_) {
   if(dlg.exec() == QDialog::Accepted) {
     m_comboField->clear();
     m_comboField->addItems(c->fieldTitles());
-    m_comboField->addItem('<' + i18n("New Field") + '>');
+    m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
     if(count != c->fieldTitles().count()) {
       fillTable();
     }
-    m_comboField->setCurrentItem(0);
+    m_comboField->setCurrentIndex(0);
   }
 }
 

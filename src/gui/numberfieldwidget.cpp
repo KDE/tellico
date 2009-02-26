@@ -52,7 +52,7 @@ void NumberFieldWidget::initSpinBox() {
   // the lineEdit until you change the keyboard focus. Fixed in QT4 ???
 //  connect(m_spinBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
   // I want to allow no value, so set space as special text. Empty text is ignored
-  m_spinBox->setSpecialValueText(QChar(' '));
+  m_spinBox->setSpecialValueText(QLatin1String(" "));
 }
 
 QString NumberFieldWidget::text() const {

@@ -184,7 +184,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
             end_macro = false;
             break;
           case BTAST_MACRO:
-            str += QString::fromUtf8(svalue) + '#';
+            str += QString::fromUtf8(svalue) + QLatin1Char('#');
             end_macro = true;
             break;
           default:
@@ -244,9 +244,9 @@ void BibtexImporter::parseText(const QString& text) {
   int startpos = 0;
   int pos = rx.indexIn(text, 0);
   while(pos > 0 && !m_cancelled) {
-    if(text[pos] == '{') {
+    if(text[pos] == QLatin1Char('{')) {
       ++brace;
-    } else if(text[pos] == '}' && brace > 0) {
+    } else if(text[pos] == QLatin1Char('}') && brace > 0) {
       --brace;
     }
     if(brace == 0) {
@@ -333,9 +333,9 @@ bool BibtexImporter::maybeBibtex(const KUrl& url_) {
   int startpos = 0;
   int pos = rx.indexIn(text, 0);
   while(pos > 0) {
-    if(text[pos] == '{') {
+    if(text[pos] == QLatin1Char('{')) {
       ++brace;
-    } else if(text[pos] == '}' && brace > 0) {
+    } else if(text[pos] == QLatin1Char('}') && brace > 0) {
       --brace;
     }
     if(brace == 0) {

@@ -73,7 +73,7 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
 
   field = new Field(QLatin1String("track"), i18n("Tracks"), Field::Table);
   field->setFormatFlag(Field::FormatTitle);
-  field->setProperty(QLatin1String("columns"), QChar('3'));
+  field->setProperty(QLatin1String("columns"), QLatin1String("3"));
   field->setProperty(QLatin1String("column1"), i18n("Title"));
   field->setProperty(QLatin1String("column2"), i18n("Artist"));
   field->setProperty(QLatin1String("column3"), i18n("Length"));

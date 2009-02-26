@@ -87,7 +87,7 @@ QString HTMLExporter::formatString() const {
 }
 
 QString HTMLExporter::fileFilter() const {
-  return i18n("*.html|HTML Files (*.html)") + QChar('\n') + i18n("*|All Files");
+  return i18n("*.html|HTML Files (*.html)") + QLatin1Char('\n') + i18n("*|All Files");
 }
 
 void HTMLExporter::reset() {
@@ -346,7 +346,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
         groupFields += QLatin1String("/tc:column[1]");
       }
       if(*it != m_groupBy.last()) {
-        groupFields += '|';
+        groupFields += QLatin1Char('|');
       }
     }
 //    myDebug() << groupFields << endl;
@@ -355,14 +355,14 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   }
 
   QString pageTitle = coll->title();
-  pageTitle += QChar(' ') + sortString;
+  pageTitle += QLatin1Char(' ') + sortString;
   m_handler->addStringParam("page-title", pageTitle.toUtf8());
 
   QStringList showFields;
   foreach(const QString& column, m_columns) {
     showFields << coll->fieldNameByTitle(column);
   }
-  m_handler->addStringParam("column-names", showFields.join(QChar(' ')).toUtf8());
+  m_handler->addStringParam("column-names", showFields.join(QLatin1String(" ")).toUtf8());
 
   if(m_imageWidth > 0 && m_imageHeight > 0) {
     m_handler->addParam("image-width", QByteArray().setNum(m_imageWidth));
@@ -545,7 +545,7 @@ QString HTMLExporter::fileDirName() const {
   if(!m_collectionURL.isEmpty()) {
     return QLatin1String("/");
   }
-  return url().fileName().section('.', 0, 0) + QLatin1String("_files/");
+  return url().fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
 }
 
 // how ugly is this?
@@ -610,14 +610,14 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
   const QString url = QLatin1String("url(");
   for(int pos = str.indexOf(url); pos >= 0; pos = str.indexOf(url, pos+1)) {
     pos += 4; // url(
-    if(str[pos] ==  '"' || str[pos] == '\'') {
+    if(str[pos] ==  QLatin1Char('"') || str[pos] == QLatin1Char('\'')) {
       ++pos;
     }
 
     start = pos;
-    pos = str.indexOf(')', start);
+    pos = str.indexOf(QLatin1Char(')'), start);
     end = pos;
-    if(str[pos-1] == '"' || str[pos-1] == '\'') {
+    if(str[pos-1] == QLatin1Char('"') || str[pos-1] == QLatin1Char('\'')) {
       --end;
     }
 
@@ -718,10 +718,10 @@ bool HTMLExporter::writeEntryFiles() {
 
     // but only use the first title if it has multiple
     if(multipleTitles) {
-      file = file.section(';', 0, 0);
+      file = file.section(QLatin1Char(';'), 0, 0);
     }
-    file.replace(badChars, QChar('_'));
-    file += QChar('-') + QString::number(entryIt->id()) + html;
+    file.replace(badChars, QLatin1String("_"));
+    file += QLatin1Char('-') + QString::number(entryIt->id()) + html;
     outputFile.setFileName(file);
 
     exporter.setEntries(Data::EntryList() << entryIt);
@@ -754,7 +754,7 @@ bool HTMLExporter::writeEntryFiles() {
     dataImages << QString::fromLatin1("stars%1.png").arg(i);
   }
   KUrl dataDir;
-  dataDir.setPath(KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png")) + "pics/");
+  dataDir.setPath(KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png")) + QLatin1String("pics/"));
   KUrl target = fileDir();
   target.addPath(QLatin1String("pics/"));
   KIO::NetAccess::mkdir(target, m_widget);

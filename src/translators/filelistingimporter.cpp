@@ -136,7 +136,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
         if(item.isValid()) {
           QString s = item.value().toString();
           if(!s.isEmpty()) {
-            strings << item.name() + "::" + s;
+            strings << item.name() + QLatin1String("::") + s;
           }
         }
       }
@@ -236,7 +236,7 @@ QString FileListingImporter::volumeName() const {
       volume = (*it)->mountPoint();
       if(!(*it)->realDeviceName().isEmpty()) {
         QString devName = (*it)->realDeviceName();
-        if(devName.endsWith(QChar('/'))) {
+        if(devName.endsWith(QLatin1Char('/'))) {
           devName.truncate(devName.length()-1);
         }
         // QFile can't do a sequential seek, and I don't want to do a 32808x loop on getch()

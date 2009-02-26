@@ -98,7 +98,7 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QLatin1String("cast"), i18n("Cast"), Field::Table);
-  field->setProperty(QLatin1String("columns"), QChar('2'));
+  field->setProperty(QLatin1String("columns"), QLatin1String("2"));
   field->setProperty(QLatin1String("column1"), i18n("Actor/Actress"));
   field->setProperty(QLatin1String("column2"), i18n("Role"));
   field->setFormatFlag(Field::FormatName);

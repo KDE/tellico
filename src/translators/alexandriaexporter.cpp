@@ -36,7 +36,7 @@ namespace {
 using Tellico::Export::AlexandriaExporter;
 
 QString& AlexandriaExporter::escapeText(QString& str_) {
-  str_.replace('"', QLatin1String("\\\""));
+  str_.replace(QLatin1String("\""), QLatin1String("\\\""));
   return str_;
 }
 
@@ -102,7 +102,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
   if(isbn.isEmpty()) {
     return false; // can't write it since Alexandria uses isbn as name of file
   }
-  isbn.remove('-'); // remove dashes
+  isbn.remove(QLatin1Char('-')); // remove dashes
 
   QFile file(dir_.absolutePath() + QDir::separator() + isbn + QLatin1String(".yaml"));
   if(!file.open(QIODevice::WriteOnly)) {

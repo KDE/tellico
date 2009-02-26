@@ -57,9 +57,9 @@ CSVParser::~CSVParser() {
 void CSVParser::setDelimiter(const QString& s) {
   Q_ASSERT(s.length() == 1);
   csv_set_delim(d->parser, s[0].toLatin1());
-  if(s[0] == '\t')     csv_set_space_func(d->parser, isSpace);
-  else if(s[0] == ' ') csv_set_space_func(d->parser, isTab);
-  else                 csv_set_space_func(d->parser, isSpaceOrTab);
+  if(s[0] == QLatin1Char('\t'))     csv_set_space_func(d->parser, isSpace);
+  else if(s[0] == QLatin1Char(' ')) csv_set_space_func(d->parser, isTab);
+  else                              csv_set_space_func(d->parser, isSpaceOrTab);
 }
 
 void CSVParser::reset(QString str) {

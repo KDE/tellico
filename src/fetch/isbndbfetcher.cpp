@@ -122,7 +122,7 @@ void ISBNdbFetcher::doSearch() {
       {
         // only grab first value
         QString v = m_value.section(QLatin1Char(';'), 0);
-        v.remove('-');
+        v.remove(QLatin1Char('-'));
         u.addQueryItem(QLatin1String("value1"), v);
       }
       break;

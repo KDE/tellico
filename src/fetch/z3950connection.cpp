@@ -173,7 +173,7 @@ void Z3950Connection::run() {
 
     QString s = i18n("Connection search error %1: %2", errcode, toString(errmsg));
     if(!QByteArray(addinfo).isEmpty()) {
-      s += " (" + toString(addinfo) + ")";
+      s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
     myDebug() << "Z3950Connection::run() - " << s << endl;
     done(s, MessageHandler::Error);
@@ -191,7 +191,7 @@ void Z3950Connection::run() {
     // want raw unless it's mods
     ZOOM_record_get(rec, type, &len);
     if(len > 0 && m_syntax.isEmpty()) {
-      newSyntax = QByteArray(ZOOM_record_get(rec, "syntax", &len)).toLower();
+      newSyntax = QString::fromLatin1(ZOOM_record_get(rec, "syntax", &len)).toLower();
       myLog() << "Z3950Connection::run() - syntax guess is " << newSyntax << endl;
       if(newSyntax == QLatin1String("mods") || newSyntax == QLatin1String("xml")) {
         m_syntax = QLatin1String("xml");
@@ -345,7 +345,7 @@ bool Z3950Connection::makeConnection() {
 
     QString s = i18n("Connection error %1: %2", errcode, toString(errmsg));
     if(!QByteArray(addinfo).isEmpty()) {
-      s += " (" + toString(addinfo) + ")";
+      s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
     myDebug() << "Z3950Connection::makeConnection() - " << s << endl;
     done(s, MessageHandler::Error);
@@ -402,7 +402,7 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
   if(!cd) {
     // maybe it's iso 5426, which we sorta support
     QString charSetLower = fromCharSet_.toLower();
-    charSetLower.remove('-').remove(' ');
+    charSetLower.remove(QLatin1Char('-')).remove(QLatin1Char(' '));
     if(charSetLower == QLatin1String("iso5426")) {
       return iconvRun(Iso5426Converter::toUtf8(text_).toUtf8(), QLatin1String("utf-8"), toCharSet_);
     } else if(charSetLower == QLatin1String("iso6937")) {
@@ -452,7 +452,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
   if(!cd) {
     // maybe it's iso 5426, which we sorta support
     QString charSetLower = charSet_.toLower();
-    charSetLower.remove('-').remove(' ');
+    charSetLower.remove(QLatin1Char('-')).remove(QLatin1Char(' '));
     if(charSetLower == QLatin1String("iso5426")) {
       return toXML(Iso5426Converter::toUtf8(marc_).toUtf8(), QLatin1String("utf-8"));
     } else if(charSetLower == QLatin1String("iso6937")) {

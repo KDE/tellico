@@ -92,7 +92,7 @@ Tellico::Data::FieldList FileCatalog::defaultFields() {
   list.append(field);
 
   field = new Field(QLatin1String("metainfo"), i18n("Meta Info"), Field::Table);
-  field->setProperty(QLatin1String("columns"), QChar('2'));
+  field->setProperty(QLatin1String("columns"), QLatin1String("2"));
   field->setProperty(QLatin1String("column1"), i18n("Property"));
   field->setProperty(QLatin1String("column2"), i18n("Value"));
   list.append(field);

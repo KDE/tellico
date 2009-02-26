@@ -92,7 +92,7 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
     m_path = config_.readEntry("Database");
   }
   if(!m_path.startsWith(QLatin1Char('/'))) {
-    m_path.prepend('/');
+    m_path.prepend(QLatin1Char('/'));
   }
   m_format = config_.readEntry("Format", "mods");
   m_fields = config_.readEntry("Custom Fields", QStringList());
@@ -142,17 +142,17 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
     case ISBN:
       // no validation here
-      str.remove('-');
+      str.remove(QLatin1Char('-'));
       // limit to first isbn
-      str = str.section(';', 0, 0);
+      str = str.section(QLatin1Char(';'), 0, 0);
       u.addQueryItem(QLatin1String("query"), QLatin1String("bath.isbn=") + str);
       break;
 
     case LCCN:
       {
         // limit to first lccn
-        str.remove('-');
-        str = str.section(';', 0, 0);
+        str.remove(QLatin1Char('-'));
+        str = str.section(QLatin1Char(';'), 0, 0);
         // also try formalized lccn
         QString lccn = LCCNValidator::formalize(str);
         u.addQueryItem(QLatin1String("query"),
@@ -168,8 +168,8 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
     case Raw:
       {
-        QString key = value_.section('=', 0, 0).trimmed();
-        QString str = value_.section('=', 1).trimmed();
+        QString key = value_.section(QLatin1Char('='), 0, 0).trimmed();
+        QString str = value_.section(QLatin1Char('='), 1).trimmed();
         u.addQueryItem(key, str);
       }
       break;
@@ -237,10 +237,12 @@ void SRUFetcher::slotComplete(KJob*) {
       if(!d.isEmpty()) {
         QString d2 = nodeList2.item(j).toElement().text();
         if(!d2.isEmpty()) {
-          d += " (" + d2 + QLatin1Char(')');
+          d += QLatin1String(" (") + d2 + QLatin1Char(')');
         }
         myDebug() << "SRUFetcher::slotComplete() - " << d << endl;
-        if(!msg.isEmpty()) msg += '\n';
+        if(!msg.isEmpty()) {
+          msg += QLatin1Char('\n');
+        }
         msg += d;
       }
     }
@@ -255,12 +257,16 @@ void SRUFetcher::slotComplete(KJob*) {
   if(!modsResult.isEmpty() && initMODSHandler()) {
     Import::TellicoImporter imp(m_MODSHandler->applyStylesheet(modsResult));
     coll = imp.collection();
-    if(!msg.isEmpty()) msg += '\n';
+    if(!msg.isEmpty()) {
+      msg += QLatin1Char('\n');
+    }
     msg += imp.statusMessage();
   } else if(m_format == QLatin1String("dc")) {
     Import::DCImporter imp(dom);
     coll = imp.collection();
-    if(!msg.isEmpty()) msg += '\n';
+    if(!msg.isEmpty()) {
+      msg += QLatin1Char('\n');
+    }
     msg += imp.statusMessage();
   } else {
     myDebug() << "SRUFetcher::slotComplete() - unrecognized format: " << m_format << endl;
@@ -518,7 +524,7 @@ QString SRUConfigWidget::preferredName() const {
 void SRUConfigWidget::slotCheckHost() {
   QString s = m_hostEdit->text();
   // someone might be pasting a full URL, check that
-  if(s.indexOf(':') > -1 || s.indexOf('/') > -1) {
+  if(s.indexOf(QLatin1Char(':')) > -1 || s.indexOf(QLatin1Char('/')) > -1) {
     KUrl u(s);
     if(u.isValid()) {
       m_hostEdit->setText(u.host());

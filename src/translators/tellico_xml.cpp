@@ -83,7 +83,7 @@ QString Tellico::XML::elementName(const QString& name_) {
   }
 
   // next check first characters IS_DIGIT is defined in libxml/vali.d
-  for(int i = 0; i < name.length() && (!IS_LETTER(name[i].unicode()) || name[i] == '_'); ++i) {
+  for(int i = 0; i < name.length() && (!IS_LETTER(name[i].unicode()) || name[i] == QLatin1Char('_')); ++i) {
     name = name.mid(1);
   }
   if(name.isEmpty() || XML::validXMLElementName(name)) {

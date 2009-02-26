@@ -82,8 +82,7 @@ QWidget* XSLTExporter::widget(QWidget* parent_) {
 
   l->addWidget(gbox);
 
-  QString filter = i18n("*.xsl|XSL Files (*.xsl)") + QChar('\n');
-  filter += i18n("*|All Files");
+  QString filter = i18n("*.xsl|XSL Files (*.xsl)") + QLatin1Char('\n') + i18n("*|All Files");
   m_URLRequester->setFilter(filter);
   m_URLRequester->setMode(KFile::File | KFile::ExistingOnly);
   if(!m_xsltFile.isEmpty()) {
