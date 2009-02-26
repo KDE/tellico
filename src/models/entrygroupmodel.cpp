@@ -184,6 +184,10 @@ void EntryGroupModel::clear() {
 }
 
 void EntryGroupModel::addGroups(const QList<Tellico::Data::EntryGroup*>& groups_, const QString& iconName_) {
+  if(groups_.isEmpty()) { // shouldn't ever happen
+    myWarning() << "adding empty group list!";
+    return;
+  }
   beginInsertRows(QModelIndex(), rowCount(), rowCount()+groups_.count()-1);
   m_groups += groups_;
   foreach(Tellico::Data::EntryGroup* group, groups_) {
